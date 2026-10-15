@@ -20,7 +20,7 @@
 - 原点左上、x 向右、y 向下、坐标范围 0–1；完成方向归一化，尚未做预览镜像。
 - 模型权重不提交 Git，不进入 AAR/XCFramework；运行时只下载模型/资源，不下载执行代码。
 - 各 App 独立沙盒；能力查询不下载、不弹权限、不加载模型；缺失指标显式为空。
-- GitHub `AmatsuZero/ondevice-ai-kit` 为主仓；极狐镜像固定 `Daubert/ondevice-ai-kit`，初始均 private。
+- GitHub `AmatsuZero/ondevice-ai-kit` 为主仓；极狐镜像固定 `home/common/ondevice-ai-kit`，初始均 private。
 - 无实机、无可靠能耗测量或无可用后端时，报告明确标记未验证/未测，不填造数据。
 
 ## Review Focus
@@ -158,8 +158,8 @@
 **Interfaces:** `sync-remotes.sh main` 只同步显式分支。tag 须使用独立显式参数，存在不同 SHA 时拒绝；不使用 `--mirror`、force push 或覆盖远端历史。
 
 - [ ] 先用临时本地 bare repos 测试：相同 SHA 无操作；fast-forward 成功；分叉拒绝且两边引用不变；主仓成功镜像失败时记录待重试；重试重新读取两端 SHA。测试 fixture 限于临时目录，不能操作真实远端。
-- [ ] 用 gh 查询 GitHub 当前身份和目标项目；用 glab `--hostname clients-gitlab.ugreeniot.com` 重新查询命名空间 `Daubert`，必须 full_path=Daubert、kind=user、id=572。已有项目则核对，不重复创建或更改可见性。
-- [ ] 创建尚不存在的两个 private 项目：GitHub `AmatsuZero/ondevice-ai-kit`、极狐 `Daubert/ondevice-ai-kit`（显式 namespace_id=572）。配置 `origin` 与 `jihu`，从 API 响应取得真实 clone URL。
+- [ ] 用 gh 查询 GitHub 当前身份和目标项目；用 glab `--hostname clients-gitlab.ugreeniot.com` 查询用户创建并授权的新项目 `home/common/ondevice-ai-kit`，必须 project id=461、namespace full_path=home/common、private。已有项目则核对，不重复创建或更改可见性。
+- [ ] 查询并使用两个已存在的 private 项目：GitHub `AmatsuZero/ondevice-ai-kit`、用户创建的极狐 `home/common/ondevice-ai-kit`。配置 `origin` 与 `jihu`，从 API 响应取得真实 clone URL。
 - [ ] 一个串行 writer 推送 GitHub→冻结该分支 SHA→极狐；用新鲜 `git ls-remote` 读两端，只有完全相等才报告同步完成。网络失败重试前对账；分叉不自动解决。
 - [ ] 记录两个项目 URL、visibility、目标 namespace、分支 SHA 与验证时间；review 脚本后提交并再同步。当前阶段只承诺手动命令同步，自动 CI 镜像另待凭据/权限方案，不声称已经持续自动同步。
 

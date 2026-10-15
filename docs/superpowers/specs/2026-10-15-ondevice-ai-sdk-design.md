@@ -192,9 +192,9 @@ iOS SDK 以 Swift Package/XCFramework products 分发，按模块选择依赖；
 项目目录为 `/Users/daubert/Github/ondevice-ai-kit`。两端仓库初始设为 private，远端目标固定为：
 
 - GitHub：`AmatsuZero/ondevice-ai-kit`
-- 极狐个人空间：`https://clients-gitlab.ugreeniot.com/Daubert/ondevice-ai-kit`
+- 极狐镜像：`https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit`
 
-极狐已只读验证 `full_path=Daubert`、`kind=user`、namespace ID 为 572；创建前重新核对，不在组织根空间创建。GitHub 作为主仓，极狐作为镜像副本。初始同步 main，后续仅同步显式列出的工作分支与发布 tag；不使用 `git push --mirror`。
+原 Daubert 个人空间受项目配额限制；用户明确改用其创建的 `home/common/ondevice-ai-kit`，API 已核实项目 ID 461、private、namespace full_path 为 `home/common`。GitHub 作为主仓，极狐作为镜像副本。初始同步 main，后续仅同步显式列出的工作分支与发布 tag；不使用 `git push --mirror`。
 
 使用一个串行写入者：本地提交 → GitHub fast-forward 推送 → 冻结已核实的 GitHub SHA → 极狐 fast-forward 推送 → 重新读取两端目标引用并比较 SHA。极狐失败标记为“同步待重试”，重试前重新对账；存在分叉停止该引用写入，保留两边提交。tag 发布后不可覆盖。CI 自动同步仅在最小权限凭据和仓库能力验证后启用，凭据置于 Secret，首版不假设极狐支持某付费镜像功能。
 
