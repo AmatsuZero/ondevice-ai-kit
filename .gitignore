@@ -1,0 +1,12 @@
+.worktrees/
+.superpowers/
+.gradle/
+.kotlin/
+**/build/
+**/.build/
+.DS_Store
+local.properties
+artifacts/
+__pycache__/
+*.xcuserstate
+xcuserdata/
