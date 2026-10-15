@@ -2,6 +2,8 @@
 
 面向多 App 复用的端侧 AI SDK。原生 SDK 独立分发，KMP 只承载桥接协议和 Demo 业务/UI。
 
+分阶段状态与下一工作包见 [ROADMAP](docs/ROADMAP.md)。当前为开发快照，尚未完成独立代码审查和真机验收。
+
 当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。
 
 **当前不包含**身份识别、活体、ASR/TTS、超分和 VLM 推理实现。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。

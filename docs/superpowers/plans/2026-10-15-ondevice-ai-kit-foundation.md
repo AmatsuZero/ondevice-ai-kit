@@ -1,5 +1,7 @@
 # OnDevice AI Kit Foundation Implementation Plan
 
+> 执行范围更新（2026-10-15）：用户要求拆成多步；后续以 [ROADMAP](../../ROADMAP.md) 的独立工作包为执行边界。本计划保留历史明细，不再一次性执行所有任务。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 交付可独立接入的 Swift/Kotlin SDK 基座、模型安装生命周期、两端人脸检测、KMP Demo，以及可导出真实设备结果的 benchmark。
