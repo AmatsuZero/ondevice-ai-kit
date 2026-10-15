@@ -41,4 +41,21 @@ final class VisionFaceDetectorTests: XCTestCase {
         do { _ = try await detector.detect(input: image(), options: FaceOptions()); XCTFail("must fail") }
         catch { XCTAssertEqual(error as? KitError, .backend("test")) }
     }
+    func testCloseRejectsAdmissionAndWaitsForBackendCompletion() async throws {
+        let runner = SuspendedFaceRunner()
+        let detector = VisionFaceDetector(runner: { _,_ in await runner.run() })
+        let request = Task { try await detector.detect(input: image(), options: FaceOptions()) }
+        await runner.waitForStart()
+        let prematureClose = expectation(description: "close must keep waiting")
+        prematureClose.isInverted = true
+        let closing = Task { await detector.close(); prematureClose.fulfill() }
+        while await detector.availability().reason != .closed { await Task.yield() }
+        do { _ = try await detector.detect(input: image(), options: FaceOptions()); XCTFail("closed") }
+        catch { XCTAssertEqual(error as? KitError, .closed) }
+        await fulfillment(of: [prematureClose], timeout: 0.05)
+        await runner.complete()
+        do { _ = try await request.value; XCTFail("close cancels active work") } catch is CancellationError { }
+        await closing.value
+        await detector.close()
+    }
 }

@@ -17,8 +17,8 @@
 | 包 | 交付与边界 | 验证/停止点 | 当前状态 |
 | --- | --- | --- | --- |
 | P0 当前快照收口 | 阶段表、验收证据、同步现有代码；不新增算法 | 当前检查结果落盘，两端分支 SHA 相等 | 已收口，随本次提交同步 |
-| P1 SDK 生命周期审查 | 仅 TaskGate、LatestFrameQueue、Vision/MLKit 取消与 close 的资源所有权；不改 Demo UI/安装器 | 独立审查、必要问题 RED→GREEN、对应测试通过；提交后停止 | 下一包 |
-| P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 待执行 |
+| P1 SDK 生命周期审查 | 仅 TaskGate、LatestFrameQueue、Vision/MLKit 取消与 close 的资源所有权；不改 Demo UI/安装器 | 独立审查、必要问题 RED→GREEN、对应测试通过；提交后停止 | 已完成，见 P1 审查记录 |
+| P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 下一包 |
 | P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 待执行，真机已获授权 |
 | P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；Android 无设备时保持缺口；提交后停止 | 待执行 |
 | P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 工具已实现，真机数据待补 |
@@ -42,6 +42,6 @@ P1/P2 是此前未完成独立审查的拆分，二者完成后才能声称基�
 
 ## 恢复时的第一步
 
-完成 P0 后，下一次仅开始 P1。读取 `apple/Sources/ODAIKitCore`、`apple/Sources/ODAIKitAppleVision`、`android/sdk-core`、`android/backend-mlkit` 与相应测试；先独立审查并建立问题清单，再做必要修复。不要同时开始 P2、签名安装或新算法研究。
+P0、P1 已完成；P1 结果见 [生命周期审查](validation/p1-lifecycle-review.md)，Swift 20 项与 Android JVM 15 项通过，Android lint/APK 构建通过。下一次仅开始 P2：读取两端 ModelStore、manifest validator、downloader/coordinator 及测试；先做独立审查，再以失败用例驱动必要修复。不要同时开始 P3、签名安装或新算法研究。
 
 详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。
