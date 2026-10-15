@@ -1,7 +1,7 @@
 import Foundation
 public enum CapabilityStatus: String, Codable, Sendable { case available, unavailable, requiresAssets }
 public enum UnavailableReason: String, Codable, Sendable {
-    case requiresOSVersion, backendNotLinked, permissionDenied, unsupportedDevice, missingAssets
+    case requiresOSVersion, backendNotLinked, permissionDenied, unsupportedDevice, missingAssets, closed
 }
 public struct CapabilityAvailability: Codable, Sendable, Equatable {
     public let status: CapabilityStatus

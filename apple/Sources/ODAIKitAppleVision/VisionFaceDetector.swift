@@ -12,7 +12,7 @@ public actor VisionFaceDetector: FaceDetector {
     public init() { runner = { input, options in try await Self.perform(input: input, options: options) } }
     init(runner: @escaping Runner) { self.runner = runner }
     public func availability() -> CapabilityAvailability {
-        CapabilityAvailability(status: closed ? .unavailable : .available, reason: closed ? .backendNotLinked : nil, backendId: "apple.vision.face", minOS: "15.0")
+        CapabilityAvailability(status: closed ? .unavailable : .available, reason: closed ? .closed : nil, backendId: "apple.vision.face", minOS: "15.0")
     }
     public func detect(input: ImageInput, options: FaceOptions = FaceOptions()) async throws -> FaceResult {
         guard !closed else { throw KitError.closed }
