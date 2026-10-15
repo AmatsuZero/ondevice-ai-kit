@@ -1,0 +1,1 @@
+{"schemaVersion":1,"tolerance":0.000001,"rotationCases":[{"degrees":0,"input":[0.2,0.3],"output":[0.2,0.3]},{"degrees":90,"input":[0.2,0.3],"output":[0.7,0.2]},{"degrees":180,"input":[0.2,0.3],"output":[0.8,0.7]},{"degrees":270,"input":[0.2,0.3],"output":[0.3,0.8]}],"pixelRect":{"image":[100,200],"input":[10,20,30,40],"output":[0.1,0.1,0.3,0.2]}}
