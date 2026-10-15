@@ -28,9 +28,27 @@ def create_project(root, relative, name, products, package_path, source)
     target.frameworks_build_phase.files << build_file
   end
   source.each { |name| target.source_build_phase.add_file_reference(project.main_group.new_file(name)) }
+  if name == 'OnDeviceAIDemo'
+    target.build_configurations.each do |config|
+      config.build_settings.merge!({
+        'ARCHS' => 'arm64',
+        'ODAI_KONAN_TARGET[sdk=iphonesimulator*]' => 'iosSimulatorArm64',
+        'ODAI_KONAN_TARGET[sdk=iphoneos*]' => 'iosArm64',
+        'FRAMEWORK_SEARCH_PATHS' => ['$(inherited)', '$(SRCROOT)/../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework'],
+        'OTHER_LDFLAGS' => ['$(inherited)', '-ObjC', '-lsqlite3'],
+        'INFOPLIST_FILE' => 'Info.plist',
+        'INFOPLIST_KEY_NSCameraUsageDescription' => '在设备本地检测人脸，不上传图像。',
+        'INFOPLIST_KEY_ODAISDKCommit' => '$(ODAI_SDK_COMMIT)',
+        'ODAI_SDK_COMMIT' => 'working-tree'
+      })
+    end
+    framework = project.main_group.new_file('../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework/ODAIKitDemo.framework')
+    target.frameworks_build_phase.add_file_reference(framework)
+  end
   project.save
   scheme = Xcodeproj::XCScheme.new
   scheme.add_build_target(target); scheme.set_launch_target(target)
   scheme.save_as(project_path, target.name, true)
 end
-create_project(root, 'examples/ios-native', 'NativeConsumer', ['ODAIKitCore'], '../../apple', ['NativeConsumerApp.swift'])
+create_project(root, 'examples/ios-native', 'NativeConsumer', ['ODAIKitCore', 'ODAIKitFace', 'ODAIKitAppleVision'], '../../apple', ['NativeConsumerApp.swift'])
+create_project(root, 'demo/iosApp', 'OnDeviceAIDemo', ['ODAIKitCore', 'ODAIKitFace', 'ODAIKitAppleVision'], '../../apple', ['OnDeviceAIDemoApp.swift', 'DemoController.swift', 'IOSFaceBridge.swift', 'CameraSource.swift'])

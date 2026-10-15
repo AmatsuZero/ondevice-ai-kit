@@ -33,13 +33,13 @@ final class TaskGateTests: XCTestCase {
     }
     func testLatestPendingReplacesOldFrames() async {
         let queue = LatestFrameQueue<Int>()
-        await queue.offer(0)
-        let first = await queue.next(); XCTAssertEqual(first, 0)
-        for i in 1...100 { await queue.offer(i) }
-        let blocked = await queue.next(); XCTAssertNil(blocked)
-        await queue.complete()
-        let last = await queue.next(); let dropped = await queue.droppedCount
+        queue.offer(0)
+        let first = queue.next(); XCTAssertEqual(first, 0)
+        for i in 1...100 { queue.offer(i) }
+        let blocked = queue.next(); XCTAssertNil(blocked)
+        queue.complete()
+        let last = queue.next(); let dropped = queue.droppedCount
         XCTAssertEqual(last, 100); XCTAssertEqual(dropped, 99)
-        await queue.complete(); await queue.close()
+        queue.complete(); queue.close()
     }
 }

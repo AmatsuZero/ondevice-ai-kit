@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "50FF2DD7439E92741D33CE91"
+               BlueprintIdentifier = "B176B1C4F2DF6C597C50A7D7"
                BuildableName = "NativeConsumer.app"
                BlueprintName = "NativeConsumer"
                ReferencedContainer = "container:NativeConsumer.xcodeproj">
@@ -30,7 +30,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "50FF2DD7439E92741D33CE91"
+            BlueprintIdentifier = "B176B1C4F2DF6C597C50A7D7"
             BuildableName = "NativeConsumer.app"
             BlueprintName = "NativeConsumer"
             ReferencedContainer = "container:NativeConsumer.xcodeproj">
@@ -53,7 +53,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "50FF2DD7439E92741D33CE91"
+            BlueprintIdentifier = "B176B1C4F2DF6C597C50A7D7"
             BuildableName = "NativeConsumer.app"
             BlueprintName = "NativeConsumer"
             ReferencedContainer = "container:NativeConsumer.xcodeproj">
@@ -70,7 +70,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "50FF2DD7439E92741D33CE91"
+            BlueprintIdentifier = "B176B1C4F2DF6C597C50A7D7"
             BuildableName = "NativeConsumer.app"
             BlueprintName = "NativeConsumer"
             ReferencedContainer = "container:NativeConsumer.xcodeproj">

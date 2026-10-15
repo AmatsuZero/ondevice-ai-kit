@@ -1,0 +1,792 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F5DBC5BAFFDB06EFFC48CA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
+		12546852456E36AE866B1CEC /* ModelLease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6FD16AB0674085D36A0A2 /* ModelLease.swift */; };
+		3864683E61ECC35F3480F5DB /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B53BC264DC0300F3ED7BC /* Availability.swift */; };
+		386ECD1C54E3A04019ABB9C3 /* ModelManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */; };
+		392A21488A3ED4187A20846F /* ModelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568ADE1C602A8407F60A6AE /* ModelStore.swift */; };
+		56EAB3977351262E36F2A2FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
+		5ACD71EFF3D6930A6A3DA1F9 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		954ED3BD7C5A0AB5198E5DAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
+		98EF1F4F88DC1B9E26717B19 /* LatestFrameQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA6D77F420A4D2DBBD5179F /* LatestFrameQueue.swift */; };
+		9BC228A95B719ABE75213605 /* TaskGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E9B24E203B35917F6D632 /* TaskGate.swift */; };
+		9FD5CC5139EEC2589BF74B1A /* InstallCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8598072235A1E65C859DE0DA /* InstallCoordinator.swift */; };
+		A85CD02F7D348E984D7D8002 /* VisionFaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0278B7DADAED87DB634BDED5 /* VisionFaceDetector.swift */; };
+		AC402CC2F005E84364ACA1D0 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		C2A4456A3D0A6F33529FB316 /* ImageGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */; };
+		CAF02ABB82EC4CFD3C1C26E8 /* ModelDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */; };
+		D1829444BA8E2D81358E27AF /* FaceObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D260AE9C59C8AB60896569 /* FaceObservation.swift */; };
+		E0932865ED77150E05827C81 /* ODAIKitFace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180827F381A9FF1D9FD308FC /* ODAIKitFace.framework */; };
+		E315D7EBD927C1F44AA63196 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
+		F874D92C770A4B26EDC06935 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		FBD9C0AAD5764A6B15A15595 /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F52582871A6E4FA0F59726 /* FaceDetector.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4318317571B769ABA02942F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 096C72DA4D40505AE6A7899B;
+			remoteInfo = ODAIKitFace;
+		};
+		52CBAACCD5330B3272AAF251 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFC88BE002DD0980AB3DAFC1;
+			remoteInfo = ODAIKitCore;
+		};
+		630FD2E874562DF3818EDFD2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFC88BE002DD0980AB3DAFC1;
+			remoteInfo = ODAIKitCore;
+		};
+		FEE8B0BB07BEE4C7D235C4A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFC88BE002DD0980AB3DAFC1;
+			remoteInfo = ODAIKitCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0278B7DADAED87DB634BDED5 /* VisionFaceDetector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VisionFaceDetector.swift; path = Sources/ODAIKitAppleVision/VisionFaceDetector.swift; sourceTree = "<group>"; };
+		180827F381A9FF1D9FD308FC /* ODAIKitFace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitFace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21C6FD16AB0674085D36A0A2 /* ModelLease.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelLease.swift; path = Sources/ODAIKitModelStore/ModelLease.swift; sourceTree = "<group>"; };
+		24B559AC07B15B943927A218 /* ODAIKitModelStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitModelStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40D260AE9C59C8AB60896569 /* FaceObservation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceObservation.swift; path = Sources/ODAIKitFace/FaceObservation.swift; sourceTree = "<group>"; };
+		44F52582871A6E4FA0F59726 /* FaceDetector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceDetector.swift; path = Sources/ODAIKitFace/FaceDetector.swift; sourceTree = "<group>"; };
+		476B53BC264DC0300F3ED7BC /* Availability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Availability.swift; path = Sources/ODAIKitCore/Availability.swift; sourceTree = "<group>"; };
+		4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageGeometry.swift; path = Sources/ODAIKitFace/ImageGeometry.swift; sourceTree = "<group>"; };
+		585E9B24E203B35917F6D632 /* TaskGate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskGate.swift; path = Sources/ODAIKitCore/TaskGate.swift; sourceTree = "<group>"; };
+		6568ADE1C602A8407F60A6AE /* ModelStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelStore.swift; path = Sources/ODAIKitModelStore/ModelStore.swift; sourceTree = "<group>"; };
+		858C773C2B112A7F9B06DDF0 /* ODAIKitAppleVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitAppleVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8598072235A1E65C859DE0DA /* InstallCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InstallCoordinator.swift; path = Sources/ODAIKitModelStore/InstallCoordinator.swift; sourceTree = "<group>"; };
+		8AA6D77F420A4D2DBBD5179F /* LatestFrameQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LatestFrameQueue.swift; path = Sources/ODAIKitCore/LatestFrameQueue.swift; sourceTree = "<group>"; };
+		94ED1EEB7B1AD380F105800B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelDownloader.swift; path = Sources/ODAIKitModelStore/ModelDownloader.swift; sourceTree = "<group>"; };
+		F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelManifest.swift; path = Sources/ODAIKitModelStore/ModelManifest.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		220C9CA1E2574771F9405767 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56EAB3977351262E36F2A2FC /* Foundation.framework in Frameworks */,
+				AC402CC2F005E84364ACA1D0 /* ODAIKitCore.framework in Frameworks */,
+				E0932865ED77150E05827C81 /* ODAIKitFace.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A85C6CEBD5D696F2BB43C5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F5DBC5BAFFDB06EFFC48CA7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		968D18219DD4A54898B2C1C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E315D7EBD927C1F44AA63196 /* Foundation.framework in Frameworks */,
+				5ACD71EFF3D6930A6A3DA1F9 /* ODAIKitCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E796F33E9CABB7FCB8964EF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				954ED3BD7C5A0AB5198E5DAB /* Foundation.framework in Frameworks */,
+				F874D92C770A4B26EDC06935 /* ODAIKitCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		65517B19205D7C7FB2D52725 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				94ED1EEB7B1AD380F105800B /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		742663F36F51EE2A62DA39CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */,
+				24B559AC07B15B943927A218 /* ODAIKitModelStore.framework */,
+				180827F381A9FF1D9FD308FC /* ODAIKitFace.framework */,
+				858C773C2B112A7F9B06DDF0 /* ODAIKitAppleVision.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DCC4DD3733F34EC81CB2F008 = {
+			isa = PBXGroup;
+			children = (
+				742663F36F51EE2A62DA39CC /* Products */,
+				F3A861F130D71D78647F5111 /* Frameworks */,
+				476B53BC264DC0300F3ED7BC /* Availability.swift */,
+				8AA6D77F420A4D2DBBD5179F /* LatestFrameQueue.swift */,
+				585E9B24E203B35917F6D632 /* TaskGate.swift */,
+				8598072235A1E65C859DE0DA /* InstallCoordinator.swift */,
+				BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */,
+				21C6FD16AB0674085D36A0A2 /* ModelLease.swift */,
+				F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */,
+				6568ADE1C602A8407F60A6AE /* ModelStore.swift */,
+				44F52582871A6E4FA0F59726 /* FaceDetector.swift */,
+				40D260AE9C59C8AB60896569 /* FaceObservation.swift */,
+				4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */,
+				0278B7DADAED87DB634BDED5 /* VisionFaceDetector.swift */,
+			);
+			sourceTree = "<group>";
+		};
+		F3A861F130D71D78647F5111 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65517B19205D7C7FB2D52725 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		38AB4603393EE45CEA4B6B87 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF69EB96EC9AFB487DA3A094 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC62F42C1AE39900FE3A09C7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4E4B558F98B07CD1E74DE7E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		096C72DA4D40505AE6A7899B /* ODAIKitFace */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04D8ACC0F6413C0E1784C676 /* Build configuration list for PBXNativeTarget "ODAIKitFace" */;
+			buildPhases = (
+				38AB4603393EE45CEA4B6B87 /* Headers */,
+				386FECCD531986FF5F4EFF58 /* Sources */,
+				E796F33E9CABB7FCB8964EF6 /* Frameworks */,
+				1258530BF3AEF479E491EB0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5DAD3DE0F02B0632F1368E3 /* PBXTargetDependency */,
+			);
+			name = ODAIKitFace;
+			productName = ODAIKitFace;
+			productReference = 180827F381A9FF1D9FD308FC /* ODAIKitFace.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		874D3CC26E555F5BFDD3C03C /* ODAIKitModelStore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 986187140E51B28E00F34545 /* Build configuration list for PBXNativeTarget "ODAIKitModelStore" */;
+			buildPhases = (
+				CC62F42C1AE39900FE3A09C7 /* Headers */,
+				C61FA4F4BC30403025B5CA5D /* Sources */,
+				968D18219DD4A54898B2C1C2 /* Frameworks */,
+				D07E97845589F2B48A5D1C8F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1438EEE792F3B566E06CB90F /* PBXTargetDependency */,
+			);
+			name = ODAIKitModelStore;
+			productName = ODAIKitModelStore;
+			productReference = 24B559AC07B15B943927A218 /* ODAIKitModelStore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFB600C809830AAC9F276613 /* Build configuration list for PBXNativeTarget "ODAIKitCore" */;
+			buildPhases = (
+				AF69EB96EC9AFB487DA3A094 /* Headers */,
+				851D8725824D8A332D86C194 /* Sources */,
+				5A85C6CEBD5D696F2BB43C5E /* Frameworks */,
+				D0008DF713E4D71C5519166D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ODAIKitCore;
+			productName = ODAIKitCore;
+			productReference = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FC68CA9BB860F983B381B99D /* ODAIKitAppleVision */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 875A391B3EFE92CE3D886A93 /* Build configuration list for PBXNativeTarget "ODAIKitAppleVision" */;
+			buildPhases = (
+				F4E4B558F98B07CD1E74DE7E /* Headers */,
+				947EBFD856F66D1673F9C14E /* Sources */,
+				220C9CA1E2574771F9405767 /* Frameworks */,
+				FFC7AA03B486039CA2736DF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FBC29F766375742D4D296283 /* PBXTargetDependency */,
+				CBF9B76B26D86FD5A206BDF8 /* PBXTargetDependency */,
+			);
+			name = ODAIKitAppleVision;
+			productName = ODAIKitAppleVision;
+			productReference = 858C773C2B112A7F9B06DDF0 /* ODAIKitAppleVision.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		077614432308B7CC82441D55 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 882F288788551146ED2641A1 /* Build configuration list for PBXProject "OnDeviceAIKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DCC4DD3733F34EC81CB2F008;
+			minimizedProjectReferenceProxies = 0;
+			preferredProjectObjectVersion = 100;
+			productRefGroup = 742663F36F51EE2A62DA39CC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */,
+				874D3CC26E555F5BFDD3C03C /* ODAIKitModelStore */,
+				096C72DA4D40505AE6A7899B /* ODAIKitFace */,
+				FC68CA9BB860F983B381B99D /* ODAIKitAppleVision */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1258530BF3AEF479E491EB0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0008DF713E4D71C5519166D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D07E97845589F2B48A5D1C8F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFC7AA03B486039CA2736DF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		386FECCD531986FF5F4EFF58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBD9C0AAD5764A6B15A15595 /* FaceDetector.swift in Sources */,
+				D1829444BA8E2D81358E27AF /* FaceObservation.swift in Sources */,
+				C2A4456A3D0A6F33529FB316 /* ImageGeometry.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		851D8725824D8A332D86C194 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3864683E61ECC35F3480F5DB /* Availability.swift in Sources */,
+				98EF1F4F88DC1B9E26717B19 /* LatestFrameQueue.swift in Sources */,
+				9BC228A95B719ABE75213605 /* TaskGate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		947EBFD856F66D1673F9C14E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A85CD02F7D348E984D7D8002 /* VisionFaceDetector.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C61FA4F4BC30403025B5CA5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FD5CC5139EEC2589BF74B1A /* InstallCoordinator.swift in Sources */,
+				CAF02ABB82EC4CFD3C1C26E8 /* ModelDownloader.swift in Sources */,
+				12546852456E36AE866B1CEC /* ModelLease.swift in Sources */,
+				386ECD1C54E3A04019ABB9C3 /* ModelManifest.swift in Sources */,
+				392A21488A3ED4187A20846F /* ModelStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1438EEE792F3B566E06CB90F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitCore;
+			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
+			targetProxy = 630FD2E874562DF3818EDFD2 /* PBXContainerItemProxy */;
+		};
+		A5DAD3DE0F02B0632F1368E3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitCore;
+			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
+			targetProxy = 52CBAACCD5330B3272AAF251 /* PBXContainerItemProxy */;
+		};
+		CBF9B76B26D86FD5A206BDF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitFace;
+			target = 096C72DA4D40505AE6A7899B /* ODAIKitFace */;
+			targetProxy = 4318317571B769ABA02942F9 /* PBXContainerItemProxy */;
+		};
+		FBC29F766375742D4D296283 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitCore;
+			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
+			targetProxy = FEE8B0BB07BEE4C7D235C4A9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0BEF4DA2B938F7A6F3AE8319 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitmodelstore;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		252C12F51233681FD9386066 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		26B6EACFD44EE261C965847B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		27BAB577E4F9FC243F48FC7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		29BB4111D6F24F7AA0C6B56D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitapplevision;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2D7CACA1591B7FB2A33B53E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitcore;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2FB2CDF6A14232751152B38D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitmodelstore;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		45B893565A7215A6402D3018 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitcore;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		898006CB2413E086DFD9EA63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitapplevision;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B73E2098C4ADEE40DB623C7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04D8ACC0F6413C0E1784C676 /* Build configuration list for PBXNativeTarget "ODAIKitFace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26B6EACFD44EE261C965847B /* Release */,
+				B73E2098C4ADEE40DB623C7C /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		875A391B3EFE92CE3D886A93 /* Build configuration list for PBXNativeTarget "ODAIKitAppleVision" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				898006CB2413E086DFD9EA63 /* Release */,
+				29BB4111D6F24F7AA0C6B56D /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		882F288788551146ED2641A1 /* Build configuration list for PBXProject "OnDeviceAIKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				252C12F51233681FD9386066 /* Debug */,
+				27BAB577E4F9FC243F48FC7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		986187140E51B28E00F34545 /* Build configuration list for PBXNativeTarget "ODAIKitModelStore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FB2CDF6A14232751152B38D /* Release */,
+				0BEF4DA2B938F7A6F3AE8319 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFB600C809830AAC9F276613 /* Build configuration list for PBXNativeTarget "ODAIKitCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45B893565A7215A6402D3018 /* Release */,
+				2D7CACA1591B7FB2A33B53E1 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 077614432308B7CC82441D55 /* Project object */;
+}
