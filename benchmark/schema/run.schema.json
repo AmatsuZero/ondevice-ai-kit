@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OnDevice AI benchmark run",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "runId",
+    "device",
+    "OS",
+    "sdkCommit",
+    "capability",
+    "actualBackend",
+    "modelRevision",
+    "preprocessRevision",
+    "fixtureHash",
+    "units",
+    "timingsMs",
+    "quality",
+    "peakMemory",
+    "energy",
+    "energyStatus",
+    "thermal",
+    "measurementMethod",
+    "validationStatus"
+  ],
+  "properties": {
+    "runId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "device": {
+      "type": "string",
+      "minLength": 1
+    },
+    "OS": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sdkCommit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capability": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actualBackend": {
+      "type": "string",
+      "minLength": 1
+    },
+    "preprocessRevision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "measurementMethod": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "modelRevision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fixtureHash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "units": {
+      "const": "ms"
+    },
+    "energy": {
+      "type": "null"
+    },
+    "energyStatus": {
+      "const": "unmeasured"
+    },
+    "thermal": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "validationStatus": {
+      "enum": [
+        "unit-fixture",
+        "simulator",
+        "device"
+      ]
+    },
+    "quality": {
+      "type": "object"
+    },
+    "peakMemory": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "required": [
+            "bytes",
+            "method"
+          ],
+          "properties": {
+            "bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "method": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "timingsMs": {
+      "type": "object",
+      "required": [
+        "coldStart",
+        "modelLoad",
+        "warmup",
+        "inference"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "coldStart": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "modelLoad": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "warmup": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "inference": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}
