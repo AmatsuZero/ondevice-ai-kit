@@ -7,3 +7,11 @@
 当前 schema v1 能耗固定 null/unmeasured，后续有可靠仪器后另行扩展 schema；热状态可记录原始平台标签。峰值内存没有可靠采集时为null，当前 resident size 不冒充峰值。
 
 导出后：`python3 tools/benchmark_report.py run.json --output artifacts/report.json`。输入和设备原始报告默认仅留本地，不提交照片或设备唯一标识。
+
+## P5 当前证据（2026-10-16）
+
+- `python3 -m unittest discover -s tools/tests -p 'test_benchmark_report.py' -v`：4/4 通过，覆盖空样本、单样本、最近秩 p50/p95、分组隔离、单位/负延迟/能耗校验。
+- Apple：`sh scripts/verify-apple.sh` 通过；Swift host tests、KMP simulator tests、bridge、PhotoSubmission、CameraLifecycle、原生消费者和 Demo 模拟器构建通过。设备 benchmark 尚未取得。
+- Android：`sh scripts/verify-android.sh` 通过，290 tasks；本地 Maven 发布及 `examples:android-native:assembleDebug -PusePublishedSdk=true` 通过。
+- Android 真机：TECNO KM9 / Android 15，实际后端 `android.mlkit.face.bundled`。原始报告为 `artifacts/P5/android-api35-face.json`，汇总为 `artifacts/P5/android-api35-report.json`（均为忽略目录）。固定输入为本机生成的合成 Orientation 6 JPEG，fixtureHash 为 `f71b7b19…e2f383`；5 次预热 p50/p95=`25.017538/39.179077 ms`，30 次 inference p50/p95=`16.876615/22.361923 ms`。该运行的 `sdkCommit` 为 `working-tree`，只能作为开发快照证据，不能作为冻结 SDK 发布基线。
+- P5 尚未完成：iOS 真机 benchmark、Android API26/iOS15 最低系统 benchmark、峰值内存/热量/能耗测量以及冻结 commit 后的重跑。
