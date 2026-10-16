@@ -47,7 +47,7 @@
 | P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；无相应设备时保持缺口；提交后停止 | 部分完成：iOS 相机/前后台、照片选择/取消与 Android API35 相机、选图取消、Orientation 6、权限拒绝/重新授权已验，见 [P4 记录](validation/p4-camera-stability.md)；iOS 旋转/镜像等仍待验收 |
 | P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 部分完成：工具、Apple/Android host 与分发验证、iOS27 和 Android API35 均以冻结 commit 完成 5+30 样本；最低系统和资源测量仍待补 |
 | P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力 | 先完成 speech-backends.md，再选择一个后端最小探针；独立停止 | 部分完成：TTS/插件边界、Android API35 与 iPhone 16 Pro Max 系统 TTS 探针已记录；iOS ASR 设备可用性已查询，但授权与转写、iOS26 资源实测仍待补 |
-| P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 部分完成：候选比较、固定视频协议和无模型 baseline 预检已完成；模型和单平台链路待选 |
+| P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 部分完成：iOS 27 真机确认 VideoToolbox 系统 SR 支持 4×、模型资产待下载；2× 固定视频 baseline 已验，4× 链路和实际模型推理仍待验 |
 | P8 VLM 调研 | SmolVLM2/huggingsnap、Florence-2、MiniCPM-V及其他指定 checkpoint | mobile-vlm.md 记录许可、平台、体积、内存、证据等级；不同时接入多个模型 | 已完成候选调研与 P9 单路线选择，见 [P8 记录](validation/mobile-vlm.md)；移动端实测归 P9 |
 | P9 VLM 单模型试验 | 根据 P8 选择一个 checkpoint、一个平台、一个 runtime | 固定图像→输出→资源/耗时原始证据；随后另包推进第二平台 | 单平台探针已通过：SmolVLM2 500M-Video-Instruct-mlx + iOS18/MLXVLM；固定资产、模拟器 15/15、签名设备构建、iPhone 16 Pro Max 成功/取消/重复会话均有证据；峰值内存未测，Android 第二平台待后续 |
 | P10 人脸身份/活体设计 | 1:1、1:N、活体分别设计数据与指标 | [face-identity.md](validation/face-identity.md)；阈值/FAR/FRR、授权删除与特征生命周期；独立停止 | 设计草案待审；实现与真实数据/设备验收待后续独立包 |
