@@ -46,3 +46,9 @@
 ## 剩余 P4 范围
 
 剩余 P4 范围为 iOS 真机 EXIF 旋转/镜像、权限恢复的真实 UI，以及两端持续资源/热量测量。iOS 真机照片选择和取消已通过。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。未开始 P5 benchmark；本次单图耗时不作为性能报告。
+
+## EXIF 方向路径补充（2026-10-17）
+
+- 新增合成 TIFF 的 ImageIO 主机检查，使用与 iOS Photo Picker 相同的 `CGImageSourceCreateThumbnailAtIndex` 参数。EXIF 1/2/6/7 的宽高、左右镜像及旋转方向均通过；合成图仅有黑白半幅，不含个人数据。`sh scripts/check-ios-photo-orientation.sh` 输出 `iOS photo ImageIO orientation checks passed (1, 2, 6, 7)`，并已加入 Apple 验证脚本。
+- 此检查验证解码/方向变换，不替代 PHPicker→Demo→Vision 的真机端到端证据。iPhone 16 Pro Max 上重新运行三个现有 UI 用例：相机连续帧、前后台恢复通过；照片选择用例在系统 Photo Picker 的 `PXGGridLayout-Info` 图片可点击性判定失败，未进入 Demo 推理。尝试仅改变测试点击坐标后，设备 runner 启动超过两分钟未返回用例结果，已停止该 runner 并撤销未验证的测试改动。此前已通过的选图用例证据仍保留，未把本次失败定性为 App 回归。
+- 真机 EXIF 2/6/7、权限设置页恢复和持续资源/热量仍为未验证；本次未改动 SDK 图像处理逻辑或设备相册内容。
