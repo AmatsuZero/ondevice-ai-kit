@@ -13,6 +13,19 @@ final class CameraLifecycleUITests: XCTestCase {
         XCTAssertTrue(app.buttons["相机"].isEnabled)
     }
 
+    func testPhotoPickerSelectionReturnsToDemo() {
+        let app = XCUIApplication(); app.launch()
+        let select = app.buttons["选择图片"]
+        XCTAssertTrue(select.waitForExistence(timeout: 15)); select.tap()
+        let firstPhoto = app.images.matching(identifier: "PXGGridLayout-Info").firstMatch
+        XCTAssertTrue(firstPhoto.waitForExistence(timeout: 15), "Photo picker needs a photo on this device")
+        firstPhoto.tap()
+        XCTAssertTrue(select.waitForExistence(timeout: 15))
+        let result = app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", "人脸 ")).firstMatch
+        XCTAssertTrue(result.waitForExistence(timeout: 20), "Selected photo should reach the detector")
+        XCTAssertTrue(select.isEnabled)
+    }
+
     func testCameraKeepsControlsStableAcrossFrames() {
         let app = XCUIApplication(); app.launchArguments = ["--ui-camera-test"]; app.launch()
         let camera = app.buttons["相机"]

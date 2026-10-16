@@ -41,8 +41,8 @@
 - iPhone 18 Pro / iOS 27 模拟器新增 `testPhotoPickerCancellationReturnsToDemo`：打开 PHPicker、点取消后，Demo 的选图和相机按钮仍可用。`xcresulttool` 确认 1/1 通过、0 失败。首次测试筛选写错而执行 0 个用例，该次不计为通过；模拟器结果不替代真机。
 - 用户完成两个 target 的 Xcode Automatic 签名设置后，在已连接的 iPhone 16 Pro Max / iOS 27.0.1 上重跑同一 `testPhotoPickerCancellationReturnsToDemo`。`xcodebuild test` exit 0，xcresult 确认 **1/1 通过、0 失败**。此前缺 profile 的构建阻塞已解除；该用例仅覆盖取消选择，未读取或保存用户照片。Xcode 自动写入的签名/工程格式改动仍留在本地工作区，未并入本次验证提交。
 - 同一签名配置下重新执行 `testCameraKeepsControlsStableAcrossFrames` 与 `testCameraResumesAfterBackgroundAndHonorsUserStop`，真机 xcresult 确认 **2/2 通过、0 失败**。
-- 尝试自动化选中照片时，设备 Photo Picker 没有可查询的照片 cell，`xcresult` 明确记录 `Photo picker needs a photo on this device`，因此该用例未执行推理并已撤回。要继续真机选图验收，需要先在该 iPhone 的系统“照片”中放入一张可选测试图片。
+- 首次自动化选图测试错误地查询 `CollectionView.Cell`，xcresult 的 UI hierarchy 显示 iOS 27 Photo Picker 网格将照片暴露为 `PXGGridLayout-Info` 标识的 `Image`，此前据失败文案推断“设备缺少照片”不成立。改为查询网格 Image 后，在同一 iPhone 上选中图片、返回 Demo 并得到人脸结果；`xcodebuild test` exit 0，xcresult 确认 **1/1 通过、0 失败**。测试未将照片或截图加入仓库，真机结果附件仅留在忽略的本地 artifacts。
 
 ## 剩余 P4 范围
 
-剩余 P4 范围为 iOS 真机照片选择、旋转/镜像、权限恢复的真实 UI，以及两端持续资源/热量测量。iOS 真机选择器取消已通过。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。未开始 P5 benchmark；本次单图耗时不作为性能报告。
+剩余 P4 范围为 iOS 真机 EXIF 旋转/镜像、权限恢复的真实 UI，以及两端持续资源/热量测量。iOS 真机照片选择和取消已通过。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。未开始 P5 benchmark；本次单图耗时不作为性能报告。

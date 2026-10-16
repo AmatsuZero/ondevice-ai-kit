@@ -44,7 +44,7 @@
 | P1 SDK 生命周期审查 | 仅 TaskGate、LatestFrameQueue、Vision/MLKit 取消与 close 的资源所有权；不改 Demo UI/安装器 | 独立审查、必要问题 RED→GREEN、对应测试通过；提交后停止 | 已完成，见 P1 审查记录 |
 | P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 已完成，见 [P2 审查](validation/p2-model-store-review.md) |
 | P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 已完成，见 [P3 真机结果](validation/p3-ios-device.md) |
-| P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；无相应设备时保持缺口；提交后停止 | 部分完成：iOS 相机/前后台与 Android API35 相机、选图取消、Orientation 6、权限拒绝/重新授权已验，见 [P4 记录](validation/p4-camera-stability.md)；iOS 照片等仍待验收 |
+| P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；无相应设备时保持缺口；提交后停止 | 部分完成：iOS 相机/前后台、照片选择/取消与 Android API35 相机、选图取消、Orientation 6、权限拒绝/重新授权已验，见 [P4 记录](validation/p4-camera-stability.md)；iOS 旋转/镜像等仍待验收 |
 | P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 工具已实现，真机数据待补 |
 | P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力 | 先完成 speech-backends.md，再选择一个后端最小探针；独立停止 | 未开始 |
 | P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 未开始 |
@@ -71,6 +71,6 @@ P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试
 
 ## 恢复时的第一步
 
-P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。P4 的 iOS 相机/前后台、真机照片选择器取消与 Android API35 相机、照片和部分权限交互已有结果，见 [P4 记录](validation/p4-camera-stability.md)。下一次仅推进 P4 剩余 iOS 真机照片选择、旋转/镜像与资源释放验收；本地签名已可运行 UI runner。iOS15/API26 最低系统项继续等待设备，不以其他验证代替。仍按每轮一个工作包推进。
+P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。P4 的 iOS 相机/前后台、真机照片选择/取消与 Android API35 相机、照片和部分权限交互已有结果，见 [P4 记录](validation/p4-camera-stability.md)。下一次仅推进 P4 剩余 iOS 真机旋转/镜像与资源释放验收；本地签名已可运行 UI runner。iOS15/API26 最低系统项继续等待设备，不以其他验证代替。仍按每轮一个工作包推进。
 
 详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。
