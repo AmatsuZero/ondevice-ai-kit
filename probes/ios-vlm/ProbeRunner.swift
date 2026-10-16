@@ -38,20 +38,22 @@ public struct VLMRunResult: Codable, Sendable {
     public let peakMemoryStatus: String
     public let cancelled: Bool
     public let output: String
+    public let errorReason: String?
 
     public init(status: VLMRunStatus, actualBackend: String, modelRevision: String,
                 runtimeRevision: String, fixtureHash: String, firstTokenMs: Double?,
                 totalMs: Double?, peakMemory: Int?, peakMemoryStatus: String = "unmeasured",
-                cancelled: Bool, output: String) {
+                cancelled: Bool, output: String, errorReason: String? = nil) {
         self.status = status; self.actualBackend = actualBackend; self.modelRevision = modelRevision
         self.runtimeRevision = runtimeRevision; self.fixtureHash = fixtureHash
         self.firstTokenMs = firstTokenMs; self.totalMs = totalMs; self.peakMemory = peakMemory
         self.peakMemoryStatus = peakMemoryStatus; self.cancelled = cancelled; self.output = output
+        self.errorReason = errorReason
     }
 
     private enum CodingKeys: String, CodingKey {
         case status, actualBackend, modelRevision, runtimeRevision, fixtureHash
-        case firstTokenMs, totalMs, peakMemory, peakMemoryStatus, cancelled, output
+        case firstTokenMs, totalMs, peakMemory, peakMemoryStatus, cancelled, output, errorReason
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -68,6 +70,7 @@ public struct VLMRunResult: Codable, Sendable {
         try container.encode(peakMemoryStatus, forKey: .peakMemoryStatus)
         try container.encode(cancelled, forKey: .cancelled)
         try container.encode(output, forKey: .output)
+        try container.encodeIfPresent(errorReason, forKey: .errorReason)
     }
 }
 
@@ -112,6 +115,13 @@ public struct VLMProbe<B: VLMBackend>: Sendable {
         let start = clock.now
         do {
             let generation = try await backend.generate(input: input, manifest: manifest)
+            guard !generation.output.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                return VLMRunResult(status: .unavailable, actualBackend: backend.identifier,
+                    modelRevision: manifest.modelRevision, runtimeRevision: manifest.runtimeRevision,
+                    fixtureHash: fixtureHash, firstTokenMs: generation.firstTokenMs,
+                    totalMs: nil, peakMemory: nil, peakMemoryStatus: "unmeasured",
+                    cancelled: false, output: "", errorReason: "empty generation")
+            }
             let elapsed = start.duration(to: clock.now)
             let ms = Double(elapsed.components.seconds) * 1000 + Double(elapsed.components.attoseconds) / 1e15
             return VLMRunResult(status: .success, actualBackend: backend.identifier, modelRevision: manifest.modelRevision,
