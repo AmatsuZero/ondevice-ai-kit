@@ -16,6 +16,9 @@
 
 | 能力 | 后端 | 平台/提供形式 | 离线与凭据 | 选择结论 |
 | --- | --- | --- | --- | --- |
+| iOS ASR | `apple.speech.recognizer` | Speech framework `SFSpeechRecognizer` | 是否支持本机识别按 locale/设备查询；权限和语音资源不可预设 | 基础后端候选，需 iOS 真机权限与离线探针 |
+| iOS 26+ ASR | `apple.speech.transcriber` | Speech framework `SpeechAnalyzer`/`SpeechTranscriber`，仅在新系统条件满足时启用 | 资源可用性、locale 与设备须运行时核验 | 增强模块候选，不抬高基础宿主最低系统 |
+| Android ASR | `android.speech.recognizer` | Android framework `SpeechRecognizer`，服务实现由设备提供 | on-device 可用性需按设备/系统查询；不承诺所有机型离线 | 基础候选，需真机权限与取消探针 |
 | iOS TTS | `apple.avspeech` | Apple AVFAudio `AVSpeechSynthesizer`，系统 API | 依赖系统语音资源；不需要服务凭据，是否可用由设备 voice 列表决定 | 默认后端；放入 core 能力接口，平台实现放在 Apple 模块 |
 | Android TTS | `android.text-to-speech` | Android framework `TextToSpeech`；具体引擎由设备提供 | 语言包和网络行为由引擎决定；不把某个厂商引擎当 SDK 依赖 | 默认后端；初始化、语言检查和 shutdown 必须受任务生命周期管理 |
 | Azure Speech TTS/ASR | `microsoft.azure.speech` | Microsoft Speech SDK：iOS/Android 原生包，也可通过 REST；包名/版本在实现任务中锁定 | 云端通常需要订阅 key/endpoint 或 token；网络失败、限流、区域和隐私必须显式暴露 | 可选插件；不进入默认依赖图，安装时单独启用 |
@@ -27,10 +30,13 @@ Microsoft 官方文档说明 Speech SDK 支持 Android、iOS 和 REST 路线；�
 - <https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-to-text>
 - <https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech>
 
-系统 API 的基线资料：
+系统 API 的基线资料（具体可用性必须由目标设备验证）：
 
 - <https://developer.apple.com/documentation/avfaudio/avspeechsynthesizer>
+- <https://developer.apple.com/documentation/speech/sfspeechrecognizer>
+- <https://developer.apple.com/documentation/speech/speechanalyzer>
 - <https://developer.android.com/reference/android/speech/tts/TextToSpeech>
+- <https://developer.android.com/reference/android/speech/SpeechRecognizer>
 
 ## 探针结果
 
@@ -42,4 +48,4 @@ Microsoft 官方文档说明 Speech SDK 支持 Android、iOS 和 REST 路线；�
 sh tools/probes/native_tts_probe.sh Samantha "OnDevice AI Kit native speech probe"
 ```
 
-P6 停止条件：统一选择值和错误语义进入实现计划；默认系统后端保持零第三方依赖；Azure 作为可裁剪插件，待凭据/网络和包分发策略确定后单独实现与 benchmark。真实 iOS/Android TTS/ASR 设备样本留给语音接入工作包，不以本机 host 探针替代。
+P6 仍待完成：核对 ASR 和 iOS 26+ API 的官方可用性、权限、离线资源，再在 iOS 或 Android 的原生环境实现一个系统后端最小探针并记录真实设备结果。本机 host 探针不能替代移动端验收。统一选择值和错误语义进入后续实现计划；Azure 作为可裁剪插件，待凭据、网络和包分发策略确定后单独实现与 benchmark。
