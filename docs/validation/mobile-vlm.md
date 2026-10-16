@@ -6,18 +6,25 @@
 
 | 候选 | 模态/任务 | 运行时候选 | 许可证与风险 | 当前结论 |
 | --- | --- | --- | --- | --- |
-| SmolVLM2 500M | 图片/短视频描述、问答 | iOS 18+ / MLXVLM，沿用现有总设计路线 | 官方 HuggingSnap 路线使用 500M-Video-Instruct-mlx；Apache-2.0 需以具体 checkpoint card 复核，MLX 权重和内存需实测 | **P9 首选**：保持现有设计，不改成 256M |
+| SmolVLM2 500M | 图片/短视频描述、问答 | iOS 18+ / MLXVLM，沿用现有总设计路线 | `mlx-community/SmolVLM2-500M-Video-Instruct-mlx` card 标记 Apache-2.0；BF16 权重约 1.02GB，**不是**设备峰值内存 | **P9 首选**：保持现有设计，不改成 256M |
 | SmolVLM2 256M | 图片/短视频描述、问答 | 官方 card 提供 ONNX 组件，Android ONNX Runtime 可探针 | Apache-2.0；model.safetensors 约 1.03GB，官方视频推理 GPU RAM 约 1.38GB；这些不是移动端实测 | Android 备选，不与 P9 同时接入 |
 | Florence-2-base | 图片描述、检测、区域任务 | 官方示例依赖 Transformers `trust_remote_code=True`；移动端转换需另证 | MIT；权重约 463MB，完整 repo 约 930MB；没有官方开箱即用移动 runtime | 任务型备选 |
-| MiniCPM-V-2_6 | 图片问答、OCR/多模态对话 | 专用 runtime/llama.cpp 路线需验证 | Apache-2.0 代码不等于权重许可；INT4 repo 约 5.97GB，模型卡约 7GB GPU memory，且有商业登记要求 | 不作为 P9 首选 |
+| MiniCPM-V-2_6 | 图片问答、OCR/多模态对话 | 官方专用 llama.cpp 分支需验证，不能视为上游通用 runtime | 主权重访问受限；Apache-2.0 仅覆盖代码，权重使用独立 MiniCPM Model License，商业用途需登记；INT4 repo 约 5.97GB，模型卡称约 7GB GPU memory | 不作为 P9 首选 |
 
 参考模型页（接入前必须重新读取具体 revision）：
 
 - <https://huggingface.co/HuggingFaceTB/SmolVLM2-500M-Video-Instruct>
+- <https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx>
 - <https://huggingface.co/HuggingFaceTB/SmolVLM2-256M-Video-Instruct>
-- <https://github.com/huggingface/swift-huggingface>
+- <https://github.com/huggingface/HuggingSnap>
+- <https://github.com/cyrilzakka/mlx-swift-examples>
 - <https://huggingface.co/microsoft/Florence-2-base>
 - <https://huggingface.co/openbmb/MiniCPM-V-2_6>
+- <https://huggingface.co/openbmb/MiniCPM-V-2_6-int4/tree/main>
+
+证据等级：模型仓库的许可证、权重大小和 revision 属于**上游模型资产证据**；HuggingSnap 的 iOS 18/MLXVLM 集成属于**上游移动端实现证据**；本项目还没有下载哈希、构建、iPhone 推理或峰值内存证据。Florence-2 的 463MB 是 FP16 权重大小，930MB 是含重复格式的仓库大小；256M 的 1.38GB 与 MiniCPM 的 7GB 是各自模型卡报告的 GPU 内存，不是本项目设备 RSS。Florence-2 官方示例使用 `trust_remote_code=True`，移动端转换及代码供应链需单独核验；还需明确 base 与 base-ft 的任务质量差异。
+
+P9 候选 revision：2026-10-16 只读查询官方模型 API，`mlx-community/SmolVLM2-500M-Video-Instruct-mlx` 的当前 SHA 为 `fa57db46815177fbdfd65cc85a2b3416a8332268`，card 的 license 为 `apache-2.0`。这是待下载前重新读取和校验的观察值，不把浮动分支名作为锁定版本。MLXVLM 示例源码也须锁定 commit，而不是跟随 `main`。
 
 ## 统一验证门槛
 
@@ -27,4 +34,4 @@
 4. 至少一个目标平台实机或明确标记 unavailable；构建/转换成功不算推理成功。
 5. 质量采用任务特定的人工可复核记录；不把不同任务或不同模型合并成总分。
 
-P8 当前状态：候选、许可证/体积风险和统一验证门槛已记录。P9 选择 **SmolVLM2 500M-Video-Instruct-mlx + iOS 18+ MLXVLM**，保持现有总设计；256M ONNX 仅作为后续 Android 备选。尚未下载权重或运行探针。
+P8 当前状态：候选、许可证、体积、运行平台和证据等级已记录。P9 选择 **SmolVLM2 500M-Video-Instruct-mlx + iOS 18+ MLXVLM**，保持现有总设计；256M ONNX 仅作为后续 Android 备选。尚未下载权重或运行探针。
