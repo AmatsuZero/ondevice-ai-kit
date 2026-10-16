@@ -71,6 +71,6 @@ P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试
 
 ## 恢复时的第一步
 
-P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。P4 的 iOS 相机/前后台与 Android API35 相机、照片和部分权限交互已有结果，见 [P4 记录](validation/p4-camera-stability.md)。下一次仅推进 P4 剩余 iOS 照片/取消、旋转/镜像与资源释放验收；目前真机 UI 重测缺少匹配的本地 provisioning profile。iOS15/API26 最低系统项继续等待设备，不以其他验证代替。仍按每轮一个工作包推进。
+P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。P4 的 iOS 相机/前后台、真机照片选择器取消与 Android API35 相机、照片和部分权限交互已有结果，见 [P4 记录](validation/p4-camera-stability.md)。下一次仅推进 P4 剩余 iOS 真机照片选择、旋转/镜像与资源释放验收；本地签名已可运行 UI runner。iOS15/API26 最低系统项继续等待设备，不以其他验证代替。仍按每轮一个工作包推进。
 
 详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。
