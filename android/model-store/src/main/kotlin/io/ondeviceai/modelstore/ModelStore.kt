@@ -20,7 +20,7 @@ class ModelStore(private val root:File,private val compatibility:ModelCompatibil
     }
     private fun directory(ref:ModelRef)=File(File(File(root,"installed"),ref.modelId),ref.revision)
     private fun validateRef(ref:ModelRef) { require(listOf(ref.modelId,ref.revision).all { it.matches(Regex("[A-Za-z0-9_.-]+")) && it!="." && it!=".." }) }
-    private fun version(value:String):List<Int> = value.split('.').map { it.toInt().also { n->require(n>=0) } }
+    private fun version(value:String):List<Int> = value.split('.').map { require(it.isNotEmpty() && it.all { c->c in '0'..'9' });it.toInt() }
     private fun compare(a:String,b:String):Int {
         val x=version(a);val y=version(b)
         for(i in 0 until maxOf(x.size,y.size)) { val c=(x.getOrElse(i){0}).compareTo(y.getOrElse(i){0});if(c!=0)return c };return 0
@@ -30,6 +30,10 @@ class ModelStore(private val root:File,private val compatibility:ModelCompatibil
         require(m.schemaVersion==1 && m.files.isNotEmpty() && m.upstreamRevision.isNotBlank() && m.capability.isNotBlank() && m.formatVersion.isNotBlank())
         require(m.licenseIdentifier.isNotBlank() && m.attribution.isNotBlank() && m.redistribution.isNotBlank())
         require(m.processing.preprocessRevision.isNotBlank() && m.processing.inputSignature.isNotBlank() && m.processing.outputSignature.isNotBlank() && m.processing.maxInputElements>0)
+        for(value in listOf(m.upstreamURL,m.licenseURL)) {
+            val url=URI(value);require(url.scheme=="https" && url.host!=null && url.userInfo==null)
+        }
+        m.resources.measuredMemoryBytes?.let { require(it>=0 && !m.resources.memoryMeasurementContext.isNullOrBlank()) }
         require(m.backendId==compatibility.backendId && compatibility.architecture in m.architectures && compare(compatibility.osVersion,m.minimumOS)>=0 && compare(compatibility.backendVersion,m.backendVersion.minimum)>=0 && compare(compatibility.backendVersion,m.backendVersion.maximumExclusive)<0)
         val paths=mutableSetOf<String>();var total=0L
         for(f in m.files) {
@@ -69,7 +73,9 @@ class ModelStore(private val root:File,private val compatibility:ModelCompatibil
         } catch(_:Exception){ModelStatus.INVALID}
     }
     suspend fun status(ref:ModelRef)=withContext(Dispatchers.IO){mutex.withLock { statusLocked(ref) }}
-    suspend fun install(manifest:ModelManifest,source:File)=withContext(Dispatchers.IO) { mutex.withLock {
+    suspend fun install(manifest:ModelManifest,source:File) {
+        val snapshot=manifest.snapshot()
+        withContext(Dispatchers.IO) { val manifest=snapshot;mutex.withLock {
         validate(manifest);verify(manifest,source);ensureActive()
         val target=directory(manifest.ref)
         if(target.exists()) {
@@ -84,7 +90,7 @@ class ModelStore(private val root:File,private val compatibility:ModelCompatibil
                 target.parentFile!!.mkdirs();Files.move(stage.toPath(),target.toPath(),StandardCopyOption.ATOMIC_MOVE)
             } finally { stage.deleteRecursively() }
         }
-    } }
+    } } }
     suspend fun acquire(ref:ModelRef):ModelLease=withContext(Dispatchers.IO) { mutex.withLock {
         check(statusLocked(ref)==ModelStatus.INSTALLED){"absent"}
         val token=UUID.randomUUID().toString();leases.getOrPut(ref){mutableSetOf()}.add(token)

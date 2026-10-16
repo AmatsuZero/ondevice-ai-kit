@@ -37,5 +37,20 @@ class ModelStoreTest {
             assertFails { store.install(fixture(file),source) }
         } finally { root.deleteRecursively() }
     }
+    @Test fun rejectsInvalidMetadataAndVersions() {
+        val root=Files.createTempDirectory("odai-metadata-test").toFile()
+        try {
+            val store=ModelStore(File(root,"store"),ModelCompatibility("fixture","1.0.0","26","arm64"))
+            val base=fixture(ModelFile("weights.bin","https://models.example/file",7,"0".repeat(64)))
+            for(url in listOf("http://models.example/info","https://user:password@models.example/info","file:///tmp/info")) {
+                assertFails {store.validate(base.copy(upstreamURL=url))}
+                assertFails {store.validate(base.copy(licenseURL=url))}
+            }
+            assertFails {store.validate(base.copy(resources=base.resources.copy(measuredMemoryBytes=-1,memoryMeasurementContext="measured")))}
+            assertFails {store.validate(base.copy(resources=base.resources.copy(measuredMemoryBytes=0,memoryMeasurementContext="   ")))}
+            for(version in listOf("","+26")) assertFails {store.validate(base.copy(minimumOS=version))}
+        } finally {root.deleteRecursively()}
+    }
+
 }
 fun fixture(file: ModelFile) = ModelManifest(modelId="fixture",revision="v1",upstreamURL="https://models.example/fixture",upstreamRevision="pinned-test-commit",capability="test-only-data",backendId="fixture",backendVersion=VersionRange("1.0.0","2.0.0"),minimumOS="26",architectures=listOf("arm64"),formatVersion="raw-v1",files=listOf(file),processing=ModelProcessing("bytes","bytes","none-v1",null,null,1024),resources=ModelResources(file.bytes,file.bytes,file.bytes),licenseIdentifier="CC0-1.0",licenseURL="https://creativecommons.org/publicdomain/zero/1.0/",attribution="SDK synthetic fixture",redistribution="permitted")

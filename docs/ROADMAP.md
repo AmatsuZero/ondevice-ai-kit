@@ -1,6 +1,6 @@
 # 分阶段交付与恢复入口
 
-更新时间：2026-10-15。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main。
+更新时间：2026-10-16。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main。
 
 ## 执行规则
 
@@ -18,7 +18,7 @@
 | --- | --- | --- | --- |
 | P0 当前快照收口 | 阶段表、验收证据、同步现有代码；不新增算法 | 当前检查结果落盘，两端分支 SHA 相等 | 已收口，随本次提交同步 |
 | P1 SDK 生命周期审查 | 仅 TaskGate、LatestFrameQueue、Vision/MLKit 取消与 close 的资源所有权；不改 Demo UI/安装器 | 独立审查、必要问题 RED→GREEN、对应测试通过；提交后停止 | 已完成，见 P1 审查记录 |
-| P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 下一包 |
+| P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 已完成，见 [P2 审查](validation/p2-model-store-review.md) |
 | P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 待执行，真机已获授权 |
 | P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；Android 无设备时保持缺口；提交后停止 | 待执行 |
 | P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 工具已实现，真机数据待补 |
@@ -28,7 +28,7 @@
 | P9 VLM 单模型试验 | 根据 P8 选择一个 checkpoint、一个平台、一个 runtime | 固定图像→输出→资源/耗时原始证据；随后另包推进第二平台 | 未开始 |
 | P10 人脸身份/活体设计 | 1:1、1:N、活体分别设计数据与指标 | face-identity.md；阈值/FAR/FRR、授权删除与特征生命周期；独立停止 | 后续 TODO |
 
-P1/P2 是此前未完成独立审查的拆分，二者完成后才能声称基础 SDK 通过审查。P3 不要求先解决模拟器 Vision Code9；真机结果另行记录。iOS15 保持基础下限，高版本能力通过 availability/独立 backend 接入。
+P1/P2 是此前未完成独立审查的拆分；二者已完成，但基础 SDK 仍需后续 P3/P4/P5 验收，不能据此声称完整工程可发布。P3 不要求先解决模拟器 Vision Code9；真机结果另行记录。iOS15 保持基础下限，高版本能力通过 availability/独立 backend 接入。
 
 ## 已有实现与证据
 
@@ -42,6 +42,6 @@ P1/P2 是此前未完成独立审查的拆分，二者完成后才能声称基�
 
 ## 恢复时的第一步
 
-P0、P1 已完成；P1 结果见 [生命周期审查](validation/p1-lifecycle-review.md)，Swift 20 项与 Android JVM 15 项通过，Android lint/APK 构建通过。下一次仅开始 P2：读取两端 ModelStore、manifest validator、downloader/coordinator 及测试；先做独立审查，再以失败用例驱动必要修复。不要同时开始 P3、签名安装或新算法研究。
+P0、P1、P2 已完成；P1 结果见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 结果见 [模型存储审查](validation/p2-model-store-review.md)。下一次仅开始 P3：iOS 真机最小闭环。不要同时开始 P4、签名资产变更或新算法研究。
 
 详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。

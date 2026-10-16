@@ -30,8 +30,16 @@ public actor ModelStore {
               !manifest.licenseIdentifier.isEmpty, !manifest.attribution.isEmpty, !manifest.redistribution.isEmpty,
               !manifest.processing.preprocessRevision.isEmpty, manifest.processing.maxInputElements > 0,
               !manifest.processing.inputSignature.isEmpty, !manifest.processing.outputSignature.isEmpty else { throw ModelStoreError.invalidManifest }
+        for url in [manifest.upstreamURL, manifest.licenseURL] {
+            guard url.scheme == "https", let host = url.host, !host.isEmpty,
+                  url.user == nil, url.password == nil else { throw ModelStoreError.invalidManifest }
+        }
+        if let memory = manifest.resources.measuredMemoryBytes {
+            guard memory >= 0, let context = manifest.resources.memoryMeasurementContext,
+                  !context.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { throw ModelStoreError.invalidManifest }
+        }
         let versions = [manifest.minimumOS, compatibility.osVersion, manifest.backendVersion.minimum, manifest.backendVersion.maximumExclusive, compatibility.backendVersion]
-        guard versions.allSatisfy({ $0.split(separator: ".", omittingEmptySubsequences: false).allSatisfy { Int($0) != nil && Int($0)! >= 0 } }) else { throw ModelStoreError.invalidManifest }
+        guard versions.allSatisfy({ !$0.isEmpty && $0.split(separator: ".", omittingEmptySubsequences: false).allSatisfy { !$0.isEmpty && $0.utf8.allSatisfy { (48...57).contains($0) } && Int($0) != nil } }) else { throw ModelStoreError.invalidManifest }
         guard manifest.backendId == compatibility.backendId,
               manifest.architectures.contains(compatibility.architecture),
               compatibility.osVersion.compare(manifest.minimumOS, options: .numeric) != .orderedAscending,

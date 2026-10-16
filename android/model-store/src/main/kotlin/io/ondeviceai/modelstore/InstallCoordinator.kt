@@ -4,7 +4,12 @@ import java.util.UUID
 import kotlinx.coroutines.*
 
 data class InstalledModel(val ref:ModelRef)
-class InstallCoordinator(private val store:ModelStore,private val downloadRoot:File,private val transport:ModelDownloadTransport,private val freeBytes:(File)->Long={it.usableSpace}) {
+/** Cleanup failed after transport stopped. Query model status before retrying installation. */
+class ModelCleanupException(val directory:File,cause:Throwable):java.io.IOException("download cleanup failed: $directory",cause)
+class InstallCoordinator internal constructor(private val store:ModelStore,private val downloadRoot:File,private val transport:ModelDownloadTransport,private val freeBytes:(File)->Long={it.usableSpace},private val cleanup:(File)->Unit) {
+    constructor(store:ModelStore,downloadRoot:File,transport:ModelDownloadTransport,freeBytes:(File)->Long={it.usableSpace}):this(store,downloadRoot,transport,freeBytes,{directory->
+        if(!directory.deleteRecursively())throw java.io.IOException("remove failed")
+    })
     private class Waiter(val result:CompletableDeferred<InstalledModel>,val progress:(Long)->Unit)
     private class InstallJob(val manifest:ModelManifest) {
         val waiters=mutableMapOf<String,Waiter>();val cancelled=mutableListOf<Waiter>()
@@ -18,12 +23,13 @@ class InstallCoordinator(private val store:ModelStore,private val downloadRoot:F
         return store.status(ref)
     }
     suspend fun install(manifest:ModelManifest,observerId:String=UUID.randomUUID().toString(),progress:(Long)->Unit={}):InstalledModel {
-        store.validate(manifest);currentCoroutineContext().ensureActive()
+        val snapshot=manifest.snapshot()
+        store.validate(snapshot);currentCoroutineContext().ensureActive()
         val waiter=Waiter(CompletableDeferred(),progress)
         val job=synchronized(lock) {
             require(jobs.values.none { observerId in it.waiters }){"duplicate observer"}
-            val job=jobs.getOrPut(manifest.ref){InstallJob(manifest)}
-            require(job.manifest==manifest && !job.cancelling){"installation revision already active with different assets or cancelling"}
+            val job=jobs.getOrPut(snapshot.ref){InstallJob(snapshot)}
+            require(job.manifest==snapshot && !job.cancelling){"installation revision already active with different assets or cancelling"}
             job.waiters[observerId]=waiter
             if(job.worker==null) {
                 // Always enter cleanup even if cancelled before dispatcher starts the worker.
@@ -35,7 +41,8 @@ class InstallCoordinator(private val store:ModelStore,private val downloadRoot:F
         try {return waiter.result.await()}
         catch(error:CancellationException) {
             cancel(observerId)
-            withContext(NonCancellable) {try {waiter.result.await()}catch(_:Exception){}}
+            val terminal = withContext(NonCancellable) { runCatching { waiter.result.await() } }
+            terminal.exceptionOrNull()?.let { if (it is ModelCleanupException) throw it }
             throw error
         }
     }
@@ -64,9 +71,10 @@ class InstallCoordinator(private val store:ModelStore,private val downloadRoot:F
             }
             checkCancelled(job);store.install(manifest,directory);InstalledModel(manifest.ref)
         }
-        directory.deleteRecursively()
+        val cleanupError=runCatching {cleanup(directory)}.exceptionOrNull()
+        val finalResult=cleanupError?.let { Result.failure<InstalledModel>(ModelCleanupException(directory,it)) } ?: result
         val final=synchronized(lock){jobs.remove(manifest.ref);job.waiters.values.toList() to job.cancelled.toList()}
-        final.first.forEach{it.result.completeWith(result)}
-        final.second.forEach{it.result.completeExceptionally(CancellationException("observer cancelled"))}
+        final.first.forEach{it.result.completeWith(finalResult)}
+        final.second.forEach{it.result.completeExceptionally(cleanupError?.let { error -> ModelCleanupException(directory,error) } ?: CancellationException("observer cancelled"))}
     }
 }

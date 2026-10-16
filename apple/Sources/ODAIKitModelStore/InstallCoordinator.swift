@@ -2,6 +2,12 @@ import Foundation
 public struct InstalledModel: Sendable {
     public let ref: ModelRef
 }
+/// Cleanup failed after transport stopped. The model may already be installed; query status.
+/// Only this job's directory is included, so recovery never sweeps other active downloads.
+public struct ModelCleanupError: Error {
+    public let directory: URL
+    public let underlyingError: Error
+}
 public actor InstallCoordinator {
     private struct Waiter {
         let continuation: CheckedContinuation<InstalledModel, Error>
@@ -19,11 +25,20 @@ public actor InstallCoordinator {
     private let downloadRoot: URL
     private let transport: any ModelDownloadTransport
     private let freeBytes: @Sendable (URL) throws -> Int64
+    private let cleanup: @Sendable (URL) throws -> Void
     private var jobs: [ModelRef: Job] = [:]
     public init(store: ModelStore, downloadRoot: URL, transport: any ModelDownloadTransport, freeBytes: @escaping @Sendable (URL) throws -> Int64 = { url in
         (try FileManager.default.attributesOfFileSystem(forPath: url.path)[.systemFreeSize] as? NSNumber)?.int64Value ?? 0
     }) {
         self.store = store; self.downloadRoot = downloadRoot; self.transport = transport; self.freeBytes = freeBytes
+        self.cleanup = { directory in try Self.removeDownload(directory) }
+    }
+    internal init(store: ModelStore, downloadRoot: URL, transport: any ModelDownloadTransport, freeBytes: @escaping @Sendable (URL) throws -> Int64 = { _ in Int64.max }, cleanup: @escaping @Sendable (URL) throws -> Void) {
+        self.store = store; self.downloadRoot = downloadRoot; self.transport = transport; self.freeBytes = freeBytes; self.cleanup = cleanup
+    }
+    private static func removeDownload(_ directory: URL) throws {
+        do { try FileManager.default.removeItem(at: directory) }
+        catch CocoaError.fileNoSuchFile { /* Failure before directory creation needs no cleanup. */ }
     }
     public func status(_ ref: ModelRef) async -> ModelStatus { if jobs[ref] != nil { return .installing }; return await store.status(ref) }
     public func install(manifest: ModelManifest, observerId: UUID = UUID(), progress: @escaping @Sendable (Int64) -> Void = { _ in }) async throws -> InstalledModel {
@@ -79,9 +94,15 @@ public actor InstallCoordinator {
             outcome = .success(InstalledModel(ref: manifest.ref))
         } catch { outcome = .failure(error) }
         // Last cancellation is not delivered until all transport I/O and owned cleanup have stopped.
-        try? FileManager.default.removeItem(at: directory)
+        let cleanupError: Error?
+        do { try cleanup(directory); cleanupError = nil }
+        catch { cleanupError = error }
+        let finalOutcome: Result<InstalledModel, Error> = cleanupError.map { .failure(ModelCleanupError(directory: directory, underlyingError: $0)) } ?? outcome
         guard let job = jobs.removeValue(forKey: manifest.ref) else { return }
-        for waiter in job.waiters.values { waiter.continuation.resume(with: outcome) }
-        for waiter in job.cancelled.values { waiter.continuation.resume(throwing: CancellationError()) }
+        for waiter in job.waiters.values { waiter.continuation.resume(with: finalOutcome) }
+        for waiter in job.cancelled.values {
+            if let cleanupError { waiter.continuation.resume(throwing: ModelCleanupError(directory: directory, underlyingError: cleanupError)) }
+            else { waiter.continuation.resume(throwing: CancellationError()) }
+        }
     }
 }

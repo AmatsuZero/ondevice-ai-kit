@@ -9,6 +9,10 @@ public struct HTTPSDownloadPolicy: Sendable {
         guard url.scheme == "https", let host = url.host?.lowercased(), allowedHosts.contains(host),
               url.user == nil, url.password == nil, url.port == nil || url.port == 443 else { throw ModelStoreError.invalidSource }
     }
+    internal func validateRedirect(_ url: URL, count: Int) throws {
+        guard count < 5 else { throw ModelStoreError.invalidSource }
+        try validate(url)
+    }
 }
 public struct HTTPSModelDownloader: ModelDownloadTransport {
     public let policy: HTTPSDownloadPolicy
@@ -19,7 +23,7 @@ public struct HTTPSModelDownloader: ModelDownloadTransport {
         try await withTaskCancellationHandler(operation: { try await operation.run() }, onCancel: { operation.cancel() })
     }
 }
-private final class DownloadOperation: NSObject, URLSessionDownloadDelegate, @unchecked Sendable {
+final class DownloadOperation: NSObject, URLSessionDownloadDelegate, @unchecked Sendable {
     private let file: ModelFile
     private let destination: URL
     private let policy: HTTPSDownloadPolicy
@@ -30,6 +34,7 @@ private final class DownloadOperation: NSObject, URLSessionDownloadDelegate, @un
     private var continuation: CheckedContinuation<Void, Error>?
     // URLSession delivers delegate callbacks serially.
     private var resultError: Error?
+    private var redirectCount = 0
     init(file: ModelFile, destination: URL, policy: HTTPSDownloadPolicy, progress: @escaping @Sendable (Int64) -> Void) {
         self.file = file; self.destination = destination; self.policy = policy; self.progress = progress
     }
@@ -49,7 +54,11 @@ private final class DownloadOperation: NSObject, URLSessionDownloadDelegate, @un
     }
     func cancel() { lock.lock(); cancelled = true; let task = self.task; lock.unlock(); task?.cancel() }
     func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
-        do { guard let url = request.url else { throw ModelStoreError.invalidSource }; try policy.validate(url); completionHandler(request) }
+        do {
+            guard let url = request.url else { throw ModelStoreError.invalidSource }
+            lock.lock(); let count = redirectCount; redirectCount += 1; lock.unlock()
+            try policy.validateRedirect(url, count: count); completionHandler(request)
+        }
         catch { resultError = error; completionHandler(nil); task.cancel() }
     }
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {

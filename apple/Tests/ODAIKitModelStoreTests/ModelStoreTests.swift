@@ -62,4 +62,26 @@ final class ModelStoreTests: XCTestCase {
         try FileManager.default.removeItem(at: weights)
         do { try await store.install(manifest: manifest, source: source); XCTFail("missing") } catch { }
     }
+    func testRejectsInvalidMetadataAndVersions() async throws {
+        let (root, _, manifest) = try environment(); defer { try? FileManager.default.removeItem(at: root) }
+        let store = try ModelStore(root: root.appendingPathComponent("store"), compatibility: .fixture)
+        let base = try JSONSerialization.jsonObject(with: JSONEncoder().encode(manifest)) as! [String: Any]
+        var invalid: [[String: Any]] = []
+        for field in ["upstreamURL", "licenseURL"] {
+            for url in ["http://models.example/info", "https://user:password@models.example/info", "file:///tmp/info"] {
+                var item = base; item[field] = url; invalid.append(item)
+            }
+        }
+        for memory in [-1, 0] {
+            var item = base; var resources = item["resources"] as! [String: Any]
+            resources["measuredMemoryBytes"] = memory
+            resources["memoryMeasurementContext"] = memory < 0 ? "measured" : "   "
+            item["resources"] = resources; invalid.append(item)
+        }
+        for version in ["", "+15.0"] { var item = base; item["minimumOS"] = version; invalid.append(item) }
+        for object in invalid {
+            let candidate = try JSONDecoder().decode(ModelManifest.self, from: JSONSerialization.data(withJSONObject: object))
+            do { try await store.validate(candidate); XCTFail("invalid metadata accepted: \(object)") } catch { }
+        }
+    }
 }

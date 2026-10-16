@@ -10,6 +10,7 @@ data class ModelResources(val downloadBytes:Long,val temporaryBytes:Long,val ins
 data class ModelCompatibility(val backendId:String,val backendVersion:String,val osVersion:String,val architecture:String)
 data class ModelManifest(val schemaVersion:Int=1,val modelId:String,val revision:String,val upstreamURL:String,val upstreamRevision:String,val capability:String,val backendId:String,val backendVersion:VersionRange,val minimumOS:String,val architectures:List<String>,val formatVersion:String,val files:List<ModelFile>,val processing:ModelProcessing,val resources:ModelResources,val licenseIdentifier:String,val licenseURL:String,val attribution:String,val redistribution:String) {
     val ref:ModelRef get()=ModelRef(modelId,revision)
+    internal fun snapshot():ModelManifest=copy(files=files.toList(),architectures=architectures.toList())
     fun toJson():String = JSONObject().apply {
         put("schemaVersion",schemaVersion);put("modelId",modelId);put("revision",revision);put("upstreamURL",upstreamURL);put("upstreamRevision",upstreamRevision)
         put("capability",capability);put("backendId",backendId);put("backendVersion",JSONObject().put("minimum",backendVersion.minimum).put("maximumExclusive",backendVersion.maximumExclusive))
