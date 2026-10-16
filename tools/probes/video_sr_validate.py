@@ -6,9 +6,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-EXPECTED = ((1280, 720), (640, 360), (1280, 720))
-
-
 def metadata(path: Path) -> dict:
     output = subprocess.check_output([
         "ffprobe", "-v", "error", "-count_frames", "-show_streams",
@@ -42,10 +39,13 @@ def decoded_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def validate(paths: list[Path]) -> None:
+def validate(paths: list[Path], scale: int = 2) -> None:
     if len(paths) != 3:
         raise ValueError("expected reference, input, and bicubic files")
-    for path, (width, height) in zip(paths, EXPECTED):
+    if scale not in (2, 4):
+        raise ValueError("expected 2x or 4x scale")
+    expected = ((1280, 720), (1280 // scale, 720 // scale), (1280, 720))
+    for path, (width, height) in zip(paths, expected):
         streams = metadata(path)["streams"]
         videos = [stream for stream in streams if stream["codec_type"] == "video"]
         if len(videos) != 1 or any(stream["codec_type"] == "audio" for stream in streams):
@@ -63,4 +63,8 @@ def validate(paths: list[Path]) -> None:
 
 
 if __name__ == "__main__":
-    validate([Path(value) for value in sys.argv[1:]])
+    arguments = sys.argv[1:]
+    scale = 2
+    if arguments and arguments[0].startswith("--scale="):
+        scale = int(arguments.pop(0).split("=", 1)[1])
+    validate([Path(value) for value in arguments], scale=scale)
