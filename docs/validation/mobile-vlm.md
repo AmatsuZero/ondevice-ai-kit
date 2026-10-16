@@ -39,3 +39,5 @@ P8 当前状态：候选、许可证、体积、运行平台和证据等级已�
 权重不进入 Git 或 LFS。重新取得资产时，使用固定 revision 的 `tools/fetch_vlm_asset.py stage docs/validation/p9-smolvlm-manifest.json artifacts/P9/staging` 下载到被忽略的 staging；运行 `python3 tools/validate_vlm_manifest.py docs/validation/p9-smolvlm-manifest.json`，再运行 `python3 tools/fetch_vlm_asset.py publish docs/validation/p9-smolvlm-manifest.json artifacts/P9/verified`。发布器会复核每个文件的大小及 SHA256。
 
 探针的固定非个人图片由 `python3 tools/probes/p9_fixture.py artifacts/P9/fixture.png` 生成（64×64 RGBA，SHA256 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`）。将 `artifacts/P9/verified`、manifest 和 fixture 复制到 iOS probe App 的 Documents 后，以 `--p9-model-directory model --p9-manifest p9-smolvlm-manifest.json --p9-input fixture.png --p9-auto-run` 启动；App 会再次逐文件校验资产，并为每次运行写入独立的 `p9-run-<UUID>.json`。
+
+2026-10-17 的验证边界：无 MLX 的 iOS 18 静态 typecheck、Python 23/23 和本地小样本的资产哈希/结果持久化验证通过。Xcode 的完整 SwiftPM 解析尚未完成：MLX 主包可获取，`swift-syntax` 通过固定 `603.0.1` 浅缓存后可继续，但 `mlx-swift 0.32.3` 的 `mlx`/`mlx-c` 子模块完整克隆在当前网络反复中断。当前没有完整 App build、安装或真机图片→文本输出；P9 不能标记 pass。
