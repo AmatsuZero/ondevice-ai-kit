@@ -36,7 +36,7 @@
 
 **Interfaces:**
 - Manifest fields: `modelId`, `modelRevision`, `runtime`, `runtimeRevision`, `files`, `license`, `platformMin`, `status`.
-- Validator rejects floating revisions, missing SHA256, non-iOS18 platform, and unknown runtime.
+- Validator rejects floating revisions, non-iOS18 platform, and unknown runtime; `status=verified` additionally requires SHA256 for every file. A `candidate` manifest must not be used for device inference.
 
 - [ ] Write failing tests for a valid pinned manifest and each rejection case.
 - [ ] Run `python3 -m unittest tools.tests.test_vlm_manifest -v` and confirm failures are from the missing validator.
@@ -47,9 +47,10 @@
 ### Task 2: Create an isolated iOS 18+ probe target
 
 **Files:**
-- Create: `probes/ios-vlm/Package.swift`
-- Create: `probes/ios-vlm/Sources/VLMProbe/main.swift`
-- Test: `probes/ios-vlm/Tests/VLMProbeTests/VLMProbeTests.swift`
+- Create: `probes/ios-vlm/VLMProbe.xcodeproj/project.pbxproj`
+- Create: `probes/ios-vlm/VLMProbeApp.swift`
+- Create: `probes/ios-vlm/ProbeRunner.swift`
+- Test: `probes/ios-vlm/Tests/ProbeRunnerTests.swift`
 - Modify: no base SDK target files
 
 **Interfaces:**
@@ -58,9 +59,9 @@
 
 - [ ] Write tests for input hash, missing manifest, cancellation terminal state, and no-output on unavailable runtime.
 - [ ] Run tests before adding MLX dependencies; expected compile failure only for the unimplemented probe type.
-- [ ] Add MLX/MLXLMCommon/MLXVLM as exact revision dependencies in the probe manifest, with iOS 18 platform declaration.
+- [ ] Add MLX/MLXLMCommon/MLXVLM as exact revision dependencies in the separate Xcode project, with deployment target iOS 18.0; avoid new dependencies in the base package.
 - [ ] Implement single-image generation, cancellation, and deterministic cleanup; never expose third-party types from base SDK modules.
-- [ ] Run probe host/unit tests without claiming device inference.
+- [ ] Run the probe tests on an available iOS 18+ simulator without claiming device inference.
 - [ ] Commit the isolated target.
 
 ### Task 3: Download and verify the fixed model asset
@@ -102,7 +103,7 @@
 
 ```sh
 python3 -m unittest tools.tests.test_vlm_manifest tools.tests.test_vlm_asset -v
-swift test --package-path probes/ios-vlm
+xcodebuild -project probes/ios-vlm/VLMProbe.xcodeproj -scheme VLMProbe -destination 'platform=iOS Simulator,name=<available-simulator>' test
 xcodebuild -project probes/ios-vlm/VLMProbe.xcodeproj -scheme VLMProbe -destination 'id=<connected-device>' build
 python3 tools/benchmark_report.py artifacts/P9/ios-vlm-run.json --output artifacts/P9/ios-vlm-report.json
 ```
