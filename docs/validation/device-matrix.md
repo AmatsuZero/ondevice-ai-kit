@@ -19,3 +19,5 @@ Inventory 2026-10-16: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 No stored device UDIDs or input photos in this report. Update rows only with fresh commands and actual results.
 
 用户已授权直接使用本地真机做 device-only 验证。P3 与 P4 部分实测不改变最低系统、Android 设备、持续热量/内存的缺口。
+
+2026-10-16：用户确认 iOS15 与 Android 真机暂不可用；对应验收挂起，待提供设备后继续。已登记 [DEVICE-IOS15 / DEVICE-ANDROID TODO](../ROADMAP.md#等待设备的-todo)，不重复索要设备，不以当前构建或模拟器结果关闭这些项。

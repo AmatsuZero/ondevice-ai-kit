@@ -12,6 +12,30 @@
 - 测试/模拟器/真机/最低系统验证分别记录；构建通过不代表真机已通过。
 - 不逐项重新请求继续许可。每个包以可复核提交、验证和剩余项结束，后续“继续”推进下一个包。
 
+## 当前范围与后续功能
+
+当前 SDK/Demo 的算法入口只有**人脸检测与关键点**，用于验证原生 SDK → KMP 桥接 → Demo → 真机的完整链路。它尚不提供身份识别、1:1 比对、1:N 搜索或活体认证。已实现的 Core、任务生命周期、最新帧队列、ModelStore 和分发工程是后续能力共用的基础设施；当前人脸后端使用系统/随库模型，尚无自有大模型下载后加载推理的完整链路。
+
+| 后续能力 | SDK 与 Demo 预计交付 | 对应阶段 |
+| --- | --- | --- |
+| ASR / TTS | 原生识别/合成接口、取消与音频生命周期；KMP Demo 的语音输入/播放与能力状态 | P6 调研和单后端探针，随后按独立工作包完成 SDK/Demo 接入 |
+| 视频超分 | 视频处理接口、进度/取消、输出文件；Demo 输入/输出与质量/性能对比 | P7 调研和单链路探针，随后完成选定后端的 SDK/Demo 接入 |
+| 图像理解 / 图生文 / 多模态 | 模型会话、生成/取消、结果展示；按模型支持范围增加输入类型 | P8 比较 SmolVLM2、Florence-2、MiniCPM-V 等，P9 先验证单模型/单平台，再分包接入 SDK/Demo 及另一平台 |
+| 模型管理与按需加载 | 模型下载/校验/安装/删除、运行时加载/卸载、版本与资源状态；Demo 提供相应流程 | 现有 ModelStore 基础上，随首个自有模型接入补齐真实链路 |
+| 后端与性能比较 | 按能力查询可用性、明确实际后端；模型/后端选择和 benchmark 展示 | P5 建立验收基线，后续各能力补充样本与指标 |
+| 人脸身份与活体 | 1:1、1:N、活体分别设计接口和数据生命周期，再增加 Demo 流程 | P10 后续 TODO |
+
+这些仍是项目后续目标。P6/P7/P8/P9 的“调研/探针”不是完整功能交付；通过许可证、转换/运行及设备资源验证后，再为选定方案创建具体实现包。Core ML、MLX、LiteRT/TensorFlow Lite、ONNX、llama.cpp 是待按能力选择的后端，不要求所有模型在所有框架/平台重复实现。iOS15 保持基础下限，高版本能力按 availability 或独立增强模块接入。
+
+## 等待设备的 TODO
+
+2026-10-16 用户确认暂时没有 iOS15 和 Android 真机。以下验收显式挂起，等用户提供设备后恢复；期间不重复要求设备，也不将这些缺口作为其他可独立工作包的阻塞。
+
+- [ ] **DEVICE-IOS15**：取得 iOS15 真机后，验证基础宿主启动、权限、照片/相机、旋转/镜像、取消、前后台和离线推理；验证可选高版本后端不会破坏基础宿主启动。
+- [ ] **DEVICE-ANDROID**：取得 Android 真机后，验证 ML Kit 实际推理、照片/相机、权限、旋转/镜像、取消、前后台和离线行为。记录实际 API 版本；若不是 API26，最低系统验收仍保留缺口。
+
+状态继续记为未验证，不以模拟器/编译结果代替真机证据。验收行见 [设备矩阵](validation/device-matrix.md)。
+
 ## 当前阶段与独立工作包
 
 | 包 | 交付与边界 | 验证/停止点 | 当前状态 |
@@ -42,6 +66,6 @@ P1/P2 是此前未完成独立审查的拆分；二者已完成，但基础 SDK 
 
 ## 恢复时的第一步
 
-P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。用户反馈使本包额外完成 P4 的相机闪动及前后台恢复修复，见 [P4 记录](validation/p4-camera-stability.md)。下一次仅推进 P4 剩余照片/取消、旋转/镜像与资源释放验收；不要同时开始 P5 或新算法研究。
+P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。用户反馈使本包额外完成 P4 的相机闪动及前后台恢复修复，见 [P4 记录](validation/p4-camera-stability.md)。下一次仅推进现有现代 iPhone 上可执行的 P4 剩余照片/取消、旋转/镜像与资源释放验收；iOS15/Android 真机项按上方 TODO 等待设备，不阻塞独立后续工作。仍按每轮一个工作包推进。
 
 详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。
