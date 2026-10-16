@@ -60,6 +60,7 @@ class AssetTests(unittest.TestCase):
 
         class Response(BytesIO):
             status = 206
+            headers = {"Content-Range": "bytes 3-6/7"}
 
         def open_range(request, timeout):
             self.assertEqual(request.get_header("Range"), "bytes=3-")
@@ -70,6 +71,24 @@ class AssetTests(unittest.TestCase):
         self.assertEqual(observed["weight.bin"]["bytes"], 7)
         self.assertEqual((destination / "weight.bin").read_bytes(), b"fixture")
         self.assertFalse((destination / "weight.bin.part").exists())
+
+    def test_candidate_download_rejects_wrong_resume_range(self):
+        manifest = {"status": "candidate", "modelId": "test/model", "modelRevision": "a" * 40,
+                    "files": [{"path": "weight.bin", "bytes": 7,
+                               "sourceSha256": hashlib.sha256(b"fixture").hexdigest()}]}
+        destination = self.root / "staging"
+        destination.mkdir()
+        (destination / "weight.bin.part").write_bytes(b"fix")
+
+        class Response(BytesIO):
+            status = 206
+            headers = {"Content-Range": "bytes 0-3/7"}
+
+        with patch.object(asset.urllib.request, "urlopen", return_value=Response(b"ture")):
+            with self.assertRaisesRegex(ValueError, "Content-Range"):
+                asset.download_candidate(manifest, destination, "https://example.invalid")
+        self.assertEqual((destination / "weight.bin.part").read_bytes(), b"fix")
+        self.assertFalse((destination / "weight.bin").exists())
 
     def test_candidate_download_skips_verified_existing_file(self):
         manifest = {"status": "candidate", "modelId": "test/model", "modelRevision": "a" * 40,

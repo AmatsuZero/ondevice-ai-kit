@@ -99,6 +99,11 @@ def download_candidate(manifest: dict, destination: Path, base_url: str = "https
             request.add_header("Range", f"bytes={offset}-")
         with urllib.request.urlopen(request, timeout=90) as response:
             append = offset > 0 and response.status == 206
+            if append:
+                content_range = response.headers.get("Content-Range", "")
+                expected_range = f"bytes {offset}-{item['bytes'] - 1}/{item['bytes']}"
+                if content_range != expected_range:
+                    raise ValueError(f"unexpected Content-Range: {content_range!r}")
             if not append:
                 offset = 0
             with partial.open("ab" if append else "wb") as output:
