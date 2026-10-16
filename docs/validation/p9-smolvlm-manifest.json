@@ -4,20 +4,91 @@
   "runtime": "MLXVLM",
   "runtimeRevision": "6e338e5df49424fc0db7c6d58184d622f92ed18a",
   "files": [
-    {"path": ".gitattributes", "bytes": 1519, "sha256": null, "hubBlobId": "a6344aac8c09253b3b630fb776ae94478aa0275b"},
-    {"path": "README.md", "bytes": 898, "sha256": null, "hubBlobId": "f126108edc53300f6a1c050efaa6a3564db4c62d"},
-    {"path": "added_tokens.json", "bytes": 4739, "sha256": null, "hubBlobId": "71dc811700b6aa9274d3697ee7d4fb2d5375e766"},
-    {"path": "chat_template.json", "bytes": 430, "sha256": null, "hubBlobId": "1d342e4f070c962a14ba4ece4e06212bc70d8e36"},
-    {"path": "config.json", "bytes": 10200, "sha256": null, "hubBlobId": "11859dc2e0037e29f2d3d824220ec2ce9e87b261"},
-    {"path": "merges.txt", "bytes": 466391, "sha256": null, "hubBlobId": "69503b13f727ba3812b6803e97442a6de05ef5eb"},
-    {"path": "model.safetensors", "bytes": 1015023993, "sha256": null, "sourceSha256": "a9839c8f79ecc93e54a00dc73cc0e68ba477debcd065d50c1c289fbb1075f981", "hubBlobId": "4fdb6a02427326c2d5024ae3ef5f14cd85278284"},
-    {"path": "model.safetensors.index.json", "bytes": 39556, "sha256": null, "hubBlobId": "1923836dbcb85653932c902189e7ebc68f57ef32"},
-    {"path": "preprocessor_config.json", "bytes": 599, "sha256": null, "hubBlobId": "bf7669a38692ad141d333db3be18bd55cb6e2c59"},
-    {"path": "processor_config.json", "bytes": 67, "sha256": null, "hubBlobId": "83df8c48da1f41e1a9129a4bc2aba000eb2b529f"},
-    {"path": "special_tokens_map.json", "bytes": 868, "sha256": null, "hubBlobId": "2b5aee28d56c0e9d89ff6bc70818fba986a90ca9"},
-    {"path": "tokenizer.json", "bytes": 3548256, "sha256": null, "hubBlobId": "a4005d1cf3170a31600a5c96f95768166cbc2b28"},
-    {"path": "tokenizer_config.json", "bytes": 28626, "sha256": null, "hubBlobId": "e4042a1126290fdb96ece2a4ad8dd7108c5de484"},
-    {"path": "vocab.json", "bytes": 800662, "sha256": null, "hubBlobId": "0ad5ecc2035b7031b88afb544ee95e2d49baa484"}
+    {
+      "path": ".gitattributes",
+      "bytes": 1519,
+      "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+      "hubBlobId": "a6344aac8c09253b3b630fb776ae94478aa0275b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 898,
+      "sha256": "12d6cb437b591abd3cdd9142a4f1c2a8627d2abb37691c483fcfdcad1a95930e",
+      "hubBlobId": "f126108edc53300f6a1c050efaa6a3564db4c62d"
+    },
+    {
+      "path": "added_tokens.json",
+      "bytes": 4739,
+      "sha256": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a",
+      "hubBlobId": "71dc811700b6aa9274d3697ee7d4fb2d5375e766"
+    },
+    {
+      "path": "chat_template.json",
+      "bytes": 430,
+      "sha256": "b585e3598909a5687f9f9d738d35223724dedef256b9b274e1cbfb32b13c74bf",
+      "hubBlobId": "1d342e4f070c962a14ba4ece4e06212bc70d8e36"
+    },
+    {
+      "path": "config.json",
+      "bytes": 10200,
+      "sha256": "36159a671d8834df337219b588c03a1dde01e4b472f1e305746e837aaf75ec5d",
+      "hubBlobId": "11859dc2e0037e29f2d3d824220ec2ce9e87b261"
+    },
+    {
+      "path": "merges.txt",
+      "bytes": 466391,
+      "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+      "hubBlobId": "69503b13f727ba3812b6803e97442a6de05ef5eb"
+    },
+    {
+      "path": "model.safetensors",
+      "bytes": 1015023993,
+      "sha256": null,
+      "sourceSha256": "a9839c8f79ecc93e54a00dc73cc0e68ba477debcd065d50c1c289fbb1075f981",
+      "hubBlobId": "4fdb6a02427326c2d5024ae3ef5f14cd85278284"
+    },
+    {
+      "path": "model.safetensors.index.json",
+      "bytes": 39556,
+      "sha256": "87dd860d59f2e9818f09bc6a844c22d5aa65d2a226656d89749952b12df4db38",
+      "hubBlobId": "1923836dbcb85653932c902189e7ebc68f57ef32"
+    },
+    {
+      "path": "preprocessor_config.json",
+      "bytes": 599,
+      "sha256": "149e315d9410368e5491455bb06e0f763426e9e56cca731c13b24404a29b6374",
+      "hubBlobId": "bf7669a38692ad141d333db3be18bd55cb6e2c59"
+    },
+    {
+      "path": "processor_config.json",
+      "bytes": 67,
+      "sha256": "f3ad45028447b3562b4752be0d5916d6806c1ef589091a469608dcf0faa1737c",
+      "hubBlobId": "83df8c48da1f41e1a9129a4bc2aba000eb2b529f"
+    },
+    {
+      "path": "special_tokens_map.json",
+      "bytes": 868,
+      "sha256": "2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60",
+      "hubBlobId": "2b5aee28d56c0e9d89ff6bc70818fba986a90ca9"
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 3548256,
+      "sha256": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a",
+      "hubBlobId": "a4005d1cf3170a31600a5c96f95768166cbc2b28"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 28626,
+      "sha256": "dd9ce2ab89a3dd881bd9378f1a79b943a064b9275a7e1706d5b7b47b68977913",
+      "hubBlobId": "e4042a1126290fdb96ece2a4ad8dd7108c5de484"
+    },
+    {
+      "path": "vocab.json",
+      "bytes": 800662,
+      "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79",
+      "hubBlobId": "0ad5ecc2035b7031b88afb544ee95e2d49baa484"
+    }
   ],
   "license": "apache-2.0",
   "platformMin": "iOS 18.0",
