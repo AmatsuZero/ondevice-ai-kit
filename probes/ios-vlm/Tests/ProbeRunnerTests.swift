@@ -40,6 +40,35 @@ final class ProbeRunnerTests: XCTestCase {
         XCTAssertTrue(result.cancelled)
         XCTAssertTrue(result.output.isEmpty)
     }
+
+    func testCandidateCannotReachBackend() async throws {
+        let backend = CountingBackend()
+        do {
+            _ = try await VLMProbe(backend: backend).run(input: try fixture(), manifest: .candidate)
+            XCTFail("candidate must fail closed")
+        } catch VLMProbeError.candidateManifest {
+            let calls = await backend.calls
+            XCTAssertEqual(calls, 0)
+        }
+    }
+
+    func testTwoSessionsDoNotRetainBackendState() async throws {
+        let backend = CountingBackend()
+        let probe = VLMProbe(backend: backend)
+        _ = try await probe.run(input: try fixture(), manifest: .testVerified)
+        _ = try await probe.run(input: try fixture(), manifest: .testVerified)
+        let calls = await backend.calls
+        XCTAssertEqual(calls, 2)
+    }
+}
+
+private actor CountingBackend: VLMBackend {
+    let identifier = "fake"
+    private(set) var calls = 0
+    func generate(input: URL, manifest: VLMManifest) async throws -> VLMGeneration {
+        calls += 1
+        return VLMGeneration(output: "ok", firstTokenMs: 1)
+    }
 }
 
 private extension VLMManifest {

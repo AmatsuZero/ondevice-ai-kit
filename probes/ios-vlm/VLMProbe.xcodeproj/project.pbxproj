@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E8772393DBBC32829925BB3 /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = B1C7BDC9A6EE0EA91258FDF0 /* Tokenizers */; };
 		1F158181F46DBB13D56FB797 /* MLXVLM in Frameworks */ = {isa = PBXBuildFile; productRef = C3E097162A56DCD56080F213 /* MLXVLM */; };
+		20A3686BC53652B7955B90BC /* HuggingFace in Frameworks */ = {isa = PBXBuildFile; productRef = 844B6BBC455AE8A898412F90 /* HuggingFace */; };
 		24D6EE42C97919D2ABC3E3BC /* VLMProbeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DBDD1964FA70EE5A90B3D7 /* VLMProbeApp.swift */; };
+		2CFA73A5F4FDD1679CA35A30 /* MLXHuggingFace in Frameworks */ = {isa = PBXBuildFile; productRef = 09E5CADA693D0D4E7906AE75 /* MLXHuggingFace */; };
 		5CDC5DEB118B1BC478923D70 /* MLXLMCommon in Frameworks */ = {isa = PBXBuildFile; productRef = DE24227C0ED91D272966A7E4 /* MLXLMCommon */; };
 		785023E05CC5901C7DB8139B /* ProbeRunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C545215B08642231EBB0B2D /* ProbeRunnerTests.swift */; };
+		CC5DE3FC065F03CA61C17C63 /* MLXSmolVLMBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F4765F6C0C6C5400F19F4 /* MLXSmolVLMBackend.swift */; };
 		D5A4F07B828EA9589BC4885E /* ProbeRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3172CA0D07090AB79CCC6831 /* ProbeRunner.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +33,7 @@
 		24AF75940B9092BFE1A70811 /* VLMProbeTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = VLMProbeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3172CA0D07090AB79CCC6831 /* ProbeRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbeRunner.swift; sourceTree = "<group>"; };
 		9286E1FC5E71C29D87956F61 /* VLMProbe.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = VLMProbe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE4F4765F6C0C6C5400F19F4 /* MLXSmolVLMBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLXSmolVLMBackend.swift; sourceTree = "<group>"; };
 		E7DBDD1964FA70EE5A90B3D7 /* VLMProbeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLMProbeApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -39,6 +44,9 @@
 			files = (
 				1F158181F46DBB13D56FB797 /* MLXVLM in Frameworks */,
 				5CDC5DEB118B1BC478923D70 /* MLXLMCommon in Frameworks */,
+				2CFA73A5F4FDD1679CA35A30 /* MLXHuggingFace in Frameworks */,
+				20A3686BC53652B7955B90BC /* HuggingFace in Frameworks */,
+				0E8772393DBBC32829925BB3 /* Tokenizers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +56,7 @@
 		9A8D19FDCCA8127AA215B702 = {
 			isa = PBXGroup;
 			children = (
+				BE4F4765F6C0C6C5400F19F4 /* MLXSmolVLMBackend.swift */,
 				3172CA0D07090AB79CCC6831 /* ProbeRunner.swift */,
 				E7DBDD1964FA70EE5A90B3D7 /* VLMProbeApp.swift */,
 				9AC9838735F7792033F658A7 /* Tests */,
@@ -90,6 +99,9 @@
 			packageProductDependencies = (
 				C3E097162A56DCD56080F213 /* MLXVLM */,
 				DE24227C0ED91D272966A7E4 /* MLXLMCommon */,
+				09E5CADA693D0D4E7906AE75 /* MLXHuggingFace */,
+				844B6BBC455AE8A898412F90 /* HuggingFace */,
+				B1C7BDC9A6EE0EA91258FDF0 /* Tokenizers */,
 			);
 			productName = VLMProbe;
 			productReference = 9286E1FC5E71C29D87956F61 /* VLMProbe.app */;
@@ -135,6 +147,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				BF063D63201A1071CACDF372 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */,
+				5FC5E68972754C8B801380C7 /* XCRemoteSwiftPackageReference "swift-huggingface" */,
+				98393E9D09B0BC1AB29CD500 /* XCRemoteSwiftPackageReference "swift-transformers" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D01C42637FA59FA8C44C480E /* Products */;
@@ -160,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC5DE3FC065F03CA61C17C63 /* MLXSmolVLMBackend.swift in Sources */,
 				D5A4F07B828EA9589BC4885E /* ProbeRunner.swift in Sources */,
 				24D6EE42C97919D2ABC3E3BC /* VLMProbeApp.swift in Sources */,
 			);
@@ -396,6 +411,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5FC5E68972754C8B801380C7 /* XCRemoteSwiftPackageReference "swift-huggingface" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huggingface/swift-huggingface.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.9.0;
+			};
+		};
+		98393E9D09B0BC1AB29CD500 /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huggingface/swift-transformers.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.3.0;
+			};
+		};
 		BF063D63201A1071CACDF372 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ml-explore/mlx-swift-lm.git";
@@ -407,6 +438,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		09E5CADA693D0D4E7906AE75 /* MLXHuggingFace */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF063D63201A1071CACDF372 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
+			productName = MLXHuggingFace;
+		};
+		844B6BBC455AE8A898412F90 /* HuggingFace */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FC5E68972754C8B801380C7 /* XCRemoteSwiftPackageReference "swift-huggingface" */;
+			productName = HuggingFace;
+		};
+		B1C7BDC9A6EE0EA91258FDF0 /* Tokenizers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98393E9D09B0BC1AB29CD500 /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Tokenizers;
+		};
 		C3E097162A56DCD56080F213 /* MLXVLM */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BF063D63201A1071CACDF372 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;

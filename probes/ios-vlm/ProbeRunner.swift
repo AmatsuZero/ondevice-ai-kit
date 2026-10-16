@@ -39,23 +39,32 @@ public struct VLMRunResult: Sendable {
     public let output: String
 }
 
+public struct VLMGeneration: Sendable {
+    public let output: String
+    public let firstTokenMs: Double?
+    public init(output: String, firstTokenMs: Double? = nil) {
+        self.output = output
+        self.firstTokenMs = firstTokenMs
+    }
+}
+
 public enum VLMProbeError: Error { case missingManifest, missingInput, candidateManifest, unavailable }
 
 public protocol VLMBackend: Sendable {
     var identifier: String { get }
-    func generate(input: URL, manifest: VLMManifest) async throws -> String
+    func generate(input: URL, manifest: VLMManifest) async throws -> VLMGeneration
 }
 
 public struct UnavailableBackend: VLMBackend {
     public init() {}
     public let identifier = "MLXVLM"
-    public func generate(input: URL, manifest: VLMManifest) async throws -> String { throw VLMProbeError.unavailable }
+    public func generate(input: URL, manifest: VLMManifest) async throws -> VLMGeneration { throw VLMProbeError.unavailable }
 }
 
 public struct CancellingBackend: VLMBackend {
     public init() {}
     public let identifier = "MLXVLM"
-    public func generate(input: URL, manifest: VLMManifest) async throws -> String { throw CancellationError() }
+    public func generate(input: URL, manifest: VLMManifest) async throws -> VLMGeneration { throw CancellationError() }
 }
 
 public struct VLMProbe<B: VLMBackend>: Sendable {
@@ -70,12 +79,12 @@ public struct VLMProbe<B: VLMBackend>: Sendable {
         let clock = ContinuousClock()
         let start = clock.now
         do {
-            let output = try await backend.generate(input: input, manifest: manifest)
+            let generation = try await backend.generate(input: input, manifest: manifest)
             let elapsed = start.duration(to: clock.now)
             let ms = Double(elapsed.components.seconds) * 1000 + Double(elapsed.components.attoseconds) / 1e15
             return VLMRunResult(status: .success, actualBackend: backend.identifier, modelRevision: manifest.modelRevision,
-                runtimeRevision: manifest.runtimeRevision, fixtureHash: fixtureHash, firstTokenMs: nil,
-                totalMs: ms, peakMemory: nil, cancelled: false, output: output)
+                runtimeRevision: manifest.runtimeRevision, fixtureHash: fixtureHash, firstTokenMs: generation.firstTokenMs,
+                totalMs: ms, peakMemory: nil, cancelled: false, output: generation.output)
         } catch is CancellationError {
             return VLMRunResult(status: .cancelled, actualBackend: backend.identifier, modelRevision: manifest.modelRevision,
                 runtimeRevision: manifest.runtimeRevision, fixtureHash: fixtureHash, firstTokenMs: nil,
