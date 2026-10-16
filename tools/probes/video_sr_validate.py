@@ -26,6 +26,22 @@ def frame_times(path: Path) -> list[float]:
     return [float(frame["best_effort_timestamp_time"]) for frame in json.loads(output)["frames"]]
 
 
+def decoded_sha256(path: Path) -> str:
+    process = subprocess.Popen([
+        "ffmpeg", "-hide_banner", "-loglevel", "error", "-i", str(path),
+        "-map", "0:v:0", "-pix_fmt", "yuv420p", "-f", "rawvideo", "-",
+    ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    digest = hashlib.sha256()
+    assert process.stdout is not None and process.stderr is not None
+    with process.stdout, process.stderr:
+        while chunk := process.stdout.read(1024 * 1024):
+            digest.update(chunk)
+        error = process.stderr.read().decode(errors="replace")
+    if process.wait() != 0:
+        raise ValueError(f"failed to decode {path}: {error}")
+    return digest.hexdigest()
+
+
 def validate(paths: list[Path]) -> None:
     if len(paths) != 3:
         raise ValueError("expected reference, input, and bicubic files")
@@ -42,8 +58,8 @@ def validate(paths: list[Path]) -> None:
             abs((right - left) - 1 / 24) > 0.001 for left, right in zip(times, times[1:])
         ):
             raise ValueError(f"invalid frame timestamps: {path}")
-        digest = hashlib.sha256(path.read_bytes()).hexdigest()
-        print(f"{path}: {width}x{height}, 48 frames at 24 fps, no audio, sha256={digest}")
+        digest = decoded_sha256(path)
+        print(f"{path}: {width}x{height}, 48 frames at 24 fps, no audio, decoded_sha256={digest}")
 
 
 if __name__ == "__main__":
