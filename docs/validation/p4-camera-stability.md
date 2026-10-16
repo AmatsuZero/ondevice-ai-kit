@@ -38,7 +38,8 @@
 - 权限：撤销 CAMERA 后重新启动，系统权限对话框出现；点击“不允许”后回到 Demo，再授予 CAMERA 并重新启动相机，成功得到 `人脸 1`。没有改动系统其他权限。
 - 本次验证没有覆盖持续摄像头内存/热量、API 26、系统设置页恢复按钮或 iOS 照片选择器；这些仍保持未验证，不以本次结果替代最低版本验收。
 - 尝试在已连接的 iPhone 16 Pro Max 上重跑 UI 测试时，`xcodebuild test` 在构建阶段因 Demo 与 UI Test runner 均无匹配 provisioning profile 退出（exit 65）。已确认本机有 Apple Development 身份，但未使用 `-allowProvisioningUpdates` 创建账户资产；此次未产生新的 iOS 行为结论，此前相机 UI 结果仍以 P4CameraFinal 记录为准。
+- iPhone 18 Pro / iOS 27 模拟器新增 `testPhotoPickerCancellationReturnsToDemo`：打开 PHPicker、点取消后，Demo 的选图和相机按钮仍可用。`xcresulttool` 确认 1/1 通过、0 失败。首次测试筛选写错而执行 0 个用例，该次不计为通过；模拟器结果不替代真机。
 
 ## 剩余 P4 范围
 
-剩余 P4 范围为 iOS 照片/取消、旋转/镜像、权限恢复的真实 UI，以及两端持续资源/热量测量。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。未开始 P5 benchmark；本次单图耗时不作为性能报告。
+剩余 P4 范围为 iOS 真机照片/取消、旋转/镜像、权限恢复的真实 UI，以及两端持续资源/热量测量。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。未开始 P5 benchmark；本次单图耗时不作为性能报告。

@@ -1,6 +1,18 @@
 import XCTest
 
 final class CameraLifecycleUITests: XCTestCase {
+    func testPhotoPickerCancellationReturnsToDemo() {
+        let app = XCUIApplication(); app.launch()
+        let select = app.buttons["选择图片"]
+        XCTAssertTrue(select.waitForExistence(timeout: 15)); select.tap()
+        let cancel = app.buttons["取消"]
+        XCTAssertTrue(cancel.waitForExistence(timeout: 10), "Photo picker should offer cancellation")
+        cancel.tap()
+        XCTAssertTrue(select.waitForExistence(timeout: 10))
+        XCTAssertTrue(select.isEnabled)
+        XCTAssertTrue(app.buttons["相机"].isEnabled)
+    }
+
     func testCameraKeepsControlsStableAcrossFrames() {
         let app = XCUIApplication(); app.launchArguments = ["--ui-camera-test"]; app.launch()
         let camera = app.buttons["相机"]
