@@ -19,8 +19,16 @@
 - Android 统一检查通过：JVM 测试、lint、Demo/原生消费者 APK 构建，290 个任务；此结果不代表 Android 设备相机验收。
 - `git diff --check` 通过。真机结果包和控制台日志保存在忽略的本地 artifacts/ledger 内，不提交相机照片或设备标识。
 
+## Android 真机补充（2026-10-16）
+
+- 设备：TECNO KM9，Android 15，API 35，`arm64-v8a`；ADB 序列号不写入仓库。
+- 修复前截图确认相机每帧走单图 `detect`：Compose 反复显示进度条并暂时禁用“选择图片”。根因是相机分析器未使用已有的 `detectFrame` 流式状态入口。
+- 修复：`MainActivity` 相机分析器改为 `model.detectFrame(...)`，保留上一帧结果并保持输入控件稳定；照片路径仍使用单图 `detect`。
+- 验证：`./gradlew :demo:shared:allTests :demo:androidApp:assembleDebug` 通过；安装 `io.ondeviceai.demo` 后，真机相机完成人脸检测，结果显示 `人脸 1`，UI dump 显示“选择图片”和 Benchmark 均为 enabled；3 秒 `logcat` 无 `FATAL EXCEPTION`/`AndroidRuntime`。
+- 该设备覆盖现代 Android API 35，不替代 API 26 下限验收；未提交截图或用户照片。
+
 独立 reviewer 返回部分意见后因模型容量限制中断，未形成完整审查结论。其提出的 benchmark-smoke 导出问题经对照 HEAD 核实：该路径在基线中已存在，输出指标和 fixtureHash、不输出图像像素，也不标记为合成空白证据；因此不作为本次新增的隐私回归。该路径及 benchmark→相机切换的取消等待由 P5 另行审查。此次执行了本地 diff 自查、项目配置重复执行、Ruby/plist 检查与上述构建/测试，不能等同完整独立审查通过。
 
 ## 剩余 P4 范围
 
-照片选择/取消、EXIF 和旋转/镜像、权限拒绝/设置恢复的真实 UI、资源释放及持续相机内存/热量仍需逐项验收。Android 无连接设备。未开始 P5 benchmark；此次成功帧计数和单次 smoke 耗时不作为性能报告。
+照片选择/取消、EXIF 和旋转/镜像、权限拒绝/设置恢复的真实 UI、资源释放及持续相机内存/热量仍需逐项验收。Android 现代 API 35 已完成相机稳定性冒烟，API 26 下限和完整照片路径仍未验收。未开始 P5 benchmark；此次成功帧计数和单次 smoke 耗时不作为性能报告。

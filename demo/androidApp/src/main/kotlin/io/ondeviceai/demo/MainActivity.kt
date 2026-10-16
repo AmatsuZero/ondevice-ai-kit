@@ -110,7 +110,7 @@ class MainActivity:ComponentActivity(),DemoActions {
                 analysis.setAnalyzer(cameraExecutor) {frame->
                     try {val bitmap=frame.toBitmap();val rotation=frame.imageInfo.rotationDegrees
                         lifecycleScope.launch(Dispatchers.Main.immediate) {
-                            if(cameraRunning) model.detect(bridge.addInput(bitmap,rotation){frame.close()}) else frame.close()
+                            if(cameraRunning) model.detectFrame(bridge.addInput(bitmap,rotation){frame.close()}) else frame.close()
                         }
                     } catch(_:Exception){frame.close()}
                 }

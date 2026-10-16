@@ -29,10 +29,10 @@
 
 ## 等待设备的 TODO
 
-2026-10-16 用户确认暂时没有 iOS15 和 Android 真机。以下验收显式挂起，等用户提供设备后恢复；期间不重复要求设备，也不将这些缺口作为其他可独立工作包的阻塞。
+2026-10-16 用户确认暂时没有 iOS15 真机；随后提供 TECNO KM9（Android 15/API 35）用于现代 Android 验证。以下最低系统验收显式挂起，等对应设备可用后恢复；期间不重复要求设备，也不将这些缺口作为其他可独立工作包的阻塞。
 
 - [ ] **DEVICE-IOS15**：取得 iOS15 真机后，验证基础宿主启动、权限、照片/相机、旋转/镜像、取消、前后台和离线推理；验证可选高版本后端不会破坏基础宿主启动。
-- [ ] **DEVICE-ANDROID**：取得 Android 真机后，验证 ML Kit 实际推理、照片/相机、权限、旋转/镜像、取消、前后台和离线行为。记录实际 API 版本；若不是 API26，最低系统验收仍保留缺口。
+- [ ] **DEVICE-ANDROID-API26**：取得 API26 真机后，验证最低系统启动及 ML Kit 推理。当前 API35 设备已完成相机冒烟与流式 UI 修复验证；照片、权限、旋转/镜像、取消、前后台和离线完整行为仍在 P4 范围内。
 
 状态继续记为未验证，不以模拟器/编译结果代替真机证据。验收行见 [设备矩阵](validation/device-matrix.md)。
 
@@ -44,7 +44,7 @@
 | P1 SDK 生命周期审查 | 仅 TaskGate、LatestFrameQueue、Vision/MLKit 取消与 close 的资源所有权；不改 Demo UI/安装器 | 独立审查、必要问题 RED→GREEN、对应测试通过；提交后停止 | 已完成，见 P1 审查记录 |
 | P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 已完成，见 [P2 审查](validation/p2-model-store-review.md) |
 | P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 已完成，见 [P3 真机结果](validation/p3-ios-device.md) |
-| P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；Android 无设备时保持缺口；提交后停止 | 部分完成：相机闪动/前后台修复已验，见 [P4 记录](validation/p4-camera-stability.md) |
+| P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；无相应设备时保持缺口；提交后停止 | 部分完成：iOS 相机/前后台与 Android API35 相机流式 UI 已验，见 [P4 记录](validation/p4-camera-stability.md)；照片等仍待验收 |
 | P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 工具已实现，真机数据待补 |
 | P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力 | 先完成 speech-backends.md，再选择一个后端最小探针；独立停止 | 未开始 |
 | P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 未开始 |

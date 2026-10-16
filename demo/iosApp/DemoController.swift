@@ -18,6 +18,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     private var cameraLifecycle = CameraLifecycle(foreground: UIApplication.shared.applicationState == .active)
     private var cameraStart: Task<Void, Never>?
     private var benchmark: Task<Void, Never>?
+    private let photoSubmission = PhotoSubmission()
     @Published var image: UIImage?
     @Published var faces: [FaceObservation] = []
     @Published var report: String?
@@ -37,7 +38,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         NotificationCenter.default.addObserver(self, selector: #selector(foreground), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(memoryWarning), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
     }
-    @objc private func background() { cameraLifecycle.pause(); pauseCamera(); model.cancel() }
+    @objc private func background() { cameraLifecycle.pause(); pauseCamera(); photoSubmission.cancel(); model.cancel() }
     @objc private func foreground() {
         if let token = cameraLifecycle.activate(), AVCaptureDevice.authorizationStatus(for: .video) == .authorized { resumeCamera(token) }
     }
@@ -66,10 +67,15 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         guard let cg = normalized.cgImage else { return }
         image = normalized; faces = []; report = nil
         let id = UUID().uuidString
-        bridge.inputs[id] = IOSFaceBridge.InputEntry(image: cg, finished: {}, fixture: smokeFixture ? "synthetic-white-64x64-upright-v1" : nil)
-        model.detect(inputId: id)
+        let pending = Array(bridge.jobs.values)
+        photoSubmission.replace(after: pending) { [weak self] in
+            guard let self else { return }
+            self.bridge.inputs[id] = IOSFaceBridge.InputEntry(image: cg, finished: {}, fixture: smokeFixture ? "synthetic-white-64x64-upright-v1" : nil)
+            self.model.detect(inputId: id)
+        }
     }
     func startCamera() {
+        photoSubmission.cancel()
         let token = cameraLifecycle.requestStart()
         AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
             DispatchQueue.main.async {
@@ -109,7 +115,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         if running, queue === frames, let next = queue.next() { consume(next, queue: queue) }
     }
     func stopCamera() {
-        cameraLifecycle.stop(); pauseCamera()
+        cameraLifecycle.stop(); photoSubmission.cancel(); pauseCamera()
     }
     private func pauseCamera() {
         cameraStart?.cancel(); cameraStart = nil
