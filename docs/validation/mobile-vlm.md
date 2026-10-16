@@ -34,4 +34,6 @@ P9 候选 revision：2026-10-16 只读查询官方模型 API，`mlx-community/Sm
 4. 至少一个目标平台实机或明确标记 unavailable；构建/转换成功不算推理成功。
 5. 质量采用任务特定的人工可复核记录；不把不同任务或不同模型合并成总分。
 
-P8 当前状态：候选、许可证、体积、运行平台和证据等级已记录。P9 选择 **SmolVLM2 500M-Video-Instruct-mlx + iOS 18+ MLXVLM**，保持现有总设计；256M ONNX 仅作为后续 Android 备选。尚未下载权重或运行探针。
+P8 当前状态：候选、许可证、体积、运行平台和证据等级已记录。P9 选择 **SmolVLM2 500M-Video-Instruct-mlx + iOS 18+ MLXVLM**，保持现有总设计；256M ONNX 仅作为后续 Android 备选。P9 权重及全部支持文件已在忽略的 `artifacts/P9/verified` 完成 SHA256 校验，`model.safetensors` 为 1,015,023,993 字节、SHA256 `a9839c8f79ecc93e54a00dc73cc0e68ba477debcd065d50c1c289fbb1075f981`。探针尚未完成构建或真机运行。
+
+权重不进入 Git 或 LFS。重新取得资产时，使用固定 revision 的 `tools/fetch_vlm_asset.py stage docs/validation/p9-smolvlm-manifest.json artifacts/P9/staging` 下载到被忽略的 staging；运行 `python3 tools/validate_vlm_manifest.py docs/validation/p9-smolvlm-manifest.json`，再运行 `python3 tools/fetch_vlm_asset.py publish docs/validation/p9-smolvlm-manifest.json artifacts/P9/verified`。发布器会复核每个文件的大小及 SHA256。

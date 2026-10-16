@@ -68,13 +68,13 @@ def fetch_vlm_asset(manifest: dict, destination: Path, source: Path) -> Verified
 
 
 def download_candidate(manifest: dict, destination: Path, base_url: str = "https://huggingface.co/") -> dict:
-    """Download pinned files into ignored staging and report hashes; never publish them.
+    """Download pinned candidate or verified files into staging; never publish them.
 
     Existing ``.part`` files are resumed with HTTP Range requests. A file is
     renamed into place only after its expected size and SHA256 are verified.
     """
-    if manifest.get("status") != "candidate":
-        raise ValueError("candidate manifest required")
+    if manifest.get("status") not in ("candidate", "verified"):
+        raise ValueError("candidate or verified manifest required")
     destination.mkdir(parents=True, exist_ok=True)
     observed = {}
     for item in manifest["files"]:

@@ -43,8 +43,7 @@
     {
       "path": "model.safetensors",
       "bytes": 1015023993,
-      "sha256": null,
-      "sourceSha256": "a9839c8f79ecc93e54a00dc73cc0e68ba477debcd065d50c1c289fbb1075f981",
+      "sha256": "a9839c8f79ecc93e54a00dc73cc0e68ba477debcd065d50c1c289fbb1075f981",
       "hubBlobId": "4fdb6a02427326c2d5024ae3ef5f14cd85278284"
     },
     {
@@ -92,5 +91,5 @@
   ],
   "license": "apache-2.0",
   "platformMin": "iOS 18.0",
-  "status": "candidate"
+  "status": "verified"
 }

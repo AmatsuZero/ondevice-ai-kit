@@ -101,6 +101,20 @@ class AssetTests(unittest.TestCase):
             observed = asset.download_candidate(manifest, destination, "https://example.invalid")
         self.assertEqual(observed["weight.bin"]["bytes"], 7)
 
+    def test_verified_manifest_can_be_downloaded_to_staging(self):
+        manifest = {"status": "verified", "modelId": "test/model", "modelRevision": "a" * 40,
+                    "files": [{"path": "weight.bin", "bytes": 7,
+                               "sha256": hashlib.sha256(b"fixture").hexdigest()}]}
+        destination = self.root / "staging"
+
+        class Response(BytesIO):
+            status = 200
+
+        with patch.object(asset.urllib.request, "urlopen", return_value=Response(b"fixture")):
+            observed = asset.download_candidate(manifest, destination, "https://example.invalid")
+        self.assertEqual(observed["weight.bin"]["bytes"], 7)
+        self.assertEqual((destination / "weight.bin").read_bytes(), b"fixture")
+
     def test_candidate_download_rejects_hash_mismatch(self):
         manifest = {"status": "candidate", "modelId": "test/model", "modelRevision": "a" * 40,
                     "files": [{"path": "weight.bin", "bytes": 7, "sha256": "0" * 64}]}
