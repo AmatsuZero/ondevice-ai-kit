@@ -1,0 +1,22 @@
+name: IOSSpeechProbe
+options:
+  deploymentTarget:
+    iOS: '15.0'
+  createIntermediateGroups: true
+targets:
+  IOSSpeechProbe:
+    type: application
+    platform: iOS
+    sources:
+      - IOSSpeechProbeApp.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.speech
+        SWIFT_VERSION: '5.0'
+        GENERATE_INFOPLIST_FILE: YES
+        TARGETED_DEVICE_FAMILY: '1,2'
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 4X996UV8LC
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: '仅检查系统语音识别能力，不上传音频。'
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: '仅用于后续语音探针，当前不自动采集。'
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
