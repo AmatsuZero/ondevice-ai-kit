@@ -16,6 +16,7 @@ final class ProbeAppModel: ObservableObject {
     @Published private(set) var status = "Ready"
     @Published private(set) var output = ""
     private var task: Task<Void, Never>?
+    private var cancellationTimer: Task<Void, Never>?
     private let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 
     func start(arguments: [String] = ProcessInfo.processInfo.arguments) {
@@ -23,6 +24,13 @@ final class ProbeAppModel: ObservableObject {
         let configuration = ProbeLaunchConfiguration.from(arguments: arguments, documents: documents)
         task = Task { [weak self] in
             await self?.run(configuration: configuration)
+        }
+        if let delay = configuration.cancelAfterMs {
+            cancellationTimer = Task { [weak self] in
+                try? await Task.sleep(for: .milliseconds(delay))
+                guard !Task.isCancelled else { return }
+                self?.cancel()
+            }
         }
     }
 
@@ -32,13 +40,13 @@ final class ProbeAppModel: ObservableObject {
     }
 
     private func run(configuration: ProbeLaunchConfiguration) async {
-        defer { task = nil }
+        defer { cancellationTimer?.cancel(); cancellationTimer = nil; task = nil }
         do {
             let manifest = try ProbeAssetVerifier.verify(
                 manifest: configuration.manifest,
                 modelDirectory: configuration.modelDirectory)
             let result: VLMRunResult
-#if canImport(MLXVLM) && canImport(MLXLMCommon) && canImport(MLXHuggingFace)
+#if canImport(MLXVLM) && canImport(MLXLMCommon) && canImport(MLXHuggingFace) && canImport(Tokenizers)
             result = try await VLMProbe(backend: MLXSmolVLMBackend(modelDirectory: configuration.modelDirectory))
                 .run(input: configuration.input, manifest: manifest)
 #else

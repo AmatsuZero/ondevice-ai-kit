@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F158181F46DBB13D56FB797 /* MLXVLM in Frameworks */ = {isa = PBXBuildFile; productRef = C3E097162A56DCD56080F213 /* MLXVLM */; };
+		20A3686BC53652B7955B90BC /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = B1C7BDC9A6EE0EA91258FDF0 /* Tokenizers */; };
 		24D6EE42C97919D2ABC3E3BC /* VLMProbeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7DBDD1964FA70EE5A90B3D7 /* VLMProbeApp.swift */; };
 		2CFA73A5F4FDD1679CA35A30 /* MLXHuggingFace in Frameworks */ = {isa = PBXBuildFile; productRef = 09E5CADA693D0D4E7906AE75 /* MLXHuggingFace */; };
 		2F2FE660344DED675258BC56 /* ProbeAssetVerifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A593E53E667C01825C23240 /* ProbeAssetVerifierTests.swift */; };
@@ -51,6 +52,7 @@
 				1F158181F46DBB13D56FB797 /* MLXVLM in Frameworks */,
 				5CDC5DEB118B1BC478923D70 /* MLXLMCommon in Frameworks */,
 				2CFA73A5F4FDD1679CA35A30 /* MLXHuggingFace in Frameworks */,
+				20A3686BC53652B7955B90BC /* Tokenizers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +110,7 @@
 				C3E097162A56DCD56080F213 /* MLXVLM */,
 				DE24227C0ED91D272966A7E4 /* MLXLMCommon */,
 				09E5CADA693D0D4E7906AE75 /* MLXHuggingFace */,
+				B1C7BDC9A6EE0EA91258FDF0 /* Tokenizers */,
 			);
 			productName = VLMProbe;
 			productReference = 9286E1FC5E71C29D87956F61 /* VLMProbe.app */;
@@ -153,6 +156,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				BF063D63201A1071CACDF372 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */,
+				98393E9D09B0BC1AB29CD500 /* XCRemoteSwiftPackageReference "swift-transformers" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D01C42637FA59FA8C44C480E /* Products */;
@@ -419,6 +423,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		98393E9D09B0BC1AB29CD500 /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huggingface/swift-transformers.git";
+			requirement = {
+				kind = revision;
+				revision = b38443e44d93eca770f2eb68e2a4d0fa100f9aa2;
+			};
+		};
 		BF063D63201A1071CACDF372 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ml-explore/mlx-swift-lm.git";
@@ -434,6 +446,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BF063D63201A1071CACDF372 /* XCRemoteSwiftPackageReference "mlx-swift-lm" */;
 			productName = MLXHuggingFace;
+		};
+		B1C7BDC9A6EE0EA91258FDF0 /* Tokenizers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 98393E9D09B0BC1AB29CD500 /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Tokenizers;
 		};
 		C3E097162A56DCD56080F213 /* MLXVLM */ = {
 			isa = XCSwiftPackageProductDependency;

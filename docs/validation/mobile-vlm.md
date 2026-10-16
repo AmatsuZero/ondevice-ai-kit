@@ -40,4 +40,10 @@ P8 当前状态：候选、许可证、体积、运行平台和证据等级已�
 
 探针的固定非个人图片由 `python3 tools/probes/p9_fixture.py artifacts/P9/fixture.png` 生成（64×64 RGBA，SHA256 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`）。将 `artifacts/P9/verified`、manifest 和 fixture 复制到 iOS probe App 的 Documents 后，以 `--p9-model-directory model --p9-manifest p9-smolvlm-manifest.json --p9-input fixture.png --p9-auto-run` 启动；App 会再次逐文件校验资产，并为每次运行写入独立的 `p9-run-<UUID>.json`。
 
-2026-10-17 的验证边界：无 MLX 的 iOS 18 静态 typecheck、Python 23/23 和本地小样本的资产哈希/结果持久化验证通过。Xcode 的完整 SwiftPM 解析尚未完成：MLX 主包可获取，`swift-syntax` 通过固定 `603.0.1` 浅缓存后可继续，但 `mlx-swift 0.32.3` 的 `mlx`/`mlx-c` 子模块完整克隆在当前网络反复中断。当前没有完整 App build、安装或真机图片→文本输出；P9 不能标记 pass。
+2026-10-17 验证边界更新：SwiftPM 已解析并固定 `mlx-swift 0.32.3`、`mlx-swift-lm 6e338e5df49424fc0db7c6d58184d622f92ed18a`、`swift-syntax 603.0.1`、`swift-numerics 1.1.1`，并加入 `swift-transformers` 的 `Tokenizers` 产品以满足 MLXHuggingFace 宏依赖。使用 `-skipMacroValidation` 后 iOS 27 模拟器测试 **15/15** 通过；签名设备构建、安装和模型复制成功。
+
+在 iPhone 16 Pro Max / iOS 27.0.1 上使用固定 fixture 和完整 1,015,023,993 字节资产完成三次运行：首次成功输出 `A flag with a red square on a white background.`（首 token 3842.036542 ms、总计 4416.807959 ms）；定时取消返回唯一 `cancelled` 终态、空输出；取消后重复会话再次成功（首 token 463.658792 ms、总计 971.546583 ms）。三次结果的模型 revision、runtime revision 和 fixture hash 均与 manifest 一致。峰值内存仍为 `null/unmeasured`，不宣称资源达标；原始 JSON 与汇总仅保存在忽略目录 `artifacts/P9`。
+
+更新后的设备构建再次运行成功：`p9-run-91404738-5192-4A0C-AA8F-D313CE091381.json` 包含 `schemaVersion=1`、唯一 `runId`、设备架构 `iPhone17,2`、`validationStatus=device` 和 OS build `24A446`；首 token 478.301875 ms、总计 997.441792 ms。该结果仍明确记录 `peakMemory=null` / `unmeasured`。
+
+模型不进入 Git 或 LFS。完整 App build、安装、真机图片→文本、取消和重复会话均已有证据；峰值内存测量、质量基准和 Android 第二平台仍未完成，P9 作为单平台探针通过，但不等于完整多平台能力交付。

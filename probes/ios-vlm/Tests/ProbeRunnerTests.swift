@@ -13,6 +13,13 @@ final class ProbeRunnerTests: XCTestCase {
         XCTAssertTrue(configuration.autoRun)
     }
 
+    func testLaunchConfigurationAcceptsBoundedCancelDelay() {
+        let documents = URL(fileURLWithPath: "/tmp/documents")
+        XCTAssertEqual(ProbeLaunchConfiguration.from(arguments: ["probe", "--p9-cancel-after-ms", "2500"], documents: documents).cancelAfterMs, 2500)
+        XCTAssertNil(ProbeLaunchConfiguration.from(arguments: ["probe", "--p9-cancel-after-ms", "0"], documents: documents).cancelAfterMs)
+        XCTAssertNil(ProbeLaunchConfiguration.from(arguments: ["probe", "--p9-cancel-after-ms", "60001"], documents: documents).cancelAfterMs)
+    }
+
     private func fixture() throws -> URL {
         let url = FileManager.default.temporaryDirectory.appendingPathComponent("p9-fixture.bin")
         try Data("fixture".utf8).write(to: url)
@@ -60,6 +67,18 @@ final class ProbeRunnerTests: XCTestCase {
         XCTAssertTrue(result.output.isEmpty)
     }
 
+    func testCancellationAfterBackendReturnsPartialOutputIsTerminal() async throws {
+        let input = try fixture()
+        let task = Task { try await VLMProbe(backend: IgnoringCancellationBackend()).run(
+            input: input, manifest: .testVerified) }
+        try await Task.sleep(for: .milliseconds(10))
+        task.cancel()
+        let result = try await task.value
+        XCTAssertEqual(result.status, .cancelled)
+        XCTAssertTrue(result.cancelled)
+        XCTAssertTrue(result.output.isEmpty)
+    }
+
     func testCandidateCannotReachBackend() async throws {
         let backend = CountingBackend()
         do {
@@ -88,6 +107,20 @@ final class ProbeRunnerTests: XCTestCase {
         XCTAssertTrue(object["peakMemory"] is NSNull)
         XCTAssertEqual(object["peakMemoryStatus"] as? String, "unmeasured")
     }
+
+    func testResultStoreWritesDeviceAndRunIdentifiers() throws {
+        let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let result = VLMRunResult(status: .success, actualBackend: "fake",
+            modelRevision: "model", runtimeRevision: "runtime", fixtureHash: "hash",
+            firstTokenMs: 1, totalMs: 2, peakMemory: nil, cancelled: false, output: "ok")
+        let file = try ProbeResultStore(directory: directory).write(result)
+        let object = try XCTUnwrap(JSONSerialization.jsonObject(with: Data(contentsOf: file)) as? [String: Any])
+        XCTAssertFalse((object["runId"] as? String ?? "").isEmpty)
+        XCTAssertFalse((object["device"] as? String ?? "").isEmpty)
+        XCTAssertFalse((object["OS"] as? String ?? "").isEmpty)
+        XCTAssertEqual(object["actualBackend"] as? String, "fake")
+    }
 }
 
 private actor CountingBackend: VLMBackend {
@@ -103,6 +136,14 @@ private struct EmptyBackend: VLMBackend {
     let identifier = "fake"
     func generate(input: URL, manifest: VLMManifest) async throws -> VLMGeneration {
         VLMGeneration(output: " ")
+    }
+}
+
+private struct IgnoringCancellationBackend: VLMBackend {
+    let identifier = "fake"
+    func generate(input: URL, manifest: VLMManifest) async throws -> VLMGeneration {
+        try? await Task.sleep(for: .milliseconds(100))
+        return VLMGeneration(output: "partial")
     }
 }
 

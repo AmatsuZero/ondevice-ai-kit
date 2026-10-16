@@ -11,6 +11,9 @@ packages:
   mlx-swift-lm:
     url: https://github.com/ml-explore/mlx-swift-lm.git
     revision: 6e338e5df49424fc0db7c6d58184d622f92ed18a
+  swift-transformers:
+    url: https://github.com/huggingface/swift-transformers.git
+    revision: b38443e44d93eca770f2eb68e2a4d0fa100f9aa2
 targets:
   VLMProbe:
     type: application
@@ -33,6 +36,8 @@ targets:
         product: MLXLMCommon
       - package: mlx-swift-lm
         product: MLXHuggingFace
+      - package: swift-transformers
+        product: Tokenizers
   VLMProbeTests:
     type: bundle.unit-test
     platform: iOS

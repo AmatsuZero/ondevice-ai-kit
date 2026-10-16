@@ -1,9 +1,10 @@
 import Foundation
 
-#if canImport(MLXVLM) && canImport(MLXLMCommon) && canImport(MLXHuggingFace)
+#if canImport(MLXVLM) && canImport(MLXLMCommon) && canImport(MLXHuggingFace) && canImport(Tokenizers)
 import MLXHuggingFace
 import MLXLMCommon
 import MLXVLM
+import Tokenizers
 
 /// Optional MLX implementation scoped to the iOS 18 probe target.
 /// No MLX type crosses into the base SDK modules.

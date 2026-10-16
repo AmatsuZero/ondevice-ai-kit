@@ -115,6 +115,7 @@ public struct VLMProbe<B: VLMBackend>: Sendable {
         let start = clock.now
         do {
             let generation = try await backend.generate(input: input, manifest: manifest)
+            try Task.checkCancellation()
             guard !generation.output.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
                 return VLMRunResult(status: .unavailable, actualBackend: backend.identifier,
                     modelRevision: manifest.modelRevision, runtimeRevision: manifest.runtimeRevision,
