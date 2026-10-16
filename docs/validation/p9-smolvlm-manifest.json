@@ -1,0 +1,25 @@
+{
+  "modelId": "mlx-community/SmolVLM2-500M-Video-Instruct-mlx",
+  "modelRevision": "fa57db46815177fbdfd65cc85a2b3416a8332268",
+  "runtime": "MLXVLM",
+  "runtimeRevision": "6e338e5df49424fc0db7c6d58184d622f92ed18a",
+  "files": [
+    {"path": ".gitattributes", "bytes": 1519, "sha256": null, "hubBlobId": "a6344aac8c09253b3b630fb776ae94478aa0275b"},
+    {"path": "README.md", "bytes": 898, "sha256": null, "hubBlobId": "f126108edc53300f6a1c050efaa6a3564db4c62d"},
+    {"path": "added_tokens.json", "bytes": 4739, "sha256": null, "hubBlobId": "71dc811700b6aa9274d3697ee7d4fb2d5375e766"},
+    {"path": "chat_template.json", "bytes": 430, "sha256": null, "hubBlobId": "1d342e4f070c962a14ba4ece4e06212bc70d8e36"},
+    {"path": "config.json", "bytes": 10200, "sha256": null, "hubBlobId": "11859dc2e0037e29f2d3d824220ec2ce9e87b261"},
+    {"path": "merges.txt", "bytes": 466391, "sha256": null, "hubBlobId": "69503b13f727ba3812b6803e97442a6de05ef5eb"},
+    {"path": "model.safetensors", "bytes": 1015023993, "sha256": null, "sourceSha256": "a9839c8f79ecc93e54a00dc73cc0e68ba477debcd065d50c1c289fbb1075f981", "hubBlobId": "4fdb6a02427326c2d5024ae3ef5f14cd85278284"},
+    {"path": "model.safetensors.index.json", "bytes": 39556, "sha256": null, "hubBlobId": "1923836dbcb85653932c902189e7ebc68f57ef32"},
+    {"path": "preprocessor_config.json", "bytes": 599, "sha256": null, "hubBlobId": "bf7669a38692ad141d333db3be18bd55cb6e2c59"},
+    {"path": "processor_config.json", "bytes": 67, "sha256": null, "hubBlobId": "83df8c48da1f41e1a9129a4bc2aba000eb2b529f"},
+    {"path": "special_tokens_map.json", "bytes": 868, "sha256": null, "hubBlobId": "2b5aee28d56c0e9d89ff6bc70818fba986a90ca9"},
+    {"path": "tokenizer.json", "bytes": 3548256, "sha256": null, "hubBlobId": "a4005d1cf3170a31600a5c96f95768166cbc2b28"},
+    {"path": "tokenizer_config.json", "bytes": 28626, "sha256": null, "hubBlobId": "e4042a1126290fdb96ece2a4ad8dd7108c5de484"},
+    {"path": "vocab.json", "bytes": 800662, "sha256": null, "hubBlobId": "0ad5ecc2035b7031b88afb544ee95e2d49baa484"}
+  ],
+  "license": "apache-2.0",
+  "platformMin": "iOS 18.0",
+  "status": "candidate"
+}
