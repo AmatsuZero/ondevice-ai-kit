@@ -12,6 +12,7 @@ Inventory 2026-10-16: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 | iOS15 device launch/camera/offline | missing-device | Cannot substitute modern simulator |
 | Android API26 device launch/camera/offline | missing-device | No API26 device; current ADB device is API35 |
 | Connected modern iPhone launch + Vision blank | pass | Signed build/install/launch; real 64x64 synthetic input returns empty faces; [P3 evidence](p3-ios-device.md) |
+| Connected modern iPhone frozen face benchmark | pass bounded | SDK commit `acf3573`; iPhone 16 Pro Max / iOS 27.0.1, 5 warmup + 30 inference, `apple.vision.face`; raw/report JSON retained under ignored `artifacts/P5` |
 | Modern iPhone camera controls + foreground resume | pass bounded | 2 real-device UI tests; explicit stop survives activation; [P4 evidence](p4-camera-stability.md) |
 | Modern Android launch | pass bounded | TECNO KM9 API35 Demo installed and launched; [P4 evidence](p4-camera-stability.md) |
 | Sustained camera/thermal/memory | not-run | Requires device run and recorded input conditions |
