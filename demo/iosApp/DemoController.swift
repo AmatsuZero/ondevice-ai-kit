@@ -15,24 +15,33 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     private let admissionLock = NSLock()
     private var frames = LatestFrameQueue<CameraFrame>()
     private var running = false
+    private var cameraLifecycle = CameraLifecycle(foreground: UIApplication.shared.applicationState == .active)
+    private var cameraStart: Task<Void, Never>?
     private var benchmark: Task<Void, Never>?
     @Published var image: UIImage?
     @Published var faces: [FaceObservation] = []
     @Published var report: String?
     @Published var message: String?
+    @Published var cameraFrameCount = 0
     override init() {
         super.init()
         bridge.onResult = { [weak self] result in
             self?.faces = result.faces
+            if self?.running == true { self?.cameraFrameCount += 1 }
             #if DEBUG
             if ProcessInfo.processInfo.arguments.contains("--smoke-benchmark") { self?.runBenchmark() }
             #endif
         }
         camera.onFrame = { [weak self] image in self?.offerFrame(image) }
-        NotificationCenter.default.addObserver(self, selector: #selector(background), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(background), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(background), name: UIApplication.willResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(foreground), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(memoryWarning), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
     }
-    @objc private func background() { stopCamera(); model.cancel() }
+    @objc private func background() { cameraLifecycle.pause(); pauseCamera(); model.cancel() }
+    @objc private func foreground() {
+        if let token = cameraLifecycle.activate(), AVCaptureDevice.authorizationStatus(for: .video) == .authorized { resumeCamera(token) }
+    }
+    @objc private func memoryWarning() { stopCamera(); model.cancel() }
     private func presenter() -> UIViewController? {
         var current = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.flatMap(\.windows).first(where: \.isKeyWindow)?.rootViewController
         while let presented = current?.presentedViewController { current = presented }; return current
@@ -49,23 +58,41 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
             DispatchQueue.main.async { self?.useImage(UIImage(cgImage: cg)) }
         }
     }
-    func useImage(_ selected: UIImage) {
+    func useImage(_ selected: UIImage, smokeFixture: Bool = false) {
         model.cancel()
         // Rendering applies UIImage EXIF orientation once; Vision subsequently receives .up.
         let format = UIGraphicsImageRendererFormat(); format.scale = 1
         let normalized = UIGraphicsImageRenderer(size: selected.size, format: format).image { _ in selected.draw(in: CGRect(origin: .zero, size: selected.size)) }
         guard let cg = normalized.cgImage else { return }
         image = normalized; faces = []; report = nil
-        let id = UUID().uuidString; bridge.inputs[id] = IOSFaceBridge.InputEntry(image: cg, finished: {}); model.detect(inputId: id)
+        let id = UUID().uuidString
+        bridge.inputs[id] = IOSFaceBridge.InputEntry(image: cg, finished: {}, fixture: smokeFixture ? "synthetic-white-64x64-upright-v1" : nil)
+        model.detect(inputId: id)
     }
     func startCamera() {
+        let token = cameraLifecycle.requestStart()
         AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
             DispatchQueue.main.async {
                 guard let self else { return }
-                guard granted else { self.model.permissionDenied(); return }
-                self.stopCamera(); self.running = true; self.admissionLock.lock(); self.frames = LatestFrameQueue<CameraFrame>(); self.admissionLock.unlock(); self.camera.start()
+                guard self.cameraLifecycle.canStart(token) else { return }
+                guard granted else { self.cameraLifecycle.stop(); self.model.permissionDenied(); return }
+                self.resumeCamera(token)
             }
         }
+    }
+    private func resumeCamera(_ token: UInt64) {
+        pauseCamera(); model.cancel()
+        let pending = Array(bridge.jobs.values)
+        cameraStart = Task { @MainActor in
+            // Cancellation does not mean Vision has released its input or admission slot.
+            for task in pending { await task.value }
+            guard !Task.isCancelled, cameraLifecycle.canStart(token) else { return }
+            replaceFrameQueue()
+            running = true; camera.start()
+        }
+    }
+    private func replaceFrameQueue() {
+        admissionLock.lock(); frames = LatestFrameQueue<CameraFrame>(); admissionLock.unlock()
     }
     private func offerFrame(_ image: CGImage) {
         // Called by capture serial queue; synchronous 1+1 admission retains no per-frame Task backlog.
@@ -75,13 +102,17 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     }
     private func consume(_ frame: CameraFrame, queue: LatestFrameQueue<CameraFrame>) {
         guard running, queue === frames else { queue.complete(); return }
-        image = UIImage(cgImage: frame.image); let id = UUID().uuidString; bridge.inputs[id] = IOSFaceBridge.InputEntry(image: frame.image, finished: { [weak self] in self?.finishFrame(queue: queue) }); model.detect(inputId: id)
+        image = UIImage(cgImage: frame.image); let id = UUID().uuidString; bridge.inputs[id] = IOSFaceBridge.InputEntry(image: frame.image, finished: { [weak self] in self?.finishFrame(queue: queue) }); model.detectFrame(inputId: id)
     }
     private func finishFrame(queue: LatestFrameQueue<CameraFrame>) {
         queue.complete()
         if running, queue === frames, let next = queue.next() { consume(next, queue: queue) }
     }
     func stopCamera() {
+        cameraLifecycle.stop(); pauseCamera()
+    }
+    private func pauseCamera() {
+        cameraStart?.cancel(); cameraStart = nil
         running = false; camera.stop(); frames.close(); bridge.stopTasks(); benchmark?.cancel(); benchmark = nil
     }
     func runBenchmark() {

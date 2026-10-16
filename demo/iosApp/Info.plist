@@ -4,5 +4,7 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>ODAISDKCommit</key>
+	<string>$(ODAI_SDK_COMMIT)</string>
 </dict>
 </plist>

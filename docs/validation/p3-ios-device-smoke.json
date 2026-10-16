@@ -1,0 +1,24 @@
+{
+  "elapsedMs": 68.34425,
+  "fixture": "synthetic-white-64x64-upright-v1",
+  "OS": "27.0.1",
+  "result": {
+    "backendId": "apple.vision.face",
+    "faces": [],
+    "frameId": "05A4BE15-8F10-4E13-B5A5-A6BB6D59E4F5",
+    "orientedHeight": 64,
+    "orientedWidth": 64,
+    "previewTransform": {
+      "offsetX": 0,
+      "offsetY": 0,
+      "scaleX": 64,
+      "scaleY": 64
+    },
+    "timestampNs": 747470339520375
+  },
+  "runId": "p3-usb-20261016-02",
+  "schemaVersion": 1,
+  "sdkCommit": "d19ed4141caa96beab19553ab8ada39c89bffc54",
+  "status": "success",
+  "validationStatus": "device"
+}

@@ -51,4 +51,5 @@ def create_project(root, relative, name, products, package_path, source)
   scheme.save_as(project_path, target.name, true)
 end
 create_project(root, 'examples/ios-native', 'NativeConsumer', ['ODAIKitCore', 'ODAIKitFace', 'ODAIKitAppleVision'], '../../apple', ['NativeConsumerApp.swift'])
-create_project(root, 'demo/iosApp', 'OnDeviceAIDemo', ['ODAIKitCore', 'ODAIKitFace', 'ODAIKitAppleVision'], '../../apple', ['OnDeviceAIDemoApp.swift', 'DemoController.swift', 'IOSFaceBridge.swift', 'CameraSource.swift'])
+create_project(root, 'demo/iosApp', 'OnDeviceAIDemo', ['ODAIKitCore', 'ODAIKitFace', 'ODAIKitAppleVision'], '../../apple', ['OnDeviceAIDemoApp.swift', 'DemoController.swift', 'IOSFaceBridge.swift', 'CameraSource.swift', 'CameraLifecycle.swift'])
+load File.join(__dir__, 'configure-ios-ui-tests.rb')

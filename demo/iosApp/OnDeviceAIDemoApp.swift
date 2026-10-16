@@ -28,11 +28,16 @@ struct SharedControls: UIViewControllerRepresentable {
                 SharedControls(controller: controller).frame(height: 280)
                 if let message = controller.message { Text(message).font(.caption) }
                 if let report = controller.report { Button("导出 Benchmark JSON") { controller.exportReport(json: report) } }
+                #if DEBUG
+                if ProcessInfo.processInfo.arguments.contains("--ui-camera-test") {
+                    Text(String(controller.cameraFrameCount)).accessibilityIdentifier("camera-frame-count")
+                }
+                #endif
             }.onDisappear { controller.stopCamera() }
             .onAppear {
                 if ProcessInfo.processInfo.arguments.contains("--smoke-blank") {
                     let renderer = UIGraphicsImageRenderer(size: CGSize(width: 64, height: 64))
-                    controller.useImage(renderer.image { context in UIColor.white.setFill(); context.fill(CGRect(x: 0, y: 0, width: 64, height: 64)) })
+                    controller.useImage(renderer.image { context in UIColor.white.setFill(); context.fill(CGRect(x: 0, y: 0, width: 64, height: 64)) }, smokeFixture: true)
                 }
             }
         }

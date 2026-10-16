@@ -19,8 +19,8 @@
 | P0 当前快照收口 | 阶段表、验收证据、同步现有代码；不新增算法 | 当前检查结果落盘，两端分支 SHA 相等 | 已收口，随本次提交同步 |
 | P1 SDK 生命周期审查 | 仅 TaskGate、LatestFrameQueue、Vision/MLKit 取消与 close 的资源所有权；不改 Demo UI/安装器 | 独立审查、必要问题 RED→GREEN、对应测试通过；提交后停止 | 已完成，见 P1 审查记录 |
 | P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 已完成，见 [P2 审查](validation/p2-model-store-review.md) |
-| P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 待执行，真机已获授权 |
-| P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；Android 无设备时保持缺口；提交后停止 | 待执行 |
+| P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 已完成，见 [P3 真机结果](validation/p3-ios-device.md) |
+| P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；Android 无设备时保持缺口；提交后停止 | 部分完成：相机闪动/前后台修复已验，见 [P4 记录](validation/p4-camera-stability.md) |
 | P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 工具已实现，真机数据待补 |
 | P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力 | 先完成 speech-backends.md，再选择一个后端最小探针；独立停止 | 未开始 |
 | P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 未开始 |
@@ -37,11 +37,11 @@ P1/P2 是此前未完成独立审查的拆分；二者已完成，但基础 SDK 
 - Apple 验证脚本已通过：19 个 Swift XCTest、3 个 KMP 测试的已有报告、桥接 typecheck、原生消费者与 Demo 构建。两平台 archive 和四个 XCFramework 已生成；二进制消费者构建通过。
 - Android 已有 11 个 JVM 测试报告通过；Demo/原生消费者 APK 离线构建通过。后续重试完成四模块 Maven 本地发布和 lint；当前统一检查与 Maven 消费者复核结果见 acceptance.md。
 - Python benchmark/sync 测试 7/7 通过。
-- iOS27 模拟器 Demo 启动成功，但 Vision 实际推理报 Code9，未生成有效 benchmark；不算成功空脸。真机未验证，iOS15 未验证，Android 设备未验证。
+- iOS27 模拟器 Demo 启动成功，但 Vision 实际推理报 Code9，未生成有效 benchmark；不算成功空脸。iPhone 16 Pro Max / iOS27.0.1 的合成空白 Vision 真机闭环已通过，见 P3；iOS15 和 Android 设备仍未验证。
 - 原整分支 reviewer 未返回审查结果：工具报告用量限制，不能视为审查通过。后续分 P1/P2/P4/P5 各包完成必要审查。
 
 ## 恢复时的第一步
 
-P0、P1、P2 已完成；P1 结果见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 结果见 [模型存储审查](validation/p2-model-store-review.md)。下一次仅开始 P3：iOS 真机最小闭环。不要同时开始 P4、签名资产变更或新算法研究。
+P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。用户反馈使本包额外完成 P4 的相机闪动及前后台恢复修复，见 [P4 记录](validation/p4-camera-stability.md)。下一次仅推进 P4 剩余照片/取消、旋转/镜像与资源释放验收；不要同时开始 P5 或新算法研究。
 
 详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。

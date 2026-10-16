@@ -5,6 +5,7 @@ final class CameraFrame: @unchecked Sendable { let image: CGImage; init(_ image:
 final class CameraSource: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let session = AVCaptureSession()
     private let queue = DispatchQueue(label: "io.ondeviceai.camera")
+    private let frameQueue = DispatchQueue(label: "io.ondeviceai.camera.frames")
     private let context = CIContext()
     var onFrame: ((CGImage) -> Void)?
     func start() {
@@ -16,7 +17,7 @@ final class CameraSource: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
                 guard self.session.canAddInput(input) else { self.session.commitConfiguration(); return }; self.session.addInput(input)
                 let output = AVCaptureVideoDataOutput(); output.alwaysDiscardsLateVideoFrames = true
                 output.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
-                output.setSampleBufferDelegate(self, queue: self.queue)
+                output.setSampleBufferDelegate(self, queue: self.frameQueue)
                 guard self.session.canAddOutput(output) else { self.session.removeInput(input); self.session.commitConfiguration(); return }; self.session.addOutput(output)
                 if let connection = output.connection(with: .video) {
                     if connection.isVideoOrientationSupported { connection.videoOrientation = .portrait }

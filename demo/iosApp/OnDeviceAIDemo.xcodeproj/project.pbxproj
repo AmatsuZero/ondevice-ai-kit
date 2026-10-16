@@ -7,25 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FC0060F5B417443F140023B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C400C8A95494A2E3B6E3B066 /* Foundation.framework */; };
 		10C3546279CE1C5B46AE5C98 /* IOSFaceBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB2DDD12BDD54DF63E16CE /* IOSFaceBridge.swift */; };
+		1951F9EBE5ECCB6715306A15 /* CameraLifecycleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DA0A16610DA12DD4F9F83C /* CameraLifecycleUITests.swift */; };
 		19E2BB64BBD2D312A33B750E /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127952E61497904681E3FFCC /* DemoController.swift */; };
 		1D4C2E4739C642009CC0C91B /* ODAIKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3961FE9E3EFF024172ED4FB9 /* ODAIKitCore */; };
 		72AC698A6CCC15C0AF0A0E43 /* ODAIKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA48C129CED625C9A7C154F3 /* ODAIKitDemo.framework */; };
 		7C468B946E26A8580611D22D /* ODAIKitAppleVision in Frameworks */ = {isa = PBXBuildFile; productRef = F9C3F3E98D731968E4E16789 /* ODAIKitAppleVision */; };
+		A119FD29C8CFE752D8D56CC4 /* CameraLifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AA788318EF571CB8808CC /* CameraLifecycle.swift */; };
 		A50CE56483A0B360D9A0BE38 /* CameraSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF72EE06B623224FAB2A2780 /* CameraSource.swift */; };
 		ACBE4DFE38D99EEE0050C759 /* ODAIKitFace in Frameworks */ = {isa = PBXBuildFile; productRef = 6E5E31E10A3093F10E4453D0 /* ODAIKitFace */; };
 		C97C9FD3F5B34B459AF57CCD /* OnDeviceAIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86B07B08BD419D7805814EB /* OnDeviceAIDemoApp.swift */; };
 		D766B6221010C3CB4849338C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C400C8A95494A2E3B6E3B066 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D2C035C9F1499A5D96D676A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59634B88C993BE2D3BE66E6D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1DF5E8B24F1645D677AF1212;
+			remoteInfo = OnDeviceAIDemo;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		127952E61497904681E3FFCC /* DemoController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DemoController.swift; sourceTree = "<group>"; };
 		1EAB2DDD12BDD54DF63E16CE /* IOSFaceBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IOSFaceBridge.swift; sourceTree = "<group>"; };
 		4CF19473DF0850004A0CD79A /* OnDeviceAIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnDeviceAIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E2AA788318EF571CB8808CC /* CameraLifecycle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CameraLifecycle.swift; sourceTree = "<group>"; };
+		A3DA0A16610DA12DD4F9F83C /* CameraLifecycleUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CameraLifecycleUITests.swift; path = UITests/CameraLifecycleUITests.swift; sourceTree = "<group>"; };
 		C400C8A95494A2E3B6E3B066 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		C86B07B08BD419D7805814EB /* OnDeviceAIDemoApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OnDeviceAIDemoApp.swift; sourceTree = "<group>"; };
 		DA48C129CED625C9A7C154F3 /* ODAIKitDemo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ODAIKitDemo.framework; path = "../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework/ODAIKitDemo.framework"; sourceTree = "<group>"; };
 		EF72EE06B623224FAB2A2780 /* CameraSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CameraSource.swift; sourceTree = "<group>"; };
+		FA3FAC9270A8B0373708CABC /* OnDeviceAIDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnDeviceAIDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +54,14 @@
 				ACBE4DFE38D99EEE0050C759 /* ODAIKitFace in Frameworks */,
 				7C468B946E26A8580611D22D /* ODAIKitAppleVision in Frameworks */,
 				72AC698A6CCC15C0AF0A0E43 /* ODAIKitDemo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCC7FCFF3797E3C82D826337 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FC0060F5B417443F140023B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				4CF19473DF0850004A0CD79A /* OnDeviceAIDemo.app */,
+				FA3FAC9270A8B0373708CABC /* OnDeviceAIDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,12 +103,32 @@
 				1EAB2DDD12BDD54DF63E16CE /* IOSFaceBridge.swift */,
 				EF72EE06B623224FAB2A2780 /* CameraSource.swift */,
 				DA48C129CED625C9A7C154F3 /* ODAIKitDemo.framework */,
+				A3DA0A16610DA12DD4F9F83C /* CameraLifecycleUITests.swift */,
+				5E2AA788318EF571CB8808CC /* CameraLifecycle.swift */,
 			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0CAED1C0C312E003375FC138 /* OnDeviceAIDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F220119F9A765D30ACA94F1 /* Build configuration list for PBXNativeTarget "OnDeviceAIDemoUITests" */;
+			buildPhases = (
+				B7B6252988C4FE294B50FED6 /* Sources */,
+				DCC7FCFF3797E3C82D826337 /* Frameworks */,
+				5961D8FB8A8A240B0E0FDFF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				41152C00A69661AD65EAEE1B /* PBXTargetDependency */,
+			);
+			name = OnDeviceAIDemoUITests;
+			productName = OnDeviceAIDemoUITests;
+			productReference = FA3FAC9270A8B0373708CABC /* OnDeviceAIDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		1DF5E8B24F1645D677AF1212 /* OnDeviceAIDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38B9D5C06BDB48D200794B4F /* Build configuration list for PBXNativeTarget "OnDeviceAIDemo" */;
@@ -134,11 +179,19 @@
 			projectRoot = "";
 			targets = (
 				1DF5E8B24F1645D677AF1212 /* OnDeviceAIDemo */,
+				0CAED1C0C312E003375FC138 /* OnDeviceAIDemoUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5961D8FB8A8A240B0E0FDFF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		76F676DE7140F471E62891F7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -149,6 +202,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B7B6252988C4FE294B50FED6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1951F9EBE5ECCB6715306A15 /* CameraLifecycleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DC05F500CCE2F564CE700F70 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -157,10 +218,20 @@
 				19E2BB64BBD2D312A33B750E /* DemoController.swift in Sources */,
 				10C3546279CE1C5B46AE5C98 /* IOSFaceBridge.swift in Sources */,
 				A50CE56483A0B360D9A0BE38 /* CameraSource.swift in Sources */,
+				A119FD29C8CFE752D8D56CC4 /* CameraLifecycle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		41152C00A69661AD65EAEE1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OnDeviceAIDemo;
+			target = 1DF5E8B24F1645D677AF1212 /* OnDeviceAIDemo */;
+			targetProxy = D2C035C9F1499A5D96D676A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		330DBEC7BCE87CE529F70BB5 /* Debug */ = {
@@ -183,6 +254,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ODAI_APP_BUNDLE_ID = io.ondeviceai.ondeviceaidemo;
 				"ODAI_KONAN_TARGET[sdk=iphoneos*]" = iosArm64;
 				"ODAI_KONAN_TARGET[sdk=iphonesimulator*]" = iosSimulatorArm64;
 				ODAI_SDK_COMMIT = "working-tree";
@@ -191,7 +263,7 @@
 					"-ObjC",
 					"-lsqlite3",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.ondeviceaidemo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ODAI_APP_BUNDLE_ID)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -218,6 +290,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ODAI_APP_BUNDLE_ID = io.ondeviceai.ondeviceaidemo;
 				"ODAI_KONAN_TARGET[sdk=iphoneos*]" = iosArm64;
 				"ODAI_KONAN_TARGET[sdk=iphonesimulator*]" = iosSimulatorArm64;
 				ODAI_SDK_COMMIT = "working-tree";
@@ -226,7 +299,7 @@
 					"-ObjC",
 					"-lsqlite3",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.ondeviceaidemo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ODAI_APP_BUNDLE_ID)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -287,6 +360,22 @@
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
+		};
+		B0EA49CD764A6B20B2FC42AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Manual;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				ODAI_APP_BUNDLE_ID = io.ondeviceai.ondeviceaidemo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ODAI_APP_BUNDLE_ID).uitests";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OnDeviceAIDemo;
+			};
+			name = Debug;
 		};
 		B8B186EB3D90D0B1C9AE677D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -349,6 +438,23 @@
 			};
 			name = Debug;
 		};
+		BE93331E37A267303C010A13 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Manual;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				ODAI_APP_BUNDLE_ID = io.ondeviceai.ondeviceaidemo;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(ODAI_APP_BUNDLE_ID).uitests";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OnDeviceAIDemo;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -357,6 +463,15 @@
 			buildConfigurations = (
 				402DAF05B30B0426B424D0DF /* Release */,
 				330DBEC7BCE87CE529F70BB5 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6F220119F9A765D30ACA94F1 /* Build configuration list for PBXNativeTarget "OnDeviceAIDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE93331E37A267303C010A13 /* Release */,
+				B0EA49CD764A6B20B2FC42AF /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
