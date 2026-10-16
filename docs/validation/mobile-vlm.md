@@ -6,13 +6,16 @@
 
 | 候选 | 模态/任务 | 运行时候选 | 许可证与风险 | 当前结论 |
 | --- | --- | --- | --- | --- |
-| SmolVLM2 | 图片/短视频描述、问答 | Transformers/MLX/Core ML 转换需验证 | 以具体 checkpoint model card 和权重许可证为准；移动端内存与 tokenizer 需实测 | 首选轻量候选，先锁一个 checkpoint |
-| Florence-2 | 图片描述、检测、区域任务 | ONNX Runtime/Core ML/LiteRT 需逐模型验证 | 代码与权重许可需分开核对；任务头输出不等于通用对话 | 任务型候选，不与通用 VLM 混合 benchmark |
-| MiniCPM-V | 图片问答、OCR/多模态对话 | llama.cpp/厂商 runtime/MLX 需验证 | 模型体积、量化、图像编码器和上下文内存风险较高 | 备选；只有资源探针通过后再选 |
+| SmolVLM2 500M | 图片/短视频描述、问答 | iOS 18+ / MLXVLM，沿用现有总设计路线 | 官方 HuggingSnap 路线使用 500M-Video-Instruct-mlx；Apache-2.0 需以具体 checkpoint card 复核，MLX 权重和内存需实测 | **P9 首选**：保持现有设计，不改成 256M |
+| SmolVLM2 256M | 图片/短视频描述、问答 | 官方 card 提供 ONNX 组件，Android ONNX Runtime 可探针 | Apache-2.0；model.safetensors 约 1.03GB，官方视频推理 GPU RAM 约 1.38GB；这些不是移动端实测 | Android 备选，不与 P9 同时接入 |
+| Florence-2-base | 图片描述、检测、区域任务 | 官方示例依赖 Transformers `trust_remote_code=True`；移动端转换需另证 | MIT；权重约 463MB，完整 repo 约 930MB；没有官方开箱即用移动 runtime | 任务型备选 |
+| MiniCPM-V-2_6 | 图片问答、OCR/多模态对话 | 专用 runtime/llama.cpp 路线需验证 | Apache-2.0 代码不等于权重许可；INT4 repo 约 5.97GB，模型卡约 7GB GPU memory，且有商业登记要求 | 不作为 P9 首选 |
 
 参考模型页（接入前必须重新读取具体 revision）：
 
+- <https://huggingface.co/HuggingFaceTB/SmolVLM2-500M-Video-Instruct>
 - <https://huggingface.co/HuggingFaceTB/SmolVLM2-256M-Video-Instruct>
+- <https://github.com/huggingface/swift-huggingface>
 - <https://huggingface.co/microsoft/Florence-2-base>
 - <https://huggingface.co/openbmb/MiniCPM-V-2_6>
 
@@ -24,4 +27,4 @@
 4. 至少一个目标平台实机或明确标记 unavailable；构建/转换成功不算推理成功。
 5. 质量采用任务特定的人工可复核记录；不把不同任务或不同模型合并成总分。
 
-P8 当前状态：候选和验证门槛已记录；尚未选择 checkpoint、下载权重或运行探针。P9 只在 P8 复核许可和资源约束后选择一个模型、一个平台和一个 runtime。
+P8 当前状态：候选、许可证/体积风险和统一验证门槛已记录。P9 选择 **SmolVLM2 500M-Video-Instruct-mlx + iOS 18+ MLXVLM**，保持现有总设计；256M ONNX 仅作为后续 Android 备选。尚未下载权重或运行探针。
