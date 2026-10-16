@@ -1,0 +1,39 @@
+name: VLMProbe
+options:
+  bundleIdPrefix: com.ondeviceaikit.probe
+  deploymentTarget:
+    iOS: '18.0'
+settings:
+  base:
+    SWIFT_VERSION: '6.0'
+    CODE_SIGNING_ALLOWED: NO
+packages:
+  mlx-swift-lm:
+    url: https://github.com/ml-explore/mlx-swift-lm.git
+    revision: 6e338e5df49424fc0db7c6d58184d622f92ed18a
+targets:
+  VLMProbe:
+    type: application
+    platform: iOS
+    sources:
+      - VLMProbeApp.swift
+      - ProbeRunner.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ondeviceaikit.probe.vlm
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - package: mlx-swift-lm
+        product: MLXVLM
+      - package: mlx-swift-lm
+        product: MLXLMCommon
+  VLMProbeTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests
+    dependencies:
+      - target: VLMProbe
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
