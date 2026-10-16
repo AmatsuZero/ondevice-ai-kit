@@ -67,30 +67,52 @@ def fetch_vlm_asset(manifest: dict, destination: Path, source: Path) -> Verified
             shutil.rmtree(temporary)
 
 
-def download_candidate(manifest: dict, destination: Path) -> dict:
-    """Download pinned files into ignored staging and report hashes; never publish them."""
+def download_candidate(manifest: dict, destination: Path, base_url: str = "https://huggingface.co/") -> dict:
+    """Download pinned files into ignored staging and report hashes; never publish them.
+
+    Existing ``.part`` files are resumed with HTTP Range requests. A file is
+    renamed into place only after its expected size and SHA256 are verified.
+    """
     if manifest.get("status") != "candidate":
         raise ValueError("candidate manifest required")
-    if destination.exists():
-        raise FileExistsError(destination)
-    destination.mkdir(parents=True)
+    destination.mkdir(parents=True, exist_ok=True)
     observed = {}
     for item in manifest["files"]:
         relative = Path(item["path"])
         if relative.is_absolute() or ".." in relative.parts:
             raise ValueError("unsafe file path")
-        url = ("https://huggingface.co/" + quote(manifest["modelId"], safe="/")
+        url = (base_url.rstrip("/") + "/" + quote(manifest["modelId"], safe="/")
                + "/resolve/" + manifest["modelRevision"] + "/" + quote(item["path"], safe="/"))
         target = destination / relative
         target.parent.mkdir(parents=True, exist_ok=True)
-        with urllib.request.urlopen(url, timeout=90) as response, target.open("wb") as output:
-            shutil.copyfileobj(response, output, length=1024 * 1024)
-        digest, size = _hash_file(target)
+        partial = target.with_name(target.name + ".part")
+        if target.is_file():
+            digest, size = _hash_file(target)
+            if size == item["bytes"] and (item.get("sha256") in (None, digest)) and (
+                item.get("sourceSha256") in (None, digest)
+            ):
+                observed[item["path"]] = {"sha256": digest, "bytes": size}
+                continue
+        offset = partial.stat().st_size if partial.exists() else 0
+        request = urllib.request.Request(url)
+        if offset:
+            request.add_header("Range", f"bytes={offset}-")
+        with urllib.request.urlopen(request, timeout=90) as response:
+            append = offset > 0 and response.status == 206
+            if not append:
+                offset = 0
+            with partial.open("ab" if append else "wb") as output:
+                shutil.copyfileobj(response, output, length=1024 * 1024)
+        digest, size = _hash_file(partial)
         if size != item["bytes"]:
             raise ValueError(f"size mismatch: {relative}")
+        expected_hash = item.get("sha256")
+        if expected_hash and digest != expected_hash:
+            raise ValueError(f"sha256 mismatch: {relative}")
         source_hash = item.get("sourceSha256")
         if source_hash and digest != source_hash:
             raise ValueError(f"source sha256 mismatch: {relative}")
+        partial.replace(target)
         observed[item["path"]] = {"sha256": digest, "bytes": size}
     return observed
 
