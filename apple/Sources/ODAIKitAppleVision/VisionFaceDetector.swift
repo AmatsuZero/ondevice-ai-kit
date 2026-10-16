@@ -4,6 +4,7 @@ import ODAIKitCore
 import ODAIKitFace
 
 public actor VisionFaceDetector: FaceDetector {
+    public nonisolated let backendId = "apple.vision.face"
     public typealias Runner = @Sendable (ImageInput, FaceOptions) async throws -> [ODAIKitFace.FaceObservation]
     private let gate = TaskGate()
     private let runner: Runner
@@ -12,7 +13,7 @@ public actor VisionFaceDetector: FaceDetector {
     public init() { runner = { input, options in try await Self.perform(input: input, options: options) } }
     init(runner: @escaping Runner) { self.runner = runner }
     public func availability() -> CapabilityAvailability {
-        CapabilityAvailability(status: closed ? .unavailable : .available, reason: closed ? .closed : nil, backendId: "apple.vision.face", minOS: "15.0")
+        CapabilityAvailability(status: closed ? .unavailable : .available, reason: closed ? .closed : nil, backendId: backendId, minOS: "15.0")
     }
     public func detect(input: ImageInput, options: FaceOptions = FaceOptions()) async throws -> FaceResult {
         guard !closed else { throw KitError.closed }
@@ -28,7 +29,7 @@ public actor VisionFaceDetector: FaceDetector {
             _ = await gate.finish(id: id, terminal: .completed)
             work = nil; await gate.release(id: id)
             let preview = try ImageGeometry.preview(imageWidth: input.orientedWidth, imageHeight: input.orientedHeight, viewWidth: Double(input.orientedWidth), viewHeight: Double(input.orientedHeight), mirrored: false)
-            return FaceResult(frameId: input.frameId, timestampNs: input.timestampNs, orientedWidth: input.orientedWidth, orientedHeight: input.orientedHeight, previewTransform: preview, backendId: "apple.vision.face", faces: faces)
+            return FaceResult(frameId: input.frameId, timestampNs: input.timestampNs, orientedWidth: input.orientedWidth, orientedHeight: input.orientedHeight, previewTransform: preview, backendId: backendId, faces: faces)
         } catch {
             _ = await gate.finish(id: id, terminal: error is CancellationError ? .cancelled : .failed)
             work = nil; await gate.release(id: id); throw error

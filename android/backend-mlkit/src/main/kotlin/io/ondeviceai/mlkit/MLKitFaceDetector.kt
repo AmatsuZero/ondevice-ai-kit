@@ -12,15 +12,16 @@ import kotlin.coroutines.suspendCoroutine
 
 /** Offline bundled ML Kit model; the detector is constructed lazily on first inference. */
 class MLKitFaceDetector: FaceDetector {
+    override val backendId = "android.mlkit.face.bundled"
     private val client=lazy {FaceDetection.getClient(FaceDetectorOptions.Builder().setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE).setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL).build())}
     private val session=DetectorSession {if(client.isInitialized())client.value.close()}
     override suspend fun availability():CapabilityAvailability {
         val closed=session.isClosed()
-        return CapabilityAvailability(if(closed)CapabilityStatus.UNAVAILABLE else CapabilityStatus.AVAILABLE,if(closed)UnavailableReason.CLOSED else null,"android.mlkit.face.bundled","26")
+        return CapabilityAvailability(if(closed)CapabilityStatus.UNAVAILABLE else CapabilityStatus.AVAILABLE,if(closed)UnavailableReason.CLOSED else null,backendId,"26")
     }
     override suspend fun detect(input:ImageInput,options:FaceOptions):FaceResult = session.execute {
         val faces=runBackend(input,options)
-        FaceResult(input.frameId,input.timestampNs,input.orientedWidth,input.orientedHeight,ImageGeometry.preview(input.orientedWidth,input.orientedHeight,input.orientedWidth.toDouble(),input.orientedHeight.toDouble(),false),"android.mlkit.face.bundled",faces)
+        FaceResult(input.frameId,input.timestampNs,input.orientedWidth,input.orientedHeight,ImageGeometry.preview(input.orientedWidth,input.orientedHeight,input.orientedWidth.toDouble(),input.orientedHeight.toDouble(),false),backendId,faces)
     }
     private suspend fun runBackend(input:ImageInput,options:FaceOptions):List<FaceObservation> = withContext(NonCancellable) {
         val image=InputImage.fromBitmap(input.bitmap,input.rotationDegrees)

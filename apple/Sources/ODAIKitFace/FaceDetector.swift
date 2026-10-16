@@ -19,6 +19,7 @@ public struct FaceOptions: Sendable {
     public init(landmarks: Bool = true) { self.landmarks = landmarks }
 }
 public protocol FaceDetector: Sendable {
+    var backendId: String { get }
     func availability() async -> CapabilityAvailability
     func detect(input: ImageInput, options: FaceOptions) async throws -> FaceResult
     func close() async
