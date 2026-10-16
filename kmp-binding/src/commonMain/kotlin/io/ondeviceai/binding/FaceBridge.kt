@@ -6,6 +6,8 @@ data class BridgePoint(val x:Double,val y:Double)
 data class BridgeLandmark(val name:String,val points:List<BridgePoint>)
 data class BridgeFace(val box:BridgeBox,val yaw:Double?,val pitch:Double?,val roll:Double?,val quality:Double?,val confidence:Double?,val landmarks:List<BridgeLandmark>,val topology:String)
 data class BridgeFaceResult(val frameId:String,val width:Int,val height:Int,val backendId:String,val faces:List<BridgeFace>,val elapsedMs:Double,val benchmarkJson:String?)
+/** Null means the platform's fixed default backend; a non-null ID selects exactly that backend. */
+data class BridgeBackendSelection(val backendId:String?=null) { init { require(backendId==null || backendId.isNotBlank()) } }
 interface FaceCallback {
     fun onResult(result:BridgeFaceResult)
     fun onError(message:String)
@@ -15,7 +17,7 @@ interface BridgeTask {fun cancel()}
 interface FaceBridge {
     fun backendId():String
     fun availability():BridgeAvailability
-    fun detect(inputId:String,callback:FaceCallback):BridgeTask
+    fun detect(inputId:String,selection:BridgeBackendSelection,callback:FaceCallback):BridgeTask
     fun close()
 }
 interface DemoActions {

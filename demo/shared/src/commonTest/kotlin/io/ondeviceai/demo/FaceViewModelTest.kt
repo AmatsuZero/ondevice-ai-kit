@@ -3,12 +3,19 @@ import io.ondeviceai.binding.*
 import kotlin.test.*
 class FakeBridge:FaceBridge {
     val callbacks=mutableListOf<FaceCallback>();var cancellations=0;var closed=false
+    val selections=mutableListOf<BridgeBackendSelection>()
     override fun backendId()="fake"
     override fun availability()=BridgeAvailability(true,null,"fake","15.0")
-    override fun detect(inputId:String,callback:FaceCallback):BridgeTask {callbacks+=callback;return object:BridgeTask {override fun cancel(){cancellations++}}}
+    override fun detect(inputId:String,selection:BridgeBackendSelection,callback:FaceCallback):BridgeTask {selections+=selection;callbacks+=callback;return object:BridgeTask {override fun cancel(){cancellations++}}}
     override fun close(){closed=true}
 }
 class FaceViewModelTest {
+    @Test fun backendSelectionReachesBridgeWithoutFallback() {
+        val bridge=FakeBridge();val vm=FaceViewModel(bridge)
+        vm.detect("default")
+        vm.detect("explicit", BridgeBackendSelection("test.face.cloud"))
+        assertEquals(listOf(null,"test.face.cloud"),bridge.selections.map{it.backendId})
+    }
     @Test fun nextCameraFrameKeepsLastResultAndStableControls() {
         val bridge=FakeBridge();val vm=FaceViewModel(bridge)
         val result=BridgeFaceResult("first",640,480,"fake",emptyList(),10.0,null)

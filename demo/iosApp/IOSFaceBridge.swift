@@ -13,6 +13,9 @@ final class SwiftBridgeTask: NSObject, BridgeTask {
 }
 final class IOSFaceBridge: NSObject, FaceBridge {
     let detector = VisionFaceDetector()
+    lazy var client = try! FaceDetectionClient(defaultBackendId: detector.backendId, registrations: [
+        FaceDetectionRegistration(backendId: detector.backendId, detector: detector)
+    ])
     struct InputEntry {
         let image: CGImage; let finished: () -> Void; var fixture: String? = nil
     }
@@ -22,14 +25,15 @@ final class IOSFaceBridge: NSObject, FaceBridge {
     private var closed = false
     func backendId() -> String { "apple.vision.face" }
     func availability() -> BridgeAvailability { BridgeAvailability(available: !closed, reason: closed ? "closed" : nil, backendId: backendId(), minimumOS: "15.0") }
-    func detect(inputId: String, callback: FaceCallback) -> BridgeTask {
+    func detect(inputId: String, selection: BridgeBackendSelection, callback: FaceCallback) -> BridgeTask {
         guard !closed, let entry = inputs.removeValue(forKey: inputId) else { callback.onError(message: closed ? "closed" : "missingInput"); return SwiftBridgeTask({}) }
         let id = UUID()
         let task = Task { @MainActor in
             defer { self.jobs.removeValue(forKey: id); entry.finished() }
             do {
                 let start = DispatchTime.now().uptimeNanoseconds
-                let native = try await self.detector.detect(input: ImageInput(image: entry.image), options: FaceOptions())
+                let backend: BackendSelection = selection.backendId.map { .explicit($0) } ?? .default
+                let native = try await self.client.detect(input: ImageInput(image: entry.image), backend: backend)
                 try Task.checkCancellation()
                 let elapsed = Double(DispatchTime.now().uptimeNanoseconds - start) / 1_000_000
                 #if DEBUG
@@ -92,7 +96,7 @@ final class IOSFaceBridge: NSObject, FaceBridge {
     func close() {
         guard !closed else { return }; closed = true
         inputs.removeAll(); jobs.values.forEach { $0.cancel() }
-        Task { await detector.close() }
+        Task { await client.close() }
     }
     func stopTasks() { jobs.values.forEach { $0.cancel() } }
 }

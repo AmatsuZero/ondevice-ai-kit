@@ -11,16 +11,16 @@ class FaceViewModel(val bridge:FaceBridge) {
     private var generation=0L
     private var active:BridgeTask?=null
     private var closed=false
-    fun detect(inputId:String) = detect(inputId,streaming=false)
-    fun detectFrame(inputId:String) = detect(inputId,streaming=true)
-    private fun detect(inputId:String,streaming:Boolean) {
+    fun detect(inputId:String,selection:BridgeBackendSelection=BridgeBackendSelection()) = detect(inputId,selection,streaming=false)
+    fun detectFrame(inputId:String,selection:BridgeBackendSelection=BridgeBackendSelection()) = detect(inputId,selection,streaming=true)
+    private fun detect(inputId:String,selection:BridgeBackendSelection,streaming:Boolean) {
         if(closed)return
         val previous=if(streaming)state.result else null
         cancel()
         val available=bridge.availability()
         if(!available.available){state=FaceState(error=available.reason?:"unavailable");return}
         val current=++generation;state=FaceState(busy=true,result=previous,streaming=streaming)
-        val task=bridge.detect(inputId,object:FaceCallback {
+        val task=bridge.detect(inputId,selection,object:FaceCallback {
             override fun onResult(result:BridgeFaceResult){if(current==generation){state=FaceState(result=result,streaming=streaming);active=null}}
             override fun onError(message:String){if(current==generation){state=FaceState(error=message,result=previous,streaming=streaming);active=null}}
             override fun onCancelled(){if(current==generation){state=FaceState(cancelled=true);active=null}}

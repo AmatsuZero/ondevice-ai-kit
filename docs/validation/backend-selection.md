@@ -17,3 +17,9 @@
 - `./gradlew :android:face:testDebugUnitTest --tests io.ondeviceai.face.FaceDetectionClientTest --offline`：Android 选择契约 **2/2** 通过。
 
 该包验证的是注册和选择语义，不宣称新增第三方后端、云端调用或身份识别能力已交付。Demo 的 KMP 桥接迁移和每项能力的独立后端分发仍按后续工作包推进。
+
+## KMP 与 Demo 桥接补充
+
+KMP 的 `FaceBridge.detect` 和 `FaceViewModel.detect`/`detectFrame` 已接收 `BridgeBackendSelection`。`backendId=null` 映射固定平台默认后端；非空 ID 严格映射原生 Client 的显式选择。Android 桥接使用 `FaceDetectionClient`，iOS 桥接使用 Swift `FaceDetectionClient`；未注册 ID 由 Client 返回错误，不在桥接层选择其他后端。Demo 当前仍只注册各自的基础后端，尚无可供最终用户选择的第二个生产后端或 UI 控件。
+
+验证：新增 KMP ViewModel 传参测试先因缺少选择 DTO/接口失败，接入后 `:demo:shared:iosSimulatorArm64Test` 与 `:kmp-binding:iosSimulatorArm64Test` 通过；Android Demo 单元测试及 APK 构建通过；`scripts/check-swift-bridge.sh` 通过；重新链接 KMP iOS framework 后，iOS Demo unsigned simulator build 通过。上述构建验证不替代真机行为或依赖裁剪验收。

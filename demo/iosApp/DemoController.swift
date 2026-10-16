@@ -71,7 +71,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         photoSubmission.replace(after: pending) { [weak self] in
             guard let self else { return }
             self.bridge.inputs[id] = IOSFaceBridge.InputEntry(image: cg, finished: {}, fixture: smokeFixture ? "synthetic-white-64x64-upright-v1" : nil)
-            self.model.detect(inputId: id)
+            self.model.detect(inputId: id, selection: BridgeBackendSelection(backendId: nil))
         }
     }
     func startCamera() {
@@ -108,7 +108,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     }
     private func consume(_ frame: CameraFrame, queue: LatestFrameQueue<CameraFrame>) {
         guard running, queue === frames else { queue.complete(); return }
-        image = UIImage(cgImage: frame.image); let id = UUID().uuidString; bridge.inputs[id] = IOSFaceBridge.InputEntry(image: frame.image, finished: { [weak self] in self?.finishFrame(queue: queue) }); model.detectFrame(inputId: id)
+        image = UIImage(cgImage: frame.image); let id = UUID().uuidString; bridge.inputs[id] = IOSFaceBridge.InputEntry(image: frame.image, finished: { [weak self] in self?.finishFrame(queue: queue) }); model.detectFrame(inputId: id, selection: BridgeBackendSelection(backendId: nil))
     }
     private func finishFrame(queue: LatestFrameQueue<CameraFrame>) {
         queue.complete()
