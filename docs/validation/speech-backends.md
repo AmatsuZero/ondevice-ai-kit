@@ -40,12 +40,13 @@ Microsoft 官方文档说明 Speech SDK 支持 Android、iOS 和 REST 路线；�
 
 ## 探针结果
 
-`tools/probes/native_tts_probe.sh` 是宿主机探针：使用 macOS 内置 `say` 生成临时 AIFF，再用 `afinfo` 读取音频格式，退出时删除文件。它验证系统语音链路和测试环境，不代表 iOS 真机、Android 引擎或 Azure 网络调用已通过。
+`tools/probes/native_tts_probe.sh` 是宿主机探针：使用 macOS 内置 `say` 生成临时 AIFF，再用 `afinfo` 读取音频格式，退出时删除文件。`tools/probes/apple_avspeech_probe.swift` 进一步直接编译 AVFoundation，枚举 180 个系统 voice 并完成 `AVSpeechSynthesizer` 短句合成。两者都验证 host/API 可探测性，不代表 iOS 真机、Android 引擎或 Azure 网络调用已通过。
 
 执行：
 
 ```sh
 sh tools/probes/native_tts_probe.sh Samantha "OnDevice AI Kit native speech probe"
+swiftc tools/probes/apple_avspeech_probe.swift -o /tmp/odai-apple-avspeech-probe && /tmp/odai-apple-avspeech-probe
 ```
 
 P6 仍待完成：核对 ASR 和 iOS 26+ API 的官方可用性、权限、离线资源，再在 iOS 或 Android 的原生环境实现一个系统后端最小探针并记录真实设备结果。本机 host 探针不能替代移动端验收。统一选择值和错误语义进入后续实现计划；Azure 作为可裁剪插件，待凭据、网络和包分发策略确定后单独实现与 benchmark。
