@@ -38,6 +38,23 @@ Microsoft 官方文档说明 Speech SDK 支持 Android、iOS 和 REST 路线；�
 - <https://developer.android.com/reference/android/speech/tts/TextToSpeech>
 - <https://developer.android.com/reference/android/speech/SpeechRecognizer>
 
+## ASR 可用性证据与状态
+
+官方 API 要求把“支持、已安装、当前可用”分开：
+
+- iOS 13+ `SFSpeechRecognizer.supportsOnDeviceRecognition` 只表示该识别器具备离线能力；只有确认它为 true 后，才设置 `SFSpeechRecognitionRequest.requiresOnDeviceRecognition = true`。同时需要语音权限，麦克风输入还需要麦克风权限。
+- iOS 26+ `SpeechTranscriber` 需要运行时检查 `isAvailable`、locale 支持和 `AssetInventory` 状态；必要时通过 `AssetInstallationRequest.downloadAndInstall()` 安装语言资产。已支持 locale 不等于资产已安装。
+- Android API 31+ 先调用 `SpeechRecognizer.isOnDeviceRecognitionAvailable(context)`，再创建 `createOnDeviceSpeechRecognizer(context)`；创建失败、模型下载和 `RECORD_AUDIO` 权限都必须变成结构化状态。实例结束必须 `destroy()`；普通 `SpeechRecognizer` 可能把音频发送到远端，不能当作离线后端。
+
+后端能力状态建议至少区分：`unavailable`、`requiresPermission`、`requiresAsset`、`ready`。官方资料：
+
+- <https://developer.apple.com/documentation/speech/sfspeechrecognizer/supportsondevicerecognition>
+- <https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest/requiresondevicerecognition>
+- <https://developer.apple.com/documentation/speech/assetinventory>
+- <https://developer.apple.com/documentation/speech/assetinstallationrequest>
+- <https://developer.android.com/reference/android/speech/SpeechRecognizer#isOnDeviceRecognitionAvailable(android.content.Context)>
+- <https://developer.android.com/reference/android/speech/SpeechRecognizer#createOnDeviceSpeechRecognizer(android.content.Context)>
+
 ## 探针结果
 
 `tools/probes/native_tts_probe.sh` 是宿主机探针：使用 macOS 内置 `say` 生成临时 AIFF，再用 `afinfo` 读取音频格式，退出时删除文件。`tools/probes/apple_avspeech_probe.swift` 进一步直接编译 AVFoundation，枚举 180 个系统 voice 并完成 `AVSpeechSynthesizer` 短句合成。两者都验证 host/API 可探测性，不代表 iOS 真机、Android 引擎或 Azure 网络调用已通过。`demo/androidApp/src/androidTest/.../TtsProbeInstrumentation.kt` 在 TECNO KM9 / Android 15 上初始化 `com.google.android.tts`，`en-US` 返回 `LANG_AVAILABLE`，467 voices，生成 129404 字节 WAV 后成功关闭并删除缓存文件。
