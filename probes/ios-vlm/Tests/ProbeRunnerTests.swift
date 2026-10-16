@@ -60,6 +60,15 @@ final class ProbeRunnerTests: XCTestCase {
         let calls = await backend.calls
         XCTAssertEqual(calls, 2)
     }
+
+    func testUnavailableJSONExplicitlyMarksMemoryUnmeasured() async throws {
+        let result = try await VLMProbe(backend: UnavailableBackend()).run(
+            input: try fixture(), manifest: .testVerified)
+        let object = try XCTUnwrap(JSONSerialization.jsonObject(with: JSONEncoder().encode(result)) as? [String: Any])
+        XCTAssertEqual(object["status"] as? String, "unavailable")
+        XCTAssertTrue(object["peakMemory"] is NSNull)
+        XCTAssertEqual(object["peakMemoryStatus"] as? String, "unmeasured")
+    }
 }
 
 private actor CountingBackend: VLMBackend {

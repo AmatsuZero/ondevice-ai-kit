@@ -24,9 +24,9 @@ public struct VLMManifest: Codable, Sendable {
     }
 }
 
-public enum VLMRunStatus: String, Sendable { case unavailable, cancelled, success }
+public enum VLMRunStatus: String, Codable, Sendable { case unavailable, cancelled, success }
 
-public struct VLMRunResult: Sendable {
+public struct VLMRunResult: Codable, Sendable {
     public let status: VLMRunStatus
     public let actualBackend: String
     public let modelRevision: String
@@ -35,8 +35,40 @@ public struct VLMRunResult: Sendable {
     public let firstTokenMs: Double?
     public let totalMs: Double?
     public let peakMemory: Int?
+    public let peakMemoryStatus: String
     public let cancelled: Bool
     public let output: String
+
+    public init(status: VLMRunStatus, actualBackend: String, modelRevision: String,
+                runtimeRevision: String, fixtureHash: String, firstTokenMs: Double?,
+                totalMs: Double?, peakMemory: Int?, peakMemoryStatus: String = "unmeasured",
+                cancelled: Bool, output: String) {
+        self.status = status; self.actualBackend = actualBackend; self.modelRevision = modelRevision
+        self.runtimeRevision = runtimeRevision; self.fixtureHash = fixtureHash
+        self.firstTokenMs = firstTokenMs; self.totalMs = totalMs; self.peakMemory = peakMemory
+        self.peakMemoryStatus = peakMemoryStatus; self.cancelled = cancelled; self.output = output
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case status, actualBackend, modelRevision, runtimeRevision, fixtureHash
+        case firstTokenMs, totalMs, peakMemory, peakMemoryStatus, cancelled, output
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(status, forKey: .status)
+        try container.encode(actualBackend, forKey: .actualBackend)
+        try container.encode(modelRevision, forKey: .modelRevision)
+        try container.encode(runtimeRevision, forKey: .runtimeRevision)
+        try container.encode(fixtureHash, forKey: .fixtureHash)
+        try container.encodeIfPresent(firstTokenMs, forKey: .firstTokenMs)
+        try container.encodeIfPresent(totalMs, forKey: .totalMs)
+        if let peakMemory { try container.encode(peakMemory, forKey: .peakMemory) }
+        else { try container.encodeNil(forKey: .peakMemory) }
+        try container.encode(peakMemoryStatus, forKey: .peakMemoryStatus)
+        try container.encode(cancelled, forKey: .cancelled)
+        try container.encode(output, forKey: .output)
+    }
 }
 
 public struct VLMGeneration: Sendable {
@@ -84,15 +116,15 @@ public struct VLMProbe<B: VLMBackend>: Sendable {
             let ms = Double(elapsed.components.seconds) * 1000 + Double(elapsed.components.attoseconds) / 1e15
             return VLMRunResult(status: .success, actualBackend: backend.identifier, modelRevision: manifest.modelRevision,
                 runtimeRevision: manifest.runtimeRevision, fixtureHash: fixtureHash, firstTokenMs: generation.firstTokenMs,
-                totalMs: ms, peakMemory: nil, cancelled: false, output: generation.output)
+                totalMs: ms, peakMemory: nil, peakMemoryStatus: "unmeasured", cancelled: false, output: generation.output)
         } catch is CancellationError {
             return VLMRunResult(status: .cancelled, actualBackend: backend.identifier, modelRevision: manifest.modelRevision,
                 runtimeRevision: manifest.runtimeRevision, fixtureHash: fixtureHash, firstTokenMs: nil,
-                totalMs: nil, peakMemory: nil, cancelled: true, output: "")
+                totalMs: nil, peakMemory: nil, peakMemoryStatus: "unmeasured", cancelled: true, output: "")
         } catch VLMProbeError.unavailable {
             return VLMRunResult(status: .unavailable, actualBackend: backend.identifier, modelRevision: manifest.modelRevision,
                 runtimeRevision: manifest.runtimeRevision, fixtureHash: fixtureHash, firstTokenMs: nil,
-                totalMs: nil, peakMemory: nil, cancelled: false, output: "")
+                totalMs: nil, peakMemory: nil, peakMemoryStatus: "unmeasured", cancelled: false, output: "")
         }
     }
 }
