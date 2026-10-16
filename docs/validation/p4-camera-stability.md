@@ -29,6 +29,16 @@
 
 独立 reviewer 返回部分意见后因模型容量限制中断，未形成完整审查结论。其提出的 benchmark-smoke 导出问题经对照 HEAD 核实：该路径在基线中已存在，输出指标和 fixtureHash、不输出图像像素，也不标记为合成空白证据；因此不作为本次新增的隐私回归。该路径及 benchmark→相机切换的取消等待由 P5 另行审查。此次执行了本地 diff 自查、项目配置重复执行、Ruby/plist 检查与上述构建/测试，不能等同完整独立审查通过。
 
+## Android API 35 交互补充（2026-10-16）
+
+- 设备：TECNO KM9，Android 15，API 35；使用 ADB 操作已安装 Demo，未保存设备标识或截图。
+- 选图取消：打开系统 Photo Picker 后点击“取消”，返回 Demo，原有控件和状态保持可用。
+- 选图推理：选择一张现有图片后，UI 显示 `人脸 1`，按钮保持可用；3 秒日志未发现 `FATAL EXCEPTION` 或应用 `AndroidRuntime` 崩溃。
+- EXIF：使用本机生成的 Orientation 6 合成 JPEG（原始 160×80），经 Photo Picker 选择后结果显示为 `80×160`，证明 Android 读取 EXIF 并旋转后再送入推理。该临时文件已从设备删除。
+- 权限：撤销 CAMERA 后重新启动，系统权限对话框出现；点击“不允许”后回到 Demo，再授予 CAMERA 并重新启动相机，成功得到 `人脸 1`。没有改动系统其他权限。
+- 本次验证没有覆盖持续摄像头内存/热量、API 26、系统设置页恢复按钮或 iOS 照片选择器；这些仍保持未验证，不以本次结果替代最低版本验收。
+- 尝试在已连接的 iPhone 16 Pro Max 上重跑 UI 测试时，`xcodebuild test` 在构建阶段因 Demo 与 UI Test runner 均无匹配 provisioning profile 退出（exit 65）。已确认本机有 Apple Development 身份，但未使用 `-allowProvisioningUpdates` 创建账户资产；此次未产生新的 iOS 行为结论，此前相机 UI 结果仍以 P4CameraFinal 记录为准。
+
 ## 剩余 P4 范围
 
-照片选择/取消、EXIF 和旋转/镜像、权限拒绝/设置恢复的真实 UI、资源释放及持续相机内存/热量仍需逐项验收。Android 现代 API 35 已完成相机稳定性冒烟，API 26 下限和完整照片路径仍未验收。未开始 P5 benchmark；此次成功帧计数和单次 smoke 耗时不作为性能报告。
+剩余 P4 范围为 iOS 照片/取消、旋转/镜像、权限恢复的真实 UI，以及两端持续资源/热量测量。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。未开始 P5 benchmark；本次单图耗时不作为性能报告。

@@ -1,6 +1,6 @@
 # Device validation matrix
 
-Inventory 2026-10-16: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (24A446). Existing signing reused for this project. No adb device attached. iOS26.5/27 simulators available; no iOS15 runtime/device found.
+Inventory 2026-10-16: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (24A446), and TECNO KM9, Android 15/API 35. Existing signing reused for the earlier iOS device build; no matching profile is currently available for the UI runner. iOS26.5/27 simulators available; no iOS15 runtime/device found.
 
 | Gate | Status | Evidence |
 | --- | --- | --- |
@@ -10,14 +10,14 @@ Inventory 2026-10-16: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 | KMP iOS export + Swift implementation | pass compile | Swift FaceBridge conformance + KMP injected backend test |
 | Android native unit tests | pass JVM/lint/build | 20 JVM tests (SDK18 + Android photo-helper2); shared ViewModel4 on iOS simulator; lint and Demo/native APK build pass; published Maven consumer build pass; bundled detector runtime remains device gate |
 | iOS15 device launch/camera/offline | missing-device | Cannot substitute modern simulator |
-| Android API26 device launch/camera/offline | missing-device | adb devices empty |
+| Android API26 device launch/camera/offline | missing-device | No API26 device; current ADB device is API35 |
 | Connected modern iPhone launch + Vision blank | pass | Signed build/install/launch; real 64x64 synthetic input returns empty faces; [P3 evidence](p3-ios-device.md) |
 | Modern iPhone camera controls + foreground resume | pass bounded | 2 real-device UI tests; explicit stop survives activation; [P4 evidence](p4-camera-stability.md) |
-| Modern Android launch | missing-device | adb devices empty |
+| Modern Android launch | pass bounded | TECNO KM9 API35 Demo installed and launched; [P4 evidence](p4-camera-stability.md) |
 | Sustained camera/thermal/memory | not-run | Requires device run and recorded input conditions |
 
 No stored device UDIDs or input photos in this report. Update rows only with fresh commands and actual results.
 
-用户已授权直接使用本地真机做 device-only 验证。P3 与 P4 部分实测不改变最低系统、Android 设备、持续热量/内存的缺口。
+用户已授权直接使用本地真机做 device-only 验证。P3 与 P4 部分实测不改变最低系统和持续热量/内存的缺口。
 
-2026-10-16：用户确认 iOS15 与 Android 真机暂不可用；对应验收挂起，待提供设备后继续。已登记 [DEVICE-IOS15 / DEVICE-ANDROID TODO](../ROADMAP.md#等待设备的-todo)，不重复索要设备，不以当前构建或模拟器结果关闭这些项。
+2026-10-16：用户确认 iOS15 与 Android API26 真机暂不可用；当前 Android API35 设备仅验证现代平台。最低系统验收挂起，待对应设备可用后继续。已登记 [DEVICE-IOS15 / DEVICE-ANDROID TODO](../ROADMAP.md#等待设备的-todo)，不以当前构建、模拟器或较新设备关闭这些项。

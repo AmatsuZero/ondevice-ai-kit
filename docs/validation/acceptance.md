@@ -8,7 +8,7 @@
 | KMP export | Swift bridge typecheck、KMP simulator tests | 跨语言接口编译与注入验证 |
 | iOS Demo | iOS27 模拟器安装/启动、合成空白图输入 | 模拟器启动已验、Vision Code9；现代 iPhone 合成空白推理及两个相机 UI 用例通过，见 P3/P4 记录；未生成性能 benchmark |
 | Apple 二进制 | 两个平台 archive succeeded；BinaryConsumer 不链接 KMP 的 XCFramework build succeeded | arm64 iOS/simulator 本地编译通过，无发布/签名承诺 |
-| Android | JVM tests、lint、APK、本地 Maven consumer、TECNO KM9 真机 | 统一脚本与本地 Maven consumer 通过；API 35 真机已安装 Demo 并完成 ML Kit 人脸相机冒烟，修复流式 UI 闪烁；API 26 下限、照片/旋转/取消完整 UI 仍未验收 |
+| Android | JVM tests、lint、APK、本地 Maven consumer、TECNO KM9 真机 | 统一脚本与本地 Maven consumer 通过；API 35 真机已完成 ML Kit 人脸相机、选图取消、EXIF Orientation 6、权限拒绝/重新授权和单图推理；API 26 下限、持续资源/热量和系统设置页恢复仍未验收 |
 | Benchmark | Python schema/分组/百分位测试；原生 Demo 采集入口 | 无设备实测结果时不生成虚假样本 |
 | 同步 | 两端 refs 新鲜读取并比较 | 仅已提交分支；未提交文件不属于远端交付 |
 
@@ -16,7 +16,7 @@
 
 ## 尚未验证
 
-iOS15、Android API26 仍需设备单项签收。现代 iPhone 已验启动、合成空白 Vision、连续帧控件、前后台恢复和显式停止；照片/旋转/镜像、完整权限/取消及离线场景仍待 P4。现代 Android API35 已完成相机 ML Kit 冒烟及 UI 稳定性修复验证；照片/旋转/权限/取消完整路径仍待 P4。持续摄像头背压、峰值内存、热状态和能耗没有实测。iOS27 模拟器 Vision 的错误不被计为成功空脸结果。没有公开或内部制品仓库发布，没有自动镜像 CI。
+iOS15、Android API26 仍需设备单项签收。现代 iPhone 已验启动、合成空白 Vision、连续帧控件、前后台恢复和显式停止；照片/旋转/镜像、完整权限/取消及离线场景仍待 P4。现代 Android API35 已完成相机 ML Kit、选图取消、Orientation 6、权限拒绝/重新授权和单图推理；持续摄像头背压、峰值内存、热状态和能耗没有实测。iOS27 模拟器 Vision 的错误不被计为成功空脸结果。没有公开或内部制品仓库发布，没有自动镜像 CI。
 
 ## 分阶段恢复
 
