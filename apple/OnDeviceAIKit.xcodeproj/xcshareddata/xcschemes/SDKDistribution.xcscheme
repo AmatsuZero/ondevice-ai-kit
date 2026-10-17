@@ -62,6 +62,34 @@
                ReferencedContainer = "container:OnDeviceAIKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7D69EBACE004E6BAC09D83DC"
+               BuildableName = "ODAIKitSpeech.framework"
+               BlueprintName = "ODAIKitSpeech"
+               ReferencedContainer = "container:OnDeviceAIKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1846E7B9482629E6A8C74FD2"
+               BuildableName = "ODAIKitAppleSpeech.framework"
+               BlueprintName = "ODAIKitAppleSpeech"
+               ReferencedContainer = "container:OnDeviceAIKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

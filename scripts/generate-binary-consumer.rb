@@ -2,20 +2,26 @@
 require 'xcodeproj'
 require 'fileutils'
 root=File.expand_path('..',__dir__)
-directory=File.join(root,'artifacts/BinaryConsumer')
+speech=!!ARGV.delete('--speech')
+abort('Usage: generate-binary-consumer.rb [--speech]') unless ARGV.empty?
+artifacts=File.expand_path(ENV.fetch('ODAI_ARTIFACTS_DIR','artifacts'),root)
+name=speech ? 'SpeechBinaryConsumer' : 'BinaryConsumer'
+source=speech ? 'examples/ios-speech-native/SpeechConsumerApp.swift' : 'examples/ios-native/NativeConsumerApp.swift'
+directory=File.join(artifacts,name)
 FileUtils.mkdir_p(directory)
-FileUtils.cp(File.join(root,'examples/ios-native/NativeConsumerApp.swift'),directory)
-project=Xcodeproj::Project.new(File.join(directory,'BinaryConsumer.xcodeproj'))
-target=project.new_target(:application,'BinaryConsumer',:ios,'15.0')
-target.source_build_phase.add_file_reference(project.main_group.new_file('NativeConsumerApp.swift'))
+FileUtils.cp(File.join(root,source),directory)
+project=Xcodeproj::Project.new(File.join(directory,"#{name}.xcodeproj"))
+target=project.new_target(:application,name,:ios,'15.0')
+target.source_build_phase.add_file_reference(project.main_group.new_file(File.basename(source)))
 target.build_configurations.each do |configuration|
- configuration.build_settings.merge!({'SWIFT_VERSION'=>'5.0','ARCHS'=>'arm64','PRODUCT_BUNDLE_IDENTIFIER'=>'io.ondeviceai.binaryconsumer','GENERATE_INFOPLIST_FILE'=>'YES','INFOPLIST_KEY_UILaunchScreen_Generation'=>'YES','INFOPLIST_KEY_UIApplicationSceneManifest_Generation'=>'YES','LD_RUNPATH_SEARCH_PATHS'=>['$(inherited)','@executable_path/Frameworks']})
+ configuration.build_settings.merge!({'SWIFT_VERSION'=>'5.0','ARCHS'=>'arm64','PRODUCT_BUNDLE_IDENTIFIER'=>"io.ondeviceai.#{name.downcase}",'GENERATE_INFOPLIST_FILE'=>'YES','INFOPLIST_KEY_UILaunchScreen_Generation'=>'YES','INFOPLIST_KEY_UIApplicationSceneManifest_Generation'=>'YES','LD_RUNPATH_SEARCH_PATHS'=>['$(inherited)','@executable_path/Frameworks']})
 end
 embed=target.new_copy_files_build_phase('Embed SDK');embed.dst_subfolder_spec='10'
-['ODAIKitCore','ODAIKitFace','ODAIKitAppleVision'].each do |name|
+products=speech ? ['ODAIKitCore','ODAIKitSpeech','ODAIKitAppleSpeech'] : ['ODAIKitCore','ODAIKitFace','ODAIKitAppleVision']
+products.each do |name|
  ref=project.main_group.new_file("../xcframeworks/#{name}.xcframework")
  target.frameworks_build_phase.add_file_reference(ref)
  file=embed.add_file_reference(ref);file.settings={'ATTRIBUTES'=>['CodeSignOnCopy','RemoveHeadersOnCopy']}
 end
 project.save
-scheme=Xcodeproj::XCScheme.new;scheme.add_build_target(target);scheme.set_launch_target(target);scheme.save_as(project.path,'BinaryConsumer',true)
+scheme=Xcodeproj::XCScheme.new;scheme.add_build_target(target);scheme.set_launch_target(target);scheme.save_as(project.path,target.name,true)

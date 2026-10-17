@@ -113,3 +113,14 @@ P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端�
 TECNO KM9 / Android 15（API35），debug 宿主已授权 `RECORD_AUDIO`。服务查询 `AVAILABLE`，实际 `en-US` 短句启动返回错误码 13（`ERROR_LANGUAGE_UNAVAILABLE`：语言支持但资源当前不可用）。Client 返回 `BackendUnavailable(reason=MISSING_ASSETS)`，探针报告 `probeStatus=unavailable`、`transcription=not-run`，取消/重入/活跃关闭未完成设备验收，不能报告 1/1 ASR 推理或生命周期通过。未触发下载、未调用网络 recognizer。网络行为未独立测量。
 
 Gradle connected 测试会卸载测试宿主；第二轮曾因麦克风授权丢失而跳过。最终以重新安装后 `pm grant` + `am instrument -w` 的直接探针为准，原始证据位于忽略目录 `artifacts/P6AndroidSpeech/asr-20261017/`。探针只将明确的运行时不可用分类标为 unavailable；其他异常仍为 fail。待语言资源可用后重跑取消、重入、close 和真实转写；API26–30 实机门禁与离线/质量验收仍待补。
+
+## 2026-10-17 P6 可裁剪分发验证
+
+- Apple 分发生成器现在幂等地产生六个 XCFramework：`ODAIKitCore`、`ODAIKitModelStore`、`ODAIKitFace`、`ODAIKitAppleVision`、`ODAIKitSpeech`、`ODAIKitAppleSpeech`。`artifacts/verification/p6-apple-package.log` 记录新目录 `artifacts/P6/current/apple` 的 archive 与 XCFramework 构建；重复运行生成器的 project/scheme SHA 未变化，已有输出目录再次打包会拒绝覆盖。
+- Apple speech consumer 只嵌入 Core/Speech/AppleSpeech，face consumer 只嵌入 Core/Face/AppleVision；`artifacts/verification/p6-apple-dependency-isolation.log` 的 `otool -L` 与 `ODAIKitSpeech.swiftinterface` imports 检查没有 KMP、Face 或 AppleSpeech 串入契约。两者均以 unsigned iOS Simulator application 构建成功。`examples/ios-speech-native/ContractConsumer.swift` 另外只使用 Core/Speech 二进制搜索路径完成 typecheck。
+- Android 发布坐标为 `io.ondeviceai:speech:0.1.0-SNAPSHOT`、`io.ondeviceai:backend-system-tts:0.1.0-SNAPSHOT`、`io.ondeviceai:backend-system-asr:0.1.0-SNAPSHOT`。`examples/android-speech` 的 `contract`、`systemTts`、`systemAsr` flavors 均以 `-PusePublishedSdk=true` 完成 debug/release 编译；依赖图分别只到 `speech/core`、`speech/core+backend-system-tts`、`speech/core+backend-system-asr`。日志副本在 `artifacts/verification/p6-android-speech-published-*.log`。
+- P6 回归：Apple speech tests 6 项（全部 Swift XCTest 共 33 项）、Android speech 8 项、system TTS 3 项、system ASR 7 项均为 0 failures；Android 测试任务复核命中 up-to-date 结果，不声称全部重新执行。三个 Android 模块及三个消费者 flavor lint 无 error。验证只覆盖本地编译/依赖裁剪，不声称新增设备运行时行为。
+
+SDK 源码基线为 `a97df90cdd49e7e567e4259d17d745da885f6225`；本包仅补分发工程/消费者/文档，未改语音算法或 API。二进制、日志、音频均留在忽略目录，没有进入 Git/LFS 或远端制品仓库。
+
+P6 仍保留这些边界：Android API35 ASR 的 `en-US` 资源缺失导致 `MISSING_ASSETS`，未完成真实转写/取消生命周期；iOS ASR 与 iOS 26 资源未实测；两端 TTS 的断网行为与主观质量未测；Azure/Microsoft SDK 尚未加入；KMP 语音 Demo 仍待后续工作包。

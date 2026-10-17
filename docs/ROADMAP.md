@@ -1,6 +1,6 @@
 # 分阶段交付与恢复入口
 
-更新时间：2026-10-16。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main。
+更新时间：2026-10-17。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main。
 
 ## 执行规则
 
@@ -45,8 +45,8 @@
 | P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 已完成，见 [P2 审查](validation/p2-model-store-review.md) |
 | P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 已完成，见 [P3 真机结果](validation/p3-ios-device.md) |
 | P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；无相应设备时保持缺口；提交后停止 | 部分完成：iOS 相机/前后台、照片选择/取消、两分钟持续相机 UI 与 Activity Monitor/thermal 抽样、Settings 恢复入口及用户手动权限往返（恢复后相机/Vision 自动化 1/1），以及 Android API35 相机、选图取消、Orientation 6、权限拒绝/重新授权和两分钟相机 PSS/热状态抽样已验，见 [P4 记录](validation/p4-camera-stability.md)；iOS EXIF 真机端到端、完整资源释放及最低系统仍待验收 |
-| P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 部分完成：冻结提交 `927b7749` 后，iOS27 和 Android API35 均重新完成 5+30 样本；四个 Apple XCFramework（补全现有 Client 的 target 源文件）、四个 Android 人脸 Maven artifact 和显式后端独立消费者均通过；最低系统和峰值内存/能耗测量仍待补。语音 artifact 分发归 P6 后续工作包 |
-| P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力 | 先完成 speech-backends.md，再选择一个后端最小探针；独立停止 | 部分完成：TTS/插件边界、Android API35 instrumentation 1/1、on-device ASR 能力查询为 true 与 iPhone 16 Pro Max 系统 TTS 探针已记录；两端独立语音能力注册/严格选择契约已加入，Apple 系统 TTS 可选后端已接入并在 iPhone 16 Pro Max 真机完成成功/取消/关闭验证；Android 系统 TTS SDK 后端已接入并在 TECNO KM9 真机完成成功/取消/关闭验证；Android on-device ASR 可选模块与严格选择已接入，本地测试/构建通过，TECNO KM9 已授权但 en-US 返回 MISSING_ASSETS，设备生命周期/转写仍未通过；ASR 授权/转写、iOS 26 资源实测及两端离线/质量验收仍待补 |
+| P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 部分完成：冻结提交 `927b7749` 后，iOS27 和 Android API35 均重新完成 5+30 样本；四个 Apple XCFramework（补全现有 Client 的 target 源文件）、四个 Android 人脸 Maven artifact 和显式后端独立消费者均通过；最低系统和峰值内存/能耗测量仍待补。语音 artifact 分发已在 P6 独立验证 |
+| P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力 | 先完成 speech-backends.md，再选择一个后端最小探针；独立停止 | 部分完成：TTS/插件边界、Android API35 instrumentation 1/1、on-device ASR 能力查询为 true 与 iPhone 16 Pro Max 系统 TTS 探针已记录；两端独立语音能力注册/严格选择契约已加入，Apple 系统 TTS 可选后端已接入并在 iPhone 16 Pro Max 真机完成成功/取消/关闭验证；Android 系统 TTS SDK 后端已接入并在 TECNO KM9 真机完成成功/取消/关闭验证；Android on-device ASR 可选模块与严格选择已接入，本地测试/构建通过，TECNO KM9 已授权但 en-US 返回 MISSING_ASSETS，设备生命周期/转写仍未通过；Apple 六模块 XCFramework、Android 三个语音 Maven artifact 和三个 flavor 的 published consumer 已验证依赖裁剪；iOS ASR/26 资源、Android ASR 真实转写、两端离线/质量和 KMP 语音 Demo 仍待补 |
 | P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 部分完成：iOS 27 真机确认 VideoToolbox 系统 SR 支持 4×并完成 48 帧固定视频链路及单路取消验证；内存采样、48 帧质量配对及共用色彩/HEVC 编码的 SR/双三次真机对照已记录，实际 MOV 的 BT.709 声明已核对；已补公共领域实拍源的固定下载与 48 帧 fixture（源色彩未声明，使用显式实验假设）；SR 模型传递函数、自然视频真机对照/可视质量、新增双路取消、Android/最低系统及 SDK/Demo 接入仍待补 |
 | P8 VLM 调研 | SmolVLM2/huggingsnap、Florence-2、MiniCPM-V及其他指定 checkpoint | mobile-vlm.md 记录许可、平台、体积、内存、证据等级；不同时接入多个模型 | 已完成候选调研与 P9 单路线选择，见 [P8 记录](validation/mobile-vlm.md)；移动端实测归 P9 |
 | P9 VLM 单模型试验 | 根据 P8 选择一个 checkpoint、一个平台、一个 runtime | 固定图像→输出→资源/耗时原始证据；随后另包推进第二平台 | 单平台探针已通过：SmolVLM2 500M-Video-Instruct-mlx + iOS18/MLXVLM；固定资产、模拟器 16/16、签名设备构建、iPhone 16 Pro Max 成功/取消/重复会话和进程常驻内存采样均有证据；质量基准与 Android 第二平台待后续 |
@@ -74,6 +74,6 @@ P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试
 
 ## 恢复时的第一步
 
-P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。P4 的 iOS 相机/前后台、真机照片选择/取消与 Android API35 相机、照片和部分权限交互已有结果，见 [P4 记录](validation/p4-camera-stability.md)。下一次仅推进 P4 剩余 iOS 真机旋转/镜像与资源释放验收；本地签名已可运行 UI runner。iOS15/API26 最低系统项继续等待设备，不以其他验证代替。仍按每轮一个工作包推进。
+P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。P4 的 iOS 相机/前后台、真机照片选择/取消与 Android API35 相机、照片和部分权限交互已有结果，见 [P4 记录](validation/p4-camera-stability.md)。P5 人脸 benchmark/分发已复核，P6 已补齐现有语音模块的可裁剪分发；下一工作包推进 iOS ASR 的音频输入、授权与实际转写探针，再据证据接入 SDK。P4 剩余 iOS 真机旋转/镜像与资源释放验收仍挂在 P4；本地签名已可运行 UI runner。iOS15/API26 最低系统项继续等待设备，不以其他验证代替。仍按每轮一个工作包推进。
 
 详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。

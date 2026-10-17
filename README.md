@@ -4,17 +4,17 @@
 
 分阶段状态与下一工作包见 [ROADMAP](docs/ROADMAP.md)。当前为开发快照，尚未完成独立代码审查和真机验收。
 
-当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。
+当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；可选的 Apple AVSpeech TTS、Android 系统 TTS，以及 Android on-device ASR 模块；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。
 
-**当前不包含**身份识别、活体、ASR/TTS、超分和 VLM 推理实现。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
+**当前仍不包含**身份识别、活体、视频超分和 VLM 推理实现；语音模块已提供系统后端的 SDK 契约与可裁剪分发，但完整 KMP Demo 接入、iOS ASR 和第三方云端后端仍未交付。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
 
 当前 Demo 以人脸检测验证基础链路。后续 SDK/Demo 能力和调研→探针→模块接入的范围见 [功能路线图](docs/ROADMAP.md#当前范围与后续功能)。iOS15 与 Android 真机验收已按用户安排登记为 [等待设备 TODO](docs/ROADMAP.md#等待设备的-todo)，待设备提供后恢复。
 
 ## 原生接入
 
-Swift Package 路径 `apple`：选择 `ODAIKitCore`、`ODAIKitModelStore`、`ODAIKitFace`、`ODAIKitAppleVision` 中所需 products；参见 `examples/ios-native`。`VisionFaceDetector.detect(input:options:)` 返回 upright、左上原点、归一化坐标；无人脸是成功空集合。调用结束前 SDK 保持输入引用；调用方不要修改输入。`close()` 等待实际底层工作结束。
+Swift Package 路径 `apple`：按需选择 `ODAIKitCore`、`ODAIKitModelStore`、`ODAIKitFace`、`ODAIKitAppleVision`、`ODAIKitSpeech`、`ODAIKitAppleSpeech` products；参见 `examples/ios-native` 与 `examples/ios-speech-native`。`ODAIKitAppleSpeech` 才引入 AVFAudio，语音调用可用 `.default` 或 `.explicit(backendId)`，显式选择不会静默回退。`VisionFaceDetector.detect(input:options:)` 返回 upright、左上原点、归一化坐标；无人脸是成功空集合。调用结束前 SDK 保持输入引用；调用方不要修改输入。`close()` 等待实际底层工作结束。
 
-Android 模块为 `android/{sdk-core,model-store,face,backend-mlkit}`；参见 `examples/android-native`。Bitmap 在 detect 返回前不可修改或 recycle。bundled ML Kit 包含模型，首次推理无需下载；无 Google Play Services 设备仍需真机验证。人脸 trackingId 不代表身份。
+Android 模块为 `android/{sdk-core,model-store,face,backend-mlkit,speech,backend-system-tts,backend-system-asr}`；参见 `examples/android-native` 与 `examples/android-speech`。`examples:android-speech` 用 `contract`、`systemTts`、`systemAsr` 三个 flavor 证明依赖可裁剪；宿主负责 `RECORD_AUDIO` 权限。Bitmap 在 detect 返回前不可修改或 recycle。bundled ML Kit 包含模型，首次推理无需下载；无 Google Play Services 设备仍需真机验证。人脸 trackingId 不代表身份。
 
 ## 构建与测试
 
@@ -39,7 +39,17 @@ Android Demo：`./gradlew :demo:androidApp:assembleDebug`。照片、相机和 b
 ruby scripts/generate-binary-consumer.rb
 ```
 
-Maven 坐标 `io.ondeviceai:{sdk-core,model-store,face,backend-mlkit}:0.1.0-SNAPSHOT`。XCFramework 位于被忽略的 `artifacts/xcframeworks`，含 iOS arm64 与 simulator arm64。打包脚本拒绝覆盖既有 XCFramework；重新打包前自行归档旧产物。尚未发布远端制品或签名版本。
+语音模块的本地分发和消费者验证：
+
+```sh
+python3 scripts/gradle-local.py :android:speech:publishToMavenLocal :android:backend-system-tts:publishToMavenLocal :android:backend-system-asr:publishToMavenLocal
+python3 scripts/gradle-local.py :examples:android-speech:assemble -PusePublishedSdk=true
+ODAI_ARTIFACTS_DIR=artifacts/P6/current/apple sh scripts/package-apple.sh
+ODAI_ARTIFACTS_DIR=artifacts/P6/current/apple ruby scripts/generate-binary-consumer.rb --speech
+xcodebuild -project artifacts/P6/current/apple/SpeechBinaryConsumer/SpeechBinaryConsumer.xcodeproj -scheme SpeechBinaryConsumer -destination 'generic/platform=iOS Simulator' -derivedDataPath artifacts/P6/current/apple/SpeechBinaryBuild CODE_SIGNING_ALLOWED=NO build
+```
+
+Maven 坐标为 `io.ondeviceai:speech:0.1.0-SNAPSHOT`、`io.ondeviceai:backend-system-tts:0.1.0-SNAPSHOT` 和 `io.ondeviceai:backend-system-asr:0.1.0-SNAPSHOT`；人脸坐标仍见上方命令。Swift products 是 `ODAIKitSpeech`（契约）和 `ODAIKitAppleSpeech`（Apple TTS 后端）。XCFramework 位于被忽略的 `artifacts/xcframeworks` 或指定的 `ODAI_ARTIFACTS_DIR`，含 iOS arm64 与 simulator arm64。打包脚本拒绝覆盖既有 XCFramework；重新打包前使用新的输出目录。当前只完成本地分发和独立消费者编译，没有发布远端制品或签名版本。
 
 ## Benchmark 与验收
 
