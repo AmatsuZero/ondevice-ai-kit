@@ -7,14 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		204671A189DFB89A9C196090 /* ASRFileProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69DB0F71FF4A0E21C6E3A62 /* ASRFileProbe.swift */; };
 		3CEC9601A71FBA9D3C9C8DDA /* IOSSpeechProbeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AEB5E9EFC6A427A0651207 /* IOSSpeechProbeApp.swift */; };
 		9123C72A96BA1328EDAD15E6 /* ODAIKitAppleSpeech in Frameworks */ = {isa = PBXBuildFile; productRef = 41B65F9D030E9F66B63FB681 /* ODAIKitAppleSpeech */; };
+		9FF8274179E7087D60B6890D /* asr-fixture.caf in Resources */ = {isa = PBXBuildFile; fileRef = AE4F1B280859EA05B47CF501 /* asr-fixture.caf */; };
+		EFABF58C0855BBBDD3D7A126 /* ASRProbeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA332109629C7EBB51CFE43D /* ASRProbeState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		26DDA6AB685EF539A6C11250 /* apple */ = {isa = PBXFileReference; lastKnownFileType = folder; name = apple; path = ../../apple; sourceTree = SOURCE_ROOT; };
 		59AC4C462EA73785695EDD93 /* IOSSpeechProbe.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = IOSSpeechProbe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66AEB5E9EFC6A427A0651207 /* IOSSpeechProbeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSpeechProbeApp.swift; sourceTree = "<group>"; };
+		AE4F1B280859EA05B47CF501 /* asr-fixture.caf */ = {isa = PBXFileReference; path = "asr-fixture.caf"; sourceTree = "<group>"; };
+		B69DB0F71FF4A0E21C6E3A62 /* ASRFileProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASRFileProbe.swift; sourceTree = "<group>"; };
+		CA332109629C7EBB51CFE43D /* ASRProbeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASRProbeState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,12 +35,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A3A26C4B851B818B10CA6DD /* foundation */ = {
+			isa = PBXGroup;
+			children = (
+				67B5790906683ED35E8B94E3 /* artifacts */,
+			);
+			name = foundation;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		6321578C729EEBB45DB1A614 /* P6IOSASR */ = {
+			isa = PBXGroup;
+			children = (
+				B11D09A0723C42651A242E3B /* fixture */,
+			);
+			path = P6IOSASR;
+			sourceTree = "<group>";
+		};
+		67B5790906683ED35E8B94E3 /* artifacts */ = {
+			isa = PBXGroup;
+			children = (
+				6321578C729EEBB45DB1A614 /* P6IOSASR */,
+			);
+			path = artifacts;
+			sourceTree = "<group>";
+		};
 		A89F9DBB6498D7C483A60075 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
 				26DDA6AB685EF539A6C11250 /* apple */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		B11D09A0723C42651A242E3B /* fixture */ = {
+			isa = PBXGroup;
+			children = (
+				AE4F1B280859EA05B47CF501 /* asr-fixture.caf */,
+			);
+			path = fixture;
 			sourceTree = "<group>";
 		};
 		B86505ECBA18675A39F67957 /* Products */ = {
@@ -48,7 +87,10 @@
 		C73E6691FDDD6A6D0C5D1067 = {
 			isa = PBXGroup;
 			children = (
+				B69DB0F71FF4A0E21C6E3A62 /* ASRFileProbe.swift */,
+				CA332109629C7EBB51CFE43D /* ASRProbeState.swift */,
 				66AEB5E9EFC6A427A0651207 /* IOSSpeechProbeApp.swift */,
+				3A3A26C4B851B818B10CA6DD /* foundation */,
 				A89F9DBB6498D7C483A60075 /* Packages */,
 				B86505ECBA18675A39F67957 /* Products */,
 			);
@@ -62,6 +104,7 @@
 			buildConfigurationList = D60C3740B238F6A83074DF52 /* Build configuration list for PBXNativeTarget "IOSSpeechProbe" */;
 			buildPhases = (
 				C3B92AFCFFFAEDF080739312 /* Sources */,
+				4030279016DFB9012E6A6CA4 /* Resources */,
 				91EFAFCF80CCA5CF277773E0 /* Frameworks */,
 			);
 			buildRules = (
@@ -113,11 +156,24 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		4030279016DFB9012E6A6CA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FF8274179E7087D60B6890D /* asr-fixture.caf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C3B92AFCFFFAEDF080739312 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				204671A189DFB89A9C196090 /* ASRFileProbe.swift in Sources */,
+				EFABF58C0855BBBDD3D7A126 /* ASRProbeState.swift in Sources */,
 				3CEC9601A71FBA9D3C9C8DDA /* IOSSpeechProbeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,8 +189,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X996UV8LC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "仅用于后续语音探针，当前不自动采集。";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "仅检查系统语音识别能力，不上传音频。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "识别固定合成语音文件，强制本机识别，不上传音频。";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -211,8 +266,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X996UV8LC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "仅用于后续语音探针，当前不自动采集。";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "仅检查系统语音识别能力，不上传音频。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "识别固定合成语音文件，强制本机识别，不上传音频。";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

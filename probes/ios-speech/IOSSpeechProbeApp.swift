@@ -8,12 +8,20 @@ import ODAIKitSpeech
 @main
 struct IOSSpeechProbeApp: App {
     @StateObject private var model = SpeechProbeModel()
+    @StateObject private var asr = ASRFileProbe()
     var body: some Scene {
         WindowGroup {
             VStack(spacing: 12) {
                 Text("iOS Speech Probe").font(.title2)
                 Text(model.status).accessibilityIdentifier("speech-status")
                 Text(model.reportPath ?? "").font(.caption).textSelection(.enabled)
+                Divider()
+                Text(asr.status).accessibilityIdentifier("asr-status")
+                Button("Run ASR file probe") { asr.run() }
+                    .disabled(asr.busy).accessibilityIdentifier("asr-run")
+                Button("Cancel ASR") { asr.cancel() }
+                    .disabled(!asr.busy).accessibilityIdentifier("asr-cancel")
+                Text(asr.reportPath ?? "").font(.caption).textSelection(.enabled)
             }.padding().onAppear { model.run() }
         }
     }
@@ -79,9 +87,14 @@ final class SpeechProbeModel: NSObject, ObservableObject {
         case .notDetermined: authorization = "notDetermined"
         @unknown default: authorization = "unknown"
         }
+        #if targetEnvironment(simulator)
+        let environment = "simulator"
+        #else
+        let environment = "device"
+        #endif
         let report: [String: Any] = [
             "schemaVersion": 1, "runId": UUID().uuidString, "device": UIDevice.current.model,
-            "OS": UIDevice.current.systemVersion, "validationStatus": "device",
+            "OS": UIDevice.current.systemVersion, "validationStatus": environment,
             "tts": ["backendId": backend?.backendId ?? "apple.avspeech", "networkBehavior": "unmeasured", "voiceCount": voices.count, "selectedVoice": voice?.identifier ?? "", "selectedLocale": voice?.language ?? "", "status": ttsStatus, "error": ttsError ?? NSNull(), "cancellationStatus": cancellationStatus, "afterCloseStatus": afterCloseStatus],
             "asr": ["backendId": "apple.speech.recognizer", "offlineCapability": recognizer?.supportsOnDeviceRecognition ?? false, "isAvailable": recognizer?.isAvailable ?? false, "authorization": authorization, "transcription": "not-run"]
         ]

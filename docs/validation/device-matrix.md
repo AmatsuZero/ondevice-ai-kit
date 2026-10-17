@@ -21,7 +21,7 @@ Inventory 2026-10-17: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 | Speech distribution consumers | pass compile/lint | P6 Apple speech/face binary consumers and Android contract/TTS/ASR published flavors compile independently; no device runtime claim; [speech evidence](speech-backends.md) |
 | System TTS on modern devices | pass bounded | iPhone 16 Pro Max / TECNO KM9: success, cancel, close probes; offline behavior and quality unmeasured; [speech evidence](speech-backends.md) |
 | Android on-device ASR | unavailable assets | TECNO KM9/API35 service available, en-US error 13 -> MISSING_ASSETS; transcription/cancel/close runtime gates remain unverified |
-| iOS ASR | unverified | Availability query only; microphone input, authorization and actual transcription pending |
+| iOS ASR fixed-file probe | partial device pass | iPhone 16 Pro Max/iOS27.0.1 authorization, forced on-device fixed-file transcription and reentry passed; delayed cancel finished too early, immediate cancel rerun pending. Microphone and SDK integration unverified; [probe evidence](ios-asr-file-probe.md) |
 | Sustained camera/thermal/memory | Android API35 bounded pass; iOS bounded pass | TECNO KM9 前置相机约两分钟，4 个 30 秒样本持续显示人脸结果；iPhone 16 Pro Max 两分钟 UI 用例 4 个 30 秒窗口持续产生成功回调，Activity Monitor 覆盖 96.378 秒、physical footprint 约 79.6–145.3 MB，thermal state 为 Nominal；两端均不覆盖峰值、GPU、能耗、长期背压或完整资源释放，见 [P4 evidence](p4-camera-stability.md) |
 
 No stored device UDIDs or input photos in this report. Update rows only with fresh commands and actual results.

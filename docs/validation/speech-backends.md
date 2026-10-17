@@ -125,4 +125,8 @@ SDK 源码基线为 `a97df90cdd49e7e567e4259d17d745da885f6225`；本包仅补分
 
 本包独立审查结论为 APPROVE，0 findings；复核了生成器幂等、目标依赖图、消费者清理与文档证据边界。实现提交 `58cc5a61ce1d4507efaf0ac3dcc4e2a9566eb8e3` 已同步 GitHub/极狐，脚本再次读取两端 ref 确认 SHA 相等。
 
-P6 仍保留这些边界：Android API35 ASR 的 `en-US` 资源缺失导致 `MISSING_ASSETS`，未完成真实转写/取消生命周期；iOS ASR 与 iOS 26 资源未实测；两端 TTS 的断网行为与主观质量未测；Azure/Microsoft SDK 尚未加入；KMP 语音 Demo 仍待后续工作包。
+P6 仍保留这些边界：Android API35 ASR 的 `en-US` 资源缺失导致 `MISSING_ASSETS`，未完成真实转写/取消生命周期；iOS ASR 取消门禁与 iOS 26 资源仍待补；两端 TTS 的断网行为与主观质量未测；Azure/Microsoft SDK 尚未加入；KMP 语音 Demo 仍待后续工作包。
+
+## iOS ASR 文件探针工作包
+
+P6 继续补充固定合成音频的文件识别探针，操作与证据见 [iOS ASR 固定文件探针](ios-asr-file-probe.md)。它沿用 `apple.speech.recognizer` 的强制 on-device 边界，文件输入不采集麦克风，授权由探针按钮显式触发。iPhone 16 Pro Max / iOS 27.0.1 的首轮报告已确认授权、固定文件转写和重入成功，输入 SHA 与冻结基线一致；150ms 延迟取消前任务已完成，因此不计为取消通过。代码改为任务创建后立即取消，待第二轮报告核验。

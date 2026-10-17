@@ -12,6 +12,10 @@ targets:
     platform: iOS
     sources:
       - IOSSpeechProbeApp.swift
+      - ASRFileProbe.swift
+      - ASRProbeState.swift
+      - path: ../../artifacts/P6IOSASR/fixture/asr-fixture.caf
+        buildPhase: resources
     dependencies:
       - package: OnDeviceAIKit
         product: ODAIKitAppleSpeech
@@ -23,6 +27,5 @@ targets:
         TARGETED_DEVICE_FAMILY: '1,2'
         CODE_SIGN_STYLE: Automatic
         DEVELOPMENT_TEAM: 4X996UV8LC
-        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: '仅检查系统语音识别能力，不上传音频。'
-        INFOPLIST_KEY_NSMicrophoneUsageDescription: '仅用于后续语音探针，当前不自动采集。'
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: '识别固定合成语音文件，强制本机识别，不上传音频。'
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
