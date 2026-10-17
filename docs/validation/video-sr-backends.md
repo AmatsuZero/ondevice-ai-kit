@@ -116,7 +116,7 @@ FFmpeg bicubic 对 reference 的 48 帧保真度为 PSNR `50.651335 dB`、SSIM `
 
 这些数值只描述这条自然样本、当前编码输出和实验色彩约定；不构成模型质量或跨设备性能结论。基线在 SR 之后顺序执行，内存为各自循环的进程常驻内存采样增量，并非独立冷启动、GPU 或真实峰值对比；时间只覆盖缩放调用。逐帧接触表只用于人工核对画面结构，未建立主观质量阈值。SR 传递函数仍未由 Apple 公开约定确认，音轨、Android、最低系统和 SDK/Demo 接入仍未验收。
 
-随后启动 `--cancel-video`，导出的新报告为 `state=cancelled`，未产生新的 MOV；取消前后既有 8 个 MOV 的文件名和 SHA-256 清单完全一致。取消发生在 SR 阶段，不覆盖基线执行期间取消或报告写入失败的故障注入。取消后以 `--terminate-existing` 重新启动 App 并执行 `--process-video`，两路再次完成 48 帧；这证明重启后可再次处理，尚不证明同进程取消后的资源释放与重入。
+随后启动 `--cancel-video`，导出的新报告为 `state=cancelled`，未产生新的 MOV；取消前后既有 8 个 MOV 的文件名和 SHA-256 清单完全一致。取消发生在 SR 阶段，不覆盖基线执行期间取消或报告写入失败的故障注入。取消后以 `--terminate-existing` 重新启动 App 并执行 `--process-video`，两路再次完成 48 帧；这次只证明重启后可再次处理，当时未证明同进程重入或资源释放；后续同进程重入的独立复核见下节。
 
 证据均在忽略目录 `artifacts/P7/natural/`，不进入 Git 或 LFS：
 
@@ -127,3 +127,10 @@ FFmpeg bicubic 对 reference 的 48 帧保真度为 PSNR `50.651335 dB`、SSIM `
 - 抽查第 0/12/24/47 帧的接触表：`visual-20261017/contact-sheet.png`，从左至右为 reference、SR、Core Image bicubic。缩略图可见对应云层和飞鸟，不能替代全分辨率逐帧或时域质量验收。
 
 本次只改验证文档；相关质量/自然素材工具的 15 项 `unittest` 重跑通过，日志为 `tests-evidence-20261017.log`。现有签名的探针 iPhoneOS 构建成功，构建日志为 `artifacts/P7/p7-final-device-build-20261017.log`。用户签名设置与本地身份草稿的 SHA-256 均保持不变。
+
+## 同进程取消后重入复核（2026-10-17）
+
+- 以既有 `--cancel-video` 参数启动 `IOSVideoSRProbe`，取消完成后通过已配置的 iOS UI runner 激活同一进程并点击“处理 Documents 视频”。取消完成及重入后的 `devicectl device info processes` 的 PID 都是 `13670`；两次操作之间没有重新启动或重新安装探针。
+- UI 用例 `VideoSR-same-process-reentry-20261017.xcresult` 为 **1/1 通过、0 失败，7.702 秒**：取消状态后再次处理，最终显示 `Processed 48 frames + baseline`。导出报告 `ios-video-sr-probe-10F22A33-9D8E-4F16-9C07-3D799D337801.json` 的 SR 与 Core Image 两路均为 `success`，输入/输出各 48 帧，输出 1280×720，PTS 单调。
+- 取消前已有 10 个 MOV 的 SHA-256 清单保持不变；取消没有留下部分输出。重入只新增 2 个 MOV，独立 `ffprobe`/FFmpeg 解码均通过：两路均 HEVC、48 帧、1280×720、24 fps，BT.709 primaries/transfer/matrix；摘要见忽略文件 `artifacts/P7/same-process-evidence-20261017.json`。
+- 该结果关闭“取消后同进程再次提交”的缺口，仍只覆盖 SR 阶段取消。基线阶段取消、全量资源/GPU 释放、主观质量阈值、Android/最低系统与 SDK/Demo 接入继续保持未验证。
