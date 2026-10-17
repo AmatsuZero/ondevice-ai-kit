@@ -31,3 +31,15 @@ P7 当前状态：候选比较和探针协议已完成；`tools/probes/video_sr_
 同日再次在同一 iPhone 16 Pro Max / iOS 27.0.1、同一 320×180→1280×720、48 帧输入上运行带内存采样的探针，两次均 `state=success`、输入/输出均 48 帧、PTS 单调。第一次进程常驻内存基线/采样峰值/结束值为 `51,412,992`/`139,182,080`/`139,116,544` B，采样峰值增量 `87,769,088` B，p50/p95 为 `0.092243875`/`0.094348667` 秒。修正采样失败处理并重新构建后，第二次为 `51,544,064`/`138,919,936`/`138,919,936` B，采样峰值增量 `87,375,872` B，p50/p95 为 `0.092315583`/`0.094685708` 秒。这些是两次设备运行的观测值，后续仍需在 P5/P11 的重复 benchmark 中评估稳定性，不能直接作为跨设备预算。
 
 质量复核新增一条更接近设备路径的双三次基线：从同一 H.264/MP4 输入放大，再用 HEVC 编码。对固定 720p FFV1 reference 的 FFmpeg PSNR 分别为 SR 输出 `21.297621 dB`、该基线 `27.140302 dB`。两者编码器（VideoToolbox 与 libx265）、编码参数和颜色处理仍不同，且 `testsrc2` 合成图案未必符合系统 SR 的训练分布；这些数值只说明当前测试条件下观察到差距，不能据此判定模型在真实视频上的质量。质量评估下一步使用自然视频与统一色彩/编码链路，并保留逐帧可视检查。
+
+## 帧配对质量复核
+
+2026-10-17 新增 `tools/probes/video_sr_quality.py`。旧式 FFmpeg framesync 直接对齐 Matroska 的毫秒时间基与设备 MOV 的 1/600 时间基时，实际产生 49 对帧；因此上段旧数值不再作为当前比较依据。新工具先验证两路尺寸、帧数、帧率、严格递增 PTS 和恒定帧间隔，再统一时间基按解码帧序号配对；PSNR 与 SSIM 的逐帧日志数量必须等于源帧数。输出 JSON 保留解码摘要、视频/色彩元数据、FFmpeg 版本和比较口径；缺帧或时序不符直接失败，完全相同帧的无限 PSNR 用 `psnrInfinite=true` 与 `psnrDb=null` 表示。
+
+对现有固定 48 帧资产重新测量：SR 编码输出 PSNR `21.831679 dB` / SSIM `0.907318`，双三次 HEVC 输出 `30.084519 dB` / `0.936982`，两路均只比较 48 对帧。原始 JSON 位于忽略目录 `artifacts/P7/quality-decoded-output.json` 和 `quality-bicubic-decoded-output.json`。这是编码输出相对 reference 的保真度测量；两路缺少完整匹配的色彩声明，编码器与转换路径也未统一，故 `colorComparability` 和 `qualityVerdict` 均为 `unverified`。自然视频、统一色彩/编码链路和可视质量验收仍未完成。
+
+运行方式：
+
+```sh
+python3 tools/probes/video_sr_quality.py reference.mkv candidate.mov > artifacts/P7/quality.json
+```
