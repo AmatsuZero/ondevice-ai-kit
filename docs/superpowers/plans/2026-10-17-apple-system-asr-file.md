@@ -10,7 +10,7 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md` §5 and §7.2; `docs/superpowers/specs/2026-10-16-capability-backends-design.md` §§3–6; this plan is the bounded P6 file-only slice.
 
-**Status:** Approved by the user on 2026-10-17. Tasks 1–2 implemented and verified; Task 3 distribution and consumer validation in progress. Execution is task-by-task with TDD and independent task-scoped review.
+**Status:** Approved by the user on 2026-10-17. Tasks 1–3 implemented and verified; final whole-branch review remains. Execution is task-by-task with TDD and independent task-scoped review.
 
 ## Global Constraints
 
@@ -99,26 +99,28 @@
 - Regenerate: `apple/OnDeviceAIKit.xcodeproj/project.pbxproj` and `apple/OnDeviceAIKit.xcodeproj/xcshareddata/xcschemes/SDKDistribution.xcscheme` through the generator; do not hand-edit generated project files.
 - Modify: `examples/ios-speech-native/ContractConsumer.swift` and `examples/ios-speech-native/SpeechConsumerApp.swift` for compile-only recognition symbol/type probes and explicit Apple backend construction.
 - Modify only if required: `docs/validation/speech-backends.md` (record the file-only SDK boundary and test evidence; do not claim device authorization or microphone validation)
+- Modify: `README.md` and `docs/ROADMAP.md` (correct the current SDK delivery boundary and next validation gates)
+- Test: `tools/tests/test_distribution_project.py` (temporary-project generator regression checks)
 - Do not modify Android/KMP/Demo application behavior or distribution artifacts beyond the necessary generator/project/consumer source updates.
 
-- [ ] **Step 1: Write the failing distribution inclusion check** that asserts `scripts/generate-distribution-project.rb` adds `AppleSpeechRecognizerBackend.swift` to `ODAIKitAppleSpeech` and links `Speech.framework` only to that target.
-- [ ] **Step 2: Run the check before generator changes** and confirm it fails because no Apple Speech framework linkage/ASR source assertion exists.
-- [ ] **Step 3: Update and run `scripts/generate-distribution-project.rb`**. Preserve its sorted source discovery, add an explicit required-source assertion for `Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift`, add `Speech.framework` to `ODAIKitAppleSpeech` only, and regenerate the project/scheme. Re-run the inclusion check and confirm it passes; rerun the generator and assert the project/scheme diff is empty.
-- [ ] **Step 4: Extend the consumer type probes**. Keep `ContractConsumer.swift` limited to `ODAIKitCore` + `ODAIKitSpeech`, constructing the new request/client-facing values without importing `Speech`; make `SpeechConsumerApp.swift` construct `AppleSpeechRecognizerBackend(locale: "en-US")` and typed recognition client without executing recognition.
+- [x] **Step 1: Write the failing distribution inclusion check** that asserts `scripts/generate-distribution-project.rb` adds `AppleSpeechRecognizerBackend.swift` to `ODAIKitAppleSpeech` and links `Speech.framework` only to that target.
+- [x] **Step 2: Run the check before generator changes** and confirm it fails because no Apple Speech framework linkage/ASR source assertion exists.
+- [x] **Step 3: Update and run `scripts/generate-distribution-project.rb`**. Preserve its sorted source discovery, add an explicit required-source assertion for `Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift`, add `Speech.framework` to `ODAIKitAppleSpeech` only, and regenerate the project/scheme. Re-run the inclusion check and confirm it passes; rerun the generator and assert the project/scheme diff is empty.
+- [x] **Step 4: Extend the consumer type probes**. Keep `ContractConsumer.swift` limited to `ODAIKitCore` + `ODAIKitSpeech`, constructing the new request/client-facing values without importing `Speech`; make `SpeechConsumerApp.swift` construct `AppleSpeechRecognizerBackend(locale: "en-US")` and typed recognition client without executing recognition.
 
-- [ ] **Step 5: Run the requested targeted test command**
+- [x] **Step 5: Run the requested targeted test command**
 
   Run: `rtk proxy swift test --package-path apple --filter ODAIKitSpeechTests`
 
   Expected: PASS; record the test count/output in the implementation report.
 
-- [ ] **Step 6: Run the requested unsigned iOS simulator build**
+- [x] **Step 6: Run the requested unsigned iOS simulator build**
 
   Run: `rtk proxy xcodebuild -project apple/OnDeviceAIKit.xcodeproj -scheme SDKDistribution -configuration Debug -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build`
 
   Expected: successful build with `AppleSpeechRecognizerBackend.swift` present in the compile log. An unavailable project/scheme is an unresolved distribution gate; package compilation alone cannot satisfy this step.
 
-- [ ] **Step 7: Run the generated binary consumer type/link probe**
+- [x] **Step 7: Run the generated binary consumer type/link probe**
 
   Package the current source into a fresh, unused artifact directory (the script rejects overwrite), then generate and build that consumer:
 
@@ -130,12 +132,12 @@
 
   Prefix each command with `rtk proxy` (and use `rtk proxy env` for assignments). Build `ContractConsumer.swift` separately with only fresh Core/Speech framework search paths using the existing contract-consumer compile check. Inspect all fresh framework binaries with `otool -L`: the probes must compile the new public symbols, only `ODAIKitAppleSpeech` may directly depend on `Speech.framework`, and Core/Speech must remain free of that dependency. Do not reuse pre-ASR XCFrameworks.
 
-- [ ] **Step 8: Review the diff and `git diff --check`**; ensure no generated audio, credentials, or unrelated worktree files are included.
-- [ ] **Step 9: Record known validation limits**: no unit test or simulator build can prove speech authorization UX, system language assets, real-device transcription quality, microphone/audio-session behavior, network isolation under packet capture, file retention across a real platform release, or iOS 15 hardware support. These remain device-validation follow-ups using a fixed local file and must not be reported as covered by this plan.
-- [ ] **Step 10: Commit the scoped plan implementation**
+- [x] **Step 8: Review the diff and `git diff --check`**; ensure no generated audio, credentials, or unrelated worktree files are included.
+- [x] **Step 9: Record known validation limits**: no unit test or simulator build can prove speech authorization UX, system language assets, real-device transcription quality, microphone/audio-session behavior, network isolation under packet capture, file retention across a real platform release, or iOS 15 hardware support. These remain device-validation follow-ups using a fixed local file and must not be reported as covered by this plan.
+- [x] **Step 10: Commit the scoped plan implementation**
 
   ```bash
-  git add scripts/generate-distribution-project.rb apple/OnDeviceAIKit.xcodeproj examples/ios-speech-native docs/validation/speech-backends.md
+  git add scripts/generate-distribution-project.rb apple/OnDeviceAIKit.xcodeproj examples/ios-speech-native docs/validation/speech-backends.md tools/tests/test_distribution_project.py README.md docs/ROADMAP.md
   git commit -m "feat: add Apple file ASR distribution probes"
   ```
 

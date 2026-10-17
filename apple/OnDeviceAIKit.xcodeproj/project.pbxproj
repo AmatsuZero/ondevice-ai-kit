@@ -10,9 +10,11 @@
 		0F5DBC5BAFFDB06EFFC48CA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		120103EC5E4DE3021FA3ECFF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		12546852456E36AE866B1CEC /* ModelLease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6FD16AB0674085D36A0A2 /* ModelLease.swift */; };
+		184DB45212EBA0B2AF70F10E /* AppleSpeechRecognizerBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9620D6921B51B5D3D408818C /* AppleSpeechRecognizerBackend.swift */; };
 		3864683E61ECC35F3480F5DB /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B53BC264DC0300F3ED7BC /* Availability.swift */; };
 		386ECD1C54E3A04019ABB9C3 /* ModelManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */; };
 		392A21488A3ED4187A20846F /* ModelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568ADE1C602A8407F60A6AE /* ModelStore.swift */; };
+		47E14962DE31F073F3436417 /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A132258ADD09AF9EEF7989FF /* Speech.framework */; };
 		56EAB3977351262E36F2A2FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		5ACD71EFF3D6930A6A3DA1F9 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		5C67CADC416AA204C371C26F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
@@ -105,6 +107,8 @@
 		8598072235A1E65C859DE0DA /* InstallCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InstallCoordinator.swift; path = Sources/ODAIKitModelStore/InstallCoordinator.swift; sourceTree = "<group>"; };
 		8AA6D77F420A4D2DBBD5179F /* LatestFrameQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LatestFrameQueue.swift; path = Sources/ODAIKitCore/LatestFrameQueue.swift; sourceTree = "<group>"; };
 		94ED1EEB7B1AD380F105800B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		9620D6921B51B5D3D408818C /* AppleSpeechRecognizerBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleSpeechRecognizerBackend.swift; path = Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift; sourceTree = "<group>"; };
+		A132258ADD09AF9EEF7989FF /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
 		AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B867539A8E2FCC7317BB20 /* ODAIKitAppleSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitAppleSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelDownloader.swift; path = Sources/ODAIKitModelStore/ModelDownloader.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 				120103EC5E4DE3021FA3ECFF /* Foundation.framework in Frameworks */,
 				81708D72661C142679A66B8B /* ODAIKitCore.framework in Frameworks */,
 				66A985DB8180B8A8749FBB6C /* ODAIKitSpeech.framework in Frameworks */,
+				47E14962DE31F073F3436417 /* Speech.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +219,7 @@
 				5B27A47D43660B453108C4A1 /* FaceDetectionClient.swift */,
 				F24346D636307E745B03B9CE /* SpeechClient.swift */,
 				DB2FECE6D5DC16691BD1A5B0 /* AppleAVSpeechBackend.swift */,
+				9620D6921B51B5D3D408818C /* AppleSpeechRecognizerBackend.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -221,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				65517B19205D7C7FB2D52725 /* iOS */,
+				A132258ADD09AF9EEF7989FF /* Speech.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -522,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9DDCBE016D7228A2E24597C /* AppleAVSpeechBackend.swift in Sources */,
+				184DB45212EBA0B2AF70F10E /* AppleSpeechRecognizerBackend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

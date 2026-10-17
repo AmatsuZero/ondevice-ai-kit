@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 require 'xcodeproj'
 root=File.expand_path('..', __dir__)
+required_asr_source='Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift'
+abort("Missing required source: #{required_asr_source}") unless File.file?(File.join(root,'apple',required_asr_source))
 project_path=File.join(root,'apple/OnDeviceAIKit.xcodeproj')
 project=File.exist?(project_path) ? Xcodeproj::Project.open(project_path) : Xcodeproj::Project.new(project_path)
 names=['ODAIKitCore','ODAIKitModelStore','ODAIKitFace','ODAIKitAppleVision','ODAIKitSpeech','ODAIKitAppleSpeech']
@@ -23,6 +25,14 @@ end
    targets[name].frameworks_build_phase.add_file_reference(targets[dependency].product_reference)
   end
  end
+end
+unless targets['ODAIKitAppleSpeech'].source_build_phase.files.any?{|build| build.file_ref.path==required_asr_source}
+ abort("Required source omitted from ODAIKitAppleSpeech: #{required_asr_source}")
+end
+speech_path='System/Library/Frameworks/Speech.framework'
+speech=project.files.find{|reference| reference.path==speech_path && reference.source_tree=='SDKROOT'} || project.frameworks_group.new_file(speech_path,'SDKROOT')
+unless targets['ODAIKitAppleSpeech'].frameworks_build_phase.files.any?{|build| build.file_ref==speech}
+ targets['ODAIKitAppleSpeech'].frameworks_build_phase.add_file_reference(speech)
 end
 project.save
 scheme=Xcodeproj::XCScheme.new;names.each{|name|scheme.add_build_target(targets[name])};scheme.save_as(project.path,'SDKDistribution',true)

@@ -1,6 +1,6 @@
 # P6 语音后端调研与探针
 
-更新时间：2026-10-16。此阶段只确定后端边界和可验证的最小探针，不把第三方服务凭据、网络可用性或商业许可假设成 SDK 已交付。
+更新时间：2026-10-17。本文记录后端边界、探针与逐步接入的 SDK 模块；各节分别标明代码、分发和真机证据，不把第三方服务凭据、网络可用性或商业许可假设成 SDK 已交付。
 
 ## 统一接口边界
 
@@ -87,6 +87,16 @@ P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端�
 - `AppleAVSpeechBackend` 查询已安装 voice、按 locale/voiceId 选择语音；单任务执行期间拒绝并发，取消调用 `stopSpeaking(.immediate)`，`close` 停止当前 utterance 并拒绝后续选择。
 - 主机与 iOS 通用设备构建通过。iPhone 16 Pro Max / iOS 27.0.1 实机通过 SDK 探针：`apple.avspeech`、193 voices、`en-US` Samantha、`status=success`；长文本取消报告 `cancellationStatus=cancelled`，关闭后调用报告 `afterCloseStatus=closed`。
 - 真实设备报告保存在被忽略的 `artifacts/verification/ios-speech-device-cancel-report.json`，不提交音频或设备用户数据。`networkBehavior=unmeasured`，因此不能据此宣称系统 voice 的离线网络行为。
+
+## 2026-10-17 Apple 文件 ASR SDK 后端
+
+- `ODAIKitSpeech` 公开 `SpeechRecognitionRequest`、最终结果、错误和严格的 `SpeechRecognitionClient`；调用方可用 `.default` 或 `.explicit(backendId)` 选择已安装后端，显式后端不可用时不会静默回退。
+- `ODAIKitAppleSpeech` 提供可选的 `apple.speech.recognizer` 后端。它只接受宿主持有的本地文件，绑定一个 canonical locale，在平台启动前检查文件存在、可读且不是目录；SDK 不请求语音/麦克风权限、不配置 audio session、不删除宿主文件。
+- 后端始终要求 `SFSpeechURLRecognitionRequest.requiresOnDeviceRecognition = true`，并在授权、recognizer availability、on-device 支持任一不满足时返回结构化不可用状态。取消/超时会先结束调用方任务，但平台 task/delegate lease 直到观察到 `.completed` 才释放；宿主用 `drain()` 后再替换或删除输入文件，`close()` 仍是永久关闭。
+- 注入式 fake bridge 覆盖授权与设备状态、强制 on-device、locale 绑定、文件校验、超时/取消/关闭、晚到回调、完成状态与 final 回调竞态、置信度聚合和 drain 后复用。Apple 语音测试 31/31、Swift 全套 58/58 通过；生成器临时工程回归 3/3 通过。
+- 分发工程已把 `AppleSpeechRecognizerBackend.swift` 和 `Speech.framework` 只加入 `ODAIKitAppleSpeech`，并提供 Core+Speech 与 Speech+AppleSpeech 的独立消费者类型探针。上述结果是本地编译/生命周期契约证据，不代表真机授权 UX、系统语音资源、真实转写质量或网络行为已验收。
+- 本轮 unsigned `SDKDistribution` iOS Simulator build 实际编译了新 ASR 文件；全新目录 `artifacts/P6/apple-file-asr/` 完成 device/simulator archive、六个 XCFramework 和 speech binary consumer 构建。只提供新 Core/Speech 搜索路径的契约消费者 typecheck 通过，12 个 device/simulator 框架的 `otool -L` 确认仅 AppleSpeech 直接依赖 `Speech.framework`。工具测试总计 44/44 通过。验证日志保存在该目录的 `verification/`；Xcode 仅报告无 AppIntents 依赖而跳过元数据提取的 warning，没有编译错误。
+- SDK 后端真机路径尚未运行；此前独立文件探针的真机转写/取消结果不替代本后端验收。麦克风、audio session、iOS26 SpeechTranscriber、iOS15 硬件及网络抓包/质量指标保持未测。
 
 ## 2026-10-17 Android 系统 TTS SDK 后端
 
