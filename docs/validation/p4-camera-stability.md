@@ -52,3 +52,10 @@
 - 新增合成 TIFF 的 ImageIO 主机检查，使用与 iOS Photo Picker 相同的 `CGImageSourceCreateThumbnailAtIndex` 参数。EXIF 1/2/6/7 的宽高、左右镜像及旋转方向均通过；合成图仅有黑白半幅，不含个人数据。`sh scripts/check-ios-photo-orientation.sh` 输出 `iOS photo ImageIO orientation checks passed (1, 2, 6, 7)`，并已加入 Apple 验证脚本。
 - 此检查验证解码/方向变换，不替代 PHPicker→Demo→Vision 的真机端到端证据。iPhone 16 Pro Max 上重新运行三个现有 UI 用例：相机连续帧、前后台恢复通过；照片选择用例在系统 Photo Picker 的 `PXGGridLayout-Info` 图片可点击性判定失败，未进入 Demo 推理。尝试仅改变测试点击坐标后，设备 runner 启动超过两分钟未返回用例结果，已停止该 runner 并撤销未验证的测试改动。此前已通过的选图用例证据仍保留，未把本次失败定性为 App 回归。
 - 真机 EXIF 2/6/7、权限设置页恢复和持续资源/热量仍为未验证；本次未改动 SDK 图像处理逻辑或设备相册内容。
+
+## Android API 35 短时持续相机补充（2026-10-17）
+
+- 设备：TECNO KM9，Android 15/API 35。重新安装当前 Debug Demo，授权本项目 CAMERA；使用前置相机，画面中有人脸，未保存摄像头图像或设备标识。UI 显示实际后端 `android.mlkit.face.bundled · offline`。
+- 启动前 `dumpsys meminfo io.ondeviceai.demo` 的 TOTAL PSS 为 150689 KiB；相机开始推理后为 254968 KiB。随后每 30 秒采样一次，共 4 次，PSS 分别为 260815、256966、238050、231722 KiB，UI 每次均显示 `人脸 1` 及本次结果耗时（159、155、141、145 ms），`dumpsys thermalservice` 热状态均为 0。显式停止相机后 UI 不再显示人脸结果，PSS 为 198266 KiB，热状态 0。
+- 原始 meminfo、thermalservice 与 UI hierarchy 保存在被忽略的 `artifacts/P4AndroidSustained/`。这只证明该设备本次约两分钟窗口内没有观察到持续 PSS 增长或热节流；它不是峰值内存、能耗、长期稳定性或 API 26 的验收，单次 UI 结果耗时也不是 P5 benchmark。
+- 同次尝试 `:demo:androidApp:connectedDebugAndroidTest` 时，自定义 TTS instrumentation 返回 `probeStatus=pass`、音频输出 129404 字节，但向 Gradle 报告 0 tests，任务因无法读取测试结果而失败。该运行只作 P6 TTS 探针旁证，不计为 Android 测试套件通过；后续应将探针改为正常测试用例或从 Gradle 测试任务中拆出。

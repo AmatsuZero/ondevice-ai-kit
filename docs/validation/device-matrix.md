@@ -15,7 +15,7 @@ Inventory 2026-10-16: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 | Connected modern iPhone frozen face benchmark | pass bounded | SDK commit `acf3573`; iPhone 16 Pro Max / iOS 27.0.1, 5 warmup + 30 inference, `apple.vision.face`; raw/report JSON retained under ignored `artifacts/P5` |
 | Modern iPhone camera controls + foreground resume | pass bounded | 2 real-device UI tests; explicit stop survives activation; [P4 evidence](p4-camera-stability.md) |
 | Modern Android launch | pass bounded | TECNO KM9 API35 Demo installed and launched; [P4 evidence](p4-camera-stability.md) |
-| Sustained camera/thermal/memory | not-run | Requires device run and recorded input conditions |
+| Sustained camera/thermal/memory | Android API35 bounded pass; iOS unverified | TECNO KM9 前置相机约两分钟，4 个 30 秒样本持续显示人脸结果；PSS 260815→231722 KiB，热状态均为 0；不覆盖峰值、能耗或长期背压，见 [P4 evidence](p4-camera-stability.md) |
 
 No stored device UDIDs or input photos in this report. Update rows only with fresh commands and actual results.
 

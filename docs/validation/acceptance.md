@@ -8,7 +8,7 @@
 | KMP export | Swift bridge typecheck、KMP simulator tests | 跨语言接口编译与注入验证 |
 | iOS Demo | iOS27 模拟器安装/启动、合成空白图输入 | 模拟器启动和照片选择器取消 UI 用例已验、Vision Code9；现代 iPhone 合成空白推理、两个相机及照片选择/取消 UI 用例通过，见 P3/P4 记录；冻结 `acf3573` 的 iPhone 16 Pro Max benchmark 已生成 |
 | Apple 二进制 | 两个平台 archive succeeded；BinaryConsumer 不链接 KMP 的 XCFramework build succeeded | arm64 iOS/simulator 本地编译通过，无发布/签名承诺 |
-| Android | JVM tests、lint、APK、本地 Maven consumer、TECNO KM9 真机 | 统一脚本与本地 Maven consumer 通过；API 35 真机已完成 ML Kit 人脸相机、选图取消、EXIF Orientation 6、权限拒绝/重新授权和单图推理；API 26 下限、持续资源/热量和系统设置页恢复仍未验收 |
+| Android | JVM tests、lint、APK、本地 Maven consumer、TECNO KM9 真机 | 统一脚本与本地 Maven consumer 通过；API 35 真机已完成 ML Kit 人脸相机、选图取消、EXIF Orientation 6、权限拒绝/重新授权和单图推理；另有两分钟相机 PSS/热状态抽样，见 P4；API 26 下限、长期资源/能耗和系统设置页恢复仍未验收 |
 | Benchmark | Python schema/分组/百分位测试；原生 Demo 采集入口 | 工具测试 4/4、iOS 真机和 Android API35 均以冻结 commit 完成 5+30 样本及分组报告；API26/iOS15、峰值内存/能耗仍待完成 |
 | 同步 | 两端 refs 新鲜读取并比较 | 仅已提交分支；未提交文件不属于远端交付 |
 
@@ -16,7 +16,7 @@
 
 ## 尚未验证
 
-iOS15、Android API26 仍需设备单项签收。现代 iPhone 已验启动、合成空白 Vision、连续帧控件、前后台恢复、显式停止和照片选择/取消；旋转/镜像、完整权限及离线场景仍待 P4。现代 Android API35 已完成相机 ML Kit、选图取消、Orientation 6、权限拒绝/重新授权和单图推理；持续摄像头背压、峰值内存、热状态和能耗没有实测。iOS27 模拟器 Vision 的错误不被计为成功空脸结果。没有公开或内部制品仓库发布，没有自动镜像 CI。
+iOS15、Android API26 仍需设备单项签收。现代 iPhone 已验启动、合成空白 Vision、连续帧控件、前后台恢复、显式停止和照片选择/取消；旋转/镜像、完整权限及离线场景仍待 P4。现代 Android API35 已完成相机 ML Kit、选图取消、Orientation 6、权限拒绝/重新授权和单图推理；两分钟相机 PSS/热状态抽样未见异常，持续背压、峰值内存和能耗仍未实测。iOS27 模拟器 Vision 的错误不被计为成功空脸结果。没有公开或内部制品仓库发布，没有自动镜像 CI。
 
 ## 分阶段恢复
 

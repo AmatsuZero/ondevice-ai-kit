@@ -44,7 +44,7 @@
 | P1 SDK 生命周期审查 | 仅 TaskGate、LatestFrameQueue、Vision/MLKit 取消与 close 的资源所有权；不改 Demo UI/安装器 | 独立审查、必要问题 RED→GREEN、对应测试通过；提交后停止 | 已完成，见 P1 审查记录 |
 | P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 已完成，见 [P2 审查](validation/p2-model-store-review.md) |
 | P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 已完成，见 [P3 真机结果](validation/p3-ios-device.md) |
-| P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；无相应设备时保持缺口；提交后停止 | 部分完成：iOS 相机/前后台、照片选择/取消与 Android API35 相机、选图取消、Orientation 6、权限拒绝/重新授权已验，见 [P4 记录](validation/p4-camera-stability.md)；iOS 旋转/镜像等仍待验收 |
+| P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；无相应设备时保持缺口；提交后停止 | 部分完成：iOS 相机/前后台、照片选择/取消与 Android API35 相机、选图取消、Orientation 6、权限拒绝/重新授权及两分钟相机 PSS/热状态抽样已验，见 [P4 记录](validation/p4-camera-stability.md)；iOS 旋转/镜像及长期资源等仍待验收 |
 | P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 部分完成：工具、Apple/Android host 与分发验证、iOS27 和 Android API35 均以冻结 commit 完成 5+30 样本；最低系统和资源测量仍待补 |
 | P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力 | 先完成 speech-backends.md，再选择一个后端最小探针；独立停止 | 部分完成：TTS/插件边界、Android API35 与 iPhone 16 Pro Max 系统 TTS 探针已记录；iOS ASR 设备可用性已查询，但授权与转写、iOS26 资源实测仍待补 |
 | P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 部分完成：iOS 27 真机确认 VideoToolbox 系统 SR 支持 4×，系统模型已处于 ready 并完成 48 帧固定视频链路及取消验证；峰值内存、质量可比性和 Android/最低系统验证仍待补 |
