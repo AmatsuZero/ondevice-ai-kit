@@ -74,6 +74,8 @@ P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试
 
 ## 恢复时的第一步
 
+2026-10-17 P6 后续包：[Apple 文件 ASR 实施计划](superpowers/plans/2026-10-17-apple-system-asr-file.md)已完成自审，待用户审阅后按公共契约、Apple backend 生命周期、可裁剪分发三个 Task 执行；当前仍只有固定文件探针，不能报告 SDK ASR 已交付。公共请求不绑定离线策略，Apple 系统后端单独强制 on-device；取消/超时后的释放以平台 task completed 为边界。
+
 P0、P1、P2、P3 已完成。P1 见 [生命周期审查](validation/p1-lifecycle-review.md)，P2 见 [模型存储审查](validation/p2-model-store-review.md)，P3 见 [真机结果](validation/p3-ios-device.md)。P4 的 iOS 相机/前后台、真机照片选择/取消与 Android API35 相机、照片和部分权限交互已有结果，见 [P4 记录](validation/p4-camera-stability.md)。P5 人脸 benchmark/分发已复核，P6 已补齐现有语音模块的可裁剪分发；[iOS ASR 固定文件探针](validation/ios-asr-file-probe.md)的授权、强制 on-device 转写、立即取消与同进程重入已有成功报告，公共 SDK ASR 后端另包推进。本轮 P4 Debug Orientation 6 合成探针真机成功（Vision 80×160），完整 PHPicker EXIF 2/6/7 和资源释放仍待补；Leaks trace 已采集，尚无可核验泄漏摘要。本地签名可运行 UI runner。iOS15/API26 最低系统项继续等待设备，不以其他验证代替。P10 的[正式设计规格](superpowers/specs/2026-10-17-face-identity-liveness-design.md)已获用户认可，[实施计划](superpowers/plans/2026-10-17-face-identity-liveness.md)已完成并等待用户审阅；本地原始草稿保持未追踪。P7 已补齐基线首帧后取消与同进程重入证据，见 [P7 记录](validation/video-sr-backends.md)。仍按每轮一个工作包推进。
 
 详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。
