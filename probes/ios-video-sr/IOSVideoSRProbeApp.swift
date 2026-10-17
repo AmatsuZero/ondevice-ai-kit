@@ -31,10 +31,12 @@ struct IOSVideoSRProbeApp: App {
             .padding()
             .onAppear {
                 model.inspect()
-                if CommandLine.arguments.contains("--process-video") || CommandLine.arguments.contains("--cancel-video") {
+                if CommandLine.arguments.contains("--process-video") ||
+                    CommandLine.arguments.contains("--cancel-video") ||
+                    CommandLine.arguments.contains("--cancel-baseline-video") {
                     Task {
                         try? await Task.sleep(nanoseconds: 500_000_000)
-                        model.processVideo()
+                        model.processVideo(cancelBaselineAfterFirstFrame: CommandLine.arguments.contains("--cancel-baseline-video"))
                         if CommandLine.arguments.contains("--cancel-video") {
                             try? await Task.sleep(nanoseconds: 250_000_000)
                             model.cancelProcessing()
@@ -77,14 +79,14 @@ final class VideoSRProbeModel: ObservableObject {
 #endif
     }
 
-    func processVideo() {
+    func processVideo(cancelBaselineAfterFirstFrame: Bool = false) {
 #if !targetEnvironment(simulator)
         guard #available(iOS 26.0, *) else { status = "Requires iOS 26"; return }
         guard !isProcessing else { return }
         isProcessing = true
         status = "Processing"
         processingTask = Task {
-            await processVideoOnDevice()
+            await processVideoOnDevice(cancelBaselineAfterFirstFrame: cancelBaselineAfterFirstFrame)
             isProcessing = false
             processingTask = nil
         }
@@ -179,7 +181,7 @@ final class VideoSRProbeModel: ObservableObject {
     }
 
     @available(iOS 26.0, *)
-    private func processVideoOnDevice() async {
+    private func processVideoOnDevice(cancelBaselineAfterFirstFrame: Bool) async {
         guard let configuration = makeConfiguration() else {
             status = "Unavailable"
             return
@@ -205,16 +207,32 @@ final class VideoSRProbeModel: ObservableObject {
                 try? FileManager.default.removeItem(at: baselineOutput)
             }
         }
+        var phase = "superResolution"
+        var baselineProcessedFrameCount = 0
         do {
             let result = try await VideoSRRunner.run(inputURL: inputURL, outputURL: srOutput, configuration: configuration)
-            let baseline = try await VideoSRRunner.runBicubic(inputURL: inputURL, outputURL: baselineOutput)
+            phase = "baseline"
+            let baseline = try await VideoSRRunner.runBicubic(inputURL: inputURL, outputURL: baselineOutput) {
+                baselineProcessedFrameCount += 1
+                if cancelBaselineAfterFirstFrame && baselineProcessedFrameCount == 1 {
+                    self.cancelProcessing()
+                }
+            }
             var combined = result
             combined["baseline"] = baseline
             guard writeReport(combined) else { return }
             completed = true
             status = "Processed \(result["outputFrameCount"] ?? 0) frames + baseline"
         } catch is CancellationError {
-            writeReport(["schemaVersion": 1, "validationStatus": "device", "backendId": "apple.videotoolbox.sr", "state": "cancelled"])
+            let report: [String: Any] = [
+                "schemaVersion": 1,
+                "validationStatus": "device",
+                "backendId": "apple.videotoolbox.sr",
+                "state": "cancelled",
+                "cancelledPhase": phase,
+                "baselineProcessedFrameCount": baselineProcessedFrameCount
+            ]
+            writeReport(report)
             status = "Cancelled"
         } catch {
             writeReport(["schemaVersion": 1, "validationStatus": "device", "backendId": "apple.videotoolbox.sr", "state": "failed", "error": String(describing: error)])

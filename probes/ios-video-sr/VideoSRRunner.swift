@@ -57,11 +57,11 @@ enum VideoSRRunner {
         try await run(inputURL: inputURL, outputURL: outputURL, mode: .superResolution(configuration))
     }
 
-    static func runBicubic(inputURL: URL, outputURL: URL) async throws -> [String: Any] {
-        try await run(inputURL: inputURL, outputURL: outputURL, mode: .bicubic)
+    static func runBicubic(inputURL: URL, outputURL: URL, onFrame: (@MainActor () -> Void)? = nil) async throws -> [String: Any] {
+        try await run(inputURL: inputURL, outputURL: outputURL, mode: .bicubic, onFrame: onFrame)
     }
 
-    private static func run(inputURL: URL, outputURL: URL, mode: ProcessingMode) async throws -> [String: Any] {
+    private static func run(inputURL: URL, outputURL: URL, mode: ProcessingMode, onFrame: (@MainActor () -> Void)? = nil) async throws -> [String: Any] {
         let inputFileSha256 = SHA256.hash(data: try Data(contentsOf: inputURL)).map { String(format: "%02x", $0) }.joined()
         var sourceAttributes: [String: Any] = [:]
         var destinationAttributes: [String: Any] = [:]
@@ -163,6 +163,7 @@ enum VideoSRRunner {
             peakResidentBytes = max(peakResidentBytes, try residentMemoryBytes())
             timestamps.append(sourceFrame.presentationTimeStamp)
             frameCount += 1
+            await onFrame?()
             previousSource = sourceFrame
             previousOutput = destinationFrame
             guard let nextSample = readerOutput.copyNextSampleBuffer() else { break }

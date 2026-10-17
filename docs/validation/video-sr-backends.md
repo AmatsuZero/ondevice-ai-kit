@@ -133,4 +133,13 @@ FFmpeg bicubic 对 reference 的 48 帧保真度为 PSNR `50.651335 dB`、SSIM `
 - 以既有 `--cancel-video` 参数启动 `IOSVideoSRProbe`，取消完成后通过已配置的 iOS UI runner 激活同一进程并点击“处理 Documents 视频”。取消完成及重入后的 `devicectl device info processes` 的 PID 都是 `13670`；两次操作之间没有重新启动或重新安装探针。
 - UI 用例 `VideoSR-same-process-reentry-20261017.xcresult` 为 **1/1 通过、0 失败，7.702 秒**：取消状态后再次处理，最终显示 `Processed 48 frames + baseline`。导出报告 `ios-video-sr-probe-10F22A33-9D8E-4F16-9C07-3D799D337801.json` 的 SR 与 Core Image 两路均为 `success`，输入/输出各 48 帧，输出 1280×720，PTS 单调。
 - 取消前已有 10 个 MOV 的 SHA-256 清单保持不变；取消没有留下部分输出。重入只新增 2 个 MOV，独立 `ffprobe`/FFmpeg 解码均通过：两路均 HEVC、48 帧、1280×720、24 fps，BT.709 primaries/transfer/matrix；摘要见忽略文件 `artifacts/P7/same-process-evidence-20261017.json`。
-- 该结果关闭“取消后同进程再次提交”的缺口，仍只覆盖 SR 阶段取消。基线阶段取消、全量资源/GPU 释放、主观质量阈值、Android/最低系统与 SDK/Demo 接入继续保持未验证。
+- 该结果关闭“取消后同进程再次提交”的缺口，仍只覆盖 SR 阶段取消；后续基线取消复核见下一节。全量资源/GPU 释放、主观质量阈值、Android/最低系统与 SDK/Demo 接入继续保持未验证。
+
+## 基线阶段取消复核（2026-10-17）
+
+- 旧探针 RED 运行接受同一参数但仍正常 `success`；新增确定性取消回调后，iPhone 16 Pro Max / iOS 27.0.1 的 GREEN 报告为 `state=cancelled`、`cancelledPhase=baseline`、`baselineProcessedFrameCount=1`。
+- 取消发生在第一帧双三次结果已 append 后，`VideoSRRunner` 的 `defer` 取消 reader/writer 并移除基线临时输出，外层流程的 `defer` 移除已完成的 SR 输出；基线取消前已有 14 个 MOV 的 SHA-256 清单在取消后完全一致，新增 MOV 数为 0。
+- 取消后的同一进程 UI 重入用例为 **1/1 通过、0 失败，7.759 秒**；`devicectl` 快照显示重入前后探针 PID 都是 `13784`，重入再次显示 `Processed 48 frames + baseline`。仅新增 SR 与基线各一个 MOV：独立 ffprobe/FFmpeg 检查均为 HEVC、1280×720、48 帧、24 fps、BT.709，解码通过；成功报告两路 PTS 均单调。
+- 证据位于忽略目录 `artifacts/P7/baseline-cancel-20261017/`：`red-check.log`、`green-check.log`、`device-build.log`、`evidence.json`、`Reentry.xcresult`、`reentry-test.log` 以及三次 Documents 导出；视频、报告和测试 bundle 不进入 Git/LFS。
+- 快照 `before` 是 RED 运行前，`after-red` 是旧代码正常成功运行后，`after-green` 是新代码基线取消后；GREEN 哈希检查以 `after-red` 为基线，保留 RED 生成的两个旧 MOV。复核命令为 `python3 artifacts/P7/baseline-cancel-20261017/assert_baseline_cancel.py artifacts/P7/baseline-cancel-20261017/after-red artifacts/P7/baseline-cancel-20261017/after-green`。独立审查已按这组快照复跑通过，未发现阻断；Python 工具完整测试 41/41 通过。
+- 本节只证明探针的基线阶段取消、临时文件清理和同进程重入；不证明生产 SDK、全量资源/GPU 释放或主观质量门槛。
