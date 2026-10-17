@@ -18,6 +18,7 @@ class VideoSRValidateTests(unittest.TestCase):
             reference = Path(directory) / "reference-720p.mkv"
             input_four_x = Path(directory) / "input-180p-4x.mkv"
             bicubic_four_x = Path(directory) / "bicubic-720p-4x.mkv"
+            self.assertTrue((Path(directory) / "input-180p-4x.mp4").exists())
             video_sr_validate.validate([reference, input_four_x, bicubic_four_x], scale=4)
 
     def test_decoded_sha256_is_stable_across_separate_mkv_encodes(self):

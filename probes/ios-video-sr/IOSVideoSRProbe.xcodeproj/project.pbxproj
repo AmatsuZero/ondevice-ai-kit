@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28F3BC06E0C2E37B94371141 /* VideoSRRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FE8A4553266F4816F8D61E /* VideoSRRunner.swift */; };
 		75527B2B837B5E96A7F53E9F /* IOSVideoSRProbeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE22E19C3A7936728D8725E0 /* IOSVideoSRProbeApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00FE8A4553266F4816F8D61E /* VideoSRRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSRRunner.swift; sourceTree = "<group>"; };
 		AE22E19C3A7936728D8725E0 /* IOSVideoSRProbeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSVideoSRProbeApp.swift; sourceTree = "<group>"; };
 		CBA51DD2C6B686665C67F908 /* IOSVideoSRProbe.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = IOSVideoSRProbe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -20,6 +22,7 @@
 			isa = PBXGroup;
 			children = (
 				AE22E19C3A7936728D8725E0 /* IOSVideoSRProbeApp.swift */,
+				00FE8A4553266F4816F8D61E /* VideoSRRunner.swift */,
 				8B94505BD314936D19DFB5BD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,6 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75527B2B837B5E96A7F53E9F /* IOSVideoSRProbeApp.swift in Sources */,
+				28F3BC06E0C2E37B94371141 /* VideoSRRunner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

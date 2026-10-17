@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import UIKit
+import AVFoundation
 
 #if !targetEnvironment(simulator)
 import VideoToolbox
@@ -19,12 +20,24 @@ struct IOSVideoSRProbeApp: App {
                     .disabled(model.isInspecting)
                 Button("下载系统模型") { model.download() }
                     .disabled(!model.canDownload)
+                Button("处理 Documents 视频") { model.processVideo() }
+                    .disabled(model.isProcessing)
+                Button("取消处理") { model.cancelProcessing() }
+                    .disabled(!model.isProcessing)
                 Text(model.reportPath ?? "")
                     .font(.caption)
                     .textSelection(.enabled)
             }
             .padding()
-            .onAppear { model.inspect() }
+            .onAppear {
+                model.inspect()
+                if CommandLine.arguments.contains("--process-video") {
+                    Task {
+                        try? await Task.sleep(nanoseconds: 500_000_000)
+                        model.processVideo()
+                    }
+                }
+            }
         }
     }
 }
@@ -35,6 +48,8 @@ final class VideoSRProbeModel: ObservableObject {
     @Published private(set) var reportPath: String?
     @Published private(set) var isInspecting = false
     @Published private(set) var canDownload = false
+    @Published private(set) var isProcessing = false
+    private var processingTask: Task<Void, Never>?
 
     func inspect() {
         guard !isInspecting else { return }
@@ -56,6 +71,26 @@ final class VideoSRProbeModel: ObservableObject {
             }
         }
 #endif
+    }
+
+    func processVideo() {
+#if !targetEnvironment(simulator)
+        guard #available(iOS 26.0, *) else { status = "Requires iOS 26"; return }
+        guard !isProcessing else { return }
+        isProcessing = true
+        status = "Processing"
+        processingTask = Task {
+            await processVideoOnDevice()
+            isProcessing = false
+            processingTask = nil
+        }
+#else
+        status = "Unavailable on simulator"
+#endif
+    }
+
+    func cancelProcessing() {
+        processingTask?.cancel()
     }
 
     private func inspectAvailability() async {
@@ -133,6 +168,37 @@ final class VideoSRProbeModel: ObservableObject {
         case VTSuperResolutionScalerConfiguration.ModelStatus.downloading.rawValue: return "downloading"
         case VTSuperResolutionScalerConfiguration.ModelStatus.ready.rawValue: return "ready"
         default: return "unknown"
+        }
+    }
+
+    @available(iOS 26.0, *)
+    private func processVideoOnDevice() async {
+        guard let configuration = makeConfiguration() else {
+            status = "Unavailable"
+            return
+        }
+        guard configuration.configurationModelStatus == .ready else {
+            writeReport(["schemaVersion": 1, "validationStatus": "device", "backendId": "apple.videotoolbox.sr", "state": "modelNotReady", "modelStatus": modelStatus(configuration.configurationModelStatus.rawValue)])
+            status = "Model not ready"
+            return
+        }
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let inputURL = documents.appendingPathComponent("input-180p-4x.mp4")
+        guard FileManager.default.fileExists(atPath: inputURL.path) else {
+            writeReport(["schemaVersion": 1, "validationStatus": "device", "backendId": "apple.videotoolbox.sr", "state": "inputMissing", "input": inputURL.lastPathComponent])
+            status = "Input missing"
+            return
+        }
+        do {
+            let result = try await VideoSRRunner.run(inputURL: inputURL, outputURL: documents.appendingPathComponent("sr-output-\(UUID().uuidString).mov"), configuration: configuration)
+            writeReport(result)
+            status = "Processed \(result["outputFrameCount"] ?? 0) frames"
+        } catch is CancellationError {
+            writeReport(["schemaVersion": 1, "validationStatus": "device", "backendId": "apple.videotoolbox.sr", "state": "cancelled"])
+            status = "Cancelled"
+        } catch {
+            writeReport(["schemaVersion": 1, "validationStatus": "device", "backendId": "apple.videotoolbox.sr", "state": "failed", "error": String(describing: error)])
+            status = "Failed: \(error.localizedDescription)"
         }
     }
 #endif

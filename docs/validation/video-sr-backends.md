@@ -1,6 +1,6 @@
 # P7 视频超分后端调研
 
-更新时间：2026-10-16。P7 只比较后端边界和一条固定输入链路的探针条件，不把单帧放大或桌面运行结果当作移动端视频超分交付。
+更新时间：2026-10-17。P7 只比较后端边界和一条固定输入链路的探针条件，不把单帧放大或桌面运行结果当作移动端视频超分交付。
 
 ## 候选路线
 
@@ -22,6 +22,6 @@
 
 输入使用 2 秒、24 fps、短边 360 的无音轨视频；记录帧数、时间戳单调性、输出尺寸、解码/模型/编码阶段耗时、峰值内存和取消行为。质量至少保留双三次基线与 SR 输出的 PSNR/SSIM；若模型不适合该输入，记录 `unavailable`，不填代理分数。所有报告按设备、OS、实际后端、模型 revision、delegate 和输入 hash 分组。
 
-P7 当前状态：候选比较和探针协议已完成；`tools/probes/video_sr_fixture.sh` 已生成 48 帧、24 fps、无音轨的 360p 输入、720p reference 和双三次 baseline，并通过帧数/时间戳/尺寸校验。2026-10-17 复核发现 Matroska 每次写入随机标识，旧记录的文件级 SHA 无法用作跨次 fixture 身份；验证器已改为对解码后的 YUV420p 帧序列求 SHA-256。两次独立生成的稳定摘要分别是 reference `5cf853741c9ac22f9da6a23a61f9fedada870fdc7a87591731dfb6dbc3d86bf1`、input `a1cd2682cf78ea244906f631a116d3bda602d077e3734b70aeb182a643b151ed`、bicubic `2a9ec0d0539c7ac253b5016820c56a9df4195b6acfe2fa915e03dfafbb418c95`；均为 1280×720/640×360、48 帧、24 fps、无音轨。此前 baseline 对 reference 的 PSNR=33.404676、SSIM=0.970067，仅作为质量基线，不是 SR 模型结果。尚未选定模型、未引入运行时依赖、未生成移动端实机结果。
+P7 当前状态：候选比较和探针协议已完成；`tools/probes/video_sr_fixture.sh` 已生成 48 帧、24 fps、无音轨的 360p 输入、720p reference 和双三次 baseline，并通过帧数/时间戳/尺寸校验。2026-10-17 复核发现 Matroska 每次写入随机标识，旧记录的文件级 SHA 无法用作跨次 fixture 身份；验证器已改为对解码后的 YUV420p 帧序列求 SHA-256。两次独立生成的稳定摘要分别是 reference `5cf853741c9ac22f9da6a23a61f9fedada870fdc7a87591731dfb6dbc3d86bf1`、input `a1cd2682cf78ea244906f631a116d3bda602d077e3734b70aeb182a643b151ed`、bicubic `2a9ec0d0539c7ac253b5016820c56a9df4195b6acfe2fa915e03dfafbb418c95`；均为 1280×720/640×360、48 帧、24 fps、无音轨。此前 baseline 对 reference 的 PSNR=33.404676、SSIM=0.970067，仅作为质量基线，不是 SR 模型结果。另生成同一 180p 输入的 H.264/MP4 传输副本，供 iOS `AVAssetReader` 使用；质量摘要仍以无损 FFV1 fixture 为准。
 
-2026-10-17 iPhone 16 Pro Max / iOS 27.0.1 签名运行独立 `probes/ios-video-sr` 能力探针。系统报告 `isSupported=true`、revision 1、`supportedScaleFactors=[4]`；原定 640×360→1280×720 的 2× 配置不受支持。改为 320×180→1280×720 的 4× 配置后，返回像素格式 `1380411457`，模型状态 `downloadRequired`、进度 0。原始报告只在被忽略的 `artifacts/P7/device-runs-4x/`，未触发系统模型下载。因此本次证明系统 API 与 4× 配置可查询，不证明模型可运行、输出质量或资源指标。4× fixture 已补齐：输入帧摘要 `9a5470e699904301402aef22d9aff86d358462e80eabee6d095618b70e6fb2bc`，双三次基线摘要 `b18ebdd8b33fb87cd228093ad7b5b320ecad463905964afa2e58c6e9dba23562`；reference 摘要仍为 `5cf853741c9ac22f9da6a23a61f9fedada870fdc7a87591731dfb6dbc3d86bf1`。下一步需由探针的显式按钮下载系统资产，确认 `ready` 后再跑固定 48 帧视频并记录输出、取消、质量和资源；资产不进 Git。
+2026-10-17 iPhone 16 Pro Max / iOS 27.0.1 签名运行独立 `probes/ios-video-sr` 能力探针。系统报告 `isSupported=true`、revision 1、`supportedScaleFactors=[4]`；原定 640×360→1280×720 的 2× 配置不受支持。改为 320×180→1280×720 的 4× 配置后，首次报告模型状态 `downloadRequired`、进度 0；该报告只证明系统 API 与 4× 配置可查询，不证明模型可运行。后续重新读取同一配置时状态变为 `ready`、进度 1（未推断触发方式），随后处理固定 48 帧 H.264/MP4 输入成功，生成可解码的 HEVC/MOV 输出，输出为 1280×720、48 帧、PTS 单调。设备报告记录每帧处理耗时 p50 `0.09339725` 秒、p95 `0.09589062` 秒；取消路径和峰值内存尚未验证。4× fixture 的输入帧摘要为 `9a5470e699904301402aef22d9aff86d358462e80eabee6d095618b70e6fb2bc`，双三次基线摘要为 `b18ebdd8b33fb87cd228093ad7b5b320ecad463905964afa2e58c6e9dba23562`；reference 摘要仍为 `5cf853741c9ac22f9da6a23a61f9fedada870fdc7a87591731dfb6dbc3d86bf1`。SR 输出与双三次基线的质量值暂不并列解读，须先核对两路颜色转换和编码路径是否可比；资产和输出均不进 Git。
