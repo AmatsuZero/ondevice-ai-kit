@@ -93,6 +93,6 @@ P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端�
 - 新增可选 Android 模块 `android:backend-system-tts`，实现 `AndroidTextToSpeechBackend`；模块不进入 Demo 默认运行依赖，Demo instrumentation 仅为验证显式加入。
 - 后端初始化 `TextToSpeech`，只选择已安装且 `isNetworkConnectionRequired=false` 的 voice；按 `locale`/可选 `voiceId` 选择，超过系统输入长度或缺少 voice 时返回结构化错误。`close` 调用 `stop()` + `shutdown()`，注册表关闭后拒绝新任务。
 - TECNO KM9 / Android 15(API 35) instrumentation **1/1 通过**：系统引擎 `com.google.android.tts`，`en-US` 可用，467 voices，原始文件 129404 bytes；通过 SDK 后端的 `sdkBackend=android.text-to-speech`、`sdkVoice=en-US-language`、`sdkStatus=success`，关闭后 `sdkAfterCloseStatus=closed`。
-- 后端新增主线程约束的 `TtsTaskGate`：取消在 `speak` 的 `finally` 中同步执行 `stop()` 并释放 admission，迟到的 `onDone/onStop/onError` 只能匹配原 utterance ID；`close` 对活动 utterance 只调用一次 `stop()`。JVM `TtsTaskGateTest` 覆盖取消后重新进入、迟到回调隔离、并发拒绝、重复取消和正常完成不调用 `stop()`。
-- 取消设备验收仍未通过：本轮短句后续请求探针未在测试超时内返回，已终止 instrumentation，未形成可靠取消证据；报告继续将 `sdkCancellationStatus` 标为 `unmeasured-device`，不能把它当作取消通过。原先长句尝试的崩溃记录也仍不计为通过。
+- 后端新增主线程约束的 `TtsTaskGate`：取消在 `speak` 的 `finally` 中同步执行 `stop()` 并释放 admission，迟到的 `onDone/onStop/onError` 只能匹配原 utterance ID；`close` 对活动 utterance 只调用一次 `stop()`。JVM `TtsTaskGateTest` 覆盖取消后重新进入、迟到回调隔离、并发拒绝、重复取消、正常完成不调用 `stop()` 以及平台 `stop()` 异常时仍执行清理。
+- 取消设备验收已通过：TECNO KM9 / Android 15(API 35) 在取消长句后立即发起短句，阶段日志确认取消协程完成、后续请求成功，instrumentation **1/1 通过**；根因为取消后重复读取 `TextToSpeech.voices` 会阻塞，后端现于初始化时缓存 voice 列表。原先长句尝试的崩溃记录仍不计为通过。
 - Android typed facade 单元测试和 `android:backend-system-tts:assembleRelease` 通过。该模块没有引入 Azure/Microsoft SDK。

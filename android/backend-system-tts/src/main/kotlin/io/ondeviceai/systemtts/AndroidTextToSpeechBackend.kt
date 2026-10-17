@@ -64,7 +64,10 @@ internal inline fun stopAndClear(stop: () -> Unit, clear: () -> Unit) {
 }
 
 /** Owns one Android TextToSpeech engine. All mutable state is confined to the main looper. */
-class AndroidTextToSpeechBackend private constructor(private val engine: TextToSpeech) : SpeechSynthesisBackend {
+class AndroidTextToSpeechBackend private constructor(
+    private val engine: TextToSpeech,
+    private val installedVoices: List<Voice>
+) : SpeechSynthesisBackend {
     override val backendId = "android.text-to-speech"
     override val capability = SpeechCapability.TTS
     private val main = Handler(Looper.getMainLooper())
@@ -89,7 +92,7 @@ class AndroidTextToSpeechBackend private constructor(private val engine: TextToS
     }
 
     override suspend fun availability(): CapabilityAvailability = withContext(Dispatchers.Main.immediate) {
-        val ready = !closed && engine.voices.orEmpty().any { !it.isNetworkConnectionRequired }
+        val ready = !closed && installedVoices.any { !it.isNetworkConnectionRequired }
         CapabilityAvailability(if (ready) CapabilityStatus.AVAILABLE else CapabilityStatus.UNAVAILABLE,
             if (closed) UnavailableReason.CLOSED else if (ready) null else UnavailableReason.MISSING_ASSETS,
             backendId, minOS = "26", offline = true)
@@ -132,7 +135,7 @@ class AndroidTextToSpeechBackend private constructor(private val engine: TextToS
         }
     }
 
-    private fun chooseVoice(request: SpeechSynthesisRequest): Voice? = engine.voices.orEmpty()
+    private fun chooseVoice(request: SpeechSynthesisRequest): Voice? = installedVoices
         .asSequence()
         .filter { !it.isNetworkConnectionRequired && it.locale.toLanguageTag() == Locale.forLanguageTag(request.locale).toLanguageTag() }
         .filter { request.voiceId == null || it.name == request.voiceId }
@@ -155,7 +158,7 @@ class AndroidTextToSpeechBackend private constructor(private val engine: TextToS
             try {
                 val status = withTimeout(15_000) { initialized.await() }
                 if (status != TextToSpeech.SUCCESS) throw SystemTtsError.EngineFailure(status)
-                AndroidTextToSpeechBackend(engine)
+                AndroidTextToSpeechBackend(engine, engine.voices.orEmpty().toList())
             } catch (error: Throwable) {
                 engine.shutdown()
                 throw error
