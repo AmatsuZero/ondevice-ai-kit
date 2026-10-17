@@ -45,19 +45,25 @@
 
 ## 剩余 P4 范围
 
-剩余 P4 范围为 iOS 真机 EXIF 旋转/镜像、权限设置页往返恢复，以及完整的原生桥接/相机资源释放验证。iOS 真机照片选择和取消已通过。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。两端持续资源/热量只保留有边界的抽样证据，不能替代完整资源释放、P5 benchmark 或最低系统验收。
+剩余 P4 范围为 iOS 真机 EXIF 旋转/镜像，以及完整的原生桥接/相机资源释放验证。iOS 真机照片选择和取消已通过；权限设置页往返已有用户手动验收和恢复后的相机自动化复核，详见下节。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。两端持续资源/热量只保留有边界的抽样证据，不能替代完整资源释放、P5 benchmark 或最低系统验收。
 
 ## iOS 相机权限恢复入口（2026-10-17）
 
 - Demo 在相机授权拒绝后显示“打开设置”，点击后调用系统 App Settings URL；从系统设置回到 Demo 时重新查询相机授权，若已授权则清除恢复提示。调试构建提供仅用于测试的模拟拒绝启动参数，不改变真实设备权限。
 - 当前 KMP iOS framework 重建后，iPhone 16 Pro Max / iOS 27.0.1 的 `testCameraPermissionDeniedOffersSettingsRecovery` 在 xcresult 中 1/1 通过、0 失败：按钮出现并打开系统 Settings。iPhone 17 / iOS 27 模拟器同一用例也为 1/1 通过。原始 xcresult 保存在忽略目录 `artifacts/P4PermissionDeviceFinal.xcresult` 与 `artifacts/P4PermissionSimulator.xcresult`。
-- 此用例没有真实关闭或重新开启相机权限，因此 Settings 往返后的授权恢复、再次启动相机仍是 **unverified**。此前照片选择 UI 重跑第一次因过期 KMP framework 缺少 `BridgeBackendSelection` 未编译；重建后第二次 runner/CoreDevice 卡住，未形成新的照片选择结论。EXIF 2/6/7 的 PHPicker→Demo→Vision 真机端到端仍未验证。
+- 此用例没有真实关闭或重新开启相机权限，单独不能证明 Settings 往返后的授权恢复或再次启动相机；随后补充的手动验收与恢复后复核见下方。此前照片选择 UI 重跑第一次因过期 KMP framework 缺少 `BridgeBackendSelection` 未编译；重建后第二次 runner/CoreDevice 卡住，未形成新的照片选择结论。EXIF 2/6/7 的 PHPicker→Demo→Vision 真机端到端仍未验证。
+
+### 真实权限往返：用户手动验收与恢复后复核
+
+- 用户按本次提供的四步操作完成 Settings 关闭本项目相机权限 → Demo 点击相机并确认“打开设置” → Settings 重新开启权限 → Demo 再次启动相机，并回复“已完成”。这部分证据来自用户手动真机验收，不是自动化全流程通过。
+- 随后复跑无模拟拒绝参数的 `testCameraKeepsControlsStableAcrossFrames`，同一 iPhone 16 Pro Max / iOS 27.0.1 的 `P4-post-manual-permission-20261017.xcresult` 为 **1/1 通过、0 失败，10.156 秒**：真实 Vision 成功回调计数持续推进，控件可用并能显式停止。此结果确认手动恢复权限后的推理正常，不单独证明此前开关变化过程。
+- 先前新增的 Settings 自动化草稿在点击开关后仍读到 `1`，未进入真实拒绝状态；该次为失败，不能算权限往返通过。失败后 CoreDevice 诊断收集未完成，保留本地日志 `artifacts/verification/p4-real-permission.log`。已确认本次测试/诊断进程退出，并撤销未通过的测试草稿，不将其纳入常规用例。
 
 ## EXIF 方向路径补充（2026-10-17）
 
 - 新增合成 TIFF 的 ImageIO 主机检查，使用与 iOS Photo Picker 相同的 `CGImageSourceCreateThumbnailAtIndex` 参数。EXIF 1/2/6/7 的宽高、左右镜像及旋转方向均通过；合成图仅有黑白半幅，不含个人数据。`sh scripts/check-ios-photo-orientation.sh` 输出 `iOS photo ImageIO orientation checks passed (1, 2, 6, 7)`，并已加入 Apple 验证脚本。
 - 此检查验证解码/方向变换，不替代 PHPicker→Demo→Vision 的真机端到端证据。iPhone 16 Pro Max 上重新运行三个现有 UI 用例：相机连续帧、前后台恢复通过；照片选择用例在系统 Photo Picker 的 `PXGGridLayout-Info` 图片可点击性判定失败，未进入 Demo 推理。尝试仅改变测试点击坐标后，设备 runner 启动超过两分钟未返回用例结果，已停止该 runner 并撤销未验证的测试改动。此前已通过的选图用例证据仍保留，未把本次失败定性为 App 回归。
-- 真机 EXIF 2/6/7、权限设置页恢复及完整资源释放仍为未验证；本次 EXIF 检查不覆盖持续资源/热量，独立有限抽样见下一节。本次未改动 SDK 图像处理逻辑或设备相册内容。
+- 真机 EXIF 2/6/7 及完整资源释放仍为未验证；权限设置页恢复见前述独立手动验收。本次 EXIF 检查不覆盖持续资源/热量，独立有限抽样见下一节。本次未改动 SDK 图像处理逻辑或设备相册内容。
 
 ## iOS 两分钟持续相机与资源抽样（2026-10-17）
 
