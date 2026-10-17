@@ -5,15 +5,15 @@ Inventory 2026-10-17: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 | Gate | Status | Evidence |
 | --- | --- | --- |
 | iOS15 deployment compilation | pass | NativeConsumer unsigned simulator build, no KMP/MLX dependency |
-| Swift lifecycle/model/geometry | pass | 25 XCTest cases on macOS host; not mobile evidence |
+| Swift lifecycle/model/geometry | pass | 33 XCTest cases on macOS host (P5 rerun); not mobile evidence |
 | Vision blank image | pass on macOS | Real Vision request against synthetic blank CGImage |
 | KMP iOS export + Swift implementation | pass compile | Swift FaceBridge conformance + KMP injected backend test |
 | Android native unit tests | pass JVM/lint/build | 20 JVM tests (SDK18 + Android photo-helper2); shared ViewModel4 on iOS simulator; lint and Demo/native APK build pass; published Maven consumer build pass; bundled detector runtime remains device gate |
 | iOS15 device launch/camera/offline | missing-device | Cannot substitute modern simulator |
 | Android API26 device launch/camera/offline | missing-device | No API26 device; current ADB device is API35 |
 | Connected modern iPhone launch + Vision blank | pass | Signed build/install/launch; real 64x64 synthetic input returns empty faces; [P3 evidence](p3-ios-device.md) |
-| Connected modern iPhone frozen face benchmark | pass bounded | SDK commit `acf3573`; iPhone 16 Pro Max / iOS 27.0.1, 5 warmup + 30 inference, `apple.vision.face`; raw/report JSON retained under ignored `artifacts/P5` |
-| Connected modern Android current face benchmark | pass bounded | SDK commit `74b6bbf`; TECNO KM9 / Android 15/API 35, 5 warmup + 30 inference, `android.mlkit.face.bundled`; raw/report JSON retained under ignored `artifacts/P5/current` |
+| Connected modern iPhone current face benchmark | pass bounded | SDK commit `927b7749`; iPhone 16 Pro Max / iOS 27.0.1, 5 warmup + 30 inference, `apple.vision.face`, p50/p95 `2.432/3.065 ms`; raw/report JSON retained under ignored `artifacts/P5/current` |
+| Connected modern Android current face benchmark | pass bounded | SDK commit `927b7749`; TECNO KM9 / Android 15/API 35, 5 warmup + 30 inference, `android.mlkit.face.bundled`, p50/p95 `10.853538/18.088231 ms`; raw/report JSON retained under ignored `artifacts/P5/current` |
 | Modern iPhone camera controls + foreground resume | pass bounded | 2 real-device UI tests; explicit stop survives activation; [P4 evidence](p4-camera-stability.md) |
 | Modern iPhone photo selection/cancellation + Settings entry | pass bounded | iPhone 16 Pro Max / iOS 27.0.1: five routine interaction tests passed after handling the Photo Picker onboarding card; includes selected image reaching Vision, but excludes EXIF 2/6/7 and actual permission changes in Settings; [P4 evidence](p4-camera-stability.md) |
 | Modern iPhone actual camera permission round trip | pass manual + post-recovery automated check | User confirmed closing camera permission in App Settings, observing the recovery entry, granting permission again and restarting the camera; subsequent real Vision camera test 1/1 passed (10.156 s). The automated Settings-switch draft failed and was removed; [P4 evidence](p4-camera-stability.md) |

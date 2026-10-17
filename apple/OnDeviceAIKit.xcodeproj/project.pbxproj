@@ -14,6 +14,7 @@
 		392A21488A3ED4187A20846F /* ModelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568ADE1C602A8407F60A6AE /* ModelStore.swift */; };
 		56EAB3977351262E36F2A2FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		5ACD71EFF3D6930A6A3DA1F9 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		89345026EFD8CAA05A971D5F /* FaceDetectionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B27A47D43660B453108C4A1 /* FaceDetectionClient.swift */; };
 		954ED3BD7C5A0AB5198E5DAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		98EF1F4F88DC1B9E26717B19 /* LatestFrameQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA6D77F420A4D2DBBD5179F /* LatestFrameQueue.swift */; };
 		9BC228A95B719ABE75213605 /* TaskGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E9B24E203B35917F6D632 /* TaskGate.swift */; };
@@ -70,6 +71,7 @@
 		476B53BC264DC0300F3ED7BC /* Availability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Availability.swift; path = Sources/ODAIKitCore/Availability.swift; sourceTree = "<group>"; };
 		4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageGeometry.swift; path = Sources/ODAIKitFace/ImageGeometry.swift; sourceTree = "<group>"; };
 		585E9B24E203B35917F6D632 /* TaskGate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskGate.swift; path = Sources/ODAIKitCore/TaskGate.swift; sourceTree = "<group>"; };
+		5B27A47D43660B453108C4A1 /* FaceDetectionClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceDetectionClient.swift; path = Sources/ODAIKitFace/FaceDetectionClient.swift; sourceTree = "<group>"; };
 		6568ADE1C602A8407F60A6AE /* ModelStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelStore.swift; path = Sources/ODAIKitModelStore/ModelStore.swift; sourceTree = "<group>"; };
 		858C773C2B112A7F9B06DDF0 /* ODAIKitAppleVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitAppleVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8598072235A1E65C859DE0DA /* InstallCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InstallCoordinator.swift; path = Sources/ODAIKitModelStore/InstallCoordinator.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				40D260AE9C59C8AB60896569 /* FaceObservation.swift */,
 				4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */,
 				0278B7DADAED87DB634BDED5 /* VisionFaceDetector.swift */,
+				5B27A47D43660B453108C4A1 /* FaceDetectionClient.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -348,6 +351,7 @@
 				FBD9C0AAD5764A6B15A15595 /* FaceDetector.swift in Sources */,
 				D1829444BA8E2D81358E27AF /* FaceObservation.swift in Sources */,
 				C2A4456A3D0A6F33529FB316 /* ImageGeometry.swift in Sources */,
+				89345026EFD8CAA05A971D5F /* FaceDetectionClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
