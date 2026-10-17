@@ -10,6 +10,17 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-17-face-identity-liveness-design.md`
 
+**Status:** Specification and implementation plan approved by the user via “同意”; execute task-by-task with TDD and ledgered dependency rulings.
+
+## Preflight dependency amendments (2026-10-17)
+
+- Keep the task IDs stable and execute in dependency order **1 -> 4 -> 2 -> 3 -> 5 -> 6 -> 7 -> 8 -> 9 -> 10 -> 11 -> 12**. Task 2 enrollment and Task 3 gallery publication consume the backend/quality/policy types originally introduced only in Task 4. Task 4 does not consume IdentityStore or IndexStore, so it can precede them.
+- Use `IdentityBackendSelection`, `IdentityBackendRegistration` and `IdentityBackendRegistry` on both platforms. Swift already exports `ODAIKitFace.BackendSelection`; an identity-specific name prevents ambiguity when a host imports both independent products. Reuse Core `TaskTerminal` instead of defining another terminal enum or importing Face.
+- Task 4 owns `IdentityProbe`, backend quality/embedding result types and immutable policy implementations. Task 2 owns `EnrollmentOptions`/`EnrollmentResult` and enrollment persistence/orchestration; Task 5 adds verification and consumes those existing contracts. Task 7 owns its independent PAD frame/event backend and does not infer PAD from identity embeddings.
+- Task 1 codec validation establishes field shape and bounded values. Issuer authenticity, authoritative stored metadata, trusted authorization-provider decisions and persisted epochs are Task 2 checks; successfully decoding a caller-supplied reference/grant never grants authority. Shared epochs use the intersection of Swift/Kotlin integer ranges (`0...Int64.max`), rejecting negative values and overflow.
+- No existing platform secure-key implementation, encrypted identity journal, IndexStore or wall/monotonic clock utility was found in the repository. ModelStore's staged-install and lease patterns are references only; it remains independent of identity persistence.
+- [Production model prerequisite evidence](../../validation/p10-identity-model-selection.md) records license boundaries without choosing a model or downloading weights. Tasks 9–10 remain gates for selected backend, authorized data and calibration; these preflight findings do not approve them.
+
 ## Global Constraints
 
 - Implement the three capabilities independently: `FaceVerification` (1:1), `FaceIdentification` (1:N), and `FaceLiveness` (continuous session); there is no generic `FaceResult` or implicit detection-to-identity path.
@@ -46,7 +57,7 @@
 
 **Interfaces:**
 - Produces equivalent Swift/Kotlin types: `TemplateRef(id:String, embeddingSpaceId:EmbeddingSpaceId, authorizationEpoch:UInt64/Long, revision:String)`, `GalleryRef(id:String, revision:String)`, `CandidateRef(id:String, storeId:String)`, `LivenessProof`, `AuthorizationGrant(grantId, revocationDomainId, scope, purpose, issuedAt, expiresAt, authorizationEpoch, evidenceRef)`, `OwnershipAuthorization`, `BackendSelection`, `TaskTerminal`, `IdentityError`, `EmbeddingSpaceId(supportedCapabilities, backendId, backendVersion, modelBinding, featureFormatVersion, dimension, dtype, endianness, normalization, preprocessRevision, scoreMetric, scoreDirection)`, `ThresholdPolicyRef`, `PADPolicyRef`, and monotonic/wall-clock abstractions.
-- Produces `BackendRegistry<Backend>` with `select(.default|.explicit(id))` and no-fallback semantics; all public errors carry optional resolved backend/model/policy/session metadata only after admission resolves it.
+- Produces `IdentityBackendRegistry<Backend>` with `select(.default|.explicit(id))` via `IdentityBackendSelection` and no-fallback semantics; all public errors carry optional resolved backend/model/policy/session metadata only after admission resolves it.
 
 - [ ] Write failing cross-platform fixture tests for opaque-reference validation, grant scope/purpose/expiry/epoch, `Default`/`Explicit` selection shape, nullable score fields, and every stable error: `backendNotRegistered`, `backendUnavailable`, `unsupportedOption`, `authorizationRequired`, `authorizationExpired`, `authorizationRevoked`, `candidateNotFound`, `candidateRevoked`, `templateNotFound`, `templateRevoked`, `galleryNotFound`, `galleryRevisionGone`, `galleryRevisionConflict`, `builderClosed`, `embeddingSpaceMismatch`, `featureFormatUnsupported`, `reEnrollmentRequired`, `rebuildRequired`, `indexUnavailable`, `indexBuilding`, `thresholdUnverified`, `invalidInput`, `multipleFaces`, `invalidChallenge`, `challengeExpired`, `sessionTimeout`, `busy`, `closed`, and `cancelled`.
 - [ ] Run `rtk proxy swift test --package-path apple --filter ODAIKitIdentityTests` and `rtk proxy ./gradlew :android:identity:testDebugUnitTest`; confirm the new symbols/fixture assertions fail before implementation.
@@ -112,7 +123,7 @@
 - [ ] Re-run tests and record the exact fixture backend IDs/space revisions in `fixtures/contracts/face-identity.json`.
 - [ ] Commit: `rtk git add apple/Sources/ODAIKitIdentity/IdentityBackend.swift apple/Sources/ODAIKitIdentity/TestIdentityBackend.swift apple/Tests/ODAIKitIdentityTests/BackendPolicyTests.swift android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityBackend.kt android/identity/src/main/kotlin/io/ondeviceai/identity/TestIdentityBackend.kt android/identity/src/test/kotlin/io/ondeviceai/identity/BackendPolicyTest.kt fixtures/contracts/face-identity.json && rtk git commit -m "feat: add strict identity backend policy"`.
 
-### Task 5: 1:1 verification and enrollment engine
+### Task 5: 1:1 verification engine consuming enrollment contracts
 
 **Files:**
 - Create: `apple/Sources/ODAIKitIdentity/FaceVerification.swift`
