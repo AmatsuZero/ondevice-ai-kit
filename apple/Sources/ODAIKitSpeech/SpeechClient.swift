@@ -98,3 +98,57 @@ public actor SpeechClient {
         for backend in registrations.values { await backend.close() }
     }
 }
+
+public struct SpeechSynthesisRequest: Sendable, Equatable {
+    public let text: String
+    public let locale: String
+    public let voiceId: String?
+    public init(text: String, locale: String, voiceId: String? = nil) {
+        self.text = text; self.locale = locale; self.voiceId = voiceId
+    }
+}
+
+public struct SpeechSynthesisResult: Sendable, Equatable {
+    public let backendId: String
+    public let voiceId: String?
+    public init(backendId: String, voiceId: String? = nil) {
+        self.backendId = backendId; self.voiceId = voiceId
+    }
+}
+
+public protocol SpeechSynthesisBackend: SpeechBackend {
+    func speak(_ request: SpeechSynthesisRequest) async throws -> SpeechSynthesisResult
+}
+
+/// Typed TTS facade over the same strict backend selection rules.
+public actor SpeechSynthesisClient {
+    private let registry: SpeechClient
+    private let backends: [String: any SpeechSynthesisBackend]
+    public init(defaultBackendId: String, backends: [any SpeechSynthesisBackend]) throws {
+        self.backends = try Self.makeTable(backends)
+        self.registry = try SpeechClient(capability: .tts, defaultBackendId: defaultBackendId,
+                                         registrations: backends.map { SpeechBackendRegistration(capability: .tts, backend: $0) })
+    }
+    public func speak(_ request: SpeechSynthesisRequest,
+                      backend: SpeechBackendSelection = .default) async throws -> SpeechSynthesisResult {
+        let selected = try await registry.select(backend)
+        guard let implementation = backends[selected.backendId] else {
+            throw SpeechClientError.backendNotRegistered(capability: .tts, backendId: selected.backendId)
+        }
+        return try await implementation.speak(request)
+    }
+    public func close() async { await registry.close() }
+    private static func makeTable(_ backends: [any SpeechSynthesisBackend]) throws -> [String: any SpeechSynthesisBackend] {
+        var table: [String: any SpeechSynthesisBackend] = [:]
+        for backend in backends {
+            guard backend.capability == .tts, !backend.backendId.isEmpty else {
+                throw SpeechClientError.invalidRegistration("invalid tts backend")
+            }
+            guard table[backend.backendId] == nil else {
+                throw SpeechClientError.invalidRegistration("duplicate backend: \(backend.backendId)")
+            }
+            table[backend.backendId] = backend
+        }
+        return table
+    }
+}

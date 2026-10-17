@@ -3,12 +3,18 @@ options:
   deploymentTarget:
     iOS: '15.0'
   createIntermediateGroups: true
+packages:
+  OnDeviceAIKit:
+    path: ../../apple
 targets:
   IOSSpeechProbe:
     type: application
     platform: iOS
     sources:
       - IOSSpeechProbeApp.swift
+    dependencies:
+      - package: OnDeviceAIKit
+        product: ODAIKitAppleSpeech
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.speech

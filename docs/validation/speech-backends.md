@@ -80,3 +80,10 @@ P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端�
 - Apple 契约测试 2/2 通过；Android `:android:speech:testDebugUnitTest --tests io.ondeviceai.speech.SpeechClientTest` 通过。当前 Fake 后端只验证选择和生命周期，不能替代系统 TTS/ASR 真机行为。
 
 后续系统后端应分别放入可选模块：`apple.avspeech`、`apple.speech.recognizer`、`android.text-to-speech` 和 `android.speech.recognizer`；Azure/Microsoft 适配器保持独立插件，不进入默认依赖图。
+
+## 2026-10-17 Apple 系统 TTS SDK 后端
+
+- 新增可选 SwiftPM 产品 `ODAIKitAppleSpeech`，实现 `AppleAVSpeechBackend`；默认依赖仍不链接 AVFoundation 语音实现。`SpeechSynthesisClient` 通过 `.default` / `.explicit(id)` 选择后端，显式选择不回退。
+- `AppleAVSpeechBackend` 查询已安装 voice、按 locale/voiceId 选择语音；单任务执行期间拒绝并发，取消调用 `stopSpeaking(.immediate)`，`close` 停止当前 utterance 并拒绝后续选择。
+- 主机与 iOS 通用设备构建通过。iPhone 16 Pro Max / iOS 27.0.1 实机通过 SDK 探针：`apple.avspeech`、193 voices、`en-US` Samantha、`status=success`；长文本取消报告 `cancellationStatus=cancelled`，关闭后调用报告 `afterCloseStatus=closed`。
+- 真实设备报告保存在被忽略的 `artifacts/verification/ios-speech-device-cancel-report.json`，不提交音频或设备用户数据。`networkBehavior=unmeasured`，因此不能据此宣称系统 voice 的离线网络行为。

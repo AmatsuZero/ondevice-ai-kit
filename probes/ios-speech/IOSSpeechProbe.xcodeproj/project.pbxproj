@@ -8,14 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		3CEC9601A71FBA9D3C9C8DDA /* IOSSpeechProbeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AEB5E9EFC6A427A0651207 /* IOSSpeechProbeApp.swift */; };
+		9123C72A96BA1328EDAD15E6 /* ODAIKitAppleSpeech in Frameworks */ = {isa = PBXBuildFile; productRef = 41B65F9D030E9F66B63FB681 /* ODAIKitAppleSpeech */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26DDA6AB685EF539A6C11250 /* apple */ = {isa = PBXFileReference; lastKnownFileType = folder; name = apple; path = ../../apple; sourceTree = SOURCE_ROOT; };
 		59AC4C462EA73785695EDD93 /* IOSSpeechProbe.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = IOSSpeechProbe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66AEB5E9EFC6A427A0651207 /* IOSSpeechProbeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSSpeechProbeApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		91EFAFCF80CCA5CF277773E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9123C72A96BA1328EDAD15E6 /* ODAIKitAppleSpeech in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
+		A89F9DBB6498D7C483A60075 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				26DDA6AB685EF539A6C11250 /* apple */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		B86505ECBA18675A39F67957 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -28,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				66AEB5E9EFC6A427A0651207 /* IOSSpeechProbeApp.swift */,
+				A89F9DBB6498D7C483A60075 /* Packages */,
 				B86505ECBA18675A39F67957 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,6 +62,7 @@
 			buildConfigurationList = D60C3740B238F6A83074DF52 /* Build configuration list for PBXNativeTarget "IOSSpeechProbe" */;
 			buildPhases = (
 				C3B92AFCFFFAEDF080739312 /* Sources */,
+				91EFAFCF80CCA5CF277773E0 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -47,6 +70,7 @@
 			);
 			name = IOSSpeechProbe;
 			packageProductDependencies = (
+				41B65F9D030E9F66B63FB681 /* ODAIKitAppleSpeech */,
 			);
 			productName = IOSSpeechProbe;
 			productReference = 59AC4C462EA73785695EDD93 /* IOSSpeechProbe.app */;
@@ -76,6 +100,9 @@
 			);
 			mainGroup = C73E6691FDDD6A6D0C5D1067;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				87F20B1309B7E71F393A1E20 /* XCLocalSwiftPackageReference "../../apple" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B86505ECBA18675A39F67957 /* Products */;
 			projectDirPath = "";
@@ -283,6 +310,20 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		87F20B1309B7E71F393A1E20 /* XCLocalSwiftPackageReference "../../apple" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../apple;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		41B65F9D030E9F66B63FB681 /* ODAIKitAppleSpeech */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ODAIKitAppleSpeech;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 638C82A74D9366C81450B3B7 /* Project object */;
 }
