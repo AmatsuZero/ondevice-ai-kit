@@ -17,6 +17,10 @@ final class CameraLifecycleUITests: XCTestCase {
         let app = XCUIApplication(); app.launch()
         let select = app.buttons["选择图片"]
         XCTAssertTrue(select.waitForExistence(timeout: 15)); select.tap()
+        let onboardingClose = app.buttons["关闭"].firstMatch
+        if onboardingClose.waitForExistence(timeout: 3) {
+            onboardingClose.tap()
+        }
         let firstPhoto = app.images.matching(identifier: "PXGGridLayout-Info").firstMatch
         XCTAssertTrue(firstPhoto.waitForExistence(timeout: 15), "Photo picker needs a photo on this device")
         firstPhoto.tap()

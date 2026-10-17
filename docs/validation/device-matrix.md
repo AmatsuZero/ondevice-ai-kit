@@ -15,6 +15,7 @@ Inventory 2026-10-17: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 | Connected modern iPhone frozen face benchmark | pass bounded | SDK commit `acf3573`; iPhone 16 Pro Max / iOS 27.0.1, 5 warmup + 30 inference, `apple.vision.face`; raw/report JSON retained under ignored `artifacts/P5` |
 | Connected modern Android current face benchmark | pass bounded | SDK commit `74b6bbf`; TECNO KM9 / Android 15/API 35, 5 warmup + 30 inference, `android.mlkit.face.bundled`; raw/report JSON retained under ignored `artifacts/P5/current` |
 | Modern iPhone camera controls + foreground resume | pass bounded | 2 real-device UI tests; explicit stop survives activation; [P4 evidence](p4-camera-stability.md) |
+| Modern iPhone photo selection/cancellation + Settings entry | pass bounded | iPhone 16 Pro Max / iOS 27.0.1: five routine interaction tests passed after handling the Photo Picker onboarding card; includes selected image reaching Vision, but excludes EXIF 2/6/7 and actual permission changes in Settings; [P4 evidence](p4-camera-stability.md) |
 | Modern Android launch | pass bounded | TECNO KM9 API35 Demo installed and launched; [P4 evidence](p4-camera-stability.md) |
 | Sustained camera/thermal/memory | Android API35 bounded pass; iOS bounded pass | TECNO KM9 前置相机约两分钟，4 个 30 秒样本持续显示人脸结果；iPhone 16 Pro Max 两分钟 UI 用例 4 个 30 秒窗口持续产生成功回调，Activity Monitor 覆盖 96.378 秒、physical footprint 约 79.6–145.3 MB，thermal state 为 Nominal；两端均不覆盖峰值、GPU、能耗、长期背压或完整资源释放，见 [P4 evidence](p4-camera-stability.md) |
 

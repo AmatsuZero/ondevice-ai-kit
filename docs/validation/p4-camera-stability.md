@@ -69,6 +69,12 @@
 - 收口前复核：Apple 主机 XCTest **33/33**，相机生命周期检查 **7 个场景**，ImageIO 方向检查 **1/2/6/7** 通过；Demo 与 UI runner 的 unsigned simulator `build-for-testing` 通过。独立审查指出的低回调门槛、重复停止和停止语义问题已修正；完整资源释放继续列为缺口。原始 xcresult、附件、trace/XML/JSON 和编译日志均留在忽略的 `artifacts/`，不提交设备照片或 trace 大文件。
 - 同日先前完整 UI suite 为 **4/5 通过、1 失败**（`P4-ios-all-20261017.xcresult`），失败发生于系统 Photo Picker 图片 activation point。改为中心坐标点击后 Picker 返回，但等待人脸结果失败（`P4-ios-photo-center-20261017.xcresult`）；坐标改动已撤销。这些失败保留为待排查项，不据此声称本轮照片选择或 EXIF 端到端通过，也不覆盖此前独立选图成功记录。
 
+## Photo Picker 引导卡修复后的交互复测（2026-10-17）
+
+- 失败层级显示 iOS 27 Photo Picker 的“私密访问照片”引导卡覆盖在 `PXGGridLayout-Info` 网格图片上，导致图片存在但不可点击。UI 测试现在只在 3 秒内发现系统 `关闭` 按钮时关闭该引导卡，随后仍必须点击网格图片、返回 Demo 并等待 `人脸 …` 检测结果；没有绕过真实 Picker 或放宽结果断言。
+- 同一 iPhone 16 Pro Max / iOS 27.0.1 上复跑五个非持续交互用例，`P4-ios-interactions-20261017.xcresult` 为 **5/5 通过、0 失败，52.539 秒**：Photo Picker 取消、Photo Picker 选图→Vision、相机控件稳定、前后台恢复/用户停止、权限拒绝后的 Settings 入口。
+- 这次修复证明该设备和 iOS 27.0.1 的选图→Demo→Vision 闭环；不扩展为 EXIF 2/6/7 真机验证，也不证明 Settings 中实际关闭/重新开启权限后的恢复或完整资源释放。
+
 ## Android API 35 短时持续相机补充（2026-10-17）
 
 - 设备：TECNO KM9，Android 15/API 35。重新安装当前 Debug Demo，授权本项目 CAMERA；使用前置相机，画面中有人脸，未保存摄像头图像或设备标识。UI 显示实际后端 `android.mlkit.face.bundled · offline`。
