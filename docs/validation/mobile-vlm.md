@@ -46,4 +46,6 @@ P8 当前状态：候选、许可证、体积、运行平台和证据等级已�
 
 更新后的设备构建再次运行成功：`p9-run-91404738-5192-4A0C-AA8F-D313CE091381.json` 包含 `schemaVersion=1`、唯一 `runId`、设备架构 `iPhone17,2`、`validationStatus=device` 和 OS build `24A446`；首 token 478.301875 ms、总计 997.441792 ms。该结果仍明确记录 `peakMemory=null` / `unmeasured`。
 
-模型不进入 Git 或 LFS。完整 App build、安装、真机图片→文本、取消和重复会话均已有证据；峰值内存测量、质量基准和 Android 第二平台仍未完成，P9 作为单平台探针通过，但不等于完整多平台能力交付。
+模型不进入 Git 或 LFS。完整 App build、安装、真机图片→文本、取消和重复会话均已有证据；本次新增 `ResidentMemorySampler`，在生成会话期间以 10 ms 间隔采样进程 `mach_task_basic_info.resident_size`，成功结果写入 `peakMemory`，状态为 `process-resident-sampled`。该指标不代表 GPU/Metal 或全机峰值。补齐锁定的 MLX Swift 子模块后，iOS 27 模拟器完整 XCTest **16/16** 通过。质量基准和 Android 第二平台仍未完成，P9 作为单平台探针通过不等于完整多平台能力交付。
+
+2026-10-17 使用修订后的签名探针在同一 iPhone 16 Pro Max / iOS 27.0.1 重跑成功：`p9-run-E1E881A2-6E52-490B-B61B-AF44E0E27516.json` 的 `status=success`、`actualBackend=mlx.smolvlm2-500m`，模型/runtime revision 与 manifest 一致，fixture hash 为 `60e52854…b847a606`，输出仍为固定红色方块描述。`firstTokenMs=688.627333`、`totalMs=1343.159917`；进程常驻采样 `peakMemory=1,166,196,736` B，`peakMemoryStatus=process-resident-sampled`。这是单次设备运行的进程常驻观测，不等于 GPU/Metal 或全机峰值，不能直接作为资源预算。

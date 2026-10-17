@@ -1,5 +1,43 @@
 import CryptoKit
 import Foundation
+import Darwin
+
+private final class ResidentMemorySampler: @unchecked Sendable {
+    private let lock = NSLock()
+    private var peakBytes: Int?
+
+    init() { sample() }
+
+    func sample() {
+        guard let bytes = Self.currentResidentBytes() else { return }
+        lock.lock(); defer { lock.unlock() }
+        peakBytes = max(peakBytes ?? bytes, bytes)
+    }
+
+    var peak: Int? {
+        lock.lock(); defer { lock.unlock() }
+        return peakBytes
+    }
+
+    func run() async {
+        while !Task.isCancelled {
+            sample()
+            try? await Task.sleep(for: .milliseconds(10))
+        }
+    }
+
+    private static func currentResidentBytes() -> Int? {
+        var info = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size / MemoryLayout<natural_t>.size)
+        let result = withUnsafeMutablePointer(to: &info) { pointer in
+            pointer.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
+                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+            }
+        }
+        guard result == KERN_SUCCESS else { return nil }
+        return Int(info.resident_size)
+    }
+}
 
 public struct VLMManifest: Codable, Sendable {
     public let modelId: String
@@ -113,6 +151,9 @@ public struct VLMProbe<B: VLMBackend>: Sendable {
         let fixtureHash = SHA256.hash(data: try Data(contentsOf: input)).map { String(format: "%02x", $0) }.joined()
         let clock = ContinuousClock()
         let start = clock.now
+        let memorySampler = ResidentMemorySampler()
+        let memoryTask = Task { await memorySampler.run() }
+        defer { memoryTask.cancel(); memorySampler.sample() }
         do {
             let generation = try await backend.generate(input: input, manifest: manifest)
             try Task.checkCancellation()
@@ -125,9 +166,11 @@ public struct VLMProbe<B: VLMBackend>: Sendable {
             }
             let elapsed = start.duration(to: clock.now)
             let ms = Double(elapsed.components.seconds) * 1000 + Double(elapsed.components.attoseconds) / 1e15
+            memorySampler.sample()
+            let peakMemory = memorySampler.peak
             return VLMRunResult(status: .success, actualBackend: backend.identifier, modelRevision: manifest.modelRevision,
                 runtimeRevision: manifest.runtimeRevision, fixtureHash: fixtureHash, firstTokenMs: generation.firstTokenMs,
-                totalMs: ms, peakMemory: nil, peakMemoryStatus: "unmeasured", cancelled: false, output: generation.output)
+                totalMs: ms, peakMemory: peakMemory, peakMemoryStatus: peakMemory == nil ? "unmeasured" : "process-resident-sampled", cancelled: false, output: generation.output)
         } catch is CancellationError {
             return VLMRunResult(status: .cancelled, actualBackend: backend.identifier, modelRevision: manifest.modelRevision,
                 runtimeRevision: manifest.runtimeRevision, fixtureHash: fixtureHash, firstTokenMs: nil,

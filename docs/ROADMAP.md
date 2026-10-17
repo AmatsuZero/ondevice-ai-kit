@@ -49,7 +49,7 @@
 | P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力 | 先完成 speech-backends.md，再选择一个后端最小探针；独立停止 | 部分完成：TTS/插件边界、Android API35 instrumentation 1/1、on-device ASR 能力查询为 true 与 iPhone 16 Pro Max 系统 TTS 探针已记录；两端独立语音能力注册/严格选择契约已加入，Apple 系统 TTS 可选后端已接入并在 iPhone 16 Pro Max 真机完成成功/取消/关闭验证；Android 系统 TTS SDK 后端已接入并在 TECNO KM9 真机完成成功/关闭验证；取消证据仍未测，ASR 授权/转写、iOS 26 资源实测及两端离线/质量验收仍待补 |
 | P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 部分完成：iOS 27 真机确认 VideoToolbox 系统 SR 支持 4×，系统模型已处于 ready 并完成 48 帧固定视频链路及取消验证；两次进程常驻内存采样已记录，质量可比性和 Android/最低系统验证仍待补 |
 | P8 VLM 调研 | SmolVLM2/huggingsnap、Florence-2、MiniCPM-V及其他指定 checkpoint | mobile-vlm.md 记录许可、平台、体积、内存、证据等级；不同时接入多个模型 | 已完成候选调研与 P9 单路线选择，见 [P8 记录](validation/mobile-vlm.md)；移动端实测归 P9 |
-| P9 VLM 单模型试验 | 根据 P8 选择一个 checkpoint、一个平台、一个 runtime | 固定图像→输出→资源/耗时原始证据；随后另包推进第二平台 | 单平台探针已通过：SmolVLM2 500M-Video-Instruct-mlx + iOS18/MLXVLM；固定资产、模拟器 15/15、签名设备构建、iPhone 16 Pro Max 成功/取消/重复会话均有证据；峰值内存未测，Android 第二平台待后续 |
+| P9 VLM 单模型试验 | 根据 P8 选择一个 checkpoint、一个平台、一个 runtime | 固定图像→输出→资源/耗时原始证据；随后另包推进第二平台 | 单平台探针已通过：SmolVLM2 500M-Video-Instruct-mlx + iOS18/MLXVLM；固定资产、模拟器 16/16、签名设备构建、iPhone 16 Pro Max 成功/取消/重复会话和进程常驻内存采样均有证据；质量基准与 Android 第二平台待后续 |
 | P10 人脸身份/活体设计 | 1:1、1:N、活体分别设计数据与指标 | [face-identity.md](validation/face-identity.md)；阈值/FAR/FRR、授权删除与特征生命周期；独立停止 | 设计草案待审；实现与真实数据/设备验收待后续独立包 |
 | P11 SDK/Demo 最终 benchmark 验收 | 冻结候选 SDK commit、模型 revision、测试输入和设备矩阵；对届时实际交付的每项能力与已接入后端统一运行正确性、质量、延迟、资源、取消和持续运行验证 | 保留逐 run 原始 JSON；生成按设备/OS/能力/后端分组的 p50/p95 与质量报告及一页状态矩阵；逐项标记 pass/fail/unverified/unavailable，列出未达标项和发布结论；停止 | 待各能力实现与分阶段 benchmark 完成后执行 |
 

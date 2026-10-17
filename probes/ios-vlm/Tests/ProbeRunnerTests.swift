@@ -50,6 +50,14 @@ final class ProbeRunnerTests: XCTestCase {
         XCTAssertFalse(result.cancelled)
     }
 
+    func testSuccessfulGenerationRecordsProcessResidentMemorySample() async throws {
+        let result = try await VLMProbe(backend: EmptyDelayBackend()).run(
+            input: try fixture(), manifest: .testVerified)
+        XCTAssertEqual(result.status, .success)
+        XCTAssertNotNil(result.peakMemory)
+        XCTAssertEqual(result.peakMemoryStatus, "process-resident-sampled")
+    }
+
     func testEmptyGenerationIsUnavailable() async throws {
         let result = try await VLMProbe(backend: EmptyBackend()).run(
             input: try fixture(), manifest: .testVerified)
@@ -136,6 +144,14 @@ private struct EmptyBackend: VLMBackend {
     let identifier = "fake"
     func generate(input: URL, manifest: VLMManifest) async throws -> VLMGeneration {
         VLMGeneration(output: " ")
+    }
+}
+
+private struct EmptyDelayBackend: VLMBackend {
+    let identifier = "fake"
+    func generate(input: URL, manifest: VLMManifest) async throws -> VLMGeneration {
+        try await Task.sleep(for: .milliseconds(30))
+        return VLMGeneration(output: "ok")
     }
 }
 
