@@ -13,6 +13,7 @@ Inventory 2026-10-16: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 | Android API26 device launch/camera/offline | missing-device | No API26 device; current ADB device is API35 |
 | Connected modern iPhone launch + Vision blank | pass | Signed build/install/launch; real 64x64 synthetic input returns empty faces; [P3 evidence](p3-ios-device.md) |
 | Connected modern iPhone frozen face benchmark | pass bounded | SDK commit `acf3573`; iPhone 16 Pro Max / iOS 27.0.1, 5 warmup + 30 inference, `apple.vision.face`; raw/report JSON retained under ignored `artifacts/P5` |
+| Connected modern Android current face benchmark | pass bounded | SDK commit `74b6bbf`; TECNO KM9 / Android 15/API 35, 5 warmup + 30 inference, `android.mlkit.face.bundled`; raw/report JSON retained under ignored `artifacts/P5/current` |
 | Modern iPhone camera controls + foreground resume | pass bounded | 2 real-device UI tests; explicit stop survives activation; [P4 evidence](p4-camera-stability.md) |
 | Modern Android launch | pass bounded | TECNO KM9 API35 Demo installed and launched; [P4 evidence](p4-camera-stability.md) |
 | Sustained camera/thermal/memory | Android API35 bounded pass; iOS unverified | TECNO KM9 前置相机约两分钟，4 个 30 秒样本持续显示人脸结果；PSS 260815→231722 KiB，热状态均为 0；不覆盖峰值、能耗或长期背压，见 [P4 evidence](p4-camera-stability.md) |
