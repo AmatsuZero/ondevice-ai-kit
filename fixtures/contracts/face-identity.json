@@ -68,5 +68,9 @@
     "busy": "{\"backendId\":null,\"code\":\"busy\",\"modelBinding\":null,\"policyId\":null,\"sessionId\":null}",
     "closed": "{\"backendId\":null,\"code\":\"closed\",\"modelBinding\":null,\"policyId\":null,\"sessionId\":null}",
     "cancelled": "{\"backendId\":null,\"code\":\"cancelled\",\"modelBinding\":null,\"policyId\":null,\"sessionId\":null}"
+  },
+  "fixtureBackendSpaces": {
+    "system.fixture": "{\"backendId\":\"system.fixture\",\"backendVersion\":\"fixture-1\",\"dimension\":2,\"dtype\":\"float32\",\"endianness\":\"little\",\"featureFormatVersion\":\"1\",\"modelBinding\":{\"id\":\"system.fixture\",\"kind\":\"system\",\"revision\":\"os-build-fixture\"},\"normalization\":\"none\",\"preprocessRevision\":\"fixture-p1\",\"scoreDirection\":\"higherIsBetter\",\"scoreMetric\":\"cosine\",\"supportedCapabilities\":[\"identification\",\"verification\"]}",
+    "optional.fixture": "{\"backendId\":\"optional.fixture\",\"backendVersion\":\"fixture-1\",\"dimension\":2,\"dtype\":\"float32\",\"endianness\":\"little\",\"featureFormatVersion\":\"1\",\"modelBinding\":{\"id\":\"optional.fixture\",\"kind\":\"model\",\"revision\":\"v1\"},\"normalization\":\"none\",\"preprocessRevision\":\"fixture-p1\",\"scoreDirection\":\"higherIsBetter\",\"scoreMetric\":\"cosine\",\"supportedCapabilities\":[\"identification\",\"verification\"]}"
   }
 }
