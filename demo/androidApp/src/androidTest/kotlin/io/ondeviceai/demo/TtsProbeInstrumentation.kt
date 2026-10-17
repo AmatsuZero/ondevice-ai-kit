@@ -6,6 +6,11 @@ import android.os.Bundle
 import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import io.ondeviceai.speech.SpeechSynthesisClient
+import io.ondeviceai.speech.SpeechSynthesisRequest
+import io.ondeviceai.systemtts.AndroidTextToSpeechBackend
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Dispatchers
 import java.io.File
 import java.util.Locale
 import java.util.concurrent.CountDownLatch
@@ -63,6 +68,24 @@ class TtsProbeInstrumentation : Instrumentation() {
             check(synthesisError == null) { synthesisError ?: "TTS synthesis failed" }
             check(output.length() > 44) { "TTS output is empty" }
             result.putLong("outputBytes", output.length())
+            val sdkBackend = runBlocking(Dispatchers.Default) { AndroidTextToSpeechBackend.create(targetContext) }
+            val sdkProbe = runBlocking(Dispatchers.Default) {
+                val client = SpeechSynthesisClient(sdkBackend.backendId, listOf(sdkBackend))
+                val normal = client.speak(SpeechSynthesisRequest("OnDevice AI Kit Android SDK speech probe", "en-US"))
+                val cancellationStatus = "unmeasured-device"
+                val afterCloseProbe = client
+                client.close()
+                val afterCloseStatus = runCatching {
+                    afterCloseProbe.speak(SpeechSynthesisRequest("after close", "en-US"))
+                }.fold({ "unexpected-success" }, { if (it.message == "closed") "closed" else it::class.simpleName ?: "unknown" })
+                Triple(normal, cancellationStatus, afterCloseStatus)
+            }
+            result.putString("sdkBackend", sdkProbe.first.backendId)
+            result.putString("sdkVoice", sdkProbe.first.voiceId)
+            result.putString("sdkStatus", "success")
+            result.putString("sdkCancellationStatus", sdkProbe.second)
+            result.putString("sdkAfterCloseStatus", sdkProbe.third)
+            check(sdkProbe.third == "closed") { "SDK close not enforced: ${sdkProbe.third}" }
             result.putString("asrOnDeviceAvailability", if (Build.VERSION.SDK_INT >= 31) {
                 SpeechRecognizer.isOnDeviceRecognitionAvailable(targetContext).toString()
             } else "requiresApi31")

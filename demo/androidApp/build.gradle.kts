@@ -15,4 +15,6 @@ dependencies {
  implementation(project(":demo:shared"));implementation(project(":kmp-binding"));implementation(project(":android:backend-mlkit"))
  implementation("androidx.activity:activity-compose:1.12.4")
  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+ androidTestImplementation(project(":android:backend-system-tts"))
+ androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 }

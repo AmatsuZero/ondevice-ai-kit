@@ -53,3 +53,25 @@ class SpeechClient(val capability: SpeechCapability, private val defaultBackendI
     }
     suspend fun close() { if (closed) return; closed = true; table.values.forEach { it.close() } }
 }
+
+data class SpeechSynthesisRequest(val text: String, val locale: String, val voiceId: String? = null)
+data class SpeechSynthesisResult(val backendId: String, val voiceId: String? = null)
+interface SpeechSynthesisBackend : SpeechBackend {
+    suspend fun speak(request: SpeechSynthesisRequest): SpeechSynthesisResult
+}
+
+/** Typed TTS facade over the capability registry; explicit IDs never fall back. */
+class SpeechSynthesisClient(defaultBackendId: String, backends: List<SpeechSynthesisBackend>) {
+    private val registry = SpeechClient(
+        SpeechCapability.TTS, defaultBackendId,
+        backends.map { SpeechBackendRegistration(SpeechCapability.TTS, it) }
+    )
+    private val table = backends.associateBy { it.backendId }
+    init { require(backends.map { it.backendId }.toSet().size == backends.size) }
+    suspend fun speak(request: SpeechSynthesisRequest, selection: SpeechBackendSelection = SpeechBackendSelection.Default): SpeechSynthesisResult {
+        require(request.text.isNotEmpty()) { "empty text" }
+        val descriptor = registry.select(selection)
+        return table.getValue(descriptor.backendId).speak(request)
+    }
+    suspend fun close() = registry.close()
+}

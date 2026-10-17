@@ -87,3 +87,11 @@ P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端�
 - `AppleAVSpeechBackend` 查询已安装 voice、按 locale/voiceId 选择语音；单任务执行期间拒绝并发，取消调用 `stopSpeaking(.immediate)`，`close` 停止当前 utterance 并拒绝后续选择。
 - 主机与 iOS 通用设备构建通过。iPhone 16 Pro Max / iOS 27.0.1 实机通过 SDK 探针：`apple.avspeech`、193 voices、`en-US` Samantha、`status=success`；长文本取消报告 `cancellationStatus=cancelled`，关闭后调用报告 `afterCloseStatus=closed`。
 - 真实设备报告保存在被忽略的 `artifacts/verification/ios-speech-device-cancel-report.json`，不提交音频或设备用户数据。`networkBehavior=unmeasured`，因此不能据此宣称系统 voice 的离线网络行为。
+
+## 2026-10-17 Android 系统 TTS SDK 后端
+
+- 新增可选 Android 模块 `android:backend-system-tts`，实现 `AndroidTextToSpeechBackend`；模块不进入 Demo 默认运行依赖，Demo instrumentation 仅为验证显式加入。
+- 后端初始化 `TextToSpeech`，只选择已安装且 `isNetworkConnectionRequired=false` 的 voice；按 `locale`/可选 `voiceId` 选择，超过系统输入长度或缺少 voice 时返回结构化错误。`close` 调用 `stop()` + `shutdown()`，注册表关闭后拒绝新任务。
+- TECNO KM9 / Android 15(API 35) instrumentation **1/1 通过**：系统引擎 `com.google.android.tts`，`en-US` 可用，467 voices，原始文件 129404 bytes；通过 SDK 后端的 `sdkBackend=android.text-to-speech`、`sdkVoice=en-US-language`、`sdkStatus=success`，关闭后 `sdkAfterCloseStatus=closed`。
+- 同次设备尝试长句取消时 instrumentation 进程崩溃，未形成可靠取消证据；当前报告将 `sdkCancellationStatus` 标为 `unmeasured-device`，不能把它当作取消通过。后续应使用可注入的 TTS driver 或独立短句队列探针复现取消竞态。
+- Android typed facade 单元测试和 `android:backend-system-tts:assembleRelease` 通过。该模块没有引入 Azure/Microsoft SDK。
