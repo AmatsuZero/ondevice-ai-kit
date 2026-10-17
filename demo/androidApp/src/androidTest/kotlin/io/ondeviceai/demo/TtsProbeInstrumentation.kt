@@ -1,7 +1,9 @@
 package io.ondeviceai.demo
 
 import android.app.Instrumentation
+import android.os.Build
 import android.os.Bundle
+import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import java.io.File
@@ -61,6 +63,9 @@ class TtsProbeInstrumentation : Instrumentation() {
             check(synthesisError == null) { synthesisError ?: "TTS synthesis failed" }
             check(output.length() > 44) { "TTS output is empty" }
             result.putLong("outputBytes", output.length())
+            result.putString("asrOnDeviceAvailability", if (Build.VERSION.SDK_INT >= 31) {
+                SpeechRecognizer.isOnDeviceRecognitionAvailable(targetContext).toString()
+            } else "requiresApi31")
             result.putString("probeStatus", "pass")
             sendStatus(0, Bundle(test).apply { putString("stream", "TTS probe passed") })
         } catch (error: Throwable) {

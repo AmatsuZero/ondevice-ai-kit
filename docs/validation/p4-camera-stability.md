@@ -58,4 +58,4 @@
 - 设备：TECNO KM9，Android 15/API 35。重新安装当前 Debug Demo，授权本项目 CAMERA；使用前置相机，画面中有人脸，未保存摄像头图像或设备标识。UI 显示实际后端 `android.mlkit.face.bundled · offline`。
 - 启动前 `dumpsys meminfo io.ondeviceai.demo` 的 TOTAL PSS 为 150689 KiB；相机开始推理后为 254968 KiB。随后每 30 秒采样一次，共 4 次，PSS 分别为 260815、256966、238050、231722 KiB，UI 每次均显示 `人脸 1` 及本次结果耗时（159、155、141、145 ms），`dumpsys thermalservice` 热状态均为 0。显式停止相机后 UI 不再显示人脸结果，PSS 为 198266 KiB，热状态 0。
 - 原始 meminfo、thermalservice 与 UI hierarchy 保存在被忽略的 `artifacts/P4AndroidSustained/`。这只证明该设备本次约两分钟窗口内没有观察到持续 PSS 增长或热节流；它不是峰值内存、能耗、长期稳定性或 API 26 的验收，单次 UI 结果耗时也不是 P5 benchmark。
-- 同次运行的 TTS instrumentation 已改为向 Android 测试平台报告 1 个可发现的测试；`connectedDebugAndroidTest` 在 TECNO KM9 上显示 **1/1 通过、0 失败**，probe status 为 pass，`en-US` 可用并生成 129404 字节音频。该测试仍只验证设备 TTS 探针，不代表 ASR 或离线网络行为。
+- 同次运行的语音 instrumentation 已改为向 Android 测试平台报告 1 个可发现的测试；`connectedDebugAndroidTest` 在 TECNO KM9 上显示 **1/1 通过、0 失败**，probe status 为 pass，`en-US` 可用并生成 129404 字节音频；API 35 的 on-device ASR 能力查询返回 `true`。该测试不代表 ASR 已授权、完成转写或 TTS/ASR 的离线网络行为。
