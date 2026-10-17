@@ -99,8 +99,31 @@ python3 tools/probes/natural_video_fixture.py prepare --assume-bt709 \
 
 FFmpeg bicubic 对 reference 的 48 帧保真度为 PSNR `50.651335 dB`、SSIM `0.997509`，报告在 `artifacts/P7/natural/quality-bicubic.json`。首帧已目视核对为真实天空/云层/飞鸟；画面以平滑天空为主，且原片已有压缩损失，这个小样本不能代表高纹理自然视频或模型质量。它与设备 Core Image baseline 也不是同一实现，不把该分数直接并列为 SR 胜负。
 
-iPhone 再次查询仍为 unavailable，因此自然视频的设备 SR/CI 双路对照、逐帧可视质量和新增双路取消依然未验收。`qualityVerdict` 保持 unverified；后续还需更有纹理的实拍样本和可确认的源色彩。
+在该下载/制备工作包验收时，iPhone 再次查询仍为 unavailable，自然视频的设备 SR/CI 双路对照、逐帧可视质量和新增双路取消尚未验收；后续设备结果见下一节。`qualityVerdict` 保持 unverified；后续还需更有纹理的实拍样本和可确认的源色彩。
 
 本包 Python 工具完整测试 41/41 通过（自然 fixture 13 项），日志在 `artifacts/P7/natural/tools-tests-final.log`；`py_compile` 与 `git diff --check` 通过。独立审查指出的 SHA-256 固定/制备源绑定、发布竞态和中断清理测试已修正并复核。SDK/探针 App 源码本包未改，未将历史设备构建视为新自然视频的设备验收。
 
 后续复核发现 prepare 的标准输出混入 validate 诊断文本，现通过 validate 的 quiet 选项让 CLI 只输出一个 JSON 报告。新增真实 CLI 子进程回归先复现 JSON 解析失败、修正后通过；完整工具测试已重跑为上述 41/41。
+
+## 自然视频 iPhone 对照与取消复核
+
+2026-10-17 在同一 iPhone 16 Pro Max / iOS 27.0.1 上完成自然素材的双路真机运行。输入是固定 Common swifts fixture 的 BT.709 实验约定传输副本，文件 SHA-256 为 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`。VideoToolbox SR 与 Core Image bicubic 均将 320×180 放大到 1280×720，输入/输出 48 帧、24 fps、PTS 单调；独立 ffprobe 确认两路 MOV 为 HEVC、YUV420p、tv range、BT.709 primaries/transfer/matrix。质量工具按解码帧序号配对 48 帧，结果仍标记 `qualityVerdict=unverified`：
+
+| 输出 | PSNR dB | SSIM | 每帧缩放 p50 / p95 秒 | 常驻内存采样峰值增量 |
+| --- | ---: | ---: | ---: | ---: |
+| VideoToolbox SR | 36.776212 | 0.979250 | 0.093611 / 0.096591 | 87,883,776 B |
+| Core Image bicubic | 38.872866 | 0.983506 | 0.001502 / 0.001705 | 475,136 B |
+
+这些数值只描述这条自然样本、当前编码输出和实验色彩约定；不构成模型质量或跨设备性能结论。基线在 SR 之后顺序执行，内存为各自循环的进程常驻内存采样增量，并非独立冷启动、GPU 或真实峰值对比；时间只覆盖缩放调用。逐帧接触表只用于人工核对画面结构，未建立主观质量阈值。SR 传递函数仍未由 Apple 公开约定确认，音轨、Android、最低系统和 SDK/Demo 接入仍未验收。
+
+随后启动 `--cancel-video`，导出的新报告为 `state=cancelled`，未产生新的 MOV；取消前后既有 8 个 MOV 的文件名和 SHA-256 清单完全一致。取消发生在 SR 阶段，不覆盖基线执行期间取消或报告写入失败的故障注入。取消后以 `--terminate-existing` 重新启动 App 并执行 `--process-video`，两路再次完成 48 帧；这证明重启后可再次处理，尚不证明同进程取消后的资源释放与重入。
+
+证据均在忽略目录 `artifacts/P7/natural/`，不进入 Git 或 LFS：
+
+- 首次双路成功：`device-pair-20261017/ios-video-sr-probe-A579B9E7-6B0E-4934-B0D8-5AE4DAD8A0B2.json`。
+- 质量：`quality-device-sr-20261017.json`、`quality-device-ci-20261017.json`。
+- 取消及既有文件导出：`device-cancel-20261017/ios-video-sr-probe-0B838A78-CFE6-459E-8742-3588121C7D15.json`。
+- 重启后成功：`device-reentry-20261017/ios-video-sr-probe-A4622B0E-F5BC-4123-B040-800CE2A95BF0.json`。
+- 抽查第 0/12/24/47 帧的接触表：`visual-20261017/contact-sheet.png`，从左至右为 reference、SR、Core Image bicubic。缩略图可见对应云层和飞鸟，不能替代全分辨率逐帧或时域质量验收。
+
+本次只改验证文档；相关质量/自然素材工具的 15 项 `unittest` 重跑通过，日志为 `tests-evidence-20261017.log`。现有签名的探针 iPhoneOS 构建成功，构建日志为 `artifacts/P7/p7-final-device-build-20261017.log`。用户签名设置与本地身份草稿的 SHA-256 均保持不变。
