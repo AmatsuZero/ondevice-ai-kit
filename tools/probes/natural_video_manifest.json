@@ -1,0 +1,22 @@
+{
+  "name": "common-swifts-hubala-residetials",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/5/50/Common_swifts._Hubala_residetials_in_Tomaszow_Mazowiecki%2C_Lodz_Voivodeship%2C_Poland%2C_CC0.ogv",
+  "bytes": 838446,
+  "sourceSha1": "1f4e81afff673d66e690008d337ecb81cc37e0d2",
+  "license": "Public domain dedication (PD-self)",
+  "attribution": "WrS.tm.pl (Commons User:WrS.tm.pl)",
+  "sourcePage": "https://commons.wikimedia.org/wiki/File:Common_swifts._Hubala_residetials_in_Tomaszow_Mazowiecki,_Lodz_Voivodeship,_Poland,_CC0.ogv",
+  "sourceDescription": "Author's own recording of common swifts in flight; captured 2019-07-27 in Tomaszow Mazowiecki, Poland.",
+  "sourceColor": "unspecified in original; preparation requires explicit --assume-bt709 experimental interpretation",
+  "prepare": {
+    "startSeconds": 0,
+    "durationSeconds": 2,
+    "fps": 24,
+    "frames": 48,
+    "input": "320x180",
+    "reference": "1280x720",
+    "audio": "removed"
+  },
+  "sourceSha256": "29cd840505e5b4e4a981888b3752c15f47e3801481a7eba7be4b46d7339f9f0b",
+  "licenseEvidence": "Commons page wikitext: source={{own}}, author=User:WrS.tm.pl, {{PD-self}}; filename also says CC0"
+}

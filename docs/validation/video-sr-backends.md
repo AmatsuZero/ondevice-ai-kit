@@ -72,3 +72,33 @@ sh tools/probes/video_sr_fixture.sh artifacts/P7/color-pair
 Python 工具测试 28/28 通过，新增 fixture 测试覆盖默认输出的尺寸/色彩/帧时序和 H.264 传输副本的解码像素一致性。独立审查发现并修正默认 fixture 不匹配输入门槛、报告失败被成功状态覆盖，以及最后一次内存采样前过早保留输出的问题；最终修订的现有签名 iPhoneOS 构建通过。手机在最终重跑前变为 unavailable，因此这两处失败路径的故障注入和新增双路流程的取消设备复核仍待补，旧版单路取消证据继续保留其原范围。
 
 当前只证明实验约定下两路色彩/编码路径可核对，`qualityVerdict` 仍为 `unverified`。Apple 模型最适合的传递函数、自然视频与逐帧可视质量、音轨保留、Android、最低系统和 SDK/Demo 接入仍未验收；不能用这些合成图案分数下最终模型质量结论。
+
+## 自然视频下载与固定制备
+
+2026-10-17 新增 `tools/probes/natural_video_manifest.json` 与 `natural_video_fixture.py`，固定一个公共领域实拍小样本：Commons 的 [Common swifts](https://commons.wikimedia.org/wiki/File:Common_swifts._Hubala_residetials_in_Tomaszow_Mazowiecki,_Lodz_Voivodeship,_Poland,_CC0.ogv)，作者 `User:WrS.tm.pl`，页面 wikitext 声明 own work 和 `PD-self`（公共领域奉献；文件名同时写有 CC0）。原片为 1280×720、30 fps、6 秒 Theora 视频，另有 Vorbis 音轨，838,446 B。下载时与上游 SHA-1、固定字节数一致，独立 `shasum` 复核 SHA-256 为 `29cd840505e5b4e4a981888b3752c15f47e3801481a7eba7be4b46d7339f9f0b`，现已写入 manifest。媒体与原始 JSON 只在忽略目录 `artifacts/P7/natural/`，不进入 Git/LFS。
+
+原片 FFprobe **没有** primaries、transfer、matrix、range 声明。默认 prepare 因此拒绝；本次显式使用 `--assume-bt709`，将未声明字段按 limited-range SDR BT.709 解释并在报告中记为 `colorBasis=assumed-bt709-for-unspecified-source`。这是一条可复现的实验约定，不证明拍摄/上游编码时的真实色彩，也不构成 HDR 转换。即使传该参数，已知 HDR 或其他冲突色彩标签仍会被拒绝。
+
+```sh
+python3 tools/probes/natural_video_fixture.py fetch \
+  tools/probes/natural_video_manifest.json artifacts/P7/natural/source.ogv
+python3 tools/probes/natural_video_fixture.py prepare --assume-bt709 \
+  --manifest tools/probes/natural_video_manifest.json \
+  artifacts/P7/natural/source.ogv artifacts/P7/natural/prepared-verified
+```
+
+`fetch` 流式下载，固定大小、SHA-1、SHA-256 全部匹配后才以不覆盖方式发布；同名有效资产可离线复用，无效已有资产保留并报错。HTTP 429/网络错误直接失败并清理临时文件，遵守站点 Retry-After 后重跑，不循环刷请求。`prepare` 在处理前后核验 source 与 manifest，一律从首帧开始，30→24 fps，固定前 48 帧、移除音轨，产生 FFV1 reference/180p input/bicubic 以及与 180p 解码像素相同的无损 H.264 MP4 传输副本。先在临时目录生成并验证全部文件，再独占创建目标目录逐项发布，最后发布 `fixture.json` 作为完成标志；消费者必须要求该报告存在。目标目录、symlink 或发布竞态均不能被覆盖。
+
+本次自然素材验证通过：1280×720 reference / 320×180 input / 1280×720 bicubic 均 48 帧、24 fps、无音轨，PTS 从零开始且恒定帧间隔，四项输出色彩标签均为 BT.709/tv。MP4 与 MKV input 的解码帧摘要一致。FFmpeg 版本为 9.0.2；容器文件摘要会受 muxer 元数据影响，跨次 fixture 身份仍使用解码帧摘要：
+
+| 资产 | 解码 YUV420p SHA-256 |
+| --- | --- |
+| reference | `ede2e6a54da3d74fbe4f906d05d8781468a232614e8ab956f865d7d096264d87` |
+| 180p input（MKV/MP4） | `ac21f5f140376567324e592b98b7c1a2dde3731c8a6b4d88a775781cf86eab3e` |
+| FFmpeg bicubic | `406b5ac031aba645cd0009258c4e69bbcbfdc8bc72b8d63d22a2a7c6d4cf709a` |
+
+FFmpeg bicubic 对 reference 的 48 帧保真度为 PSNR `50.651335 dB`、SSIM `0.997509`，报告在 `artifacts/P7/natural/quality-bicubic.json`。首帧已目视核对为真实天空/云层/飞鸟；画面以平滑天空为主，且原片已有压缩损失，这个小样本不能代表高纹理自然视频或模型质量。它与设备 Core Image baseline 也不是同一实现，不把该分数直接并列为 SR 胜负。
+
+iPhone 再次查询仍为 unavailable，因此自然视频的设备 SR/CI 双路对照、逐帧可视质量和新增双路取消依然未验收。`qualityVerdict` 保持 unverified；后续还需更有纹理的实拍样本和可确认的源色彩。
+
+本包 Python 工具完整测试 40/40 通过（自然 fixture 12 项），日志在 `artifacts/P7/natural/tools-tests-final.log`；`py_compile` 与 `git diff --check` 通过。独立审查指出的 SHA-256 固定/制备源绑定、发布竞态和中断清理测试已修正并复核。SDK/探针 App 源码本包未改，未将历史设备构建视为新自然视频的设备验收。
