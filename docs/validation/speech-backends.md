@@ -57,7 +57,7 @@ Microsoft 官方文档说明 Speech SDK 支持 Android、iOS 和 REST 路线；�
 
 ## 探针结果
 
-`tools/probes/native_tts_probe.sh` 是宿主机探针：使用 macOS 内置 `say` 生成临时 AIFF，再用 `afinfo` 读取音频格式，退出时删除文件。`tools/probes/apple_avspeech_probe.swift` 进一步直接编译 AVFoundation，枚举 180 个系统 voice 并完成 `AVSpeechSynthesizer` 短句合成。两者只验证 host/API 可探测性。`demo/androidApp/src/androidTest/.../TtsProbeInstrumentation.kt` 在 TECNO KM9 / Android 15 上初始化 `com.google.android.tts`，`en-US` 返回 `LANG_AVAILABLE`，467 voices，生成 129404 字节 WAV 后成功关闭并删除缓存文件。
+`tools/probes/native_tts_probe.sh` 是宿主机探针：使用 macOS 内置 `say` 生成临时 AIFF，再用 `afinfo` 读取音频格式，退出时删除文件。`tools/probes/apple_avspeech_probe.swift` 进一步直接编译 AVFoundation，枚举 180 个系统 voice 并完成 `AVSpeechSynthesizer` 短句合成。两者只验证 host/API 可探测性。`demo/androidApp/src/androidTest/.../TtsProbeInstrumentation.kt` 在 TECNO KM9 / Android 15 上作为 1 个可发现的 instrumentation test 初始化 `com.google.android.tts`，`en-US` 返回 `LANG_AVAILABLE`，467 voices，生成 129404 字节 WAV 后成功关闭并删除缓存文件；`connectedDebugAndroidTest` 报告 1/1 通过。
 
 2026-10-17 增加独立 `probes/ios-speech` 探针。iPhone 16 Pro Max / iOS 27.0.1 已签名构建、安装和启动；原始 JSON 保存在忽略目录 `artifacts/P6IOSSpeech/device-runs/`。设备报告显示 `AVSpeechSynthesizer` 共 193 个 voice，选择 `en-US` 的 Samantha，短句回调 `didFinish`，TTS 状态 `success`。原始 JSON 的 `offline=true` 是旧版探针未经断网验证的推断，不能作为离线证据；当前源码已改为 `networkBehavior=unmeasured`，此版本已通过模拟器构建但尚未重跑真机。探针也未录制或审听音频，因此网络行为和主观质量仍未测。`SFSpeechRecognizer(en-US)` 报告 `supportsOnDeviceRecognition=true`、`isAvailable=true`，但授权状态是 `notDetermined`，`transcription=not-run`；这些字段只证明可用性查询，不证明 ASR 推理通过。
 

@@ -18,6 +18,14 @@ class TtsProbeInstrumentation : Instrumentation() {
 
     override fun onStart() {
         val result = Bundle()
+        val test = Bundle().apply {
+            putInt("numtests", 1)
+            putInt("current", 1)
+            putString("id", "TtsProbeInstrumentation")
+            putString("class", this@TtsProbeInstrumentation.javaClass.name)
+            putString("test", "synthesizesEnglishToFile")
+        }
+        sendStatus(1, test)
         var engine: TextToSpeech? = null
         val init = CountDownLatch(1)
         var initStatus = TextToSpeech.ERROR
@@ -54,13 +62,15 @@ class TtsProbeInstrumentation : Instrumentation() {
             check(output.length() > 44) { "TTS output is empty" }
             result.putLong("outputBytes", output.length())
             result.putString("probeStatus", "pass")
+            sendStatus(0, Bundle(test).apply { putString("stream", "TTS probe passed") })
         } catch (error: Throwable) {
             result.putString("probeStatus", "fail")
             result.putString("probeError", error.toString())
+            sendStatus(-2, Bundle(test).apply { putString("stack", error.stackTraceToString()) })
         } finally {
             engine?.shutdown()
             output.delete()
-            finish(0, result)
+            finish(-1, result)
         }
     }
 }
