@@ -10,7 +10,7 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md` §5 and §7.2; `docs/superpowers/specs/2026-10-16-capability-backends-design.md` §§3–6; this plan is the bounded P6 file-only slice.
 
-**Status:** Approved by the user on 2026-10-17. Tasks 1–3 implemented and verified; final whole-branch review remains. Execution is task-by-task with TDD and independent task-scoped review.
+**Status:** Approved by the user on 2026-10-17. Tasks 1–3 implemented and verified. Final independent architecture review: CLEAR with one deferred LOW file-metadata error-mapping item. Actual SDK fixed-file recognition, active cancellation, drain, same-process reentry and close rejection passed on iPhone 16 Pro Max / iOS 27.0.1 at `5fd0b2d`; bounded evidence and remaining device/quality/network gates are recorded in `docs/validation/speech-backends.md`.
 
 ## Global Constraints
 

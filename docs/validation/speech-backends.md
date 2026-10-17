@@ -96,7 +96,10 @@ P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端�
 - 注入式 fake bridge 覆盖授权与设备状态、强制 on-device、locale 绑定、文件校验、超时/取消/关闭、晚到回调、完成状态与 final 回调竞态、置信度聚合和 drain 后复用。Apple 语音测试 31/31、Swift 全套 58/58 通过；生成器临时工程回归 3/3 通过。
 - 分发工程已把 `AppleSpeechRecognizerBackend.swift` 和 `Speech.framework` 只加入 `ODAIKitAppleSpeech`，并提供 Core+Speech 与 Speech+AppleSpeech 的独立消费者类型探针。上述结果是本地编译/生命周期契约证据，不代表真机授权 UX、系统语音资源、真实转写质量或网络行为已验收。
 - 本轮 unsigned `SDKDistribution` iOS Simulator build 实际编译了新 ASR 文件；全新目录 `artifacts/P6/apple-file-asr/` 完成 device/simulator archive、六个 XCFramework 和 speech binary consumer 构建。只提供新 Core/Speech 搜索路径的契约消费者 typecheck 通过，12 个 device/simulator 框架的 `otool -L` 确认仅 AppleSpeech 直接依赖 `Speech.framework`。工具测试总计 44/44 通过。验证日志保存在该目录的 `verification/`；Xcode 仅报告无 AppIntents 依赖而跳过元数据提取的 warning，没有编译错误。
-- SDK 后端真机路径尚未运行；此前独立文件探针的真机转写/取消结果不替代本后端验收。麦克风、audio session、iOS26 SpeechTranscriber、iOS15 硬件及网络抓包/质量指标保持未测。
+- 实际 SDK 后端已在 iPhone 16 Pro Max / iOS 27.0.1 通过固定合成文件验证，源码绑定 `5fd0b2d9e5941c3df97f7953d47d1e491e0dca5a`：首次转写和同进程重入均与预期句子归一化匹配；取消前并发调用返回 busy，确认已进入活动任务，随后调用方取消、`drain()` 返回、输入 hash 不变，关闭后新请求被拒绝。宿主在 close 后删除自己的输入，SDK 不删除文件。单次 drain 约 16 ms，只是本次观测，不作为性能或完整内存释放结论。
+- 本轮 SDK 报告为忽略目录 `artifacts/P6/apple-file-asr-device-20261017/Reports/sdk-asr-file-B4E889D3-359B-4D93-B3D5-FB61C9C305DE.json`，SHA256 `67a541459c4ed9914e95e53e4cfbb260c43789238a1c6630acd6568bb42c5667`；固定输入 SHA256 `ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`。临时宿主仅放在忽略目录，测试后已恢复原探针 App，未修改 Demo 签名文件。
+- 最终独立架构审查为 `CLEAR`，无 Critical/Important 阻断；保留一个 LOW：极少见文件 stat/metadata 错误目前可能透出 CocoaError/NSError，后续补齐 `KitError.invalidInput` 映射。两次 code-reviewer 服务 429 未计为审查通过；最终结论来自可用的独立 architect 审查。
+- 本轮复用了既有语音授权，未测试授权弹窗 UX；麦克风、audio session、iOS26 SpeechTranscriber、iOS15 硬件、系统资源安装、自然语音 CER/WER 及网络抓包仍未测。`requiresOnDeviceRecognition=true` 是实现约束，报告 `networkBehavior=unmeasured`，不据此宣称断网或无网络流量验收。
 
 ## 2026-10-17 Android 系统 TTS SDK 后端
 

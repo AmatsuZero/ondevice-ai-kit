@@ -30,4 +30,12 @@ P1 生命周期审查与修复已完成，详见 [P1 证据](p1-lifecycle-review
 
 P2 模型存储审查及修复见 [P2 证据](p2-model-store-review.md)。P3/P4 新鲜 Apple/Android 统一检查通过；其中 KMP Gradle 测试任务命中已有成功缓存，不声称每次重跑。旧分发产物仍待 P5 按最终源码重新生成及验收。
 
-2026-10-17 P5 复核已更新上表：两端真机 benchmark 冻结 `927b7749`；人脸四模块分发已重新构建，修复 Apple target 遗漏 Client 源文件并验证显式选择消费者。前述 P1/P2 的“旧产物待重打包”是历史状态，本轮已补人脸分发证据；P6 又补齐两端语音模块的本地分发、published consumer、依赖隔离和 lint/JVM 回归；Android ASR 资源缺失、iOS15/API26、iOS ASR、断网与质量验收仍保持未完成。详细路径与未测项见 [benchmark](benchmark.md) 与 [语音后端记录](speech-backends.md)。
+2026-10-17 P5 复核已更新上表：两端真机 benchmark 冻结 `927b7749`；人脸四模块分发已重新构建，修复 Apple target 遗漏 Client 源文件并验证显式选择消费者。前述 P1/P2 的“旧产物待重打包”是历史状态，本轮已补人脸分发证据；P6 又补齐两端语音模块的本地分发、published consumer、依赖隔离和 lint/JVM 回归；Android ASR 资源缺失、iOS15/API26、iOS 麦克风 ASR、断网与质量验收仍保持未完成。详细路径与未测项见 [benchmark](benchmark.md) 与 [语音后端记录](speech-backends.md)。
+
+## 2026-10-17 Apple 文件 ASR SDK 收口
+
+公共契约、可选 Apple 后端和分发三个 Task 已提交。最新完整 Swift XCTest 58/58、语音 31/31、Python 工具测试 44/44（含分发生成器 3/3）通过；全新六模块 XCFramework、unsigned SDK/二进制消费者构建、Core+Speech 独立 typecheck 和 12 个框架的动态依赖检查通过。日志归档在忽略目录 `artifacts/P6/apple-file-asr/verification/`，不把末尾 Swift Testing 的零测试 sibling summary 当成 XCTest 总数。
+
+实际 SDK `5fd0b2d` 在 iPhone 16 Pro Max / iOS 27.0.1 通过固定合成文件转写、活动任务取消、drain、输入保持不变、同进程重入及关闭后拒绝。报告及 hash 见 [语音后端记录](speech-backends.md#2026-10-17-apple-文件-asr-sdk-后端)。既有语音授权被复用，麦克风/音频 session、iOS26 资源、iOS15、自然语音质量和网络行为仍未验收。
+
+该工作包最终独立架构审查 CLEAR，无 Critical/Important；一个 LOW 文件 metadata 错误映射延后处理。此前两次服务 429 与作者自审是过程记录，不作为最终独立审查证据；此结论仅覆盖 Apple 文件 ASR 工作包，不替代整条 roadmap 的验收。
