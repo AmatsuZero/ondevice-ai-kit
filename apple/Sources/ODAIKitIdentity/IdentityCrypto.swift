@@ -19,10 +19,10 @@ public struct IdentityEnvelope: Sendable, Equatable {
         self.nonce = nonce; self.ciphertext = ciphertext; self.tag = tag
     }
 
-    public static func seal(_ plaintext: Data, keyId: String, rotationEpoch: Int64, keyProvider: any IdentityKeyProvider, context: String) throws -> Self {
+    public static func seal(_ plaintext: Data, keyId: String, rotationEpoch: Int64, keyProvider: any IdentityKeyProvider, context: String, createIfMissing: Bool = true) throws -> Self {
         try identityToken(keyId); try identityToken(context)
         guard rotationEpoch >= 0 else { throw IdentityError(.invalidInput) }
-        let key = try keyProvider.key(id: keyId, createIfMissing: true)
+        let key = try keyProvider.key(id: keyId, createIfMissing: createIfMissing)
         guard key.bitCount == 256 else { throw IdentityError(.invalidInput) }
         let aad = authenticatedHeader(formatVersion: 1, keyId: keyId, rotationEpoch: rotationEpoch, context: context)
         do {

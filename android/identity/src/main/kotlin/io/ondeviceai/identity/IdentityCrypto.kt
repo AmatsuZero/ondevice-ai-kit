@@ -20,10 +20,10 @@ class IdentityEnvelope(val formatVersion: Int, val keyId: String, val rotationEp
     val ciphertext: ByteArray get() = ciphertextBytes.clone()
     val tag: ByteArray get() = tagBytes.clone()
     companion object {
-        fun seal(plaintext: ByteArray, keyId: String, rotationEpoch: Long, keyProvider: IdentityKeyProvider, context: String): IdentityEnvelope {
+        fun seal(plaintext: ByteArray, keyId: String, rotationEpoch: Long, keyProvider: IdentityKeyProvider, context: String, createIfMissing: Boolean = true): IdentityEnvelope {
             token(keyId); token(context); if (rotationEpoch < 0) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
             try {
-                val key = keyProvider.key(keyId, true)
+                val key = keyProvider.key(keyId, createIfMissing)
                 validateAES256(key)
                 val cipher = Cipher.getInstance("AES/GCM/NoPadding")
                 cipher.init(Cipher.ENCRYPT_MODE, key)
