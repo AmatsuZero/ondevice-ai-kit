@@ -31,11 +31,44 @@ sealed class SystemTtsError(message: String) : IllegalStateException(message) {
     data class EngineFailure(val code: Int) : SystemTtsError("tts engine failed: $code")
 }
 
+/** Main-looper-confined admission gate. Late platform callbacks cannot finish a newer task. */
+internal class TtsTaskGate {
+    private var activeId: String? = null
+
+    fun begin(id: String): Boolean {
+        if (activeId != null) return false
+        activeId = id
+        return true
+    }
+
+    fun cancel(id: String, stop: () -> Unit): Boolean {
+        if (activeId != id) return false
+        activeId = null
+        stop()
+        return true
+    }
+
+    fun finish(id: String): Boolean {
+        if (activeId != id) return false
+        activeId = null
+        return true
+    }
+}
+
+internal inline fun stopAndClear(stop: () -> Unit, clear: () -> Unit) {
+    try {
+        stop()
+    } finally {
+        clear()
+    }
+}
+
 /** Owns one Android TextToSpeech engine. All mutable state is confined to the main looper. */
 class AndroidTextToSpeechBackend private constructor(private val engine: TextToSpeech) : SpeechSynthesisBackend {
     override val backendId = "android.text-to-speech"
     override val capability = SpeechCapability.TTS
     private val main = Handler(Looper.getMainLooper())
+    private val taskGate = TtsTaskGate()
     private var closed = false
     private var active: Active? = null
 
@@ -71,30 +104,32 @@ class AndroidTextToSpeechBackend private constructor(private val engine: TextToS
         val voiceStatus = engine.setVoice(voice)
         if (voiceStatus != TextToSpeech.SUCCESS) throw SystemTtsError.EngineFailure(voiceStatus)
         val id = UUID.randomUUID().toString()
-        suspendCancellableCoroutine { continuation ->
-            active = Active(id, continuation, voice.name)
-            continuation.invokeOnCancellation {
-                main.post {
-                    if (active?.id == id) {
-                        active = null
-                        engine.stop()
-                    }
-                }
+        if (!taskGate.begin(id)) throw SystemTtsError.Busy
+        try {
+            suspendCancellableCoroutine { continuation ->
+                active = Active(id, continuation, voice.name)
+                val queued = engine.speak(request.text, TextToSpeech.QUEUE_FLUSH, Bundle(), id)
+                if (queued != TextToSpeech.SUCCESS) finish(id, SystemTtsError.EngineFailure(queued))
             }
-            val queued = engine.speak(request.text, TextToSpeech.QUEUE_FLUSH, Bundle(), id)
-            if (queued != TextToSpeech.SUCCESS) finish(id, SystemTtsError.EngineFailure(queued))
+        } finally {
+            // Runs on Main before the cancelled caller completes, so a subsequent speak
+            // cannot overtake stop() and see a stale active utterance.
+            taskGate.cancel(id) { stopAndClear({ engine.stop() }) { active = null } }
         }
     }
 
     override suspend fun close() = withContext(Dispatchers.Main.immediate) {
         if (closed) return@withContext
         closed = true
-        active?.let { current ->
+        val current = active
+        current?.let { taskGate.cancel(it.id) {} }
+        try {
+            engine.stop()
+        } finally {
             active = null
-            if (current.continuation.isActive) current.continuation.resumeWithException(ClosedException())
+            if (current?.continuation?.isActive == true) current.continuation.resumeWithException(ClosedException())
+            engine.shutdown()
         }
-        engine.stop()
-        engine.shutdown()
     }
 
     private fun chooseVoice(request: SpeechSynthesisRequest): Voice? = engine.voices.orEmpty()
@@ -106,6 +141,7 @@ class AndroidTextToSpeechBackend private constructor(private val engine: TextToS
 
     private fun finish(id: String, error: Throwable?) {
         val current = active?.takeIf { it.id == id } ?: return
+        if (!taskGate.finish(id)) return
         active = null
         if (!current.continuation.isActive) return
         if (error == null) current.continuation.resume(SpeechSynthesisResult(backendId, current.voiceId))
