@@ -1,6 +1,6 @@
 # Device validation matrix
 
-Inventory 2026-10-16: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (24A446), and TECNO KM9, Android 15/API 35. Existing signing reused for the earlier iOS device build; no matching profile is currently available for the UI runner. iOS26.5/27 simulators available; no iOS15 runtime/device found.
+Inventory 2026-10-17: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (24A446), and TECNO KM9, Android 15/API 35. The user configured signing for the Demo and UI runner; the existing configuration successfully ran the sustained camera test. Signing changes remain local. No iOS15 runtime/device found.
 
 | Gate | Status | Evidence |
 | --- | --- | --- |
@@ -16,7 +16,7 @@ Inventory 2026-10-16: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 | Connected modern Android current face benchmark | pass bounded | SDK commit `74b6bbf`; TECNO KM9 / Android 15/API 35, 5 warmup + 30 inference, `android.mlkit.face.bundled`; raw/report JSON retained under ignored `artifacts/P5/current` |
 | Modern iPhone camera controls + foreground resume | pass bounded | 2 real-device UI tests; explicit stop survives activation; [P4 evidence](p4-camera-stability.md) |
 | Modern Android launch | pass bounded | TECNO KM9 API35 Demo installed and launched; [P4 evidence](p4-camera-stability.md) |
-| Sustained camera/thermal/memory | Android API35 bounded pass; iOS unverified | TECNO KM9 前置相机约两分钟，4 个 30 秒样本持续显示人脸结果；PSS 260815→231722 KiB，热状态均为 0；不覆盖峰值、能耗或长期背压，见 [P4 evidence](p4-camera-stability.md) |
+| Sustained camera/thermal/memory | Android API35 bounded pass; iOS bounded pass | TECNO KM9 前置相机约两分钟，4 个 30 秒样本持续显示人脸结果；iPhone 16 Pro Max 两分钟 UI 用例 4 个 30 秒窗口持续产生成功回调，Activity Monitor 覆盖 96.378 秒、physical footprint 约 79.6–145.3 MB，thermal state 为 Nominal；两端均不覆盖峰值、GPU、能耗、长期背压或完整资源释放，见 [P4 evidence](p4-camera-stability.md) |
 
 No stored device UDIDs or input photos in this report. Update rows only with fresh commands and actual results.
 

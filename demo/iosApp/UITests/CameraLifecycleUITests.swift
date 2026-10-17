@@ -42,6 +42,54 @@ final class CameraLifecycleUITests: XCTestCase {
         }
         app.buttons["停止"].tap()
     }
+
+    func testCameraKeepsDeliveringFramesForTwoMinutesAndStops() {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-camera-test"]
+        app.launch()
+        let camera = app.buttons["相机"]
+        XCTAssertTrue(camera.waitForExistence(timeout: 15))
+        camera.tap()
+        var stoppedByTest = false
+        defer {
+            if !stoppedByTest, app.buttons["停止"].exists {
+                app.buttons["停止"].tap()
+            }
+        }
+        let counter = app.staticTexts["camera-frame-count"]
+        XCTAssertTrue(counter.waitForExistence(timeout: 5))
+        waitForFrames(counter, after: 0)
+        let started = ProcessInfo.processInfo.systemUptime
+        var previous = Int(counter.label) ?? 0
+        let minimumSuccessfulResultsPerWindow = 10
+        for sample in 1...4 {
+            Thread.sleep(forTimeInterval: 30)
+            let current = Int(counter.label) ?? 0
+            XCTAssertGreaterThanOrEqual(
+                current - previous,
+                minimumSuccessfulResultsPerWindow,
+                "Each 30-second sample window must add at least 10 successful inference results"
+            )
+            XCTAssertTrue(app.buttons["选择图片"].isEnabled)
+            XCTAssertTrue(app.buttons["Benchmark"].isEnabled)
+            XCTAssertEqual(app.progressIndicators.count, 0)
+            let elapsed = ProcessInfo.processInfo.systemUptime - started
+            let evidence = XCTAttachment(string: "sample=\(sample) elapsedSeconds=\(elapsed) successfulFrames=\(current) delta=\(current - previous)")
+            evidence.name = "camera-sustained-sample-\(sample)"
+            evidence.lifetime = .keepAlways
+            add(evidence)
+            previous = current
+        }
+        let totalElapsed = ProcessInfo.processInfo.systemUptime - started
+        XCTAssertGreaterThanOrEqual(totalElapsed, 120, "The sustained camera window must cover at least two minutes")
+        app.buttons["停止"].tap()
+        stoppedByTest = true
+        let stopped = Int(counter.label) ?? 0
+        let advancing = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in
+            (Int(counter.label) ?? 0) > stopped
+        }, object: nil)
+        XCTAssertEqual(XCTWaiter.wait(for: [advancing], timeout: 5), .timedOut, "Stopped Demo must not publish more successful inference results to the UI")
+    }
     func testCameraResumesAfterBackgroundAndHonorsUserStop() {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-camera-test"]

@@ -45,7 +45,7 @@
 
 ## 剩余 P4 范围
 
-剩余 P4 范围为 iOS 真机 EXIF 旋转/镜像、权限恢复的真实 UI，以及两端持续资源/热量测量。iOS 真机照片选择和取消已通过。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。未开始 P5 benchmark；本次单图耗时不作为性能报告。
+剩余 P4 范围为 iOS 真机 EXIF 旋转/镜像、权限设置页往返恢复，以及完整的原生桥接/相机资源释放验证。iOS 真机照片选择和取消已通过。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。两端持续资源/热量只保留有边界的抽样证据，不能替代完整资源释放、P5 benchmark 或最低系统验收。
 
 ## iOS 相机权限恢复入口（2026-10-17）
 
@@ -57,7 +57,17 @@
 
 - 新增合成 TIFF 的 ImageIO 主机检查，使用与 iOS Photo Picker 相同的 `CGImageSourceCreateThumbnailAtIndex` 参数。EXIF 1/2/6/7 的宽高、左右镜像及旋转方向均通过；合成图仅有黑白半幅，不含个人数据。`sh scripts/check-ios-photo-orientation.sh` 输出 `iOS photo ImageIO orientation checks passed (1, 2, 6, 7)`，并已加入 Apple 验证脚本。
 - 此检查验证解码/方向变换，不替代 PHPicker→Demo→Vision 的真机端到端证据。iPhone 16 Pro Max 上重新运行三个现有 UI 用例：相机连续帧、前后台恢复通过；照片选择用例在系统 Photo Picker 的 `PXGGridLayout-Info` 图片可点击性判定失败，未进入 Demo 推理。尝试仅改变测试点击坐标后，设备 runner 启动超过两分钟未返回用例结果，已停止该 runner 并撤销未验证的测试改动。此前已通过的选图用例证据仍保留，未把本次失败定性为 App 回归。
-- 真机 EXIF 2/6/7、权限设置页恢复和持续资源/热量仍为未验证；本次未改动 SDK 图像处理逻辑或设备相册内容。
+- 真机 EXIF 2/6/7、权限设置页恢复及完整资源释放仍为未验证；本次 EXIF 检查不覆盖持续资源/热量，独立有限抽样见下一节。本次未改动 SDK 图像处理逻辑或设备相册内容。
+
+## iOS 两分钟持续相机与资源抽样（2026-10-17）
+
+- iPhone 16 Pro Max / iOS 27.0.1 上新增 `testCameraKeepsDeliveringFramesForTwoMinutesAndStops`，初版真机 xcresult 为 **1/1 通过、0 失败**。四个 30 秒窗口分别在 30.24、60.34、90.46、120.57 秒记录成功推理回调计数 802、1551、2301、3051；初版每窗口只要求至少 3 个新增成功回调。审查后改为每窗口至少 10 个新增成功回调，显式断言总时长至少 120 秒，避免重复停止，并明确停止后观察 5 秒只检查 UI 不再发布结果。
+- 修订后的门槛在同一 iPhone 上重新执行，xcresult `P4-ios-sustained-reviewed-20261017.xcresult` 为 **1/1 通过、0 失败，134.187 秒**；这才是当前测试代码的有效验证证据。
+- 这里的计数是桥接推理成功回调，不是底层捕获帧数；停止断言只证明停止后 Demo 不再向 UI 发布成功结果，不能单独证明 `AVCaptureSession`、Vision 任务、队列或图像内存已经释放。
+- Activity Monitor trace `artifacts/P4-ios-sustained-activity-20261017.trace` 覆盖 96.378 秒、94 个样本。进程 physical footprint 采样范围约 79.6–145.3 MB，首样本约 143.3 MB、末样本约 81.9 MB；同一 trace 的 `device-thermal-state-intervals` 表显示热状态为 `Nominal`。
+- Trace 在相机启动后才附着，只覆盖 120.565 秒 UI 窗口中的约 96 秒；该数据只代表进程 physical footprint 和采样时的设备热状态，不代表 GPU、全机峰值、能耗或长期资源释放。热节流 trace 未成功采集，仍记为未测。
+- 收口前复核：Apple 主机 XCTest **33/33**，相机生命周期检查 **7 个场景**，ImageIO 方向检查 **1/2/6/7** 通过；Demo 与 UI runner 的 unsigned simulator `build-for-testing` 通过。独立审查指出的低回调门槛、重复停止和停止语义问题已修正；完整资源释放继续列为缺口。原始 xcresult、附件、trace/XML/JSON 和编译日志均留在忽略的 `artifacts/`，不提交设备照片或 trace 大文件。
+- 同日先前完整 UI suite 为 **4/5 通过、1 失败**（`P4-ios-all-20261017.xcresult`），失败发生于系统 Photo Picker 图片 activation point。改为中心坐标点击后 Picker 返回，但等待人脸结果失败（`P4-ios-photo-center-20261017.xcresult`）；坐标改动已撤销。这些失败保留为待排查项，不据此声称本轮照片选择或 EXIF 端到端通过，也不覆盖此前独立选图成功记录。
 
 ## Android API 35 短时持续相机补充（2026-10-17）
 
