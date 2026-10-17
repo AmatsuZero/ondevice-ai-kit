@@ -30,6 +30,19 @@ final class CameraLifecycleUITests: XCTestCase {
         XCTAssertTrue(select.isEnabled)
     }
 
+    func testDebugOrientationSixProbeReportsUprightImageSize() {
+        let app = XCUIApplication()
+        app.launchArguments = ["--smoke-orientation-6"]
+        app.launch()
+
+        let status = app.staticTexts["orientation-probe-status"]
+        XCTAssertTrue(status.waitForExistence(timeout: 15), "Orientation probe should publish a Debug status")
+        let succeeded = XCTNSPredicateExpectation(predicate: NSPredicate(format: "label == %@", "success"), object: status)
+        XCTAssertEqual(XCTWaiter.wait(for: [succeeded], timeout: 20), .completed, "Synthetic image should reach Vision successfully")
+        XCTAssertEqual(status.label, "success")
+        XCTAssertEqual(app.staticTexts["orientation-probe-size"].label, "80×160")
+    }
+
     func testCameraKeepsControlsStableAcrossFrames() {
         let app = XCUIApplication(); app.launchArguments = ["--ui-camera-test"]; app.launch()
         let camera = app.buttons["相机"]

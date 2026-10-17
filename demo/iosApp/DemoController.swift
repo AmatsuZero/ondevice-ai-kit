@@ -24,12 +24,24 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     @Published var report: String?
     @Published var message: String?
     @Published var cameraFrameCount = 0
+    #if DEBUG
+    @Published private(set) var orientationProbeStatus: String?
+    @Published private(set) var orientationProbeSize: String?
+    private var orientationProbePending = false
+    #endif
     @Published private(set) var cameraPermissionDenied = false
     override init() {
         super.init()
         bridge.onResult = { [weak self] result in
             self?.faces = result.faces
             if self?.running == true { self?.cameraFrameCount += 1 }
+            #if DEBUG
+            if self?.orientationProbePending == true {
+                self?.orientationProbePending = false
+                self?.orientationProbeSize = "\(result.orientedWidth)×\(result.orientedHeight)"
+                self?.orientationProbeStatus = "success"
+            }
+            #endif
             #if DEBUG
             if ProcessInfo.processInfo.arguments.contains("--smoke-benchmark") { self?.runBenchmark() }
             #endif
@@ -57,9 +69,16 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         picker.dismiss(animated: true)
         guard let provider = results.first?.itemProvider else { return }
         provider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { [weak self] url, error in
-            guard let url, let source = CGImageSourceCreateWithURL(url as CFURL, nil), let cg = CGImageSourceCreateThumbnailAtIndex(source, 0, [kCGImageSourceCreateThumbnailFromImageAlways:true,kCGImageSourceCreateThumbnailWithTransform:true,kCGImageSourceThumbnailMaxPixelSize:2048] as CFDictionary) else { DispatchQueue.main.async { self?.message = error?.localizedDescription ?? "无法读取图片" }; return }
+            guard let url, let source = CGImageSourceCreateWithURL(url as CFURL, nil), let cg = Self.decodePhoto(source) else { DispatchQueue.main.async { self?.message = error?.localizedDescription ?? "无法读取图片" }; return }
             DispatchQueue.main.async { self?.useImage(UIImage(cgImage: cg)) }
         }
+    }
+    private static func decodePhoto(_ source: CGImageSource) -> CGImage? {
+        CGImageSourceCreateThumbnailAtIndex(source, 0, [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: 2048
+        ] as CFDictionary)
     }
     func useImage(_ selected: UIImage, smokeFixture: Bool = false) {
         model.cancel()
@@ -76,6 +95,37 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
             self.model.detect(inputId: id, selection: BridgeBackendSelection(backendId: nil))
         }
     }
+
+    #if DEBUG
+    func runOrientationProbe() {
+        orientationProbeStatus = "pending"
+        orientationProbeSize = nil
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 160, height: 80), format: format)
+        let sourceImage = renderer.image { context in
+            UIColor.systemBlue.setFill()
+            context.fill(CGRect(x: 0, y: 0, width: 80, height: 80))
+            UIColor.systemYellow.setFill()
+            context.fill(CGRect(x: 80, y: 0, width: 80, height: 80))
+        }
+        guard let sourceCG = sourceImage.cgImage,
+              let data = NSMutableData(capacity: 4096),
+              let destination = CGImageDestinationCreateWithData(data, UTType.jpeg.identifier as CFString, 1, nil) else {
+            orientationProbeStatus = "failure: encode"
+            return
+        }
+        CGImageDestinationAddImage(destination, sourceCG, [kCGImagePropertyOrientation: 6] as CFDictionary)
+        guard CGImageDestinationFinalize(destination),
+              let imageSource = CGImageSourceCreateWithData(data as CFData, nil),
+              let transformed = Self.decodePhoto(imageSource) else {
+            orientationProbeStatus = "failure: transform"
+            return
+        }
+        orientationProbePending = true
+        useImage(UIImage(cgImage: transformed))
+    }
+    #endif
     func startCamera() {
         photoSubmission.cancel()
         let token = cameraLifecycle.requestStart()

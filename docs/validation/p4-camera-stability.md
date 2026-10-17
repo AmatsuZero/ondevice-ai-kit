@@ -87,3 +87,21 @@
 - 启动前 `dumpsys meminfo io.ondeviceai.demo` 的 TOTAL PSS 为 150689 KiB；相机开始推理后为 254968 KiB。随后每 30 秒采样一次，共 4 次，PSS 分别为 260815、256966、238050、231722 KiB，UI 每次均显示 `人脸 1` 及本次结果耗时（159、155、141、145 ms），`dumpsys thermalservice` 热状态均为 0。显式停止相机后 UI 不再显示人脸结果，PSS 为 198266 KiB，热状态 0。
 - 原始 meminfo、thermalservice 与 UI hierarchy 保存在被忽略的 `artifacts/P4AndroidSustained/`。这只证明该设备本次约两分钟窗口内没有观察到持续 PSS 增长或热节流；它不是峰值内存、能耗、长期稳定性或 API 26 的验收，单次 UI 结果耗时也不是 P5 benchmark。
 - 同次运行的语音 instrumentation 已改为向 Android 测试平台报告 1 个可发现的测试；`connectedDebugAndroidTest` 在 TECNO KM9 上显示 **1/1 通过、0 失败**，probe status 为 pass，`en-US` 可用并生成 129404 字节音频；API 35 的 on-device ASR 能力查询返回 `true`。该测试不代表 ASR 已授权、完成转写或 TTS/ASR 的离线网络行为。
+
+## iOS Debug Orientation 6 合成探针（2026-10-17）
+
+- 用户批准增加仅 Debug 的 `--smoke-orientation-6` 启动参数。App 在内存生成无个人数据的双色 JPEG：原始像素 `160×80`、EXIF Orientation `6`、renderer scale `1`；不写相册、不依赖用户图片，也不生成仓库内媒体文件。普通启动不运行该探针，Release 不包含该入口或状态 UI。
+- Photo Picker 与探针共用 `decodePhoto`：`CGImageSourceCreateThumbnailAtIndex` 使用 `CreateThumbnailFromImageAlways=true`、`CreateThumbnailWithTransform=true` 和最大边 `2048`。Picker 从临时 URL 创建 image source，探针从内存数据创建 source；之后复用 `useImage` → KMP ViewModel → Swift bridge → 系统 Vision。Debug 成功状态及尺寸仅在真实原生成功回调中发布，尺寸取自 Vision `FaceResult`。
+- TDD RED：实现前，`P4-ios-orientation6-red-device-20261017.xcresult` 真实执行 1 个用例并失败，原因是缺少探针标识及成功结果。首次沙箱内调用因 Xcode 缓存权限在构建前失败，不计为行为 RED。
+- GREEN：同一 iPhone 16 Pro Max / iOS 27.0.1 的 `P4-ios-orientation6-green-20261017.xcresult` 为 **1/1 通过、0 失败，5.426 秒**。UI 用例等待成功回调并断言实际结果为 `80×160`，没有仅检查生成器的预期常量。
+- 完整真机 UI suite `P4-ios-orientation6-suite-20261017.xcresult` 为 **7/7 通过、0 失败，190.997 秒**，包含新探针、Photo Picker 选择/取消、相机控件、两分钟持续运行、前后台恢复与 Settings 入口。首次请求因自动审批服务 429 未执行，重试获批后才运行，未将未执行请求计为验证结果。
+- `sh scripts/verify-apple.sh` 通过：Apple 主机 XCTest **33/33**、KMP/共享 ViewModel 模拟器任务、桥接 typecheck、相机生命周期/照片提交/方向/ASR 检查、原生消费者和 Demo 模拟器构建。KMP 测试任务本次为 `UP-TO-DATE`，未声称重新运行。额外的 unsigned `build-for-testing` 和 Release 模拟器构建通过。
+- Release App 二进制的 strings 检查未发现 `--smoke-orientation-6`、`orientation-probe-*` 或 `runOrientationProbe`。本次构建仍有既有的界面方向/AppIntents 警告与 Xcode SDK build-number 诊断，没有新增编译错误。
+- 独立只读 code review 覆盖控制器、Debug UI 与新增用例，结论 APPROVE，未发现阻断或重要问题。用户既有 signing 工程和未追踪的人脸身份草稿保持原哈希，未纳入提交。
+- 这只覆盖合成 Orientation 6 的共享解码→Demo→Vision 尺寸链路，没有通过 PHPicker 选择该图，也没有在真机检查像素旋转方向或 EXIF 2/7 镜像；完整 PHPicker EXIF 2/6/7 验收继续保留。主机方向检查另行覆盖 1/2/6/7 的像素方向。
+
+## iOS Leaks 采集补充（2026-10-17）
+
+- 同一设备再次运行两分钟相机用例，`P4-ios-resource-leaks-20261017.xcresult` 为 **1/1 通过、0 失败，137.211 秒**，停止后仍观察 5 秒没有新成功结果。
+- 只附着本项目 Demo 的 Leaks 模板采集完成，`P4-ios-resource-leaks-20261017.trace` 记录 **96.019181 秒**。`xctrace export --toc` 确认存在 Allocations 和 Leaks tracks；可导出的 data tables 没有泄漏/分配统计 schema，因此本次尚未取得可核验的泄漏摘要，不能据此报告零泄漏或完整资源释放通过。
+- trace 约 3.4 GB，仅留在 Git 忽略的 `artifacts/`，不加入 Git/LFS 或上传；xcresult、日志和导出 XML 也仅保存在该目录。完整相机/桥接资源释放、GPU/系统服务资源与最低系统验收仍未完成。

@@ -33,12 +33,23 @@ struct SharedControls: UIViewControllerRepresentable {
                 }
                 if let report = controller.report { Button("导出 Benchmark JSON") { controller.exportReport(json: report) } }
                 #if DEBUG
+                if let status = controller.orientationProbeStatus {
+                    Text(status).accessibilityIdentifier("orientation-probe-status")
+                    if let size = controller.orientationProbeSize {
+                        Text(size).accessibilityIdentifier("orientation-probe-size")
+                    }
+                }
                 if ProcessInfo.processInfo.arguments.contains("--ui-camera-test") {
                     Text(String(controller.cameraFrameCount)).accessibilityIdentifier("camera-frame-count")
                 }
                 #endif
             }.onDisappear { controller.stopCamera() }
             .onAppear {
+                #if DEBUG
+                if ProcessInfo.processInfo.arguments.contains("--smoke-orientation-6") {
+                    controller.runOrientationProbe()
+                }
+                #endif
                 if ProcessInfo.processInfo.arguments.contains("--smoke-blank") {
                     let renderer = UIGraphicsImageRenderer(size: CGSize(width: 64, height: 64))
                     controller.useImage(renderer.image { context in UIColor.white.setFill(); context.fill(CGRect(x: 0, y: 0, width: 64, height: 64)) }, smokeFixture: true)
