@@ -1,3 +1,4 @@
+import Foundation
 import ODAIKitCore
 
 public enum SpeechCapability: String, Sendable, Equatable { case asr, tts }
@@ -8,6 +9,76 @@ public protocol SpeechBackend: Sendable {
     var capability: SpeechCapability { get }
     func availability() async -> CapabilityAvailability
     func close() async
+}
+
+/// A host-owned local audio file. The selected backend defines its supported input modes.
+public struct SpeechRecognitionRequest: Sendable, Equatable {
+    public let locale: String
+    public let audioFile: URL
+
+    public init(locale: String, audioFile: URL) throws {
+        let trimmed = locale.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { throw KitError.invalidInput("empty speech locale") }
+        guard audioFile.isFileURL else { throw KitError.invalidInput("audio must be a file URL") }
+        self.locale = Locale.canonicalIdentifier(from: trimmed)
+        self.audioFile = audioFile
+    }
+}
+
+/// One final transcript; partial transcript streaming is outside this file-only contract.
+public struct SpeechRecognitionResult: Sendable, Equatable {
+    public let backendId: String
+    public let transcript: String
+    public let confidence: Float?
+
+    public init(backendId: String, transcript: String, confidence: Float? = nil) {
+        self.backendId = backendId
+        self.transcript = transcript
+        self.confidence = confidence
+    }
+}
+
+public enum SpeechRecognitionError: Error, Equatable, Sendable {
+    case timedOut
+    case noResult
+    case platform(domain: String, code: Int)
+}
+
+public protocol SpeechRecognitionBackend: SpeechBackend {
+    func recognize(_ request: SpeechRecognitionRequest) async throws -> SpeechRecognitionResult
+}
+
+/// Typed file recognition facade over the capability-scoped backend registry.
+public actor SpeechRecognitionClient {
+    private let registry: SpeechClient
+    private let backends: [String: any SpeechRecognitionBackend]
+    private var closed = false
+    private var closeTask: Task<Void, Never>?
+
+    public init(defaultBackendId: String, backends: [any SpeechRecognitionBackend]) throws {
+        registry = try SpeechClient(capability: .asr, defaultBackendId: defaultBackendId,
+                                   registrations: backends.map { .init(capability: .asr, backend: $0) })
+        self.backends = Dictionary(uniqueKeysWithValues: backends.map { ($0.backendId, $0) })
+    }
+
+    public func recognize(_ request: SpeechRecognitionRequest,
+                          backend: SpeechBackendSelection = .default) async throws -> SpeechRecognitionResult {
+        guard !closed else { throw SpeechClientError.closed }
+        let selected = try await registry.select(backend)
+        guard !closed else { throw SpeechClientError.closed }
+        guard let implementation = backends[selected.backendId] else {
+            throw SpeechClientError.backendNotRegistered(capability: .asr, backendId: selected.backendId)
+        }
+        return try await implementation.recognize(request)
+    }
+
+    public func close() async {
+        closed = true
+        if closeTask == nil {
+            closeTask = Task { await registry.close() }
+        }
+        await closeTask?.value
+    }
 }
 
 public struct SpeechBackendRegistration: Sendable {
