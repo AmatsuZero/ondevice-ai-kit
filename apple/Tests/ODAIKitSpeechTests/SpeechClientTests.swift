@@ -18,6 +18,7 @@ final class SpeechClientTests: XCTestCase {
         let request = try SpeechRecognitionRequest(locale: "  en_us  ", audioFile: url)
         XCTAssertEqual(request.locale, "en_US")
         XCTAssertEqual(request.audioFile, url)
+        XCTAssertEqual(try SpeechRecognitionRequest(locale: "en-US", audioFile: url).locale, "en_US")
     }
 
     func testRecognitionRequestRejectsBlankLocale() {
@@ -81,6 +82,17 @@ final class SpeechClientTests: XCTestCase {
         } catch {
             XCTAssertEqual(error as? SpeechClientError, .closed)
         }
+    }
+
+    func testRecognitionClientDrainsRegisteredBackendsWithoutClosing() async throws {
+        let backend = FakeRecognitionBackend("apple.speech.recognizer")
+        let client = try SpeechRecognitionClient(defaultBackendId: backend.backendId, backends: [backend])
+        await client.drain()
+        let drainCount = await backend.drainCount
+        XCTAssertEqual(drainCount, 1)
+        let request = try SpeechRecognitionRequest(locale: "en-US", audioFile: URL(fileURLWithPath: "/tmp/example.wav"))
+        let result = try await client.recognize(request)
+        XCTAssertEqual(result.transcript, "local transcript")
     }
 
     func testRecognitionClientDoesNotDispatchIfClosedDuringAvailability() async throws {
@@ -165,6 +177,7 @@ private actor FakeRecognitionBackend: SpeechRecognitionBackend {
     let closeStarted: XCTestExpectation?
     var closeContinuation: CheckedContinuation<Void, Never>?
     var closeCount = 0
+    var drainCount = 0
 
     init(_ id: String, available: Bool = true, availabilityStarted: XCTestExpectation? = nil,
          closeStarted: XCTestExpectation? = nil) {
@@ -204,4 +217,5 @@ private actor FakeRecognitionBackend: SpeechRecognitionBackend {
     }
 
     func resumeClose() { closeContinuation?.resume(); closeContinuation = nil }
+    func drain() { drainCount += 1 }
 }

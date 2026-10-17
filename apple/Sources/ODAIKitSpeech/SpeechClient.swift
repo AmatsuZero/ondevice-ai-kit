@@ -11,7 +11,8 @@ public protocol SpeechBackend: Sendable {
     func close() async
 }
 
-/// A host-owned local audio file. The selected backend defines its supported input modes.
+/// A host-owned local audio file. Keep it unchanged until recognition returns, or,
+/// after caller cancellation/timeout, until `drain()` or `close()` finishes.
 public struct SpeechRecognitionRequest: Sendable, Equatable {
     public let locale: String
     public let audioFile: URL
@@ -20,7 +21,7 @@ public struct SpeechRecognitionRequest: Sendable, Equatable {
         let trimmed = locale.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { throw KitError.invalidInput("empty speech locale") }
         guard audioFile.isFileURL else { throw KitError.invalidInput("audio must be a file URL") }
-        self.locale = Locale.canonicalIdentifier(from: trimmed)
+        self.locale = Locale.canonicalIdentifier(from: trimmed.replacingOccurrences(of: "-", with: "_"))
         self.audioFile = audioFile
     }
 }
@@ -46,6 +47,9 @@ public enum SpeechRecognitionError: Error, Equatable, Sendable {
 
 public protocol SpeechRecognitionBackend: SpeechBackend {
     func recognize(_ request: SpeechRecognitionRequest) async throws -> SpeechRecognitionResult
+    /// Wait for the currently admitted platform operation to release its input.
+    /// Does not cancel work or close admission; callers coordinate new requests.
+    func drain() async
 }
 
 /// Typed file recognition facade over the capability-scoped backend registry.
@@ -78,6 +82,12 @@ public actor SpeechRecognitionClient {
             closeTask = Task { await registry.close() }
         }
         await closeTask?.value
+    }
+
+    /// Wait for current backend leases without closing the client. Do not start a new
+    /// request using the same input while draining if you intend to delete that input.
+    public func drain() async {
+        for implementation in backends.values { await implementation.drain() }
     }
 }
 
