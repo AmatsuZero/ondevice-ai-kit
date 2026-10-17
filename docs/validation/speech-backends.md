@@ -59,7 +59,7 @@ Microsoft 官方文档说明 Speech SDK 支持 Android、iOS 和 REST 路线；�
 
 `tools/probes/native_tts_probe.sh` 是宿主机探针：使用 macOS 内置 `say` 生成临时 AIFF，再用 `afinfo` 读取音频格式，退出时删除文件。`tools/probes/apple_avspeech_probe.swift` 进一步直接编译 AVFoundation，枚举 180 个系统 voice 并完成 `AVSpeechSynthesizer` 短句合成。两者只验证 host/API 可探测性。`demo/androidApp/src/androidTest/.../TtsProbeInstrumentation.kt` 在 TECNO KM9 / Android 15 上作为 1 个可发现的 instrumentation test 初始化 `com.google.android.tts`，`en-US` 返回 `LANG_AVAILABLE`，467 voices，生成 129404 字节 WAV 后成功关闭并删除缓存文件；同次查询 `SpeechRecognizer.isOnDeviceRecognitionAvailable` 返回 `true`，只证明设备具备 on-device ASR 服务，不代表已授权或已完成转写；`connectedDebugAndroidTest` 报告 1/1 通过。
 
-2026-10-17 增加独立 `probes/ios-speech` 探针。iPhone 16 Pro Max / iOS 27.0.1 已签名构建、安装和启动；原始 JSON 保存在忽略目录 `artifacts/P6IOSSpeech/device-runs/`。设备报告显示 `AVSpeechSynthesizer` 共 193 个 voice，选择 `en-US` 的 Samantha，短句回调 `didFinish`，TTS 状态 `success`。原始 JSON 的 `offline=true` 是旧版探针未经断网验证的推断，不能作为离线证据；当前源码已改为 `networkBehavior=unmeasured`，此版本已通过模拟器构建但尚未重跑真机。探针也未录制或审听音频，因此网络行为和主观质量仍未测。`SFSpeechRecognizer(en-US)` 报告 `supportsOnDeviceRecognition=true`、`isAvailable=true`，但授权状态是 `notDetermined`，`transcription=not-run`；这些字段只证明可用性查询，不证明 ASR 推理通过。
+2026-10-17 初版独立 `probes/ios-speech` 探针的历史结果如下（后续 ASR 文件实测见本文末节）。iPhone 16 Pro Max / iOS 27.0.1 已签名构建、安装和启动；原始 JSON 保存在忽略目录 `artifacts/P6IOSSpeech/device-runs/`。设备报告显示 `AVSpeechSynthesizer` 共 193 个 voice，选择 `en-US` 的 Samantha，短句回调 `didFinish`，TTS 状态 `success`。原始 JSON 的 `offline=true` 是旧版探针未经断网验证的推断，不能作为离线证据；当前源码已改为 `networkBehavior=unmeasured`，此版本已通过模拟器构建但尚未重跑真机。探针也未录制或审听音频，因此网络行为和主观质量仍未测。`SFSpeechRecognizer(en-US)` 报告 `supportsOnDeviceRecognition=true`、`isAvailable=true`，但授权状态是 `notDetermined`，`transcription=not-run`；这些字段只证明可用性查询，不证明 ASR 推理通过。
 
 执行：
 
@@ -68,7 +68,7 @@ sh tools/probes/native_tts_probe.sh Samantha "OnDevice AI Kit native speech prob
 swiftc tools/probes/apple_avspeech_probe.swift -o /tmp/odai-apple-avspeech-probe && /tmp/odai-apple-avspeech-probe
 ```
 
-P6 仍待完成：iOS 真机 ASR 授权、音频输入和转写验证，iOS 26+ SpeechTranscriber 资源实际状态，以及两端 TTS 的离线/质量验收。Android 与 iOS 系统 TTS 最小探针已通过；统一选择值和错误语义进入后续实现计划。Azure 作为可裁剪插件，待凭据、网络和包分发策略确定后单独实现与 benchmark。
+P6 仍待完成：iOS 麦克风输入与音频 session，iOS 26+ SpeechTranscriber 资源实际状态，以及两端 TTS 的离线/质量验收。Android 与 iOS 系统 TTS 最小探针已通过；统一选择值和错误语义进入后续实现计划。Azure 作为可裁剪插件，待凭据、网络和包分发策略确定后单独实现与 benchmark。
 
 ## 2026-10-17 统一 SDK 语音选择契约
 
@@ -125,8 +125,8 @@ SDK 源码基线为 `a97df90cdd49e7e567e4259d17d745da885f6225`；本包仅补分
 
 本包独立审查结论为 APPROVE，0 findings；复核了生成器幂等、目标依赖图、消费者清理与文档证据边界。实现提交 `58cc5a61ce1d4507efaf0ac3dcc4e2a9566eb8e3` 已同步 GitHub/极狐，脚本再次读取两端 ref 确认 SHA 相等。
 
-P6 仍保留这些边界：Android API35 ASR 的 `en-US` 资源缺失导致 `MISSING_ASSETS`，未完成真实转写/取消生命周期；iOS ASR 取消门禁与 iOS 26 资源仍待补；两端 TTS 的断网行为与主观质量未测；Azure/Microsoft SDK 尚未加入；KMP 语音 Demo 仍待后续工作包。
+P6 仍保留这些边界：Android API35 ASR 的 `en-US` 资源缺失导致 `MISSING_ASSETS`，未完成真实转写/取消生命周期；iOS 麦克风 ASR 与 iOS 26 资源仍待补；两端 TTS 的断网行为与主观质量未测；Azure/Microsoft SDK 尚未加入；KMP 语音 Demo 仍待后续工作包。
 
 ## iOS ASR 文件探针工作包
 
-P6 继续补充固定合成音频的文件识别探针，操作与证据见 [iOS ASR 固定文件探针](ios-asr-file-probe.md)。它沿用 `apple.speech.recognizer` 的强制 on-device 边界，文件输入不采集麦克风，授权由探针按钮显式触发。iPhone 16 Pro Max / iOS 27.0.1 的首轮报告已确认授权、固定文件转写和重入成功，输入 SHA 与冻结基线一致；150ms 延迟取消前任务已完成，因此不计为取消通过。代码改为任务创建后立即取消，待第二轮报告核验。
+P6 继续补充固定合成音频的文件识别探针，操作与证据见 [iOS ASR 固定文件探针](ios-asr-file-probe.md)。它沿用 `apple.speech.recognizer` 的强制 on-device 边界，文件输入不采集麦克风，通过探针按钮或显式 `--run-asr` 启动参数运行。iPhone 16 Pro Max / iOS 27.0.1 首轮的 150ms 延迟取消未生效，保留为 incomplete；第二轮任务创建后立即取消，确认 `platformCancelled=true`、平台 task completed，以及同一进程后续转写成功，整体 `status=success`。输入 SHA 与冻结基线一致。文件探针不覆盖麦克风、音频 session 或 iOS 26 SpeechTranscriber。

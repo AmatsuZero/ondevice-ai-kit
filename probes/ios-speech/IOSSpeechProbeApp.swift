@@ -9,6 +9,7 @@ import ODAIKitSpeech
 struct IOSSpeechProbeApp: App {
     @StateObject private var model = SpeechProbeModel()
     @StateObject private var asr = ASRFileProbe()
+    @State private var didAutoRunASR = false
     var body: some Scene {
         WindowGroup {
             VStack(spacing: 12) {
@@ -22,7 +23,13 @@ struct IOSSpeechProbeApp: App {
                 Button("Cancel ASR") { asr.cancel() }
                     .disabled(!asr.busy).accessibilityIdentifier("asr-cancel")
                 Text(asr.reportPath ?? "").font(.caption).textSelection(.enabled)
-            }.padding().onAppear { model.run() }
+            }.padding().onAppear {
+                model.run()
+                if CommandLine.arguments.contains("--run-asr"), !didAutoRunASR {
+                    didAutoRunASR = true
+                    asr.run()
+                }
+            }
         }
     }
 }
