@@ -39,7 +39,7 @@ def decoded_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def validate(paths: list[Path], scale: int = 2) -> None:
+def validate(paths: list[Path], scale: int = 2, quiet: bool = False) -> None:
     if len(paths) != 3:
         raise ValueError("expected reference, input, and bicubic files")
     if scale not in (2, 4):
@@ -59,7 +59,8 @@ def validate(paths: list[Path], scale: int = 2) -> None:
         ):
             raise ValueError(f"invalid frame timestamps: {path}")
         digest = decoded_sha256(path)
-        print(f"{path}: {width}x{height}, 48 frames at 24 fps, no audio, decoded_sha256={digest}")
+        if not quiet:
+            print(f"{path}: {width}x{height}, 48 frames at 24 fps, no audio, decoded_sha256={digest}")
 
 
 if __name__ == "__main__":

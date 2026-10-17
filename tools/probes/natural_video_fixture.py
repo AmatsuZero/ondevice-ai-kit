@@ -137,7 +137,7 @@ def prepare_fixture(source: Path, destination: Path, manifest: dict, *, assume_b
         low_resolution = temporary / "input-180p-4x.mkv"
         encode(low_resolution, "bicubic-720p-4x.mkv", "scale=1280:720:flags=bicubic")
         encode(low_resolution, "input-180p-4x.mp4", "null", mp4=True)
-        validate([reference, low_resolution, temporary / "bicubic-720p-4x.mkv"], scale=4)
+        validate([reference, low_resolution, temporary / "bicubic-720p-4x.mkv"], scale=4, quiet=True)
         if decoded_sha256(low_resolution) != decoded_sha256(temporary / "input-180p-4x.mp4"):
             raise ValueError("MP4 transport changed decoded pixels")
         files = {path.name: {**file_identity(path), "decodedSha256": decoded_sha256(path)}

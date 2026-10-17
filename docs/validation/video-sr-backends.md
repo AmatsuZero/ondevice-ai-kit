@@ -101,4 +101,6 @@ FFmpeg bicubic 对 reference 的 48 帧保真度为 PSNR `50.651335 dB`、SSIM `
 
 iPhone 再次查询仍为 unavailable，因此自然视频的设备 SR/CI 双路对照、逐帧可视质量和新增双路取消依然未验收。`qualityVerdict` 保持 unverified；后续还需更有纹理的实拍样本和可确认的源色彩。
 
-本包 Python 工具完整测试 40/40 通过（自然 fixture 12 项），日志在 `artifacts/P7/natural/tools-tests-final.log`；`py_compile` 与 `git diff --check` 通过。独立审查指出的 SHA-256 固定/制备源绑定、发布竞态和中断清理测试已修正并复核。SDK/探针 App 源码本包未改，未将历史设备构建视为新自然视频的设备验收。
+本包 Python 工具完整测试 41/41 通过（自然 fixture 13 项），日志在 `artifacts/P7/natural/tools-tests-final.log`；`py_compile` 与 `git diff --check` 通过。独立审查指出的 SHA-256 固定/制备源绑定、发布竞态和中断清理测试已修正并复核。SDK/探针 App 源码本包未改，未将历史设备构建视为新自然视频的设备验收。
+
+后续复核发现 prepare 的标准输出混入 validate 诊断文本，现通过 validate 的 quiet 选项让 CLI 只输出一个 JSON 报告。新增真实 CLI 子进程回归先复现 JSON 解析失败、修正后通过；完整工具测试已重跑为上述 41/41。

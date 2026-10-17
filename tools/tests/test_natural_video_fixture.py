@@ -1,6 +1,7 @@
 import hashlib
 import json
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,6 +17,25 @@ def source_manifest(path):
 
 
 class NaturalVideoFixtureTests(unittest.TestCase):
+    def test_prepare_cli_stdout_is_a_single_json_report(self):
+        with tempfile.TemporaryDirectory() as root:
+            source = Path(root) / "source.mkv"
+            subprocess.run([
+                "ffmpeg", "-hide_banner", "-loglevel", "error", "-f", "lavfi",
+                "-i", "testsrc2=size=1280x720:rate=24", "-frames:v", "48", "-an",
+                "-c:v", "ffv1", "-y", str(source),
+            ], check=True)
+            manifest = Path(root) / "manifest.json"
+            manifest.write_text(json.dumps(source_manifest(source)))
+            result = subprocess.run([
+                sys.executable, str(Path(__file__).parents[1] / "probes" / "natural_video_fixture.py"),
+                "prepare", str(source), str(Path(root) / "prepared"),
+                "--manifest", str(manifest), "--assume-bt709",
+            ], text=True, capture_output=True, check=True)
+            report = json.loads(result.stdout)
+            self.assertTrue(report["sourceVerified"])
+            self.assertEqual(report["frames"], 48)
+
     def test_download_verifies_sha1_and_does_not_publish_corrupt_asset(self):
         with tempfile.TemporaryDirectory() as root:
             root_path = Path(root)
