@@ -1,7 +1,7 @@
 plugins { alias(libs.plugins.android.application);alias(libs.plugins.kotlin.compose) }
 android {
  namespace="io.ondeviceai.demo";compileSdk=36
- defaultConfig {applicationId="io.ondeviceai.demo";minSdk=26;targetSdk=36;versionCode=1;versionName="0.1.0";testInstrumentationRunner="io.ondeviceai.demo.TtsProbeInstrumentation";buildConfigField("String","ODAI_SDK_COMMIT","\""+(providers.gradleProperty("sdkCommit").orNull?:"working-tree")+"\"")}
+ defaultConfig {applicationId="io.ondeviceai.demo";minSdk=26;targetSdk=36;versionCode=1;versionName="0.1.0";testInstrumentationRunner=providers.gradleProperty("odaiTestRunner").orNull?:"io.ondeviceai.demo.TtsProbeInstrumentation";buildConfigField("String","ODAI_SDK_COMMIT","\""+(providers.gradleProperty("sdkCommit").orNull?:"working-tree")+"\"")}
  buildFeatures {compose=true;buildConfig=true}
  compileOptions {sourceCompatibility=JavaVersion.VERSION_17;targetCompatibility=JavaVersion.VERSION_17}
 }
@@ -16,5 +16,6 @@ dependencies {
  implementation("androidx.activity:activity-compose:1.12.4")
  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
  androidTestImplementation(project(":android:backend-system-tts"))
+ androidTestImplementation(project(":android:backend-system-asr"))
  androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 }

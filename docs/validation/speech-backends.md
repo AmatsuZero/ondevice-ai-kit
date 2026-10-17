@@ -96,3 +96,20 @@ P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端�
 - 后端新增主线程约束的 `TtsTaskGate`：取消在 `speak` 的 `finally` 中同步执行 `stop()` 并释放 admission，迟到的 `onDone/onStop/onError` 只能匹配原 utterance ID；`close` 对活动 utterance 只调用一次 `stop()`。JVM `TtsTaskGateTest` 覆盖取消后重新进入、迟到回调隔离、并发拒绝、重复取消、正常完成不调用 `stop()` 以及平台 `stop()` 异常时仍执行清理。
 - 取消设备验收已通过：TECNO KM9 / Android 15(API 35) 在取消长句后立即发起短句，阶段日志确认取消协程完成、后续请求成功，instrumentation **1/1 通过**；根因为取消后重复读取 `TextToSpeech.voices` 会阻塞，后端现于初始化时缓存 voice 列表。原先长句尝试的崩溃记录仍不计为通过。
 - Android typed facade 单元测试和 `android:backend-system-tts:assembleRelease` 通过。该模块没有引入 Azure/Microsoft SDK。
+
+## Android on-device ASR 可选后端
+
+本包沿用同一注册表，新增 `SpeechRecognitionRequest(locale)`、`SpeechRecognitionResult(backendId, transcript, confidence?)`、`SpeechRecognitionBackend` 与 `SpeechRecognitionClient`，与 TTS 请求/结果分别定义。首版为一次短句的麦克风输入，不承诺持续听写、partial 流、音频文件注入或语音模型安装。`android:backend-system-asr` 使用 `android.speech.recognizer` ID，保持 minSdk26，API31 以下只报告不可用；已注册但不可用或显式选择未知 ID 均不回退到其他引擎。Demo 只在 androidTest 依赖后端；麦克风权限仅加入 debug manifest，默认 release 不包含 ASR 实现或麦克风权限。
+
+官方边界已按本机 Android API34 `api-versions.xml`、API37 public sources 及 [AOSP Android 13 固定源码](https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-13.0.0_r1/core/java/android/speech/SpeechRecognizer.java) 核对：
+
+- `createOnDeviceSpeechRecognizer` 与 `isOnDeviceRecognitionAvailable` 自 API31 提供。仅调用 on-device factory；不将普通 `createSpeechRecognizer` 加 `EXTRA_PREFER_OFFLINE` 的 hint 当作同等保证。
+- 全部 framework 方法在应用主线程调用，listener 先于 start 设置，取消/结束后必须 destroy。一个实例对应一次短句，晚到的旧 callback 不能完成下一次请求。
+- `RECORD_AUDIO` 由宿主声明并授权；查询不弹权限、不下载资源。服务存在不等于某语言模型已安装或真实转写成功。
+- API33 的 [EXTRA_AUDIO_SOURCE](https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-13.0.0_r1/core/java/android/speech/RecognizerIntent.java) 可提供 PFD/PCM，调用方负责关闭，但不支持的服务可改用麦克风。`checkRecognitionSupport` 的语言列表不证明音频注入支持，因此本包不把该路径加入 SDK 公共 DTO。
+
+2026-10-17 本地验证：`android:speech` 8 项 JVM 测试、ASR session 7 项测试通过，ASR Release AAR、`lintDebug`、Demo debug/androidTest APK 编译通过；现有 Android 验证脚本所列 JVM/lint/APK 任务及语音模块测试通过。lint 无 error，保留项目固定 coroutines 版本更新提示和私有 API31 实现类 `TargetApi` 建议两条 warning。独立审查修正了外部 deadline 被误转为 ASR 超时、选择后运行时不可用的错误分类，以及清理异常静默丢失；外部超时和 destroy 失败回归均已观察 RED→GREEN，busy 请求不会销毁当前任务。
+
+TECNO KM9 / Android 15（API35），debug 宿主已授权 `RECORD_AUDIO`。服务查询 `AVAILABLE`，实际 `en-US` 短句启动返回错误码 13（`ERROR_LANGUAGE_UNAVAILABLE`：语言支持但资源当前不可用）。Client 返回 `BackendUnavailable(reason=MISSING_ASSETS)`，探针报告 `probeStatus=unavailable`、`transcription=not-run`，取消/重入/活跃关闭未完成设备验收，不能报告 1/1 ASR 推理或生命周期通过。未触发下载、未调用网络 recognizer。网络行为未独立测量。
+
+Gradle connected 测试会卸载测试宿主；第二轮曾因麦克风授权丢失而跳过。最终以重新安装后 `pm grant` + `am instrument -w` 的直接探针为准，原始证据位于忽略目录 `artifacts/P6AndroidSpeech/asr-20261017/`。探针只将明确的运行时不可用分类标为 unavailable；其他异常仍为 fail。待语言资源可用后重跑取消、重入、close 和真实转写；API26–30 实机门禁与离线/质量验收仍待补。

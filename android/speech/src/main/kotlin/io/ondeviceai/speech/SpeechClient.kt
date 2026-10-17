@@ -20,8 +20,12 @@ data class SpeechBackendRegistration(val capability: SpeechCapability, val backe
 data class SpeechBackendDescriptor(val capability: SpeechCapability, val backendId: String, val availability: CapabilityAvailability)
 sealed class SpeechClientError(message: String) : IllegalStateException(message) {
     data class BackendNotRegistered(val capability: SpeechCapability, val backendId: String) : SpeechClientError("backend not registered: $backendId")
-    data class BackendUnavailable(val capability: SpeechCapability, val backendId: String, val reason: UnavailableReason) : SpeechClientError("backend unavailable: $backendId")
+    data class BackendUnavailable(val capability: SpeechCapability, val backendId: String, val reason: UnavailableReason, val diagnostic: Throwable? = null) : SpeechClientError("backend unavailable: $backendId") {
+        init { diagnostic?.let(::initCause) }
+    }
 }
+
+class SpeechBackendUnavailableException(val reason: UnavailableReason, cause: Throwable? = null) : IllegalStateException("backend unavailable: $reason", cause)
 
 /** Capability-scoped registry; task and audio contracts are added with concrete providers. */
 class SpeechClient(val capability: SpeechCapability, private val defaultBackendId: String,
@@ -72,6 +76,42 @@ class SpeechSynthesisClient(defaultBackendId: String, backends: List<SpeechSynth
         require(request.text.isNotEmpty()) { "empty text" }
         val descriptor = registry.select(selection)
         return table.getValue(descriptor.backendId).speak(request)
+    }
+    suspend fun close() = registry.close()
+}
+
+data class SpeechRecognitionRequest(val locale: String) {
+    init { require(locale.isNotBlank()) { "locale must not be blank" } }
+}
+
+data class SpeechRecognitionResult(
+    val backendId: String,
+    val transcript: String,
+    val confidence: Float? = null
+)
+
+interface SpeechRecognitionBackend : SpeechBackend {
+    suspend fun recognize(request: SpeechRecognitionRequest): SpeechRecognitionResult
+}
+
+/** Typed ASR facade. A selected backend is queried and invoked exactly once. */
+class SpeechRecognitionClient(defaultBackendId: String, backends: List<SpeechRecognitionBackend>) {
+    private val registry = SpeechClient(
+        SpeechCapability.ASR, defaultBackendId,
+        backends.map { SpeechBackendRegistration(SpeechCapability.ASR, it) }
+    )
+    private val table = backends.associateBy { it.backendId }
+    init { require(backends.map { it.backendId }.toSet().size == backends.size) }
+    suspend fun recognize(
+        request: SpeechRecognitionRequest,
+        selection: SpeechBackendSelection = SpeechBackendSelection.Default
+    ): SpeechRecognitionResult {
+        val descriptor = registry.select(selection)
+        return try {
+            table.getValue(descriptor.backendId).recognize(request)
+        } catch (error: SpeechBackendUnavailableException) {
+            throw SpeechClientError.BackendUnavailable(capability = SpeechCapability.ASR, backendId = descriptor.backendId, reason = error.reason, diagnostic = error)
+        }
     }
     suspend fun close() = registry.close()
 }
