@@ -43,3 +43,32 @@ P7 当前状态：候选比较和探针协议已完成；`tools/probes/video_sr_
 ```sh
 python3 tools/probes/video_sr_quality.py reference.mkv candidate.mov > artifacts/P7/quality.json
 ```
+
+## 共用色彩与编码的设备对照
+
+2026-10-17 进一步读取本机 Xcode iPhoneOS 27.1 SDK 的 `VTFrameProcessor_SuperResolutionScaler.h`、`VTFrameProcessorConfiguration.h`、`CIContext.h` 和 `AVVideoSettings.h`。Apple 的公开头文件要求通过配置的 source/destination attributes 协商缓冲区，但没有规定 SR 模型的传递函数；`64RGBAHalf` 只定义像素布局。Core Image 默认工作空间为线性 extended sRGB，简化 render 方法会根据目标 buffer 色彩空间进行匹配。仅凭 half-float 格式不能推断 SR 要求线性输入。
+
+旧链路的首帧真机诊断发现：未标色彩的 180p 输入被 AVAssetReader 解码为 SMPTE-C primaries、BT.709 transfer 和 BT.601 matrix；随后分配的 RGBAHalf 和编码前 BGRA 没有色彩附件，Core Image 将其按 sRGB 解释。设备配置返回的 source/destination attributes 只有尺寸、IOSurface 和 `RGhA`（1380411457），没有色彩要求。原始记录在 `artifacts/P7/device-runs-color-contract/`。该诊断最初把“存在但无名称的 CGColorSpace”与缺失空间都写成 unspecified，后续已区分 unnamed；这里不据旧字段推断解码图像没有色彩空间。
+
+探针现在使用一个明确的**实验约定**：输入必须是标有 BT.709 的 SDR 320×180 视频；两路共用 AVAssetReader BGRA 解码、显式 sRGB RGBAHalf 转换、sRGB 工作空间、输出 BGRA 转换及同一 AVAssetWriter HEVC/MOV 设置。中间只切换 VideoToolbox SR 与 Core Image bicubic（B=0、C=0.75、4×）。SR 缓冲区通过 `CVPixelBufferCreateResolvedAttributesDictionary` 合并系统要求；RGB 缓冲区附加 sRGB 色彩空间/传递函数与 BT.709 primaries。writer 统一输出 BT.709，平均码率请求 8 Mbps、24 fps、关键帧间隔 48、关闭帧重排。相同设置不保证两路实际码率或编码误差相同，比较仍包含编码损失。
+
+`video_sr_fixture.sh` 默认生成完整 BT.709/tv 声明的 fixture，解码帧摘要保持不变；显式 `--untagged` 仅用于重现旧路径的负向验证。默认生成方式为：
+
+```sh
+sh tools/probes/video_sr_fixture.sh artifacts/P7/color-pair
+```
+
+将生成的 `input-180p-4x.mp4` 复制到探针 Documents 后，用 `--process-video` 或界面处理按钮运行两路。成功报告包含 `baseline`、两路输入文件 SHA-256、请求的编码设置和首帧各阶段色彩附件；只有两路均完成并成功写入报告后才保留输出。旧的未标色彩输入已在真机被明确拒绝，且未留下新 MOV。探针仍仅处理固定小输入；文件 hash 暂时整文件读取，扩大输入前应改为流式 hash，当前内存采样也不覆盖这一步。
+
+同一 iPhone 16 Pro Max / iOS 27.0.1 的对照结果如下，两路输入文件 SHA-256 均为 `8e5bf599efd877bfecc88e0a0e3ba96b6a611338caba1cefc7137fc64f124dc0`，输入/输出均 48 帧、24 fps，PTS 单调。设备报告记录解码图像为 CoreMedia709，中间及编码前图像均为 sRGB。FFprobe 独立确认两个实际 MOV 均只有 HEVC 视频轨、1280×720、YUV420p、tv range，primaries/transfer/matrix 均为 BT.709；与 reference 的声明一致，质量工具均为 `colorComparability=matched-metadata`、恰好 48 对帧。
+
+| 输出 | PSNR dB | SSIM | 每帧缩放 p50 / p95 秒 |
+| --- | ---: | ---: | ---: |
+| VideoToolbox SR | 26.945055 | 0.920472 | 0.093907 / 0.096132 |
+| Core Image bicubic | 28.087569 | 0.919197 | 0.001453 / 0.002219 |
+
+原始设备报告为 `artifacts/P7/device-runs-color-pair/ios-video-sr-probe-34696DD3-F92D-4148-B331-550490B6389C.json`，质量报告为 `artifacts/P7/color-pair-quality-sr.json` 与 `color-pair-quality-bicubic.json`。上述时间只覆盖缩放调用，不是含解码/编码的端到端耗时；基线在 SR 后运行，不能作为独立冷启动或内存比较。两路首帧附件及编码设置已逐字段复核。
+
+Python 工具测试 28/28 通过，新增 fixture 测试覆盖默认输出的尺寸/色彩/帧时序和 H.264 传输副本的解码像素一致性。独立审查发现并修正默认 fixture 不匹配输入门槛、报告失败被成功状态覆盖，以及最后一次内存采样前过早保留输出的问题；最终修订的现有签名 iPhoneOS 构建通过。手机在最终重跑前变为 unavailable，因此这两处失败路径的故障注入和新增双路流程的取消设备复核仍待补，旧版单路取消证据继续保留其原范围。
+
+当前只证明实验约定下两路色彩/编码路径可核对，`qualityVerdict` 仍为 `unverified`。Apple 模型最适合的传递函数、自然视频与逐帧可视质量、音轨保留、Android、最低系统和 SDK/Demo 接入仍未验收；不能用这些合成图案分数下最终模型质量结论。

@@ -135,6 +135,9 @@ final class VideoSRProbeModel: ObservableObject {
                 report["configurationRevision"] = configuration.revision.rawValue
                 report["configurationScaleFactor"] = configuration.scaleFactor
                 report["pixelFormats"] = configuration.__frameSupportedPixelFormats.map { $0.intValue }
+                // Keep framework-owned values readable even when they are not JSON types.
+                report["sourcePixelBufferAttributes"] = configuration.sourcePixelBufferAttributes.mapValues { String(describing: $0) }
+                report["destinationPixelBufferAttributes"] = configuration.destinationPixelBufferAttributes.mapValues { String(describing: $0) }
                 canDownload = modelRawStatus == VTSuperResolutionScalerConfiguration.ModelStatus.downloadRequired.rawValue
                 status = canDownload ? "Model download required" : "Ready to probe"
             } else {
@@ -193,10 +196,23 @@ final class VideoSRProbeModel: ObservableObject {
             status = "Input missing"
             return
         }
+        let srOutput = documents.appendingPathComponent("sr-output-\(UUID().uuidString).mov")
+        let baselineOutput = documents.appendingPathComponent("bicubic-output-\(UUID().uuidString).mov")
+        var completed = false
+        defer {
+            if !completed {
+                try? FileManager.default.removeItem(at: srOutput)
+                try? FileManager.default.removeItem(at: baselineOutput)
+            }
+        }
         do {
-            let result = try await VideoSRRunner.run(inputURL: inputURL, outputURL: documents.appendingPathComponent("sr-output-\(UUID().uuidString).mov"), configuration: configuration)
-            writeReport(result)
-            status = "Processed \(result["outputFrameCount"] ?? 0) frames"
+            let result = try await VideoSRRunner.run(inputURL: inputURL, outputURL: srOutput, configuration: configuration)
+            let baseline = try await VideoSRRunner.runBicubic(inputURL: inputURL, outputURL: baselineOutput)
+            var combined = result
+            combined["baseline"] = baseline
+            guard writeReport(combined) else { return }
+            completed = true
+            status = "Processed \(result["outputFrameCount"] ?? 0) frames + baseline"
         } catch is CancellationError {
             writeReport(["schemaVersion": 1, "validationStatus": "device", "backendId": "apple.videotoolbox.sr", "state": "cancelled"])
             status = "Cancelled"
@@ -207,15 +223,18 @@ final class VideoSRProbeModel: ObservableObject {
     }
 #endif
 
-    private func writeReport(_ report: [String: Any]) {
+    @discardableResult
+    private func writeReport(_ report: [String: Any]) -> Bool {
         do {
             let data = try JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
             let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let file = documents.appendingPathComponent("ios-video-sr-probe-\(UUID().uuidString).json")
             try data.write(to: file, options: .atomic)
             reportPath = file.lastPathComponent
+            return true
         } catch {
             status = "Report failed: \(error.localizedDescription)"
+            return false
         }
     }
 }
