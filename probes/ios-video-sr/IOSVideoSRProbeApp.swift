@@ -31,10 +31,14 @@ struct IOSVideoSRProbeApp: App {
             .padding()
             .onAppear {
                 model.inspect()
-                if CommandLine.arguments.contains("--process-video") {
+                if CommandLine.arguments.contains("--process-video") || CommandLine.arguments.contains("--cancel-video") {
                     Task {
                         try? await Task.sleep(nanoseconds: 500_000_000)
                         model.processVideo()
+                        if CommandLine.arguments.contains("--cancel-video") {
+                            try? await Task.sleep(nanoseconds: 250_000_000)
+                            model.cancelProcessing()
+                        }
                     }
                 }
             }
