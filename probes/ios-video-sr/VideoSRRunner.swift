@@ -3,6 +3,7 @@ import AVFoundation
 import CoreVideo
 import CoreImage
 import Foundation
+import Darwin
 import VideoToolbox
 
 @available(iOS 26.0, *)
@@ -63,6 +64,8 @@ enum VideoSRRunner {
         var frameCount = 0
         var timestamps: [CMTime] = []
         var durations: [Double] = []
+        let baselineResidentBytes = try residentMemoryBytes()
+        var peakResidentBytes = baselineResidentBytes
         guard let sample = readerOutput.copyNextSampleBuffer(), let firstBuffer = CMSampleBufferGetImageBuffer(sample) else {
             throw RunnerError.readerFailed("empty video")
         }
@@ -89,11 +92,13 @@ enum VideoSRRunner {
                 try Task.checkCancellation()
                 throw RunnerError.processingFailed(String(describing: error))
             }
+            peakResidentBytes = max(peakResidentBytes, try residentMemoryBytes())
             durations.append(ProcessInfo.processInfo.systemUptime - started)
             guard let encodedBuffer = makeBuffer(width: 1280, height: 720, format: kCVPixelFormatType_32BGRA) else { throw RunnerError.invalidFrame }
             ciContext.render(CIImage(cvPixelBuffer: destinationBuffer), to: encodedBuffer)
             while !writerInput.isReadyForMoreMediaData { try await Task.sleep(for: .milliseconds(2)) }
             guard adaptor.append(encodedBuffer, withPresentationTime: sourceFrame.presentationTimeStamp) else { throw RunnerError.writerFailed(writer.error?.localizedDescription ?? "append failed") }
+            peakResidentBytes = max(peakResidentBytes, try residentMemoryBytes())
             timestamps.append(sourceFrame.presentationTimeStamp)
             frameCount += 1
             previousSource = sourceFrame
@@ -111,7 +116,9 @@ enum VideoSRRunner {
         guard frameCount == 48, monotonic else { throw RunnerError.processingFailed("frame count or timestamps invalid") }
         completed = true
         let sorted = durations.sorted()
-        return ["schemaVersion": 1, "validationStatus": "device", "backendId": "apple.videotoolbox.sr", "state": "success", "inputFrameCount": frameCount, "outputFrameCount": frameCount, "outputWidth": 1280, "outputHeight": 720, "timestampsMonotonic": monotonic, "p50Seconds": sorted.isEmpty ? NSNull() : sorted[sorted.count / 2], "p95Seconds": sorted.isEmpty ? NSNull() : sorted[min(sorted.count - 1, Int(Double(sorted.count) * 0.95))], "output": outputURL.lastPathComponent, "startTime": startTime.map { CMTimeGetSeconds($0) } ?? NSNull()]
+        let endingResidentBytes = try residentMemoryBytes()
+        peakResidentBytes = max(peakResidentBytes, endingResidentBytes)
+        return ["schemaVersion": 1, "validationStatus": "device", "backendId": "apple.videotoolbox.sr", "state": "success", "inputFrameCount": frameCount, "outputFrameCount": frameCount, "outputWidth": 1280, "outputHeight": 720, "timestampsMonotonic": monotonic, "p50Seconds": sorted.isEmpty ? NSNull() : sorted[sorted.count / 2], "p95Seconds": sorted.isEmpty ? NSNull() : sorted[min(sorted.count - 1, Int(Double(sorted.count) * 0.95))], "residentMemoryBaselineBytes": baselineResidentBytes, "residentMemoryPeakBytes": peakResidentBytes, "residentMemoryEndingBytes": endingResidentBytes, "residentMemoryPeakDeltaBytes": max(0, peakResidentBytes - baselineResidentBytes), "memoryMeasurement": "process resident_size sampled after each frame processing and encoding", "output": outputURL.lastPathComponent, "startTime": startTime.map { CMTimeGetSeconds($0) } ?? NSNull()]
     }
 
     private static func makeSourceFrame(from buffer: CVPixelBuffer, pts: CMTime, context: CIContext) -> VTFrameProcessorFrame? {
@@ -130,6 +137,18 @@ enum VideoSRRunner {
         var buffer: CVPixelBuffer?
         guard CVPixelBufferCreate(nil, width, height, format, attrs as CFDictionary, &buffer) == kCVReturnSuccess else { return nil }
         return buffer
+    }
+
+    private static func residentMemoryBytes() throws -> Int64 {
+        var info = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size / MemoryLayout<natural_t>.size)
+        let result = withUnsafeMutablePointer(to: &info) { pointer in
+            pointer.withMemoryRebound(to: integer_t.self, capacity: Int(count)) {
+                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+            }
+        }
+        guard result == KERN_SUCCESS else { throw RunnerError.processingFailed("resident memory sampling failed: \(result)") }
+        return Int64(info.resident_size)
     }
 }
 #endif
