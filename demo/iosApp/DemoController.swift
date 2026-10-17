@@ -24,6 +24,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     @Published var report: String?
     @Published var message: String?
     @Published var cameraFrameCount = 0
+    @Published private(set) var cameraPermissionDenied = false
     override init() {
         super.init()
         bridge.onResult = { [weak self] result in
@@ -40,6 +41,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     }
     @objc private func background() { cameraLifecycle.pause(); pauseCamera(); photoSubmission.cancel(); model.cancel() }
     @objc private func foreground() {
+        if AVCaptureDevice.authorizationStatus(for: .video) == .authorized { cameraPermissionDenied = false }
         if let token = cameraLifecycle.activate(), AVCaptureDevice.authorizationStatus(for: .video) == .authorized { resumeCamera(token) }
     }
     @objc private func memoryWarning() { stopCamera(); model.cancel() }
@@ -77,14 +79,28 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     func startCamera() {
         photoSubmission.cancel()
         let token = cameraLifecycle.requestStart()
+        cameraPermissionDenied = false
+        #if DEBUG
+        if ProcessInfo.processInfo.arguments.contains("--simulate-camera-permission-denied") {
+            cameraLifecycle.stop()
+            cameraPermissionDenied = true
+            model.permissionDenied()
+            return
+        }
+        #endif
         AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
             DispatchQueue.main.async {
                 guard let self else { return }
                 guard self.cameraLifecycle.canStart(token) else { return }
-                guard granted else { self.cameraLifecycle.stop(); self.model.permissionDenied(); return }
+                guard granted else { self.cameraLifecycle.stop(); self.cameraPermissionDenied = true; self.model.permissionDenied(); return }
                 self.resumeCamera(token)
             }
         }
+    }
+
+    func openCameraSettings() {
+        guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url)
     }
     private func resumeCamera(_ token: UInt64) {
         pauseCamera(); model.cancel()

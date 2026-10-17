@@ -27,6 +27,10 @@ struct SharedControls: UIViewControllerRepresentable {
                 }
                 SharedControls(controller: controller).frame(height: 280)
                 if let message = controller.message { Text(message).font(.caption) }
+                if controller.cameraPermissionDenied {
+                    Button("打开设置") { controller.openCameraSettings() }
+                        .accessibilityIdentifier("camera-permission-settings")
+                }
                 if let report = controller.report { Button("导出 Benchmark JSON") { controller.exportReport(json: report) } }
                 #if DEBUG
                 if ProcessInfo.processInfo.arguments.contains("--ui-camera-test") {

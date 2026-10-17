@@ -47,6 +47,12 @@
 
 剩余 P4 范围为 iOS 真机 EXIF 旋转/镜像、权限恢复的真实 UI，以及两端持续资源/热量测量。iOS 真机照片选择和取消已通过。Android 现代 API 35 的相机和照片交互已完成；API 26 下限仍等待设备。未开始 P5 benchmark；本次单图耗时不作为性能报告。
 
+## iOS 相机权限恢复入口（2026-10-17）
+
+- Demo 在相机授权拒绝后显示“打开设置”，点击后调用系统 App Settings URL；从系统设置回到 Demo 时重新查询相机授权，若已授权则清除恢复提示。调试构建提供仅用于测试的模拟拒绝启动参数，不改变真实设备权限。
+- 当前 KMP iOS framework 重建后，iPhone 16 Pro Max / iOS 27.0.1 的 `testCameraPermissionDeniedOffersSettingsRecovery` 在 xcresult 中 1/1 通过、0 失败：按钮出现并打开系统 Settings。iPhone 17 / iOS 27 模拟器同一用例也为 1/1 通过。原始 xcresult 保存在忽略目录 `artifacts/P4PermissionDeviceFinal.xcresult` 与 `artifacts/P4PermissionSimulator.xcresult`。
+- 此用例没有真实关闭或重新开启相机权限，因此 Settings 往返后的授权恢复、再次启动相机仍是 **unverified**。此前照片选择 UI 重跑第一次因过期 KMP framework 缺少 `BridgeBackendSelection` 未编译；重建后第二次 runner/CoreDevice 卡住，未形成新的照片选择结论。EXIF 2/6/7 的 PHPicker→Demo→Vision 真机端到端仍未验证。
+
 ## EXIF 方向路径补充（2026-10-17）
 
 - 新增合成 TIFF 的 ImageIO 主机检查，使用与 iOS Photo Picker 相同的 `CGImageSourceCreateThumbnailAtIndex` 参数。EXIF 1/2/6/7 的宽高、左右镜像及旋转方向均通过；合成图仅有黑白半幅，不含个人数据。`sh scripts/check-ios-photo-orientation.sh` 输出 `iOS photo ImageIO orientation checks passed (1, 2, 6, 7)`，并已加入 Apple 验证脚本。

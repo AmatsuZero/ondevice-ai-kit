@@ -68,6 +68,22 @@ final class CameraLifecycleUITests: XCTestCase {
         waitForFrames(counter, after: stopped)
         app.buttons["停止"].tap()
     }
+
+    func testCameraPermissionDeniedOffersSettingsRecovery() {
+        let app = XCUIApplication()
+        app.launchArguments = ["--simulate-camera-permission-denied"]
+        app.launch()
+        let camera = app.buttons["相机"]
+        XCTAssertTrue(camera.waitForExistence(timeout: 15))
+        camera.tap()
+        let settings = app.buttons["打开设置"]
+        XCTAssertTrue(settings.waitForExistence(timeout: 10), "Denied camera permission should offer Settings recovery")
+        XCTAssertTrue(settings.isEnabled)
+        settings.tap()
+        let preferences = XCUIApplication(bundleIdentifier: "com.apple.Preferences")
+        XCTAssertTrue(preferences.waitForExistence(timeout: 10), "Recovery button should open system Settings")
+    }
+
     private func waitForFrames(_ counter: XCUIElement, after count: Int, file: StaticString = #filePath, line: UInt = #line) {
         let fresh = XCTNSPredicateExpectation(predicate: NSPredicate { _, _ in (Int(counter.label) ?? 0) > count + 2 }, object: nil)
         XCTAssertEqual(XCTWaiter.wait(for: [fresh], timeout: 10), .completed, "Camera inference must keep delivering frames", file: file, line: line)
