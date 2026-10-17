@@ -123,4 +123,6 @@ Gradle connected 测试会卸载测试宿主；第二轮曾因麦克风授权丢
 
 SDK 源码基线为 `a97df90cdd49e7e567e4259d17d745da885f6225`；本包仅补分发工程/消费者/文档，未改语音算法或 API。二进制、日志、音频均留在忽略目录，没有进入 Git/LFS 或远端制品仓库。
 
+本包独立审查结论为 APPROVE，0 findings；复核了生成器幂等、目标依赖图、消费者清理与文档证据边界。实现提交 `58cc5a61ce1d4507efaf0ac3dcc4e2a9566eb8e3` 已同步 GitHub/极狐，脚本再次读取两端 ref 确认 SHA 相等。
+
 P6 仍保留这些边界：Android API35 ASR 的 `en-US` 资源缺失导致 `MISSING_ASSETS`，未完成真实转写/取消生命周期；iOS ASR 与 iOS 26 资源未实测；两端 TTS 的断网行为与主观质量未测；Azure/Microsoft SDK 尚未加入；KMP 语音 Demo 仍待后续工作包。

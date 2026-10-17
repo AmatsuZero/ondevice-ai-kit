@@ -30,6 +30,6 @@
 - [x] Task 1: six XCFrameworks built; speech and face binary consumers compiled; Core/Speech-only contract typecheck passed; generator repeat hashes equal; existing package outputs refused without mutation.
 - [x] Task 2: Android contract/systemTts/systemAsr consumers compile with project dependencies and published Maven Local coordinates; all debug/release flavors passed; dependency graphs isolate each provider.
 - [x] Task 3: Swift XCTest 33/33 (speech 6), existing Android speech/TTS/ASR test reports 18/18, module and consumer lint with no errors. Android unit tasks reused up-to-date outputs. Evidence and remaining gaps recorded in speech-backends.md.
-- [ ] Task 4: scoped independent review, commit and dual-remote verification.
+- [x] Task 4: independent review APPROVE (0 findings); implementation commit `58cc5a61ce1d4507efaf0ac3dcc4e2a9566eb8e3` synchronized to GitHub and JiHu with fresh remote SHA equality checks.
 
 Scope decision: this package distributes existing APIs only. It does not add iOS ASR, KMP speech UI, or cloud providers. Android ASR MISSING_ASSETS and minimum-version devices remain explicit gaps.
