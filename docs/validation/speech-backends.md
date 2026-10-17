@@ -69,3 +69,14 @@ swiftc tools/probes/apple_avspeech_probe.swift -o /tmp/odai-apple-avspeech-probe
 ```
 
 P6 仍待完成：iOS 真机 ASR 授权、音频输入和转写验证，iOS 26+ SpeechTranscriber 资源实际状态，以及两端 TTS 的离线/质量验收。Android 与 iOS 系统 TTS 最小探针已通过；统一选择值和错误语义进入后续实现计划。Azure 作为可裁剪插件，待凭据、网络和包分发策略确定后单独实现与 benchmark。
+
+## 2026-10-17 统一 SDK 语音选择契约
+
+P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端实现：
+
+- Apple：`ODAIKitSpeech.SpeechClient`，通过 `SpeechCapability.tts` 或 `.asr` 创建能力注册表；注册 `SpeechBackend` 后可用默认后端或 `SpeechBackendSelection.explicit(id)` 查询所选描述符。显式 ID 不存在或不可用时返回结构化错误，不会静默切换。
+- Android：`io.ondeviceai.speech.SpeechClient`，对应 `SpeechCapability.TTS` / `ASR` 与 `SpeechBackendSelection.Explicit(id)`，目前仅查询所选描述符；模块 `android:speech` 可独立依赖，未加入 Demo 默认依赖。
+- 描述符公开现有 `CapabilityAvailability` 的可用性、`offline` 与最低系统字段；尚未定义凭据/网络错误或音频任务接口。SDK 不修改宿主音频会话或路由。
+- Apple 契约测试 2/2 通过；Android `:android:speech:testDebugUnitTest --tests io.ondeviceai.speech.SpeechClientTest` 通过。当前 Fake 后端只验证选择和生命周期，不能替代系统 TTS/ASR 真机行为。
+
+后续系统后端应分别放入可选模块：`apple.avspeech`、`apple.speech.recognizer`、`android.text-to-speech` 和 `android.speech.recognizer`；Azure/Microsoft 适配器保持独立插件，不进入默认依赖图。
