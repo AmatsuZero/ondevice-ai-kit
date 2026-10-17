@@ -3,6 +3,76 @@ import CryptoKit
 @testable import ODAIKitIdentity
 
 final class IdentityJournalTests: XCTestCase {
+    func testLiveCorruptionAndUnexpectedInsertionCannotBeOverwritten() throws {
+        let keys = JournalKeys(); let root = temporaryRoot()
+        let writer = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+        try writer.commit(Data([1]))
+        let file = root.appendingPathComponent("identity-journal-store.bin")
+        var corrupt = try Data(contentsOf: file); corrupt[corrupt.index(before: corrupt.endIndex)] ^= 1
+        try corrupt.write(to: file)
+        XCTAssertThrowsError(try writer.commit(Data([2])))
+        XCTAssertEqual(try Data(contentsOf: file), corrupt)
+        try writer.close()
+        let blankRoot = temporaryRoot()
+        let blank = try IdentityJournal(root: blankRoot, recordID: "store", keyProvider: keys)
+        let inserted = blankRoot.appendingPathComponent("identity-journal-store.bin")
+        try Data([1, 2, 3]).write(to: inserted)
+        XCTAssertThrowsError(try blank.commit(Data([2])))
+        XCTAssertEqual(try Data(contentsOf: inserted), Data([1, 2, 3]))
+        try blank.close()
+    }
+
+    func testRecordIDLengthIsRejectedBeforeWriterAcquisition() throws {
+        let root = temporaryRoot(); let keys = JournalKeys()
+        XCTAssertThrowsError(try IdentityJournal(root: root, recordID: String(repeating: "a", count: 65), keyProvider: keys))
+        let boundary = try IdentityJournal(root: root, recordID: String(repeating: "a", count: 64), keyProvider: keys)
+        try boundary.commit(Data([1])); try boundary.close()
+    }
+
+    func testOversizedJournalIsRejectedWithoutLoadingPayload() throws {
+        let root = temporaryRoot(); let keys = JournalKeys()
+        let file = root.appendingPathComponent("identity-journal-store.bin")
+        FileManager.default.createFile(atPath: file.path, contents: nil)
+        let handle = try FileHandle(forWritingTo: file); try handle.truncate(atOffset: 16 * 1024 * 1024 + 1); try handle.close()
+        XCTAssertThrowsError(try IdentityJournal(root: root, recordID: "store", keyProvider: keys))
+    }
+
+    func testOversizedCommitIsRejectedAndPreservesPriorRecord() throws {
+        let root = temporaryRoot(); let keys = JournalKeys()
+        let writer = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+        try writer.commit(Data([1]))
+        XCTAssertThrowsError(try writer.commit(Data(repeating: 7, count: 16 * 1024 * 1024)))
+        let reopened = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+        XCTAssertEqual(try reopened.read(), Data([1])); try reopened.close()
+    }
+
+    func testRecoveryRemovesAllAuthenticatedOrphansSharingAnUnpublishedKey() throws {
+        let root = temporaryRoot(); let keys = JournalKeys()
+        let writer = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+        try writer.commit(Data([1])); try writer.close()
+        let dataFile = root.appendingPathComponent("identity-journal-store.bin")
+        let orphans = (1...2).map { root.appendingPathComponent(".identity-journal-store-00000000-0000-0000-0000-00000000000\($0).tmp") }
+        for orphan in orphans { try FileManager.default.copyItem(at: dataFile, to: orphan) }
+        try FileManager.default.removeItem(at: dataFile)
+        let reopened = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+        for orphan in orphans { XCTAssertFalse(FileManager.default.fileExists(atPath: orphan.path)) }
+        XCTAssertNil(try reopened.read()); try reopened.close()
+    }
+
+    func testRecoveryRemovesOnlyAuthenticatedJournalTemporaryFiles() throws {
+        let root = temporaryRoot(); let keys = JournalKeys()
+        let writer = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+        try writer.commit(Data([1])); try writer.close()
+        let dataFile = root.appendingPathComponent("identity-journal-store.bin")
+        let orphan = root.appendingPathComponent(".identity-journal-store-00000000-0000-0000-0000-000000000001.tmp")
+        let unrelated = root.appendingPathComponent(".identity-journal-store-00000000-0000-0000-0000-000000000002.tmp")
+        try FileManager.default.copyItem(at: dataFile, to: orphan)
+        try Data([1, 2, 3]).write(to: unrelated)
+        let reopened = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: orphan.path))
+        XCTAssertTrue(FileManager.default.fileExists(atPath: unrelated.path))
+        XCTAssertEqual(try reopened.read(), Data([1])); try reopened.close()
+    }
     func testUnauthenticatedExistingRecordCannotBeOverwrittenWithoutReading() throws {
         let root = temporaryRoot(); let keys = JournalKeys()
         let writer = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)

@@ -7,6 +7,62 @@ import java.security.SecureRandom
 import kotlin.test.*
 
 class IdentityJournalTest {
+    @Test fun liveCorruptionAndUnexpectedInsertionCannotBeOverwritten() {
+        val root = Files.createTempDirectory("identity-journal"); val keys = JournalKeys()
+        IdentityJournal(root, "store", keys).use { writer ->
+            writer.commit(byteArrayOf(1)); val file = root.resolve("identity-journal-store.bin")
+            val corrupt = Files.readAllBytes(file); corrupt[corrupt.lastIndex] = (corrupt.last().toInt() xor 1).toByte(); Files.write(file, corrupt)
+            assertFailsWith<IdentityError> { writer.commit(byteArrayOf(2)) }; assertContentEquals(corrupt, Files.readAllBytes(file))
+        }
+        val blankRoot = Files.createTempDirectory("identity-journal")
+        IdentityJournal(blankRoot, "store", keys).use { blank ->
+            val file = blankRoot.resolve("identity-journal-store.bin"); Files.write(file, byteArrayOf(1, 2, 3))
+            assertFailsWith<IdentityError> { blank.commit(byteArrayOf(2)) }; assertContentEquals(byteArrayOf(1, 2, 3), Files.readAllBytes(file))
+        }
+    }
+
+    @Test fun recordIDLengthIsRejectedBeforeWriterAcquisition() {
+        val root = Files.createTempDirectory("identity-journal"); val keys = JournalKeys()
+        assertFailsWith<IdentityError> { IdentityJournal(root, "a".repeat(65), keys) }
+        IdentityJournal(root, "a".repeat(64), keys).use { it.commit(byteArrayOf(1)) }
+    }
+
+    @Test fun oversizedJournalIsRejectedWithoutLoadingPayload() {
+        val root = Files.createTempDirectory("identity-journal"); val keys = JournalKeys()
+        java.io.RandomAccessFile(root.resolve("identity-journal-store.bin").toFile(), "rw").use { it.setLength(16 * 1024 * 1024 + 1L) }
+        assertFailsWith<IdentityError> { IdentityJournal(root, "store", keys) }
+    }
+
+    @Test fun oversizedCommitIsRejectedAndPreservesPriorRecord() {
+        val root = Files.createTempDirectory("identity-journal"); val keys = JournalKeys()
+        val writer = IdentityJournal(root, "store", keys); writer.commit(byteArrayOf(1))
+        assertFailsWith<IdentityError> { writer.commit(ByteArray(16 * 1024 * 1024)) }
+        IdentityJournal(root, "store", keys).use { assertContentEquals(byteArrayOf(1), it.read()) }
+    }
+
+    @Test fun recoveryRemovesAllAuthenticatedOrphansSharingAnUnpublishedKey() {
+        val root = Files.createTempDirectory("identity-journal"); val keys = JournalKeys()
+        IdentityJournal(root, "store", keys).use { it.commit(byteArrayOf(1)) }
+        val file = root.resolve("identity-journal-store.bin")
+        val orphans = (1..2).map { root.resolve(".identity-journal-store-00000000-0000-0000-0000-00000000000$it.tmp") }
+        for (orphan in orphans) Files.copy(file, orphan)
+        Files.delete(file)
+        IdentityJournal(root, "store", keys).use { reopened ->
+            for (orphan in orphans) assertFalse(Files.exists(orphan))
+            assertNull(reopened.read())
+        }
+    }
+
+    @Test fun recoveryRemovesOnlyAuthenticatedJournalTemporaryFiles() {
+        val root = Files.createTempDirectory("identity-journal"); val keys = JournalKeys()
+        IdentityJournal(root, "store", keys).use { it.commit(byteArrayOf(1)) }
+        val orphan = root.resolve(".identity-journal-store-00000000-0000-0000-0000-000000000001.tmp")
+        val unrelated = root.resolve(".identity-journal-store-00000000-0000-0000-0000-000000000002.tmp")
+        Files.copy(root.resolve("identity-journal-store.bin"), orphan); Files.write(unrelated, byteArrayOf(1, 2, 3))
+        IdentityJournal(root, "store", keys).use {
+            assertFalse(Files.exists(orphan)); assertTrue(Files.exists(unrelated)); assertContentEquals(byteArrayOf(1), it.read())
+        }
+    }
     @Test fun copiedJournalIsRejectedAndFailedOpenReleasesWriter() {
         val keys = JournalKeys(); val firstRoot = Files.createTempDirectory("identity-journal"); val secondRoot = Files.createTempDirectory("identity-journal")
         val first = IdentityJournal(firstRoot, "store", keys); first.commit(byteArrayOf(8)); first.close()
