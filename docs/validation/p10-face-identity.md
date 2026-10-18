@@ -30,11 +30,11 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 ## Task 2 待实现
 
 - 已有可信 provider 契约及不可变授权状态，后续 Store 构造仍必须注入 provider 和持久化根目录；禁止以 request epoch 或单纯内存字典作为权威状态。
-- journal 已接入 candidate/template admission；模板采用独立 envelope，持久 stage 所有权与故障恢复已接入；仍需内部 vector lease 与物理 purge。
+- journal 已接入 candidate/template admission；模板采用独立 envelope，持久 stage 所有权与故障恢复已接入；内部 vector lease 已通过单测，仍需物理 purge。
 - candidate/template 与 immutable grant 的持久绑定、域撤销 tombstone 和稳定 revoke receipt 已实现；模板删除及逐目标 purge 状态仍待实现。
 - admission/revoke/template publish 共用串行门；quality/embed 在门外执行，撤销立即请求停止。lease 后两阶段删除仍待实现。
 - operation ticket 已固定 grant/candidate 并接入 public enroll、撤销 stop、结果抑制与 close drain；任务对象的完整 Core 终态封装仍需后续整合。
-- 仍需持有 lease 删除、逐目标 purge 失败/重试/重启及 lease close drain 测试；已有 scope/expiry、同域新 grant ID 绕过与 enrollment 撤销竞态测试不能替代它们。
+- 仍需持有 lease 删除、逐目标 purge 失败/重试/重启测试；已有 scope/expiry、同域新 grant ID 绕过、enrollment 撤销竞态和正常 close lease drain 测试不能替代它们。
 - 平台原生密钥与恢复行为真机验证；iOS 15/API 26 最低设备验收另记。
 
 只有这些门全部通过，才能标记 Task 2 完成。后续 Task 3/5/6/7 的 snapshot、身份引擎和活体状态机尚未实现。
@@ -44,7 +44,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - Swift actor / Kotlin synchronized 门负责候选 admission、journal 持久化及发布；创建候选不会调用生物后端，也不存储图像/向量。
 - 元数据目前使用严格 64 KiB JSON 格式（包含授权快照），超限在提交前拒绝；后续模板/索引规模需另行设计存储格式。
 - Kotlin public open 只使用 Context.noBackupFilesDir 内的受管目录；其路径构造尚无 Context/真机验收，单测使用 internal 临时目录入口。
-- close 已请求 operation ticket stop 并等待 drain；lease 尚未实现，不能宣称完整 lease 关闭验收。
+- close 已请求 operation ticket stop，并等待 operation ticket 和内部 template lease 同时 drain。journal 提交失败时仍沿用立即 poison/unlock；旧 lease release 只修改旧 Store 内存，不做文件/密钥 I/O。退休期间的物理 purge 权限仍须后续切片证明。
 
 ### 持久撤销当前边界
 
@@ -66,7 +66,15 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - v3 journal 在模板密钥/文件创建前登记 stage UUID；模板独立 AES-GCM key 与 AAD 绑定 store/record，文件同步后才提交 membership。门内最终检查和元数据发布不拆开。
 - 存储失败保留持久 stage 并退休 writer；重启先验证全部元数据再逐项清理 stage 文件和密钥，成功后清除 manifest。不存在按前缀扫描删除模板目录的操作；未登记文件保留。
 - 已覆盖密钥创建失败、payload 后 journal 提交失败、篡改/换包/缺钥、完整 space 绑定、同域另一 grant 恢复、stage 重复/重叠和无效 membership。模板 envelope 的持久 codec 为平台内部实现，不构成跨设备特征导出接口。
-- 本切片尚无内部 template lease、逐目标 DeletionStatus/receipt、物理 purge、purge 重试及 lease-held close drain。真实 Keychain/Keystore 和最小系统版本仍须真机验证。
+- 本切片尚无逐目标 DeletionStatus/receipt、物理 purge 和 purge 重试。真实 Keychain/Keystore 和最小系统版本仍须真机验证。
+
+### template lease 当前边界
+
+- 实现提交 `9bb91e7`，独立复审 APPROVE（无遗留 Critical/Important 发现）；这不构成 Task 2 完成。
+- 内部 `acquireTemplateLease` 仅供 verification/identification 使用：校验完整 template ref、embedding space 的能力集合、scope、purpose、同域同 epoch 以及可信 provider；解密后重验授权再 pin。允许同域另一有效 grant，其完整声明持久保存以支持撤销和重启绑定校验。
+- lease 的向量只在模块内部读取，close 后清除 lease 自身持有值并拒绝读取；已经由 SDK 消费者取出的值仍须任务 defer/finally 释放，不宣称内存覆写。release 幂等且不执行 I/O。
+- 最新身份模块单测：Swift 107/107（lease 7 项），Android 110/110（Store 47 项）及 lintDebug。日志 `/tmp/odai-p10-lease-{swift,android}-final.log`。审查提出能力集合缺口，双端 verification-only 模板回归先 RED 再 GREEN；初轮 Android 宿主回调重入覆盖撤销状态也已 RED→GREEN。
+- 全 Apple 包本轮 `/tmp/odai-p10-lease-swift-full.log` 仍有既有 `VisionFaceDetectorTests.testBlankImageUsesRealVisionAndReturnsSuccessfulEmptyResult`（Vision Code 9）；身份模块 106 项在该全包运行通过，随后新增能力回归的定向身份模块 107 项通过。未宣称全 Apple 包通过。
 
 ### 停止信号当前边界
 
