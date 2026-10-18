@@ -14,8 +14,9 @@
 | Task 2 后端停止子步骤：per-operation stop signal | `0d401fb` | Swift stop 8/8；Android stop 8/8；identity 59/59、57/57 及 Android lintDebug | 幂等停止、锁外 native stop 回调、停止前后检查、停止覆盖普通后端错误；致命 JVM Error 透传。独立复审 APPROVE；尚未接入 Store 在途 ticket/close drain |
 | Task 2 candidate Store 子步骤：持久授权绑定与 admission | `ea8e92b` | Swift Store 9/9；Android Store 9/9；identity 68/68、66/66 及 Android lintDebug | actor/synchronized 门内 staged candidate 状态在 journal 提交后发布；恢复持久 storeId/授权epoch/immutable grant；发布前重检；密钥失败退休 writer。独立复审无实现缺陷，Android 并发/恢复测试缺口已补齐 |
 | Task 2 持久撤销子步骤：域 epoch、目标 tombstone 与稳定回执 | `8230437` | Swift Store 19/19、identity 78/78；Android Store 18/18、identity 75/75；Android lintDebug | 独立 ownership、同域多 grant 共用回执、跨 epoch 目标去重、v1→v2 恢复、严格目标集校验、失败提交退休。Android 回调重入拒绝。独立审查 APPROVE、无遗留发现；尚无在途任务停止、模板 purge 或 close drain |
+| Task 2 operation ticket 子步骤：撤销停止、发布抑制与 close drain | `ab7a4bc` | Swift Store 28/28、identity 87/87；Android Store 28/28、identity 85/85；Android lintDebug | ticket 固定 candidate/grant/scope；撤销或新 epoch 先提交再锁外 stop；旧 backend error 被 authorizationRevoked 抑制；跨域/跨 store 拒绝；close 等待 drain，Android 中断后仍释放 writer。独立复审 APPROVE；模板/lease/purge 尚未实现 |
 
-最新身份模块合计：Swift 78/78、Android 75/75，Android identity lintDebug 通过。测试使用合成夹具及临时内存密钥，不包含个人生物数据、模型权重或商用精度结论。两端测试组织粒度不同，总数不表示平台行为差异。
+最新身份模块合计：Swift 87/87、Android 85/85，Android identity lintDebug 通过。测试使用合成夹具及临时内存密钥，不包含个人生物数据、模型权重或商用精度结论。两端测试组织粒度不同，总数不表示平台行为差异。
 
 ## 可复现命令
 
@@ -32,6 +33,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 已将 journal 接入 IdentityStore 的 candidate admission；模板数据仍需独立 envelope 持久化、恢复和所有权清理，不能把候选存储当作完整 Task 2 验收。
 - candidate 与 immutable grant 的持久绑定、域撤销 tombstone 和稳定 receipt 已实现；template 所属关系及模板删除回收仍待实现。
 - admission/revoke/publish 串行门、撤销立即请求停止、lease 后两阶段删除。
+- operation ticket 已固定 grant/candidate 并接入撤销 stop、结果抑制与 close drain；模板 publish 仍未接入实际 backend。
 - 进程重启、持有 lease 删除、scope/expiry、同域新 grant ID 绕过与撤销竞态测试。
 - 平台原生密钥与恢复行为真机验证；iOS 15/API 26 最低设备验收另记。
 
@@ -50,6 +52,12 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - v2 元数据严格校验完整目标集、候选所属关系、重复目标和域 epoch；仍可读取 v1 候选记录，下次提交迁移到 v2。
 - 撤销提交成功后才发布内存和回执；提交失败退休 writer。当前尚未接入在途 operation ticket，因此不能把本切片当作完整 revoke-vs-publish 验收。
 - Android 门内宿主回调若重入 Store，返回 `busy`，防止重入提交被外层 staged 状态覆盖。
+
+### operation ticket 当前边界
+
+- ticket 只在 Store 内部存在，固定 candidate、完整 grant、scope 和 process-local stop signal；`finishOperation` 总会消费它，并在撤销、expiry、关闭或 backend error 时重新取权威状态。
+- 撤销及可信更高 epoch 的 candidate admission 在持久提交后标记相关 ticket；stop handler 在 actor/monitor 外执行。close 拒绝新 admission，等待 ticket 释放后才关闭 journal；Android 被中断时继续 drain 并恢复中断标记。
+- 目前没有 public `enroll`、template envelope、lease 或物理 purge；ticket 还未与昂贵 quality/embed 和最终模板发布接线，不能声称完整 revoke-vs-publish 已验收。
 
 ### 停止信号当前边界
 
