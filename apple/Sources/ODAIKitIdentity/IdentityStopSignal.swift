@@ -56,6 +56,7 @@ public final class IdentityStopSignal: @unchecked Sendable {
         let pending = Array(handlers.values)
         handlers.removeAll(keepingCapacity: false)
         lock.unlock()
+        guard !pending.isEmpty else { return nil }
         return { for handler in pending { Self.deliver(handler) } }
     }
 

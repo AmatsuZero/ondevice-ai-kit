@@ -48,11 +48,14 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
         if (backend != null && backend.embeddingSpace != policy.embeddingSpace) throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
         val members = synchronized(gate) {
             val base = baseGalleryRef?.let(catalog::snapshot)
-            if (base != null && (base.policy != policy || base.aggregationPolicyId != aggregationPolicyId))
-                throw IdentityError(IdentityErrorCode.GALLERY_REVISION_CONFLICT)
+            if (base != null && base.policy.embeddingSpace != policy.embeddingSpace)
+                throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
             base?.members?.associateBy { it.ref.id }?.toMutableMap() ?: mutableMapOf()
         }
-        admit(grant, members.values.toList(), policy.embeddingSpace)
+        // Copying opaque membership metadata permits explicit cleanup of a
+        // revoked base. The operation is authorized now; every retained member
+        // is revalidated together at publication and read admission.
+        admit(grant, emptyList(), policy.embeddingSpace)
         synchronized(gate) {
             requireOpen()
             baseGalleryRef?.let(catalog::snapshot)
@@ -67,13 +70,13 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
         val candidate = identityStore.recordedTemplateCandidate(template)
         if (template.embeddingSpaceId != state.policy.embeddingSpace) throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
         val member = GallerySnapshotMember(template, candidate, grant)
-        admit(state.grant, state.members.values.toList() + member, state.policy.embeddingSpace)
+        admit(state.grant, listOf(member), state.policy.embeddingSpace)
         synchronized(gate) { requireBuilderOpen(state); state.members[template.id] = member }
     }
 
     internal fun remove(id: UUID, template: TemplateRef, grant: AuthorizationGrant) = mutateBuilder(id) { state ->
         if (state.members[template.id]?.ref != template) throw IdentityError(IdentityErrorCode.TEMPLATE_NOT_FOUND)
-        admit(state.grant, state.members.filterKeys { it != template.id }.values.toList(), state.policy.embeddingSpace)
+        admit(state.grant, emptyList(), state.policy.embeddingSpace)
         admit(grant, emptyList(), state.policy.embeddingSpace)
         synchronized(gate) { requireBuilderOpen(state); state.members.remove(template.id); Unit }
     }

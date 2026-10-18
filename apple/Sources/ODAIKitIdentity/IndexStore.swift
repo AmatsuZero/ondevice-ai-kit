@@ -65,10 +65,12 @@ public actor IndexStore {
         if let baseGalleryRef {
             guard deletedLineages[baseGalleryRef.id] == nil else { throw IdentityError(.galleryRevisionGone) }
             let base = try catalog.snapshot(baseGalleryRef)
-            guard base.policy == policy, base.aggregationPolicyId == aggregationPolicyId else { throw IdentityError(.galleryRevisionConflict) }
+            guard base.policy.embeddingSpace == policy.embeddingSpace else { throw IdentityError(.embeddingSpaceMismatch) }
             members = Dictionary(uniqueKeysWithValues: base.members.map { ($0.ref.id, $0) })
         }
-        try await admitMutation(grant: grant, members: Array(members.values), space: policy.embeddingSpace)
+        // A live operation grant may copy opaque metadata for explicit cleanup;
+        // publication and reads still validate every retained member together.
+        try await admitMutation(grant: grant, members: [], space: policy.embeddingSpace)
         try requireOpen()
         if let baseGalleryRef { _ = try catalog.snapshot(baseGalleryRef) }
         let id = UUID()
@@ -143,16 +145,15 @@ public actor IndexStore {
         try requireOpen(); guard builders[id]?.status == .open else { throw IdentityError(.builderClosed) }
         guard template.embeddingSpaceId == state.policy.embeddingSpace else { throw IdentityError(.embeddingSpaceMismatch) }
         let member = GallerySnapshotMember(ref: template, candidate: candidate, grant: grant)
-        try await admitMutation(grant: state.operationGrant, members: Array(state.members.values) + [member], space: state.policy.embeddingSpace)
+        try await admitMutation(grant: state.operationGrant, members: [member], space: state.policy.embeddingSpace)
         _ = try openBuilder(id)
         state.members[template.id] = member; builders[id] = state
     }
 
     fileprivate func builderRemove(_ id: UUID, template: TemplateRef, grant: AuthorizationGrant) async throws {
         var state = try beginBuilderMutation(id); defer { endBuilderMutation(id) }
-        guard state.members[template.id] != nil else { throw IdentityError(.templateNotFound) }
-        let retained = state.members.filter { $0.key != template.id }.map(\.value)
-        try await admitMutation(grant: state.operationGrant, members: retained, space: state.policy.embeddingSpace)
+        guard state.members[template.id]?.ref == template else { throw IdentityError(.templateNotFound) }
+        try await admitMutation(grant: state.operationGrant, members: [], space: state.policy.embeddingSpace)
         try await admitMutation(grant: grant, members: [], space: state.policy.embeddingSpace)
         try requireOpen(); guard builders[id]?.status == .open else { throw IdentityError(.builderClosed) }
         state.members.removeValue(forKey: template.id); builders[id] = state
@@ -175,6 +176,7 @@ public actor IndexStore {
             activeTickets[id] = admitted
             for member in members { leases.append(try await identityStore.acquireTemplateLease(member.ref, grant: member.grant, scope: .identification, embeddingSpace: state.policy.embeddingSpace)) }
             guard builders[id]?.status == .publishing, !closed else { throw IdentityError(.cancelled) }
+            if Task.isCancelled { admitted.stopSignal.requestStop(.cancelled); throw IdentityError(.cancelled) }
             let embeddings = try leases.map { try $0.embedding() }
             let indexBuilder = buildIndex
             let buildTask = Task.detached { try indexBuilder(embeddings) }
@@ -275,7 +277,15 @@ public actor IndexStore {
         let revisions = preparedIndexLineages.compactMap { $0.value == lineage ? $0.key : nil }
         for revision in revisions { preparedIndexes.removeValue(forKey: revision); preparedIndexLineages.removeValue(forKey: revision); revisionLineages.removeValue(forKey: revision) }
     }
-    private func finishClose() { guard !closeFinished else { return }; closeFinished = true; try? catalog.close(); let waiters = closeWaiters; closeWaiters.removeAll(); for waiter in waiters { waiter.resume() } }
+    private func finishClose() {
+        guard !closeFinished else { return }
+        closeFinished = true
+        preparedIndexes.removeAll()
+        preparedIndexLineages.removeAll()
+        revisionLineages.removeAll()
+        try? catalog.close()
+        let waiters = closeWaiters; closeWaiters.removeAll(); for waiter in waiters { waiter.resume() }
+    }
 }
 
 public final class GalleryBuilder: @unchecked Sendable {

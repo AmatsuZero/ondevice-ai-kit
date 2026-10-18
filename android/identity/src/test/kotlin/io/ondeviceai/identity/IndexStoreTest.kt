@@ -258,6 +258,46 @@ class IndexStoreTest {
         } finally { release.countDown(); lease.close(); registration.close(); executor.shutdownNow(); index.close(); f.identity.close() }
     }
 
+    @Test fun newBuilderCanExplicitlyRemoveMultipleRevokedMembers() {
+        val f = fixture()
+        val operation = AuthorizationGrant("operation", "operations", setOf(IdentityScope.IDENTIFICATION), "identity", 0, null, 0, "audit")
+        val secondGrant = AuthorizationGrant("second", "second-domain", f.grant.scope, "identity", 0, null, 0, "audit")
+        val thirdGrant = AuthorizationGrant("third", "third-domain", f.grant.scope, "identity", 0, null, 0, "audit")
+        fun enroll(grant: AuthorizationGrant): TemplateRef = requireNotNull(f.identity.enroll(
+            IdentityProbe("fixture", listOf(1f, 2f)), f.identity.createCandidate(grant), grant,
+            EnrollmentOptions(0.8, "quality", "1"), FixtureIdentityBackend.system()).templateRef)
+        val second = enroll(secondGrant); val third = enroll(thirdGrant)
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        try {
+            val builder = index.createGalleryBuilder(grant = operation, policy = f.policy)
+            builder.addTemplate(f.template, f.grant); builder.addTemplate(second, secondGrant); builder.addTemplate(third, thirdGrant)
+            val base = builder.publish()
+            f.identity.revokeGrant(f.grant.grantId, f.owner); f.identity.revokeGrant(secondGrant.grantId, f.owner)
+            assertFailsWith<IdentityError> { index.acquireIndexReadLease(base, operation) }
+            val unsafe = index.createGalleryBuilder(base, operation, f.policy)
+            assertFailsWith<IdentityError> { unsafe.publish() }
+            assertEquals(IdentityErrorCode.BUILDER_CLOSED, assertFailsWith<IdentityError> { unsafe.publish() }.code)
+            val cleanup = index.createGalleryBuilder(base, operation, f.policy)
+            cleanup.removeTemplate(f.template, operation)
+            cleanup.removeTemplate(second, operation)
+            val revision = cleanup.publish()
+            assertEquals(base.id, revision.id); assertNotEquals(base.revision, revision.revision)
+            index.acquireIndexReadLease(revision, operation).use { assertEquals(listOf(third), it.snapshot().members.map { member -> member.ref }) }
+            assertFailsWith<IdentityError> { index.acquireIndexReadLease(base, operation) }
+        } finally { index.close(); f.identity.close() }
+    }
+
+    @Test fun newRevisionCanUpgradeVerifiedPolicyWithoutChangingThePinnedSpace() {
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        try {
+            val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
+            val base = builder.publish(); val upgraded = f.policy.copy(revision = "2", threshold = 0.6)
+            val next = index.createGalleryBuilder(base, f.grant, upgraded).publish()
+            index.acquireIndexReadLease(base, f.grant).use { assertEquals("1", it.snapshot().policy.revision) }
+            index.acquireIndexReadLease(next, f.grant).use { assertEquals("2", it.snapshot().policy.revision); assertEquals(0.6, it.snapshot().policy.threshold) }
+        } finally { index.close(); f.identity.close() }
+    }
+
     private fun fixture(): IndexFixture {
         val keys = IndexKeys(); val authority = IndexAuthority()
         val identity = IdentityStore(root().toFile(), "identity", authority, keys,

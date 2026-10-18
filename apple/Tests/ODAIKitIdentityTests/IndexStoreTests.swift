@@ -276,6 +276,85 @@ final class IndexStoreTests: XCTestCase {
         if let index = retained.value { await index.close(); try await identity.close() }
     }
 
+    func testCloseReleasesTheCachedDerivedPayloadWhileStoreRemainsRetained() async throws {
+        let freed = expectation(description: "derived payload released")
+        let context = try await context(buildIndex: { _ in
+            let pointer = UnsafeMutableRawPointer.allocate(byteCount: 64, alignment: 1)
+            pointer.initializeMemory(as: UInt8.self, repeating: 1, count: 64)
+            return Data(bytesNoCopy: pointer, count: 64, deallocator: .custom { pointer, _ in
+                pointer.deallocate(); freed.fulfill()
+            })
+        })
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        _ = try await builder.publish()
+        await context.index.close()
+        await fulfillment(of: [freed], timeout: 0.2)
+        try await context.identity.close()
+    }
+
+    func testPreCancelledPublicationNeverEntersTheIndexBackend() async throws {
+        let built = expectation(description: "cancelled build must not start"); built.isInverted = true
+        let context = try await context(buildIndex: { _ in built.fulfill(); return Data([1]) })
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let publishing = Task {
+            withUnsafeCurrentTask { $0?.cancel() }
+            return try await builder.publish()
+        }
+        do { _ = try await publishing.value; XCTFail("pre-cancelled publication succeeded") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .cancelled) }
+        await fulfillment(of: [built], timeout: 0.05)
+        await context.index.close(); try await context.identity.close()
+    }
+
+    func testNewBuilderCanExplicitlyRemoveMultipleRevokedMembers() async throws {
+        let context = try await context()
+        let operation = try AuthorizationGrant(grantId: "operation", revocationDomainId: "operations", scope: [.identification], purpose: "identity", issuedAtMillis: 0, expiresAtMillis: nil, authorizationEpoch: 0, evidenceRef: "audit")
+        let secondGrant = try AuthorizationGrant(grantId: "second", revocationDomainId: "second-domain", scope: context.grant.scope, purpose: "identity", issuedAtMillis: 0, expiresAtMillis: nil, authorizationEpoch: 0, evidenceRef: "audit")
+        let thirdGrant = try AuthorizationGrant(grantId: "third", revocationDomainId: "third-domain", scope: context.grant.scope, purpose: "identity", issuedAtMillis: 0, expiresAtMillis: nil, authorizationEpoch: 0, evidenceRef: "audit")
+        func enroll(_ grant: AuthorizationGrant) async throws -> TemplateRef {
+            let candidate = try await context.identity.createCandidate(grant)
+            let result = try await context.identity.enroll(IdentityProbe(fixtureID: "fixture", vector: [1, 2]), candidate: candidate, grant: grant,
+                options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "q", revision: "1"), backend: FixtureIdentityBackend.system())
+            return try XCTUnwrap(result.templateRef)
+        }
+        let second = try await enroll(secondGrant); let third = try await enroll(thirdGrant)
+        let builder = try await context.index.createGalleryBuilder(grant: operation, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        try await builder.addTemplate(second, grant: secondGrant); try await builder.addTemplate(third, grant: thirdGrant)
+        let base = try await builder.publish()
+        _ = try await context.identity.revokeGrant(context.grant.grantId, ownership: context.owner)
+        _ = try await context.identity.revokeGrant(secondGrant.grantId, ownership: context.owner)
+        let unsafe = try await context.index.createGalleryBuilder(baseGalleryRef: base, grant: operation, policy: context.policy)
+        do { _ = try await unsafe.publish(); XCTFail("retained revoked members were published") } catch {}
+        do { _ = try await unsafe.publish(); XCTFail("failed builder was reused") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .builderClosed) }
+        let cleanup: GalleryBuilder
+        do { cleanup = try await context.index.createGalleryBuilder(baseGalleryRef: base, grant: operation, policy: context.policy) }
+        catch { await context.index.close(); try await context.identity.close(); throw error }
+        try await cleanup.removeTemplate(context.template, grant: operation); try await cleanup.removeTemplate(second, grant: operation)
+        let revision = try await cleanup.publish()
+        let lease = try await context.index.acquireIndexReadLease(revision, grant: operation)
+        XCTAssertEqual(try lease.snapshot().members.map(\.ref), [third]); await lease.close()
+        do { _ = try await context.index.acquireIndexReadLease(base, grant: operation); XCTFail("old revoked snapshot was filtered") } catch {}
+        await context.index.close(); try await context.identity.close()
+    }
+
+    func testNewRevisionCanUpgradeVerifiedPolicyAndKeepOldPolicyImmutable() async throws {
+        let context = try await context()
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant); let base = try await builder.publish()
+        let upgraded = try identificationPolicy(context.template, revision: "2")
+        let next: GalleryRef
+        do { next = try await context.index.createGalleryBuilder(baseGalleryRef: base, grant: context.grant, policy: upgraded).publish() }
+        catch { await context.index.close(); try await context.identity.close(); throw error }
+        let first = try await context.index.acquireIndexReadLease(base, grant: context.grant)
+        let second = try await context.index.acquireIndexReadLease(next, grant: context.grant)
+        XCTAssertEqual(try first.snapshot().policy.revision, "1"); XCTAssertEqual(try second.snapshot().policy.revision, "2")
+        await first.close(); await second.close(); await context.index.close(); try await context.identity.close()
+    }
+
     private func context(buildIndex: @escaping GalleryIndexBuilder = { _ in Data([1]) }) async throws -> IndexTestContext {
         let keys = IndexTestKeys(); let authority = IndexTestAuthority()
         let identity = try IdentityStore(root: temporaryRoot(), purpose: "identity", authorizationProvider: authority,
@@ -297,8 +376,8 @@ final class IndexStoreTests: XCTestCase {
     }
 }
 
-private func identificationPolicy(_ template: TemplateRef) throws -> ThresholdPolicy {
-    try ThresholdPolicy(id: "identify", revision: "1", embeddingSpace: template.embeddingSpaceId,
+private func identificationPolicy(_ template: TemplateRef, revision: String = "1") throws -> ThresholdPolicy {
+    try ThresholdPolicy(id: "identify", revision: revision, embeddingSpace: template.embeddingSpaceId,
         scoreMetric: "cosine", scoreDirection: .higherIsBetter, calibrationStatus: .verified,
         kind: .identification, threshold: 0.5, qualityFloor: 0.8, operatingPoint: "fixture", datasetRevision: "fixture", gallerySizeRange: 1...32, enrollmentRule: "one", effectiveAuthorizationEpoch: 0)
 }
