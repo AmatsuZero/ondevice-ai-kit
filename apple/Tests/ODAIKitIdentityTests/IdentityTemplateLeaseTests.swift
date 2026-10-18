@@ -704,14 +704,60 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         registration.close(); try await fixture.store.close()
     }
 
+    func testAwaitDeletionDeadlineReturnsPendingFromInjectedMonotonicClock() async throws {
+        let clock = MutableLeaseClock()
+        let fixture = try await fixture(monotonicClock: clock)
+        let lease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        let deadline = try IdentityDeadline(clock: clock, durationNanos: 10)
+        clock.advance(to: 11)
+        let pending = try await fixture.store.awaitDeletion(receipt, deadline: deadline)
+        XCTAssertEqual(pending, .purgePending)
+        await lease.close(); try await fixture.store.close()
+    }
+
+    func testAwaitDeletionWaitsForLeaseReleaseAndHonorsStopSignal() async throws {
+        let fixture = try await fixture()
+        let lease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        let deadline = try IdentityDeadline(clock: LeaseClock(), durationNanos: 1_000_000_000)
+        let cancelled = IdentityStopSignal(); cancelled.requestStop(.cancelled)
+        do { _ = try await fixture.store.awaitDeletion(receipt, deadline: deadline, stopSignal: cancelled); XCTFail("pre-cancel accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .cancelled) }
+        let active = IdentityStopSignal()
+        let stopping = Task { try await fixture.store.awaitDeletion(receipt, deadline: deadline, stopSignal: active) }
+        await Task.yield(); active.requestStop(.cancelled)
+        do { _ = try await stopping.value; XCTFail("active cancel accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .cancelled) }
+        let waiting = Task { try await fixture.store.awaitDeletion(receipt, deadline: deadline) }
+        await Task.yield(); await lease.close()
+        let purged = try await waiting.value
+        XCTAssertEqual(purged, .purged)
+        try await fixture.store.close()
+    }
+
+    func testAwaitDeletionTaskCancellationDoesNotUndoPendingTombstone() async throws {
+        let fixture = try await fixture()
+        let lease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        let deadline = try IdentityDeadline(clock: LeaseClock(), durationNanos: 1_000_000_000)
+        let waiting = Task { try await fixture.store.awaitDeletion(receipt, deadline: deadline) }
+        await Task.yield(); waiting.cancel()
+        do { _ = try await waiting.value; XCTFail("task cancellation accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .cancelled) }
+        let pending = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(pending, .purgePending)
+        await lease.close(); try await fixture.store.close()
+    }
+
     private struct Fixture {
         let root: URL; let keys: LeaseKeys; let authority: LeaseAuthority
         let store: IdentityStore; let ref: TemplateRef; let candidate: CandidateRef; let grant: AuthorizationGrant
     }
-    private func fixture() async throws -> Fixture {
+    private func fixture(monotonicClock: any IdentityMonotonicClock = LeaseClock()) async throws -> Fixture {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         addTeardownBlock { try? FileManager.default.removeItem(at: root) }
-        let keys = LeaseKeys(); let authority = LeaseAuthority(); let store = try open(root, keys, authority)
+        let keys = LeaseKeys(); let authority = LeaseAuthority(); let store = try open(root, keys, authority, monotonicClock: monotonicClock)
         let grant = try grant(); let candidate = try await store.createCandidate(grant)
         let result = try await store.enroll(IdentityProbe(fixtureID: "lease", vector: [0.25, -0.75]), candidate: candidate, grant: grant,
                                             options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1"), backend: FixtureIdentityBackend.system())
@@ -720,12 +766,17 @@ final class IdentityTemplateLeaseTests: XCTestCase {
     private func grant(id: String = "g1", domain: String = "tenant.subject", scopes: Set<IdentityScope> = [.enrollment, .verification], expiry: Int64 = 200, epoch: Int64 = 0) throws -> AuthorizationGrant {
         try AuthorizationGrant(grantId: id, revocationDomainId: domain, scope: scopes, purpose: "login", issuedAtMillis: 0, expiresAtMillis: expiry, authorizationEpoch: epoch, evidenceRef: "audit")
     }
-    private func open(_ root: URL, _ keys: LeaseKeys, _ authority: LeaseAuthority) throws -> IdentityStore {
-        try IdentityStore(root: root, purpose: "login", authorizationProvider: authority, keyProvider: keys, wallClock: LeaseClock(), monotonicClock: LeaseClock())
+    private func open(_ root: URL, _ keys: LeaseKeys, _ authority: LeaseAuthority, monotonicClock: any IdentityMonotonicClock = LeaseClock()) throws -> IdentityStore {
+        try IdentityStore(root: root, purpose: "login", authorizationProvider: authority, keyProvider: keys, wallClock: LeaseClock(), monotonicClock: monotonicClock)
     }
 }
 
 private struct LeaseClock: IdentityWallClock, IdentityMonotonicClock { let nowMillis: Int64 = 100; let nowNanos: Int64 = 1 }
+private final class MutableLeaseClock: IdentityMonotonicClock, @unchecked Sendable {
+    private let lock = NSLock(); private var value: Int64 = 1
+    var nowNanos: Int64 { lock.lock(); defer { lock.unlock() }; return value }
+    func advance(to next: Int64) { lock.lock(); value = next; lock.unlock() }
+}
 private final class LeaseAuthority: IdentityAuthorizationProvider, @unchecked Sendable {
     var epoch: Int64 = 0
     var denyOwnership = false

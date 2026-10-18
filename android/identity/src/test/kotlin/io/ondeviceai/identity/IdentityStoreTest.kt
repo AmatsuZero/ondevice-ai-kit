@@ -979,6 +979,50 @@ class IdentityStoreTest {
         reopened.close()
     }
 
+    @Test fun awaitDeletionDeadlineCancellationAndLeaseReleaseUseCommittedFacts() {
+        val clock = MutableStoreMono()
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority(), clock)
+        val enrollment = grant(); val candidate = store.createCandidate(enrollment)
+        val ref = requireNotNull(store.enroll(IdentityProbe("await", listOf(1f, 2f)), candidate, enrollment,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val lease = store.acquireTemplateLease(ref, grantWithScope("verify", IdentityScope.VERIFICATION), IdentityScope.VERIFICATION, ref.embeddingSpaceId)
+        val receipt = store.deleteTemplate(ref, OwnershipAuthorization(store.storeId, "owner"))
+        val deadline = IdentityDeadline(clock, 10); clock.now = 11
+        assertEquals(DeletionStatus.PURGE_PENDING, store.awaitDeletion(receipt, deadline))
+        val cancelled = IdentityStopSignal().also { it.requestStop(IdentityStopReason.CANCELLED) }
+        assertCode(IdentityErrorCode.CANCELLED) { store.awaitDeletion(receipt, IdentityDeadline(clock, 10), cancelled) }
+        val started = CountDownLatch(1)
+        val caught = CountDownLatch(1)
+        val interrupted = AtomicBoolean(false)
+        val cancellation = AtomicReference<IdentityErrorCode>()
+        val executor = Executors.newSingleThreadExecutor()
+        try {
+            val waiting = executor.submit<DeletionStatus> {
+                started.countDown()
+                try { store.awaitDeletion(receipt, IdentityDeadline(clock, 1_000_000_000)) }
+                catch (error: IdentityError) {
+                    interrupted.set(Thread.currentThread().isInterrupted)
+                    cancellation.set(error.code)
+                    caught.countDown()
+                    throw error
+                }
+            }
+            assertTrue(started.await(2, TimeUnit.SECONDS))
+            waiting.cancel(true)
+            assertTrue(caught.await(2, TimeUnit.SECONDS))
+            assertEquals(IdentityErrorCode.CANCELLED, cancellation.get())
+            assertTrue(interrupted.get())
+            val completed = executor.submit<DeletionStatus> { store.awaitDeletion(receipt, IdentityDeadline(clock, 1_000_000_000)) }
+            lease.close()
+            assertEquals(DeletionStatus.PURGED, completed.get(2, TimeUnit.SECONDS))
+        } finally {
+            lease.close()
+            executor.shutdownNow()
+            assertTrue(executor.awaitTermination(2, TimeUnit.SECONDS))
+            store.close()
+        }
+    }
+
     @Test fun deleteTemplateRejectsForgedCrossStoreReferenceAndOwnership() {
         val keys = StoreKeys(); val provider = StoreAuthority()
         val first = store(tempRoot(), keys, provider); val second = store(tempRoot(), keys, provider)
@@ -1413,8 +1457,8 @@ class IdentityStoreTest {
         }
     }
 
-    private fun store(root: java.nio.file.Path, keys: StoreKeys, provider: StoreAuthority) =
-        IdentityStore(root.toFile(), "login", provider, keys, StoreClock(100), StoreMono())
+    private fun store(root: java.nio.file.Path, keys: StoreKeys, provider: StoreAuthority, monotonicClock: IdentityMonotonicClock = StoreMono()) =
+        IdentityStore(root.toFile(), "login", provider, keys, StoreClock(100), monotonicClock)
     private fun grant(id: String = "g1", purpose: String = "login", epoch: Long = 0, domain: String = "tenant.subject") =
         AuthorizationGrant(id, domain, setOf(IdentityScope.ENROLLMENT), purpose, 0, 200, epoch, "audit")
     private fun grantWithScope(id: String, scope: IdentityScope, epoch: Long = 0, domain: String = "tenant.subject") =
@@ -1525,6 +1569,7 @@ private class BlockingEnrollmentBackend : IdentityBackend {
 }
 private data class StoreClock(override val nowMillis: Long) : IdentityWallClock
 private data class StoreMono(override val nowNanos: Long = 1) : IdentityMonotonicClock
+private class MutableStoreMono(var now: Long = 1) : IdentityMonotonicClock { override val nowNanos get() = now }
 private class AdvancingClock : IdentityWallClock {
     private var current = 100L
     override val nowMillis: Long get() = current.also { current = 200L }

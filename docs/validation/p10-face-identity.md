@@ -83,7 +83,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 本切片独立架构审查及代码复审 APPROVE（0 findings）；不构成完整 Task 2 验收。回执固定 `id/storeId/templateId`，其完整 ref、candidate/grant/space/revision 绑定保留在加密元数据，清理后仍拒绝伪造引用和跨 store 回执。
 - 每次删除（包含重复请求）均验证独立 ownership，不要求生物 grant 有效；先持久化 `purgePending` tombstone，再在无 lease 时删除精确 payload/key，最后提交 `purged`。文件/密钥失败提交 `purgeFailed`，重启按固定 tombstone 重试。
 - 所有恢复元数据校验完成后才清理；不会按目录扫描删除。正常运行的最后一个 lease release 可触发清理；关闭/退休 Store 的旧 release 不再执行 I/O。物理完成后的 journal 失败不发布成功状态，writer 退休后重开从 durable tombstone 重试。
-- `awaitDeletion(receipt)` 当前读取已提交状态；带 deadline 的异步等待、取消不撤回 tombstone、candidate/domain 所有目标清理和精确模板 ticket 绑定仍待实现。
+- `awaitDeletion(receipt)` 读取已提交状态；带单调 deadline 的等待在超时返回当前 `purgePending`，取消映射为 `cancelled` 且不撤回 tombstone。Swift Task cancellation、Android interruption（含中断标志恢复）均有回归覆盖；candidate/domain 所有目标清理和精确模板 ticket 绑定已实现。
 - 最新单元测试 Swift 116/116、Android 121/121 及 Android identity lintDebug；覆盖多 lease、清理失败恢复、伪造/独立所有权、未提交逻辑删除不清理、物理清理后提交失败、全元数据验证先于恢复 I/O、旧 writer 回调隔离。日志 `/tmp/odai-p10-deletion-final-swift.log`、`/tmp/odai-p10-deletion-android-reentry-final.log`。
 - 全 Apple 包 `/tmp/odai-p10-deletion-swift-full.log` 身份模块 116 项通过；仍只有既有 `VisionFaceDetectorTests.testBlankImageUsesRealVisionAndReturnsSuccessfulEmptyResult`（Vision Code 9）失败。未宣称全包通过，未跳过该测试。
 
@@ -92,7 +92,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - v5 元数据持久化 candidate tombstone 和固定模板目标集；空 candidate 也保持删除状态。`DeletionReceipt` 严格区分 template/candidate 目标，重复请求重验独立 ownership，旧 template receipt 继续查询共享 purge 状态。
 - 删除事务先提交全部 tombstone 与缺失的逐模板清理事实，再在门外停止该 candidate 的在途 ticket，随后尝试精确 purge。持有 lease 时保持 pending；清理失败可重启重试，其他 candidate 不受影响。
 - Swift 审查修复了全局 receipt ID 冲突分配及未排序目标集的恢复拒绝，回归先 RED 再 GREEN。最新 identity 单元测试 Swift 125/125、Android 131/131 及 lintDebug 通过；日志 `/tmp/odai-p10-candidate-review-final-{swift,android}.log`。
-- grant/domain 物理清理、精确模板 ticket、带 deadline/取消的等待、完整退休 drain 和真实平台 provider 验证仍待完成。全 Apple 包仍单列既有 Vision Code 9 环境失败，不宣称全包通过。
+- grant/domain 物理清理、精确模板 ticket、带 deadline/取消的等待已完成；完整退休 writer drain 和真实平台 provider 验证仍待完成。全 Apple 包仍单列既有 Vision Code 9 环境失败，不宣称全包通过。
 
 ### grant/domain 物理清理当前边界
 
@@ -101,7 +101,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - v1–v5 恢复先校验完整元数据，再从不可变 membership 推导目标与清理事实，并提交 v6 后才开始物理清理。v6 在清理前拒绝伪造/重复目标、缺失 fact、跨域 membership 与 receipt 碰撞；不扫描目录删除模板。
 - 最新 identity 测试 Swift 136/136、Android 142/142 及 Android lintDebug 通过。双端 stop 交付竞态、Android legacy migration/重复 receipt/无回执可信 epoch 清理均有 RED→GREEN 记录。日志 `/tmp/odai-p10-domain-{swift,android}-final.log`，全 Apple 包 `/tmp/odai-p10-domain-swift-full.log` 仍单列既有 Vision Code 9 失败。
 - 本切片独立跨端复审 APPROVE（0 findings）。提交前 Swift identity 136/136；Android identity 142/142（XML 失败/错误/跳过均为 0），Gradle test/lintDebug 再次成功（命中已有验证缓存）。并发回归覆盖 stop 回调未完成时同 epoch 清理及 lease release 禁止提前 purge。
-- 本切片不完成 Task 2：精确模板 operation tickets、带 deadline/取消的等待、journal 退休后的完整 lock drain，以及真实 Keychain/Keystore 与最低系统版本设备验证仍待完成。
+- 本切片不完成 Task 2：journal 退休后的完整 lock drain，以及真实 Keychain/Keystore 与最低系统版本设备验证仍待完成。
 
 ### 停止信号当前边界
 
@@ -142,4 +142,4 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 内部 ticket 将完整 Store 验证过的模板引用固定为精确 ID 集合；拒绝伪造、跨 candidate 或已删除 target，完成前重检每个 target。单模板删除只停止与该模板相交的 ticket，不影响同 candidate 其他模板或未绑定模板的 enrollment ticket；candidate/domain 删除继续停止各自固定范围。
 - 单模板 tombstone 提交后，stop 回调在 actor/monitor 外执行；共享 pending-stop 计数保护覆盖并发 candidate/domain 清理与 lease release，Android 重复删除不会释放其他请求的计数。撤销后普通 backend error 被 authorizationRevoked 抑制。
 - 独立 scoped re-review APPROVE（两项初轮 HIGH 均已关闭）。Swift identity 139/139，Android identity 146/146 与 lintDebug 通过；回归先复现 stop 交付期间提前 purge、Android 持锁回调及重复删除计数问题，再修复通过。日志 `/tmp/odai-p10-template-ticket-final-{swift,android}.log`。
-- 本切片不包含带 deadline/cancellation 的 awaitDeletion、退休 writer 完整 drain、后续 gallery/身份引擎或生产精度验收。Task 2 与 roadmap 继续实施中。
+- 本切片不包含退休 writer 完整 drain、后续 gallery/身份引擎或生产精度验收。Task 2 与 roadmap 继续实施中。

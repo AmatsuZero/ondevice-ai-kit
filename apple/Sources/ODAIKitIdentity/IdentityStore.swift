@@ -489,6 +489,36 @@ public actor IdentityStore {
         return try deletionStatus(record.templateIds)
     }
 
+    /// Waits for the committed purge status without performing cleanup or other store operations.
+    /// Observation is bounded so the actor remains available to release leases and close.
+    public func awaitDeletion(_ receipt: DeletionReceipt, deadline: IdentityDeadline,
+                              stopSignal: IdentityStopSignal? = nil) async throws -> DeletionStatus {
+        try await awaitDeletion(deadline: deadline, stopSignal: stopSignal) { try self.awaitDeletion(receipt) }
+    }
+
+    /// Revocation receipts observe the same per-template committed purge facts as deletion receipts.
+    public func awaitDeletion(_ receipt: RevocationReceipt, deadline: IdentityDeadline,
+                              stopSignal: IdentityStopSignal? = nil) async throws -> DeletionStatus {
+        try await awaitDeletion(deadline: deadline, stopSignal: stopSignal) { try self.awaitDeletion(receipt) }
+    }
+
+    private func awaitDeletion(deadline: IdentityDeadline, stopSignal: IdentityStopSignal?,
+                               status: () throws -> DeletionStatus) async throws -> DeletionStatus {
+        while true {
+            let current = try status()
+            if current == .purged || current == .purgeFailed { return current }
+            do {
+                try Task.checkCancellation()
+                try stopSignal?.check()
+            } catch is CancellationError {
+                throw IdentityError(.cancelled)
+            }
+            if deadline.isExpired(clock: monotonicClock) { return current }
+            do { try await Task.sleep(nanoseconds: 10_000_000) }
+            catch is CancellationError { throw IdentityError(.cancelled) }
+        }
+    }
+
     private func deletionStatus(_ targets: Set<String>) throws -> DeletionStatus {
         let statuses = try targets.map { id -> DeletionStatus in
             guard let record = deletions[id] else { throw IdentityError(.invalidInput) }

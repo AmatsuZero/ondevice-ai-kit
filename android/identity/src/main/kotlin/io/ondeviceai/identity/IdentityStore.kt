@@ -374,6 +374,34 @@ class IdentityStore internal constructor(
         }
     }
 
+    /** Waits on committed purge facts without holding the store monitor or performing cleanup. */
+    fun awaitDeletion(receipt: DeletionReceipt, deadline: IdentityDeadline,
+                      stopSignal: IdentityStopSignal? = null): DeletionStatus {
+        return awaitDeletion(deadline, stopSignal) { awaitDeletion(receipt) }
+    }
+
+    /** Revocation receipts observe the same per-template committed purge facts. */
+    fun awaitDeletion(receipt: RevocationReceipt, deadline: IdentityDeadline,
+                      stopSignal: IdentityStopSignal? = null): DeletionStatus {
+        return awaitDeletion(deadline, stopSignal) { awaitDeletion(receipt) }
+    }
+
+    private fun awaitDeletion(deadline: IdentityDeadline, stopSignal: IdentityStopSignal?,
+                              status: () -> DeletionStatus): DeletionStatus {
+        while (true) {
+            val current = status()
+            if (current == DeletionStatus.PURGED || current == DeletionStatus.PURGE_FAILED) return current
+            stopSignal?.check()
+            if (deadline.isExpired(monotonicClock)) return current
+            try {
+                Thread.sleep(10)
+            } catch (interrupted: InterruptedException) {
+                Thread.currentThread().interrupt()
+                throw IdentityError(IdentityErrorCode.CANCELLED)
+            }
+        }
+    }
+
     private fun commitDeletions(next: Map<String, IdentityTemplateDeletion>) {
         journalCommit(encode(storeId, authorization, candidates, deletions = next, candidateDeletions = candidateDeletions))
         deletions = next
