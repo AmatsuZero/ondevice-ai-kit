@@ -18,8 +18,10 @@ public actor IdentityStore {
     private var stages: Set<String> = []
     private var templateLeases: [String: Int] = [:]
     private var pendingPurgeStops: [String: Int] = [:]
+    private var pendingStopDeliveries = 0
     private var closed = false
     private var writerReleased = false
+    private let instanceId = UUID()
     private struct Operation {
         let ticket: IdentityOperationTicket
         var terminal: IdentityStopReason?
@@ -172,7 +174,7 @@ public actor IdentityStore {
         let bytes = try Self.encode(storeId: storeId, authorization: auth, candidates: next, revocations: revocations, templates: templates, stages: stages, deletions: nextDeletions, candidateDeletions: candidateDeletions)
         _ = try auth.admitting(grant, scope: .enrollment, provider: provider, nowMillis: wallClock.nowMillis)
         do { try journal.commit(bytes) }
-        catch { closed = true; throw error }
+        catch { retire(); throw error }
         authorization = auth; candidates = next; deletions = nextDeletions
         let signals = invalidateOperations(domain: grant.revocationDomainId, before: auth.highestEpoch(domain: grant.revocationDomainId))
         try await stopAndPurge(targets, signals: signals)
@@ -210,7 +212,7 @@ public actor IdentityStore {
         let nextDeletions = try Self.addDeletionFacts(templateIds, existing: deletions, reserved: receiptIDs.union([receipt.id]))
         let bytes = try Self.encode(storeId: storeId, authorization: nextAuthorization, candidates: candidates, revocations: next, templates: templates, stages: stages, deletions: nextDeletions, candidateDeletions: candidateDeletions)
         do { try journal.commit(bytes) }
-        catch { closed = true; throw error }
+        catch { retire(); throw error }
         authorization = nextAuthorization; revocations = next; deletions = nextDeletions
         let signals = invalidateOperations(domain: grant.revocationDomainId, before: epoch)
         try await stopAndPurge(templateIds, signals: signals)
@@ -248,7 +250,7 @@ public actor IdentityStore {
         if next != authorization {
             let bytes = try Self.encode(storeId: storeId, authorization: next, candidates: candidates, revocations: revocations, templates: templates, stages: stages, deletions: deletions, candidateDeletions: candidateDeletions)
             _ = try next.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
-            do { try journal.commit(bytes) } catch { closed = true; throw error }
+            do { try journal.commit(bytes) } catch { retire(); throw error }
             authorization = next
         }
         let targetIDs: Set<String>?
@@ -274,10 +276,7 @@ public actor IdentityStore {
         guard let operation = operations[ticket.id], operation.ticket === ticket else { throw IdentityError(.invalidInput) }
         defer {
             operations.removeValue(forKey: ticket.id)
-            if operations.isEmpty && templateLeases.isEmpty {
-                let waiters = drainWaiters; drainWaiters.removeAll()
-                for waiter in waiters { waiter.resume() }
-            }
+            maybeReleaseWriter()
         }
         if operation.terminal == .authorizationRevoked { throw IdentityError(.authorizationRevoked) }
         guard !closed else { throw IdentityError(.closed) }
@@ -354,7 +353,7 @@ public actor IdentityStore {
                 } catch {
                     // The durable manifest owns any partial file/key. Recovery
                     // retries exact cleanup; an ambiguous writer never publishes.
-                    closed = true; throw (error as? IdentityError) ?? IdentityError(.invalidInput)
+                    retire(); throw (error as? IdentityError) ?? IdentityError(.invalidInput)
                 }
             }
             let id = ticket.id.uuidString.lowercased()
@@ -414,7 +413,7 @@ public actor IdentityStore {
         if next != authorization {
             let bytes = try Self.encode(storeId: storeId, authorization: next, candidates: candidates,
                                         revocations: revocations, templates: templates, stages: stages, deletions: deletions, candidateDeletions: candidateDeletions)
-            do { try journal.commit(bytes) } catch { closed = true; throw error }
+            do { try journal.commit(bytes) } catch { retire(); throw error }
             authorization = next
             _ = try authorization.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
         }
@@ -461,7 +460,7 @@ public actor IdentityStore {
         }
         let bytes = try Self.encode(storeId: storeId, authorization: authorization, candidates: candidates, revocations: revocations,
                                     templates: templates, stages: stages, deletions: nextTemplates, candidateDeletions: nextCandidates)
-        do { try journal.commit(bytes) } catch { closed = true; throw error }
+        do { try journal.commit(bytes) } catch { retire(); throw error }
         deletions = nextTemplates; candidateDeletions = nextCandidates
         var signals: [IdentityStopSignal] = []
         for (operationId, operation) in operations where operation.ticket.candidate.id == candidate.id {
@@ -560,7 +559,7 @@ public actor IdentityStore {
     private func commitDeletions(_ next: [String: IdentityTemplateDeletion]) throws {
         let bytes = try Self.encode(storeId: storeId, authorization: authorization, candidates: candidates,
                                     revocations: revocations, templates: templates, stages: stages, deletions: next, candidateDeletions: candidateDeletions)
-        do { try journal.commit(bytes) } catch { closed = true; throw error }
+        do { try journal.commit(bytes) } catch { retire(); throw error }
         deletions = next
     }
 
@@ -571,17 +570,20 @@ public actor IdentityStore {
         var next = deletions; next[id] = deletion.withStatus(status)
         // Payload may already be gone. An ambiguous metadata failure retires the
         // writer, and recovery retries from the last durable tombstone.
-        do { try commitDeletions(next) } catch { closed = true; throw error }
+        do { try commitDeletions(next) } catch { retire(); throw error }
     }
 
     private func stopAndPurge(_ targets: Set<String>, signals: [IdentityStopSignal]) async throws {
         // Actor reentrancy and lease release cannot overtake an earlier stop delivery.
         for id in targets { pendingPurgeStops[id, default: 0] += 1 }
-        await Self.stop(signals, reason: .authorizationRevoked)
+        pendingStopDeliveries += signals.count
+        await Self.stop(signals, reason: .authorizationRevoked, store: instanceId)
+        pendingStopDeliveries -= signals.count
         for id in targets {
             let remaining = (pendingPurgeStops[id] ?? 1) - 1
             pendingPurgeStops[id] = remaining == 0 ? nil : remaining
         }
+        maybeReleaseWriter()
         for id in targets { try purgeTemplate(id) }
     }
 
@@ -596,32 +598,72 @@ public actor IdentityStore {
         else { templateLeases[id] = count - 1 }
         // Retired and closing stores never do file/key I/O from an old callback.
         try? purgeTemplate(id)
-        if operations.isEmpty && templateLeases.isEmpty {
-            let waiters = drainWaiters; drainWaiters.removeAll()
-            for waiter in waiters { waiter.resume() }
+        maybeReleaseWriter()
+    }
+
+    /// Retire admission immediately. Stop delivery owns a drain token before
+    /// leaving the actor; failures never await the operation that is unwinding.
+    private func retire() {
+        if !closed {
+            closed = true
+            var revoked: [IdentityStopSignal] = []; var closing: [IdentityStopSignal] = []
+            for (id, operation) in operations {
+                if operation.terminal == .authorizationRevoked { revoked.append(operation.ticket.stopSignal) }
+                else { operations[id]?.terminal = .closed; closing.append(operation.ticket.stopSignal) }
+            }
+            if !revoked.isEmpty || !closing.isEmpty {
+                pendingStopDeliveries += 1
+                let store = instanceId
+                Task.detached { [self] in
+                    let delivery = IdentityStoreStopDelivery(store: store)
+                    IdentityStoreStopDelivery.$current.withValue(delivery) {
+                        defer { delivery.finish() }
+                        for signal in revoked { signal.requestStop(.authorizationRevoked) }
+                        for signal in closing { signal.requestStop(.closed) }
+                    }
+                    await self.finishStopDelivery()
+                }
+            }
         }
+        maybeReleaseWriter()
+    }
+
+    private func finishStopDelivery() {
+        pendingStopDeliveries -= 1
+        maybeReleaseWriter()
+    }
+
+    private func maybeReleaseWriter() {
+        guard closed, !writerReleased, operations.isEmpty, templateLeases.isEmpty,
+              pendingStopDeliveries == 0 else { return }
+        try? journal.close()
+        writerReleased = true
+        let waiters = drainWaiters; drainWaiters.removeAll()
+        for waiter in waiters { waiter.resume() }
     }
 
     public func close() async throws {
-        guard !writerReleased else { return }
-        closed = true
-        var revoked: [IdentityStopSignal] = []; var closing: [IdentityStopSignal] = []
-        for (id, operation) in operations {
-            if operation.terminal == .authorizationRevoked { revoked.append(operation.ticket.stopSignal) }
-            else { operations[id]?.terminal = .closed; closing.append(operation.ticket.stopSignal) }
-        }
-        await Self.stop(revoked, reason: .authorizationRevoked)
-        await Self.stop(closing, reason: .closed)
-        if !operations.isEmpty || !templateLeases.isEmpty {
+        retire()
+        // A Task started by a synchronous stop handler inherits this marker.
+        // It may retire, but cannot join its own delivery token. The outer
+        // delivery releases the writer after returning from that handler.
+        if let delivery = IdentityStoreStopDelivery.current,
+           delivery.store == instanceId, delivery.isActive,
+           IdentityStopHandlerContext.current?.isActive == true { return }
+        if !writerReleased {
             await withCheckedContinuation { drainWaiters.append($0) }
         }
-        guard !writerReleased else { return }
-        try journal.close(); writerReleased = true
     }
 
-    private nonisolated static func stop(_ signals: [IdentityStopSignal], reason: IdentityStopReason) async {
+    private nonisolated static func stop(_ signals: [IdentityStopSignal], reason: IdentityStopReason, store: UUID) async {
         guard !signals.isEmpty else { return }
-        await Task.detached { for signal in signals { signal.requestStop(reason) } }.value
+        await Task.detached {
+            let delivery = IdentityStoreStopDelivery(store: store)
+            IdentityStoreStopDelivery.$current.withValue(delivery) {
+                defer { delivery.finish() }
+                for signal in signals { signal.requestStop(reason) }
+            }
+        }.value
     }
 
     private static func encode(storeId: String, authorization: IdentityAuthorizationState,
@@ -635,4 +677,14 @@ public actor IdentityStore {
         guard json.utf8.count <= 65_536 else { throw IdentityError(.invalidInput) }
         return Data(json.utf8)
     }
+}
+
+private final class IdentityStoreStopDelivery: @unchecked Sendable {
+    @TaskLocal static var current: IdentityStoreStopDelivery?
+    let store: UUID
+    private let lock = NSLock()
+    private var active = true
+    init(store: UUID) { self.store = store }
+    var isActive: Bool { lock.lock(); defer { lock.unlock() }; return active }
+    func finish() { lock.lock(); active = false; lock.unlock() }
 }

@@ -261,13 +261,13 @@ class IdentityStoreTest {
         assertEquals(count, keys.templateDeletions)
     }
 
-    @Test fun revokeLogicalCommitFailurePublishesNoStopAndNoPurge() {
+    @Test fun revokeLogicalCommitFailurePublishesNoStopButRetiresWithClosedStop() {
         val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
         val candidate = store.createCandidate(grant()); val template = requireNotNull(store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, grant(), EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
         val ticket = store.beginOperation(candidate, grant(), IdentityScope.ENROLLMENT); var stopped = false
         ticket.stopSignal.registerStopHandler { stopped = true }; keys.rejectJournal = true
         assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { store.revokeGrant("g1", OwnershipAuthorization(store.storeId, "owner")) }
-        assertFalse(stopped); assertTrue(Files.exists(root.resolve("identity-template-${template.id}.bin"))); keys.rejectJournal = false
+        assertTrue(stopped); assertTrue(Files.exists(root.resolve("identity-template-${template.id}.bin"))); keys.rejectJournal = false
         assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) }
         store.close()
     }
@@ -932,9 +932,9 @@ class IdentityStoreTest {
         keys.rejectJournal = true
         assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { store.createCandidate(grant("uncommitted")) }
         keys.rejectJournal = false
-        val reopened = store(root, keys, provider)
-        lease.close(); lease.close(); store.close()
         assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+        lease.close(); lease.close(); store.close()
+        val reopened = store(root, keys, provider)
         assertEquals(candidate, reopened.recordedTemplateCandidate(template))
         reopened.close()
     }
@@ -1317,10 +1317,12 @@ class IdentityStoreTest {
         keys.rejectJournal = true
         assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { store.createCandidate(grant("retire")) }
         keys.rejectJournal = false
-        val reopened = store(root, keys, provider)
+        assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
         val count = keys.templateDeletions
         lease.close(); store.close()
         assertEquals(count, keys.templateDeletions)
+        val reopened = store(root, keys, provider)
+        assertTrue(keys.templateDeletions > count)
         assertEquals(DeletionStatus.PURGED, reopened.awaitDeletion(receipt))
         reopened.close()
     }
@@ -1454,6 +1456,150 @@ class IdentityStoreTest {
             executor.shutdown(); executor.awaitTermination(5, TimeUnit.SECONDS)
             assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.finishOperation(ticket) }
             registration.close(); store.close()
+        }
+    }
+
+    @Test fun retiredWriterRetainsLockUntilMixedTicketAndEveryLeaseDrain() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val template = enrollFixture(store, candidate, authorization)
+        val verify = grantWithScope("verify", IdentityScope.VERIFICATION)
+        val first = store.acquireTemplateLease(template, verify, IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        val last = store.acquireTemplateLease(template, verify, IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT)
+        keys.rejectJournal = true
+        assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { store.createCandidate(grant("retire")) }
+        keys.rejectJournal = false
+        assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+        first.close()
+        assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+        assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) }
+        assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+        last.close(); last.close()
+        val reopened = store(root, keys, provider)
+        // Duplicate retired callbacks only touch their old in-memory registrations.
+        first.close(); assertEquals(candidate, reopened.recordedTemplateCandidate(template))
+        reopened.close(); store.close()
+    }
+
+    @Test fun closeRetainsWriterForBlockedStopDeliveryAndCallbackReentry() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT)
+        val entered = CountDownLatch(1); val release = CountDownLatch(1)
+        val registration = ticket.stopSignal.registerStopHandler {
+            entered.countDown()
+            store.close() // Must not wait for this callback's own delivery token.
+            release.await(5, TimeUnit.SECONDS)
+        }
+        val executor = Executors.newSingleThreadExecutor()
+        try {
+            val closing = executor.submit { store.close() }
+            assertTrue(entered.await(2, TimeUnit.SECONDS))
+            assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+            release.countDown()
+            assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) }
+            closing.get(2, TimeUnit.SECONDS)
+            store(root, keys, provider).close()
+        } finally {
+            release.countDown(); registration.close(); executor.shutdownNow()
+        }
+    }
+
+    @Test fun blockedStopDeliveryRetainsWriterAfterLastTicketDrains() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT)
+        val entered = CountDownLatch(1); val release = CountDownLatch(1)
+        val registration = ticket.stopSignal.registerStopHandler { entered.countDown(); release.await(5, TimeUnit.SECONDS) }
+        val executor = Executors.newFixedThreadPool(2)
+        try {
+            val closing = executor.submit { store.close() }
+            assertTrue(entered.await(2, TimeUnit.SECONDS))
+            val finished = executor.submit { assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) } }
+            finished.get(2, TimeUnit.SECONDS)
+            assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+            release.countDown(); closing.get(2, TimeUnit.SECONDS)
+            store(root, keys, provider).close()
+        } finally {
+            release.countDown(); registration.close(); executor.shutdownNow()
+        }
+    }
+
+    @Test fun retiredWriterWaitsForTicketWhenLeasesDrainFirst() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val template = enrollFixture(store, candidate, authorization)
+        val verify = grantWithScope("verify", IdentityScope.VERIFICATION)
+        val first = store.acquireTemplateLease(template, verify, IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        val last = store.acquireTemplateLease(template, verify, IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT)
+        keys.rejectJournal = true
+        assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { store.createCandidate(grant("retire")) }
+        keys.rejectJournal = false
+        first.close(); last.close()
+        assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+        assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) }
+        store(root, keys, provider).close(); store.close()
+    }
+
+    @Test fun interruptedCloseStillDrainsAndRestoresInterruptFlag() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT)
+        val stopped = CountDownLatch(1); val finished = CountDownLatch(1); val interrupted = AtomicBoolean(false)
+        val registration = ticket.stopSignal.registerStopHandler { stopped.countDown() }
+        val closer = Thread {
+            store.close()
+            interrupted.set(Thread.currentThread().isInterrupted)
+            finished.countDown()
+        }
+        try {
+            closer.start(); assertTrue(stopped.await(2, TimeUnit.SECONDS))
+            closer.interrupt()
+            assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) }
+            assertTrue(finished.await(2, TimeUnit.SECONDS))
+            assertTrue(interrupted.get())
+            store(root, keys, provider).close()
+        } finally {
+            registration.close(); closer.join(2_000)
+        }
+    }
+
+    @Test fun retirementStopFromPurgeFailureRunsOutsideEveryStoreMonitor() {
+        for (leaseHeld in listOf(true, false)) {
+            val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+            val authorization = grant(); val candidate = store.createCandidate(authorization)
+            val template = enrollFixture(store, candidate, authorization)
+            val verify = grantWithScope("verify", IdentityScope.VERIFICATION)
+            val lease = if (leaseHeld) store.acquireTemplateLease(template, verify, IdentityScope.VERIFICATION, template.embeddingSpaceId) else null
+            val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT)
+            val queried = AtomicBoolean(false)
+            val executor = Executors.newSingleThreadExecutor()
+            val registration = ticket.stopSignal.registerStopHandler {
+                try {
+                    executor.submit {
+                        assertCode(IdentityErrorCode.CLOSED) { store.recordedCandidateGrant(candidate) }
+                        queried.set(true)
+                    }.get(250, TimeUnit.MILLISECONDS)
+                } catch (_: java.util.concurrent.TimeoutException) { }
+            }
+            try {
+                if (leaseHeld) {
+                    store.deleteTemplate(template, OwnershipAuthorization(store.storeId, "owner"))
+                    keys.rejectJournal = true
+                    lease!!.close()
+                } else {
+                    keys.onTemplateDelete = { keys.rejectJournal = true }
+                    assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { store.deleteTemplate(template, OwnershipAuthorization(store.storeId, "owner")) }
+                }
+                assertTrue(queried.get(), "retirement callback ran under an outer Store monitor")
+            } finally {
+                keys.rejectJournal = false; keys.onTemplateDelete = null
+                assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) }
+                lease?.close(); registration.close(); store.close()
+                executor.shutdown(); assertTrue(executor.awaitTermination(2, TimeUnit.SECONDS))
+            }
         }
     }
 

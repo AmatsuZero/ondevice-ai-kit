@@ -14,6 +14,7 @@ final class IdentityJournal: @unchecked Sendable {
     private let root: URL, recordID: String, provider: any IdentityKeyProvider, context: String
     private let dataURL: URL, lockFD: Int32, stateLock = NSLock()
     private var closed = false
+    private var poisoned = false
     private var hadRecord = false
     let keyID: String
 
@@ -74,8 +75,13 @@ final class IdentityJournal: @unchecked Sendable {
         closed = true; _ = flock(lockFD, LOCK_UN); _ = DarwinOrGlibcClose(lockFD)
     }
 
-    private func admittedUnlocked() throws { if closed { throw IdentityError(.closed) } }
-    private func poisonUnlocked() { closed = true; _ = flock(lockFD, LOCK_UN); _ = DarwinOrGlibcClose(lockFD) }
+    private func admittedUnlocked() throws {
+        if closed || poisoned { throw IdentityError(.closed) }
+    }
+    /// Retire admission after an authenticated read/commit failure while
+    /// retaining the writer lock. IdentityStore owns the eventual physical
+    /// close so live tickets and leases cannot race a reopened writer.
+    private func poisonUnlocked() { poisoned = true }
 
     private func authenticatedCurrentRecord() throws -> Data? {
         let exists = FileManager.default.fileExists(atPath: dataURL.path)

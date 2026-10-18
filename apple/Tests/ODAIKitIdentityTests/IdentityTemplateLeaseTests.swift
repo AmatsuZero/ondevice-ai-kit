@@ -80,9 +80,11 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         do { _ = try await fixture.store.createCandidate(grant(id: "failed-commit")); XCTFail("journal failure ignored") }
         catch { XCTAssertEqual((error as? IdentityError)?.code, .reEnrollmentRequired) }
         fixture.keys.rejectJournal = false
-        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) {
+            XCTAssertEqual(($0 as? IdentityError)?.code, .busy)
+        }
         await lease.close(); await lease.close(); try await fixture.store.close()
-        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .busy) }
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
         let current = try await reopened.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
         XCTAssertEqual(try current.embedding().values, [0.25, -0.75])
         await current.close(); try await reopened.close()
@@ -254,10 +256,11 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         fixture.keys.rejectJournal = true
         do { _ = try await fixture.store.createCandidate(grant(id: "retire")); XCTFail("expected writer retirement") } catch {}
         fixture.keys.rejectJournal = false
-        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .busy) }
         let count = fixture.keys.templateDeletions
         await lease.close(); try await fixture.store.close()
         XCTAssertEqual(fixture.keys.templateDeletions, count)
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
         let status = try await reopened.awaitDeletion(receipt)
         XCTAssertEqual(status, .purged)
         try await reopened.close()
@@ -631,19 +634,25 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         try await fixture.store.close(); try await reopened.close()
     }
 
-    func testFailedLogicalRevocationDoesNotStopOrPurgeBeforeCommit() async throws {
+    func testFailedLogicalRevocationRetiresWithoutPublishingRevocationOrPurge() async throws {
         let fixture = try await fixture()
         let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+        let stopped = expectation(description: "failed writer requests closed")
+        let registration = ticket.stopSignal.registerStopHandler { stopped.fulfill() }
         fixture.keys.rejectJournal = true
         do { _ = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")); XCTFail("failed logical commit published") } catch {}
-        XCTAssertNoThrow(try ticket.stopSignal.check())
+        await fulfillment(of: [stopped], timeout: 2)
+        XCTAssertThrowsError(try ticket.stopSignal.check()) { XCTAssertEqual(($0 as? IdentityError)?.code, .closed) }
         XCTAssertEqual(fixture.keys.templateDeletions, 0)
         fixture.keys.rejectJournal = false
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .busy) }
+        do { try await fixture.store.finishOperation(ticket); XCTFail("retired ticket published") } catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+        try await fixture.store.close()
         let reopened = try open(fixture.root, fixture.keys, fixture.authority)
         let recovered = try await reopened.recordedTemplateCandidate(fixture.ref)
         XCTAssertEqual(recovered, fixture.candidate)
-        do { try await fixture.store.finishOperation(ticket) } catch {}
-        try await fixture.store.close(); try await reopened.close()
+        registration.close()
+        try await reopened.close()
     }
 
     private func enroll(_ store: IdentityStore, candidate: CandidateRef, grant: AuthorizationGrant) async throws -> TemplateRef {
@@ -750,6 +759,177 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         await lease.close(); try await fixture.store.close()
     }
 
+    func testRetirementDrainsMixedResourcesInBothCompletionOrders() async throws {
+        for ticketFirst in [true, false] {
+            let fixture = try await fixture()
+            let first = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+            let last = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+            let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+            let stopped = expectation(description: "retirement requests stop")
+            let registration = ticket.stopSignal.registerStopHandler { stopped.fulfill() }
+            fixture.keys.rejectJournal = true
+            do { _ = try await fixture.store.createCandidate(grant(id: "failed")); XCTFail("fault published") }
+            catch { XCTAssertEqual((error as? IdentityError)?.code, .reEnrollmentRequired) }
+            fixture.keys.rejectJournal = false
+            await fulfillment(of: [stopped], timeout: 2)
+            XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .busy) }
+            let closeOne = Task { try await fixture.store.close() }
+            let closeTwo = Task { try await fixture.store.close() }
+            await first.close()
+            if ticketFirst {
+                do { try await fixture.store.finishOperation(ticket); XCTFail("retired ticket published") }
+                catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+            } else { await last.close() }
+            XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .busy) }
+            if ticketFirst { await last.close() }
+            else {
+                do { try await fixture.store.finishOperation(ticket); XCTFail("retired ticket published") }
+                catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+            }
+            try await closeOne.value; try await closeTwo.value
+            let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+            let before = try Data(contentsOf: fixture.root.appendingPathComponent("identity-journal-store.bin"))
+            await first.close(); await last.close(); try await fixture.store.close()
+            do { try await fixture.store.finishOperation(ticket); XCTFail("duplicate ticket accepted") }
+            catch { XCTAssertEqual((error as? IdentityError)?.code, .invalidInput) }
+            XCTAssertEqual(try Data(contentsOf: fixture.root.appendingPathComponent("identity-journal-store.bin")), before)
+            XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .busy) }
+            let recovered = try await reopened.recordedTemplateCandidate(fixture.ref)
+            XCTAssertEqual(recovered, fixture.candidate)
+            registration.close(); try await reopened.close()
+        }
+    }
+
+    func testCloseWaitsForEmptyTargetStopDeliveryAfterOperationDrains() async throws {
+        let fixture = try await fixture()
+        let empty = try await fixture.store.createCandidate(grant(id: "empty"))
+        let ticket = try await fixture.store.beginOperation(empty, grant: grant(id: "empty"), scope: .verification)
+        let entered = expectation(description: "empty target delivery entered")
+        let resume = DispatchSemaphore(value: 0)
+        let registration = ticket.stopSignal.registerStopHandler {
+            entered.fulfill(); _ = resume.wait(timeout: .now() + 5)
+        }
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        let deleting = Task { try await fixture.store.deleteCandidate(empty, ownership: owner) }
+        await fulfillment(of: [entered], timeout: 2)
+        do { try await fixture.store.finishOperation(ticket); XCTFail("revoked ticket published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        let returned = expectation(description: "close returned during delivery"); returned.isInverted = true
+        let closing = Task { try await fixture.store.close(); returned.fulfill() }
+        await fulfillment(of: [returned], timeout: 0.05)
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .busy) }
+        resume.signal()
+        let receipt = try await deleting.value; try await closing.value
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let status = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(status, .purged)
+        registration.close(); try await reopened.close()
+    }
+
+    func testStopCallbackCanCloseItsStoreWithoutWaitingForItsOwnDelivery() async throws {
+        let fixture = try await fixture()
+        let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+        let callbackReturned = expectation(description: "callback returned")
+        let closedInside = LeaseFlag()
+        let retainedInside = LeaseFlag()
+        let registration = ticket.stopSignal.registerStopHandler {
+            let done = DispatchSemaphore(value: 0)
+            Task {
+                try? await fixture.store.finishOperation(ticket)
+                try? await fixture.store.close()
+                done.signal()
+            }
+            closedInside.set(done.wait(timeout: .now() + 1) == .success)
+            do { let unexpected = try self.open(fixture.root, fixture.keys, fixture.authority); Task { try? await unexpected.close() } }
+            catch { retainedInside.set((error as? IdentityError)?.code == .busy) }
+            callbackReturned.fulfill()
+        }
+        let closing = Task { try await fixture.store.close() }
+        await fulfillment(of: [callbackReturned], timeout: 2)
+        try await closing.value
+        XCTAssertTrue(closedInside.value, "callback close waited for its own delivery")
+        XCTAssertTrue(retainedInside.value, "callback close released writer before delivery returned")
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        registration.close(); try await reopened.close()
+    }
+
+    func testDelayedTaskCreatedByStopHandlerStillJoinsRetirementDrain() async throws {
+        let fixture = try await fixture()
+        let lease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+        let callbackReturned = expectation(description: "stop callback returned")
+        let delayedFinished = expectation(description: "delayed close finished"); delayedFinished.isInverted = true
+        let completed = expectation(description: "delayed close joined drain")
+        let registration = ticket.stopSignal.registerStopHandler {
+            Task {
+                try? await Task.sleep(nanoseconds: 50_000_000)
+                try? await fixture.store.close()
+                delayedFinished.fulfill()
+                completed.fulfill()
+            }
+            callbackReturned.fulfill()
+        }
+        let closing = Task { try await fixture.store.close() }
+        await fulfillment(of: [callbackReturned], timeout: 2)
+        do { try await fixture.store.finishOperation(ticket); XCTFail("closed ticket published") } catch {}
+        await fulfillment(of: [delayedFinished], timeout: 0.15)
+        await lease.close()
+        try await closing.value
+        await fulfillment(of: [completed], timeout: 2)
+        registration.close()
+    }
+
+    func testTaskFromReturnedHandlerJoinsWhenAnotherHandlerOnSameSignalBlocks() async throws {
+        try await assertReturnedHandlerTaskJoinsDrain(separateSignals: false)
+    }
+
+    func testTaskFromReturnedSignalHandlerJoinsWhenAnotherSignalHandlerBlocks() async throws {
+        try await assertReturnedHandlerTaskJoinsDrain(separateSignals: true)
+    }
+
+    private func assertReturnedHandlerTaskJoinsDrain(separateSignals: Bool) async throws {
+        let fixture = try await fixture()
+        let first = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+        let second = separateSignals ? try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification) : first
+        let secondEntered = expectation(description: "second handler entered")
+        let childEntered = expectation(description: "returned handler child calls close")
+        let earlyReturn = expectation(description: "child close returned before delivery drained"); earlyReturn.isInverted = true
+        let childFinished = expectation(description: "child close eventually joined")
+        let startChild = DispatchSemaphore(value: 0)
+        let resume = DispatchSemaphore(value: 0)
+        let order = LeaseCounter()
+        let handler: @Sendable () -> Void = {
+            if order.next() == 1 {
+                Task {
+                    guard startChild.wait(timeout: .now() + 5) == .success else { return }
+                    childEntered.fulfill()
+                    try? await fixture.store.close()
+                    earlyReturn.fulfill()
+                    childFinished.fulfill()
+                }
+            } else {
+                secondEntered.fulfill()
+                startChild.signal()
+                _ = resume.wait(timeout: .now() + 5)
+            }
+        }
+        let registrations = [first.stopSignal.registerStopHandler(handler), second.stopSignal.registerStopHandler(handler)]
+        let closing = Task { try await fixture.store.close() }
+        await fulfillment(of: [secondEntered, childEntered], timeout: 2)
+        // Both tickets must be consumed independently: finish always throws once
+        // closed, so a shared do/catch would strand the second operation.
+        for ticket in separateSignals ? [first, second] : [first] {
+            do { try await fixture.store.finishOperation(ticket); XCTFail("closed ticket published") }
+            catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+        }
+        await fulfillment(of: [earlyReturn], timeout: 0.1)
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .busy) }
+        resume.signal()
+        try await closing.value
+        await fulfillment(of: [childFinished], timeout: 2)
+        registrations.forEach { $0.close() }
+    }
+
     private struct Fixture {
         let root: URL; let keys: LeaseKeys; let authority: LeaseAuthority
         let store: IdentityStore; let ref: TemplateRef; let candidate: CandidateRef; let grant: AuthorizationGrant
@@ -824,4 +1004,15 @@ private final class VerificationOnlyBackend: IdentityBackend, @unchecked Sendabl
     func evaluateQuality(_ probe: IdentityProbe) throws -> IdentityQuality { try base.evaluateQuality(probe) }
     func embed(_ probe: IdentityProbe) throws -> IdentityEmbedding { try IdentityEmbedding(embeddingSpace: embeddingSpace, values: base.embed(probe).values) }
     func close() { base.close() }
+}
+
+private final class LeaseFlag: @unchecked Sendable {
+    private let lock = NSLock(); private var stored = false
+    var value: Bool { lock.lock(); defer { lock.unlock() }; return stored }
+    func set(_ value: Bool) { lock.lock(); stored = value; lock.unlock() }
+}
+
+private final class LeaseCounter: @unchecked Sendable {
+    private let lock = NSLock(); private var stored = 0
+    func next() -> Int { lock.lock(); defer { lock.unlock() }; stored += 1; return stored }
 }

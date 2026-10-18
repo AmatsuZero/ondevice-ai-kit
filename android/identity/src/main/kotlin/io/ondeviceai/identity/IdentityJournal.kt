@@ -24,6 +24,7 @@ internal class IdentityJournal(root: Path, private val recordId: String, private
     private val context: String
     internal val keyId: String
     @Volatile private var closed = false
+    @Volatile private var poisoned = false
     private var hadRecord = false
 
     init {
@@ -64,8 +65,12 @@ internal class IdentityJournal(root: Path, private val recordId: String, private
         if (closed) return; closed = true
         try { fileLock.release() } finally { lockChannel.close() }
     }
-    private fun admitted() { if (closed) throw IdentityError(IdentityErrorCode.CLOSED) }
-    private fun poison() { if (!closed) close() }
+    private fun admitted() {
+        if (closed) throw IdentityError(IdentityErrorCode.CLOSED)
+        if (poisoned) throw IdentityError(IdentityErrorCode.CLOSED)
+    }
+    /** A poisoned journal remains the writer owner's responsibility until close(). */
+    private fun poison() { poisoned = true }
 
     private fun authenticatedCurrentRecord(): ByteArray? {
         val exists = Files.exists(dataFile)

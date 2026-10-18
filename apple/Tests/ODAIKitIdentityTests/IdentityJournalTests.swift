@@ -42,6 +42,7 @@ final class IdentityJournalTests: XCTestCase {
         let writer = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
         try writer.commit(Data([1]))
         XCTAssertThrowsError(try writer.commit(Data(repeating: 7, count: 16 * 1024 * 1024)))
+        try writer.close()
         let reopened = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
         XCTAssertEqual(try reopened.read(), Data([1])); try reopened.close()
     }
@@ -132,8 +133,12 @@ final class IdentityJournalTests: XCTestCase {
         provider.fail = true
         XCTAssertThrowsError(try writer.commit(Data([2])))
         XCTAssertThrowsError(try writer.read())
+        XCTAssertThrowsError(try IdentityJournal(root: root, recordID: "store", keyProvider: keys)) {
+            XCTAssertEqual(($0 as? IdentityError)?.code, .busy)
+        }
+        try writer.close()
         let reopened = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
-        try writer.close() // A retired writer cannot unlock the reopened writer.
+        try writer.close() // Duplicate retirement close cannot unlock the new writer.
         XCTAssertThrowsError(try IdentityJournal(root: root, recordID: "other", keyProvider: keys))
         XCTAssertEqual(try reopened.read(), Data([1]))
         try reopened.close()

@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | Task 1：引用、授权声明、时钟、错误、选择与 codec | `10029b8` | Swift 12/12；Android 12/12；共享 canonical JSON 夹具 | 仅字段/取值契约，解码不代表签发真实性或授权有效 |
 | Task 4：后端绑定与独立身份/PAD 策略 | `850fe02` | Swift 8/8；Android 8/8；两端 backend space 夹具一致 | fixture 后端为模块内部类型；无默认生产模型/阈值；判定归后续引擎 |
-| Task 2 加密子步骤：AES-256-GCM envelope 与原生 key provider | `7803999` | Swift 6/6；Android 6/6；Android lintDebug | 密钥缺失不重建、AAD/篡改拒绝、随机 nonce、严格 256 位与字节快照已验证；真实 Keychain/Keystore 成功路径尚未真机验证 |
+| Task 2 加密子步骤：AES-256-GCM envelope 与原生 key provider | `7803999` | Swift 6/6；Android 6/6；Android lintDebug | 密钥缺失不重建、AAD/篡改拒绝、随机 nonce、严格 256 位与字节快照已验证；Android Keystore envelope 已在 API35 真机验证；iOS Keychain 与完整 Store 真机路径尚待验证 |
 | Task 2 journal 子步骤：独占 writer、加密原子提交、恢复加固 | `976d973`、`a006bbb` | Swift journal 14/14；Android journal 13/13；完整 identity 模块及 Android lintDebug | 构造与每次覆盖前认证现有 journal；丢失记录/密钥不重建；fsync、原子替换、目录同步；有界读取；只清理已认证临时文件。独立增量复审 APPROVE，4 项问题全部关闭；仅 journal primitive，不代表完整 Store 生命周期 |
 | Task 2 授权状态子步骤：可信 provider、不可变声明与域 epoch | `6dba20b` | Swift 授权 11/11；Android 授权 10/10；identity 模块及 Android lintDebug | provider 独立权威 epoch、同域撤销/新 grant 拒绝、声明不可改绑、ownership 独立授权、严格快照恢复。独立复审实现可接受，LOW issuedAt 测试缺口已补；candidate 持久化接入见下行 |
 | Task 2 后端停止子步骤：per-operation stop signal | `0d401fb` | Swift stop 8/8；Android stop 8/8；identity 59/59、57/57 及 Android lintDebug | 幂等停止、锁外 native stop 回调、停止前后检查、停止覆盖普通后端错误；致命 JVM Error 透传。独立复审 APPROVE；尚未接入 Store 在途 ticket/close drain |
@@ -27,7 +27,7 @@ rtk proxy env CLANG_MODULE_CACHE_PATH=/tmp/odai-p10-clang-cache SWIFTPM_MODULECA
 rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDebug
 ```
 
-当前完整 Apple 包测试另有既有环境失败：`VisionFaceDetectorTests.testBlankImageUsesRealVisionAndReturnsSuccessfulEmptyResult` 返回 `com.apple.Vision Code=9`。未将其改为跳过或通过；上述身份定向结果与该缺口分别记录。
+最新完整 Apple 包在正常本机权限下运行 `/tmp/odai-retirement-swift-full-native-final.log` 通过 206/206（Speech 31、ModelStore 13、Identity 148、Face 9、Core 5），包含真实 Vision 空白图测试；沙箱内全包仍出现 Vision Code9（identity 148 项通过）。独立 retirement/frame scoped 复审已通过，详见文末。
 
 ## Task 2 待实现
 
@@ -36,7 +36,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - candidate/template 与 immutable grant 的持久绑定、域撤销 tombstone 和稳定 revoke receipt 已实现；模板单目标删除和逐目标 purge 状态已通过单测；candidate/domain 固定目标集和共享逐模板 purge 状态已实现。
 - admission/revoke/template publish 共用串行门；quality/embed 在门外执行，撤销立即请求停止。模板单目标已接入 lease 后两阶段删除，candidate/domain 清理已接入，精确在途模板绑定也已通过本地测试。
 - operation ticket 已固定 grant/candidate 并接入 public enroll、撤销 stop、结果抑制与 close drain；任务对象的完整 Core 终态封装仍需后续整合。
-- 单目标已覆盖持有多 lease 删除、purge 失败/重试/重启；candidate/domain 全目标集已有覆盖；仍需 deadline/cancel 等待和退休锁 drain 测试；已有 scope/expiry、同域新 grant ID 绕过、enrollment 撤销竞态和正常 close lease drain 测试不能替代它们。
+- 单目标已覆盖持有多 lease 删除、purge 失败/重试/重启；candidate/domain 全目标集已有覆盖；deadline/cancel 等待已在 `80d887e` 完成；退休锁 drain 与 Swift 多 handler 交错回归已通过，独立 scoped re-review PASS；已有 scope/expiry、同域新 grant ID 绕过、enrollment 撤销竞态和正常 close lease drain 测试不能替代它们。
 - 平台原生密钥与恢复行为真机验证；iOS 15/API 26 最低设备验收另记。
 
 只有这些门全部通过，才能标记 Task 2 完成。后续 Task 3/5/6/7 的 snapshot、身份引擎和活体状态机尚未实现。
@@ -46,7 +46,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - Swift actor / Kotlin synchronized 门负责候选 admission、journal 持久化及发布；创建候选不会调用生物后端，也不存储图像/向量。
 - 元数据目前使用严格 64 KiB JSON 格式（包含授权快照），超限在提交前拒绝；后续模板/索引规模需另行设计存储格式。
 - Kotlin public open 只使用 Context.noBackupFilesDir 内的受管目录；其路径构造尚无 Context/真机验收，单测使用 internal 临时目录入口。
-- close 已请求 operation ticket stop，并等待 operation ticket 和内部 template lease 同时 drain。journal 提交失败时仍沿用立即 poison/unlock；旧/关闭 Store 的 lease release 只修改旧 Store 内存，不做文件/密钥 I/O；模板单目标已覆盖旧回调与重开 writer 隔离。完整退休锁 drain 语义仍须后续切片处理。
+- close 已请求 operation ticket stop，并等待 operation ticket 和内部 template lease 同时 drain。当前 retirement 差异将 journal poison 与物理解锁分离，writer 保持到 operation、lease 和 stop delivery 全部 drain；旧/关闭 Store 的回调只修改旧内存。双端已通过专项复审，Swift 多 handler 派生 Task 的 close 等待边界已有 RED→GREEN。
 
 ### 持久撤销当前边界
 
@@ -143,3 +143,11 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 单模板 tombstone 提交后，stop 回调在 actor/monitor 外执行；共享 pending-stop 计数保护覆盖并发 candidate/domain 清理与 lease release，Android 重复删除不会释放其他请求的计数。撤销后普通 backend error 被 authorizationRevoked 抑制。
 - 独立 scoped re-review APPROVE（两项初轮 HIGH 均已关闭）。Swift identity 139/139，Android identity 146/146 与 lintDebug 通过；回归先复现 stop 交付期间提前 purge、Android 持锁回调及重复删除计数问题，再修复通过。日志 `/tmp/odai-p10-template-ticket-final-{swift,android}.log`。
 - 本切片不包含退休 writer 完整 drain、后续 gallery/身份引擎或生产精度验收。Task 2 与 roadmap 继续实施中。
+
+### Task 2 writer retirement / drain（2026-10-18）
+
+- `IdentityJournal` 的 poison 与 physical close 已分离：读/写故障进入 fail-closed admission，但保留 writer；只有显式 close 且 Store 的 operation、template lease、stop delivery 全部 drain 后才释放 writer。
+- Store fault、正常 close、并发 close、lease/ticket 两种完成顺序、空目标 stop delivery、Android 中断恢复、旧回调重开隔离均有回归。Swift 还覆盖同一 stop signal 多 handler、多个 signal 交错、晚注册和 handler 派生 Task；每个 handler 使用独立 active frame，handler 返回后派生 Task 不能跳过 drain。
+- RED/GREEN：Swift frame 修复前两项交错回归各失败，修复后 identity **148/148**；Android **153/153**，失败/错误/跳过均为 0，`lintDebug` 通过。完整 Apple 原生权限运行 **206/206**（Speech 31、ModelStore 13、Identity 148、Face 9、Core 5），Vision 空白图测试本次成功；沙箱运行的 Vision Code9 只作为环境差异记录。
+- 独立 scoped re-review `task-2-retirement-frame-rereview.md`：spec compliance PASS、quality PASS，无 Critical/Important 遗留。Android 编译仍有既有 nullable/unchecked-cast 警告，lint 无错误。
+- 该切片仍不等于 Task 2 完成：Android 完整 `Context.noBackupFilesDir` Store probe、iOS Keychain Store 真机闭环、API26/iOS15 设备门禁和进程终止/文件系统故障注入仍单列；不以单元测试替代这些证据。

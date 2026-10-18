@@ -32,6 +32,10 @@ class IdentityStore internal constructor(
     private var operating = false
     private val leases = mutableMapOf<String, MutableSet<IdentityTemplateLease>>()
     private val pendingPurgeStops = mutableMapOf<String, Int>()
+    /** Every host stop callback is retained until its synchronous delivery returns. */
+    private var pendingStopDeliveries = 0
+    private val stopDeliveryDepth = ThreadLocal.withInitial { 0 }
+    private val deferredRetirementStops = mutableListOf<Pair<IdentityStopSignal, IdentityStopReason>>()
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
     private val gate = java.lang.Object()
     private var writerReleased = false
@@ -88,7 +92,7 @@ class IdentityStore internal constructor(
             val bytes = encode(storeId, nextAuthorization, nextCandidates, deletions = nextDeletions)
             nextAuthorization.admitting(grant, IdentityScope.ENROLLMENT, authorizationProvider, wallClock.nowMillis)
             try { journal.commit(bytes) }
-            catch (error: Exception) { closed = true; throw error }
+            catch (error: Exception) { retireAfterJournalFaultLocked(); throw error }
             authorization = nextAuthorization
             candidates = nextCandidates
             deletions = nextDeletions
@@ -132,7 +136,7 @@ class IdentityStore internal constructor(
             val record = RevocationRecord(grant.revocationDomainId, epoch, grants, candidateIds, templateIds)
             val nextRevocations = revocations + (receipt.id to record)
             val bytes = encode(storeId, nextAuthorization, candidates, nextRevocations, deletions = nextDeletions)
-            try { journal.commit(bytes) } catch (error: Exception) { closed = true; throw error }
+            try { journal.commit(bytes) } catch (error: Exception) { retireAfterJournalFaultLocked(); throw error }
             authorization = nextAuthorization; revocations = nextRevocations; deletions = nextDeletions
             val signals = invalidateOperations(grant.revocationDomainId, epoch)
             holdPurge(templateIds)
@@ -144,7 +148,7 @@ class IdentityStore internal constructor(
 
     private fun invalidateOperations(domain: String, beforeEpoch: Long) = operations.values.filter {
         it.ticket.grant.revocationDomainId == domain && it.ticket.grant.authorizationEpoch < beforeEpoch
-    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
+    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }.also(::reserveAuthorizationStopsLocked)
 
     internal fun beginOperation(candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope,
                                  templateTargets: List<TemplateRef>? = null): IdentityOperationTicket = mutation {
@@ -155,7 +159,7 @@ class IdentityStore internal constructor(
         if (next.canonicalJSON() != authorization.canonicalJSON()) {
             val bytes = encode(storeId, next, candidates)
             next.admitting(grant, scope, authorizationProvider, wallClock.nowMillis)
-            try { journal.commit(bytes) } catch (error: Exception) { closed = true; throw error }
+            try { journal.commit(bytes) } catch (error: Exception) { retireAfterJournalFaultLocked(); throw error }
             authorization = next
         }
         val targetIds = templateTargets?.map { ref ->
@@ -193,7 +197,7 @@ class IdentityStore internal constructor(
             return publication()
         } finally {
             operations.remove(ticket.id)
-            if (operations.isEmpty()) gate.notifyAll()
+            releaseWriterIfDrainedLocked()
         }
     }
 
@@ -243,7 +247,7 @@ class IdentityStore internal constructor(
         } finally {
             registration?.close()
             // Also drains if a backend throws a fatal JVM Error before publication.
-            synchronized(gate) { operations.remove(ticket.id); if (operations.isEmpty()) gate.notifyAll() }
+            synchronized(gate) { operations.remove(ticket.id); releaseWriterIfDrainedLocked() }
         }
     }
 
@@ -425,11 +429,11 @@ class IdentityStore internal constructor(
     }
 
     private fun invalidateCandidateOperations(candidateId: String) = operations.values.filter { it.ticket.candidate.id == candidateId }
-        .map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
+        .map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }.also(::reserveAuthorizationStopsLocked)
 
     private fun invalidateTemplateOperations(targets: Set<String>) = operations.values.filter {
         it.ticket.templateTargets?.let { bound -> bound.intersect(targets).isNotEmpty() } ?: false
-    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
+    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }.also(::reserveAuthorizationStopsLocked)
 
     private fun purgeTemplate(id: String) {
         if (closed || writerReleased || !leases[id].isNullOrEmpty() || id in pendingPurgeStops) return
@@ -438,7 +442,7 @@ class IdentityStore internal constructor(
         // Never catch metadata failure as a payload error. An ambiguous commit
         // retires this writer; only a reopened writer may retry from its tombstone.
         try { commitDeletions(deletions + (id to record.copy(status = status))) }
-        catch (error: Exception) { closed = true; throw error }
+        catch (error: Exception) { retireAfterJournalFaultLocked(); throw error }
     }
 
     private fun holdPurge(targets: List<String>) {
@@ -446,52 +450,111 @@ class IdentityStore internal constructor(
     }
 
     private fun stopAndPurge(signals: List<IdentityStopSignal>, targets: List<String>) {
-        signals.forEach { it.requestStop(IdentityStopReason.AUTHORIZATION_REVOKED) }
-        synchronized(gate) {
+        deliverReservedStops(signals.map { it to IdentityStopReason.AUTHORIZATION_REVOKED })
+        mutation(allowClosed = true) {
             targets.forEach { id ->
                 val remaining = (pendingPurgeStops[id] ?: 1) - 1
                 if (remaining == 0) pendingPurgeStops.remove(id) else pendingPurgeStops[id] = remaining
             }
             // Stop callbacks may close/retire the store; only the live writer may purge.
-            if (!closed) mutation { targets.forEach(::purgeTemplate) }
+            if (!closed) targets.forEach(::purgeTemplate)
         }
     }
 
-    private fun releaseLease(templateId: String, lease: IdentityTemplateLease) = synchronized(gate) {
-        val held = leases[templateId] ?: return@synchronized
-        held.remove(lease)
-        if (held.isEmpty()) leases.remove(templateId)
-        // Host key-provider callbacks cannot reenter publication during cleanup.
-        if (!closed && !writerReleased) {
+    private fun releaseLease(templateId: String, lease: IdentityTemplateLease) {
+        val shouldPurge = synchronized(gate) {
+            val held = leases[templateId] ?: return@synchronized false
+            held.remove(lease)
+            if (held.isEmpty()) leases.remove(templateId)
+            releaseWriterIfDrainedLocked()
+            !closed && !writerReleased && !operating
+        }
+        // The mutation owns its monitor. Its retirement delivery must not
+        // remain nested inside the lease-removal monitor above.
+        if (shouldPurge) {
             try { mutation { purgeTemplate(templateId) } } catch (_: Exception) { /* Recovery retries the durable tombstone. */ }
         }
-        if (leases.isEmpty()) gate.notifyAll()
     }
 
-    private fun journalCommit(bytes: ByteArray) { try { journal.commit(bytes) } catch (error: Exception) { closed = true; throw error } }
+    private fun journalCommit(bytes: ByteArray) { try { journal.commit(bytes) } catch (error: Exception) {
+        retireAfterJournalFaultLocked()
+        throw error
+    } }
 
     override fun close() {
         val pending = synchronized(gate) {
             if (writerReleased) return
-            if (operating) throw IdentityError(IdentityErrorCode.BUSY)
+            if (operating && stopDeliveryDepth.get() == 0) throw IdentityError(IdentityErrorCode.BUSY)
+            if (closed) return@synchronized emptyList()
             closed = true
-            operations.values.map {
+            reserveStopsLocked(operations.values.map {
                 if (it.terminal != IdentityStopReason.AUTHORIZATION_REVOKED) it.terminal = IdentityStopReason.CLOSED
                 it.ticket.stopSignal to it.terminal!!
-            }
+            })
         }
-        pending.forEach { (signal, reason) -> signal.requestStop(reason) }
+        deliverReservedStops(pending)
+        // A callback runs on the stop-delivery stack. It cannot wait for its own
+        // delivery token; the outer finally below performs the common drain.
+        if (stopDeliveryDepth.get() != 0) return
         var interrupted = false
         try {
             synchronized(gate) {
-                while (operations.isNotEmpty() || leases.isNotEmpty()) {
+                releaseWriterIfDrainedLocked()
+                while (!writerReleased) {
                     try { gate.wait() } catch (_: InterruptedException) { interrupted = true }
                 }
-                if (!writerReleased) { journal.close(); writerReleased = true }
             }
         } finally {
             if (interrupted) Thread.currentThread().interrupt()
         }
+    }
+
+    /** Delivers host callbacks outside the monitor while retaining the writer boundary. */
+    private fun deliverReservedStops(pending: List<Pair<IdentityStopSignal, IdentityStopReason>>) {
+        if (pending.isEmpty()) return
+        stopDeliveryDepth.set(stopDeliveryDepth.get() + 1)
+        try {
+            pending.forEach { (signal, reason) -> signal.requestStop(reason) }
+        } finally {
+            stopDeliveryDepth.set(stopDeliveryDepth.get() - 1)
+            synchronized(gate) {
+                pendingStopDeliveries -= pending.size
+                releaseWriterIfDrainedLocked()
+            }
+        }
+    }
+
+    /** Caller owns [gate]; reservation happens before another callback can drain this writer. */
+    private fun reserveStopsLocked(pending: List<Pair<IdentityStopSignal, IdentityStopReason>>): List<Pair<IdentityStopSignal, IdentityStopReason>> {
+        pendingStopDeliveries += pending.size
+        return pending
+    }
+
+    private fun reserveAuthorizationStopsLocked(signals: List<IdentityStopSignal>) {
+        reserveStopsLocked(signals.map { it to IdentityStopReason.AUTHORIZATION_REVOKED })
+    }
+
+    /** Caller owns [gate]. Preserves revocation as the more specific terminal reason. */
+    private fun retireAfterJournalFaultLocked() {
+        if (closed) return
+        closed = true
+        val pending = operations.values.mapNotNull {
+            if (it.terminal == IdentityStopReason.AUTHORIZATION_REVOKED) null
+            else {
+                it.terminal = IdentityStopReason.CLOSED
+                it.ticket.stopSignal to IdentityStopReason.CLOSED
+            }
+        }
+        deferredRetirementStops += reserveStopsLocked(pending)
+    }
+
+    /** The only physical writer release point. Caller owns [gate]. */
+    private fun releaseWriterIfDrainedLocked() {
+        if (closed && !operating && operations.isEmpty() && leases.isEmpty() && pendingStopDeliveries == 0 && !writerReleased) {
+            journal.close()
+            writerReleased = true
+        }
+        gate.notifyAll()
     }
 
     private fun admitted() {
@@ -500,11 +563,25 @@ class IdentityStore internal constructor(
     }
 
     // JVM monitors are reentrant. Host callbacks cannot recursively publish a second state.
-    private inline fun <T> mutation(allowClosed: Boolean = false, block: () -> T): T = synchronized(gate) {
-        if (!allowClosed && closed) throw IdentityError(IdentityErrorCode.CLOSED)
-        if (operating) throw IdentityError(IdentityErrorCode.BUSY)
-        operating = true
-        try { return block() } finally { operating = false }
+    private inline fun <T> mutation(allowClosed: Boolean = false, block: () -> T): T {
+        var retirementStops = emptyList<Pair<IdentityStopSignal, IdentityStopReason>>()
+        try {
+            synchronized(gate) {
+                if (!allowClosed && closed) throw IdentityError(IdentityErrorCode.CLOSED)
+                if (operating) throw IdentityError(IdentityErrorCode.BUSY)
+                operating = true
+                try { return block() } finally {
+                    operating = false
+                    releaseWriterIfDrainedLocked()
+                    retirementStops = deferredRetirementStops.toList()
+                    deferredRetirementStops.clear()
+                }
+            }
+        } finally {
+            // The reservation was made while the fault was still under [gate].
+            // Delivery is deliberately outside it to permit backend re-entry.
+            if (retirementStops.isNotEmpty()) deliverReservedStops(retirementStops)
+        }
     }
 
     private data class Metadata(val version: Long, val storeId: String, val authorization: IdentityAuthorizationState, val candidates: Map<String, String>, val revocations: Map<String, RevocationRecord>, val templates: Map<String, IdentityTemplateRecord>, val stages: Set<String>, val deletions: Map<String, IdentityTemplateDeletion>, val candidateDeletions: Map<String, IdentityCandidateDeletion>)

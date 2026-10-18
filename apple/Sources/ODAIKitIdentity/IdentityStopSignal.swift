@@ -35,7 +35,7 @@ public final class IdentityStopSignal: @unchecked Sendable {
         lock.lock()
         if reason != nil {
             lock.unlock()
-            handler()
+            Self.deliver(handler)
             return IdentityStopRegistration(signal: nil, id: id)
         }
         handlers[id] = handler
@@ -50,12 +50,41 @@ public final class IdentityStopSignal: @unchecked Sendable {
         let pending = Array(handlers.values)
         handlers.removeAll(keepingCapacity: false)
         lock.unlock()
-        for handler in pending { handler() }
+        for handler in pending { Self.deliver(handler) }
+    }
+
+    private static func deliver(_ handler: @Sendable () -> Void) {
+        let frame = IdentityStopHandlerFrame()
+        IdentityStopHandlerContext.$current.withValue(frame) {
+            defer { frame.finish() }
+            handler()
+        }
     }
 
     fileprivate func removeHandler(_ id: UUID) {
         lock.lock(); handlers.removeValue(forKey: id); lock.unlock()
     }
+}
+
+/// A handler's synchronous call frame. Child Tasks inherit the object, but the
+/// frame is deactivated as soon as the handler returns, so escaped work cannot
+/// bypass a later writer-drain wait.
+internal final class IdentityStopHandlerFrame: @unchecked Sendable {
+    private let lock = NSLock()
+    private var active = true
+
+    var isActive: Bool {
+        lock.lock(); defer { lock.unlock() }
+        return active
+    }
+
+    func finish() {
+        lock.lock(); active = false; lock.unlock()
+    }
+}
+
+internal enum IdentityStopHandlerContext {
+    @TaskLocal static var current: IdentityStopHandlerFrame?
 }
 
 public final class IdentityStopRegistration: @unchecked Sendable {

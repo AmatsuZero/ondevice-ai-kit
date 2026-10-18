@@ -37,6 +37,8 @@ class IdentityJournalTest {
         val root = Files.createTempDirectory("identity-journal"); val keys = JournalKeys()
         val writer = IdentityJournal(root, "store", keys); writer.commit(byteArrayOf(1))
         assertFailsWith<IdentityError> { writer.commit(ByteArray(16 * 1024 * 1024)) }
+        assertFailsWith<IdentityError> { IdentityJournal(root, "store", keys) }
+        writer.close()
         IdentityJournal(root, "store", keys).use { assertContentEquals(byteArrayOf(1), it.read()) }
     }
 
@@ -79,8 +81,9 @@ class IdentityJournalTest {
         val writer = IdentityJournal(root, "store", provider); writer.commit(byteArrayOf(1)); provider.fail = true
         assertFailsWith<IdentityError> { writer.commit(byteArrayOf(2)) }
         assertFailsWith<IdentityError> { writer.read() }
+        assertFailsWith<IdentityError> { IdentityJournal(root, "store", keys) }
+        writer.close()
         IdentityJournal(root, "store", keys).use { reopened ->
-            writer.close()
             assertFailsWith<IdentityError> { IdentityJournal(root, "other", keys) }
             assertContentEquals(byteArrayOf(1), reopened.read())
         }
