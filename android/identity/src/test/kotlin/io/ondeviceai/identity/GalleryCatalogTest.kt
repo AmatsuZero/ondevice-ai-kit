@@ -270,6 +270,87 @@ class GalleryCatalogTest {
         GalleryCatalog(root, "identity-store", keys).use { assertEquals("receipt", it.tombstoneReceipt(first.ref.id)) }
     }
 
+    @Test fun purgeFailureMarkerPersistsUntilSuccessfulPhysicalCleanup() {
+        val root = root(); val keys = GalleryCatalogKeys()
+        val catalog = GalleryCatalog(root, "identity-store", keys)
+        val first = snapshot(catalog.storeId); catalog.publish(first)
+        catalog.tombstoneLineage(first.ref.id, "receipt")
+        assertEquals(DeletionStatus.PURGE_PENDING, catalog.deletionStatus(first.ref.id))
+        catalog.markPurgeAttempt(first.ref.id)
+        assertEquals(DeletionStatus.PURGE_FAILED, catalog.deletionStatus(first.ref.id))
+        val other = snapshot(catalog.storeId, lineage = "other"); catalog.publish(other)
+        catalog.tombstoneLineage(other.ref.id, "other-receipt")
+        keys.denied = true
+        assertFailsWith<IdentityError> { catalog.removeLineage(first.ref.id) }
+        keys.denied = false
+        catalog.close()
+
+        GalleryCatalog(root, "identity-store", keys).use { reopened ->
+            assertEquals(DeletionStatus.PURGE_FAILED, reopened.deletionStatus(first.ref.id))
+            reopened.removeLineage(first.ref.id)
+            assertEquals(DeletionStatus.PURGED, reopened.deletionStatus(first.ref.id))
+            keys.denied = true
+            reopened.removeLineage(first.ref.id)
+            reopened.markPurgeAttempt(first.ref.id)
+            assertEquals(DeletionStatus.PURGED, reopened.deletionStatus(first.ref.id))
+            keys.denied = false
+        }
+    }
+
+    @Test fun failedMarkerWriteDoesNotClaimADurableFailureAfterRecovery() {
+        val root = root(); val keys = GalleryCatalogKeys()
+        val catalog = GalleryCatalog(root, "identity-store", keys)
+        val first = snapshot(catalog.storeId); catalog.publish(first)
+        catalog.tombstoneLineage(first.ref.id, "receipt")
+        keys.denied = true
+        assertFailsWith<IdentityError> { catalog.markPurgeAttempt(first.ref.id) }
+        keys.denied = false; catalog.close()
+        GalleryCatalog(root, "identity-store", keys).use { reopened ->
+            assertEquals(DeletionStatus.PURGE_PENDING, reopened.deletionStatus(first.ref.id))
+        }
+    }
+
+    @Test fun versionTwoPendingDeletionUpgradesAndRetainsPurgeAttempt() {
+        val root = root(); val keys = GalleryCatalogKeys()
+        val catalog = GalleryCatalog(root, "identity-store", keys)
+        val first = snapshot(catalog.storeId); catalog.publish(first)
+        catalog.tombstoneLineage(first.ref.id, "receipt"); catalog.close()
+        IdentityJournal(root, "index", keys).use { journal ->
+            val fields = IdentityContractJSON.parse(requireNotNull(journal.read()).decodeToString()).toMutableMap()
+            fields["version"] = 2L; fields.remove("purgeFailures")
+            journal.commit(IdentityContractJSON.encode(fields).encodeToByteArray())
+        }
+        GalleryCatalog(root, "identity-store", keys).use {
+            assertEquals(DeletionStatus.PURGE_PENDING, it.deletionStatus(first.ref.id))
+            it.markPurgeAttempt(first.ref.id)
+        }
+        GalleryCatalog(root, "identity-store", keys).use {
+            assertEquals(DeletionStatus.PURGE_FAILED, it.deletionStatus(first.ref.id))
+            it.removeLineage(first.ref.id)
+            assertEquals(DeletionStatus.PURGED, it.deletionStatus(first.ref.id))
+        }
+    }
+
+    @Test fun invalidPurgeMarkersAreRejectedWithoutRewriting() {
+        val root = root(); val keys = GalleryCatalogKeys()
+        val catalog = GalleryCatalog(root, "identity-store", keys)
+        val first = snapshot(catalog.storeId); catalog.publish(first)
+        catalog.tombstoneLineage(first.ref.id, "receipt"); catalog.markPurgeAttempt(first.ref.id); catalog.close()
+        val valid = IdentityJournal(root, "index", keys).use { IdentityContractJSON.parse(requireNotNull(it.read()).decodeToString()) }
+        val mutations: List<(MutableMap<String, Any?>) -> Unit> = listOf(
+            { it["purgeFailures"] = listOf("unknown") },
+            { it["purgeFailures"] = listOf(first.ref.id, first.ref.id) },
+            { it["purgeFailures"] = "invalid" },
+            { it["heads"] = emptyMap<String, String>(); it["snapshots"] = emptyMap<String, String>() }
+        )
+        mutations.forEach { mutation ->
+            val bytes = IdentityContractJSON.encode(valid.toMutableMap().also(mutation)).encodeToByteArray()
+            IdentityJournal(root, "index", keys).use { it.commit(bytes) }
+            assertFailsWith<IdentityError> { GalleryCatalog(root, "identity-store", keys) }
+            IdentityJournal(root, "index", keys).use { assertTrue(bytes.contentEquals(it.read())) }
+        }
+    }
+
     @Test fun restoreRejectsMalformedOrAliasedDeletionReceiptsWithoutRewriting() {
         val root = root(); val keys = GalleryCatalogKeys()
         val valid = mapOf<String, Any?>("version" to 2, "storeId" to "index-store", "identityStoreId" to "identity-store",

@@ -12,6 +12,7 @@ final class GalleryCatalog: @unchecked Sendable {
     // A tombstone survives physical cleanup so a deleted lineage cannot revive
     // from an older journal or be recreated by a stale builder after reopen.
     private var tombstones: [String: String] = [:]
+    private var purgeFailures: Set<String> = []
     private var closed = false
     private var retired = false
     private var operating = false
@@ -27,9 +28,11 @@ final class GalleryCatalog: @unchecked Sendable {
                 let version: Int64
                 if let v1 = try? identityObject(json, keys: ["version", "storeId", "identityStoreId", "snapshots", "heads"]) {
                     version = try identityInteger(v1, "version"); guard version == 1 else { throw IdentityError(.invalidInput) }; fields = v1
-                } else {
-                    let v2 = try identityObject(json, keys: ["version", "storeId", "identityStoreId", "snapshots", "heads", "tombstones"])
+                } else if let v2 = try? identityObject(json, keys: ["version", "storeId", "identityStoreId", "snapshots", "heads", "tombstones"]) {
                     version = try identityInteger(v2, "version"); guard version == 2 else { throw IdentityError(.invalidInput) }; fields = v2
+                } else {
+                    let v3 = try identityObject(json, keys: ["version", "storeId", "identityStoreId", "snapshots", "heads", "tombstones", "purgeFailures"])
+                    version = try identityInteger(v3, "version"); guard version == 3 else { throw IdentityError(.invalidInput) }; fields = v3
                 }
                 let storeId = try identityString(fields, "storeId")
                 let persistedIdentityStoreId = try identityString(fields, "identityStoreId")
@@ -54,7 +57,8 @@ final class GalleryCatalog: @unchecked Sendable {
                     }
                 }
                 var tombstones: [String: String] = [:]
-                if version == 2 {
+                var purgeFailures: Set<String> = []
+                if version == 2 || version == 3 {
                     guard let persisted = fields["tombstones"] as? [String: String] else { throw IdentityError(.invalidInput) }
                     var receiptIDs = Set<String>()
                     for (lineage, receipt) in persisted {
@@ -62,6 +66,12 @@ final class GalleryCatalog: @unchecked Sendable {
                         guard receiptIDs.insert(receipt).inserted else { throw IdentityError(.invalidInput) }
                     }
                     tombstones = persisted
+                    if version == 3 {
+                        guard let values = fields["purgeFailures"] as? [String], values == values.sorted(), Set(values).count == values.count,
+                              Set(values).isSubset(of: Set(persisted.keys)), Set(values).isSubset(of: Set(persistedHeads.keys)) else { throw IdentityError(.invalidInput) }
+                        for lineage in values { try identityToken(lineage) }
+                        purgeFailures = Set(values)
+                    }
                 }
                 var reachable = Set<String>()
                 for (lineage, revision) in persistedHeads {
@@ -75,11 +85,11 @@ final class GalleryCatalog: @unchecked Sendable {
                 }
                 guard reachable == Set(restored.keys) else { throw IdentityError(.invalidInput) }
                 self.storeId = storeId; self.identityStoreId = identityStoreId
-                self.snapshots = restored; self.heads = persistedHeads; self.tombstones = tombstones
+                self.snapshots = restored; self.heads = persistedHeads; self.tombstones = tombstones; self.purgeFailures = purgeFailures
             } else {
                 let storeId = UUID().uuidString.lowercased()
                 self.storeId = storeId; self.identityStoreId = identityStoreId
-                try journal.commit(Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: [:], heads: [:], tombstones: [:]))
+                try journal.commit(Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: [:], heads: [:], tombstones: [:], purgeFailures: []))
             }
             self.journal = journal
         } catch {
@@ -102,8 +112,8 @@ final class GalleryCatalog: @unchecked Sendable {
             var nextSnapshots = snapshots; nextSnapshots[record.ref.revision] = record
             var nextHeads = heads; nextHeads[record.ref.id] = record.ref.revision
             let reserved = Self.reserveTombstoneCapacity(heads: nextHeads, tombstones: tombstones)
-            _ = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: nextSnapshots, heads: nextHeads, tombstones: reserved)
-            let bytes = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: nextSnapshots, heads: nextHeads, tombstones: tombstones)
+            _ = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: nextSnapshots, heads: nextHeads, tombstones: reserved, purgeFailures: purgeFailures.union(nextHeads.keys))
+            let bytes = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: nextSnapshots, heads: nextHeads, tombstones: tombstones, purgeFailures: purgeFailures)
             do { try journal.commit(bytes) } catch { retired = true; throw error }
             snapshots = nextSnapshots; heads = nextHeads
         }
@@ -132,6 +142,32 @@ final class GalleryCatalog: @unchecked Sendable {
 
     func tombstoneReceipts() throws -> [String: String] { try access { tombstones } }
 
+    func deletionStatus(lineageId: String) throws -> DeletionStatus? {
+        try access {
+            guard tombstones[lineageId] != nil else { return nil }
+            if purgeFailures.contains(lineageId) { return .purgeFailed }
+            return snapshots.values.contains { $0.ref.id == lineageId } ? .purgePending : .purged
+        }
+    }
+
+    /// A failed or interrupted removal leaves this conservative durable marker.
+    /// Completion removes it atomically with the snapshots. No attempt is made
+    /// to rewrite a poisoned journal after a failed marker commit.
+    @discardableResult
+    func markPurgeAttempt(_ lineageId: String) throws -> Bool {
+        try access {
+            guard tombstones[lineageId] != nil else { throw IdentityError(.galleryRevisionGone) }
+            guard heads[lineageId] != nil else { return false }
+            guard !purgeFailures.contains(lineageId) else { return true }
+            var next = purgeFailures; next.insert(lineageId)
+            let bytes = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: snapshots, heads: heads,
+                                        tombstones: tombstones, purgeFailures: next)
+            do { try journal.commit(bytes) } catch { retired = true; throw error }
+            purgeFailures = next
+            return true
+        }
+    }
+
     func hasSnapshots(lineageId: String) throws -> Bool {
         try access { snapshots.values.contains { $0.ref.id == lineageId } }
     }
@@ -147,8 +183,8 @@ final class GalleryCatalog: @unchecked Sendable {
             guard !tombstones.values.contains(receiptId) else { throw IdentityError(.invalidInput) }
             var next = tombstones; next[lineageId] = receiptId
             let reserved = Self.reserveTombstoneCapacity(heads: heads, tombstones: next)
-            _ = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: snapshots, heads: heads, tombstones: reserved)
-            let bytes = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: snapshots, heads: heads, tombstones: next)
+            _ = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: snapshots, heads: heads, tombstones: reserved, purgeFailures: purgeFailures.union(heads.keys))
+            let bytes = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: snapshots, heads: heads, tombstones: next, purgeFailures: purgeFailures)
             do { try journal.commit(bytes) } catch { retired = true; throw error }
             tombstones = next
         }
@@ -161,9 +197,11 @@ final class GalleryCatalog: @unchecked Sendable {
             var nextHeads = heads
             nextHeads.removeValue(forKey: lineageId)
             guard remaining.count != snapshots.count || nextHeads != heads else { return }
-            let bytes = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: remaining, heads: nextHeads, tombstones: tombstones)
+            var nextFailures = purgeFailures; nextFailures.remove(lineageId)
+            let bytes = try Self.encode(storeId: storeId, identityStoreId: identityStoreId, snapshots: remaining, heads: nextHeads,
+                                        tombstones: tombstones, purgeFailures: nextFailures)
             do { try journal.commit(bytes) } catch { retired = true; throw error }
-            snapshots = remaining; heads = nextHeads
+            snapshots = remaining; heads = nextHeads; purgeFailures = nextFailures
         }
     }
 
@@ -181,9 +219,10 @@ final class GalleryCatalog: @unchecked Sendable {
         return try body()
     }
 
-    private static func encode(storeId: String, identityStoreId: String, snapshots: [String: GallerySnapshotRecord], heads: [String: String], tombstones: [String: String]) throws -> Data {
-        let fields: [String: Any] = ["version": 2, "storeId": storeId, "identityStoreId": identityStoreId,
-            "snapshots": snapshots.mapValues { $0.canonicalJSON() }, "heads": heads, "tombstones": tombstones]
+    private static func encode(storeId: String, identityStoreId: String, snapshots: [String: GallerySnapshotRecord], heads: [String: String], tombstones: [String: String], purgeFailures: Set<String>) throws -> Data {
+        let fields: [String: Any] = ["version": 3, "storeId": storeId, "identityStoreId": identityStoreId,
+            "snapshots": snapshots.mapValues { $0.canonicalJSON() }, "heads": heads, "tombstones": tombstones,
+            "purgeFailures": purgeFailures.sorted()]
         let bytes = Data(identityJSON(fields).utf8)
         guard bytes.count <= 65_536 else { throw IdentityError(.invalidInput) }
         return bytes

@@ -476,6 +476,33 @@ final class IndexStoreTests: XCTestCase {
         await reopened.close(); try await context.identity.close()
     }
 
+    func testPurgeFailureRemainsObservableAndReopenRetriesCommittedDeletion() async throws {
+        let context = try await context()
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let ref = try await builder.publish()
+        let lease = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        let receipt = try await context.index.deleteGallery(ref, ownership: context.owner)
+        context.keys.denied = true
+        await lease.close()
+        let failed = try await context.index.awaitDeletion(receipt)
+        XCTAssertEqual(failed, .purgeFailed)
+        let repeated = try await context.index.deleteGallery(ref, ownership: context.owner)
+        XCTAssertEqual(repeated, receipt)
+        context.keys.denied = false
+        do {
+            _ = try await IndexStore.open(root: context.indexRoot, identityStore: context.identity, keyProvider: context.keys, buildIndex: { _, _ in Data([1]) })
+            XCTFail("failed cleanup released writer before close")
+        } catch { XCTAssertEqual((error as? IdentityError)?.code, .busy) }
+        await context.index.close()
+        let recovered = try await IndexStore.open(root: context.indexRoot, identityStore: context.identity, keyProvider: context.keys, buildIndex: { _, _ in Data([1]) })
+        let purged = try await recovered.awaitDeletion(receipt)
+        XCTAssertEqual(purged, .purged)
+        do { _ = try await recovered.acquireIndexReadLease(ref, grant: context.grant); XCTFail("recovered deleted gallery became readable") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .galleryRevisionGone) }
+        await recovered.close(); try await context.identity.close()
+    }
+
     func testDeletionDeadlineReturnsPendingWithoutUndoingDeletion() async throws {
         let clock = IndexWaitClock()
         let context = try await context(monotonicClock: clock)

@@ -141,6 +141,30 @@ class IndexStoreTest {
         f.identity.close()
     }
 
+    @Test fun purgeFailureIsObservableAndRecoveryRetriesTheSameReceipt() {
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
+        builder.addTemplate(f.template, f.grant); val ref = builder.publish()
+        val lease = index.acquireIndexReadLease(ref, f.grant)
+        val receipt = index.deleteGallery(ref, f.owner)
+        f.keys.denied = true
+        lease.close()
+        assertEquals(DeletionStatus.PURGE_FAILED, index.awaitDeletion(receipt))
+        assertEquals(receipt, index.deleteGallery(ref, f.owner))
+        f.keys.denied = false
+        assertEquals(IdentityErrorCode.BUSY, assertFailsWith<IdentityError> {
+            IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+        }.code)
+        index.close()
+        IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.use { reopened ->
+            assertEquals(DeletionStatus.PURGED, reopened.awaitDeletion(receipt))
+            assertEquals(IdentityErrorCode.GALLERY_REVISION_GONE, assertFailsWith<IdentityError> {
+                reopened.acquireIndexReadLease(ref, f.grant)
+            }.code)
+        }
+        f.identity.close()
+    }
+
     @Test fun failedChildBuildKeepsPriorIndexQueryableAndDiscardsBuilder() {
         val f = fixture(); var calls = 0
         val index = IndexStore(f.indexRoot, f.identity, f.keys) { embeddings, _ ->

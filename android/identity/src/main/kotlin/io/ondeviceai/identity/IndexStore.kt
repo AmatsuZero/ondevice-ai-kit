@@ -20,6 +20,8 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
     private val indexLineages = mutableMapOf<String, String>()
     private val readTickets = mutableMapOf<UUID, Pair<String, IdentityGalleryOperationTicket>>()
     private val deleted = mutableMapOf<String, DeletionReceipt>()
+    private val purgeStatuses = mutableMapOf<String, DeletionStatus>()
+    private var purgeRetired = false
     private val rebuilding = mutableSetOf<String>()
     private var closed = false
     private var writerReleased = false
@@ -36,9 +38,15 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
 
     init {
         try {
-            catalog.tombstoneReceipts().forEach { (lineage, receipt) ->
+            val receipts = catalog.tombstoneReceipts()
+            // Read every committed observation before a recovery write can
+            // retire the catalog and prevent further metadata admission.
+            receipts.forEach { (lineage, receipt) ->
                 deleted[lineage] = DeletionReceipt(receipt, storeId, galleryId = lineage)
-                catalog.removeLineage(lineage)
+                purgeStatuses[lineage] = requireNotNull(catalog.deletionStatus(lineage))
+            }
+            receipts.keys.sorted().forEach { lineage ->
+                if (!purgeRetired && purgeStatuses[lineage] != DeletionStatus.PURGED) recoverPurge(lineage)
             }
         } catch (error: Throwable) { catalog.close(); throw error }
     }
@@ -172,6 +180,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
             val receipt = DeletionReceipt(UUID.randomUUID().toString(), storeId, galleryId = ref.id)
             catalog.tombstoneLineage(ref.id, receipt.id)
             deleted[ref.id] = receipt
+            purgeStatuses[ref.id] = DeletionStatus.PURGE_PENDING
             val stops = readTickets.values.filter { it.first == ref.id }.mapNotNull { prepareStop(ref.id, it.second.stopSignal, IdentityStopReason.AUTHORIZATION_REVOKED) }.toMutableList()
             builders.values.filter { it.lineage == ref.id }.forEach { stops += discard(it, IdentityStopReason.AUTHORIZATION_REVOKED) }
             receipt to stops
@@ -183,7 +192,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
     fun awaitDeletion(receipt: DeletionReceipt): DeletionStatus = synchronized(gate) {
         requireOpen()
         if (receipt.storeId != storeId || receipt.galleryId == null || deleted[receipt.galleryId] != receipt) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
-        if (catalog.hasSnapshots(receipt.galleryId)) DeletionStatus.PURGE_PENDING else DeletionStatus.PURGED
+        purgeStatuses[receipt.galleryId] ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
     }
 
     /** Waits on committed purge facts without holding the store monitor or doing cleanup. */
@@ -276,10 +285,25 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
         finally { synchronized(gate) { val lineage = readTickets.remove(ticket.id)?.first; if (lineage != null) purge(lineage); releaseWriterIfDrained() } }
     }
     private fun purge(lineage: String) {
+        if (purgeRetired || purgeStatuses[lineage] == DeletionStatus.PURGED) return
         if (lineage !in deleted || readTickets.values.any { it.first == lineage } ||
             builders.values.any { it.lineage == lineage && it.busy } || (lineageStops[lineage] ?: 0) > 0) return
-        catalog.removeLineage(lineage)
-        indexLineages.filterValues { it == lineage }.keys.toList().forEach { indexes.remove(it); indexLineages.remove(it) }
+        recoverPurge(lineage)
+    }
+
+    private fun recoverPurge(lineage: String) {
+        try {
+            catalog.markPurgeAttempt(lineage)
+            catalog.removeLineage(lineage)
+            purgeStatuses[lineage] = DeletionStatus.PURGED
+            indexLineages.filterValues { it == lineage }.keys.toList().forEach { indexes.remove(it); indexLineages.remove(it) }
+        } catch (_: Exception) {
+            // Failed marker writes leave the durable pending tombstone intact.
+            // Successful markers survive later purge failures. This process can
+            // report the failed attempt without writing to a retired journal.
+            purgeStatuses[lineage] = DeletionStatus.PURGE_FAILED
+            purgeRetired = true
+        }
     }
     private fun releaseWriterIfDrained() {
         if (closed && !writerReleased && inFlight == 0 && readTickets.isEmpty() && pendingStops == 0) {

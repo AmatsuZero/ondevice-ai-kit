@@ -12,6 +12,8 @@ public actor IndexStore {
     private var builders: [UUID: BuilderState] = [:]
     private var leases: [String: Int] = [:]
     private var deletedLineages: [String: DeletionReceipt] = [:]
+    private var deletionStatuses: [String: DeletionStatus] = [:]
+    private var purgeRetired = false
     private var preparedIndexes: [String: Data] = [:]
     private var preparedIndexLineages: [String: String] = [:]
     private var closed = false
@@ -47,9 +49,23 @@ public actor IndexStore {
                 buildIndex: @escaping GalleryIndexBuilder) throws {
         let catalog = try GalleryCatalog(root: root, identityStoreId: identityStore.storeId, keyProvider: keyProvider)
         self.storeId = catalog.storeId; self.catalog = catalog; self.identityStore = identityStore; self.monotonicClock = monotonicClock; self.buildIndex = buildIndex
-        for (lineageId, receiptId) in try catalog.tombstoneReceipts() {
+        let receipts = try catalog.tombstoneReceipts()
+        // Restore all committed observations before a recovery write can retire
+        // the catalog. Failed writers retain their lock until close/drain.
+        for (lineageId, receiptId) in receipts {
             self.deletedLineages[lineageId] = try DeletionReceipt(id: receiptId, storeId: catalog.storeId, galleryId: lineageId)
-            try catalog.removeLineage(lineageId)
+            self.deletionStatuses[lineageId] = try catalog.deletionStatus(lineageId: lineageId)
+        }
+        for lineageId in receipts.keys.sorted() where deletionStatuses[lineageId] != .purged {
+            if purgeRetired { continue }
+            do {
+                _ = try catalog.markPurgeAttempt(lineageId)
+                try catalog.removeLineage(lineageId)
+                self.deletionStatuses[lineageId] = .purged
+            } catch {
+                self.deletionStatuses[lineageId] = .purgeFailed
+                self.purgeRetired = true
+            }
         }
     }
 
@@ -132,14 +148,15 @@ public actor IndexStore {
         try beginOperation(); defer { endOperation() }
         try await identityStore.validateGalleryOwnership(ownership)
         try requireOpen()
-        if let receipt = deletedLineages[ref.id] { return receipt }
+        if let receipt = deletedLineages[ref.id] { purgeLineageIfPossible(ref.id); return receipt }
         guard let head = try catalog.head(lineageId: ref.id), head.id == ref.id else { throw IdentityError(.galleryNotFound) }
         let receipt = try DeletionReceipt(id: UUID().uuidString.lowercased(), storeId: storeId, galleryId: ref.id)
         try catalog.tombstoneLineage(ref.id, receiptId: receipt.id)
         deletedLineages[ref.id] = receipt
+        deletionStatuses[ref.id] = .purgePending
         activeReadTickets[ref.id, default: []].forEach { queueStop($0.stopSignal, reason: .authorizationRevoked, lineage: ref.id) }
         for id in builders.keys where builders[id]?.lineageId == ref.id { cancelBuilder(id, reason: .authorizationRevoked) }
-        try purgeLineageIfPossible(ref.id)
+        purgeLineageIfPossible(ref.id)
         return receipt
     }
 
@@ -183,7 +200,7 @@ public actor IndexStore {
         defer { endBuilderMutation(id) }
         guard !state.members.isEmpty else { throw IdentityError(.invalidInput) }
         activePublishes.insert(id)
-        defer { activePublishes.remove(id); try? purgeLineageIfPossible(state.lineageId) }
+        defer { activePublishes.remove(id); purgeLineageIfPossible(state.lineageId) }
         state.status = .publishing; builders[id] = state
         let members = state.members.values.sorted { $0.ref.id < $1.ref.id }
         var leases: [IdentityTemplateLease] = []
@@ -240,7 +257,8 @@ public actor IndexStore {
     public func awaitDeletion(_ receipt: DeletionReceipt) throws -> DeletionStatus {
         try requireOpen()
         guard let galleryId = receipt.galleryId, receipt.storeId == storeId, deletedLineages[galleryId] == receipt else { throw IdentityError(.invalidInput) }
-        return try catalog.hasSnapshots(lineageId: galleryId) ? .purgePending : .purged
+        guard let status = deletionStatuses[galleryId] else { throw IdentityError(.invalidInput) }
+        return status
     }
 
     /// Observes deletion without retrying cleanup; cancellation only ends this wait.
@@ -298,7 +316,7 @@ public actor IndexStore {
         pendingStopDeliveries -= 1
         if lineageStopDeliveries[lineage] == 1 { lineageStopDeliveries.removeValue(forKey: lineage) }
         else { lineageStopDeliveries[lineage, default: 1] -= 1 }
-        try? purgeLineageIfPossible(lineage)
+        purgeLineageIfPossible(lineage)
         if closed && inFlight == 0 && leases.isEmpty && pendingStopDeliveries == 0 { finishClose() }
     }
     private func releaseLease(_ revision: String) {
@@ -306,16 +324,27 @@ public actor IndexStore {
         if count <= 1 { leases.removeValue(forKey: revision) } else { leases[revision] = count - 1 }
         if let lineage = revisionLineages[revision] {
             if let lineCount = leaseLineages[lineage], lineCount <= 1 { leaseLineages.removeValue(forKey: lineage) } else { leaseLineages[lineage] = (leaseLineages[lineage] ?? 1) - 1 }
-            try? purgeLineageIfPossible(lineage)
+            purgeLineageIfPossible(lineage)
         }
         if closed && inFlight == 0 && leases.isEmpty && pendingStopDeliveries == 0 { finishClose() }
     }
-    private func purgeLineageIfPossible(_ lineage: String) throws {
-        guard deletedLineages[lineage] != nil, leaseLineages[lineage] == nil, lineageStopDeliveries[lineage] == nil,
+    private func purgeLineageIfPossible(_ lineage: String) {
+        guard !purgeRetired, deletedLineages[lineage] != nil, deletionStatuses[lineage] != .purged,
+              leaseLineages[lineage] == nil, lineageStopDeliveries[lineage] == nil,
               !activePublishes.contains(where: { builders[$0]?.lineageId == lineage }) else { return }
-        try catalog.removeLineage(lineage)
-        let revisions = preparedIndexLineages.compactMap { $0.value == lineage ? $0.key : nil }
-        for revision in revisions { preparedIndexes.removeValue(forKey: revision); preparedIndexLineages.removeValue(forKey: revision); revisionLineages.removeValue(forKey: revision) }
+        do {
+            _ = try catalog.markPurgeAttempt(lineage)
+            try catalog.removeLineage(lineage)
+            deletionStatuses[lineage] = .purged
+            let revisions = preparedIndexLineages.compactMap { $0.value == lineage ? $0.key : nil }
+            for revision in revisions { preparedIndexes.removeValue(forKey: revision); preparedIndexLineages.removeValue(forKey: revision); revisionLineages.removeValue(forKey: revision) }
+        } catch {
+            // Never leak cleanup errors from lease releases or mutation defers.
+            // A failed marker write leaves the last committed pending tombstone;
+            // successful marker writes survive a later removal failure/restart.
+            deletionStatuses[lineage] = .purgeFailed
+            purgeRetired = true
+        }
     }
     private func finishClose() {
         guard !closeFinished else { return }

@@ -190,6 +190,10 @@ final class GalleryCatalogTests: XCTestCase {
             try catalog.tombstoneLineage(ref.id, receiptId: receipt)
             XCTAssertEqual(try catalog.tombstoneReceipt(lineageId: ref.id), receipt)
         }
+        for ref in published {
+            try catalog.markPurgeAttempt(ref.id)
+            XCTAssertEqual(try catalog.deletionStatus(lineageId: ref.id), .purgeFailed)
+        }
     }
 
     func testDurableLineageTombstoneSurvivesPhysicalCleanupAndRejectsRepublish() throws {
@@ -225,6 +229,78 @@ final class GalleryCatalogTests: XCTestCase {
         defer { try? reopened.close() }
         XCTAssertNil(try reopened.tombstoneReceipt(lineageId: first.ref.id))
         XCTAssertEqual(try reopened.head(lineageId: first.ref.id), first.ref)
+    }
+
+    func testPurgeAttemptIsDurableAcrossOtherLineageChangesAndRetry() throws {
+        let root = temporaryRoot(); let keys = CatalogKeys()
+        let catalog = try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys)
+        let first = try snapshot(indexStoreId: catalog.storeId); try catalog.publish(first)
+        try catalog.tombstoneLineage(first.ref.id, receiptId: "receipt")
+        XCTAssertEqual(try catalog.deletionStatus(lineageId: first.ref.id), .purgePending)
+        try catalog.markPurgeAttempt(first.ref.id)
+        XCTAssertEqual(try catalog.deletionStatus(lineageId: first.ref.id), .purgeFailed)
+        let other = try snapshot(indexStoreId: catalog.storeId, lineage: "other"); try catalog.publish(other)
+        try catalog.tombstoneLineage(other.ref.id, receiptId: "other-receipt")
+        keys.denied = true
+        XCTAssertThrowsError(try catalog.removeLineage(first.ref.id))
+        keys.denied = false; try catalog.close()
+        let restored = try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys)
+        defer { try? restored.close() }
+        XCTAssertEqual(try restored.deletionStatus(lineageId: first.ref.id), .purgeFailed)
+        XCTAssertEqual(try restored.deletionStatus(lineageId: other.ref.id), .purgePending)
+        XCTAssertThrowsError(try restored.snapshot(first.ref))
+        try restored.removeLineage(first.ref.id)
+        XCTAssertEqual(try restored.deletionStatus(lineageId: first.ref.id), .purged)
+        keys.denied = true
+        XCTAssertNoThrow(try restored.removeLineage(first.ref.id))
+        XCTAssertNoThrow(try restored.markPurgeAttempt(first.ref.id))
+        XCTAssertEqual(try restored.deletionStatus(lineageId: first.ref.id), .purged)
+    }
+
+    func testV2PendingTombstoneUpgradesToRecoverablePurgeAttempt() throws {
+        let root = temporaryRoot(); let keys = CatalogKeys()
+        let catalog = try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys)
+        let record = try snapshot(indexStoreId: catalog.storeId); try catalog.publish(record)
+        try catalog.tombstoneLineage(record.ref.id, receiptId: "receipt"); try catalog.close()
+        let journal = try IdentityJournal(root: root, recordID: "index", keyProvider: keys)
+        var fields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(journal.read())) as? [String: Any])
+        fields["version"] = 2; fields.removeValue(forKey: "purgeFailures")
+        try journal.commit(Data(identityJSON(fields).utf8)); try journal.close()
+        let legacy = try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys)
+        XCTAssertEqual(try legacy.deletionStatus(lineageId: record.ref.id), .purgePending)
+        try legacy.markPurgeAttempt(record.ref.id); try legacy.close()
+        let upgraded = try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys)
+        defer { try? upgraded.close() }
+        XCTAssertEqual(try upgraded.deletionStatus(lineageId: record.ref.id), .purgeFailed)
+        try upgraded.removeLineage(record.ref.id)
+        XCTAssertEqual(try upgraded.deletionStatus(lineageId: record.ref.id), .purged)
+    }
+
+    func testPurgeFailureCodecRejectsUnboundOrDuplicateMarkersWithoutRewriting() throws {
+        let root = temporaryRoot(); let keys = CatalogKeys()
+        let catalog = try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys)
+        let first = try snapshot(indexStoreId: catalog.storeId); try catalog.publish(first)
+        try catalog.tombstoneLineage(first.ref.id, receiptId: "receipt")
+        try catalog.markPurgeAttempt(first.ref.id); try catalog.close()
+        let journal = try IdentityJournal(root: root, recordID: "index", keyProvider: keys)
+        let original = try XCTUnwrap(journal.read()); try journal.close()
+        let base = try XCTUnwrap(JSONSerialization.jsonObject(with: original) as? [String: Any])
+        XCTAssertEqual(base["version"] as? Int, 3)
+        let mutations: [(inout [String: Any]) -> Void] = [
+            { $0["purgeFailures"] = ["unknown"] },
+            { $0["purgeFailures"] = [first.ref.id, first.ref.id] },
+            { $0["purgeFailures"] = "invalid" },
+            { $0["snapshots"] = [String: String](); $0["heads"] = [String: String]() }
+        ]
+        for mutate in mutations {
+            var fields = base; mutate(&fields)
+            let bytes = Data(identityJSON(fields).utf8)
+            let writer = try IdentityJournal(root: root, recordID: "index", keyProvider: keys)
+            try writer.commit(bytes); try writer.close()
+            XCTAssertThrowsError(try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys))
+            let reader = try IdentityJournal(root: root, recordID: "index", keyProvider: keys)
+            XCTAssertEqual(try reader.read(), bytes); try reader.close()
+        }
     }
 
     func testPhysicalCleanupFaultPreservesDurableTombstoneAndRecoveryCanRetry() throws {
