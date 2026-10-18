@@ -227,7 +227,20 @@ public actor IdentityStore {
         return signals
     }
 
-    func beginOperation(_ candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope) throws -> IdentityOperationTicket {
+    private func invalidateTemplateOperations(_ targets: Set<String>) -> [IdentityStopSignal] {
+        var signals: [IdentityStopSignal] = []
+        for (id, operation) in operations {
+            let matches = operation.ticket.templateTargets.map { !$0.isDisjoint(with: targets) } ?? false
+            if matches {
+                operations[id]?.terminal = .authorizationRevoked
+                signals.append(operation.ticket.stopSignal)
+            }
+        }
+        return signals
+    }
+
+    func beginOperation(_ candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope,
+                        templateTargets: [TemplateRef]? = nil) throws -> IdentityOperationTicket {
         let membership = try recordedCandidateGrant(candidate)
         guard membership.revocationDomainId == grant.revocationDomainId, membership.purpose == grant.purpose,
               membership.authorizationEpoch == grant.authorizationEpoch else { throw IdentityError(.authorizationRequired) }
@@ -238,7 +251,16 @@ public actor IdentityStore {
             do { try journal.commit(bytes) } catch { closed = true; throw error }
             authorization = next
         }
-        let ticket = IdentityOperationTicket(candidate: candidate, grant: grant, scope: scope)
+        let targetIDs: Set<String>?
+        if let templateTargets {
+            targetIDs = Set(try templateTargets.map { ref in
+                guard let record = templates[ref.id], record.candidateId == candidate.id, deletions[ref.id] == nil,
+                      candidateDeletions[candidate.id] == nil else { throw IdentityError(.templateRevoked) }
+                try ref.validate(against: record.ref)
+                return ref.id
+            })
+        } else { targetIDs = nil }
+        let ticket = IdentityOperationTicket(candidate: candidate, grant: grant, scope: scope, templateTargets: targetIDs)
         operations[ticket.id] = Operation(ticket: ticket)
         return ticket
     }
@@ -261,6 +283,17 @@ public actor IdentityStore {
         guard !closed else { throw IdentityError(.closed) }
         try ticket.stopSignal.check()
         _ = try recordedCandidateGrant(ticket.candidate)
+        if let targets = ticket.templateTargets {
+            for id in targets {
+                guard let record = templates[id], record.candidateId == ticket.candidate.id,
+                      deletions[id] == nil, candidateDeletions[ticket.candidate.id] == nil else {
+                    throw IdentityError(.authorizationRevoked)
+                }
+                guard let stored = authorization.recordedGrant(record.grantId),
+                      stored.authorizationEpoch == ticket.grant.authorizationEpoch,
+                      stored.revocationDomainId == ticket.grant.revocationDomainId else { throw IdentityError(.authorizationRevoked) }
+            }
+        }
         _ = try authorization.admitting(ticket.grant, scope: ticket.scope, provider: provider, nowMillis: wallClock.nowMillis)
         return try publication()
     }
@@ -393,7 +426,7 @@ public actor IdentityStore {
 
     /// Logically revokes this exact template before physical cleanup. Ownership is
     /// independent of biometric grant validity, including on repeated requests.
-    public func deleteTemplate(_ ref: TemplateRef, ownership: OwnershipAuthorization) throws -> DeletionReceipt {
+    public func deleteTemplate(_ ref: TemplateRef, ownership: OwnershipAuthorization) async throws -> DeletionReceipt {
         guard !closed else { throw IdentityError(.closed) }
         try IdentityAuthorizationState.requireOwnership(ownership, storeId: storeId, provider: provider, nowMillis: wallClock.nowMillis)
         guard let record = templates[ref.id] else { throw IdentityError(.templateNotFound) }
@@ -405,7 +438,8 @@ public actor IdentityStore {
         var next = deletions
         next[ref.id] = IdentityTemplateDeletion(receiptId: receipt.id, status: .purgePending)
         try commitDeletions(next)
-        try purgeTemplate(ref.id)
+        let signals = invalidateTemplateOperations([ref.id])
+        try await stopAndPurge([ref.id], signals: signals)
         return receipt
     }
 

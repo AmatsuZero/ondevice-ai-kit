@@ -1321,6 +1321,98 @@ class IdentityStoreTest {
         reopened.close()
     }
 
+    @Test fun templateDeletionStopsOnlyTicketBoundToDeletedTemplate() {
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority())
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val first = requireNotNull(store.enroll(IdentityProbe("first", listOf(1f, 2f)), candidate, authorization, EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val second = requireNotNull(store.enroll(IdentityProbe("second", listOf(3f, 4f)), candidate, authorization, EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val firstTicket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT, listOf(first, second))
+        val secondTicket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT, listOf(second))
+        val candidateOnly = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT)
+
+        store.deleteTemplate(first, OwnershipAuthorization(store.storeId, "owner"))
+
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { firstTicket.stopSignal.check() }
+        secondTicket.stopSignal.check(); candidateOnly.stopSignal.check()
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.finishOperation(firstTicket, IdentityError(IdentityErrorCode.BACKEND_UNAVAILABLE)) }
+        store.finishOperation(secondTicket); store.finishOperation(candidateOnly)
+        assertCode(IdentityErrorCode.TEMPLATE_REVOKED) { store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT, listOf(first)) }
+        store.close()
+    }
+
+    @Test fun candidateDeletionStopsOnlyItsCandidateAndTemplateTickets() {
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority())
+        val authorization = grant(); val firstCandidate = store.createCandidate(authorization); val secondCandidate = store.createCandidate(authorization)
+        val first = requireNotNull(store.enroll(IdentityProbe("first", listOf(1f, 2f)), firstCandidate, authorization, EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val second = requireNotNull(store.enroll(IdentityProbe("second", listOf(3f, 4f)), secondCandidate, authorization, EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        assertCode(IdentityErrorCode.TEMPLATE_NOT_FOUND) {
+            store.beginOperation(firstCandidate, authorization, IdentityScope.ENROLLMENT, listOf(first.copy(revision = "forged")))
+        }
+        assertCode(IdentityErrorCode.TEMPLATE_REVOKED) {
+            store.beginOperation(firstCandidate, authorization, IdentityScope.ENROLLMENT, listOf(second))
+        }
+        val firstTicket = store.beginOperation(firstCandidate, authorization, IdentityScope.ENROLLMENT, listOf(first))
+        val secondTicket = store.beginOperation(secondCandidate, authorization, IdentityScope.ENROLLMENT, listOf(second))
+
+        store.deleteCandidate(firstCandidate, OwnershipAuthorization(store.storeId, "owner"))
+
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { firstTicket.stopSignal.check() }
+        secondTicket.stopSignal.check()
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.finishOperation(firstTicket) }
+        store.finishOperation(secondTicket)
+        store.close()
+    }
+
+    @Test fun exactTemplateStopDeliveryBlocksRepeatedDeletionCandidateCleanupAndLeaseRelease() {
+        val keys = StoreKeys(); val store = store(tempRoot(), keys, StoreAuthority())
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val template = enrollFixture(store, candidate, authorization)
+        val lease = store.acquireTemplateLease(template, grantWithScope("verify", IdentityScope.VERIFICATION), IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT, listOf(template))
+        val entered = CountDownLatch(1); val resume = CountDownLatch(1)
+        val registration = ticket.stopSignal.registerStopHandler { entered.countDown(); resume.await(5, TimeUnit.SECONDS) }
+        val executor = Executors.newSingleThreadExecutor()
+        val owner = OwnershipAuthorization(store.storeId, "owner")
+        try {
+            val deleting = executor.submit<DeletionReceipt> { store.deleteTemplate(template, owner) }
+            assertTrue(entered.await(2, TimeUnit.SECONDS))
+            store.deleteTemplate(template, owner)
+            store.deleteCandidate(candidate, owner)
+            lease.close()
+            assertEquals(0, keys.templateDeletions, "cleanup overtook exact stop delivery")
+            resume.countDown()
+            val receipt = deleting.get(5, TimeUnit.SECONDS)
+            assertEquals(DeletionStatus.PURGED, store.awaitDeletion(receipt))
+        } finally {
+            resume.countDown(); lease.close(); executor.shutdown(); executor.awaitTermination(5, TimeUnit.SECONDS)
+            assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.finishOperation(ticket, IdentityError(IdentityErrorCode.BACKEND_UNAVAILABLE)) }
+            registration.close(); store.close()
+        }
+    }
+
+    @Test fun exactTemplateStopCallbackRunsOutsideStoreGate() {
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority())
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val template = enrollFixture(store, candidate, authorization)
+        val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT, listOf(template))
+        val queried = AtomicBoolean(false)
+        val executor = Executors.newSingleThreadExecutor()
+        val registration = ticket.stopSignal.registerStopHandler {
+            val query = executor.submit<CandidateRef> { store.recordedTemplateCandidate(template) }
+            try { query.get(1, TimeUnit.SECONDS) }
+            catch (error: java.util.concurrent.ExecutionException) { queried.set((error.cause as? IdentityError)?.code == IdentityErrorCode.TEMPLATE_REVOKED) }
+            catch (_: java.util.concurrent.TimeoutException) { }
+        }
+        try {
+            store.deleteTemplate(template, OwnershipAuthorization(store.storeId, "owner"))
+            assertTrue(queried.get(), "stop callback held the gate and blocked a concurrent state query")
+        } finally {
+            executor.shutdown(); executor.awaitTermination(5, TimeUnit.SECONDS)
+            assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.finishOperation(ticket) }
+            registration.close(); store.close()
+        }
+    }
+
     private fun store(root: java.nio.file.Path, keys: StoreKeys, provider: StoreAuthority) =
         IdentityStore(root.toFile(), "login", provider, keys, StoreClock(100), StoreMono())
     private fun grant(id: String = "g1", purpose: String = "login", epoch: Long = 0, domain: String = "tenant.subject") =

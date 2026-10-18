@@ -32,7 +32,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 已有可信 provider 契约及不可变授权状态，后续 Store 构造仍必须注入 provider 和持久化根目录；禁止以 request epoch 或单纯内存字典作为权威状态。
 - journal 已接入 candidate/template admission；模板采用独立 envelope，持久 stage 所有权与故障恢复已接入；内部 vector lease 和模板单目标 purge 已通过单测；candidate/domain 固定目标集及物理清理也已通过单测。
 - candidate/template 与 immutable grant 的持久绑定、域撤销 tombstone 和稳定 revoke receipt 已实现；模板单目标删除和逐目标 purge 状态已通过单测；candidate/domain 固定目标集和共享逐模板 purge 状态已实现。
-- admission/revoke/template publish 共用串行门；quality/embed 在门外执行，撤销立即请求停止。模板单目标已接入 lease 后两阶段删除，candidate/domain 清理已接入，精确在途模板绑定仍待实现。
+- admission/revoke/template publish 共用串行门；quality/embed 在门外执行，撤销立即请求停止。模板单目标已接入 lease 后两阶段删除，candidate/domain 清理已接入，精确在途模板绑定也已通过本地测试。
 - operation ticket 已固定 grant/candidate 并接入 public enroll、撤销 stop、结果抑制与 close drain；任务对象的完整 Core 终态封装仍需后续整合。
 - 单目标已覆盖持有多 lease 删除、purge 失败/重试/重启；candidate/domain 全目标集已有覆盖；仍需 deadline/cancel 等待和退休锁 drain 测试；已有 scope/expiry、同域新 grant ID 绕过、enrollment 撤销竞态和正常 close lease drain 测试不能替代它们。
 - 平台原生密钥与恢复行为真机验证；iOS 15/API 26 最低设备验收另记。
@@ -57,7 +57,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 
 - ticket 只在 Store 内部存在，固定 candidate、完整 grant、scope 和 process-local stop signal；`finishOperation` 总会消费它，并在撤销、expiry、关闭或 backend error 时重新取权威状态。
 - 撤销及可信更高 epoch 的 candidate admission 在持久提交后标记相关 ticket；stop handler 在 actor/monitor 外执行。close 拒绝新 admission，等待 ticket 释放后才关闭 journal；Android 被中断时继续 drain 并恢复中断标记。
-- public `enroll` 已将票据连接到门外 quality/embed 和门内最终模板发布；阻塞后端测试覆盖撤销抑制成功、低质量和普通后端错误。内部 lease 与模板单目标 purge 已实现，后续身份引擎和精确模板在途绑定仍未实现。
+- public `enroll` 已将票据连接到门外 quality/embed 和门内最终模板发布；阻塞后端测试覆盖撤销抑制成功、低质量和普通后端错误。内部 lease 与模板单目标 purge 已实现，精确模板在途绑定见下节；后续身份引擎仍未实现。
 
 ### enrollment/template 当前边界
 
@@ -134,3 +134,10 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - [Android noBackupFilesDir](https://developer.android.com/reference/android/content/Context#getNoBackupFilesDir())：后续存储根应位于该目录，持久化相对路径。
 
 这些资料只约束实现，不替代真实设备和故障恢复验收。
+
+### 精确模板 operation ticket 当前边界
+
+- 内部 ticket 将完整 Store 验证过的模板引用固定为精确 ID 集合；拒绝伪造、跨 candidate 或已删除 target，完成前重检每个 target。单模板删除只停止与该模板相交的 ticket，不影响同 candidate 其他模板或未绑定模板的 enrollment ticket；candidate/domain 删除继续停止各自固定范围。
+- 单模板 tombstone 提交后，stop 回调在 actor/monitor 外执行；共享 pending-stop 计数保护覆盖并发 candidate/domain 清理与 lease release，Android 重复删除不会释放其他请求的计数。撤销后普通 backend error 被 authorizationRevoked 抑制。
+- 独立 scoped re-review APPROVE（两项初轮 HIGH 均已关闭）。Swift identity 139/139，Android identity 146/146 与 lintDebug 通过；回归先复现 stop 交付期间提前 purge、Android 持锁回调及重复删除计数问题，再修复通过。日志 `/tmp/odai-p10-template-ticket-final-{swift,android}.log`。
+- 本切片不包含带 deadline/cancellation 的 awaitDeletion、退休 writer 完整 drain、后续 gallery/身份引擎或生产精度验收。Task 2 与 roadmap 继续实施中。

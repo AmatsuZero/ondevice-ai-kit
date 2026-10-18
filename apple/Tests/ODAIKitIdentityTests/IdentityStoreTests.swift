@@ -761,6 +761,64 @@ extension IdentityStoreTests {
         try await first.finishOperation(ticket)
         try await first.close(); try await second.close()
     }
+
+    func testTemplateDeletionStopsOnlyTicketBoundToDeletedTemplate() async throws {
+        let store = try makeStore(root: temporaryRoot(), keys: StoreKeys(), provider: StoreAuthority(epoch: 0))
+        let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+        let options = try EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1")
+        let firstResult = try await store.enroll(IdentityProbe(fixtureID: "first", vector: [1, 2]), candidate: candidate, grant: authorization,
+                                                 options: options, backend: try FixtureIdentityBackend.system())
+        let secondResult = try await store.enroll(IdentityProbe(fixtureID: "second", vector: [3, 4]), candidate: candidate, grant: authorization,
+                                                  options: options, backend: try FixtureIdentityBackend.system())
+        let first = try XCTUnwrap(firstResult.templateRef)
+        let second = try XCTUnwrap(secondResult.templateRef)
+        let firstTicket = try await store.beginOperation(candidate, grant: authorization, scope: .enrollment, templateTargets: [first, second])
+        let secondTicket = try await store.beginOperation(candidate, grant: authorization, scope: .enrollment, templateTargets: [second])
+        let candidateOnly = try await store.beginOperation(candidate, grant: authorization, scope: .enrollment)
+
+        _ = try await store.deleteTemplate(first, ownership: OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner"))
+
+        XCTAssertThrowsError(try firstTicket.stopSignal.check()) { XCTAssertEqual(($0 as? IdentityError)?.code, .authorizationRevoked) }
+        XCTAssertNoThrow(try secondTicket.stopSignal.check())
+        XCTAssertNoThrow(try candidateOnly.stopSignal.check())
+        do { try await store.finishOperation(firstTicket, backendError: IdentityError(.backendUnavailable)); XCTFail("deleted template ticket published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        try await store.finishOperation(secondTicket)
+        try await store.finishOperation(candidateOnly)
+        do { _ = try await store.beginOperation(candidate, grant: authorization, scope: .enrollment, templateTargets: [first]); XCTFail("deleted template target admitted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
+        try await store.close()
+    }
+
+    func testCandidateDeletionStopsOnlyItsCandidateAndTemplateTickets() async throws {
+        let store = try makeStore(root: temporaryRoot(), keys: StoreKeys(), provider: StoreAuthority(epoch: 0))
+        let authorization = try grant(); let firstCandidate = try await store.createCandidate(authorization)
+        let secondCandidate = try await store.createCandidate(authorization)
+        let options = try EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1")
+        let firstResult = try await store.enroll(IdentityProbe(fixtureID: "first", vector: [1, 2]), candidate: firstCandidate, grant: authorization,
+                                                 options: options, backend: try FixtureIdentityBackend.system())
+        let secondResult = try await store.enroll(IdentityProbe(fixtureID: "second", vector: [3, 4]), candidate: secondCandidate, grant: authorization,
+                                                  options: options, backend: try FixtureIdentityBackend.system())
+        let firstTemplate = try XCTUnwrap(firstResult.templateRef)
+        let secondTemplate = try XCTUnwrap(secondResult.templateRef)
+        let forged = try TemplateRef(id: firstTemplate.id, embeddingSpaceId: firstTemplate.embeddingSpaceId,
+                                     authorizationEpoch: firstTemplate.authorizationEpoch, revision: "forged")
+        do { _ = try await store.beginOperation(firstCandidate, grant: authorization, scope: .enrollment, templateTargets: [forged]); XCTFail("forged target admitted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateNotFound) }
+        do { _ = try await store.beginOperation(firstCandidate, grant: authorization, scope: .enrollment, templateTargets: [secondTemplate]); XCTFail("foreign candidate target admitted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
+        let firstTicket = try await store.beginOperation(firstCandidate, grant: authorization, scope: .enrollment, templateTargets: [firstTemplate])
+        let secondTicket = try await store.beginOperation(secondCandidate, grant: authorization, scope: .enrollment, templateTargets: [secondTemplate])
+
+        _ = try await store.deleteCandidate(firstCandidate, ownership: OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner"))
+
+        XCTAssertThrowsError(try firstTicket.stopSignal.check()) { XCTAssertEqual(($0 as? IdentityError)?.code, .authorizationRevoked) }
+        XCTAssertNoThrow(try secondTicket.stopSignal.check())
+        do { try await store.finishOperation(firstTicket); XCTFail("deleted candidate ticket published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        try await store.finishOperation(secondTicket)
+        try await store.close()
+    }
 }
 
 private final class StoreFlag: @unchecked Sendable {

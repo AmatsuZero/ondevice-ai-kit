@@ -7,9 +7,12 @@ final class IdentityOperationTicket: Sendable {
     let candidate: CandidateRef
     let grant: AuthorizationGrant
     let scope: IdentityScope
+    /// Nil means the operation is candidate-wide; otherwise the ticket is
+    /// invalidated only when one of these exact template IDs is deleted.
+    let templateTargets: Set<String>?
     let stopSignal = IdentityStopSignal()
 
-    init(candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope) {
-        self.candidate = candidate; self.grant = grant; self.scope = scope
+    init(candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope, templateTargets: Set<String>? = nil) {
+        self.candidate = candidate; self.grant = grant; self.scope = scope; self.templateTargets = templateTargets
     }
 }

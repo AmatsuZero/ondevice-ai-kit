@@ -6,7 +6,9 @@ import java.util.UUID
 internal class IdentityOperationTicket(
     val candidate: CandidateRef,
     val grant: AuthorizationGrant,
-    val scope: IdentityScope
+    val scope: IdentityScope,
+    /** Null means candidate-wide; otherwise only intersecting template IDs invalidate this ticket. */
+    val templateTargets: Set<String>? = null
 ) {
     val id: UUID = UUID.randomUUID()
     val stopSignal = IdentityStopSignal()

@@ -146,7 +146,8 @@ class IdentityStore internal constructor(
         it.ticket.grant.revocationDomainId == domain && it.ticket.grant.authorizationEpoch < beforeEpoch
     }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
 
-    internal fun beginOperation(candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope): IdentityOperationTicket = mutation {
+    internal fun beginOperation(candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope,
+                                 templateTargets: List<TemplateRef>? = null): IdentityOperationTicket = mutation {
         val membership = candidateGrant(candidate)
         if (membership.revocationDomainId != grant.revocationDomainId || membership.purpose != grant.purpose ||
             membership.authorizationEpoch != grant.authorizationEpoch) throw IdentityError(IdentityErrorCode.AUTHORIZATION_REQUIRED)
@@ -157,7 +158,14 @@ class IdentityStore internal constructor(
             try { journal.commit(bytes) } catch (error: Exception) { closed = true; throw error }
             authorization = next
         }
-        IdentityOperationTicket(candidate, grant, scope).also { operations[it.id] = Operation(it) }
+        val targetIds = templateTargets?.map { ref ->
+            val record = templates[ref.id]
+            if (record == null || record.candidateId != candidate.id || ref.id in deletions || candidate.id in candidateDeletions)
+                throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+            ref.validate(record.ref)
+            ref.id
+        }?.toSet()
+        IdentityOperationTicket(candidate, grant, scope, targetIds).also { operations[it.id] = Operation(it) }
     }
 
     /** Always consumes the ticket. Template publication will use this same gate. */
@@ -172,6 +180,15 @@ class IdentityStore internal constructor(
             if (closed) throw IdentityError(IdentityErrorCode.CLOSED)
             ticket.stopSignal.check()
             candidateGrant(ticket.candidate)
+            ticket.templateTargets?.forEach { id ->
+                val record = templates[id]
+                if (record == null || record.candidateId != ticket.candidate.id || id in deletions || ticket.candidate.id in candidateDeletions)
+                    throw IdentityError(IdentityErrorCode.AUTHORIZATION_REVOKED)
+                val stored = authorization.recordedGrant(record.grantId)
+                if (stored == null || stored.authorizationEpoch != ticket.grant.authorizationEpoch ||
+                    stored.revocationDomainId != ticket.grant.revocationDomainId)
+                    throw IdentityError(IdentityErrorCode.AUTHORIZATION_REVOKED)
+            }
             authorization.admitting(ticket.grant, ticket.scope, authorizationProvider, wallClock.nowMillis)
             return publication()
         } finally {
@@ -283,15 +300,22 @@ class IdentityStore internal constructor(
     }
 
     /** Ownership is checked independently on every call, including repeated deletion. */
-    fun deleteTemplate(ref: TemplateRef, ownership: OwnershipAuthorization): DeletionReceipt = mutation {
-        IdentityAuthorizationState.requireOwnership(ownership, storeId, authorizationProvider, wallClock.nowMillis)
-        val record = templates[ref.id] ?: throw IdentityError(IdentityErrorCode.TEMPLATE_NOT_FOUND)
-        ref.validate(record.ref)
-        deletions[ref.id]?.let { return@mutation DeletionReceipt(it.receiptId, storeId, templateId = ref.id) }
-        val receipt = DeletionReceipt(nextReceiptId(), storeId, templateId = ref.id)
-        commitDeletions(deletions + (ref.id to IdentityTemplateDeletion(receipt.id, DeletionStatus.PURGE_PENDING)))
-        purgeTemplate(ref.id)
-        receipt
+    fun deleteTemplate(ref: TemplateRef, ownership: OwnershipAuthorization): DeletionReceipt {
+        val (receipt, signals, targets) = mutation {
+            IdentityAuthorizationState.requireOwnership(ownership, storeId, authorizationProvider, wallClock.nowMillis)
+            val record = templates[ref.id] ?: throw IdentityError(IdentityErrorCode.TEMPLATE_NOT_FOUND)
+            ref.validate(record.ref)
+            deletions[ref.id]?.let {
+                return@mutation Triple(DeletionReceipt(it.receiptId, storeId, templateId = ref.id), emptyList<IdentityStopSignal>(), emptyList<String>())
+            }
+            val receipt = DeletionReceipt(nextReceiptId(), storeId, templateId = ref.id)
+            commitDeletions(deletions + (ref.id to IdentityTemplateDeletion(receipt.id, DeletionStatus.PURGE_PENDING)))
+            val targets = listOf(ref.id)
+            holdPurge(targets)
+            Triple(receipt, invalidateTemplateOperations(targets.toSet()), targets)
+        }
+        stopAndPurge(signals, targets)
+        return receipt
     }
 
     /** Candidate deletion commits its immutable target set and all missing template tombstones together. */
@@ -374,6 +398,10 @@ class IdentityStore internal constructor(
 
     private fun invalidateCandidateOperations(candidateId: String) = operations.values.filter { it.ticket.candidate.id == candidateId }
         .map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
+
+    private fun invalidateTemplateOperations(targets: Set<String>) = operations.values.filter {
+        it.ticket.templateTargets?.let { bound -> bound.intersect(targets).isNotEmpty() } ?: false
+    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
 
     private fun purgeTemplate(id: String) {
         if (closed || writerReleased || !leases[id].isNullOrEmpty() || id in pendingPurgeStops) return

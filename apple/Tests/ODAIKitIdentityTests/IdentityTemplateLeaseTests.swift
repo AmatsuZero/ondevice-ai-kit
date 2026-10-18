@@ -678,6 +678,32 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         XCTAssertEqual(id, "fresh")
     }
 
+    func testExactTemplateStopDeliveryBlocksRepeatedDeletionCandidateCleanupAndLeaseRelease() async throws {
+        let fixture = try await fixture()
+        let lease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification, templateTargets: [fixture.ref])
+        let entered = expectation(description: "exact stop entered")
+        let resume = DispatchSemaphore(value: 0)
+        let registration = ticket.stopSignal.registerStopHandler {
+            entered.fulfill()
+            _ = resume.wait(timeout: .now() + 5)
+        }
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        let deleting = Task { try await fixture.store.deleteTemplate(fixture.ref, ownership: owner) }
+        await fulfillment(of: [entered], timeout: 2)
+        _ = try await fixture.store.deleteTemplate(fixture.ref, ownership: owner)
+        _ = try await fixture.store.deleteCandidate(fixture.candidate, ownership: owner)
+        await lease.close()
+        XCTAssertEqual(fixture.keys.templateDeletions, 0, "cleanup overtook exact stop delivery")
+        resume.signal()
+        let receipt = try await deleting.value
+        let status = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(status, .purged)
+        do { try await fixture.store.finishOperation(ticket, backendError: IdentityError(.backendUnavailable)); XCTFail("revoked operation published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        registration.close(); try await fixture.store.close()
+    }
+
     private struct Fixture {
         let root: URL; let keys: LeaseKeys; let authority: LeaseAuthority
         let store: IdentityStore; let ref: TemplateRef; let candidate: CandidateRef; let grant: AuthorizationGrant
