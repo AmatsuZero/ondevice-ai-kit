@@ -126,6 +126,21 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 
 ## 生产门槛
 
+### Task 3 gallery 授权门（2026-10-18）
+
+- `61fb1c5` 增加双端内部 gallery ticket：操作与每个成员分别提供 identification grant，成员授权绑定模板原 enrollment 的 domain、purpose 和 epoch；不会借用 enrollment scope。
+- 发布同步 closure 在 IdentityStore actor/monitor 内重验全部成员；撤销任一相关域、删除成员模板/candidate、关闭 Store 都会停止整个 ticket。writer 等 ticket 和 stop delivery drain 后释放。
+- Android 在 stop/purge 完成后才登记 ticket，避免 cleanup 失败留下无法领取的 ticket；最终 provider 回调后再次检查取消。
+- Swift Identity **166/166**、Android **163/163** 与 `lintDebug` 通过，跨平台作者分离评审均 APPROVE。该提交只完成授权门前置切片；快照编码、IndexStore/CAS、builder、index leases 与 lineage 删除仍在推进。
+
+### Task 3 immutable snapshot 编码（2026-10-18）
+
+- 双端内部快照固定完整 threshold policy、operation/member grants、template/candidate refs、parent、store identity、aggregation policy 与完整 domain epoch map。canonical 内容的 SHA256 同时作为不可变 revision 和 content digest。
+- 严格恢复拒绝未知字段、非整数 epoch、重复或乱序成员、跨 store 的 candidate、不一致的同 candidate/domain 或同 grant ID 声明，以及摘要或完整 epoch map 不匹配。
+- threshold/qualityFloor 采用 16 位小写 IEEE754 十六进制字符串，保留所有有限值 bit；共享合成 root/child fixture 已验证 Swift/Android 编码、恢复和摘要一致。没有模型权重或真实生物数据。
+- Swift 快照 **7/7**，当时完整 Identity **176/176**；Android 最终显式全量 **179/179**（快照 **8/8**、catalog 前置组件 **8/8**）和 lint 通过。两端 codec scope 独立审查 APPROVE。
+- codec 只证明内部格式一致性；成员归属、授权签发、实时 epoch/tombstone 必须由后续 IndexStore 在 IdentityStore 门内重验。完整 IndexStore 的构建、lease、删除及恢复仍在实施。
+
 [模型预研](p10-identity-model-selection.md)没有选型或下载权重。Task 9 的商用模型许可、授权数据和身份阈值，以及 Task 10 的 PAD 后端/攻击数据/校准仍为独立门槛。P10 与整个 roadmap 均未完成。
 
 ## 加密平台依据
