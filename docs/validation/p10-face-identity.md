@@ -11,7 +11,9 @@
 | Task 2 加密子步骤：AES-256-GCM envelope 与原生 key provider | `7803999` | Swift 6/6；Android 6/6；Android lintDebug | 密钥缺失不重建、AAD/篡改拒绝、随机 nonce、严格 256 位与字节快照已验证；真实 Keychain/Keystore 成功路径尚未真机验证 |
 | Task 2 journal 子步骤：独占 writer、加密原子提交、恢复加固 | `976d973`、`a006bbb` | Swift journal 14/14；Android journal 13/13；完整 identity 模块及 Android lintDebug | 构造与每次覆盖前认证现有 journal；丢失记录/密钥不重建；fsync、原子替换、目录同步；有界读取；只清理已认证临时文件。独立增量复审 APPROVE，4 项问题全部关闭；尚无 IdentityStore 生命周期 |
 
-| Task 2 授权状态子步骤：可信 provider、不可变声明与域 epoch | 本次提交 | Swift 授权 11/11；Android 授权 10/10；identity 模块及 Android lintDebug | provider 独立权威 epoch、同域撤销/新 grant 拒绝、声明不可改绑、ownership 独立授权、严格快照恢复。独立复审实现可接受，LOW issuedAt 测试缺口已补；尚未接入 Store 持久化门 |
+| Task 2 授权状态子步骤：可信 provider、不可变声明与域 epoch | `6dba20b` | Swift 授权 11/11；Android 授权 10/10；identity 模块及 Android lintDebug | provider 独立权威 epoch、同域撤销/新 grant 拒绝、声明不可改绑、ownership 独立授权、严格快照恢复。独立复审实现可接受，LOW issuedAt 测试缺口已补；尚未接入 Store 持久化门 |
+
+| Task 2 后端停止子步骤：per-operation stop signal | 本次提交 | Swift stop 8/8；Android stop 8/8；identity 59/59、57/57 及 Android lintDebug | 幂等停止、锁外 native stop 回调、停止前后检查、停止覆盖普通后端错误；致命 JVM Error 透传。独立复审 APPROVE；尚未接入 Store 在途 ticket/close drain |
 
 授权切片验收时身份模块定向合计：Swift 51/51、Android 49/49，Android identity lintDebug 通过。测试使用合成夹具及临时内存密钥，不包含个人生物数据、模型权重或商用精度结论。journal 两端测试数差异来自 Swift 独立的 record identifier 边界用例，Android 在组合用例中覆盖同一行为。
 
@@ -34,6 +36,13 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 平台原生密钥与恢复行为真机验证；iOS 15/API 26 最低设备验收另记。
 
 只有这些门全部通过，才能标记 Task 2 完成。后续 Task 3/5/6/7 的 snapshot、身份引擎和活体状态机尚未实现。
+
+### 停止信号当前边界
+
+- 每次后端调用可接收独立 stop signal；原生适配器可登记实际底层 stop 回调。
+- 默认适配器检查原同步 primitive 的执行前后，不能声称已中断不可取消的同步 native 工作。
+- 停止请求的第一个原因保持稳定；已被请求停止时晚注册的回调立即调用，回调执行不持有信号内部锁。注销只撤回尚未被请求方领取的回调；SDK 使用方需 defer/finally 关闭 registration。
+- Store 的持久化撤销门、在途 ticket 和 close drain 尚未接入，不能把单独 stop 测试当作完整撤销验收。
 
 ### 授权状态当前边界
 

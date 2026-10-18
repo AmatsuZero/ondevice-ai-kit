@@ -46,7 +46,9 @@ public protocol IdentityBackend: AnyObject, Sendable {
     var embeddingSpace: EmbeddingSpaceId { get }
     func availability() -> CapabilityAvailability
     func embed(_ probe: IdentityProbe) throws -> IdentityEmbedding
+    func embed(_ probe: IdentityProbe, stopSignal: IdentityStopSignal) throws -> IdentityEmbedding
     func evaluateQuality(_ probe: IdentityProbe) throws -> IdentityQuality
+    func evaluateQuality(_ probe: IdentityProbe, stopSignal: IdentityStopSignal) throws -> IdentityQuality
     func close()
 }
 public enum CalibrationStatus: String, Sendable { case verified, unverified }

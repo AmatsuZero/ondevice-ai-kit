@@ -1,0 +1,105 @@
+import Foundation
+
+public enum IdentityStopReason: Sendable, Equatable {
+    case cancelled
+    case authorizationRevoked
+    case closed
+
+    fileprivate var identityError: IdentityErrorCode {
+        switch self {
+        case .cancelled: return .cancelled
+        case .authorizationRevoked: return .authorizationRevoked
+        case .closed: return .closed
+        }
+    }
+}
+
+/// Cooperative stop boundary for one backend invocation. It requests the native
+/// stop callback when available; it never claims that a synchronous primitive was
+/// interrupted before it returns.
+public final class IdentityStopSignal: @unchecked Sendable {
+    private let lock = NSLock()
+    private var reason: IdentityStopReason?
+    private var handlers: [UUID: @Sendable () -> Void] = [:]
+
+    public init() {}
+
+    public func check() throws {
+        lock.lock(); let stopped = reason; lock.unlock()
+        if let stopped { throw IdentityError(stopped.identityError) }
+    }
+
+    @discardableResult
+    public func registerStopHandler(_ handler: @escaping @Sendable () -> Void) -> IdentityStopRegistration {
+        let id = UUID()
+        lock.lock()
+        if reason != nil {
+            lock.unlock()
+            handler()
+            return IdentityStopRegistration(signal: nil, id: id)
+        }
+        handlers[id] = handler
+        lock.unlock()
+        return IdentityStopRegistration(signal: self, id: id)
+    }
+
+    public func requestStop(_ requested: IdentityStopReason) {
+        lock.lock()
+        guard reason == nil else { lock.unlock(); return }
+        reason = requested
+        let pending = Array(handlers.values)
+        handlers.removeAll(keepingCapacity: false)
+        lock.unlock()
+        for handler in pending { handler() }
+    }
+
+    fileprivate func removeHandler(_ id: UUID) {
+        lock.lock(); handlers.removeValue(forKey: id); lock.unlock()
+    }
+}
+
+public final class IdentityStopRegistration: @unchecked Sendable {
+    private weak var signal: IdentityStopSignal?
+    private let id: UUID
+    private let lock = NSLock()
+    private var closed = false
+
+    fileprivate init(signal: IdentityStopSignal?, id: UUID) { self.signal = signal; self.id = id }
+
+    public func close() {
+        lock.lock()
+        guard !closed else { lock.unlock(); return }
+        closed = true
+        let signal = self.signal
+        self.signal = nil
+        lock.unlock()
+        signal?.removeHandler(id)
+    }
+
+}
+
+public extension IdentityBackend {
+    func embed(_ probe: IdentityProbe, stopSignal: IdentityStopSignal) throws -> IdentityEmbedding {
+        try stopSignal.check()
+        do {
+            let result = try embed(probe)
+            try stopSignal.check()
+            return result
+        } catch {
+            try stopSignal.check()
+            throw error
+        }
+    }
+
+    func evaluateQuality(_ probe: IdentityProbe, stopSignal: IdentityStopSignal) throws -> IdentityQuality {
+        try stopSignal.check()
+        do {
+            let result = try evaluateQuality(probe)
+            try stopSignal.check()
+            return result
+        } catch {
+            try stopSignal.check()
+            throw error
+        }
+    }
+}

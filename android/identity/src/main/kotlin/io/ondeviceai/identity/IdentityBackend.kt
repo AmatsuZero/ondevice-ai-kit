@@ -34,6 +34,24 @@ interface IdentityBackend {
     fun availability(): CapabilityAvailability
     fun embed(probe: IdentityProbe): IdentityEmbedding
     fun evaluateQuality(probe: IdentityProbe): IdentityQuality
+    fun embed(probe: IdentityProbe, stopSignal: IdentityStopSignal): IdentityEmbedding {
+        stopSignal.check()
+        return try {
+            embed(probe).also { stopSignal.check() }
+        } catch (error: Exception) {
+            stopSignal.check()
+            throw error
+        }
+    }
+    fun evaluateQuality(probe: IdentityProbe, stopSignal: IdentityStopSignal): IdentityQuality {
+        stopSignal.check()
+        return try {
+            evaluateQuality(probe).also { stopSignal.check() }
+        } catch (error: Exception) {
+            stopSignal.check()
+            throw error
+        }
+    }
     fun close()
 }
 enum class CalibrationStatus { VERIFIED, UNVERIFIED }
