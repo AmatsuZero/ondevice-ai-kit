@@ -38,6 +38,8 @@ struct IdentityAuthorizationState: Sendable, Equatable {
 
     func highestEpoch(domain: String) -> Int64 { epochs[domain] ?? 0 }
 
+    func recordedGrant(_ id: String) -> AuthorizationGrant? { grants[id] }
+
     func admitting(_ grant: AuthorizationGrant, scope: IdentityScope,
                    provider: any IdentityAuthorizationProvider, nowMillis: Int64) throws -> Self {
         guard grant.purpose == purpose else { throw IdentityError(.authorizationRequired) }

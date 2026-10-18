@@ -16,6 +16,8 @@ internal class IdentityAuthorizationState private constructor(
 
     fun highestEpoch(domain: String): Long = epochs[domain.also(::token)] ?: 0
 
+    internal fun recordedGrant(grantId: String): AuthorizationGrant? = grants[grantId]
+
     fun admitting(
         grant: AuthorizationGrant,
         scope: IdentityScope,
