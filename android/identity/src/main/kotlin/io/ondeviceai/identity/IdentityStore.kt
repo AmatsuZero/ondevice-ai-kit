@@ -41,6 +41,8 @@ class IdentityStore internal constructor(
     private var writerReleased = false
     private data class Operation(val ticket: IdentityOperationTicket, var terminal: IdentityStopReason? = null)
     private val operations = mutableMapOf<UUID, Operation>()
+    private data class GalleryOperation(val ticket: IdentityGalleryOperationTicket, var terminal: IdentityStopReason? = null)
+    private val galleryOperations = mutableMapOf<UUID, GalleryOperation>()
 
     init {
         val initial = IdentityAuthorizationState(purpose)
@@ -97,7 +99,9 @@ class IdentityStore internal constructor(
             candidates = nextCandidates
             deletions = nextDeletions
             holdPurge(oldTemplates)
-            Triple(ref, invalidateOperations(grant.revocationDomainId, nextAuthorization.highestEpoch(grant.revocationDomainId)), oldTemplates)
+            val invalidated = invalidateOperations(grant.revocationDomainId, nextAuthorization.highestEpoch(grant.revocationDomainId)) +
+                invalidateGalleryOperations(grant.revocationDomainId, nextAuthorization.highestEpoch(grant.revocationDomainId)).also(::reserveAuthorizationStopsLocked)
+            Triple(ref, invalidated, oldTemplates)
         }
         stopAndPurge(signals, cleanup)
         return ref
@@ -138,7 +142,8 @@ class IdentityStore internal constructor(
             val bytes = encode(storeId, nextAuthorization, candidates, nextRevocations, deletions = nextDeletions)
             try { journal.commit(bytes) } catch (error: Exception) { retireAfterJournalFaultLocked(); throw error }
             authorization = nextAuthorization; revocations = nextRevocations; deletions = nextDeletions
-            val signals = invalidateOperations(grant.revocationDomainId, epoch)
+            val signals = invalidateOperations(grant.revocationDomainId, epoch) +
+                invalidateGalleryOperations(grant.revocationDomainId, epoch).also(::reserveAuthorizationStopsLocked)
             holdPurge(templateIds)
             Triple(receipt, signals, templateIds)
         }
@@ -149,6 +154,128 @@ class IdentityStore internal constructor(
     private fun invalidateOperations(domain: String, beforeEpoch: Long) = operations.values.filter {
         it.ticket.grant.revocationDomainId == domain && it.ticket.grant.authorizationEpoch < beforeEpoch
     }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }.also(::reserveAuthorizationStopsLocked)
+
+    private fun invalidateGalleryOperations(domain: String, beforeEpoch: Long) = galleryOperations.values.filter { operation ->
+        val ticket = operation.ticket
+        (ticket.operationGrant.revocationDomainId == domain && ticket.operationGrant.authorizationEpoch < beforeEpoch) ||
+            ticket.members.any { it.grant.revocationDomainId == domain && it.grant.authorizationEpoch < beforeEpoch }
+    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
+
+    /**
+     * Admit a gallery publication under the same monitor used by revokeGrant.
+     * Member grants are identification grants in their own domains; the
+     * enrollment grant stored on a template is never used as a substitute.
+     */
+    internal fun beginGalleryOperation(
+        operationGrant: AuthorizationGrant,
+        members: List<IdentityGalleryMember>,
+        embeddingSpace: EmbeddingSpaceId
+    ): IdentityGalleryOperationTicket {
+        // Provider/stop callbacks run during admission and cleanup. Snapshot the
+        // caller list before invoking either so the checked members are exactly
+        // the members carried by the returned ticket.
+        val immutableMembers = members.toList()
+        val (outcome, signals, cleanup) = mutation {
+            if (IdentityCapability.IDENTIFICATION !in embeddingSpace.supportedCapabilities)
+                throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
+            if (immutableMembers.map { it.ref.id }.toSet().size != immutableMembers.size)
+                throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+
+            var next = authorization.admitting(operationGrant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
+            immutableMembers.forEach { member ->
+                preflightGalleryMemberLocked(member.ref, member.grant, embeddingSpace)
+                next = next.admitting(member.grant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
+            }
+            // The operation grant is checked again after all member/provider callbacks.
+            // A provider may advance or cancel the operation while member grants are admitted.
+            next = next.admitting(operationGrant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
+            val advancedDomains = (listOf(operationGrant) + immutableMembers.map { it.grant }).map { it.revocationDomainId }.distinct()
+                .filter { next.highestEpoch(it) > authorization.highestEpoch(it) }
+            val staleTemplates = templates.values.filter { record ->
+                val recorded = authorization.recordedGrant(record.grantId)
+                recorded != null && recorded.authorizationEpoch < next.highestEpoch(recorded.revocationDomainId)
+            }.map { it.ref.id }.sorted()
+            val nextDeletions = addDeletionFacts(staleTemplates, deletions)
+            if (next.canonicalJSON() != authorization.canonicalJSON()) {
+                journalCommit(encode(storeId, next, candidates, revocations, templates, stages, nextDeletions, candidateDeletions))
+                authorization = next; deletions = nextDeletions
+                holdPurge(staleTemplates)
+            }
+            val signals = advancedDomains.flatMap { domain ->
+                val epoch = next.highestEpoch(domain)
+                invalidateOperations(domain, epoch) + invalidateGalleryOperations(domain, epoch).also(::reserveAuthorizationStopsLocked)
+            }
+            val failure = runCatching { immutableMembers.forEach { validateGalleryMemberLocked(it.ref, it.grant, embeddingSpace) } }.exceptionOrNull()
+            Triple(failure, signals, staleTemplates)
+        }
+        stopAndPurge(signals, cleanup)
+        outcome?.let { throw it }
+        // Stop callbacks execute outside the monitor and can revoke/close this
+        // store. Never register a ticket until those callbacks and all purge
+        // journal writes have completed successfully.
+        return mutation {
+            if (IdentityCapability.IDENTIFICATION !in embeddingSpace.supportedCapabilities)
+                throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
+            authorization.admitting(operationGrant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
+            immutableMembers.forEach { validateGalleryMemberLocked(it.ref, it.grant, embeddingSpace) }
+            IdentityGalleryOperationTicket(operationGrant, immutableMembers, embeddingSpace).also {
+                galleryOperations[it.id] = GalleryOperation(it)
+            }
+        }
+    }
+
+    /** Consume exactly once; [publication] runs while all authorization facts are rechecked under the monitor. */
+    internal fun <T> consumeGalleryOperation(
+        ticket: IdentityGalleryOperationTicket,
+        publication: () -> T
+    ): T = mutation(allowClosed = true) {
+        val operation = galleryOperations[ticket.id]?.takeIf { it.ticket === ticket }
+            ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        try {
+            if (operation.terminal == IdentityStopReason.AUTHORIZATION_REVOKED)
+                throw IdentityError(IdentityErrorCode.AUTHORIZATION_REVOKED)
+            if (closed) throw IdentityError(IdentityErrorCode.CLOSED)
+            ticket.stopSignal.check()
+            if (IdentityCapability.IDENTIFICATION !in ticket.embeddingSpace.supportedCapabilities)
+                throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
+            authorization.admitting(ticket.operationGrant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
+            ticket.members.forEach { validateGalleryMemberLocked(it.ref, it.grant, ticket.embeddingSpace) }
+            ticket.stopSignal.check()
+            return@mutation publication()
+        } finally {
+            galleryOperations.remove(ticket.id)
+            releaseWriterIfDrainedLocked()
+        }
+    }
+
+    private fun validateGalleryMemberLocked(ref: TemplateRef, grant: AuthorizationGrant, embeddingSpace: EmbeddingSpaceId) {
+        val record = preflightGalleryMemberLocked(ref, grant, embeddingSpace)
+        if (ref.id in deletions || record.candidateId in candidateDeletions)
+            throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        val candidateGrantId = candidates[record.candidateId] ?: throw IdentityError(IdentityErrorCode.CANDIDATE_REVOKED)
+        val candidateGrant = authorization.recordedGrant(candidateGrantId) ?: throw IdentityError(IdentityErrorCode.CANDIDATE_REVOKED)
+        if (candidateGrant.authorizationEpoch != authorization.highestEpoch(candidateGrant.revocationDomainId) ||
+            revocations.values.any { record.candidateId in it.candidateIds })
+            throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        val templateGrant = authorization.recordedGrant(record.grantId) ?: throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        if (templateGrant.revocationDomainId != grant.revocationDomainId ||
+            templateGrant.purpose != grant.purpose || templateGrant.authorizationEpoch != grant.authorizationEpoch)
+            throw IdentityError(IdentityErrorCode.AUTHORIZATION_REQUIRED)
+        authorization.admitting(grant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
+    }
+
+    /** Checks immutable reference/domain facts before a newer trusted epoch is admitted and tombstoned. */
+    private fun preflightGalleryMemberLocked(ref: TemplateRef, grant: AuthorizationGrant, embeddingSpace: EmbeddingSpaceId): IdentityTemplateRecord {
+        val record = templates[ref.id] ?: throw IdentityError(IdentityErrorCode.TEMPLATE_NOT_FOUND)
+        ref.validate(record.ref)
+        if (ref.embeddingSpaceId != embeddingSpace) throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
+        if (IdentityCapability.IDENTIFICATION !in embeddingSpace.supportedCapabilities)
+            throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
+        val templateGrant = authorization.recordedGrant(record.grantId) ?: throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        if (templateGrant.revocationDomainId != grant.revocationDomainId || templateGrant.purpose != grant.purpose)
+            throw IdentityError(IdentityErrorCode.AUTHORIZATION_REQUIRED)
+        return record
+    }
 
     internal fun beginOperation(candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope,
                                  templateTargets: List<TemplateRef>? = null): IdentityOperationTicket = mutation {
@@ -316,7 +443,8 @@ class IdentityStore internal constructor(
             commitDeletions(deletions + (ref.id to IdentityTemplateDeletion(receipt.id, DeletionStatus.PURGE_PENDING)))
             val targets = listOf(ref.id)
             holdPurge(targets)
-            Triple(receipt, invalidateTemplateOperations(targets.toSet()), targets)
+            val invalidated = invalidateTemplateOperations(targets.toSet()) + invalidateGalleryTemplateOperations(targets.toSet())
+            Triple(receipt, invalidated, targets)
         }
         stopAndPurge(signals, targets)
         return receipt
@@ -339,7 +467,8 @@ class IdentityStore internal constructor(
             journalCommit(encode(storeId, authorization, candidates, revocations, templates, stages, nextDeletions, nextCandidates))
             deletions = nextDeletions; candidateDeletions = nextCandidates
             holdPurge(targetIds)
-            Triple(receipt, invalidateCandidateOperations(candidate.id), targetIds)
+            val invalidated = invalidateCandidateOperations(candidate.id) + invalidateGalleryCandidateOperations(candidate.id)
+            Triple(receipt, invalidated, targetIds)
         }
         stopAndPurge(signals, targetIds)
         return receipt
@@ -435,6 +564,16 @@ class IdentityStore internal constructor(
         it.ticket.templateTargets?.let { bound -> bound.intersect(targets).isNotEmpty() } ?: false
     }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }.also(::reserveAuthorizationStopsLocked)
 
+    private fun invalidateGalleryTemplateOperations(targets: Set<String>) = galleryOperations.values.filter {
+        it.ticket.members.any { member -> member.ref.id in targets }
+    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
+        .also(::reserveAuthorizationStopsLocked)
+
+    private fun invalidateGalleryCandidateOperations(candidateId: String) = galleryOperations.values.filter { operation ->
+        operation.ticket.members.any { member -> templates[member.ref.id]?.candidateId == candidateId }
+    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
+        .also(::reserveAuthorizationStopsLocked)
+
     private fun purgeTemplate(id: String) {
         if (closed || writerReleased || !leases[id].isNullOrEmpty() || id in pendingPurgeStops) return
         val record = deletions[id]?.takeIf { it.status != DeletionStatus.PURGED } ?: return
@@ -490,6 +629,9 @@ class IdentityStore internal constructor(
             reserveStopsLocked(operations.values.map {
                 if (it.terminal != IdentityStopReason.AUTHORIZATION_REVOKED) it.terminal = IdentityStopReason.CLOSED
                 it.ticket.stopSignal to it.terminal!!
+            } + galleryOperations.values.map {
+                if (it.terminal != IdentityStopReason.AUTHORIZATION_REVOKED) it.terminal = IdentityStopReason.CLOSED
+                it.ticket.stopSignal to it.terminal!!
             })
         }
         deliverReservedStops(pending)
@@ -538,19 +680,25 @@ class IdentityStore internal constructor(
     private fun retireAfterJournalFaultLocked() {
         if (closed) return
         closed = true
-        val pending = operations.values.mapNotNull {
+        val pending = (operations.values.mapNotNull {
             if (it.terminal == IdentityStopReason.AUTHORIZATION_REVOKED) null
             else {
                 it.terminal = IdentityStopReason.CLOSED
                 it.ticket.stopSignal to IdentityStopReason.CLOSED
             }
-        }
+        } + galleryOperations.values.mapNotNull {
+            if (it.terminal == IdentityStopReason.AUTHORIZATION_REVOKED) null
+            else {
+                it.terminal = IdentityStopReason.CLOSED
+                it.ticket.stopSignal to IdentityStopReason.CLOSED
+            }
+        })
         deferredRetirementStops += reserveStopsLocked(pending)
     }
 
     /** The only physical writer release point. Caller owns [gate]. */
     private fun releaseWriterIfDrainedLocked() {
-        if (closed && !operating && operations.isEmpty() && leases.isEmpty() && pendingStopDeliveries == 0 && !writerReleased) {
+        if (closed && !operating && operations.isEmpty() && galleryOperations.isEmpty() && leases.isEmpty() && pendingStopDeliveries == 0 && !writerReleased) {
             journal.close()
             writerReleased = true
         }

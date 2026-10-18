@@ -27,6 +27,11 @@ public actor IdentityStore {
         var terminal: IdentityStopReason?
     }
     private var operations: [UUID: Operation] = [:]
+    private struct GalleryOperation {
+        let ticket: IdentityGalleryOperation
+        var terminal: IdentityStopReason?
+    }
+    private var galleryOperations: [UUID: GalleryOperation] = [:]
     private var drainWaiters: [CheckedContinuation<Void, Never>] = []
 
     public init(root: URL, purpose: String, authorizationProvider: any IdentityAuthorizationProvider,
@@ -226,6 +231,10 @@ public actor IdentityStore {
             operations[id]?.terminal = .authorizationRevoked
             signals.append(operation.ticket.stopSignal)
         }
+        for (id, operation) in galleryOperations where operation.ticket.uses(domain: domain, before: epoch) {
+            galleryOperations[id]?.terminal = .authorizationRevoked
+            signals.append(operation.ticket.stopSignal)
+        }
         return signals
     }
 
@@ -238,7 +247,80 @@ public actor IdentityStore {
                 signals.append(operation.ticket.stopSignal)
             }
         }
+        for (id, operation) in galleryOperations where operation.ticket.uses(templates: targets) {
+            galleryOperations[id]?.terminal = .authorizationRevoked
+            signals.append(operation.ticket.stopSignal)
+        }
         return signals
+    }
+
+    /// Registers every grant before issuing a process-local gallery ticket. Each
+    /// trusted epoch advance uses the existing stale-template cleanup protocol.
+    func beginGalleryOperation(grant: AuthorizationGrant, members: [IdentityGalleryMember],
+                               embeddingSpace: EmbeddingSpaceId) async throws -> IdentityGalleryOperation {
+        guard embeddingSpace.supportedCapabilities.contains(.identification) else {
+            throw IdentityError(.embeddingSpaceMismatch)
+        }
+        guard Set(members.map { $0.ref.id }).count == members.count else { throw IdentityError(.invalidInput) }
+        try await admitGalleryGrant(grant)
+        for member in members {
+            try validateGalleryMember(member, space: embeddingSpace, requireEpoch: false)
+            try await admitGalleryGrant(member.grant)
+        }
+        // Above cleanup can suspend; perform a complete final admission pass.
+        try validateGalleryAuthorization(grant: grant, members: members, space: embeddingSpace)
+        let ticket = IdentityGalleryOperation(grant: grant, members: members, embeddingSpace: embeddingSpace)
+        galleryOperations[ticket.id] = GalleryOperation(ticket: ticket)
+        return ticket
+    }
+
+    /// The synchronous closure is the sole IndexStore durable-publication bridge.
+    /// It cannot suspend between final validation and CAS/journal commit.
+    func finishGalleryOperation<T>(_ ticket: IdentityGalleryOperation, publication: () throws -> T) throws -> T {
+        guard let operation = galleryOperations[ticket.id], operation.ticket === ticket else { throw IdentityError(.invalidInput) }
+        defer { galleryOperations.removeValue(forKey: ticket.id); maybeReleaseWriter() }
+        if operation.terminal == .authorizationRevoked { throw IdentityError(.authorizationRevoked) }
+        guard !closed else { throw IdentityError(.closed) }
+        try ticket.stopSignal.check()
+        try validateGalleryAuthorization(grant: ticket.grant, members: ticket.members, space: ticket.embeddingSpace)
+        try ticket.stopSignal.check()
+        return try publication()
+    }
+
+    private func validateGalleryAuthorization(grant: AuthorizationGrant, members: [IdentityGalleryMember],
+                                               space: EmbeddingSpaceId) throws {
+        guard !closed else { throw IdentityError(.closed) }
+        _ = try authorization.admitting(grant, scope: .identification, provider: provider, nowMillis: wallClock.nowMillis)
+        for member in members { try validateGalleryMember(member, space: space) }
+    }
+
+    private func validateGalleryMember(_ member: IdentityGalleryMember, space: EmbeddingSpaceId, requireEpoch: Bool = true) throws {
+        _ = try recordedTemplateCandidate(member.ref)
+        guard member.ref.embeddingSpaceId == space else { throw IdentityError(.embeddingSpaceMismatch) }
+        guard let record = templates[member.ref.id], let enrollment = authorization.recordedGrant(record.grantId),
+              enrollment.revocationDomainId == member.grant.revocationDomainId,
+              (!requireEpoch || enrollment.authorizationEpoch == member.grant.authorizationEpoch),
+              enrollment.purpose == member.grant.purpose else { throw IdentityError(.authorizationRequired) }
+        _ = try authorization.admitting(member.grant, scope: .identification, provider: provider, nowMillis: wallClock.nowMillis)
+    }
+
+    private func admitGalleryGrant(_ grant: AuthorizationGrant) async throws {
+        guard !closed else { throw IdentityError(.closed) }
+        let next = try authorization.admitting(grant, scope: .identification, provider: provider, nowMillis: wallClock.nowMillis)
+        let targets = Set(templates.values.filter { record in
+            guard let stored = next.recordedGrant(record.grantId) else { return false }
+            return stored.revocationDomainId == grant.revocationDomainId && stored.authorizationEpoch < next.highestEpoch(domain: stored.revocationDomainId)
+        }.map { $0.ref.id })
+        let nextDeletions = try Self.addDeletionFacts(targets, existing: deletions, reserved: receiptIDs)
+        if next != authorization || nextDeletions.count != deletions.count {
+            let bytes = try Self.encode(storeId: storeId, authorization: next, candidates: candidates, revocations: revocations,
+                                        templates: templates, stages: stages, deletions: nextDeletions, candidateDeletions: candidateDeletions)
+            _ = try next.admitting(grant, scope: .identification, provider: provider, nowMillis: wallClock.nowMillis)
+            do { try journal.commit(bytes) } catch { retire(); throw error }
+            authorization = next; deletions = nextDeletions
+        }
+        let signals = invalidateOperations(domain: grant.revocationDomainId, before: next.highestEpoch(domain: grant.revocationDomainId))
+        try await stopAndPurge(targets, signals: signals)
     }
 
     func beginOperation(_ candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope,
@@ -467,6 +549,10 @@ public actor IdentityStore {
             operations[operationId]?.terminal = .authorizationRevoked
             signals.append(operation.ticket.stopSignal)
         }
+        for (operationId, operation) in galleryOperations where operation.ticket.uses(templates: targetIds) {
+            galleryOperations[operationId]?.terminal = .authorizationRevoked
+            signals.append(operation.ticket.stopSignal)
+        }
         try await stopAndPurge(targetIds, signals: signals)
         return receipt
     }
@@ -611,6 +697,10 @@ public actor IdentityStore {
                 if operation.terminal == .authorizationRevoked { revoked.append(operation.ticket.stopSignal) }
                 else { operations[id]?.terminal = .closed; closing.append(operation.ticket.stopSignal) }
             }
+            for (id, operation) in galleryOperations {
+                if operation.terminal == .authorizationRevoked { revoked.append(operation.ticket.stopSignal) }
+                else { galleryOperations[id]?.terminal = .closed; closing.append(operation.ticket.stopSignal) }
+            }
             if !revoked.isEmpty || !closing.isEmpty {
                 pendingStopDeliveries += 1
                 let store = instanceId
@@ -634,7 +724,7 @@ public actor IdentityStore {
     }
 
     private func maybeReleaseWriter() {
-        guard closed, !writerReleased, operations.isEmpty, templateLeases.isEmpty,
+        guard closed, !writerReleased, operations.isEmpty, galleryOperations.isEmpty, templateLeases.isEmpty,
               pendingStopDeliveries == 0 else { return }
         try? journal.close()
         writerReleased = true
