@@ -11,7 +11,10 @@ import javax.crypto.SecretKeyFactory
  * namespaced alias and removes only that alias before returning.
  */
 class AndroidKeystoreProbeInstrumentation : Instrumentation() {
+    private var probeArguments: Bundle? = null
+
     override fun onCreate(arguments: Bundle?) {
+        probeArguments = arguments
         super.onCreate(arguments)
         start()
     }
@@ -25,6 +28,7 @@ class AndroidKeystoreProbeInstrumentation : Instrumentation() {
             putString("test", "androidKeystoreEnvelopeLifecycle")
         }
         val result = Bundle()
+        var finalCode = -2
         sendStatus(1, test)
         val namespace = "probe-${java.util.UUID.randomUUID()}"
         val keyId = "envelope-key"
@@ -32,6 +36,9 @@ class AndroidKeystoreProbeInstrumentation : Instrumentation() {
         val plaintext = "synthetic-keystore-probe".encodeToByteArray()
         val provider = AndroidKeystoreIdentityKeyProvider(namespace)
         try {
+            check(probeArguments?.getString("forceFailure") != "true") {
+                "forced probe failure"
+            }
             val sealed = IdentityEnvelope.seal(plaintext, keyId, 0, provider, context)
             val key = provider.key(keyId, false)
             val keyInfo = SecretKeyFactory.getInstance("AES", "AndroidKeyStore")
@@ -70,6 +77,7 @@ class AndroidKeystoreProbeInstrumentation : Instrumentation() {
             result.putString("probeStatus", "pass")
             result.putString("namespace", namespace)
             result.putString("cleanup", "exact namespace/keyId; no alias enumeration")
+            finalCode = -1
             sendStatus(0, Bundle(test).apply { putString("stream", "AndroidKeyStore envelope probe passed") })
         } catch (error: Throwable) {
             result.putString("probeStatus", "fail")
@@ -77,7 +85,7 @@ class AndroidKeystoreProbeInstrumentation : Instrumentation() {
             sendStatus(-2, Bundle(test).apply { putString("stack", error.stackTraceToString()) })
         } finally {
             runCatching { provider.deleteKey(keyId) }
-            finish(-1, result)
+            finish(finalCode, result)
         }
     }
 }
