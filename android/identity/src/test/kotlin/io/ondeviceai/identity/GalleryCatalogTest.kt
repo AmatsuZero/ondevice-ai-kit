@@ -100,6 +100,51 @@ class GalleryCatalogTest {
         } finally { catalog.close() }
     }
 
+    @Test fun nearCapacityV2MigrationRejectsPurgeMarkerWithoutMutatingTheLegacyJournal() {
+        val root = root(); val keys = GalleryCatalogKeys()
+        val seed = GalleryCatalog(root, "identity-store", keys)
+        val storeId = seed.storeId
+        seed.close()
+        val lengths = MutableList(12) { 1 }
+        fun records() = lengths.mapIndexed { index, length ->
+            snapshot(storeId, aggregation = "a".repeat(length), lineage = "legacy-$index")
+        }
+        fun v2(records: List<GallerySnapshotRecord>) = mapOf<String, Any?>(
+            "version" to 2L, "storeId" to storeId, "identityStoreId" to "identity-store",
+            "snapshots" to records.associate { it.ref.revision to it.canonicalJSON },
+            "heads" to records.associate { it.ref.id to it.ref.revision },
+            "tombstones" to mapOf(records.first().ref.id to "legacy-receipt")
+        )
+        var baseline = records()
+        var padding = 65_530 - IdentityContractJSON.encode(v2(baseline)).encodeToByteArray().size
+        check(padding in 1..(lengths.size * 255))
+        lengths.indices.forEach { index ->
+            val extra = minOf(255, padding)
+            lengths[index] += extra
+            padding -= extra
+        }
+        check(padding == 0)
+        baseline = records()
+        val legacy = v2(baseline)
+        val legacyBytes = IdentityContractJSON.encode(legacy).encodeToByteArray()
+        assertEquals(65_530, legacyBytes.size)
+        val lineage = baseline.first().ref.id
+        val v3Attempt = legacy + mapOf("version" to 3L, "purgeFailures" to listOf(lineage))
+        assertTrue(IdentityContractJSON.encode(v3Attempt).encodeToByteArray().size > 65_536)
+        IdentityJournal(root, "index", keys).use { it.commit(legacyBytes) }
+        val file = root.resolve("identity-journal-index.bin")
+        val before = Files.readAllBytes(file)
+
+        GalleryCatalog(root, "identity-store", keys).use { catalog ->
+            assertEquals(DeletionStatus.PURGE_PENDING, catalog.deletionStatus(lineage))
+            assertEquals(IdentityErrorCode.INVALID_INPUT,
+                assertFailsWith<IdentityError> { catalog.markPurgeAttempt(lineage) }.code)
+            assertEquals(DeletionStatus.PURGE_PENDING, catalog.deletionStatus(lineage))
+            assertEquals(baseline[1].ref, catalog.snapshot(baseline[1].ref).ref)
+        }
+        assertTrue(before.contentEquals(Files.readAllBytes(file)))
+    }
+
     @Test fun restoreRejectsWrongIdentityWithoutRewritingTheJournal() {
         val root = root(); val keys = GalleryCatalogKeys()
         val catalog = GalleryCatalog(root, "identity-store", keys)

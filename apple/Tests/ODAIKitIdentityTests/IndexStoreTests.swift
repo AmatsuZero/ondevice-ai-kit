@@ -503,6 +503,110 @@ final class IndexStoreTests: XCTestCase {
         await recovered.close(); try await context.identity.close()
     }
 
+    func testCloseDuringFinalCatalogCommitDrainsPublicationAndReleasesItsPayload() async throws {
+        let committing = expectation(description: "final catalog commit entered")
+        let stopped = expectation(description: "close admitted during final catalog commit")
+        let freed = expectation(description: "late published payload released by close")
+        let closeReturned = expectation(description: "close must wait for final publication")
+        closeReturned.isInverted = true
+        let release = DispatchSemaphore(value: 0)
+        let keys = IndexTestKeys()
+        let context = try await context(keys: keys, buildIndex: { _, signal in
+            // Keep the registration alive through the synchronous commit gate.
+            let registration = signal.registerStopHandler { stopped.fulfill() }
+            keys.onNextAccess {
+                defer { registration.close() }
+                committing.fulfill()
+                XCTAssertEqual(release.wait(timeout: .now() + 5), .success)
+            }
+            let pointer = UnsafeMutableRawPointer.allocate(byteCount: 64, alignment: 1)
+            pointer.initializeMemory(as: UInt8.self, repeating: 1, count: 64)
+            return Data(bytesNoCopy: pointer, count: 64, deallocator: .custom { pointer, _ in
+                pointer.deallocate(); freed.fulfill()
+            })
+        })
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let publishing = Task { try await builder.publish() }
+        await fulfillment(of: [committing], timeout: 2)
+        let closing = Task { await context.index.close(); closeReturned.fulfill() }
+        await fulfillment(of: [stopped], timeout: 2)
+        await fulfillment(of: [closeReturned], timeout: 0.05)
+        do {
+            _ = try await IndexStore.open(root: context.indexRoot, identityStore: context.identity, keyProvider: keys, buildIndex: { _, _ in Data([1]) })
+            XCTFail("close released writer while final commit was suspended")
+        } catch { XCTAssertEqual((error as? IdentityError)?.code, .busy) }
+        release.signal()
+        let ref = try await publishing.value
+        await closing.value
+        await fulfillment(of: [freed], timeout: 1)
+        // The CAS already entered its non-suspending authority window. Closing
+        // drains that publication, then discards the process-local cache.
+        let reopened = try await IndexStore.open(root: context.indexRoot, identityStore: context.identity, keyProvider: keys, buildIndex: { _, _ in Data([9]) })
+        let restored = try await reopened.snapshotSummary(ref)
+        XCTAssertEqual(restored.ref, ref)
+        do { _ = try await reopened.acquireIndexReadLease(ref, grant: context.grant); XCTFail("cold reopen retained process-local payload") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .rebuildRequired) }
+        await reopened.close(); try await context.identity.close()
+    }
+
+    func testReopenRecoveryFaultPreservesEveryReceiptAndUnrelatedLineage() async throws {
+        // Two successful reads open the journal. Two more key calls commit
+        // the marker; fail at either that marker or the subsequent removal.
+        for successfulCalls in [2, 4] {
+            let context = try await context()
+            var refs: [GalleryRef] = []
+            for _ in 0..<3 {
+                let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+                try await builder.addTemplate(context.template, grant: context.grant)
+                refs.append(try await builder.publish())
+            }
+            let first = try await context.index.acquireIndexReadLease(refs[0], grant: context.grant)
+            let second = try await context.index.acquireIndexReadLease(refs[1], grant: context.grant)
+            let surviving = try await context.index.acquireIndexReadLease(refs[2], grant: context.grant)
+            let firstReceipt = try await context.index.deleteGallery(refs[0], ownership: context.owner)
+            let secondReceipt = try await context.index.deleteGallery(refs[1], ownership: context.owner)
+            context.keys.denied = true
+            await first.close(); await second.close()
+            XCTAssertEqual(try surviving.indexData(), Data([1]), "unrelated leased payload lost on catalog retirement")
+            XCTAssertEqual(try surviving.snapshot().ref, refs[2])
+            context.keys.denied = false
+            await surviving.close(); await context.index.close()
+
+            context.keys.failAfterKeyCalls(successfulCalls)
+            let recovered = try await IndexStore.open(root: context.indexRoot, identityStore: context.identity,
+                keyProvider: context.keys, buildIndex: { _, _ in Data([1]) })
+            let ordered = [firstReceipt, secondReceipt].sorted { $0.galleryId! < $1.galleryId! }
+            let failed = try await recovered.awaitDeletion(ordered[0])
+            let pending = try await recovered.awaitDeletion(ordered[1])
+            XCTAssertEqual(failed, .purgeFailed)
+            XCTAssertEqual(pending, .purgePending)
+            await recovered.close()
+
+            let catalog = try GalleryCatalog(root: context.indexRoot, identityStoreId: context.identity.storeId, keyProvider: context.keys)
+            XCTAssertEqual(try catalog.deletionStatus(lineageId: ordered[0].galleryId!), successfulCalls == 4 ? .purgeFailed : .purgePending)
+            XCTAssertEqual(try catalog.deletionStatus(lineageId: ordered[1].galleryId!), .purgePending)
+            XCTAssertEqual(try catalog.snapshot(refs[2]).ref, refs[2])
+            try catalog.close()
+
+            let retried = try await IndexStore.open(root: context.indexRoot, identityStore: context.identity,
+                keyProvider: context.keys, buildIndex: { _, _ in Data([9]) })
+            for receipt in ordered {
+                let status = try await retried.awaitDeletion(receipt)
+                XCTAssertEqual(status, .purged)
+            }
+            for ref in refs.prefix(2) {
+                do { _ = try await retried.acquireIndexReadLease(ref, grant: context.grant); XCTFail("deleted lineage resurrected after recovery") }
+                catch { XCTAssertEqual((error as? IdentityError)?.code, .galleryRevisionGone) }
+            }
+            let rebuilt = try await retried.rebuildIndex(refs[2], grant: context.grant)
+            XCTAssertEqual(rebuilt, refs[2])
+            let readable = try await retried.acquireIndexReadLease(refs[2], grant: context.grant)
+            XCTAssertEqual(try readable.indexData(), Data([9]))
+            await readable.close(); await retried.close(); try await context.identity.close()
+        }
+    }
+
     func testDeletionDeadlineReturnsPendingWithoutUndoingDeletion() async throws {
         let clock = IndexWaitClock()
         let context = try await context(monotonicClock: clock)
@@ -582,8 +686,8 @@ final class IndexStoreTests: XCTestCase {
         try await context.identity.close()
     }
 
-    private func context(monotonicClock: any IdentityMonotonicClock = SystemIdentityMonotonicClock(), buildIndex: @escaping GalleryIndexBuilder = { _, _ in Data([1]) }) async throws -> IndexTestContext {
-        let keys = IndexTestKeys(); let authority = IndexTestAuthority()
+    private func context(keys: IndexTestKeys = IndexTestKeys(), monotonicClock: any IdentityMonotonicClock = SystemIdentityMonotonicClock(), buildIndex: @escaping GalleryIndexBuilder = { _, _ in Data([1]) }) async throws -> IndexTestContext {
+        let authority = IndexTestAuthority()
         let identity = try IdentityStore(root: temporaryRoot(), purpose: "identity", authorizationProvider: authority,
             keyProvider: keys, wallClock: IndexClock(), monotonicClock: IndexMono())
         let grant = try indexGrant(); let candidate = try await identity.createCandidate(grant)
@@ -624,9 +728,19 @@ private final class IndexTestAuthority: IdentityAuthorizationProvider, @unchecke
 }
 private final class IndexTestKeys: IdentityKeyProvider, @unchecked Sendable {
     private var values: [String: SymmetricKey] = [:]; private let lock = NSLock()
+    private var nextAccess: (@Sendable () -> Void)?
+    private var remainingCalls: Int?
     var denied = false
+    func onNextAccess(_ action: @escaping @Sendable () -> Void) { lock.lock(); nextAccess = action; lock.unlock() }
+    func failAfterKeyCalls(_ count: Int) { lock.lock(); remainingCalls = count; lock.unlock() }
     func key(id: String, createIfMissing: Bool) throws -> SymmetricKey {
+        lock.lock(); let action = nextAccess; nextAccess = nil; lock.unlock()
+        action?()
         lock.lock(); defer { lock.unlock() }
+        if let remaining = remainingCalls {
+            if remaining == 0 { remainingCalls = nil; throw IdentityError(.reEnrollmentRequired) }
+            remainingCalls = remaining - 1
+        }
         if denied { throw IdentityError(.reEnrollmentRequired) }
         if let value = values[id] { return value }
         guard createIfMissing else { throw IdentityError(.reEnrollmentRequired) }

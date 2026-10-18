@@ -276,6 +276,44 @@ final class GalleryCatalogTests: XCTestCase {
         XCTAssertEqual(try upgraded.deletionStatus(lineageId: record.ref.id), .purged)
     }
 
+    func testNearCapacityV2MigrationRejectsPurgeMarkerWithoutMutatingLegacyJournal() throws {
+        let root = temporaryRoot(); let keys = CatalogKeys()
+        let seed = try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys)
+        let storeId = seed.storeId; try seed.close()
+        var lengths = Array(repeating: 1, count: 12)
+        func records() throws -> [GallerySnapshotRecord] {
+            try lengths.enumerated().map { index, length in
+                try snapshot(indexStoreId: storeId, aggregation: String(repeating: "a", count: length), lineage: "legacy-\(index)")
+            }
+        }
+        func v2(_ records: [GallerySnapshotRecord]) -> [String: Any] {
+            ["version": 2, "storeId": storeId, "identityStoreId": "identity-store",
+             "snapshots": Dictionary(uniqueKeysWithValues: records.map { ($0.ref.revision, $0.canonicalJSON()) }),
+             "heads": Dictionary(uniqueKeysWithValues: records.map { ($0.ref.id, $0.ref.revision) }),
+             "tombstones": [records[0].ref.id: "legacy-receipt"]]
+        }
+        var baseline = try records()
+        var padding = 65_530 - Data(identityJSON(v2(baseline)).utf8).count
+        XCTAssertTrue((1...(12 * 255)).contains(padding))
+        for index in lengths.indices { let extra = min(255, padding); lengths[index] += extra; padding -= extra }
+        XCTAssertEqual(padding, 0)
+        baseline = try records()
+        let legacy = v2(baseline); let legacyBytes = Data(identityJSON(legacy).utf8)
+        XCTAssertEqual(legacyBytes.count, 65_530)
+        var attempt = legacy; attempt["version"] = 3; attempt["purgeFailures"] = [baseline[0].ref.id]
+        XCTAssertGreaterThan(Data(identityJSON(attempt).utf8).count, 65_536)
+        let journal = try IdentityJournal(root: root, recordID: "index", keyProvider: keys)
+        try journal.commit(legacyBytes); try journal.close()
+        let file = root.appendingPathComponent("identity-journal-index.bin")
+        let before = try Data(contentsOf: file)
+        let catalog = try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys)
+        defer { try? catalog.close() }
+        XCTAssertThrowsError(try catalog.markPurgeAttempt(baseline[0].ref.id)) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
+        XCTAssertEqual(try catalog.deletionStatus(lineageId: baseline[0].ref.id), .purgePending)
+        XCTAssertEqual(try catalog.snapshot(baseline[1].ref).ref, baseline[1].ref)
+        XCTAssertEqual(try Data(contentsOf: file), before)
+    }
+
     func testPurgeFailureCodecRejectsUnboundOrDuplicateMarkersWithoutRewriting() throws {
         let root = temporaryRoot(); let keys = CatalogKeys()
         let catalog = try GalleryCatalog(root: root, identityStoreId: "identity-store", keyProvider: keys)

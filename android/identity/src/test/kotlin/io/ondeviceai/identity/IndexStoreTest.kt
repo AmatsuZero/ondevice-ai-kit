@@ -165,6 +165,62 @@ class IndexStoreTest {
         f.identity.close()
     }
 
+    @Test fun reopenRecoveryFaultKeepsEveryCommittedReceiptObservableUntilTheNextRetry() {
+        fun exerciseRecoveryFault(failAfter: Int, expectedDurableFirst: DeletionStatus) {
+            val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+            fun publish(): GalleryRef {
+                val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
+                builder.addTemplate(f.template, f.grant)
+                return builder.publish()
+            }
+            val first = publish(); val second = publish(); val surviving = publish()
+            val firstLease = index.acquireIndexReadLease(first, f.grant)
+            val secondLease = index.acquireIndexReadLease(second, f.grant)
+            val survivingLease = index.acquireIndexReadLease(surviving, f.grant)
+            val firstReceipt = index.deleteGallery(first, f.owner)
+            val secondReceipt = index.deleteGallery(second, f.owner)
+
+            f.keys.denied = true
+            firstLease.close(); secondLease.close()
+            assertEquals(DeletionStatus.PURGE_FAILED, index.awaitDeletion(firstReceipt))
+            assertEquals(surviving, survivingLease.snapshot().ref)
+            assertEquals(listOf<Byte>(1), survivingLease.indexData().toList())
+            survivingLease.close()
+            f.keys.denied = false
+            index.close()
+
+            f.keys.failAfterKeyCalls(failAfter)
+            val recovered = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+            val ordered = listOf(firstReceipt, secondReceipt).sortedBy { it.galleryId }
+            try {
+                assertEquals(DeletionStatus.PURGE_FAILED, recovered.awaitDeletion(ordered[0]))
+                assertEquals(DeletionStatus.PURGE_PENDING, recovered.awaitDeletion(ordered[1]))
+            } finally { recovered.close() }
+
+            GalleryCatalog(f.indexRoot, f.identity.storeId, f.keys).use { catalog ->
+                assertEquals(expectedDurableFirst, catalog.deletionStatus(requireNotNull(ordered[0].galleryId)))
+                assertEquals(DeletionStatus.PURGE_PENDING, catalog.deletionStatus(requireNotNull(ordered[1].galleryId)))
+                assertEquals(surviving, catalog.snapshot(surviving).ref)
+            }
+            IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.use { retried ->
+                assertEquals(DeletionStatus.PURGED, retried.awaitDeletion(firstReceipt))
+                assertEquals(DeletionStatus.PURGED, retried.awaitDeletion(secondReceipt))
+                assertEquals(IdentityErrorCode.GALLERY_REVISION_GONE,
+                    assertFailsWith<IdentityError> { retried.acquireIndexReadLease(first, f.grant) }.code)
+                assertEquals(IdentityErrorCode.GALLERY_REVISION_GONE,
+                    assertFailsWith<IdentityError> { retried.acquireIndexReadLease(second, f.grant) }.code)
+                assertEquals(IdentityErrorCode.REBUILD_REQUIRED,
+                    assertFailsWith<IdentityError> { retried.acquireIndexReadLease(surviving, f.grant) }.code)
+                assertEquals(surviving, retried.rebuildIndex(surviving, f.grant))
+                retried.acquireIndexReadLease(surviving, f.grant).use { assertEquals(surviving, it.snapshot().ref) }
+            }
+            f.identity.close()
+        }
+
+        exerciseRecoveryFault(failAfter = 2, expectedDurableFirst = DeletionStatus.PURGE_PENDING)
+        exerciseRecoveryFault(failAfter = 4, expectedDurableFirst = DeletionStatus.PURGE_FAILED)
+    }
+
     @Test fun failedChildBuildKeepsPriorIndexQueryableAndDiscardsBuilder() {
         val f = fixture(); var calls = 0
         val index = IndexStore(f.indexRoot, f.identity, f.keys) { embeddings, _ ->
@@ -555,7 +611,16 @@ private class IndexAuthority : IdentityAuthorizationProvider {
 private class IndexKeys : IdentityKeyProvider {
     private val keys = mutableMapOf<String, SecretKey>()
     @Volatile var denied = false
+    @Volatile private var failAfterKeyCalls: Int? = null
+    fun failAfterKeyCalls(successfulCalls: Int) { failAfterKeyCalls = successfulCalls }
     @Synchronized override fun key(id: String, createIfMissing: Boolean): SecretKey {
+        failAfterKeyCalls?.let { remaining ->
+            if (remaining == 0) {
+                failAfterKeyCalls = null
+                throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
+            }
+            failAfterKeyCalls = remaining - 1
+        }
         if (denied) throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
         keys[id]?.let { return it }
         if (!createIfMissing) throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
