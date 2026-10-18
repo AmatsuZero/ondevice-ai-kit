@@ -10,7 +10,8 @@ typealias GalleryIndexBuilder = (List<IdentityEmbedding>, IdentityStopSignal) ->
 
 /** Immutable revisions; catalog persistence and IdentityStore remain separate serial gates. */
 class IndexStore internal constructor(root: Path, private val identityStore: IdentityStore,
-    keys: IdentityKeyProvider, private val buildIndex: GalleryIndexBuilder) : AutoCloseable {
+    keys: IdentityKeyProvider, private val monotonicClock: IdentityMonotonicClock = SystemIdentityMonotonicClock,
+    private val buildIndex: GalleryIndexBuilder) : AutoCloseable {
     private val catalog = GalleryCatalog(root, identityStore.storeId, keys)
     val storeId = catalog.storeId
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN") private val gate = java.lang.Object()
@@ -180,8 +181,26 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
     }
 
     fun awaitDeletion(receipt: DeletionReceipt): DeletionStatus = synchronized(gate) {
+        requireOpen()
         if (receipt.storeId != storeId || receipt.galleryId == null || deleted[receipt.galleryId] != receipt) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         if (catalog.hasSnapshots(receipt.galleryId)) DeletionStatus.PURGE_PENDING else DeletionStatus.PURGED
+    }
+
+    /** Waits on committed purge facts without holding the store monitor or doing cleanup. */
+    fun awaitDeletion(receipt: DeletionReceipt, deadline: IdentityDeadline,
+        stopSignal: IdentityStopSignal? = null): DeletionStatus {
+        while (true) {
+            val current = awaitDeletion(receipt)
+            if (current == DeletionStatus.PURGED || current == DeletionStatus.PURGE_FAILED) return current
+            stopSignal?.check()
+            if (deadline.isExpired(monotonicClock)) return current
+            try {
+                Thread.sleep(10)
+            } catch (interrupted: InterruptedException) {
+                Thread.currentThread().interrupt()
+                throw IdentityError(IdentityErrorCode.CANCELLED)
+            }
+        }
     }
 
     override fun close() {
@@ -269,12 +288,14 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
     }
 
     companion object {
-        fun open(context: Context, storeName: String, identityStore: IdentityStore, keys: IdentityKeyProvider, buildIndex: GalleryIndexBuilder): IndexStore {
+        fun open(context: Context, storeName: String, identityStore: IdentityStore, keys: IdentityKeyProvider,
+            monotonicClock: IdentityMonotonicClock = SystemIdentityMonotonicClock,
+            buildIndex: GalleryIndexBuilder): IndexStore {
             token(storeName); if (storeName.length > 64) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
             val base = context.noBackupFilesDir.toPath().also { Files.createDirectories(it) }.toRealPath()
             val root = base.resolve("ondevice-index-$storeName"); Files.createDirectories(root)
             if (!root.toRealPath().startsWith(base)) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
-            return IndexStore(root, identityStore, keys, buildIndex)
+            return IndexStore(root, identityStore, keys, monotonicClock, buildIndex)
         }
     }
 }

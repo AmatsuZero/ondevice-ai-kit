@@ -8,6 +8,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicReference
 import javax.crypto.SecretKey
 import javax.crypto.spec.SecretKeySpec
 import kotlin.test.AfterTest
@@ -46,6 +47,97 @@ class IndexStoreTest {
             assertEquals(receipt, reopened.deleteGallery(first, f.owner))
             assertEquals(IdentityErrorCode.GALLERY_REVISION_GONE, assertFailsWith<IdentityError> { reopened.acquireIndexReadLease(first, f.grant) }.code)
         }
+        f.identity.close()
+    }
+
+    @Test fun awaitDeletionDeadlineCancellationAndLeaseReleaseUseCommittedFacts() {
+        val f = fixture(); val clock = MutableIndexMono()
+        val index = IndexStore(f.indexRoot, f.identity, f.keys, clock) { _, _ -> byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
+        builder.addTemplate(f.template, f.grant)
+        val ref = builder.publish()
+        val lease = index.acquireIndexReadLease(ref, f.grant)
+        val receipt = index.deleteGallery(ref, f.owner)
+        val journal = f.indexRoot.resolve("identity-journal-index.bin")
+        val committed = Files.readAllBytes(journal)
+
+        val deadline = IdentityDeadline(clock, 10)
+        clock.now = 11
+        assertEquals(DeletionStatus.PURGE_PENDING, index.awaitDeletion(receipt, deadline))
+        assertTrue(committed.contentEquals(Files.readAllBytes(journal)), "deadline observation performed cleanup I/O")
+        val cancelled = IdentityStopSignal().also { it.requestStop(IdentityStopReason.CANCELLED) }
+        assertEquals(IdentityErrorCode.CANCELLED,
+            assertFailsWith<IdentityError> { index.awaitDeletion(receipt, IdentityDeadline(clock, 10), cancelled) }.code)
+
+        val waiting = Executors.newSingleThreadExecutor()
+        try {
+            val started = CountDownLatch(1); val caught = CountDownLatch(1)
+            val cancellation = AtomicReference<IdentityErrorCode>()
+            val interrupted = AtomicBoolean(false)
+            val interruptedObservation = waiting.submit<DeletionStatus> {
+                started.countDown()
+                try { index.awaitDeletion(receipt, IdentityDeadline(clock, 1_000_000_000)) }
+                catch (error: IdentityError) {
+                    cancellation.set(error.code)
+                    interrupted.set(Thread.currentThread().isInterrupted)
+                    caught.countDown()
+                    throw error
+                }
+            }
+            assertTrue(started.await(1, TimeUnit.SECONDS))
+            Thread.sleep(20)
+            interruptedObservation.cancel(true)
+            assertTrue(caught.await(1, TimeUnit.SECONDS))
+            assertEquals(IdentityErrorCode.CANCELLED, cancellation.get())
+            assertTrue(interrupted.get())
+            assertEquals(DeletionStatus.PURGE_PENDING, index.awaitDeletion(receipt))
+            val observation = waiting.submit<DeletionStatus> {
+                index.awaitDeletion(receipt, IdentityDeadline(clock, 1_000_000_000))
+            }
+            Thread.sleep(20)
+            lease.close()
+            assertEquals(DeletionStatus.PURGED, observation.get(2, TimeUnit.SECONDS))
+        } finally {
+            lease.close(); waiting.shutdownNow(); assertTrue(waiting.awaitTermination(2, TimeUnit.SECONDS))
+            index.close(); f.identity.close()
+        }
+    }
+
+    @Test fun awaitDeletionRejectsClosingStoreWhileLeaseStillOwnsWriter() {
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
+        builder.addTemplate(f.template, f.grant); val ref = builder.publish()
+        val lease = index.acquireIndexReadLease(ref, f.grant)
+        val receipt = index.deleteGallery(ref, f.owner)
+        val closing = CountDownLatch(1)
+        // Already-stopped leases deliver registration immediately, so use a
+        // separate live lineage to observe close's stop admission.
+        val other = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
+        other.addTemplate(f.template, f.grant); val live = index.acquireIndexReadLease(other.publish(), f.grant)
+        val registration = live.registerStopHandler { closing.countDown() }
+        val executor = Executors.newSingleThreadExecutor()
+        val close = executor.submit { index.close() }
+        try {
+            assertTrue(closing.await(1, TimeUnit.SECONDS))
+            assertEquals(IdentityErrorCode.CLOSED, assertFailsWith<IdentityError> { index.awaitDeletion(receipt) }.code)
+        } finally {
+            lease.close(); live.close(); registration.close(); close.get(2, TimeUnit.SECONDS)
+            executor.shutdownNow(); index.close(); f.identity.close()
+        }
+    }
+
+    @Test fun awaitDeletionAfterCloseReportsClosedWithoutCleanup() {
+        val f = fixture(); val clock = MutableIndexMono()
+        val index = IndexStore(f.indexRoot, f.identity, f.keys, clock) { _, _ -> byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
+        builder.addTemplate(f.template, f.grant)
+        val ref = builder.publish()
+        val receipt = index.deleteGallery(ref, f.owner)
+        index.close()
+        assertEquals(IdentityErrorCode.CLOSED,
+            assertFailsWith<IdentityError> {
+                index.awaitDeletion(receipt, IdentityDeadline(clock, 10))
+            }.code)
         f.identity.close()
     }
 
@@ -446,4 +538,8 @@ private class IndexKeys : IdentityKeyProvider {
         return SecretKeySpec(ByteArray(32).also(SecureRandom()::nextBytes), "AES").also { keys[id] = it }
     }
     @Synchronized override fun deleteKey(id: String) { keys.remove(id) }
+}
+
+private class MutableIndexMono(var now: Long = 1) : IdentityMonotonicClock {
+    override val nowNanos get() = now
 }

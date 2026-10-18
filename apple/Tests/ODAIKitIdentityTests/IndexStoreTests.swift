@@ -476,7 +476,86 @@ final class IndexStoreTests: XCTestCase {
         await reopened.close(); try await context.identity.close()
     }
 
-    private func context(buildIndex: @escaping GalleryIndexBuilder = { _, _ in Data([1]) }) async throws -> IndexTestContext {
+    func testDeletionDeadlineReturnsPendingWithoutUndoingDeletion() async throws {
+        let clock = IndexWaitClock()
+        let context = try await context(monotonicClock: clock)
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let ref = try await builder.publish()
+        let lease = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        let receipt = try await context.index.deleteGallery(ref, ownership: context.owner)
+        let deadline = try IdentityDeadline(clock: clock, durationNanos: 1)
+        clock.advance()
+        let journal = context.indexRoot.appendingPathComponent("identity-journal-index.bin")
+        let committed = try Data(contentsOf: journal)
+        let status = try await context.index.awaitDeletion(receipt, deadline: deadline)
+        XCTAssertEqual(status, .purgePending)
+        XCTAssertEqual(try Data(contentsOf: journal), committed, "observation performed cleanup I/O")
+        XCTAssertThrowsError(try lease.snapshot()) { XCTAssertEqual(($0 as? IdentityError)?.code, .authorizationRevoked) }
+        await lease.close()
+        let final = try await context.index.awaitDeletion(receipt, deadline: deadline)
+        XCTAssertEqual(final, .purged)
+        await context.index.close(); try await context.identity.close()
+    }
+
+    func testDeletionWaitYieldsSoReadLeaseCanFinish() async throws {
+        let clock = IndexWaitClock()
+        let context = try await context(monotonicClock: clock)
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let ref = try await builder.publish()
+        let lease = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        let receipt = try await context.index.deleteGallery(ref, ownership: context.owner)
+        let deadline = try IdentityDeadline(clock: clock, durationNanos: 1_000_000_000)
+        let observing = expectation(description: "deadline read while waiting")
+        clock.onNextRead { observing.fulfill() }
+        let waiting = Task { try await context.index.awaitDeletion(receipt, deadline: deadline) }
+        await fulfillment(of: [observing], timeout: 1)
+        await lease.close()
+        let status = try await waiting.value
+        XCTAssertEqual(status, .purged)
+        await context.index.close(); try await context.identity.close()
+    }
+
+    func testCancelledDeletionWaitPreservesCommittedReceipt() async throws {
+        let clock = IndexWaitClock()
+        let context = try await context(monotonicClock: clock)
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let ref = try await builder.publish()
+        let lease = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        let receipt = try await context.index.deleteGallery(ref, ownership: context.owner)
+        let deadline = try IdentityDeadline(clock: clock, durationNanos: 1_000_000_000)
+        let signal = IdentityStopSignal(); signal.requestStop(.cancelled)
+        do { _ = try await context.index.awaitDeletion(receipt, deadline: deadline, stopSignal: signal); XCTFail("cancelled wait returned") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .cancelled) }
+        let observing = expectation(description: "task entered wait")
+        clock.onNextRead { observing.fulfill() }
+        let waiting = Task { try await context.index.awaitDeletion(receipt, deadline: deadline) }
+        await fulfillment(of: [observing], timeout: 1)
+        waiting.cancel()
+        do { _ = try await waiting.value; XCTFail("task cancellation ignored") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .cancelled) }
+        let repeated = try await context.index.deleteGallery(ref, ownership: context.owner)
+        XCTAssertEqual(repeated, receipt)
+        let pending = try await context.index.awaitDeletion(receipt)
+        XCTAssertEqual(pending, .purgePending)
+        await lease.close(); await context.index.close(); try await context.identity.close()
+    }
+
+    func testDeletionObservationRejectsClosedStore() async throws {
+        let context = try await context()
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let ref = try await builder.publish()
+        let receipt = try await context.index.deleteGallery(ref, ownership: context.owner)
+        await context.index.close()
+        do { _ = try await context.index.awaitDeletion(receipt); XCTFail("closed store returned status") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+        try await context.identity.close()
+    }
+
+    private func context(monotonicClock: any IdentityMonotonicClock = SystemIdentityMonotonicClock(), buildIndex: @escaping GalleryIndexBuilder = { _, _ in Data([1]) }) async throws -> IndexTestContext {
         let keys = IndexTestKeys(); let authority = IndexTestAuthority()
         let identity = try IdentityStore(root: temporaryRoot(), purpose: "identity", authorizationProvider: authority,
             keyProvider: keys, wallClock: IndexClock(), monotonicClock: IndexMono())
@@ -485,7 +564,7 @@ final class IndexStoreTests: XCTestCase {
             options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "q", revision: "1"), backend: FixtureIdentityBackend.system())
         let template = try XCTUnwrap(result.templateRef)
         let indexRoot = temporaryRoot()
-        let index = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys, buildIndex: buildIndex)
+        let index = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys, monotonicClock: monotonicClock, buildIndex: buildIndex)
         return try IndexTestContext(index: index, indexRoot: indexRoot, identity: identity, keys: keys, authority: authority, grant: grant, template: template,
             policy: identificationPolicy(template), owner: OwnershipAuthorization(storeId: identity.storeId, evidenceRef: "owner"))
     }
@@ -553,4 +632,15 @@ private final class WeakIndexStore { weak var value: IndexStore? }
 private final class IndexBuildCounter: @unchecked Sendable {
     private let lock = NSLock(); private var value: UInt8 = 0
     func next() -> UInt8 { lock.lock(); defer { lock.unlock() }; value += 1; return value }
+}
+
+private final class IndexWaitClock: IdentityMonotonicClock, @unchecked Sendable {
+    private let lock = NSLock(); private var value: Int64 = 1
+    private var callback: (@Sendable () -> Void)?
+    var nowNanos: Int64 {
+        lock.lock(); let result = value; let action = callback; callback = nil; lock.unlock()
+        action?(); return result
+    }
+    func advance() { lock.lock(); value += 1; lock.unlock() }
+    func onNextRead(_ action: @escaping @Sendable () -> Void) { lock.lock(); callback = action; lock.unlock() }
 }

@@ -7,6 +7,7 @@ public actor IndexStore {
     public nonisolated let storeId: String
     private let catalog: GalleryCatalog
     private let identityStore: IdentityStore
+    private let monotonicClock: any IdentityMonotonicClock
     private let buildIndex: GalleryIndexBuilder
     private var builders: [UUID: BuilderState] = [:]
     private var leases: [String: Int] = [:]
@@ -42,9 +43,10 @@ public actor IndexStore {
     }
 
     public init(root: URL, identityStore: IdentityStore, keyProvider: any IdentityKeyProvider,
+                monotonicClock: any IdentityMonotonicClock = SystemIdentityMonotonicClock(),
                 buildIndex: @escaping GalleryIndexBuilder) throws {
         let catalog = try GalleryCatalog(root: root, identityStoreId: identityStore.storeId, keyProvider: keyProvider)
-        self.storeId = catalog.storeId; self.catalog = catalog; self.identityStore = identityStore; self.buildIndex = buildIndex
+        self.storeId = catalog.storeId; self.catalog = catalog; self.identityStore = identityStore; self.monotonicClock = monotonicClock; self.buildIndex = buildIndex
         for (lineageId, receiptId) in try catalog.tombstoneReceipts() {
             self.deletedLineages[lineageId] = try DeletionReceipt(id: receiptId, storeId: catalog.storeId, galleryId: lineageId)
             try catalog.removeLineage(lineageId)
@@ -52,8 +54,9 @@ public actor IndexStore {
     }
 
     public static func open(root: URL, identityStore: IdentityStore, keyProvider: any IdentityKeyProvider,
+                            monotonicClock: any IdentityMonotonicClock = SystemIdentityMonotonicClock(),
                             buildIndex: @escaping GalleryIndexBuilder) async throws -> IndexStore {
-        try IndexStore(root: root, identityStore: identityStore, keyProvider: keyProvider, buildIndex: buildIndex)
+        try IndexStore(root: root, identityStore: identityStore, keyProvider: keyProvider, monotonicClock: monotonicClock, buildIndex: buildIndex)
     }
 
     public func createGalleryBuilder(baseGalleryRef: GalleryRef? = nil, grant: AuthorizationGrant,
@@ -235,8 +238,23 @@ public actor IndexStore {
     fileprivate func builderClose(_ id: UUID) { cancelBuilder(id) }
 
     public func awaitDeletion(_ receipt: DeletionReceipt) throws -> DeletionStatus {
+        try requireOpen()
         guard let galleryId = receipt.galleryId, receipt.storeId == storeId, deletedLineages[galleryId] == receipt else { throw IdentityError(.invalidInput) }
         return try catalog.hasSnapshots(lineageId: galleryId) ? .purgePending : .purged
+    }
+
+    /// Observes deletion without retrying cleanup; cancellation only ends this wait.
+    public func awaitDeletion(_ receipt: DeletionReceipt, deadline: IdentityDeadline,
+                              stopSignal: IdentityStopSignal? = nil) async throws -> DeletionStatus {
+        while true {
+            let status = try awaitDeletion(receipt)
+            if status == .purged || status == .purgeFailed { return status }
+            if Task.isCancelled { throw IdentityError(.cancelled) }
+            try stopSignal?.check()
+            if deadline.isExpired(clock: monotonicClock) { return status }
+            do { try await Task.sleep(nanoseconds: 10_000_000) }
+            catch is CancellationError { throw IdentityError(.cancelled) }
+        }
     }
 
     private func admitMutation(grant: AuthorizationGrant, members: [GallerySnapshotMember], space: EmbeddingSpaceId) async throws {
