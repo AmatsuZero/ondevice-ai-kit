@@ -771,6 +771,157 @@ class IdentityStoreTest {
         first.close(); second.close()
     }
 
+    @Test fun deleteCandidateIsolatesCandidatesAndPurgesEveryOwnedTemplate() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val firstGrant = grant(); val secondGrant = grant("g2")
+        val first = store.createCandidate(firstGrant); val second = store.createCandidate(secondGrant)
+        val firstTemplate = requireNotNull(store.enroll(IdentityProbe("first-1", listOf(1f, 2f)), first, firstGrant,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val secondFirst = requireNotNull(store.enroll(IdentityProbe("first-2", listOf(1f, 2f)), first, secondGrant,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val otherTemplate = requireNotNull(store.enroll(IdentityProbe("other", listOf(1f, 2f)), second, secondGrant,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+
+        val receipt = store.deleteCandidate(first, OwnershipAuthorization(store.storeId, "owner"))
+
+        assertEquals(first.id, receipt.candidateId); assertNull(receipt.templateId)
+        assertEquals(DeletionStatus.PURGED, store.awaitDeletion(receipt))
+        assertCode(IdentityErrorCode.CANDIDATE_REVOKED) { store.recordedCandidateGrant(first) }
+        assertCode(IdentityErrorCode.TEMPLATE_REVOKED) { store.recordedTemplateCandidate(firstTemplate) }
+        assertCode(IdentityErrorCode.TEMPLATE_REVOKED) { store.recordedTemplateCandidate(secondFirst) }
+        assertEquals(second, store.recordedTemplateCandidate(otherTemplate))
+        store.close()
+    }
+
+    @Test fun deleteEmptyCandidatePersistsTombstoneAndDeniesEnrollmentAfterRestart() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val receipt = store.deleteCandidate(candidate, OwnershipAuthorization(store.storeId, "owner"))
+
+        assertEquals(candidate.id, receipt.candidateId); assertNull(receipt.templateId)
+        assertEquals(DeletionStatus.PURGED, store.awaitDeletion(receipt))
+        assertCode(IdentityErrorCode.CANDIDATE_REVOKED) {
+            store.enroll(IdentityProbe("after-delete", listOf(1f, 2f)), candidate, authorization,
+                EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system())
+        }
+        store.close()
+        val reopened = store(root, keys, provider)
+        assertEquals(receipt, reopened.deleteCandidate(candidate, OwnershipAuthorization(reopened.storeId, "owner")))
+        assertEquals(DeletionStatus.PURGED, reopened.awaitDeletion(receipt)); reopened.close()
+    }
+
+    @Test fun candidateDeletionReceiptWireIsStrictAndStoreBound() {
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority()); val candidate = store.createCandidate(grant())
+        val receipt = store.deleteCandidate(candidate, OwnershipAuthorization(store.storeId, "owner"))
+        assertEquals(receipt, DeletionReceipt.decodeJSON(receipt.canonicalJSON()))
+        assertCode(IdentityErrorCode.INVALID_INPUT) {
+            DeletionReceipt.decodeJSON("{\"id\":\"r\",\"storeId\":\"s\",\"templateId\":\"t\",\"candidateId\":\"c\"}")
+        }
+        assertCode(IdentityErrorCode.INVALID_INPUT) { store.awaitDeletion(receipt.copy(candidateId = "forged")) }
+        assertCode(IdentityErrorCode.INVALID_INPUT) { store.awaitDeletion(receipt.copy(storeId = "other")) }
+        store.close()
+    }
+
+    @Test fun repeatedCandidateDeletionRevalidatesOwnershipAndPreservesReceiptAfterRestart() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val candidate = store.createCandidate(grant()); val owner = OwnershipAuthorization(store.storeId, "owner")
+        assertCode(IdentityErrorCode.AUTHORIZATION_REQUIRED) { store.deleteCandidate(candidate, OwnershipAuthorization("wrong", "owner")) }
+        provider.denyOwnership = true
+        assertCode(IdentityErrorCode.AUTHORIZATION_REQUIRED) { store.deleteCandidate(candidate, owner) }
+        provider.denyOwnership = false
+        val receipt = store.deleteCandidate(candidate, owner)
+        provider.denyOwnership = true
+        assertCode(IdentityErrorCode.AUTHORIZATION_REQUIRED) { store.deleteCandidate(candidate, owner) }
+        provider.denyOwnership = false; store.close()
+        val reopened = store(root, keys, provider)
+        assertEquals(receipt, reopened.deleteCandidate(candidate, OwnershipAuthorization(reopened.storeId, "owner")))
+        assertEquals(DeletionStatus.PURGED, reopened.awaitDeletion(receipt)); reopened.close()
+    }
+
+    @Test fun candidateDeletionWaitsForEveryHeldLeaseAndSharesPriorTemplateReceipt() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val first = requireNotNull(store.enroll(IdentityProbe("first", listOf(1f, 2f)), candidate, authorization,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val second = requireNotNull(store.enroll(IdentityProbe("second", listOf(1f, 2f)), candidate, grant("g2"),
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val owner = OwnershipAuthorization(store.storeId, "owner")
+        val prior = store.deleteTemplate(first, owner)
+        val verification = grantWithScope("verify", IdentityScope.VERIFICATION)
+        val firstLease = store.acquireTemplateLease(second, verification, IdentityScope.VERIFICATION, second.embeddingSpaceId)
+        val lastLease = store.acquireTemplateLease(second, verification, IdentityScope.VERIFICATION, second.embeddingSpaceId)
+        val receipt = store.deleteCandidate(candidate, owner)
+
+        assertNotEquals(prior.id, receipt.id); assertEquals(DeletionStatus.PURGE_PENDING, store.awaitDeletion(receipt))
+        firstLease.close(); assertEquals(DeletionStatus.PURGE_PENDING, store.awaitDeletion(receipt))
+        lastLease.close(); assertEquals(DeletionStatus.PURGED, store.awaitDeletion(receipt))
+        assertEquals(prior, store.deleteTemplate(first, owner)); store.close()
+    }
+
+    @Test fun failedCandidatePurgeRemainsRetryableAfterRestart() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, authorization,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system())
+        keys.rejectTemplateDeletion = true
+        val receipt = store.deleteCandidate(candidate, OwnershipAuthorization(store.storeId, "owner"))
+        assertEquals(DeletionStatus.PURGE_FAILED, store.awaitDeletion(receipt)); store.close()
+        keys.rejectTemplateDeletion = false
+        val reopened = store(root, keys, provider)
+        assertEquals(DeletionStatus.PURGED, reopened.awaitDeletion(receipt)); reopened.close()
+    }
+
+    @Test fun candidateDeletionStopsInFlightEnrollmentAndSuppressesPublication() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization); val backend = BlockingEnrollmentBackend()
+        val executor = Executors.newSingleThreadExecutor()
+        try {
+            val job = executor.submit(Callable {
+                runCatching { store.enroll(IdentityProbe("blocked", listOf(1f, 2f)), candidate, authorization,
+                    EnrollmentOptions(0.8, "host.quality", "q1"), backend) }.exceptionOrNull()
+            })
+            assertTrue(backend.started.await(2, TimeUnit.SECONDS))
+            store.deleteCandidate(candidate, OwnershipAuthorization(store.storeId, "owner"))
+            assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED, (job.get(2, TimeUnit.SECONDS) as? IdentityError)?.code)
+            assertEquals(0, root.toFile().listFiles()!!.count { it.name.startsWith("identity-template-") })
+        } finally { backend.release.countDown(); executor.shutdownNow(); store.close() }
+    }
+
+    @Test fun committedCandidateTombstoneSurvivesLaterCreateRevokeEnrollAndLeaseCommits() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val deletedGrant = grant(); val deleted = store.createCandidate(deletedGrant)
+        val deletion = store.deleteCandidate(deleted, OwnershipAuthorization(store.storeId, "owner"))
+        val otherGrant = grant("other", domain = "tenant.other")
+        val other = store.createCandidate(otherGrant)
+        val template = requireNotNull(store.enroll(IdentityProbe("other", listOf(1f, 2f)), other, otherGrant,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val verification = grantWithScope("verify", IdentityScope.VERIFICATION, domain = "tenant.other")
+        store.acquireTemplateLease(template, verification, IdentityScope.VERIFICATION, template.embeddingSpaceId).close()
+        store.revokeGrant("other", OwnershipAuthorization(store.storeId, "owner")); store.close()
+        val reopened = store(root, keys, provider)
+        assertEquals(deletion, reopened.deleteCandidate(deleted, OwnershipAuthorization(reopened.storeId, "owner")))
+        assertEquals(DeletionStatus.PURGED, reopened.awaitDeletion(deletion))
+        assertCode(IdentityErrorCode.CANDIDATE_REVOKED) { reopened.recordedCandidateGrant(deleted) }
+        reopened.close()
+    }
+
+    @Test fun restoreRejectsCandidateDeletionMissingTemplateFactBeforeRecoveryIO() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val template = requireNotNull(store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, authorization,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        store.close()
+        IdentityJournal(root, "store", keys).use { journal ->
+            val fields = IdentityContractJSON.parse(requireNotNull(journal.read()).decodeToString()).toMutableMap()
+            fields["version"] = 5
+            fields["deletions"] = emptyMap<String, Any?>()
+            fields["candidateDeletions"] = mapOf(candidate.id to mapOf("receiptId" to "candidate-receipt", "templateIds" to listOf(template.id)))
+            journal.commit(IdentityContractJSON.encode(fields).encodeToByteArray())
+        }
+        assertCode(IdentityErrorCode.INVALID_INPUT) { store(root, keys, provider).use { } }
+        assertTrue(Files.exists(root.resolve("identity-template-${template.id}.bin")))
+    }
+
     @Test fun deleteTemplateWaitsForLeaseThenPurgesWhenLeaseCloses() {
         val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
         val candidate = store.createCandidate(grant())
@@ -926,6 +1077,26 @@ class IdentityStoreTest {
         val count = keys.templateDeletions
         assertCode(IdentityErrorCode.INVALID_INPUT) { store(root, keys, provider) }
         assertEquals(count, keys.templateDeletions)
+    }
+
+    @Test fun candidateDeletionStopsTicketsBeforePurgeAndBeforePurgeCommitFailure() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val candidate = store.createCandidate(grant())
+        store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, grant(), EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system())
+        val ticket = store.beginOperation(candidate, grantWithScope("verify", IdentityScope.VERIFICATION), IdentityScope.VERIFICATION)
+        val stoppedAtPurge = AtomicReference<IdentityErrorCode?>()
+        keys.onTemplateDelete = {
+            try { ticket.stopSignal.check() } catch (error: IdentityError) { stoppedAtPurge.set(error.code) }
+            keys.rejectJournal = true
+        }
+        assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { store.deleteCandidate(candidate, OwnershipAuthorization(store.storeId, "owner")) }
+        assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED, stoppedAtPurge.get())
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.finishOperation(ticket, IdentityError(IdentityErrorCode.BACKEND_UNAVAILABLE)) }
+        keys.onTemplateDelete = null; keys.rejectJournal = false
+        store.close()
+        val reopened = store(root, keys, provider)
+        assertCode(IdentityErrorCode.CANDIDATE_REVOKED) { reopened.recordedCandidateGrant(candidate) }
+        reopened.close()
     }
 
     private fun store(root: java.nio.file.Path, keys: StoreKeys, provider: StoreAuthority) =

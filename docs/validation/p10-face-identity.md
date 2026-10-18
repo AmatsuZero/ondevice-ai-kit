@@ -85,6 +85,13 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 最新单元测试 Swift 116/116、Android 121/121 及 Android identity lintDebug；覆盖多 lease、清理失败恢复、伪造/独立所有权、未提交逻辑删除不清理、物理清理后提交失败、全元数据验证先于恢复 I/O、旧 writer 回调隔离。日志 `/tmp/odai-p10-deletion-final-swift.log`、`/tmp/odai-p10-deletion-android-reentry-final.log`。
 - 全 Apple 包 `/tmp/odai-p10-deletion-swift-full.log` 身份模块 116 项通过；仍只有既有 `VisionFaceDetectorTests.testBlankImageUsesRealVisionAndReturnsSuccessfulEmptyResult`（Vision Code 9）失败。未宣称全包通过，未跳过该测试。
 
+### candidate 删除当前边界
+
+- v5 元数据持久化 candidate tombstone 和固定模板目标集；空 candidate 也保持删除状态。`DeletionReceipt` 严格区分 template/candidate 目标，重复请求重验独立 ownership，旧 template receipt 继续查询共享 purge 状态。
+- 删除事务先提交全部 tombstone 与缺失的逐模板清理事实，再在门外停止该 candidate 的在途 ticket，随后尝试精确 purge。持有 lease 时保持 pending；清理失败可重启重试，其他 candidate 不受影响。
+- Swift 审查修复了全局 receipt ID 冲突分配及未排序目标集的恢复拒绝，回归先 RED 再 GREEN。最新 identity 单元测试 Swift 125/125、Android 131/131 及 lintDebug 通过；日志 `/tmp/odai-p10-candidate-review-final-{swift,android}.log`。
+- grant/domain 物理清理、精确模板 ticket、带 deadline/取消的等待、完整退休 drain 和真实平台 provider 验证仍待完成。全 Apple 包仍单列既有 Vision Code 9 环境失败，不宣称全包通过。
+
 ### 停止信号当前边界
 
 - 每次后端调用可接收独立 stop signal；原生适配器可登记实际底层 stop 回调。

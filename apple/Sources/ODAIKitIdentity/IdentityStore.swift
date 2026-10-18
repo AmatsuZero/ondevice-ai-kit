@@ -14,6 +14,7 @@ public actor IdentityStore {
     private var revocations: [String: IdentityRevocation]
     private var templates: [String: IdentityTemplateRecord] = [:]
     private var deletions: [String: IdentityTemplateDeletion] = [:]
+    private var candidateDeletions: [String: IdentityCandidateDeletion] = [:]
     private var stages: Set<String> = []
     private var templateLeases: [String: Int] = [:]
     private var closed = false
@@ -43,9 +44,11 @@ public actor IdentityStore {
                     } else {
                         if let v3 = try? identityObject(json, keys: legacyKeys.union(["revocations", "templates", "stages"])), try identityInteger(v3, "version") == 3 {
                             fields = v3
+                        } else if let v4 = try? identityObject(json, keys: legacyKeys.union(["revocations", "templates", "stages", "deletions"])), try identityInteger(v4, "version") == 4 {
+                            fields = v4
                         } else {
-                            fields = try identityObject(json, keys: legacyKeys.union(["revocations", "templates", "stages", "deletions"]))
-                            guard try identityInteger(fields, "version") == 4 else { throw IdentityError(.invalidInput) }
+                            fields = try identityObject(json, keys: legacyKeys.union(["revocations", "templates", "stages", "deletions", "candidateDeletions"]))
+                            guard try identityInteger(fields, "version") == 5 else { throw IdentityError(.invalidInput) }
                         }
                     }
                 }
@@ -83,8 +86,9 @@ public actor IdentityStore {
                         stages.insert(id)
                     }
                 }
+                let version = try identityInteger(fields, "version")
                 var deletions: [String: IdentityTemplateDeletion] = [:]
-                if try identityInteger(fields, "version") == 4 {
+                if version >= 4 {
                     guard let records = fields["deletions"] as? [String: [String: Any]] else { throw IdentityError(.invalidInput) }
                     var receipts = Set<String>()
                     for (templateId, value) in records {
@@ -94,24 +98,37 @@ public actor IdentityStore {
                         deletions[templateId] = deletion
                     }
                 }
+                var candidateDeletions: [String: IdentityCandidateDeletion] = [:]
+                if version >= 5 {
+                    guard let records = fields["candidateDeletions"] as? [String: [String: Any]] else { throw IdentityError(.invalidInput) }
+                    var receipts = Set(deletions.values.map(\.receiptId))
+                    receipts.formUnion(revocations.keys)
+                    for (candidateId, value) in records {
+                        let deletion = try IdentityCandidateDeletion.restore(value)
+                        guard candidates[candidateId] != nil, receipts.insert(deletion.receiptId).inserted,
+                              deletion.templateIds == Set(templates.values.filter { $0.candidateId == candidateId }.map { $0.ref.id }),
+                              deletion.templateIds.allSatisfy({ deletions[$0] != nil }) else { throw IdentityError(.invalidInput) }
+                        candidateDeletions[candidateId] = deletion
+                    }
+                }
                 // All metadata is validated before the first recovery side effect.
                 let payload = try IdentityTemplatePayload(root: root, storeId: id, provider: keyProvider)
                 for stage in stages { try payload.remove(recordId: stage) }
                 if !stages.isEmpty {
-                    try journal.commit(Self.encode(storeId: id, authorization: auth, candidates: candidates, revocations: revocations, templates: templates, deletions: deletions))
+                    try journal.commit(Self.encode(storeId: id, authorization: auth, candidates: candidates, revocations: revocations, templates: templates, deletions: deletions, candidateDeletions: candidateDeletions))
                 }
                 for (templateId, deletion) in deletions where deletion.status != .purged {
                     let status = Self.removePayload(templateId, payload: payload)
                     var next = deletions; next[templateId] = deletion.withStatus(status)
-                    try journal.commit(Self.encode(storeId: id, authorization: auth, candidates: candidates, revocations: revocations, templates: templates, deletions: next))
+                    try journal.commit(Self.encode(storeId: id, authorization: auth, candidates: candidates, revocations: revocations, templates: templates, deletions: next, candidateDeletions: candidateDeletions))
                     deletions = next
                 }
-                self.payload = payload; self.templates = templates; self.deletions = deletions
+                self.payload = payload; self.templates = templates; self.deletions = deletions; self.candidateDeletions = candidateDeletions
                 self.storeId = id; self.authorization = auth; self.candidates = candidates; self.revocations = revocations
             } else {
                 let id = UUID().uuidString.lowercased()
-                try journal.commit(Self.encode(storeId: id, authorization: initial, candidates: [:], revocations: [:]))
-                self.storeId = id; self.authorization = initial; self.candidates = [:]; self.revocations = [:]
+                try journal.commit(Self.encode(storeId: id, authorization: initial, candidates: [:], revocations: [:], candidateDeletions: [:]))
+                self.storeId = id; self.authorization = initial; self.candidates = [:]; self.revocations = [:]; self.candidateDeletions = [:]
                 self.payload = try IdentityTemplatePayload(root: root, storeId: id, provider: keyProvider)
             }
         } catch { try? journal.close(); throw error }
@@ -124,7 +141,7 @@ public actor IdentityStore {
         let auth = try authorization.admitting(grant, scope: .enrollment, provider: provider, nowMillis: wallClock.nowMillis)
         let ref = try CandidateRef(id: UUID().uuidString.lowercased(), storeId: storeId)
         var next = candidates; next[ref.id] = grant.grantId
-        let bytes = try Self.encode(storeId: storeId, authorization: auth, candidates: next, revocations: revocations, templates: templates, stages: stages, deletions: deletions)
+        let bytes = try Self.encode(storeId: storeId, authorization: auth, candidates: next, revocations: revocations, templates: templates, stages: stages, deletions: deletions, candidateDeletions: candidateDeletions)
         _ = try auth.admitting(grant, scope: .enrollment, provider: provider, nowMillis: wallClock.nowMillis)
         do { try journal.commit(bytes) }
         catch { closed = true; throw error }
@@ -138,7 +155,8 @@ public actor IdentityStore {
         guard !closed else { throw IdentityError(.closed) }
         guard ref.storeId == storeId, let grantId = candidates[ref.id],
               let grant = authorization.recordedGrant(grantId) else { throw IdentityError(.candidateNotFound) }
-        guard grant.authorizationEpoch == authorization.highestEpoch(domain: grant.revocationDomainId),
+        guard candidateDeletions[ref.id] == nil,
+              grant.authorizationEpoch == authorization.highestEpoch(domain: grant.revocationDomainId),
               !revocations.values.contains(where: { $0.candidateIds.contains(ref.id) }) else { throw IdentityError(.candidateRevoked) }
         return grant
     }
@@ -155,11 +173,11 @@ public actor IdentityStore {
         let epoch = nextAuthorization.highestEpoch(domain: grant.revocationDomainId)
         let alreadyCovered = revocations.values.reduce(into: Set<String>()) { $0.formUnion($1.grantIds) }
         let targets = nextAuthorization.recordedGrantIDs(domain: grant.revocationDomainId, before: epoch).subtracting(alreadyCovered)
-        let receipt = try RevocationReceipt(id: UUID().uuidString.lowercased(), storeId: storeId)
+        let receipt = try RevocationReceipt(id: newReceiptID(), storeId: storeId)
         let record = IdentityRevocation(domainId: grant.revocationDomainId, epoch: epoch, grantIds: targets,
                                         candidateIds: Set(candidates.filter { targets.contains($0.value) }.keys))
         var next = revocations; next[receipt.id] = record
-        let bytes = try Self.encode(storeId: storeId, authorization: nextAuthorization, candidates: candidates, revocations: next, templates: templates, stages: stages, deletions: deletions)
+        let bytes = try Self.encode(storeId: storeId, authorization: nextAuthorization, candidates: candidates, revocations: next, templates: templates, stages: stages, deletions: deletions, candidateDeletions: candidateDeletions)
         do { try journal.commit(bytes) }
         catch { closed = true; throw error }
         authorization = nextAuthorization; revocations = next
@@ -184,7 +202,7 @@ public actor IdentityStore {
               membership.authorizationEpoch == grant.authorizationEpoch else { throw IdentityError(.authorizationRequired) }
         let next = try authorization.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
         if next != authorization {
-            let bytes = try Self.encode(storeId: storeId, authorization: next, candidates: candidates, revocations: revocations, templates: templates, stages: stages, deletions: deletions)
+            let bytes = try Self.encode(storeId: storeId, authorization: next, candidates: candidates, revocations: revocations, templates: templates, stages: stages, deletions: deletions, candidateDeletions: candidateDeletions)
             _ = try next.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
             do { try journal.commit(bytes) } catch { closed = true; throw error }
             authorization = next
@@ -257,7 +275,7 @@ public actor IdentityStore {
                 let pending = stages.union([issued.id])
                 do {
                     try journal.commit(Self.encode(storeId: storeId, authorization: authorization, candidates: candidates,
-                                                   revocations: revocations, templates: templates, stages: pending, deletions: deletions))
+                                                   revocations: revocations, templates: templates, stages: pending, deletions: deletions, candidateDeletions: candidateDeletions))
                     stages = pending
                     try payload.write(recordId: issued.id, embedding: embedding)
                     // Cancellation and expiry may occur during synchronous I/O.
@@ -267,7 +285,7 @@ public actor IdentityStore {
                     next[issued.id] = IdentityTemplateRecord(ref: issued, candidateId: ticket.candidate.id, grantId: ticket.grant.grantId)
                     let remaining = stages.subtracting([issued.id])
                     try journal.commit(Self.encode(storeId: storeId, authorization: authorization, candidates: candidates,
-                                                   revocations: revocations, templates: next, stages: remaining, deletions: deletions))
+                                                   revocations: revocations, templates: next, stages: remaining, deletions: deletions, candidateDeletions: candidateDeletions))
                     templates = next; stages = remaining; ref = issued
                 } catch {
                     // The durable manifest owns any partial file/key. Recovery
@@ -297,7 +315,8 @@ public actor IdentityStore {
         guard let record = templates[ref.id] else { throw IdentityError(.templateNotFound) }
         try ref.validate(against: record.ref)
         guard deletions[ref.id] == nil else { throw IdentityError(.templateRevoked) }
-        guard let grant = authorization.recordedGrant(record.grantId),
+        guard candidateDeletions[record.candidateId] == nil,
+              let grant = authorization.recordedGrant(record.grantId),
               grant.authorizationEpoch == authorization.highestEpoch(domain: grant.revocationDomainId),
               !revocations.values.contains(where: { $0.candidateIds.contains(record.candidateId) }) else { throw IdentityError(.templateRevoked) }
         return try CandidateRef(id: record.candidateId, storeId: storeId)
@@ -330,7 +349,7 @@ public actor IdentityStore {
         _ = try next.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
         if next != authorization {
             let bytes = try Self.encode(storeId: storeId, authorization: next, candidates: candidates,
-                                        revocations: revocations, templates: templates, stages: stages, deletions: deletions)
+                                        revocations: revocations, templates: templates, stages: stages, deletions: deletions, candidateDeletions: candidateDeletions)
             do { try journal.commit(bytes) } catch { closed = true; throw error }
             authorization = next
             _ = try authorization.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
@@ -351,7 +370,7 @@ public actor IdentityStore {
         if let existing = deletions[ref.id] {
             return try DeletionReceipt(id: existing.receiptId, storeId: storeId, templateId: ref.id)
         }
-        let receipt = try DeletionReceipt(id: UUID().uuidString.lowercased(), storeId: storeId, templateId: ref.id)
+        let receipt = try DeletionReceipt(id: newReceiptID(), storeId: storeId, templateId: ref.id)
         var next = deletions
         next[ref.id] = IdentityTemplateDeletion(receiptId: receipt.id, status: .purgePending)
         try commitDeletions(next)
@@ -359,18 +378,69 @@ public actor IdentityStore {
         return receipt
     }
 
+    public func deleteCandidate(_ candidate: CandidateRef, ownership: OwnershipAuthorization) async throws -> DeletionReceipt {
+        guard !closed else { throw IdentityError(.closed) }
+        try IdentityAuthorizationState.requireOwnership(ownership, storeId: storeId, provider: provider, nowMillis: wallClock.nowMillis)
+        guard candidate.storeId == storeId, candidates[candidate.id] != nil else { throw IdentityError(.candidateNotFound) }
+        if let existing = candidateDeletions[candidate.id] { return try DeletionReceipt(id: existing.receiptId, storeId: storeId, candidateId: candidate.id) }
+        let targetIds = Set(templates.values.filter { $0.candidateId == candidate.id }.map { $0.ref.id })
+        let receipt = try DeletionReceipt(id: newReceiptID(), storeId: storeId, candidateId: candidate.id)
+        var nextCandidates = candidateDeletions
+        nextCandidates[candidate.id] = IdentityCandidateDeletion(receiptId: receipt.id, templateIds: targetIds)
+        var nextTemplates = deletions
+        var reserved: Set<String> = [receipt.id]
+        for templateId in targetIds where nextTemplates[templateId] == nil {
+            let id = try newReceiptID(reserved: reserved)
+            reserved.insert(id)
+            nextTemplates[templateId] = IdentityTemplateDeletion(receiptId: id, status: .purgePending)
+        }
+        let bytes = try Self.encode(storeId: storeId, authorization: authorization, candidates: candidates, revocations: revocations,
+                                    templates: templates, stages: stages, deletions: nextTemplates, candidateDeletions: nextCandidates)
+        do { try journal.commit(bytes) } catch { closed = true; throw error }
+        deletions = nextTemplates; candidateDeletions = nextCandidates
+        var signals: [IdentityStopSignal] = []
+        for (operationId, operation) in operations where operation.ticket.candidate.id == candidate.id {
+            operations[operationId]?.terminal = .authorizationRevoked
+            signals.append(operation.ticket.stopSignal)
+        }
+        await Self.stop(signals, reason: .authorizationRevoked)
+        for templateId in targetIds { try purgeTemplate(templateId) }
+        return receipt
+    }
+
     /// Returns the current durable status. Deadline-bound waiting is a separate overload.
     public func awaitDeletion(_ receipt: DeletionReceipt) throws -> DeletionStatus {
         guard !closed else { throw IdentityError(.closed) }
-        guard receipt.storeId == storeId, let record = deletions[receipt.templateId], record.receiptId == receipt.id else {
-            throw IdentityError(.invalidInput)
+        guard receipt.storeId == storeId else { throw IdentityError(.invalidInput) }
+        if let templateId = receipt.templateId, let record = deletions[templateId], record.receiptId == receipt.id { return record.status }
+        if let candidateId = receipt.candidateId, let candidate = candidateDeletions[candidateId], candidate.receiptId == receipt.id {
+            let statuses = try candidate.templateIds.map { id -> DeletionStatus in
+                guard let record = deletions[id] else { throw IdentityError(.invalidInput) }
+                return record.status
+            }
+            if statuses.contains(.purgeFailed) { return .purgeFailed }
+            if statuses.allSatisfy({ $0 == .purged }) { return .purged }
+            return .purgePending
         }
-        return record.status
+        throw IdentityError(.invalidInput)
+    }
+
+    nonisolated static func allocateReceiptID(existing: Set<String>, generate: () -> String) throws -> String {
+        var id = generate()
+        while existing.contains(id) { id = generate() }
+        try identityToken(id)
+        return id
+    }
+
+    private func newReceiptID(reserved: Set<String> = []) throws -> String {
+        let existing = reserved.union(revocations.keys).union(deletions.values.map(\.receiptId))
+            .union(candidateDeletions.values.map(\.receiptId))
+        return try Self.allocateReceiptID(existing: existing) { UUID().uuidString.lowercased() }
     }
 
     private func commitDeletions(_ next: [String: IdentityTemplateDeletion]) throws {
         let bytes = try Self.encode(storeId: storeId, authorization: authorization, candidates: candidates,
-                                    revocations: revocations, templates: templates, stages: stages, deletions: next)
+                                    revocations: revocations, templates: templates, stages: stages, deletions: next, candidateDeletions: candidateDeletions)
         do { try journal.commit(bytes) } catch { closed = true; throw error }
         deletions = next
     }
@@ -427,10 +497,11 @@ public actor IdentityStore {
     private static func encode(storeId: String, authorization: IdentityAuthorizationState,
                                candidates: [String: String], revocations: [String: IdentityRevocation],
                                templates: [String: IdentityTemplateRecord] = [:], stages: Set<String> = [],
-                               deletions: [String: IdentityTemplateDeletion] = [:]) throws -> Data {
-        let json = identityJSON(["version": 4, "storeId": storeId,
+                               deletions: [String: IdentityTemplateDeletion] = [:],
+                               candidateDeletions: [String: IdentityCandidateDeletion]) throws -> Data {
+        let json = identityJSON(["version": 5, "storeId": storeId,
                                  "authorization": try authorization.canonicalJSON(), "candidates": candidates,
-                                 "revocations": revocations.mapValues(\.fields), "templates": templates.mapValues(\.fields), "stages": stages.sorted(), "deletions": deletions.mapValues(\.fields)])
+                                 "revocations": revocations.mapValues(\.fields), "templates": templates.mapValues(\.fields), "stages": stages.sorted(), "deletions": deletions.mapValues(\.fields), "candidateDeletions": candidateDeletions.mapValues(\.fields)])
         guard json.utf8.count <= 65_536 else { throw IdentityError(.invalidInput) }
         return Data(json.utf8)
     }

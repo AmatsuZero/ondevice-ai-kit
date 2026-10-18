@@ -210,7 +210,7 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         catch { XCTAssertEqual((error as? IdentityError)?.code, .templateNotFound) }
         let wire = try DeletionReceipt.decodeJSON(receipt.canonicalJSON())
         XCTAssertEqual(wire, receipt)
-        let crossStore = try DeletionReceipt(id: receipt.id, storeId: "other", templateId: receipt.templateId)
+        let crossStore = try DeletionReceipt(id: receipt.id, storeId: "other", templateId: try XCTUnwrap(receipt.templateId))
         do { _ = try await fixture.store.awaitDeletion(crossStore); XCTFail("cross-store receipt accepted") }
         catch { XCTAssertEqual((error as? IdentityError)?.code, .invalidInput) }
         try await fixture.store.close()
@@ -278,6 +278,168 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         let count = fixture.keys.templateDeletions
         XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
         XCTAssertEqual(fixture.keys.templateDeletions, count)
+    }
+
+    func testCandidateDeletionUsesFixedTemplateSetAndPreservesEarlierTemplateReceipt() async throws {
+        let fixture = try await fixture()
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        let otherCandidate = try await fixture.store.createCandidate(grant(id: "other-candidate"))
+        let otherResult = try await fixture.store.enroll(IdentityProbe(fixtureID: "other", vector: [0.5, 0.5]), candidate: otherCandidate, grant: grant(id: "other-candidate"),
+            options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1"), backend: FixtureIdentityBackend.system())
+        let otherRef = try XCTUnwrap(otherResult.templateRef)
+        _ = try await fixture.store.enroll(IdentityProbe(fixtureID: "second", vector: [0.5, 0.5]), candidate: fixture.candidate, grant: fixture.grant,
+            options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1"), backend: FixtureIdentityBackend.system())
+        let lease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let templateReceipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: owner)
+        let receipt = try await fixture.store.deleteCandidate(fixture.candidate, ownership: owner)
+        XCTAssertEqual(receipt.candidateId, fixture.candidate.id)
+        XCTAssertNil(receipt.templateId)
+        let pending = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(pending, .purgePending)
+        do { _ = try await fixture.store.recordedCandidateGrant(fixture.candidate); XCTFail("candidate revived") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .candidateRevoked) }
+        let other = try await fixture.store.recordedTemplateCandidate(otherRef)
+        XCTAssertEqual(other, otherCandidate)
+        await lease.close()
+        let purged = try await fixture.store.awaitDeletion(receipt)
+        let oldPurged = try await fixture.store.awaitDeletion(templateReceipt)
+        XCTAssertEqual(purged, .purged); XCTAssertEqual(oldPurged, .purged)
+        try await fixture.store.close()
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let repeated = try await reopened.deleteCandidate(fixture.candidate, ownership: owner)
+        XCTAssertEqual(repeated, receipt)
+        let restored = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(restored, .purged)
+        do { _ = try await reopened.enroll(IdentityProbe(fixtureID: "late", vector: [1, 0]), candidate: fixture.candidate, grant: fixture.grant,
+            options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1"), backend: FixtureIdentityBackend.system()); XCTFail("deleted candidate enrolled") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .candidateRevoked) }
+        try await reopened.close()
+    }
+
+    func testEmptyCandidateDeletionPersistsAndRevalidatesOwnershipAndReceiptKind() async throws {
+        let fixture = try await fixture()
+        let candidate = try await fixture.store.createCandidate(grant(id: "empty"))
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        let receipt = try await fixture.store.deleteCandidate(candidate, ownership: owner)
+        let status = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(status, .purged)
+        let wire = try DeletionReceipt.decodeJSON(receipt.canonicalJSON())
+        XCTAssertEqual(wire, receipt)
+        fixture.authority.denyOwnership = true
+        do { _ = try await fixture.store.deleteCandidate(candidate, ownership: owner); XCTFail("repeat bypassed owner") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRequired) }
+        fixture.authority.denyOwnership = false
+        let forged = try DeletionReceipt(id: receipt.id, storeId: receipt.storeId, candidateId: fixture.candidate.id)
+        do { _ = try await fixture.store.awaitDeletion(forged); XCTFail("substituted candidate receipt accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .invalidInput) }
+        try await fixture.store.close()
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        do { _ = try await reopened.recordedCandidateGrant(candidate); XCTFail("empty candidate tombstone lost") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .candidateRevoked) }
+        try await reopened.close()
+    }
+
+    func testCandidateDeletionPurgeFailureRecoversAllTargets() async throws {
+        let fixture = try await fixture()
+        fixture.keys.rejectTemplateDeletion = true
+        let receipt = try await fixture.store.deleteCandidate(fixture.candidate, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        let failed = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(failed, .purgeFailed)
+        try await fixture.store.close()
+        fixture.keys.rejectTemplateDeletion = false
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let status = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(status, .purged)
+        try await reopened.close()
+    }
+
+    func testCandidateDeletionFailureDoesNotPublishTombstoneOrPurge() async throws {
+        let fixture = try await fixture()
+        fixture.keys.rejectJournal = true
+        do { _ = try await fixture.store.deleteCandidate(fixture.candidate, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")); XCTFail("failed commit published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .reEnrollmentRequired) }
+        XCTAssertEqual(fixture.keys.templateDeletions, 0)
+        fixture.keys.rejectJournal = false
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let candidate = try await reopened.recordedTemplateCandidate(fixture.ref)
+        XCTAssertEqual(candidate, fixture.candidate)
+        try await reopened.close(); try await fixture.store.close()
+    }
+
+    func testCandidateDeletionStopsOnlyItsTicketsAndSuppressesBackendFailure() async throws {
+        let fixture = try await fixture()
+        let other = try await fixture.store.createCandidate(grant(id: "unaffected"))
+        let affected = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+        let reentered = DispatchSemaphore(value: 0)
+        let registration = affected.stopSignal.registerStopHandler {
+            Task {
+                do { _ = try await fixture.store.recordedCandidateGrant(fixture.candidate); XCTFail("stop preceded durable candidate tombstone") }
+                catch { XCTAssertEqual((error as? IdentityError)?.code, .candidateRevoked) }
+                reentered.signal()
+            }
+        }
+        let unaffected = try await fixture.store.beginOperation(other, grant: grant(id: "unaffected"), scope: .verification)
+        _ = try await fixture.store.deleteCandidate(fixture.candidate, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        XCTAssertEqual(reentered.wait(timeout: .now() + 2), .success, "stop callback did not reenter after commit")
+        XCTAssertThrowsError(try affected.stopSignal.check()) { XCTAssertEqual(($0 as? IdentityError)?.code, .authorizationRevoked) }
+        XCTAssertNoThrow(try unaffected.stopSignal.check())
+        do { try await fixture.store.finishOperation(affected, backendError: IdentityError(.backendUnavailable)); XCTFail("deleted candidate published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        try await fixture.store.finishOperation(unaffected)
+        registration.close()
+        try await fixture.store.close()
+    }
+
+    func testRestoreRejectsCandidateTargetWithoutItsTemplatePurgeFact() async throws {
+        let fixture = try await fixture()
+        _ = try await fixture.store.deleteCandidate(fixture.candidate, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        try await fixture.store.close()
+        let journal = try IdentityJournal(root: fixture.root, recordID: "store", keyProvider: fixture.keys)
+        var fields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(journal.read())) as? [String: Any])
+        fields["deletions"] = [String: Any]()
+        try journal.commit(Data(identityJSON(fields).utf8)); try journal.close()
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
+    }
+
+    func testRestoreRejectsCandidateReceiptCollisionWithGrantRevocation() async throws {
+        let fixture = try await fixture()
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        _ = try await fixture.store.deleteCandidate(fixture.candidate, ownership: owner)
+        let revocation = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: owner)
+        try await fixture.store.close()
+        let journal = try IdentityJournal(root: fixture.root, recordID: "store", keyProvider: fixture.keys)
+        var fields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(journal.read())) as? [String: Any])
+        var candidates = try XCTUnwrap(fields["candidateDeletions"] as? [String: [String: Any]])
+        candidates[fixture.candidate.id]?["receiptId"] = revocation.id
+        fields["candidateDeletions"] = candidates
+        try journal.commit(Data(identityJSON(fields).utf8)); try journal.close()
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
+    }
+
+    func testRestoreRejectsUnsortedCandidateTemplateTargets() async throws {
+        let fixture = try await fixture()
+        _ = try await fixture.store.enroll(IdentityProbe(fixtureID: "second", vector: [0.5, 0.5]), candidate: fixture.candidate, grant: fixture.grant,
+            options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1"), backend: FixtureIdentityBackend.system())
+        _ = try await fixture.store.deleteCandidate(fixture.candidate, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        try await fixture.store.close()
+        let journal = try IdentityJournal(root: fixture.root, recordID: "store", keyProvider: fixture.keys)
+        var fields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(journal.read())) as? [String: Any])
+        var candidates = try XCTUnwrap(fields["candidateDeletions"] as? [String: [String: Any]])
+        var record = try XCTUnwrap(candidates[fixture.candidate.id])
+        let targets = try XCTUnwrap(record["templateIds"] as? [String])
+        XCTAssertGreaterThanOrEqual(targets.count, 2)
+        record["templateIds"] = Array(targets.reversed())
+        candidates[fixture.candidate.id] = record
+        fields["candidateDeletions"] = candidates
+        try journal.commit(Data(identityJSON(fields).utf8)); try journal.close()
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
+    }
+
+    func testReceiptAllocatorSkipsEveryOccupiedNamespaceID() throws {
+        let occupied: Set<String> = ["occupied-1", "occupied-2"]
+        var values = ["occupied-1", "occupied-2", "fresh"]
+        let id = try IdentityStore.allocateReceiptID(existing: occupied) { values.removeFirst() }
+        XCTAssertEqual(id, "fresh")
     }
 
     private struct Fixture {

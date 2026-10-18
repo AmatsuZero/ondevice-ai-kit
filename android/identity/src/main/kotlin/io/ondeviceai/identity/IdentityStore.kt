@@ -27,6 +27,7 @@ class IdentityStore internal constructor(
     private var templates: Map<String, IdentityTemplateRecord> = emptyMap()
     private var stages: Set<String> = emptySet()
     private var deletions: Map<String, IdentityTemplateDeletion> = emptyMap()
+    private var candidateDeletions: Map<String, IdentityCandidateDeletion> = emptyMap()
     private var closed = false
     private var operating = false
     private val leases = mutableMapOf<String, MutableSet<IdentityTemplateLease>>()
@@ -44,10 +45,10 @@ class IdentityStore internal constructor(
             if (record == null) {
                 val id = UUID.randomUUID().toString()
                 opened.commit(encode(id, initial, emptyMap(), emptyMap()))
-                storeId = id; authorization = initial; candidates = emptyMap(); revocations = emptyMap(); templates = emptyMap(); stages = emptySet()
+                storeId = id; authorization = initial; candidates = emptyMap(); revocations = emptyMap(); templates = emptyMap(); stages = emptySet(); deletions = emptyMap(); candidateDeletions = emptyMap()
             } else {
                 val metadata = decode(record)
-                storeId = metadata.storeId; authorization = metadata.authorization; candidates = metadata.candidates; revocations = metadata.revocations; templates = metadata.templates; stages = metadata.stages; deletions = metadata.deletions
+                storeId = metadata.storeId; authorization = metadata.authorization; candidates = metadata.candidates; revocations = metadata.revocations; templates = metadata.templates; stages = metadata.stages; deletions = metadata.deletions; candidateDeletions = metadata.candidateDeletions
             }
             payload = IdentityTemplatePayload(root.toPath(), storeId, keyProvider)
             if (stages.isNotEmpty()) {
@@ -94,7 +95,7 @@ class IdentityStore internal constructor(
         if (ref.storeId != storeId) throw IdentityError(IdentityErrorCode.CANDIDATE_NOT_FOUND)
         val grantId = candidates[ref.id] ?: throw IdentityError(IdentityErrorCode.CANDIDATE_NOT_FOUND)
         val grant = authorization.recordedGrant(grantId) ?: throw IdentityError(IdentityErrorCode.CANDIDATE_NOT_FOUND)
-        if (revocations.values.any { ref.id in it.candidateIds } || grant.authorizationEpoch < authorization.highestEpoch(grant.revocationDomainId))
+        if (ref.id in candidateDeletions || revocations.values.any { ref.id in it.candidateIds } || grant.authorizationEpoch < authorization.highestEpoch(grant.revocationDomainId))
             throw IdentityError(IdentityErrorCode.CANDIDATE_REVOKED)
         return grant
     }
@@ -218,7 +219,7 @@ class IdentityStore internal constructor(
     internal fun recordedTemplateCandidate(ref: TemplateRef): CandidateRef = synchronized(gate) {
         admitted(); val record = templates[ref.id] ?: throw IdentityError(IdentityErrorCode.TEMPLATE_NOT_FOUND)
         ref.validate(record.ref)
-        if (ref.id in deletions) throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        if (ref.id in deletions || record.candidateId in candidateDeletions) throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
         val grant = authorization.recordedGrant(record.grantId) ?: throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
         if (grant.authorizationEpoch != authorization.highestEpoch(grant.revocationDomainId) || revocations.values.any { record.candidateId in it.candidateIds }) throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
         CandidateRef(record.candidateId, storeId)
@@ -234,7 +235,7 @@ class IdentityStore internal constructor(
             throw IdentityError(IdentityErrorCode.UNSUPPORTED_OPTION)
         val record = templates[ref.id] ?: throw IdentityError(IdentityErrorCode.TEMPLATE_NOT_FOUND)
         ref.validate(record.ref)
-        if (ref.id in deletions) throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        if (ref.id in deletions || record.candidateId in candidateDeletions) throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
         if (ref.embeddingSpaceId != embeddingSpace) throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
         val capability = if (scope == IdentityScope.VERIFICATION) IdentityCapability.VERIFICATION else IdentityCapability.IDENTIFICATION
         if (capability !in embeddingSpace.supportedCapabilities) throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
@@ -270,26 +271,70 @@ class IdentityStore internal constructor(
         IdentityAuthorizationState.requireOwnership(ownership, storeId, authorizationProvider, wallClock.nowMillis)
         val record = templates[ref.id] ?: throw IdentityError(IdentityErrorCode.TEMPLATE_NOT_FOUND)
         ref.validate(record.ref)
-        deletions[ref.id]?.let { return@mutation DeletionReceipt(it.receiptId, storeId, ref.id) }
-        val receipt = DeletionReceipt(UUID.randomUUID().toString(), storeId, ref.id)
+        deletions[ref.id]?.let { return@mutation DeletionReceipt(it.receiptId, storeId, templateId = ref.id) }
+        val receipt = DeletionReceipt(nextReceiptId(), storeId, templateId = ref.id)
         commitDeletions(deletions + (ref.id to IdentityTemplateDeletion(receipt.id, DeletionStatus.PURGE_PENDING)))
         purgeTemplate(ref.id)
         receipt
     }
 
+    /** Candidate deletion commits its immutable target set and all missing template tombstones together. */
+    fun deleteCandidate(candidate: CandidateRef, ownership: OwnershipAuthorization): DeletionReceipt {
+        val (receipt, signals, targetIds) = mutation {
+            IdentityAuthorizationState.requireOwnership(ownership, storeId, authorizationProvider, wallClock.nowMillis)
+            if (candidate.storeId != storeId || candidate.id !in candidates) throw IdentityError(IdentityErrorCode.CANDIDATE_NOT_FOUND)
+            candidateDeletions[candidate.id]?.let {
+                return@mutation Triple(DeletionReceipt(it.receiptId, storeId, candidateId = candidate.id), emptyList<IdentityStopSignal>(), emptyList<String>())
+            }
+            val targetIds = templates.values.filter { it.candidateId == candidate.id }.map { it.ref.id }.sorted()
+            val nextDeletions = targetIds.fold(deletions) { next, templateId ->
+                if (templateId in next) next else next + (templateId to IdentityTemplateDeletion(nextReceiptId(), DeletionStatus.PURGE_PENDING))
+            }
+            val receipt = DeletionReceipt(nextReceiptId(), storeId, candidateId = candidate.id)
+            val nextCandidates = candidateDeletions + (candidate.id to IdentityCandidateDeletion(receipt.id, targetIds))
+            journalCommit(encode(storeId, authorization, candidates, revocations, templates, stages, nextDeletions, nextCandidates))
+            deletions = nextDeletions; candidateDeletions = nextCandidates
+            Triple(receipt, invalidateCandidateOperations(candidate.id), targetIds)
+        }
+        signals.forEach { it.requestStop(IdentityStopReason.AUTHORIZATION_REVOKED) }
+        // Stop callbacks may close or retire the store. Recheck writer authority
+        // before cleanup, and never let a purge failure suppress cancellation.
+        synchronized(gate) { if (!closed) mutation { targetIds.forEach(::purgeTemplate) } }
+        return receipt
+    }
+
     /** Returns the current durable status. Deadline-bound waiting is a separate overload. */
     fun awaitDeletion(receipt: DeletionReceipt): DeletionStatus = synchronized(gate) {
         admitted()
-        val record = deletions[receipt.templateId]
-        if (receipt.storeId != storeId || record == null || record.receiptId != receipt.id)
-            throw IdentityError(IdentityErrorCode.INVALID_INPUT)
-        record.status
+        if (receipt.storeId != storeId) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        receipt.templateId?.let { templateId ->
+            val record = deletions[templateId]
+            if (record == null || record.receiptId != receipt.id) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            return@synchronized record.status
+        }
+        val candidateId = receipt.candidateId ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        val record = candidateDeletions[candidateId]
+        if (record == null || record.receiptId != receipt.id) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        val statuses = record.templateIds.map { deletions[it]?.status ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
+        when {
+            statuses.all { it == DeletionStatus.PURGED } -> DeletionStatus.PURGED
+            statuses.any { it == DeletionStatus.PURGE_FAILED } -> DeletionStatus.PURGE_FAILED
+            else -> DeletionStatus.PURGE_PENDING
+        }
     }
 
     private fun commitDeletions(next: Map<String, IdentityTemplateDeletion>) {
-        journalCommit(encode(storeId, authorization, candidates, deletions = next))
+        journalCommit(encode(storeId, authorization, candidates, deletions = next, candidateDeletions = candidateDeletions))
         deletions = next
     }
+
+    private fun nextReceiptId(): String {
+        val used = revocations.keys + deletions.values.map { it.receiptId } + candidateDeletions.values.map { it.receiptId }
+        return generateSequence { UUID.randomUUID().toString() }.first { it !in used }
+    }
+
+    private fun invalidateCandidateOperations(candidateId: String) = operations.values.filter { it.ticket.candidate.id == candidateId }
+        .map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
 
     private fun purgeTemplate(id: String) {
         if (closed || writerReleased || !leases[id].isNullOrEmpty()) return
@@ -351,12 +396,12 @@ class IdentityStore internal constructor(
         try { return block() } finally { operating = false }
     }
 
-    private data class Metadata(val storeId: String, val authorization: IdentityAuthorizationState, val candidates: Map<String, String>, val revocations: Map<String, RevocationRecord>, val templates: Map<String, IdentityTemplateRecord>, val stages: Set<String>, val deletions: Map<String, IdentityTemplateDeletion>)
+    private data class Metadata(val storeId: String, val authorization: IdentityAuthorizationState, val candidates: Map<String, String>, val revocations: Map<String, RevocationRecord>, val templates: Map<String, IdentityTemplateRecord>, val stages: Set<String>, val deletions: Map<String, IdentityTemplateDeletion>, val candidateDeletions: Map<String, IdentityCandidateDeletion>)
     private data class RevocationRecord(val domainId: String, val epoch: Long, val grantIds: List<String>, val candidateIds: List<String>) {
         fun fields() = mapOf("candidateIds" to candidateIds, "domainId" to domainId, "epoch" to epoch, "grantIds" to grantIds)
     }
 
-    private fun encode(storeId: String, authorization: IdentityAuthorizationState, candidates: Map<String, String>, revocations: Map<String, RevocationRecord> = this.revocations, templates: Map<String, IdentityTemplateRecord> = this.templates, stages: Set<String> = this.stages, deletions: Map<String, IdentityTemplateDeletion> = this.deletions): ByteArray {
+    private fun encode(storeId: String, authorization: IdentityAuthorizationState, candidates: Map<String, String>, revocations: Map<String, RevocationRecord> = this.revocations, templates: Map<String, IdentityTemplateRecord> = this.templates, stages: Set<String> = this.stages, deletions: Map<String, IdentityTemplateDeletion> = this.deletions, candidateDeletions: Map<String, IdentityCandidateDeletion> = this.candidateDeletions): ByteArray {
         val json = IdentityContractJSON.encode(mapOf(
             "authorization" to authorization.canonicalJSON(),
             "candidates" to candidates,
@@ -365,7 +410,8 @@ class IdentityStore internal constructor(
             "storeId" to storeId,
             "templates" to templates.mapValues { it.value.fields() },
             "deletions" to deletions.mapValues { it.value.fields() },
-            "version" to 4
+            "candidateDeletions" to candidateDeletions.mapValues { it.value.fields() },
+            "version" to 5
         ))
         if (json.toByteArray(StandardCharsets.UTF_8).size > 65536) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         return json.toByteArray(StandardCharsets.UTF_8)
@@ -382,6 +428,7 @@ class IdentityStore internal constructor(
             2L -> root.also { if (it.keys != setOf("authorization", "candidates", "revocations", "storeId", "version")) throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
             3L -> root.also { if (it.keys != setOf("authorization", "candidates", "revocations", "stages", "storeId", "templates", "version")) throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
             4L -> root.also { if (it.keys != setOf("authorization", "candidates", "revocations", "stages", "storeId", "templates", "deletions", "version")) throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
+            5L -> root.also { if (it.keys != setOf("authorization", "candidates", "revocations", "stages", "storeId", "templates", "deletions", "candidateDeletions", "version")) throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
             else -> throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         }
         val id = fields.string("storeId").also(::token)
@@ -455,7 +502,20 @@ class IdentityStore internal constructor(
             if (templateId !in templates || !receiptIds.add(record.receiptId) || record.receiptId in revocations) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
             record
         }
-        return Metadata(id, auth, candidates, revocations, templates, stages, deletions)
+        @Suppress("UNCHECKED_CAST")
+        val rawCandidateDeletions = if (version < 5L) emptyMap() else fields["candidateDeletions"] as? Map<String, Any?> ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        val deletedCandidates = mutableSetOf<String>()
+        val candidateReceiptIds = mutableSetOf<String>()
+        val candidateDeletions = rawCandidateDeletions.mapValues { (candidateId, value) ->
+            token(candidateId)
+            if (candidateId !in candidates || !deletedCandidates.add(candidateId)) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            val record = IdentityCandidateDeletion.restore(value as? Map<String, Any?> ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT))
+            if (!candidateReceiptIds.add(record.receiptId) || record.receiptId in revocations || record.receiptId in deletions.values.map { it.receiptId }) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            val expected = templates.values.filter { it.candidateId == candidateId }.map { it.ref.id }.sorted()
+            if (record.templateIds != expected || record.templateIds.any { it !in deletions }) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            record
+        }
+        return Metadata(id, auth, candidates, revocations, templates, stages, deletions, candidateDeletions)
     }
 
     private fun requireRecordId(id: String) {

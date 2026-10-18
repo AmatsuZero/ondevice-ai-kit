@@ -8,18 +8,39 @@ public enum DeletionStatus: String, Sendable {
 public struct DeletionReceipt: Equatable, Sendable {
     public let id: String
     public let storeId: String
-    public let templateId: String
+    public let templateId: String?
+    public let candidateId: String?
     init(id: String, storeId: String, templateId: String) throws {
         try identityToken(id); try identityToken(storeId); try identityToken(templateId)
-        self.id = id; self.storeId = storeId; self.templateId = templateId
+        self.id = id; self.storeId = storeId; self.templateId = templateId; self.candidateId = nil
+    }
+    init(id: String, storeId: String, candidateId: String) throws {
+        try identityToken(id); try identityToken(storeId); try identityToken(candidateId)
+        self.id = id; self.storeId = storeId; self.templateId = nil; self.candidateId = candidateId
     }
     public func canonicalJSON() -> String {
-        identityJSON(["id": id, "storeId": storeId, "templateId": templateId])
+        if let templateId { return identityJSON(["id": id, "storeId": storeId, "templateId": templateId]) }
+        return identityJSON(["id": id, "storeId": storeId, "candidateId": candidateId!])
     }
     public static func decodeJSON(_ json: String) throws -> Self {
-        let fields = try identityObject(json, keys: ["id", "storeId", "templateId"])
-        return try Self(id: identityString(fields, "id"), storeId: identityString(fields, "storeId"),
-                        templateId: identityString(fields, "templateId"))
+        if let fields = try? identityObject(json, keys: ["id", "storeId", "templateId"]) {
+            return try Self(id: identityString(fields, "id"), storeId: identityString(fields, "storeId"), templateId: identityString(fields, "templateId"))
+        }
+        let fields = try identityObject(json, keys: ["id", "storeId", "candidateId"])
+        return try Self(id: identityString(fields, "id"), storeId: identityString(fields, "storeId"), candidateId: identityString(fields, "candidateId"))
+    }
+}
+
+struct IdentityCandidateDeletion: Sendable {
+    let receiptId: String
+    let templateIds: Set<String>
+    var fields: [String: Any] { ["receiptId": receiptId, "templateIds": templateIds.sorted()] }
+    static func restore(_ fields: [String: Any]) throws -> Self {
+        guard Set(fields.keys) == ["receiptId", "templateIds"], let targets = fields["templateIds"] as? [String],
+              targets == Set(targets).sorted() else { throw IdentityError(.invalidInput) }
+        let id = try identityString(fields, "receiptId"); try identityToken(id)
+        for target in targets { try identityToken(target) }
+        return Self(receiptId: id, templateIds: Set(targets))
     }
 }
 

@@ -5,14 +5,30 @@ enum class DeletionStatus(internal val wireValue: String) {
 }
 
 /** A store resolves this opaque receipt against its durable deletion record. */
-data class DeletionReceipt internal constructor(val id: String, val storeId: String, val templateId: String) {
-    init { token(id); token(storeId); token(templateId) }
-    fun canonicalJSON(): String = IdentityContractJSON.encode(mapOf("id" to id, "storeId" to storeId, "templateId" to templateId))
+@ConsistentCopyVisibility
+data class DeletionReceipt internal constructor(
+    val id: String,
+    val storeId: String,
+    val templateId: String? = null,
+    val candidateId: String? = null
+) {
+    init {
+        token(id); token(storeId)
+        if ((templateId == null) == (candidateId == null)) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        templateId?.let(::token); candidateId?.let(::token)
+    }
+    fun canonicalJSON(): String = IdentityContractJSON.encode(buildMap {
+        put("id", id); put("storeId", storeId)
+        if (templateId != null) put("templateId", templateId) else put("candidateId", candidateId)
+    })
     companion object {
         fun decodeJSON(json: String): DeletionReceipt {
             val fields = IdentityContractJSON.parse(json)
-            if (fields.keys != setOf("id", "storeId", "templateId")) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
-            return DeletionReceipt(fields.string("id"), fields.string("storeId"), fields.string("templateId"))
+            return when (fields.keys) {
+                setOf("id", "storeId", "templateId") -> DeletionReceipt(fields.string("id"), fields.string("storeId"), templateId = fields.string("templateId"))
+                setOf("id", "storeId", "candidateId") -> DeletionReceipt(fields.string("id"), fields.string("storeId"), candidateId = fields.string("candidateId"))
+                else -> throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            }
         }
     }
 }
@@ -26,6 +42,21 @@ internal data class IdentityTemplateDeletion(val receiptId: String, val status: 
             val status = DeletionStatus.entries.firstOrNull { it.wireValue == fields.string("status") }
                 ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
             return IdentityTemplateDeletion(id, status)
+        }
+    }
+}
+
+internal data class IdentityCandidateDeletion(val receiptId: String, val templateIds: List<String>) {
+    fun fields() = mapOf("receiptId" to receiptId, "templateIds" to templateIds)
+    companion object {
+        fun restore(fields: Map<String, Any?>): IdentityCandidateDeletion {
+            if (fields.keys != setOf("receiptId", "templateIds")) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            val receiptId = fields.string("receiptId").also(::token)
+            val templateIds = (fields["templateIds"] as? List<*>)?.map { it as? String ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
+                ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            if (templateIds != templateIds.distinct().sorted()) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            templateIds.forEach(::token)
+            return IdentityCandidateDeletion(receiptId, templateIds)
         }
     }
 }
