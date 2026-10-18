@@ -30,11 +30,11 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 ## Task 2 待实现
 
 - 已有可信 provider 契约及不可变授权状态，后续 Store 构造仍必须注入 provider 和持久化根目录；禁止以 request epoch 或单纯内存字典作为权威状态。
-- journal 已接入 candidate/template admission；模板采用独立 envelope，持久 stage 所有权与故障恢复已接入；内部 vector lease 已通过单测，仍需物理 purge。
-- candidate/template 与 immutable grant 的持久绑定、域撤销 tombstone 和稳定 revoke receipt 已实现；模板删除及逐目标 purge 状态仍待实现。
-- admission/revoke/template publish 共用串行门；quality/embed 在门外执行，撤销立即请求停止。lease 后两阶段删除仍待实现。
+- journal 已接入 candidate/template admission；模板采用独立 envelope，持久 stage 所有权与故障恢复已接入；内部 vector lease 和模板单目标 purge 已通过单测；candidate/domain 批量清理仍待实现。
+- candidate/template 与 immutable grant 的持久绑定、域撤销 tombstone 和稳定 revoke receipt 已实现；模板单目标删除和逐目标 purge 状态已通过单测；candidate/domain 目标集清理仍待实现。
+- admission/revoke/template publish 共用串行门；quality/embed 在门外执行，撤销立即请求停止。模板单目标已接入 lease 后两阶段删除，candidate/domain 清理与精确在途模板绑定仍待实现。
 - operation ticket 已固定 grant/candidate 并接入 public enroll、撤销 stop、结果抑制与 close drain；任务对象的完整 Core 终态封装仍需后续整合。
-- 仍需持有 lease 删除、逐目标 purge 失败/重试/重启测试；已有 scope/expiry、同域新 grant ID 绕过、enrollment 撤销竞态和正常 close lease drain 测试不能替代它们。
+- 单目标已覆盖持有多 lease 删除、purge 失败/重试/重启；仍需 candidate/domain 全目标集、deadline/cancel 等待和退休锁 drain 测试；已有 scope/expiry、同域新 grant ID 绕过、enrollment 撤销竞态和正常 close lease drain 测试不能替代它们。
 - 平台原生密钥与恢复行为真机验证；iOS 15/API 26 最低设备验收另记。
 
 只有这些门全部通过，才能标记 Task 2 完成。后续 Task 3/5/6/7 的 snapshot、身份引擎和活体状态机尚未实现。
@@ -44,12 +44,12 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - Swift actor / Kotlin synchronized 门负责候选 admission、journal 持久化及发布；创建候选不会调用生物后端，也不存储图像/向量。
 - 元数据目前使用严格 64 KiB JSON 格式（包含授权快照），超限在提交前拒绝；后续模板/索引规模需另行设计存储格式。
 - Kotlin public open 只使用 Context.noBackupFilesDir 内的受管目录；其路径构造尚无 Context/真机验收，单测使用 internal 临时目录入口。
-- close 已请求 operation ticket stop，并等待 operation ticket 和内部 template lease 同时 drain。journal 提交失败时仍沿用立即 poison/unlock；旧 lease release 只修改旧 Store 内存，不做文件/密钥 I/O。退休期间的物理 purge 权限仍须后续切片证明。
+- close 已请求 operation ticket stop，并等待 operation ticket 和内部 template lease 同时 drain。journal 提交失败时仍沿用立即 poison/unlock；旧/关闭 Store 的 lease release 只修改旧 Store 内存，不做文件/密钥 I/O；模板单目标已覆盖旧回调与重开 writer 隔离。完整退休锁 drain 语义仍须后续切片处理。
 
 ### 持久撤销当前边界
 
 - 回执仅包含 `id` 与 `storeId`，不是物理回收完成证明。加密元数据记录固定的 grant/candidate 目标集，重复撤销及重启后均返回原回执；重放旧回执不会撤销新 epoch 的对象。
-- 元数据严格校验完整 grant/candidate 目标集、候选所属关系、重复目标和域 epoch；仍可读取 v1/v2 记录，下次提交写 v3（含 templates/stages）。
+- 元数据严格校验完整 grant/candidate 目标集、候选所属关系、重复目标和域 epoch；仍可读取 v1/v2/v3 记录，下次提交写 v4（含 templates/stages/deletions）。
 - 撤销提交成功后才发布内存和回执；提交失败退休 writer。operation ticket 和 enrollment 发布已接线；gallery/lease/purge 的撤销链路尚未验收。
 - Android 门内宿主回调若重入 Store，返回 `busy`，防止重入提交被外层 staged 状态覆盖。
 
@@ -57,7 +57,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 
 - ticket 只在 Store 内部存在，固定 candidate、完整 grant、scope 和 process-local stop signal；`finishOperation` 总会消费它，并在撤销、expiry、关闭或 backend error 时重新取权威状态。
 - 撤销及可信更高 epoch 的 candidate admission 在持久提交后标记相关 ticket；stop handler 在 actor/monitor 外执行。close 拒绝新 admission，等待 ticket 释放后才关闭 journal；Android 被中断时继续 drain 并恢复中断标记。
-- public `enroll` 已将票据连接到门外 quality/embed 和门内最终模板发布；阻塞后端测试覆盖撤销抑制成功、低质量和普通后端错误。lease、物理 purge 和后续身份引擎仍未实现。
+- public `enroll` 已将票据连接到门外 quality/embed 和门内最终模板发布；阻塞后端测试覆盖撤销抑制成功、低质量和普通后端错误。内部 lease 与模板单目标 purge 已实现，后续身份引擎和精确模板在途绑定仍未实现。
 
 ### enrollment/template 当前边界
 
@@ -66,15 +66,24 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - v3 journal 在模板密钥/文件创建前登记 stage UUID；模板独立 AES-GCM key 与 AAD 绑定 store/record，文件同步后才提交 membership。门内最终检查和元数据发布不拆开。
 - 存储失败保留持久 stage 并退休 writer；重启先验证全部元数据再逐项清理 stage 文件和密钥，成功后清除 manifest。不存在按前缀扫描删除模板目录的操作；未登记文件保留。
 - 已覆盖密钥创建失败、payload 后 journal 提交失败、篡改/换包/缺钥、完整 space 绑定、同域另一 grant 恢复、stage 重复/重叠和无效 membership。模板 envelope 的持久 codec 为平台内部实现，不构成跨设备特征导出接口。
-- 本切片尚无逐目标 DeletionStatus/receipt、物理 purge 和 purge 重试。真实 Keychain/Keystore 和最小系统版本仍须真机验证。
+- 模板单目标后续切片已加入 DeletionStatus/receipt、物理 purge 和重启重试。真实 Keychain/Keystore 和最小系统版本仍须真机验证。
 
 ### template lease 当前边界
 
 - 实现提交 `9bb91e7`，独立复审 APPROVE（无遗留 Critical/Important 发现）；这不构成 Task 2 完成。
 - 内部 `acquireTemplateLease` 仅供 verification/identification 使用：校验完整 template ref、embedding space 的能力集合、scope、purpose、同域同 epoch 以及可信 provider；解密后重验授权再 pin。允许同域另一有效 grant，其完整声明持久保存以支持撤销和重启绑定校验。
-- lease 的向量只在模块内部读取，close 后清除 lease 自身持有值并拒绝读取；已经由 SDK 消费者取出的值仍须任务 defer/finally 释放，不宣称内存覆写。release 幂等且不执行 I/O。
+- lease 的向量只在模块内部读取，close 后清除 lease 自身持有值并拒绝读取；已经由 SDK 消费者取出的值仍须任务 defer/finally 释放，不宣称内存覆写。release 幂等；活跃 writer 的最后一个 lease 可触发精确 purge，关闭/退休 writer 的 release 不执行 I/O。
 - 最新身份模块单测：Swift 107/107（lease 7 项），Android 110/110（Store 47 项）及 lintDebug。日志 `/tmp/odai-p10-lease-{swift,android}-final.log`。审查提出能力集合缺口，双端 verification-only 模板回归先 RED 再 GREEN；初轮 Android 宿主回调重入覆盖撤销状态也已 RED→GREEN。
 - 全 Apple 包本轮 `/tmp/odai-p10-lease-swift-full.log` 仍有既有 `VisionFaceDetectorTests.testBlankImageUsesRealVisionAndReturnsSuccessfulEmptyResult`（Vision Code 9）；身份模块 106 项在该全包运行通过，随后新增能力回归的定向身份模块 107 项通过。未宣称全 Apple 包通过。
+
+### 模板单目标删除当前边界
+
+- 本切片独立架构审查及代码复审 APPROVE（0 findings）；不构成完整 Task 2 验收。回执固定 `id/storeId/templateId`，其完整 ref、candidate/grant/space/revision 绑定保留在加密元数据，清理后仍拒绝伪造引用和跨 store 回执。
+- 每次删除（包含重复请求）均验证独立 ownership，不要求生物 grant 有效；先持久化 `purgePending` tombstone，再在无 lease 时删除精确 payload/key，最后提交 `purged`。文件/密钥失败提交 `purgeFailed`，重启按固定 tombstone 重试。
+- 所有恢复元数据校验完成后才清理；不会按目录扫描删除。正常运行的最后一个 lease release 可触发清理；关闭/退休 Store 的旧 release 不再执行 I/O。物理完成后的 journal 失败不发布成功状态，writer 退休后重开从 durable tombstone 重试。
+- `awaitDeletion(receipt)` 当前读取已提交状态；带 deadline 的异步等待、取消不撤回 tombstone、candidate/domain 所有目标清理和精确模板 ticket 绑定仍待实现。
+- 最新单元测试 Swift 116/116、Android 121/121 及 Android identity lintDebug；覆盖多 lease、清理失败恢复、伪造/独立所有权、未提交逻辑删除不清理、物理清理后提交失败、全元数据验证先于恢复 I/O、旧 writer 回调隔离。日志 `/tmp/odai-p10-deletion-final-swift.log`、`/tmp/odai-p10-deletion-android-reentry-final.log`。
+- 全 Apple 包 `/tmp/odai-p10-deletion-swift-full.log` 身份模块 116 项通过；仍只有既有 `VisionFaceDetectorTests.testBlankImageUsesRealVisionAndReturnsSuccessfulEmptyResult`（Vision Code 9）失败。未宣称全包通过，未跳过该测试。
 
 ### 停止信号当前边界
 

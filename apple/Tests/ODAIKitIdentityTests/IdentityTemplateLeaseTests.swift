@@ -118,6 +118,168 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         try await store.close()
     }
 
+    func testTemplateDeletionWaitsForLeaseAndKeepsReceiptAfterRestart() async throws {
+        let fixture = try await fixture()
+        let lease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: owner)
+        let pending = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(pending, .purgePending)
+        do { _ = try await fixture.store.recordedTemplateCandidate(fixture.ref); XCTFail("tombstoned template accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
+        await lease.close(); await lease.close()
+        let purged = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(purged, .purged)
+        try await fixture.store.close()
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let restored = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(restored, .purged)
+        let repeated = try await reopened.deleteTemplate(fixture.ref, ownership: owner)
+        XCTAssertEqual(repeated, receipt)
+        try await reopened.close()
+    }
+
+    func testTemplateDeletionFailureRetriesAfterRestartWithoutRevivingTemplate() async throws {
+        let fixture = try await fixture()
+        fixture.keys.rejectTemplateDeletion = true
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        let failed = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(failed, .purgeFailed)
+        try await fixture.store.close()
+        fixture.keys.rejectTemplateDeletion = false
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let restored = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(restored, .purged)
+        do { _ = try await reopened.recordedTemplateCandidate(fixture.ref); XCTFail("purged template revived") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
+        try await reopened.close()
+    }
+
+    func testTemplateDeletionRejectsOwnershipAndForgedReceipt() async throws {
+        let fixture = try await fixture()
+        fixture.authority.denyOwnership = true
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        do { _ = try await fixture.store.deleteTemplate(fixture.ref, ownership: owner); XCTFail("ownership denial ignored") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRequired) }
+        fixture.authority.denyOwnership = false
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: owner)
+        let forged = try DeletionReceipt(id: receipt.id, storeId: receipt.storeId, templateId: "forged")
+        do { _ = try await fixture.store.awaitDeletion(forged); XCTFail("receipt substitution accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .invalidInput) }
+        try await fixture.store.close()
+    }
+
+    func testDeletionWaitsForAllLeasesAndRemovesOnlyItsOwnKeyAndFile() async throws {
+        let fixture = try await fixture()
+        let second = try await fixture.store.enroll(IdentityProbe(fixtureID: "second", vector: [0.5, 0.5]), candidate: fixture.candidate, grant: fixture.grant,
+            options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1"), backend: FixtureIdentityBackend.system())
+        let otherRef = try XCTUnwrap(second.templateRef)
+        let file = fixture.root.appendingPathComponent("identity-template-\(fixture.ref.id).bin")
+        let first = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let last = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        await first.close()
+        let pending = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(pending, .purgePending)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: file.path))
+        XCTAssertEqual(fixture.keys.templateDeletions, 0)
+        await last.close()
+        XCTAssertFalse(FileManager.default.fileExists(atPath: file.path))
+        XCTAssertEqual(fixture.keys.templateDeletions, 1)
+        let other = try await fixture.store.acquireTemplateLease(otherRef, grant: fixture.grant, scope: .verification, embeddingSpace: otherRef.embeddingSpaceId)
+        XCTAssertEqual(try other.embedding().values, [0.5, 0.5]); await other.close()
+        _ = try await fixture.store.createCandidate(grant(id: "after-delete"))
+        try await fixture.store.close()
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let restored = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(restored, .purged)
+        try await reopened.close()
+    }
+
+    func testRepeatedDeletionRevalidatesOwnershipAndImmutableRefAfterGrantRevocation() async throws {
+        let fixture = try await fixture()
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        _ = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: owner)
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: owner)
+        fixture.authority.denyOwnership = true
+        do { _ = try await fixture.store.deleteTemplate(fixture.ref, ownership: owner); XCTFail("repeat bypassed ownership") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRequired) }
+        fixture.authority.denyOwnership = false
+        let forged = try TemplateRef(id: fixture.ref.id, embeddingSpaceId: fixture.ref.embeddingSpaceId, authorizationEpoch: fixture.ref.authorizationEpoch, revision: "forged")
+        do { _ = try await fixture.store.deleteTemplate(forged, ownership: owner); XCTFail("purged ref binding lost") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateNotFound) }
+        let wire = try DeletionReceipt.decodeJSON(receipt.canonicalJSON())
+        XCTAssertEqual(wire, receipt)
+        let crossStore = try DeletionReceipt(id: receipt.id, storeId: "other", templateId: receipt.templateId)
+        do { _ = try await fixture.store.awaitDeletion(crossStore); XCTFail("cross-store receipt accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .invalidInput) }
+        try await fixture.store.close()
+    }
+
+    func testFailedLogicalDeletionDoesNotRemovePayloadOrPublishTombstone() async throws {
+        let fixture = try await fixture()
+        fixture.keys.rejectJournal = true
+        do { _ = try await fixture.store.deleteTemplate(fixture.ref, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")); XCTFail("failed commit accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .reEnrollmentRequired) }
+        XCTAssertEqual(fixture.keys.templateDeletions, 0)
+        fixture.keys.rejectJournal = false
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let lease = try await reopened.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        await lease.close(); try await reopened.close(); try await fixture.store.close()
+    }
+
+    func testPurgeStatusCommitFailureRetiresWriterAndRecoveryUsesDurableTombstone() async throws {
+        let fixture = try await fixture()
+        let lease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        fixture.keys.onTemplateDelete = { fixture.keys.rejectJournal = true }
+        await lease.close()
+        do { _ = try await fixture.store.awaitDeletion(receipt); XCTFail("ambiguous writer reported purge") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+        fixture.keys.onTemplateDelete = nil; fixture.keys.rejectJournal = false
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let status = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(status, .purged)
+        let count = fixture.keys.templateDeletions
+        await lease.close(); try await fixture.store.close()
+        XCTAssertEqual(fixture.keys.templateDeletions, count)
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority))
+        try await reopened.close()
+    }
+
+    func testRetiredPendingLeaseReleaseCannotPerformCleanupOwnedByReopenedWriter() async throws {
+        let fixture = try await fixture()
+        let lease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let receipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        fixture.keys.rejectJournal = true
+        do { _ = try await fixture.store.createCandidate(grant(id: "retire")); XCTFail("expected writer retirement") } catch {}
+        fixture.keys.rejectJournal = false
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let count = fixture.keys.templateDeletions
+        await lease.close(); try await fixture.store.close()
+        XCTAssertEqual(fixture.keys.templateDeletions, count)
+        let status = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(status, .purged)
+        try await reopened.close()
+    }
+
+    func testRestoreRejectsInvalidDeletionMetadataBeforeAnyRecoveryCleanup() async throws {
+        let fixture = try await fixture()
+        fixture.keys.rejectTemplateDeletion = true
+        _ = try await fixture.store.deleteTemplate(fixture.ref, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        try await fixture.store.close()
+        let journal = try IdentityJournal(root: fixture.root, recordID: "store", keyProvider: fixture.keys)
+        var fields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(journal.read())) as? [String: Any])
+        var deletions = try XCTUnwrap(fields["deletions"] as? [String: Any])
+        deletions[UUID().uuidString.lowercased()] = ["receiptId": "unowned", "status": "purgePending"]
+        fields["deletions"] = deletions
+        try journal.commit(Data(identityJSON(fields).utf8)); try journal.close()
+        fixture.keys.rejectTemplateDeletion = false
+        let count = fixture.keys.templateDeletions
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
+        XCTAssertEqual(fixture.keys.templateDeletions, count)
+    }
+
     private struct Fixture {
         let root: URL; let keys: LeaseKeys; let authority: LeaseAuthority
         let store: IdentityStore; let ref: TemplateRef; let candidate: CandidateRef; let grant: AuthorizationGrant
@@ -142,13 +304,19 @@ final class IdentityTemplateLeaseTests: XCTestCase {
 private struct LeaseClock: IdentityWallClock, IdentityMonotonicClock { let nowMillis: Int64 = 100; let nowNanos: Int64 = 1 }
 private final class LeaseAuthority: IdentityAuthorizationProvider, @unchecked Sendable {
     var epoch: Int64 = 0
+    var denyOwnership = false
     func authoritativeEpoch(grant: AuthorizationGrant, minimumEpoch: Int64, nowMillis: Int64) throws -> Int64 { epoch }
-    func validateOwnership(_ authorization: OwnershipAuthorization, nowMillis: Int64) throws {}
+    func validateOwnership(_ authorization: OwnershipAuthorization, nowMillis: Int64) throws {
+        if denyOwnership { throw IdentityError(.authorizationRequired) }
+    }
 }
 private final class LeaseKeys: IdentityKeyProvider, @unchecked Sendable {
     private let lock = NSLock(); private var keys: [String: SymmetricKey] = [:]
     var onTemplateRead: (@Sendable () -> Void)?
     var rejectJournal = false
+    var rejectTemplateDeletion = false
+    var templateDeletions = 0
+    var onTemplateDelete: (@Sendable () -> Void)?
     func key(id: String, createIfMissing: Bool) throws -> SymmetricKey {
         lock.lock(); defer { lock.unlock() }
         if rejectJournal && id.hasPrefix("journal.") { throw IdentityError(.reEnrollmentRequired) }
@@ -157,7 +325,12 @@ private final class LeaseKeys: IdentityKeyProvider, @unchecked Sendable {
         guard createIfMissing else { throw IdentityError(.reEnrollmentRequired) }
         let key = SymmetricKey(size: .bits256); keys[id] = key; return key
     }
-    func deleteKey(id: String) throws { lock.lock(); defer { lock.unlock() }; keys.removeValue(forKey: id) }
+    func deleteKey(id: String) throws {
+        lock.lock(); defer { lock.unlock() }
+        if rejectTemplateDeletion && id.hasPrefix("template.") { throw IdentityError(.reEnrollmentRequired) }
+        keys.removeValue(forKey: id)
+        if id.hasPrefix("template.") { templateDeletions += 1; onTemplateDelete?() }
+    }
 }
 
 private final class VerificationOnlyBackend: IdentityBackend, @unchecked Sendable {
