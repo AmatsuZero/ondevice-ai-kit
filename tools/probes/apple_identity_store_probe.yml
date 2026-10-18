@@ -1,0 +1,25 @@
+name: IOSIdentityStoreProbe
+options:
+  deploymentTarget:
+    iOS: '15.0'
+packages:
+  OnDeviceAIKit:
+    path: apple
+targets:
+  IOSIdentityStoreProbe:
+    type: application
+    platform: iOS
+    sources:
+      - tools/probes/apple_identity_store_probe.swift
+    dependencies:
+      - package: OnDeviceAIKit
+        product: ODAIKitIdentity
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.speech
+        SWIFT_VERSION: '5.0'
+        GENERATE_INFOPLIST_FILE: YES
+        TARGETED_DEVICE_FAMILY: '1,2'
+        CODE_SIGN_STYLE: Automatic
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        ENABLE_TESTABILITY: YES

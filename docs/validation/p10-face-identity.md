@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | Task 1：引用、授权声明、时钟、错误、选择与 codec | `10029b8` | Swift 12/12；Android 12/12；共享 canonical JSON 夹具 | 仅字段/取值契约，解码不代表签发真实性或授权有效 |
 | Task 4：后端绑定与独立身份/PAD 策略 | `850fe02` | Swift 8/8；Android 8/8；两端 backend space 夹具一致 | fixture 后端为模块内部类型；无默认生产模型/阈值；判定归后续引擎 |
-| Task 2 加密子步骤：AES-256-GCM envelope 与原生 key provider | `7803999` | Swift 6/6；Android 6/6；Android lintDebug | 密钥缺失不重建、AAD/篡改拒绝、随机 nonce、严格 256 位与字节快照已验证；Android Keystore envelope 已在 API35 真机验证；iOS Keychain 与完整 Store 真机路径尚待验证 |
+| Task 2 加密子步骤：AES-256-GCM envelope 与原生 key provider | `7803999` | Swift 6/6；Android 6/6；Android lintDebug | 密钥缺失不重建、AAD/篡改拒绝、随机 nonce、严格 256 位与字节快照已验证；Android Keystore envelope 已在 API35 真机验证；Android API35 与 iOS27 完整 Store/secure-key 同进程生命周期探针已通过 |
 | Task 2 journal 子步骤：独占 writer、加密原子提交、恢复加固 | `976d973`、`a006bbb` | Swift journal 14/14；Android journal 13/13；完整 identity 模块及 Android lintDebug | 构造与每次覆盖前认证现有 journal；丢失记录/密钥不重建；fsync、原子替换、目录同步；有界读取；只清理已认证临时文件。独立增量复审 APPROVE，4 项问题全部关闭；仅 journal primitive，不代表完整 Store 生命周期 |
 | Task 2 授权状态子步骤：可信 provider、不可变声明与域 epoch | `6dba20b` | Swift 授权 11/11；Android 授权 10/10；identity 模块及 Android lintDebug | provider 独立权威 epoch、同域撤销/新 grant 拒绝、声明不可改绑、ownership 独立授权、严格快照恢复。独立复审实现可接受，LOW issuedAt 测试缺口已补；candidate 持久化接入见下行 |
 | Task 2 后端停止子步骤：per-operation stop signal | `0d401fb` | Swift stop 8/8；Android stop 8/8；identity 59/59、57/57 及 Android lintDebug | 幂等停止、锁外 native stop 回调、停止前后检查、停止覆盖普通后端错误；致命 JVM Error 透传。独立复审 APPROVE；尚未接入 Store 在途 ticket/close drain |
@@ -150,4 +150,4 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - Store fault、正常 close、并发 close、lease/ticket 两种完成顺序、空目标 stop delivery、Android 中断恢复、旧回调重开隔离均有回归。Swift 还覆盖同一 stop signal 多 handler、多个 signal 交错、晚注册和 handler 派生 Task；每个 handler 使用独立 active frame，handler 返回后派生 Task 不能跳过 drain。
 - RED/GREEN：Swift frame 修复前两项交错回归各失败，修复后 identity **148/148**；Android **153/153**，失败/错误/跳过均为 0，`lintDebug` 通过。完整 Apple 原生权限运行 **206/206**（Speech 31、ModelStore 13、Identity 148、Face 9、Core 5），Vision 空白图测试本次成功；沙箱运行的 Vision Code9 只作为环境差异记录。
 - 独立 scoped re-review `task-2-retirement-frame-rereview.md`：spec compliance PASS、quality PASS，无 Critical/Important 遗留。Android 编译仍有既有 nullable/unchecked-cast 警告，lint 无错误。
-- Android API35 完整 `Context.noBackupFilesDir` Store probe 已通过：成功 `pass/-1`，受控失败 `fail/-2`，lease/purge、重开恢复、epoch 撤销和精确 cleanup 均有证据，见 [Android Store 真机探针](p10-android-store-device-probe.md)。Task 2 仍不等于生产完成：iOS Keychain Store 真机闭环、API26/iOS15 设备门禁和进程终止/文件系统故障注入仍单列；不以单元测试替代这些证据。
+- Android API35 完整 `Context.noBackupFilesDir` Store probe 已通过：成功 `pass/-1`，受控失败 `fail/-2`，lease/purge、重开恢复、epoch 撤销和精确 cleanup 均有证据，见 [Android Store 真机探针](p10-android-store-device-probe.md)。iOS27 Keychain Store 真机闭环也已通过，见 [iOS Store 真机探针](p10-ios-store-device-probe.md)。Task 2 仍不等于生产完成：API26/iOS15 设备门禁和进程终止/文件系统故障注入仍单列；不以单元测试替代这些证据。
