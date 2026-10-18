@@ -25,6 +25,7 @@ public actor IndexStore {
     private var activeTickets: [UUID: IdentityGalleryOperation] = [:]
     private var activePublishes: Set<UUID> = []
     private var activeReadTickets: [String: [IdentityGalleryOperation]] = [:]
+    private var rebuilding: Set<String> = []
     private var pendingStopDeliveries = 0
     private var lineageStopDeliveries: [String: Int] = [:]
 
@@ -37,6 +38,7 @@ public actor IndexStore {
         let aggregationPolicyId: String
         let lineageId: String
         var members: [String: GallerySnapshotMember]
+        var rebuild: GallerySnapshotRecord? = nil
     }
 
     public init(root: URL, identityStore: IdentityStore, keyProvider: any IdentityKeyProvider,
@@ -90,11 +92,24 @@ public actor IndexStore {
         try requireOpen(); guard let lineage = lastLineageId, deletedLineages[lineage] == nil else { return nil }; return try catalog.head(lineageId: lineage)
     }
 
+    /// Recreates only the derived cache for this exact durable snapshot.
+    public func rebuildIndex(_ ref: GalleryRef, grant: AuthorizationGrant) async throws -> GalleryRef {
+        try beginOperation(); defer { endOperation() }
+        let record = try catalog.snapshot(ref)
+        guard rebuilding.insert(ref.revision).inserted else { throw IdentityError(.busy) }
+        let id = UUID()
+        builders[id] = BuilderState(base: ref, operationGrant: grant, policy: record.policy,
+            aggregationPolicyId: record.aggregationPolicyId, lineageId: ref.id,
+            members: Dictionary(uniqueKeysWithValues: record.members.map { ($0.ref.id, $0) }), rebuild: record)
+        defer { builders.removeValue(forKey: id); rebuilding.remove(ref.revision) }
+        return try await builderPublish(id)
+    }
+
     func acquireIndexReadLease(_ ref: GalleryRef, grant: AuthorizationGrant? = nil) async throws -> IndexReadLease {
         guard let grant else { throw IdentityError(.authorizationRequired) }
         try beginOperation(); defer { endOperation() }
         let value = try snapshotSummary(ref)
-        guard preparedIndexes[ref.revision] != nil else { throw IdentityError(.rebuildRequired) }
+        guard let indexData = preparedIndexes[ref.revision] else { throw IdentityError(.rebuildRequired) }
         let ticket = try await identityStore.beginGalleryOperation(grant: grant,
             members: value.members.map { IdentityGalleryMember(ref: $0.ref, grant: $0.grant) }, embeddingSpace: value.policy.embeddingSpace,
             requiredGrants: [value.operationGrant])
@@ -105,7 +120,7 @@ public actor IndexStore {
         leases[ref.revision, default: 0] += 1
         leaseLineages[ref.id, default: 0] += 1; revisionLineages[ref.revision] = ref.id
         activeReadTickets[ref.id, default: []].append(ticket)
-        return IndexReadLease(snapshot: value, stopSignal: ticket.stopSignal) { [self] in
+        return IndexReadLease(snapshot: value, indexData: indexData, stopSignal: ticket.stopSignal) { [self] in
             await self.releaseReadLease(ref.revision, lineage: ref.id, ticket: ticket)
         }
     }
@@ -172,7 +187,8 @@ public actor IndexStore {
         var ticket: IdentityGalleryOperation?
         do {
             let admitted = try await identityStore.beginGalleryOperation(grant: state.operationGrant,
-                members: members.map { IdentityGalleryMember(ref: $0.ref, grant: $0.grant) }, embeddingSpace: state.policy.embeddingSpace)
+                members: members.map { IdentityGalleryMember(ref: $0.ref, grant: $0.grant) }, embeddingSpace: state.policy.embeddingSpace,
+                requiredGrants: state.rebuild.map { [$0.operationGrant] } ?? [])
             ticket = admitted
             activeTickets[id] = admitted
             for member in members { leases.append(try await identityStore.acquireTemplateLease(member.ref, grant: member.grant, scope: .identification, embeddingSpace: state.policy.embeddingSpace)) }
@@ -193,9 +209,13 @@ public actor IndexStore {
             try admitted.stopSignal.check()
             guard builders[id]?.status == .publishing, !closed else { throw IdentityError(.cancelled) }
             guard !bytes.isEmpty else { throw IdentityError(.indexUnavailable) }
-            let record = try GallerySnapshotRecord(indexStoreId: storeId, identityStoreId: identityStore.storeId, lineageId: state.lineageId,
+            let record = try state.rebuild ?? GallerySnapshotRecord(indexStoreId: storeId, identityStoreId: identityStore.storeId, lineageId: state.lineageId,
                 parent: state.base, members: members, operationGrant: state.operationGrant, policy: state.policy, aggregationPolicyId: state.aggregationPolicyId)
-            let result = try await identityStore.finishGalleryOperation(admitted) { try self.catalog.publish(record); return record.ref }
+            let isRebuild = state.rebuild != nil
+            let result = try await identityStore.finishGalleryOperation(admitted) {
+                if isRebuild { _ = try self.catalog.snapshot(record.ref) } else { try self.catalog.publish(record) }
+                return record.ref
+            }
             activeTickets.removeValue(forKey: id)
             preparedIndexes[record.ref.revision] = bytes
             preparedIndexLineages[record.ref.revision] = record.ref.id
@@ -299,13 +319,25 @@ public final class GalleryBuilder: @unchecked Sendable {
 }
 
 public final class IndexReadLease: @unchecked Sendable {
-    private let value: GallerySnapshotRecord; private let stopSignal: IdentityStopSignal; private let release: @Sendable () async -> Void; private let lock = NSLock(); private var closed = false
-    fileprivate init(snapshot: GallerySnapshotRecord, stopSignal: IdentityStopSignal, release: @escaping @Sendable () async -> Void) { value = snapshot; self.stopSignal = stopSignal; self.release = release }
+    private let value: GallerySnapshotRecord; private let stopSignal: IdentityStopSignal
+    private var release: (@Sendable () async -> Void)?; private var bytes: Data?
+    private let lock = NSLock(); private var closed = false
+    fileprivate init(snapshot: GallerySnapshotRecord, indexData: Data, stopSignal: IdentityStopSignal, release: @escaping @Sendable () async -> Void) {
+        value = snapshot; bytes = indexData; self.stopSignal = stopSignal; self.release = release
+    }
     func snapshot() throws -> GallerySnapshotRecord { lock.lock(); defer { lock.unlock() }; guard !closed else { throw IdentityError(.closed) }; try stopSignal.check(); return value }
+    func indexData() throws -> Data {
+        lock.lock(); defer { lock.unlock() }
+        guard !closed, let bytes else { throw IdentityError(.closed) }
+        try stopSignal.check(); return bytes
+    }
     func registerStopHandler(_ handler: @escaping @Sendable () -> Void) -> IdentityStopRegistration {
         stopSignal.registerStopHandler(handler)
     }
-    public func close() async { if takeClose() { await release() } }
-    private func takeClose() -> Bool { lock.lock(); defer { lock.unlock() }; guard !closed else { return false }; closed = true; return true }
-    deinit { if takeClose() { let callback = release; Task { await callback() } } }
+    public func close() async { if let callback = takeRelease() { await callback() } }
+    private func takeRelease() -> (@Sendable () async -> Void)? {
+        lock.lock(); defer { lock.unlock() }; guard !closed else { return nil }
+        closed = true; bytes = nil; let callback = release; release = nil; return callback
+    }
+    deinit { if let callback = takeRelease() { Task { await callback() } } }
 }

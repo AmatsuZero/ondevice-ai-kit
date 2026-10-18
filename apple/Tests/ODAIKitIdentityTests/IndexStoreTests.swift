@@ -390,6 +390,89 @@ final class IndexStoreTests: XCTestCase {
         await lease.close(); await context.index.close(); try await context.identity.close()
     }
 
+    func testReopenedRevisionCanBeExplicitlyRebuiltWithoutChangingItsReference() async throws {
+        let context = try await context()
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant); let ref = try await builder.publish()
+        await context.index.close()
+        let reopened = try await IndexStore.open(root: context.indexRoot, identityStore: context.identity, keyProvider: context.keys,
+            buildIndex: { _, signal in try signal.check(); return Data([9]) })
+        do { _ = try await reopened.acquireIndexReadLease(ref, grant: context.grant); XCTFail("recovered cache unexpectedly existed") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .rebuildRequired) }
+        let rebuilt = try await reopened.rebuildIndex(ref, grant: context.grant); XCTAssertEqual(rebuilt, ref)
+        let lease = try await reopened.acquireIndexReadLease(ref, grant: context.grant); XCTAssertEqual(try lease.snapshot().ref, ref)
+        await lease.close(); await reopened.close(); try await context.identity.close()
+    }
+
+    func testReadLeasePinsDerivedPayloadAcrossRebuildAndClearsOnRelease() async throws {
+        let counter = IndexBuildCounter()
+        let context = try await context(buildIndex: { _, _ in Data([counter.next()]) })
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant); let ref = try await builder.publish()
+        let old = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        let rebuilt = try await context.index.rebuildIndex(ref, grant: context.grant); XCTAssertEqual(rebuilt, ref)
+        let current = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        XCTAssertEqual(try old.indexData(), Data([1])); XCTAssertEqual(try current.indexData(), Data([2]))
+        await old.close(); XCTAssertThrowsError(try old.indexData()) { XCTAssertEqual(($0 as? IdentityError)?.code, .closed) }
+        await current.close(); await context.index.close(); try await context.identity.close()
+    }
+
+    func testFailedRebuildPreservesPreviouslyQueryableDerivedPayload() async throws {
+        let counter = IndexBuildCounter()
+        let context = try await context(buildIndex: { _, _ in
+            if counter.next() > 1 { throw IdentityError(.indexUnavailable) }
+            return Data([7])
+        })
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant); let ref = try await builder.publish()
+        do { _ = try await context.index.rebuildIndex(ref, grant: context.grant); XCTFail("failed rebuild succeeded") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .indexUnavailable) }
+        let lease = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        XCTAssertEqual(try lease.indexData(), Data([7]))
+        await lease.close(); await context.index.close(); try await context.identity.close()
+    }
+
+    func testDeletionStopsRebuildAndConcurrentRebuildIsBusy() async throws {
+        let counter = IndexBuildCounter(); let entered = expectation(description: "rebuild entered")
+        let release = DispatchSemaphore(value: 0)
+        let context = try await context(buildIndex: { _, signal in
+            if counter.next() > 1 {
+                let registration = signal.registerStopHandler { release.signal() }; defer { registration.close() }
+                entered.fulfill()
+                guard release.wait(timeout: .now() + 3) == .success else { throw IdentityError(.indexUnavailable) }
+                try signal.check()
+            }
+            return Data([1])
+        })
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant); let ref = try await builder.publish()
+        let rebuilding = Task { try await context.index.rebuildIndex(ref, grant: context.grant) }
+        await fulfillment(of: [entered], timeout: 1)
+        do { _ = try await context.index.rebuildIndex(ref, grant: context.grant); XCTFail("second rebuild accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .busy) }
+        _ = try await context.index.deleteGallery(ref, ownership: context.owner)
+        do { _ = try await rebuilding.value; XCTFail("deleted rebuild published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        do { _ = try await context.index.acquireIndexReadLease(ref, grant: context.grant); XCTFail("deleted revision revived") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .galleryRevisionGone) }
+        await context.index.close(); try await context.identity.close()
+    }
+
+    func testRebuildChecksRevokedSnapshotOriginBeforeEnteringBackend() async throws {
+        let context = try await context()
+        let operation = try AuthorizationGrant(grantId: "operation-rebuild", revocationDomainId: "operation-rebuild-domain", scope: [.identification], purpose: "identity", issuedAtMillis: 0, expiresAtMillis: nil, authorizationEpoch: 0, evidenceRef: "audit")
+        let builder = try await context.index.createGalleryBuilder(grant: operation, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant); let ref = try await builder.publish()
+        await context.index.close(); _ = try await context.identity.revokeGrant(operation.grantId, ownership: context.owner)
+        let built = expectation(description: "revoked rebuild must not enter backend"); built.isInverted = true
+        let reopened = try await IndexStore.open(root: context.indexRoot, identityStore: context.identity, keyProvider: context.keys,
+            buildIndex: { _, _ in built.fulfill(); return Data([1]) })
+        do { _ = try await reopened.rebuildIndex(ref, grant: context.grant); XCTFail("revoked origin rebuild accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        await fulfillment(of: [built], timeout: 0.05)
+        await reopened.close(); try await context.identity.close()
+    }
+
     private func context(buildIndex: @escaping GalleryIndexBuilder = { _, _ in Data([1]) }) async throws -> IndexTestContext {
         let keys = IndexTestKeys(); let authority = IndexTestAuthority()
         let identity = try IdentityStore(root: temporaryRoot(), purpose: "identity", authorizationProvider: authority,
@@ -398,8 +481,9 @@ final class IndexStoreTests: XCTestCase {
         let result = try await identity.enroll(IdentityProbe(fixtureID: "fixture", vector: [1, 2]), candidate: candidate, grant: grant,
             options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "q", revision: "1"), backend: FixtureIdentityBackend.system())
         let template = try XCTUnwrap(result.templateRef)
-        let index = try await IndexStore.open(root: temporaryRoot(), identityStore: identity, keyProvider: keys, buildIndex: buildIndex)
-        return try IndexTestContext(index: index, identity: identity, keys: keys, authority: authority, grant: grant, template: template,
+        let indexRoot = temporaryRoot()
+        let index = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys, buildIndex: buildIndex)
+        return try IndexTestContext(index: index, indexRoot: indexRoot, identity: identity, keys: keys, authority: authority, grant: grant, template: template,
             policy: identificationPolicy(template), owner: OwnershipAuthorization(storeId: identity.storeId, evidenceRef: "owner"))
     }
 
@@ -447,7 +531,7 @@ private func indexGrant() throws -> AuthorizationGrant {
 }
 
 private struct IndexTestContext {
-    let index: IndexStore; let identity: IdentityStore; let keys: IndexTestKeys; let authority: IndexTestAuthority
+    let index: IndexStore; let indexRoot: URL; let identity: IdentityStore; let keys: IndexTestKeys; let authority: IndexTestAuthority
     let grant: AuthorizationGrant; let template: TemplateRef; let policy: ThresholdPolicy; let owner: OwnershipAuthorization
 }
 private final class IndexBuildGate: @unchecked Sendable {
@@ -463,3 +547,7 @@ private final class IndexBuildGate: @unchecked Sendable {
 }
 
 private final class WeakIndexStore { weak var value: IndexStore? }
+private final class IndexBuildCounter: @unchecked Sendable {
+    private let lock = NSLock(); private var value: UInt8 = 0
+    func next() -> UInt8 { lock.lock(); defer { lock.unlock() }; value += 1; return value }
+}

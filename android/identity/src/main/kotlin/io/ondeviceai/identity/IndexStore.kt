@@ -19,6 +19,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
     private val indexLineages = mutableMapOf<String, String>()
     private val readTickets = mutableMapOf<UUID, Pair<String, IdentityGalleryOperationTicket>>()
     private val deleted = mutableMapOf<String, DeletionReceipt>()
+    private val rebuilding = mutableSetOf<String>()
     private var closed = false
     private var writerReleased = false
     private var inFlight = 0
@@ -28,6 +29,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
     private enum class Status { OPEN, PUBLISHING, PUBLISHED, DISCARDED }
     private class BuilderState(val lineage: String, val base: GalleryRef?, val grant: AuthorizationGrant,
         val policy: ThresholdPolicy, val aggregation: String, val members: MutableMap<String, GallerySnapshotMember>,
+        val rebuild: GallerySnapshotRecord? = null,
         var status: Status = Status.OPEN, var busy: Boolean = false, var ticket: IdentityGalleryOperationTicket? = null)
     private data class Stop(val lineage: String, val delivery: () -> Unit)
 
@@ -90,7 +92,8 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
         val leases = mutableListOf<IdentityTemplateLease>()
         var ticket: IdentityGalleryOperationTicket? = null
         try {
-            val admitted = identityStore.beginGalleryOperation(state.grant, members.map { IdentityGalleryMember(it.ref, it.grant) }, state.policy.embeddingSpace)
+            val admitted = identityStore.beginGalleryOperation(state.grant, members.map { IdentityGalleryMember(it.ref, it.grant) }, state.policy.embeddingSpace,
+                state.rebuild?.let { listOf(it.operationGrant) } ?: emptyList())
             ticket = admitted
             synchronized(gate) {
                 state.ticket = admitted
@@ -103,9 +106,12 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
             if (Thread.currentThread().isInterrupted) admitted.stopSignal.requestStop(IdentityStopReason.CANCELLED)
             admitted.stopSignal.check()
             if (bytes.isEmpty()) throw IdentityError(IdentityErrorCode.INDEX_UNAVAILABLE)
-            val record = GallerySnapshotRecord.create(storeId, identityStore.storeId, state.lineage, state.base, members, state.grant, state.policy, state.aggregation)
+            val record = state.rebuild ?: GallerySnapshotRecord.create(storeId, identityStore.storeId, state.lineage, state.base, members, state.grant, state.policy, state.aggregation)
             ticket = null
-            val result = identityStore.consumeGalleryOperation(admitted) { catalog.publish(record); record.ref }
+            val result = identityStore.consumeGalleryOperation(admitted) {
+                if (state.rebuild != null) catalog.snapshot(record.ref) else catalog.publish(record)
+                record.ref
+            }
             synchronized(gate) {
                 // A completed publication can be followed by deletion before this
                 // thread resumes. Never repopulate a purged/closed cache.
@@ -128,6 +134,18 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
         deliver(stops)
     }
 
+    /** Recreates only the derived cache for this exact durable snapshot. */
+    fun rebuildIndex(ref: GalleryRef, grant: AuthorizationGrant): GalleryRef = operation {
+        val id = synchronized(gate) {
+            val record = catalog.snapshot(ref)
+            if (!rebuilding.add(ref.revision)) throw IdentityError(IdentityErrorCode.BUSY)
+            UUID.randomUUID().also { id -> builders[id] = BuilderState(ref.id, ref, grant, record.policy,
+                record.aggregationPolicyId, record.members.associateBy { it.ref.id }.toMutableMap(), record) }
+        }
+        try { publish(id) }
+        finally { synchronized(gate) { builders.remove(id); rebuilding.remove(ref.revision) } }
+    }
+
     internal fun acquireIndexReadLease(ref: GalleryRef, grant: AuthorizationGrant): IndexReadLease = operation {
         val record = synchronized(gate) {
             val value = catalog.snapshot(ref)
@@ -139,7 +157,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
             synchronized(gate) {
                 requireOpen(); catalog.snapshot(ref)
                 readTickets[ticket.id] = ref.id to ticket
-                IndexReadLease(record, ticket.stopSignal) { releaseReadLease(ticket) }
+                IndexReadLease(record, ticket.stopSignal, indexes.getValue(ref.revision)) { releaseReadLease(ticket) }
             }
         } catch (error: Throwable) { runCatching { identityStore.consumeGalleryOperation(ticket) { Unit } }; throw error }
     }
@@ -267,9 +285,15 @@ class GalleryBuilder internal constructor(private val store: IndexStore, private
     override fun close() = store.closeBuilder(id)
 }
 
-class IndexReadLease internal constructor(private val record: GallerySnapshotRecord, private val signal: IdentityStopSignal, onRelease: () -> Unit) : AutoCloseable {
+class IndexReadLease internal constructor(private val record: GallerySnapshotRecord, private val signal: IdentityStopSignal,
+    indexData: ByteArray, onRelease: () -> Unit) : AutoCloseable {
+    private var bytes: ByteArray? = indexData.clone()
     private var release: (() -> Unit)? = onRelease
     internal fun snapshot(): GallerySnapshotRecord = synchronized(this) { if (release == null) throw IdentityError(IdentityErrorCode.CLOSED); signal.check(); record }
+    internal fun indexData(): ByteArray = synchronized(this) {
+        if (release == null) throw IdentityError(IdentityErrorCode.CLOSED)
+        signal.check(); requireNotNull(bytes).clone()
+    }
     internal fun registerStopHandler(callback: () -> Unit) = signal.registerStopHandler(callback)
-    override fun close() { val callback = synchronized(this) { val value = release; release = null; value }; callback?.invoke() }
+    override fun close() { val callback = synchronized(this) { val value = release; release = null; bytes = null; value }; callback?.invoke() }
 }

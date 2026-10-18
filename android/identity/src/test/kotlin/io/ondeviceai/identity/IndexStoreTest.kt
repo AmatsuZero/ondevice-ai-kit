@@ -331,6 +331,83 @@ class IndexStoreTest {
         } finally { lease.close(); index.close(); f.identity.close() }
     }
 
+    @Test fun reopenedRevisionCanBeExplicitlyRebuiltWithoutChangingItsReference() {
+        val f = fixture()
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, signal -> signal.check(); byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
+        val ref = builder.publish(); index.close()
+        IndexStore(f.indexRoot, f.identity, f.keys) { _, signal -> signal.check(); byteArrayOf(9) }.use { reopened ->
+            assertEquals(IdentityErrorCode.REBUILD_REQUIRED, assertFailsWith<IdentityError> { reopened.acquireIndexReadLease(ref, f.grant) }.code)
+            assertEquals(ref, reopened.rebuildIndex(ref, f.grant))
+            reopened.acquireIndexReadLease(ref, f.grant).use { assertEquals(ref, it.snapshot().ref) }
+        }
+        f.identity.close()
+    }
+
+    @Test fun readLeasePinsDerivedPayloadAcrossRebuildAndClearsOnRelease() {
+        val f = fixture(); var builds = 0
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf((++builds).toByte()) }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
+        val ref = builder.publish(); val old = index.acquireIndexReadLease(ref, f.grant)
+        assertEquals(ref, index.rebuildIndex(ref, f.grant))
+        val current = index.acquireIndexReadLease(ref, f.grant)
+        assertEquals(listOf<Byte>(1), old.indexData().toList()); assertEquals(listOf<Byte>(2), current.indexData().toList())
+        old.indexData()[0] = 99
+        assertEquals(listOf<Byte>(1), old.indexData().toList())
+        old.close(); assertEquals(IdentityErrorCode.CLOSED, assertFailsWith<IdentityError> { old.indexData() }.code)
+        current.close(); index.close(); f.identity.close()
+    }
+
+    @Test fun failedRebuildPreservesThePreviouslyQueryableDerivedPayload() {
+        val f = fixture(); var builds = 0
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ ->
+            if (++builds > 1) throw IdentityError(IdentityErrorCode.INDEX_UNAVAILABLE)
+            byteArrayOf(7)
+        }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
+        val ref = builder.publish()
+        assertEquals(IdentityErrorCode.INDEX_UNAVAILABLE, assertFailsWith<IdentityError> { index.rebuildIndex(ref, f.grant) }.code)
+        index.acquireIndexReadLease(ref, f.grant).use { assertEquals(listOf<Byte>(7), it.indexData().toList()) }
+        index.close(); f.identity.close()
+    }
+
+    @Test fun deletionStopsRebuildAndConcurrentRebuildIsBusy() {
+        val f = fixture(); var builds = 0
+        val entered = CountDownLatch(1); val release = CountDownLatch(1)
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, signal ->
+            if (++builds > 1) {
+                val registration = signal.registerStopHandler { release.countDown() }
+                try { entered.countDown(); check(release.await(3, TimeUnit.SECONDS)); signal.check() }
+                finally { registration.close() }
+            }
+            byteArrayOf(1)
+        }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
+        val ref = builder.publish(); val executor = Executors.newSingleThreadExecutor()
+        try {
+            val rebuilding = executor.submit<IdentityErrorCode?> { try { index.rebuildIndex(ref, f.grant); null } catch (error: IdentityError) { error.code } }
+            assertTrue(entered.await(1, TimeUnit.SECONDS))
+            assertEquals(IdentityErrorCode.BUSY, assertFailsWith<IdentityError> { index.rebuildIndex(ref, f.grant) }.code)
+            index.deleteGallery(ref, f.owner)
+            assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED, rebuilding.get(1, TimeUnit.SECONDS))
+            assertEquals(IdentityErrorCode.GALLERY_REVISION_GONE, assertFailsWith<IdentityError> { index.acquireIndexReadLease(ref, f.grant) }.code)
+        } finally { release.countDown(); executor.shutdownNow(); index.close(); f.identity.close() }
+    }
+
+    @Test fun rebuildChecksRevokedSnapshotOriginBeforeEnteringBackend() {
+        val f = fixture()
+        val operation = AuthorizationGrant("operation-rebuild", "operation-rebuild-domain", setOf(IdentityScope.IDENTIFICATION), "identity", 0, null, 0, "audit")
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = operation, policy = f.policy); builder.addTemplate(f.template, f.grant)
+        val ref = builder.publish(); index.close(); f.identity.revokeGrant(operation.grantId, f.owner)
+        var built = false
+        IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> built = true; byteArrayOf(1) }.use { reopened ->
+            assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED, assertFailsWith<IdentityError> { reopened.rebuildIndex(ref, f.grant) }.code)
+            assertTrue(!built)
+        }
+        f.identity.close()
+    }
+
     private fun fixture(): IndexFixture {
         val keys = IndexKeys(); val authority = IndexAuthority()
         val identity = IdentityStore(root().toFile(), "identity", authority, keys,
