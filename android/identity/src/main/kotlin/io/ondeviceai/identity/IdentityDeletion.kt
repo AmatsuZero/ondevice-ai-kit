@@ -10,16 +10,21 @@ data class DeletionReceipt internal constructor(
     val id: String,
     val storeId: String,
     val templateId: String? = null,
-    val candidateId: String? = null
+    val candidateId: String? = null,
+    val galleryId: String? = null
 ) {
     init {
         token(id); token(storeId)
-        if ((templateId == null) == (candidateId == null)) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
-        templateId?.let(::token); candidateId?.let(::token)
+        if (listOf(templateId, candidateId, galleryId).count { it != null } != 1) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        templateId?.let(::token); candidateId?.let(::token); galleryId?.let(::token)
     }
     fun canonicalJSON(): String = IdentityContractJSON.encode(buildMap {
         put("id", id); put("storeId", storeId)
-        if (templateId != null) put("templateId", templateId) else put("candidateId", candidateId)
+        when {
+            templateId != null -> put("templateId", templateId)
+            candidateId != null -> put("candidateId", candidateId)
+            else -> put("galleryId", galleryId)
+        }
     })
     companion object {
         fun decodeJSON(json: String): DeletionReceipt {
@@ -27,6 +32,7 @@ data class DeletionReceipt internal constructor(
             return when (fields.keys) {
                 setOf("id", "storeId", "templateId") -> DeletionReceipt(fields.string("id"), fields.string("storeId"), templateId = fields.string("templateId"))
                 setOf("id", "storeId", "candidateId") -> DeletionReceipt(fields.string("id"), fields.string("storeId"), candidateId = fields.string("candidateId"))
+                setOf("id", "storeId", "galleryId") -> DeletionReceipt(fields.string("id"), fields.string("storeId"), galleryId = fields.string("galleryId"))
                 else -> throw IdentityError(IdentityErrorCode.INVALID_INPUT)
             }
         }

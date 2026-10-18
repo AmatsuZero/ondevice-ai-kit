@@ -1088,6 +1088,16 @@ class IdentityStoreTest {
         store.close()
     }
 
+    @Test fun galleryDeletionReceiptWireIsStrictAndStoreBound() {
+        val receipt = DeletionReceipt("receipt", "store", galleryId = "gallery")
+        assertEquals(receipt, DeletionReceipt.decodeJSON(receipt.canonicalJSON()))
+        assertNull(receipt.templateId); assertNull(receipt.candidateId); assertEquals("gallery", receipt.galleryId)
+        assertCode(IdentityErrorCode.INVALID_INPUT) {
+            DeletionReceipt.decodeJSON("{\"id\":\"r\",\"storeId\":\"s\",\"galleryId\":\"g\",\"templateId\":\"t\"}")
+        }
+        assertCode(IdentityErrorCode.INVALID_INPUT) { DeletionReceipt("r", "s", galleryId = "g", candidateId = "c") }
+    }
+
     @Test fun repeatedCandidateDeletionRevalidatesOwnershipAndPreservesReceiptAfterRestart() {
         val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
         val candidate = store.createCandidate(grant()); val owner = OwnershipAuthorization(store.storeId, "owner")
