@@ -196,6 +196,14 @@ public actor IdentityStore {
         return grant
     }
 
+    /// IndexStore cannot access the provider or wall clock directly. Keep
+    /// gallery deletion ownership on the same authoritative boundary as
+    /// template and candidate deletion.
+    func validateGalleryOwnership(_ ownership: OwnershipAuthorization) throws {
+        guard !closed else { throw IdentityError(.closed) }
+        try IdentityAuthorizationState.requireOwnership(ownership, storeId: storeId, provider: provider, nowMillis: wallClock.nowMillis)
+    }
+
     public func revokeGrant(_ grantId: String, ownership: OwnershipAuthorization) async throws -> RevocationReceipt {
         guard !closed else { throw IdentityError(.closed) }
         try identityToken(grantId)

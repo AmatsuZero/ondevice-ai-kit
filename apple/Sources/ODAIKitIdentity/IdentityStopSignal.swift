@@ -44,13 +44,19 @@ public final class IdentityStopSignal: @unchecked Sendable {
     }
 
     public func requestStop(_ requested: IdentityStopReason) {
+        prepareStopDelivery(requested)?()
+    }
+
+    /// Commits the stop reason now, while letting an actor deliver native
+    /// callbacks after leaving its isolation boundary.
+    internal func prepareStopDelivery(_ requested: IdentityStopReason) -> (@Sendable () -> Void)? {
         lock.lock()
-        guard reason == nil else { lock.unlock(); return }
+        guard reason == nil else { lock.unlock(); return nil }
         reason = requested
         let pending = Array(handlers.values)
         handlers.removeAll(keepingCapacity: false)
         lock.unlock()
-        for handler in pending { Self.deliver(handler) }
+        return { for handler in pending { Self.deliver(handler) } }
     }
 
     private static func deliver(_ handler: @Sendable () -> Void) {
