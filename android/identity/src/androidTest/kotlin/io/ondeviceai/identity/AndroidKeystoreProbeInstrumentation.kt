@@ -3,7 +3,6 @@ package io.ondeviceai.identity
 import android.app.Instrumentation
 import android.os.Bundle
 import android.security.keystore.KeyInfo
-import java.security.KeyStore
 import javax.crypto.SecretKeyFactory
 
 /**
@@ -20,6 +19,10 @@ class AndroidKeystoreProbeInstrumentation : Instrumentation() {
     }
 
     override fun onStart() {
+        if (probeArguments?.getString("probe") == "store") {
+            AndroidIdentityStoreProbeInstrumentation(this, probeArguments ?: Bundle()).run()
+            return
+        }
         val test = Bundle().apply {
             putInt("numtests", 1)
             putInt("current", 1)

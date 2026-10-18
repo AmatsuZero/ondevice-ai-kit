@@ -45,7 +45,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 
 - Swift actor / Kotlin synchronized 门负责候选 admission、journal 持久化及发布；创建候选不会调用生物后端，也不存储图像/向量。
 - 元数据目前使用严格 64 KiB JSON 格式（包含授权快照），超限在提交前拒绝；后续模板/索引规模需另行设计存储格式。
-- Kotlin public open 只使用 Context.noBackupFilesDir 内的受管目录；其路径构造尚无 Context/真机验收，单测使用 internal 临时目录入口。
+- Kotlin public open 只使用 Context.noBackupFilesDir 内的受管目录；API35 已通过 public Context 真机探针，单测继续使用 internal 临时目录入口。
 - close 已请求 operation ticket stop，并等待 operation ticket 和内部 template lease 同时 drain。当前 retirement 差异将 journal poison 与物理解锁分离，writer 保持到 operation、lease 和 stop delivery 全部 drain；旧/关闭 Store 的回调只修改旧内存。双端已通过专项复审，Swift 多 handler 派生 Task 的 close 等待边界已有 RED→GREEN。
 
 ### 持久撤销当前边界
@@ -121,7 +121,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 内部 record ID 长度为 1–64 字节，加密记录总长不超过 16 MiB；拒绝超限输入和文件。
 - AAD 绑定 canonical root 路径和 record ID；移动目录会拒绝解密。接入真实应用前仍需验证平台容器路径变化的影响，不能推断为可迁移存储。
 - 加密写入临时文件先同步，再同目录原子替换并同步父目录；异常会退休当前 writer。已有测试覆盖密钥拒绝、旧记录保留、关闭/重开、篡改和恢复；真实进程终止及设备文件系统故障注入仍待后续验收。
-- Swift 根目录显式排除备份；Android primitive 为 internal，生产 IdentityStore.open 将目录限定在 `noBackupFilesDir` 内，真实 Context 路径仍待设备验证。
+- Swift 根目录显式排除备份；Android primitive 为 internal，生产 IdentityStore.open 将目录限定在 `noBackupFilesDir` 内，真实 Context/noBackup 路径已在 API35 探针验证，API26 仍待设备。
 - 未认证、损坏或不属于此 record 的临时文件会保留，不按名字删除。未提供全盘清理或闪存擦除承诺。
 
 ## 生产门槛
@@ -150,4 +150,4 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - Store fault、正常 close、并发 close、lease/ticket 两种完成顺序、空目标 stop delivery、Android 中断恢复、旧回调重开隔离均有回归。Swift 还覆盖同一 stop signal 多 handler、多个 signal 交错、晚注册和 handler 派生 Task；每个 handler 使用独立 active frame，handler 返回后派生 Task 不能跳过 drain。
 - RED/GREEN：Swift frame 修复前两项交错回归各失败，修复后 identity **148/148**；Android **153/153**，失败/错误/跳过均为 0，`lintDebug` 通过。完整 Apple 原生权限运行 **206/206**（Speech 31、ModelStore 13、Identity 148、Face 9、Core 5），Vision 空白图测试本次成功；沙箱运行的 Vision Code9 只作为环境差异记录。
 - 独立 scoped re-review `task-2-retirement-frame-rereview.md`：spec compliance PASS、quality PASS，无 Critical/Important 遗留。Android 编译仍有既有 nullable/unchecked-cast 警告，lint 无错误。
-- 该切片仍不等于 Task 2 完成：Android 完整 `Context.noBackupFilesDir` Store probe、iOS Keychain Store 真机闭环、API26/iOS15 设备门禁和进程终止/文件系统故障注入仍单列；不以单元测试替代这些证据。
+- Android API35 完整 `Context.noBackupFilesDir` Store probe 已通过：成功 `pass/-1`，受控失败 `fail/-2`，lease/purge、重开恢复、epoch 撤销和精确 cleanup 均有证据，见 [Android Store 真机探针](p10-android-store-device-probe.md)。Task 2 仍不等于生产完成：iOS Keychain Store 真机闭环、API26/iOS15 设备门禁和进程终止/文件系统故障注入仍单列；不以单元测试替代这些证据。
