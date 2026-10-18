@@ -218,7 +218,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
             if (state.busy) throw IdentityError(IdentityErrorCode.BUSY)
             state.busy = true; state
         }
-        try { body(state) } finally { synchronized(gate) { state.busy = false } }
+        try { body(state) } finally { synchronized(gate) { state.busy = false; purge(state.lineage) } }
     }
     private fun requireBuilderOpen(state: BuilderState) { requireOpen(); if (state.status != Status.OPEN) throw IdentityError(IdentityErrorCode.BUILDER_CLOSED) }
     private fun requireOpen() { if (closed) throw IdentityError(IdentityErrorCode.CLOSED) }
@@ -257,7 +257,8 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
         finally { synchronized(gate) { val lineage = readTickets.remove(ticket.id)?.first; if (lineage != null) purge(lineage); releaseWriterIfDrained() } }
     }
     private fun purge(lineage: String) {
-        if (lineage !in deleted || readTickets.values.any { it.first == lineage } || (lineageStops[lineage] ?: 0) > 0) return
+        if (lineage !in deleted || readTickets.values.any { it.first == lineage } ||
+            builders.values.any { it.lineage == lineage && it.busy } || (lineageStops[lineage] ?: 0) > 0) return
         catalog.removeLineage(lineage)
         indexLineages.filterValues { it == lineage }.keys.toList().forEach { indexes.remove(it); indexLineages.remove(it) }
     }

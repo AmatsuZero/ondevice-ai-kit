@@ -158,10 +158,13 @@ final class IndexStoreTests: XCTestCase {
         await fulfillment(of: [entered], timeout: 2)
         let deletion = Task { let receipt = try await context.index.deleteGallery(base, ownership: context.owner); deleted.fulfill(); return receipt }
         await fulfillment(of: [deleted], timeout: 1)
+        let receipt = try await deletion.value
+        let pending = try await context.index.awaitDeletion(receipt)
+        XCTAssertEqual(pending, .purgePending, "native child build still owns derived work")
         gate.release()
-        _ = try await deletion.value
         do { _ = try await publication.value; XCTFail("deleted child build was published") }
         catch { XCTAssertTrue([IdentityErrorCode.authorizationRevoked, .galleryRevisionGone, .cancelled].contains((error as? IdentityError)?.code ?? .invalidInput)) }
+        let purged = try await context.index.awaitDeletion(receipt); XCTAssertEqual(purged, .purged)
         await context.index.close(); try await context.identity.close()
     }
 

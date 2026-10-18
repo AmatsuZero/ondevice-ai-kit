@@ -99,9 +99,11 @@ class IndexStoreTest {
             val publication = executor.submit<IdentityErrorCode?> { try { child.publish(); null } catch (error: IdentityError) { error.code } }
             assertTrue(entered.await(1, TimeUnit.SECONDS))
             val deletion = executor.submit<DeletionReceipt> { index.deleteGallery(base, f.owner) }
-            deletion.get(1, TimeUnit.SECONDS)
+            val receipt = deletion.get(1, TimeUnit.SECONDS)
+            assertEquals(DeletionStatus.PURGE_PENDING, index.awaitDeletion(receipt), "native child build still owns derived work")
             release.countDown()
             assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED, publication.get(2, TimeUnit.SECONDS))
+            assertEquals(DeletionStatus.PURGED, index.awaitDeletion(receipt))
         } finally { release.countDown(); executor.shutdownNow(); index.close(); f.identity.close() }
     }
 

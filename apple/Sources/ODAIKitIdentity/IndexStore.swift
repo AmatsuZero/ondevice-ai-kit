@@ -180,7 +180,7 @@ public actor IndexStore {
         defer { endBuilderMutation(id) }
         guard !state.members.isEmpty else { throw IdentityError(.invalidInput) }
         activePublishes.insert(id)
-        defer { activePublishes.remove(id) }
+        defer { activePublishes.remove(id); try? purgeLineageIfPossible(state.lineageId) }
         state.status = .publishing; builders[id] = state
         let members = state.members.values.sorted { $0.ref.id < $1.ref.id }
         var leases: [IdentityTemplateLease] = []
@@ -293,7 +293,8 @@ public actor IndexStore {
         if closed && inFlight == 0 && leases.isEmpty && pendingStopDeliveries == 0 { finishClose() }
     }
     private func purgeLineageIfPossible(_ lineage: String) throws {
-        guard deletedLineages[lineage] != nil, leaseLineages[lineage] == nil, lineageStopDeliveries[lineage] == nil else { return }
+        guard deletedLineages[lineage] != nil, leaseLineages[lineage] == nil, lineageStopDeliveries[lineage] == nil,
+              !activePublishes.contains(where: { builders[$0]?.lineageId == lineage }) else { return }
         try catalog.removeLineage(lineage)
         let revisions = preparedIndexLineages.compactMap { $0.value == lineage ? $0.key : nil }
         for revision in revisions { preparedIndexes.removeValue(forKey: revision); preparedIndexLineages.removeValue(forKey: revision); revisionLineages.removeValue(forKey: revision) }
