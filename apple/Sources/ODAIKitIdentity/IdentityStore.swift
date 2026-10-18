@@ -14,6 +14,7 @@ public actor IdentityStore {
     private var revocations: [String: IdentityRevocation]
     private var templates: [String: IdentityTemplateRecord] = [:]
     private var stages: Set<String> = []
+    private var templateLeases: [String: Int] = [:]
     private var closed = false
     private var writerReleased = false
     private struct Operation {
@@ -179,7 +180,7 @@ public actor IdentityStore {
         guard let operation = operations[ticket.id], operation.ticket === ticket else { throw IdentityError(.invalidInput) }
         defer {
             operations.removeValue(forKey: ticket.id)
-            if operations.isEmpty {
+            if operations.isEmpty && templateLeases.isEmpty {
                 let waiters = drainWaiters; drainWaiters.removeAll()
                 for waiter in waiters { waiter.resume() }
             }
@@ -278,6 +279,54 @@ public actor IdentityStore {
         return try CandidateRef(id: record.candidateId, storeId: storeId)
     }
 
+    /// Reads and pins a template vector for a verification or identification
+    /// operation. The passed declaration may be a different grant in the same
+    /// domain and epoch; the provider remains authoritative at admission.
+    func acquireTemplateLease(_ ref: TemplateRef, grant: AuthorizationGrant,
+                              scope: IdentityScope, embeddingSpace: EmbeddingSpaceId) throws -> IdentityTemplateLease {
+        guard !closed else { throw IdentityError(.closed) }
+        guard scope == .verification || scope == .identification else { throw IdentityError(.unsupportedOption) }
+        _ = try recordedTemplateCandidate(ref)
+        guard let record = templates[ref.id] else { throw IdentityError(.templateNotFound) }
+        try ref.validate(against: record.ref)
+        guard record.ref.embeddingSpaceId == embeddingSpace else { throw IdentityError(.embeddingSpaceMismatch) }
+        let capability: IdentityCapability = scope == .verification ? .verification : .identification
+        guard embeddingSpace.supportedCapabilities.contains(capability) else { throw IdentityError(.embeddingSpaceMismatch) }
+        guard let storedGrant = authorization.recordedGrant(record.grantId),
+              storedGrant.scope.contains(.enrollment),
+              storedGrant.revocationDomainId == grant.revocationDomainId,
+              storedGrant.purpose == grant.purpose,
+              storedGrant.authorizationEpoch == grant.authorizationEpoch else {
+            throw IdentityError(.authorizationRequired)
+        }
+        let next = try authorization.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
+        let value = try payload.read(recordId: ref.id, space: embeddingSpace)
+        // Recheck after decryption so a provider callback cannot make the
+        // lease stale before it becomes visible to a consumer.
+        _ = try next.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
+        if next != authorization {
+            let bytes = try Self.encode(storeId: storeId, authorization: next, candidates: candidates,
+                                        revocations: revocations, templates: templates, stages: stages)
+            do { try journal.commit(bytes) } catch { closed = true; throw error }
+            authorization = next
+            _ = try authorization.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
+        }
+        templateLeases[ref.id, default: 0] += 1
+        return IdentityTemplateLease(value: value) {
+            await self.releaseTemplateLease(ref.id)
+        }
+    }
+
+    private func releaseTemplateLease(_ id: String) {
+        guard let count = templateLeases[id] else { return }
+        if count <= 1 { templateLeases.removeValue(forKey: id) }
+        else { templateLeases[id] = count - 1 }
+        if operations.isEmpty && templateLeases.isEmpty {
+            let waiters = drainWaiters; drainWaiters.removeAll()
+            for waiter in waiters { waiter.resume() }
+        }
+    }
+
     public func close() async throws {
         guard !writerReleased else { return }
         closed = true
@@ -288,7 +337,9 @@ public actor IdentityStore {
         }
         await Self.stop(revoked, reason: .authorizationRevoked)
         await Self.stop(closing, reason: .closed)
-        if !operations.isEmpty { await withCheckedContinuation { drainWaiters.append($0) } }
+        if !operations.isEmpty || !templateLeases.isEmpty {
+            await withCheckedContinuation { drainWaiters.append($0) }
+        }
         guard !writerReleased else { return }
         try journal.close(); writerReleased = true
     }

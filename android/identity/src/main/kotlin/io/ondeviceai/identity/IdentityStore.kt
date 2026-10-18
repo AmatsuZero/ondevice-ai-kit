@@ -28,6 +28,7 @@ class IdentityStore internal constructor(
     private var stages: Set<String> = emptySet()
     private var closed = false
     private var operating = false
+    private val leases = mutableMapOf<String, MutableSet<IdentityTemplateLease>>()
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
     private val gate = java.lang.Object()
     private var writerReleased = false
@@ -217,6 +218,53 @@ class IdentityStore internal constructor(
         CandidateRef(record.candidateId, storeId)
     }
 
+    internal fun acquireTemplateLease(
+        ref: TemplateRef,
+        grant: AuthorizationGrant,
+        scope: IdentityScope,
+        embeddingSpace: EmbeddingSpaceId
+    ): IdentityTemplateLease = mutation {
+        if (scope != IdentityScope.VERIFICATION && scope != IdentityScope.IDENTIFICATION)
+            throw IdentityError(IdentityErrorCode.UNSUPPORTED_OPTION)
+        val record = templates[ref.id] ?: throw IdentityError(IdentityErrorCode.TEMPLATE_NOT_FOUND)
+        ref.validate(record.ref)
+        if (ref.embeddingSpaceId != embeddingSpace) throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
+        val capability = if (scope == IdentityScope.VERIFICATION) IdentityCapability.VERIFICATION else IdentityCapability.IDENTIFICATION
+        if (capability !in embeddingSpace.supportedCapabilities) throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
+        val templateGrant = authorization.recordedGrant(record.grantId)
+            ?: throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        val candidateGrantId = candidates[record.candidateId]
+        val candidateGrant = candidateGrantId?.let(authorization::recordedGrant)
+            ?: throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        if (candidateGrant.authorizationEpoch != authorization.highestEpoch(candidateGrant.revocationDomainId) ||
+            revocations.values.any { record.candidateId in it.candidateIds })
+            throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        if (templateGrant.revocationDomainId != grant.revocationDomainId || templateGrant.purpose != grant.purpose ||
+            templateGrant.authorizationEpoch != grant.authorizationEpoch || templateGrant.purpose != purpose)
+            throw IdentityError(IdentityErrorCode.AUTHORIZATION_REQUIRED)
+        val admitted = authorization.admitting(grant, scope, authorizationProvider, wallClock.nowMillis)
+        if (admitted.canonicalJSON() != authorization.canonicalJSON()) {
+            journalCommit(encode(storeId, admitted, candidates, revocations, templates, stages))
+            authorization = admitted
+        }
+        val embedding = payload.read(ref.id, embeddingSpace)
+        val rechecked = authorization.admitting(grant, scope, authorizationProvider, wallClock.nowMillis)
+        if (rechecked.canonicalJSON() != authorization.canonicalJSON()) {
+            journalCommit(encode(storeId, rechecked, candidates, revocations, templates, stages))
+            authorization = rechecked
+        }
+        val lease = IdentityTemplateLease(embedding) { releaseLease(ref.id, it) }
+        leases.getOrPut(ref.id) { linkedSetOf() }.add(lease)
+        lease
+    }
+
+    private fun releaseLease(templateId: String, lease: IdentityTemplateLease) = synchronized(gate) {
+        val held = leases[templateId] ?: return@synchronized
+        held.remove(lease)
+        if (held.isEmpty()) leases.remove(templateId)
+        if (leases.isEmpty()) gate.notifyAll()
+    }
+
     private fun journalCommit(bytes: ByteArray) { try { journal.commit(bytes) } catch (error: Exception) { closed = true; throw error } }
 
     override fun close() {
@@ -233,7 +281,7 @@ class IdentityStore internal constructor(
         var interrupted = false
         try {
             synchronized(gate) {
-                while (operations.isNotEmpty()) {
+                while (operations.isNotEmpty() || leases.isNotEmpty()) {
                     try { gate.wait() } catch (_: InterruptedException) { interrupted = true }
                 }
                 if (!writerReleased) { journal.close(); writerReleased = true }

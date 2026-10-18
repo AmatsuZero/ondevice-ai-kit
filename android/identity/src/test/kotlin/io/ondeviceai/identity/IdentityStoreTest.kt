@@ -589,10 +589,152 @@ class IdentityStoreTest {
         }
     }
 
+    @Test fun templateLeaseValidatesScopeSpaceAndFullAuthorization() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val enrollment = grant(); val candidate = store.createCandidate(enrollment)
+        val template = requireNotNull(store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, enrollment,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val verification = grantWithScope("verify", IdentityScope.VERIFICATION)
+        val lease = store.acquireTemplateLease(template, verification, IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        assertEquals(template.embeddingSpaceId, lease.embedding.embeddingSpace)
+        lease.close()
+        assertCode(IdentityErrorCode.UNSUPPORTED_OPTION) {
+            store.acquireTemplateLease(template, enrollment, IdentityScope.ENROLLMENT, template.embeddingSpaceId)
+        }
+        assertCode(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH) {
+            store.acquireTemplateLease(template, verification, IdentityScope.VERIFICATION, FixtureIdentityBackend.system("other").embeddingSpace)
+        }
+        assertCode(IdentityErrorCode.AUTHORIZATION_REQUIRED) {
+            store.acquireTemplateLease(template, grantWithScope("foreign", IdentityScope.VERIFICATION, domain = "tenant.other"), IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        }
+        store.close()
+    }
+
+    @Test fun templateLeaseAcceptsDifferentGrantSameDomainEpochAndPersistsItForRevoke() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val enrollment = grant(); val candidate = store.createCandidate(enrollment)
+        val template = requireNotNull(store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, enrollment,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val verification = grantWithScope("verify", IdentityScope.VERIFICATION)
+        store.acquireTemplateLease(template, verification, IdentityScope.VERIFICATION, template.embeddingSpaceId).close()
+        store.close()
+        val reopened = store(root, keys, provider)
+        assertEquals(reopened.storeId, reopened.revokeGrant("verify", OwnershipAuthorization(reopened.storeId, "owner")).storeId)
+        reopened.close()
+    }
+
+    @Test fun templateLeaseEmbeddingIsClearedAfterCloseAndCloseWaitsForLeaseDrain() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val enrollment = grant(); val candidate = store.createCandidate(enrollment)
+        val template = requireNotNull(store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, enrollment,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val verification = grantWithScope("verify", IdentityScope.VERIFICATION)
+        val lease = store.acquireTemplateLease(template, verification, IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        val ticket = store.beginOperation(candidate, verification, IdentityScope.VERIFICATION)
+        val enteredClose = CountDownLatch(1)
+        val registration = ticket.stopSignal.registerStopHandler { enteredClose.countDown() }
+        val executor = Executors.newSingleThreadExecutor()
+        try {
+            val closing = executor.submit { store.close() }
+            assertTrue(enteredClose.await(2, TimeUnit.SECONDS))
+            assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) }
+            assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+            lease.close()
+            closing.get(2, TimeUnit.SECONDS)
+            assertCode(IdentityErrorCode.CLOSED) { lease.embedding }
+            val reopened = store(root, keys, provider)
+            lease.close()
+            assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+            assertEquals(candidate, reopened.recordedTemplateCandidate(template))
+            reopened.close()
+            store.close()
+        } finally { lease.close(); registration.close(); executor.shutdownNow() }
+    }
+
+    @Test fun templateLeaseProviderReentryCannotOverwriteRevocation() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val enrollment = grant(); val candidate = store.createCandidate(enrollment)
+        val template = requireNotNull(store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, enrollment,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        var nestedFailure: Throwable? = null
+        provider.onAuthorize = {
+            provider.onAuthorize = null
+            nestedFailure = runCatching { store.revokeGrant("g1", OwnershipAuthorization(store.storeId, "owner")) }.exceptionOrNull()
+        }
+        val lease = store.acquireTemplateLease(template, grantWithScope("verify", IdentityScope.VERIFICATION), IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        lease.close()
+        assertEquals(IdentityErrorCode.BUSY, (nestedFailure as? IdentityError)?.code)
+        store.close()
+        store(root, keys, provider).close()
+    }
+
+    @Test fun templateLeaseRejectsRevokedReferenceWithTemplateError() {
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority()); val enrollment = grant()
+        val candidate = store.createCandidate(enrollment)
+        val template = requireNotNull(store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, enrollment,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        store.revokeGrant("g1", OwnershipAuthorization(store.storeId, "owner"))
+        assertCode(IdentityErrorCode.TEMPLATE_REVOKED) {
+            store.acquireTemplateLease(template, grantWithScope("verify", IdentityScope.VERIFICATION), IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        }
+        store.close()
+    }
+
+    @Test fun templateLeaseRejectsExpiredAlteredAndProviderStaleGrants() {
+        val provider = StoreAuthority(); val store = store(tempRoot(), StoreKeys(), provider)
+        val enrollment = grant(); val candidate = store.createCandidate(enrollment)
+        val template = requireNotNull(store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, enrollment,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val verification = grantWithScope("verify", IdentityScope.VERIFICATION)
+        val expired = AuthorizationGrant("expired", "tenant.subject", setOf(IdentityScope.VERIFICATION), "login", 0, 100, 0, "audit")
+        assertCode(IdentityErrorCode.AUTHORIZATION_EXPIRED) { store.acquireTemplateLease(template, expired, IdentityScope.VERIFICATION, template.embeddingSpaceId) }
+        assertCode(IdentityErrorCode.AUTHORIZATION_REQUIRED) { store.acquireTemplateLease(template, enrollment, IdentityScope.VERIFICATION, template.embeddingSpaceId) }
+        store.acquireTemplateLease(template, verification, IdentityScope.VERIFICATION, template.embeddingSpaceId).close()
+        val altered = AuthorizationGrant("verify", "tenant.subject", setOf(IdentityScope.VERIFICATION), "login", 1, 200, 0, "audit")
+        assertCode(IdentityErrorCode.AUTHORIZATION_REQUIRED) { store.acquireTemplateLease(template, altered, IdentityScope.VERIFICATION, template.embeddingSpaceId) }
+        provider.epoch = 1
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.acquireTemplateLease(template, verification, IdentityScope.VERIFICATION, template.embeddingSpaceId) }
+        store.close()
+    }
+
+    @Test fun templateLeaseRechecksEpochAfterDecryptAndReleasesWithoutTouchingNewWriter() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val enrollment = grant(); val candidate = store.createCandidate(enrollment)
+        val template = requireNotNull(store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, enrollment,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        val verification = grantWithScope("verify", IdentityScope.VERIFICATION)
+        keys.onTemplateRead = { provider.epoch = 1 }
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.acquireTemplateLease(template, verification, IdentityScope.VERIFICATION, template.embeddingSpaceId) }
+        keys.onTemplateRead = null; provider.epoch = 0
+        val lease = store.acquireTemplateLease(template, verification, IdentityScope.VERIFICATION, template.embeddingSpaceId)
+        keys.rejectJournal = true
+        assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { store.createCandidate(grant("uncommitted")) }
+        keys.rejectJournal = false
+        val reopened = store(root, keys, provider)
+        lease.close(); lease.close(); store.close()
+        assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+        assertEquals(candidate, reopened.recordedTemplateCandidate(template))
+        reopened.close()
+    }
+
+    @Test fun identificationLeaseRejectsVerificationOnlyEmbeddingSpace() {
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority())
+        val enrollment = grant(); val candidate = store.createCandidate(enrollment)
+        val backend = VerificationOnlyBackend()
+        val ref = requireNotNull(store.enroll(IdentityProbe("verification-only", listOf(1f, 2f)), candidate, enrollment,
+            EnrollmentOptions(0.8, "host.quality", "q1"), backend).templateRef)
+        assertCode(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH) {
+            store.acquireTemplateLease(ref, grantWithScope("identify", IdentityScope.IDENTIFICATION), IdentityScope.IDENTIFICATION, ref.embeddingSpaceId).close()
+        }
+        store.close()
+    }
+
     private fun store(root: java.nio.file.Path, keys: StoreKeys, provider: StoreAuthority) =
         IdentityStore(root.toFile(), "login", provider, keys, StoreClock(100), StoreMono())
     private fun grant(id: String = "g1", purpose: String = "login", epoch: Long = 0, domain: String = "tenant.subject") =
         AuthorizationGrant(id, domain, setOf(IdentityScope.ENROLLMENT), purpose, 0, 200, epoch, "audit")
+    private fun grantWithScope(id: String, scope: IdentityScope, epoch: Long = 0, domain: String = "tenant.subject") =
+        AuthorizationGrant(id, domain, setOf(scope), "login", 0, 200, epoch, "audit")
     private fun tempRoot() = Files.createTempDirectory("identity-store").also { roots.add(it) }
     private fun assertCode(code: IdentityErrorCode, block: () -> Any?) =
         assertEquals(code, assertFailsWith<IdentityError> { block() }.code)
@@ -604,9 +746,11 @@ private class StoreKeys : IdentityKeyProvider {
     var rejectTemplateCreation = false
     var failJournalAfterTemplateCreation = false
     var rejectJournal = false
+    var onTemplateRead: (() -> Unit)? = null
     override fun key(id: String, createIfMissing: Boolean): SecretKey = synchronized(values) {
         if (reject) throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
         if (rejectJournal && id.startsWith("journal.")) throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
+        if (!createIfMissing && id.startsWith("template.")) onTemplateRead?.invoke()
         if (rejectTemplateCreation && createIfMissing && id.startsWith("template.")) throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
         values[id] ?: if (createIfMissing) KeyGenerator.getInstance("AES").apply { init(256) }.generateKey().also {
             values[id] = it
@@ -615,6 +759,21 @@ private class StoreKeys : IdentityKeyProvider {
         else throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
     }
     override fun deleteKey(id: String) { synchronized(values) { values.remove(id) } }
+}
+
+private class VerificationOnlyBackend : IdentityBackend {
+    private val base = FixtureIdentityBackend.system()
+    override val backendId = base.backendId
+    override val backendVersion = base.backendVersion
+    override val modelBinding = base.modelBinding
+    override val embeddingSpace = EmbeddingSpaceId(setOf(IdentityCapability.VERIFICATION), base.embeddingSpace.backendId,
+        base.embeddingSpace.backendVersion, base.embeddingSpace.modelBinding, base.embeddingSpace.featureFormatVersion,
+        base.embeddingSpace.dimension, base.embeddingSpace.dtype, base.embeddingSpace.endianness, base.embeddingSpace.normalization,
+        base.embeddingSpace.preprocessRevision, base.embeddingSpace.scoreMetric, base.embeddingSpace.scoreDirection)
+    override fun availability() = base.availability()
+    override fun evaluateQuality(probe: IdentityProbe) = base.evaluateQuality(probe)
+    override fun embed(probe: IdentityProbe) = IdentityEmbedding(embeddingSpace, base.embed(probe).values)
+    override fun close() = base.close()
 }
 
 private class EnrollmentTestBackend(val quality: IdentityQuality = IdentityQuality(1, 1.0), val failure: Boolean = false, val block: Boolean = false) : IdentityBackend {
