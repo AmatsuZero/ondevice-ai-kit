@@ -24,7 +24,7 @@ class IndexStoreTest {
 
     @Test fun immutableRevisionsCasReadLeaseAndLineageDeletionPersist() {
         val f = fixture()
-        val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
         builder.addTemplate(f.template, f.grant)
         val first = builder.publish()
@@ -42,7 +42,7 @@ class IndexStoreTest {
         assertEquals(DeletionStatus.PURGED, index.awaitDeletion(receipt))
         f.identity.acquireTemplateLease(f.template, f.grant, IdentityScope.VERIFICATION, f.template.embeddingSpaceId).close()
         index.close()
-        IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }.use { reopened ->
+        IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.use { reopened ->
             assertEquals(receipt, reopened.deleteGallery(first, f.owner))
             assertEquals(IdentityErrorCode.GALLERY_REVISION_GONE, assertFailsWith<IdentityError> { reopened.acquireIndexReadLease(first, f.grant) }.code)
         }
@@ -51,7 +51,7 @@ class IndexStoreTest {
 
     @Test fun failedChildBuildKeepsPriorIndexQueryableAndDiscardsBuilder() {
         val f = fixture(); var calls = 0
-        val index = IndexStore(f.indexRoot, f.identity, f.keys) { embeddings ->
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { embeddings, _ ->
             assertEquals(f.template.embeddingSpaceId, embeddings.single().embeddingSpace)
             if (++calls > 1) throw IdentityError(IdentityErrorCode.INDEX_UNAVAILABLE)
             byteArrayOf(1)
@@ -65,7 +65,7 @@ class IndexStoreTest {
     }
 
     @Test fun ownershipDenialCannotTombstoneOrCreateADeletionReceipt() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
         val ref = builder.publish()
         f.authority.denyOwnership = true
@@ -76,7 +76,7 @@ class IndexStoreTest {
     }
 
     @Test fun revocationStopsTheWholeReadLeaseWithoutSilentlyFiltering() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
         val ref = builder.publish(); val lease = index.acquireIndexReadLease(ref, f.grant)
         f.identity.revokeGrant(f.grant.grantId, f.owner)
@@ -88,7 +88,7 @@ class IndexStoreTest {
     @Test fun logicalDeletionDoesNotWaitForTheChildBuildToReturn() {
         val f = fixture(); var calls = 0
         val entered = CountDownLatch(1); val release = CountDownLatch(1)
-        val index = IndexStore(f.indexRoot, f.identity, f.keys) {
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ ->
             if (++calls > 1) { entered.countDown(); check(release.await(3, TimeUnit.SECONDS)) }
             byteArrayOf(1)
         }
@@ -106,7 +106,7 @@ class IndexStoreTest {
     }
 
     @Test fun identityOriginatedStopCallbackCanReenterIndexClose() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
         builder.addTemplate(f.template, f.grant); val ref = builder.publish()
         val lease = index.acquireIndexReadLease(ref, f.grant)
@@ -125,7 +125,7 @@ class IndexStoreTest {
 
     @Test fun preInterruptedPublicationDoesNotStartAnExpensiveBuild() {
         val f = fixture(); val built = AtomicBoolean()
-        val index = IndexStore(f.indexRoot, f.identity, f.keys) { built.set(true); byteArrayOf(1) }
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> built.set(true); byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
         builder.addTemplate(f.template, f.grant)
         val executor = Executors.newSingleThreadExecutor()
@@ -141,7 +141,7 @@ class IndexStoreTest {
     }
 
     @Test fun everyConcurrentCloseRetainsTheWriterUntilReadLeaseRelease() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
         builder.addTemplate(f.template, f.grant); val ref = builder.publish()
         val lease = index.acquireIndexReadLease(ref, f.grant); val stopped = CountDownLatch(1)
@@ -154,15 +154,15 @@ class IndexStoreTest {
             assertEquals(IdentityErrorCode.CLOSED, assertFailsWith<IdentityError> { lease.snapshot() }.code)
             assertFailsWith<java.util.concurrent.TimeoutException> { second.get(50, TimeUnit.MILLISECONDS) }
             assertEquals(IdentityErrorCode.BUSY, assertFailsWith<IdentityError> {
-                IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }.close()
+                IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.close()
             }.code)
             lease.close(); first.get(2, TimeUnit.SECONDS); second.get(2, TimeUnit.SECONDS)
-            IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }.close()
+            IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.close()
         } finally { lease.close(); registration.close(); executor.shutdownNow(); index.close(); f.identity.close() }
     }
 
     @Test fun indexOriginatedStopCallbackCanReenterClose() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
         builder.addTemplate(f.template, f.grant); val lease = index.acquireIndexReadLease(builder.publish(), f.grant)
         val returned = CountDownLatch(1)
@@ -174,7 +174,7 @@ class IndexStoreTest {
     }
 
     @Test fun builderRejectsSecondWriterWhileMemberAdmissionIsBlocked() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
         val entered = CountDownLatch(1); val release = CountDownLatch(1)
         f.authority.onEpoch = { entered.countDown(); check(release.await(3, TimeUnit.SECONDS)) }
@@ -189,7 +189,7 @@ class IndexStoreTest {
 
     @Test fun closeRetainsTheWriterUntilAnInFlightBuildReturns() {
         val f = fixture(); val entered = CountDownLatch(1); val release = CountDownLatch(1)
-        val index = IndexStore(f.indexRoot, f.identity, f.keys) { entered.countDown(); check(release.await(3, TimeUnit.SECONDS)); byteArrayOf(1) }
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> entered.countDown(); check(release.await(3, TimeUnit.SECONDS)); byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
         val executor = Executors.newFixedThreadPool(2)
         try {
@@ -197,13 +197,13 @@ class IndexStoreTest {
             assertTrue(entered.await(1, TimeUnit.SECONDS))
             val closing = executor.submit { index.close() }
             assertFailsWith<java.util.concurrent.TimeoutException> { closing.get(50, TimeUnit.MILLISECONDS) }
-            assertEquals(IdentityErrorCode.BUSY, assertFailsWith<IdentityError> { IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }.close() }.code)
+            assertEquals(IdentityErrorCode.BUSY, assertFailsWith<IdentityError> { IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.close() }.code)
             release.countDown(); assertEquals(IdentityErrorCode.CLOSED, publishing.get(2, TimeUnit.SECONDS)); closing.get(2, TimeUnit.SECONDS)
         } finally { release.countDown(); executor.shutdownNow(); index.close(); f.identity.close() }
     }
 
     @Test fun releasingDeletedLineagePreservesAnotherLeasedLineage() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         fun publish(): GalleryRef {
             val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
             builder.addTemplate(f.template, f.grant); return builder.publish()
@@ -216,17 +216,17 @@ class IndexStoreTest {
     }
 
     @Test fun reopenedDerivedIndexRequiresRebuildInsteadOfServingAnEmptyIndex() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
         builder.addTemplate(f.template, f.grant); val ref = builder.publish(); index.close()
-        IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }.use { reopened ->
+        IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.use { reopened ->
             assertEquals(IdentityErrorCode.REBUILD_REQUIRED, assertFailsWith<IdentityError> { reopened.acquireIndexReadLease(ref, f.grant) }.code)
         }
         f.identity.close()
     }
 
     @Test fun failedTombstoneCommitNeverCachesAnUncommittedReceipt() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
         builder.addTemplate(f.template, f.grant); val ref = builder.publish()
         f.keys.denied = true
@@ -234,7 +234,7 @@ class IndexStoreTest {
         f.keys.denied = false
         assertEquals(IdentityErrorCode.CLOSED, assertFailsWith<IdentityError> { index.deleteGallery(ref, f.owner) }.code)
         index.close()
-        IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }.use { reopened ->
+        IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.use { reopened ->
             val receipt = reopened.deleteGallery(ref, f.owner)
             assertEquals(DeletionStatus.PURGED, reopened.awaitDeletion(receipt))
         }
@@ -242,7 +242,7 @@ class IndexStoreTest {
     }
 
     @Test fun stopCallbackRunsOutsideIndexMonitorAndRetainsWriterUntilReturn() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
         builder.addTemplate(f.template, f.grant); val lease = index.acquireIndexReadLease(builder.publish(), f.grant)
         val entered = CountDownLatch(1); val release = CountDownLatch(1)
@@ -252,9 +252,9 @@ class IndexStoreTest {
             val closing = executor.submit { index.close() }
             assertTrue(entered.await(1, TimeUnit.SECONDS))
             executor.submit { lease.close() }.get(1, TimeUnit.SECONDS)
-            assertEquals(IdentityErrorCode.BUSY, assertFailsWith<IdentityError> { IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }.close() }.code)
+            assertEquals(IdentityErrorCode.BUSY, assertFailsWith<IdentityError> { IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.close() }.code)
             release.countDown(); closing.get(2, TimeUnit.SECONDS)
-            IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }.close()
+            IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.close()
         } finally { release.countDown(); lease.close(); registration.close(); executor.shutdownNow(); index.close(); f.identity.close() }
     }
 
@@ -267,7 +267,7 @@ class IndexStoreTest {
             IdentityProbe("fixture", listOf(1f, 2f)), f.identity.createCandidate(grant), grant,
             EnrollmentOptions(0.8, "quality", "1"), FixtureIdentityBackend.system()).templateRef)
         val second = enroll(secondGrant); val third = enroll(thirdGrant)
-        val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         try {
             val builder = index.createGalleryBuilder(grant = operation, policy = f.policy)
             builder.addTemplate(f.template, f.grant); builder.addTemplate(second, secondGrant); builder.addTemplate(third, thirdGrant)
@@ -288,7 +288,7 @@ class IndexStoreTest {
     }
 
     @Test fun newRevisionCanUpgradeVerifiedPolicyWithoutChangingThePinnedSpace() {
-        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { byteArrayOf(1) }
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
         try {
             val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
             val base = builder.publish(); val upgraded = f.policy.copy(revision = "2", threshold = 0.6)
@@ -296,6 +296,24 @@ class IndexStoreTest {
             index.acquireIndexReadLease(base, f.grant).use { assertEquals("1", it.snapshot().policy.revision) }
             index.acquireIndexReadLease(next, f.grant).use { assertEquals("2", it.snapshot().policy.revision); assertEquals(0.6, it.snapshot().policy.threshold) }
         } finally { index.close(); f.identity.close() }
+    }
+
+    @Test fun nativeBuildReceivesStopOnCloseAndTheWriterDrains() {
+        val f = fixture(); val entered = CountDownLatch(1); val release = CountDownLatch(1)
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, signal ->
+            val registration = signal.registerStopHandler { release.countDown() }
+            try { entered.countDown(); check(release.await(3, TimeUnit.SECONDS)); signal.check(); byteArrayOf(1) }
+            finally { registration.close() }
+        }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy); builder.addTemplate(f.template, f.grant)
+        val executor = Executors.newFixedThreadPool(2)
+        try {
+            val publishing = executor.submit<IdentityErrorCode?> { try { builder.publish(); null } catch (error: IdentityError) { error.code } }
+            assertTrue(entered.await(1, TimeUnit.SECONDS))
+            val closing = executor.submit { index.close() }
+            assertEquals(IdentityErrorCode.CLOSED, publishing.get(1, TimeUnit.SECONDS)); closing.get(1, TimeUnit.SECONDS)
+            IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }.close()
+        } finally { release.countDown(); executor.shutdownNow(); index.close(); f.identity.close() }
     }
 
     private fun fixture(): IndexFixture {

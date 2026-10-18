@@ -13,7 +13,7 @@ final class IndexStoreTests: XCTestCase {
             grant: grant, options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "q", revision: "1"), backend: backend)
         let template = try XCTUnwrap(enrolled.templateRef)
         let index = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys,
-                                              buildIndex: { _ in Data([1]) })
+                                              buildIndex: { _, _ in Data([1]) })
         let policy = try ThresholdPolicy(id: "identify", revision: "1", embeddingSpace: template.embeddingSpaceId,
             scoreMetric: "cosine", scoreDirection: .higherIsBetter, calibrationStatus: .verified,
             kind: .identification, threshold: 0.5, qualityFloor: 0.8, operatingPoint: "fixture", datasetRevision: "fixture", gallerySizeRange: 1...32, enrollmentRule: "one", effectiveAuthorizationEpoch: 0)
@@ -39,7 +39,7 @@ final class IndexStoreTests: XCTestCase {
         XCTAssertEqual(purgedStatus, .purged)
         await second.close()
         await index.close()
-        let reopened = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys, buildIndex: { _ in Data([1]) })
+        let reopened = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys, buildIndex: { _, _ in Data([1]) })
         let repeated = try await reopened.deleteGallery(published, ownership: try OwnershipAuthorization(storeId: identity.storeId, evidenceRef: "owner"))
         XCTAssertEqual(repeated, deletion)
         await reopened.close()
@@ -56,7 +56,7 @@ final class IndexStoreTests: XCTestCase {
             options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "q", revision: "1"), backend: backend)
         let template = try XCTUnwrap(result.templateRef)
         let index = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys,
-                                              buildIndex: { _ in Data([1]) })
+                                              buildIndex: { _, _ in Data([1]) })
         let policy = try ThresholdPolicy(id: "identify", revision: "1", embeddingSpace: template.embeddingSpaceId,
             scoreMetric: "cosine", scoreDirection: .higherIsBetter, calibrationStatus: .verified,
             kind: .identification, threshold: 0.5, qualityFloor: 0.8, operatingPoint: "fixture", datasetRevision: "fixture", gallerySizeRange: 1...32, enrollmentRule: "one", effectiveAuthorizationEpoch: 0)
@@ -81,7 +81,7 @@ final class IndexStoreTests: XCTestCase {
         let enrolled = try await identity.enroll(IdentityProbe(fixtureID: "fixture", vector: [1, 2]), candidate: candidate, grant: grant,
             options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "q", revision: "1"), backend: backend)
         let template = try XCTUnwrap(enrolled.templateRef)
-        let index = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys, buildIndex: { embeddings in
+        let index = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys, buildIndex: { embeddings, _ in
             XCTAssertEqual(embeddings.count, 1)
             XCTAssertEqual(embeddings[0].embeddingSpace, template.embeddingSpaceId)
             throw IdentityError(.indexUnavailable)
@@ -106,7 +106,7 @@ final class IndexStoreTests: XCTestCase {
         let enrolled = try await identity.enroll(IdentityProbe(fixtureID: "fixture", vector: [1, 2]), candidate: candidate, grant: grant,
             options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "q", revision: "1"), backend: backend)
         let template = try XCTUnwrap(enrolled.templateRef)
-        let index = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys, buildIndex: { _ in Data([1]) })
+        let index = try await IndexStore.open(root: indexRoot, identityStore: identity, keyProvider: keys, buildIndex: { _, _ in Data([1]) })
         let builder = try await index.createGalleryBuilder(grant: grant, policy: try identificationPolicy(template), backend: backend)
         try await builder.addTemplate(template, grant: grant); let published = try await builder.publish()
         authority.rejectOwnership = true
@@ -149,7 +149,7 @@ final class IndexStoreTests: XCTestCase {
         let entered = expectation(description: "child build entered")
         let deleted = expectation(description: "logical deletion committed while build blocked")
         let gate = IndexBuildGate(entered: entered)
-        let context = try await context(buildIndex: { _ in try gate.build() })
+        let context = try await context(buildIndex: { _, _ in try gate.build() })
         let baseBuilder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
         try await baseBuilder.addTemplate(context.template, grant: context.grant)
         let base = try await baseBuilder.publish()
@@ -168,7 +168,7 @@ final class IndexStoreTests: XCTestCase {
     func testCallerCancellationSuppressesPublicationAfterTheBuildReturns() async throws {
         let entered = expectation(description: "child build entered")
         let gate = IndexBuildGate(entered: entered)
-        let context = try await context(buildIndex: { _ in try gate.build() })
+        let context = try await context(buildIndex: { _, _ in try gate.build() })
         let baseBuilder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
         try await baseBuilder.addTemplate(context.template, grant: context.grant); let base = try await baseBuilder.publish()
         let child = try await context.index.createGalleryBuilder(baseGalleryRef: base, grant: context.grant, policy: context.policy)
@@ -278,7 +278,7 @@ final class IndexStoreTests: XCTestCase {
 
     func testCloseReleasesTheCachedDerivedPayloadWhileStoreRemainsRetained() async throws {
         let freed = expectation(description: "derived payload released")
-        let context = try await context(buildIndex: { _ in
+        let context = try await context(buildIndex: { _, _ in
             let pointer = UnsafeMutableRawPointer.allocate(byteCount: 64, alignment: 1)
             pointer.initializeMemory(as: UInt8.self, repeating: 1, count: 64)
             return Data(bytesNoCopy: pointer, count: 64, deallocator: .custom { pointer, _ in
@@ -295,7 +295,7 @@ final class IndexStoreTests: XCTestCase {
 
     func testPreCancelledPublicationNeverEntersTheIndexBackend() async throws {
         let built = expectation(description: "cancelled build must not start"); built.isInverted = true
-        let context = try await context(buildIndex: { _ in built.fulfill(); return Data([1]) })
+        let context = try await context(buildIndex: { _, _ in built.fulfill(); return Data([1]) })
         let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
         try await builder.addTemplate(context.template, grant: context.grant)
         let publishing = Task {
@@ -355,7 +355,27 @@ final class IndexStoreTests: XCTestCase {
         await first.close(); await second.close(); await context.index.close(); try await context.identity.close()
     }
 
-    private func context(buildIndex: @escaping GalleryIndexBuilder = { _ in Data([1]) }) async throws -> IndexTestContext {
+    func testNativeBuildReceivesStopOnCloseAndTheWriterDrains() async throws {
+        let entered = expectation(description: "native build entered")
+        let release = DispatchSemaphore(value: 0)
+        let context = try await context(buildIndex: { _, signal in
+            let registration = signal.registerStopHandler { release.signal() }
+            defer { registration.close() }
+            entered.fulfill()
+            guard release.wait(timeout: .now() + 3) == .success else { throw IdentityError(.indexUnavailable) }
+            try signal.check(); return Data([1])
+        })
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let publishing = Task { try await builder.publish() }
+        await fulfillment(of: [entered], timeout: 1)
+        let closing = Task { await context.index.close() }
+        do { _ = try await publishing.value; XCTFail("closed native build published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+        await closing.value; try await context.identity.close()
+    }
+
+    private func context(buildIndex: @escaping GalleryIndexBuilder = { _, _ in Data([1]) }) async throws -> IndexTestContext {
         let keys = IndexTestKeys(); let authority = IndexTestAuthority()
         let identity = try IdentityStore(root: temporaryRoot(), purpose: "identity", authorizationProvider: authority,
             keyProvider: keys, wallClock: IndexClock(), monotonicClock: IndexMono())

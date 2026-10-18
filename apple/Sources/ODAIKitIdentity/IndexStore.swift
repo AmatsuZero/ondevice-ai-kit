@@ -1,6 +1,6 @@
 import Foundation
 
-public typealias GalleryIndexBuilder = @Sendable ([IdentityEmbedding]) throws -> Data
+public typealias GalleryIndexBuilder = @Sendable ([IdentityEmbedding], IdentityStopSignal) throws -> Data
 
 /// Immutable gallery snapshots backed by IdentityStore authorization and leases.
 public actor IndexStore {
@@ -179,7 +179,7 @@ public actor IndexStore {
             if Task.isCancelled { admitted.stopSignal.requestStop(.cancelled); throw IdentityError(.cancelled) }
             let embeddings = try leases.map { try $0.embedding() }
             let indexBuilder = buildIndex
-            let buildTask = Task.detached { try indexBuilder(embeddings) }
+            let buildTask = Task.detached { try indexBuilder(embeddings, admitted.stopSignal) }
             activeBuilds[id] = buildTask
             let bytes = try await withTaskCancellationHandler {
                 if Task.isCancelled { admitted.stopSignal.requestStop(.cancelled) }

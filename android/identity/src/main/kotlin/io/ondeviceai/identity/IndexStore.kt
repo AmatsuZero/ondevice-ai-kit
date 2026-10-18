@@ -6,7 +6,7 @@ import java.nio.file.Path
 import java.util.UUID
 
 /** Backend index construction receives the actual leased, pinned embeddings. */
-typealias GalleryIndexBuilder = (List<IdentityEmbedding>) -> ByteArray
+typealias GalleryIndexBuilder = (List<IdentityEmbedding>, IdentityStopSignal) -> ByteArray
 
 /** Immutable revisions; catalog persistence and IdentityStore remain separate serial gates. */
 class IndexStore internal constructor(root: Path, private val identityStore: IdentityStore,
@@ -99,7 +99,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
             members.forEach { leases += identityStore.acquireTemplateLease(it.ref, it.grant, IdentityScope.IDENTIFICATION, state.policy.embeddingSpace) }
             if (Thread.currentThread().isInterrupted) admitted.stopSignal.requestStop(IdentityStopReason.CANCELLED)
             admitted.stopSignal.check()
-            val bytes = buildIndex(leases.map { it.embedding }).clone()
+            val bytes = buildIndex(leases.map { it.embedding }, admitted.stopSignal).clone()
             if (Thread.currentThread().isInterrupted) admitted.stopSignal.requestStop(IdentityStopReason.CANCELLED)
             admitted.stopSignal.check()
             if (bytes.isEmpty()) throw IdentityError(IdentityErrorCode.INDEX_UNAVAILABLE)
