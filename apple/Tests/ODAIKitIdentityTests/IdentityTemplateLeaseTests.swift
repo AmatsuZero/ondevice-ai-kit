@@ -416,6 +416,242 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
     }
 
+    func testRevocationReceiptTracksAllDomainTemplatesAndIsStableAfterRestart() async throws {
+        let fixture = try await fixture()
+        _ = try await fixture.store.enroll(IdentityProbe(fixtureID: "second", vector: [0.5, 0.5]), candidate: fixture.candidate, grant: fixture.grant,
+            options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1"), backend: FixtureIdentityBackend.system())
+        let firstLease = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        let aliasGrant = try grant(id: "other-candidate")
+        let otherCandidate = try await fixture.store.createCandidate(aliasGrant)
+        _ = try await enroll(fixture.store, candidate: otherCandidate, grant: aliasGrant)
+        let receipt = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: owner)
+        let pendingStatus = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(pendingStatus, .purgePending)
+        await firstLease.close()
+        let purgedStatus = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(purgedStatus, .purged)
+        XCTAssertEqual(fixture.keys.templateDeletions, 3)
+        try await fixture.store.close()
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let alias = try await reopened.revokeGrant(fixture.grant.grantId, ownership: owner)
+        XCTAssertEqual(alias, receipt)
+        let restoredStatus = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(restoredStatus, .purged)
+        try await reopened.close()
+    }
+
+    func testNewEpochCandidateCommitsCleanupOfOldDomainTemplates() async throws {
+        let fixture = try await fixture()
+        fixture.authority.epoch = 1
+        let newer = try grant(id: "g2", domain: fixture.grant.revocationDomainId, expiry: 300, epoch: 1)
+        let candidate = try await fixture.store.createCandidate(newer)
+        do { _ = try await fixture.store.recordedTemplateCandidate(fixture.ref); XCTFail("old template survived newer epoch") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
+        XCTAssertGreaterThanOrEqual(fixture.keys.templateDeletions, 1)
+        _ = candidate
+        try await fixture.store.close()
+    }
+
+    func testRevocationPurgeFailureStillStopsMatchingTicket() async throws {
+        let fixture = try await fixture()
+        let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+        let stopped = expectation(description: "revocation stop")
+        let registration = ticket.stopSignal.registerStopHandler { stopped.fulfill() }
+        fixture.keys.rejectTemplateDeletion = true
+        let receipt = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        await fulfillment(of: [stopped], timeout: 2)
+        let failedStatus = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(failedStatus, .purgeFailed)
+        XCTAssertThrowsError(try ticket.stopSignal.check()) { XCTAssertEqual(($0 as? IdentityError)?.code, .authorizationRevoked) }
+        do { try await fixture.store.finishOperation(ticket); XCTFail("revoked ticket published") } catch {}
+        registration.close(); try await fixture.store.close()
+    }
+
+    func testV5RevocationMigrationDerivesTemplateTargetsBeforeRecoveryPurge() async throws {
+        let fixture = try await fixture()
+        fixture.keys.rejectTemplateDeletion = true
+        let receipt = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        try await fixture.store.close()
+        let journal = try IdentityJournal(root: fixture.root, recordID: "store", keyProvider: fixture.keys)
+        var fields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(journal.read())) as? [String: Any])
+        var revocations = try XCTUnwrap(fields["revocations"] as? [String: [String: Any]])
+        var record = try XCTUnwrap(revocations[receipt.id]); record.removeValue(forKey: "templateIds")
+        revocations[receipt.id] = record; fields["revocations"] = revocations; fields["version"] = 5
+        fields["deletions"] = [String: Any]()
+        try journal.commit(Data(identityJSON(fields).utf8)); try journal.close()
+        fixture.keys.rejectTemplateDeletion = false
+        fixture.keys.onTemplateDelete = { fixture.keys.rejectJournal = true }
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority))
+        fixture.keys.onTemplateDelete = nil; fixture.keys.rejectJournal = false
+        let migrated = try IdentityJournal(root: fixture.root, recordID: "store", keyProvider: fixture.keys)
+        let migratedFields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(migrated.read())) as? [String: Any])
+        XCTAssertEqual(migratedFields["version"] as? Int, 6)
+        let migratedRevocations = try XCTUnwrap(migratedFields["revocations"] as? [String: [String: Any]])
+        XCTAssertEqual(migratedRevocations[receipt.id]?["templateIds"] as? [String], [fixture.ref.id])
+        let migratedFacts = try XCTUnwrap(migratedFields["deletions"] as? [String: [String: Any]])
+        XCTAssertEqual(migratedFacts[fixture.ref.id]?["status"] as? String, "purgePending")
+        try migrated.close()
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let restored = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(restored, .purged)
+        try await reopened.close()
+    }
+
+    func testV6RevocationTargetForgeryFailsBeforeAnyPurgeIOMutation() async throws {
+        let fixture = try await fixture()
+        fixture.keys.rejectTemplateDeletion = true
+        let receipt = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+        try await fixture.store.close()
+        let journal = try IdentityJournal(root: fixture.root, recordID: "store", keyProvider: fixture.keys)
+        var fields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(journal.read())) as? [String: Any])
+        var revocations = try XCTUnwrap(fields["revocations"] as? [String: [String: Any]])
+        var record = try XCTUnwrap(revocations[receipt.id]); record["templateIds"] = ["forged-template"]
+        revocations[receipt.id] = record; fields["revocations"] = revocations
+        try journal.commit(Data(identityJSON(fields).utf8)); try journal.close()
+        fixture.keys.rejectTemplateDeletion = false
+        let count = fixture.keys.templateDeletions
+        XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority)) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
+        XCTAssertEqual(fixture.keys.templateDeletions, count)
+    }
+
+    func testV6RevocationRejectsMissingFactAndDuplicateTargetsBeforePurge() async throws {
+        for malformed in ["missing-fact", "duplicate-target"] {
+            let fixture = try await fixture()
+            fixture.keys.rejectTemplateDeletion = true
+            let receipt = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner"))
+            try await fixture.store.close()
+            let journal = try IdentityJournal(root: fixture.root, recordID: "store", keyProvider: fixture.keys)
+            var fields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(journal.read())) as? [String: Any])
+            if malformed == "missing-fact" { fields["deletions"] = [String: Any]() }
+            else {
+                var records = try XCTUnwrap(fields["revocations"] as? [String: [String: Any]])
+                records[receipt.id]?["templateIds"] = [fixture.ref.id, fixture.ref.id]
+                fields["revocations"] = records
+            }
+            try journal.commit(Data(identityJSON(fields).utf8)); try journal.close()
+            fixture.keys.rejectTemplateDeletion = false
+            let count = fixture.keys.templateDeletions
+            XCTAssertThrowsError(try open(fixture.root, fixture.keys, fixture.authority), malformed) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
+            XCTAssertEqual(fixture.keys.templateDeletions, count)
+        }
+    }
+
+    func testNewEpochPurgeStatusFailureStillStopsOldDomainTicket() async throws {
+        let fixture = try await fixture()
+        let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+        fixture.authority.epoch = 1
+        fixture.keys.onTemplateDelete = { fixture.keys.rejectJournal = true }
+        do { _ = try await fixture.store.createCandidate(grant(id: "new-epoch", epoch: 1)); XCTFail("status failure ignored") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .reEnrollmentRequired) }
+        XCTAssertThrowsError(try ticket.stopSignal.check()) { XCTAssertEqual(($0 as? IdentityError)?.code, .authorizationRevoked) }
+        do { try await fixture.store.finishOperation(ticket); XCTFail("old ticket completed") } catch {}
+        fixture.keys.onTemplateDelete = nil; fixture.keys.rejectJournal = false
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        do { _ = try await reopened.recordedTemplateCandidate(fixture.ref); XCTFail("stale template recovered") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
+        try await fixture.store.close(); try await reopened.close()
+    }
+
+    func testPendingStopDeliveryBlocksConcurrentEpochCleanupAndLeaseRelease() async throws {
+        for holdLease in [false, true] {
+            let fixture = try await fixture()
+            let lease = holdLease ? try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId) : nil
+            let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+            let entered = expectation(description: "old epoch stop entered")
+            let resume = DispatchSemaphore(value: 0)
+            let registration = ticket.stopSignal.registerStopHandler { entered.fulfill(); XCTAssertEqual(resume.wait(timeout: .now() + 5), .success) }
+            fixture.authority.epoch = 1
+            let newer = try grant(id: "epoch-one", epoch: 1)
+            let first = Task { try await fixture.store.createCandidate(newer) }
+            await fulfillment(of: [entered], timeout: 2)
+            _ = try await fixture.store.createCandidate(newer)
+            await lease?.close()
+            XCTAssertEqual(fixture.keys.templateDeletions, 0, "purge preceded in-progress stop delivery; lease=\(holdLease)")
+            resume.signal(); _ = try await first.value
+            XCTAssertEqual(fixture.keys.templateDeletions, 1)
+            do { try await fixture.store.finishOperation(ticket); XCTFail("old epoch operation completed") } catch {}
+            registration.close(); try await fixture.store.close()
+        }
+    }
+
+    func testOldRevocationReceiptDoesNotIncludeNewEpochTemplatesOrOtherDomains() async throws {
+        let fixture = try await fixture()
+        let otherGrant = try grant(id: "other-domain", domain: "unaffected-domain")
+        let other = try await fixture.store.createCandidate(otherGrant)
+        let otherRef = try await enroll(fixture.store, candidate: other, grant: otherGrant)
+        let first = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let last = try await fixture.store.acquireTemplateLease(fixture.ref, grant: fixture.grant, scope: .verification, embeddingSpace: fixture.ref.embeddingSpaceId)
+        let owner = try OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")
+        let alias = try grant(id: "alias")
+        _ = try await fixture.store.createCandidate(alias)
+        let templateReceipt = try await fixture.store.deleteTemplate(fixture.ref, ownership: owner)
+        let receipt = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: owner)
+        let aliasReceipt = try await fixture.store.revokeGrant(alias.grantId, ownership: owner)
+        XCTAssertEqual(aliasReceipt, receipt)
+        fixture.authority.epoch = 1
+        let newer = try grant(id: "new-epoch", epoch: 1)
+        let fresh = try await fixture.store.createCandidate(newer)
+        let freshRef = try await enroll(fixture.store, candidate: fresh, grant: newer)
+        await first.close()
+        let pending = try await fixture.store.awaitDeletion(receipt)
+        XCTAssertEqual(pending, .purgePending)
+        await last.close()
+        let purged = try await fixture.store.awaitDeletion(receipt)
+        let oldPurged = try await fixture.store.awaitDeletion(templateReceipt)
+        XCTAssertEqual(purged, .purged); XCTAssertEqual(oldPurged, .purged)
+        fixture.authority.epoch = 0
+        let otherLease = try await fixture.store.acquireTemplateLease(otherRef, grant: otherGrant, scope: .verification, embeddingSpace: otherRef.embeddingSpaceId)
+        await otherLease.close()
+        fixture.authority.epoch = 1
+        let freshLease = try await fixture.store.acquireTemplateLease(freshRef, grant: newer, scope: .verification, embeddingSpace: freshRef.embeddingSpaceId)
+        await freshLease.close()
+        try await fixture.store.close()
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let recovered = try await reopened.recordedTemplateCandidate(freshRef)
+        XCTAssertEqual(recovered, fresh)
+        let restoredReceipt = try await reopened.revokeGrant(alias.grantId, ownership: owner)
+        XCTAssertEqual(restoredReceipt, receipt)
+        try await reopened.close()
+    }
+
+    func testRevocationStatusCommitFailureCannotSuppressAlreadyRequiredStop() async throws {
+        let fixture = try await fixture()
+        let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+        fixture.keys.onTemplateDelete = { fixture.keys.rejectJournal = true }
+        do { _ = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")); XCTFail("status commit failure ignored") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .reEnrollmentRequired) }
+        XCTAssertThrowsError(try ticket.stopSignal.check()) { XCTAssertEqual(($0 as? IdentityError)?.code, .authorizationRevoked) }
+        do { try await fixture.store.finishOperation(ticket); XCTFail("revoked ticket completed") } catch {}
+        fixture.keys.onTemplateDelete = nil; fixture.keys.rejectJournal = false
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let receipt = try await reopened.revokeGrant(fixture.grant.grantId, ownership: OwnershipAuthorization(storeId: reopened.storeId, evidenceRef: "owner"))
+        let restored = try await reopened.awaitDeletion(receipt)
+        XCTAssertEqual(restored, .purged)
+        try await fixture.store.close(); try await reopened.close()
+    }
+
+    func testFailedLogicalRevocationDoesNotStopOrPurgeBeforeCommit() async throws {
+        let fixture = try await fixture()
+        let ticket = try await fixture.store.beginOperation(fixture.candidate, grant: fixture.grant, scope: .verification)
+        fixture.keys.rejectJournal = true
+        do { _ = try await fixture.store.revokeGrant(fixture.grant.grantId, ownership: OwnershipAuthorization(storeId: fixture.store.storeId, evidenceRef: "owner")); XCTFail("failed logical commit published") } catch {}
+        XCTAssertNoThrow(try ticket.stopSignal.check())
+        XCTAssertEqual(fixture.keys.templateDeletions, 0)
+        fixture.keys.rejectJournal = false
+        let reopened = try open(fixture.root, fixture.keys, fixture.authority)
+        let recovered = try await reopened.recordedTemplateCandidate(fixture.ref)
+        XCTAssertEqual(recovered, fixture.candidate)
+        do { try await fixture.store.finishOperation(ticket) } catch {}
+        try await fixture.store.close(); try await reopened.close()
+    }
+
+    private func enroll(_ store: IdentityStore, candidate: CandidateRef, grant: AuthorizationGrant) async throws -> TemplateRef {
+        let result = try await store.enroll(IdentityProbe(fixtureID: "template", vector: [0.25, -0.75]), candidate: candidate, grant: grant,
+            options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1"), backend: FixtureIdentityBackend.system())
+        return try XCTUnwrap(result.templateRef)
+    }
+
     func testRestoreRejectsUnsortedCandidateTemplateTargets() async throws {
         let fixture = try await fixture()
         _ = try await fixture.store.enroll(IdentityProbe(fixtureID: "second", vector: [0.5, 0.5]), candidate: fixture.candidate, grant: fixture.grant,
@@ -455,8 +691,8 @@ final class IdentityTemplateLeaseTests: XCTestCase {
                                             options: EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "q1"), backend: FixtureIdentityBackend.system())
         return try Fixture(root: root, keys: keys, authority: authority, store: store, ref: XCTUnwrap(result.templateRef), candidate: candidate, grant: grant)
     }
-    private func grant(id: String = "g1", domain: String = "tenant.subject", scopes: Set<IdentityScope> = [.enrollment, .verification], expiry: Int64 = 200) throws -> AuthorizationGrant {
-        try AuthorizationGrant(grantId: id, revocationDomainId: domain, scope: scopes, purpose: "login", issuedAtMillis: 0, expiresAtMillis: expiry, authorizationEpoch: 0, evidenceRef: "audit")
+    private func grant(id: String = "g1", domain: String = "tenant.subject", scopes: Set<IdentityScope> = [.enrollment, .verification], expiry: Int64 = 200, epoch: Int64 = 0) throws -> AuthorizationGrant {
+        try AuthorizationGrant(grantId: id, revocationDomainId: domain, scope: scopes, purpose: "login", issuedAtMillis: 0, expiresAtMillis: expiry, authorizationEpoch: epoch, evidenceRef: "audit")
     }
     private func open(_ root: URL, _ keys: LeaseKeys, _ authority: LeaseAuthority) throws -> IdentityStore {
         try IdentityStore(root: root, purpose: "login", authorizationProvider: authority, keyProvider: keys, wallClock: LeaseClock(), monotonicClock: LeaseClock())

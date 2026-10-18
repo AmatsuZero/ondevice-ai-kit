@@ -22,22 +22,26 @@ struct IdentityRevocation: Sendable {
     let epoch: Int64
     let grantIds: Set<String>
     let candidateIds: Set<String>
+    let templateIds: Set<String>
 
     var fields: [String: Any] {
-        ["domainId": domainId, "epoch": epoch, "grantIds": grantIds.sorted(), "candidateIds": candidateIds.sorted()]
+        ["domainId": domainId, "epoch": epoch, "grantIds": grantIds.sorted(), "candidateIds": candidateIds.sorted(), "templateIds": templateIds.sorted()]
     }
 
-    static func restore(_ fields: [String: Any]) throws -> Self {
-        guard Set(fields.keys) == ["domainId", "epoch", "grantIds", "candidateIds"],
+    static func restore(_ fields: [String: Any], includeTemplateIds: Bool) throws -> Self {
+        let required: Set<String> = includeTemplateIds ? ["domainId", "epoch", "grantIds", "candidateIds", "templateIds"] : ["domainId", "epoch", "grantIds", "candidateIds"]
+        guard Set(fields.keys) == required,
               let grants = fields["grantIds"] as? [String], let candidates = fields["candidateIds"] as? [String],
-              !grants.isEmpty, Set(grants).count == grants.count, Set(candidates).count == candidates.count else {
+              let templates = includeTemplateIds ? (fields["templateIds"] as? [String]) : [],
+              !grants.isEmpty, Set(grants).count == grants.count, Set(candidates).count == candidates.count,
+              Set(templates).count == templates.count, grants == Set(grants).sorted(), candidates == Set(candidates).sorted(), templates == Set(templates).sorted() else {
             throw IdentityError(.invalidInput)
         }
         let domain = try identityString(fields, "domainId"); try identityToken(domain)
-        for id in grants + candidates { try identityToken(id) }
+        for id in grants + candidates + templates { try identityToken(id) }
         let epoch = try identityInteger(fields, "epoch")
         guard epoch > 0 else { throw IdentityError(.invalidInput) }
-        return Self(domainId: domain, epoch: epoch, grantIds: Set(grants), candidateIds: Set(candidates))
+        return Self(domainId: domain, epoch: epoch, grantIds: Set(grants), candidateIds: Set(candidates), templateIds: Set(templates))
     }
 
     static func validate(_ records: [String: Self], authorization: IdentityAuthorizationState,

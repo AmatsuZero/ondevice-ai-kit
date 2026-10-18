@@ -30,11 +30,11 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 ## Task 2 待实现
 
 - 已有可信 provider 契约及不可变授权状态，后续 Store 构造仍必须注入 provider 和持久化根目录；禁止以 request epoch 或单纯内存字典作为权威状态。
-- journal 已接入 candidate/template admission；模板采用独立 envelope，持久 stage 所有权与故障恢复已接入；内部 vector lease 和模板单目标 purge 已通过单测；candidate/domain 批量清理仍待实现。
-- candidate/template 与 immutable grant 的持久绑定、域撤销 tombstone 和稳定 revoke receipt 已实现；模板单目标删除和逐目标 purge 状态已通过单测；candidate/domain 目标集清理仍待实现。
-- admission/revoke/template publish 共用串行门；quality/embed 在门外执行，撤销立即请求停止。模板单目标已接入 lease 后两阶段删除，candidate/domain 清理与精确在途模板绑定仍待实现。
+- journal 已接入 candidate/template admission；模板采用独立 envelope，持久 stage 所有权与故障恢复已接入；内部 vector lease 和模板单目标 purge 已通过单测；candidate/domain 固定目标集及物理清理也已通过单测。
+- candidate/template 与 immutable grant 的持久绑定、域撤销 tombstone 和稳定 revoke receipt 已实现；模板单目标删除和逐目标 purge 状态已通过单测；candidate/domain 固定目标集和共享逐模板 purge 状态已实现。
+- admission/revoke/template publish 共用串行门；quality/embed 在门外执行，撤销立即请求停止。模板单目标已接入 lease 后两阶段删除，candidate/domain 清理已接入，精确在途模板绑定仍待实现。
 - operation ticket 已固定 grant/candidate 并接入 public enroll、撤销 stop、结果抑制与 close drain；任务对象的完整 Core 终态封装仍需后续整合。
-- 单目标已覆盖持有多 lease 删除、purge 失败/重试/重启；仍需 candidate/domain 全目标集、deadline/cancel 等待和退休锁 drain 测试；已有 scope/expiry、同域新 grant ID 绕过、enrollment 撤销竞态和正常 close lease drain 测试不能替代它们。
+- 单目标已覆盖持有多 lease 删除、purge 失败/重试/重启；candidate/domain 全目标集已有覆盖；仍需 deadline/cancel 等待和退休锁 drain 测试；已有 scope/expiry、同域新 grant ID 绕过、enrollment 撤销竞态和正常 close lease drain 测试不能替代它们。
 - 平台原生密钥与恢复行为真机验证；iOS 15/API 26 最低设备验收另记。
 
 只有这些门全部通过，才能标记 Task 2 完成。后续 Task 3/5/6/7 的 snapshot、身份引擎和活体状态机尚未实现。
@@ -91,6 +91,15 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 删除事务先提交全部 tombstone 与缺失的逐模板清理事实，再在门外停止该 candidate 的在途 ticket，随后尝试精确 purge。持有 lease 时保持 pending；清理失败可重启重试，其他 candidate 不受影响。
 - Swift 审查修复了全局 receipt ID 冲突分配及未排序目标集的恢复拒绝，回归先 RED 再 GREEN。最新 identity 单元测试 Swift 125/125、Android 131/131 及 lintDebug 通过；日志 `/tmp/odai-p10-candidate-review-final-{swift,android}.log`。
 - grant/domain 物理清理、精确模板 ticket、带 deadline/取消的等待、完整退休 drain 和真实平台 provider 验证仍待完成。全 Apple 包仍单列既有 Vision Code 9 环境失败，不宣称全包通过。
+
+### grant/domain 物理清理当前边界
+
+- v6 撤销记录保存不可变的精确模板目标集；`awaitDeletion(RevocationReceipt)` 查询与 template/candidate receipt 共享的逐模板 purge 状态。回执和别名重启后保持稳定，新 epoch 的模板不会加入旧回执。
+- revoke 将 epoch、固定候选/模板目标与缺失的清理事实放进同一提交。可信 provider 提升 epoch 时，createCandidate 同样提交旧域模板清理事实；相关 stop 回调在门外执行，结束后才清理。逐模板计数阻止并发 createCandidate、重复 revoke 和 lease release 抢跑未结束的 stop 交付。
+- v1–v5 恢复先校验完整元数据，再从不可变 membership 推导目标与清理事实，并提交 v6 后才开始物理清理。v6 在清理前拒绝伪造/重复目标、缺失 fact、跨域 membership 与 receipt 碰撞；不扫描目录删除模板。
+- 最新 identity 测试 Swift 136/136、Android 142/142 及 Android lintDebug 通过。双端 stop 交付竞态、Android legacy migration/重复 receipt/无回执可信 epoch 清理均有 RED→GREEN 记录。日志 `/tmp/odai-p10-domain-{swift,android}-final.log`，全 Apple 包 `/tmp/odai-p10-domain-swift-full.log` 仍单列既有 Vision Code 9 失败。
+- 本切片独立跨端复审 APPROVE（0 findings）。提交前 Swift identity 136/136；Android identity 142/142（XML 失败/错误/跳过均为 0），Gradle test/lintDebug 再次成功（命中已有验证缓存）。并发回归覆盖 stop 回调未完成时同 epoch 清理及 lease release 禁止提前 purge。
+- 本切片不完成 Task 2：精确模板 operation tickets、带 deadline/取消的等待、journal 退休后的完整 lock drain，以及真实 Keychain/Keystore 与最低系统版本设备验证仍待完成。
 
 ### 停止信号当前边界
 
