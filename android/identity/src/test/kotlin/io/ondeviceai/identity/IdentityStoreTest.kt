@@ -10,6 +10,8 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
+import io.ondeviceai.core.CapabilityAvailability
+import io.ondeviceai.core.CapabilityStatus
 
 class IdentityStoreTest {
     private val roots = mutableListOf<java.nio.file.Path>()
@@ -309,6 +311,168 @@ class IdentityStoreTest {
         store.close()
     }
 
+    @Test fun enrollmentPersistsTemplateAndRestoresCandidateMapping() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val result = store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, authorization,
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system())
+        assertEquals(EnrollmentOutcome.ENROLLED, result.outcome); assertTrue(result.durationNanos >= 0)
+        val ref = requireNotNull(result.templateRef); assertEquals(candidate, store.recordedTemplateCandidate(ref)); store.close()
+        val reopened = store(root, keys, provider); assertEquals(candidate, reopened.recordedTemplateCandidate(ref)); reopened.close()
+    }
+
+    @Test fun enrollmentOptionsValidateExplicitQualityFloor() {
+        assertCode(IdentityErrorCode.INVALID_INPUT) { EnrollmentOptions(Double.NaN, "host.quality", "q1") }
+        assertCode(IdentityErrorCode.INVALID_INPUT) { EnrollmentOptions(1.1, "host.quality", "q1") }
+    }
+
+    @Test fun enrollmentRejectsSpaceDriftWrongEmbeddingAndMultipleFacesWithoutFallback() {
+        val root = tempRoot(); val store = store(root, StoreKeys(), StoreAuthority()); val authorization = grant()
+        val candidate = store.createCandidate(authorization); val probe = IdentityProbe("p", listOf(1f, 0f))
+        val options = EnrollmentOptions(0.8, "host.quality", "q1")
+        for ((mode, expected) in listOf("multiple" to IdentityErrorCode.MULTIPLE_FACES, "drift" to IdentityErrorCode.EMBEDDING_SPACE_MISMATCH, "wrong" to IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)) {
+            val backend = EnrollmentVariantTestBackend(mode)
+            val issue = assertFailsWith<IdentityError> { store.enroll(probe, candidate, authorization, options, backend) }
+            assertEquals(expected, issue.code)
+            assertEquals(FixtureIdentityBackend.system().modelBinding, issue.modelBinding)
+        }
+        assertCode(IdentityErrorCode.BACKEND_UNAVAILABLE) { store.enroll(probe, candidate, authorization, options, FixtureIdentityBackend.optionalUnavailable()) }
+        assertEquals(0, root.toFile().listFiles()!!.count { it.name.startsWith("identity-template-") }); store.close()
+    }
+
+    @Test fun higherEpochCannotResurrectOldTemplateAcrossRestart() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val ref = requireNotNull(store.enroll(IdentityProbe("p", listOf(1f, 0f)), candidate, authorization, EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef)
+        provider.epoch = 1; val fresh = store.createCandidate(grant("fresh", epoch = 1))
+        assertCode(IdentityErrorCode.TEMPLATE_REVOKED) { store.recordedTemplateCandidate(ref) }; store.close()
+        val reopened = store(root, keys, provider)
+        assertCode(IdentityErrorCode.TEMPLATE_REVOKED) { reopened.recordedTemplateCandidate(ref) }
+        assertEquals("fresh", reopened.recordedCandidateGrant(fresh).grantId); reopened.close()
+    }
+
+    @Test fun enrollmentCanUseAnotherGrantInSameDomainAndEpochAcrossRestart() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val candidate = store.createCandidate(grant())
+        val result = store.enroll(IdentityProbe("p", listOf(1f, 0f)), candidate, grant("g2"),
+            EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system())
+        store.close()
+        val reopened = store(root, keys, provider)
+        assertEquals(candidate, reopened.recordedTemplateCandidate(requireNotNull(result.templateRef))); reopened.close()
+    }
+
+    @Test fun revokeWhileEnrollmentBackendBlockedSuppressesEveryBackendOutcome() {
+        for (mode in 0..2) {
+            val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+            val authorization = grant(); val candidate = store.createCandidate(authorization)
+            val backend = EnrollmentTestBackend(quality = IdentityQuality(1, if (mode == 1) 0.1 else 1.0), failure = mode == 2, block = true)
+            val executor = Executors.newSingleThreadExecutor()
+            try {
+                val job = executor.submit(Callable { runCatching { store.enroll(IdentityProbe("p", listOf(1f, 0f)), candidate, authorization,
+                    EnrollmentOptions(0.8, "host.quality", "q1"), backend) }.exceptionOrNull() })
+                assertTrue(backend.started.await(2, TimeUnit.SECONDS))
+                store.revokeGrant("g1", OwnershipAuthorization(store.storeId, "owner"))
+                assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED, (job.get(2, TimeUnit.SECONDS) as? IdentityError)?.code)
+                assertEquals(0, root.toFile().listFiles()!!.count { it.name.startsWith("identity-template-") })
+            } finally { backend.release.countDown(); executor.shutdownNow(); store.close() }
+        }
+    }
+
+    @Test fun lowQualityDoesNotEmbedOrWriteAndResolvedErrorsHaveContext() {
+        val root = tempRoot(); val keys = StoreKeys(); val store = store(root, keys, StoreAuthority())
+        val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val low = EnrollmentTestBackend(quality = IdentityQuality(1, 0.1))
+        val options = EnrollmentOptions(0.8, "host.quality", "q1"); val probe = IdentityProbe("p", listOf(1f, 0f))
+        val result = store.enroll(probe, candidate, authorization, options, low)
+        assertEquals(EnrollmentOutcome.INSUFFICIENT_QUALITY, result.outcome); assertNull(result.templateRef)
+        assertEquals(0, low.embeddingCalls); assertEquals(0, root.toFile().listFiles()!!.count { it.name.startsWith("identity-template-") })
+        val backend = EnrollmentTestBackend(failure = true)
+        val error = assertFailsWith<IdentityError> { store.enroll(probe, candidate, authorization, options, backend) }
+        assertEquals(IdentityErrorCode.BACKEND_UNAVAILABLE, error.code); assertEquals(backend.backendId, error.backendId)
+        assertEquals(backend.modelBinding, error.modelBinding); assertNotNull(error.sessionId); store.close()
+    }
+
+    @Test fun cancellationCloseAndFatalBackendErrorAlwaysReleaseEnrollmentTicket() {
+        for (closing in listOf(false, true)) {
+            val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+            val authorization = grant(); val candidate = store.createCandidate(authorization)
+            val backend = EnrollmentTestBackend(block = true); val signal = IdentityStopSignal()
+            val executor = Executors.newSingleThreadExecutor()
+            try {
+                val job = executor.submit(Callable { runCatching { store.enroll(IdentityProbe("p", listOf(1f, 0f)), candidate, authorization,
+                    EnrollmentOptions(0.8, "host.quality", "q1"), backend, signal) }.exceptionOrNull() })
+                assertTrue(backend.started.await(2, TimeUnit.SECONDS))
+                if (closing) store.close() else signal.requestStop(IdentityStopReason.CANCELLED)
+                assertEquals(if (closing) IdentityErrorCode.CLOSED else IdentityErrorCode.CANCELLED, (job.get(2, TimeUnit.SECONDS) as? IdentityError)?.code)
+                store.close(); store(root, keys, provider).close()
+            } finally { backend.release.countDown(); executor.shutdownNow(); store.close() }
+        }
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority()); val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val fatal = object : IdentityBackend by FixtureIdentityBackend.system() {
+            override fun evaluateQuality(probe: IdentityProbe): IdentityQuality = throw AssertionError("fatal fixture")
+            override fun evaluateQuality(probe: IdentityProbe, stopSignal: IdentityStopSignal): IdentityQuality = throw AssertionError("fatal fixture")
+        }
+        assertFailsWith<AssertionError> { store.enroll(IdentityProbe("p", listOf(1f, 0f)), candidate, authorization, EnrollmentOptions(0.8, "host.quality", "q1"), fatal) }
+        store.close()
+    }
+
+    @Test fun recoveryCleansOnlyDurableStageAfterKeyOrPublicationFailure() {
+        for (publication in listOf(false, true)) {
+            val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+            val authorization = grant(); val candidate = store.createCandidate(authorization)
+            keys.rejectTemplateCreation = !publication; keys.failJournalAfterTemplateCreation = publication
+            assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { store.enroll(IdentityProbe("p", listOf(1f, 0f)), candidate, authorization,
+                EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()) }
+            keys.rejectJournal = false; keys.rejectTemplateCreation = false; keys.failJournalAfterTemplateCreation = false; store.close()
+            val metadata = IdentityJournal(root, "store", keys).use { IdentityContractJSON.parse(it.read()!!.decodeToString()) }
+            val pending = metadata["stages"] as List<*>; assertEquals(1, pending.size)
+            assertTrue((metadata["templates"] as Map<*, *>).isEmpty())
+            val unowned = root.resolve("identity-template-${java.util.UUID.randomUUID()}.bin"); Files.write(unowned, byteArrayOf(9))
+            val reopened = store(root, keys, provider)
+            assertFalse(Files.exists(root.resolve("identity-template-${pending.single()}.bin")))
+            assertCode(IdentityErrorCode.RE_ENROLLMENT_REQUIRED) { keys.key("template.${store.storeId}.${pending.single()}", false) }
+            assertContentEquals(byteArrayOf(9), Files.readAllBytes(unowned))
+            assertNotNull(reopened.enroll(IdentityProbe("p", listOf(1f, 0f)), candidate, authorization,
+                EnrollmentOptions(0.8, "host.quality", "q1"), FixtureIdentityBackend.system()).templateRef); reopened.close()
+        }
+    }
+
+    @Test fun restoreRejectsDuplicateStagesAndMalformedTemplateMembership() {
+        val provider = StoreAuthority(); val auth = IdentityAuthorizationState("login").admitting(grant(), IdentityScope.ENROLLMENT, provider, 100)
+        val id = java.util.UUID.randomUUID().toString()
+        val ref = TemplateRef(id, FixtureIdentityBackend.system().embeddingSpace, 0, "r1")
+        val valid = mapOf("ref" to ref.canonicalJSON(), "candidateId" to "c1", "grantId" to "g1")
+        val variants = listOf(
+            mapOf<String, Any?>() to listOf(id, id), mapOf(id to valid) to listOf(id),
+            mapOf("wrong" to valid) to emptyList(), mapOf(id to (valid + ("grantId" to "unknown"))) to emptyList(),
+            mapOf(id to (valid + ("candidateId" to "unknown"))) to emptyList(), mapOf(id to (valid + ("extra" to "x"))) to emptyList()
+        )
+        for ((templates, stages) in variants) {
+            val root = tempRoot(); val keys = StoreKeys()
+            IdentityJournal(root, "store", keys).use { it.commit(IdentityContractJSON.encode(mapOf("version" to 3, "storeId" to "store",
+                "authorization" to auth.canonicalJSON(), "candidates" to mapOf("c1" to "g1"), "revocations" to emptyMap<String, Any>(),
+                "templates" to templates, "stages" to stages)).encodeToByteArray()) }
+            assertCode(IdentityErrorCode.INVALID_INPUT) { store(root, keys, provider).use { } }
+        }
+    }
+
+    @Test fun blockedEnrollmentRevocationSuppressesResultAndLeavesGateResponsive() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority(); val store = store(root, keys, provider)
+        val authorization = grant(); val candidate = store.createCandidate(authorization); val backend = BlockingEnrollmentBackend()
+        val executor = Executors.newSingleThreadExecutor()
+        val future = executor.submit<EnrollmentResult> {
+            store.enroll(IdentityProbe("fixture", listOf(1f, 2f)), candidate, authorization,
+                EnrollmentOptions(0.8, "host.quality", "q1"), backend)
+        }
+        assertTrue(backend.started.await(2, TimeUnit.SECONDS))
+        store.revokeGrant("g1", OwnershipAuthorization(store.storeId, "owner"))
+        assertCode(IdentityErrorCode.CANDIDATE_REVOKED) { store.recordedCandidateGrant(candidate) }
+        backend.release.countDown()
+        val issue = assertFailsWith<java.util.concurrent.ExecutionException> { future.get(2, TimeUnit.SECONDS) }
+        assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED, (issue.cause as? IdentityError)?.code)
+        executor.shutdownNow(); store.close()
+    }
+
     @Test fun closeStopsAndDrainsOperationBeforeReleasingWriter() {
         val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority()
         val store = store(root, keys, provider); val authorization = grant(); val candidate = store.createCandidate(authorization)
@@ -437,12 +601,59 @@ class IdentityStoreTest {
 private class StoreKeys : IdentityKeyProvider {
     private val values = mutableMapOf<String, SecretKey>()
     var reject = false
+    var rejectTemplateCreation = false
+    var failJournalAfterTemplateCreation = false
+    var rejectJournal = false
     override fun key(id: String, createIfMissing: Boolean): SecretKey = synchronized(values) {
         if (reject) throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
-        values[id] ?: if (createIfMissing) KeyGenerator.getInstance("AES").apply { init(256) }.generateKey().also { values[id] = it }
+        if (rejectJournal && id.startsWith("journal.")) throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
+        if (rejectTemplateCreation && createIfMissing && id.startsWith("template.")) throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
+        values[id] ?: if (createIfMissing) KeyGenerator.getInstance("AES").apply { init(256) }.generateKey().also {
+            values[id] = it
+            if (failJournalAfterTemplateCreation && id.startsWith("template.")) rejectJournal = true
+        }
         else throw IdentityError(IdentityErrorCode.RE_ENROLLMENT_REQUIRED)
     }
     override fun deleteKey(id: String) { synchronized(values) { values.remove(id) } }
+}
+
+private class EnrollmentTestBackend(val quality: IdentityQuality = IdentityQuality(1, 1.0), val failure: Boolean = false, val block: Boolean = false) : IdentityBackend {
+    private val base = FixtureIdentityBackend.system()
+    override val backendId get() = base.backendId
+    override val backendVersion get() = base.backendVersion
+    override val modelBinding get() = base.modelBinding
+    override val embeddingSpace get() = base.embeddingSpace
+    override fun availability() = base.availability()
+    val started = CountDownLatch(1); val release = CountDownLatch(1)
+    var embeddingCalls = 0
+    override fun evaluateQuality(probe: IdentityProbe) = quality
+    override fun evaluateQuality(probe: IdentityProbe, stopSignal: IdentityStopSignal): IdentityQuality {
+        val registration = stopSignal.registerStopHandler { release.countDown() }
+        try {
+            if (block) { started.countDown(); if (!release.await(5, TimeUnit.SECONDS)) throw IdentityError(IdentityErrorCode.SESSION_TIMEOUT) }
+            if (failure) throw IdentityError(IdentityErrorCode.BACKEND_UNAVAILABLE)
+            return quality
+        } finally { registration.close() }
+    }
+    override fun embed(probe: IdentityProbe): IdentityEmbedding { embeddingCalls++; return base.embed(probe) }
+    override fun close() = base.close()
+}
+
+private class EnrollmentVariantTestBackend(val mode: String) : IdentityBackend {
+    private val base = FixtureIdentityBackend.system()
+    private val other = FixtureIdentityBackend.system("other-model")
+    private var drifted = false
+    override val backendId get() = base.backendId
+    override val backendVersion get() = base.backendVersion
+    override val modelBinding get() = if (drifted) other.modelBinding else base.modelBinding
+    override val embeddingSpace get() = if (drifted) other.embeddingSpace else base.embeddingSpace
+    override fun availability() = base.availability()
+    override fun evaluateQuality(probe: IdentityProbe): IdentityQuality {
+        if (mode == "drift") drifted = true
+        return IdentityQuality(if (mode == "multiple") 2 else 1, 1.0)
+    }
+    override fun embed(probe: IdentityProbe) = (if (mode == "wrong") other else base).embed(probe)
+    override fun close() {}
 }
 private class StoreAuthority(var epoch: Long = 0) : IdentityAuthorizationProvider {
     var denyOwnership = false
@@ -451,6 +662,16 @@ private class StoreAuthority(var epoch: Long = 0) : IdentityAuthorizationProvide
     override fun validateOwnership(authorization: OwnershipAuthorization, nowMillis: Long) {
         if (denyOwnership) throw IdentityError(IdentityErrorCode.AUTHORIZATION_REQUIRED)
     }
+}
+private class BlockingEnrollmentBackend : IdentityBackend {
+    override val backendId = "blocked.fixture"; override val backendVersion = "1"
+    override val modelBinding = ModelBinding(ModelBindingKind.MODEL, backendId, "1")
+    override val embeddingSpace = EmbeddingSpaceId(setOf(IdentityCapability.VERIFICATION), backendId, backendVersion, modelBinding, "1", 2, FeatureDType.FLOAT32, Endianness.LITTLE, "l2", "p1", "cosine", ScoreDirection.HIGHER_IS_BETTER)
+    val started = CountDownLatch(1); val release = CountDownLatch(1)
+    override fun availability() = CapabilityAvailability(CapabilityStatus.AVAILABLE, backendId = backendId)
+    override fun evaluateQuality(probe: IdentityProbe) = IdentityQuality(1, 1.0)
+    override fun embed(probe: IdentityProbe): IdentityEmbedding { started.countDown(); release.await(2, TimeUnit.SECONDS); return IdentityEmbedding(embeddingSpace, listOf(1f, 2f)) }
+    override fun close() = Unit
 }
 private data class StoreClock(override val nowMillis: Long) : IdentityWallClock
 private data class StoreMono(override val nowNanos: Long = 1) : IdentityMonotonicClock

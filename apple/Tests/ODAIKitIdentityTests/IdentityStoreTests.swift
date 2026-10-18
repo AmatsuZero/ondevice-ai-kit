@@ -1,5 +1,6 @@
 import XCTest
 import CryptoKit
+import ODAIKitCore
 @testable import ODAIKitIdentity
 
 final class IdentityStoreTests: XCTestCase {
@@ -152,12 +153,19 @@ final class IdentityStoreTests: XCTestCase {
 private final class StoreKeys: IdentityKeyProvider, @unchecked Sendable {
     private var values: [String: SymmetricKey] = [:]; private let lock = NSLock()
     var rejectAccess = false
+    var rejectTemplateCreation = false
+    var failJournalAfterTemplateCreation = false
+    var rejectJournal = false
     func key(id: String, createIfMissing: Bool) throws -> SymmetricKey {
         lock.lock(); defer { lock.unlock() }
         if rejectAccess { throw IdentityError(.reEnrollmentRequired) }
+        if rejectJournal && id.hasPrefix("journal.") { throw IdentityError(.reEnrollmentRequired) }
+        if rejectTemplateCreation && createIfMissing && id.hasPrefix("template.") { throw IdentityError(.reEnrollmentRequired) }
         if let value = values[id] { return value }
         guard createIfMissing else { throw IdentityError(.reEnrollmentRequired) }
-        let value = SymmetricKey(size: .bits256); values[id] = value; return value
+        let value = SymmetricKey(size: .bits256); values[id] = value
+        if failJournalAfterTemplateCreation && id.hasPrefix("template.") { rejectJournal = true }
+        return value
     }
     func deleteKey(id: String) throws { lock.lock(); values.removeValue(forKey: id); lock.unlock() }
 }
@@ -173,6 +181,249 @@ private final class StoreAuthority: IdentityAuthorizationProvider, @unchecked Se
 private struct FixedClock: IdentityWallClock { let nowMillis: Int64 }
 private struct FixedMono: IdentityMonotonicClock { let nowNanos: Int64 = 1 }
 private final class MovingClock: IdentityWallClock, @unchecked Sendable { var nowMillis: Int64 = 100 }
+
+extension IdentityStoreTests {
+    func testEnrollmentRejectsBackendSpaceDriftAndMultipleFacesWithoutFallback() async throws {
+        let root = temporaryRoot(); let store = try makeStore(root: root, keys: StoreKeys(), provider: StoreAuthority(epoch: 0))
+        let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+        let probe = try IdentityProbe(fixtureID: "p", vector: [1, 0])
+        for (backend, expected) in [(try EnrollmentVariantBackend(mode: .multiple), IdentityErrorCode.multipleFaces),
+                                    (try EnrollmentVariantBackend(mode: .spaceDrift), .embeddingSpaceMismatch),
+                                    (try EnrollmentVariantBackend(mode: .wrongEmbedding), .embeddingSpaceMismatch)] {
+            do { _ = try await store.enroll(probe, candidate: candidate, grant: authorization, options: enrollmentOptions(), backend: backend); XCTFail("invalid backend result accepted") }
+            catch { XCTAssertEqual((error as? IdentityError)?.code, expected) }
+        }
+        do { _ = try await store.enroll(probe, candidate: candidate, grant: authorization, options: enrollmentOptions(), backend: FixtureIdentityBackend.optionalUnavailable()); XCTFail("unavailable fell back") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .backendUnavailable) }
+        XCTAssertFalse(try FileManager.default.contentsOfDirectory(atPath: root.path).contains { $0.hasPrefix("identity-template-") })
+        try await store.close()
+    }
+
+    func testHigherEpochInvalidatesOldTemplateWithoutResurrectingAfterRestart() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+        let result = try await store.enroll(IdentityProbe(fixtureID: "p", vector: [1, 0]), candidate: candidate, grant: authorization,
+                                            options: enrollmentOptions(), backend: FixtureIdentityBackend.system())
+        let old = try XCTUnwrap(result.templateRef)
+        provider.epoch = 1; let fresh = try await store.createCandidate(grant(id: "fresh", epoch: 1))
+        do { _ = try await store.recordedTemplateCandidate(old); XCTFail("old template revived") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
+        try await store.close()
+        let reopened = try makeStore(root: root, keys: keys, provider: provider)
+        let recovered = try await reopened.recordedCandidateGrant(fresh)
+        XCTAssertEqual(recovered.grantId, "fresh")
+        do { _ = try await reopened.recordedTemplateCandidate(old); XCTFail("old template revived on restart") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
+        try await reopened.close()
+    }
+
+    func testRestoreRejectsInvalidTemplateAndStageOwnershipBeforeCleanup() async throws {
+        let provider = StoreAuthority(epoch: 0)
+        let auth = try IdentityAuthorizationState(purpose: "login").admitting(grant(), scope: .enrollment, provider: provider, nowMillis: 100)
+        let id = UUID().uuidString.lowercased()
+        let ref = try TemplateRef(id: id, embeddingSpaceId: FixtureIdentityBackend.system().embeddingSpace, authorizationEpoch: 0, revision: "r1")
+        let valid: [String: Any] = ["ref": ref.canonicalJSON(), "candidateId": "c1", "grantId": "g1"]
+        let cases: [([String: Any], [String])] = [
+            ([id: valid], [id]), ([id: valid], ["../file"]), ([:], [id, id]),
+            (["wrong": valid], []), ([id: valid.merging(["grantId": "unknown"]) { _, v in v }], []),
+            ([id: valid.merging(["candidateId": "unknown"]) { _, v in v }], []),
+            ([id: valid.merging(["extra": true]) { _, v in v }], [])
+        ]
+        for (templates, stages) in cases {
+            let root = temporaryRoot(); let keys = StoreKeys()
+            let journal = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+            try journal.commit(Data(identityJSON(["version": 3, "storeId": "store", "authorization": auth.canonicalJSON(), "candidates": ["c1": "g1"], "revocations": [:], "templates": templates, "stages": stages]).utf8)); try journal.close()
+            XCTAssertThrowsError(try makeStore(root: root, keys: keys, provider: provider)) { XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput) }
+        }
+    }
+
+    func testRecoveryRemovesOnlyManifestOwnedStagesAfterKeyOrPublicationFailure() async throws {
+        for failedPublication in [false, true] {
+            let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+            let store = try makeStore(root: root, keys: keys, provider: provider)
+            let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+            let backend = try FixtureIdentityBackend.system()
+            keys.rejectTemplateCreation = !failedPublication; keys.failJournalAfterTemplateCreation = failedPublication
+            do {
+                _ = try await store.enroll(IdentityProbe(fixtureID: "p", vector: [1, 0]), candidate: candidate, grant: authorization,
+                                            options: enrollmentOptions(), backend: backend)
+                XCTFail("failed storage published")
+            } catch { XCTAssertEqual((error as? IdentityError)?.code, .reEnrollmentRequired) }
+            keys.rejectJournal = false; keys.rejectTemplateCreation = false; keys.failJournalAfterTemplateCreation = false
+            try await store.close()
+            let journal = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+            let fields = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(journal.read())) as? [String: Any])
+            let stages = try XCTUnwrap(fields["stages"] as? [String]); XCTAssertEqual(stages.count, 1)
+            XCTAssertEqual((fields["templates"] as? [String: Any])?.count, 0)
+            try journal.close()
+            let orphan = root.appendingPathComponent("identity-template-\(UUID().uuidString.lowercased()).bin")
+            try Data([9, 8, 7]).write(to: orphan)
+            let reopened = try makeStore(root: root, keys: keys, provider: provider)
+            XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("identity-template-\(stages[0]).bin").path))
+            XCTAssertThrowsError(try keys.key(id: "template.\(store.storeId).\(stages[0])", createIfMissing: false))
+            XCTAssertEqual(try Data(contentsOf: orphan), Data([9, 8, 7]))
+            let result = try await reopened.enroll(IdentityProbe(fixtureID: "p", vector: [1, 0]), candidate: candidate, grant: authorization,
+                                                  options: enrollmentOptions(), backend: backend)
+            XCTAssertNotNil(result.templateRef); try await reopened.close()
+            let recovered = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+            let after = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(recovered.read())) as? [String: Any])
+            XCTAssertEqual(after["stages"] as? [String], []); try recovered.close()
+        }
+    }
+
+    func testEnrollmentMeasuresMonotonicTimeAndAddsResolvedErrorContext() async throws {
+        let clock = EnrollmentMono(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try IdentityStore(root: temporaryRoot(), purpose: "login", authorizationProvider: provider, keyProvider: keys,
+                                      wallClock: FixedClock(nowMillis: 100), monotonicClock: clock)
+        let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+        let backend = try FixtureIdentityBackend.system()
+        let result = try await store.enroll(IdentityProbe(fixtureID: "p", vector: [1, 0]), candidate: candidate, grant: authorization,
+                                            options: enrollmentOptions(), backend: backend)
+        XCTAssertGreaterThan(result.durationNanos, 0)
+        let failing = try EnrollmentBackend(failure: true)
+        do {
+            _ = try await store.enroll(IdentityProbe(fixtureID: "p", vector: [1, 0]), candidate: candidate, grant: authorization,
+                                        options: enrollmentOptions(), backend: failing)
+            XCTFail("backend failure accepted")
+        } catch {
+            let issue = error as? IdentityError
+            XCTAssertEqual(issue?.code, .backendUnavailable); XCTAssertEqual(issue?.backendId, backend.backendId)
+            XCTAssertEqual(issue?.modelBinding, backend.modelBinding); XCTAssertNotNil(issue?.sessionId)
+        }
+        try await store.close()
+    }
+
+    func testEnrollmentPersistsIndependentTemplateAndImmutableMembership() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+        let backend = try FixtureIdentityBackend.system()
+        let result = try await store.enroll(IdentityProbe(fixtureID: "p", vector: [0.25, -0.75]), candidate: candidate,
+                                            grant: authorization, options: enrollmentOptions(), backend: backend)
+        XCTAssertEqual(result.outcome, .enrolled)
+        let ref = try XCTUnwrap(result.templateRef)
+        XCTAssertEqual(result.backendId, backend.backendId); XCTAssertEqual(result.embeddingSpace, backend.embeddingSpace)
+        XCTAssertEqual(result.inputRevision, "fixture-p1"); XCTAssertEqual(result.optionsRevision, "quality-1")
+        XCTAssertEqual(result.qualityPolicyId, "host.quality"); XCTAssertFalse(result.runId.isEmpty)
+        try await store.close()
+        let reopened = try makeStore(root: root, keys: keys, provider: provider)
+        let membership = try await reopened.recordedTemplateCandidate(ref)
+        XCTAssertEqual(membership, candidate)
+        let payload = try IdentityTemplatePayload(root: root, storeId: reopened.storeId, provider: keys)
+        XCTAssertEqual(try payload.read(recordId: ref.id, space: ref.embeddingSpaceId).values, [0.25, -0.75])
+        let bytes = try Data(contentsOf: root.appendingPathComponent("identity-template-\(ref.id).bin"))
+        XCTAssertFalse(bytes.contains(Data("fixture-p1".utf8)))
+        _ = try await reopened.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner"))
+        do { _ = try await reopened.recordedTemplateCandidate(ref); XCTFail("revoked template accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
+        try await reopened.close()
+    }
+
+    func testInsufficientQualityDoesNotWriteTemplateOrInvokeEmbedding() async throws {
+        let root = temporaryRoot(); let store = try makeStore(root: root, keys: StoreKeys(), provider: StoreAuthority(epoch: 0))
+        let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+        let backend = try EnrollmentBackend(quality: IdentityQuality(faceCount: 1, score: 0.1))
+        let result = try await store.enroll(IdentityProbe(fixtureID: "p", vector: [1, 0]), candidate: candidate,
+                                            grant: authorization, options: enrollmentOptions(), backend: backend)
+        XCTAssertEqual(result.outcome, .insufficientQuality); XCTAssertNil(result.templateRef)
+        XCTAssertEqual(backend.embeddingCalls, 0)
+        XCTAssertFalse(try FileManager.default.contentsOfDirectory(atPath: root.path).contains { $0.hasPrefix("identity-template-") })
+        try await store.close()
+    }
+
+    func testRevokeWhileBackendBlockedSuppressesSuccessQualityAndBackendError() async throws {
+        for mode in 0..<3 {
+            let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+            let store = try makeStore(root: root, keys: keys, provider: provider)
+            let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+            let started = expectation(description: "backend running")
+            let backend = try EnrollmentBackend(quality: IdentityQuality(faceCount: 1, score: mode == 1 ? 0.1 : 1),
+                                                failure: mode == 2, onStart: { started.fulfill() })
+            let probe = try IdentityProbe(fixtureID: "p", vector: [1, 0]); let options = try enrollmentOptions()
+            let task = Task { try await store.enroll(probe, candidate: candidate, grant: authorization, options: options, backend: backend) }
+            await fulfillment(of: [started], timeout: 2)
+            _ = try await store.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner"))
+            backend.release.signal()
+            do { _ = try await task.value; XCTFail("revocation lost") }
+            catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+            try await store.close()
+            XCTAssertFalse(try FileManager.default.contentsOfDirectory(atPath: root.path).contains { $0.hasPrefix("identity-template-") })
+        }
+    }
+
+    func testCancellationAndCloseDrainBlockedEnrollment() async throws {
+        for closing in [false, true] {
+            let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+            let store = try makeStore(root: root, keys: keys, provider: provider)
+            let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+            let started = expectation(description: "backend running")
+            let backend = try EnrollmentBackend(onStart: { started.fulfill() })
+            let probe = try IdentityProbe(fixtureID: "p", vector: [1, 0]); let options = try enrollmentOptions()
+            let task = Task { try await store.enroll(probe, candidate: candidate, grant: authorization, options: options, backend: backend) }
+            await fulfillment(of: [started], timeout: 2)
+            let closer: Task<Void, Error>?
+            if closing { closer = Task { try await store.close() } } else { closer = nil; task.cancel() }
+            // The backend cooperates via its registered native stop callback.
+            do { _ = try await task.value; XCTFail("stopped operation succeeded") }
+            catch { XCTAssertEqual((error as? IdentityError)?.code, closing ? .closed : .cancelled) }
+            try await closer?.value; try await store.close()
+            let reopened = try makeStore(root: root, keys: keys, provider: provider); try await reopened.close()
+        }
+    }
+
+    private func enrollmentOptions() throws -> EnrollmentOptions {
+        try EnrollmentOptions(qualityFloor: 0.8, qualityPolicyId: "host.quality", revision: "quality-1")
+    }
+}
+
+private final class EnrollmentMono: IdentityMonotonicClock, @unchecked Sendable {
+    private let lock = NSLock(); private var value: Int64 = 0
+    var nowNanos: Int64 { lock.lock(); defer { lock.unlock() }; value += 10; return value }
+}
+
+private final class EnrollmentVariantBackend: IdentityBackend, @unchecked Sendable {
+    enum Mode { case multiple, spaceDrift, wrongEmbedding }
+    let base: FixtureIdentityBackend; let other: FixtureIdentityBackend; let mode: Mode
+    private var drifted = false
+    init(mode: Mode) throws { self.mode = mode; base = try .system(); other = try .system(revision: "other-model") }
+    var backendId: String { base.backendId }; var backendVersion: String { base.backendVersion }
+    var modelBinding: ModelBinding { drifted ? other.modelBinding : base.modelBinding }
+    var embeddingSpace: EmbeddingSpaceId { drifted ? other.embeddingSpace : base.embeddingSpace }
+    func availability() -> CapabilityAvailability { base.availability() }
+    func evaluateQuality(_ probe: IdentityProbe) throws -> IdentityQuality {
+        if mode == .spaceDrift { drifted = true }
+        return try IdentityQuality(faceCount: mode == .multiple ? 2 : 1, score: 1)
+    }
+    func embed(_ probe: IdentityProbe) throws -> IdentityEmbedding { try (mode == .wrongEmbedding ? other : base).embed(probe) }
+    func close() {}
+}
+
+private final class EnrollmentBackend: IdentityBackend, @unchecked Sendable {
+    let base: FixtureIdentityBackend
+    let quality: IdentityQuality
+    let failure: Bool
+    let onStart: (@Sendable () -> Void)?
+    let release = DispatchSemaphore(value: 0)
+    private(set) var embeddingCalls = 0
+    var backendId: String { base.backendId }
+    var backendVersion: String { base.backendVersion }
+    var modelBinding: ModelBinding { base.modelBinding }
+    var embeddingSpace: EmbeddingSpaceId { base.embeddingSpace }
+    init(quality: IdentityQuality? = nil, failure: Bool = false, onStart: (@Sendable () -> Void)? = nil) throws {
+        base = try .system(); self.quality = try quality ?? IdentityQuality(faceCount: 1, score: 1)
+        self.failure = failure; self.onStart = onStart
+    }
+    func availability() -> CapabilityAvailability { base.availability() }
+    func evaluateQuality(_ probe: IdentityProbe) throws -> IdentityQuality { quality }
+    func evaluateQuality(_ probe: IdentityProbe, stopSignal: IdentityStopSignal) throws -> IdentityQuality {
+        let registration = stopSignal.registerStopHandler { self.release.signal() }; defer { registration.close() }
+        if let onStart { onStart(); guard release.wait(timeout: .now() + 5) == .success else { throw IdentityError(.sessionTimeout) } }
+        if failure { throw IdentityError(.backendUnavailable) }; return quality
+    }
+    func embed(_ probe: IdentityProbe) throws -> IdentityEmbedding { embeddingCalls += 1; return try base.embed(probe) }
+    func close() { base.close() }
+}
 
 extension IdentityStoreTests {
     func testRevokePersistsTombstonesAndReturnsIdempotentReceipt() async throws {

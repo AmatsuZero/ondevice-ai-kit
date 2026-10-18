@@ -9,20 +9,23 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.UUID
 
-/** Persistent candidate admission and logical revocation. Physical purge is a later slice. */
+/** Persistent candidate/template admission and logical revocation. Physical purge is a later slice. */
 class IdentityStore internal constructor(
     root: File,
     private val purpose: String,
     private val authorizationProvider: IdentityAuthorizationProvider,
     keyProvider: IdentityKeyProvider,
     private val wallClock: IdentityWallClock,
-    @Suppress("unused") private val monotonicClock: IdentityMonotonicClock
+    private val monotonicClock: IdentityMonotonicClock
 ) : AutoCloseable {
     private val journal: IdentityJournal
+    private val payload: IdentityTemplatePayload
     val storeId: String
     private var authorization: IdentityAuthorizationState
     private var candidates: Map<String, String>
     private var revocations: Map<String, RevocationRecord>
+    private var templates: Map<String, IdentityTemplateRecord> = emptyMap()
+    private var stages: Set<String> = emptySet()
     private var closed = false
     private var operating = false
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
@@ -39,10 +42,18 @@ class IdentityStore internal constructor(
             if (record == null) {
                 val id = UUID.randomUUID().toString()
                 opened.commit(encode(id, initial, emptyMap(), emptyMap()))
-                storeId = id; authorization = initial; candidates = emptyMap(); revocations = emptyMap()
+                storeId = id; authorization = initial; candidates = emptyMap(); revocations = emptyMap(); templates = emptyMap(); stages = emptySet()
             } else {
                 val metadata = decode(record)
-                storeId = metadata.storeId; authorization = metadata.authorization; candidates = metadata.candidates; revocations = metadata.revocations
+                storeId = metadata.storeId; authorization = metadata.authorization; candidates = metadata.candidates; revocations = metadata.revocations; templates = metadata.templates; stages = metadata.stages
+            }
+            payload = IdentityTemplatePayload(root.toPath(), storeId, keyProvider)
+            if (stages.isNotEmpty()) {
+                try {
+                    stages.forEach(payload::remove)
+                    opened.commit(encode(storeId, authorization, candidates, revocations, templates, emptySet()))
+                    stages = emptySet()
+                } catch (error: Exception) { opened.close(); throw error }
             }
         } catch (error: Exception) {
             opened.close()
@@ -128,6 +139,10 @@ class IdentityStore internal constructor(
 
     /** Always consumes the ticket. Template publication will use this same gate. */
     internal fun finishOperation(ticket: IdentityOperationTicket, backendError: Exception? = null): Unit = mutation(allowClosed = true) {
+        consumeOperation(ticket) { if (backendError != null) throw backendError }
+    }
+
+    private inline fun <T> consumeOperation(ticket: IdentityOperationTicket, publication: () -> T): T {
         val operation = operations[ticket.id]?.takeIf { it.ticket === ticket } ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         try {
             if (operation.terminal == IdentityStopReason.AUTHORIZATION_REVOKED) throw IdentityError(IdentityErrorCode.AUTHORIZATION_REVOKED)
@@ -135,12 +150,74 @@ class IdentityStore internal constructor(
             ticket.stopSignal.check()
             candidateGrant(ticket.candidate)
             authorization.admitting(ticket.grant, ticket.scope, authorizationProvider, wallClock.nowMillis)
-            if (backendError != null) throw backendError
+            return publication()
         } finally {
             operations.remove(ticket.id)
             if (operations.isEmpty()) gate.notifyAll()
         }
     }
+
+    /** Backend callbacks execute without the store mutation gate; publication rejoins this gate. */
+    fun enroll(probe: IdentityProbe, candidate: CandidateRef, grant: AuthorizationGrant, options: EnrollmentOptions,
+               backend: IdentityBackend, stopSignal: IdentityStopSignal? = null): EnrollmentResult {
+        val started = monotonicClock.nowNanos
+        val ticket = beginOperation(candidate, grant, IdentityScope.ENROLLMENT)
+        val registration = stopSignal?.registerStopHandler { ticket.stopSignal.requestStop(IdentityStopReason.CANCELLED) }
+        var resolved: EmbeddingSpaceId? = null
+        try {
+            val binding = IdentityEnrollmentBinding(backend)
+            resolved = binding.space
+            val prepared = try { Result.success(binding.prepare(probe, options, ticket.stopSignal)) }
+            catch (error: IdentityError) { Result.failure(error) }
+            catch (_: Exception) { Result.failure(IdentityError(IdentityErrorCode.BACKEND_UNAVAILABLE)) }
+            return mutation(allowClosed = true) {
+                consumeOperation(ticket) {
+                    val work = prepared.getOrThrow()
+                    var ref: TemplateRef? = null
+                    if (work.embedding != null) {
+                        val issued = TemplateRef(UUID.randomUUID().toString(), binding.space, ticket.grant.authorizationEpoch, UUID.randomUUID().toString())
+                        val pending = stages + issued.id
+                        var published = false
+                        try {
+                            journalCommit(encode(storeId, authorization, candidates, revocations, templates, pending)); stages = pending
+                            payload.write(issued.id, work.embedding)
+                            ticket.stopSignal.check()
+                            authorization.admitting(ticket.grant, ticket.scope, authorizationProvider, wallClock.nowMillis)
+                            val next = templates + (issued.id to IdentityTemplateRecord(issued, ticket.candidate.id, ticket.grant.grantId))
+                            journalCommit(encode(storeId, authorization, candidates, revocations, next, pending - issued.id))
+                            templates = next; stages = pending - issued.id; ref = issued; published = true
+                        } catch (error: IdentityError) { throw error }
+                        catch (_: Exception) { throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
+                        finally { if (!published) closed = true }
+                    }
+                    val id = ticket.id.toString()
+                    EnrollmentResult(if (ref == null) EnrollmentOutcome.INSUFFICIENT_QUALITY else EnrollmentOutcome.ENROLLED, ref, binding.space, work.quality,
+                        binding.space.backendId, binding.space.backendVersion, binding.space.modelBinding, probe.revision, options.revision,
+                        options.qualityPolicyId, id, id, binding.space.preprocessRevision, elapsed(started, monotonicClock.nowNanos))
+                }
+            }
+        } catch (error: IdentityError) {
+            throw IdentityError(error.code, resolved?.backendId, resolved?.modelBinding, error.policyId, ticket.id.toString())
+        } catch (_: Exception) {
+            throw IdentityError(IdentityErrorCode.BACKEND_UNAVAILABLE, resolved?.backendId, resolved?.modelBinding, sessionId = ticket.id.toString())
+        } finally {
+            registration?.close()
+            // Also drains if a backend throws a fatal JVM Error before publication.
+            synchronized(gate) { operations.remove(ticket.id); if (operations.isEmpty()) gate.notifyAll() }
+        }
+    }
+
+    private fun elapsed(start: Long, end: Long): Long = if (end < start) 0 else try { Math.subtractExact(end, start) } catch (_: ArithmeticException) { Long.MAX_VALUE }
+
+    internal fun recordedTemplateCandidate(ref: TemplateRef): CandidateRef = synchronized(gate) {
+        admitted(); val record = templates[ref.id] ?: throw IdentityError(IdentityErrorCode.TEMPLATE_NOT_FOUND)
+        ref.validate(record.ref)
+        val grant = authorization.recordedGrant(record.grantId) ?: throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        if (grant.authorizationEpoch != authorization.highestEpoch(grant.revocationDomainId) || revocations.values.any { record.candidateId in it.candidateIds }) throw IdentityError(IdentityErrorCode.TEMPLATE_REVOKED)
+        CandidateRef(record.candidateId, storeId)
+    }
+
+    private fun journalCommit(bytes: ByteArray) { try { journal.commit(bytes) } catch (error: Exception) { closed = true; throw error } }
 
     override fun close() {
         val pending = synchronized(gate) {
@@ -179,18 +256,20 @@ class IdentityStore internal constructor(
         try { return block() } finally { operating = false }
     }
 
-    private data class Metadata(val storeId: String, val authorization: IdentityAuthorizationState, val candidates: Map<String, String>, val revocations: Map<String, RevocationRecord>)
+    private data class Metadata(val storeId: String, val authorization: IdentityAuthorizationState, val candidates: Map<String, String>, val revocations: Map<String, RevocationRecord>, val templates: Map<String, IdentityTemplateRecord>, val stages: Set<String>)
     private data class RevocationRecord(val domainId: String, val epoch: Long, val grantIds: List<String>, val candidateIds: List<String>) {
         fun fields() = mapOf("candidateIds" to candidateIds, "domainId" to domainId, "epoch" to epoch, "grantIds" to grantIds)
     }
 
-    private fun encode(storeId: String, authorization: IdentityAuthorizationState, candidates: Map<String, String>, revocations: Map<String, RevocationRecord> = this.revocations): ByteArray {
+    private fun encode(storeId: String, authorization: IdentityAuthorizationState, candidates: Map<String, String>, revocations: Map<String, RevocationRecord> = this.revocations, templates: Map<String, IdentityTemplateRecord> = this.templates, stages: Set<String> = this.stages): ByteArray {
         val json = IdentityContractJSON.encode(mapOf(
             "authorization" to authorization.canonicalJSON(),
             "candidates" to candidates,
             "revocations" to revocations.mapValues { it.value.fields() },
+            "stages" to stages.sorted(),
             "storeId" to storeId,
-            "version" to 2
+            "templates" to templates.mapValues { it.value.fields() },
+            "version" to 3
         ))
         if (json.toByteArray(StandardCharsets.UTF_8).size > 65536) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         return json.toByteArray(StandardCharsets.UTF_8)
@@ -205,6 +284,7 @@ class IdentityStore internal constructor(
         val fields = when (version) {
             1L -> root.also { if (it.keys != setOf("authorization", "candidates", "storeId", "version")) throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
             2L -> root.also { if (it.keys != setOf("authorization", "candidates", "revocations", "storeId", "version")) throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
+            3L -> root.also { if (it.keys != setOf("authorization", "candidates", "revocations", "stages", "storeId", "templates", "version")) throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
             else -> throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         }
         val id = fields.string("storeId").also(::token)
@@ -250,7 +330,30 @@ class IdentityStore internal constructor(
                 .flatMap { it.grantIds }.toSet()
             if (required != covered) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         }
-        return Metadata(id, auth, candidates, revocations)
+        @Suppress("UNCHECKED_CAST")
+        val rawTemplates = if (version < 3L) emptyMap() else fields["templates"] as? Map<String, Any?> ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        val templates = rawTemplates.mapValues { (templateId, value) ->
+            requireRecordId(templateId)
+            @Suppress("UNCHECKED_CAST")
+            val fields = value as? Map<String, Any?> ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            IdentityTemplateRecord.restore(fields).also { if (it.ref.id != templateId) throw IdentityError(IdentityErrorCode.INVALID_INPUT) }
+        }
+        val pending = if (version < 3L) emptyList() else (fields["stages"] as? List<*>)?.map { it as? String ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT) } ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        val stages = pending.toSet()
+        if (stages.size != pending.size || stages.intersect(templates.keys).isNotEmpty()) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        stages.forEach(::requireRecordId)
+        templates.values.forEach { record ->
+            val candidateGrant = candidates[record.candidateId]?.let(auth::recordedGrant) ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            val grant = auth.recordedGrant(record.grantId) ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+            if (grant.authorizationEpoch != record.ref.authorizationEpoch || grant.authorizationEpoch != candidateGrant.authorizationEpoch ||
+                grant.revocationDomainId != candidateGrant.revocationDomainId || grant.purpose != candidateGrant.purpose || IdentityScope.ENROLLMENT !in grant.scope)
+                throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        }
+        return Metadata(id, auth, candidates, revocations, templates, stages)
+    }
+
+    private fun requireRecordId(id: String) {
+        if (!Regex("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}").matches(id)) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
     }
 
     companion object {
