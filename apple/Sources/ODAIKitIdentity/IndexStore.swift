@@ -96,7 +96,8 @@ public actor IndexStore {
         let value = try snapshotSummary(ref)
         guard preparedIndexes[ref.revision] != nil else { throw IdentityError(.rebuildRequired) }
         let ticket = try await identityStore.beginGalleryOperation(grant: grant,
-            members: value.members.map { IdentityGalleryMember(ref: $0.ref, grant: $0.grant) }, embeddingSpace: value.policy.embeddingSpace)
+            members: value.members.map { IdentityGalleryMember(ref: $0.ref, grant: $0.grant) }, embeddingSpace: value.policy.embeddingSpace,
+            requiredGrants: [value.operationGrant])
         guard !closed, deletedLineages[ref.id] == nil else {
             try? await identityStore.finishGalleryOperation(ticket) { throw IdentityError(.closed) }
             throw IdentityError(.closed)

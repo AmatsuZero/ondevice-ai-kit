@@ -17,9 +17,11 @@ internal data class IdentityGalleryMember(
 internal class IdentityGalleryOperationTicket(
     val operationGrant: AuthorizationGrant,
     members: List<IdentityGalleryMember>,
-    val embeddingSpace: EmbeddingSpaceId
+    val embeddingSpace: EmbeddingSpaceId,
+    requiredGrants: List<AuthorizationGrant> = emptyList()
 ) {
     val members: List<IdentityGalleryMember> = Collections.unmodifiableList(members.toList())
+    val requiredGrants: List<AuthorizationGrant> = Collections.unmodifiableList(requiredGrants.toList())
     val id: UUID = UUID.randomUUID()
     val stopSignal = IdentityStopSignal()
 }

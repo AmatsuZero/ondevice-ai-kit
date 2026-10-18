@@ -316,6 +316,21 @@ class IndexStoreTest {
         } finally { release.countDown(); executor.shutdownNow(); index.close(); f.identity.close() }
     }
 
+    @Test fun readLeaseRetainsTheSnapshotOperationGrantAcrossQueryGrantChanges() {
+        val f = fixture()
+        val operation = AuthorizationGrant("operation-read", "operation-domain", setOf(IdentityScope.IDENTIFICATION), "identity", 0, null, 0, "audit")
+        val query = AuthorizationGrant("query-read", "query-domain", setOf(IdentityScope.IDENTIFICATION), "identity", 0, null, 0, "audit")
+        val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = operation, policy = f.policy)
+        builder.addTemplate(f.template, f.grant); val ref = builder.publish()
+        val lease = index.acquireIndexReadLease(ref, query)
+        f.identity.revokeGrant(operation.grantId, f.owner)
+        try {
+            assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED, assertFailsWith<IdentityError> { lease.snapshot() }.code)
+            assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED, assertFailsWith<IdentityError> { index.acquireIndexReadLease(ref, query) }.code)
+        } finally { lease.close(); index.close(); f.identity.close() }
+    }
+
     private fun fixture(): IndexFixture {
         val keys = IndexKeys(); val authority = IndexAuthority()
         val identity = IdentityStore(root().toFile(), "identity", authority, keys,

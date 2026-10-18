@@ -265,19 +265,21 @@ public actor IdentityStore {
     /// Registers every grant before issuing a process-local gallery ticket. Each
     /// trusted epoch advance uses the existing stale-template cleanup protocol.
     func beginGalleryOperation(grant: AuthorizationGrant, members: [IdentityGalleryMember],
-                               embeddingSpace: EmbeddingSpaceId) async throws -> IdentityGalleryOperation {
+                               embeddingSpace: EmbeddingSpaceId,
+                               requiredGrants: [AuthorizationGrant] = []) async throws -> IdentityGalleryOperation {
         guard embeddingSpace.supportedCapabilities.contains(.identification) else {
             throw IdentityError(.embeddingSpaceMismatch)
         }
         guard Set(members.map { $0.ref.id }).count == members.count else { throw IdentityError(.invalidInput) }
         try await admitGalleryGrant(grant)
+        for required in requiredGrants { try await admitGalleryGrant(required) }
         for member in members {
             try validateGalleryMember(member, space: embeddingSpace, requireEpoch: false)
             try await admitGalleryGrant(member.grant)
         }
         // Above cleanup can suspend; perform a complete final admission pass.
-        try validateGalleryAuthorization(grant: grant, members: members, space: embeddingSpace)
-        let ticket = IdentityGalleryOperation(grant: grant, members: members, embeddingSpace: embeddingSpace)
+        try validateGalleryAuthorization(grant: grant, members: members, space: embeddingSpace, requiredGrants: requiredGrants)
+        let ticket = IdentityGalleryOperation(grant: grant, members: members, embeddingSpace: embeddingSpace, requiredGrants: requiredGrants)
         galleryOperations[ticket.id] = GalleryOperation(ticket: ticket)
         return ticket
     }
@@ -290,15 +292,18 @@ public actor IdentityStore {
         if operation.terminal == .authorizationRevoked { throw IdentityError(.authorizationRevoked) }
         guard !closed else { throw IdentityError(.closed) }
         try ticket.stopSignal.check()
-        try validateGalleryAuthorization(grant: ticket.grant, members: ticket.members, space: ticket.embeddingSpace)
+        try validateGalleryAuthorization(grant: ticket.grant, members: ticket.members, space: ticket.embeddingSpace, requiredGrants: ticket.requiredGrants)
         try ticket.stopSignal.check()
         return try publication()
     }
 
     private func validateGalleryAuthorization(grant: AuthorizationGrant, members: [IdentityGalleryMember],
-                                               space: EmbeddingSpaceId) throws {
+                                               space: EmbeddingSpaceId, requiredGrants: [AuthorizationGrant] = []) throws {
         guard !closed else { throw IdentityError(.closed) }
         _ = try authorization.admitting(grant, scope: .identification, provider: provider, nowMillis: wallClock.nowMillis)
+        for required in requiredGrants {
+            _ = try authorization.admitting(required, scope: .identification, provider: provider, nowMillis: wallClock.nowMillis)
+        }
         for member in members { try validateGalleryMember(member, space: space) }
     }
 

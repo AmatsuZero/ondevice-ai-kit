@@ -134,7 +134,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
             if (indexes[ref.revision] == null) throw IdentityError(IdentityErrorCode.REBUILD_REQUIRED)
             value
         }
-        val ticket = identityStore.beginGalleryOperation(grant, record.members.map { IdentityGalleryMember(it.ref, it.grant) }, record.policy.embeddingSpace)
+        val ticket = identityStore.beginGalleryOperation(grant, record.members.map { IdentityGalleryMember(it.ref, it.grant) }, record.policy.embeddingSpace, listOf(record.operationGrant))
         try {
             synchronized(gate) {
                 requireOpen(); catalog.snapshot(ref)

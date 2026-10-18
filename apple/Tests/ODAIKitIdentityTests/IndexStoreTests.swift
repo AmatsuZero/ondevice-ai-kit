@@ -375,6 +375,21 @@ final class IndexStoreTests: XCTestCase {
         await closing.value; try await context.identity.close()
     }
 
+    func testReadLeaseRetainsSnapshotOperationGrantAcrossQueryGrantChanges() async throws {
+        let context = try await context()
+        let operation = try AuthorizationGrant(grantId: "operation-read", revocationDomainId: "operation-domain", scope: [.identification], purpose: "identity", issuedAtMillis: 0, expiresAtMillis: nil, authorizationEpoch: 0, evidenceRef: "audit")
+        let query = try AuthorizationGrant(grantId: "query-read", revocationDomainId: "query-domain", scope: [.identification], purpose: "identity", issuedAtMillis: 0, expiresAtMillis: nil, authorizationEpoch: 0, evidenceRef: "audit")
+        let builder = try await context.index.createGalleryBuilder(grant: operation, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant); let ref = try await builder.publish()
+        let lease = try await context.index.acquireIndexReadLease(ref, grant: query)
+        _ = try await context.identity.revokeGrant(operation.grantId, ownership: context.owner)
+        do { _ = try lease.snapshot(); XCTFail("revoked snapshot operation remained readable") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        do { _ = try await context.index.acquireIndexReadLease(ref, grant: query); XCTFail("new query grant bypassed snapshot operation revoke") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        await lease.close(); await context.index.close(); try await context.identity.close()
+    }
+
     private func context(buildIndex: @escaping GalleryIndexBuilder = { _, _ in Data([1]) }) async throws -> IndexTestContext {
         let keys = IndexTestKeys(); let authority = IndexTestAuthority()
         let identity = try IdentityStore(root: temporaryRoot(), purpose: "identity", authorizationProvider: authority,

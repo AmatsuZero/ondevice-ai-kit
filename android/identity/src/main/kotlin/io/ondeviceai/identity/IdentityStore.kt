@@ -158,6 +158,7 @@ class IdentityStore internal constructor(
     private fun invalidateGalleryOperations(domain: String, beforeEpoch: Long) = galleryOperations.values.filter { operation ->
         val ticket = operation.ticket
         (ticket.operationGrant.revocationDomainId == domain && ticket.operationGrant.authorizationEpoch < beforeEpoch) ||
+            ticket.requiredGrants.any { it.revocationDomainId == domain && it.authorizationEpoch < beforeEpoch } ||
             ticket.members.any { it.grant.revocationDomainId == domain && it.grant.authorizationEpoch < beforeEpoch }
     }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
 
@@ -173,12 +174,14 @@ class IdentityStore internal constructor(
     internal fun beginGalleryOperation(
         operationGrant: AuthorizationGrant,
         members: List<IdentityGalleryMember>,
-        embeddingSpace: EmbeddingSpaceId
+        embeddingSpace: EmbeddingSpaceId,
+        requiredGrants: List<AuthorizationGrant> = emptyList()
     ): IdentityGalleryOperationTicket {
         // Provider/stop callbacks run during admission and cleanup. Snapshot the
         // caller list before invoking either so the checked members are exactly
         // the members carried by the returned ticket.
         val immutableMembers = members.toList()
+        val immutableRequiredGrants = requiredGrants.toList()
         val (outcome, signals, cleanup) = mutation {
             if (IdentityCapability.IDENTIFICATION !in embeddingSpace.supportedCapabilities)
                 throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
@@ -186,6 +189,7 @@ class IdentityStore internal constructor(
                 throw IdentityError(IdentityErrorCode.INVALID_INPUT)
 
             var next = authorization.admitting(operationGrant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
+            immutableRequiredGrants.forEach { next = next.admitting(it, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis) }
             immutableMembers.forEach { member ->
                 preflightGalleryMemberLocked(member.ref, member.grant, embeddingSpace)
                 next = next.admitting(member.grant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
@@ -193,7 +197,7 @@ class IdentityStore internal constructor(
             // The operation grant is checked again after all member/provider callbacks.
             // A provider may advance or cancel the operation while member grants are admitted.
             next = next.admitting(operationGrant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
-            val advancedDomains = (listOf(operationGrant) + immutableMembers.map { it.grant }).map { it.revocationDomainId }.distinct()
+            val advancedDomains = (listOf(operationGrant) + immutableRequiredGrants + immutableMembers.map { it.grant }).map { it.revocationDomainId }.distinct()
                 .filter { next.highestEpoch(it) > authorization.highestEpoch(it) }
             val staleTemplates = templates.values.filter { record ->
                 val recorded = authorization.recordedGrant(record.grantId)
@@ -221,8 +225,9 @@ class IdentityStore internal constructor(
             if (IdentityCapability.IDENTIFICATION !in embeddingSpace.supportedCapabilities)
                 throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
             authorization.admitting(operationGrant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
+            immutableRequiredGrants.forEach { authorization.admitting(it, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis) }
             immutableMembers.forEach { validateGalleryMemberLocked(it.ref, it.grant, embeddingSpace) }
-            IdentityGalleryOperationTicket(operationGrant, immutableMembers, embeddingSpace).also {
+            IdentityGalleryOperationTicket(operationGrant, immutableMembers, embeddingSpace, immutableRequiredGrants).also {
                 galleryOperations[it.id] = GalleryOperation(it)
             }
         }
@@ -243,6 +248,7 @@ class IdentityStore internal constructor(
             if (IdentityCapability.IDENTIFICATION !in ticket.embeddingSpace.supportedCapabilities)
                 throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
             authorization.admitting(ticket.operationGrant, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis)
+            ticket.requiredGrants.forEach { authorization.admitting(it, IdentityScope.IDENTIFICATION, authorizationProvider, wallClock.nowMillis) }
             ticket.members.forEach { validateGalleryMemberLocked(it.ref, it.grant, ticket.embeddingSpace) }
             ticket.stopSignal.check()
             return@mutation publication()
