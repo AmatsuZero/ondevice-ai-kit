@@ -10,21 +10,30 @@ public struct DeletionReceipt: Equatable, Sendable {
     public let storeId: String
     public let templateId: String?
     public let candidateId: String?
+    public let galleryId: String?
     init(id: String, storeId: String, templateId: String) throws {
         try identityToken(id); try identityToken(storeId); try identityToken(templateId)
-        self.id = id; self.storeId = storeId; self.templateId = templateId; self.candidateId = nil
+        self.id = id; self.storeId = storeId; self.templateId = templateId; self.candidateId = nil; self.galleryId = nil
     }
     init(id: String, storeId: String, candidateId: String) throws {
         try identityToken(id); try identityToken(storeId); try identityToken(candidateId)
-        self.id = id; self.storeId = storeId; self.templateId = nil; self.candidateId = candidateId
+        self.id = id; self.storeId = storeId; self.templateId = nil; self.candidateId = candidateId; self.galleryId = nil
+    }
+    init(id: String, storeId: String, galleryId: String) throws {
+        try identityToken(id); try identityToken(storeId); try identityToken(galleryId)
+        self.id = id; self.storeId = storeId; self.templateId = nil; self.candidateId = nil; self.galleryId = galleryId
     }
     public func canonicalJSON() -> String {
         if let templateId { return identityJSON(["id": id, "storeId": storeId, "templateId": templateId]) }
-        return identityJSON(["id": id, "storeId": storeId, "candidateId": candidateId!])
+        if let candidateId { return identityJSON(["id": id, "storeId": storeId, "candidateId": candidateId]) }
+        return identityJSON(["id": id, "storeId": storeId, "galleryId": galleryId!])
     }
     public static func decodeJSON(_ json: String) throws -> Self {
         if let fields = try? identityObject(json, keys: ["id", "storeId", "templateId"]) {
             return try Self(id: identityString(fields, "id"), storeId: identityString(fields, "storeId"), templateId: identityString(fields, "templateId"))
+        }
+        if let fields = try? identityObject(json, keys: ["id", "storeId", "galleryId"]) {
+            return try Self(id: identityString(fields, "id"), storeId: identityString(fields, "storeId"), galleryId: identityString(fields, "galleryId"))
         }
         let fields = try identityObject(json, keys: ["id", "storeId", "candidateId"])
         return try Self(id: identityString(fields, "id"), storeId: identityString(fields, "storeId"), candidateId: identityString(fields, "candidateId"))
