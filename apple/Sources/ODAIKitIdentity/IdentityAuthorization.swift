@@ -40,6 +40,10 @@ struct IdentityAuthorizationState: Sendable, Equatable {
 
     func recordedGrant(_ id: String) -> AuthorizationGrant? { grants[id] }
 
+    func recordedGrantIDs(domain: String, before epoch: Int64) -> Set<String> {
+        Set(grants.values.filter { $0.revocationDomainId == domain && $0.authorizationEpoch < epoch }.map(\.grantId))
+    }
+
     func admitting(_ grant: AuthorizationGrant, scope: IdentityScope,
                    provider: any IdentityAuthorizationProvider, nowMillis: Int64) throws -> Self {
         guard grant.purpose == purpose else { throw IdentityError(.authorizationRequired) }

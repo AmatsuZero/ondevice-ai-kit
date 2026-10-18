@@ -18,6 +18,9 @@ internal class IdentityAuthorizationState private constructor(
 
     internal fun recordedGrant(grantId: String): AuthorizationGrant? = grants[grantId]
 
+    internal fun recordedGrantIds(domain: String, beforeEpoch: Long): Set<String> = grants.values
+        .filter { it.revocationDomainId == domain && it.authorizationEpoch < beforeEpoch }.map { it.grantId }.toSet()
+
     fun admitting(
         grant: AuthorizationGrant,
         scope: IdentityScope,

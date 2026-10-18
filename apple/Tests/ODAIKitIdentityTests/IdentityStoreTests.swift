@@ -137,8 +137,8 @@ final class IdentityStoreTests: XCTestCase {
         try IdentityStore(root: root, purpose: "login", authorizationProvider: provider, keyProvider: keys,
                           wallClock: FixedClock(nowMillis: 100), monotonicClock: FixedMono())
     }
-    private func grant(id: String = "g1", purpose: String = "login", epoch: Int64 = 0) throws -> AuthorizationGrant {
-        try AuthorizationGrant(grantId: id, revocationDomainId: "tenant.subject", scope: [.enrollment], purpose: purpose,
+    private func grant(id: String = "g1", purpose: String = "login", epoch: Int64 = 0, domain: String = "tenant.subject") throws -> AuthorizationGrant {
+        try AuthorizationGrant(grantId: id, revocationDomainId: domain, scope: [.enrollment], purpose: purpose,
                                issuedAtMillis: 0, expiresAtMillis: 200, authorizationEpoch: epoch, evidenceRef: "audit")
     }
     private func temporaryRoot() -> URL {
@@ -164,9 +164,214 @@ private final class StoreKeys: IdentityKeyProvider, @unchecked Sendable {
 private final class StoreAuthority: IdentityAuthorizationProvider, @unchecked Sendable {
     var epoch: Int64; init(epoch: Int64) { self.epoch = epoch }
     var onAuthorize: (@Sendable () -> Void)?
+    var denyOwnership = false
     func authoritativeEpoch(grant: AuthorizationGrant, minimumEpoch: Int64, nowMillis: Int64) throws -> Int64 { onAuthorize?(); return epoch }
-    func validateOwnership(_ authorization: OwnershipAuthorization, nowMillis: Int64) throws {}
+    func validateOwnership(_ authorization: OwnershipAuthorization, nowMillis: Int64) throws {
+        if denyOwnership { throw IdentityError(.authorizationRequired) }
+    }
 }
 private struct FixedClock: IdentityWallClock { let nowMillis: Int64 }
 private struct FixedMono: IdentityMonotonicClock { let nowNanos: Int64 = 1 }
 private final class MovingClock: IdentityWallClock, @unchecked Sendable { var nowMillis: Int64 = 100 }
+
+extension IdentityStoreTests {
+    func testRevokePersistsTombstonesAndReturnsIdempotentReceipt() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let candidate = try await store.createCandidate(grant())
+        let ownership = try OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner")
+        let receipt = try await store.revokeGrant("g1", ownership: ownership)
+        XCTAssertEqual(receipt.storeId, store.storeId)
+        XCTAssertFalse(receipt.id.isEmpty)
+        do { _ = try await store.recordedCandidateGrant(candidate); XCTFail("revoked candidate visible") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .candidateRevoked) }
+        let repeated = try await store.revokeGrant("g1", ownership: ownership)
+        XCTAssertEqual(repeated, receipt)
+        try await store.close()
+
+        let reopened = try makeStore(root: root, keys: keys, provider: provider)
+        let restored = try await reopened.revokeGrant("g1", ownership: try OwnershipAuthorization(storeId: reopened.storeId, evidenceRef: "owner"))
+        XCTAssertEqual(restored, receipt)
+        do { _ = try await reopened.recordedCandidateGrant(candidate); XCTFail("tombstone lost") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .candidateRevoked) }
+        try await reopened.close()
+    }
+
+    func testRevokeAdvancesDomainEpochAndNewAuthorizedEpochCreatesNewCandidate() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        _ = try await store.createCandidate(grant())
+        let ownership = try OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner")
+        _ = try await store.revokeGrant("g1", ownership: ownership)
+        do { _ = try await store.createCandidate(grant(id: "old-new-id")); XCTFail("old epoch bypass") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        provider.epoch = 1
+        let fresh = try await store.createCandidate(grant(id: "g2", epoch: 1))
+        let freshGrant = try await store.recordedCandidateGrant(fresh)
+        XCTAssertEqual(freshGrant.grantId, "g2")
+        try await store.close()
+    }
+
+    func testRevokeRequiresIndependentOwnershipAndDoesNotChangeStateOnDenial() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let candidate = try await store.createCandidate(grant())
+        do { _ = try await store.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: "wrong", evidenceRef: "owner")); XCTFail("wrong owner accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRequired) }
+        provider.denyOwnership = true
+        do { _ = try await store.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner")); XCTFail("denied owner accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRequired) }
+        provider.denyOwnership = false
+        let unchanged = try await store.recordedCandidateGrant(candidate)
+        XCTAssertEqual(unchanged.grantId, "g1")
+        try await store.close()
+    }
+
+    func testRevokeTargetsEveryOldGrantInItsDomainAndPreservesOtherDomains() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let first = try await store.createCandidate(grant())
+        let second = try await store.createCandidate(grant(id: "g2"))
+        let unrelated = try await store.createCandidate(grant(id: "other", domain: "tenant.other"))
+        let ownership = try OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner")
+        let receipt = try await store.revokeGrant("g1", ownership: ownership)
+        let alias = try await store.revokeGrant("g2", ownership: ownership)
+        XCTAssertEqual(alias, receipt)
+        for ref in [first, second] {
+            do { _ = try await store.recordedCandidateGrant(ref); XCTFail("same domain survived") }
+            catch { XCTAssertEqual((error as? IdentityError)?.code, .candidateRevoked) }
+        }
+        let otherGrant = try await store.recordedCandidateGrant(unrelated)
+        XCTAssertEqual(otherGrant.grantId, "other")
+        try await store.close()
+        let reopened = try makeStore(root: root, keys: keys, provider: provider)
+        let restoredAlias = try await reopened.revokeGrant("g2", ownership: ownership)
+        XCTAssertEqual(restoredAlias, receipt)
+        do { _ = try await reopened.createCandidate(grant(id: "bypass")); XCTFail("restart lost epoch") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        provider.epoch = 1
+        let fresh = try await reopened.createCandidate(grant(id: "fresh", epoch: 1))
+        let oldReceipt = try await reopened.revokeGrant("g1", ownership: ownership)
+        XCTAssertEqual(oldReceipt, receipt)
+        let live = try await reopened.recordedCandidateGrant(fresh)
+        XCTAssertEqual(live.grantId, "fresh")
+        let nextReceipt = try await reopened.revokeGrant("fresh", ownership: ownership)
+        XCTAssertNotEqual(nextReceipt, receipt)
+        try await reopened.close()
+        let twiceReopened = try makeStore(root: root, keys: keys, provider: provider)
+        let firstRestored = try await twiceReopened.revokeGrant("g1", ownership: ownership)
+        let secondRestored = try await twiceReopened.revokeGrant("fresh", ownership: ownership)
+        XCTAssertEqual(firstRestored, receipt); XCTAssertEqual(secondRestored, nextReceipt)
+        try await twiceReopened.close()
+    }
+
+    func testFailedRevokeCommitRetiresStoreAndDoesNotPublishTombstone() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let candidate = try await store.createCandidate(grant())
+        let ownership = try OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner")
+        let file = root.appendingPathComponent("identity-journal-store.bin")
+        let before = try Data(contentsOf: file)
+        keys.rejectAccess = true
+        do { _ = try await store.revokeGrant("g1", ownership: ownership); XCTFail("failed commit returned receipt") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .reEnrollmentRequired) }
+        keys.rejectAccess = false
+        XCTAssertEqual(try Data(contentsOf: file), before)
+        do { _ = try await store.recordedCandidateGrant(candidate); XCTFail("retired store accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+        let reopened = try makeStore(root: root, keys: keys, provider: provider)
+        try await store.close()
+        XCTAssertThrowsError(try makeStore(root: root, keys: keys, provider: provider))
+        let live = try await reopened.recordedCandidateGrant(candidate)
+        XCTAssertEqual(live.grantId, "g1")
+        try await reopened.close()
+    }
+
+    func testUnknownGrantAndClosedStoreRejectRevocation() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let ownership = try OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner")
+        do { _ = try await store.revokeGrant("unknown", ownership: ownership); XCTFail("unknown grant accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRequired) }
+        try await store.close()
+        do { _ = try await store.revokeGrant("unknown", ownership: ownership); XCTFail("closed accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+    }
+
+    func testReceiptWireIsStoreBoundAndStrict() throws {
+        let receipt = try RevocationReceipt(id: "receipt", storeId: "store")
+        XCTAssertEqual(try RevocationReceipt.decodeJSON(receipt.canonicalJSON()), receipt)
+        XCTAssertThrowsError(try RevocationReceipt.decodeJSON(#"{"id":"r","storeId":"s","status":"purged"}"#))
+        XCTAssertThrowsError(try RevocationReceipt.decodeJSON(#"{"id":"","storeId":"s"}"#))
+    }
+
+    func testVersionOneCandidateStoreMigratesOnNextCommit() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let auth = try IdentityAuthorizationState(purpose: "login").admitting(grant(), scope: .enrollment, provider: provider, nowMillis: 100)
+        let journal = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+        try journal.commit(Data(identityJSON(["version": 1, "storeId": "legacy", "authorization": try auth.canonicalJSON(),
+                                              "candidates": ["candidate": "g1"]]).utf8))
+        try journal.close()
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let ref = try CandidateRef(id: "candidate", storeId: "legacy")
+        let membership = try await store.recordedCandidateGrant(ref)
+        XCTAssertEqual(membership.grantId, "g1")
+        let receipt = try await store.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: "legacy", evidenceRef: "owner"))
+        try await store.close()
+        let reopened = try makeStore(root: root, keys: keys, provider: provider)
+        let restored = try await reopened.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: "legacy", evidenceRef: "owner"))
+        XCTAssertEqual(restored, receipt)
+        try await reopened.close()
+    }
+
+    func testRestoreRejectsIncompleteOrInconsistentRevocationTargetSets() throws {
+        let provider = StoreAuthority(epoch: 0)
+        var auth = try IdentityAuthorizationState(purpose: "login").admitting(grant(), scope: .enrollment, provider: provider, nowMillis: 100)
+        auth = try auth.admitting(grant(id: "g2"), scope: .enrollment, provider: provider, nowMillis: 100).revoking(grantId: "g1")
+        let valid: [String: Any] = ["domainId": "tenant.subject", "epoch": 1, "grantIds": ["g1", "g2"], "candidateIds": ["c1", "c2"]]
+        func changing(_ changes: [String: Any]) -> [String: Any] { valid.merging(changes) { _, new in new } }
+        let invalidRecords: [[String: Any]] = [
+            ["r": changing(["grantIds": ["g1"], "candidateIds": ["c1"]])],
+            ["r": changing(["candidateIds": ["c1"]])],
+            ["r": changing(["candidateIds": ["c1", "c1"]])],
+            ["r": changing(["grantIds": [String]()])],
+            ["r": changing(["domainId": "wrong"])],
+            ["r": changing(["epoch": 0])], ["r": changing(["epoch": 2])],
+            ["r": changing(["extra": true])], ["r": valid, "duplicate": valid]
+        ]
+        for records in invalidRecords {
+            let root = temporaryRoot(); let keys = StoreKeys()
+            let journal = try IdentityJournal(root: root, recordID: "store", keyProvider: keys)
+            try journal.commit(Data(identityJSON(["version": 2, "storeId": "store", "authorization": try auth.canonicalJSON(),
+                                                  "candidates": ["c1": "g1", "c2": "g2"], "revocations": records]).utf8))
+            try journal.close()
+            XCTAssertThrowsError(try makeStore(root: root, keys: keys, provider: provider)) {
+                XCTAssertEqual(($0 as? IdentityError)?.code, .invalidInput)
+            }
+        }
+    }
+
+    func testConcurrentRevocationsReturnOnePersistentReceipt() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        _ = try await store.createCandidate(grant())
+        let ownership = try OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner")
+        let receipts = try await withThrowingTaskGroup(of: RevocationReceipt.self) { group in
+            for _ in 0..<16 { group.addTask { try await store.revokeGrant("g1", ownership: ownership) } }
+            var results: [RevocationReceipt] = []
+            for try await receipt in group { results.append(receipt) }
+            return results
+        }
+        XCTAssertEqual(receipts.count, 16)
+        XCTAssertTrue(receipts.allSatisfy { $0 == receipts.first })
+        provider.denyOwnership = true
+        do { _ = try await store.revokeGrant("g1", ownership: ownership); XCTFail("repeated revoke bypassed ownership") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRequired) }
+        provider.denyOwnership = false
+        try await store.close()
+        let reopened = try makeStore(root: root, keys: keys, provider: provider)
+        let restored = try await reopened.revokeGrant("g1", ownership: ownership)
+        XCTAssertEqual(restored, receipts.first)
+        try await reopened.close()
+    }
+}
