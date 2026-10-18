@@ -166,6 +166,10 @@ class IdentityStore internal constructor(
      * Member grants are identification grants in their own domains; the
      * enrollment grant stored on a template is never used as a substitute.
      */
+    internal fun validateGalleryOwnership(ownership: OwnershipAuthorization) = mutation {
+        IdentityAuthorizationState.requireOwnership(ownership, storeId, authorizationProvider, wallClock.nowMillis)
+    }
+
     internal fun beginGalleryOperation(
         operationGrant: AuthorizationGrant,
         members: List<IdentityGalleryMember>,

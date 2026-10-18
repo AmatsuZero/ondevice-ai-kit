@@ -12,6 +12,7 @@ internal class GalleryCatalog(root: Path, val identityStoreId: String, keys: Ide
     private var heads = emptyMap<String, String>()
     private var tombstones = emptyMap<String, String>()
     private var closed = false
+    private var publicationsSealed = false
     private var retired = false
     private var operating = false
 
@@ -91,7 +92,17 @@ internal class GalleryCatalog(root: Path, val identityStoreId: String, keys: Ide
         }
     }
 
+    fun sealPublications() = synchronized(lock) {
+        if (operating) throw IdentityError(IdentityErrorCode.BUSY)
+        // A fault retires normal catalog access, but close must still seal and
+        // drain the existing writer without attempting another journal write.
+        publicationsSealed = true
+    }
+    fun tombstoneReceipts(): Map<String, String> = access { tombstones.toMap() }
+    fun hasSnapshots(lineageId: String): Boolean = access { snapshots.values.any { it.ref.id == lineageId } }
+
     fun publish(record: GallerySnapshotRecord) = access {
+        if (publicationsSealed) throw IdentityError(IdentityErrorCode.CLOSED)
         if (record.indexStoreId != storeId || record.identityStoreId != identityStoreId) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         if (tombstones.containsKey(record.ref.id)) throw IdentityError(IdentityErrorCode.GALLERY_REVISION_GONE)
         if (snapshots.containsKey(record.ref.revision)) throw IdentityError(IdentityErrorCode.GALLERY_REVISION_CONFLICT)

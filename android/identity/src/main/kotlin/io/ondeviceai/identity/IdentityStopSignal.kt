@@ -38,19 +38,28 @@ class IdentityStopSignal {
         }
     }
 
-    fun requestStop(reason: IdentityStopReason) {
+    fun requestStop(reason: IdentityStopReason) { prepareStopDelivery(reason)?.invoke() }
+
+    internal fun prepareStopDelivery(reason: IdentityStopReason): (() -> Unit)? {
         val pending: List<() -> Unit>
         synchronized(lock) {
-            if (stopped != null) return
+            if (stopped != null) return null
             stopped = reason
             pending = handlers.values.toList()
             handlers.clear()
         }
-        pending.forEach(::invokeSafely)
+        return { pending.forEach(::invokeSafely) }
     }
 
     private fun invokeSafely(callback: () -> Unit) {
+        deliveryDepth.set((deliveryDepth.get() ?: 0) + 1)
         try { callback() } catch (_: Exception) { /* one backend must not block others */ }
+        finally { deliveryDepth.set((deliveryDepth.get() ?: 0) - 1) }
+    }
+
+    internal companion object {
+        private val deliveryDepth = ThreadLocal.withInitial { 0 }
+        val isDelivering: Boolean get() = (deliveryDepth.get() ?: 0) > 0
     }
 
     private val IdentityStopReason.errorCode: IdentityErrorCode
