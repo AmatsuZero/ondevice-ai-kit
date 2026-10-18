@@ -18,6 +18,8 @@
 
 enrollment/template 已提交 `0bc6761`：Swift 100/100、Android 102/102，Android identity lintDebug 通过，独立审查 APPROVE（无 Critical/Important 发现）。root 验证日志为 `/tmp/odai-p10-enrollment-accept-{swift,android}.log`；审查者另跑 Swift Store/payload 41/41，未能访问 Gradle 缓存，不替代 root 的 Android 验证。测试使用合成夹具及临时内存密钥，不包含个人生物数据、模型权重或商用精度结论。两端测试组织粒度不同，总数不表示平台行为差异。
 
+Android 原生 Keystore envelope 已在 TECNO KM9 API 35 真机通过，[探针记录](p10-android-keystore-probe.md)列出密钥不可导出、合成数据 round-trip、篡改拒绝与删除后禁止重建的结果；不替代完整 Store、API 26 或 iOS Keychain 验收。
+
 ## 可复现命令
 
 ```sh
