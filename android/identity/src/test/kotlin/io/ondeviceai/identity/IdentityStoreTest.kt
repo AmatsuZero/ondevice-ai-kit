@@ -4,6 +4,10 @@ import kotlin.test.*
 import java.nio.file.Files
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.atomic.AtomicReference
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 
@@ -272,6 +276,153 @@ class IdentityStoreTest {
         val reopened = store(root, keys, provider)
         assertEquals(receipts.first(), reopened.revokeGrant("g1", ownership))
         reopened.close()
+    }
+
+    @Test fun revocationStopsMatchingOperationAndSuppressesFinish() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority()
+        val store = store(root, keys, provider); val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT)
+        var stopped = false
+        val registration = ticket.stopSignal.registerStopHandler { stopped = true }
+        store.revokeGrant("g1", OwnershipAuthorization(store.storeId, "owner"))
+        assertTrue(stopped)
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { ticket.stopSignal.check() }
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.finishOperation(ticket) }
+        registration.close(); store.close()
+    }
+
+    @Test fun operationFromOtherDomainSurvivesRevocation() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority()
+        val store = store(root, keys, provider); val same = grant(); val other = grant("other", domain = "tenant.other")
+        val sameRef = store.createCandidate(same); val otherRef = store.createCandidate(other)
+        val ticket = store.beginOperation(otherRef, other, IdentityScope.ENROLLMENT)
+        store.revokeGrant("g1", OwnershipAuthorization(store.storeId, "owner"))
+        ticket.stopSignal.check(); store.finishOperation(ticket)
+        assertCode(IdentityErrorCode.CANDIDATE_REVOKED) { store.recordedCandidateGrant(sameRef) }
+        store.close()
+    }
+
+    @Test fun operationTicketRejectsMismatchedCandidateOrGrant() {
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority()); val first = grant(); val second = grant("g2", domain = "tenant.other")
+        val ref = store.createCandidate(first)
+        assertCode(IdentityErrorCode.AUTHORIZATION_REQUIRED) { store.beginOperation(ref, second, IdentityScope.ENROLLMENT) }
+        store.close()
+    }
+
+    @Test fun closeStopsAndDrainsOperationBeforeReleasingWriter() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority()
+        val store = store(root, keys, provider); val authorization = grant(); val candidate = store.createCandidate(authorization)
+        val ticket = store.beginOperation(candidate, authorization, IdentityScope.ENROLLMENT)
+        val stopped = CountDownLatch(1)
+        val registration = ticket.stopSignal.registerStopHandler { stopped.countDown() }
+        val executor = Executors.newFixedThreadPool(2)
+        try {
+            val closing = executor.submit { store.close() }
+            assertTrue(stopped.await(2, TimeUnit.SECONDS))
+            val secondClosing = executor.submit { store.close() }
+            assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+            assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) }
+            closing.get(2, TimeUnit.SECONDS)
+            secondClosing.get(2, TimeUnit.SECONDS)
+            registration.close()
+            val reopened = store(root, keys, provider)
+            store.close()
+            assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+            reopened.close()
+        } finally { executor.shutdownNow() }
+    }
+
+    @Test fun newAuthoritativeEpochStopsOldOperationAndSuppressesBackendError() {
+        val provider = StoreAuthority(); val store = store(tempRoot(), StoreKeys(), provider)
+        val old = grant(); val ref = store.createCandidate(old); val ticket = store.beginOperation(ref, old, IdentityScope.ENROLLMENT)
+        provider.epoch = 1
+        store.createCandidate(grant("new", epoch = 1))
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { ticket.stopSignal.check() }
+        assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.finishOperation(ticket, IdentityError(IdentityErrorCode.BACKEND_UNAVAILABLE)) }
+        store.close()
+    }
+
+    @Test fun finishedOperationIsNotRetroactivelyStopped() {
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority()); val authorization = grant()
+        val ref = store.createCandidate(authorization); val ticket = store.beginOperation(ref, authorization, IdentityScope.ENROLLMENT)
+        store.finishOperation(ticket)
+        store.revokeGrant("g1", OwnershipAuthorization(store.storeId, "owner"))
+        ticket.stopSignal.check(); store.close()
+    }
+
+    @Test fun stopCallbackCanQueryStoreFromAnotherThread() {
+        val store = store(tempRoot(), StoreKeys(), StoreAuthority()); val authorization = grant()
+        val ref = store.createCandidate(authorization); val other = store.createCandidate(grant("other", domain = "tenant.other"))
+        val ticket = store.beginOperation(ref, authorization, IdentityScope.ENROLLMENT)
+        val callbackWasOutsideGate = AtomicBoolean(false)
+        val executor = Executors.newSingleThreadExecutor()
+        val registration = ticket.stopSignal.registerStopHandler {
+            val result = executor.submit(Callable { store.recordedCandidateGrant(other) }).get(2, TimeUnit.SECONDS)
+            callbackWasOutsideGate.set(result.grantId == "other")
+        }
+        try {
+            store.revokeGrant("g1", OwnershipAuthorization(store.storeId, "owner"))
+            assertTrue(callbackWasOutsideGate.get())
+            assertCode(IdentityErrorCode.AUTHORIZATION_REVOKED) { store.finishOperation(ticket, IdentityError(IdentityErrorCode.BACKEND_UNAVAILABLE)) }
+            registration.close(); store.close()
+        } finally { executor.shutdownNow() }
+    }
+
+    @Test fun operationRechecksExpiryAndPersistsNewGrantDeclaration() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority()
+        var now = 100L
+        val clock = object : IdentityWallClock { override val nowMillis: Long get() = now }
+        val store = IdentityStore(root.toFile(), "login", provider, keys, clock, StoreMono())
+        val ref = store.createCandidate(grant())
+        val ticket = store.beginOperation(ref, grant("g2"), IdentityScope.ENROLLMENT)
+        now = 200
+        assertCode(IdentityErrorCode.AUTHORIZATION_EXPIRED) { store.finishOperation(ticket) }
+        store.close()
+        val reopened = store(root, keys, provider)
+        val changed = AuthorizationGrant("g2", "tenant.subject", setOf(IdentityScope.ENROLLMENT), "login", 1, 200, 0, "audit")
+        assertCode(IdentityErrorCode.AUTHORIZATION_REQUIRED) { reopened.beginOperation(ref, changed, IdentityScope.ENROLLMENT) }
+        reopened.close()
+    }
+
+    @Test fun foreignStoreCannotConsumeOperationTicket() {
+        val first = store(tempRoot(), StoreKeys(), StoreAuthority()); val second = store(tempRoot(), StoreKeys(), StoreAuthority())
+        val authorization = grant(); val ref = first.createCandidate(authorization)
+        val ticket = first.beginOperation(ref, authorization, IdentityScope.ENROLLMENT)
+        assertCode(IdentityErrorCode.INVALID_INPUT) { second.finishOperation(ticket) }
+        first.finishOperation(ticket)
+        first.close(); second.close()
+    }
+
+    @Test fun interruptedCloseStillDrainsAndRestoresInterruptStatus() {
+        val root = tempRoot(); val keys = StoreKeys(); val provider = StoreAuthority()
+        val store = store(root, keys, provider); val authorization = grant()
+        val ref = store.createCandidate(authorization); val ticket = store.beginOperation(ref, authorization, IdentityScope.ENROLLMENT)
+        val stopped = CountDownLatch(1); val finished = CountDownLatch(1)
+        val failure = AtomicReference<Throwable?>(); val interruptedAfterClose = AtomicBoolean(false)
+        val registration = ticket.stopSignal.registerStopHandler { stopped.countDown() }
+        val closer = Thread {
+            try { store.close(); interruptedAfterClose.set(Thread.currentThread().isInterrupted) }
+            catch (error: Throwable) { failure.set(error) }
+            finally { finished.countDown() }
+        }
+        closer.start()
+        try {
+            assertTrue(stopped.await(2, TimeUnit.SECONDS))
+            val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(2)
+            while (closer.state != Thread.State.WAITING && finished.count > 0 && System.nanoTime() < deadline) Thread.yield()
+            assertEquals(Thread.State.WAITING, closer.state)
+            closer.interrupt()
+            assertFalse(finished.await(100, TimeUnit.MILLISECONDS), "close returned before its ticket drained")
+            assertCode(IdentityErrorCode.BUSY) { store(root, keys, provider) }
+            assertCode(IdentityErrorCode.CLOSED) { store.finishOperation(ticket) }
+            assertTrue(finished.await(2, TimeUnit.SECONDS))
+            assertNull(failure.get())
+            assertTrue(interruptedAfterClose.get())
+            store(root, keys, provider).close()
+        } finally {
+            runCatching { store.finishOperation(ticket) }
+            store.close(); registration.close(); closer.join(2000)
+        }
     }
 
     private fun store(root: java.nio.file.Path, keys: StoreKeys, provider: StoreAuthority) =

@@ -374,4 +374,146 @@ extension IdentityStoreTests {
         XCTAssertEqual(restored, receipts.first)
         try await reopened.close()
     }
+
+    func testRevocationStopsMatchingOperationAndSuppressesFinish() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let authorization = try grant()
+        let candidate = try await store.createCandidate(authorization)
+        let ticket = try await store.beginOperation(candidate, grant: authorization, scope: .enrollment)
+        let stopped = expectation(description: "backend stop requested")
+        let registration = ticket.stopSignal.registerStopHandler { stopped.fulfill() }
+        _ = try await store.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner"))
+        await fulfillment(of: [stopped], timeout: 2)
+        do { try ticket.stopSignal.check(); XCTFail("stop not visible") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        do { try await store.finishOperation(ticket); XCTFail("revoked operation published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        registration.close(); try await store.close()
+    }
+
+    func testOperationFromOtherDomainSurvivesRevocation() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let same = try grant(); let other = try grant(id: "other", domain: "tenant.other")
+        let sameRef = try await store.createCandidate(same); let otherRef = try await store.createCandidate(other)
+        let ticket = try await store.beginOperation(otherRef, grant: other, scope: .enrollment)
+        _ = try await store.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner"))
+        try ticket.stopSignal.check()
+        try await store.finishOperation(ticket)
+        do { _ = try await store.recordedCandidateGrant(sameRef); XCTFail("same domain remained") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .candidateRevoked) }
+        try await store.close()
+    }
+
+    func testOperationTicketRejectsMismatchedCandidateOrGrant() async throws {
+        let store = try makeStore(root: temporaryRoot(), keys: StoreKeys(), provider: StoreAuthority(epoch: 0))
+        let first = try grant(); let second = try grant(id: "g2", domain: "tenant.other")
+        let ref = try await store.createCandidate(first)
+        do { _ = try await store.beginOperation(ref, grant: second, scope: .enrollment); XCTFail("grant substitution accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRequired) }
+        try await store.close()
+    }
+
+    func testCloseStopsAndDrainsOperationBeforeReleasingWriter() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: root, keys: keys, provider: provider)
+        let authorization = try grant(); let candidate = try await store.createCandidate(authorization)
+        let ticket = try await store.beginOperation(candidate, grant: authorization, scope: .enrollment)
+        let stopped = expectation(description: "close requested backend stop")
+        let registration = ticket.stopSignal.registerStopHandler { stopped.fulfill() }
+        let closing = Task { try await store.close() }
+        await fulfillment(of: [stopped], timeout: 2)
+        let secondClosing = Task { try await store.close() }
+        XCTAssertThrowsError(try makeStore(root: root, keys: keys, provider: provider)) {
+            XCTAssertEqual(($0 as? IdentityError)?.code, .busy)
+        }
+        do { try await store.finishOperation(ticket); XCTFail("closed operation published") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+        try await closing.value
+        try await secondClosing.value
+        registration.close()
+        let reopened = try makeStore(root: root, keys: keys, provider: provider)
+        try await store.close()
+        XCTAssertThrowsError(try makeStore(root: root, keys: keys, provider: provider))
+        try await reopened.close()
+    }
+
+    func testNewAuthoritativeEpochStopsOldOperationAndKeepsOldCandidateRevoked() async throws {
+        let provider = StoreAuthority(epoch: 0)
+        let store = try makeStore(root: temporaryRoot(), keys: StoreKeys(), provider: provider)
+        let old = try grant(); let ref = try await store.createCandidate(old)
+        let ticket = try await store.beginOperation(ref, grant: old, scope: .enrollment)
+        provider.epoch = 1
+        _ = try await store.createCandidate(grant(id: "new", epoch: 1))
+        do { try ticket.stopSignal.check(); XCTFail("old epoch backend still active") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        do { try await store.finishOperation(ticket, backendError: IdentityError(.backendUnavailable)); XCTFail("old epoch result accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        try await store.close()
+    }
+
+    func testFinishedOperationIsNotRetroactivelyStopped() async throws {
+        let store = try makeStore(root: temporaryRoot(), keys: StoreKeys(), provider: StoreAuthority(epoch: 0))
+        let authorization = try grant(); let ref = try await store.createCandidate(authorization)
+        let ticket = try await store.beginOperation(ref, grant: authorization, scope: .enrollment)
+        try await store.finishOperation(ticket)
+        _ = try await store.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner"))
+        try ticket.stopSignal.check()
+        try await store.close()
+    }
+
+    func testOperationRechecksExpiryAndPersistsNewGrantDeclaration() async throws {
+        let root = temporaryRoot(); let keys = StoreKeys(); let provider = StoreAuthority(epoch: 0); let clock = MovingClock()
+        let store = try IdentityStore(root: root, purpose: "login", authorizationProvider: provider,
+                                      keyProvider: keys, wallClock: clock, monotonicClock: FixedMono())
+        let ref = try await store.createCandidate(grant())
+        let freshDeclaration = try grant(id: "g2")
+        let ticket = try await store.beginOperation(ref, grant: freshDeclaration, scope: .enrollment)
+        clock.nowMillis = 200
+        do { try await store.finishOperation(ticket); XCTFail("expired completion accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationExpired) }
+        try await store.close()
+        let reopened = try makeStore(root: root, keys: keys, provider: provider)
+        let changed = try AuthorizationGrant(grantId: "g2", revocationDomainId: "tenant.subject", scope: [.enrollment], purpose: "login",
+                                              issuedAtMillis: 1, expiresAtMillis: 200, authorizationEpoch: 0, evidenceRef: "audit")
+        do { _ = try await reopened.beginOperation(ref, grant: changed, scope: .enrollment); XCTFail("declaration rebound") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRequired) }
+        try await reopened.close()
+    }
+
+    func testStopCallbackCanQueryStoreFromAnotherTask() async throws {
+        let store = try makeStore(root: temporaryRoot(), keys: StoreKeys(), provider: StoreAuthority(epoch: 0))
+        let authorization = try grant(); let ref = try await store.createCandidate(authorization)
+        let other = try await store.createCandidate(grant(id: "other", domain: "tenant.other"))
+        let ticket = try await store.beginOperation(ref, grant: authorization, scope: .enrollment)
+        let callbackWasOutsideGate = StoreFlag()
+        let registration = ticket.stopSignal.registerStopHandler {
+            let queried = DispatchSemaphore(value: 0)
+            Task { if (try? await store.recordedCandidateGrant(other)) != nil { queried.signal() } }
+            callbackWasOutsideGate.set(queried.wait(timeout: .now() + 2) == .success)
+        }
+        _ = try await store.revokeGrant("g1", ownership: OwnershipAuthorization(storeId: store.storeId, evidenceRef: "owner"))
+        XCTAssertTrue(callbackWasOutsideGate.value)
+        do { try await store.finishOperation(ticket, backendError: IdentityError(.backendUnavailable)); XCTFail("backend error won") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+        registration.close(); try await store.close()
+    }
+
+    func testForeignStoreCannotConsumeOperationTicket() async throws {
+        let first = try makeStore(root: temporaryRoot(), keys: StoreKeys(), provider: StoreAuthority(epoch: 0))
+        let second = try makeStore(root: temporaryRoot(), keys: StoreKeys(), provider: StoreAuthority(epoch: 0))
+        let authorization = try grant(); let ref = try await first.createCandidate(authorization)
+        let ticket = try await first.beginOperation(ref, grant: authorization, scope: .enrollment)
+        do { try await second.finishOperation(ticket); XCTFail("foreign ticket accepted") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .invalidInput) }
+        try await first.finishOperation(ticket)
+        try await first.close(); try await second.close()
+    }
+}
+
+private final class StoreFlag: @unchecked Sendable {
+    private let lock = NSLock(); private var stored = false
+    var value: Bool { lock.lock(); defer { lock.unlock() }; return stored }
+    func set(_ value: Bool) { lock.lock(); stored = value; lock.unlock() }
 }

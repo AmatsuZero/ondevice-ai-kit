@@ -11,6 +11,13 @@ public actor IdentityStore {
     private var candidates: [String: String]
     private var revocations: [String: IdentityRevocation]
     private var closed = false
+    private var writerReleased = false
+    private struct Operation {
+        let ticket: IdentityOperationTicket
+        var terminal: IdentityStopReason?
+    }
+    private var operations: [UUID: Operation] = [:]
+    private var drainWaiters: [CheckedContinuation<Void, Never>] = []
 
     public init(root: URL, purpose: String, authorizationProvider: any IdentityAuthorizationProvider,
                 keyProvider: any IdentityKeyProvider, wallClock: any IdentityWallClock,
@@ -52,7 +59,7 @@ public actor IdentityStore {
         self.wallClock = wallClock; self.monotonicClock = monotonicClock
     }
 
-    public func createCandidate(_ grant: AuthorizationGrant) throws -> CandidateRef {
+    public func createCandidate(_ grant: AuthorizationGrant) async throws -> CandidateRef {
         guard !closed else { throw IdentityError(.closed) }
         let auth = try authorization.admitting(grant, scope: .enrollment, provider: provider, nowMillis: wallClock.nowMillis)
         let ref = try CandidateRef(id: UUID().uuidString.lowercased(), storeId: storeId)
@@ -62,6 +69,8 @@ public actor IdentityStore {
         do { try journal.commit(bytes) }
         catch { closed = true; throw error }
         authorization = auth; candidates = next
+        let signals = invalidateOperations(domain: grant.revocationDomainId, before: auth.highestEpoch(domain: grant.revocationDomainId))
+        await Self.stop(signals, reason: .authorizationRevoked)
         return ref
     }
 
@@ -74,7 +83,7 @@ public actor IdentityStore {
         return grant
     }
 
-    public func revokeGrant(_ grantId: String, ownership: OwnershipAuthorization) throws -> RevocationReceipt {
+    public func revokeGrant(_ grantId: String, ownership: OwnershipAuthorization) async throws -> RevocationReceipt {
         guard !closed else { throw IdentityError(.closed) }
         try identityToken(grantId)
         try IdentityAuthorizationState.requireOwnership(ownership, storeId: storeId, provider: provider, nowMillis: wallClock.nowMillis)
@@ -94,12 +103,73 @@ public actor IdentityStore {
         do { try journal.commit(bytes) }
         catch { closed = true; throw error }
         authorization = nextAuthorization; revocations = next
+        let signals = invalidateOperations(domain: grant.revocationDomainId, before: epoch)
+        await Self.stop(signals, reason: .authorizationRevoked)
         return receipt
     }
 
-    public func close() throws {
-        guard !closed else { return }
-        closed = true; try journal.close()
+    private func invalidateOperations(domain: String, before epoch: Int64) -> [IdentityStopSignal] {
+        var signals: [IdentityStopSignal] = []
+        for (id, operation) in operations where operation.ticket.grant.revocationDomainId == domain &&
+            operation.ticket.grant.authorizationEpoch < epoch {
+            operations[id]?.terminal = .authorizationRevoked
+            signals.append(operation.ticket.stopSignal)
+        }
+        return signals
+    }
+
+    func beginOperation(_ candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope) throws -> IdentityOperationTicket {
+        let membership = try recordedCandidateGrant(candidate)
+        guard membership.revocationDomainId == grant.revocationDomainId, membership.purpose == grant.purpose,
+              membership.authorizationEpoch == grant.authorizationEpoch else { throw IdentityError(.authorizationRequired) }
+        let next = try authorization.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
+        if next != authorization {
+            let bytes = try Self.encode(storeId: storeId, authorization: next, candidates: candidates, revocations: revocations)
+            _ = try next.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
+            do { try journal.commit(bytes) } catch { closed = true; throw error }
+            authorization = next
+        }
+        let ticket = IdentityOperationTicket(candidate: candidate, grant: grant, scope: scope)
+        operations[ticket.id] = Operation(ticket: ticket)
+        return ticket
+    }
+
+    /// Consumes the ticket even on failure. Template publication will use this same gate.
+    func finishOperation(_ ticket: IdentityOperationTicket, backendError: (any Error)? = nil) throws {
+        guard let operation = operations[ticket.id], operation.ticket === ticket else { throw IdentityError(.invalidInput) }
+        defer {
+            operations.removeValue(forKey: ticket.id)
+            if operations.isEmpty {
+                let waiters = drainWaiters; drainWaiters.removeAll()
+                for waiter in waiters { waiter.resume() }
+            }
+        }
+        if operation.terminal == .authorizationRevoked { throw IdentityError(.authorizationRevoked) }
+        guard !closed else { throw IdentityError(.closed) }
+        try ticket.stopSignal.check()
+        _ = try recordedCandidateGrant(ticket.candidate)
+        _ = try authorization.admitting(ticket.grant, scope: ticket.scope, provider: provider, nowMillis: wallClock.nowMillis)
+        if let backendError { throw backendError }
+    }
+
+    public func close() async throws {
+        guard !writerReleased else { return }
+        closed = true
+        var revoked: [IdentityStopSignal] = []; var closing: [IdentityStopSignal] = []
+        for (id, operation) in operations {
+            if operation.terminal == .authorizationRevoked { revoked.append(operation.ticket.stopSignal) }
+            else { operations[id]?.terminal = .closed; closing.append(operation.ticket.stopSignal) }
+        }
+        await Self.stop(revoked, reason: .authorizationRevoked)
+        await Self.stop(closing, reason: .closed)
+        if !operations.isEmpty { await withCheckedContinuation { drainWaiters.append($0) } }
+        guard !writerReleased else { return }
+        try journal.close(); writerReleased = true
+    }
+
+    private nonisolated static func stop(_ signals: [IdentityStopSignal], reason: IdentityStopReason) async {
+        guard !signals.isEmpty else { return }
+        await Task.detached { for signal in signals { signal.requestStop(reason) } }.value
     }
 
     private static func encode(storeId: String, authorization: IdentityAuthorizationState,

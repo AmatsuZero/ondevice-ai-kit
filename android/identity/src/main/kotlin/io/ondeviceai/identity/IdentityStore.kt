@@ -25,6 +25,11 @@ class IdentityStore internal constructor(
     private var revocations: Map<String, RevocationRecord>
     private var closed = false
     private var operating = false
+    @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+    private val gate = java.lang.Object()
+    private var writerReleased = false
+    private data class Operation(val ticket: IdentityOperationTicket, var terminal: IdentityStopReason? = null)
+    private val operations = mutableMapOf<UUID, Operation>()
 
     init {
         val initial = IdentityAuthorizationState(purpose)
@@ -46,21 +51,29 @@ class IdentityStore internal constructor(
         journal = opened
     }
 
-    @Synchronized fun createCandidate(grant: AuthorizationGrant): CandidateRef = mutation {
-        val nextAuthorization = authorization.admitting(grant, IdentityScope.ENROLLMENT, authorizationProvider, wallClock.nowMillis)
-        val ref = CandidateRef(UUID.randomUUID().toString(), storeId)
-        val nextCandidates = candidates + (ref.id to grant.grantId)
-        val bytes = encode(storeId, nextAuthorization, nextCandidates)
-        nextAuthorization.admitting(grant, IdentityScope.ENROLLMENT, authorizationProvider, wallClock.nowMillis)
-        try { journal.commit(bytes) }
-        catch (error: Exception) { closed = true; throw error }
-        authorization = nextAuthorization
-        candidates = nextCandidates
-        ref
+    fun createCandidate(grant: AuthorizationGrant): CandidateRef {
+        val (ref, signals) = mutation {
+            val nextAuthorization = authorization.admitting(grant, IdentityScope.ENROLLMENT, authorizationProvider, wallClock.nowMillis)
+            val ref = CandidateRef(UUID.randomUUID().toString(), storeId)
+            val nextCandidates = candidates + (ref.id to grant.grantId)
+            val bytes = encode(storeId, nextAuthorization, nextCandidates)
+            nextAuthorization.admitting(grant, IdentityScope.ENROLLMENT, authorizationProvider, wallClock.nowMillis)
+            try { journal.commit(bytes) }
+            catch (error: Exception) { closed = true; throw error }
+            authorization = nextAuthorization
+            candidates = nextCandidates
+            ref to invalidateOperations(grant.revocationDomainId, nextAuthorization.highestEpoch(grant.revocationDomainId))
+        }
+        signals.forEach { it.requestStop(IdentityStopReason.AUTHORIZATION_REVOKED) }
+        return ref
     }
 
-    @Synchronized internal fun recordedCandidateGrant(ref: CandidateRef): AuthorizationGrant {
+    internal fun recordedCandidateGrant(ref: CandidateRef): AuthorizationGrant = synchronized(gate) {
         admitted()
+        candidateGrant(ref)
+    }
+
+    private fun candidateGrant(ref: CandidateRef): AuthorizationGrant {
         if (ref.storeId != storeId) throw IdentityError(IdentityErrorCode.CANDIDATE_NOT_FOUND)
         val grantId = candidates[ref.id] ?: throw IdentityError(IdentityErrorCode.CANDIDATE_NOT_FOUND)
         val grant = authorization.recordedGrant(grantId) ?: throw IdentityError(IdentityErrorCode.CANDIDATE_NOT_FOUND)
@@ -69,30 +82,88 @@ class IdentityStore internal constructor(
         return grant
     }
 
-    @Synchronized fun revokeGrant(grantId: String, ownership: OwnershipAuthorization): RevocationReceipt = mutation {
-        token(grantId)
-        IdentityAuthorizationState.requireOwnership(ownership, storeId, authorizationProvider, wallClock.nowMillis)
-        revocations.entries.firstOrNull { grantId in it.value.grantIds }?.let { return@mutation RevocationReceipt(it.key, storeId) }
-        val grant = authorization.recordedGrant(grantId) ?: throw IdentityError(IdentityErrorCode.AUTHORIZATION_REQUIRED)
-        val nextAuthorization = authorization.revoking(grantId)
-        val epoch = nextAuthorization.highestEpoch(grant.revocationDomainId)
-        val alreadyCovered = revocations.values.flatMap { it.grantIds }.toSet()
-        val grants = nextAuthorization.recordedGrantIds(grant.revocationDomainId, epoch).minus(alreadyCovered).sorted()
-        val candidateIds = candidates.filterValues { it in grants }.keys.sorted()
-        val receipt = RevocationReceipt(UUID.randomUUID().toString(), storeId)
-        val record = RevocationRecord(grant.revocationDomainId, epoch, grants, candidateIds)
-        val nextRevocations = revocations + (receipt.id to record)
-        val bytes = encode(storeId, nextAuthorization, candidates, nextRevocations)
-        try { journal.commit(bytes) } catch (error: Exception) { closed = true; throw error }
-        authorization = nextAuthorization; revocations = nextRevocations
-        receipt
+    fun revokeGrant(grantId: String, ownership: OwnershipAuthorization): RevocationReceipt {
+        val (receipt, signals) = mutation {
+            token(grantId)
+            IdentityAuthorizationState.requireOwnership(ownership, storeId, authorizationProvider, wallClock.nowMillis)
+            revocations.entries.firstOrNull { grantId in it.value.grantIds }?.let {
+                return@mutation RevocationReceipt(it.key, storeId) to emptyList<IdentityStopSignal>()
+            }
+            val grant = authorization.recordedGrant(grantId) ?: throw IdentityError(IdentityErrorCode.AUTHORIZATION_REQUIRED)
+            val nextAuthorization = authorization.revoking(grantId)
+            val epoch = nextAuthorization.highestEpoch(grant.revocationDomainId)
+            val alreadyCovered = revocations.values.flatMap { it.grantIds }.toSet()
+            val grants = nextAuthorization.recordedGrantIds(grant.revocationDomainId, epoch).minus(alreadyCovered).sorted()
+            val candidateIds = candidates.filterValues { it in grants }.keys.sorted()
+            val receipt = RevocationReceipt(UUID.randomUUID().toString(), storeId)
+            val record = RevocationRecord(grant.revocationDomainId, epoch, grants, candidateIds)
+            val nextRevocations = revocations + (receipt.id to record)
+            val bytes = encode(storeId, nextAuthorization, candidates, nextRevocations)
+            try { journal.commit(bytes) } catch (error: Exception) { closed = true; throw error }
+            authorization = nextAuthorization; revocations = nextRevocations
+            val signals = invalidateOperations(grant.revocationDomainId, epoch)
+            receipt to signals
+        }
+        signals.forEach { it.requestStop(IdentityStopReason.AUTHORIZATION_REVOKED) }
+        return receipt
     }
 
-    @Synchronized override fun close() {
-        if (closed) return
-        if (operating) throw IdentityError(IdentityErrorCode.BUSY)
-        closed = true
-        journal.close()
+    private fun invalidateOperations(domain: String, beforeEpoch: Long) = operations.values.filter {
+        it.ticket.grant.revocationDomainId == domain && it.ticket.grant.authorizationEpoch < beforeEpoch
+    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }
+
+    internal fun beginOperation(candidate: CandidateRef, grant: AuthorizationGrant, scope: IdentityScope): IdentityOperationTicket = mutation {
+        val membership = candidateGrant(candidate)
+        if (membership.revocationDomainId != grant.revocationDomainId || membership.purpose != grant.purpose ||
+            membership.authorizationEpoch != grant.authorizationEpoch) throw IdentityError(IdentityErrorCode.AUTHORIZATION_REQUIRED)
+        val next = authorization.admitting(grant, scope, authorizationProvider, wallClock.nowMillis)
+        if (next.canonicalJSON() != authorization.canonicalJSON()) {
+            val bytes = encode(storeId, next, candidates)
+            next.admitting(grant, scope, authorizationProvider, wallClock.nowMillis)
+            try { journal.commit(bytes) } catch (error: Exception) { closed = true; throw error }
+            authorization = next
+        }
+        IdentityOperationTicket(candidate, grant, scope).also { operations[it.id] = Operation(it) }
+    }
+
+    /** Always consumes the ticket. Template publication will use this same gate. */
+    internal fun finishOperation(ticket: IdentityOperationTicket, backendError: Exception? = null): Unit = mutation(allowClosed = true) {
+        val operation = operations[ticket.id]?.takeIf { it.ticket === ticket } ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        try {
+            if (operation.terminal == IdentityStopReason.AUTHORIZATION_REVOKED) throw IdentityError(IdentityErrorCode.AUTHORIZATION_REVOKED)
+            if (closed) throw IdentityError(IdentityErrorCode.CLOSED)
+            ticket.stopSignal.check()
+            candidateGrant(ticket.candidate)
+            authorization.admitting(ticket.grant, ticket.scope, authorizationProvider, wallClock.nowMillis)
+            if (backendError != null) throw backendError
+        } finally {
+            operations.remove(ticket.id)
+            if (operations.isEmpty()) gate.notifyAll()
+        }
+    }
+
+    override fun close() {
+        val pending = synchronized(gate) {
+            if (writerReleased) return
+            if (operating) throw IdentityError(IdentityErrorCode.BUSY)
+            closed = true
+            operations.values.map {
+                if (it.terminal != IdentityStopReason.AUTHORIZATION_REVOKED) it.terminal = IdentityStopReason.CLOSED
+                it.ticket.stopSignal to it.terminal!!
+            }
+        }
+        pending.forEach { (signal, reason) -> signal.requestStop(reason) }
+        var interrupted = false
+        try {
+            synchronized(gate) {
+                while (operations.isNotEmpty()) {
+                    try { gate.wait() } catch (_: InterruptedException) { interrupted = true }
+                }
+                if (!writerReleased) { journal.close(); writerReleased = true }
+            }
+        } finally {
+            if (interrupted) Thread.currentThread().interrupt()
+        }
     }
 
     private fun admitted() {
@@ -101,8 +172,10 @@ class IdentityStore internal constructor(
     }
 
     // JVM monitors are reentrant. Host callbacks cannot recursively publish a second state.
-    private inline fun <T> mutation(block: () -> T): T {
-        admitted(); operating = true
+    private inline fun <T> mutation(allowClosed: Boolean = false, block: () -> T): T = synchronized(gate) {
+        if (!allowClosed && closed) throw IdentityError(IdentityErrorCode.CLOSED)
+        if (operating) throw IdentityError(IdentityErrorCode.BUSY)
+        operating = true
         try { return block() } finally { operating = false }
     }
 
