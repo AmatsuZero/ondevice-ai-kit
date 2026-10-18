@@ -13,8 +13,9 @@
 | Task 2 授权状态子步骤：可信 provider、不可变声明与域 epoch | `6dba20b` | Swift 授权 11/11；Android 授权 10/10；identity 模块及 Android lintDebug | provider 独立权威 epoch、同域撤销/新 grant 拒绝、声明不可改绑、ownership 独立授权、严格快照恢复。独立复审实现可接受，LOW issuedAt 测试缺口已补；candidate 持久化接入见下行 |
 | Task 2 后端停止子步骤：per-operation stop signal | `0d401fb` | Swift stop 8/8；Android stop 8/8；identity 59/59、57/57 及 Android lintDebug | 幂等停止、锁外 native stop 回调、停止前后检查、停止覆盖普通后端错误；致命 JVM Error 透传。独立复审 APPROVE；尚未接入 Store 在途 ticket/close drain |
 | Task 2 candidate Store 子步骤：持久授权绑定与 admission | `ea8e92b` | Swift Store 9/9；Android Store 9/9；identity 68/68、66/66 及 Android lintDebug | actor/synchronized 门内 staged candidate 状态在 journal 提交后发布；恢复持久 storeId/授权epoch/immutable grant；发布前重检；密钥失败退休 writer。独立复审无实现缺陷，Android 并发/恢复测试缺口已补齐 |
+| Task 2 持久撤销子步骤：域 epoch、目标 tombstone 与稳定回执 | `8230437` | Swift Store 19/19、identity 78/78；Android Store 18/18、identity 75/75；Android lintDebug | 独立 ownership、同域多 grant 共用回执、跨 epoch 目标去重、v1→v2 恢复、严格目标集校验、失败提交退休。Android 回调重入拒绝。独立审查 APPROVE、无遗留发现；尚无在途任务停止、模板 purge 或 close drain |
 
-最新身份模块定向合计：Swift 68/68、Android 66/66，Android identity lintDebug 通过。测试使用合成夹具及临时内存密钥，不包含个人生物数据、模型权重或商用精度结论。两端 identity 总数差 2：journal 的 record identifier 边界，以及授权测试的组织粒度不同；不是平台行为差异。
+最新身份模块合计：Swift 78/78、Android 75/75，Android identity lintDebug 通过。测试使用合成夹具及临时内存密钥，不包含个人生物数据、模型权重或商用精度结论。两端测试组织粒度不同，总数不表示平台行为差异。
 
 ## 可复现命令
 
@@ -29,7 +30,7 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 
 - 已有可信 provider 契约及不可变授权状态，后续 Store 构造仍必须注入 provider 和持久化根目录；禁止以 request epoch 或单纯内存字典作为权威状态。
 - 已将 journal 接入 IdentityStore 的 candidate admission；模板数据仍需独立 envelope 持久化、恢复和所有权清理，不能把候选存储当作完整 Task 2 验收。
-- candidate 与 immutable grant 的持久绑定已实现；template 所属关系、撤销 tombstone/receipt 和反向索引仍待实现。
+- candidate 与 immutable grant 的持久绑定、域撤销 tombstone 和稳定 receipt 已实现；template 所属关系及模板删除回收仍待实现。
 - admission/revoke/publish 串行门、撤销立即请求停止、lease 后两阶段删除。
 - 进程重启、持有 lease 删除、scope/expiry、同域新 grant ID 绕过与撤销竞态测试。
 - 平台原生密钥与恢复行为真机验证；iOS 15/API 26 最低设备验收另记。
@@ -43,17 +44,24 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - Kotlin public open 只使用 Context.noBackupFilesDir 内的受管目录；其路径构造尚无 Context/真机验收，单测使用 internal 临时目录入口。
 - close 当前只有 candidate admission 需要串行化；后续接入 operation ticket 和 lease 后，必须实现 cancel/drain 后再释放 journal，不能宣称现已实现完整关闭。
 
+### 持久撤销当前边界
+
+- 回执仅包含 `id` 与 `storeId`，不是物理回收完成证明。加密元数据记录固定的 grant/candidate 目标集，重复撤销及重启后均返回原回执；重放旧回执不会撤销新 epoch 的对象。
+- v2 元数据严格校验完整目标集、候选所属关系、重复目标和域 epoch；仍可读取 v1 候选记录，下次提交迁移到 v2。
+- 撤销提交成功后才发布内存和回执；提交失败退休 writer。当前尚未接入在途 operation ticket，因此不能把本切片当作完整 revoke-vs-publish 验收。
+- Android 门内宿主回调若重入 Store，返回 `busy`，防止重入提交被外层 staged 状态覆盖。
+
 ### 停止信号当前边界
 
 - 每次后端调用可接收独立 stop signal；原生适配器可登记实际底层 stop 回调。
 - 默认适配器检查原同步 primitive 的执行前后，不能声称已中断不可取消的同步 native 工作。
 - 停止请求的第一个原因保持稳定；已被请求停止时晚注册的回调立即调用，回调执行不持有信号内部锁。注销只撤回尚未被请求方领取的回调；SDK 使用方需 defer/finally 关闭 registration。
-- Store 的持久化撤销门、在途 ticket 和 close drain 尚未接入，不能把单独 stop 测试当作完整撤销验收。
+- Store 的持久化撤销已实现；stop signal 与在途 ticket、close drain 尚未接入，不能把单独 stop 测试当作完整撤销验收。
 
 ### 授权状态当前边界
 
 - 内部版本化授权快照沿用严格 contract parser，编码与恢复均限 64 KiB；超限拒绝编码，后续 Store 不能先发布内存再尝试持久化。
-- 这里只提供生成候选状态的纯操作；尚未公开 revoke API、签发 receipt 或实现 template membership；candidate 持久化门已有实现。
+- 授权状态提供纯操作；Store 已接入候选持久化、公开 revoke API 和 receipt。template membership 尚未实现。
 - 授权声明与 epoch 保存在快照内，candidate Store 已将其包进已认证 journal，不能写入明文或日志。
 
 ### journal 当前边界
