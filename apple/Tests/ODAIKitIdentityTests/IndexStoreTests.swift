@@ -686,6 +686,78 @@ final class IndexStoreTests: XCTestCase {
         try await context.identity.close()
     }
 
+    func testReadResultConsumesOriginalTicketOnceAndKeepsPayloadPinnedUntilClose() async throws {
+        let context = try await context()
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let ref = try await builder.publish()
+        let lease = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        let value = try await context.index.consumeReadLease(lease) { "published" }
+        XCTAssertEqual(value, "published")
+        XCTAssertEqual(try lease.indexData(), Data([1]))
+        do { _ = try await context.index.consumeReadLease(lease) { "duplicate" }; XCTFail("read ticket consumed twice") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .invalidInput) }
+        let receipt = try await context.index.deleteGallery(ref, ownership: context.owner)
+        let pending = try await context.index.awaitDeletion(receipt); XCTAssertEqual(pending, .purgePending)
+        await lease.close()
+        let purged = try await context.index.awaitDeletion(receipt); XCTAssertEqual(purged, .purged)
+        XCTAssertEqual(value, "published")
+        await context.index.close(); try await context.identity.close()
+    }
+
+    func testReadResultFinalGateRejectsRevokedOriginAndDeletedGallery() async throws {
+        for deleteGallery in [false, true] {
+            let context = try await context()
+            let operation = try AuthorizationGrant(grantId: "origin", revocationDomainId: "origin-domain", scope: [.identification], purpose: "identity", issuedAtMillis: 0, expiresAtMillis: nil, authorizationEpoch: 0, evidenceRef: "fixture")
+            let query = try AuthorizationGrant(grantId: "query", revocationDomainId: "query-domain", scope: [.identification], purpose: "identity", issuedAtMillis: 0, expiresAtMillis: nil, authorizationEpoch: 0, evidenceRef: "fixture")
+            let builder = try await context.index.createGalleryBuilder(grant: operation, policy: context.policy)
+            try await builder.addTemplate(context.template, grant: context.grant)
+            let ref = try await builder.publish()
+            let lease = try await context.index.acquireIndexReadLease(ref, grant: query)
+            if deleteGallery { _ = try await context.index.deleteGallery(ref, ownership: context.owner) }
+            else { _ = try await context.identity.revokeGrant(operation.grantId, ownership: context.owner) }
+            do {
+                _ = try await context.index.consumeReadLease(lease) { XCTFail("revoked read published"); return "bad" }
+                XCTFail("revoked read succeeded")
+            } catch { XCTAssertEqual((error as? IdentityError)?.code, .authorizationRevoked) }
+            await lease.close(); await context.index.close(); try await context.identity.close()
+        }
+    }
+
+    func testReadResultFinalProviderCallbackCancellationSuppressesPublication() async throws {
+        let context = try await context()
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let ref = try await builder.publish()
+        let lease = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        context.authority.onNextEpoch { lease.requestStop(.cancelled) }
+        do {
+            _ = try await context.index.consumeReadLease(lease) { XCTFail("cancelled read published"); return "bad" }
+            XCTFail("cancelled read succeeded")
+        } catch { XCTAssertEqual((error as? IdentityError)?.code, .cancelled) }
+        await lease.close(); await context.index.close(); try await context.identity.close()
+    }
+
+    func testCloseDrainsAReservedConsumeAfterTheLeaseClosesConcurrently() async throws {
+        let context = try await context()
+        let builder = try await context.index.createGalleryBuilder(grant: context.grant, policy: context.policy)
+        try await builder.addTemplate(context.template, grant: context.grant)
+        let ref = try await builder.publish()
+        let lease = try await context.index.acquireIndexReadLease(ref, grant: context.grant)
+        let entered = DispatchSemaphore(value: 0), release = DispatchSemaphore(value: 0), closed = DispatchSemaphore(value: 0)
+        context.authority.onNextEpoch { entered.signal(); _ = release.wait(timeout: .now() + 3) }
+        let consuming = Task.detached { try await context.index.consumeReadLease(lease) { "published" } }
+        XCTAssertEqual(entered.wait(timeout: .now() + 2), .success)
+        await lease.close()
+        let closing = Task { await context.index.close(); closed.signal() }
+        XCTAssertEqual(closed.wait(timeout: .now() + 0.1), .timedOut, "close returned before reserved consume drained")
+        release.signal()
+        do { _ = try await consuming.value; XCTFail("query published after closing store") }
+        catch { XCTAssertEqual((error as? IdentityError)?.code, .closed) }
+        await closing.value
+        try await context.identity.close()
+    }
+
     private func context(keys: IndexTestKeys = IndexTestKeys(), monotonicClock: any IdentityMonotonicClock = SystemIdentityMonotonicClock(), buildIndex: @escaping GalleryIndexBuilder = { _, _ in Data([1]) }) async throws -> IndexTestContext {
         let authority = IndexTestAuthority()
         let identity = try IdentityStore(root: temporaryRoot(), purpose: "identity", authorizationProvider: authority,

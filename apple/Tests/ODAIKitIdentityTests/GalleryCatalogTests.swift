@@ -400,6 +400,45 @@ final class GalleryCatalogTests: XCTestCase {
         }
     }
 
+    func testQueryPublicationHoldsSnapshotGateUntilResultCommit() throws {
+        let catalog = try GalleryCatalog(root: temporaryRoot(), identityStoreId: "identity-store", keyProvider: CatalogKeys())
+        defer { try? catalog.close() }
+        let record = try snapshot(indexStoreId: catalog.storeId); try catalog.publish(record)
+        let entered = DispatchSemaphore(value: 0), release = DispatchSemaphore(value: 0)
+        let deleteStarted = DispatchSemaphore(value: 0), deleteFinished = DispatchSemaphore(value: 0)
+        let done = DispatchGroup(), results = CatalogResults()
+        done.enter()
+        DispatchQueue.global().async {
+            defer { done.leave() }
+            results.append(Result { try catalog.withSnapshot(record.ref) { _ in entered.signal(); _ = release.wait(timeout: .now() + 3) } })
+        }
+        XCTAssertEqual(entered.wait(timeout: .now() + 2), .success)
+        done.enter()
+        DispatchQueue.global().async {
+            defer { deleteFinished.signal(); done.leave() }
+            deleteStarted.signal()
+            results.append(Result { try catalog.tombstoneLineage(record.ref.id, receiptId: "receipt") })
+        }
+        XCTAssertEqual(deleteStarted.wait(timeout: .now() + 2), .success)
+        XCTAssertEqual(deleteFinished.wait(timeout: .now() + 0.1), .timedOut)
+        release.signal(); XCTAssertEqual(done.wait(timeout: .now() + 3), .success)
+        XCTAssertEqual(results.successCount, 2)
+        XCTAssertThrowsError(try catalog.withSnapshot(record.ref) { _ in XCTFail("deleted snapshot published") }) {
+            XCTAssertEqual(($0 as? IdentityError)?.code, .galleryRevisionGone)
+        }
+    }
+
+    func testQueryResultSealingRejectsPublicationWithoutDeletingSnapshot() throws {
+        let catalog = try GalleryCatalog(root: temporaryRoot(), identityStoreId: "identity-store", keyProvider: CatalogKeys())
+        defer { try? catalog.close() }
+        let record = try snapshot(indexStoreId: catalog.storeId); try catalog.publish(record)
+        catalog.sealQueryResults()
+        XCTAssertThrowsError(try catalog.withSnapshot(record.ref) { _ in XCTFail("sealed query published") }) {
+            XCTAssertEqual(($0 as? IdentityError)?.code, .closed)
+        }
+        XCTAssertEqual(try catalog.snapshot(record.ref), record)
+    }
+
     private func snapshot(indexStoreId: String, parent: GalleryRef? = nil, aggregation: String = "subject-max-v1", lineage: String? = nil) throws -> GallerySnapshotRecord {
         let fixture = try loadFixture()
         let original = try GallerySnapshotRecord.restore(XCTUnwrap(fixture["snapshotJSON"]))

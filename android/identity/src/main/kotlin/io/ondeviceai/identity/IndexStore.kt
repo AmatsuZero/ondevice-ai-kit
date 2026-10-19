@@ -18,6 +18,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
     private val builders = mutableMapOf<UUID, BuilderState>()
     private val indexes = mutableMapOf<String, ByteArray>()
     private val indexLineages = mutableMapOf<String, String>()
+    private val consumedReadTickets = mutableSetOf<UUID>()
     private val readTickets = mutableMapOf<UUID, Pair<String, IdentityGalleryOperationTicket>>()
     private val deleted = mutableMapOf<String, DeletionReceipt>()
     private val purgeStatuses = mutableMapOf<String, DeletionStatus>()
@@ -166,9 +167,25 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
             synchronized(gate) {
                 requireOpen(); catalog.snapshot(ref)
                 readTickets[ticket.id] = ref.id to ticket
-                IndexReadLease(record, ticket.stopSignal, indexes.getValue(ref.revision)) { releaseReadLease(ticket) }
+                IndexReadLease(record, ticket, indexes.getValue(ref.revision)) { releaseReadLease(ticket) }
             }
         } catch (error: Throwable) { runCatching { identityStore.consumeGalleryOperation(ticket) { Unit } }; throw error }
+    }
+
+    /** Final result uses the original read ticket; caller closes the pinned lease after cleanup. */
+    internal fun <T> consumeReadLease(lease: IndexReadLease, publication: () -> T): T = operation {
+        val ticket = lease.ticket
+        val ref = lease.record.ref
+        synchronized(gate) {
+            requireOpen()
+            if (!lease.isOpen) throw IdentityError(IdentityErrorCode.CLOSED)
+            if (readTickets[ticket.id]?.second !== ticket || !consumedReadTickets.add(ticket.id))
+                throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        }
+        // Never enter IdentityStore while holding the IndexStore monitor.
+        identityStore.consumeGalleryOperation(ticket) {
+            catalog.withSnapshot(ref) { ticket.stopSignal.check(); publication() }
+        }
     }
 
     fun deleteGallery(ref: GalleryRef, ownership: OwnershipAuthorization): DeletionReceipt = operation {
@@ -216,7 +233,7 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
         val stops = synchronized(gate) {
             if (writerReleased) return
             if (closed) emptyList() else {
-                catalog.sealPublications()
+                catalog.sealPublications(); catalog.sealQueryResults()
                 closed = true
                 val actions = builders.values.flatMap { discard(it, IdentityStopReason.CLOSED) }.toMutableList()
                 readTickets.values.forEach { (lineage, ticket) -> prepareStop(lineage, ticket.stopSignal, IdentityStopReason.CLOSED)?.let(actions::add) }
@@ -281,7 +298,8 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
         failure?.let { throw it }
     }
     private fun releaseReadLease(ticket: IdentityGalleryOperationTicket) {
-        try { runCatching { identityStore.consumeGalleryOperation(ticket) { Unit } } }
+        val consumed = synchronized(gate) { consumedReadTickets.remove(ticket.id) }
+        try { if (!consumed) runCatching { identityStore.consumeGalleryOperation(ticket) { Unit } } }
         finally { synchronized(gate) { val lineage = readTickets.remove(ticket.id)?.first; if (lineage != null) purge(lineage); releaseWriterIfDrained() } }
     }
     private fun purge(lineage: String) {
@@ -331,8 +349,11 @@ class GalleryBuilder internal constructor(private val store: IndexStore, private
     override fun close() = store.closeBuilder(id)
 }
 
-class IndexReadLease internal constructor(private val record: GallerySnapshotRecord, private val signal: IdentityStopSignal,
+class IndexReadLease internal constructor(internal val record: GallerySnapshotRecord, internal val ticket: IdentityGalleryOperationTicket,
     indexData: ByteArray, onRelease: () -> Unit) : AutoCloseable {
+    private val signal get() = ticket.stopSignal
+    internal val isOpen: Boolean get() = synchronized(this) { release != null }
+    internal fun requestStop(reason: IdentityStopReason) = signal.requestStop(reason)
     private var bytes: ByteArray? = indexData.clone()
     private var release: (() -> Unit)? = onRelease
     internal fun snapshot(): GallerySnapshotRecord = synchronized(this) { if (release == null) throw IdentityError(IdentityErrorCode.CLOSED); signal.check(); record }

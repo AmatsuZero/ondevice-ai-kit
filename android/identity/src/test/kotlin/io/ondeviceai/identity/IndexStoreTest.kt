@@ -582,6 +582,73 @@ class IndexStoreTest {
         f.identity.close()
     }
 
+    @Test fun readResultConsumesOriginalTicketOnceAndKeepsPayloadPinnedUntilClose() {
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
+        builder.addTemplate(f.template, f.grant); val ref = builder.publish()
+        val lease = index.acquireIndexReadLease(ref, f.grant)
+        val value = index.consumeReadLease(lease) { "published" }
+        assertEquals("published", value)
+        assertTrue(lease.indexData().contentEquals(byteArrayOf(1)))
+        assertEquals(IdentityErrorCode.INVALID_INPUT, assertFailsWith<IdentityError> { index.consumeReadLease(lease) { "duplicate" } }.code)
+        val receipt = index.deleteGallery(ref, f.owner)
+        assertEquals(DeletionStatus.PURGE_PENDING, index.awaitDeletion(receipt))
+        lease.close()
+        assertEquals(DeletionStatus.PURGED, index.awaitDeletion(receipt))
+        assertEquals("published", value)
+        index.close(); f.identity.close()
+    }
+
+    @Test fun readResultFinalGateRejectsRevokedOriginAndDeletedGallery() {
+        for (deleteGallery in listOf(false, true)) {
+            val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+            val operation = AuthorizationGrant("origin", "origin-domain", setOf(IdentityScope.IDENTIFICATION), "identity", 0, null, 0, "fixture")
+            val query = AuthorizationGrant("query", "query-domain", setOf(IdentityScope.IDENTIFICATION), "identity", 0, null, 0, "fixture")
+            val builder = index.createGalleryBuilder(grant = operation, policy = f.policy)
+            builder.addTemplate(f.template, f.grant); val ref = builder.publish()
+            val lease = index.acquireIndexReadLease(ref, query)
+            if (deleteGallery) index.deleteGallery(ref, f.owner) else f.identity.revokeGrant(operation.grantId, f.owner)
+            var published = false
+            assertEquals(IdentityErrorCode.AUTHORIZATION_REVOKED,
+                assertFailsWith<IdentityError> { index.consumeReadLease(lease) { published = true } }.code)
+            assertTrue(!published)
+            lease.close(); index.close(); f.identity.close()
+        }
+    }
+
+    @Test fun readResultFinalProviderCallbackCancellationSuppressesPublication() {
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
+        builder.addTemplate(f.template, f.grant); val ref = builder.publish()
+        val lease = index.acquireIndexReadLease(ref, f.grant)
+        f.authority.onEpoch = { lease.requestStop(IdentityStopReason.CANCELLED) }
+        var published = false
+        assertEquals(IdentityErrorCode.CANCELLED, assertFailsWith<IdentityError> { index.consumeReadLease(lease) { published = true } }.code)
+        assertTrue(!published)
+        lease.close(); index.close(); f.identity.close()
+    }
+
+    @Test fun closeDrainsAReservedConsumeAfterTheLeaseClosesConcurrently() {
+        val f = fixture(); val index = IndexStore(f.indexRoot, f.identity, f.keys) { _, _ -> byteArrayOf(1) }
+        val builder = index.createGalleryBuilder(grant = f.grant, policy = f.policy)
+        builder.addTemplate(f.template, f.grant); val ref = builder.publish()
+        val lease = index.acquireIndexReadLease(ref, f.grant)
+        val entered = CountDownLatch(1); val release = CountDownLatch(1); val closed = CountDownLatch(1)
+        val workers = Executors.newFixedThreadPool(2)
+        f.authority.onEpoch = { entered.countDown(); check(release.await(3, TimeUnit.SECONDS)) }
+        try {
+            val consuming = workers.submit<IdentityErrorCode?> {
+                try { index.consumeReadLease(lease) { "published" }; null } catch (error: IdentityError) { error.code }
+            }
+            assertTrue(entered.await(2, TimeUnit.SECONDS))
+            lease.close()
+            val closing = workers.submit { index.close(); closed.countDown() }
+            assertTrue(!closed.await(100, TimeUnit.MILLISECONDS), "close returned before reserved consume drained")
+            release.countDown()
+            assertEquals(IdentityErrorCode.CLOSED, consuming.get(2, TimeUnit.SECONDS)); closing.get(2, TimeUnit.SECONDS)
+        } finally { release.countDown(); workers.shutdownNow(); assertTrue(workers.awaitTermination(3, TimeUnit.SECONDS)); lease.close(); index.close(); f.identity.close() }
+    }
+
     private fun fixture(): IndexFixture {
         val keys = IndexKeys(); val authority = IndexAuthority()
         val identity = IdentityStore(root().toFile(), "identity", authority, keys,

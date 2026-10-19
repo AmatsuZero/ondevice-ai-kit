@@ -12,6 +12,8 @@ internal class GalleryCatalog(root: Path, val identityStoreId: String, keys: Ide
     private var heads = emptyMap<String, String>()
     private var tombstones = emptyMap<String, String>()
     private var purgeFailures = emptySet<String>()
+    private val queryResultLock = Any()
+    private var queryResultsSealed = false
     private var closed = false
     private var publicationsSealed = false
     private var retired = false
@@ -145,6 +147,16 @@ internal class GalleryCatalog(root: Path, val identityStoreId: String, keys: Ide
         if (tombstones.containsKey(ref.id)) throw IdentityError(IdentityErrorCode.GALLERY_REVISION_GONE)
         snapshots[ref.revision]?.takeIf { it.ref == ref } ?: throw IdentityError(IdentityErrorCode.GALLERY_REVISION_GONE)
     }
+
+    /** Holds the same gate as lineage tombstones through synchronous result publication. */
+    fun <T> withSnapshot(ref: GalleryRef, publication: (GallerySnapshotRecord) -> T): T = access { synchronized(queryResultLock) {
+        if (queryResultsSealed) throw IdentityError(IdentityErrorCode.CLOSED)
+        val record = snapshots[ref.revision]
+        if (ref.id in tombstones || record?.ref != ref) throw IdentityError(IdentityErrorCode.GALLERY_REVISION_GONE)
+        publication(requireNotNull(record))
+    } }
+
+    fun sealQueryResults() = synchronized(queryResultLock) { queryResultsSealed = true }
 
     fun head(lineageId: String): GalleryRef? = access {
         if (tombstones.containsKey(lineageId)) throw IdentityError(IdentityErrorCode.GALLERY_REVISION_GONE)

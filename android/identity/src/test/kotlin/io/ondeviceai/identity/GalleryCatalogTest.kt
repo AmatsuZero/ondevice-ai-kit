@@ -415,6 +415,43 @@ class GalleryCatalogTest {
         }
     }
 
+    @Test fun queryPublicationHoldsSnapshotGateUntilResultCommit() {
+        val catalog = GalleryCatalog(root(), "identity-store", GalleryCatalogKeys())
+        val record = snapshot(catalog.storeId); catalog.publish(record)
+        val entered = CountDownLatch(1); val release = CountDownLatch(1); val deleteStarted = CountDownLatch(1)
+        val deleteFinished = CountDownLatch(1); val workers = Executors.newFixedThreadPool(2)
+        try {
+            val publication = workers.submit<String> {
+                catalog.withSnapshot(record.ref) { entered.countDown(); check(release.await(3, TimeUnit.SECONDS)); "published" }
+            }
+            assertTrue(entered.await(2, TimeUnit.SECONDS))
+            val deletion = workers.submit {
+                deleteStarted.countDown()
+                try { catalog.tombstoneLineage(record.ref.id, "receipt") } finally { deleteFinished.countDown() }
+            }
+            assertTrue(deleteStarted.await(2, TimeUnit.SECONDS))
+            assertTrue(!deleteFinished.await(100, TimeUnit.MILLISECONDS))
+            release.countDown()
+            assertEquals("published", publication.get(2, TimeUnit.SECONDS)); deletion.get(2, TimeUnit.SECONDS)
+            var published = false
+            assertEquals(IdentityErrorCode.GALLERY_REVISION_GONE,
+                assertFailsWith<IdentityError> { catalog.withSnapshot(record.ref) { published = true } }.code)
+            assertTrue(!published)
+        } finally { release.countDown(); workers.shutdownNow(); assertTrue(workers.awaitTermination(3, TimeUnit.SECONDS)); catalog.close() }
+    }
+
+    @Test fun queryResultSealingRejectsPublicationWithoutDeletingSnapshot() {
+        val catalog = GalleryCatalog(root(), "identity-store", GalleryCatalogKeys())
+        try {
+            val record = snapshot(catalog.storeId); catalog.publish(record)
+            catalog.sealQueryResults()
+            var published = false
+            assertEquals(IdentityErrorCode.CLOSED, assertFailsWith<IdentityError> { catalog.withSnapshot(record.ref) { published = true } }.code)
+            assertTrue(!published)
+            assertEquals(record, catalog.snapshot(record.ref))
+        } finally { catalog.close() }
+    }
+
     private fun snapshot(indexStoreId: String, parent: GalleryRef? = null, aggregation: String = "subject-max-v1", lineage: String? = null): GallerySnapshotRecord {
         val fixturePath = sequenceOf(Path.of("fixtures/contracts/gallery-snapshots.json"), Path.of("../../fixtures/contracts/gallery-snapshots.json"), Path.of("../../../fixtures/contracts/gallery-snapshots.json")).first(Files::exists)
         val root = IdentityContractJSON.parse(Files.readAllBytes(fixturePath).decodeToString())

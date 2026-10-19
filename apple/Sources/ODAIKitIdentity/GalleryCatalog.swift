@@ -13,6 +13,8 @@ final class GalleryCatalog: @unchecked Sendable {
     // from an older journal or be recreated by a stale builder after reopen.
     private var tombstones: [String: String] = [:]
     private var purgeFailures: Set<String> = []
+    private let queryResultLock = NSRecursiveLock()
+    private var queryResultsSealed = false
     private var closed = false
     private var retired = false
     private var operating = false
@@ -126,6 +128,20 @@ final class GalleryCatalog: @unchecked Sendable {
             return record
         }
     }
+
+    /// Holds the same gate as lineage tombstones through synchronous result publication.
+    func withSnapshot<T>(_ ref: GalleryRef, publication: (GallerySnapshotRecord) throws -> T) throws -> T {
+        try access {
+            queryResultLock.lock(); defer { queryResultLock.unlock() }
+            guard !queryResultsSealed else { throw IdentityError(.closed) }
+            guard tombstones[ref.id] == nil, let record = snapshots[ref.revision], record.ref == ref else {
+                throw IdentityError(.galleryRevisionGone)
+            }
+            return try publication(record)
+        }
+    }
+
+    func sealQueryResults() { queryResultLock.lock(); queryResultsSealed = true; queryResultLock.unlock() }
 
     func head(lineageId: String) throws -> GalleryRef? {
         try access {

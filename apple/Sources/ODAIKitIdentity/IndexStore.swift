@@ -27,6 +27,7 @@ public actor IndexStore {
     private var activeBuilds: [UUID: Task<Data, Error>] = [:]
     private var activeTickets: [UUID: IdentityGalleryOperation] = [:]
     private var activePublishes: Set<UUID> = []
+    private var consumedReadTickets: Set<UUID> = []
     private var activeReadTickets: [String: [IdentityGalleryOperation]] = [:]
     private var rebuilding: Set<String> = []
     private var pendingStopDeliveries = 0
@@ -139,8 +140,25 @@ public actor IndexStore {
         leases[ref.revision, default: 0] += 1
         leaseLineages[ref.id, default: 0] += 1; revisionLineages[ref.revision] = ref.id
         activeReadTickets[ref.id, default: []].append(ticket)
-        return IndexReadLease(snapshot: value, indexData: indexData, stopSignal: ticket.stopSignal) { [self] in
+        return IndexReadLease(snapshot: value, indexData: indexData, ticket: ticket) { [self] in
             await self.releaseReadLease(ref.revision, lineage: ref.id, ticket: ticket)
+        }
+    }
+
+    /// Uses the original read admission ticket. The caller retains and closes
+    /// the lease after worker cleanup; final consume never admits a new grant.
+    func consumeReadLease<T>(_ lease: IndexReadLease, publication: () throws -> T) async throws -> T {
+        try beginOperation(); defer { endOperation() }
+        guard lease.isOpen else { throw IdentityError(.closed) }
+        let ticket = lease.ticket, ref = lease.value.ref
+        guard activeReadTickets[ref.id]?.contains(where: { $0 === ticket }) == true,
+              consumedReadTickets.insert(ticket.id).inserted else { throw IdentityError(.invalidInput) }
+        let catalog = self.catalog
+        return try await identityStore.finishGalleryOperation(ticket) {
+            try catalog.withSnapshot(ref) { _ in
+                try ticket.stopSignal.check()
+                return try publication()
+            }
         }
     }
 
@@ -163,6 +181,7 @@ public actor IndexStore {
     public func close() async {
         if closeFinished { return }
         if !closed {
+            catalog.sealQueryResults()
             closed = true
             for id in builders.keys { cancelBuilder(id, reason: .closed) }
             for (lineage, tickets) in activeReadTickets {
@@ -296,7 +315,9 @@ public actor IndexStore {
     private func releaseReadLease(_ revision: String, lineage: String, ticket: IdentityGalleryOperation) async {
         activeReadTickets[lineage]?.removeAll { $0 === ticket }
         if activeReadTickets[lineage]?.isEmpty == true { activeReadTickets.removeValue(forKey: lineage) }
-        try? await identityStore.finishGalleryOperation(ticket) { () }
+        if consumedReadTickets.remove(ticket.id) == nil {
+            try? await identityStore.finishGalleryOperation(ticket) { () }
+        }
         releaseLease(revision)
     }
     private func cancelBuilder(_ id: UUID, reason: IdentityStopReason = .cancelled) {
@@ -367,12 +388,16 @@ public final class GalleryBuilder: @unchecked Sendable {
 }
 
 public final class IndexReadLease: @unchecked Sendable {
-    private let value: GallerySnapshotRecord; private let stopSignal: IdentityStopSignal
+    fileprivate let value: GallerySnapshotRecord
+    fileprivate let ticket: IdentityGalleryOperation
+    private var stopSignal: IdentityStopSignal { ticket.stopSignal }
     private var release: (@Sendable () async -> Void)?; private var bytes: Data?
     private let lock = NSLock(); private var closed = false
-    fileprivate init(snapshot: GallerySnapshotRecord, indexData: Data, stopSignal: IdentityStopSignal, release: @escaping @Sendable () async -> Void) {
-        value = snapshot; bytes = indexData; self.stopSignal = stopSignal; self.release = release
+    fileprivate init(snapshot: GallerySnapshotRecord, indexData: Data, ticket: IdentityGalleryOperation, release: @escaping @Sendable () async -> Void) {
+        value = snapshot; bytes = indexData; self.ticket = ticket; self.release = release
     }
+    fileprivate var isOpen: Bool { lock.lock(); defer { lock.unlock() }; return !closed }
+    func requestStop(_ reason: IdentityStopReason) { stopSignal.requestStop(reason) }
     func snapshot() throws -> GallerySnapshotRecord { lock.lock(); defer { lock.unlock() }; guard !closed else { throw IdentityError(.closed) }; try stopSignal.check(); return value }
     func indexData() throws -> Data {
         lock.lock(); defer { lock.unlock() }
