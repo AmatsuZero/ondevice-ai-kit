@@ -21,6 +21,8 @@ public final class IdentityStopSignal: @unchecked Sendable {
     private let lock = NSLock()
     private var reason: IdentityStopReason?
     private var handlers: [UUID: @Sendable () -> Void] = [:]
+    private var pendingDeliveries = 0
+    private var drainWaiters: [CheckedContinuation<Void, Never>] = []
 
     public init() {}
 
@@ -55,9 +57,37 @@ public final class IdentityStopSignal: @unchecked Sendable {
         reason = requested
         let pending = Array(handlers.values)
         handlers.removeAll(keepingCapacity: false)
+        if !pending.isEmpty { pendingDeliveries += 1 }
         lock.unlock()
         guard !pending.isEmpty else { return nil }
-        return { for handler in pending { Self.deliver(handler) } }
+        return { [weak self] in
+            defer { self?.finishDelivery() }
+            for handler in pending { Self.deliver(handler) }
+        }
+    }
+
+    internal func drain() async {
+        if IdentityStopHandlerContext.current?.isActive == true { return }
+        await withCheckedContinuation { continuation in
+            lock.lock()
+            if pendingDeliveries == 0 {
+                lock.unlock()
+                continuation.resume()
+            } else {
+                drainWaiters.append(continuation)
+                lock.unlock()
+            }
+        }
+    }
+
+    private func finishDelivery() {
+        lock.lock()
+        pendingDeliveries -= 1
+        guard pendingDeliveries == 0 else { lock.unlock(); return }
+        let waiters = drainWaiters
+        drainWaiters.removeAll()
+        lock.unlock()
+        for waiter in waiters { waiter.resume() }
     }
 
     private static func deliver(_ handler: @Sendable () -> Void) {

@@ -35,7 +35,9 @@ class IdentityStore internal constructor(
     /** Every host stop callback is retained until its synchronous delivery returns. */
     private var pendingStopDeliveries = 0
     private val stopDeliveryDepth = ThreadLocal.withInitial { 0 }
-    private val deferredRetirementStops = mutableListOf<Pair<IdentityStopSignal, IdentityStopReason>>()
+    private val deferredRetirementStops = mutableListOf<() -> Unit>()
+    /** Stop reasons are fixed under [gate]; callbacks run after the mutation releases it. */
+    private val reservedAuthorizationDeliveries = mutableMapOf<IdentityStopSignal, () -> Unit>()
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
     private val gate = java.lang.Object()
     private var writerReleased = false
@@ -314,6 +316,11 @@ class IdentityStore internal constructor(
         consumeOperation(ticket) { if (backendError != null) throw backendError }
     }
 
+    /** Publishes a computed result only after the operation's final authority check. */
+    internal fun <T> finishOperation(ticket: IdentityOperationTicket, publication: () -> T): T = mutation(allowClosed = true) {
+        consumeOperation(ticket, publication)
+    }
+
     private inline fun <T> consumeOperation(ticket: IdentityOperationTicket, publication: () -> T): T {
         val operation = operations[ticket.id]?.takeIf { it.ticket === ticket } ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         try {
@@ -331,6 +338,7 @@ class IdentityStore internal constructor(
                     throw IdentityError(IdentityErrorCode.AUTHORIZATION_REVOKED)
             }
             authorization.admitting(ticket.grant, ticket.scope, authorizationProvider, wallClock.nowMillis)
+            ticket.stopSignal.check()
             return publication()
         } finally {
             operations.remove(ticket.id)
@@ -599,7 +607,8 @@ class IdentityStore internal constructor(
     }
 
     private fun stopAndPurge(signals: List<IdentityStopSignal>, targets: List<String>) {
-        deliverReservedStops(signals.map { it to IdentityStopReason.AUTHORIZATION_REVOKED })
+        val deliveries = synchronized(gate) { signals.mapNotNull { reservedAuthorizationDeliveries.remove(it) } }
+        deliverReservedStops(deliveries)
         mutation(allowClosed = true) {
             targets.forEach { id ->
                 val remaining = (pendingPurgeStops[id] ?: 1) - 1
@@ -662,11 +671,11 @@ class IdentityStore internal constructor(
     }
 
     /** Delivers host callbacks outside the monitor while retaining the writer boundary. */
-    private fun deliverReservedStops(pending: List<Pair<IdentityStopSignal, IdentityStopReason>>) {
+    private fun deliverReservedStops(pending: List<() -> Unit>) {
         if (pending.isEmpty()) return
         stopDeliveryDepth.set(stopDeliveryDepth.get() + 1)
         try {
-            pending.forEach { (signal, reason) -> signal.requestStop(reason) }
+            pending.forEach { it.invoke() }
         } finally {
             stopDeliveryDepth.set(stopDeliveryDepth.get() - 1)
             synchronized(gate) {
@@ -677,13 +686,19 @@ class IdentityStore internal constructor(
     }
 
     /** Caller owns [gate]; reservation happens before another callback can drain this writer. */
-    private fun reserveStopsLocked(pending: List<Pair<IdentityStopSignal, IdentityStopReason>>): List<Pair<IdentityStopSignal, IdentityStopReason>> {
-        pendingStopDeliveries += pending.size
-        return pending
+    private fun reserveStopsLocked(pending: List<Pair<IdentityStopSignal, IdentityStopReason>>): List<() -> Unit> {
+        val deliveries = pending.mapNotNull { (signal, reason) -> signal.prepareStopDelivery(reason) }
+        pendingStopDeliveries += deliveries.size
+        return deliveries
     }
 
     private fun reserveAuthorizationStopsLocked(signals: List<IdentityStopSignal>) {
-        reserveStopsLocked(signals.map { it to IdentityStopReason.AUTHORIZATION_REVOKED })
+        signals.forEach { signal ->
+            signal.prepareStopDelivery(IdentityStopReason.AUTHORIZATION_REVOKED)?.let { delivery ->
+                pendingStopDeliveries++
+                reservedAuthorizationDeliveries[signal] = delivery
+            }
+        }
     }
 
     /** Caller owns [gate]. Preserves revocation as the more specific terminal reason. */
@@ -722,7 +737,7 @@ class IdentityStore internal constructor(
 
     // JVM monitors are reentrant. Host callbacks cannot recursively publish a second state.
     private inline fun <T> mutation(allowClosed: Boolean = false, block: () -> T): T {
-        var retirementStops = emptyList<Pair<IdentityStopSignal, IdentityStopReason>>()
+        var retirementStops = emptyList<() -> Unit>()
         try {
             synchronized(gate) {
                 if (!allowClosed && closed) throw IdentityError(IdentityErrorCode.CLOSED)

@@ -367,6 +367,15 @@ public actor IdentityStore {
         try consumeOperation(ticket) { if let backendError { throw backendError } }
     }
 
+    func beginVerification(_ ref: TemplateRef, grant: AuthorizationGrant) throws -> IdentityOperationTicket {
+        let candidate = try recordedTemplateCandidate(ref)
+        return try beginOperation(candidate, grant: grant, scope: .verification, templateTargets: [ref])
+    }
+
+    func finishVerification<T>(_ ticket: IdentityOperationTicket, publication: () throws -> T) throws -> T {
+        try consumeOperation(ticket, publication: publication)
+    }
+
     private func consumeOperation<T>(_ ticket: IdentityOperationTicket, publication: () throws -> T) throws -> T {
         guard let operation = operations[ticket.id], operation.ticket === ticket else { throw IdentityError(.invalidInput) }
         defer {
@@ -389,6 +398,7 @@ public actor IdentityStore {
             }
         }
         _ = try authorization.admitting(ticket.grant, scope: ticket.scope, provider: provider, nowMillis: wallClock.nowMillis)
+        try ticket.stopSignal.check()
         return try publication()
     }
 
@@ -676,7 +686,8 @@ public actor IdentityStore {
         // Actor reentrancy and lease release cannot overtake an earlier stop delivery.
         for id in targets { pendingPurgeStops[id, default: 0] += 1 }
         pendingStopDeliveries += signals.count
-        await Self.stop(signals, reason: .authorizationRevoked, store: instanceId)
+        let deliveries = signals.compactMap { $0.prepareStopDelivery(.authorizationRevoked) }
+        await Self.stop(deliveries, store: instanceId)
         pendingStopDeliveries -= signals.count
         for id in targets {
             let remaining = (pendingPurgeStops[id] ?? 1) - 1
@@ -717,12 +728,13 @@ public actor IdentityStore {
             if !revoked.isEmpty || !closing.isEmpty {
                 pendingStopDeliveries += 1
                 let store = instanceId
+                let deliveries = revoked.compactMap { $0.prepareStopDelivery(.authorizationRevoked) }
+                    + closing.compactMap { $0.prepareStopDelivery(.closed) }
                 Task.detached { [self] in
                     let delivery = IdentityStoreStopDelivery(store: store)
                     IdentityStoreStopDelivery.$current.withValue(delivery) {
                         defer { delivery.finish() }
-                        for signal in revoked { signal.requestStop(.authorizationRevoked) }
-                        for signal in closing { signal.requestStop(.closed) }
+                        for delivery in deliveries { delivery() }
                     }
                     await self.finishStopDelivery()
                 }
@@ -758,13 +770,13 @@ public actor IdentityStore {
         }
     }
 
-    private nonisolated static func stop(_ signals: [IdentityStopSignal], reason: IdentityStopReason, store: UUID) async {
-        guard !signals.isEmpty else { return }
+    private nonisolated static func stop(_ deliveries: [@Sendable () -> Void], store: UUID) async {
+        guard !deliveries.isEmpty else { return }
         await Task.detached {
             let delivery = IdentityStoreStopDelivery(store: store)
             IdentityStoreStopDelivery.$current.withValue(delivery) {
                 defer { delivery.finish() }
-                for signal in signals { signal.requestStop(reason) }
+                for action in deliveries { action() }
             }
         }.value
     }

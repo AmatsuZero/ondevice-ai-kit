@@ -166,3 +166,12 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - RED/GREEN：Swift frame 修复前两项交错回归各失败，修复后 identity **148/148**；Android **153/153**，失败/错误/跳过均为 0，`lintDebug` 通过。完整 Apple 原生权限运行 **206/206**（Speech 31、ModelStore 13、Identity 148、Face 9、Core 5），Vision 空白图测试本次成功；沙箱运行的 Vision Code9 只作为环境差异记录。
 - 独立 scoped re-review `task-2-retirement-frame-rereview.md`：spec compliance PASS、quality PASS，无 Critical/Important 遗留。Android 编译仍有既有 nullable/unchecked-cast 警告，lint 无错误。
 - Android API35 完整 `Context.noBackupFilesDir` Store probe 已通过：成功 `pass/-1`，受控失败 `fail/-2`，lease/purge、重开恢复、epoch 撤销和精确 cleanup 均有证据，见 [Android Store 真机探针](p10-android-store-device-probe.md)。iOS27 Keychain Store 真机闭环也已通过，见 [iOS Store 真机探针](p10-ios-store-device-probe.md)。Task 2 仍不等于生产完成：API26/iOS15 设备门禁和进程终止/文件系统故障注入仍单列；不以单元测试替代这些证据。
+
+
+## Task 5：1:1 人脸验证（2026-10-19）
+
+- 双端新增 `FaceVerification`、`VerificationOptions`、稳定任务终态与 `VerificationResult`；公开结果只携带 opaque `TemplateRef` 版本、后端/模型/策略/预处理修订、质量和运行元数据，不携带宿主主体 ID、原始图像或向量。
+- 验证顺序固定为 admission → 后端质量/embedding → 最终授权消费门；多脸、空脸/低质量、损坏输入、缺失模板、过期/撤销授权、空间不兼容和未校准策略均 fail-closed。显式不可用后端不会回退默认后端。
+- 撤销、取消和关闭共用停止信号与串行结果门：停止回调在锁外交付并等待 drain；撤销在最终消费门之前提交时抑制结果，已提交完成结果不会被后续撤销回收；重复 close 与 callback 内重入保持单一终态。
+- Apple 原生权限全量：293/293（Identity235、Speech31、ModelStore13、Face9、Core5），0 failures。Android identity：240/240，0 failures/errors/skips；`lintDebug` 成功。日志：`/tmp/odai-verification-frozen-apple-native.log`、`/tmp/odai-verification-frozen-android.log`。
+- Task 5 仍使用合成 fixture backend；未宣称商用模型精度、真实生物数据、生产后端或最低系统版本设备验收。下一步为 Task 6：1:N identification。

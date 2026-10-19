@@ -8,8 +8,10 @@ fun interface IdentityStopRegistration : AutoCloseable {
 
 /** Thread-safe cooperative stop boundary. Callbacks are always invoked outside the lock. */
 class IdentityStopSignal {
-    private val lock = Any()
+    @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
+    private val lock = java.lang.Object()
     private var stopped: IdentityStopReason? = null
+    private var activeDeliveries = 0
     private var nextId = 0L
     private val handlers = linkedMapOf<Long, () -> Unit>()
 
@@ -47,8 +49,22 @@ class IdentityStopSignal {
             stopped = reason
             pending = handlers.values.toList()
             handlers.clear()
+            activeDeliveries++
         }
-        return { pending.forEach(::invokeSafely) }
+        return {
+            try { pending.forEach(::invokeSafely) }
+            finally { synchronized(lock) { activeDeliveries--; lock.notifyAll() } }
+        }
+    }
+
+    internal fun awaitDelivery() {
+        if (isDelivering) return
+        var interrupted = false
+        try {
+            synchronized(lock) {
+                while (activeDeliveries != 0) try { lock.wait() } catch (_: InterruptedException) { interrupted = true }
+            }
+        } finally { if (interrupted) Thread.currentThread().interrupt() }
     }
 
     private fun invokeSafely(callback: () -> Unit) {
