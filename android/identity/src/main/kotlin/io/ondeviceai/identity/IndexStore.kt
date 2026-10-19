@@ -77,6 +77,11 @@ class IndexStore internal constructor(root: Path, private val identityStore: Ide
         }
     }
 
+    internal fun snapshotSummary(ref: GalleryRef): GallerySnapshotRecord = synchronized(gate) {
+        requireOpen()
+        catalog.snapshot(ref)
+    }
+
     internal fun add(id: UUID, template: TemplateRef, grant: AuthorizationGrant) = mutateBuilder(id) { state ->
         if (template.id in state.members) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
         val candidate = identityStore.recordedTemplateCandidate(template)
@@ -351,7 +356,8 @@ class GalleryBuilder internal constructor(private val store: IndexStore, private
 
 class IndexReadLease internal constructor(internal val record: GallerySnapshotRecord, internal val ticket: IdentityGalleryOperationTicket,
     indexData: ByteArray, onRelease: () -> Unit) : AutoCloseable {
-    private val signal get() = ticket.stopSignal
+    internal val operationSignal get() = ticket.stopSignal
+    private val signal get() = operationSignal
     internal val isOpen: Boolean get() = synchronized(this) { release != null }
     internal fun requestStop(reason: IdentityStopReason) = signal.requestStop(reason)
     private var bytes: ByteArray? = indexData.clone()

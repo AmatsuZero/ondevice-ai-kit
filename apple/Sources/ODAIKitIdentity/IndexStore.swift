@@ -390,7 +390,8 @@ public final class GalleryBuilder: @unchecked Sendable {
 public final class IndexReadLease: @unchecked Sendable {
     fileprivate let value: GallerySnapshotRecord
     fileprivate let ticket: IdentityGalleryOperation
-    private var stopSignal: IdentityStopSignal { ticket.stopSignal }
+    var operationSignal: IdentityStopSignal { ticket.stopSignal }
+    private var stopSignal: IdentityStopSignal { operationSignal }
     private var release: (@Sendable () async -> Void)?; private var bytes: Data?
     private let lock = NSLock(); private var closed = false
     fileprivate init(snapshot: GallerySnapshotRecord, indexData: Data, ticket: IdentityGalleryOperation, release: @escaping @Sendable () async -> Void) {
