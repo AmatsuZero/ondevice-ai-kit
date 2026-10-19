@@ -8,6 +8,17 @@ final class IdentityPolicyCodecTests: XCTestCase {
         let f = try JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("fixtures/contracts/identity-policies.json"))) as! [String: String]
         return try XCTUnwrap(f[key])
     }
+    func testLivenessChallengePreservesAllIssuedFieldsAndRejectsCoercion() throws {
+        let json = try fixture("challengeJSON")
+        let c = try LivenessChallenge.decodeJSON(json)
+        XCTAssertEqual(json, c.canonicalJSON())
+        XCTAssertEqual(c.authorizationEpoch, 7); XCTAssertEqual(c.issuedAtNanos, 1_234_567_890)
+        XCTAssertEqual(c.expiresAtNanos, 9_876_543_210); XCTAssertEqual(c.nonce, "nonce")
+        for bad in [json.replacingOccurrences(of: "1234567890", with: "1234567890.0"), json.replacingOccurrences(of: "9876543210", with: "1234567890"),
+                    json.replacingOccurrences(of: "\"nonce\":\"nonce\"", with: "\"nonce\":true"), String(json.dropLast()) + ",\"extra\":1}"] {
+            XCTAssertThrowsError(try LivenessChallenge.decodeJSON(bad))
+        }
+    }
     func testSharedVerifiedIdentificationPolicyPreservesAllFieldsAndExactBits() throws {
         let json = try fixture("thresholdJSON")
         let p = try ThresholdPolicy.decodeJSON(json)

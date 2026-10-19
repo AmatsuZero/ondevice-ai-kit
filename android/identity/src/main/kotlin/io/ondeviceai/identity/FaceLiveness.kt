@@ -21,7 +21,23 @@ enum class LivenessSessionState { CREATED, RUNNING, CHALLENGE_ISSUED, EVALUATING
 data class LivenessChallenge internal constructor(
     val id: String, val nonce: String, val sessionId: String, val purpose: String,
     val authorizationEpoch: Long, val issuedAtNanos: Long, val expiresAtNanos: Long
-)
+) {
+    init {
+        listOf(id, nonce, sessionId, purpose).forEach(::token)
+        if (authorizationEpoch < 0 || issuedAtNanos < 0 || expiresAtNanos <= issuedAtNanos) throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+    }
+    fun canonicalJSON(): String = IdentityContractJSON.encode(mapOf(
+        "authorizationEpoch" to authorizationEpoch, "expiresAtNanos" to expiresAtNanos, "id" to id,
+        "issuedAtNanos" to issuedAtNanos, "nonce" to nonce, "purpose" to purpose, "sessionId" to sessionId
+    ))
+    companion object {
+        fun decodeJSON(json: String): LivenessChallenge {
+            val f = fields(json, setOf("authorizationEpoch", "expiresAtNanos", "id", "issuedAtNanos", "nonce", "purpose", "sessionId"))
+            return LivenessChallenge(f.string("id"), f.string("nonce"), f.string("sessionId"), f.string("purpose"),
+                f.long("authorizationEpoch"), f.long("issuedAtNanos"), f.long("expiresAtNanos"))
+        }
+    }
+}
 data class LivenessDecision(val outcome: LivenessOutcome, val quality: IdentityQuality, val scoreFields: IdentityScoreFields = IdentityScoreFields())
 /** Nil requests more frames. Temporal tracking is scoped to the supplied session signal. */
 interface LivenessBackend {

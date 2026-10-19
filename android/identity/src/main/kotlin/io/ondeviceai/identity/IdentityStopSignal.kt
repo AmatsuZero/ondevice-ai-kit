@@ -57,7 +57,8 @@ class IdentityStopSignal {
         }
     }
 
-    internal fun awaitDelivery() {
+    /** Waits until all registered native stop handlers have returned. */
+    fun awaitDelivery() {
         if (isDelivering) return
         var interrupted = false
         try {

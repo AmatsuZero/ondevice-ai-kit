@@ -28,6 +28,12 @@ public struct LivenessChallenge: Sendable, Equatable {
     public let authorizationEpoch: Int64
     public let issuedAtNanos: Int64
     public let expiresAtNanos: Int64
+    public init(id: String, nonce: String, sessionId: String, purpose: String, authorizationEpoch: Int64, issuedAtNanos: Int64, expiresAtNanos: Int64) throws {
+        try identityToken(id); try identityToken(nonce); try identityToken(sessionId); try identityToken(purpose)
+        guard authorizationEpoch >= 0, issuedAtNanos >= 0, expiresAtNanos > issuedAtNanos else { throw IdentityError(.invalidInput) }
+        self.id = id; self.nonce = nonce; self.sessionId = sessionId; self.purpose = purpose
+        self.authorizationEpoch = authorizationEpoch; self.issuedAtNanos = issuedAtNanos; self.expiresAtNanos = expiresAtNanos
+    }
 }
 public struct LivenessDecision: Sendable {
     public let outcome: LivenessOutcome

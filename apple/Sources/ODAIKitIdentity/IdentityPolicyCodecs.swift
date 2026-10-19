@@ -100,3 +100,12 @@ private func policyNumber(_ f: [String: Any], _ key: String) throws -> Double? {
     guard value.isFinite else { throw IdentityError(.invalidInput) }
     return value
 }
+
+
+public extension LivenessChallenge {
+    func canonicalJSON() -> String { identityJSON(["authorizationEpoch": authorizationEpoch, "expiresAtNanos": expiresAtNanos, "id": id, "issuedAtNanos": issuedAtNanos, "nonce": nonce, "purpose": purpose, "sessionId": sessionId]) }
+    static func decodeJSON(_ json: String) throws -> Self {
+        let f = try identityObject(json, keys: ["authorizationEpoch", "expiresAtNanos", "id", "issuedAtNanos", "nonce", "purpose", "sessionId"])
+        return try Self(id: identityString(f, "id"), nonce: identityString(f, "nonce"), sessionId: identityString(f, "sessionId"), purpose: identityString(f, "purpose"), authorizationEpoch: identityInteger(f, "authorizationEpoch"), issuedAtNanos: identityInteger(f, "issuedAtNanos"), expiresAtNanos: identityInteger(f, "expiresAtNanos"))
+    }
+}

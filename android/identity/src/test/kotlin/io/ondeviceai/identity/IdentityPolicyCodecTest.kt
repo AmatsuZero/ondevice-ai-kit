@@ -9,6 +9,17 @@ class IdentityPolicyCodecTest {
         while (!File(root, "fixtures/contracts/identity-policies.json").exists()) root = root.parentFile ?: error("fixture missing")
         return IdentityContractJSON.parse(File(root, "fixtures/contracts/identity-policies.json").readText())[key] as String
     }
+    @Test fun livenessChallengePreservesAllIssuedFieldsAndRejectsCoercion() {
+        val json = fixture("challengeJSON")
+        val c = LivenessChallenge.decodeJSON(json)
+        assertEquals(json, c.canonicalJSON())
+        assertEquals(7, c.authorizationEpoch); assertEquals(1234567890, c.issuedAtNanos)
+        assertEquals(9876543210, c.expiresAtNanos); assertEquals("nonce", c.nonce)
+        for (bad in listOf(json.replace("1234567890", "1234567890.0"), json.replace("9876543210", "1234567890"),
+            json.replace("\"nonce\":\"nonce\"", "\"nonce\":true"), json.dropLast(1) + ",\"extra\":1}")) {
+            assertFailsWith<IdentityError> { LivenessChallenge.decodeJSON(bad) }
+        }
+    }
     @Test fun sharedVerifiedIdentificationPolicyPreservesAllFieldsAndExactBits() {
         val json = fixture("thresholdJSON")
         val p = ThresholdPolicy.decodeJSON(json)
