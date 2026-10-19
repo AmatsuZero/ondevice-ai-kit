@@ -118,6 +118,12 @@
 - 用同一已安装 bundle `io.ondeviceai.ondeviceaidemo` 启动不运行相机的静态 Compose 页面，PID `15819`；Leaks trace `P4-ios-leaks-idle-pid15819-20261019.trace` 采集 **96.079477 秒**。导出的 detail 仍有 **1 个 `GrOp`、128 字节**。
 - 该对照说明 `GrOp` 不是相机启动后才首次出现，不能把三项/384 字节全部归因于相机桥或 Vision。相机路径相对静态页面多出的对象数量仍需最小化渲染/文本状态对照；P4 资源释放状态继续为 **unverified**。
 
+### 纯原生 consumer 对照（2026-10-19）
+
+- 使用仓库已有 `examples/ios-native/NativeConsumerApp.swift` 和工程，在命令行传入已有 development team 构建，未改写工程或签名资产；签名 device build、安装与启动均成功。该宿主只链接原生 Core/Face/AppleVision 与系统框架，不链接 KMP/Compose；源码中有一次合成空白 Vision 请求及 Client close。
+- `P4-ios-leaks-native-pid15846-20261019.trace` 附着启动返回的 PID `15846`，采集 **95.903346 秒**，Leaks detail 为 **0 行**。这只是该采样窗口未观察到泄漏，不证明初始 Vision 请求成功，也未覆盖其完整调用/释放窗口或相机资源。
+- 同设备对照为：纯原生 consumer **0 行**；静态 Compose Demo **1× GrOp / 128 B**；相机 Compose Demo **3× GrOp / 384 B**。下一调查重点是 Demo 的 Compose/Skia 渲染路径；当前没有依据将这些对象直接认定为原生 SDK 相机泄漏，或通过修改 SDK 释放逻辑修复它们。
+
 可重复导出方式（无需依赖 `data/table` 的 schema 列表）：
 
 ```sh
