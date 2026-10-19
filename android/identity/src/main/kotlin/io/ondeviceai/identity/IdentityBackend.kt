@@ -75,6 +75,8 @@ data class ThresholdPolicy(
         if (calibrationStatus == CalibrationStatus.VERIFIED && (threshold == null || qualityFloor == null || operatingPoint == null || datasetRevision == null || enrollmentRule == null ||
             (kind == IdentityPolicyKind.IDENTIFICATION && gallerySizeRange == null))) throw IdentityError(IdentityErrorCode.THRESHOLD_UNVERIFIED, policyId = id)
     }
+    fun canonicalJSON(): String = IdentityPolicyCodecs.encode(this)
+    companion object { fun decodeJSON(json: String): ThresholdPolicy = IdentityPolicyCodecs.threshold(json) }
     fun validate(space: EmbeddingSpaceId, kind: IdentityPolicyKind = IdentityPolicyKind.VERIFICATION, epoch: Long = 0, gallerySize: Int? = null) {
         if (embeddingSpace != space) throw IdentityError(IdentityErrorCode.EMBEDDING_SPACE_MISMATCH)
         requireVerified()
@@ -109,6 +111,8 @@ class PADPolicy(
             throw IdentityError(IdentityErrorCode.THRESHOLD_UNVERIFIED, policyId = id)
     }
     fun requireVerified() { if (calibrationStatus != CalibrationStatus.VERIFIED) throw IdentityError(IdentityErrorCode.THRESHOLD_UNVERIFIED, policyId = id) }
+    fun canonicalJSON(): String = IdentityPolicyCodecs.encode(this)
+    companion object { fun decodeJSON(json: String): PADPolicy = IdentityPolicyCodecs.pad(json) }
     fun validate(backendId: String, backendVersion: String, modelBinding: ModelBinding, mode: PADMode, epoch: Long) {
         requireVerified()
         if (this.backendId != backendId || this.backendVersion != backendVersion || this.modelBinding != modelBinding || this.mode != mode || effectiveAuthorizationEpoch != epoch)

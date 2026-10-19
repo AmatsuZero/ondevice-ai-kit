@@ -37,3 +37,11 @@ rtk proxy env CLANG_MODULE_CACHE_PATH=/tmp/odai-task11-clang-cache sh scripts/ch
 - Production model, PAD backend, authorized datasets and calibration remain Tasks 9/10 blocked-unverified. Synthetic contract/state tests do not validate biometric accuracy or authorize a default decision threshold.
 
 The protected signing project and original `docs/validation/face-identity.md` draft remain unchanged. No Task 11 or roadmap completion is claimed by this prerequisite.
+
+## Native policy codec prerequisite
+
+Both native Identity modules now expose `ThresholdPolicy.canonicalJSON/decodeJSON` and `PADPolicy.canonicalJSON/decodeJSON`. Version 1 serializes finite Double values as 16 lowercase IEEE-754 binary64 hex digits, preserving calibration bits while retaining the existing integer-only authorization/reference parser. Complete embedding/model bindings are nested objects. Unknown/missing/duplicate keys, numeric coercion, out-of-range capture/range integers, non-finite bits and duplicate attack types are rejected. Gallery persistence is unchanged.
+
+The shared `fixtures/contracts/identity-policies.json` supplies synthetic identification and active categorical PAD policies; both platforms decode and re-encode the exact same canonical bytes. Unverified policies retain null calibration fields and continue to reject `requireVerified`. A serialized `verified` declaration establishes neither calibration provenance nor production approval.
+
+RED logs: `/tmp/odai-policy-codec-android-red.log`, `/tmp/odai-policy-codec-swift-red.log` (missing public API). GREEN: Apple identity full 312/312 in `/tmp/odai-policy-codec-apple-full.log`; Android identity full 310/310, zero failures/errors/skips, plus lintDebug in `/tmp/odai-policy-codec-android-full.log`. Fresh codec tests passed 4/4 per platform; Apple log `/tmp/odai-policy-codec-swift-fresh.log`. The Android codec count is four (supersedes an earlier progress message saying three). Existing Swift async-wait and sandbox cache warnings remain. This is a native-mapping prerequisite, not Task 11 completion or algorithm validation.
