@@ -20,11 +20,17 @@ private class FakeIdentityBridge : IdentityBridge by UnavailableIdentityBridge()
     var enrollmentCallback: IdentityCallback<IdentityEnrollmentResult>? = null
     var identificationCallback: IdentityCallback<IdentityIdentificationResult>? = null
     var livenessCallback: IdentityCallback<IdentityLivenessSession>? = null
+    var lastProbe: IdentityProbeReference? = null
+    var lastCandidate: IdentityCandidateReference? = null
+    var lastTemplate: IdentityTemplateReference? = null
+    var lastGallery: IdentityGalleryReference? = null
+    var lastGrant: IdentityAuthorizationGrant? = null
     var advertisedAvailability: IdentityBridgeAvailability = IdentityBridgeAvailability.Available("fixture.identity")
     override fun availability() = advertisedAvailability
     override fun verify(probe: IdentityProbeReference, template: IdentityTemplateReference,
         grant: IdentityAuthorizationGrant, options: IdentityVerificationOptions,
         backend: IdentityBackendSelection, callback: IdentityCallback<IdentityVerificationResult>): IdentityBridgeTask {
+        lastProbe = probe; lastTemplate = template; lastGrant = grant
         selections += backend; callbacks += callback
         if (completeSynchronously) callback.onSuccess(verification())
         return IdentityTask { cancellations++; callback.onFailure(IdentityBridgeFailure.Cancelled) }
@@ -32,11 +38,13 @@ private class FakeIdentityBridge : IdentityBridge by UnavailableIdentityBridge()
     override fun enroll(probe: IdentityProbeReference, candidate: IdentityCandidateReference,
         grant: IdentityAuthorizationGrant, options: IdentityEnrollmentOptions,
         backend: IdentityBackendSelection, callback: IdentityCallback<IdentityEnrollmentResult>): IdentityBridgeTask {
+        lastProbe = probe; lastCandidate = candidate; lastGrant = grant
         selections += backend; enrollmentCallback = callback; return IdentityTask()
     }
     override fun identify(probe: IdentityProbeReference, gallery: IdentityGalleryReference,
         grant: IdentityAuthorizationGrant, options: IdentityIdentificationOptions,
         backend: IdentityBackendSelection, callback: IdentityCallback<IdentityIdentificationResult>): IdentityBridgeTask {
+        lastProbe = probe; lastGallery = gallery; lastGrant = grant
         selections += backend; identificationCallback = callback; return IdentityTask()
     }
     override fun openLivenessSession(grant: IdentityAuthorizationGrant, options: IdentityLivenessOptions,
@@ -105,6 +113,83 @@ class IdentityViewModelTest {
         assertEquals(IdentityBridgeFailure.Unavailable(IdentityAvailabilityReason.UNVERIFIED), model.state.error)
         assertFalse(model.state.busy)
         assertNull(model.state.verification)
+    }
+    private fun hostConfiguration() = IdentityDemoConfiguration(grant = grant,
+        candidate = IdentityCandidateReference("host-candidate"), template = template,
+        gallery = IdentityGalleryReference("host-gallery"),
+        enrollmentOptions = IdentityEnrollmentOptions(0.8, "host-quality", "v1"),
+        verificationOptions = options,
+        identificationOptions = IdentityIdentificationOptions(3, null, "v1"),
+        livenessOptions = livenessOptions)
+
+    @Test fun configuredActionsRequireHostAuthorizationAndInputBeforeBridgeWork() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.enrollConfigured()
+        assertEquals(IdentityBridgeFailure.Unavailable(IdentityAvailabilityReason.AUTHORIZATION_REQUIRED), model.state.error)
+        model.configure(hostConfiguration())
+        model.verifyConfigured()
+        assertEquals(IdentityBridgeFailure.Rejected(IdentityErrorCode.INVALID_INPUT), model.state.error)
+        assertTrue(bridge.selections.isEmpty())
+        assertFalse(model.state.busy)
+    }
+    @Test fun configuredActionsUseOnlyHostReferencesPoliciesAndSelectedBackend() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(hostConfiguration()); model.selectProbe(probe)
+        val selection = IdentityBackendSelection.Explicit("installed.plugin")
+        model.enrollConfigured(selection)
+        assertEquals(IdentityCandidateReference("host-candidate"), bridge.lastCandidate)
+        assertEquals(probe, bridge.lastProbe); assertEquals(grant, bridge.lastGrant)
+        model.verifyConfigured(selection)
+        assertEquals(template, bridge.lastTemplate)
+        model.identifyConfigured(selection)
+        assertEquals(IdentityGalleryReference("host-gallery"), bridge.lastGallery)
+        model.openLivenessConfigured(selection)
+        assertEquals(List<IdentityBackendSelection>(4) { selection }, bridge.selections)
+    }
+    @Test fun enrollingThenSelectingAnotherImageKeepsTheOpaqueTemplateForVerification() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(hostConfiguration().copy(template = null)); model.selectProbe(probe)
+        model.enrollConfigured()
+        val issued = IdentityTemplateReference("native-issued")
+        bridge.enrollmentCallback!!.onSuccess(IdentityEnrollmentResult(IdentityEnrollmentOutcome.ENROLLED,
+            issued, IdentityEmbeddingSpace("space"), IdentityQualitySummary(1, 1.0), "quality", metadata()))
+        model.selectProbe(IdentityProbeReference("next-image"))
+        model.verifyConfigured()
+        assertEquals(issued, bridge.lastTemplate)
+        assertEquals(IdentityProbeReference("next-image"), bridge.lastProbe)
+    }
+    @Test fun replacingHostConfigurationInvalidatesOldResultAndClearsOldTemplate() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(hostConfiguration()); model.selectProbe(probe); model.enrollConfigured()
+        val old = bridge.enrollmentCallback!!
+        model.configure(hostConfiguration().copy(grant = IdentityAuthorizationGrant("new-grant"), template = null))
+        old.onSuccess(IdentityEnrollmentResult(IdentityEnrollmentOutcome.ENROLLED, template,
+            IdentityEmbeddingSpace("space"), IdentityQualitySummary(1, 1.0), "quality", metadata()))
+        assertFalse(model.inputReady)
+        model.selectProbe(probe)
+        model.verifyConfigured()
+        assertEquals(IdentityBridgeFailure.Rejected(IdentityErrorCode.TEMPLATE_NOT_FOUND), model.state.error)
+        assertNull(model.enrolledTemplate)
+        assertTrue(bridge.callbacks.isEmpty())
+    }
+    @Test fun configurationCanEnableVerificationWithoutEnrollmentOrPADPolicies() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(IdentityDemoConfiguration(grant, template = template, verificationOptions = options))
+        model.selectProbe(probe); model.verifyConfigured()
+        assertEquals(1, bridge.callbacks.size)
+        model.openLivenessConfigured()
+        assertEquals(IdentityBridgeFailure.Rejected(IdentityErrorCode.UNSUPPORTED_OPTION), model.state.error)
+        assertNull(bridge.livenessCallback)
+    }
+    @Test fun clearingSelectedProbePreventsReuseOfAnOldHostInput() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(hostConfiguration()); model.selectProbe(probe); model.verifyConfigured()
+        model.selectProbe(null)
+        bridge.callbacks.single().onSuccess(verification())
+        assertNull(model.state.verification)
+        model.verifyConfigured()
+        assertEquals(IdentityBridgeFailure.Rejected(IdentityErrorCode.INVALID_INPUT), model.state.error)
+        assertEquals(1, bridge.callbacks.size)
     }
     @Test fun staleVerificationCallbackIsCancelledAndIgnored() {
         val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)

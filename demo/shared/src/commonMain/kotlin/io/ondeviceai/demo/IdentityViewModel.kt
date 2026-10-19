@@ -5,6 +5,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import io.ondeviceai.binding.*
 
+/** Supplied by the host; optional capability policies never gain synthetic defaults. */
+data class IdentityDemoConfiguration(
+    val grant: IdentityAuthorizationGrant,
+    val candidate: IdentityCandidateReference? = null,
+    val template: IdentityTemplateReference? = null,
+    val gallery: IdentityGalleryReference? = null,
+    val enrollmentOptions: IdentityEnrollmentOptions? = null,
+    val verificationOptions: IdentityVerificationOptions? = null,
+    val identificationOptions: IdentityIdentificationOptions? = null,
+    val livenessOptions: IdentityLivenessOptions? = null
+)
+
 data class IdentityViewState(
     val busy: Boolean = false,
     val enrollment: IdentityEnrollmentResult? = null,
@@ -21,6 +33,14 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
     private var active: IdentityBridgeTask? = null
     private var session: IdentityLivenessSession? = null
     private var closed = false
+    private var configuration: IdentityDemoConfiguration? = null
+    private var selectedProbe: IdentityProbeReference? = null
+    var enrolledTemplate by mutableStateOf<IdentityTemplateReference?>(null)
+        private set
+    var configured by mutableStateOf(false)
+        private set
+    var inputReady by mutableStateOf(false)
+        private set
     private var livenessTerminalDelivered = false
     private class EventPump(val generation: Long, val session: IdentityLivenessSession) {
         var running = false
@@ -59,7 +79,7 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         val task = bridge.enroll(probe, candidate, grant, options, backend, object : IdentityCallback<IdentityEnrollmentResult> {
             override fun onSuccess(value: IdentityEnrollmentResult) {
                 if (current != generation || terminalDelivered) return
-                terminalDelivered = true; active = null; state = IdentityViewState(enrollment = value)
+                terminalDelivered = true; active = null; enrolledTemplate = value.template; state = IdentityViewState(enrollment = value)
             }
             override fun onFailure(error: IdentityBridgeFailure) {
                 if (current != generation || terminalDelivered) return
@@ -124,6 +144,57 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         if (current == generation && state.busy && !terminalDelivered) active = task
     }
 
+    fun configure(value: IdentityDemoConfiguration?) {
+        if (closed) return
+        beginOperation()
+        configuration = value
+        configured = value != null
+        selectedProbe = null
+        inputReady = false
+        enrolledTemplate = null
+        state = IdentityViewState()
+    }
+
+    fun selectProbe(value: IdentityProbeReference?) {
+        if (closed) return
+        beginOperation()
+        selectedProbe = value
+        inputReady = value != null
+        state = IdentityViewState()
+    }
+
+    fun enrollConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val probe = requireProbe() ?: return
+        val candidate = value.candidate ?: run { reject(IdentityErrorCode.CANDIDATE_NOT_FOUND); return }
+        val options = value.enrollmentOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        enroll(probe, candidate, value.grant, options, backend)
+    }
+
+    fun verifyConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val probe = requireProbe() ?: return
+        val template = value.template ?: enrolledTemplate
+        if (template == null) { reject(IdentityErrorCode.TEMPLATE_NOT_FOUND); return }
+        val options = value.verificationOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        verify(probe, template, value.grant, options, backend)
+    }
+
+    fun identifyConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val probe = requireProbe() ?: return
+        val gallery = value.gallery
+        if (gallery == null) { reject(IdentityErrorCode.GALLERY_NOT_FOUND); return }
+        val options = value.identificationOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        identify(probe, gallery, value.grant, options, backend)
+    }
+
+    fun openLivenessConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val options = value.livenessOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        openLiveness(value.grant, options, backend)
+    }
+
     fun submitLivenessFrame(frame: IdentityLivenessFrame): Boolean = session?.submitFrame(frame) ?: false
     fun finishLiveness() { session?.finish() }
     fun cancel() {
@@ -134,6 +205,18 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
     fun close() { if (!closed) { closed = true; cancel(); bridge.close() } }
 
     private fun beginOperation(): Long { generation++; active?.cancel(); active = null; session?.close(); session = null; return generation }
+    private fun requireConfiguration(): IdentityDemoConfiguration? {
+        if (closed) return null
+        val value = configuration
+        if (value == null) { beginOperation(); state = IdentityViewState(error = IdentityBridgeFailure.Unavailable(IdentityAvailabilityReason.AUTHORIZATION_REQUIRED)); return null }
+        return value
+    }
+    private fun requireProbe(): IdentityProbeReference? {
+        val value = selectedProbe
+        if (value == null) { reject(IdentityErrorCode.INVALID_INPUT); return null }
+        return value
+    }
+    private fun reject(code: IdentityErrorCode) { beginOperation(); state = IdentityViewState(error = IdentityBridgeFailure.Rejected(code)) }
     private fun acceptLivenessTerminal(current: Long, event: IdentityLivenessEvent) {
         if (current != generation || livenessTerminalDelivered) return
         if (event is IdentityLivenessEvent.Completed || event is IdentityLivenessEvent.Failed || event === IdentityLivenessEvent.Cancelled || event === IdentityLivenessEvent.Closed) {
