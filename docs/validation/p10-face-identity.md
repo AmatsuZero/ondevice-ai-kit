@@ -6,11 +6,59 @@
 
 - Task 1–8 的双端契约、加密存储/删除、不可变 gallery、1:1、1:N、独立活体会话及模型 lease 适配层已实现；任务依赖顺序仍为 1→4→2→3→5→6→7→8。
 - Task 6 公共引擎 `cc08973`；Task 7 独立授权门 `ece1d18`、会话 `06a66ea`；Task 8 模型绑定适配层 `d12c7ec`。Task 7 独立审查通过；Task 8 按 inline 执行，整个分支的最终独立审查仍待后续工作包完成。
-- 最新原生 Apple 全量 **366/366**（Identity308、Speech31、ModelStore13、Face9、Core5）；Android Identity **306/306**、ModelStore **10/10**，失败/错误/跳过均为 0，两个模块 `lintDebug` 通过。详见[模型适配层记录](p10-local-identity-adapter.md)。
-- [Task 9 模型选型](p10-identity-model-selection.md)与[Task 10 PAD 后端](p10-pad-backend-selection.md)均为 **blocked-unverified**；尚无获批生产模型、授权数据或校准策略。Task 11 类型化 bridge/Demo 与 Task 12 分发仍待实施。P10 与 roadmap 均未完成。
+- 最新原生 Apple 全量 **371/371**（Identity313、Speech31、ModelStore13、Face9、Core5）；Android Identity **319/319**、ModelStore **10/10**，失败/错误/跳过均为 0。更新后的双端 verify 脚本通过，工具测试 **53/53**。
+- [Task 9 模型选型](p10-identity-model-selection.md)与[Task 10 PAD 后端](p10-pad-backend-selection.md)均为 **blocked-unverified**；尚无获批生产模型、授权数据或校准策略。Task 11 类型化 bridge、独立 Demo 控件与宿主配置已完成（`2f28922`）；Task 12 可裁剪分发及独立 consumer 的本地验收已通过，提交与最终独立分支审查待完成。P10 与 roadmap 均未完成。
 - 真实设备准确率、iOS15/API26 最低系统和进程终止/文件系统故障验收仍为独立门槛，不能由合成测试或现有 Store 同进程探针代替。
 
 以下切片为按实施时间保留的历史证据；其中“尚未实现/待实现”描述该次检查点，不覆盖上面的当前状态。
+
+## Task 11/12：bridge、Demo 与独立分发验收（2026-10-19）
+
+Task 11 以 `2f28922` 收口：双端 native adapter 调用真实 Store/IndexStore/verification/identification/liveness；共享 Demo 提供分开的注册、验证、识别、活体和显式后端控件。宿主提供授权、opaque 输入及策略；默认 UNVERIFIED。Swift 同一 adapter 在独立 Binding 和 Demo umbrella 下各通过 10/10 native 测试；Demo25/25（Identity20+Face5）、binding6/6、Android APK/lint、iOS unsigned simulator build 和 API35 控件/未授权提示已验证。详见 [bridge 记录](p10-kmp-identity-bridge.md)。
+
+Task 12 的代码基于 `2f28922` 工作树：Apple 分发工程新增 `ODAIKitIdentity`，只依赖 Core/ModelStore；七个 product 均生成 device arm64 与 simulator arm64 XCFramework。`--identity` consumer 只链接这三个原生模块，编译了 candidate、显式 verify、模型绑定和身份/PAD 策略 codec 调用。Android `io.ondeviceai:identity:0.1.0-SNAPSHOT` 的独立 consumer 同时通过 source dependency 与 published Maven dependency 构建。两端 consumer 启动页说明需要宿主配置；不运行生产身份/PAD 推理。
+
+复现命令（使用与已安装 xcodeproj/json 一致的 Ruby 环境；本机为 RVM Ruby3.4.11）：
+
+```sh
+rtk proxy swift test --package-path apple
+rtk proxy ./scripts/verify-android.sh
+rtk proxy env RUBY=/Users/daubert/.rvm/wrappers/ruby-3.4.11/ruby ./scripts/verify-apple.sh
+rtk proxy ruby scripts/generate-distribution-project.rb
+rtk proxy env ODAI_ARTIFACTS_DIR=artifacts/P10/identity-final-20261019 sh scripts/package-apple.sh
+rtk proxy env ODAI_ARTIFACTS_DIR=artifacts/P10/identity-final-20261019 ruby scripts/generate-binary-consumer.rb --identity
+rtk proxy env ODAI_ARTIFACTS_DIR=artifacts/P10/identity-final-20261019 ruby scripts/generate-binary-consumer.rb
+rtk proxy xcodebuild -project artifacts/P10/identity-final-20261019/IdentityBinaryConsumer/IdentityBinaryConsumer.xcodeproj -scheme IdentityBinaryConsumer -destination 'generic/platform=iOS Simulator' -derivedDataPath artifacts/P10/identity-final-20261019/IdentityBinaryBuild CODE_SIGNING_ALLOWED=NO build
+rtk proxy xcodebuild -project artifacts/P10/identity-final-20261019/BinaryConsumer/BinaryConsumer.xcodeproj -scheme BinaryConsumer -destination 'generic/platform=iOS Simulator' -derivedDataPath artifacts/P10/identity-final-20261019/BinaryBuild CODE_SIGNING_ALLOWED=NO build
+rtk proxy ./gradlew publishToMavenLocal :examples:android-identity-native:assembleDebug :examples:android-identity-native:dependencies -PusePublishedSdk=true --configuration debugRuntimeClasspath
+rtk proxy env RUBY=/Users/daubert/.rvm/wrappers/ruby-3.4.11/ruby python3 -m unittest discover -s tools/tests -v
+```
+
+`identity-final-20261019` 是本次已存在的验证输出；复现时换新目录。生成器和打包脚本拒绝覆盖已有 consumer、archive、XCFramework 或 Identity metadata。
+
+| 验收 | 结果与原始日志 |
+| --- | --- |
+| Apple 原生全包 | 371/371，0 failures；`/tmp/odai-p10-task12-apple-full.log` |
+| 更新后的 Apple verify | exit0，含 native/common、生命周期脚本、11项分发检查、原生 consumer 与 Demo build；`/tmp/odai-p10-task12-verify-apple.log` |
+| Android verify | exit0；Identity319、ModelStore10、Core4、Face3、MLKit3、Speech8、TTS3、ASR7 均无失败/错误/跳过，另含 Demo tests/lint/APK 和 native consumers；`/tmp/odai-p10-task12-android-full.log` |
+| 工具全包 | 53/53；`/tmp/odai-p10-task12-tools.log` |
+| Apple package | 七个 XCFramework 与自动 `identity-artifact.json`；`/tmp/odai-p10-package-final.log` |
+| Apple binary consumers | Identity 与既有人脸两项均 BUILD SUCCEEDED；`/tmp/odai-p10-identity-binary-final.log`、`/tmp/odai-p10-default-binary-final.log` |
+| Maven consumer | BUILD SUCCESSFUL；只解析 Identity/Core/ModelStore、Kotlin/annotations/coroutines；`/tmp/odai-p10-published-android.log` |
+| RED→GREEN | 缺失 Identity target、缺失 Android consumer、未支持 --identity、metadata reporter 缺失均先复现；`/tmp/odai-p10-distribution-ruby-red.log`、`/tmp/odai-p10-android-consumer-red.log`、`/tmp/odai-p10-binary-consumer-red.log`、`/tmp/odai-p10-artifact-metadata-red.log` |
+
+产物 hash（全部输出在忽略目录，未提交二进制或权重）：
+
+| 产物 | SHA256 |
+| --- | --- |
+| Identity device arm64 binary | `f469bb7aaf0dce2e0dedb6545316c7b596bd9757e61e2e4d7892df4e83b08522` |
+| Identity simulator arm64 binary | `a63738f2fba02ea66fa008c0ad9d30b66c7908b6b885382886182021e07295c0` |
+| Android identity-release.aar | `48dbd72162bfe3fec758de8c0624eeba7e252c744a58bc97777b013b39c5e430` |
+| 本地 Maven Identity POM | `38ad7cd477ace50e8973bf443317a23ea929cb6d0cad9c7c2a29d5c20c0a9da6` |
+
+自动报告检查每个 slice 的公开 `ModelBinding`、`ThresholdPolicy`、`PADPolicy` 接口，记录二进制/interface hash 与实际 import，拒绝常见模型权重扩展和已知 KMP/Compose/MLX/云 SDK import。它只证明分发结构；`selectedProductionModel` 与 `calibrationEvidence` 保持 null。额外 `otool -L` 核实 Identity 只动态链接 Core/ModelStore 与 Apple 系统库。Android 实际 dependency graph 未包含 KMP、Compose、ML Kit、MLX 或云后端。
+
+设备证据沿用 [iOS Store](p10-ios-store-device-probe.md)、[Android Store](p10-android-store-device-probe.md)及 Task 11 Android API35 UI 冒烟；本次 consumer 编译不冒充设备推理。iOS15/API26、进程终止/文件系统故障、生产模型/数据授权、PAD 攻击数据、阈值与准确率验收仍未通过；全分支独立审查待完成。
 
 ## 已验证切片（历史记录）
 

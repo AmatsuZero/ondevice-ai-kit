@@ -10,3 +10,5 @@ include(":android:model-store", ":android:face", ":android:backend-mlkit", ":and
 include(":demo:shared", ":demo:androidApp")
 include(":examples:android-native")
 include(":examples:android-speech")
+
+include(":examples:android-identity-native")

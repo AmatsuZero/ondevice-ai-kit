@@ -7,35 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E4D4156C3249BE6D12B1D96 /* IdentityAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A0C5087D6BAEB12ABAD20E /* IdentityAuthorization.swift */; };
 		0F5DBC5BAFFDB06EFFC48CA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		120103EC5E4DE3021FA3ECFF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		12546852456E36AE866B1CEC /* ModelLease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6FD16AB0674085D36A0A2 /* ModelLease.swift */; };
+		16F26DC8947BA25D9FAC0970 /* FaceIdentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108CAD03F5016A712A73981 /* FaceIdentification.swift */; };
 		184DB45212EBA0B2AF70F10E /* AppleSpeechRecognizerBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9620D6921B51B5D3D408818C /* AppleSpeechRecognizerBackend.swift */; };
+		2019F2341B1AD64F302602BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		3864683E61ECC35F3480F5DB /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B53BC264DC0300F3ED7BC /* Availability.swift */; };
 		386ECD1C54E3A04019ABB9C3 /* ModelManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */; };
 		392A21488A3ED4187A20846F /* ModelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568ADE1C602A8407F60A6AE /* ModelStore.swift */; };
+		3A7530B22CF5A51DB9BDF3FA /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		453F92DD0E7BAEA9BF5EDF26 /* IdentityContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65806FDB767FCB54FE5F2921 /* IdentityContracts.swift */; };
+		45C72765F7B8B1FF60EA2587 /* IdentityErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0A4C80736172E54494CB8 /* IdentityErrors.swift */; };
 		47E14962DE31F073F3436417 /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A132258ADD09AF9EEF7989FF /* Speech.framework */; };
+		52A7399B5E7454CCA0E284CD /* KeychainIdentityKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC727BB00DD3072C7CB20A /* KeychainIdentityKeyProvider.swift */; };
+		54CCFEB543CEC3AC8CB73453 /* IdentityTemplatePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BEB93AABBF7EC8E2589C5B /* IdentityTemplatePayload.swift */; };
+		56ABF4F4EF518B042C08AF8D /* IdentityCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECBC274B21187A3A5E4761 /* IdentityCrypto.swift */; };
 		56EAB3977351262E36F2A2FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
+		58255A0698D7A2E6A08B1221 /* IdentityOperationTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356B145C70501D9B48F78AC7 /* IdentityOperationTicket.swift */; };
 		5ACD71EFF3D6930A6A3DA1F9 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		5C67CADC416AA204C371C26F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
+		5CFC154A02D03E644A9DBB3B /* IdentityBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA68DF876300C7C5D099A75 /* IdentityBackend.swift */; };
 		66A985DB8180B8A8749FBB6C /* ODAIKitSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4F8AE1FD0B502BE5D40CB2 /* ODAIKitSpeech.framework */; };
+		69AE2FC526CCF3B668180639 /* GalleryCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59C13A18066C82FB5E037A /* GalleryCatalog.swift */; };
 		81708D72661C142679A66B8B /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		89345026EFD8CAA05A971D5F /* FaceDetectionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B27A47D43660B453108C4A1 /* FaceDetectionClient.swift */; };
 		954ED3BD7C5A0AB5198E5DAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		96ADC04EC9C0984301E8B126 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		98EF1F4F88DC1B9E26717B19 /* LatestFrameQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA6D77F420A4D2DBBD5179F /* LatestFrameQueue.swift */; };
 		9BC228A95B719ABE75213605 /* TaskGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E9B24E203B35917F6D632 /* TaskGate.swift */; };
+		9CEE41EB5E70CB93054399AA /* GallerySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9A49CE061532935F71D882 /* GallerySnapshot.swift */; };
+		9DEE06588AA8263AB962EDFB /* IdentityContractCodecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4098819D18DF89E8F6C0E290 /* IdentityContractCodecs.swift */; };
+		9FBA6901574B6656CBA70F88 /* IdentityDeletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC62F260C1E5E3E210CC2FF2 /* IdentityDeletion.swift */; };
 		9FD5CC5139EEC2589BF74B1A /* InstallCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8598072235A1E65C859DE0DA /* InstallCoordinator.swift */; };
+		A4CDA10D0E97F7A9A4E3A765 /* IdentityPolicyCodecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199E592263186548423B158D /* IdentityPolicyCodecs.swift */; };
+		A5AECA25BA3624F5F6517C46 /* IdentityGalleryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCEDF5FCBA3AA67F169FC96 /* IdentityGalleryOperation.swift */; };
 		A85CD02F7D348E984D7D8002 /* VisionFaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0278B7DADAED87DB634BDED5 /* VisionFaceDetector.swift */; };
 		AC402CC2F005E84364ACA1D0 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		AEB7A925C5BF66431CB312D1 /* FaceLiveness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6CF6558B298D0F7E5CED9 /* FaceLiveness.swift */; };
+		B2BC68C7874ADFC190295439 /* LocalIdentityBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C45DD1192427D52D280690 /* LocalIdentityBackend.swift */; };
 		B9DDCBE016D7228A2E24597C /* AppleAVSpeechBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2FECE6D5DC16691BD1A5B0 /* AppleAVSpeechBackend.swift */; };
+		BB02C8D38DEA33AD2CC8D272 /* IdentityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2697C9F5448D517E5196CA0B /* IdentityStore.swift */; };
+		BB8E3B3253EE7E49B98BA88C /* IndexStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F691F270D1FE0D65FD0ACB2 /* IndexStore.swift */; };
+		C192D88DD16107B3C37A17B0 /* IdentityEnrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41866830051FC001F515E083 /* IdentityEnrollment.swift */; };
 		C2A4456A3D0A6F33529FB316 /* ImageGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */; };
+		C814E8CBB34E9BB5B367332B /* IdentityTemplateLease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D92A232996FA126F753F32B /* IdentityTemplateLease.swift */; };
 		CAF02ABB82EC4CFD3C1C26E8 /* ModelDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */; };
 		D1829444BA8E2D81358E27AF /* FaceObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D260AE9C59C8AB60896569 /* FaceObservation.swift */; };
+		D572022EBBF3ED78F901459F /* IdentityStopSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7719F88D02917C7C358D4FB1 /* IdentityStopSignal.swift */; };
 		DAB68DD158DFA4D467C6DCC0 /* SpeechClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24346D636307E745B03B9CE /* SpeechClient.swift */; };
+		DDBAC062C4C652DBF34C1F10 /* ODAIKitModelStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B559AC07B15B943927A218 /* ODAIKitModelStore.framework */; };
 		E0932865ED77150E05827C81 /* ODAIKitFace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180827F381A9FF1D9FD308FC /* ODAIKitFace.framework */; };
 		E315D7EBD927C1F44AA63196 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
+		E52090F8A227987A8469D8AC /* TestIdentityBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4B332FA6F8B400CFD924A /* TestIdentityBackend.swift */; };
+		EAFF22EA976D513A674D1F20 /* IdentityWireValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251DCF4818C5B910F8056A31 /* IdentityWireValidation.swift */; };
+		EEE3A551A5EF3EE7A795BD3E /* FaceVerification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEF34BC229EF6EFB7F4BFFA /* FaceVerification.swift */; };
+		EFF3AC13E44E5A92196002DA /* IdentityLivenessOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACB01B3704A8FAC12FA6411 /* IdentityLivenessOperation.swift */; };
+		F33AE311C9127366254F9897 /* IdentityJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E479AF70E638E5BA343EC5C4 /* IdentityJournal.swift */; };
 		F874D92C770A4B26EDC06935 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		F984B8C4DB76FF836B1F1DFC /* IdentityRevocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA9B51D24AB4AA7CA0E2643 /* IdentityRevocation.swift */; };
 		FBD9C0AAD5764A6B15A15595 /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F52582871A6E4FA0F59726 /* FaceDetector.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +92,13 @@
 			remoteGlobalIDString = EFC88BE002DD0980AB3DAFC1;
 			remoteInfo = ODAIKitCore;
 		};
+		75D8DFF503D6585B1139BCBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 874D3CC26E555F5BFDD3C03C;
+			remoteInfo = ODAIKitModelStore;
+		};
 		C24A513999FD036ECBE09980 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 077614432308B7CC82441D55 /* Project object */;
@@ -74,6 +112,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 7D69EBACE004E6BAC09D83DC;
 			remoteInfo = ODAIKitSpeech;
+		};
+		E1ACC4BEF7A304BE21D666CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFC88BE002DD0980AB3DAFC1;
+			remoteInfo = ODAIKitCore;
 		};
 		E614FAE522D0238D748C0CA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -93,27 +138,56 @@
 
 /* Begin PBXFileReference section */
 		0278B7DADAED87DB634BDED5 /* VisionFaceDetector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VisionFaceDetector.swift; path = Sources/ODAIKitAppleVision/VisionFaceDetector.swift; sourceTree = "<group>"; };
+		05A0C5087D6BAEB12ABAD20E /* IdentityAuthorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityAuthorization.swift; path = Sources/ODAIKitIdentity/IdentityAuthorization.swift; sourceTree = "<group>"; };
+		0BEF34BC229EF6EFB7F4BFFA /* FaceVerification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceVerification.swift; path = Sources/ODAIKitIdentity/FaceVerification.swift; sourceTree = "<group>"; };
+		0C59C13A18066C82FB5E037A /* GalleryCatalog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GalleryCatalog.swift; path = Sources/ODAIKitIdentity/GalleryCatalog.swift; sourceTree = "<group>"; };
 		180827F381A9FF1D9FD308FC /* ODAIKitFace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitFace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		199E592263186548423B158D /* IdentityPolicyCodecs.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityPolicyCodecs.swift; path = Sources/ODAIKitIdentity/IdentityPolicyCodecs.swift; sourceTree = "<group>"; };
+		1BCEDF5FCBA3AA67F169FC96 /* IdentityGalleryOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityGalleryOperation.swift; path = Sources/ODAIKitIdentity/IdentityGalleryOperation.swift; sourceTree = "<group>"; };
+		1F691F270D1FE0D65FD0ACB2 /* IndexStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IndexStore.swift; path = Sources/ODAIKitIdentity/IndexStore.swift; sourceTree = "<group>"; };
+		20ECBC274B21187A3A5E4761 /* IdentityCrypto.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityCrypto.swift; path = Sources/ODAIKitIdentity/IdentityCrypto.swift; sourceTree = "<group>"; };
 		21C6FD16AB0674085D36A0A2 /* ModelLease.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelLease.swift; path = Sources/ODAIKitModelStore/ModelLease.swift; sourceTree = "<group>"; };
 		24B559AC07B15B943927A218 /* ODAIKitModelStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitModelStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		251DCF4818C5B910F8056A31 /* IdentityWireValidation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityWireValidation.swift; path = Sources/ODAIKitIdentity/IdentityWireValidation.swift; sourceTree = "<group>"; };
+		2697C9F5448D517E5196CA0B /* IdentityStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityStore.swift; path = Sources/ODAIKitIdentity/IdentityStore.swift; sourceTree = "<group>"; };
+		2ACB01B3704A8FAC12FA6411 /* IdentityLivenessOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityLivenessOperation.swift; path = Sources/ODAIKitIdentity/IdentityLivenessOperation.swift; sourceTree = "<group>"; };
+		356B145C70501D9B48F78AC7 /* IdentityOperationTicket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityOperationTicket.swift; path = Sources/ODAIKitIdentity/IdentityOperationTicket.swift; sourceTree = "<group>"; };
+		35C45DD1192427D52D280690 /* LocalIdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocalIdentityBackend.swift; path = Sources/ODAIKitIdentity/LocalIdentityBackend.swift; sourceTree = "<group>"; };
+		4098819D18DF89E8F6C0E290 /* IdentityContractCodecs.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityContractCodecs.swift; path = Sources/ODAIKitIdentity/IdentityContractCodecs.swift; sourceTree = "<group>"; };
 		40D260AE9C59C8AB60896569 /* FaceObservation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceObservation.swift; path = Sources/ODAIKitFace/FaceObservation.swift; sourceTree = "<group>"; };
+		41866830051FC001F515E083 /* IdentityEnrollment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityEnrollment.swift; path = Sources/ODAIKitIdentity/IdentityEnrollment.swift; sourceTree = "<group>"; };
 		44F52582871A6E4FA0F59726 /* FaceDetector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceDetector.swift; path = Sources/ODAIKitFace/FaceDetector.swift; sourceTree = "<group>"; };
 		476B53BC264DC0300F3ED7BC /* Availability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Availability.swift; path = Sources/ODAIKitCore/Availability.swift; sourceTree = "<group>"; };
 		4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageGeometry.swift; path = Sources/ODAIKitFace/ImageGeometry.swift; sourceTree = "<group>"; };
 		585E9B24E203B35917F6D632 /* TaskGate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskGate.swift; path = Sources/ODAIKitCore/TaskGate.swift; sourceTree = "<group>"; };
 		5B27A47D43660B453108C4A1 /* FaceDetectionClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceDetectionClient.swift; path = Sources/ODAIKitFace/FaceDetectionClient.swift; sourceTree = "<group>"; };
+		63B4B332FA6F8B400CFD924A /* TestIdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestIdentityBackend.swift; path = Sources/ODAIKitIdentity/TestIdentityBackend.swift; sourceTree = "<group>"; };
 		6568ADE1C602A8407F60A6AE /* ModelStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelStore.swift; path = Sources/ODAIKitModelStore/ModelStore.swift; sourceTree = "<group>"; };
+		65806FDB767FCB54FE5F2921 /* IdentityContracts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityContracts.swift; path = Sources/ODAIKitIdentity/IdentityContracts.swift; sourceTree = "<group>"; };
+		6B9A49CE061532935F71D882 /* GallerySnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GallerySnapshot.swift; path = Sources/ODAIKitIdentity/GallerySnapshot.swift; sourceTree = "<group>"; };
+		7719F88D02917C7C358D4FB1 /* IdentityStopSignal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityStopSignal.swift; path = Sources/ODAIKitIdentity/IdentityStopSignal.swift; sourceTree = "<group>"; };
+		7D92A232996FA126F753F32B /* IdentityTemplateLease.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityTemplateLease.swift; path = Sources/ODAIKitIdentity/IdentityTemplateLease.swift; sourceTree = "<group>"; };
+		81B6CF6558B298D0F7E5CED9 /* FaceLiveness.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceLiveness.swift; path = Sources/ODAIKitIdentity/FaceLiveness.swift; sourceTree = "<group>"; };
 		858C773C2B112A7F9B06DDF0 /* ODAIKitAppleVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitAppleVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8598072235A1E65C859DE0DA /* InstallCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InstallCoordinator.swift; path = Sources/ODAIKitModelStore/InstallCoordinator.swift; sourceTree = "<group>"; };
 		8AA6D77F420A4D2DBBD5179F /* LatestFrameQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LatestFrameQueue.swift; path = Sources/ODAIKitCore/LatestFrameQueue.swift; sourceTree = "<group>"; };
 		94ED1EEB7B1AD380F105800B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		9620D6921B51B5D3D408818C /* AppleSpeechRecognizerBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleSpeechRecognizerBackend.swift; path = Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift; sourceTree = "<group>"; };
 		A132258ADD09AF9EEF7989FF /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
+		A8B0A4C80736172E54494CB8 /* IdentityErrors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityErrors.swift; path = Sources/ODAIKitIdentity/IdentityErrors.swift; sourceTree = "<group>"; };
+		A8CC727BB00DD3072C7CB20A /* KeychainIdentityKeyProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainIdentityKeyProvider.swift; path = Sources/ODAIKitIdentity/KeychainIdentityKeyProvider.swift; sourceTree = "<group>"; };
 		AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACA675A66C3CF1CFFE67B7A0 /* ODAIKitIdentity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitIdentity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B867539A8E2FCC7317BB20 /* ODAIKitAppleSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitAppleSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelDownloader.swift; path = Sources/ODAIKitModelStore/ModelDownloader.swift; sourceTree = "<group>"; };
 		BE4F8AE1FD0B502BE5D40CB2 /* ODAIKitSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9BEB93AABBF7EC8E2589C5B /* IdentityTemplatePayload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityTemplatePayload.swift; path = Sources/ODAIKitIdentity/IdentityTemplatePayload.swift; sourceTree = "<group>"; };
+		CBA9B51D24AB4AA7CA0E2643 /* IdentityRevocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityRevocation.swift; path = Sources/ODAIKitIdentity/IdentityRevocation.swift; sourceTree = "<group>"; };
+		CDA68DF876300C7C5D099A75 /* IdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityBackend.swift; path = Sources/ODAIKitIdentity/IdentityBackend.swift; sourceTree = "<group>"; };
 		DB2FECE6D5DC16691BD1A5B0 /* AppleAVSpeechBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleAVSpeechBackend.swift; path = Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift; sourceTree = "<group>"; };
+		DC62F260C1E5E3E210CC2FF2 /* IdentityDeletion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityDeletion.swift; path = Sources/ODAIKitIdentity/IdentityDeletion.swift; sourceTree = "<group>"; };
+		E108CAD03F5016A712A73981 /* FaceIdentification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceIdentification.swift; path = Sources/ODAIKitIdentity/FaceIdentification.swift; sourceTree = "<group>"; };
+		E479AF70E638E5BA343EC5C4 /* IdentityJournal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityJournal.swift; path = Sources/ODAIKitIdentity/IdentityJournal.swift; sourceTree = "<group>"; };
 		F24346D636307E745B03B9CE /* SpeechClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpeechClient.swift; path = Sources/ODAIKitSpeech/SpeechClient.swift; sourceTree = "<group>"; };
 		F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelManifest.swift; path = Sources/ODAIKitModelStore/ModelManifest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -166,6 +240,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFFC37A2BED3017E3256DD91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2019F2341B1AD64F302602BF /* Foundation.framework in Frameworks */,
+				3A7530B22CF5A51DB9BDF3FA /* ODAIKitCore.framework in Frameworks */,
+				DDBAC062C4C652DBF34C1F10 /* ODAIKitModelStore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E796F33E9CABB7FCB8964EF6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -195,6 +279,7 @@
 				858C773C2B112A7F9B06DDF0 /* ODAIKitAppleVision.framework */,
 				BE4F8AE1FD0B502BE5D40CB2 /* ODAIKitSpeech.framework */,
 				B9B867539A8E2FCC7317BB20 /* ODAIKitAppleSpeech.framework */,
+				ACA675A66C3CF1CFFE67B7A0 /* ODAIKitIdentity.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,6 +305,34 @@
 				F24346D636307E745B03B9CE /* SpeechClient.swift */,
 				DB2FECE6D5DC16691BD1A5B0 /* AppleAVSpeechBackend.swift */,
 				9620D6921B51B5D3D408818C /* AppleSpeechRecognizerBackend.swift */,
+				E108CAD03F5016A712A73981 /* FaceIdentification.swift */,
+				81B6CF6558B298D0F7E5CED9 /* FaceLiveness.swift */,
+				0BEF34BC229EF6EFB7F4BFFA /* FaceVerification.swift */,
+				0C59C13A18066C82FB5E037A /* GalleryCatalog.swift */,
+				6B9A49CE061532935F71D882 /* GallerySnapshot.swift */,
+				05A0C5087D6BAEB12ABAD20E /* IdentityAuthorization.swift */,
+				CDA68DF876300C7C5D099A75 /* IdentityBackend.swift */,
+				4098819D18DF89E8F6C0E290 /* IdentityContractCodecs.swift */,
+				65806FDB767FCB54FE5F2921 /* IdentityContracts.swift */,
+				20ECBC274B21187A3A5E4761 /* IdentityCrypto.swift */,
+				DC62F260C1E5E3E210CC2FF2 /* IdentityDeletion.swift */,
+				41866830051FC001F515E083 /* IdentityEnrollment.swift */,
+				A8B0A4C80736172E54494CB8 /* IdentityErrors.swift */,
+				1BCEDF5FCBA3AA67F169FC96 /* IdentityGalleryOperation.swift */,
+				E479AF70E638E5BA343EC5C4 /* IdentityJournal.swift */,
+				2ACB01B3704A8FAC12FA6411 /* IdentityLivenessOperation.swift */,
+				356B145C70501D9B48F78AC7 /* IdentityOperationTicket.swift */,
+				199E592263186548423B158D /* IdentityPolicyCodecs.swift */,
+				CBA9B51D24AB4AA7CA0E2643 /* IdentityRevocation.swift */,
+				7719F88D02917C7C358D4FB1 /* IdentityStopSignal.swift */,
+				2697C9F5448D517E5196CA0B /* IdentityStore.swift */,
+				7D92A232996FA126F753F32B /* IdentityTemplateLease.swift */,
+				C9BEB93AABBF7EC8E2589C5B /* IdentityTemplatePayload.swift */,
+				251DCF4818C5B910F8056A31 /* IdentityWireValidation.swift */,
+				1F691F270D1FE0D65FD0ACB2 /* IndexStore.swift */,
+				A8CC727BB00DD3072C7CB20A /* KeychainIdentityKeyProvider.swift */,
+				35C45DD1192427D52D280690 /* LocalIdentityBackend.swift */,
+				63B4B332FA6F8B400CFD924A /* TestIdentityBackend.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,6 +383,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DE35A26AB3D1DAE064CF6CDB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4E4B558F98B07CD1E74DE7E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -297,6 +417,26 @@
 			name = ODAIKitFace;
 			productName = ODAIKitFace;
 			productReference = 180827F381A9FF1D9FD308FC /* ODAIKitFace.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		113749C3261A67104AF67309 /* ODAIKitIdentity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F4B5839ED4D5DEBCF00CD02 /* Build configuration list for PBXNativeTarget "ODAIKitIdentity" */;
+			buildPhases = (
+				DE35A26AB3D1DAE064CF6CDB /* Headers */,
+				010ED84A76C53BC6BABC1247 /* Sources */,
+				BFFC37A2BED3017E3256DD91 /* Frameworks */,
+				DFB95F5724DAA60AA14751FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1C7838CCF83BC28B870B30B /* PBXTargetDependency */,
+				B91566F6DAD3C6DA58F788D3 /* PBXTargetDependency */,
+			);
+			name = ODAIKitIdentity;
+			productName = ODAIKitIdentity;
+			productReference = ACA675A66C3CF1CFFE67B7A0 /* ODAIKitIdentity.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		1846E7B9482629E6A8C74FD2 /* ODAIKitAppleSpeech */ = {
@@ -425,6 +565,7 @@
 				FC68CA9BB860F983B381B99D /* ODAIKitAppleVision */,
 				7D69EBACE004E6BAC09D83DC /* ODAIKitSpeech */,
 				1846E7B9482629E6A8C74FD2 /* ODAIKitAppleSpeech */,
+				113749C3261A67104AF67309 /* ODAIKitIdentity */,
 			);
 		};
 /* End PBXProject section */
@@ -465,6 +606,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DFB95F5724DAA60AA14751FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FFC7AA03B486039CA2736DF5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -475,6 +623,41 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		010ED84A76C53BC6BABC1247 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16F26DC8947BA25D9FAC0970 /* FaceIdentification.swift in Sources */,
+				AEB7A925C5BF66431CB312D1 /* FaceLiveness.swift in Sources */,
+				EEE3A551A5EF3EE7A795BD3E /* FaceVerification.swift in Sources */,
+				69AE2FC526CCF3B668180639 /* GalleryCatalog.swift in Sources */,
+				9CEE41EB5E70CB93054399AA /* GallerySnapshot.swift in Sources */,
+				0E4D4156C3249BE6D12B1D96 /* IdentityAuthorization.swift in Sources */,
+				5CFC154A02D03E644A9DBB3B /* IdentityBackend.swift in Sources */,
+				9DEE06588AA8263AB962EDFB /* IdentityContractCodecs.swift in Sources */,
+				453F92DD0E7BAEA9BF5EDF26 /* IdentityContracts.swift in Sources */,
+				56ABF4F4EF518B042C08AF8D /* IdentityCrypto.swift in Sources */,
+				9FBA6901574B6656CBA70F88 /* IdentityDeletion.swift in Sources */,
+				C192D88DD16107B3C37A17B0 /* IdentityEnrollment.swift in Sources */,
+				45C72765F7B8B1FF60EA2587 /* IdentityErrors.swift in Sources */,
+				A5AECA25BA3624F5F6517C46 /* IdentityGalleryOperation.swift in Sources */,
+				F33AE311C9127366254F9897 /* IdentityJournal.swift in Sources */,
+				EFF3AC13E44E5A92196002DA /* IdentityLivenessOperation.swift in Sources */,
+				58255A0698D7A2E6A08B1221 /* IdentityOperationTicket.swift in Sources */,
+				A4CDA10D0E97F7A9A4E3A765 /* IdentityPolicyCodecs.swift in Sources */,
+				F984B8C4DB76FF836B1F1DFC /* IdentityRevocation.swift in Sources */,
+				D572022EBBF3ED78F901459F /* IdentityStopSignal.swift in Sources */,
+				BB02C8D38DEA33AD2CC8D272 /* IdentityStore.swift in Sources */,
+				C814E8CBB34E9BB5B367332B /* IdentityTemplateLease.swift in Sources */,
+				54CCFEB543CEC3AC8CB73453 /* IdentityTemplatePayload.swift in Sources */,
+				EAFF22EA976D513A674D1F20 /* IdentityWireValidation.swift in Sources */,
+				BB8E3B3253EE7E49B98BA88C /* IndexStore.swift in Sources */,
+				52A7399B5E7454CCA0E284CD /* KeychainIdentityKeyProvider.swift in Sources */,
+				B2BC68C7874ADFC190295439 /* LocalIdentityBackend.swift in Sources */,
+				E52090F8A227987A8469D8AC /* TestIdentityBackend.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		386FECCD531986FF5F4EFF58 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -565,6 +748,18 @@
 			name = ODAIKitCore;
 			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
 			targetProxy = C24A513999FD036ECBE09980 /* PBXContainerItemProxy */;
+		};
+		B1C7838CCF83BC28B870B30B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitCore;
+			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
+			targetProxy = E1ACC4BEF7A304BE21D666CE /* PBXContainerItemProxy */;
+		};
+		B91566F6DAD3C6DA58F788D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitModelStore;
+			target = 874D3CC26E555F5BFDD3C03C /* ODAIKitModelStore */;
+			targetProxy = 75D8DFF503D6585B1139BCBC /* PBXContainerItemProxy */;
 		};
 		CBF9B76B26D86FD5A206BDF8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -934,6 +1129,33 @@
 			};
 			name = Release;
 		};
+		67B7519F2B139D2B75572631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitidentity;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		7CEFAA655D8A4C94CBAACD42 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1014,6 +1236,32 @@
 			};
 			name = Debug;
 		};
+		FC08CCCE439DCA991855470B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitidentity;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1049,6 +1297,15 @@
 			buildConfigurations = (
 				252C12F51233681FD9386066 /* Debug */,
 				27BAB577E4F9FC243F48FC7A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F4B5839ED4D5DEBCF00CD02 /* Build configuration list for PBXNativeTarget "ODAIKitIdentity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67B7519F2B139D2B75572631 /* Release */,
+				FC08CCCE439DCA991855470B /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

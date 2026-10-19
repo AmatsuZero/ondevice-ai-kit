@@ -90,6 +90,20 @@
                ReferencedContainer = "container:OnDeviceAIKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "113749C3261A67104AF67309"
+               BuildableName = "ODAIKitIdentity.framework"
+               BlueprintName = "ODAIKitIdentity"
+               ReferencedContainer = "container:OnDeviceAIKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

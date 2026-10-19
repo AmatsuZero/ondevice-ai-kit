@@ -1,6 +1,6 @@
 # 分阶段交付与恢复入口
 
-更新时间：2026-10-18。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main。
+更新时间：2026-10-19。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main。
 
 ## 执行规则
 
@@ -14,7 +14,7 @@
 
 ## 当前范围与后续功能
 
-当前 KMP Demo 的算法入口是**人脸检测与关键点**，原生 SDK 另已接入系统 TTS 与文件 ASR；VLM 与视频超分的独立探针状态见下表。当前尚不提供生产身份识别、1:1 比对、1:N 搜索或活体认证。已实现的 Core、任务生命周期、最新帧队列、ModelStore 和分发工程是后续能力共用的基础设施；P10 正在构建独立身份存储与授权生命周期。
+当前 KMP Demo 的算法入口是**人脸检测与关键点**，并有独立的身份/活体控件与宿主配置入口；原生 SDK 另已接入系统 TTS 与文件 ASR；VLM 与视频超分的独立探针状态见下表。当前尚不提供生产身份识别、1:1 比对、1:N 搜索或活体认证。已实现的 Core、任务生命周期、最新帧队列、ModelStore 和分发工程是后续能力共用的基础设施；P10 已实现独立身份存储、授权生命周期、类型化 bridge 与可裁剪分发；生产算法门槛仍待通过。
 
 | 后续能力 | SDK 与 Demo 预计交付 | 对应阶段 |
 | --- | --- | --- |
@@ -23,7 +23,7 @@
 | 图像理解 / 图生文 / 多模态 | 模型会话、生成/取消、结果展示；按模型支持范围增加输入类型 | P8 比较 SmolVLM2、Florence-2、MiniCPM-V 等，P9 先验证单模型/单平台，再分包接入 SDK/Demo 及另一平台 |
 | 模型管理与按需加载 | 模型下载/校验/安装/删除、运行时加载/卸载、版本与资源状态；Demo 提供相应流程 | 现有 ModelStore 基础上，随首个自有模型接入补齐真实链路 |
 | 后端与性能比较 | 按能力查询可用性、明确实际后端；模型/后端选择和 benchmark 展示 | P5 建立验收基线，各能力接入时补充样本与指标，P11 统一验收 |
-| 人脸身份与活体 | 1:1、1:N、活体分别设计接口和数据生命周期，再增加 Demo 流程 | P10 已批准规格与实施计划，原生身份存储实施中 |
+| 人脸身份与活体 | 1:1、1:N、活体分别设计接口和数据生命周期，再增加 Demo 流程 | P10 已完成原生契约/存储/引擎与 bridge/Demo，独立分发验收中；生产模型/PAD/校准待定 |
 
 这些仍是项目后续目标。P6/P7/P8/P9 的“调研/探针”不是完整功能交付；通过许可证、转换/运行及设备资源验证后，再为选定方案创建具体实现包。Core ML、MLX、LiteRT/TensorFlow Lite、ONNX、llama.cpp 是待按能力选择的后端，不要求所有模型在所有框架/平台重复实现。iOS15 保持基础下限，高版本能力按 availability 或独立增强模块接入。
 
@@ -50,7 +50,7 @@
 | P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 部分完成：iOS 27 真机确认 VideoToolbox 系统 SR 支持 4×并完成 48 帧固定视频链路；已记录内存采样、统一色彩/HEVC 编码的 SR/双三次对照和自然视频真机质量配对（两路均 48/48 帧、BT.709 元数据一致，质量仍为 unverified）；双路流程在 SR 阶段和基线阶段均验证取消无残留输出，重启后两路再处理成功，随后两次取消后同进程重入也已通过（PID 不变、两路各 48 帧）。SR 模型传递函数、逐帧主观质量、Android/最低系统及 SDK/Demo 接入仍待补，见 [P7 记录](validation/video-sr-backends.md) |
 | P8 VLM 调研 | SmolVLM2/huggingsnap、Florence-2、MiniCPM-V及其他指定 checkpoint | mobile-vlm.md 记录许可、平台、体积、内存、证据等级；不同时接入多个模型 | 已完成候选调研与 P9 单路线选择，见 [P8 记录](validation/mobile-vlm.md)；移动端实测归 P9 |
 | P9 VLM 单模型试验 | 根据 P8 选择一个 checkpoint、一个平台、一个 runtime | 固定图像→输出→资源/耗时原始证据；随后另包推进第二平台 | 单平台探针已通过：SmolVLM2 500M-Video-Instruct-mlx + iOS18/MLXVLM；固定资产、模拟器 16/16、签名设备构建、iPhone 16 Pro Max 成功/取消/重复会话和进程常驻内存采样均有证据；质量基准与 Android 第二平台待后续 |
-| P10 人脸身份/活体设计 | 1:1、1:N、活体分别设计数据与指标 | [身份与活体规格](superpowers/specs/2026-10-17-face-identity-liveness-design.md)；阈值、授权删除与特征生命周期；独立停止 | 书面规格已获用户认可；含 12 个工作包的[实施计划](superpowers/plans/2026-10-17-face-identity-liveness.md)已确认实施。实施前核对已修正 selection 命名冲突、Task 4 backend/policy 先于存储的依赖顺序和 codec/授权边界；[模型许可预研](validation/p10-identity-model-selection.md)已有固定上游 revision 的证据，未选模型、未下载权重。Task 1 契约与 Task 4 后端/策略层已实现；Task 2 已实现加密 journal、持久授权与撤销、enrollment、模板 lease、template/candidate/domain 两阶段删除和 deadline/取消等待；writer retirement/drain 已通过双端测试和独立复审，Android API35 与 iOS27 完整 Store/secure-key 同进程生命周期探针均已通过，见[P10 进展](validation/p10-face-identity.md)。真实模型、授权数据、阈值/PAD 校准和设备验收仍为独立门槛 |
+| P10 人脸身份/活体设计 | 1:1、1:N、活体分别设计数据与指标 | [身份与活体规格](superpowers/specs/2026-10-17-face-identity-liveness-design.md)；阈值、授权删除与特征生命周期；独立停止 | 书面规格已获用户认可；含 12 个工作包的[实施计划](superpowers/plans/2026-10-17-face-identity-liveness.md)已确认实施。实施前核对已修正 selection 命名冲突、Task 4 backend/policy 先于存储的依赖顺序和 codec/授权边界；[模型许可预研](validation/p10-identity-model-selection.md)已有固定上游 revision 的证据，未选模型、未下载权重。Task 1–8 契约、加密存储/删除、gallery、1:1/1:N、活体会话和模型 lease 已实现；Task 11 双端 native bridge、独立 Demo 控件与宿主配置已完成，含 Android API35 UI 冒烟及两种 iOS KMP ABI 测试；Task 12 七个 Apple XCFramework、Identity 独立二进制 consumer 与 Maven consumer 已通过本地验收，最终独立分支审查待完成。最新 Apple371/371、Android Identity319/319、分发与工具测试见[P10 进展](validation/p10-face-identity.md)。Task 9/10 生产模型/PAD、授权数据、校准和最低系统设备仍是未通过门槛 |
 | P11 SDK/Demo 最终 benchmark 验收 | 冻结候选 SDK commit、模型 revision、测试输入和设备矩阵；对届时实际交付的每项能力与已接入后端统一运行正确性、质量、延迟、资源、取消和持续运行验证 | 保留逐 run 原始 JSON；生成按设备/OS/能力/后端分组的 p50/p95 与质量报告及一页状态矩阵；逐项标记 pass/fail/unverified/unavailable，列出未达标项和发布结论；停止 | 待各能力实现与分阶段 benchmark 完成后执行 |
 
 P1/P2 是此前未完成独立审查的拆分；二者已完成，但基础 SDK 仍需后续 P3/P4/P5 验收，不能据此声称完整工程可发布。P3 不要求先解决模拟器 Vision Code9；真机结果另行记录。iOS15 保持基础下限，高版本能力通过 availability/独立 backend 接入。

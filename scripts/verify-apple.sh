@@ -7,6 +7,7 @@ swift test --package-path apple > artifacts/verification/swift-tests.log 2>&1 ||
 if grep -Eq "Some test targets reported failures|Test Suite .* failed|error:" artifacts/verification/swift-tests.log; then tail -60 artifacts/verification/swift-tests.log; exit 1; fi
 tail -15 artifacts/verification/swift-tests.log
 python3 scripts/gradle-local.py :kmp-binding:iosSimulatorArm64Test :kmp-binding:linkDebugFrameworkIosSimulatorArm64 :demo:shared:iosSimulatorArm64Test :demo:shared:linkDebugFrameworkIosSimulatorArm64 --console=plain
+python3 -m unittest discover -s tools/tests -p "test_*distribution*.py" -v
 sh scripts/check-swift-bridge.sh
 sh scripts/check-camera-lifecycle.sh
 sh scripts/check-photo-submission.sh
