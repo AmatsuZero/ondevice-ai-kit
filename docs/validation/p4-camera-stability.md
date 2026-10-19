@@ -106,6 +106,22 @@
 - 只附着本项目 Demo 的 Leaks 模板采集完成，`P4-ios-resource-leaks-20261017.trace` 记录 **96.019181 秒**。`xctrace export --toc` 确认存在 Allocations 和 Leaks tracks；可导出的 data tables 没有泄漏/分配统计 schema，因此本次尚未取得可核验的泄漏摘要，不能据此报告零泄漏或完整资源释放通过。
 - trace 约 3.4 GB，仅留在 Git 忽略的 `artifacts/`，不加入 Git/LFS 或上传；xcresult、日志和导出 XML 也仅保存在该目录。完整相机/桥接资源释放、GPU/系统服务资源与最低系统验收仍未完成。
 
+### Leaks 明细复核与当前版本重现（2026-10-19）
+
+- 对历史 trace 直接导出 Leaks detail 后发现 **3 个 `GrOp`、共 384 字节**；其中两项责任栈指向 `OnDeviceAIDemo.debug.dylib` 的 Skia `AtlasTextOp::Make`，另一个栈达到 Instruments 的 call-stack limit。历史记录不能证明当前源码仍有相同问题，但也不能报告零泄漏。
+- 用当前提交 `98da9a9` 的同一相机 UI 用例在 iPhone 16 Pro Max / iOS 27.0.1 重跑，xcresult `P4-ios-leaks-overlap-20261019.xcresult` 为 **1/1 通过、0 失败，133.547 秒**。通过核对安装 bundle 与 PID `15804`，Leaks trace `P4-ios-leaks-current-pid15804-20261019.trace` 与相机进程重叠 **37.753672 秒**；导出的 detail 仍为 **3 个 `GrOp`、384 字节**。
+- 该有效窗口为 21:40:51.055–21:41:28.809，覆盖持续相机用例后段、用户停止后的观察及目标退出；不覆盖整个两分钟窗口。最初 `P4-ios-leaks-repro-20261019.trace` 附着旧 PID `13348` 且在第一轮用例结束后才开始，其空表不能作为本轮零泄漏证据；随后按名称自动附着又因多个同名进程而 exit20，未产生有效 trace。当前证据只采用与安装 bundle 路径一致的 PID `15804`。
+- 当前复现只建立了“在该设备、该 UI/渲染路径和采样窗口中观察到的泄漏对象”事实，尚未证明根因来自 SDK 相机桥、Compose/Skia 文本渲染或系统服务，也未证明进程终止后的可回收状态。原始 trace 和导出 XML 保留在忽略目录；摘要哈希见 `artifacts/P4-leaks-export-20261019/exports.json`。下一步需用最小 UI/渲染路径和同一 trace 模板隔离责任边界，再决定是否属于本项目可修复缺陷。
+
+可重复导出方式（无需依赖 `data/table` 的 schema 列表）：
+
+```sh
+xcrun xctrace export --input <trace> --xpath '/trace-toc/run[@number="1"]/tracks/track[@name="Leaks"]/details/detail[@name="Leaks"]' --output <leaks.xml>
+xcrun xctrace export --input <trace> --xpath '/trace-toc/run[@number="1"]/tracks/track[@name="Allocations"]/details/detail[@name="Statistics"]' --output <allocations.xml>
+```
+
+Allocations 的 `persistent-bytes` 是分配统计，不等同进程 physical footprint/峰值；本次不据此改写既有内存测量。
+
 ## 身份 UI 集成后的 iOS 回归（2026-10-19）
 
 - 在提交 `bb89516` 的 iPhone 16 Pro Max 上复测三个已有用例：Photo Picker 取消、Debug Orientation 6 和相机前后台/用户停止。`P4-ios-post-identity-refreshed-20261019.xcresult` **3/3 通过、0 失败，29.795 秒**；日志 `/tmp/odai-p4-post-identity-ui-refreshed.log`，xcodebuild exit0。
