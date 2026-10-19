@@ -45,6 +45,8 @@ class IdentityStore internal constructor(
     private val operations = mutableMapOf<UUID, Operation>()
     private data class GalleryOperation(val ticket: IdentityGalleryOperationTicket, var terminal: IdentityStopReason? = null)
     private val galleryOperations = mutableMapOf<UUID, GalleryOperation>()
+    private data class LivenessOperation(val ticket: IdentityLivenessOperation, var terminal: IdentityStopReason? = null)
+    private val livenessOperations = mutableMapOf<UUID, LivenessOperation>()
 
     init {
         val initial = IdentityAuthorizationState(purpose)
@@ -153,9 +155,11 @@ class IdentityStore internal constructor(
         return receipt
     }
 
-    private fun invalidateOperations(domain: String, beforeEpoch: Long) = operations.values.filter {
+    private fun invalidateOperations(domain: String, beforeEpoch: Long) = (operations.values.filter {
         it.ticket.grant.revocationDomainId == domain && it.ticket.grant.authorizationEpoch < beforeEpoch
-    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }.also(::reserveAuthorizationStopsLocked)
+    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal } + livenessOperations.values.filter {
+        it.ticket.grant.revocationDomainId == domain && it.ticket.grant.authorizationEpoch < beforeEpoch
+    }.map { it.terminal = IdentityStopReason.AUTHORIZATION_REVOKED; it.ticket.stopSignal }).also(::reserveAuthorizationStopsLocked)
 
     private fun invalidateGalleryOperations(domain: String, beforeEpoch: Long) = galleryOperations.values.filter { operation ->
         val ticket = operation.ticket
@@ -171,6 +175,51 @@ class IdentityStore internal constructor(
      */
     internal fun validateGalleryOwnership(ownership: OwnershipAuthorization) = mutation {
         IdentityAuthorizationState.requireOwnership(ownership, storeId, authorizationProvider, wallClock.nowMillis)
+    }
+
+    /** Authorize PAD without enrolling a fake candidate or borrowing an identity capability. */
+    internal fun beginLivenessOperation(grant: AuthorizationGrant): IdentityLivenessOperation {
+        val (signals, cleanup) = mutation {
+            val next = authorization.admitting(grant, IdentityScope.LIVENESS, authorizationProvider, wallClock.nowMillis)
+            val staleTemplates = templates.values.filter { record ->
+                val stored = authorization.recordedGrant(record.grantId)
+                stored != null && stored.authorizationEpoch < next.highestEpoch(stored.revocationDomainId)
+            }.map { it.ref.id }.sorted()
+            val nextDeletions = addDeletionFacts(staleTemplates, deletions)
+            if (next.canonicalJSON() != authorization.canonicalJSON()) {
+                next.admitting(grant, IdentityScope.LIVENESS, authorizationProvider, wallClock.nowMillis)
+                journalCommit(encode(storeId, next, candidates, revocations, templates, stages, nextDeletions, candidateDeletions))
+                authorization = next; deletions = nextDeletions
+            }
+            holdPurge(staleTemplates)
+            val epoch = next.highestEpoch(grant.revocationDomainId)
+            val signals = invalidateOperations(grant.revocationDomainId, epoch) +
+                invalidateGalleryOperations(grant.revocationDomainId, epoch).also(::reserveAuthorizationStopsLocked)
+            signals to staleTemplates
+        }
+        stopAndPurge(signals, cleanup)
+        // Cleanup callbacks may revoke/close this writer; registration follows their drain.
+        return mutation {
+            authorization.admitting(grant, IdentityScope.LIVENESS, authorizationProvider, wallClock.nowMillis)
+            IdentityLivenessOperation(grant).also { livenessOperations[it.id] = LivenessOperation(it) }
+        }
+    }
+
+    /** Consume the original ticket exactly once under the revocation/publication monitor. */
+    internal fun <T> finishLivenessOperation(ticket: IdentityLivenessOperation, publication: () -> T): T = mutation(allowClosed = true) {
+        val operation = livenessOperations[ticket.id]?.takeIf { it.ticket === ticket }
+            ?: throw IdentityError(IdentityErrorCode.INVALID_INPUT)
+        try {
+            if (operation.terminal == IdentityStopReason.AUTHORIZATION_REVOKED) throw IdentityError(IdentityErrorCode.AUTHORIZATION_REVOKED)
+            if (closed) throw IdentityError(IdentityErrorCode.CLOSED)
+            ticket.stopSignal.check()
+            authorization.admitting(ticket.grant, IdentityScope.LIVENESS, authorizationProvider, wallClock.nowMillis)
+            ticket.stopSignal.check()
+            publication()
+        } finally {
+            livenessOperations.remove(ticket.id)
+            releaseWriterIfDrainedLocked()
+        }
     }
 
     internal fun beginGalleryOperation(
@@ -651,6 +700,9 @@ class IdentityStore internal constructor(
             } + galleryOperations.values.map {
                 if (it.terminal != IdentityStopReason.AUTHORIZATION_REVOKED) it.terminal = IdentityStopReason.CLOSED
                 it.ticket.stopSignal to it.terminal!!
+            } + livenessOperations.values.map {
+                if (it.terminal != IdentityStopReason.AUTHORIZATION_REVOKED) it.terminal = IdentityStopReason.CLOSED
+                it.ticket.stopSignal to it.terminal!!
             })
         }
         deliverReservedStops(pending)
@@ -717,13 +769,19 @@ class IdentityStore internal constructor(
                 it.terminal = IdentityStopReason.CLOSED
                 it.ticket.stopSignal to IdentityStopReason.CLOSED
             }
+        } + livenessOperations.values.mapNotNull {
+            if (it.terminal == IdentityStopReason.AUTHORIZATION_REVOKED) null
+            else {
+                it.terminal = IdentityStopReason.CLOSED
+                it.ticket.stopSignal to IdentityStopReason.CLOSED
+            }
         })
         deferredRetirementStops += reserveStopsLocked(pending)
     }
 
     /** The only physical writer release point. Caller owns [gate]. */
     private fun releaseWriterIfDrainedLocked() {
-        if (closed && !operating && operations.isEmpty() && galleryOperations.isEmpty() && leases.isEmpty() && pendingStopDeliveries == 0 && !writerReleased) {
+        if (closed && !operating && operations.isEmpty() && galleryOperations.isEmpty() && livenessOperations.isEmpty() && leases.isEmpty() && pendingStopDeliveries == 0 && !writerReleased) {
             journal.close()
             writerReleased = true
         }

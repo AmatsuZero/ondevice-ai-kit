@@ -32,6 +32,11 @@ public actor IdentityStore {
         var terminal: IdentityStopReason?
     }
     private var galleryOperations: [UUID: GalleryOperation] = [:]
+    private struct LivenessOperation {
+        let ticket: IdentityLivenessOperation
+        var terminal: IdentityStopReason?
+    }
+    private var livenessOperations: [UUID: LivenessOperation] = [:]
     private var drainWaiters: [CheckedContinuation<Void, Never>] = []
 
     public init(root: URL, purpose: String, authorizationProvider: any IdentityAuthorizationProvider,
@@ -243,6 +248,11 @@ public actor IdentityStore {
             galleryOperations[id]?.terminal = .authorizationRevoked
             signals.append(operation.ticket.stopSignal)
         }
+        for (id, operation) in livenessOperations where operation.ticket.grant.revocationDomainId == domain &&
+            operation.ticket.grant.authorizationEpoch < epoch {
+            livenessOperations[id]?.terminal = .authorizationRevoked
+            signals.append(operation.ticket.stopSignal)
+        }
         return signals
     }
 
@@ -271,11 +281,11 @@ public actor IdentityStore {
             throw IdentityError(.embeddingSpaceMismatch)
         }
         guard Set(members.map { $0.ref.id }).count == members.count else { throw IdentityError(.invalidInput) }
-        try await admitGalleryGrant(grant)
-        for required in requiredGrants { try await admitGalleryGrant(required) }
+        try await admitGrant(grant, scope: .identification)
+        for required in requiredGrants { try await admitGrant(required, scope: .identification) }
         for member in members {
             try validateGalleryMember(member, space: embeddingSpace, requireEpoch: false)
-            try await admitGalleryGrant(member.grant)
+            try await admitGrant(member.grant, scope: .identification)
         }
         // Above cleanup can suspend; perform a complete final admission pass.
         try validateGalleryAuthorization(grant: grant, members: members, space: embeddingSpace, requiredGrants: requiredGrants)
@@ -317,9 +327,32 @@ public actor IdentityStore {
         _ = try authorization.admitting(member.grant, scope: .identification, provider: provider, nowMillis: wallClock.nowMillis)
     }
 
-    private func admitGalleryGrant(_ grant: AuthorizationGrant) async throws {
+    /// PAD admission is independent from candidate enrollment and gallery creation.
+    func beginLivenessOperation(grant: AuthorizationGrant) async throws -> IdentityLivenessOperation {
+        try await admitGrant(grant, scope: .liveness)
+        // Cleanup/stop delivery may suspend or reenter; recheck before registration.
         guard !closed else { throw IdentityError(.closed) }
-        let next = try authorization.admitting(grant, scope: .identification, provider: provider, nowMillis: wallClock.nowMillis)
+        _ = try authorization.admitting(grant, scope: .liveness, provider: provider, nowMillis: wallClock.nowMillis)
+        let ticket = IdentityLivenessOperation(grant: grant)
+        livenessOperations[ticket.id] = LivenessOperation(ticket: ticket)
+        return ticket
+    }
+
+    /// Final authorization and result publication share the same non-suspending gate.
+    func finishLivenessOperation<T>(_ ticket: IdentityLivenessOperation, publication: () throws -> T) throws -> T {
+        guard let operation = livenessOperations[ticket.id], operation.ticket === ticket else { throw IdentityError(.invalidInput) }
+        defer { livenessOperations.removeValue(forKey: ticket.id); maybeReleaseWriter() }
+        if operation.terminal == .authorizationRevoked { throw IdentityError(.authorizationRevoked) }
+        guard !closed else { throw IdentityError(.closed) }
+        try ticket.stopSignal.check()
+        _ = try authorization.admitting(ticket.grant, scope: .liveness, provider: provider, nowMillis: wallClock.nowMillis)
+        try ticket.stopSignal.check()
+        return try publication()
+    }
+
+    private func admitGrant(_ grant: AuthorizationGrant, scope: IdentityScope) async throws {
+        guard !closed else { throw IdentityError(.closed) }
+        let next = try authorization.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
         let targets = Set(templates.values.filter { record in
             guard let stored = next.recordedGrant(record.grantId) else { return false }
             return stored.revocationDomainId == grant.revocationDomainId && stored.authorizationEpoch < next.highestEpoch(domain: stored.revocationDomainId)
@@ -328,7 +361,7 @@ public actor IdentityStore {
         if next != authorization || nextDeletions.count != deletions.count {
             let bytes = try Self.encode(storeId: storeId, authorization: next, candidates: candidates, revocations: revocations,
                                         templates: templates, stages: stages, deletions: nextDeletions, candidateDeletions: candidateDeletions)
-            _ = try next.admitting(grant, scope: .identification, provider: provider, nowMillis: wallClock.nowMillis)
+            _ = try next.admitting(grant, scope: scope, provider: provider, nowMillis: wallClock.nowMillis)
             do { try journal.commit(bytes) } catch { retire(); throw error }
             authorization = next; deletions = nextDeletions
         }
@@ -725,6 +758,10 @@ public actor IdentityStore {
                 if operation.terminal == .authorizationRevoked { revoked.append(operation.ticket.stopSignal) }
                 else { galleryOperations[id]?.terminal = .closed; closing.append(operation.ticket.stopSignal) }
             }
+            for (id, operation) in livenessOperations {
+                if operation.terminal == .authorizationRevoked { revoked.append(operation.ticket.stopSignal) }
+                else { livenessOperations[id]?.terminal = .closed; closing.append(operation.ticket.stopSignal) }
+            }
             if !revoked.isEmpty || !closing.isEmpty {
                 pendingStopDeliveries += 1
                 let store = instanceId
@@ -749,7 +786,7 @@ public actor IdentityStore {
     }
 
     private func maybeReleaseWriter() {
-        guard closed, !writerReleased, operations.isEmpty, galleryOperations.isEmpty, templateLeases.isEmpty,
+        guard closed, !writerReleased, operations.isEmpty, galleryOperations.isEmpty, livenessOperations.isEmpty, templateLeases.isEmpty,
               pendingStopDeliveries == 0 else { return }
         try? journal.close()
         writerReleased = true
