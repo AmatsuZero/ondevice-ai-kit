@@ -92,3 +92,10 @@ Fresh verification:
 - Swift formatter strict lint, Ruby syntax, fresh standalone-project generation, overwrite refusal, and `git diff --check` passed. The local Ruby environment emits unrelated unbuilt-gem extension notices; no gem installation or environment mutation was performed.
 
 Xcode's current XCTest libraries report simulator deployment-version link warnings (15 target vs 17 XCTest support), plus skipped AppIntents metadata extraction. These tests ran on the available iOS 27.1 simulator, not an iOS 15 device. No production model, PAD algorithm, accuracy/calibration or minimum-device gate is unlocked by synthetic fixtures. No independent whole-branch review is claimed here. Task 11 remains active for host controls/configuration and the full Demo gate; Task 12 distribution and Tasks 9/10 production gates remain outstanding.
+
+
+## Demo selection preflight correction
+
+Before host UI wiring, a real common regression (`/tmp/odai-demo-explicit-backend-red.log`, 16 tests, 1 failure) showed that the ViewModel's default Identity availability preflight prevented all explicitly selected capability calls. This also conflated identity availability with the independent PAD engine. The UI now uses availability for display; actual method admission, backend choice and unavailable errors come from the native bridge. Unconfigured `UnavailableIdentityBridge` still reports UNVERIFIED synchronously and produces no result. Explicit enroll/verify/identify/PAD forwarding is covered with an unavailable default declaration.
+
+`/tmp/odai-demo-explicit-backend-green.log`: BUILD SUCCESSFUL; inspected XML Demo16/16 and binding6/6, zero failures/errors/skips; Android Demo APK assembly passed. A test generic-inference compile error was corrected before observing the behavioral RED and is not counted as failure evidence. This correction does not deliver host controls or unblock production backends.

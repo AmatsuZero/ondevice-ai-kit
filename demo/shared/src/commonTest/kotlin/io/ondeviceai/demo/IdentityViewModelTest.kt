@@ -20,7 +20,8 @@ private class FakeIdentityBridge : IdentityBridge by UnavailableIdentityBridge()
     var enrollmentCallback: IdentityCallback<IdentityEnrollmentResult>? = null
     var identificationCallback: IdentityCallback<IdentityIdentificationResult>? = null
     var livenessCallback: IdentityCallback<IdentityLivenessSession>? = null
-    override fun availability() = IdentityBridgeAvailability.Available("fixture.identity")
+    var advertisedAvailability: IdentityBridgeAvailability = IdentityBridgeAvailability.Available("fixture.identity")
+    override fun availability() = advertisedAvailability
     override fun verify(probe: IdentityProbeReference, template: IdentityTemplateReference,
         grant: IdentityAuthorizationGrant, options: IdentityVerificationOptions,
         backend: IdentityBackendSelection, callback: IdentityCallback<IdentityVerificationResult>): IdentityBridgeTask {
@@ -77,6 +78,33 @@ class IdentityViewModelTest {
         assertEquals(listOf(IdentityBackendSelection.Default, IdentityBackendSelection.Explicit("vendor.identity")), bridge.selections)
         assertTrue(model.state.busy)
         assertNull(model.state.error)
+    }
+    @Test fun explicitCapabilityCallsAreNotBlockedByDefaultIdentityAvailability() {
+        val bridge = FakeIdentityBridge().apply {
+            advertisedAvailability = IdentityBridgeAvailability.Unavailable(IdentityAvailabilityReason.BACKEND_UNAVAILABLE)
+        }
+        val model = IdentityViewModel(bridge)
+        val selection = IdentityBackendSelection.Explicit("host.plugin")
+        model.verify(probe, template, grant, options, selection)
+        assertEquals(1, bridge.callbacks.size)
+        model.enroll(probe, IdentityCandidateReference("candidate"), grant,
+            IdentityEnrollmentOptions(0.8, "host-quality", "v1"), selection)
+        assertNotNull(bridge.enrollmentCallback)
+        model.identify(probe, IdentityGalleryReference("gallery"), grant,
+            IdentityIdentificationOptions(3, null, "v1"), selection)
+        assertNotNull(bridge.identificationCallback)
+        model.openLiveness(grant, livenessOptions, selection)
+        assertNotNull(bridge.livenessCallback)
+        assertEquals<List<IdentityBackendSelection>>(List(4) { selection }, bridge.selections)
+        assertTrue(model.state.busy)
+        assertNull(model.state.error)
+    }
+    @Test fun unconfiguredBridgeStillReturnsUnavailableWithoutIdentityResults() {
+        val model = IdentityViewModel(UnavailableIdentityBridge())
+        model.verify(probe, template, grant, options)
+        assertEquals(IdentityBridgeFailure.Unavailable(IdentityAvailabilityReason.UNVERIFIED), model.state.error)
+        assertFalse(model.state.busy)
+        assertNull(model.state.verification)
     }
     @Test fun staleVerificationCallbackIsCancelledAndIgnored() {
         val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)

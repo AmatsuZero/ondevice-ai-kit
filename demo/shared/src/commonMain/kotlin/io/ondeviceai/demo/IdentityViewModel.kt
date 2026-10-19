@@ -34,7 +34,6 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
         if (closed) return
         val current = beginOperation()
-        if (!ensureAvailable()) return
         state = IdentityViewState(busy = true)
         var terminalDelivered = false
         val task = bridge.verify(probe, template, grant, options, backend, object : IdentityCallback<IdentityVerificationResult> {
@@ -55,7 +54,6 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
         if (closed) return
         val current = beginOperation()
-        if (!ensureAvailable()) return
         state = IdentityViewState(busy = true)
         var terminalDelivered = false
         val task = bridge.enroll(probe, candidate, grant, options, backend, object : IdentityCallback<IdentityEnrollmentResult> {
@@ -76,7 +74,6 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
         if (closed) return
         val current = beginOperation()
-        if (!ensureAvailable()) return
         state = IdentityViewState(busy = true)
         var terminalDelivered = false
         val task = bridge.identify(probe, gallery, grant, options, backend, object : IdentityCallback<IdentityIdentificationResult> {
@@ -96,7 +93,6 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
         if (closed) return
         val current = beginOperation(); livenessTerminalDelivered = false
-        if (!ensureAvailable()) return
         state = IdentityViewState(busy = true)
         var terminalDelivered = false
         val task = bridge.openLivenessSession(grant, options, backend, object : IdentityCallback<IdentityLivenessSession> {
@@ -138,13 +134,6 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
     fun close() { if (!closed) { closed = true; cancel(); bridge.close() } }
 
     private fun beginOperation(): Long { generation++; active?.cancel(); active = null; session?.close(); session = null; return generation }
-    private fun ensureAvailable(): Boolean {
-        val value = bridge.availability()
-        if (value is IdentityBridgeAvailability.Unavailable) {
-            state = IdentityViewState(error = IdentityBridgeFailure.Unavailable(value.reason)); return false
-        }
-        return true
-    }
     private fun acceptLivenessTerminal(current: Long, event: IdentityLivenessEvent) {
         if (current != generation || livenessTerminalDelivered) return
         if (event is IdentityLivenessEvent.Completed || event is IdentityLivenessEvent.Failed || event === IdentityLivenessEvent.Cancelled || event === IdentityLivenessEvent.Closed) {
