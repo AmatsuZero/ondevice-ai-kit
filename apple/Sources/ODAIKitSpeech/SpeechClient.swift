@@ -119,6 +119,7 @@ public actor SpeechClient {
     private let defaultBackendId: String
     private let registrations: [String: any SpeechBackend]
     private var closed = false
+    private var closeTask: Task<Void, Never>?
 
     public init(capability: SpeechCapability, defaultBackendId: String,
                 registrations: [SpeechBackendRegistration]) throws {
@@ -166,6 +167,7 @@ public actor SpeechClient {
             throw SpeechClientError.backendNotRegistered(capability: capability, backendId: id)
         }
         let availability = await backend.availability()
+        guard !closed else { throw SpeechClientError.closed }
         guard availability.status == .available else {
             throw SpeechClientError.backendUnavailable(capability: capability, backendId: id,
                                                         reason: availability.reason ?? .unsupportedDevice)
@@ -174,9 +176,13 @@ public actor SpeechClient {
     }
 
     public func close() async {
-        guard !closed else { return }
         closed = true
-        for backend in registrations.values { await backend.close() }
+        if closeTask == nil {
+            closeTask = Task { [registrations] in
+                for backend in registrations.values { await backend.close() }
+            }
+        }
+        await closeTask?.value
     }
 }
 
@@ -205,6 +211,8 @@ public protocol SpeechSynthesisBackend: SpeechBackend {
 public actor SpeechSynthesisClient {
     private let registry: SpeechClient
     private let backends: [String: any SpeechSynthesisBackend]
+    private var closed = false
+    private var closeTask: Task<Void, Never>?
     public init(defaultBackendId: String, backends: [any SpeechSynthesisBackend]) throws {
         self.backends = try Self.makeTable(backends)
         self.registry = try SpeechClient(capability: .tts, defaultBackendId: defaultBackendId,
@@ -212,13 +220,21 @@ public actor SpeechSynthesisClient {
     }
     public func speak(_ request: SpeechSynthesisRequest,
                       backend: SpeechBackendSelection = .default) async throws -> SpeechSynthesisResult {
+        guard !closed else { throw SpeechClientError.closed }
         let selected = try await registry.select(backend)
+        guard !closed else { throw SpeechClientError.closed }
         guard let implementation = backends[selected.backendId] else {
             throw SpeechClientError.backendNotRegistered(capability: .tts, backendId: selected.backendId)
         }
         return try await implementation.speak(request)
     }
-    public func close() async { await registry.close() }
+    public func close() async {
+        closed = true
+        if closeTask == nil {
+            closeTask = Task { await registry.close() }
+        }
+        await closeTask?.value
+    }
     private static func makeTable(_ backends: [any SpeechSynthesisBackend]) throws -> [String: any SpeechSynthesisBackend] {
         var table: [String: any SpeechSynthesisBackend] = [:]
         for backend in backends {

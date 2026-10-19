@@ -3,6 +3,9 @@ package io.ondeviceai.speech
 import io.ondeviceai.core.CapabilityAvailability
 import io.ondeviceai.core.CapabilityStatus
 import io.ondeviceai.core.UnavailableReason
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.withContext
 
 enum class SpeechCapability { ASR, TTS }
 sealed class SpeechBackendSelection {
@@ -31,7 +34,9 @@ class SpeechBackendUnavailableException(val reason: UnavailableReason, cause: Th
 class SpeechClient(val capability: SpeechCapability, private val defaultBackendId: String,
                    registrations: List<SpeechBackendRegistration>) {
     private val table: Map<String, SpeechBackend>
-    private var closed = false
+    private val closeLock = Any()
+    @Volatile private var closed = false
+    private var closeCompletion: CompletableDeferred<Unit>? = null
     init {
         require(defaultBackendId.isNotBlank())
         require(registrations.all { it.capability == capability && it.backend.capability == capability && it.backend.backendId.isNotBlank() })
@@ -50,12 +55,32 @@ class SpeechClient(val capability: SpeechCapability, private val defaultBackendI
         }
         val backend = table[id] ?: throw SpeechClientError.BackendNotRegistered(capability, id)
         val availability = backend.availability()
+        check(!closed) { "closed" }
         if (availability.status != CapabilityStatus.AVAILABLE) {
             throw SpeechClientError.BackendUnavailable(capability, id, availability.reason ?: UnavailableReason.UNSUPPORTED_DEVICE)
         }
         return SpeechBackendDescriptor(capability, id, availability)
     }
-    suspend fun close() { if (closed) return; closed = true; table.values.forEach { it.close() } }
+    suspend fun close() {
+        val (completion, ownsClose) = synchronized(closeLock) {
+            closed = true
+            closeCompletion?.let { it to false } ?: CompletableDeferred<Unit>().let {
+                closeCompletion = it
+                it to true
+            }
+        }
+        if (ownsClose) {
+            withContext(NonCancellable) {
+                try {
+                    table.values.forEach { it.close() }
+                    completion.complete(Unit)
+                } catch (error: Throwable) {
+                    completion.completeExceptionally(error)
+                }
+            }
+        }
+        completion.await()
+    }
 }
 
 data class SpeechSynthesisRequest(val text: String, val locale: String, val voiceId: String? = null)

@@ -140,6 +140,16 @@ SDK 源码基线为 `a97df90cdd49e7e567e4259d17d745da885f6225`；本包仅补分
 
 P6 仍保留这些边界：Android API35 ASR 的 `en-US` 资源缺失导致 `MISSING_ASSETS`，未完成真实转写/取消生命周期；iOS 麦克风 ASR 与 iOS 26 资源仍待补；两端 TTS 的断网行为与主观质量未测；Azure/Microsoft SDK 尚未加入；KMP 语音 Demo 仍待后续工作包。
 
+## 2026-10-19 Client 关闭并发回归
+
+已复现并修复两个公共生命周期缺陷：后端 availability 挂起期间关闭 Client，旧实现仍可返回选择结果并分发 TTS（Android ASR 也受影响）；第二个并发 close 在第一个底层 close 尚未释放时提前返回。修复后，挂起的选择恢复时重新检查关闭状态；Swift TTS 与文件 ASR 一样在 facade 层关闭 admission；双端所有 close 调用共享底层释放结果。Android 关闭状态具备跨线程可见性，清理不因发起者取消而中断。
+
+- 行为 RED：`/tmp/odai-speech-close-swift-red.log`，3 个用例失败；`/tmp/odai-speech-close-android-red.log`，4 个用例失败。Android 首次 JUnit 因方法非 void 未执行行为测试，修正测试签名后的四项失败才计作 RED。
+- GREEN：同名 `*-green.log`，Swift3/3、Android4/4；控制后端只用于挂起可用性/释放回调，断言实际 Client 返回错误、拒绝调用以及等待释放。
+- 完整 Apple 原生包：`swift test --disable-sandbox --package-path apple`，**374/374**（Identity313、Speech34、ModelStore13、Face9、Core5），日志 `/tmp/odai-speech-close-apple-all.log`。
+- Android：speech **12/12**、系统 TTS **3/3**、系统 ASR **7/7**，XML 失败/错误/跳过均为0；speech lintDebug 与三个语音 consumer flavor 构建通过。日志 `/tmp/odai-speech-close-android-full.log`、`/tmp/odai-speech-close-providers-consumer.log`。
+- 本次未改变后端选择/音频输入接口，没有新依赖或新真机结论；KMP 语音 Demo、麦克风/文件输入的双端差异、离线/质量与原有设备缺口继续保留。P10 最终独立审查仍待工具容量恢复，未以作者检查替代批准。
+
 ## iOS ASR 文件探针工作包
 
 P6 继续补充固定合成音频的文件识别探针，操作与证据见 [iOS ASR 固定文件探针](ios-asr-file-probe.md)。它沿用 `apple.speech.recognizer` 的强制 on-device 边界，文件输入不采集麦克风，通过探针按钮或显式 `--run-asr` 启动参数运行。iPhone 16 Pro Max / iOS 27.0.1 首轮的 150ms 延迟取消未生效，保留为 incomplete；第二轮任务创建后立即取消，确认 `platformCancelled=true`、平台 task completed，以及同一进程后续转写成功，整体 `status=success`。输入 SHA 与冻结基线一致。文件探针不覆盖麦克风、音频 session 或 iOS 26 SpeechTranscriber。
