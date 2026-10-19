@@ -1,8 +1,18 @@
 # P10 身份与活体实施进展
 
-更新：2026-10-18。状态：**实施中；生产身份与活体未启用**。
+更新：2026-10-19。状态：**实施中；生产身份与活体未启用**。
 
-## 已验证切片
+## 当前状态
+
+- Task 1–8 的双端契约、加密存储/删除、不可变 gallery、1:1、1:N、独立活体会话及模型 lease 适配层已实现；任务依赖顺序仍为 1→4→2→3→5→6→7→8。
+- Task 6 公共引擎 `cc08973`；Task 7 独立授权门 `ece1d18`、会话 `06a66ea`；Task 8 模型绑定适配层 `d12c7ec`。Task 7 独立审查通过；Task 8 按 inline 执行，整个分支的最终独立审查仍待后续工作包完成。
+- 最新原生 Apple 全量 **366/366**（Identity308、Speech31、ModelStore13、Face9、Core5）；Android Identity **306/306**、ModelStore **10/10**，失败/错误/跳过均为 0，两个模块 `lintDebug` 通过。详见[模型适配层记录](p10-local-identity-adapter.md)。
+- [Task 9 模型选型](p10-identity-model-selection.md)与[Task 10 PAD 后端](p10-pad-backend-selection.md)均为 **blocked-unverified**；尚无获批生产模型、授权数据或校准策略。Task 11 类型化 bridge/Demo 与 Task 12 分发仍待实施。P10 与 roadmap 均未完成。
+- 真实设备准确率、iOS15/API26 最低系统和进程终止/文件系统故障验收仍为独立门槛，不能由合成测试或现有 Store 同进程探针代替。
+
+以下切片为按实施时间保留的历史证据；其中“尚未实现/待实现”描述该次检查点，不覆盖上面的当前状态。
+
+## 已验证切片（历史记录）
 
 | 工作包 | 提交 | 验证 | 结论边界 |
 | --- | --- | --- | --- |

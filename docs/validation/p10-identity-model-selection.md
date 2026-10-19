@@ -32,3 +32,15 @@ The sources were retrieved by a read-only researcher lane. The comparative depen
 5. Run correctness, cancellation, lease/revocation, device and grouped accuracy checks on the selected implementation. Detection/tracking results are not identity embeddings.
 
 These gates are part of the roadmap and remain incomplete. No registration, licensing inquiry, credential operation or external write was performed.
+
+## Task 9 gate audit (2026-10-19)
+
+Task 8 now provides the model-bound lease adapter used by a future selected
+backend. It does not select a model or authorize an inference runtime. The
+selection work package remains **blocked-unverified** because the record still
+has no approved redistributable model revision, model hash/manifest, authorized
+development or validation dataset, operating point, enrollment/gallery strata,
+or device resource matrix. Consequently no Task 9 backend module, model asset,
+verified `ThresholdPolicy`, accuracy harness, or production registration was
+added. Identity engines continue to return typed `backendUnavailable` or
+`thresholdUnverified` outcomes under these conditions.
