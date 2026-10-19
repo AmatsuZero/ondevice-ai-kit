@@ -41,6 +41,8 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         private set
     var inputReady by mutableStateOf(false)
         private set
+    var livenessChallenge by mutableStateOf<IdentityLivenessChallenge?>(null)
+        private set
     private var livenessTerminalDelivered = false
     private class EventPump(val generation: Long, val session: IdentityLivenessSession) {
         var running = false
@@ -152,6 +154,7 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         selectedProbe = null
         inputReady = false
         enrolledTemplate = null
+        livenessChallenge = null
         state = IdentityViewState()
     }
 
@@ -195,16 +198,22 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         openLiveness(value.grant, options, backend)
     }
 
+    val livenessSessionId: String? get() = session?.sessionId
     fun submitLivenessFrame(frame: IdentityLivenessFrame): Boolean = session?.submitFrame(frame) ?: false
+    fun submitLivenessFrame(frame: IdentityLivenessFrame, sessionId: String): Boolean {
+        val current = session ?: return false
+        return if (current.sessionId == sessionId) current.submitFrame(frame) else false
+    }
     fun finishLiveness() { session?.finish() }
     fun cancel() {
         generation++; active?.cancel(); active = null
         val previous = session; session = null; previous?.cancel(); previous?.close()
+        livenessChallenge = null
         state = state.copy(busy = false, error = if (closed) state.error else IdentityBridgeFailure.Cancelled)
     }
     fun close() { if (!closed) { closed = true; cancel(); bridge.close() } }
 
-    private fun beginOperation(): Long { generation++; active?.cancel(); active = null; session?.close(); session = null; return generation }
+    private fun beginOperation(): Long { generation++; active?.cancel(); active = null; session?.close(); session = null; livenessChallenge = null; return generation }
     private fun requireConfiguration(): IdentityDemoConfiguration? {
         if (closed) return null
         val value = configuration
@@ -220,8 +229,15 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
     private fun acceptLivenessTerminal(current: Long, event: IdentityLivenessEvent) {
         if (current != generation || livenessTerminalDelivered) return
         if (event is IdentityLivenessEvent.Completed || event is IdentityLivenessEvent.Failed || event === IdentityLivenessEvent.Cancelled || event === IdentityLivenessEvent.Closed) {
-            livenessTerminalDelivered = true; active = null; state = state.copy(busy = false, liveness = event)
-        } else state = state.copy(liveness = event)
+            livenessTerminalDelivered = true; active = null
+            val previous = session; session = null
+            livenessChallenge = null
+            state = state.copy(busy = false, liveness = event)
+            previous?.close()
+        } else {
+            if (event is IdentityLivenessEvent.ChallengeIssued) livenessChallenge = event.challenge
+            state = state.copy(liveness = event)
+        }
     }
 
     // A native bridge may deliver immediately. Trampoline queued events instead of recursing.

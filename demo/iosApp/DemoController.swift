@@ -8,9 +8,13 @@ import ODAIKitDemo
 import ODAIKitCore
 import ODAIKitFace
 
-final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerViewControllerDelegate {
+final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDemoActions, PHPickerViewControllerDelegate {
     let bridge = IOSFaceBridge()
     lazy var model = FaceViewModel(bridge: bridge)
+    let identityModel: IdentityViewModel
+    private let identityProbeFactory: ((CGImage) -> IdentityProbeReference)?
+    private var latestIdentityCameraFrame: CameraFrame?
+    private var livenessCapture: Task<Void, Never>?
     private let camera = CameraSource()
     private let admissionLock = NSLock()
     private var frames = LatestFrameQueue<CameraFrame>()
@@ -30,8 +34,13 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     private var orientationProbePending = false
     #endif
     @Published private(set) var cameraPermissionDenied = false
-    override init() {
+    init(identityBridge: IdentityBridge = UnavailableIdentityBridge(reason: .unverified),
+         identityConfiguration: IdentityDemoConfiguration? = nil,
+         identityProbeFactory: ((CGImage) -> IdentityProbeReference)? = nil) {
+        self.identityModel = IdentityViewModel(bridge: identityBridge)
+        self.identityProbeFactory = identityProbeFactory
         super.init()
+        identityModel.configure(value: identityConfiguration)
         bridge.onResult = { [weak self] result in
             self?.faces = result.faces
             if self?.running == true { self?.cameraFrameCount += 1 }
@@ -51,7 +60,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         NotificationCenter.default.addObserver(self, selector: #selector(foreground), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(memoryWarning), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
     }
-    @objc private func background() { cameraLifecycle.pause(); pauseCamera(); photoSubmission.cancel(); model.cancel() }
+    @objc private func background() { livenessCapture?.cancel(); identityModel.cancel(); cameraLifecycle.pause(); pauseCamera(); photoSubmission.cancel(); model.cancel() }
     @objc private func foreground() {
         if AVCaptureDevice.authorizationStatus(for: .video) == .authorized { cameraPermissionDenied = false }
         if let token = cameraLifecycle.activate(), AVCaptureDevice.authorizationStatus(for: .video) == .authorized { resumeCamera(token) }
@@ -62,6 +71,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         while let presented = current?.presentedViewController { current = presented }; return current
     }
     func selectPhoto() {
+        identityModel.selectProbe(value: nil)
         stopCamera(); var config = PHPickerConfiguration(); config.filter = .images; config.selectionLimit = 1
         let picker = PHPickerViewController(configuration: config); picker.delegate = self; presenter()?.present(picker, animated: true)
     }
@@ -87,6 +97,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         let normalized = UIGraphicsImageRenderer(size: selected.size, format: format).image { _ in selected.draw(in: CGRect(origin: .zero, size: selected.size)) }
         guard let cg = normalized.cgImage else { return }
         image = normalized; faces = []; report = nil
+        identityModel.selectProbe(value: identityProbeFactory?(cg))
         let id = UUID().uuidString
         let pending = Array(bridge.jobs.values)
         photoSubmission.replace(after: pending) { [weak self] in
@@ -153,6 +164,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         UIApplication.shared.open(url)
     }
     private func resumeCamera(_ token: UInt64) {
+        identityModel.selectProbe(value: nil)
         pauseCamera(); model.cancel()
         let pending = Array(bridge.jobs.values)
         cameraStart = Task { @MainActor in
@@ -174,6 +186,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
     }
     private func consume(_ frame: CameraFrame, queue: LatestFrameQueue<CameraFrame>) {
         guard running, queue === frames else { queue.complete(); return }
+        latestIdentityCameraFrame = frame
         image = UIImage(cgImage: frame.image); let id = UUID().uuidString; bridge.inputs[id] = IOSFaceBridge.InputEntry(image: frame.image, finished: { [weak self] in self?.finishFrame(queue: queue) }); model.detectFrame(inputId: id, selection: BridgeBackendSelection(backendId: nil))
     }
     private func finishFrame(queue: LatestFrameQueue<CameraFrame>) {
@@ -181,11 +194,33 @@ final class DemoController: NSObject, ObservableObject, DemoActions, PHPickerVie
         if running, queue === frames, let next = queue.next() { consume(next, queue: queue) }
     }
     func stopCamera() {
+        livenessCapture?.cancel()
+        identityModel.cancel()
+        latestIdentityCameraFrame = nil
         cameraLifecycle.stop(); photoSubmission.cancel(); pauseCamera()
     }
     private func pauseCamera() {
         cameraStart?.cancel(); cameraStart = nil
         running = false; camera.stop(); frames.close(); bridge.stopTasks(); benchmark?.cancel(); benchmark = nil
+    }
+    func submitLivenessFrame() {
+        let source = running ? latestIdentityCameraFrame?.image : image?.cgImage
+        guard let source, let sessionId = identityModel.livenessSessionId, livenessCapture == nil else { return }
+        let timestamp = running ? latestIdentityCameraFrame?.timestampNanos ?? 0 : Int64(clamping: DispatchTime.now().uptimeNanoseconds)
+        let challenge = identityModel.livenessChallenge
+        livenessCapture = Task { @MainActor in
+            defer { livenessCapture = nil }
+            let array = await Task.detached { () -> KotlinByteArray? in
+                guard let bytes = UIImage(cgImage: source).pngData() else { return nil }
+                let array = KotlinByteArray(size: Int32(bytes.count))
+                for (index, value) in bytes.enumerated() { array.set(index: Int32(index), value: Int8(bitPattern: value)) }
+                return array
+            }.value
+            guard !Task.isCancelled else { return }
+            guard let array else { message = "无法编码活体帧"; return }
+            let accepted = identityModel.submitLivenessFrame(frame: IdentityLivenessFrame(encodedFrame: array, timestampNanos: timestamp, revision: "demo-upright-frame-v1", challenge: challenge), sessionId: sessionId)
+            message = accepted ? "活体帧已接收" : "活体帧未接收"
+        }
     }
     func runBenchmark() {
         stopCamera(); model.cancel()

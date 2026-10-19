@@ -39,10 +39,14 @@ import java.security.MessageDigest
 import java.util.UUID
 import java.util.concurrent.Executors
 
-class MainActivity:ComponentActivity(),DemoActions {
+class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private val detector=MLKitFaceDetector()
     private lateinit var bridge:AndroidFaceBridge
     private lateinit var model:FaceViewModel
+    private var identityModel by mutableStateOf(IdentityViewModel(UnavailableIdentityBridge()))
+    private var identityProbeFactory:((Bitmap)->IdentityProbeReference)?=null
+    private var latestIdentityCameraFrame:Triple<Bitmap,Long,Int>?=null
+    private var livenessCapture:Job?=null
     private val cameraExecutor=Executors.newSingleThreadExecutor()
     private var provider:ProcessCameraProvider?=null
     private var previewView:PreviewView?=null
@@ -75,13 +79,41 @@ class MainActivity:ComponentActivity(),DemoActions {
                         }
                     }
                 }
-                FaceScreen(model,this@MainActivity)
+                FaceScreen(model,this@MainActivity,identityModel,this@MainActivity)
                 message?.let{Text(it)}
                 report?.let{json->TextButton(onClick={exportReport(json)}){Text("导出 Benchmark JSON")}}
             }}
         }
     }
-    override fun selectPhoto(){stopCamera();model.cancel();photoPicker.launch("image/*")}
+    fun configureIdentity(bridge:IdentityBridge, configuration:IdentityDemoConfiguration,
+        probeFactory:(Bitmap)->IdentityProbeReference) {
+        identityModel.close()
+        identityProbeFactory=probeFactory
+        identityModel=IdentityViewModel(bridge).also { replacement ->
+            replacement.configure(configuration)
+            photo?.let { replacement.selectProbe(probeFactory(it)) }
+        }
+    }
+    override fun submitLivenessFrame() {
+        val captured=if(cameraRunning)latestIdentityCameraFrame else photo?.let{Triple(it,System.nanoTime(),0)}
+        if(captured==null){message="先选择图片或启动相机";return}
+        if(livenessCapture?.isActive==true)return
+        val sessionId=identityModel.livenessSessionId?:return
+        val challenge=identityModel.livenessChallenge
+        val target=identityModel
+        livenessCapture=lifecycleScope.launch {
+            try {
+                val bytes=withContext(Dispatchers.IO) { java.io.ByteArrayOutputStream().use { output ->
+                    val upright=if(captured.third==0) captured.first else Bitmap.createBitmap(captured.first,0,0,captured.first.width,captured.first.height,Matrix().apply{postRotate(captured.third.toFloat())},true)
+                    check(upright.compress(Bitmap.CompressFormat.PNG,100,output)){"无法编码活体帧"};output.toByteArray()
+                } }
+                if(target!==identityModel)return@launch
+                val accepted=target.submitLivenessFrame(IdentityLivenessFrame(bytes,captured.second,"demo-upright-frame-v1",challenge),sessionId)
+                message=if(accepted)"活体帧已接收" else "活体帧未接收"
+            } catch(_:CancellationException){} catch(error:Exception){message=error.message}
+        }
+    }
+    override fun selectPhoto(){stopCamera();model.cancel();identityModel.selectProbe(null);photoPicker.launch("image/*")}
     private fun loadPhoto(uri:Uri) {lifecycleScope.launch {
         try {
             val bitmap=withContext(Dispatchers.IO) {
@@ -94,10 +126,12 @@ class MainActivity:ComponentActivity(),DemoActions {
                 when(orientation){ExifInterface.ORIENTATION_ROTATE_90->matrix.postRotate(90f);ExifInterface.ORIENTATION_ROTATE_180->matrix.postRotate(180f);ExifInterface.ORIENTATION_ROTATE_270->matrix.postRotate(270f);ExifInterface.ORIENTATION_FLIP_HORIZONTAL->matrix.postScale(-1f,1f);ExifInterface.ORIENTATION_FLIP_VERTICAL->matrix.postScale(1f,-1f);ExifInterface.ORIENTATION_TRANSPOSE->{matrix.postRotate(90f);matrix.postScale(-1f,1f)};ExifInterface.ORIENTATION_TRANSVERSE->{matrix.postRotate(270f);matrix.postScale(-1f,1f)}}
                 Bitmap.createBitmap(decoded,0,0,decoded.width,decoded.height,matrix,true)
             }
-            photo=bitmap;result=null;report=null;model.detect(bridge.addInput(bitmap))
+            photo=bitmap;result=null;report=null
+            identityModel.selectProbe(identityProbeFactory?.invoke(bitmap))
+            model.detect(bridge.addInput(bitmap))
         } catch(error:Exception){message=error.message}
     }}
-    override fun startCamera(){cameraPermission.launch(Manifest.permission.CAMERA)}
+    override fun startCamera(){identityModel.selectProbe(null);cameraPermission.launch(Manifest.permission.CAMERA)}
     private fun enableCamera(){stopCamera();cameraRunning=true;previewView?.let{bindCamera(it)}}
     private fun bindCamera(view:PreviewView) {
         val future=ProcessCameraProvider.getInstance(this)
@@ -110,7 +144,10 @@ class MainActivity:ComponentActivity(),DemoActions {
                 analysis.setAnalyzer(cameraExecutor) {frame->
                     try {val bitmap=frame.toBitmap();val rotation=frame.imageInfo.rotationDegrees
                         lifecycleScope.launch(Dispatchers.Main.immediate) {
-                            if(cameraRunning) model.detectFrame(bridge.addInput(bitmap,rotation){frame.close()}) else frame.close()
+                            if(cameraRunning) {
+                                latestIdentityCameraFrame=Triple(bitmap,System.nanoTime(),rotation)
+                                model.detectFrame(bridge.addInput(bitmap,rotation){frame.close()})
+                            } else frame.close()
                         }
                     } catch(_:Exception){frame.close()}
                 }
@@ -118,7 +155,7 @@ class MainActivity:ComponentActivity(),DemoActions {
             } catch(error:Exception){message=error.message;cameraRunning=false}
         },ContextCompat.getMainExecutor(this))
     }
-    override fun stopCamera(){cameraRunning=false;provider?.unbindAll();result=null;benchmark?.cancel();benchmark=null}
+    override fun stopCamera(){livenessCapture?.cancel();cameraRunning=false;latestIdentityCameraFrame=null;identityModel.cancel();provider?.unbindAll();result=null;benchmark?.cancel();benchmark=null}
     override fun runBenchmark(){
         stopCamera();model.cancel();val bitmap=photo?:run{message="先选择图片";return}
         benchmark=lifecycleScope.launch {
@@ -134,5 +171,5 @@ class MainActivity:ComponentActivity(),DemoActions {
     }
     override fun exportReport(json:String){report=json;reportPicker.launch("odai-benchmark.json")}
     override fun onStop(){super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
-    override fun onDestroy(){if(::model.isInitialized)model.close();cameraExecutor.shutdown();super.onDestroy()}
+    override fun onDestroy(){if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
 }

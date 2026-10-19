@@ -1,7 +1,7 @@
 import AVFoundation
 import CoreImage
 import ODAIKitCore
-final class CameraFrame: @unchecked Sendable { let image: CGImage; init(_ image: CGImage) { self.image = image } }
+final class CameraFrame: @unchecked Sendable { let image: CGImage; let timestampNanos: Int64; init(_ image: CGImage) { self.image = image; timestampNanos = Int64(clamping: DispatchTime.now().uptimeNanoseconds) } }
 final class CameraSource: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let session = AVCaptureSession()
     private let queue = DispatchQueue(label: "io.ondeviceai.camera")

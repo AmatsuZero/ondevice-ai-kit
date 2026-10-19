@@ -3,7 +3,7 @@ import ODAIKitDemo
 import ODAIKitFace
 struct SharedControls: UIViewControllerRepresentable {
     let controller: DemoController
-    func makeUIViewController(context: Context) -> UIViewController { MainViewControllerKt.mainViewController(model: controller.model, actions: controller) }
+    func makeUIViewController(context: Context) -> UIViewController { MainViewControllerKt.mainViewController(model: controller.model, actions: controller, identity: controller.identityModel, identityActions: controller) }
     func updateUIViewController(_ view: UIViewController, context: Context) {}
 }
 @main struct OnDeviceAIDemoApp: App {

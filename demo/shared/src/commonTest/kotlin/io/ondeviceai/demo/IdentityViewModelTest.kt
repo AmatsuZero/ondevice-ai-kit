@@ -52,13 +52,13 @@ private class FakeIdentityBridge : IdentityBridge by UnavailableIdentityBridge()
         selections += backend; livenessCallback = callback; return IdentityTask()
     }
 }
-private class FakeSession : IdentityLivenessSession {
-    override val sessionId = "session"
+private class FakeSession(override val sessionId: String = "session") : IdentityLivenessSession {
+    var submittedFrames = 0
     val eventCallbacks = mutableListOf<IdentityCallback<IdentityLivenessEvent?>>()
     var closes = 0
     var immediateEvents = 0
     override fun start(callback: IdentityCallback<Unit>): IdentityBridgeTask { callback.onSuccess(Unit); return IdentityTask() }
-    override fun submitFrame(frame: IdentityLivenessFrame) = true
+    override fun submitFrame(frame: IdentityLivenessFrame): Boolean { submittedFrames++; return true }
     override fun nextEvent(callback: IdentityCallback<IdentityLivenessEvent?>): IdentityBridgeTask {
         eventCallbacks += callback
         if (immediateEvents > 0) { immediateEvents--; callback.onSuccess(IdentityLivenessEvent.FrameAccepted) }
@@ -245,6 +245,47 @@ class IdentityViewModelTest {
         assertEquals(IdentityLivenessEvent.Failed(IdentityErrorCode.AUTHORIZATION_REVOKED), model.state.liveness)
         first.eventCallbacks[1].onSuccess(IdentityLivenessEvent.Cancelled)
         assertEquals(IdentityLivenessEvent.Failed(IdentityErrorCode.AUTHORIZATION_REVOKED), model.state.liveness)
+    }
+    @Test fun livenessChallengeStaysBoundToSessionAcrossFrameEvents() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.openLiveness(grant, livenessOptions)
+        val session = FakeSession(); bridge.livenessCallback!!.onSuccess(session)
+        val challenge = IdentityLivenessChallenge("native-canonical-challenge")
+        session.eventCallbacks[0].onSuccess(IdentityLivenessEvent.ChallengeIssued(challenge))
+        session.eventCallbacks[1].onSuccess(IdentityLivenessEvent.FrameAccepted)
+        assertEquals(challenge, model.livenessChallenge)
+        model.openLiveness(grant, livenessOptions)
+        assertNull(model.livenessChallenge)
+        model.cancel()
+        assertNull(model.livenessChallenge)
+    }
+    @Test fun terminalLivenessReleasesChallengeAndRejectsDelayedHostFrames() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.openLiveness(grant, livenessOptions)
+        val session = FakeSession(); bridge.livenessCallback!!.onSuccess(session)
+        val capturedFor = model.livenessSessionId!!
+        session.eventCallbacks[0].onSuccess(IdentityLivenessEvent.ChallengeIssued(IdentityLivenessChallenge("issued")))
+        session.eventCallbacks[1].onSuccess(IdentityLivenessEvent.Failed(IdentityErrorCode.SESSION_TIMEOUT))
+        assertNull(model.livenessSessionId)
+        assertNull(model.livenessChallenge)
+        assertEquals(1, session.closes)
+        val frame = IdentityLivenessFrame(byteArrayOf(1), 1, "frame-v1", null)
+        assertFalse(model.submitLivenessFrame(frame, capturedFor))
+        assertFalse(model.submitLivenessFrame(frame))
+        assertEquals(0, session.submittedFrames)
+    }
+    @Test fun delayedHostFrameCannotEnterAReplacementLivenessSession() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.openLiveness(grant, livenessOptions)
+        bridge.livenessCallback!!.onSuccess(FakeSession("first"))
+        val capturedFor = model.livenessSessionId!!
+        model.openLiveness(grant, livenessOptions)
+        val replacement = FakeSession("replacement"); bridge.livenessCallback!!.onSuccess(replacement)
+        val frame = IdentityLivenessFrame(byteArrayOf(1), 1, "frame-v1", null)
+        assertFalse(model.submitLivenessFrame(frame, capturedFor))
+        assertEquals(0, replacement.submittedFrames)
+        assertTrue(model.submitLivenessFrame(frame, "replacement"))
+        assertEquals(1, replacement.submittedFrames)
     }
     @Test fun immediateLivenessEventsAreDrainedWithoutRecursiveStackGrowth() {
         val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
