@@ -442,7 +442,13 @@ public actor IdentityStore {
                                    stopSignal: IdentityStopSignal? = nil) async throws -> EnrollmentResult {
         let ticket = try await beginOperation(candidate, grant: grant, scope: .enrollment)
         let started = await monotonicNow()
-        let registration = stopSignal?.registerStopHandler { ticket.stopSignal.requestStop(.cancelled) }
+        let registration = stopSignal?.registerStopHandler {
+            do { try stopSignal?.check() }
+            catch let error as IdentityError {
+                let reason: IdentityStopReason = error.code == .closed ? .closed : error.code == .authorizationRevoked ? .authorizationRevoked : .cancelled
+                ticket.stopSignal.requestStop(reason)
+            } catch { ticket.stopSignal.requestStop(.cancelled) }
+        }
         defer { registration?.close() }
         return try await withTaskCancellationHandler {
             if Task.isCancelled { ticket.stopSignal.requestStop(.cancelled) }

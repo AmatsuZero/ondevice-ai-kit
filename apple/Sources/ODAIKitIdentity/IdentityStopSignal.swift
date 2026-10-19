@@ -66,7 +66,9 @@ public final class IdentityStopSignal: @unchecked Sendable {
         }
     }
 
-    internal func drain() async {
+    /// Waits until every stop handler requested on this signal has returned.
+    /// Adapters use this to keep terminal callbacks behind native cancellation delivery.
+    public func awaitDelivery() async {
         if IdentityStopHandlerContext.current?.isActive == true { return }
         await withCheckedContinuation { continuation in
             lock.lock()
@@ -79,6 +81,8 @@ public final class IdentityStopSignal: @unchecked Sendable {
             }
         }
     }
+
+    internal func drain() async { await awaitDelivery() }
 
     private func finishDelivery() {
         lock.lock()

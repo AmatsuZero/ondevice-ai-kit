@@ -3,6 +3,10 @@ package io.ondeviceai.binding
 import kotlin.test.*
 
 class IdentityBridgeContractTest {
+    @Test fun swiftUnitSuccessUsesTheActualKotlinUnitObject() {
+        assertSame(Unit, IdentityBridgeValues.unitValue)
+    }
+
     @Test fun closedUnavailableBridgeRejectsAdmissionWithClosed() {
         val bridge = UnavailableIdentityBridge()
         bridge.close()

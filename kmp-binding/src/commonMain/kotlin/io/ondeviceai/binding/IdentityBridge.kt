@@ -175,3 +175,6 @@ class UnavailableIdentityBridge(private val reason: IdentityAvailabilityReason =
     override fun awaitRevocation(receipt: IdentityRevocationReceipt, options: IdentityDeletionWaitOptions, callback: IdentityCallback<IdentityDeletionStatus>) = reject(callback)
     override fun close() { closed = true }
 }
+
+/** Swift cannot construct Kotlin Unit from an erased IdentityCallback<*> protocol. */
+object IdentityBridgeValues { val unitValue: Any get() = Unit }

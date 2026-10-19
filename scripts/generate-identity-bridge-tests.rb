@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+require 'xcodeproj'
+require 'fileutils'
+root = File.expand_path('..', __dir__)
+directory = File.expand_path(ENV.fetch('ODAI_IDENTITY_BRIDGE_TEST_DIR', 'artifacts/verification/ios-identity-bridge'), root)
+abort('Refusing to replace existing identity bridge test output') if File.exist?(directory)
+framework = File.join(root, 'kmp-binding/build/bin/iosSimulatorArm64/debugFramework/ODAIKitBinding.framework')
+sources = ['kmp-binding/apple/IOSIdentityBridge.swift', 'probes/ios-identity-bridge/IOSIdentityBridgeTests.swift']
+([framework] + sources.map { |s| File.join(root, s) }).each { |path| abort("Missing input: #{path}") unless File.exist?(path) }
+FileUtils.mkdir_p(directory)
+project = Xcodeproj::Project.new(File.join(directory, 'IdentityBridgeTests.xcodeproj'))
+target = project.new_target(:unit_test_bundle, 'IdentityBridgeTests', :ios, '15.0')
+package = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
+package.relative_path = File.join(root, 'apple')
+project.root_object.package_references << package
+['ODAIKitIdentity', 'ODAIKitCore'].each do |name|
+  dependency = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
+  dependency.product_name = name; dependency.package = package
+  target.package_product_dependencies << dependency
+  file = project.new(Xcodeproj::Project::Object::PBXBuildFile)
+  file.product_ref = dependency; target.frameworks_build_phase.files << file
+end
+sources.each { |path| target.source_build_phase.add_file_reference(project.main_group.new_file(File.join(root, path))) }
+target.frameworks_build_phase.add_file_reference(project.main_group.new_file(framework))
+target.build_configurations.each do |config|
+  config.build_settings.merge!({
+    'SWIFT_VERSION' => '5.0', 'PRODUCT_BUNDLE_IDENTIFIER' => 'io.ondeviceai.identity.bridge.tests',
+    'GENERATE_INFOPLIST_FILE' => 'YES', 'ARCHS' => 'arm64', 'SUPPORTED_PLATFORMS' => 'iphonesimulator',
+    'FRAMEWORK_SEARCH_PATHS' => ['$(inherited)', File.dirname(framework)],
+    'OTHER_LDFLAGS' => ['$(inherited)', '-ObjC', '-lsqlite3'], 'CODE_SIGNING_ALLOWED' => 'NO',
+    'ENABLE_TESTABILITY' => 'YES', 'LD_RUNPATH_SEARCH_PATHS' => ['$(inherited)', '@loader_path/Frameworks']
+  })
+end
+project.save
+scheme = Xcodeproj::XCScheme.new
+scheme.add_build_target(target)
+scheme.add_test_target(target)
+scheme.save_as(project.path, target.name, true)
+puts project.path
