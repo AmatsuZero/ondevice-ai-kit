@@ -4,7 +4,10 @@ require 'fileutils'
 root = File.expand_path('..', __dir__)
 directory = File.expand_path(ENV.fetch('ODAI_IDENTITY_BRIDGE_TEST_DIR', 'artifacts/verification/ios-identity-bridge'), root)
 abort('Refusing to replace existing identity bridge test output') if File.exist?(directory)
-framework = File.join(root, 'kmp-binding/build/bin/iosSimulatorArm64/debugFramework/ODAIKitBinding.framework')
+binding_module = ENV.fetch('ODAI_IDENTITY_BRIDGE_KMP_MODULE', 'ODAIKitBinding')
+framework_root = { 'ODAIKitBinding' => 'kmp-binding', 'ODAIKitDemo' => 'demo/shared' }[binding_module]
+abort('Unsupported identity bridge KMP module') unless framework_root
+framework = File.join(root, framework_root, "build/bin/iosSimulatorArm64/debugFramework/#{binding_module}.framework")
 sources = ['kmp-binding/apple/IOSIdentityBridge.swift', 'probes/ios-identity-bridge/IOSIdentityBridgeTests.swift']
 ([framework] + sources.map { |s| File.join(root, s) }).each { |path| abort("Missing input: #{path}") unless File.exist?(path) }
 FileUtils.mkdir_p(directory)
@@ -24,6 +27,7 @@ sources.each { |path| target.source_build_phase.add_file_reference(project.main_
 target.frameworks_build_phase.add_file_reference(project.main_group.new_file(framework))
 target.build_configurations.each do |config|
   config.build_settings.merge!({
+    'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => binding_module == 'ODAIKitDemo' ? '$(inherited) ODAI_DEMO_BINDING' : '$(inherited)',
     'SWIFT_VERSION' => '5.0', 'PRODUCT_BUNDLE_IDENTIFIER' => 'io.ondeviceai.identity.bridge.tests',
     'GENERATE_INFOPLIST_FILE' => 'YES', 'ARCHS' => 'arm64', 'SUPPORTED_PLATFORMS' => 'iphonesimulator',
     'FRAMEWORK_SEARCH_PATHS' => ['$(inherited)', File.dirname(framework)],

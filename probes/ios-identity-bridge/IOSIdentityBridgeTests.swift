@@ -1,9 +1,14 @@
 import CryptoKit
-import ODAIKitBinding
 import ODAIKitCore
 import XCTest
 
 @testable import ODAIKitIdentity
+
+#if ODAI_DEMO_BINDING
+  import ODAIKitDemo
+#else
+  import ODAIKitBinding
+#endif
 
 @MainActor
 final class IOSIdentityBridgeTests: XCTestCase {
@@ -98,14 +103,14 @@ final class IOSIdentityBridgeTests: XCTestCase {
       f.bridge.deleteGallery(reference: gallery, ownership: f.owner, callback: $0)
     }
     XCTAssertEqual(receipt.store, .index)
-    let status: ODAIKitBinding.IdentityDeletionStatus = try await invoke {
+    let status: IdentityBridgeDeletionStatus = try await invoke {
       f.bridge.awaitDeletion(receipt: receipt, options: f.poll, callback: $0)
     }
     XCTAssertEqual(status, .purged)
     let deleted: IdentityDeletionReceipt = try await invoke {
       f.bridge.deleteTemplate(reference: template, ownership: f.owner, callback: $0)
     }
-    let purged: ODAIKitBinding.IdentityDeletionStatus = try await invoke {
+    let purged: IdentityBridgeDeletionStatus = try await invoke {
       f.bridge.awaitDeletion(
         receipt: deleted,
         options: IdentityDeletionWaitOptions(durationNanos: KotlinLong(value: 1_000_000)),
@@ -118,7 +123,7 @@ final class IOSIdentityBridgeTests: XCTestCase {
     let revoked: IdentityRevocationReceipt = try await invoke {
       f.bridge.revokeGrant(grantId: f.grant.grantId, ownership: f.owner, callback: $0)
     }
-    let revokedStatus: ODAIKitBinding.IdentityDeletionStatus = try await invoke {
+    let revokedStatus: IdentityBridgeDeletionStatus = try await invoke {
       f.bridge.awaitRevocation(receipt: revoked, options: f.poll, callback: $0)
     }
     XCTAssertEqual(revokedStatus, .purged)
@@ -129,7 +134,7 @@ final class IOSIdentityBridgeTests: XCTestCase {
       f.bridge.createCandidate(grant: f.grantWire, callback: $0)
     }
     for (id, code) in [
-      ("missing", ODAIKitBinding.IdentityErrorCode.backendNotRegistered),
+      ("missing", IdentityBridgeErrorCode.backendNotRegistered),
       ("optional.fixture", .backendUnavailable),
     ] {
       let error = await failure {
@@ -575,4 +580,4 @@ private final class TestPAD: LivenessBackend, @unchecked Sendable {
   func close() {}
 }
 
-private final class UnknownSelection: NSObject, ODAIKitBinding.IdentityBackendSelection {}
+private final class UnknownSelection: NSObject, IdentityBridgeBackendSelection {}

@@ -125,3 +125,15 @@ TDD evidence for this slice:
 The lifecycle fix clears `livenessSessionId` and the retained challenge at the first terminal event, closes the native session, and rejects delayed frames. Existing simulator/API warnings remain: CameraX `setTargetResolution` deprecation, iOS simulator framework deployment-version warning, and AppIntents metadata skip. This verifies Demo wiring and fail-closed behavior; it does not unlock Tasks 9/10 production model, PAD, calibration, or minimum-device gates.
 
 Host probe factories must register a stable, immutable input for the native adapter resolver and retain it until native work drains. The host owns that registry and its eventual removal; opaque references are not subject IDs. Demo replacement closes the old bridge through its ViewModel, so injected bridges must be dedicated to that Demo instance; the native bridge continues to borrow the underlying stores/engines. The standalone Swift adapter currently targets `ODAIKitBinding`; compatibility with the Demo umbrella export remains a separate Task 11 gate.
+
+## Demo umbrella ABI gate
+
+The iOS adapter now supports either host module without linking duplicate Kotlin frameworks. A standalone host compiles it with `ODAIKitBinding`; a KMP Demo host defines `ODAI_DEMO_BINDING` and compiles it against the `ODAIKitDemo` umbrella export. The adapter uses module-local type aliases for the exported identity values, so method signatures and strict backend selection stay identical.
+
+The same generated XCTest project and native fixture passed both paths on the iOS 27.1 simulator:
+
+- `/tmp/odai-identity-binding-abi-final.log`: standalone `ODAIKitBinding`, 10/10.
+- `/tmp/odai-identity-demo-abi-green.log`: Demo umbrella `ODAIKitDemo` only, 10/10.
+- `/tmp/odai-identity-demo-abi-red.log`: expected RED before the conditional import, with `Unable to resolve module dependency: ODAIKitBinding` when only the Demo framework was linked.
+
+`generate-identity-bridge-tests.rb` now selects `ODAI_IDENTITY_BRIDGE_KMP_MODULE` (`ODAIKitBinding` or `ODAIKitDemo`), refuses existing output, and keeps all generated projects under ignored artifact paths. No Xcode signing project was changed by this gate.

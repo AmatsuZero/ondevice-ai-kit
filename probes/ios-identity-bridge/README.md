@@ -19,3 +19,5 @@ rtk proxy xcodebuild \
 The destination above is the simulator used for the recorded validation; replace its ID with an available local device. The generator refuses existing output. To generate another independent project, set `ODAI_IDENTITY_BRIDGE_TEST_DIR` to a fresh ignored path under `artifacts/verification/`. Existing generated projects can be reused for subsequent source builds/tests.
 
 The adapter source belongs to the host KMP integration layer. A host compiles `kmp-binding/apple/IOSIdentityBridge.swift` with `ODAIKitBinding` and `ODAIKitIdentity`, supplies the real stores/engines/backend registry and opaque probe resolver, and explicitly closes the adapter before disposing its borrowed dependencies. No production backend is enabled by this test harness.
+
+For a Demo umbrella host, build `demo/shared` and generate a fresh harness with `ODAI_IDENTITY_BRIDGE_KMP_MODULE=ODAIKitDemo`; the generator adds `ODAI_DEMO_BINDING` and links only `ODAIKitDemo`. The same adapter tests cover both module selections.

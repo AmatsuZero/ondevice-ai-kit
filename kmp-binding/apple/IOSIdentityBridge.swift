@@ -1,6 +1,24 @@
 import Foundation
-@preconcurrency import ODAIKitBinding
 import ODAIKitIdentity
+
+// The host links exactly one Kotlin framework. The Demo umbrella re-exports binding types.
+#if ODAI_DEMO_BINDING
+  @preconcurrency import ODAIKitDemo
+  public typealias IdentityBridgeBackendSelection = ODAIKitDemo.IdentityBackendSelection
+  public typealias IdentityBridgeDeletionStatus = ODAIKitDemo.IdentityDeletionStatus
+  public typealias IdentityBridgeErrorCode = ODAIKitDemo.IdentityErrorCode
+  public typealias IdentityBridgeModelBinding = ODAIKitDemo.IdentityModelBinding
+  public typealias IdentityBridgeRunMetadata = ODAIKitDemo.IdentityRunMetadata
+  public typealias IdentityBridgeScoreFields = ODAIKitDemo.IdentityScoreFields
+#else
+  @preconcurrency import ODAIKitBinding
+  public typealias IdentityBridgeBackendSelection = ODAIKitBinding.IdentityBackendSelection
+  public typealias IdentityBridgeDeletionStatus = ODAIKitBinding.IdentityDeletionStatus
+  public typealias IdentityBridgeErrorCode = ODAIKitBinding.IdentityErrorCode
+  public typealias IdentityBridgeModelBinding = ODAIKitBinding.IdentityModelBinding
+  public typealias IdentityBridgeRunMetadata = ODAIKitBinding.IdentityRunMetadata
+  public typealias IdentityBridgeScoreFields = ODAIKitBinding.IdentityScoreFields
+#endif
 
 /// iOS host adapter. It borrows native stores and engines; only bridge tasks,
 /// builders and sessions are owned by this object.
@@ -59,7 +77,7 @@ public final class IOSIdentityBridge: NSObject, IdentityBridge {
   public func enroll(
     probe: IdentityProbeReference, candidate: IdentityCandidateReference,
     grant: IdentityAuthorizationGrant, options: IdentityEnrollmentOptions,
-    backend: ODAIKitBinding.IdentityBackendSelection, callback: IdentityCallback
+    backend: IdentityBridgeBackendSelection, callback: IdentityCallback
   ) -> IdentityBridgeTask {
     submit(callback) { task in
       let native = try await self.store.enroll(
@@ -76,7 +94,7 @@ public final class IOSIdentityBridge: NSObject, IdentityBridge {
   public func verify(
     probe: IdentityProbeReference, template: IdentityTemplateReference,
     grant: IdentityAuthorizationGrant, options: IdentityVerificationOptions,
-    backend: ODAIKitBinding.IdentityBackendSelection, callback: IdentityCallback
+    backend: IdentityBridgeBackendSelection, callback: IdentityCallback
   ) -> IdentityBridgeTask {
     submit(callback) { task in
       let nativeTask = try await self.verification.verify(
@@ -94,7 +112,7 @@ public final class IOSIdentityBridge: NSObject, IdentityBridge {
   }
   public func createGalleryBuilder(
     baseGallery: IdentityGalleryReference?, grant: IdentityAuthorizationGrant,
-    options: IdentityGalleryOptions, backend: ODAIKitBinding.IdentityBackendSelection,
+    options: IdentityGalleryOptions, backend: IdentityBridgeBackendSelection,
     callback: IdentityCallback
   ) -> IdentityBridgeTask {
     submit(callback) { task in
@@ -161,7 +179,7 @@ public final class IOSIdentityBridge: NSObject, IdentityBridge {
   public func identify(
     probe: IdentityProbeReference, gallery: IdentityGalleryReference,
     grant: IdentityAuthorizationGrant, options: IdentityIdentificationOptions,
-    backend: ODAIKitBinding.IdentityBackendSelection, callback: IdentityCallback
+    backend: IdentityBridgeBackendSelection, callback: IdentityCallback
   ) -> IdentityBridgeTask {
     submit(callback) { task in
       let nativeTask = try await self.identification.identify(
@@ -180,7 +198,7 @@ public final class IOSIdentityBridge: NSObject, IdentityBridge {
   }
   public func openLivenessSession(
     grant: IdentityAuthorizationGrant, options: IdentityLivenessOptions,
-    backend: ODAIKitBinding.IdentityBackendSelection, callback: IdentityCallback
+    backend: IdentityBridgeBackendSelection, callback: IdentityCallback
   ) -> IdentityBridgeTask {
     submit(callback) { task in
       guard let engine = self.liveness else { throw IdentityError(.backendUnavailable) }
@@ -314,7 +332,7 @@ public final class IOSIdentityBridge: NSObject, IdentityBridge {
     _ = lock.withLock { sessions.removeValue(forKey: id) }
   }
   private var isClosed: Bool { lock.withLock { closed } }
-  private func selectBackend(_ selection: ODAIKitBinding.IdentityBackendSelection) throws
+  private func selectBackend(_ selection: IdentityBridgeBackendSelection) throws
     -> any IdentityBackend
   {
     let selected = try registry.select(selection.native())
@@ -513,7 +531,7 @@ private final class IOSLivenessSession: NSObject, IdentityLivenessSession, @unch
   }
 }
 
-extension ODAIKitBinding.IdentityBackendSelection {
+extension IdentityBridgeBackendSelection {
   fileprivate func native() throws -> ODAIKitIdentity.IdentityBackendSelection {
     if let explicit = self as? IdentityBackendSelectionExplicit {
       return .explicit(explicit.backendId)
@@ -532,7 +550,7 @@ extension IdentityError {
   }
 }
 extension ODAIKitIdentity.IdentityErrorCode {
-  fileprivate var bridgeValue: ODAIKitBinding.IdentityErrorCode {
+  fileprivate var bridgeValue: IdentityBridgeErrorCode {
     switch self {
     case .backendNotRegistered: return .backendNotRegistered
     case .backendUnavailable: return .backendUnavailable
@@ -573,8 +591,8 @@ extension IdentityQuality {
   }
 }
 extension ODAIKitIdentity.IdentityScoreFields {
-  fileprivate var bridgeValue: ODAIKitBinding.IdentityScoreFields {
-    ODAIKitBinding.IdentityScoreFields(
+  fileprivate var bridgeValue: IdentityBridgeScoreFields {
+    IdentityBridgeScoreFields(
       score: score.map { KotlinDouble(value: $0) }, metric: metric,
       threshold: threshold.map { KotlinDouble(value: $0) })
   }
@@ -630,40 +648,40 @@ extension IdentificationResult {
   }
 }
 extension EnrollmentResult {
-  fileprivate var bridgeMetadata: ODAIKitBinding.IdentityRunMetadata {
-    ODAIKitBinding.IdentityRunMetadata(
+  fileprivate var bridgeMetadata: IdentityBridgeRunMetadata {
+    IdentityBridgeRunMetadata(
       backendId: backendId, backendVersion: backendVersion,
-      modelBinding: ODAIKitBinding.IdentityModelBinding(
+      modelBinding: IdentityBridgeModelBinding(
         canonicalValue: modelBinding.canonicalJSON()), inputRevision: inputRevision,
       optionsRevision: optionsRevision, preprocessingRevision: preprocessingRevision,
       sessionId: sessionId, runId: runId, durationNanos: durationNanos)
   }
 }
 extension VerificationResult {
-  fileprivate var bridgeMetadata: ODAIKitBinding.IdentityRunMetadata {
-    ODAIKitBinding.IdentityRunMetadata(
+  fileprivate var bridgeMetadata: IdentityBridgeRunMetadata {
+    IdentityBridgeRunMetadata(
       backendId: backendId, backendVersion: backendVersion,
-      modelBinding: ODAIKitBinding.IdentityModelBinding(
+      modelBinding: IdentityBridgeModelBinding(
         canonicalValue: modelBinding.canonicalJSON()), inputRevision: inputRevision,
       optionsRevision: optionsRevision, preprocessingRevision: preprocessingRevision,
       sessionId: sessionId, runId: runId, durationNanos: durationNanos)
   }
 }
 extension IdentificationResult {
-  fileprivate var bridgeMetadata: ODAIKitBinding.IdentityRunMetadata {
-    ODAIKitBinding.IdentityRunMetadata(
+  fileprivate var bridgeMetadata: IdentityBridgeRunMetadata {
+    IdentityBridgeRunMetadata(
       backendId: backendId, backendVersion: backendVersion,
-      modelBinding: ODAIKitBinding.IdentityModelBinding(
+      modelBinding: IdentityBridgeModelBinding(
         canonicalValue: modelBinding.canonicalJSON()), inputRevision: inputRevision,
       optionsRevision: optionsRevision, preprocessingRevision: preprocessingRevision,
       sessionId: sessionId, runId: runId, durationNanos: durationNanos)
   }
 }
 extension LivenessResult {
-  fileprivate var bridgeMetadata: ODAIKitBinding.IdentityRunMetadata {
-    ODAIKitBinding.IdentityRunMetadata(
+  fileprivate var bridgeMetadata: IdentityBridgeRunMetadata {
+    IdentityBridgeRunMetadata(
       backendId: backendId, backendVersion: backendVersion,
-      modelBinding: ODAIKitBinding.IdentityModelBinding(
+      modelBinding: IdentityBridgeModelBinding(
         canonicalValue: modelBinding.canonicalJSON()), inputRevision: inputRevision,
       optionsRevision: optionsRevision, preprocessingRevision: nil, sessionId: sessionId,
       runId: runId, durationNanos: durationNanos)
@@ -701,7 +719,7 @@ extension LivenessEvent {
   }
 }
 extension DeletionStatus {
-  fileprivate var bridgeValue: ODAIKitBinding.IdentityDeletionStatus {
+  fileprivate var bridgeValue: IdentityBridgeDeletionStatus {
     switch self {
     case .revoked: return .revoked
     case .purgePending: return .purgePending
