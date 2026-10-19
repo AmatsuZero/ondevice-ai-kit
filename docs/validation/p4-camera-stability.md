@@ -123,6 +123,7 @@
 - 使用仓库已有 `examples/ios-native/NativeConsumerApp.swift` 和工程，在命令行传入已有 development team 构建，未改写工程或签名资产；签名 device build、安装与启动均成功。该宿主只链接原生 Core/Face/AppleVision 与系统框架，不链接 KMP/Compose；源码中有一次合成空白 Vision 请求及 Client close。
 - `P4-ios-leaks-native-pid15846-20261019.trace` 附着启动返回的 PID `15846`，采集 **95.903346 秒**，Leaks detail 为 **0 行**。这只是该采样窗口未观察到泄漏，不证明初始 Vision 请求成功，也未覆盖其完整调用/释放窗口或相机资源。
 - 同设备对照为：纯原生 consumer **0 行**；静态 Compose Demo **1× GrOp / 128 B**；相机 Compose Demo **3× GrOp / 384 B**。下一调查重点是 Demo 的 Compose/Skia 渲染路径；当前没有依据将这些对象直接认定为原生 SDK 相机泄漏，或通过修改 SDK 释放逻辑修复它们。
+- 本地 Gradle `:demo:shared:dependencyInsight --configuration iosArm64CompileKlibraries --dependency skiko` 确认 Demo 解析到 `org.jetbrains.skiko:skiko:0.144.6`，由 Compose Multiplatform `1.11.1` 引入（`gradle/libs.versions.toml:4,10`、`demo/shared/build.gradle.kts:4,12`）。对应缓存 sources 的 `uikitMain/.../MetalRedrawer.uikit.kt` 中，`dispose()` 在 180–192 行关闭 display link、flush 和 `DirectContext`；每帧 `surface`/`renderTarget` 在 263–264 行关闭，但 265 行仍保留 `TODO manually release metalDrawable when K/N API arrives`，空 surface 分支 245 行也有同一 TODO。该实现证据解释了为什么应继续检查 Compose/Skiko 的 drawable 生命周期，但不是当前仓库可直接修改的 SDK 源码。
 
 可重复导出方式（无需依赖 `data/table` 的 schema 列表）：
 
