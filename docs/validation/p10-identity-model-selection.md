@@ -44,3 +44,41 @@ or device resource matrix. Consequently no Task 9 backend module, model asset,
 verified `ThresholdPolicy`, accuracy harness, or production registration was
 added. Identity engines continue to return typed `backendUnavailable` or
 `thresholdUnverified` outcomes under these conditions.
+
+## Pinned SFace runtime feasibility evidence (2026-10-19)
+
+A read-only dependency review inspected the pinned OpenCV Zoo SFace directory
+at revision `47534e27c9851bb1128ccc0102f1145e27f23f98`. The directory contains
+three Git LFS pointer assets; no model was downloaded or executed:
+
+| Asset | LFS SHA-256 | Model size in pointer |
+| --- | --- | ---: |
+| `face_recognition_sface_2021dec.onnx` | `0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79` | 38,696,353 B |
+| `face_recognition_sface_2021dec_int8.onnx` | `2b0e941e6f16cc048c20aee0c8e31f569118f65d702914540f7bfdc14048d78a` | 9,896,933 B |
+| `face_recognition_sface_2021dec_int8bq.onnx` | `fb143eea07838aa532d1c95df5f69899974ea0140e1fba05e94204be13ed74ee` | 10,667,852 B |
+
+The pinned OpenCV implementation documents five landmarks (right eye, left
+eye, nose, right mouth corner, left mouth corner), similarity alignment to
+`112×112`, `blobFromImage` scale `1`, `swapRB=true`, and cosine/L2 matching.
+It does not establish ONNX tensor names, output dimension, target-device
+latency, or quantized runtime compatibility. OpenCV Zoo marks the exact
+directory Apache-2.0; future distribution must retain the license and
+applicable notices. This does not establish training-data provenance or
+production authorization.
+
+The recommended next experiment is a non-production parity harness comparing
+ONNX Runtime CPU and OpenCV DNN on iOS 15 and Android API 26, after the model
+experiment and test data are approved. It must record the final asset hash,
+tensor metadata, aligned-pixel/embedding parity, latency, memory, binary size
+and teardown. ONNX Runtime remains a feasibility candidate rather than a
+selected dependency; exact package versions, deployment floors and execution
+providers still need proof. No Task 9 model, runtime, weight, threshold, or
+accuracy result is approved by this note.
+
+Evidence: [pinned directory listing](https://api.github.com/repos/opencv/opencv_zoo/contents/models/face_recognition_sface?ref=47534e27c9851bb1128ccc0102f1145e27f23f98),
+[float LFS pointer](https://raw.githubusercontent.com/opencv/opencv_zoo/47534e27c9851bb1128ccc0102f1145e27f23f98/models/face_recognition_sface/face_recognition_sface_2021dec.onnx),
+[INT8 pointer](https://raw.githubusercontent.com/opencv/opencv_zoo/47534e27c9851bb1128ccc0102f1145e27f23f98/models/face_recognition_sface/face_recognition_sface_2021dec_int8.onnx),
+[block-quantized pointer](https://raw.githubusercontent.com/opencv/opencv_zoo/47534e27c9851bb1128ccc0102f1145e27f23f98/models/face_recognition_sface/face_recognition_sface_2021dec_int8bq.onnx),
+and [pinned preprocessing implementation](https://github.com/opencv/opencv/blob/9b6287ec500ef7b327ac74c4f6c9cd84a2cbc9cd/modules/objdetect/src/face_recognize.cpp).
+Further retrieval encountered proxy refusal and DNS failure; package-version
+claims are therefore left unverified rather than inferred from current docs.
