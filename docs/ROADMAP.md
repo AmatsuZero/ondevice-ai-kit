@@ -74,6 +74,8 @@ P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试
 
 ## 恢复时的第一步
 
+2026-10-19 P6 当前入口：语音 Client 的 availability/close 竞态与并发 close 等待已修复并提交 `c13ed4c`，Apple 全包374/374、Android Speech12/12、TTS3/3、ASR7/7及消费者构建通过，见[语音记录](validation/speech-backends.md)。用户已选择“先将现有后端接 Demo，再独立补齐 iOS 麦克风 ASR”；[语音 bridge 与 Demo 书面规格](superpowers/specs/2026-10-19-speech-demo-bridge-design.md)已编写，尚待用户审阅，实施计划与产品实现尚未开始。麦克风、Android ASR 实际转写、离线/质量和最低系统验证继续保留。P10 最终独立审查的再次重试仍因模型容量不足退出，未产生审查结论；固定 revision 的 SFace LFS 元数据与运行时可行性研究已补入[模型预研](validation/p10-identity-model-selection.md)，未下载模型或选定运行时。
+
 2026-10-19 当前入口：P10 Task 1–8、11、12 已实现并提交，Task12 为 `bb89516`；最终独立审查包覆盖 `ecdfd52..bb89516`，三个审查实例均因模型容量不足未启动，没有审查结论。Task9/10 生产模型/PAD、数据授权与校准继续保留。iOS Demo 真机 KMP framework 已刷新，新增身份 UI 后照片取消、方向探针、相机前后台回归3/3通过，详见[P4补充](validation/p4-camera-stability.md#身份-ui-集成后的-ios-回归2026-10-19)。下文10月17日段落为历史入口，P10当前状态以上表和[P10记录](validation/p10-face-identity.md)为准。
 
 2026-10-17 P6 后续包：用户已批准的[Apple 文件 ASR 实施计划](superpowers/plans/2026-10-17-apple-system-asr-file.md)已实现公共契约、Apple backend 生命周期与可裁剪分发三个 Task。Swift 58/58、工具测试 44/44、Xcode 模拟器构建、全新六模块 XCFramework、binary consumer 和 Core+Speech 独立 typecheck 均通过。公共请求不绑定离线策略，Apple 系统后端单独强制 on-device；取消/超时后先 drain 再更改输入，lease 释放以平台 task completed 为边界。实际 SDK `5fd0b2d` 已在 iPhone 16 Pro Max / iOS 27.0.1 通过固定合成文件转写、busy 证明的活动任务取消、drain、输入保持、同进程重入和 close 后拒绝。最终独立架构审查 CLEAR，一个 LOW 文件 metadata 错误映射延后处理。报告/hash 见[语音后端记录](validation/speech-backends.md#2026-10-17-apple-文件-asr-sdk-后端)；既有授权被复用，麦克风、音频 session、资源安装、自然语音质量与网络行为仍未测。
