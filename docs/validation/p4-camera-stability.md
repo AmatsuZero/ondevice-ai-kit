@@ -105,3 +105,9 @@
 - 同一设备再次运行两分钟相机用例，`P4-ios-resource-leaks-20261017.xcresult` 为 **1/1 通过、0 失败，137.211 秒**，停止后仍观察 5 秒没有新成功结果。
 - 只附着本项目 Demo 的 Leaks 模板采集完成，`P4-ios-resource-leaks-20261017.trace` 记录 **96.019181 秒**。`xctrace export --toc` 确认存在 Allocations 和 Leaks tracks；可导出的 data tables 没有泄漏/分配统计 schema，因此本次尚未取得可核验的泄漏摘要，不能据此报告零泄漏或完整资源释放通过。
 - trace 约 3.4 GB，仅留在 Git 忽略的 `artifacts/`，不加入 Git/LFS 或上传；xcresult、日志和导出 XML 也仅保存在该目录。完整相机/桥接资源释放、GPU/系统服务资源与最低系统验收仍未完成。
+
+## 身份 UI 集成后的 iOS 回归（2026-10-19）
+
+- 在提交 `bb89516` 的 iPhone 16 Pro Max 上复测三个已有用例：Photo Picker 取消、Debug Orientation 6 和相机前后台/用户停止。`P4-ios-post-identity-refreshed-20261019.xcresult` **3/3 通过、0 失败，29.795 秒**；日志 `/tmp/odai-p4-post-identity-ui-refreshed.log`，xcodebuild exit0。
+- 首次 `P4-ios-post-identity-20261019.xcresult` 在构建阶段失败：本地 `iosArm64` Demo framework 仍为 10月17日旧导出，缺少新增 Identity 类型，模拟器产物则为 10月19日。按 README 的真机构建前置步骤运行 `./gradlew :demo:shared:linkDebugFrameworkIosArm64 --console=plain` 后重试通过；没有修改 Swift 代码、工程或签名。Gradle 日志 `/tmp/odai-p10-device-framework-refresh.log`。
+- 本次为新增身份控件后的检测流程回归，不覆盖身份生产推理、完整 PHPicker EXIF 2/6/7、资源释放或最低系统验收。两份受保护用户文件 SHA256 保持不变。
