@@ -10,14 +10,14 @@ let package = Package(name: "OnDeviceAIKit", platforms: [.iOS(.v15), .macOS(.v12
     .library(name: "ODAIKitIdentity", targets: ["ODAIKitIdentity"])
 ], targets: [
     .target(name: "ODAIKitCore"),
-    .target(name: "ODAIKitIdentity", dependencies: ["ODAIKitCore"]),
+    .target(name: "ODAIKitIdentity", dependencies: ["ODAIKitCore", "ODAIKitModelStore"]),
     .target(name: "ODAIKitModelStore", dependencies: ["ODAIKitCore"]),
     .target(name: "ODAIKitFace", dependencies: ["ODAIKitCore"]),
     .target(name: "ODAIKitAppleVision", dependencies: ["ODAIKitFace", "ODAIKitCore"]),
     .target(name: "ODAIKitSpeech", dependencies: ["ODAIKitCore"]),
     .target(name: "ODAIKitAppleSpeech", dependencies: ["ODAIKitSpeech", "ODAIKitCore"]),
     .testTarget(name: "ODAIKitFaceTests", dependencies: ["ODAIKitFace", "ODAIKitAppleVision"]),
-    .testTarget(name: "ODAIKitIdentityTests", dependencies: ["ODAIKitIdentity"]),
+    .testTarget(name: "ODAIKitIdentityTests", dependencies: ["ODAIKitIdentity", "ODAIKitModelStore"]),
     .testTarget(name: "ODAIKitCoreTests", dependencies: ["ODAIKitCore"]),
     .testTarget(name: "ODAIKitModelStoreTests", dependencies: ["ODAIKitModelStore"]),
     .testTarget(name: "ODAIKitSpeechTests", dependencies: ["ODAIKitSpeech", "ODAIKitAppleSpeech"])

@@ -121,8 +121,9 @@ public actor ModelStore {
     }
     public func acquire(_ ref: ModelRef) throws -> ModelLease {
         guard status(ref) == .installed else { throw ModelStoreError.absent }
+        let manifest = try JSONDecoder().decode(ModelManifest.self, from: Data(contentsOf: directory(ref).appendingPathComponent(".odai-manifest.json")))
         let token = UUID(); leases[ref, default: []].insert(token)
-        return ModelLease(directory: directory(ref), store: self, ref: ref, token: token)
+        return ModelLease(directory: directory(ref), manifest: manifest, store: self, ref: ref, token: token)
     }
     func release(_ ref: ModelRef, token: UUID) { leases[ref]?.remove(token) }
     public func remove(_ ref: ModelRef) throws {

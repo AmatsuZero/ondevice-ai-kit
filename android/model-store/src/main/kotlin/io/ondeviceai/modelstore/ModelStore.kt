@@ -93,14 +93,17 @@ class ModelStore(private val root:File,private val compatibility:ModelCompatibil
     } } }
     suspend fun acquire(ref:ModelRef):ModelLease=withContext(Dispatchers.IO) { mutex.withLock {
         check(statusLocked(ref)==ModelStatus.INSTALLED){"absent"}
+        val manifest=ModelManifest.parse(File(directory(ref),".odai-manifest.json").readText())
         val token=UUID.randomUUID().toString();leases.getOrPut(ref){mutableSetOf()}.add(token)
-        ModelLease(directory(ref)){mutex.withLock{leases[ref]?.remove(token);Unit}}
+        ModelLease(directory(ref),manifest){mutex.withLock{leases[ref]?.remove(token);Unit}}
     } }
     suspend fun remove(ref:ModelRef)=withContext(Dispatchers.IO) {mutex.withLock {
         validateRef(ref);if(!leases[ref].isNullOrEmpty())throw ModelInUseException()
         val dir=directory(ref);if(dir.exists() && !dir.deleteRecursively())throw java.io.IOException("remove failed")
     }}
 }
-class ModelLease internal constructor(val directory:File,private val release:suspend ()->Unit) {
+class ModelLease internal constructor(val directory:File,private val verifiedManifest:ModelManifest,private val release:suspend ()->Unit) {
+    /** Read-only snapshot of the verified asset manifest. Collections are copied on access. */
+    val manifest:ModelManifest get()=verifiedManifest.snapshot()
     suspend fun close() { release() }
 }
