@@ -31,6 +31,11 @@ private final class AppleIdentityStoreProbeRunner: ObservableObject {
         didStart = true
         let arguments = ProcessInfo.processInfo.arguments
         let runID = arguments.first(where: { $0.hasPrefix("--run-id=") }).map { String($0.dropFirst(9)) } ?? UUID().uuidString
+        if let stage = arguments.first(where: { $0.hasPrefix("--restart-stage=") }) {
+            let outcome = await AppleIdentityRestartProbe(runID: runID, stage: String(stage.dropFirst(16))).run()
+            status = outcome ? "Identity restart checkpoint ready" : "Identity restart probe failed"
+            return
+        }
         let outcome = await AppleIdentityStoreProbe(forceFailure: arguments.contains("--force-failure"), runID: runID).run()
         status = outcome ? "Identity Store probe passed" : "Identity Store probe failed"
     }

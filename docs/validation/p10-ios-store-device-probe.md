@@ -49,4 +49,48 @@ unsigned iphoneos 与现有开发签名构建均 `BUILD SUCCEEDED`。构建仅�
 
 ## 边界
 
-报告明确 `sameProcessOnly=true`。本探针不证明进程被杀/重启、设备重启、锁屏后台访问、容器路径迁移或文件系统故障恢复，也不替代 iOS15 最低系统设备验证、真实身份模型许可或阈值/PAD 校准。
+上面的原同进程报告明确 `sameProcessOnly=true`，不证明进程被杀/重启。下节补充了两个已提交检查点后的进程终止恢复；设备重启、锁屏后台访问、容器路径迁移、提交中断与文件系统故障恢复仍未验证，也不替代 iOS15 最低系统设备、真实身份模型许可或阈值/PAD 校准。
+
+## 两次 SIGKILL 后的持久恢复（2026-10-19）
+
+SDK 源码基线 `40f51f2`；本次只增加 Debug 验收 helper，不修改生产 SDK。设备仍为 iPhone 16 Pro Max / iOS27.0.1。`tools/probes/apple_identity_restart_probe.swift` 通过原宿主的 `--restart-stage=` 路由运行，使用 UUID 限定的私有 Application Support 目录、独立 Keychain namespace 和合成 `[1,2]` embedding。向量不进入报告或 Git；仅模板/candidate/receipt 的 opaque 编码保存在备份排除的测试目录内，供下一进程恢复。
+
+最终运行 UUID：`15179388-0fa7-42af-9537-e8901cf0aec5`。同一安装的可执行路径和不同 PID 已用四份 launch JSON、两份 SIGKILL JSON 与报告交叉核对：
+
+| 阶段 | PID | 实际结果 |
+| --- | --- | --- |
+| create | 15878 | enrollment 已提交，writer 保持打开，报告 ready；随后 devicectl 确认发送 SIGKILL/9 |
+| delete | 15880 | 新进程恢复相同 Store/membership，实际解密向量比较成功；持有 lease 提交删除，观察 purgePending 与 payload 仍在，报告 ready；随后第二次 SIGKILL/9 |
+| recover | 15881 | 第三个进程恢复 tombstone，原回执为 purged；payload 与模板 key 缺失，旧模板拒绝，重复删除回执相同；close 后报告 pass |
+| cleanup | 15882 | 仅删除该 UUID ledger 中的精确 key，并逐项验证缺失；删除本次私有目录，报告 pass/cleanup=true |
+
+成功 ready 路径不调用 close，Store/lease 保持在挂起函数内直到外部强制终止。Key ID 在创建前写入私有 ledger，清理不枚举 Keychain 或其他目录。验证后原已签名 `IOSSpeechProbe.app` 已重新安装并启动，无卸载操作。
+
+### 复现
+
+生成、build/install 命令与前节相同，工程输出换成新的 `artifacts/P10/identity-restart-device`（先创建父目录），derivedData 为 `artifacts/P10/identity-restart-dd`。不要复用已完成运行的 UUID。按以下阶段分别启动，每次导出 `Documents/identity-restart-probe.json` 到 `report-<stage>.json`；核对本次 UUID、stage/status 和 PID 后才执行下一步。
+
+```sh
+rtk proxy xcrun devicectl device process launch --device 00008140-0008703436D3001C --json-output <evidence>/launch-create.json io.ondeviceai.probe.speech -- --run-id=<UUID> --restart-stage=create
+rtk proxy xcrun devicectl device process terminate --device 00008140-0008703436D3001C --pid <create-report-pid> --kill --json-output <evidence>/kill-create.json
+rtk proxy xcrun devicectl device process launch --device 00008140-0008703436D3001C --json-output <evidence>/launch-delete.json io.ondeviceai.probe.speech -- --run-id=<UUID> --restart-stage=delete
+rtk proxy xcrun devicectl device process terminate --device 00008140-0008703436D3001C --pid <delete-report-pid> --kill --json-output <evidence>/kill-delete.json
+rtk proxy xcrun devicectl device process launch --device 00008140-0008703436D3001C --json-output <evidence>/launch-recover.json io.ondeviceai.probe.speech -- --run-id=<UUID> --restart-stage=recover
+rtk proxy xcrun devicectl device process launch --device 00008140-0008703436D3001C --terminate-existing --json-output <evidence>/launch-cleanup.json io.ondeviceai.probe.speech -- --run-id=<UUID> --restart-stage=cleanup
+rtk proxy python3 tools/probes/validate_identity_restart_report.py <evidence> --run-id <UUID>
+```
+
+最终原始报告、kill/launch/恢复安装 JSON 均在 Git 忽略的 `artifacts/P10/identity-restart-reviewed-device/`，校验器对该目录 exit0。初轮 `artifacts/P10/identity-restart-device/` 的 create 命令将 JSON 参数误放在 `--` 后，缺失 launch-create.json；独立审查还指出空 `withExtendedLifetime` 位于 sleep 之前不能保证等待期间的对象寿命。初轮不作为最终通过证据，按修订校验器会被拒绝。修复为每次 sleep 后使用 Store/lease 引用，并以新 UUID 重跑全部四阶段；两项 HIGH 经原 reviewer 复核关闭。
+
+校验器检查四阶段同 UUID、状态与必需 flags、不同 PID、同设备/同安装路径的成功 SIGKILL 与全部 launch 参数。四个新增工具用例含 stale/running/失败、缺 flags、同 PID、SIGTERM、错 PID/设备/参数、同名旧安装路径、缺 kill JSON 及 create launch 缺失/错参数/错 PID 等反例。缺校验器、旧安装路径误接受和 create 三反例均先 RED 后 GREEN；新旧报告校验器定向工具测试共 5/5 通过，最终真实证据目录校验 exit0。首次探针编译因误用 RevocationReceipt 失败，改用实际 DeletionReceipt 后构建成功；审查修订后的最终 build 也 `BUILD SUCCEEDED`。编译失败不是 SDK 缺陷或行为 RED。
+
+| 本次对象 | SHA-256 |
+| --- | --- |
+| restart helper 源码 | `4d04b493e648bce6cd15dbb4f676f2afbb1ca7e0d36b8424555f376c3042a54e` |
+| Debug dylib | `36bb080d7a2c2e3504a2fcad7240b04ed7489e04d3e37dafc29c45ec8d3c074f` |
+| create 报告 | `d45d1501d4f4c8b7813cdf3ed676938cf847c025be1c478f04a878fa4024bed1` |
+| delete 报告 | `986db4327217d604ab2ba12995b4559ea2062c65521ffaa18e1e556dfe484d4c` |
+| recover 报告 | `bc60095c2253a2d1a416521283be44e4633b2b8a3e6f99cc1caa3488c9ed37bb` |
+| cleanup 报告 | `06bf21bbab2bd4571ab5f7fb87545e30c5a587fb1f538a29417f2f87bfe79516` |
+
+最终构建日志 `/tmp/odai-ios-restart-build-reviewed-20261019.log`。本次只证明上述两个 durable checkpoint 之后的恢复；未在 journal rename/fsync、模板 stage 或撤销提交过程中杀进程，未注入磁盘故障，也没有 Android 跨进程结果。相关门槛继续未完成。

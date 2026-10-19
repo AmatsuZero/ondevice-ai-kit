@@ -11,6 +11,7 @@ targets:
     platform: iOS
     sources:
       - tools/probes/apple_identity_store_probe.swift
+      - tools/probes/apple_identity_restart_probe.swift
     dependencies:
       - package: OnDeviceAIKit
         product: ODAIKitIdentity

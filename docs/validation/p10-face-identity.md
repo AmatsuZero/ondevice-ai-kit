@@ -8,7 +8,7 @@
 - Task 6 公共引擎 `cc08973`；Task 7 独立授权门 `ece1d18`、会话 `06a66ea`；Task 8 模型绑定适配层 `d12c7ec`。Task 7 独立审查通过；Task 8 按 inline 执行，整个分支的最终独立审查仍待后续工作包完成。
 - 最新原生 Apple 全量 **371/371**（Identity313、Speech31、ModelStore13、Face9、Core5）；Android Identity **319/319**、ModelStore **10/10**，失败/错误/跳过均为 0。更新后的双端 verify 脚本通过，工具测试 **53/53**。
 - [Task 9 模型选型](p10-identity-model-selection.md)与[Task 10 PAD 后端](p10-pad-backend-selection.md)均为 **blocked-unverified**；尚无获批生产模型、授权数据或校准策略。Task 11 类型化 bridge、独立 Demo 控件与宿主配置已完成（`2f28922`）；Task 12 可裁剪分发及独立 consumer 已提交（`bb89516`），完成脚本重新运行工具全包 53/53。最终独立分支审查三次因模型容量不足未启动，仍待完成。P10 与 roadmap 均未完成。
-- 真实设备准确率、iOS15/API26 最低系统和进程终止/文件系统故障验收仍为独立门槛，不能由合成测试或现有 Store 同进程探针代替。
+- iOS27 已补齐两个已提交检查点后的 SIGKILL 恢复：注册后重启实际解密，lease 持有的删除提交后重启恢复 tombstone 并清理 payload/key，见 [iOS Store 真机探针](p10-ios-store-device-probe.md#两次-sigkill-后的持久恢复2026-10-19)。真实准确率、最低系统、Android 跨进程、提交中断与文件系统故障仍为独立门槛。
 
 以下切片为按实施时间保留的历史证据；其中“尚未实现/待实现”描述该次检查点，不覆盖上面的当前状态。
 
