@@ -175,3 +175,10 @@ rtk proxy ./gradlew :android:identity:testDebugUnitTest :android:identity:lintDe
 - 撤销、取消和关闭共用停止信号与串行结果门：停止回调在锁外交付并等待 drain；撤销在最终消费门之前提交时抑制结果，已提交完成结果不会被后续撤销回收；重复 close 与 callback 内重入保持单一终态。
 - Apple 原生权限全量：293/293（Identity235、Speech31、ModelStore13、Face9、Core5），0 failures。Android identity：240/240，0 failures/errors/skips；`lintDebug` 成功。日志：`/tmp/odai-verification-frozen-apple-native.log`、`/tmp/odai-verification-frozen-android.log`。
 - Task 5 仍使用合成 fixture backend；未宣称商用模型精度、真实生物数据、生产后端或最低系统版本设备验收。下一步为 Task 6：1:N identification。
+
+
+### Task 6 前置切片：candidate 排序
+
+- 已实现内部纯排序：同一 candidate 多模板最大合格分数 → 阈值过滤 → score 降序/opaque 字节序平分 → topK（1…32，默认 32）；未知 aggregation 拒绝，不回退。
+- 双端各 7 项合成测试；Apple 全包 300/300（Identity242）、Android identity247/247 + lintDebug 通过。日志 `/tmp/odai-identification-ranking-apple-all.log`、`/tmp/odai-identification-ranking-android-all.log`。
+- 这不是完整的识别引擎：尚需查询任务、quality/report metadata、immutable read lease 和最终授权发布门；不包含真实精度或 FPIR/FNIR 数值。
