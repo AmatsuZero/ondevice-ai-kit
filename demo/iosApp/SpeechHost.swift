@@ -18,7 +18,7 @@ final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency 
     private var foreground = true
     private var pickerGeneration = 0
     private var permission: PermissionTask?
-    lazy var model = SpeechViewModel(bridge: self)
+    lazy var model = SpeechViewModel(bridge: WeakSpeechHostBridge(self))
 
     init(inputs: SpeechInputStore, bridge: any SpeechBridge,
          requestAuthorization: @escaping (@escaping (Bool) -> Void) -> Void,
@@ -121,6 +121,32 @@ final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency 
     }
     private func failure(_ code: SpeechBridgeFailureCode, _ reason: String? = nil) -> SpeechBridgeFailure {
         SpeechBridgeFailure(code: code, reason: reason, domain: nil, platformCode: nil)
+    }
+}
+
+/// The controller owns the host; the Kotlin model must not retain its Swift owner.
+@MainActor
+private final class WeakSpeechHostBridge: NSObject, @preconcurrency SpeechBridge {
+    private weak var host: SpeechHost?
+    init(_ host: SpeechHost) { self.host = host }
+    func queryBackends(capability: SpeechBridgeCapability, callback: SpeechBridgeBackendsCallback) -> BridgeTask {
+        guard let host else { callback.onFailure(failure: closed); return PermissionTask() }
+        return host.queryBackends(capability: capability, callback: callback)
+    }
+    func speak(request: SpeechBridgeTtsRequest, selection: SpeechBridgeSelection, callback: SpeechBridgeTtsCallback) -> BridgeTask {
+        guard let host else { callback.onFailure(failure: closed); return PermissionTask() }
+        return host.speak(request: request, selection: selection, callback: callback)
+    }
+    func recognize(request: SpeechBridgeAsrRequest, selection: SpeechBridgeSelection, callback: SpeechBridgeAsrCallback) -> BridgeTask {
+        guard let host else { callback.onFailure(failure: closed); return PermissionTask() }
+        return host.recognize(request: request, selection: selection, callback: callback)
+    }
+    func close(callback: SpeechBridgeCloseCallback) {
+        guard let host else { callback.onClosed(); return }
+        host.close(callback: callback)
+    }
+    private var closed: SpeechBridgeFailure {
+        SpeechBridgeFailure(code: .closed, reason: nil, domain: nil, platformCode: nil)
     }
 }
 

@@ -8,6 +8,15 @@ import ODAIKitBinding
 
 @MainActor
 final class SpeechHostTests: XCTestCase {
+    func testClosedHostDoesNotRetainItselfThroughModel() throws {
+        let f = try HostFixture()
+        defer { try? FileManager.default.removeItem(at: f.root) }
+        weak var released = f.host
+        _ = f.host.model
+        f.host.close()
+        f.host = nil
+        XCTAssertNil(released)
+    }
     func testPermissionReplyAfterBackgroundDoesNotStartRecognition() throws {
         let f = try HostFixture()
         defer { f.shutdown() }

@@ -6,7 +6,7 @@
 
 当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；可选的 Apple AVSpeech TTS、Apple 文件 ASR、Android 系统 TTS，以及 Android on-device ASR 模块；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。
 
-身份模块现已提供独立原生契约、加密存储/删除、1:1/1:N 引擎、活体会话、KMP bridge 与 Demo 控件；生产身份模型、PAD 后端和校准尚未启用。视频超分和 VLM 目前仍是独立探针；语音模块已提供系统后端的 SDK 契约与可裁剪分发，iOS ASR 当前是本地文件、强制 on-device 的可选后端，完整 KMP Demo 接入、麦克风 ASR 和第三方云端后端仍未交付。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
+身份模块现已提供独立原生契约、加密存储/删除、1:1/1:N 引擎、活体会话、KMP bridge 与 Demo 控件；生产身份模型、PAD 后端和校准尚未启用。视频超分和 VLM 目前仍是独立探针；语音已有双端 KMP bridge、共享页面和原生 host，iOS 使用独立生成工程。iOS ASR 当前仅本地文件、强制 on-device；iOS 麦克风和第三方云端后端未交付。现代真机的双端 TTS 与 iOS 文件 ASR Demo 闭环已通过；Android ASR 仍缺资源，最低系统/自然质量与追加独立审查待补，见[语音 Demo 验证](docs/validation/speech-demo-bridge.md)。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
 
 当前 Demo 提供人脸检测与独立“身份与活体”控件；身份默认显示 UNVERIFIED，宿主注入真实授权、策略与后端后才可运行。后续 SDK/Demo 能力和调研→探针→模块接入的范围见 [功能路线图](docs/ROADMAP.md#当前范围与后续功能)。iOS15 与 Android 真机验收已按用户安排登记为 [等待设备 TODO](docs/ROADMAP.md#等待设备的-todo)，待设备提供后恢复。
 
@@ -29,6 +29,16 @@ python3 -m unittest discover -s tools/tests -v
 Xcode 工程已提交。需要重新生成时，使用已有 Ruby xcodeproj gem 执行 `ruby scripts/generate-xcode-projects.rb`。iOS Demo 构建前先执行 `./gradlew :demo:shared:linkDebugFrameworkIosSimulatorArm64`（真机改为 `IosArm64`），再打开 `demo/iosApp/OnDeviceAIDemo.xcodeproj`。Demo 当前仅支持 Apple Silicon 模拟器；SDK 本身不依赖 KMP。真机签名由宿主配置。
 
 Android Demo：`./gradlew :demo:androidApp:assembleDebug`。照片、相机和 benchmark 入口均调用真实原生后端。系统权限由 Demo 管理；SDK 不主动弹权限。benchmark 使用 5 次预热、30 次采样，记录实际后端和测量方法；未测内存/能耗为 null。
+
+语音 Demo：Android APK 的“语音”页包含系统 TTS 与仅麦克风 ASR，宿主管理 `RECORD_AUDIO`。iOS 不修改现有 Xcode 工程，先构建两份共享 framework，再生成到尚不存在的目录：
+
+```sh
+./gradlew :demo:shared:linkDebugFrameworkIosSimulatorArm64 :demo:shared:linkDebugFrameworkIosArm64
+ODAI_SPEECH_DEMO_DIR=artifacts/SpeechDemo-new ruby scripts/generate-speech-demo.rb
+open artifacts/SpeechDemo-new/SpeechDemo.xcodeproj
+```
+
+生成器可用 `ODAI_DEVELOPMENT_TEAM` 传入已有 team；不创建签名账户/资产。新工程包含实际 App UI 测试，旧工程仍保留旧入口。后端列表不等于语言资源就绪；取消按钮会等待 native drain 后才恢复操作。当前真机证据、Android 资源与审查缺口、完整测试命令见[验证记录](docs/validation/speech-demo-bridge.md)。
 
 ## 本地分发
 

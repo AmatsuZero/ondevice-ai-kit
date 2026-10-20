@@ -4,6 +4,22 @@ import io.ondeviceai.binding.*
 import io.ondeviceai.speech.*
 import kotlinx.coroutines.*
 
+/** One system prompt, with its result delivered to the latest admitted logical retry. */
+internal class SpeechPermissionGate(private val launch: () -> Unit) {
+    private var inFlight = false
+    private var reply: ((Boolean) -> Unit)? = null
+    fun request(callback: (Boolean) -> Unit) {
+        reply = callback
+        if (!inFlight) { inFlight = true; launch() }
+    }
+    fun complete(granted: Boolean) {
+        inFlight = false
+        val callback = reply; reply = null
+        callback?.invoke(granted)
+    }
+    fun clear() { reply = null }
+}
+
 /** Owns initialization and cleanup independently of the Activity's cancelled lifecycle Job. */
 class SpeechHost(
     scope: CoroutineScope,
@@ -24,10 +40,13 @@ class SpeechHost(
     private var closing = false
     private var closeResult: SpeechBridgeFailure? = null
     private var closeFinished = false
+    private val initializationFailures = mutableMapOf<SpeechBridgeCapability, SpeechBridgeFailure>()
     private val initialization = owner.launch {
-        val ttsBackend = try { createTts() } catch (_: Exception) { null }
+        val ttsBackend = try { createTts() } catch (error: CancellationException) { throw error }
+            catch (_: Exception) { recordInitializationFailure(SpeechBridgeCapability.TTS); null }
         if (closed) { ttsBackend?.close(); return@launch }
-        val asrBackend = try { createAsr() } catch (_: Exception) { null }
+        val asrBackend = try { createAsr() } catch (error: CancellationException) { throw error }
+            catch (_: Exception) { recordInitializationFailure(SpeechBridgeCapability.ASR); null }
         adapter = AndroidSpeechBridge(
             tts = ttsBackend?.let { SpeechSynthesisClient(it.backendId, listOf(it)) },
             asr = asrBackend?.let { SpeechRecognitionClient(it.backendId, listOf(it)) }, scope = owner)
@@ -45,15 +64,18 @@ class SpeechHost(
 
     override fun queryBackends(capability: SpeechBridgeCapability, callback: SpeechBridgeBackendsCallback): BridgeTask {
         if (closed) { callback.onFailure(failure(SpeechBridgeFailureCode.CLOSED)); return CompletedTask }
+        initializationFailures[capability]?.let { callback.onFailure(it); return CompletedTask }
         return adapter.queryBackends(capability, callback)
     }
     override fun speak(request: SpeechBridgeTtsRequest, selection: SpeechBridgeSelection, callback: SpeechBridgeTtsCallback): BridgeTask {
         if (closed) { callback.onFailure(failure(SpeechBridgeFailureCode.CLOSED)); return CompletedTask }
+        initializationFailures[SpeechBridgeCapability.TTS]?.let { callback.onFailure(it); return CompletedTask }
         if (permission != null) { callback.onFailure(failure(SpeechBridgeFailureCode.BUSY)); return CompletedTask }
         return adapter.speak(request, selection, callback)
     }
     override fun recognize(request: SpeechBridgeAsrRequest, selection: SpeechBridgeSelection, callback: SpeechBridgeAsrCallback): BridgeTask {
         if (closed) { callback.onFailure(failure(SpeechBridgeFailureCode.CLOSED)); return CompletedTask }
+        initializationFailures[SpeechBridgeCapability.ASR]?.let { callback.onFailure(it); return CompletedTask }
         if (permission != null) { callback.onFailure(failure(SpeechBridgeFailureCode.BUSY)); return CompletedTask }
         if (!foreground) { callback.onCancelled(); return CompletedTask }
         if (request.input !is SpeechBridgeInput.Microphone) {
@@ -105,5 +127,9 @@ class SpeechHost(
         }
     }
     private object CompletedTask : BridgeTask { override fun cancel() = Unit }
+    private fun recordInitializationFailure(capability: SpeechBridgeCapability) {
+        initializationFailures[capability] = SpeechBridgeFailure(SpeechBridgeFailureCode.PLATFORM, null,
+            domain = "demo.speech.initialization", platformCode = 1)
+    }
     private fun failure(code: SpeechBridgeFailureCode, reason: String? = null) = SpeechBridgeFailure(code, reason)
 }

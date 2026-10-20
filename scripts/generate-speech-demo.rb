@@ -12,7 +12,8 @@ frameworks = %w[iosSimulatorArm64 iosArm64].map do |platform|
   File.join(root, "demo/shared/build/bin/#{platform}/debugFramework/ODAIKitDemo.framework")
 end
 inputs = sources.map { |path| File.join(root, path) } + frameworks +
-  [File.join(root, 'apple'), File.join(root, 'demo/iosApp/Info.plist')]
+  [File.join(root, 'apple'), File.join(root, 'demo/iosApp/Info.plist'),
+   File.join(root, 'demo/iosApp/UITests/SpeechDemoUITests.swift')]
 inputs.each { |path| abort("Missing input: #{path}") unless File.exist?(path) }
 FileUtils.mkdir_p(File.dirname(directory))
 Dir.mkdir(directory)
@@ -51,9 +52,24 @@ target.build_configurations.each do |config|
   team = ENV['ODAI_DEVELOPMENT_TEAM']
   config.build_settings['DEVELOPMENT_TEAM'] = team unless team.nil? || team.empty?
 end
+ui = project.new_target(:ui_test_bundle, 'SpeechDemoUITests', :ios, '17.0')
+ui.add_dependency(target)
+ui.source_build_phase.add_file_reference(project.main_group.new_file(File.join(root, 'demo/iosApp/UITests/SpeechDemoUITests.swift')))
+ui.build_configurations.each do |config|
+  config.build_settings.merge!({
+    'PRODUCT_BUNDLE_IDENTIFIER' => 'io.ondeviceai.ondeviceaidemo.uitests',
+    'SWIFT_VERSION' => '5.0', 'GENERATE_INFOPLIST_FILE' => 'YES', 'ARCHS' => 'arm64',
+    'TEST_TARGET_NAME' => 'SpeechDemo', 'CODE_SIGN_STYLE' => 'Automatic',
+    'TARGETED_DEVICE_FAMILY' => '1,2'
+  })
+  team = ENV['ODAI_DEVELOPMENT_TEAM']
+  config.build_settings['DEVELOPMENT_TEAM'] = team unless team.nil? || team.empty?
+end
 project.save
 scheme = Xcodeproj::XCScheme.new
 scheme.add_build_target(target)
 scheme.set_launch_target(target)
+scheme.add_build_target(ui)
+scheme.add_test_target(ui)
 scheme.save_as(project.path, target.name, true)
 puts project.path

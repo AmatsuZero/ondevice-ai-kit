@@ -1,10 +1,14 @@
 package io.ondeviceai.demo
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import io.ondeviceai.binding.*
 
@@ -14,6 +18,7 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
     var locale by remember { mutableStateOf("en-US") }
     var text by remember { mutableStateOf("") }
     var voice by remember { mutableStateOf("") }
+    val focusManager = LocalFocusManager.current
     LaunchedEffect(model) {
         model.refreshBackends(SpeechBridgeCapability.TTS)
         model.refreshBackends(SpeechBridgeCapability.ASR)
@@ -25,7 +30,9 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
     BackendControls("TTS", state.tts, state.ttsSelection, state.controlsEnabled,
         { model.selectBackend(SpeechBridgeCapability.TTS, it) }, { model.refreshBackends(SpeechBridgeCapability.TTS) })
     OutlinedTextField(text, { model.cancel(); text = it }, label = { Text("朗读文本") },
-        modifier = Modifier.fillMaxWidth().testTag("speech-tts-text"), enabled = state.controlsEnabled)
+        modifier = Modifier.fillMaxWidth().testTag("speech-tts-text"), enabled = state.controlsEnabled,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }))
     OutlinedTextField(voice, { model.cancel(); voice = it }, label = { Text("voice ID（可选）") },
         modifier = Modifier.fillMaxWidth(), singleLine = true, enabled = state.controlsEnabled)
     Button(onClick = { model.speak(SpeechBridgeTtsRequest(text, locale, voice.takeIf { it.isNotBlank() })) },

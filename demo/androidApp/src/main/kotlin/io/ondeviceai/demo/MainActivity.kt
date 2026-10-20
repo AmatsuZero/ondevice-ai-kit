@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -49,10 +51,10 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private lateinit var bridge:AndroidFaceBridge
     private lateinit var model:FaceViewModel
     private lateinit var speechHost: SpeechHost
-    private var speechPermissionReply: ((Boolean) -> Unit)? = null
-    private val speechPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        val reply = speechPermissionReply; speechPermissionReply = null; reply?.invoke(granted)
+    private val speechPermission: androidx.activity.result.ActivityResultLauncher<String> = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        speechPermissionGate.complete(granted)
     }
+    private val speechPermissionGate: SpeechPermissionGate = SpeechPermissionGate { speechPermission.launch(Manifest.permission.RECORD_AUDIO) }
     private var identityModel by mutableStateOf(IdentityViewModel(UnavailableIdentityBridge()))
     private var identityProbeFactory:((Bitmap)->IdentityProbeReference)?=null
     private var latestIdentityCameraFrame:Triple<Bitmap,Long,Int>?=null
@@ -71,19 +73,17 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private val reportPicker=registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) {uri->
         if(uri!=null) lifecycleScope.launch(Dispatchers.IO) {try {contentResolver.openOutputStream(uri)?.use{it.write((report?:"").toByteArray())}}catch(error:Exception){withContext(Dispatchers.Main){message=error.message}}}
     }
+    @OptIn(androidx.compose.ui.ExperimentalComposeUiApi::class)
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
         bridge=AndroidFaceBridge(detector,lifecycleScope){result=it};model=FaceViewModel(bridge)
         speechHost = SpeechHost(lifecycleScope,
             createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },
             hasPermission = { Build.VERSION.SDK_INT < 31 || ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED },
-            requestPermission = { reply ->
-                // Keep the callback attached to its original launch until Android returns it.
-                if (speechPermissionReply != null) reply(false)
-                else { speechPermissionReply = reply; speechPermission.launch(Manifest.permission.RECORD_AUDIO) }
-            }, openSettings = { startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) })
+            requestPermission = speechPermissionGate::request,
+            openSettings = { startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) })
         setContent {
-            MaterialTheme {Column(Modifier.fillMaxSize()) {
+            MaterialTheme {Column(Modifier.fillMaxSize().semantics { testTagsAsResourceId = true }) {
                 Box(Modifier.weight(1f).fillMaxWidth().background(Color.Black)) {
                     if(cameraRunning) AndroidView(factory={context->PreviewView(context).also{previewView=it;bindCamera(it)}},modifier=Modifier.fillMaxSize())
                     else photo?.let{Image(it.asImageBitmap(),"selected image",Modifier.fillMaxSize(),contentScale=ContentScale.Crop)}
@@ -190,5 +190,5 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     override fun exportReport(json:String){report=json;reportPicker.launch("odai-benchmark.json")}
     override fun onStart(){super.onStart();if(::speechHost.isInitialized)speechHost.onForeground()}
     override fun onStop(){if(::speechHost.isInitialized)speechHost.onBackground();super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
-    override fun onDestroy(){if(::speechHost.isInitialized)speechHost.close();speechPermissionReply=null;if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
+    override fun onDestroy(){if(::speechHost.isInitialized)speechHost.close();speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
 }

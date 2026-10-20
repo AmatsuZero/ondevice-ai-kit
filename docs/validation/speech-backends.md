@@ -112,7 +112,7 @@ P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端�
 
 ## Android on-device ASR 可选后端
 
-本包沿用同一注册表，新增 `SpeechRecognitionRequest(locale)`、`SpeechRecognitionResult(backendId, transcript, confidence?)`、`SpeechRecognitionBackend` 与 `SpeechRecognitionClient`，与 TTS 请求/结果分别定义。首版为一次短句的麦克风输入，不承诺持续听写、partial 流、音频文件注入或语音模型安装。`android:backend-system-asr` 使用 `android.speech.recognizer` ID，保持 minSdk26，API31 以下只报告不可用；已注册但不可用或显式选择未知 ID 均不回退到其他引擎。Demo 只在 androidTest 依赖后端；麦克风权限仅加入 debug manifest，默认 release 不包含 ASR 实现或麦克风权限。
+本包沿用同一注册表，新增 `SpeechRecognitionRequest(locale)`、`SpeechRecognitionResult(backendId, transcript, confidence?)`、`SpeechRecognitionBackend` 与 `SpeechRecognitionClient`，与 TTS 请求/结果分别定义。首版为一次短句的麦克风输入，不承诺持续听写、partial 流、音频文件注入或语音模型安装。`android:backend-system-asr` 使用 `android.speech.recognizer` ID，保持 minSdk26，API31 以下只报告不可用；已注册但不可用或显式选择未知 ID 均不回退到其他引擎。最初探针阶段只在 androidTest 依赖后端；2026-10-20 Demo bridge 包已将系统 TTS/ASR 和 RECORD_AUDIO 加入实际 Demo host，原生 contract-only 消费者仍可裁剪。
 
 官方边界已按本机 Android API34 `api-versions.xml`、API37 public sources 及 [AOSP Android 13 固定源码](https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-13.0.0_r1/core/java/android/speech/SpeechRecognizer.java) 核对：
 
@@ -153,3 +153,11 @@ P6 仍保留这些边界：Android API35 ASR 的 `en-US` 资源缺失导致 `MIS
 ## iOS ASR 文件探针工作包
 
 P6 继续补充固定合成音频的文件识别探针，操作与证据见 [iOS ASR 固定文件探针](ios-asr-file-probe.md)。它沿用 `apple.speech.recognizer` 的强制 on-device 边界，文件输入不采集麦克风，通过探针按钮或显式 `--run-asr` 启动参数运行。iPhone 16 Pro Max / iOS 27.0.1 首轮的 150ms 延迟取消未生效，保留为 incomplete；第二轮任务创建后立即取消，确认 `platformCancelled=true`、平台 task completed，以及同一进程后续转写成功，整体 `status=success`。输入 SHA 与冻结基线一致。文件探针不覆盖麦克风、音频 session 或 iOS 26 SpeechTranscriber。
+
+## 2026-10-20 KMP Speech Demo bridge
+
+Tasks 1–6 已实现：能力级 metadata 查询、严格 Default/Explicit 选择、双端 drain/close adapter、iOS opaque file token/lease、共享状态机和真实 host。Android Demo实际链接系统TTS/ASR并申请麦克风权限；iOS通过fresh独立工程链接AppleSpeech，不改旧项目。Swift Host使用弱转发防止Kotlin引用环；Android权限重试复用原系统prompt，factory失败保留稳定PLATFORM而非误报未链接。
+
+最新本地验证为Swift378项、iOS adapter/Host20项、Android Host5项、工具76项零失败，Android验证569tasks成功；七个XCFramework及原生Face/Speech/Identity/Maven消费者通过。真实Android Demo TTS完成、活动取消、重入、后台取消/前台不自动运行通过。ASR仍返回MISSING_ASSETS；用户批准的英语资源下载尝试未确认资源就绪，没有转向网络recognizer或采集真人音频。iOS语音入口/滚动通过；修正仅以 `isHittable` 判断部分可见 Compose accessibility 元素的假阳性后，真实 clean App 的文件 picker 打开/取消在 `speech-ui-fully-visible.xcresult` 中通过。后续画面定位与慢速稳定滚动证明旧焦点失败为自动化误判；原多行输入、Done、TTS完成/取消/重入/后台完整用例已通过（73.656秒）。文件ASR实际picker导入、取消保留、完成/活动取消/同输入重入/后台门禁均已通过；最终完整UI5/5、零跳过，141.919秒（asr-file-ui-full-suite.xcresult）。普通无分享包已恢复；新UI/Done追加独立审查仍因容量不足待恢复。
+
+Task7仍进行中，完整命令、失败证据、用户授权边界与下一入口见[语音Demo验证](speech-demo-bridge.md)。P6最低系统、iOS麦克风、Android真实转写、断网/自然质量及第三方后端不因此关闭。

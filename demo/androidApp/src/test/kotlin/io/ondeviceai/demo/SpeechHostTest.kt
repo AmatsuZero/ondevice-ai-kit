@@ -7,6 +7,49 @@ import kotlinx.coroutines.*
 import kotlin.test.*
 
 class SpeechHostTest {
+    @Test fun permissionRetryReusesPromptAndReceivesOnlyActualResult() = runBlocking {
+        for (granted in listOf(true, false)) {
+            var prompts = 0
+            val gate = SpeechPermissionGate { prompts++ }
+            val backend = HostAsrBackend()
+            val host = SpeechHost(CoroutineScope(Dispatchers.Unconfined), createTts = { null }, createAsr = { backend },
+                hasPermission = { false }, requestPermission = gate::request, openSettings = {})
+            host.model.recognize(SpeechBridgeAsrRequest("en-US", SpeechBridgeInput.Microphone))
+            host.onBackground()
+            assertEquals(SpeechPhase.CANCELLED, host.model.state.phase)
+            host.onForeground()
+            host.model.recognize(SpeechBridgeAsrRequest("en-US", SpeechBridgeInput.Microphone))
+            assertEquals(1, prompts)
+            assertEquals(0, backend.starts)
+            assertNull(host.model.state.failure)
+            gate.complete(granted)
+            assertEquals(if (granted) 1 else 0, backend.starts)
+            if (!granted) assertEquals("PERMISSION_DENIED", host.model.state.failure?.reason)
+            host.close()
+        }
+    }
+    @Test fun factoryFailureIsPlatformFailureNotMissingModule() = runBlocking {
+        val host = SpeechHost(CoroutineScope(Dispatchers.Unconfined),
+            createTts = { error("private factory details") }, createAsr = { error("private recognizer details") },
+            hasPermission = { true }, requestPermission = { it(true) }, openSettings = {})
+        for (capability in SpeechBridgeCapability.entries) {
+            var failure: SpeechBridgeFailure? = null
+            host.queryBackends(capability, object : SpeechBridgeBackendsCallback {
+                override fun onResult(backends: List<SpeechBridgeBackend>) { error("expected initialization failure") }
+                override fun onFailure(value: SpeechBridgeFailure) { failure = value }
+                override fun onCancelled() { error("unexpected cancellation") }
+            })
+            assertEquals(SpeechBridgeFailureCode.PLATFORM, failure?.code)
+            assertEquals("demo.speech.initialization", failure?.domain)
+            assertEquals(1, failure?.platformCode)
+            assertNull(failure?.reason)
+        }
+        host.model.speak(SpeechBridgeTtsRequest("fixture", "en-US", null))
+        assertEquals(SpeechBridgeFailureCode.PLATFORM, host.model.state.failure?.code)
+        host.model.recognize(SpeechBridgeAsrRequest("en-US", SpeechBridgeInput.Microphone))
+        assertEquals(SpeechBridgeFailureCode.PLATFORM, host.model.state.failure?.code)
+        host.close()
+    }
     @Test fun ttsInitializationAfterOwnerCloseDisposesBackend() = runBlocking {
         val started = CompletableDeferred<Unit>()
         val factory = CompletableDeferred<SpeechSynthesisBackend?>()
