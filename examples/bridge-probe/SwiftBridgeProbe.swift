@@ -9,6 +9,57 @@ final class SwiftFaceBridge: NSObject, FaceBridge {
 }
 func verifySwiftBridge() { precondition(FaceBridgeKt.probeBackend(bridge: SwiftFaceBridge()) == "apple.vision") }
 
+final class SwiftSpeechBackendsCallback: NSObject, SpeechBridgeBackendsCallback {
+    func onResult(backends: [SpeechBridgeBackend]) {}
+    func onFailure(failure: SpeechBridgeFailure) {}
+    func onCancelled() {}
+}
+
+final class SwiftSpeechTtsCallback: NSObject, SpeechBridgeTtsCallback {
+    func onResult(synthesis: SpeechBridgeTtsResult) {}
+    func onFailure(failure: SpeechBridgeFailure) {}
+    func onCancelled() {}
+}
+
+final class SwiftSpeechAsrCallback: NSObject, SpeechBridgeAsrCallback {
+    func onResult(output: SpeechBridgeAsrResult) {}
+    func onFailure(failure: SpeechBridgeFailure) {}
+    func onCancelled() {}
+}
+
+final class SwiftSpeechCloseCallback: NSObject, SpeechBridgeCloseCallback {
+    func onClosed() {}
+    func onFailure(failure: SpeechBridgeFailure) {}
+}
+
+// Kotlin sealed interfaces are exported as Swift protocols. Native adapters must reject
+// conformers other than the generated Default and Explicit selection implementations.
+final class SwiftUnknownSpeechSelection: NSObject, SpeechBridgeSelection {}
+
+func verifySwiftSpeechBridge(bridge: SpeechBridge) {
+    let backendCallback = SwiftSpeechBackendsCallback()
+    let ttsCallback = SwiftSpeechTtsCallback()
+    let asrCallback = SwiftSpeechAsrCallback()
+    let defaultSelection = SpeechBridgeSelectionDefault.shared
+    let explicitSelection = SpeechBridgeSelectionExplicit(backendId: "system.tts")
+    let microphone = SpeechBridgeInputMicrophone.shared
+    let file = SpeechBridgeInputAudioFile(reference: "opaque-file")
+    let availability = BridgeAvailability(available: true, reason: nil, backendId: "system.asr", minimumOS: "15.0")
+    _ = SpeechBridgeBackend(capability: .asr, backendId: "system.asr", availability: availability,
+                            supportedInputs: [.audioFile], offline: true)
+    _ = SpeechBridgeTtsResult(backendId: "system.tts", voiceId: nil)
+    _ = SpeechBridgeAsrResult(backendId: "system.asr", transcript: "fixture", confidence: nil)
+    _ = SpeechBridgeFailure(code: .platform, reason: nil, domain: "fixture", platformCode: 7)
+    bridge.queryBackends(capability: .tts, callback: backendCallback).cancel()
+    bridge.speak(request: SpeechBridgeTtsRequest(text: "hello", locale: "en-US", voiceId: nil),
+                 selection: defaultSelection, callback: ttsCallback).cancel()
+    bridge.recognize(request: SpeechBridgeAsrRequest(locale: "en-US", input: microphone),
+                     selection: explicitSelection, callback: asrCallback).cancel()
+    bridge.recognize(request: SpeechBridgeAsrRequest(locale: "en-US", input: file),
+                     selection: SwiftUnknownSpeechSelection(), callback: asrCallback).cancel()
+    bridge.close(callback: SwiftSpeechCloseCallback())
+}
+
 final class SwiftIdentityCallback: NSObject, IdentityCallback {
     func onSuccess(value: Any?) {}
     func onFailure(error: IdentityBridgeFailure) {}
