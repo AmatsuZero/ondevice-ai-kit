@@ -46,10 +46,16 @@ public enum SpeechRecognitionError: Error, Equatable, Sendable {
 }
 
 public protocol SpeechRecognitionBackend: SpeechBackend {
+    /// Static capability metadata. Existing backends are file-only by default.
+    var supportedInputs: [SpeechRecognitionInputKind] { get }
     func recognize(_ request: SpeechRecognitionRequest) async throws -> SpeechRecognitionResult
     /// Wait for the currently admitted platform operation to release its input.
     /// Does not cancel work or close admission; callers coordinate new requests.
     func drain() async
+}
+
+public extension SpeechRecognitionBackend {
+    var supportedInputs: [SpeechRecognitionInputKind] { [.audioFile] }
 }
 
 /// Typed file recognition facade over the capability-scoped backend registry.
@@ -112,6 +118,17 @@ public struct SpeechBackendDescriptor: Sendable, Equatable {
     public let capability: SpeechCapability
     public let backendId: String
     public let availability: CapabilityAvailability
+
+    public let supportedInputs: [SpeechRecognitionInputKind]
+
+    public init(capability: SpeechCapability, backendId: String,
+                availability: CapabilityAvailability,
+                supportedInputs: [SpeechRecognitionInputKind] = []) {
+        self.capability = capability
+        self.backendId = backendId
+        self.availability = availability
+        self.supportedInputs = supportedInputs
+    }
 }
 
 public enum SpeechClientError: Error, Equatable, Sendable {
@@ -155,7 +172,9 @@ public actor SpeechClient {
             for backend in registrations.values {
                 group.addTask {
                     SpeechBackendDescriptor(capability: self.capability, backendId: backend.backendId,
-                                            availability: await backend.availability())
+                                            availability: await backend.availability(),
+                                            supportedInputs: self.capability == .asr
+                                                ? (backend as? any SpeechRecognitionBackend)?.supportedInputs ?? [] : [])
                 }
             }
             var result: [SpeechBackendDescriptor] = []
@@ -180,7 +199,9 @@ public actor SpeechClient {
             throw SpeechClientError.backendUnavailable(capability: capability, backendId: id,
                                                         reason: availability.reason ?? .unsupportedDevice)
         }
-        return SpeechBackendDescriptor(capability: capability, backendId: id, availability: availability)
+        return SpeechBackendDescriptor(capability: capability, backendId: id, availability: availability,
+                                       supportedInputs: capability == .asr
+                                           ? (backend as? any SpeechRecognitionBackend)?.supportedInputs ?? [] : [])
     }
 
     public func close() async {
