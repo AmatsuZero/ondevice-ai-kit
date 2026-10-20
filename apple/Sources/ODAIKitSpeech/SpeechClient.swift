@@ -76,6 +76,14 @@ public actor SpeechRecognitionClient {
         return try await implementation.recognize(request)
     }
 
+    public func listBackends() async throws -> [SpeechBackendDescriptor] {
+        guard !closed else { throw SpeechClientError.closed }
+        let descriptors = await registry.listBackends()
+        try Task.checkCancellation()
+        guard !closed else { throw SpeechClientError.closed }
+        return descriptors
+    }
+
     public func close() async {
         closed = true
         if closeTask == nil {
@@ -227,6 +235,13 @@ public actor SpeechSynthesisClient {
             throw SpeechClientError.backendNotRegistered(capability: .tts, backendId: selected.backendId)
         }
         return try await implementation.speak(request)
+    }
+    public func listBackends() async throws -> [SpeechBackendDescriptor] {
+        guard !closed else { throw SpeechClientError.closed }
+        let descriptors = await registry.listBackends()
+        try Task.checkCancellation()
+        guard !closed else { throw SpeechClientError.closed }
+        return descriptors
     }
     public func close() async {
         closed = true

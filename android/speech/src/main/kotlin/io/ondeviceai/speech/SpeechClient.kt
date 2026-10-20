@@ -96,13 +96,23 @@ class SpeechSynthesisClient(defaultBackendId: String, backends: List<SpeechSynth
         backends.map { SpeechBackendRegistration(SpeechCapability.TTS, it) }
     )
     private val table = backends.associateBy { it.backendId }
+    @Volatile private var closed = false
     init { require(backends.map { it.backendId }.toSet().size == backends.size) }
     suspend fun speak(request: SpeechSynthesisRequest, selection: SpeechBackendSelection = SpeechBackendSelection.Default): SpeechSynthesisResult {
         require(request.text.isNotEmpty()) { "empty text" }
         val descriptor = registry.select(selection)
         return table.getValue(descriptor.backendId).speak(request)
     }
-    suspend fun close() = registry.close()
+    suspend fun listBackends(): List<SpeechBackendDescriptor> {
+        check(!closed) { "closed" }
+        val descriptors = registry.listBackends()
+        check(!closed) { "closed" }
+        return descriptors
+    }
+    suspend fun close() {
+        closed = true
+        registry.close()
+    }
 }
 
 data class SpeechRecognitionRequest(val locale: String) {
@@ -126,6 +136,7 @@ class SpeechRecognitionClient(defaultBackendId: String, backends: List<SpeechRec
         backends.map { SpeechBackendRegistration(SpeechCapability.ASR, it) }
     )
     private val table = backends.associateBy { it.backendId }
+    @Volatile private var closed = false
     init { require(backends.map { it.backendId }.toSet().size == backends.size) }
     suspend fun recognize(
         request: SpeechRecognitionRequest,
@@ -138,5 +149,14 @@ class SpeechRecognitionClient(defaultBackendId: String, backends: List<SpeechRec
             throw SpeechClientError.BackendUnavailable(capability = SpeechCapability.ASR, backendId = descriptor.backendId, reason = error.reason, diagnostic = error)
         }
     }
-    suspend fun close() = registry.close()
+    suspend fun listBackends(): List<SpeechBackendDescriptor> {
+        check(!closed) { "closed" }
+        val descriptors = registry.listBackends()
+        check(!closed) { "closed" }
+        return descriptors
+    }
+    suspend fun close() {
+        closed = true
+        registry.close()
+    }
 }
