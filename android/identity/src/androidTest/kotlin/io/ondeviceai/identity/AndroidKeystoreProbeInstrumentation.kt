@@ -19,6 +19,10 @@ class AndroidKeystoreProbeInstrumentation : Instrumentation() {
     }
 
     override fun onStart() {
+        if (probeArguments?.getString("probe") == "restart") {
+            AndroidIdentityRestartProbe(this, probeArguments ?: Bundle()).run()
+            return
+        }
         if (probeArguments?.getString("probe") == "store") {
             AndroidIdentityStoreProbeInstrumentation(this, probeArguments ?: Bundle()).run()
             return

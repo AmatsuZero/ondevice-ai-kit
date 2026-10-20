@@ -74,7 +74,9 @@ P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试
 
 ## 恢复时的第一步
 
-2026-10-19 P10 验收补充：iPhone16ProMax/iOS27 已完成注册持久化后 SIGKILL→新进程实际解密，以及持有 lease 的删除提交后 SIGKILL→新进程 tombstone/稳定回执/payload/key 清理；最终精确 cleanup=true，原语音探针已恢复。见 [进程恢复证据](validation/p10-ios-store-device-probe.md#两次-sigkill-后的持久恢复2026-10-19)。本次不证明提交中断、文件系统故障或 Android 跨进程验收；P10/roadmap 继续未完成。最终分支独立审查再次返回容量错误，未产生结论。
+2026-10-19 P10 验收补充：iPhone16ProMax/iOS27 已完成注册持久化后 SIGKILL→新进程实际解密，以及持有 lease 的删除提交后 SIGKILL→新进程 tombstone/稳定回执/payload/key 清理；最终精确 cleanup=true，原语音探针已恢复。见 [进程恢复证据](validation/p10-ios-store-device-probe.md#两次-sigkill-后的持久恢复2026-10-19)。
+
+2026-10-20 P10 验收补充：TECNO KM9/API35 已完成 Android create→SIGKILL、delete→SIGKILL、recover、cleanup 四阶段跨进程链；runner 在每个 stage 前对精确测试包 force-stop 并确认无旧 PID，controller 与校验器确认四个不同 PID/launch nonce、报告绑定、双 kill -9、tombstone/稳定回执、payload/key purge 与 run-scoped cleanup，runner 检测到的失败路径也会 best-effort 清理并留下 cleanup outcome。见 [Android 进程恢复证据](validation/p10-android-store-device-probe.md#两次-sigkill-后的跨进程持久恢复2026-10-20)。两端证据仍不证明 API26/iOS15、提交中断或文件系统故障；P10/roadmap 继续未完成。最终分支独立审查仍待取得结论。
 
 2026-10-19 P6 当前入口：语音 Client 的 availability/close 竞态与并发 close 等待已修复并提交 `c13ed4c`，Apple 全包374/374、Android Speech12/12、TTS3/3、ASR7/7及消费者构建通过，见[语音记录](validation/speech-backends.md)。用户已选择“先将现有后端接 Demo，再独立补齐 iOS 麦克风 ASR”；[语音 bridge 与 Demo 书面规格](superpowers/specs/2026-10-19-speech-demo-bridge-design.md)已获用户认可；含七个 Task 的[实施计划](superpowers/plans/2026-10-19-speech-demo-bridge.md)已编写待审阅，产品实现尚未开始。麦克风、Android ASR 实际转写、离线/质量和最低系统验证继续保留。P10 最终独立审查的再次重试仍因模型容量不足退出，未产生审查结论；固定 revision 的 SFace LFS 元数据与运行时可行性研究已补入[模型预研](validation/p10-identity-model-selection.md)，未下载模型或选定运行时。
 
