@@ -7,6 +7,9 @@ import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.os.Build
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,6 +35,8 @@ import androidx.lifecycle.lifecycleScope
 import io.ondeviceai.binding.*
 import io.ondeviceai.face.*
 import io.ondeviceai.mlkit.MLKitFaceDetector
+import io.ondeviceai.systemtts.AndroidTextToSpeechBackend
+import io.ondeviceai.systemasr.AndroidSpeechRecognizerBackend
 import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -43,6 +48,11 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private val detector=MLKitFaceDetector()
     private lateinit var bridge:AndroidFaceBridge
     private lateinit var model:FaceViewModel
+    private lateinit var speechHost: SpeechHost
+    private var speechPermissionReply: ((Boolean) -> Unit)? = null
+    private val speechPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        val reply = speechPermissionReply; speechPermissionReply = null; reply?.invoke(granted)
+    }
     private var identityModel by mutableStateOf(IdentityViewModel(UnavailableIdentityBridge()))
     private var identityProbeFactory:((Bitmap)->IdentityProbeReference)?=null
     private var latestIdentityCameraFrame:Triple<Bitmap,Long,Int>?=null
@@ -64,6 +74,14 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
         bridge=AndroidFaceBridge(detector,lifecycleScope){result=it};model=FaceViewModel(bridge)
+        speechHost = SpeechHost(lifecycleScope,
+            createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },
+            hasPermission = { Build.VERSION.SDK_INT < 31 || ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED },
+            requestPermission = { reply ->
+                // Keep the callback attached to its original launch until Android returns it.
+                if (speechPermissionReply != null) reply(false)
+                else { speechPermissionReply = reply; speechPermission.launch(Manifest.permission.RECORD_AUDIO) }
+            }, openSettings = { startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) })
         setContent {
             MaterialTheme {Column(Modifier.fillMaxSize()) {
                 Box(Modifier.weight(1f).fillMaxWidth().background(Color.Black)) {
@@ -79,7 +97,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                         }
                     }
                 }
-                FaceScreen(model,this@MainActivity,identityModel,this@MainActivity)
+                FaceScreen(model,this@MainActivity,identityModel,this@MainActivity,speechHost.model,speechHost)
                 message?.let{Text(it)}
                 report?.let{json->TextButton(onClick={exportReport(json)}){Text("导出 Benchmark JSON")}}
             }}
@@ -170,6 +188,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         }
     }
     override fun exportReport(json:String){report=json;reportPicker.launch("odai-benchmark.json")}
-    override fun onStop(){super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
-    override fun onDestroy(){if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
+    override fun onStart(){super.onStart();if(::speechHost.isInitialized)speechHost.onForeground()}
+    override fun onStop(){if(::speechHost.isInitialized)speechHost.onBackground();super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
+    override fun onDestroy(){if(::speechHost.isInitialized)speechHost.close();speechPermissionReply=null;if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
 }

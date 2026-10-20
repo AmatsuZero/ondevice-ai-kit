@@ -13,6 +13,7 @@ SOURCES = ["kmp-binding/apple/IOSSpeechBridge.swift",
            "kmp-binding/apple/IOSSpeechAudioInput.swift",
            "demo/iosApp/SpeechInputStore.swift",
            "probes/ios-speech-bridge/IOSSpeechBridgeTests.swift"]
+HOST_SOURCES = ["demo/iosApp/SpeechHost.swift", "probes/ios-speech-bridge/SpeechHostTests.swift"]
 
 
 class SpeechBridgeProjectTests(unittest.TestCase):
@@ -24,7 +25,7 @@ class SpeechBridgeProjectTests(unittest.TestCase):
         (self.root / "scripts").mkdir()
         shutil.copy(ROOT / SCRIPT, self.root / SCRIPT)
         (self.root / "apple").mkdir()
-        for source in SOURCES:
+        for source in SOURCES + HOST_SOURCES:
             path = self.root / source
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("// fixture\n")
@@ -58,7 +59,8 @@ puts JSON.generate({targets: p.targets.map(&:name),
 """, str(project)], capture_output=True, text=True, check=True)
                 data = json.loads(inspected.stdout)
                 self.assertEqual(data["targets"], ["SpeechBridgeTests"])
-                self.assertEqual(sorted(data["sources"]), sorted(str(self.root / p) for p in SOURCES))
+                sources = SOURCES + (HOST_SOURCES if module == "ODAIKitDemo" else [])
+                self.assertEqual(sorted(data["sources"]), sorted(str(self.root / p) for p in sources))
                 kotlin = [p for p in data["frameworks"] if "ODAIKit" in p]
                 self.assertEqual(kotlin, [str(self.frameworks[module])])
                 self.assertEqual(sorted(data["products"]), ["ODAIKitCore", "ODAIKitSpeech"])

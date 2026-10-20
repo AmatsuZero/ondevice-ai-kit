@@ -3,7 +3,15 @@ import ODAIKitDemo
 import ODAIKitFace
 struct SharedControls: UIViewControllerRepresentable {
     let controller: DemoController
-    func makeUIViewController(context: Context) -> UIViewController { MainViewControllerKt.mainViewController(model: controller.model, actions: controller, identity: controller.identityModel, identityActions: controller) }
+    func makeUIViewController(context: Context) -> UIViewController {
+        #if ODAI_SPEECH_DEMO
+        if let speech = controller.speechHost {
+            return MainViewControllerKt.speechMainViewController(model: controller.model, actions: controller,
+                identity: controller.identityModel, identityActions: controller, speech: speech.model, speechActions: speech)
+        }
+        #endif
+        return MainViewControllerKt.mainViewController(model: controller.model, actions: controller, identity: controller.identityModel, identityActions: controller)
+    }
     func updateUIViewController(_ view: UIViewController, context: Context) {}
 }
 @main struct OnDeviceAIDemoApp: App {
@@ -25,7 +33,7 @@ struct SharedControls: UIViewControllerRepresentable {
                         } else { Text("选择图片或启动相机").foregroundColor(.white) }
                     }.clipped()
                 }
-                SharedControls(controller: controller).frame(height: 280)
+                SharedControls(controller: controller).frame(height: 380)
                 if let message = controller.message { Text(message).font(.caption) }
                 if controller.cameraPermissionDenied {
                     Button("打开设置") { controller.openCameraSettings() }

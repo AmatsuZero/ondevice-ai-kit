@@ -12,6 +12,9 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
     let bridge = IOSFaceBridge()
     lazy var model = FaceViewModel(bridge: bridge)
     let identityModel: IdentityViewModel
+    #if ODAI_SPEECH_DEMO
+    private(set) var speechHost: SpeechHost?
+    #endif
     private let identityProbeFactory: ((CGImage) -> IdentityProbeReference)?
     private var latestIdentityCameraFrame: CameraFrame?
     private var livenessCapture: Task<Void, Never>?
@@ -40,6 +43,13 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
         self.identityModel = IdentityViewModel(bridge: identityBridge)
         self.identityProbeFactory = identityProbeFactory
         super.init()
+        #if ODAI_SPEECH_DEMO
+        MainActor.assumeIsolated {
+            do { speechHost = try SpeechHost.make() }
+            catch { message = "语音模块初始化失败" }
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(speechBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        #endif
         identityModel.configure(value: identityConfiguration)
         bridge.onResult = { [weak self] result in
             self?.faces = result.faces
@@ -62,9 +72,15 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
     }
     @objc private func background() { livenessCapture?.cancel(); identityModel.cancel(); cameraLifecycle.pause(); pauseCamera(); photoSubmission.cancel(); model.cancel() }
     @objc private func foreground() {
+        #if ODAI_SPEECH_DEMO
+        Task { @MainActor [weak self] in self?.speechHost?.onForeground() }
+        #endif
         if AVCaptureDevice.authorizationStatus(for: .video) == .authorized { cameraPermissionDenied = false }
         if let token = cameraLifecycle.activate(), AVCaptureDevice.authorizationStatus(for: .video) == .authorized { resumeCamera(token) }
     }
+    #if ODAI_SPEECH_DEMO
+    @objc private func speechBackground() { Task { @MainActor [weak self] in self?.speechHost?.background() } }
+    #endif
     @objc private func memoryWarning() { stopCamera(); model.cancel() }
     private func presenter() -> UIViewController? {
         var current = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.flatMap(\.windows).first(where: \.isKeyWindow)?.rootViewController
@@ -262,5 +278,11 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
         do { try Data(json.utf8).write(to: file); let share = UIActivityViewController(activityItems: [file], applicationActivities: nil); share.popoverPresentationController?.sourceView = presenter()?.view; presenter()?.present(share, animated: true) }
         catch { message = String(describing: error) }
     }
-    deinit { NotificationCenter.default.removeObserver(self) }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        #if ODAI_SPEECH_DEMO
+        let speech = speechHost
+        Task { @MainActor in speech?.close() }
+        #endif
+    }
 }

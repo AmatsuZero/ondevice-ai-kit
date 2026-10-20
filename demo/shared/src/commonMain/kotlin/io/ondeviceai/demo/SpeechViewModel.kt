@@ -77,6 +77,12 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
         state = state.copy(audioReference = reference, audioDisplayName = if (reference == null) null else displayName)
     }
 
+    fun inputFailed() {
+        if (state.closed) return
+        state = state.copy(phase = if (audioPending) state.phase else SpeechPhase.FAILED,
+            failure = SpeechBridgeFailure(SpeechBridgeFailureCode.INVALID_INPUT, "audioImportFailed"))
+    }
+
     fun speak(request: SpeechBridgeTtsRequest, selection: SpeechBridgeSelection = state.ttsSelection) {
         val generation = begin() ?: return
         val task = bridge.speak(request, selection, object : SpeechBridgeTtsCallback {

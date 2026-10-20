@@ -11,6 +11,9 @@ abort('Unsupported speech bridge KMP module') unless framework_root
 framework = File.join(root, framework_root, "build/bin/iosSimulatorArm64/debugFramework/#{binding_module}.framework")
 sources = ['kmp-binding/apple/IOSSpeechBridge.swift', 'kmp-binding/apple/IOSSpeechAudioInput.swift',
            'demo/iosApp/SpeechInputStore.swift', 'probes/ios-speech-bridge/IOSSpeechBridgeTests.swift']
+if binding_module == 'ODAIKitDemo'
+  sources += ['demo/iosApp/SpeechHost.swift', 'probes/ios-speech-bridge/SpeechHostTests.swift']
+end
 ([framework, File.join(root, 'apple')] + sources.map { |s| File.join(root, s) }).each do |path|
   abort("Missing input: #{path}") unless File.exist?(path)
 end
