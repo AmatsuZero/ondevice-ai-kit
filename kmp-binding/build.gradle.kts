@@ -5,6 +5,11 @@ kotlin {
     iosSimulatorArm64 { binaries.framework { baseName = "ODAIKitBinding"; isStatic = true } }
     sourceSets {
         commonTest.dependencies { implementation(kotlin("test")) }
-        androidMain.dependencies { implementation(project(":android:identity"));implementation(project(":android:face"));implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2") }
+        androidMain.dependencies {
+            implementation(project(":android:identity"))
+            implementation(project(":android:face"))
+            implementation(project(":android:speech"))
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+        }
     }
 }
