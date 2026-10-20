@@ -42,7 +42,9 @@ public final class IOSSpeechBridge: NSObject, @preconcurrency SpeechBridge {
                     availability: BridgeAvailability(available: availability.status == .available,
                         reason: availability.reason?.rawValue, backendId: descriptor.backendId,
                         minimumOS: availability.minOS),
-                    supportedInputs: capability == .asr ? [.audioFile] : [], offline: availability.offline)
+                    supportedInputs: descriptor.supportedInputs.map {
+                        $0 == .microphone ? .microphone : .audioFile
+                    }, offline: availability.offline)
             }
         }, result: { callback.onResult(backends: $0) }, failure: { callback.onFailure(failure: $0) },
            cancelled: { callback.onCancelled() })
@@ -75,11 +77,27 @@ public final class IOSSpeechBridge: NSObject, @preconcurrency SpeechBridge {
               let selected = native(selection) else {
             callback.onFailure(failure: fail(.invalidInput)); return IOSSpeechTask()
         }
-        guard let file = request.input as? SpeechBridgeInputAudioFile else {
-            callback.onFailure(failure: fail(.unsupportedInput)); return IOSSpeechTask()
-        }
         guard let asr else {
             callback.onFailure(failure: fail(.backendUnavailable, "backendNotLinked")); return IOSSpeechTask()
+        }
+        if request.input is SpeechBridgeInputMicrophone {
+            let nativeRequest: SpeechMicrophoneRecognitionRequest
+            do { nativeRequest = try SpeechMicrophoneRecognitionRequest(locale: request.locale) }
+            catch { callback.onFailure(failure: fail(.invalidInput)); return IOSSpeechTask() }
+            let handle = IOSSpeechMicrophoneTask()
+            return submit(audio: true, handle: handle, operation: {
+                try Task.checkCancellation()
+                let native = try await asr.startMicrophone(nativeRequest, backend: selected)
+                await handle.attach(native)
+                // The managed native task publishes only after backend drain.
+                let value = try await native.result()
+                return SpeechBridgeAsrResult(backendId: value.backendId, transcript: value.transcript,
+                    confidence: value.confidence.map { KotlinFloat(float: $0) })
+            }, result: { callback.onResult(output: $0) }, failure: { callback.onFailure(failure: $0) },
+               cancelled: { callback.onCancelled() })
+        }
+        guard let file = request.input as? SpeechBridgeInputAudioFile else {
+            callback.onFailure(failure: fail(.unsupportedInput)); return IOSSpeechTask()
         }
         let lease: any IOSSpeechAudioInputLease
         let nativeRequest: SpeechRecognitionRequest
@@ -139,10 +157,11 @@ public final class IOSSpeechBridge: NSObject, @preconcurrency SpeechBridge {
         return nil
     }
 
-    private func submit<T>(audio: Bool, operation: @escaping @MainActor () async throws -> T,
+    private func submit<T>(audio: Bool, handle: IOSSpeechTask = IOSSpeechTask(),
+                           operation: @escaping @MainActor () async throws -> T,
                            result: @escaping (T) -> Void, failure: @escaping (SpeechBridgeFailure) -> Void,
                            cancelled: @escaping () -> Void) -> any BridgeTask {
-        let id = UUID(), handle = IOSSpeechTask()
+        let id = UUID()
         tasks[id] = handle
         if audio { self.audio = id }
         handle.worker = Task { @MainActor in
@@ -175,6 +194,7 @@ public final class IOSSpeechBridge: NSObject, @preconcurrency SpeechBridge {
         case SpeechClientError.closed, KitError.closed: return fail(.closed)
         case KitError.busy: return fail(.busy)
         case KitError.invalidInput: return fail(.invalidInput)
+        case SpeechRecognitionInputError.unsupportedInput: return fail(.unsupportedInput)
         case SpeechClientError.backendNotRegistered: return fail(.backendNotRegistered)
         case SpeechClientError.backendUnavailable(_, _, let reason): return fail(.backendUnavailable, reason.rawValue)
         case SpeechRecognitionError.timedOut: return fail(.timedOut)
@@ -190,7 +210,7 @@ public final class IOSSpeechBridge: NSObject, @preconcurrency SpeechBridge {
 }
 
 /// Cancellation may arrive from any thread; registry mutation stays on MainActor.
-private final class IOSSpeechTask: NSObject, BridgeTask {
+private class IOSSpeechTask: NSObject, BridgeTask {
     private let lock = NSLock()
     private var cancelled = false
     private var finished = false
@@ -212,5 +232,48 @@ private final class IOSSpeechTask: NSObject, BridgeTask {
     }
     func finish() -> Bool {
         lock.withLock { finished = true; storedWorker = nil; return cancelled }
+    }
+}
+
+/// Records controls before asynchronous native admission returns. Each instance
+/// owns one native task; completed handles cannot reach a later generation.
+private final class IOSSpeechMicrophoneTask: IOSSpeechTask, SpeechBridgeMicrophoneTask, @unchecked Sendable {
+    private let controlLock = NSLock()
+    private var native: (any SpeechMicrophoneRecognitionTask)?
+    private var finishRequested = false
+    private var cancelRequested = false
+    private var terminal = false
+
+    func attach(_ task: any SpeechMicrophoneRecognitionTask) async {
+        let intent = controlLock.withLock { () -> (Bool, Bool) in
+            native = task
+            return (cancelRequested, finishRequested)
+        }
+        if intent.0 { await task.cancel() }
+        else if intent.1 { await task.finishInput() }
+    }
+
+    func finishInput() {
+        let task = controlLock.withLock { () -> (any SpeechMicrophoneRecognitionTask)? in
+            guard !terminal, !cancelRequested, !finishRequested else { return nil }
+            finishRequested = true
+            return native
+        }
+        if let task { Task { await task.finishInput() } }
+    }
+
+    override func cancel() {
+        let task = controlLock.withLock { () -> (any SpeechMicrophoneRecognitionTask)? in
+            guard !terminal, !cancelRequested else { return nil }
+            cancelRequested = true
+            return native
+        }
+        super.cancel()
+        if let task { Task { await task.cancel() } }
+    }
+
+    override func finish() -> Bool {
+        controlLock.withLock { terminal = true; native = nil }
+        return super.finish()
     }
 }

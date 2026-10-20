@@ -64,17 +64,144 @@ final class IOSSpeechBridgeTests: XCTestCase {
         XCTAssertTrue(FileManager.default.fileExists(atPath: f.source.path), "never delete the original")
     }
 
-    func testUnknownTokenAndMicrophoneAreRejected() throws {
+    func testUnknownTokenAndFileOnlyMicrophoneAreRejected() async throws {
         let f = try fixture()
         for (input, code) in [(SpeechBridgeInputAudioFile(reference: "unknown") as any SpeechBridgeInput,
                               SpeechBridgeFailureCode.invalidInput),
                              (SpeechBridgeInputMicrophone.shared, .unsupportedInput)] {
             let callback = AsrCapture()
-            _ = f.bridge.recognize(request: .init(locale: "en-US", input: input),
+            let task = f.bridge.recognize(request: .init(locale: "en-US", input: input),
                                    selection: f.defaultSelection, callback: callback)
+            if input is SpeechBridgeInputMicrophone {
+                XCTAssertTrue(task is any SpeechBridgeMicrophoneTask)
+                await fulfillment(of: [callback.done], timeout: 3)
+            }
             XCTAssertEqual(callback.failure?.code, code)
             XCTAssertEqual(callback.terminals, 1)
         }
+    }
+
+    func testMicrophoneMetadataComesFromNativeAndNeverAcquiresFileLease() async throws {
+        let f = try microphoneFixture()
+        let query = BackendsCapture()
+        _ = f.bridge.queryBackends(capability: .asr, callback: query)
+        await fulfillment(of: [query.done], timeout: 3)
+        XCTAssertEqual(query.backends?.first?.supportedInputs, [.audioFile, .microphone])
+        let callback = AsrCapture()
+        let task = f.bridge.recognize(request: f.request, selection: f.selection, callback: callback)
+        let microphone = try XCTUnwrap(task as? any SpeechBridgeMicrophoneTask)
+        microphone.finishInput(); microphone.finishInput()
+        await fulfillment(of: [f.backend.native.finished], timeout: 3)
+        XCTAssertEqual(callback.terminals, 0)
+        await f.backend.native.complete()
+        await fulfillment(of: [callback.done], timeout: 3)
+        XCTAssertNotNil(callback.result)
+        XCTAssertEqual(f.inputs.acquires, 0)
+        let finishes = await f.backend.native.finishCount
+        XCTAssertEqual(finishes, 1)
+    }
+
+    func testFinishBeforeSuspendedNativeStartAndOldHandleCannotAffectReentry() async throws {
+        let f = try microphoneFixture(holdStart: true)
+        let first = AsrCapture()
+        let task = try XCTUnwrap(f.bridge.recognize(request: f.request, selection: f.selection,
+            callback: first) as? any SpeechBridgeMicrophoneTask)
+        await fulfillment(of: [f.backend.started], timeout: 3)
+        task.finishInput()
+        await f.backend.startGate.open()
+        await fulfillment(of: [f.backend.native.finished], timeout: 3)
+        await f.backend.native.complete()
+        await fulfillment(of: [first.done], timeout: 3)
+        let nextNative = MicNativeTask()
+        await f.backend.replace(nextNative)
+        let next = AsrCapture()
+        let nextTask = try XCTUnwrap(f.bridge.recognize(request: f.request, selection: f.selection,
+            callback: next) as? any SpeechBridgeMicrophoneTask)
+        task.finishInput(); task.cancel()
+        nextTask.finishInput()
+        await fulfillment(of: [nextNative.finished], timeout: 3)
+        await nextNative.complete()
+        await fulfillment(of: [next.done], timeout: 3)
+        XCTAssertNotNil(next.result)
+        let cancels = await nextNative.cancelCount
+        XCTAssertEqual(cancels, 0)
+    }
+
+    func testCancelBeforeWorkerSuppressesPendingFinishAndNeverStartsNative() async throws {
+        let f = try microphoneFixture()
+        let callback = AsrCapture()
+        let task = try XCTUnwrap(f.bridge.recognize(request: f.request, selection: f.selection,
+            callback: callback) as? any SpeechBridgeMicrophoneTask)
+        task.finishInput(); task.cancel(); task.finishInput()
+        await fulfillment(of: [callback.done], timeout: 3)
+        XCTAssertTrue(callback.cancelled)
+        let starts = await f.backend.startCount
+        XCTAssertEqual(starts, 0)
+    }
+
+    func testCancelDuringNativeStartJoinsDrainAndConcurrentClose() async throws {
+        let f = try microphoneFixture(holdStart: true, holdDrain: true)
+        let callback = AsrCapture()
+        let task = try XCTUnwrap(f.bridge.recognize(request: f.request, selection: f.selection,
+            callback: callback) as? any SpeechBridgeMicrophoneTask)
+        await fulfillment(of: [f.backend.started], timeout: 3)
+        task.finishInput(); task.cancel()
+        let close = CloseCapture(), another = CloseCapture()
+        f.bridge.close(callback: close); f.bridge.close(callback: another)
+        await f.backend.startGate.open()
+        await fulfillment(of: [f.backend.native.cancelled, f.backend.draining], timeout: 3)
+        XCTAssertEqual(callback.terminals + close.count + another.count, 0)
+        let finishes = await f.backend.native.finishCount
+        XCTAssertEqual(finishes, 0)
+        await f.backend.drainGate.open()
+        await fulfillment(of: [callback.done, close.done, another.done], timeout: 3)
+        XCTAssertTrue(callback.cancelled)
+        XCTAssertEqual(callback.terminals, 1)
+    }
+
+    func testCancelAfterFinishDiscardsLateFinalAndHoldsSlotUntilDrain() async throws {
+        let f = try microphoneFixture(holdDrain: true)
+        let callback = AsrCapture()
+        callback.ended = {
+            let next = AsrCapture()
+            let returned = f.bridge.recognize(request: .init(locale: " ", input: SpeechBridgeInputMicrophone.shared),
+                selection: f.selection, callback: next)
+            XCTAssertFalse(returned is any SpeechBridgeMicrophoneTask)
+            XCTAssertEqual(next.failure?.code, .invalidInput, "terminal callback must permit reentry")
+        }
+        let task = try XCTUnwrap(f.bridge.recognize(request: f.request, selection: f.selection,
+            callback: callback) as? any SpeechBridgeMicrophoneTask)
+        task.finishInput()
+        await fulfillment(of: [f.backend.native.finished], timeout: 3)
+        task.cancel()
+        await fulfillment(of: [f.backend.native.cancelled], timeout: 3)
+        await f.backend.native.complete()
+        await fulfillment(of: [f.backend.draining], timeout: 3)
+        let busy = AsrCapture()
+        _ = f.bridge.recognize(request: f.request, selection: f.selection, callback: busy)
+        XCTAssertEqual(busy.failure?.code, .busy)
+        XCTAssertEqual(callback.terminals, 0)
+        await f.backend.drainGate.open()
+        await fulfillment(of: [callback.done], timeout: 3)
+        XCTAssertTrue(callback.cancelled)
+        XCTAssertNil(callback.result)
+    }
+
+    func testMicrophoneExplicitMissingSelectionDoesNotFallback() async throws {
+        let f = try microphoneFixture()
+        let callback = AsrCapture()
+        _ = f.bridge.recognize(request: f.request,
+            selection: SpeechBridgeSelectionExplicit(backendId: "missing"), callback: callback)
+        await fulfillment(of: [callback.done], timeout: 3)
+        XCTAssertEqual(callback.failure?.code, .backendNotRegistered)
+        let starts = await f.backend.startCount
+        XCTAssertEqual(starts, 0)
+    }
+
+    private func microphoneFixture(holdStart: Bool = false, holdDrain: Bool = false) throws -> MicFixture {
+        let fixture = try MicFixture(holdStart: holdStart, holdDrain: holdDrain)
+        addTeardownBlock { await fixture.shutdown() }
+        return fixture
     }
 
     func testMissingTtsClientDoesNotBlockAsr() async throws {
@@ -275,6 +402,81 @@ private actor Signal {
         opened = true
         let pending = waiters; waiters.removeAll()
         pending.forEach { $0.resume() }
+    }
+}
+
+private actor MicNativeTask: SpeechMicrophoneRecognitionTask {
+    nonisolated let finished = XCTestExpectation(description: "finish reached native")
+    nonisolated let cancelled = XCTestExpectation(description: "cancel reached native")
+    private let resultGate = Signal()
+    private(set) var finishCount = 0
+    private(set) var cancelCount = 0
+    func finishInput() { finishCount += 1; if finishCount == 1 { finished.fulfill() } }
+    func cancel() { cancelCount += 1; if cancelCount == 1 { cancelled.fulfill() } }
+    func result() async -> SpeechRecognitionResult {
+        await resultGate.wait()
+        return .init(backendId: "fixture.mic", transcript: "synthetic", confidence: nil)
+    }
+    func complete() async { await resultGate.open() }
+}
+
+private actor MicBackend: SpeechMicrophoneRecognitionBackend {
+    nonisolated let backendId = "fixture.mic"
+    nonisolated let capability = SpeechCapability.asr
+    nonisolated let supportedInputs: [SpeechRecognitionInputKind] = [.audioFile, .microphone]
+    nonisolated let native = MicNativeTask()
+    nonisolated let started = XCTestExpectation(description: "microphone start entered")
+    nonisolated let draining = XCTestExpectation(description: "microphone drain entered")
+    nonisolated let startGate = Signal(), drainGate = Signal()
+    private let holdStart: Bool, holdDrain: Bool
+    private var replacement: MicNativeTask?
+    private(set) var startCount = 0
+    init(holdStart: Bool, holdDrain: Bool) { self.holdStart = holdStart; self.holdDrain = holdDrain }
+    func availability() -> CapabilityAvailability { .init(status: .available, backendId: backendId) }
+    func recognize(_ request: SpeechRecognitionRequest) throws -> SpeechRecognitionResult { throw SpeechRecognitionError.noResult }
+    func startMicrophone(_ request: SpeechMicrophoneRecognitionRequest) async -> any SpeechMicrophoneRecognitionTask {
+        startCount += 1
+        if startCount == 1 { started.fulfill() }
+        if holdStart { await startGate.wait() }
+        return replacement ?? native
+    }
+    func replace(_ task: MicNativeTask) { replacement = task }
+    func drain() async { if holdDrain { draining.fulfill(); await drainGate.wait() } }
+    func close() {}
+    func unblock() async {
+        await startGate.open(); await drainGate.open(); await native.complete(); await replacement?.complete()
+    }
+}
+
+@MainActor
+private final class RejectingMicInputs: IOSSpeechAudioInputProvider {
+    var acquires = 0
+    func acquire(reference: String) throws -> any IOSSpeechAudioInputLease {
+        acquires += 1
+        throw KitError.invalidInput("no file input")
+    }
+}
+
+@MainActor
+private final class MicFixture {
+    let backend: MicBackend
+    let inputs = RejectingMicInputs()
+    let bridge: IOSSpeechBridge
+    let selection = SpeechBridgeSelectionDefault.shared
+    let request = SpeechBridgeAsrRequest(locale: "en-US", input: SpeechBridgeInputMicrophone.shared)
+    init(holdStart: Bool, holdDrain: Bool) throws {
+        backend = MicBackend(holdStart: holdStart, holdDrain: holdDrain)
+        bridge = IOSSpeechBridge(tts: nil,
+            asr: try SpeechRecognitionClient(defaultBackendId: backend.backendId, backends: [backend]), inputs: inputs)
+    }
+    func shutdown() async {
+        await backend.unblock()
+        let callback = CloseCapture()
+        bridge.close(callback: callback)
+        await withCheckedContinuation { continuation in
+            if callback.count > 0 { continuation.resume() }
+            else { callback.ended = { continuation.resume() } }
+        }
     }
 }
 

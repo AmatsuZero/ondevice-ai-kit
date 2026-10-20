@@ -93,6 +93,11 @@ interface SpeechBridgeCloseCallback {
     fun onFailure(failure: SpeechBridgeFailure)
 }
 
+/** Optional microphone control. Finishing input waits for recognition; cancel discards it. */
+interface SpeechBridgeMicrophoneTask : BridgeTask {
+    fun finishInput()
+}
+
 /**
  * Calls are admitted on the platform UI/main dispatcher. A terminal callback may happen
  * synchronously and implementations deliver every callback on that same dispatcher.

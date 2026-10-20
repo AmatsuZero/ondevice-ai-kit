@@ -3,7 +3,7 @@ package io.ondeviceai.demo
 import androidx.compose.runtime.*
 import io.ondeviceai.binding.*
 
-enum class SpeechPhase { IDLE, RUNNING, CANCELLING, SUCCEEDED, FAILED, CANCELLED }
+enum class SpeechPhase { IDLE, RUNNING, FINISHING, CANCELLING, SUCCEEDED, FAILED, CANCELLED }
 data class SpeechBackendState(
     val backends: List<SpeechBridgeBackend> = emptyList(),
     val refreshing: Boolean = false,
@@ -21,8 +21,9 @@ data class SpeechState(
     val asrResult: SpeechBridgeAsrResult? = null,
     val failure: SpeechBridgeFailure? = null,
     val closed: Boolean = false,
+    val canFinishInput: Boolean = false,
 ) {
-    val controlsEnabled: Boolean get() = !closed && phase != SpeechPhase.RUNNING && phase != SpeechPhase.CANCELLING
+    val controlsEnabled: Boolean get() = !closed && phase != SpeechPhase.RUNNING && phase != SpeechPhase.FINISHING && phase != SpeechPhase.CANCELLING
 }
 
 interface SpeechDemoActions {
@@ -37,6 +38,7 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
     var state by mutableStateOf(SpeechState()); private set
     private var audioGeneration = 0L
     private var audioPending = false
+    private var microphonePending = false
     private var active: BridgeTask? = null
     private val queryGenerations = mutableMapOf<SpeechBridgeCapability, Long>()
     private val queries = mutableMapOf<SpeechBridgeCapability, BridgeTask>()
@@ -90,7 +92,7 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
             override fun onFailure(failure: SpeechBridgeFailure) = terminal(generation, SpeechPhase.FAILED, failure = failure)
             override fun onCancelled() = terminal(generation, SpeechPhase.CANCELLED)
         })
-        if (audioPending && audioGeneration == generation) active = task
+        installHandle(generation, task)
     }
 
     fun recognize(request: SpeechBridgeAsrRequest, selection: SpeechBridgeSelection = state.asrSelection) {
@@ -111,18 +113,26 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
                                ttsResult = null, asrResult = null)
             return
         }
-        val generation = begin() ?: return
+        val generation = begin(microphone = request.input == SpeechBridgeInput.Microphone) ?: return
         val task = bridge.recognize(request, selection, object : SpeechBridgeAsrCallback {
             override fun onResult(output: SpeechBridgeAsrResult) = terminal(generation, SpeechPhase.SUCCEEDED, asr = output)
             override fun onFailure(failure: SpeechBridgeFailure) = terminal(generation, SpeechPhase.FAILED, failure = failure)
             override fun onCancelled() = terminal(generation, SpeechPhase.CANCELLED)
         })
-        if (audioPending && audioGeneration == generation) active = task
+        installHandle(generation, task)
+    }
+
+    fun finishInput() {
+        if (!audioPending || !microphonePending || state.phase != SpeechPhase.RUNNING) return
+        val task = active
+        if (task != null && task !is SpeechBridgeMicrophoneTask) return
+        state = state.copy(phase = SpeechPhase.FINISHING, canFinishInput = false)
+        (task as? SpeechBridgeMicrophoneTask)?.finishInput()
     }
 
     fun cancel() {
         if (!audioPending || state.phase == SpeechPhase.CANCELLING) return
-        state = state.copy(phase = SpeechPhase.CANCELLING)
+        state = state.copy(phase = SpeechPhase.CANCELLING, canFinishInput = false)
         active?.cancel()
     }
 
@@ -136,21 +146,35 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
         bridge.close(object : SpeechBridgeCloseCallback {
             override fun onClosed() {
                 audioPending = false; active = null
-                state = state.copy(phase = SpeechPhase.CANCELLED, asrResult = null, ttsResult = null)
+                state = state.copy(phase = SpeechPhase.CANCELLED, asrResult = null, ttsResult = null, canFinishInput = false)
             }
             override fun onFailure(failure: SpeechBridgeFailure) {
                 audioPending = false; active = null
-                state = state.copy(phase = SpeechPhase.FAILED, failure = failure, asrResult = null, ttsResult = null)
+                state = state.copy(phase = SpeechPhase.FAILED, failure = failure, asrResult = null, ttsResult = null, canFinishInput = false)
             }
         })
     }
 
-    private fun begin(): Long? {
+    private fun begin(microphone: Boolean = false): Long? {
         if (!state.controlsEnabled) { rejectAdmission(); return null }
         audioPending = true
+        microphonePending = microphone
         active = null
-        state = state.copy(phase = SpeechPhase.RUNNING, ttsResult = null, asrResult = null, failure = null)
+        state = state.copy(phase = SpeechPhase.RUNNING, ttsResult = null, asrResult = null, failure = null, canFinishInput = false)
         return ++audioGeneration
+    }
+
+    private fun installHandle(generation: Long, task: BridgeTask) {
+        if (!audioPending || audioGeneration != generation) return
+        active = task
+        when (state.phase) {
+            SpeechPhase.CANCELLING -> task.cancel()
+            SpeechPhase.FINISHING -> {
+                if (task is SpeechBridgeMicrophoneTask) task.finishInput()
+                else state = state.copy(phase = SpeechPhase.RUNNING)
+            }
+            else -> state = state.copy(canFinishInput = microphonePending && task is SpeechBridgeMicrophoneTask)
+        }
     }
 
     private fun terminal(generation: Long, phase: SpeechPhase, tts: SpeechBridgeTtsResult? = null,
@@ -160,7 +184,7 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
         val cancelled = state.closed || state.phase == SpeechPhase.CANCELLING
         state = state.copy(phase = if (cancelled) SpeechPhase.CANCELLED else phase,
             ttsResult = if (cancelled) null else tts, asrResult = if (cancelled) null else asr,
-            failure = if (cancelled) null else failure)
+            failure = if (cancelled) null else failure, canFinishInput = false)
     }
 
     private fun cancelQueries() {

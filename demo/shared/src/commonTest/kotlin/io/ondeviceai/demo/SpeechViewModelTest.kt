@@ -7,6 +7,81 @@ class SpeechViewModelTest {
     private val tts = SpeechBridgeTtsRequest("fixture", "en-US")
     private val mic = SpeechBridgeAsrRequest("en-US", SpeechBridgeInput.Microphone)
 
+    @Test fun finishWaitsForTerminalAndCancelOverridesFinish() {
+        val bridge = ControlledSpeechBridge().apply { microphoneFinish = true }
+        val model = SpeechViewModel(bridge)
+        model.recognize(mic)
+        assertTrue(model.state.canFinishInput)
+        model.finishInput(); model.finishInput()
+        assertEquals(1, bridge.audioFinishes)
+        assertEquals(SpeechPhase.FINISHING, model.state.phase)
+        assertFalse(model.state.controlsEnabled)
+        assertFalse(model.state.canFinishInput)
+        model.speak(tts)
+        assertEquals(1, bridge.audioStarts)
+        model.cancel()
+        assertEquals(1, bridge.audioCancels)
+        bridge.asrCallback!!.onResult(SpeechBridgeAsrResult("asr", "late", null))
+        assertEquals(SpeechPhase.CANCELLED, model.state.phase)
+        assertNull(model.state.asrResult)
+        assertTrue(model.state.controlsEnabled)
+    }
+
+    @Test fun onlyMicrophoneFinishHandlesOfferFinishAndFinalEnablesReentry() {
+        val bridge = ControlledSpeechBridge()
+        val model = SpeechViewModel(bridge)
+        model.recognize(mic)
+        model.finishInput()
+        assertFalse(model.state.canFinishInput)
+        assertEquals(SpeechPhase.RUNNING, model.state.phase)
+        bridge.asrCallback!!.onCancelled()
+        bridge.microphoneFinish = true
+        model.recognize(mic)
+        model.finishInput()
+        bridge.asrCallback!!.onResult(SpeechBridgeAsrResult("asr", "fixture", null))
+        assertEquals(SpeechPhase.SUCCEEDED, model.state.phase)
+        assertFalse(model.state.canFinishInput)
+        model.finishInput()
+        assertEquals(1, bridge.audioFinishes)
+        model.speak(tts)
+        assertFalse(model.state.canFinishInput)
+    }
+
+    @Test fun finishOrCancelBeforeBridgeReturnsIsDeliveredToReturnedHandle() {
+        for (cancel in listOf(false, true)) {
+            val bridge = ControlledSpeechBridge().apply { microphoneFinish = true }
+            val model = SpeechViewModel(bridge)
+            bridge.beforeAsrReturn = { model.finishInput(); if (cancel) model.cancel() }
+            model.recognize(mic)
+            assertEquals(if (cancel) 1 else 0, bridge.audioCancels)
+            assertEquals(if (cancel) 0 else 1, bridge.audioFinishes)
+            assertFalse(model.state.controlsEnabled)
+            assertEquals(if (cancel) SpeechPhase.CANCELLING else SpeechPhase.FINISHING, model.state.phase)
+        }
+    }
+
+    @Test fun synchronousAsrTerminalNeverResurrectsFinishOrCancelHandle() {
+        val bridge = ControlledSpeechBridge().apply { microphoneFinish = true }
+        val model = SpeechViewModel(bridge)
+        bridge.beforeAsrReturn = { bridge.asrCallback!!.onFailure(SpeechBridgeFailure(SpeechBridgeFailureCode.NO_RESULT, null)) }
+        model.recognize(mic)
+        model.finishInput(); model.cancel()
+        assertEquals(SpeechPhase.FAILED, model.state.phase)
+        assertFalse(model.state.canFinishInput)
+        assertEquals(0, bridge.audioFinishes + bridge.audioCancels)
+    }
+
+    @Test fun backgroundDuringFinishDiscardsLateFinalAndDoesNotRestart() {
+        val bridge = ControlledSpeechBridge().apply { microphoneFinish = true }
+        val model = SpeechViewModel(bridge)
+        model.recognize(mic); model.finishInput(); model.background()
+        bridge.asrCallback!!.onResult(SpeechBridgeAsrResult("asr", "late", null))
+        assertEquals(SpeechPhase.CANCELLED, model.state.phase)
+        assertNull(model.state.asrResult)
+        assertEquals(1, bridge.audioStarts)
+        assertEquals(1, bridge.audioCancels)
+    }
+
     @Test fun synchronousTerminalDoesNotResurrectHandle() {
         val bridge = ControlledSpeechBridge().apply { synchronous = true }
         val model = SpeechViewModel(bridge)
@@ -144,6 +219,9 @@ class SpeechViewModelTest {
 }
 
 private class ControlledSpeechBridge : SpeechBridge {
+    var microphoneFinish = false
+    var audioFinishes = 0
+    var beforeAsrReturn: (() -> Unit)? = null
     var synchronous = false
     var audioStarts = 0
     var audioCancels = 0
@@ -165,6 +243,11 @@ private class ControlledSpeechBridge : SpeechBridge {
     }
     override fun recognize(request: SpeechBridgeAsrRequest, selection: SpeechBridgeSelection, callback: SpeechBridgeAsrCallback): BridgeTask {
         audioStarts++; lastSelection = selection; asrCallback = callback
+        beforeAsrReturn?.invoke()
+        if (microphoneFinish && request.input == SpeechBridgeInput.Microphone) return object : SpeechBridgeMicrophoneTask {
+            override fun finishInput() { audioFinishes++ }
+            override fun cancel() { audioCancels++ }
+        }
         return object : BridgeTask { override fun cancel() { audioCancels++ } }
     }
     override fun close(callback: SpeechBridgeCloseCallback) { closes++; callback.onClosed() }

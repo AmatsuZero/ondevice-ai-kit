@@ -43,7 +43,7 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
         { model.selectBackend(SpeechBridgeCapability.ASR, it) }, { model.refreshBackends(SpeechBridgeCapability.ASR) })
     val inputs = state.asr.backends.flatMap { it.supportedInputs }.toSet()
     if (SpeechBridgeInputKind.AUDIO_FILE in inputs) {
-        Text("文件识别 · Apple 系统后端当前语言 en-US；本包不支持 iOS 麦克风识别")
+        Text("文件识别 · Apple 系统后端当前语言 en-US")
         Text(state.audioDisplayName ?: "尚未选择音频", Modifier.testTag("speech-audio-name"))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = { actions?.selectAudioFile() }, enabled = state.controlsEnabled && actions != null,
@@ -55,14 +55,18 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
             modifier = Modifier.testTag("speech-recognize-file")) { Text("识别音频文件") }
     }
     if (SpeechBridgeInputKind.MICROPHONE in inputs) {
-        Text("麦克风识别 · 需要录音权限和本机语言资源；本包不支持 Android 文件识别")
+        Text("麦克风识别 · 开始后会采集声音，请在安静环境使用；需要录音权限和本机语言资源")
         Button(onClick = { model.recognize(SpeechBridgeAsrRequest(locale, SpeechBridgeInput.Microphone)) },
             enabled = state.controlsEnabled && locale.isNotBlank(), modifier = Modifier.testTag("speech-recognize-mic")) { Text("开始麦克风 ASR") }
     }
     if (inputs.isEmpty()) Text("ASR 输入尚不可用；刷新后端查看原因")
-    if (state.phase == SpeechPhase.RUNNING || state.phase == SpeechPhase.CANCELLING) {
+    if (state.canFinishInput) {
+        Button(onClick = { model.finishInput() }, modifier = Modifier.testTag("speech-finish-input")) { Text("结束录音并识别") }
+    }
+    if (state.phase == SpeechPhase.RUNNING || state.phase == SpeechPhase.FINISHING || state.phase == SpeechPhase.CANCELLING) {
         LinearProgressIndicator(Modifier.fillMaxWidth())
-        TextButton(onClick = { model.cancel() }, enabled = state.phase == SpeechPhase.RUNNING,
+        if (state.phase == SpeechPhase.FINISHING) Text("正在结束录音，等待识别")
+        TextButton(onClick = { model.cancel() }, enabled = state.phase != SpeechPhase.CANCELLING,
             modifier = Modifier.testTag("speech-cancel")) { Text(if (state.phase == SpeechPhase.CANCELLING) "等待原生任务释放…" else "取消语音任务") }
     }
     Text(state.phase.name, Modifier.testTag(if (state.phase == SpeechPhase.CANCELLED) "speech-cancelled" else "speech-phase"))
