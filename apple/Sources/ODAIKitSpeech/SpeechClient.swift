@@ -64,6 +64,9 @@ public actor SpeechRecognitionClient {
     private let backends: [String: any SpeechRecognitionBackend]
     private var closed = false
     private var closeTask: Task<Void, Never>?
+    private var activeMicrophoneTasks: [UUID: SpeechMicrophoneTaskHandle] = [:]
+    private var pendingMicrophoneStarts = 0
+    private var pendingStartWaiters: [CheckedContinuation<Void, Never>] = []
 
     public init(defaultBackendId: String, backends: [any SpeechRecognitionBackend]) throws {
         registry = try SpeechClient(capability: .asr, defaultBackendId: defaultBackendId,
@@ -90,10 +93,50 @@ public actor SpeechRecognitionClient {
         return descriptors
     }
 
+    public func startMicrophone(_ request: SpeechMicrophoneRecognitionRequest,
+                                backend: SpeechBackendSelection = .default) async throws
+        -> any SpeechMicrophoneRecognitionTask {
+        guard !closed else { throw SpeechClientError.closed }
+        guard pendingMicrophoneStarts == 0, activeMicrophoneTasks.isEmpty else { throw KitError.busy }
+        pendingMicrophoneStarts += 1
+        defer { finishPendingMicrophoneStart() }
+        let selected = try await registry.select(backend)
+        guard !closed else { throw SpeechClientError.closed }
+        guard let implementation = backends[selected.backendId] else {
+            throw SpeechClientError.backendNotRegistered(capability: .asr, backendId: selected.backendId)
+        }
+        guard implementation.supportedInputs.contains(.microphone),
+              let microphone = implementation as? any SpeechMicrophoneRecognitionBackend else {
+            throw SpeechRecognitionInputError.unsupportedInput
+        }
+        try Task.checkCancellation()
+        let native = try await microphone.startMicrophone(request)
+        if Task.isCancelled || closed {
+            await native.cancel()
+            await microphone.drain()
+            if closed { throw SpeechClientError.closed }
+            throw CancellationError()
+        }
+        let id = UUID()
+        let coordinator = SpeechMicrophoneTaskCoordinator(native: native,
+            drain: { await microphone.drain() },
+            onTerminal: { [weak self] in await self?.removeMicrophoneTask(id: id) })
+        let handle = SpeechMicrophoneTaskHandle(coordinator: coordinator)
+        activeMicrophoneTasks[id] = handle
+        await coordinator.startDriver()
+        if closed || Task.isCancelled {
+            await handle.cancel()
+            await handle.waitForTerminal()
+            if closed { throw SpeechClientError.closed }
+            throw CancellationError()
+        }
+        return handle
+    }
+
     public func close() async {
         closed = true
         if closeTask == nil {
-            closeTask = Task { await registry.close() }
+            closeTask = Task { [weak self] in await self?.finishClose() }
         }
         await closeTask?.value
     }
@@ -101,7 +144,34 @@ public actor SpeechRecognitionClient {
     /// Wait for current backend leases without closing the client. Do not start a new
     /// request using the same input while draining if you intend to delete that input.
     public func drain() async {
+        if pendingMicrophoneStarts > 0 {
+            await withCheckedContinuation { pendingStartWaiters.append($0) }
+        }
+        let tasks = Array(activeMicrophoneTasks.values)
+        for task in tasks { await task.waitForTerminal() }
         for implementation in backends.values { await implementation.drain() }
+    }
+
+    private func removeMicrophoneTask(id: UUID) {
+        activeMicrophoneTasks.removeValue(forKey: id)
+    }
+
+    private func finishPendingMicrophoneStart() {
+        pendingMicrophoneStarts -= 1
+        guard pendingMicrophoneStarts == 0 else { return }
+        let waiters = pendingStartWaiters
+        pendingStartWaiters.removeAll()
+        waiters.forEach { $0.resume() }
+    }
+
+    private func finishClose() async {
+        if pendingMicrophoneStarts > 0 {
+            await withCheckedContinuation { pendingStartWaiters.append($0) }
+        }
+        let tasks = Array(activeMicrophoneTasks.values)
+        for task in tasks { await task.cancel() }
+        for task in tasks { await task.waitForTerminal() }
+        await registry.close()
     }
 }
 
