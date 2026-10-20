@@ -1,6 +1,6 @@
 # 分阶段交付与恢复入口
 
-更新时间：2026-10-20（实现基线 `b272b76`，Task 7 验收通过，追加独立审查待恢复）。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main；远端同步结果以 GitHub / 极狐该分支的新鲜 SHA 核对为准。
+更新时间：2026-10-20（实现基线 `476d027`，Task 7 验收通过，追加独立审查待恢复；iOS 麦克风 ASR 设计草案已落盘）。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main；远端同步结果以 GitHub / 极狐该分支的新鲜 SHA 核对为准。
 
 ## 执行规则
 
@@ -76,7 +76,9 @@ P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试
 
 ## 恢复时的第一步
 
-2026-10-20 **当前执行入口：语音 bridge/Demo Task 7 真机交互缺口**。按[实施计划](superpowers/plans/2026-10-19-speech-demo-bridge.md)继续 iOS 实际页面交互定位与验收，Task 1–6 已完成，不重复执行。Task 6 提交 `b272b76`；本轮 Task 7 已补测试、独立整包审查修复与本地分发回归；功能门禁通过，追加审查待恢复。最新证据见[语音 Demo 记录](validation/speech-demo-bridge.md)、[交接](HANDOFF-2026-10-20-speech-demo-bridge.md)及 ledger（`.superpowers/sdd/2026-10-19-speech-demo-bridge/progress.md`）。
+2026-10-20 **当前执行入口：Task 7 UI/Done 独立审查；可并行推进 iOS 麦克风 ASR 书面设计**。Task 1–6 及 Task 7 真机交互均已有通过证据，不重复实现或定位。Task 7 实现提交 `476d027`；独立整包 Host 审查修复、本地分发和现代真机功能门禁通过，最后追加审查因模型容量不足待恢复。最新证据见[语音 Demo 记录](validation/speech-demo-bridge.md)、[交接](HANDOFF-2026-10-20-speech-demo-bridge.md)及 ledger（`.superpowers/sdd/2026-10-19-speech-demo-bridge/progress.md`）。
+
+下一包的 [iOS 麦克风 ASR 设计](superpowers/specs/2026-10-20-ios-microphone-asr-design.md)已根据当前 API、Apple 官方 DocC 和本地 SDK header 落盘：保留文件 API，增加可结束输入的麦克风 task、宿主注入音频 session lease、按输入申请权限。按既有自动推进约定先执行本地兼容性测试与契约实现，不声称人工逐项审阅、已开始录音或新能力交付；独立审查/真机/远端门禁继续保留。
 
 | 语音工作包任务 | 当前状态与证据 |
 | --- | --- |

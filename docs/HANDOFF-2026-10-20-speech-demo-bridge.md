@@ -96,6 +96,10 @@ Task7 已 task-start，base `b272b76e8428eeb78340bc623960691cbf08b224`，尚未 
 
 ## 下一会话最小恢复步骤
 
+### Roadmap 后续设计已启动
+
+在 Task 7 追加独立审查仍不可用期间，已完成下一包 [iOS 麦克风 ASR 设计](superpowers/specs/2026-10-20-ios-microphone-asr-design.md)。它保留当前文件 API，提出独立 microphone task、finish/cancel 分离、显式 session lease、权限与 drain 门禁，并记录 Apple DocC/SDK 依据。按用户“逐项实施、自动进入下一项”的 roadmap 约定推进本地契约测试与实现，不把这当成人工逐字批准或验收通过。新包的录音、真机与独立审查分别记录；旧 Task 7 的审查与双远端同步门禁仍保留。恢复时读新包计划/ledger，避免重做已完成切片。
+
 ### 15:09 恢复检查点
 
 - 实现 HEAD 仍为 `476d027`；本轮未修改产品或 UI 测试源码，Task 7 未 task-done。
