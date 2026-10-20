@@ -46,10 +46,13 @@
 		A85CD02F7D348E984D7D8002 /* VisionFaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0278B7DADAED87DB634BDED5 /* VisionFaceDetector.swift */; };
 		AC402CC2F005E84364ACA1D0 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		AEB7A925C5BF66431CB312D1 /* FaceLiveness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B6CF6558B298D0F7E5CED9 /* FaceLiveness.swift */; };
+		B140148B0B297244C6CD9507 /* SpeechMicrophoneClientTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148B3A0CC524F8417F31A6D /* SpeechMicrophoneClientTask.swift */; };
+		B2128EA69693A5D58B4EA8FF /* SpeechMicrophone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703A22282ED4D713DDA31B32 /* SpeechMicrophone.swift */; };
 		B2BC68C7874ADFC190295439 /* LocalIdentityBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C45DD1192427D52D280690 /* LocalIdentityBackend.swift */; };
 		B9DDCBE016D7228A2E24597C /* AppleAVSpeechBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2FECE6D5DC16691BD1A5B0 /* AppleAVSpeechBackend.swift */; };
 		BB02C8D38DEA33AD2CC8D272 /* IdentityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2697C9F5448D517E5196CA0B /* IdentityStore.swift */; };
 		BB8E3B3253EE7E49B98BA88C /* IndexStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F691F270D1FE0D65FD0ACB2 /* IndexStore.swift */; };
+		BDAEBD5303838C78A6C57881 /* AppleSpeechMicrophone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FA11E5462EE6906655735C /* AppleSpeechMicrophone.swift */; };
 		C192D88DD16107B3C37A17B0 /* IdentityEnrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41866830051FC001F515E083 /* IdentityEnrollment.swift */; };
 		C2A4456A3D0A6F33529FB316 /* ImageGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */; };
 		C814E8CBB34E9BB5B367332B /* IdentityTemplateLease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D92A232996FA126F753F32B /* IdentityTemplateLease.swift */; };
@@ -59,6 +62,7 @@
 		DAB68DD158DFA4D467C6DCC0 /* SpeechClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24346D636307E745B03B9CE /* SpeechClient.swift */; };
 		DDBAC062C4C652DBF34C1F10 /* ODAIKitModelStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B559AC07B15B943927A218 /* ODAIKitModelStore.framework */; };
 		E0932865ED77150E05827C81 /* ODAIKitFace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180827F381A9FF1D9FD308FC /* ODAIKitFace.framework */; };
+		E0A9AC8DADD95F1F0C270ACC /* AppleSpeechAudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11FFC59E264168F5AD5D261 /* AppleSpeechAudioSession.swift */; };
 		E315D7EBD927C1F44AA63196 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		E52090F8A227987A8469D8AC /* TestIdentityBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B4B332FA6F8B400CFD924A /* TestIdentityBackend.swift */; };
 		EAFF22EA976D513A674D1F20 /* IdentityWireValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251DCF4818C5B910F8056A31 /* IdentityWireValidation.swift */; };
@@ -141,6 +145,7 @@
 		05A0C5087D6BAEB12ABAD20E /* IdentityAuthorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityAuthorization.swift; path = Sources/ODAIKitIdentity/IdentityAuthorization.swift; sourceTree = "<group>"; };
 		0BEF34BC229EF6EFB7F4BFFA /* FaceVerification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceVerification.swift; path = Sources/ODAIKitIdentity/FaceVerification.swift; sourceTree = "<group>"; };
 		0C59C13A18066C82FB5E037A /* GalleryCatalog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GalleryCatalog.swift; path = Sources/ODAIKitIdentity/GalleryCatalog.swift; sourceTree = "<group>"; };
+		13FA11E5462EE6906655735C /* AppleSpeechMicrophone.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleSpeechMicrophone.swift; path = Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift; sourceTree = "<group>"; };
 		180827F381A9FF1D9FD308FC /* ODAIKitFace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitFace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		199E592263186548423B158D /* IdentityPolicyCodecs.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityPolicyCodecs.swift; path = Sources/ODAIKitIdentity/IdentityPolicyCodecs.swift; sourceTree = "<group>"; };
 		1BCEDF5FCBA3AA67F169FC96 /* IdentityGalleryOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityGalleryOperation.swift; path = Sources/ODAIKitIdentity/IdentityGalleryOperation.swift; sourceTree = "<group>"; };
@@ -165,6 +170,7 @@
 		6568ADE1C602A8407F60A6AE /* ModelStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelStore.swift; path = Sources/ODAIKitModelStore/ModelStore.swift; sourceTree = "<group>"; };
 		65806FDB767FCB54FE5F2921 /* IdentityContracts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityContracts.swift; path = Sources/ODAIKitIdentity/IdentityContracts.swift; sourceTree = "<group>"; };
 		6B9A49CE061532935F71D882 /* GallerySnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GallerySnapshot.swift; path = Sources/ODAIKitIdentity/GallerySnapshot.swift; sourceTree = "<group>"; };
+		703A22282ED4D713DDA31B32 /* SpeechMicrophone.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpeechMicrophone.swift; path = Sources/ODAIKitSpeech/SpeechMicrophone.swift; sourceTree = "<group>"; };
 		7719F88D02917C7C358D4FB1 /* IdentityStopSignal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityStopSignal.swift; path = Sources/ODAIKitIdentity/IdentityStopSignal.swift; sourceTree = "<group>"; };
 		7D92A232996FA126F753F32B /* IdentityTemplateLease.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityTemplateLease.swift; path = Sources/ODAIKitIdentity/IdentityTemplateLease.swift; sourceTree = "<group>"; };
 		81B6CF6558B298D0F7E5CED9 /* FaceLiveness.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceLiveness.swift; path = Sources/ODAIKitIdentity/FaceLiveness.swift; sourceTree = "<group>"; };
@@ -181,12 +187,14 @@
 		B9B867539A8E2FCC7317BB20 /* ODAIKitAppleSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitAppleSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelDownloader.swift; path = Sources/ODAIKitModelStore/ModelDownloader.swift; sourceTree = "<group>"; };
 		BE4F8AE1FD0B502BE5D40CB2 /* ODAIKitSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C148B3A0CC524F8417F31A6D /* SpeechMicrophoneClientTask.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpeechMicrophoneClientTask.swift; path = Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift; sourceTree = "<group>"; };
 		C9BEB93AABBF7EC8E2589C5B /* IdentityTemplatePayload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityTemplatePayload.swift; path = Sources/ODAIKitIdentity/IdentityTemplatePayload.swift; sourceTree = "<group>"; };
 		CBA9B51D24AB4AA7CA0E2643 /* IdentityRevocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityRevocation.swift; path = Sources/ODAIKitIdentity/IdentityRevocation.swift; sourceTree = "<group>"; };
 		CDA68DF876300C7C5D099A75 /* IdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityBackend.swift; path = Sources/ODAIKitIdentity/IdentityBackend.swift; sourceTree = "<group>"; };
 		DB2FECE6D5DC16691BD1A5B0 /* AppleAVSpeechBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleAVSpeechBackend.swift; path = Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift; sourceTree = "<group>"; };
 		DC62F260C1E5E3E210CC2FF2 /* IdentityDeletion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityDeletion.swift; path = Sources/ODAIKitIdentity/IdentityDeletion.swift; sourceTree = "<group>"; };
 		E108CAD03F5016A712A73981 /* FaceIdentification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceIdentification.swift; path = Sources/ODAIKitIdentity/FaceIdentification.swift; sourceTree = "<group>"; };
+		E11FFC59E264168F5AD5D261 /* AppleSpeechAudioSession.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleSpeechAudioSession.swift; path = Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift; sourceTree = "<group>"; };
 		E479AF70E638E5BA343EC5C4 /* IdentityJournal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityJournal.swift; path = Sources/ODAIKitIdentity/IdentityJournal.swift; sourceTree = "<group>"; };
 		F24346D636307E745B03B9CE /* SpeechClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpeechClient.swift; path = Sources/ODAIKitSpeech/SpeechClient.swift; sourceTree = "<group>"; };
 		F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelManifest.swift; path = Sources/ODAIKitModelStore/ModelManifest.swift; sourceTree = "<group>"; };
@@ -333,6 +341,10 @@
 				A8CC727BB00DD3072C7CB20A /* KeychainIdentityKeyProvider.swift */,
 				35C45DD1192427D52D280690 /* LocalIdentityBackend.swift */,
 				63B4B332FA6F8B400CFD924A /* TestIdentityBackend.swift */,
+				703A22282ED4D713DDA31B32 /* SpeechMicrophone.swift */,
+				C148B3A0CC524F8417F31A6D /* SpeechMicrophoneClientTask.swift */,
+				E11FFC59E264168F5AD5D261 /* AppleSpeechAudioSession.swift */,
+				13FA11E5462EE6906655735C /* AppleSpeechMicrophone.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -674,6 +686,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAB68DD158DFA4D467C6DCC0 /* SpeechClient.swift in Sources */,
+				B2128EA69693A5D58B4EA8FF /* SpeechMicrophone.swift in Sources */,
+				B140148B0B297244C6CD9507 /* SpeechMicrophoneClientTask.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,6 +727,8 @@
 			files = (
 				B9DDCBE016D7228A2E24597C /* AppleAVSpeechBackend.swift in Sources */,
 				184DB45212EBA0B2AF70F10E /* AppleSpeechRecognizerBackend.swift in Sources */,
+				E0A9AC8DADD95F1F0C270ACC /* AppleSpeechAudioSession.swift in Sources */,
+				BDAEBD5303838C78A6C57881 /* AppleSpeechMicrophone.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

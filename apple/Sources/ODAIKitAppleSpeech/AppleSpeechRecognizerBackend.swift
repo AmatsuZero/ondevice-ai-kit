@@ -37,6 +37,7 @@ internal enum AppleSpeechPlatformEvent: Sendable, Equatable {
     case final(text: String, segments: [AppleSpeechSegment])
     case cancelled
     case failed(domain: String, code: Int)
+    case captureInvalidated(domain: String, code: Int)
     case finished
 }
 
@@ -153,11 +154,12 @@ internal final class AppleSpeechPlatformBridgeImpl: AppleSpeechPlatformBridge {
 }
 
 @MainActor
-public final class AppleSpeechRecognizerBackend: SpeechRecognitionBackend {
+public final class AppleSpeechRecognizerBackend: SpeechMicrophoneRecognitionBackend {
     public nonisolated let backendId = "apple.speech.recognizer"
     public nonisolated let capability: SpeechCapability = .asr
     internal let locale: String
     internal let timeout: TimeInterval
+    public nonisolated let supportedInputs: [SpeechRecognitionInputKind]
 
     /// The framework callback and MainActor polling can run in either order.
     /// Buffer events before scheduling an actor hop, preserving callback order.
@@ -201,10 +203,50 @@ public final class AppleSpeechRecognizerBackend: SpeechRecognitionBackend {
         }
     }
 
+    @MainActor
+    private final class MicrophoneOperation {
+        let generation: UInt64
+        let handle: AppleSpeechTaskHandle
+        let inbox: EventInbox
+        let lease: any AppleSpeechAudioSessionLease
+        var outcome: Result<SpeechRecognitionResult, Error>?
+        var resultWaiters: [CheckedContinuation<SpeechRecognitionResult, Error>] = []
+        var finalResult: SpeechRecognitionResult?
+        var failure: Error?
+        var receivedFinished = false
+        var cancellationRequested = false
+        var finishRequested = false
+        var nativeCancelRequested = false
+        var captureStopTask: Task<Error?, Never>?
+        var captureStopped = false
+        var cleanupStarted = false
+        var pollTask: Task<Void, Never>?
+        var timeoutTask: Task<Void, Never>?
+        var closeWaiters: [CheckedContinuation<Void, Never>] = []
+
+        init(generation: UInt64, handle: AppleSpeechTaskHandle, inbox: EventInbox,
+             lease: any AppleSpeechAudioSessionLease) {
+            self.generation = generation
+            self.handle = handle
+            self.inbox = inbox
+            self.lease = lease
+        }
+
+        func result() async throws -> SpeechRecognitionResult {
+            if let outcome { return try outcome.get() }
+            return try await withCheckedThrowingContinuation { resultWaiters.append($0) }
+        }
+    }
+
     private let bridge: any AppleSpeechPlatformBridge
     private let clock: any AppleSpeechClock
+    private let microphoneBridge: (any AppleSpeechMicrophonePlatformBridge)?
+    private let audioSessionProvider: (any AppleSpeechAudioSessionProvider)?
     private var generation: UInt64 = 0
     private var active: Operation?
+    private var activeMicrophone: MicrophoneOperation?
+    private var pendingMicrophoneStarts = 0
+    private var pendingMicrophoneWaiters: [CheckedContinuation<Void, Never>] = []
     private var closed = false
 
     public init(locale: String, timeout: TimeInterval = 30) throws {
@@ -216,10 +258,15 @@ public final class AppleSpeechRecognizerBackend: SpeechRecognitionBackend {
         self.timeout = timeout
         self.bridge = AppleSpeechPlatformBridgeImpl(locale: canonical)
         self.clock = SystemAppleSpeechClock()
+        self.microphoneBridge = nil
+        self.audioSessionProvider = nil
+        self.supportedInputs = [.audioFile]
     }
 
     internal init(locale: String, timeout: TimeInterval = 30,
                   bridge: any AppleSpeechPlatformBridge,
+                  microphoneBridge: (any AppleSpeechMicrophonePlatformBridge)? = nil,
+                  audioSessionProvider: (any AppleSpeechAudioSessionProvider)? = nil,
                   clock: any AppleSpeechClock = SystemAppleSpeechClock()) throws {
         let canonical = try Self.canonicalLocale(locale)
         guard timeout.isFinite, (1...300).contains(timeout) else {
@@ -229,6 +276,271 @@ public final class AppleSpeechRecognizerBackend: SpeechRecognitionBackend {
         self.timeout = timeout
         self.bridge = bridge
         self.clock = clock
+        self.microphoneBridge = microphoneBridge
+        self.audioSessionProvider = audioSessionProvider
+        self.supportedInputs = microphoneBridge == nil || audioSessionProvider == nil
+            ? [.audioFile] : [.audioFile, .microphone]
+    }
+
+    public func startMicrophone(_ request: SpeechMicrophoneRecognitionRequest) async throws
+        -> any SpeechMicrophoneRecognitionTask {
+        guard !closed else { throw KitError.closed }
+        guard active == nil, activeMicrophone == nil, pendingMicrophoneStarts == 0 else { throw KitError.busy }
+        guard let microphoneBridge, let audioSessionProvider else {
+            throw SpeechRecognitionInputError.unsupportedInput
+        }
+        guard microphoneBridge.isRecordingAuthorized else {
+            throw SpeechClientError.backendUnavailable(capability: .asr, backendId: backendId, reason: .permissionDenied)
+        }
+        let metadata = microphoneBridge.metadata()
+        guard metadata.authorization == .authorized else {
+            throw SpeechClientError.backendUnavailable(capability: .asr, backendId: backendId, reason: .permissionDenied)
+        }
+        guard metadata.isAvailable, metadata.supportsOnDeviceRecognition else {
+            throw SpeechClientError.backendUnavailable(capability: .asr, backendId: backendId, reason: .unsupportedDevice)
+        }
+        guard request.locale == locale else { throw KitError.invalidInput("locale does not match backend") }
+        try Task.checkCancellation()
+        pendingMicrophoneStarts += 1
+        defer { finishPendingMicrophoneStart() }
+
+        let lease: any AppleSpeechAudioSessionLease
+        do { lease = try await audioSessionProvider.acquire() }
+        catch { throw error }
+        guard !closed else {
+            try? await lease.release()
+            throw KitError.closed
+        }
+        do { try Task.checkCancellation() }
+        catch {
+            try? await lease.release()
+            throw error
+        }
+
+        // Acquiring the host's session can suspend while permissions change.
+        // Revalidate admission before creating any native capture resources.
+        let currentMetadata = microphoneBridge.metadata()
+        guard microphoneBridge.isRecordingAuthorized, currentMetadata.authorization == .authorized else {
+            try? await lease.release()
+            throw SpeechClientError.backendUnavailable(capability: .asr, backendId: backendId, reason: .permissionDenied)
+        }
+        guard currentMetadata.isAvailable, currentMetadata.supportsOnDeviceRecognition else {
+            try? await lease.release()
+            throw SpeechClientError.backendUnavailable(capability: .asr, backendId: backendId, reason: .unsupportedDevice)
+        }
+
+        generation &+= 1
+        let currentGeneration = generation
+        let inbox = EventInbox()
+        let handle: AppleSpeechTaskHandle
+        do {
+            handle = try await microphoneBridge.start(requiresOnDeviceRecognition: true) { [weak self, inbox] event in
+                inbox.append(event)
+                Task { @MainActor [weak self, inbox] in
+                    self?.receiveMicrophoneEvents(generation: currentGeneration, inbox: inbox)
+                }
+            }
+        } catch {
+            try? await lease.release()
+            throw error
+        }
+        let operation = MicrophoneOperation(generation: currentGeneration, handle: handle,
+                                             inbox: inbox, lease: lease)
+        activeMicrophone = operation
+        operation.pollTask = Task { @MainActor [weak self] in
+            await self?.pollMicrophoneUntilCompleted(operation)
+        }
+        operation.timeoutTask = Task { @MainActor [weak self] in
+            do {
+                try await self?.clock.sleep(seconds: self?.timeout ?? 30)
+                if let self { await self.timeoutMicrophone(operation) }
+            } catch { }
+        }
+        if closed || Task.isCancelled {
+            await cancelMicrophone(operation, failure: CancellationError())
+            if operation.outcome == nil {
+                await withCheckedContinuation { operation.closeWaiters.append($0) }
+            }
+            if closed { throw KitError.closed }
+            throw CancellationError()
+        }
+        let task = AppleSpeechMicrophoneTaskHandleImpl(
+            result: { try await operation.result() },
+            finish: { [weak self] in await self?.finishMicrophone(operation) },
+            cancel: { [weak self] in await self?.cancelMicrophone(operation, failure: CancellationError()) })
+        return task
+    }
+
+    private func finishPendingMicrophoneStart() {
+        pendingMicrophoneStarts -= 1
+        guard pendingMicrophoneStarts == 0 else { return }
+        let waiters = pendingMicrophoneWaiters
+        pendingMicrophoneWaiters.removeAll()
+        waiters.forEach { $0.resume() }
+    }
+
+    private func finishMicrophone(_ operation: MicrophoneOperation) async {
+        guard activeMicrophone === operation, operation.outcome == nil,
+              !operation.cancellationRequested, !operation.finishRequested else { return }
+        operation.finishRequested = true
+        await stopMicrophoneCapture(operation, endAudio: true)
+        finishMicrophoneIfReady(operation)
+    }
+
+    private func cancelMicrophone(_ operation: MicrophoneOperation, failure: Error) async {
+        guard activeMicrophone === operation, operation.outcome == nil else { return }
+        operation.cancellationRequested = true
+        if operation.failure == nil { operation.failure = failure }
+        await stopMicrophoneCapture(operation, endAudio: true)
+        requestMicrophoneCancel(operation)
+        finishMicrophoneIfReady(operation)
+    }
+
+    private func requestMicrophoneCancel(_ operation: MicrophoneOperation) {
+        guard !operation.nativeCancelRequested else { return }
+        operation.nativeCancelRequested = true
+        if microphoneBridge?.state(of: operation.handle) != .completed {
+            microphoneBridge?.cancel(operation.handle)
+        }
+    }
+
+    private func stopMicrophoneCapture(_ operation: MicrophoneOperation, endAudio: Bool) async {
+        guard !operation.captureStopped, let microphoneBridge else { return }
+        let stopTask: Task<Error?, Never>
+        if let existing = operation.captureStopTask {
+            stopTask = existing
+        } else {
+            let created: Task<Error?, Never> = Task { @MainActor in
+                do {
+                    try await microphoneBridge.stopCapture(operation.handle, endAudio: endAudio)
+                    return nil
+                } catch { return error }
+            }
+            operation.captureStopTask = created
+            stopTask = created
+        }
+        let stopError = await stopTask.value
+        if let error = stopError {
+            operation.failure = error
+        }
+        operation.captureStopTask = nil
+        operation.captureStopped = true
+    }
+
+    private func invalidateMicrophone(_ operation: MicrophoneOperation, failure: Error) async {
+        guard activeMicrophone === operation, operation.outcome == nil else { return }
+        operation.cancellationRequested = true
+        if operation.failure == nil { operation.failure = failure }
+        await stopMicrophoneCapture(operation, endAudio: true)
+        requestMicrophoneCancel(operation)
+        finishMicrophoneIfReady(operation)
+    }
+
+    private func stopMicrophoneAfterNaturalTerminal(_ operation: MicrophoneOperation) async {
+        guard activeMicrophone === operation, operation.outcome == nil else { return }
+        await stopMicrophoneCapture(operation, endAudio: true)
+        finishMicrophoneIfReady(operation)
+    }
+
+    private func receiveMicrophoneEvents(generation: UInt64, inbox: EventInbox) {
+        guard let operation = activeMicrophone,
+              operation.generation == generation, operation.inbox === inbox,
+              operation.outcome == nil else { return }
+        for event in inbox.takeEvents() { receiveMicrophone(event, operation: operation) }
+        finishMicrophoneIfReady(operation)
+    }
+
+    private func receiveMicrophone(_ event: AppleSpeechPlatformEvent, operation: MicrophoneOperation) {
+        switch event {
+        case .partial:
+            break
+        case .final(let text, let segments):
+            guard !operation.cancellationRequested else { return }
+            operation.finalResult = SpeechRecognitionResult(backendId: backendId, transcript: text,
+                                                            confidence: Self.aggregateConfidence(segments))
+            Task { @MainActor [weak self] in
+                await self?.stopMicrophoneAfterNaturalTerminal(operation)
+            }
+        case .cancelled:
+            operation.cancellationRequested = true
+            if operation.failure == nil { operation.failure = CancellationError() }
+            Task { @MainActor [weak self] in
+                await self?.invalidateMicrophone(operation, failure: CancellationError())
+            }
+        case .failed(let domain, let code), .captureInvalidated(let domain, let code):
+            let failure = SpeechRecognitionError.platform(domain: domain, code: code)
+            operation.cancellationRequested = true
+            if operation.failure == nil { operation.failure = failure }
+            Task { @MainActor [weak self] in
+                await self?.invalidateMicrophone(operation, failure: failure)
+            }
+        case .finished:
+            operation.receivedFinished = true
+            if !operation.captureStopped {
+                Task { @MainActor [weak self] in
+                    await self?.stopMicrophoneAfterNaturalTerminal(operation)
+                }
+            }
+        }
+    }
+
+    private func pollMicrophoneUntilCompleted(_ operation: MicrophoneOperation) async {
+        while activeMicrophone === operation {
+            receiveMicrophoneEvents(generation: operation.generation, inbox: operation.inbox)
+            finishMicrophoneIfReady(operation)
+            guard activeMicrophone === operation else { return }
+            do { try await clock.sleep(seconds: 0.02) }
+            catch { return }
+        }
+    }
+
+    private func timeoutMicrophone(_ operation: MicrophoneOperation) async {
+        guard activeMicrophone === operation, operation.outcome == nil else { return }
+        operation.cancellationRequested = true
+        operation.failure = SpeechRecognitionError.timedOut
+        await stopMicrophoneCapture(operation, endAudio: true)
+        requestMicrophoneCancel(operation)
+        finishMicrophoneIfReady(operation)
+    }
+
+    private func finishMicrophoneIfReady(_ operation: MicrophoneOperation) {
+        guard activeMicrophone === operation,
+              (operation.cancellationRequested || operation.finalResult != nil || operation.failure != nil || operation.receivedFinished),
+              operation.captureStopped,
+              microphoneBridge?.state(of: operation.handle) == .completed else { return }
+        Task { @MainActor [weak self] in
+            await self?.releaseMicrophone(operation)
+        }
+    }
+
+    private func releaseMicrophone(_ operation: MicrophoneOperation) async {
+        guard activeMicrophone === operation, !operation.cleanupStarted else { return }
+        operation.cleanupStarted = true
+        microphoneBridge?.release(operation.handle)
+        operation.timeoutTask?.cancel()
+        operation.pollTask?.cancel()
+        var result: Result<SpeechRecognitionResult, Error>
+        do {
+            try await operation.lease.release()
+            if operation.cancellationRequested {
+                result = .failure(operation.failure ?? CancellationError())
+            } else if let failure = operation.failure {
+                result = .failure(failure)
+            } else if let finalResult = operation.finalResult {
+                result = .success(finalResult)
+            } else {
+                result = .failure(SpeechRecognitionError.noResult)
+            }
+        } catch {
+            result = .failure(error)
+        }
+        operation.outcome = result
+        activeMicrophone = nil
+        for waiter in operation.resultWaiters { waiter.resume(with: result) }
+        operation.resultWaiters.removeAll()
+        let closeWaiters = operation.closeWaiters
+        operation.closeWaiters.removeAll()
+        closeWaiters.forEach { $0.resume() }
     }
 
     public func availability() async -> CapabilityAvailability {
@@ -248,7 +560,7 @@ public final class AppleSpeechRecognizerBackend: SpeechRecognitionBackend {
     /// before changing/deleting the file; the platform may still be using its audio.
     public func recognize(_ request: SpeechRecognitionRequest) async throws -> SpeechRecognitionResult {
         guard !closed else { throw KitError.closed }
-        guard active == nil else { throw KitError.busy }
+        guard active == nil, activeMicrophone == nil, pendingMicrophoneStarts == 0 else { throw KitError.busy }
         guard request.locale == locale else { throw KitError.invalidInput("locale does not match backend") }
         try validateFile(request.audioFile)
         let metadata = bridge.metadata()
@@ -296,6 +608,16 @@ public final class AppleSpeechRecognizerBackend: SpeechRecognitionBackend {
 
     public func close() async {
         closed = true
+        if pendingMicrophoneStarts > 0 {
+            await withCheckedContinuation { pendingMicrophoneWaiters.append($0) }
+        }
+        if let microphone = activeMicrophone {
+            await cancelMicrophone(microphone, failure: CancellationError())
+            finishMicrophoneIfReady(microphone)
+            if activeMicrophone === microphone {
+                await withCheckedContinuation { microphone.closeWaiters.append($0) }
+            }
+        }
         guard let operation = active else { return }
         cancel(operation, failure: CancellationError())
         finishIfReady(operation)
@@ -306,6 +628,15 @@ public final class AppleSpeechRecognizerBackend: SpeechRecognitionBackend {
     /// Wait for the current platform task to reach `.completed`, preserving reuse.
     /// Cancellation of this wait does not release the platform task early.
     public func drain() async {
+        if pendingMicrophoneStarts > 0 {
+            await withCheckedContinuation { pendingMicrophoneWaiters.append($0) }
+        }
+        if let microphone = activeMicrophone {
+            finishMicrophoneIfReady(microphone)
+            if activeMicrophone === microphone {
+                await withCheckedContinuation { microphone.closeWaiters.append($0) }
+            }
+        }
         guard let operation = active else { return }
         finishIfReady(operation)
         guard active === operation else { return }
@@ -332,6 +663,8 @@ public final class AppleSpeechRecognizerBackend: SpeechRecognitionBackend {
             operation.failure = CancellationError()
         case .failed(let domain, let code):
             operation.failure = SpeechRecognitionError.platform(domain: domain, code: code)
+        case .captureInvalidated:
+            break
         case .finished:
             operation.receivedFinished = true
         }
