@@ -6,6 +6,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import io.ondeviceai.binding.*
 
@@ -13,17 +14,27 @@ interface IdentityDemoActions { fun submitLivenessFrame() }
 
 @Composable
 fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityViewModel? = null,
-    identityActions: IdentityDemoActions? = null) {
+    identityActions: IdentityDemoActions? = null, speech: SpeechViewModel? = null,
+    speechActions: SpeechDemoActions? = null) {
     val state = model.state
     val availability = model.bridge.availability()
     var identityVisible by remember { mutableStateOf(false) }
+    var speechVisible by remember { mutableStateOf(false) }
+    fun leaveSpeech() { if (speechVisible) { speech?.leavePage(); speechActions?.leavePage() }; speechVisible = false }
+    DisposableEffect(speech) { onDispose { speech?.leavePage(); speechActions?.leavePage() } }
     MaterialTheme {
         Column(Modifier.fillMaxWidth().heightIn(max = 380.dp).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("OnDevice AI Kit", style = MaterialTheme.typography.headlineSmall)
-            if (identity != null) Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TextButton(onClick = { identityVisible = false }) { Text("人脸检测") }
-                TextButton(onClick = { identityVisible = true }) { Text("身份与活体") }
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                TextButton(onClick = { leaveSpeech(); identityVisible = false }) { Text("人脸检测") }
+                if (identity != null) TextButton(onClick = { leaveSpeech(); identityVisible = true }) { Text("身份与活体") }
+                if (speech != null) TextButton(onClick = {
+                    actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; speechVisible = true
+                }, modifier = Modifier.testTag("speech-tab")) { Text("语音") }
             }
+            if (speechVisible && speech != null) {
+                SpeechScreen(speech, speechActions)
+            } else {
             Text(availability.backendId + if (availability.available) " · offline" else " · " + availability.reason)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Button(onClick = { actions.selectPhoto() }, enabled = state.canSelectInput) { Text("选择图片") }
@@ -45,6 +56,7 @@ fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityVie
                 }
             }
             if (identityVisible) identity?.let { IdentityControls(it, identityActions) }
+            }
         }
     }
 }
