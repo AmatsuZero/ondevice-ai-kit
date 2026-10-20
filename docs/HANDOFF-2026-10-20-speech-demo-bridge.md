@@ -100,7 +100,7 @@ Task7 已 task-start，base `b272b76e8428eeb78340bc623960691cbf08b224`，尚未 
 
 - 实现 HEAD 仍为 `476d027`；本轮未修改产品或 UI 测试源码，Task 7 未 task-done。
 - 新鲜回归：生成器 `test_speech_demo_project.py` **4/4**；`./gradlew :demo:shared:allTests :demo:androidApp:testDebugUnitTest :demo:androidApp:lintDebug --console=plain` **BUILD SUCCESSFUL，427 tasks（5 executed、422 up-to-date）**。日志：ledger 同目录 `task-7-resume-gradle.log`。未重跑此前完整五项真机套件。
-- native `code-reviewer`、`critic`、`architect`、默认继承模型和显式 `gpt-6.1-sol` 独立子代理均在执行前返回 `Selected model is at capacity`，没有审查发现或 CLEAR。替代的 `omx ask claude` 退出 1：`Not logged in`，未修改登录状态。失败原始记录在 `.omx/artifacts/claude-read-only-independent-code-review-repository-worktree-users--2026-10-20T06-58-08-790Z.md`。恢复后只需一次可用的独立 UI/Done 审查，不重复已通过的 Host 整包审查。
+- native `code-reviewer`、`critic`、`architect`、默认继承模型和显式 `gpt-6.1-sol`、`gpt-6-astra`、`gpt-6-luna` 独立子代理均在执行前返回 `Selected model is at capacity`，没有审查发现或 CLEAR。替代的 `omx ask claude` 退出 1：`Not logged in`，未修改登录状态。失败原始记录在 `.omx/artifacts/claude-read-only-independent-code-review-repository-worktree-users--2026-10-20T06-58-08-790Z.md`。恢复后只需一次可用的独立 UI/Done 审查，不重复已通过的 Host 整包审查。
 - 两个远端 `feat/sdk-foundation` 实时查询均仍为 `472ca9351eb69c09d863ef7bc267c280b068b846`，是当前本地分支的祖先。没有推送；最终审查门禁保留，既有串行同步授权继续有效。
 - 两个受保护文件的 SHA-256 与本文件固定值一致，`git diff --check` 通过。后续不得将它们纳入提交。
 
