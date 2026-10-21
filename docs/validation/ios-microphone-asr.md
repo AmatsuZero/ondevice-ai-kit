@@ -47,7 +47,7 @@ Speech binary consumer unsigned simulator App **BUILD SUCCEEDED**，只嵌入 Co
 
 Task4 独立 code-reviewer APPROVE、0问题；Task5 与 Task3 回滚修复独立 code-reviewer APPROVE、10files、0问题。Task1–3 capture/client核心整包独立审查同样 APPROVE、11files、0问题，并独立跑相关34tests通过；五条 Review Focus 均已覆盖，真实录音/iOS15/网络边界除外。旧 Speech Demo Task7 UI/Done 追加审查在首次429后已恢复独立 APPROVE，旧包本地门禁收口；两者审查范围分别记录。最终门禁前不提前同步远端。
 
-2026-10-21 受控真机窗口（iPhone 16 Pro Max，UDID `00008140-0008703436D3001C`）已使用新生成包 `artifacts/verification/microphone-live-fix-20261021/`。用户主动开始并结束录音后，回报页面显示 **`SUCCEEDED ASR`**，记录本次真实麦克风 ASR 的用户复测成功；未独立核对识别文本或断网表现；不记录或导出自然转写文本。此前诊断包的 `categoryChange` 误报已由 route snapshot 修复覆盖。以下仍未验证：
+2026-10-21 受控真机窗口（iPhone 16 Pro Max，UDID `00008140-0008703436D3001C`）已使用新生成包 `artifacts/verification/microphone-live-fix-20261021/`。用户主动开始并结束录音后，回报页面显示 **`SUCCEEDED ASR`**，记录本次真实麦克风 ASR 的用户复测成功；未独立核对识别文本或断网表现；不记录或导出自然转写文本。此前诊断包的 `categoryChange` 误报已由 route snapshot 修复覆盖。随后用户在取消/重入测试回报两次均 `FAILED`，该生命周期门禁当前失败，尚无本轮底层错误码；首轮成功不代表完整修复。诊断工程与日志见交接。以下仍未验证：
 
 - 实际录音授权/拒权恢复、取消/drain、同进程重入、TTS 往返、后台取消/前台不重启。
 - iOS15 真机、两端自然语音 CER/WER/听感、断网与资源指标。`requiresOnDeviceRecognition=true` 是实现约束，不是独立网络验收。

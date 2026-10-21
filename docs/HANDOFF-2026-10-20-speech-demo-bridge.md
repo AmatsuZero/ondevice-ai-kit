@@ -15,6 +15,8 @@
 
 受控窗口更新：用户已确认可配合固定朗读。新生成工程 `artifacts/verification/microphone-live-fix-20261021/SpeechDemo.xcodeproj`、signed device build/install/launch 已成功（沿用 team `4X996UV8LC`，没有变更账户资产）；日志 `task-6-route-{framework,device-build,device-install,device-launch}.log`。用户主动开始、结束录音后回报，页面显示 **`SUCCEEDED ASR`**；不记录或导出自然转写文本。此前诊断包的 `categoryChange` 误报已由 route snapshot 修复覆盖。下一步仍需受控取消、同进程重入和后台取消/前台不自动重启；不得把授权扩展成旁人录音或后台自动采集。
 
+后续生命周期复测失败：用户在取消/同进程重入步骤回报“两次都 FAILED”。首轮 `SUCCEEDED ASR` 仍为有效单次成功，但不得视为完整修复或 Task6 完成。已构建安装并用控制台启动临时诊断工程 `artifacts/verification/microphone-reentry-diagnostic-20261021/`，沿用当前路由修复；只在忽略目录的 bridge/session 副本输出稳定 domain/code、会话配置和路由 reason/count/rate，不输出文本、音频、端口标识。过滤日志 `task-6-reentry-diagnostic-console.log`；构建/安装日志 `task-6-reentry-diagnostic-{build,install}.log`。等待本轮受控复现日志后重新判定根因，禁止凭首次成功推断取消/重入通过。
+
 路由修复：设备诊断两次 `AVAudioSessionRouteChangeReasonKey=3`（categoryChange）被原 observer 无条件转换成 PLATFORM。当前仅在 categoryChange 且 category/mode/options、输入输出端口、采样率和输入通道均与启动快照一致且输入健康时忽略；其余仍失效。新 native fixture41/41、Swift全套412项通过，日志 `task-6-route-{green,swift-full}.log`。此前七XCFramework产物不包含此次修复，尚未重新分发。此次两次独立复审调用均因 model-at-capacity 未启动，没有新的 APPROVE；不以既有审查替代。
 
 下一步：读取最新git与新ledger；旧Task7已在旧ledger收口；核对工作树与保护hash，随后按路线继续受控真机或其他独立工作包。仅确认受控朗读后开展真机mic窗口。缺设备/录音窗口的项保留unverified，继续roadmap其他可独立工作，不将整个目标标complete。新麦克风Task6门禁未满足前不提前推送当前HEAD；旧包审查通过不替代新包真实录音验收。
