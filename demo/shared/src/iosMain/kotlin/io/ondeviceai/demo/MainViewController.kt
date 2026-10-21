@@ -7,3 +7,8 @@ fun mainViewController(model:FaceViewModel,actions:DemoActions,identity:Identity
 fun speechMainViewController(model:FaceViewModel,actions:DemoActions,identity:IdentityViewModel,
     identityActions:IdentityDemoActions,speech:SpeechViewModel,speechActions:SpeechDemoActions)=
     ComposeUIViewController { FaceScreen(model,actions,identity,identityActions,speech,speechActions) }
+
+fun videoMainViewController(model:FaceViewModel,actions:DemoActions,identity:IdentityViewModel,
+    identityActions:IdentityDemoActions,speech:SpeechViewModel,speechActions:SpeechDemoActions,
+    video:VideoViewModel,videoActions:VideoDemoActions)=
+    ComposeUIViewController { FaceScreen(model,actions,identity,identityActions,speech,speechActions,video,videoActions) }

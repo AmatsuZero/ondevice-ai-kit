@@ -15,25 +15,34 @@ interface IdentityDemoActions { fun submitLivenessFrame() }
 @Composable
 fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityViewModel? = null,
     identityActions: IdentityDemoActions? = null, speech: SpeechViewModel? = null,
-    speechActions: SpeechDemoActions? = null) {
+    speechActions: SpeechDemoActions? = null, video: VideoViewModel? = null,
+    videoActions: VideoDemoActions? = null) {
     val state = model.state
     val availability = model.bridge.availability()
     var identityVisible by remember { mutableStateOf(false) }
     var speechVisible by remember { mutableStateOf(false) }
+    var videoVisible by remember { mutableStateOf(false) }
     fun leaveSpeech() { if (speechVisible) { speech?.leavePage(); speechActions?.leavePage() }; speechVisible = false }
+    fun leaveVideo() { if (videoVisible) { video?.leavePage(); videoActions?.leavePage() }; videoVisible = false }
     DisposableEffect(speech) { onDispose { speech?.leavePage(); speechActions?.leavePage() } }
+    DisposableEffect(video) { onDispose { video?.leavePage(); videoActions?.leavePage() } }
     MaterialTheme {
         Column(Modifier.fillMaxWidth().heightIn(max = 380.dp).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("OnDevice AI Kit", style = MaterialTheme.typography.headlineSmall)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TextButton(onClick = { leaveSpeech(); identityVisible = false }) { Text("人脸检测") }
-                if (identity != null) TextButton(onClick = { leaveSpeech(); identityVisible = true }) { Text("身份与活体") }
+                TextButton(onClick = { leaveSpeech(); leaveVideo(); identityVisible = false }) { Text("人脸检测") }
+                if (identity != null) TextButton(onClick = { leaveSpeech(); leaveVideo(); identityVisible = true }) { Text("身份与活体") }
                 if (speech != null) TextButton(onClick = {
-                    actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; speechVisible = true
+                    leaveVideo(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; speechVisible = true
                 }, modifier = Modifier.testTag("speech-tab")) { Text("语音") }
+                if (video != null) TextButton(onClick = {
+                    leaveSpeech(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; videoVisible = true
+                }, modifier = Modifier.testTag("video-tab")) { Text("视频") }
             }
             if (speechVisible && speech != null) {
                 SpeechScreen(speech, speechActions)
+            } else if (videoVisible && video != null) {
+                VideoScreen(video, videoActions)
             } else {
             Text(availability.backendId + if (availability.available) " · offline" else " · " + availability.reason)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
