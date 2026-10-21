@@ -22,6 +22,7 @@ enum AppleVideoAudioMuxer {
             let audio = try await audioTrack(source: source, videoDuration: videoDuration)
             try Task.checkCancellation()
             guard let audio else {
+                try await validateMuxedVideo(output: processedVideo, videoDuration: videoDuration)
                 try FileManager.default.moveItem(at: processedVideo, to: output)
                 return 0
             }
@@ -54,10 +55,9 @@ enum AppleVideoAudioMuxer {
             // The SDK overlay cancels the session and awaits its terminal completion callback.
             try await exporter.export(to: output, as: .mov)
             try Task.checkCancellation()
-            let result = AVURLAsset(url: output)
-            let resultVideos = try await result.loadTracks(withMediaType: .video)
+            try await validateMuxedVideo(output: output, videoDuration: videoDuration)
             let resultAudio = try await audioTrack(source: output, videoDuration: videoDuration)
-            guard resultVideos.count == 1, let resultAudio else { throw AppleVideoError.processingFailed }
+            guard let resultAudio else { throw AppleVideoError.processingFailed }
             let resultRange = try await resultAudio.track.load(.timeRange)
             guard abs(resultRange.start.seconds - audioRange.start.seconds) < 0.000002,
                   abs(resultRange.duration.seconds - audioRange.duration.seconds) < 0.000002 else {
@@ -70,6 +70,21 @@ enum AppleVideoAudioMuxer {
             try Task.checkCancellation()
             if let stable = error as? AppleVideoError { throw stable }
             throw AppleVideoError.processingFailed
+        }
+    }
+
+    static func validateMuxedVideo(output: URL, videoDuration: Double) async throws {
+        try Task.checkCancellation()
+        let asset = AVURLAsset(url: output)
+        defer { withExtendedLifetime(asset) {} }
+        let tracks = try await asset.loadTracks(withMediaType: .video)
+        guard tracks.count == 1, let track = tracks.first else { throw AppleVideoError.invalidFrame }
+        let (range, size, formats) = try await (track.load(.timeRange), track.load(.naturalSize), track.load(.formatDescriptions))
+        guard videoDuration.isFinite, videoDuration > 0, range.start.isNumeric, range.duration.isNumeric,
+              abs(range.start.seconds) < 0.000002, abs(range.duration.seconds - videoDuration) < 0.000002,
+              size == CGSize(width: 1280, height: 720), formats.count == 1,
+              CMFormatDescriptionGetMediaSubType(formats[0]) == kCMVideoCodecType_HEVC else {
+            throw AppleVideoError.invalidFrame
         }
     }
 

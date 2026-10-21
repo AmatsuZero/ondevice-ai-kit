@@ -72,6 +72,14 @@ final class AppleVideoAudioMuxerTests: XCTestCase {
         }
     }
 
+    func testRejectsMuxedVideoWithWrongTimelineOrFormat() async throws {
+        try await AppleVideoAudioMuxer.validateMuxedVideo(output: fixture("video-only.mov"), videoDuration: 2)
+        for (name, duration) in [("video-only.mov", 1.0), ("aac.mp4", 2.0)] {
+            do { try await AppleVideoAudioMuxer.validateMuxedVideo(output: fixture(name), videoDuration: duration); XCTFail("invalid mux video must not be delivered") }
+            catch { XCTAssertTrue(error is AppleVideoError) }
+        }
+    }
+
     func testExistingOutputRemainsUntouched() async throws {
         let root = try makeRoot(); defer { try? FileManager.default.removeItem(at: root) }
         let output = root.appendingPathComponent("keep.mov")
