@@ -13,7 +13,8 @@ SOURCES = ["kmp-binding/apple/IOSSpeechBridge.swift",
            "kmp-binding/apple/IOSSpeechAudioInput.swift",
            "demo/iosApp/SpeechInputStore.swift",
            "probes/ios-speech-bridge/IOSSpeechBridgeTests.swift"]
-HOST_SOURCES = ["demo/iosApp/SpeechHost.swift", "probes/ios-speech-bridge/SpeechHostTests.swift"]
+HOST_SOURCES = ["demo/iosApp/SpeechHost.swift", "probes/ios-speech-bridge/SpeechHostTests.swift",
+                "demo/iosApp/SpeechAudioSession.swift", "probes/ios-speech-bridge/SpeechAudioSessionTests.swift"]
 
 
 class SpeechBridgeProjectTests(unittest.TestCase):
@@ -63,7 +64,8 @@ puts JSON.generate({targets: p.targets.map(&:name),
                 self.assertEqual(sorted(data["sources"]), sorted(str(self.root / p) for p in sources))
                 kotlin = [p for p in data["frameworks"] if "ODAIKit" in p]
                 self.assertEqual(kotlin, [str(self.frameworks[module])])
-                self.assertEqual(sorted(data["products"]), ["ODAIKitCore", "ODAIKitSpeech"])
+                products = ["ODAIKitCore", "ODAIKitSpeech"] + (["ODAIKitAppleSpeech"] if module == "ODAIKitDemo" else [])
+                self.assertEqual(sorted(data["products"]), sorted(products))
                 for config in data["settings"]:
                     self.assertEqual("ODAI_DEMO_BINDING" in config["SWIFT_ACTIVE_COMPILATION_CONDITIONS"],
                                      module == "ODAIKitDemo")
@@ -91,6 +93,19 @@ puts JSON.generate({targets: p.targets.map(&:name),
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(list(self.output.iterdir()), [sentinel])
         self.assertEqual(sentinel.read_bytes(), b"user data")
+
+    def testMissingHostOrSessionSourceRejectsDemoWithoutOutput(self):
+        for source in HOST_SOURCES:
+            with self.subTest(source=source):
+                path = self.root / source
+                held = path.with_name(path.name + ".held")
+                path.rename(held)
+                try:
+                    result = self.generate("ODAIKitDemo")
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertFalse(self.output.exists())
+                finally:
+                    held.rename(path)
 
     def testDanglingOutputSymlinkIsNotFollowed(self):
         self.output.parent.mkdir(parents=True)

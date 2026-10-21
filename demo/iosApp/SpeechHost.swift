@@ -3,6 +3,7 @@ import ODAIKitDemo
 #if ODAI_SPEECH_DEMO
 import UIKit
 import Speech
+import AVFAudio
 import ODAIKitSpeech
 import ODAIKitAppleSpeech
 #endif
@@ -11,7 +12,8 @@ import ODAIKitAppleSpeech
 final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency SpeechDemoActions {
     private let inputs: SpeechInputStore
     private let bridge: any SpeechBridge
-    private let requestAuthorization: (@escaping (Bool) -> Void) -> Void
+    private let speechAuthorization: SpeechPermissionGate
+    private let recordAuthorization: SpeechPermissionGate
     private let presentPicker: (@escaping (URL?) -> Void) -> Void
     private let openSettings: () -> Void
     private var closed = false
@@ -22,9 +24,12 @@ final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency 
 
     init(inputs: SpeechInputStore, bridge: any SpeechBridge,
          requestAuthorization: @escaping (@escaping (Bool) -> Void) -> Void,
+         requestRecordAuthorization: @escaping (@escaping (Bool) -> Void) -> Void = { $0(false) },
          presentPicker: @escaping (@escaping (URL?) -> Void) -> Void, openSettings: @escaping () -> Void) {
         self.inputs = inputs; self.bridge = bridge
-        self.requestAuthorization = requestAuthorization; self.presentPicker = presentPicker
+        self.speechAuthorization = SpeechPermissionGate(request: requestAuthorization)
+        self.recordAuthorization = SpeechPermissionGate(request: requestRecordAuthorization)
+        self.presentPicker = presentPicker
         self.openSettings = openSettings
     }
 
@@ -33,7 +38,7 @@ final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency 
         let inputs = try SpeechInputStore()
         do {
             let ttsBackend = AppleAVSpeechBackend()
-            let asrBackend = try AppleSpeechRecognizerBackend(locale: "en-US")
+            let asrBackend = try AppleSpeechRecognizerBackend(locale: "en-US", audioSessionProvider: DemoSpeechAudioSessionProvider())
             let bridge = IOSSpeechBridge(
                 tts: try SpeechSynthesisClient(defaultBackendId: ttsBackend.backendId, backends: [ttsBackend]),
                 asr: try SpeechRecognitionClient(defaultBackendId: asrBackend.backendId, backends: [asrBackend]), inputs: inputs)
@@ -43,6 +48,22 @@ final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency 
                 else if SFSpeechRecognizer.authorizationStatus() == .notDetermined {
                     SFSpeechRecognizer.requestAuthorization { status in DispatchQueue.main.async { reply(status == .authorized) } }
                 } else { reply(false) }
+            }, requestRecordAuthorization: { reply in
+                let deliver: (Bool) -> Void = { granted in DispatchQueue.main.async { reply(granted) } }
+                if #available(iOS 17, *) {
+                    switch AVAudioApplication.shared.recordPermission {
+                    case .granted: reply(true)
+                    case .undetermined: AVAudioApplication.requestRecordPermission(completionHandler: deliver)
+                    default: reply(false)
+                    }
+                } else {
+                    let session = AVAudioSession.sharedInstance()
+                    switch session.recordPermission {
+                    case .granted: reply(true)
+                    case .undetermined: session.requestRecordPermission(deliver)
+                    default: reply(false)
+                    }
+                }
             }, presentPicker: { picker.present(reply: $0) }, openSettings: {
                 if let url = URL(string: UIApplication.openSettingsURLString) { UIApplication.shared.open(url) }
             })
@@ -63,24 +84,36 @@ final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency 
         if closed { callback.onFailure(failure: failure(.closed)); return PermissionTask() }
         if permission != nil { callback.onFailure(failure: failure(.busy)); return PermissionTask() }
         if !foreground { callback.onCancelled(); return PermissionTask() }
-        // Unsupported input is rejected without asking for an unrelated permission.
-        guard request.input is SpeechBridgeInputAudioFile else {
+        let microphone = request.input is SpeechBridgeInputMicrophone
+        guard microphone || request.input is SpeechBridgeInputAudioFile else {
             callback.onFailure(failure: failure(.unsupportedInput)); return PermissionTask()
         }
-        let task = PermissionTask()
+        let task: PermissionTask = microphone ? MicrophonePermissionTask() : PermissionTask()
         permission = task
         task.cancelPending = { [weak self, weak task] in
             guard let self, let task, self.permission === task else { return }
             self.permission = nil
+            task.complete()
             callback.onCancelled()
         }
-        requestAuthorization { [weak self, weak task] granted in
+        let admitted = PermissionAsrCallback(task: task, callback: callback)
+        let start: (Bool, String) -> Void = { [weak self, weak task] granted, reason in
             guard let self, let task, self.permission === task else { return }
             self.permission = nil
             task.cancelPending = nil
-            if self.closed || !self.foreground { callback.onCancelled() }
-            else if !granted { callback.onFailure(failure: self.failure(.backendUnavailable, "permissionDenied")) }
-            else { task.native = self.bridge.recognize(request: request, selection: selection, callback: callback) }
+            if self.closed || !self.foreground { admitted.onCancelled() }
+            else if !granted { admitted.onFailure(failure: self.failure(.backendUnavailable, reason)) }
+            else { task.install(self.bridge.recognize(request: request, selection: selection, callback: admitted)) }
+        }
+        speechAuthorization.request { [weak self, weak task] granted in
+            guard let self, let task, self.permission === task else { return }
+            if !granted || !microphone { start(granted, "permissionDenied") }
+            else {
+                self.recordAuthorization.request { [weak self, weak task] allowed in
+                    guard let self, let task, self.permission === task else { return }
+                    start(allowed, "recordPermissionDenied")
+                }
+            }
         }
         return task
     }
@@ -151,11 +184,80 @@ private final class WeakSpeechHostBridge: NSObject, @preconcurrency SpeechBridge
 }
 
 @MainActor
-private final class PermissionTask: NSObject, @preconcurrency BridgeTask {
-    var native: BridgeTask?
+private class PermissionTask: NSObject, @preconcurrency BridgeTask {
+    private(set) var native: BridgeTask?
+    private(set) var completed = false
+    private(set) var cancelled = false
     var cancelPending: (() -> Void)?
+    func install(_ native: BridgeTask) {
+        guard !completed else { return }
+        self.native = native
+        if cancelled { native.cancel() }
+    }
+    func complete() { completed = true; native = nil; cancelPending = nil }
     func cancel() {
+        guard !completed, !cancelled else { return }
+        cancelled = true
         if let native { native.cancel() }
         else { let action = cancelPending; cancelPending = nil; action?() }
+    }
+}
+
+@MainActor
+private final class MicrophonePermissionTask: PermissionTask, @preconcurrency SpeechBridgeMicrophoneTask {
+    private var finishRequested = false
+    func finishInput() {
+        guard !completed, !cancelled, !finishRequested else { return }
+        finishRequested = true
+        (native as? any SpeechBridgeMicrophoneTask)?.finishInput()
+    }
+    override func install(_ native: BridgeTask) {
+        super.install(native)
+        if !completed, !cancelled, finishRequested { (native as? any SpeechBridgeMicrophoneTask)?.finishInput() }
+    }
+}
+
+@MainActor
+private final class PermissionAsrCallback: NSObject, @preconcurrency SpeechBridgeAsrCallback {
+    private let task: PermissionTask
+    private let callback: SpeechBridgeAsrCallback
+    init(task: PermissionTask, callback: SpeechBridgeAsrCallback) { self.task = task; self.callback = callback }
+    func onResult(output: SpeechBridgeAsrResult) {
+        guard !task.completed else { return }
+        let cancelled = task.cancelled
+        task.complete()
+        if cancelled { callback.onCancelled() } else { callback.onResult(output: output) }
+    }
+    func onFailure(failure: SpeechBridgeFailure) {
+        guard !task.completed else { return }
+        let cancelled = task.cancelled
+        task.complete()
+        if cancelled { callback.onCancelled() } else { callback.onFailure(failure: failure) }
+    }
+    func onCancelled() {
+        guard !task.completed else { return }
+        task.complete(); callback.onCancelled()
+    }
+}
+
+@MainActor
+private final class SpeechPermissionGate {
+    private let prompt: (@escaping (Bool) -> Void) -> Void
+    private var waiters: [(Bool) -> Void] = []
+    init(request: @escaping (@escaping (Bool) -> Void) -> Void) { prompt = request }
+    func request(_ reply: @escaping (Bool) -> Void) {
+        waiters.append(reply)
+        guard waiters.count == 1 else { return }
+        prompt { [weak self] granted in
+            guard let self else { return }
+            // Permission APIs can reply on a background thread; host state is main-only.
+            if Thread.isMainThread { self.resolve(granted) }
+            else { DispatchQueue.main.async { self.resolve(granted) } }
+        }
+    }
+    private func resolve(_ granted: Bool) {
+        let pending = waiters
+        waiters.removeAll()
+        pending.forEach { $0(granted) }
     }
 }

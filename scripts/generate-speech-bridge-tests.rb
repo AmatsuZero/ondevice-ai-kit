@@ -12,7 +12,8 @@ framework = File.join(root, framework_root, "build/bin/iosSimulatorArm64/debugFr
 sources = ['kmp-binding/apple/IOSSpeechBridge.swift', 'kmp-binding/apple/IOSSpeechAudioInput.swift',
            'demo/iosApp/SpeechInputStore.swift', 'probes/ios-speech-bridge/IOSSpeechBridgeTests.swift']
 if binding_module == 'ODAIKitDemo'
-  sources += ['demo/iosApp/SpeechHost.swift', 'probes/ios-speech-bridge/SpeechHostTests.swift']
+  sources += ['demo/iosApp/SpeechHost.swift', 'probes/ios-speech-bridge/SpeechHostTests.swift',
+              'demo/iosApp/SpeechAudioSession.swift', 'probes/ios-speech-bridge/SpeechAudioSessionTests.swift']
 end
 ([framework, File.join(root, 'apple')] + sources.map { |s| File.join(root, s) }).each do |path|
   abort("Missing input: #{path}") unless File.exist?(path)
@@ -24,7 +25,9 @@ target = project.new_target(:unit_test_bundle, 'SpeechBridgeTests', :ios, '15.0'
 package = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
 package.relative_path = File.join(root, 'apple')
 project.root_object.package_references << package
-['ODAIKitSpeech', 'ODAIKitCore'].each do |name|
+products = ['ODAIKitSpeech', 'ODAIKitCore']
+products << 'ODAIKitAppleSpeech' if binding_module == 'ODAIKitDemo'
+products.each do |name|
   dependency = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
   dependency.product_name = name
   dependency.package = package

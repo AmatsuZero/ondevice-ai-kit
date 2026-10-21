@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = "scripts/generate-speech-demo.rb"
 UI_SOURCE = "demo/iosApp/UITests/SpeechDemoUITests.swift"
 SOURCES = [f"demo/iosApp/{name}.swift" for name in ["OnDeviceAIDemoApp", "DemoController", "IOSFaceBridge",
-    "CameraSource", "CameraLifecycle", "PhotoSubmission", "SpeechHost", "SpeechFilePicker", "SpeechInputStore"]] + [
+    "CameraSource", "CameraLifecycle", "PhotoSubmission", "SpeechHost", "SpeechFilePicker", "SpeechInputStore", "SpeechAudioSession"]] + [
     "kmp-binding/apple/IOSSpeechBridge.swift", "kmp-binding/apple/IOSSpeechAudioInput.swift"]
 
 
@@ -65,7 +65,9 @@ puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.rea
             self.assertEqual(settings["PRODUCT_BUNDLE_IDENTIFIER"], "io.ondeviceai.ondeviceaidemo")
             self.assertEqual(settings["DEVELOPMENT_TEAM"], "LOCALTEAM")
             self.assertIn("INFOPLIST_KEY_NSSpeechRecognitionUsageDescription", settings)
-            self.assertNotIn("INFOPLIST_KEY_NSMicrophoneUsageDescription", settings)
+            self.assertIn("INFOPLIST_KEY_NSMicrophoneUsageDescription", settings)
+            for key in ["INFOPLIST_KEY_UIBackgroundModes", "INFOPLIST_KEY_UIFileSharingEnabled", "INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace"]:
+                self.assertNotIn(key, settings)
         self.assertEqual(self.original.read_bytes(), b"protected project")
 
     def testMissingEitherAbiOrSourceHasNoOutputSideEffect(self):

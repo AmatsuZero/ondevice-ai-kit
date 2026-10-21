@@ -6,7 +6,7 @@ root = File.expand_path('..', __dir__)
 directory = File.expand_path(ENV.fetch('ODAI_SPEECH_DEMO_DIR', 'artifacts/verification/speech-demo'), root)
 abort('Refusing to replace existing speech Demo output') if File.exist?(directory) || File.symlink?(directory)
 sources = %w[OnDeviceAIDemoApp DemoController IOSFaceBridge CameraSource CameraLifecycle PhotoSubmission
-             SpeechHost SpeechFilePicker SpeechInputStore].map { |name| "demo/iosApp/#{name}.swift" }
+             SpeechHost SpeechFilePicker SpeechInputStore SpeechAudioSession].map { |name| "demo/iosApp/#{name}.swift" }
 sources += ['kmp-binding/apple/IOSSpeechBridge.swift', 'kmp-binding/apple/IOSSpeechAudioInput.swift']
 frameworks = %w[iosSimulatorArm64 iosArm64].map do |platform|
   File.join(root, "demo/shared/build/bin/#{platform}/debugFramework/ODAIKitDemo.framework")
@@ -41,7 +41,8 @@ target.build_configurations.each do |config|
     'GENERATE_INFOPLIST_FILE' => 'YES', 'INFOPLIST_FILE' => File.join(root, 'demo/iosApp/Info.plist'),
     'INFOPLIST_KEY_UILaunchScreen_Generation' => 'YES', 'INFOPLIST_KEY_UIApplicationSceneManifest_Generation' => 'YES',
     'INFOPLIST_KEY_NSCameraUsageDescription' => '在设备本地检测人脸，不上传图像。',
-    'INFOPLIST_KEY_NSSpeechRecognitionUsageDescription' => '在设备本地识别主动选择的音频文件，不上传音频。',
+    'INFOPLIST_KEY_NSSpeechRecognitionUsageDescription' => '在设备本地识别选择的音频文件或主动开始的麦克风语音，不上传音频。',
+    'INFOPLIST_KEY_NSMicrophoneUsageDescription' => '仅在你主动开始语音识别时采集声音，在本机处理，不保存录音。',
     'TARGETED_DEVICE_FAMILY' => '1,2', 'CODE_SIGN_STYLE' => 'Automatic', 'ARCHS' => 'arm64',
     'ODAI_KONAN_TARGET[sdk=iphonesimulator*]' => 'iosSimulatorArm64',
     'ODAI_KONAN_TARGET[sdk=iphoneos*]' => 'iosArm64',
