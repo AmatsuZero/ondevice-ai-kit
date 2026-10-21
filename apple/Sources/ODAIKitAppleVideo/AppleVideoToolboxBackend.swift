@@ -83,6 +83,7 @@ public actor AppleVideoToolboxBackend: VideoSuperResolutionBackend {
         } catch {
             // Removal is synchronous and remains mandatory on the cancelled worker.
             try workspace.remove()
+            try Task.checkCancellation()
             throw error
         }
     }

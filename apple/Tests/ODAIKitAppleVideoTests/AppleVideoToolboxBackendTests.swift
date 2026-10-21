@@ -90,6 +90,21 @@ final class AppleVideoToolboxBackendTests: XCTestCase {
         XCTAssertEqual(try Data(contentsOf: input), Data([1, 3, 5]))
     }
 
+    func testCancellationDominatesLateProcessingFailureAfterCleanup() async throws {
+        let root = try makeRoot(); defer { try? FileManager.default.removeItem(at: root) }
+        let engine = ControlledVideoEngine(block: true, fail: true)
+        let backend = AppleVideoToolboxBackend(root: root, engine: engine)
+        let request = request
+        let operation = Task { try await backend.process(request, progress: nil) }
+        await engine.gate.waitForEntry()
+        operation.cancel()
+        await engine.gate.open()
+        do { _ = try await operation.value; XCTFail("cancelled processing") }
+        catch { XCTAssertTrue(error is CancellationError, "late native errors must not turn cancellation into failure") }
+        await backend.close()
+        XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: root.path), [])
+    }
+
     func testPublicFactoryIsUnavailableOnHostWithoutStartingProcessing() async throws {
         #if !os(iOS) || targetEnvironment(simulator)
         let backend = AppleVideoToolboxBackend()
