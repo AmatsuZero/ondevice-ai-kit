@@ -2,6 +2,14 @@
 
 更新时间：2026-10-21（Asia/Shanghai；恢复后追加语言 admission 修复并装机；中文自然输入与取消/重入仍待真机终态）
 
+## P7 续接检查点（2026-10-21，优先于下方语音历史记录）
+
+- 已继续 roadmap 的独立 Video SDK Foundation，未重做语音 Tasks1–5。提交 `17a330e` Swift契约、`fd2e537` Swift client、`112634d` Android模块；最新 HEAD 以 git 为准。
+- 计划/规格：`docs/superpowers/plans/2026-10-21-video-sdk-foundation.md`、同名 design；ledger `.superpowers/sdd/2026-10-21-video-sdk-foundation/progress.md`。Task1–4本地实施/分发已验证，独立审查因服务容量失败待恢复。后续入口是独立 Apple VideoToolbox 后端包，不把探针直接当 SDK 后端。
+- 已验证 Swift426/426、Android video7/7 + lint、工具78/78、Apple总门禁与Android610tasks通过；fresh八XCFramework以及仅Core+Video的设备/模拟器消费者编译链接通过。分发输出 `artifacts/verification/video-foundation-20261021/`，详细证据见[视频基础验证](validation/video-sdk-foundation.md)。独立审查因服务容量失败待恢复，未声明 APPROVE。
+- 仍没有真实视频SDK处理器、KMP/Demo视频流、Android模型或新质量/最低系统验收。P7保持未完成。P6中文实录终态/取消/重入及修复独立审查、P9/P10/P11缺口继续保留；没有自动录音、资源下载或远端push。
+- 两个受保护文件状态/hash保持一致，仍不得暂存/覆盖。继续从新 ledger 的首个未完成项恢复；不要按下方历史“当前入口”重复旧工作。
+
 ## 当前恢复检查点（2026-10-21，优先于后面的历史记录）
 
 ### 本次接手后的更新（优先于下方上午记录）

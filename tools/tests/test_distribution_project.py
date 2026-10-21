@@ -44,7 +44,7 @@ puts JSON.generate(project.targets.to_h { |target|
 """, str(self.project)], capture_output=True, text=True, check=True,
         )
         targets = json.loads(inspected.stdout)
-        self.assertEqual(len(targets), 7)
+        self.assertEqual(len(targets), 8)
         for name, target in targets.items():
             expected = 1 if name == "ODAIKitAppleSpeech" else 0
             self.assertEqual(target["sources"].count(ASR_SOURCE), expected, name)
@@ -79,6 +79,30 @@ puts JSON.generate({
         self.assertNotEqual(generated.returncode, 0)
         self.assertIn(ASR_SOURCE, generated.stderr)
         self.assertEqual((self.project / "project.pbxproj").read_bytes(), before)
+
+    def testVideoIncludesAllSourcesAndOnlyCoreDependency(self):
+        generated = self.generate()
+        self.assertEqual(generated.returncode, 0, generated.stderr)
+        inspected = subprocess.run(
+            [self.ruby, "-rxcodeproj", "-rjson", "-e", """
+project = Xcodeproj::Project.open(ARGV.fetch(0))
+target = project.targets.find { |candidate| candidate.name == "ODAIKitVideo" }
+abort("Missing Video distribution target") unless target
+puts JSON.generate({
+  sources: target.source_build_phase.files.map { |file| file.file_ref.path },
+  dependencies: target.dependencies.map { |dependency| dependency.target.name },
+  frameworks: target.frameworks_build_phase.files.map { |file| File.basename(file.file_ref.path) }
+})
+""", str(self.project)], capture_output=True, text=True, check=False,
+        )
+        self.assertEqual(inspected.returncode, 0, inspected.stderr)
+        target = json.loads(inspected.stdout)
+        expected = sorted(str(path.relative_to(self.root / "apple")) for path in
+                          (self.root / "apple/Sources/ODAIKitVideo").glob("*.swift"))
+        self.assertTrue(expected)
+        self.assertEqual(sorted(target["sources"]), expected)
+        self.assertEqual(target["dependencies"], ["ODAIKitCore"])
+        self.assertEqual(sorted(target["frameworks"]), ["Foundation.framework", "ODAIKitCore.framework"])
 
     def testRepeatedGenerationKeepsProjectAndSchemeUnchanged(self):
         first = self.generate()

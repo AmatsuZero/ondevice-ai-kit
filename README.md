@@ -6,15 +6,15 @@
 
 当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；可选的 Apple AVSpeech TTS、Apple 文件/麦克风 ASR、Android 系统 TTS，以及 Android on-device ASR 模块；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。
 
-身份模块现已提供独立原生契约、加密存储/删除、1:1/1:N 引擎、活体会话、KMP bridge 与 Demo 控件；生产身份模型、PAD 后端和校准尚未启用。视频超分和 VLM 目前仍是独立探针；语音已有双端 KMP bridge、共享页面和原生 host，iOS 使用独立生成工程。iOS ASR 已实现文件与可主动结束输入的麦克风路径，均强制 on-device；麦克风真机录音尚未验收，见[麦克风验证](docs/validation/ios-microphone-asr.md)。第三方云端后端未交付。现代真机的双端 TTS 与 iOS 文件 ASR Demo 闭环已通过；Android ASR 仍缺资源，最低系统/自然质量与追加独立审查待补，见[语音 Demo 验证](docs/validation/speech-demo-bridge.md)。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
+身份模块现已提供独立原生契约、加密存储/删除、1:1/1:N 引擎、活体会话、KMP bridge 与 Demo 控件；生产身份模型、PAD 后端和校准尚未启用。视频超分已有双端独立契约与客户端（尚无 SDK 处理后端），VLM 目前仍是独立探针；语音已有双端 KMP bridge、共享页面和原生 host，iOS 使用独立生成工程。iOS ASR 已实现文件与可主动结束输入的麦克风路径，均强制 on-device；麦克风真机录音尚未验收，见[麦克风验证](docs/validation/ios-microphone-asr.md)。第三方云端后端未交付。现代真机的双端 TTS 与 iOS 文件 ASR Demo 闭环已通过；Android ASR 仍缺资源，最低系统/自然质量与追加独立审查待补，见[语音 Demo 验证](docs/validation/speech-demo-bridge.md)。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
 
 当前 Demo 提供人脸检测与独立“身份与活体”控件；身份默认显示 UNVERIFIED，宿主注入真实授权、策略与后端后才可运行。后续 SDK/Demo 能力和调研→探针→模块接入的范围见 [功能路线图](docs/ROADMAP.md#当前范围与后续功能)。iOS15 与 Android 真机验收已按用户安排登记为 [等待设备 TODO](docs/ROADMAP.md#等待设备的-todo)，待设备提供后恢复。
 
 ## 原生接入
 
-Swift Package 路径 `apple`：按需选择 `ODAIKitCore`、`ODAIKitModelStore`、`ODAIKitFace`、`ODAIKitAppleVision`、`ODAIKitSpeech`、`ODAIKitAppleSpeech`、`ODAIKitIdentity` products；参见 `examples/ios-native` 与 `examples/ios-speech-native`。`ODAIKitAppleSpeech` 才引入 AVFAudio，语音调用可用 `.default` 或 `.explicit(backendId)`，显式选择不会静默回退。`VisionFaceDetector.detect(input:options:)` 返回 upright、左上原点、归一化坐标；无人脸是成功空集合。调用结束前 SDK 保持输入引用；调用方不要修改输入。`close()` 等待实际底层工作结束。
+Swift Package 路径 `apple`：按需选择 `ODAIKitCore`、`ODAIKitModelStore`、`ODAIKitFace`、`ODAIKitAppleVision`、`ODAIKitSpeech`、`ODAIKitAppleSpeech`、`ODAIKitIdentity`、`ODAIKitVideo` products；参见 `examples/ios-native` 与 `examples/ios-speech-native`。`ODAIKitAppleSpeech` 才引入 AVFAudio，语音调用可用 `.default` 或 `.explicit(backendId)`，显式选择不会静默回退。`VisionFaceDetector.detect(input:options:)` 返回 upright、左上原点、归一化坐标；无人脸是成功空集合。调用结束前 SDK 保持输入引用；调用方不要修改输入。`close()` 等待实际底层工作结束。
 
-Android 模块为 `android/{sdk-core,model-store,face,backend-mlkit,speech,backend-system-tts,backend-system-asr,identity}`；参见 `examples/android-native` 与 `examples/android-speech`。`examples:android-speech` 用 `contract`、`systemTts`、`systemAsr` 三个 flavor 证明依赖可裁剪；宿主负责 `RECORD_AUDIO` 权限。Bitmap 在 detect 返回前不可修改或 recycle。bundled ML Kit 包含模型，首次推理无需下载；无 Google Play Services 设备仍需真机验证。人脸 trackingId 不代表身份。
+Android 模块为 `android/{sdk-core,model-store,face,backend-mlkit,speech,backend-system-tts,backend-system-asr,identity,video}`；参见 `examples/android-native` 与 `examples/android-speech`。`examples:android-speech` 用 `contract`、`systemTts`、`systemAsr` 三个 flavor 证明依赖可裁剪；宿主负责 `RECORD_AUDIO` 权限。Bitmap 在 detect 返回前不可修改或 recycle。bundled ML Kit 包含模型，首次推理无需下载；无 Google Play Services 设备仍需真机验证。人脸 trackingId 不代表身份。
 
 ## 构建与测试
 
@@ -73,6 +73,8 @@ xcodebuild -project artifacts/P10/identity-example/IdentityBinaryConsumer/Identi
 ```
 
 Identity 只依赖 Core 与 ModelStore，独立消费者见 `examples/ios-identity-native`、`examples/android-identity-native`。`identity-artifact.json` 记录真实二进制/interface hash、模型与策略绑定类型、当前模型/校准空缺；生产后端、模型资产和校准策略由独立工作包接入。生成 consumer 和打包均拒绝覆盖既有输出。Ruby/xcodeproj 与 json gem 需要使用同一 Ruby 环境；工具测试可用 `RUBY` 指定该环境的可执行文件。分发证据见 [P10 验证](docs/validation/p10-face-identity.md)。
+
+视频基础模块：Swift `ODAIKitVideo` 只依赖 Core，Android `io.ondeviceai:video:0.1.0-SNAPSHOT` 使用 Core 与现有协程库。`VideoProcessingClient` 接收默认 ID 和宿主提供的后端，支持严格 Default/Explicit 选择、进度、取消/drain 与共享 close；当前没有内置视频处理器。请求默认保留音轨，不支持的倍率或音轨策略会拒绝。成功结果中的 output lease 由调用方持有，使用结束后调用 `release()`；client.close 不删除已交付的输出。输入文件需保持到处理及取消排空结束。分发与验证见[视频 SDK 基础记录](docs/validation/video-sdk-foundation.md)，下一包接入独立 Apple VideoToolbox 后端，不提高基础系统下限。
 
 ## Benchmark 与验收
 

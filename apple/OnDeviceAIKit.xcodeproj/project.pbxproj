@@ -14,6 +14,7 @@
 		16F26DC8947BA25D9FAC0970 /* FaceIdentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108CAD03F5016A712A73981 /* FaceIdentification.swift */; };
 		184DB45212EBA0B2AF70F10E /* AppleSpeechRecognizerBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9620D6921B51B5D3D408818C /* AppleSpeechRecognizerBackend.swift */; };
 		2019F2341B1AD64F302602BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
+		33B288D899FF05216061044D /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		3864683E61ECC35F3480F5DB /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B53BC264DC0300F3ED7BC /* Availability.swift */; };
 		386ECD1C54E3A04019ABB9C3 /* ModelManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */; };
 		392A21488A3ED4187A20846F /* ModelStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6568ADE1C602A8407F60A6AE /* ModelStore.swift */; };
@@ -32,7 +33,9 @@
 		66A985DB8180B8A8749FBB6C /* ODAIKitSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4F8AE1FD0B502BE5D40CB2 /* ODAIKitSpeech.framework */; };
 		69AE2FC526CCF3B668180639 /* GalleryCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59C13A18066C82FB5E037A /* GalleryCatalog.swift */; };
 		81708D72661C142679A66B8B /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		841D4F6C0AF29DA9FCFFC6EA /* VideoContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D0E994E7F0CDD8434F8B1A /* VideoContracts.swift */; };
 		89345026EFD8CAA05A971D5F /* FaceDetectionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B27A47D43660B453108C4A1 /* FaceDetectionClient.swift */; };
+		912EEFF6F4CE27A150DAEF2C /* VideoProcessingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC879CFB96F62D4FB6E8A2A0 /* VideoProcessingClient.swift */; };
 		954ED3BD7C5A0AB5198E5DAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		96ADC04EC9C0984301E8B126 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		98EF1F4F88DC1B9E26717B19 /* LatestFrameQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA6D77F420A4D2DBBD5179F /* LatestFrameQueue.swift */; };
@@ -71,6 +74,7 @@
 		F33AE311C9127366254F9897 /* IdentityJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E479AF70E638E5BA343EC5C4 /* IdentityJournal.swift */; };
 		F874D92C770A4B26EDC06935 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		F984B8C4DB76FF836B1F1DFC /* IdentityRevocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA9B51D24AB4AA7CA0E2643 /* IdentityRevocation.swift */; };
+		FA0B52D43B3550E98FAE26F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		FBD9C0AAD5764A6B15A15595 /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F52582871A6E4FA0F59726 /* FaceDetector.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +85,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 096C72DA4D40505AE6A7899B;
 			remoteInfo = ODAIKitFace;
+		};
+		43EC27E14111D44034D11FE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFC88BE002DD0980AB3DAFC1;
+			remoteInfo = ODAIKitCore;
 		};
 		52CBAACCD5330B3272AAF251 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -169,6 +180,7 @@
 		63B4B332FA6F8B400CFD924A /* TestIdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestIdentityBackend.swift; path = Sources/ODAIKitIdentity/TestIdentityBackend.swift; sourceTree = "<group>"; };
 		6568ADE1C602A8407F60A6AE /* ModelStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelStore.swift; path = Sources/ODAIKitModelStore/ModelStore.swift; sourceTree = "<group>"; };
 		65806FDB767FCB54FE5F2921 /* IdentityContracts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityContracts.swift; path = Sources/ODAIKitIdentity/IdentityContracts.swift; sourceTree = "<group>"; };
+		6643354AC84B2DDDF6122E7A /* ODAIKitVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9A49CE061532935F71D882 /* GallerySnapshot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GallerySnapshot.swift; path = Sources/ODAIKitIdentity/GallerySnapshot.swift; sourceTree = "<group>"; };
 		703A22282ED4D713DDA31B32 /* SpeechMicrophone.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpeechMicrophone.swift; path = Sources/ODAIKitSpeech/SpeechMicrophone.swift; sourceTree = "<group>"; };
 		7719F88D02917C7C358D4FB1 /* IdentityStopSignal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityStopSignal.swift; path = Sources/ODAIKitIdentity/IdentityStopSignal.swift; sourceTree = "<group>"; };
@@ -196,6 +208,8 @@
 		E108CAD03F5016A712A73981 /* FaceIdentification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceIdentification.swift; path = Sources/ODAIKitIdentity/FaceIdentification.swift; sourceTree = "<group>"; };
 		E11FFC59E264168F5AD5D261 /* AppleSpeechAudioSession.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleSpeechAudioSession.swift; path = Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift; sourceTree = "<group>"; };
 		E479AF70E638E5BA343EC5C4 /* IdentityJournal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityJournal.swift; path = Sources/ODAIKitIdentity/IdentityJournal.swift; sourceTree = "<group>"; };
+		EC879CFB96F62D4FB6E8A2A0 /* VideoProcessingClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoProcessingClient.swift; path = Sources/ODAIKitVideo/VideoProcessingClient.swift; sourceTree = "<group>"; };
+		F1D0E994E7F0CDD8434F8B1A /* VideoContracts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoContracts.swift; path = Sources/ODAIKitVideo/VideoContracts.swift; sourceTree = "<group>"; };
 		F24346D636307E745B03B9CE /* SpeechClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpeechClient.swift; path = Sources/ODAIKitSpeech/SpeechClient.swift; sourceTree = "<group>"; };
 		F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelManifest.swift; path = Sources/ODAIKitModelStore/ModelManifest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,6 +239,15 @@
 			files = (
 				5C67CADC416AA204C371C26F /* Foundation.framework in Frameworks */,
 				96ADC04EC9C0984301E8B126 /* ODAIKitCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7516E631B3DBFB4E1C800C67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA0B52D43B3550E98FAE26F1 /* Foundation.framework in Frameworks */,
+				33B288D899FF05216061044D /* ODAIKitCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +311,7 @@
 				BE4F8AE1FD0B502BE5D40CB2 /* ODAIKitSpeech.framework */,
 				B9B867539A8E2FCC7317BB20 /* ODAIKitAppleSpeech.framework */,
 				ACA675A66C3CF1CFFE67B7A0 /* ODAIKitIdentity.framework */,
+				6643354AC84B2DDDF6122E7A /* ODAIKitVideo.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -345,6 +369,8 @@
 				C148B3A0CC524F8417F31A6D /* SpeechMicrophoneClientTask.swift */,
 				E11FFC59E264168F5AD5D261 /* AppleSpeechAudioSession.swift */,
 				13FA11E5462EE6906655735C /* AppleSpeechMicrophone.swift */,
+				F1D0E994E7F0CDD8434F8B1A /* VideoContracts.swift */,
+				EC879CFB96F62D4FB6E8A2A0 /* VideoProcessingClient.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -360,6 +386,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		1FD8A1122B5BDE08EAD4ED46 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38AB4603393EE45CEA4B6B87 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -471,6 +504,25 @@
 			productReference = B9B867539A8E2FCC7317BB20 /* ODAIKitAppleSpeech.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		2742F71BBFE57B2B72B765EF /* ODAIKitVideo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AFAA45C307EF815E3A613D6 /* Build configuration list for PBXNativeTarget "ODAIKitVideo" */;
+			buildPhases = (
+				1FD8A1122B5BDE08EAD4ED46 /* Headers */,
+				2A4BEAE1405B9C05E28B70CF /* Sources */,
+				7516E631B3DBFB4E1C800C67 /* Frameworks */,
+				63F2CF67F8D44D8DFB8A953D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7FC1133696921F7D052C2C1E /* PBXTargetDependency */,
+			);
+			name = ODAIKitVideo;
+			productName = ODAIKitVideo;
+			productReference = 6643354AC84B2DDDF6122E7A /* ODAIKitVideo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		7D69EBACE004E6BAC09D83DC /* ODAIKitSpeech */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A18841E19BF34B7D328C9995 /* Build configuration list for PBXNativeTarget "ODAIKitSpeech" */;
@@ -578,6 +630,7 @@
 				7D69EBACE004E6BAC09D83DC /* ODAIKitSpeech */,
 				1846E7B9482629E6A8C74FD2 /* ODAIKitAppleSpeech */,
 				113749C3261A67104AF67309 /* ODAIKitIdentity */,
+				2742F71BBFE57B2B72B765EF /* ODAIKitVideo */,
 			);
 		};
 /* End PBXProject section */
@@ -591,6 +644,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1258530BF3AEF479E491EB0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		63F2CF67F8D44D8DFB8A953D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -667,6 +727,15 @@
 				52A7399B5E7454CCA0E284CD /* KeychainIdentityKeyProvider.swift in Sources */,
 				B2BC68C7874ADFC190295439 /* LocalIdentityBackend.swift in Sources */,
 				E52090F8A227987A8469D8AC /* TestIdentityBackend.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2A4BEAE1405B9C05E28B70CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				841D4F6C0AF29DA9FCFFC6EA /* VideoContracts.swift in Sources */,
+				912EEFF6F4CE27A150DAEF2C /* VideoProcessingClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,6 +821,12 @@
 			name = ODAIKitCore;
 			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
 			targetProxy = E614FAE522D0238D748C0CA8 /* PBXContainerItemProxy */;
+		};
+		7FC1133696921F7D052C2C1E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitCore;
+			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
+			targetProxy = 43EC27E14111D44034D11FE9 /* PBXContainerItemProxy */;
 		};
 		A5DAD3DE0F02B0632F1368E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1065,6 +1140,33 @@
 			};
 			name = Release;
 		};
+		30EFA12168C2BD7B8D43D0D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitvideo;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		3A5BAC3DC58DF2E46476E940 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1252,6 +1354,32 @@
 			};
 			name = Debug;
 		};
+		CA1590B351DB28CB71B1F144 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitvideo;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		FC08CCCE439DCA991855470B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1295,6 +1423,15 @@
 			buildConfigurations = (
 				7CEFAA655D8A4C94CBAACD42 /* Release */,
 				00FCB8E12F421D06AF348DD4 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3AFAA45C307EF815E3A613D6 /* Build configuration list for PBXNativeTarget "ODAIKitVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30EFA12168C2BD7B8D43D0D9 /* Release */,
+				CA1590B351DB28CB71B1F144 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
