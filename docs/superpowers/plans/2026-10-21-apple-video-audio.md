@@ -27,6 +27,6 @@ ConsumeTask1 mux；Produce支持preserve/discard的后端描述与真实engine�
 ### Task 3: Distribution/device/docs
 
 Files: regenerate distribution pbxproj；Modify README/ROADMAP/handoff/validation；忽略目录device harness固定公开视频+合成tone。
-- [ ] fresh九XCFramework、Core+Video-only consumer与signed device/unsigned simulator build。
-- [ ] 固定fixture成功→取消/drain→同进程重入，ffprobe/完整decode/音频payload与时间线复核；独立审查可用则一次，否则pending。
-- [ ] Apple/tools门禁、保护hash/逐路径提交，KMP/Demo成为下一入口，其他缺口保持。
+- [x] fresh九XCFramework、Core+Video-only consumer与signed device/unsigned simulator build。
+- [x] 固定fixture成功→取消/drain→同进程重入，ffprobe/完整decode/音频payload与时间线复核；独立审查可用则一次，否则pending。
+- [x] Apple/tools门禁、保护hash/逐路径提交，KMP/Demo成为下一入口，其他缺口保持。

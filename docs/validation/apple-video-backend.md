@@ -1,5 +1,7 @@
 # Apple VideoToolbox 后端验证
 
+当前后续包已支持有界AAC音轨preserve，见[音轨验证](apple-video-audio.md)；下文discard-only为首包历史验收边界。首包独立审查恢复仍429失败，无独立结论。
+
 日期：2026-10-21；引擎提交 `e996d5d`，取消竞态修复 `51d98bf`，分发/验证改动随后提交。独立 reviewer 因模型容量返回 `Selected model is at capacity`，没有审查结论，保持 pending。
 
 本包把 `apple.videotoolbox.sr` 接入 `VideoProcessingClient`，只支持非模拟器 iOS26+、VideoToolbox model status `ready`、固定 320×180/24fps/≤48 帧/BT.709 SDR 输入、4×和显式 `discard` 音轨策略。输出为后端临时 UUID 目录中的 1280×720 HEVC/MOV lease；调用方释放 lease，client.close 不删除已交付结果。没有模型下载、私人媒体、整文件 hash（验证 harness 的输入摘要仅用于证明输入未变）、云端或 Android 后端。

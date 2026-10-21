@@ -2,6 +2,14 @@
 
 更新时间：2026-10-21（Asia/Shanghai；AppleVideo SDK 首包本地/设备验证完成，独立审查pending；P6实录终态仍待验）
 
+## AppleVideo 音轨续接检查点（2026-10-21，优先于下方历史入口）
+
+- `0902e8e`实际音频passthrough、`26dcd0f`默认preserve、`7dcb25d`审查后视频时间线校验。Swift447/447、mux8/8、工具79/79、Apple总门禁与fresh九XCFramework通过。默认preserve支持无音轨或单条零起点/等长/无空白编辑AAC（44.1/48kHz、单/双声道），discard保持显式丢弃；视频固定profile/系统下限不变。
+- 设备suite成功PID19288/run`B06660C7-6E4D-4F13-AAED-F8DC83D2494F`：带AAC的两轮各48帧、第1帧取消无残留、无音轨默认preserve、close/lease/input不变均通过；导出视频PTS/HEVC/BT.709与完整decode通过，AAC压缩payload与输入逐字节相同。native export阶段中途取消尚未单独验，不得冒充。
+- 分发使用`artifacts/verification/apple-video-audio-20261021/distribution-reviewed/`，早期`distribution/`为审查修复前，不替代最终证据。Core+Video-only设备/模拟器消费者、weak VT与两种harness构建通过。详见[音轨验证](validation/apple-video-audio.md)。
+- 音频包独立审查1MEDIUM（导出视频时间线缺校验）已修复并回归，未复审/不声明APPROVE；基础包恢复审查capacity、VT首包恢复审查429，仍pending。保护文件hash未变；无push/下载/录音/发布。
+- 下一本地入口KMP Video bridge/Demo；计划/ledger以`2026-10-21-apple-video-audio`包为最新已完成实现。P6真实录音、P7质量/Android/最低系统及其他roadmap缺口继续保留，不重复已完成切片。
+
 ## AppleVideo SDK 续接检查点（2026-10-21，优先于下方历史入口）
 
 - 独立 `ODAIKitAppleVideo` Task1–3 已提交：`4e77325` workspace/lease、`5c6ba01` backend协调、`e996d5d`真实VT引擎；`51d98bf`修复取消后晚到错误改变终态，回归RED→GREEN，Swift438/438通过。
