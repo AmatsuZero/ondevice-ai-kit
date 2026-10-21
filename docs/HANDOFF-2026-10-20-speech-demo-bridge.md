@@ -13,6 +13,8 @@
 - iPhone16ProMax physical connected（本轮发现），未安排受控朗读，**没有启动真实麦克风录音**。Simulator capture使用合成PCM/fake engine/session；不能声称自然语音/断网/录音权限真机通过。iOS15、Android MISSING_ASSETS等缺口保持。
 - 两个受保护文件hash仍与下方固定值一致；没有覆盖、stage或提交。没有push、force-push、资源安装、账户资产修改。
 
+受控窗口更新：用户已确认现在可配合固定朗读、要求先给步骤。新生成工程 `artifacts/verification/microphone-live-20261021/SpeechDemo.xcodeproj`、signed device build/install/launch 已成功（沿用team `4X996UV8LC`，没有变更账户资产）；iPhone上的App已更新到麦克风实现。日志 `task-6-live-{framework,device-build,device-install,device-launch}.log`。尚未由agent启动录音/取得自然语音结果。下一步先让用户完成固定句“开始麦克风ASR→授权→朗读→结束录音并识别”，仅回报终态/错误码，不上传转写/截图；随后受控取消、重入和后台验收。不得把此授权扩展成旁人录音/后台自动采集。
+
 下一步：读取最新git与新ledger；旧Task7已在旧ledger收口；核对工作树与保护hash，随后按路线继续受控真机或其他独立工作包。仅确认受控朗读后开展真机mic窗口。缺设备/录音窗口的项保留unverified，继续roadmap其他可独立工作，不将整个目标标complete。新麦克风Task6门禁未满足前不提前推送当前HEAD；旧包审查通过不替代新包真实录音验收。
 
 以下为旧 Speech Demo 包的历史交接，旧“当前入口/HEAD”不覆盖本检查点；旧Task7追加审查和原始证据仍有效。
