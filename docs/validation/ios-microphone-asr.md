@@ -1,6 +1,6 @@
 # iOS 麦克风 ASR 验证记录
 
-日期：2026-10-21。实现基线 `d60867c`；本包本地实现已提交，真实录音验收仍未完成；Task1–5独立审查已通过。P6 和整个 roadmap 保持未收口。
+日期：2026-10-21。实现基线 `d60867c`；路由修复已本地提交，真实录音窗口已取得首个成功结果；Task1–5独立审查已通过。P6 和整个 roadmap 保持未收口。
 
 [计划](../superpowers/plans/2026-10-20-ios-microphone-asr.md)、[设计](../superpowers/specs/2026-10-20-ios-microphone-asr-design.md)、[恢复交接](../HANDOFF-2026-10-20-speech-demo-bridge.md)。本机原始日志位于忽略目录 `.superpowers/sdd/2026-10-20-ios-microphone-asr/`，下文简称 `logs/`。
 
@@ -35,9 +35,11 @@
 - 独立生成 simulator App、unsigned device App、Demo device framework、原受保护 App simulator build 均通过；`logs/task-5-{simulator-app-build,device-app-build,device-framework,original-app-build}.log`。生成器只在新工程加录音描述，无后台音频/文件分享键；原项目未纳入提交。
 - iOS capture fixture 最新 **39/39、0 failures**，含 capture3、microphone19、file backend17；`logs/task-6-native-simulator.log` / `artifacts/verification/microphone-task6-rollback-final.xcresult`。此 fixture 使用合成 PCM/fake engine/session，不能证明实际录音或自然语音质量。
 
+路由修复追加验证：`task-6-route-green.log` native simulator **41/41**（新增两项路由测试）；`task-6-route-swift-full.log` Swift全套 **412项、0失败**；`task-6-route-device-build.log` signed device build成功。两次独立复审调用均因模型容量不足未启动，路由修复复审仍待补。
+
 ## 新鲜本地分发
 
-输出 `artifacts/P6/microphone-20261021/`，device/simulator archive 与七个 XCFramework 均成功：Core、ModelStore、Face、AppleVision、Speech、AppleSpeech、Identity；`logs/task-6-xcframeworks.log`。
+以下分发产物早于本次路由修复，尚未重打包。输出 `artifacts/P6/microphone-20261021/`，device/simulator archive 与七个 XCFramework 均成功：Core、ModelStore、Face、AppleVision、Speech、AppleSpeech、Identity；`logs/task-6-xcframeworks.log`。
 
 Speech binary consumer unsigned simulator App **BUILD SUCCEEDED**，只嵌入 Core/Speech/AppleSpeech；`logs/task-6-speech-consumer-build.log`。两份 slice 的 contract-only 消费者（原文件 API 和新麦克风 request/start/finish/cancel）只提供 Core/Speech 搜索路径完成 iOS15 target typecheck。14个框架的依赖及接口 imports 检查确认契约未引入 AppleSpeech/AVFAudio/KMP/Face，只有 AppleSpeech 直接依赖 Speech.framework；`logs/task-6-speech-isolation.log`。这只证明编译/裁剪，不等于设备录音通过。
 
@@ -45,9 +47,9 @@ Speech binary consumer unsigned simulator App **BUILD SUCCEEDED**，只嵌入 Co
 
 Task4 独立 code-reviewer APPROVE、0问题；Task5 与 Task3 回滚修复独立 code-reviewer APPROVE、10files、0问题。Task1–3 capture/client核心整包独立审查同样 APPROVE、11files、0问题，并独立跑相关34tests通过；五条 Review Focus 均已覆盖，真实录音/iOS15/网络边界除外。旧 Speech Demo Task7 UI/Done 追加审查在首次429后已恢复独立 APPROVE，旧包本地门禁收口；两者审查范围分别记录。最终门禁前不提前同步远端。
 
-2026-10-21 新鲜发现 iPhone16ProMax physical connected；尚未安排受控朗读，**没有启动麦克风录音**。以下均为 unverified：
+2026-10-21 受控真机窗口（iPhone 16 Pro Max，UDID `00008140-0008703436D3001C`）已使用新生成包 `artifacts/verification/microphone-live-fix-20261021/`。用户主动开始并结束录音后，回报页面显示 **`SUCCEEDED ASR`**，记录本次真实麦克风 ASR 的用户复测成功；未独立核对识别文本或断网表现；不记录或导出自然转写文本。此前诊断包的 `categoryChange` 误报已由 route snapshot 修复覆盖。以下仍未验证：
 
-- 实际录音授权/拒权恢复、主动结束取得自然语音 final、取消/drain、同进程重入、TTS 往返、后台取消/前台不重启。
+- 实际录音授权/拒权恢复、取消/drain、同进程重入、TTS 往返、后台取消/前台不重启。
 - iOS15 真机、两端自然语音 CER/WER/听感、断网与资源指标。`requiresOnDeviceRecognition=true` 是实现约束，不是独立网络验收。
 - Android en-US ASR 仍 MISSING_ASSETS；不重新下载语言资源，不切网络识别。
 

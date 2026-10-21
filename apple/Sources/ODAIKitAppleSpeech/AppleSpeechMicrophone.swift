@@ -136,6 +136,38 @@ internal final class AppleSpeechMicrophoneTaskHandleImpl: SpeechMicrophoneRecogn
 
 #if os(iOS)
 
+/// A route notification can arrive after the host's own session setup. Only
+/// category changes matching this admitted, healthy configuration are benign.
+/// Port identities stay internal and are never included in diagnostics.
+internal struct AppleSpeechMicrophoneRouteSnapshot: Equatable, Sendable {
+    let category: String
+    let mode: String
+    let options: UInt
+    let inputPorts: [String]
+    let outputPorts: [String]
+    let sampleRate: Double
+    let inputChannels: Int
+
+    static func current() -> Self {
+        let session = AVAudioSession.sharedInstance()
+        func ports(_ ports: [AVAudioSessionPortDescription]) -> [String] {
+            ports.map { "\($0.uid):\($0.selectedDataSource?.dataSourceID.stringValue ?? "-")" }
+        }
+        return .init(category: session.category.rawValue, mode: session.mode.rawValue,
+            options: session.categoryOptions.rawValue, inputPorts: ports(session.currentRoute.inputs),
+            outputPorts: ports(session.currentRoute.outputs), sampleRate: session.sampleRate,
+            inputChannels: session.inputNumberOfChannels)
+    }
+
+    func requiresInvalidation(_ notification: Notification, current: Self) -> Bool {
+        let reason = (notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? NSNumber)?.uintValue
+        guard reason == AVAudioSession.RouteChangeReason.categoryChange.rawValue,
+              self == current, !inputPorts.isEmpty, inputChannels > 0,
+              sampleRate.isFinite, sampleRate > 0 else { return true }
+        return false
+    }
+}
+
 @MainActor
 internal final class AppleSpeechMicrophonePlatformBridgeImpl: AppleSpeechMicrophonePlatformBridge {
     var isRecordingAuthorized: Bool { AVAudioSession.sharedInstance().recordPermission == .granted }
@@ -235,13 +267,15 @@ internal final class AppleSpeechMicrophonePlatformBridgeImpl: AppleSpeechMicroph
         let capture = AppleSpeechMicrophoneCapture(engine: Engine(),
             append: { bufferRequest.append($0) }, endAudio: { bufferRequest.endAudio() })
         let center = NotificationCenter.default
+        let expectedRoute = AppleSpeechMicrophoneRouteSnapshot.current()
         let observers = [
             center.addObserver(forName: AVAudioSession.interruptionNotification, object: nil, queue: nil) { note in
                 let raw = note.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt
                 guard raw == AVAudioSession.InterruptionType.began.rawValue else { return }
                 callback(.captureInvalidated(domain: "AVAudioSession.Interruption", code: 1))
             },
-            center.addObserver(forName: AVAudioSession.routeChangeNotification, object: nil, queue: nil) { _ in
+            center.addObserver(forName: AVAudioSession.routeChangeNotification, object: nil, queue: nil) { note in
+                guard expectedRoute.requiresInvalidation(note, current: .current()) else { return }
                 callback(.captureInvalidated(domain: "AVAudioSession.RouteChange", code: 2))
             },
             center.addObserver(forName: AVAudioSession.mediaServicesWereResetNotification, object: nil, queue: nil) { _ in

@@ -65,6 +65,50 @@ final class AppleSpeechCaptureTests: XCTestCase {
         XCTAssertEqual(stopped, 2)
     }
 
+    #if os(iOS)
+    func testExpectedSessionCategoryNotificationDoesNotInvalidateHealthyCapture() {
+        let expected = AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "measurement", options: 0,
+            inputPorts: ["fixture.mic"], outputPorts: [], sampleRate: 48_000, inputChannels: 1)
+        let notification = Notification(name: AVAudioSession.routeChangeNotification,
+            userInfo: [AVAudioSessionRouteChangeReasonKey: AVAudioSession.RouteChangeReason.categoryChange.rawValue])
+        XCTAssertFalse(expected.requiresInvalidation(notification, current: expected))
+    }
+
+    func testInputLossUnknownReasonAndUnexpectedConfigurationStillInvalidateCapture() {
+        let expected = AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "measurement", options: 0,
+            inputPorts: ["fixture.mic"], outputPorts: [], sampleRate: 48_000, inputChannels: 1)
+        for reason in [nil, 0, 1, 2, 4, 6, 7, 8, 999] as [UInt?] {
+            let info: [AnyHashable: Any] = reason.map { [AVAudioSessionRouteChangeReasonKey: $0] } ?? [:]
+            XCTAssertTrue(expected.requiresInvalidation(Notification(name: AVAudioSession.routeChangeNotification,
+                userInfo: info), current: expected), "reason=\(String(describing: reason))")
+        }
+        let categoryChanged = Notification(name: AVAudioSession.routeChangeNotification,
+            userInfo: [AVAudioSessionRouteChangeReasonKey: AVAudioSession.RouteChangeReason.categoryChange.rawValue])
+        let changed = [
+            AppleSpeechMicrophoneRouteSnapshot(category: "playback", mode: "measurement", options: 0,
+                inputPorts: ["fixture.mic"], outputPorts: [], sampleRate: 48_000, inputChannels: 1),
+            AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "default", options: 0,
+                inputPorts: ["fixture.mic"], outputPorts: [], sampleRate: 48_000, inputChannels: 1),
+            AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "measurement", options: 1,
+                inputPorts: ["fixture.mic"], outputPorts: [], sampleRate: 48_000, inputChannels: 1),
+            AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "measurement", options: 0,
+                inputPorts: [], outputPorts: [], sampleRate: 48_000, inputChannels: 1),
+            AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "measurement", options: 0,
+                inputPorts: ["other.mic"], outputPorts: [], sampleRate: 48_000, inputChannels: 1),
+            AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "measurement", options: 0,
+                inputPorts: ["fixture.mic"], outputPorts: ["speaker"], sampleRate: 48_000, inputChannels: 1),
+            AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "measurement", options: 0,
+                inputPorts: ["fixture.mic"], outputPorts: [], sampleRate: 16_000, inputChannels: 1),
+            AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "measurement", options: 0,
+                inputPorts: ["fixture.mic"], outputPorts: [], sampleRate: 48_000, inputChannels: 0)
+        ]
+        for current in changed { XCTAssertTrue(expected.requiresInvalidation(categoryChanged, current: current)) }
+        let invalid = AppleSpeechMicrophoneRouteSnapshot(category: "record", mode: "measurement", options: 0,
+            inputPorts: [], outputPorts: [], sampleRate: 0, inputChannels: 0)
+        XCTAssertTrue(invalid.requiresInvalidation(categoryChanged, current: invalid))
+    }
+    #endif
+
     nonisolated private static func buffer() -> AVAudioPCMBuffer {
         let format = AVAudioFormat(standardFormatWithSampleRate: 16_000, channels: 1)!
         let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: 16)!
