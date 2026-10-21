@@ -13,6 +13,7 @@
 		12546852456E36AE866B1CEC /* ModelLease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6FD16AB0674085D36A0A2 /* ModelLease.swift */; };
 		16F26DC8947BA25D9FAC0970 /* FaceIdentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E108CAD03F5016A712A73981 /* FaceIdentification.swift */; };
 		184DB45212EBA0B2AF70F10E /* AppleSpeechRecognizerBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9620D6921B51B5D3D408818C /* AppleSpeechRecognizerBackend.swift */; };
+		1FA87777ABC2016F8DADABD0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		2019F2341B1AD64F302602BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		33B288D899FF05216061044D /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		3864683E61ECC35F3480F5DB /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B53BC264DC0300F3ED7BC /* Availability.swift */; };
@@ -22,22 +23,27 @@
 		453F92DD0E7BAEA9BF5EDF26 /* IdentityContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65806FDB767FCB54FE5F2921 /* IdentityContracts.swift */; };
 		45C72765F7B8B1FF60EA2587 /* IdentityErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B0A4C80736172E54494CB8 /* IdentityErrors.swift */; };
 		47E14962DE31F073F3436417 /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A132258ADD09AF9EEF7989FF /* Speech.framework */; };
+		4F3925EEBA9EB9E3960B544B /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		52A7399B5E7454CCA0E284CD /* KeychainIdentityKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC727BB00DD3072C7CB20A /* KeychainIdentityKeyProvider.swift */; };
 		54CCFEB543CEC3AC8CB73453 /* IdentityTemplatePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BEB93AABBF7EC8E2589C5B /* IdentityTemplatePayload.swift */; };
 		56ABF4F4EF518B042C08AF8D /* IdentityCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ECBC274B21187A3A5E4761 /* IdentityCrypto.swift */; };
 		56EAB3977351262E36F2A2FC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		58255A0698D7A2E6A08B1221 /* IdentityOperationTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356B145C70501D9B48F78AC7 /* IdentityOperationTicket.swift */; };
+		59E41B1284F8CACFE68CBDF3 /* AppleVideoOutputLease.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D8551D84C601691C4A7FCC /* AppleVideoOutputLease.swift */; };
 		5ACD71EFF3D6930A6A3DA1F9 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		5C67CADC416AA204C371C26F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		5CFC154A02D03E644A9DBB3B /* IdentityBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA68DF876300C7C5D099A75 /* IdentityBackend.swift */; };
+		62B8DC4C5A8CA28DD17DC500 /* VideoToolboxSREngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07C2D7E8301010DC3BD7595 /* VideoToolboxSREngine.swift */; };
 		66A985DB8180B8A8749FBB6C /* ODAIKitSpeech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4F8AE1FD0B502BE5D40CB2 /* ODAIKitSpeech.framework */; };
 		69AE2FC526CCF3B668180639 /* GalleryCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C59C13A18066C82FB5E037A /* GalleryCatalog.swift */; };
+		7E634F3E0FD37A2801A4EFD6 /* AppleVideoToolboxBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B01455551E2B60889705D1 /* AppleVideoToolboxBackend.swift */; };
 		81708D72661C142679A66B8B /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		841D4F6C0AF29DA9FCFFC6EA /* VideoContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D0E994E7F0CDD8434F8B1A /* VideoContracts.swift */; };
 		89345026EFD8CAA05A971D5F /* FaceDetectionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B27A47D43660B453108C4A1 /* FaceDetectionClient.swift */; };
 		912EEFF6F4CE27A150DAEF2C /* VideoProcessingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC879CFB96F62D4FB6E8A2A0 /* VideoProcessingClient.swift */; };
 		954ED3BD7C5A0AB5198E5DAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		96ADC04EC9C0984301E8B126 /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		97C31D60F7D9030CE36784A8 /* AppleVideoProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F498BC60278351419F10A5 /* AppleVideoProfile.swift */; };
 		98EF1F4F88DC1B9E26717B19 /* LatestFrameQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA6D77F420A4D2DBBD5179F /* LatestFrameQueue.swift */; };
 		9BC228A95B719ABE75213605 /* TaskGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585E9B24E203B35917F6D632 /* TaskGate.swift */; };
 		9CEE41EB5E70CB93054399AA /* GallerySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9A49CE061532935F71D882 /* GallerySnapshot.swift */; };
@@ -52,6 +58,7 @@
 		B140148B0B297244C6CD9507 /* SpeechMicrophoneClientTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C148B3A0CC524F8417F31A6D /* SpeechMicrophoneClientTask.swift */; };
 		B2128EA69693A5D58B4EA8FF /* SpeechMicrophone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703A22282ED4D713DDA31B32 /* SpeechMicrophone.swift */; };
 		B2BC68C7874ADFC190295439 /* LocalIdentityBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C45DD1192427D52D280690 /* LocalIdentityBackend.swift */; };
+		B78CF0789F74214871C69355 /* ODAIKitVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6643354AC84B2DDDF6122E7A /* ODAIKitVideo.framework */; };
 		B9DDCBE016D7228A2E24597C /* AppleAVSpeechBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2FECE6D5DC16691BD1A5B0 /* AppleAVSpeechBackend.swift */; };
 		BB02C8D38DEA33AD2CC8D272 /* IdentityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2697C9F5448D517E5196CA0B /* IdentityStore.swift */; };
 		BB8E3B3253EE7E49B98BA88C /* IndexStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F691F270D1FE0D65FD0ACB2 /* IndexStore.swift */; };
@@ -79,6 +86,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2A1EFF7E897CF46E561597A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2742F71BBFE57B2B72B765EF;
+			remoteInfo = ODAIKitVideo;
+		};
 		4318317571B769ABA02942F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 077614432308B7CC82441D55 /* Project object */;
@@ -121,6 +135,13 @@
 			remoteGlobalIDString = EFC88BE002DD0980AB3DAFC1;
 			remoteInfo = ODAIKitCore;
 		};
+		C7FD90389EF78E1A7097475F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFC88BE002DD0980AB3DAFC1;
+			remoteInfo = ODAIKitCore;
+		};
 		DA379A0F41D7AEE6A7BD615B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 077614432308B7CC82441D55 /* Project object */;
@@ -154,6 +175,7 @@
 /* Begin PBXFileReference section */
 		0278B7DADAED87DB634BDED5 /* VisionFaceDetector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VisionFaceDetector.swift; path = Sources/ODAIKitAppleVision/VisionFaceDetector.swift; sourceTree = "<group>"; };
 		05A0C5087D6BAEB12ABAD20E /* IdentityAuthorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityAuthorization.swift; path = Sources/ODAIKitIdentity/IdentityAuthorization.swift; sourceTree = "<group>"; };
+		05F498BC60278351419F10A5 /* AppleVideoProfile.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleVideoProfile.swift; path = Sources/ODAIKitAppleVideo/AppleVideoProfile.swift; sourceTree = "<group>"; };
 		0BEF34BC229EF6EFB7F4BFFA /* FaceVerification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceVerification.swift; path = Sources/ODAIKitIdentity/FaceVerification.swift; sourceTree = "<group>"; };
 		0C59C13A18066C82FB5E037A /* GalleryCatalog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GalleryCatalog.swift; path = Sources/ODAIKitIdentity/GalleryCatalog.swift; sourceTree = "<group>"; };
 		13FA11E5462EE6906655735C /* AppleSpeechMicrophone.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleSpeechMicrophone.swift; path = Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift; sourceTree = "<group>"; };
@@ -169,6 +191,7 @@
 		2ACB01B3704A8FAC12FA6411 /* IdentityLivenessOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityLivenessOperation.swift; path = Sources/ODAIKitIdentity/IdentityLivenessOperation.swift; sourceTree = "<group>"; };
 		356B145C70501D9B48F78AC7 /* IdentityOperationTicket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityOperationTicket.swift; path = Sources/ODAIKitIdentity/IdentityOperationTicket.swift; sourceTree = "<group>"; };
 		35C45DD1192427D52D280690 /* LocalIdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocalIdentityBackend.swift; path = Sources/ODAIKitIdentity/LocalIdentityBackend.swift; sourceTree = "<group>"; };
+		38B01455551E2B60889705D1 /* AppleVideoToolboxBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleVideoToolboxBackend.swift; path = Sources/ODAIKitAppleVideo/AppleVideoToolboxBackend.swift; sourceTree = "<group>"; };
 		4098819D18DF89E8F6C0E290 /* IdentityContractCodecs.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityContractCodecs.swift; path = Sources/ODAIKitIdentity/IdentityContractCodecs.swift; sourceTree = "<group>"; };
 		40D260AE9C59C8AB60896569 /* FaceObservation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceObservation.swift; path = Sources/ODAIKitFace/FaceObservation.swift; sourceTree = "<group>"; };
 		41866830051FC001F515E083 /* IdentityEnrollment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityEnrollment.swift; path = Sources/ODAIKitIdentity/IdentityEnrollment.swift; sourceTree = "<group>"; };
@@ -196,9 +219,11 @@
 		A8CC727BB00DD3072C7CB20A /* KeychainIdentityKeyProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainIdentityKeyProvider.swift; path = Sources/ODAIKitIdentity/KeychainIdentityKeyProvider.swift; sourceTree = "<group>"; };
 		AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA675A66C3CF1CFFE67B7A0 /* ODAIKitIdentity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitIdentity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF8647E9CA7CB86C3F0FCE8C /* ODAIKitAppleVideo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitAppleVideo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B867539A8E2FCC7317BB20 /* ODAIKitAppleSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitAppleSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelDownloader.swift; path = Sources/ODAIKitModelStore/ModelDownloader.swift; sourceTree = "<group>"; };
 		BE4F8AE1FD0B502BE5D40CB2 /* ODAIKitSpeech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitSpeech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C07C2D7E8301010DC3BD7595 /* VideoToolboxSREngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoToolboxSREngine.swift; path = Sources/ODAIKitAppleVideo/VideoToolboxSREngine.swift; sourceTree = "<group>"; };
 		C148B3A0CC524F8417F31A6D /* SpeechMicrophoneClientTask.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpeechMicrophoneClientTask.swift; path = Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift; sourceTree = "<group>"; };
 		C9BEB93AABBF7EC8E2589C5B /* IdentityTemplatePayload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityTemplatePayload.swift; path = Sources/ODAIKitIdentity/IdentityTemplatePayload.swift; sourceTree = "<group>"; };
 		CBA9B51D24AB4AA7CA0E2643 /* IdentityRevocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityRevocation.swift; path = Sources/ODAIKitIdentity/IdentityRevocation.swift; sourceTree = "<group>"; };
@@ -211,6 +236,7 @@
 		EC879CFB96F62D4FB6E8A2A0 /* VideoProcessingClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoProcessingClient.swift; path = Sources/ODAIKitVideo/VideoProcessingClient.swift; sourceTree = "<group>"; };
 		F1D0E994E7F0CDD8434F8B1A /* VideoContracts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoContracts.swift; path = Sources/ODAIKitVideo/VideoContracts.swift; sourceTree = "<group>"; };
 		F24346D636307E745B03B9CE /* SpeechClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpeechClient.swift; path = Sources/ODAIKitSpeech/SpeechClient.swift; sourceTree = "<group>"; };
+		F3D8551D84C601691C4A7FCC /* AppleVideoOutputLease.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleVideoOutputLease.swift; path = Sources/ODAIKitAppleVideo/AppleVideoOutputLease.swift; sourceTree = "<group>"; };
 		F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelManifest.swift; path = Sources/ODAIKitModelStore/ModelManifest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -222,6 +248,16 @@
 				56EAB3977351262E36F2A2FC /* Foundation.framework in Frameworks */,
 				AC402CC2F005E84364ACA1D0 /* ODAIKitCore.framework in Frameworks */,
 				E0932865ED77150E05827C81 /* ODAIKitFace.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		540AF5210229676112B55295 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FA87777ABC2016F8DADABD0 /* Foundation.framework in Frameworks */,
+				4F3925EEBA9EB9E3960B544B /* ODAIKitCore.framework in Frameworks */,
+				B78CF0789F74214871C69355 /* ODAIKitVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +348,7 @@
 				B9B867539A8E2FCC7317BB20 /* ODAIKitAppleSpeech.framework */,
 				ACA675A66C3CF1CFFE67B7A0 /* ODAIKitIdentity.framework */,
 				6643354AC84B2DDDF6122E7A /* ODAIKitVideo.framework */,
+				AF8647E9CA7CB86C3F0FCE8C /* ODAIKitAppleVideo.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -371,6 +408,10 @@
 				13FA11E5462EE6906655735C /* AppleSpeechMicrophone.swift */,
 				F1D0E994E7F0CDD8434F8B1A /* VideoContracts.swift */,
 				EC879CFB96F62D4FB6E8A2A0 /* VideoProcessingClient.swift */,
+				F3D8551D84C601691C4A7FCC /* AppleVideoOutputLease.swift */,
+				05F498BC60278351419F10A5 /* AppleVideoProfile.swift */,
+				38B01455551E2B60889705D1 /* AppleVideoToolboxBackend.swift */,
+				C07C2D7E8301010DC3BD7595 /* VideoToolboxSREngine.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -386,6 +427,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		068747F6A3DC5B93A0A269C9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FD8A1122B5BDE08EAD4ED46 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -523,6 +571,26 @@
 			productReference = 6643354AC84B2DDDF6122E7A /* ODAIKitVideo.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		4FC45751A386387FFD94DF68 /* ODAIKitAppleVideo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFCBD417E3389F16C313C7C1 /* Build configuration list for PBXNativeTarget "ODAIKitAppleVideo" */;
+			buildPhases = (
+				068747F6A3DC5B93A0A269C9 /* Headers */,
+				52A3AE306B698645540A8907 /* Sources */,
+				540AF5210229676112B55295 /* Frameworks */,
+				FA4436FA66270A9ABDF2010B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6451437D1F1B99E858164E1B /* PBXTargetDependency */,
+				48DC9C710BB7E1615B8FADFE /* PBXTargetDependency */,
+			);
+			name = ODAIKitAppleVideo;
+			productName = ODAIKitAppleVideo;
+			productReference = AF8647E9CA7CB86C3F0FCE8C /* ODAIKitAppleVideo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		7D69EBACE004E6BAC09D83DC /* ODAIKitSpeech */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A18841E19BF34B7D328C9995 /* Build configuration list for PBXNativeTarget "ODAIKitSpeech" */;
@@ -631,6 +699,7 @@
 				1846E7B9482629E6A8C74FD2 /* ODAIKitAppleSpeech */,
 				113749C3261A67104AF67309 /* ODAIKitIdentity */,
 				2742F71BBFE57B2B72B765EF /* ODAIKitVideo */,
+				4FC45751A386387FFD94DF68 /* ODAIKitAppleVideo */,
 			);
 		};
 /* End PBXProject section */
@@ -679,6 +748,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DFB95F5724DAA60AA14751FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA4436FA66270A9ABDF2010B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -750,6 +826,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		52A3AE306B698645540A8907 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59E41B1284F8CACFE68CBDF3 /* AppleVideoOutputLease.swift in Sources */,
+				97C31D60F7D9030CE36784A8 /* AppleVideoProfile.swift in Sources */,
+				7E634F3E0FD37A2801A4EFD6 /* AppleVideoToolboxBackend.swift in Sources */,
+				62B8DC4C5A8CA28DD17DC500 /* VideoToolboxSREngine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5FC499C2DC5A52E476A31F51 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -816,11 +903,23 @@
 			target = 7D69EBACE004E6BAC09D83DC /* ODAIKitSpeech */;
 			targetProxy = DA379A0F41D7AEE6A7BD615B /* PBXContainerItemProxy */;
 		};
+		48DC9C710BB7E1615B8FADFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitVideo;
+			target = 2742F71BBFE57B2B72B765EF /* ODAIKitVideo */;
+			targetProxy = 2A1EFF7E897CF46E561597A5 /* PBXContainerItemProxy */;
+		};
 		5B15B310BDA49CA5CFCE3B6A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ODAIKitCore;
 			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
 			targetProxy = E614FAE522D0238D748C0CA8 /* PBXContainerItemProxy */;
+		};
+		6451437D1F1B99E858164E1B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitCore;
+			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
+			targetProxy = C7FD90389EF78E1A7097475F /* PBXContainerItemProxy */;
 		};
 		7FC1133696921F7D052C2C1E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1274,6 +1373,33 @@
 			};
 			name = Release;
 		};
+		68CA32EC41528370803E3F7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitapplevideo;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		7CEFAA655D8A4C94CBAACD42 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1370,6 +1496,32 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitvideo;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D4D078BCF1F3B2176BE25185 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitapplevideo;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
@@ -1486,6 +1638,15 @@
 			buildConfigurations = (
 				45B893565A7215A6402D3018 /* Release */,
 				2D7CACA1591B7FB2A33B53E1 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFCBD417E3389F16C313C7C1 /* Build configuration list for PBXNativeTarget "ODAIKitAppleVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68CA32EC41528370803E3F7C /* Release */,
+				D4D078BCF1F3B2176BE25185 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

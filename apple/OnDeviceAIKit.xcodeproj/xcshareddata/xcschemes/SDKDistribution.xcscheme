@@ -118,6 +118,20 @@
                ReferencedContainer = "container:OnDeviceAIKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4FC45751A386387FFD94DF68"
+               BuildableName = "ODAIKitAppleVideo.framework"
+               BlueprintName = "ODAIKitAppleVideo"
+               ReferencedContainer = "container:OnDeviceAIKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

@@ -5,7 +5,7 @@ required_asr_source='Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swi
 abort("Missing required source: #{required_asr_source}") unless File.file?(File.join(root,'apple',required_asr_source))
 project_path=File.join(root,'apple/OnDeviceAIKit.xcodeproj')
 project=File.exist?(project_path) ? Xcodeproj::Project.open(project_path) : Xcodeproj::Project.new(project_path)
-names=['ODAIKitCore','ODAIKitModelStore','ODAIKitFace','ODAIKitAppleVision','ODAIKitSpeech','ODAIKitAppleSpeech','ODAIKitIdentity','ODAIKitVideo']
+names=['ODAIKitCore','ODAIKitModelStore','ODAIKitFace','ODAIKitAppleVision','ODAIKitSpeech','ODAIKitAppleSpeech','ODAIKitIdentity','ODAIKitVideo','ODAIKitAppleVideo']
 targets={}
 names.each do |name|
  target=project.targets.find{|candidate| candidate.name==name} || project.new_target(:framework,name,:ios,'15.0');targets[name]=target
@@ -18,7 +18,7 @@ names.each do |name|
   target.source_build_phase.add_file_reference(reference) unless target.source_build_phase.files.any?{|build| build.file_ref==reference}
  end
 end
-{'ODAIKitVideo'=>['ODAIKitCore'],'ODAIKitIdentity'=>['ODAIKitCore','ODAIKitModelStore'],'ODAIKitModelStore'=>['ODAIKitCore'],'ODAIKitFace'=>['ODAIKitCore'],'ODAIKitAppleVision'=>['ODAIKitCore','ODAIKitFace'],'ODAIKitSpeech'=>['ODAIKitCore'],'ODAIKitAppleSpeech'=>['ODAIKitCore','ODAIKitSpeech']}.each do |name, dependencies|
+{'ODAIKitAppleVideo'=>['ODAIKitCore','ODAIKitVideo'],'ODAIKitVideo'=>['ODAIKitCore'],'ODAIKitIdentity'=>['ODAIKitCore','ODAIKitModelStore'],'ODAIKitModelStore'=>['ODAIKitCore'],'ODAIKitFace'=>['ODAIKitCore'],'ODAIKitAppleVision'=>['ODAIKitCore','ODAIKitFace'],'ODAIKitSpeech'=>['ODAIKitCore'],'ODAIKitAppleSpeech'=>['ODAIKitCore','ODAIKitSpeech']}.each do |name, dependencies|
  dependencies.each do |dependency|
   targets[name].add_dependency(targets[dependency])
   unless targets[name].frameworks_build_phase.files.any?{|build| build.file_ref==targets[dependency].product_reference}

@@ -1,6 +1,15 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-21（Asia/Shanghai；恢复后追加语言 admission 修复并装机；中文自然输入与取消/重入仍待真机终态）
+更新时间：2026-10-21（Asia/Shanghai；AppleVideo SDK 首包本地/设备验证完成，独立审查pending；P6实录终态仍待验）
+
+## AppleVideo SDK 续接检查点（2026-10-21，优先于下方历史入口）
+
+- 独立 `ODAIKitAppleVideo` Task1–3 已提交：`4e77325` workspace/lease、`5c6ba01` backend协调、`e996d5d`真实VT引擎；`51d98bf`修复取消后晚到错误改变终态，回归RED→GREEN，Swift438/438通过。
+- 当前首包仅支持非模拟器iOS26+、模型ready、固定320×180/24fps/1…48帧/BT.709 SDR、4×和显式discard；基础iOS15/macOS12不变，无模型下载。音轨preserve默认请求明确拒绝。
+- 修复后fresh九XCFramework位于 `artifacts/verification/apple-video-backend-20261021/distribution-cancel-fix/`。Core+Video-only设备/模拟器消费者在iOS15 target编译链接通过；设备VT符号为weak，模拟器无VT专用符号。签名device与unsigned simulator harness均构建通过。
+- iPhone16ProMax/iOS27.0.1修复后固定公开fixture套件 `state=success`，PID19252，runId `6BFB16C9-8000-44AF-9018-BD0F72F155CD`：48帧成功、第1帧后取消且无残留、同进程48帧重入、close保留已交付lease、release清理、关闭后拒绝新任务、输入未变。导出的单轨HEVC1280×720/24fps/2秒/BT.709、连续PTS及完整decode通过，见[验证](validation/apple-video-backend.md)。
+- 计划/规格 `docs/superpowers/plans/2026-10-21-apple-video-backend.md` 与同名design，ledger `.superpowers/sdd/2026-10-21-apple-video-backend/progress.md`。独立reviewer容量失败，无APPROVE，保持pending；不push。
+- 下一本地工作包：有界音轨preserve，随后KMP/Demo接入；先以新包规格/测试明确音频兼容、同步、取消清理边界。P7质量/传递函数/Android/最低系统仍独立，P6不自动录音。两个受保护文件hash保持不变，不暂存或覆盖。
 
 ## P7 续接检查点（2026-10-21，优先于下方语音历史记录）
 
