@@ -109,14 +109,22 @@ public actor AppleVideoToolboxBackend: VideoSuperResolutionBackend {
     }
 }
 
-func makeAppleVideoEngine() -> any AppleVideoProcessingEngine { UnsupportedAppleVideoEngine() }
+func makeAppleVideoEngine() -> any AppleVideoProcessingEngine {
+    #if os(iOS) && !targetEnvironment(simulator)
+    if #available(iOS 26, *) { return VideoToolboxSREngine() }
+    return UnsupportedAppleVideoEngine(reason: .requiresOSVersion)
+    #else
+    return UnsupportedAppleVideoEngine()
+    #endif
+}
 
 private struct UnsupportedAppleVideoEngine: AppleVideoProcessingEngine {
+    var reason: UnavailableReason = .unsupportedDevice
     func availability() async -> CapabilityAvailability {
-        .init(status: .unavailable, reason: .unsupportedDevice, backendId: "apple.videotoolbox.sr", minOS: "iOS26", offline: true)
+        .init(status: .unavailable, reason: reason, backendId: "apple.videotoolbox.sr", minOS: "iOS26", offline: true)
     }
     func process(request: VideoProcessingRequest, output: URL,
                  progress: (@Sendable (VideoProcessingProgress) -> Void)?) async throws -> VideoOutputInfo {
-        throw VideoClientError.backendUnavailable("apple.videotoolbox.sr", .unsupportedDevice)
+        throw VideoClientError.backendUnavailable("apple.videotoolbox.sr", reason)
     }
 }
