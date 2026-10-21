@@ -6,6 +6,7 @@ dependencyResolutionManagement { repositories {
 rootProject.name = "ondevice-ai-kit"
 include(":kmp-binding")
 include(":android:sdk-core", ":android:identity")
+include(":android:video")
 include(":android:model-store", ":android:face", ":android:backend-mlkit", ":android:speech", ":android:backend-system-tts", ":android:backend-system-asr")
 include(":demo:shared", ":demo:androidApp")
 include(":examples:android-native")
