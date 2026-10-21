@@ -16,18 +16,33 @@ final class AppleVideoToolboxBackendTests: XCTestCase {
         let client = try VideoProcessingClient(defaultBackendId: backend.backendId, backends: [backend])
         let metadata = try await client.listBackends()
         XCTAssertEqual(metadata[0].supportedScaleFactors, [4])
-        XCTAssertEqual(metadata[0].supportedAudioPolicies, [.discard])
+        XCTAssertEqual(metadata[0].supportedAudioPolicies, [.preserve, .discard])
         XCTAssertEqual(metadata[0].availability.reason, .missingAssets)
         do { _ = try await client.process(request); XCTFail("no model") }
         catch { XCTAssertEqual(error as? VideoClientError, .backendUnavailable(backend.backendId, .missingAssets)) }
         await client.close()
         let ready = AppleVideoToolboxBackend(root: root, engine: ControlledVideoEngine())
-        do { _ = try await ready.process(.init(inputFile: request.inputFile, scaleFactor: 4), progress: nil); XCTFail("preserve not implemented") }
-        catch { XCTAssertEqual(error as? VideoClientError, .unsupportedAudioPolicy(.preserve)) }
         do { _ = try await ready.process(.init(inputFile: request.inputFile, scaleFactor: 2, audioPolicy: .discard), progress: nil); XCTFail("no scale fallback") }
         catch { XCTAssertEqual(error as? VideoClientError, .unsupportedScaleFactor(2)) }
         XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: root.path), [])
         await ready.close()
+    }
+
+    func testDefaultPreserveIsAdvertisedAndDeliveredByClient() async throws {
+        let root = try makeRoot(); defer { try? FileManager.default.removeItem(at: root) }
+        let engine = ControlledVideoEngine()
+        let backend = AppleVideoToolboxBackend(root: root, engine: engine)
+        let client = try VideoProcessingClient(defaultBackendId: backend.backendId, backends: [backend])
+        let descriptors = try await client.listBackends()
+        XCTAssertEqual(descriptors[0].supportedAudioPolicies, [.preserve, .discard])
+        let result = try await client.process(.init(inputFile: request.inputFile, scaleFactor: 4))
+        let policy = await engine.lastAudioPolicy
+        XCTAssertEqual(policy, .preserve)
+        XCTAssertEqual(result.output.info.audioTrackCount, 1)
+        await client.close()
+        XCTAssertTrue(FileManager.default.fileExists(atPath: result.output.file.path))
+        try await result.output.release()
+        XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: root.path), [])
     }
 
     func testCancelledLateOutputIsRemovedBeforeDrainAndReentry() async throws {
@@ -128,6 +143,7 @@ private actor ControlledVideoEngine: AppleVideoProcessingEngine {
     let status: CapabilityStatus
     let fail: Bool
     var starts = 0
+    var lastAudioPolicy: VideoAudioPolicy?
     init(block: Bool = false, status: CapabilityStatus = .available, fail: Bool = false) {
         gate = BackendVideoBarrier(open: !block); self.status = status; self.fail = fail
     }
@@ -137,10 +153,11 @@ private actor ControlledVideoEngine: AppleVideoProcessingEngine {
     func process(request: VideoProcessingRequest, output: URL,
                  progress: (@Sendable (VideoProcessingProgress) -> Void)?) async throws -> VideoOutputInfo {
         starts += 1
+        lastAudioPolicy = request.audioPolicy
         await gate.wait()
         try Data([1, 2, 3]).write(to: output)
         if fail { throw EngineFailure.processing }
-        return try .init(width: 1280, height: 720, frameCount: 48, durationSeconds: 2, audioTrackCount: 0)
+        return try .init(width: 1280, height: 720, frameCount: 48, durationSeconds: 2, audioTrackCount: request.audioPolicy == .preserve ? 1 : 0)
     }
 }
 

@@ -44,7 +44,6 @@ struct VideoToolboxSREngine: AppleVideoProcessingEngine {
                               progress: (@Sendable (VideoProcessingProgress) -> Void)?) async throws -> VideoOutputInfo {
         try Task.checkCancellation()
         try AppleVideoProfile.validateFile(request.inputFile)
-        guard request.audioPolicy == .discard else { throw VideoClientError.unsupportedAudioPolicy(request.audioPolicy) }
         guard request.scaleFactor == 4 else { throw VideoClientError.unsupportedScaleFactor(request.scaleFactor) }
         guard let configuration = configuration() else { throw VideoClientError.backendUnavailable(Self.id, .unsupportedDevice) }
         guard configuration.configurationModelStatus == .ready else { throw VideoClientError.backendUnavailable(Self.id, .missingAssets) }
@@ -60,6 +59,9 @@ struct VideoToolboxSREngine: AppleVideoProcessingEngine {
         guard duration.isNumeric, duration.seconds > 0, duration.seconds <= 2.001 else {
             throw AppleVideoError.unsupportedInput("video duration up to two seconds required")
         }
+        if request.audioPolicy == .preserve {
+            try await AppleVideoAudioMuxer.validateInput(source: request.inputFile, videoDuration: duration.seconds)
+        }
         try Task.checkCancellation()
         let reader = try AVAssetReader(asset: asset)
         let source = AVAssetReaderTrackOutput(track: track, outputSettings: [
@@ -70,7 +72,9 @@ struct VideoToolboxSREngine: AppleVideoProcessingEngine {
         guard reader.canAdd(source) else { throw AppleVideoError.readerFailed }
         reader.add(source)
 
-        let writer = try AVAssetWriter(outputURL: output, fileType: .mov)
+        let renderedVideo = request.audioPolicy == .preserve
+            ? output.deletingLastPathComponent().appendingPathComponent("video-only.mov") : output
+        let writer = try AVAssetWriter(outputURL: renderedVideo, fileType: .mov)
         let processor = VTFrameProcessor()
         var sessionStarted = false
         var finished = false
@@ -146,7 +150,15 @@ struct VideoToolboxSREngine: AppleVideoProcessingEngine {
         await writer.finishWriting()
         try Task.checkCancellation()
         guard writer.status == .completed else { throw AppleVideoError.writerFailed }
-        let info = try VideoOutputInfo(width: 1280, height: 720, frameCount: count, durationSeconds: Double(count) / 24, audioTrackCount: 0)
+        let outputDuration = Double(count) / 24
+        var audioTrackCount = 0
+        if request.audioPolicy == .preserve {
+            audioTrackCount = try await AppleVideoAudioMuxer.preserve(source: request.inputFile, processedVideo: renderedVideo,
+                                                                     output: output, videoDuration: outputDuration)
+            if FileManager.default.fileExists(atPath: renderedVideo.path) { try FileManager.default.removeItem(at: renderedVideo) }
+        }
+        try Task.checkCancellation()
+        let info = try VideoOutputInfo(width: 1280, height: 720, frameCount: count, durationSeconds: outputDuration, audioTrackCount: audioTrackCount)
         finished = true
         return info
     }

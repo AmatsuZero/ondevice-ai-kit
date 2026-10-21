@@ -21,8 +21,8 @@ Produce internal AppleVideoAudioMuxer.validateInput(source:videoDuration:) async
 
 Files: Modify AppleVideoToolboxBackend.swift、VideoToolboxSREngine.swift、AppleVideoToolboxBackendTests.swift。
 ConsumeTask1 mux；Produce支持preserve/discard的后端描述与真实engine输出metadata。
-- [ ] RED：client默认preserve可交付/释放、metadata包含preserve，Expected旧实现拒绝。
-- [ ] 引擎前置audio admission，内部silent文件→mux→删除intermediate，准确audioTrackCount；GREEN定向/全套，device/simulator编译；范围审读/提交。
+- [x] RED：client默认preserve可交付/释放、metadata包含preserve，Expected旧实现拒绝。
+- [x] 引擎前置audio admission，内部silent文件→mux→删除intermediate，准确audioTrackCount；GREEN定向/全套，device/simulator编译；范围审读/提交。
 
 ### Task 3: Distribution/device/docs
 

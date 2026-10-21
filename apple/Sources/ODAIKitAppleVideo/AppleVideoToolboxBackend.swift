@@ -9,11 +9,11 @@ protocol AppleVideoProcessingEngine: Sendable {
                  progress: (@Sendable (VideoProcessingProgress) -> Void)?) async throws -> VideoOutputInfo
 }
 
-/// Experimental bounded SDR profile: 4x and explicit discard only. No model downloads.
+/// Experimental bounded SDR profile: 4x with bounded AAC preservation or discard. No model downloads.
 public actor AppleVideoToolboxBackend: VideoSuperResolutionBackend {
     public nonisolated let backendId = "apple.videotoolbox.sr"
     public nonisolated let supportedScaleFactors = [4]
-    public nonisolated let supportedAudioPolicies: [VideoAudioPolicy] = [.discard]
+    public nonisolated let supportedAudioPolicies: [VideoAudioPolicy] = [.preserve, .discard]
     private let root: URL
     private let engine: any AppleVideoProcessingEngine
     private var active: Task<any VideoOutputLease, Error>?
