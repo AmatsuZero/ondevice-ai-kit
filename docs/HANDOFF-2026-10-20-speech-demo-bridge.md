@@ -1,25 +1,22 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-21（Asia/Shanghai；麦克风实现已提交，本地门禁/分发通过；既有实现审查通过；真机首次ASR成功，路由修复复审待补）
+更新时间：2026-10-21（Asia/Shanghai；麦克风实现已提交，本地门禁/分发通过；首次ASR成功，后续真实输入1110未收口；修复复审待补）
 
 ## 当前恢复检查点（2026-10-21，优先于后面的历史记录）
 
-工作树仍为 `.worktrees/foundation` / `feat/sdk-foundation`。恢复基线 HEAD `9053a48`（路由修复已本地提交；实时 HEAD 以 git log 为准），麦克风计划 `docs/superpowers/plans/2026-10-20-ios-microphone-asr.md`，设计同名 specs 文件；ledger `.superpowers/sdd/2026-10-20-ios-microphone-asr/progress.md`。**不要从旧 Task4 或麦克风 Task1 重做。**
+工作树 `.worktrees/foundation` / `feat/sdk-foundation`。路由修复 `29b388d`，失败复测记录 `83d5443`；新的 1110→NO_RESULT 修复以 `git log` 查询本地提交。麦克风 Tasks1–5 已完成，不重做；Task6、P6 与整个 roadmap **未完成**。计划 `docs/superpowers/plans/2026-10-20-ios-microphone-asr.md`，ledger `.superpowers/sdd/2026-10-20-ios-microphone-asr/progress.md`。
 
-- 麦克风已提交：Task1契约 `5be8a76`，Task2 client `0e43f99`，Task3 capture/lease `206a601`，Task4 bridge/VM `98d22a7`，回滚错误传播修复 `780e529`，Task5 host/session/generator `d60867c`。
-- `verify-apple` 最新通过，Swift412项（Speech72）、分发11项及后续检查成功；首次失败为系统Ruby2.6加载3.4 gems，固定 `RUBY=/Users/daubert/.rvm/wrappers/ruby-3.4.11/ruby` 后通过。Android gate569tasks/11executed；工具77/77、新生成桥接/Host/session35/35；双ABI/VM/独立App simulator/unsigned device/旧App构建已通过。详见[麦克风验证](validation/ios-microphone-asr.md)。
-- fresh七XCFramework `artifacts/P6/microphone-20261021/` 已完成；Speech binary consumer build成功，仅嵌Core/Speech/AppleSpeech；双slice Core/Speech-only的文件+麦克风API typecheck、14框架依赖裁剪检查通过。日志新ledger下 `task-6-{xcframeworks,speech-consumer-build,speech-isolation}.log`。
-- Task4独立review APPROVE；Task5及Task3回滚修复独立review APPROVE/0issues；Task1–3 capture/client核心独立review亦APPROVE/11files/0issues，另跑相关34tests通过；native simulator最新39/39（task-6-native-simulator.log）。旧Task7 UI/Done追加独立review已恢复并 APPROVE/0 issues；核对SpeechScreen Done、多行输入、OCR helper、picker/ASR、Android TTS及生成器target隔离。仍不覆盖最低系统/自然语音/断网/Android真实ASR。
-- iPhone16ProMax 真机新修复包已取得用户回报 `SUCCEEDED ASR 完成`（开始麦克风→结束录音）；取消、重入、后台、拒权恢复和断网仍未验收。iOS15、Android MISSING_ASSETS等缺口保持。
-- 两个受保护文件hash仍与下方固定值一致；没有覆盖、stage或提交。没有push、force-push、资源安装、账户资产修改。
+- 原 Task1–5、旧 Task7 独立审查已 APPROVE；原分发/Android/KMP/host门禁见[验证记录](validation/ios-microphone-asr.md)。路由及新的 1110 修复独立审查仍因模型容量不足未执行，没有新的 APPROVE；不推送远端。
+- 首次真机 `FAILED PLATFORM` 两次均为 categoryChange(reason3)被无条件判失效。`29b388d` 仅放过与启动健康快照完全一致的 categoryChange，其余仍失效。新普通包安装后用户回报一次 `SUCCEEDED ASR 完成`。
+- 随后的“取消/重入”用户回报都 FAILED。成功接入诊断后，实际两轮日志均为 `finishInput`、没有 `cancel`，错误为 `kAFAssistantErrorDomain/1110`。先一轮0.77秒/24000frames，后一轮4.63秒/211200frames（4.4秒PCM），均有非零float样本。**不能把较长一轮失败仅归于录音过短，也不能将非零样本等同可识别语音。** 录音/转写未保存或导出。
+- Apple SDK `SFSpeechRecognitionTask.h` 的官方错误表明确1110为“Failed to recognize any speech”；新的窄修复映射既有 `.noResult`，不伪报成功。显式取消保持取消、其他domain/code保持平台错误。新增2测试先断言RED再GREEN；Swift全套414项0失败，iOS native fixture43/43。日志 `task-6-no-speech-{red,green,swift-full-final,native}.log`。
+- 自动合成对照不使用麦克风：同一固定CAF，文件识别成功；最初复用可变buffer的临时探针1110（探针实现问题），修正为独立buffer后，整段/实时、不保留数组、iOS27 readonly-copy和48kHz均成功。日志 `task-6-{synthetic-comparison,buffer-variants,buffer-copy}-events.log`。**不把原探针失败解释为系统buffer识别不支持。**
+- 进一步在忽略目录的 SDK副本仅替换 Engine 为合成PCM源，保留生产backend/delegate/session/finish/drain/release：首次完成、取消、同进程重入和再次完成成功。日志 `task-6-native-synthetic{-lifecycle,}-events.log`。这是真实系统识别+合成源，不是实际麦克风或UI取消验收。
+- 诊断工程 `artifacts/verification/microphone-reentry-diagnostic-20261021/` 内含 bridge/session副本、`apple-diagnostic/`和合成探针，均不得提交。最初工程引用替换未命中相对路径导致诊断未生效，已用xcodeproj真实引用修正并确认 `ODAI_MIC_DIAGNOSTIC ready`；可靠现场日志为 `task-6-reentry-buffer-events.log`。
+- 结束自动对照后恢复普通生成工程 `artifacts/verification/microphone-live-fix-20261021/`（原生产package，不含诊断源码、合成输入或自动识别）。恢复构建/安装/启动日志 `task-6-no-speech-normal-device-{build,install,launch}.log`，状态以文件核对。原七XCFramework `artifacts/P6/microphone-20261021/` 早于两次修复，尚未重新分发。
+- 两个受保护文件及hash见下方，未覆盖/暂存/提交。没有push、force-push、语言资源安装、签名账户资产/网络配置变更。iPhone UDID `00008140-0008703436D3001C`，沿用team `4X996UV8LC`，bundle `io.ondeviceai.ondeviceaidemo`。
 
-受控窗口更新：用户已确认可配合固定朗读。新生成工程 `artifacts/verification/microphone-live-fix-20261021/SpeechDemo.xcodeproj`、signed device build/install/launch 已成功（沿用 team `4X996UV8LC`，没有变更账户资产）；日志 `task-6-route-{framework,device-build,device-install,device-launch}.log`。用户主动开始、结束录音后回报，页面显示 **`SUCCEEDED ASR`**；不记录或导出自然转写文本。此前诊断包的 `categoryChange` 误报已由 route snapshot 修复覆盖。下一步仍需受控取消、同进程重入和后台取消/前台不自动重启；不得把授权扩展成旁人录音或后台自动采集。
-
-后续生命周期复测失败：用户在取消/同进程重入步骤回报“两次都 FAILED”。首轮 `SUCCEEDED ASR` 仍为有效单次成功，但不得视为完整修复或 Task6 完成。已构建安装并用控制台启动临时诊断工程 `artifacts/verification/microphone-reentry-diagnostic-20261021/`，沿用当前路由修复；只在忽略目录的 bridge/session 副本输出稳定 domain/code、会话配置和路由 reason/count/rate，不输出文本、音频、端口标识。过滤日志 `task-6-reentry-diagnostic-console.log`；构建/安装日志 `task-6-reentry-diagnostic-{build,install}.log`。等待本轮受控复现日志后重新判定根因，禁止凭首次成功推断取消/重入通过。
-
-路由修复：设备诊断两次 `AVAudioSessionRouteChangeReasonKey=3`（categoryChange）被原 observer 无条件转换成 PLATFORM。当前仅在 categoryChange 且 category/mode/options、输入输出端口、采样率和输入通道均与启动快照一致且输入健康时忽略；其余仍失效。新 native fixture41/41、Swift全套412项通过，日志 `task-6-route-{green,swift-full}.log`。此前七XCFramework产物不包含此次修复，尚未重新分发。此次两次独立复审调用均因 model-at-capacity 未启动，没有新的 APPROVE；不以既有审查替代。
-
-下一步：读取最新git与新ledger；旧Task7已在旧ledger收口；核对工作树与保护hash，随后按路线继续受控真机或其他独立工作包。仅确认受控朗读后开展真机mic窗口。缺设备/录音窗口的项保留unverified，继续roadmap其他可独立工作，不将整个目标标complete。新麦克风Task6门禁未满足前不提前推送当前HEAD；旧包审查通过不替代新包真实录音验收。
+下一步：先读取最新git/ledger和普通包恢复日志；用户尚需回答较长录音是否实际完整朗读英文固定句。只有现场输入/操作条件明确后继续受控麦克风；可以追加汇总音量指标，不保存录音/转写，不自动启动现场采集。真实取消、重入、后台/前台不重启仍未验收；模型容量恢复后追加修复独立review，分发产物需重打包。iOS15、Android API26/ASR MISSING_ASSETS、自然质量与断网、P7/P9/P10/P11缺口保留，不以合成对照关闭。
 
 以下为旧 Speech Demo 包的历史交接，旧“当前入口/HEAD”不覆盖本检查点；旧Task7追加审查和原始证据仍有效。
 

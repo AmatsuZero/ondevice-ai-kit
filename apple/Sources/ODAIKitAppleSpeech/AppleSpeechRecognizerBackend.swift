@@ -470,7 +470,12 @@ public final class AppleSpeechRecognizerBackend: SpeechMicrophoneRecognitionBack
                 await self?.invalidateMicrophone(operation, failure: CancellationError())
             }
         case .failed(let domain, let code), .captureInvalidated(let domain, let code):
-            let failure = SpeechRecognitionError.platform(domain: domain, code: code)
+            // Apple documents kAFAssistantErrorDomain/1110 as “Failed to recognize any speech”.
+            // Keep explicit cancellation authoritative, but expose a no-result outcome when the
+            // recognizer ends normally without any recognized speech.
+            let failure: Error = domain == "kAFAssistantErrorDomain" && code == 1110
+                ? SpeechRecognitionError.noResult
+                : SpeechRecognitionError.platform(domain: domain, code: code)
             operation.cancellationRequested = true
             if operation.failure == nil { operation.failure = failure }
             Task { @MainActor [weak self] in

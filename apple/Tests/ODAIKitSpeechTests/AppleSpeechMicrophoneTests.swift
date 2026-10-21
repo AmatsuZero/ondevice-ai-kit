@@ -225,6 +225,36 @@ final class AppleSpeechMicrophoneTests: XCTestCase {
         XCTAssertEqual(releases, 1)
     }
 
+    func testDocumentedNoSpeechErrorReturnsNoResultAndReleasesSession() async throws {
+        for (domain, code, expected) in [
+            ("kAFAssistantErrorDomain", 1110, SpeechRecognitionError.noResult),
+            ("fixture.other", 1110, .platform(domain: "fixture.other", code: 1110)),
+            ("kAFAssistantErrorDomain", 1101, .platform(domain: "kAFAssistantErrorDomain", code: 1101))
+        ] {
+            let fixture = try makeBackend()
+            let task = try await fixture.backend.startMicrophone(request)
+            await task.finishInput()
+            fixture.microphone.emit(.failed(domain: domain, code: code))
+            fixture.microphone.complete()
+            await fixture.clock.advance(by: 0.02)
+            do { _ = try await task.result(); XCTFail("recognition must fail") }
+            catch { XCTAssertEqual(error as? SpeechRecognitionError, expected) }
+            let releases = await fixture.lease.count()
+            XCTAssertEqual(releases, 1)
+            XCTAssertEqual(fixture.microphone.releaseCount, 1)
+        }
+    }
+
+    func testExplicitCancelRemainsCancelledWhenPlatformReportsNoSpeech() async throws {
+        let fixture = try makeBackend()
+        let task = try await fixture.backend.startMicrophone(request)
+        await task.cancel()
+        fixture.microphone.emit(.failed(domain: "kAFAssistantErrorDomain", code: 1110))
+        fixture.microphone.complete()
+        await fixture.clock.advance(by: 0.02)
+        await assertCancellation(task)
+    }
+
     func testPartialOnlyAfterFinishReturnsNoResult() async throws {
         let fixture = try makeBackend()
         let task = try await fixture.backend.startMicrophone(request)

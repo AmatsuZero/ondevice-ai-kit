@@ -1,6 +1,6 @@
 # iOS 麦克风 ASR 验证记录
 
-日期：2026-10-21。实现基线 `d60867c`；路由修复已本地提交，真实录音窗口已取得首个成功结果；Task1–5独立审查已通过。P6 和整个 roadmap 保持未收口。
+日期：2026-10-21。实现基线 `d60867c`；路由修复已本地提交，真实录音窗口首个成功后仍有1110失败；新的NO_RESULT分类修复已完成本地验证；Task1–5独立审查已通过。P6 和整个 roadmap 保持未收口。
 
 [计划](../superpowers/plans/2026-10-20-ios-microphone-asr.md)、[设计](../superpowers/specs/2026-10-20-ios-microphone-asr-design.md)、[恢复交接](../HANDOFF-2026-10-20-speech-demo-bridge.md)。本机原始日志位于忽略目录 `.superpowers/sdd/2026-10-20-ios-microphone-asr/`，下文简称 `logs/`。
 
@@ -54,6 +54,14 @@ Task4 独立 code-reviewer APPROVE、0问题；Task5 与 Task3 回滚修复独�
 - Android en-US ASR 仍 MISSING_ASSETS；不重新下载语言资源，不切网络识别。
 
 真实录音只在确认受控环境和固定朗读窗口后启动。记录是否有 final、取消/重入状态和 backend，不导出自然转写或保存录音。UI RUNNING、metadata readiness、fixture passed 都不足以作为真实采集证据。其余 P7/P9/P10/P11 按 roadmap 独立推进，不以本包关闭。
+
+## 1110 后续定位与修复
+
+实际日志 `logs/task-6-reentry-buffer-events.log` 记录的是结束输入而非显式取消：较长一轮约4.63秒后结束，PCM211200frames/48kHz（4.4秒），44buffer均有非零样本，仍1110。不能仅以“过早结束”解释，也不能从非零样本推定可识别语音。Apple官方SDK `SFSpeechRecognitionTask.h` 错误表及[公开入口](https://developer.apple.com/documentation/speech/sfspeechrecognitiontask)将1110定义为“Failed to recognize any speech”；没有文档将它唯一绑定静音或某个更细原因。
+
+新的映射使用已有 `SpeechRecognitionError.noResult`，显式取消仍优先，其他domain/code仍为platform；不制造空转写或成功。两项回归的准确RED断言和GREEN见 `task-6-no-speech-{red,green}.log`；完整Swift414/414，native iOS43/43，日志 `task-6-no-speech-{swift-full-final,native}.log`。真实麦克风仍未收口。
+
+无需录音的合成对照：修正临时探针重复使用可变buffer后，独立buffer整段/实时、readonly-copy、48kHz均成功。不得把原探针错误扩大为系统buffer能力结论。`task-6-buffer-{variants,copy}-events.log`。保留生产backend/delegate/session/finish/drain，仅用合成Engine替换真实Engine的对照中，取消、同进程重入、再次完成均成功（`task-6-native-synthetic-lifecycle-events.log`）。该对照没有采集现场声音，不能替代真实麦克风或UI生命周期验收。忽略目录的诊断SDK副本不纳入产品/提交。
 
 ## 本地复跑
 
