@@ -39,6 +39,8 @@ C：由 Demo host 采集 PCM，再把 buffer 送给识别 backend。会让 SDK �
 
 Apple backend 同一实例的文件与麦克风共用已有单音频槽；关闭立即拒绝 admission，join 所有在途任务后才返回。普通文件构造方式保持 file-only；新增显式 microphone session provider 的构造方式才启用该实例的麦克风能力。backend ID 保持 `apple.speech.recognizer`，locale 继续绑定 en-US，其他 locale 明确拒绝，不静默改写。
 
+2026-10-21 Demo 语言路由修订：原生 Apple backend 仍严格绑定构造时的 locale；Demo 以一个稳定 backend ID 按请求的 canonical locale 惰性创建并缓存这些实例，共享同一 session provider。无 locale 的列表查询只报告共享 Speech 权限和关闭状态，不预先检查默认英语，也不承诺某种语言资源可用；具体文件/麦克风请求由对应原生实例检查本机就绪状态，不回退语言。此修订修复页面可编辑 locale 与固定英语 recognizer 不一致的问题，不放宽 on-device、权限或 drain 约束。
+
 ## 采集、会话与清理
 
 `ODAIKitAppleSpeech` 增加 iOS 专用 capture 边界，内部系统实现使用 `AVAudioEngine`、input-node tap 和 `SFSpeechAudioBufferRecognitionRequest`。fake capture/recognizer 可分别测试采集与识别的竞态。

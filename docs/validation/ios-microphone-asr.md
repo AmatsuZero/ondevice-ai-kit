@@ -69,6 +69,16 @@ Demo 内部的语言路由现在按请求 locale 构造并缓存 Apple backend�
 
 ## 本地复跑
 
+### 2026-10-21 恢复验收与语言 admission 修复
+
+恢复基线 `0526988`，两个保护文件 hash 与交接一致；iPhone 16 Pro Max 和 TECNO KM9 均在线。本轮尚未收到中文朗读终态，原现场取消/重入失败不能标为已修复。独立 code-reviewer 与 architect 两次调用均在执行前返回 `Selected model is at capacity`；`29b388d`、`027c7ad`、`09f5f6e` 及本次后续修复均没有新的独立 APPROVE。
+
+恢复后的完整本地门禁通过：Apple Swift **414/414**（`artifacts/verification/swift-tests.log`）、binding/shared simulator gate、11 项分发测试、consumer/原 App 构建；Android **569 tasks，22 executed、547 up-to-date**；Python tools **77/77**。另有 targeted native **24/24** 与 bridge/Host/session **36/36**，日志 `task-6-resume-native-targeted.log`、`task-6-resume-host.log`。这些完整门禁早于下面的 Demo Host 修复；修复不修改 SDK、shared 或 Android 源码。
+
+真实 `SpeechRecognitionClient` 回归复现：请求 `zh-CN`，中文 backend 就绪而默认英语不可用时，registry 会先查询 router 的英语 availability，并错误拒绝中文请求。RED 为 `task-6-locale-admission-red.log` 的 `testUnavailableEnglishDoesNotBlockChineseFileOrMicrophoneThroughClient` 断言失败。修复移除默认英语实例，列表查询只检查共享授权/关闭状态，实际语言的系统就绪检查仍在请求对应的 Apple backend 执行；没有语言或网络 fallback。生成 fixture **39/39、0 failures**，含真实 client 的文件/麦克风入口、不可用请求不回退、canonical cache 复用、拒权及关闭后拒绝 admission；`task-6-locale-admission-green.log`。此 fixture 使用固定测试 backend，不采集音频，不证明中文真机实录成功。
+
+修复后 native iOS fixture **43/43**，`task-6-resume-native-ios.log`；普通包 signed device **BUILD SUCCEEDED** 并安装至同一 iPhone，`task-6-locale-admission-device-{build,install}.log`，build 路径 `artifacts/verification/microphone-locale-admission-device-20261021/`。成包未包含文件分享或后台音频设置；未自动启动麦克风。SDK 未改，上午的七XCFramework/consumer证据继续对应当前 SDK，不重复打包相同产物。真实中文/取消/重入与独立审查门禁仍保留。
+
 ```sh
 rtk proxy env RUBY=/Users/daubert/.rvm/wrappers/ruby-3.4.11/ruby sh scripts/verify-apple.sh
 rtk proxy sh scripts/verify-android.sh

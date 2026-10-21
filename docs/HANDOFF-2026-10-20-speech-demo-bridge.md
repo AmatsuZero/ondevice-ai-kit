@@ -1,8 +1,19 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-21（Asia/Shanghai；语言路由修复 `09f5f6e` 已提交并装机；中文自然输入与取消/重入仍待真机终态）
+更新时间：2026-10-21（Asia/Shanghai；恢复后追加语言 admission 修复并装机；中文自然输入与取消/重入仍待真机终态）
 
 ## 当前恢复检查点（2026-10-21，优先于后面的历史记录）
+
+### 本次接手后的更新（优先于下方上午记录）
+
+- 接手基线 `0526988`；现新增 Demo locale admission 修复，最新提交以 `git log -2 --oneline` 为准。真实 `SpeechRecognitionClient` 回归复现：默认 `en-US` 不可用会在 registry 阶段阻断已就绪的 `zh-CN`。修复移除默认英语实例：无请求 locale 的列表查询只检查共享 Speech 授权/关闭状态，按实际请求惰性创建 canonical locale backend，再由该原生 backend 严格校验本机就绪和权限，不回退语言。
+- `task-6-locale-admission-red.log` 记录上述真实 client 断言失败，退出65；GREEN `task-6-locale-admission-green.log` **39/39**，覆盖文件/麦克风、不可用请求不回退、canonical cache/close、拒权和关闭后拒绝启动。native iOS fixture `task-6-resume-native-ios.log` **43/43**。均为测试输入，不是自然麦克风验收。
+- 接手后、此 Demo Host 修复前的完整门禁：Swift **414/414**、Apple 全脚本门禁与consumer/原App构建成功；Android **569 tasks（22 executed、547 up-to-date）**；Python **77/77**。新增修复只涉及 Demo Host/Host fixture，不改 SDK/shared/Android；之后完整生成 Host fixture 与 signed device build 已通过。
+- 设备已装新普通包：生成工程仍为 `artifacts/verification/microphone-locale-router-20261021/`，最新 build 输出为 `artifacts/verification/microphone-locale-admission-device-20261021/`。build/install 证据 `task-6-locale-admission-device-{build,install}.log`；无诊断/合成源，无 sharing/background audio key。此次未自动开始录音，中文终态仍未收到。
+- 独立 `code-reviewer` 与 `architect` 调用均在执行前因模型容量不足失败；路由/1110/locale 与本次 admission 修复均仍无新的独立 APPROVE。作者按独立步骤审读修改与回归，不冒充独立审查。Task6/P6/roadmap 未关闭；两个保护文件hash不变。
+- 本次只读查询：origin 分支仍为 `472ca9351eb69c09d863ef7bc267c280b068b846`；极狐查询返回 `SSL_ERROR_SYSCALL`，无法确认当前远端相等。未push。当前七XCFramework `artifacts/P6/microphone-locale-20261021/` 仍对应最新 SDK；本次只改Demo Host，无需重打相同 SDK 产物。
+
+当前待办：先使用用户已回复的中文终态；若没有，等待用户主动在 `zh-CN` 下完成固定句测试，仅报告状态/错误码。真实完成后继续显式取消、同进程重入、TTS往返、后台取消/前台不重启及拒权恢复。独立复审恢复后覆盖三项上午修复和本次 admission delta。不要用“继续”当作设备成功报告，不重复 Tasks1–5 或已通过的整包门禁。
 
 工作树 `.worktrees/foundation` / `feat/sdk-foundation`，语言路由实现提交 `09f5f6e fix: route iOS Demo speech by requested locale`；路由修复 `29b388d`、失败复测记录 `83d5443`、1110→NO_RESULT 修复 `027c7ad` 均已本地提交。恢复时以 `git log -2 --oneline` 核对最新 HEAD。麦克风 Tasks1–5 已完成，不重做；Task6、P6 与整个 roadmap **未完成**。计划 `docs/superpowers/plans/2026-10-20-ios-microphone-asr.md`，ledger `.superpowers/sdd/2026-10-20-ios-microphone-asr/progress.md`。
 

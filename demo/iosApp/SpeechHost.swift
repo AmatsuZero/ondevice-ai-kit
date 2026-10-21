@@ -42,7 +42,9 @@ final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency 
         do {
             let ttsBackend = AppleAVSpeechBackend()
             let audioSessionProvider = DemoSpeechAudioSessionProvider()
-            let asrBackend = try SpeechLocaleRoutingBackend(defaultLocale: "en-US") { locale in
+            let asrBackend = SpeechLocaleRoutingBackend(isAuthorized: {
+                SFSpeechRecognizer.authorizationStatus() == .authorized
+            }) { locale in
                 try AppleSpeechRecognizerBackend(locale: locale, audioSessionProvider: audioSessionProvider)
             }
             let bridge = IOSSpeechBridge(
@@ -172,21 +174,23 @@ final class SpeechLocaleRoutingBackend: SpeechMicrophoneRecognitionBackend {
     nonisolated let capability: SpeechCapability = .asr
     nonisolated let supportedInputs: [SpeechRecognitionInputKind] = [.audioFile, .microphone]
 
-    private let defaultLocale: String
+    private let isAuthorized: @MainActor () -> Bool
     private let makeBackend: @MainActor (String) throws -> any SpeechMicrophoneRecognitionBackend
-    private var backends: [String: any SpeechMicrophoneRecognitionBackend]
+    private var backends: [String: any SpeechMicrophoneRecognitionBackend] = [:]
     private var closed = false
 
-    init(defaultLocale: String,
-         makeBackend: @escaping @MainActor (String) throws -> any SpeechMicrophoneRecognitionBackend) throws {
-        let canonical = try SpeechMicrophoneRecognitionRequest(locale: defaultLocale).locale
-        self.defaultLocale = canonical
+    init(isAuthorized: @escaping @MainActor () -> Bool,
+         makeBackend: @escaping @MainActor (String) throws -> any SpeechMicrophoneRecognitionBackend) {
+        self.isAuthorized = isAuthorized
         self.makeBackend = makeBackend
-        self.backends = [canonical: try makeBackend(canonical)]
     }
 
     func availability() async -> CapabilityAvailability {
-        await backends[defaultLocale]!.availability()
+        // The registry asks without a request locale. Report the shared permission
+        // gate here; the requested backend checks its own on-device readiness.
+        let reason: UnavailableReason? = closed ? .closed : (isAuthorized() ? nil : .permissionDenied)
+        return .init(status: reason == nil ? .available : .unavailable,
+            reason: reason, backendId: backendId, minOS: "15.0", offline: true)
     }
 
     func recognize(_ request: SpeechRecognitionRequest) async throws -> SpeechRecognitionResult {
