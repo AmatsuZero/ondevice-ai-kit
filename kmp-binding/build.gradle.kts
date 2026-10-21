@@ -9,6 +9,7 @@ kotlin {
             implementation(project(":android:identity"))
             implementation(project(":android:face"))
             implementation(project(":android:speech"))
+            implementation(project(":android:video"))
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
         }
     }
