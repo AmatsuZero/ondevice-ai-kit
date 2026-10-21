@@ -97,6 +97,77 @@ final class SpeechDemoUITests: XCTestCase {
         XCTAssertFalse(cancel.exists, "Foreground must not restart recognition")
     }
 
+    func testVideoFixtureSuccessPlaybackSharingAndCleanup() throws {
+        try requireVideoFixture()
+        let app = XCUIApplication(); app.launch()
+        openVideoTab(app)
+        selectVideoFixture(in: app)
+        let selected = app.staticTexts["video-input"]
+        XCTAssertEqual(selected.label, "odai-video-ui-fixture.mp4")
+        tapRenderedControl("选择视频", in: app)
+        let cancel = app.buttons.matching(NSPredicate(format: "label == '取消' OR label == 'Cancel'")).firstMatch
+        XCTAssertTrue(cancel.waitForExistence(timeout: 10)); cancel.tap()
+        XCTAssertEqual(selected.label, "odai-video-ui-fixture.mp4")
+        tapRenderedControl("开始4×超分", in: app)
+        let output = app.staticTexts["video-output"]
+        XCTAssertTrue(output.waitForExistence(timeout: 90), "The real Video Demo bridge must deliver output")
+        XCTAssertTrue(output.label.contains("1280×720"))
+        XCTAssertTrue(output.label.contains("48 帧"))
+        XCTAssertTrue(output.label.contains("音轨 1"))
+        tapRenderedControl("分享结果", in: app)
+        let closeShare = app.buttons.matching(NSPredicate(format: "label == '关闭' OR label == 'Close'")).firstMatch
+        XCTAssertTrue(closeShare.waitForExistence(timeout: 10)); closeShare.tap()
+        tapRenderedControl("播放结果", in: app)
+        let closePlayer = app.buttons.matching(NSPredicate(format: "label == '完成' OR label == 'Done' OR label == '关闭' OR label == 'Close'")).firstMatch
+        XCTAssertTrue(closePlayer.waitForExistence(timeout: 10)); closePlayer.tap()
+        tapRenderedControl("清理结果", in: app)
+        XCTAssertFalse(output.exists)
+        XCTAssertEqual(selected.label, "odai-video-ui-fixture.mp4")
+    }
+
+    func testVideoFixtureCancellationReentryAndBackground() throws {
+        try requireVideoFixture()
+        let app = XCUIApplication(); app.launch()
+        openVideoTab(app)
+        selectVideoFixture(in: app)
+        tapRenderedControl("开始4×超分", in: app)
+        tapRenderedControl("取消视频", in: app, edgeInset: 0, settle: false)
+        assertVideoCancelled(app)
+        tapRenderedControl("开始4×超分", in: app)
+        XCTAssertTrue(app.staticTexts["video-output"].waitForExistence(timeout: 90), "Same input must reenter after cancellation drain")
+        tapRenderedControl("开始4×超分", in: app)
+        XCTAssertTrue(app.buttons["video-cancel"].exists)
+        XCUIDevice.shared.press(.home); app.activate()
+        assertVideoCancelled(app)
+        XCTAssertFalse(app.staticTexts["video-output"].exists)
+    }
+
+    private func requireVideoFixture() throws {
+        try XCTSkipUnless(ProcessInfo.processInfo.environment["ODAI_VIDEO_FILE_UI_TEST"] == "1",
+            "Requires the fixed public video + synthetic AAC fixture; see video-bridge-demo.md")
+    }
+    private func openVideoTab(_ app: XCUIApplication) {
+        let tab = app.buttons["video-tab"]
+        XCTAssertTrue(tab.waitForExistence(timeout: 15)); tab.tap()
+    }
+    private func assertVideoCancelled(_ app: XCUIApplication) {
+        let cancelled = XCTNSPredicateExpectation(predicate: NSPredicate(format: "label == 'CANCELLED'"), object: app.staticTexts["video-phase"])
+        XCTAssertEqual(XCTWaiter.wait(for: [cancelled], timeout: 30), .completed)
+        XCTAssertFalse(app.buttons["video-cancel"].exists, "Foreground must not restart the video task")
+    }
+    private func selectVideoFixture(in app: XCUIApplication) {
+        tapRenderedControl("选择视频", in: app)
+        let browse = app.buttons.matching(NSPredicate(format: "label == '浏览' OR label == 'Browse'")).firstMatch
+        if browse.waitForExistence(timeout: 3) { browse.tap() }
+        let local = app.descendants(matching: .any).matching(NSPredicate(format: "label == '在我的 iPhone 上' OR label == '我的iPhone' OR label == 'On My iPhone'")).firstMatch
+        if local.waitForExistence(timeout: 3) { local.tap() }
+        let folder = app.descendants(matching: .any).matching(NSPredicate(format: "label == 'SpeechDemo'")).firstMatch
+        if folder.waitForExistence(timeout: 3) { folder.tap() }
+        let file = app.cells.matching(NSPredicate(format: "label BEGINSWITH 'odai-video-ui-fixture'")).firstMatch
+        XCTAssertTrue(file.waitForExistence(timeout: 10), "Select only the provisioned public fixture")
+        file.tap()
+    }
+
     private func selectFixture(in app: XCUIApplication) {
         tapRenderedControl("选择音频文件", in: app)
         let browse = app.buttons.matching(NSPredicate(format: "label == '浏览' OR label == 'Browse'")).firstMatch

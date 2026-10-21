@@ -1,8 +1,21 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-21（Asia/Shanghai；AppleVideo SDK 首包本地/设备验证完成，独立审查pending；P6实录终态仍待验）
+更新时间：2026-10-21（Asia/Shanghai；Video bridge/Demo 实现与本地门禁完成，Task6 iOS UI/独立审查待补；P6实录终态仍待验）
 
-## AppleVideo 音轨续接检查点（2026-10-21，优先于下方历史入口）
+## Video bridge / Demo 续接检查点（2026-10-21，当前入口）
+
+- 用户最新要求：当前会话直接执行，不再派子代理；按 roadmap 推进，每完成一个阶段更新本交接。不 push/发布/下载/录音/读取私人媒体/修改签名资产，保护文件不覆盖/暂存。
+- Task1–5 已提交：`9bad71d` common契约、`e522c9d` Android adapter、`fd19f2c` iOS adapter/ABI fixture、`aa0e837`共享 VM/视频页、`3b0560c`双端 host与独立工程 opt-in。不要重做。当前 Task6 的UI测试/验证文档及检查点随同次提交；最新HEAD以git为准。
+- 本地证据：common4/4、Android adapter10/10/native client7/7、VM8/8；iOS Binding ABI6/6、Demo adapter+host9/9；Android host3/3。工具83/83（使用既有Ruby3.4 wrapper，默认系统Ruby2.6混用gem失败已保留并纠正）；Apple总门禁/Swift447/447、Android总门禁625tasks（14执行）通过；独立iOS生成工程的signed device/unsigned simulator build通过。原生SDK源码未改，不重打前包九XCFramework。
+- Android TECNO KM9/API35 新 Video smoke：明确unavailable、真实GetContent打开后取消/无输入、后台返回仍IDLE/不启动处理均通过；真实处理/输出及实际选中文件的ActivityResult设备往返仍未验，不能用host3项单测替代。Android宿主不会读取选择的媒体。
+- iOS iPhone16ProMax/iOS27.0.1：固定公开视频+合成AAC已provision到本项目Documents，UI target构建成功；两次runner均在 `Timed out while enabling automation mode.` 处失败，0视频用例通过。首次未完成验收仍是新Demo导入/成功/preserve/播放分享清理/活动取消drain/重入/后台不重启。不要用前包SDK harness设备成功替代新Demo UI。
+- 普通设备包已恢复：`task-6-final-normal-{build,install}.log`成功，Info.plist不含两个sharing key。测试fixture留在本项目Documents；后续仅为显式UI复跑临时用忽略目录plist暴露，结束再次恢复。保护hash与交接固定值一致。
+- 子代理执行/恢复因429/capacity启动前失败，未产生实现或审查；用户改为当前会话执行后仅作者独立步骤自审，不冒称独立APPROVE。旧Foundation/AppleVideo/音轨修复复审缺口保留，无push。
+- 规格/计划：`docs/superpowers/{specs,plans}/2026-10-21-video-bridge-demo*.md`；ledger `.superpowers/sdd/2026-10-21-video-bridge-demo/progress.md`。详细命令、失败与分层证据见[视频 Demo 验证](validation/video-bridge-demo.md)。第一项未完成Task6验收/审查先保留，其他独立可执行入口为P9 VLM SDK foundation设计；不直接把探针当SDK后端。P7 Android/质量/传递函数/最低系统/native export中途取消、P6实录及其他roadmap缺口不关闭。
+
+## 历史检查点（以下入口已被上述 Video bridge/Demo 检查点取代）
+
+## AppleVideo 音轨检查点（2026-10-21，历史）
 
 - `0902e8e`实际音频passthrough、`26dcd0f`默认preserve、`7dcb25d`审查后视频时间线校验。Swift447/447、mux8/8、工具79/79、Apple总门禁与fresh九XCFramework通过。默认preserve支持无音轨或单条零起点/等长/无空白编辑AAC（44.1/48kHz、单/双声道），discard保持显式丢弃；视频固定profile/系统下限不变。
 - 设备suite成功PID19288/run`B06660C7-6E4D-4F13-AAED-F8DC83D2494F`：带AAC的两轮各48帧、第1帧取消无残留、无音轨默认preserve、close/lease/input不变均通过；导出视频PTS/HEVC/BT.709与完整decode通过，AAC压缩payload与输入逐字节相同。native export阶段中途取消尚未单独验，不得冒充。
@@ -10,7 +23,7 @@
 - 音频包独立审查1MEDIUM（导出视频时间线缺校验）已修复并回归，未复审/不声明APPROVE；基础包恢复审查capacity、VT首包恢复审查429，仍pending。保护文件hash未变；无push/下载/录音/发布。
 - 下一本地入口KMP Video bridge/Demo；计划/ledger以`2026-10-21-apple-video-audio`包为最新已完成实现。P6真实录音、P7质量/Android/最低系统及其他roadmap缺口继续保留，不重复已完成切片。
 
-## AppleVideo SDK 续接检查点（2026-10-21，优先于下方历史入口）
+## AppleVideo SDK 检查点（2026-10-21，历史）
 
 - 独立 `ODAIKitAppleVideo` Task1–3 已提交：`4e77325` workspace/lease、`5c6ba01` backend协调、`e996d5d`真实VT引擎；`51d98bf`修复取消后晚到错误改变终态，回归RED→GREEN，Swift438/438通过。
 - 当前首包仅支持非模拟器iOS26+、模型ready、固定320×180/24fps/1…48帧/BT.709 SDR、4×和显式discard；基础iOS15/macOS12不变，无模型下载。音轨preserve默认请求明确拒绝。
@@ -19,7 +32,7 @@
 - 计划/规格 `docs/superpowers/plans/2026-10-21-apple-video-backend.md` 与同名design，ledger `.superpowers/sdd/2026-10-21-apple-video-backend/progress.md`。独立reviewer容量失败，无APPROVE，保持pending；不push。
 - 下一本地工作包：有界音轨preserve，随后KMP/Demo接入；先以新包规格/测试明确音频兼容、同步、取消清理边界。P7质量/传递函数/Android/最低系统仍独立，P6不自动录音。两个受保护文件hash保持不变，不暂存或覆盖。
 
-## P7 续接检查点（2026-10-21，优先于下方语音历史记录）
+## P7 检查点（2026-10-21，历史）
 
 - 已继续 roadmap 的独立 Video SDK Foundation，未重做语音 Tasks1–5。提交 `17a330e` Swift契约、`fd2e537` Swift client、`112634d` Android模块；最新 HEAD 以 git 为准。
 - 计划/规格：`docs/superpowers/plans/2026-10-21-video-sdk-foundation.md`、同名 design；ledger `.superpowers/sdd/2026-10-21-video-sdk-foundation/progress.md`。Task1–4本地实施/分发已验证，独立审查因服务容量失败待恢复。后续入口是独立 Apple VideoToolbox 后端包，不把探针直接当 SDK 后端。
@@ -27,7 +40,7 @@
 - 仍没有真实视频SDK处理器、KMP/Demo视频流、Android模型或新质量/最低系统验收。P7保持未完成。P6中文实录终态/取消/重入及修复独立审查、P9/P10/P11缺口继续保留；没有自动录音、资源下载或远端push。
 - 两个受保护文件状态/hash保持一致，仍不得暂存/覆盖。继续从新 ledger 的首个未完成项恢复；不要按下方历史“当前入口”重复旧工作。
 
-## 当前恢复检查点（2026-10-21，优先于后面的历史记录）
+## Speech 恢复检查点（2026-10-21，历史）
 
 ### 本次接手后的更新（优先于下方上午记录）
 
