@@ -15,6 +15,9 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
     #if ODAI_SPEECH_DEMO
     private(set) var speechHost: SpeechHost?
     #endif
+    #if ODAI_VIDEO_DEMO
+    private(set) var videoHost: VideoHost?
+    #endif
     private let identityProbeFactory: ((CGImage) -> IdentityProbeReference)?
     private var latestIdentityCameraFrame: CameraFrame?
     private var livenessCapture: Task<Void, Never>?
@@ -43,6 +46,12 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
         self.identityModel = IdentityViewModel(bridge: identityBridge)
         self.identityProbeFactory = identityProbeFactory
         super.init()
+        #if ODAI_VIDEO_DEMO
+        MainActor.assumeIsolated {
+            do { videoHost = try VideoHost.make() }
+            catch { message = "视频模块初始化失败" }
+        }
+        #endif
         #if ODAI_SPEECH_DEMO
         MainActor.assumeIsolated {
             do { speechHost = try SpeechHost.make() }
@@ -70,8 +79,16 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
         NotificationCenter.default.addObserver(self, selector: #selector(foreground), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(memoryWarning), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
     }
-    @objc private func background() { livenessCapture?.cancel(); identityModel.cancel(); cameraLifecycle.pause(); pauseCamera(); photoSubmission.cancel(); model.cancel() }
+    @objc private func background() {
+        livenessCapture?.cancel(); identityModel.cancel(); cameraLifecycle.pause(); pauseCamera(); photoSubmission.cancel(); model.cancel()
+        #if ODAI_VIDEO_DEMO
+        Task { @MainActor [weak self] in self?.videoHost?.background() }
+        #endif
+    }
     @objc private func foreground() {
+        #if ODAI_VIDEO_DEMO
+        Task { @MainActor [weak self] in self?.videoHost?.onForeground() }
+        #endif
         #if ODAI_SPEECH_DEMO
         Task { @MainActor [weak self] in self?.speechHost?.onForeground() }
         #endif
@@ -280,6 +297,10 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
     }
     deinit {
         NotificationCenter.default.removeObserver(self)
+        #if ODAI_VIDEO_DEMO
+        let video = videoHost
+        Task { @MainActor in video?.close() }
+        #endif
         #if ODAI_SPEECH_DEMO
         let speech = speechHost
         Task { @MainActor in speech?.close() }

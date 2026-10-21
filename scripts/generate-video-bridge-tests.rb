@@ -11,6 +11,11 @@ abort('Unsupported video bridge KMP module') unless framework_root
 framework = File.join(root, framework_root, "build/bin/iosSimulatorArm64/debugFramework/#{binding_module}.framework")
 sources = ['kmp-binding/apple/IOSVideoBridge.swift', 'kmp-binding/apple/IOSVideoInput.swift',
            'probes/ios-video-bridge/IOSVideoBridgeTests.swift']
+if binding_module == 'ODAIKitDemo'
+  sources += ['demo/iosApp/VideoHost.swift', 'demo/iosApp/VideoInputStore.swift', 'demo/iosApp/VideoFilePicker.swift',
+              'demo/iosApp/SpeechInputStore.swift', 'kmp-binding/apple/IOSSpeechAudioInput.swift',
+              'probes/ios-video-bridge/VideoHostTests.swift']
+end
 ([framework, File.join(root, 'apple')] + sources.map { |s| File.join(root, s) }).each do |path|
   abort("Missing input: #{path}") unless File.exist?(path)
 end
@@ -21,7 +26,9 @@ target = project.new_target(:unit_test_bundle, 'VideoBridgeTests', :ios, '15.0')
 package = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
 package.relative_path = File.join(root, 'apple')
 project.root_object.package_references << package
-['ODAIKitVideo', 'ODAIKitCore'].each do |name|
+products = ['ODAIKitVideo', 'ODAIKitCore']
+products << 'ODAIKitAppleVideo' if binding_module == 'ODAIKitDemo'
+products.each do |name|
   dependency = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
   dependency.product_name = name
   dependency.package = package

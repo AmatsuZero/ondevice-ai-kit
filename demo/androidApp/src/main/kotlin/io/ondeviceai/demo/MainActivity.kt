@@ -51,6 +51,13 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private lateinit var bridge:AndroidFaceBridge
     private lateinit var model:FaceViewModel
     private lateinit var speechHost: SpeechHost
+    private lateinit var videoHost: VideoHost
+    private var videoPickerReply: ((String?, String?) -> Unit)? = null
+    private val videoPicker = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        val reply = videoPickerReply; videoPickerReply = null
+        // No Android backend is registered: do not read or copy media just to report unavailable.
+        reply?.invoke(uri?.let { UUID.randomUUID().toString() }, uri?.let { "已选择的视频（Android 后端待接入）" })
+    }
     private val speechPermission: androidx.activity.result.ActivityResultLauncher<String> = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         speechPermissionGate.complete(granted)
     }
@@ -77,6 +84,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
         bridge=AndroidFaceBridge(detector,lifecycleScope){result=it};model=FaceViewModel(bridge)
+        videoHost = VideoHost(selectFile = { reply -> videoPickerReply = reply; videoPicker.launch("video/*") })
         speechHost = SpeechHost(lifecycleScope,
             createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },
             hasPermission = { Build.VERSION.SDK_INT < 31 || ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED },
@@ -97,7 +105,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                         }
                     }
                 }
-                FaceScreen(model,this@MainActivity,identityModel,this@MainActivity,speechHost.model,speechHost)
+                FaceScreen(model,this@MainActivity,identityModel,this@MainActivity,speechHost.model,speechHost,videoHost.model,videoHost)
                 message?.let{Text(it)}
                 report?.let{json->TextButton(onClick={exportReport(json)}){Text("导出 Benchmark JSON")}}
             }}
@@ -188,7 +196,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         }
     }
     override fun exportReport(json:String){report=json;reportPicker.launch("odai-benchmark.json")}
-    override fun onStart(){super.onStart();if(::speechHost.isInitialized)speechHost.onForeground()}
-    override fun onStop(){if(::speechHost.isInitialized)speechHost.onBackground();super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
-    override fun onDestroy(){if(::speechHost.isInitialized)speechHost.close();speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
+    override fun onStart(){if(::videoHost.isInitialized)videoHost.foreground();super.onStart();if(::speechHost.isInitialized)speechHost.onForeground()}
+    override fun onStop(){if(::speechHost.isInitialized)speechHost.onBackground();if(::videoHost.isInitialized)videoHost.background(preservePicker=videoPickerReply!=null);super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
+    override fun onDestroy(){if(::speechHost.isInitialized)speechHost.close();if(::videoHost.isInitialized)videoHost.close();videoPickerReply=null;speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
 }

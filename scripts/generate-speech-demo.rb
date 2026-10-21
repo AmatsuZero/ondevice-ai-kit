@@ -8,6 +8,11 @@ abort('Refusing to replace existing speech Demo output') if File.exist?(director
 sources = %w[OnDeviceAIDemoApp DemoController IOSFaceBridge CameraSource CameraLifecycle PhotoSubmission
              SpeechHost SpeechFilePicker SpeechInputStore SpeechAudioSession].map { |name| "demo/iosApp/#{name}.swift" }
 sources += ['kmp-binding/apple/IOSSpeechBridge.swift', 'kmp-binding/apple/IOSSpeechAudioInput.swift']
+video_demo = ENV['ODAI_VIDEO_DEMO'] == '1'
+if video_demo
+  sources += ['demo/iosApp/VideoHost.swift', 'demo/iosApp/VideoInputStore.swift', 'demo/iosApp/VideoFilePicker.swift',
+              'kmp-binding/apple/IOSVideoBridge.swift', 'kmp-binding/apple/IOSVideoInput.swift']
+end
 frameworks = %w[iosSimulatorArm64 iosArm64].map do |platform|
   File.join(root, "demo/shared/build/bin/#{platform}/debugFramework/ODAIKitDemo.framework")
 end
@@ -22,7 +27,9 @@ target = project.new_target(:application, 'SpeechDemo', :ios, '15.0')
 package = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
 package.relative_path = File.join(root, 'apple')
 project.root_object.package_references << package
-%w[ODAIKitCore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech].each do |name|
+products = %w[ODAIKitCore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech]
+products += %w[ODAIKitVideo ODAIKitAppleVideo] if video_demo
+products.each do |name|
   dependency = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
   dependency.product_name = name
   dependency.package = package
@@ -37,7 +44,7 @@ target.frameworks_build_phase.add_file_reference(project.main_group.new_file(Fil
 target.build_configurations.each do |config|
   config.build_settings.merge!({
     'PRODUCT_BUNDLE_IDENTIFIER' => 'io.ondeviceai.ondeviceaidemo',
-    'SWIFT_VERSION' => '5.0', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO',
+    'SWIFT_VERSION' => '5.0', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO' + (video_demo ? ' ODAI_VIDEO_DEMO' : ''),
     'GENERATE_INFOPLIST_FILE' => 'YES', 'INFOPLIST_FILE' => File.join(root, 'demo/iosApp/Info.plist'),
     'INFOPLIST_KEY_UILaunchScreen_Generation' => 'YES', 'INFOPLIST_KEY_UIApplicationSceneManifest_Generation' => 'YES',
     'INFOPLIST_KEY_NSCameraUsageDescription' => '在设备本地检测人脸，不上传图像。',
