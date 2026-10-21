@@ -43,7 +43,7 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
         { model.selectBackend(SpeechBridgeCapability.ASR, it) }, { model.refreshBackends(SpeechBridgeCapability.ASR) })
     val inputs = state.asr.backends.flatMap { it.supportedInputs }.toSet()
     if (SpeechBridgeInputKind.AUDIO_FILE in inputs) {
-        Text("文件识别 · Apple 系统后端当前语言 en-US")
+        Text("文件识别 · 按上方请求语言识别")
         Text(state.audioDisplayName ?: "尚未选择音频", Modifier.testTag("speech-audio-name"))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = { actions?.selectAudioFile() }, enabled = state.controlsEnabled && actions != null,
@@ -55,7 +55,7 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
             modifier = Modifier.testTag("speech-recognize-file")) { Text("识别音频文件") }
     }
     if (SpeechBridgeInputKind.MICROPHONE in inputs) {
-        Text("麦克风识别 · 开始后会采集声音，请在安静环境使用；需要录音权限和本机语言资源")
+        Text("麦克风识别 · 请使用 $locale 朗读；开始后会采集声音，需要录音权限和本机语言资源")
         Button(onClick = { model.recognize(SpeechBridgeAsrRequest(locale, SpeechBridgeInput.Microphone)) },
             enabled = state.controlsEnabled && locale.isNotBlank(), modifier = Modifier.testTag("speech-recognize-mic")) { Text("开始麦克风 ASR") }
     }

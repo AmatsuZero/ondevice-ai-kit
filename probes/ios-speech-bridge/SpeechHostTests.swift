@@ -1,5 +1,7 @@
 import Foundation
 import XCTest
+import ODAIKitCore
+import ODAIKitSpeech
 #if ODAI_DEMO_BINDING
 import ODAIKitDemo
 #else
@@ -10,6 +12,24 @@ import ODAIKitBinding
 final class SpeechHostTests: XCTestCase {
     private var microphoneRequest: SpeechBridgeAsrRequest {
         .init(locale: "en-US", input: SpeechBridgeInputMicrophone.shared)
+    }
+
+    func testLocaleRouterBuildsBackendForRequestedLocale() async throws {
+        let recorder = HostLocaleBackendRecorder()
+        let router = try SpeechLocaleRoutingBackend(defaultLocale: "en-US") { locale in
+            recorder.make(locale: locale)
+        }
+        let request = try SpeechRecognitionRequest(
+            locale: "zh-CN", audioFile: URL(fileURLWithPath: "/tmp/locale-routing-fixture.caf"))
+
+        let result = try await router.recognize(request)
+
+        XCTAssertEqual(result.transcript, request.locale)
+        XCTAssertEqual(recorder.locales, [
+            try SpeechRecognitionRequest(locale: "en-US", audioFile: request.audioFile).locale,
+            request.locale,
+        ])
+        await router.close()
     }
 
     func testCloseWhilePermissionPendingDoesNotRetainHost() throws {
@@ -175,6 +195,37 @@ final class SpeechHostTests: XCTestCase {
         XCTAssertEqual(f.host.model.state.failure?.code, .invalidInput)
         XCTAssertEqual(f.host.model.state.failure?.reason, "audioImportFailed")
     }
+}
+
+@MainActor
+private final class HostLocaleBackendRecorder {
+    private(set) var locales: [String] = []
+    func make(locale: String) -> any SpeechMicrophoneRecognitionBackend {
+        locales.append(locale)
+        return HostLocaleBackend(locale: locale)
+    }
+}
+
+@MainActor
+private final class HostLocaleBackend: SpeechMicrophoneRecognitionBackend {
+    nonisolated let backendId = "apple.speech.recognizer"
+    nonisolated let capability: SpeechCapability = .asr
+    nonisolated let supportedInputs: [SpeechRecognitionInputKind] = [.audioFile, .microphone]
+    private let locale: String
+    init(locale: String) { self.locale = locale }
+    func availability() async -> CapabilityAvailability {
+        .init(status: .available, backendId: backendId, minOS: "15.0", offline: true)
+    }
+    func recognize(_ request: SpeechRecognitionRequest) async throws -> SpeechRecognitionResult {
+        guard request.locale == locale else { throw KitError.invalidInput("locale mismatch") }
+        return .init(backendId: backendId, transcript: locale)
+    }
+    func startMicrophone(_ request: SpeechMicrophoneRecognitionRequest) async throws
+        -> any SpeechMicrophoneRecognitionTask {
+        throw SpeechRecognitionInputError.unsupportedInput
+    }
+    func drain() async {}
+    func close() async {}
 }
 
 @MainActor

@@ -1,10 +1,13 @@
 import Foundation
 import ODAIKitDemo
+#if ODAI_SPEECH_DEMO || ODAI_DEMO_BINDING
+import ODAIKitCore
+import ODAIKitSpeech
+#endif
 #if ODAI_SPEECH_DEMO
 import UIKit
 import Speech
 import AVFAudio
-import ODAIKitSpeech
 import ODAIKitAppleSpeech
 #endif
 
@@ -38,7 +41,10 @@ final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency 
         let inputs = try SpeechInputStore()
         do {
             let ttsBackend = AppleAVSpeechBackend()
-            let asrBackend = try AppleSpeechRecognizerBackend(locale: "en-US", audioSessionProvider: DemoSpeechAudioSessionProvider())
+            let audioSessionProvider = DemoSpeechAudioSessionProvider()
+            let asrBackend = try SpeechLocaleRoutingBackend(defaultLocale: "en-US") { locale in
+                try AppleSpeechRecognizerBackend(locale: locale, audioSessionProvider: audioSessionProvider)
+            }
             let bridge = IOSSpeechBridge(
                 tts: try SpeechSynthesisClient(defaultBackendId: ttsBackend.backendId, backends: [ttsBackend]),
                 asr: try SpeechRecognitionClient(defaultBackendId: asrBackend.backendId, backends: [asrBackend]), inputs: inputs)
@@ -156,6 +162,61 @@ final class SpeechHost: NSObject, @preconcurrency SpeechBridge, @preconcurrency 
         SpeechBridgeFailure(code: code, reason: reason, domain: nil, platformCode: nil)
     }
 }
+
+/// One stable Apple backend ID with request-scoped recognizer languages. The bridge
+/// keeps the shared audio slot; this owner keeps every locale backend until close.
+#if ODAI_SPEECH_DEMO || ODAI_DEMO_BINDING
+@MainActor
+final class SpeechLocaleRoutingBackend: SpeechMicrophoneRecognitionBackend {
+    nonisolated let backendId = "apple.speech.recognizer"
+    nonisolated let capability: SpeechCapability = .asr
+    nonisolated let supportedInputs: [SpeechRecognitionInputKind] = [.audioFile, .microphone]
+
+    private let defaultLocale: String
+    private let makeBackend: @MainActor (String) throws -> any SpeechMicrophoneRecognitionBackend
+    private var backends: [String: any SpeechMicrophoneRecognitionBackend]
+    private var closed = false
+
+    init(defaultLocale: String,
+         makeBackend: @escaping @MainActor (String) throws -> any SpeechMicrophoneRecognitionBackend) throws {
+        let canonical = try SpeechMicrophoneRecognitionRequest(locale: defaultLocale).locale
+        self.defaultLocale = canonical
+        self.makeBackend = makeBackend
+        self.backends = [canonical: try makeBackend(canonical)]
+    }
+
+    func availability() async -> CapabilityAvailability {
+        await backends[defaultLocale]!.availability()
+    }
+
+    func recognize(_ request: SpeechRecognitionRequest) async throws -> SpeechRecognitionResult {
+        try await backend(for: request.locale).recognize(request)
+    }
+
+    func startMicrophone(_ request: SpeechMicrophoneRecognitionRequest) async throws
+        -> any SpeechMicrophoneRecognitionTask {
+        try await backend(for: request.locale).startMicrophone(request)
+    }
+
+    func drain() async {
+        for backend in backends.values { await backend.drain() }
+    }
+
+    func close() async {
+        guard !closed else { return }
+        closed = true
+        for backend in backends.values { await backend.close() }
+    }
+
+    private func backend(for locale: String) throws -> any SpeechMicrophoneRecognitionBackend {
+        guard !closed else { throw KitError.closed }
+        if let backend = backends[locale] { return backend }
+        let backend = try makeBackend(locale)
+        backends[locale] = backend
+        return backend
+    }
+}
+#endif
 
 /// The controller owns the host; the Kotlin model must not retain its Swift owner.
 @MainActor

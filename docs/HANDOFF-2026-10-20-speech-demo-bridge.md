@@ -15,8 +15,9 @@
 - 诊断工程 `artifacts/verification/microphone-reentry-diagnostic-20261021/` 内含 bridge/session副本、`apple-diagnostic/`和合成探针，均不得提交。最初工程引用替换未命中相对路径导致诊断未生效，已用xcodeproj真实引用修正并确认 `ODAI_MIC_DIAGNOSTIC ready`；可靠现场日志为 `task-6-reentry-buffer-events.log`。
 - 结束自动对照后恢复普通生成工程 `artifacts/verification/microphone-live-fix-20261021/`（原生产package，不含诊断源码、合成输入或自动识别）。恢复构建/安装/启动日志 `task-6-no-speech-normal-device-{build,install,launch}.log`，状态以文件核对。原七XCFramework `artifacts/P6/microphone-20261021/` 早于两次修复，尚未重新分发。
 - 两个受保护文件及hash见下方，未覆盖/暂存/提交。没有push、force-push、语言资源安装、签名账户资产/网络配置变更。iPhone UDID `00008140-0008703436D3001C`，沿用team `4X996UV8LC`，bundle `io.ondeviceai.ondeviceaidemo`。
+- 用户确认失败轮次使用中文或中英混合；此前 Demo Host 却将 Apple 识别器固定为 `en-US`。现已加入 Demo 内部 `SpeechLocaleRoutingBackend`：保持稳定 `apple.speech.recognizer` ID，按请求 locale 缓存 Apple backend，共用同一个 `DemoSpeechAudioSessionProvider`，不回退语言；共享 UI 文案改为按请求语言。新增 locale 路由回归后生成桥接/Host/Session 测试 **36/36** 通过（RED 日志 `task-6-locale-router-red.log`，GREEN `task-6-locale-router-green-final.log`），shared framework/allTests 成功（`task-6-locale-shared.log`），真机包构建成功并安装（`task-6-locale-device-build.log` / `task-6-locale-device-install.log`）。
 
-下一步：先读取最新git/ledger和普通包恢复日志；用户尚需回答较长录音是否实际完整朗读英文固定句。只有现场输入/操作条件明确后继续受控麦克风；可以追加汇总音量指标，不保存录音/转写，不自动启动现场采集。真实取消、重入、后台/前台不重启仍未验收；模型容量恢复后追加修复独立review，分发产物需重打包。iOS15、Android API26/ASR MISSING_ASSETS、自然质量与断网、P7/P9/P10/P11缺口保留，不以合成对照关闭。
+下一步：用户可在已安装的 locale-router 包中把页面语言设为 `zh-CN`，主动朗读固定句并报告终态；不要发送转写文本。忽略目录中文诊断包已确认 `zh-CN` recognizer `available=true onDevice=true`（`task-6-zh-cn-events.log`），但尚无现场中文朗读终态。真实取消、重入、后台/前台不重启仍未验收；语言路由修复尚未重打包 XCFramework，独立复审仍待模型容量恢复。iOS15、Android API26/ASR MISSING_ASSETS、自然质量与断网、P7/P9/P10/P11缺口保留，不以合成对照关闭。
 
 以下为旧 Speech Demo 包的历史交接，旧“当前入口/HEAD”不覆盖本检查点；旧Task7追加审查和原始证据仍有效。
 
