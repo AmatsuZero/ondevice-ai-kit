@@ -4,7 +4,7 @@
 
 ## 当前恢复检查点（2026-10-21，优先于后面的历史记录）
 
-工作树 `.worktrees/foundation` / `feat/sdk-foundation`，当前 HEAD `09f5f6e fix: route iOS Demo speech by requested locale`；路由修复 `29b388d`、失败复测记录 `83d5443`、1110→NO_RESULT 修复 `027c7ad` 均已本地提交。麦克风 Tasks1–5 已完成，不重做；Task6、P6 与整个 roadmap **未完成**。计划 `docs/superpowers/plans/2026-10-20-ios-microphone-asr.md`，ledger `.superpowers/sdd/2026-10-20-ios-microphone-asr/progress.md`。
+工作树 `.worktrees/foundation` / `feat/sdk-foundation`，语言路由实现提交 `09f5f6e fix: route iOS Demo speech by requested locale`；路由修复 `29b388d`、失败复测记录 `83d5443`、1110→NO_RESULT 修复 `027c7ad` 均已本地提交。恢复时以 `git log -2 --oneline` 核对最新 HEAD。麦克风 Tasks1–5 已完成，不重做；Task6、P6 与整个 roadmap **未完成**。计划 `docs/superpowers/plans/2026-10-20-ios-microphone-asr.md`，ledger `.superpowers/sdd/2026-10-20-ios-microphone-asr/progress.md`。
 
 - 原 Task1–5、旧 Task7 独立审查已 APPROVE；原分发/Android/KMP/host门禁见[验证记录](validation/ios-microphone-asr.md)。路由及新的 1110 修复独立审查仍因模型容量不足未执行，没有新的 APPROVE；不推送远端。
 - 首次真机 `FAILED PLATFORM` 两次均为 categoryChange(reason3)被无条件判失效。`29b388d` 仅放过与启动健康快照完全一致的 categoryChange，其余仍失效。新普通包安装后用户回报一次 `SUCCEEDED ASR 完成`。
