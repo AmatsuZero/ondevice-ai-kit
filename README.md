@@ -4,9 +4,9 @@
 
 分阶段状态与下一工作包见 [ROADMAP](docs/ROADMAP.md)。当前为开发快照，尚未完成独立代码审查和真机验收。
 
-当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；可选的 Apple AVSpeech TTS、Apple 文件 ASR、Android 系统 TTS，以及 Android on-device ASR 模块；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。
+当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；可选的 Apple AVSpeech TTS、Apple 文件/麦克风 ASR、Android 系统 TTS，以及 Android on-device ASR 模块；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。
 
-身份模块现已提供独立原生契约、加密存储/删除、1:1/1:N 引擎、活体会话、KMP bridge 与 Demo 控件；生产身份模型、PAD 后端和校准尚未启用。视频超分和 VLM 目前仍是独立探针；语音已有双端 KMP bridge、共享页面和原生 host，iOS 使用独立生成工程。iOS ASR 当前仅本地文件、强制 on-device；iOS 麦克风和第三方云端后端未交付。现代真机的双端 TTS 与 iOS 文件 ASR Demo 闭环已通过；Android ASR 仍缺资源，最低系统/自然质量与追加独立审查待补，见[语音 Demo 验证](docs/validation/speech-demo-bridge.md)。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
+身份模块现已提供独立原生契约、加密存储/删除、1:1/1:N 引擎、活体会话、KMP bridge 与 Demo 控件；生产身份模型、PAD 后端和校准尚未启用。视频超分和 VLM 目前仍是独立探针；语音已有双端 KMP bridge、共享页面和原生 host，iOS 使用独立生成工程。iOS ASR 已实现文件与可主动结束输入的麦克风路径，均强制 on-device；麦克风真机录音尚未验收，见[麦克风验证](docs/validation/ios-microphone-asr.md)。第三方云端后端未交付。现代真机的双端 TTS 与 iOS 文件 ASR Demo 闭环已通过；Android ASR 仍缺资源，最低系统/自然质量与追加独立审查待补，见[语音 Demo 验证](docs/validation/speech-demo-bridge.md)。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
 
 当前 Demo 提供人脸检测与独立“身份与活体”控件；身份默认显示 UNVERIFIED，宿主注入真实授权、策略与后端后才可运行。后续 SDK/Demo 能力和调研→探针→模块接入的范围见 [功能路线图](docs/ROADMAP.md#当前范围与后续功能)。iOS15 与 Android 真机验收已按用户安排登记为 [等待设备 TODO](docs/ROADMAP.md#等待设备的-todo)，待设备提供后恢复。
 
@@ -38,7 +38,7 @@ ODAI_SPEECH_DEMO_DIR=artifacts/SpeechDemo-new ruby scripts/generate-speech-demo.
 open artifacts/SpeechDemo-new/SpeechDemo.xcodeproj
 ```
 
-生成器可用 `ODAI_DEVELOPMENT_TEAM` 传入已有 team；不创建签名账户/资产。新工程包含实际 App UI 测试，旧工程仍保留旧入口。后端列表不等于语言资源就绪；取消按钮会等待 native drain 后才恢复操作。当前真机证据、Android 资源与审查缺口、完整测试命令见[验证记录](docs/validation/speech-demo-bridge.md)。
+生成器可用 `ODAI_DEVELOPMENT_TEAM` 传入已有 team；不创建签名账户/资产。新工程包含实际 App UI 测试，旧工程仍保留旧入口。后端列表不等于语言资源就绪；取消按钮会等待 native drain 后才恢复操作。生成的 iOS 工程支持文件/麦克风输入：文件只请求 Speech 权限，麦克风依次请求 Speech 和录音权限；“结束录音并识别”等待最终结果，“取消”丢弃结果。宿主显式提供独占 audio-session lease，采集结束并 drain 后恢复 category/mode/options。当前真机证据、Android 资源与审查缺口见[语音 Demo 验证](docs/validation/speech-demo-bridge.md)和[麦克风验证](docs/validation/ios-microphone-asr.md)。
 
 ## 本地分发
 
@@ -59,7 +59,7 @@ ODAI_ARTIFACTS_DIR=artifacts/P6/current/apple ruby scripts/generate-binary-consu
 xcodebuild -project artifacts/P6/current/apple/SpeechBinaryConsumer/SpeechBinaryConsumer.xcodeproj -scheme SpeechBinaryConsumer -destination 'generic/platform=iOS Simulator' -derivedDataPath artifacts/P6/current/apple/SpeechBinaryBuild CODE_SIGNING_ALLOWED=NO build
 ```
 
-Maven 坐标为 `io.ondeviceai:speech:0.1.0-SNAPSHOT`、`io.ondeviceai:backend-system-tts:0.1.0-SNAPSHOT` 和 `io.ondeviceai:backend-system-asr:0.1.0-SNAPSHOT`；人脸坐标仍见上方命令。Swift products 是 `ODAIKitSpeech`（契约）和 `ODAIKitAppleSpeech`（Apple TTS 与文件 ASR 后端）。XCFramework 位于被忽略的 `artifacts/xcframeworks` 或指定的 `ODAI_ARTIFACTS_DIR`，含 iOS arm64 与 simulator arm64。打包脚本拒绝覆盖既有 XCFramework；重新打包前使用新的输出目录。当前只完成本地分发和独立消费者编译，没有发布远端制品或签名版本。
+Maven 坐标为 `io.ondeviceai:speech:0.1.0-SNAPSHOT`、`io.ondeviceai:backend-system-tts:0.1.0-SNAPSHOT` 和 `io.ondeviceai:backend-system-asr:0.1.0-SNAPSHOT`；人脸坐标仍见上方命令。Swift products 是 `ODAIKitSpeech`（契约）和 `ODAIKitAppleSpeech`（Apple TTS 与文件/麦克风 ASR 后端）。XCFramework 位于被忽略的 `artifacts/xcframeworks` 或指定的 `ODAI_ARTIFACTS_DIR`，含 iOS arm64 与 simulator arm64。打包脚本拒绝覆盖既有 XCFramework；重新打包前使用新的输出目录。当前只完成本地分发和独立消费者编译，没有发布远端制品或签名版本。
 
 身份模块的本地分发与独立消费者：
 

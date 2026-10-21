@@ -165,17 +165,17 @@ iOS `SpeechHost` 持有 inputs、专用 clients/adapter、SpeechViewModel 和权
 
 **Interfaces:** Consumes Tasks 1–6。保留每次验证 SDK commit/设备/OS/backend/状态与日志路径；不记录自然转写文本或音频。UI用例通过实际 App 语音入口，不把旧直接探针当 Demo 验收。自动化固定文本/合成 fixture 不替代自然语音质量。
 
-- [ ] **Step 1 — 写交互 RED。** 两端用例断言语音页入口、独立后端列表、TTS 完成/活动取消/重入；iOS 文件选择取消与已导入输入保留、文件 ASR 转写/取消/再运行；Android mic拒权不启动、授权后真实转写或明确 MISSING_ASSETS，不能把 unavailable 当转写通过。增加后台取消后回前台不自动开始的可复核步骤。
+- [x] **Step 1 — 写交互 RED。** 两端用例断言语音页入口、独立后端列表、TTS 完成/活动取消/重入；iOS 文件选择取消与已导入输入保留、文件 ASR 转写/取消/再运行；Android mic拒权不启动、授权后真实转写或明确 MISSING_ASSETS，不能把 unavailable 当转写通过。增加后台取消后回前台不自动开始的可复核步骤。
   ```swift
   // 生成工程的 UI 测试通过稳定 accessibility ID 观测状态，不读取转写内容。
   XCTAssertTrue(app.buttons["speech-tab"].waitForExistence(timeout: 10))
   XCTAssertTrue(app.staticTexts["speech-cancelled"].waitForExistence(timeout: 30))
   ```
 
-- [ ] **Step 2 — 运行并保存初始结果。** iPhone `00008140-0008703436D3001C`、Android `15365375C9007986` 先检查在线状态，再用生成项目 UI test/APK instrumentation；需要真人权限点击或录音输入时只询问该动作，同时继续本地 gate。缺资源/设备记录 unverified/unavailable。
-- [ ] **Step 3 — 修复真实失败。** 只修本包实际问题，每项保留可复现 RED→GREEN；不自动装资源、不打开网络识别、不调整保护工程。host/adapter/VM问题回到所属 Task 测试锁定。
-- [ ] **Step 4 — 最终本地与裁剪回归。** `rtk proxy sh scripts/verify-apple.sh`、`rtk proxy sh scripts/verify-android.sh`、`rtk proxy ./gradlew :kmp-binding:allTests :demo:shared:allTests --console=plain`、`rtk proxy env RUBY=/Users/daubert/.rvm/wrappers/ruby-3.4.11/ruby python3 -m unittest discover -s tools/tests -v`；fresh Apple七产品 package、原生 Identity/Face/Speech消费者及 Maven published消费者依赖检查沿用现有脚本。检查无新增 KMP/Compose/system backend 进入原生 contract-only 产品；测试输出逐份读 XML/xcresult，hash 与 git diff --check 通过。
-- [ ] **Step 5 — 独立整包审查、提交与下一入口。** 审查 Task 1 起点到最终实现 HEAD，处理 Critical/Important、保留 Minor。文档记录通过与缺口及生成/打开命令，提交 `test: validate speech Demo lifecycle and module isolation`。P6仍不标完成，下一工作包为 iOS 麦克风 ASR 的独立设计，同时继续 Android 资源/真实转写与质量验证；P10/其他 roadmap 项不因本包完成而关闭。
+- [x] **Step 2 — 运行并保存初始结果。** iPhone `00008140-0008703436D3001C`、Android `15365375C9007986` 先检查在线状态，再用生成项目 UI test/APK instrumentation；需要真人权限点击或录音输入时只询问该动作，同时继续本地 gate。缺资源/设备记录 unverified/unavailable。
+- [x] **Step 3 — 修复真实失败。** 只修本包实际问题，每项保留可复现 RED→GREEN；不自动装资源、不打开网络识别、不调整保护工程。host/adapter/VM问题回到所属 Task 测试锁定。
+- [x] **Step 4 — 最终本地与裁剪回归。** `rtk proxy sh scripts/verify-apple.sh`、`rtk proxy sh scripts/verify-android.sh`、`rtk proxy ./gradlew :kmp-binding:allTests :demo:shared:allTests --console=plain`、`rtk proxy env RUBY=/Users/daubert/.rvm/wrappers/ruby-3.4.11/ruby python3 -m unittest discover -s tools/tests -v`；fresh Apple七产品 package、原生 Identity/Face/Speech消费者及 Maven published消费者依赖检查沿用现有脚本。检查无新增 KMP/Compose/system backend 进入原生 contract-only 产品；测试输出逐份读 XML/xcresult，hash 与 git diff --check 通过。
+- [x] **Step 5 — 独立整包审查、提交与下一入口。** 审查 Task 1 起点到最终实现 HEAD，处理 Critical/Important、保留 Minor。文档记录通过与缺口及生成/打开命令，提交 `test: validate speech Demo lifecycle and module isolation`。P6仍不标完成，下一工作包为 iOS 麦克风 ASR 的独立设计，同时继续 Android 资源/真实转写与质量验证；P10/其他 roadmap 项不因本包完成而关闭。
 
 ## 计划自审
 

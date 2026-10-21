@@ -1,6 +1,21 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-20 15:09（Asia/Shanghai；恢复回归通过，追加独立审查仍被模型容量阻挡）
+更新时间：2026-10-21（Asia/Shanghai；麦克风实现已提交，本地门禁/分发通过；各语音独立审查通过；真实录音待补）
+
+## 当前恢复检查点（2026-10-21，优先于后面的历史记录）
+
+工作树仍为 `.worktrees/foundation` / `feat/sdk-foundation`。当前实现 HEAD `d60867c`，麦克风计划 `docs/superpowers/plans/2026-10-20-ios-microphone-asr.md`，设计同名 specs 文件；ledger `.superpowers/sdd/2026-10-20-ios-microphone-asr/progress.md`。**不要从旧 Task4 或麦克风 Task1 重做。**
+
+- 麦克风已提交：Task1契约 `5be8a76`，Task2 client `0e43f99`，Task3 capture/lease `206a601`，Task4 bridge/VM `98d22a7`，回滚错误传播修复 `780e529`，Task5 host/session/generator `d60867c`。
+- `verify-apple` 最新通过，Swift412项（Speech72）、分发11项及后续检查成功；首次失败为系统Ruby2.6加载3.4 gems，固定 `RUBY=/Users/daubert/.rvm/wrappers/ruby-3.4.11/ruby` 后通过。Android gate569tasks/11executed；工具77/77、新生成桥接/Host/session35/35；双ABI/VM/独立App simulator/unsigned device/旧App构建已通过。详见[麦克风验证](validation/ios-microphone-asr.md)。
+- fresh七XCFramework `artifacts/P6/microphone-20261021/` 已完成；Speech binary consumer build成功，仅嵌Core/Speech/AppleSpeech；双slice Core/Speech-only的文件+麦克风API typecheck、14框架依赖裁剪检查通过。日志新ledger下 `task-6-{xcframeworks,speech-consumer-build,speech-isolation}.log`。
+- Task4独立review APPROVE；Task5及Task3回滚修复独立review APPROVE/0issues；Task1–3 capture/client核心独立review亦APPROVE/11files/0issues，另跑相关34tests通过；native simulator最新39/39（task-6-native-simulator.log）。旧Task7 UI/Done追加独立review已恢复并 APPROVE/0 issues；核对SpeechScreen Done、多行输入、OCR helper、picker/ASR、Android TTS及生成器target隔离。仍不覆盖最低系统/自然语音/断网/Android真实ASR。
+- iPhone16ProMax physical connected（本轮发现），未安排受控朗读，**没有启动真实麦克风录音**。Simulator capture使用合成PCM/fake engine/session；不能声称自然语音/断网/录音权限真机通过。iOS15、Android MISSING_ASSETS等缺口保持。
+- 两个受保护文件hash仍与下方固定值一致；没有覆盖、stage或提交。没有push、force-push、资源安装、账户资产修改。
+
+下一步：读取最新git与新ledger；旧Task7已在旧ledger收口；核对工作树与保护hash，随后按路线继续受控真机或其他独立工作包。仅确认受控朗读后开展真机mic窗口。缺设备/录音窗口的项保留unverified，继续roadmap其他可独立工作，不将整个目标标complete。新麦克风Task6门禁未满足前不提前推送当前HEAD；旧包审查通过不替代新包真实录音验收。
+
+以下为旧 Speech Demo 包的历史交接，旧“当前入口/HEAD”不覆盖本检查点；旧Task7追加审查和原始证据仍有效。
 
 ## 恢复位置
 
@@ -127,7 +142,7 @@ Task 7 文件分组（以恢复时 `git status` / 提交 diff 为准）：
 
 - iOS 15 真机、Android API 26 真机。
 - Android ASR 真实转写；当前 TECNO KM9 / API 35 的 en-US 返回 `MISSING_ASSETS`。
-- iOS 麦克风 ASR。
+- iOS 麦克风 ASR 的受控真机录音与最终验收（本地实现现已提交，见顶部检查点）。
 - 两端自然语音质量与断网验证。
 - P7 Android 视频超分与完整 SDK/Demo 接入。
 - P9 Android 第二平台与质量基准。

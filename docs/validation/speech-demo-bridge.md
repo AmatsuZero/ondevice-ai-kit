@@ -1,6 +1,6 @@
 # Speech Demo Bridge 验证记录
 
-日期：2026-10-20。实现基线 `b272b76`（Task 6），本轮 Task 7 增加真实 App UI 测试和审查修复；现代真机闭环及本地回归通过，未推送或发布远端制品。
+日期：2026-10-20（历史文件输入包；2026-10-21 新增麦克风实现另见[麦克风验证](ios-microphone-asr.md)，真实录音未验）。实现基线 `b272b76`（Task 6），本轮 Task 7 增加真实 App UI 测试和审查修复；现代真机闭环及本地回归通过，未推送或发布远端制品。
 
 本包实现 typed bridge、共享状态机与双端原生 host，不代表 P6 全部完成。计划/规格见 [计划](../superpowers/plans/2026-10-19-speech-demo-bridge.md)、[规格](../superpowers/specs/2026-10-19-speech-demo-bridge-design.md)。恢复状态以[交接](../HANDOFF-2026-10-20-speech-demo-bridge.md)和执行 ledger 为准。
 
@@ -47,7 +47,7 @@ Done 修改后本地回归：`task-7-ui-shared-regression.log` 的 shared allTes
 
 文件 ASR opt-in 用例通过实际系统 picker，未注入 bridge 输入。`task-7-ios-asr-file-ui-system-alert.log` 已证明固定 CAF 导入、重开/取消保持选择、首次真实 on-device ASR 完成；整轮因2.47秒短音频在取消观测前结束而失败。随后用相同合成音频重复20次（约49.47秒）；即时画面定位取消按钮后，`task-7-ios-asr-file-ui-fast-cancel.log` 完整生命周期1/1通过（40.535秒）。最后 `task-7-ios-asr-file-ui-full-suite.log` / `asr-file-ui-full-suite.xcresult` **5/5通过，零失败/跳过**，xcresulttool summary已核对。系统授权弹窗属于 SpringBoard；仅查询 App alerts 会漏掉它，历史 RUNNING 等待不是 native ASR 卡死证据。
 
-固定测试文件通过 `devicectl` 复制至本 Demo 的 Documents。为实际 Files picker 暴露它，仅在忽略目录生成测试用 plist，覆盖 `UIFileSharingEnabled=true` 和 `LSSupportsOpeningDocumentsInPlace=true`；生产 plist/生成器未开启分享。验收结束已恢复普通包build/install，并核对两个sharing key均不存在，日志`task-7-ios-restore-normal-{build,install}.log`。固定合成fixture继续留在Demo Documents供复跑，不删除其他文件。新UI/Done追加独立review因模型容量不足未产生结论；先前Host修复的定向CLEAR仍保留。
+固定测试文件通过 `devicectl` 复制至本 Demo 的 Documents。为实际 Files picker 暴露它，仅在忽略目录生成测试用 plist，覆盖 `UIFileSharingEnabled=true` 和 `LSSupportsOpeningDocumentsInPlace=true`；生产 plist/生成器未开启分享。验收结束已恢复普通包build/install，并核对两个sharing key均不存在，日志`task-7-ios-restore-normal-{build,install}.log`。固定合成fixture继续留在Demo Documents供复跑，不删除其他文件。旧 Task7 UI/Done 追加独立 review 已恢复并 APPROVE/0 issues：核对 SpeechScreen 的多行 Done/clearFocus、iOS Vision OCR 稳定点击、文件 picker/ASR drain 重入、Android TTS 生命周期及生成器 target 隔离。仍不覆盖 iOS15/API26、自然语音、断网和 Android ASR 真实转写。先前Host修复的定向CLEAR仍保留。
 
 ### Android 英语离线资源尝试
 
@@ -87,6 +87,6 @@ Android `am instrument` 的进程退出码不等于门禁通过；必须读取�
 
 ## 未完成项 / 下一入口
 
-iOS TTS/文件ASR完整闭环及全套5项UI已通过；恢复新UI/Done追加独立审查后关闭Task7。作者审读不替代独立结论。Android 需英语离线资源就绪后补真人转写和 ASR 取消/重入；目前 unavailable 单独保留。iOS 麦克风属于后续独立设计；两端最低系统、断网/自然质量、第三方语音和 P7/P9/P10/P11 不因本包本地门禁通过而关闭。
+iOS TTS/文件ASR完整闭环及全套5项UI已通过；Task7 UI/Done追加独立审查已 APPROVE。旧包本地门禁可收口，但远端同步仍受总路线门禁约束。Android 需英语离线资源就绪后补真人转写和 ASR 取消/重入；目前 unavailable 单独保留。iOS 麦克风属于后续独立设计；两端最低系统、断网/自然质量、第三方语音和 P7/P9/P10/P11 不因本包本地门禁通过而关闭。
 
 最终targeted回归：生成器4/4通过（`task-7-generator-final.log`）；shared allTests、Android unit/lint427tasks成功（5执行，`task-7-final-gradle-targeted.log`）。受保护pbxproj及face-identity.md的SHA256与交接固定值一致；git diff --check通过。合成CAF SHA256：`1f001801f3bcc12be1c22c038827f7fa436b73a3c462467c82f6541ef4304d10`。Xcode结果另有一项QoS优先级反转runtime warning，未造成用例失败，未在此轮扩展排查。

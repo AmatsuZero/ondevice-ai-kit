@@ -1,6 +1,6 @@
 # 分阶段交付与恢复入口
 
-更新时间：2026-10-20（实现基线 `476d027`，Task 7 验收通过，追加独立审查待恢复；iOS 麦克风 ASR 设计草案已落盘）。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main；远端同步结果以 GitHub / 极狐该分支的新鲜 SHA 核对为准。
+更新时间：2026-10-21（实现基线 `d60867c`；iOS 麦克风 Task1–5 已提交，本地门禁/分发通过；麦克风核心/bridge/host独立审查通过；真实录音待补；旧 UI/Done 追加审查已通过）。GitHub 为主仓，极狐 `home/common/ondevice-ai-kit` 同步显式分支。当前实现位于 `feat/sdk-foundation`，未合入 main；远端同步结果以 GitHub / 极狐该分支的新鲜 SHA 核对为准。
 
 ## 执行规则
 
@@ -14,7 +14,7 @@
 
 ## 当前范围与后续功能
 
-当前 KMP Demo 已有**人脸检测与关键点**入口，以及独立的身份/活体控件与宿主配置入口；原生 SDK 已接入系统 TTS 与文件 ASR。语音工作包已完成公共契约、能力级后端查询、双端 adapter、iOS 文件 lease、共享状态机/语音页面，以及两端宿主接线、权限与独立 iOS 工程；Task 7 的现代真机闭环已通过，追加 UI/Done 独立审查待工具容量恢复；不能视为 P6 已完整收口。VLM 与视频超分的独立探针状态见下表。当前尚不提供生产身份识别、1:1 比对、1:N 搜索或活体认证。已实现的 Core、任务生命周期、最新帧队列、ModelStore 和分发工程是后续能力共用的基础设施；P10 已实现独立身份存储、授权生命周期、类型化 bridge 与可裁剪分发；生产算法门槛仍待通过。
+当前 KMP Demo 已有**人脸检测与关键点**入口，以及独立的身份/活体控件与宿主配置入口；原生 SDK 已接入系统 TTS、文件 ASR 与 iOS 麦克风 ASR；新麦克风路径已实现并通过本地 fixture，实际录音未验。语音工作包已完成公共契约、能力级后端查询、双端 adapter、iOS 文件 lease、共享状态机/语音页面，以及两端宿主接线、权限与独立 iOS 工程；Task 7 的现代真机闭环已通过，追加 UI/Done 独立审查已 APPROVE；不能视为 P6 已完整收口。VLM 与视频超分的独立探针状态见下表。当前尚不提供生产身份识别、1:1 比对、1:N 搜索或活体认证。已实现的 Core、任务生命周期、最新帧队列、ModelStore 和分发工程是后续能力共用的基础设施；P10 已实现独立身份存储、授权生命周期、类型化 bridge 与可裁剪分发；生产算法门槛仍待通过。
 
 | 后续能力 | SDK 与 Demo 预计交付 | 对应阶段 |
 | --- | --- | --- |
@@ -48,7 +48,7 @@
 | P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 已完成，见 [P3 真机结果](validation/p3-ios-device.md) |
 | P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；无相应设备时保持缺口；提交后停止 | 部分完成：iOS 相机/前后台、照片选择/取消、两分钟持续相机 UI 与 Activity Monitor/thermal 抽样、Settings 恢复入口及用户手动权限往返（恢复后相机/Vision 自动化 1/1），以及 Android API35 相机、选图取消、Orientation 6、权限拒绝/重新授权和两分钟相机 PSS/热状态抽样已验；新增 iOS Debug Orientation 6 合成图共用 ImageIO 解码→Vision，真机结果 80×160，见 [P4 记录](validation/p4-camera-stability.md)。完整 PHPicker EXIF 2/6/7、资源释放及最低系统仍待验收；Leaks detail 已导出：相机路径复现3个GrOp/384B，静态Compose对照1个/128B，纯原生consumer采样0行；渲染责任边界与完整释放仍未验 |
 | P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 部分完成：冻结提交 `927b7749` 后，iOS27 和 Android API35 均重新完成 5+30 样本；四个 Apple XCFramework（补全现有 Client 的 target 源文件）、四个 Android 人脸 Maven artifact 和显式后端独立消费者均通过；最低系统和峰值内存/能耗测量仍待补。语音 artifact 分发已在 P6 独立验证 |
-| P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力；已有后端按独立工作包接入 SDK/Demo | 原生探针与 Demo 验收分别记录；未测项继续保留 | 部分完成：两端系统 TTS SDK 已完成现代真机成功/取消/关闭验证；Android on-device ASR 模块与严格选择已实现，TECNO KM9 的 en-US 返回 MISSING_ASSETS，真实转写和设备生命周期仍未通过。Apple 文件 ASR SDK `5fd0b2d` 已通过强制 on-device 固定文件转写、活动取消、drain、输入保持、重入及关闭后拒绝，独立架构审查 CLEAR（一个 LOW 延后）；Apple/Android 原生语音分发及消费者依赖裁剪已有通过证据。2026-10-20 语音 bridge/Demo 工作包 Task 1–6 已完成，Task 6 提交 `b272b76`：公共契约、能力级查询、Android/iOS adapter、文件 lease、共享 VM/UI、双端 host/权限与独立 iOS 工程均已实现；Task 7 的 Demo 真机/裁剪门禁已通过；追加 UI/Done 独立审查因工具容量不足待恢复。iOS 两种 ABI 各 14/14、最新 iOS Host20/20、Android Host5/5、工具76/76，Android APK 与独立生成工程构建通过；Task 7 已补本地分发和审查回归，但未因这些门禁关闭。iOS 麦克风与音频 session、iOS26 资源、Android ASR 真实转写、两端断网/自然语音质量及最低系统验收继续保留 |
+| P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力；已有后端按独立工作包接入 SDK/Demo | 原生探针与 Demo 验收分别记录；未测项继续保留 | 部分完成：两端系统 TTS SDK 已完成现代真机成功/取消/关闭验证；Android on-device ASR 模块与严格选择已实现，TECNO KM9 的 en-US 返回 MISSING_ASSETS，真实转写和设备生命周期仍未通过。Apple 文件 ASR SDK `5fd0b2d` 已通过强制 on-device 固定文件转写、活动取消、drain、输入保持、重入及关闭后拒绝，独立架构审查 CLEAR（一个 LOW 延后）；Apple/Android 原生语音分发及消费者依赖裁剪已有通过证据。2026-10-20 语音 bridge/Demo 工作包 Task 1–6 已完成，Task 6 提交 `b272b76`：公共契约、能力级查询、Android/iOS adapter、文件 lease、共享 VM/UI、双端 host/权限与独立 iOS 工程均已实现；Task 7 的 Demo 真机/裁剪门禁已通过；追加 UI/Done 独立审查已于2026-10-21 APPROVE。iOS 两种 ABI 各 14/14、最新 iOS Host20/20、Android Host5/5、工具76/76，Android APK 与独立生成工程构建通过；Task7本地验收/独立审查现已收口；P6其他缺口保留。iOS 麦克风契约/client/capture/bridge/host/session 已于 `5be8a76..d60867c` 本地提交；Swift412项、生成桥接/host/session35项、工具77项、Apple/Android门禁、fresh七XCFramework和Speech裁剪通过，Task1–5独立APPROVE、native simulator39/39。受控真机录音仍待验；iOS26资源、Android ASR真实转写、两端断网/自然语音质量及最低系统继续保留，见[麦克风记录](validation/ios-microphone-asr.md) |
 | P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 部分完成：iOS 27 真机确认 VideoToolbox 系统 SR 支持 4×并完成 48 帧固定视频链路；已记录内存采样、统一色彩/HEVC 编码的 SR/双三次对照和自然视频真机质量配对（两路均 48/48 帧、BT.709 元数据一致，质量仍为 unverified）；双路流程在 SR 阶段和基线阶段均验证取消无残留输出，重启后两路再处理成功，随后两次取消后同进程重入也已通过（PID 不变、两路各 48 帧）。SR 模型传递函数、逐帧主观质量、Android/最低系统及 SDK/Demo 接入仍待补，见 [P7 记录](validation/video-sr-backends.md) |
 | P8 VLM 调研 | SmolVLM2/huggingsnap、Florence-2、MiniCPM-V及其他指定 checkpoint | mobile-vlm.md 记录许可、平台、体积、内存、证据等级；不同时接入多个模型 | 已完成候选调研与 P9 单路线选择，见 [P8 记录](validation/mobile-vlm.md)；移动端实测归 P9 |
 | P9 VLM 单模型试验 | 根据 P8 选择一个 checkpoint、一个平台、一个 runtime | 固定图像→输出→资源/耗时原始证据；随后另包推进第二平台 | 单平台探针已通过：SmolVLM2 500M-Video-Instruct-mlx + iOS18/MLXVLM；固定资产、模拟器 16/16、签名设备构建、iPhone 16 Pro Max 成功/取消/重复会话和进程常驻内存采样均有证据；质量基准与 Android 第二平台待后续 |
@@ -76,9 +76,9 @@ P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试
 
 ## 恢复时的第一步
 
-2026-10-20 **当前执行入口：Task 7 UI/Done 独立审查；可并行推进 iOS 麦克风 ASR 书面设计**。Task 1–6 及 Task 7 真机交互均已有通过证据，不重复实现或定位。Task 7 实现提交 `476d027`；独立整包 Host 审查修复、本地分发和现代真机功能门禁通过，最后追加审查因模型容量不足待恢复。最新证据见[语音 Demo 记录](validation/speech-demo-bridge.md)、[交接](HANDOFF-2026-10-20-speech-demo-bridge.md)及 ledger（`.superpowers/sdd/2026-10-19-speech-demo-bridge/progress.md`）。
+2026-10-21 **当前执行入口：iOS 麦克风 Task6 受控真机验收；旧 Task7 UI/Done 追加审查已通过**。麦克风 Tasks1–5 已提交到 `d60867c`，不要重新实现。Swift412项、工具77项、generated XCTest35项、Apple/Android总门禁及fresh七XCFramework/Speech binary consumer和双slice contract裁剪均通过。真实录音尚未开始；受控朗读未确认时继续其他本地工作，不采旁人声音。证据见[麦克风验证](validation/ios-microphone-asr.md)、[交接](HANDOFF-2026-10-20-speech-demo-bridge.md)及新包 ledger `.superpowers/sdd/2026-10-20-ios-microphone-asr/progress.md`。
 
-下一包的 [iOS 麦克风 ASR 设计](superpowers/specs/2026-10-20-ios-microphone-asr-design.md)已根据当前 API、Apple 官方 DocC 和本地 SDK header 落盘：保留文件 API，增加可结束输入的麦克风 task、宿主注入音频 session lease、按输入申请权限。按既有自动推进约定先执行本地兼容性测试与契约实现，不声称人工逐项审阅、已开始录音或新能力交付；独立审查/真机/远端门禁继续保留。
+[iOS 麦克风设计](superpowers/specs/2026-10-20-ios-microphone-asr-design.md)的文件兼容、optional finish、session lease、按输入权限和drain边界均已落地。Task1–3核心、Task4桥接、Task5及回滚修复均独立APPROVE，0问题；最新native simulator39/39。旧语音包 Task7 UI/Done 独立审查已恢复APPROVE；旧包本地门禁收口。当前新麦克风Task6未验，远端最终同步门禁维持。
 
 | 语音工作包任务 | 当前状态与证据 |
 | --- | --- |
@@ -88,20 +88,20 @@ P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试
 | Task 4 iOS adapter 与输入 lease | 已完成，`7605511`；Binding/Demo 两种 ABI XCTest 各 14/14，生成器 5/5；受保护文件 hash 未变化 |
 | Task 5 共享状态机与语音页面 | 已完成，`233873e`；Speech VM 10/10、Face 5/5、Identity 20/20，binding tests、Android APK 与共享模拟器 framework 构建通过；Android 真实 tags/滚动已在 Task 7 验证 |
 | Task 6 两端 host/权限/独立工程 | 已完成，`b272b76`；iOS picker/Speech 授权、Android 麦克风权限/TTS 初始化、双端生命周期与独立工程构建；Task 7 补引用环、权限重试与 factory 分类回归 |
-| Task 7 真机与裁剪验收 | 进行中；Android TTS 完成/取消/重入/后台门禁通过，ASR 仍 MISSING_ASSETS；Apple/Android 本地验证、76 项工具测试、七个 XCFramework、三个 Apple consumer 与 Maven 消费者通过；iOS TTS与文件ASR完整生命周期通过，全套UI5/5、零跳过（141.919秒）；普通无分享配置已恢复；历史焦点失败为陈旧AX坐标/滚动惯性。新UI/Done追加独立审查因容量不足待恢复 |
+| Task 7 真机与裁剪验收 | 已完成本包本地验收；Android TTS 完成/取消/重入/后台门禁通过，ASR 仍 MISSING_ASSETS；Apple/Android 本地验证、76 项工具测试、七个 XCFramework、三个 Apple consumer 与 Maven 消费者通过；iOS TTS与文件ASR完整生命周期通过，全套UI5/5、零跳过（141.919秒）；普通无分享配置已恢复；历史焦点失败为陈旧AX坐标/滚动惯性。新UI/Done追加独立审查已APPROVE/0issues |
 
-以上最新结果本轮已复跑并保存输出。当前仍有 1/7 个语音任务待追加独立审查收口；独立审查提出三项 Host 问题，修复后定向复审 CLEAR，最终现代真机UI已通过，追加审查缺口不以作者审读冒充CLEAR。即使 Task 7 完成，P6 的 iOS 麦克风、Android 真实转写、离线/质量和最低系统缺口仍不能标为通过。
+旧包七个任务的实现、本地验收和独立审查均已收口；三项Host问题修复后定向CLEAR，最终UI/Done追加审查也已独立APPROVE。Android MISSING_ASSETS明确不计转写通过。P6的麦克风真机录音、Android真实转写、离线/质量和最低系统缺口仍不能标通过，路线图继续active。
 
 2026-10-19 P10 验收补充：iPhone16ProMax/iOS27 已完成注册持久化后 SIGKILL→新进程实际解密，以及持有 lease 的删除提交后 SIGKILL→新进程 tombstone/稳定回执/payload/key 清理；最终精确 cleanup=true，原语音探针已恢复。见 [进程恢复证据](validation/p10-ios-store-device-probe.md#两次-sigkill-后的持久恢复2026-10-19)。
 
 2026-10-20 P10 验收补充：TECNO KM9/API35 已完成 Android create→SIGKILL、delete→SIGKILL、recover、cleanup 四阶段跨进程链；runner 在每个 stage 前对精确测试包 force-stop 并确认无旧 PID，controller 与校验器确认四个不同 PID/launch nonce、报告绑定、双 kill -9、tombstone/稳定回执、payload/key purge 与 run-scoped cleanup，runner 检测到的失败路径也会 best-effort 清理并留下 cleanup outcome。见 [Android 进程恢复证据](validation/p10-android-store-device-probe.md#两次-sigkill-后的跨进程持久恢复2026-10-20)。两端证据仍不证明 API26/iOS15、提交中断或文件系统故障；P10/roadmap 继续未完成。最终分支独立审查仍待取得结论。
 
-2026-10-19 P6 历史背景（当前进度以上述 2026-10-20 入口为准）：语音 Client 的 availability/close 竞态与并发 close 等待已修复并提交 `c13ed4c`，Apple 全包374/374、Android Speech12/12、TTS3/3、ASR7/7及消费者构建通过，见[语音记录](validation/speech-backends.md)。用户已选择“先将现有后端接 Demo，再独立补齐 iOS 麦克风 ASR”；[书面规格](superpowers/specs/2026-10-19-speech-demo-bridge-design.md)已认可，[七任务计划](superpowers/plans/2026-10-19-speech-demo-bridge.md)现已执行至 Task 5 完成。麦克风、Android ASR 实际转写、离线/质量和最低系统验证继续保留。P10 最终独立审查的再次重试仍因模型容量不足退出，未产生审查结论；固定 revision 的 SFace LFS 元数据与运行时可行性研究已补入[模型预研](validation/p10-identity-model-selection.md)，未下载模型或选定运行时。
+2026-10-19 P6 历史背景（当前进度以上述 2026-10-21 入口为准）：语音 Client 的 availability/close 竞态与并发 close 等待已修复并提交 `c13ed4c`，Apple 全包374/374、Android Speech12/12、TTS3/3、ASR7/7及消费者构建通过，见[语音记录](validation/speech-backends.md)。用户已选择“先将现有后端接 Demo，再独立补齐 iOS 麦克风 ASR”；[书面规格](superpowers/specs/2026-10-19-speech-demo-bridge-design.md)已认可，[七任务计划](superpowers/plans/2026-10-19-speech-demo-bridge.md)现已执行至 Task 5 完成。麦克风、Android ASR 实际转写、离线/质量和最低系统验证继续保留。P10 最终独立审查的再次重试仍因模型容量不足退出，未产生审查结论；固定 revision 的 SFace LFS 元数据与运行时可行性研究已补入[模型预研](validation/p10-identity-model-selection.md)，未下载模型或选定运行时。
 
 2026-10-19 当前入口：P10 Task 1–8、11、12 已实现并提交，Task12 为 `bb89516`；最终独立审查包覆盖 `ecdfd52..bb89516`，三个审查实例均因模型容量不足未启动，没有审查结论。Task9/10 生产模型/PAD、数据授权与校准继续保留。iOS Demo 真机 KMP framework 已刷新，新增身份 UI 后照片取消、方向探针、相机前后台回归3/3通过，详见[P4补充](validation/p4-camera-stability.md#身份-ui-集成后的-ios-回归2026-10-19)。下文10月17日段落为历史入口，P10当前状态以上表和[P10记录](validation/p10-face-identity.md)为准。
 
 2026-10-17 P6 后续包：用户已批准的[Apple 文件 ASR 实施计划](superpowers/plans/2026-10-17-apple-system-asr-file.md)已实现公共契约、Apple backend 生命周期与可裁剪分发三个 Task。Swift 58/58、工具测试 44/44、Xcode 模拟器构建、全新六模块 XCFramework、binary consumer 和 Core+Speech 独立 typecheck 均通过。公共请求不绑定离线策略，Apple 系统后端单独强制 on-device；取消/超时后先 drain 再更改输入，lease 释放以平台 task completed 为边界。实际 SDK `5fd0b2d` 已在 iPhone 16 Pro Max / iOS 27.0.1 通过固定合成文件转写、busy 证明的活动任务取消、drain、输入保持、同进程重入和 close 后拒绝。最终独立架构审查 CLEAR，一个 LOW 文件 metadata 错误映射延后处理。报告/hash 见[语音后端记录](validation/speech-backends.md#2026-10-17-apple-文件-asr-sdk-后端)；既有授权被复用，麦克风、音频 session、资源安装、自然语音质量与网络行为仍未测。
 
-恢复时以阶段表、2026-10-20 当前入口和最新 Git 为准。P1–P3 证据分别见[生命周期审查](validation/p1-lifecycle-review.md)、[模型存储审查](validation/p2-model-store-review.md)与[真机结果](validation/p3-ios-device.md)；P4 的完整 PHPicker EXIF 2/6/7、资源释放和最低系统缺口见[P4 记录](validation/p4-camera-stability.md)。P6 已有原生文件探针与 SDK 真机证据，尚不能代替本次 Demo 验收。P10 Task 1–8、11、12 和两端 SIGKILL 后存储恢复已有证据，生产模型/PAD、授权数据、校准、提交中断/文件系统故障、最低系统及最终独立审查仍未通过；本地原始草稿保持未追踪。P7 取消/重入探针结果见[P7 记录](validation/video-sr-backends.md)，完整 SDK/Demo 与 Android 接入仍待完成。按已批准计划推进，缺设备项独立保留。
+恢复时以阶段表、2026-10-21 当前入口和最新 Git 为准。P1–P3 证据分别见[生命周期审查](validation/p1-lifecycle-review.md)、[模型存储审查](validation/p2-model-store-review.md)与[真机结果](validation/p3-ios-device.md)；P4 的完整 PHPicker EXIF 2/6/7、资源释放和最低系统缺口见[P4 记录](validation/p4-camera-stability.md)。P6 已有原生文件探针与 SDK 真机证据，尚不能代替本次 Demo 验收。P10 Task 1–8、11、12 和两端 SIGKILL 后存储恢复已有证据，生产模型/PAD、授权数据、校准、提交中断/文件系统故障、最低系统及最终独立审查仍未通过；本地原始草稿保持未追踪。P7 取消/重入探针结果见[P7 记录](validation/video-sr-backends.md)，完整 SDK/Demo 与 Android 接入仍待完成。按已批准计划推进，缺设备项独立保留。
 
 详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。
