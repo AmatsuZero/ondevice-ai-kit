@@ -93,6 +93,52 @@ final class AppleSpeechMicrophoneTests: XCTestCase {
         await assertCancellation(retry)
     }
 
+    func testStartupRollbackSurfacesLeaseReleaseFailure() async throws {
+        let cleanup = SpeechRecognitionError.platform(domain: "fixture.cleanup", code: 51)
+        for denied in [true, false] {
+            let microphone = MicrophonePlatformBridge()
+            let lease = MicrophoneSessionLease(releaseError: cleanup)
+            let provider = MicrophoneSessionProvider(leases: [lease], holdAcquire: true)
+            let backend = try AppleSpeechRecognizerBackend(locale: "en-US", bridge: MicrophoneFileBridge(),
+                microphoneBridge: microphone, audioSessionProvider: provider)
+            let start = Task { try await backend.startMicrophone(request) }
+            await provider.waitUntilAcquireEntered()
+            if denied { microphone.isRecordingAuthorized = false }
+            else { microphone.startError = SpeechRecognitionError.platform(domain: "fixture.start", code: 9) }
+            await provider.releaseAcquire()
+            do { _ = try await start.value; XCTFail("rollback must surface cleanup failure") }
+            catch { XCTAssertEqual(error as? SpeechRecognitionError, cleanup) }
+            let releases = await lease.count()
+            XCTAssertEqual(releases, 1)
+            await backend.close()
+        }
+    }
+
+    func testInvalidatedNativeStartSurfacesLeaseReleaseFailureAfterDrain() async throws {
+        let cleanup = SpeechRecognitionError.platform(domain: "fixture.cleanup", code: 52)
+        for closing in [false, true] {
+            let fixture = try makeBackend(lease: MicrophoneSessionLease(releaseError: cleanup))
+            fixture.microphone.holdStart = true
+            let start = Task { try await fixture.backend.startMicrophone(request) }
+            await waitUntil { fixture.microphone.startCount == 1 }
+            let close: Task<Void, Never>?
+            if closing {
+                close = Task { await fixture.backend.close() }
+                for _ in 0..<1_000 {
+                    if await fixture.backend.availability().reason == .closed { break }
+                    await Task.yield()
+                }
+            } else { close = nil; start.cancel() }
+            fixture.microphone.releaseStart()
+            await waitUntil { fixture.microphone.cancelCount == 1 }
+            fixture.microphone.complete()
+            await fixture.clock.advance(by: 0.02)
+            do { _ = try await start.value; XCTFail("cleanup failure must remain visible") }
+            catch { XCTAssertEqual(error as? SpeechRecognitionError, cleanup) }
+            await close?.value
+        }
+    }
+
     func testNaturalFinalStopsCaptureWithoutExplicitFinish() async throws {
         let fixture = try makeBackend()
         let task = try await fixture.backend.startMicrophone(request)

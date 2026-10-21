@@ -308,12 +308,12 @@ public final class AppleSpeechRecognizerBackend: SpeechMicrophoneRecognitionBack
         do { lease = try await audioSessionProvider.acquire() }
         catch { throw error }
         guard !closed else {
-            try? await lease.release()
+            try await lease.release()
             throw KitError.closed
         }
         do { try Task.checkCancellation() }
         catch {
-            try? await lease.release()
+            try await lease.release()
             throw error
         }
 
@@ -321,11 +321,11 @@ public final class AppleSpeechRecognizerBackend: SpeechMicrophoneRecognitionBack
         // Revalidate admission before creating any native capture resources.
         let currentMetadata = microphoneBridge.metadata()
         guard microphoneBridge.isRecordingAuthorized, currentMetadata.authorization == .authorized else {
-            try? await lease.release()
+            try await lease.release()
             throw SpeechClientError.backendUnavailable(capability: .asr, backendId: backendId, reason: .permissionDenied)
         }
         guard currentMetadata.isAvailable, currentMetadata.supportsOnDeviceRecognition else {
-            try? await lease.release()
+            try await lease.release()
             throw SpeechClientError.backendUnavailable(capability: .asr, backendId: backendId, reason: .unsupportedDevice)
         }
 
@@ -341,7 +341,7 @@ public final class AppleSpeechRecognizerBackend: SpeechMicrophoneRecognitionBack
                 }
             }
         } catch {
-            try? await lease.release()
+            try await lease.release()
             throw error
         }
         let operation = MicrophoneOperation(generation: currentGeneration, handle: handle,
@@ -361,6 +361,8 @@ public final class AppleSpeechRecognizerBackend: SpeechMicrophoneRecognitionBack
             if operation.outcome == nil {
                 await withCheckedContinuation { operation.closeWaiters.append($0) }
             }
+            if case .failure(let cleanupFailure)? = operation.outcome,
+               !(cleanupFailure is CancellationError) { throw cleanupFailure }
             if closed { throw KitError.closed }
             throw CancellationError()
         }
