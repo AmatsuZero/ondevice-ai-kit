@@ -20,7 +20,7 @@ let package = Package(name: "OnDeviceAIKit", platforms: [.iOS(.v15), .macOS(.v12
     .target(name: "ODAIKitVideo", dependencies: ["ODAIKitCore"]),
     .testTarget(name: "ODAIKitVideoTests", dependencies: ["ODAIKitVideo"]),
     .target(name: "ODAIKitAppleVideo", dependencies: ["ODAIKitCore", "ODAIKitVideo"]),
-    .testTarget(name: "ODAIKitAppleVideoTests", dependencies: ["ODAIKitAppleVideo", "ODAIKitVideo"]),
+    .testTarget(name: "ODAIKitAppleVideoTests", dependencies: ["ODAIKitAppleVideo", "ODAIKitVideo"], resources: [.copy("Fixtures")]),
     .target(name: "ODAIKitAppleSpeech", dependencies: ["ODAIKitSpeech", "ODAIKitCore"]),
     .testTarget(name: "ODAIKitFaceTests", dependencies: ["ODAIKitFace", "ODAIKitAppleVision"]),
     .testTarget(name: "ODAIKitIdentityTests", dependencies: ["ODAIKitIdentity", "ODAIKitModelStore"]),

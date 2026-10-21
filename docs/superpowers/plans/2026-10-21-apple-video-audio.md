@@ -14,8 +14,8 @@
 
 Files: Create apple/Sources/ODAIKitAppleVideo/AppleVideoAudioMuxer.swift；apple/Tests/ODAIKitAppleVideoTests/AppleVideoAudioMuxerTests.swift、Fixtures、fixture生成说明；Modify apple/Package.swift test resources。
 Produce internal AppleVideoAudioMuxer.validateInput(source:videoDuration:) async throws、preserve(source:processedVideo:output:videoDuration:) async throws -> Int；复用AppleVideoError。
-- [ ] RED：真实固定fixture无音轨/AAC passthrough、范围/不兼容拒绝、已有输出保护、取消先行，运行swift test --filter AppleVideoAudioMuxerTests，Expected missing类型。
-- [ ] 实现AVFoundation admission/composition/passthrough/cleanup，GREEN定向及全套；范围审读/提交。
+- [x] RED：真实固定fixture无音轨/AAC passthrough、范围/不兼容拒绝、已有输出保护、取消先行，运行swift test --filter AppleVideoAudioMuxerTests，Expected missing类型。
+- [x] 实现AVFoundation admission/composition/passthrough/cleanup，GREEN定向及全套；范围审读/提交。
 
 ### Task 2: Default preserve engine integration
 

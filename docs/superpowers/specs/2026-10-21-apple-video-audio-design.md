@@ -4,9 +4,9 @@
 
 ## 范围与取舍
 
-preserve支持无音轨或一条AAC-LC（kAudioFormatMPEG4AAC），单/双声道、44.1/48kHz、单format description；音轨timeRange必须numeric、start≥0、duration>0、end≤视频duration，保留全部音频range与原start，不裁剪、拉伸、混音或重编码。非兼容输入在启动SR前拒绝，最终按实际输出帧数/24再次检查音频边界。无音轨preserve直接把内部silent文件移到output。discard继续忽略音轨。保护用户输入/已有输出，只有调用内创建的workspace文件可清理。
+preserve支持无音轨或一条AAC（kAudioFormatMPEG4AAC），单/双声道、44.1/48kHz、单format description；音轨timeRange必须numeric、start=0、duration与视频duration相同（容差1微秒）且无空白编辑段，保留全部音频range，不裁剪、拉伸、混音或重编码。非兼容输入在启动SR前拒绝，最终按实际输出帧数/24再次检查音频边界。无音轨preserve直接把内部silent文件移到output。discard继续忽略音轨。保护用户输入/已有输出，只有调用内创建的workspace文件可清理。
 
-选择先SR输出video-only.mov，再AVMutableComposition+AVAssetExportPresetPassthrough封装为output.mov：避免在同一writer串行写两种media导致backpressure，保持已编码视频与原AAC。把音频解码重编码会改变音质/容量；同writer并行lane增加当前小profile的协调成本，均不采用。composition只插入实际SR视频range至0，音频完整timeRange插到其原start；导出兼容性检查与MOV supported file type必须通过，导出后校验视频/音轨数量与音轨format，缺轨不能当成功。压缩payload与时间线在固定fixture上复核，不宣称容器metadata字节等同。
+选择先SR输出video-only.mov，再AVMutableComposition+AVAssetExportPresetPassthrough封装为output.mov：避免在同一writer串行写两种media导致backpressure，保持已编码视频与原AAC。把音频解码重编码会改变音质/容量；同writer并行lane增加当前小profile的协调成本，均不采用。composition只插入实际SR视频range至0，音频完整timeRange插到其原start；导出兼容性检查与MOV supported file type必须通过，导出后校验视频/音轨数量与音轨format和时长（容差2微秒），缺轨不能当成功。压缩payload与时间线在固定fixture上复核，不宣称容器metadata字节等同。
 
 ## 生命周期
 
@@ -16,4 +16,6 @@ preserve支持无音轨或一条AAC-LC（kAudioFormatMPEG4AAC），单/双声道
 
 ## 验证与未包含项
 
-使用ffmpeg本地生成无私密内容的固定2秒色块/440HzAAC fixture，真实AVFoundation host测试检查无音轨、AAC数量/格式/起始位置/时长、拒绝多轨/不兼容/超长/负或非法range、保护已有输出、预取消及压缩音频payload。backend/client真实默认preserve路径测试，以及已存在的取消/close/晚到失败回归。设备公开视频加合成tone固定fixture验证SR→mux、48帧与AAC payload/PTS、取消/重入/lease清理；实际export中途取消若无法可靠触发需明确未验，不以预取消代替。fresh九XCFramework、Core+Video隔离消费者与Apple/tools门禁。独立审查失败保留pending，不push。通用音频、HDR/VFR、质量/能耗、KMP/Demo/Android/最低系统独立后续。
+使用ffmpeg本地生成无私密内容的固定2秒色块/440HzAAC fixture，真实AVFoundation host测试检查无音轨、AAC数量/格式/零起始位置/时长、拒绝多轨/不兼容/超长/偏移/空白编辑或非法range、保护已有输出、预取消及压缩音频payload。backend/client真实默认preserve路径测试，以及已存在的取消/close/晚到失败回归。设备公开视频加合成tone固定fixture验证SR→mux、48帧与AAC payload/PTS、取消/重入/lease清理；实际export中途取消若无法可靠触发需明确未验，不以预取消代替。fresh九XCFramework、Core+Video隔离消费者与Apple/tools门禁。独立审查失败保留pending，不push。通用音频、HDR/VFR、质量/能耗、KMP/Demo/Android/最低系统独立后续。
+
+实测偏移AAC含leading empty edit，在composition passthrough中出现约81微秒的duration变化；设定naturalTimeScale未消除。为不放宽同步契约，首版提前拒绝offset/empty edit/非等长音轨，后续独立扩展。
