@@ -10,6 +10,8 @@ ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = "scripts/generate-multimodal-bridge-tests.rb"
 SOURCES = ["kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOSMultimodalInput.swift",
            "probes/ios-multimodal-bridge/IOSMultimodalBridgeTests.swift"]
+INPUT_SOURCES = ["demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/SpeechInputStore.swift",
+                 "kmp-binding/apple/IOSSpeechAudioInput.swift", "probes/ios-multimodal-bridge/MultimodalInputStoreTests.swift"]
 
 
 class MultimodalBridgeProjectTests(unittest.TestCase):
@@ -20,7 +22,7 @@ class MultimodalBridgeProjectTests(unittest.TestCase):
         (self.root / "scripts").mkdir()
         shutil.copy(ROOT / SCRIPT, self.root / SCRIPT)
         (self.root / "apple").mkdir()
-        for source in SOURCES:
+        for source in SOURCES + INPUT_SOURCES:
             path = self.root / source
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("// fixture\n")
@@ -52,7 +54,8 @@ puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.rea
                 self.assertEqual(sorted(data["products"]), ["ODAIKitCore", "ODAIKitMultimodal"])
                 framework = self.root / base / f"build/bin/iosSimulatorArm64/debugFramework/{module}.framework"
                 self.assertEqual([p for p in data["linked"] if Path(p).name != "Foundation.framework"], [str(framework)])
-                self.assertEqual(sorted(data["sources"]), sorted(str(self.root / p) for p in SOURCES))
+                expected = SOURCES + (INPUT_SOURCES if module == "ODAIKitDemo" else [])
+                self.assertEqual(sorted(data["sources"]), sorted(str(self.root / p) for p in expected))
                 self.assertTrue(all(c["IPHONEOS_DEPLOYMENT_TARGET"] == "15.0" for c in data["settings"]))
                 self.assertTrue(all(("ODAI_DEMO_BINDING" in c["SWIFT_ACTIVE_COMPILATION_CONDITIONS"]) == (module == "ODAIKitDemo") for c in data["settings"]))
 

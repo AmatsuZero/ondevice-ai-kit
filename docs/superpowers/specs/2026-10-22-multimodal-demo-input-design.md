@@ -17,3 +17,7 @@ Imports accept local regular nonsymlink files only. Each successful import copie
 ## Verification
 
 Test public behavior on actual files: original mutation after import, two concurrent leases, replacement/remove/close retention until last release, repeat release/close, closed and unknown-reference admission, symlink/directory/nonlocal rejection and fresh-directory/foreign sentinel preservation. Android unit tests run offline; Apple generated Demo-ABI XCTest project includes the store and existing protocol/store files, with no MLX product. Update generator behavioral tests to inspect real generated project source/product lists; Binding ABI stays unchanged. Every Task observes RED before implementation, then full relevant tests and scope author review/local commit. Independent review remains pending under user's inline/no-subagent instruction.
+
+## Verified reuse boundary repair
+
+The new foreign-sentinel test exposed recursive directory deletion in the existing SpeechInputStore empty-registry cleanup. Replace that single removal with atomic nonrecursive `Darwin.rmdir`, preserving normal empty-root cleanup and protecting unknown files. This justified narrow Speech/Video-shared change is covered by new input tests and existing capability regressions; no general store extraction.

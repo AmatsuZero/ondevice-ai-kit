@@ -1,4 +1,5 @@
 import Foundation
+import Darwin
 
 /// Owns only private copies; selected references and native operation leases are independent.
 @MainActor
@@ -73,7 +74,12 @@ final class SpeechInputStore: IOSSpeechAudioInputProvider {
     }
 
     private func removeEmptyDirectory() {
-        if closed && entries.isEmpty { try? FileManager.default.removeItem(at: directory) }
+        if closed && entries.isEmpty {
+            // Atomic, nonrecursive removal: never delete a file this store does not own.
+            directory.withUnsafeFileSystemRepresentation { path in
+                if let path { _ = rmdir(path) }
+            }
+        }
     }
 
     private enum InputError: Error { case invalidReference }

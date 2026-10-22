@@ -15,7 +15,7 @@
 - No picker/host/model/MLX integration in this package, no new dependencies or downloads.
 - Only synthetic local fixture files; no device/private media, recording, signing mutation or push.
 - iOS15/macOS12/API26 and optional enhancement boundary unchanged; protected files never modified/staged.
-- Preserve existing Speech/Video store sources; only reuse them on Apple.
+- Reuse Apple SpeechInputStore; only the reproduced recursive-directory cleanup defect may change to atomic rmdir, with Speech/Video regressions.
 
 ## Review Focus
 
@@ -27,7 +27,7 @@
 
 ### Task 1: Apple input provider and generated tests
 
-**Files:** Create `demo/iosApp/MultimodalInputStore.swift`, `probes/ios-multimodal-bridge/MultimodalInputStoreTests.swift`; modify `scripts/generate-multimodal-bridge-tests.rb`, `tools/tests/test_multimodal_bridge_project.py`.
+**Files:** Create `demo/iosApp/MultimodalInputStore.swift`, `probes/ios-multimodal-bridge/MultimodalInputStoreTests.swift`; modify `demo/iosApp/SpeechInputStore.swift` only for the reproduced cleanup fix, `scripts/generate-multimodal-bridge-tests.rb`, `tools/tests/test_multimodal_bridge_project.py`.
 
 **Interfaces:** Consumes IOSMultimodalInputProvider/Lease plus SpeechInputStore; produces MainActor MultimodalInputStore importImage(from:), acquire(reference:), remove(reference:), close().
 

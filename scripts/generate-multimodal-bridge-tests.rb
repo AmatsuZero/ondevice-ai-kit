@@ -11,6 +11,10 @@ abort('Unsupported multimodal bridge KMP module') unless framework_root
 framework = File.join(root, framework_root, "build/bin/iosSimulatorArm64/debugFramework/#{binding_module}.framework")
 sources = ['kmp-binding/apple/IOSMultimodalBridge.swift', 'kmp-binding/apple/IOSMultimodalInput.swift',
            'probes/ios-multimodal-bridge/IOSMultimodalBridgeTests.swift']
+if binding_module == 'ODAIKitDemo'
+  sources += ['demo/iosApp/MultimodalInputStore.swift', 'demo/iosApp/SpeechInputStore.swift',
+              'kmp-binding/apple/IOSSpeechAudioInput.swift', 'probes/ios-multimodal-bridge/MultimodalInputStoreTests.swift']
+end
 ([framework, File.join(root, 'apple')] + sources.map { |s| File.join(root, s) }).each do |path|
   abort("Missing input: #{path}") unless File.exist?(path)
 end
