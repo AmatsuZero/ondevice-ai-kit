@@ -1,8 +1,18 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；shared单图UI/opt-in本地包完成；host/真实设备/iOS UI/独立审查待补）
+更新时间：2026-10-22（Asia/Shanghai；双端单图opaque input/lease本地包完成；host/picker/真实设备/iOS UI/独立审查待补）
 
-## P9 Single-image Demo UI（2026-10-22，最新检查点）
+## P9 Single-image Demo input ownership（2026-10-22，最新检查点）
+
+- 接续55a425b；设计/计划0b0f851、Apple Task1 caab202，Android Task2与本检查点同次提交，最新HEAD以git为准。工作树/branch/index与两保护hash复核相符，无并发改动。见[输入验证](validation/multimodal-demo-input.md)、独立spec/plan `2026-10-22-multimodal-demo-input` 及同名 `.superpowers/sdd/` ledger/final-review。不重做UI/state/bridge/后端/benchmark。
+- 双端MultimodalInputStore只实现输入所有权：新鲜私有目录、复制regular nonsymlink文件、opaque UUID、registry-only acquire、多lease、选择退役、close封闭、幂等release、最后lease清理。没有picker/host/模型或平台导航接线，默认unavailable仍保留。合成字节测试不是图片质量或真实picker验收。
+- Apple新测试先发现旧SpeechInputStore误删foreign sentinel（13/14），必要范围修正为原子非递归Darwin.rmdir；代价是清理失败可留存目录，不接受误删外来文件。修复后Demo ABI14/14、Binding10/10，新鲜完整Speech39/39、Video9/9、生成器3/3和strict格式检查通过。日志保留失败证据。
+- Android缺store symbol RED后实现，新输入4/4、全Demo14/14新执行；离线APK/lint通过，0error/9既有warning；工具101/101。最终Gradle539tasks（7执行、532up-to-date），缓存不计新测试。具体命令与日志见验证记录。
+- 每Task范围与最终均为作者自审；按用户要求不派子代理，独立review仍pending，无APPROVE。只做本地提交，无push/merge/发布/下载/录音/私人媒体/签名变更。保护文件hash/state精确不变且均未暂存，scratch/artifacts/日志保留。
+- 下一独立包：**两端单图host/picker与页面/后台/close生命周期接线**，消费现有VM/typed bridge/store；固定Apple模型/ModelStore和真实KMP设备闭环再拆包，Android无生产backend保持unavailable。真实模型host所需后端验证及backend/benchmark设计计划已读，进入时按实际资产/连接复核。
+- iOS实际UI、host/picker往返、KMP→真实MLXVLM、自然质量/Metal GPU/energy/最低系统/Android生产后端与独立审查仍未验。旧Video初始化超时、P6实录、Android ASR MISSING_ASSETS及其他门槛保留；仍5/12完成、7阶段未收口，P9 active。
+
+## P9 Single-image Demo UI（2026-10-22，历史检查点）
 
 - 接手基线e0fc825，branch/worktree/index与保护hash均核对相符。设计/计划f88b43f；Task1共享UI/opt-in98a3891；Task2验证/交接同次提交，最终HEAD以git为准。见[UI验证](validation/multimodal-demo-ui.md)、独立spec/plan `2026-10-22-multimodal-demo-ui` 和同名`.superpowers/sdd/` ledger/final-review。
 - 新MultimodalScreen消费既有VM，展示严格backend选择/availability、输入displayName、原始prompt、预算、生成/取消/phase、累计文本、最终实际backend/model/runtime与typed failure。FaceScreen可选model默认null，旧App入口不变；新独立iOS入口保留Face/Identity/Speech/Video参数与旧导出标签。无picker/native host/model/lease接线，默认unavailable。

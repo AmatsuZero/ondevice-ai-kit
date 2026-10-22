@@ -31,11 +31,11 @@
 
 **Interfaces:** Consumes IOSMultimodalInputProvider/Lease plus SpeechInputStore; produces MainActor MultimodalInputStore importImage(from:), acquire(reference:), remove(reference:), close().
 
-- [ ] Add XCTest fixture-file assertions for copy isolation, two leases/retirement/close, duplicate release, closed/unknown admission and foreign/symlink/directory/nonlocal rejection. Add generator expected source files only for Demo ABI.
-- [ ] Run generator tests before generator edit: expected actual generated Demo source set mismatch RED; update generator. Generate fresh Demo tests and run Xcode: expect missing store symbols RED.
-- [ ] Implement capability wrapper with nonsymlink regular file admission and native lease adapter; do not alter existing stores.
-- [ ] Run generated Demo ABI tests (existing10 plus input4), Binding ABI regression and generator tests offline. Inspect actual Xcode outputs, not source grep.
-- [ ] Scope author review; exact stage/local commit `feat: add Apple multimodal input ownership`.
+- [x] Add XCTest fixture-file assertions for copy isolation, two leases/retirement/close, duplicate release, closed/unknown admission and foreign/symlink/directory/nonlocal rejection. Add generator expected source files only for Demo ABI.
+- [x] Run generator tests before generator edit: expected actual generated Demo source set mismatch RED; update generator. Generate fresh Demo tests and run Xcode: expect missing store symbols RED.
+- [x] Implement capability wrapper with nonsymlink regular file admission and native lease adapter; only the reproduced recursive cleanup defect changes in existing SpeechInputStore (ledger Ruling).
+- [x] Run generated Demo ABI tests (existing10 plus input4), Binding ABI regression and generator tests offline. Inspect actual Xcode outputs, not source grep.
+- [x] Scope author review; exact stage/local commit `feat: add Apple multimodal input ownership`.
 
 ### Task 2: Android input provider and checkpoint
 
@@ -43,7 +43,7 @@
 
 **Interfaces:** Consumes AndroidMultimodalInputProvider/Lease; produces synchronized MultimodalInputStore(directory: File), importImage(source: File): String, acquire(reference), remove(reference), close().
 
-- [ ] Write four fixture-file tests for the five Review Focus cases and source copy isolation; run Android app unit tests offline, expect missing store RED.
-- [ ] Implement fresh-directory ownership and opaque token registry, NOFOLLOW copy admission, separate selected/lease counts, idempotent lease release and safe nonrecursive cleanup.
-- [ ] Run `rtk proxy python3 scripts/gradle-local.py :demo:androidApp:testDebugUnitTest :demo:androidApp:assembleDebug :demo:androidApp:lintDebug --offline --console=plain`; expected full app unit suite green and APK/lint success (existing warnings remain). Run full tools suite with existing Ruby3.4.
-- [ ] Separate final author review against spec/plan; record actual evidence, independent-review/host/picker/real-inference gaps, protected hashes and next package. Exact stage/local commit `feat: add Android multimodal input ownership`.
+- [x] Write four fixture-file tests for the five Review Focus cases and source copy isolation; run Android app unit tests offline, expect missing store RED.
+- [x] Implement fresh-directory ownership and opaque token registry, NOFOLLOW copy admission, separate selected/lease counts, idempotent lease release and safe nonrecursive cleanup.
+- [x] Run `rtk proxy python3 scripts/gradle-local.py :demo:androidApp:testDebugUnitTest :demo:androidApp:assembleDebug :demo:androidApp:lintDebug --offline --console=plain`; expected full app unit suite green and APK/lint success (existing warnings remain). Run full tools suite with existing Ruby3.4.
+- [x] Separate final author review against spec/plan; record actual evidence, independent-review/host/picker/real-inference gaps, protected hashes and next package. Exact stage/local commit `feat: add Android multimodal input ownership`.
