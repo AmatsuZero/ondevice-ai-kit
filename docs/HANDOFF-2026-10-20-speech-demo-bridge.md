@@ -1,11 +1,11 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；Video包检查点 `ae76aa3`；P9 Multimodal SDK Foundation设计/计划落盘，Task1待实现；视频UI/P6实录/独立审查缺口保留）
+更新时间：2026-10-22（Asia/Shanghai；Video包检查点 `ae76aa3`；P9 Multimodal SDK Foundation Task1 Swift已完成，Task2 Android为当前入口；视频UI/P6实录/独立审查缺口保留）
 
 ## P9 Multimodal SDK Foundation（2026-10-22，当前实现入口）
 
 - Video bridge/Demo 本地验证检查点已提交 `ae76aa3`，下方设备/审查缺口仍保留，不重复已完成实现或初始化超时重试。
-- 新设计：[Multimodal Foundation](superpowers/specs/2026-10-22-multimodal-sdk-foundation-design.md)；计划：[四项Task](superpowers/plans/2026-10-22-multimodal-sdk-foundation.md)；ledger `.superpowers/sdd/2026-10-22-multimodal-sdk-foundation/progress.md`。当前首个实现Task1：Swift纯契约与generation client，先RED再GREEN；随后Android对等模块、可裁剪分发/consumer和文档门禁。
+- 新设计：[Multimodal Foundation](superpowers/specs/2026-10-22-multimodal-sdk-foundation-design.md)；计划：[四项Task](superpowers/plans/2026-10-22-multimodal-sdk-foundation.md)；ledger `.superpowers/sdd/2026-10-22-multimodal-sdk-foundation/progress.md`。Task1 已完成：Swift `ODAIKitMultimodal` 契约与 actor generation client 通过契约4/4、client10/10、全量Swift461/461回归0失败；覆盖严格后端选择/不回退、单槽availability、取消后mandatory drain及晚到success/ordinary error、累计文本更新过滤、query/close join与共享close。当前首个未完成入口为Task2 Android对等模块；随后是可裁剪分发/consumer和文档门禁。
 - 首包只依赖Core，不引入MLX/权重/下载；单图片+prompt、累计文本增量、严格选择、单槽cancel/drain/close-query join。图像与短视频真实backend/模型管理/KMP/Demo/质量与另一平台后续分别接入；本包不等于P9完成。
 - 用户已明确当前会话直接执行，设计/计划自审，不派子代理；不声称逐行人工批准或独立APPROVE。完成Task/阶段后继续更新本handoff，禁止远端push/发布/资源下载/私人媒体/自动录音/签名变更，保护文件仍不动。
 

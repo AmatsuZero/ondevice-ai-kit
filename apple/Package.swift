@@ -7,6 +7,7 @@ let package = Package(name: "OnDeviceAIKit", platforms: [.iOS(.v15), .macOS(.v12
     .library(name: "ODAIKitAppleVision", targets: ["ODAIKitAppleVision"]),
     .library(name: "ODAIKitSpeech", targets: ["ODAIKitSpeech"]),
     .library(name: "ODAIKitVideo", targets: ["ODAIKitVideo"]),
+    .library(name: "ODAIKitMultimodal", targets: ["ODAIKitMultimodal"]),
     .library(name: "ODAIKitAppleVideo", targets: ["ODAIKitAppleVideo"]),
     .library(name: "ODAIKitAppleSpeech", targets: ["ODAIKitAppleSpeech"]),
     .library(name: "ODAIKitIdentity", targets: ["ODAIKitIdentity"])
@@ -18,6 +19,8 @@ let package = Package(name: "OnDeviceAIKit", platforms: [.iOS(.v15), .macOS(.v12
     .target(name: "ODAIKitAppleVision", dependencies: ["ODAIKitFace", "ODAIKitCore"]),
     .target(name: "ODAIKitSpeech", dependencies: ["ODAIKitCore"]),
     .target(name: "ODAIKitVideo", dependencies: ["ODAIKitCore"]),
+    .target(name: "ODAIKitMultimodal", dependencies: ["ODAIKitCore"]),
+    .testTarget(name: "ODAIKitMultimodalTests", dependencies: ["ODAIKitMultimodal"]),
     .testTarget(name: "ODAIKitVideoTests", dependencies: ["ODAIKitVideo"]),
     .target(name: "ODAIKitAppleVideo", dependencies: ["ODAIKitCore", "ODAIKitVideo"]),
     .testTarget(name: "ODAIKitAppleVideoTests", dependencies: ["ODAIKitAppleVideo", "ODAIKitVideo"], resources: [.copy("Fixtures")]),
