@@ -1,8 +1,16 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；可选固定Apple MLXVLM Demo host本地包完成；KMP真实设备闭环/iOS UI/独立审查待补）
+更新时间：2026-10-22（Asia/Shanghai；程序化KMP host/VM真实MLXVLM设备生命周期通过；共享页面/增强Demo集成/iOS UI/独立审查待补）
 
-## P9 Optional fixed Apple MLXVLM Demo host（2026-10-22，最新检查点）
+## P9 Programmatic KMP host/VM real-device lifecycle（2026-10-22，最新检查点）
+
+- 接续ab40fec；design671f2d0、report2e8eb1d、consumer a24866d、built provenance2868bee，验证/本检查点同次本地提交，最新HEAD以git为准。见[真机host/VM验证](validation/multimodal-demo-device.md)、同名spec/plan及`.superpowers/sdd/2026-10-22-multimodal-demo-device/` ledger/final-review。
+- 独立bundle io.ondeviceai.multimodallifecycle，实际KMP VM/host→IOS bridge→真实client/MLXVLM/ModelStore，不替换runtime输出。授权iPhone16ProMax/iOS27.0.1，source2868bee、runId5514FD5C-44A9-4E1F-8CEB-EE154A50406D、同PID20852；10 gates/5请求成功：available、成功/实际身份、首update取消/释放后终态、drain后重入、host后台/foreground300ms不重启、活动close/input cleanup/modellease释放及VM/bridge关闭后typed拒绝。raw/summary在artifacts/verification/multimodal-device-provenance-20261022，严格validator通过。
+- tools112/112、report5/5/generator3/3、新Swiftstrict0、unsigned/signed真实device build；缺suite RED与provenance失败保留。实际built plist先发现自定义generated key丢失，显式plist修复RED→GREEN后最终commit/hash绑定。模型14/14和fixture/lock复核，仅复制公开固定资产到独立bundle，无下载/录音/私人媒体/签名改动。
+- **边界与下一包：共享Compose页面/增强Demo真实集成验收**。本包只程序化host/VM，不能称页面渲染/导航触摸/system picker/实际OS前后台/增强Demo async准备通过。下一包独立设计/计划，先补可执行页面/host接线与有界验证，已知旧Video runner外部初始化超时不反复重试。Android继续明确unavailable；短视频/自然质量/资源/生产backend另包。
+- 每Task/最终仅作者自审；独立review仍pending，无APPROVE。保护hash/state/index精确不变，日志/artifacts/.superpowers保留，只本地提交，无push/merge/发布。旧Video/P6/ASR MISSING_ASSETS/最低系统/质量/MetalGPU/energy等缺口保留，仍5/12完成、7阶段未收口，P9 active。
+
+## P9 Optional fixed Apple MLXVLM Demo host（2026-10-22，历史检查点）
 
 - 接续picker1ece99d；设计/计划30e691b，Task1 5afb045，Task2与本检查点同次提交，最新HEAD以git为准。见[可选MLX host验证](validation/multimodal-demo-mlx-host.md)、同名spec/plan与`.superpowers/sdd/2026-10-22-multimodal-demo-mlx-host/` ledger/final-review。完成包不重做。
 - 仅独立增强生成工程三flag `ODAI_VIDEO_DEMO=1 ODAI_MULTIMODAL_DEMO=1 ODAI_MULTIMODAL_MLX_DEMO=1` 链接apple-mlx，iOS18/独立bundle io.ondeviceai.multimodalmlxdemo/固定lock；运行另需 `--multimodal-mlx-local-model`。Documents/model canonical固定模型经ModelStore→lease→MLXVLMBackend→client→既有IOS bridge/host/VM，default/Android仍unavailable。准备取消/失败精确释放，销毁owner取消、晚到host关闭、inactive完成background、foreground不重启，准备期间延迟shared控件创建。
