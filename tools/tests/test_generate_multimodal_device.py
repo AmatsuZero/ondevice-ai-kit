@@ -1,4 +1,5 @@
 import json
+import plistlib
 from pathlib import Path
 import tempfile
 import unittest
@@ -23,8 +24,9 @@ class MultimodalDeviceGeneratorTests(unittest.TestCase):
         lock = self.output / "MultimodalDevice.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
         self.assertEqual(lock.read_text(), "fixture")
         project = (self.output / "MultimodalDevice.xcodeproj/project.pbxproj").read_text()
-        for value in ["io.ondeviceai.multimodallifecycle", "18.0", "ODAI_DEMO_BINDING", "ODAIKitDemo.framework", "ODAIKitAppleMLXVLM", "MultimodalDeviceSuite.swift", "a" * 40]:
+        for value in ["io.ondeviceai.multimodallifecycle", "18.0", "ODAI_DEMO_BINDING", "ODAIKitDemo.framework", "ODAIKitAppleMLXVLM", "MultimodalDeviceSuite.swift"]:
             self.assertIn(value, project)
+        self.assertEqual(plistlib.loads((self.output / "Info.plist").read_bytes())["ODAISourceCommit"], "a" * 40)
         self.assertFalse((self.root / "demo/iosApp/OnDeviceAIDemo.xcodeproj").exists())
 
     def testMissingInputRejectsBeforeOutput(self):
