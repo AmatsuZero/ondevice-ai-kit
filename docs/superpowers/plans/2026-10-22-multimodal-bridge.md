@@ -16,13 +16,13 @@
 - No Demo screen, video, private media, recording, signing-asset changes, pushes or publication.
 - Preserve two user-protected files; no modification or staging.
 - Callbacks/admission/provider access on UI; cancel any-thread; terminal after drain/release exactly once.
-- Capability-prefixed callback names avoid changing old exported selector labels.
+- Capability-prefixed entry point and callback names avoid changing old exported selector labels.
 
 ### Task1: Common contract and unavailable implementation
 
 **Files:** Create `kmp-binding/src/commonMain/kotlin/io/ondeviceai/binding/MultimodalBridge.kt` and `kmp-binding/src/commonTest/kotlin/io/ondeviceai/binding/MultimodalBridgeContractTest.kt`.
 
-**Interfaces:** consumes BridgeTask/BridgeAvailability; produces DTOs and MultimodalBridge queryBackends/generate/close plus UnavailableMultimodalBridge for platform hosts.
+**Interfaces:** consumes BridgeTask/BridgeAvailability; produces DTOs and MultimodalBridge queryMultimodalBackends/generateMultimodal/closeMultimodal plus UnavailableMultimodalBridge for platform hosts.
 
 - [ ] Write failing tests for blank reference/prompt/selection, nonpositive budget, invalid sequence/identity/output, backend identity mismatch and failure privacy. Example:
   ```kotlin
@@ -33,9 +33,9 @@
 - [ ] Implement DTO validation and synchronous unavailable/closed behavior:
   ```kotlin
   interface MultimodalBridge {
-      fun queryBackends(callback: MultimodalBridgeBackendsCallback): BridgeTask
-      fun generate(request: MultimodalBridgeRequest, selection: MultimodalBridgeSelection, callback: MultimodalBridgeGenerateCallback): BridgeTask
-      fun close(callback: MultimodalBridgeCloseCallback)
+      fun queryMultimodalBackends(callback: MultimodalBridgeBackendsCallback): BridgeTask
+      fun generateMultimodal(request: MultimodalBridgeRequest, selection: MultimodalBridgeSelection, callback: MultimodalBridgeGenerateCallback): BridgeTask
+      fun closeMultimodal(callback: MultimodalBridgeCloseCallback)
   }
   ```
 - [ ] Run common simulator tests and `:kmp-binding:linkDebugFrameworkIosSimulatorArm64 :demo:shared:linkDebugFrameworkIosSimulatorArm64 --offline`; inspect new selectors and confirm old Speech/Video labels unchanged.
