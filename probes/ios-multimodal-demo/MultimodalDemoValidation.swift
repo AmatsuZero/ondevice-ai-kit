@@ -86,10 +86,18 @@ import UIKit
           && ready.model.state.inputReference != nil)
       gates["pickerReply"] = true
       stage = "generate activation"
-      try require(try AppAccessibility.activate(identifier: "multimodal-generate", roots: roots()))
+      report["canGenerateBeforeActivation"] = ready.model.state.canGenerate
+      report["phaseBeforeActivation"] = ready.model.state.phase.name
+      let accepted = try AppAccessibility.activate(
+        identifier: "multimodal-generate", roots: roots())
+      report["activationAccepted"] = accepted
+      report["phaseAfterActivation"] = ready.model.state.phase.name
+      try require(accepted)
       try await wait(seconds: 120) {
         ready.model.state.phase != .running && ready.model.state.phase != .cancelling
       }
+      report["phaseAfterTerminalWait"] = ready.model.state.phase.name
+      report["generationFailureCode"] = ready.model.state.failure?.code.name ?? "none"
       try require(ready.model.state.phase == .succeeded)
       guard let output = ready.model.state.output else { throw ValidationFailure() }
       let identity = SmolVLM2Model.identity
