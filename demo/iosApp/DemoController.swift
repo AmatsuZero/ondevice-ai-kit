@@ -19,8 +19,12 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
     private(set) var videoHost: VideoHost?
     #endif
     #if ODAI_MULTIMODAL_DEMO
-    private(set) var multimodalHost: MultimodalHost?
+    @Published private(set) var multimodalHost: MultimodalHost?
     private var multimodalPicker: MultimodalFilePicker?
+    #endif
+    #if ODAI_MULTIMODAL_MLX_DEMO
+    @Published private(set) var multimodalPreparing = false
+    private var multimodalPreparation: MultimodalHostPreparation?
     #endif
     private let identityProbeFactory: ((CGImage) -> IdentityProbeReference)?
     private var latestIdentityCameraFrame: CameraFrame?
@@ -69,6 +73,23 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
                 let picker = MultimodalFilePicker()
                 multimodalPicker = picker
                 multimodalHost = MultimodalHost(store: try MultimodalInputStore(), picker: { picker.present(reply: $0) })
+                #if ODAI_MULTIMODAL_MLX_DEMO
+                if ProcessInfo.processInfo.arguments.contains("--multimodal-mlx-local-model") {
+                    multimodalPreparing = true
+                    let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                    let preparation = MultimodalHostPreparation()
+                    multimodalPreparation = preparation
+                    preparation.start(make: { try await MultimodalMLXHostFactory.make(documents: documents, picker: picker) },
+                        ready: { [weak self] host in
+                            guard let self else { host?.close(); return }
+                            self.multimodalPreparing = false
+                            guard let host else { self.message = "本地模型准备失败"; return }
+                            self.multimodalHost?.close()
+                            if UIApplication.shared.applicationState != .active { host.background() }
+                            self.multimodalHost = host
+                        })
+                }
+                #endif
             } catch { message = "多模态模块初始化失败" }
         }
         #endif

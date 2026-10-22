@@ -15,6 +15,8 @@ SOURCES = [f"demo/iosApp/{name}.swift" for name in ["OnDeviceAIDemoApp", "DemoCo
 VIDEO_SOURCES = ["demo/iosApp/VideoHost.swift", "demo/iosApp/VideoInputStore.swift", "demo/iosApp/VideoFilePicker.swift",
                  "kmp-binding/apple/IOSVideoBridge.swift", "kmp-binding/apple/IOSVideoInput.swift"]
 
+MLX_SOURCES = ["demo/iosApp/MultimodalHostPreparation.swift", "demo/iosApp/MultimodalModelHostFactory.swift", "demo/iosApp/MultimodalMLXHostFactory.swift"]
+
 MULTIMODAL_SOURCES = ["demo/iosApp/MultimodalHost.swift", "demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/MultimodalFilePicker.swift", "kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOSMultimodalInput.swift"]
 
 class SpeechDemoProjectTests(unittest.TestCase):
@@ -26,7 +28,9 @@ class SpeechDemoProjectTests(unittest.TestCase):
         (self.root / "scripts").mkdir()
         shutil.copy(ROOT / SCRIPT, self.root / SCRIPT)
         (self.root / "apple").mkdir()
-        for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
+        (self.root / "apple-mlx").mkdir()
+        (self.root / "apple-mlx/Package.resolved").write_text("fixed-lock")
+        for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
             path = self.root / source
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("fixture")
@@ -40,9 +44,41 @@ class SpeechDemoProjectTests(unittest.TestCase):
         self.output = self.root / "artifacts/speech-demo"
         self.ruby = os.environ.get("RUBY", "ruby")
 
-    def generate(self, video=False, multimodal=False):
+    def generate(self, video=False, multimodal=False, mlx=False):
         return subprocess.run([self.ruby, str(self.root / SCRIPT)], capture_output=True, text=True,
-            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0"})
+            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0", "ODAI_MULTIMODAL_MLX_DEMO": "1" if mlx else "0"})
+
+    def testMlxRequiresBothFlagsAndAddsIsolatedProductLockAndTarget(self):
+        for flags in [{"mlx": True}, {"video": True, "mlx": True}]:
+            result = self.generate(**flags)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertFalse(self.output.exists())
+        result = self.generate(video=True, multimodal=True, mlx=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        inspected = subprocess.run([self.ruby, "-rxcodeproj", "-rjson", "-e", """
+p = Xcodeproj::Project.open(ARGV[0]); t = p.targets.find { |target| target.name == 'SpeechDemo' }
+puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.real_path.to_s },
+ packages: p.root_object.package_references.map(&:relative_path), products: t.package_product_dependencies.map(&:product_name),
+ settings: t.build_configurations.map(&:build_settings)})
+""", str(self.output / "SpeechDemo.xcodeproj")], capture_output=True, text=True, check=True)
+        data = json.loads(inspected.stdout)
+        self.assertEqual(sorted(data["sources"]), sorted(str(self.root / s) for s in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES))
+        self.assertIn(str(self.root / "apple-mlx"), data["packages"])
+        self.assertIn("ODAIKitAppleMLXVLM", data["products"])
+        self.assertIn("ODAIKitModelStore", data["products"])
+        for settings in data["settings"]:
+            self.assertEqual(settings["IPHONEOS_DEPLOYMENT_TARGET"], "18.0")
+            self.assertEqual(settings["PRODUCT_BUNDLE_IDENTIFIER"], "io.ondeviceai.multimodalmlxdemo")
+            self.assertIn("ODAI_MULTIMODAL_MLX_DEMO", settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"])
+        lock = self.output / "SpeechDemo.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
+        self.assertEqual(lock.read_text(), "fixed-lock")
+        self.assertEqual(self.original.read_bytes(), b"protected project")
+
+    def testMlxMissingLockRejectsBeforeOutputMutation(self):
+        (self.root / "apple-mlx/Package.resolved").unlink()
+        result = self.generate(video=True, multimodal=True, mlx=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(self.output.exists())
 
     def testMultimodalOptInRequiresVideoAndAddsOnlyBaseProducts(self):
         rejected = self.generate(multimodal=True)

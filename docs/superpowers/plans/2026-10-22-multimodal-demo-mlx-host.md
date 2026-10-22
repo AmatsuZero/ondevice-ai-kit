@@ -20,16 +20,16 @@ Cancellation during preparation, failures after ownership transfer, default grap
 Files: create demo/iosApp/MultimodalModelHostFactory.swift, probes/ios-multimodal-bridge/MultimodalModelHostFactoryTests.swift; extend Demo-only test generator and source/product inspection tests.
 Interfaces: MainActor static make(modelStore: ModelStore, manifest: ModelManifest, source: URL, inputDirectory: URL, picker: @escaping (@escaping (URL?)->Void)throws->Void, backend: (ModelLease)throws->any MultimodalGenerationBackend) async throws -> MultimodalHost.
 
-- [ ] Write tiny real ModelStore tests: successful transfer protects remove until host.close; builder throw closes lease; invalid registration closes backend; cancelled before install invokes no builder; cancelled during builder closes backend/lease; corrupt source invokes no builder. Real generated test RED missing factory symbol.
-- [ ] Implement composition using Task.checkCancellation at ownership boundaries, explicit async cleanup on failure, bridge/store/host reuse.
-- [ ] Run fresh complete Demo ABI tests, actual generator tests and strict new Swift format; expected all pass with no skipped. Scope author review; exact commit feat: compose lease-safe multimodal model host.
+- [x] Write tiny real ModelStore tests: successful transfer protects remove until host.close; builder throw closes lease; invalid registration closes backend; cancelled before install invokes no builder; cancelled during builder closes backend/lease; corrupt source invokes no builder. Real generated test RED missing factory symbol.
+- [x] Implement composition using Task.checkCancellation at ownership boundaries, explicit async cleanup on failure, bridge/store/host reuse.
+- [x] Run fresh complete Demo ABI tests, actual generator tests and strict new Swift format; expected all pass with no skipped. Scope author review; exact commit feat: compose lease-safe multimodal model host.
 
 ### Task2: enhanced fixed MLX Demo opt-in
 
-Files: create demo/iosApp/MultimodalMLXHostFactory.swift; modify DemoController.swift, OnDeviceAIDemoApp.swift, scripts/generate-speech-demo.rb, tools/tests/test_speech_demo_project.py; validation/roadmap/handoff/ledger/final-review.
+Files: create demo/iosApp/MultimodalMLXHostFactory.swift, MultimodalHostPreparation.swift and preparation XCTest; modify DemoController.swift, OnDeviceAIDemoApp.swift, scripts/generate-speech-demo.rb, tools/tests/test_speech_demo_project.py; validation/roadmap/handoff/ledger/final-review.
 Interfaces: MainActor MultimodalMLXHostFactory.make(documents: URL, picker: MultimodalFilePicker) async throws -> MultimodalHost; compile flag ODAI_MULTIMODAL_MLX_DEMO and explicit --multimodal-mlx-local-model runtime opt-in. Only enhanced generator adds source/product/local apple-mlx and copies fixed lock; enhanced deployment18/bundle distinct.
 
-- [ ] Add actual generation tests for flag prerequisites, default graph unchanged, enhanced18/source/products/lock/bundle, refuse missing lock before output; run RED.
-- [ ] Implement canonical factory and async once-only owner wiring: unavailable retained on failure, weak completion/close on cancelled or released owner, published host and loading gate before controls, inactive completion backgrounded. No auto generation/restart.
-- [ ] Run full tools and Demo native tests as changed; generate fresh enhanced project and offline unsigned generic iOS device compile with fixed existing SourcePackages/lock and -disableAutomaticPackageResolution -skipPackageUpdates -onlyUsePackageVersionsFromResolvedFile. Expected success or exact external cache/tool blocker, never download.
-- [ ] Separate author final review; document real pass/fail/unverified and next independent device suite. Verify protected hashes/index, exact local commit feat: add opt-in fixed MLXVLM Demo host. Roadmap5/12/P9active unchanged.
+- [x] Add actual generation tests for flag prerequisites, default graph unchanged, enhanced18/source/products/lock/bundle, refuse missing lock before output; run RED.
+- [x] Implement canonical factory and async once-only owner wiring: unavailable retained on failure, weak completion/close on cancelled or released owner, published host and loading gate before controls, inactive completion backgrounded. No auto generation/restart.
+- [x] Run full tools and Demo native tests as changed; generate fresh enhanced project and offline unsigned generic iOS device compile with fixed existing SourcePackages/lock and -disableAutomaticPackageResolution -skipPackageUpdates -onlyUsePackageVersionsFromResolvedFile. Expected success or exact external cache/tool blocker, never download.
+- [x] Separate author final review; document real pass/fail/unverified and next independent device suite. Verify protected hashes/index, exact local commit feat: add opt-in fixed MLXVLM Demo host. Roadmap5/12/P9active unchanged.

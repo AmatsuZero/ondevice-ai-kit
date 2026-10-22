@@ -47,7 +47,15 @@ struct SharedControls: UIViewControllerRepresentable {
                         } else { Text("选择图片或启动相机").foregroundColor(.white) }
                     }.clipped()
                 }
+                #if ODAI_MULTIMODAL_MLX_DEMO
+                if controller.multimodalPreparing {
+                    ProgressView("正在校验本地模型").frame(height: 380)
+                } else {
+                    SharedControls(controller: controller).frame(height: 380)
+                }
+                #else
                 SharedControls(controller: controller).frame(height: 380)
+                #endif
                 if let message = controller.message { Text(message).font(.caption) }
                 if controller.cameraPermissionDenied {
                     Button("打开设置") { controller.openCameraSettings() }

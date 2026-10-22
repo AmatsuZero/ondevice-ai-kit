@@ -1,8 +1,16 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；双端单图picker/shared actions/opt-in本地包完成；真实模型host/设备闭环/iOS UI/独立审查待补）
+更新时间：2026-10-22（Asia/Shanghai；可选固定Apple MLXVLM Demo host本地包完成；KMP真实设备闭环/iOS UI/独立审查待补）
 
-## P9 Single-image Demo picker/shared actions（2026-10-22，最新检查点）
+## P9 Optional fixed Apple MLXVLM Demo host（2026-10-22，最新检查点）
+
+- 接续picker1ece99d；设计/计划30e691b，Task1 5afb045，Task2与本检查点同次提交，最新HEAD以git为准。见[可选MLX host验证](validation/multimodal-demo-mlx-host.md)、同名spec/plan与`.superpowers/sdd/2026-10-22-multimodal-demo-mlx-host/` ledger/final-review。完成包不重做。
+- 仅独立增强生成工程三flag `ODAI_VIDEO_DEMO=1 ODAI_MULTIMODAL_DEMO=1 ODAI_MULTIMODAL_MLX_DEMO=1` 链接apple-mlx，iOS18/独立bundle io.ondeviceai.multimodalmlxdemo/固定lock；运行另需 `--multimodal-mlx-local-model`。Documents/model canonical固定模型经ModelStore→lease→MLXVLMBackend→client→既有IOS bridge/host/VM，default/Android仍unavailable。准备取消/失败精确释放，销毁owner取消、晚到host关闭、inactive完成background、foreground不重启，准备期间延迟shared控件创建。
+- 新factory6/6与准备owner3/3，完整Demo33/33；generator11/11，全tools104/104、strict新Swift0；default完整unsigned simulator与enhanced完整unsigned generic iOS device构建通过，既有cache/固定lock，无下载。现有XCTest/ICU/actor/C++ warning保留，不当最低系统验证。原模型14/14及fixturehash已复核，本包无设备安装/运行/复制。
+- 下一独立包：**KMP页面到真实MLXVLM设备生命周期**，先独立设计/逐Task计划，再做成功/首update取消/drain/同进程重入/后台不自动重启/close/lease释放/关闭后拒绝。只已有固定模型/合成fixture与授权设备。iOS实际触摸/真实system picker仍未验；短视频/Android真backend/自然质量/资源另包。
+- 每Task范围与最终仅作者自审；独立review pending，无APPROVE。保护hash/state/index不变，只本地提交，无push/merge/发布/下载/录音/私人媒体/签名变更。旧Video UI初始化超时/P6实录/Android ASR MISSING_ASSETS/最低系统/自然质量/Metal GPU/energy与独立review缺口保留。仍5/12完成、7阶段未收口，P9 active。
+
+## P9 Single-image Demo picker/shared actions（2026-10-22，历史检查点）
 
 - 接续29458bb；独立设计/计划7eda196，Task1 shared actions2cdf094，Task2 Android433121c，Task3 iOS/检查点同次提交，最新HEAD以git为准。见[picker验证](validation/multimodal-demo-picker.md)、同名spec/plan及`.superpowers/sdd/2026-10-22-multimodal-demo-picker/` ledger/final-review。已完成包不重做。
 - shared可选选择/清除/离页动作、新专属iOS host入口；Android Intent extra `odai.multimodal.enabled`默认false，GetContent→IO bounded staging→host/store opaque token，后台/close接线；iOS独立生成Demo双flag `ODAI_VIDEO_DEMO=1 ODAI_MULTIMODAL_DEMO=1`，PNG/JPEG单文件picker、host/lifecycle，旧保护工程不变。默认仍UnavailableBridge，无模型/backend接线。
