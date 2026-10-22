@@ -13,7 +13,12 @@ Scope: common contract → Android adapter → Apple adapter; no Demo UI/video/m
 
 ## Task 2 — Android adapter
 
-Pending.
+Completed implementation and scope author review.
+
+- RED: `task-2-red.log`, missing Android adapter/input provider/lease symbols.
+- GREEN: `task-2-green-final.log`, offline Multimodal native + bridge tests, lintDebug, binding compile and existing Video/Speech tests successful. Bridge 10/10 + native 12/12. Lint retains only existing pinned coroutine-version advisory (no dependency download/upgrade).
+- Real native client with injected barrier backends verifies strict explicit/default selection, metadata/identity/prompt/budget, UI updates/callbacks, duplicate/stale/late suppression, any-thread and immediate cancellation, cancellation winning late ordinary errors (including lease error), slot/lease through drain and release, reentrant result, repeated close joining queries, detached cleanup after host cancellation and private stable failures.
+- Self-review: no copied Video output lease/token machinery; immutable text only. `ATOMIC` starts cleanup on immediate cancellation; close seals admission synchronously, joins tracked workers, closes native once; registry/slot cleanup precedes terminal callback. No MLX/Demo/video changes or real Android inference claim. Protected files not staged. Independent review pending.
 
 ## Task 3 — Apple adapter / final checkpoint
 
