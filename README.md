@@ -6,7 +6,7 @@
 
 当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；可选的 Apple AVSpeech TTS、Apple 文件/麦克风 ASR、Android 系统 TTS，以及 Android on-device ASR 模块；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。
 
-身份模块现已提供独立原生契约、加密存储/删除、1:1/1:N 引擎、活体会话、KMP bridge 与 Demo 控件；生产身份模型、PAD 后端和校准尚未启用。视频超分已有双端独立契约/client、可选 Apple VideoToolbox 固定 profile 后端和 KMP bridge/Demo；Android 明确 unavailable，iOS 新 Demo UI 因自动化初始化超时尚未验收，见[视频 Demo 验证](docs/validation/video-bridge-demo.md)。VLM已新增双端Multimodal纯契约/client与可裁剪本地分发，真实MLX后端仍待独立接入，见[多模态基础验证](docs/validation/multimodal-sdk-foundation.md)；语音已有双端 KMP bridge、共享页面和原生 host，iOS 使用独立生成工程。iOS ASR 已实现文件与可主动结束输入的麦克风路径，均强制 on-device；麦克风真机录音尚未验收，见[麦克风验证](docs/validation/ios-microphone-asr.md)。第三方云端后端未交付。现代真机的双端 TTS 与 iOS 文件 ASR Demo 闭环已通过；Android ASR 仍缺资源，最低系统/自然质量与追加独立审查待补，见[语音 Demo 验证](docs/validation/speech-demo-bridge.md)。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
+身份模块现已提供独立原生契约、加密存储/删除、1:1/1:N 引擎、活体会话、KMP bridge 与 Demo 控件；生产身份模型、PAD 后端和校准尚未启用。视频超分已有双端独立契约/client、可选 Apple VideoToolbox 固定 profile 后端和 KMP bridge/Demo；Android 明确 unavailable，iOS 新 Demo UI 因自动化初始化超时尚未验收，见[视频 Demo 验证](docs/validation/video-bridge-demo.md)。VLM已新增双端Multimodal纯契约/client与可裁剪本地分发，可选Apple MLXVLM后端已在独立apple-mlx包接入并通过固定单图SDK设备套件，见[MLXVLM后端验证](docs/validation/apple-mlxvlm-backend.md)；语音已有双端 KMP bridge、共享页面和原生 host，iOS 使用独立生成工程。iOS ASR 已实现文件与可主动结束输入的麦克风路径，均强制 on-device；麦克风真机录音尚未验收，见[麦克风验证](docs/validation/ios-microphone-asr.md)。第三方云端后端未交付。现代真机的双端 TTS 与 iOS 文件 ASR Demo 闭环已通过；Android ASR 仍缺资源，最低系统/自然质量与追加独立审查待补，见[语音 Demo 验证](docs/validation/speech-demo-bridge.md)。它们按[设计](docs/superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)分阶段接入；高系统能力作为可选 backend，不提高基础 SDK 的 iOS 15 下限。动态加载指模型资产与已链接后端的实例生命周期，不下载执行代码。
 
 当前 Demo 提供人脸检测、独立“身份与活体”、语音与视频控件（iOS 语音/视频使用独立生成工程）；身份默认显示 UNVERIFIED，宿主注入真实授权、策略与后端后才可运行。后续 SDK/Demo 能力和调研→探针→模块接入的范围见 [功能路线图](docs/ROADMAP.md#当前范围与后续功能)。iOS15 与 Android 真机验收已按用户安排登记为 [等待设备 TODO](docs/ROADMAP.md#等待设备的-todo)，待设备提供后恢复。
 
@@ -78,7 +78,7 @@ Identity 只依赖 Core 与 ModelStore，独立消费者见 `examples/ios-identi
 
 视频基础模块：Swift `ODAIKitVideo` 只依赖 Core，Android `io.ondeviceai:video:0.1.0-SNAPSHOT` 使用 Core 与现有协程库。`VideoProcessingClient` 接收默认 ID 和宿主提供的后端，支持严格 Default/Explicit 选择、进度、取消/drain 与共享 close。请求默认保留音轨，不支持的倍率或音轨策略会拒绝。成功结果中的 output lease 由调用方持有，使用结束后调用 `release()`；client.close 不删除已交付的输出。输入文件需保持到处理及取消排空结束。分发与验证见[视频 SDK 基础记录](docs/validation/video-sdk-foundation.md)。可选 `ODAIKitAppleVideo` 只依赖 Core/Video，注册 `AppleVideoToolboxBackend()` 后提供 `apple.videotoolbox.sr`：仅非模拟器 iOS26+、模型已 ready、320×180/24fps/1…48帧/BT.709 SDR 输入、4×，输出1280×720 HEVC/MOV。默认 `.preserve` 支持无音轨或单条44.1/48kHz单/双声道AAC（零起点、与视频等长、无空白编辑段）；不兼容音频明确拒绝，`.discard` 显式丢弃。其他系统/模拟器返回 unavailable，不下载模型、不提高基础系统下限。九XCFramework与真实设备成功/取消/重入证据见[AppleVideo 验证](docs/validation/apple-video-backend.md)；音轨保留与设备证据见[音频验证](docs/validation/apple-video-audio.md)；基础/VT首包独立审查继续保留；KMP/Demo 已实现且本地门禁通过，新 Demo UI、独立审查与质量验收仍待补。
 
-多模态基础模块：Swift ODAIKitMultimodal与Android io.ondeviceai:multimodal:0.1.0-SNAPSHOT只依赖Core（Android另用既有协程库）。单图+prompt、默认128输出预算、model/runtime identity、累计文本、严格后端选择、cancel/drain/共享close已实现；构造请求不读图片，close不撤销返回文本。真实MLX/Android后端、模型管理、短视频、KMP/Demo仍待后续。
+多模态基础模块：Swift ODAIKitMultimodal与Android io.ondeviceai:multimodal:0.1.0-SNAPSHOT只依赖Core（Android另用既有协程库）。单图+prompt、默认128输出预算、model/runtime identity、累计文本、严格后端选择、cancel/drain/共享close已实现；构造请求不读图片，close不撤销返回文本。独立Apple MLXVLM后端/ModelStore lease已接入并通过固定单图设备生成/取消/重入/close；短视频、Android、KMP/Demo、质量/峰值资源与独立审查仍待后续。见[后端验证](docs/validation/apple-mlxvlm-backend.md)。
 
     rtk proxy ./gradlew :android:sdk-core:publishToMavenLocal :android:multimodal:publishToMavenLocal
     rtk proxy ./gradlew :examples:android-multimodal-native:assembleDebug -PusePublishedSdk=true
@@ -96,3 +96,5 @@ python3 tools/benchmark_report.py run.json --output report.json
 仅合并设备、OS、后端、模型、输入、预处理和测量方法一致的数据；缺失阶段保持 null，无综合评分。参见[协议](docs/validation/benchmark.md)、[验收记录](docs/validation/acceptance.md)、[设备矩阵](docs/validation/device-matrix.md)。构建通过不等于 iOS 15/API 26 真机验收通过。
 
 GitHub 主仓：<https://github.com/AmatsuZero/ondevice-ai-kit>；极狐镜像：<https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit>。按[同步说明](docs/validation/remote-sync.md)显式同步分支/tag；未配置自动 CI 镜像。
+
+可选MLX增强source package：路径apple-mlx，product ODAIKitAppleMLXVLM，仅arm64 iOS18+物理设备实际推理。使用SmolVLM2Model.manifest()安装已有本地资产到ModelStore，acquire后传入MLXVLMBackend(lease:)；成功初始化后lease由backend持有，调用方不能提前close。增强包保持与基础apple包分离。用 `python3 tools/generate_mlxvlm_consumer.py artifacts/MLXVLMConsumer-fresh` 生成独立消费者；生成不会下载依赖或模型，离线构建需现有固定缓存。详见[验证和限制](docs/validation/apple-mlxvlm-backend.md)。

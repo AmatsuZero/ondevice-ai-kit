@@ -1,0 +1,29 @@
+name: MLXVLMConsumer
+options:
+  deploymentTarget:
+    iOS: '18.0'
+packages:
+  AppleMLX:
+    path: ../../apple-mlx
+  BaseSDK:
+    path: ../../apple
+targets:
+  MLXVLMConsumer:
+    type: application
+    platform: iOS
+    sources:
+      - MLXVLMConsumerApp.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.mlxvlmconsumer
+        SWIFT_VERSION: '6.0'
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        CODE_SIGNING_ALLOWED: NO
+    dependencies:
+      - package: AppleMLX
+        product: ODAIKitAppleMLXVLM
+      - package: BaseSDK
+        product: ODAIKitModelStore
+      - package: BaseSDK
+        product: ODAIKitMultimodal

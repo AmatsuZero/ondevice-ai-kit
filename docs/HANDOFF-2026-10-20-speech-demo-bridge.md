@@ -1,8 +1,17 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；P9 Multimodal SDK Foundation四Task本地完成；真实MLX后端为下一独立入口；Video UI/P6实录/独立审查缺口保留）
+更新时间：2026-10-22（Asia/Shanghai；P9独立Apple MLXVLM后端与真实SDK固定设备套件通过；质量/峰值资源/独立审查与其他阶段缺口保留）
 
-## P9 Multimodal SDK Foundation（2026-10-22，最新检查点）
+## P9 Optional Apple MLXVLM Backend（2026-10-22，最新检查点）
+
+- 已提交cdb959a设计/计划、440af94独立package shell、815435b真实runtime与取消生命周期。Task3消费者/验证/交接随本检查点同次提交，最新HEAD以git为准。规格/计划为docs/superpowers/{specs,plans}/2026-10-22-apple-mlxvlm-backend*，ledger .superpowers/sdd/2026-10-22-apple-mlxvlm-backend/progress.md，不重做已完成项。
+- 独立apple-mlx的ODAIKitAppleMLXVLM仅arm64 iOS18+物理设备推理，macOS/simulator明确unsupported；root apple不引MLX，基础iOS15/macOS12/API26不变。固定14文件canonical manifest、ModelStore lease、单图有界snapshot、maxTokens与真实producer join已接入；每请求重新load，无跨轮聊天历史。
+- [后端验证](validation/apple-mlxvlm-backend.md)：host11/11、root Swift fresh461/461、工具90/90；device target、独立consumer unsigned/signed build与install成功。设备结果artifacts/verification/apple-mlxvlm-backend-20261022/device-result.json为success，首轮3625.341709ms、update后取消/同进程reentry/lease保护/close释放/关闭拒绝均通过。此为新SDK链路，不挪用旧probe成功。
+- tools/generate_mlxvlm_consumer.py生成fresh独立consumer、源码与固定lock，拒绝覆盖非空输出；模型14文件与fixture hash复核。只用既有缓存，无下载/录音/私人媒体/push/发布/签名资产变更，两个保护文件hash不变且未暂存。
+- 用户要求inline执行，范围/最终仅作者自审，独立review仍pending，不能声称APPROVE。未验证增强包binary分发、最低系统、质量/峰值Metal GPU资源/首token统计；其他Video UI/P6等旧缺口保留。
+- 下一本地入口：有界固定单图质量/性能和资源证据设计，沿用已有固定资产与合成fixture，禁止泛化单fixture成功为质量通过；随后分包推进短视频、KMP/Demo与Android。P9/roadmap未关闭。
+
+## P9 Multimodal SDK Foundation（2026-10-22，历史检查点）
 
 - 设计/计划43929e4；Task1 cf3a0e6 Swift契约/actor client、Task2 8476dd8 Android对等模块、Task3 e1ff006分发/consumer、Task4为本检查点同次提交。最新HEAD以git为准，不重做。规格：[设计](superpowers/specs/2026-10-22-multimodal-sdk-foundation-design.md)；[四Task计划](superpowers/plans/2026-10-22-multimodal-sdk-foundation.md)；ledger .superpowers/sdd/2026-10-22-multimodal-sdk-foundation/progress.md。
 - 验证：Swift新增契约4/4、client10/10，全量461/461；Android12/12+lint、总门禁716tasks（15执行）；工具88/88、Apple总门禁含新binary consumer通过。Android取消availability晚启动竞态已有真实失败断言和修复回归。详见[验证](validation/multimodal-sdk-foundation.md)。

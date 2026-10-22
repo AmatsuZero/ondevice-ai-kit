@@ -41,11 +41,11 @@
 - Consumes: `MultimodalGenerationBackend`, `ModelLease`, `ModelManifest`.
 - Produces: `MLXVLMBackend(lease:)`, stable backend id, availability and lifecycle surface.
 
-- [ ] **Step 1: Write failing tests** for fixed identity admission, unavailable availability without invoking a loader, and repeated close.
-- [ ] **Step 2: Run** `rtk proxy swift test --package-path apple-mlx --filter MLXVLMBackendTests`; Expected: compile failure because package/backend are absent.
-- [ ] **Step 3: Implement** the separate manifest-gated backend shell with an injected loader protocol and one-shot close state.
-- [ ] **Step 4: Run** the focused tests; Expected: PASS.
-- [ ] **Step 5: Commit** `feat: add isolated Apple MLXVLM backend shell`.
+- [x] **Step 1: Write failing tests** for fixed identity admission, unavailable availability without invoking a loader, and repeated close.
+- [x] **Step 2: Run** `rtk proxy swift test --package-path apple-mlx --filter MLXVLMBackendTests`; Expected: compile failure because package/backend are absent.
+- [x] **Step 3: Implement** the separate manifest-gated backend shell with an injected loader protocol and one-shot close state.
+- [x] **Step 4: Run** the focused tests; Expected: PASS.
+- [x] **Step 5: Commit** `feat: add isolated Apple MLXVLM backend shell`.
 
 ### Task 2: Fixed MLXVLM runtime adapter
 
@@ -58,26 +58,32 @@
 - Consumes: Task 1 internal runtime protocol `generate(directory:request:update:) async throws -> String`, real ModelLease and fixed local MLX checkout API.
 - Produces: request-budgeted owned `generateTask` streaming, cumulative ordered updates, cancellation drain, and lease-safe close.
 
-- [ ] **Step 1: Add failing adapter tests** for `maxOutputTokens`, update ordering, cancellation drain before lease close, and ordinary error preservation.
-- [ ] **Step 2: Run focused tests**; Expected: FAIL on missing runtime adapter behavior.
-- [ ] **Step 3: Implement** `VLMModelFactory` local loading, tokenizer loader, `GenerateParameters(maxTokens:)`, bounded image snapshot, explicit generation-task join, and close serialization.
-- [ ] **Step 4: Run focused and package tests**; Expected: PASS, no skipped tests.
-- [ ] **Step 5: Commit** `feat: adapt fixed MLXVLM generation lifecycle`.
+- [x] **Step 1: Add failing adapter tests** for `maxOutputTokens`, update ordering, cancellation drain before lease close, and ordinary error preservation.
+- [x] **Step 2: Run focused tests**; Expected: FAIL on missing runtime adapter behavior.
+- [x] **Step 3: Implement** `VLMModelFactory` local loading, tokenizer loader, `GenerateParameters(maxTokens:)`, bounded image snapshot, explicit generation-task join, and close serialization.
+- [x] **Step 4: Run focused and package tests**; Expected: PASS, no skipped tests.
+- [x] **Step 5: Commit** `feat: adapt fixed MLXVLM generation lifecycle`.
 
 ### Task 3: Consumer and evidence gates
 
 **Files:**
-- Create: `examples/ios-mlxvlm-native/MLXVLMConsumerApp.swift`
+- Create: `examples/ios-mlxvlm-native/MLXVLMConsumerApp.swift` and `project.yml`
+- Create: `tools/generate_mlxvlm_consumer.py` and `tools/tests/test_apple_mlx_consumer.py`
+- Modify: `README.md`
 - Create: `docs/validation/apple-mlxvlm-backend.md`
 - Modify: `docs/ROADMAP.md`
 - Modify: `docs/HANDOFF-2026-10-20-speech-demo-bridge.md`
 
 **Interfaces:**
 - Consumes: Task 2 public product and the verified local fixture/model directory.
-- Produces: compile-only separate consumer, local verification record, and next-stage handoff.
+- Produces: independently generated source consumer, compile gate plus explicit opt-in fixed-fixture SDK device suite, local verification record, and next-stage handoff.
 
-- [ ] **Step 1: Write consumer/gate assertions** that importing `ODAIKitAppleMLXVLM` does not alter the base package's products.
-- [ ] **Step 2: Run the gate before implementation**; Expected: consumer and validation links fail because files/product are absent.
-- [ ] **Step 3: Add the minimal consumer, validation record, and roadmap/handoff checkpoint.**
-- [ ] **Step 4: Run `swift test --package-path apple`, `swift test --package-path apple-mlx`, and the compile-only consumer; Expected: base package remains green and enhancement package compiles on the fixed local checkout.
-- [ ] **Step 5: Commit** `docs: checkpoint Apple MLXVLM backend evidence`.
+- [x] **Step 1: Write consumer/gate assertions** that importing `ODAIKitAppleMLXVLM` does not alter the base package's products.
+- [x] **Step 2: Run the gate before implementation**; Expected: consumer and validation links fail because files/product are absent.
+- [x] **Step 3: Add the minimal consumer, validation record, and roadmap/handoff checkpoint.**
+- [x] **Step 4: Run `swift test --package-path apple`, `swift test --package-path apple-mlx`, and the compile-only consumer; Expected: base package remains green and enhancement package compiles on the fixed local checkout.
+- [x] **Step 5: Commit** `docs: checkpoint Apple MLXVLM backend evidence`.
+
+## Execution record
+
+Tasks 1–3 implemented locally. The ledger records RED/GREEN evidence and minimal implementation rulings (owned upstream generation Task, typed tokenizer bridge, portable consumer generator and opt-in device suite). Documentation now describes the immutable CIImage snapshot used by the implementation. These are executor decisions, not claims of line-by-line user approval. Whole-package author self-review is recorded separately; independent review remains pending.
