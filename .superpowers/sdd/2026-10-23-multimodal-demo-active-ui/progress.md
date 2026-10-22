@@ -1,0 +1,3 @@
+# SDD ledger — plan: docs/superpowers/plans/2026-10-23-multimodal-demo-active-ui.md
+
+Base69fae57, inline/no subagents. Spec/plan selfreview no placeholders/conflicts; Task1 enabledhelper/report consumed byTask2 suite, noKMPexports. Ruling:256tokenbudget onlyexplicitactivevalidation for controlrecomposition window,32tokenreentry; nobenchmark/qualitycomparison. Cancelafterfirstobservedupdate notsynchronousfirstcallback, recordobserved/actionsequence and rejectifalreadyterminal; noretryfalseactiveevidence. Existingbootstrap/selection pathreused; AXnotphysicaltouch/OSbackground/truefilepicker. Userauthorization coversindependentpackage/soloexecution/noroutineconfirmation.
