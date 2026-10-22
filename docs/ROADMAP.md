@@ -10,6 +10,8 @@
 
 2026-10-21 P7 续接：已提交 Swift 视频契约/client（`17a330e`、`fd2e537`）和 Android 对等模块（`112634d`），本地分发已验证，独立审查因服务容量失败保留pending。Apple VideoToolbox 后端现已完成本地实施、九XCFramework及固定fixture设备验证，有界AAC音轨preserve已完成并通过设备验证，KMP Video bridge/Demo Task1–5 已提交、本地门禁通过，Task6 iOS UI 因自动化初始化超时待补；Android unavailable/picker取消/空闲前后台 smoke通过。当前验收入口为[视频 Demo 验证](validation/video-bridge-demo.md)；Video SDK Foundation/AppleVideo/bridge 独立审查待恢复；P6 受控录音等待真实终态期间继续可独立推进的 P7。基础契约本身不代表实际超分，新增固定profile后端也不代表 P7 完成，见[音轨验证](validation/apple-video-audio.md)、[AppleVideo验证](validation/apple-video-backend.md)、[基础验证](validation/video-sdk-foundation.md)与[实施计划](superpowers/plans/2026-10-21-video-sdk-foundation.md)。
 
+2026-10-22 P9 续接：视频包检查点 `ae76aa3` 后，独立推进[Multimodal SDK Foundation设计](superpowers/specs/2026-10-22-multimodal-sdk-foundation-design.md)与[四Task计划](superpowers/plans/2026-10-22-multimodal-sdk-foundation.md)。当前Task1待实现：双端纯契约/client先行，随后本地分发/裁剪consumer；不引入MLX/模型下载，不把旧probe当SDK。视频UI/独立审查和P6实录缺口继续保留。
+
 - 继续时先读本文件、验收记录和 git 状态，选择当前未完成工作包；不重复已验证工作。
 - 工作包发现跨范围缺陷时，记录为后续项；本包无法成立的阻塞才在包内修复。
 - 已授权直接使用本地真机做 device-only 验证；仅操作本项目 App，保留设备其他 App/资料。使用已有签名配置，不自行创建或变更证书、描述文件等账户资产。
