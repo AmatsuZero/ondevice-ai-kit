@@ -86,6 +86,17 @@ import UIKit
           && ready.model.state.inputReference != nil)
       gates["pickerReply"] = true
       stage = "generate activation"
+      report["generateNodeInitiallyDisabled"] = try AppAccessibility.find(
+        identifier: "multimodal-generate", roots: roots())?.accessibilityTraits.contains(
+          .notEnabled)
+      stage = "generate enabled node"
+      try await wait(seconds: 10) {
+        guard
+          let node = try AppAccessibility.find(identifier: "multimodal-generate", roots: roots())
+        else { return false }
+        return !node.accessibilityTraits.contains(.notEnabled)
+      }
+      stage = "generate activation"
       report["canGenerateBeforeActivation"] = ready.model.state.canGenerate
       report["phaseBeforeActivation"] = ready.model.state.phase.name
       let accepted = try AppAccessibility.activate(
@@ -94,7 +105,8 @@ import UIKit
       report["phaseAfterActivation"] = ready.model.state.phase.name
       try require(accepted)
       try await wait(seconds: 120) {
-        ready.model.state.phase != .running && ready.model.state.phase != .cancelling
+        ready.model.state.phase == .succeeded || ready.model.state.phase == .failed
+          || ready.model.state.phase == .cancelled
       }
       report["phaseAfterTerminalWait"] = ready.model.state.phase.name
       report["generationFailureCode"] = ready.model.state.failure?.code.name ?? "none"
@@ -148,7 +160,9 @@ import UIKit
         withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
       try data.write(
         to: documents.appendingPathComponent("demo-integration.json"), options: .atomic)
-    } catch { /* No synthetic pass if the report cannot be persisted. */  }
+    } catch {
+      // No synthetic pass if the report cannot be persisted.
+    }
   }
 
   private static func roots() -> [NSObject] {
