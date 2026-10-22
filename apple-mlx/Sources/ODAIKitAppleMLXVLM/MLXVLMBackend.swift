@@ -10,24 +10,30 @@ public struct MLXVLMBackend: MultimodalGenerationBackend {
 
     public init(lease: ModelLease) throws {
         try SmolVLM2Model.validate(lease.manifest)
-        session = MLXVLMGenerationSession(lease: lease, runtime: UnlinkedRuntime(), identity: SmolVLM2Model.identity)
+        session = MLXVLMGenerationSession(lease: lease, runtime: LocalMLXVLMRuntime(), identity: SmolVLM2Model.identity)
     }
 
     public func availability() async -> CapabilityAvailability {
-        await session.availability(supported: false)
+        await session.availability(supported: Self.isSupported)
     }
 
     public func generate(_ request: MultimodalRequest,
                          update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> MultimodalTextOutput {
-        try await session.generate(request, update: update)
+        let state = await session.availability(supported: Self.isSupported)
+        if state.reason == .closed { throw MultimodalClientError.closed }
+        guard state.status == .available else {
+            throw MultimodalClientError.backendUnavailable(backendId, .unsupportedDevice)
+        }
+        return try await session.generate(request, update: update)
     }
+    private static var isSupported: Bool {
+        #if os(iOS) && arch(arm64) && !targetEnvironment(simulator)
+        true
+        #else
+        false
+        #endif
+    }
+
     public func drain() async { await session.drain() }
     public func close() async { await session.close() }
-}
-
-private struct UnlinkedRuntime: MLXVLMRuntime {
-    func generate(directory: URL, request: MultimodalRequest,
-                  update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> String {
-        throw MultimodalClientError.backendUnavailable(SmolVLM2Model.backendId, .backendNotLinked)
-    }
 }

@@ -15,6 +15,7 @@ actor MLXVLMGenerationSession {
     private let identity: MultimodalModelIdentity
     private var closed = false
     private var active: Task<String, Error>?
+    private var relay: MLXVLMUpdateRelay?
     private var closeTask: Task<Void, Never>?
     private var waiters: [CheckedContinuation<Void, Never>] = []
 
@@ -39,9 +40,16 @@ actor MLXVLMGenerationSession {
             throw MultimodalClientError.invalidInput("request exceeds MLXVLM budget")
         }
         let runtime = runtime, directory = lease.directory
-        let task = Task { try await runtime.generate(directory: directory, request: request, update: update) }
+        let relay = MLXVLMUpdateRelay(update)
+        let task = Task {
+            try Task.checkCancellation()
+            return try await runtime.generate(directory: directory, request: request, update: { relay.publish($0) })
+        }
+        self.relay = relay
         active = task
         defer {
+            relay.stop()
+            self.relay = nil
             active = nil
             let pending = waiters
             waiters.removeAll()
@@ -59,7 +67,7 @@ actor MLXVLMGenerationSession {
                 if Task.isCancelled || task.isCancelled || closed { throw CancellationError() }
                 throw error
             }
-        } onCancel: { task.cancel() }
+        } onCancel: { relay.stop(); task.cancel() }
     }
 
     func drain() async {
@@ -69,6 +77,7 @@ actor MLXVLMGenerationSession {
     func close() async {
         if let closeTask { await closeTask.value; return }
         closed = true
+        relay?.stop()
         active?.cancel()
         let lease = lease
         let task = Task {
@@ -78,4 +87,19 @@ actor MLXVLMGenerationSession {
         closeTask = task
         await task.value
     }
+}
+
+/// Serializes delivery with cancellation, including synchronous cancellation from a callback.
+private final class MLXVLMUpdateRelay: @unchecked Sendable {
+    private let lock = NSRecursiveLock()
+    private var callback: (@Sendable (MultimodalTextUpdate) -> Void)?
+    private var lastSequence = -1
+    init(_ callback: (@Sendable (MultimodalTextUpdate) -> Void)?) { self.callback = callback }
+    func publish(_ value: MultimodalTextUpdate) {
+        lock.lock(); defer { lock.unlock() }
+        guard value.sequence > lastSequence else { return }
+        lastSequence = value.sequence
+        callback?(value)
+    }
+    func stop() { lock.lock(); defer { lock.unlock() }; callback = nil }
 }

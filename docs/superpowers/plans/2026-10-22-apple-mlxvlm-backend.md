@@ -6,7 +6,7 @@
 
 **Architecture:** A new `apple-mlx` Swift package owns the MLX imports and exposes `ODAIKitAppleMLXVLM`. The backend adapts an acquired `ModelLease` to the existing `MultimodalGenerationBackend`, joins cancelled generation before clearing the session and releasing the lease, and uses only the fixed local SmolVLM2/MLX revisions.
 
-**Tech Stack:** Swift 6, Swift Package Manager, iOS 18, MLXVLM/MLXLMCommon/MLXHuggingFace, Tokenizers, local ODAIKitMultimodal and ODAIKitModelStore.
+**Tech Stack:** Swift 6, Swift Package Manager, iOS 18, MLXVLM/MLXLMCommon, Tokenizers, local ODAIKitMultimodal and ODAIKitModelStore.
 
 **Spec:** `docs/superpowers/specs/2026-10-22-apple-mlxvlm-backend-design.md`
 
