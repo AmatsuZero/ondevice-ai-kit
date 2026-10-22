@@ -16,30 +16,38 @@ interface IdentityDemoActions { fun submitLivenessFrame() }
 fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityViewModel? = null,
     identityActions: IdentityDemoActions? = null, speech: SpeechViewModel? = null,
     speechActions: SpeechDemoActions? = null, video: VideoViewModel? = null,
-    videoActions: VideoDemoActions? = null) {
+    videoActions: VideoDemoActions? = null, multimodal: MultimodalViewModel? = null) {
     val state = model.state
     val availability = model.bridge.availability()
     var identityVisible by remember { mutableStateOf(false) }
     var speechVisible by remember { mutableStateOf(false) }
     var videoVisible by remember { mutableStateOf(false) }
+    var multimodalVisible by remember(multimodal) { mutableStateOf(false) }
     fun leaveSpeech() { if (speechVisible) { speech?.leavePage(); speechActions?.leavePage() }; speechVisible = false }
     fun leaveVideo() { if (videoVisible) { video?.leavePage(); videoActions?.leavePage() }; videoVisible = false }
+    fun leaveMultimodal() { if (multimodalVisible) multimodal?.leavePage(); multimodalVisible = false }
     DisposableEffect(speech) { onDispose { speech?.leavePage(); speechActions?.leavePage() } }
     DisposableEffect(video) { onDispose { video?.leavePage(); videoActions?.leavePage() } }
+    DisposableEffect(multimodal) { onDispose { multimodal?.leavePage() } }
     MaterialTheme {
         Column(Modifier.fillMaxWidth().heightIn(max = 380.dp).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("OnDevice AI Kit", style = MaterialTheme.typography.headlineSmall)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TextButton(onClick = { leaveSpeech(); leaveVideo(); identityVisible = false }) { Text("人脸检测") }
-                if (identity != null) TextButton(onClick = { leaveSpeech(); leaveVideo(); identityVisible = true }) { Text("身份与活体") }
+                TextButton(onClick = { leaveSpeech(); leaveVideo(); leaveMultimodal(); identityVisible = false }) { Text("人脸检测") }
+                if (identity != null) TextButton(onClick = { leaveSpeech(); leaveVideo(); leaveMultimodal(); identityVisible = true }) { Text("身份与活体") }
                 if (speech != null) TextButton(onClick = {
-                    leaveVideo(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; speechVisible = true
+                    leaveVideo(); leaveMultimodal(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; speechVisible = true
                 }, modifier = Modifier.testTag("speech-tab")) { Text("语音") }
                 if (video != null) TextButton(onClick = {
-                    leaveSpeech(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; videoVisible = true
+                    leaveSpeech(); leaveMultimodal(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; videoVisible = true
                 }, modifier = Modifier.testTag("video-tab")) { Text("视频") }
             }
-            if (speechVisible && speech != null) {
+            if (multimodal != null) TextButton(onClick = {
+                leaveSpeech(); leaveVideo(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; multimodalVisible = true
+            }, modifier = Modifier.testTag("multimodal-tab")) { Text("图像理解") }
+            if (multimodalVisible && multimodal != null) {
+                MultimodalScreen(multimodal)
+            } else if (speechVisible && speech != null) {
                 SpeechScreen(speech, speechActions)
             } else if (videoVisible && video != null) {
                 VideoScreen(video, videoActions)

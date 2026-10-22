@@ -12,3 +12,9 @@ fun videoMainViewController(model:FaceViewModel,actions:DemoActions,identity:Ide
     identityActions:IdentityDemoActions,speech:SpeechViewModel,speechActions:SpeechDemoActions,
     video:VideoViewModel,videoActions:VideoDemoActions)=
     ComposeUIViewController { FaceScreen(model,actions,identity,identityActions,speech,speechActions,video,videoActions) }
+
+/** Explicit opt-in; legacy entry points and their export labels stay unchanged. */
+fun multimodalMainViewController(model:FaceViewModel,actions:DemoActions,identity:IdentityViewModel,
+    identityActions:IdentityDemoActions,speech:SpeechViewModel,speechActions:SpeechDemoActions,
+    video:VideoViewModel,videoActions:VideoDemoActions,multimodal:MultimodalViewModel)=
+    ComposeUIViewController { FaceScreen(model,actions,identity,identityActions,speech,speechActions,video,videoActions,multimodal) }
