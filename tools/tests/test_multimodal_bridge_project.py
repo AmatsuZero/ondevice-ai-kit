@@ -13,7 +13,8 @@ SOURCES = ["kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOS
 INPUT_SOURCES = ["demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/SpeechInputStore.swift",
                  "kmp-binding/apple/IOSSpeechAudioInput.swift", "probes/ios-multimodal-bridge/MultimodalInputStoreTests.swift",
                  "demo/iosApp/MultimodalHost.swift", "probes/ios-multimodal-bridge/MultimodalHostTests.swift",
-                 "demo/iosApp/MultimodalFilePicker.swift", "probes/ios-multimodal-bridge/MultimodalFilePickerTests.swift"]
+                 "demo/iosApp/MultimodalFilePicker.swift", "probes/ios-multimodal-bridge/MultimodalFilePickerTests.swift",
+                 "demo/iosApp/MultimodalModelHostFactory.swift", "probes/ios-multimodal-bridge/MultimodalModelHostFactoryTests.swift"]
 
 
 class MultimodalBridgeProjectTests(unittest.TestCase):
@@ -53,7 +54,7 @@ puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.rea
 """, str(self.output / "MultimodalBridgeTests.xcodeproj")], capture_output=True, text=True)
                 self.assertEqual(inspected.returncode, 0, inspected.stderr)
                 data = json.loads(inspected.stdout)
-                self.assertEqual(sorted(data["products"]), ["ODAIKitCore", "ODAIKitMultimodal"])
+                self.assertEqual(sorted(data["products"]), ["ODAIKitCore", "ODAIKitModelStore", "ODAIKitMultimodal"] if module == "ODAIKitDemo" else ["ODAIKitCore", "ODAIKitMultimodal"])
                 framework = self.root / base / f"build/bin/iosSimulatorArm64/debugFramework/{module}.framework"
                 self.assertEqual([p for p in data["linked"] if Path(p).name != "Foundation.framework"], [str(framework)])
                 expected = SOURCES + (INPUT_SOURCES if module == "ODAIKitDemo" else [])
