@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-22-multimodal-bridge-design.md`
 
+**Execution checkpoint (2026-10-22):** Tasks1/2 committed as 2e96a26/b1e6873; Task3 source and two ABIs verified, checkpoint committed with validation/handoff. Historical step list below records the original execution order; completion evidence is in `docs/validation/multimodal-bridge.md` and `.superpowers/sdd/2026-10-22-multimodal-bridge/progress.md`. Independent review pending; no release approval.
+
 ## Global Constraints
 
 - Keep base iOS15/macOS12/API26 and optional apple-mlx isolation; no new dependency/model downloads.

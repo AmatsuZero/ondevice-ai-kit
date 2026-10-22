@@ -1,8 +1,18 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；P9固定单图benchmark本地证据已完成；自然质量/Metal资源/独立审查与其他阶段缺口保留）
+更新时间：2026-10-22（Asia/Shanghai；单图 KMP bridge 三 Task 本地实现/验证完成；独立审查和跨设备验收缺口保留）
 
-## P9 Fixed-Image Benchmark（2026-10-22，最新检查点）
+## P9 Single-image KMP Bridge（2026-10-22，最新检查点）
+
+- 设计/计划 `88c2fa9`，Task1 `2e96a26` common契约，Task2 `b1e6873` Android adapter；Task3 Apple adapter/独立工程/本检查点同次提交，最终HEAD以git为准。[验证](validation/multimodal-bridge.md)，规格/计划 `docs/superpowers/{specs,plans}/2026-10-22-multimodal-bridge*`，ledger/final-review在 `.superpowers/sdd/2026-10-22-multimodal-bridge/`。不重做已完成 Foundation/后端/benchmark/bridge。
+- 单图 opaque input、严格Default/Explicit、累计update和不可变model/runtime身份、UI callbacks、any-thread cancel、drain后lease释放、close/query join已实现。Apple只依赖base Multimodal，Android注入native client，无client明确unavailable。没有Demo UI、视频或Android真推理。
+- 新鲜common21/21（新增4）、Android bridge10/native12、Video17/Speech25回归、lint/compile、Binding/Demo framework成功；Apple两种ABI各10/10；工具101/101。旧Video导出selector曾被generic入口改变，专属前缀修复后旧Swift6/6通过，旧Speech/Video源码未改。
+- Apple生成工程保留于 `artifacts/verification/multimodal-{binding,demo}-20261022/`。默认系统Ruby2.6与3.4 gem混用的失败已定位，使用既有3.4 binary，无安装；XCTest17和Demo既有ICU18.5链接版本警告保留，不能当iOS15设备验证。
+- 每Task和最终仅作者自审，用户要求单人执行；独立review仍pending，无APPROVE。基础iOS15/macOS12/API26与独立apple-mlx不变；无push/下载/录音/私人媒体/签名资产变更。两保护文件hash精确不变且未暂存，日志/artifacts不清理。
+- 下一独立执行包：**单图Demo共享状态机与UI**，只消费typed bridge、平台默认unavailable，先独立设计/逐Task计划。双端host/picker、固定模型接入和真机生命周期随后另包；短视频、Android真实后端不一起扩入。KMP→真实MLXVLM设备端到端仍unverified，不用本包fixture替代。
+- 自然图片质量、Metal/GPU/energy、最低系统、增强包分发、旧Video UI初始化超时、P6实录、Android ASR及旧独立审查缺口保留；整个P9/roadmap仍active。
+
+## P9 Fixed-Image Benchmark（2026-10-22，历史检查点）
 
 - 设计/计划提交 `fdf55e1`，Task1 validator `b97f0b3`，Task2 observer/consumer/测量 `f9512a0`。Task3验证/交接随本检查点提交，HEAD以git为准。设计/计划 `docs/superpowers/{specs,plans}/2026-10-22-apple-mlxvlm-fixed-image-benchmark*`，ledger与final-review在 `.superpowers/sdd/2026-10-22-apple-mlxvlm-fixed-image-benchmark/`。不重做已完成Foundation/后端/benchmark包。
 - 真机 iPhone16ProMax/iOS27.0.1，固定模型/runtime/fixture、Debug build、temperature0、32tokens；1次warm-up＋5次新backend/client测量。严格校验后的加载p50/p95=311.094917/323.690167ms，首交付update=763.803375/774.153375ms，总耗时=924.392542/934.323334ms；不是冷启动、纯首token、Release SLA或P11验收。
