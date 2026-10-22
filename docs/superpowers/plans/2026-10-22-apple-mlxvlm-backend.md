@@ -33,11 +33,13 @@
 **Files:**
 - Create: `apple-mlx/Package.swift`
 - Create: `apple-mlx/Sources/ODAIKitAppleMLXVLM/MLXVLMBackend.swift`
-- Create: `apple-mlx/Tests/ODAIKitAppleMLVLMTests/MLXVLMBackendTests.swift`
+- Create: `apple-mlx/Sources/ODAIKitAppleMLXVLM/MLXVLMGenerationSession.swift`
+- Create: `apple-mlx/Sources/ODAIKitAppleMLXVLM/SmolVLM2Model.swift` and canonical manifest resource
+- Create: `apple-mlx/Tests/ODAIKitAppleMLXVLMTests/MLXVLMBackendTests.swift`
 
 **Interfaces:**
 - Consumes: `MultimodalGenerationBackend`, `ModelLease`, `ModelManifest`.
-- Produces: `MLXVLMBackend(lease:loader:identity:)`, stable backend id, availability and lifecycle surface.
+- Produces: `MLXVLMBackend(lease:)`, stable backend id, availability and lifecycle surface.
 
 - [ ] **Step 1: Write failing tests** for fixed identity admission, unavailable availability without invoking a loader, and repeated close.
 - [ ] **Step 2: Run** `rtk proxy swift test --package-path apple-mlx --filter MLXVLMBackendTests`; Expected: compile failure because package/backend are absent.
@@ -50,15 +52,15 @@
 **Files:**
 - Modify: `apple-mlx/Package.swift`
 - Modify: `apple-mlx/Sources/ODAIKitAppleMLXVLM/MLXVLMBackend.swift`
-- Modify: `apple-mlx/Tests/ODAIKitAppleMLVLMTests/MLXVLMBackendTests.swift`
+- Modify: `apple-mlx/Tests/ODAIKitAppleMLXVLMTests/MLXVLMBackendTests.swift`
 
 **Interfaces:**
-- Consumes: Task 1 backend and the fixed local MLX checkout API.
-- Produces: request-budgeted `ChatSession` streaming, cumulative ordered updates, cancellation drain, and lease-safe close.
+- Consumes: Task 1 internal runtime protocol `generate(directory:request:update:) async throws -> String`, real ModelLease and fixed local MLX checkout API.
+- Produces: request-budgeted owned `generateTask` streaming, cumulative ordered updates, cancellation drain, and lease-safe close.
 
 - [ ] **Step 1: Add failing adapter tests** for `maxOutputTokens`, update ordering, cancellation drain before lease close, and ordinary error preservation.
 - [ ] **Step 2: Run focused tests**; Expected: FAIL on missing runtime adapter behavior.
-- [ ] **Step 3: Implement** `VLMModelFactory` local loading, tokenizer loader, `GenerateParameters(maxTokens:)`, `.url` image input, stream join, `clear()`, and close serialization.
+- [ ] **Step 3: Implement** `VLMModelFactory` local loading, tokenizer loader, `GenerateParameters(maxTokens:)`, bounded image snapshot, explicit generation-task join, and close serialization.
 - [ ] **Step 4: Run focused and package tests**; Expected: PASS, no skipped tests.
 - [ ] **Step 5: Commit** `feat: adapt fixed MLXVLM generation lifecycle`.
 
