@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-22-multimodal-demo-state-design.md`.
 
+**Execution checkpoint:** Task1 committed5db0083; Task2 validation/handoff checkpoint committed with `docs/validation/multimodal-demo-state.md`. Both tasks locally verified; independent review remains pending. The step list below preserves the original plan; exact execution evidence is in this plan's ledger.
+
 ## Global Constraints
 
 - Keep iOS15/macOS12/API26 and optional apple-mlx isolation.

@@ -1,8 +1,17 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；单图 KMP bridge 三 Task 本地实现/验证完成；独立审查和跨设备验收缺口保留）
+更新时间：2026-10-22（Asia/Shanghai；单图bridge及共享Demo状态机本地包完成；UI/host/设备/独立审查仍待补）
 
-## P9 Single-image KMP Bridge（2026-10-22，最新检查点）
+## P9 Single-image Demo State（2026-10-22，最新检查点）
+
+- bridge三Task已提交 `2e96a26`、`b1e6873`、`1291bd2`。下一包按独立交付进一步拆为shared state先行、UI随后，避免导航/ABI/picker/model同时扩张。设计/计划 `5866196`；Task1状态机 `5db0083`；Task2验证/本检查点同次提交，最终HEAD以git为准。验证见[共享状态机](validation/multimodal-demo-state.md)，ledger/final-review `.superpowers/sdd/2026-10-22-multimodal-demo-state/`。
+- MultimodalViewModel默认UnavailableBridge；原始prompt/严格选择/预算校验、递增累计update/最终身份、同步callback、cancel等待终态、旧callback过滤、编辑取消、background不重启与一次close已实现。只是shared state，无UI/host/picker/媒体读取/真模型连接。
+- 新VM12/12、全shared60/60实际执行；binding21/21为既有缓存，双framework link与Android shared compile成功。最终Android Demo APK/lint560tasks（60执行）成功，0 error/9条既有warning；更新后Demo ABI bridge10/10实际重链/执行、工具101/101。具体日志与缓存边界见验证记录，不把缓存命中称新执行。
+- 每Task与最终仅作者自审，独立review仍pending，无APPROVE。无push/下载/录音/私人媒体/签名修改；两保护文件hash不变且未暂存，worktree/artifacts/日志保留。基础iOS15/macOS12/API26与apple-mlx独立不变。
+- 下一独立执行包：**shared单图Screen/UI与opt-in入口**。消费现有状态机，默认不可用，展示backend/输入名/prompt/预算/取消/update/实际输出身份；先独立设计/逐Task计划。两端host/picker、固定模型/ModelStore和真机闭环随后另包；短视频与Android真后端继续独立。
+- KMP→MLXVLM设备端到端、自然质量、Metal/GPU/energy、最低系统、增强分发与独立review仍未验；旧Video UI初始化超时、P6实录、Android ASR等缺口原样保留，不重复已完成bridge/Foundation/后端/benchmark/state。
+
+## P9 Single-image KMP Bridge（2026-10-22，历史检查点）
 
 - 设计/计划 `88c2fa9`，Task1 `2e96a26` common契约，Task2 `b1e6873` Android adapter；Task3 Apple adapter/独立工程/本检查点同次提交，最终HEAD以git为准。[验证](validation/multimodal-bridge.md)，规格/计划 `docs/superpowers/{specs,plans}/2026-10-22-multimodal-bridge*`，ledger/final-review在 `.superpowers/sdd/2026-10-22-multimodal-bridge/`。不重做已完成 Foundation/后端/benchmark/bridge。
 - 单图 opaque input、严格Default/Explicit、累计update和不可变model/runtime身份、UI callbacks、any-thread cancel、drain后lease释放、close/query join已实现。Apple只依赖base Multimodal，Android注入native client，无client明确unavailable。没有Demo UI、视频或Android真推理。
