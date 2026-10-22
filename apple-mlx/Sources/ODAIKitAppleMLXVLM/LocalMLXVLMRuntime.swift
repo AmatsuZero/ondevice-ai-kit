@@ -10,6 +10,7 @@ import Tokenizers
 
 struct LocalMLXVLMRuntime: MLXVLMRuntime {
     func generate(directory: URL, request: MultimodalRequest,
+                  observer: (@Sendable (MLXVLMGenerationEvent) -> Void)?,
                   update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> String {
         #if os(iOS)
         try Task.checkCancellation()
@@ -18,9 +19,13 @@ struct LocalMLXVLMRuntime: MLXVLMRuntime {
               let image = CGImageSourceCreateImageAtIndex(source, 0, [kCGImageSourceShouldCacheImmediately: true] as CFDictionary) else {
             throw MLXVLMBackendError.invalidImage
         }
+        let loadStarted = ContinuousClock.now
         let model: ModelContainer
         do { model = try await VLMModelFactory.shared.loadContainer(from: directory, using: LocalTokenizerLoader()) }
         catch { try Task.checkCancellation(); throw MLXVLMBackendError.runtimeFailure }
+        let loadElapsed = loadStarted.duration(to: .now)
+        let loadMs = Double(loadElapsed.components.seconds) * 1000 + Double(loadElapsed.components.attoseconds) / 1e15
+        observer?(.modelLoaded(durationMs: loadMs))
         try Task.checkCancellation()
         do {
             return try await model.perform { context in

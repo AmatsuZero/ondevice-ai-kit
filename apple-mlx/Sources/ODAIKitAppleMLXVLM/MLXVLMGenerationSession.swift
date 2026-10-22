@@ -6,6 +6,7 @@ import ODAIKitMultimodal
 /// A runtime must not return until its model/preprocessing/generation work has actually stopped.
 protocol MLXVLMRuntime: Sendable {
     func generate(directory: URL, request: MultimodalRequest,
+                  observer: (@Sendable (MLXVLMGenerationEvent) -> Void)?,
                   update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> String
 }
 
@@ -18,11 +19,18 @@ actor MLXVLMGenerationSession {
     private var relay: MLXVLMUpdateRelay?
     private var closeTask: Task<Void, Never>?
     private var waiters: [CheckedContinuation<Void, Never>] = []
+    private let observer: (@Sendable (MLXVLMGenerationEvent) -> Void)?
 
     init(lease: ModelLease, runtime: any MLXVLMRuntime, identity: MultimodalModelIdentity) {
+        self.init(lease: lease, runtime: runtime, identity: identity, observer: nil)
+    }
+
+    init(lease: ModelLease, runtime: any MLXVLMRuntime, identity: MultimodalModelIdentity,
+         observer: (@Sendable (MLXVLMGenerationEvent) -> Void)?) {
         self.lease = lease
         self.runtime = runtime
         self.identity = identity
+        self.observer = observer
     }
 
     func availability(supported: Bool) -> CapabilityAvailability {
@@ -43,7 +51,8 @@ actor MLXVLMGenerationSession {
         let relay = MLXVLMUpdateRelay(update)
         let task = Task {
             try Task.checkCancellation()
-            return try await runtime.generate(directory: directory, request: request, update: { relay.publish($0) })
+            return try await runtime.generate(directory: directory, request: request, observer: observer,
+                                              update: { relay.publish($0) })
         }
         self.relay = relay
         active = task

@@ -53,6 +53,9 @@
 - Modify: `apple-mlx/Tests/ODAIKitAppleMLXVLMTests/MLXVLMBackendTests.swift`
 - Modify: `examples/ios-mlxvlm-native/MLXVLMConsumerApp.swift`
 - Modify: `tools/tests/test_apple_mlx_consumer.py`
+- Create: `examples/ios-mlxvlm-native/BenchmarkMeasurements.swift` (executable host-tested measurement helper)
+- Modify: `examples/ios-mlxvlm-native/project.yml` and `tools/generate_mlxvlm_consumer.py` (include helper)
+- Modify: `tools/mlxvlm_benchmark_report.py` and its tests (reject missing source/failed runs; preserve unavailable RSS)
 
 **Interfaces:**
 - Consumes: existing backend/client generation and fixed consumer provisioning.

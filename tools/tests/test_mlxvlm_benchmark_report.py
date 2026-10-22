@@ -98,6 +98,21 @@ class MLXVLMBenchmarkReportTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "rubric result"):
             report.validate(run)
 
+    def test_rejects_missing_source_identity_and_failed_run(self):
+        for key, value in (("sdkCommit", "unverified"), ("errorType", "StoreFailure")):
+            run = valid_run()
+            run[key] = value
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                report.validate(run)
+
+    def test_missing_rss_remains_unverified_without_invented_bytes(self):
+        run = valid_run()
+        run["memory"] = {"method": report.MEMORY_METHOD, "state": "unverified", "reason": "task_info failed"}
+        self.assertEqual(report.summarize(run)["memory"]["state"], "unverified")
+        run["memory"]["peakBytes"] = 0
+        with self.assertRaises(ValueError):
+            report.validate(run)
+
 
 if __name__ == "__main__":
     unittest.main()

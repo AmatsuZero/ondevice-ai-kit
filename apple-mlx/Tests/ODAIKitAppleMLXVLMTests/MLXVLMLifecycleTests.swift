@@ -128,6 +128,7 @@ private actor ControlledRuntime: MLXVLMRuntime {
         await withCheckedContinuation { started.append($0) }
     }
     func generate(directory: URL, request: MultimodalRequest,
+                  observer: (@Sendable (MLXVLMGenerationEvent) -> Void)?,
                   update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> String {
         self.request = request
         starts += 1

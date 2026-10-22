@@ -37,6 +37,43 @@ class AppleMLXConsumerTests(unittest.TestCase):
         target = next(v for v in manifest['targets'] if v['name'] == 'ODAIKitMultimodal')
         self.assertEqual(target['dependencies'], [{'byName': ['ODAIKitCore', None]}])
 
+    def test_executable_measurements_preserve_missing_rss_and_timing_order(self):
+        # Removing failure propagation or accepting load-after-update must fail this test.
+        with tempfile.TemporaryDirectory() as directory:
+            directory = Path(directory)
+            main = directory / 'main.swift'
+            main.write_text('''import Foundation
+let missing = ResidentMemorySampler(readMemory: { nil })
+missing.sample()
+precondition(missing.snapshot()["state"] as? String == "unverified")
+precondition(missing.snapshot()["peakBytes"] == nil)
+let measured = ResidentMemorySampler(readMemory: { 100 })
+measured.sample()
+precondition(measured.snapshot()["baselineBytes"] as? Int == 100)
+precondition(measured.snapshot()["deltaBytes"] as? Int == 0)
+let invalid = BenchmarkTiming()
+invalid.start()
+invalid.recordFirstUpdate()
+invalid.recordLoad(0)
+invalid.finish()
+precondition(invalid.snapshot() == nil)
+let valid = BenchmarkTiming()
+valid.start()
+valid.recordLoad(0)
+valid.recordFirstUpdate()
+valid.finish()
+precondition(valid.snapshot() != nil)
+let absent = BenchmarkTiming()
+absent.start()
+absent.finish()
+precondition(absent.snapshot() == nil)
+print("measurement behavior passed")
+''')
+            binary = directory / 'measurements'
+            subprocess.run(['swiftc', '-swift-version', '6', str(ROOT / 'examples/ios-mlxvlm-native/BenchmarkMeasurements.swift'), str(main), '-o', str(binary)], check=True, capture_output=True)
+            result = subprocess.check_output([str(binary)], text=True)
+            self.assertEqual(result.strip(), 'measurement behavior passed')
+
 
 if __name__ == '__main__':
     unittest.main()

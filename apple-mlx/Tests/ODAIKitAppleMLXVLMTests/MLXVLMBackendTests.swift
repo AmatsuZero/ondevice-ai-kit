@@ -6,6 +6,20 @@ import ODAIKitMultimodal
 @testable import ODAIKitAppleMLXVLM
 
 final class MLXVLMBackendTests: XCTestCase {
+    func testGenerationObserverReceivesModelLoadBeforeFirstUpdate() async throws {
+        let fixture = try await ModelFixture.make()
+        let events = EventRecorder()
+        let runtime = ObservedRuntime()
+        let session = MLXVLMGenerationSession(lease: fixture.lease, runtime: runtime,
+                                              identity: SmolVLM2Model.identity,
+                                              observer: { events.record($0) })
+        let image = fixture.lease.directory.appendingPathComponent("weights.bin")
+        let request = try MultimodalRequest(imageFile: image, prompt: "fixture", maxOutputTokens: 1)
+        _ = try await session.generate(request, update: { _ in events.recordUpdate() })
+        XCTAssertEqual(events.values, ["load:12.5", "update"])
+        await session.close()
+    }
+
     func testCanonicalManifestHasFixedIdentityAndFourteenFiles() throws {
         let m = try SmolVLM2Model.manifest()
         XCTAssertEqual(m.modelId, "smolvlm2-500m-video-instruct-mlx")
@@ -60,10 +74,31 @@ final class MLXVLMBackendTests: XCTestCase {
 actor ImmediateRuntime: MLXVLMRuntime {
     var count = 0
     func generate(directory: URL, request: MultimodalRequest,
+                  observer: (@Sendable (MLXVLMGenerationEvent) -> Void)?,
                   update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> String {
         count += 1
         return "fixture"
     }
+}
+
+actor ObservedRuntime: MLXVLMRuntime {
+    func generate(directory: URL, request: MultimodalRequest,
+                  observer: (@Sendable (MLXVLMGenerationEvent) -> Void)?,
+                  update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> String {
+        observer?(.modelLoaded(durationMs: 12.5))
+        update?(try .init(sequence: 0, text: "fixture"))
+        return "fixture"
+    }
+}
+
+private final class EventRecorder: @unchecked Sendable {
+    private let lock = NSLock()
+    private(set) var values: [String] = []
+    func record(_ event: MLXVLMGenerationEvent) {
+        lock.lock(); defer { lock.unlock() }
+        if case .modelLoaded(let durationMs) = event { values.append("load:\(durationMs)") }
+    }
+    func recordUpdate() { lock.lock(); values.append("update"); lock.unlock() }
 }
 
 struct ModelFixture {

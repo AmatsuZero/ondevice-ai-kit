@@ -4,6 +4,7 @@
 import argparse
 import json
 import math
+import re
 from pathlib import Path
 
 
@@ -34,11 +35,15 @@ def _integer(value, name):
 
 
 def validate(run):
+    if "errorType" in run:
+        raise ValueError("benchmark run failed")
     if run.get("schemaVersion") != 1:
         raise ValueError("unsupported schema")
     for key in ("runId", "sdkCommit", "device", "OS"):
         if not isinstance(run.get(key), str) or not run[key]:
             raise ValueError(f"missing metadata: {key}")
+    if not re.fullmatch(r"[0-9a-f]{40}", run["sdkCommit"]):
+        raise ValueError("invalid SDK commit identity")
     for key, expected in EXPECTED.items():
         if run.get(key) != expected:
             raise ValueError(f"fixed identity mismatch: {key}")
@@ -65,11 +70,15 @@ def validate(run):
     memory = run.get("memory")
     if not isinstance(memory, dict) or memory.get("method") != MEMORY_METHOD:
         raise ValueError("memory measurement must be labeled as process RSS")
-    baseline = _integer(memory.get("baselineBytes"), "baselineBytes")
-    peak = _integer(memory.get("peakBytes"), "peakBytes")
-    delta = _integer(memory.get("deltaBytes"), "deltaBytes")
-    if peak < baseline or delta != peak - baseline:
-        raise ValueError("invalid process RSS delta")
+    if memory.get("state") == "unverified":
+        if set(memory) != {"method", "state", "reason"} or not memory.get("reason"):
+            raise ValueError("unverified RSS must not contain invented bytes")
+    else:
+        baseline = _integer(memory.get("baselineBytes"), "baselineBytes")
+        peak = _integer(memory.get("peakBytes"), "peakBytes")
+        delta = _integer(memory.get("deltaBytes"), "deltaBytes")
+        if baseline == 0 or peak < baseline or delta != peak - baseline:
+            raise ValueError("invalid process RSS delta")
     if run.get("unverified") != UNVERIFIED:
         raise ValueError("required unverified resource and quality fields are missing")
     if run.get("qualityScope") != "synthetic-fixture-only":
