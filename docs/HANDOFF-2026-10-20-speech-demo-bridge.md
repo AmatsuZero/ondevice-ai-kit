@@ -1,8 +1,17 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；程序化KMP host/VM真实MLXVLM设备生命周期通过；共享页面/增强Demo集成/iOS UI/独立审查待补）
+更新时间：2026-10-23（Asia/Shanghai；增强Demo bootstrap与共享页面App-local AX真实生成通过；活动取消/离页UI接线、物理触摸/systempicker/OS后台/独立审查待补）
 
-## P9 Programmatic KMP host/VM real-device lifecycle（2026-10-22，最新检查点）
+## P9 Enhanced Demo bootstrap/shared AX integration（2026-10-23，最新检查点）
+
+- 接续6136a62；design558b057、helperd498783、接线10d65b8、诊断7e6250e、AX等待修复51d3b72，文档检查点同次本地提交，最新HEAD以git为准。见[增强Demo集成验证](validation/multimodal-demo-integration.md)、spec/plan `2026-10-22-multimodal-demo-integration`、同名ledger/final-review。
+- 实际增强DemoController准备→真实MLX available→App-local AX激活共享tab/select→真实pickerdelegate注入唯一合成fixture→AX生成→真实VM/SDK输出→共享AX文本/phase/identity→旧Speech/Video idle页签动作→hostclose通过。显式buildflag ODAI_MULTIMODAL_DEMO_VALIDATION=1（须全部增强flags）与双runtimeargs隔离验证；默认/Android仍unavailable，KMP/header/旧导出未改。
+- 最终source51d3b7213cbdf41cdac5747409ac63b75b3a5615，iPhone16ProMax/iOS27.0.1，PID21217/runId6CEF2880-772D-4175-88BD-3CF919E68429；9gatespassed，raw/summary `artifacts/verification/multimodal-demo-integration-final-20261023/`。旧两次AXfalse报告保留；最终initialdisabled=true证实等待notEnabled解除必要，随后RUNNING→SUCCEEDED。不能把outputRendered门禁名当视觉像素/物理touch通过。
+- helper5/5/全Demo38/38，tools114/114，generator3+Speech10，defaultsimulator/enhancedunsigned+signeddevicebuild通过。早期strictlint一个blockcomment被shell掩盖，最终corrected-format实际exit0，失败记录保留。模型14/fixture/lock复核，exactcommitmetadata检查后才运行，无下载/录音/私人媒体/签名资产变更。
+- 下一独立包：**共享页面App-local AX首update后取消/活动离页与重入**，先设计/计划；不重做前包程序化host生命周期。物理触摸/实际OS前后台/真实systempicker文件选择仍未验；不重试已确认的旧Video runner初始化门槛。短视频/Android真backend/质量/资源另包。
+- 每Task/最终仅作者自审，独立reviewpending、无APPROVE；保护hash/state/index不变，只本地提交、无push/merge/发布，日志/artifacts保留。旧Video/P6/ASR/最低系统/自然质量/MetalGPU/energy等缺口不被替代；仍5/12完成、7未收口，P9active。
+
+## P9 Programmatic KMP host/VM real-device lifecycle（2026-10-22，历史检查点）
 
 - 接续ab40fec；design671f2d0、report2e8eb1d、consumer a24866d、built provenance2868bee，验证/本检查点同次本地提交，最新HEAD以git为准。见[真机host/VM验证](validation/multimodal-demo-device.md)、同名spec/plan及`.superpowers/sdd/2026-10-22-multimodal-demo-device/` ledger/final-review。
 - 独立bundle io.ondeviceai.multimodallifecycle，实际KMP VM/host→IOS bridge→真实client/MLXVLM/ModelStore，不替换runtime输出。授权iPhone16ProMax/iOS27.0.1，source2868bee、runId5514FD5C-44A9-4E1F-8CEB-EE154A50406D、同PID20852；10 gates/5请求成功：available、成功/实际身份、首update取消/释放后终态、drain后重入、host后台/foreground300ms不重启、活动close/input cleanup/modellease释放及VM/bridge关闭后typed拒绝。raw/summary在artifacts/verification/multimodal-device-provenance-20261022，严格validator通过。
