@@ -15,4 +15,13 @@ sh scripts/check-ios-photo-orientation.sh
 sh scripts/check-ios-asr-probe.sh
 xcodebuild -project examples/ios-native/NativeConsumer.xcodeproj -scheme NativeConsumer -destination 'generic/platform=iOS Simulator' -derivedDataPath artifacts/NativeConsumer CODE_SIGNING_ALLOWED=NO build > artifacts/verification/native-ios-build.log 2>&1 || { tail -50 artifacts/verification/native-ios-build.log; exit 1; }
 xcodebuild -project demo/iosApp/OnDeviceAIDemo.xcodeproj -scheme OnDeviceAIDemo -destination 'generic/platform=iOS Simulator' -derivedDataPath artifacts/iOSDemo CODE_SIGNING_ALLOWED=NO build > artifacts/verification/demo-ios-build.log 2>&1 || { tail -50 artifacts/verification/demo-ios-build.log; exit 1; }
+# Binary consumer gates use a fresh package output supplied by the caller.
+if [ -n "${ODAI_MULTIMODAL_CONSUMER_PROJECT:-}" ]; then
+ for platform in 'generic/platform=iOS' 'generic/platform=iOS Simulator'; do
+  case "$platform" in *Simulator*) suffix=simulator ;; *) suffix=device ;; esac
+  xcodebuild -project "$ODAI_MULTIMODAL_CONSUMER_PROJECT" -scheme MultimodalBinaryConsumer -destination "$platform" -derivedDataPath "artifacts/MultimodalConsumer-$suffix" CODE_SIGNING_ALLOWED=NO build > "artifacts/verification/multimodal-consumer-$suffix.log" 2>&1 || { tail -50 "artifacts/verification/multimodal-consumer-$suffix.log"; exit 1; }
+ done
+else
+ echo 'Multimodal binary consumer not checked: set ODAI_MULTIMODAL_CONSUMER_PROJECT after packaging.'
+fi
 echo 'Apple host tests, native consumer, bridge and Demo builds passed. Device gates remain separate.'

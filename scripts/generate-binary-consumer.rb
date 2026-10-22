@@ -4,11 +4,18 @@ require 'fileutils'
 root=File.expand_path('..',__dir__)
 speech=!!ARGV.delete('--speech')
 identity=!!ARGV.delete('--identity')
-abort('Usage: generate-binary-consumer.rb [--speech | --identity]') unless ARGV.empty? && !(speech && identity)
+multimodal=!!ARGV.delete('--multimodal')
+abort('Usage: generate-binary-consumer.rb [--speech | --identity | --multimodal]') unless ARGV.empty? && [speech,identity,multimodal].count(true)<=1
 artifacts=File.expand_path(ENV.fetch('ODAI_ARTIFACTS_DIR','artifacts'),root)
-name=identity ? 'IdentityBinaryConsumer' : speech ? 'SpeechBinaryConsumer' : 'BinaryConsumer'
-source=identity ? 'examples/ios-identity-native/IdentityConsumerApp.swift' : speech ? 'examples/ios-speech-native/SpeechConsumerApp.swift' : 'examples/ios-native/NativeConsumerApp.swift'
-products=identity ? ['ODAIKitCore','ODAIKitModelStore','ODAIKitIdentity'] : speech ? ['ODAIKitCore','ODAIKitSpeech','ODAIKitAppleSpeech'] : ['ODAIKitCore','ODAIKitFace','ODAIKitAppleVision']
+if multimodal
+ name='MultimodalBinaryConsumer'
+ source='examples/ios-multimodal-native/MultimodalConsumerApp.swift'
+ products=['ODAIKitCore','ODAIKitMultimodal']
+else
+ name=identity ? 'IdentityBinaryConsumer' : speech ? 'SpeechBinaryConsumer' : 'BinaryConsumer'
+ source=identity ? 'examples/ios-identity-native/IdentityConsumerApp.swift' : speech ? 'examples/ios-speech-native/SpeechConsumerApp.swift' : 'examples/ios-native/NativeConsumerApp.swift'
+ products=identity ? ['ODAIKitCore','ODAIKitModelStore','ODAIKitIdentity'] : speech ? ['ODAIKitCore','ODAIKitSpeech','ODAIKitAppleSpeech'] : ['ODAIKitCore','ODAIKitFace','ODAIKitAppleVision']
+end
 directory=File.join(artifacts,name)
 abort('Refusing to replace existing binary consumer output') if File.exist?(directory)
 abort("Missing source: #{source}") unless File.file?(File.join(root,source))

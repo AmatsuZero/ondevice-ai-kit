@@ -132,6 +132,20 @@
                ReferencedContainer = "container:OnDeviceAIKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "931E1F29166DF4B736CC4D87"
+               BuildableName = "ODAIKitMultimodal.framework"
+               BlueprintName = "ODAIKitMultimodal"
+               ReferencedContainer = "container:OnDeviceAIKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

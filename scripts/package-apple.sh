@@ -3,7 +3,7 @@ set -eu
 cd "$(dirname "$0")/.."
 artifacts_root=${ODAI_ARTIFACTS_DIR:-artifacts}
 if [ -e "$artifacts_root/identity-artifact.json" ]; then echo "Metadata exists; set ODAI_ARTIFACTS_DIR to a fresh directory" >&2; exit 1; fi
-products='ODAIKitCore ODAIKitModelStore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech ODAIKitIdentity ODAIKitVideo ODAIKitAppleVideo'
+products='ODAIKitCore ODAIKitModelStore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech ODAIKitIdentity ODAIKitVideo ODAIKitAppleVideo ODAIKitMultimodal'
 for platform in iphoneos iphonesimulator; do
  if [ -e "$artifacts_root/archives/$platform.xcarchive" ]; then echo "Archive exists; set ODAI_ARTIFACTS_DIR to a fresh directory" >&2; exit 1; fi
 done

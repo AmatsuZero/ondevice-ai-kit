@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07BE57E4F4964AC26358A15D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		0E4D4156C3249BE6D12B1D96 /* IdentityAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A0C5087D6BAEB12ABAD20E /* IdentityAuthorization.swift */; };
 		0F5DBC5BAFFDB06EFFC48CA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		120103EC5E4DE3021FA3ECFF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
@@ -15,6 +16,8 @@
 		184DB45212EBA0B2AF70F10E /* AppleSpeechRecognizerBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9620D6921B51B5D3D408818C /* AppleSpeechRecognizerBackend.swift */; };
 		1FA87777ABC2016F8DADABD0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
 		2019F2341B1AD64F302602BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94ED1EEB7B1AD380F105800B /* Foundation.framework */; };
+		2BFB0269564920A17E9E654B /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
+		2CB3C85575809DE3EE214F20 /* MultimodalContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5269ECAF762D141215774D7D /* MultimodalContracts.swift */; };
 		33B288D899FF05216061044D /* ODAIKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA0D6B1F8440919B0AF0FD52 /* ODAIKitCore.framework */; };
 		3864683E61ECC35F3480F5DB /* Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B53BC264DC0300F3ED7BC /* Availability.swift */; };
 		386ECD1C54E3A04019ABB9C3 /* ModelManifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42809D4D173CF5C8D46F6B5 /* ModelManifest.swift */; };
@@ -66,6 +69,7 @@
 		BDAEBD5303838C78A6C57881 /* AppleSpeechMicrophone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FA11E5462EE6906655735C /* AppleSpeechMicrophone.swift */; };
 		C192D88DD16107B3C37A17B0 /* IdentityEnrollment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41866830051FC001F515E083 /* IdentityEnrollment.swift */; };
 		C2A4456A3D0A6F33529FB316 /* ImageGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */; };
+		C5D985B43FF3B2B0A0E3B9A1 /* MultimodalGenerationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC0E37E2EAA2B612D892746 /* MultimodalGenerationClient.swift */; };
 		C814E8CBB34E9BB5B367332B /* IdentityTemplateLease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D92A232996FA126F753F32B /* IdentityTemplateLease.swift */; };
 		CAF02ABB82EC4CFD3C1C26E8 /* ModelDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */; };
 		D1829444BA8E2D81358E27AF /* FaceObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D260AE9C59C8AB60896569 /* FaceObservation.swift */; };
@@ -93,6 +97,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2742F71BBFE57B2B72B765EF;
 			remoteInfo = ODAIKitVideo;
+		};
+		2A2D5C766C39457C8804A408 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 077614432308B7CC82441D55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EFC88BE002DD0980AB3DAFC1;
+			remoteInfo = ODAIKitCore;
 		};
 		4318317571B769ABA02942F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -191,6 +202,7 @@
 		251DCF4818C5B910F8056A31 /* IdentityWireValidation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityWireValidation.swift; path = Sources/ODAIKitIdentity/IdentityWireValidation.swift; sourceTree = "<group>"; };
 		2697C9F5448D517E5196CA0B /* IdentityStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityStore.swift; path = Sources/ODAIKitIdentity/IdentityStore.swift; sourceTree = "<group>"; };
 		2ACB01B3704A8FAC12FA6411 /* IdentityLivenessOperation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityLivenessOperation.swift; path = Sources/ODAIKitIdentity/IdentityLivenessOperation.swift; sourceTree = "<group>"; };
+		2DC0E37E2EAA2B612D892746 /* MultimodalGenerationClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultimodalGenerationClient.swift; path = Sources/ODAIKitMultimodal/MultimodalGenerationClient.swift; sourceTree = "<group>"; };
 		356B145C70501D9B48F78AC7 /* IdentityOperationTicket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityOperationTicket.swift; path = Sources/ODAIKitIdentity/IdentityOperationTicket.swift; sourceTree = "<group>"; };
 		35C45DD1192427D52D280690 /* LocalIdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocalIdentityBackend.swift; path = Sources/ODAIKitIdentity/LocalIdentityBackend.swift; sourceTree = "<group>"; };
 		38B01455551E2B60889705D1 /* AppleVideoToolboxBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleVideoToolboxBackend.swift; path = Sources/ODAIKitAppleVideo/AppleVideoToolboxBackend.swift; sourceTree = "<group>"; };
@@ -200,6 +212,7 @@
 		44F52582871A6E4FA0F59726 /* FaceDetector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceDetector.swift; path = Sources/ODAIKitFace/FaceDetector.swift; sourceTree = "<group>"; };
 		476B53BC264DC0300F3ED7BC /* Availability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Availability.swift; path = Sources/ODAIKitCore/Availability.swift; sourceTree = "<group>"; };
 		4ADA196B96D9664686DF4D76 /* ImageGeometry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageGeometry.swift; path = Sources/ODAIKitFace/ImageGeometry.swift; sourceTree = "<group>"; };
+		5269ECAF762D141215774D7D /* MultimodalContracts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultimodalContracts.swift; path = Sources/ODAIKitMultimodal/MultimodalContracts.swift; sourceTree = "<group>"; };
 		585E9B24E203B35917F6D632 /* TaskGate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskGate.swift; path = Sources/ODAIKitCore/TaskGate.swift; sourceTree = "<group>"; };
 		5B27A47D43660B453108C4A1 /* FaceDetectionClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceDetectionClient.swift; path = Sources/ODAIKitFace/FaceDetectionClient.swift; sourceTree = "<group>"; };
 		63B4B332FA6F8B400CFD924A /* TestIdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TestIdentityBackend.swift; path = Sources/ODAIKitIdentity/TestIdentityBackend.swift; sourceTree = "<group>"; };
@@ -230,6 +243,7 @@
 		C9BEB93AABBF7EC8E2589C5B /* IdentityTemplatePayload.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityTemplatePayload.swift; path = Sources/ODAIKitIdentity/IdentityTemplatePayload.swift; sourceTree = "<group>"; };
 		CBA9B51D24AB4AA7CA0E2643 /* IdentityRevocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityRevocation.swift; path = Sources/ODAIKitIdentity/IdentityRevocation.swift; sourceTree = "<group>"; };
 		CDA68DF876300C7C5D099A75 /* IdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityBackend.swift; path = Sources/ODAIKitIdentity/IdentityBackend.swift; sourceTree = "<group>"; };
+		D20CA65ACC3A9F5402F0CA3C /* ODAIKitMultimodal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ODAIKitMultimodal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB2FECE6D5DC16691BD1A5B0 /* AppleAVSpeechBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleAVSpeechBackend.swift; path = Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift; sourceTree = "<group>"; };
 		DC62F260C1E5E3E210CC2FF2 /* IdentityDeletion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityDeletion.swift; path = Sources/ODAIKitIdentity/IdentityDeletion.swift; sourceTree = "<group>"; };
 		E108CAD03F5016A712A73981 /* FaceIdentification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceIdentification.swift; path = Sources/ODAIKitIdentity/FaceIdentification.swift; sourceTree = "<group>"; };
@@ -277,6 +291,15 @@
 			files = (
 				5C67CADC416AA204C371C26F /* Foundation.framework in Frameworks */,
 				96ADC04EC9C0984301E8B126 /* ODAIKitCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6605B9754FAFCA381DCB242B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07BE57E4F4964AC26358A15D /* Foundation.framework in Frameworks */,
+				2BFB0269564920A17E9E654B /* ODAIKitCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +374,7 @@
 				ACA675A66C3CF1CFFE67B7A0 /* ODAIKitIdentity.framework */,
 				6643354AC84B2DDDF6122E7A /* ODAIKitVideo.framework */,
 				AF8647E9CA7CB86C3F0FCE8C /* ODAIKitAppleVideo.framework */,
+				D20CA65ACC3A9F5402F0CA3C /* ODAIKitMultimodal.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -415,6 +439,8 @@
 				38B01455551E2B60889705D1 /* AppleVideoToolboxBackend.swift */,
 				C07C2D7E8301010DC3BD7595 /* VideoToolboxSREngine.swift */,
 				08B11194300552BE993ABDDB /* AppleVideoAudioMuxer.swift */,
+				5269ECAF762D141215774D7D /* MultimodalContracts.swift */,
+				2DC0E37E2EAA2B612D892746 /* MultimodalGenerationClient.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -452,6 +478,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A25453718BDE1D1512034B15 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A427F18B744AF617A052BD34 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -632,6 +665,25 @@
 			productReference = 24B559AC07B15B943927A218 /* ODAIKitModelStore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		931E1F29166DF4B736CC4D87 /* ODAIKitMultimodal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF4FA78605E9D3EB676D00C7 /* Build configuration list for PBXNativeTarget "ODAIKitMultimodal" */;
+			buildPhases = (
+				A427F18B744AF617A052BD34 /* Headers */,
+				26A526E1BA53939DA552EFF5 /* Sources */,
+				6605B9754FAFCA381DCB242B /* Frameworks */,
+				F333FB9498A49E128A7091E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21E0A99B5A3B0721A4B5330E /* PBXTargetDependency */,
+			);
+			name = ODAIKitMultimodal;
+			productName = ODAIKitMultimodal;
+			productReference = D20CA65ACC3A9F5402F0CA3C /* ODAIKitMultimodal.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFB600C809830AAC9F276613 /* Build configuration list for PBXNativeTarget "ODAIKitCore" */;
@@ -703,6 +755,7 @@
 				113749C3261A67104AF67309 /* ODAIKitIdentity */,
 				2742F71BBFE57B2B72B765EF /* ODAIKitVideo */,
 				4FC45751A386387FFD94DF68 /* ODAIKitAppleVideo */,
+				931E1F29166DF4B736CC4D87 /* ODAIKitMultimodal */,
 			);
 		};
 /* End PBXProject section */
@@ -751,6 +804,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DFB95F5724DAA60AA14751FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F333FB9498A49E128A7091E8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -806,6 +866,15 @@
 				52A7399B5E7454CCA0E284CD /* KeychainIdentityKeyProvider.swift in Sources */,
 				B2BC68C7874ADFC190295439 /* LocalIdentityBackend.swift in Sources */,
 				E52090F8A227987A8469D8AC /* TestIdentityBackend.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		26A526E1BA53939DA552EFF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CB3C85575809DE3EE214F20 /* MultimodalContracts.swift in Sources */,
+				C5D985B43FF3B2B0A0E3B9A1 /* MultimodalGenerationClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -906,6 +975,12 @@
 			name = ODAIKitSpeech;
 			target = 7D69EBACE004E6BAC09D83DC /* ODAIKitSpeech */;
 			targetProxy = DA379A0F41D7AEE6A7BD615B /* PBXContainerItemProxy */;
+		};
+		21E0A99B5A3B0721A4B5330E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ODAIKitCore;
+			target = EFC88BE002DD0980AB3DAFC1 /* ODAIKitCore */;
+			targetProxy = 2A2D5C766C39457C8804A408 /* PBXContainerItemProxy */;
 		};
 		48DC9C710BB7E1615B8FADFE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1458,6 +1533,32 @@
 			};
 			name = Release;
 		};
+		A8E95DCE6241EBB541A28E3B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitmultimodal;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		B73E2098C4ADEE40DB623C7C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1483,6 +1584,33 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		B8CACEE38EC5D2F0A4F12236 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.ondeviceai.odaikitmultimodal;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		CA1590B351DB28CB71B1F144 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1633,6 +1761,15 @@
 			buildConfigurations = (
 				3B3DD503159EB9B875AB4567 /* Release */,
 				3A5BAC3DC58DF2E46476E940 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF4FA78605E9D3EB676D00C7 /* Build configuration list for PBXNativeTarget "ODAIKitMultimodal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8CACEE38EC5D2F0A4F12236 /* Release */,
+				A8E95DCE6241EBB541A28E3B /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

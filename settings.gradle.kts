@@ -13,3 +13,5 @@ include(":examples:android-native")
 include(":examples:android-speech")
 
 include(":examples:android-identity-native")
+
+include(":examples:android-multimodal-native")

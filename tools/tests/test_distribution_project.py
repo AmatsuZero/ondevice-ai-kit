@@ -44,7 +44,7 @@ puts JSON.generate(project.targets.to_h { |target|
 """, str(self.project)], capture_output=True, text=True, check=True,
         )
         targets = json.loads(inspected.stdout)
-        self.assertEqual(len(targets), 9)
+        self.assertEqual(len(targets), 10)
         for name, target in targets.items():
             expected = 1 if name == "ODAIKitAppleSpeech" else 0
             self.assertEqual(target["sources"].count(ASR_SOURCE), expected, name)
