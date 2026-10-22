@@ -17,6 +17,8 @@ VIDEO_SOURCES = ["demo/iosApp/VideoHost.swift", "demo/iosApp/VideoInputStore.swi
 
 MLX_SOURCES = ["demo/iosApp/MultimodalHostPreparation.swift", "demo/iosApp/MultimodalModelHostFactory.swift", "demo/iosApp/MultimodalMLXHostFactory.swift"]
 
+VALIDATION_SOURCES = ["probes/ios-multimodal-demo/AppAccessibility.swift", "probes/ios-multimodal-demo/MultimodalDemoValidation.swift"]
+
 MULTIMODAL_SOURCES = ["demo/iosApp/MultimodalHost.swift", "demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/MultimodalFilePicker.swift", "kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOSMultimodalInput.swift"]
 
 class SpeechDemoProjectTests(unittest.TestCase):
@@ -30,7 +32,7 @@ class SpeechDemoProjectTests(unittest.TestCase):
         (self.root / "apple").mkdir()
         (self.root / "apple-mlx").mkdir()
         (self.root / "apple-mlx/Package.resolved").write_text("fixed-lock")
-        for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
+        for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES + VALIDATION_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
             path = self.root / source
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("fixture")
@@ -44,9 +46,34 @@ class SpeechDemoProjectTests(unittest.TestCase):
         self.output = self.root / "artifacts/speech-demo"
         self.ruby = os.environ.get("RUBY", "ruby")
 
-    def generate(self, video=False, multimodal=False, mlx=False):
+    def generate(self, video=False, multimodal=False, mlx=False, validation=False, commit="a" * 40):
         return subprocess.run([self.ruby, str(self.root / SCRIPT)], capture_output=True, text=True,
-            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0", "ODAI_MULTIMODAL_MLX_DEMO": "1" if mlx else "0"})
+            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0", "ODAI_MULTIMODAL_MLX_DEMO": "1" if mlx else "0", "ODAI_MULTIMODAL_DEMO_VALIDATION": "1" if validation else "0", "ODAI_VALIDATION_SOURCE_COMMIT": commit})
+
+    def testValidationRequiresEnhancedAndExactCommitBeforeOutput(self):
+        for flags in [{"validation": True}, {"video": True, "multimodal": True, "validation": True}, {"video": True, "multimodal": True, "mlx": True, "validation": True, "commit": "dirty"}]:
+            result = self.generate(**flags)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertFalse(self.output.exists())
+
+    def testValidationSourcesResourceAndFlagAreExplicitOnly(self):
+        result = self.generate(video=True, multimodal=True, mlx=True, validation=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        inspected = subprocess.run([self.ruby, "-rxcodeproj", "-rjson", "-e", """
+p = Xcodeproj::Project.open(ARGV[0]); t = p.targets.find { |target| target.name == 'SpeechDemo' }
+puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.real_path.to_s },
+ resources: t.resources_build_phase.files.map { |f| f.file_ref.real_path.to_s },
+ settings: t.build_configurations.map(&:build_settings)})
+""", str(self.output / "SpeechDemo.xcodeproj")], capture_output=True, text=True, check=True)
+        data = json.loads(inspected.stdout)
+        for source in VALIDATION_SOURCES:
+            self.assertIn(str(self.root / source), data["sources"])
+        resource = self.output / "validation-metadata.json"
+        self.assertIn(str(resource), data["resources"])
+        self.assertEqual(json.loads(resource.read_text()), {"sourceCommit": "a" * 40})
+        for settings in data["settings"]:
+            self.assertIn("ODAI_MULTIMODAL_DEMO_VALIDATION", settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"])
+        self.assertEqual(self.original.read_bytes(), b"protected project")
 
     def testMlxRequiresBothFlagsAndAddsIsolatedProductLockAndTarget(self):
         for flags in [{"mlx": True}, {"video": True, "mlx": True}]:

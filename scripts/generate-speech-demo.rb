@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'xcodeproj'
 require 'fileutils'
+require 'json'
 
 root = File.expand_path('..', __dir__)
 directory = File.expand_path(ENV.fetch('ODAI_SPEECH_DEMO_DIR', 'artifacts/verification/speech-demo'), root)
@@ -11,6 +12,10 @@ sources += ['kmp-binding/apple/IOSSpeechBridge.swift', 'kmp-binding/apple/IOSSpe
 video_demo = ENV['ODAI_VIDEO_DEMO'] == '1'
 multimodal_demo = ENV['ODAI_MULTIMODAL_DEMO'] == '1'
 mlx_demo = ENV['ODAI_MULTIMODAL_MLX_DEMO'] == '1'
+validation = ENV['ODAI_MULTIMODAL_DEMO_VALIDATION'] == '1'
+validation_commit = ENV.fetch('ODAI_VALIDATION_SOURCE_COMMIT', '')
+abort('Demo validation requires ODAI_MULTIMODAL_MLX_DEMO=1') if validation && !mlx_demo
+abort('Demo validation requires full source commit') if validation && !validation_commit.match?(/\A[0-9a-f]{40}\z/)
 abort('MLX Demo requires ODAI_MULTIMODAL_DEMO=1') if mlx_demo && !multimodal_demo
 abort('Multimodal Demo requires ODAI_VIDEO_DEMO=1') if multimodal_demo && !video_demo
 if video_demo
@@ -26,6 +31,7 @@ if mlx_demo
   sources += ['demo/iosApp/MultimodalModelHostFactory.swift', 'demo/iosApp/MultimodalHostPreparation.swift',
               'demo/iosApp/MultimodalMLXHostFactory.swift']
 end
+sources += ['probes/ios-multimodal-demo/AppAccessibility.swift', 'probes/ios-multimodal-demo/MultimodalDemoValidation.swift'] if validation
 frameworks = %w[iosSimulatorArm64 iosArm64].map do |platform|
   File.join(root, "demo/shared/build/bin/#{platform}/debugFramework/ODAIKitDemo.framework")
 end
@@ -66,7 +72,7 @@ target.frameworks_build_phase.add_file_reference(project.main_group.new_file(Fil
 target.build_configurations.each do |config|
   config.build_settings.merge!({
     'PRODUCT_BUNDLE_IDENTIFIER' => mlx_demo ? 'io.ondeviceai.multimodalmlxdemo' : 'io.ondeviceai.ondeviceaidemo',
-    'SWIFT_VERSION' => '5.0', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO' + (video_demo ? ' ODAI_VIDEO_DEMO' : '') + (multimodal_demo ? ' ODAI_MULTIMODAL_DEMO' : '') + (mlx_demo ? ' ODAI_MULTIMODAL_MLX_DEMO' : ''),
+    'SWIFT_VERSION' => '5.0', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO' + (video_demo ? ' ODAI_VIDEO_DEMO' : '') + (multimodal_demo ? ' ODAI_MULTIMODAL_DEMO' : '') + (mlx_demo ? ' ODAI_MULTIMODAL_MLX_DEMO' : '') + (validation ? ' ODAI_MULTIMODAL_DEMO_VALIDATION' : ''),
     'GENERATE_INFOPLIST_FILE' => 'YES', 'INFOPLIST_FILE' => File.join(root, 'demo/iosApp/Info.plist'),
     'INFOPLIST_KEY_UILaunchScreen_Generation' => 'YES', 'INFOPLIST_KEY_UIApplicationSceneManifest_Generation' => 'YES',
     'INFOPLIST_KEY_NSCameraUsageDescription' => '在设备本地检测人脸，不上传图像。',
@@ -94,6 +100,11 @@ ui.build_configurations.each do |config|
   })
   team = ENV['ODAI_DEVELOPMENT_TEAM']
   config.build_settings['DEVELOPMENT_TEAM'] = team unless team.nil? || team.empty?
+end
+if validation
+  metadata = File.join(directory, 'validation-metadata.json')
+  File.write(metadata, JSON.generate({ sourceCommit: validation_commit }))
+  target.resources_build_phase.add_file_reference(project.main_group.new_file(metadata))
 end
 project.save
 if mlx_demo

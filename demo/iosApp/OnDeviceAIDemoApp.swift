@@ -75,6 +75,10 @@ struct SharedControls: UIViewControllerRepresentable {
                 #endif
             }.onDisappear { controller.stopCamera() }
             .onAppear {
+                #if ODAI_MULTIMODAL_DEMO_VALIDATION
+                MultimodalDemoValidation.start(preparing: { [weak controller] in controller?.multimodalPreparing ?? true },
+                    host: { [weak controller] in controller?.multimodalHost })
+                #endif
                 #if DEBUG
                 if ProcessInfo.processInfo.arguments.contains("--smoke-orientation-6") {
                     controller.runOrientationProbe()
