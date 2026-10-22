@@ -10,6 +10,7 @@ import android.os.Build
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.Settings
+import android.provider.OpenableColumns
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,6 +46,7 @@ import org.json.JSONObject
 import java.security.MessageDigest
 import java.util.UUID
 import java.util.concurrent.Executors
+import java.io.File
 
 class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private val detector=MLKitFaceDetector()
@@ -52,6 +54,32 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private lateinit var model:FaceViewModel
     private lateinit var speechHost: SpeechHost
     private lateinit var videoHost: VideoHost
+    private var multimodalHost: MultimodalHost? = null
+    private var multimodalPickerReply: ((File?) -> Unit)? = null
+    private var multimodalPickerFailure: (() -> Unit)? = null
+    private var multimodalImport: Job? = null
+    private val multimodalPicker = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        val reply = multimodalPickerReply; multimodalPickerReply = null
+        val failure = multimodalPickerFailure; multimodalPickerFailure = null
+        if (reply != null) {
+            if (uri == null) reply(null)
+            else multimodalImport = lifecycleScope.launch {
+                try {
+                    withContext(Dispatchers.IO) {
+                        val name = contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use {
+                            if (it.moveToFirst()) it.getString(0) else null
+                        } ?: "selected-image"
+                        val copy = MultimodalPickerCopy.create(File(cacheDir, "multimodal-picker-${UUID.randomUUID()}"), name,
+                            open = { checkNotNull(contentResolver.openInputStream(uri)) }, checkpoint = { ensureActive() })
+                        try { withContext(Dispatchers.Main.immediate) { reply(copy.file) } }
+                        finally { copy.close() }
+                    }
+                } catch (error: CancellationException) { throw error }
+                catch (_: Exception) { failure?.invoke() }
+                finally { multimodalImport = null }
+            }
+        }
+    }
     private var videoPickerReply: ((String?, String?) -> Unit)? = null
     private val videoPicker = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         val reply = videoPickerReply; videoPickerReply = null
@@ -85,6 +113,18 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         super.onCreate(savedInstanceState)
         bridge=AndroidFaceBridge(detector,lifecycleScope){result=it};model=FaceViewModel(bridge)
         videoHost = VideoHost(selectFile = { reply -> videoPickerReply = reply; videoPicker.launch("video/*") })
+        if (intent.getBooleanExtra("odai.multimodal.enabled", false)) {
+            multimodalHost = MultimodalHost(MultimodalInputStore(File(cacheDir, "multimodal-input-${UUID.randomUUID()}")),
+                selectFile = { reply, failure ->
+                    if (multimodalPickerReply != null || multimodalImport?.isActive == true) reply(null)
+                    else {
+                        multimodalPickerReply = reply
+                        multimodalPickerFailure = failure
+                        try { multimodalPicker.launch("image/*") }
+                        catch (error: Exception) { multimodalPickerReply = null; multimodalPickerFailure = null; throw error }
+                    }
+                })
+        }
         speechHost = SpeechHost(lifecycleScope,
             createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },
             hasPermission = { Build.VERSION.SDK_INT < 31 || ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED },
@@ -105,7 +145,8 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                         }
                     }
                 }
-                FaceScreen(model,this@MainActivity,identityModel,this@MainActivity,speechHost.model,speechHost,videoHost.model,videoHost)
+                FaceScreen(model,this@MainActivity,identityModel,this@MainActivity,speechHost.model,speechHost,videoHost.model,videoHost,
+                    multimodalHost?.model,multimodalHost)
                 message?.let{Text(it)}
                 report?.let{json->TextButton(onClick={exportReport(json)}){Text("导出 Benchmark JSON")}}
             }}
@@ -196,7 +237,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         }
     }
     override fun exportReport(json:String){report=json;reportPicker.launch("odai-benchmark.json")}
-    override fun onStart(){if(::videoHost.isInitialized)videoHost.foreground();super.onStart();if(::speechHost.isInitialized)speechHost.onForeground()}
-    override fun onStop(){if(::speechHost.isInitialized)speechHost.onBackground();if(::videoHost.isInitialized)videoHost.background(preservePicker=videoPickerReply!=null);super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
-    override fun onDestroy(){if(::speechHost.isInitialized)speechHost.close();if(::videoHost.isInitialized)videoHost.close();videoPickerReply=null;speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
+    override fun onStart(){if(::videoHost.isInitialized)videoHost.foreground();super.onStart();if(::speechHost.isInitialized)speechHost.onForeground();multimodalHost?.onForeground()}
+    override fun onStop(){if(::speechHost.isInitialized)speechHost.onBackground();if(::videoHost.isInitialized)videoHost.background(preservePicker=videoPickerReply!=null);multimodalHost?.background(preservePicker=multimodalPickerReply!=null || multimodalImport?.isActive==true);super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
+    override fun onDestroy(){multimodalPickerReply=null;multimodalPickerFailure=null;multimodalImport?.cancel();multimodalHost?.close();if(::speechHost.isInitialized)speechHost.close();if(::videoHost.isInitialized)videoHost.close();videoPickerReply=null;speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
 }

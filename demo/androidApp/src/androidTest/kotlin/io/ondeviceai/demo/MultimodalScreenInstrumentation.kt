@@ -159,7 +159,7 @@ class MultimodalScreenInstrumentation : Instrumentation() {
             val source = java.io.File.createTempFile("synthetic-", ".png", activity.cacheDir).apply { writeBytes(byteArrayOf(1, 2, 3)) }
             lateinit var inputHost: MultimodalHost
             var inputReply: ((java.io.File?) -> Unit)? = null
-            runOnMainSync { inputHost = MultimodalHost(MultimodalInputStore(inputDirectory), selectFile = { inputReply = it }) }
+            runOnMainSync { inputHost = MultimodalHost(MultimodalInputStore(inputDirectory), selectFile = { callback, _ -> inputReply = callback }) }
             show(inputHost.model, inputActions = inputHost)
             click("multimodal-tab")
             click("multimodal-select-input")

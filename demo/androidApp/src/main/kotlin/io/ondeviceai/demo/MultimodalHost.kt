@@ -8,7 +8,7 @@ import java.io.File
 class MultimodalHost(
     private val store: MultimodalInputStore,
     bridge: MultimodalBridge = UnavailableMultimodalBridge(),
-    private val selectFile: ((File?) -> Unit) -> Unit,
+    private val selectFile: ((File?) -> Unit, () -> Unit) -> Unit,
 ) : MultimodalDemoActions {
     val model = MultimodalViewModel(bridge)
     private var selected: String? = null
@@ -22,7 +22,7 @@ class MultimodalHost(
         val ticket = ++pickerGeneration
         pendingPicker = ticket
         try {
-            selectFile { source ->
+            selectFile({ source ->
                 if (closed || model.state.closed || pendingPicker != ticket) return@selectFile
                 pendingPicker = null
                 if (source != null) {
@@ -36,7 +36,12 @@ class MultimodalHost(
                         model.inputFailed()
                     }
                 }
-            }
+            }, {
+                if (!closed && !model.state.closed && pendingPicker == ticket) {
+                    pendingPicker = null
+                    model.inputFailed()
+                }
+            })
         } catch (_: Exception) {
             if (pendingPicker == ticket) {
                 pendingPicker = null

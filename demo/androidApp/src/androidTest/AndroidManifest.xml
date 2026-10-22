@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!-- Test APK only: fixed public synthetic bytes; no filesystem access. -->
+        <provider android:name="io.ondeviceai.demo.MultimodalFixtureProvider"
+            android:authorities="io.ondeviceai.demo.test.multimodal-fixture" android:exported="true" />
+    </application>
+</manifest>

@@ -15,7 +15,7 @@ class MultimodalHostTest {
     @Test fun replacementAndClearRetireOnlySelectionOwnership() = runBlocking {
         val store = store()
         var reply: ((File?) -> Unit)? = null
-        val host = MultimodalHost(store, selectFile = { reply = it })
+        val host = MultimodalHost(store, selectFile = { callback, _ -> reply = callback })
         val source = source()
         host.selectImageFile(); reply!!(source)
         val first = assertNotNull(host.model.state.inputReference)
@@ -42,7 +42,7 @@ class MultimodalHostTest {
 
     @Test fun onlyLatestPickerReplyIsConsumedOnceIncludingCancel() {
         val replies = mutableListOf<(File?) -> Unit>()
-        val host = MultimodalHost(store(), selectFile = { replies += it })
+        val host = MultimodalHost(store(), selectFile = { callback, _ -> replies += callback })
         val source = source()
         host.selectImageFile(); host.selectImageFile()
         replies[0](source)
@@ -59,7 +59,7 @@ class MultimodalHostTest {
     @Test fun importAndLaunchFailuresPreserveSelectionAndUseTypedFailure() {
         var reply: ((File?) -> Unit)? = null
         var throws = false
-        val host = MultimodalHost(store(), selectFile = { if (throws) error("private details") else reply = it })
+        val host = MultimodalHost(store(), selectFile = { callback, _ -> if (throws) error("private details") else reply = callback })
         host.selectImageFile(); reply!!(source())
         val selected = host.model.state.inputReference
         host.selectImageFile(); reply!!(temporary.root)
@@ -79,7 +79,7 @@ class MultimodalHostTest {
             val directory = temporary.root.resolve("copies-${System.nanoTime()}")
             var reply: ((File?) -> Unit)? = null
             var launches = 0
-            val host = MultimodalHost(MultimodalInputStore(directory), selectFile = { launches++; reply = it })
+            val host = MultimodalHost(MultimodalInputStore(directory), selectFile = { callback, _ -> launches++; reply = callback })
             host.selectImageFile(); action(host); reply!!(source())
             assertNull(host.model.state.inputReference)
             if (!host.model.state.closed) assertTrue(directory.listFiles()!!.isEmpty())
@@ -93,7 +93,7 @@ class MultimodalHostTest {
         val store = store()
         val bridge = DrainingBridge(store)
         var reply: ((File?) -> Unit)? = null
-        val host = MultimodalHost(store, bridge, selectFile = { reply = it })
+        val host = MultimodalHost(store, bridge, selectFile = { callback, _ -> reply = callback })
         host.selectImageFile(); host.background(preservePicker = true); reply!!(source())
         assertNotNull(host.model.state.inputReference)
         host.onForeground()
@@ -109,7 +109,7 @@ class MultimodalHostTest {
         val store = store()
         val bridge = DrainingBridge(store)
         var reply: ((File?) -> Unit)? = null
-        val host = MultimodalHost(store, bridge, selectFile = { reply = it })
+        val host = MultimodalHost(store, bridge, selectFile = { callback, _ -> reply = callback })
         host.selectImageFile(); reply!!(source())
         host.model.generate()
         val lease = assertNotNull(bridge.lease)
@@ -132,12 +132,28 @@ class MultimodalHostTest {
 
     @Test fun defaultHostRemainsExplicitlyUnavailable() {
         var reply: ((File?) -> Unit)? = null
-        val host = MultimodalHost(store(), selectFile = { reply = it })
+        val host = MultimodalHost(store(), selectFile = { callback, _ -> reply = callback })
         host.selectImageFile(); reply!!(source())
         host.model.refreshBackends(); host.model.generate()
         assertEquals(MultimodalBridgeFailureCode.BACKEND_UNAVAILABLE, host.model.state.queryFailure?.code)
         assertEquals(MultimodalBridgeFailureCode.BACKEND_UNAVAILABLE, host.model.state.failure?.code)
         assertNull(host.model.state.output)
+        host.close()
+    }
+
+    @Test fun asynchronousPickerFailureUsesSameOnceOnlyTicketAsSuccess() {
+        val replies = mutableListOf<(File?) -> Unit>()
+        val failures = mutableListOf<() -> Unit>()
+        val host = MultimodalHost(store(), selectFile = { reply, failure -> replies += reply; failures += failure })
+        host.selectImageFile(); host.leavePage(); failures[0]()
+        assertNull(host.model.state.failure)
+        host.selectImageFile(); failures[1]()
+        assertEquals(MultimodalBridgeFailureCode.INVALID_INPUT, host.model.state.failure?.code)
+        replies[1](source())
+        assertNull(host.model.state.inputReference)
+        host.selectImageFile(); replies[2](source()); failures[2]()
+        assertNotNull(host.model.state.inputReference)
+        assertNull(host.model.state.failure)
         host.close()
     }
 }
