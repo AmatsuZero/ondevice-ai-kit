@@ -20,9 +20,9 @@ False pass on missing callback or wrong sequence; release-before-terminal eviden
 Files: create tools/multimodal_lifecycle_report.py and tools/tests/test_multimodal_lifecycle_report.py.
 Interface: validate(report: dict, expected_commit: str) -> dict; CLI takes report and --source-commit and prints compact validated summary, exit nonzero on any failure. Constants exact model/backend/runtime/fixture; gates availability, success, cancel, reentry, background, close, modelLeaseProtected, modelLeaseReleased, inputsReleased, closedRejected.
 
-- [ ] Write tests using a complete valid synthetic report and mutations: absent/false/type-confused gate, wrong source/hash/identity/simulator, empty trace, missing update/cancel/request or release/terminal order. Run unittest RED missing module.
-- [ ] Implement strict validation of all gates and ordered actual trace (request, update, cancel/background/close, inputReleased, terminal), duplicate/malformed events rejected. Summary says programmatic KMP host/VM; UI unverified.
-- [ ] Full tools suite passes; scope author review and exact local commit test: validate real KMP multimodal lifecycle evidence.
+- [x] Write tests using a complete valid synthetic report and mutations: absent/false/type-confused gate, wrong source/hash/identity/simulator, empty trace, missing update/cancel/request or release/terminal order. Run unittest RED missing module.
+- [x] Implement strict validation of all gates and ordered actual trace (request, update, cancel/background/close, inputReleased, terminal), duplicate/malformed events rejected. Summary says programmatic KMP host/VM; UI unverified.
+- [x] Full tools suite passes; scope author review and exact local commit test: validate real KMP multimodal lifecycle evidence.
 
 ### Task2: real KMP host/VM device suite
 
