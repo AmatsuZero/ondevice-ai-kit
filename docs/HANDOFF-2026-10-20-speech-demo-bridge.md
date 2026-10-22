@@ -1,8 +1,17 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；单图bridge及共享Demo状态机本地包完成；UI/host/设备/独立审查仍待补）
+更新时间：2026-10-22（Asia/Shanghai；shared单图UI/opt-in本地包完成；host/真实设备/iOS UI/独立审查待补）
 
-## P9 Single-image Demo State（2026-10-22，最新检查点）
+## P9 Single-image Demo UI（2026-10-22，最新检查点）
+
+- 接手基线e0fc825，branch/worktree/index与保护hash均核对相符。设计/计划f88b43f；Task1共享UI/opt-in98a3891；Task2验证/交接同次提交，最终HEAD以git为准。见[UI验证](validation/multimodal-demo-ui.md)、独立spec/plan `2026-10-22-multimodal-demo-ui` 和同名`.superpowers/sdd/` ledger/final-review。
+- 新MultimodalScreen消费既有VM，展示严格backend选择/availability、输入displayName、原始prompt、预算、生成/取消/phase、累计文本、最终实际backend/model/runtime与typed failure。FaceScreen可选model默认null，旧App入口不变；新独立iOS入口保留Face/Identity/Speech/Video参数与旧导出标签。无picker/native host/model/lease接线，默认unavailable。
+- Android TECNO KM9/API35实际UI全部具名场景status=passed，含真实default unavailable与旧Speech/Video活动切页；其余生成是UI fixture，不能称推理成功。shared60/60新执行；旧/新Swift入口实际typecheck、含旧双host生成Demo编译、更新Demo ABI10/10、工具101/101通过。Android lint0error/9既有warning。早期AX节点/重组滚动失败与修正均留日志。
+- 每Task与最终仅作者自审，独立review仍pending，不称APPROVE。iOS实际UI、KMP→MLXVLM真机、质量/Metal GPU/minimumOS等未验。旧Video UI初始化超时、P6实录、Android ASR及其余roadmap缺口不变，仍5/12阶段完成，P9 active。
+- 下一独立包：**双端host/picker与opaque input/lease生命周期**；固定Apple模型/ModelStore可选接线、真实设备闭环继续另包，Android无生产backend保持unavailable。真实模型host之前读后端验证及backend/benchmark设计计划；不下载模型/依赖，不录音/读私人媒体或改签名。
+- 仅本地提交，无push/merge/发布。两保护文件sha256与用户固定值精确相同，状态仍tracked dirty/untracked，均未暂存；.superpowers/artifacts/日志保留。
+
+## P9 Single-image Demo State（2026-10-22，历史检查点）
 
 - bridge三Task已提交 `2e96a26`、`b1e6873`、`1291bd2`。下一包按独立交付进一步拆为shared state先行、UI随后，避免导航/ABI/picker/model同时扩张。设计/计划 `5866196`；Task1状态机 `5db0083`；Task2验证/本检查点同次提交，最终HEAD以git为准。验证见[共享状态机](validation/multimodal-demo-state.md)，ledger/final-review `.superpowers/sdd/2026-10-22-multimodal-demo-state/`。
 - MultimodalViewModel默认UnavailableBridge；原始prompt/严格选择/预算校验、递增累计update/最终身份、同步callback、cancel等待终态、旧callback过滤、编辑取消、background不重启与一次close已实现。只是shared state，无UI/host/picker/媒体读取/真模型连接。

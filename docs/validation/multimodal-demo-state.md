@@ -4,6 +4,8 @@
 
 [设计](../superpowers/specs/2026-10-22-multimodal-demo-state-design.md)、[两 Task 计划](../superpowers/plans/2026-10-22-multimodal-demo-state.md)。前置 [typed bridge 包](multimodal-bridge.md) 已完成，不重做。ledger、RED/GREEN、final-review 在 `.superpowers/sdd/2026-10-22-multimodal-demo-state/`。
 
+后继shared UI/opt-in包已本地验证，当前入口见[单图UI验证](multimodal-demo-ui.md)；下文记录本状态机包交付时的范围与历史证据。
+
 ## 行为
 
 `MultimodalViewModel` 消费 typed bridge，默认 `UnavailableMultimodalBridge`。UI-serialized admission/callbacks；输入仅 opaque reference/displayName，不读取图片、不管理 native lease。默认 prompt 为 `Describe this image.`、预算文本 `32`；空/非数字/非正/Int溢出预算在调用 bridge 前拒绝，原 prompt/reference/显式后端字节不变。
