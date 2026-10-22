@@ -1,8 +1,18 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；P9独立Apple MLXVLM后端与真实SDK固定设备套件通过；质量/峰值资源/独立审查与其他阶段缺口保留）
+更新时间：2026-10-22（Asia/Shanghai；P9固定单图benchmark本地证据已完成；自然质量/Metal资源/独立审查与其他阶段缺口保留）
 
-## P9 Optional Apple MLXVLM Backend（2026-10-22，最新检查点）
+## P9 Fixed-Image Benchmark（2026-10-22，最新检查点）
+
+- 设计/计划提交 `fdf55e1`，Task1 validator `b97f0b3`，Task2 observer/consumer/测量 `f9512a0`。Task3验证/交接随本检查点提交，HEAD以git为准。设计/计划 `docs/superpowers/{specs,plans}/2026-10-22-apple-mlxvlm-fixed-image-benchmark*`，ledger与final-review在 `.superpowers/sdd/2026-10-22-apple-mlxvlm-fixed-image-benchmark/`。不重做已完成Foundation/后端/benchmark包。
+- 真机 iPhone16ProMax/iOS27.0.1，固定模型/runtime/fixture、Debug build、temperature0、32tokens；1次warm-up＋5次新backend/client测量。严格校验后的加载p50/p95=311.094917/323.690167ms，首交付update=763.803375/774.153375ms，总耗时=924.392542/934.323334ms；不是冷启动、纯首token、Release SLA或P11验收。
+- process RSS baseline/采样peak/delta=2,087,469,056/2,437,054,464/349,585,408B，10ms请求间隔，不能冒称Metal/GPU峰值或模型独占内存；Metal/GPU与energy仍unverified。红方块rubric5/5，但原文都多描述“flag”，不能算完整图片描述准确或自然质量通过。
+- 原始 `artifacts/verification/apple-mlxvlm-fixed-image-20261022/device-result.json` 与 `summary.json`；runId `6A376940-9A43-4654-BCA2-33EDD3D2C453`，PID20276，绑定完整源commit `f9512a0f9fb0956a41e5e99eb4dd1e0a05011169`。raw/summary hash、边界与重校验命令见[后端验证](validation/apple-mlxvlm-backend.md#有界固定单图-benchmark2026-10-22)。忽略目录的资产/日志/.superpowers均保留。
+- 新验证host12/12、工具98/98、定向10/10及缓存离线signed device build；基础461/461是前包证据，未重跑冒称新证据。作者自审修正nil RSS填0/未同步读取、异步close、事件顺序与未知source接受问题；observer故障注入RED、恢复GREEN已保留。独立review仍pending，无APPROVE。
+- 当前会话不派子代理，无push/发布/依赖或模型下载/录音/私人媒体/签名资产变更；保护文件hash与用户固定值相同，不修改/暂存。旧Video UI初始化超时、P6实录、Android ASR、基础最低系统及旧包独立审查缺口不被新结果替代，整个P9/roadmap仍active。
+- 下一独立执行包选择：**单图KMP bridge公共契约与平台adapter**。先复核现有Multimodal client及Speech/Video bridge模式，独立设计/逐Task计划，范围只含单图、类型化选择/错误/update、输入lease与cancel/drain/close；Apple可选MLX依旧独立，Android无已注册后端时明确unavailable，不下载新模型。共享Demo UI、短视频与Android真实推理分别后续分包；本检查点不宣称已实现下一包。
+
+## P9 Optional Apple MLXVLM Backend（2026-10-22，历史检查点）
 
 - 已提交cdb959a设计/计划、440af94独立package shell、815435b真实runtime与取消生命周期。Task3消费者/验证/交接随本检查点同次提交，最新HEAD以git为准。规格/计划为docs/superpowers/{specs,plans}/2026-10-22-apple-mlxvlm-backend*，ledger .superpowers/sdd/2026-10-22-apple-mlxvlm-backend/progress.md，不重做已完成项。
 - 独立apple-mlx的ODAIKitAppleMLXVLM仅arm64 iOS18+物理设备推理，macOS/simulator明确unsupported；root apple不引MLX，基础iOS15/macOS12/API26不变。固定14文件canonical manifest、ModelStore lease、单图有界snapshot、maxTokens与真实producer join已接入；每请求重新load，无跨轮聊天历史。

@@ -22,7 +22,7 @@ Each measured iteration creates a fresh backend/client so the backend's per-requ
 
 The suite performs one untabulated warm-up followed by five measured iterations. Five samples are deliberately a bounded development checkpoint, not the final P11 5+30 acceptance protocol. Raw per-iteration values remain in JSON; the report computes nearest-rank p50/p95 without merging different identity or measurement methods.
 
-Process resident memory is sampled every 10 ms with `mach_task_basic_info.resident_size` from immediately before warm-up until the final measured iteration finishes. The report records baseline, peak, and delta with the exact method string `process-resident-mach-task-basic-info-10ms`. It is process RSS only: it is not Metal/GPU allocation, device-wide peak, energy, or a stable resource budget. Metal/GPU peak and energy remain `unverified` rather than receiving proxy values.
+Process resident memory is sampled at a requested 10 ms interval with `mach_task_basic_info.resident_size` after ModelStore installation, from immediately before warm-up until the final measured iteration finishes. Scheduling is not hard realtime and short peaks may be missed. The report records baseline, sampled peak, and delta with the exact method string `process-resident-mach-task-basic-info-10ms`. If any read fails the RSS observation is `unverified`, never zero-filled. It is process RSS only: it is not Metal/GPU allocation, device-wide peak, energy, or a stable resource budget. Metal/GPU peak and energy remain `unverified` rather than receiving proxy values.
 
 ## Quality contract
 
@@ -30,7 +30,7 @@ The synthetic fixture has one inspectable property: a red square on a near-white
 
 ## Artifacts and validation
 
-The device writes one raw JSON document containing frozen identity, environment, measurement methods, warm-up status, five measured iterations, RSS observation, explicit `unverified` fields, and the synthetic rubric. A repository tool validates this document and produces a summary JSON with nearest-rank p50/p95 for load, first update, total, and RSS delta. Invalid identity, missing samples, non-finite or misordered timings, a misleading GPU/Metal memory label, or an overclaimed natural-image status is rejected.
+The device writes one raw JSON document containing frozen identity, environment, measurement methods, warm-up status, five measured iterations, RSS observation, explicit `unverified` fields, and the synthetic rubric. A repository tool validates this document and produces a summary JSON with nearest-rank p50/p95 for load, first update and total. RSS is one suite-level baseline/peak/delta observation, not a per-iteration distribution, so it has no p50/p95. Invalid identity, missing samples, non-finite or misordered timings, a misleading GPU/Metal memory label, or an overclaimed natural-image status is rejected.
 
 Host tests cover the validator/report rules. Swift host tests cover timing-event ordering with an injected runtime before the real runtime is changed. The device run is reported separately from host correctness. Independent review remains pending; author self-review cannot be labeled APPROVE.
 

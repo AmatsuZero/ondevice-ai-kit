@@ -49,8 +49,40 @@ iPhone16ProMax/iOS27.0.1，UDID `00008140-0008703436D3001C`；独立bundle `io.o
 
 输出是合成红色方块图片的一句描述。该套件经过真实SDK/ModelStore/runtime，不复用旧probe的结果；不把它称为质量、最低系统或资源峰值验收。
 
+## 有界固定单图 benchmark（2026-10-22）
+
+设计/计划：`docs/superpowers/{specs,plans}/2026-10-22-apple-mlxvlm-fixed-image-benchmark*`。实现提交 `f9512a0f9fb0956a41e5e99eb4dd1e0a05011169`，前置 validator 为 `b97f0b3`。只新增 opt-in observer 与独立消费者测量；没有更改基础 SDK、模型、runtime 或输入。
+
+### 固定条件和可复核原始证据
+
+- iPhone16ProMax (`iPhone17,2`)，iOS27.0.1/build24A446；同一授权 UDID、bundle、team。签名 **Debug** build，不是 Release 性能结论。
+- 模型/runtime/fixture hash 与上节相同；本地模型14文件重新逐一校验 bytes/SHA256，设备端通过真实 ModelStore install/acquire 验证，消费者再次核对固定图片 hash。prompt=`Describe this image in one brief sentence.`，maxOutputTokens=32，真实 runtime 使用 `temperature=0`，image preprocessing resize=512×512。其余 GenerateParameters 默认值由固定 runtime revision 限定。
+- 新进程 PID20276，runId=`6A376940-9A43-4654-BCA2-33EDD3D2C453`；1 次不入统计的 warm-up＋5 次测量。每轮新建 backend/client、重新 load、无聊天历史；文件系统/Metal allocator/编译缓存没有清空，**不是冷启动**。
+- `artifacts/verification/apple-mlxvlm-fixed-image-20261022/`：`device-result.json`、`summary.json`、`launch.json`、`install.json`、`devices.json`、`asset-verification.log`。构建/测试/RED日志在 `.superpowers/sdd/2026-10-22-apple-mlxvlm-fixed-image-benchmark/`。这些本地忽略目录保留，不含模型权重的 Git 提交。
+- raw SHA256=`51215802ad610c5887c681443bd4379e59b4326734e639556591e8101a651407`；summary SHA256=`a520754c434f342630418f96816dd164fd65921bef6339c667e1996c09775666`；`apple-mlx/Package.resolved` SHA256=`e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。
+
+重新校验和汇总（不启动设备或访问模型网络）：
+
+    rtk proxy python3 tools/mlxvlm_benchmark_report.py artifacts/verification/apple-mlxvlm-fixed-image-20261022/device-result.json --output artifacts/verification/apple-mlxvlm-fixed-image-20261022/summary-recheck.json
+
+### 测量结果与边界
+
+| 指标（ms） | p50 | p95 |
+| --- | ---: | ---: |
+| loadContainer 区间 | 311.094917 | 323.690167 |
+| generate 调用前至首个交付 update | 763.803375 | 774.153375 |
+| generate 调用前至成功返回 | 924.392542 | 934.323334 |
+
+时钟为 `ContinuousClock`，nearest-rank，n=5（p95就是5次最大值），不是P11的5+30协议，也没有性能SLA通过结论。首update包含加载/预处理/调度，不冒称纯解码首token；总耗时不包含前置ModelStore install/acquire、request构造或返回后的close。load只覆盖loadContainer，不含前置图片校验/解码；MLX懒执行成本可能落入后续阶段。
+
+进程RSS：baseline **2,087,469,056 B**，采样peak **2,437,054,464 B**，delta **349,585,408 B**。方法 `process-resident-mach-task-basic-info-10ms`：ModelStore安装完成后、warm-up前取baseline，独立Task请求每10ms采样，最后一轮结束后cancel/join并锁定快照；10ms是请求间隔而非硬实时保证，短峰可能漏采。baseline已经包含App及安装/校验的影响，delta不是模型独占内存。没有逐轮RSS分布；**没有RSS p50/p95**。该值不是Metal/GPU峰值、物理内存预算或设备全局资源，`metalGpuPeak`和`energy`均为 **unverified**。任何task_info失败都将整个RSS观察标为unverified，不能以0代填。
+
+合成rubric `synthetic-red-square-v1` 为5/5（都含red和square），原始5次输出均为 ` A flag with a red square in the center.`。人工复核fixture只见近白背景与红方块，**“flag”是未由fixture证明的额外语义**；rubric没有检测该问题。因此仅记录最小概念命中，不声明完整合成描述准确，更不声明自然图片质量、OCR、计数、空间推理或幻觉率通过；`naturalImageQuality=unverified`。
+
+新增验证：consumer/validator定向10/10、工具完整98/98（既有Ruby3.4 wrapper）、apple-mlx host12/12、固定缓存的签名iOS构建均通过。observer故障注入确实断言失败后恢复GREEN；RSS不可用与事件顺序使用真实Swift helper编译执行验证，不只检查源码字符串。基础Swift461/461为前包既有证据，本包未修改基础源码，未把旧计数称为新跑结果。
+
 ## 保留门槛
 
-独立reviewer仍pending，作者自审不能代替独立APPROVE。未完成：短视频、Android实际推理、KMP/Demo、自然图片质量基准、首token/多轮性能统计、Metal/GPU峰值、最低系统设备及增强包binary分发。根基础模块的十XCFramework无需重复打包，本包只验证新增source package消费。
+独立reviewer仍pending，作者自审不能代替独立APPROVE。未完成：短视频、Android实际推理、KMP/Demo、自然图片质量基准、纯首token/冷启动/P11规模性能统计、Metal/GPU峰值、最低系统设备及增强包binary分发。下一独立包选择单图KMP bridge（公共契约与平台adapter），Demo UI/短视频/Android新模型各自分包，不在本证据包扩张。根基础模块的十XCFramework无需重复打包，本包只验证新增source package消费。
 
 没有push、发布、录音、私人媒体读取或新资源下载。两个保护文件hash未变且未暂存。整个P9/roadmap保持未完成。
