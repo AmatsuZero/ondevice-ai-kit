@@ -1,8 +1,18 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；双端单图opaque input/lease本地包完成；host/picker/真实设备/iOS UI/独立审查待补）
+更新时间：2026-10-22（Asia/Shanghai；双端单图native host本地包完成；system picker/平台接线/真实设备/iOS UI/独立审查待补）
 
-## P9 Single-image Demo input ownership（2026-10-22，最新检查点）
+## P9 Single-image native host lifecycle（2026-10-22，最新检查点）
+
+- 输入包2c2aaef后独立设计cc99556、Android Task1 854d256，Apple Task2与本检查点同次提交，最新HEAD以git为准。独立spec/plan `2026-10-22-multimodal-demo-host`，同名`.superpowers/sdd/` ledger/final-review。见[host验证](validation/multimodal-demo-host.md)。工作树/index/保护hash复核；不重做完成包。
+- 双端MultimodalHost只组合现有VM/typed bridge/input store，以注入本地File/URL选择建立latest/once-only ticket、替换/clear退役、晚到过滤、后台不重启、close一次与lease保留。默认真实UnavailableBridge。没有system picker/URI/shared选择按钮/平台opt-in/session owner或模型接线，不称真实picker/设备推理通过。
+- Android缺符号RED后host7/7、全Demo21/21新执行，APK/lint0error9既有warning；Apple generator实际source-set RED→GREEN3/3、缺host符号RED，修正遗漏throws签名后Demo21/21（新host7+input4+bridge10），格式化后再次21/21。新生成Binding10/10、工具101/101与strict格式检查通过。生成工程和全部失败日志保留；既有XCTest/ICU链接版本warning不等于最低系统设备通过。
+- Ruling：native lifecycle owner先行，实际picker/shared actions/platform opt-in另包，代价是再一个小集成包。preservePicker=true只保留已经在途的external-picker ticket，可在foreground前接受本地文件但绝不自动生成；下一包须明确接Activity/页面生命周期，不能用注入回调测试当system picker验收。
+- 下一独立包：**双端system picker、shared选择/清除动作、平台opt-in与session生命周期接线**。Apple既有固定ModelStore/MLXVLM可选接线和真实KMP设备闭环随后另包，Android没有生产backend继续unavailable。只用固定资产和公开/合成fixture，不读取私人媒体。
+- 每Task与最终仅作者自审，独立review仍pending，无APPROVE。全程本地提交、无push/merge/发布/下载/录音/私人媒体/签名变更，保护hash/state精确不变且未暂存；workspace/artifacts/日志保留。
+- 旧Video UI初始化超时、P6实录、Android ASR MISSING_ASSETS、iOS实际UI、最低系统、自然质量、Metal/GPU/energy及独立审查缺口保留。仍5/12阶段完成、7未收口，P9 active。
+
+## P9 Single-image Demo input ownership（2026-10-22，历史检查点）
 
 - 接续55a425b；设计/计划0b0f851、Apple Task1 caab202，Android Task2与本检查点同次提交，最新HEAD以git为准。工作树/branch/index与两保护hash复核相符，无并发改动。见[输入验证](validation/multimodal-demo-input.md)、独立spec/plan `2026-10-22-multimodal-demo-input` 及同名 `.superpowers/sdd/` ledger/final-review。不重做UI/state/bridge/后端/benchmark。
 - 双端MultimodalInputStore只实现输入所有权：新鲜私有目录、复制regular nonsymlink文件、opaque UUID、registry-only acquire、多lease、选择退役、close封闭、幂等release、最后lease清理。没有picker/host/模型或平台导航接线，默认unavailable仍保留。合成字节测试不是图片质量或真实picker验收。

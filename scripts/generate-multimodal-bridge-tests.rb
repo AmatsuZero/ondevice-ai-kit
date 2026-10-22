@@ -13,7 +13,8 @@ sources = ['kmp-binding/apple/IOSMultimodalBridge.swift', 'kmp-binding/apple/IOS
            'probes/ios-multimodal-bridge/IOSMultimodalBridgeTests.swift']
 if binding_module == 'ODAIKitDemo'
   sources += ['demo/iosApp/MultimodalInputStore.swift', 'demo/iosApp/SpeechInputStore.swift',
-              'kmp-binding/apple/IOSSpeechAudioInput.swift', 'probes/ios-multimodal-bridge/MultimodalInputStoreTests.swift']
+              'kmp-binding/apple/IOSSpeechAudioInput.swift', 'probes/ios-multimodal-bridge/MultimodalInputStoreTests.swift',
+              'demo/iosApp/MultimodalHost.swift', 'probes/ios-multimodal-bridge/MultimodalHostTests.swift']
 end
 ([framework, File.join(root, 'apple')] + sources.map { |s| File.join(root, s) }).each do |path|
   abort("Missing input: #{path}") unless File.exist?(path)
