@@ -14,10 +14,14 @@ import UIKit
       arguments.contains("--multimodal-mlx-local-model")
     else { return }
     started = true
-    Task { await run(preparing: preparing, host: host) }
+    Task {
+      await run(
+        preparing: preparing, host: host,
+        active: arguments.contains("--multimodal-demo-active-validation"))
+    }
   }
 
-  private static func run(preparing: () -> Bool, host: () -> MultimodalHost?) async {
+  private static func run(preparing: () -> Bool, host: () -> MultimodalHost?, active: Bool) async {
     var report: [String: Any] = [
       "schemaVersion": 1, "runId": UUID().uuidString,
       "pid": ProcessInfo.processInfo.processIdentifier, "os": UIDevice.current.systemVersion,
@@ -85,66 +89,76 @@ import UIKit
         ready.model.state.inputDisplayName == "fixture.png"
           && ready.model.state.inputReference != nil)
       gates["pickerReply"] = true
-      stage = "generate activation"
-      report["generateNodeInitiallyDisabled"] = try AppAccessibility.find(
-        identifier: "multimodal-generate", roots: roots())?.accessibilityTraits.contains(
-          .notEnabled)
-      stage = "generate enabled node"
-      try await wait(seconds: 10) {
-        guard
-          let node = try AppAccessibility.find(identifier: "multimodal-generate", roots: roots())
-        else { return false }
-        return !node.accessibilityTraits.contains(.notEnabled)
+      if active {
+        stage = "active shared controls"
+        let result = try await MultimodalDemoActiveValidation.run(host: ready, roots: roots)
+        if let extra = result["gates"] as? [String: Bool] {
+          gates.merge(extra) { _, value in value }
+        }
+        report["scenarios"] = result["scenarios"]
+      } else {
+        stage = "generate activation"
+        report["generateNodeInitiallyDisabled"] = try AppAccessibility.find(
+          identifier: "multimodal-generate", roots: roots())?.accessibilityTraits.contains(
+            .notEnabled)
+        stage = "generate enabled node"
+        try await wait(seconds: 10) {
+          guard
+            let node = try AppAccessibility.find(identifier: "multimodal-generate", roots: roots())
+          else { return false }
+          return !node.accessibilityTraits.contains(.notEnabled)
+        }
+        stage = "generate activation"
+        report["canGenerateBeforeActivation"] = ready.model.state.canGenerate
+        report["phaseBeforeActivation"] = ready.model.state.phase.name
+        let accepted = try AppAccessibility.activate(
+          identifier: "multimodal-generate", roots: roots())
+        report["activationAccepted"] = accepted
+        report["phaseAfterActivation"] = ready.model.state.phase.name
+        try require(accepted)
+        try await wait(seconds: 120) {
+          ready.model.state.phase == .succeeded || ready.model.state.phase == .failed
+            || ready.model.state.phase == .cancelled
+        }
+        report["phaseAfterTerminalWait"] = ready.model.state.phase.name
+        report["generationFailureCode"] = ready.model.state.failure?.code.name ?? "none"
+        try require(ready.model.state.phase == .succeeded)
+        guard let output = ready.model.state.output else { throw ValidationFailure() }
+        let identity = SmolVLM2Model.identity
+        try require(
+          !output.text.isEmpty && output.backendId == SmolVLM2Model.backendId
+            && output.model.modelId == identity.modelId
+            && output.model.modelRevision == identity.modelRevision
+            && output.model.runtimeRevision == identity.runtimeRevision)
+        report["output"] = [
+          "text": output.text, "backendId": output.backendId, "modelId": output.model.modelId,
+          "modelRevision": output.model.modelRevision,
+          "runtimeRevision": output.model.runtimeRevision,
+        ]
+        gates["generated"] = true
+        stage = "output AX reflection"
+        try await wait(seconds: 10) {
+          guard
+            let text = try AppAccessibility.find(identifier: "multimodal-output", roots: roots()),
+            let actualIdentity = try AppAccessibility.find(
+              identifier: "multimodal-identity", roots: roots()),
+            let phase = try AppAccessibility.find(identifier: "multimodal-phase", roots: roots())
+          else { return false }
+          return text.accessibilityLabel == output.text
+            && actualIdentity.accessibilityLabel?.contains(identity.runtimeRevision) == true
+            && phase.accessibilityLabel == "SUCCEEDED"
+        }
+        gates["outputRendered"] = true
+        stage = "legacy idle navigation"
+        for tab in ["speech-tab", "video-tab", "multimodal-tab"] {
+          try require(try AppAccessibility.activate(identifier: tab, roots: roots()))
+          try await Task.sleep(nanoseconds: 100_000_000)
+        }
+        gates["legacyTabs"] = true
       }
-      stage = "generate activation"
-      report["canGenerateBeforeActivation"] = ready.model.state.canGenerate
-      report["phaseBeforeActivation"] = ready.model.state.phase.name
-      let accepted = try AppAccessibility.activate(
-        identifier: "multimodal-generate", roots: roots())
-      report["activationAccepted"] = accepted
-      report["phaseAfterActivation"] = ready.model.state.phase.name
-      try require(accepted)
-      try await wait(seconds: 120) {
-        ready.model.state.phase == .succeeded || ready.model.state.phase == .failed
-          || ready.model.state.phase == .cancelled
-      }
-      report["phaseAfterTerminalWait"] = ready.model.state.phase.name
-      report["generationFailureCode"] = ready.model.state.failure?.code.name ?? "none"
-      try require(ready.model.state.phase == .succeeded)
-      guard let output = ready.model.state.output else { throw ValidationFailure() }
-      let identity = SmolVLM2Model.identity
-      try require(
-        !output.text.isEmpty && output.backendId == SmolVLM2Model.backendId
-          && output.model.modelId == identity.modelId
-          && output.model.modelRevision == identity.modelRevision
-          && output.model.runtimeRevision == identity.runtimeRevision)
-      report["output"] = [
-        "text": output.text, "backendId": output.backendId, "modelId": output.model.modelId,
-        "modelRevision": output.model.modelRevision,
-        "runtimeRevision": output.model.runtimeRevision,
-      ]
-      gates["generated"] = true
-      stage = "output AX reflection"
-      try await wait(seconds: 10) {
-        guard let text = try AppAccessibility.find(identifier: "multimodal-output", roots: roots()),
-          let actualIdentity = try AppAccessibility.find(
-            identifier: "multimodal-identity", roots: roots()),
-          let phase = try AppAccessibility.find(identifier: "multimodal-phase", roots: roots())
-        else { return false }
-        return text.accessibilityLabel == output.text
-          && actualIdentity.accessibilityLabel?.contains(identity.runtimeRevision) == true
-          && phase.accessibilityLabel == "SUCCEEDED"
-      }
-      gates["outputRendered"] = true
-      stage = "legacy idle navigation"
-      for tab in ["speech-tab", "video-tab", "multimodal-tab"] {
-        try require(try AppAccessibility.activate(identifier: tab, roots: roots()))
-        try await Task.sleep(nanoseconds: 100_000_000)
-      }
-      gates["legacyTabs"] = true
       report["status"] = "passed"
     } catch {
-      report["failedGate"] = stage
+      report["failedGate"] = (error as? MultimodalDemoActiveValidation.Failure)?.label ?? stage
     }
     if let current {
       current.close()
@@ -159,7 +173,8 @@ import UIKit
       let data = try JSONSerialization.data(
         withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
       try data.write(
-        to: documents.appendingPathComponent("demo-integration.json"), options: .atomic)
+        to: documents.appendingPathComponent(
+          active ? "demo-active-integration.json" : "demo-integration.json"), options: .atomic)
     } catch {
       // No synthetic pass if the report cannot be persisted.
     }

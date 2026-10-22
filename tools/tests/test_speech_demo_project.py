@@ -17,7 +17,7 @@ VIDEO_SOURCES = ["demo/iosApp/VideoHost.swift", "demo/iosApp/VideoInputStore.swi
 
 MLX_SOURCES = ["demo/iosApp/MultimodalHostPreparation.swift", "demo/iosApp/MultimodalModelHostFactory.swift", "demo/iosApp/MultimodalMLXHostFactory.swift"]
 
-VALIDATION_SOURCES = ["probes/ios-multimodal-demo/AppAccessibility.swift", "probes/ios-multimodal-demo/MultimodalDemoValidation.swift"]
+VALIDATION_SOURCES = ["probes/ios-multimodal-demo/AppAccessibility.swift", "probes/ios-multimodal-demo/MultimodalDemoValidation.swift", "probes/ios-multimodal-demo/MultimodalDemoActiveValidation.swift"]
 
 MULTIMODAL_SOURCES = ["demo/iosApp/MultimodalHost.swift", "demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/MultimodalFilePicker.swift", "kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOSMultimodalInput.swift"]
 
