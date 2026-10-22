@@ -9,7 +9,7 @@ class MultimodalHost(
     private val store: MultimodalInputStore,
     bridge: MultimodalBridge = UnavailableMultimodalBridge(),
     private val selectFile: ((File?) -> Unit) -> Unit,
-) {
+) : MultimodalDemoActions {
     val model = MultimodalViewModel(bridge)
     private var selected: String? = null
     private var pickerGeneration = 0L
@@ -17,7 +17,7 @@ class MultimodalHost(
     private var foreground = true
     private var closed = false
 
-    fun selectImageFile() {
+    override fun selectImageFile() {
         if (closed || !foreground || !model.state.controlsEnabled) return
         val ticket = ++pickerGeneration
         pendingPicker = ticket
@@ -45,7 +45,7 @@ class MultimodalHost(
         }
     }
 
-    fun clearImageFile() {
+    override fun clearImageFile() {
         if (closed) return
         pendingPicker = null
         model.selectImage(null, null)
@@ -54,6 +54,7 @@ class MultimodalHost(
     }
 
     fun leavePage() { pendingPicker = null; model.leavePage() }
+    override fun leaveMultimodalPage() = leavePage()
     fun background(preservePicker: Boolean = false) {
         foreground = false
         if (!preservePicker) pendingPicker = null

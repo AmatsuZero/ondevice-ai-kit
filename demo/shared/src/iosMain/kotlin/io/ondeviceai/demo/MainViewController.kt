@@ -18,3 +18,9 @@ fun multimodalMainViewController(model:FaceViewModel,actions:DemoActions,identit
     identityActions:IdentityDemoActions,speech:SpeechViewModel,speechActions:SpeechDemoActions,
     video:VideoViewModel,videoActions:VideoDemoActions,multimodal:MultimodalViewModel)=
     ComposeUIViewController { FaceScreen(model,actions,identity,identityActions,speech,speechActions,video,videoActions,multimodal) }
+
+/** Host action opt-in has its own entry, preserving every earlier exported signature. */
+fun multimodalHostMainViewController(model:FaceViewModel,actions:DemoActions,identity:IdentityViewModel,
+    identityActions:IdentityDemoActions,speech:SpeechViewModel,speechActions:SpeechDemoActions,
+    video:VideoViewModel,videoActions:VideoDemoActions,multimodal:MultimodalViewModel,multimodalActions:MultimodalDemoActions)=
+    ComposeUIViewController { FaceScreen(model,actions,identity,identityActions,speech,speechActions,video,videoActions,multimodal,multimodalActions) }

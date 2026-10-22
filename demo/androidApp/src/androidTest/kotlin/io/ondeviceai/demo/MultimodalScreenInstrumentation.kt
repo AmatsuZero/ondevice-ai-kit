@@ -154,6 +154,26 @@ class MultimodalScreenInstrumentation : Instrumentation() {
             await { video.state.phase == VideoPhase.CANCELLED }
             runOnMainSync { speech.close(); video.close(); navModel.close() }
             result.putString("legacyNavigation", "passed-active-speech-video-leave-no-audio-media")
+            stage = "host-input-actions"
+            val inputDirectory = java.io.File(activity.cacheDir, "multimodal-ui-${java.util.UUID.randomUUID()}")
+            val source = java.io.File.createTempFile("synthetic-", ".png", activity.cacheDir).apply { writeBytes(byteArrayOf(1, 2, 3)) }
+            lateinit var inputHost: MultimodalHost
+            var inputReply: ((java.io.File?) -> Unit)? = null
+            runOnMainSync { inputHost = MultimodalHost(MultimodalInputStore(inputDirectory), selectFile = { inputReply = it }) }
+            show(inputHost.model, inputActions = inputHost)
+            click("multimodal-tab")
+            click("multimodal-select-input")
+            runOnMainSync { check(inputReply != null); inputReply!!(source) }
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.contains(source.name) == true }
+            click("multimodal-clear-input")
+            await { inputHost.model.state.inputReference == null }
+            click("multimodal-select-input")
+            val inputFaceTab = node { it.text?.toString() == "人脸检测" }
+            check((if (inputFaceTab.isClickable) inputFaceTab else inputFaceTab.parent).performAction(AccessibilityNodeInfo.ACTION_CLICK))
+            waitForIdleSync()
+            runOnMainSync { inputReply!!(source); check(inputHost.model.state.inputReference == null); inputHost.close() }
+            check(source.delete()); check(!inputDirectory.exists())
+            result.putString("inputActions", "passed-real-host-select-clear-leave-filter")
             result.putString("inference", "unverified-ui-fixture-only")
             result.putString("status", "passed")
         } catch (error: Throwable) {
@@ -169,12 +189,13 @@ class MultimodalScreenInstrumentation : Instrumentation() {
     }
 
     @OptIn(androidx.compose.ui.ExperimentalComposeUiApi::class)
-    private fun show(model: MultimodalViewModel?, speech: SpeechViewModel? = null, video: VideoViewModel? = null) {
+    private fun show(model: MultimodalViewModel?, speech: SpeechViewModel? = null, video: VideoViewModel? = null,
+                     inputActions: MultimodalDemoActions? = null) {
         runOnMainSync {
             activity.setContent {
                 MaterialTheme {
                     Column(Modifier.fillMaxSize().semantics { testTagsAsResourceId = true }) {
-                        FaceScreen(face, actions, speech = speech, video = video, multimodal = model)
+                        FaceScreen(face, actions, speech = speech, video = video, multimodal = model, multimodalActions = inputActions)
                     }
                 }
             }

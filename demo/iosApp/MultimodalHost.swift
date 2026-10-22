@@ -2,7 +2,7 @@ import Foundation
 import ODAIKitDemo
 
 @MainActor
-final class MultimodalHost {
+final class MultimodalHost: NSObject, @preconcurrency MultimodalDemoActions {
   let model: MultimodalViewModel
   private let store: MultimodalInputStore
   private let picker: (@escaping (URL?) -> Void) throws -> Void
@@ -19,6 +19,7 @@ final class MultimodalHost {
     self.store = store
     self.model = MultimodalViewModel(bridge: bridge)
     self.picker = picker
+    super.init()
   }
 
   func selectImageFile() {
@@ -60,6 +61,7 @@ final class MultimodalHost {
     pendingPicker = nil
     model.leavePage()
   }
+  func leaveMultimodalPage() { leavePage() }
   func background(preservePicker: Bool = false) {
     foreground = false
     if !preservePicker { pendingPicker = nil }

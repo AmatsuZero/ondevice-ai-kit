@@ -16,7 +16,8 @@ interface IdentityDemoActions { fun submitLivenessFrame() }
 fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityViewModel? = null,
     identityActions: IdentityDemoActions? = null, speech: SpeechViewModel? = null,
     speechActions: SpeechDemoActions? = null, video: VideoViewModel? = null,
-    videoActions: VideoDemoActions? = null, multimodal: MultimodalViewModel? = null) {
+    videoActions: VideoDemoActions? = null, multimodal: MultimodalViewModel? = null,
+    multimodalActions: MultimodalDemoActions? = null) {
     val state = model.state
     val availability = model.bridge.availability()
     var identityVisible by remember { mutableStateOf(false) }
@@ -25,10 +26,13 @@ fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityVie
     var multimodalVisible by remember(multimodal) { mutableStateOf(false) }
     fun leaveSpeech() { if (speechVisible) { speech?.leavePage(); speechActions?.leavePage() }; speechVisible = false }
     fun leaveVideo() { if (videoVisible) { video?.leavePage(); videoActions?.leavePage() }; videoVisible = false }
-    fun leaveMultimodal() { if (multimodalVisible) multimodal?.leavePage(); multimodalVisible = false }
+    fun leaveMultimodal() {
+        if (multimodalVisible) { multimodal?.leavePage(); multimodalActions?.leaveMultimodalPage() }
+        multimodalVisible = false
+    }
     DisposableEffect(speech) { onDispose { speech?.leavePage(); speechActions?.leavePage() } }
     DisposableEffect(video) { onDispose { video?.leavePage(); videoActions?.leavePage() } }
-    DisposableEffect(multimodal) { onDispose { multimodal?.leavePage() } }
+    DisposableEffect(multimodal, multimodalActions) { onDispose { multimodal?.leavePage(); multimodalActions?.leaveMultimodalPage() } }
     MaterialTheme {
         Column(Modifier.fillMaxWidth().heightIn(max = 380.dp).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("OnDevice AI Kit", style = MaterialTheme.typography.headlineSmall)
@@ -46,7 +50,7 @@ fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityVie
                 leaveSpeech(); leaveVideo(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; multimodalVisible = true
             }, modifier = Modifier.testTag("multimodal-tab")) { Text("图像理解") }
             if (multimodalVisible && multimodal != null) {
-                MultimodalScreen(multimodal)
+                MultimodalScreen(multimodal, multimodalActions)
             } else if (speechVisible && speech != null) {
                 SpeechScreen(speech, speechActions)
             } else if (videoVisible && video != null) {
