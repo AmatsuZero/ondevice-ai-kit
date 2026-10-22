@@ -2,6 +2,30 @@ import UIKit
 import XCTest
 
 @MainActor final class AppAccessibilityTests: XCTestCase {
+  func testWaitsForEnabledNodeAndActivatesOnce() async throws {
+    let node = AccessibilityElement(identifier: "target", result: true)
+    node.accessibilityTraits.insert(.notEnabled)
+    Task { @MainActor in
+      await Task.yield()
+      node.accessibilityTraits.remove(.notEnabled)
+    }
+    let accepted = try await AppAccessibility.activateWhenEnabled(
+      identifier: "target", roots: { [node] })
+    XCTAssertTrue(accepted)
+    XCTAssertEqual(node.activations, 1)
+  }
+  func testEnabledWaitDoesNotRetryFailedActionOrActivateDisabledTimeout() async throws {
+    let node = AccessibilityElement(identifier: "target", result: false)
+    let accepted = try await AppAccessibility.activateWhenEnabled(
+      identifier: "target", roots: { [node] })
+    XCTAssertFalse(accepted)
+    XCTAssertEqual(node.activations, 1)
+    node.accessibilityTraits.insert(.notEnabled)
+    let timedOut = try await AppAccessibility.activateWhenEnabled(
+      identifier: "target", roots: { [node] }, timeout: 0.001)
+    XCTAssertFalse(timedOut)
+    XCTAssertEqual(node.activations, 1)
+  }
   func testFindsNestedNodeAndActivatesExactlyOnce() throws {
     let container = AccessibilityContainer()
     let node = AccessibilityElement(identifier: "target", result: true)

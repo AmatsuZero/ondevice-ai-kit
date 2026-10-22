@@ -1,3 +1,5 @@
 # SDD ledger — plan: docs/superpowers/plans/2026-10-23-multimodal-demo-active-ui.md
 
 Base69fae57, inline/no subagents. Spec/plan selfreview no placeholders/conflicts; Task1 enabledhelper/report consumed byTask2 suite, noKMPexports. Ruling:256tokenbudget onlyexplicitactivevalidation for controlrecomposition window,32tokenreentry; nobenchmark/qualitycomparison. Cancelafterfirstobservedupdate notsynchronousfirstcallback, recordobserved/actionsequence and rejectifalreadyterminal; noretryfalseactiveevidence. Existingbootstrap/selection pathreused; AXnotphysicaltouch/OSbackground/truefilepicker. Userauthorization coversindependentpackage/soloexecution/noroutineconfirmation.
+
+Task1 complete: actualmissingactivateWhenEnabled RED→new2/2, helper7/7/fullDemo40/40; missingreportmodule RED→4/4mutationtests; tools118/118 and strictnewSwift0. Scopeauthorreview: enabledhelper finitepositiveboundedwait, missing/disabledpollonly, returnsoneactivationresultwithoutretry, cancellationpropagates; validatorrequiresfullcommit/physicalPID/exactgates/orderedscenarios/update-beforeRUNNINGaction/typedtrue/nooutputoncancel/exactreentryidentity. Existinghelperandidentityconstantsreused.

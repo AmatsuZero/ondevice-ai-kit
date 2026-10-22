@@ -34,6 +34,22 @@ import UIKit
     return match
   }
 
+  static func activateWhenEnabled(
+    identifier: String, roots: () -> [NSObject], timeout: TimeInterval = 10
+  ) async throws -> Bool {
+    guard timeout.isFinite, timeout > 0 else { return false }
+    let deadline = ProcessInfo.processInfo.systemUptime + timeout
+    while ProcessInfo.processInfo.systemUptime < deadline {
+      if let node = try find(identifier: identifier, roots: roots()),
+        !node.accessibilityTraits.contains(.notEnabled)
+      {
+        return node.accessibilityActivate()
+      }
+      try await Task.sleep(nanoseconds: 1_000_000)
+    }
+    return false
+  }
+
   static func activate(identifier: String, roots: [NSObject]) throws -> Bool {
     guard let node = try find(identifier: identifier, roots: roots) else { return false }
     return node.accessibilityActivate()

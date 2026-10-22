@@ -20,8 +20,8 @@ DisabledAXreturnsfalse, staleVMupdatefrompreviousround, generationfinishesbefore
 Modify probes/ios-multimodal-demo/AppAccessibility.swift and probes/ios-multimodal-bridge/AppAccessibilityTests.swift; create tools/multimodal_active_report.py and tools/tests/test_multimodal_active_report.py.
 Interface MainActor AppAccessibility.activateWhenEnabled(identifier: String, roots: ()->[NSObject], timeout: TimeInterval=10) async throws -> Bool; disabled/missing nodeswaitboundedly, acceptedactiononce, falseactivationreturnwithoutretry. validate(report:dict,expected_commit:str)->dict schemaVersion1/sourceCommit/runId/pid/platformphysical/fixtureHash/identity/gates/scenarios.
 
-- [ ] ActualXCTest missinghelperRED for disablednode asynchronouslyenabled→oneactivation, failedactionnotretried, disabledtimeoutfalse; strictreport missingmoduleRED withvalidreport/mutations wrongsource/platform/hash/identity/phase/missingupdate/falseorboolcoercedgate/canceloutput/ordering.
-- [ ] Implementminimalhelper/validator, freshDemo/fulltools/strictSwiftGREEN; authorreview/exactcommit test: gate active shared multimodal AX validation.
+- [x] ActualXCTest missinghelperRED for disablednode asynchronouslyenabled→oneactivation, failedactionnotretried, disabledtimeoutfalse; strictreport missingmoduleRED withvalidreport/mutations wrongsource/platform/hash/identity/phase/missingupdate/falseorboolcoercedgate/canceloutput/ordering.
+- [x] Implementminimalhelper/validator, freshDemo/fulltools/strictSwiftGREEN; authorreview/exactcommit test: gate active shared multimodal AX validation.
 
 ### Task2: actual shared cancel/leave and reentry device suite
 
