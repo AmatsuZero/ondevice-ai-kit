@@ -20,8 +20,8 @@ Ambiguous AX activation, cyclic/unbounded containers, preparation failure misrep
 Create probes/ios-multimodal-demo/AppAccessibility.swift and AppAccessibilityTests.swift; extend Demo-only multimodal-bridge XCTest generator/source-set tests.
 Interface MainActor AppAccessibility.find(identifier: String, roots: [NSObject]) throws -> NSObject?; activate(identifier: String, roots: [NSObject]) throws -> Bool. Public UIKit APIs only; exact identifier, duplicate object deduplication, ambiguity throws, finite node/depth cap, false activation reported.
 
-- [ ] Write actual XCTest missing helper RED, using real UIKit container/element graphs: nested discovery/one action, duplicate objects not duplicate action, ambiguous exact ID rejects, absent returnsfalse, failing action returnsfalse, cyclic graph terminates. Extend real generator inspection before implementation.
-- [ ] Implement bounded finder/action; fresh complete Demo ABI XCTest and generator tests GREEN, strictnewSwift0. Scope authorreview/exact local commit test: add bounded in-app accessibility driver.
+- [x] Write actual XCTest missing helper RED, using real UIKit container/element graphs: nested discovery/one action, duplicate objects not duplicate action, ambiguous exact ID rejects, absent returnsfalse, failing action returnsfalse, cyclic graph terminates. Extend real generator inspection before implementation.
+- [x] Implement bounded finder/action; fresh complete Demo ABI XCTest and generator tests GREEN, strictnewSwift0. Scope authorreview/exact local commit test: add bounded in-app accessibility driver.
 
 ### Task2: enhanced real bootstrap and shared-control validation
 
