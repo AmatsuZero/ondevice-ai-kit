@@ -4,6 +4,13 @@ import ODAIKitFace
 struct SharedControls: UIViewControllerRepresentable {
     let controller: DemoController
     func makeUIViewController(context: Context) -> UIViewController {
+        #if ODAI_MULTIMODAL_DEMO
+        if let multimodal = controller.multimodalHost, let video = controller.videoHost, let speech = controller.speechHost {
+            return MainViewControllerKt.multimodalHostMainViewController(model: controller.model, actions: controller,
+                identity: controller.identityModel, identityActions: controller, speech: speech.model, speechActions: speech,
+                video: video.model, videoActions: video, multimodal: multimodal.model, multimodalActions: multimodal)
+        }
+        #endif
         #if ODAI_VIDEO_DEMO
         if let video = controller.videoHost, let speech = controller.speechHost {
             return MainViewControllerKt.videoMainViewController(model: controller.model, actions: controller,

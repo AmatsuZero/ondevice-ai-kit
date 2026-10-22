@@ -15,6 +15,7 @@ SOURCES = [f"demo/iosApp/{name}.swift" for name in ["OnDeviceAIDemoApp", "DemoCo
 VIDEO_SOURCES = ["demo/iosApp/VideoHost.swift", "demo/iosApp/VideoInputStore.swift", "demo/iosApp/VideoFilePicker.swift",
                  "kmp-binding/apple/IOSVideoBridge.swift", "kmp-binding/apple/IOSVideoInput.swift"]
 
+MULTIMODAL_SOURCES = ["demo/iosApp/MultimodalHost.swift", "demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/MultimodalFilePicker.swift", "kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOSMultimodalInput.swift"]
 
 class SpeechDemoProjectTests(unittest.TestCase):
     def setUp(self):
@@ -25,7 +26,7 @@ class SpeechDemoProjectTests(unittest.TestCase):
         (self.root / "scripts").mkdir()
         shutil.copy(ROOT / SCRIPT, self.root / SCRIPT)
         (self.root / "apple").mkdir()
-        for source in SOURCES + VIDEO_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
+        for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
             path = self.root / source
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("fixture")
@@ -39,9 +40,27 @@ class SpeechDemoProjectTests(unittest.TestCase):
         self.output = self.root / "artifacts/speech-demo"
         self.ruby = os.environ.get("RUBY", "ruby")
 
-    def generate(self, video=False):
+    def generate(self, video=False, multimodal=False):
         return subprocess.run([self.ruby, str(self.root / SCRIPT)], capture_output=True, text=True,
-            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0"})
+            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0"})
+
+    def testMultimodalOptInRequiresVideoAndAddsOnlyBaseProducts(self):
+        rejected = self.generate(multimodal=True)
+        self.assertNotEqual(rejected.returncode, 0)
+        self.assertFalse(self.output.exists())
+        result = self.generate(video=True, multimodal=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        inspected = subprocess.run([self.ruby, "-rxcodeproj", "-rjson", "-e", """
+p = Xcodeproj::Project.open(ARGV[0]); t = p.targets.find { |target| target.name == 'SpeechDemo' }
+puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.real_path.to_s },
+ products: t.package_product_dependencies.map(&:product_name), settings: t.build_configurations.map(&:build_settings)})
+""", str(self.output / "SpeechDemo.xcodeproj")], capture_output=True, text=True, check=True)
+        data = json.loads(inspected.stdout)
+        self.assertEqual(sorted(data["sources"]), sorted(str(self.root / s) for s in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES))
+        self.assertIn("ODAIKitMultimodal", data["products"])
+        self.assertNotIn("ODAIKitAppleMLXVLM", data["products"])
+        self.assertTrue(all("ODAI_MULTIMODAL_DEMO" in c["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] for c in data["settings"]))
+        self.assertEqual(self.original.read_bytes(), b"protected project")
 
     def testVideoOptInAddsOnlyHostVideoProductsAndPreservesOriginal(self):
         result = self.generate(video=True)

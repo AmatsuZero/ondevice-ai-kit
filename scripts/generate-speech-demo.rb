@@ -9,9 +9,16 @@ sources = %w[OnDeviceAIDemoApp DemoController IOSFaceBridge CameraSource CameraL
              SpeechHost SpeechFilePicker SpeechInputStore SpeechAudioSession].map { |name| "demo/iosApp/#{name}.swift" }
 sources += ['kmp-binding/apple/IOSSpeechBridge.swift', 'kmp-binding/apple/IOSSpeechAudioInput.swift']
 video_demo = ENV['ODAI_VIDEO_DEMO'] == '1'
+multimodal_demo = ENV['ODAI_MULTIMODAL_DEMO'] == '1'
+abort('Multimodal Demo requires ODAI_VIDEO_DEMO=1') if multimodal_demo && !video_demo
 if video_demo
   sources += ['demo/iosApp/VideoHost.swift', 'demo/iosApp/VideoInputStore.swift', 'demo/iosApp/VideoFilePicker.swift',
               'kmp-binding/apple/IOSVideoBridge.swift', 'kmp-binding/apple/IOSVideoInput.swift']
+end
+if multimodal_demo
+  sources += ['demo/iosApp/MultimodalHost.swift', 'demo/iosApp/MultimodalInputStore.swift',
+              'demo/iosApp/MultimodalFilePicker.swift', 'kmp-binding/apple/IOSMultimodalBridge.swift',
+              'kmp-binding/apple/IOSMultimodalInput.swift']
 end
 frameworks = %w[iosSimulatorArm64 iosArm64].map do |platform|
   File.join(root, "demo/shared/build/bin/#{platform}/debugFramework/ODAIKitDemo.framework")
@@ -29,6 +36,7 @@ package.relative_path = File.join(root, 'apple')
 project.root_object.package_references << package
 products = %w[ODAIKitCore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech]
 products += %w[ODAIKitVideo ODAIKitAppleVideo] if video_demo
+products += ['ODAIKitMultimodal'] if multimodal_demo
 products.each do |name|
   dependency = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
   dependency.product_name = name
@@ -44,7 +52,7 @@ target.frameworks_build_phase.add_file_reference(project.main_group.new_file(Fil
 target.build_configurations.each do |config|
   config.build_settings.merge!({
     'PRODUCT_BUNDLE_IDENTIFIER' => 'io.ondeviceai.ondeviceaidemo',
-    'SWIFT_VERSION' => '5.0', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO' + (video_demo ? ' ODAI_VIDEO_DEMO' : ''),
+    'SWIFT_VERSION' => '5.0', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO' + (video_demo ? ' ODAI_VIDEO_DEMO' : '') + (multimodal_demo ? ' ODAI_MULTIMODAL_DEMO' : ''),
     'GENERATE_INFOPLIST_FILE' => 'YES', 'INFOPLIST_FILE' => File.join(root, 'demo/iosApp/Info.plist'),
     'INFOPLIST_KEY_UILaunchScreen_Generation' => 'YES', 'INFOPLIST_KEY_UIApplicationSceneManifest_Generation' => 'YES',
     'INFOPLIST_KEY_NSCameraUsageDescription' => '在设备本地检测人脸，不上传图像。',

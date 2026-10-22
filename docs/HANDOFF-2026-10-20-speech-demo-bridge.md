@@ -1,8 +1,18 @@
 # Handoff — Speech Demo Bridge
 
-更新时间：2026-10-22（Asia/Shanghai；双端单图native host本地包完成；system picker/平台接线/真实设备/iOS UI/独立审查待补）
+更新时间：2026-10-22（Asia/Shanghai；双端单图picker/shared actions/opt-in本地包完成；真实模型host/设备闭环/iOS UI/独立审查待补）
 
-## P9 Single-image native host lifecycle（2026-10-22，最新检查点）
+## P9 Single-image Demo picker/shared actions（2026-10-22，最新检查点）
+
+- 接续29458bb；独立设计/计划7eda196，Task1 shared actions2cdf094，Task2 Android433121c，Task3 iOS/检查点同次提交，最新HEAD以git为准。见[picker验证](validation/multimodal-demo-picker.md)、同名spec/plan及`.superpowers/sdd/2026-10-22-multimodal-demo-picker/` ledger/final-review。已完成包不重做。
+- shared可选选择/清除/离页动作、新专属iOS host入口；Android Intent extra `odai.multimodal.enabled`默认false，GetContent→IO bounded staging→host/store opaque token，后台/close接线；iOS独立生成Demo双flag `ODAI_VIDEO_DEMO=1 ODAI_MULTIMODAL_DEMO=1`，PNG/JPEG单文件picker、host/lifecycle，旧保护工程不变。默认仍UnavailableBridge，无模型/backend接线。
+- Task1 shared60/60、双framework link、实际Swift五入口编译；API35 Compose actions/旧导航通过。Task2 copy4/host8/全Demo26新执行，APK/lint0error9既有warning；TECNO KM9/API35实际optOut/optIn unavailable/systemPicker取消/合成content回调copy/clear/后台不重启/目录清理status=passed，真实系统选文件及Android推理unverified。失败fixture/中断日志保留，最终Java test-only provider只提供固定公开三字节。
+- Task3真实缺picker符号RED→Demo24/24（3picker+7host+4input+10bridge），格式化后再24/24；工具102/102，strict新Swift lint0，完整独立生成App unsigned simulator编译通过。iOS实际触摸UI/system picker往返仍unverified；旧minimumOS/XCTest/ICU警告保留，不称最低系统通过。
+- 下一独立包：**Apple既有固定模型/ModelStore可选host接线**；先复核backend及benchmark设计/计划、固定资产和设备。Android没有生产backend继续unavailable。再另包做KMP页面到真实SDK成功/首update取消/drain/重入/后台不重启/close/lease释放/关闭后拒绝设备闭环。短视频、新Android推理、自然质量与资源测量另包。
+- 每Task范围及最终仅作者自审；独立review仍pending，无APPROVE。Ruling：独立iOS生成工程保留原保护文件；Android异步failure共享ticket；synthetic content provider不替代真实系统文件选择。只本地提交，无push/merge/发布/下载/录音/私人媒体/签名变更；两保护hash/state精确不变且未暂存，日志/artifacts保留。
+- 旧Video UI初始化超时、P6实录、Android ASR MISSING_ASSETS、最低系统、自然质量/Metal GPU/energy及独立审查缺口原样保留。仍5/12完成、7阶段未收口，P9 active。
+
+## P9 Single-image native host lifecycle（2026-10-22，历史检查点）
 
 - 输入包2c2aaef后独立设计cc99556、Android Task1 854d256，Apple Task2与本检查点同次提交，最新HEAD以git为准。独立spec/plan `2026-10-22-multimodal-demo-host`，同名`.superpowers/sdd/` ledger/final-review。见[host验证](validation/multimodal-demo-host.md)。工作树/index/保护hash复核；不重做完成包。
 - 双端MultimodalHost只组合现有VM/typed bridge/input store，以注入本地File/URL选择建立latest/once-only ticket、替换/clear退役、晚到过滤、后台不重启、close一次与lease保留。默认真实UnavailableBridge。没有system picker/URI/shared选择按钮/平台opt-in/session owner或模型接线，不称真实picker/设备推理通过。

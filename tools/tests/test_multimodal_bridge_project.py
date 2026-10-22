@@ -12,7 +12,8 @@ SOURCES = ["kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOS
            "probes/ios-multimodal-bridge/IOSMultimodalBridgeTests.swift"]
 INPUT_SOURCES = ["demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/SpeechInputStore.swift",
                  "kmp-binding/apple/IOSSpeechAudioInput.swift", "probes/ios-multimodal-bridge/MultimodalInputStoreTests.swift",
-                 "demo/iosApp/MultimodalHost.swift", "probes/ios-multimodal-bridge/MultimodalHostTests.swift"]
+                 "demo/iosApp/MultimodalHost.swift", "probes/ios-multimodal-bridge/MultimodalHostTests.swift",
+                 "demo/iosApp/MultimodalFilePicker.swift", "probes/ios-multimodal-bridge/MultimodalFilePickerTests.swift"]
 
 
 class MultimodalBridgeProjectTests(unittest.TestCase):
