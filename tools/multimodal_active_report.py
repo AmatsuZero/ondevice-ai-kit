@@ -4,6 +4,9 @@ import json
 from pathlib import Path
 import re
 from uuid import UUID
+if __package__ in {None, ""}:
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from tools.multimodal_lifecycle_report import FIXTURE, IDENTITY, require
 
 GATES = {"bootstrap", "available", "pageOpened", "inputAction", "pickerReply", "activeCancel", "reentry", "activeLeave", "noAutoRestart", "returnReentry", "closed"}

@@ -1,5 +1,10 @@
 import copy
 import unittest
+import json
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
 from tools.multimodal_active_report import validate
 
 COMMIT = "a" * 40
@@ -47,3 +52,14 @@ class MultimodalActiveReportTests(unittest.TestCase):
         for key in [*IDENTITY, "text"]:
             item = report(); item["scenarios"][1]["output"][key] = "" if key == "text" else "wrong"
             with self.assertRaises(ValueError): validate(item, COMMIT)
+
+    def testDirectFileAndModuleCliAcceptSameReport(self):
+        root = Path(__file__).resolve().parents[2]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "report.json"
+            path.write_text(json.dumps(report()))
+            for invocation in [[str(root / "tools/multimodal_active_report.py")], ["-m", "tools.multimodal_active_report"]]:
+                result = subprocess.run([sys.executable, *invocation, str(path), "--source-commit", COMMIT],
+                                        cwd=root, capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(json.loads(result.stdout)["sourceCommit"], COMMIT)
