@@ -1,6 +1,6 @@
 # Multimodal Demo real OS background validation
 
-2026-10-23。接续 active AX 包 `d50eff1`；设计/计划 `76b6807`，Task1 报告门禁 `b521952`。实际增强 Demo 与项目-owned inert companion 均使用既有签名配置，未安装 mobile agent、未读取其他 App/媒体。
+2026-10-23。接续 active AX/CLI 检查点 `39660fc`；本包运行代码 `d50eff1`；设计/计划 `76b6807`，Task1 报告门禁 `b521952`。实际增强 Demo 与项目-owned inert companion 均使用既有签名配置，未安装 mobile agent、未读取其他 App/媒体。
 
 ## Physical device evidence
 

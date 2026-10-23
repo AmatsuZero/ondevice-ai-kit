@@ -5,11 +5,11 @@
 ## P9 Real OS background lifecycle（2026-10-23，最新检查点）
 
 - 接续d50eff1；design/plan76b6807、strict report b521952，本检查点文档同次提交。见[OS后台验证](validation/multimodal-demo-os-background.md)、spec/plan `2026-10-23-multimodal-demo-os-background` 与 ledger/final-review。
-- 真实增强 Demo PID21398 在 RUNNING/update23 写 ready；devicectl 前台启动项目-owned inert companion，再恢复增强 Demo，同 PID21398。四通知严格有序，willResignActive时RUNNING，didEnterBackground时CANCELLED无output/failure；恢复300ms无自动重启，token32同PID重入成功，close通过，14 gates全true。
+- 真实增强 Demo PID21398 在 RUNNING/update0 写 ready，系统willResignActive时已到update23；devicectl 前台启动项目-owned inert companion，再恢复增强 Demo，同 PID21398。四通知严格有序，willResignActive时RUNNING，didEnterBackground时CANCELLED无output/failure；恢复300ms无自动重启，token32同PID重入成功，close通过，14 gates全true。
 - runId16D64305-AD03-404E-ACB1-A509F9A79DA3，raw SHA256 bc5ec5fbcb17f93ff3a3f034a8bab27a82fe0f48646236dd0a944bc7755b96e；固定fixture/lock/metadata精确检查，companion只含Text，无agent/profile安装。
 - 新增仅validation source/arg与项目-owned companion；默认/Android/KMP ABI/生产生命周期未改。tools123/123、bridge/Demo42/42、strictSwift0、默认/增强build成功。物理touch/systempicker仍unverified，mobile agent缺失门槛保留；质量/资源/最低系统/独立review/旧Video/P6/ASR缺口保留，仍5/12、P9active。
 
-## P9 Shared active Multimodal AX（2026-10-23，最新检查点）
+## P9 Shared active Multimodal AX（2026-10-23，历史检查点）
 
 - 接续69fae57，design54b7951、helper/report2339c5d、suite2915725，本检查点同次本地文档提交。见[活动UI验证](validation/multimodal-demo-active-ui.md)、spec/plan `2026-10-23-multimodal-demo-active-ui` 与同名ledger/final-review。
 - 实际增强Demo/shared AX生成→首观察update→RUNNING取消、同PID重入成功、再次RUNNING update后speech-tab活动离页取消、返回300ms不自动重启、再次重入成功及close；11gates全部true。预算256仅给控件重组窗口，重入32；不是benchmark/同步firstcallback取消承诺。

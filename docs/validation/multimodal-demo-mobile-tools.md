@@ -11,3 +11,5 @@
 更正：实际只调用了 foreground 检查；未重复调用已确定缺少 agent 的元素读取。之前文档将两项均写为已执行，现纠正。
 
 状态：`unverified`（真实触摸、元素命中、OS 前后台）。不重复重试已确认门槛；待有授权 provisioning profile 或其他已安装 agent 的本项目设备工具后再开独立包。旧 Video runner 初始化超时、P6 实录、Android ASR MISSING_ASSETS、最低系统、质量/资源与独立 review 缺口继续保留。
+
+后续更新：项目-owned companion + devicectl 已在独立 [OS后台包](multimodal-demo-os-background.md) 通过真实 UIKit 生命周期/取消/同PID恢复验证；无需 mobile agent。上述缺失只继续阻断 mobile MCP 元素/触摸工具，不再意味着整个 OS 后台验收无可执行路径。
