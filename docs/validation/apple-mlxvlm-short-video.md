@@ -1,6 +1,24 @@
 # Apple MLXVLM 短视频可行性
 
-2026-10-23。从 `515ec07` 分发交接继续；源码可行性/设计已提交 `52fc766`，内部snapshot/上游characterization为`eb1287d`。**最新：内部项目侧sampled-video适配器已通过host真实帧与固定tokenizer验证；上游29FPS重采样仍失败，公共类型化视频契约已完成，设备视频推理尚未通过**。未改模型/lock/上游依赖。roadmap 仍5/12、P9active。
+2026-10-23。固定模型/runtime的项目侧8帧adapter、Swift typed video client与native runtime现已完成，并有固定合成视频真机生成/取消/同PID重入/close证据。原上游二次采样8→7失败仍保留；自然质量/资源/最低系统/分发/独立review门槛未关闭。roadmap仍5/12/P9active。
+
+## 最新结果：固定合成视频设备链路与哈希内存修复
+
+Task2公共契约`c9ea298`、runtime设计`b5e206d`、共享runtime`eebc670`、显式consumer/严格validator`30e5e8e`已本地提交。视频直接消费`MLXVLMVideoInputAdapter.Prepared.input`，image/video共用session/model lease；generator/生成producer明确join后才清理owned snapshot，未恢复上游二次采样。
+
+首次设备PID22015无最终report且被Jetsam `per-process-limit`终止（原始`JetsamEvent-2026-10-23-234110.ips`保留，约3.30GiB进程驻留页估算，**不是Metal峰值**）。阶段诊断`4eefb34`/`4a4ec77`将失败定位到ModelStore acquire前，尚未decode/model推理。相同Foundation哈希循环读约1GB固定权重三次的host phys_footprint约3.061GB；逐1MiB read+SHA256.update置于autoreleasepool后约5.7MB、hash不变。真实ModelStore64MiB合成文件回归实际RED（202440848B增量峰值）→GREEN（3440640B；全套后续约1MiB）。独立[哈希内存设计](../superpowers/specs/2026-10-23-modelstore-hash-memory-design.md)/[计划](../superpowers/plans/2026-10-23-modelstore-hash-memory.md)，修复`5e39cb8`，保持完整byte/size/hash校验，没有调整MLX全局cache、帧数、模型或runtime。RSS与phys_footprint口径分开，不将此回归当作通用资源验收。
+
+**修复后的真实物理iPhone16ProMax（iPhone17,2）/iOS27.0.1设备链路通过**：tested source=`5e39cb8b06a1dc3862e0f0a034ec6397951eac48`，PID=`22072`，runId=`2B747E73-3D02-4585-8F13-969685C84892`，与独立devicectl启动记录一致。App逐一核对14model文件size/hash，真实固定tokenizer/权重生成；29FPSfixtureSHA256=`9786524a69579ffd69d75c49048a566f31eaec090b1487b69aa4ce6d55e1ee51`。
+
+- success实际返回非空文本、22个update；首update主动取消只收到1个update，取消请求约1904.29ms，snapshot清理约1928.77ms，返回及drain约1929.93ms（单次观测，不是SLA）；同PID重入再次非空、22个update。
+- 三次native decode与adapter都保留8真实帧，actualTime原值`[0,3584,7168,10752,14848,18432,22016,25600]/14848`；clip duration=2s、sample span=`25600/14848`约1.724138s，始终分开。三次副本SHA相同、preparedFrameCount=8、owned snapshot close后实际目录不存在。
+- 七个gate均true：生成前lease保护、取消后lease仍保护、close后lease可移除、closed图片/视频均拒绝、源fixture未变、没有新owned snapshot目录。raw严格validator实际exit0，未从输出文本推断时序/自然质量。
+
+raw/summary/sourceinventory：`artifacts/verification/apple-mlxvlm-video-suite-20261023/`；raw文件`device-raw-memory-fixed.json` SHA256=`a5efcc79134c1ec4cc01313169e09c3cb56303d6011d8eecfdc33254f4e69ec2`。所有失败/诊断/build argv/log、implementation-checks/final-review在`.superpowers/sdd/2026-10-23-apple-mlxvlm-short-video-runtime/`，哈希fix自身RED/GREEN/fullbase日志在`.superpowers/sdd/2026-10-23-modelstore-hash-memory/`。
+
+最新验证：完整基础Apple **470/470**、增强host **41/41，无skip**（真实tokenizer2/2）、tools **133/133**；新独立consumer generic iOS build及随后实际签名device build均成功。签名沿用既有team/profile、无allowProvisioningUpdates/签名资产变更；12checkout HEAD/clean、原/consumer lock、canonical资源与2个保护文件hash保持匹配。本会话作者自审，**独立review仍pending，无APPROVE**；仅本地提交、无push/merge/publish。
+
+原Task2/3的本轮固定native范围完成，Task1仍partial：短于8实际样本明确拒绝，不承诺任意<=5s视频。原上游8→7失败未修复，失败证据保留。仍5/12/P9active；自然视频/时序质量、Metal/GPU/energy、Android真实后端、最低系统、binary archive exit65、物理触摸/真实system picker、旧Video UI、P6实录等缺口保留。下一独立包为Android类型化video contract/client对等，之后再独立KMP/Demo接线；不能把Android契约称为真推理。下方为历史检查点，不重复已完成包。
 
 **最新runtime库检查点：** Task2契约`c9ea298`之后，按[runtime计划](../superpowers/plans/2026-10-23-apple-mlxvlm-short-video-runtime.md)接入MLXVLMBackend视频协议、共用session/model lease及取消/close屏障；Local runtime直接消费adapter.Prepared.input，保留owned snapshot至generation producer明确join后清理。新增诊断metadata含副本hash、原始requested/actual rational times、真实clip duration与sample span；无调用方路径。session6项与metadata1项均missing-API RED→GREEN，全增强host41/41无skip、tools126/126、新独立unsigned generic iOS BUILD SUCCEEDED/exit0。**这些是host/build证据，尚无视频权重设备运行；原Task3仍未完成。** 下一实现opt-in consumer/严格validator后进行固定合成视频设备success/cancel/reentry/close。当前短样本仍拒绝，独立reviewpending、5/12/P9active，binary/质量/资源/Android/minOS等缺口保留。原始logs/checks/作者自审在`.superpowers/sdd/2026-10-23-apple-mlxvlm-short-video-runtime/`。
 

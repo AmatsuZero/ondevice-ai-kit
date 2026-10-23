@@ -1,6 +1,6 @@
 # Next session — foundation continuation
 
-2026-10-23。建议在新会话开始下一独立包，本文件是恢复入口，不是整个项目完成结论。
+2026-10-23。建议在新会话开始下一独立包，本文件是恢复入口，不是整个项目完成结论。 最新状态见下方“固定 MLXVLM 短视频可行性”的native设备完成检查点；上面的分发段保留历史。
 
 ## 最新续接 — 可搬移 source 分发与 binary 门槛
 
@@ -34,6 +34,8 @@ SDK Foundation、独立apple-mlx后端/真实SDK固定单图生命周期与bench
 - 当前设备通过devicectl可用；mobile MCP只执行了foreground检查，报agent未安装。未执行元素读取、未安装agent/profile。agent缺失继续限制触摸工具，**不阻断已通过的OS前后台证据**。
 
 ## 最新续接 — 固定 MLXVLM 短视频可行性
+
+**最新native设备完成检查点（优先于下方全部历史下一步）：** Task2typedclient`c9ea298`、共享session/runtime`eebc670`、显式consumer/严格validator`30e5e8e`完成。首次设备PID22015 per-process-limit无report；阶段定位到ModelStore.acquire前，独立64MiB真实RED→GREEN定位Foundation逐块read临时对象保留，`5e39cb8`在read+SHA256.update内逐块autoreleasepool，不跳过校验、不动模型/runtime/MLXglobals/帧数。完整Apple470/470、增强host41/41无skip、tools133/133，实际签名build成功。真实iPhone16ProMax/iOS27.0.1源`5e39cb8b06a1dc3862e0f0a034ec6397951eac48`/PID22072/runId2B747E73-3D02-4585-8F13-969685C84892，固定29FPS8frame实际权重生成、首update取消+drain、同PID重入、close/lease/remove/清理均通过，严格validatorexit0。clip2s与span25600/14848分列，14modelhash/12checkout/lock均核对；raw与失败Jetsam/阶段诊断全保留，见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部和runtime/hash-memory两份ledger。原Task2/3本轮固定native范围完成；Task1短样本仍拒绝，不泛化<=5s。下一Androidtypedvideo契约/client对等独立设计实施，再另包KMP/Demo；不要重做adapter/profile/client/runtime。原上游8→7失败、binary archiveexit65、自然质量/Metal/energy/Android真backend/minOS/旧UI/P6实录/独立reviewpending缺口不变，5/12/P9active。仅本地提交，无新push授权。HEAD以git为准；2保护文件原hash/state/index不变。
 
 **最新runtime库检查点（优先于下方）：** MLXVLMBackend已conform video协议，image/video共用session/lease，视频直接adapter.Prepared.input，producerjoin后snapshot清理。session6项、实际29FPSmetadata1项均RED→GREEN，全增强host41/41无skip、tools126/126、新独立unsigned generic iOS build通过。原Task3仍缺consumer/严格validator及设备视频权重success/cancel/reentry/close，不以本包host/build替代。下一按`2026-10-23-apple-mlxvlm-short-video-runtime.md` Task2继续；日志/checks/作者自审在同名ledger目录。原Task1短样本仍拒绝，独立reviewpending、5/12/P9active、所有旧门槛不变，仅本地提交。
 

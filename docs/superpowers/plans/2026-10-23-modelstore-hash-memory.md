@@ -7,6 +7,8 @@
 **Tech Stack:** existingFoundation/CryptoKit/Darwin/XCTest/Swift6.
 **Spec:** docs/superpowers/specs/2026-10-23-modelstore-hash-memory-design.md
 
+**Execution checkpoint:** ActualModelStore RED202440848B→GREEN3440640B/lastfull1048576B, fullbaseApple470/470, enhancedhost41/41 no skips, tools133/133, signedbuildpass; actualdevice source5e39cb8/PID22072 fixedvideo suite andstrictvalidatorpass. No MLXglobal/model/runtime/frames changes. Authorreviewonly, independentpending.
+
 ## Global constraints
 
 Keep exactmanifest/byteverification, symlink/pathchecks, leases/close/cancellation unchanged. BaseiOS15/macOS12; fixedmodels/runtime/lock/dependencies; protect originaldirtyfiles. No downloads/upstream/MLXglobals/signingasset/remote changes. Keepallartifacts andindependentreviewpending.
@@ -20,7 +22,7 @@ Large files must not retain file-sized autoreleased readbuffers; truncated/wrong
 **Files:** apple/Sources/ODAIKitModelStore/ModelStore.swift; new apple/Tests/ODAIKitModelStoreTests/ModelStoreMemoryTests.swift; examples/ios-mlxvlm-native/VideoFixtureSuite.swift.
 **Interfaces:** unchanged. Test private footprint sampler measures realstore install/acquire, synthetic sparse64MiB expectedliteralSHA256 and peakdelta<96MiB; no modeldependency.
 
-- [ ] Add meaningfulrealstorememory regression with actualfullintegrity/lease lifecycle; run focusedRED beforeproductedit, save measuredpeak/failure.
-- [ ] Implement per-chunk autoreleasepool around read+hash update in store and consumerhash, preserving errors andfileclose; no smallerframe/model/runtimetuning.
-- [ ] Run focusedGREEN, fullbaseApple, enhancedhost(realTokenizer), fulltools explicitRuby, pycompile/diffcheck. Review andprecisestagelocalcommit.
-- [ ] Resume originalruntimeTask2device suite with sourcecommit/newbuild, samefixedmodel/fixture/profile; do not mark complete unless strictactualreportpasses. If differentrealblockappears, diagnose/record separately.
+- [x] Add meaningfulrealstorememory regression with actualfullintegrity/lease lifecycle; run focusedRED beforeproductedit, save measuredpeak/failure.
+- [x] Implement per-chunk autoreleasepool around read+hash update in store and consumerhash, preserving errors andfileclose; no smallerframe/model/runtimetuning.
+- [x] Run focusedGREEN, fullbaseApple, enhancedhost(realTokenizer), fulltools explicitRuby, pycompile/diffcheck. Review andprecisestagelocalcommit.
+- [x] Resume originalruntimeTask2device suite with sourcecommit/newbuild, samefixedmodel/fixture/profile; do not mark complete unless strictactualreportpasses. If differentrealblockappears, diagnose/record separately.

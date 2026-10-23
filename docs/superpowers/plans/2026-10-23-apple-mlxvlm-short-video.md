@@ -20,6 +20,8 @@
 
 **Latest Task3a checkpoint:** backend/session/video runtime wired via adapter.Prepared.input (old.frames route superseded). Host41/41(no skips),tools126/126,freshgenericIOSbuild pass; originalTask3 remains INCOMPLETE, consumer/strictvalidator/devicegeneration unexecuted. Continue runtime subplanTask2; do not use host/build as device gates.
 
+**Latest completed native checkpoint (supersedes historical next steps):** Task2/3/4 complete in this fixed synthetic native scope; Task1 remains partial forshortactualsamples. Runtime subplan finished, directadapterinput, device source5e39cb8/PID22072 success/firstupdatecancel+drain/samePIDreentry/close/leasecleanup andstrictvalidatorpass. InitialJetsamfailure was pre-inference hashbufferretention, fixed via separate actualRED→GREENModelStorepackage; allfailurelogs retained. FullbaseApple470/470,enhancedhost41/41(no skips),tools133/133. Reviewpending,5/12/P9active,quality/resource/minOS/binary/Androidrealbackend andoldgaps remain. NextindependentAndroidcontractparity, not repeatcompletednativepackages.
+
 ## Global constraints
 
 No new dependencies/downloads/upstream edits; exact current model/runtime/Package.resolved. Base iOS15/macOS12 and Android API26 unchanged, enhanced real inference arm64 iOS18+ device only. H.264 SDR, one zero-start video track, local regular nonsymlink input<=32MiB, finite duration0<d<=5s, <=1920 each side and <=2,073,600 pixels, at most8 frames<=512 each side. Prompt<=8192 UTF8 bytes, output1...512, temperature0. No KMP/Android implementation, natural media, remote writes, signing changes or protected-file edits in this package.
@@ -62,17 +64,17 @@ No new dependencies/downloads/upstream edits; exact current model/runtime/Packag
 
 **Interfaces:** Task2 video request/protocol; Task1 snapshot; existing ModelStore lease/LocalTokenizerLoader/generateTask. `MLXVLMBackend.generateVideo(_:update:)` shares session with generate(image). Explicit consumer launch flag `--sdk-mlxvlm-video-suite`; normal launch and existing flags keep behavior. Report CLI takes raw JSON path and optional `--output` summary path.
 
-- [ ] Write RED tests for backend image/video mutual exclusion, cancellation during decoding/prepare/update, producer join before lease release, reentry and close; write validator mutations that reject missing identity/hash/timestamps, empty output, different PID, absent cancellation/drain/cleanup gates and inferred quality.
-- [ ] Implement video session routing with same model lease and active task, input ownership through final join; explicit targetFrames, fixed model processor, existing temperature/output budget and update relay. Preserve image errors/availability and host unsupported-device behavior.
-- [ ] Implement consumer synthetic fixture lifecycle and strict raw validator. Include runId, sourceCommit, PID/device/OS, model/runtime/fixture hashes, actual/requested timestamps, clip duration vs sampled span, decode/prepare/generation phases, success/update-cancel/samePID reentry/close/lease results; natural quality/Metal/energy/minOS remain unverified.
-- [ ] Run targeted host and full tools tests with `RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`, Python compile, diff-check. Generate independent consumer and build generic iOS unsigned with matching SourcePackages and `-disableAutomaticPackageResolution -skipPackageUpdates -onlyUsePackageVersionsFromResolvedFile`.
-- [ ] Recheck the existing authorized device, install/run only the project consumer with existing signing; provision only hash-verified model/synthetic fixture; collect raw results and run strict validator. Preserve failed attempt logs. Device failure is a gap, never substitute host tests.
-- [ ] Author scope review, exact-stage local Task commit.
+- [x] Write RED tests for backend image/video mutual exclusion, cancellation during decoding/prepare/update, producer join before lease release, reentry and close; write validator mutations that reject missing identity/hash/timestamps, empty output, different PID, absent cancellation/drain/cleanup gates and inferred quality.
+- [x] Implement video session routing with same model lease and active task, input ownership through final join; direct adapter.Prepared.input, fixed model configuration/tokenizer, existing temperature/output budget and update relay. Preserve image errors/availability and host unsupported-device behavior.
+- [x] Implement consumer synthetic fixture lifecycle and strict raw validator. Include runId, sourceCommit, PID/device/OS, model/runtime/fixture hashes, actual/requested timestamps, clip duration vs sampled span, decode/prepare/generation phases, success/update-cancel/samePID reentry/close/lease results; natural quality/Metal/energy/minOS remain unverified.
+- [x] Run targeted host and full tools tests with `RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`, Python compile, diff-check. Generate independent consumer and build generic iOS unsigned with matching SourcePackages and `-disableAutomaticPackageResolution -skipPackageUpdates -onlyUsePackageVersionsFromResolvedFile`.
+- [x] Recheck the existing authorized device, install/run only the project consumer with existing signing; provision only hash-verified model/synthetic fixture; collect raw results and run strict validator. Preserve failed attempt logs. Device failure is a gap, never substitute host tests.
+- [x] Author scope review, exact-stage local Task commit.
 
 ### Task 4: Recovery checkpoint
 
 **Files:** update `docs/validation/apple-mlxvlm-short-video.md`, ROADMAP and next-session handoff, this plan and local progress/final-review.
 
-- [ ] Record actual counts, commands, hashes, commits, characterization and host/device outcomes separately. Leave Android/KMP, natural quality, binary, minimumOS and independent review explicit.
-- [ ] Recheck fixed lock/canonical resource/protected hashes and index, docs links and diff-check; separate author final review and local docs commit.
-- [ ] Next independent package is Android video contract parity and then KMP/Demo video input, only after native gates pass. Do not close P9 or promote the 5/12 count from native progress alone.
+- [x] Record actual counts, commands, hashes, commits, characterization and host/device outcomes separately. Leave Android/KMP, natural quality, binary, minimumOS and independent review explicit.
+- [x] Recheck fixed lock/canonical resource/protected hashes and index, docs links and diff-check; separate author final review and local docs commit.
+- [x] Next independent package is Android video contract parity and then KMP/Demo video input, only after native gates pass. Do not close P9 or promote the 5/12 count from native progress alone.

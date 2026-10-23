@@ -1,5 +1,7 @@
 # 分阶段交付与恢复入口
 
+2026-10-23 P9固定合成短视频native链路通过：`c9ea298/eebc670/30e5e8e` typed API/shared runtime/opt-in consumer后，首次设备因ModelStore大文件校验临时缓冲保留被per-process-limit终止；独立实际RED→GREEN修复`5e39cb8`保持全hash校验。真实iPhone17,2/iOS27.0.1/PID22072固定29FPS8帧权重success、首update取消/drain、同PID重入、close/lease清理及严格validator通过；clip2s与span25600/14848分列。完整Apple470/470、增强host41/41无skip、tools133/133。仅合成集成生命周期，不证明自然视频质量/Metal/energy/minOS；短实际样本仍拒绝、上游8→7失败/binary archive exit65/旧验收与独立reviewpending保留，仍5/12/P9active。下一独立Androidvideo契约对等，再另包KMP/Demo；详见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。以下为历史检查点。
+
 2026-10-23 P9 runtime库续接：MLXVLMBackend已显式支持video入口，沿同session/lease直接使用adapter LMInput并join后清理。新增session6/metadata1项RED→GREEN，增强host41/41无skip、tools126/126、fresh generic iOS build通过；仅库host/build，视频权重设备运行尚未执行，原Task3仍未完成。下一opt-in consumer/严格validator及固定合成device生命周期；仍5/12/P9active、独立reviewpending及旧缺口保留，见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。
 
 2026-10-23 P9 Task2续接：纯Swift typed video request/可选backend协议/client共享生命周期已实现，API RED后Multimodal22/22、完整Apple469/469、增强host34/34无skip、tools126/126、Swift6严格typecheck与新独立generic iOS公共API compile probe通过。MLXVLMBackend仍image-only，Task3 runtime未开始；下一先细化adapter直入LMInput的runtime计划。Task1短样本仍拒绝，上游8→7失败/二进制/自然质量/资源/Android真实后端/最低系统/独立review缺口保留，仍5/12/P9active。见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部；以下是历史检查点。

@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-23-apple-mlxvlm-short-video-design.md`, Runtime continuation decision; adapter design is binding for temporal/input semantics.
 
+**Execution checkpoint:** Tasks1–3 complete within fixedsyntheticnative scope. Source5e39cb8/PID22072 actualdevice strictvalidatorpass after separateModelStorehashbufferfix; originalper-process-limitfailure/phaseattemptsretained. FullbaseApple470/470,enhancedhost41/41noskips,tools133/133. OriginalTask1short-samples remains partial; no naturalquality/resource/minOS/binary/review promotion. NextindependentAndroidcontractparity.
+
 ## Global constraints
 
 Same fixed model fa57db46815177fbdfd65cc85a2b3416a8332268 and runtime6e338e5df49424fc0db7c6d58184d622f92ed18a; locke67e9859… unchanged. Current regular/nonsymlink<=32MiB H.264 BT709 one zero-start video-track profile, 0<duration<=5s, sides<=1920/pixels<=2073600, eight distinct frames<=512; short two-frame clips explicitly rejected. Prompt<=8192UTF8 and output1...512, temperature0. Enhanced inference arm64physicaliOS18+ only. No upstream edits/download/private media/recording/signing changes/push; retain protected files/artifacts/failures. Independentreviewpending and5/12/P9active.
@@ -40,13 +42,13 @@ Same fixed model fa57db46815177fbdfd65cc85a2b3416a8332268 and runtime6e338e5df49
 
 **Interfaces:** VideoFixtureSuite.run() async writes sdk-mlxvlm-video.json, explicit --sdk-mlxvlm-video-suite only. CLI rawJSON [--output path]; strict schemaVersion1/runId/sourceCommit/device/OS/PID/identity/hashes + three ordered runs success/cancelled/reentry, plus closed rejection/lease/remove/source integrity. Each run records copied hash/exact times/clip/span/decode+prepare+model-load/update/generation-return/cleanup evidence. SinglePID, requested grid and all8actual times, nonempty success/reentry, firstupdate cancel then drain, cleanup after return required. Quality/resource/minOS explicitly unverified.
 
-- [ ] Write validator positive fixture + mutations (missing/invalid identities, hash, rational time count/order/grid/span, empty output, PID change, missing cancel/drain/cleanup/close/lease, inferred quality), run missing-module RED. Implement strict parser and summary; no inferred values. Extend generator tests to require copying video suite before implementation, preserve RED then GREEN.
-- [ ] Implement suite and flag using hash-verified29FPS fixture/model, shared client and observer with locked metadata collector; cancel from first update, await task and drain before samePID reentry, awaitclose before store.remove. Persist failed report with stable error type. No natural media/automatic normal launch.
-- [ ] Run full tools and Python compile/diff-check; fresh independent generic iOS build. Commit source before device execution so sourceCommit is exact.
-- [ ] Recheck connected authorized device; signed build using existing team/profile only, install project App, provision verified synthetic fixture+fixedmodel, launch explicit flag/sourceCommit, retrieve rawJSON. Strict validator must pass actual raw; preserve all failures and device gap if it cannot. No host/build substitution.
-- [ ] Author review and exact local evidence/docs commit; mark original Task3 only if device gates pass. Original Task1 short-samples remains partial. Next Android contract parity only after native gates.
+- [x] Write validator positive fixture + mutations (missing/invalid identities, hash, rational time count/order/grid/span, empty output, PID change, missing cancel/drain/cleanup/close/lease, inferred quality), run missing-module RED. Implement strict parser and summary; no inferred values. Extend generator tests to require copying video suite before implementation, preserve RED then GREEN.
+- [x] Implement suite and flag using hash-verified29FPS fixture/model, shared client and observer with locked metadata collector; cancel from first update, await task and drain before samePID reentry, awaitclose before store.remove. Persist failed report with stable error type. No natural media/automatic normal launch.
+- [x] Run full tools and Python compile/diff-check; fresh independent generic iOS build. Commit source before device execution so sourceCommit is exact.
+- [x] Recheck connected authorized device; signed build using existing team/profile only, install project App, provision verified synthetic fixture+fixedmodel, launch explicit flag/sourceCommit, retrieve rawJSON. Strict validator must pass actual raw; preserve all failures and device gap if it cannot. No host/build substitution.
+- [x] Author review and exact local evidence/docs commit; mark original Task3 only if device gates pass. Original Task1 short-samples remains partial. Next Android contract parity only after native gates.
 
 ### Task 3: Recovery documentation (original Task4)
 
-- [ ] Update validation/roadmap/handoff/current plans with actual commits/counts/paths/pass-fail-unverified; preserve all prior gates and independentreviewpending.
-- [ ] Verify protected2hash/index, fixedlock/checkouts, canonicalmodelresource, doc links and diff-check; exact local commit, no push.
+- [x] Update validation/roadmap/handoff/current plans with actual commits/counts/paths/pass-fail-unverified; preserve all prior gates and independentreviewpending.
+- [x] Verify protected2hash/index, fixedlock/checkouts, canonicalmodelresource, doc links and diff-check; exact local commit, no push.
