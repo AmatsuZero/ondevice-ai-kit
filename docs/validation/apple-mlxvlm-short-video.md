@@ -2,7 +2,19 @@
 
 2026-10-23。从 `515ec07` 分发交接继续；源码可行性/设计已提交 `52fc766`，内部snapshot/上游characterization为`eb1287d`。**最新：内部项目侧sampled-video适配器已通过host真实帧与固定tokenizer验证；上游29FPS重采样仍失败，公共短视频 API/设备推理尚未通过**。未改模型/lock/上游依赖。roadmap 仍5/12、P9active。
 
-## 最新续接：项目侧 sampled-video adapter
+## 最新续接：profile 与 iOS 输入准备
+
+`81ea4df`补4个真实合成负向profile测试：H.264 BT.2020/PQ、0.25s offset/edit、只有2个真实帧、带外部URL dref entry的容器，均拒绝且清理owned copy。baseline原实现4/4GREEN，**没有产品bug修复**；临时放松transfer guard后PQ测试实际RED（exit65/1failure），finally恢复原snapshot字节后完整host **34/34、无skip**；tools新跑 **126/126**。原snapshot源码没有最终diff。two-frame fixture是当前8个互异sample profile的**拒绝**证据，不是短于8样本视频支持。reference fixture只指向不存在的合成相对URL，属于结构拒绝测试，不证明任意引用容器无外部I/O。
+
+新增[profile设计](../superpowers/specs/2026-10-23-apple-mlxvlm-video-profile-design.md)及[计划](../superpowers/plans/2026-10-23-apple-mlxvlm-video-profile.md)。原Package直接真机测试exit70，测试体未执行：`Tool-hosted testing is unavailable on device destinations`。按诊断生成本项目空App作为XCTest host，沿用现有bundle ID/team/wildcard profile、同一SDK、测试源码和fixtures；不改SDK可见性或签名资产、不启用allowProvisioningUpdates。恢复后**物理iPhone16ProMax / iOS27.0.1 / arm64**实际执行：
+
+- snapshot/profile **12/12、0failures、无skip**，包括合法8帧解码、副本稳定、首帧后主动取消/join后清理、重复close保留foreign目录及4项新拒绝；raw summary=`device-snapshot-summary.json`。
+- 后续适配器 **6/6、0failures、无skip**，29FPS真实8帧逐帧pixels/CMTime、24FPS上游tokens/pixels对照、单帧metadata、非法输入和取消。此设备测试使用ByteTokenizer；真实固定tokenizer仍只有前包macOS2/2证据。raw summary=`device-adapter-summary.json`。
+- 第一次追加adapter测试因生成host缺少MLXVLM直接product链接exit65；补链接时MLX revision约束与原exact0.32.3 lock不符，离线解析exit74；改为与原manifest相同的exactVersion约束后通过。全部失败日志保留，未改lock或关闭离线flags，没有下载。不是产品失败或通过证据替换。
+
+原始日志/argv/fixture生成脚本/ffprobe/hosted源码hash位于`.superpowers/sdd/2026-10-23-apple-mlxvlm-video-profile/`，真实xcresult位于`artifacts/verification/apple-mlxvlm-video-profile-20261023/hosted-build/Logs/Test/`。设备执行源码/fixture16项hash均与当前仓库字节一致，tested product source=`81ea4df`，后续仅文档/生成host配置变化。仍**没有新视频权重生成、自然质量、Metal/GPU/energy指标、最低系统或公共API/runtime接线证据**；不把真实CI/MLX输入准备当作推理或资源验收。作者自审、独立reviewpending，5/12/P9active。下一可独立工作为原Task2纯Swift类型化请求/client生命周期；原Task3必须使用新adapter，不能恢复原`.frames`二次采样路线。短于8实际样本的支持仍未实现，不扩大当前profile承诺。
+
+## 项目侧 sampled-video adapter（前包）
 
 独立[设计](../superpowers/specs/2026-10-23-apple-mlxvlm-video-adapter-design.md)与[逐Task计划](../superpowers/plans/2026-10-23-apple-mlxvlm-video-adapter.md)。`5be1b57`新增内部`MLXVLMVideoInputAdapter`，`c9ef8ce`加入真实固定tokenizer验证。适配器不调用上游帧选择，而逐一处理全部snapshot帧；复用公开sRGB/Lanczos512/normalize和SmolVLM2MessageGenerator，保留固定视频block/每帧64image tokens/THW。block在真实chat template前装配，不通过imageFile或单图tiles处理。固定config错配、非法时间/帧数/尺寸/媒体标签prompt均fail closed。
 

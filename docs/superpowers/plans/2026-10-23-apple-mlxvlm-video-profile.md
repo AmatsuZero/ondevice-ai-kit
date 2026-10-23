@@ -39,10 +39,11 @@ Current foundation worktree only, fixedlock/model/runtime unchanged. No download
 
 **Interfaces:** same snapshot/ProfileTests; schemeOnDeviceAIKitAppleMLX andexistingprojectsigningteam, no profileupdates.
 
-- [ ] Checkconnectedphysicaldeviceandtestdestinations; attemptonlynative snapshot/profileXCTestwithexistingteam,3offlineflags,noallowProvisioningUpdates. Recordargv/exit andwhetherbodiesexecuted.
-- [ ] If existingprofile/platformrunnerconditionsblock, retainrawfailureandmarkiOSdecode/cancelunverified; no repeatedsamegate orimplicit signing changes.
-- [ ] Updateexacttestcounts/fixturehashes/deviceoutcome andnextsafeentry;authorselfreview,links/diff/hash/indexchecks;localdocscommit. PublicAPI/devicevideo inference andindependentAPPROVE remainpending.
+- [x] Checkconnectedphysicaldeviceandtestdestinations; attemptonlynative snapshot/profileXCTestwithexistingteam,3offlineflags,noallowProvisioningUpdates. Recordargv/exit andwhetherbodiesexecuted.
+- [x] If existingprofile/platformrunnerconditionsblock, retainrawfailureandmarkiOSdecode/cancelunverified; no repeatedsamegate orimplicit signing changes.
+- [x] Package tool-hosted device path actuallyfailedexit70; use separatelygeneratedemptyhostApp with existingprojectbundleID/team andsame snapshot/profiletestsource+fixtures,recordhashes/argv. This changeshoststrategy,not product orsigningassets. NoallowProvisioningUpdates;evaluateactualtestbodyresults.
+- [x] Updateexacttestcounts/fixturehashes/deviceoutcome andnextsafeentry;authorselfreview,links/diff/hash/indexchecks;localdocscommit. PublicAPI/devicevideo inference andindependentAPPROVE remainpending.
 
 ## Execution checkpoint
 
-Author reviewed design/plan under explicit autonomous solo request; tasks pending. No independent APPROVE.
+Tasks1/2 complete as narrow profile/native-input-preparation evidence:81ea4df plus docs checkpoint. Fullhost34/34,tools126/126;physicalsnapshot/profile12/12andadapter6/6,no skips. PublicAPI/runtime/video inference remainunstarted;shorterclip supportstillmissing. No independent APPROVE.

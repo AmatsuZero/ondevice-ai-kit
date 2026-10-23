@@ -4,6 +4,8 @@
 
 ## 执行规则
 
+2026-10-23 P9 profile/设备续接：`81ea4df`真实PQ/offset/2frame/reference负向4/4，HDRguard mutation RED后原源码恢复，完整host34/34、tools126/126。空App unit-test host沿用既有签名，物理iPhone16ProMax/iOS27.0.1执行snapshot/profile12/12和adapter6/6；ByteTokenizer输入准备，不是视频权重/质量/资源验收。原Package tool-hosted exit70及中间host链接/约束失败均保留；固定lock/checkout不改。短于8实际样本仍拒绝、不泛化profile。下一可独立推进纯Swift typed video contract/client，runtime视频推理仍未开始；见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。独立reviewpending、仍5/12/P9active。
+
 2026-10-23 P9短视频内部适配续接：`5be1b57`逐帧保留29FPS全部8帧真实pixels/顺序/CMTime，不调用上游二次采样；`c9ef8ce`真实固定tokenizer2/2，无权重加载。clip2s与sample span约1.724138s分别记录；24FPS完整tokens/pixels/mask对照上游一致。最新host30/30、tools126/126、fresh generic iOS编译通过。上游`.frames`仍8→7，原失败保留；公共API/runtime/设备视频推理未开始，snapshot额外profile/iOSdecode与旧验收门槛仍待补。下一入口补snapshot profile及iOSdecode/cancel，见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部和独立适配设计/计划。只本地提交、独立reviewpending，仍5/12、P9active。
 
 2026-10-23 P9短视频Task1：内部有界snapshot及实际pinned processor characterization已实施，host22/22、tools126/126、独立consumer generic iOS编译通过。24FPS的8帧保留并完成真实prepare；29FPS的8帧在固定上游二次采样后变7帧，原始8帧门槛实际失败。因此Task2/3暂停，不接公共video API、不改上游/伪造时间戳。下一入口先设计保留真实帧/时间语义的项目侧适配，见[短视频验证](validation/apple-mlxvlm-short-video.md)；设备推理/质量/资源与旧缺口不变，仍5/12、P9active。

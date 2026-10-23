@@ -9,3 +9,9 @@
 iOS验证先检查现有连接、scheme可用destination及现有team/签名配置。只运行本项目native XCTest的snapshot类（不是旧UI测试），固定缓存和3项离线flags，不加载模型/不读设备媒体。不使用allowProvisioningUpdates、不创建/下载/修改签名资产；若现有条件缺必要profile或平台不支持，保留真实失败并明确未验，不以host/build代替。
 
 固定模型/runtime/lock和两个保护文件不变；全部artifacts/失败日志保留；仅本地提交，无子代理/外部写入。作者自审不等于独立APPROVE；仍5/12/P9active。reference测试的拒绝不单独证明任意恶意容器都无外部访问；低帧率拒绝不等于支持所有<=5s片段。
+
+## Native host recovery ruling
+
+实际package测试exit70，在测试体前拒绝：`Tool-hosted testing is unavailable on device destinations`。按Xcode诊断改用独立生成的本项目空App作为unit-test host；不是重跑同一路径。空App沿用现有`io.ondeviceai.mlxvlmconsumer`及已使用的team4X996UV8LC/wildcardprofile，不运行原consumer/model初始化。测试target使用仓库同一snapshot/profile XCTest源码和fixtures，增加只在生成目录的Bundle.module桥；通过@testable引用当前package，明确ENABLE_TESTABILITY。所有生成项目/argv/hash留在artifacts/ledger，不改SDK公开API或签名资产，不用allowProvisioningUpdates。若仍有真实签名/runner阻塞则保留失败，不继续盲重试。
+
+同一host另跑现有adapter6项测试，使用ByteTokenizer且不加载权重；test target显式链接当前固定MLXVLM/MLXLMCommon/MLX产品（与package test target相同），MLX约束必须与原exact0.32.3一致，不能把lock中的version改成revision要求。完成后重新安装普通consumer，不启动推理，避免设备留在空testhost版本。
