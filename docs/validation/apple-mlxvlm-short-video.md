@@ -1,8 +1,16 @@
 # Apple MLXVLM 短视频可行性
 
-2026-10-23。从 `515ec07` 分发交接继续；源码可行性/设计已提交 `52fc766`，内部snapshot/上游characterization为`eb1287d`。**最新：内部项目侧sampled-video适配器已通过host真实帧与固定tokenizer验证；上游29FPS重采样仍失败，公共短视频 API/设备推理尚未通过**。未改模型/lock/上游依赖。roadmap 仍5/12、P9active。
+2026-10-23。从 `515ec07` 分发交接继续；源码可行性/设计已提交 `52fc766`，内部snapshot/上游characterization为`eb1287d`。**最新：内部项目侧sampled-video适配器已通过host真实帧与固定tokenizer验证；上游29FPS重采样仍失败，公共类型化视频契约已完成，设备视频推理尚未通过**。未改模型/lock/上游依赖。roadmap 仍5/12、P9active。
 
-## 最新续接：profile 与 iOS 输入准备
+## 最新续接：Task 2 类型化视频契约
+
+纯Swift `MultimodalVideoRequest`、可选 `MultimodalVideoGenerationBackend` 与client视频overload已完成；image/video复用同一admission、update过滤、cancel/drain和close/query屏障。legacy backend在availability前明确拒绝视频且不fallback。**`MLXVLMBackend`仍只支持图片，Task3 runtime未开始；本包不是视频推理证据。**
+
+实际API缺失RED exit1后，Multimodal22/22（新增8项）、完整基础Apple469/469、增强host34/34无skip（固定真实tokenizer2/2）、tools126/126通过；Swift6 strict-concurrency/warnings-as-errors typecheck exit0。新独立consumer unsigned generic iOS BUILD SUCCEEDED/exit0，额外compile probe确实编译公共video request/client overload，未执行该函数。旧XCFramework不作新API分发证据。raw/checks/作者自审在`.superpowers/sdd/2026-10-23-apple-mlxvlm-short-video/task-2-client-*`；12checkout HEAD/clean及原/consumer lock匹配，保护文件未变。独立reviewpending，仍5/12/P9active，仅本地提交。
+
+下一先细化Task3 runtime设计/可验证计划，直接消费`MLXVLMVideoInputAdapter.Prepared.input`，不恢复上游`.frames`二次采样。Task1短于8实际样本仍拒绝，不扩大当前profile；原上游8→7失败及binary archive exit65、自然质量、Metal/GPU/energy、Android真后端、最低系统、旧Video UI与P6实录门槛保留。下方为历史检查点。
+
+## 前包：profile 与 iOS 输入准备
 
 `81ea4df`补4个真实合成负向profile测试：H.264 BT.2020/PQ、0.25s offset/edit、只有2个真实帧、带外部URL dref entry的容器，均拒绝且清理owned copy。baseline原实现4/4GREEN，**没有产品bug修复**；临时放松transfer guard后PQ测试实际RED（exit65/1failure），finally恢复原snapshot字节后完整host **34/34、无skip**；tools新跑 **126/126**。原snapshot源码没有最终diff。two-frame fixture是当前8个互异sample profile的**拒绝**证据，不是短于8样本视频支持。reference fixture只指向不存在的合成相对URL，属于结构拒绝测试，不证明任意引用容器无外部I/O。
 

@@ -19,6 +19,24 @@ public struct MultimodalRequest: Sendable, Equatable {
     }
 }
 
+public struct MultimodalVideoRequest: Sendable, Equatable {
+    public let videoFile: URL
+    public let prompt: String
+    public let maxOutputTokens: Int
+
+    /// Validates values only. Video support and the accepted media profile are backend-specific.
+    public init(videoFile: URL, prompt: String, maxOutputTokens: Int = 128) throws {
+        guard videoFile.isFileURL else { throw MultimodalClientError.invalidInput("video must be a file URL") }
+        guard !prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            throw MultimodalClientError.invalidInput("prompt must not be blank")
+        }
+        guard maxOutputTokens > 0 else { throw MultimodalClientError.invalidInput("output budget must be positive") }
+        self.videoFile = videoFile
+        self.prompt = prompt
+        self.maxOutputTokens = maxOutputTokens
+    }
+}
+
 public struct MultimodalModelIdentity: Sendable, Equatable {
     public let modelId: String
     public let modelRevision: String
@@ -83,6 +101,13 @@ public protocol MultimodalGenerationBackend: Sendable {
                   update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> MultimodalTextOutput
     func drain() async
     func close() async
+}
+
+/// Explicit opt-in to video generation. General backend availability does not imply
+/// video support. Image and video operations share the owning client's lifecycle.
+public protocol MultimodalVideoGenerationBackend: MultimodalGenerationBackend {
+    func generateVideo(_ request: MultimodalVideoRequest,
+                       update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> MultimodalTextOutput
 }
 
 public struct MultimodalBackendDescriptor: Sendable, Equatable {

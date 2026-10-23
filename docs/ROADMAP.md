@@ -1,5 +1,7 @@
 # 分阶段交付与恢复入口
 
+2026-10-23 P9 Task2续接：纯Swift typed video request/可选backend协议/client共享生命周期已实现，API RED后Multimodal22/22、完整Apple469/469、增强host34/34无skip、tools126/126、Swift6严格typecheck与新独立generic iOS公共API compile probe通过。MLXVLMBackend仍image-only，Task3 runtime未开始；下一先细化adapter直入LMInput的runtime计划。Task1短样本仍拒绝，上游8→7失败/二进制/自然质量/资源/Android真实后端/最低系统/独立review缺口保留，仍5/12/P9active。见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部；以下是历史检查点。
+
 更新时间：2026-10-23（P9真实 OS background lifecycle 14 gates通过；Demo/bridge42/42、tools123/123；物理触摸/systempicker与独立review仍待补）。GitHub为主仓，feat/sdk-foundation未合入main；本次按用户显式授权同步GitHub/GitLab功能分支，未合入main；后续恢复默认本地提交。
 
 ## 执行规则

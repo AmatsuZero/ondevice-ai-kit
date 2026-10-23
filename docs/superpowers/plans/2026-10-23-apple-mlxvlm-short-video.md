@@ -16,6 +16,8 @@
 
 **Latest profile/native checkpoint:** `81ea4df`adds4negativeprofiles;host34/34 andtools126/126. HostednativeiOSsnapshot/profile12/12 andadapter6/6 executed onphysicaliPhone16ProMax/iOS27.0.1;adapterusesByteTokenizer,no weights. Actualfixedtokenizer2/2remainhost-only. Originaltool-hosteddeviceexit70 andintermediatehostlink/constraintfailuresretained. Current8-unique-sampleprofile rejects2frameclip; shorterclip supportisstillnotimplemented. Ruling: pureSwiftTask2clientcontractisindependentofsamplercoverageandmaynowproceedafteradaptergate,withoutclaimingalloriginalTask1scopecomplete;no productionbackendconformsorvideo inferenceuntilseparateruntimegates. Task3mustconsumeMLXVLMVideoInputAdapter.Prepared.inputdirectly;theoldUserInput.framesrouteisobsolete.
 
+**Latest Task2 checkpoint:** pureSwift typed video contract/client complete: missingAPI RED exit1, Multimodal22/22, baseApple469/469, enhancedhost34/34(no skips), tools126/126, strictSwift6typecheck exit0, independentunsignedgenericiOS publicAPIcompileprobe BUILD SUCCEEDED exit0. ProductionMLXVLMBackend remainsimage-only; Task3unstarted. Allpreviouscheckpointsarehistorical. Next: refineTask3runtimeplan to consumeadapter.Prepared.inputdirectly; no old.framespath. Task1short-samplesupportremainsopen; independentreviewpending.
+
 ## Global constraints
 
 No new dependencies/downloads/upstream edits; exact current model/runtime/Package.resolved. Base iOS15/macOS12 and Android API26 unchanged, enhanced real inference arm64 iOS18+ device only. H.264 SDR, one zero-start video track, local regular nonsymlink input<=32MiB, finite duration0<d<=5s, <=1920 each side and <=2,073,600 pixels, at most8 frames<=512 each side. Prompt<=8192 UTF8 bytes, output1...512, temperature0. No KMP/Android implementation, natural media, remote writes, signing changes or protected-file edits in this package.
@@ -47,10 +49,10 @@ No new dependencies/downloads/upstream edits; exact current model/runtime/Packag
 
 **Interfaces:** `MultimodalVideoRequest(videoFile: URL, prompt: String, maxOutputTokens: Int = 128)`; `MultimodalVideoGenerationBackend: MultimodalGenerationBackend` with `generateVideo(_:update:)`; `MultimodalGenerationClient.generate(_ request: MultimodalVideoRequest, backend:update:) -> MultimodalGenerationResult`. Existing image interface is unchanged. These are the exact types Task3 consumes.
 
-- [ ] Write real fake-backend tests: invalid video request values; image/video share busy; cancelled video awaits drain; close awaits query and video; out-of-order/late update suppressed; legacy backend rejects video with `invalidInput("selected backend does not support video")` without invocation or fallback; explicit backend selection honored.
-- [ ] Run `rtk proxy swift test --package-path apple --filter Multimodal`; record missing API RED.
-- [ ] Implement the new value/protocol and overload, factoring admission/run only as necessary to share one operation. Preserve all image code semantics and closed/cancelled precedence.
-- [ ] Run focused and full base Apple tests GREEN; author scope review and exact-stage local Task commit. Do not reuse old binary consumer evidence as new API distribution evidence.
+- [x] Write real fake-backend tests: invalid video request values; image/video share busy; cancelled video awaits drain; close awaits query and video; out-of-order/late update suppressed; legacy backend rejects video with `invalidInput("selected backend does not support video")` without invocation or fallback; explicit backend selection honored.
+- [x] Run `rtk proxy swift test --package-path apple --filter Multimodal`; record missing API RED.
+- [x] Implement the new value/protocol and overload, factoring admission/run only as necessary to share one operation. Preserve all image code semantics and closed/cancelled precedence.
+- [x] Run focused and full base Apple tests GREEN; author scope review and exact-stage local Task commit. Do not reuse old binary consumer evidence as new API distribution evidence.
 
 ### Task 3: Enhanced runtime and independent video consumer
 

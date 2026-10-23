@@ -3,6 +3,11 @@ import ODAIKitCore
 
 /// Serializes backend admission and owns the registered backends.
 public actor MultimodalGenerationClient {
+    private enum Request: Sendable {
+        case image(MultimodalRequest)
+        case video(MultimodalVideoRequest)
+    }
+
     private struct Operation {
         let id: UUID
         let task: Task<MultimodalTextOutput, Error>
@@ -56,6 +61,22 @@ public actor MultimodalGenerationClient {
         backend selection: MultimodalBackendSelection = .default,
         update: (@Sendable (MultimodalTextUpdate) -> Void)? = nil
     ) async throws -> MultimodalGenerationResult {
+        try await generate(.image(request), backend: selection, update: update)
+    }
+
+    public func generate(
+        _ request: MultimodalVideoRequest,
+        backend selection: MultimodalBackendSelection = .default,
+        update: (@Sendable (MultimodalTextUpdate) -> Void)? = nil
+    ) async throws -> MultimodalGenerationResult {
+        try await generate(.video(request), backend: selection, update: update)
+    }
+
+    private func generate(
+        _ request: Request,
+        backend selection: MultimodalBackendSelection,
+        update: (@Sendable (MultimodalTextUpdate) -> Void)?
+    ) async throws -> MultimodalGenerationResult {
         guard !closed else { throw MultimodalClientError.closed }
         guard active == nil else { throw MultimodalClientError.busy }
         try Task.checkCancellation()
@@ -67,6 +88,9 @@ public actor MultimodalGenerationClient {
         }
         guard let backend = backends[id] else {
             throw MultimodalClientError.backendNotRegistered(id)
+        }
+        if case .video = request, !(backend is any MultimodalVideoGenerationBackend) {
+            throw MultimodalClientError.invalidInput("selected backend does not support video")
         }
 
         let operationId = UUID()
@@ -93,7 +117,7 @@ public actor MultimodalGenerationClient {
     }
 
     private func run(
-        _ request: MultimodalRequest,
+        _ request: Request,
         backend: any MultimodalGenerationBackend,
         operationId: UUID
     ) async throws -> MultimodalTextOutput {
@@ -106,9 +130,19 @@ public actor MultimodalGenerationClient {
 
         let outcome: Result<MultimodalTextOutput, Error>
         do {
-            let output = try await backend.generate(request, update: { [weak self] value in
+            let update: @Sendable (MultimodalTextUpdate) -> Void = { [weak self] value in
                 Task { await self?.publish(value, operationId: operationId) }
-            })
+            }
+            let output: MultimodalTextOutput
+            switch request {
+            case .image(let image):
+                output = try await backend.generate(image, update: update)
+            case .video(let video):
+                guard let videoBackend = backend as? any MultimodalVideoGenerationBackend else {
+                    throw MultimodalClientError.invalidInput("selected backend does not support video")
+                }
+                output = try await videoBackend.generateVideo(video, update: update)
+            }
             outcome = .success(output)
         } catch {
             outcome = .failure(error)
