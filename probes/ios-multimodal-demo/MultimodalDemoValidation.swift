@@ -17,11 +17,14 @@ import UIKit
     Task {
       await run(
         preparing: preparing, host: host,
-        active: arguments.contains("--multimodal-demo-active-validation"))
+        active: arguments.contains("--multimodal-demo-active-validation"),
+        background: arguments.contains("--multimodal-demo-os-background"))
     }
   }
 
-  private static func run(preparing: () -> Bool, host: () -> MultimodalHost?, active: Bool) async {
+  private static func run(
+    preparing: () -> Bool, host: () -> MultimodalHost?, active: Bool, background: Bool
+  ) async {
     var report: [String: Any] = [
       "schemaVersion": 1, "runId": UUID().uuidString,
       "pid": ProcessInfo.processInfo.processIdentifier, "os": UIDevice.current.systemVersion,
@@ -89,7 +92,18 @@ import UIKit
         ready.model.state.inputDisplayName == "fixture.png"
           && ready.model.state.inputReference != nil)
       gates["pickerReply"] = true
-      if active {
+      if background {
+        stage = "OS background lifecycle"
+        let result = try await MultimodalDemoBackgroundValidation.run(
+          host: ready, roots: roots,
+          documents: documents, sourceCommit: commit, fixtureHash: hash,
+          runId: report["runId"] as! String)
+        if let extra = result["gates"] as? [String: Bool] {
+          gates.merge(extra) { _, value in value }
+        }
+        for key in ["ready", "events", "cancel", "reentry"] { report[key] = result[key] }
+        report["osBackground"] = "verified"
+      } else if active {
         stage = "active shared controls"
         let result = try await MultimodalDemoActiveValidation.run(host: ready, roots: roots)
         if let extra = result["gates"] as? [String: Bool] {
@@ -158,7 +172,9 @@ import UIKit
       }
       report["status"] = "passed"
     } catch {
-      report["failedGate"] = (error as? MultimodalDemoActiveValidation.Failure)?.label ?? stage
+      report["failedGate"] =
+        (error as? MultimodalDemoBackgroundValidation.Failure)?.label
+        ?? (error as? MultimodalDemoActiveValidation.Failure)?.label ?? stage
     }
     if let current {
       current.close()
@@ -174,7 +190,10 @@ import UIKit
         withJSONObject: report, options: [.prettyPrinted, .sortedKeys])
       try data.write(
         to: documents.appendingPathComponent(
-          active ? "demo-active-integration.json" : "demo-integration.json"), options: .atomic)
+          background
+            ? "demo-background-integration.json"
+            : (active ? "demo-active-integration.json" : "demo-integration.json")), options: .atomic
+      )
     } catch {
       // No synthetic pass if the report cannot be persisted.
     }

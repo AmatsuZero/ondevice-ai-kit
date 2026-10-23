@@ -31,7 +31,7 @@ if mlx_demo
   sources += ['demo/iosApp/MultimodalModelHostFactory.swift', 'demo/iosApp/MultimodalHostPreparation.swift',
               'demo/iosApp/MultimodalMLXHostFactory.swift']
 end
-sources += ['probes/ios-multimodal-demo/AppAccessibility.swift', 'probes/ios-multimodal-demo/MultimodalDemoValidation.swift', 'probes/ios-multimodal-demo/MultimodalDemoActiveValidation.swift'] if validation
+sources += ['probes/ios-multimodal-demo/AppAccessibility.swift', 'probes/ios-multimodal-demo/AppBackgroundObservation.swift', 'probes/ios-multimodal-demo/MultimodalDemoValidation.swift', 'probes/ios-multimodal-demo/MultimodalDemoActiveValidation.swift', 'probes/ios-multimodal-demo/MultimodalDemoBackgroundValidation.swift'] if validation
 frameworks = %w[iosSimulatorArm64 iosArm64].map do |platform|
   File.join(root, "demo/shared/build/bin/#{platform}/debugFramework/ODAIKitDemo.framework")
 end

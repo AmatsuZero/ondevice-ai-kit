@@ -16,7 +16,8 @@ INPUT_SOURCES = ["demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/SpeechIn
                  "demo/iosApp/MultimodalFilePicker.swift", "probes/ios-multimodal-bridge/MultimodalFilePickerTests.swift",
                  "demo/iosApp/MultimodalModelHostFactory.swift", "probes/ios-multimodal-bridge/MultimodalModelHostFactoryTests.swift",
                  "demo/iosApp/MultimodalHostPreparation.swift", "probes/ios-multimodal-bridge/MultimodalHostPreparationTests.swift",
-                 "probes/ios-multimodal-demo/AppAccessibility.swift", "probes/ios-multimodal-bridge/AppAccessibilityTests.swift"]
+                 "probes/ios-multimodal-demo/AppAccessibility.swift", "probes/ios-multimodal-bridge/AppAccessibilityTests.swift",
+                 "probes/ios-multimodal-demo/AppBackgroundObservation.swift", "probes/ios-multimodal-bridge/AppBackgroundObservationTests.swift"]
 
 
 class MultimodalBridgeProjectTests(unittest.TestCase):
