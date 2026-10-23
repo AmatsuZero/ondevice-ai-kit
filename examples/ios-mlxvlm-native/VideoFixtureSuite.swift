@@ -129,9 +129,11 @@ enum VideoFixtureSuite {
         let handle = try FileHandle(forReadingFrom: url)
         defer { try? handle.close() }
         var hash = SHA256(), bytes: Int64 = 0
-        while let data = try handle.read(upToCount: 1024 * 1024), !data.isEmpty {
+        while try autoreleasepool(invoking: { () throws -> Bool in
+            guard let data = try handle.read(upToCount: 1024 * 1024), !data.isEmpty else { return false }
             bytes += Int64(data.count); hash.update(data: data)
-        }
+            return true
+        }) { }
         return (hash.finalize().map { String(format: "%02x", $0) }.joined(), bytes)
     }
     private static func ownedSnapshots() throws -> Set<String> {

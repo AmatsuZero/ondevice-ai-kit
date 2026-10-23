@@ -79,7 +79,13 @@ public actor ModelStore {
             guard (try url.resourceValues(forKeys: [.fileSizeKey])).fileSize == Int(file.bytes) else { throw ModelStoreError.integrity }
             let handle = try FileHandle(forReadingFrom: url); defer { try? handle.close() }
             var hash = SHA256()
-            while let data = try handle.read(upToCount: 1024 * 1024), !data.isEmpty { hash.update(data: data) }
+            // FileHandle's Foundation buffers can otherwise remain autoreleased
+            // until the actor job ends, retaining whole multi-GB model files.
+            while try autoreleasepool(invoking: { () throws -> Bool in
+                guard let data = try handle.read(upToCount: 1024 * 1024), !data.isEmpty else { return false }
+                hash.update(data: data)
+                return true
+            }) { }
             guard hash.finalize().map({ String(format: "%02x", $0) }).joined() == file.sha256 else { throw ModelStoreError.integrity }
         }
     }
