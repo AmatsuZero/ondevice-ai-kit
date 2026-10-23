@@ -83,7 +83,7 @@ enum VideoFixtureSuite {
 
     private static func iteration(client: MultimodalGenerationClient, request: MultimodalVideoRequest,
                                   router: VideoObservationRouter, kind: String) async -> [String: Any] {
-        let capture = VideoRunCapture(), cancel = VideoCancelOnUpdate()
+        let capture = VideoRunCapture(kind: kind), cancel = VideoCancelOnUpdate()
         router.select(capture)
         let task = Task {
             try await client.generate(request, update: { _ in
@@ -145,11 +145,30 @@ private final class VideoRunCapture: @unchecked Sendable {
     private let lock = NSLock(), started = ContinuousClock.now
     private var events: [[String: Any]] = [["name": "begin", "ms": 0.0]]
     private var data: [String: Any] = [:]
+    private let progress: URL
+    init(kind: String) {
+        progress = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("sdk-mlxvlm-video-progress.json")
+        data["kind"] = kind
+        persist()
+    }
+    // Separate incomplete diagnostic file: never accepted by the success validator.
+    private func persist() {
+        var value = data
+        value["events"] = events
+        value["pid"] = ProcessInfo.processInfo.processIdentifier
+        value["sourceCommit"] = ProcessInfo.processInfo.arguments.first { $0.hasPrefix("--sdk-commit=") }?
+            .dropFirst("--sdk-commit=".count).description ?? "unverified"
+        if let bytes = try? JSONSerialization.data(withJSONObject: value, options: [.sortedKeys, .prettyPrinted]) {
+            try? bytes.write(to: progress, options: .atomic)
+        }
+    }
     func record(_ name: String) { lock.lock(); defer { lock.unlock() }; append(name) }
     private func append(_ name: String) {
         let elapsed = started.duration(to: .now)
         let ms = Double(elapsed.components.seconds) * 1000 + Double(elapsed.components.attoseconds) / 1e15
         events.append(["name": name, "ms": ms])
+        persist()
     }
     func record(_ event: MLXVLMGenerationEvent) {
         lock.lock(); defer { lock.unlock() }
@@ -169,7 +188,7 @@ private final class VideoRunCapture: @unchecked Sendable {
         }
     }
     func error(_ error: Error) { lock.lock(); data["errorType"] = String(describing: type(of: error)); lock.unlock() }
-    func snapshot() -> [String: Any] { lock.lock(); defer { lock.unlock() }; var result = data; result["events"] = events; return result }
+    func snapshot() -> [String: Any] { lock.lock(); defer { lock.unlock() }; var result = data; result.removeValue(forKey: "kind"); result["events"] = events; return result }
 }
 
 private final class VideoCancelOnUpdate: @unchecked Sendable {
