@@ -1,6 +1,6 @@
 # 分阶段交付与恢复入口
 
-更新时间：2026-10-23（P9真实 OS background lifecycle 14 gates通过；Demo/bridge42/42、tools123/123；物理触摸/systempicker与独立review仍待补）。GitHub为主仓，feat/sdk-foundation未合入main；本轮无远端同步。
+更新时间：2026-10-23（P9真实 OS background lifecycle 14 gates通过；Demo/bridge42/42、tools123/123；物理触摸/systempicker与独立review仍待补）。GitHub为主仓，feat/sdk-foundation未合入main；本次按用户显式授权同步GitHub/GitLab功能分支，未合入main；后续恢复默认本地提交。
 
 ## 执行规则
 
