@@ -33,7 +33,7 @@ enum MLXVLMVideoInputAdapterError: Error {
 }
 
 /// Experimental, fixed-SmolVLM2 video preparation for frames already sampled by us.
-/// No public generation path uses this adapter yet. In particular, do not pass these
+/// The video runtime consumes Prepared.input directly. Do not pass these
 /// frames back through MediaProcessing.asProcessedSequence: it can silently drop them.
 enum MLXVLMVideoInputAdapter {
     struct Prepared {

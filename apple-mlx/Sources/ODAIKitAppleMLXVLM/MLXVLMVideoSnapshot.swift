@@ -7,7 +7,7 @@ enum MLXVLMVideoSnapshotError: Error {
     case invalidInput
 }
 
-/// Internal, experimental video admission. Public generation remains image-only.
+/// Internal bounded video admission for the fixed experimental video backend.
 /// Decoding is joined before load returns; frames are immutable and independent of file cleanup.
 final class MLXVLMVideoSnapshot: @unchecked Sendable {
     static let maxEncodedBytes = 32 * 1024 * 1024

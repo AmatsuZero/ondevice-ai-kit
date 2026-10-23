@@ -6,10 +6,16 @@ import ODAIKitMultimodal
 public enum MLXVLMGenerationEvent: Sendable {
     /// Wall-clock interval around loadContainer only (not image preparation or first update).
     case modelLoaded(durationMs: Double)
+    /// All decoding has joined; exact input identity/times, without caller paths.
+    case videoDecoded(MLXVLMVideoMetadata)
+    case videoPreparationStarted
+    case videoPrepared(durationMs: Double, frameCount: Int)
+    /// Emitted after owned snapshot close and filesystem absence check.
+    case videoSnapshotClosed(removed: Bool)
 }
 
 /// Owns the supplied lease after successful initialization. Do not separately close that lease.
-public struct MLXVLMBackend: MultimodalGenerationBackend {
+public struct MLXVLMBackend: MultimodalVideoGenerationBackend {
     public let backendId = SmolVLM2Model.backendId
     private let session: MLXVLMGenerationSession
 
@@ -39,6 +45,16 @@ public struct MLXVLMBackend: MultimodalGenerationBackend {
         }
         return try await session.generate(request, update: update)
     }
+    public func generateVideo(_ request: MultimodalVideoRequest,
+                              update: (@Sendable (MultimodalTextUpdate) -> Void)?) async throws -> MultimodalTextOutput {
+        let state = await session.availability(supported: Self.isSupported)
+        if state.reason == .closed { throw MultimodalClientError.closed }
+        guard state.status == .available else {
+            throw MultimodalClientError.backendUnavailable(backendId, .unsupportedDevice)
+        }
+        return try await session.generateVideo(request, update: update)
+    }
+
     private static var isSupported: Bool {
         #if os(iOS) && arch(arm64) && !targetEnvironment(simulator)
         true

@@ -2,7 +2,9 @@
 
 2026-10-23。从 `515ec07` 分发交接继续；源码可行性/设计已提交 `52fc766`，内部snapshot/上游characterization为`eb1287d`。**最新：内部项目侧sampled-video适配器已通过host真实帧与固定tokenizer验证；上游29FPS重采样仍失败，公共类型化视频契约已完成，设备视频推理尚未通过**。未改模型/lock/上游依赖。roadmap 仍5/12、P9active。
 
-## 最新续接：Task 2 类型化视频契约
+**最新runtime库检查点：** Task2契约`c9ea298`之后，按[runtime计划](../superpowers/plans/2026-10-23-apple-mlxvlm-short-video-runtime.md)接入MLXVLMBackend视频协议、共用session/model lease及取消/close屏障；Local runtime直接消费adapter.Prepared.input，保留owned snapshot至generation producer明确join后清理。新增诊断metadata含副本hash、原始requested/actual rational times、真实clip duration与sample span；无调用方路径。session6项与metadata1项均missing-API RED→GREEN，全增强host41/41无skip、tools126/126、新独立unsigned generic iOS BUILD SUCCEEDED/exit0。**这些是host/build证据，尚无视频权重设备运行；原Task3仍未完成。** 下一实现opt-in consumer/严格validator后进行固定合成视频设备success/cancel/reentry/close。当前短样本仍拒绝，独立reviewpending、5/12/P9active，binary/质量/资源/Android/minOS等缺口保留。原始logs/checks/作者自审在`.superpowers/sdd/2026-10-23-apple-mlxvlm-short-video-runtime/`。
+
+## 前包：Task 2 类型化视频契约
 
 纯Swift `MultimodalVideoRequest`、可选 `MultimodalVideoGenerationBackend` 与client视频overload已完成；image/video复用同一admission、update过滤、cancel/drain和close/query屏障。legacy backend在availability前明确拒绝视频且不fallback。**`MLXVLMBackend`仍只支持图片，Task3 runtime未开始；本包不是视频推理证据。**
 

@@ -18,6 +18,8 @@
 
 **Latest Task2 checkpoint:** pureSwift typed video contract/client complete: missingAPI RED exit1, Multimodal22/22, baseApple469/469, enhancedhost34/34(no skips), tools126/126, strictSwift6typecheck exit0, independentunsignedgenericiOS publicAPIcompileprobe BUILD SUCCEEDED exit0. ProductionMLXVLMBackend remainsimage-only; Task3unstarted. Allpreviouscheckpointsarehistorical. Next: refineTask3runtimeplan to consumeadapter.Prepared.inputdirectly; no old.framespath. Task1short-samplesupportremainsopen; independentreviewpending.
 
+**Latest Task3a checkpoint:** backend/session/video runtime wired via adapter.Prepared.input (old.frames route superseded). Host41/41(no skips),tools126/126,freshgenericIOSbuild pass; originalTask3 remains INCOMPLETE, consumer/strictvalidator/devicegeneration unexecuted. Continue runtime subplanTask2; do not use host/build as device gates.
+
 ## Global constraints
 
 No new dependencies/downloads/upstream edits; exact current model/runtime/Package.resolved. Base iOS15/macOS12 and Android API26 unchanged, enhanced real inference arm64 iOS18+ device only. H.264 SDR, one zero-start video track, local regular nonsymlink input<=32MiB, finite duration0<d<=5s, <=1920 each side and <=2,073,600 pixels, at most8 frames<=512 each side. Prompt<=8192 UTF8 bytes, output1...512, temperature0. No KMP/Android implementation, natural media, remote writes, signing changes or protected-file edits in this package.
