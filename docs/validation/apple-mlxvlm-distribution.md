@@ -68,3 +68,5 @@ public `OrderedCollections.swiftinterface` 也有同类错误，并有 `extraneo
 每 Task 与最终为作者自审，独立 review pending，无 APPROVE。两个保护文件的 hash/state/index 保留；无 push/merge/publish、下载、录音、私人媒体读取、签名资产变更。物理 touch、真实 system picker、短视频、Android 真 backend、质量、Metal/GPU/energy、最低系统，以及旧 Video/P6/ASR 缺口仍独立保留。
 
 下一步不反复重跑同一 archive。若仍固定本机工具链/依赖，本路线门槛记录在此；可另包推进缓存可支持的短视频输入设计/可行性核对，或在工具链/依赖升级获得明确范围后单独设计 binary 策略。先读取最新交接和当前状态，不下载新模型/依赖。
+
+2026-10-23 已完成上述短视频源码/缓存核对与设计，见[短视频可行性](apple-mlxvlm-short-video.md)。下一门槛为有界native sampler和固定processor的实际帧/时间语义characterization；本source/binary证据不变，尚未新增视频API或视频推理结果。
