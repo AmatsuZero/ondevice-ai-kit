@@ -1,6 +1,6 @@
 # 分阶段交付与恢复入口
 
-更新时间：2026-10-23（P9共享App-local AX活动取消/离页/同进程重入11 gates通过；Demo40/40、tools118/118；物理触摸/systempicker/OS后台与独立review仍待补）。GitHub为主仓，feat/sdk-foundation未合入main；本轮无远端同步。
+更新时间：2026-10-23（P9共享App-local AX活动取消/离页/同进程重入11 gates通过；Demo40/40、tools118/118；mobile MCP 因真机 agent 未安装无法观测触摸/OS后台，systempicker 与独立review仍待补）。GitHub为主仓，feat/sdk-foundation未合入main；本轮无远端同步。
 
 ## 执行规则
 
@@ -10,7 +10,7 @@
 
 2026-10-21 P7 续接：已提交 Swift 视频契约/client（`17a330e`、`fd2e537`）和 Android 对等模块（`112634d`），本地分发已验证，独立审查因服务容量失败保留pending。Apple VideoToolbox 后端现已完成本地实施、九XCFramework及固定fixture设备验证，有界AAC音轨preserve已完成并通过设备验证，KMP Video bridge/Demo Task1–5 已提交、本地门禁通过，Task6 iOS UI 因自动化初始化超时待补；Android unavailable/picker取消/空闲前后台 smoke通过。当前验收入口为[视频 Demo 验证](validation/video-bridge-demo.md)；Video SDK Foundation/AppleVideo/bridge 独立审查待恢复；P6 受控录音等待真实终态期间继续可独立推进的 P7。基础契约本身不代表实际超分，新增固定profile后端也不代表 P7 完成，见[音轨验证](validation/apple-video-audio.md)、[AppleVideo验证](validation/apple-video-backend.md)、[基础验证](validation/video-sdk-foundation.md)与[实施计划](superpowers/plans/2026-10-21-video-sdk-foundation.md)。
 
-2026-10-23 P9当前入口：增强Demo真实shared AX活动取消/离页/重入11 gates通过，source2915725、PID21348；实际update sequence0且RUNNING时cancel/leave→CANCELLED无output，两次同PID重入成功，返回300ms无自动重启。Demo40/40、tools118/118、default/enhanced构建与严格真实报告通过。见[活动UI验证](validation/multimodal-demo-active-ui.md)。下一独立包检查授权本地mobile工具的真实OS前后台/触摸可执行性；物理touch/真实systempicker/OS后台仍未验，不关闭P9或提升5/12。
+2026-10-23 P9当前入口：增强Demo真实shared AX活动取消/离页/重入11 gates通过，source2915725、PID21348；实际update sequence0且RUNNING时cancel/leave→CANCELLED无output，两次同PID重入成功，返回300ms无自动重启。Demo40/40、tools118/118、default/enhanced构建与严格真实报告通过。见[活动UI验证](validation/multimodal-demo-active-ui.md)。下一独立包等待有授权 mobile agent 后再验真实OS前后台/触摸；当前已记录 agent 缺失门槛，物理touch/真实systempicker/OS后台仍未验，不关闭P9或提升5/12。
 
 2026-10-22 P9程序化host历史入口：独立consumer中程序化KMP host/VM→真实MLXVLM设备生命周期已通过，source2868bee，iPhone16ProMax/iOS27.0.1同PID20852，10 gates/5真实请求；成功/首update取消/drain/重入/host后台不重启/close/input与modellease/关闭拒绝。工具112/112，signeddevicebuild与严格rawvalidator通过。见[真机host/VM验证](validation/multimodal-demo-device.md)。下一独立包为共享Compose页面与增强Demo集成验收；实际UI/OS后台/systempicker仍未验，不提升5/12或关闭P9。
 

@@ -8,7 +8,7 @@
 - 实际增强Demo/shared AX生成→首观察update→RUNNING取消、同PID重入成功、再次RUNNING update后speech-tab活动离页取消、返回300ms不自动重启、再次重入成功及close；11gates全部true。预算256仅给控件重组窗口，重入32；不是benchmark/同步firstcallback取消承诺。
 - 最终source29157258921c324f2c08692e136ccb6da608d622，iPhone16ProMax/iOS27.0.1，PID21348/runId43C3DAB4-ACD8-4384-ACAC-198065BB7D58；raw/summary/install/launch在 `artifacts/verification/multimodal-demo-active-final-20261023/`。raw SHA25608dfd7005148935a6545c2fdb82902956ea2639853f82b01f4539ecd46d542bd。exact built metadata/lock先检查，再装机执行。
 - 新helper2/2、全Demo40/40、tools118/118、generator Speech10/10、defaultsimulator/enhancedunsigned+signeddevicebuild与strictSwift0通过；实际RED日志/资产复核全部保留。仅validation build和第三runtimearg启用，无KMP/public ABI/默认backend变更。
-- 下一独立包：检查已发现的本地mobile工具能否对授权本项目App完成实际OS前后台/触摸，不重试旧XCTest runner初始化门槛。**物理touch、真实systempicker文件选择、实际OS后台仍unverified**；AX不证明视觉像素或命中。短视频/Android真backend/自然质量/资源另包。
+- 下一独立包：本地mobile MCP已检查但真机 agent 未安装，foreground/元素读取失败；安装需额外 provisioning profile，暂不执行。**物理touch、真实systempicker文件选择、实际OS后台仍unverified**；AX不证明视觉像素或命中。待有授权 agent 后再验，不重试旧XCTest runner初始化门槛。短视频/Android真backend/自然质量/资源另包。
 - 每Task/最终仅作者自审，独立reviewpending、无APPROVE；保护hash/state/index不变，只本地提交、无push/merge/发布/下载/录音/私人媒体/签名资产变更。所有旧Video/P6/ASR/最低系统/质量/资源缺口保留，仍5/12完成、7未收口，P9active。
 
 ## P9 Enhanced Demo bootstrap/shared AX integration（2026-10-23，历史检查点）
