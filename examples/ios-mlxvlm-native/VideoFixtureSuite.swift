@@ -20,6 +20,15 @@ enum VideoFixtureSuite {
             "runtimeRevision": SmolVLM2Model.identity.runtimeRevision, "fixtureHash": fixtureHash,
             "prompt": prompt, "maxOutputTokens": 32, "scope": "fixed-synthetic-video-lifecycle-only",
             "unverified": ["naturalVideoQuality", "metalGpuPeak", "energy", "minimumOS", "androidBackend"]]
+        func checkpoint(_ phase: String) {
+            let sampler = ResidentMemorySampler()
+            let value: [String: Any] = ["phase": phase, "pid": process.processIdentifier,
+                "sourceCommit": sourceCommit, "runId": report["runId"]!, "processRSS": sampler.snapshot()]
+            if let bytes = try? JSONSerialization.data(withJSONObject: value, options: [.sortedKeys, .prettyPrinted]) {
+                try? bytes.write(to: documents.appendingPathComponent("sdk-mlxvlm-video-preflight.json"), options: .atomic)
+            }
+        }
+        checkpoint("start")
         var client: MultimodalGenerationClient?
         var gates: [String: Bool] = [:], runs: [[String: Any]] = []
         do {
@@ -29,7 +38,9 @@ enum VideoFixtureSuite {
             let manifest = try SmolVLM2Model.manifest(), model = documents.appendingPathComponent("model")
             var files: [[String: Any]] = []
             for file in manifest.files {
+                checkpoint("beforeHash:" + file.path)
                 let actual = try hash(model.appendingPathComponent(file.path))
+                checkpoint("afterHash:" + file.path)
                 guard actual.digest == file.sha256, actual.bytes == file.bytes else { throw VideoSuiteError.model }
                 files.append(["path": file.path, "bytes": actual.bytes, "sha256": actual.digest])
             }
@@ -38,8 +49,11 @@ enum VideoFixtureSuite {
             let store = try ModelStore(root: documents.appendingPathComponent("sdk-video-model-store"),
                 compatibility: .init(backendId: SmolVLM2Model.backendId, backendVersion: "1.0.0",
                     osVersion: "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)", architecture: "arm64"))
+            checkpoint("beforeInstall")
             try await store.install(manifest: manifest, source: model)
+            checkpoint("beforeAcquire")
             let lease = try await store.acquire(manifest.ref), router = VideoObservationRouter()
+            checkpoint("afterAcquire")
             let backend: MLXVLMBackend
             do { backend = try MLXVLMBackend(lease: lease, observer: { router.record($0) }) }
             catch { await lease.close(); throw error }
