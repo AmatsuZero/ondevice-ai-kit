@@ -8,12 +8,18 @@ Wrong-source/stale ready, generation completed before switch, missing OS lifecyc
 
 ### Task1 strict report
 
+- [x] Validator mutation/CLI tests RED→GREEN; full tools123/123.
+
 Create tools/multimodal_background_report.py and tools/tests/test_multimodal_background_report.py. validate(report,expected_commit) consumes existing provenance plus gates/events/ready/reentry; supports direct/moduleCLI. ActualmissingmoduleRED→validreport/mutations GREEN; fulltools with explicitRUBY3.4.11. Scopeauthorreview/exactlocalcommit.
 
 ### Task2 suite and real device
 
+- [x] Observer RED→GREEN, validation source-set, companion/demo build, real device report strict pass.
+
 Create probes/ios-multimodal-demo/MultimodalDemoBackgroundValidation.swift and independent probes/ios-multimodal-background/{BackgroundApp.swift,project.yml}. Modify existing validationhook/runtime selection/generator source-settest. ActualgeneratorRED and missingSwift suitecompileRED→GREEN. No production callbacks changed. Temporaryselector observer records actual OS notifications; ready atomic write followed by externally driven companion activation, samePIDrestore, realcancel300msnoautostart/AXreentry32identity/close. Actualcompanion unsigned/signedcompile. Fulltools/freshDemo/strictSwift/default/enhancedcompile, codecommit then regenerate exactmetadata/signedbuild/checkconnection+assets+lock/installonlyownbundles/run/retrieve/strictvalidator. Record real failures accurately. No routine confirmation.
 
 ### Task3 records
+
+- [x] Validation/roadmap/handoff/ledger/final-review recorded; local commit only.
 
 Authorfinalreview; update validation/roadmap/handoff/ledger/final-review/protectedhash/index; exactlocaldoccommit. Only Task2 strictphysicalreport closes OS gate, never touch/systempicker/quality/minimumOS. If externalblocked retain exactgate and move nextsafeindependentwork.
