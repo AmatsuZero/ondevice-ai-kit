@@ -16,7 +16,9 @@ struct MLXVLMConsumerApp: App {
                 Text(status)
                 Button("Run fixed fixture suite") { run() }.disabled(running)
             }.padding().task {
-                if ProcessInfo.processInfo.arguments.contains("--sdk-mlxvlm-benchmark") {
+                if ProcessInfo.processInfo.arguments.contains("--sdk-mlxvlm-video-suite") {
+                    runVideo()
+                } else if ProcessInfo.processInfo.arguments.contains("--sdk-mlxvlm-benchmark") {
                     runBenchmark()
                 } else if ProcessInfo.processInfo.arguments.contains("--sdk-mlxvlm-fixture-suite") { run() }
             }
@@ -29,6 +31,16 @@ struct MLXVLMConsumerApp: App {
         Task {
             await FixtureSuite.run()
             status = "Finished. See sdk-mlxvlm-result.json in this app's Documents."
+            running = false
+        }
+    }
+    private func runVideo() {
+        guard !running else { return }
+        running = true
+        status = "Running fixed synthetic video suite…"
+        Task {
+            await VideoFixtureSuite.run()
+            status = "Finished. See sdk-mlxvlm-video.json in this app's Documents."
             running = false
         }
     }

@@ -54,6 +54,7 @@ def generate(output: Path, *, portable_source: bool = False) -> None:
     example = ROOT / 'examples/ios-mlxvlm-native'
     source = example / 'MLXVLMConsumerApp.swift'
     measurements = example / 'BenchmarkMeasurements.swift'
+    video_suite = example / 'VideoFixtureSuite.swift'
     lock = ROOT / 'apple-mlx/Package.resolved'
     spec = (example / 'project.yml').read_text()
     if portable_source:
@@ -62,12 +63,13 @@ def generate(output: Path, *, portable_source: bool = False) -> None:
     else:
         spec = spec.replace('path: ../../apple-mlx', 'path: ' + json.dumps(str(ROOT / 'apple-mlx')))
         spec = spec.replace('path: ../../apple', 'path: ' + json.dumps(str(ROOT / 'apple')))
-    if not source.is_file() or not measurements.is_file() or not lock.is_file():
+    if not source.is_file() or not measurements.is_file() or not video_suite.is_file() or not lock.is_file():
         raise ValueError('consumer source or fixed package lock missing')
     output.mkdir(parents=True, exist_ok=True)
     inventory = _copy_portable_packages(output) if portable_source else None
     shutil.copyfile(source, output / source.name)
     shutil.copyfile(measurements, output / measurements.name)
+    shutil.copyfile(video_suite, output / video_suite.name)
     (output / 'project.yml').write_text(spec)
     subprocess.run(['xcodegen', 'generate', '--spec', str(output / 'project.yml'), '--project', str(output)], check=True)
     pins = output / 'MLXVLMConsumer.xcodeproj/project.xcworkspace/xcshareddata/swiftpm'

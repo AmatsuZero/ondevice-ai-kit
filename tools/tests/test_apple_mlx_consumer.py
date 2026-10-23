@@ -16,6 +16,9 @@ class AppleMLXConsumerTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as output:
             subprocess.run([sys.executable, str(ROOT / 'tools/generate_mlxvlm_consumer.py'), output], check=True, capture_output=True)
             self.assertTrue((Path(output) / 'MLXVLMConsumerApp.swift').is_file())
+            # A generated consumer must compile the opt-in suite, not silently omit it.
+            suite = Path(output) / 'VideoFixtureSuite.swift'
+            self.assertEqual(suite.read_bytes(), (ROOT / 'examples/ios-mlxvlm-native/VideoFixtureSuite.swift').read_bytes())
             retry = subprocess.run([sys.executable, str(ROOT / 'tools/generate_mlxvlm_consumer.py'), output], capture_output=True)
             self.assertNotEqual(retry.returncode, 0, 'existing consumer was overwritten')
             pbx = Path(output) / 'MLXVLMConsumer.xcodeproj/project.pbxproj'
@@ -24,6 +27,9 @@ class AppleMLXConsumerTests(unittest.TestCase):
             self.assertEqual(names, {'ODAIKitAppleMLXVLM', 'ODAIKitModelStore', 'ODAIKitMultimodal'})
             targets = [v for v in objects.values() if v.get('isa') == 'PBXNativeTarget']
             self.assertEqual(len(targets), 1)
+            refs = {key for key, value in objects.items() if value.get('isa') == 'PBXFileReference' and value.get('path') == 'VideoFixtureSuite.swift'}
+            builds = {key for key, value in objects.items() if value.get('isa') == 'PBXBuildFile' and value.get('fileRef') in refs}
+            self.assertTrue(any(builds.intersection(v.get('files', [])) for v in objects.values() if v.get('isa') == 'PBXSourcesBuildPhase'))
             configs = [v['buildSettings'] for v in objects.values() if v.get('isa') == 'XCBuildConfiguration']
             self.assertTrue(any(v.get('IPHONEOS_DEPLOYMENT_TARGET') == '18.0' for v in configs))
 
