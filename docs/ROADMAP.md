@@ -4,6 +4,8 @@
 
 ## 执行规则
 
+2026-10-23 P9分发续接：`b8acaa3` 新增可搬移source consumer（122个tracked package文件、相对引用、固定lock/资源hash）；搬移后generic iOS离线编译通过，tools126/126。增强Release/library-evolution archive 在本机Swift6.4验证固定swift-collections1.7.3的OrderedCollections.swiftinterface失败（exit65），binary未通过，不复用基础十XCFramework证据。见[分发验证](validation/apple-mlxvlm-distribution.md)。独立review及既有缺口保留，仍5/12、P9active；本包仅本地提交。
+
 用户最新要求是**继续推进，直到 roadmap 完成**。按下表工作包限定输入、改动范围与验证，逐项实施、复审和提交后自动进入下一项。设备、凭据、商用模型许可与校准缺口分别保留，不能把局部测试通过视为完整交付。原十项 foundation 计划保留为历史细节。
 
 2026-10-21 接手更新：P6 Demo 语言路由补齐请求级 admission，避免默认英语不可用阻断已就绪的中文。真实 client 回归先失败再通过，Host/bridge/session39/39、native iOS fixture43/43及普通真机包构建/装机通过；完整恢复门禁Swift414/414、工具77/77和Android569tasks通过。尚无中文实录终态与真实取消/重入完成证据，独立复审仍因模型容量不足不可用，P6/roadmap保持未完成，未同步远端。恢复入口见[交接检查点](HANDOFF-2026-10-20-speech-demo-bridge.md)。

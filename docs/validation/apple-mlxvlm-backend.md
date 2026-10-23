@@ -1,6 +1,8 @@
 # Apple MLXVLM Backend 验证
 
-更新时间：2026-10-22（Asia/Shanghai）
+更新时间：2026-10-23（Asia/Shanghai）
+
+最新独立分发包：可搬移 source consumer 已在固定缓存下离线编译；Release/library-evolution archive 在固定 `swift-collections` 的 `OrderedCollections.swiftinterface` 验证失败（exit65），增强 binary 分发仍未通过。见[分发验证](apple-mlxvlm-distribution.md)。下文历史 backend/benchmark 证据不替代该门槛。
 
 ## 交付边界
 

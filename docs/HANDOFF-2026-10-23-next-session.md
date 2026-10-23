@@ -2,6 +2,15 @@
 
 2026-10-23。建议在新会话开始下一独立包，本文件是恢复入口，不是整个项目完成结论。
 
+## 最新续接 — 可搬移 source 分发与 binary 门槛
+
+- 已从下述b988742基线续接；设计/计划cf342a1、source generator实现b8acaa3，最后精确HEAD以git为准。新增[分发验证](validation/apple-mlxvlm-distribution.md)和对应spec/plan/本地ledger；**不重做本包**。
+- `tools/generate_mlxvlm_consumer.py --portable-source <fresh-output>` 复制122个tracked package文件、固定lock和资源，以相对package引用生成独立consumer。已搬移到含空格目录，并在既有12个精确匹配/无tracked修改的依赖缓存下完成unsigned generic iOS build；snapshot/project lock及built canonical JSON完全一致，六个backend源文件确实从搬移目录编译。工具126/126，最终定向6/6、py_compile/diff-check通过。
+- source raw/summary `artifacts/verification/apple-mlxvlm-source-distribution-20261023/`；完整logs与progress/final-review在`.superpowers/sdd/2026-10-23-apple-mlxvlm-source-distribution/`。inventorySHA256 `479bdeb51f178c2b791a9d9228217b21eda90a3c3859aaa543c572ac6bbc2033`；lock仍e67e9859…。
+- 增强package真实Release archive（OnDeviceAIKitAppleMLX scheme、library evolution、固定缓存）**exit65 / ARCHIVE FAILED**：本机Xcode27.1/Swift6.4验证固定swift-collections1.7.3的OrderedCollections.swiftinterface失败，`'Element' is not imported through module 'OrderedCollections'`。binary分发未通过；未改上游/关闭校验/下载，不反复重跑同一门槛。source构建不替代binary、设备推理或最低系统验收。
+- 全程当前会话单人、作者自审，独立reviewpending；只本地提交，无远端同步。原有两个保护文件hash/state/index不变。旧UI/模型/质量/资源/最低系统门槛与roadmap5/12/P9active保留。
+- 下一独立包先核对**既有固定模型/runtime是否能支持有界短视频输入**，先读相关P8/P9/probe与backend契约，仅本地源码/缓存可行性和设计；若不满足依赖或设备条件，准确记录门槛后选择其他独立项。不与binary路线混做，不下载新模型/依赖，不预先承诺短视频可用。
+
 ## 基线与远端
 
 - 工作树 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation`，分支 `feat/sdk-foundation`。
@@ -26,7 +35,7 @@ SDK Foundation、独立apple-mlx后端/真实SDK固定单图生命周期与bench
 
 ## 下一独立包建议
 
-优先检查 **可选Apple MLXVLM增强包的分发与独立consumer** 是否可用既有依赖缓存独立推进：先读 `docs/validation/apple-mlxvlm-backend.md` 及对应backend/benchmark设计计划、现有apple-mlx package和分发脚本；明确source消费与binary分发各自证据后设计/逐Task实施，不能把根基础十XCFramework或增强Demo source build当新增增强包binary分发通过。若现有缓存/平台限制构成外部门槛，准确记录并选择其他独立包，不下载新依赖/模型。此处仅是建议包，不预先声称产物一定可分发。
+原建议的可选Apple MLXVLM分发包已按顶部最新续接执行，不再从头探测。source/binary结果分别见[分发验证](validation/apple-mlxvlm-distribution.md)；后续入口以顶部为准，binary路线必须有工具链/依赖条件变化或独立策略设计才重新启动。
 
 物理触摸/命中、真实system picker选文件、自然图片质量、可靠Metal/GPU/能耗/最低系统、短视频、Android真后端和独立review各自仍待验；不以AX/合成fixture/processRSS替代。短视频或Android新后端不与分发包混做。作者自审不称独立APPROVE。
 

@@ -28,11 +28,11 @@ Solo/local commits only; no downloads, signing changes, private media or protect
 
 **Interfaces:** Consumes existing example, Git-tracked package files and fixed lock. Produces `generate(output: Path, *, portable_source: bool = False)` and CLI `--portable-source`, relative `packages/` references and `source-bundle.json`.
 
-- [ ] Write real-generator tests: relocation/project dependency paths, exact lock/resource/hash inventory, untracked sentinel exclusion, nonempty/symlink refusal.
-- [ ] Run `rtk proxy python3 -m unittest tools.tests.test_mlxvlm_source_bundle -v`; Expected: missing flag/behavior RED.
-- [ ] Implement minimum portable branch; preserve default behavior.
-- [ ] Run new tests plus `tools.tests.test_apple_mlx_consumer`; Expected: all pass. Run full tools with explicit Ruby; Expected: all pass.
-- [ ] Author scope review, exact-stage and local commit.
+- [x] Write real-generator tests: relocation/project dependency paths, exact lock/resource/hash inventory, untracked sentinel exclusion, nonempty/symlink refusal.
+- [x] Run `rtk proxy python3 -m unittest tools.tests.test_mlxvlm_source_bundle -v`; Expected: missing flag/behavior RED.
+- [x] Implement minimum portable branch; preserve default behavior.
+- [x] Run new tests plus `tools.tests.test_apple_mlx_consumer`; Expected: all pass. Run full tools with explicit Ruby; Expected: all pass.
+- [x] Author scope review, exact-stage and local commit.
 
 ### Task 2: Relocated offline build and binary probe
 
@@ -40,10 +40,10 @@ Solo/local commits only; no downloads, signing changes, private media or protect
 
 **Interfaces:** Consumes Task1 portable output. Produces build/archive logs and inspected products, without SDK/runtime changes.
 
-- [ ] Generate portable consumer, relocate into a fresh path with a space, verify hashes and project references.
-- [ ] Build unsigned `MLXVLMConsumer`, generic iOS, exact cached SourcePackages and all three no-resolution/update flags. Expected: BUILD SUCCEEDED; unchanged lock and actual relocated source/resource paths.
-- [ ] Attempt Release archive of `ODAIKitAppleMLXVLM`, same cache/flags, `BUILD_LIBRARY_FOR_DISTRIBUTION=YES SKIP_INSTALL=NO`. Expected: either inspectable framework with dependencies/resources, or explicit recorded compiler/product-layout barrier. Neither source build nor empty archive passes binary acceptance.
-- [ ] Author evidence review; record exact result, preserve failed logs.
+- [x] Generate portable consumer, relocate into a fresh path with a space, verify hashes and project references.
+- [x] Build unsigned `MLXVLMConsumer`, generic iOS, exact cached SourcePackages and all three no-resolution/update flags. Expected: BUILD SUCCEEDED; unchanged lock and actual relocated source/resource paths.
+- [x] Attempt Release archive of `OnDeviceAIKitAppleMLX` (actual SwiftPM workspace scheme for the enhanced package), same cache/flags, `BUILD_LIBRARY_FOR_DISTRIBUTION=YES SKIP_INSTALL=NO`. Expected: either inspectable framework with dependencies/resources, or explicit recorded compiler/product-layout barrier. Neither source build nor empty archive passes binary acceptance.
+- [x] Author evidence review; record exact result, preserve failed logs.
 
 ### Task 3: Validation and recovery checkpoint
 
@@ -51,6 +51,6 @@ Solo/local commits only; no downloads, signing changes, private media or protect
 
 **Interfaces:** Consumes tested generator and fresh build/archive evidence. Produces honest source/binary statuses and a bounded next entry.
 
-- [ ] Document reproducible commands, snapshot/lock hashes, counts, diagnostics and remaining binary requirements.
-- [ ] Run Python static compilation and `git diff --check`; recheck exact protected hashes and index.
-- [ ] Final separate author review, local docs commit, no remote writes.
+- [x] Document reproducible commands, snapshot/lock hashes, counts, diagnostics and remaining binary requirements.
+- [x] Run Python static compilation and `git diff --check`; recheck exact protected hashes and index.
+- [x] Final separate author review, local docs commit, no remote writes.
