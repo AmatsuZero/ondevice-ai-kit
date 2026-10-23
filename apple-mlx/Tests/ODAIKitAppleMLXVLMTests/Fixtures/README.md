@@ -32,6 +32,43 @@ The processor tests use the real fixed MLXVLM implementation and a synthetic
 byte tokenizer, validating frame/prompt mechanics only. No model inference,
 real model tokenization or natural-video quality is claimed.
 
+Later `MLXVLMVideoTokenizerTests` separately opts in to the existing verified local
+model directory and executes the actual fixed tokenizer/template. It never loads
+weights; the original ByteTokenizer characterization above remains unchanged.
+
+## Negative profile additions (2026-10-23)
+
+`MLXVLMVideoProfileTests` executes all four through the real snapshot and checks
+rejection, owned-copy cleanup and unchanged input bytes. These are narrow negative
+fixtures, not arbitrary-container/HDR support or natural-quality evidence.
+
+All three FFmpeg fixtures use `testsrc2=size=160x90`, `-an -c:v libx264
+-pix_fmt yuv420p -bf 0 -movflags +write_colr`:
+
+| File | Additional arguments | Bytes | SHA256 |
+| --- | --- | --- | --- |
+| video-pq.mp4 | rate=24, -t 2, -x264-params colorprim=bt2020:transfer=smpte2084:colormatrix=bt2020nc, -use_editlist 0 | 31996 | 4ce99328452e47a35e504e92b783cc34f224dbb3f581d7a29d709fa034e7d5f7 |
+| video-offset.mp4 | rate=24, -t 2, -x264-params colorprim=bt709:transfer=bt709:colormatrix=bt709, -use_editlist 1 -output_ts_offset 0.25 | 32044 | 776bca3955bed8fcfdafac49f9d1d9a1e319d298b1c041ebc86f80abd4d60d5e |
+| video-two-frames.mp4 | rate=2, -t 1, -x264-params colorprim=bt709:transfer=bt709:colormatrix=bt709, -use_editlist 0 | 6020 | 05e00525b3fb54536de40a38ce542fed23430873d5e4248fe9f50fa93f579c64 |
+| video-external-reference.mp4 | Structural mutation of video-sdr.mp4 described below | 32025 | 5ea8da1cb930244b918e990658387e444dec3d2af642bc6e6b0de25111daa10a |
+
+The offset file's actual stream start is 0.25s. The initial attempt with
+`-use_editlist 0` ignored the requested offset and produced the original fixture;
+that attempt is preserved in the local ledger and is not the committed offset file.
+The two-frame input is deliberately rejected by the current eight-unique-sample
+profile; these tests do not add shorter-clip support or duplicate frames.
+PQ is signalled by actual H.264 VUI/BT.2020 metadata, not only the filename.
+
+For the external-reference fixture, recurse through moov/trak/mdia/minf/dinf into
+dref; replace its sole self-contained `url ` entry (version/flags=0x00000001)
+with version/flags=0x00000000 followed by NUL-terminated relative URL
+`synthetic-external-media.mp4`, updating each enclosing box size. Source moov
+follows mdat, so original sample bytes/offsets stay unchanged. No external file
+is provided or private path named. This proves rejection of this structural
+profile, not successful external playback or absence of all possible external I/O.
+Exact generator, commands, ffprobe JSON and both offset attempts are retained in
+`.superpowers/sdd/2026-10-23-apple-mlxvlm-video-profile/`.
+
 Recorded file inventory:
 
 ```json
