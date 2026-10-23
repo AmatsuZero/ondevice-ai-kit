@@ -1,4 +1,3 @@
-#if os(iOS)
 import Foundation
 import MLXLMCommon
 import Tokenizers
@@ -31,4 +30,3 @@ private struct LocalTokenizer: MLXLMCommon.Tokenizer {
         catch Tokenizers.TokenizerError.missingChatTemplate { throw MLXLMCommon.TokenizerError.missingChatTemplate }
     }
 }
-#endif

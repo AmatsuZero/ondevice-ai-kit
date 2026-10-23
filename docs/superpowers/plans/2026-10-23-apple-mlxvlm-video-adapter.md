@@ -39,9 +39,9 @@ Model fa57db46815177fbdfd65cc85a2b3416a8332268; runtime6e338e5df49424fc0db7c6d58
 
 **Interfaces:** unchanged LocalTokenizerLoader.load(from:) now available to macOS tests. Consumes Task1 adapter. Opt-in `ODAI_VIDEO_MODEL_DIRECTORY` supplies local verified assets; absent means explicit XCTSkip, not passing model evidence.
 
-- [ ] Write tests and run RED for missing host loader. Load only local tokenizer; no model/container/weights. 24FPS adapter and upstream tokens/pixels exactly match (same rounded duration); 29FPS adapter has8frames and512 actual image IDs versus upstream7/448; prompt retains user question and assistant suffix. Assert exact metadata retained.
-- [ ] Remove iOS-only compilation guard without changing loader implementation. Verify required tokenizer files against manifest before run; run focused actual-tokenizer tests with local env, no skips.
-- [ ] Run complete enhancedhost and tools with explicitRuby, generic iOS unsigned consumer build from fresh output, all3 fixed dependency flags. Verify no lock/checkout drift. Author scope review and exact-stage local Task commit.
+- [x] Write tests and run RED for missing host loader. Load only local tokenizer; no model/container/weights. 24FPS adapter and upstream tokens/pixels exactly match (same rounded duration); 29FPS adapter has8frames and512 actual image IDs versus upstream7/448; prompt retains user question and assistant suffix. Assert exact metadata retained.
+- [x] Remove iOS-only compilation guard without changing loader implementation. Verify required tokenizer files against manifest before run; run focused actual-tokenizer tests with local env, no skips.
+- [x] Run complete enhancedhost and tools with explicitRuby, generic iOS unsigned consumer build from fresh output, all3 fixed dependency flags. Verify no lock/checkout drift. Author scope review and exact-stage local Task commit.
 
 ### Task 3: Durable acceptance boundary
 
