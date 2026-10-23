@@ -4,6 +4,8 @@
 
 ## 执行规则
 
+2026-10-23 P9短视频Task1：内部有界snapshot及实际pinned processor characterization已实施，host22/22、tools126/126、独立consumer generic iOS编译通过。24FPS的8帧保留并完成真实prepare；29FPS的8帧在固定上游二次采样后变7帧，原始8帧门槛实际失败。因此Task2/3暂停，不接公共video API、不改上游/伪造时间戳。下一入口先设计保留真实帧/时间语义的项目侧适配，见[短视频验证](validation/apple-mlxvlm-short-video.md)；设备推理/质量/资源与旧缺口不变，仍5/12、P9active。
+
 2026-10-23 P9短视频续接：固定模型14文件 hash/size 与12个缓存 checkout HEAD/clean 重新离线复核通过。上游有单视频 processor；`fps=1/max_frames=64` 是配置值，短片默认采样率会动态变化。项目仍无视频 API/推理证据，已完成[可行性与设计](validation/apple-mlxvlm-short-video.md)。下一 Task 先执行有界 snapshot 与固定 processor 帧/时间语义 characterization；通过后才接 typed API、Apple backend 与独立consumer。仍5/12、P9 active，binary与旧验收缺口保留。
 
 2026-10-23 P9分发续接：`b8acaa3` 新增可搬移source consumer（122个tracked package文件、相对引用、固定lock/资源hash）；搬移后generic iOS离线编译通过，tools126/126。增强Release/library-evolution archive 在本机Swift6.4验证固定swift-collections1.7.3的OrderedCollections.swiftinterface失败（exit65），binary未通过，不复用基础十XCFramework证据。见[分发验证](validation/apple-mlxvlm-distribution.md)。独立review及既有缺口保留，仍5/12、P9active；本包仅本地提交。

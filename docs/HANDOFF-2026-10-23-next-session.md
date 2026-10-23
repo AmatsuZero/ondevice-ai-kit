@@ -35,10 +35,12 @@ SDK Foundation、独立apple-mlx后端/真实SDK固定单图生命周期与bench
 
 ## 最新续接 — 固定 MLXVLM 短视频可行性
 
+**此节最新状态以本段为准**：52fc766之后已实施内部`MLXVLMVideoSnapshot`和真实pinned processor测试；增强host22/22、tools126/126、独立consumer unsigned generic iOS编译通过。24FPS/2s fixture8帧保留，真实`SmolVLMProcessor.prepare` pixels为`[8,512,512,3]`；29FPS/2s原8帧count/timestamps门槛实际失败（上游二次采样变7帧，原index6丢失）。原失败log与断言副本保留；默认characterization测试断言固定版本已知7帧行为，不把GREEN称为8帧集成通过。**不要直接执行原Task2/3**。下一独立设计先解决真实帧/时间语义适配，不能改写timestamps或修改上游来绕过；原生snapshot额外profile测试和iOS实际decode/cancel仍待补。详见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。
+
 - 已完成源码/缓存核对并新增[短视频可行性](validation/apple-mlxvlm-short-video.md)、[设计](superpowers/specs/2026-10-23-apple-mlxvlm-short-video-design.md)和[计划](superpowers/plans/2026-10-23-apple-mlxvlm-short-video.md)。固定14个模型文件 hash/size 全匹配，12个 lock checkout HEAD/clean 全匹配；摘要 `artifacts/verification/apple-mlxvlm-short-video-20261023/preflight.json`，SHA256 `135c87c076307df7fbf5c1e02bfb75016bef0cb7b0e417efa7596b0362343186`。
 - 固定 runtime 的 `SmolVLMProcessor` 有单视频分支；配置 `fps=1/max_frames=64/max_image_size=512`，实际默认FPS会按时长变化。`UserInput.Video` 支持 `.url/.avAsset/.frames`，但项目公共请求和 backend 仍只支持单图。URL sampling包含duration端点并跳过失败帧；`.frames`重新计算sample span并二次采样，必须先做实际characterization。
 - 下一 Task1 为有界 H.264 SDR 本地 snapshot、AVFoundation 解码取消/join、帧身份/时间戳及 pinned processor characterization。只有通过后才执行 Task2 typed video contract、Task3 Apple runtime/consumer/device。若失败保留精确诊断，不改上游或伪造timestamps绕过。
-- 本轮仅本地文档与离线preflight，无新SDK实现、build、推理或设备写入；仍5/12、P9active。独立只读代理因429未启动，后续遵守当前会话单人执行。两个保护文件hash/state/index不变；无远端写入。
+- 初次52fc766仅文档/preflight；后续内部snapshot/host/build结果见本节最新段，无新视频设备推理或设备写入。仍5/12、P9active。独立只读代理因429未启动，后续遵守当前会话单人执行。两个保护文件hash/state/index不变；无远端写入。
 
 ## 下一独立包建议
 

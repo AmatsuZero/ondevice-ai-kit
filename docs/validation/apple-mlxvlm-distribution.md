@@ -69,4 +69,4 @@ public `OrderedCollections.swiftinterface` 也有同类错误，并有 `extraneo
 
 下一步不反复重跑同一 archive。若仍固定本机工具链/依赖，本路线门槛记录在此；可另包推进缓存可支持的短视频输入设计/可行性核对，或在工具链/依赖升级获得明确范围后单独设计 binary 策略。先读取最新交接和当前状态，不下载新模型/依赖。
 
-2026-10-23 已完成上述短视频源码/缓存核对与设计，见[短视频可行性](apple-mlxvlm-short-video.md)。下一门槛为有界native sampler和固定processor的实际帧/时间语义characterization；本source/binary证据不变，尚未新增视频API或视频推理结果。
+2026-10-23 已完成短视频源码/缓存核对与设计，并继续内部snapshot/host characterization：host22/22、tools126/126、generic iOS编译通过；29FPS输入的原8帧门槛真实失败（上游重新采样得到7帧），后续公共API暂停，见[短视频验证](apple-mlxvlm-short-video.md)。本source/binary证据不变，未新增公共视频API或视频设备推理结果。

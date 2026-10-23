@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-10-23-apple-mlxvlm-short-video-design.md`
 
+**Execution checkpoint (2026-10-23):** Task1 partially implemented; internal snapshot and host characterization exist, host22/22, tools126/126 and unsigned generic iOS build pass. The required8-frame semantic gate **failed** for actual29FPS input (8→7frames). Default characterization asserts the pinned known failure; this does not pass integration. Do not execute Task2/3 until a separate project-side temporal-adapter design resolves this gate without upstream edits or fabricated timestamps. Task1 external-reference/HDR/offset/short-clip and iOS-device coverage remain open; no Task is marked fully complete.
+
 ## Global constraints
 
 No new dependencies/downloads/upstream edits; exact current model/runtime/Package.resolved. Base iOS15/macOS12 and Android API26 unchanged, enhanced real inference arm64 iOS18+ device only. H.264 SDR, one zero-start video track, local regular nonsymlink input<=32MiB, finite duration0<d<=5s, <=1920 each side and <=2,073,600 pixels, at most8 frames<=512 each side. Prompt<=8192 UTF8 bytes, output1...512, temperature0. No KMP/Android implementation, natural media, remote writes, signing changes or protected-file edits in this package.

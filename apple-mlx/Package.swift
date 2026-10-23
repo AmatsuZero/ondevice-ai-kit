@@ -21,6 +21,10 @@ let package = Package(
             .product(name: "MLX", package: "mlx-swift"),
             .product(name: "Tokenizers", package: "swift-transformers")
         ], resources: [.copy("Resources/smolvlm2-model.json")]),
-        .testTarget(name: "ODAIKitAppleMLXVLMTests", dependencies: ["ODAIKitAppleMLXVLM"])
+        .testTarget(name: "ODAIKitAppleMLXVLMTests", dependencies: ["ODAIKitAppleMLXVLM",
+                    .product(name: "MLXVLM", package: "mlx-swift-lm"),
+                    .product(name: "MLXLMCommon", package: "mlx-swift-lm"),
+                    .product(name: "MLX", package: "mlx-swift")],
+                    resources: [.copy("Fixtures")])
     ]
 )

@@ -1,8 +1,35 @@
 # Apple MLXVLM 短视频可行性
 
-2026-10-23。从 `515ec07` 的分发交接继续。**固定模型/runtime 有单视频处理源码，本项目尚无短视频 API、解码或推理通过证据**。本包完成交接指定的本地源码/缓存核对和下一包设计，不更改 SDK、模型、lock 或依赖。roadmap 仍 5/12，P9 active。
+2026-10-23。从 `515ec07` 分发交接继续；源码可行性/设计已提交 `52fc766`，随后按用户继续执行 Task1。**内部有界视频 snapshot 与 host processor characterization 已实现；公共短视频 API/设备推理尚未通过，29FPS 重采样门槛实际失败**。未改模型/lock/上游依赖。roadmap 仍5/12、P9active。
 
-## 新鲜离线证据
+## Task1 实际实施与阻塞
+
+新增内部 `MLXVLMVideoSnapshot`：fd/O_NOFOLLOW/fstat 有界私有复制（32MiB）、5s/单视频轨/零起点无编辑/H.264/明确BT.709 transfer/尺寸与像素profile、至多512px的8个采样点且不含duration端点。AVURLAsset显式 `AVAssetReferenceRestrictions.forbidAll`；取消请求会取消asset loading和generator，消费剩余generation结果后才进入私有目录清理。同步observer用于copied/decodedFrame诊断，不作为释放屏障。
+
+源文件后续修改不会改变私有副本；close幂等且不删除原路径被重新创建后的foreign文件。该项测试先真实失败（第二次close删除foreign.txt），加锁保护closed状态后通过。首次合法fixture失败也保留：本机FFmpeg general color flags未写出transfer/primaries；经ffprobe与真实AVFoundation format descriptions定位，使用显式x264/x265 color params修正合成fixture，没有放宽产品SDR校验。
+
+### 实际 pinned processor 结果
+
+不是源码字符串检查：macOS host中执行既有固定MLXVLM的 `MediaProcessing.asProcessedSequence` 和 `SmolVLMProcessor.prepare`。使用固定模型的byte-identical `preprocessor_config.json` 和测试用ByteTokenizer；验证真实图像/MLX帧处理及prompt结构，**不验证真实模型tokenizer或权重推理**。
+
+| 合成输入 | native snapshot | 固定 processor 结果 |
+| --- | --- | --- |
+| 160×90/24FPS/2s | 8帧，actual=0,0.25,...,1.75s | 8帧时间戳/每帧原始pixel身份保留；prepare pixels=`[8,512,512,3]`、8个THW、8个frame提示。真实clip duration=2s，sample span=1.75s，分别记录。 |
+| 160×90/29FPS/2s | 8帧，actual time值（timescale14848）=`[0,3584,7168,10752,14848,18432,22016,25600]` | `.frames`重新采样只保留原索引`[0,1,2,3,4,5,7]`，得到7帧。原8帧count与timestamp断言均真实失败。**集成门槛未通过**。 |
+
+原始失败：`.superpowers/sdd/2026-10-23-apple-mlxvlm-short-video/task-1-processor-characterization.log`（exit65，两条断言失败），原断言源码保留为 `processor-eight-frame-gate-red.swift`。仓库中的characterization测试明确断言上述固定版本的已知7帧行为，以检测依赖行为漂移；该测试GREEN不代表8帧集成门槛通过，不称为上游bug已修复。
+
+按设计停止Task2/3，不接公共video API，不修改上游、不伪造timestamps、不把视频塞进imageFile。内部snapshot仍是实验性前置代码，不承诺任意<=5s视频可用；短于8个可解码样本、HDR/offset/reference-container等额外测试及iOS实际解码/取消仍需补齐。
+
+### 本轮验证
+
+- 新snapshot测试8/8：合法8帧/副本稳定/清理、文件类型/symlink、编码字节、duration/codec/dimensions/pixels/多轨、预取消、首frame后主动取消及清理、重复close保留foreign目录、profile常量。
+- pinned processor characterization2/2（包含**已知失败边界的断言**）；完整增强host **22/22、0 failures**，日志 `task-1-snapshot-and-characterization-green.log`。
+- 测试target只增加已存在的MLXVLM/MLXLMCommon/MLX直接测试依赖与合成资源；未新增package、改lock或基础SDK。所有合成fixture来源/命令/hash见测试Fixtures/README.md；无自然/私人媒体。
+- tools完整 **126/126**（显式Ruby3.4.11），日志 `task-1-tools.log`；新生成独立consumer的unsigned generic iOS **BUILD SUCCEEDED**，日志 `task-1-ios-build.log`。固定SourcePackages与三项禁止解析/更新flags保持不变，lock未改。
+- `MLXVLMVideoSnapshot.swift`确实进入该iOS编译；没有新设备安装/运行、视频推理/质量/资源/最低系统验收。该内部snapshot/characterization不是增强binary分发证据。
+
+## 前置源码核对的离线证据（52fc766）
 
 - `artifacts/P9/verified` 的 14 个文件重新逐一检查大小和 SHA256，全部匹配 `docs/validation/p9-smolvlm-manifest.json`，包括 1,015,023,993 B 的权重。
 - 现有 `VLMProbe-gsskvhiuepshlpbhywyqjxgoktbb/SourcePackages/checkouts` 的 12 个 checkout：HEAD 全部匹配 `apple-mlx/Package.resolved`，tracked 修改为空。未解析、更新或下载依赖。
@@ -36,6 +63,6 @@
 
 ## 验证边界与恢复
 
-本包为源码与文档工作：没有新产品实现，不运行完整 SDK 测试、build 或推理；历史 tools126/126 与 source build 不称为本轮新跑结果。独立只读代理启动遭 429/retry-limit，未返回分析；本轮后续为当前会话作者核对和自审，无独立 APPROVE。交接规定后续继续当前会话单人执行。
+最初52fc766为源码与文档工作，没有产品实现或新build/推理。后续Task1的实际host执行结果见顶部，历史tools126/126和source build不充作该Task的新跑结果。独立只读代理启动遭429/retry-limit，未返回分析；后续为当前会话作者核对和自审，无独立APPROVE。继续当前会话单人执行。
 
-短视频 decode/processor/tokenization/device generation/cancel/reentry/close、自然视频质量、Metal/GPU/energy、最低系统、Android 实际后端均未验。binary archive 的既有 exit65 门槛继续保留，不重跑。无 push/merge/publish、下载、录音、私人媒体读取或签名变更；两个保护文件保持原 hash/state/index。
+仅顶部明确列出的host decode/processor范围有新证据；真实模型tokenization、device generation/cancel/reentry/close、自然视频质量、Metal/GPU/energy、最低系统、Android实际后端仍未验。binary archive既有exit65门槛继续保留，不重跑。无push/merge/publish、下载、录音、私人媒体读取或签名变更；两个保护文件保持原hash/state/index。
