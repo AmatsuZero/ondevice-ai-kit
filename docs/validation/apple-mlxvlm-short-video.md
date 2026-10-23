@@ -1,6 +1,19 @@
 # Apple MLXVLM 短视频可行性
 
-2026-10-23。从 `515ec07` 分发交接继续；源码可行性/设计已提交 `52fc766`，随后按用户继续执行 Task1。**内部有界视频 snapshot 与 host processor characterization 已实现；公共短视频 API/设备推理尚未通过，29FPS 重采样门槛实际失败**。未改模型/lock/上游依赖。roadmap 仍5/12、P9active。
+2026-10-23。从 `515ec07` 分发交接继续；源码可行性/设计已提交 `52fc766`，内部snapshot/上游characterization为`eb1287d`。**最新：内部项目侧sampled-video适配器已通过host真实帧与固定tokenizer验证；上游29FPS重采样仍失败，公共短视频 API/设备推理尚未通过**。未改模型/lock/上游依赖。roadmap 仍5/12、P9active。
+
+## 最新续接：项目侧 sampled-video adapter
+
+独立[设计](../superpowers/specs/2026-10-23-apple-mlxvlm-video-adapter-design.md)与[逐Task计划](../superpowers/plans/2026-10-23-apple-mlxvlm-video-adapter.md)。`5be1b57`新增内部`MLXVLMVideoInputAdapter`，`c9ef8ce`加入真实固定tokenizer验证。适配器不调用上游帧选择，而逐一处理全部snapshot帧；复用公开sRGB/Lanczos512/normalize和SmolVLM2MessageGenerator，保留固定视频block/每帧64image tokens/THW。block在真实chat template前装配，不通过imageFile或单图tiles处理。固定config错配、非法时间/帧数/尺寸/媒体标签prompt均fail closed。
+
+- 29FPS实际8帧逐帧pixel身份/顺序保留，timestamps原样为`[0,3584,7168,10752,14848,18432,22016,25600]/14848`；pixels=`[8,512,512,3]`。真实clip duration=2s；sample span=`25600/14848`≈1.724138s，分别返回，未改时间戳或补帧。
+- 24FPS适配器完整pixels、tokens及mask与固定上游一致。单帧、非零首时间也保留原始CMTime，sample span=0，prompt duration使用真实clip而非span。模型视频prompt沿用ceil到整秒的H:MM:SS，**没有亚秒文本精度承诺**。
+- 真实固定`LocalTokenizerLoader`在macOS离线使用已验证model目录，只读tokenizer/template，不加载权重；2/2、无skip。适配29FPS为8帧/512实际imageIDs（含16边界、8globalIDs），固定上游仍7帧/448imageIDs。旧ByteTokenizer characterization仍单独存在；本项没有把旧测试提升为真实tokenizer证据。
+- RED：`task-1-red.log`缺失适配接口；`task-2-red.log`缺失host tokenizer入口，均exit65。首实现测试跨Task返回非SendableLMInput的编译失败保留于`task-1-first-green.log`；测试改为在同一Task内消费，未添加uncheckedSendable。
+- 最新完整增强host **30/30、0failures、无skip**；tools **126/126**（显式Ruby3.4.11）；新独立consumer unsigned generic iOS **BUILD SUCCEEDED**，适配器确实参与iOS编译。日志为新ledger目录`.superpowers/sdd/2026-10-23-apple-mlxvlm-video-adapter/`的`task-2-full-host.log`、`task-2-tools.log`、`task-2-ios-build.log`；argv和post-build-checks.json保留。既有AppIntents/orientation与上游warnings未抹掉。
+- 使用前14model文件size/hash匹配；构建后12checkout HEAD/clean、原lock及consumer lock均匹配。无需下载、upstream edits或binary archive重跑。两个保护文件hash/state/index保留。
+
+**该内部适配包通过离线input preparation兼容门槛，不等于原上游`.frames`修复、公开API集成、权重生成、设备或质量验收。** 原Task1 profile/iOSdecode仍未齐，原Task2/3继续未开始。下一可独立项为补齐snapshot profile测试和iOS实际decode/cancel；完成后仍须另行验证runtime接线与视频权重推理。作者逐Task/最终自审，独立reviewpending、无APPROVE；仅本地提交，无push/merge/publish。
 
 ## Task1 实际实施与阻塞
 

@@ -49,9 +49,9 @@ Model fa57db46815177fbdfd65cc85a2b3416a8332268; runtime6e338e5df49424fc0db7c6d58
 
 **Interfaces:** consumes Task1/2 evidence only; original upstream red remains failed.
 
-- [ ] Document exact RED/GREEN/count/build/tokenizer scope and remaining profile/device/API/review/binary gates. Record configuration/protected hashes, cache status and unchangedlock.
-- [ ] Verify links/diff/index/protected state; separate author final review; precise local docs commit. No P9 completion/count promotion or remote sync.
+- [x] Document exact RED/GREEN/count/build/tokenizer scope and remaining profile/device/API/review/binary gates. Record configuration/protected hashes, cache status and unchangedlock.
+- [x] Verify links/diff/index/protected state; separate author final review; precise local docs commit. No P9 completion/count promotion or remote sync.
 
 ## Execution checkpoint
 
-Design and plan author-reviewed against user constraints; tasks pending. No independent APPROVE. Automatic inline execution is explicitly requested, so routine skill approval prompts and subagent/reviewer/cleanup instructions yield to the user's instructions.
+Tasks1–3 completed as an internal preparation package:5be1b57/c9ef8ce plus documentation checkpoint; host30/30(no skips),tools126/126,generic iOSbuildpassed. Original public short-video plan remainspartial; no API/runtime/device video generation. No independent APPROVE. Automatic inline execution is explicitly requested, so routine skill approval prompts and subagent/reviewer/cleanup instructions yield to the user's instructions.

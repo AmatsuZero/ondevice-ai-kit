@@ -4,6 +4,8 @@
 
 ## 执行规则
 
+2026-10-23 P9短视频内部适配续接：`5be1b57`逐帧保留29FPS全部8帧真实pixels/顺序/CMTime，不调用上游二次采样；`c9ef8ce`真实固定tokenizer2/2，无权重加载。clip2s与sample span约1.724138s分别记录；24FPS完整tokens/pixels/mask对照上游一致。最新host30/30、tools126/126、fresh generic iOS编译通过。上游`.frames`仍8→7，原失败保留；公共API/runtime/设备视频推理未开始，snapshot额外profile/iOSdecode与旧验收门槛仍待补。下一入口补snapshot profile及iOSdecode/cancel，见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部和独立适配设计/计划。只本地提交、独立reviewpending，仍5/12、P9active。
+
 2026-10-23 P9短视频Task1：内部有界snapshot及实际pinned processor characterization已实施，host22/22、tools126/126、独立consumer generic iOS编译通过。24FPS的8帧保留并完成真实prepare；29FPS的8帧在固定上游二次采样后变7帧，原始8帧门槛实际失败。因此Task2/3暂停，不接公共video API、不改上游/伪造时间戳。下一入口先设计保留真实帧/时间语义的项目侧适配，见[短视频验证](validation/apple-mlxvlm-short-video.md)；设备推理/质量/资源与旧缺口不变，仍5/12、P9active。
 
 2026-10-23 P9短视频续接：固定模型14文件 hash/size 与12个缓存 checkout HEAD/clean 重新离线复核通过。上游有单视频 processor；`fps=1/max_frames=64` 是配置值，短片默认采样率会动态变化。项目仍无视频 API/推理证据，已完成[可行性与设计](validation/apple-mlxvlm-short-video.md)。下一 Task 先执行有界 snapshot 与固定 processor 帧/时间语义 characterization；通过后才接 typed API、Apple backend 与独立consumer。仍5/12、P9 active，binary与旧验收缺口保留。
