@@ -2,6 +2,18 @@
 
 2026-10-23。输入为 `515ec07` 分发交接及[短视频可行性](../../validation/apple-mlxvlm-short-video.md)。本轮交付源码/缓存可行性与设计；以下为下一独立实现包，不表示已交付视频能力。按用户继续 roadmap 和安全本地自动推进要求作出下列实现选择；不是独立 reviewer 的 APPROVE。
 
+## Runtime continuation decision (after c9ea298)
+
+This section supersedes the original `.frames` integration below. Original upstream29FPS8→7 gate remains failed, not fixed. Independent adapter (`5be1b57`,`c9ef8ce`) and profile/device input checks (`81ea4df`,`0b03771`) now permit native runtime integration. Pure Swift typed client completed in `c9ea298`. Current snapshot requires eight distinct real samples; two-frame clips remain rejected. Do not claim general <=5s support.
+
+Approaches considered by the author under the user's autonomous solo execution instruction: (1) duplicate video session/lease would weaken image/video exclusion; reject. (2) route a private image/video request enum through the current session and require a video method on the internal runtime; choose this, retaining one active task/relay/close barrier. (3) forward frames to old processor is already disproven; reject. No new dependencies/model/runtime/upstream changes. This is an author decision, not user design review or independent APPROVE.
+
+Video runtime lifetime: snapshot load/join → immutable frames + read-only metadata → fixed local model/tokenizer/config load → adapter.prepare inside ModelContainer.perform → TokenIterator consumes Prepared.input directly → existing generateTask cancellation + explicit producer await → snapshot.close. Every outcome, including callback cancellation, joins the producer before cleanup; session holds the model lease through runtime return and close. Input admission errors remain invalidInput, model failures runtimeFailure, cancellation wins. Reject reserved media prompt tokens and >8192UTF8/>512 output before decoding/model load.
+
+Extend public synchronous diagnostic observer only as needed: videoDecoded(metadata), videoPreparationStarted, videoPrepared(durationMs,frameCount), videoSnapshotClosed(removed). Metadata contains copied-byteSHA256, exact requested/actual rational times, true clip duration vs sample span, frame count/dimensions; no path or image bytes. Snapshot hash is from owned immutable copy. Events are diagnostic, never cleanup barriers; snapshotClosed is emitted after close and filesystem absence check. Existing modelLoaded and image behavior remain unchanged. Metadata's rational time representation is public, immutable, Sendable; no fabricated timestamps. Input pixels/token compatibility stays pinned by existing real adapter/tokenizer tests.
+
+Deliver runtime/library lifecycle as Task3a with fake-runtime session gates (explicitly not decode/model evidence), full real input host regression and fresh iOS build. Task3b then delivers opt-in consumer `--sdk-mlxvlm-video-suite` and strict report validator, followed by fixed29FPS model device success/update-cancel/samePID reentry/close. Use actual source commit/fixture+model hashes, device/OS/PID and per-run phases. Missing metadata, empty text, identity mismatch, absent cleanup/drain/lease gates or quality claims fail validation. Preserve failures. Natural temporal quality/Metal/GPU/energy/minOS remain unverified. Task3 remains incomplete until device gates actually pass; neither Task3a host tests nor build substitutes.
+
 ## Intent and constraints
 
 让原生 Swift consumer 用既有固定 SmolVLM2 500M/MLXVLM 理解单条有界本地合成短视频，同时保持单图 API、基础 iOS15/macOS12 和默认/Android unavailable 语义。增强推理继续只在 arm64 iOS18+ 物理设备运行。
