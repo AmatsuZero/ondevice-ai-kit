@@ -9,6 +9,11 @@ import kotlinx.coroutines.*
  * Update callbacks run serially under the coordination lock and must not block.
  */
 class MultimodalGenerationClient(private val defaultBackendId: String, backends: List<MultimodalGenerationBackend>) {
+    private sealed interface Request {
+        data class Image(val value: MultimodalRequest) : Request
+        data class Video(val value: MultimodalVideoRequest) : Request
+    }
+
     private class Outcome(val output: MultimodalTextOutput?, val error: Throwable?)
     private class Operation(val update: ((MultimodalTextUpdate) -> Unit)?, val callerJob: Job?) {
         lateinit var worker: Job
@@ -50,11 +55,23 @@ class MultimodalGenerationClient(private val defaultBackendId: String, backends:
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun generate(
         request: MultimodalRequest,
         backend: MultimodalBackendSelection = MultimodalBackendSelection.Default,
         update: ((MultimodalTextUpdate) -> Unit)? = null
+    ): MultimodalGenerationResult = generate(Request.Image(request), backend, update)
+
+    suspend fun generate(
+        request: MultimodalVideoRequest,
+        backend: MultimodalBackendSelection = MultimodalBackendSelection.Default,
+        update: ((MultimodalTextUpdate) -> Unit)? = null
+    ): MultimodalGenerationResult = generate(Request.Video(request), backend, update)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private suspend fun generate(
+        request: Request,
+        backend: MultimodalBackendSelection,
+        update: ((MultimodalTextUpdate) -> Unit)?
     ): MultimodalGenerationResult {
         val callerContext = currentCoroutineContext()
         callerContext.ensureActive()
@@ -66,6 +83,9 @@ class MultimodalGenerationClient(private val defaultBackendId: String, backends:
                 is MultimodalBackendSelection.Explicit -> backend.backendId
             }
             val selected = table[id] ?: throw MultimodalClientError.BackendNotRegistered(id)
+            if (request is Request.Video && selected !is MultimodalVideoGenerationBackend) {
+                throw MultimodalClientError.InvalidInput("selected backend does not support video")
+            }
             val operation = Operation(update, callerContext[Job])
             active = operation
             // ATOMIC guarantees the cleanup path even if close cancels before dispatch.
@@ -93,7 +113,7 @@ class MultimodalGenerationClient(private val defaultBackendId: String, backends:
         }
     }
 
-    private suspend fun run(request: MultimodalRequest, backend: MultimodalGenerationBackend, operation: Operation) {
+    private suspend fun run(request: Request, backend: MultimodalGenerationBackend, operation: Operation) {
         var output: MultimodalTextOutput? = null
         var error: Throwable? = null
         var started = false
@@ -108,7 +128,11 @@ class MultimodalGenerationClient(private val defaultBackendId: String, backends:
                     backend.backendId, availability.reason ?: UnavailableReason.BACKEND_NOT_LINKED)
             }
             started = true
-            output = backend.generate(request) { value -> publish(operation, value) }
+            val update: (MultimodalTextUpdate) -> Unit = { value -> publish(operation, value) }
+            output = when (request) {
+                is Request.Image -> backend.generate(request.value, update)
+                is Request.Video -> (backend as MultimodalVideoGenerationBackend).generateVideo(request.value, update)
+            }
         } catch (failure: Throwable) { error = failure }
         withContext(NonCancellable) {
             if (started) {

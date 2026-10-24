@@ -12,6 +12,14 @@ data class MultimodalRequest(val imageFile: File, val prompt: String, val maxOut
     }
 }
 
+/** Value validation only; video support and accepted media profiles are backend-specific. */
+data class MultimodalVideoRequest(val videoFile: File, val prompt: String, val maxOutputTokens: Int = 128) {
+    init {
+        if (prompt.isBlank()) throw MultimodalClientError.InvalidInput("prompt must not be blank")
+        if (maxOutputTokens <= 0) throw MultimodalClientError.InvalidInput("output budget must be positive")
+    }
+}
+
 data class MultimodalModelIdentity(val modelId: String, val modelRevision: String, val runtimeRevision: String) {
     init {
         if (listOf(modelId, modelRevision, runtimeRevision).any { it.isBlank() }) {
@@ -46,6 +54,14 @@ interface MultimodalGenerationBackend {
     suspend fun generate(request: MultimodalRequest, update: ((MultimodalTextUpdate) -> Unit)? = null): MultimodalTextOutput
     suspend fun drain()
     suspend fun close()
+}
+
+/** Explicit video opt-in; general backend availability does not promise video support.
+ * Image and video share the owning client's operation and cleanup barriers.
+ */
+interface MultimodalVideoGenerationBackend : MultimodalGenerationBackend {
+    suspend fun generateVideo(request: MultimodalVideoRequest,
+                              update: ((MultimodalTextUpdate) -> Unit)? = null): MultimodalTextOutput
 }
 
 data class MultimodalBackendDescriptor(val backendId: String, val availability: CapabilityAvailability)
