@@ -2,6 +2,14 @@
 
 2026-10-23。建议在新会话开始下一独立包，本文件是恢复入口，不是整个项目完成结论。 最新状态见下方“固定 MLXVLM 短视频可行性”的native设备完成检查点；上面的分发段保留历史。
 
+## 最新续接 — 2026-10-24 Android 视频契约对等
+
+优先于下方全部历史下一步：设计333e414、typed API/client bd52496、callback测试修正f2f7bd1、consumer2164ebd。本包35/35（video13+旧client12+bridge10），完整Android725tasks/452JUnit、tools133/133；模块lint/KMPAndroidcompile通过，新localMavenAAR/sourceJar/javap及fresh独立Kotlin2.4 consumer45tasks assemble/lint通过。callback异常引用assertSame失败后误commit不是通过证据，f2f7bd1修正语义后全GREEN；独立consumer起初2.2metadata失败保留，对齐既有2.4后通过，未关闭检查/下载。Android仍无真实后端，未读媒体/运行设备/改KMPbridge或Demo。详见[Android视频契约验证](validation/android-multimodal-video-contract.md)和同名spec/plan/ledger。
+
+下一独立包为KMPtypedvideo/opaqueinput桥接设计实施，之后再Demo/picker；不要重复已完成Swift/Android native包。原Apple设备链路与所有质量/资源/binary/minOS/短样本/旧UI/P6/独立reviewpending缺口不变，仍5/12/P9active。HEAD以git为准；仅本地提交、2保护文件hash/state/index未变。
+
+用户本次“同步代码，然后继续”授权冻结同步05c67d2。sync-remotes两次因jihu SSL_ERROR_SYSCALL/reset预检失败，独立重查/HTTP1.1也失败；无任何push。GitHubfresh仍eb1287d，jihu fresh未知，双远端同步pending。初始runtimeledger remote-sync-20261024日志与Androidledger sync-jihu-recheck.log保留，未改网络/签名/凭据。继续实现后的新Android包默认本地，不自动追push。
+
 ## 最新续接 — 可搬移 source 分发与 binary 门槛
 
 - 已从下述b988742基线续接；设计/计划cf342a1、source generator实现b8acaa3，最后精确HEAD以git为准。新增[分发验证](validation/apple-mlxvlm-distribution.md)和对应spec/plan/本地ledger；**不重做本包**。

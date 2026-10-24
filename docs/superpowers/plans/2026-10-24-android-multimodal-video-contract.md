@@ -7,6 +7,8 @@
 **Tech Stack:** existing Kotlin2.4/Android API26/JDK21/coroutines1.10.2/JUnit/Gradle offline.
 **Spec:** `docs/superpowers/specs/2026-10-24-android-multimodal-video-contract-design.md`
 
+**Execution checkpoint:** Tasks1–3 complete in localcontract/distribution scope. SDKbd52496, callbacktestfixf2f7bd1, consumer2164ebd. Module35/35; fullAndroid725tasks/452tests, tools133/133; sourceconsumer/localpublish366tasks, isolatedMavenKotlin2.4consumer45tasks. Failedcallbackidentityassertion/prematurecommit andinitial2.2metadata attemptretained. Independentreviewpending, Androidrealinferenceunverified. Initialsync05c67d2remainspendingjihuTLS/resetpreflight, no push. Next independentKMPvideo design.
+
 ## Global constraints
 
 No new dependencies/models/runtime/upstream edits, minSDK26 unchanged, original two protected files untouched. All commands rtk, Gradle existing local helper --offline; fulltools explicitRuby3.4.11. No generation/backend/device/quality/release claims. No push after initial synchronization unless requested. Preserve failures/ledger/artifacts. Independent review pending;5/12/P9active.
@@ -24,22 +26,22 @@ No new dependencies/models/runtime/upstream edits, minSDK26 unchanged, original 
 **Files:** modify android/multimodal/src/main/kotlin/io/ondeviceai/multimodal/{MultimodalContracts,MultimodalGenerationClient}.kt; create test counterpart MultimodalVideoClientTest.kt.
 **Interfaces:** data class MultimodalVideoRequest(val videoFile:File,val prompt:String,val maxOutputTokens:Int=128); interface MultimodalVideoGenerationBackend:MultimodalGenerationBackend with suspend fun generateVideo(request:MultimodalVideoRequest,update:((MultimodalTextUpdate)->Unit)?=null):MultimodalTextOutput; client suspend generate(videoRequest,backend=Default,update=null):MultimodalGenerationResult.
 
-- [ ] Write deterministic behavioral tests described in spec using cancellation-ignoring external backend gates and real client; assert selected request/output/drain, no I/O and legacy0queries, bidirectionalbusy, both modality reentry, callback identity, cancelledclose/querybarrier. Capture missingAPI RED via `rtk proxy python3 scripts/gradle-local.py --offline :android:multimodal:testDebugUnitTest --tests io.ondeviceai.multimodal.MultimodalVideoClientTest --console=plain`.
-- [ ] Add values/optional interface, route overload through private sealed request, conformance check under existing lock. Preserve old worker/cancellation/close/publish/drain code other than request dispatch.
-- [ ] Run focused GREEN then full module tests/lint plus KMP Android compile offline, capture XML counts. Author scope review, protecthash/index checks, exact local code commit.
+- [x] Write deterministic behavioral tests described in spec using cancellation-ignoring external backend gates and real client; assert selected request/output/drain, no I/O and legacy0queries, bidirectionalbusy, both modality reentry, callback identity, cancelledclose/querybarrier. Capture missingAPI RED via `rtk proxy python3 scripts/gradle-local.py --offline :android:multimodal:testDebugUnitTest --tests io.ondeviceai.multimodal.MultimodalVideoClientTest --console=plain`.
+- [x] Add values/optional interface, route overload through private sealed request, conformance check under existing lock. Preserve old worker/cancellation/close/publish/drain code other than request dispatch.
+- [x] Run focused GREEN then full module tests/lint plus KMP Android compile offline, capture XML counts. Author scope review, protecthash/index checks, exact local code commit.
 
 ### Task 2: Native consumer and local distribution
 
 **Files:** modify examples/android-multimodal-native/src/main/kotlin/io/ondeviceai/example/multimodal/MainActivity.kt (compile/link only); ledger-owned generated isolated Maven project under artifacts/verification/android-multimodal-video-contract-20261024/.
 **Interfaces:** nativeconsumer explicitlyunavailablevideo stub, constructs both requests/compilesboth generate overloads in unused suspend probe. Isolatedconsumer uses local Maven Core+Multimodal0.1.0-SNAPSHOT only; existing AGP/Kotlin/cache.
 
-- [ ] Extend consumer compile surface before publishing: compile real new request/interface/overload in sourceconsumer, retain no autogeneration. Run assemble/lint offline, expected BUILD SUCCESSFUL.
-- [ ] Build release AAR/sourceJar via local publish tasks; record SHA256/typeentries/POM dependencies. Generate fresh outside-root Gradle project with only localMaven coordinates and same fixed pluginversions; compile public image/video API from actual AAR, expected BUILD SUCCESSFUL, runtime graph no projectSDK/model deps. No remote Maven publication.
-- [ ] Run existing complete Androidverify task list offline and fulltools explicitRuby, pycompile/diffcheck. Author scope review and exact local consumercommit; report exact task/test counts, no deviceclaim.
+- [x] Extend consumer compile surface before publishing: compile real new request/interface/overload in sourceconsumer, retain no autogeneration. Run assemble/lint offline, expected BUILD SUCCESSFUL.
+- [x] Build release AAR/sourceJar via local publish tasks; record SHA256/typeentries/POM dependencies. Generate fresh outside-root Gradle project with only localMaven coordinates and same fixed pluginversions; compile public image/video API from actual AAR, expected BUILD SUCCESSFUL, runtime graph no projectSDK/model deps. No remote Maven publication.
+- [x] Run existing complete Androidverify task list offline and fulltools explicitRuby, pycompile/diffcheck. Author scope review and exact local consumercommit; report exact task/test counts, no deviceclaim.
 
 ### Task 3: Recovery checkpoint
 
 **Files:** new docs/validation/android-multimodal-video-contract.md, ROADMAP/handoff/current plan, ledger checks/finalreview.
 
-- [ ] Record actual RED/GREEN/build/lint/Maven evidence, hashes, sourcecommits and authorselfreview; preserve pending independentreview and all roadmapgaps. Record initialsync outcome accurately; no inference from failedtransport.
-- [ ] Verify protectedhash/index, docslinks, committedsource versus artifact hashes anddiffcheck; localdocscommit, continue next independent KMPdesign only after this parity package gates pass.
+- [x] Record actual RED/GREEN/build/lint/Maven evidence, hashes, sourcecommits and authorselfreview; preserve pending independentreview and all roadmapgaps. Record initialsync outcome accurately; no inference from failedtransport.
+- [x] Verify protectedhash/index, docslinks, committedsource versus artifact hashes anddiffcheck; localdocscommit, continue next independent KMPdesign only after this parity package gates pass.
