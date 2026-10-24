@@ -9,6 +9,81 @@ import org.junit.rules.TemporaryFolder
 class MultimodalInputStoreTest {
     @get:Rule val temporary = TemporaryFolder()
 
+    @Test fun cancelledImportReclaimsPartialCopy() {
+        val directory = temporary.root.resolve("cancelled")
+        val store = MultimodalInputStore(directory)
+        val source = temporary.newFile().apply { writeBytes(ByteArray(128 * 1024) { 7 }) }
+        var checkpoints = 0
+        assertFailsWith<java.util.concurrent.CancellationException> {
+            store.importImage(source) {
+                if (++checkpoints == 3) throw java.util.concurrent.CancellationException()
+            }
+        }
+        assertTrue(checkpoints >= 3)
+        assertTrue(directory.listFiles()!!.isEmpty())
+        assertEquals(128 * 1024, source.length().toInt())
+        store.close()
+        assertFalse(directory.exists())
+    }
+
+    @Test fun closeDoesNotWaitForBlockedCopyAndCopyCannotPublishAfterClose() {
+        val directory = temporary.root.resolve("inflight")
+        val store = MultimodalInputStore(directory)
+        val source = temporary.newFile().apply { writeText("fixture") }
+        val entered = java.util.concurrent.CountDownLatch(1)
+        val resume = java.util.concurrent.CountDownLatch(1)
+        val existing = store.importImage(source)
+        val lease = store.acquire(existing)
+        val closed = java.util.concurrent.CountDownLatch(1)
+        val outcome = java.util.concurrent.atomic.AtomicReference<Throwable?>()
+        val worker = Thread {
+            try {
+                var checkpoints = 0
+                store.importImage(source) {
+                    if (++checkpoints == 2) {
+                        entered.countDown()
+                        check(resume.await(5, java.util.concurrent.TimeUnit.SECONDS))
+                    }
+                }
+            } catch (error: Throwable) { outcome.set(error) }
+        }
+        worker.start()
+        var closer: Thread? = null
+        try {
+            assertTrue(entered.await(5, java.util.concurrent.TimeUnit.SECONDS))
+            closer = Thread { try { store.close() } finally { closed.countDown() } }
+            closer.start()
+            assertTrue(closed.await(2, java.util.concurrent.TimeUnit.SECONDS), "close must not wait for copy")
+            assertTrue(directory.exists(), "in-flight copy owns its directory until join")
+            assertEquals("fixture", lease.file.readText())
+            runBlocking { lease.release() }
+            assertFalse(lease.file.exists())
+            assertTrue(directory.exists(), "worker, not the released lease, keeps the directory alive")
+            assertFails { store.importImage(source) }
+        } finally {
+            resume.countDown()
+            worker.join(5000)
+            closer?.join(5000)
+        }
+        assertFalse(worker.isAlive)
+        assertNotNull(outcome.get(), "closed store must reject import publication")
+        assertFalse(directory.exists())
+        assertEquals("fixture", source.readText())
+    }
+
+    @Test fun emptyAndOversizedImportsLeaveNoPartialFiles() {
+        val directory = temporary.root.resolve("bounded")
+        val store = MultimodalInputStore(directory, maxBytes = 4)
+        val source = temporary.newFile("bounded-source")
+        assertFails { store.importImage(source) }
+        source.writeText("12345")
+        assertFails { store.importImage(source) }
+        assertTrue(directory.listFiles()!!.isEmpty())
+        source.writeText("1234")
+        assertNotNull(store.importImage(source))
+        store.close()
+    }
+
     @Test fun importedBytesArePrivateAndReferencesAreOpaque() = runBlocking {
         val source = temporary.newFile("source.png").apply { writeText("synthetic-before") }
         val directory = temporary.root.resolve("owned")

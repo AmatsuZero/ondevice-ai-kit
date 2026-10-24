@@ -72,7 +72,9 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
             do {
                 let picker = MultimodalFilePicker()
                 multimodalPicker = picker
-                multimodalHost = MultimodalHost(store: try MultimodalInputStore(), picker: { picker.present(reply: $0) })
+                multimodalHost = MultimodalHost(store: try MultimodalInputStore(),
+                    videoStore: try MultimodalInputStore(), videoPicker: { picker.presentVideo(reply: $0) },
+                    picker: { picker.present(reply: $0) })
                 #if ODAI_MULTIMODAL_MLX_DEMO
                 if ProcessInfo.processInfo.arguments.contains("--multimodal-mlx-local-model") {
                     multimodalPreparing = true

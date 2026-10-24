@@ -6,3 +6,8 @@ interface MultimodalDemoActions {
     fun clearImageFile()
     fun leaveMultimodalPage()
 }
+
+/** Optional video selection; existing image-only hosts remain source compatible. */
+interface MultimodalVideoDemoActions : MultimodalDemoActions {
+    fun selectVideoFile()
+}

@@ -67,8 +67,14 @@ final class IOSMultimodalBridgeTests: XCTestCase {
     await fulfillment(of: [capture.done], timeout: 3)
     XCTAssertTrue(capture.cancelled)
     XCTAssertEqual(f.inputs.releases, 1)
+    let terminalUpdates = capture.updates
     await f.backend.emit(sequence: 99)
-    XCTAssertEqual(capture.updates, [2])
+    // Delivery hops can admit 1 before 2 even though the backend emits 2 first.
+    // Both [2] and [1, 2] satisfy monotonic filtering; no post-terminal update may arrive.
+    XCTAssertEqual(terminalUpdates.last, 2)
+    XCTAssertTrue(zip(terminalUpdates, terminalUpdates.dropFirst()).allSatisfy { $0 < $1 })
+    for _ in 0..<20 { await Task.yield() }
+    XCTAssertEqual(capture.updates, terminalUpdates)
     await f.close(self)
   }
 

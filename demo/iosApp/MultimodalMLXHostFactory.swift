@@ -18,6 +18,9 @@ enum MultimodalMLXHostFactory {
       source: documents.appendingPathComponent("model"),
       inputDirectory: FileManager.default.temporaryDirectory.appendingPathComponent(
         "odai-multimodal-input-" + UUID().uuidString),
+      videoInputDirectory: FileManager.default.temporaryDirectory.appendingPathComponent(
+        "odai-multimodal-video-" + UUID().uuidString),
+      videoPicker: { picker.presentVideo(reply: $0) },
       picker: { picker.present(reply: $0) }, backend: { try MLXVLMBackend(lease: $0) })
   }
 }

@@ -2,6 +2,20 @@
 
 2026-10-23。建议在新会话开始下一独立包，本文件是恢复入口，不是整个项目完成结论。 最新状态见下方“固定 MLXVLM 短视频可行性”的native设备完成检查点；上面的分发段保留历史。
 
+## 最新续接 — 2026-10-24 双端异步输入提交检查点
+
+双端生产host已接异步最终复制及取消/晚到回收；Android Activity临时source经join保活，iOS detached worker/MainActor registry持有inflight目录与安全域直到worker退出。Android34/34、生产接线APK/lint通过；主会话完整iOS Demo ABI67/67。详见validation/multimodal-video-demo.md新增节。仍缺当前版本真机picker/UI、增强MLX整App、KMP视频权重闭环及独立review，5/12、P9active。用户本次明确授权将当前变更提交到feat/sdk-foundation并推送GitHub/GitLab；两个保护文件排除。提交与远端同步精确结果以后续git证据为准，下方未提交描述为历史状态。
+
+## 最新续接 — 2026-10-24 可取消 store 前置检查点
+
+后续已先解决Android store整段复制持锁问题：in-flight目录所有权、锁外逐块copy/checkpoint、close后拒绝publish、部分副本清理。2新测试真实缺checkpoint API编译RED→GREEN，增强旧lease+blocked worker断言后offline Demo31/31、assembleDebug/lintDebug成功。验证与原始GREEN log见multimodal-video-demo.md新增节。尚未改双端host异步调用；下一接Android staging任务与picker临时source存活/join，再Apple worker/MainActor分离。当前HEAD仍8d2cd9c，全部未提交、无新push/设备操作；保护hash不变。不是P9收口，仍5/12、P9active。
+
+## 最新续接 — 2026-10-24 视频 Demo 输入检查点
+
+用户已确认独立双store/共享状态机方案。新增shared媒体类型与视频分派、可选video actions/UI、双端host/picker独立store、32MiB有界私有复制及Apple factory videoInputs接线。当前均未提交/未push。shared64/64、Android Demo29/29及assemble/lint通过；Swift Demo ABI59/59、独立基础Demo simulator build通过。tools标准命令受清单sandbox阻断，进程内仅对dump-package加--disable-sandbox后133/133；完整说明见[本轮验证](validation/multimodal-video-demo.md)。旧图片测试异步序列断言[2]偶发失败，改验合法单调序列及terminal后不更新，产品bridge未改。两保护hash/index不变。
+
+不称本包完全收口：host最终复制仍UI同步有界，异步stager/显式导入中取消待补；增强MLX整App、Binding-only ABI、全Android modules、本轮UI实操及KMP到固定权重设备视频未验。下一先作者差异复核/独立review与增强编译及stager，再另包设备链路；5/12、P9active、原质量/资源/minOS/binary/picker等缺口保留。
+
 ## 最新续接 — 2026-10-24 KMP 视频 bridge
 
 优先于下方历史下一步：设计e5a91a7、common447a7d5、Android0a84af6、Apple/generator2a1757d。optionalMultimodalVideoBridge/typedvideoDTO，原imageprotocol不加requirement；两端单独可选videoInputs默认nil/null，不借图片provider解析，image/video共用既有任务/nativeclient/drain/release/close。common24/24；Android模块48/48、完整725tasks/465JUnit；SwiftBinding23/23、Demo55/55、旧VideoABI6/6，xcresult0fail/skip；tools133/133、swiftformatstrict/Pythoncompile/diffcheck通过。中间common/JUnit/generatorfixture失败及所有logs留档，详见[视频bridge验证](validation/multimodal-video-bridge.md)、同名spec/plan/ledger。作者自审，独立reviewpending。

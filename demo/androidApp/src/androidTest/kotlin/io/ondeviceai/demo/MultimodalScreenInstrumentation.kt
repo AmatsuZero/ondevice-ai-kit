@@ -54,7 +54,7 @@ class MultimodalScreenInstrumentation : Instrumentation() {
             stage = "unavailable-no-input-generate"
             node { it.viewIdResourceName == "multimodal-generate" && !it.isEnabled }
             stage = "unavailable-input-name"
-            check(node("multimodal-input").text?.toString() == "尚未选择图片") { "initial input name" }
+            check(node("multimodal-input").text?.toString() == "尚未选择输入") { "initial input name" }
             runOnMainSync { unavailable.selectImage("synthetic-opaque", "synthetic.png") }
             stage = "unavailable-generate"
             node { it.viewIdResourceName == "multimodal-generate" && it.isEnabled }
@@ -174,6 +174,35 @@ class MultimodalScreenInstrumentation : Instrumentation() {
             runOnMainSync { inputReply!!(source); check(inputHost.model.state.inputReference == null); inputHost.close() }
             check(source.delete()); check(!inputDirectory.exists())
             result.putString("inputActions", "passed-real-host-select-clear-leave-filter")
+            stage = "video-host-input-actions"
+            val videoDirectory = java.io.File(activity.cacheDir, "multimodal-video-ui-${java.util.UUID.randomUUID()}")
+            val imageDirectory = java.io.File(activity.cacheDir, "multimodal-image-ui-${java.util.UUID.randomUUID()}")
+            val videoSource = java.io.File.createTempFile("synthetic-video-", ".mp4", activity.cacheDir).apply { writeBytes(byteArrayOf(1, 2, 3)) }
+            var videoReply: ((java.io.File?) -> Unit)? = null
+            lateinit var videoInputHost: MultimodalHost
+            lateinit var images: MultimodalInputStore
+            runOnMainSync {
+                images = MultimodalInputStore(imageDirectory)
+                videoInputHost = MultimodalHost(images, selectFile = { _, _ -> error("video must not use image picker") },
+                    videoStore = MultimodalInputStore(videoDirectory), selectVideo = { callback, _ -> videoReply = callback })
+            }
+            show(videoInputHost.model, inputActions = videoInputHost)
+            click("multimodal-tab")
+            click("multimodal-select-video")
+            runOnMainSync {
+                check(videoReply != null); videoReply!!(videoSource)
+                check(videoInputHost.model.state.inputKind == MultimodalInputKind.VIDEO)
+                val token = checkNotNull(videoInputHost.model.state.inputReference)
+                check(runCatching { images.acquire(token) }.isFailure)
+            }
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.contains(videoSource.name) == true }
+            click("multimodal-generate")
+            node { it.viewIdResourceName == "multimodal-failure" && it.text?.contains("BACKEND_UNAVAILABLE") == true }
+            click("multimodal-clear-input")
+            await { videoInputHost.model.state.inputReference == null }
+            runOnMainSync { videoInputHost.close() }
+            check(videoSource.delete()); check(!videoDirectory.exists()); check(!imageDirectory.exists())
+            result.putString("videoInputActions", "passed-video-select-isolation-unavailable-clear-cleanup-synthetic-bytes-only")
             result.putString("inference", "unverified-ui-fixture-only")
             result.putString("status", "passed")
         } catch (error: Throwable) {

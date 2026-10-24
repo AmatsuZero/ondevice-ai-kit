@@ -24,7 +24,9 @@ fun MultimodalScreen(model: MultimodalViewModel, actions: MultimodalDemoActions?
     val keyboardActions = KeyboardActions(onDone = { focus.clearFocus() })
     LaunchedEffect(model) { model.refreshBackends() }
 
-    Text("图像理解 · 单图", style = MaterialTheme.typography.titleMedium)
+    Text(if (state.inputKind == MultimodalInputKind.VIDEO) "视频理解 · 实验性单视频" else "图像理解 · 单图",
+        style = MaterialTheme.typography.titleMedium)
+    if (state.inputKind == MultimodalInputKind.VIDEO) Text("视频支持取决于所选后端及输入规格；后端可用不代表视频可用。")
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = { model.selectBackend(MultimodalBridgeSelection.Default) }, enabled = state.controlsEnabled,
             modifier = Modifier.testTag("multimodal-default")) { Text(if (explicit == null) "默认 ✓" else "使用默认后端") }
@@ -41,13 +43,15 @@ fun MultimodalScreen(model: MultimodalViewModel, actions: MultimodalDemoActions?
     }.ifEmpty { "尚无后端列表" }, Modifier.testTag("multimodal-backends"))
     state.queryFailure?.let { Text("查询：${failureText(it)}", Modifier.testTag("multimodal-query-failure"), color = MaterialTheme.colorScheme.error) }
 
-    Text(state.inputDisplayName ?: if (state.inputReference == null) "尚未选择图片" else "已选择图片",
+    Text(state.inputDisplayName ?: if (state.inputReference == null) "尚未选择输入" else "已选择输入",
         Modifier.testTag("multimodal-input"))
     if (actions != null) Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = actions::selectImageFile, enabled = state.controlsEnabled,
             modifier = Modifier.testTag("multimodal-select-input")) { Text("选择图片") }
+        if (actions is MultimodalVideoDemoActions) TextButton(onClick = actions::selectVideoFile,
+            enabled = state.controlsEnabled, modifier = Modifier.testTag("multimodal-select-video")) { Text("选择视频") }
         TextButton(onClick = actions::clearImageFile, enabled = !state.closed && state.inputReference != null,
-            modifier = Modifier.testTag("multimodal-clear-input")) { Text("清除图片") }
+            modifier = Modifier.testTag("multimodal-clear-input")) { Text("清除输入") }
     } else Text("图片输入由宿主提供")
     OutlinedTextField(state.prompt, model::setPrompt, label = { Text("原始 prompt") }, enabled = state.controlsEnabled,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done), keyboardActions = keyboardActions,

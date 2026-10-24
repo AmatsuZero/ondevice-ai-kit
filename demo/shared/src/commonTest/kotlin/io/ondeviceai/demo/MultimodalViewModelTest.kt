@@ -4,6 +4,52 @@ import io.ondeviceai.binding.*
 import kotlin.test.*
 
 class MultimodalViewModelTest {
+    @Test fun videoPreservesRawFieldsAndNeverUsesImageEntrypoint() {
+        val bridge = VideoControlledBridge(); val model = MultimodalViewModel(bridge)
+        model.selectVideo("opaque-video", "clip.mp4")
+        model.setPrompt(" Describe motion. \n"); model.setTokenBudget("37")
+        model.selectBackend(MultimodalBridgeSelection.Explicit(" strict.video "))
+        model.generate()
+        assertEquals(MultimodalInputKind.VIDEO, model.state.inputKind)
+        assertEquals(MultimodalBridgeVideoRequest("opaque-video", " Describe motion. \n", 37), bridge.videoRequests.single())
+        assertEquals(MultimodalBridgeSelection.Explicit(" strict.video "), bridge.videoSelections.single())
+        assertTrue(bridge.images.requests.isEmpty())
+        bridge.videoCallbacks.single().onMultimodalResult(output())
+        assertEquals(MultimodalPhase.SUCCEEDED, model.state.phase)
+    }
+
+    @Test fun sameTokenMediaSwitchCancelsAndWaitsForTerminal() {
+        val bridge = VideoControlledBridge(); val model = MultimodalViewModel(bridge)
+        model.selectVideo("same", null); model.generate()
+        model.selectImage("same", "image.png")
+        assertEquals(1, bridge.videoTask.cancels)
+        assertEquals(MultimodalPhase.CANCELLING, model.state.phase)
+        model.generate(); assertTrue(bridge.images.requests.isEmpty())
+        bridge.videoCallbacks.single().onMultimodalResult(output())
+        assertNull(model.state.output)
+        model.generate(); assertEquals("same", bridge.images.requests.single().inputReference)
+        assertEquals(MultimodalInputKind.IMAGE, model.state.inputKind)
+    }
+
+    @Test fun legacyBridgeRejectsVideoWithoutImageFallback() {
+        val bridge = ControlledMultimodalBridge(); val model = MultimodalViewModel(bridge)
+        model.selectVideo("video", null); model.generate()
+        assertEquals(MultimodalPhase.FAILED, model.state.phase)
+        assertEquals(MultimodalBridgeFailureCode.BACKEND_UNAVAILABLE, model.state.failure?.code)
+        assertTrue(bridge.requests.isEmpty()); assertTrue(model.state.controlsEnabled)
+    }
+
+    @Test fun synchronousVideoTerminalDoesNotRetainHandleAndClosedSelectionIsIgnored() {
+        val bridge = VideoControlledBridge().apply { sync = true }; val model = MultimodalViewModel(bridge)
+        model.selectVideo("video", "clip"); model.generate(); model.cancel()
+        assertEquals(MultimodalPhase.SUCCEEDED, model.state.phase)
+        assertEquals(0, bridge.videoTask.cancels)
+        model.selectVideo(null, "stale"); assertNull(model.state.inputDisplayName)
+        assertFalse(model.state.canGenerate)
+        model.close(); model.selectVideo("late", "late")
+        assertNull(model.state.inputReference)
+    }
+
     @Test fun invalidRequestsNeverReachBridgeAndValidRequestPreservesRawFields() {
         val bridge = ControlledMultimodalBridge()
         val model = MultimodalViewModel(bridge)
@@ -191,6 +237,21 @@ class MultimodalViewModelTest {
 private fun output() = MultimodalBridgeOutput("actual.backend", "A red square.",
     MultimodalBridgeIdentity("fixture", "r1", "runtime1"))
 private fun platformFailure() = MultimodalBridgeFailure(MultimodalBridgeFailureCode.PLATFORM, null, "test.multimodal", 1)
+private class VideoControlledBridge(
+    val images: ControlledMultimodalBridge = ControlledMultimodalBridge()
+) : MultimodalBridge by images, MultimodalVideoBridge {
+    var sync = false
+    val videoRequests = mutableListOf<MultimodalBridgeVideoRequest>()
+    val videoSelections = mutableListOf<MultimodalBridgeSelection>()
+    val videoCallbacks = mutableListOf<MultimodalBridgeGenerateCallback>()
+    val videoTask = ControlledTask()
+    override fun generateMultimodalVideo(request: MultimodalBridgeVideoRequest, selection: MultimodalBridgeSelection,
+                                         callback: MultimodalBridgeGenerateCallback): BridgeTask {
+        videoRequests += request; videoSelections += selection; videoCallbacks += callback
+        if (sync) callback.onMultimodalResult(output())
+        return videoTask
+    }
+}
 private class ControlledTask : BridgeTask { var cancels = 0; override fun cancel() { cancels++ } }
 /** Only the platform boundary is controlled; tests assert real ViewModel state. */
 private class ControlledMultimodalBridge : MultimodalBridge {

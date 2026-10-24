@@ -7,6 +7,8 @@ import ODAIKitMultimodal
 enum MultimodalModelHostFactory {
   static func make(
     modelStore: ModelStore, manifest: ModelManifest, source: URL, inputDirectory: URL,
+    videoInputDirectory: URL? = nil,
+    videoPicker: ((@escaping (URL?) -> Void) throws -> Void)? = nil,
     picker: @escaping (@escaping (URL?) -> Void) throws -> Void,
     backend build: (ModelLease) throws -> any MultimodalGenerationBackend
   ) async throws -> MultimodalHost {
@@ -34,8 +36,16 @@ enum MultimodalModelHostFactory {
     do {
       try Task.checkCancellation()
       let inputs = try MultimodalInputStore(directory: inputDirectory)
-      let bridge = IOSMultimodalBridge(client: client, inputs: inputs)
-      return MultimodalHost(store: inputs, bridge: bridge, picker: picker)
+      do {
+        let videos = try videoInputDirectory.map { try MultimodalInputStore(directory: $0) }
+        let bridge = IOSMultimodalBridge(client: client, inputs: inputs, videoInputs: videos)
+        return MultimodalHost(
+          store: inputs, bridge: bridge, videoStore: videos,
+          videoPicker: videoPicker, picker: picker)
+      } catch {
+        inputs.close()
+        throw error
+      }
     } catch {
       await client.close()
       throw error

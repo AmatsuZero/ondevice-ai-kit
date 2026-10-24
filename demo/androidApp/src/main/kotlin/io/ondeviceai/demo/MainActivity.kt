@@ -71,8 +71,13 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                         } ?: "selected-image"
                         val copy = MultimodalPickerCopy.create(File(cacheDir, "multimodal-picker-${UUID.randomUUID()}"), name,
                             open = { checkNotNull(contentResolver.openInputStream(uri)) }, checkpoint = { ensureActive() })
-                        try { withContext(Dispatchers.Main.immediate) { reply(copy.file) } }
-                        finally { copy.close() }
+                        try {
+                            withContext(Dispatchers.Main.immediate) {
+                                reply(copy.file)
+                                // The host's second private copy is asynchronous. Keep this source until joined.
+                                withContext(NonCancellable) { multimodalHost?.awaitImports() }
+                            }
+                        } finally { copy.close() }
                     }
                 } catch (error: CancellationException) { throw error }
                 catch (_: Exception) { failure?.invoke() }
@@ -114,16 +119,21 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         bridge=AndroidFaceBridge(detector,lifecycleScope){result=it};model=FaceViewModel(bridge)
         videoHost = VideoHost(selectFile = { reply -> videoPickerReply = reply; videoPicker.launch("video/*") })
         if (intent.getBooleanExtra("odai.multimodal.enabled", false)) {
-            multimodalHost = MultimodalHost(MultimodalInputStore(File(cacheDir, "multimodal-input-${UUID.randomUUID()}")),
-                selectFile = { reply, failure ->
+            val selectMultimodal: (String, (File?) -> Unit, () -> Unit) -> Unit = { mime, reply, failure ->
                     if (multimodalPickerReply != null || multimodalImport?.isActive == true) reply(null)
                     else {
                         multimodalPickerReply = reply
                         multimodalPickerFailure = failure
-                        try { multimodalPicker.launch("image/*") }
+                        try { multimodalPicker.launch(mime) }
                         catch (error: Exception) { multimodalPickerReply = null; multimodalPickerFailure = null; throw error }
                     }
-                })
+            }
+            multimodalHost = MultimodalHost(
+                MultimodalInputStore(File(cacheDir, "multimodal-input-${UUID.randomUUID()}")),
+                selectFile = { reply, failure -> selectMultimodal("image/*", reply, failure) },
+                videoStore = MultimodalInputStore(File(cacheDir, "multimodal-video-${UUID.randomUUID()}")),
+                selectVideo = { reply, failure -> selectMultimodal("video/*", reply, failure) },
+                importScope = lifecycleScope)
         }
         speechHost = SpeechHost(lifecycleScope,
             createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },

@@ -14,13 +14,15 @@ final class MultimodalFilePicker: NSObject, UIDocumentPickerDelegate {
     super.init()
   }
 
-  func present(reply: @escaping (URL?) -> Void) {
+  func present(reply: @escaping (URL?) -> Void) { present(types: [.png, .jpeg], reply: reply) }
+  func presentVideo(reply: @escaping (URL?) -> Void) { present(types: [.movie], reply: reply) }
+  private func present(types: [UTType], reply: @escaping (URL?) -> Void) {
     guard !closed, self.reply == nil else {
       reply(nil)
       return
     }
     let controller = UIDocumentPickerViewController(
-      forOpeningContentTypes: [.png, .jpeg], asCopy: false)
+      forOpeningContentTypes: types, asCopy: false)
     controller.allowsMultipleSelection = false
     controller.delegate = self
     self.controller = controller

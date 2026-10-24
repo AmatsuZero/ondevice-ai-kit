@@ -12,41 +12,72 @@ import java.nio.file.StandardOpenOption.READ
 import java.nio.file.StandardOpenOption.WRITE
 import java.util.UUID
 
-/** Host-owned private copies. Image decoding and bounded admission belong to the backend. */
-class MultimodalInputStore(private val directory: File) : AndroidMultimodalInputProvider {
+/** Host-owned bounded private copies; media decoding belongs to the backend. */
+class MultimodalInputStore(private val directory: File, private val maxBytes: Long = 32L * 1024 * 1024) : AndroidMultimodalInputProvider {
     private val lock = Any()
     private val entries = mutableMapOf<String, Entry>()
     private var closed = false
+    private var imports = 0
 
     init {
         // Never adopt an existing directory, including an empty directory or a symlink.
+        require(maxBytes > 0)
         Files.createDirectory(directory.toPath())
     }
 
-    fun importImage(source: File): String = synchronized(lock) {
-        check(!closed) { "Input store is closed" }
-        require(Files.isRegularFile(source.toPath(), NOFOLLOW_LINKS)) { "Regular file required" }
+    fun importImage(source: File, checkpoint: () -> Unit = {}): String {
         val reference = UUID.randomUUID().toString()
         val destination = directory.resolve(reference)
+        synchronized(lock) {
+            check(!closed) { "Input store is closed" }
+            imports++ // Keeps the directory alive while copying outside the registry lock.
+        }
+        fun checkActive() {
+            checkpoint()
+            synchronized(lock) { check(!closed) { "Input store is closed" } }
+        }
         var created = false
         try {
+            checkActive()
+            require(Files.isRegularFile(source.toPath(), NOFOLLOW_LINKS)) { "Regular file required" }
             // NOFOLLOW on the opened handle also rejects a final-component symlink swap.
             Files.newByteChannel(source.toPath(), setOf(READ, NOFOLLOW_LINKS)).use { channel ->
                 Files.newOutputStream(destination.toPath(), CREATE_NEW, WRITE).use { output ->
                     created = true
-                    Channels.newInputStream(channel).use { input -> input.copyTo(output) }
+                    Channels.newInputStream(channel).use { input ->
+                        val buffer = ByteArray(64 * 1024)
+                        var total = 0L
+                        while (true) {
+                            checkActive()
+                            val count = input.read(buffer)
+                            if (count < 0) break
+                            require(count.toLong() <= maxBytes - total) { "Input too large" }
+                            output.write(buffer, 0, count)
+                            total += count
+                        }
+                        require(total > 0) { "Empty input" }
+                    }
                 }
             }
-        } catch (error: Exception) {
-            if (created) {
+            checkActive()
+            return synchronized(lock) {
+                check(!closed) { "Input store is closed" }
+                entries[reference] = Entry(destination)
+                reference
+            }
+        } catch (error: Throwable) {
+            if (created) synchronized(lock) {
                 // Keep failed copies in the registry if deletion fails, for close() retry.
                 entries[reference] = Entry(destination, selected = false)
                 reclaim(reference)
             }
             throw error
+        } finally {
+            synchronized(lock) {
+                imports--
+                removeEmptyDirectory()
+            }
         }
-        entries[reference] = Entry(destination)
-        reference
     }
 
     override fun acquire(reference: String): AndroidMultimodalInputLease = synchronized(lock) {
@@ -94,7 +125,7 @@ class MultimodalInputStore(private val directory: File) : AndroidMultimodalInput
     }
 
     private fun removeEmptyDirectory() {
-        if (closed && entries.isEmpty()) {
+        if (closed && entries.isEmpty() && imports == 0) {
             try {
                 // Nonrecursive and atomic: unknown files keep their containing directory alive.
                 Files.deleteIfExists(directory.toPath())

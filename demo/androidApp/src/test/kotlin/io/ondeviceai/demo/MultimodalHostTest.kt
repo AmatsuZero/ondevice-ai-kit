@@ -12,6 +12,101 @@ class MultimodalHostTest {
     private fun source() = temporary.newFile("synthetic-${System.nanoTime()}.png").apply { writeText("fixture") }
     private fun store() = MultimodalInputStore(temporary.root.resolve("copies"))
 
+    @Test fun videoAndImageUseIndependentStoresAndLatestCrossMediaTicket() = runBlocking {
+        val images = store()
+        val videos = MultimodalInputStore(temporary.root.resolve("videos"))
+        var imageReply: ((File?) -> Unit)? = null
+        var videoReply: ((File?) -> Unit)? = null
+        val host = MultimodalHost(images, videoStore = videos,
+            selectVideo = { callback, _ -> videoReply = callback },
+            selectFile = { callback, _ -> imageReply = callback })
+        host.selectImageFile(); host.selectVideoFile()
+        imageReply!!(source()); assertNull(host.model.state.inputReference)
+        videoReply!!(source())
+        val token = assertNotNull(host.model.state.inputReference)
+        assertEquals(MultimodalInputKind.VIDEO, host.model.state.inputKind)
+        assertFails { images.acquire(token) }
+        val lease = videos.acquire(token)
+        host.selectImageFile(); imageReply!!(source())
+        assertFails { videos.acquire(token) }
+        assertTrue(lease.file.exists())
+        val image = assertNotNull(host.model.state.inputReference)
+        assertFails { videos.acquire(image) }
+        host.close(); assertTrue(lease.file.exists())
+        lease.release(); assertFalse(lease.file.exists())
+    }
+
+    @Test fun asyncImportDoesNotPublishInlineAndClearCancelsBeforeCopy() = runBlocking {
+        val queue = java.util.ArrayDeque<Runnable>()
+        val dispatcher = object : kotlinx.coroutines.CoroutineDispatcher() {
+            override fun dispatch(context: kotlin.coroutines.CoroutineContext, block: Runnable) { queue.add(block) }
+        }
+        val scope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + dispatcher)
+        val directory = temporary.root.resolve("async-copies")
+        var reply: ((File?) -> Unit)? = null
+        val host = MultimodalHost(MultimodalInputStore(directory), importScope = scope,
+            importDispatcher = dispatcher, selectFile = { callback, _ -> reply = callback })
+        host.selectImageFile(); reply!!(source())
+        assertNull(host.model.state.inputReference, "copy must not execute in picker callback")
+        host.clearImageFile()
+        while (queue.isNotEmpty()) queue.removeFirst().run()
+        host.awaitImports()
+        assertNull(host.model.state.inputReference)
+        assertNull(host.model.state.failure)
+        assertTrue(directory.listFiles()!!.isEmpty())
+        host.close()
+        scope.coroutineContext[kotlinx.coroutines.Job]!!.cancel()
+    }
+
+    @Test fun asyncQueuedImportsAreInvalidatedByEveryLifecycleBoundary() = runBlocking {
+        for (action in listOf<(MultimodalHost) -> Unit>(
+            { it.clearImageFile() }, { it.leavePage() }, { it.background() }, { it.close() },
+        )) {
+            val queue = java.util.ArrayDeque<Runnable>()
+            val dispatcher = object : kotlinx.coroutines.CoroutineDispatcher() {
+                override fun dispatch(context: kotlin.coroutines.CoroutineContext, block: Runnable) { queue.add(block) }
+            }
+            val scope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + dispatcher)
+            val directory = temporary.root.resolve("lifecycle-${System.nanoTime()}")
+            var reply: ((File?) -> Unit)? = null
+            val host = MultimodalHost(MultimodalInputStore(directory), importScope = scope,
+                importDispatcher = dispatcher, selectFile = { callback, _ -> reply = callback })
+            host.selectImageFile(); reply!!(source()); action(host)
+            while (queue.isNotEmpty()) queue.removeFirst().run()
+            host.awaitImports()
+            assertNull(host.model.state.inputReference)
+            assertNull(host.model.state.failure)
+            host.close()
+            assertFalse(directory.exists())
+            scope.coroutineContext[kotlinx.coroutines.Job]!!.cancel()
+        }
+    }
+
+    @Test fun asyncImportPublishesThenRetiresOnClose() = runBlocking {
+        val scope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + kotlinx.coroutines.Dispatchers.Unconfined)
+        val directory = temporary.root.resolve("async-success")
+        var reply: ((File?) -> Unit)? = null
+        val host = MultimodalHost(MultimodalInputStore(directory), importScope = scope,
+            importDispatcher = kotlinx.coroutines.Dispatchers.IO,
+            selectFile = { callback, _ -> reply = callback })
+        host.selectImageFile(); reply!!(source())
+        host.awaitImports()
+        assertNotNull(host.model.state.inputReference)
+        host.close()
+        assertFalse(directory.exists())
+        scope.coroutineContext[kotlinx.coroutines.Job]!!.cancel()
+    }
+
+    @Test fun unavailableVideoPickerDoesNotLaunchImagePicker() {
+        var launches = 0
+        val host = MultimodalHost(store(), selectFile = { _, _ -> launches++ })
+        host.selectVideoFile()
+        assertEquals(0, launches)
+        assertNull(host.model.state.inputReference)
+        assertEquals(MultimodalBridgeFailureCode.INVALID_INPUT, host.model.state.failure?.code)
+        host.close()
+    }
+
     @Test fun replacementAndClearRetireOnlySelectionOwnership() = runBlocking {
         val store = store()
         var reply: ((File?) -> Unit)? = null

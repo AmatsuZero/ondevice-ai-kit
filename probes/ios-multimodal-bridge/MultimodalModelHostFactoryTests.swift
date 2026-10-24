@@ -5,6 +5,32 @@ import ODAIKitMultimodal
 import XCTest
 
 @MainActor final class MultimodalModelHostFactoryTests: XCTestCase {
+  func testOptionalVideoStoreIsOwnedAndRemovedOnClose() async throws {
+    let e = try environment()
+    defer { try? FileManager.default.removeItem(at: e.root) }
+    let videos = e.root.appendingPathComponent("video-inputs")
+    var reply: ((URL?) -> Void)?
+    let host = try await MultimodalModelHostFactory.make(
+      modelStore: e.store, manifest: e.manifest, source: e.source, inputDirectory: e.input,
+      videoInputDirectory: videos, videoPicker: { reply = $0 }, picker: { _ in },
+      backend: { ModelFactoryBackend(lease: $0) })
+    let source = e.root.appendingPathComponent("synthetic.mp4")
+    try Data([1, 2, 3]).write(to: source)
+    host.selectVideoFile()
+    reply?(source)
+    let inputTask = try XCTUnwrap(host.inputTask)
+    await inputTask.value
+    XCTAssertNotNil(host.model.state.inputReference)
+    host.close()
+    for _ in 0..<1000 {
+      if !host.model.state.closing { break }
+      await Task.yield()
+    }
+    XCTAssertFalse(FileManager.default.fileExists(atPath: videos.path))
+    XCTAssertFalse(FileManager.default.fileExists(atPath: e.input.path))
+    try await e.store.remove(e.manifest.ref)
+  }
+
   func testHostCloseReleasesTransferredModelLease() async throws {
     let e = try environment()
     defer { try? FileManager.default.removeItem(at: e.root) }

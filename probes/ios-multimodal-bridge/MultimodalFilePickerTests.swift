@@ -3,6 +3,26 @@ import UniformTypeIdentifiers
 import XCTest
 
 @MainActor final class MultimodalFilePickerTests: XCTestCase {
+  func testVideoPresentationSharesPendingSlotAndDeliversOnce() throws {
+    var presented: UIDocumentPickerViewController?
+    let picker = MultimodalFilePicker(present: {
+      presented = $0
+      return true
+    })
+    var replies = [URL?]()
+    picker.presentVideo { replies.append($0) }
+    let controller = try XCTUnwrap(presented)
+    XCTAssertFalse(controller.allowsMultipleSelection)
+    picker.present { replies.append($0) }
+    XCTAssertEqual(replies.count, 1)
+    XCTAssertNil(replies[0])
+    let source = URL(fileURLWithPath: "/synthetic.mp4")
+    picker.documentPicker(controller, didPickDocumentsAt: [source])
+    picker.documentPickerWasCancelled(controller)
+    XCTAssertEqual(replies.count, 2)
+    XCTAssertEqual(replies[1], source)
+  }
+
   func testSinglePngJpegSelectionDeliversFirstUrlOnlyOnce() throws {
     var presented: UIDocumentPickerViewController?
     let picker = MultimodalFilePicker(present: {

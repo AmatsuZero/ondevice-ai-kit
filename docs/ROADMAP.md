@@ -1,5 +1,7 @@
 # 分阶段交付与恢复入口
 
+2026-10-24 10:10 P9 Demo最新检查点：shared typed video输入/分派/UI、双端独立store/host/picker及32MiB复制已本地实现、未提交。shared64/64、Android Demo29/29、Swift DemoABI59/59；基础iOS simulator与已有签名真机build通过，iosArm64框架已刷新，iPhone16ProMax/iOS27.0.1安装启动成功（仅启动，不是视频推理）。TECNO KM9/Android15 API35实际shared UI instrumentation通过，新增视频选择/错provider隔离/unavailable/清除/清理；初次旧文案断言失败保留。详见[Demo验证](validation/multimodal-video-demo.md)。下一优先异步host staging及导入取消、增强MLX编译，再固定视频KMP权重真机链路；仍5/12/P9active，iOS15/API26/生产Androidbackend/独立review等缺口不变。
+
 2026-10-24 P9 KMP视频bridge完成：optional typed video DTO/interface与双平台adapter，独立videoInputs默认拒绝、共用native client/lease清理。common24/24，Android模块48/48、完整Android725tasks/465JUnit，SwiftBinding23/23、Demo55/55及旧VideoABI6/6均0fail/skip，tools133/133。仅契约/注入client生命周期，不是KMP视频权重设备验收，Demo视频host/state/UI另包；详见[视频bridge验证](validation/multimodal-video-bridge.md)。原同步05c67d2现已非强推同步两远端、fresh SHA相等；新Android/KMP提交仍本地。仍5/12/P9active、独立reviewpending及全部旧缺口保留。下一独立sharedvideo state/UI与hoststager设计。
 
 2026-10-24 P9 Androidvideo契约对等完成：typed request/可选video backend/client共享Operation已实现，新增13+原22项=35/35；offline模块lint/KMPAndroidcompile通过，完整Android725tasks/452JUnit及tools133/133。新local Maven AAR/sourceJar与独立Kotlin2.4 consumer实际编译/assemble/lint45tasks通过；初次2.2metadata失败与callback测试修正均留档。Android仍无生产推理backend，KMP/Demo视频接线另包；仍5/12/P9active、独立reviewpending及旧验收缺口保留，见[Android视频契约验证](validation/android-multimodal-video-contract.md)。用户请求的旧HEAD05c67d2双远端同步因jihu TLS/reset预检未完成、未push，后续新包仅本地。下一独立KMPtypedvideo设计。

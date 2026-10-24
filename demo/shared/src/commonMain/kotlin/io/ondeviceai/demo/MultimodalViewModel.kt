@@ -5,6 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import io.ondeviceai.binding.*
 
+enum class MultimodalInputKind { IMAGE, VIDEO }
+
 enum class MultimodalPhase { IDLE, RUNNING, CANCELLING, SUCCEEDED, FAILED, CANCELLED }
 
 data class MultimodalState(
@@ -23,6 +25,7 @@ data class MultimodalState(
     val closed: Boolean = false,
     val closing: Boolean = false,
     val closeFailure: MultimodalBridgeFailure? = null,
+    val inputKind: MultimodalInputKind = MultimodalInputKind.IMAGE,
 ) {
     val controlsEnabled get() = !closed && phase != MultimodalPhase.RUNNING && phase != MultimodalPhase.CANCELLING
     val canGenerate get() = controlsEnabled && !inputReference.isNullOrBlank() && prompt.isNotBlank() &&
@@ -63,10 +66,13 @@ class MultimodalViewModel(private val bridge: MultimodalBridge = UnavailableMult
         if (state.closed || selection == state.selection) return
         invalidateRequest(); state = state.copy(selection = selection)
     }
-    fun selectImage(reference: String?, displayName: String?) {
+    fun selectImage(reference: String?, displayName: String?) = selectInput(MultimodalInputKind.IMAGE, reference, displayName)
+    fun selectVideo(reference: String?, displayName: String?) = selectInput(MultimodalInputKind.VIDEO, reference, displayName)
+    private fun selectInput(kind: MultimodalInputKind, reference: String?, displayName: String?) {
         if (state.closed) return
-        if (reference != state.inputReference) invalidateRequest()
-        state = state.copy(inputReference = reference, inputDisplayName = if (reference == null) null else displayName)
+        if (reference != state.inputReference || kind != state.inputKind) invalidateRequest()
+        state = state.copy(inputKind = kind, inputReference = reference,
+            inputDisplayName = if (reference == null) null else displayName)
     }
     fun setPrompt(prompt: String) {
         if (state.closed || prompt == state.prompt) return
@@ -89,11 +95,15 @@ class MultimodalViewModel(private val bridge: MultimodalBridge = UnavailableMult
             return
         }
         if (!state.canGenerate) { inputFailed(); return }
-        val request = MultimodalBridgeRequest(checkNotNull(state.inputReference), state.prompt, checkNotNull(state.tokenBudget.toIntOrNull()))
+        val reference = checkNotNull(state.inputReference)
+        val prompt = state.prompt
+        val budget = checkNotNull(state.tokenBudget.toIntOrNull())
+        val selection = state.selection
+        val kind = state.inputKind
         val ticket = ++generation
         pending = true; active = null
         state = state.copy(phase = MultimodalPhase.RUNNING, update = null, output = null, failure = null)
-        val handle = bridge.generateMultimodal(request, state.selection, object : MultimodalBridgeGenerateCallback {
+        val callback = object : MultimodalBridgeGenerateCallback {
             override fun onMultimodalUpdate(update: MultimodalBridgeUpdate) {
                 if (pending && ticket == generation && !state.closed && state.phase == MultimodalPhase.RUNNING &&
                     update.sequence > (state.update?.sequence ?: -1)) state = state.copy(update = update)
@@ -101,7 +111,15 @@ class MultimodalViewModel(private val bridge: MultimodalBridge = UnavailableMult
             override fun onMultimodalResult(output: MultimodalBridgeOutput) = terminal(ticket, MultimodalPhase.SUCCEEDED, output = output)
             override fun onMultimodalFailure(failure: MultimodalBridgeFailure) = terminal(ticket, MultimodalPhase.FAILED, failure = failure)
             override fun onMultimodalCancelled() = terminal(ticket, MultimodalPhase.CANCELLED)
-        })
+        }
+        val handle = if (kind == MultimodalInputKind.VIDEO) {
+            val videoBridge = bridge as? MultimodalVideoBridge
+            if (videoBridge == null) {
+                callback.onMultimodalFailure(fail(MultimodalBridgeFailureCode.BACKEND_UNAVAILABLE))
+                return
+            }
+            videoBridge.generateMultimodalVideo(MultimodalBridgeVideoRequest(reference, prompt, budget), selection, callback)
+        } else bridge.generateMultimodal(MultimodalBridgeRequest(reference, prompt, budget), selection, callback)
         // Synchronous terminal must not attach an already finished task to later cancellation.
         if (pending && ticket == generation) {
             active = handle
