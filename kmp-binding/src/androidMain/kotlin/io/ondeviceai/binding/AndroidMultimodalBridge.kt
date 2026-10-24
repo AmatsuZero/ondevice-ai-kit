@@ -17,11 +17,12 @@ interface AndroidMultimodalInputProvider {
 }
 
 /** Owns the optional native client. Admission, providers and callbacks use the host UI dispatcher. */
-class AndroidMultimodalBridge(
+class AndroidMultimodalBridge @JvmOverloads constructor(
     private val client: MultimodalGenerationClient?,
     private val inputs: AndroidMultimodalInputProvider,
     scope: CoroutineScope,
-) : MultimodalBridge {
+    private val videoInputs: AndroidMultimodalInputProvider? = null,
+) : MultimodalVideoBridge {
     // Detached ownership ensures host Job cancellation cannot skip native drain/lease cleanup.
     private val scope = CoroutineScope(SupervisorJob() + scope.coroutineContext.minusKey(Job))
     private val workers = mutableSetOf<MultimodalTask>()
@@ -47,21 +48,33 @@ class AndroidMultimodalBridge(
     }
 
     override fun generateMultimodal(request: MultimodalBridgeRequest, selection: MultimodalBridgeSelection,
-                                   callback: MultimodalBridgeGenerateCallback): BridgeTask {
+                                   callback: MultimodalBridgeGenerateCallback): BridgeTask =
+        generate(request.inputReference, request.prompt, request.maxOutputTokens, selection, callback, video = false)
+
+    override fun generateMultimodalVideo(request: MultimodalBridgeVideoRequest, selection: MultimodalBridgeSelection,
+                                        callback: MultimodalBridgeGenerateCallback): BridgeTask =
+        generate(request.inputReference, request.prompt, request.maxOutputTokens, selection, callback, video = true)
+
+    private fun generate(reference: String, prompt: String, maxOutputTokens: Int,
+                         selection: MultimodalBridgeSelection, callback: MultimodalBridgeGenerateCallback,
+                         video: Boolean): BridgeTask {
         admission(true)?.let { callback.onMultimodalFailure(it); return CompletedTask }
         val client = client ?: run { callback.onMultimodalFailure(unlinked()); return CompletedTask }
-        val input = try { inputs.acquire(request.inputReference) } catch (_: Exception) {
+        val provider = (if (video) videoInputs else inputs) ?: run {
+            callback.onMultimodalFailure(fail(MultimodalBridgeFailureCode.INVALID_INPUT)); return CompletedTask
+        }
+        val input = try { provider.acquire(reference) } catch (_: Exception) {
             callback.onMultimodalFailure(fail(MultimodalBridgeFailureCode.INVALID_INPUT)); return CompletedTask
         }
         val handle = MultimodalTask()
         return submit(true, handle, operation = {
             try {
                 coroutineContext.ensureActive()
-                client.generate(MultimodalRequest(input.file, request.prompt, request.maxOutputTokens),
-                    when (selection) {
-                        MultimodalBridgeSelection.Default -> MultimodalBackendSelection.Default
-                        is MultimodalBridgeSelection.Explicit -> MultimodalBackendSelection.Explicit(selection.backendId)
-                    }) { update ->
+                val selected = when (selection) {
+                    MultimodalBridgeSelection.Default -> MultimodalBackendSelection.Default
+                    is MultimodalBridgeSelection.Explicit -> MultimodalBackendSelection.Explicit(selection.backendId)
+                }
+                val update: (MultimodalTextUpdate) -> Unit = { update ->
                     scope.launch {
                         if (active === handle && !closed && !handle.cancelled && update.sequence > handle.lastSequence) {
                             handle.lastSequence = update.sequence
@@ -69,6 +82,8 @@ class AndroidMultimodalBridge(
                         }
                     }
                 }
+                if (video) client.generate(MultimodalVideoRequest(input.file, prompt, maxOutputTokens), selected, update)
+                else client.generate(MultimodalRequest(input.file, prompt, maxOutputTokens), selected, update)
             } finally {
                 withContext(NonCancellable) {
                     try { client.drain() } finally { input.release() }
