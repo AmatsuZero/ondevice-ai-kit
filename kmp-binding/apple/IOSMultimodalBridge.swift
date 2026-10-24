@@ -9,9 +9,14 @@ import ODAIKitMultimodal
 
 /// Owns the client; admission, providers and callbacks stay on MainActor.
 @MainActor
-public final class IOSMultimodalBridge: NSObject, @preconcurrency MultimodalBridge {
+public final class IOSMultimodalBridge: NSObject, @preconcurrency MultimodalVideoBridge {
   private let client: MultimodalGenerationClient?
   private let inputs: any IOSMultimodalInputProvider
+  private let videoInputs: (any IOSMultimodalInputProvider)?
+  private enum NativeRequest {
+    case image(MultimodalRequest)
+    case video(MultimodalVideoRequest)
+  }
   private var tasks: [UUID: IOSMultimodalTask] = [:]
   private var active: IOSMultimodalTask?
   private var closed = false
@@ -19,9 +24,13 @@ public final class IOSMultimodalBridge: NSObject, @preconcurrency MultimodalBrid
   private var closeWaiters: [any MultimodalBridgeCloseCallback] = []
   private var closeWorker: Task<Void, Never>?
 
-  public init(client: MultimodalGenerationClient?, inputs: any IOSMultimodalInputProvider) {
+  public init(
+    client: MultimodalGenerationClient?, inputs: any IOSMultimodalInputProvider,
+    videoInputs: (any IOSMultimodalInputProvider)? = nil
+  ) {
     self.client = client
     self.inputs = inputs
+    self.videoInputs = videoInputs
   }
 
   public func queryMultimodalBackends(callback: any MultimodalBridgeBackendsCallback)
@@ -55,6 +64,36 @@ public final class IOSMultimodalBridge: NSObject, @preconcurrency MultimodalBrid
     request: MultimodalBridgeRequest, selection: any MultimodalBridgeSelection,
     callback: any MultimodalBridgeGenerateCallback
   ) -> any BridgeTask {
+    generate(
+      reference: request.inputReference, provider: inputs, selection: selection, callback: callback
+    ) { url in
+      .image(
+        try MultimodalRequest(
+          imageFile: url, prompt: request.prompt,
+          maxOutputTokens: Int(request.maxOutputTokens)))
+    }
+  }
+
+  public func generateMultimodalVideo(
+    request: MultimodalBridgeVideoRequest, selection: any MultimodalBridgeSelection,
+    callback: any MultimodalBridgeGenerateCallback
+  ) -> any BridgeTask {
+    generate(
+      reference: request.inputReference, provider: videoInputs, selection: selection,
+      callback: callback
+    ) { url in
+      .video(
+        try MultimodalVideoRequest(
+          videoFile: url, prompt: request.prompt,
+          maxOutputTokens: Int(request.maxOutputTokens)))
+    }
+  }
+
+  private func generate(
+    reference: String, provider: (any IOSMultimodalInputProvider)?,
+    selection: any MultimodalBridgeSelection, callback: any MultimodalBridgeGenerateCallback,
+    makeRequest: (URL) throws -> NativeRequest
+  ) -> any BridgeTask {
     if let error = admission(generate: true) {
       callback.onMultimodalFailure(failure: error)
       return IOSMultimodalTask()
@@ -68,13 +107,15 @@ public final class IOSMultimodalBridge: NSObject, @preconcurrency MultimodalBrid
       return IOSMultimodalTask()
     }
     let lease: any IOSMultimodalInputLease
-    let nativeRequest: MultimodalRequest
+    let nativeRequest: NativeRequest
+    guard let provider else {
+      callback.onMultimodalFailure(failure: fail(.invalidInput))
+      return IOSMultimodalTask()
+    }
     do {
-      let acquired = try inputs.acquire(reference: request.inputReference)
+      let acquired = try provider.acquire(reference: reference)
       do {
-        nativeRequest = try MultimodalRequest(
-          imageFile: acquired.url, prompt: request.prompt,
-          maxOutputTokens: Int(request.maxOutputTokens))
+        nativeRequest = try makeRequest(acquired.url)
       } catch {
         acquired.release()
         throw error
@@ -92,19 +133,24 @@ public final class IOSMultimodalBridge: NSObject, @preconcurrency MultimodalBrid
         let outcome: Result<MultimodalGenerationResult, Error>
         do {
           try Task.checkCancellation()
-          outcome = .success(
-            try await client.generate(nativeRequest, backend: selected) {
-              [weak bridge = self] update in
-              Task { @MainActor in
-                guard let bridge, bridge.active === handle, !bridge.closed, handle.acceptsUpdates,
-                  update.sequence > handle.lastSequence,
-                  let sequence = Int32(exactly: update.sequence)
-                else { return }
-                handle.lastSequence = update.sequence
-                callback.onMultimodalUpdate(
-                  update: MultimodalBridgeUpdate(sequence: sequence, text: update.text))
-              }
-            })
+          let update: @Sendable (MultimodalTextUpdate) -> Void = {
+            [weak bridge = self] update in
+            Task { @MainActor in
+              guard let bridge, bridge.active === handle, !bridge.closed, handle.acceptsUpdates,
+                update.sequence > handle.lastSequence,
+                let sequence = Int32(exactly: update.sequence)
+              else { return }
+              handle.lastSequence = update.sequence
+              callback.onMultimodalUpdate(
+                update: MultimodalBridgeUpdate(sequence: sequence, text: update.text))
+            }
+          }
+          switch nativeRequest {
+          case .image(let image):
+            outcome = .success(try await client.generate(image, backend: selected, update: update))
+          case .video(let video):
+            outcome = .success(try await client.generate(video, backend: selected, update: update))
+          }
         } catch { outcome = .failure(error) }
         // Uncancelled drain precedes synchronous lease release, even on immediate cancel.
         await Task.detached { await client.drain() }.value

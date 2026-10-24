@@ -1,6 +1,7 @@
 import Foundation
 
-/// A host-owned image lease. Release is synchronous and idempotent on MainActor.
+/// A host-owned media lease. Release is synchronous and idempotent on MainActor.
+/// Image and video providers are explicitly injected separately.
 @MainActor
 public protocol IOSMultimodalInputLease: AnyObject {
   var url: URL { get }
