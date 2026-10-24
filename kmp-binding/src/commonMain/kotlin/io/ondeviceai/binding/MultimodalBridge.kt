@@ -11,6 +11,10 @@ sealed interface MultimodalBridgeSelection {
 data class MultimodalBridgeRequest(val inputReference: String, val prompt: String, val maxOutputTokens: Int = 128) {
     init { require(inputReference.isNotBlank()); require(prompt.isNotBlank()); require(maxOutputTokens > 0) }
 }
+/** Single video; opaque token resolved only by an explicitly supplied video provider. */
+data class MultimodalBridgeVideoRequest(val inputReference: String, val prompt: String, val maxOutputTokens: Int = 128) {
+    init { require(inputReference.isNotBlank()); require(prompt.isNotBlank()); require(maxOutputTokens > 0) }
+}
 data class MultimodalBridgeBackend(val backendId: String, val availability: BridgeAvailability) {
     init { require(backendId.isNotBlank() && availability.backendId == backendId) }
 }
@@ -58,8 +62,13 @@ interface MultimodalBridge {
     fun generateMultimodal(request: MultimodalBridgeRequest, selection: MultimodalBridgeSelection, callback: MultimodalBridgeGenerateCallback): BridgeTask
     fun closeMultimodal(callback: MultimodalBridgeCloseCallback)
 }
+/** Optional video extension. Legacy image-only bridges remain valid MultimodalBridge implementations. */
+interface MultimodalVideoBridge : MultimodalBridge {
+    fun generateMultimodalVideo(request: MultimodalBridgeVideoRequest, selection: MultimodalBridgeSelection,
+                                callback: MultimodalBridgeGenerateCallback): BridgeTask
+}
 private object CompletedMultimodalBridgeTask : BridgeTask { override fun cancel() = Unit }
-class UnavailableMultimodalBridge : MultimodalBridge {
+class UnavailableMultimodalBridge : MultimodalVideoBridge {
     private var closed = false
     private fun failure() = if (closed) MultimodalBridgeFailure(MultimodalBridgeFailureCode.CLOSED, null)
         else MultimodalBridgeFailure(MultimodalBridgeFailureCode.BACKEND_UNAVAILABLE, "backendNotLinked")
@@ -67,6 +76,9 @@ class UnavailableMultimodalBridge : MultimodalBridge {
         callback.onMultimodalFailure(failure()); return CompletedMultimodalBridgeTask
     }
     override fun generateMultimodal(request: MultimodalBridgeRequest, selection: MultimodalBridgeSelection, callback: MultimodalBridgeGenerateCallback): BridgeTask {
+        callback.onMultimodalFailure(failure()); return CompletedMultimodalBridgeTask
+    }
+    override fun generateMultimodalVideo(request: MultimodalBridgeVideoRequest, selection: MultimodalBridgeSelection, callback: MultimodalBridgeGenerateCallback): BridgeTask {
         callback.onMultimodalFailure(failure()); return CompletedMultimodalBridgeTask
     }
     override fun closeMultimodal(callback: MultimodalBridgeCloseCallback) { closed = true; callback.onMultimodalClosed() }
