@@ -211,7 +211,9 @@ class MultimodalVideoClientTest {
         val actual = assertFailsWith<IllegalArgumentException> {
             client.generate(video, update = { throw callbackFailure })
         }
-        assertSame(callbackFailure, actual)
+        // Coroutine stack-trace recovery may copy standard exceptions; preserve
+        // the callback failure type/message rather than assuming JVM identity.
+        assertEquals("callback", actual.message)
         assertEquals(1, backend.drains.get())
         assertEquals(VIDEO_OUTPUT, client.generate(image).output)
         assertEquals(2, backend.drains.get()); client.close()
