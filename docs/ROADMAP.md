@@ -1,5 +1,7 @@
 # 分阶段交付与恢复入口
 
+2026-10-24 P9 KMP视频bridge完成：optional typed video DTO/interface与双平台adapter，独立videoInputs默认拒绝、共用native client/lease清理。common24/24，Android模块48/48、完整Android725tasks/465JUnit，SwiftBinding23/23、Demo55/55及旧VideoABI6/6均0fail/skip，tools133/133。仅契约/注入client生命周期，不是KMP视频权重设备验收，Demo视频host/state/UI另包；详见[视频bridge验证](validation/multimodal-video-bridge.md)。原同步05c67d2现已非强推同步两远端、fresh SHA相等；新Android/KMP提交仍本地。仍5/12/P9active、独立reviewpending及全部旧缺口保留。下一独立sharedvideo state/UI与hoststager设计。
+
 2026-10-24 P9 Androidvideo契约对等完成：typed request/可选video backend/client共享Operation已实现，新增13+原22项=35/35；offline模块lint/KMPAndroidcompile通过，完整Android725tasks/452JUnit及tools133/133。新local Maven AAR/sourceJar与独立Kotlin2.4 consumer实际编译/assemble/lint45tasks通过；初次2.2metadata失败与callback测试修正均留档。Android仍无生产推理backend，KMP/Demo视频接线另包；仍5/12/P9active、独立reviewpending及旧验收缺口保留，见[Android视频契约验证](validation/android-multimodal-video-contract.md)。用户请求的旧HEAD05c67d2双远端同步因jihu TLS/reset预检未完成、未push，后续新包仅本地。下一独立KMPtypedvideo设计。
 
 2026-10-23 P9固定合成短视频native链路通过：`c9ea298/eebc670/30e5e8e` typed API/shared runtime/opt-in consumer后，首次设备因ModelStore大文件校验临时缓冲保留被per-process-limit终止；独立实际RED→GREEN修复`5e39cb8`保持全hash校验。真实iPhone17,2/iOS27.0.1/PID22072固定29FPS8帧权重success、首update取消/drain、同PID重入、close/lease清理及严格validator通过；clip2s与span25600/14848分列。完整Apple470/470、增强host41/41无skip、tools133/133。仅合成集成生命周期，不证明自然视频质量/Metal/energy/minOS；短实际样本仍拒绝、上游8→7失败/binary archive exit65/旧验收与独立reviewpending保留，仍5/12/P9active。下一独立Androidvideo契约对等，再另包KMP/Demo；详见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。以下为历史检查点。

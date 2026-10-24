@@ -20,6 +20,8 @@ AAR SHA256=`da2d6db7c459711598a93612f0e348f97f9cd27b7fa2424cb5c62108988a9d14`；
 
 ## 同步与后续
 
+**后续同步已恢复（优先于下方失败时状态）：** 既有05c67d2已非强推同步origin/jihu，两次独立fresh SHA均匹配；证据在后续KMP视频bridge ledger的`remote-sync-20261024.json`，见[bridge验证](multimodal-video-bridge.md)。本Android新包仍本地。以下原失败记录保留。
+
 用户授权先同步既有HEAD `05c67d2a85c050d70ad51e255d0ed8deabc1d833`后继续。仓库sync-remotes脚本两次均在极狐预检失败（SSL_ERROR_SYSCALL/connection reset），后续独立refresh及HTTP1.1诊断仍失败，尚未进入任何push。GitHub fresh ls-remote仍`eb1287dc7ecac4c3ce17f3503292d1967b8852a9`；极狐fresh SHA无法读取，**双远端同步pending**，未宣称相等。初始logs在上包runtime ledger的`remote-sync-20261024*.log`，后续在本包`sync-jihu-recheck.log`；未改代理/路由/凭据/aTrust。新Android包仅本地commit，初始同步授权不自动扩为继续实现后的新包push。
 
 保护文件2hash/state/index保持原样，没有并发代码变化。下一独立包先设计KMP typed video bridge/opaque input生命周期，再单独Demo/picker。独立review pending，无APPROVE；保留Apple短实际样本拒绝、原上游8→7失败、binary archive exit65、自然视频/时序质量、Metal/GPU/energy、Android真后端、最低系统、物理触摸/真实picker、旧Video UI与P6实录等缺口。

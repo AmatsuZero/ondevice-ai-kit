@@ -2,6 +2,14 @@
 
 2026-10-23。建议在新会话开始下一独立包，本文件是恢复入口，不是整个项目完成结论。 最新状态见下方“固定 MLXVLM 短视频可行性”的native设备完成检查点；上面的分发段保留历史。
 
+## 最新续接 — 2026-10-24 KMP 视频 bridge
+
+优先于下方历史下一步：设计e5a91a7、common447a7d5、Android0a84af6、Apple/generator2a1757d。optionalMultimodalVideoBridge/typedvideoDTO，原imageprotocol不加requirement；两端单独可选videoInputs默认nil/null，不借图片provider解析，image/video共用既有任务/nativeclient/drain/release/close。common24/24；Android模块48/48、完整725tasks/465JUnit；SwiftBinding23/23、Demo55/55、旧VideoABI6/6，xcresult0fail/skip；tools133/133、swiftformatstrict/Pythoncompile/diffcheck通过。中间common/JUnit/generatorfixture失败及所有logs留档，详见[视频bridge验证](validation/multimodal-video-bridge.md)、同名spec/plan/ledger。作者自审，独立reviewpending。
+
+下一独立包为sharedtypedvideo input/state/UI与两端hoststager设计实施，再单独KMP→固定模型设备视频链路。当前Demohost/UI仍image-only；本包只验证注入真实client生命周期，不是设备视频推理。原Apple固定native证据及所有Android真backend/自然质量/资源/minOS/binary/短样本/原上游丢帧/真实picker/旧UI/P6/独立review缺口保留，仍5/12/P9active。HEAD以git为准，原2保护文件hash/state/index保持。
+
+本次用户授权的原检查点05c67d2在jihu网络恢复后已非强推同步origin与jihu，独立freshls-remote双方均05c67d2a85c050d70ad51e255d0ed8deabc1d833；此前SSL/reset失败保留，未改网络/凭据/签名，无mainmerge/force/publish。新Android/KMP包仅本地提交；不自动继续push。同步JSON/成功push与失败logs在KMP视频bridge及前两个ledger，详见validation。下方“同步pending”为当时历史状态。
+
 ## 最新续接 — 2026-10-24 Android 视频契约对等
 
 优先于下方全部历史下一步：设计333e414、typed API/client bd52496、callback测试修正f2f7bd1、consumer2164ebd。本包35/35（video13+旧client12+bridge10），完整Android725tasks/452JUnit、tools133/133；模块lint/KMPAndroidcompile通过，新localMavenAAR/sourceJar/javap及fresh独立Kotlin2.4 consumer45tasks assemble/lint通过。callback异常引用assertSame失败后误commit不是通过证据，f2f7bd1修正语义后全GREEN；独立consumer起初2.2metadata失败保留，对齐既有2.4后通过，未关闭检查/下载。Android仍无真实后端，未读媒体/运行设备/改KMPbridge或Demo。详见[Android视频契约验证](validation/android-multimodal-video-contract.md)和同名spec/plan/ledger。
