@@ -1,0 +1,25 @@
+# Android typed multimodal video contract parity
+
+2026-10-24. Continues foundation `05c67d2` after fixed Apple synthetic-video native gates. This package adds Android contract/client parity only; no Android production generation backend exists. User authorized solo autonomous continuation and initial branch synchronization; subsequent changes remain local commits.
+
+## Intent and scope
+
+Let an Android native caller express one local video explicitly, select an opt-in backend, and use the same lifetime barriers as image generation. Preserve existing image request/backend source compatibility, API26 minimum, current dependencies and unavailable defaults. File values are passed through unchanged; no reads/exists/codec/profile checks in the value initializer. Blank prompt/nonpositive output reject; default128. Concrete backend owns budgets/decoding. No model or dependency downloads, Android inference, KMP/Swift bridge changes, Demo/picker changes, resource/natural quality/minimumOS acceptance, signing assets or remote publication in this package. Keep two original protected files untouched and all ledger/artifact/failed logs.
+
+## Approaches and decision
+
+Author choice under authorized local autonomy: add `MultimodalVideoRequest(videoFile: File, prompt: String, maxOutputTokens: Int = 128)` and `MultimodalVideoGenerationBackend : MultimodalGenerationBackend` with `suspend generateVideo(request, update): MultimodalTextOutput`. Client adds a typed `generate(videoRequest, backend=Default, update=null)` overload. A private sealed image/video request routes both through existing Operation/worker/result/done and coordination lock. This mirrors Swift's completed public semantics while retaining Kotlin's current coroutine cancellation ordering and drain-error suppression. No user confirmation inferred from author choice; independent review pending.
+
+Putting video in `imageFile` would erase the media contract; reject. A parallel client/registry would admit overlapping operations and independent close; reject. Optional interface opt-in keeps legacy implementers intact. General backend availability never promises video support. Under the same admission lock, selected legacy backend rejects `InvalidInput("selected backend does not support video")` before availability, file read or invocation; unknown/unavailable selections retain their existing errors and never fallback.
+
+## Lifetime and error contract
+
+Image/video occupy one slot across availability, generation, noncancellable backend drain and final worker join. Capture original caller Job once; caller cancellation suppresses callbacks and wins late backend success/error; operation admission clears only after join. Existing active/busy/closed and cancelled-caller precedence stays unchanged. Cancellation before generation does not start/drain backend; once generation started, `drain()` runs in NonCancellable and preserves existing suppression/error rules. Old/duplicate/regressive/post-cancel callbacks cannot escape operation identity filter. Callback synchronous cancellation and callback failures must still drain. `close()` seals both overloads, cancels worker, joins operation/query then closes each registered backend once, continuing through backend-close errors; cancelled waiters cannot interrupt cleanup.
+
+No production backend added or updated to video conformance. Android default/provider availability stays honest; a fixture backend's output only tests routing/lifecycle. Native compile consumer may implement an explicitly unavailable video stub and compile both overloads, never launch generation or read media. Local Maven release AAR + sourceJar must contain new public types/client overload; an isolated generated consumer uses only local Maven Core+Multimodal coordinates, not source/project dependencies. Snapshot artifact version remains0.1.0-SNAPSHOT per existing local convention, no public release.
+
+## Validation and acceptance
+
+Tests first: actual missing-video API RED, then deterministic fake external-backend gates against real client. Cover unchanged values/no I/O, explicit/unknown/unavailable/legacy, bidirectional busy, cancelled availability, late success/error+drain reentry, ordinary/error/drain failure, update ordering/old callbacks, callback cancellation, close during availability/generation/query and cancelled waiter. Keep current image suite. Run targeted then full module tests/lint and existing Android suite offline using cached JDK/SDK. Tools full with explicitRuby. New release Maven artifact/external isolated consumer build proves local compile/distribution only, no device inference or platform-floor acceptance. Keep raw outputs/XML counts/checksums and author review separately from independent review.
+
+Stop only for concurrent writes/destructive/missing authority or unavoidable missing cached assets; preserve exact failures and continue independent safe work. Roadmap stays5/12/P9active; all Apple short-sample/upstream8→7/binaryexit65/quality/resource/oldUI/P6/review gaps remain. Next package: independently design KMP typed video input/bridge parity before Demo integration.
