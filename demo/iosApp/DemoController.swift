@@ -8,7 +8,8 @@ import ODAIKitDemo
 import ODAIKitCore
 import ODAIKitFace
 
-final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDemoActions, PHPickerViewControllerDelegate {
+@MainActor
+final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, @MainActor IdentityDemoActions, PHPickerViewControllerDelegate {
     let bridge = IOSFaceBridge()
     lazy var model = FaceViewModel(bridge: bridge)
     let identityModel: IdentityViewModel
@@ -30,7 +31,6 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
     private var latestIdentityCameraFrame: CameraFrame?
     private var livenessCapture: Task<Void, Never>?
     private let camera = CameraSource()
-    private let admissionLock = NSLock()
     private var frames = LatestFrameQueue<CameraFrame>()
     private var running = false
     private var cameraLifecycle = CameraLifecycle(foreground: UIApplication.shared.applicationState == .active)
@@ -110,7 +110,6 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
             if ProcessInfo.processInfo.arguments.contains("--smoke-benchmark") { self?.runBenchmark() }
             #endif
         }
-        camera.onFrame = { [weak self] image in self?.offerFrame(image) }
         NotificationCenter.default.addObserver(self, selector: #selector(background), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(foreground), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(memoryWarning), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
@@ -156,11 +155,11 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
         picker.dismiss(animated: true)
         guard let provider = results.first?.itemProvider else { return }
         provider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { [weak self] url, error in
-            guard let url, let source = CGImageSourceCreateWithURL(url as CFURL, nil), let cg = Self.decodePhoto(source) else { DispatchQueue.main.async { self?.message = error?.localizedDescription ?? "无法读取图片" }; return }
-            DispatchQueue.main.async { self?.useImage(UIImage(cgImage: cg)) }
+            guard let url, let source = CGImageSourceCreateWithURL(url as CFURL, nil), let cg = Self.decodePhoto(source) else { DispatchQueue.main.async { [weak self] in self?.message = error?.localizedDescription ?? "无法读取图片" }; return }
+            DispatchQueue.main.async { [weak self] in self?.useImage(UIImage(cgImage: cg)) }
         }
     }
-    private static func decodePhoto(_ source: CGImageSource) -> CGImage? {
+    nonisolated private static func decodePhoto(_ source: CGImageSource) -> CGImage? {
         CGImageSourceCreateThumbnailAtIndex(source, 0, [
             kCGImageSourceCreateThumbnailFromImageAlways: true,
             kCGImageSourceCreateThumbnailWithTransform: true,
@@ -227,7 +226,7 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
         }
         #endif
         AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
                 guard self.cameraLifecycle.canStart(token) else { return }
                 guard granted else { self.cameraLifecycle.stop(); self.cameraPermissionDenied = true; self.model.permissionDenied(); return }
@@ -253,13 +252,18 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
         }
     }
     private func replaceFrameQueue() {
-        admissionLock.lock(); frames = LatestFrameQueue<CameraFrame>(); admissionLock.unlock()
-    }
-    private func offerFrame(_ image: CGImage) {
-        // Called by capture serial queue; synchronous 1+1 admission retains no per-frame Task backlog.
-        admissionLock.lock(); let queue = frames; admissionLock.unlock()
-        queue.offer(CameraFrame(image))
-        if let frame = queue.next() { DispatchQueue.main.async { [weak self] in self?.consume(frame, queue: queue) } }
+        let queue = LatestFrameQueue<CameraFrame>()
+        frames = queue
+        camera.onFrame = { @Sendable [weak self] image in
+            // Each callback captures its generation's queue; only its owner changes frames.
+            queue.offer(CameraFrame(image))
+            if let frame = queue.next() {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self else { queue.complete(); return }
+                    self.consume(frame, queue: queue)
+                }
+            }
+        }
     }
     private func consume(_ frame: CameraFrame, queue: LatestFrameQueue<CameraFrame>) {
         guard running, queue === frames else { queue.complete(); return }
@@ -287,14 +291,11 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
         let challenge = identityModel.livenessChallenge
         livenessCapture = Task { @MainActor in
             defer { livenessCapture = nil }
-            let array = await Task.detached { () -> KotlinByteArray? in
-                guard let bytes = UIImage(cgImage: source).pngData() else { return nil }
-                let array = KotlinByteArray(size: Int32(bytes.count))
-                for (index, value) in bytes.enumerated() { array.set(index: Int32(index), value: Int8(bitPattern: value)) }
-                return array
-            }.value
+            let bytes = await Task.detached { UIImage(cgImage: source).pngData() }.value
             guard !Task.isCancelled else { return }
-            guard let array else { message = "无法编码活体帧"; return }
+            guard let bytes else { message = "无法编码活体帧"; return }
+            let array = KotlinByteArray(size: Int32(bytes.count))
+            for (index, value) in bytes.enumerated() { array.set(index: Int32(index), value: Int8(bitPattern: value)) }
             let accepted = identityModel.submitLivenessFrame(frame: IdentityLivenessFrame(encodedFrame: array, timestampNanos: timestamp, revision: "demo-upright-frame-v1", challenge: challenge), sessionId: sessionId)
             message = accepted ? "活体帧已接收" : "活体帧未接收"
         }
@@ -339,8 +340,16 @@ final class DemoController: NSObject, ObservableObject, DemoActions, IdentityDem
         do { try Data(json.utf8).write(to: file); let share = UIActivityViewController(activityItems: [file], applicationActivities: nil); share.popoverPresentationController?.sourceView = presenter()?.view; presenter()?.present(share, animated: true) }
         catch { message = String(describing: error) }
     }
-    deinit {
+    isolated deinit {
         NotificationCenter.default.removeObserver(self)
+        cameraStart?.cancel()
+        benchmark?.cancel()
+        livenessCapture?.cancel()
+        frames.close()
+        let face = bridge
+        let photo = photoSubmission
+        let cameraSource = camera
+        Task { @MainActor in photo.cancel(); face.close(); await cameraSource.close() }
         #if ODAI_MULTIMODAL_DEMO
         let multimodal = multimodalHost
         let picker = multimodalPicker

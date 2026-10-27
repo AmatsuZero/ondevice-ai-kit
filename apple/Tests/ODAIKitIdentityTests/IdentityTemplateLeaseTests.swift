@@ -550,10 +550,12 @@ final class IdentityTemplateLeaseTests: XCTestCase {
         XCTAssertThrowsError(try ticket.stopSignal.check()) { XCTAssertEqual(($0 as? IdentityError)?.code, .authorizationRevoked) }
         do { try await fixture.store.finishOperation(ticket); XCTFail("old ticket completed") } catch {}
         fixture.keys.onTemplateDelete = nil; fixture.keys.rejectJournal = false
+        // Retirement delivers stops asynchronously; join the writer drain before reopening.
+        try await fixture.store.close()
         let reopened = try open(fixture.root, fixture.keys, fixture.authority)
         do { _ = try await reopened.recordedTemplateCandidate(fixture.ref); XCTFail("stale template recovered") }
         catch { XCTAssertEqual((error as? IdentityError)?.code, .templateRevoked) }
-        try await fixture.store.close(); try await reopened.close()
+        try await reopened.close()
     }
 
     func testPendingStopDeliveryBlocksConcurrentEpochCleanupAndLeaseRelease() async throws {
