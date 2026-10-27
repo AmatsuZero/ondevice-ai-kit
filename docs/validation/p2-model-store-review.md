@@ -1,5 +1,9 @@
 # P2 模型存储与下载审查
 
+## 2026-10-27 published SDK consumer 复验
+
+提交 `1102978bd9f66b56a09d77371a734f38152027cc` 的 `sdk-core`、`model-store`、`multimodal` 和 `backend-litertlm` release AAR 重新发布到本地 Maven；`examples:android-litertlm-native` 使用 `-PusePublishedSdk=true` 构建通过，147 tasks、22 executed。日志和摘要在 `artifacts/verification/android-lease-cancellation-20261027/published-consumer-current.*`。这确认 consumer 使用当前 ModelStore 分发链，仍不证明设备推理或 LiteRT-LM native drain。
+
 ## 2026-10-27 Android lease 返回时取消修复
 
 `ModelStore.acquire()` 在 IO dispatcher 校验并登记 lease 后，会切回调用方 dispatcher。若调用方在这次返回调度前取消，`withContext` 会丢弃结果；旧实现没有回收已登记、尚未交付的 lease，后续 `remove()` 永久报 `ModelInUseException`。这影响 Android 各后端共同使用的存储所有权，与 LiteRT-LM native drain 是否成立无关。

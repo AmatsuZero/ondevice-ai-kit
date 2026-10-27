@@ -4,6 +4,11 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 ModelStore published SDK consumer 复验
+
+- 以提交 `1102978bd9f66b56a09d77371a734f38152027cc` 重新发布 `sdk-core`、`model-store`、`multimodal` 和 `backend-litertlm` release AAR 到本地 Maven，并使用 `-PusePublishedSdk=true` 构建 `examples:android-litertlm-native`；**147 tasks / 22 executed，BUILD SUCCESSFUL**。摘要和完整日志见 `artifacts/verification/android-lease-cancellation-20261027/published-consumer-current.json` / `.log`。
+- 该结果确认分发 consumer 使用当前发布依赖链；它不增加模型资产、生产 factory、native drain、设备推理或 P11 状态。原8项本地修改与保护hash继续保留，goal active。
+
 ## 最新续接 — 2026-10-27 Android ModelStore 取消交付 lease 回收
 
 - 独立 LiteRT-LM consumer review 再次429无结论后，转向共享资源门禁，发现 `ModelStore.acquire()` 在 IO 已登记 lease、调用方尚未接收时取消，会丢弃返回值并永久 pin 模型。手动排队 dispatcher 的真实 store 回归得到 **1 test/1 failure**（取消后 remove 抛 ModelInUseException）；修复在取消退出时 NonCancellable 回收尚未交付的本次 lease，不改正常返回后的调用方所有权。
