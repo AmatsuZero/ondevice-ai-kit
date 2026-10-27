@@ -4,6 +4,14 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 LiteRT-LM unavailable 真机合同覆盖
+
+- 新增计划 Task 5 的 Kotlin instrumentation 与测试 runner 配置；真实 `ModelStore` 在 UUID 私有目录安装带 SHA-256 的合成文件，覆盖缺资产、已安装但 native drain 未证明、重复关闭三种状态。检查具体 availability/generate 拒绝、factory/输出次数为零、无 generation cache、remove 无残留 lease及精确目录清理。生产源码与 factory 边界未改。
+- TECNO KM9/API35 初次 **3/3**；临时将测试 setup 的 `UNPROVEN` 替换为 `PROVEN_CUMULATIVE` 作负向对照，得到预期 **3 tests/1 failure**（UNAVAILABLE→AVAILABLE）；恢复后正式设备 XML **3/3、0 failures、0 errors、0 skips**。强制重跑 JVM **23/23**，最终 lint 0 errors/2 既有版本提示、AAR/test APK 构建通过；默认 Demo 依赖图排除 LiteRT-LM，backend runtime 精确0.18.1且无runner/JUnit。证据冻结于 `artifacts/verification/android-litertlm-unavailable-20261027/summary.json`，不把合成合同覆盖记为模型推理或 native drain。
+- 新限定独立审查返回429无结论，未重派；一次额外runner注册查询也因自动审批服务429未执行，实际runner执行由设备XML证明。生产factory/consumer、授权模型、真实drain与API26真机仍开放，基础10/12、P4/P11及完整roadmap goal保持active。
+- 补齐上一段工作留下的iOS恢复记录：页面resource probe曾构建并安装但未启动，未重复301秒录制；普通Demo随后已恢复并无参数启动 **PID28142**。本轮读取 `/tmp/odai-camera-resource-page-20261027/restore-launch.json` 确认arguments为空，恢复包executable SHA-256仍为 `5852045750eae0f390b89de2b0f0f1b3b84ea7bdbfe0e1a7546ba3a077eea96d`。这不是新的iOS设备验收；本轮设备测试只操作Android独立test package。
+- 本批按既有授权提交Kotlin验收代码和验证文档，再以 `scripts/sync-remotes.sh feat/sdk-foundation` 同步origin+jihu；实际远端结果以本证据目录的 `sync-summary.json` 和新鲜ls-remote为准。保护工程、身份草稿与未完成线程/资源probe共8项继续留本地，原始证据/签名产物保持ignored。
+
 ## 最新续接 — 2026-10-27 P4 ThreadInventory 主机门禁刷新
 
 - 新鲜本地主机验证编译 `probes/ios-camera-lifecycle/ThreadInventory.swift` 与 `ThreadInventoryChecks.swift`（Swift 6）并执行100轮快照；正常状态为 `complete-snapshot`，send-right 引用 **2→2**，注入缺失 pthread 映射时正确降级为 `partial-snapshot`（1 次 lookup failure），4097B marker 保持。

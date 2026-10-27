@@ -4,7 +4,10 @@ android {
     publishing { singleVariant("release") { withSourcesJar() } }
     namespace = "io.ondeviceai.litertlm"
     compileSdk = 36
-    defaultConfig { minSdk = 26 }
+    defaultConfig {
+        minSdk = 26
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
 }
 
@@ -16,6 +19,8 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.4.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
     testImplementation("org.json:json:20250517")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("junit:junit:4.13.2")
 }
 
 group = "io.ondeviceai"

@@ -4,6 +4,14 @@
 
 进度口径于 2026-10-26 [复核](roadmap-progress-audit-20261026.md)：P8 调研与 P9 单模型/单平台试验里程碑已达到原定停止点，基础里程碑计数为 10/12。下文各次 5/12 是历史扩展交付口径；Android LiteRT-LM、自然质量、资源、最低系统和统一验收的未完成状态继续保留。
 
+## 2026-10-27 LiteRT-LM unavailable 真机合同覆盖
+
+批准计划 Task 5 的 Kotlin `LiteRtLmUnavailableInstrumentation` 使用真实 Android `ModelStore` 和每个用例独立的 UUID 私有目录，覆盖缺资产 `REQUIRES_ASSETS/MISSING_ASSETS`、合成文件安装后且 probe 为 `UNPROVEN` 的 `UNAVAILABLE/UNSUPPORTED_DEVICE`、重复 close 后的 `UNAVAILABLE/CLOSED`。每个状态均检查 generate 的具体拒绝类型、factory 调用和输出次数为零、generation cache 未创建；安装用例还通过真实 remove 检查无残留 lease，teardown 检查仅本用例目录已删除。
+
+TECNO KM9 / Android 15（API35）初次 **3/3**；负向对照临时把测试 setup 改为 `PROVEN_CUMULATIVE`，已安装资产用例按预期失败（`expected UNAVAILABLE but was AVAILABLE`，3 项中 1 failure），恢复 `UNPROVEN` 后正式复验 **3/3、0 failures、0 skips**。这只是测试输入负向对照，没有修改生产 gate，也不代表获得了真实 drain 证明。强制重跑 backend JVM **23/23**；最终 lint **0 errors/2 既有版本提示**、debug AAR/测试 APK 构建通过。新鲜依赖图确认默认 Demo 无 LiteRT-LM，backend 生产 runtime 固定 `0.18.1` 且无 runner/JUnit。
+
+原始设备 XML、负向对照日志、JVM XML、依赖图和源码哈希冻结于 `artifacts/verification/android-litertlm-unavailable-20261027/summary.json`。限定独立审查因 429 无结论，不计为 review pass。合成文件不是模型权重，Task 5 consumer、Task 4 production factory、授权模型、真实 native drain/推理和 API26 实机验收继续开放；基础 **10/12，P4/P11 未完成**。
+
 ## 2026-10-27 LiteRT-LM drain 判据修正（生产门禁仍关闭）
 
 固定 0.18.1 AAR 证明 `Conversation.isAlive` 是对象生命周期标志：close 先置 false，再进入 native delete；原 `terminalCallbackThenDeadConversation` 判据无效。probe 已改为 schema 2、`drainProven=false`，累计 callback 也只返回 `unverified-native-drain-contract`；不能据该 flag 关闭 post-send native 资源。两项误判回归先 RED，随后 JVM **9/9**、lint/APK/test APK 构建通过。官方 C++ 析构等待忽略错误且默认 10 分钟，目前仍无可用于生产的替代 barrier；fake 30 秒 deadline 不能证明阻塞 JNI 的结束。详见[合同修正与证据边界](android-litertlm-drain-contract.md)。本轮没有模型运行、设备推理或新完成阶段，当前基础 **10/12，P4/P11 未完成**。
