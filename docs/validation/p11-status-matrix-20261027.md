@@ -4,15 +4,15 @@
 
 | 能力 | 当前状态 | 已有证据 | 仍未验证或阻断 |
 | --- | --- | --- | --- |
-| Face detection | `pass-bounded` | iOS 27.0.1、Android 15/API35 benchmark 与设备矩阵 | iOS 15、Android API26、峰值内存、能耗、长期资源 |
-| Speech TTS | `pass-bounded` | iOS 27.0.1 与 Android 15/API35 后端/关闭路径 | 自然语音质量、最低系统、完整离线矩阵 |
-| Speech ASR file | `pass-bounded` | iOS 真机固定文件识别、取消和重入报告 | 麦克风录音、自然语音 CER/WER、iOS 15 |
-| Speech ASR Android | `unavailable-assets` | Android 后端与设备矩阵记录 | 已授权离线资源、真实转写、取消/关闭真机运行 |
-| Video SR | `pass-bounded` | iOS 真机 48 帧链路、取消、音轨和质量测量记录 | Android 后端、主观质量、GPU/能耗、最低系统 |
-| Multimodal Apple | `pass-bounded` | Apple MLXVLM 图像与视频 Demo/设备报告 | 自然质量、短视频完整验收、GPU/能耗、完整物理触控 |
-| Multimodal Android LiteRT-LM | `unverified-production-gate-closed` | LiteRT-LM 0.18.1 AAR 与 drain 合同取证、Kotlin opt-in consumer | 授权模型 manifest/weights、production factory、native drain、真实推理、质量、GPU/能耗 |
-| Face identity/liveness | `unverified-production-model` | 双端 API、存储、生命周期和分发记录 | 生产模型、PAD、授权数据、校准、准确率 |
-| Camera demo resource release | `unverified-native-residuals` | iOS 27.0.1 相机/页面退出、AtlasTextOp 线程调查 | 18×GrOp/2304B 根因、TLS/destructor 归属、最低系统、完整 review |
+| Face detection | `pass-bounded` | [benchmark](benchmark.md)、[设备矩阵](device-matrix.md) | iOS 15、Android API26、峰值内存、能耗、长期资源 |
+| Speech TTS | `pass-bounded` | [语音后端](speech-backends.md) | 自然语音质量、最低系统、完整离线矩阵 |
+| Speech ASR file | `pass-bounded` | [语音后端](speech-backends.md)、[固定文件探针](ios-asr-file-probe.md) | 麦克风录音、自然语音 CER/WER、iOS 15 |
+| Speech ASR Android | `unavailable-assets` | [语音后端](speech-backends.md)、[设备矩阵](device-matrix.md) | 已授权离线资源、真实转写、取消/关闭真机运行 |
+| Video SR | `pass-bounded` | [超分探针](video-sr-backends.md)、[Video Demo](video-bridge-demo.md) | Android 后端、主观质量、GPU/能耗、最低系统 |
+| Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[多模态视频 Demo](multimodal-video-demo.md) | 自然质量、短视频完整验收、GPU/能耗、完整物理触控 |
+| Multimodal Android LiteRT-LM | `unverified-production-gate-closed` | [移动端 VLM](mobile-vlm.md)、[drain 合同](android-litertlm-drain-contract.md) | 授权模型 manifest/weights、production factory、native drain、真实推理、质量、GPU/能耗 |
+| Face identity/liveness | `unverified-production-model` | [身份/活体](p10-face-identity.md) | 生产模型、PAD、授权数据、校准、准确率 |
+| Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、最低系统、完整 review |
 
 ## 统一结论
 
