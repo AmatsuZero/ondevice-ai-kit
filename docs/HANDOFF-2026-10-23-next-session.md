@@ -4,6 +4,13 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 Android ModelStore 取消交付 lease 回收
+
+- 独立 LiteRT-LM consumer review 再次429无结论后，转向共享资源门禁，发现 `ModelStore.acquire()` 在 IO 已登记 lease、调用方尚未接收时取消，会丢弃返回值并永久 pin 模型。手动排队 dispatcher 的真实 store 回归得到 **1 test/1 failure**（取消后 remove 抛 ModelInUseException）；修复在取消退出时 NonCancellable 回收尚未交付的本次 lease，不改正常返回后的调用方所有权。
+- 最终 ModelStore JVM **12/12**，含取消后可删与另一 owner 仍 pin 的两个回归，release AAR构建通过；LiteRT-LM JVM **25/25**、两模块 lint/consumer 构建通过（388tasks/51executed）。仓库 `verify-android.sh` 通过（725tasks/55executed/670up-to-date）；最后测试失败清理保护更新后，ModelStore全套与release重新通过（62tasks/8executed）。没有新编译warning或lint error；既有lint提示保留。
+- 新修复的限定独立review仍429无结论，不计APPROVE。证据冻结于 `artifacts/verification/android-lease-cancellation-20261027/summary.json`，详见 `docs/validation/p2-model-store-review.md`。本轮无设备操作/媒体/模型下载；不把JVM取消交付证据提升为native drain或真机推理。
+- 按既有授权仅提交本次源码、回归与记录，再同步origin+jihu；实际结果见该证据目录sync-summary.json及新鲜远端SHA。原8项未提交修改保留，保护hash不变；基础10/12、P4/P11和goal active继续保持。下一步仍需解决受支持native drain、授权模型和P4原生残留/EXIF等实际门禁，不重跑旧LLDB变体。
+
 ## 最新续接 — 2026-10-27 LiteRT-LM 可选 Kotlin consumer
 
 - 继续 Task 5，新增公开只读 `LiteRtLm.availability` 和独立 Kotlin `examples/android-litertlm-native`；真实 `ModelStore`、API/ABI 加固定 `UNPROVEN`，缺资产显示 `REQUIRES_ASSETS/MISSING_ASSETS`、已安装资产仍为 `UNAVAILABLE/UNSUPPORTED_DEVICE`。不构造 production backend、不下载模型、不生成 fixture 输出；Task 4 及 Task 5 generation/close 消费仍开放，裁定已写入设计/计划与本地 ledger。

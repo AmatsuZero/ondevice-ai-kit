@@ -1,5 +1,18 @@
 # P2 模型存储与下载审查
 
+## 2026-10-27 Android lease 返回时取消修复
+
+`ModelStore.acquire()` 在 IO dispatcher 校验并登记 lease 后，会切回调用方 dispatcher。若调用方在这次返回调度前取消，`withContext` 会丢弃结果；旧实现没有回收已登记、尚未交付的 lease，后续 `remove()` 永久报 `ModelInUseException`。这影响 Android 各后端共同使用的存储所有权，与 LiteRT-LM native drain 是否成立无关。
+
+新增 Kotlin 回归用手动排队的调用方 dispatcher 精确暂停返回，不依赖 sleep、模型下载或 native fake。真实安装/校验/登记后先确认模型正在被使用，再取消并放行返回；原实现得到 **1 test / 1 failure**，失败即取消后仍无法删除。修复仅在 `acquire` 取消退出时，以 `NonCancellable` 关闭本次尚未交付的 lease；正常返回后仍由调用方负责关闭。另一用例确认取消不会释放其他持有者的 lease。
+
+- 最终 ModelStore JVM **12/12、0 failures/errors/skips**（包含两个新回归）；release AAR 构建通过，62 tasks（8 executed）。
+- LiteRT-LM JVM **25/25**、ModelStore/LiteRT-LM lint 和 opt-in consumer 构建通过；388 tasks（51 executed）。lint 保留既有提示，无 error。
+- `scripts/verify-android.sh` **BUILD SUCCESSFUL**，725 tasks（55 executed、670 up-to-date）；未变更任务的已有结果按 Gradle 增量门禁复用。最后只修改测试的失败清理保护，随后 ModelStore 全套重新执行通过。
+- 独立限定 reviewer 返回 `429 Too Many Requests`，没有审查结论。原始红/绿灯日志、XML、源码 hash 与验证摘要在 `artifacts/verification/android-lease-cancellation-20261027/`。
+
+本轮未操作真机、访问媒体、接入生产模型或启用 LiteRT-LM factory；基础10/12、P4/P11与完整交付目标仍开放。下方2026-10-16结果保留为历史记录。
+
 日期：2026-10-16。范围限定为 Apple/Android 的 manifest 校验、原子安装、下载协调、取消合并和 lease；没有接入新模型、Demo UI 或真机推理。
 
 ## 独立审查与修复

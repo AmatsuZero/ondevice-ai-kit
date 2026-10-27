@@ -91,12 +91,23 @@ class ModelStore(private val root:File,private val compatibility:ModelCompatibil
             } finally { stage.deleteRecursively() }
         }
     } } }
-    suspend fun acquire(ref:ModelRef):ModelLease=withContext(Dispatchers.IO) { mutex.withLock {
-        check(statusLocked(ref)==ModelStatus.INSTALLED){"absent"}
-        val manifest=ModelManifest.parse(File(directory(ref),".odai-manifest.json").readText())
-        val token=UUID.randomUUID().toString();leases.getOrPut(ref){mutableSetOf()}.add(token)
-        ModelLease(directory(ref),manifest){mutex.withLock{leases[ref]?.remove(token);Unit}}
-    } }
+    suspend fun acquire(ref:ModelRef):ModelLease {
+        var acquired:ModelLease?=null
+        try {
+            return withContext(Dispatchers.IO) { mutex.withLock {
+                check(statusLocked(ref)==ModelStatus.INSTALLED){"absent"}
+                val manifest=ModelManifest.parse(File(directory(ref),".odai-manifest.json").readText())
+                val token=UUID.randomUUID().toString();leases.getOrPut(ref){mutableSetOf()}.add(token)
+                ModelLease(directory(ref),manifest){mutex.withLock{leases[ref]?.remove(token)}}
+                    .also { acquired=it }
+            } }
+        } catch(cancelled:CancellationException) {
+            // withContext can discard the result when cancellation wins return dispatch.
+            // Until delivery succeeds, this method owns the registered lease.
+            withContext(NonCancellable) { acquired?.close() }
+            throw cancelled
+        }
+    }
     suspend fun remove(ref:ModelRef)=withContext(Dispatchers.IO) {mutex.withLock {
         validateRef(ref);if(!leases[ref].isNullOrEmpty())throw ModelInUseException()
         val dir=directory(ref);if(dir.exists() && !dir.deleteRecursively())throw java.io.IOException("remove failed")
