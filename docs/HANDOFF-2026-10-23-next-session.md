@@ -4,6 +4,11 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 P11 一页状态矩阵
+
+- 新增 `docs/validation/p11-status-matrix-20261027.md`，把 readiness 快照的 9 项能力、bounded 状态、证据链接、未验证项和 `not-ready` 发布阻断整理为可审阅矩阵；来源哈希已纳入 `artifacts/verification/p11-readiness-20261027/summary.json`，校验结果为 16 条来源哈希、9 行未达 terminal pass。
+- 矩阵不提升任何能力状态，不接受许可证或下载模型；P4 原生残留、LiteRT-LM 模型/drain、Face Identity 生产模型、最低系统与统一质量/资源报告仍是发布阻断。提交 `00b11a1d255473f91d1a3c02d5e3c1fe60f48baa` 已同步 origin+jihu，goal active 保持。
+
 ## 最新续接 — 2026-10-27 ModelStore published SDK consumer 复验
 
 - 以提交 `1102978bd9f66b56a09d77371a734f38152027cc` 重新发布 `sdk-core`、`model-store`、`multimodal` 和 `backend-litertlm` release AAR 到本地 Maven，并使用 `-PusePublishedSdk=true` 构建 `examples:android-litertlm-native`；**147 tasks / 22 executed，BUILD SUCCESSFUL**。摘要和完整日志见 `artifacts/verification/android-lease-cancellation-20261027/published-consumer-current.json` / `.log`。
