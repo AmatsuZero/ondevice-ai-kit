@@ -20,6 +20,7 @@ EXPECTED = {
 MEMORY_METHOD = "process-resident-mach-task-basic-info-10ms"
 UNVERIFIED = ["metalGpuPeak", "energy", "naturalImageQuality"]
 RUBRIC = "synthetic-red-square-v1"
+SAMPLE_LABELS = {5: "five", 30: "thirty"}
 
 
 def _duration(value, name):
@@ -34,7 +35,9 @@ def _integer(value, name):
     return value
 
 
-def validate(run):
+def validate(run, expected_samples=5):
+    if type(expected_samples) is not int or expected_samples <= 0:
+        raise ValueError("expected_samples must be a positive integer")
     if "errorType" in run:
         raise ValueError("benchmark run failed")
     if run.get("schemaVersion") != 1:
@@ -50,8 +53,15 @@ def validate(run):
     if run.get("warmup") != {"state": "success"}:
         raise ValueError("warm-up did not succeed")
     iterations = run.get("iterations")
-    if not isinstance(iterations, list) or len(iterations) != 5:
-        raise ValueError("expected exactly five measured iterations")
+    if not isinstance(iterations, list) or len(iterations) != expected_samples:
+        label = SAMPLE_LABELS.get(expected_samples, str(expected_samples))
+        raise ValueError(f"expected exactly {label} measured iterations")
+    expected_profile = f"1-warmup-{expected_samples}-samples"
+    profile = run.get("sampleProfile")
+    if expected_samples != 5 and profile != expected_profile:
+        raise ValueError("sample profile is required and must match expected sample count")
+    if expected_samples == 5 and profile is not None and profile != expected_profile:
+        raise ValueError("sample profile does not match expected sample count")
     for expected_index, item in enumerate(iterations, 1):
         if not isinstance(item, dict) or item.get("index") != expected_index:
             raise ValueError("invalid iteration sequence")
@@ -96,8 +106,8 @@ def _statistics(values):
     }
 
 
-def summarize(raw):
-    run = validate(raw)
+def summarize(raw, expected_samples=5):
+    run = validate(raw, expected_samples=expected_samples)
     iterations = run["iterations"]
     return {
         "schemaVersion": 1,
@@ -107,6 +117,7 @@ def summarize(raw):
         "OS": run["OS"],
         **EXPECTED,
         "sampleCount": len(iterations),
+        "sampleProfile": f"1-warmup-{expected_samples}-samples",
         "percentileMethod": "nearest-rank",
         "timingsMs": {
             "load": _statistics([item["loadMs"] for item in iterations]),
@@ -128,10 +139,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--expected-samples", type=int, default=5)
     args = parser.parse_args()
     raw = json.loads(args.input.read_text(), parse_constant=lambda value: (_ for _ in ()).throw(ValueError(value)))
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(summarize(raw), ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+    args.output.write_text(json.dumps(summarize(raw, expected_samples=args.expected_samples),
+                                     ensure_ascii=False, indent=2, allow_nan=False) + "\n")
 
 
 if __name__ == "__main__":

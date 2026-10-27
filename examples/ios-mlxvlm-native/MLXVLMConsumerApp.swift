@@ -18,6 +18,8 @@ struct MLXVLMConsumerApp: App {
             }.padding().task {
                 if ProcessInfo.processInfo.arguments.contains("--sdk-mlxvlm-video-suite") {
                     runVideo()
+                } else if ProcessInfo.processInfo.arguments.contains("--sdk-mlxvlm-benchmark-30") {
+                    runBenchmark(measuredIterations: 30, outputName: "sdk-mlxvlm-benchmark-30.json")
                 } else if ProcessInfo.processInfo.arguments.contains("--sdk-mlxvlm-benchmark") {
                     runBenchmark()
                 } else if ProcessInfo.processInfo.arguments.contains("--sdk-mlxvlm-fixture-suite") { run() }
@@ -44,28 +46,31 @@ struct MLXVLMConsumerApp: App {
             running = false
         }
     }
-    private func runBenchmark() {
+    private func runBenchmark(measuredIterations: Int = BenchmarkSuite.defaultMeasuredIterations,
+                              outputName: String = "sdk-mlxvlm-benchmark.json") {
         guard !running else { return }
         running = true
-        status = "Running bounded fixed-image benchmark…"
+        status = "Running fixed-image benchmark (1 warm-up + \(measuredIterations) samples)…"
         Task {
-            await BenchmarkSuite.run()
-            status = "Finished. See sdk-mlxvlm-benchmark.json in this app's Documents."
+            let failure = await BenchmarkSuite.run(measuredIterations: measuredIterations, outputName: outputName)
+            status = BenchmarkRunStatus.message(outputName: outputName, failure: failure)
             running = false
         }
     }
 }
 
 private enum BenchmarkSuite {
-    static let measuredIterations = 5
+    static let defaultMeasuredIterations = 5
     static let prompt = "Describe this image in one brief sentence."
     static let fixtureSHA256 = "60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606"
 
-    static func run() async {
+    static func run(measuredIterations: Int, outputName: String) async -> String? {
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let output = documents.appendingPathComponent("sdk-mlxvlm-benchmark.json")
-        var report: [String: Any] = fixedMetadata()
+        let output = documents.appendingPathComponent(outputName)
+        var report: [String: Any] = fixedMetadata(measuredIterations: measuredIterations)
+        var failure: String?
         do {
+            guard measuredIterations > 0 else { throw BenchmarkError.timing }
             let fixture = documents.appendingPathComponent("fixture.png")
             guard try FixtureSuite.hash(fixture) == fixtureSHA256 else { throw BenchmarkError.fixture }
             let manifest = try SmolVLM2Model.manifest()
@@ -90,11 +95,16 @@ private enum BenchmarkSuite {
             report["memory"] = memory.snapshot()
             try await store.remove(manifest.ref)
         } catch {
-            report["errorType"] = String(describing: type(of: error))
+            failure = String(describing: type(of: error))
+            report["errorType"] = failure
         }
-        if let data = try? JSONSerialization.data(withJSONObject: report, options: [.sortedKeys, .prettyPrinted]) {
-            try? data.write(to: output, options: .atomic)
+        do {
+            let data = try JSONSerialization.data(withJSONObject: report, options: [.sortedKeys, .prettyPrinted])
+            try data.write(to: output, options: .atomic)
+        } catch {
+            failure = failure.map { "\($0); ReportWriteFailure" } ?? "ReportWriteFailure"
         }
+        return failure
     }
 
     private static func iteration(store: ModelStore, manifest: ModelManifest, fixture: URL,
@@ -130,7 +140,7 @@ private enum BenchmarkSuite {
         }
     }
 
-    private static func fixedMetadata() -> [String: Any] {
+    private static func fixedMetadata(measuredIterations: Int) -> [String: Any] {
         let process = ProcessInfo.processInfo
         let sdkCommit = process.arguments.first { $0.hasPrefix("--sdk-commit=") }?.split(separator: "=", maxSplits: 1).last.map(String.init) ?? "unverified"
         return ["schemaVersion": 1, "runId": UUID().uuidString, "sdkCommit": sdkCommit,
@@ -139,6 +149,7 @@ private enum BenchmarkSuite {
                 "modelRevision": SmolVLM2Model.identity.modelRevision,
                 "runtimeRevision": SmolVLM2Model.identity.runtimeRevision,
                 "fixtureHash": fixtureSHA256, "prompt": prompt, "maxOutputTokens": 32,
+                "sampleProfile": "1-warmup-\(measuredIterations)-samples",
                 "qualityScope": "synthetic-fixture-only",
                 "unverified": ["metalGpuPeak", "energy", "naturalImageQuality"]]
     }

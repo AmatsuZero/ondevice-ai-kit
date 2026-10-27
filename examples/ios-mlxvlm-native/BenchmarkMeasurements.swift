@@ -1,6 +1,15 @@
 import Foundation
 import Darwin
 
+enum BenchmarkRunStatus {
+    static func message(outputName: String, failure: String?) -> String {
+        if let failure {
+            return "Benchmark failed (\(failure)). See \(outputName) in this app's Documents if present."
+        }
+        return "Finished. See \(outputName) in this app's Documents."
+    }
+}
+
 /// Local consumer instrumentation only; never interpreted as GPU/Metal allocation.
 final class ResidentMemorySampler: @unchecked Sendable {
     static let method = "process-resident-mach-task-basic-info-10ms"

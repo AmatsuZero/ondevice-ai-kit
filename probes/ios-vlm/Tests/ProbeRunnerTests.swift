@@ -128,6 +128,10 @@ final class ProbeRunnerTests: XCTestCase {
         XCTAssertFalse((object["device"] as? String ?? "").isEmpty)
         XCTAssertFalse((object["OS"] as? String ?? "").isEmpty)
         XCTAssertEqual(object["actualBackend"] as? String, "fake")
+        let latest = directory.appendingPathComponent("p9-latest.json")
+        let latestObject = try XCTUnwrap(JSONSerialization.jsonObject(with: Data(contentsOf: latest)) as? [String: Any])
+        XCTAssertEqual(latestObject["runId"] as? String, object["runId"] as? String)
+        XCTAssertEqual(latestObject["output"] as? String, "ok")
     }
 }
 

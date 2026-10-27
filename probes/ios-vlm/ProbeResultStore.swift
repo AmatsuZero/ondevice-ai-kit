@@ -26,6 +26,7 @@ struct ProbeResultStore: Sendable {
         #endif
         let data = try JSONSerialization.data(withJSONObject: object, options: [.sortedKeys])
         try data.write(to: file, options: .atomic)
+        try data.write(to: directory.appendingPathComponent("p9-latest.json"), options: .atomic)
         return file
     }
 }

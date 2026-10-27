@@ -4,9 +4,9 @@ import unittest
 from tools import mlxvlm_benchmark_report as report
 
 
-def valid_run():
+def valid_run(sample_count=5, sample_profile=None):
     iterations = []
-    for index in range(5):
+    for index in range(sample_count):
         load = 100.0 + index
         first = 140.0 + index
         total = 180.0 + index
@@ -18,7 +18,7 @@ def valid_run():
             "output": "A red square on a white background.",
             "quality": {"rubric": "synthetic-red-square-v1", "passed": True},
         })
-    return {
+    run = {
         "schemaVersion": 1,
         "runId": "run-1",
         "sdkCommit": "a" * 40,
@@ -42,6 +42,9 @@ def valid_run():
         "unverified": ["metalGpuPeak", "energy", "naturalImageQuality"],
         "qualityScope": "synthetic-fixture-only",
     }
+    if sample_profile is not None:
+        run["sampleProfile"] = sample_profile
+    return run
 
 
 class MLXVLMBenchmarkReportTests(unittest.TestCase):
@@ -54,6 +57,23 @@ class MLXVLMBenchmarkReportTests(unittest.TestCase):
         self.assertEqual(summary["memory"]["deltaBytes"], 150)
         self.assertEqual(summary["quality"], {"rubric": "synthetic-red-square-v1", "passed": 5, "total": 5})
         self.assertEqual(summary["unverified"], ["metalGpuPeak", "energy", "naturalImageQuality"])
+
+    def test_valid_thirty_sample_run_requires_and_reports_explicit_profile(self):
+        summary = report.summarize(valid_run(30, "1-warmup-30-samples"), expected_samples=30)
+        self.assertEqual(summary["sampleCount"], 30)
+        self.assertEqual(summary["sampleProfile"], "1-warmup-30-samples")
+        self.assertEqual(summary["timingsMs"]["load"]["count"], 30)
+
+    def test_explicit_profile_rejects_wrong_sample_count(self):
+        with self.assertRaisesRegex(ValueError, "thirty measured iterations"):
+            report.validate(valid_run(), expected_samples=30)
+        run = valid_run(30, "1-warmup-5-samples")
+        with self.assertRaisesRegex(ValueError, "sample profile"):
+            report.validate(run, expected_samples=30)
+
+    def test_thirty_sample_profile_is_required_for_raw_report_provenance(self):
+        with self.assertRaisesRegex(ValueError, "sample profile"):
+            report.validate(valid_run(30), expected_samples=30)
 
     def test_rejects_identity_drift_and_wrong_sample_count(self):
         for key, value in (

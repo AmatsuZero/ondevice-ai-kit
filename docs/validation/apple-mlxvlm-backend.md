@@ -83,6 +83,20 @@ iPhone16ProMax/iOS27.0.1，UDID `00008140-0008703436D3001C`；独立bundle `io.o
 
 新增验证：consumer/validator定向10/10、工具完整98/98（既有Ruby3.4 wrapper）、apple-mlx host12/12、固定缓存的签名iOS构建均通过。observer故障注入确实断言失败后恢复GREEN；RSS不可用与事件顺序使用真实Swift helper编译执行验证，不只检查源码字符串。基础Swift461/461为前包既有证据，本包未修改基础源码，未把旧计数称为新跑结果。
 
+## 固定单图 1 warm-up + 30 samples（2026-10-25）
+
+为补齐 P9/P11 规模化统计，本轮保留旧 `--sdk-mlxvlm-benchmark` 的 1 warm-up + 5 兼容行为，新增显式 `--sdk-mlxvlm-benchmark-30` 入口和 validator `--expected-samples 30`。从当前源码生成的独立 consumer 使用固定缓存、既有 Team `4X996UV8LC` 构建并安装到同一授权 iPhone；全程使用 `xcodebuild`/`xcrun devicectl`，无镜像、无坐标点击、无私人媒体。
+
+- 原始设备报告：`artifacts/verification/apple-mlxvlm-benchmark-30-20261025/device-report.json`，SHA-256 `dd75f54cb84b821261e06639d032af2bba539fbdf1706023691479eb2e7c9f66`；汇总：同目录 `summary.json`，SHA-256 `3d970842aec57e0e79519f6588a49beb0b7ff3f9bdd776611aa3648d57fb7b83`。
+- iPhone 16 Pro Max / iOS 27.0.1 (`iPhone17,2`)，`runId=D824ACA7-42E8-492D-B9A5-6FE3868551F5`，`sampleProfile=1-warmup-30-samples`，warm-up 成功，测量 30/30；模型/runtime/fixture identity 与固定 manifest 一致。
+- nearest-rank：load p50/p95 `334.141875/372.181459 ms`；首 update `782.097334/819.266917 ms`；total `943.978709/981.462959 ms`。30 次输出均命中 synthetic rubric（30/30）。RSS baseline/peak/delta `34,127,872 / 1,186,676,736 / 1,152,548,864 B`，仅代表 `process-resident-mach-task-basic-info-10ms` 进程采样。
+
+该报告只补齐固定合成图片的规模化延迟/RSS 统计；不代表自然图片质量、Metal GPU peak、energy、冷启动、跨设备预算或 P11 统一验收。`metalGpuPeak`、`energy`、`naturalImageQuality` 继续为 **unverified**。新增 validator/consumer 定向测试与构建通过，未提交或推送本包。
+
+### Review 修复后的复核
+
+独立 code review 的两个 MEDIUM 已修复：显式 30 样本现在必须携带匹配的 `sampleProfile`，benchmark 运行/报告写盘失败会显式反馈而不显示成功。当前源码重新构建并在同一物理设备重跑的证据为 `artifacts/verification/apple-mlxvlm-benchmark-30-20261025-fix2/`，raw SHA-256 `186a2077bf966dfb69cd89034d940c79a09b91a6d09d74b05172dc862c3c73d1`，summary SHA-256 `4cf8f2430d896addd2f2d821d815b795647924c83f09b9d825ed5987a6fa61d6`。validator/consumer 定向测试 **13/13**；架构 lane 因 429 未返回独立结论。
+
 ## 保留门槛
 
 独立reviewer仍pending，作者自审不能代替独立APPROVE。未完成：短视频、Android实际推理、KMP/Demo、自然图片质量基准、纯首token/冷启动/P11规模性能统计、Metal/GPU峰值、最低系统设备及增强包binary分发。下一独立包选择单图KMP bridge（公共契约与平台adapter），Demo UI/短视频/Android新模型各自分包，不在本证据包扩张。根基础模块的十XCFramework无需重复打包，本包只验证新增source package消费。

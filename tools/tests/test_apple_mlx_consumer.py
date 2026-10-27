@@ -73,6 +73,8 @@ let absent = BenchmarkTiming()
 absent.start()
 absent.finish()
 precondition(absent.snapshot() == nil)
+precondition(BenchmarkRunStatus.message(outputName: "report.json", failure: nil) == "Finished. See report.json in this app's Documents.")
+precondition(BenchmarkRunStatus.message(outputName: "report.json", failure: "StoreFailure") == "Benchmark failed (StoreFailure). See report.json in this app's Documents if present.")
 print("measurement behavior passed")
 ''')
             binary = directory / 'measurements'

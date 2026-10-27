@@ -21,7 +21,7 @@
 ## Review Focus
 
 - A first update delivered before load completion, or after terminal completion, must make the run invalid.
-- Fewer or more than five measured iterations must not produce a comparable summary.
+- The default profile requires exactly five measured iterations; the explicit thirty-sample profile requires exactly thirty iterations and its matching `sampleProfile`.
 - Identity or fixture drift must be rejected before statistics are emitted.
 - Resource fields must not relabel process RSS as Metal/GPU memory.
 - Synthetic output without both rubric concepts must remain a quality failure without hiding the raw output.
@@ -59,7 +59,7 @@
 
 **Interfaces:**
 - Consumes: existing backend/client generation and fixed consumer provisioning.
-- Produces: public opt-in benchmark observer events for model-load completion plus `sdk-mlxvlm-benchmark.json` containing one warm-up and five measured iterations.
+- Produces: public opt-in benchmark observer events for model-load completion plus the default `sdk-mlxvlm-benchmark.json` (one warm-up + five measured iterations) and explicit `sdk-mlxvlm-benchmark-30.json` (one warm-up + thirty measured iterations with a matching sample profile).
 
 - [x] **Step 1: Write failing Swift and generator tests** for ordered load timing, five samples, 10 ms process-RSS labeling, frozen prompt/budget/identity, and explicit unverified GPU/energy/natural-quality fields.
 - [x] **Step 2: Run focused tests**; Expected: FAIL because benchmark observation/output is absent.
