@@ -4,6 +4,13 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 Metal 单目标资源观察
+
+- 解决受限沙箱无法初始化 InstrumentsCLI 用户缓存的工具入口问题；受控提权后模板列表可用。物理 iPhone16ProMax/iOS27.0.1 上，以已安装独立 VLMProbe、固定 manifest/model/公开 fixture 录制单目标 `Metal System Trace`：20.776271秒、PID28389、进程exit0；新报告runId `D8FEFBDC-94F8-425B-931C-474925C09DFC` status success，fixture/model/runtime identity不变。
+- 新导出501条该PID GPU interval（495Compute/6CoreImage）、3,227条 `MTLDevice.currentAllocatedSize` 记录，观察峰值 **1,723,596,800B**，资源分配事件1,436条。原始trace/XML/report、带schema/引用/PID断言的汇总脚本和摘要见 `artifacts/verification/p9-metal-20261027/`；这是单次合成图独立probe的Metal分配观察，不能当作物理GPU驻留、RSS可加值、当前SDK完整验收或统一预算。
+- Power Profiler All Processes被Location Energy Model拒绝，改为单目标后xctrace在 `NetworkConnectionStatsModeling.receive(row:writer:context:)` 触发SIGTRAP，trace缺模板无法导出；相关原始报告/诊断记录在 `artifacts/verification/p9-power-20261027/`。不重跑相同失败组合；能耗仍unverified。普通Demo已无参数启动恢复，见Metal证据目录restore-demo-launch.json。
+- 更新移动端VLM记录、P11矩阵及readiness/candidate来源哈希，9行仍有gap，`open/not-ready` 与基础10/12、P4/P11、goal active保持。原8项本地修改及保护hash保留；本包按既有授权精确提交文档并同步origin+jihu，实际SHA以新鲜远端检查为准。下一独立项需提升真实资源/质量/最低系统或production门禁，避免重复仅有GPU activity的录制。
+
 ## 最新续接 — 2026-10-27 P11 一页状态矩阵
 
 - 新增 `docs/validation/p11-status-matrix-20261027.md`，把 readiness 快照的 9 项能力、bounded 状态、证据链接、未验证项和 `not-ready` 发布阻断整理为可审阅矩阵；来源哈希已纳入 `artifacts/verification/p11-readiness-20261027/summary.json`，校验结果为 16 条来源哈希、9 行未达 terminal pass。

@@ -112,6 +112,16 @@ TECNO KM9 / Android 15（API35）初次 **3/3**；负向对照临时把测试 se
 
 本轮把 P9/P5 的 GPU 观测从完全缺样本推进到有原始 trace，但 `energy`、可比较的 GPU 峰值、自然质量、最低系统和 Android 生产后端仍为 **unverified**。
 
+## 2026-10-27 Metal 单目标分配观察（固定公开 fixture）
+
+为区分 Metal 分配观察和能耗门禁，本轮在同一已授权 iPhone 16 Pro Max / iOS 27.0.1 上，以单目标 `Metal System Trace` 启动已安装的 `com.ondeviceaikit.probe.vlm`，沿用设备 Documents 中已核对的 `fixture.png`、manifest 和模型文件。录制参数、原始 trace、XML 导出、设备报告和确定性汇总脚本保存在 `artifacts/verification/p9-metal-20261027/`。
+
+- TOC 显示录制窗口 `20.776271 s`，VLMProbe PID `28389`，进程 `exit(0)`，Metal GPU 为 `A18 Pro`，`Counter Set: (null)`、`Shader Timeline: Disabled`。设备报告 `runId=D8FEFBDC-94F8-425B-931C-474925C09DFC`，`status=success`，backend `mlx.smolvlm2-500m`，fixture/model/runtime hash 与固定清单一致；首 token `592.326375 ms`、总耗时 `1223.079625 ms`、进程常驻采样峰值 `1,164,345,344 B`。
+- 过滤到该 PID 的 `metal-gpu-intervals` 有 **501** 条：`495` 条 Compute、`6` 条 CoreImage。`metal-current-allocated-size` 有 **3,227** 条记录，观察到的最大值为 **1,723,596,800 B**；`metal-resource-allocations` 有 **1,436** 条该 PID 记录。该值是 `MTLDevice.currentAllocatedSize` 的 Metal 分配观察值，不能解释为物理 GPU 驻留峰值、全机 GPU 预算或可与 RSS 相加的独立内存。
+- 同窗口 `Power Profiler` 的 All Processes 录制被 Location Energy Model 拒绝；单目标录制结束时 `xctrace` 在 `NetworkConnectionStatsModeling.receive(row:writer:context:)` 触发 `EXC_BREAKPOINT/SIGTRAP`，trace 没有可导出的模板数据。能耗仍为 **unverified**，过程和原始报告见 `artifacts/verification/p9-power-20261027/power-attempt.json`。
+
+本轮新增的是单次固定合成图片的 GPU activity 与 Metal 分配观察，不升级自然质量、可比较 GPU peak、能耗、长时间资源预算、跨设备矩阵或 P11 终态。
+
 ## 2026-10-25 固定单图 1 warm-up + 30 samples 真机 benchmark（非镜像）
 
 为补齐 P9 固定单图的规模化统计，本轮从当前源码生成独立 `MLXVLMConsumer` artifact，使用既有本地缓存和签名 Team，在物理 iPhone 16 Pro Max / iOS 27.0.1（`iPhone17,2`）上运行显式 `--sdk-mlxvlm-benchmark-30`。全程只使用 `xcodebuild`、`xcrun devicectl` 和 App Documents 文件服务；没有使用 iPhone 镜像、镜像画布、坐标点击或私人媒体。公开 fixture 与 14 个固定模型文件均在设备端复制/清单核对后才启动。

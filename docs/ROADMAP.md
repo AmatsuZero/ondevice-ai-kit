@@ -12,6 +12,8 @@
 
 2026-10-27 P11 一页状态矩阵：新增[状态矩阵](validation/p11-status-matrix-20261027.md)，覆盖9项能力和统一 `open/not-ready` 发布阻断；矩阵来源哈希纳入 readiness 校验，16项来源哈希通过。它不提升局部 pass-bounded 结果，也不关闭P4/P11。
 
+2026-10-27 P9/P11资源补证：固定公开单图的独立VLMProbe单目标Metal trace成功（20.776271秒、PID28389），501条GPU activity、3,227条Metal分配记录，观察峰值1,723,596,800B。Power Profiler因工具SIGTRAP无有效导出，能耗仍未验证；本轮不关闭可比较GPU peak、统一资源预算或P11。详见[移动端VLM](validation/mobile-vlm.md)。
+
 2026-10-27 Android LiteRT-LM consumer：公开只读availability与独立Kotlin app已完成project/Maven Local消费及TECNO缺资产UI验证；backend JVM25/25、consumer2/2、multimodal48/48，设备backend4/4、UI1/1。默认Demo/base multimodal无vendor runtime，opt-in精确0.18.1；lint无error、warning保留。生产factory/generation/close消费、模型、真实drain/推理、API26及独立review仍开放，Task5仅分段交付；详见[移动端VLM](validation/mobile-vlm.md)。基础10/12、P4/P11未完成不变。
 
 2026-10-27 P4当前源码Compose相机UI：真机控件/前后台/用户停止2/2，两分钟持续UI1/1，合计3/3、0失败/跳过；四窗口新增748/750/749/750，120.457944秒后计数3047，停止5秒不增加。普通Demo已无参数恢复；未访问相册，无图像/视频附件。补齐当前源码三项UI验证，原生GrOp、PHPicker EXIF、最低系统/全范围审查及P11仍开放，基础10/12不变。见[P4记录](validation/p4-camera-stability.md)。
