@@ -6,6 +6,8 @@
 
 **完整 SDK/Demo 交付仍在进行。** P4 交互/资源释放、语音实录与 Android ASR、视频 Android/质量、多模态 Android LiteRT-LM 生产推理、身份模型/PAD/数据/校准、资源与最低系统验收及 P11 统一验收均继续推进。P9 的单模型/单平台试验里程碑已完成，当前活动工作是其已批准的 Android 扩展包。
 
+2026-10-28 P4 全范围审查：fresh reviewer 覆盖camera isolation、synthetic PHPicker harness和当前resource/page/thread probe，结果0 Critical、2 Important、0 Minor。默认resource probe的静默报告失败已RED→GREEN修复并通过generic iOS15 build；受保护signing工程明确排除。官方上游核验没有找到处理当前AtlasTextOp TLS/18×GrOp残留的受支持升级路径，故完整review子门槛关闭，但native residual、真机EXIF和最低系统仍阻断P4；见[审查记录](validation/p4-full-review-20261028.md)。基础10/12、P4/P11开放状态不变。
+
 2026-10-27 分批交付：用户已授权将验证通过的benchmark、多模态Kotlin/iOS picker、相机隔离、可选LiteRT-LM基础门禁与合成EXIF验证分别提交，并同步现有foundation分支到origin+jihu。提交与最新复验见[handoff顶部](HANDOFF-2026-10-23-next-session.md)；签名工程、身份草稿和未完成资源取证工具保留本地。提交/同步不关闭P4/P11，也不表示生产后端或发布验收。
 
 2026-10-27 Android ModelStore：修复IO已登记但尚未交付的lease在返回调度前取消时遗失的问题；确定性回归RED→GREEN，ModelStore12/12、LiteRT-LM25/25、lint/consumer/release AAR和仓库Android门禁通过。只回收本次未交付lease，其他owner仍pin；独立review429未取得结论。见[P2补充](validation/p2-model-store-review.md)。未增加设备/模型/native drain验收，基础10/12、P4/P11仍开放。

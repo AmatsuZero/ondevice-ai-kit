@@ -1,5 +1,18 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-10-28 全范围审查与依赖结论
+
+fresh P4 code-review 覆盖 camera isolation、synthetic PHPicker harness 和当前
+resource/page/thread probe，结果为0 Critical、2 Important、0 Minor。默认 resource probe
+静默吞掉二次报告写入失败的问题已按 RED→GREEN 增加有界 fallback，并通过 fresh generic
+iOS 15 unsigned build；受保护 signing 工程继续留在独立 workstream，禁止进入 P4 选择。
+完整范围、哈希和验证见[全范围审查记录](p4-full-review-20261028.md)。
+
+上游只读核验同时得到 `no-supported-upgrade-conclusion`：已发布的 Compose 1.12.2 /
+Skiko 0.150.2 及更后 Skia m153 源码仍保留相同 AtlasTextOp TLS 单槽、调用线程
+`ClearCache()` 和 `GrRecordingContext` 析构清理机制，没有证据表明升级会处理本次18个
+residual。当前不升级、不强制覆盖 Skiko、不调用私有清理，也不重标 Leaks；P4 继续开放。
+
 ## 2026-10-27 分配时间与线程快照邻接复核
 
 对既有 `p4-thread-calibration-20261027` 的完整 Allocations List、Leaks 明细和 236 个 own-task 快照做了只读时间对齐。18 个最终 live `GrOp` 中，1 个在 trace 开始前已有；其余 17 个分配的 trace 相对时间均能由 4097B marker 校准到分配时刻前后各约 1.1 秒内的快照，并且前后快照都观察到同一个 kernel thread ID。7 个导出低 32 位标签在不同分配窗口分别对应多个不同 kernel thread ID，具体映射与每行邻接时间见 `artifacts/verification/p4-thread-calibration-20261027/allocation-snapshot-correlation.json`，复核脚本为同目录 `correlate_allocations.py`。

@@ -6,6 +6,8 @@
 
 基础里程碑仍为 **10/12**：P4 和 P11 未完成。最新 P4 线程校准在当前源码生成的独立 probe 上完成三轮页面退出/重入和同 PID 301 秒 Leaks 录制：三轮窗口新增 687/661/660 次结果，最后页面的 owner、bridge、Compose controller 和 Metal layer 均释放；trace 最终仍有 18×GrOp/2304B live。4097B marker 校准了导出的低32位 thread label，但7个 GrOp label 对应多个不同 kernel thread ID，尚未证明析构/free/TLS 归属。证据见 [P4 AtlasTextOp 调查](p4-atlas-text-cache.md)；不把页面弱引用释放或严格并发门禁升级为零泄漏、最低系统或 P4 完成。
 
+P4 当前实现/验证包已取得 fresh 全范围 review：0 Critical、2 Important、0 Minor。默认 resource probe 静默吞掉二次报告写入失败的问题已按 compile RED→GREEN 修复，并通过新生成 generic iOS15 unsigned build；受保护 signing 工程被明确排除。上游依赖评估没有找到可支持的 Compose/Skiko/Skia 升级修复，故审查子门槛关闭但 native residual、真机 EXIF 与最低系统继续开放。范围、哈希与验证见 [P4 全范围审查](p4-full-review-20261028.md)。
+
 P11 的 SDK committed-tree 快照已经冻结，但统一候选仍未就绪：剩余模型 revision、跨能力 fixture/设备矩阵，以及所有已接入能力的统一任务/质量/资源/取消报告尚未收口。LiteRT-LM 生产 factory、授权模型、真实 native drain 与 Android 推理仍未验证；iOS15/API26 设备缺口继续按设备矩阵记录。
 
 P4 ThreadInventory 主机门禁已刷新：Swift6 主机100轮快照 complete、send-right 2→2，缺失 pthread 映射正确为 partial；iOS15 arm64 typecheck 与生成器 Ruby 语法检查通过。该证据只覆盖主机快照/释放完整性，不证明真机线程生命周期、TLS/destructor 归属、GrOp 根因或零泄漏。证据见 `artifacts/verification/p4-thread-inventory-local-20261027/summary.json`。
@@ -34,7 +36,7 @@ iOS15、Android API26 仍需设备单项签收。现代 iPhone 已验启动、�
 
 ## 分阶段恢复
 
-执行范围已改为 [ROADMAP](../ROADMAP.md)。P0/P1/P2/P3 已完成；P4 已完成的交互/资源抽样见设备矩阵，剩余 EXIF、资源释放和最低系统项保持待验收。P5 人脸分发与 benchmark、P6 语音分发的当前证据见上表和对应记录。独立整分支审查因工具用量限制未完成，不宣称审查通过，不合入 main。
+执行范围已改为 [ROADMAP](../ROADMAP.md)。P0/P1/P2/P3 已完成；P4 已完成的交互/资源抽样见设备矩阵，剩余 EXIF、资源释放和最低系统项保持待验收。P5 人脸分发与 benchmark、P6 语音分发的当前证据见上表和对应记录。P4 当前范围的 fresh review 已完成并处理 findings；它不替代整个 foundation 分支、P11 或最终发布审查，也不授权合入 main。
 
 本次复核日志：`verify-android-checkpoint.log`（BUILD SUCCESSFUL，290 tasks，其中 278 up-to-date）、`maven-consumer.log`（BUILD SUCCESSFUL，36 tasks，其中 29 up-to-date）；已通过缓存检查与构建，不声称全部测试重新执行。四模块本地 Maven 发布及 lint 的前次成功日志为 `distribution-retry.log`（277 tasks）。
 

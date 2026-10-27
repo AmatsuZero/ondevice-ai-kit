@@ -4,6 +4,14 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-28 P4 全范围审查与上游依赖结论
+
+- fresh code-reviewer 只读覆盖 `e7c1484` camera isolation、`33dd8c4` synthetic PHPicker EXIF harness、当前 resource/page/thread probe、计划/ledger及冻结 Task12 证据；结果 **0 Critical、2 Important、0 Minor**。camera/controller/FIFO/terminal close、simulator picker边界和ThreadInventory资源释放未发现其他阻断。
+- Important 1：默认 `CameraResourceValidation` 的失败报告若再次写入失败会被 `try?` 静默吞掉。新增主机回归先因 reporter 不存在得到compile RED，再加入有界 `NSLog` fallback后GREEN；当前生产App生成的全新resource probe在generic iOS15 unsigned build中 **BUILD SUCCEEDED**。首次build仅因受限环境SwiftPM/Xcode cache权限失败，同一生成项目在批准环境复跑通过；没有设备安装/启动。
+- Important 2：受保护pbxproj的automatic signing/team diff不属于P4。按用户边界不restore、不覆盖、不stage、不commit；Face Identity草稿同样留在P10。排除本轮待提交文档后，审查涉及的本地保护/未完成子集为 **1 tracked dirty + 8 untracked（共9项）**；这不是完整 `git status` 计数，详情与hash见 `docs/validation/p4-full-review-20261028.md`。
+- dependency-expert与官方release/source核验得到 `no-supported-upgrade-conclusion`：Compose1.12.2→Skiko0.150.2及Skia m153仍保留相同AtlasTextOp TLS单槽/调用线程ClearCache机制，不能把版本升级当作18×GrOp/2304B修复。当前不升级、不私调ClearCache、不重标Leaks；下一条有区分力的方向是单独设计非生产instrumented Skiko/Skia research build，不重复旧LLDB或同构301秒trace。
+- Task12 ledger已用新鲜主机100轮、iOS15 typecheck、Swift5/6相机门禁、runtime/UUID/hash及17/17分配邻接脚本闭合；复用已完成的301.202178秒真机录制，不重复设备运行。P4仍缺native destructor/free/TLS证据、物理PHPicker→Vision EXIF和最低系统；P11仍`open/not-ready`，goal active。
+
 ## 最新续接 — 2026-10-27 P11 分组 benchmark 快照
 
 - 新增 `benchmark/p11/grouped-report-manifest.json`、`tools/p11_grouped_report.py` 及回归测试；工具先验证 readiness/原始 JSON SHA-256、仓库内路径和全局 `runId` 唯一性，再分别委托既有 face/MLXVLM reporter 重算，输出覆盖前拒绝同路径、软链接和现有硬链接别名。
