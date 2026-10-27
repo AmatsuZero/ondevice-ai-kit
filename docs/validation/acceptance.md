@@ -6,13 +6,15 @@
 
 基础里程碑仍为 **10/12**：P4 和 P11 未完成。最新 P4 线程校准在当前源码生成的独立 probe 上完成三轮页面退出/重入和同 PID 301 秒 Leaks 录制：三轮窗口新增 687/661/660 次结果，最后页面的 owner、bridge、Compose controller 和 Metal layer 均释放；trace 最终仍有 18×GrOp/2304B live。4097B marker 校准了导出的低32位 thread label，但7个 GrOp label 对应多个不同 kernel thread ID，尚未证明析构/free/TLS 归属。证据见 [P4 AtlasTextOp 调查](p4-atlas-text-cache.md)；不把页面弱引用释放或严格并发门禁升级为零泄漏、最低系统或 P4 完成。
 
-P11 仍缺最终候选冻结、所有已接入能力的统一任务/质量/资源/取消矩阵和发布结论。LiteRT-LM 生产 factory、授权模型、真实 native drain 与 Android 推理仍未验证；iOS15/API26 设备缺口继续按设备矩阵记录。
+P11 的 SDK committed-tree 快照已经冻结，但统一候选仍未就绪：剩余模型 revision、跨能力 fixture/设备矩阵，以及所有已接入能力的统一任务/质量/资源/取消报告尚未收口。LiteRT-LM 生产 factory、授权模型、真实 native drain 与 Android 推理仍未验证；iOS15/API26 设备缺口继续按设备矩阵记录。
 
 P4 ThreadInventory 主机门禁已刷新：Swift6 主机100轮快照 complete、send-right 2→2，缺失 pthread 映射正确为 partial；iOS15 arm64 typecheck 与生成器 Ruby 语法检查通过。该证据只覆盖主机快照/释放完整性，不证明真机线程生命周期、TLS/destructor 归属、GrOp 根因或零泄漏。证据见 `artifacts/verification/p4-thread-inventory-local-20261027/summary.json`。
 
-P11 candidate freeze 预检为 `not-ready`：当前工作树 1 项 tracked dirty、7 项 untracked，没有 clean candidate snapshot；仅 Apple MLXVLM 既有合成图观察可冻结。LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型与校准、iOS15/API26 设备、GPU/energy/峰值资源及统一 fixture 均未满足。预检只记录边界，不构成发布候选或最终验收。见 `artifacts/verification/p11-candidate-freeze-20261027/summary.json`。
+P11 candidate freeze 仍为 `not-ready`，但 SDK 子门槛已关闭：从提交 `7b9f7fc75772b61948d211d72ec2e1e221362591` 的 committed tree 生成了干净归档，内嵌 commit、tree 与 SHA-256 已核对；归档排除当前工作树 1 项 tracked dirty 和 7 项 untracked。LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型与校准、iOS15/API26 设备、可比较 GPU/energy/峰值资源及统一 fixture 仍未满足。因此只冻结 SDK 源码快照，不构成统一发布候选或最终验收。见 `artifacts/verification/p11-candidate-freeze-20261027/summary.json`。
 
-P11 readiness 快照现有只读校验门禁：当前 9 行均有未验证 gap，16 条证据路径对应的 13 个独立文件均已纳入来源哈希，总计 15 项；非 terminal 行仍强制 `open/not-ready`，且快照必须声明 `p11Stop` 与 `requiredBeforeP11`。修复前未纳入哈希的证据内容可变更而仍通过，回归先 RED 后 GREEN；完整工具套件在可写 Swift 编译缓存的环境中 **156/156**。该结果只证明报告完整性，不改变 P11 的未完成状态。新证据见 `artifacts/verification/p11-evidence-hashes-20261027/summary.json`；原始 154 项历史验证留在 `artifacts/verification/p11-readiness-validator-20261027/summary.json`。
+P11 readiness 快照现有只读校验门禁：当前 9 行均有未验证 gap；非 terminal 行仍强制 `open/not-ready`，且快照必须声明 `p11Stop` 与 `requiredBeforeP11`。修复前未纳入哈希的证据内容可变更而仍通过，回归先 RED 后 GREEN；完整工具套件在可写 Swift 编译缓存的环境中 **156/156**。该结果只证明报告完整性，不改变 P11 的未完成状态。新证据见 `artifacts/verification/p11-evidence-hashes-20261027/summary.json`；原始 154 项历史验证留在 `artifacts/verification/p11-readiness-validator-20261027/summary.json`。
+
+P11 分组 benchmark 首版已从哈希固定的原始 JSON 重算出3组：iOS/Android face 与 Apple MLXVLM，按 device、OS、P11 capability、actual backend 分组。readiness 的9项能力全部进入 coverage，但仅2项有兼容分组报告，另外7项保持 `unverified`；face quality/peak memory/energy/GPU 与 MLXVLM natural quality/Metal GPU peak/energy 没有被补成通过。详见 [P11 分组 benchmark](p11-grouped-benchmark.md)。
 
 | 项目 | 证据 | 结论 |
 | --- | --- | --- |
@@ -21,7 +23,7 @@ P11 readiness 快照现有只读校验门禁：当前 9 行均有未验证 gap�
 | iOS Demo | iOS27 模拟器安装/启动、合成空白图输入 | 模拟器启动和照片选择器取消 UI 用例已验、Vision Code9；现代 iPhone 已验合成空白推理，Photo Picker 引导卡修复后常规交互 5/5 通过，两分钟持续相机另有 1/1 通过，见 P3/P4 记录；冻结 `927b7749` 的 iPhone 16 Pro Max benchmark 已生成 |
 | Apple 二进制 | P5 人脸四模块 + P6 六模块 archive/XCFramework；speech/face 独立消费者构建和依赖隔离日志 | arm64 iOS/simulator 本地编译通过；语音与人脸依赖可裁剪，无发布/签名承诺 |
 | Android | JVM tests、lint、APK、本地 Maven consumer、TECNO KM9 真机 | 统一脚本与本地 Maven consumer 通过；API 35 真机已完成 ML Kit 人脸相机、选图取消、EXIF Orientation 6、权限拒绝/重新授权和单图推理；另有两分钟相机 PSS/热状态抽样，见 P4；API 26 下限、长期资源/能耗和系统设置页恢复仍未验收 |
-| Benchmark | Python schema/分组/百分位测试；原生 Demo 采集入口 | 工具测试 4/4、iOS 真机和 Android API35 均以 `927b7749` 完成 5+30 样本及分组报告；当前四模块 Apple/Android 消费者构建通过；API26/iOS15、峰值内存/能耗仍待完成 |
+| Benchmark | Python schema/分组/百分位测试；原生 Demo 采集入口 | iOS 真机和 Android API35 均以 `927b7749` 完成 5+30 样本；P11 首版从三份原始 JSON 重算3组并明确7项能力 gap；当前四模块 Apple/Android 消费者构建通过；API26/iOS15、统一质量/峰值资源/能耗仍待完成 |
 | 同步 | 两端 refs 新鲜读取并比较 | 仅已提交分支；未提交文件不属于远端交付 |
 
 原始证据目录：`.superpowers/sdd/2026-10-15-ondevice-ai-kit-foundation`（本机任务记录）与 `artifacts/verification`；SDK/APP 产物为 `artifacts/xcframeworks`、`artifacts/iOSDemo`、`artifacts/BinaryBuild`、`demo/androidApp/build/outputs/apk`。

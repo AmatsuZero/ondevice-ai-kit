@@ -4,12 +4,12 @@
 
 | 能力 | 当前状态 | 已有证据 | 仍未验证或阻断 |
 | --- | --- | --- | --- |
-| Face detection | `pass-bounded` | [benchmark](benchmark.md)、[设备矩阵](device-matrix.md) | iOS 15、Android API26、峰值内存、能耗、长期资源 |
+| Face detection | `pass-bounded` | [benchmark](benchmark.md)、[P11 分组报告](p11-grouped-benchmark.md)、[设备矩阵](device-matrix.md) | iOS 15、Android API26、质量阈值、峰值内存、能耗、长期资源 |
 | Speech TTS | `pass-bounded` | [语音后端](speech-backends.md) | 自然语音质量、最低系统、完整离线矩阵 |
 | Speech ASR file | `pass-bounded` | [语音后端](speech-backends.md)、[固定文件探针](ios-asr-file-probe.md) | 麦克风录音、自然语音 CER/WER、iOS 15 |
 | Speech ASR Android | `unavailable-assets` | [语音后端](speech-backends.md)、[设备矩阵](device-matrix.md) | 已授权离线资源、真实转写、取消/关闭真机运行 |
 | Video SR | `pass-bounded` | [超分探针](video-sr-backends.md)、[Video Demo](video-bridge-demo.md) | Android 后端、主观质量、GPU/能耗、最低系统 |
-| Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[多模态视频 Demo](multimodal-video-demo.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 自然质量、短视频完整验收、可比较 GPU peak/能耗、完整物理触控 |
+| Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[P11 分组报告](p11-grouped-benchmark.md)、[多模态视频 Demo](multimodal-video-demo.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 自然质量、短视频完整验收、可比较 GPU peak/能耗、完整物理触控 |
 | Multimodal Android LiteRT-LM | `unverified-production-gate-closed` | [移动端 VLM](mobile-vlm.md)、[drain 合同](android-litertlm-drain-contract.md) | 授权模型 manifest/weights、production factory、native drain、真实推理、质量、GPU/能耗 |
 | Face identity/liveness | `unverified-production-model` | [身份/活体](p10-face-identity.md) | 生产模型、PAD、授权数据、校准、准确率 |
 | Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、最低系统、完整 review |
@@ -22,11 +22,13 @@
 
 候选 SDK 已冻结为 committed tree `7b9f7fc75772b61948d211d72ec2e1e221362591` / `f60b65fc117908a9b82c60eb42285f8c855d6f91`，归档 SHA-256 为 `6a2cb8afd895b13fa281d15f55046b3f263a1882aebd8ce31dff563bc3b2b666`。归档不含 foundation 工作树的8项受保护/未完成修改；该冻结只关闭 SDK commit 快照子门槛。
 
+[P11 分组 benchmark](p11-grouped-benchmark.md) 已从三份哈希固定的原始设备 JSON 重算3组：iOS/Android face 与 Apple MLXVLM。9项 readiness 能力全部进入 coverage，但只有2项有本轮兼容报告，另外7项仍为 `unverified`。face 没有质量/资源数据；MLXVLM 的30/30只覆盖合成 fixture，natural quality、Metal GPU peak 与 energy 仍未验证。因此这只推进逐 run/分组报告门槛，不改变发布结论。
+
 发布前仍需完成：
 
 1. 在已冻结 SDK commit 的基础上，冻结剩余模型 revision、输入 fixture 和设备矩阵。
 2. 对每项实际交付能力补齐正确性、质量、延迟、资源、取消和持续运行报告。
-3. 保留逐 run 原始 JSON，并生成按设备、系统、能力和后端分组的 p50/p95 与质量报告。
+3. 在现有3组/2项能力首版上继续保留逐 run 原始 JSON，为其余实际交付能力补齐按设备、系统、能力和后端分组的 p50/p95 与质量报告，或保持明确 unavailable/unverified。
 4. 解决 LiteRT-LM 授权模型与 native drain、Face Identity 生产模型/PAD/校准、P4 原生残留，以及 iOS 15/Android API26 设备缺口。
 
 本矩阵不接受许可证、不下载模型、不改变生产 factory，也不关闭 P4/P11。

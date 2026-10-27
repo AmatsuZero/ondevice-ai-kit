@@ -4,6 +4,14 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 P11 分组 benchmark 快照
+
+- 新增 `benchmark/p11/grouped-report-manifest.json`、`tools/p11_grouped_report.py` 及回归测试；工具先验证 readiness/原始 JSON SHA-256、仓库内路径和全局 `runId` 唯一性，再分别委托既有 face/MLXVLM reporter 重算，输出覆盖前拒绝同路径、软链接和现有硬链接别名。
+- 真实 manifest 生成 `artifacts/verification/p11-grouped-benchmark-20261027/summary.json`：3 个组（iOS face、Android face、Apple MLXVLM），2/9 项 readiness 能力有兼容 grouped report，7 项显式 `unverified`；face quality/peak memory/energy/GPU 未测，MLXVLM 30/30 仅 synthetic rubric，natural quality/Metal GPU peak/energy 未验证。gate 仍 `open/not-ready`。
+- `docs/validation/acceptance.md` 与 `docs/validation/p11-status-matrix-20261027.md` 已链接首版报告并修正候选快照旧描述；详细合同见 `docs/validation/p11-grouped-benchmark.md`。readiness 校验为 19 evidence paths / 17 source hashes / 9 open rows。
+- 原始输入 SHA-256 未变：iOS face `e4005b5d…927e7`、Android face `13d6e256…5131`、MLXVLM `186a2077…73d1`；readiness `933e10bf…37fa`。继续保留 8 项本地修改和保护哈希，不把忽略目录 artifacts 当作提交内容。
+- 聚焦回归10/10、完整Python tools 166/166、`py_compile`、`git diff --check`及真实快照确定性重生成通过。独立code-reviewer因429重试耗尽没有结论；作者按review focus完成一次fix pass，不宣称独立审查通过。
+
 ## 最新续接 — 2026-10-27 P11 SDK 候选快照冻结
 
 - 当前已在 linked `foundation` worktree，按 worktree 隔离规则不创建嵌套 worktree。直接从已同步双远端的提交 `7b9f7fc75772b61948d211d72ec2e1e221362591` 生成 committed-tree archive；内嵌 commit ID 精确匹配，tree `f60b65fc117908a9b82c60eb42285f8c855d6f91`，tar SHA-256 `6a2cb8afd895b13fa281d15f55046b3f263a1882aebd8ce31dff563bc3b2b666`。

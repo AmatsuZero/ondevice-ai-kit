@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "readiness": {
+    "path": "artifacts/verification/p11-readiness-20261027/summary.json",
+    "sha256": "933e10bf0864bab027bbe8c26c8dcc28d8d15a7e70d240359dc693c3cb5037fa"
+  },
+  "sources": [
+    {
+      "kind": "face",
+      "p11Capability": "face-detection",
+      "path": "artifacts/P5/current/ios27-face-927b774.json",
+      "sha256": "e4005b5d288e1c3746dc129e3c0604bbf8e541a96da34c98adbd95c7bef927e7"
+    },
+    {
+      "kind": "face",
+      "p11Capability": "face-detection",
+      "path": "artifacts/P5/current/android-api35-face-927b774.json",
+      "sha256": "13d6e25625806d0d2c97df39b49c77bd219ffc2457eda0f31afdf58d93815131"
+    },
+    {
+      "kind": "mlxvlm",
+      "p11Capability": "multimodal-apple",
+      "path": "artifacts/verification/apple-mlxvlm-benchmark-30-20261025-fix2/device-report.json",
+      "sha256": "186a2077bf966dfb69cd89034d940c79a09b91a6d09d74b05172dc862c3c73d1",
+      "expectedSamples": 30
+    }
+  ]
+}
