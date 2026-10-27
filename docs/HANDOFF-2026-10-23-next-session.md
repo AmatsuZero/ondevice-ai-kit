@@ -4,10 +4,16 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 P4 ThreadInventory 主机门禁刷新
+
+- 新鲜本地主机验证编译 `probes/ios-camera-lifecycle/ThreadInventory.swift` 与 `ThreadInventoryChecks.swift`（Swift 6）并执行100轮快照；正常状态为 `complete-snapshot`，send-right 引用 **2→2**，注入缺失 pthread 映射时正确降级为 `partial-snapshot`（1 次 lookup failure），4097B marker 保持。
+- 同一源码通过 iOS15 arm64 typecheck，`scripts/generate-camera-resource-app.rb` 通过 Ruby 3.4.11 语法检查。证据：`artifacts/verification/p4-thread-inventory-local-20261027/summary.json`。
+- 这是 host ownership/snapshot release 与生成器边界证据；不证明真机线程生命周期、TLS/destructor 归属、GrOp 根因或零泄漏。当前 candidate/readiness 快照已刷新到 HEAD `1fd95c63d1d0af5bf2a4ff9a5a02b94b0c28052c`，P4/P11 仍开放。
+
 ## 最新续接 — 2026-10-27 P11 candidate freeze 预检
 
 - `artifacts/verification/p11-candidate-freeze-20261027/summary.json` 的状态为 `not-ready`，仅作候选冻结前盘点，不冻结发布候选、不接受许可证、不下载模型，也不提升任何未验证行。
-- 当前 SDK 工作树仍有 7 个 tracked dirty、9 个 untracked；受保护工程、身份草稿、线程/资源 probe、文档与 readiness 工具均按边界保留，因此没有单一 clean candidate snapshot。
+- 当前 SDK 工作树仍有 1 个 tracked dirty、7 个 untracked；受保护工程、身份草稿和线程/资源 probe 按边界保留，因此没有单一 clean candidate snapshot。
 - 仅 Apple MLXVLM 的既有合成图观察值可冻结（model `fa57db46815177fbdfd65cc85a2b3416a8332268`、runtime `6e338e5df49424fc0db7c6d58184d622f92ed18a`、fixture SHA-256 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`）。LiteRT-LM 授权 manifest/weights、Face Identity 生产模型/PAD/数据/校准、iOS15/Android API26 设备、GPU/energy/峰值资源以及统一跨能力 fixture 仍缺失。
 - 该预检不改变基础 **10/12**、P4/P11 开放状态或 goal active；下一步仍须先完成 `requiredBeforeP11` 的候选冻结、逐能力矩阵和发布结论。
 
