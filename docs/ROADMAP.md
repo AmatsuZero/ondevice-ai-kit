@@ -13,7 +13,7 @@
 2026-10-27 P11准备矩阵：已建立只读 `artifacts/verification/p11-readiness-20261027/summary.json`，覆盖9项能力并保留逐项未验证原因；所有9行仍有 gaps，`p11Gate.status=open`，发布结论 `not-ready`。该矩阵仅用于统一验收前的证据盘点，不改变10/12计数。
 2026-10-27 P4 ThreadInventory 主机门禁刷新：Swift6 主机100轮快照为 complete、send-right 2→2，缺失 pthread 映射为 partial；iOS15 arm64 typecheck 与资源生成器 Ruby 语法检查通过。证据 `artifacts/verification/p4-thread-inventory-local-20261027/summary.json` 仅覆盖 host ownership/snapshot release，不关闭真机线程/TLS/GrOp/零泄漏门禁。
 2026-10-27 P11 candidate freeze 预检：`artifacts/verification/p11-candidate-freeze-20261027/summary.json` 为 `not-ready`；工作树1项 tracked dirty/7项 untracked，只有既有 Apple MLXVLM 合成图观察值可冻结，LiteRT-LM授权模型、Face Identity生产模型与校准、iOS15/API26设备、GPU/energy/峰值资源和统一fixture仍缺失。仅作候选盘点，不冻结发布候选，不改变10/12或P11开放状态。
-2026-10-27 P11 readiness 校验门禁：新增只读 `tools/validate_p11_readiness.py` 和6项回归，强制 `p11Stop`/`requiredBeforeP11` 停止契约，并检查证据路径、来源哈希、行计数及非terminal行不得关闭门禁。当前快照校验为9行/9 gaps/16证据路径/5哈希；完整工具套件显式Ruby3.4.11并以临时SwiftPM sandbox开关重跑 **154/154**。这只证明快照完整性，P11仍 `open/not-ready`，不增加设备、模型或发布证据。
+2026-10-27 P11 readiness 校验门禁：只读 `tools/validate_p11_readiness.py` 强制 `p11Stop`/`requiredBeforeP11` 停止契约，检查证据路径、来源哈希、行计数及非terminal行不得关闭门禁；补齐所有证据必须纳入哈希的门禁。当前快照校验为9行/9 gaps/16证据路径/15哈希，完整工具套件 **156/156**。这只证明快照完整性，P11仍 `open/not-ready`，不增加设备、模型或发布证据。
 
 2026-10-27 Android 合同修正：固定 LiteRT-LM 0.18.1 AAR 否定原 terminal + isAlive=false 的 drain 判据；probe schema 2 不再认证该证明。两项回归 RED→GREEN，JVM9/9、lint/APK/test APK 构建通过；生产 factory/consumer 及真实 native drain 仍未完成，没有模型或设备运行。见[专项证据](validation/android-litertlm-drain-contract.md)。基础10/12不变。
 

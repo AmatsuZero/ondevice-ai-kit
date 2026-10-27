@@ -65,6 +65,7 @@ def validate_summary(summary: dict[str, Any], repo_root: Path) -> dict[str, int]
         raise ReadinessValidationError("rows must be a non-empty array")
 
     evidence_checked = 0
+    evidence_paths: set[str] = set()
     rows_with_gaps = 0
     rows_not_terminal = 0
     for index, row_value in enumerate(rows):
@@ -81,6 +82,7 @@ def validate_summary(summary: dict[str, Any], repo_root: Path) -> dict[str, int]
             resolved = _relative_path(repo_root, evidence_path, f"rows[{index}].evidence")
             if not resolved.is_file():
                 raise ReadinessValidationError(f"missing evidence: {evidence_path}")
+            evidence_paths.add(evidence_path)
             evidence_checked += 1
         unverified = row.get("unverified")
         if not isinstance(unverified, list):
@@ -91,6 +93,11 @@ def validate_summary(summary: dict[str, Any], repo_root: Path) -> dict[str, int]
             rows_not_terminal += 1
 
     source_hashes = _require_mapping(summary.get("sourceHashes"), "sourceHashes")
+    unhashed_evidence = sorted(evidence_paths - set(source_hashes))
+    if unhashed_evidence:
+        raise ReadinessValidationError(
+            "unhashed evidence: " + ", ".join(unhashed_evidence)
+        )
     source_hashes_checked = 0
     for raw_path, expected in source_hashes.items():
         if not isinstance(expected, str) or not _SHA256.fullmatch(expected):

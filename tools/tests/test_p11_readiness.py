@@ -28,7 +28,10 @@ class P11ReadinessValidationTests(unittest.TestCase):
                     "unverified": ["minimum OS"],
                 }
             ],
-            "sourceHashes": {"docs/ROADMAP.md": digest},
+            "sourceHashes": {
+                "docs/ROADMAP.md": digest,
+                "evidence.json": hashlib.sha256(b"{}\n").hexdigest(),
+            },
             "p11Gate": {
                 "status": "open",
                 "rowsWithUnverifiedGaps": 1,
@@ -46,7 +49,23 @@ class P11ReadinessValidationTests(unittest.TestCase):
 
         self.assertEqual(result["rowsWithUnverifiedGaps"], 1)
         self.assertEqual(result["rowsNotTerminalPass"], 1)
-        self.assertEqual(result["sourceHashesChecked"], 1)
+        self.assertEqual(result["sourceHashesChecked"], 2)
+
+    def test_rejects_evidence_without_a_source_hash(self):
+        temp, root, summary = self.make_fixture()
+        self.addCleanup(temp.cleanup)
+        summary["sourceHashes"].pop("evidence.json")
+
+        with self.assertRaisesRegex(ReadinessValidationError, "unhashed evidence"):
+            validate_summary(summary, root)
+
+    def test_rejects_changed_evidence_contents(self):
+        temp, root, summary = self.make_fixture()
+        self.addCleanup(temp.cleanup)
+        (root / "evidence.json").write_text('{"changed": true}\n', encoding="utf-8")
+
+        with self.assertRaisesRegex(ReadinessValidationError, "source hash mismatch"):
+            validate_summary(summary, root)
 
     def test_rejects_stale_source_hash(self):
         temp, root, summary = self.make_fixture()

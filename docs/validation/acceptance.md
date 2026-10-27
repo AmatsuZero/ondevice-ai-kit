@@ -12,7 +12,7 @@ P4 ThreadInventory 主机门禁已刷新：Swift6 主机100轮快照 complete、
 
 P11 candidate freeze 预检为 `not-ready`：当前工作树 1 项 tracked dirty、7 项 untracked，没有 clean candidate snapshot；仅 Apple MLXVLM 既有合成图观察可冻结。LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型与校准、iOS15/API26 设备、GPU/energy/峰值资源及统一 fixture 均未满足。预检只记录边界，不构成发布候选或最终验收。见 `artifacts/verification/p11-candidate-freeze-20261027/summary.json`。
 
-P11 readiness 快照现有只读校验门禁：当前 9 行均有未验证 gap，证据路径与5项来源哈希均通过，非 terminal 行仍强制 `open/not-ready`，且快照必须声明 `p11Stop` 与 `requiredBeforeP11`。完整工具套件在显式 Ruby 3.4.11 与临时 SwiftPM sandbox 开关下 **154/154**；该结果只证明报告完整性，不改变 P11 的未完成状态。原始证据见 `artifacts/verification/p11-readiness-validator-20261027/summary.json`。
+P11 readiness 快照现有只读校验门禁：当前 9 行均有未验证 gap，16 条证据路径对应的 13 个独立文件均已纳入来源哈希，总计 15 项；非 terminal 行仍强制 `open/not-ready`，且快照必须声明 `p11Stop` 与 `requiredBeforeP11`。修复前未纳入哈希的证据内容可变更而仍通过，回归先 RED 后 GREEN；完整工具套件在可写 Swift 编译缓存的环境中 **156/156**。该结果只证明报告完整性，不改变 P11 的未完成状态。新证据见 `artifacts/verification/p11-evidence-hashes-20261027/summary.json`；原始 154 项历史验证留在 `artifacts/verification/p11-readiness-validator-20261027/summary.json`。
 
 | 项目 | 证据 | 结论 |
 | --- | --- | --- |

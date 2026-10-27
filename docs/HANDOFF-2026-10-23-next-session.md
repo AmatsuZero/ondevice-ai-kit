@@ -4,11 +4,17 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 P11 证据哈希覆盖门禁
+
+- 发现旧 readiness 校验只核对 16 条证据路径存在，却仅固定 5 项来源哈希；13 个独立证据文件中 10 个可以在内容变更后仍通过校验。真实测试目录复现了该误判。先新增回归得到 **8 tests/1 failure**，再让校验器拒绝任何未纳入 `sourceHashes` 的证据；修复后聚焦 **8/8**，旧快照如预期列出全部10项遗漏。
+- 忽略目录快照现纳入 15 项来源哈希（包含全部13个独立证据文件）。当前校验仍为 9 行/9 gaps/16条证据路径，`open/not-ready` 不变；Python 工具完整套件在可写Swift编译缓存的环境中 **156/156**。受限沙箱首次完整运行的2项 Swift 错误为模块缓存 `Operation not permitted`，同一源码随后完整复验通过。此包只提升 P11 证据完整性，不增加产品/设备/发布验收。
+- 前一检查点的远端网络判断仅适用于受限沙箱。已授权提权运行 `scripts/sync-remotes.sh feat/sdk-foundation`，`0c6559d` 成功同步至 `origin` 与 `jihu`，脚本完成新鲜远端SHA相等检查；本包后续提交仍需单独同步。8项受保护/未完成本地修改继续保留。
+
 ## 最新续接 — 2026-10-27 P11 快照来源漂移与同步通道
 
 - 巡检起点 `feat/sdk-foundation` 为 `ec8308d`；既有 P11 readiness 快照的 `mobile-vlm.md`、`p4-atlas-text-cache.md` 两项来源哈希因后续已提交证据变化而失配。重新按当前文件刷新忽略目录中的 readiness/candidate 盘点并运行只读校验；九项能力仍全有 gap，`open/not-ready` 不变。快照刷新只证明来源完整性，不增加模型、真机推理、质量、资源、最低系统或发布证据。
 - 原有 1 项 tracked dirty 与 7 项 untracked 保留；两个保护文件哈希仍为 `b35bd984…fe9fd8f5`、`6f130bd9…bb70822`。Android `adb devices -l` 当前因 USB plugin/smartsocket `Operation not permitted` 失败；本机没有 iOS15 simulator runtime 或 Android API26 AVD，物理 iPhone 列表中的 connected 状态未作为新的验收。
-- 本次重新读取远端遇到 `github.com` DNS 失败，`jihu` 直连 DNS 失败且现有 `127.0.0.1:7897` 代理未监听。`origin/jihu` 本地 remote-tracking refs 均为 `ec8308d`，这是上次同步记录，不是本次远端新鲜确认。仅在网络通道恢复后重试非强推 `scripts/sync-remotes.sh feat/sdk-foundation`；不合并、tag 或发布。
+- 本次在受限沙箱内重新读取远端遇到 `github.com` DNS 失败，`jihu` 直连 DNS 失败且现有 `127.0.0.1:7897` 代理未监听。当时本地 remote-tracking refs 均为 `ec8308d`；随后受控提权同步成功，结果见上方最新续接。
 
 ## 最新续接 — 2026-10-27 P4 分配时间与线程快照邻接复核
 
