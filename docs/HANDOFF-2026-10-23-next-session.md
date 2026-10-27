@@ -4,6 +4,12 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 P11 快照来源漂移与同步通道
+
+- 巡检起点 `feat/sdk-foundation` 为 `ec8308d`；既有 P11 readiness 快照的 `mobile-vlm.md`、`p4-atlas-text-cache.md` 两项来源哈希因后续已提交证据变化而失配。重新按当前文件刷新忽略目录中的 readiness/candidate 盘点并运行只读校验；九项能力仍全有 gap，`open/not-ready` 不变。快照刷新只证明来源完整性，不增加模型、真机推理、质量、资源、最低系统或发布证据。
+- 原有 1 项 tracked dirty 与 7 项 untracked 保留；两个保护文件哈希仍为 `b35bd984…fe9fd8f5`、`6f130bd9…bb70822`。Android `adb devices -l` 当前因 USB plugin/smartsocket `Operation not permitted` 失败；本机没有 iOS15 simulator runtime 或 Android API26 AVD，物理 iPhone 列表中的 connected 状态未作为新的验收。
+- 本次重新读取远端遇到 `github.com` DNS 失败，`jihu` 直连 DNS 失败且现有 `127.0.0.1:7897` 代理未监听。`origin/jihu` 本地 remote-tracking refs 均为 `ec8308d`，这是上次同步记录，不是本次远端新鲜确认。仅在网络通道恢复后重试非强推 `scripts/sync-remotes.sh feat/sdk-foundation`；不合并、tag 或发布。
+
 ## 最新续接 — 2026-10-27 P4 分配时间与线程快照邻接复核
 
 - 对既有同 PID 301.202178 秒 trace 的完整 Allocations List、Leaks 明细和 236 个 own-task 快照完成只读时间对齐：18 个最终 live `GrOp` 中 1 个录制前已有，trace 内其余 **17/17** 个分配在估计时刻前后约1.1秒的快照中都观察到同一个 kernel thread ID。7 个导出低32位标签在不同分配窗口对应多个不同 kernel TID，结果与逐行邻接时间保存在 `artifacts/verification/p4-thread-calibration-20261027/allocation-snapshot-correlation.json`，可复核脚本为同目录 `correlate_allocations.py`。
