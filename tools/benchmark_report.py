@@ -33,8 +33,11 @@ def statistics(values):
 
 def summarize(runs):
     groups={}
+    seen_run_ids=set()
     for raw in runs:
         run=validate(raw)
+        if run["runId"] in seen_run_ids:raise ValueError("duplicate runId: "+run["runId"])
+        seen_run_ids.add(run["runId"])
         # Memory methods differ between platforms and instruments; do not combine them.
         memory_method=(run.get("peakMemory") or {}).get("method")
         key=tuple(run[field] for field in GROUP_FIELDS)+(memory_method,)
@@ -48,7 +51,13 @@ def summarize(runs):
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument("inputs",nargs="+");parser.add_argument("--output",required=True);args=parser.parse_args()
     def invalid_constant(value):raise ValueError("non-finite JSON number: "+value)
-    runs=[json.loads(Path(name).read_text(),parse_constant=invalid_constant) for name in args.inputs]
-    output=Path(args.output);output.parent.mkdir(parents=True,exist_ok=True)
-    output.write_text(json.dumps(summarize(runs),ensure_ascii=False,indent=2,allow_nan=False)+"\n")
+    inputs=[Path(name) for name in args.inputs]
+    output=Path(args.output)
+    for source in inputs:
+        if output.resolve()==source.resolve() or (output.exists() and output.samefile(source)):
+            parser.error("output must not overwrite benchmark input: "+str(source))
+    runs=[json.loads(source.read_text(),parse_constant=invalid_constant) for source in inputs]
+    contents=json.dumps(summarize(runs),ensure_ascii=False,indent=2,allow_nan=False)+"\n"
+    output.parent.mkdir(parents=True,exist_ok=True)
+    output.write_text(contents)
 if __name__=="__main__":main()

@@ -26,7 +26,8 @@
   "properties": {
     "runId": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "Identifies one benchmark execution; must be unique across all inputs to one aggregated report."
     },
     "device": {
       "type": "string",

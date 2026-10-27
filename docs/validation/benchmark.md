@@ -8,6 +8,14 @@
 
 导出后：`python3 tools/benchmark_report.py run.json --output artifacts/report.json`。输入和设备原始报告默认仅留本地，不提交照片或设备唯一标识。
 
+每次真实运行生成独立`runId`。一次汇总的所有输入必须具有不同的`runId`：重复文件、复制文件或同ID但元数据/测量值不同的报告都会被拒绝，避免重复计数或隐去冲突。不同ID的独立运行即使测量值相同，也保留各自样本。输出必须与每份输入分离；相同路径、软链接和现有硬链接别名均被拒绝，普通独立报告路径仍可重新生成。
+
+## 2026-10-27 报告输入完整性修复
+
+实际旧iPhone P5报告重复传入时，原工具将30次inference统计成60次。新增聚合与真实CLI回归先出现9项失败/子用例，修复后聚焦**9/9**通过。完整Python工具套件在显式`RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`及正常Swift缓存权限下**148/148**通过；首轮系统Ruby2.6混用3.4gems与缓存权限失败完整保留。独立code-reviewer对工具、测试和修复计划的限定审查为**APPROVE、0 findings**。
+
+原`927b7749`双端报告分别及合并重算均与修复前有效输入的输出完全一致：iOS30样本、p50/p95=2.432/3.065ms；Android30样本、10.853538/18.088231ms。原始文件hash未变，重复真实输入现在拒绝且不创建输出。原始报告复核、RED/GREEN、完整套件和审查记录在`artifacts/verification/benchmark-report-integrity-20261027/`。这是现有报告工具修复与历史证据重算；P11冻结候选、统一设备任务/质量阈值、资源和最终发布结论仍待完成。
+
 ## P5 当前证据（2026-10-17）
 
 - `python3 -m unittest discover -s tools/tests -p 'test_benchmark_report.py' -v`：4/4 通过，覆盖空样本、单样本、最近秩 p50/p95、分组隔离、单位/负延迟/能耗校验。
