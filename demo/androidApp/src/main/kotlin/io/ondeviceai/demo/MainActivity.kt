@@ -58,7 +58,10 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private var multimodalPickerReply: ((File?) -> Unit)? = null
     private var multimodalPickerFailure: (() -> Unit)? = null
     private var multimodalImport: Job? = null
-    private val multimodalPicker = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+    // DocumentsUI gives the multimodal demo a stable openable document contract,
+    // including test and user document providers, before the app copies it into
+    // its own private store.
+    private val multimodalPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         val reply = multimodalPickerReply; multimodalPickerReply = null
         val failure = multimodalPickerFailure; multimodalPickerFailure = null
         if (reply != null) {
@@ -124,7 +127,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                     else {
                         multimodalPickerReply = reply
                         multimodalPickerFailure = failure
-                        try { multimodalPicker.launch(mime) }
+                        try { multimodalPicker.launch(arrayOf(mime)) }
                         catch (error: Exception) { multimodalPickerReply = null; multimodalPickerFailure = null; throw error }
                     }
             }
@@ -133,7 +136,8 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                 selectFile = { reply, failure -> selectMultimodal("image/*", reply, failure) },
                 videoStore = MultimodalInputStore(File(cacheDir, "multimodal-video-${UUID.randomUUID()}")),
                 selectVideo = { reply, failure -> selectMultimodal("video/*", reply, failure) },
-                importScope = lifecycleScope)
+                importScope = lifecycleScope,
+                canSelectInput = { multimodalPickerReply == null && multimodalImport?.isActive != true })
         }
         speechHost = SpeechHost(lifecycleScope,
             createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },

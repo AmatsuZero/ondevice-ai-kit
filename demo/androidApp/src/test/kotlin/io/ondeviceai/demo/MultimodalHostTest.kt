@@ -3,7 +3,12 @@ package io.ondeviceai.demo
 import io.ondeviceai.binding.*
 import java.io.File
 import kotlin.test.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.junit.Rule
 import org.junit.rules.TemporaryFolder
 
@@ -82,6 +87,96 @@ class MultimodalHostTest {
         }
     }
 
+    @Test fun cancellationAfterIoCopyBeforeUiPublicationReclaimsThePrivateCopy() = runBlocking {
+        val uiQueue = java.util.ArrayDeque<Runnable>()
+        val ioQueue = java.util.ArrayDeque<Runnable>()
+        fun queueDispatcher(queue: java.util.ArrayDeque<Runnable>) = object : kotlinx.coroutines.CoroutineDispatcher() {
+            override fun dispatch(context: kotlin.coroutines.CoroutineContext, block: Runnable) { queue.add(block) }
+        }
+        val uiDispatcher = queueDispatcher(uiQueue)
+        val ioDispatcher = queueDispatcher(ioQueue)
+        val scope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + uiDispatcher)
+        val directory = temporary.root.resolve("copy-before-publish")
+        var reply: ((File?) -> Unit)? = null
+        val host = MultimodalHost(MultimodalInputStore(directory), importScope = scope,
+            importDispatcher = ioDispatcher, selectFile = { callback, _ -> reply = callback })
+
+        host.selectImageFile(); reply!!(source())
+        uiQueue.removeFirst().run() // Starts the host job and queues its worker copy.
+        ioQueue.removeFirst().run() // Completes the private copy but queues publication on UI.
+        assertTrue(directory.listFiles()!!.single().isFile, "copy must exist before UI publication resumes")
+
+        host.clearImageFile()
+        while (uiQueue.isNotEmpty()) uiQueue.removeFirst().run()
+        host.awaitImports()
+        assertNull(host.model.state.inputReference)
+        assertNull(host.model.state.failure)
+        assertTrue(directory.listFiles()!!.isEmpty(), "cancelled publication must reclaim its copied token")
+        host.close()
+        assertFalse(directory.exists(), "close must remove the now-empty owned directory")
+        scope.coroutineContext[kotlinx.coroutines.Job]!!.cancel()
+    }
+
+    @Test fun cancelledPickerCallerKeepsItsSourceUntilNonCancellableImportJoin() = runBlocking {
+        val uiQueue = java.util.ArrayDeque<Runnable>()
+        val ioQueue = java.util.ArrayDeque<Runnable>()
+        fun queueDispatcher(queue: java.util.ArrayDeque<Runnable>) = object : kotlinx.coroutines.CoroutineDispatcher() {
+            override fun dispatch(context: kotlin.coroutines.CoroutineContext, block: Runnable) { queue.add(block) }
+        }
+        val hostScope = kotlinx.coroutines.CoroutineScope(SupervisorJob() + queueDispatcher(uiQueue))
+        val directory = temporary.root.resolve("joined-copy")
+        val staging = temporary.root.resolve("picker-source")
+        val copy = MultimodalPickerCopy.create(staging, "synthetic.png", open = {
+            java.io.ByteArrayInputStream("fixture".encodeToByteArray())
+        })
+        var reply: ((File?) -> Unit)? = null
+        val host = MultimodalHost(MultimodalInputStore(directory), importScope = hostScope,
+            importDispatcher = queueDispatcher(ioQueue), selectFile = { callback, _ -> reply = callback })
+        val caller = kotlinx.coroutines.CoroutineScope(SupervisorJob() + Dispatchers.Unconfined).launch {
+            try {
+                host.selectImageFile()
+                reply!!(copy.file)
+                withContext(NonCancellable) { host.awaitImports() }
+            } finally {
+                copy.close()
+            }
+        }
+
+        caller.cancel()
+        uiQueue.removeFirst().run() // Starts the host worker after the picker caller was cancelled.
+        ioQueue.removeFirst().run() // Finishes copying while the UI publication continuation is pending.
+        assertTrue(copy.file.exists(), "picker source must outlive a cancelled caller until host join completes")
+        while (uiQueue.isNotEmpty()) uiQueue.removeFirst().run()
+        caller.join()
+        assertFalse(staging.exists(), "source owner closes only after the NonCancellable host join")
+        assertNotNull(host.model.state.inputReference)
+        host.close()
+        assertFalse(directory.exists())
+        hostScope.coroutineContext[kotlinx.coroutines.Job]!!.cancel()
+    }
+
+    @Test fun busyPickerRejectionMustNotCancelAlreadyAcceptedImport() = runBlocking {
+        val queue = java.util.ArrayDeque<Runnable>()
+        val dispatcher = object : kotlinx.coroutines.CoroutineDispatcher() {
+            override fun dispatch(context: kotlin.coroutines.CoroutineContext, block: Runnable) { queue.add(block) }
+        }
+        val scope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + dispatcher)
+        var busy = false
+        var launches = 0
+        var reply: ((File?) -> Unit)? = null
+        val host = MultimodalHost(store(), importScope = scope, importDispatcher = dispatcher,
+            canSelectInput = { !busy }, selectFile = { callback, _ -> launches++; reply = callback })
+        host.selectImageFile(); reply!!(source())
+        busy = true
+        host.selectImageFile()
+        assertEquals(1, launches)
+        while (queue.isNotEmpty()) queue.removeFirst().run()
+        host.awaitImports()
+        assertNotNull(host.model.state.inputReference, "rejected selection must preserve the accepted import")
+        host.close()
+        scope.coroutineContext[kotlinx.coroutines.Job]!!.cancel()
+    }
+
     @Test fun asyncImportPublishesThenRetiresOnClose() = runBlocking {
         val scope = kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.SupervisorJob() + kotlinx.coroutines.Dispatchers.Unconfined)
         val directory = temporary.root.resolve("async-success")
@@ -104,6 +199,12 @@ class MultimodalHostTest {
         assertEquals(0, launches)
         assertNull(host.model.state.inputReference)
         assertEquals(MultimodalBridgeFailureCode.INVALID_INPUT, host.model.state.failure?.code)
+        host.close()
+    }
+
+    @Test fun imageOnlyHostDoesNotAdvertiseVideoInput() {
+        val host = MultimodalHost(store(), selectFile = { _, _ -> })
+        assertFalse(host.supportsVideoInput)
         host.close()
     }
 

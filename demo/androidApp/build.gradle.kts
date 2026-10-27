@@ -5,6 +5,15 @@ android {
  buildFeatures {compose=true;buildConfig=true}
  compileOptions {sourceCompatibility=JavaVersion.VERSION_17;targetCompatibility=JavaVersion.VERSION_17}
 }
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    if (name.contains("AndroidTest")) {
+        compilerOptions.freeCompilerArgs.addAll(
+            "-Xno-param-assertions",
+            "-Xno-call-assertions",
+            "-Xno-receiver-assertions",
+        )
+    }
+}
 dependencies {
  implementation("androidx.compose.foundation:foundation:1.9.3")
  implementation("androidx.compose.material3:material3:1.4.0")
@@ -18,5 +27,9 @@ dependencies {
  implementation(project(":android:speech"))
  implementation(project(":android:backend-system-tts"))
  implementation(project(":android:backend-system-asr"))
+    // Kotlin-only androidTest providers run in the test APK process, whose
+    // classpath is separate from the target APK. Keep the fixture in Kotlin
+    // and package its runtime explicitly so provider startup is deterministic.
+    androidTestImplementation("org.jetbrains.kotlin:kotlin-stdlib:2.4.0")
  androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 }

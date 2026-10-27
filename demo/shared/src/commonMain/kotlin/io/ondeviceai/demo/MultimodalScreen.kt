@@ -48,7 +48,7 @@ fun MultimodalScreen(model: MultimodalViewModel, actions: MultimodalDemoActions?
     if (actions != null) Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = actions::selectImageFile, enabled = state.controlsEnabled,
             modifier = Modifier.testTag("multimodal-select-input")) { Text("选择图片") }
-        if (actions is MultimodalVideoDemoActions) TextButton(onClick = actions::selectVideoFile,
+        if (actions is MultimodalVideoDemoActions && actions.supportsVideoInput) TextButton(onClick = actions::selectVideoFile,
             enabled = state.controlsEnabled, modifier = Modifier.testTag("multimodal-select-video")) { Text("选择视频") }
         TextButton(onClick = actions::clearImageFile, enabled = !state.closed && state.inputReference != null,
             modifier = Modifier.testTag("multimodal-clear-input")) { Text("清除输入") }

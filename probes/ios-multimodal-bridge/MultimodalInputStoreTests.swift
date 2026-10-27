@@ -2,6 +2,25 @@ import Foundation
 import XCTest
 
 @MainActor final class MultimodalInputStoreTests: XCTestCase {
+  func testCreatesMissingParentDirectoriesForOwnedStore() throws {
+    let root = try makeRoot()
+    defer { try? FileManager.default.removeItem(at: root) }
+    let source = root.appendingPathComponent("source")
+    try Data([1, 2, 3]).write(to: source)
+    let directory = root.appendingPathComponent("missing/owned/copies")
+
+    let store = try MultimodalInputStore(directory: directory)
+    let token = try store.importImage(from: source)
+
+    XCTAssertTrue(FileManager.default.fileExists(atPath: directory.path))
+    let lease = try store.acquire(reference: token)
+    XCTAssertEqual(try Data(contentsOf: lease.url), Data([1, 2, 3]))
+    lease.release()
+    store.remove(reference: token)
+    store.close()
+    XCTAssertFalse(FileManager.default.fileExists(atPath: directory.path))
+  }
+
   func testBoundedCopyRejectsEmptyOversizedAndCancelledWithoutPartialFiles() async throws {
     let root = try makeRoot()
     defer { try? FileManager.default.removeItem(at: root) }

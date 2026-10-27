@@ -3,6 +3,7 @@ import ODAIKitDemo
 
 @MainActor
 final class MultimodalHost: NSObject, @preconcurrency MultimodalVideoDemoActions {
+  var supportsVideoInput: Bool { videoStore != nil && videoPicker != nil }
   let model: MultimodalViewModel
   private let store: MultimodalInputStore
   private let videoStore: MultimodalInputStore?
@@ -17,6 +18,7 @@ final class MultimodalHost: NSObject, @preconcurrency MultimodalVideoDemoActions
   private let importInput: @MainActor (MultimodalInputStore, URL) throws -> Task<String, Error>
   private var importGeneration = 0
   private var importOperation: Task<String, Error>?
+  private var preserveImportOnNextBackground = false
   private(set) var inputTask: Task<Void, Never>?
 
   init(
@@ -60,6 +62,7 @@ final class MultimodalHost: NSObject, @preconcurrency MultimodalVideoDemoActions
         }
         self.pendingPicker = nil
         guard let source else { return }
+        self.preserveImportOnNextBackground = true
         self.beginImport(from: source, into: target, video: video)
       }
     } catch {
@@ -81,11 +84,13 @@ final class MultimodalHost: NSObject, @preconcurrency MultimodalVideoDemoActions
           guard let self, !self.closed, !self.model.state.closed,
             self.importGeneration == ticket, !operation.isCancelled
           else {
+            self?.preserveImportOnNextBackground = false
             target.remove(reference: token)
             return
           }
           self.importOperation = nil
           self.inputTask = nil
+          self.preserveImportOnNextBackground = false
           let previous = self.selected
           let previousStore = self.selectedStore
           self.selected = token
@@ -97,6 +102,7 @@ final class MultimodalHost: NSObject, @preconcurrency MultimodalVideoDemoActions
           }
           if let previous { previousStore.remove(reference: previous) }
         } catch {
+          self?.preserveImportOnNextBackground = false
           guard let self, self.importGeneration == ticket, !self.closed,
             !self.model.state.closed
           else { return }
@@ -106,12 +112,14 @@ final class MultimodalHost: NSObject, @preconcurrency MultimodalVideoDemoActions
         }
       }
     } catch {
+      preserveImportOnNextBackground = false
       if !(error is CancellationError) { model.inputFailed() }
     }
   }
 
   private func cancelImport() {
     importGeneration += 1
+    preserveImportOnNextBackground = false
     importOperation?.cancel()
     importOperation = nil
     inputTask = nil
@@ -134,8 +142,10 @@ final class MultimodalHost: NSObject, @preconcurrency MultimodalVideoDemoActions
   }
   func leaveMultimodalPage() { leavePage() }
   func background(preservePicker: Bool = false) {
+    let preserveImport = preservePicker || preserveImportOnNextBackground
+    preserveImportOnNextBackground = false
     foreground = false
-    if !preservePicker {
+    if !preserveImport {
       pendingPicker = nil
       cancelImport()
     }

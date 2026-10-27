@@ -44,6 +44,22 @@ import XCTest
     XCTAssertFalse(picker.isPresenting)
   }
 
+  func testSelectionKeepsPresentingDuringReplyToPreserveImportAcrossDismissal() throws {
+    var presented: UIDocumentPickerViewController?
+    let picker = MultimodalFilePicker(present: {
+      presented = $0
+      return true
+    })
+    var presentingDuringReply = false
+    picker.present { _ in presentingDuringReply = picker.isPresenting }
+    let controller = try XCTUnwrap(presented)
+
+    picker.documentPicker(controller, didPickDocumentsAt: [URL(fileURLWithPath: "/synthetic.png")])
+
+    XCTAssertTrue(presentingDuringReply)
+    XCTAssertFalse(picker.isPresenting)
+  }
+
   func testCancelCloseAndUnavailablePresenterAreOnceOnly() throws {
     var presented: UIDocumentPickerViewController?
     let picker = MultimodalFilePicker(present: {
@@ -90,5 +106,12 @@ import XCTest
     XCTAssertEqual(first, 0)
     picker.documentPickerWasCancelled(try XCTUnwrap(presented))
     XCTAssertEqual(first, 1)
+  }
+
+  func testPresenterRequiresAttachedWindow() {
+    let window = UIWindow(frame: .zero)
+    window.rootViewController = UIViewController()
+
+    XCTAssertNil(MultimodalFilePicker.presenter(in: [window]))
   }
 }

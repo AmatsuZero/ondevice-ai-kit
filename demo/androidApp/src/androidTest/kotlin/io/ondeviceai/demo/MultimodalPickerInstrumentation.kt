@@ -2,6 +2,7 @@ package io.ondeviceai.demo
 
 import android.app.Activity
 import android.app.Instrumentation
+import android.graphics.Rect
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -36,15 +37,76 @@ class MultimodalPickerInstrumentation : Instrumentation() {
             click("multimodal-select-input")
             await { uiAutomation.rootInActiveWindow?.packageName?.toString()?.let { it != targetContext.packageName } == true }
             check(uiAutomation.performGlobalAction(android.accessibilityservice.AccessibilityService.GLOBAL_ACTION_BACK))
-            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择图片" }
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择输入" }
             result.putString("systemPicker", "passed-open-cancel-without-media-read")
+
+            stage("system-picker-real-selection")
+            click("multimodal-select-input")
+            await { uiAutomation.rootInActiveWindow?.packageName?.toString()?.let { it != targetContext.packageName } == true }
+            clickPickerControl(contentDescription = setOf("显示根目录", "Show roots"))
+            // OpenDocument surfaces the test provider as a visible source card on
+            // this device; selecting it exercises DocumentsUI without coordinates.
+            clickPickerControl(
+                text = setOf("OnDevice AI test fixtures"),
+                contentDescription = setOf("OnDevice AI test fixtures"),
+            )
+            clickPickerControl(contentDescription = setOf("real-system.png"))
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString()?.contains("real-system.png") == true }
+            result.putString("actualSelectedSystemFile", "passed-documents-provider-real-picker")
+            click("multimodal-clear-input")
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择输入" }
+
+            stage("busy-reselection")
+            val slowFixture = Uri.parse("content://io.ondeviceai.demo.test.multimodal-fixture/slow.png")
+            var busyIntercepted = 0
+            monitor = object : ActivityMonitor() {
+                override fun onStartActivity(intent: Intent): ActivityResult? {
+                    if (intent.action != Intent.ACTION_OPEN_DOCUMENT) return null
+                    busyIntercepted += 1
+                    return ActivityResult(Activity.RESULT_OK, Intent().setData(slowFixture))
+                }
+            }
+            addMonitor(monitor)
+            click("multimodal-select-input")
+            check(awaitActivityImport(activity!!)) { "slow fixture did not keep the Activity-owned import active" }
+            result.putString("activityMidCopy", "passed-activity-owned-import-active")
+            click("multimodal-select-input")
+            check(busyIntercepted == 1) { "busy reselection launched ${busyIntercepted} pickers" }
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString()?.contains("public-slow.png") == true }
+            result.putString("busyReselection", "passed-first-import-retained-second-picker-rejected")
+            removeMonitor(monitor); monitor = null
+            click("multimodal-clear-input")
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择输入" }
+
+            stage("background-active-import")
+            monitor = object : ActivityMonitor() {
+                override fun onStartActivity(intent: Intent): ActivityResult? {
+                    if (intent.action != Intent.ACTION_OPEN_DOCUMENT) return null
+                    return ActivityResult(Activity.RESULT_OK, Intent().setData(slowFixture))
+                }
+            }
+            addMonitor(monitor)
+            click("multimodal-select-input")
+            check(awaitActivityImport(activity!!)) { "slow fixture did not keep the Activity-owned import active" }
+            check(find(uiAutomation.rootInActiveWindow) {
+                it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择输入"
+            } != null) { "slow import published before lifecycle transition" }
+            runOnMainSync { check(activity!!.moveTaskToBack(true)) }
+            await { uiAutomation.rootInActiveWindow?.packageName?.toString()?.let { it != targetContext.packageName } == true }
+            targetContext.startActivity(Intent(targetContext, MainActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString()?.contains("public-slow.png") == true }
+            result.putString("backgroundMidCopy", "passed-import-retained-after-background-return")
+            removeMonitor(monitor); monitor = null
+            click("multimodal-clear-input")
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择输入" }
 
             stage("synthetic-activity-result")
             val fixture = Uri.parse("content://io.ondeviceai.demo.test.multimodal-fixture/synthetic.png")
             var intercepted = 0
             monitor = object : ActivityMonitor() {
                 override fun onStartActivity(intent: Intent): ActivityResult? {
-                    if (intent.action != Intent.ACTION_GET_CONTENT) return null
+                    if (intent.action != Intent.ACTION_OPEN_DOCUMENT) return null
                     intercepted += 1
                     return ActivityResult(Activity.RESULT_OK, Intent().setData(fixture))
                 }
@@ -56,9 +118,15 @@ class MultimodalPickerInstrumentation : Instrumentation() {
             removeMonitor(monitor); monitor = null
             click("multimodal-generate")
             node { it.viewIdResourceName == "multimodal-failure" && it.text?.contains("BACKEND_UNAVAILABLE") == true }
-            check(targetContext.contentResolver.openInputStream(fixture)!!.use { it.readBytes() }.contentEquals(byteArrayOf(1, 2, 3)))
+            val fixtureInput = checkNotNull(targetContext.contentResolver.openInputStream(fixture))
+            val fixtureBytes = try {
+                fixtureInput.readBytes()
+            } finally {
+                fixtureInput.close()
+            }
+            check(fixtureBytes.contentEquals(byteArrayOf(1, 2, 3)))
             click("multimodal-clear-input")
-            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择图片" }
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择输入" }
             result.putString("syntheticResult", "passed-real-callback-copy-host-clear-fixture-only")
 
             stage("background-return")
@@ -66,14 +134,15 @@ class MultimodalPickerInstrumentation : Instrumentation() {
             targetContext.startActivity(Intent(targetContext, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
             node { it.viewIdResourceName == "multimodal-phase" && it.text?.toString() == "FAILED" }
-            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择图片" }
+            node { it.viewIdResourceName == "multimodal-input" && it.text?.toString() == "尚未选择输入" }
             result.putString("foreground", "passed-no-input-no-auto-generation")
             runOnMainSync { activity!!.finish() }
             waitForIdleSync()
             await { targetContext.cacheDir.listFiles().orEmpty().none { it.name !in before &&
                 (it.name.startsWith("multimodal-input-") || it.name.startsWith("multimodal-picker-")) } }
             result.putString("cleanup", "passed-new-owned-directories-released")
-            result.putString("actualSelectedSystemFile", "unverified-synthetic-result-only")
+            check(result.getString("actualSelectedSystemFile") == "passed-documents-provider-real-picker")
+            check(result.getString("backgroundMidCopy") == "passed-import-retained-after-background-return")
             result.putString("inference", "unverified-no-android-backend")
             result.putString("status", "passed")
         } catch (error: Throwable) {
@@ -93,6 +162,35 @@ class MultimodalPickerInstrumentation : Instrumentation() {
     private fun click(tag: String) {
         check(node { it.viewIdResourceName == tag && it.isEnabled && it.isVisibleToUser }
             .performAction(AccessibilityNodeInfo.ACTION_CLICK))
+        waitForIdleSync()
+    }
+
+    private fun clickPickerControl(text: Set<String> = emptySet(), contentDescription: Set<String> = emptySet()) {
+        val target = node { candidate ->
+            candidate.packageName?.toString() == "com.google.android.documentsui" &&
+                candidate.isVisibleToUser &&
+                ((candidate.text?.toString() in text &&
+                    (text.isEmpty() || candidate.viewIdResourceName == "android:id/title")) || contentDescription.any {
+                    candidate.contentDescription?.toString()?.contains(it) == true
+                })
+        }
+        var clickable: AccessibilityNodeInfo? = target
+        while (clickable != null && !clickable!!.isClickable) clickable = clickable!!.parent
+        if (clickable?.isClickable == true) {
+            check(clickable.performAction(AccessibilityNodeInfo.ACTION_CLICK)) {
+                "picker control click failed: text=${target.text} contentDescription=${target.contentDescription}"
+            }
+        } else {
+            // DocumentsUI exposes some root/document rows as non-clickable
+            // accessibility containers. Inject a tap at the node-derived center
+            // rather than depending on a device-specific coordinate.
+            val bounds = Rect()
+            target.getBoundsInScreen(bounds)
+            check(!bounds.isEmpty) { "picker control has no bounds" }
+            uiAutomation.executeShellCommand(
+                "input tap ${bounds.centerX()} ${bounds.centerY()}",
+            ).close()
+        }
         waitForIdleSync()
     }
     private fun await(predicate: () -> Boolean) {
@@ -124,5 +222,15 @@ class MultimodalPickerInstrumentation : Instrumentation() {
         if (predicate(root)) return root
         for (index in 0 until root.childCount) find(root.getChild(index), predicate)?.let { return it }
         return null
+    }
+
+    private fun awaitActivityImport(current: Activity): Boolean {
+        val field = MainActivity::class.java.getDeclaredField("multimodalImport").apply { isAccessible = true }
+        await {
+            var active = false
+            runOnMainSync { active = (field.get(current) as? kotlinx.coroutines.Job)?.isActive == true }
+            active
+        }
+        return true
     }
 }

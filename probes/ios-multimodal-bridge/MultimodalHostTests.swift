@@ -3,6 +3,16 @@ import ODAIKitDemo
 import XCTest
 
 @MainActor final class MultimodalHostTests: XCTestCase {
+  func testImageOnlyHostDoesNotAdvertiseVideoInput() throws {
+    let root = try makeRoot()
+    defer { try? FileManager.default.removeItem(at: root) }
+    let host = MultimodalHost(
+      store: try MultimodalInputStore(directory: root.appendingPathComponent("images")),
+      picker: { _ in })
+    XCTAssertFalse(host.supportsVideoInput)
+    host.close()
+  }
+
   func testVideoStoresAreIsolatedAndCrossMediaPickerIsLatestOnly() async throws {
     let root = try makeRoot()
     defer { try? FileManager.default.removeItem(at: root) }
@@ -218,6 +228,37 @@ import XCTest
     }
   }
 
+  func testPickerDismissalBackgroundAfterReplyDoesNotCancelImport() async throws {
+    let root = try makeRoot()
+    defer { try? FileManager.default.removeItem(at: root) }
+    let source = try makeSource(root)
+    let entered = expectation(description: "选择回调后的导入已进入后台 worker")
+    let resume = DispatchSemaphore(value: 0)
+    defer { resume.signal() }
+    let store = try MultimodalInputStore(
+      directory: root.appendingPathComponent("copies"),
+      checkpoint: { phase in
+        if phase == .beforeSourceOpen {
+          entered.fulfill()
+          XCTAssertEqual(resume.wait(timeout: .now() + 5), .success)
+        }
+      })
+    var reply: ((URL?) -> Void)?
+    let host = MultimodalHost(store: store, picker: { reply = $0 })
+
+    host.selectImageFile()
+    reply?(source)
+    let delivery = try XCTUnwrap(host.inputTask)
+    await fulfillment(of: [entered], timeout: 2)
+    host.background(preservePicker: false)
+    resume.signal()
+
+    await delivery.value
+    XCTAssertNotNil(host.model.state.inputReference)
+    XCTAssertNil(host.model.state.failure)
+    host.close()
+  }
+
   func testActiveCancelAndCloseWaitForDrainAndCloseOnlyOnce() async throws {
     let root = try makeRoot()
     defer { try? FileManager.default.removeItem(at: root) }
@@ -300,13 +341,13 @@ import XCTest
     host.close()
   }
 
-  func testLateSuccessfulImportIsRetiredAfterClearLeaveBackgroundCloseAndOwnerRelease() async throws
+  func testLateSuccessfulImportIsRetiredAfterClearLeaveCloseAndOwnerRelease() async throws
   {
     let root = try makeRoot()
     defer { try? FileManager.default.removeItem(at: root) }
     let source = try makeSource(root)
     let actions: [(MultimodalHost) -> Void] = [
-      { $0.clearImageFile() }, { $0.leavePage() }, { $0.background() }, { $0.close() },
+      { $0.clearImageFile() }, { $0.leavePage() }, { $0.close() },
     ]
     for action in actions {
       let directory = root.appendingPathComponent(UUID().uuidString)

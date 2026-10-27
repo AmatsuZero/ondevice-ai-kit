@@ -88,9 +88,10 @@ import UIKit
       else { throw ValidationFailure() }
       delegate.documentPicker(filePicker, didPickDocumentsAt: [fixture])
       filePicker.dismiss(animated: false)
-      try require(
+      try await wait(seconds: 30) {
         ready.model.state.inputDisplayName == "fixture.png"
-          && ready.model.state.inputReference != nil)
+          && ready.model.state.inputReference != nil
+      }
       gates["pickerReply"] = true
       if background {
         stage = "OS background lifecycle"

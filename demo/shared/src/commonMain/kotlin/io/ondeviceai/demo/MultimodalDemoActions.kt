@@ -9,5 +9,7 @@ interface MultimodalDemoActions {
 
 /** Optional video selection; existing image-only hosts remain source compatible. */
 interface MultimodalVideoDemoActions : MultimodalDemoActions {
+    /** True only when the host has a video store and picker wired to this screen. */
+    val supportsVideoInput: Boolean
     fun selectVideoFile()
 }

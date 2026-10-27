@@ -3,5 +3,13 @@
         <!-- Test APK only: fixed public synthetic bytes; no filesystem access. -->
         <provider android:name="io.ondeviceai.demo.MultimodalFixtureProvider"
             android:authorities="io.ondeviceai.demo.test.multimodal-fixture" android:exported="true" />
+        <provider android:name="io.ondeviceai.demo.MultimodalFixtureDocumentsProvider"
+            android:authorities="io.ondeviceai.demo.test.multimodal-documents"
+            android:exported="true" android:grantUriPermissions="true"
+            android:permission="android.permission.MANAGE_DOCUMENTS">
+            <intent-filter>
+                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
+            </intent-filter>
+        </provider>
     </application>
 </manifest>

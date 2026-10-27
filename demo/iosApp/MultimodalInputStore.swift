@@ -1,6 +1,10 @@
 import Darwin
 import Foundation
 
+enum MultimodalInputStoreError: Error, Equatable {
+  case invalidSource
+}
+
 /// 每种媒体独立持有注册表；操作租约的生命周期长于选择所有权。
 @MainActor
 final class MultimodalInputStore: IOSMultimodalInputProvider {
@@ -31,17 +35,19 @@ final class MultimodalInputStore: IOSMultimodalInputProvider {
     startAccess: @escaping (URL) -> Bool = { $0.startAccessingSecurityScopedResource() },
     stopAccess: @escaping (URL) -> Void = { $0.stopAccessingSecurityScopedResource() }
   ) throws {
-    guard maxBytes > 0 else { throw InputError.invalidSource }
+    guard maxBytes > 0 else { throw MultimodalInputStoreError.invalidSource }
     self.directory = directory
     self.maxBytes = maxBytes
     self.checkpoint = checkpoint
     self.startAccess = startAccess
     self.stopAccess = stopAccess
+    try FileManager.default.createDirectory(
+      at: directory.deletingLastPathComponent(), withIntermediateDirectories: true)
     try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false)
   }
 
   func startImport(from source: URL) throws -> Task<String, Error> {
-    guard !closed, source.isFileURL else { throw InputError.invalidSource }
+    guard !closed, source.isFileURL else { throw MultimodalInputStoreError.invalidSource }
     let scoped = startAccess(source)
     let token = UUID().uuidString.lowercased()
     let destination = directory.appendingPathComponent(token)
@@ -89,7 +95,7 @@ final class MultimodalInputStore: IOSMultimodalInputProvider {
   func importImage(
     from source: URL, checkpoint: () throws -> Void = { try Task.checkCancellation() }
   ) throws -> String {
-    guard !closed, source.isFileURL else { throw InputError.invalidSource }
+    guard !closed, source.isFileURL else { throw MultimodalInputStoreError.invalidSource }
     let scoped = startAccess(source)
     defer { if scoped { stopAccess(source) } }
     let token = UUID().uuidString.lowercased()
@@ -116,17 +122,17 @@ final class MultimodalInputStore: IOSMultimodalInputProvider {
     let descriptor = source.withUnsafeFileSystemRepresentation { path in
       path.map { Darwin.open($0, O_RDONLY | O_NOFOLLOW | O_NONBLOCK) } ?? -1
     }
-    guard descriptor >= 0 else { throw InputError.invalidSource }
+    guard descriptor >= 0 else { throw MultimodalInputStoreError.invalidSource }
     defer { Darwin.close(descriptor) }
     var metadata = stat()
     guard fstat(descriptor, &metadata) == 0,
       metadata.st_mode & S_IFMT == S_IFREG
-    else { throw InputError.invalidSource }
+    else { throw MultimodalInputStoreError.invalidSource }
     let output = destination.withUnsafeFileSystemRepresentation { path in
       path.map { Darwin.open($0, O_WRONLY | O_CREAT | O_EXCL | O_NOFOLLOW, S_IRUSR | S_IWUSR) }
         ?? -1
     }
-    guard output >= 0 else { throw InputError.invalidSource }
+    guard output >= 0 else { throw MultimodalInputStoreError.invalidSource }
     owned = true
     defer { Darwin.close(output) }
     var buffer = [UInt8](repeating: 0, count: 64 * 1024)
@@ -135,29 +141,29 @@ final class MultimodalInputStore: IOSMultimodalInputProvider {
       let count = Darwin.read(descriptor, &buffer, buffer.count)
       if count < 0 {
         if errno == EINTR { continue }
-        throw InputError.invalidSource
+        throw MultimodalInputStoreError.invalidSource
       }
       if count == 0 { break }
-      guard count <= maxBytes - total else { throw InputError.invalidSource }
+      guard count <= maxBytes - total else { throw MultimodalInputStoreError.invalidSource }
       try buffer.withUnsafeBytes { bytes in
         var written = 0
         while written < count {
           let result = Darwin.write(
             output, bytes.baseAddress!.advanced(by: written), count - written)
           if result < 0 && errno == EINTR { continue }
-          guard result > 0 else { throw InputError.invalidSource }
+          guard result > 0 else { throw MultimodalInputStoreError.invalidSource }
           written += result
         }
       }
       total += count
       try checkpoint(.chunkWritten)
     }
-    guard total > 0 else { throw InputError.invalidSource }
+    guard total > 0 else { throw MultimodalInputStoreError.invalidSource }
   }
 
   func acquire(reference: String) throws -> any IOSMultimodalInputLease {
     guard !closed, var entry = entries[reference], entry.selected else {
-      throw InputError.invalidSource
+      throw MultimodalInputStoreError.invalidSource
     }
     entry.leases += 1
     entries[reference] = entry
@@ -193,7 +199,6 @@ final class MultimodalInputStore: IOSMultimodalInputProvider {
       }
     }
   }
-  private enum InputError: Error { case invalidSource }
   private final class Lease: IOSMultimodalInputLease {
     let url: URL
     private var action: (() -> Void)?

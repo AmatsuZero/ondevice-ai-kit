@@ -14,7 +14,9 @@ class MultimodalHost(
     private val selectVideo: (((File?) -> Unit, () -> Unit) -> Unit)? = null,
     private val importScope: CoroutineScope? = null,
     private val importDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val canSelectInput: () -> Boolean = { true },
 ) : MultimodalVideoDemoActions {
+    override val supportsVideoInput: Boolean get() = videoStore != null && selectVideo != null
     val model = MultimodalViewModel(bridge)
     private var selected: String? = null
     private var selectedStore: MultimodalInputStore = store
@@ -45,7 +47,7 @@ class MultimodalHost(
     override fun selectImageFile() = selectInput(false)
     override fun selectVideoFile() = selectInput(true)
     private fun selectInput(video: Boolean) {
-        if (closed || !foreground || !model.state.controlsEnabled) return
+        if (closed || !foreground || !model.state.controlsEnabled || !canSelectInput()) return
         val target = if (video) videoStore else store
         val picker = if (video) selectVideo else selectFile
         if (target == null || picker == null) { model.inputFailed(); return }

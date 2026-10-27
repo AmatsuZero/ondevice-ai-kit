@@ -5,6 +5,100 @@ import ODAIKitMultimodal
 import XCTest
 
 @MainActor final class MultimodalModelHostFactoryTests: XCTestCase {
+  func testFactoryVideoHostGeneratesThroughVideoProviderAndBackend() async throws {
+    let e = try environment()
+    defer { try? FileManager.default.removeItem(at: e.root) }
+    let videos = e.root.appendingPathComponent("video-inputs")
+    var reply: ((URL?) -> Void)?
+    var backend: FactoryVideoBackend?
+    let host = try await MultimodalModelHostFactory.make(
+      modelStore: e.store, manifest: e.manifest, source: e.source, inputDirectory: e.input,
+      videoInputDirectory: videos, videoPicker: { reply = $0 }, picker: { _ in },
+      backend: {
+        let videoBackend = FactoryVideoBackend(lease: $0)
+        backend = videoBackend
+        return videoBackend
+      })
+    let source = e.root.appendingPathComponent("synthetic.mp4")
+    try Data([1, 2, 3]).write(to: source)
+
+    host.selectVideoFile()
+    reply?(source)
+    await host.inputTask?.value
+    let token = try XCTUnwrap(host.model.state.inputReference)
+    XCTAssertEqual(host.model.state.inputKind, .video)
+    let prompt = "  Describe this synthetic video.  "
+    host.model.setPrompt(prompt: prompt)
+    host.model.generate()
+    let videoBackend = try XCTUnwrap(backend)
+    await fulfillment(of: [videoBackend.generated], timeout: 3)
+    let request = await videoBackend.lastVideoRequest
+    XCTAssertEqual(request?.videoFile.lastPathComponent, token)
+    XCTAssertEqual(request?.videoFile.deletingLastPathComponent().path, videos.path)
+    XCTAssertNotEqual(request?.videoFile, source)
+    XCTAssertEqual(try Data(contentsOf: XCTUnwrap(request?.videoFile)), Data([1, 2, 3]))
+    XCTAssertEqual(request?.prompt, prompt)
+    for _ in 0..<1_000 where host.model.state.output == nil { await Task.yield() }
+    XCTAssertEqual(host.model.state.output?.text, "factory video output")
+    do {
+      try await e.store.remove(e.manifest.ref)
+      XCTFail("model lease must remain owned until host close")
+    } catch { XCTAssertEqual(error as? ModelStoreError, .inUse) }
+    host.close()
+    for _ in 0..<1_000 where host.model.state.closing { await Task.yield() }
+    let closes = await videoBackend.closes
+    XCTAssertEqual(closes, 1)
+    XCTAssertFalse(host.model.state.closing)
+    XCTAssertFalse(FileManager.default.fileExists(atPath: videos.path))
+    XCTAssertFalse(FileManager.default.fileExists(atPath: e.input.path))
+    try await e.store.remove(e.manifest.ref)
+  }
+
+  func testFactoryCreatesMissingParentsForImageAndVideoStores() async throws {
+    let e = try environment()
+    defer { try? FileManager.default.removeItem(at: e.root) }
+    let images = e.root.appendingPathComponent("missing/images")
+    let videos = e.root.appendingPathComponent("missing/videos")
+
+    let host = try await MultimodalModelHostFactory.make(
+      modelStore: e.store, manifest: e.manifest, source: e.source, inputDirectory: images,
+      videoInputDirectory: videos, picker: { $0(nil) }, backend: { ModelFactoryBackend(lease: $0) })
+
+    XCTAssertTrue(FileManager.default.fileExists(atPath: images.path))
+    XCTAssertTrue(FileManager.default.fileExists(atPath: videos.path))
+    host.close()
+    for _ in 0..<1000 where host.model.state.closing { await Task.yield() }
+    XCTAssertFalse(FileManager.default.fileExists(atPath: images.path))
+    XCTAssertFalse(FileManager.default.fileExists(atPath: videos.path))
+    try await e.store.remove(e.manifest.ref)
+  }
+
+  func testVideoStoreCreationFailureClosesImageStoreAndModelLease() async throws {
+    let e = try environment()
+    defer { try? FileManager.default.removeItem(at: e.root) }
+    let videos = e.root.appendingPathComponent("blocked-video-store")
+    try Data([9]).write(to: videos)
+
+    var failure: Error?
+    do {
+      _ = try await MultimodalModelHostFactory.make(
+        modelStore: e.store, manifest: e.manifest, source: e.source, inputDirectory: e.input,
+        videoInputDirectory: videos, picker: { $0(nil) },
+        backend: { ModelFactoryBackend(lease: $0) })
+      XCTFail("video store creation must fail")
+    } catch {
+      failure = error
+    }
+
+    let constructionError = try XCTUnwrap(failure as NSError?)
+    XCTAssertEqual(constructionError.domain, NSCocoaErrorDomain)
+    XCTAssertEqual(constructionError.code, CocoaError.fileWriteFileExists.rawValue)
+
+    XCTAssertFalse(FileManager.default.fileExists(atPath: e.input.path))
+    XCTAssertEqual(try Data(contentsOf: videos), Data([9]))
+    try await e.store.remove(e.manifest.ref)
+  }
+
   func testOptionalVideoStoreIsOwnedAndRemovedOnClose() async throws {
     let e = try environment()
     defer { try? FileManager.default.removeItem(at: e.root) }
@@ -193,4 +287,33 @@ private final class ModelFactoryBackend: MultimodalGenerationBackend, @unchecked
   { throw FactoryError.injected }
   func drain() async {}
   func close() async { await lease.close() }
+}
+
+private actor FactoryVideoBackend: MultimodalVideoGenerationBackend {
+  nonisolated let backendId = "fixture"
+  nonisolated let generated = XCTestExpectation(description: "factory video backend generated")
+  let lease: ModelLease
+  var lastVideoRequest: MultimodalVideoRequest?
+  var closes = 0
+  init(lease: ModelLease) { self.lease = lease }
+  func availability() async -> CapabilityAvailability {
+    .init(status: .available, backendId: backendId)
+  }
+  func generate(_ request: MultimodalRequest, update: (@Sendable (MultimodalTextUpdate) -> Void)?)
+    async throws -> MultimodalTextOutput
+  { throw FactoryError.injected }
+  func generateVideo(
+    _ request: MultimodalVideoRequest, update: (@Sendable (MultimodalTextUpdate) -> Void)?
+  ) async throws -> MultimodalTextOutput {
+    lastVideoRequest = request
+    generated.fulfill()
+    return try .init(
+      text: "factory video output",
+      model: .init(modelId: "fixture", modelRevision: "v1", runtimeRevision: "test"))
+  }
+  func drain() async {}
+  func close() async {
+    closes += 1
+    await lease.close()
+  }
 }
