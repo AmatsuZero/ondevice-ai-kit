@@ -8,7 +8,7 @@
 
 - 新鲜本地主机验证编译 `probes/ios-camera-lifecycle/ThreadInventory.swift` 与 `ThreadInventoryChecks.swift`（Swift 6）并执行100轮快照；正常状态为 `complete-snapshot`，send-right 引用 **2→2**，注入缺失 pthread 映射时正确降级为 `partial-snapshot`（1 次 lookup failure），4097B marker 保持。
 - 同一源码通过 iOS15 arm64 typecheck，`scripts/generate-camera-resource-app.rb` 通过 Ruby 3.4.11 语法检查。证据：`artifacts/verification/p4-thread-inventory-local-20261027/summary.json`。
-- 这是 host ownership/snapshot release 与生成器边界证据；不证明真机线程生命周期、TLS/destructor 归属、GrOp 根因或零泄漏。当前 candidate/readiness 快照已刷新到 HEAD `1fd95c63d1d0af5bf2a4ff9a5a02b94b0c28052c`，P4/P11 仍开放。
+- 这是 host ownership/snapshot release 与生成器边界证据；不证明真机线程生命周期、TLS/destructor 归属、GrOp 根因或零泄漏。当前 candidate/readiness 快照在本检查点刷新，P4/P11 仍开放。
 
 ## 最新续接 — 2026-10-27 P11 candidate freeze 预检
 
