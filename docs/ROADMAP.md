@@ -9,6 +9,10 @@
 2026-10-27 分批交付：用户已授权将验证通过的benchmark、多模态Kotlin/iOS picker、相机隔离、可选LiteRT-LM基础门禁与合成EXIF验证分别提交，并同步现有foundation分支到origin+jihu。提交与最新复验见[handoff顶部](HANDOFF-2026-10-23-next-session.md)；签名工程、身份草稿和未完成资源取证工具保留本地。提交/同步不关闭P4/P11，也不表示生产后端或发布验收。
 
 2026-10-27 P4当前源码Compose相机UI：真机控件/前后台/用户停止2/2，两分钟持续UI1/1，合计3/3、0失败/跳过；四窗口新增748/750/749/750，120.457944秒后计数3047，停止5秒不增加。普通Demo已无参数恢复；未访问相册，无图像/视频附件。补齐当前源码三项UI验证，原生GrOp、PHPicker EXIF、最低系统/全范围审查及P11仍开放，基础10/12不变。见[P4记录](validation/p4-camera-stability.md)。
+2026-10-27 P4线程标签校准：修正 own-task 快照在 pthread 映射缺失时误报 complete 的缺陷；100轮宿主 send-right 2→2、iOS15 Swift6严格 typecheck和当前 Swift5/Swift6 相机门禁通过。当前源码真机三轮页面退出/重入窗口新增687/661/660，最后页面对象/bridge约32.643秒首次全释放；同PID 301.202178秒 trace 为18×GrOp/2304B live。4097B marker校准导出低32 thread label；8个GrOp标签中7个完整pthread指针对应多个kernel TID，不能据同标签推导同一线程或TLS根因。P4原生残留、完整审查和P11仍开放，见[专项调查](validation/p4-atlas-text-cache.md)。
+2026-10-27 P11准备矩阵：已建立只读 `artifacts/verification/p11-readiness-20261027/summary.json`，覆盖9项能力并保留逐项未验证原因；所有9行仍有 gaps，`p11Gate.status=open`，发布结论 `not-ready`。该矩阵仅用于统一验收前的证据盘点，不改变10/12计数。
+2026-10-27 P11 candidate freeze 预检：`artifacts/verification/p11-candidate-freeze-20261027/summary.json` 为 `not-ready`；工作树7项 tracked dirty/9项 untracked，只有既有 Apple MLXVLM 合成图观察值可冻结，LiteRT-LM授权模型、Face Identity生产模型与校准、iOS15/API26设备、GPU/energy/峰值资源和统一fixture仍缺失。仅作候选盘点，不冻结发布候选，不改变10/12或P11开放状态。
+2026-10-27 P11 readiness 校验门禁：新增只读 `tools/validate_p11_readiness.py` 和6项回归，强制 `p11Stop`/`requiredBeforeP11` 停止契约，并检查证据路径、来源哈希、行计数及非terminal行不得关闭门禁。当前快照校验为9行/9 gaps/16证据路径/5哈希；完整工具套件显式Ruby3.4.11并以临时SwiftPM sandbox开关重跑 **154/154**。这只证明快照完整性，P11仍 `open/not-ready`，不增加设备、模型或发布证据。
 
 2026-10-27 Android 合同修正：固定 LiteRT-LM 0.18.1 AAR 否定原 terminal + isAlive=false 的 drain 判据；probe schema 2 不再认证该证明。两项回归 RED→GREEN，JVM9/9、lint/APK/test APK 构建通过；生产 factory/consumer 及真实 native drain 仍未完成，没有模型或设备运行。见[专项证据](validation/android-litertlm-drain-contract.md)。基础10/12不变。
 

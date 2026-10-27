@@ -1,5 +1,15 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 最新：marker 校准与实际 thread label 复验（2026-10-27）
+
+Task12 的取证完整性修正先以 lookup seam 稳定复现缺失 pthread 映射的 runtime RED，再要求 `partial-snapshot`、失败数和 unchanged send-right；修正后 macOS 宿主100轮快照通过，引用计数2→2，iOS15 Swift6 warnings-as-errors typecheck通过。设备 probe 仅在显式 `--camera-thread-inventory` 下启用，普通模式不改变。
+
+本轮在当前源码生成的签名 probe 上完成三轮同进程页面退出/重入和精确 PID Leaks 录制。三轮活动窗口新增 **687/661/660** 次，停止5秒无新增；最终页面 owner、Compose controller、Metal layer 与 bridge 均释放，首次全弱引用释放的实际页面缺失时长约32.643秒，最终约61.986秒仍为0。trace 时长301.202178秒，导出 Allocations List 读取108263行/85579214 bytes、exit0；最终 **18×GrOp/2304B** 全部仍为 live，不能据此关闭原生残留。
+
+4097B marker 实际由 malloc 分类为5120B，分配栈命中 `ThreadInventoryMarker`。其记录的 pthread low32 candidate 与导出的 thread label一致，证明此导出器使用相同低32格式。8个 GrOp allocation labels 都能在 own-task 快照中找到；其中7个完整 pthread 指针分别对应多个不同 kernel thread ID，说明相同 label 不能直接代表同一持续存活 OS 线程。236个快照中66个 complete、170个 partial，partial 仅因 pthread 查询缺失；未见 thread_info、port release 或 VM array release 错误。
+
+这仍不是析构/free/TLS 证据：快照边界非原子，缺失不是精确线程退出时间；没有跨线程内存读取、TLS 读取或私有清理调用。marker 只校准一个已知主线程分配，其他 GrOp 仍缺少 generation/析构归属。新限定 reviewer 继续因429无结论。证据：`artifacts/verification/p4-thread-calibration-20261027/summary.json`、`candidate-thread-mapping.json`、`snapshot-summary.json`及同目录原始报告/trace/导出。P4/P11保持开放。
+
 ## 最新：设备 LLDB 取证边界（2026-10-27）
 
 使用本机`devicectl`帮助中记录的`device select`、`device process attach -p`路径，5次有界诊断均未取得可检查的映像。target保持`<none>`/`state=connected`；显式`remote-ios`仍报`no modules found`，`process interrupt`报`Process must be launched`，补充`process attach`报`no such process`。这些是调试工具结果，不能推导产品错误、析构已经发生或TLS槽归属，也不关闭原生残留项。没有新的受支持路径时不重复这些变体。

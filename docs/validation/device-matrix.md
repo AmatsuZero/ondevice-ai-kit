@@ -30,6 +30,12 @@ Inventory 2026-10-17: USB-connected iPhone 16 Pro Max (iPhone17,2), iOS 27.0.1 (
 
 No stored device UDIDs or input photos in this report. Update rows only with fresh commands and actual results.
 
+## 2026-10-27 P4 线程校准补充
+
+当前源码的独立页面 probe 在已解锁现代 iPhone 上完成三轮退出/重入和精确 PID 301.202178 秒 Leaks 录制。窗口新增 687/661/660 次成功结果；页面移除后的最后 owner、bridge、Compose controller 和 Metal layer 均释放，首次全弱引用释放约32.643秒，约61.986秒仍为0。完整 Allocations List 导出为108263行、85579214 bytes、exit0；18×GrOp/2304B仍为 live。
+
+own-task 快照在 pthread 映射缺失时现明确报告 partial；100轮 macOS 宿主回归保持 send-right 2→2，当前相机 Swift5/Swift6 transfer 门禁和 iOS15 typecheck 通过。4097B marker 的 trace 分配栈命中校准类，导出低32位 label 与记录值一致；8个 GrOp labels 中7个完整 pthread 指针曾对应多个 kernel thread ID。该结果不能证明析构/free/TLS 归属、长期增长、最低系统或零泄漏，P4 资源释放和全范围 review 仍为 unverified。
+
 用户已授权直接使用本地真机做 device-only 验证。P3 与 P4 部分实测不改变最低系统和持续热量/内存的缺口。
 
 2026-10-16：用户确认 iOS15 与 Android API26 真机暂不可用；当前 Android API35 设备仅验证现代平台。最低系统验收挂起，待对应设备可用后继续。已登记 [DEVICE-IOS15 / DEVICE-ANDROID TODO](../ROADMAP.md#等待设备的-todo)，不以当前构建、模拟器或较新设备关闭这些项。

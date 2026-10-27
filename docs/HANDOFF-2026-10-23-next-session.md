@@ -4,6 +4,42 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 P11 candidate freeze 预检
+
+- `artifacts/verification/p11-candidate-freeze-20261027/summary.json` 的状态为 `not-ready`，仅作候选冻结前盘点，不冻结发布候选、不接受许可证、不下载模型，也不提升任何未验证行。
+- 当前 SDK 工作树仍有 7 个 tracked dirty、9 个 untracked；受保护工程、身份草稿、线程/资源 probe、文档与 readiness 工具均按边界保留，因此没有单一 clean candidate snapshot。
+- 仅 Apple MLXVLM 的既有合成图观察值可冻结（model `fa57db46815177fbdfd65cc85a2b3416a8332268`、runtime `6e338e5df49424fc0db7c6d58184d622f92ed18a`、fixture SHA-256 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`）。LiteRT-LM 授权 manifest/weights、Face Identity 生产模型/PAD/数据/校准、iOS15/Android API26 设备、GPU/energy/峰值资源以及统一跨能力 fixture 仍缺失。
+- 该预检不改变基础 **10/12**、P4/P11 开放状态或 goal active；下一步仍须先完成 `requiredBeforeP11` 的候选冻结、逐能力矩阵和发布结论。
+
+## 最新续接 — 2026-10-27 P11 readiness 快照校验门禁
+
+- 新增只读 `tools/validate_p11_readiness.py` 与 `tools/tests/test_p11_readiness.py`。校验器强制 `p11Stop`/`requiredBeforeP11` 停止契约，并拒绝缺失/越界证据、来源哈希漂移、门禁计数不一致，以及仍有非 terminal 行时的 `closed/ready` 结论；不会修改快照或工作树。
+- 当前快照新鲜校验通过：9 行、9 个未验证 gap、16 条证据路径、5 个来源哈希；`p11Gate.status=open`、`finalReleaseConclusion=not-ready` 保持不变。证据与原始日志见 `artifacts/verification/p11-readiness-validator-20261027/summary.json`。
+- 使用显式 Ruby 3.4.11、临时 SwiftPM `--disable-sandbox` wrapper（只作用于测试子进程）重跑完整 Python 工具套件 **154/154、0 failures、0 errors**；`git diff --check` exit0。此前未设置 wrapper 的单项失败是当前受限环境的 SwiftPM sandbox 错误，不是产品/校验器失败。
+- 本轮只推进 P11 证据完整性，未新增设备、模型、质量、资源、最低系统或发布证据；基础10/12、P4/P11、goal active保持不变。
+
+## 最新续接 — 2026-10-27 CoreDevice 通道恢复但 EXIF 仍受 harness 边界限制
+
+- 新鲜 `devicectl list devices` 与 `device info lockState` 均 exit0；物理 iPhone 16 Pro Max 当前 `connected`、`passcodeRequired=false`、`unlockedSinceBoot=true`。本轮没有安装、启动或访问媒体。
+- Android ADB 仍因 USB plugin/smartsocket `Operation not permitted` exit1。iOS EXIF 计划仍明确为 simulator-only，生成器固定 `SUPPORTED_PLATFORMS=iphonesimulator`；不通过向物理 Photos 写入合成资产来绕过该边界。P4 真机 PHPicker→Vision EXIF2/6/7 继续 `unverified`。
+- 最新通道/harness 状态（不含设备标识）更新于 `artifacts/verification/p4-device-gate-status-20261027/summary.json`；这只证明通道可用，不关闭 P4、最低系统或 P11 门禁。
+
+## 最新续接 — 2026-10-27 P4 设备通道与 EXIF harness 边界刷新
+
+- 本轮首次 `devicectl list devices` 曾列出物理 iPhone 16 Pro Max 为 `connected`，立即重查却因 CoreDeviceService timeout 退出；没有安装、启动或测试。Android `adb devices -l` 因 USB plugin/smartsocket `Operation not permitted` 退出。该瞬时连接状态不计为设备验收。
+- 现有 `scripts/generate-photo-picker-tests.rb` 明确只生成 `SUPPORTED_PLATFORMS=iphonesimulator`、iOS15 的 host；没有把物理设备或 Photos 写入作为隐式 fallback。当前没有安全、可复核的真机合成 EXIF fixture 注入路径，因此 P4 真机 PHPicker→Vision EXIF2/6/7 继续 `unverified`。
+- 设备通道与 harness 证据（不含设备标识）见 `artifacts/verification/p4-device-gate-status-20261027/summary.json`。本轮没有重复页面 trace、没有访问私人媒体、没有修改签名或保护工程。
+
+## 最新续接 — 2026-10-27 P4 线程标签校准与原生残留复验
+
+- 延续 Task12 的 own-task 取证，先发现并修正完整性缺陷：`pthread_from_mach_thread_np` 缺失映射不能再报告 `complete-snapshot`。新增 lookup seam 后先得到稳定 runtime RED，再修正为 `partial-snapshot` 并记录 `pthreadLookupFailures`；100轮 macOS 宿主快照、JSON 序列化和 send-right **2→2**，缺映射回归通过，iOS15 Swift6 warnings-as-errors typecheck exit0。签名设备 probe build exit0；没有改保护工程或安装资产。
+- 在已解锁 iPhone 上使用显式 `--camera-thread-inventory` 完成当前源码生成 probe、三轮 page exit/reentry 与同 PID **301.202178s** Leaks 录制；运行 ID、PID、安装路径、trace 时间和实际 binary UUID 已严格关联。三轮 active 窗口新增 **687/661/660**，停止5秒无新增；页面退出后最后 owner、bridge、Compose controller、Metal layer 均在约 **32.643s** 首次全释放，约61.986s仍为0。普通 Demo 已从当前核验 restore 包恢复并无参数启动，容器保留。
+- 新鲜 trace 的最终 Leaks 为 **18×GrOp/2304B**，18项全部在完整 Allocations List 中为 live；导出读取 **108263 rows / 85579214 bytes，exit0**。4097B marker 实际分类为5120B，分配栈命中 `ThreadInventoryMarker`，其导出 thread label 与记录的 pthread low32 candidate 一致，完成了标签格式校准。8个 GrOp allocation labels 均能匹配快照候选值；其中7个完整 pthread 指针各对应多个不同 kernel thread ID，证明相同导出标签不能直接代表同一持续存活 OS 线程。
+- 取证仍有限：快照为非原子 own-task 列举，236个快照中66 complete/170 partial；partial 原因仅为 pthread 查询缺失，未见 thread_info、send-right release 或 VM array release 错误。没有观测析构/free 线程、TLS 槽地址或线程退出事件，因此不能关闭 GrOp、宣称泄漏是误报、或推导长期增长/平台修复。新限定审查仍因429无结论，不写成 APPROVE。
+- 线程校准结束后重新运行当前生产相机源码门禁：`scripts/check-camera-concurrency.sh` exit0，Swift5/Swift6 transfer checks 均通过，目标 iOS15；日志与 exit 文件在同一证据目录。该源码门禁不替代 iOS15 真机运行、原生释放或全范围 P4 review。
+- 为 P11 建立只读统一准备矩阵 `artifacts/verification/p11-readiness-20261027/summary.json`：9 项能力均保留至少一个未验证项，`p11Gate.status=open`、`rowsNotTerminalPass=9`，发布结论明确为 `not-ready`。它只汇总当前证据和阻断项，不把分包 pass-bounded 结果升级为最终验收。
+- 证据冻结在 `artifacts/verification/p4-thread-calibration-20261027/summary.json`、`snapshot-summary.json`、`candidate-thread-mapping.json`、`verify_runtime.py`、trace/导出及恢复日志。线程取证源码、生成器、资源 probe、保护工程和身份草稿继续留在本地 dirty/untracked；本轮未提交或再次同步。基础10/12、P4/P11、LiteRT-LM生产factory/模型/真实drain及完整交付继续开放。
+
 ## 最新续接 — 2026-10-27 已验证工作包分批提交与双远端同步
 
 - 用户明确授权“分批提交已验证改动，并同步 origin + jihu”。此前各计划/历史检查点的 no commit/push 限制已被本次授权覆盖；只同步现有 `feat/sdk-foundation` 分支，不涉及合并、tag 或发布。

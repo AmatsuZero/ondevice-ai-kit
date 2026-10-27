@@ -1,6 +1,16 @@
 # Foundation 验收记录
 
-更新日期：2026-10-17（保留分包历史证据）。工作分支 `feat/sdk-foundation`；代码提交以 git 历史为准。构建日志与本机产物放在忽略目录，不提交模型权重、照片、设备标识或签名材料。
+更新日期：2026-10-27（保留分包历史证据）。工作分支 `feat/sdk-foundation`；代码提交以 git 历史为准。构建日志与本机产物放在忽略目录，不提交模型权重、照片、设备标识或签名材料。
+
+## 当前统一口径
+
+基础里程碑仍为 **10/12**：P4 和 P11 未完成。最新 P4 线程校准在当前源码生成的独立 probe 上完成三轮页面退出/重入和同 PID 301 秒 Leaks 录制：三轮窗口新增 687/661/660 次结果，最后页面的 owner、bridge、Compose controller 和 Metal layer 均释放；trace 最终仍有 18×GrOp/2304B live。4097B marker 校准了导出的低32位 thread label，但7个 GrOp label 对应多个不同 kernel thread ID，尚未证明析构/free/TLS 归属。证据见 [P4 AtlasTextOp 调查](p4-atlas-text-cache.md)；不把页面弱引用释放或严格并发门禁升级为零泄漏、最低系统或 P4 完成。
+
+P11 仍缺最终候选冻结、所有已接入能力的统一任务/质量/资源/取消矩阵和发布结论。LiteRT-LM 生产 factory、授权模型、真实 native drain 与 Android 推理仍未验证；iOS15/API26 设备缺口继续按设备矩阵记录。
+
+P11 candidate freeze 预检为 `not-ready`：当前工作树 7 项 tracked dirty、9 项 untracked，没有 clean candidate snapshot；仅 Apple MLXVLM 既有合成图观察可冻结。LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型与校准、iOS15/API26 设备、GPU/energy/峰值资源及统一 fixture 均未满足。预检只记录边界，不构成发布候选或最终验收。见 `artifacts/verification/p11-candidate-freeze-20261027/summary.json`。
+
+P11 readiness 快照现有只读校验门禁：当前 9 行均有未验证 gap，证据路径与5项来源哈希均通过，非 terminal 行仍强制 `open/not-ready`，且快照必须声明 `p11Stop` 与 `requiredBeforeP11`。完整工具套件在显式 Ruby 3.4.11 与临时 SwiftPM sandbox 开关下 **154/154**；该结果只证明报告完整性，不改变 P11 的未完成状态。原始证据见 `artifacts/verification/p11-readiness-validator-20261027/summary.json`。
 
 | 项目 | 证据 | 结论 |
 | --- | --- | --- |
