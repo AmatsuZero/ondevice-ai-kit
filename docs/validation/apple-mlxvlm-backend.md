@@ -34,7 +34,7 @@ ledger/log：`.superpowers/sdd/2026-10-22-apple-mlxvlm-backend/`。
 
 ## 真实 SDK 设备链路
 
-iPhone16ProMax/iOS27.0.1，UDID `00008140-0008703436D3001C`；独立bundle `io.ondeviceai.mlxvlmconsumer`，沿用既有开发team签名，没有修改签名资产或默认Demo。固定输入 `artifacts/P9/fixture.png` SHA256 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`；本机 `artifacts/P9/verified` 的14文件逐一复核bytes/SHA256。只复制公开模型与合成fixture到本App容器。
+iPhone16ProMax/iOS27.0.1，UDID `<iPhone-UDID>`；独立bundle `io.ondeviceai.mlxvlmconsumer`，沿用既有开发team签名，没有修改签名资产或默认Demo。固定输入 `artifacts/P9/fixture.png` SHA256 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`；本机 `artifacts/P9/verified` 的14文件逐一复核bytes/SHA256。只复制公开模型与合成fixture到本App容器。
 
 原始结果 `artifacts/verification/apple-mlxvlm-backend-20261022/device-result.json`，launch/install JSON与所有build/provision/copy logs保留在相邻目录/ledger。
 

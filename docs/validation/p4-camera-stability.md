@@ -2,6 +2,158 @@
 
 日期：2026-10-16。此包处理用户实际反馈的两个 Demo 问题，只完成 P4 的相机控件稳定及前后台恢复部分。
 
+## 当前源码 Compose 相机 UI 验收（2026-10-27）
+
+Task10并发改造后的实际Demo在iPhone16ProMax/iOS27.0.1重新完成现有相机UI用例。控件稳定、前后台恢复/显式停止 **2/2、0失败、0跳过**；两分钟持续UI **1/1、0失败、0跳过**。本轮runner正常启动，保留此前初始化失败作为历史证据，不据此声称已定位其原因。
+
+四个30秒窗口新增748/750/749/750次成功结果，窗口实际120.457944秒、计数50→3047；UI断言确认照片/Benchmark按钮可用、无逐帧进度条，停止后5秒无新结果。短测附件为空，持续测试仅四份纯文本计数，无保留图片/视频。未访问相册，未修改产品或测试代码。
+
+普通Demo已无参数恢复PID28004，数据保留；原工程与两个保护hash不变。证据位于`artifacts/verification/p4-current-camera-ui-20261027/summary.json`，含两个xcresult、原始日志及源码/设备KMP框架hash。现有/tmp恢复目录的App已由build-for-testing更新，使用本轮artifact hash，不套用旧恢复包hash。
+
+这只补齐当前源码三项Compose相机UI验证；原生GrOp/渲染资源释放、真机PHPicker→Vision EXIF2/6/7、最低系统和全P4审查仍开放。基础10/12、P4/P11未完成。
+
+## Task10限定审查与MLX增强集成补验（2026-10-27）
+
+最终源码的独立`camera_isolation_review`已返回**APPROVE、0 findings**，覆盖相机并发所有权、MainActor/isolated deinit及Identity测试close-before-reopen屏障；不是全P4批准。新生成MLX增强App以全部可选开关、固定依赖pins完成generic iOS Debug unsigned构建（exit0、minOS18.0）；源码/pins哈希不变，不是新增签名/安装/设备推理。记录在`artifacts/verification/p4-camera-mlx-integration-20261027/summary.json`。下节“review429、MLX未复验”为上一个历史检查点，此处已补齐这两项；其余原生泄漏、交互和最低系统缺口仍保留。
+
+## 相机并发隔离与当前源码真机回归（2026-10-27）
+
+生产CameraSource采用不可变Sendable入口、单AsyncStream控制消费者和专用串行executor上的capture actor，保留start/stop/close顺序和同步有界帧接入。session与terminal状态由actor拥有；只有NSLock保护的callback slot使用窄范围unchecked声明，payload为Sendable，调用和capture析构在锁外。DemoController及Kotlin action conformances隔离至MainActor；各代回调捕获自己的帧队列，detached编码只返回Data。
+
+可选Demo构建发现Published多模态状态不能从nonisolated deinit读取，修为isolated deinit。当前SDK的MainActor析构回溯部署实现与真实对象符号均保留；iOS15 target编译不等于iOS15运行验收。严格Swift5/Swift6 complete checks无诊断，最终simulator生命周期8/8，TSan相机专项7/7且产物有19个插桩符号；默认/语音+视频+多模态Demo构建通过，MLX专属增强构建未复验。Apple门禁通过，完整host470/470；首轮469通过/1项Identity测试busy暴露测试重开存储前未join异步stop排空，已将既有close移至reopen前，未改Identity产品行为。
+
+iPhone16ProMax/iOS27.0.1当前源码hosted XCTest **11/11、0 failures、0 skips**，PID27956。两分钟持续runID `0D4BFED6-DAD0-49B0-9A58-EA9E94A56622`，四个窗口新增747/747/748/747，活动120.054737秒累计2992次Vision成功；停止5秒计数不变、inputs/jobs0，owner/bridge/detector关闭释放通过。同PID暂停/恢复/FIFO用例计数3/6/7/10、关闭后10；start/stop通知各3，inputs/outputs1/1→0/0。所有附件仅状态，不保存图像。
+
+普通Demo从匹配当前源码的签名包恢复安装、无参数启动PID27961，安装/启动路径一致、原容器保留。证据与源hash在`artifacts/verification/p4-camera-isolation-20261027/summary.json`。首轮沙箱缓存、恢复包审批429及沙箱签名信任问题的原件保留，后续授权验证通过。独立code-reviewer及兼容性researcher均429，没有独立审查结论。
+
+P4仍开放：本包不证明Compose/Skia原生GrOp释放，不替代真实PHPicker→Vision EXIF2/6/7、完整UI与最低系统验收。基础10/12、P11与全SDK/Demo范围不变；下节9/9及“生产代码未修改”均指改造前的历史检查点。
+
+## 暂停/恢复与连续 stop/start 真机回归（2026-10-27）
+
+为后续严格并发隔离改造补充行为约束，新增真实CameraSource/session回归：暂停保留同一input/output及callback，delegate排空后250ms无新帧；恢复继续出帧；紧邻stop/start后先等两次真实session通知，再要求新的回调。最后terminal close排空并移除输入输出。错误路径也关闭相机，不保存画面。
+
+当前源码独立签名构建与iPhone16ProMax/iOS27.0.1完整生命周期套件**9/9通过、0 failures、0 skips**。新用例2.126秒，PID27922/runID `B6B0956C-4C7E-4138-8EEE-3E5C08A5B0DD`：暂停3、恢复6、连续stop/start完成后7、最终10次callback，关闭250ms后仍10；start/stop通知各3，inputs/outputs1/1→0/0。普通Demo恢复无参数启动PID27925，原容器保留。原始报告、附件及验证汇总在`artifacts/verification/p4-camera-concurrency-20261027/summary.json`。
+
+生产代码未修改。Swift6/complete/iOS15单文件检查仍有4处CameraSource捕获warning，编译exit0不能当warning-free；SDK API声明不等于iOS15运行证据。并发隔离改造、完整UI/EXIF、原生GrOp残留、最低系统和完整审查继续开放，基础10/12不变。
+
+## 末次 bridge 空闲释放复验（2026-10-27）
+
+当前probe/manifest/status修订已随新签名构建在iPhone16ProMax/iOS27.0.1运行：PID27882/runID `543373D1-52A7-424C-9ED1-FE5922D6E97C`。三轮30秒窗口新增672/694/694次Vision成功，停止5秒无新增且jobs/inputs0；每轮页面退出30秒后owner/Compose controller/Metal layer均释放，残留bridge已关闭接入且无任务/输入。末次bridge在退出实际30.992938秒仍存在、32.086039秒采样消失，并持续到62.350613秒；期间没有重入或强制GC。此范围的自然释放已验证。
+
+同PID301.116972秒trace完整覆盖尾部，18×GrOp/2304B仍最终live；17项33帧AtlasTextOp路径。trace/local运行binary UUID、安装路径、源/框架hash均吻合。固定源码宿主实验支持TLS槽随线程退出丢失原始存储的可能性，但实际线程生命周期/TLS地址未证实，详见[专项调查](p4-atlas-text-cache.md)。普通Demo恢复PID27888、无参数、保留容器；P4原生残留、UI/EXIF/minOS/严格并发/完整审查缺口不变。原始证据`artifacts/verification/p4-page-tail-20261027/summary.json`。
+
+## 同 PID 页面退出/重入与原生残留（2026-10-27）
+
+新增生成page-cycle模式及弱引用probe，复用生产SwiftUI/Compose内容与StateObject，独立root真实移除/重建页面；不改变生产导航或依赖。真机PID27863、runID `7BB10334-CBE9-4CC8-839A-BC6DD3F38C20`三轮30秒相机窗口新增667/690/694次Vision成功，stop后5秒无新增且inputs/jobs清空。每轮页面退出30秒后owner/Compose controller/Metal layer弱引用均为空，bridge仍1；前两轮bridge在下一次warmup已释放，最后bridge后续释放未验，因此原报告`incomplete-release`。
+
+同PID301.106594秒Leaks录制覆盖全部周期。19×GrOp/2432B全部在最终live allocation表匹配，其中18项有33帧AtlasTextOp文字绘制栈，来自8个分配线程，按分配周期为7/6/5；另1项录制前已有。三轮均新增最终残留对象，不能因页面弱引用清空而宣布原生资源释放或稳定缓存。详细数值、解释边界与后续析构/线程验证见[AtlasTextOp专项调查](p4-atlas-text-cache.md)。
+
+`artifacts/verification/p4-page-release-20261027/summary.json`保留trace/PID/URL/时间校验、完整分配表流式读取统计、实际运行源及App/framework hashes。普通Demo已恢复无参数启动PID27875，保护hash和生产源hash不变。独立probe审查的诊断/manifest/status建议已处理，双模式生成检查及修订后build通过；后续修订未重跑设备，原运行版本单独冻结。范围不包括物理UI、真机PHPicker→Vision、最低系统、严格并发或完整P4审查，P4仍未完成。
+
+## AtlasTextOp 完整分配栈与线程缓存（2026-10-27）
+
+对下方PID27593既有trace的后续只读导出已匹配全部7个地址。5个AtlasTextOp对象各有33帧完整分配栈，来自5个不同allocation threads，均经过Compose `SurfaceMetalRedrawer`的文字绘制路径；另2个录制前已有对象仍无栈。固定上游cpp与当前本地二进制确认每线程单槽缓存，且`GrRecordingContext`基类析构调用`ClearCache`清理调用线程槽。这支持缓存假设，但没有证明每个地址的最终TLS/析构状态、跨线程释放或长期稳定性，**原7×GrOp/896B仍保留为未关闭资源项**。
+
+完整证据、当前二进制与trace关联边界、工具失败和下一页面退出/重入实验见[专项调查](p4-atlas-text-cache.md)。本轮未改生产源码或依赖，未新操作真机；独立产品review与P4其余验收缺口不变。
+
+## 实际 Demo 渲染的持续/停止资源采样（2026-10-27）
+
+`generate-camera-resource-app.rb`在独立目录生成device-only验证包，App源码是生产`OnDeviceAIDemoApp.swift`加唯一`onAppear`验证调用，其余controller/相机/Compose路径保持当前源码。显式UUID启动后等待本轮app-private触发文件，录制已附加准确PID后才触发相机。全过程无截图或图像文件；只导出状态、类型、几何与资源数据。
+
+最终iPhone16ProMax/iOS27.0.1报告runID `DE42C583-3089-416C-92A0-94B38266F918`、PID27593为`passed`：预热3次，活动121.117918秒，四个30秒窗口分别新增672/642/670/641次，累计2628次真实Vision成功。停止后30.085894秒结果计数不变、bridge inputs/jobs均0。各采样点前台/thermal为raw0，`ComposeHostingViewController`和可见440×380 `CMPMetalLayer`存在。它验证真实页面渲染时的controller驱动运行，不替代物理UI控件操作。
+
+Leaks trace为210.750103秒（00:19:03.834–00:22:34.584 +08:00），与安装URL/PID及报告逐阶段时间一致，完整覆盖基线、持续和停止后窗口。明细有**7个GrOp/896B**：5项`responsible-frame`现在可见`skgpu::ganesh::AtlasTextOp::Make(...)`，责任library为`OnDeviceAIDemo.debug.dylib`；另2项仍达到栈限制。这是新的分配位置线索，**不是完整所有权栈、泄漏根因或依赖升级依据**，也不能与先前不同状态的空闲样本直接计算增长率。
+
+| 观测点 | Vision成功累计 | RSS快照（B） |
+| --- | --- | --- |
+| 活动30秒 | 675 | 471859200 |
+| 活动60秒 | 1317 | 472678400 |
+| 活动90秒 | 1987 | 473088000 |
+| 活动120秒 | 2628 | 473841664 |
+| 停止30秒后 | 2628 | 464404480 |
+
+Allocations的`All Heap & Anonymous VM` persistent为351357200B，其中`VM: IOSurface`317390848B。它们是采样分配统计；RSS也是离散观测，均非峰值、physical footprint、GPU或能耗。录制会影响资源/时间，正常stop仍保留最后图像和Compose页面；本轮没有整个页面owner teardown或零泄漏证明。
+
+验证入口的首次启动inactive已修正为限时前台就绪等待；初次只检测CAMetalLayer的误判，经本地固定Compose1.11.1官方source JAR与实际图层几何确认后补识别CMPMetalLayer。旧Swift几何API编译失败、一次未采用新构建的诊断启动、所有失败报告与早期未启动相机的trace均保留在`diagnostics.json`，不计产品RED或持续相机通过。
+
+最终构建、生成源等价检查、源/保护hash、报告时序与trace关联通过；`summary.json`位于`artifacts/verification/p4-rendered-resource-20261027/`，同目录保留raw trace（约4GB，本地忽略）、导出XML、报告及source manifest。普通Demo已恢复安装/无参数启动（PID27598），共享override缺席，原应用数据与保护文件保留。生产源码未变，未重复运行未改动的470项Apple测试；新增范围独立review仍未取得。
+
+**P4仍未完成。** 下一步从新trace中的AtlasTextOp符号调查对象生命周期与完整分配栈；完整渲染释放、真机PHPicker EXIF2/6/7、物理UI控件、最低系统和并发/review门槛继续保留。
+
+## 真机两分钟 controller/bridge/Vision 管线（2026-10-26）
+
+新增opt-in device-only XCTest，通过生产`DemoController.startCamera()`持续输入真实相机帧，计数仅在native Vision请求成功后增加。未改变生产代码，没有保存画面。iPhone16ProMax/iOS27.0.1完整套件**9 passed/0 failed/0 skipped**；持续用例runID `A13B90FD-12DB-4283-928C-832A205AF891`、PID27564，预热4次后活动120.069秒。
+
+| 观测点 | 累计Vision成功 | 本窗口新增 | RSS快照（B） |
+| --- | --- | --- | --- |
+| 启动前 | 0 | — | 148439040 |
+| 预热完成 | 4 | — | 180322304 |
+| 活动30秒 | 724 | 720 | 490962944 |
+| 活动60秒 | 1445 | 721 | 492339200 |
+| 活动90秒 | 2165 | 720 | 491012096 |
+| 活动120秒 | 2885 | 720 | 491012096 |
+| 停止后5秒 | 2885 | 0 | 490864640 |
+| owner释放 | 2885 | 0 | 450330624 |
+
+每个30秒窗口均超过既定至少10次成功要求；停止后等待bridge jobs结束，再观察5秒，计数不变且inputs/jobs为空。owner weak引用为空、retained bridge与detector closed通过。8个观测点的applicationState/thermalState均raw0，仅为采样值。RSS来自`mach_task_basic_info.resident_size`，不等于峰值、physical footprint、GPU或能耗；上述数据不证明无泄漏。
+
+`ODAI_CAMERA_LIFECYCLE_SUSTAINED=1`要求device模式，错误simulator组合实际拒绝且未创建输出；默认simulator项目生成成功且不含持续用例。证据在`artifacts/verification/p4-sustained-controller-20261026/summary.json`，含xcresult summary、8份原始文本附件与日志的交叉核对、源/保护hash和恢复来源。普通Demo预构建包与上轮hash一致，已重新安装并无参数启动（PID27570），安装URL/启动路径吻合，无文件共享override，原容器保留。
+
+**范围限于native controller/bridge/Vision持续运行、停止与owner释放。** 完整Compose相机UI、持续及停止后的Leaks、渲染释放、真机PHPicker→Vision EXIF2/6/7、严格并发warnings、独立review和最低系统仍未完成；不将先前UI runner初始化失败转写为通过，P4基础里程碑继续未完成。
+
+## 真实 PHPicker 的合成 EXIF 模拟器验证（2026-10-26）
+
+独立SwiftUI验证host直接使用生产`DemoController.selectPhoto()`及其PHPicker delegate/normalize路径，以`controller.image`的尺寸和四角像素作为观测。没有复制生产decoder、注入选择回调或修改生产源码；Vision结果不在断言内。三个新建iOS27.1模拟器各导入一张公开合成80x40 JPEG，元数据确认EXIF2/6/7，库内original与fixture的SHA256唯一吻合。
+
+| EXIF | 真实picker→controller输出（左上/右上/左下/右下） | XCTest |
+| --- | --- | --- |
+| 2 | 80x40，白/黑/白/黑 | 1 passed/0 failed/0 skipped |
+| 6 | 40x80，黑/黑/白/白 | 1 passed/0 failed/0 skipped |
+| 7 | 40x80，白/白/黑/黑 | 1 passed/0 failed/0 skipped |
+
+新模拟器自带6张Apple示例图，首次总网格count=1断言因此失败，诊断重跑确认标签；两次都在选图前结束。最终测试要求外部核验的精确fixture标签且唯一匹配，无配置或匹配不唯一就停止，不使用位置fallback。失败与最终3/3结果均保留在`artifacts/verification/p4-picker-exif-20261026/`，`summary.json`关联原始xcresult、文本像素附件、fixture manifest、库内hash清单和源码hash。只清理了本轮新建的三个模拟器，原模拟器状态与受保护文件不变。
+
+该结果补齐系统picker链路的模拟器证据，**不替代真机PHPicker→Vision、完整Compose Demo交互或最低系统验收**。Photos可能转换provider导出的编码表示，本包只验证已知EXIF输入的最终方向，不声称临时文件保留原EXIF。独立审查未取得；P4其余资源门槛继续开放。复跑说明见`probes/ios-photo-picker/README.md`。
+
+## 回调同步修复后的真机复验（2026-10-26）
+
+- 当前源码hash与`callback-summary.json`一致，iPhone16ProMax/iOS27.0.1 hosted XCTest **8/8 passed、0 failures、0 skips**，覆盖真实硬件关闭、owner/bridge释放与6项callback/session生命周期回归。使用既有签名，无provisioning updates。
+- 文本附件记录callback3次，input/output1/1→0/0，关闭后250ms仍3次，restart后session未运行；没有保存相机画面。测试后恢复当前普通Demo安装并无参数启动，保留App容器，Info.plist没有文件共享override。
+- 证据为`artifacts/verification/p4-owner-release-20261026/callback-physical-summary.json`、`callback-physical-tests.xcresult`及`callback-physical-attachments/`。这关闭新同步修复的硬件复验项；PHPicker EXIF2/6/7、持续相机/停止资源采样、完整渲染释放、最低系统、并发warnings与独立review仍保留，**P4未完成**。
+
+## 回调注册与关闭同步（2026-10-26）
+
+- `CameraSource.onFrame` 的注册、读取与清理原来没有同步，terminal close后仍可重新持有callback owner。`testClosedCameraRejectsCallbackRegistrationAndReleasesItsCapture` 在旧代码上实际失败两条断言（callback非nil、捕获对象未释放），完成exit65；最初沙箱访问失败不计RED。
+- 现以NSLock保护回调槽与terminal admission；封住注册后停止/拆卸session、排空帧队列。回调调用及替换/关闭释放的旧捕获对象都在锁外，不引入析构重入死锁。没有通过新增unchecked Sendable隐藏警告。
+- simulator完整生命周期7/7通过；带Thread Sanitizer的相机专项6/6通过，没有race/lock-order report，测试binary含19项`__tsan_`符号引用。另覆盖并发setter/getter/close及旧callback捕获对象析构时读取相机状态。它只证明该测试范围，不能替代持续摄像头或完整渲染资源验收。
+- Apple完整门禁exit0：host XCTest470/470、distribution tools18/18、生命周期/照片/方向/ASR checks及native consumer/default Demo build通过；KMP部分UP-TO-DATE，增强binary consumer未运行。单文件Swift6 strict typecheck exit0但保留4项capture warnings，严格并发门槛未收口。新独立review因429不可用；本轮未做真机复验，旧硬件5/5不自动扩展到当前修改。
+- 原始RED/GREEN、TSan、strict诊断与冻结后的Apple日志及源hash位于`artifacts/verification/p4-owner-release-20261026/callback-summary.json`及同目录。保护文件hash保持不变，**P4仍未完成**。
+
+## 既有空闲 trace 的分配栈复核（2026-10-26）
+
+- 在 Instruments 的 Leaks 明细展开 4 个 GrOp 对象，逐一选择后查看 Inspector `Allocation Backtrace`，地址分别为 `0x1112ddd80`、`0x1112de480`、`0x1112df200`、`0x1112de680`；每项均为128B，栈均只有 `<Call stack limit reached>` / `<unknown>`。UI 未提供比已导出的 Responsible Frame 更完整的来源；View Options 只列出 Invert Stack / Collapse Stack。
+- 本机官方 `xctrace … --show-recording-options` 输出包含 Allocations 的记录/丢弃/引用计数/类型筛选及 Leaks snapshot interval，没有公开 stack-depth 参数。只读上游代理返回429，无调查结论。这些证据不足以定位根因或选择依赖修复；没有新采样、代码或依赖修改。
+- 证据：`artifacts/verification/p4-owner-release-20261026/leaks-recording-options.json`、`idle-backtrace-inspection.json` 和追加后的 `physical-summary.json`。结束对同一 trace 的重复检查；完整资源释放、持续相机/停止窗口与其余 P4 门槛继续未完成。
+
+## 真机关闭合同与当前空闲 Leaks（2026-10-26）
+
+- 使用现有签名资产创建独立 hosted XCTest 工程，App/test bundle 标识沿用 Demo；没有 provisioning updates、工程或证书修改。iPhone 16 Pro Max / iOS 27.0.1 的 `physical-tests.xcresult` 为 **5/5 passed、0 failures、0 skips**。新硬件测试真实取得 **3** 次 camera callback，关闭前 input/output 为 **1/1**，关闭后 **0/0**，关闭后 250ms 的 callback 仍 **3**；再次 start 后 session 未重新运行、input/output 仍空。
+- 另四项 owner 释放、face bridge/native detector 关闭、video output/delegate/callback 释放、frame queue drain 和重复 close 同机通过。测试仅输出计数/状态，未保存 capture image。新 device 模式以外的默认 simulator 模式再次 **4/4 passed**，证明生成器未混用 KMP ABI；硬件测试不在 simulator 上运行。
+- 临时 native host 随后由普通 Demo 的当前源码 signed device build 和安装替换，保留原 App 容器；结束采样后已恢复无参数正常启动。普通 App 没有 `UIFileSharingEnabled` / `LSSupportsOpeningDocumentsInPlace`；保护文件 hash 保持不变。
+- 两分钟相机 UI 用例两次均未能初始化 runner，精确错误为 `Timed out while enabling automation mode.`；xcresult 将 runner 初始化错误记作一条 failure，业务用例体未运行。曾核对并终止本项目旧安装路径的进程，重试仍失败，不把它当产品断言失败或通过。artifact-only xctestrun 按本机官方 man page 设置 `SystemAttachmentLifetime=keepNever`、`UserAttachmentLifetime=keepAlways`，禁止自动截图，保留自建文本附件。
+- 另对当前普通 Compose Demo 的合成空白图启动后空闲进程采样 Leaks。实际 PID **27475**、安装路径和 TOC 均吻合，窗口 **91.471143 秒**。导出 **4 个 GrOp、总 512 B**；四项责任栈均为 `<Call stack limit reached>`。它证明当前该空闲路径仍可观察到泄漏对象，不能报告零泄漏，不能仅凭对象名认定相机桥责任；与历史静态/相机样本状态不同，不推导增长率。
+- 同 trace 的 Allocations `All Heap & Anonymous VM` persistent bytes 为 **19,206,032**，只作为分配统计保留，不等同 physical footprint 或峰值。app-owned `face-smoke.json` 回读为 synthetic-white-64x64/Vision success，但该启动没有显式预设 run ID，其逐请求与 trace 的关联/新鲜性不作为验收依据。
+- 证据位于 `artifacts/verification/p4-owner-release-20261026/physical-summary.json`、`physical-tests.xcresult`、`physical-attachments/`、`idle-trace-toc.xml`、`idle-leaks-detail.xml`、`idle-allocations-statistics.xml` 和 raw logs；大体积 trace 只留 Git 忽略目录。新增真机证据关闭 camera terminal-close 合同的硬件缺口；持续相机及停止窗口、PHPicker EXIF 2/6/7、完整渲染释放、最低系统和独立审查继续保留，**P4 尚未完成**。
+
+## Demo owner 释放回归（2026-10-26）
+
+- 新增真实 `DemoController` 的模拟器回归，先观察 owner 已销毁而 bridge 仍 available、持有 pending image、native detector 未 closed 的运行时失败。现 deinit 取消 camera-start/benchmark/liveness tasks、关闭 frame queue，并在 main actor 取消 photo submission、关闭 face bridge 和相机。
+- `CameraSource.stop()` 继续是可恢复暂停；新增 asynchronous terminal `close()`，在既有 session serial queue 上停止 capture、移除全部 inputs/outputs、清空 video delegate，然后排空 frame queue、释放 callback 与 CIContext cache。重复 close 等待同一串行关闭边界；后续 start 不再重新打开 capture。
+- `scripts/generate-camera-lifecycle-tests.rb` 创建独立测试工程，保留受保护的 Demo 工程。`probes/ios-camera-lifecycle/` 使用真实 AVCaptureSession/video output 和真实控制器验证 owner 释放、output/delegate/callback 清理、frame queue drain、并发重复 close：iOS 27.1 模拟器 **4/4 通过、0 failures**。此 simulator 没有配置真实 camera input，不证明硬件关闭或真实 sample-buffer 的完整释放。
+- 新鲜 Apple 门禁 exit0：host XCTest **470/470**、分发工具 **18/18**、既有 camera lifecycle（7 scenarios）/photo submission/ImageIO orientation/ASR checks、native consumer 与默认 Demo simulator build 通过。KMP 部分任务为 UP-TO-DATE；增强 binary consumer 未运行。初轮 Ruby 2.6 与 Ruby 3.4 gem 混用导致 5 failures/2 errors，显式使用现有 Ruby 3.4.11 后同一门禁通过，未改安装或项目配置。
+- 证据：`artifacts/verification/p4-owner-release-20261026/summary.json`、`camera-green.xcresult`、`bridge-green.xcresult` 与 frozen logs。运行时 RED 的实际断言已记录，runner 后续诊断整理被中断（exit130），没有把该 red xcresult 记成完整运行。camera API 的 RED 为缺少 initializer/terminal close 合同的编译失败（exit65）。
+- 独立审查未取得结论（`429 Too Many Requests`）。默认 Demo build 新增 `CameraSource.close` non-Sendable self capture warning；Swift 5 构建通过，严格并发审查仍待完成。本改动不建立对历史 `GrOp` 的因果结论；新同设备 Leaks/Allocations、PHPicker EXIF 2/6/7 与最低系统缺口继续保留，**P4 尚未完成**。
+
 ## 现象 → 根因 → 修复 → 防护
 
 | 现象 | 根因 | 修复 | 防护 |

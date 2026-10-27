@@ -2,7 +2,7 @@
 
 面向多 App 复用的端侧 AI SDK。原生 SDK 独立分发，KMP 只承载桥接协议和 Demo 业务/UI。
 
-分阶段状态与下一工作包见 [ROADMAP](docs/ROADMAP.md)。当前为开发快照，尚未完成独立代码审查和真机验收。
+分阶段状态与下一工作包见 [ROADMAP](docs/ROADMAP.md)。按原始阶段停止点复核，当前基础里程碑 **10/12**（P4、P11 未完成）；历史检查点中的 5/12 已被此口径取代，详见[逐阶段证据](docs/validation/roadmap-progress-audit-20261026.md)。完整 SDK/Demo 扩展交付、独立审查和统一真机验收仍在进行，10/12 不表示整体完成百分比。
 
 当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；可选的 Apple AVSpeech TTS、Apple 文件/麦克风 ASR、Android 系统 TTS，以及 Android on-device ASR 模块；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。
 
@@ -78,7 +78,7 @@ Identity 只依赖 Core 与 ModelStore，独立消费者见 `examples/ios-identi
 
 视频基础模块：Swift `ODAIKitVideo` 只依赖 Core，Android `io.ondeviceai:video:0.1.0-SNAPSHOT` 使用 Core 与现有协程库。`VideoProcessingClient` 接收默认 ID 和宿主提供的后端，支持严格 Default/Explicit 选择、进度、取消/drain 与共享 close。请求默认保留音轨，不支持的倍率或音轨策略会拒绝。成功结果中的 output lease 由调用方持有，使用结束后调用 `release()`；client.close 不删除已交付的输出。输入文件需保持到处理及取消排空结束。分发与验证见[视频 SDK 基础记录](docs/validation/video-sdk-foundation.md)。可选 `ODAIKitAppleVideo` 只依赖 Core/Video，注册 `AppleVideoToolboxBackend()` 后提供 `apple.videotoolbox.sr`：仅非模拟器 iOS26+、模型已 ready、320×180/24fps/1…48帧/BT.709 SDR 输入、4×，输出1280×720 HEVC/MOV。默认 `.preserve` 支持无音轨或单条44.1/48kHz单/双声道AAC（零起点、与视频等长、无空白编辑段）；不兼容音频明确拒绝，`.discard` 显式丢弃。其他系统/模拟器返回 unavailable，不下载模型、不提高基础系统下限。九XCFramework与真实设备成功/取消/重入证据见[AppleVideo 验证](docs/validation/apple-video-backend.md)；音轨保留与设备证据见[音频验证](docs/validation/apple-video-audio.md)；基础/VT首包独立审查继续保留；KMP/Demo 已实现且本地门禁通过，新 Demo UI、独立审查与质量验收仍待补。
 
-多模态基础模块：Swift ODAIKitMultimodal与Android io.ondeviceai:multimodal:0.1.0-SNAPSHOT只依赖Core（Android另用既有协程库）。单图+prompt、默认128输出预算、model/runtime identity、累计文本、严格后端选择、cancel/drain/共享close已实现；构造请求不读图片，close不撤销返回文本。独立Apple MLXVLM后端/ModelStore lease已接入并通过固定单图设备生成/取消/重入/close；短视频、Android、KMP/Demo、质量/峰值资源与独立审查仍待后续。见[后端验证](docs/validation/apple-mlxvlm-backend.md)。
+多模态基础模块：Swift ODAIKitMultimodal 与 Android `io.ondeviceai:multimodal:0.1.0-SNAPSHOT` 只依赖 Core（Android 另用既有协程库）。单图+prompt、默认128输出预算、model/runtime identity、累计文本、严格后端选择、cancel/drain/共享close已实现；构造请求不读图片，close不撤销返回文本。独立 Apple MLXVLM 后端/ModelStore lease 已接入，并有固定单图设备生成/取消/重入/close、1 warm-up + 30 samples benchmark，以及固定合成短视频 native/KMP/Demo 生命周期证据。Android 当前完成类型化 video contract/client 与 Demo 的明确 unavailable 路径，尚无生产 VLM/video backend；自然质量、Metal/GPU 峰值、energy、最低系统、增强 binary archive 与独立全范围审查仍未收口。见[后端验证](docs/validation/apple-mlxvlm-backend.md)、[视频 Demo 验证](docs/validation/multimodal-video-demo.md)和[Android 视频契约验证](docs/validation/android-multimodal-video-contract.md)。
 
     rtk proxy ./gradlew :android:sdk-core:publishToMavenLocal :android:multimodal:publishToMavenLocal
     rtk proxy ./gradlew :examples:android-multimodal-native:assembleDebug -PusePublishedSdk=true

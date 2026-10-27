@@ -2,6 +2,19 @@
 
 更新：2026-10-21。工作树 `.worktrees/foundation` / `feat/sdk-foundation`；本包基线 `ae2becd`。这是本地实现及分层验证记录，P7 整体未完成。
 
+## 2026-10-25 iPhone 真机 Video Demo UI 闭环
+
+本节 supersede 下方早期“runner 初始化超时、0 个用例通过”的历史记录；历史失败包仍保留，未删除。
+
+- 目标为物理 iPhone 16 Pro Max / iOS 27.0.1，UDID `<iPhone-UDID>`，`devicectl` 状态 `connected`。本轮不使用 iPhone 镜像，所有动作由 `xcodebuild` XCTest 真机 runner 与 `devicectl` 完成。
+- 验证工程为忽略目录 `artifacts/verification/roadmap-p7-video-ui-20261025-ruby34/SpeechDemo.xcodeproj`；固定 Ruby `/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`、`ODAI_VIDEO_DEMO=1`、Team `4X996UV8LC`。`build-for-testing` exit 0；测试专用 `ui-test.plist` 未写入 tracked 生产工程。
+- fixture 为公开 `artifacts/verification/apple-video-audio-20261021/DeviceHarness/input-audio.mp4`，SHA256 `6a1c2a7bb875c8d9502450e732901fcd21bca5be27da0ef6ceae58c5b64c0d00`。每次 runner 安装新 app container 后，用 `devicectl device copy to` 复制到 `Documents/odai-video-ui-fixture.mp4`；没有读取私人媒体。
+- `video-success7.xcresult`：`testVideoFixtureSuccessPlaybackSharingAndCleanup` 通过（summary：物理设备 `passedTests=1`、`failedTests=0`）。流程实际打开系统 Files picker 选取 fixture，取消二次 picker 并保留输入，真实处理输出 `1280×720 · 48 帧 · 2.0 秒 · 音轨 1`，分享面板通过系统 `PopoverDismissRegion` 关闭，播放面板关闭，清理输出后保留输入。
+- `video-cancel1.xcresult`：`testVideoFixtureCancellationReentryAndBackground` 通过（`passedTests=1`、`failedTests=0`）。覆盖取消到 `CANCELLED`、同输入重入成功、再次运行后 Home/回前台不自动重启。
+- UI 测试中的选择、处理、取消均使用 tracked `demo/iosApp/UITests/SpeechDemoUITests.swift` 的 accessibility identifier；分享面板关闭 locator 是根据 `video-success5` 真机 hierarchy 修正的 `PopoverDismissRegion`。`-collect-test-diagnostics never` 必须保留以避免收尾诊断挂住。
+
+该证据是 **真实设备上的 XCTest UI 与系统 Files picker 证据**，不等于人工物理手指触摸验收；也不扩展为 Android 生产视频 backend、自然视频质量、GPU/能耗、最低系统、binary archive/Swift interface 或 P9/P11/全 roadmap 完成。早期失败包 `video-ui-first.xcresult`、`video-ui-retry.xcresult` 与本轮中间失败 `video-success5/6.xcresult` 均保留供审计。
+
 ## 实现与提交
 
 | Task | 提交 | 交付 |
@@ -39,11 +52,11 @@ common 不传路径或 URL。原生输入 lease 持有到 native drain；取消�
 
 ## 设备证据与明确缺口
 
-Android：TECNO KM9 / API35，serial `15365375C9007986`。`VideoDemoInstrumentation` 使用真实 MainActivity/Compose accessibility：明确 unavailable、实际打开 GetContent 后取消且无输入、后台返回后仍 IDLE/处理按钮禁用。第一次未滚动至 unavailable 状态失败；用例增加滚动定位后 `task-6-android-ui-scroll.log` 返回 `status=passed`、三个检查 passed，`processing=unverified-no-android-backend`。设备结果必须读取 Bundle 字段，不能只看 instrumentation code或进程退出码。最终包含点击成功断言的版本复验也通过：`task-6-android-ui-final.log` 的三个检查 passed、status=passed；对应runner构建/lint为501tasks成功（9执行），`task-6-android-ui-final-build.log`。
+Android：TECNO KM9 / API35，serial `<Android-serial>`。`VideoDemoInstrumentation` 使用真实 MainActivity/Compose accessibility：明确 unavailable、实际打开 GetContent 后取消且无输入、后台返回后仍 IDLE/处理按钮禁用。第一次未滚动至 unavailable 状态失败；用例增加滚动定位后 `task-6-android-ui-scroll.log` 返回 `status=passed`、三个检查 passed，`processing=unverified-no-android-backend`。设备结果必须读取 Bundle 字段，不能只看 instrumentation code或进程退出码。最终包含点击成功断言的版本复验也通过：`task-6-android-ui-final.log` 的三个检查 passed、status=passed；对应runner构建/lint为501tasks成功（9执行），`task-6-android-ui-final-build.log`。
 
 这不覆盖 Android 实际选中结果的 ActivityResult 设备往返、真实视频处理、输出播放/分享或处理期间取消；host 单元测试不代替这些设备项。测试不选择或读取设备媒体，不下载模型或资源。
 
-iOS：iPhone16ProMax / iOS27.0.1 (24A446)，UDID `00008140-0008703436D3001C`。新生成 Demo、UI target build-for-testing 和安装成功。固定输入是已有公开 Common swifts 视频加本地440Hz/48kHz AAC，320×180/24fps/48帧/BT.709 SDR/2秒，SHA256 `6a1c2a7bb875c8d9502450e732901fcd21bca5be27da0ef6ceae58c5b64c0d00`；只复制至本项目 App 的 Documents/odai-video-ui-fixture.mp4。
+iOS：iPhone16ProMax / iOS27.0.1 (24A446)，UDID `<iPhone-UDID>`。新生成 Demo、UI target build-for-testing 和安装成功。固定输入是已有公开 Common swifts 视频加本地440Hz/48kHz AAC，320×180/24fps/48帧/BT.709 SDR/2秒，SHA256 `6a1c2a7bb875c8d9502450e732901fcd21bca5be27da0ef6ceae58c5b64c0d00`；只复制至本项目 App 的 Documents/odai-video-ui-fixture.mp4。
 
 两次 UI 会话都在 runner 初始化阶段失败：`Timed out while enabling automation mode.` 结果 `video-ui-first.xcresult`、`video-ui-retry.xcresult` 位于 `artifacts/verification/video-demo-20261021/`。**0 个视频用例通过；不是产品断言失败，也不能算 UI 验收通过。** 新增两个 opt-in 测试已编译，实际导入/成功/保留AAC、播放/分享/清理、活动取消/drain/同输入重入/后台不重启均仍 unverified。
 

@@ -2,12 +2,36 @@
 
 更新：2026-10-19。状态：**实施中；生产身份与活体未启用**。
 
+## 2026-10-24 scoped final review checkpoint
+
+The frozen implementation range `ecdfd528..bb895161` received a leader-owned
+read-only scoped review covering the Apple/Android identity stores and journals,
+authorization/revocation/purge, gallery CAS and leases, KMP bridge, Demo wiring,
+and distribution tools. No new CRITICAL, HIGH, or MEDIUM functional finding was
+identified. The review is recorded in
+`.superpowers/sdd/2026-10-24-p10-final-review/`.
+
+The independent code-reviewer completed a 98-file read-only review and the
+architect completed a scoped architecture review; both reported zero
+functional/security findings at CRITICAL/HIGH/MEDIUM/LOW. The Android-review
+dispatch remains unavailable with `429 Too Many Requests`; the checkpoint is
+therefore `SCOPED_CODE_AND_ARCHITECTURE_REVIEW_COMPLETE_PRODUCT_GATES_WATCH`,
+not a whole-roadmap approval. Fresh local evidence is Apple identity 313/313,
+Android identity 319/319, and distribution/tool tests 14/14, all with zero
+failures. Production model/PAD, authorized data, calibration, minimum-system,
+and device inference gates remain open.
+
+2026-10-26: a read-only retry of the pending Android-specific review again
+terminated with `429 Too Many Requests` before producing findings. This is not
+review evidence; the Android lane remains pending and the frozen review scope
+and product-gate status above are unchanged.
+
 ## 当前状态
 
 - Task 1–8 的双端契约、加密存储/删除、不可变 gallery、1:1、1:N、独立活体会话及模型 lease 适配层已实现；任务依赖顺序仍为 1→4→2→3→5→6→7→8。
-- Task 6 公共引擎 `cc08973`；Task 7 独立授权门 `ece1d18`、会话 `06a66ea`；Task 8 模型绑定适配层 `d12c7ec`。Task 7 独立审查通过；Task 8 按 inline 执行，整个分支的最终独立审查仍待后续工作包完成。
-- 最新原生 Apple 全量 **371/371**（Identity313、Speech31、ModelStore13、Face9、Core5）；Android Identity **319/319**、ModelStore **10/10**，失败/错误/跳过均为 0。更新后的双端 verify 脚本通过，工具测试 **53/53**。
-- [Task 9 模型选型](p10-identity-model-selection.md)与[Task 10 PAD 后端](p10-pad-backend-selection.md)均为 **blocked-unverified**；尚无获批生产模型、授权数据或校准策略。Task 11 类型化 bridge、独立 Demo 控件与宿主配置已完成（`2f28922`）；Task 12 可裁剪分发及独立 consumer 已提交（`bb89516`），完成脚本重新运行工具全包 53/53。最终独立分支审查三次因模型容量不足未启动，仍待完成。P10 与 roadmap 均未完成。
+- Task 6 公共引擎 `cc08973`；Task 7 独立授权门 `ece1d18`、会话 `06a66ea`；Task 8 模型绑定适配层 `d12c7ec`。Task 7 独立审查通过；Task 8 按 inline 执行。P10 冻结范围的 code/architecture scoped review 已完成并无功能或安全 finding；全 roadmap acceptance 仍待产品门槛。
+- 最新原生 Apple 全量 **371/371**（Identity313、Speech31、ModelStore13、Face9、Core5）；Android Identity **319/319**、ModelStore **10/10**，失败/错误/跳过均为 0。2026-10-24 全量 `verify-android.sh` 再次 exit0（725 actionable tasks，JVM tests/lint/APK passed），工具测试 **53/53**。
+- [Task 9 模型选型](p10-identity-model-selection.md)与[Task 10 PAD 后端](p10-pad-backend-selection.md)均为 **blocked-unverified**；尚无获批生产模型、授权数据或校准策略。Task 11 类型化 bridge、独立 Demo 控件与宿主配置已完成（`2f28922`）；Task 12 可裁剪分发及独立 consumer 已提交（`bb89516`），完成脚本重新运行工具全包 53/53。冻结范围 code/architecture review 已完成，Android 专项 review 因容量限制待恢复；P10 与 roadmap 均未完成。
 - iOS27 已补齐两个已提交检查点后的 SIGKILL 恢复：注册后重启实际解密，lease 持有的删除提交后重启恢复 tombstone 并清理 payload/key，见 [iOS Store 真机探针](p10-ios-store-device-probe.md#两次-sigkill-后的持久恢复2026-10-19)。Android API35 也已完成 create→SIGKILL、delete→SIGKILL、recover、cleanup 的四阶段跨进程证据，见 [Android Store 真机探针](p10-android-store-device-probe.md#两次-sigkill-后的跨进程持久恢复2026-10-20)。真实准确率、最低系统、提交中断与文件系统故障仍为独立门槛。
 
 以下切片为按实施时间保留的历史证据；其中“尚未实现/待实现”描述该次检查点，不覆盖上面的当前状态。

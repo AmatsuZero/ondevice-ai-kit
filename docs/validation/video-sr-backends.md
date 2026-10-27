@@ -1,6 +1,21 @@
 # P7 视频超分后端调研
 
-更新时间：2026-10-17。P7 只比较后端边界和一条固定输入链路的探针条件，不把单帧放大或桌面运行结果当作移动端视频超分交付。
+更新时间：2026-10-25。P7 只比较后端边界和一条固定输入链路的探针条件，不把单帧放大或桌面运行结果当作移动端视频超分交付。
+
+## 自然视频 iPhone 真机复核（2026-10-25，非镜像）
+
+沿用固定公开 Common swifts fixture，在授权的 iPhone 16 Pro Max / iOS 27.0.1（UDID `<iPhone-UDID>`）上重新安装签名的 `IOSVideoSRProbe.app`，通过 `devicectl` 将 `artifacts/P7/natural/prepared/input-180p-4x.mp4` 复制到 probe 的 App Documents，并以 `--process-video` 启动。全程使用 `xcodebuild`/`devicectl` 真机路径，没有使用 iPhone 镜像、镜像画布或坐标点击。
+
+设备报告 `artifacts/verification/p7-natural-device-20261025/device-documents/ios-video-sr-probe-777236F5-1760-4698-A44E-8EABAFAD81A5.json` 显示：SR 与 bicubic 均 `state=success`，输入/输出均为 48 帧、1280×720、PTS 单调；输入 SHA-256 为 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`，与仓库 fixture 和设备副本一致。两路首帧和编码声明均为 sRGB 中间链路、BT.709 primaries/transfer/matrix、HEVC/MOV，SR 常驻内存采样峰值增量为 `88,113,152 B`，bicubic 为 `507,904 B`；这些仍是 probe 进程采样，不是 GPU 或全机峰值。
+
+对设备 MOV 运行 `tools/probes/video_sr_quality.py`，按解码帧序号配对 48 帧且 `colorComparability=matched-metadata`：
+
+| 输出 | PSNR dB | SSIM | 设备输出 |
+| --- | ---: | ---: | --- |
+| VideoToolbox SR | 36.776212 | 0.979250 | `sr-output-FEF9C597-569D-4FD4-B044-F229CAA17E7A.mov` |
+| Core Image bicubic | 38.872866 | 0.983506 | `bicubic-output-F71BB40C-359C-4C32-84DA-0013F9A4D794.mov` |
+
+本次 SR 分数低于同链路 bicubic，且这只是单一自然样本的编码输出保真度比较；`qualityVerdict` 保持 `unverified`，不据此判定模型质量失败或通过。该复核补充了自然视频统一色彩/编码链路的真机运行证据，但不升级主观质量、传递函数、GPU/能耗、最低系统或 P7/P11 完成状态。
 
 ## 候选路线
 
