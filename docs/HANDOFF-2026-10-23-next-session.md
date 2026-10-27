@@ -4,6 +4,12 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 P11 SDK 候选快照冻结
+
+- 当前已在 linked `foundation` worktree，按 worktree 隔离规则不创建嵌套 worktree。直接从已同步双远端的提交 `7b9f7fc75772b61948d211d72ec2e1e221362591` 生成 committed-tree archive；内嵌 commit ID 精确匹配，tree `f60b65fc117908a9b82c60eb42285f8c855d6f91`，tar SHA-256 `6a2cb8afd895b13fa281d15f55046b3f263a1882aebd8ce31dff563bc3b2b666`。
+- 候选源码归档位于 `artifacts/verification/p11-candidate-freeze-20261027/sdk-foundation-7b9f7fc.tar`，只含 committed tree，因此排除受保护工程、身份草稿和未完成线程/资源probe；原 `foundation` 工作树仍保持1项tracked dirty+7项untracked，保护hash不变。
+- P11 SDK commit 冻结门槛由未就绪改为已就绪；整体候选仍 `not-ready`，Android LiteRT-LM授权模型/native drain、Face Identity生产模型/PAD/数据/校准、最低系统设备、统一质量/资源/能耗报告仍阻断。P11仍open，基础10/12与goal active不变。
+
 ## 最新续接 — 2026-10-27 Metal 单目标资源观察
 
 - 解决受限沙箱无法初始化 InstrumentsCLI 用户缓存的工具入口问题；受控提权后模板列表可用。物理 iPhone16ProMax/iOS27.0.1 上，以已安装独立 VLMProbe、固定 manifest/model/公开 fixture 录制单目标 `Metal System Trace`：20.776271秒、PID28389、进程exit0；新报告runId `D8FEFBDC-94F8-425B-931C-474925C09DFC` status success，fixture/model/runtime identity不变。
