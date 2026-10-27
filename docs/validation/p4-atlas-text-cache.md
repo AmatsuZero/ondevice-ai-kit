@@ -1,5 +1,11 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-10-27 分配时间与线程快照邻接复核
+
+对既有 `p4-thread-calibration-20261027` 的完整 Allocations List、Leaks 明细和 236 个 own-task 快照做了只读时间对齐。18 个最终 live `GrOp` 中，1 个在 trace 开始前已有；其余 17 个分配的 trace 相对时间均能由 4097B marker 校准到分配时刻前后各约 1.1 秒内的快照，并且前后快照都观察到同一个 kernel thread ID。7 个导出低 32 位标签在不同分配窗口分别对应多个不同 kernel thread ID，具体映射与每行邻接时间见 `artifacts/verification/p4-thread-calibration-20261027/allocation-snapshot-correlation.json`，复核脚本为同目录 `correlate_allocations.py`。
+
+这把“相同导出标签”与“同一实际 kernel thread”区分开：本次 17/17 的时间邻接样本支持分配时刻的观察映射，同时 7 个标签的跨周期 ID 复用仍然存在。快照是非原子的，marker 到 trace 时间原点有调度误差；结果没有读取析构/free、TLS 槽值或精确线程退出，不能关闭 GrOp、证明缓存释放或推导长期增长。原始 Leaks 判定和 P4/P11 状态保持不变。
+
 ## 最新：marker 校准与实际 thread label 复验（2026-10-27）
 
 Task12 的取证完整性修正先以 lookup seam 稳定复现缺失 pthread 映射的 runtime RED，再要求 `partial-snapshot`、失败数和 unchanged send-right；修正后 macOS 宿主100轮快照通过，引用计数2→2，iOS15 Swift6 warnings-as-errors typecheck通过。设备 probe 仅在显式 `--camera-thread-inventory` 下启用，普通模式不改变。

@@ -4,6 +4,11 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 P4 分配时间与线程快照邻接复核
+
+- 对既有同 PID 301.202178 秒 trace 的完整 Allocations List、Leaks 明细和 236 个 own-task 快照完成只读时间对齐：18 个最终 live `GrOp` 中 1 个录制前已有，trace 内其余 **17/17** 个分配在估计时刻前后约1.1秒的快照中都观察到同一个 kernel thread ID。7 个导出低32位标签在不同分配窗口对应多个不同 kernel TID，结果与逐行邻接时间保存在 `artifacts/verification/p4-thread-calibration-20261027/allocation-snapshot-correlation.json`，可复核脚本为同目录 `correlate_allocations.py`。
+- 这只增加分配时刻的观察映射，不能证明析构/free、TLS槽值、精确线程退出或长期增长；快照非原子，marker 到 trace 原点有调度误差。没有新设备操作、没有依赖或生产代码变更，原始18×GrOp/2304B结论和 P4/P11 开放状态保持。
+
 ## 最新续接 — 2026-10-27 LiteRT-LM unavailable 真机合同覆盖
 
 - 新增计划 Task 5 的 Kotlin instrumentation 与测试 runner 配置；真实 `ModelStore` 在 UUID 私有目录安装带 SHA-256 的合成文件，覆盖缺资产、已安装但 native drain 未证明、重复关闭三种状态。检查具体 availability/generate 拒绝、factory/输出次数为零、无 generation cache、remove 无残留 lease及精确目录清理。生产源码与 factory 边界未改。
