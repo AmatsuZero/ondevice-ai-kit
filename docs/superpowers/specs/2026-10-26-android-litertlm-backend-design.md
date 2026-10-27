@@ -6,6 +6,12 @@
 
 原批准设计使用 `terminalCallbackThenDeadConversation`（terminal + `isAlive=false`）作为 drain 证明；固定 0.18.1 AAR 已否定该假设。`isAlive` 在 close 调用 native delete 之前就变 false，不能证明 native 完成。此处撤销该具体判据，保留生命周期目标与生产门禁；没有批准或启用替代关闭协议。完整证据、源码限制与 RED→GREEN 见[合同修正](../../validation/android-litertlm-drain-contract.md)。
 
+## 2026-10-27 Task 5 分段交付
+
+在 Task 4 生产构造门禁保持关闭时，先提供公开只读 `LiteRtLm.availability(store, model, environment)` 与独立 Kotlin consumer。`LiteRtLmModel` 只描述 `ModelRef` 与安装目录内相对路径，`LiteRtLmRuntimeEnvironment.current()` 读取真实 API/ABI；查询复用真实 `ModelStore` 校验并固定 `UNPROVEN`，任何调用方提供的 environment 都不能使其返回 `AVAILABLE`。缺资产为 `REQUIRES_ASSETS/MISSING_ASSETS`，已安装资产仍为 `UNAVAILABLE/UNSUPPORTED_DEVICE`。
+
+此交付用于验证可选依赖、真实 AAR/Maven 消费和 unavailable UI；没有构造 production backend、下载模型或启动 generation。Task 5 的生产 factory/generation/close 消费部分仍开放，不能据此关闭 Task 4、模型、native drain 或设备推理验收。验证见[移动端 VLM](../../validation/mobile-vlm.md)。
+
 ## 意图
 
 让 Android 调用方可以显式安装并选择 LiteRT-LM 后端，用本地、哈希验证过的模型目录完成图片加 prompt 生成，同时保持基础 `android:multimodal` 无 LiteRT-LM 依赖、默认 Demo 不自动加载模型、缺少模型时返回稳定 unavailable。该包先建立真实运行时边界，不能用 fixture 输出或 AAR 静态检查代替设备推理。

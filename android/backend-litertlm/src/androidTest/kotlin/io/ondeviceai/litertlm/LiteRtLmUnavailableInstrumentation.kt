@@ -102,6 +102,24 @@ class LiteRtLmUnavailableInstrumentation {
         assertAvailability(CapabilityStatus.REQUIRES_ASSETS, UnavailableReason.MISSING_ASSETS)
     }
 
+    @Test
+    fun publicQueryUsesCurrentDeviceAndKeepsInstalledAssetsUnavailable() = runBlocking {
+        installSyntheticAssets()
+        assertEquals(ModelStatus.INSTALLED, store.status(ref))
+        val value = LiteRtLm.availability(store,
+            LiteRtLmModel(ref, "model.bin", setOf("tokenizer.json")))
+        assertEquals(CapabilityStatus.UNAVAILABLE, value.status)
+        assertEquals(UnavailableReason.UNSUPPORTED_DEVICE, value.reason)
+        assertEquals("litertlm.android", value.backendId)
+        assertEquals("26", value.minOS)
+        assertNoGenerationSideEffects()
+        store.remove(ref)
+        assertEquals(ModelStatus.ABSENT, store.status(ref))
+        assertEquals(UnavailableReason.MISSING_ASSETS,
+            LiteRtLm.availability(store,
+                LiteRtLmModel(ref, "model.bin", setOf("tokenizer.json"))).reason)
+    }
+
     // Catches close losing precedence to either asset state, or admitting generation afterward.
     @Test
     fun repeatedCloseRejectsGenerationBeforeAndAfterAssetRemoval() = runBlocking {

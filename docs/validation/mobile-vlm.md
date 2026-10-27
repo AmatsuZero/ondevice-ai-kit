@@ -4,6 +4,16 @@
 
 进度口径于 2026-10-26 [复核](roadmap-progress-audit-20261026.md)：P8 调研与 P9 单模型/单平台试验里程碑已达到原定停止点，基础里程碑计数为 10/12。下文各次 5/12 是历史扩展交付口径；Android LiteRT-LM、自然质量、资源、最低系统和统一验收的未完成状态继续保留。
 
+## 2026-10-27 LiteRT-LM 可选 Kotlin availability consumer
+
+新增公开 `LiteRtLm.availability` 与独立 `examples/android-litertlm-native`。查询使用真实 `ModelStore`、API/ABI，固定 `UNPROVEN`；不构造 production backend。缺资产返回 `REQUIRES_ASSETS/MISSING_ASSETS`，已安装资产仍返回 `UNAVAILABLE/UNSUPPORTED_DEVICE`，不会返回 `AVAILABLE`。consumer 只显示查询结果，无下载、generation 或视频路径。设计与计划已明确记录此 Task 5 分段交付裁定，production factory/generation/close 消费继续开放。
+
+TECNO KM9/API35 backend instrumentation **4/4**、consumer Activity UI **1/1**，均无 failures/errors/skips。新增公开查询用例使用真实 Android `Build` 和已安装合成资产，并验证查询后可移除模型、没有 generation cache；UI 用例实际启动 Activity 并读取 `TextView` 的缺资产状态。合成文件不是模型权重，这些结果不证明 native drain 或推理。
+
+backend JVM **25/25**、consumer **2/2**、multimodal **48/48**；project consumer、默认 Demo、AAR/test APK 与 lint 构建通过（594 tasks）。lint 无 error，backend 保留 2 条版本提示；consumer 有目标 API、图标、字符串资源 3 条 warning。四个 SDK 模块发布到 Maven Local 后，consumer 以 `-PusePublishedSdk=true` 构建通过（37 tasks），实际 runtime 精确解析 `litertlm-android:0.18.1`；默认 Demo/base multimodal 新鲜依赖图均不含 LiteRT-LM。Python AAR 工具 **7/7**、vendor AAR 校验通过，SHA-256 保持 `05c6bdc8acda834efcca12c0ad5d06d2cd8c83e60770f056d8d222f699f3012b`。
+
+原始 XML、构建/依赖日志、产物和源码哈希见 `artifacts/verification/android-litertlm-consumer-20261027/summary.json`。独立审查首选模型容量不足，备用模型 429，无审查结论；作者检查不能替代独立审查。初次设备执行的自动权限审核超时，按提示重试后才实际运行成功；ADB 在受限沙箱中的错误不作为设备断连结论。授权模型、真实 drain/推理、生产 factory、API26 与完整审查仍未验证；基础 **10/12，P4/P11 未完成**。
+
 ## 2026-10-27 LiteRT-LM unavailable 真机合同覆盖
 
 批准计划 Task 5 的 Kotlin `LiteRtLmUnavailableInstrumentation` 使用真实 Android `ModelStore` 和每个用例独立的 UUID 私有目录，覆盖缺资产 `REQUIRES_ASSETS/MISSING_ASSETS`、合成文件安装后且 probe 为 `UNPROVEN` 的 `UNAVAILABLE/UNSUPPORTED_DEVICE`、重复 close 后的 `UNAVAILABLE/CLOSED`。每个状态均检查 generate 的具体拒绝类型、factory 调用和输出次数为零、generation cache 未创建；安装用例还通过真实 remove 检查无残留 lease，teardown 检查仅本用例目录已删除。

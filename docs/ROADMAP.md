@@ -8,6 +8,8 @@
 
 2026-10-27 分批交付：用户已授权将验证通过的benchmark、多模态Kotlin/iOS picker、相机隔离、可选LiteRT-LM基础门禁与合成EXIF验证分别提交，并同步现有foundation分支到origin+jihu。提交与最新复验见[handoff顶部](HANDOFF-2026-10-23-next-session.md)；签名工程、身份草稿和未完成资源取证工具保留本地。提交/同步不关闭P4/P11，也不表示生产后端或发布验收。
 
+2026-10-27 Android LiteRT-LM consumer：公开只读availability与独立Kotlin app已完成project/Maven Local消费及TECNO缺资产UI验证；backend JVM25/25、consumer2/2、multimodal48/48，设备backend4/4、UI1/1。默认Demo/base multimodal无vendor runtime，opt-in精确0.18.1；lint无error、warning保留。生产factory/generation/close消费、模型、真实drain/推理、API26及独立review仍开放，Task5仅分段交付；详见[移动端VLM](validation/mobile-vlm.md)。基础10/12、P4/P11未完成不变。
+
 2026-10-27 P4当前源码Compose相机UI：真机控件/前后台/用户停止2/2，两分钟持续UI1/1，合计3/3、0失败/跳过；四窗口新增748/750/749/750，120.457944秒后计数3047，停止5秒不增加。普通Demo已无参数恢复；未访问相册，无图像/视频附件。补齐当前源码三项UI验证，原生GrOp、PHPicker EXIF、最低系统/全范围审查及P11仍开放，基础10/12不变。见[P4记录](validation/p4-camera-stability.md)。
 2026-10-27 P4线程标签校准：修正 own-task 快照在 pthread 映射缺失时误报 complete 的缺陷；100轮宿主 send-right 2→2、iOS15 Swift6严格 typecheck和当前 Swift5/Swift6 相机门禁通过。当前源码真机三轮页面退出/重入窗口新增687/661/660，最后页面对象/bridge约32.643秒首次全释放；同PID 301.202178秒 trace 为18×GrOp/2304B live。4097B marker校准导出低32 thread label；8个GrOp标签中7个完整pthread指针对应多个kernel TID，不能据同标签推导同一线程或TLS根因。P4原生残留、完整审查和P11仍开放，见[专项调查](validation/p4-atlas-text-cache.md)。
 2026-10-27 P11准备矩阵：已建立只读 `artifacts/verification/p11-readiness-20261027/summary.json`，覆盖9项能力并保留逐项未验证原因；所有9行仍有 gaps，`p11Gate.status=open`，发布结论 `not-ready`。该矩阵仅用于统一验收前的证据盘点，不改变10/12计数。

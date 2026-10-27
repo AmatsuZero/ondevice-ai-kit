@@ -121,6 +121,8 @@
 
 ### Task 5: Consumer boundary, package verification, and static regression
 
+2026-10-27 局部检查点：独立 Kotlin availability consumer、公开只读查询、project/Maven Local 两种消费构建与 unavailable UI 已验证。沿用设计的生产门禁，查询固定 `UNPROVEN`，不构造 Task 4 factory；Task 5 整体仍为 partial，generation/close 消费尚未验收。TECNO API35 backend instrumentation 4/4、consumer UI 1/1；backend JVM25/25、consumer2/2、multimodal48/48，lint 无 error，保留 backend 2 条版本提示及 consumer 3 条 warning。依赖图与产物证据见 `artifacts/verification/android-litertlm-consumer-20261027/summary.json`。新限定独立审查先因模型容量不足、备用模型随后 429 失败，未取得审查结论。
+
 **Files:**
 - Modify: `examples/android-multimodal-native/build.gradle.kts` only if adding an explicit opt-in consumer variant
 - Create: `examples/android-litertlm-native/build.gradle.kts`
@@ -131,10 +133,10 @@
 - Modify: `tools/tests/test_android_vlm_artifact.py` only for new probe/consumer evidence fields
 
 **Interfaces:**
-- Consumes: the public `LiteRtLmBackend` and Task 4 production factory; the existing Demo remains unchanged by default.
+- Consumes: the public read-only `LiteRtLm.availability` query first; `LiteRtLmBackend` and the Task 4 production factory remain gated until native drain is proven. The existing Demo remains unchanged by default.
 - Produces: a Kotlin-only opt-in consumer that can list `litertlm.android` availability and reports stable unavailable states without silently generating or downloading a model.
 
-- [ ] **Step 1: Write failing consumer/build assertions** that the default `:demo:androidApp` dependency graph has no LiteRT-LM runtime, the explicit consumer links `:android:backend-litertlm`, and the consumer displays `UNAVAILABLE/MISSING_ASSETS` when no model is installed.
+- [ ] **Step 1: Write failing consumer/build assertions** that the default `:demo:androidApp` dependency graph has no LiteRT-LM runtime, the explicit consumer links `:android:backend-litertlm`, and the consumer displays `REQUIRES_ASSETS/MISSING_ASSETS` when no model is installed.
 - [ ] **Step 2: Run** `./gradlew :demo:androidApp:dependencies --configuration debugRuntimeClasspath` and the new consumer compile task; Expected: the default graph contains no `litertlm-android`, while the opt-in graph contains exactly `0.18.1`.
 - [ ] **Step 3: Implement the small Kotlin consumer** with no automatic model download, no fixture output, and no video path; use the public backend availability and error contracts only.
 - [ ] **Step 4: Run** `./gradlew :android:backend-litertlm:testDebugUnitTest :android:backend-litertlm:lintDebug :android:backend-litertlm:assembleDebug :examples:android-litertlm-native:assembleDebug :demo:androidApp:assembleDebug`; Expected: all tasks pass, with existing unrelated lint warnings retained and no new errors.

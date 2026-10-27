@@ -4,6 +4,13 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-27 LiteRT-LM 可选 Kotlin consumer
+
+- 继续 Task 5，新增公开只读 `LiteRtLm.availability` 和独立 Kotlin `examples/android-litertlm-native`；真实 `ModelStore`、API/ABI 加固定 `UNPROVEN`，缺资产显示 `REQUIRES_ASSETS/MISSING_ASSETS`、已安装资产仍为 `UNAVAILABLE/UNSUPPORTED_DEVICE`。不构造 production backend、不下载模型、不生成 fixture 输出；Task 4 及 Task 5 generation/close 消费仍开放，裁定已写入设计/计划与本地 ledger。
+- backend JVM **25/25**、consumer **2/2**、multimodal **48/48**；project consumer/default Demo/AAR/test APK/lint 构建通过，594 tasks。lint 无 error，backend 2 条既有版本提示，consumer 3 条 API/icon/i18n warning 保留。四 SDK 模块本地 Maven 发布后，consumer `-PusePublishedSdk=true` 构建通过，37 tasks；runtime 精确0.18.1，默认 Demo 与 base multimodal 新鲜图均不含 LiteRT-LM。AAR 工具7/7及固定vendor artifact校验通过。
+- TECNO KM9/API35 backend **4/4**、consumer Activity UI **1/1**，均无 failures/errors/skips。公开查询用例使用真实 Build 与已安装合成文件，确认仍 unavailable、无 generation cache 且可正常 remove；UI 读取真实 TextView 缺资产状态。无模型推理、native drain 或最低系统验收。设备命令首次自动权限审核超时未执行，提示允许的一次重试后成功；受限沙箱 ADB 失败不是断连证据。
+- 独立审查首选模型容量不足、备用模型429，未取得结论，不计为通过。证据冻结于 `artifacts/verification/android-litertlm-consumer-20261027/summary.json`；新包按用户授权提交并通过 `scripts/sync-remotes.sh feat/sdk-foundation` 同步，实际结果以本地 `sync-summary.json` 与新鲜远端 SHA 为准。原8项受保护/未完成修改保留；模型、production factory、真实drain/推理、API26及完整review仍开放，基础10/12、P4/P11、goal active 不变。
+
 ## 最新续接 — 2026-10-27 P11 证据哈希覆盖门禁
 
 - 发现旧 readiness 校验只核对 16 条证据路径存在，却仅固定 5 项来源哈希；13 个独立证据文件中 10 个可以在内容变更后仍通过校验。真实测试目录复现了该误判。先新增回归得到 **8 tests/1 failure**，再让校验器拒绝任何未纳入 `sourceHashes` 的证据；修复后聚焦 **8/8**，旧快照如预期列出全部10项遗漏。
