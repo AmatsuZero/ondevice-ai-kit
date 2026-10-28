@@ -4,6 +4,15 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 固定自然视频五次真机语义质量
+
+- 当前 Codex goal 仍为同一 active 目标，直接继续，无需替换 goal；本工作树仍为 `feat/sdk-foundation`，保护 dirty 文件未 restore、覆盖、stage 或提交。
+- 修正 isolated consumer runner 的素材路径：设备复制步骤提供 `common-swifts-24fps.mp4`（SHA-256=`97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`），runner 已与其对齐；生产 SDK、普通 Demo、签名工程和 Photos 均未改动。
+- iPhone 16 Pro Max / iOS 27.0.1 使用签名 isolated App，在同一进程按固定 prompt 连续生成 5 次；App 沙盒只放公开 fixture/model。原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/device-report-5.json`：`state=success`、5 个 distinct UUID、backend=`mlx.smolvlm2-500m`、model/runtime revision 与冻结身份一致，耗时 2119.134–2362.877 ms；SHA-256=`64a657dcb3c3ada3762fdd746b2a5b4caebbc81174f6bfdd57ec15e4635aefd0`。
+- `quality/raw-runs.json`、`expected-identity.json` 已切换 `expectedRuns=5` 并逐行绑定原始报告/hash；validator 汇总 `summary.json` 为 subject/action/scene/semantic pass **5/5**，重复生成逐字节一致。`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 仍明确 `unverified`，不把五次单素材语义命中写成完整自然质量。
+- P11 readiness 已纳入五次原始报告：`29` evidence paths、`27` source hashes、`9` rows with gaps，validator 通过；新 grouped 快照为 `artifacts/verification/p11-grouped-benchmark-20261029-f08-quality-5/summary.json`，仍 3 groups / 9 coverage、gate=`open`、release=`not-ready`，自然质量报告不加入 benchmark sample。
+- 本轮已通过 build、quality validator、P11 readiness、grouped deterministic regeneration；尚待本轮完成 focused tests、`git diff --check`、保护哈希复核，并决定是否按既有授权提交/双远端同步。
+
 ## 最新续接 — 2026-10-28 F08 自然质量 rubric 首包
 
 - 按用户“继续”从 F08 可执行队列进入自然质量首包；设计与计划为 `docs/superpowers/{specs,plans}/2026-10-28-apple-mlxvlm-natural-quality-*`。当前只改 validator/测试/文档和 ignored 证据，不改生产 SDK、Demo、签名工程或保护 dirty 文件。

@@ -143,13 +143,14 @@ Roadmap 仍 **5/12、P9 active**；本轮 `git diff --check` 通过，所有既�
 
 本证据关闭 Home 转场取消时序和 tagged native request/backend/drain provenance 两个窄缺口；`inBackgroundTerminalTiming` 仍为 `unverified`。自然质量、可比较 GPU/能耗、持续资源和完整物理触控也仍未验证。
 
-## 2026-10-28 自然视频语义质量首个有界报告
+## 2026-10-29 自然视频语义质量五次真机有界报告
 
-对已保留的真实 iPhone native run 建立了独立的 `natural-video-semantic-rubric-v1` 报告。固定身份为 fixture SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`、backend=`mlx.smolvlm2-500m`、model/runtime revision 与原始报告一致，prompt 仍为“一句简短描述视频发生了什么”。
+隔离 consumer 在 iPhone 16 Pro Max / iOS 27.0.1 的同一进程内，对固定公开素材连续执行五次生成，并建立 `natural-video-semantic-rubric-v1` 报告。固定身份为 fixture SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`、backend=`mlx.smolvlm2-500m`、model/runtime revision 与原始报告一致，prompt 仍为“一句简短描述视频发生了什么”。素材与模型仅复制到隔离 App 的 Documents 沙盒，没有使用 Photos、picker、录音、网络或私人媒体。
 
-- 评分只检查三类可审计语义：subject=`birds/swifts`（参考帧明确为复数）、action=`fly/flying/flight/in flight/soar/soaring`、scene=`sky` 且包含 `blue/cloud/clouds`。首个保留 run 的输出 `A group of birds fly in formation against a clear blue sky.` 三类均命中，`semanticPass=1/1`。
-- 规范化输入、期望身份、评分器和汇总分别位于 `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/{raw-runs.json,expected-identity.json,summary.json}`；同一输入重复生成汇总逐字节一致。原始设备报告仍是权威来源，未改写。
-- 这是单个既有 run 的 bounded semantic evidence，不是完整自然质量结论，也不是 benchmark 样本。`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 明确保持 `unverified`；还需要额外 distinct physical-device runs 与更完整任务集才能裁定质量。
+- 五个 run ID 均不同，实际 backend/model/runtime/fixture/prompt 与冻结身份一致；耗时范围为 2119.134–2362.877 ms。五次输出均为 `A group of birds fly in formation against a clear blue sky.`（原始文本保留一个前导空格）。
+- 评分只检查三类可审计语义：subject=`birds/swifts`（参考帧明确为复数）、action=`fly/flying/flight/in flight/soar/soaring`、scene=`sky` 且包含 `blue/cloud/clouds`；subject/action/scene 与 `semanticPass` 均为 **5/5**。
+- 原始设备报告为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/device-report-5.json`，SHA-256=`64a657dcb3c3ada3762fdd746b2a5b4caebbc81174f6bfdd57ec15e4635aefd0`。规范化输入、期望身份和汇总位于同目录的 `raw-runs.json`、`expected-identity.json`、`summary.json`；重复生成汇总逐字节一致。
+- 这是固定单素材/单 prompt 的 bounded semantic evidence，不是完整自然质量结论，也不是 benchmark 样本。`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 明确保持 `unverified`；更完整任务集仍是质量裁定缺口。
 
 CoreDevice 恢复到 `available (paired)` 后，fresh `test-without-building` 仍 exit **70**；直接查询 lock state 返回 `CoreDeviceError 10003` / `RemotePairingError 1016`（`The device has not been unlocked recently`）。这确认当前只差一次设备解锁，不能归因于 host/picker 代码。
 

@@ -66,9 +66,9 @@
 - Use existing ignored standalone consumer under `artifacts/verification/apple-mlxvlm-natural-video-20261028/`; no production source files.
 - Create: `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/device-runs/` raw logs/reports.
 
-- [ ] Verify device availability, source commit, model lease, fixture hash, and no protected-file drift.
-- [ ] Run the fixed natural-video prompt on the connected iPhone exactly five times, retaining each raw report and distinct run ID; then change `expectedRuns` from 1 to 5.
-- [ ] Do not claim quality completion from execution alone; classify output only through the Task 1 validator.
+- [x] Verify device availability, source commit, model lease, fixture hash, and no protected-file drift.
+- [x] Run the fixed natural-video prompt on the connected iPhone exactly five times, retaining each raw report and distinct run ID; then change `expectedRuns` from 1 to 5.
+- [x] Do not claim quality completion from execution alone; classify output only through the Task 1 validator.
 
 ### Task 4: Generate and verify the aggregate report
 
@@ -78,8 +78,8 @@
 - Modify: `docs/validation/foundation-followups.md`
 - Modify: `docs/validation/p11-status-matrix-20261027.md`
 
-- [ ] Generate the aggregate summary from the immutable raw-run manifest.
-- [ ] Re-run generation and compare outputs byte-for-byte.
-- [ ] Record per-category counts and keep `naturalQuality`, `naturalTemporalQuality`, `gpuEnergy`, and `sustainedResources` explicit in the report.
-- [ ] Run focused tests, `git diff --check`, and readiness validation; update P11 evidence only if the new report is a valid non-benchmark evidence path.
-- [ ] Commit only the validator/tests and precise documentation changes; preserve all protected dirty files.
+- [x] Generate the aggregate summary from the immutable raw-run manifest.
+- [x] Re-run generation and compare outputs byte-for-byte.
+- [x] Record per-category counts and keep complete natural quality, `naturalTemporalQuality`, `gpuEnergy`, and `sustainedResources` explicit as incomplete/unverified.
+- [x] Run focused tests, `git diff --check`, and readiness validation; update P11 evidence only if the new report is a valid non-benchmark evidence path.
+- [x] Commit only the already-present validator/tests and precise documentation/manifest changes; preserve all protected dirty files.

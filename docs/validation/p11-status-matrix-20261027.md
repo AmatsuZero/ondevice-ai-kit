@@ -11,7 +11,7 @@
 | Speech ASR file | `pass-bounded` | [语音后端](speech-backends.md)、[固定文件探针](ios-asr-file-probe.md) | 麦克风录音、自然语音 CER/WER、iOS 15 |
 | Speech ASR Android | `unavailable-assets` | [语音后端](speech-backends.md)、[设备矩阵](device-matrix.md) | 已授权离线资源、真实转写、取消/关闭真机运行 |
 | Video SR | `pass-bounded` | [超分探针](video-sr-backends.md)、[Video Demo](video-bridge-demo.md)、[原生导出取消](apple-video-audio.md) | Android 后端、主观质量、GPU/能耗；最低系统设备验收暂缓 |
-| Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/真实 Files provider/AX 终态/Home 转场 tagged native trace/首个语义质量 rubric](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 真正 background 内 terminal 时序、自然 temporal quality（当前仅1 run）、可比较 GPU peak/能耗、持续资源、完整物理触控 |
+| Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/真实 Files provider/AX 终态/Home 转场 tagged native trace/五次真机语义质量 rubric](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 真正 background 内 terminal 时序、多任务集/自然 temporal quality、可比较 GPU peak/能耗、持续资源、完整物理触控 |
 | Multimodal Android LiteRT-LM | `unverified-production-gate-closed` | [移动端 VLM](mobile-vlm.md)、[drain 合同](android-litertlm-drain-contract.md) | 授权模型 manifest/weights、production factory、native drain、真实推理、质量、GPU/能耗 |
 | Face identity/liveness | `unverified-production-model` | [身份/活体](p10-face-identity.md) | 生产模型、PAD、授权数据、校准、准确率 |
 | Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)（含真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 3/3）、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、真实 PHPicker provider 路径、最低系统、完整 review |
@@ -28,7 +28,7 @@
 
 随后同一真机 Home XCTest 用 tagged 单调时钟 trace 保留 request/backend/drain provenance：`firstNativeClientUpdate` 后触发 Home，`willResignActive` 后 41.882 ms 出现 `nativeDrainAndLeaseRelease`，再过 1.185 ms 进入 `bridgeCancelled`，而 `didEnterBackground` 晚 601.106 ms。规范化报告为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/home-timing-xctest/home-timing-device-report.json`。因此 Home 转场取消时序与 native 来源已具备证据，但真正 background 内 terminal timing 仍未验证；该报告也不加入既有 p50/p95 benchmark。
 
-首个自然质量语义报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/summary.json` 对同一固定素材的 1 个既有 physical native run 检查 subject/action/scene，三项均为 `true`。它只建立 rubric 和 bounded evidence，不加入 grouped benchmark，不关闭自然 temporal quality、GPU/energy 或持续资源 gap；更多 distinct runs 与任务集仍需补齐。
+自然质量语义报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/summary.json` 对同一固定素材/单 prompt 的 5 个 distinct physical-device run 检查 subject/action/scene，三类及 semantic pass 均为 **5/5**；原始报告 `quality/device-report-5.json` 的 SHA-256 为 `64a657dcb3c3ada3762fdd746b2a5b4caebbc81174f6bfdd57ec15e4635aefd0`。它只建立固定单素材 rubric 的 bounded evidence，不加入 grouped benchmark，不关闭多任务集/自然 temporal quality、GPU/energy 或持续资源 gap。
 
 2026-10-28 的原生 mux 专项先在独立诊断 App 中连续 3 轮观察到 iPhone `waiting → exporting → cancelled`；随后使用资源哈希一致的 31,608,443 字节 HEVC fixture 完成非零进度真机 3/3。取消点进度为 5.33%–7.47%，当时已生成 943–1,347 字节部分文件；调用方收到 `CancellationError` 时文件均已删除，输入哈希不变，3 轮同进程 AAC 重入 payload 相同。该子项已关闭；Android 后端、主观质量、GPU/能耗和最低系统仍开放，因此 Video SR 状态与 P11 `open/not-ready` 不变。iOS15/API26运行验收按用户要求暂缓，不视为通过。
 
