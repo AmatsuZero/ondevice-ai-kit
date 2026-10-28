@@ -11,7 +11,7 @@
 - iPhone 16 Pro Max / iOS 27.0.1 使用签名 isolated App，在同一进程按固定 prompt 连续生成 5 次；App 沙盒只放公开 fixture/model。原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/device-report-5.json`：`state=success`、5 个 distinct UUID、backend=`mlx.smolvlm2-500m`、model/runtime revision 与冻结身份一致，耗时 2119.134–2362.877 ms；SHA-256=`64a657dcb3c3ada3762fdd746b2a5b4caebbc81174f6bfdd57ec15e4635aefd0`。
 - `quality/raw-runs.json`、`expected-identity.json` 已切换 `expectedRuns=5` 并逐行绑定原始报告/hash；validator 汇总 `summary.json` 为 subject/action/scene/semantic pass **5/5**，重复生成逐字节一致。`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 仍明确 `unverified`，不把五次单素材语义命中写成完整自然质量。
 - P11 readiness 已纳入五次原始报告：`29` evidence paths、`27` source hashes、`9` rows with gaps，validator 通过；新 grouped 快照为 `artifacts/verification/p11-grouped-benchmark-20261029-f08-quality-5/summary.json`，仍 3 groups / 9 coverage、gate=`open`、release=`not-ready`，自然质量报告不加入 benchmark sample。
-- 本轮已通过 build、quality validator、P11 readiness、grouped deterministic regeneration；尚待本轮完成 focused tests、`git diff --check`、保护哈希复核，并决定是否按既有授权提交/双远端同步。
+- 本轮已通过 build、quality validator、P11 readiness、grouped deterministic regeneration、25/25 focused tests、`git diff --check` 和保护哈希复核；文档/manifest 提交为 `8df9c0c427e6de42a0d428cab716b3cdff439faf`，已按既有授权同步并核对 local/origin/jihu 三端一致。隔离 consumer 源码与原始 5-run JSON 仍为 ignored 证据，不纳入生产 SDK 或普通 Demo。
 
 ## 最新续接 — 2026-10-28 F08 自然质量 rubric 首包
 
