@@ -1,5 +1,11 @@
 # Typed video Demo input / state / host checkpoint
 
+## 2026-10-28 真实 Files provider 自然短视频真机证据
+
+使用当前 `c978628a7e3cb4f97f580ae307bb7f3218a9e1e1` 源码构建独立共享 Demo 验证工程。验证专用 plist 开启文件共享，将固定公开 `common-swifts-24fps.mp4`（SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`）和固定模型放入测试 App 沙盒。物理 iPhone 16 Pro Max / iOS 27.0.1 上，XCTest 打开真实系统 Files provider、选择该文件，随后共享页面显示选中文件，生成非空结果，`multimodal-phase=SUCCEEDED` 且 `multimodal-output-backend=实际后端：mlx.smolvlm2-500m`。
+
+`testNaturalMultimodalVideoFromRealFiles` 连续两次真机运行均为 **1 test / 0 failures / 0 skips**，分别耗时 21.792 秒和 21.798 秒。两份 xcresult 路径、测试断言、安装/复制记录见 `artifacts/verification/apple-mlxvlm-natural-video-20261028/real-files/device-report.json` 与同目录测试副本。此项关闭 `systemFileSelection` 子项；物理手指触控、OS 后台、自然质量和资源预算仍未验证。未使用 iPhone 镜像、Photos 或私人媒体。
+
 ## 2026-10-28 固定公开自然短视频共享页面真机证据
 
 在已验证的 [Common swifts native 视频输出](apple-mlxvlm-short-video.md)基础上，使用当前 `be75e326673cdcba88a10f3e2809b2c464fc83b9` 源码构建独立 `SpeechDemo` 验证工程。固定模型、Kotlin/Compose shared 框架、iOS `MultimodalHost` 和生产 `IOSMultimodalBridge` 保持原实现；只在 ignored 诊断副本中把验证入口的选择按钮改为 `multimodal-select-video`，并把测试 App Documents 中的输入换为公共领域 2 秒视频。没有使用 iPhone 镜像、相册或私人媒体。

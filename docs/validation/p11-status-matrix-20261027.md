@@ -11,7 +11,7 @@
 | Speech ASR file | `pass-bounded` | [语音后端](speech-backends.md)、[固定文件探针](ios-asr-file-probe.md) | 麦克风录音、自然语音 CER/WER、iOS 15 |
 | Speech ASR Android | `unavailable-assets` | [语音后端](speech-backends.md)、[设备矩阵](device-matrix.md) | 已授权离线资源、真实转写、取消/关闭真机运行 |
 | Video SR | `pass-bounded` | [超分探针](video-sr-backends.md)、[Video Demo](video-bridge-demo.md)、[原生导出取消](apple-video-audio.md) | Android 后端、主观质量、GPU/能耗；最低系统设备验收暂缓 |
-| Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/AX 终态](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 自然质量、真实 Files provider、OS 后台、可比较 GPU peak/能耗、完整物理触控 |
+| Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/真实 Files provider/AX 终态](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 自然质量、OS 后台、可比较 GPU peak/能耗、完整物理触控 |
 | Multimodal Android LiteRT-LM | `unverified-production-gate-closed` | [移动端 VLM](mobile-vlm.md)、[drain 合同](android-litertlm-drain-contract.md) | 授权模型 manifest/weights、production factory、native drain、真实推理、质量、GPU/能耗 |
 | Face identity/liveness | `unverified-production-model` | [身份/活体](p10-face-identity.md) | 生产模型、PAD、授权数据、校准、准确率 |
 | Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)（含真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 3/3）、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、真实 PHPicker provider 路径、最低系统、完整 review |
@@ -23,6 +23,8 @@
 2026-10-28 F08 使用固定公开 Common swifts 2秒素材，在独立 native consumer 中完成生成、首 update 主动取消、同 PID 重入；三轮均保持8帧 actual CMTime，clip=2秒与sample span=1.75秒分开，7项生命周期 gate 全通过。原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/device-report.json` 固定到 readiness 来源哈希。该单次诊断不加入既有单图 benchmark 的 p50/p95，也不提升自然质量、完整 KMP/Demo 交互或资源结论；仍只有3组/2项能力的兼容 benchmark。
 
 同一公开素材在共享 Demo 的独立真机验证工程中经 `VIDEO` 输入路由完成取消、离开页面、两次重入及 AX 输出终态；原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/demo/device-report.json` 已固定到 readiness 来源哈希。选择路径为验证用 picker 回调注入，`systemFileSelection` 仍未验证；自然质量、OS后台及物理触控不据此升级。
+
+同一公开素材随后通过真实系统 Files provider 进入共享 Demo；iPhone 16 Pro Max / iOS 27.0.1 上 `testNaturalMultimodalVideoFromRealFiles` 连续两次均为 **1/0/0**，真实选择 `common-swifts-24fps.mp4` 后 shared `inputKind=VIDEO`、phase=`SUCCEEDED`、backend=`mlx.smolvlm2-500m` 且输出非空。两份 xcresult 与原始摘要 `artifacts/verification/apple-mlxvlm-natural-video-20261028/real-files/device-report.json` 已固定到 readiness 来源哈希；这关闭 `systemFileSelection` 子项，仍不关闭自然质量、OS 后台或物理触控。
 
 2026-10-28 的原生 mux 专项先在独立诊断 App 中连续 3 轮观察到 iPhone `waiting → exporting → cancelled`；随后使用资源哈希一致的 31,608,443 字节 HEVC fixture 完成非零进度真机 3/3。取消点进度为 5.33%–7.47%，当时已生成 943–1,347 字节部分文件；调用方收到 `CancellationError` 时文件均已删除，输入哈希不变，3 轮同进程 AAC 重入 payload 相同。该子项已关闭；Android 后端、主观质量、GPU/能耗和最低系统仍开放，因此 Video SR 状态与 P11 `open/not-ready` 不变。iOS15/API26运行验收按用户要求暂缓，不视为通过。
 

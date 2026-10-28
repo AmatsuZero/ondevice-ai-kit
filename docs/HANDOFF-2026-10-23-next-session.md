@@ -4,6 +4,18 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-28 F08 真实 Files provider 共享 Demo 真机验证
+
+- 基于 `c978628a7e3cb4f97f580ae307bb7f3218a9e1e1` 构建独立验证工程；固定公开 `common-swifts-24fps.mp4`（SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`）和模型仅放测试 App 沙盒。XCTest 从真实 Files provider 选择视频，未使用 iPhone 镜像、Photos 或私人媒体。
+- iPhone 16 Pro Max / iOS 27.0.1（UDID `00008140-0008703436D3001C`）执行 `testNaturalMultimodalVideoFromRealFiles` 连续两次，均为 **1 test / 0 failures / 0 skips**，分别耗时 21.792、21.798 秒。共享页面显示选中文件；生成结果非空，phase=`SUCCEEDED`，实际 backend=`mlx.smolvlm2-500m`。规范化报告和两份原始 xcresult 路径在 `artifacts/verification/apple-mlxvlm-natural-video-20261028/real-files/device-report.json`。
+- F08 `systemFileSelection` 子项已完成；真实手指触控、OS 后台、自然质量、GPU/能耗和持续资源仍未验证。P11 继续 `open/not-ready`。P11 readiness/grouped 校验见下文；双远端同步需网络恢复后执行。后续优先 OS 后台和自然质量，不重复本次 Files 路径。
+
+### F08 Files 证据纳入 P11 readiness（2026-10-28）
+
+- 新增真实 Files provider 原始摘要到 `multimodal-apple` readiness evidence 与来源哈希；readiness validator 检查 **9 行 / 25 个 evidence paths / 23 个 source hashes**，仍9行有缺口，gate=`open`、结论=`not-ready`。
+- grouped manifest 仅刷新 readiness 摘要哈希，不把 UI acceptance 当作 benchmark 样本；新快照 `artifacts/verification/p11-grouped-benchmark-20261028-f08-files/summary.json` 仍3组、覆盖2项能力。
+- 聚焦 P11 回归 **19/19**、Python `py_compile`、`git diff --check` 通过；保护文件哈希保持 `project.pbxproj=b35bd984…9fd8f5`、`face-identity.md=6f130bd9…70822`。远端连接目前 DNS 解析失败，尚未同步此批。
+
 ## 最新续接 — 2026-10-28 F08 自然视频共享 Demo 真机验证
 
 - 在前包公开自然视频 native SDK 输出上，使用 `be75e326673cdcba88a10f3e2809b2c464fc83b9` 的生产 KMP/Swift 实现，生成 ignored 目录的共享 Demo 验证副本。物理 iPhone16ProMax/iOS27.0.1，PID29279、runId `6FEDC19F-01FA-48B8-B6CA-DF4B8E07E2EB`。验证入口只选 `multimodal-select-video` 并回调注入公开沙盒视频，实际共享状态 `inputKind=VIDEO`；没有改生产 SDK、普通 Demo、保护工程或媒体库。
