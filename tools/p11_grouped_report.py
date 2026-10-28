@@ -19,6 +19,10 @@ except ModuleNotFoundError:  # Direct `python tools/p11_grouped_report.py` invoc
 
 SCHEMA_VERSION = 1
 _KINDS = {"face", "mlxvlm"}
+_KIND_CAPABILITIES = {
+    "face": {"face-detection"},
+    "mlxvlm": {"multimodal-apple"},
+}
 
 
 def _json_constant(value: str) -> None:
@@ -214,6 +218,8 @@ def generate(manifest: dict[str, Any], repo_root: Path) -> dict[str, Any]:
             raise ValueError(f"sources[{index}].p11Capability is required")
         if capability not in readiness_capabilities:
             raise ValueError(f"sources[{index}].p11Capability is not present in readiness: {capability}")
+        if capability not in _KIND_CAPABILITIES[entry["kind"]]:
+            raise ValueError(f"sources[{index}].kind {entry['kind']} cannot report {capability}")
         digest = entry["sha256"]
         if entry["kind"] == "face":
             groups.append(_face_group(raw, capability, entry["path"], digest))

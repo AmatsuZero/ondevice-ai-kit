@@ -186,6 +186,22 @@ class GroupedReportTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "not present in readiness"):
                 report.generate(manifest, root)
 
+    def test_source_kind_cannot_be_mapped_to_another_readiness_capability(self):
+        for kind, payload, capability in (
+            ("face", face_run(), "speech-tts"),
+            ("face", face_run(), "multimodal-apple"),
+            ("mlxvlm", mlx_run(), "speech-tts"),
+            ("mlxvlm", mlx_run(), "face-detection"),
+        ):
+            with self.subTest(kind=kind, capability=capability), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                manifest = self.write_manifest(root, [(kind, payload, kind, capability)])
+                output = root / "report.json"
+                output.write_bytes(b"keep\n")
+                with self.assertRaisesRegex(ValueError, f"kind {kind} cannot report {capability}"):
+                    report.write_report(manifest, root, output)
+                self.assertEqual(output.read_bytes(), b"keep\n")
+
     def test_ready_gate_is_rejected_while_readiness_rows_have_gaps(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

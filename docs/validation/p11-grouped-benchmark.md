@@ -15,6 +15,8 @@ python3 tools/p11_grouped_report.py \
 
 工具先验证所有来源哈希和仓库内路径，再分别调用 `benchmark_report.py` 与 `mlxvlm_benchmark_report.py` 重新计算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。
 
+来源 `kind` 与 P11 能力映射也是固定合同：`face` 只能报告 `face-detection`，`mlxvlm` 只能报告 `multimodal-apple`。工具拒绝把一个 reporter 的原始 JSON 重标记成另一个能力，以免覆盖统计看似增加却失去语义身份。
+
 ## 当前分组结果
 
 分组键为 device、OS、P11 capability 和 actual backend；各来源的 model/fixture/revision/measurement identity 继续随组保留。
