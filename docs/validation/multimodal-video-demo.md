@@ -1,5 +1,15 @@
 # Typed video Demo input / state / host checkpoint
 
+## 2026-10-28 固定公开自然短视频共享页面真机证据
+
+在已验证的 [Common swifts native 视频输出](apple-mlxvlm-short-video.md)基础上，使用当前 `be75e326673cdcba88a10f3e2809b2c464fc83b9` 源码构建独立 `SpeechDemo` 验证工程。固定模型、Kotlin/Compose shared 框架、iOS `MultimodalHost` 和生产 `IOSMultimodalBridge` 保持原实现；只在 ignored 诊断副本中把验证入口的选择按钮改为 `multimodal-select-video`，并把测试 App Documents 中的输入换为公共领域 2 秒视频。没有使用 iPhone 镜像、相册或私人媒体。
+
+物理 iPhone 16 Pro Max/iOS 27.0.1，`devicectl` 启动 PID `29279` 与报告一致，runId `6FEDC19F-01FA-48B8-B6CA-DF4B8E07E2EB`。KMP shared framework 离线构建和 iOS 签名 `build-for-testing` 均成功；测试 App 沙盒中的输入 SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`。本地 AX 激活视频选择按钮并向验证用 `UIDocumentPickerViewController` 注入固定公开文件的回调，随后 shared 状态为 `inputKind=VIDEO`、输入名 `common-swifts-24fps.mp4`。
+
+四个同进程 shared 控件场景顺序为：首个 update 后取消→`CANCELLED`；重入→`SUCCEEDED`；首个 update 后离开页面→`CANCELLED`；返回后无自动重启，再重入→`SUCCEEDED`。两次成功均返回 `A group of birds fly in formation against a clear blue sky.`，并通过真实 Compose AX 节点核对文本与 `SUCCEEDED`；11 个既有生命周期 gate 全 true。模型身份为 `mlx.smolvlm2-500m` / `fa57db46815177fbdfd65cc85a2b3416a8332268` / `6e338e5df49424fc0db7c6d58184d622f92ed18a`。原严格 active reporter 使用本次固定素材身份校验通过，诊断额外拒绝4个 inputKind、render、scope 篡改负例。
+
+原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/demo/device-report.json` SHA-256 `7ee24d303635527524a94878859eab59a01858801edc16c0d09137d6ca52b931`；同目录保存源码指纹、构建与设备命令/日志以及 `verification.json`。这证明当前共享页面的 `VIDEO` 路由、SDK生成、主动取消/离开/重入和 AX 输出终态。`systemFileSelection`、真实手指触控、OS后台、自然质量及资源预算仍 `unverified`；验证入口使用 picker 回调注入，不算真实 Files provider 选择。
+
 ## 2026-10-26 当前 dirty source iOS 真机 picker 清除回归复验
 
 - 上一轮当前 dirty source 的新鲜真机报告在 Clear 后等待 `multimodal-input=尚未选择输入` 超时。按系统调试取证，产品 `MultimodalHost.clearImageFile()` 与 shared `MultimodalViewModel.selectImage(nil, nil)` 已在 MainActor 上同步更新；失败点是 UI test helper `tapMultimodalClear` 先点击 Compose 的子 `StaticText`，没有激活父 `multimodal-clear-input` Button。该假设由最小验证确认，不修改产品清除逻辑。

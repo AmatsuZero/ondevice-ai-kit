@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-28 F08 自然视频共享 Demo 真机验证
+
+- 在前包公开自然视频 native SDK 输出上，使用 `be75e326673cdcba88a10f3e2809b2c464fc83b9` 的生产 KMP/Swift 实现，生成 ignored 目录的共享 Demo 验证副本。物理 iPhone16ProMax/iOS27.0.1，PID29279、runId `6FEDC19F-01FA-48B8-B6CA-DF4B8E07E2EB`。验证入口只选 `multimodal-select-video` 并回调注入公开沙盒视频，实际共享状态 `inputKind=VIDEO`；没有改生产 SDK、普通 Demo、保护工程或媒体库。
+- 首update后取消 `CANCELLED`、同进程重入 `SUCCEEDED`、首update后离开 `CANCELLED`、返回不自启后再次重入 `SUCCEEDED`。两次输出均为 `A group of birds fly in formation against a clear blue sky.` 且 Compose AX 文本/phase对应，11项gate全true。raw为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/demo/device-report.json`，SHA-256 `7ee24d303635527524a94878859eab59a01858801edc16c0d09137d6ca52b931`；KMP离线构建及iOS签名build-for-testing均成功。自然质量、真实Files provider选择、物理触控、OS后台、GPU/能耗仍unverified。
+- 本包将原始报告加入P11 readiness来源并重算grouped：24条证据路径/22个来源哈希、9行有gap，快照为 `artifacts/verification/p11-grouped-benchmark-20261028-demo-natural/summary.json`，仍3组/2项能力、open/not-ready。完整证据目录为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/demo/`。独立review服务429未恢复，不计APPROVE；F08剩余是有区分力的真实系统选择/后台与自然质量裁定，避免重复本次注入式AX流程。
+
 ## 最新续接 — 2026-10-28 F08 公开自然短视频 native 真机证据
 
 - 当前源码基点 `6b6f4a26c29a5c3e1ea1fec083cc040c539cd951`，只在 ignored 目录生成消费者/validator 的固定自然素材诊断副本，没有修改生产 SDK、普通 Demo、原合成门禁或受保护文件。沿用公共领域 Common swifts 的320×180/24fps/2秒H.264副本，hash `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`；素材和14文件固定模型只放独立App沙盒，不写Photos。
