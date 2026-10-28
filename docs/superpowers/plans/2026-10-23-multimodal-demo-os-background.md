@@ -23,3 +23,12 @@ Create probes/ios-multimodal-demo/MultimodalDemoBackgroundValidation.swift and i
 - [x] Validation/roadmap/handoff/ledger/final-review recorded; local commit only.
 
 Authorfinalreview; update validation/roadmap/handoff/ledger/final-review/protectedhash/index; exactlocaldoccommit. Only Task2 strictphysicalreport closes OS gate, never touch/systempicker/quality/minimumOS. If externalblocked retain exactgate and move nextsafeindependentwork.
+
+### Task4 lifecycle observation timing (2026-10-28 continuation)
+
+- [x] Extend the existing observer regression to require a monotonic timestamp and the actual UIKit application state for every event; observe RED, add those two fields, then run the complete generated Demo ABI XCTest suite.
+- [x] Record the local result and exact evidence boundary. These observer fields enable the next Home-driven diagnostic but do not prove a physical-device cancellation time or native request provenance. Keep F08 and P11 open.
+
+Files: `probes/ios-multimodal-demo/AppBackgroundObservation.swift`, `probes/ios-multimodal-bridge/AppBackgroundObservationTests.swift`, validation record and handoff. No production callbacks, protected project, model, fixture or remote issue state changes. Existing snapshot fields remain intact; observer-owned name/time/state fields override snapshot values.
+
+Result: missing-field RED followed by **75/75** generated Demo ABI XCTest passes on iOS 27.0 simulator. Evidence and limits: [observer timing validation](../../validation/f08-observation-timing.md). No new physical-device report or gate closure.

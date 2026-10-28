@@ -21,8 +21,12 @@ import UIKit
         center.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
           MainActor.assumeIsolated {
             guard let self else { return }
+            let monotonicSeconds = ProcessInfo.processInfo.systemUptime
+            let applicationState = UIApplication.shared.applicationState.rawValue
             var value = self.snapshot()
             value["name"] = label
+            value["monotonicSeconds"] = monotonicSeconds
+            value["applicationState"] = applicationState
             self.events.append(value)
           }
         })

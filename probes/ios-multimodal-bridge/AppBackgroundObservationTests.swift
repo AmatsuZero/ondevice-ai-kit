@@ -5,7 +5,12 @@ final class AppBackgroundObservationTests: XCTestCase {
   @MainActor func testRecordsOrderedSnapshotsAndStopsOnlyOwnObservation() {
     let center = NotificationCenter()
     var phase = "RUNNING"
-    let observation = AppBackgroundObservation(center: center) { ["phase": phase, "sequence": 0] }
+    let observation = AppBackgroundObservation(center: center) {
+      ["phase": phase, "sequence": 0, "backendId": "mlx.smolvlm2-500m",
+       "name": "snapshot-cannot-override", "monotonicSeconds": -1.0, "applicationState": -1]
+    }
+    let before = ProcessInfo.processInfo.systemUptime
+    let applicationState = UIApplication.shared.applicationState.rawValue
     center.post(name: UIApplication.willResignActiveNotification, object: nil)
     phase = "CANCELLED"
     center.post(name: UIApplication.didEnterBackgroundNotification, object: nil)
@@ -16,6 +21,14 @@ final class AppBackgroundObservationTests: XCTestCase {
       ["willResignActive", "didEnterBackground", "willEnterForeground", "didBecomeActive"])
     XCTAssertEqual(observation.events[0]["phase"] as? String, "RUNNING")
     XCTAssertEqual(observation.events[1]["phase"] as? String, "CANCELLED")
+    XCTAssertTrue(observation.events.allSatisfy { $0["monotonicSeconds"] is Double })
+    XCTAssertTrue(observation.events.allSatisfy { $0["applicationState"] is Int })
+    XCTAssertTrue(observation.events.allSatisfy { $0["backendId"] as? String == "mlx.smolvlm2-500m" })
+    let times = observation.events.compactMap { $0["monotonicSeconds"] as? Double }
+    XCTAssertEqual(times, times.sorted(), "Lifecycle timestamps must be monotonic")
+    let after = ProcessInfo.processInfo.systemUptime
+    XCTAssertTrue(times.allSatisfy { $0 >= before && $0 <= after })
+    XCTAssertTrue(observation.events.allSatisfy { $0["applicationState"] as? Int == applicationState })
     observation.stop()
     center.post(name: UIApplication.willResignActiveNotification, object: nil)
     XCTAssertEqual(observation.events.count, 4)

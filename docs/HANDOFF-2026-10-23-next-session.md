@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-28 F08 后台 observer 时序诊断增量
+
+- 隔离 validation observer 为每条 UIKit notification 新增真实单调时间与 `applicationState`，保留 host phase/update snapshot，并禁止 snapshot 覆盖 observer-owned 字段。新增回归先因字段缺失 RED，再通过完整生成 Demo ABI XCTest **75/75、0 failures、0 skips**；原始日志和 xcresult 在 `artifacts/verification/f08-observation-timing-20261028/`，详见[验证记录](validation/f08-observation-timing.md)。
+- 本包未重新运行真机，也没有关闭后台 terminal timing/native provenance 或其他 F08 gate；P11 readiness/benchmark 样本不变。下一次真实 Home 运行需保留含失败路径的 lifecycle snapshots，事件采样只能界定终态所在区间；native request/backend provenance 仍需独立 trace。独立 reviewer 本轮 429，未计 APPROVE。
+- 当前 goal 仍 active，同一范围继续 `goal resume` 即可；仅在任务目标改变时另设目标。受保护工程、身份草稿与相机 probes 均保留。
+
 ## 最新续接 — 2026-10-28 F08 真机 Home 后台取消与前台重入
 
 - 复用隔离 MLX Demo 验证副本和公开 `common-swifts-24fps.mp4`，在 iPhone 16 Pro Max / iOS 27.0.1 执行 `testNaturalVideoOSBackgroundCancellationAndReentry`。真实 Files provider 选择后等待共享页面 `RUNNING` 和非空 update，XCTest 按系统 Home 进入后台；回前台状态为 `CANCELLED`，随后1秒内无自动重启，同一输入再次生成成功，输出 backend=`mlx.smolvlm2-500m`。
