@@ -2,9 +2,9 @@
 
 ## 2026-10-28 真机 Home 后台取消与前台重入
 
-复用当前 MLX Demo 验证副本和公开 `common-swifts-24fps.mp4`，在 iPhone 16 Pro Max / iOS 27.0.1 上运行独立 XCTest `testNaturalVideoOSBackgroundCancellationAndReentry`。测试从真实系统 Files provider 选择视频，等待 native `RUNNING` 与首个 update 后按系统 Home，将 App 置于后台；回到前台后状态为 `CANCELLED`，没有自动重启，再次使用同一输入生成成功，输出 backend=`mlx.smolvlm2-500m`。测试 **1/1、0 failures、0 skips**，耗时 31.659 秒；`build-for-testing` 与 `test-without-building` 均成功。
+复用当前 MLX Demo 验证副本和公开 `common-swifts-24fps.mp4`，在 iPhone 16 Pro Max / iOS 27.0.1 上运行独立 XCTest `testNaturalVideoOSBackgroundCancellationAndReentry`。测试从真实系统 Files provider 选择视频，等待共享页面的 `RUNNING` 与非空 update 后按系统 Home，确认 App 状态为后台或后台挂起；回到前台后状态为 `CANCELLED`，随后1秒观察窗口内没有自动重启，再次使用同一输入生成成功，输出 backend=`mlx.smolvlm2-500m`。测试 **1/1、0 failures、0 skips**，耗时 31.659 秒；`build-for-testing` 与 `test-without-building` 均成功。
 
-原始 xcresult、附件和规范化报告见 `artifacts/verification/apple-mlxvlm-natural-video-20261028/os-background-xctest/`。该证据关闭 F08 的 OS background cancellation/no-auto-restart/reentry 子项；物理手指触控、自然质量、GPU/能耗和持续资源仍未验证。项目内 background notification 探针本轮返回 `OS lifecycle notifications timeout`，缺少足够事件，不能据此归因；保留于 `demo-background-rerun-20261028/report-current.json`，与这次 XCTest 的系统 Home 结果分别记录。
+原始 xcresult、附件和规范化报告见 `artifacts/verification/apple-mlxvlm-natural-video-20261028/os-background-xctest/`。该证据关闭 F08 的 Home 往返取消、1秒不自动重启及前台重入子项；取消 terminal 仅在回前台后观察到，后台中的具体 terminal 时序没有独立取证，Home 前 update 也未单独附带 native request/backend 标识。物理手指触控、自然质量、GPU/能耗和持续资源仍未验证。项目内 background notification 探针本轮返回 `OS lifecycle notifications timeout`，缺少足够事件，不能据此归因；保留于 `demo-background-rerun-20261028/report-current.json`，与这次 XCTest 的系统 Home 结果分别记录。
 
 ## 2026-10-28 真实 Files provider 自然短视频真机证据
 

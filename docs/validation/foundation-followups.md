@@ -12,8 +12,8 @@
 | 已完成子项 | **F06：Apple 非零导出进度取消与部分文件清理** | 真机 3/3 在 5.33%–7.47% 进度取消，取消时已有 943–1,347 字节部分文件，调用返回前均已删除；同进程 AAC 重入 3/3。见[导出取消](apple-video-audio.md)。 |
 | 1 | **F04 的 iOS 麦克风生命周期部分** | iOS 后端、Demo 与真机已有基础链路；可先验证真实录音终态、取消、关闭、重入、后台及 lease drain。自然语音 CER/WER、TTS 主观质量和完整离线矩阵另需授权语料/参考文本，不能由合成 fixture 代替。 |
 | 已完成子项 | **F08：真实 Files provider 选择** | 公开自然飞鸟短视频经系统 Files provider 进入共享页面并完成 native MLXVLM 输出，见[原始记录](multimodal-video-demo.md)。 |
-| 已完成子项 | **F08：OS Home 后台取消与前台重入** | 真机 XCTest 1/1；Home 后台后取消、前台不自动重启、同一输入再次生成成功，见[原始记录](multimodal-video-demo.md)。 |
-| 2 | **F08 的 Apple 现有模型短视频/Demo 链路** | 公开自然飞鸟短视频的 native 输出/8帧时间/取消重入、共享 Demo 的 VIDEO 路由/取消/离开/重入/AX 终态、真实 Files provider 选择及 Home 后台取消/前台重入已完成，见[原始记录](multimodal-video-demo.md)。下一步聚焦自然质量与资源测量；自然质量另需参考答案与评分规则。 |
+| 已完成子项 | **F08：Home 往返取消与前台重入** | 真机 XCTest 1/1；真实进入后台，回前台观察到取消，1秒内不自动重启，同一输入再次生成成功；后台中的 terminal 时序未独立观测。见[原始记录](multimodal-video-demo.md)。 |
+| 2 | **F08 的 Apple 现有模型短视频/Demo 链路** | 公开自然飞鸟短视频的 native 输出/8帧时间/取消重入、共享 Demo 的 VIDEO 路由/取消/离开/重入/AX 终态、真实 Files provider 选择及 Home 往返取消/1秒不自动重启/前台重入已完成，见[原始记录](multimodal-video-demo.md)。下一步聚焦自然质量与资源测量；自然质量另需参考答案与评分规则。 |
 | 3 | **F11 的现有能力报告补齐** | 使用上述新原始数据，补按能力/设备/后端的真实报告和缺口；不重新包装旧 3 组报告，不凭报告格式提升质量、GPU 或能耗结论。 |
 
 **暂不进入近期队列的外部卡点**：F03 需要 iOS15/API26 真机；F05 需要设备支持且授权的 Android ASR 离线资源；F07 真实推理需要可授权 LiteRT-LM 权重，native drain 另缺受支持证明；F10 需要生产模型/PAD、授权数据和校准集。真实 PHPicker 也需要将合成资产写入 Photos；当前按用户要求不做这项写入，因此保留为 F01 的独立后续。输入出现后再恢复对应专项。
@@ -29,7 +29,7 @@
 | F05 / Speech Android | [语音](speech-backends.md)：on-device ASR 返回 MISSING_ASSETS | 提供设备支持且授权的系统离线语音资源 | 真实转写、取消/close/重入、离线与自然质量验收；仍缺资产时明确 unavailable |
 | F06 / Video | [超分](video-sr-backends.md)、[导出取消](apple-video-audio.md)：Apple 非零导出进度取消和部分文件清理已完成真机 3/3；Android 生产后端、自然主观质量/传递函数、峰值资源仍缺证据 | Android 后端独立选择/实现；固定自然视频与质量裁定；Apple 取消专项无新输入时不重复 | 两端各自支持 profile 的真实输出/质量、取消与完整文件清理、持续运行报告，不把插值基线当算法效果 |
 | F07 / Multimodal Android | [drain 合同](android-litertlm-drain-contract.md)、[VLM](mobile-vlm.md)：LiteRT-LM 0.18.1 缺授权权重、production factory 和 native drain barrier | 固定可授权模型 manifest/hash/revision；取得受支持的 native drain 证明方案 | Kotlin consumer 实际生成、callback/取消/drain/close/重入/lease、质量资源报告；证明前维持 UNPROVEN/unavailable，supportsVideo=false |
-| F08 / Multimodal Apple | [图像](apple-mlxvlm-backend.md)、[短视频](apple-mlxvlm-short-video.md)、[Demo](multimodal-video-demo.md)：固定公开自然视频 native 生成/取消/同PID重入、8帧 rational times 和7项生命周期 gate 已通过；共享 Demo 的 VIDEO 路由、取消/离开/重入/AX 输出终态、真实 Files provider 选择及 Home 后台取消/前台重入也通过。自然质量、物理触控、GPU/能耗及持续资源仍缺 | 固定自然任务/参考答案与评分规则；再确定可比较的资源测量方法 | 保留真实 KMP/SDK 输出、时间/帧语义、自然质量及完整交互报告；synthetic 30/30 或单一自然视频输出不替代自然质量 |
+| F08 / Multimodal Apple | [图像](apple-mlxvlm-backend.md)、[短视频](apple-mlxvlm-short-video.md)、[Demo](multimodal-video-demo.md)：固定公开自然视频 native 生成/取消/同PID重入、8帧 rational times 和7项生命周期 gate 已通过；共享 Demo 的 VIDEO 路由、取消/离开/重入/AX 输出终态、真实 Files provider 选择及 Home 往返取消/1秒不自动重启/前台重入也通过。后台中 terminal 时序、自然质量、物理触控、GPU/能耗及持续资源仍缺 | 固定自然任务/参考答案与评分规则；再确定可比较的资源测量方法 | 保留真实 KMP/SDK 输出、时间/帧语义、自然质量及完整交互报告；synthetic 30/30 或单一自然视频输出不替代自然质量 |
 | F09 / Apple MLX 分发 | [分发](apple-mlxvlm-distribution.md)：基础十 XCFramework 不能证明增强 MLX binary；OrderedCollections swiftinterface archive 失败 | 独立处理固定工具链/上游 library-evolution 兼容性，保留当前可搬移 source lane | 增强 release archive、swiftinterface 与搬移 binary consumer 实际构建通过 |
 | F10 / Identity/PAD | [身份/活体](p10-face-identity.md)：生产模型、PAD、授权数据、阈值/准确率校准未交付 | 授权模型/数据/使用范围、独立训练/评测集及校准要求 | 1:1、1:N、PAD 指标与阈值、授权撤销/删除和真实设备流程验收；fixture 引擎不提升为生产能力 |
 | F11 / P11 质量/资源/性能 | [状态矩阵](p11-status-matrix-20261027.md)、[分组报告](p11-grouped-benchmark.md)：9行均有 gap，仅2能力/3组兼容报告；Face 无自然质量，GPU/energy/持续资源未统一 | 固定每能力任务集/阈值、同构测量方法与设备；Power Profiler 工具崩溃需新方案 | 所有实际交付能力正确性/质量/延迟/峰值/取消/持续运行有原始逐run数据与分组报告；不能可靠测量项保持 null 并明确发布裁定 |
