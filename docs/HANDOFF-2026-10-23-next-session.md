@@ -4,6 +4,15 @@
 
 当前状态：**本轮执行 closed-with-followups；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12及goal active/继续下一包均为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-28 F01 真机 sandbox 子项
+
+- 用户要求继续推进 F01，但明确合成图片只放验证 App 沙盒，不写入真机 Photos。新增隔离 `PhotoSandboxDeviceHost`/UI-test 将三张 EXIF2/6/7 fixture 交给生产 `DemoController.useImage`，再观察生产 Vision bridge；没有调用 `selectPhoto()`、请求 Photos 权限或读取/写入照片库。
+- iPhone 16 Pro Max / iOS 27.0.1（UDID `00008140-0008703436D3001C`）的 `build-for-testing` 与 `test-without-building` 成功，XCTest **3/3、0 failures、0 skips**。EXIF2=`80x40:white,black,white,black`，EXIF6=`40x80:black,black,white,white`，EXIF7=`40x80:white,white,black,black`；三例均返回 `apple.vision.face`、`faces=0`。
+- 证据目录为 `artifacts/verification/p4-picker-sandbox-device/`，汇总为 `summary.json`；fixture SHA-256 和保护哈希均记录在汇总中。该包只完成 F01 的 sandbox 方向/镜像归一化与 Vision 子项，**真实 PHPicker→Photos provider→controller 仍未验证**，也不证明 EXIF 标签经 Photos 导出后保留；最低系统设备仍排除。
+- 新增源码/脚本为 `probes/ios-photo-picker/PhotoSandboxDeviceHost.swift`、`PhotoSandboxDeviceUITests.swift` 和 `scripts/generate-photo-sandbox-device-tests.rb`。保留既有 tracked dirty 工程、身份草稿及 camera resource/thread probes；不恢复、不覆盖、不 stage 受保护文件。
+- 验证 host 使用独立 bundle ID，没有替换普通 Demo。当前 CoreDevice 的 `device info apps/processes` 只读查询均因服务初始化超时失败，因此普通 Demo 当前安装/运行状态尚未重新确认；不要把此前历史恢复记录当成本轮确认。
+- `artifacts/verification/p11-readiness-20261027/summary.json` 已按新的 P4 记录刷新来源哈希；readiness 校验为 9 行、21 evidence paths、19 source hashes，9 行仍有 gap，`open/not-ready`。`benchmark/p11/grouped-report-manifest.json` 同步更新哈希，新报告在 `artifacts/verification/p11-grouped-benchmark-20261028-f01/summary.json`；它只重算已有3组，不增加质量/资源结论。
+
 ## 最新收尾 — 2026-10-28 用户要求结束本轮持续执行
 
 - 用户明确要求“存在的问题记录下来，后续专项推进，尽快结尾”。据此停止新增Photos/native取证/模型实施；最终结果见[收尾记录](validation/roadmap-closure-20261028.md)和[专项清单](validation/foundation-followups.md)。每个专项保留问题、证据、恢复输入和退出标准；P4/P11不改成pass，发布门禁不放宽。

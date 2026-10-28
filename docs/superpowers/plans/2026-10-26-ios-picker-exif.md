@@ -2,10 +2,14 @@
 
 2026-10-28 收尾更新：用户要求现存问题记录后续专项，本轮尽快结尾。Task2保持未执行，转入[F01](../../validation/foundation-followups.md)；本轮不再新增device harness或写入Photos。下方既有授权与设计保留为专项恢复依据，Task1已通过证据不重跑。
 
+2026-10-28 用户已恢复执行 F01。用户补充要求优先使用 Demo 沙盒，不写入真机 Photos；因此先执行新增的 sandbox→生产 `DemoController.useImage`→Vision fallback，真实 PHPicker 仍保持单独未验证门槛。所有结果明确标记为 sandbox，不能提升为 PHPicker 通过。
+
+2026-10-28 最新执行结果：Task3 的真机 sandbox 子项已完成并通过 3/3；Task2 真实 PHPicker 仍 deferred。后续恢复前不请求 Photos 权限、不写入相册。
+
 2026-10-27 用户授权更新：已验证改动可分批提交并同步 `origin` + `jihu` 的现有 foundation 分支；覆盖本计划此前的暂不提交约束。受保护文件和未完成线程取证保留本地；不包含合并、tag 或发布。
 
-2026-10-28 用户明确授权：如有助于更快推进，可向真机 Photos 写入合成测试资产。
-下述 Task 2 取代仅针对真机的 no-write/simulator-only 限制；原 Task 1 保持不变。
+2026-10-28 用户曾授权：如有助于更快推进，可向真机 Photos 写入合成测试资产。该授权随后被“优先使用 Demo 沙盒、不写入真机 Photos”的最新边界取代；以下 Task2 设计只保留为未来恢复依据。
+下述 Task 2 是历史设计，当前不执行；原 Task 1 保持不变。
 不读取或导出已有照片、不删除任何资产、不改变签名资产或受保护工程。沿用 inline 执行。
 
 > Execute inline with superpowers:executing-plans. Existing approved P4 scope and autonomous continuation authorize this bounded validation work; no new product capability or approval gate is introduced.
@@ -45,7 +49,7 @@
 
 Only if a product defect is reproduced: preserve the failing evidence, repair the specific production behavior with regression coverage, and run its relevant build/tests before claiming a fix. Otherwise keep this package validation-only.
 
-## Task 2: Physical synthetic-only picker→Vision acceptance
+## Task 2: Physical synthetic-only picker→Vision acceptance (deferred)
 
 Files: new `probes/ios-photo-picker/DevicePhotoLibrary.swift`,
 `PhotoPickerDeviceHost.swift`, `PhotoPickerDeviceUITests.swift`,
@@ -81,3 +85,21 @@ Review focus: wrong-asset selection, duplicate imports after interrupted writes,
 source hash drift, successful normalized pixels without Vision completion, and
 scope of Photos permission. Original EXIF tags need not survive Photos export;
 the contract is the known input's end-to-end normalized geometry and pixels.
+
+## Task 3: Physical sandbox fallback
+
+The validation app bundles the three generated JPEGs and calls the production
+`DemoController.useImage` entry with a fixture selected by launch argument. It
+does not call `selectPhoto()`, inject a PHPicker callback, request Photos access,
+or write to the photo library. The report must say `validation=sandbox` and keep
+the PHPicker gate open. This is useful for the currently available iPhone because
+it proves physical-device EXIF normalization and Vision dimensions without a
+photo-library side effect.
+
+- [x] Generate and hash the three fixtures under ignored artifacts.
+- [x] Build an isolated signed iOS15-target host/UI-test project with bundle resources.
+- [x] Run EXIF2/6/7 on the connected iPhone and retain signature/Vision reports.
+- [x] Update F01 with the bounded sandbox result.
+- [ ] Confirm the ordinary Demo installation after CoreDevice queries recover. The isolated host has a separate bundle ID and did not replace the ordinary Demo.
+
+Task3 result is `validation=sandbox`; it does not close Task2 or the full F01 exit standard.

@@ -2,6 +2,25 @@
 
 日期：2026-10-16。此包处理用户实际反馈的两个 Demo 问题，只完成 P4 的相机控件稳定及前后台恢复部分。
 
+## F01 真机 sandbox EXIF→生产 controller→Vision（2026-10-28）
+
+新增的隔离验证 App 将 EXIF2/6/7 合成 JPEG 放在验证 App 沙盒中，调用生产
+`DemoController.useImage`，再观察生产 bridge 的 `apple.vision.face` 结果；没有调用
+`selectPhoto()`、请求 Photos 权限或写入相册。iPhone 16 Pro Max / iOS 27.0.1 上
+`build-for-testing` 与 `test-without-building` 均成功，XCTest **3/3、0 failures、0 skips**：
+
+| 输入 | 生产 controller 输出 | Vision 结果 |
+| --- | --- | --- |
+| EXIF2 | `80x40:white,black,white,black` | `apple.vision.face`, `faces=0` |
+| EXIF6 | `40x80:black,black,white,white` | `apple.vision.face`, `faces=0` |
+| EXIF7 | `40x80:white,white,black,black` | `apple.vision.face`, `faces=0` |
+
+原始日志、xcresult、fixture manifest 和汇总见
+`artifacts/verification/p4-picker-sandbox-device/summary.json`。该结果关闭 P4 的
+物理设备方向/镜像归一化与 Vision 尺寸响应子项，但**不关闭真实 PHPicker→Photos
+provider→controller** 门槛，也不证明 EXIF 标签经过 Photos 导出后仍保留；最低系统
+运行验收仍缺设备。验证 App 沙盒内的合成文件不会出现在用户相册。
+
 ## 当前源码 Compose 相机 UI 验收（2026-10-27）
 
 Task10并发改造后的实际Demo在iPhone16ProMax/iOS27.0.1重新完成现有相机UI用例。控件稳定、前后台恢复/显式停止 **2/2、0失败、0跳过**；两分钟持续UI **1/1、0失败、0跳过**。本轮runner正常启动，保留此前初始化失败作为历史证据，不据此声称已定位其原因。
