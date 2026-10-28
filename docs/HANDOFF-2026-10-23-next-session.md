@@ -4,6 +4,12 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-28 Video native export cancellation
+
+- 以独立诊断 App 复制当前 `AppleVideoAudioMuxer`，保留 production source/fixtures/Demo/signing 不变；host mux 8/8、Ruby3.4 distribution 16/16，真机 iPhone16 Pro Max/iOS27.0.1 报告 `E5DC6A49-E240-4A04-A6B6-BAC7AAF40DE8`。
+- 3/3 运行观察原生 `AVAssetExportSession` `waiting → exporting → cancelled`，调用方 `CancellationError`，输出在返回时不存在，source/processed video 哈希不变；3/3 同进程 AAC 重入 payload 相同。主机负向对照移除取消调用后以 native completed=3 被拒绝。
+- 取消点进度均为0%，因此关闭“完全未观察到 native export 阶段取消”这一项，但不声称非零进度的部分文件清理已验证；P7/P11其余质量、资源、最低系统与Android门槛不变。证据见 `docs/validation/apple-video-audio.md` 与 `artifacts/verification/video-export-cancellation-20261028/`。
+
 ## 最新续接 — 2026-10-28 P6 当前源码分发复核
 
 - 以当前 HEAD `c245d12` 生成 `artifacts/P6/microphone-locale-admission-20261028/`；iphoneos 与 iphonesimulator archive 均成功，产物实际为 **10 个 XCFramework**：Core、ModelStore、Face、AppleVision、Speech、AppleSpeech、Identity、Video、AppleVideo、Multimodal。逐包确认 `ios-arm64` 与 `ios-arm64-simulator` 存在，两个 slice 均为 arm64。

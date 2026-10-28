@@ -24,6 +24,32 @@ host测试使用本地ffmpeg生成的色块/440Hz合成AAC，不下载/录音。
 
 ## 真实设备
 
+### 2026-10-28 原生 mux 导出阶段取消
+
+使用 `probes/apple-video-export-cancellation/` 生成独立诊断 App，仅复制当前
+`AppleVideoAudioMuxer` 并在真实 `AVAssetExportSession` 外层增加状态观察；生产
+源、Demo 工程、签名配置和合成 fixture 均未修改。iPhone 16 Pro Max / iOS
+27.0.1 真机报告 `runId=E5DC6A49-E240-4A04-A6B6-BAC7AAF40DE8`，报告与完整控制台
+日志见 `artifacts/verification/video-export-cancellation-20261028/device-report.json`
+和 `device-console.log`。
+
+同一进程的3轮导出均观察到 native status `waiting → exporting → cancelled`（完整原始枚举
+`0,1,2,5`）；3 次调用方均收到 `CancellationError`，export 返回时输出不存在，
+source/processed video SHA-256 不变，随后同进程重入均为 1 条 AAC 且 payload 相同。
+主机负向对照移除取消调用后以 native `completed=3` 被验收器拒绝，说明检查器没有把
+正常完成误判为取消。
+
+取消触发时 `progress=0`，所以本包关闭“未观察到 native export 阶段取消”这一缺口，
+但不把它扩大为“已验证非零进度的部分文件清理”；后者仍是独立 stress case。
+
+本轮诊断构建使用SDK文档仍支持的KVO status读取，存在status/progress及旧reader API的
+deprecation warning，不声称warning-free。Console collector达到30秒观察上限后exit2，
+App已先写入success报告；设备结果以取回的JSON及内嵌source manifest hash为依据。
+独立Video foundation/AppleVideo审查恢复仍因429没有结论，不计APPROVE。最低系统设备
+验收按用户指示暂缓；基础里程碑10/12、P4/P11开放。
+
+### 2026-10-21 原始 SR→mux 设备验收
+
 iPhone16ProMax / iOS27.0.1 (24A446)，PID19288，runId `B06660C7-6E4D-4F13-AAED-F8DC83D2494F`。固定公开视频加本地440Hz/48kHz AAC；新输入SHA256 `6a1c2a7bb875c8d9502450e732901fcd21bca5be27da0ef6ceae58c5b64c0d00`。只读取测试bundle fixture；沿用本项目视频probe的已有签名，不变更签名资产或原Demo工程。
 
 `task-3-device-run.log`与导出`device-results/result.json`均记录`state=success`：
@@ -41,4 +67,4 @@ iPhone16ProMax / iOS27.0.1 (24A446)，PID19288，runId `B06660C7-6E4D-4F13-AAED-
 
 实测偏移AAC含leading empty edit，composition passthrough导出时长变化约81微秒；设置naturalTimeScale未消除。首版因此提前拒绝偏移/空白编辑/非等长音轨，保留精确同步门槛；代价是更窄的输入兼容性。无音频重编码、裁剪、拉伸或静默降级。AVAssetTrack.asset为weak，asset与轨道一同保留到实际export结束。Apple SDK async export overlay用Task cancellation handler取消并await终态回调，之后才清理输出。
 
-尚未可靠触发并单独观察native export阶段中途取消，不能拿第1帧SR取消或预取消冒充；其系统取消/完成边界有SDK实现依据，设备专项仍未验。更广音频、SR传递函数/质量/峰值资源、最低系统、Android与KMP/Demo仍未完成。下一本地包为KMP Video bridge与Demo接入，P7保持部分完成；无远端push/制品发布。
+更广音频、非零进度部分文件清理、SR传递函数/质量/峰值资源及Android生产后端仍未完成；最低系统设备验收暂缓。KMP bridge/Demo已在后续包接入，2026-10-25的真机UI结果见[Video bridge验证](video-bridge-demo.md)。P7原始探针停止点已完成，扩展交付仍开放，基础里程碑10/12、P4/P11未关闭。本轮仅提交诊断probe与验收记录，不发布制品。

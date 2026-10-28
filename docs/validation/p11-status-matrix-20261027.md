@@ -8,7 +8,7 @@
 | Speech TTS | `pass-bounded` | [语音后端](speech-backends.md) | 自然语音质量、最低系统、完整离线矩阵 |
 | Speech ASR file | `pass-bounded` | [语音后端](speech-backends.md)、[固定文件探针](ios-asr-file-probe.md) | 麦克风录音、自然语音 CER/WER、iOS 15 |
 | Speech ASR Android | `unavailable-assets` | [语音后端](speech-backends.md)、[设备矩阵](device-matrix.md) | 已授权离线资源、真实转写、取消/关闭真机运行 |
-| Video SR | `pass-bounded` | [超分探针](video-sr-backends.md)、[Video Demo](video-bridge-demo.md) | Android 后端、主观质量、GPU/能耗、最低系统 |
+| Video SR | `pass-bounded` | [超分探针](video-sr-backends.md)、[Video Demo](video-bridge-demo.md)、[原生导出取消](apple-video-audio.md) | Android 后端、主观质量、GPU/能耗、非零导出进度部分文件清理；最低系统设备验收暂缓 |
 | Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[P11 分组报告](p11-grouped-benchmark.md)、[多模态视频 Demo](multimodal-video-demo.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 自然质量、短视频完整验收、可比较 GPU peak/能耗、完整物理触控 |
 | Multimodal Android LiteRT-LM | `unverified-production-gate-closed` | [移动端 VLM](mobile-vlm.md)、[drain 合同](android-litertlm-drain-contract.md) | 授权模型 manifest/weights、production factory、native drain、真实推理、质量、GPU/能耗 |
 | Face identity/liveness | `unverified-production-model` | [身份/活体](p10-face-identity.md) | 生产模型、PAD、授权数据、校准、准确率 |
@@ -17,6 +17,8 @@
 ## 统一结论
 
 当前 P11 gate 为 `open`，最终发布结论为 **`not-ready`**。9 行能力均存在未验证项；这些项不能由局部 JVM、模拟器、现代系统真机、AAR 构建或 synthetic fixture 证据替代。
+
+2026-10-28 的原生mux专项在独立诊断App中连续3轮观察到iPhone `waiting → exporting → cancelled`，输出不存在、输入哈希不变、3轮同进程AAC重入payload相同。取消点progress均为0；这增加导出开始后的终态证据，不覆盖非零进度部分文件清理，也不改变Video SR或P11状态。iOS15/API26运行验收按用户要求暂缓，不视为通过。
 
 2026-10-27 的固定公开单图独立 probe 新增单 PID Metal 分配观察峰值 `1,723,596,800 B`（3,227 条 `currentAllocatedSize` 记录）和 501 条 GPU activity。该值只覆盖单次合成图的 Metal 资源分配，未关闭可比较 GPU peak/能耗或统一资源预算；Power Profiler 的单目标 trace 因 xctrace 工具崩溃无法导出。
 
