@@ -4,6 +4,11 @@
 
 当前状态：**本轮执行 closed-with-followups；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12及goal active/继续下一包均为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-28 F11 矩阵同步
+
+- F01 的真机 sandbox 证据现已写入 [P11 一页矩阵](validation/p11-status-matrix-20261027.md) 的 camera 行，真实 PHPicker provider 路径显式保留为未验证。相应 readiness source hash 与 grouped manifest 已刷新；`validate_p11_readiness.py` 为9行、21 evidence paths、19 source hashes、9行仍有gap，`open/not-ready`；分组报告在 `artifacts/verification/p11-grouped-benchmark-20261028-matrix/summary.json`，仍只有既有3组/2项能力。聚焦18/18测试及 `git diff --check` 通过，两个保护哈希未变。
+- F04现有Task1–5实现/本地门禁已有证据，Task6真实麦克风取消/重入仍缺受控真人朗读与终态；未自动启动录音。F08固定合成视频的真机success/cancel/reentry/close已有证据，重复相同fixture无区分力。CoreDevice `device info apps/processes` 仍因服务初始化超时不可用，普通 Demo 状态未重新确认。下一步优先使用有区分力的新输入或恢复真机受控窗口；不把旧synthetic与静音对照写成自然质量通过。
+
 ## 最新续接 — 2026-10-28 F01 真机 sandbox 子项
 
 - 用户要求继续推进 F01，但明确合成图片只放验证 App 沙盒，不写入真机 Photos。新增隔离 `PhotoSandboxDeviceHost`/UI-test 将三张 EXIF2/6/7 fixture 交给生产 `DemoController.useImage`，再观察生产 Vision bridge；没有调用 `selectPhoto()`、请求 Photos 权限或读取/写入照片库。
@@ -11,7 +16,7 @@
 - 证据目录为 `artifacts/verification/p4-picker-sandbox-device/`，汇总为 `summary.json`；fixture SHA-256 和保护哈希均记录在汇总中。该包只完成 F01 的 sandbox 方向/镜像归一化与 Vision 子项，**真实 PHPicker→Photos provider→controller 仍未验证**，也不证明 EXIF 标签经 Photos 导出后保留；最低系统设备仍排除。
 - 新增源码/脚本为 `probes/ios-photo-picker/PhotoSandboxDeviceHost.swift`、`PhotoSandboxDeviceUITests.swift` 和 `scripts/generate-photo-sandbox-device-tests.rb`。保留既有 tracked dirty 工程、身份草稿及 camera resource/thread probes；不恢复、不覆盖、不 stage 受保护文件。
 - 验证 host 使用独立 bundle ID，没有替换普通 Demo。当前 CoreDevice 的 `device info apps/processes` 只读查询均因服务初始化超时失败，因此普通 Demo 当前安装/运行状态尚未重新确认；不要把此前历史恢复记录当成本轮确认。
-- `artifacts/verification/p11-readiness-20261027/summary.json` 已按新的 P4 记录刷新来源哈希；readiness 校验为 9 行、21 evidence paths、19 source hashes，9 行仍有 gap，`open/not-ready`。`benchmark/p11/grouped-report-manifest.json` 同步更新哈希，新报告在 `artifacts/verification/p11-grouped-benchmark-20261028-f01/summary.json`；它只重算已有3组，不增加质量/资源结论。
+- `artifacts/verification/p11-readiness-20261027/summary.json` 已按新的 P4 记录刷新来源哈希；readiness 校验为 9 行、21 evidence paths、19 source hashes，9 行仍有 gap，`open/not-ready`。`benchmark/p11/grouped-report-manifest.json` 同步更新哈希，新报告在 `artifacts/verification/p11-grouped-benchmark-20261028-f01/summary.json`；该报告为矩阵更新前的中间快照，以上方 `p11-grouped-benchmark-20261028-matrix` 为当前快照。
 
 ## 最新收尾 — 2026-10-28 用户要求结束本轮持续执行
 

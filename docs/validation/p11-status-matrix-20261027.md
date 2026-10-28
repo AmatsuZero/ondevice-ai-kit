@@ -14,7 +14,7 @@
 | Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[P11 分组报告](p11-grouped-benchmark.md)、[多模态视频 Demo](multimodal-video-demo.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 自然质量、短视频完整验收、可比较 GPU peak/能耗、完整物理触控 |
 | Multimodal Android LiteRT-LM | `unverified-production-gate-closed` | [移动端 VLM](mobile-vlm.md)、[drain 合同](android-litertlm-drain-contract.md) | 授权模型 manifest/weights、production factory、native drain、真实推理、质量、GPU/能耗 |
 | Face identity/liveness | `unverified-production-model` | [身份/活体](p10-face-identity.md) | 生产模型、PAD、授权数据、校准、准确率 |
-| Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、最低系统、完整 review |
+| Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)（含真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 3/3）、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、真实 PHPicker provider 路径、最低系统、完整 review |
 
 ## 统一结论
 
@@ -23,6 +23,8 @@
 2026-10-28 的原生mux专项在独立诊断App中连续3轮观察到iPhone `waiting → exporting → cancelled`，输出不存在、输入哈希不变、3轮同进程AAC重入payload相同。取消点progress均为0；这增加导出开始后的终态证据，不覆盖非零进度部分文件清理，也不改变Video SR或P11状态。iOS15/API26运行验收按用户要求暂缓，不视为通过。
 
 2026-10-27 的固定公开单图独立 probe 新增单 PID Metal 分配观察峰值 `1,723,596,800 B`（3,227 条 `currentAllocatedSize` 记录）和 501 条 GPU activity。该值只覆盖单次合成图的 Metal 资源分配，未关闭可比较 GPU peak/能耗或统一资源预算；Power Profiler 的单目标 trace 因 xctrace 工具崩溃无法导出。
+
+2026-10-28 F01 真机 sandbox 子项在 iPhone 16 Pro Max / iOS 27.0.1 上通过 3/3：EXIF2/6/7 均经生产 `DemoController.useImage` 得到预期归一化尺寸/四角像素，并收到 `apple.vision.face`、`faces=0`。验证 App 只读取沙盒 fixture，没有请求 Photos 权限或写入相册；因此真实 PHPicker→Photos provider 路径仍未验证，不改变本行 `unverified-native-residuals` 或 P11 gate。
 
 候选 SDK 已冻结为 committed tree `7b9f7fc75772b61948d211d72ec2e1e221362591` / `f60b65fc117908a9b82c60eb42285f8c855d6f91`，归档 SHA-256 为 `6a2cb8afd895b13fa281d15f55046b3f263a1882aebd8ce31dff563bc3b2b666`。归档不含 foundation 工作树的8项受保护/未完成修改；该冻结只关闭 SDK commit 快照子门槛。
 
