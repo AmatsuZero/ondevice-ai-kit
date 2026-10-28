@@ -1,6 +1,6 @@
 # iOS 麦克风 ASR 验证记录
 
-日期：2026-10-21。实现基线 `d60867c`；路由修复已本地提交，真实录音窗口首个成功后仍有1110失败；新的NO_RESULT分类修复已完成本地验证；Task1–5独立审查已通过。P6 和整个 roadmap 保持未收口。
+日期：2026-10-28。实现基线 `d60867c`；locale admission 修复已提交 `36567f2`。真实录音窗口首个成功后仍有1110失败，取消/重入与中文自然录音尚未收口；Task1–5独立审查已通过。P6 和整个 roadmap 保持未收口。
 
 [计划](../superpowers/plans/2026-10-20-ios-microphone-asr.md)、[设计](../superpowers/specs/2026-10-20-ios-microphone-asr-design.md)、[恢复交接](../HANDOFF-2026-10-20-speech-demo-bridge.md)。本机原始日志位于忽略目录 `.superpowers/sdd/2026-10-20-ios-microphone-asr/`，下文简称 `logs/`。
 
@@ -37,7 +37,13 @@
 
 路由修复追加验证：`task-6-route-green.log` native simulator **41/41**（新增两项路由测试）；`task-6-route-swift-full.log` Swift全套 **412项、0失败**；`task-6-route-device-build.log` signed device build成功。两次独立复审调用均因模型容量不足未启动，路由修复复审仍待补。
 
-## 新鲜本地分发
+## 2026-10-28 当前源码分发
+
+以当前源码 HEAD `c245d12` 生成 `artifacts/P6/microphone-locale-admission-20261028/`。两个 archive 日志均包含 `ARCHIVE SUCCEEDED`，产物实际包含 **10 个 XCFramework**：`Core`、`ModelStore`、`Face`、`AppleVision`、`Speech`、`AppleSpeech`、`Identity`、`Video`、`AppleVideo`、`Multimodal`。每个包都提供 `ios-arm64` 与 `ios-arm64-simulator`，两个 slice 的实际 Mach-O 架构均为 `arm64`。
+
+当前 `SpeechBinaryConsumer` 已构建出 simulator App，工程和 App 只链接/嵌入 `ODAIKitCore`、`ODAIKitSpeech`、`ODAIKitAppleSpeech`。逐个检查 20 个 framework slice 后，只有 `ODAIKitAppleSpeech` 直接链接系统 `Speech.framework`；`ODAIKitSpeech` 两个公开 interface 只导入 `Foundation`、`ODAIKitCore` 及 Swift 运行时模块，没有引入 `AppleSpeech`、`AVFAudio`、Video、Face、KMP 或 Demo。该结果确认当前源码的分发与依赖裁剪，不能替代真机录音、自然语言质量或最低系统运行验收。
+
+## 历史本地分发
 
 以下分发产物早于本次路由修复，尚未重打包。输出 `artifacts/P6/microphone-20261021/`，device/simulator archive 与七个 XCFramework 均成功：Core、ModelStore、Face、AppleVision、Speech、AppleSpeech、Identity；`logs/task-6-xcframeworks.log`。
 

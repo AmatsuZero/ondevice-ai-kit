@@ -4,6 +4,12 @@
 
 当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
 
+## 最新续接 — 2026-10-28 P6 当前源码分发复核
+
+- 以当前 HEAD `c245d12` 生成 `artifacts/P6/microphone-locale-admission-20261028/`；iphoneos 与 iphonesimulator archive 均成功，产物实际为 **10 个 XCFramework**：Core、ModelStore、Face、AppleVision、Speech、AppleSpeech、Identity、Video、AppleVideo、Multimodal。逐包确认 `ios-arm64` 与 `ios-arm64-simulator` 存在，两个 slice 均为 arm64。
+- 当前 `SpeechBinaryConsumer` simulator App 已构建成功，只链接/嵌入 Core、Speech、AppleSpeech。20 个 framework slice 的动态依赖检查确认只有 AppleSpeech 直接链接 `Speech.framework`；Speech 的两个 slice interface 只导入 Foundation/Core 与 Swift 运行时，没有跨入 AppleSpeech、AVFAudio、Video、Face、KMP 或 Demo。
+- 这是当前源码的分发与依赖裁剪证据，不提升真机自然录音、中文质量、取消/重入、后台生命周期或最低系统状态。P6 Task6 仍开放；最低系统设备验收暂缓。后续按既有授权精确提交验证文档，保护工程、身份草稿和相机资源/线程 probe 保持本地。
+
 ## 最新续接 — 2026-10-28 P4 全范围审查与上游依赖结论
 
 - fresh code-reviewer 只读覆盖 `e7c1484` camera isolation、`33dd8c4` synthetic PHPicker EXIF harness、当前 resource/page/thread probe、计划/ledger及冻结 Task12 证据；结果 **0 Critical、2 Important、0 Minor**。camera/controller/FIFO/terminal close、simulator picker边界和ThreadInventory资源释放未发现其他阻断。
