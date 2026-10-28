@@ -1,5 +1,11 @@
 # Typed video Demo input / state / host checkpoint
 
+## 2026-10-28 真机 Home 后台取消与前台重入
+
+复用当前 MLX Demo 验证副本和公开 `common-swifts-24fps.mp4`，在 iPhone 16 Pro Max / iOS 27.0.1 上运行独立 XCTest `testNaturalVideoOSBackgroundCancellationAndReentry`。测试从真实系统 Files provider 选择视频，等待 native `RUNNING` 与首个 update 后按系统 Home，将 App 置于后台；回到前台后状态为 `CANCELLED`，没有自动重启，再次使用同一输入生成成功，输出 backend=`mlx.smolvlm2-500m`。测试 **1/1、0 failures、0 skips**，耗时 31.659 秒；`build-for-testing` 与 `test-without-building` 均成功。
+
+原始 xcresult、附件和规范化报告见 `artifacts/verification/apple-mlxvlm-natural-video-20261028/os-background-xctest/`。该证据关闭 F08 的 OS background cancellation/no-auto-restart/reentry 子项；物理手指触控、自然质量、GPU/能耗和持续资源仍未验证。项目内 background notification 探针本轮返回 `OS lifecycle notifications timeout`，缺少足够事件，不能据此归因；保留于 `demo-background-rerun-20261028/report-current.json`，与这次 XCTest 的系统 Home 结果分别记录。
+
 ## 2026-10-28 真实 Files provider 自然短视频真机证据
 
 使用当前 `c978628a7e3cb4f97f580ae307bb7f3218a9e1e1` 源码构建独立共享 Demo 验证工程。验证专用 plist 开启文件共享，将固定公开 `common-swifts-24fps.mp4`（SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`）和固定模型放入测试 App 沙盒。物理 iPhone 16 Pro Max / iOS 27.0.1 上，XCTest 打开真实系统 Files provider、选择该文件，随后共享页面显示选中文件，生成非空结果，`multimodal-phase=SUCCEEDED` 且 `multimodal-output-backend=实际后端：mlx.smolvlm2-500m`。

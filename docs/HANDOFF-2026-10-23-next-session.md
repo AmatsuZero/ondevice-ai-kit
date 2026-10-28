@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-28 F08 真机 Home 后台取消与前台重入
+
+- 复用隔离 MLX Demo 验证副本和公开 `common-swifts-24fps.mp4`，在 iPhone 16 Pro Max / iOS 27.0.1 执行 `testNaturalVideoOSBackgroundCancellationAndReentry`。真实 Files provider 选择后等待 native `RUNNING` 和首个 update，XCTest 按系统 Home 进入后台；回前台状态为 `CANCELLED`，无自动重启，同一输入再次生成成功，输出 backend=`mlx.smolvlm2-500m`。
+- 真机 XCTest **1/1、0 failures、0 skips**，31.659 秒；build-for-testing 与 test-without-building 均成功。报告为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/os-background-xctest/device-report.json`，原始 xcresult 与两个文本附件同目录。
+- 该证据关闭 F08 的 OS background cancellation/no-auto-restart/reentry 子项；自然质量、GPU/能耗、持续资源和完整物理触控仍未验证。项目内 notification 探针本轮仅返回 `OS lifecycle notifications timeout`，缺少足够事件，保留为失败对照且不据此归因。
+- P11 readiness 已纳入新报告：**26 个 evidence paths / 24 个 source hashes**，9行仍有gap；grouped 快照为 `artifacts/verification/p11-grouped-benchmark-20261028-f08-background/summary.json`，仍3组/2项能力、`open/not-ready`。聚焦回归19/19通过。F01–F12 milestone 与 parent issue 已在两端创建，映射见[跟踪索引](validation/foundation-tracking.md)；F08 issue #8 仍应保持 open。前一 checkpoint 的 F08 Files 文档与 tracker 索引已分别提交为 `e5fd746`、`59f99a6` 并同步两端。
+
 ## 最新续接 — 2026-10-28 F08 真实 Files provider 共享 Demo 真机验证
 
 - 基于 `c978628a7e3cb4f97f580ae307bb7f3218a9e1e1` 构建独立验证工程；固定公开 `common-swifts-24fps.mp4`（SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`）和模型仅放测试 App 沙盒。XCTest 从真实 Files provider 选择视频，未使用 iPhone 镜像、Photos 或私人媒体。

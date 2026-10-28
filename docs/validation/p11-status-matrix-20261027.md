@@ -11,7 +11,7 @@
 | Speech ASR file | `pass-bounded` | [语音后端](speech-backends.md)、[固定文件探针](ios-asr-file-probe.md) | 麦克风录音、自然语音 CER/WER、iOS 15 |
 | Speech ASR Android | `unavailable-assets` | [语音后端](speech-backends.md)、[设备矩阵](device-matrix.md) | 已授权离线资源、真实转写、取消/关闭真机运行 |
 | Video SR | `pass-bounded` | [超分探针](video-sr-backends.md)、[Video Demo](video-bridge-demo.md)、[原生导出取消](apple-video-audio.md) | Android 后端、主观质量、GPU/能耗；最低系统设备验收暂缓 |
-| Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/真实 Files provider/AX 终态](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 自然质量、OS 后台、可比较 GPU peak/能耗、完整物理触控 |
+| Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/真实 Files provider/AX 终态/Home 后台重入](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | 自然质量、可比较 GPU peak/能耗、持续资源、完整物理触控 |
 | Multimodal Android LiteRT-LM | `unverified-production-gate-closed` | [移动端 VLM](mobile-vlm.md)、[drain 合同](android-litertlm-drain-contract.md) | 授权模型 manifest/weights、production factory、native drain、真实推理、质量、GPU/能耗 |
 | Face identity/liveness | `unverified-production-model` | [身份/活体](p10-face-identity.md) | 生产模型、PAD、授权数据、校准、准确率 |
 | Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)（含真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 3/3）、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、真实 PHPicker provider 路径、最低系统、完整 review |
