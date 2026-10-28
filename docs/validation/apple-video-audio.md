@@ -28,10 +28,10 @@ host测试使用本地ffmpeg生成的色块/440Hz合成AAC，不下载/录音。
 
 使用 `probes/apple-video-export-cancellation/` 生成独立诊断 App，仅复制当前
 `AppleVideoAudioMuxer` 并在真实 `AVAssetExportSession` 外层增加状态观察；生产
-源、Demo 工程、签名配置和合成 fixture 均未修改。iPhone 16 Pro Max / iOS
-27.0.1 真机报告 `runId=E5DC6A49-E240-4A04-A6B6-BAC7AAF40DE8`，报告与完整控制台
-日志见 `artifacts/verification/video-export-cancellation-20261028/device-report.json`
-和 `device-console.log`。
+源、Demo 工程和签名配置均未修改。首轮 iPhone 16 Pro Max / iOS 27.0.1 报告
+`runId=E5DC6A49-E240-4A04-A6B6-BAC7AAF40DE8`，使用仓库原始 7,464 字节视频，
+3 轮取消点 `progress=0`；报告见
+`artifacts/verification/video-export-cancellation-20261028/device-report.json`。
 
 同一进程的3轮导出均观察到 native status `waiting → exporting → cancelled`（完整原始枚举
 `0,1,2,5`）；3 次调用方均收到 `CancellationError`，export 返回时输出不存在，
@@ -39,14 +39,25 @@ source/processed video SHA-256 不变，随后同进程重入均为 1 条 AAC �
 主机负向对照移除取消调用后以 native `completed=3` 被验收器拒绝，说明检查器没有把
 正常完成误判为取消。
 
-取消触发时 `progress=0`，所以本包关闭“未观察到 native export 阶段取消”这一缺口，
-但不把它扩大为“已验证非零进度的部分文件清理”；后者仍是独立 stress case。
+随后进行一次有界的非零进度专项。先在主机使用 31,608,443 字节、1280×720、
+24 fps、2 秒 HEVC fixture 连续 3 轮通过，再清理独立 DerivedData 重新签名构建；
+包内 manifest、AAC、视频 SHA-256 与诊断目录逐项一致。当前真机报告
+`runId=8163CFEA-3940-4272-A5C4-267C858BE2DF`，原始 JSON 为
+`artifacts/verification/video-export-nonzero-20261028/device-report-current.json`，
+SHA-256 为 `a4f323525b592b7a92945a80ecf9821c63b6fe27f94c870ef0d2e22e14cc0b6a`。
+
+三轮均在 native `exporting` 状态且 `progress>0` 后触发取消：进度分别为
+`0.0746666640`、`0.0533333346`、`0.0533333346`，当时输出已存在且大小分别为
+1,347、943、943 字节。调用方收到 `CancellationError` 时三份部分文件均已删除，
+native 终态为 `cancelled`，输入哈希不变；随后三轮同进程重入均成功生成 1 条 AAC，
+压缩 payload 与源相同。由此关闭 Apple mux 的“非零导出进度部分文件清理”子项；
+这不覆盖 Android 后端、自然质量、GPU/能耗、持续资源或最低系统设备验收。
 
 本轮诊断构建使用SDK文档仍支持的KVO status读取，存在status/progress及旧reader API的
-deprecation warning，不声称warning-free。Console collector达到30秒观察上限后exit2，
-App已先写入success报告；设备结果以取回的JSON及内嵌source manifest hash为依据。
-独立Video foundation/AppleVideo审查恢复仍因429没有结论，不计APPROVE。最低系统设备
-验收按用户指示暂缓；基础里程碑10/12、P4/P11开放。
+deprecation warning，不声称 warning-free。设备结果以取回的 JSON、内嵌 manifest
+SHA-256 和签名包资源哈希为依据。独立 Video foundation/AppleVideo 审查恢复仍因429
+没有结论，不计 APPROVE。最低系统设备验收按用户指示暂缓；基础里程碑10/12、P4/P11
+开放。
 
 ### 2026-10-21 原始 SR→mux 设备验收
 
@@ -67,4 +78,4 @@ iPhone16ProMax / iOS27.0.1 (24A446)，PID19288，runId `B06660C7-6E4D-4F13-AAED-
 
 实测偏移AAC含leading empty edit，composition passthrough导出时长变化约81微秒；设置naturalTimeScale未消除。首版因此提前拒绝偏移/空白编辑/非等长音轨，保留精确同步门槛；代价是更窄的输入兼容性。无音频重编码、裁剪、拉伸或静默降级。AVAssetTrack.asset为weak，asset与轨道一同保留到实际export结束。Apple SDK async export overlay用Task cancellation handler取消并await终态回调，之后才清理输出。
 
-更广音频、非零进度部分文件清理、SR传递函数/质量/峰值资源及Android生产后端仍未完成；最低系统设备验收暂缓。KMP bridge/Demo已在后续包接入，2026-10-25的真机UI结果见[Video bridge验证](video-bridge-demo.md)。P7原始探针停止点已完成，扩展交付仍开放，基础里程碑10/12、P4/P11未关闭。本轮仅提交诊断probe与验收记录，不发布制品。
+更广音频、SR传递函数/质量/峰值资源及Android生产后端仍未完成；最低系统设备验收暂缓。KMP bridge/Demo已在后续包接入，2026-10-25的真机UI结果见[Video bridge验证](video-bridge-demo.md)。P7原始探针停止点已完成，扩展交付仍开放，基础里程碑10/12、P4/P11未关闭。本轮仅提交诊断probe与验收记录，不发布制品。

@@ -4,6 +4,13 @@
 
 当前状态：**本轮执行 closed-with-followups；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12及goal active/继续下一包均为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-28 F06 Apple 非零导出进度取消
+
+- 独立 `ExportCancellationProbe` 使用当前生产 `AppleVideoAudioMuxer` 的诊断复制，在 host 先以 31,608,443 字节、1280×720、24 fps、2 秒 HEVC fixture 完成 3/3；随后清理独立 DerivedData 重新签名构建。包内 manifest、AAC、视频 SHA-256 与诊断目录逐项一致，未修改生产 mux、普通 Demo 或受保护工程。
+- iPhone 16 Pro Max / iOS 27.0.1 当前报告 `runId=8163CFEA-3940-4272-A5C4-267C858BE2DF`，三轮均观察 `waiting → exporting → cancelled`，在进度 `0.0746666640`、`0.0533333346`、`0.0533333346` 时取消；当时部分输出为 1,347、943、943 字节。调用返回前输出均已删除，调用方均收到 `CancellationError`，source/processed video 哈希不变，三轮同进程 AAC 重入均为 1 轨且 payload 相同。
+- 当前原始报告为 `artifacts/verification/video-export-nonzero-20261028/device-report-current.json`，SHA-256 `a4f323525b592b7a92945a80ecf9821c63b6fe27f94c870ef0d2e22e14cc0b6a`；内嵌 manifest SHA-256 `eb9115eaa0e4e8477d77a24a194d720d82af9e0d79f9e95aef60e81143f7e17c`。此前 7,464 字节 fixture 的 0% 与非零进度先行结果保留为历史对照，不作为当前证据身份。
+- F06 的 Apple 非零进度部分文件清理子项已完成；Android 生产后端、自然质量/传递函数、GPU/能耗、持续资源和最低系统仍开放。P11 Video SR 移除此单项 gap，但该行仍 `pass-bounded`，整体 9 行仍有 gap，发布继续 `open/not-ready`。F11 证据矩阵、readiness 与 grouped manifest 已刷新：校验 21 条证据路径/19 个来源哈希通过，聚焦回归 18/18；新报告为 `artifacts/verification/p11-grouped-benchmark-20261028-f06/summary.json`，重复生成逐字节一致。F04 真实麦克风仍等待受控真人朗读窗口，F08 已有固定合成 fixture，不重复同构运行。
+
 ## 最新续接 — 2026-10-28 F11 矩阵同步
 
 - F01 的真机 sandbox 证据现已写入 [P11 一页矩阵](validation/p11-status-matrix-20261027.md) 的 camera 行，真实 PHPicker provider 路径显式保留为未验证。相应 readiness source hash 与 grouped manifest 已刷新；`validate_p11_readiness.py` 为9行、21 evidence paths、19 source hashes、9行仍有gap，`open/not-ready`；分组报告在 `artifacts/verification/p11-grouped-benchmark-20261028-matrix/summary.json`，仍只有既有3组/2项能力。聚焦18/18测试及 `git diff --check` 通过，两个保护哈希未变。
