@@ -49,7 +49,8 @@ multi-event reference set and an explicit temporal scoring rule.
 
 Each normalized run contains `runId`, `device`, `osVersion`, `bundle`,
 `sourceCommit`, `backend`, `modelRevision`, `runtimeRevision`, `fixtureSha256`,
-`prompt`, `output`, `durationMs`, and `qualityScope`. The aggregate records the
+`prompt`, `output`, `durationMs`, `qualityScope`, and the authoritative source
+report path/SHA-256. The aggregate records the
 rubric revision, input manifest hash, expected run count, per-category counts,
 and an explicit list of unverified dimensions.
 

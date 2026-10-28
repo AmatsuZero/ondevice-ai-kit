@@ -24,9 +24,11 @@ class QualityIdentity:
     runtime_revision: str
     prompt: str
     expected_runs: int | None = None
+    source_report: str | None = None
+    source_report_sha256: str | None = None
 
 
-_SUBJECT = ("bird", "birds", "swift", "swifts")
+_SUBJECT = ("birds", "swifts")
 _ACTION = ("fly", "flying", "flight", "in flight", "soar", "soaring")
 _SCENE = ("blue", "cloud", "clouds")
 _RUBRIC_REVISION = "natural-video-semantic-rubric-v1"
@@ -73,6 +75,8 @@ def normalize_run(raw: dict[str, Any], *, expected: QualityIdentity) -> dict[str
         "prompt": "prompt",
         "output": "output",
         "durationMs": "durationMs",
+        "sourceReport": "sourceReport",
+        "sourceReportSha256": "sourceReportSha256",
     }
     values = {target: _required(raw, source) for source, target in required.items()}
     if values["backend"] != expected.backend:
@@ -85,6 +89,12 @@ def normalize_run(raw: dict[str, Any], *, expected: QualityIdentity) -> dict[str
         raise QualityValidationError("runtime revision mismatch")
     if values["prompt"] != expected.prompt:
         raise QualityValidationError("prompt mismatch")
+    if expected.source_report is not None and values["sourceReport"] != expected.source_report:
+        raise QualityValidationError("source report path mismatch")
+    if expected.source_report_sha256 is not None and values["sourceReportSha256"] != expected.source_report_sha256:
+        raise QualityValidationError("source report hash mismatch")
+    if raw.get("qualityScope") != _RUBRIC_REVISION:
+        raise QualityValidationError("qualityScope mismatch")
     if not isinstance(values["output"], str) or not values["output"].strip():
         raise QualityValidationError("output must be non-empty")
     if not isinstance(values["durationMs"], (int, float)) or values["durationMs"] <= 0:
@@ -127,6 +137,15 @@ def build_summary(runs: list[dict[str, Any]], *, expected: QualityIdentity, rubr
 
 def _load_identity(path: Path) -> QualityIdentity:
     data = json.loads(path.read_text(encoding="utf-8"))
+    source_report = data.get("sourceReport")
+    source_report_sha256 = data.get("sourceReportSha256")
+    if source_report is not None:
+        source = (path.parent / source_report).resolve()
+        if not source.is_file():
+            raise QualityValidationError("source report is missing")
+        actual = hashlib.sha256(source.read_bytes()).hexdigest()
+        if actual != source_report_sha256:
+            raise QualityValidationError("source report hash mismatch")
     return QualityIdentity(
         fixture_sha256=data["fixtureSha256"],
         backend=data["backend"],
@@ -134,6 +153,8 @@ def _load_identity(path: Path) -> QualityIdentity:
         runtime_revision=data["runtimeRevision"],
         prompt=data["prompt"],
         expected_runs=data.get("expectedRuns"),
+        source_report=source_report,
+        source_report_sha256=source_report_sha256,
     )
 
 

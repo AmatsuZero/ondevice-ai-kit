@@ -39,11 +39,11 @@
 - `build_summary(runs: list[dict], *, expected: QualityIdentity, rubric: QualityRubric) -> dict`
 - CLI: `python3 tools/mlxvlm_natural_quality.py validate <report.json> --expected <identity.json> --output <summary.json>`
 
-- [ ] Write RED tests for valid output, missing identity, wrong fixture hash, empty output, missing category, duplicate run ID, and deterministic summary ordering.
-- [ ] Run `python3 -m unittest tools.tests.test_mlxvlm_natural_quality`; confirm RED for the absent module/contract.
-- [ ] Implement the immutable identity and conservative lexical rubric from the design: subject `{bird,birds,swift,swifts}`, action `{fly,flying,flight,in flight,soar,soaring}`, scene requiring `sky` plus one of `{blue,cloud,clouds}`.
-- [ ] Run the focused tests; expect all tests green.
-- [ ] Run `python3 -m py_compile tools/mlxvlm_natural_quality.py`.
+- [x] Write RED tests for valid output, missing identity, wrong fixture hash, empty output, missing category, duplicate run ID, and deterministic summary ordering.
+- [x] Run `python3 -m unittest tools.tests.test_mlxvlm_natural_quality`; confirm RED for the absent module/contract.
+- [x] Implement the immutable identity and conservative lexical rubric from the design: subject `{birds,swifts}` (plural is required by the reference frames), action `{fly,flying,flight,in flight,soar,soaring}`, scene requiring `sky` plus one of `{blue,cloud,clouds}`.
+- [x] Run the focused tests; expect all tests green.
+- [x] Run `python3 -m py_compile tools/mlxvlm_natural_quality.py`.
 
 ### Task 2: Normalize retained physical-device runs
 
@@ -56,9 +56,9 @@
 - Consume the existing fixed fixture and model identity from `device-report.json` and the existing physical-device logs.
 - Produce a raw-run manifest that preserves source report paths and hashes; do not rewrite existing raw reports.
 
-- [ ] Freeze expected identity to fixture SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`, model revision `fa57db46815177fbdfd65cc85a2b3416a8332268`, runtime revision `6e338e5df49424fc0db7c6d58184d622f92ed18a`, and prompt text.
-- [ ] Select only retained physical-device successful natural-video runs with distinct run IDs; record exact source paths and hashes.
-- [ ] Validate the manifest with the Task 1 CLI before any aggregate report is generated.
+- [x] Freeze expected identity to fixture SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`, model revision `fa57db46815177fbdfd65cc85a2b3416a8332268`, runtime revision `6e338e5df49424fc0db7c6d58184d622f92ed18a`, and prompt text.
+- [x] Select the retained physical-device successful natural-video run, give its normalized row a source-qualified ID, and record the exact source path/hash. This initial evidence has `expectedRuns=1`; Task 3 replaces it with five new distinct device runs.
+- [x] Validate the manifest with the Task 1 CLI before any aggregate report is generated.
 
 ### Task 3: Execute bounded device repetitions
 
@@ -67,7 +67,7 @@
 - Create: `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/device-runs/` raw logs/reports.
 
 - [ ] Verify device availability, source commit, model lease, fixture hash, and no protected-file drift.
-- [ ] Run the fixed natural-video prompt on the connected iPhone for the planned repeated count, retaining each raw report and run ID.
+- [ ] Run the fixed natural-video prompt on the connected iPhone exactly five times, retaining each raw report and distinct run ID; then change `expectedRuns` from 1 to 5.
 - [ ] Do not claim quality completion from execution alone; classify output only through the Task 1 validator.
 
 ### Task 4: Generate and verify the aggregate report

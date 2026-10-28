@@ -7,8 +7,8 @@
 ## 最新续接 — 2026-10-28 F08 自然质量 rubric 首包
 
 - 按用户“继续”从 F08 可执行队列进入自然质量首包；设计与计划为 `docs/superpowers/{specs,plans}/2026-10-28-apple-mlxvlm-natural-quality-*`。当前只改 validator/测试/文档和 ignored 证据，不改生产 SDK、Demo、签名工程或保护 dirty 文件。
-- `tools/mlxvlm_natural_quality.py` 及 5 项 focused unittest 已 RED→GREEN；评分器固定 rubric=`natural-video-semantic-rubric-v1`，只检查 subject/action/scene 三类词义覆盖。对保留的 iPhone native run，1/1 semantic pass，重复汇总逐字节一致。
-- 证据：`artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/{expected-identity.json,raw-runs.json,summary.json}`。这是单个既有 run 的 bounded semantic evidence，不是完整自然质量结论；`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 和额外 distinct runs 仍未完成。
+- `tools/mlxvlm_natural_quality.py` 及 6 项 focused unittest 已 RED→GREEN；评分器固定 rubric=`natural-video-semantic-rubric-v1`，要求复数 subject 并检查 action/scene 三类词义覆盖，且绑定原始 device report 路径与 SHA-256。对保留的 iPhone native run，1/1 semantic pass，重复汇总逐字节一致。
+- 证据：`artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/{expected-identity.json,raw-runs.json,summary.json}`。readiness 为 **28 evidence paths / 26 source hashes / 9 rows with gaps**，P11 仍 `open/not-ready`。这是单个既有 run 的 bounded semantic evidence，不是完整自然质量结论；`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 和额外 distinct runs 仍未完成。
 
 ## 最新续接 — 2026-10-28 F08 Home 转场取消时序与 native provenance
 

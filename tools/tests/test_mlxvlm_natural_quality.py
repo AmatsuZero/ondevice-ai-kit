@@ -1,7 +1,5 @@
 import json
-import tempfile
 import unittest
-from pathlib import Path
 
 from tools.mlxvlm_natural_quality import (
     QualityIdentity,
@@ -19,6 +17,8 @@ IDENTITY = QualityIdentity(
     runtime_revision="runtime",
     prompt="Describe what happens in this video in one brief sentence.",
     expected_runs=1,
+    source_report="device-report.json",
+    source_report_sha256="source-hash",
 )
 
 
@@ -36,6 +36,8 @@ def raw(run_id="run-1", output="Several birds are flying in a blue sky with clou
         "output": output,
         "durationMs": 2100.0,
         "qualityScope": "natural-video-semantic-rubric-v1",
+        "sourceReport": "device-report.json",
+        "sourceReportSha256": "source-hash",
     }
 
 
@@ -51,6 +53,11 @@ class NaturalQualityTests(unittest.TestCase):
         self.assertFalse(score["categories"]["subject"])
         self.assertFalse(score["categories"]["action"])
 
+    def test_single_bird_does_not_satisfy_multiple_bird_reference(self):
+        score = score_output("A bird is flying in a blue sky with clouds.")
+        self.assertFalse(score["categories"]["subject"])
+        self.assertFalse(score["semanticPass"])
+
     def test_normalize_rejects_identity_mismatch_and_empty_output(self):
         with self.assertRaisesRegex(QualityValidationError, "fixture"):
             normalize_run({**raw(), "fixtureHash": "wrong"}, expected=IDENTITY)
@@ -58,6 +65,10 @@ class NaturalQualityTests(unittest.TestCase):
             normalize_run(raw(output="   "), expected=IDENTITY)
         with self.assertRaisesRegex(QualityValidationError, "backend"):
             normalize_run({**raw(), "actualBackend": "wrong"}, expected=IDENTITY)
+        with self.assertRaisesRegex(QualityValidationError, "qualityScope"):
+            normalize_run({**raw(), "qualityScope": "wrong"}, expected=IDENTITY)
+        with self.assertRaisesRegex(QualityValidationError, "source report"):
+            normalize_run({**raw(), "sourceReportSha256": "wrong"}, expected=IDENTITY)
 
     def test_duplicate_run_ids_are_rejected(self):
         with self.assertRaisesRegex(QualityValidationError, "duplicate"):
