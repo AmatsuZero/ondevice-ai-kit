@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-28 F08 自然质量 rubric 首包
+
+- 按用户“继续”从 F08 可执行队列进入自然质量首包；设计与计划为 `docs/superpowers/{specs,plans}/2026-10-28-apple-mlxvlm-natural-quality-*`。当前只改 validator/测试/文档和 ignored 证据，不改生产 SDK、Demo、签名工程或保护 dirty 文件。
+- `tools/mlxvlm_natural_quality.py` 及 5 项 focused unittest 已 RED→GREEN；评分器固定 rubric=`natural-video-semantic-rubric-v1`，只检查 subject/action/scene 三类词义覆盖。对保留的 iPhone native run，1/1 semantic pass，重复汇总逐字节一致。
+- 证据：`artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/{expected-identity.json,raw-runs.json,summary.json}`。这是单个既有 run 的 bounded semantic evidence，不是完整自然质量结论；`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 和额外 distinct runs 仍未完成。
+
 ## 最新续接 — 2026-10-28 F08 Home 转场取消时序与 native provenance
 
 - 当前 goal 保持 active，继续 `goal resume`，不需要替换。工作树为 `feat/sdk-foundation`；受保护工程、身份草稿和相机 probes 保持本地，不 restore、不覆盖、不 stage。
