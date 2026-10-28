@@ -133,6 +133,16 @@ Roadmap 仍 **5/12、P9 active**；本轮 `git diff --check` 通过，所有既�
 
 同一时段的 `xcrun xctrace list devices` 将该 UDID 列入 **Devices Offline**，与 `devicectl` 的 `Timed out waiting for CoreDeviceService to fully initialize` 一致；这只是设备/CoreDevice 外部门槛，不把镜像画面或 AX 结果升级为真机证据。
 
+## 2026-10-28 Home 转场取消时序与 native provenance
+
+在前述真实 Files provider 与 Home 往返 XCTest 基础上，独立 ignored 验证副本把 UIKit lifecycle、共享页面 phase、native request/backend 和 drain/lease release 写入同一条单调时钟 trace。生产源码、普通 Demo、签名工程和媒体库均未修改。
+
+- iPhone 16 Pro Max / iOS 27.0.1（UDID `00008140-0008703436D3001C`）执行 `testNaturalVideoOSBackgroundCancellationAndReentry`：**1 passed / 0 failed / 0 skipped**，xcodebuild 用时 39.377 秒。固定公开 `common-swifts-24fps.mp4` SHA-256 为 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`，从真实系统 Files provider 进入共享页面。
+- 请求 `7511710F-23D4-458A-854A-FF9F34035326` 在 Home 前记录 `nativeRequestAdmitted` 和 `firstNativeClientUpdate`，backend=`mlx.smolvlm2-500m`。`willResignActive` 后 41.882 ms 记录 `nativeDrainAndLeaseRelease`，再过 1.185 ms 记录 `bridgeCancelled`；`didEnterBackground` 在取消终态后 601.106 ms 才出现。因此可确认取消发生在 inactive 转场期间，不能写成进入 background 后才出现 terminal。
+- 前台恢复后，同一输入以新 request ID `6A411334-E9AD-4FEC-8D62-5DF4D6AD1440` 再次生成，记录新的 native update 和 drain/lease release。规范化报告为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/home-timing-xctest/home-timing-device-report.json`，trace SHA-256 为 `07c99f6d13f6d44266bb9a81e8d244db58c9c0a09f92808806020580bbbfd699`。
+
+本证据关闭 Home 转场取消时序和 tagged native request/backend/drain provenance 两个窄缺口；`inBackgroundTerminalTiming` 仍为 `unverified`。自然质量、可比较 GPU/能耗、持续资源和完整物理触控也仍未验证。
+
 CoreDevice 恢复到 `available (paired)` 后，fresh `test-without-building` 仍 exit **70**；直接查询 lock state 返回 `CoreDeviceError 10003` / `RemotePairingError 1016`（`The device has not been unlocked recently`）。这确认当前只差一次设备解锁，不能归因于 host/picker 代码。
 
 ## 2026-10-25 P9 picker 退场竞态修复与本地回归
