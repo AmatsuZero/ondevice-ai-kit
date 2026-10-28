@@ -2,6 +2,8 @@
 
 日期：2026-10-27。矩阵对应 foundation 分支当前证据快照。`pass-bounded` 表示已有范围内的行为证据，未验证项仍是发布阻断；它不等于最终能力通过。
 
+2026-10-28 收尾裁定：用户要求当前问题记录并后续专项推进，本轮执行 `closed-with-followups`。本表原验收状态全部保留，P11仍 `open/not-ready`；后续动作归入 [F01–F12](foundation-followups.md)，不要求本轮继续清零所有发布阻断。见[收尾记录](roadmap-closure-20261028.md)。
+
 | 能力 | 当前状态 | 已有证据 | 仍未验证或阻断 |
 | --- | --- | --- | --- |
 | Face detection | `pass-bounded` | [benchmark](benchmark.md)、[P11 分组报告](p11-grouped-benchmark.md)、[设备矩阵](device-matrix.md) | iOS 15、Android API26、质量阈值、峰值内存、能耗、长期资源 |

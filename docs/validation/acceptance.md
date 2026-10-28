@@ -1,8 +1,10 @@
 # Foundation 验收记录
 
-更新日期：2026-10-27（保留分包历史证据）。工作分支 `feat/sdk-foundation`；代码提交以 git 历史为准。构建日志与本机产物放在忽略目录，不提交模型权重、照片、设备标识或签名材料。
+更新日期：2026-10-28（保留分包历史证据）。工作分支 `feat/sdk-foundation`；代码提交以 git 历史为准。构建日志与本机产物放在忽略目录，不提交模型权重、照片、设备标识或签名材料。
 
 ## 当前统一口径
+
+用户要求遗留问题后续专项推进、本轮尽快收尾；执行状态为 `closed-with-followups`，见[收尾记录](roadmap-closure-20261028.md)。[F01–F12](foundation-followups.md)覆盖全部9项 readiness 能力及分发/审查缺口。P4/P11 原验收保持未完成，发布仍 `open/not-ready`；下面是已冻结证据，不是新的持续执行指令。
 
 基础里程碑仍为 **10/12**：P4 和 P11 未完成。最新 P4 线程校准在当前源码生成的独立 probe 上完成三轮页面退出/重入和同 PID 301 秒 Leaks 录制：三轮窗口新增 687/661/660 次结果，最后页面的 owner、bridge、Compose controller 和 Metal layer 均释放；trace 最终仍有 18×GrOp/2304B live。4097B marker 校准了导出的低32位 thread label，但7个 GrOp label 对应多个不同 kernel thread ID，尚未证明析构/free/TLS 归属。证据见 [P4 AtlasTextOp 调查](p4-atlas-text-cache.md)；不把页面弱引用释放或严格并发门禁升级为零泄漏、最低系统或 P4 完成。
 

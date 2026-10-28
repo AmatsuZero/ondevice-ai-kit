@@ -2,7 +2,14 @@
 
 恢复入口；以最上方最新检查点为准，下方各节保留历史，不是整个项目完成结论。
 
-当前进度：**基础里程碑10/12，P4/P11未完成**。下方5/12均为历史口径，不能用于当前汇报；已批准的SDK/Demo、Android、模型、质量与统一验收范围全部保留，见`docs/validation/roadmap-progress-audit-20261026.md`。
+当前状态：**本轮执行 closed-with-followups；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12及goal active/继续下一包均为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
+
+## 最新收尾 — 2026-10-28 用户要求结束本轮持续执行
+
+- 用户明确要求“存在的问题记录下来，后续专项推进，尽快结尾”。据此停止新增Photos/native取证/模型实施；最终结果见[收尾记录](validation/roadmap-closure-20261028.md)和[专项清单](validation/foundation-followups.md)。每个专项保留问题、证据、恢复输入和退出标准；P4/P11不改成pass，发布门禁不放宽。
+- 交付源码基点为`90d528c60726b4fd3f3ce23690dbb6125816fc91`。收尾包只选择文档与benchmark来源指纹；protected signing工程、身份草稿、相机resource/thread probe共9项本地文件保留，不stage、不commit。原picker计划Task2仍未执行，新增收尾注记记录延期。
+- 接续中仅确认iPhone connected、passcodeRequired=false；未安装/启动测试App、未请求Photos权限、未写入/读取照片。device harness patch因格式验证失败未产生文件，随收尾决定不再重试。不能把可连接/解锁当成EXIF验收。
+- 最终复核只检查文档链接/问题覆盖、readiness来源哈希与grouped报告重算、受保护文件和选择提交范围；不把这些检查称为新产品/设备/完整分支审查。同步沿用已授权的origin+jihu现有分支，不merge、tag或发布。后续按专项编号恢复，勿重新开始历史循环。
 
 ## 最新续接 — 2026-10-28 Video native export cancellation
 
