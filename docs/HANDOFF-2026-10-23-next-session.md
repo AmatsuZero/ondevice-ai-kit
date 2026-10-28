@@ -2,7 +2,15 @@
 
 恢复入口；以最上方最新检查点为准，下方各节保留历史，不是整个项目完成结论。
 
-当前状态：**本轮执行 closed-with-followups；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12及goal active/继续下一包均为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
+当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
+
+## 最新续接 — 2026-10-28 F08 公开自然短视频 native 真机证据
+
+- 当前源码基点 `6b6f4a26c29a5c3e1ea1fec083cc040c539cd951`，只在 ignored 目录生成消费者/validator 的固定自然素材诊断副本，没有修改生产 SDK、普通 Demo、原合成门禁或受保护文件。沿用公共领域 Common swifts 的320×180/24fps/2秒H.264副本，hash `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`；素材和14文件固定模型只放独立App沙盒，不写Photos。
+- iPhone16ProMax/iOS27.0.1，PID29258、runId `78F2A44B-8050-4A56-A404-6F882E1690FD`：success与reentry均输出 `A group of birds fly in formation against a clear blue sky.`；cancel在首update后终止。三轮8帧actual times=`[0,3072,6144,9216,12288,15360,18432,21504]/12288`；clip=2秒、sample span=1.75秒，7项lease/close/输入/清理gate全true。自然质量、时序理解和KMP/Demo交互不据此宣称通过。
+- 证据目录 `artifacts/verification/apple-mlxvlm-natural-video-20261028/`，raw `device-report.json` SHA-256 `049550af32129447a0edf622c7758e1d6dbe9a05de539531ba49b0a4dacfdcec`。专用严格validator通过且拒绝6个篡改负例，原合成报告器测试7/7；签名构建exit0，launch/raw PID与source identity一致。独立verifier仍429，无review结论。
+- **缓存路径更新**：旧 `~/Library/Developer/Xcode/DerivedData/VLMProbe-…/SourcePackages` checkout 已缺失。历史 `artifacts/verification/multimodal-mlx-full-app-9288ac5-20261024/SourcePackages` objects完整但alternate引用失效；复制到本包 `SourcePackages` 后仅修复11个副本路径，12个固定revision/clean前后均通过，锁文件不变。下一构建复用本包缓存，不能继续假设旧DerivedData可用；`apple-mlx/.build/checkouts/mlx-swift` 另有既有dirty submodule，未修改或使用。
+- P11矩阵新增自然视频原始来源，readiness校验23条证据路径/21项来源哈希通过，聚焦回归19/19，当前grouped快照为 `artifacts/verification/p11-grouped-benchmark-20261028-f08/summary.json`；仍9行有gap、3组/2项能力benchmark、open/not-ready，本包不是benchmark样本。下一有区分力的F08工作是复用现有素材验证KMP/Demo短视频输入与UI终态；自然质量另建参考/评分依据。F04等待受控真人朗读窗口，最低系统仍暂缓，不重复既有F06或本次native套件。
 
 ## 最新续接 — 2026-10-28 F06 Apple 非零导出进度取消
 

@@ -1,5 +1,32 @@
 # Apple MLXVLM 短视频可行性
 
+## 2026-10-28 F08 固定公开自然视频真机链路
+
+当前基础里程碑为 **10/12，P4/P11 未完成，发布 open/not-ready**；下方 5/12/P9 active 为历史检查点。本次补齐一个公开自然短视频的 native SDK 输出、帧时间和生命周期证据，不关闭 F08 的自然质量、完整 Demo 交互或资源验收。
+
+- 源码基点 `6b6f4a26c29a5c3e1ea1fec083cc040c539cd951`，iPhone 16 Pro Max（`iPhone17,2`）/iOS 27.0.1，PID `29258`、runId `78F2A44B-8050-4A56-A404-6F882E1690FD` 与 `devicectl` 启动记录一致。使用独立 `io.ondeviceai.mlxvlmconsumer`，没有替换普通 Demo、访问 Photos 或私人媒体。
+- 输入为既有公共领域 [Common swifts](video-sr-backends.md) 的固定前 2 秒派生素材：`artifacts/P7/natural/prepared/input-180p-4x.mp4`，506,617 B、320×180、H.264、24 fps、48 帧、无音轨，SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`。BT.709 是制备时对未声明源色彩的实验约定，不能当作原片色彩实测。素材和模型仅复制到测试 App Documents。
+- 固定模型 revision `fa57db46815177fbdfd65cc85a2b3416a8332268`、runtime `6e338e5df49424fc0db7c6d58184d622f92ed18a`，host 和 App 均逐一验证 14 文件 bytes/SHA-256。prompt 为 `Describe what happens in this video in one brief sentence.`，maxOutputTokens=32。
+- 诊断副本沿用已有 `VideoFixtureSuite`，只固定替换素材名/hash、scope 与输出文件名/UI 文案；生产 SDK、默认消费者和原合成视频 validator 未变。`prepare.py` 以替换次数断言记录转换，`source-inventory.json` 固定原件和副本哈希。
+
+三轮实际结果：
+
+| 运行 | 输出 / 终态 | 首 update / 返回 / drain（ms） |
+| --- | --- | --- |
+| success | `A group of birds fly in formation against a clear blue sky.`，13 updates | 2152.427 / 2372.794 / 2373.168 |
+| cancelled | 首 update 后主动取消，1 update、`CancellationError` | 1906.331 / 1932.627 / 1933.045 |
+| reentry | 同 PID，再次得到上述完整文本，13 updates | 1899.755 / 2119.616 / 2119.985 |
+
+三轮 native decode/adapter 均保留 8 帧，actual CMTime 为 `[0,3072,6144,9216,12288,15360,18432,21504]/12288`（0、0.25、…、1.75 秒），requested 为 `[0,250,…,1750]/1000`。真实 clip duration=`2000/1000`，sample span=`21504/12288`，分别记录；没有补帧或上游二次采样。取消请求在 1907.463 ms，snapshot 清理在 1931.896 ms，返回和 drain 均随后发生。这些为单次诊断观测，含同步报告写盘开销，不是 benchmark/SLA。
+
+7 个生命周期 gate 全 true：生成前/取消后 lease 保护、close 后可 remove、closed 图片/视频拒绝、源文件不变、没有新增残留 owned snapshot。专用严格 validator 固定上述自然素材 hash、8 帧 rational times 和 320×180 尺寸，保留原模型/phase/取消/清理/quality 拒绝门禁；原报告通过，6 个篡改负例均拒绝。原合成视频报告器测试新鲜 **7/7**。自然文本没有固定参考答案/独立评分，`naturalVideoQuality` 仍为 `unverified`；不能由“birds”命中推断编队、天空描述或时序理解准确。
+
+证据在 `artifacts/verification/apple-mlxvlm-natural-video-20261028/`：原始 `device-report.json` SHA-256 `049550af32129447a0edf622c7758e1d6dbe9a05de539531ba49b0a4dacfdcec`，`device-summary.json`、`verification.json`、`source-inventory.json`，以及可复核的 `prepare.py`、`validate_natural_video.py`、`verify_run.py`、build/device argv/log。运行 `rtk proxy python3 artifacts/verification/apple-mlxvlm-natural-video-20261028/verify_run.py` 可复核身份、原始报告、负例、保护哈希和依赖 checkout。
+
+首次构建发现旧 DerivedData 的 SourcePackages checkout 已缺失，停在 fetch 时主动终止（-15）。仓库内历史缓存的 objects 完整，但 11 个 Git alternate 路径仍指向已删除的旧目录；复制到本证据目录并仅修复副本引用后，**12 个固定 revision/clean 核对通过**，离线签名 Debug build exit0，构建后再次通过。锁文件 SHA-256 仍为 `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`，没有升级依赖或重新下载模型。独立 verifier 服务返回429，没有审查结论；F12 保留 pending。两个受保护文件哈希未变。
+
+## 历史检查点
+
 2026-10-23。固定模型/runtime的项目侧8帧adapter、Swift typed video client与native runtime现已完成，并有固定合成视频真机生成/取消/同PID重入/close证据。原上游二次采样8→7失败仍保留；自然质量/资源/最低系统/分发/独立review门槛未关闭。roadmap仍5/12/P9active。
 
 ## 最新结果：固定合成视频设备链路与哈希内存修复
