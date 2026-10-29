@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F08 跨场景素材搜索边界
+
+- 为继续 F08 跨场景 temporal quality，检查了当前仓库和既有验证目录；唯一有明确来源/许可/哈希的自然素材仍是 `tools/probes/natural_video_manifest.json` 中的 Common swifts，不能作为第二个场景重复使用。其他本地视频没有可审计授权，不纳入设备任务。
+- 对 Wikimedia Commons API 的代理路径和 `--noproxy "*"` 直连路径各尝试一次：前者因本机 `127.0.0.1:7897` 代理不可用退出 7，后者因 `commons.wikimedia.org` DNS 失败退出 6。完整尝试、策略和停止点记录在 ignored `artifacts/verification/f08-cross-scene-source-search-20261030/summary.json`；这不是 F08 通过证据。
+- 因此本轮不生成第二场景、不重复已有 temporal run；待有可审计来源和网络后恢复。F08 temporal pair 仍 0/3，P11 仍 `open/not-ready`，F03 最低系统按用户要求暂缓。
+
 ## 最新续接 — 2026-10-30 P11 分组报告的 readiness 来源校验
 
 - 沿用同一 active goal，不替换；开始时 `feat/sdk-foundation`、本地 `origin`、`jihu` 均在 `5f8158261d6ca05907481a7b4ab5f0e207c633ca`。现有 1 项 tracked dirty 与 8 项 untracked 受保护文件的哈希保持不变，未覆盖或暂存。
