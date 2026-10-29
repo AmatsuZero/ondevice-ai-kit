@@ -11,6 +11,8 @@
 - 派生结果 `artifacts/verification/apple-mlxvlm-natural-video-20261028/label-margin/summary.json` SHA-256=`5c801baceb0072f571920c4bd58f05c3a04264f8bc25be07e832dd4019dd4a8b`，raw report SHA-256=`d20d2a4ca2c15480b0ed1d62bf36e00f42443da567fcb49f50b13cc2195f99ec`，tokenizer SHA-256=`5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a`。三组 motion/frozen margin 为 `1.625/1.000`、`1.625/1.375`、`1.750/1.250`；motion 均更高，但 frozen 仍偏向 `ĠMO`。这支持首 token 偏置诊断，不证明完整标签概率、视觉语义或 temporal quality；F08/P11 `observed-failure`、gate `open`、release `not-ready` 与基础10/12不变。
 - 下一步优先级不变：若继续 F08，需静止帧语义或真实完整标签分布/视觉特征观测；不要重复已有六次生成、Snapshot、adapter 或同一 raw report。生产 SDK、普通 Demo 与九项受保护修改未改动。
 - 完整 `tools/tests` 首轮受系统 Ruby 2.6/RVM gem 不兼容及 Swift ModuleCache 写权限影响失败；以已安装 Ruby 3.4 和临时可写 cache 在正常授权环境复跑 **192/192**。`python3 -m py_compile` 与 `git diff --check` 通过。
+- 修改验证文档后已刷新只读 P11 快照来源哈希：`tools/validate_p11_readiness.py` 输出 **9 rows / 40 evidence paths / 38 source hashes / 9 rows with gaps**，`open/not-ready`；`benchmark/p11/grouped-report-manifest.json` 已同步该快照哈希，未把 label-margin 派生诊断加入 benchmark sample。
+- 本轮新增提交 `3704c60`（派生诊断工具/测试/文档）、`bcb7818`（grouped manifest readiness hash）均已普通推送，且 `origin`/`jihu` 回读与本地一致；本段 handoff 更新另形成后续提交。当前无额外暂存的生产改动。
 
 ## 最新续接 — 2026-10-29 F08 iPhone 首 token logits 边界
 
