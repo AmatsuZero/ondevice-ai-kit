@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F09 OrderedCollections workaround 后的 EventSource 门槛
+
+- 同一 active goal 继续，无需替换；工作树 `feat/sdk-foundation`，`project.pbxproj` 和 8 项身份/相机受保护 dirty/untracked 文件未 restore、覆盖、stage 或提交。
+- Swift 上游 issue [#91540](https://github.com/swiftlang/swift/issues/91540) 与 PR [#92814](https://github.com/swiftlang/swift/pull/92814) 对应当前 `OrderedCollections` textual-interface 错误。严格 generic iOS interface 回读中，1.7.5 无 workaround 仍失败；加 `-Xfrontend -disable-module-selectors-in-module-interface` 后 1.7.5 和生产锁定 1.7.3 均退出 0。证据和接口哈希已记录在[分发验证](validation/apple-mlxvlm-distribution.md)的 2026-10-30 节。
+- 在搬移 source consumer 上用同一 workaround 运行 unsigned Release generic iOS archive，`exit=65 / ARCHIVE FAILED`；`OrderedCollections` 不再是首个失败目标，新的首个失败是 `EventSource` 1.5.1 的 `SwiftVerifyEmittedModuleInterface`（`EventSource.EventSource.Event` 与 `AsyncSequence` conform 错误）。原始日志在 ignored `artifacts/verification/f09-interface-workaround-20261030/archive.log`，SHA-256=`0a39797e059c6cb423ec08454d15e291d76199c35ac8051de92cc4653f4800b3`。
+- 结论仍为 F09 `open/not-ready`；没有修改生产 `Package.resolved`、上游 checkout、签名或发布产物。下一步只核对 EventSource 的受支持修复/隔离方案，不重复无参数 archive。
+
 ## 最新续接 — 2026-10-30 P11 committed-tree candidate freeze 刷新
 
 - 最终 GitLab 连接恢复，`feat/sdk-foundation` 在 `origin` 与 `jihu` 均回读为 `9f066081bbd425846c9bb0cd2aaf2e258cdf9467`；下面 F08 节保留首次 TLS/connection reset 的历史尝试，不再是当前同步阻断。

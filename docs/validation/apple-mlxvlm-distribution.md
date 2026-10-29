@@ -75,6 +75,12 @@ cannot convert value of type 'Int' to expected argument type 'Key/Element'
 
 1.7.5 的 host `swift build --product OrderedCollections -Xswiftc -enable-library-evolution` 可以通过，但这不是 iOS textual-interface verification，也不能替代 archive。两次 iOS probe 生成的 textual interface 已分别保存并绑定 SHA-256（1.7.4=`dfd2f79133fd04ebdb4927e2a08cbce7a4f48e72ccb907ba5d51d7ba8e725cdc`，1.7.5=`277d3e46ae5fd72b49077658fe247b15e95da452c849b4d2cb3a87b996d040a1`），原始候选、命令与结果摘要保存在 `artifacts/verification/f09-swift-collections-20261029/summary.json`。因此没有得到受支持的 dependency-only 修复；生产 `apple-mlx/Package.resolved` 保持 1.7.3 且 SHA-256=`e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`，不重跑完整 MLXVLM archive、不关闭 interface verification、不修改上游 checkout。
 
+### 2026-10-30 编译器 workaround 与下一道门槛
+
+Swift 上游 [#91540](https://github.com/swiftlang/swift/issues/91540) 记录了与上述 `OrderedCollections` 诊断吻合的接口打印问题；[#92814](https://github.com/swiftlang/swift/pull/92814) 已合并编译器修复，但当前 Xcode 27.1/Swift 6.4.0 是否包含它没有证据。上游给出的 `-disable-module-selectors-in-module-interface` workaround 在 `/tmp` 隔离副本做了真正的 iOS textual-interface 回读：1.7.5 无参数 `swift-frontend -typecheck-module-from-interface` 失败，仍报 `Element`、`at:`、`Int`；同版加 `-Xfrontend -disable-module-selectors-in-module-interface` 回读退出 0；**生产锁定的 1.7.3** 加同一参数也回读退出 0。生成的三份接口 SHA-256 分别为 `3f7a56daf19a91c0a762500ba4483e6bb4eb38cbf7a66a6cc78145a3d0df7b2d`、`245721868eeda0522fbd1afb3006a8eb8279e623e62eafb64c33b953b538a4cc`、`f03a28f32ab0424800f3a39ee97ca5ccecabb7d49174da93d016f8a02484bc7d`。最初只运行 `swift build` 的尝试未做接口回读，不计通过。
+
+随后用原搬移 source consumer、固定依赖缓存/解析 flags 和同一 workaround 运行 unsigned Release generic iOS archive。结果仍为 **exit 65 / ARCHIVE FAILED**，新的首个失败目标为固定 `EventSource` 1.5.1 的 `SwiftVerifyEmittedModuleInterface`：生成的 `EventSource.swiftinterface` 包含 `EventSource.EventSource.Event`，回读报 `EventSource` 不是 actor `EventSource.EventSource` 的成员类型，并派生 `AsyncSequence` conform 错误。原始日志 SHA-256=`0a39797e059c6cb423ec08454d15e291d76199c35ac8051de92cc4653f4800b3`，保留在 ignored `artifacts/verification/f09-interface-workaround-20261030/archive.log`。这证明单一 OrderedCollections workaround 尚不足以完成增强包 archive；没有改生产 lock、上游 checkout、签名或发布结论。下一步先核对 EventSource 的受支持修复或隔离方案，再继续 binary package/consumer 门槛。
+
 ## Tests、审查与恢复
 
 新 black-box generator 测试初次真实 RED 为缺少 `--portable-source`（2 failures；symlink 拒绝测试当时由 parser 拒绝而通过，不冒称该项独立 RED）。实现后新3/3；含默认 consumer 与基础分发的定向11/11；完整 tools **126/126**；补强 lock/resource 精确比较后的定向6/6、Python py_compile、`git diff --check` 通过。完整 tools 显式使用 `RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`；一次漏设 Ruby 的两个既有分发测试失败已由正确环境通过，不是产品修改。
