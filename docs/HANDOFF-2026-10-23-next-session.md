@@ -6,6 +6,7 @@
 
 ## 最新续接 — 2026-10-30 P11 committed-tree candidate freeze 刷新
 
+- 最终 GitLab 连接恢复，`feat/sdk-foundation` 在 `origin` 与 `jihu` 均回读为 `5007e3f17d1bde1de36b600c40d5357334c0f481`；下面 F08 节保留首次 TLS/connection reset 的历史尝试，不再是当前同步阻断。
 - 从当前 `HEAD=edd5e97591a92ddcc037b667ccc8be37c9843e3c` 重建 committed-tree archive：tree=`bd426c329084000d4c922df76499abf3ebc1bfd6`，tar=`artifacts/verification/p11-candidate-freeze-20261030/sdk-foundation-edd5e97591a9.tar`，SHA-256=`8fc5be132befa4df71db2435438ddd7c0644c55613a7448a6bc6605040147ebd`；`git get-tar-commit-id`、tree 与重复生成逐字节一致。
 - 归档只取 committed tree，八项受保护 untracked 文件均 absent；一项 tracked dirty 的 `project.pbxproj` 只保留提交中的旧版本，不包含工作树修改。SDK/Demo 源码目录相对上一冻结点没有 committed diff。候选摘要留在 ignored `artifacts/verification/p11-candidate-freeze-20261030/summary.json`，状态仍 `not-ready`。
 - 该刷新只关闭候选 SDK 快照的新鲜性检查，不满足 LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型/PAD、iOS15/API26、统一质量/资源报告等阻断项；P11 仍 `open/not-ready`。
@@ -15,7 +16,7 @@
 - 为继续 F08 跨场景 temporal quality，检查了当前仓库和既有验证目录；唯一有明确来源/许可/哈希的自然素材仍是 `tools/probes/natural_video_manifest.json` 中的 Common swifts，不能作为第二个场景重复使用。其他本地视频没有可审计授权，不纳入设备任务。
 - 对 Wikimedia Commons API 的代理路径和 `--noproxy "*"` 直连路径各尝试一次：前者因本机 `127.0.0.1:7897` 代理不可用退出 7，后者因 `commons.wikimedia.org` DNS 失败退出 6。完整尝试、策略和停止点记录在 ignored `artifacts/verification/f08-cross-scene-source-search-20261030/summary.json`；这不是 F08 通过证据。
 - 因此本轮不生成第二场景、不重复已有 temporal run；待有可审计来源和网络后恢复。F08 temporal pair 仍 0/3，P11 仍 `open/not-ready`，F03 最低系统按用户要求暂缓。
-- 本节 handoff 提交 `daf1ff4` 已推送并回读 GitHub `origin`；GitLab `jihu` 在同步脚本预检和单独重试中分别返回 TLS `SSL_ERROR_SYSCALL` 与 connection reset，当前仍停在 `6f1cdec`。详见同目录 ignored `sync-summary.json`，恢复网络后只需普通 fast-forward 重试。
+- 本节 handoff 的首次提交 `daf1ff4` 先只推送到 GitHub；GitLab 曾在预检和单独重试中返回 TLS `SSL_ERROR_SYSCALL` 与 connection reset，随后在 F12 提交同步时恢复并已追平到 `5007e3f`。ignored `sync-summary.json` 保留失败尝试，当前不再阻断同步。
 
 ## 最新续接 — 2026-10-30 P11 分组报告的 readiness 来源校验
 
