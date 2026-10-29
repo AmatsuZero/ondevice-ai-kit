@@ -36,6 +36,8 @@
 
 首 token 前 Home 诊断进一步补齐后台 terminal：PID `31298` 在 `.videoPrepared` 后、首个文本 update 前触发 Home；`didEnterBackground` 后 106.301 ms 才出现 native drain，107.359 ms 进入 `CANCELLED`，前台重入成功。规范化 raw `artifacts/verification/apple-mlxvlm-natural-video-20261028/pretoken-home-xctest/device-report-pretoken.json` SHA-256=`bdf65e038122c9b63fce6801eb9da33538de4212b33ae14ffe051a4a1a534774`；该窄项关闭，但跨素材/系统和其他资源质量门槛仍开放，不加入 grouped 样本。
 
+静止帧场景语义探针在同一 iPhone 的三个 frozen control 上得到 subject/scene **3/3 pass-bounded**；原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/static-semantic/device-report.json` SHA-256=`31eb195e375c123c39d5133636609cad835af80d0a80408af7912e53fcf43e01`，bounded summary 已纳入 readiness 来源哈希。这只说明固定静止帧的飞鸟/天空语义可读；temporal exact-label pair **0/3** 与跨场景 natural temporal quality gap 保持不变，不加入 grouped benchmark。
+
 后续 cache 归因正式 PID 31212 仍为12/12预期终态、全部cleanup gates通过：close后无干预等待2秒 RSS 1,153,712,128 B、MLX cache 1,086,181,704 B；单次clearCache后等时RSS 137,428,992 B、active 108 B/cache 40 B。约1,016,283,136 B下降支持本固定workload的大部分残留为可回收cache；第一轮cache已存在而RSS较低，不能简单等同两个计数。raw `artifacts/verification/mlxvlm-memory-attribution-20261029/device-report.json` SHA-256=`353ab172cba08aaefd4b8a5d9fe968d79e7d4a60089b0e4c4407f69f4fc98e31`；详见[归因方法与限制](multimodal-video-demo.md#2026-10-29-mlx-cache-归因与等时等待对照)。不改生产缓存策略，不关闭全部泄漏、GPU/energy/预算或跨素材资源gap，不加入grouped样本。
 
 2026-10-28 的原生 mux 专项先在独立诊断 App 中连续 3 轮观察到 iPhone `waiting → exporting → cancelled`；随后使用资源哈希一致的 31,608,443 字节 HEVC fixture 完成非零进度真机 3/3。取消点进度为 5.33%–7.47%，当时已生成 943–1,347 字节部分文件；调用方收到 `CancellationError` 时文件均已删除，输入哈希不变，3 轮同进程 AAC 重入 payload 相同。该子项已关闭；Android 后端、主观质量、GPU/能耗和最低系统仍开放，因此 Video SR 状态与 P11 `open/not-ready` 不变。iOS15/API26运行验收按用户要求暂缓，不视为通过。

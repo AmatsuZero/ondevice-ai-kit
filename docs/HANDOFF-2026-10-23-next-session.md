@@ -12,6 +12,11 @@
 - 本轮专项测试 **4/4**，完整 `tools/tests` 在 Ruby 3.4 与临时可写 Swift 缓存下 **196/196**，`py_compile` 与 `git diff --check` 通过。CoreDeviceService 首次读取报告发生初始化超时，使用授权的 `devicectl device copy from` 重试后成功；不要把此前超时当作 App 失败。提交 `71bb8bb` 已同步 `origin` 与 `jihu`，原始报告、summary、install/launch/copy receipts 均为 ignored 证据；生产 SDK、普通 Demo、九项受保护 dirty/untracked 文件未修改。
 - 下一步：若继续 F08，扩展不同来源/场景或完整标签概率/视觉特征观测；不要重复 Snapshot、adapter 或同一 temporal 生成任务。P11 仍保持 `open/not-ready`。
 
+## 最新续接 — 2026-10-29 P11 readiness 证据索引刷新
+
+- 静态语义 raw report 与 bounded summary 已加入 `multimodal-apple` 的 P11 evidence/source-hash 索引；不加入 grouped benchmark 样本，也不改变任何 unverified gap。`tools/validate_p11_readiness.py` 当前校验 **9 rows / 42 evidence paths / 40 source hashes / 9 rows with gaps**，`p11Gate=open`、release=`not-ready`。
+- `tools.tests.test_p11_readiness` 与 `tools.tests.test_p11_grouped_report` **19/19** 通过；状态矩阵已记录静态语义边界，`benchmark/p11/grouped-report-manifest.json` 已更新 readiness SHA-256=`64c1dfcd4718df968c600d4f0ba6718265dd2f14287505468c62d6a8c8805e42`。受保护 dirty/untracked 文件仍未暂存或修改。
+
 ## 最新续接 — 2026-10-29 F08 选定标签前缀 margin 派生诊断
 
 - 同一 active goal 继续，未替换 goal。当前工作树 `feat/sdk-foundation`；本轮开始时本地、`origin` 与 `jihu` 的该分支已通过普通 fast-forward push/回读核对为 `a45b3f718351fa3c018956d0fd131e24df51fdc5`。九项受保护 dirty/untracked 文件哈希仍 **9/9** 匹配，未 restore、覆盖或 stage。
