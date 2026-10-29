@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F12 候选范围与证据重建审计
+
+- 同一 goal 继续保持 `active`，无需替换或新建 goal。对冻结 SDK 提交 `7b9f7fc75772b61948d211d72ec2e1e221362591` 到当前 `HEAD=cc438de8e32eec3f01d02d64bf7e6585f44ec2a3` 做只读范围核对：49 个提交路径全部位于文档、工具、探针、脚本或 benchmark；生产 SDK、KMP binding、Demo 和构建配置没有提交差异。既有 committed-tree archive 的 SHA-256=`6a2cb8afd895b13fa281d15f55046b3f263a1882aebd8ce31dff563bc3b2b666`，内嵌 tar commit 与冻结提交一致。
+- 当前 readiness validator 重新读取真实文件通过：9 rows、38 evidence paths、36 source hashes、9 rows with gaps；P11 gate 仍为 `open`，release 仍为 `not-ready`。`tools.tests.test_p11_readiness` 与 `tools.tests.test_p11_grouped_report` 为 **19/19**。
+- 两个最新正式诊断均可确定性重建：MLX cache attribution `summary.json` 与 validator 输出逐字节一致；首 token 前 Home report 与 validator 重建结果一致，报告中 10/10 source/evidence hashes 匹配。受保护 dirty/untracked 文件的 9/9 哈希保持不变。
+- 该审计只关闭候选范围/报告可重建性子项，不关闭统一 release candidate、独立 reviewer、P4/P11、最低系统、Android 授权模型/native drain、Face Identity 生产模型/PAD、自然 temporal quality、GPU/energy 或发布资源预算。独立 reviewer 若无返回仍按未验证处理。
+
 ## 最新续接 — 2026-10-29 F08 首 token 前 Home 后台 terminal
 
 - 在 ignored 隔离 Home timing 副本中，以真实 Files provider 固定公开视频，在 `.videoPrepared` 后、首个文本 update 前触发系统 Home；保持生产 `willResignActive` 取消策略，不延迟 native。iPhone 16 Pro Max / iOS 27.0.1 PID `31298`，XCTest **1/1、0 failures、0 skips**。
