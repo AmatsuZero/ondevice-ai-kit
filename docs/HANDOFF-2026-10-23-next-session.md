@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 iPhone 首 token logits 边界
+
+- 同一 active goal 直接 resume，不替换；工作树 `feat/sdk-foundation`，HEAD=`608b22ac838432979c6217d374468c47dbe98535`。隔离 `io.ondeviceai.logitdebug` 探针在 iPhone 16 Pro Max / iOS 27.0.1 已解锁设备运行，PID `31609` 与 launch receipt 一致。固定本地模型权重及六段公开 fixture 仅放该 App 沙盒；不使用镜像、Photos、私人媒体或文字生成。unsigned generic 与 signed device build 均 exit0/`BUILD SUCCEEDED`；首次无冻结 package cache 的受限构建卡在 SwiftPM 远程 clone，已终止并用现有 `SourcePackages` 成功重建。
+- 正式原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/logit-boundary/device-report.json` SHA-256=`d20d2a4ca2c15480b0ed1d62bf36e00f42443da567fcb49f50b13cc2195f99ec`。七行含六个固定 motion/frozen 任务及一个 `motion-0-2` 重复 run；同输入两次完整 logits hash 一致，三组 motion/frozen hash 均不同，shape 全为 `[1,1,49280]`。六行 top-5 token ID 排序均为 `15720,5022,26332,372,625`，首位 tokenizer token `ĠMO`；各 pair 数值有差异但排序不变。同目录 `validate.py` 为 `pass-bounded`，含 PID/manifest/source/model hash 与篡改负例。
+- 这关闭固定输入在首 token logits 边界“完全相同”的疑点，但不证明 vision encoder 的正确运动语义或 control 答案。原正式六次 `MOVING.`、pair 0/3、`observed-failure`、F08/P11 `open/not-ready` 和基础10/12不变。下一步可用静止帧语义任务或标签概率/视觉特征区分模型能力与任务设计，不重复同一生成。九项受保护 dirty 文件继续保留；goal active。
+
 ## 最新续接 — 2026-10-29 F08 iPhone prepared tensor 边界
 
 - 沿生产调用链 `MLXVLMVideoSnapshot.frames → MLXVLMVideoInputAdapter.prepare → LMInput.image.pixels` 构建独立签名 `io.ondeviceai.tensordebug` App；adapter 与 tokenizer loader 副本分别和生产源 SHA-256 `5f15491e843973f473f04abcd83ced284c64513a4daa232a4f5b849e075c7751`、`2c8f0958d7764b09cba527d123d13744de18b8478cd68fd5812143fcdf520084` 一致。设备只 provision 4.6MB tokenizer/config 和六个固定 fixture，没有复制或加载 968MB 模型权重，也没有执行生成。

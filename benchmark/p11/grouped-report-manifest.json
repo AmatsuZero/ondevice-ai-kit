@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "readiness": {
     "path": "artifacts/verification/p11-readiness-20261027/summary.json",
-    "sha256": "fef6b17fd04f39571b0048fc45be78392821db5681bf3d3d9712f099c0127df3"
+    "sha256": "ed35a0ec75bfc13a78851d91c275aa5ea8849cb16df5cfe988f62636a19a8bf1"
   },
   "sources": [
     {

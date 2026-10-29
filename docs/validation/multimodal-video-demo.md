@@ -1,5 +1,11 @@
 # Typed video Demo input / state / host checkpoint
 
+## 2026-10-29 iPhone 首 token logits 边界
+
+在已解锁的 iPhone 16 Pro Max / iOS 27.0.1 上，隔离签名 App `io.ondeviceai.logitdebug` 读取同一六段固定公开 fixture 和本地固定 SmolVLM2 权重，调用生产 Snapshot、与生产源哈希相同的 video adapter，再直接观察 `LanguageModel.prepare` 返回的首 token logits；没有运行文字生成或改变正式评分。设备 PID `31609` 与 launch receipt 相同。原始七行报告位于 `artifacts/verification/apple-mlxvlm-natural-video-20261028/logit-boundary/device-report.json`，SHA-256=`d20d2a4ca2c15480b0ed1d62bf36e00f42443da567fcb49f50b13cc2195f99ec`；同目录 `validate.py` 核对 fixture、模型文件、生产源码副本、PID 和原始行，并拒绝篡改的 logits hash。
+
+`motion-0-2` 的第二次同输入 prepare 与第一次完整 float logits hash 完全相同。三组 motion/frozen 的完整 logits hash 均不同，说明差异已到达模型首 token 分布。但六行 top-5 token ID 的排序都相同：`15720, 5022, 26332, 372, 625`；固定 tokenizer 中首位 `15720` 对应 `ĠMO`，而非 frozen control 的 `STILL`。各 pair 的 top-5 logit 数值有变化，排序没有变化。此证据不证明视觉编码器正确理解运动，也不证明任一 control 被正确判别；正式六次 raw output `MOVING.`、temporal pair **0/3** 和 `observed-failure` 保持不变。下一步若定位质量问题，应测试模型是否能从静止帧任务中区分语义，或观察选定标签概率/视觉特征，不再重复相同生成。
+
 ## 2026-10-29 temporal 评分行与原始报告绑定修复
 
 `tools/mlxvlm_temporal_task_set.py` 原先只校验复制行声明的 raw-report SHA-256，没有核对复制行内容。保留真实 `device-report-v2.json` 不变、仅把复制行输出改成期望标签时，旧工具可将 `observed-failure` 误汇总为 `pass-bounded`。现在要求原始报告是成功的完整 nine-row run，并逐行核对完整内容；输出、耗时、run ID、设备或源码身份的副本篡改均拒绝。输出路径也不能覆盖 report、manifest、source report 或其 symlink/hardlink。
