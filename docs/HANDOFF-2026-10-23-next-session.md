@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08/F11 MLX cache 归因
+
+- 同一 goal active，工作树 `feat/sdk-foundation`，生产源码和9项保护dirty文件保持不变。正式设备 PID `31212`，固定公开视频/模型 12轮（8 success、4 cancelled）、drain/close/lease/临时清理全部通过。
+- 隔离 consumer 新增 MLX snapshot 和关闭后单次clearCache。close后RSS `1,153,695,744 B`、MLX active `148 B`/cache `1,086,181,704 B`；无干预等待2秒RSS `1,153,712,128 B`，MLX计数不变；clearCache后立即RSS `137,347,072 B`/cache0，再2秒RSS `137,428,992 B`、active108/cache40。相对无干预对照RSS下降 `1,016,283,136 B`，支持本workload约1GB主要残留是可回收cache。第一轮cache已约1.086GB但RSS较低，不把两者等同，也不声称所有泄漏/资源预算通过。
+- 正式 raw `artifacts/verification/mlxvlm-memory-attribution-20261029/device-report.json` SHA-256=`353ab172cba08aaefd4b8a5d9fe968d79e7d4a60089b0e4c4407f69f4fc98e31`；同目录 `summary.json`、`source-manifest.json`、`EXPERIMENT.md`、validator及8项合同测试。初版generic unsigned和signed build通过，加入等待对照后的signed build通过；最终PID与launch receipt匹配。两份pilot独立保留，正式结论只用等待对照版本。raw/source/build仍ignored，不纳入源码提交。
+- 新鲜 readiness 校验为 **9 rows / 35 evidence paths / 33 source hashes / 9 rows with gaps**；P11 focused tests **19/19**，grouped报告重算逐字节一致。研究子代理本轮429无结果，不计独立review；已按实际源码与报告完成作者复核。
+- 不修改生产SDK的全局缓存策略。下一步先确定资源预算和缓存所有权/多client影响，再决定是否提供显式维护策略；不重复相同诊断。其余F08自然temporal quality仍有失败、GPU/energy/跨素材资源开放，F11/P11 `open/not-ready`，基础里程碑仍10/12。F04受控朗读窗口尚无，最低系统设备仍暂缓。
+
 ## 最新续接 — 2026-10-29 F08/F11 固定自然视频持续 RSS 观察
 
 - 当前 Codex goal 仍为同一 active 目标，继续 `goal resume`，无需替换；工作树为 `feat/sdk-foundation`。原有 `project.pbxproj`、身份草稿与相机 resource/thread probes 等受保护 dirty 文件未 restore、覆盖、stage 或提交。

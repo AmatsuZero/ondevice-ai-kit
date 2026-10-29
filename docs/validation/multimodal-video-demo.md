@@ -167,6 +167,25 @@ Roadmap 仍 **5/12、P9 active**；本轮 `git diff --check` 通过，所有既�
 
 进程 RSS 由第一轮前 40,681,472 B，在首轮 `drain` 后为 136,200,192 B，第二轮取消并 drain 后阶跃至 1,141,293,056 B，第 12 轮 `drain` 后为 1,152,892,928 B，`close` 后为 1,152,909,312 B。首轮到末轮增加 **1,016,692,736 B**，但第二轮到末轮只增加 **11,599,872 B**。原始设备报告为 `artifacts/verification/mlxvlm-sustained-video-20261029/device-report.json`，SHA-256=`0408fb19a30a5c4506fa5c92971453955deb5cb8c0360f19f0f2d53183007012`；逐轮 RSS 和有界结论在同目录 `summary.json`。这是一次同 PID、单素材的 `mach_task_basic_info` 进程驻留内存观察，不能据此判定内存泄漏根因、GPU 专用内存或能耗，也没有建立发布资源预算。第二轮阶跃及后续小幅增长需要单独定位；P11 `open/not-ready` 不变，且不把这 12 轮计入合成图 grouped benchmark 的样本。
 
+## 2026-10-29 MLX cache 归因与等时等待对照
+
+在新的 ignored 隔离 consumer `artifacts/verification/mlxvlm-memory-attribution-20261029/consumer` 复用固定模型、公开视频及 12 轮 success/cancel/reentry 流程。只增加 MLX `Memory.snapshot()` 计数与一次关闭后的 `Memory.clearCache()` 诊断；未修改生产 SDK、普通 Demo、签名工程或生产 lock，未读取/写入 Photos。固定 `mlx-swift` 0.32.3 / commit `19601207e9a0de51e03ee6ec0c3c5f3784275075` 的源码说明 MLX cache 是可回收 buffer，可能表现为系统 RSS。没有读写 `cacheLimit`、没有重置 peak、没有逐轮清缓存。
+
+正式 iPhone 16 Pro Max / iOS 27.0.1 运行 PID `31212`，8 次成功、4 次取消及全部 7 项生命周期 gate 通过。关闭后先记录，再等待 2 秒作为无干预对照，随后清缓存一次并立即/2 秒后记录：
+
+| 边界 | 进程 RSS / B | MLX active / B | MLX cache / B |
+| --- | ---: | ---: | ---: |
+| close 后 | 1,153,695,744 | 148 | 1,086,181,704 |
+| close 后等待 2 秒，无清理 | 1,153,712,128 | 148 | 1,086,181,704 |
+| 单次 clearCache 后立即 | 137,347,072 | 148 | 0 |
+| clearCache 后等待 2 秒 | 137,428,992 | 108 | 40 |
+
+无干预等待期间 RSS 增加 16,384 B；clearCache 后等时采样相对对照下降 **1,016,283,136 B**。这支持本次固定 workload 的主要 retained RSS 来自可回收 MLX buffer cache，而不是约 1 GB 的活跃数组。第一轮 drain 时 cache 已约 1.086 GB、RSS 仅 232,964,096 B，因此 cache 与 RSS 不一一对应，不能把第二轮 RSS 阶跃直接解释为第二轮才分配缓存。MLX active+cache 不能与 RSS 相加；累计 active peak 1,737,512,660 B 也不是独立 GPU 专用内存峰值。
+
+原始报告 `artifacts/verification/mlxvlm-memory-attribution-20261029/device-report.json` SHA-256=`353ab172cba08aaefd4b8a5d9fe968d79e7d4a60089b0e4c4407f69f4fc98e31`，正式启动 PID 与 receipt 匹配；同目录 `summary.json`/`source-manifest.json` 保留算术、模型/代码/固定依赖身份，`validate.py` 检查轮次、PID、素材、cleanup、MLX字段、累计peak和等待对照。校验器 8 项合同测试通过。初版 unsigned generic iOS build 与 signed device build 成功，加入等待对照后的 signed device build 再次成功。前两份无等时对照的 pilot 报告单独保留，不作为最终归因来源；首次 pilot 的输入曾在启动后被重新复制，正式运行在输入复制完成后启动。
+
+结论范围仍有限：没有证明进程所有内存无泄漏、约 137 MB 残留的构成、跨素材持续资源、能耗或发布资源预算；108 B active/40 B cache 的小额残留亦未解释。清缓存是进程级诊断操作，未变成生产 SDK 生命周期策略；共享 MLX 使用方、性能/重入影响尚未评估。F08/F11 保持 open，P11 `open/not-ready`，该报告不进入 grouped benchmark 样本。下一步应先制定资源预算与缓存所有权策略，再决定生产行为；不重复同构取证，也不把诊断清理直接加入 SDK close。
+
 CoreDevice 恢复到 `available (paired)` 后，fresh `test-without-building` 仍 exit **70**；直接查询 lock state 返回 `CoreDeviceError 10003` / `RemotePairingError 1016`（`The device has not been unlocked recently`）。这确认当前只差一次设备解锁，不能归因于 host/picker 代码。
 
 ## 2026-10-25 P9 picker 退场竞态修复与本地回归
