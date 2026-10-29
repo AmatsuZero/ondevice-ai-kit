@@ -6,8 +6,8 @@
 
 ## 最新续接 — 2026-10-30 P11 committed-tree candidate freeze 刷新
 
-- 最终 GitLab 连接恢复，`feat/sdk-foundation` 在 `origin` 与 `jihu` 均回读为 `5007e3f17d1bde1de36b600c40d5357334c0f481`；下面 F08 节保留首次 TLS/connection reset 的历史尝试，不再是当前同步阻断。
-- 从当前 `HEAD=edd5e97591a92ddcc037b667ccc8be37c9843e3c` 重建 committed-tree archive：tree=`bd426c329084000d4c922df76499abf3ebc1bfd6`，tar=`artifacts/verification/p11-candidate-freeze-20261030/sdk-foundation-edd5e97591a9.tar`，SHA-256=`8fc5be132befa4df71db2435438ddd7c0644c55613a7448a6bc6605040147ebd`；`git get-tar-commit-id`、tree 与重复生成逐字节一致。
+- 最终 GitLab 连接恢复，`feat/sdk-foundation` 在 `origin` 与 `jihu` 均回读为 `9f066081bbd425846c9bb0cd2aaf2e258cdf9467`；下面 F08 节保留首次 TLS/connection reset 的历史尝试，不再是当前同步阻断。
+- 从当前 `HEAD=9f066081bbd425846c9bb0cd2aaf2e258cdf9467` 重建 committed-tree archive：tree=`58f27c795a7a5a90a83eab30a95a1dbc801b18e5`，tar=`artifacts/verification/p11-candidate-freeze-20261030/sdk-foundation-9f066081bbd.tar`，SHA-256=`c81cdf13b01abdfd7b2404648f949d1107d3fabd2ccf9e7b3ff77749cb658ae2`；`git get-tar-commit-id`、tree 与重复生成逐字节一致。
 - 归档只取 committed tree，八项受保护 untracked 文件均 absent；一项 tracked dirty 的 `project.pbxproj` 只保留提交中的旧版本，不包含工作树修改。SDK/Demo 源码目录相对上一冻结点没有 committed diff。候选摘要留在 ignored `artifacts/verification/p11-candidate-freeze-20261030/summary.json`，状态仍 `not-ready`。
 - 该刷新只关闭候选 SDK 快照的新鲜性检查，不满足 LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型/PAD、iOS15/API26、统一质量/资源报告等阻断项；P11 仍 `open/not-ready`。
 
