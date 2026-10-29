@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 P11 committed-tree candidate freeze 刷新
+
+- 从当前 `HEAD=edd5e97591a92ddcc037b667ccc8be37c9843e3c` 重建 committed-tree archive：tree=`bd426c329084000d4c922df76499abf3ebc1bfd6`，tar=`artifacts/verification/p11-candidate-freeze-20261030/sdk-foundation-edd5e97591a9.tar`，SHA-256=`8fc5be132befa4df71db2435438ddd7c0644c55613a7448a6bc6605040147ebd`；`git get-tar-commit-id`、tree 与重复生成逐字节一致。
+- 归档只取 committed tree，八项受保护 untracked 文件均 absent；一项 tracked dirty 的 `project.pbxproj` 只保留提交中的旧版本，不包含工作树修改。SDK/Demo 源码目录相对上一冻结点没有 committed diff。候选摘要留在 ignored `artifacts/verification/p11-candidate-freeze-20261030/summary.json`，状态仍 `not-ready`。
+- 该刷新只关闭候选 SDK 快照的新鲜性检查，不满足 LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型/PAD、iOS15/API26、统一质量/资源报告等阻断项；P11 仍 `open/not-ready`。
+
 ## 最新续接 — 2026-10-30 F08 跨场景素材搜索边界
 
 - 为继续 F08 跨场景 temporal quality，检查了当前仓库和既有验证目录；唯一有明确来源/许可/哈希的自然素材仍是 `tools/probes/natural_video_manifest.json` 中的 Common swifts，不能作为第二个场景重复使用。其他本地视频没有可审计授权，不纳入设备任务。
