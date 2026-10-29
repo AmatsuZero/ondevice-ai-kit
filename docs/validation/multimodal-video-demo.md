@@ -6,6 +6,12 @@
 
 新回归先 RED 后 GREEN，聚焦 38/38、完整 tools 186/186 通过。真实 evidence 经新工具重建与原 summary 逐字节一致：semantic 1/3、temporal pair 0/3、`observed-failure`；没有修改评分 rubric、原始报告或生产行为，不把格式失败改写为运动感知通过。独立 reviewer 因模型容量不足未返回结论，审查缺口保留。P11 继续 `open/not-ready`。
 
+### 失败模式分解（诊断，不改变正式评分）
+
+六个 temporal raw output 都是 `MOVING.`。正式 exact-label 结果为 **0/6**，因为末尾句号使输出不等于 `MOVING` 或 `STILL`。在单独的诊断报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/temporal/failure-mode-diagnosis.json` 中，仅去掉末尾标点而不改变正式评分：三个 motion window 为 `MOVING` **3/3**，三个 frozen control 仍为 `MOVING`、期望 `STILL` **0/3**，因此控制片段判别仍失败。
+
+这把两个可观察现象分开：模型对 motion 输入的标签意图在宽松诊断下均为 `MOVING`，但没有区分 repeated-first-frame control；正式合同仍同时记录格式遵循失败。该分解仍受固定 prompt、同一来源和诊断性标点归一化影响，不能当作纯运动感知指标，也不提升 temporal quality 或 P11。
+
 ## 2026-10-28 真机 Home 后台取消与前台重入
 
 复用当前 MLX Demo 验证副本和公开 `common-swifts-24fps.mp4`，在 iPhone 16 Pro Max / iOS 27.0.1 上运行独立 XCTest `testNaturalVideoOSBackgroundCancellationAndReentry`。测试从真实系统 Files provider 选择视频，等待共享页面的 `RUNNING` 与非空 update 后按系统 Home，确认 App 状态为后台或后台挂起；回到前台后状态为 `CANCELLED`，随后1秒观察窗口内没有自动重启，再次使用同一输入生成成功，输出 backend=`mlx.smolvlm2-500m`。测试 **1/1、0 failures、0 skips**，耗时 31.659 秒；`build-for-testing` 与 `test-without-building` 均成功。

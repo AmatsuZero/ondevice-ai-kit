@@ -4,12 +4,19 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 temporal 失败模式分解
+
+- 对固定 raw `device-report-v2.json` 的六个 temporal 输出逐行复核：全部为 `MOVING.`；正式 exact-label 为 0/6。仅为诊断去掉末尾标点后，motion 3/3 为 `MOVING`，frozen control 0/3 为期望 `STILL`；诊断报告位于 `artifacts/verification/apple-mlxvlm-natural-video-20261028/temporal/failure-mode-diagnosis.json`，SHA-256=`370a392590f2ab3e10a5b63cdd01d82e5875cac693d779e4c9256ac703a296ca`。
+- 该结果把输出格式问题与 motion/frozen control 区分失败分开记录，但仍是固定 prompt/同源场景的诊断，不能宣称纯运动感知或自然 temporal quality。正式 summary、P11 gate 和 `observed-failure` 结论不变；不重跑同一真机任务集。
+
+
 ## 最新续接 — 2026-10-29 F08 temporal 原始行绑定修复
 
 - 根因复现：保持真实 raw-report 不变，只篡改 copied evidence 的六个输出为期望标签，旧 temporal validator 会从 `observed-failure` 错判为 `pass-bounded`。现在对成功完整 nine-row raw report 逐行核对内容，并禁止输出覆盖任何输入及 symlink/hardlink；严格 MOVING/STILL rubric、模型/生产SDK/Demo 均未改动。
 - 新回归先 RED（12 个子用例失败，无 errors）后 GREEN；聚焦38/38、完整 tools **186/186**。完整套件首次两个 Swift 测试因用户 ModuleCache 写权限失败，正常授权环境复跑后全部通过；不隐瞒首轮环境失败。
 - 真实 temporal evidence 经新工具重建与原 summary 逐字节一致，semantic1/3、temporal pair0/3、`observed-failure` 保持。未重跑相同真机输入，未篡改 raw/summary，不提升 F08 或 P11。独立 code-reviewer 返回 `Selected model is at capacity`，没有审查结论；保留 F12 缺口。
 - 下一步继续区分 exact-label instruction following 与 motion perception，或推进资源预算/缓存所有权设计；现有失败不放宽评分，不新增发布门槛。受保护dirty文件继续保留，goal仍active。
+
 
 ## 最新续接 — 2026-10-29 F12 候选范围与证据重建审计
 
