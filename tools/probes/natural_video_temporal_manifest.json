@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "bytes": 838446,
+    "sourceSha1": "1f4e81afff673d66e690008d337ecb81cc37e0d2",
+    "sourceSha256": "29cd840505e5b4e4a981888b3752c15f47e3801481a7eba7be4b46d7339f9f0b"
+  },
+  "colorBasis": "assumed-bt709-for-unspecified-source",
+  "windows": [
+    {
+      "taskId": "motion-0-2",
+      "pairId": "pair-0",
+      "role": "motion",
+      "start": 0,
+      "end": 2
+    },
+    {
+      "taskId": "motion-2-4",
+      "pairId": "pair-1",
+      "role": "motion",
+      "start": 2,
+      "end": 4
+    },
+    {
+      "taskId": "motion-4-6",
+      "pairId": "pair-2",
+      "role": "motion",
+      "start": 4,
+      "end": 6
+    }
+  ]
+}
