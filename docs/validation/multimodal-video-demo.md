@@ -12,6 +12,12 @@
 
 这把两个可观察现象分开：模型对 motion 输入的标签意图在宽松诊断下均为 `MOVING`，但没有区分 repeated-first-frame control；正式合同仍同时记录格式遵循失败。该分解仍受固定 prompt、同一来源和诊断性标点归一化影响，不能当作纯运动感知指标，也不提升 temporal quality 或 P11。
 
+### 原生采样边界核对
+
+在 macOS 27.2 的隔离探针中直接编译生产 `MLXVLMVideoSnapshot.swift`，对同一六个 fixture 做 AVFoundation 解码。六行均完成：每个 motion window 的 8 个采样帧有 8 个唯一 RGBA 哈希；每个 frozen control 的 8 个采样帧只有 1 个唯一哈希；三对 motion/control 的首帧像素哈希一致。实际时间均为 `0, 0.25, …, 1.75` 秒，snapshot close 后临时副本目录全部移除，源文件保持不变。报告为 `artifacts/verification/temporal-native-frames-20261029/report.json`，SHA-256=`53fd6203ee5d71e194d99193eb66bace7a7009ddeeb066497785b32d34032f2b`。
+
+这说明固定 motion/frozen 差异在本次 macOS 原生采样边界得以保留。它不证明物理 iPhone 解码、MLX prepared tensor 或模型感知，不能据此将真机 0/3 归因到模型；正式 `observed-failure` 与 P11 结论不变。
+
 ## 2026-10-28 真机 Home 后台取消与前台重入
 
 复用当前 MLX Demo 验证副本和公开 `common-swifts-24fps.mp4`，在 iPhone 16 Pro Max / iOS 27.0.1 上运行独立 XCTest `testNaturalVideoOSBackgroundCancellationAndReentry`。测试从真实系统 Files provider 选择视频，等待共享页面的 `RUNNING` 与非空 update 后按系统 Home，确认 App 状态为后台或后台挂起；回到前台后状态为 `CANCELLED`，随后1秒观察窗口内没有自动重启，再次使用同一输入生成成功，输出 backend=`mlx.smolvlm2-500m`。测试 **1/1、0 failures、0 skips**，耗时 31.659 秒；`build-for-testing` 与 `test-without-building` 均成功。

@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 原生视频采样边界
+
+- 用生产 `MLXVLMVideoSnapshot.swift` 原文件构建隔离 macOS 27.2 探针，对六个 temporal fixture 完成 AVFoundation 解码：motion 每段8个唯一采样帧，frozen 每段1个唯一帧；三对首帧 RGBA 哈希一致；实际采样时间均为 `0,0.25,…,1.75` 秒；snapshot 临时目录全部清理且源文件未变。
+- 报告 `artifacts/verification/temporal-native-frames-20261029/report.json` SHA-256=`53fd6203ee5d71e194d99193eb66bace7a7009ddeeb066497785b32d34032f2b`。首次受限沙箱运行返回 `invalidInput`/系统查询拒绝，正常授权环境同一二进制复跑完成6/6；没有修改生产源码或fixture。
+- 只证明本机原生采样保留 motion/frozen 差异，不证明物理 iPhone 解码、MLX tensor 或模型感知；不能据此归因真机0/3。下一步若继续此调查，需要有区分力的下游输入边界证据，不重复相同 raw 输出；正式 temporal `observed-failure`、P11 `open/not-ready` 和 goal active 不变。
+
 ## 最新续接 — 2026-10-29 F08 temporal 失败模式分解
 
 - 对固定 raw `device-report-v2.json` 的六个 temporal 输出逐行复核：全部为 `MOVING.`；正式 exact-label 为 0/6。仅为诊断去掉末尾标点后，motion 3/3 为 `MOVING`，frozen control 0/3 为期望 `STILL`；诊断报告位于 `artifacts/verification/apple-mlxvlm-natural-video-20261028/temporal/failure-mode-diagnosis.json`，SHA-256=`370a392590f2ab3e10a5b63cdd01d82e5875cac693d779e4c9256ac703a296ca`。
