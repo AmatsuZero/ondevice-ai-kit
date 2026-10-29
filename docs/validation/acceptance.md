@@ -20,7 +20,7 @@ P11 readiness 快照现有只读校验门禁：当前 9 行均有未验证 gap�
 
 P11 分组 benchmark 首版已从哈希固定的原始 JSON 重算出3组：iOS/Android face 与 Apple MLXVLM，按 device、OS、P11 capability、actual backend 分组。readiness 的9项能力全部进入 coverage，但仅2项有兼容分组报告，另外7项保持 `unverified`；face quality/peak memory/energy/GPU 与 MLXVLM natural quality/Metal GPU peak/energy 没有被补成通过。详见 [P11 分组 benchmark](p11-grouped-benchmark.md)。
 
-2026-10-29 F08/F11 持续视频专项在同一物理 iPhone 进程完成 12 轮（8 次成功、4 次首 update 后取消）；lease、drain、close 和临时快照清理 gate 全部通过。`mach_task_basic_info` RSS 从首轮 drain 后 `136,200,192 B` 增至第12轮 drain 后 `1,152,892,928 B`，增长原因未定，不能替代 GPU/能耗或发布资源预算证据。readiness 当前校验为 9 行、33 个 evidence paths、31 个 source hashes，仍 `open/not-ready`；原始报告和摘要见 `artifacts/verification/mlxvlm-sustained-video-20261029/`。
+2026-10-29 F08/F11 持续视频专项在同一物理 iPhone 进程完成 12 轮（8 次成功、4 次首 update 后取消）；lease、drain、close 和临时快照清理 gate 全部通过。`mach_task_basic_info` RSS 在首轮 drain 后为 `136,200,192 B`，第二轮取消并 drain 后阶跃至 `1,141,293,056 B`，第12轮 drain 后为 `1,152,892,928 B`；第二轮之后增加 `11,599,872 B`。增长原因未定，不能替代 GPU/能耗或发布资源预算证据。readiness 当前校验为 9 行、33 个 evidence paths、31 个 source hashes，仍 `open/not-ready`；原始报告和摘要见 `artifacts/verification/mlxvlm-sustained-video-20261029/`。
 
 | 项目 | 证据 | 结论 |
 | --- | --- | --- |
