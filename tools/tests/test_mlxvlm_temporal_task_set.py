@@ -1,5 +1,7 @@
 import hashlib
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -113,6 +115,27 @@ class TemporalTaskSetTests(unittest.TestCase):
             self.assertEqual(json.dumps(first, sort_keys=True), json.dumps(second, sort_keys=True))
             self.assertEqual(first["temporalSuiteVerdict"], "pass-bounded")
             self.assertEqual(len(first["pairs"]), 3)
+
+    def test_cli_runs_from_repository_root(self):
+        rows = raw_rows()
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            source = root / "raw-device-report.json"
+            source.write_text("raw")
+            source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+            for row in rows:
+                row["sourceReportSha256"] = source_hash
+            report = root / "evidence.json"
+            report.write_text(json.dumps({"rows": rows}))
+            task_manifest = root / "manifest.json"
+            task_manifest.write_text(json.dumps(manifest()))
+            output = root / "summary.json"
+            subprocess.run([
+                sys.executable, "tools/mlxvlm_temporal_task_set.py", str(report),
+                "--manifest", str(task_manifest), "--source-report", str(source),
+                "--output", str(output),
+            ], check=True)
+            self.assertEqual(json.loads(output.read_text())["runCount"], 9)
 
 
 if __name__ == "__main__":

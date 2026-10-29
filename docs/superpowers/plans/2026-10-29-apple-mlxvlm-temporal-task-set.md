@@ -108,11 +108,11 @@
 - Modify: `docs/validation/p11-status-matrix-20261027.md`
 - Modify: `docs/superpowers/specs/2026-10-29-apple-mlxvlm-temporal-task-set-design.md` only for builder-call decisions discovered during implementation
 
-- [ ] Add the raw-report and summary hashes/paths, measured semantic and temporal verdicts, and explicit coupling of exact-label instruction following with temporal discrimination.
-- [ ] Keep natural temporal quality, broad task-set generalization, GPU/energy, sustained resources, minimum OS, physical touch, background terminal timing, F08, and P11 open/unverified as required by the design.
-- [ ] Run focused Python tests, `py_compile`, readiness validation, grouped-report deterministic regeneration, `git diff --check`, and protected-file hash checks.
-- [ ] Review `git diff` and stage only tracked validator/tests/manifest/docs/plan changes; leave all protected dirty files and ignored evidence untouched.
-- [ ] Commit the tracked package in small commits only after all gates pass.
+- [x] Add the raw-report and summary hashes/paths, measured semantic and temporal verdicts, and explicit coupling of exact-label instruction following with temporal discrimination.
+- [x] Keep natural temporal quality, broad task-set generalization, GPU/energy, sustained resources, minimum OS, physical touch, background terminal timing, F08, and P11 open/unverified as required by the design.
+- [x] Run focused Python tests, `py_compile`, readiness validation, grouped-report deterministic regeneration, `git diff --check`, and protected-file hash checks.
+- [x] Review `git diff` and stage only tracked validator/tests/manifest/docs/plan changes; leave all protected dirty files and ignored evidence untouched.
+- [x] Commit the tracked package in small commits only after all gates pass.
 
 ## Stop Condition
 

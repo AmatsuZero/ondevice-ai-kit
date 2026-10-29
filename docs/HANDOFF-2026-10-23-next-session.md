@@ -4,6 +4,15 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 temporal motion/control task-set 收尾
+
+- 当前 Codex goal 仍为同一 active 目标，直接继续 `goal resume`，无需替换；工作树仍为 `feat/sdk-foundation`，受保护的 `project.pbxproj`、身份草稿与相机 resource/thread probes 均保留，未 restore、覆盖或 stage。
+- F08 temporal task-set 已完成：复用 pinned CC0 Common swifts source，三个 2 秒 motion window 与三个 repeated-first-frame frozen control 共 6/6 fixture；metadata 为 320×180、24fps、48帧、H.264/yuv420p、无音频、`hasBFrames=0`。fixture manifest SHA-256=`666fbfebdc999aefa5b9db944a090024b9478c13107685af621fb842babe1694`，真实 validate 通过。
+- iPhone 16 Pro Max / iOS 27.0.1 的隔离 consumer 同进程完成 3 semantic + 6 temporal，共 9/9 rows；raw `artifacts/verification/apple-mlxvlm-natural-video-20261028/temporal/device-report-v2.json` SHA-256=`620ce4d2d3a90e83e9385ad5fbb92fe7eb60be728d7be5aa2015863735413ace`。semantic rubric 1/3；六个 exact-label 输出均为 `MOVING.`，motion/frozen pair 0/3，summary `observed-failure`，summary SHA-256=`787bb647a5d25522da17ef099fcbfa0ee3907a5dcc23cb6ca40a45d254ae0310`。这保留模型限制，不改写为通过。
+- P11 readiness 已刷新并通过只读校验：9 rows、31 evidence paths、29 source hashes、9 rows with gaps，gate=`open`、release=`not-ready`；grouped 报告重算为 3 groups/9 coverage，temporal 证据未加入 benchmark sample，重复输出逐字节一致。完整 tools suite **183/183**，专项 focused **29/29**，fixture/summary deterministic、`py_compile`、`git diff --check` 和保护哈希均通过。
+- 独立 code-reviewer 通道本轮 429，未取得 APPROVE；作者按 review focus 完成 self-review，未发现 Critical/Important，但不能将 429 视作独立审查通过。忽略目录 raw/build/summary 不提交；受保护 dirty 文件继续保留。
+- 仍保持未验证/开放：完整 natural temporal quality、跨场景泛化、GPU/energy/持续资源、background 内 terminal timing、真实 physical touch、minimum OS、Android LiteRT-LM production/native drain/模型、Face Identity production model/PAD，以及 P4 native residual root cause。发布继续 `open/not-ready`，基础里程碑仍 10/12。
+
 ## 最新续接 — 2026-10-29 F08 固定自然视频五次真机语义质量
 
 - 当前 Codex goal 仍为同一 active 目标，直接继续，无需替换 goal；本工作树仍为 `feat/sdk-foundation`，保护 dirty 文件未 restore、覆盖、stage 或提交。

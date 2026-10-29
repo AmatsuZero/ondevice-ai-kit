@@ -50,6 +50,7 @@ def _metadata(path: Path) -> dict[str, Any]:
     stream = video[0]
     return {
         "codec": stream.get("codec_name"),
+        "hasBFrames": int(stream.get("has_b_frames", 0)),
         "pixelFormat": stream.get("pix_fmt"),
         "width": stream.get("width"),
         "height": stream.get("height"),
@@ -84,7 +85,7 @@ def _expected_source(manifest: dict[str, Any]) -> dict[str, Any]:
 
 def _assert_metadata(metadata: dict[str, Any]) -> None:
     expected = {
-        "codec": "h264", "pixelFormat": "yuv420p", "width": 320, "height": 180,
+        "codec": "h264", "hasBFrames": 0, "pixelFormat": "yuv420p", "width": 320, "height": 180,
         "fps": "24/1", "frames": 48, "audioStreams": 0,
     }
     for key, value in expected.items():
@@ -123,7 +124,7 @@ def _encode_motion(source: Path, output: Path, start_frame: int, end_frame: int)
     subprocess.run([
         "ffmpeg", "-hide_banner", "-loglevel", "error", "-i", str(source),
         "-map", "0:v:0", "-vf", filters, "-frames:v", "48", "-an", "-c:v", "libx264",
-        "-preset", "veryslow", "-crf", "18", "-pix_fmt", "yuv420p", "-color_range", "tv",
+        "-preset", "ultrafast", "-crf", "0", "-bf", "0", "-pix_fmt", "yuv420p", "-color_range", "tv",
         "-colorspace", "bt709", "-color_trc", "bt709", "-color_primaries", "bt709",
         "-movflags", "+faststart", str(output),
     ], check=True)
@@ -135,7 +136,7 @@ def _encode_control(motion: Path, output: Path) -> None:
         "select=eq(n\\,0),loop=loop=47:size=1:start=0,setpts=N/(24*TB),"
         "scale=320:180:flags=lanczos,setsar=1,"
         "setparams=range=tv:color_primaries=bt709:color_trc=bt709:colorspace=bt709",
-        "-c:v", "libx264", "-preset", "veryslow", "-crf", "0", "-pix_fmt", "yuv420p",
+        "-c:v", "libx264", "-preset", "ultrafast", "-crf", "0", "-bf", "0", "-pix_fmt", "yuv420p",
         "-color_range", "tv", "-colorspace", "bt709", "-color_trc", "bt709",
         "-color_primaries", "bt709", "-movflags", "+faststart", str(output),
     ], check=True)

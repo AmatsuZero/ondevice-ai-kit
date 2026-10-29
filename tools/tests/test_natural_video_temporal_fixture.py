@@ -59,6 +59,7 @@ class TemporalFixtureTests(unittest.TestCase):
             self.assertTrue(all(item["metadata"]["width"] == 320 for item in result["derivatives"]))
             self.assertTrue(all(item["metadata"]["height"] == 180 for item in result["derivatives"]))
             self.assertTrue(all(item["metadata"]["fps"] == "24/1" for item in result["derivatives"]))
+            self.assertTrue(all(item["metadata"]["hasBFrames"] == 0 for item in result["derivatives"]))
             self.assertTrue(all(item["metadata"]["audioStreams"] == 0 for item in result["derivatives"]))
             controls = [item for item in result["derivatives"] if item["role"] == "frozen-control"]
             self.assertEqual([item["controlOf"] for item in controls], ["motion-0-2", "motion-2-4", "motion-4-6"])

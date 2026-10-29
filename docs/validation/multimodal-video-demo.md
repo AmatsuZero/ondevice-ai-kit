@@ -152,6 +152,15 @@ Roadmap 仍 **5/12、P9 active**；本轮 `git diff --check` 通过，所有既�
 - 原始设备报告为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/device-report-5.json`，SHA-256=`64a657dcb3c3ada3762fdd746b2a5b4caebbc81174f6bfdd57ec15e4635aefd0`。规范化输入、期望身份和汇总位于同目录的 `raw-runs.json`、`expected-identity.json`、`summary.json`；重复生成汇总逐字节一致。
 - 这是固定单素材/单 prompt 的 bounded semantic evidence，不是完整自然质量结论，也不是 benchmark 样本。`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 明确保持 `unverified`；更完整任务集仍是质量裁定缺口。
 
+## 2026-10-29 Apple MLXVLM temporal motion/control task-set
+
+为扩展上述单 prompt 证据，本轮复用同一份六秒 CC0 Common swifts source，先验证 pinned source identity，再切出三个不重叠的两秒 motion window（`0–2`、`2–4`、`4–6`），并为每段生成 repeated-first-frame frozen control。六个 derivative 均为 320×180、24 fps、48 帧、H.264/yuv420p、无音频，且额外固定 `has_b_frames=0` 以满足现有 MLXVLM video profile；fixture manifest SHA-256 为 `666fbfebdc999aefa5b9db944a090024b9478c13107685af621fb842babe1694`。
+
+- 隔离 consumer 在同一 iPhone 16 Pro Max / iOS 27.0.1 进程内完成 3 个 semantic motion 请求和 6 个 temporal contrast 请求，共 9/9 rows；固定 backend=`mlx.smolvlm2-500m`，每次有独立 run ID、输入 hash、模型/runtime revision、prompt、耗时和 source commit。设备原始报告为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/temporal/device-report-v2.json`，SHA-256=`620ce4d2d3a90e83e9385ad5fbb92fe7eb60be728d7be5aa2015863735413ace`。
+- semantic 任务仅 1/3 通过既有 `natural-video-semantic-rubric-v1`；temporal prompt 固定为 `Are the birds moving across the sky or staying still? Answer exactly MOVING or STILL.`，六次 raw output 都是 `MOVING.`，因此 exact-label rubric 下 motion 与 frozen control 均失败，三个 pair 为 0/3，suite verdict=`observed-failure`。这不是把失败改写成通过，也不是完整 temporal quality 结论。
+- 规范化 evidence 绑定 raw source report SHA-256，summary 位于 `artifacts/verification/apple-mlxvlm-natural-video-20261028/temporal/summary.json`，SHA-256=`787bb647a5d25522da17ef099fcbfa0ee3907a5dcc23cb6ca40a45d254ae0310`，重复生成逐字节一致。旧的 B-frame 输入曾被设备 profile 明确拒绝，诊断报告保留在 `device-report-diagnostic.json`；修正后才执行 v2，避免把输入不兼容误判成模型 temporal 失败。
+- 该 task-set 只说明同源场景下的有限 instruction-following/temporal contrast 结果；natural temporal quality、跨场景泛化、人类偏好、GPU/energy、持续资源、最低系统、物理触控、background terminal timing、F08 和 P11 仍保持未验证或开放，不加入 grouped benchmark 样本。
+
 CoreDevice 恢复到 `available (paired)` 后，fresh `test-without-building` 仍 exit **70**；直接查询 lock state 返回 `CoreDeviceError 10003` / `RemotePairingError 1016`（`The device has not been unlocked recently`）。这确认当前只差一次设备解锁，不能归因于 host/picker 代码。
 
 ## 2026-10-25 P9 picker 退场竞态修复与本地回归
