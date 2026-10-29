@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 静态语义证据校验加固
+
+- 本地审查发现静态语义 validator 原先只要求 launch receipt 的 source commit，未强制核对静态探针入口和 fixture manifest，也可能把输出路径指向 launch/install receipt。已先写出并观察到 **2 个 RED**，随后加固为要求 `--sdk-mlxvlm-static-semantic`、source commit、manifest 参数，并拒绝覆盖 source/launch/install 三类输入证据。
+- 专项 **4/4**、完整 `tools/tests`（Ruby 3.4 + 临时可写 Swift cache）**196/196**；真实设备 raw report SHA-256=`31eb195e375c123c39d5133636609cad835af80d0a80408af7912e53fcf43e01` 重新校验为 **3/3 pass-bounded**。该修复只提高证据完整性，不改变 temporal pair 0/3、F08 `observed-failure` 或 P11 `open/not-ready`。
+- 独立 reviewer 通道本轮仍返回 429，无 APPROVE；保留该审查缺口。下一步继续 F08 跨场景/标签概率诊断或 F11 资源专项，不重复同一 raw generation。
+
 ## 最新续接 — 2026-10-29 F08 静止帧语义真机探针
 
 - 同一 active goal 直接 resume，无需替换；工作树 `feat/sdk-foundation`，设备探针源提交 `835221e11e06dae4db2e47d75e08ef64db855c32`。隔离签名 App `io.ondeviceai.staticsemantic` 已安装并在 iPhone 16 Pro Max / iOS 27.0.1 启动，launch receipt 的 PID=`31720`；模型、三个 frozen fixture 只存在 App Documents 沙盒，没有写入 Photos。

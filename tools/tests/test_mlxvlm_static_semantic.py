@@ -17,7 +17,7 @@ EXPECTED = (
 SOURCE_COMMIT = "a" * 40
 MODEL_REVISION = "fa57db46815177fbdfd65cc85a2b3416a8332268"
 RUNTIME_REVISION = "6e338e5df49424fc0db7c6d58184d622f92ed18a"
-LAUNCH = {"info": {"outcome": "success"}, "result": {"deviceIdentifier": "device", "process": {"processIdentifier": 31720}, "launchOptions": {"arguments": [f"--sdk-commit={SOURCE_COMMIT}"]}}}
+LAUNCH = {"info": {"outcome": "success"}, "result": {"deviceIdentifier": "device", "process": {"processIdentifier": 31720}, "launchOptions": {"arguments": ["--sdk-mlxvlm-static-semantic", f"--sdk-commit={SOURCE_COMMIT}", "--sdk-temporal-manifest-sha256=666fbfebdc999aefa5b9db944a090024b9478c13107685af621fb842babe1694"]}}}
 INSTALL = {"info": {"outcome": "success"}, "result": {"deviceIdentifier": "device", "installedApplications": [{"bundleID": "io.ondeviceai.staticsemantic"}]}}
 
 
@@ -97,6 +97,15 @@ class StaticSemanticTests(unittest.TestCase):
             self.assertNotEqual(failed.returncode, 0)
             self.assertEqual(source.read_bytes(), before)
 
+            launch_before = launch.read_bytes()
+            failed = subprocess.run([
+                sys.executable, "-m", "tools.mlxvlm_static_semantic", str(source),
+                "--output", str(launch), "--expected-sha256", digest,
+                "--launch-receipt", str(launch), "--install-receipt", str(install), "--source-commit", SOURCE_COMMIT,
+            ], capture_output=True)
+            self.assertNotEqual(failed.returncode, 0)
+            self.assertEqual(launch.read_bytes(), launch_before)
+
     def test_provenance_rejects_wrong_pid_and_model(self):
         verify_provenance(report(), LAUNCH, INSTALL, source_commit=SOURCE_COMMIT)
         changed = report()
@@ -107,6 +116,11 @@ class StaticSemanticTests(unittest.TestCase):
         changed["rows"][0]["modelRevision"] = "wrong"
         with self.assertRaisesRegex(StaticSemanticValidationError, "row provenance"):
             verify_provenance(changed, LAUNCH, INSTALL, source_commit=SOURCE_COMMIT)
+
+        launch_without_entrypoint = json.loads(json.dumps(LAUNCH))
+        launch_without_entrypoint["result"]["launchOptions"]["arguments"] = [f"--sdk-commit={SOURCE_COMMIT}"]
+        with self.assertRaisesRegex(StaticSemanticValidationError, "receipt identity"):
+            verify_provenance(report(), launch_without_entrypoint, INSTALL, source_commit=SOURCE_COMMIT)
 
 
 if __name__ == "__main__":

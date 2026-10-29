@@ -49,7 +49,9 @@ def verify_provenance(report: dict[str, Any], launch: dict[str, Any], install: d
     applications = install.get("result", {}).get("installedApplications", [])
     arguments = launch_result.get("launchOptions", {}).get("arguments", [])
     if (launch_result.get("process", {}).get("processIdentifier") != report.get("pid")
+            or "--sdk-mlxvlm-static-semantic" not in arguments
             or f"--sdk-commit={source_commit}" not in arguments
+            or f"--sdk-temporal-manifest-sha256={EXPECTED_MANIFEST}" not in arguments
             or not any(app.get("bundleID") == EXPECTED_BUNDLE for app in applications)):
         raise StaticSemanticValidationError("device receipt identity mismatch")
     if launch_result.get("deviceIdentifier") != install.get("result", {}).get("deviceIdentifier"):
@@ -112,9 +114,12 @@ def build_summary(report: dict[str, Any], *, source_sha256: str) -> dict[str, An
     }
 
 
-def _assert_safe_output(source: Path, output: Path) -> None:
-    if output.is_symlink() or output.resolve() == source.resolve() or (output.exists() and os.path.samefile(source, output)):
-        raise StaticSemanticValidationError("refusing to overwrite source report")
+def _assert_safe_output(output: Path, *sources: Path) -> None:
+    if output.is_symlink() or any(
+        output.resolve() == source.resolve() or (output.exists() and os.path.samefile(source, output))
+        for source in sources
+    ):
+        raise StaticSemanticValidationError("refusing to overwrite input evidence")
 
 
 def main() -> int:
@@ -127,7 +132,7 @@ def main() -> int:
     parser.add_argument("--source-commit", required=True)
     args = parser.parse_args()
     try:
-        _assert_safe_output(args.source_report, args.output)
+        _assert_safe_output(args.output, args.source_report, args.launch_receipt, args.install_receipt)
         raw = args.source_report.read_bytes()
         actual = hashlib.sha256(raw).hexdigest()
         if actual != args.expected_sha256:
