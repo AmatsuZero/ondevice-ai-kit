@@ -9,6 +9,7 @@
 - 为继续 F08 跨场景 temporal quality，检查了当前仓库和既有验证目录；唯一有明确来源/许可/哈希的自然素材仍是 `tools/probes/natural_video_manifest.json` 中的 Common swifts，不能作为第二个场景重复使用。其他本地视频没有可审计授权，不纳入设备任务。
 - 对 Wikimedia Commons API 的代理路径和 `--noproxy "*"` 直连路径各尝试一次：前者因本机 `127.0.0.1:7897` 代理不可用退出 7，后者因 `commons.wikimedia.org` DNS 失败退出 6。完整尝试、策略和停止点记录在 ignored `artifacts/verification/f08-cross-scene-source-search-20261030/summary.json`；这不是 F08 通过证据。
 - 因此本轮不生成第二场景、不重复已有 temporal run；待有可审计来源和网络后恢复。F08 temporal pair 仍 0/3，P11 仍 `open/not-ready`，F03 最低系统按用户要求暂缓。
+- 本节 handoff 提交 `daf1ff4` 已推送并回读 GitHub `origin`；GitLab `jihu` 在同步脚本预检和单独重试中分别返回 TLS `SSL_ERROR_SYSCALL` 与 connection reset，当前仍停在 `6f1cdec`。详见同目录 ignored `sync-summary.json`，恢复网络后只需普通 fast-forward 重试。
 
 ## 最新续接 — 2026-10-30 P11 分组报告的 readiness 来源校验
 
