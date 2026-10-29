@@ -14,7 +14,7 @@ P11 的 SDK committed-tree 快照已经冻结，但统一候选仍未就绪：�
 
 P4 ThreadInventory 主机门禁已刷新：Swift6 主机100轮快照 complete、send-right 2→2，缺失 pthread 映射正确为 partial；iOS15 arm64 typecheck 与生成器 Ruby 语法检查通过。该证据只覆盖主机快照/释放完整性，不证明真机线程生命周期、TLS/destructor 归属、GrOp 根因或零泄漏。证据见 `artifacts/verification/p4-thread-inventory-local-20261027/summary.json`。
 
-P11 candidate freeze 仍为 `not-ready`，但 SDK 子门槛已关闭：从提交 `7b9f7fc75772b61948d211d72ec2e1e221362591` 的 committed tree 生成了干净归档，内嵌 commit、tree 与 SHA-256 已核对；归档排除当前工作树 1 项 tracked dirty 和 7 项 untracked。LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型与校准、iOS15/API26 设备、可比较 GPU/energy/峰值资源及统一 fixture 仍未满足。因此只冻结 SDK 源码快照，不构成统一发布候选或最终验收。见 `artifacts/verification/p11-candidate-freeze-20261027/summary.json`。
+P11 candidate freeze 仍为 `not-ready`，但 SDK 子门槛已关闭：从提交 `6ddc13a23cc8f7052b77a9486a527223b7c2d872` 的 committed tree 生成了干净归档，tree=`825c54d0af8ff5f1ad08a7d08fed28b434b30b0e`、tar SHA-256=`b6daeec000479665656ab87249ab28d20e7e51d46b37c598470b4df86426685a`，内嵌 commit 已核对；归档排除当前工作树 1 项 tracked dirty 和 8 项 untracked。LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型与校准、iOS15/API26 设备、可比较 GPU/energy/峰值资源及统一 fixture 仍未满足。因此只冻结 SDK 源码快照，不构成统一发布候选或最终验收。见 `artifacts/verification/p11-candidate-freeze-20261029/summary.json`。
 
 P11 readiness 快照现有只读校验门禁：当前 9 行均有未验证 gap；非 terminal 行仍强制 `open/not-ready`，且快照必须声明 `p11Stop` 与 `requiredBeforeP11`。修复前未纳入哈希的证据内容可变更而仍通过，回归先 RED 后 GREEN；完整工具套件在可写 Swift 编译缓存的环境中 **156/156**。该结果只证明报告完整性，不改变 P11 的未完成状态。新证据见 `artifacts/verification/p11-evidence-hashes-20261027/summary.json`；原始 154 项历史验证留在 `artifacts/verification/p11-readiness-validator-20261027/summary.json`。
 

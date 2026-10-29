@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 P11 committed-tree candidate freeze 重建
+
+- 从当时 `HEAD=6ddc13a23cc8f7052b77a9486a527223b7c2d872` 重新生成 committed-tree archive：tree=`825c54d0af8ff5f1ad08a7d08fed28b434b30b0e`，tar=`artifacts/verification/p11-candidate-freeze-20261029/sdk-foundation-6ddc13a23cc8.tar`，SHA-256=`b6daeec000479665656ab87249ab28d20e7e51d46b37c598470b4df86426685a`；`git get-tar-commit-id` 与源提交一致，重复生成逐字节一致。
+- 归档只取 committed tree，排除当前 1 项 tracked dirty 和 8 项 untracked 的受保护文件；archive 内没有这些 untracked paths。候选摘要 `artifacts/verification/p11-candidate-freeze-20261029/summary.json` 状态仍 `not-ready`：Android LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型/PAD、iOS15/API26、统一跨能力资源/质量报告仍是阻断项。
+- `docs/validation/acceptance.md` 已更新本次 archive 信息，readiness source hash 同步后通过 **9 rows / 42 evidence paths / 40 source hashes / 9 rows with gaps**；`benchmark/p11/grouped-report-manifest.json` 的 readiness SHA-256=`58126552d6fee4af1e58acf649b5281931c80a98df92b22189553524319ed6e4`。该重建只关闭 SDK committed-tree snapshot 的新鲜性，不冻结统一发布候选，也不改变基础里程碑 **10/12** 或 P11 `open/not-ready`。
+
 ## 最新续接 — 2026-10-29 F08 静态语义证据校验加固
 
 - 本地审查发现静态语义 validator 原先只要求 launch receipt 的 source commit，未强制核对静态探针入口和 fixture manifest，也可能把输出路径指向 launch/install receipt。已先写出并观察到 **2 个 RED**，随后加固为要求 `--sdk-mlxvlm-static-semantic`、source commit、manifest 参数，并拒绝覆盖 source/launch/install 三类输入证据。
