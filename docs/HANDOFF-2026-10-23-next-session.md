@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 P11 分组报告的 readiness 来源校验
+
+- 沿用同一 active goal，不替换；开始时 `feat/sdk-foundation`、本地 `origin`、`jihu` 均在 `5f8158261d6ca05907481a7b4ab5f0e207c633ca`。现有 1 项 tracked dirty 与 8 项 untracked 受保护文件的哈希保持不变，未覆盖或暂存。
+- 发现分组报告生成器只核对 readiness JSON 本身的 manifest 哈希，没有复核 readiness 内 `sourceHashes` 引用的底层证据。新增回归先观察到预期 RED（底层证据更改后仍生成报告），随后在生成器中调用现有 `validate_p11_readiness.validate_summary`；来源哈希漂移现在会在输出写入前被拒绝。
+- 独立审查又发现输出路径未覆盖 readiness `sourceHashes` 文件；已先观察到直接路径、软链接和硬链接 **3 个 RED**，再补齐 alias 拒绝。当前聚焦 P11 **21/21**、完整 `tools/tests` 在 Ruby 3.4 与可写 clang/Swift cache 的正常授权环境 **198/198**；受限沙箱首次运行因 SwiftPM `sandbox_apply` 失败，不计产品失败。当前 manifest 生成 3 组、9 项覆盖、9 行 gap，P11 仍 `open/not-ready`；新报告留在 ignored 的 `artifacts/verification/p11-grouped-benchmark-20261030-integrity/summary.json`。`py_compile`、`git diff --check` 通过。
+- F08 temporal pair 仍 0/3，F11 跨能力质量/资源原始测量仍缺，F03 最低系统按用户要求暂缓；此修复只防止陈旧证据产生新快照，不提升验收结论。
+
 ## 最新续接 — 2026-10-29 P11 committed-tree candidate freeze 重建
 
 - 从当时 `HEAD=6ddc13a23cc8f7052b77a9486a527223b7c2d872` 重新生成 committed-tree archive：tree=`825c54d0af8ff5f1ad08a7d08fed28b434b30b0e`，tar=`artifacts/verification/p11-candidate-freeze-20261029/sdk-foundation-6ddc13a23cc8.tar`，SHA-256=`b6daeec000479665656ab87249ab28d20e7e51d46b37c598470b4df86426685a`；`git get-tar-commit-id` 与源提交一致，重复生成逐字节一致。

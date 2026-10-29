@@ -89,6 +89,17 @@ class GroupedReportTests(unittest.TestCase):
                 ],
                 "p11Gate": {"status": "open", "finalReleaseConclusion": "not-ready"},
             }
+        evidence_path = root / "evidence.json"
+        evidence_path.write_text("{}\n")
+        readiness.setdefault("p11Stop", "Do not release while evidence gaps remain.")
+        readiness.setdefault("requiredBeforeP11", ["verify all source evidence"])
+        readiness.setdefault("sourceHashes", {})["evidence.json"] = hashlib.sha256(
+            evidence_path.read_bytes()
+        ).hexdigest()
+        for row in readiness["rows"]:
+            row.setdefault("evidence", ["evidence.json"])
+        readiness["p11Gate"].setdefault("rowsWithUnverifiedGaps", sum(bool(row["unverified"]) for row in readiness["rows"]))
+        readiness["p11Gate"].setdefault("rowsNotTerminalPass", sum(bool(row["unverified"]) or row["status"] != "pass" for row in readiness["rows"]))
         readiness_path = root / "readiness.json"
         readiness_path.write_text(json.dumps(readiness))
         manifest_sources = []
@@ -213,7 +224,7 @@ class GroupedReportTests(unittest.TestCase):
             manifest = self.write_manifest(
                 root, [("face", face_run(), "face", "face-detection")], readiness=readiness
             )
-            with self.assertRaisesRegex(ValueError, "must remain open/not-ready"):
+            with self.assertRaisesRegex(ValueError, "must remain open"):
                 report.generate(manifest, root)
 
     def test_changed_source_and_unsafe_output_fail_before_writes(self):
@@ -237,6 +248,28 @@ class GroupedReportTests(unittest.TestCase):
                 report.write_report(manifest, root, output)
             self.assertEqual(output.read_bytes(), b"keep\n")
 
+    def test_changed_readiness_evidence_fails_before_output_write(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.write_manifest(root, [("face", face_run(), "face", "face-detection")])
+            (root / "evidence.json").write_text('{"changed": true}\n')
+            output = root / "report.json"
+            output.write_bytes(b"keep\n")
+
+            with self.assertRaisesRegex(ValueError, "source hash mismatch: evidence.json"):
+                report.write_report(manifest, root, output)
+            self.assertEqual(output.read_bytes(), b"keep\n")
+
+    def test_output_cannot_alias_readiness_source_hash_file(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.write_manifest(root, [("face", face_run(), "face", "face-detection")])
+            evidence = root / "evidence.json"
+            original = evidence.read_bytes()
+            with self.assertRaisesRegex(ValueError, "output must not overwrite"):
+                report.write_report(manifest, root, evidence)
+            self.assertEqual(evidence.read_bytes(), original)
+
     def test_direct_cli_runs_and_cannot_replace_the_manifest(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -257,7 +290,7 @@ class GroupedReportTests(unittest.TestCase):
             self.assertEqual(manifest_path.read_bytes(), original)
 
     def test_output_symlink_and_hardlink_aliases_preserve_inputs(self):
-        for target_name in ("0-face.json", "manifest.json"):
+        for target_name in ("0-face.json", "manifest.json", "evidence.json"):
             for alias in ("symlink", "hardlink"):
                 with self.subTest(target=target_name, alias=alias), tempfile.TemporaryDirectory() as directory:
                     root = Path(directory)

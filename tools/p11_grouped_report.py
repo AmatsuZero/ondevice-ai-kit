@@ -11,10 +11,10 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from tools import benchmark_report, mlxvlm_benchmark_report
+    from tools import benchmark_report, mlxvlm_benchmark_report, validate_p11_readiness
 except ModuleNotFoundError:  # Direct `python tools/p11_grouped_report.py` invocation.
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-    from tools import benchmark_report, mlxvlm_benchmark_report
+    from tools import benchmark_report, mlxvlm_benchmark_report, validate_p11_readiness
 
 
 SCHEMA_VERSION = 1
@@ -169,6 +169,7 @@ def _readiness(repo_root: Path, manifest: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(readiness_entry, dict):
         raise ValueError("readiness must be an object")
     _, readiness = _verify_file(repo_root, readiness_entry, "readiness")
+    validate_p11_readiness.validate_summary(readiness, repo_root)
     if readiness.get("schemaVersion") != 1 or not isinstance(readiness.get("rows"), list):
         raise ValueError("unsupported readiness snapshot")
     gate = readiness.get("p11Gate")
@@ -277,6 +278,17 @@ def _reject_output_aliases(
         path = _relative_path(repo_root, entry.get("path"), f"input[{index}].path")
         if output_resolved == path or (output.exists() and output.samefile(path)):
             raise ValueError(f"output must not overwrite benchmark input: {entry.get('path')}")
+
+    readiness_entry = manifest.get("readiness")
+    if isinstance(readiness_entry, dict):
+        readiness_path = _relative_path(repo_root, readiness_entry.get("path"), "readiness.path")
+        readiness = _load_json(readiness_path)
+        source_hashes = readiness.get("sourceHashes")
+        if isinstance(source_hashes, dict):
+            for source_path in source_hashes:
+                path = _relative_path(repo_root, source_path, "readiness.sourceHashes path")
+                if output_resolved == path or (output.exists() and output.samefile(path)):
+                    raise ValueError(f"output must not overwrite readiness evidence: {source_path}")
 
 
 def write_report(
