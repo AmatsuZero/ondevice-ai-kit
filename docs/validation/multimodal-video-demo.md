@@ -14,6 +14,10 @@
 
 ### 原生采样边界核对
 
+同一物理 iPhone 上进一步直接运行生产 `MLXVLMVideoInputAdapter.prepare`，只 provision 固定 tokenizer/config 与六个 fixture，不复制模型权重或生成文本。adapter 与 `LocalTokenizerLoader` 副本均与生产源逐字节一致；正式复跑 PID `31574`。六行 `LMInput.image.pixels` shape 均为 `[8,512,512,3]`，motion 各 8 个唯一 tensor frame、frozen 各 1 个，三对首帧 tensor hash 相同。相同 temporal prompt 生成的六行 token 均为 720 个，其中 `<image>` 512 个，token hash 完全相同。原始报告 `artifacts/verification/temporal-iphone-tensor-20261029/device-report-rerun.json` SHA-256=`fa1244768cfd208fe6c4af0423187798f7677c378df2ab406d267057378a1052`，独立 validator 为 `pass-bounded`。
+
+因此固定输入的 motion/frozen 差异已经同时跨过物理 iPhone Snapshot 和生产 pixel tensor 准备边界；现有 0/3 不能归因于这两个边界把帧变成相同输入。vision encoder/模型感知仍未观察，正式评分和 P11 结论不变。
+
 物理 iPhone 16 Pro Max / iOS 27.0.1 上又以独立 App `io.ondeviceai.temporalframes` 运行与生产文件哈希相同的 `MLXVLMVideoSnapshot.swift`，从 App 沙盒读取同一六个公开视频 fixture。PID `31522` 与设备启动 receipt 一致；六行各采到 8 帧，实际时间均为 `0, 0.25, …, 1.75` 秒，motion 各 8 个唯一帧、frozen 各 1 个，三对首帧哈希一致。每行副本文件与源素材 SHA-256 一致，临时 snapshot 目录已清理，素材未变。原始设备报告 `artifacts/verification/temporal-iphone-native-frames-20261029/device-report.json` SHA-256=`9413fbc62497239d486f4a8cfb39bb470521d41ace3ae17e9b8b09065bb31529`；同目录独立校验 `validate.py` 为 `pass-bounded`。该 App 没有加载模型或生成文字。
 
 iPhone 与 macOS 的 RGBA 渲染参数一致，但逐帧字节哈希 48/48 不同；因此这两次结果只证明各平台内部的采样时间与 motion/frozen 关系，不证明跨平台像素一致。iPhone 原生 Snapshot 边界保留了固定素材的运动差异，下一处待查的是 MLX 预处理后的 tensor 与模型行为；正式 temporal 0/3 和 P11 `open/not-ready` 仍不变。

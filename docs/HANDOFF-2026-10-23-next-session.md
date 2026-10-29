@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 iPhone prepared tensor 边界
+
+- 沿生产调用链 `MLXVLMVideoSnapshot.frames → MLXVLMVideoInputAdapter.prepare → LMInput.image.pixels` 构建独立签名 `io.ondeviceai.tensordebug` App；adapter 与 tokenizer loader 副本分别和生产源 SHA-256 `5f15491e843973f473f04abcd83ced284c64513a4daa232a4f5b849e075c7751`、`2c8f0958d7764b09cba527d123d13744de18b8478cd68fd5812143fcdf520084` 一致。设备只 provision 4.6MB tokenizer/config 和六个固定 fixture，没有复制或加载 968MB 模型权重，也没有执行生成。
+- iPhone 16 Pro Max / iOS 27.0.1，正式复跑 PID `31574` 与 launch receipt 一致。六行 prepared pixel shape 均为 `[8,512,512,3]`：三个 motion 各 8 个唯一 tensor-frame hash，三个 frozen 各 1 个；三对首帧 tensor hash 一致。每行文本输入均为 720 tokens、512 个 `<image>` tokens，token hash 六行相同；实际时间仍为 `0,0.25,…,1.75` 秒。原始报告 `artifacts/verification/temporal-iphone-tensor-20261029/device-report-rerun.json` SHA-256=`fa1244768cfd208fe6c4af0423187798f7677c378df2ab406d267057378a1052`；独立 validator 输出 `pass-bounded`，`verification.json` SHA-256=`2bed03a8286d1f8d4f0ed2bc8e5c5d5f8213d6edd747961f0d00c48074ca8262`；最新签名 build `** BUILD SUCCEEDED **`。
+- 该证据关闭固定 fixture 的 Snapshot 后、模型前预处理边界疑点：motion/frozen 差异仍存在于生产 adapter 交给模型的 pixel tensor 中，且六行文本 prompt/token 一致。它不证明 vision encoder/模型能感知差异，也不把旧 `MOVING.` 六次、temporal pair 0/3 改写为通过；下一处有区分力的边界是 vision encoder/模型内部，不再重复 Snapshot、adapter 或同一生成任务。P11 仍 `open/not-ready`，goal active。
+
 ## 最新续接 — 2026-10-29 F08 iPhone 原生视频采样边界
 
 - 在已解锁的物理 iPhone 16 Pro Max / iOS 27.0.1 上构建并运行独立签名 `io.ondeviceai.temporalframes` App；隔离 consumer 引入与生产文件 SHA-256 一致的 `MLXVLMVideoSnapshot.swift`（`33db01c3ce3470b2d78f7ff6b2f7c87a9197dc41198295dd483c053424eb5f01`）。六个固定公开视频 fixture 仅复制到该 App 的 Documents 沙盒；未加载模型、未生成文字、未写 Photos。
