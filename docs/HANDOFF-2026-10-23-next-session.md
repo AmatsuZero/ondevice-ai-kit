@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F09 swift-collections 候选复核
+
+- 当前 Codex goal 仍为同一 active 目标，继续 `goal resume`，无需替换；工作树为 `feat/sdk-foundation`。`project.pbxproj`、身份草稿与相机 resource/thread probes 等 8 项受保护 dirty 文件未 restore、覆盖、stage 或提交。
+- 官方只读 refs：`swift-collections` 1.7.4=`844289ac455816e193f1dbbe014f3c4dbe429410`，1.7.5=`f96b909e1a9e469620bc5037c1e24e00153f376f`。1.7.4 的 `OrderedCollections` 无变更；1.7.5 仅有 `93b0a28` 文件名歧义修复，未触及失败 API/interface。
+- 在 `/tmp/odai-f09-swift-collections.vVEqIL` 隔离副本中，Xcode 27.1 / Swift 6.4 / iPhoneOS27.1 / generic iOS / `BUILD_LIBRARY_FOR_DISTRIBUTION=YES` 的 `OrderedCollections` build：1.7.4 与 1.7.5 均 **exit 65**，同样停在 `SwiftVerifyEmittedModuleInterface`，错误为 `Element is not imported through module OrderedCollections`、`extraneous argument label 'at:'`、`Int` 到 `Key/Element` 类型错配。1.7.5 host `swift build` 成功不构成 iOS interface 或 binary 证据。
+- 证据摘要：`artifacts/verification/f09-swift-collections-20261029/summary.json`；生产 `apple-mlx/Package.resolved` 未变，SHA-256=`e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。F09 仍 `open/not-ready`，不重跑完整 archive、不关闭 interface verification、不改上游 checkout；下一次只在出现明确上游/toolchain 修复时恢复。
+
 ## 最新续接 — 2026-10-29 F08 temporal motion/control task-set 收尾
 
 - 当前 Codex goal 仍为同一 active 目标，直接继续 `goal resume`，无需替换；工作树仍为 `feat/sdk-foundation`，受保护的 `project.pbxproj`、身份草稿与相机 resource/thread probes 均保留，未 restore、覆盖或 stage。

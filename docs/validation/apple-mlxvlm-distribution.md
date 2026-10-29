@@ -61,6 +61,20 @@ public `OrderedCollections.swiftinterface` 也有同类错误，并有 `extraneo
 
 未得到可验收的增强 XCFramework。除当前 interface 门槛，自动/static library 的最终 framework 布局、传递模块依赖、canonical JSON/Metal runtime bundle 的打包、device/simulator slices，以及只依赖分发产物的独立 binary consumer 均需另包设计验证。根基础十个 XCFramework 不计入增强包通过证据。
 
+### 2026-10-29 依赖候选复核
+
+为避免把上游新 tag 当作未经验证的修复，先通过官方只读 refs 确认：`swift-collections` 1.7.4=`844289ac455816e193f1dbbe014f3c4dbe429410`，1.7.5=`f96b909e1a9e469620bc5037c1e24e00153f376f`。官方 compare `1.7.3...1.7.5` 显示 1.7.4 在 `Sources/OrderedCollections` 没有变更；1.7.5 的相关提交 `93b0a28` 只处理 `OrderedCollections`/`InternalCollectionsUtilities` 的文件名歧义，不改变产生错误接口的声明。
+
+随后在 `/tmp` 隔离副本分别对 1.7.4 与 1.7.5 运行同一 Xcode 27.1 / Swift 6.4 / generic iOS / `BUILD_LIBRARY_FOR_DISTRIBUTION=YES` 的 `OrderedCollections` library-evolution build。两者均 exit **65**，失败阶段仍是 `SwiftVerifyEmittedModuleInterface`，并重复出现：
+
+```text
+Element is not imported through module OrderedCollections
+extraneous argument label 'at:' in call
+cannot convert value of type 'Int' to expected argument type 'Key/Element'
+```
+
+1.7.5 的 host `swift build --product OrderedCollections -Xswiftc -enable-library-evolution` 可以通过，但这不是 iOS textual-interface verification，也不能替代 archive。两次 iOS probe 生成的 textual interface 已分别保存并绑定 SHA-256（1.7.4=`dfd2f79133fd04ebdb4927e2a08cbce7a4f48e72ccb907ba5d51d7ba8e725cdc`，1.7.5=`277d3e46ae5fd72b49077658fe247b15e95da452c849b4d2cb3a87b996d040a1`），原始候选、命令与结果摘要保存在 `artifacts/verification/f09-swift-collections-20261029/summary.json`。因此没有得到受支持的 dependency-only 修复；生产 `apple-mlx/Package.resolved` 保持 1.7.3 且 SHA-256=`e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`，不重跑完整 MLXVLM archive、不关闭 interface verification、不修改上游 checkout。
+
 ## Tests、审查与恢复
 
 新 black-box generator 测试初次真实 RED 为缺少 `--portable-source`（2 failures；symlink 拒绝测试当时由 parser 拒绝而通过，不冒称该项独立 RED）。实现后新3/3；含默认 consumer 与基础分发的定向11/11；完整 tools **126/126**；补强 lock/resource 精确比较后的定向6/6、Python py_compile、`git diff --check` 通过。完整 tools 显式使用 `RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`；一次漏设 Ruby 的两个既有分发测试失败已由正确环境通过，不是产品修改。
