@@ -161,6 +161,12 @@ Roadmap 仍 **5/12、P9 active**；本轮 `git diff --check` 通过，所有既�
 - 规范化 evidence 绑定 raw source report SHA-256，summary 位于 `artifacts/verification/apple-mlxvlm-natural-video-20261028/temporal/summary.json`，SHA-256=`787bb647a5d25522da17ef099fcbfa0ee3907a5dcc23cb6ca40a45d254ae0310`，重复生成逐字节一致。旧的 B-frame 输入曾被设备 profile 明确拒绝，诊断报告保留在 `device-report-diagnostic.json`；修正后才执行 v2，避免把输入不兼容误判成模型 temporal 失败。
 - 该 task-set 只说明同源场景下的有限 instruction-following/temporal contrast 结果；natural temporal quality、跨场景泛化、人类偏好、GPU/energy、持续资源、最低系统、物理触控、background terminal timing、F08 和 P11 仍保持未验证或开放，不加入 grouped benchmark 样本。
 
+## 2026-10-29 固定自然视频持续资源观察
+
+隔离 consumer 在同一物理 iPhone 16 Pro Max 进程（PID 31130）对固定公开视频连续执行 12 轮，按 `success → 首 update 后取消 → reentry` 重复四组。8 次生成和 4 次取消均达到预期终态；每轮 `drain` 后的 `odai-video-` 临时快照均清空，最终 `close` 后 lease 可移除，7 项生命周期 gate 全为 true。模型 14 文件、fixture SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f` 与既有固定身份一致。签名真机 build 和无签名 generic iOS build 均成功；报告由 [隔离 validator](../../artifacts/verification/mlxvlm-sustained-video-20261029/validate.py) 核对身份、轮次、PID、输入 hash、资源采样与清理 gate。
+
+进程 RSS 由第一轮前 40,681,472 B，在首轮 `drain` 后为 136,200,192 B，第 12 轮 `drain` 后为 1,152,892,928 B，`close` 后为 1,152,909,312 B；首轮 drain 到末轮 drain 增加 **1,016,692,736 B**。原始设备报告为 `artifacts/verification/mlxvlm-sustained-video-20261029/device-report.json`，SHA-256=`0408fb19a30a5c4506fa5c92971453955deb5cb8c0360f19f0f2d53183007012`；逐轮 RSS 和有界结论在同目录 `summary.json`。这是一次同 PID、单素材的 `mach_task_basic_info` 进程驻留内存观察，不能据此判定内存泄漏根因、GPU 专用内存或能耗，也没有建立发布资源预算。RSS 持续上升需要单独定位；P11 `open/not-ready` 不变，且不把这 12 轮计入合成图 grouped benchmark 的样本。
+
 CoreDevice 恢复到 `available (paired)` 后，fresh `test-without-building` 仍 exit **70**；直接查询 lock state 返回 `CoreDeviceError 10003` / `RemotePairingError 1016`（`The device has not been unlocked recently`）。这确认当前只差一次设备解锁，不能归因于 host/picker 代码。
 
 ## 2026-10-25 P9 picker 退场竞态修复与本地回归
