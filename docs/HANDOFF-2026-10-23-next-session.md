@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 iPhone 原生视频采样边界
+
+- 在已解锁的物理 iPhone 16 Pro Max / iOS 27.0.1 上构建并运行独立签名 `io.ondeviceai.temporalframes` App；隔离 consumer 引入与生产文件 SHA-256 一致的 `MLXVLMVideoSnapshot.swift`（`33db01c3ce3470b2d78f7ff6b2f7c87a9197dc41198295dd483c053424eb5f01`）。六个固定公开视频 fixture 仅复制到该 App 的 Documents 沙盒；未加载模型、未生成文字、未写 Photos。
+- 设备 PID `31522` 与 `devicectl` launch receipt 一致。六段均成功解码，每段 8 帧、实际时间 `0,0.25,…,1.75` 秒；三个 motion 各 8 个唯一像素哈希，三个 frozen 各 1 个，三对首帧哈希相同；snapshot 副本 SHA 与原始素材一致，close 后目录删除且原文件未变。原始报告 `artifacts/verification/temporal-iphone-native-frames-20261029/device-report.json` SHA-256=`9413fbc62497239d486f4a8cfb39bb470521d41ace3ae17e9b8b09065bb31529`；同目录独立 `validate.py` 输出 `pass-bounded`，校验结果 SHA-256=`b57b8a2919f1f1255fce07809cfabc93726e5c4bd512678d9b3d065168082d8a`。
+- iPhone/macOS 使用同一 RGBA 哈希渲染参数，但 48/48 对应帧的字节哈希不同，因此只认各平台内部 motion/frozen 关系，不声称跨平台像素相等。该结果关闭固定 fixture 的**物理 iPhone 生产 Snapshot 采样边界**疑点；MLX prepared tensors、模型感知和自然 temporal quality 仍未验证。旧正式模型输出 `MOVING.` 六次、temporal pair 0/3、`observed-failure` 与 P11 `open/not-ready` 不变；下一步若继续定位，应观察下游预处理/tensor，勿重复同一生成任务。
+- 首次受限构建因 ModuleCache/SPM 写权限在依赖解析阶段失败；授权环境同一命令 `** BUILD SUCCEEDED **`。受保护 dirty 文件未 stage/恢复/覆盖，goal 仍 active。
+
 ## 最新续接 — 2026-10-29 F08 原生视频采样边界
 
 - 用生产 `MLXVLMVideoSnapshot.swift` 原文件构建隔离 macOS 27.2 探针，对六个 temporal fixture 完成 AVFoundation 解码：motion 每段8个唯一采样帧，frozen 每段1个唯一帧；三对首帧 RGBA 哈希一致；实际采样时间均为 `0,0.25,…,1.75` 秒；snapshot 临时目录全部清理且源文件未变。

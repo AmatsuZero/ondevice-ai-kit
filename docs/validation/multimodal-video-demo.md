@@ -14,9 +14,13 @@
 
 ### 原生采样边界核对
 
+物理 iPhone 16 Pro Max / iOS 27.0.1 上又以独立 App `io.ondeviceai.temporalframes` 运行与生产文件哈希相同的 `MLXVLMVideoSnapshot.swift`，从 App 沙盒读取同一六个公开视频 fixture。PID `31522` 与设备启动 receipt 一致；六行各采到 8 帧，实际时间均为 `0, 0.25, …, 1.75` 秒，motion 各 8 个唯一帧、frozen 各 1 个，三对首帧哈希一致。每行副本文件与源素材 SHA-256 一致，临时 snapshot 目录已清理，素材未变。原始设备报告 `artifacts/verification/temporal-iphone-native-frames-20261029/device-report.json` SHA-256=`9413fbc62497239d486f4a8cfb39bb470521d41ace3ae17e9b8b09065bb31529`；同目录独立校验 `validate.py` 为 `pass-bounded`。该 App 没有加载模型或生成文字。
+
+iPhone 与 macOS 的 RGBA 渲染参数一致，但逐帧字节哈希 48/48 不同；因此这两次结果只证明各平台内部的采样时间与 motion/frozen 关系，不证明跨平台像素一致。iPhone 原生 Snapshot 边界保留了固定素材的运动差异，下一处待查的是 MLX 预处理后的 tensor 与模型行为；正式 temporal 0/3 和 P11 `open/not-ready` 仍不变。
+
 在 macOS 27.2 的隔离探针中直接编译生产 `MLXVLMVideoSnapshot.swift`，对同一六个 fixture 做 AVFoundation 解码。六行均完成：每个 motion window 的 8 个采样帧有 8 个唯一 RGBA 哈希；每个 frozen control 的 8 个采样帧只有 1 个唯一哈希；三对 motion/control 的首帧像素哈希一致。实际时间均为 `0, 0.25, …, 1.75` 秒，snapshot close 后临时副本目录全部移除，源文件保持不变。报告为 `artifacts/verification/temporal-native-frames-20261029/report.json`，SHA-256=`53fd6203ee5d71e194d99193eb66bace7a7009ddeeb066497785b32d34032f2b`。
 
-这说明固定 motion/frozen 差异在本次 macOS 原生采样边界得以保留。它不证明物理 iPhone 解码、MLX prepared tensor 或模型感知，不能据此将真机 0/3 归因到模型；正式 `observed-failure` 与 P11 结论不变。
+这说明固定 motion/frozen 差异在本次 macOS 原生采样边界得以保留；物理 iPhone 的对应边界由上方独立设备报告补充。两者都没有观察 MLX prepared tensor 或模型感知，不能据此将真机 0/3 归因到模型；正式 `observed-failure` 与 P11 结论不变。
 
 ## 2026-10-28 真机 Home 后台取消与前台重入
 
