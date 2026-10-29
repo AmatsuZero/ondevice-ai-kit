@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 首 token 前 Home 后台 terminal
+
+- 在 ignored 隔离 Home timing 副本中，以真实 Files provider 固定公开视频，在 `.videoPrepared` 后、首个文本 update 前触发系统 Home；保持生产 `willResignActive` 取消策略，不延迟 native。iPhone 16 Pro Max / iOS 27.0.1 PID `31298`，XCTest **1/1、0 failures、0 skips**。
+- `didEnterBackground` 时 phase=`CANCELLING`；106.301 ms 后 `nativeDrainAndLeaseRelease`，107.359 ms 后 `bridgeCancelled`；取消请求没有首个文本 update，前台 phase 保持 `CANCELLED` 且同输入重入成功。该窄证据关闭固定 fixture/首 token 前阶段的 `inBackgroundTerminalTiming`，不外推跨素材或跨系统。
+- 规范化 report `artifacts/verification/apple-mlxvlm-natural-video-20261028/pretoken-home-xctest/device-report-pretoken.json` SHA-256=`bdf65e038122c9b63fce6801eb9da33538de4212b33ae14ffe051a4a1a534774`；trace=`c727a0843ff58ca44270016e127d536ede339531c7986e9f7e4d3dbeef1935fa`，xcresult summary=`1ae5ea82406b8456743c8b08f19b8933008b701b98281c6de9a4469292add9d7`。validator 真实报告和6个篡改负例通过；生产SDK、普通Demo、受保护dirty文件未修改。
+- readiness 现为 **9 rows / 38 evidence paths / 36 source hashes / 9 rows with gaps**；P11 继续 `open/not-ready`。自然 temporal quality、物理触控、GPU/energy、持续资源、发布预算仍开放；该报告不加入 grouped benchmark。
+
 ## 最新续接 — 2026-10-29 F08/F11 MLX cache 归因
 
 - 同一 goal active，工作树 `feat/sdk-foundation`，生产源码和9项保护dirty文件保持不变。正式设备 PID `31212`，固定公开视频/模型 12轮（8 success、4 cancelled）、drain/close/lease/临时清理全部通过。

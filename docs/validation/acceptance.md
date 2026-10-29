@@ -24,6 +24,8 @@ P11 分组 benchmark 首版已从哈希固定的原始 JSON 重算出3组：iOS/
 
 后续 MLX cache 归因使用清理前后各2秒等待对照：无干预RSS约1.154 GB保持，clearCache后约137 MB，cache由1,086,181,704 B降为0（再等待后40 B）。本固定视频的主要保留量得到可回收cache证据；生产策略、全部泄漏与资源预算仍未通过。当前readiness为9行、35个evidence paths、33个source hashes，9行仍有gap；详见[multimodal video记录](multimodal-video-demo.md#2026-10-29-mlx-cache-归因与等时等待对照)。
 
+首 token 前 Home 诊断补齐固定公开视频在已进入 background 后的 terminal 时序：PID `31298`，`didEnterBackground` 后 106.301 ms drain、107.359 ms `CANCELLED`，XCTest 1/1，前台重入成功；该窄项不改变其他质量/资源 gap。当前 readiness 为 9 行、38 个 evidence paths、36 个 source hashes，9 行仍有 gap。
+
 | 项目 | 证据 | 结论 |
 | --- | --- | --- |
 | Swift SDK | `scripts/verify-apple.sh` 的 XCTest 和原生消费者日志 | 本次 P5 脚本通过：33 Swift XCTest、原生消费者和 Demo 构建；macOS 测试不替代 iPhone |

@@ -186,6 +186,15 @@ Roadmap 仍 **5/12、P9 active**；本轮 `git diff --check` 通过，所有既�
 
 结论范围仍有限：没有证明进程所有内存无泄漏、约 137 MB 残留的构成、跨素材持续资源、能耗或发布资源预算；108 B active/40 B cache 的小额残留亦未解释。清缓存是进程级诊断操作，未变成生产 SDK 生命周期策略；共享 MLX 使用方、性能/重入影响尚未评估。F08/F11 保持 open，P11 `open/not-ready`，该报告不进入 grouped benchmark 样本。下一步应先制定资源预算与缓存所有权策略，再决定生产行为；不重复同构取证，也不把诊断清理直接加入 SDK close。
 
+## 2026-10-29 首 token 前 Home 与后台 terminal 时序
+
+为补齐此前“首个文本 update 后 Home”无法覆盖的早期阶段，复用同一真实 Files provider、固定公开视频与隔离 Demo，在 `.videoPrepared` 之后、首个文本 update 之前触发系统 Home。测试专用 accessibility stage 只用于让 XCTest 等待 native observer 事件；没有延迟、篡改或关闭生产 `willResignActive` 取消策略。
+
+- iPhone 16 Pro Max / iOS 27.0.1，PID `31298`，`testNaturalVideoOSBackgroundCancellationAndReentry` **1/1 passed、0 failed、0 skipped**。取消请求在 native `videoPrepared` 后 `912.199 ms` 触发 `willResignActive`，此时首个文本 update 尚未送达。
+- `didEnterBackground` 后仍是 `CANCELLING`；再过 `106.301 ms` 出现 `nativeDrainAndLeaseRelease`，`107.359 ms` 进入 `bridgeCancelled`。取消请求没有在进入后台前假定完成；前台恢复后保持 `CANCELLED`，同一输入重入成功。native observer 事件与 UIKit lifecycle 的单调时间分别保留，报告只用事件顺序和边界字段作结论。
+- 规范化报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/pretoken-home-xctest/device-report-pretoken.json` SHA-256=`bdf65e038122c9b63fce6801eb9da33538de4212b33ae14ffe051a4a1a534774`；原始 trace SHA-256=`c727a0843ff58ca44270016e127d536ede339531c7986e9f7e4d3dbeef1935fa`，xcresult summary SHA-256=`1ae5ea82406b8456743c8b08f19b8933008b701b98281c6de9a4469292add9d7`，fixture hash 仍为 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`。`validate.py` 的真实报告校验与 6 个篡改负例均通过。
+- 这关闭 F08 的窄子项 `inBackgroundTerminalTiming`（固定公开 fixture、首 token 前取消阶段）；不扩展为跨素材/跨系统保证，也不关闭自然 temporal quality、物理触控、GPU/energy、持续资源或发布预算。该报告不加入 grouped benchmark 样本。
+
 CoreDevice 恢复到 `available (paired)` 后，fresh `test-without-building` 仍 exit **70**；直接查询 lock state 返回 `CoreDeviceError 10003` / `RemotePairingError 1016`（`The device has not been unlocked recently`）。这确认当前只差一次设备解锁，不能归因于 host/picker 代码。
 
 ## 2026-10-25 P9 picker 退场竞态修复与本地回归
