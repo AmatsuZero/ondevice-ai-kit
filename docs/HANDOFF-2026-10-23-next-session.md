@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 选定标签前缀 margin 派生诊断
+
+- 同一 active goal 继续，未替换 goal。当前工作树 `feat/sdk-foundation`；本轮开始时本地、`origin` 与 `jihu` 的该分支已通过普通 fast-forward push/回读核对为 `a45b3f718351fa3c018956d0fd131e24df51fdc5`。九项受保护 dirty/untracked 文件哈希仍 **9/9** 匹配，未 restore、覆盖或 stage。
+- 沿用已验证的真实七行首 token logits raw report，不重新运行文字生成或设备 probe。新增 `tools/mlxvlm_label_margin.py` 与 `tools/tests/test_mlxvlm_label_margin.py`，从固定 tokenizer 的 `ĠMO`=`15720`、`ĠST`=`5022` 提取 selected prefix logits、margin 与仅在两 prefix token 上的归一化值；tokenizer hash 拒绝测试先观察到预期失败再修复，专项 **6/6**，拒绝缺失 token、raw/tokenizer hash 变更及覆盖输入。
+- 派生结果 `artifacts/verification/apple-mlxvlm-natural-video-20261028/label-margin/summary.json` SHA-256=`5c801baceb0072f571920c4bd58f05c3a04264f8bc25be07e832dd4019dd4a8b`，raw report SHA-256=`d20d2a4ca2c15480b0ed1d62bf36e00f42443da567fcb49f50b13cc2195f99ec`，tokenizer SHA-256=`5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a`。三组 motion/frozen margin 为 `1.625/1.000`、`1.625/1.375`、`1.750/1.250`；motion 均更高，但 frozen 仍偏向 `ĠMO`。这支持首 token 偏置诊断，不证明完整标签概率、视觉语义或 temporal quality；F08/P11 `observed-failure`、gate `open`、release `not-ready` 与基础10/12不变。
+- 下一步优先级不变：若继续 F08，需静止帧语义或真实完整标签分布/视觉特征观测；不要重复已有六次生成、Snapshot、adapter 或同一 raw report。生产 SDK、普通 Demo 与九项受保护修改未改动。
+- 完整 `tools/tests` 首轮受系统 Ruby 2.6/RVM gem 不兼容及 Swift ModuleCache 写权限影响失败；以已安装 Ruby 3.4 和临时可写 cache 在正常授权环境复跑 **192/192**。`python3 -m py_compile` 与 `git diff --check` 通过。
+
 ## 最新续接 — 2026-10-29 F08 iPhone 首 token logits 边界
 
 - 同一 active goal 直接 resume，不替换；工作树 `feat/sdk-foundation`，HEAD=`608b22ac838432979c6217d374468c47dbe98535`。隔离 `io.ondeviceai.logitdebug` 探针在 iPhone 16 Pro Max / iOS 27.0.1 已解锁设备运行，PID `31609` 与 launch receipt 一致。固定本地模型权重及六段公开 fixture 仅放该 App 沙盒；不使用镜像、Photos、私人媒体或文字生成。unsigned generic 与 signed device build 均 exit0/`BUILD SUCCEEDED`；首次无冻结 package cache 的受限构建卡在 SwiftPM 远程 clone，已终止并用现有 `SourcePackages` 成功重建。

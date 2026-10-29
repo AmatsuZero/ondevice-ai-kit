@@ -6,6 +6,12 @@
 
 `motion-0-2` 的第二次同输入 prepare 与第一次完整 float logits hash 完全相同。三组 motion/frozen 的完整 logits hash 均不同，说明差异已到达模型首 token 分布。但六行 top-5 token ID 的排序都相同：`15720, 5022, 26332, 372, 625`；固定 tokenizer 中首位 `15720` 对应 `ĠMO`，而非 frozen control 的 `STILL`。各 pair 的 top-5 logit 数值有变化，排序没有变化。此证据不证明视觉编码器正确理解运动，也不证明任一 control 被正确判别；正式六次 raw output `MOVING.`、temporal pair **0/3** 和 `observed-failure` 保持不变。下一步若定位质量问题，应测试模型是否能从静止帧任务中区分语义，或观察选定标签概率/视觉特征，不再重复相同生成。
 
+### 2026-10-29 首 token 选定标签前缀 margin（派生诊断）
+
+从上面的真实七行 raw logits 报告派生出 `ĠMO`（token `15720`）与 `ĠST`（token `5022`）的相对分数；没有重新生成、没有修改 raw report，也没有把两 token 归一化结果当作全词表概率。验证器 `tools/mlxvlm_label_margin.py` 绑定 raw report SHA-256=`d20d2a4ca2c15480b0ed1d62bf36e00f42443da567fcb49f50b13cc2195f99ec` 与 tokenizer SHA-256=`5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a`；输出 `artifacts/verification/apple-mlxvlm-natural-video-20261028/label-margin/summary.json` SHA-256=`5c801baceb0072f571920c4bd58f05c3a04264f8bc25be07e832dd4019dd4a8b`，状态为 `pass-bounded`。
+
+三个 pair 的 `MOVING` 前缀减 `STILL` 前缀 margin 分别为 motion/frozen：`1.625/1.000`、`1.625/1.375`、`1.750/1.250`；motion margin 均高于 frozen，但 frozen 仍为正，选定前缀二项归一化仍偏向 `ĠMO`（约 `0.731–0.798`）。这进一步支持“输入差异改变了首 token 分布，但模型在该 prompt 上保留 MOVING 前缀偏置”的窄诊断；它不证明完整标签概率、视觉语义或 temporal quality，F08/P11 `observed-failure` 与 `open/not-ready` 保持不变。新增回归为 **6/6**，并拒绝缺失选定 token、raw/tokenizer hash 变更及覆盖输入文件。
+
 ## 2026-10-29 temporal 评分行与原始报告绑定修复
 
 `tools/mlxvlm_temporal_task_set.py` 原先只校验复制行声明的 raw-report SHA-256，没有核对复制行内容。保留真实 `device-report-v2.json` 不变、仅把复制行输出改成期望标签时，旧工具可将 `observed-failure` 误汇总为 `pass-bounded`。现在要求原始报告是成功的完整 nine-row run，并逐行核对完整内容；输出、耗时、run ID、设备或源码身份的副本篡改均拒绝。输出路径也不能覆盖 report、manifest、source report 或其 symlink/hardlink。
