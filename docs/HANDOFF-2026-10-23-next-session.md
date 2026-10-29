@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 静止帧语义真机探针
+
+- 同一 active goal 直接 resume，无需替换；工作树 `feat/sdk-foundation`，设备探针源提交 `835221e11e06dae4db2e47d75e08ef64db855c32`。隔离签名 App `io.ondeviceai.staticsemantic` 已安装并在 iPhone 16 Pro Max / iOS 27.0.1 启动，launch receipt 的 PID=`31720`；模型、三个 frozen fixture 只存在 App Documents 沙盒，没有写入 Photos。
+- 原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/static-semantic/device-report.json` SHA-256=`31eb195e375c123c39d5133636609cad835af80d0a80408af7912e53fcf43e01`。三行均绑定 fixture hash、bundle、PID、backend=`mlx.smolvlm2-500m`、model revision=`fa57db46815177fbdfd65cc85a2b3416a8332268`、runtime revision=`6e338e5df49424fc0db7c6d58184d622f92ed18a`；prompt 为 `Describe the visible scene in one brief sentence.`。
+- 静态语义 validator 输出 `artifacts/verification/apple-mlxvlm-natural-video-20261028/static-semantic/summary.json`，`pass-bounded`、subject/scene **3/3**；三个输出都描述飞鸟和天空。该证据只关闭 frozen control 的基础场景语义可读性疑点，不改变原 temporal exact-label pair **0/3**、F08 `observed-failure`、P11 `open/not-ready` 或基础里程碑 **10/12**；temporal quality、GPU/energy、持续资源仍 `unverified`。
+- 本轮专项测试 **3/3**，`py_compile` 与 `git diff --check` 通过。CoreDeviceService 首次读取报告发生初始化超时，使用授权的 `devicectl device copy from` 重试后成功；不要把此前超时当作 App 失败。原始报告、summary、install/launch/copy receipts 均为 ignored 证据；生产 SDK、普通 Demo、九项受保护 dirty/untracked 文件未修改。
+- 下一步：若继续 F08，扩展不同来源/场景或完整标签概率/视觉特征观测；不要重复 Snapshot、adapter 或同一 temporal 生成任务。P11 仍保持 `open/not-ready`。
+
 ## 最新续接 — 2026-10-29 F08 选定标签前缀 margin 派生诊断
 
 - 同一 active goal 继续，未替换 goal。当前工作树 `feat/sdk-foundation`；本轮开始时本地、`origin` 与 `jihu` 的该分支已通过普通 fast-forward push/回读核对为 `a45b3f718351fa3c018956d0fd131e24df51fdc5`。九项受保护 dirty/untracked 文件哈希仍 **9/9** 匹配，未 restore、覆盖或 stage。

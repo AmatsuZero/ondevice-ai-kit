@@ -1,5 +1,11 @@
 # Typed video Demo input / state / host checkpoint
 
+## 2026-10-29 静止帧场景语义真机探针
+
+隔离签名 App `io.ondeviceai.staticsemantic` 在 iPhone 16 Pro Max / iOS 27.0.1 上读取三个 repeated-first-frame frozen control，使用 prompt `Describe the visible scene in one brief sentence.` 生成自然语言描述。launch receipt 与原始报告 PID 均为 `31720`；报告绑定 source commit `835221e11e06dae4db2e47d75e08ef64db855c32`、fixture manifest SHA-256=`666fbfebdc999aefa5b9db944a090024b9478c13107685af621fb842babe1694`、backend/model/runtime identity。原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/static-semantic/device-report.json` SHA-256=`31eb195e375c123c39d5133636609cad835af80d0a80408af7912e53fcf43e01`。
+
+三个输出都描述了飞鸟和天空，静态 rubric 的 subject/scene 为 **3/3**；规范化摘要 `artifacts/verification/apple-mlxvlm-natural-video-20261028/static-semantic/summary.json` 为 `pass-bounded`。这只证明 frozen control 的基础场景语义可读性，不能证明完整 temporal quality、运动/静止标签判别、GPU/energy 或持续资源；正式 temporal pair 仍为 **0/3**、F08/P11 仍 `observed-failure` / `open/not-ready`，本报告不加入 grouped benchmark sample。
+
 ## 2026-10-29 iPhone 首 token logits 边界
 
 在已解锁的 iPhone 16 Pro Max / iOS 27.0.1 上，隔离签名 App `io.ondeviceai.logitdebug` 读取同一六段固定公开 fixture 和本地固定 SmolVLM2 权重，调用生产 Snapshot、与生产源哈希相同的 video adapter，再直接观察 `LanguageModel.prepare` 返回的首 token logits；没有运行文字生成或改变正式评分。设备 PID `31609` 与 launch receipt 相同。原始七行报告位于 `artifacts/verification/apple-mlxvlm-natural-video-20261028/logit-boundary/device-report.json`，SHA-256=`d20d2a4ca2c15480b0ed1d62bf36e00f42443da567fcb49f50b13cc2195f99ec`；同目录 `validate.py` 核对 fixture、模型文件、生产源码副本、PID 和原始行，并拒绝篡改的 logits hash。
