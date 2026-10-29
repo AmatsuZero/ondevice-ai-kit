@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-29 F08 temporal 原始行绑定修复
+
+- 根因复现：保持真实 raw-report 不变，只篡改 copied evidence 的六个输出为期望标签，旧 temporal validator 会从 `observed-failure` 错判为 `pass-bounded`。现在对成功完整 nine-row raw report 逐行核对内容，并禁止输出覆盖任何输入及 symlink/hardlink；严格 MOVING/STILL rubric、模型/生产SDK/Demo 均未改动。
+- 新回归先 RED（12 个子用例失败，无 errors）后 GREEN；聚焦38/38、完整 tools **186/186**。完整套件首次两个 Swift 测试因用户 ModuleCache 写权限失败，正常授权环境复跑后全部通过；不隐瞒首轮环境失败。
+- 真实 temporal evidence 经新工具重建与原 summary 逐字节一致，semantic1/3、temporal pair0/3、`observed-failure` 保持。未重跑相同真机输入，未篡改 raw/summary，不提升 F08 或 P11。独立 code-reviewer 返回 `Selected model is at capacity`，没有审查结论；保留 F12 缺口。
+- 下一步继续区分 exact-label instruction following 与 motion perception，或推进资源预算/缓存所有权设计；现有失败不放宽评分，不新增发布门槛。受保护dirty文件继续保留，goal仍active。
+
 ## 最新续接 — 2026-10-29 F12 候选范围与证据重建审计
 
 - 同一 goal 继续保持 `active`，无需替换或新建 goal。对冻结 SDK 提交 `7b9f7fc75772b61948d211d72ec2e1e221362591` 到当前 `HEAD=cc438de8e32eec3f01d02d64bf7e6585f44ec2a3` 做只读范围核对：49 个提交路径全部位于文档、工具、探针、脚本或 benchmark；生产 SDK、KMP binding、Demo 和构建配置没有提交差异。既有 committed-tree archive 的 SHA-256=`6a2cb8afd895b13fa281d15f55046b3f263a1882aebd8ce31dff563bc3b2b666`，内嵌 tar commit 与冻结提交一致。

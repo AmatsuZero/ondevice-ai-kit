@@ -52,14 +52,6 @@ def score_semantic_row(raw: dict[str, Any], *, task: dict[str, Any]) -> dict[str
     return score_output(raw.get("output", ""))
 
 
-def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        while chunk := stream.read(1024 * 1024):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-
 def _required(row: dict[str, Any], key: str) -> Any:
     value = row.get(key)
     if value is None or (isinstance(value, str) and not value.strip()):
@@ -141,7 +133,8 @@ def build_temporal_summary(rows: list[dict[str, Any]], *, manifest: dict[str, An
     tasks = _task_contract(manifest)
     if not source_report.is_file():
         raise TemporalValidationError("source report is missing")
-    report_hash = _sha256(source_report)
+    source_bytes = source_report.read_bytes()
+    report_hash = hashlib.sha256(source_bytes).hexdigest()
     run_ids = [row.get("runId") for row in rows]
     if any(not isinstance(run_id, str) or not run_id.strip() for run_id in run_ids):
         raise TemporalValidationError("missing runId")
@@ -159,6 +152,21 @@ def build_temporal_summary(rows: list[dict[str, Any]], *, manifest: dict[str, An
         if task is None:
             raise TemporalValidationError("unknown task ID")
         normalized.append(_normalize_row(row, task, source_report=source_report, report_hash=report_hash))
+    source = json.loads(source_bytes)
+    if (
+        not isinstance(source, dict)
+        or source.get("schemaVersion") != 1
+        or source.get("state") != "success"
+        or source.get("expectedRows") != len(tasks)
+        or not isinstance(source.get("rows"), list)
+        or len(source["rows"]) != len(tasks)
+    ):
+        raise TemporalValidationError("source report must contain a successful nine-row run")
+    source_rows = source["rows"]
+    for row in rows:
+        original = {key: value for key, value in row.items() if key not in {"sourceReport", "sourceReportSha256"}}
+        if source_rows.count(original) != 1:
+            raise TemporalValidationError(f"source row mismatch: {row['taskId']}")
     ordered = sorted(normalized, key=lambda item: item["taskId"])
     temporal = [item for item in ordered if item["taskKind"] != "semantic-motion"]
     semantic = [item for item in ordered if item["taskKind"] == "semantic-motion"]
@@ -193,6 +201,9 @@ def build_temporal_summary(rows: list[dict[str, Any]], *, manifest: dict[str, An
 
 
 def _validate(report: Path, manifest: Path, source_report: Path, output: Path) -> None:
+    for input_path in (report, manifest, source_report):
+        if output.resolve() == input_path.resolve() or (output.exists() and output.samefile(input_path)):
+            raise TemporalValidationError(f"output must not overwrite input: {input_path}")
     raw = json.loads(report.read_text(encoding="utf-8"))
     rows = raw if isinstance(raw, list) else raw.get("rows")
     if not isinstance(rows, list):

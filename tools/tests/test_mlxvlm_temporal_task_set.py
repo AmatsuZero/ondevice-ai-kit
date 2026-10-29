@@ -1,5 +1,7 @@
+import copy
 import hashlib
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -12,6 +14,7 @@ from tools.mlxvlm_temporal_task_set import (
     normalize_temporal_answer,
     score_semantic_row,
     score_temporal_row,
+    _validate,
 )
 
 
@@ -63,6 +66,15 @@ def raw_rows():
     return rows
 
 
+def write_source_report(path, evidence_rows, **overrides):
+    source_rows = [{k: v for k, v in row.items() if k not in {"sourceReport", "sourceReportSha256"}} for row in evidence_rows]
+    path.write_text(json.dumps({"schemaVersion": 1, "state": "success", "expectedRows": 9, "rows": source_rows, **overrides}))
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    for row in evidence_rows:
+        row["sourceReport"] = path.name
+        row["sourceReportSha256"] = digest
+
+
 class TemporalTaskSetTests(unittest.TestCase):
     def test_temporal_answer_accepts_only_exact_labels(self):
         self.assertEqual(normalize_temporal_answer("MOVING"), "MOVING")
@@ -87,7 +99,7 @@ class TemporalTaskSetTests(unittest.TestCase):
         rows = raw_rows()
         with tempfile.TemporaryDirectory() as root:
             report = Path(root) / "raw-device-report.json"
-            report.write_text("raw")
+            write_source_report(report, rows)
             report_hash = hashlib.sha256(report.read_bytes()).hexdigest()
             for row in rows:
                 row["sourceReportSha256"] = report_hash
@@ -104,7 +116,8 @@ class TemporalTaskSetTests(unittest.TestCase):
         rows = raw_rows()
         with tempfile.TemporaryDirectory() as root:
             report = Path(root) / "raw-device-report.json"
-            report.write_text("raw")
+            write_source_report(report, rows)
+            rows[0]["sourceReportSha256"] = "stale"
             with self.assertRaisesRegex(TemporalValidationError, "source report"):
                 build_temporal_summary(rows, manifest=manifest(), source_report=report)
             actual = hashlib.sha256(report.read_bytes()).hexdigest()
@@ -121,7 +134,7 @@ class TemporalTaskSetTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as root:
             root = Path(root)
             source = root / "raw-device-report.json"
-            source.write_text("raw")
+            write_source_report(source, rows)
             source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
             for row in rows:
                 row["sourceReportSha256"] = source_hash
@@ -136,6 +149,53 @@ class TemporalTaskSetTests(unittest.TestCase):
                 "--output", str(output),
             ], check=True)
             self.assertEqual(json.loads(output.read_text())["runCount"], 9)
+
+    def test_summary_rejects_copied_rows_changed_without_changing_source(self):
+        with tempfile.TemporaryDirectory() as root:
+            source = Path(root) / "raw-device-report.json"
+            rows = raw_rows()
+            write_source_report(source, rows)
+            original = source.read_bytes()
+            for field, value in (("output", "MOVING now"), ("durationMs", 1.0), ("runId", "invented"),
+                                 ("device", "other-device"), ("sourceCommit", "b" * 40)):
+                with self.subTest(field=field):
+                    changed = copy.deepcopy(rows)
+                    changed[0][field] = value
+                    with self.assertRaisesRegex(TemporalValidationError, "source row"):
+                        build_temporal_summary(changed, manifest=manifest(), source_report=source)
+                    self.assertEqual(source.read_bytes(), original)
+
+    def test_summary_rejects_failed_or_incomplete_source(self):
+        with tempfile.TemporaryDirectory() as root:
+            source = Path(root) / "raw-device-report.json"
+            for change in ({"state": "failed"}, {"rows": []}, {"expectedRows": 8}, {"schemaVersion": 2}):
+                with self.subTest(change=change):
+                    rows = raw_rows()
+                    write_source_report(source, rows, **change)
+                    with self.assertRaisesRegex(TemporalValidationError, "source report"):
+                        build_temporal_summary(rows, manifest=manifest(), source_report=source)
+
+    def test_validation_cannot_overwrite_any_input(self):
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            rows = raw_rows()
+            source = root / "raw-device-report.json"
+            report = root / "evidence.json"
+            task_manifest = root / "manifest.json"
+            write_source_report(source, rows)
+            symlink = root / "source-symlink.json"
+            symlink.symlink_to(source)
+            hardlink = root / "source-hardlink.json"
+            os.link(source, hardlink)
+            for target in (source, report, task_manifest, symlink, hardlink):
+                with self.subTest(target=target.name):
+                    write_source_report(source, rows)
+                    report.write_text(json.dumps({"rows": rows}))
+                    task_manifest.write_text(json.dumps(manifest()))
+                    original = target.read_bytes()
+                    with self.assertRaisesRegex(TemporalValidationError, "overwrite"):
+                        _validate(report, task_manifest, source, target)
+                    self.assertEqual(target.read_bytes(), original)
 
 
 if __name__ == "__main__":

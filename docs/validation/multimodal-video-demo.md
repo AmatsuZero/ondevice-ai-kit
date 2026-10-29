@@ -1,5 +1,11 @@
 # Typed video Demo input / state / host checkpoint
 
+## 2026-10-29 temporal 评分行与原始报告绑定修复
+
+`tools/mlxvlm_temporal_task_set.py` 原先只校验复制行声明的 raw-report SHA-256，没有核对复制行内容。保留真实 `device-report-v2.json` 不变、仅把复制行输出改成期望标签时，旧工具可将 `observed-failure` 误汇总为 `pass-bounded`。现在要求原始报告是成功的完整 nine-row run，并逐行核对完整内容；输出、耗时、run ID、设备或源码身份的副本篡改均拒绝。输出路径也不能覆盖 report、manifest、source report 或其 symlink/hardlink。
+
+新回归先 RED 后 GREEN，聚焦 38/38、完整 tools 186/186 通过。真实 evidence 经新工具重建与原 summary 逐字节一致：semantic 1/3、temporal pair 0/3、`observed-failure`；没有修改评分 rubric、原始报告或生产行为，不把格式失败改写为运动感知通过。独立 reviewer 因模型容量不足未返回结论，审查缺口保留。P11 继续 `open/not-ready`。
+
 ## 2026-10-28 真机 Home 后台取消与前台重入
 
 复用当前 MLX Demo 验证副本和公开 `common-swifts-24fps.mp4`，在 iPhone 16 Pro Max / iOS 27.0.1 上运行独立 XCTest `testNaturalVideoOSBackgroundCancellationAndReentry`。测试从真实系统 Files provider 选择视频，等待共享页面的 `RUNNING` 与非空 update 后按系统 Home，确认 App 状态为后台或后台挂起；回到前台后状态为 `CANCELLED`，随后1秒观察窗口内没有自动重启，再次使用同一输入生成成功，输出 backend=`mlx.smolvlm2-500m`。测试 **1/1、0 failures、0 skips**，耗时 31.659 秒；`build-for-testing` 与 `test-without-building` 均成功。
