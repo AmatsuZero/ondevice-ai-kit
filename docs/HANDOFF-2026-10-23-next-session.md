@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F09 target-scoped archive 新阻断
+
+- 同一 active goal 继续；原有 `project.pbxproj`、身份草稿和相机 probes 等 protected dirty/untracked 文件未覆盖。使用 ignored `SourcePackages` 副本，只给 `swift-collections` 的 `OrderedCollections` target 注入 `-Xfrontend -disable-module-selectors-in-module-interface`；EventSource 保持默认 selectors。生产 `Package.resolved`、生产 checkout 和签名产物未修改。
+- 真实搬移 source consumer 的 unsigned Release generic iOS archive 已通过 `OrderedCollections` 和 `EventSource` 的 `SwiftVerifyEmittedModuleInterface`，随后 exit=`65` 在 `mlx-swift-lm` 首次失败。诊断为 Swift 6.4 对 `MLXFast.ScaledDotProductAttentionMaskMode` 的未知枚举值检查，位置为 `KVCache.swift:2627/2803`、`TurboQuantKVCache.swift:1345`、`Gemma4.swift:105`。
+- archive log SHA-256=`5a4e6d769b0a92712c0e3764366b964c91552f3557767dfe4cf4f015485937c2`；隔离摘要 `artifacts/verification/f09-target-scoped-20261030/summary.json` SHA-256=`ed5f997486bdecc8fd73301160b9e69a60f8824b5954eb60072a042f5424d9d8`。这证明 target-scoped 方向越过前两个门槛，但 F09 仍 `open/not-ready`，尚未得到 archive 或 binary consumer 通过。
+
 ## 最新续接 — 2026-10-30 F09 EventSource textual-interface 依赖设置冲突
 
 - 同一 active goal 继续；现有 `project.pbxproj`、身份草稿和相机 probes 等 protected dirty/untracked 文件未覆盖。未修改生产 `Package.resolved`、上游 checkout、签名或发布产物。

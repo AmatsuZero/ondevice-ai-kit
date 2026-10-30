@@ -89,6 +89,12 @@ Swift 上游 [#91540](https://github.com/swiftlang/swift/issues/91540) 记录了
 
 上游缓存的 `main` revision=`bdaaba6` 相对 1.5.1 只修改 CI 矩阵以测试 Swift 6.4（没有 EventSource 源码或 API 修复），且官方 tags 目前止于 1.5.1。因此当前没有已验证的 EventSource dependency-only 修复；问题是 **OrderedCollections 需要关闭 selectors，而 EventSource 需要 selectors** 的依赖级编译设置冲突。隔离摘要保留在 `artifacts/verification/f09-eventsource-interface-20261030/summary-corrected.json`（SHA-256=`913ad55586c86fb28942b9279d6e64655f3e5296470706689ecc628697a90334`）。生产 lock、上游 checkout、archive 选项和发布产物均未修改。
 
+### 2026-10-30 target-scoped workaround archive
+
+在 ignored 缓存副本中，只给 `swift-collections` 的 `OrderedCollections` target 注入 `-Xfrontend -disable-module-selectors-in-module-interface`，EventSource 保持默认 selectors；`Package.resolved`、生产 checkout 和生产 lock 未改。真实搬移 source consumer 的 unsigned Release generic iOS archive 已越过 `OrderedCollections` 与 `EventSource` 的 `SwiftVerifyEmittedModuleInterface` 阶段，随后在 `mlx-swift-lm` 目标失败，exit=`65`。
+
+新的首个诊断是 Swift 6.4 对 `MLXFast.ScaledDotProductAttentionMaskMode` 的未知枚举值检查：`KVCache.swift:2627`、`KVCache.swift:2803`、`TurboQuantKVCache.swift:1345`、`Gemma4.swift:105` 的 switch 没有 `@unknown default`。原始 archive log SHA-256=`5a4e6d769b0a92712c0e3764366b964c91552f3557767dfe4cf4f015485937c2`；隔离摘要 `artifacts/verification/f09-target-scoped-20261030/summary.json` SHA-256=`ed5f997486bdecc8fd73301160b9e69a60f8824b5954eb60072a042f5424d9d8`。该结果证明 target-scoped 方向能消除前两个 interface 阻断，但不等于增强 archive 或 binary consumer 已通过；生产依赖仍未修改。
+
 ## Tests、审查与恢复
 
 新 black-box generator 测试初次真实 RED 为缺少 `--portable-source`（2 failures；symlink 拒绝测试当时由 parser 拒绝而通过，不冒称该项独立 RED）。实现后新3/3；含默认 consumer 与基础分发的定向11/11；完整 tools **126/126**；补强 lock/resource 精确比较后的定向6/6、Python py_compile、`git diff --check` 通过。完整 tools 显式使用 `RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`；一次漏设 Ruby 的两个既有分发测试失败已由正确环境通过，不是产品修改。
