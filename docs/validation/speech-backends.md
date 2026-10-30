@@ -57,6 +57,14 @@ Microsoft 官方文档说明 Speech SDK 支持 Android、iOS 和 REST 路线；�
 
 ## 探针结果
 
+### 2026-10-30 F11 文件 ASR 资源原始测量
+
+在 ignored 隔离 probe `io.ondeviceai.probe.f11speech` 中复用固定合成 CAF，先 warm-up，再连续五次 `SFSpeechURLRecognitionRequest` 本机识别。iPhone 16 Pro Max / iOS 27.0.1 的启动 PID=`32472` 与原始报告一致；输入 SHA-256=`ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`，`requiresOnDeviceRecognition=true`，未使用麦克风。warm-up 和五次测量都为 `taskCompleted=true`、全文归一化匹配。
+
+原始报告 `artifacts/verification/f11-speech-asr-resources-20261030/device-report-final.json` SHA-256=`81e5312e678bce19cf441933ef430db670f7e5df483a60cf291bec92dad632f2`；五次耗时 p50/p95=`75.010/76.434 ms`，约 10 ms 间隔 `mach_task_basic_info.resident_size` 采样 RSS 峰值范围=`36,831,232–36,945,920 B`。bounded summary SHA-256=`71e163cec6634e595c338025d2070a8c0baa63271e936b585c2ddb15ddcca6f3`。
+
+这是 Speech framework 固定文件探针数据，不是生产 SDK client 性能、自然语音 CER/WER、网络行为、真实峰值/GPU/energy 或最低系统验收。首轮和正式复跑的 RSS 基线不同，不能用作发布资源预算；取消/重入仍沿用 P6 独立真机证据。
+
 `tools/probes/native_tts_probe.sh` 是宿主机探针：使用 macOS 内置 `say` 生成临时 AIFF，再用 `afinfo` 读取音频格式，退出时删除文件。`tools/probes/apple_avspeech_probe.swift` 进一步直接编译 AVFoundation，枚举 180 个系统 voice 并完成 `AVSpeechSynthesizer` 短句合成。两者只验证 host/API 可探测性。`demo/androidApp/src/androidTest/.../TtsProbeInstrumentation.kt` 在 TECNO KM9 / Android 15 上作为 1 个可发现的 instrumentation test 初始化 `com.google.android.tts`，`en-US` 返回 `LANG_AVAILABLE`，467 voices，生成 129404 字节 WAV 后成功关闭并删除缓存文件；同次查询 `SpeechRecognizer.isOnDeviceRecognitionAvailable` 返回 `true`，只证明设备具备 on-device ASR 服务，不代表已授权或已完成转写；`connectedDebugAndroidTest` 报告 1/1 通过。
 
 2026-10-17 初版独立 `probes/ios-speech` 探针的历史结果如下（后续 ASR 文件实测见本文末节）。iPhone 16 Pro Max / iOS 27.0.1 已签名构建、安装和启动；原始 JSON 保存在忽略目录 `artifacts/P6IOSSpeech/device-runs/`。设备报告显示 `AVSpeechSynthesizer` 共 193 个 voice，选择 `en-US` 的 Samantha，短句回调 `didFinish`，TTS 状态 `success`。原始 JSON 的 `offline=true` 是旧版探针未经断网验证的推断，不能作为离线证据；当前源码已改为 `networkBehavior=unmeasured`，此版本已通过模拟器构建但尚未重跑真机。探针也未录制或审听音频，因此网络行为和主观质量仍未测。`SFSpeechRecognizer(en-US)` 报告 `supportsOnDeviceRecognition=true`、`isAvailable=true`，但授权状态是 `notDetermined`，`transcription=not-run`；这些字段只证明可用性查询，不证明 ASR 推理通过。
