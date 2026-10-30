@@ -57,6 +57,14 @@ Microsoft 官方文档说明 Speech SDK 支持 Android、iOS 和 REST 路线；�
 
 ## 探针结果
 
+### 2026-10-30 F11 生产 SDK 文件 ASR 资源测量
+
+隔离 consumer 使用当前 `ODAIKitSpeech.SpeechRecognitionClient.recognize` → `ODAIKitAppleSpeech.AppleSpeechRecognizerBackend.recognize`，复用同一份固定合成 CAF（SHA-256=`ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`）。iPhone 16 Pro Max / iOS 27.0.1、PID=`32487`；预热和随后 5/5 次识别成功，实际 backend 均为 `apple.speech.recognizer`，归一化全文匹配，`client.close()` 返回。未使用麦克风或 Photos。
+
+原始报告 `artifacts/verification/f11-speech-asr-sdk-resources-20261030/device-report-final.json` SHA-256=`40d65c13c9ec7065ff639d51063e4508d186a004d38884689f1325074ecf6578`；五次耗时 p50/p95=`76.484/93.436 ms`，约 10 ms 间隔进程 RSS 采样峰值范围=`36,782,080–36,929,536 B`。bounded summary SHA-256=`2b436735c860cc278f28232b1eb2d0e40492c16b8ec4c8c9ca797e0f4a9b4e04`，来源清单 SHA-256=`8ae79f1efcc8f150fc58934739d2004054c86df29ecb3ecd8448b820278b469a`。
+
+这是生产 SDK 路径的固定文件单设备测量；与下方直连 Speech framework probe 是独立运行，不能将 p50 差值解释为 SDK 固有开销。自然语音 CER/WER、断网行为、真实内存峰值、GPU/energy 和最低系统仍未验证；采样 RSS 不能充当发布预算。
+
 ### 2026-10-30 F11 文件 ASR 资源原始测量
 
 在 ignored 隔离 probe `io.ondeviceai.probe.f11speech` 中复用固定合成 CAF，先 warm-up，再连续五次 `SFSpeechURLRecognitionRequest` 本机识别。iPhone 16 Pro Max / iOS 27.0.1 的启动 PID=`32472` 与原始报告一致；输入 SHA-256=`ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`，`requiresOnDeviceRecognition=true`，未使用麦克风。warm-up 和五次测量都为 `taskCompleted=true`、全文归一化匹配。

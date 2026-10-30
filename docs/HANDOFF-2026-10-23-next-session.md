@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F11 生产 SDK 文件 ASR 资源补测
+
+- 同一 active goal 继续，无需替换；工作树 `feat/sdk-foundation`，原有 `project.pbxproj`、身份草稿和相机 probes 等受保护 dirty/untracked 文件未覆盖。隔离 consumer 由当前 `ODAIKitSpeech.SpeechRecognitionClient.recognize` 调用 `ODAIKitAppleSpeech.AppleSpeechRecognizerBackend.recognize`，使用相同固定合成 CAF；未修改生产 SDK/Demo，未使用麦克风或 Photos。
+- iPhone 16 Pro Max / iOS 27.0.1，PID=`32487`；输入 SHA-256=`ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`。unsigned generic 和签名真机构建均 `BUILD SUCCEEDED`，安装、启动、Documents 回收成功。预热及 5/5 次 SDK 识别成功，实际 backend 均为 `apple.speech.recognizer`、归一化全文匹配，`client.close()` 返回。
+- 原始 `artifacts/verification/f11-speech-asr-sdk-resources-20261030/device-report-final.json` SHA-256=`40d65c13c9ec7065ff639d51063e4508d186a004d38884689f1325074ecf6578`；五次耗时 p50/p95=`76.484/93.436 ms`，约 10 ms 采样进程 RSS 峰值=`36,782,080–36,929,536 B`。bounded summary SHA-256=`2b436735c860cc278f28232b1eb2d0e40492c16b8ec4c8c9ca797e0f4a9b4e04`，source manifest SHA-256=`8ae79f1efcc8f150fc58934739d2004054c86df29ecb3ecd8448b820278b469a`。
+- 直连 Speech framework 与 SDK 路径为独立运行，不能把 p50 差值归因为 SDK 固有开销；自然 CER/WER、断网、真实峰值/GPU/能耗及最低系统仍未验证。P11 维持 `open/not-ready`，goal 维持 active。
+- readiness 已刷新为 **61 evidence paths / 68 source hashes / 9 rows with gaps**；快照 `artifacts/verification/p11-readiness-20261030-f11-asr-index/summary.json` SHA-256=`e6ac109c818a1650b2b1df6d129eecff6f2518c9a2abd3be70def604f24bb88c8`。grouped 报告确定性重算为 3 groups / 9 coverage，输出 `artifacts/verification/p11-grouped-benchmark-20261030-f11-sdk-asr/summary.json` SHA-256=`dfbfcb8d9bc6b0e3667e82f630df1388b6a832323f73275087181ac9d586b86f`；SDK ASR 不加入兼容 benchmark sample。
+
 ## 最新续接 — 2026-10-30 F11 iOS 文件 ASR 资源补测
 
 - 同一 active goal 继续；在 ignored `artifacts/verification/f11-speech-asr-resources-20261030/` 建立隔离 Speech framework probe，固定合成 CAF、一次 warm-up、五次顺序本机识别、逐 run 单调耗时和约 10 ms 采样进程 RSS。无麦克风、Photos 或私人媒体，生产 SDK/Demo 与受保护 dirty/untracked 文件未改。
