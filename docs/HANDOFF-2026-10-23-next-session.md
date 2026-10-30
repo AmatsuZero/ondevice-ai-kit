@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-31 F09 诊断 framework archive 与双远端同步
+
+- 用户恢复的 `gh` keyring 凭据在授权环境核对有效；一次性 HTTPS askpass 非强制快进将 `f553b69` 同步到 GitHub `origin/feat/sdk-foundation`，GitLab `jihu/feat/sdk-foundation` 此前已是该提交。没有更改全局 Git 配置、强推、merge、tag 或 release。此后新提交需再按新鲜远端 SHA 快进同步。
+- 使用 ignored `f09-target-scoped-20261030/SourcePackages` 诊断副本和 `f09-framework-target-20261031/snapshot` 的 XcodeGen wrapper target，generic iOS unsigned Release archive **exit 0 / ARCHIVE SUCCEEDED**。原始 `archive-diagnostic.log` SHA-256=`8b768fcba17351e0875da032551d6c2314148b2b05df7615cea1ffc4a85b6681`。这只证明隔离 workaround 下 framework target 可归档：产物仅 `MLXVLMFrameworkProbe.framework`，公开 interface 仍 `@_exported import ODAIKitAppleMLXVLM`；archive 有 24 个 `.o`、2 个 wrapper interfaces、0 资源 bundle，没有 20 模块闭包或 simulator slice。详见[分发验证](validation/apple-mlxvlm-distribution.md)。
+- 生产固定 lock 的同一 target 仍在 `OrderedCollections` Swift 6.4.2 interface 校验失败；ignored selector flag/MLXLM switch 补丁不可作为生产兼容通过。下一步需先确定受支持的依赖配置或明确 vendored policy，再构建完整 device/simulator XCFramework 及独立 binary-only consumer。F09 和发布仍 `open/not-ready`；保护性未提交修改保留。
+
 ## 最新续接 — 2026-10-30 F09 binary artifact gates
 
 - F09 计划 Task 1/2 已完成，Task 3 仅完成布局检查器。提交 `73f70c4` 包含 artifact manifest validator、committed-tree snapshot、XCFramework/Mach-O 布局检查器、定向测试和[分发证据](validation/apple-mlxvlm-distribution.md)。独立审查发现的 canonical 资源哈希、真实 Mach-O、畸形 manifest 与 symlink 问题已修复并由测试复核；未取得修复后的新一轮独立 APPROVE。完整 `tools/tests` 在可写 SwiftPM 环境 **221/221**，`compileall`/`git diff --check` 通过。

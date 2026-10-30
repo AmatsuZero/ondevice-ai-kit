@@ -131,6 +131,34 @@ selector workaround remains diagnostic only; it was not injected into this
 committed-snapshot run and cannot be promoted without a supportable production
 policy.
 
+### 2026-10-31 diagnostic framework-target archive
+
+Using only the ignored diagnostic `SourcePackages` copy (target-scoped
+OrderedCollections selector flag plus isolated MLXLM unknown-case edits), the
+same generated framework target archived successfully for generic iOS. This
+does **not** close F09, because it is not the production dependency tree and it
+only produced the wrapper target:
+
+- Archive log: `artifacts/verification/f09-framework-target-20261031/archive-diagnostic.log`, SHA-256
+  `8b768fcba17351e0875da032551d6c2314148b2b05df7615cea1ffc4a85b6681`
+- Wrapper framework binary SHA-256:
+  `ed37ab8d000092f81ebeb32b3dc8fe8a5d4840dde9143cf33f819886e1c983e6`
+- Wrapper public interface SHA-256:
+  `723ed3114640a21a246469acd01d7adc4768078993ef5545c019627e5f587e47`
+- The interface contains `@_exported import ODAIKitAppleMLXVLM`; the enhanced
+  module is therefore still a transitive source/module obligation, not hidden
+  by this wrapper.
+- The archive contains **24 object files**, only **2** wrapper interfaces, and
+  **0 resource bundles**. It has no simulator slice, no complete 20-module
+  XCFramework closure and no binary-only consumer. The model JSON and Metal
+  bundle are absent from this wrapper archive.
+
+The diagnostic success proves that a generated framework target can cross the
+toolchain once the ignored workarounds are applied. It also identifies the
+next packaging work: build every public closure module as a real framework or
+library, preserve resources, and prove device/simulator plus source-free
+consumer behavior under a supportable dependency policy.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer
