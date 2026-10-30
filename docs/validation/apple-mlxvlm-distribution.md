@@ -95,6 +95,12 @@ Swift 上游 [#91540](https://github.com/swiftlang/swift/issues/91540) 记录了
 
 新的首个诊断是 Swift 6.4 对 `MLXFast.ScaledDotProductAttentionMaskMode` 的未知枚举值检查：`KVCache.swift:2627`、`KVCache.swift:2803`、`TurboQuantKVCache.swift:1345`、`Gemma4.swift:105` 的 switch 没有 `@unknown default`。原始 archive log SHA-256=`5a4e6d769b0a92712c0e3764366b964c91552f3557767dfe4cf4f015485937c2`；隔离摘要 `artifacts/verification/f09-target-scoped-20261030/summary.json` SHA-256=`ed5f997486bdecc8fd73301160b9e69a60f8824b5954eb60072a042f5424d9d8`。该结果证明 target-scoped 方向能消除前两个 interface 阻断，但不等于增强 archive 或 binary consumer 已通过；生产依赖仍未修改。
 
+### 2026-10-30 隔离依赖 switch 诊断续接
+
+在同一 ignored `SourcePackages` 副本中，给上述四处 switch 增加显式 `@unknown default`，未知值调用 `fatalError`，不改变已知 case。搬移 source consumer 的 `MLXVLMConsumer` App scheme 隔离 archive 再次前进，新的唯一 Swift 编译错误出现在 `Gemma4.swift:201` 的第五处同类 switch（原始 `archive-v4-app.log` SHA-256=`584780e737e8419bd6ef6b989f18cec93f6a256dd1bff5f4ba6dda1ce008cb20`）。只补第五处后，以 Release、generic iOS、`BUILD_LIBRARY_FOR_DISTRIBUTION=YES SKIP_INSTALL=NO CODE_SIGNING_ALLOWED=NO`、锁定依赖和 target-scoped OrderedCollections flag 重跑：`archive-v5-app-escalated.log` **exit 0 / ARCHIVE SUCCEEDED**，SHA-256=`97bece006f118bf9b05d9f70c3653827606f04558680c4c57fef6f3a41e3ae82`。`OrderedCollections`、`EventSource`、`MLXLMCommon`、`MLXVLM` 及 `ODAIKitAppleMLXVLM` 的 interface verification 均执行，无 `error:` 诊断。
+
+产物是 `MLXVLMConsumer.app` 的 unsigned iOS App archive；包内确有 `OnDeviceAIKitAppleMLX_ODAIKitAppleMLXVLM.bundle/smolvlm2-model.json` 和 `mlx-swift_Cmlx.bundle/default.metallib`，但 SDK 模块位于 `Products/Users/daubert/Objects/*.o`，并非增强 XCFramework。诊断源码未进入生产 package，生产 lock SHA-256 仍为 `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。因此这轮证明本机工具链上**可越过依赖编译门槛**，不证明稳定的上游修复、二进制分发、独立 binary consumer 或设备运行；F09 仍 `open/not-ready`。
+
 ## Tests、审查与恢复
 
 新 black-box generator 测试初次真实 RED 为缺少 `--portable-source`（2 failures；symlink 拒绝测试当时由 parser 拒绝而通过，不冒称该项独立 RED）。实现后新3/3；含默认 consumer 与基础分发的定向11/11；完整 tools **126/126**；补强 lock/resource 精确比较后的定向6/6、Python py_compile、`git diff --check` 通过。完整 tools 显式使用 `RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`；一次漏设 Ruby 的两个既有分发测试失败已由正确环境通过，不是产品修改。

@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F09 隔离 App archive 越过依赖编译门槛
+
+- 同一 active goal 继续。原有受保护的 `project.pbxproj`、身份草稿和相机 probes 未覆盖或暂存；生产 `apple-mlx/Package.resolved` SHA-256 仍为 `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。仅在 ignored `artifacts/verification/f09-target-scoped-20261030/SourcePackages/checkouts/mlx-swift-lm` 副本给五处 `MLXFast.ScaledDotProductAttentionMaskMode` switch 增加显式 `@unknown default`，未知值立即 `fatalError`；生产依赖没有修补。
+- 用搬移 source consumer 的 `MLXVLMConsumer` App scheme、Release、generic iOS、`BUILD_LIBRARY_FOR_DISTRIBUTION=YES`、unsigned、锁定依赖及 target-scoped OrderedCollections flag，真实 archive **exit 0 / ARCHIVE SUCCEEDED**。`MLXLMCommon`、`MLXVLM`、`ODAIKitAppleMLXVLM` 的编译和 interface 验证越过先前错误，App 包内包含 `smolvlm2-model.json` 与 `default.metallib`。原始日志 `artifacts/verification/f09-target-scoped-20261030/archive-v5-app-escalated.log` SHA-256=`97bece006f118bf9b05d9f70c3653827606f04558680c4c57fef6f3a41e3ae82`。
+- 这只是 **App archive**：SDK 产物在 archive 的 `Products/Users/daubert/Objects/*.o`，尚无可分发的增强 XCFramework、device/simulator slices 或独立 binary consumer。F09 与发布继续 `open/not-ready`。原 SwiftPM package workspace scheme 当前无法从搬移目录直接恢复；前两次错误工作目录/scheme 尝试和一次沙盒 SwiftPM 缓存失败均未进入编译，不能计产品失败。一次自动审批因 429 未执行；随后获准的实际 archive 已完成。
+
 ## 最新续接 — 2026-10-30 F09 target-scoped archive 新阻断
 
 - 同一 active goal 继续；原有 `project.pbxproj`、身份草稿和相机 probes 等 protected dirty/untracked 文件未覆盖。使用 ignored `SourcePackages` 副本，只给 `swift-collections` 的 `OrderedCollections` target 注入 `-Xfrontend -disable-module-selectors-in-module-interface`；EventSource 保持默认 selectors。生产 `Package.resolved`、生产 checkout 和签名产物未修改。
