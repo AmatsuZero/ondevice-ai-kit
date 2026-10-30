@@ -209,6 +209,20 @@ command and Tasks 4–5 must wait for either a verified upstream/compiler fix or
 an explicit, reviewed vendored dependency policy. Until then the diagnostic
 XCFramework is not a release candidate, and F09 remains `open/not-ready`.
 
+A subsequent read-only Git refresh on 2026-10-31 completed. Official
+`swift-collections` `main`/latest tag `1.7.5` both point to
+`f96b909e1a9e469620bc5037c1e24e00153f376f`; EventSource's latest tag
+remains `1.5.1` (`86b5096ac59ab46e66bd1f6377c604bc1dab0bc2`), although
+its `main` has advanced to `bb4b61273b5a976bb571859c17f903ebc3439df1`.
+The `mlx-swift-lm` `main` is
+`128f49f1db38ea7b949f2ebb60967def8b76f58e`. Its current
+`KVCache.swift` still has two `ScaledDotProductAttentionMaskMode` switches
+without `@unknown default`, and `MLXVLM/Models/Gemma4.swift` still has two;
+these are direct source checks, not a new Xcode archive. Upstream `main`
+also changes the MLX and Swift Syntax dependency requirements, so moving the
+production lock to that revision would be a broader migration, not a proven
+drop-in repair. The fixed lock and F09 readiness decision are unchanged.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer

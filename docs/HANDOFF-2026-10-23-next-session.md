@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-31 F09 官方 refs 刷新
+
+- 只读官方 Git refs 核对成功：`swift-collections` `main` 和最新 `1.7.5` 同为 `f96b909e1a9e469620bc5037c1e24e00153f376f`；EventSource 最新 tag 仍是 `1.5.1`=`86b5096ac59ab46e66bd1f6377c604bc1dab0bc2`，`main`=`bb4b61273b5a976bb571859c17f903ebc3439df1`；`mlx-swift-lm` `main`=`128f49f1db38ea7b949f2ebb60967def8b76f58e`。
+- 直接检查当前 `mlx-swift-lm` 源码：`KVCache.swift` 两处、`MLXVLM/Models/Gemma4.swift` 两处 `ScaledDotProductAttentionMaskMode` switch 仍无 `@unknown default`。当前 main 也提高 MLX 与 Swift Syntax 依赖要求；不能把换 main 当作固定 lock 的已验证修复。详见[分发验证](validation/apple-mlxvlm-distribution.md)。没有生产依赖改动或新 archive；F09 仍 `open/not-ready`。
+- 本轮曾有部分 `gh api` 读取被自动审批服务 429 拒绝，但上述 Git refs 与源码读取成功。受限环境的 CoreDeviceService 初始化超时；授权环境复核 iPhone 16 Pro Max 为 `connected`。未安排受控朗读窗口，因此没有启动真实麦克风。保护性 dirty/untracked 文件和 lock 保留。
+
 ## 最新续接 — 2026-10-31 F09 生产依赖决策门槛与 GitHub 认证
 
 - 用户提供的 `gh` keyring 登录状态已在授权环境复核为有效（`AmatsuZero`，active）；受限沙箱内 `gh auth status` 仍显示 `default` token 无效，两者是不同凭据视图。`origin` 与 `jihu` 的 `feat/sdk-foundation` 已新鲜回读为本地 HEAD `45f7e966d0102c14b2878fa8537ac3cec2768aa3`；无需补推旧提交。
