@@ -11,7 +11,8 @@
 - 原始报告 `artifacts/verification/f11-videosr-20261030/device-documents/ios-video-sr-probe-2076985E-4089-4826-8893-4E6C4051E3D7.json` SHA-256=`73aacec0f3b5b78b203825304f52dc668761ae3fe504a93dd383a9d476a353b0`。SR 每帧 p50/p95=`93.408/94.587 ms`，采样 RSS 峰值增量=`127,500,288 B`；bicubic 为 `1.467/2.114 ms` 与 `442,368 B`。两路首帧/编码色彩元数据可比，仍只是 probe 进程 `resident_size` 采样，不是全机/GPU/energy 峰值。
 - 独立 `video_sr_validate.py --scale=4` 通过 48 帧/24 fps/无音轨/时序校验；`video_sr_quality.py` 两路均完成 48 帧配对，`colorComparability=matched-metadata`，SR PSNR/SSIM=`36.776212/0.979250`，bicubic=`38.872866/0.983506`。质量 JSON 为 ignored 证据，`qualityVerdict` 保持 `unverified`；不把单一自然素材的编码输出分数升级为模型主观质量或发布通过。
 - 该轮只补齐 F11 的真实 iOS Video SR 原始延迟、采样 RSS、输出完整性与色彩/质量边界；Android 后端、主观/跨场景质量、GPU/energy、持续资源和最低系统仍开放。P11 仍 `open/not-ready`，goal 继续 active。
-- 文档来源哈希刷新后，P11 readiness 校验为 **9 rows / 45 evidence paths / 43 source hashes / 9 rows with gaps**，grouped 报告仍为 **3 groups / 9 coverage**；聚焦 readiness/grouped 回归 **21/21**。这不把 SR probe 数据硬映射成兼容 grouped sample。
+- 将本轮真机可用性、原始报告、两份质量 JSON、输入/参考和两份输出视频共 8 项加入 Video SR readiness 来源后，P11 readiness 为 **9 rows / 53 evidence paths / 51 source hashes / 9 rows with gaps**；grouped 报告仍为 **3 groups / 9 coverage**，聚焦 readiness/grouped 回归保持 **21/21**。SR 数据仍不硬映射成兼容 grouped sample。
+- 新快照为 ignored `artifacts/verification/p11-readiness-20261030-f11-videosr-index/summary.json`（SHA-256=`7a81dde22a3b285e440816bd28690a3f13fc0c880186181af39cc72c1fdb9446`）；`benchmark/p11/grouped-report-manifest.json` 已指向该快照。grouped 复算结果在 ignored `artifacts/verification/p11-grouped-benchmark-20261030-f11-videosr-index/summary.json`（SHA-256=`75ab6b01e85fdd9a3384b6ee4a87f049816542018ae4e260180d649f3755027f`），Video SR 行仍为 `reportStatus=unverified`、release=`not-ready`。
 
 ## 最新续接 — 2026-10-30 F11 iOS TTS 原始资源测量
 
