@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-31 F09 生产依赖决策门槛与 GitHub 认证
+
+- 用户提供的 `gh` keyring 登录状态已在授权环境复核为有效（`AmatsuZero`，active）；受限沙箱内 `gh auth status` 仍显示 `default` token 无效，两者是不同凭据视图。`origin` 与 `jihu` 的 `feat/sdk-foundation` 已新鲜回读为本地 HEAD `45f7e966d0102c14b2878fa8537ac3cec2768aa3`；无需补推旧提交。
+- F09 [分发验证](validation/apple-mlxvlm-distribution.md)补充生产依赖决策矩阵：固定 lock 的 Xcode 27.2 framework archive 在 `OrderedCollections` Swift interface 校验 exit 65；此前隔离核对的 `swift-collections` 1.7.4/1.7.5 未解决，global selector workaround 与 EventSource 冲突，target-scoped flag 加五处 MLXLM 改动仅在 ignored 诊断副本成功。已检查版本中没有**已验证**的 dependency-only 生产配置；诊断双 slice wrapper 不能升级为完整二进制产物。
+- 本轮上游只读 API 刷新因自动审批服务 HTTP 429 未执行，因此不声称最新上游绝无修复。下一步先取得可支持的上游/编译器修复，或制定并审查明确的 vendored dependency policy，再执行完整 20 模块 closure、canonical resources、device/simulator XCFramework 和 source-free consumer。F09 `open/not-ready`，保护性 dirty/untracked 文件保持未暂存。
+
 ## 最新续接 — 2026-10-31 诊断双 slice XCFramework 布局检查
 
 - 同一 ignored 诊断配置的 generic iOS Simulator wrapper archive 也成功，日志 `archive-diagnostic-sim.log` SHA-256=`b6fd24eb0ca594a9ab99625edd00811446e826e47cd3ebce3d12cfa115887c30`。与 device wrapper slice 合成 ignored `MLXVLMFrameworkProbe-diagnostic.xcframework` 后，`tools/inspect_mlxvlm_xcframework.py` 通过 device/simulator Mach-O、arm64、iOS 18 floor、Swift interfaces、C module maps；layout report SHA-256=`5f3ca99da50d85a7f067a26195e4af2bb85721316cce4f28f0bd6cff54cb459a`。

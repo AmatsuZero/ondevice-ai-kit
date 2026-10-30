@@ -180,6 +180,35 @@ logs and the layout report, while explicitly recording `fullModuleClosure`,
 `resourceBundles`, `binaryOnlyConsumer` and `productionDependencyCompatibility`
 as false.
 
+### 2026-10-31 production dependency decision gate
+
+The committed, unchanged `Package.resolved` still fails the real Xcode 27.2 /
+Swift 6.4.2 framework archive at `OrderedCollections` interface verification
+(`archive-v2.log`, SHA-256
+`650a143ac9d6a24ca5c404a228d57e0623dfefc4f30210f1b574f6a9e624c330`).
+The previously checked official `swift-collections` 1.7.4 and 1.7.5 tags also
+failed the isolated iOS library-evolution interface check; those tags are not
+a verified dependency-only upgrade path. The pinned EventSource 1.5.1 passes
+with default selectors but fails with the global selector workaround required
+by OrderedCollections. The pinned `mlx-swift-lm` revision also needs five
+unknown-enum switch edits in the isolated diagnostic copy to complete the App
+archive. Exact probes and hashes are recorded below.
+
+| Candidate configuration | Verified outcome | Production decision |
+| --- | --- | --- |
+| Committed lock, no patches | Framework archive exit 65 at `OrderedCollections` | Blocked |
+| `swift-collections` 1.7.4 or 1.7.5 | Isolated iOS interface verification exit 65 | No verified upgrade fix |
+| Global selector workaround | `EventSource` interface verification exit 65 | Invalid configuration |
+| Target-scoped selector flag plus five `mlx-swift-lm` edits | Diagnostic App and wrapper archives succeed; complete binary closure absent | Diagnostic only |
+
+No production-supported dependency configuration has been proven among the
+checked versions. The upstream read-only refresh attempted on 2026-10-31 was
+not executed because automatic approval review returned HTTP 429; this table
+does not claim that newer upstream changes cannot exist. Task 3's packaging
+command and Tasks 4–5 must wait for either a verified upstream/compiler fix or
+an explicit, reviewed vendored dependency policy. Until then the diagnostic
+XCFramework is not a release candidate, and F09 remains `open/not-ready`.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer
