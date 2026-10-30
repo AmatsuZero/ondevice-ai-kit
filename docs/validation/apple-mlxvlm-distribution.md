@@ -116,6 +116,21 @@ F09 remains `open/not-ready`; after the Metal Toolchain prerequisite is
 available, the same pinned project still must prove dependency interfaces,
 complete module closure and a source-free consumer.
 
+The approved Metal Toolchain installation completed as Xcode component
+`27B47` (`com.apple.dt.toolchain.Metal.32023.922.4`). Re-running the same
+pinned framework target with the installed component reached SwiftPM's actual
+library-evolution interface verification, then exited **65** on the production
+lock's `OrderedCollections` 1.7.3 interface (`Element` import and `remove(at:)`
+diagnostics). There was still no archive/framework output. The rerun log is
+`artifacts/verification/f09-framework-target-20261031/archive-v2.log`, SHA-256
+`650a143ac9d6a24ca5c404a228d57e0623dfefc4f30210f1b574f6a9e624c330`.
+
+This is the first pinned framework-target compile evidence after satisfying
+the toolchain component prerequisite. The earlier ignored target-scoped
+selector workaround remains diagnostic only; it was not injected into this
+committed-snapshot run and cannot be promoted without a supportable production
+policy.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer

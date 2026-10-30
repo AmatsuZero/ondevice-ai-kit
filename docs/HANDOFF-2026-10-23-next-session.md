@@ -17,6 +17,12 @@
 - 初次临时探针忘记在生成的 workspace 放 lock，虽使用 offline flags 仍尝试 GitHub clone，传输失败 exit 74；此轮不计源码或依赖兼容性失败。之后 pinned rerun 越过解析；既有缓存 checkout 的 tracked 状态为 clean，生产 lock 与保护文件哈希未变。没有安装 Metal Toolchain、下载模型、修改生产依赖、签名或发布。
 - 下一步先取得可用 Metal Toolchain 或另一个已安装的兼容 Xcode，再用同一 pinned project 复核第一真实编译错误；继续验证 device/simulator slices、20 模块闭包、资源和 binary-only consumer。F09 仍 `open/not-ready`，不要把本探针或旧 App archive 计为增强二进制通过。
 
+## 最新续接 — 2026-10-31 Metal Toolchain 安装后真实首个编译门槛
+
+- 用户批准后安装 Xcode Metal Toolchain 27B47（`com.apple.dt.toolchain.Metal.32023.922.4`）。同一 committed snapshot/framework target、固定 lock、固定 cache、offline flags 的第二次 unsigned generic iOS archive 已越过 Metal 编译，随后 exit **65** 在生产锁定 `OrderedCollections` 1.7.3 的 Swift 6.4.2 textual-interface verification；首个错误为 `Element is not imported through module OrderedCollections`，随后为 `remove(at:)` label/type 错误。没有 archive 或 framework 产物。
+- 原始日志 `artifacts/verification/f09-framework-target-20261031/archive-v2.log` SHA-256=`650a143ac9d6a24ca5c404a228d57e0623dfefc4f30210f1b574f6a9e624c330`；同目录保留 pinned project、Package.resolved、argv、derived 诊断和 summary。保护文件、生产 lock、固定 cache checkout tracked 状态未变。
+- 结论：Metal Toolchain 前置条件已排除，F09 当前真实阻断收敛为生产依赖/Swift textual-interface 兼容性；不能把 ignored target-scoped selector workaround 或五处 MLXLM switch 补丁当作生产修复。下一步需获得上游/依赖支持的 selector 配置或明确 vendored policy，再重跑 device/simulator framework 闭包；F09 仍 `open/not-ready`。
+
 ## 最新续接 — 2026-10-30 F09 binary distribution 设计与实施顺序
 
 - 在现有 F09 当前图像/视频 source App archive 证据上，新增 [binary distribution design](superpowers/specs/2026-10-30-apple-mlxvlm-binary-distribution-design.md) 与 [implementation plan](superpowers/plans/2026-10-30-apple-mlxvlm-binary-distribution.md)，并在[分发验证](validation/apple-mlxvlm-distribution.md)中加入入口。设计要求完整 20 个本地 Swift interface 模块的闭包、C module maps、模型 JSON/Metal 资源、device/simulator 双 slice，以及不带增强源码 checkout 的独立 binary consumer。
