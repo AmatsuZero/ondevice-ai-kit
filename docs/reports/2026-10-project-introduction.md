@@ -59,11 +59,11 @@ Android Demo 同页提供人脸检测、身份与活体、语音、视频入口�
 
 iOS 模拟器截图展示语言、TTS backend、显式 backend ID 和朗读文本输入。宿主先查看可用性，再提交任务；不同 backend 的实际状态和失败原因在界面可见。
 
-### iOS：文件 ASR 的系统权限边界
+### iOS：文件 ASR 的任务状态与取消
 
-![iOS ASR 系统权限](assets/ios-asr-permission-20261020.png)
+![iOS 文件 ASR 取消状态](assets/ios-asr-cancel-demo-20261020.png)
 
-iOS 真机 UI 验证截图展示系统语音识别权限提示和本地音频文件选择区域。权限与文件输入由宿主处理；SDK 返回实际识别 backend、任务终态和结果。
+iOS 真机 UI 验证截图展示本地音频文件选择区域、实际识别 backend、运行进度和取消入口。权限与文件输入由宿主处理；SDK 返回任务终态和结果。截图只说明取消交互可见，完整生命周期结论以原始 UI 测试报告为准。
 
 ### iOS：Video SR 的输入和输出意图
 
