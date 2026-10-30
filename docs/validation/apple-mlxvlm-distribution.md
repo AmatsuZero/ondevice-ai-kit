@@ -81,6 +81,14 @@ Swift 上游 [#91540](https://github.com/swiftlang/swift/issues/91540) 记录了
 
 随后用原搬移 source consumer、固定依赖缓存/解析 flags 和同一 workaround 运行 unsigned Release generic iOS archive。结果仍为 **exit 65 / ARCHIVE FAILED**，新的首个失败目标为固定 `EventSource` 1.5.1 的 `SwiftVerifyEmittedModuleInterface`：生成的 `EventSource.swiftinterface` 包含 `EventSource.EventSource.Event`，回读报 `EventSource` 不是 actor `EventSource.EventSource` 的成员类型，并派生 `AsyncSequence` conform 错误。原始日志 SHA-256=`0a39797e059c6cb423ec08454d15e291d76199c35ac8051de92cc4653f4800b3`，保留在 ignored `artifacts/verification/f09-interface-workaround-20261030/archive.log`。这证明单一 OrderedCollections workaround 尚不足以完成增强包 archive；没有改生产 lock、上游 checkout、签名或发布结论。下一步先核对 EventSource 的受支持修复或隔离方案，再继续 binary package/consumer 门槛。
 
+### 2026-10-30 EventSource 最小接口复现
+
+隔离的 `EventSource` 1.5.1 checkout（revision=`86b5096ac59ab46e66bd1f6377c604bc1dab0bc2`）在相同 Xcode 27.1 / Swift 6.4 / `arm64-apple-ios15.0` 目标下单独生成 textual interface。默认 module selectors 生成并独立 `swift-frontend -typecheck-module-from-interface` 回读成功；生成接口 SHA-256=`2992a275dade76028a002c4afcbd305b5fd5b8d7c48347285ca386bad6bfb188`。
+
+把为 `OrderedCollections` 使用的 `-Xfrontend -disable-module-selectors-in-module-interface` 全局传入 EventSource 后，编译期接口验证和独立回读均失败，首个错误仍是 `EventSource` 不是 actor `EventSource.EventSource` 的成员类型；接口 SHA-256=`92c827cb0b5dacb047cf7c7fb83ae1668619807b71b217cce7f7ae1f9adcd60a`。`-module-interface-preserve-types-as-written` 在当前编译器已被 module selectors 取代，实际等价于默认设置，不能作为独立修复。
+
+上游缓存的 `main` revision=`bdaaba6` 相对 1.5.1 只修改 CI 矩阵以测试 Swift 6.4（没有 EventSource 源码或 API 修复），且官方 tags 目前止于 1.5.1。因此当前没有已验证的 EventSource dependency-only 修复；问题是 **OrderedCollections 需要关闭 selectors，而 EventSource 需要 selectors** 的依赖级编译设置冲突。隔离摘要保留在 `artifacts/verification/f09-eventsource-interface-20261030/summary-corrected.json`（SHA-256=`913ad55586c86fb28942b9279d6e64655f3e5296470706689ecc628697a90334`）。生产 lock、上游 checkout、archive 选项和发布产物均未修改。
+
 ## Tests、审查与恢复
 
 新 black-box generator 测试初次真实 RED 为缺少 `--portable-source`（2 failures；symlink 拒绝测试当时由 parser 拒绝而通过，不冒称该项独立 RED）。实现后新3/3；含默认 consumer 与基础分发的定向11/11；完整 tools **126/126**；补强 lock/resource 精确比较后的定向6/6、Python py_compile、`git diff --check` 通过。完整 tools 显式使用 `RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`；一次漏设 Ruby 的两个既有分发测试失败已由正确环境通过，不是产品修改。

@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F09 EventSource textual-interface 依赖设置冲突
+
+- 同一 active goal 继续；现有 `project.pbxproj`、身份草稿和相机 probes 等 protected dirty/untracked 文件未覆盖。未修改生产 `Package.resolved`、上游 checkout、签名或发布产物。
+- 本地 EventSource 1.5.1 checkout（revision=`86b5096ac59ab46e66bd1f6377c604bc1dab0bc2`）在 `arm64-apple-ios15.0` 下用默认 module selectors 生成并独立回读 textual interface 成功；接口 SHA-256=`2992a275dade76028a002c4afcbd305b5fd5b8d7c48347285ca386bad6bfb188`。
+- 为 OrderedCollections 采用的 `-Xfrontend -disable-module-selectors-in-module-interface` 若全局传入 EventSource，编译期验证和独立回读均失败，错误为 `EventSource` 不是 actor `EventSource.EventSource` 的成员类型；接口 SHA-256=`92c827cb0b5dacb047cf7c7fb83ae1668619807b71b217cce7f7ae1f9adcd60a`。当前编译器已将 `-module-interface-preserve-types-as-written` 视为默认 selectors 的淘汰选项。
+- 上游缓存 `main`=`bdaaba6` 相对 1.5.1 只改 Swift 6.4 CI 矩阵，官方 tags 止于 1.5.1；因此没有已验证的 dependency-only 修复。F09 现在精确为 **OrderedCollections 需要关闭 selectors、EventSource 需要 selectors 的依赖级编译设置冲突**。隔离摘要 `artifacts/verification/f09-eventsource-interface-20261030/summary-corrected.json` SHA-256=`913ad55586c86fb28942b9279d6e64655f3e5296470706689ecc628697a90334`；F09 仍 `open/not-ready`。
+
 ## 最新续接 — 2026-10-30 F11 生产 SDK 文件 ASR 资源补测
 
 - 同一 active goal 继续，无需替换；工作树 `feat/sdk-foundation`，原有 `project.pbxproj`、身份草稿和相机 probes 等受保护 dirty/untracked 文件未覆盖。隔离 consumer 由当前 `ODAIKitSpeech.SpeechRecognitionClient.recognize` 调用 `ODAIKitAppleSpeech.AppleSpeechRecognizerBackend.recognize`，使用相同固定合成 CAF；未修改生产 SDK/Demo，未使用麦克风或 Photos。
