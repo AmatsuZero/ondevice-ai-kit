@@ -11,6 +11,12 @@
 - 在搬移 source consumer 上用同一 workaround 运行 unsigned Release generic iOS archive，`exit=65 / ARCHIVE FAILED`；`OrderedCollections` 不再是首个失败目标，新的首个失败是 `EventSource` 1.5.1 的 `SwiftVerifyEmittedModuleInterface`（`EventSource.EventSource.Event` 与 `AsyncSequence` conform 错误）。原始日志在 ignored `artifacts/verification/f09-interface-workaround-20261030/archive.log`，SHA-256=`0a39797e059c6cb423ec08454d15e291d76199c35ac8051de92cc4653f4800b3`。
 - 结论仍为 F09 `open/not-ready`；没有修改生产 `Package.resolved`、上游 checkout、签名或发布产物。下一步只核对 EventSource 的受支持修复/隔离方案，不重复无参数 archive。
 
+## 最新续接 — 2026-10-30 F11 iOS TTS 原始资源测量
+
+- 同一 active goal 继续；设备入口通过 `devicectl` 恢复，物理 `iPhone 16 Pro Max` / iOS 27.0.1（UDID `00008140-0008703436D3001C`，CoreDevice `1D0EA54B-8379-5147-84DF-A86534DADE1C`）已解锁。生产 Demo、SDK 和受保护 dirty/untracked 文件未修改。
+- 隔离 probe `io.ondeviceai.probe.f11speech` 使用当前 Apple Speech backend、固定 `en-US` Samantha 和固定短句；1 次 warm-up 后连续 5 次生成，5/5 `success`，同一 PID=`32416`。原始 `device-report.json` SHA-256=`d3c9d6caf68d5a45fa10bc9c85f8a23de4c469018d6ec0150c8b26b25d22e7c8`；bounded `summary.json` SHA-256=`de761c1c2c6af17ba6c82db802a639e572aebc07d1aad5306fcd1b244a6f5d04`。duration p50/p95=`2779.727/2779.792 ms`；采样 RSS 峰值范围=`44,761,088–44,810,240 B`，方法为约 10 ms 间隔的 `mach_task_basic_info.resident_size`，不是真实峰值/physical footprint/GPU/energy。
+- 新 readiness 快照 `artifacts/verification/p11-readiness-20261030-f11-tts/summary.json` 已通过 **45 evidence paths / 43 source hashes / 9 rows with gaps**；grouped 报告确定性重算为 3 groups / 9 coverage，TTS 原始资源数据未硬映射为兼容 grouped sample。TTS 自然质量、断网行为、最低系统仍保持 `unverified/deferred`，P11 仍 `open/not-ready`。
+
 ## 最新续接 — 2026-10-30 P11 committed-tree candidate freeze 刷新
 
 - 最终 GitLab 连接恢复，`feat/sdk-foundation` 在 `origin` 与 `jihu` 均回读为 `9f066081bbd425846c9bb0cd2aaf2e258cdf9467`；下面 F08 节保留首次 TLS/connection reset 的历史尝试，不再是当前同步阻断。
