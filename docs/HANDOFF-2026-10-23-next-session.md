@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F09 binary distribution 设计与实施顺序
+
+- 在现有 F09 当前图像/视频 source App archive 证据上，新增 [binary distribution design](superpowers/specs/2026-10-30-apple-mlxvlm-binary-distribution-design.md) 与 [implementation plan](superpowers/plans/2026-10-30-apple-mlxvlm-binary-distribution.md)，并在[分发验证](validation/apple-mlxvlm-distribution.md)中加入入口。设计要求完整 20 个本地 Swift interface 模块的闭包、C module maps、模型 JSON/Metal 资源、device/simulator 双 slice，以及不带增强源码 checkout 的独立 binary consumer。
+- 计划从 committed tree/固定 lock 的 artifact manifest 和兼容配置证明开始，再做 XCFramework 与搬移 consumer；当前 App archive 与 isolated target-scoped flag/五处 enum switch 诊断补丁不升级为生产二进制通过。F09 仍 `open/not-ready`，P11 与发布结论不变。
+- 本轮只写文档和验证顺序，未执行新增 binary build、没有下载依赖/模型、没有修改生产 lock 或受保护 dirty/untracked 文件。下一次从计划 Task 1 的 manifest validator RED→GREEN 开始；若兼容配置仍不具生产可支持性，记录具体失败并停止发布包构建。
+
 ## 最新续接 — 2026-10-30 双端项目介绍材料与 Wiki 发布
 
 - 新增领导/产品介绍材料 `docs/reports/2026-10-project-introduction.md`，按参考调研报告补齐背景、适用场景、业务数据流、SDK 分层、双端能力矩阵、Demo 说明、性能/资源对比、发布边界和后续计划。正文明确当前 `10/12`、`open/not-ready`，不把阶段性证据写成发布承诺。

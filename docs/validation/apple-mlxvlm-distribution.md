@@ -1,5 +1,14 @@
 # Apple MLXVLM 分发验证
 
+## F09 binary distribution design checkpoint (2026-10-30)
+
+The binary artifact contract and implementation sequence are defined in:
+
+- [Binary distribution design](../superpowers/specs/2026-10-30-apple-mlxvlm-binary-distribution-design.md)
+- [Binary distribution implementation plan](../superpowers/plans/2026-10-30-apple-mlxvlm-binary-distribution.md)
+
+The chosen boundary is an explicit XCFramework set for the complete public Swift-module closure, with device/simulator slices, emitted interfaces, C module maps, model/Metal resources, and a source-free independent consumer. The current App archive remains diagnostic evidence only; it does not satisfy this contract.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer
