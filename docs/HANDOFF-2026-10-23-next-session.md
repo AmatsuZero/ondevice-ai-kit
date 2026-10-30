@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 双端项目介绍材料与 Wiki 发布
+
+- 新增领导/产品介绍材料 `docs/reports/2026-10-project-introduction.md`，按参考调研报告补齐背景、适用场景、业务数据流、SDK 分层、双端能力矩阵、Demo 说明、性能/资源对比、发布边界和后续计划。正文明确当前 `10/12`、`open/not-ready`，不把阶段性证据写成发布承诺。
+- 新增并裁剪 4 张公开 Demo 截图：`docs/reports/assets/android-demo-home-20261030.png`（TECNO KM9 / Android 15 真机）、`ios-speech-demo-20261020.png`、`ios-asr-cancel-demo-20261020.png`、`ios-video-demo-20261025.png`。图片已视觉检查；ASR 图按实际内容标为运行/取消状态，不误称为权限弹窗。
+- 仓库提交 `f04bfb0a861fc883f3d2d0e09f29f1775740d384` 已推送到 GitHub `origin/feat/sdk-foundation` 与 GitLab `jihu/feat/sdk-foundation`。现有 `project.pbxproj` dirty、身份草稿和相机 probes 等受保护 dirty/untracked 文件未暂存、覆盖或清理。
+- GitHub Wiki 已更新首页与介绍页，Wiki HEAD=`b9d296fa495232cfa1490248394f5406d56b3d00`；介绍页 HTTP `200`，页面引用 4 个图片 URL，Android 图片原始 URL HTTP `200 image/png`。GitLab Wiki 已更新首页与介绍页，Wiki HEAD=`9bf0f8286001fd4936a6ee4ba778fa17123d8053`；Git push 成功，未登录 HTTP 请求会重定向到 `/users/sign_in`，页面读取需已有 GitLab 登录会话。
+- 后续更新约定：先修改仓库中的介绍材料/月报，再复制到 `/tmp/ondevice-ai-kit-wiki-20261030` 与 `/tmp/ondevice-ai-kit-gitlab-wiki-20261030` 的 Wiki Git 仓库，提交并推送；图片优先使用已审核、无私人媒体的验证附件。
+
 ## 最新续接 — 2026-10-30 F09 当前图像/视频源码 archive 与示例兼容修复
 
 - 复核发现下节成功 archive 使用 10 月 23 日的 image-only 搬移快照。此次从当前 `a98aa51` 重新生成并搬移 source consumer，147 个 package 文件逐项匹配当前 HEAD；生产 lock 与受保护 dirty/untracked 文件保留。
