@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F09 当前图像/视频源码 archive 与示例兼容修复
+
+- 复核发现下节成功 archive 使用 10 月 23 日的 image-only 搬移快照。此次从当前 `a98aa51` 重新生成并搬移 source consumer，147 个 package 文件逐项匹配当前 HEAD；生产 lock 与受保护 dirty/untracked 文件保留。
+- 当前 consumer 的首次 archive 真实 exit 65：`VideoFixtureSuite.swift:191` 对公共 `MLXVLMGenerationEvent` 缺少未知 case。示例源码增加一行 `@unknown default: append("unknownGenerationEvent")`，保留已知五类事件处理；重新生成后同一 unsigned Release generic iOS / library-evolution archive **exit 0 / ARCHIVE SUCCEEDED**。依赖继续使用下节 ignored target-scoped flag 与五处 MLXLM switch 诊断改动，不能视为生产依赖已修复。
+- 当前 archive 原始日志 `artifacts/verification/f09-current-source-20261030/archive-fixed.log` SHA-256=`ed582152bb95e8cd6e4a2122ebdfff1d1d3ff5c2253b0ab187a05cfe3f6851d2`；接口明确包含 `MultimodalVideoGenerationBackend`、视频 metadata 和事件，模型 JSON 与 canonical 相同，Metal bundle 存在。摘要 `summary.json` SHA-256=`3a8a4986fbbc53cb44184f1e42e1c5d25f1b0747514605a1a8c063b79354b590`。接口导入图有 20 个本地 Swift 模块，C modules 与资源还需单独处理；增强 XCFramework/device+simulator slices/binary consumer 未验，F09 仍 `open/not-ready`。
+- 相关 portable-source/consumer 回归在正常缓存环境 6/6；受限沙盒的两项 Swift 测试因用户缓存不可写失败，不计产品失败。独立 code-reviewer 通道返回 429，未取得 APPROVE；作者完成范围/证据自审，未发现 Critical/Important，但审查缺口继续保留。
+
 ## 最新续接 — 2026-10-30 F09 隔离 App archive 越过依赖编译门槛
 
 - 同一 active goal 继续。原有受保护的 `project.pbxproj`、身份草稿和相机 probes 未覆盖或暂存；生产 `apple-mlx/Package.resolved` SHA-256 仍为 `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。仅在 ignored `artifacts/verification/f09-target-scoped-20261030/SourcePackages/checkouts/mlx-swift-lm` 副本给五处 `MLXFast.ScaledDotProductAttentionMaskMode` switch 增加显式 `@unknown default`，未知值立即 `fatalError`；生产依赖没有修补。

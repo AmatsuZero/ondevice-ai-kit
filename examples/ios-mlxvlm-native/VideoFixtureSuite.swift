@@ -201,6 +201,7 @@ private final class VideoRunCapture: @unchecked Sendable {
         case .videoPrepared(let durationMs, let frameCount):
             data["prepareMs"] = durationMs; data["preparedFrameCount"] = frameCount; append("prepared")
         case .videoSnapshotClosed(let removed): data["snapshotRemoved"] = removed; append("snapshotClosed")
+        @unknown default: append("unknownGenerationEvent")
         }
     }
     func error(_ error: Error) { lock.lock(); data["errorType"] = String(describing: type(of: error)); lock.unlock() }

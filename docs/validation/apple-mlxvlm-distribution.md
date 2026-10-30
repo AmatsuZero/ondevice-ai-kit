@@ -101,6 +101,16 @@ Swift 上游 [#91540](https://github.com/swiftlang/swift/issues/91540) 记录了
 
 产物是 `MLXVLMConsumer.app` 的 unsigned iOS App archive；包内确有 `OnDeviceAIKitAppleMLX_ODAIKitAppleMLXVLM.bundle/smolvlm2-model.json` 和 `mlx-swift_Cmlx.bundle/default.metallib`，但 SDK 模块位于 `Products/Users/daubert/Objects/*.o`，并非增强 XCFramework。诊断源码未进入生产 package，生产 lock SHA-256 仍为 `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。因此这轮证明本机工具链上**可越过依赖编译门槛**，不证明稳定的上游修复、二进制分发、独立 binary consumer 或设备运行；F09 仍 `open/not-ready`。
 
+### 2026-10-30 当前图像/视频 source consumer 复核
+
+上述 `archive-v5-app-escalated.log` 使用的是 10 月 23 日的搬移快照，其接口只有图像 API。为补当前源码证据，用现有 `--portable-source` 生成器重新生成并搬移 consumer；147 个 package 文件的 inventory SHA-256=`b659c80b8d1156b0a3464b68243d23ee46fd279df4a04555cc3959123a995af6`，每项均与 `a98aa51` 的 HEAD 字节匹配，两个副本 lock 和生产 lock 逐字节一致。当前 example 的首次 library-evolution App archive 在 `VideoFixtureSuite.swift:191` 缺少 `MLXVLMGenerationEvent` 未知 case 而失败，原始 `archive.log` SHA-256=`7361f8eb61fbd93b5516004633828b1a245af5c33e4cb1480e9e5d9c253724e6`。
+
+给示例增加 `@unknown default: append("unknownGenerationEvent")` 后重新生成 consumer，同一 unsigned Release generic iOS archive **exit 0 / ARCHIVE SUCCEEDED**，无 `error:`；`archive-fixed.log` SHA-256=`ed582152bb95e8cd6e4a2122ebdfff1d1d3ff5c2253b0ab187a05cfe3f6851d2`。此次 `ODAIKitAppleMLXVLM` interface 含 `MultimodalVideoGenerationBackend`、`MLXVLMVideoMetadata` 及视频事件，SHA-256=`30c0eb756465dada0c9493b2d8c19af838b8c15c709bae6fe2677b485dc17e4b`。模型 JSON 哈希仍为 canonical `c074e693cc0fb9cfb19d6e7a393ffb113108e88d1489a387e8cb06d309602d54`；Metal bundle 存在。摘要 `artifacts/verification/f09-current-source-20261030/summary.json` SHA-256=`3a8a4986fbbc53cb44184f1e42e1c5d25f1b0747514605a1a8c063b79354b590`。
+
+本次仍使用 ignored 依赖的 OrderedCollections target-scoped flag 和五处 MLXLM unknown-case 诊断补丁；生产依赖兼容性没有因此通过。实际 public-interface 导入图包含 20 个本地 Swift 模块，此外还涉及 C module maps 与资源。[Apple XCFramework 文档](https://developer.apple.com/documentation/xcode/creating-a-multi-platform-binary-framework-bundle)要求实际 framework/library 的平台变体；[Swift package binary 分发文档](https://developer.apple.com/documentation/xcode/distributing-binary-frameworks-as-swift-packages)使用显式 XCFramework binary targets，未承诺自动打包任意 SwiftPM 传递依赖或资源。因此仍需另包验证 artifact 边界、传递模块、device/simulator slices 与独立 binary consumer，F09 保持 `open/not-ready`。
+
+本轮定向 portable-source/consumer 回归在可写 Swift 缓存环境 **6/6**；受限沙盒的两项 Swift 编译测试因 `~/.cache/clang` 与 SwiftPM cache 不可写失败，授权环境同命令通过。独立 code-reviewer 通道因服务 429 未返回结论，不能计 APPROVE。
+
 ## Tests、审查与恢复
 
 新 black-box generator 测试初次真实 RED 为缺少 `--portable-source`（2 failures；symlink 拒绝测试当时由 parser 拒绝而通过，不冒称该项独立 RED）。实现后新3/3；含默认 consumer 与基础分发的定向11/11；完整 tools **126/126**；补强 lock/resource 精确比较后的定向6/6、Python py_compile、`git diff --check` 通过。完整 tools 显式使用 `RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`；一次漏设 Ruby 的两个既有分发测试失败已由正确环境通过，不是产品修改。
