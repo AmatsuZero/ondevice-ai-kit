@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F11 iOS 文件 ASR 资源补测
+
+- 同一 active goal 继续；在 ignored `artifacts/verification/f11-speech-asr-resources-20261030/` 建立隔离 Speech framework probe，固定合成 CAF、一次 warm-up、五次顺序本机识别、逐 run 单调耗时和约 10 ms 采样进程 RSS。无麦克风、Photos 或私人媒体，生产 SDK/Demo 与受保护 dirty/untracked 文件未改。
+- 泛型 iOS 构建 `BUILD SUCCEEDED`；首次签名构建在受限环境因 CoreSimulator 服务和 profile 读取失败，授权环境复用现有 `io.ondeviceai.probe.f11speech` profile 后真机构建、安装和启动成功。CoreDeviceService 两次 Documents 读取超时后恢复；这不是 ASR 运行失败。
+- 正式原始报告 `device-report-final.json` SHA-256=`81e5312e678bce19cf441933ef430db670f7e5df483a60cf291bec92dad632f2`，PID=`32472` 与 `launch-final.json` 一致，bundle=`io.ondeviceai.probe.f11speech`，固定 CAF SHA-256=`ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`。warm-up 与 5/5 run 均 success、task completed、归一化全文匹配；耗时 p50/p95=`75.010/76.434 ms`，采样 RSS 峰值范围=`36,831,232–36,945,920 B`。bounded `summary.json` SHA-256=`71e163cec6634e595c338025d2070a8c0baa63271e936b585c2ddb15ddcca6f3`，来源清单保留源文件、构建/安装/启动/复制回执哈希。
+- 该 probe 直连 Speech framework，仅补固定文件原始延迟/RSS；生产 SDK client 性能、自然 CER/WER、断网、真实峰值/GPU/能耗、最低系统仍未验证。首轮和正式复跑的 RSS 基线明显不同，不能推算发布预算。P11 `open/not-ready`，goal active。
+- readiness 索引已加入 ASR 原始报告、summary、source manifest 和设计边界；最新快照 `artifacts/verification/p11-readiness-20261030-f11-asr-index/summary.json` 为 **57 evidence paths / 64 source hashes / 9 rows with gaps**，SHA-256=`59b84e0736a09bbc17e1708a907b3d789ec52e39d2fd22f91ce4f798f46f2cb0`。grouped 复算仍为 3 groups / 9 coverage，结果 SHA-256=`d6ed462edc60afe6ba4bdedfd787dd2eb0551926faff31c498815363895278a6`，重复生成逐字节一致；ASR 与 Video SR 均不硬映射为兼容 grouped sample。来源清单 10 项哈希回读无漂移，聚焦 readiness/grouped 回归 **21/21**。
+
 ## 最新续接 — 2026-10-30 F11 iOS Video SR 原始质量/资源复核
 
 - 同一 active goal 继续，无需替换；工作树仍为 `feat/sdk-foundation`，现有 `project.pbxproj`、身份草稿和相机 resource/thread probes 等受保护 dirty/untracked 文件未 restore、覆盖、stage 或提交。
@@ -12,7 +20,7 @@
 - 独立 `video_sr_validate.py --scale=4` 通过 48 帧/24 fps/无音轨/时序校验；`video_sr_quality.py` 两路均完成 48 帧配对，`colorComparability=matched-metadata`，SR PSNR/SSIM=`36.776212/0.979250`，bicubic=`38.872866/0.983506`。质量 JSON 为 ignored 证据，`qualityVerdict` 保持 `unverified`；不把单一自然素材的编码输出分数升级为模型主观质量或发布通过。
 - 该轮只补齐 F11 的真实 iOS Video SR 原始延迟、采样 RSS、输出完整性与色彩/质量边界；Android 后端、主观/跨场景质量、GPU/energy、持续资源和最低系统仍开放。P11 仍 `open/not-ready`，goal 继续 active。
 - 将本轮真机可用性、原始报告、两份质量 JSON、输入/参考和两份输出视频共 8 项加入 Video SR readiness 来源后，P11 readiness 为 **9 rows / 53 evidence paths / 51 source hashes / 9 rows with gaps**；grouped 报告仍为 **3 groups / 9 coverage**，聚焦 readiness/grouped 回归保持 **21/21**。SR 数据仍不硬映射成兼容 grouped sample。
-- 新快照为 ignored `artifacts/verification/p11-readiness-20261030-f11-videosr-index/summary.json`（SHA-256=`7a81dde22a3b285e440816bd28690a3f13fc0c880186181af39cc72c1fdb9446`）；`benchmark/p11/grouped-report-manifest.json` 已指向该快照。grouped 复算结果在 ignored `artifacts/verification/p11-grouped-benchmark-20261030-f11-videosr-index/summary.json`（SHA-256=`75ab6b01e85fdd9a3384b6ee4a87f049816542018ae4e260180d649f3755027f`），Video SR 行仍为 `reportStatus=unverified`、release=`not-ready`。
+- 该快照随后被 ASR 续接快照替代；当前以顶部 `p11-readiness-20261030-f11-asr-index/summary.json` 和 `benchmark/p11/grouped-report-manifest.json` 为准。
 
 ## 最新续接 — 2026-10-30 F11 iOS TTS 原始资源测量
 
