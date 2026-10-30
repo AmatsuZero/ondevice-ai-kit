@@ -159,6 +159,18 @@ next packaging work: build every public closure module as a real framework or
 library, preserve resources, and prove device/simulator plus source-free
 consumer behavior under a supportable dependency policy.
 
+The same diagnostic target also archived for generic iOS Simulator. Combining
+the two wrapper slices with `xcodebuild -create-xcframework` produced the
+ignored `MLXVLMFrameworkProbe-diagnostic.xcframework`; the layout inspector
+passed device/simulator Mach-O, arm64, minimum-OS, Swift interface and module
+map checks. Layout report SHA-256 is
+`5f3ca99da50d85a7f067a26195e4af2bb85721316cce4f28f0bd6cff54cb459a`, and the
+simulator archive log SHA-256 is
+`b6fd24eb0ca594a9ab99625edd00811446e826e47cd3ebce3d12cfa115887c30`.
+This remains a wrapper-only diagnostic XCFramework: it has zero resource
+bundles, its public interface re-exports `ODAIKitAppleMLXVLM`, and it does not
+ship the 20-module closure or a binary-only consumer.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer
