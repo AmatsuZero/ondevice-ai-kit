@@ -2,6 +2,19 @@
 
 更新时间：2026-10-25。P7 只比较后端边界和一条固定输入链路的探针条件，不把单帧放大或桌面运行结果当作移动端视频超分交付。
 
+## F11 真实 iOS 资源与质量复核（2026-10-30）
+
+沿用已审计的 Common swifts BT.709 实验约定素材，在 iPhone 16 Pro Max / iOS 27.0.1 上重新运行隔离 `io.ondeviceai.probe.f11videosr`。本轮使用 `xcodebuild` 与 `xcrun devicectl` 真机路径；输入和两路输出只位于 probe 的 App `Documents` 沙盒，没有写入 Photos。输入文件 SHA-256 为 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`，设备副本与仓库副本一致。
+
+设备原始报告 `artifacts/verification/f11-videosr-20261030/device-documents/ios-video-sr-probe-2076985E-4089-4826-8893-4E6C4051E3D7.json` 的 SHA-256 为 `73aacec0f3b5b78b203825304f52dc668761ae3fe504a93dd383a9d476a353b0`。SR 与 Core Image bicubic 均为 `success`，各处理 48 帧、输出 1280×720、PTS 单调；两路输出均为 HEVC/MOV、24 fps、无音轨，并带 BT.709/tv 元数据。
+
+| 路径 | 每帧 p50 / p95 | 采样 RSS 峰值增量 | PSNR / SSIM（48 帧） |
+| --- | ---: | ---: | ---: |
+| VideoToolbox SR | `93.408 / 94.587 ms` | `127,500,288 B` | `36.776212 / 0.979250` |
+| Core Image bicubic | `1.467 / 2.114 ms` | `442,368 B` | `38.872866 / 0.983506` |
+
+质量 JSON 分别为 `artifacts/verification/f11-videosr-20261030/quality-sr.json`（SHA-256 `cc0efbacfec05fefc18a6252fc8f2d5de9cc389e75c60bfe648fd0794221af18`）和 `quality-bicubic.json`（SHA-256 `bc044e78ea5779654ebc9d9322f878980a1fa9a46c2b5e0ab97e96259165b608`）。两份报告均为 `comparedFrames=48`、`colorComparability=matched-metadata`，但 `qualityVerdict` 仍为 `unverified`：这是单一自然素材的编码输出保真度和 probe 进程 RSS 采样，不是主观模型质量、全机/GPU 峰值或能耗结论。该复核补充 F11 原始数据，不改变 P7/P11 的 Android 后端、最低系统和统一资源门禁。
+
 ## 自然视频 iPhone 真机复核（2026-10-25，非镜像）
 
 沿用固定公开 Common swifts fixture，在授权的 iPhone 16 Pro Max / iOS 27.0.1（UDID `<iPhone-UDID>`）上重新安装签名的 `IOSVideoSRProbe.app`，通过 `devicectl` 将 `artifacts/P7/natural/prepared/input-180p-4x.mp4` 复制到 probe 的 App Documents，并以 `--process-video` 启动。全程使用 `xcodebuild`/`devicectl` 真机路径，没有使用 iPhone 镜像、镜像画布或坐标点击。

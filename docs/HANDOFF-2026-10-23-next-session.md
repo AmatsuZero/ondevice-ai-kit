@@ -4,6 +4,15 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F11 iOS Video SR 原始质量/资源复核
+
+- 同一 active goal 继续，无需替换；工作树仍为 `feat/sdk-foundation`，现有 `project.pbxproj`、身份草稿和相机 resource/thread probes 等受保护 dirty/untracked 文件未 restore、覆盖、stage 或提交。
+- 隔离 probe `io.ondeviceai.probe.f11videosr` 在 iPhone 16 Pro Max / iOS 27.0.1 上使用已审计的 Common swifts BT.709 实验约定素材处理 48 帧。仓库与设备输入副本 SHA-256 均为 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`；SR 和 Core Image bicubic 两路均 `success`，各输出 1280×720/48 帧/24 fps/无音轨，设备 Documents 列表未出现 Photos 或共享相册路径。
+- 原始报告 `artifacts/verification/f11-videosr-20261030/device-documents/ios-video-sr-probe-2076985E-4089-4826-8893-4E6C4051E3D7.json` SHA-256=`73aacec0f3b5b78b203825304f52dc668761ae3fe504a93dd383a9d476a353b0`。SR 每帧 p50/p95=`93.408/94.587 ms`，采样 RSS 峰值增量=`127,500,288 B`；bicubic 为 `1.467/2.114 ms` 与 `442,368 B`。两路首帧/编码色彩元数据可比，仍只是 probe 进程 `resident_size` 采样，不是全机/GPU/energy 峰值。
+- 独立 `video_sr_validate.py --scale=4` 通过 48 帧/24 fps/无音轨/时序校验；`video_sr_quality.py` 两路均完成 48 帧配对，`colorComparability=matched-metadata`，SR PSNR/SSIM=`36.776212/0.979250`，bicubic=`38.872866/0.983506`。质量 JSON 为 ignored 证据，`qualityVerdict` 保持 `unverified`；不把单一自然素材的编码输出分数升级为模型主观质量或发布通过。
+- 该轮只补齐 F11 的真实 iOS Video SR 原始延迟、采样 RSS、输出完整性与色彩/质量边界；Android 后端、主观/跨场景质量、GPU/energy、持续资源和最低系统仍开放。P11 仍 `open/not-ready`，goal 继续 active。
+- 文档来源哈希刷新后，P11 readiness 校验为 **9 rows / 45 evidence paths / 43 source hashes / 9 rows with gaps**，grouped 报告仍为 **3 groups / 9 coverage**；聚焦 readiness/grouped 回归 **21/21**。这不把 SR probe 数据硬映射成兼容 grouped sample。
+
 ## 最新续接 — 2026-10-30 F11 iOS TTS 原始资源测量
 
 - 同一 active goal 继续；设备入口通过 `devicectl` 恢复，物理 `iPhone 16 Pro Max` / iOS 27.0.1（UDID `00008140-0008703436D3001C`，CoreDevice `1D0EA54B-8379-5147-84DF-A86534DADE1C`）已解锁。生产 Demo、SDK 和受保护 dirty/untracked 文件未修改。

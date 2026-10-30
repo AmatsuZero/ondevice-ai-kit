@@ -6,6 +6,8 @@
 
 2026-10-30 F11 新增一条真实 iOS TTS 原始资源报告：iPhone 16 Pro Max / iOS 27.0.1，`apple.avspeech`、固定 `en-US` Samantha，1 次 warm-up 后 5 次逐 run，5/5 成功；耗时 p50=`2779.727 ms`、p95=`2779.792 ms`，10 ms 左右间隔的 `mach_task_basic_info.resident_size` 采样峰值为 `44,761,088–44,810,240 B`。原始报告与来源清单位于 ignored `artifacts/verification/f11-speech-tts-resources-20261030/`，报告 SHA-256=`d3c9d6caf68d5a45fa10bc9c85f8a23de4c469018d6ec0150c8b26b25d22e7c8`，bounded summary SHA-256=`c8c515d451d9237b3e28120358dc831ef16398f7ed9ab83f37a050fb3a7515e3`。这只补齐 TTS 的逐 run 延迟与采样 RSS；自然语音质量、断网行为、真实峰值、GPU/energy、最低系统仍未验证。新的 readiness 快照为 45 evidence paths / 43 source hashes / 9 rows with gaps，gate 仍 `open/not-ready`；该报告不加入既有 grouped benchmark 样本。
 
+2026-10-30 F11 iOS Video SR 复核使用隔离 probe 和同一公开 48 帧自然素材，SR 与 Core Image bicubic 均成功输出 720p/24 fps；SR 每帧 p50/p95=`93.408/94.587 ms`、采样 RSS 峰值增量=`127,500,288 B`，bicubic 为 `1.467/2.114 ms`、`442,368 B`。两路 48 帧 PSNR/SSIM 分别为 `36.776212/0.979250` 与 `38.872866/0.983506`，色彩元数据匹配；原始路径和哈希见[超分复核](video-sr-backends.md#f11-真实-ios-资源与质量复核2026-10-30)。单一素材的编码输出保真度不等于主观模型质量，`qualityVerdict=unverified`。该数据不加入原分组报告的三份兼容样本；Android 后端、GPU/energy、持续资源和最低系统仍开放，P11 仍 `open/not-ready`。
+
 | 能力 | 当前状态 | 已有证据 | 仍未验证或阻断 |
 | --- | --- | --- | --- |
 | Face detection | `pass-bounded` | [benchmark](benchmark.md)、[P11 分组报告](p11-grouped-benchmark.md)、[设备矩阵](device-matrix.md) | iOS 15、Android API26、质量阈值、峰值内存、能耗、长期资源 |
