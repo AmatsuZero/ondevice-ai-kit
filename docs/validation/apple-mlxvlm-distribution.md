@@ -84,6 +84,38 @@ generated Xcode project or another explicit framework target; the unsupported
 option is not used as a packaging shortcut. No output was created by this
 probe.
 
+### 2026-10-31 committed snapshot framework-target probe
+
+An isolated XcodeGen project in ignored
+`artifacts/verification/f09-framework-target-20261031/` declares an iOS 18
+framework target importing `ODAIKitAppleMLXVLM` from the exact committed
+snapshot, with fixed `Package.resolved` copied into the generated Xcode
+workspace. XcodeGen exited 0. The unsigned generic iOS Release archive used
+the fixed dependency cache and offline resolution flags, then exited **65**
+before producing an archive. The first relevant failure is in
+`mlx-swift_Cmlx` Metal compilation:
+
+```text
+error: cannot execute tool 'metal' due to missing Metal Toolchain;
+       use: xcodebuild -downloadComponent MetalToolchain
+```
+
+Original argv, project spec, archive log and summary are retained under that
+ignored directory; `archive.log` SHA-256 is
+`ca600eb0c8cdd542bc8a43562c36bf17c431c2579392c5206e7868ad0bb363c5`.
+The current Xcode is 27.2 (`27B52`). An earlier temporary project omitted the
+workspace lock and attempted GitHub clones despite offline flags; those
+fetches failed (exit 74) and did not establish a dependency or compiler
+result. The pinned rerun avoided that resolution failure. The shared fixed
+cache checkouts inspected afterward had zero tracked changes, and the
+production lock and protected files retained their hashes.
+
+No toolchain component was installed, no production dependency was patched,
+and no enhanced framework/simulator slice or binary consumer is available.
+F09 remains `open/not-ready`; after the Metal Toolchain prerequisite is
+available, the same pinned project still must prove dependency interfaces,
+complete module closure and a source-free consumer.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer

@@ -11,6 +11,12 @@
 - Xcode 27.2 拒绝 `xcodebuild -packagePath`，尚无可归档的增强 framework target；当前 App archive 仍只含对象文件。Task 3 下一步需从 committed snapshot 建立真实 device/simulator framework 构建项目，并先证明 OrderedCollections/EventSource 和 MLXLM switch 的**生产可支持**依赖配置。没有增强 XCFramework、binary-only consumer 或资源运行时结果，F09 继续 `open/not-ready`。
 - `73f70c4` 已快进推送并新鲜核对到 GitLab `jihu/feat/sdk-foundation`。GitHub `origin` 使用 SSH 时返回 `Permission denied (publickey)`；本机 `gh auth status` 显示默认 token 无效，本轮无法新鲜读取 GitHub SHA；上次核对为 `79536bd`，可能已变化。没有强推、tag、release 或 merge。保留本地提交，恢复 GitHub 凭据后按 `scripts/sync_remotes.py` 的快进检查补同步。
 
+## 最新续接 — 2026-10-31 F09 framework-target 工具链门槛
+
+- 在 ignored `artifacts/verification/f09-framework-target-20261031/` 从 `79536bd` committed snapshot 生成隔离 XcodeGen framework target；workspace 复制生产 `Package.resolved`、使用固定依赖缓存及 offline 解析 flags。XcodeGen exit 0；Xcode 27.2 generic iOS Release unsigned archive exit **65**，首个可归因失败为 `mlx-swift_Cmlx` 无 Metal Toolchain，尚未产出 archive。原始 log SHA-256=`ca600eb0c8cdd542bc8a43562c36bf17c431c2579392c5206e7868ad0bb363c5`，完整 argv/spec/summary 均在同目录；详见[分发验证](validation/apple-mlxvlm-distribution.md)。
+- 初次临时探针忘记在生成的 workspace 放 lock，虽使用 offline flags 仍尝试 GitHub clone，传输失败 exit 74；此轮不计源码或依赖兼容性失败。之后 pinned rerun 越过解析；既有缓存 checkout 的 tracked 状态为 clean，生产 lock 与保护文件哈希未变。没有安装 Metal Toolchain、下载模型、修改生产依赖、签名或发布。
+- 下一步先取得可用 Metal Toolchain 或另一个已安装的兼容 Xcode，再用同一 pinned project 复核第一真实编译错误；继续验证 device/simulator slices、20 模块闭包、资源和 binary-only consumer。F09 仍 `open/not-ready`，不要把本探针或旧 App archive 计为增强二进制通过。
+
 ## 最新续接 — 2026-10-30 F09 binary distribution 设计与实施顺序
 
 - 在现有 F09 当前图像/视频 source App archive 证据上，新增 [binary distribution design](superpowers/specs/2026-10-30-apple-mlxvlm-binary-distribution-design.md) 与 [implementation plan](superpowers/plans/2026-10-30-apple-mlxvlm-binary-distribution.md)，并在[分发验证](validation/apple-mlxvlm-distribution.md)中加入入口。设计要求完整 20 个本地 Swift interface 模块的闭包、C module maps、模型 JSON/Metal 资源、device/simulator 双 slice，以及不带增强源码 checkout 的独立 binary consumer。
