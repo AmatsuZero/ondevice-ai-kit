@@ -8,6 +8,7 @@
 
 - 同一 ignored 诊断配置的 generic iOS Simulator wrapper archive 也成功，日志 `archive-diagnostic-sim.log` SHA-256=`b6fd24eb0ca594a9ab99625edd00811446e826e47cd3ebce3d12cfa115887c30`。与 device wrapper slice 合成 ignored `MLXVLMFrameworkProbe-diagnostic.xcframework` 后，`tools/inspect_mlxvlm_xcframework.py` 通过 device/simulator Mach-O、arm64、iOS 18 floor、Swift interfaces、C module maps；layout report SHA-256=`5f3ca99da50d85a7f067a26195e4af2bb85721316cce4f28f0bd6cff54cb459a`。
 - 该结果只证明诊断 wrapper 的双 slice 布局工具链可行：XCFramework 有 0 resource bundles，公开 interface 仍 re-export `ODAIKitAppleMLXVLM`，没有 20-module closure、canonical resources 或 binary-only consumer。不要把它替代 F09 生产 artifact。
+- 完整诊断绑定摘要位于 `artifacts/verification/f09-framework-target-20261031/diagnostic-summary.json`，SHA-256=`cbffcd9dea4260db32fab00790b22f47dcb1a1a4723b2ca29780dbb52ab7ff1c`；明确记录 `fullModuleClosure=false`、`resourceBundles=0`、`binaryOnlyConsumer=false`、`productionDependencyCompatibility=false`。
 - 写入本节前双端远端已新鲜同步到 `1cd1236`；本地保护性 dirty/untracked 文件保持未暂存。F09 下一步仍是生产依赖策略/完整 closure，而不是重复 wrapper archive；后续提交需重新核对远端 SHA。
 
 ## 最新续接 — 2026-10-31 F09 诊断 framework archive 与双远端同步

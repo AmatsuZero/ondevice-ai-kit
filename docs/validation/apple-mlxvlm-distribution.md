@@ -171,6 +171,15 @@ This remains a wrapper-only diagnostic XCFramework: it has zero resource
 bundles, its public interface re-exports `ODAIKitAppleMLXVLM`, and it does not
 ship the 20-module closure or a binary-only consumer.
 
+The complete diagnostic summary is retained at
+`artifacts/verification/f09-framework-target-20261031/diagnostic-summary.json`
+(SHA-256
+`cbffcd9dea4260db32fab00790b22f47dcb1a1a4723b2ca29780dbb52ab7ff1c`). It
+binds the committed source/lock, diagnostic patch-file hashes, both archive
+logs and the layout report, while explicitly recording `fullModuleClosure`,
+`resourceBundles`, `binaryOnlyConsumer` and `productionDependencyCompatibility`
+as false.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer
