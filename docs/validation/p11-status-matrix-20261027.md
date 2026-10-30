@@ -4,7 +4,7 @@
 
 2026-10-28 收尾裁定：用户要求当前问题记录并后续专项推进，本轮执行 `closed-with-followups`。本表原验收状态全部保留，P11仍 `open/not-ready`；后续动作归入 [F01–F12](foundation-followups.md)，不要求本轮继续清零所有发布阻断。见[收尾记录](roadmap-closure-20261028.md)。
 
-2026-10-30 F11 新增一条真实 iOS TTS 原始资源报告：iPhone 16 Pro Max / iOS 27.0.1，`apple.avspeech`、固定 `en-US` Samantha，1 次 warm-up 后 5 次逐 run，5/5 成功；耗时 p50=`2779.727 ms`、p95=`2779.792 ms`，10 ms 左右间隔的 `mach_task_basic_info.resident_size` 采样峰值为 `44,761,088–44,810,240 B`。原始报告与来源清单位于 ignored `artifacts/verification/f11-speech-tts-resources-20261030/`，报告 SHA-256=`d3c9d6caf68d5a45fa10bc9c85f8a23de4c469018d6ec0150c8b26b25d22e7c8`，bounded summary SHA-256=`de761c1c2c6af17ba6c82db802a639e572aebc07d1aad5306fcd1b244a6f5d04`。这只补齐 TTS 的逐 run 延迟与采样 RSS；自然语音质量、断网行为、真实峰值、GPU/energy、最低系统仍未验证。新的 readiness 快照为 45 evidence paths / 43 source hashes / 9 rows with gaps，gate 仍 `open/not-ready`；该报告不加入既有 grouped benchmark 样本。
+2026-10-30 F11 新增一条真实 iOS TTS 原始资源报告：iPhone 16 Pro Max / iOS 27.0.1，`apple.avspeech`、固定 `en-US` Samantha，1 次 warm-up 后 5 次逐 run，5/5 成功；耗时 p50=`2779.727 ms`、p95=`2779.792 ms`，10 ms 左右间隔的 `mach_task_basic_info.resident_size` 采样峰值为 `44,761,088–44,810,240 B`。原始报告与来源清单位于 ignored `artifacts/verification/f11-speech-tts-resources-20261030/`，报告 SHA-256=`d3c9d6caf68d5a45fa10bc9c85f8a23de4c469018d6ec0150c8b26b25d22e7c8`，bounded summary SHA-256=`c8c515d451d9237b3e28120358dc831ef16398f7ed9ab83f37a050fb3a7515e3`。这只补齐 TTS 的逐 run 延迟与采样 RSS；自然语音质量、断网行为、真实峰值、GPU/energy、最低系统仍未验证。新的 readiness 快照为 45 evidence paths / 43 source hashes / 9 rows with gaps，gate 仍 `open/not-ready`；该报告不加入既有 grouped benchmark 样本。
 
 | 能力 | 当前状态 | 已有证据 | 仍未验证或阻断 |
 | --- | --- | --- | --- |
