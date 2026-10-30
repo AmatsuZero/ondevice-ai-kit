@@ -219,7 +219,7 @@ The `mlx-swift-lm` `main` is
 `KVCache.swift` still has two `ScaledDotProductAttentionMaskMode` switches
 without `@unknown default`, and `MLXVLM/Models/Gemma4.swift` still has two;
 these are direct source checks, not a new Xcode archive. Upstream `main`
-also changes the MLX and Swift Syntax dependency requirements, so moving the
+also raises the MLX dependency floor from 0.32.3 to 0.33.0, so moving the
 production lock to that revision would be a broader migration, not a proven
 drop-in repair. The fixed lock and F09 readiness decision are unchanged.
 

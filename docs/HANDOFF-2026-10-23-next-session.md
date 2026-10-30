@@ -7,7 +7,7 @@
 ## 最新续接 — 2026-10-31 F09 官方 refs 刷新
 
 - 只读官方 Git refs 核对成功：`swift-collections` `main` 和最新 `1.7.5` 同为 `f96b909e1a9e469620bc5037c1e24e00153f376f`；EventSource 最新 tag 仍是 `1.5.1`=`86b5096ac59ab46e66bd1f6377c604bc1dab0bc2`，`main`=`bb4b61273b5a976bb571859c17f903ebc3439df1`；`mlx-swift-lm` `main`=`128f49f1db38ea7b949f2ebb60967def8b76f58e`。
-- 直接检查当前 `mlx-swift-lm` 源码：`KVCache.swift` 两处、`MLXVLM/Models/Gemma4.swift` 两处 `ScaledDotProductAttentionMaskMode` switch 仍无 `@unknown default`。当前 main 也提高 MLX 与 Swift Syntax 依赖要求；不能把换 main 当作固定 lock 的已验证修复。详见[分发验证](validation/apple-mlxvlm-distribution.md)。没有生产依赖改动或新 archive；F09 仍 `open/not-ready`。
+- 直接检查当前 `mlx-swift-lm` 源码：`KVCache.swift` 两处、`MLXVLM/Models/Gemma4.swift` 两处 `ScaledDotProductAttentionMaskMode` switch 仍无 `@unknown default`。当前 main 也把 MLX 最低版本从 0.32.3 提高到 0.33.0（Swift Syntax 范围未变）；不能把换 main 当作固定 lock 的已验证修复。详见[分发验证](validation/apple-mlxvlm-distribution.md)。没有生产依赖改动或新 archive；F09 仍 `open/not-ready`。
 - 本轮曾有部分 `gh api` 读取被自动审批服务 429 拒绝，但上述 Git refs 与源码读取成功。受限环境的 CoreDeviceService 初始化超时；授权环境复核 iPhone 16 Pro Max 为 `connected`。未安排受控朗读窗口，因此没有启动真实麦克风。保护性 dirty/untracked 文件和 lock 保留。
 
 ## 最新续接 — 2026-10-31 F09 生产依赖决策门槛与 GitHub 认证
