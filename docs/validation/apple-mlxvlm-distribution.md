@@ -9,6 +9,81 @@ The binary artifact contract and implementation sequence are defined in:
 
 The chosen boundary is an explicit XCFramework set for the complete public Swift-module closure, with device/simulator slices, emitted interfaces, C module maps, model/Metal resources, and a source-free independent consumer. The current App archive remains diagnostic evidence only; it does not satisfy this contract.
 
+### Task 1: artifact manifest validator
+
+The first F09 implementation gate is the tracked validator
+`tools/validate_mlxvlm_binary_artifact.py`. It accepts a manifest path and an
+artifact root and exits non-zero (or raises `ValueError` through its Python
+API) for any incomplete or unsafe artifact set:
+
+```sh
+rtk proxy python3 tools/validate_mlxvlm_binary_artifact.py \
+  artifacts/verification/f09-binary/artifact.json \
+  artifacts/verification/f09-binary
+```
+
+Manifest schema `1` (`kind=apple-mlxvlm-xcframework-set`) requires a source
+commit, toolchain, unique `moduleClosure`, resource entries with SHA-256, and
+artifact entries with module names, minimum OS, device and simulator slices,
+arm64 architecture, `.swiftinterface` hashes, and a deterministic directory
+tree SHA-256. The resource list must contain the canonical
+`smolvlm2-model.json` and a `.metallib`. Resolved paths must remain below the
+artifact root; symlink escapes, source checkout paths, duplicate modules,
+missing closure members, missing interfaces/slices, and hash drift are
+rejected before a consumer can use the artifact.
+
+Focused evidence on 2026-10-30: `test_mlxvlm_binary_artifact` **13/13** passed,
+covering a valid fixture, missing module closure, artifact/resource/interface
+hash drift, symlink escape, source checkout path, per-slice arm64/interface
+requirements, and duplicate modules. The validator is intentionally a local
+artifact gate; it does not claim that any XCFramework has been built yet.
+
+### Task 2: committed-tree snapshot
+
+`tools/prepare_mlxvlm_binary_snapshot.py` materializes only Git objects from
+one exact full commit. It refuses an existing output directory and verifies
+the production lock before writing; current dirty files and untracked package
+files are never copied. The diagnostic patch manifest is recorded only when it
+is itself part of the committed package tree.
+
+The 2026-10-30 snapshot was created from
+`79536bd715146eb69906c2123d907e2406df47e2`:
+
+`artifacts/verification/f09-binary-snapshot-20261030-v2/`
+
+- 147 tracked package files; source inventory tree SHA-256:
+  `8d3b9e075e165ca1ce35d71bd1735c9dd7d0c1536aa9fcbf82b0526260eb2a68`
+- `Package.resolved` SHA-256:
+  `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`
+- Snapshot tests verified that a deliberately dirty tracked source stays dirty
+  in its worktree while an untracked source sentinel is absent from the
+  snapshot. In this checkout, protected project, identity, camera and
+  generator files retained their pre-task hashes.
+
+This snapshot is a reproducible input for the XCFramework build task; it is
+not itself a binary artifact or a release publication.
+
+Task 2 snapshot tests passed **3/3**. The complete `tools/tests` suite passed
+**221/221** in an environment where SwiftPM can write its module cache; the
+restricted sandbox run had two Swift compiler/cache errors before that rerun.
+
+### Task 3: layout inspector checkpoint
+
+`tools/inspect_mlxvlm_xcframework.py` now checks the XCFramework plist and
+both iOS device/simulator framework layouts for actual Mach-O arm64 and
+deployment-target load commands, public Swift interfaces, module maps,
+binaries and resource bundle paths. Nested symlink escapes are rejected. Its
+layout tests passed **7/7**, including one real compiled Mach-O header probe. No enhanced XCFramework was produced or
+inspected from a real archive, and production dependency compatibility remains
+unverified. The current source App archive still does not satisfy F09.
+
+The first committed-snapshot packaging probe also recorded a toolchain
+boundary: Xcode 27.2 rejects `xcodebuild -packagePath` before resolving the
+package (`invalid option '-packagePath'`). A package archive therefore needs a
+generated Xcode project or another explicit framework target; the unsupported
+option is not used as a packaging shortcut. No output was created by this
+probe.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer
