@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-30 F09 binary artifact gates
+
+- F09 计划 Task 1/2 已完成，Task 3 仅完成布局检查器。提交 `73f70c4` 包含 artifact manifest validator、committed-tree snapshot、XCFramework/Mach-O 布局检查器、定向测试和[分发证据](validation/apple-mlxvlm-distribution.md)。独立审查发现的 canonical 资源哈希、真实 Mach-O、畸形 manifest 与 symlink 问题已修复并由测试复核；未取得修复后的新一轮独立 APPROVE。完整 `tools/tests` 在可写 SwiftPM 环境 **221/221**，`compileall`/`git diff --check` 通过。
+- 忽略目录 `artifacts/verification/f09-binary-snapshot-20261030-v2/` 保存 `79536bd715146eb69906c2123d907e2406df47e2` 的 147 个已提交 package 文件；lock SHA-256=`e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`，tree SHA-256=`8d3b9e075e165ca1ce35d71bd1735c9dd7d0c1536aa9fcbf82b0526260eb2a68`，diagnostic patch manifest 明确为 `null`。保护性 dirty/untracked 文件哈希前后未变。
+- Xcode 27.2 拒绝 `xcodebuild -packagePath`，尚无可归档的增强 framework target；当前 App archive 仍只含对象文件。Task 3 下一步需从 committed snapshot 建立真实 device/simulator framework 构建项目，并先证明 OrderedCollections/EventSource 和 MLXLM switch 的**生产可支持**依赖配置。没有增强 XCFramework、binary-only consumer 或资源运行时结果，F09 继续 `open/not-ready`。
+- `73f70c4` 已快进推送并新鲜核对到 GitLab `jihu/feat/sdk-foundation`。GitHub `origin` 使用 SSH 时返回 `Permission denied (publickey)`；本机 `gh auth status` 显示默认 token 无效，本轮无法新鲜读取 GitHub SHA；上次核对为 `79536bd`，可能已变化。没有强推、tag、release 或 merge。保留本地提交，恢复 GitHub 凭据后按 `scripts/sync_remotes.py` 的快进检查补同步。
+
 ## 最新续接 — 2026-10-30 F09 binary distribution 设计与实施顺序
 
 - 在现有 F09 当前图像/视频 source App archive 证据上，新增 [binary distribution design](superpowers/specs/2026-10-30-apple-mlxvlm-binary-distribution-design.md) 与 [implementation plan](superpowers/plans/2026-10-30-apple-mlxvlm-binary-distribution.md)，并在[分发验证](validation/apple-mlxvlm-distribution.md)中加入入口。设计要求完整 20 个本地 Swift interface 模块的闭包、C module maps、模型 JSON/Metal 资源、device/simulator 双 slice，以及不带增强源码 checkout 的独立 binary consumer。
