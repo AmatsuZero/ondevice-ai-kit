@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-31 F11 跨场景自然视频质量报告
+
+- 使用两份 immutable 真机原始报告生成六行范围明确的自由描述比较：旧 Common swifts 与新 Kawaida waterfall，各三个 `semantic-motion-*`，相同 prompt `Describe what happens in this video in one brief sentence.`。原始报告 SHA-256 分别为 `620ce4d2d3a90e83e9385ad5fbb92fe7eb60be728d7be5aa2015863735413ace` 与 `bcf785bc9637965378f22ac67204e15d68fa63eb6544d35fa976946cfdd68b7b`；不同视频、fixture 和 source commit，不当作同一 benchmark 样本。
+- 派生报告 `artifacts/verification/f11-cross-scene-video-quality-20261031/summary.json` SHA-256=`530c4676f9e81f9a68a76e27aa806f872a4713bfc793361edd8a84267bebe474`，逐行保留原始输出。两场景窄场景词命中均为 3/3；飞鸟已有完整 rubric 为 1/3，瀑布三行包含抽查画面未支持的人、动物或鸟细节，完整语义质量保持 `unverified`。两组 strict motion/frozen pair 均为 0/3，temporal 结论保持 `observed-failure`。
+- 新 readiness `artifacts/verification/p11-readiness-20261031-f11-cross-scene/summary.json` SHA-256=`7e15eae548cadb93ef959189fe96897459ce70d7ccb429ca1a6fe9b6e4294380`，`validate_p11_readiness.py` 输出 **69 evidence paths / 76 source hashes / 9 rows with gaps**；`benchmark/p11/grouped-report-manifest.json` 已指向新快照，grouped report 仍为 **3 groups / 9 coverage**，P11 `open/not-ready`。该报告不新增 grouped sample。
+- 本轮只修改验证文档、readiness 快照和 grouped manifest；没有启动设备、麦克风或模型生成，也未触碰受保护 dirty/untracked 文件。P11 定向工具测试 **21/21**，`py_compile`/`git diff --check` 通过。下一步按既有授权精确提交并同步双端；GitHub `gh` 的 keyring 与受限 shell `default` token 视图不同，需在可用认证上下文复核。
+
 ## 最新续接 — 2026-10-31 F08 跨场景自然视频
 
 - 从 Wikimedia Commons 官方 API 获取第二场景 Kawaida Waterfall 视频（作者 Lebu Ayiga，CC BY 4.0，3,520,704 B，SHA-1=`2d071fec07aa778a6f7b44cc34815eb4ed20cc19`，SHA-256=`8a0702df71ce6b8712b2b5d7c24db8261720198922e663c8bbe0a933524e79f9`）。来源、许可、原片和派生 fixture 只在 ignored `artifacts/verification/f08-cross-scene-waterfall-20261031/`；contact sheet 已人工核对为瀑布画面，不使用 Photos、私人媒体或镜像。

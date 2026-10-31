@@ -1,5 +1,7 @@
 # Typed video Demo input / state / host checkpoint
 
+F11 的两场景六行自由描述比较见[自然视频跨场景质量核对](f11-cross-scene-video-quality-20261031.md)。该报告只做哈希绑定的语义失败模式核对，不把场景词命中当作完整质量通过。
+
 ## 2026-10-31 F08 第二自然场景：Kawaida 瀑布
 
 从 [Wikimedia Commons 的 Kawaida Waterfall 视频](https://commons.wikimedia.org/wiki/File:Front_view_video_of_Kawaida_Waterfall,_Cianda,_Kiambu_County.webm)取得第二场景。作者 Lebu Ayiga，许可 CC BY 4.0，署名为“Lebu Ayiga — Kawaida Waterfall video (CC BY 4.0), via Wikimedia Commons”。官方 API 的 3,520,704 B / SHA-1 `2d071fec07aa778a6f7b44cc34815eb4ed20cc19` 与下载文件一致；源 SHA-256 为 `8a0702df71ce6b8712b2b5d7c24db8261720198922e663c8bbe0a933524e79f9`。原片、官方 metadata、许可记录与派生素材只在 ignored `artifacts/verification/f08-cross-scene-waterfall-20261031/`，不进 Git/LFS，也不使用 Photos 或私人媒体。

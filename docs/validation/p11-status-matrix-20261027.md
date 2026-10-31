@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-10-31 F11 对两份已固定 SHA-256 的自然视频原始报告做[六行跨场景自由描述核对](f11-cross-scene-video-quality-20261031.md)：飞鸟、瀑布各三个 motion window，场景词分别命中 3/3；飞鸟现有完整 rubric 仅 1/3，瀑布三行含抽查画面不支持的人、动物或鸟细节，完整语义正确率仍未评定。两场景严格 motion/frozen pair 都为 0/3；不同素材和 source commit 不构成配对 benchmark。派生记录 SHA-256=`530c4676f9e81f9a68a76e27aa806f872a4713bfc793361edd8a84267bebe474`；readiness 为 69 evidence paths / 76 source hashes / 9 rows with gaps，既有 grouped benchmark 仍为 3 组。P11 仍 `open/not-ready`。
+
 日期：2026-10-27。矩阵对应 foundation 分支当前证据快照。`pass-bounded` 表示已有范围内的行为证据，未验证项仍是发布阻断；它不等于最终能力通过。
 
 2026-10-28 收尾裁定：用户要求当前问题记录并后续专项推进，本轮执行 `closed-with-followups`。本表原验收状态全部保留，P11仍 `open/not-ready`；后续动作归入 [F01–F12](foundation-followups.md)，不要求本轮继续清零所有发布阻断。见[收尾记录](roadmap-closure-20261028.md)。
