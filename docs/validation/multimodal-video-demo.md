@@ -1,5 +1,13 @@
 # Typed video Demo input / state / host checkpoint
 
+## 2026-10-31 F08 第二自然场景：Kawaida 瀑布
+
+从 [Wikimedia Commons 的 Kawaida Waterfall 视频](https://commons.wikimedia.org/wiki/File:Front_view_video_of_Kawaida_Waterfall,_Cianda,_Kiambu_County.webm)取得第二场景。作者 Lebu Ayiga，许可 CC BY 4.0，署名为“Lebu Ayiga — Kawaida Waterfall video (CC BY 4.0), via Wikimedia Commons”。官方 API 的 3,520,704 B / SHA-1 `2d071fec07aa778a6f7b44cc34815eb4ed20cc19` 与下载文件一致；源 SHA-256 为 `8a0702df71ce6b8712b2b5d7c24db8261720198922e663c8bbe0a933524e79f9`。原片、官方 metadata、许可记录与派生素材只在 ignored `artifacts/verification/f08-cross-scene-waterfall-20261031/`，不进 Git/LFS，也不使用 Photos 或私人媒体。
+
+现有固定工具从原片切出 0–2、2–4、4–6 秒三段，并各做 repeated-first-frame 对照；六段均为 2 秒、48 帧、320×180 H.264、BT.709、无音轨、无 B-frame，fixture validator 通过。manifest SHA-256=`69ecac7378a1a76e9acbbc135ac3e8bbe2f5c7942e95c0e46f4540b21bd7e92b`。独立 consumer 使用生产 SDK 源与固定模型，真机签名 build exit 0；iPhone 16 Pro Max / iOS 27.0.1 上 9/9 请求成功完成，backend=`mlx.smolvlm2-500m`、model=`fa57db46815177fbdfd65cc85a2b3416a8332268`、runtime=`6e338e5df49424fc0db7c6d58184d622f92ed18a`。原始报告 `device-report.json` SHA-256=`bcf785bc9637965378f22ac67204e15d68fa63eb654d35fa976946cfdd68b7b`，哈希绑定摘要 `cross-scene-summary.json` SHA-256=`30be9e4895bedb2e547b9fb76fb49b2ce8154ebc2d6c55c8a86fea14da0a7280`，均在上述目录。
+
+三个自由描述均提到瀑布/水（窄场景词命中 3/3），但输出也分别提到人、动物或鸟；抽查原片 0/2/4 秒画面不能支持这些细节，不能记为完整语义准确。固定 prompt `Is the waterfall water moving or staying still? Answer exactly MOVING or STILL.` 的 motion/frozen 三对，严格标签为 **0/3**；仅剥除末尾句号的诊断评分仍为 **0/3**。这补齐第二个不同来源/场景的真实设备输入，新增失败模式证据；自然 temporal quality、跨场景泛化、主观质量、GPU/energy、持续资源及 Demo 路径仍开放，F08/P11 保持 `observed-failure` / `open/not-ready`。本报告不并入旧合成图 benchmark 样本。
+
 ## 2026-10-29 静止帧场景语义真机探针
 
 隔离签名 App `io.ondeviceai.staticsemantic` 在 iPhone 16 Pro Max / iOS 27.0.1 上读取三个 repeated-first-frame frozen control，使用 prompt `Describe the visible scene in one brief sentence.` 生成自然语言描述。launch receipt 与原始报告 PID 均为 `31720`；报告绑定 source commit `835221e11e06dae4db2e47d75e08ef64db855c32`、fixture manifest SHA-256=`666fbfebdc999aefa5b9db944a090024b9478c13107685af621fb842babe1694`、backend/model/runtime identity。原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/static-semantic/device-report.json` SHA-256=`31eb195e375c123c39d5133636609cad835af80d0a80408af7912e53fcf43e01`。

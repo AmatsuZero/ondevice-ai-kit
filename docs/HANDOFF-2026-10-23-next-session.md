@@ -4,6 +4,15 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-31 F08 跨场景自然视频
+
+- 从 Wikimedia Commons 官方 API 获取第二场景 Kawaida Waterfall 视频（作者 Lebu Ayiga，CC BY 4.0，3,520,704 B，SHA-1=`2d071fec07aa778a6f7b44cc34815eb4ed20cc19`，SHA-256=`8a0702df71ce6b8712b2b5d7c24db8261720198922e663c8bbe0a933524e79f9`）。来源、许可、原片和派生 fixture 只在 ignored `artifacts/verification/f08-cross-scene-waterfall-20261031/`；contact sheet 已人工核对为瀑布画面，不使用 Photos、私人媒体或镜像。
+- 现有 `natural_video_temporal_fixture.py` 固定 0–2、2–4、4–6 秒 motion 与 repeated-first-frame control；6 段均为 2 秒、48 帧、320×180 H.264/BT.709、无音轨、无 B-frame，fixture manifest SHA-256=`69ecac7378a1a76e9acbbc135ac3e8bbe2f5c7942e95c0e46f4540b21bd7e92b`，独立 validator 通过。
+- ignored waterfall consumer 以生产 SDK 源、lock 和固定模型构建，签名 device build exit 0；iPhone 16 Pro Max / iOS 27.0.1 上 9/9 请求成功。backend=`mlx.smolvlm2-500m`，model=`fa57db46815177fbdfd65cc85a2b3416a8332268`，runtime=`6e338e5df49424fc0db7c6d58184d622f92ed18a`，source commit=`f0ff4ed72c061394f0c04357da771a50c0fb4d2b`。
+- 原始报告 `device-report.json` SHA-256=`bcf785bc9637965378f22ac67204e15d68fa63eb6544d35fa976946cfdd68b7b`，哈希绑定摘要 `cross-scene-summary.json` SHA-256=`30be9e4895bedb2e547b9fb76fb49b2ce8154ebc2d6c55c8a86fea14da0a7280`。三个自由描述均命中瀑布/水（3/3 窄场景词），但含未由抽查画面支持的人/动物/鸟细节；motion/frozen 严格标签 pair=`0/3`，去句号诊断仍=`0/3`，结论为 `observed-failure`。
+- P11 readiness 已刷新为 67 evidence paths / 74 source hashes / 9 rows with gaps；快照 `artifacts/verification/p11-readiness-20261031-f08-cross-scene/summary.json` SHA-256=`b6fa75bc25dcda363651c58cc03db1759d5b2fe0dd0a68fe0fece468bb938a66`，`tools/validate_p11_readiness.py` 与 grouped report 均通过，3 个既有 grouped benchmark 样本未增加。完整 tools 使用 Ruby 3.4 wrapper 为 **225/225**；首轮无 wrapper 的失败是系统 Ruby 2.6/3.4 gem 混用，日志保留在同一 ignored 目录。
+- F08/P11 仍 `open/not-ready`；本轮只关闭“第二场景来源和真机执行缺失”这一窄缺口，不把自然质量、跨场景泛化、主观质量、GPU/energy、持续资源或 Demo 交互升级为通过。下一步优先继续 F04 生命周期或 F11 报告收口，不重复同一视频生成。
+
 ## 最新续接 — 2026-10-31 F09 artifact gate 独立复审修复
 
 - 独立 code-reviewer 对当前 F09 三工具/三组测试复审先给出 `REQUEST CHANGES`：无 Critical/High，4 个 Medium，涉及 manifest provenance、declared module 与真实 XCFramework 绑定、重复 slice/interface、顶层 symlink。作者针对四项补测试和实现；修复后的同一 reviewer 复审给出 `APPROVE`、0 findings，独立定向 24/24。
