@@ -50,7 +50,10 @@ def _reject_symlink_escapes(path: Path, root: Path) -> None:
 def inspect_xcframework(path: Path, module: str, minimum_os: str) -> dict:
     """Validate declared iOS slices, interfaces, module maps and resources."""
 
-    path = Path(path).resolve(strict=True)
+    path = Path(path)
+    if path.is_symlink():
+        raise ValueError(f"symlink XCFramework input is not allowed: {path}")
+    path = path.resolve(strict=True)
     if path.suffix != ".xcframework":
         raise ValueError(f"not an XCFramework path: {path}")
     metadata = plistlib.loads((path / "Info.plist").read_bytes())

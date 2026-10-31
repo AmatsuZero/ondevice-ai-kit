@@ -5,6 +5,8 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import plistlib
+import re
 from typing import Any
 
 
@@ -21,6 +23,10 @@ def _fail(message: str) -> None:
 def _require(condition: bool, message: str) -> None:
     if not condition:
         _fail(message)
+
+
+def _commit(value: Any) -> bool:
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-fA-F]{40}", value) is not None
 
 
 def _sha256_file(path: Path) -> str:
@@ -80,6 +86,37 @@ def _reject_symlink_escapes(path: Path, root: Path, label: str) -> None:
                 _fail(f"{label} contains a symlink escape: {item}")
 
 
+def _actual_xcframework_modules(path: Path, label: str) -> tuple[set[str], set[str]]:
+    _require(path.suffix == ".xcframework", f"{label}.path must be an XCFramework")
+    try:
+        metadata = plistlib.loads((path / "Info.plist").read_bytes())
+    except (OSError, plistlib.InvalidFileException) as error:
+        _fail(f"{label} Info.plist is invalid: {error}")
+    libraries = metadata.get("AvailableLibraries")
+    _require(isinstance(libraries, list) and libraries, f"{label} has no XCFramework slices")
+    modules: set[str] = set()
+    interfaces: set[str] = set()
+    for index, library in enumerate(libraries):
+        slice_label = f"{label}.AvailableLibraries[{index}]"
+        _require(isinstance(library, dict), f"{slice_label} must be an object")
+        identifier = library.get("LibraryIdentifier")
+        library_path = library.get("LibraryPath")
+        _require(isinstance(identifier, str) and isinstance(library_path, str),
+                 f"{slice_label} is missing identifier/path")
+        framework = _existing(path, f"{identifier}/{library_path}", f"{slice_label}.path")
+        _require(framework.is_dir() and framework.name.endswith(".framework"),
+                 f"{slice_label} is not a framework directory")
+        module = framework.name.removesuffix(".framework")
+        _require((framework / module).is_file(), f"{slice_label} is missing module binary")
+        module_dir = framework / "Modules" / f"{module}.swiftmodule"
+        public = [item for item in module_dir.glob("*.swiftinterface")
+                  if not item.name.endswith(".private.swiftinterface")]
+        _require(public, f"{slice_label} is missing public Swift interfaces")
+        modules.add(module)
+        interfaces.update(str(item.relative_to(path)) for item in public)
+    return modules, interfaces
+
+
 def _hash_matches(path: Path, expected: Any, label: str) -> None:
     _require(isinstance(expected, str) and len(expected) == 64,
              f"{label} sha256 is invalid")
@@ -105,15 +142,34 @@ def validate_manifest(manifest_path: Path, artifact_root: Path) -> None:
     _require(isinstance(payload, dict), "manifest must be an object")
     _require(payload.get("schemaVersion") == SCHEMA_VERSION, "unsupported schemaVersion")
     _require(payload.get("kind") == KIND, "unsupported artifact kind")
-    _require(isinstance(payload.get("sourceCommit"), str) and payload["sourceCommit"],
-             "sourceCommit is required")
-    _require(isinstance(payload.get("toolchain"), dict), "toolchain is required")
+    _require(_commit(payload.get("sourceCommit")), "sourceCommit must be a full commit SHA")
+    toolchain = payload.get("toolchain")
+    _require(isinstance(toolchain, dict) and all(
+        isinstance(toolchain.get(field), str) and toolchain[field].strip()
+        for field in ("xcode", "swift")
+    ), "toolchain requires Xcode and Swift versions")
 
     closure = payload.get("moduleClosure")
     _require(isinstance(closure, list) and closure and all(isinstance(item, str) and item for item in closure),
              "moduleClosure is required")
     _require(len(set(closure)) == len(closure), "module closure contains duplicate modules")
     closure_set = set(closure)
+
+    attributions = payload.get("sourceAttributions")
+    _require(isinstance(attributions, list) and attributions,
+             "sourceAttributions are required")
+    attributed: set[str] = set()
+    for index, entry in enumerate(attributions):
+        label = f"sourceAttributions[{index}]"
+        _require(isinstance(entry, dict), f"{label} must be an object")
+        module = entry.get("module")
+        _require(isinstance(module, str) and module in closure_set and module not in attributed,
+                 f"{label}.module must name one unclaimed closure module")
+        attributed.add(module)
+        _require(all(isinstance(entry.get(field), str) and entry[field].strip()
+                     for field in ("source", "license")) and _commit(entry.get("revision")),
+                 f"{label} requires source, full revision and license")
+    _require(attributed == closure_set, "sourceAttributions do not cover module closure")
 
     resources = payload.get("resources")
     _require(isinstance(resources, list) and resources, "resources are required")
@@ -167,6 +223,9 @@ def validate_manifest(manifest_path: Path, artifact_root: Path) -> None:
         _require(isinstance(artifact.get("minimumOS"), str) and artifact["minimumOS"],
                  f"{label}.minimumOS is required")
         _hash_matches_tree(artifact_path, artifact.get("sha256"), label)
+        actual_modules, actual_interfaces = _actual_xcframework_modules(artifact_path, label)
+        _require(set(modules) == actual_modules,
+                 f"{label} modules do not match XCFramework contents: expected {sorted(actual_modules)}")
 
         slices = artifact.get("slices")
         _require(isinstance(slices, list) and slices, f"{label} slices are required")
@@ -177,6 +236,7 @@ def validate_manifest(manifest_path: Path, artifact_root: Path) -> None:
             _require(isinstance(slice_info, dict), f"{slice_label} must be an object")
             slice_path = _existing(artifact_path, slice_info.get("path"), f"{slice_label}.path")
             _require(slice_path.is_dir(), f"{slice_label}.path is not a directory")
+            _require(slice_path not in slice_paths, f"{label} contains duplicate slice path")
             slice_paths.add(slice_path)
             platform = slice_info.get("platform")
             _require(isinstance(platform, str), f"{slice_label}.platform is required")
@@ -201,11 +261,15 @@ def validate_manifest(manifest_path: Path, artifact_root: Path) -> None:
             interface_path = _existing(artifact_path, interface.get("path"), f"{interface_label}.path")
             _require(interface_path.is_file(), f"{interface_label}.path is not a file")
             _require(interface_path.suffix == ".swiftinterface", f"{interface_label} is not a Swift interface")
+            _require(interface_path not in interface_paths, f"{label} contains duplicate interface path")
             interface_paths.add(interface_path)
             _hash_matches(interface_path, interface.get("sha256"), interface_label)
         for slice_path in slice_paths:
             _require(any(path.is_relative_to(slice_path) for path in interface_paths),
                      f"{label} interface is missing for slice {slice_path.relative_to(artifact_path)}")
+        declared_interfaces = {str(path.relative_to(artifact_path)) for path in interface_paths}
+        _require(declared_interfaces == actual_interfaces,
+                 f"{label} interfaces do not match XCFramework contents")
 
     _require(shipped == closure_set,
              f"module closure is incomplete: missing {sorted(closure_set - shipped)}")

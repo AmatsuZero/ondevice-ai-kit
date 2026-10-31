@@ -22,21 +22,34 @@ rtk proxy python3 tools/validate_mlxvlm_binary_artifact.py \
   artifacts/verification/f09-binary
 ```
 
-Manifest schema `1` (`kind=apple-mlxvlm-xcframework-set`) requires a source
-commit, toolchain, unique `moduleClosure`, resource entries with SHA-256, and
+Manifest schema `1` (`kind=apple-mlxvlm-xcframework-set`) requires a full
+40-character source commit, nonempty Xcode/Swift toolchain versions, one
+`sourceAttributions` entry per declared closure module (`module`, `source`,
+full `revision`, `license`), unique `moduleClosure`, resource entries with SHA-256, and
 artifact entries with module names, minimum OS, device and simulator slices,
 arm64 architecture, `.swiftinterface` hashes, and a deterministic directory
 tree SHA-256. The resource list must contain the canonical
 `smolvlm2-model.json` and a `.metallib`. Resolved paths must remain below the
 artifact root; symlink escapes, source checkout paths, duplicate modules,
-missing closure members, missing interfaces/slices, and hash drift are
-rejected before a consumer can use the artifact.
+duplicate slice/interface paths, declared modules that do not match actual
+XCFramework metadata and Swift module directories, missing declared closure
+members, missing interfaces/slices, and hash drift are rejected before a
+consumer can use the artifact. This gate checks the **declared** closure against
+the artifact layout; a source-free consumer is still required to prove that
+the declared closure resolves all public imports. The standalone layout
+inspector also rejects a top-level XCFramework symlink. The manifest validator
+does not substitute for the inspector's real Mach-O architecture/platform/OS
+checks; both gates are required before the binary consumer.
 
-Focused evidence on 2026-10-30: `test_mlxvlm_binary_artifact` **13/13** passed,
+Focused evidence on 2026-10-31: `test_mlxvlm_binary_artifact` **16/16** and
+the snapshot/layout gates together **27/27** passed,
 covering a valid fixture, missing module closure, artifact/resource/interface
 hash drift, symlink escape, source checkout path, per-slice arm64/interface
 requirements, and duplicate modules. The validator is intentionally a local
 artifact gate; it does not claim that any XCFramework has been built yet.
+The independent review of the provenance/layout hardening closed all four
+Medium findings with `APPROVE` and 0 remaining findings; the reviewer reran
+24 focused tests. The final focused suite above contains 27 tests.
 
 ### Task 2: committed-tree snapshot
 
@@ -64,7 +77,8 @@ This snapshot is a reproducible input for the XCFramework build task; it is
 not itself a binary artifact or a release publication.
 
 Task 2 snapshot tests passed **3/3**. The complete `tools/tests` suite passed
-**221/221** in an environment where SwiftPM can write its module cache; the
+**225/225** in an environment where SwiftPM and Ruby use writable/compatible
+caches and the project Ruby wrapper; the
 restricted sandbox run had two Swift compiler/cache errors before that rerun.
 
 ### Task 3: layout inspector checkpoint
@@ -73,7 +87,7 @@ restricted sandbox run had two Swift compiler/cache errors before that rerun.
 both iOS device/simulator framework layouts for actual Mach-O arm64 and
 deployment-target load commands, public Swift interfaces, module maps,
 binaries and resource bundle paths. Nested symlink escapes are rejected. Its
-layout tests passed **7/7**, including one real compiled Mach-O header probe. No enhanced XCFramework was produced or
+layout tests passed **8/8**, including one real compiled Mach-O header probe. No enhanced XCFramework was produced or
 inspected from a real archive, and production dependency compatibility remains
 unverified. The current source App archive still does not satisfy F09.
 

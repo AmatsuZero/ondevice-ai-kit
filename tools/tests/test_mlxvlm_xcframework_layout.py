@@ -105,6 +105,13 @@ class MLXVLMXCFrameworkLayoutTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "symlink"):
             inspect_xcframework(artifact, "ODAIKitAppleMLXVLM", "18.0")
 
+    def test_top_level_symlink_is_rejected(self):
+        root, artifact = self.make_fixture()
+        link = root / "linked.xcframework"
+        link.symlink_to(artifact, target_is_directory=True)
+        with self.assertRaisesRegex(ValueError, "symlink"):
+            inspect_xcframework(link, "ODAIKitAppleMLXVLM", "18.0")
+
     @unittest.skipUnless(shutil.which("xcrun"), "Xcode toolchain unavailable")
     def test_actual_macho_header_reports_platform_and_floor(self):
         directory = tempfile.TemporaryDirectory()

@@ -1,5 +1,6 @@
 import hashlib
 import json
+import plistlib
 from pathlib import Path
 import shutil
 import tempfile
@@ -29,10 +30,20 @@ class MLXVLMBinaryArtifactTests(unittest.TestCase):
         root = Path(tempfile.mkdtemp())
         self.addCleanup(lambda: shutil.rmtree(root))
         artifact = root / "xcframeworks/ODAIKitAppleMLXVLM.xcframework"
-        interface = artifact / "ios-arm64/ODAIKitAppleMLXVLM.swiftinterface"
-        simulator = artifact / "ios-arm64-simulator/ODAIKitAppleMLXVLM.swiftinterface"
+        interface = artifact / "ios-arm64/ODAIKitAppleMLXVLM.framework/Modules/ODAIKitAppleMLXVLM.swiftmodule/ios-arm64.swiftinterface"
+        simulator = artifact / "ios-arm64-simulator/ODAIKitAppleMLXVLM.framework/Modules/ODAIKitAppleMLXVLM.swiftmodule/ios-arm64-simulator.swiftinterface"
         interface.parent.mkdir(parents=True)
         simulator.parent.mkdir(parents=True)
+        for slice_path in ("ios-arm64", "ios-arm64-simulator"):
+            framework = artifact / slice_path / "ODAIKitAppleMLXVLM.framework"
+            (framework / "Modules").mkdir(parents=True, exist_ok=True)
+            (framework / "ODAIKitAppleMLXVLM").write_bytes(b"mach-o placeholder")
+            (framework / "Modules/module.modulemap").write_text("framework module ODAIKitAppleMLXVLM {}\n")
+        (artifact / "Info.plist").parent.mkdir(parents=True, exist_ok=True)
+        (artifact / "Info.plist").write_bytes(plistlib.dumps({"AvailableLibraries": [
+            {"LibraryIdentifier": "ios-arm64", "LibraryPath": "ODAIKitAppleMLXVLM.framework", "SupportedPlatform": "ios"},
+            {"LibraryIdentifier": "ios-arm64-simulator", "LibraryPath": "ODAIKitAppleMLXVLM.framework", "SupportedPlatform": "ios", "SupportedPlatformVariant": "simulator"},
+        ]}))
         interface.write_text("module ODAIKitAppleMLXVLM")
         simulator.write_text("module ODAIKitAppleMLXVLM simulator")
         resource = root / "resources/smolvlm2-model.json"
@@ -50,9 +61,10 @@ class MLXVLMBinaryArtifactTests(unittest.TestCase):
         manifest.write_text(json.dumps({
             "schemaVersion": 1,
             "kind": "apple-mlxvlm-xcframework-set",
-            "sourceCommit": "0123456789abcdef",
+            "sourceCommit": "0123456789abcdef0123456789abcdef01234567",
             "toolchain": {"xcode": "27.1", "swift": "6.4"},
             "moduleClosure": ["ODAIKitAppleMLXVLM"],
+            "sourceAttributions": [{"module": "ODAIKitAppleMLXVLM", "source": "https://github.com/AmatsuZero/ondevice-ai-kit", "revision": "0123456789abcdef0123456789abcdef01234567", "license": "MIT"}],
             "resources": [
                 {"path": "resources/smolvlm2-model.json", "sha256": sha256_file(resource)},
                 {"path": "resources/default.metallib", "sha256": sha256_file(metal)},
@@ -67,8 +79,8 @@ class MLXVLMBinaryArtifactTests(unittest.TestCase):
                     {"path": "ios-arm64-simulator", "platform": "iOS Simulator", "architectures": ["arm64"]},
                 ],
                 "interfaces": [
-                    {"path": "ios-arm64/ODAIKitAppleMLXVLM.swiftinterface", "sha256": sha256_file(interface)},
-                    {"path": "ios-arm64-simulator/ODAIKitAppleMLXVLM.swiftinterface", "sha256": sha256_file(simulator)},
+                    {"path": str(interface.relative_to(artifact)), "sha256": sha256_file(interface)},
+                    {"path": str(simulator.relative_to(artifact)), "sha256": sha256_file(simulator)},
                 ],
             }],
         }, indent=2))
@@ -190,6 +202,44 @@ class MLXVLMBinaryArtifactTests(unittest.TestCase):
         manifest.write_text(json.dumps(payload))
         with self.assertRaisesRegex(ValueError, "artifact\\[0\\].modules"):
             validate_manifest(manifest, root)
+
+    def test_provenance_requires_full_commit_toolchain_and_attribution(self):
+        root, manifest, *_ = self.make_fixture()
+        original = json.loads(manifest.read_text())
+        cases = [
+            ("sourceCommit", "short", "sourceCommit"),
+            ("toolchain", {}, "toolchain"),
+            ("sourceAttributions", [], "sourceAttributions"),
+        ]
+        for field, value, message in cases:
+            with self.subTest(field=field):
+                payload = json.loads(json.dumps(original))
+                payload[field] = value
+                manifest.write_text(json.dumps(payload))
+                with self.assertRaisesRegex(ValueError, message):
+                    validate_manifest(manifest, root)
+
+    def test_duplicate_slice_and_interface_paths_are_rejected(self):
+        root, manifest, *_ = self.make_fixture()
+        original = json.loads(manifest.read_text())
+        for field in ("slices", "interfaces"):
+            with self.subTest(field=field):
+                payload = json.loads(json.dumps(original))
+                payload["artifacts"][0][field].append(payload["artifacts"][0][field][0])
+                manifest.write_text(json.dumps(payload))
+                with self.assertRaisesRegex(ValueError, f"duplicate {field[:-1]}"):
+                    validate_manifest(manifest, root)
+
+    def test_declared_module_must_match_actual_xcframework(self):
+        root, manifest, *_ = self.make_fixture()
+        payload = json.loads(manifest.read_text())
+        payload["moduleClosure"] = ["InventedModule"]
+        payload["sourceAttributions"][0]["module"] = "InventedModule"
+        payload["artifacts"][0]["modules"] = ["InventedModule"]
+        manifest.write_text(json.dumps(payload))
+        with self.assertRaisesRegex(ValueError, "module|XCFramework"):
+            validate_manifest(manifest, root)
+
 
 
 if __name__ == "__main__":

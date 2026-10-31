@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-31 F09 artifact gate 独立复审修复
+
+- 独立 code-reviewer 对当前 F09 三工具/三组测试复审先给出 `REQUEST CHANGES`：无 Critical/High，4 个 Medium，涉及 manifest provenance、declared module 与真实 XCFramework 绑定、重复 slice/interface、顶层 symlink。作者针对四项补测试和实现；修复后的同一 reviewer 复审给出 `APPROVE`、0 findings，独立定向 24/24。
+- 本轮未启动真实麦克风。现有 `IOSSpeechProbe` 是文件识别探针，重复安装不会关闭 F04 的真实录音缺口；后续需要受控朗读窗口。iPhone 16 Pro Max 在授权环境为 connected。
+- 四项修复已完成：manifest 要求 40 位 source/revision、Xcode/Swift、逐模块 license/source attribution；读取实际 XCFramework `Info.plist`、framework binary 和 public interfaces 绑定声明闭包；拒绝重复 slice/interface；standalone inspector 拒绝顶层 symlink。新增/扩展测试后 F09 定向 **27/27**、`compileall` 和 `git diff --check` 通过。
+- 用可写 Swift/Clang cache 与项目 Ruby 3.4 wrapper 重跑完整 `tools/tests`：**225/225** 通过。受限沙箱此前的 2 个 SwiftPM/cache 错误不计产品失败；没有修改生产 lock 或保护性 dirty/untracked 文件。
+
 ## 最新续接 — 2026-10-31 F09 官方 refs 刷新
 
 - 只读官方 Git refs 核对成功：`swift-collections` `main` 和最新 `1.7.5` 同为 `f96b909e1a9e469620bc5037c1e24e00153f376f`；EventSource 最新 tag 仍是 `1.5.1`=`86b5096ac59ab46e66bd1f6377c604bc1dab0bc2`，`main`=`bb4b61273b5a976bb571859c17f903ebc3439df1`；`mlx-swift-lm` `main`=`128f49f1db38ea7b949f2ebb60967def8b76f58e`。
