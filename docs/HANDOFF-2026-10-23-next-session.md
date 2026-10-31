@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 instrumented Skia 研究路线
+
+- 固定 Skiko `0.144.6` / `9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0` 与 Skia `m144-22f58c9fd4` 的官方代码已核对。Skiko 支持 `:prepareLocalSkiaBuild -Pskia.repo.dir=... -Pskia.target=ios` 后用 `:skiko:publishToMavenLocal` 生成 iOS arm64/simulatorArm64 本地研究库；`NativeTasksConfiguration` 显示 iOS12 floor、Metal/CoreGraphics/CoreText/UIKit 链接及 `-include-binary`。
+- 这只是隔离 research build 路线，没有证据能直接替换 Compose Multiplatform 1.11.1 的传递 Skiko。后续若执行，必须在 ignored checkout 做 dependency substitution，并对 ABI、Compose renderer、Metal layer 和 AtlasTextOp 构造/析构/cache/TLS 事件做对照；不修改生产依赖、不调用私有 `ClearCache()`，F02/P4 仍 `open/not-ready`。设计边界见[研究设计](superpowers/specs/2026-11-01-f02-instrumented-skia-design.md)与[AtlasTextOp 调查](validation/p4-atlas-text-cache.md)。
+
 ## 最新续接 — 2026-10-31 F09 Swift 编译器上游门槛
 
 - `tools/tests` 使用 Ruby 3.4 wrapper 新鲜全套 **225/225** 通过；受保护的 `project.pbxproj`、身份草稿及相机 probes 均未编辑/暂存，生产 `Package.resolved` SHA-256 仍为 `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。Metal Toolchain 在授权 Xcode 27.2 环境显示 `installed`，不再是 F09 的当前阻断。

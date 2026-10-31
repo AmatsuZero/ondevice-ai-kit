@@ -1,5 +1,32 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 隔离 instrumented Skia 研究构建路线
+
+对固定依赖做了只读上游核对：Skiko `0.144.6` 对应 commit
+`9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0`，其 Skia 依赖为
+`m144-22f58c9fd4`。Skiko 官方的 `BuildLocalSkiaTask` 支持从包含
+`tools/skia_release/` 的 Skia checkout 构建本地库：
+
+```sh
+./gradlew :prepareLocalSkiaBuild \
+  -Pskia.repo.dir=/abs/JetBrains-skia -Pskia.target=ios
+./gradlew :skiko:publishToMavenLocal \
+  -Pskia.dir=/abs/JetBrains-skia \
+  -Pskiko.native.ios.arm64.enabled=true \
+  -Pskiko.native.ios.simulatorArm64.enabled=true
+```
+
+`NativeTasksConfiguration` 显示 iOS native 目标最低为 iOS 12，并链接
+Metal/CoreGraphics/CoreText/UIKit，将 Skia 静态库以 `-include-binary` 纳入
+Kotlin/Native。上游参考为 [BuildLocalSkiaTask](https://github.com/JetBrains/skiko/blob/9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0/skiko/buildSrc/src/main/kotlin/BuildLocalSkiaTask.kt)、[properties](https://github.com/JetBrains/skiko/blob/9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0/skiko/buildSrc/src/main/kotlin/properties.kt) 和 [NativeTasksConfiguration](https://github.com/JetBrains/skiko/blob/9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0/skiko/buildSrc/src/main/kotlin/tasks/configuration/NativeTasksConfiguration.kt)。
+
+该路线属于 Skiko 开发/研究用途；没有官方证据证明本地库可以直接替换
+Compose Multiplatform 1.11.1 的传递 Skiko。后续若执行，只能在 ignored 隔离 checkout
+中做 Gradle dependency substitution，并对 Kotlin/Native ABI、当前 Compose renderer、
+Metal layer 和 `AtlasTextOp` 构造/析构/cache/TLS 事件做对照。未经这些对照，不修改生产
+依赖、不覆盖缓存、不调用私有 `ClearCache()`，也不把研究包当作发布 artifact。当前
+F02 仍 `open/not-ready`，这条路线是下一步可执行输入而非根因修复证据。
+
 ## 2026-10-28 全范围审查与依赖结论
 
 fresh P4 code-review 覆盖 camera isolation、synthetic PHPicker harness 和当前

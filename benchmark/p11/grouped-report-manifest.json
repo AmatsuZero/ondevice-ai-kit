@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261031-f09-upstream/summary.json",
-    "sha256": "002cdd413f50526c50163bb0c2eb4d7ce9173e043848cd485b37774e98041e61"
+    "path": "artifacts/verification/p11-readiness-20261101-f02-route/summary.json",
+    "sha256": "1d7cdc820e32697e0fca6cd4f2559afc2db9e22945403c97668b75731f3b2329"
   },
   "schemaVersion": 1,
   "sources": [
