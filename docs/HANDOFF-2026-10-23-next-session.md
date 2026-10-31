@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-10-31 F09 Swift 编译器上游门槛
+
+- `tools/tests` 使用 Ruby 3.4 wrapper 新鲜全套 **225/225** 通过；受保护的 `project.pbxproj`、身份草稿及相机 probes 均未编辑/暂存，生产 `Package.resolved` SHA-256 仍为 `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。Metal Toolchain 在授权 Xcode 27.2 环境显示 `installed`，不再是 F09 的当前阻断。
+- 官方 Swift issue [`#91540`](https://github.com/swiftlang/swift/issues/91540) 仍 `open`，明确描述 6.4 interface printer 的跨模块 associated-type selector 错误及 `swift-collections` 触发签名；修复 PR [`#91672`](https://github.com/swiftlang/swift/pull/91672) head=`0a53ffc501e5d3ac475ad36a9fc485b5623c570d` 仍 `open`/`merged=false`。原始 API JSON 保留于 ignored `artifacts/verification/f09-upstream-compiler-20261031/`，哈希见[分发验证](validation/apple-mlxvlm-distribution.md)。没有可用的已发布编译器修复或已验证的 dependency-only 生产配置；不能把 issue workaround 或开放 PR 当成 F09 通过。
+- 因分发验证文档增加上游来源，P11 readiness 新快照 `artifacts/verification/p11-readiness-20261031-f09-upstream/summary.json` SHA-256=`002cdd413f50526c50163bb0c2eb4d7ce9173e043848cd485b37774e98041e61`；校验为 **69 evidence paths / 77 source hashes / 9 rows with gaps**。grouped report 仍 **3 groups / 9 coverage**，`open/not-ready`。下一步只有已发布修复后的生产 archive，或经独立评审的 vendored/target-scoped policy 才能解开 F09 Task 3–5；F02/P4 原生残留仍需析构/free/TLS 观测机制。
+
 ## 最新续接 — 2026-10-31 F11 跨场景自然视频质量报告
 
 - 使用两份 immutable 真机原始报告生成六行范围明确的自由描述比较：旧 Common swifts 与新 Kawaida waterfall，各三个 `semantic-motion-*`，相同 prompt `Describe what happens in this video in one brief sentence.`。原始报告 SHA-256 分别为 `620ce4d2d3a90e83e9385ad5fbb92fe7eb60be728d7be5aa2015863735413ace` 与 `bcf785bc9637965378f22ac67204e15d68fa63eb6544d35fa976946cfdd68b7b`；不同视频、fixture 和 source commit，不当作同一 benchmark 样本。

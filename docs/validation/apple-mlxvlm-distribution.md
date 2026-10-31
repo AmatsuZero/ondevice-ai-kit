@@ -237,6 +237,36 @@ also raises the MLX dependency floor from 0.32.3 to 0.33.0, so moving the
 production lock to that revision would be a broader migration, not a proven
 drop-in repair. The fixed lock and F09 readiness decision are unchanged.
 
+#### Upstream compiler evidence
+
+The failure is also tracked by the official Swift compiler issue
+[`swiftlang/swift#91540`](https://github.com/swiftlang/swift/issues/91540),
+which remains **open**. Its reproduction describes the same Swift 6.4
+module-interface printer bug: a cross-module associated type is emitted with
+the conforming module selector, so the generated interface fails to read back
+with `Element is not imported through module OrderedCollections`. The issue
+records that Swift 6.3.2 round-trips the interface and that the workaround
+`-disable-module-selectors-in-module-interface` changes the spelling.
+
+The proposed compiler repair is
+[`swiftlang/swift#91672`](https://github.com/swiftlang/swift/pull/91672),
+head `0a53ffc501e5d3ac475ad36a9fc485b5623c570d`; the PR is still open and
+`merged=false`. Its source change is not a released Xcode toolchain and has
+not been independently verified against this repository's complete 20-module
+closure. Therefore it is evidence for the root cause, not a production
+configuration. The supported F09 stop condition remains: wait for a released
+compiler containing the fix, or separately review and approve a vendored or
+target-scoped dependency policy before rebuilding the full XCFramework and
+binary-only consumer.
+
+The read-only GitHub API responses are retained under ignored
+`artifacts/verification/f09-upstream-compiler-20261031/`: `issue-91540.json`
+SHA-256=`81679d8f27a41dbd920e92aa4b5110eabf1ab20bdfe82ded7dff89e155cf151e`
+and `pr-91672.json`
+SHA-256=`2a0471387b5d8201b37484424c6be44c0c7871141f63fd59d362b6ad001eb07d`.
+These freeze the observed issue/PR state; future toolchain decisions require
+a fresh upstream status check and a real production archive.
+
 2026-10-23。可搬移 **source consumer 已通过本地离线编译**；增强包 **binary 分发未通过**。设计/计划为 `docs/superpowers/{specs,plans}/2026-10-23-apple-mlxvlm-source-distribution*`；设计提交 `cf342a1`，实现 `b8acaa3286431460b1de455a5d7a83ce66f770ed`。本包不重跑推理，不提升 roadmap 5/12，也不关闭 P9。
 
 ## Source consumer
