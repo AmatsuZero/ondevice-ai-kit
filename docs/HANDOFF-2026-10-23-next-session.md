@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 真机 C ABI smoke
+
+- 上一节的设备安装阻断已解除：授权环境重试 `devicectl device install app` 成功，安装的研究包 `io.ondeviceai.ondeviceaidemo` URL 为 `file:///private/var/containers/Bundle/Application/E3350029-67CF-45E2-8781-0AAC2A9C56ED/OnDeviceAIDemo.app/`；`device-install-retry.json` SHA-256=`850fb82aa7d81de675d6641118f7c5d22b34654fa7297c8a0d61e061924eb96a`。iPhone 16 Pro Max 真机启动回执 `device-launch.json` SHA-256=`25b8acc8c7819b5aa0e09b5b6dceeb92564980f94de760c7d454776b0e9267e6`，首次 PID=`34518`。为捕获 console，`--terminate-existing --console` 再次启动研究 App，实际观察 PID=`34529`，随后显式 SIGTERM 成功。
+- PID `34529` 的设备 console（`device-console.log` SHA-256=`f45b61a787fb5be8bfa76e5fae3a2f45a2407bb6d033db70ba448eccca5f49f6`）回读初始 `eventCount=0`，2 秒后 `delayedCount=120 copied=120 dropped=0 correctRun=true`；kind 计数为 new-allocated 8、new-reused 22、destructor entry/exit 30/30、delete-cached 24、delete-freed 6。研究源码 runId 固定为 73、88-byte event ABI。签名 App 的最终 debug dylib UUID=`CADD1856-3A9A-31E5-911B-8317551BA3E6`，五个 C ABI 均在最终链接物中；这是同一 source/binary/install/launch 路径的**真机单页 ABI smoke**，不是完整 P4 协议。
+- 没有触发三次相机页面退出/重入、300 秒 Leaks/Allocations、逐地址 generation 对齐或 sustained reentry；不将这 120 个事件对应到旧 PID 的 18 个地址，也不据此称资源问题修复。下一步在 ignored consumer 纳入现有三页页面驱动与有界事件导出，生成新的签名研究 App，先校验 source/build UUID 与事件无丢失，再运行设备三页 trace。P4/F02 仍 **open/not-ready**；生产依赖、Demo 和保护性未提交文件未改。
+
 ## 最新续接 — 2026-11-01 F02 iPhoneOS App 链接与签名边界
 
 - 用户提供的 GitHub 登录状态已在授权环境复核：`gh auth status` 显示 `AmatsuZero` active。它只解决 GitHub 访问，不代表 iOS 签名。受限沙箱内 `security find-identity` 显示 0，但授权环境重新读取为 **3 valid identities**；前一结论属于沙箱凭据视图，不能作为本机缺少签名身份的证据。

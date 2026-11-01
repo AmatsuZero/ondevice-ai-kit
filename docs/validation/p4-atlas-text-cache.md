@@ -1,5 +1,9 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 真机单页 ABI smoke
+
+在 iPhone 16 Pro Max 真机安装并启动隔离研究 App；PID `34529` 的 `device-console.log` SHA-256=`f45b61a787fb5be8bfa76e5fae3a2f45a2407bb6d033db70ba448eccca5f49f6`。初始 `eventCount=0`，2 秒后 `delayedCount=120 copied=120 dropped=0 correctRun=true`；new-allocated/new-reused=8/22，destructor entry/exit=30/30，delete-cached/delete-freed=24/6。签名 device debug dylib UUID=`CADD1856-3A9A-31E5-911B-8317551BA3E6` 且含五个 C ABI。此证据覆盖真机最终 App 链接与 C ABI 调用，但只是单页研究 smoke；未运行相机三页/Leaks 协议，未完成逐地址 ledger，旧 18 个地址仍不可跨 PID 直接匹配。P4/F02 保持 `open/not-ready`。
+
 ## 2026-11-01 F02 iPhoneOS 最终 App 链接
 
 同一 ignored research consumer 的 generic `iphoneos` unsigned 与使用既有身份/profile 的 signed App 构建均 **BUILD SUCCEEDED**；签名构建日志为 `artifacts/verification/f02-consumer-20261101/xcode-app-device-signed.log`（SHA-256=`8e4f83bd0b228d292b19f9d8127824e54a846d96ba4382574ecf7f6ae847f76d`）。最终 device debug dylib UUID=`CADD1856-3A9A-31E5-911B-8317551BA3E6`，包含五个研究 C ABI；App stub UUID=`2EEFC256-A5F0-3D06-A279-4D59476AE98A`。授权环境有签名身份，之前沙箱内 0 身份是凭据视图差异。设备安装授权调用因审批服务 429 未执行；沙箱尝试因 CoreDeviceService 初始化超时失败。**无真机 PID/事件/三页协议**，不能从链接证据推出旧 18 个地址的析构/释放路径。P4/F02 仍 `open/not-ready`。
