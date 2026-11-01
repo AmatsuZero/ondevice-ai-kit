@@ -1,5 +1,13 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-02 F02 无全局原始指针 recorder 的本地发布与真机预检
+
+在 ignored `artifacts/verification/f02-tokenized-recorder-20261101/` 的固定 Skia 副本里，研究记录器的全局 generation 槽、事件 ring 和 pthread/TLS 字段改为带进程内随机 salt 的高位标记 token。对本轮允许的低 63 位地址域，该映射为一一对应，离线可用导出的 salt 对 Instruments 地址复算；超出域、缺失 generation、表满、递归记录和持有 live generation 时 reset 均增加 `integrityFailures`。原始缓存指针只留在 `thread_local CacheOwner` 的实际缓存中；owner 线程退出先记录观察和 owner exit，再在 `::operator delete` 返回后记录同 generation 的 free 完成。ring 覆盖计数单独保留，验收以持久化序号缺口和 integrity 计数为门槛。宿主源码抽取 fixture 的七段检查通过，包括同线程复用、跨线程删除、owner/non-owner 清理、worker exit、8 worker 并发、ring 覆盖、token 域和 live reset 拒绝；独立架构复审遇 429，**不算审批通过**。
+
+两个 iOS slice 的 `libskia.a` 在隔离副本编译成功，SHA-256 分别为 `4c6cc01e...` / `fa49ee4e...`。Skiko 正常本地 BuildRepo 的 iOS arm64、simulator arm64、root 和 AWT 四个 publication 任务 **BUILD SUCCESSFUL / 64 tasks executed**；发布双 Klib 内嵌库与上述两个 archive 哈希逐字节一致。独立 committed-source consumer 的双 slice static framework 强制重链均成功，回读 token、salt 与 integrity C ABI 符号。签名研究 App 的最终链接成功。
+
+iPhone 16 Pro Max 上的预检 PID `35703` 导出 40 条连续事件、3520 B；PID/runID 一致，所有非零指针派生字段带 token 标记，`missed=0`、`droppedRing=0`、`integrityFailures=0`。但此研究 bundle 的相机状态为 `camera-not-authorized`，页面周期尚未开始，因此**没有本次 Leaks trace，也没有逐地址线程退出/最终 live 判定**。研究 PID 已终止；新一版研究 App 已安装且尚未启动，会在权限未决定时请求系统授权。普通 Demo 和生产依赖未改。完整来源、哈希、回执及下一门槛见同目录 `summary.json`；**F02/P4/P11 仍 open/not-ready**。
+
 ## 2026-11-01 正常 publication 来源真机十轮资源观察
 
 正常 BuildRepo consumer 的 iOS device framework SHA-256=`ecf5901f6ff9e57f0d770ccf8d42ee9d9f1b28f4eee44fb0cb1ac8a094830e45`，被独立相机 App 最终链接。初次生成误用原受保护三轮探针，设备仅完成三轮、录制显式中断，未计入下述十轮；研究副本随后只把循环上限改为十轮，源码哈希=`eb019de1b93331d9647f2e6ae2fe0d6e541f7e6dd0ffc0ce287e8e5dbdf38301`，与此前候选十轮探针逐字节一致。十轮 App 签名 dylib UUID=`9272673D-F19E-3E3A-AE9C-3FCAB7570FE2`，SHA-256=`62e429705dc40232af5c73a8fad33f7faa79cc8d65de6ba03771f52da1ab5356`；保留 `CacheOwner` 析构和 `__tlv_atexit` 引用，无旧 recorder C ABI。

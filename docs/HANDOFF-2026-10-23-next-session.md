@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-02 F02 tokenized recorder 本地发布与相机授权门槛
+
+- `gh auth status` 在授权 keyring 视图新鲜复核为 `AmatsuZero` active、`repo` scope 有效；受限 shell 的 `default token invalid` 是不同凭据视图，未重置认证。主工作树九项受保护 dirty/untracked 文件保持原样、未暂存。
+- ignored `artifacts/verification/f02-tokenized-recorder-20261101/` 中，固定 Skia 副本完成不在全局 recorder 槽或 ring 保存原始指针的 token 化。进程 salt 与非指针标记支持离线逐地址复算；非法地址、map 失败、缺失 generation、递归和 live reset 均转为 integrity 失败。`CacheOwner` 线程退出的观察、exit 和真正 free 完成事件在宿主测试中顺序通过。七段宿主 fixture 全绿，iPhoneOS/simulator `libskia.a` 重建成功。架构复审子代理遇 429，**无审查结论**。
+- 克隆的 Skiko 使用上游正常 BuildRepo publication 四任务构建成功（64/64 executed）；两个发布 Klib 内嵌 `libskia.a` 哈希与新源码构建一致。固定 committed-source consumer 的 device/simulator framework 均强制重链成功并含 token、salt、integrity ABI；签名独立研究 App 最终链接成功。
+- iPhone 16 Pro Max 预检 PID=`35703`，40 条/3520 B 事件序号连续，非零指针派生字段均带 token 标记，`missed=0`、`droppedRing=0`、`integrityFailures=0`；但研究 bundle 的相机授权未给，报告为 `camera-not-authorized`，**没有相机页面周期或本次 Leaks trace**。PID 已终止。修正后研究 App UUID=`CEAA864A-2B27-35CE-8F39-A78EB39B3262` 已安装但未启动；下一次运行会在权限未决定时弹系统相机授权。普通 Demo 未覆盖或操作。
+- 完整哈希、回执、边界在 ignored `artifacts/verification/f02-tokenized-recorder-20261101/summary.json`。下一步需用户在设备旁响应系统相机授权，随后同 PID 完成十轮页面协议与 Leaks/Allocations/token/generation/线程退出配对；任何事件缺口、integrity 失败或地址不匹配仅作诊断。**F02/P4/P11 仍 open/not-ready**，生产依赖未改。
+
 ## 最新续接 — 2026-11-01 F02 正常 publication 来源真机十轮
 
 - 双端 `feat/sdk-foundation` 已同步 `3455e2d1b982a06201de801b5d822c42eb87d209`，GitHub/GitLab F02 `#2` 各记入正常 Skiko iOS+AWT+root 本地 BuildRepo publication 进度。`gh` 在授权 keyring 视图为 `AmatsuZero` active；未修改认证配置。GitHub 评论写入返回 URL，但随后一次只读回读被自动审批服务 429 拒绝，命令未执行；GitLab note 已回读。
