@@ -1,12 +1,18 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 双 slice framework link 回读
+
+隔离 committed-snapshot consumer 已分别完成 `:demo:shared:linkDebugFrameworkIosSimulatorArm64` 与 `:demo:shared:linkDebugFrameworkIosArm64`，两者均 `BUILD SUCCESSFUL`。生成的静态 framework archive 均含 `gpu.AtlasTextOp.o`、`CMPMetalLayer.o` 以及五个 instrumentation C ABI 符号；simulator archive SHA-256=`c85dcb91718af355cd9215517ee349ff0d813eaaf5562b4848a1306b4bda9077`，device archive SHA-256=`5c7b92eaae51b34bdd0ce1aef8f3f1b4237c67ba83b681117c875a4e00e0824e`。完整符号/平台回读见 ignored `artifacts/verification/f02-consumer-20261101/framework-evidence.json`（SHA-256=`bab07b0cc5761bf28e793a019c53922aa18d1a052e9fd66bad3588448a6069af`）。
+
+两个输出是 static archive，不能取得 `LC_UUID`；最终 app executable 尚未链接，因此当前只证明 **Kotlin/Native framework archive link 与 instrumented object/C ABI 包含**，不证明 Compose renderer/Metal layer 的运行时身份、C ABI 运行时调用或真机 P4 三页协议。F02/P4 仍 `open/not-ready`。
+
 ## 2026-11-01 F02 隔离研究包与 host 事件验证
 
 官方依赖同步及固定 Skia 的 iOS arm64、simulatorArm64 原版和 instrumented archive 已在 ignored `artifacts/verification/f02-instrumented-skia-20261101/` 完成。iOS-only Skiko publication 产出 `0.144.6` Klib；两个 Klib 内嵌 `libskia.a` 的 SHA-256 分别为 `1f5804d9c31d42870b324215b0f495bcca1b4060cefa02492486f8bab75b0cdc`、`7d24eeec9a2ca4ff3dca53162a16e20e78fd293697abe2096d75eb8bb5846a7d`，与对应 instrumented archive 内的文件逐字节相同。ABI manifest 为 compiler `2.2.20`、ABI `2.2.0`、iOS 两目标；五个研究 C ABI 符号在 archive 中可见。来源及 publication 校验见 `instrumented-artifact-manifest.json`。
 
 从 instrumented `AtlasTextOp.cpp` 精确抽取 allocator/recorder block，在 macOS 用 `clang++ -std=c++17 -O0 -pthread` 编译并运行 stress fixture。5/5 场景通过：同线程复用及 generation 更新；跨线程 delete 后 owner 与 non-owner `ClearCache` 差异；worker exit 时占用 TLS 的事件；8 线程 16016 个事件的连续 sequence/非零 generation/零丢失；65540 个事件的 ring 覆盖与 4 个丢失计数。这验证研究记录器的宿主语义，不证明 iOS app 中符号存活、Compose renderer/Metal layer 一致，也不是旧 18 个真机地址的析构证据。
 
-ignored `artifacts/verification/f02-consumer-20261101/` 从 committed HEAD `568aa6d` 生成；Compose `1.11.1` / Kotlin `2.4.0` 的 simulator compile dependency graph 成功解析到 Skiko `0.144.6` 两个坐标。framework link 因自动审批服务 429 没有执行；受限环境的 Gradle native service 无法启动。需要后续真实 link、UUID/C ABI 回读及 render-path 验证；设备三页协议未启动，P4/F02 仍 `open/not-ready`。
+ignored `artifacts/verification/f02-consumer-20261101/` 从 committed HEAD `568aa6d` 生成；Compose `1.11.1` / Kotlin `2.4.0` 的 simulator compile dependency graph 成功解析到 Skiko `0.144.6` 两个坐标。该检查点曾因自动审批服务 429 暂停 framework link；上方最新章节已记录审批恢复后的 simulator/device 双 slice link 和符号回读。UUID、runtime render-path 和设备三页协议仍未验证，P4/F02 仍 `open/not-ready`。
 
 ## 2026-11-01 F02 隔离 instrumented Skia 研究构建路线
 
