@@ -1,5 +1,13 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 隔离研究包与 host 事件验证
+
+官方依赖同步及固定 Skia 的 iOS arm64、simulatorArm64 原版和 instrumented archive 已在 ignored `artifacts/verification/f02-instrumented-skia-20261101/` 完成。iOS-only Skiko publication 产出 `0.144.6` Klib；两个 Klib 内嵌 `libskia.a` 的 SHA-256 分别为 `1f5804d9c31d42870b324215b0f495bcca1b4060cefa02492486f8bab75b0cdc`、`7d24eeec9a2ca4ff3dca53162a16e20e78fd293697abe2096d75eb8bb5846a7d`，与对应 instrumented archive 内的文件逐字节相同。ABI manifest 为 compiler `2.2.20`、ABI `2.2.0`、iOS 两目标；五个研究 C ABI 符号在 archive 中可见。来源及 publication 校验见 `instrumented-artifact-manifest.json`。
+
+从 instrumented `AtlasTextOp.cpp` 精确抽取 allocator/recorder block，在 macOS 用 `clang++ -std=c++17 -O0 -pthread` 编译并运行 stress fixture。5/5 场景通过：同线程复用及 generation 更新；跨线程 delete 后 owner 与 non-owner `ClearCache` 差异；worker exit 时占用 TLS 的事件；8 线程 16016 个事件的连续 sequence/非零 generation/零丢失；65540 个事件的 ring 覆盖与 4 个丢失计数。这验证研究记录器的宿主语义，不证明 iOS app 中符号存活、Compose renderer/Metal layer 一致，也不是旧 18 个真机地址的析构证据。
+
+ignored `artifacts/verification/f02-consumer-20261101/` 从 committed HEAD `568aa6d` 生成；Compose `1.11.1` / Kotlin `2.4.0` 的 simulator compile dependency graph 成功解析到 Skiko `0.144.6` 两个坐标。framework link 因自动审批服务 429 没有执行；受限环境的 Gradle native service 无法启动。需要后续真实 link、UUID/C ABI 回读及 render-path 验证；设备三页协议未启动，P4/F02 仍 `open/not-ready`。
+
 ## 2026-11-01 F02 隔离 instrumented Skia 研究构建路线
 
 对固定依赖做了只读上游核对：Skiko `0.144.6` 对应 commit

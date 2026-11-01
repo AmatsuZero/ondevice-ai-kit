@@ -4,6 +4,21 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 `0.144.6` 内嵌库回读与隔离 consumer
+
+- ignored 研究库 `artifacts/verification/f02-instrumented-skia-20261101/maven-0.144.6/` 已由 iOS-only publication tasks 生成；`publish-ios-0.144.6.log` SHA-256=`f03537f561cc5f5b908962a7c87a648c695353f3939bed4d5a5012078dfc336b`，日志为 **BUILD SUCCESSFUL in 37s**。没有写入用户 Maven 缓存或生产依赖。
+- 两个 `0.144.6` Klib 均逐项回读：`ios_arm64` Klib 内嵌 `libskia.a` SHA-256=`1f5804d9c31d42870b324215b0f495bcca1b4060cefa02492486f8bab75b0cdc`，模拟器 Klib 内嵌 `libskia.a` SHA-256=`7d24eeec9a2ca4ff3dca53162a16e20e78fd293697abe2096d75eb8bb5846a7d`；分别与对应 instrumented archive 内的 `libskia.a` 完全一致。ABI manifest 回读为 Kotlin/Native compiler=`2.2.20`、ABI=`2.2.0`、targets=`ios_arm64` / `ios_simulator_arm64`。`instrumented-artifact-manifest.json` 已补充 `0.144.6` Klib/ABI/内嵌库哈希。
+- ignored committed-snapshot consumer `artifacts/verification/f02-consumer-20261101/` 使用 HEAD=`568aa6d...`、生产 Compose=`1.11.1` / Kotlin=`2.4.0`，通过本地 Maven 仓库和 init-script substitution。任务枚举成功；`iosSimulatorArm64CompileKlibraries` 依赖图成功，并明确回读 `org.jetbrains.skiko:skiko:0.144.6 -> skiko-iossimulatorarm64:0.144.6`。图日志 SHA-256=`998925837ce2049cc2aaec88ec935085535d3908de11791ac896affa28259ebe`，consumer 摘要 SHA-256=`9d269887a49974b8f08994f66b26c97ed8516a369f744c6cddb04145e5776819`。
+- framework link 尚未完成：授权执行环境的同一命令未被自动审批执行（429），受限环境重试又因 Gradle native service/socket 限制无法启动；因此没有把依赖图成功升级为 Kotlin/Native framework、Compose renderer/Metal layer、Mach-O UUID 或 C ABI 的通过证据。没有启动设备或三页 P4 协议，F02/P4 仍 **open/not-ready**。
+- 在 framework link 之前，已对固定源码中的 allocator/recorder block 做 source-extracted macOS stress fixture：同线程复用、跨线程 delete 与 owner/non-owner `ClearCache`、worker exit 占用 TLS、8 线程 sequence/generation stress、65540 事件 ring overflow 共 **5/5 pass**；fixture 输出 `stress-fixture-run.log`，结果已写入 `instrumented-artifact-manifest.json`（SHA-256=`a8b46de5e88aa478ea805f41dda6090fd35ec84f152db191493e227b2da862d3`）。该证据只验证记录器语义，不证明 iOS framework 已加载或 Compose/Metal render path 一致。
+- 下一步：在审批可用时只重跑 ignored consumer 的 `:demo:shared:linkDebugFrameworkIosSimulatorArm64` 与 `linkDebugFrameworkIosArm64`，回读 framework 中 instrumented C ABI 符号和 UUID，复核 iOS linked binary 的观测路径；通过后才考虑签名设备 run。生产 Gradle 图、锁文件、Demo、受保护 dirty/untracked 文件仍未改动。
+
+## 最新续接 — 2026-11-01 F02 固定源码构建预检与 GitHub 认证复核
+
+- 用户确认 `gh` 已以 `AmatsuZero` 登录；授权环境实测 `gh auth status` 为 keyring active。GitHub 只读 API 回读：`swiftlang/swift#91540` 仍 open，`#91672` 仍 open/未合并、head=`0a53ffc501e5d3ac475ad36a9fc485b5623c570d`；`#92814` 已合并，不能据此推断 Xcode 27.2 已包含相关修复。F09 生产 archive 门槛未改变。
+- ignored `artifacts/verification/f02-instrumented-skia-20261101/` 中固定 Skiko `9a5b398...`、Skia `22f58c9...` checkout 均干净。嵌套 `skiko/skiko/gradlew` 的 Gradle 8.14.3、隔离 `GRADLE_USER_HOME` 下，`:prepareLocalSkiaBuild -Pskia.target=ios --dry-run --offline` exit 0；它只证明任务配置通过。首次真实 arm64 build 进入官方 `git-sync-deps`，重跑时依赖目录增长至约 3.8 GB；随后 `unicodetools` shallow fetch 189 秒无返回，人工有界停止，exit 130。完整 Gradle 日志 SHA-256=`7839ecd40e02d9e8de4cbf3016bb744c9580addf0f5eb18dbcef3754d19d3482`，摘要见同目录 `build-route-summary.json`。精确清理本轮中断留下的子进程；无 Skia archive、编译器或 ABI 结果。
+- 生产 Gradle 图、Demo、锁文件和受保护 dirty/untracked 文件未改；未 publish Maven 或运行设备。F02/P4 仍 `open/not-ready`。下一步先完成固定 Skia 的依赖同步和 iOS arm64/simulatorArm64 研究包，再进行隔离 substitution、ABI/render-path 对照和 allocator 事件 instrumentation；不要把 dry-run 或部分依赖拉取当成资源根因证据。
+
 ## 最新续接 — 2026-11-01 F02 instrumented Skia 研究路线
 
 - 固定 Skiko `0.144.6` / `9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0` 与 Skia `m144-22f58c9fd4` 的官方代码已核对。Skiko 支持 `:prepareLocalSkiaBuild -Pskia.repo.dir=... -Pskia.target=ios` 后用 `:skiko:publishToMavenLocal` 生成 iOS arm64/simulatorArm64 本地研究库；`NativeTasksConfiguration` 显示 iOS12 floor、Metal/CoreGraphics/CoreText/UIKit 链接及 `-include-binary`。
