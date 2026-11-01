@@ -1,5 +1,15 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 无 recorder 的 TLS owner 候选真机十轮
+
+固定 Skia/Skiko TLS owner 候选经独立 source-free consumer 链接后，使用已有 Apple Development 身份签名。独立 bundle `io.ondeviceai.f02candidate` 在 iPhone 16 Pro Max / iOS 27.0.1 真机安装、启动并终止（debug dylib UUID=`4E2CD327-B613-3D66-B145-F5140942231F`、PID=`35155`）。随后在 ignored 研究项目里移除全部旧 `skia_atlas_text_op_*` recorder C ABI，保留十轮相机页面驱动，使用相同候选 framework 重新构建签名 App（debug dylib UUID=`919386F5-8B81-321D-9901-2F758CAC404D`、SHA-256=`c5cab192afdbfb1a5b75b9d7ee29f204b63d31802573ce0a836d812b37fb736d`）。生产 Demo 源码、依赖与锁文件未改。
+
+真机 PID=`35178`、runID=`7CC03135-326D-4301-98B5-9F56D6748838` 的 `Leaks` 模板 trace 为 **851.208258 秒**；TOC 的 PID/安装路径与 `devicectl` 回执一致。十轮 30 秒相机活动成功结果增量为 `648/637/668/676/664/647/638/642/638/640`，86 个报告样本无 `failed`。十次页面退出 30 秒时，owner/Compose/Metal 弱引用均为 0，但各有 1 个 bridge 弱引用仍 live；第十轮之后 31/35/60 秒 idle 全部归零，`allObservedPageObjectsReleased=true`。十轮 30 秒 page-absent RSS 从 `144,916,480 B` 到 `153,763,840 B`（+`8,847,360 B`）；该差额没有按分配来源归因。
+
+完整导出的 Allocations List 有 **105,170** 个分配行，最终 `live=true` 且大小为 128 B、栈含 `AtlasTextOp::Make` 的唯一地址有 **6 个**；Leaks 明细 **0 行**。本次实验不保留缓存原始指针，但也没有旧 recorder 提供的析构、`delete-cached`、同 generation 线程退出事件，因此无法判定这 6 个地址在持有线程退出后是否仍 live。它与旧研究 App 的 52 个逐地址确认残留不是严格同口径比较；不能宣称修复率、零泄漏或资源稳定。原始 trace、Allocations/Leaks XML、device 回执、报告和解析脚本均在 ignored `artifacts/verification/f02-candidate-trace-20261101/`，`summary.json` SHA-256=`2df5cadd075af557fde9d7d38980a93d29cbeffa083cd7743527160c9d5c3a85`。研究 PID 已终止，普通无研究参数 Demo 恢复启动 PID=`35196`。
+
+固定 Skiko 的正常 Maven publication 仍未通过 metadata 编译，当前下游使用的是明确标记的研究组装仓库。下一门槛是受支持的正常 publication 与不依赖原始指针 recorder 的线程退出配对；F02/P4/P11 仍为 **open/not-ready**。
+
 ## 2026-11-01 F02 候选最终链接与模拟器边界
 
 固定 Skiko 的正常 Maven publication 在 `compileCommonMainKotlinMetadata` 重编译时报 `@OptionalExpectation` 只能用于 common source；隔离实验的 `-Xmulti-platform` 没有修复，排除该任务又在 nativeJs metadata 编译失败。为验证下游，ignored 研究仓库仅从同 revision 的既有本地元数据替换双 iOS 候选 Klib 及其 `.module` 哈希；23 个文件中严格只有这 4 个变化。它是**研究组装物，不是正常发布物**。独立 committed-snapshot consumer 经 dependency substitution 解析该候选，iOS arm64/simulator arm64 framework 强制重链均成功；最终 unsigned Xcode simulator/iPhoneOS App 构建均成功，debug dylib 分别含 `CacheOwner` 析构、TLS 初始化与 `__tlv_atexit` 系统导入。

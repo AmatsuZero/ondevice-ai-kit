@@ -4,6 +4,15 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 无 recorder 候选真机十轮与普通 Demo 恢复
+
+- `gh auth status` 在授权 keyring 视图重新确认 `AmatsuZero` active、scope 包含 `repo`；受限沙箱的 `default token invalid` 是凭据视图差异，**未修改登录配置**。真机 iPhone 16 Pro Max / iOS 27.0.1、UDID=`00008140-0008703436D3001C` 为 connected。
+- 从固定 Skiko 研究组装仓库链接的独立 `io.ondeviceai.f02candidate` App 已用现有 Apple Development team `4X996UV8LC` 签名构建、真机安装和启动；其 debug dylib UUID=`4E2CD327-B613-3D66-B145-F5140942231F`，启动回执 PID=`35155`，随后显式终止。这是候选的真机加载 smoke，不是 P4 资源验收。
+- 另在 ignored `f02-candidate-consumer-20261101/camera-page-candidate-project/` 建立**无旧 recorder C ABI**的十轮相机实验，沿用同一候选 framework、原页面移除/重入协议和已授权相机的研究 bundle。签名最终 debug dylib UUID=`919386F5-8B81-321D-9901-2F758CAC404D`、SHA-256=`c5cab192afdbfb1a5b75b9d7ee29f204b63d31802573ce0a836d812b37fb736d`；设备 PID=`35178`、runID=`7CC03135-326D-4301-98B5-9F56D6748838` 与安装路径、trace TOC 相符。
+- 同 PID `Leaks` 模板 trace **851.208258 秒**覆盖十轮和最终 idle；十个 30 秒相机活动窗口成功结果增量 `648/637/668/676/664/647/638/642/638/640`。每轮页面移除 30 秒时总有一个 bridge 弱引用仍 live；最后一轮 31/35/60 秒 idle 均为 0，最终 `allObservedPageObjectsReleased=true`。十轮 page-absent 30 秒 RSS 首末 +`8,847,360 B`，不能归因于 Atlas 缓存。
+- 完整 Allocations List **105,170 行**中，6 条 `live=true` 的 128 B 分配栈包含 `AtlasTextOp::Make`；Leaks 明细 0 行。旧 recorder 的同 PID 逐地址证据为 52 个线程退出后仍 live 的缓存地址，但本候选**无 recorder、无逐地址 generation/线程退出配对**，因此 6 条不能定性为退出后残留，也不能把 52→6 当成严格同口径修复率；0 行 Leaks 不是零泄漏证明。原始 trace、导出、解析脚本与报告见 ignored `artifacts/verification/f02-candidate-trace-20261101/summary.json`，SHA-256=`2df5cadd075af557fde9d7d38980a93d29cbeffa083cd7743527160c9d5c3a85`。
+- 研究 PID 已显式终止；普通 Demo（debug dylib UUID=`6CC6F4AF-8726-375E-BB7C-EA22DCDB07A4`）已重新安装并**无研究参数**启动，PID=`35196`。固定 Skiko 的**正常 Maven publication 仍在 metadata 编译失败**；`compileCommonMainKotlinMetadata` 的 input manifest 为 `native_targets=`，这是诊断线索，不是已证明的唯一根因。下一步先取得正常 publication 的受支持构建，再用相同来源的正式候选做线程退出/缓存存储的独立配对与 P4/P11 验收。生产依赖、锁文件及九项受保护 dirty/untracked 文件未改；**F02/P4/P11 仍 open/not-ready**。
+
 ## 最新续接 — 2026-11-01 F02 候选进入最终 App 与模拟器 smoke
 
 - 固定 Skiko 重新编译 `compileCommonMainKotlinMetadata` 报 `@OptionalExpectation` 错误；仅加 `-Xmulti-platform` 无效，研究副本改动已撤回。只请求 iOS variant publication 仍触发同一失败；排除该任务又在 `compileNativeJsMainKotlinMetadata` 失败。**正常 Maven publication 仍未通过**，不能把先前 `UP-TO-DATE` 当作重编译成功。
