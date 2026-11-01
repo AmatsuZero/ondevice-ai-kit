@@ -1,5 +1,13 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 十轮持续页面重入（研究 App）
+
+仅在 ignored 研究 consumer 的**独立项目/探针副本**把原三轮协议扩为十轮；原 v4 源码/报告、生产 Demo 与依赖均未覆盖。iPhone 16 Pro Max / iOS 27.0.1 上，签名研究 App 的 debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`，runID=`3219BF16-972B-45F9-9E45-5BD6A9C31FB6`，同一 PID=`34735`。十轮各 30 秒相机活动 Vision 成功增量为 `748/754/757/757/757/749/756/751/751/754`；每轮页面移除 30 秒后已观察的 owner/Compose controller/Metal layer/bridge 弱引用均为 0，最终 60 秒 idle 尾部仍为 0。报告终态为 `observations-complete`，不是 `nativeLeakAcceptance` 通过。
+
+私有 Documents 原始事件流为 **1,508,754 条 / 132,770,352 B**，88 B/条；独立解析全流序号连续、PID/runId 一致、地址/generation 匹配，设备报告的 capture missed=0。最终事件状态为 **50 个缓存地址**，其中 **48 个**有持缓存指针的线程退出观察；这是事件流状态，不是本轮 Allocations List live 地址数。研究 App 原始地址也被全局 recorder 持有。本轮**未运行 Instruments Leaks/Allocations trace**，所以不能据此把 50 个地址判定为最终 live、零泄漏、生产修复或持续运行无界增长。十轮页面退出 30 秒时的采样进程 RSS 从 `121,929,728 B` 到 `129,007,616 B`（+`7,077,888 B`），可能混有 recorder/运行时与系统因素，不归因为 AtlasTextOp；也不能称内存稳定。
+
+研究 PID 已显式 SIGTERM；已重新安装且无研究参数启动普通 Demo，PID=`34751`，安装容器=`5B93037F-63E7-4DBF-90E8-42FC97A25CB6`，普通 debug dylib UUID=`6CC6F4AF-8726-375E-BB7C-EA22DCDB07A4` 且无五个研究 C ABI。此恢复仅为安装/启动回执，不是 UI 验收。原始报告、事件、解析器、构建与设备收据均在 ignored `artifacts/verification/f02-sustained-20261101/`；汇总 `summary.json` SHA-256=`9a32100d54dde0cd1e7211596d9ec7ae378da62b248de95a0966f0dc604f5846`。十轮有界重入和缓存累积机制得到进一步观测，但生产修复/所有权裁定、原生最终 live 验证与 P4/P11 发布门槛仍 **open/not-ready**。
+
 ## 2026-11-01 F02 同 PID 逐地址析构/TLS 与普通 Demo 恢复
 
 隔离研究 App 在 iPhone 16 Pro Max / iOS 27.0.1 上以 PID `34674`、runID `E226E0C3-D90A-4805-BF5F-2E4494966DD1` 完成三次相机页面创建、退出和重入；各活动窗口 Vision 成功增量为 `660/691/690`，三次页面移除 30 秒后 owner、Compose controller、Metal layer 和 bridge 弱引用均为 0。301 秒同 PID Instruments 录制覆盖三个周期。运行的 `OnDeviceAIDemo.debug.dylib` UUID 为 `D2914E8C-93FA-3E0E-9414-070AE8B24C06`，与该研究包、安装 URL、PID 和事件 runId 绑定；不是生产 Demo 二进制。

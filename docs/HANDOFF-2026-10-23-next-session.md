@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 十轮持续重入与设备恢复
+
+- ignored research 项目副本将页面协议从 3 轮扩为 10 轮，未改生产 Demo/依赖或原 v4 证据。iPhone 16 Pro Max / iOS 27.0.1，PID=`34735`，runID=`3219BF16-972B-45F9-9E45-5BD6A9C31FB6`，debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`。10 个 30 秒活动窗口 Vision 成功增量 `748/754/757/757/757/749/756/751/751/754`；每轮页面移除 30 秒后 owner/Compose/Metal/bridge 弱引用均为 0，最终 60 秒 idle 仍为 0。
+- 原始事件流 **1,508,754 条 / 132,770,352 B**；全流序号、PID/runId、地址/generation 校验通过，capture missed=0。最终事件状态有 **50 个 cached 地址**，其中 **48 个**记录到持缓存指针的线程退出。本轮未运行 Instruments Leaks/Allocations，50 不是经 Allocations 证实的最终 live 数；研究 recorder 持原始地址，仍不能宣称零泄漏。每轮页面退出 30 秒的采样 RSS 首末差 +`7,077,888 B`，不能归因缓存，也不能声称内存稳定。
+- 研究 PID 已显式终止；普通 committed-source Demo 重新安装并无研究参数启动，PID=`34751`，普通 debug dylib UUID=`6CC6F4AF-8726-375E-BB7C-EA22DCDB07A4`，无研究 C ABI。原始报告、事件、源码哈希、构建和设备收据见 ignored `artifacts/verification/f02-sustained-20261101/summary.json`（SHA-256=`9a32100d54dde0cd1e7211596d9ec7ae378da62b248de95a0966f0dc604f5846`）及[AtlasTextOp 记录](validation/p4-atlas-text-cache.md)。十轮有界重入已验证，生产修复/所有权裁定、最终 live 匹配和 P4/P11 原验收仍 `open/not-ready`；受保护未提交文件未改。
+
 ## 最新续接 — 2026-11-01 F02 同 PID 逐地址关联与普通 Demo 恢复
 
 - 隔离研究 App PID=`34674`、runID=`E226E0C3-D90A-4805-BF5F-2E4494966DD1`、debug dylib UUID=`D2914E8C-93FA-3E0E-9414-070AE8B24C06` 完成真机三次相机页面退出/重入，Vision 活动成功增量 `660/691/690`，三轮页面移除 30 秒后 owner/Compose/Metal/bridge 弱引用均为 0；301 秒 Instruments trace 覆盖全程。完整研究事件导出 **416,726** 条、184 块、序号无缺口；ring 覆盖 351,190 次，不能说全部历史事件仍在 ring。
