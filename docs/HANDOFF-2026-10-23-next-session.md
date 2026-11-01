@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 十轮 trace 与最终 live 地址
+
+- 同一隔离十轮研究 App 新 run：真机 PID=`34764`、runID=`8425AEE8-5D65-4742-96E1-EBF75BDB4E51`，签名包 debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`。851.217207 秒同 PID Instruments trace 覆盖十次页面退出/重入和最终 idle；十轮活动 Vision 成功增量 `666/658/686/673/683/686/683/684/685/681`，每轮页面移除 30 秒后已观察 owner/Compose/Metal/bridge 弱引用均为 0。trace TOC 的 PID/安装路径与 CoreDevice 回执匹配，但 `dyld-library-load` 无映像行，故没有独立 trace UUID 回读。
+- 原始事件 **1,387,570 条 / 122,106,160 B**，序号连续、capture missed=0。最终 **52 个 cached 地址**均有同 generation 析构、`delete-cached`、持缓存指针线程退出事件；完整 Allocations List **104,727 行**中 52/52 唯一匹配 `live=true` 的 128 B 存储（50 个有 AtlasTextOp 分配责任栈，2 个录制前分配栈受限）。这是研究包的析构后缓存存储残留，不是生产修复或无界增长率。十轮 page-absent 30 秒采样 RSS 首末 +`9,879,552 B`，不能把全部差额归因于这 52 个地址。
+- 研究 recorder 全局表仍保存原始指针，Leaks 明细 0 行**不能判作零泄漏**。源/包/设备/原始 trace/事件/逐地址 ledger 见[AtlasTextOp 记录](validation/p4-atlas-text-cache.md)及 ignored `artifacts/verification/f02-sustained-trace-20261101/summary.json`（SHA-256=`6f1f8f098baedbcfea941a217bfb3139601fda0204b6cf8e5b9824f0b56f01df`）。独立 reviewer 通道返回 429，尚无结论。研究 PID 已终止，普通 Demo 已重新安装并无研究参数启动 PID=`34802`。受保护工程、身份草稿与 probes 未改；下一步应裁定生产依赖的受支持修复/所有权边界，而不是再次做相同 trace。P4/F02/P11 仍 `open/not-ready`。
+
 ## 最新续接 — 2026-11-01 F02 十轮持续重入与设备恢复
 
 - ignored research 项目副本将页面协议从 3 轮扩为 10 轮，未改生产 Demo/依赖或原 v4 证据。iPhone 16 Pro Max / iOS 27.0.1，PID=`34735`，runID=`3219BF16-972B-45F9-9E45-5BD6A9C31FB6`，debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`。10 个 30 秒活动窗口 Vision 成功增量 `748/754/757/757/757/749/756/751/751/754`；每轮页面移除 30 秒后 owner/Compose/Metal/bridge 弱引用均为 0，最终 60 秒 idle 仍为 0。

@@ -1,5 +1,13 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 十轮同 PID trace / 逐地址 live 关联
+
+在相同 ignored 十轮研究 App（签名 debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`）上另起新 run，iPhone 16 Pro Max / iOS 27.0.1，PID=`34764`、runID=`8425AEE8-5D65-4742-96E1-EBF75BDB4E51`。`Leaks` 模板 trace 从 15:35:03.942 到 15:49:15.159（+08:00），**851.217207 秒**覆盖十轮相机页面协议和最终 idle。每轮活动 Vision 成功增量为 `666/658/686/673/683/686/683/684/685/681`；十次页面移除 30 秒后已观察 owner/Compose/Metal/bridge 弱引用全部为 0。研究 App 的安装 URL 与 trace TOC 的进程路径（`/private/var` / `/var` 别名）及 PID 一致。trace 的 `dyld-library-load` 仅导出 schema、无映像行，因此 **没有独立 trace UUID 回读**；UUID 由本地签名包回读并与安装/进程路径绑定，不把它写成独立 trace 证据。
+
+设备私有 Documents 复制的 **1,387,570 条 / 122,106,160 B** 研究事件序号连续、PID/runId 一致、capture missed=0。逐地址解析将最终 **52 个 cached 地址**全部关联到相同 generation 的析构 entry/exit、`delete-cached` 和持该指针的线程退出观察；完整导出的 Allocations List 读取 **104,727 行**，52/52 地址各唯一匹配 `live=true` 的 128 B malloc 存储。50 个匹配行有 `AtlasTextOp::operator new` 责任栈，2 个为录制前已有、分配栈达到上限。这是研究 App 同 PID 中真实的**析构后线程缓存存储仍 live**证据，不是 52 个仍构造中的 C++ 对象。十轮页面退出 30 秒时采样 RSS 从 `157,368,320 B` 到 `167,247,872 B`（+`9,879,552 B`），不能将全部差额归因于这 52×128 B，也不能据有限十轮推算无界增长率。
+
+研究 recorder 的全局 ring/generation 表保留原始地址；本轮 Leaks 明细仍为 0 行，**不能作为零泄漏证明**。原始 trace、Allocations/Leaks 导出、报告、事件、逐地址 ledger、解析脚本和设备收据保存在 ignored `artifacts/verification/f02-sustained-trace-20261101/`；汇总 `summary.json` SHA-256=`6f1f8f098baedbcfea941a217bfb3139601fda0204b6cf8e5b9824f0b56f01df`。独立 reviewer 通道返回 429，尚无审查结论。研究 PID 已显式 SIGTERM，普通无研究 C ABI Demo 已重新安装并无研究参数启动（PID=`34802`）；仅为恢复回执，不是 UI 验收。该轮加强了线程退出缓存残留的因果链，**生产依赖的修复/所有权决策及 P4/P11 发布验收仍 open/not-ready**。
+
 ## 2026-11-01 F02 十轮持续页面重入（研究 App）
 
 仅在 ignored 研究 consumer 的**独立项目/探针副本**把原三轮协议扩为十轮；原 v4 源码/报告、生产 Demo 与依赖均未覆盖。iPhone 16 Pro Max / iOS 27.0.1 上，签名研究 App 的 debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`，runID=`3219BF16-972B-45F9-9E45-5BD6A9C31FB6`，同一 PID=`34735`。十轮各 30 秒相机活动 Vision 成功增量为 `748/754/757/757/757/749/756/751/751/754`；每轮页面移除 30 秒后已观察的 owner/Compose controller/Metal layer/bridge 弱引用均为 0，最终 60 秒 idle 尾部仍为 0。报告终态为 `observations-complete`，不是 `nativeLeakAcceptance` 通过。
