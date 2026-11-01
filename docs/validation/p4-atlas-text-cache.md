@@ -1,5 +1,9 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 iPhoneOS 最终 App 链接
+
+同一 ignored research consumer 的 generic `iphoneos` unsigned 与使用既有身份/profile 的 signed App 构建均 **BUILD SUCCEEDED**；签名构建日志为 `artifacts/verification/f02-consumer-20261101/xcode-app-device-signed.log`（SHA-256=`8e4f83bd0b228d292b19f9d8127824e54a846d96ba4382574ecf7f6ae847f76d`）。最终 device debug dylib UUID=`CADD1856-3A9A-31E5-911B-8317551BA3E6`，包含五个研究 C ABI；App stub UUID=`2EEFC256-A5F0-3D06-A279-4D59476AE98A`。授权环境有签名身份，之前沙箱内 0 身份是凭据视图差异。设备安装授权调用因审批服务 429 未执行；沙箱尝试因 CoreDeviceService 初始化超时失败。**无真机 PID/事件/三页协议**，不能从链接证据推出旧 18 个地址的析构/释放路径。P4/F02 仍 `open/not-ready`。
+
 ## 2026-11-01 F02 最终 App 链接与 simulator 运行时事件
 
 普通 unsigned generic simulator App 链接成功后，未引用研究 C ABI 的最终 debug dylib 被 `dead_strip`，因此不能只看 static framework archive 的符号。ignored consumer 加入显式 research probe 后，`xcode-app-sim-probe6.log` **BUILD SUCCEEDED**；最终 debug dylib UUID=`A93B4B79-57D6-32DE-B4F0-5DB2B983AF56`，包含五个 instrumentation C ABI，App stub UUID=`AFD5B670-07B7-3718-8C4E-07035B2018E0`。这是研究 consumer 的最终链接证据，不是生产 Demo 改动。

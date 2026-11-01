@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 iPhoneOS App 链接与签名边界
+
+- 用户提供的 GitHub 登录状态已在授权环境复核：`gh auth status` 显示 `AmatsuZero` active。它只解决 GitHub 访问，不代表 iOS 签名。受限沙箱内 `security find-identity` 显示 0，但授权环境重新读取为 **3 valid identities**；前一结论属于沙箱凭据视图，不能作为本机缺少签名身份的证据。
+- 同一 ignored committed-snapshot consumer `artifacts/verification/f02-consumer-20261101/` 中，`xcode-app-device-unsigned-escalated.log` 的 generic `iphoneos` App **BUILD SUCCEEDED**，最终 debug dylib 含五个研究 C ABI，未签名；日志 SHA-256=`4e8fc871d7b1db8b7a3d696e3261e60430bbf44953ee0248bc36062ff3fd0e8a`。最初受限运行因 SwiftPM/Clang 缓存不可写 exit 74，不是源码编译失败。
+- 使用本机已有 Apple Development 身份、既有 Xcode 通配 profile 与 `DEVELOPMENT_TEAM=4X996UV8LC`，未启用 provisioning 更新，在隔离 consumer 生成签名 device App：`xcode-app-device-signed.log` **BUILD SUCCEEDED**，SHA-256=`8e4f83bd0b228d292b19f9d8127824e54a846d96ba4382574ecf7f6ae847f76d`。最终 debug dylib SHA-256=`d666dfc4078e72d1b0c401c52abc431dc11e1588c0c9eb8242e533c302d7d84c`、UUID=`CADD1856-3A9A-31E5-911B-8317551BA3E6`，`nm -a` 可见五个 C ABI；App stub UUID=`2EEFC256-A5F0-3D06-A279-4D59476AE98A`。研究 probe 源 SHA-256 仍为 `7cc62e1675cbb99e0961b020de395c209ea14e4d308192fee27fa632d2252488`。
+- 设备安装的授权调用因自动审批服务 HTTP 429 **未执行**；受限环境一次调用又因 CoreDeviceService 初始化超时 exit 1，`device-install.json` 为 failed。没有设备安装、启动、PID 或真机 ABI/三页 trace；本机 `codesign --verify --deep --strict` 在受限环境返回 `CSSMERR_TP_NOT_TRUSTED`，不能替代设备签名验收。审批恢复后应先重新验证签名/安装，再做源、包、UUID、PID、runId 绑定及完整三页协议。未修改生产 Demo、依赖、签名资产或受保护 dirty/untracked 文件。P4/F02 保持 **open/not-ready**。
+
 ## 最新续接 — 2026-11-01 F02 最终 App 链接与 simulator C ABI 运行时回读
 
 - ignored committed-snapshot consumer 的普通 unsigned generic simulator App `xcode-app-sim.log` **BUILD SUCCEEDED**，但因未引用研究 C ABI，最终 `OnDeviceAIDemo.debug.dylib` 经过 `dead_strip` 后不含五个符号；这证明 static framework archive 符号可见不能代替最终链接证据。仅在 ignored consumer 的 `OnDeviceAIDemoApp.swift` 加入研究 probe，显式调用五个 C ABI 并复制事件；生产 Demo 和受保护 `project.pbxproj` 未改。
