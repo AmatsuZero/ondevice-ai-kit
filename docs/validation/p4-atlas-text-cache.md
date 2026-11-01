@@ -1,5 +1,13 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 正常 Skiko iOS publication 已进入独立 consumer
+
+对固定 Skiko `9a5b398...` 的 metadata 编译做仅 AWT flag 不同的对照：关闭 AWT 时 `compileCommonMainKotlinMetadata --rerun-tasks` 报 `@OptionalExpectation`；开启其默认 AWT 目标后同任务 6/6 executed、**BUILD SUCCESSFUL**。成功时 `inputManifest` 仍为 `native_targets=`，不能据此独立解释失败。保留 Skiko/Skia tracked 源码不变，以固定 TLS owner 候选 Skia 输出运行 Skiko 原生 iOS arm64、iOS simulator arm64 与 Kotlin Multiplatform 根模块三个 BuildRepo publication tasks；**BUILD SUCCESSFUL**，没有跳过 metadata。正常发布双 Klib 与前述研究组装仓库对应 Klib 的 SHA-256 完全相同：`340d6912df2f57e1291cd5d8099da414e834ca2fb10a940fd8b5dc994bae6ae6` 和 `5d09908f2987a763edc3fe07d752a26baf52dc5f69c6889fe2f093319c7f063c`。
+
+全新 committed `568aa6d...` source archive consumer 的 762 个未改文件均与提交一致，只在 `settings.gradle.kts` 添加该**正常 BuildRepo**。iOS arm64 依赖图解析 `skiko:0.144.6 -> skiko-iosarm64:0.144.6`，两份 static framework 强制重链成功（14/14 tasks executed），均含 `gpu.AtlasTextOp.o`、Metal layer、`CacheOwner` 析构、TLS init 和系统 `__tlv_atexit` 引用。独立签名 iPhoneOS App 最终 debug dylib UUID=`EDC85B90-54E2-3A1E-BD2F-67331805410D`，真机安装/启动 PID=`35239` 后终止；simulator 最终 App unsigned 构建成功，UUID=`7053A680-5A3E-3B54-ACA4-DADB462705A9`。证据目录为 ignored `artifacts/verification/f02-normal-publication-consumer-20261101/normal-publication-summary.json`，SHA-256=`a362a94d5ccefc08eb6dd449e66466442fb49911b44fc78d7baa4cc6cb738bc3`。
+
+这是隔离 iOS+root publication 和加载 smoke，不是完整 Skiko 全平台分发；root metadata 的 AWT artifact 未在此限定仓库发布。前一十轮候选 App 使用相同 Klib 字节，但最终 App 来源不同，且无逐地址线程退出配对，故不据此宣布 P4 修复或 P11 验收。生产依赖未改，**F02/P4/P11 仍 open/not-ready**。
+
 ## 2026-11-01 无 recorder 的 TLS owner 候选真机十轮
 
 固定 Skia/Skiko TLS owner 候选经独立 source-free consumer 链接后，使用已有 Apple Development 身份签名。独立 bundle `io.ondeviceai.f02candidate` 在 iPhone 16 Pro Max / iOS 27.0.1 真机安装、启动并终止（debug dylib UUID=`4E2CD327-B613-3D66-B145-F5140942231F`、PID=`35155`）。随后在 ignored 研究项目里移除全部旧 `skia_atlas_text_op_*` recorder C ABI，保留十轮相机页面驱动，使用相同候选 framework 重新构建签名 App（debug dylib UUID=`919386F5-8B81-321D-9901-2F758CAC404D`、SHA-256=`c5cab192afdbfb1a5b75b9d7ee29f204b63d31802573ce0a836d812b37fb736d`）。生产 Demo 源码、依赖与锁文件未改。
