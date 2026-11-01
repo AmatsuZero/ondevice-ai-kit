@@ -1,5 +1,13 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 正常 publication 来源真机十轮资源观察
+
+正常 BuildRepo consumer 的 iOS device framework SHA-256=`ecf5901f6ff9e57f0d770ccf8d42ee9d9f1b28f4eee44fb0cb1ac8a094830e45`，被独立相机 App 最终链接。初次生成误用原受保护三轮探针，设备仅完成三轮、录制显式中断，未计入下述十轮；研究副本随后只把循环上限改为十轮，源码哈希=`eb019de1b93331d9647f2e6ae2fe0d6e541f7e6dd0ffc0ce287e8e5dbdf38301`，与此前候选十轮探针逐字节一致。十轮 App 签名 dylib UUID=`9272673D-F19E-3E3A-AE9C-3FCAB7570FE2`，SHA-256=`62e429705dc40232af5c73a8fad33f7faa79cc8d65de6ba03771f52da1ab5356`；保留 `CacheOwner` 析构和 `__tlv_atexit` 引用，无旧 recorder C ABI。
+
+iPhone 16 Pro Max / iOS 27.0.1 的同一 PID=`35285`、runID=`91269411-871E-4D6B-8E24-6FD10B0C7A3F` 完成十轮，每轮 30 秒相机窗口的 Vision 成功增量为 `666/668/641/646/641/645/662/663/663/648`；86 个样本无失败，最终页面 owner、bridge、Compose controller 与 Metal layer 的弱引用全部释放。页面缺失 30 秒时 9/10 轮各有一个 bridge 仍 live，第 9 轮为 0；末轮 31/35/60 秒 idle 均为 0。page-absent 30 秒 RSS 首末 +`8,437,760 B`，没有分配来源归因。
+
+850.878895 秒 `Leaks` trace 的 TOC PID/安装路径与设备回执一致；完整 Allocations List 读取 **104,779** 行，最终 `live=true` 且 128 B、分配栈含 `AtlasTextOp::Make` 的为 **2 行**。逐栈检查发现一条经 `dyld::ThreadLocalVariables::addTermFunc`，属于 TLS 析构注册路径，不能当作 Atlas 缓存存储；另一条经全局 `operator new`。Leaks 明细为 0 行。没有同 PID 的缓存 generation、析构/free 和线程退出事件，故后一条也不能判定为退出后残留，不能将此前另一 App 的 6 行与本次 2 行当作严格修复率，也不能以空 Leaks 明细宣称零泄漏。原始设备报告、trace、导出、解析器和各哈希在 ignored `artifacts/verification/f02-normal-publication-consumer-20261101/`；`camera-page-normal10-summary.json` SHA-256=`bfffa72ef7bb26cafabb6cee17bdb0a5f51cfd7e1f371127f12cfad1b82f36fe`。研究 PID 已显式终止，普通 Demo UUID=`6CC6F4AF-8726-375E-BB7C-EA22DCDB07A4` 恢复安装并无研究参数启动 PID=`35295`。生产依赖未改，**F02/P4/P11 仍 open/not-ready**。下一步实现不保留原始指针的同来源 generation/线程退出配对，并裁定生产修复/所有权。
+
 ## 2026-11-01 正常 Skiko iOS publication 已进入独立 consumer
 
 对固定 Skiko `9a5b398...` 的 metadata 编译做仅 AWT flag 不同的对照：关闭 AWT 时 `compileCommonMainKotlinMetadata --rerun-tasks` 报 `@OptionalExpectation`；开启其默认 AWT 目标后同任务 6/6 executed、**BUILD SUCCESSFUL**。成功时 `inputManifest` 仍为 `native_targets=`，不能据此独立解释失败。保留 Skiko/Skia tracked 源码不变，以固定 TLS owner 候选 Skia 输出运行 Skiko 原生 iOS arm64、iOS simulator arm64 与 Kotlin Multiplatform 根模块三个 BuildRepo publication tasks；**BUILD SUCCESSFUL**，没有跳过 metadata。正常发布双 Klib 与前述研究组装仓库对应 Klib 的 SHA-256 完全相同：`340d6912df2f57e1291cd5d8099da414e834ca2fb10a940fd8b5dc994bae6ae6` 和 `5d09908f2987a763edc3fe07d752a26baf52dc5f69c6889fe2f093319c7f063c`。另发布 AWT 变体到同一 BuildRepo，12 tasks 中 8 executed、**BUILD SUCCESSFUL**；root `.module` 列出的三个目标模块均存在。

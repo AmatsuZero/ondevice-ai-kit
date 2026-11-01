@@ -21,12 +21,12 @@
 
 **暂不进入近期队列的外部卡点**：F03 需要 iOS15/API26 真机；F05 需要设备支持且授权的 Android ASR 离线资源；F07 真实推理需要可授权 LiteRT-LM 权重，native drain 另缺受支持证明；F10 需要生产模型/PAD、授权数据和校准集。真实 PHPicker 也需要将合成资产写入 Photos；当前按用户要求不做这项写入，因此保留为 F01 的独立后续。输入出现后再恢复对应专项。
 
-**独立技术难题，后置且不冒充外部设备卡点**：F02 需要能直接观察析构/free/TLS 的研究构建；F06 的 Android 生产超分需要先确定可运行且可评价的后端；F09 已用隔离依赖诊断改动完成当前图像/视频 App archive，但生产依赖兼容、增强 XCFramework 与 binary consumer 仍未验；F12 完整复审此前遇服务 429，待形成新的候选差异后重试。它们仍是交付要求，只是不占用上述短队列。当前按用户要求继续推进此表中的可执行专项。
+**独立技术难题，后置且不冒充外部设备卡点**：F02 已有研究构建，仍需不保留原始指针的同来源事件配对及生产所有权裁定；F06 的 Android 生产超分需要先确定可运行且可评价的后端；F09 已用隔离依赖诊断改动完成当前图像/视频 App archive，但生产依赖兼容、增强 XCFramework 与 binary consumer 仍未验；F12 完整复审此前遇服务 429，待形成新的候选差异后重试。它们仍是交付要求，只是不占用上述短队列。当前按用户要求继续推进此表中的可执行专项。
 
 | 编号 / 负责范围 | 问题与已有证据 | 恢复输入 / 下一动作 | 专项退出标准 |
 | --- | --- | --- | --- |
 | F01 / iOS Demo | [P4](p4-camera-stability.md)：真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 已完成；真实 PHPicker→controller 仍未验 | sandbox 子项已完成，证据见 `artifacts/verification/p4-picker-sandbox-device/summary.json`；后续若恢复 PHPicker 专项，才考虑合成资产的 Photos provider 路径；当前不写入 Photos | 三例实际选择同一指定合成资产，尺寸/镜像像素及 `apple.vision.face` 成功结果均可复核；sandbox 结果不替代 PHPicker，且不读取私人照片 |
-| F02 / Compose/Skia 资源 | [AtlasTextOp](p4-atlas-text-cache.md)：隔离研究 App 十轮同 PID trace 已将最终 52 个 cached/thread-exit 地址逐项匹配 Allocations `live=true` 128 B 存储；每轮页面对象弱引用已释放。研究 recorder 持原始地址，空 Leaks 明细不作零泄漏证明；生产依赖未改 | 基于已观测机制裁定生产依赖的受支持修复/所有权边界，并验证生产持续资源；不重复无新机制的旧 trace | 匹配 runtime UUID、对象地址、分配/析构/free/TLS 与线程生命周期；修复或有证据的边界裁定，并证明持续重入行为 |
+| F02 / Compose/Skia 资源 | [AtlasTextOp](p4-atlas-text-cache.md)：旧隔离 recorder 十轮 trace 将最终 52 个 cached/thread-exit 地址逐项匹配 `live=true` 存储，但 recorder 持原始地址；正常 BuildRepo publication 的独立 consumer 已在真机完成无 recorder 十轮，最终 `AtlasTextOp::Make` 栈下 2 条 live 128 B 分别为 TLS 析构注册与 `operator new`，后一条无线程退出配对。最终页面弱引用释放，空 Leaks 明细不作零泄漏证明；生产依赖未改 | 以不保留原始指针的同来源事件配对裁定缓存存储、线程退出与生产所有权；不重复无新机制的旧 trace | 匹配 runtime UUID、对象地址、分配/析构/free/TLS 与线程生命周期；修复或有证据的边界裁定，并证明持续重入行为 |
 | F03 / 最低系统 | [设备矩阵](device-matrix.md)：iOS15/API26 缺设备 | 取得相应真机后恢复启动、availability、权限、选图/相机、取消、前后台、离线门禁 | 两平台最低系统实际运行报告；编译下限不替代运行验收 |
 | F04 / Speech iOS/TTS | [语音](speech-backends.md)、[麦克风计划](../superpowers/plans/2026-10-20-ios-microphone-asr.md)：自然麦克风终态、中文质量/取消重入/后台、TTS 自然质量与完整离线矩阵仍缺 | 受控授权录音和文本/语言任务集，保留准确转写参考及网络观测方法 | 麦克风终态、资源 drain、取消重入/后台、CER/WER、自然 TTS 与离线矩阵逐项报告 |
 | F05 / Speech Android | [语音](speech-backends.md)：on-device ASR 返回 MISSING_ASSETS | 提供设备支持且授权的系统离线语音资源 | 真实转写、取消/close/重入、离线与自然质量验收；仍缺资产时明确 unavailable |

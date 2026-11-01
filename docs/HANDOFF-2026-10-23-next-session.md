@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 正常 publication 来源真机十轮
+
+- 双端 `feat/sdk-foundation` 已同步 `3455e2d1b982a06201de801b5d822c42eb87d209`，GitHub/GitLab F02 `#2` 各记入正常 Skiko iOS+AWT+root 本地 BuildRepo publication 进度。`gh` 在授权 keyring 视图为 `AmatsuZero` active；未修改认证配置。GitHub 评论写入返回 URL，但随后一次只读回读被自动审批服务 429 拒绝，命令未执行；GitLab note 已回读。
+- 从 committed-source 正常 BuildRepo consumer 的 device framework（SHA-256=`ecf5901f6ff9e57f0d770ccf8d42ee9d9f1b28f4eee44fb0cb1ac8a094830e45`）生成独立研究 App。原受保护探针只含三轮，第一次真机运行因此仅完成三轮；该次 trace 被显式中断，不计十轮证据。随后只在 ignored consumer 探针副本将 `1...3` 改为 `1...10`，与既有十轮候选探针逐字节一致，重新生成、签名构建，最终 dylib UUID=`9272673D-F19E-3E3A-AE9C-3FCAB7570FE2`、SHA-256=`62e429705dc40232af5c73a8fad33f7faa79cc8d65de6ba03771f52da1ab5356`。
+- iPhone 16 Pro Max / iOS 27.0.1，同 bundle 相机授权研究 App PID=`35285`、runID=`91269411-871E-4D6B-8E24-6FD10B0C7A3F` 完成十轮 30 秒窗口，原生结果增量 `666/668/641/646/641/645/662/663/663/648`，86 个报告样本无失败，最终所有已观察页面弱引用释放。页面缺失 30 秒时，9 轮各仍有 1 个 bridge 弱引用存活、第 9 轮为 0；末轮 31/35/60 秒 idle 全部为 0。十轮 page-absent 30 秒 RSS 首末 +`8,437,760 B`，不能归因于 Atlas 缓存。
+- 同 PID `Leaks` trace 为 **850.878895 秒**，覆盖十轮与最终 idle；TOC 的 PID/安装路径与设备回执一致。完整 Allocations List **104,779 行**中，最终 `live=true`、128 B、分配栈含 `AtlasTextOp::Make` 的行有 **2 条**：一条栈经 `dyld::ThreadLocalVariables::addTermFunc`，属于 TLS 析构注册路径，不能视作 Atlas 缓存存储；另一条经全局 `operator new`。Leaks 明细 0 行。无 recorder C ABI、无同 PID 逐地址析构/free/TLS/线程退出配对，故不把后一条定性为退出后残留，也不把上次研究组装仓库的 6 行与本次 2 行当作严格修复率。原始 trace、导出、源/构建/安装/运行/恢复回执及解析器在 ignored `artifacts/verification/f02-normal-publication-consumer-20261101/`，`camera-page-normal10-summary.json` SHA-256=`bfffa72ef7bb26cafabb6cee17bdb0a5f51cfd7e1f371127f12cfad1b82f36fe`。研究 PID 已终止，普通 Demo UUID=`6CC6F4AF-8726-375E-BB7C-EA22DCDB07A4` 已恢复安装并无研究参数启动 PID=`35295`。生产依赖及受保护 dirty/untracked 文件未改；**F02/P4/P11 仍 open/not-ready**。下一门槛仍是无原始指针保留的同来源缓存 generation/线程退出配对与生产所有权裁定。
+
 ## 最新续接 — 2026-11-01 F02 正常 Skiko iOS publication 与独立 consumer
 
 - 固定 Skiko `9a5b398...` 的 metadata 失败找到**受控触发条件**：同源码、Kotlin 2.2.20、双 iOS 目标、离线缓存及 release `0.144.6`，`-Pskiko.awt.enabled=false` 强制重编译 `compileCommonMainKotlinMetadata` 在 `@OptionalExpectation` 失败；只改为 `true` 后 6/6 tasks 成功。`native_targets=` 在成功后仍为空，不能单独当根因。没有修改 Skiko/Skia tracked 源码，也没有压制编译错误。
