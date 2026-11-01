@@ -1,5 +1,11 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 候选最终链接与模拟器边界
+
+固定 Skiko 的正常 Maven publication 在 `compileCommonMainKotlinMetadata` 重编译时报 `@OptionalExpectation` 只能用于 common source；隔离实验的 `-Xmulti-platform` 没有修复，排除该任务又在 nativeJs metadata 编译失败。为验证下游，ignored 研究仓库仅从同 revision 的既有本地元数据替换双 iOS 候选 Klib 及其 `.module` 哈希；23 个文件中严格只有这 4 个变化。它是**研究组装物，不是正常发布物**。独立 committed-snapshot consumer 经 dependency substitution 解析该候选，iOS arm64/simulator arm64 framework 强制重链均成功；最终 unsigned Xcode simulator/iPhoneOS App 构建均成功，debug dylib 分别含 `CacheOwner` 析构、TLS 初始化与 `__tlv_atexit` 系统导入。
+
+隔离 bundle `io.ondeviceai.f02candidate` 在 iOS 27.2 simulator 安装并启动 PID `25744`，截图显示 Demo 主界面，随后研究进程正常终止。这只证明该候选在本次模拟器可链接、加载并显示普通首页；**没有真机线程退出后的原始缓存 live 对照、相机十轮重入、Leaks/Allocations、能耗或生产依赖验收**。设备状态查询的自动审批服务返回 429，调用未执行，不推断设备状态。证据哈希、构建日志和组装约束见 ignored `artifacts/verification/f02-remediation-20261101/candidate-consumer-summary.json`。F02/P4/P11 保持 **open/not-ready**。
+
 ## 2026-11-01 F02 TLS owner 候选及 Skiko Klib 集成
 
 固定 Skia revision 的原版宿主夹具在线程退出后留下 1 块缓存原始存储；候选 `thread_local CacheOwner` 的析构释放该存储，8 worker 与跨线程删除场景均为 0，且同线程 1000 次 new/delete 只需 1 次底层分配。无缓存备选同样归零，但需 1000 次底层分配。这些是源码抽取宿主结果，不是真机修复证明。候选只存在 ignored 研究目录 `artifacts/verification/f02-remediation-20261101/`，未改生产 Skiko/Skia 依赖。

@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 候选进入最终 App 与模拟器 smoke
+
+- 固定 Skiko 重新编译 `compileCommonMainKotlinMetadata` 报 `@OptionalExpectation` 错误；仅加 `-Xmulti-platform` 无效，研究副本改动已撤回。只请求 iOS variant publication 仍触发同一失败；排除该任务又在 `compileNativeJsMainKotlinMetadata` 失败。**正常 Maven publication 仍未通过**，不能把先前 `UP-TO-DATE` 当作重编译成功。
+- 为验证下游，在 ignored `f02-remediation-20261101/maven-candidate-repacked/` 复用同一固定 Skiko revision 的既有本地 Maven 元数据，只替换双 slice 候选 Klib 和各自 `.module` 的 size/hash。严格目录比较为 **23 个文件中仅 4 个变化**；这是研究组装仓库，不是 Gradle 正常发布或可分发 SDK。候选 release Klib SHA-256：device=`340d6912df2f57e1291cd5d8099da414e834ca2fb10a940fd8b5dc994bae6ae6`，simulator=`5d09908f2987a763edc3fe07d752a26baf52dc5f69c6889fe2f093319c7f063c`，内嵌 `libskia.a` 与上方纯补丁构建逐项匹配。
+- 独立克隆的 committed-snapshot consumer 使用该研究仓库：iOS 依赖图成功解析 `skiko:0.144.6 -> skiko-iosarm64:0.144.6`；两个 Demo static framework 强制重链均 **BUILD SUCCESSFUL / 9 tasks executed**，包含 `gpu.AtlasTextOp.o`、`CMPMetalLayer.o` 和 `__tlv_atexit` 引用，无 recorder C ABI。用与 committed `568aa6d...` 哈希一致的普通 App Swift 源码，Xcode unsigned simulator 与 generic iPhoneOS 最终 App 均 **BUILD SUCCEEDED**；debug dylib UUID 分别为 `799AB436-867D-3461-90E8-E9ADC1B43E52` / `EAFEF8F2-EF75-3C7A-8EB9-872239EF0841`，均可回读 `CacheOwner` 析构及 TLS 初始化符号。
+- 独立 bundle `io.ondeviceai.f02candidate` 在 iPhone 18 Pro / iOS 27.2 simulator 安装、启动成功，PID=`25744`；截图回读 Demo 主界面，随后 `simctl terminate` exit 0，未替换普通 Demo。未运行相机十轮或模拟器 Leaks；iPhoneOS 包未签名、未安装真机。读取真机状态与模拟器 PID 日志的自动审批服务返回 HTTP 429，**命令未执行**；这不是设备不可用或运行异常的结论。源、构建、组装、截图与 SHA 见 ignored `f02-remediation-20261101/candidate-consumer-summary.json`。生产依赖和受保护 dirty/untracked 文件未改；**F02/P4/P11 仍 open/not-ready**。下一步先解决受支持的正常 Skiko publication/所有权，再对签名候选执行真机线程退出与十轮相机资源对照。
+
 ## 最新续接 — 2026-11-01 F02 TLS 缓存候选进入双 iOS Klib
 
 - `gh auth status` 在受限沙箱报告 `default` token invalid；同一会话经授权凭据视图回读为 `AmatsuZero` keyring active，和用户提供的结果一致。不要修改或清除 GitHub 登录配置。GitHub 认证与本次 iOS 构建/签名是不同门槛。
