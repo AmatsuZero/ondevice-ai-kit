@@ -1,5 +1,15 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 同 PID 逐地址析构/TLS 与普通 Demo 恢复
+
+隔离研究 App 在 iPhone 16 Pro Max / iOS 27.0.1 上以 PID `34674`、runID `E226E0C3-D90A-4805-BF5F-2E4494966DD1` 完成三次相机页面创建、退出和重入；各活动窗口 Vision 成功增量为 `660/691/690`，三次页面移除 30 秒后 owner、Compose controller、Metal layer 和 bridge 弱引用均为 0。301 秒同 PID Instruments 录制覆盖三个周期。运行的 `OnDeviceAIDemo.debug.dylib` UUID 为 `D2914E8C-93FA-3E0E-9414-070AE8B24C06`，与该研究包、安装 URL、PID 和事件 runId 绑定；不是生产 Demo 二进制。
+
+事件导出合计 **416,726** 条、88 B/条，序号连续、无导出序号缺口；采集分 184 块完成，ring 在采集中覆盖旧事件 351,190 次，故不能把完整历史事件都视为保留。逐地址 ledger 针对最终 Allocations List 的 **18 个唯一 live 128 B 地址**：18/18 记录到对应 generation 的析构和 `delete-cached`，15/18 还记录到持有该缓存指针的线程退出；其余 3 个不据此推断线程仍存活或已释放。这里的“live”指原始 malloc 存储仍在 Allocations List，不等同于 C++ 对象未析构。旧 trace 中的 18 个地址属于另一 PID，不能直接逐地址配对。
+
+本次研究 recorder 的全局 ring 和 generation 表也保存原始地址，可能使 Instruments Leaks 的可达性判断受到干扰。因此本轮 Leaks 明细 0 行**不是零泄漏、无残留或修复证明**；以逐地址析构/cache/TLS/最终 live 的限定结论为准。研究证据见 ignored `artifacts/verification/f02-consumer-20261101/camera-page-v4-summary.json`（SHA-256 `11115feba01b152145e6676af3c2dc00cedb5cdce1682586a3e2a391e093121d`）、`camera-page-v4-address-ledger.json`（`37a07604269335308a2ab9c879a143e1601eb1adf04564dcc400e70684cd420f`）、原始最终报告（`d2f3e658f37c675662e8db8711716a78d209f269b2bbbbd0838df4f78ac02fb9`）及完整 trace/导出。
+
+研究 App 已显式 SIGTERM；随后从 committed source 构建、安装并无研究 C ABI 参数启动普通 Demo，启动回执 PID `34719`、安装 URL 为 `54F2120E-2511-4E32-A330-46054A62937E` 容器，`launch.json` SHA-256=`9001d260faf7af7fb359897f9566209038e09df0b1714e0f20258c899a38c1be`。该恢复只证明普通 App 安装/启动回执，不是新一轮 UI 验收。生产依赖与受保护未提交文件未改。F02 机制归因已有直接证据，但持续重入边界、生产修复/裁定及 P4/P11 发布验收仍 **open/not-ready**。
+
 ## 2026-11-01 F02 真机单页 ABI smoke
 
 在 iPhone 16 Pro Max 真机安装并启动隔离研究 App；PID `34529` 的 `device-console.log` SHA-256=`f45b61a787fb5be8bfa76e5fae3a2f45a2407bb6d033db70ba448eccca5f49f6`。初始 `eventCount=0`，2 秒后 `delayedCount=120 copied=120 dropped=0 correctRun=true`；new-allocated/new-reused=8/22，destructor entry/exit=30/30，delete-cached/delete-freed=24/6。签名 device debug dylib UUID=`CADD1856-3A9A-31E5-911B-8317551BA3E6` 且含五个 C ABI。此证据覆盖真机最终 App 链接与 C ABI 调用，但只是单页研究 smoke；未运行相机三页/Leaks 协议，未完成逐地址 ledger，旧 18 个地址仍不可跨 PID 直接匹配。P4/F02 保持 `open/not-ready`。

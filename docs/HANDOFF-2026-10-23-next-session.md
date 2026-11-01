@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 同 PID 逐地址关联与普通 Demo 恢复
+
+- 隔离研究 App PID=`34674`、runID=`E226E0C3-D90A-4805-BF5F-2E4494966DD1`、debug dylib UUID=`D2914E8C-93FA-3E0E-9414-070AE8B24C06` 完成真机三次相机页面退出/重入，Vision 活动成功增量 `660/691/690`，三轮页面移除 30 秒后 owner/Compose/Metal/bridge 弱引用均为 0；301 秒 Instruments trace 覆盖全程。完整研究事件导出 **416,726** 条、184 块、序号无缺口；ring 覆盖 351,190 次，不能说全部历史事件仍在 ring。
+- 最终 Allocations List 的 **18 个唯一 live 128 B 地址**均在同 PID、同 runID 的 ledger 中记录到对应 generation 析构和 `delete-cached`；其中 15 个还记录到持缓存指针的线程退出。3 个未记录该 exit，不推断其状态。原始存储 live 与 C++ 对象已析构并不矛盾；旧 PID 的 18 个地址不能跨进程配对。
+- 研究 recorder 的全局 ring/generation 表也保存原始地址，可能影响 Leaks 可达性；因此本轮 Leaks 明细 0 行**不作为零泄漏或修复证明**。P4/F02 的持续重入边界、生产修复/裁定和 P11 发布验收仍 `open/not-ready`。限定结论、源/包/PID/UUID/事件/trace 哈希见[AtlasTextOp 记录](validation/p4-atlas-text-cache.md)及 ignored `artifacts/verification/f02-consumer-20261101/camera-page-v4-summary.json`（SHA-256=`11115feba01b152145e6676af3c2dc00cedb5cdce1682586a3e2a391e093121d`）。
+- 研究 App 已显式终止；普通 committed-source Demo 已重新构建、安装并无研究参数启动，PID=`34719`，启动回执 SHA-256=`9001d260faf7af7fb359897f9566209038e09df0b1714e0f20258c899a38c1be`。这只是安装/启动恢复，不是新的 UI 验收。`gh auth status` 已在 keyring 环境只读复核为 `AmatsuZero` active；受限沙箱的 `default` token 错误是凭据视图差异。受保护的 `project.pbxproj`、身份草稿、相机 probes 与生产依赖未改。
+
 ## 最新续接 — 2026-11-01 F02 真机 C ABI smoke
 
 - 上一节的设备安装阻断已解除：授权环境重试 `devicectl device install app` 成功，安装的研究包 `io.ondeviceai.ondeviceaidemo` URL 为 `file:///private/var/containers/Bundle/Application/E3350029-67CF-45E2-8781-0AAC2A9C56ED/OnDeviceAIDemo.app/`；`device-install-retry.json` SHA-256=`850fb82aa7d81de675d6641118f7c5d22b34654fa7297c8a0d61e061924eb96a`。iPhone 16 Pro Max 真机启动回执 `device-launch.json` SHA-256=`25b8acc8c7819b5aa0e09b5b6dceeb92564980f94de760c7d454776b0e9267e6`，首次 PID=`34518`。为捕获 console，`--terminate-existing --console` 再次启动研究 App，实际观察 PID=`34529`，随后显式 SIGTERM 成功。
