@@ -1,5 +1,13 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 TLS owner 候选及 Skiko Klib 集成
+
+固定 Skia revision 的原版宿主夹具在线程退出后留下 1 块缓存原始存储；候选 `thread_local CacheOwner` 的析构释放该存储，8 worker 与跨线程删除场景均为 0，且同线程 1000 次 new/delete 只需 1 次底层分配。无缓存备选同样归零，但需 1000 次底层分配。这些是源码抽取宿主结果，不是真机修复证明。候选只存在 ignored 研究目录 `artifacts/verification/f02-remediation-20261101/`，未改生产 Skiko/Skia 依赖。
+
+从仅有 `AtlasTextOp.cpp` 候选改动的固定 Skia checkout 重新构建并打包 iOS arm64 与 simulator arm64 静态库。两个新 Skia ZIP 的内嵌 `libskia.a` 分别为 SHA-256 `c90798bb2ce3fd7aff7f7de0a1ca9e37c19d837749c05b4010b1742dcccc845f`、`5f4790af17452aaac834a0b80bd9afa2b503ff9a55ce737a9a93eaf1b9dab1ca`；两个新 `0.144.6-SNAPSHOT` Skiko Klib 分别内嵌完全相同的库。`iosArm64Klib iosSimulatorArm64Klib --rerun-tasks` 为 **BUILD SUCCESSFUL / 18 tasks executed**，Klib SHA-256 分别为 `648c9fc00f98b513e309e4a2028c2260550a5b1505336d0a660f5819f2ef7413`、`a4b8fc6963c3ab299e027109106f2920cfa91179f6619c4ea5065e2e35b70bdd`。Klib manifest 的 Kotlin/Native compiler=`2.2.20`、ABI=`2.2.0`、target 对应 iOS arm64/simulator arm64。原目录中的 `0.144.6` Klib 是旧 instrumented 研究库，不能作为候选证据。
+
+完整隔离 Maven publication 两次均在 `compileCommonMainKotlinMetadata` 失败，错误为 `@OptionalExpectation` 只能用于 common source；单独 Klib 目标不依赖该失败任务。这一步只关闭候选进入双 slice Klib 的门槛，没有完成 Maven 分发、Compose consumer 最终链接、`__tlv_atexit` 最终解析或真机线程退出/相机十轮对照。原始 SHA、构建日志和失败边界见 ignored `artifacts/verification/f02-remediation-20261101/klib-integration-summary.json`。F02/P4/P11 保持 **open/not-ready**。
+
 ## 2026-11-01 F02 十轮同 PID trace / 逐地址 live 关联
 
 在相同 ignored 十轮研究 App（签名 debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`）上另起新 run，iPhone 16 Pro Max / iOS 27.0.1，PID=`34764`、runID=`8425AEE8-5D65-4742-96E1-EBF75BDB4E51`。`Leaks` 模板 trace 从 15:35:03.942 到 15:49:15.159（+08:00），**851.217207 秒**覆盖十轮相机页面协议和最终 idle。每轮活动 Vision 成功增量为 `666/658/686/673/683/686/683/684/685/681`；十次页面移除 30 秒后已观察 owner/Compose/Metal/bridge 弱引用全部为 0。研究 App 的安装 URL 与 trace TOC 的进程路径（`/private/var` / `/var` 别名）及 PID 一致。trace 的 `dyld-library-load` 仅导出 schema、无映像行，因此 **没有独立 trace UUID 回读**；UUID 由本地签名包回读并与安装/进程路径绑定，不把它写成独立 trace 证据。

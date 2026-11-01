@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-01 F02 TLS 缓存候选进入双 iOS Klib
+
+- `gh auth status` 在受限沙箱报告 `default` token invalid；同一会话经授权凭据视图回读为 `AmatsuZero` keyring active，和用户提供的结果一致。不要修改或清除 GitHub 登录配置。GitHub 认证与本次 iOS 构建/签名是不同门槛。
+- ignored `artifacts/verification/f02-remediation-20261101/` 的固定 Skia `22f58c9...` 宿主复现：原版线程退出后留 1 块，`thread_local CacheOwner` 候选为 0，1000 次同线程操作只分配 1 次；无缓存方案也为 0，但需 1000 次分配。候选补丁 SHA-256=`c4ba9412811a6c68df3f3c9e14e53cb684c7eb849f3f16c0f683c10f6b55fc30`，仅在隔离研究副本中；未修改生产依赖。
+- 集成前发现旧研究 ZIP 未更新，且先前 `skia-patch-compile` checkout 的 header 尚有 recorder 改动。新建 ignored `skia-clean-candidate`，固定 revision 下 `git diff` 仅 `AtlasTextOp.cpp` 的 TLS owner 改动；重编译 iOS arm64/simulator arm64，重新打包，并验证两个 archive 的内嵌 `libskia.a` 与本地静态库相同，均有 `__tlv_atexit` 引用、无研究 recorder ABI 引用。
+- 独立 `skiko-clean-candidate` 用固定 Skiko `9a5b398...` 强制构建 `iosArm64Klib iosSimulatorArm64Klib`：**BUILD SUCCESSFUL，18/18 tasks executed**。正确产物是 `0.144.6-SNAPSHOT`，目录里旧的 `0.144.6` Klib 不可误用。两个 SNAPSHOT Klib 内嵌 `libskia.a` SHA-256 分别为 `c90798bb2ce3fd7aff7f7de0a1ca9e37c19d837749c05b4010b1742dcccc845f` 和 `5f4790af17452aaac834a0b80bd9afa2b503ff9a55ce737a9a93eaf1b9dab1ca`，均与新 ZIP/本地 archive 一致；Kotlin/Native compiler=`2.2.20`、ABI=`2.2.0`、target 分别为 `ios_arm64`/`ios_simulator_arm64`。
+- 完整 Maven publication 在 `compileCommonMainKotlinMetadata` 报大量 `@OptionalExpectation can only be used in common module sources`，增量重试同样失败；没有绕过该发布任务，也没有 source-free consumer link 或真机候选运行。独立诊断代理遇 429，未返回审查结论。确切命令/产物哈希/失败日志见 ignored `klib-integration-summary.json`。下一步诊断该 metadata 构建门槛，再做隔离 publication、最终 App link 与真机十轮对照；**F02/P4/P11 仍 open/not-ready**。受保护工程、身份草稿和 probes 未改。
+
 ## 最新续接 — 2026-11-01 F02 十轮 trace 与最终 live 地址
 
 - 同一隔离十轮研究 App 新 run：真机 PID=`34764`、runID=`8425AEE8-5D65-4742-96E1-EBF75BDB4E51`，签名包 debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`。851.217207 秒同 PID Instruments trace 覆盖十次页面退出/重入和最终 idle；十轮活动 Vision 成功增量 `666/658/686/673/683/686/683/684/685/681`，每轮页面移除 30 秒后已观察 owner/Compose/Metal/bridge 弱引用均为 0。trace TOC 的 PID/安装路径与 CoreDevice 回执匹配，但 `dyld-library-load` 无映像行，故没有独立 trace UUID 回读。
