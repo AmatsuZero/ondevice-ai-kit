@@ -1,8 +1,14 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-01 F02 最终 App 链接与 simulator 运行时事件
+
+普通 unsigned generic simulator App 链接成功后，未引用研究 C ABI 的最终 debug dylib 被 `dead_strip`，因此不能只看 static framework archive 的符号。ignored consumer 加入显式 research probe 后，`xcode-app-sim-probe6.log` **BUILD SUCCEEDED**；最终 debug dylib UUID=`A93B4B79-57D6-32DE-B4F0-5DB2B983AF56`，包含五个 instrumentation C ABI，App stub UUID=`AFD5B670-07B7-3718-8C4E-07035B2018E0`。这是研究 consumer 的最终链接证据，不是生产 Demo 改动。
+
+在 iPhone 18 Pro / iOS 27.2 simulator（UDID=`C8D20AFB-8CDF-4968-92E5-069F732C241E`）安装启动后，PID=`70773` 的 unified log 回读 `eventCount=0`，2 秒后 `delayedCount=120 copied=120 dropped=0 correctRun=true`，事件 kind 计数为 new-allocated 9、new-reused 21、destructor entry/exit 30/30、delete-cached 24、delete-freed 6。说明最终 app 中 C ABI 调用、88-byte event 结构复制、runId 和零丢失计数均可工作，且普通 Compose 页面产生了 AtlasTextOp 生命周期事件。该 run 没有触发 `ClearCache` 或 thread-exit kind，也没有做真机三页协议；P4/F02 仍 `open/not-ready`。
+
 ## 2026-11-01 F02 双 slice framework link 回读
 
-隔离 committed-snapshot consumer 已分别完成 `:demo:shared:linkDebugFrameworkIosSimulatorArm64` 与 `:demo:shared:linkDebugFrameworkIosArm64`，两者均 `BUILD SUCCESSFUL`。生成的静态 framework archive 均含 `gpu.AtlasTextOp.o`、`CMPMetalLayer.o` 以及五个 instrumentation C ABI 符号；simulator archive SHA-256=`c85dcb91718af355cd9215517ee349ff0d813eaaf5562b4848a1306b4bda9077`，device archive SHA-256=`5c7b92eaae51b34bdd0ce1aef8f3f1b4237c67ba83b681117c875a4e00e0824e`。完整符号/平台回读见 ignored `artifacts/verification/f02-consumer-20261101/framework-evidence.json`（SHA-256=`bab07b0cc5761bf28e793a019c53922aa18d1a052e9fd66bad3588448a6069af`）。
+隔离 committed-snapshot consumer 已分别完成 `:demo:shared:linkDebugFrameworkIosSimulatorArm64` 与 `:demo:shared:linkDebugFrameworkIosArm64`，两者均 `BUILD SUCCESSFUL`。生成的静态 framework archive 均含 `gpu.AtlasTextOp.o`、`CMPMetalLayer.o` 以及五个 instrumentation C ABI 符号；simulator archive SHA-256=`c85dcb91718af355cd9215517ee349ff0d813eaaf5562b4848a1306b4bda9077`，device archive SHA-256=`5c7b92eaae51b34bdd0ce1aef8f3f1b4237c67ba83b681117c875a4e00e0824e`。完整符号/平台回读见 ignored `artifacts/verification/f02-consumer-20261101/framework-evidence.json`（SHA-256=`c9de48b8376ab1f9797b3adb5ec9415938cadfcac02c1c09e86e28a34240fcae`）。
 
 两个输出是 static archive，不能取得 `LC_UUID`；最终 app executable 尚未链接，因此当前只证明 **Kotlin/Native framework archive link 与 instrumented object/C ABI 包含**，不证明 Compose renderer/Metal layer 的运行时身份、C ABI 运行时调用或真机 P4 三页协议。F02/P4 仍 `open/not-ready`。
 
