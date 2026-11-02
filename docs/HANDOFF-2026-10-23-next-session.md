@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-02 F02 授权已完成与 F11 Video SR 报告合同复核
+
+- 用户再次表示可处理 F02 系统相机弹窗；该授权及同 PID 十轮真机 trace 已在下方 `F02 tokenized recorder 同 PID 真机 trace 已配对` 检查点完成，无需重复启动研究 App 或请求授权。F02 生产依赖归属、无 recorder 候选及长期资源门槛仍开放。
+- 复核 `f11-videosr-20261030` 的成功设备报告和两份质量报告，三份 SHA-256 均与[Video SR 验证记录](validation/video-sr-backends.md)一致。成功报告只有汇总 p50/p95，没有逐帧耗时、device、OS、runId；同目录的 device/OS/runId 报告仅为另一次系统模型能力查询，不能拼接。两份质量报告 `qualityVerdict=unverified`。已在[P11 分组报告](validation/p11-grouped-benchmark.md)写明下一次同一成功报告所需身份及逐帧原始数据；当前仍 **3项能力/4组，P11 open/not-ready**，没有把单素材 PSNR/SSIM 升级为主观质量通过。
+- 本轮 `devicectl list devices` 在当前受限环境报 `Timed out waiting for CoreDeviceService to fully initialize`，不据此判断设备断开；未重装或启动 App，未操作相机/相册。九项受保护 dirty/untracked 文件保留。下一步若做 Video SR 新采样，先使 probe 成功报告保留同次 run 身份与逐帧耗时，再运行真机并校验质量输入/输出哈希。
+
 ## 最新续接 — 2026-11-02 F11 iOS TTS 纳入分组报告
 
 - F11 工作包提交 `02d3fe5f4443b3fe4786de5d86d0628c76030833` 已同步 `origin` 与 `jihu`；双端 F11 issue `#11` 均已添加同文进展评论，保持 issue 开放。

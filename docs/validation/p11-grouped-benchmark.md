@@ -34,6 +34,6 @@ python3 tools/p11_grouped_report.py \
 
 readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **3项能力/4组**。其余6项保持 `unverified`：Speech ASR file、Speech ASR Android、Video SR、Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。新 readiness 快照校验了70个 evidence paths、78个 source hashes，9行仍有 gap。
 
-其中 Video SR 已有独立 per-frame p50/p95、PSNR/SSIM 和边界文档，但旧报告没有与本工具相同的 device/OS/run identity 合同，且 `qualityVerdict` 明确为 `unverified`，因此没有被硬映射。文件 ASR 的现有五次资源数据来自直连 Speech framework 的隔离 probe，不能冒充 SDK client 分组；身份、相机与 LiteRT-LM 同理保留各自证据和缺口。
+其中 Video SR 已有独立 per-frame p50/p95、PSNR/SSIM 和边界文档。复核 `f11-videosr-20261030` 的哈希固定成功报告后，确认它只保存计算后的 p50/p95，没有逐帧耗时、device、OS 或 runId；同目录另一个含 device/OS/runId 的报告只记录系统模型能力查询，属于不同运行，不能拼接为成功 benchmark。两份质量报告均明确 `qualityVerdict=unverified`。因此继续保持 Video SR 的 grouped `unverified`，下一次采样须在同一成功报告中保留设备/系统/run 身份及逐帧原始耗时，再核验质量报告的输入/输出哈希关系；单素材 PSNR/SSIM 不升级为主观质量通过。文件 ASR 的现有五次资源数据来自直连 Speech framework 的隔离 probe，不能冒充 SDK client 分组；身份、相机与 LiteRT-LM 同理保留各自证据和缺口。
 
 本包不运行设备、不下载模型、不接受许可证。P11 仍为 `open`，最终发布结论仍为 `not-ready`；后续需逐能力补齐兼容原始报告或保持明确 unavailable/unverified，并完成最低系统、质量、资源、取消和持续运行门禁。
