@@ -136,6 +136,33 @@ def sdk_video_sr_run():
     }
 
 
+def sdk_file_asr_run():
+    return {
+        "schemaVersion": 1, "status": "success", "runId": "asr-session",
+        "scope": "SpeechRecognitionClient.recognize -> AppleSpeechRecognizerBackend.recognize",
+        "device": "iPhone", "OS": "27.0.1", "processIdentifier": 1234,
+        "bundleId": "io.ondeviceai.probe.f11speech", "backendId": "apple.speech.recognizer",
+        "inputSHA256": "", "audioSource": "bundled-asr-fixture.caf", "locale": "en-US",
+        "expectedText": "The blue bicycle is beside the green house.",
+        "requiresOnDeviceRecognition": True, "microphoneUsed": False,
+        "networkBehavior": "unmeasured", "clientClosed": True,
+        "measurementMethod": "process RSS sampled approximately every 10 ms",
+        "sampleProfile": "one warm-up then five sequential fixed-file SDK recognitions",
+        "warmup": {"status": "success", "actualBackendId": "apple.speech.recognizer",
+                   "backendIdentityMatch": True, "normalizedMatch": True,
+                   "transcript": "The blue bicycle is beside the greenhouse"},
+        "resourceRuns": [
+            {"sampleIndex": index, "runId": f"asr-{index}", "status": "success",
+             "actualBackendId": "apple.speech.recognizer", "backendIdentityMatch": True,
+             "normalizedMatch": True, "transcript": "The blue bicycle is beside the greenhouse",
+             "durationMs": float(index + 1), "rssStartBytes": 100,
+             "rssEndBytes": 110, "rssPeakSampledBytes": 200 + index,
+             "rssSampleCount": 10}
+            for index in range(5)
+        ],
+    }
+
+
 class GroupedReportTests(unittest.TestCase):
     def write_manifest(self, root, sources, readiness=None):
         if readiness is None:
@@ -286,6 +313,107 @@ class GroupedReportTests(unittest.TestCase):
             path.write_text(json.dumps(quality))
             entry["quality"][label] = {"path": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
         return manifest
+
+    def sdk_asr_manifest(self, root, raw=None):
+        raw = raw or sdk_file_asr_run()
+        readiness = {"schemaVersion": 1, "rows": [
+            {"capability": "speech-asr-file", "status": "pass-bounded", "unverified": ["quality"]},
+            {"capability": "video-sr", "status": "pass-bounded", "unverified": ["quality"]}],
+            "p11Gate": {"status": "open", "finalReleaseConclusion": "not-ready"}}
+        manifest = self.write_manifest(
+            root, [("asr", raw, "asr-file-sdk-resource", "speech-asr-file")], readiness=readiness)
+        entry = manifest["sources"][0]
+        input_path = root / "asr.caf"
+        input_path.write_bytes(b"synthetic speech fixture")
+        entry["input"] = {"path": input_path.name,
+                          "sha256": hashlib.sha256(input_path.read_bytes()).hexdigest()}
+        raw["inputSHA256"] = entry["input"]["sha256"]
+        raw_path = root / entry["path"]
+        raw_path.write_text(json.dumps(raw))
+        entry["sha256"] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+        sources = {entry["path"]: entry["sha256"],
+                   entry["input"]["path"]: entry["input"]["sha256"]}
+        source_manifest = {"schemaVersion": 1, "sourceCommit": "a" * 40,
+                           "sourceHashes": sources}
+        source_path = root / "source-manifest.json"
+        source_path.write_text(json.dumps(source_manifest))
+        entry["sourceManifest"] = {"path": source_path.name,
+                                   "sha256": hashlib.sha256(source_path.read_bytes()).hexdigest()}
+        summary = {"schemaVersion": 1, "validationStatus": "pass-bounded",
+                   "backendId": raw["backendId"], "bundleId": raw["bundleId"],
+                   "scope": raw["scope"], "runId": raw["runId"],
+                   "inputSHA256": raw["inputSHA256"], "processIdentifier": raw["processIdentifier"],
+                   "measurementMethod": raw["measurementMethod"], "measuredRuns": 5,
+                   "warmup": "success", "rawReportSha256": entry["sha256"],
+                   "sourceManifestSha256": entry["sourceManifest"]["sha256"],
+                   "durationMs": {"p50": 3.0, "p95": 5.0},
+                   "rssPeakSampledBytes": {"min": 200, "max": 204},
+                   "unverified": ["natural speech CER/WER", "energy"]}
+        summary_path = root / "asr-summary.json"
+        summary_path.write_text(json.dumps(summary))
+        entry["summary"] = {"path": summary_path.name,
+                            "sha256": hashlib.sha256(summary_path.read_bytes()).hexdigest()}
+        return manifest
+
+    def test_sdk_file_asr_recomputes_five_runs_without_quality_promotion(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            result = report.generate(self.sdk_asr_manifest(root), root)
+        self.assertEqual(len(result["groups"]), 1)
+        group = result["groups"][0]
+        self.assertEqual(group["kind"], "asr-file-sdk-resource")
+        self.assertEqual(group["p11Capability"], "speech-asr-file")
+        self.assertEqual(group["runIds"], [f"asr-{index}" for index in range(5)])
+        self.assertEqual(group["timingsMs"]["duration"], {"count": 5, "p50": 3.0, "p95": 5.0})
+        self.assertEqual(group["memory"]["peakSampledBytes"], {"count": 5, "p50": 202, "p95": 204})
+        self.assertEqual(group["quality"]["status"], "unverified")
+        self.assertEqual(result["p11Gate"], {"status": "open", "finalReleaseConclusion": "not-ready"})
+
+    def test_sdk_file_asr_rejects_bad_run_and_cross_file_identity(self):
+        for corruption in ("duplicate", "failed", "bad-rss", "wrong-transcript",
+                           "summary-raw", "manifest-input"):
+            with self.subTest(corruption=corruption), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                raw = sdk_file_asr_run()
+                if corruption == "duplicate":
+                    raw["resourceRuns"][1]["runId"] = raw["resourceRuns"][0]["runId"]
+                elif corruption == "failed":
+                    raw["resourceRuns"][1]["normalizedMatch"] = False
+                elif corruption == "bad-rss":
+                    raw["resourceRuns"][1]["rssPeakSampledBytes"] = 1
+                elif corruption == "wrong-transcript":
+                    raw["resourceRuns"][1]["transcript"] = "not the expected phrase"
+                manifest = self.sdk_asr_manifest(root, raw)
+                entry = manifest["sources"][0]
+                if corruption == "summary-raw":
+                    path = root / entry["summary"]["path"]
+                    summary = json.loads(path.read_text())
+                    summary["rawReportSha256"] = "b" * 64
+                    path.write_text(json.dumps(summary))
+                    entry["summary"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+                elif corruption == "manifest-input":
+                    path = root / entry["sourceManifest"]["path"]
+                    source = json.loads(path.read_text())
+                    source["sourceHashes"][entry["input"]["path"]] = "b" * 64
+                    path.write_text(json.dumps(source))
+                    entry["sourceManifest"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+                with self.assertRaises(ValueError):
+                    report.generate(manifest, root)
+
+    def test_sdk_file_asr_rejects_wrong_capability_and_output_alias(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.sdk_asr_manifest(root)
+            entry = manifest["sources"][0]
+            entry["p11Capability"] = "video-sr"
+            with self.assertRaisesRegex(ValueError, "cannot report"):
+                report.generate(manifest, root)
+            entry["p11Capability"] = "speech-asr-file"
+            output = root / entry["input"]["path"]
+            before = output.read_bytes()
+            with self.assertRaisesRegex(ValueError, "output must not overwrite"):
+                report.write_report(manifest, root, output)
+            self.assertEqual(output.read_bytes(), before)
 
     def test_sdk_video_group_recomputes_five_full_requests_separately(self):
         with tempfile.TemporaryDirectory() as directory:

@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-02 F11 SDK 文件 ASR 独立分组
+
+- 既有 `SpeechRecognitionClient.recognize → AppleSpeechRecognizerBackend.recognize` 五次固定文件真机报告此前已在 readiness，但 grouped 的 `speech-asr-file` 仍无兼容来源。本轮新增独立 `asr-file-sdk-resource`，以 manifest 哈希固定原始报告、bounded summary、来源清单和合成 CAF；核对五个不同成功 run 的后端、归一化文本、RSS、耗时、输入身份和摘要交叉引用，重算最近秩统计。它不合并独立的直连 Speech framework 探针，也不使用设备/麦克风/相册。
+- 新 ignored readiness `artifacts/verification/p11-readiness-20261102-sdk-asr-grouped/summary.json` SHA-256=`a2b74c6b168efb943a7c863bb39277411ece8e234319d422e747a0dbe52a83b4`，校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**；新 grouped `artifacts/verification/p11-grouped-20261102-sdk-asr/summary.json` SHA-256=`be8796dbab1e3528f18f5bda3c7d09ab1f1b0cf905294e7b975c0692f009fdab`，**5项能力/8组**。ASR duration p50/p95=`76.484458/93.435792 ms`，约10 ms 采样进程 RSS 峰值 p50/p95=`36,913,152/36,929,536 B`。固定合成语音的匹配不是自然 CER/WER、真实麦克风、离线网络、真实/GPU 峰值、能耗或最低系统验收。P11/发布仍 `open/not-ready`。
+- 先见新增测试 RED，再见 reporter/readiness **36/36**、完整 `tools/tests` 在 Ruby 3.4 和允许 SwiftPM 环境 **240/240**、`py_compile` 与 `git diff --check` 通过。独立复审发现只信任原报告的 `normalizedMatch=true`，未重算转写身份；加入错误转写但标记匹配的 RED 用例，按 probe 的小写字母/数字规则重算后 GREEN，完整套件再次 **240/240**。九项受保护 dirty/untracked 路径未改。之后需精确提交、同步 `origin`/`jihu` 并更新双端 F11 issue。
+
 ## 最新续接 — 2026-11-02 F11 SDK Video SR 独立分组
 
 - 用户再次回复可以处理 F02 相机弹窗；该授权与同 PID 十轮 trace 已在下方 F02 检查点完成，本轮无需重新启动研究 App 或使用相机。九项受保护 dirty/untracked 路径继续保留。

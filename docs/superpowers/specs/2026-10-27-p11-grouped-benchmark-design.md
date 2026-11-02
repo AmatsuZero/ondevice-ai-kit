@@ -83,3 +83,7 @@ capabilities unreported by this grouped snapshot.
 ## 2026-11-02 extension: public SDK Video SR requests
 
 The later five-run public SDK Video SR report is a separate `video-sr-sdk-resource` source kind. Its complete request wall time and sampled process RSS cannot be aggregated with the existing system probe's per-frame processing time. The manifest additionally pins its bounded summary, input/reference media, five distinct outputs, and first/last quality reports by SHA-256; linked files must have distinct filesystem identities. Add `kind` to the grouping key so the two Video SR groups remain distinct even on the same device and backend. The original nine-capability coverage and `open/not-ready` gate remain unchanged.
+
+## 2026-11-02 extension: SDK client fixed-file ASR
+
+The retained five-run `SpeechRecognitionClient` report is a separate `asr-file-sdk-resource` source kind. Bind its raw report, bounded summary, source manifest, and synthetic CAF by SHA-256, verify their cross-references and five successful request identities, and recompute duration and sampled RSS nearest-rank statistics. It reports `speech-asr-file` coverage without treating fixed synthetic transcript match as natural speech quality or merging the independent direct Speech framework probe. The original P11 release gate remains open.

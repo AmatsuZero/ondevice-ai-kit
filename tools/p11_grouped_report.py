@@ -20,13 +20,15 @@ except ModuleNotFoundError:  # Direct `python tools/p11_grouped_report.py` invoc
 
 
 SCHEMA_VERSION = 1
-_KINDS = {"face", "mlxvlm", "tts-resource", "video-sr-resource", "video-sr-sdk-resource"}
+_KINDS = {"face", "mlxvlm", "tts-resource", "video-sr-resource", "video-sr-sdk-resource",
+          "asr-file-sdk-resource"}
 _KIND_CAPABILITIES = {
     "face": {"face-detection"},
     "mlxvlm": {"multimodal-apple"},
     "tts-resource": {"speech-tts"},
     "video-sr-resource": {"video-sr"},
     "video-sr-sdk-resource": {"video-sr"},
+    "asr-file-sdk-resource": {"speech-asr-file"},
 }
 
 
@@ -239,6 +241,128 @@ def _tts_group(
         "energy": {"status": "unmeasured"},
         "unverified": ["naturalVoiceQuality", "offlineNetworkBehavior", "truePeakMemory",
                        "energy", "gpuPeak", "minimumOS"],
+    }
+
+
+def _normalized_asr_text(value: str) -> str:
+    return "".join(character for character in value.lower() if character.isalnum())
+
+
+def _asr_file_sdk_group(raw: dict[str, Any], entry: dict[str, Any], repo_root: Path) -> dict[str, Any]:
+    summary_entry = entry.get("summary")
+    source_entry = entry.get("sourceManifest")
+    input_entry = entry.get("input")
+    if not all(isinstance(item, dict) for item in (summary_entry, source_entry, input_entry)):
+        raise ValueError("invalid SDK file ASR evidence entries")
+    evidence_paths = [_relative_path(repo_root, item.get("path"), "SDK file ASR evidence path")
+                      for item in (entry, summary_entry, source_entry, input_entry)]
+    for index, path in enumerate(evidence_paths):
+        if any(_is_alias(path, earlier) for earlier in evidence_paths[:index]):
+            raise ValueError(f"SDK file ASR evidence alias: {path}")
+    _, summary = _verify_file(repo_root, summary_entry, "SDK file ASR summary")
+    _, source_manifest = _verify_file(repo_root, source_entry, "SDK file ASR source manifest")
+    _verify_hash(repo_root, input_entry, "SDK file ASR input")
+    source_hashes = source_manifest.get("sourceHashes")
+    if (source_manifest.get("schemaVersion") != 1
+            or not isinstance(source_manifest.get("sourceCommit"), str)
+            or not source_manifest["sourceCommit"]
+            or not isinstance(source_hashes, dict)
+            or source_hashes.get(entry["path"]) != entry["sha256"]
+            or source_hashes.get(input_entry["path"]) != input_entry["sha256"]):
+        raise ValueError("invalid SDK file ASR source manifest identity")
+
+    backend = "apple.speech.recognizer"
+    scope = "SpeechRecognitionClient.recognize -> AppleSpeechRecognizerBackend.recognize"
+    session_id = raw.get("runId")
+    runs = raw.get("resourceRuns")
+    warmup = raw.get("warmup")
+    if (raw.get("schemaVersion") != 1 or raw.get("status") != "success"
+            or raw.get("scope") != scope or raw.get("backendId") != backend
+            or not isinstance(raw.get("device"), str) or not raw["device"]
+            or not isinstance(raw.get("OS"), str) or not raw["OS"]
+            or not isinstance(session_id, str) or not session_id
+            or not isinstance(raw.get("bundleId"), str) or not raw["bundleId"]
+            or type(raw.get("processIdentifier")) is not int or raw["processIdentifier"] <= 0
+            or raw.get("inputSHA256") != input_entry["sha256"]
+            or raw.get("audioSource") != "bundled-asr-fixture.caf"
+            or raw.get("locale") != "en-US"
+            or not isinstance(raw.get("expectedText"), str) or not raw["expectedText"]
+            or raw.get("requiresOnDeviceRecognition") is not True
+            or raw.get("microphoneUsed") is not False
+            or raw.get("networkBehavior") != "unmeasured"
+            or raw.get("clientClosed") is not True
+            or not isinstance(raw.get("measurementMethod"), str) or not raw["measurementMethod"]
+            or not isinstance(raw.get("sampleProfile"), str) or not raw["sampleProfile"]
+            or not isinstance(warmup, dict) or warmup.get("status") != "success"
+            or warmup.get("actualBackendId") != backend
+            or warmup.get("backendIdentityMatch") is not True
+            or warmup.get("normalizedMatch") is not True
+            or not isinstance(warmup.get("transcript"), str) or not warmup["transcript"]
+            or not _normalized_asr_text(raw["expectedText"])
+            or _normalized_asr_text(warmup["transcript"]) != _normalized_asr_text(raw["expectedText"])
+            or not isinstance(runs, list) or len(runs) != 5):
+        raise ValueError("invalid SDK file ASR source identity")
+
+    run_ids: set[str] = set()
+    durations: list[float] = []
+    peaks: list[int] = []
+    for index, run in enumerate(runs):
+        if not isinstance(run, dict):
+            raise ValueError("invalid SDK file ASR run")
+        run_id = run.get("runId")
+        duration = run.get("durationMs")
+        start, end, peak = (run.get(field) for field in (
+            "rssStartBytes", "rssEndBytes", "rssPeakSampledBytes"))
+        if (not isinstance(run_id, str) or not run_id or run_id == session_id
+                or run_id in run_ids or run.get("sampleIndex") != index
+                or run.get("status") != "success"
+                or run.get("actualBackendId") != backend
+                or run.get("backendIdentityMatch") is not True
+                or run.get("normalizedMatch") is not True
+                or not isinstance(run.get("transcript"), str) or not run["transcript"]
+                or _normalized_asr_text(run["transcript"]) != _normalized_asr_text(raw["expectedText"])
+                or type(duration) not in (int, float)
+                or not math.isfinite(duration) or duration <= 0
+                or any(type(value) is not int or value < 0 for value in (start, end, peak))
+                or peak < max(start, end)
+                or type(run.get("rssSampleCount")) is not int or run["rssSampleCount"] <= 0):
+            raise ValueError("invalid SDK file ASR run")
+        run_ids.add(run_id)
+        durations.append(duration)
+        peaks.append(peak)
+    timing = _nearest_rank(durations)
+    if (summary.get("schemaVersion") != 1 or summary.get("validationStatus") != "pass-bounded"
+            or summary.get("backendId") != backend
+            or summary.get("bundleId") != raw["bundleId"]
+            or summary.get("scope") != scope or summary.get("runId") != session_id
+            or summary.get("inputSHA256") != input_entry["sha256"]
+            or summary.get("processIdentifier") != raw["processIdentifier"]
+            or summary.get("measurementMethod") != raw["measurementMethod"]
+            or summary.get("measuredRuns") != 5 or summary.get("warmup") != "success"
+            or summary.get("rawReportSha256") != entry["sha256"]
+            or summary.get("sourceManifestSha256") != source_entry["sha256"]
+            or summary.get("durationMs") != {"p50": timing["p50"], "p95": timing["p95"]}
+            or summary.get("rssPeakSampledBytes") != {"min": min(peaks), "max": max(peaks)}
+            or not isinstance(summary.get("unverified"), list) or not summary["unverified"]):
+        raise ValueError("invalid SDK file ASR summary identity")
+    return {
+        "kind": "asr-file-sdk-resource", "p11Capability": "speech-asr-file",
+        "source": entry["path"], "sourceSha256": entry["sha256"],
+        "summary": dict(summary_entry), "sourceManifest": dict(source_entry),
+        "scope": scope, "device": raw["device"], "OS": raw["OS"],
+        "actualBackend": backend,
+        "identity": {"sessionRunId": session_id, "sourceCommit": source_manifest["sourceCommit"],
+                     "inputFileSha256": raw["inputSHA256"], "input": dict(input_entry),
+                     "bundleId": raw["bundleId"], "processIdentifier": raw["processIdentifier"],
+                     "locale": raw["locale"], "sampleProfile": raw["sampleProfile"]},
+        "runIds": [run["runId"] for run in runs],
+        "timingsMs": {"duration": timing},
+        "quality": {"status": "unverified", "reason": "fixed synthetic transcript match is not natural speech CER/WER"},
+        "memory": {"status": "observed-sampled", "method": raw["measurementMethod"],
+                   "peakSampledBytes": _nearest_rank(peaks)},
+        "energy": {"status": "unmeasured"},
+        "unverified": ["microphone", "naturalSpeechCERWER", "offlineNetworkBehavior",
+                       "truePeakMemory", "gpuPeak", "energy", "minimumOS", "crossDevice"],
     }
 
 
@@ -558,6 +682,8 @@ def generate(manifest: dict[str, Any], repo_root: Path) -> dict[str, Any]:
             groups.append(_mlx_group(raw, capability, entry["path"], digest, entry.get("expectedSamples")))
         elif entry["kind"] == "tts-resource":
             groups.append(_tts_group(raw, entry, repo_root))
+        elif entry["kind"] == "asr-file-sdk-resource":
+            groups.append(_asr_file_sdk_group(raw, entry, repo_root))
         elif entry["kind"] == "video-sr-resource":
             groups.extend(_video_sr_groups(raw, entry, repo_root))
         else:
@@ -611,6 +737,8 @@ def _reject_output_aliases(
     candidates = [manifest.get("readiness"), *sources,
                   *(entry.get("summary") for entry in sources if isinstance(entry, dict) and entry.get("summary"))]
     for source in sources:
+        if isinstance(source, dict) and source.get("kind") == "asr-file-sdk-resource":
+            candidates.extend(source.get(key) for key in ("sourceManifest", "input"))
         if not isinstance(source, dict) or source.get("kind") not in ("video-sr-resource", "video-sr-sdk-resource"):
             continue
         candidates.extend(source.get(key) for key in ("input", "reference"))
