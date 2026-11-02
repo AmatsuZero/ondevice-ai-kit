@@ -1,5 +1,15 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-02 F02 生产依赖归属与候选门槛
+
+**源码归属**：当前 Demo 的 `demo/shared/build.gradle.kts` 通过 Compose UI 引入渲染器；版本目录固定 Compose `1.11.1`、Kotlin `2.4.0`。独立 committed-source consumer 的 iOS arm64 依赖图显示 `org.jetbrains.skiko:skiko:0.144.6 → skiko-iosarm64:0.144.6`。待修正的 `thread_local void* gCache`、`operator new/delete` 和 `ClearCache()` 都在 Skia `src/gpu/ganesh/ops/AtlasTextOp.cpp`，不在本项目的相机页面或 KMP bridge。Skiko 将对应 Skia 静态库装入 iOS Klib，Compose 再传递引入它。因此源码修复应由 Skia 层承载；本项目负责验证和选择可追溯的 Skiko/Compose 分发物，不能只在 Demo 页面清理状态来代替原生缓存修复。以上是源码及依赖图归属，不是上游维护者已接受补丁的声明。
+
+**当前候选**：ignored `artifacts/verification/f02-remediation-20261101/AtlasTextOp-tls-owner.patch` 仅将原始 TLS 指针改为带析构的 `CacheOwner`，保留单槽复用与 `ClearCache()` 行为。固定 Skia `22f58c9fd43d55bde818821c04b48fda5d7ec939`、Skiko `9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0` 的隔离构建已通过 iOS arm64/simulator arm64、root 与 AWT 的正常本地 BuildRepo publication；source-free consumer 的两个 framework 强制重链成功，签名研究 App 在真机运行十轮。tokenized recorder 同 PID trace 将 58 个持缓存线程退出与同 generation free 完成配对，唯一最终 live 缓存仍由未观察退出的线程持有。它支持 TLS owner 候选的限定机制，不构成生产依赖、完整跨平台 Skiko 发布、长期资源稳定或 P4/P11 验收。
+
+**进入生产的门槛**：先取得经源码复审的 Skia 修复及可固定版本的 Skiko 分发路径（上游发布，或经独立审查、可复现且可维护的项目专用发布物）；再用当前 Compose/Kotlin 图验证 iOS 双 slice Klib、root/所需 variant、ABI、最终 App 链接及实际 Compose/Metal 渲染路径。正式无 recorder 候选需以独立固定源码 consumer 重建，匹配最终二进制身份，在真机做原 P4 页面协议和持续重入资源观察；instrumented 逐地址事件与正式候选结果分别报告，不把研究记录器本身带入生产。通过这些门槛前，生产依赖、锁定版本和 Demo 均不改，F02/P4/P11 保持 `open/not-ready`。
+
+**尚未证明**：本轮只读上游 issue 搜索未返回匹配项；进一步 PR/fork 查询被自动审批服务 HTTP 429 拒绝且未执行，不能据此断言上游没有修复或正式发布。生产分发选择、跨平台 variant 完整性、独立代码复审及长期资源预算仍待专项裁定。
+
 ## 2026-11-02 F02 tokenized recorder 同 PID 真机 trace 结论
 
 相机授权后，隔离研究 App 最终 dylib UUID=`8F434AF5-713D-3063-98F1-3B583F1F68A4` 在 iPhone 16 Pro Max / iOS 27.0.1 以 PID `35714`、runID=`792FC36B-ACA8-447E-AD1C-F8DAE7764D48` 完成十轮页面重入。十个 30 秒活动窗口 Vision 成功增量为 `698/669/663/665/655/677/661/688/693/663`；86 个报告样本，最终页面弱引用全部释放，末轮 31/35/60 秒 idle 观察值均为 0。page-absent 30 秒 RSS 首末 +`8,716,288 B`，不做 Atlas 归因。

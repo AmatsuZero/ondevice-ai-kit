@@ -26,7 +26,7 @@
 | 编号 / 负责范围 | 问题与已有证据 | 恢复输入 / 下一动作 | 专项退出标准 |
 | --- | --- | --- | --- |
 | F01 / iOS Demo | [P4](p4-camera-stability.md)：真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 已完成；真实 PHPicker→controller 仍未验 | sandbox 子项已完成，证据见 `artifacts/verification/p4-picker-sandbox-device/summary.json`；后续若恢复 PHPicker 专项，才考虑合成资产的 Photos provider 路径；当前不写入 Photos | 三例实际选择同一指定合成资产，尺寸/镜像像素及 `apple.vision.face` 成功结果均可复核；sandbox 结果不替代 PHPicker，且不读取私人照片 |
-| F02 / Compose/Skia 资源 | [AtlasTextOp](p4-atlas-text-cache.md)：tokenized recorder 同 PID 十轮真机 trace 完成 1,380,716 条事件与 111,141 行分配配对；58 个持缓存线程退出均有同 generation free 完成。最终两条 live 128 B 中一条是 TLS 析构注册，唯一缓存存储仍由未观察退出的线程持有；独立限定复审 `WATCH`，生产依赖未改 | 裁定生产所有权和正式修复，使用无 recorder 候选做长期资源门槛及原 P4/P11 验收 | 匹配 runtime UUID、对象地址、分配/析构/free/TLS 与线程生命周期；修复或有证据的边界裁定，并证明持续重入行为 |
+| F02 / Compose/Skia 资源 | [AtlasTextOp](p4-atlas-text-cache.md)：tokenized recorder 同 PID 十轮真机 trace 完成 1,380,716 条事件与 111,141 行分配配对；58 个持缓存线程退出均有同 generation free 完成。最终两条 live 128 B 中一条是 TLS 析构注册，唯一缓存存储仍由未观察退出的线程持有；独立限定复审 `WATCH`，生产依赖未改。源码修复归属 Skia，Skiko/Compose 是生产分发链 | 取得经复审的 Skia 修复与可追溯 Skiko 分发物，完成 Compose/Kotlin 兼容、iOS 双 slice 和正式无 recorder 候选验证，再做长期资源门槛及原 P4/P11 验收 | 匹配 runtime UUID、对象地址、分配/析构/free/TLS 与线程生命周期；修复或有证据的边界裁定，并证明持续重入行为 |
 | F03 / 最低系统 | [设备矩阵](device-matrix.md)：iOS15/API26 缺设备 | 取得相应真机后恢复启动、availability、权限、选图/相机、取消、前后台、离线门禁 | 两平台最低系统实际运行报告；编译下限不替代运行验收 |
 | F04 / Speech iOS/TTS | [语音](speech-backends.md)、[麦克风计划](../superpowers/plans/2026-10-20-ios-microphone-asr.md)：自然麦克风终态、中文质量/取消重入/后台、TTS 自然质量与完整离线矩阵仍缺 | 受控授权录音和文本/语言任务集，保留准确转写参考及网络观测方法 | 麦克风终态、资源 drain、取消重入/后台、CER/WER、自然 TTS 与离线矩阵逐项报告 |
 | F05 / Speech Android | [语音](speech-backends.md)：on-device ASR 返回 MISSING_ASSETS | 提供设备支持且授权的系统离线语音资源 | 真实转写、取消/close/重入、离线与自然质量验收；仍缺资产时明确 unavailable |

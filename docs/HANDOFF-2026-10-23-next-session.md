@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-02 F02 生产依赖源码归属
+
+- [AtlasTextOp 调查](validation/p4-atlas-text-cache.md)新增有界归属结论：当前 Demo 的 Compose `1.11.1` 传递解析到 Skiko `0.144.6`；TLS 缓存及候选修复位于 Skia `AtlasTextOp.cpp`。Skia 承载源码修复，Skiko/Compose 是生产分发链，本项目负责选择可追溯分发物并做兼容与真机验收；这不是上游已接受补丁或生产依赖已修复的声明。[F02 跟踪行](validation/foundation-followups.md)已据此明确下一门槛。
+- 本轮只做依赖图、固定 patch 与既有候选证据的本地复核，未启动研究 App、变更生产依赖或接触受保护九项 dirty/untracked 文件。上游 issue 的只读搜索无匹配；进一步 PR/fork 查询被自动审批服务 HTTP 429 拒绝、命令未执行，不据此判断上游状态。F02/P4/P11 仍 `open/not-ready`。
+
 ## 最新续接 — 2026-11-02 F02 授权答复与 F11 双端同步
 
 - 用户回复可以处理 F02 系统相机授权；该授权及同 PID 十轮真机 trace 已在下方 F02 检查点完成。本次没有重新启动研究 App、申请权限或采集相机数据；F02 仍待生产依赖归属、无 recorder 正式候选和长期资源门槛。
