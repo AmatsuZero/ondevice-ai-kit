@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-02 F11 iOS TTS 纳入分组报告
+
+- 当前 `benchmark/p11/grouped-report-manifest.json` 增加 `tts-resource`，同时固定真实 iOS TTS 原始报告与既有摘要 SHA-256；`tools/p11_grouped_report.py` 校验两者哈希关系、五个不同成功 run、duration/采样 RSS、固定 voice/locale/SDK 来源，并拒绝输出覆盖嵌套摘要。17 个定向单测通过。此改动只扩展分组报告，未更改运行时、依赖或模型。
+- 从最新 F02 证据刷新 ignored readiness 快照，校验 **70 evidence paths / 78 source hashes / 9 rows with gaps**。新 grouped 输出为 **3项能力/4组**，iOS TTS `apple.avspeech` 五次 duration p50/p95=`2779.726917/2779.791875 ms`，约10 ms 采样 RSS 峰值 p50/p95 均 `44,810,240 B`。这是固定 `en-US` Samantha 的隔离 SDK TTS probe，不是正式 App 整链路或自然音质、断网、真实峰值、GPU/energy、最低系统验收；文件 ASR 直连 Speech framework 的报告仍未映射成 SDK 分组。P11 `open/not-ready`。
+- 证据输出在 ignored `artifacts/verification/p11-readiness-20261102-f11-tts/` 与 `artifacts/verification/p11-grouped-benchmark-20261102-tts/`，生成入口及限制见 [P11 分组报告](validation/p11-grouped-benchmark.md)。受保护九项 dirty/untracked 文件保持原样。F02 生产依赖归属仍需明确；独立 dependency-expert 调用遇 429，无依赖方案审批结论。
+- 四个相关 Python reporter/readiness 套件 **44/44**、`compileall` 和 `git diff --check` 通过。全量 `tools/tests` 229 项有 **13 failures / 8 errors**，落在无权写 Swift/Clang 用户缓存与系统 Ruby 2.6 加载 RVM Ruby 3.4 gem 的环境路径，未把它计作通过；完整日志 `/private/tmp/f11-tools-tests-20261102.log`。本轮新增的 grouped/readiness 测试无失败。
+
 ## 最新续接 — 2026-11-02 F02 tokenized recorder 真机 trace 已配对
 
 - 三份验证/续接文档已单独提交 `107346b7942f7f378b640c5cdd18feee11ffb769` 并同步 `origin` 与 `jihu`；GitHub/GitLab F02 issue `#2` 均已更新正文及新进展评论。仅清理本轮创建的 ignored `consumer-gradle/` 隔离副本（约 18 GB），保留 trace、事件、ledger、解析器和其他受保护内容。

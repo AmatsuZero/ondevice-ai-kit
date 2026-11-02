@@ -77,6 +77,24 @@ def mlx_run(run_id="mlx-1"):
     }
 
 
+def tts_resource_run():
+    return {
+        "schemaVersion": 1, "runId": "tts-session", "device": "iPhone", "OS": "27.0.1",
+        "validationStatus": "device",
+        "f11SampleProfile": "one warm-up then five sequential fixed-text TTS requests",
+        "f11ResourceMethod": "mach_task_basic_info.resident_size sampled every approximately 10 ms; sampled peak, not true peak",
+        "tts": {"status": "success", "backendId": "apple.avspeech", "selectedLocale": "en-US",
+                "selectedVoice": "com.apple.voice.compact.en-US.Samantha",
+                "networkBehavior": "unmeasured"},
+        "f11ResourceRuns": [
+            {"runId": f"tts-{index}", "sampleIndex": index, "status": "success", "error": None,
+             "durationMs": float(index + 1), "rssStartBytes": 100, "rssEndBytes": 110,
+             "rssPeakSampledBytes": 200 + index, "rssSampleCount": 10}
+            for index in range(5)
+        ],
+    }
+
+
 class GroupedReportTests(unittest.TestCase):
     def write_manifest(self, root, sources, readiness=None):
         if readiness is None:
@@ -122,6 +140,88 @@ class GroupedReportTests(unittest.TestCase):
             "sources": manifest_sources,
         }
         return manifest
+
+    def tts_manifest(self, root, raw=None):
+        raw = raw or tts_resource_run()
+        manifest = self.write_manifest(root, [("tts", raw, "tts-resource", "speech-tts")])
+        summary = {
+            "schemaVersion": 1, "kind": "f11-ios-tts-resource-run", "backend": "apple.avspeech",
+            "sourceCommit": "a" * 40, "device": {"model": "iPhone", "os": "27.0.1", "udid": "device-1"},
+            "locale": "en-US", "voice": "com.apple.voice.compact.en-US.Samantha",
+            "rawReport": {"path": manifest["sources"][0]["path"],
+                          "sha256": manifest["sources"][0]["sha256"]},
+            "runs": {"actual": 5, "successful": 5},
+        }
+        path = root / "tts-summary.json"
+        path.write_text(json.dumps(summary))
+        manifest["sources"][0]["summary"] = {
+            "path": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()
+        }
+        return manifest
+
+    def test_tts_resource_group_recomputes_five_runs_without_quality_promotion(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.tts_manifest(root)
+            result = report.generate(manifest, root)
+        group = result["groups"][0]
+        self.assertEqual(group["p11Capability"], "speech-tts")
+        self.assertEqual(group["runIds"], [f"tts-{index}" for index in range(5)])
+        self.assertEqual(group["timingsMs"]["duration"], {"count": 5, "p50": 3.0, "p95": 5.0})
+        self.assertEqual(group["memory"]["peakSampledBytes"], {"count": 5, "p50": 202, "p95": 204})
+        self.assertEqual(group["identity"]["voice"], "com.apple.voice.compact.en-US.Samantha")
+        self.assertEqual(group["quality"]["status"], "unverified")
+        self.assertEqual(group["scope"], "isolated-sdk-tts-probe")
+        self.assertEqual(result["coverage"][2]["reportStatus"], "reported")
+        self.assertEqual(result["p11Gate"], {"status": "open", "finalReleaseConclusion": "not-ready"})
+
+    def test_tts_summary_must_match_raw_and_cannot_be_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.tts_manifest(root)
+            raw = root / "0-tts.json"
+            raw.write_text(raw.read_text() + "\n")
+            manifest["sources"][0]["sha256"] = hashlib.sha256(raw.read_bytes()).hexdigest()
+            with self.assertRaisesRegex(ValueError, "TTS summary raw hash mismatch"):
+                report.generate(manifest, root)
+            manifest = self.tts_manifest(root)
+            summary = root / "tts-summary.json"
+            before = summary.read_bytes()
+            with self.assertRaisesRegex(ValueError, "output must not overwrite"):
+                report.write_report(manifest, root, summary)
+            self.assertEqual(summary.read_bytes(), before)
+
+    def test_tts_malformed_summary_is_rejected_as_source_error(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.tts_manifest(root)
+            summary = root / "tts-summary.json"
+            payload = json.loads(summary.read_text())
+            payload["runs"] = None
+            summary.write_text(json.dumps(payload))
+            manifest["sources"][0]["summary"]["sha256"] = hashlib.sha256(summary.read_bytes()).hexdigest()
+            with self.assertRaisesRegex(ValueError, "invalid TTS resource source identity"):
+                report.generate(manifest, root)
+
+    def test_tts_rejects_bad_runs_and_wrong_capability(self):
+        for change in ("duplicate", "failed", "negative"):
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                raw = tts_resource_run()
+                if change == "duplicate":
+                    raw["f11ResourceRuns"][1]["runId"] = "tts-0"
+                elif change == "failed":
+                    raw["f11ResourceRuns"][1]["status"] = "failed"
+                else:
+                    raw["f11ResourceRuns"][1]["durationMs"] = -1
+                with self.assertRaisesRegex(ValueError, "invalid TTS resource run"):
+                    report.generate(self.tts_manifest(root, raw), root)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.tts_manifest(root)
+            manifest["sources"][0]["p11Capability"] = "face-detection"
+            with self.assertRaisesRegex(ValueError, "cannot report"):
+                report.generate(manifest, root)
 
     def test_recomputes_supported_groups_and_explicit_gaps(self):
         with tempfile.TemporaryDirectory() as directory:

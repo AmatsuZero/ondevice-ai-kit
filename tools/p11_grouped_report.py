@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import sys
 from pathlib import Path
 from typing import Any
@@ -18,10 +19,11 @@ except ModuleNotFoundError:  # Direct `python tools/p11_grouped_report.py` invoc
 
 
 SCHEMA_VERSION = 1
-_KINDS = {"face", "mlxvlm"}
+_KINDS = {"face", "mlxvlm", "tts-resource"}
 _KIND_CAPABILITIES = {
     "face": {"face-detection"},
     "mlxvlm": {"multimodal-apple"},
+    "tts-resource": {"speech-tts"},
 }
 
 
@@ -155,6 +157,83 @@ def _mlx_group(
     }
 
 
+def _nearest_rank(values: list[float | int]) -> dict[str, float | int]:
+    ordered = sorted(values)
+    count = len(ordered)
+    return {"count": count, "p50": ordered[math.ceil(count * 0.5) - 1],
+            "p95": ordered[math.ceil(count * 0.95) - 1]}
+
+
+def _tts_group(
+    raw: dict[str, Any], entry: dict[str, Any], repo_root: Path
+) -> dict[str, Any]:
+    summary_entry = entry.get("summary")
+    if not isinstance(summary_entry, dict):
+        raise ValueError("TTS summary is required")
+    _, summary = _verify_file(repo_root, summary_entry, "TTS summary")
+    if (summary.get("schemaVersion") != 1 or summary.get("kind") != "f11-ios-tts-resource-run"
+            or summary.get("rawReport") != {"path": entry["path"], "sha256": entry["sha256"]}):
+        raise ValueError("TTS summary raw hash mismatch")
+    tts = raw.get("tts")
+    device = summary.get("device")
+    runs = raw.get("f11ResourceRuns")
+    summary_runs = summary.get("runs")
+    if (raw.get("schemaVersion") != 1 or raw.get("validationStatus") != "device"
+            or not isinstance(tts, dict) or tts.get("status") != "success"
+            or tts.get("backendId") != summary.get("backend")
+            or tts.get("selectedLocale") != summary.get("locale")
+            or tts.get("selectedVoice") != summary.get("voice")
+            or not isinstance(device, dict) or raw.get("device") != device.get("model")
+            or raw.get("OS") != device.get("os")
+            or not isinstance(runs, list) or len(runs) != 5
+            or not isinstance(summary_runs, dict) or summary_runs.get("actual") != 5
+            or summary_runs.get("successful") != 5
+            or not isinstance(raw.get("runId"), str) or not raw["runId"]
+            or not isinstance(device.get("udid"), str) or not device["udid"]
+            or not isinstance(raw.get("f11ResourceMethod"), str) or not raw["f11ResourceMethod"]
+            or not isinstance(raw.get("f11SampleProfile"), str) or not raw["f11SampleProfile"]):
+        raise ValueError("invalid TTS resource source identity")
+    run_ids: set[str] = set()
+    for index, run in enumerate(runs):
+        if not isinstance(run, dict):
+            raise ValueError("invalid TTS resource run")
+        duration = run.get("durationMs")
+        peak = run.get("rssPeakSampledBytes")
+        start = run.get("rssStartBytes")
+        end = run.get("rssEndBytes")
+        run_id = run.get("runId")
+        if (not isinstance(run_id, str) or not run_id or run_id in run_ids
+                or run.get("sampleIndex") != index or run.get("status") != "success"
+                or run.get("error") is not None
+                or not isinstance(duration, (int, float)) or isinstance(duration, bool)
+                or not math.isfinite(duration) or duration <= 0
+                or any(type(value) is not int or value < 0 for value in (peak, start, end))
+                or peak < max(start, end)
+                or type(run.get("rssSampleCount")) is not int or run["rssSampleCount"] <= 0):
+            raise ValueError("invalid TTS resource run")
+        run_ids.add(run_id)
+    commit = summary.get("sourceCommit")
+    if not isinstance(commit, str) or len(commit) != 40:
+        raise ValueError("invalid TTS source commit")
+    return {
+        "kind": "tts-resource", "p11Capability": "speech-tts",
+        "source": entry["path"], "sourceSha256": entry["sha256"],
+        "summary": dict(summary_entry), "scope": "isolated-sdk-tts-probe",
+        "device": raw["device"], "OS": raw["OS"], "actualBackend": tts["backendId"],
+        "identity": {"sdkCommit": commit, "deviceId": device.get("udid"),
+                     "sessionRunId": raw.get("runId"), "voice": tts["selectedVoice"],
+                     "locale": tts["selectedLocale"], "sampleProfile": raw.get("f11SampleProfile")},
+        "runIds": [run["runId"] for run in runs],
+        "timingsMs": {"duration": _nearest_rank([run["durationMs"] for run in runs])},
+        "quality": {"status": "unverified", "reason": "fixed voice has no natural quality rubric"},
+        "memory": {"status": "observed-sampled", "method": raw.get("f11ResourceMethod"),
+                   "peakSampledBytes": _nearest_rank([run["rssPeakSampledBytes"] for run in runs])},
+        "energy": {"status": "unmeasured"},
+        "unverified": ["naturalVoiceQuality", "offlineNetworkBehavior", "truePeakMemory",
+                       "energy", "gpuPeak", "minimumOS"],
+    }
+
+
 def _reject_duplicate_run_ids(groups: list[dict[str, Any]]) -> None:
     seen: set[str] = set()
     for group in groups:
@@ -224,8 +303,10 @@ def generate(manifest: dict[str, Any], repo_root: Path) -> dict[str, Any]:
         digest = entry["sha256"]
         if entry["kind"] == "face":
             groups.append(_face_group(raw, capability, entry["path"], digest))
-        else:
+        elif entry["kind"] == "mlxvlm":
             groups.append(_mlx_group(raw, capability, entry["path"], digest, entry.get("expectedSamples")))
+        else:
+            groups.append(_tts_group(raw, entry, repo_root))
     _reject_duplicate_run_ids(groups)
     reported = {group["p11Capability"] for group in groups}
     coverage = []
@@ -271,7 +352,9 @@ def _reject_output_aliases(
     if manifest_path is not None and _is_alias(output, manifest_path):
         raise ValueError(f"output must not overwrite benchmark input: {manifest_path}")
     output_resolved = output.resolve()
-    candidates = [manifest.get("readiness"), *(manifest.get("sources") or [])]
+    sources = manifest.get("sources") or []
+    candidates = [manifest.get("readiness"), *sources,
+                  *(entry.get("summary") for entry in sources if isinstance(entry, dict) and entry.get("summary"))]
     for index, entry in enumerate(candidates):
         if not isinstance(entry, dict):
             continue
