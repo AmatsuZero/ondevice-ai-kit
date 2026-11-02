@@ -8,7 +8,8 @@
 
 - 既有 `SpeechRecognitionClient.recognize → AppleSpeechRecognizerBackend.recognize` 五次固定文件真机报告此前已在 readiness，但 grouped 的 `speech-asr-file` 仍无兼容来源。本轮新增独立 `asr-file-sdk-resource`，以 manifest 哈希固定原始报告、bounded summary、来源清单和合成 CAF；核对五个不同成功 run 的后端、归一化文本、RSS、耗时、输入身份和摘要交叉引用，重算最近秩统计。它不合并独立的直连 Speech framework 探针，也不使用设备/麦克风/相册。
 - 新 ignored readiness `artifacts/verification/p11-readiness-20261102-sdk-asr-grouped/summary.json` SHA-256=`a2b74c6b168efb943a7c863bb39277411ece8e234319d422e747a0dbe52a83b4`，校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**；新 grouped `artifacts/verification/p11-grouped-20261102-sdk-asr/summary.json` SHA-256=`be8796dbab1e3528f18f5bda3c7d09ab1f1b0cf905294e7b975c0692f009fdab`，**5项能力/8组**。ASR duration p50/p95=`76.484458/93.435792 ms`，约10 ms 采样进程 RSS 峰值 p50/p95=`36,913,152/36,929,536 B`。固定合成语音的匹配不是自然 CER/WER、真实麦克风、离线网络、真实/GPU 峰值、能耗或最低系统验收。P11/发布仍 `open/not-ready`。
-- 先见新增测试 RED，再见 reporter/readiness **36/36**、完整 `tools/tests` 在 Ruby 3.4 和允许 SwiftPM 环境 **240/240**、`py_compile` 与 `git diff --check` 通过。独立复审发现只信任原报告的 `normalizedMatch=true`，未重算转写身份；加入错误转写但标记匹配的 RED 用例，按 probe 的小写字母/数字规则重算后 GREEN，完整套件再次 **240/240**。九项受保护 dirty/untracked 路径未改。之后需精确提交、同步 `origin`/`jihu` 并更新双端 F11 issue。
+- 先见新增测试 RED，再见 reporter/readiness **36/36**、完整 `tools/tests` 在 Ruby 3.4 和允许 SwiftPM 环境 **240/240**、`py_compile` 与 `git diff --check` 通过。独立复审发现只信任原报告的 `normalizedMatch=true`，未重算转写身份；加入错误转写但标记匹配的 RED 用例，按 probe 的小写字母/数字规则重算后 GREEN，完整套件再次 **240/240**。九项受保护 dirty/untracked 路径未改。
+- 工作包提交 `b0194d3` 已快进同步 `origin` 和 `jihu`；GitHub F11 issue `#11` 评论 `6581438676`、GitLab F11 issue `#11` note `39247` 已写同文进展且 issue 保持 open。两次远端只读预检曾被自动审批 HTTP 429 拒绝、命令未执行；从正常审批路径重试成功后完成同步。下一个可执行项仍是 F11 自然质量/持续资源统一方法，或 F02 无 recorder 正式候选；不提升 P11 发布结论。
 
 ## 最新续接 — 2026-11-02 F11 SDK Video SR 独立分组
 
