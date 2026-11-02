@@ -1,5 +1,15 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-02 F02 tokenized recorder 同 PID 真机 trace 结论
+
+相机授权后，隔离研究 App 最终 dylib UUID=`8F434AF5-713D-3063-98F1-3B583F1F68A4` 在 iPhone 16 Pro Max / iOS 27.0.1 以 PID `35714`、runID=`792FC36B-ACA8-447E-AD1C-F8DAE7764D48` 完成十轮页面重入。十个 30 秒活动窗口 Vision 成功增量为 `698/669/663/665/655/677/661/688/693/663`；86 个报告样本，最终页面弱引用全部释放，末轮 31/35/60 秒 idle 观察值均为 0。page-absent 30 秒 RSS 首末 +`8,716,288 B`，不做 Atlas 归因。
+
+同 PID 的 901.166218 秒 `Leaks` trace TOC 与设备安装路径、PID、运行时间一致。完整 Allocations List **111,141 行**；最终 live 128 B、栈含 `AtlasTextOp::Make` 的两行中，`0x137978380` 是 `dyld::ThreadLocalVariables::addTermFunc` TLS 析构注册存储，没有缓存 token generation；`0x136d42680` 经全局 `operator new`，是唯一匹配的缓存存储。后者对应 sequence `1380382` 的当前存储分配周期，最终 generation `345065` 状态为 cached；holder kernel thread `17026203` 在采集结束前没有退出观察。Leaks 明细 0 行不构成零泄漏证明。
+
+事件文件共 **1,380,716 条 / 121,503,008 B**，序号连续；`missed=0`、`integrityFailures=0`，345,133 个 generation 无解析错误。58 个持缓存线程退出观察均在同 generation 配有 `CacheOwner` exit 与 free 完成。研究解析器先前仅按地址把历史复用 generation 全部关联到最终 live 行，产生假匹配；现按 `new-allocated` 到 free 的存储生命周期关联，6 个单测通过。完整原始 trace、XML 导出、事件、逐地址 ledger、脚本、哈希和设备终止回执在 ignored `artifacts/verification/f02-tokenized-recorder-20261101/` 的 `summary.json`。研究 PID 已终止，普通 Demo PID `35295` 仍在，生产依赖未改。
+
+结论限于本次隔离研究：已观察的线程退出有缓存 free 完成，最终 live 缓存属于采集时未观察到退出的线程；尚不能对长期增长、生产所有权、正式 P4/P11 发布验收下结论。本轮新的只读架构复审独立重数 58 个不同线程/generation 的精确 `[thread-exit, cache-owner-exit, cache-owner-freed]` 尾序列，确认限定结论合理，给出 `WATCH`，不是生产批准；此前 429 的审查不作通过。**F02/P4/P11 仍 open/not-ready**。
+
 ## 2026-11-02 F02 无全局原始指针 recorder 的本地发布与真机预检
 
 在 ignored `artifacts/verification/f02-tokenized-recorder-20261101/` 的固定 Skia 副本里，研究记录器的全局 generation 槽、事件 ring 和 pthread/TLS 字段改为带进程内随机 salt 的高位标记 token。对本轮允许的低 63 位地址域，该映射为一一对应，离线可用导出的 salt 对 Instruments 地址复算；超出域、缺失 generation、表满、递归记录和持有 live generation 时 reset 均增加 `integrityFailures`。原始缓存指针只留在 `thread_local CacheOwner` 的实际缓存中；owner 线程退出先记录观察和 owner exit，再在 `::operator delete` 返回后记录同 generation 的 free 完成。ring 覆盖计数单独保留，验收以持久化序号缺口和 integrity 计数为门槛。宿主源码抽取 fixture 的七段检查通过，包括同线程复用、跨线程删除、owner/non-owner 清理、worker exit、8 worker 并发、ring 覆盖、token 域和 live reset 拒绝；独立架构复审遇 429，**不算审批通过**。

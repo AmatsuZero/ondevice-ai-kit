@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-02 F02 tokenized recorder 真机 trace 已配对
+
+- 用户已处理隔离研究 App 相机授权。iPhone 16 Pro Max / iOS 27.0.1、最终 dylib UUID=`8F434AF5-713D-3063-98F1-3B583F1F68A4` 的同 PID `35714`、runID=`792FC36B-ACA8-447E-AD1C-F8DAE7764D48` 完成十轮相机页面协议，30 秒活动窗口原生结果增量为 `698/669/663/665/655/677/661/688/693/663`。86 个报告样本，末轮 31/35/60 秒 idle 已观察页面弱引用均为 0；十轮 page-absent 30 秒 RSS 首末 +`8,716,288 B`，不归因于 Atlas。合成图仍只在 Demo 沙盒，报告 `capturedImagesSaved=false`。
+- `Leaks` trace TOC 记录同 PID、同安装路径及 **901.166218 秒**（08:04:51–08:19:52 +08:00），覆盖十轮及最终 idle。Allocations List 共 **111,141 行**；最终 `live=true`、128 B、含 `AtlasTextOp::Make` 栈的两行分别是 TLS 析构注册存储 `0x137978380` 与真正 `operator new` 缓存存储 `0x136d42680`。Leaks 明细 0 行，**不等于零泄漏证明**。
+- 1,380,716 条 token 事件已持久化，`missed=0`、`integrityFailures=0`、解析错误 0；345,133 个 generation。58 个持缓存线程退出观察全部配有同 generation 的 `CacheOwner` exit 和 free 完成。唯一最终 live 缓存存储 `0x136d42680` 从 sequence `1380382` 的新分配至最终 generation `345065` 为 cached，持有 kernel thread `17026203` 在事件采集结束前**没有退出观察**，不能称线程退出后残留。解析器已修正地址复用造成的历史 generation 假匹配；6 个定向测试通过。原始 trace、导出、完整 ledger、校验脚本、SHA-256 汇总都在 ignored `artifacts/verification/f02-tokenized-recorder-20261101/`。
+- 已只终止研究 PID `35714`，回读普通 Demo PID `35295` 仍在；受保护九项 dirty/untracked 文件与生产依赖未改。本轮新的只读架构复审独立重数 58 个不同线程/generation 的精确 `[thread-exit, cache-owner-exit, cache-owner-freed]` 尾序列，核对唯一 live 缓存的 holder 无退出观察，结论 `WATCH`：支持隔离机制和限定措辞，不批准生产就绪。此前 429 的审查不作通过。**F02/P4/P11 仍 open/not-ready**；下一步裁定生产修复归属、无 recorder 的正式候选和长期资源门槛。
+
 ## 最新续接 — 2026-11-02 F02 tokenized recorder 本地发布与相机授权门槛
 
 - `gh auth status` 在授权 keyring 视图新鲜复核为 `AmatsuZero` active、`repo` scope 有效；受限 shell 的 `default token invalid` 是不同凭据视图，未重置认证。主工作树九项受保护 dirty/untracked 文件保持原样、未暂存。
