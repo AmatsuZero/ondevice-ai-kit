@@ -9,7 +9,8 @@
 - 用户再次回复可以处理 F02 相机弹窗；该授权与同 PID 十轮 trace 已在下方 F02 检查点完成，本轮无需重新启动研究 App 或使用相机。九项受保护 dirty/untracked 路径继续保留。
 - `tools/p11_grouped_report.py` 新增 `video-sr-sdk-resource`，以 manifest 哈希固定原始报告、摘要、输入/参考、五个独立 MOV 与首末质量 JSON；核对同一会话五个不同 runId、整请求数值/输出身份及质量 `unverified`。分组键新增 `kind`，使同设备同后端的 SDK 整请求与系统逐帧探针保持独立。先见新测试 RED，再见聚焦 **24/24** 及 readiness/report **32/32** 通过。
 - 新 ignored readiness `artifacts/verification/p11-readiness-20261102-sdk-grouped/summary.json` SHA-256=`ec6202427a5b8fbd82ef33076446195b198454c924869908e53059a684aa306c`，校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**；新 grouped `artifacts/verification/p11-grouped-20261102-sdk-request/summary.json` SHA-256=`c46c34f7f87751b1e5b2a2b4c6ff1239b8ce3d9e22c3bd81381365791aaf83e4`，**4项能力/7组**。SDK 整请求 wall p50/p95=`5110.416958/6533.880333 ms`，约10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`77,824,000/259,391,488 B`，首轮含预热。首末质量仍 `unverified`；P11/发布仍 `open/not-ready`。这是单素材、单设备、同 PID 五次顺序请求，不能证明主观质量、持续稳定、真实/GPU 峰值或能耗。
-- 独立复审指出不同输出名仍可能硬链接同一 MOV；先见该场景 RED，再补齐全部 SDK 证据文件的别名拒绝并见 GREEN。聚焦 reporter/readiness **33/33**、完整 `tools/tests` 在 Ruby 3.4 与允许 SwiftPM sandbox 的环境 **237/237**、`py_compile`、`git diff --check` 均通过。受限环境首轮完整套件为 236 tests / 1 error，唯一错误是 SwiftPM `sandbox_apply: Operation not permitted`，不计产品回归。工作包尚待精确提交/双端同步和 F11 issue 更新；下一个续接先完成这些门槛，再继续 F02 无 recorder 生产候选或 F11 剩余质量/资源缺口。
+- 独立复审指出不同输出名仍可能硬链接同一 MOV；先见该场景 RED，再补齐全部 SDK 证据文件的别名拒绝并见 GREEN。聚焦 reporter/readiness **33/33**、完整 `tools/tests` 在 Ruby 3.4 与允许 SwiftPM sandbox 的环境 **237/237**、`py_compile`、`git diff --check` 均通过。受限环境首轮完整套件为 236 tests / 1 error，唯一错误是 SwiftPM `sandbox_apply: Operation not permitted`，不计产品回归。
+- 工作包提交 `be6306a693dcc1332b346c4b7c0df16a6368bbd3` 已快进同步 `origin` 与 `jihu`。GitHub F11 issue `#11` 评论 `6580754322`、GitLab F11 issue `#11` note `39246` 均已写入同文进展，保持 open。GitLab 首次身份/远端预检被自动审批 HTTP 429 拒绝、命令未执行；正常审批路径重试成功后再同步。下一步继续 F02 无 recorder 生产候选或 F11 剩余质量/资源缺口。
 
 ## 最新续接 — 2026-11-02 F11 公开 SDK Video SR 五次真机资源报告
 
