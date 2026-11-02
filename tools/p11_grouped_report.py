@@ -20,12 +20,13 @@ except ModuleNotFoundError:  # Direct `python tools/p11_grouped_report.py` invoc
 
 
 SCHEMA_VERSION = 1
-_KINDS = {"face", "mlxvlm", "tts-resource", "video-sr-resource"}
+_KINDS = {"face", "mlxvlm", "tts-resource", "video-sr-resource", "video-sr-sdk-resource"}
 _KIND_CAPABILITIES = {
     "face": {"face-detection"},
     "mlxvlm": {"multimodal-apple"},
     "tts-resource": {"speech-tts"},
     "video-sr-resource": {"video-sr"},
+    "video-sr-sdk-resource": {"video-sr"},
 }
 
 
@@ -350,6 +351,140 @@ def _video_sr_groups(raw: dict[str, Any], entry: dict[str, Any], repo_root: Path
     return groups
 
 
+def _video_sr_sdk_group(raw: dict[str, Any], entry: dict[str, Any], repo_root: Path) -> dict[str, Any]:
+    summary_entry = entry.get("summary")
+    input_entry = entry.get("input")
+    reference_entry = entry.get("reference")
+    output_entries = entry.get("outputs")
+    quality_entries = entry.get("quality")
+    if (not all(isinstance(value, dict) for value in (summary_entry, input_entry, reference_entry,
+                                                       quality_entries))
+            or not isinstance(output_entries, list) or len(output_entries) != 5):
+        raise ValueError("invalid SDK Video SR evidence entries")
+    evidence_entries = [entry, summary_entry, input_entry, reference_entry,
+                        *output_entries, *quality_entries.values()]
+    if not all(isinstance(item, dict) for item in evidence_entries):
+        raise ValueError("invalid SDK Video SR evidence entries")
+    evidence_paths = [_relative_path(repo_root, item.get("path"), "SDK Video SR evidence path")
+                      for item in evidence_entries]
+    for index, path in enumerate(evidence_paths):
+        if any(_is_alias(path, earlier) for earlier in evidence_paths[:index]):
+            raise ValueError(f"SDK Video SR evidence alias: {path}")
+    _, summary = _verify_file(repo_root, summary_entry, "SDK Video SR summary")
+    _verify_hash(repo_root, input_entry, "SDK Video SR input")
+    _verify_hash(repo_root, reference_entry, "SDK Video SR reference")
+    runs = raw.get("runs")
+    device = raw.get("deviceModel")
+    os_version = raw.get("osVersion")
+    session_id = raw.get("runId")
+    backend = "apple.videotoolbox.sr"
+    if (raw.get("schemaVersion") != 1 or raw.get("state") != "success"
+            or raw.get("scope") != "isolated-public-sdk-consumer"
+            or raw.get("backendId") != backend or raw.get("audioPolicy") != "discard"
+            or not isinstance(device, str) or not re.fullmatch(r"iPhone[0-9]+,[0-9]+", device)
+            or not isinstance(os_version, str) or not os_version
+            or not isinstance(session_id, str) or not session_id
+            or raw.get("inputSHA256") != input_entry["sha256"]
+            or not isinstance(raw.get("measurement"), str) or not raw["measurement"]
+            or not isinstance(runs, list) or len(runs) != 5
+            or summary.get("schemaVersion") != 1 or summary.get("state") != "pass-bounded"
+            or summary.get("qualityVerdict") != "unverified"
+            or summary.get("rawReportSHA256") != entry["sha256"]
+            or summary.get("runCount") != 5 or summary.get("deviceModel") != device
+            or summary.get("osVersion") != os_version
+            or summary.get("inputSHA256") != input_entry["sha256"]):
+        raise ValueError("invalid SDK Video SR source identity")
+
+    run_ids: set[str] = set()
+    output_hashes: dict[str, str] = {}
+    walls: list[float] = []
+    peaks: list[int] = []
+    deltas: list[int] = []
+    for index, (run, output_entry) in enumerate(zip(runs, output_entries), start=1):
+        if not isinstance(run, dict) or not isinstance(output_entry, dict):
+            raise ValueError("invalid SDK Video SR run")
+        _verify_hash(repo_root, output_entry, f"SDK Video SR output {index}")
+        run_id = run.get("runId")
+        wall = run.get("wallMilliseconds")
+        before, after, peak = (run.get(key) for key in (
+            "rssBeforeBytes", "rssAfterBytes", "rssSampledPeakBytes"))
+        if (not isinstance(run_id, str) or not run_id or run_id == session_id
+                or run_id in run_ids or run.get("index") != index
+                or run.get("backendId") != backend
+                or not isinstance(run.get("outputFile"), str)
+                or run["outputFile"] != Path(output_entry["path"]).name
+                or run.get("outputSHA256") != output_entry["sha256"]
+                or run["outputFile"] in output_hashes
+                or run.get("width") != 1280 or run.get("height") != 720
+                or run.get("frameCount") != 48 or run.get("durationSeconds") != 2
+                or run.get("audioTrackCount") != 0
+                or type(wall) not in (int, float) or not math.isfinite(wall) or wall <= 0
+                or any(type(value) is not int or value < 0 for value in (before, after, peak))
+                or peak < max(before, after)
+                or type(run.get("rssSampleCount")) is not int or run["rssSampleCount"] <= 0):
+            raise ValueError("invalid SDK Video SR run")
+        run_ids.add(run_id)
+        output_hashes[run["outputFile"]] = output_entry["sha256"]
+        walls.append(wall)
+        peaks.append(peak)
+        deltas.append(peak - before)
+    if summary.get("outputSHA256") != output_hashes:
+        raise ValueError("invalid SDK Video SR summary outputs")
+
+    quality_metrics = {}
+    for label, run in (("first", runs[0]), ("last", runs[-1])):
+        quality_entry = quality_entries.get(label)
+        if not isinstance(quality_entry, dict):
+            raise ValueError(f"invalid SDK Video SR {label} quality entry")
+        _, quality = _verify_file(repo_root, quality_entry, f"SDK Video SR {label} quality")
+        candidate = quality.get("candidate")
+        reference = quality.get("reference")
+        metrics = quality.get("metrics")
+        if (quality.get("schemaVersion") != 1
+                or quality.get("measurement") != "decoded-output-fidelity"
+                or quality.get("qualityVerdict") != "unverified"
+                or quality.get("colorComparability") != "matched-metadata"
+                or quality.get("comparedFrames") != 48
+                or not isinstance(candidate, dict) or not isinstance(reference, dict)
+                or candidate.get("path") != output_entries[run["index"] - 1]["path"]
+                or reference.get("path") != reference_entry["path"]
+                or not isinstance(candidate.get("decodedSha256"), str)
+                or not re.fullmatch(r"[0-9a-f]{64}", candidate["decodedSha256"])
+                or not isinstance(reference.get("decodedSha256"), str)
+                or not re.fullmatch(r"[0-9a-f]{64}", reference["decodedSha256"])
+                or not isinstance(metrics, dict)
+                or type(metrics.get("psnrDb")) not in (int, float)
+                or not math.isfinite(metrics["psnrDb"]) or metrics["psnrDb"] <= 0
+                or type(metrics.get("ssim")) not in (int, float)
+                or not math.isfinite(metrics["ssim"]) or not 0 <= metrics["ssim"] <= 1):
+            raise ValueError(f"invalid SDK Video SR {label} quality identity")
+        quality_metrics[label] = {"source": dict(quality_entry), "metrics": metrics,
+                                  "candidateDecodedSha256": candidate["decodedSha256"],
+                                  "referenceDecodedSha256": reference["decodedSha256"]}
+    if quality_metrics["first"]["referenceDecodedSha256"] != quality_metrics["last"]["referenceDecodedSha256"]:
+        raise ValueError("invalid SDK Video SR quality reference identity")
+    return {
+        "kind": "video-sr-sdk-resource", "p11Capability": "video-sr",
+        "source": entry["path"], "sourceSha256": entry["sha256"],
+        "summary": dict(summary_entry), "scope": raw["scope"],
+        "device": device, "OS": os_version, "actualBackend": backend,
+        "identity": {"sessionRunId": session_id, "inputFileSha256": raw["inputSHA256"],
+                     "measurement": raw["measurement"], "firstRunIncludesWarmup": True},
+        "runIds": [run["runId"] for run in runs],
+        "timingsMs": {"requestWall": _nearest_rank(walls)},
+        "quality": {"status": "unverified", "reason": "single-clip fidelity is not subjective SR quality",
+                    "measurement": "decoded-output-fidelity", "firstAndLast": quality_metrics,
+                    "reference": dict(reference_entry), "input": dict(input_entry),
+                    "outputs": [dict(item) for item in output_entries]},
+        "memory": {"status": "observed-sampled", "method": raw["measurement"],
+                   "peakSampledBytes": _nearest_rank(peaks),
+                   "peakDeltaSampledBytes": _nearest_rank(deltas)},
+        "energy": {"status": "unmeasured"},
+        "unverified": ["subjectiveQuality", "sustainedResources", "truePeakMemory",
+                       "gpuPeak", "energy", "minimumOS", "crossDevice"],
+    }
+
+
 def _reject_duplicate_run_ids(groups: list[dict[str, Any]]) -> None:
     seen: set[str] = set()
     for group in groups:
@@ -423,8 +558,10 @@ def generate(manifest: dict[str, Any], repo_root: Path) -> dict[str, Any]:
             groups.append(_mlx_group(raw, capability, entry["path"], digest, entry.get("expectedSamples")))
         elif entry["kind"] == "tts-resource":
             groups.append(_tts_group(raw, entry, repo_root))
-        else:
+        elif entry["kind"] == "video-sr-resource":
             groups.extend(_video_sr_groups(raw, entry, repo_root))
+        else:
+            groups.append(_video_sr_sdk_group(raw, entry, repo_root))
     _reject_duplicate_run_ids(groups)
     reported = {group["p11Capability"] for group in groups}
     coverage = []
@@ -446,7 +583,7 @@ def generate(manifest: dict[str, Any], repo_root: Path) -> dict[str, Any]:
     return {
         "schemaVersion": SCHEMA_VERSION,
         "percentileMethod": "nearest-rank",
-        "grouping": ["device", "OS", "p11Capability", "actualBackend"],
+        "grouping": ["device", "OS", "p11Capability", "actualBackend", "kind"],
         "inputs": {
             "readiness": dict(manifest["readiness"]),
             "sources": [dict(entry) for entry in entries],
@@ -474,9 +611,13 @@ def _reject_output_aliases(
     candidates = [manifest.get("readiness"), *sources,
                   *(entry.get("summary") for entry in sources if isinstance(entry, dict) and entry.get("summary"))]
     for source in sources:
-        if not isinstance(source, dict) or source.get("kind") != "video-sr-resource":
+        if not isinstance(source, dict) or source.get("kind") not in ("video-sr-resource", "video-sr-sdk-resource"):
             continue
         candidates.extend(source.get(key) for key in ("input", "reference"))
+        if source.get("kind") == "video-sr-sdk-resource":
+            nested = source.get("outputs")
+            if isinstance(nested, list):
+                candidates.extend(nested)
         for key in ("quality", "outputs"):
             nested = source.get(key)
             if isinstance(nested, dict):

@@ -118,6 +118,24 @@ def video_sr_run():
     return raw
 
 
+def sdk_video_sr_run():
+    return {
+        "schemaVersion": 1, "state": "success", "scope": "isolated-public-sdk-consumer",
+        "runId": "sdk-session", "deviceModel": "iPhone17,2", "osVersion": "27.0.1",
+        "backendId": "apple.videotoolbox.sr", "inputSHA256": "", "audioPolicy": "discard",
+        "measurement": "request wall time and approximately 10 ms sampled process RSS",
+        "runs": [
+            {"index": index, "runId": f"sdk-{index}", "backendId": "apple.videotoolbox.sr",
+             "outputFile": f"sdk-{index}.mov", "outputSHA256": "", "width": 1280,
+             "height": 720, "frameCount": 48, "durationSeconds": 2,
+             "audioTrackCount": 0, "wallMilliseconds": float(index + 1),
+             "rssBeforeBytes": 100, "rssAfterBytes": 110,
+             "rssSampledPeakBytes": 200 + index, "rssSampleCount": 10}
+            for index in range(1, 6)
+        ],
+    }
+
+
 class GroupedReportTests(unittest.TestCase):
     def write_manifest(self, root, sources, readiness=None):
         if readiness is None:
@@ -225,6 +243,126 @@ class GroupedReportTests(unittest.TestCase):
                 "path": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()
             }
         return manifest
+
+    def sdk_video_manifest(self, root, raw=None):
+        raw = raw or sdk_video_sr_run()
+        readiness = {"schemaVersion": 1, "rows": [
+            {"capability": "video-sr", "status": "pass-bounded", "unverified": ["quality"]}],
+            "p11Gate": {"status": "open", "finalReleaseConclusion": "not-ready"}}
+        manifest = self.write_manifest(
+            root, [("sdk", raw, "video-sr-sdk-resource", "video-sr")], readiness=readiness)
+        entry = manifest["sources"][0]
+        for field, name in (("input", "input.mp4"), ("reference", "reference.mkv")):
+            path = root / name
+            path.write_bytes(name.encode())
+            entry[field] = {"path": name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+        raw["inputSHA256"] = entry["input"]["sha256"]
+        entry["outputs"] = []
+        for run in raw["runs"]:
+            path = root / run["outputFile"]
+            path.write_bytes(run["runId"].encode())
+            run["outputSHA256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+            entry["outputs"].append({"path": path.name, "sha256": run["outputSHA256"]})
+        raw_path = root / entry["path"]
+        raw_path.write_text(json.dumps(raw))
+        entry["sha256"] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+        summary = {"schemaVersion": 1, "state": "pass-bounded", "qualityVerdict": "unverified",
+                   "rawReportSHA256": entry["sha256"], "runCount": 5,
+                   "deviceModel": raw["deviceModel"], "osVersion": raw["osVersion"],
+                   "inputSHA256": raw["inputSHA256"],
+                   "outputSHA256": {run["outputFile"]: run["outputSHA256"] for run in raw["runs"]}}
+        path = root / "sdk-summary.json"
+        path.write_text(json.dumps(summary))
+        entry["summary"] = {"path": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+        entry["quality"] = {}
+        for label, run in (("first", raw["runs"][0]), ("last", raw["runs"][-1])):
+            quality = {"schemaVersion": 1, "measurement": "decoded-output-fidelity",
+                       "qualityVerdict": "unverified", "colorComparability": "matched-metadata",
+                       "comparedFrames": 48,
+                       "reference": {"path": entry["reference"]["path"], "decodedSha256": "a" * 64},
+                       "candidate": {"path": run["outputFile"], "decodedSha256": "b" * 64},
+                       "metrics": {"psnrDb": 36.5, "ssim": 0.97}}
+            path = root / f"quality-{label}.json"
+            path.write_text(json.dumps(quality))
+            entry["quality"][label] = {"path": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+        return manifest
+
+    def test_sdk_video_group_recomputes_five_full_requests_separately(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            result = report.generate(self.sdk_video_manifest(root), root)
+        self.assertEqual(len(result["groups"]), 1)
+        group = result["groups"][0]
+        self.assertEqual(group["kind"], "video-sr-sdk-resource")
+        self.assertEqual(group["runIds"], [f"sdk-{index}" for index in range(1, 6)])
+        self.assertEqual(group["timingsMs"]["requestWall"], {"count": 5, "p50": 4.0, "p95": 6.0})
+        self.assertEqual(group["memory"]["peakDeltaSampledBytes"], {"count": 5, "p50": 103, "p95": 105})
+        self.assertEqual(group["quality"]["status"], "unverified")
+        self.assertEqual(group["scope"], "isolated-public-sdk-consumer")
+        self.assertEqual(result["grouping"], ["device", "OS", "p11Capability", "actualBackend", "kind"])
+        self.assertEqual(result["p11Gate"], {"status": "open", "finalReleaseConclusion": "not-ready"})
+
+    def test_sdk_video_rejects_invalid_run_and_evidence_identity(self):
+        for corruption in ("duplicate-run", "bad-number", "wrong-output", "wrong-quality", "wrong-summary"):
+            with self.subTest(corruption=corruption), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                raw = sdk_video_sr_run()
+                if corruption == "duplicate-run":
+                    raw["runs"][1]["runId"] = raw["runs"][0]["runId"]
+                elif corruption == "bad-number":
+                    raw["runs"][1]["rssSampledPeakBytes"] = 1
+                manifest = self.sdk_video_manifest(root, raw)
+                entry = manifest["sources"][0]
+                if corruption == "wrong-output":
+                    entry["outputs"][1] = entry["outputs"][0]
+                elif corruption == "wrong-quality":
+                    path = root / entry["quality"]["first"]["path"]
+                    quality = json.loads(path.read_text())
+                    quality["candidate"]["path"] = raw["runs"][1]["outputFile"]
+                    path.write_text(json.dumps(quality))
+                    entry["quality"]["first"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+                elif corruption == "wrong-summary":
+                    path = root / entry["summary"]["path"]
+                    summary = json.loads(path.read_text())
+                    summary["rawReportSHA256"] = "c" * 64
+                    path.write_text(json.dumps(summary))
+                    entry["summary"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+                with self.assertRaises(ValueError):
+                    report.generate(manifest, root)
+
+    def test_sdk_video_rejects_nested_output_alias(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.sdk_video_manifest(root)
+            output = root / manifest["sources"][0]["outputs"][2]["path"]
+            before = output.read_bytes()
+            with self.assertRaisesRegex(ValueError, "output must not overwrite"):
+                report.write_report(manifest, root, output)
+            self.assertEqual(output.read_bytes(), before)
+
+    def test_sdk_video_rejects_hardlinked_output_even_with_updated_hashes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.sdk_video_manifest(root)
+            entry = manifest["sources"][0]
+            first = root / entry["outputs"][0]["path"]
+            second = root / entry["outputs"][1]["path"]
+            second.unlink()
+            os.link(first, second)
+            entry["outputs"][1]["sha256"] = entry["outputs"][0]["sha256"]
+            raw_path = root / entry["path"]
+            raw = json.loads(raw_path.read_text())
+            raw["runs"][1]["outputSHA256"] = entry["outputs"][1]["sha256"]
+            raw_path.write_text(json.dumps(raw))
+            entry["sha256"] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+            summary_path = root / entry["summary"]["path"]
+            summary = json.loads(summary_path.read_text())
+            summary["rawReportSHA256"] = entry["sha256"]
+            summary["outputSHA256"][raw["runs"][1]["outputFile"]] = entry["outputs"][1]["sha256"]
+            summary_path.write_text(json.dumps(summary))
+            entry["summary"]["sha256"] = hashlib.sha256(summary_path.read_bytes()).hexdigest()
+            with self.assertRaisesRegex(ValueError, "alias"):
+                report.generate(manifest, root)
 
     def test_tts_resource_group_recomputes_five_runs_without_quality_promotion(self):
         with tempfile.TemporaryDirectory() as directory:

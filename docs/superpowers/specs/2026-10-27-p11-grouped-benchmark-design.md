@@ -79,3 +79,7 @@ capabilities unreported by this grouped snapshot.
 - Regenerating the real snapshot yields three groups, two reported readiness
   capabilities, seven explicit gaps, and unchanged raw-input hashes.
 - P11 remains `open/not-ready`; no device or publication action occurs.
+
+## 2026-11-02 extension: public SDK Video SR requests
+
+The later five-run public SDK Video SR report is a separate `video-sr-sdk-resource` source kind. Its complete request wall time and sampled process RSS cannot be aggregated with the existing system probe's per-frame processing time. The manifest additionally pins its bounded summary, input/reference media, five distinct outputs, and first/last quality reports by SHA-256; linked files must have distinct filesystem identities. Add `kind` to the grouping key so the two Video SR groups remain distinct even on the same device and backend. The original nine-capability coverage and `open/not-ready` gate remain unchanged.
