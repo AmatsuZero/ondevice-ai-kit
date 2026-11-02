@@ -46,4 +46,4 @@
 - [x] Record exact values and limits in validation docs and update the handoff.
 - [x] Run `git diff --check`, targeted tests, and hash-bound generation; stage only this work package.
 
-The broader `tools/tests` run reached 229 tests with 13 failures and 8 errors in unrelated Swift cache and system Ruby/RVM gem paths. The four relevant reporter/readiness suites passed 44/44. Full-suite environmental failures are not counted as a green gate.
+The four relevant reporter/readiness suites passed 44/44. The first broader `tools/tests` run reached 229 tests with 13 failures and 8 errors in Swift user-cache permissions and system Ruby/RVM gem paths; after using the installed Ruby 3.4 environment and writable Swift cache, the same full tools suite passed **229/229**. This verifies the tools suite, not the P11 release gate.
