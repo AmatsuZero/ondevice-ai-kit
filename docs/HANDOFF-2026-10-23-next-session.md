@@ -6,6 +6,7 @@
 
 ## 最新续接 — 2026-11-02 F11 iOS TTS 纳入分组报告
 
+- F11 工作包提交 `02d3fe5f4443b3fe4786de5d86d0628c76030833` 已同步 `origin` 与 `jihu`；双端 F11 issue `#11` 均已添加同文进展评论，保持 issue 开放。
 - 当前 `benchmark/p11/grouped-report-manifest.json` 增加 `tts-resource`，同时固定真实 iOS TTS 原始报告与既有摘要 SHA-256；`tools/p11_grouped_report.py` 校验两者哈希关系、五个不同成功 run、duration/采样 RSS、固定 voice/locale/SDK 来源，并拒绝输出覆盖嵌套摘要。17 个定向单测通过。此改动只扩展分组报告，未更改运行时、依赖或模型。
 - 从最新 F02 证据刷新 ignored readiness 快照，校验 **70 evidence paths / 78 source hashes / 9 rows with gaps**。新 grouped 输出为 **3项能力/4组**，iOS TTS `apple.avspeech` 五次 duration p50/p95=`2779.726917/2779.791875 ms`，约10 ms 采样 RSS 峰值 p50/p95 均 `44,810,240 B`。这是固定 `en-US` Samantha 的隔离 SDK TTS probe，不是正式 App 整链路或自然音质、断网、真实峰值、GPU/energy、最低系统验收；文件 ASR 直连 Speech framework 的报告仍未映射成 SDK 分组。P11 `open/not-ready`。
 - 证据输出在 ignored `artifacts/verification/p11-readiness-20261102-f11-tts/` 与 `artifacts/verification/p11-grouped-benchmark-20261102-tts/`，生成入口及限制见 [P11 分组报告](validation/p11-grouped-benchmark.md)。受保护九项 dirty/untracked 文件保持原样。F02 生产依赖归属仍需明确；独立 dependency-expert 调用遇 429，无依赖方案审批结论。
