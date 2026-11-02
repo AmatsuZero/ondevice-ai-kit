@@ -11,6 +11,7 @@
 - `video-sr-resource` 分组新增 manifest 的输入/参考/双输出/双质量哈希绑定，验证同次设备身份、不同输出、同一输入/参考身份和 48 帧原始值。先观察新测试 RED 后，定向 **21/21**；独立 reviewer 初审指出质量报告未绑定和同名输出未拒绝，均补测试修复。复审调用返回 429，**无第二次独立 APPROVE**。最近秩逐帧 p50/p95：SR=`93.619833/95.641250 ms`，bicubic=`1.457208/1.583791 ms`；采样进程 RSS 峰值增量分别 `87,801,856/507,904 B`，两路顺序执行，不是独立冷启动或真实/GPU 峰值。
 - 新 readiness `artifacts/verification/p11-readiness-20261102-f11-videosr/summary.json` SHA-256=`d46cc3ac5e67848c4495cb495988c9aa29dbd2285b315eddc722bb55d6001d41`，校验 **76 evidence paths / 84 source hashes / 9 rows with gaps**。新 grouped `artifacts/verification/f11-videosr-grouped-20261102/summary.json` SHA-256=`d24f6ba482146fbed8767a57d7edca0a552b889c9880cb08fbc9b67939f076fe`，**4项能力/6组**、另5项无兼容分组；所有 Video SR 质量组保持 `unverified`，P11/发布 `open/not-ready`。完整 `tools/tests` 在 Ruby 3.4 和可写 Swift/Clang cache 下 **233/233 OK**，日志 SHA-256=`e4ad6bed49ce172e44143278d4d8f118c3a58f19f1e587ec5a6445f0009e841b`；默认受限环境初跑因系统 Ruby 2.6/RVM gem 混用与 `sandbox-exec` 权限失败，不计产品回归。
 - 九项受保护 dirty/untracked 文件未改。下一步继续 F11 缺口（正式 SDK Video SR 路径、自然主观质量、跨设备/持续资源、GPU/energy）及 F02 生产依赖归属；不把单素材保真度或 isolated probe 指标当发布验收。
+- 本机 `codesign --verify --deep --strict` 对研究 App 返回 `CSSMERR_TP_NOT_TRUSTED`，不把本机证书链验证写为通过；真机安装与启动回执仍成功。GitHub F11 issue `#11` 只读回读为 open；GitLab `glab issue view` 的自动审批检查因 HTTP 429 拒绝、命令未执行，因此本轮未向任一端写 issue 评论，留待双端都可回读时同步。
 
 ## 最新续接 — 2026-11-02 F02 授权已完成与 F11 Video SR 报告合同复核
 
