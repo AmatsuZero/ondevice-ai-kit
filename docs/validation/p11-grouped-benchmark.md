@@ -1,16 +1,16 @@
 # P11 分组 benchmark 快照
 
-初版日期：2026-10-27；2026-11-02 纳入 iOS TTS 五次逐 run 及 Video SR 双后端 48 帧原始资源报告。该快照只聚合能够从哈希固定原始 JSON 严格重算的数据；不补造历史字段，也不把不同能力的 timing 或质量指标合成总分。
+初版日期：2026-10-27；2026-11-02 纳入 iOS TTS 五次逐 run 及 Video SR 双后端 48 帧原始资源报告。同日另取得公开 SDK 路径的五次 Video SR 整请求报告，因测量对象与现有逐帧系统探针不同，先纳入 readiness 证据，不混入本表六组。该快照只聚合能够从哈希固定原始 JSON 严格重算的数据；不补造历史字段，也不把不同能力的 timing 或质量指标合成总分。
 
 ## 可复现入口
 
-跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、五份原始设备报告及 TTS 既有摘要的路径、SHA-256、source kind 和 P11 能力映射。生成命令：
+跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、五份原始设备报告及 TTS 既有摘要的路径、SHA-256、source kind 和 P11 能力映射。SDK 五次整请求样本只进入 readiness 的哈希证据集，不改这五份 grouped 来源。生成命令：
 
 ```sh
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/f11-videosr-grouped-20261102/summary.json
+  --output artifacts/verification/p11-grouped-20261102-sdk-videosr/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。
@@ -34,8 +34,8 @@ python3 tools/p11_grouped_report.py \
 
 ## 覆盖与剩余缺口
 
-readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Video SR 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **4项能力/6组**。其余5项保持 `unverified`：Speech ASR file、Speech ASR Android、Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。新 readiness 快照校验 **76 evidence paths / 84 source hashes / 9行有 gap**。
+readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Video SR 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **4项能力/6组**。其余5项保持 `unverified`：Speech ASR file、Speech ASR Android、Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。新增 SDK 样本后的 readiness 快照校验 **97 evidence paths / 105 source hashes / 9行有 gap**。
 
-旧 `f11-videosr-20261030` 成功报告缺少设备/系统/run 身份和逐帧原始值，仍不作为本次 grouped 来源；本次仅使用新真机成功报告。Video SR 的两份质量报告保持 `qualityVerdict=unverified`，分组 JSON 的 `quality.status` 也仍是 `unverified`，不把单素材 PSNR/SSIM 升级为主观质量通过。文件 ASR 的现有五次资源数据来自直连 Speech framework 的隔离 probe，不能冒充 SDK client 分组；身份、相机与 LiteRT-LM 同理保留各自证据和缺口。
+旧 `f11-videosr-20261030` 成功报告缺少设备/系统/run 身份和逐帧原始值，仍不作为本次 grouped 来源；本次仅使用新真机成功报告。新增的五次 SDK 整请求耗时及进程 RSS 样本保留为单独范围，不将约 5 秒的解码/缩放/编码全程与约 94 ms 的逐帧缩放混成同一统计组；待新增独立合同与复审后才考虑对应 SDK 分组。Video SR 的两份质量报告保持 `qualityVerdict=unverified`，分组 JSON 的 `quality.status` 也仍是 `unverified`，不把单素材 PSNR/SSIM 升级为主观质量通过。文件 ASR 的现有五次资源数据来自直连 Speech framework 的隔离 probe，不能冒充 SDK client 分组；身份、相机与 LiteRT-LM 同理保留各自证据和缺口。
 
-本次只在已连接 iPhone 上运行隔离 Video SR probe，输入/输出留在其 App Documents 沙盒；没有下载模型或接受许可证。P11 仍为 `open`，最终发布结论仍为 `not-ready`；后续需逐能力补齐兼容原始报告或保持明确 unavailable/unverified，并完成最低系统、质量、资源、取消和持续运行门禁。
+两类 Video SR 研究 App 均在已连接 iPhone 上运行，输入/输出留在各自 App Documents 沙盒；本次 SDK consumer 没有下载模型或接受许可证。P11 仍为 `open`，最终发布结论仍为 `not-ready`；后续需逐能力补齐兼容原始报告或保持明确 unavailable/unverified，并完成最低系统、质量、资源、取消和持续运行门禁。

@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261102-f11-videosr/summary.json",
-    "sha256": "d46cc3ac5e67848c4495cb495988c9aa29dbd2285b315eddc722bb55d6001d41"
+    "path": "artifacts/verification/p11-readiness-20261102-sdk-videosr/summary.json",
+    "sha256": "846712c901952ca1fc6b6d9db94b4e51a49049a6455a34b5a729ce27cec12660"
   },
   "schemaVersion": 1,
   "sources": [

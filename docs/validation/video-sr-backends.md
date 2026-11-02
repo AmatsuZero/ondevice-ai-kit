@@ -2,6 +2,14 @@
 
 更新时间：2026-11-02。P7 只比较后端边界和一条固定输入链路的探针条件，不把单帧放大或桌面运行结果当作移动端视频超分交付。
 
+## F11 公开 SDK 路径五次真机请求（2026-11-02）
+
+隔离 `io.ondeviceai.probe.f11sdkresource` App 从当前本地 Swift package 导入公开 `ODAIKitVideo`/`ODAIKitAppleVideo`，实际调用 `VideoProcessingClient → AppleVideoToolboxBackend`，以 `.discard` 音频策略顺序处理固定 Common swifts 48 帧输入五次。这是正式 SDK API 的隔离 consumer，不是下方直接调用系统 VideoToolbox 的探针，也不是 Demo UI 的端到端计时。iPhone17,2 / iOS 27.0.1，单进程 PID=`36128`、runId=`663C8FEA-1690-4B6D-A289-A4A2385CDF64`；签名 App 可执行文件 UUID=`969CD206-A99E-3D7C-9774-A4B2B3626EC9`。输入 SHA-256=`97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`，与既有公开 fixture 及 App bundle 副本一致。没有读取私人媒体、写 Photos 或下载模型；所有输出留在研究 App Documents 及 ignored 本地验证目录，普通 Demo 未替换。
+
+五个不同 runId 均返回 `apple.videotoolbox.sr`，各生成 1280×720、48 帧、24 fps、2 秒、无音轨的 HEVC/BT.709 MOV；输出文件哈希、帧时间戳及资源字段由 `artifacts/verification/f11-sdk-resource-20261102/validate.py` 重算。原始报告 SHA-256=`ca6e1a4bb5dc8375368b4b1822623ae84186bfcd5caf8f2333532342aacd2aa5`，校验摘要 SHA-256=`a130d3ae406dac3fd521e87d9b3cc88305a68bcda983c7e871be2465f028eec0`。五次整请求耗时最近秩 p50/p95=`5110.416958/6533.880333 ms`；约 10 ms 间隔采样的进程 RSS 峰值相对各轮开始值 p50/p95=`77,824,000/259,391,488 B`，首轮包含初始预热。首轮完成后 RSS=`61,112,320 B`、末轮完成后=`61,784,064 B`；这五次顺序运行不构成长期稳定、独立冷启动、真实/GPU 内存峰值或能耗证明。取样时设备上另有独立 `IOSVideoSRProbe` 进程，不能称全机负载隔离。
+
+首轮和末轮输出各与固定参考逐帧配对 48 帧，色彩元数据匹配；PSNR/SSIM 分别=`36.777730/0.979295` 与 `36.776212/0.979250`。两份质量报告 SHA-256=`fd8a08d13d3722070803009f85acf7f01c2ac223b162c32d77c93b398241c349`、`a6db070ddcf67d0dddecfaeef2219191de628918fcf0f9547add75e97d17c54e`，均保留 `qualityVerdict=unverified`。这只排查了固定素材的输出损坏与粗粒度漂移，没有主观模型质量裁定。SDK 整请求耗时含解码、缩放、编码及 client 调度，不能与下方系统探针逐帧缩放 p50/p95 直接比较。研究 PID 已单独 SIGTERM 并回读为 absent；设备上的其他进程未动。F11/P11 仍 `open/not-ready`。
+
 ## F11 可复算真机逐帧报告（2026-11-02）
 
 隔离 `io.ondeviceai.probe.f11videosr` Swift 探针在 iPhone 16 Pro Max (`iPhone17,2`) / iOS 27.0.1 重新处理同一公开 Common swifts 输入。固定传输文件 SHA-256=`97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`；成功报告 runId=`DEA07C32-D0F8-4354-BC5A-DE881FE7D3DB`，SHA-256=`8ac77be85c3834c78ffdcb8965340d2fd43db581e4781b1a71c4717cf4fb159d`。它在同一 JSON 内保留设备/系统身份、两路实际后端、输入哈希、各 48 个逐帧处理耗时和进程 RSS 采样字段，供[P11 分组报告](p11-grouped-benchmark.md)按最近秩重算。

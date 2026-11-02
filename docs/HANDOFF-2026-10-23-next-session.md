@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-02 F11 公开 SDK Video SR 五次真机资源报告
+
+- 隔离 `io.ondeviceai.probe.f11sdkresource` 研究 App 使用当前 Apple package 的公开 `VideoProcessingClient → AppleVideoToolboxBackend`，在已连接 iPhone17,2 / iOS 27.0.1、同 PID=`36128`、runId=`663C8FEA-1690-4B6D-A289-A4A2385CDF64` 顺序处理固定公开 48 帧素材五次。App 可执行文件 UUID=`969CD206-A99E-3D7C-9774-A4B2B3626EC9`；输入、bundle 副本和既有 fixture SHA-256 均为 `97682e3f...`。普通 Demo 未替换，不使用 Photos、私人媒体或模型下载。
+- 五次不同请求均成功生成独立 1280×720/48帧/24fps/2秒/无音轨 HEVC/BT.709 MOV，五份哈希及时间戳经 ignored `artifacts/verification/f11-sdk-resource-20261102/validate.py` 重算。原始报告 SHA-256=`ca6e1a4bb5dc8375368b4b1822623ae84186bfcd5caf8f2333532342aacd2aa5`，校验摘要 SHA-256=`a130d3ae406dac3fd521e87d9b3cc88305a68bcda983c7e871be2465f028eec0`。整请求耗时最近秩 p50/p95=`5110.416958/6533.880333 ms`；约10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`77,824,000/259,391,488 B`，首轮含预热。首末轮参考编码保真度 PSNR/SSIM=`36.777730/0.979295` 与 `36.776212/0.979250`，`qualityVerdict=unverified`。采样时另有独立 Video SR probe 进程，未声称全机负载隔离。
+- 新 ignored readiness `artifacts/verification/p11-readiness-20261102-sdk-videosr/summary.json` SHA-256=`846712c901952ca1fc6b6d9db94b4e51a49049a6455a34b5a729ce27cec12660`，校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**；grouped `artifacts/verification/p11-grouped-20261102-sdk-videosr/summary.json` SHA-256=`9b1016c6603b5a642637ea1a4d0b1db759104d9e2ac260828bd4fb2b657c3c35`，仍 **4项能力/6组**。SDK 整请求数据只入 readiness，不与系统探针逐帧耗时合组。P11/发布 `open/not-ready`，长期资源、主观质量、真实/GPU 峰值及能耗仍缺；两项 P11 定向测试 **29/29**。研究 PID 已精确 SIGTERM 并回读 absent，其他设备进程保留。原始证据、源码、构建回执和五份 MOV 均在 ignored 本地目录；受保护九项 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-02 F02 生产依赖源码归属
 
 - [AtlasTextOp 调查](validation/p4-atlas-text-cache.md)新增有界归属结论：当前 Demo 的 Compose `1.11.1` 传递解析到 Skiko `0.144.6`；TLS 缓存及候选修复位于 Skia `AtlasTextOp.cpp`。Skia 承载源码修复，Skiko/Compose 是生产分发链，本项目负责选择可追溯分发物并做兼容与真机验收；这不是上游已接受补丁或生产依赖已修复的声明。[F02 跟踪行](validation/foundation-followups.md)已据此明确下一门槛。
