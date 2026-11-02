@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-02 F02 授权答复与 F11 双端同步
+
+- 用户回复可以处理 F02 系统相机授权；该授权及同 PID 十轮真机 trace 已在下方 F02 检查点完成。本次没有重新启动研究 App、申请权限或采集相机数据；F02 仍待生产依赖归属、无 recorder 正式候选和长期资源门槛。
+- `f4847539e1f4f67953e38229436ac6dcdd46310d` 已快进推送 GitLab `jihu/feat/sdk-foundation`，只读 `ls-remote` 回读 GitHub `origin` 与 GitLab `jihu` 均为该 SHA。GitHub/GitLab F11 issue `#11` 已追加同文 Video SR 进展并回读，均保持 open；明确记录 4 项能力／6 组、76 条证据路径／84 个哈希／9 行有缺口，Video SR 质量与 P11 发布仍 `unverified` / `open/not-ready`。
+- 生产依赖路径的独立子代理重试仍遇 429，没有依赖方案审查结论；不据此改动生产 Compose/Skiko 图。九项受保护 dirty/untracked 文件继续保留。下一步先裁定 F02 修复归属与兼容门槛，再做无 recorder 的正式生产候选；F11 保留自然主观质量及跨能力资源缺口。
+
 ## 最新续接 — 2026-11-02 F11 Video SR 同次逐帧真机分组
 
 - 已连接 iPhone 16 Pro Max / iOS 27.0.1 上，隔离 `io.ondeviceai.probe.f11videosr` Swift 探针签名构建、安装并以 PID `36085` 处理固定公开视频输入；成功报告 runId=`DEA07C32-D0F8-4354-BC5A-DE881FE7D3DB`，同一 JSON 新增硬件型号/OS/runId 与 SR、Core Image bicubic 各 48 个逐帧耗时。输入 SHA-256=`97682e3f...`，原始报告 SHA-256=`8ac77be85c3834c78ffdcb8965340d2fd43db581e4781b1a71c4717cf4fb159d`。两路 MOV 仅在 App Documents 和 ignored `artifacts/verification/f11-videosr-grouped-20261102/`；研究 PID 已单独 SIGTERM，普通 Demo 未替换。
