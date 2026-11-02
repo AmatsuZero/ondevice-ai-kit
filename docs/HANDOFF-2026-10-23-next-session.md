@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-02 F11 Video SR 同次逐帧真机分组
+
+- 已连接 iPhone 16 Pro Max / iOS 27.0.1 上，隔离 `io.ondeviceai.probe.f11videosr` Swift 探针签名构建、安装并以 PID `36085` 处理固定公开视频输入；成功报告 runId=`DEA07C32-D0F8-4354-BC5A-DE881FE7D3DB`，同一 JSON 新增硬件型号/OS/runId 与 SR、Core Image bicubic 各 48 个逐帧耗时。输入 SHA-256=`97682e3f...`，原始报告 SHA-256=`8ac77be85c3834c78ffdcb8965340d2fd43db581e4781b1a71c4717cf4fb159d`。两路 MOV 仅在 App Documents 和 ignored `artifacts/verification/f11-videosr-grouped-20261102/`；研究 PID 已单独 SIGTERM，普通 Demo 未替换。
+- `video_sr_quality.py` 复核两路 48 帧 HEVC/24 fps/BT.709；PSNR/SSIM=`36.776212/0.979250` 与 `38.872866/0.983506`，两份 `qualityVerdict=unverified`。ignored `source-manifest.json` SHA-256=`3a27bad734166f631a332eddfd3314d4e32ed14b2b6a434eec08f2f3aa89b6f8`，绑定 Swift 源、签名 App dylib、输入/参考、原始报告、两份质量 JSON 和两路 MOV 哈希。
+- `video-sr-resource` 分组新增 manifest 的输入/参考/双输出/双质量哈希绑定，验证同次设备身份、不同输出、同一输入/参考身份和 48 帧原始值。先观察新测试 RED 后，定向 **21/21**；独立 reviewer 初审指出质量报告未绑定和同名输出未拒绝，均补测试修复。复审调用返回 429，**无第二次独立 APPROVE**。最近秩逐帧 p50/p95：SR=`93.619833/95.641250 ms`，bicubic=`1.457208/1.583791 ms`；采样进程 RSS 峰值增量分别 `87,801,856/507,904 B`，两路顺序执行，不是独立冷启动或真实/GPU 峰值。
+- 新 readiness `artifacts/verification/p11-readiness-20261102-f11-videosr/summary.json` SHA-256=`d46cc3ac5e67848c4495cb495988c9aa29dbd2285b315eddc722bb55d6001d41`，校验 **76 evidence paths / 84 source hashes / 9 rows with gaps**。新 grouped `artifacts/verification/f11-videosr-grouped-20261102/summary.json` SHA-256=`d24f6ba482146fbed8767a57d7edca0a552b889c9880cb08fbc9b67939f076fe`，**4项能力/6组**、另5项无兼容分组；所有 Video SR 质量组保持 `unverified`，P11/发布 `open/not-ready`。完整 `tools/tests` 在 Ruby 3.4 和可写 Swift/Clang cache 下 **233/233 OK**，日志 SHA-256=`e4ad6bed49ce172e44143278d4d8f118c3a58f19f1e587ec5a6445f0009e841b`；默认受限环境初跑因系统 Ruby 2.6/RVM gem 混用与 `sandbox-exec` 权限失败，不计产品回归。
+- 九项受保护 dirty/untracked 文件未改。下一步继续 F11 缺口（正式 SDK Video SR 路径、自然主观质量、跨设备/持续资源、GPU/energy）及 F02 生产依赖归属；不把单素材保真度或 isolated probe 指标当发布验收。
+
 ## 最新续接 — 2026-11-02 F02 授权已完成与 F11 Video SR 报告合同复核
 
 - 用户再次表示可处理 F02 系统相机弹窗；该授权及同 PID 十轮真机 trace 已在下方 `F02 tokenized recorder 同 PID 真机 trace 已配对` 检查点完成，无需重复启动研究 App 或请求授权。F02 生产依赖归属、无 recorder 候选及长期资源门槛仍开放。

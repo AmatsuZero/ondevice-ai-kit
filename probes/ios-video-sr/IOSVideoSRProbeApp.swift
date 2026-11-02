@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import UIKit
 import AVFoundation
+import Darwin
 
 #if !targetEnvironment(simulator)
 import VideoToolbox
@@ -220,6 +221,13 @@ final class VideoSRProbeModel: ObservableObject {
             }
             var combined = result
             combined["baseline"] = baseline
+            var systemInfo = utsname()
+            uname(&systemInfo)
+            combined["runId"] = UUID().uuidString
+            combined["device"] = withUnsafeBytes(of: &systemInfo.machine) { bytes in
+                String(decoding: bytes.prefix { $0 != 0 }, as: UTF8.self)
+            }
+            combined["OS"] = UIDevice.current.systemVersion
             guard writeReport(combined) else { return }
             completed = true
             status = "Processed \(result["outputFrameCount"] ?? 0) frames + baseline"

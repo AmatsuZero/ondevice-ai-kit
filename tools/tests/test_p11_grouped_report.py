@@ -95,6 +95,29 @@ def tts_resource_run():
     }
 
 
+def video_sr_run():
+    def result(backend, timings, peak):
+        return {
+            "schemaVersion": 1, "validationStatus": "device", "state": "success",
+            "backendId": backend, "inputFileSha256": "c" * 64,
+            "inputFrameCount": 48, "outputFrameCount": 48,
+            "outputWidth": 1280, "outputHeight": 720, "timestampsMonotonic": True,
+            "frameProcessingSeconds": timings,
+            "residentMemoryBaselineBytes": 100, "residentMemoryPeakBytes": peak,
+            "residentMemoryEndingBytes": 110, "residentMemoryPeakDeltaBytes": peak - 100,
+            "memoryMeasurement": "process resident_size sampled after each frame processing and encoding",
+            "output": "sr.mov" if backend == "apple.videotoolbox.sr" else "bicubic.mov",
+        }
+
+    raw = result("apple.videotoolbox.sr", [index / 1000 for index in range(1, 49)], 300)
+    raw.update({
+        "runId": "video-session", "device": "iPhone17,2", "OS": "27.0.1",
+        "colorContract": "probe-sRGB-v1; SR model transfer function unverified",
+        "baseline": result("apple.coreimage.bicubic", [index / 10000 for index in range(1, 49)], 140),
+    })
+    return raw
+
+
 class GroupedReportTests(unittest.TestCase):
     def write_manifest(self, root, sources, readiness=None):
         if readiness is None:
@@ -159,6 +182,50 @@ class GroupedReportTests(unittest.TestCase):
         }
         return manifest
 
+    def video_manifest(self, root, raw=None):
+        raw = raw or video_sr_run()
+        readiness = {
+            "schemaVersion": 1,
+            "rows": [{"capability": "video-sr", "status": "pass-bounded", "unverified": ["subjective quality"]}],
+            "p11Gate": {"status": "open", "finalReleaseConclusion": "not-ready"},
+        }
+        manifest = self.write_manifest(
+            root, [("video", raw, "video-sr-resource", "video-sr")], readiness=readiness
+        )
+        entry = manifest["sources"][0]
+        for label, name, payload in (
+            ("input", "input.mp4", b"input"), ("reference", "reference.mkv", b"reference"),
+            ("sr", "sr.mov", b"super-resolution"), ("bicubic", "bicubic.mov", b"bicubic"),
+        ):
+            path = root / name
+            path.write_bytes(payload)
+            data = {"path": path.name, "sha256": hashlib.sha256(payload).hexdigest()}
+            if label in ("input", "reference"):
+                entry[label] = data
+            else:
+                entry.setdefault("outputs", {})[label] = data
+        raw["inputFileSha256"] = entry["input"]["sha256"]
+        raw["baseline"]["inputFileSha256"] = entry["input"]["sha256"]
+        raw_path = root / entry["path"]
+        raw_path.write_text(json.dumps(raw))
+        entry["sha256"] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+        for label in ("sr", "bicubic"):
+            quality = {
+                "schemaVersion": 1, "measurement": "decoded-output-fidelity",
+                "qualityVerdict": "unverified", "colorComparability": "matched-metadata",
+                "comparedFrames": 48,
+                "reference": {"path": entry["reference"]["path"], "decodedSha256": "a" * 64},
+                "candidate": {"path": entry["outputs"][label]["path"],
+                              "decodedSha256": ("b" if label == "sr" else "c") * 64},
+                "metrics": {"psnrDb": 36.5 if label == "sr" else 38.5, "ssim": 0.97},
+            }
+            path = root / f"quality-{label}.json"
+            path.write_text(json.dumps(quality))
+            entry.setdefault("quality", {})[label] = {
+                "path": path.name, "sha256": hashlib.sha256(path.read_bytes()).hexdigest()
+            }
+        return manifest
+
     def test_tts_resource_group_recomputes_five_runs_without_quality_promotion(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -174,6 +241,78 @@ class GroupedReportTests(unittest.TestCase):
         self.assertEqual(group["scope"], "isolated-sdk-tts-probe")
         self.assertEqual(result["coverage"][2]["reportStatus"], "reported")
         self.assertEqual(result["p11Gate"], {"status": "open", "finalReleaseConclusion": "not-ready"})
+
+    def test_video_sr_groups_recompute_48_frame_timings_without_quality_promotion(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.video_manifest(root)
+            result = report.generate(manifest, root)
+        self.assertEqual(len(result["groups"]), 2)
+        sr, bicubic = result["groups"]
+        self.assertEqual(sr["actualBackend"], "apple.videotoolbox.sr")
+        self.assertEqual(bicubic["actualBackend"], "apple.coreimage.bicubic")
+        self.assertEqual(sr["timingsMs"]["frameProcessing"], {"count": 48, "p50": 24.0, "p95": 46.0})
+        self.assertEqual(bicubic["timingsMs"]["frameProcessing"], {"count": 48, "p50": 2.4, "p95": 4.6})
+        self.assertEqual(sr["runIds"], ["video-session"])
+        self.assertEqual(bicubic["runIds"], ["video-session:bicubic"])
+        self.assertEqual(sr["quality"]["status"], "unverified")
+        self.assertEqual(sr["quality"]["metrics"], {"psnrDb": 36.5, "ssim": 0.97})
+        self.assertEqual(sr["quality"]["source"], manifest["sources"][0]["quality"]["sr"])
+        self.assertEqual(sr["memory"]["peakDeltaSampledBytes"], 200)
+        self.assertEqual(result["coverage"][0]["reportStatus"], "reported")
+        self.assertEqual(result["p11Gate"], {"status": "open", "finalReleaseConclusion": "not-ready"})
+
+    def test_video_sr_rejects_missing_frame_samples_and_cross_backend_input_mismatch(self):
+        for corruption in ("missing-samples", "different-input"):
+            with self.subTest(corruption=corruption), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                raw = video_sr_run()
+                if corruption == "missing-samples":
+                    raw["frameProcessingSeconds"] = raw["frameProcessingSeconds"][:-1]
+                manifest = self.video_manifest(root, raw)
+                if corruption == "different-input":
+                    entry = manifest["sources"][0]
+                    raw_path = root / entry["path"]
+                    raw = json.loads(raw_path.read_text())
+                    raw["baseline"]["inputFileSha256"] = "d" * 64
+                    raw_path.write_text(json.dumps(raw))
+                    entry["sha256"] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+                with self.assertRaisesRegex(ValueError, "invalid Video SR"):
+                    report.generate(manifest, root)
+
+    def test_video_sr_rejects_duplicate_outputs_and_mismatched_quality_identity(self):
+        for corruption in ("duplicate-output", "swapped-candidate", "mismatched-reference"):
+            with self.subTest(corruption=corruption), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                manifest = self.video_manifest(root)
+                entry = manifest["sources"][0]
+                if corruption == "duplicate-output":
+                    raw_path = root / entry["path"]
+                    raw = json.loads(raw_path.read_text())
+                    raw["baseline"]["output"] = raw["output"]
+                    raw_path.write_text(json.dumps(raw))
+                    entry["sha256"] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+                else:
+                    quality_path = root / entry["quality"]["sr"]["path"]
+                    quality = json.loads(quality_path.read_text())
+                    if corruption == "swapped-candidate":
+                        quality["candidate"]["path"] = entry["outputs"]["bicubic"]["path"]
+                    else:
+                        quality["reference"]["decodedSha256"] = "b" * 64
+                    quality_path.write_text(json.dumps(quality))
+                    entry["quality"]["sr"]["sha256"] = hashlib.sha256(quality_path.read_bytes()).hexdigest()
+                with self.assertRaisesRegex(ValueError, "invalid Video SR"):
+                    report.generate(manifest, root)
+
+    def test_video_sr_quality_file_cannot_be_overwritten_by_grouped_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.video_manifest(root)
+            quality = root / manifest["sources"][0]["quality"]["sr"]["path"]
+            before = quality.read_bytes()
+            with self.assertRaisesRegex(ValueError, "output must not overwrite"):
+                report.write_report(manifest, root, quality)
+            self.assertEqual(quality.read_bytes(), before)
 
     def test_tts_summary_must_match_raw_and_cannot_be_output(self):
         with tempfile.TemporaryDirectory() as directory:

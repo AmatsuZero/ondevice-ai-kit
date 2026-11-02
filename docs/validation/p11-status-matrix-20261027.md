@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-11-02 F11 隔离 iOS Video SR probe 新增同一成功报告内的硬件型号/系统/runId 与两路各 48 个逐帧耗时，固定公开输入 SHA-256=`97682e3f...`。P11 按最近秩重算 SR 每帧 p50/p95=`93.619833/95.641250 ms`、Core Image bicubic=`1.457208/1.583791 ms`，进程 RSS 采样峰值增量分别为 `87,801,856/507,904 B`。对应质量报告的单素材编码输出 PSNR/SSIM 分别为 `36.776212/0.979250` 和 `38.872866/0.983506`，`qualityVerdict=unverified`，主观质量及模型传递函数未验。新 grouped coverage **4项能力/6组**，另5项无兼容分组；readiness **76 evidence paths / 84 source hashes / 9 rows with gaps**，P11 仍 `open/not-ready`。原始报告和限制见[超分复核](video-sr-backends.md#f11-可复算真机逐帧报告2026-11-02)与[分组报告](p11-grouped-benchmark.md)。
+
 2026-11-02 F11 将固定来源的 iOS TTS 五次逐 run 原始报告纳入严格 grouped 工具：新增 `speech-tts` / `apple.avspeech` 一组，duration p50/p95=`2779.726917/2779.791875 ms`，约10 ms 采样 RSS 峰值 p50/p95 均为 `44,810,240 B`。报告明确为隔离 SDK TTS probe，voice 为 `en-US` Samantha；自然音质、断网、真实峰值、GPU/energy、最低系统仍未验证。当前 grouped coverage **3项能力/4组**，另6项无兼容分组；readiness **70 evidence paths / 78 source hashes / 9 rows with gaps**。F02 tokenized 同 PID trace 作为新增限定证据，生产归属仍开放；P11 保持 `open/not-ready`。生成入口见[分组报告](p11-grouped-benchmark.md)。
 
 2026-10-31 F11 对两份已固定 SHA-256 的自然视频原始报告做[六行跨场景自由描述核对](f11-cross-scene-video-quality-20261031.md)：飞鸟、瀑布各三个 motion window，场景词分别命中 3/3；飞鸟现有完整 rubric 仅 1/3，瀑布三行含抽查画面不支持的人、动物或鸟细节，完整语义正确率仍未评定。两场景严格 motion/frozen pair 都为 0/3；不同素材和 source commit 不构成配对 benchmark。派生记录 SHA-256=`530c4676f9e81f9a68a76e27aa806f872a4713bfc793361edd8a84267bebe474`；readiness 为 69 evidence paths / 76 source hashes / 9 rows with gaps，既有 grouped benchmark 仍为 3 组。P11 仍 `open/not-ready`。

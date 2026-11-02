@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -19,11 +20,12 @@ except ModuleNotFoundError:  # Direct `python tools/p11_grouped_report.py` invoc
 
 
 SCHEMA_VERSION = 1
-_KINDS = {"face", "mlxvlm", "tts-resource"}
+_KINDS = {"face", "mlxvlm", "tts-resource", "video-sr-resource"}
 _KIND_CAPABILITIES = {
     "face": {"face-detection"},
     "mlxvlm": {"multimodal-apple"},
     "tts-resource": {"speech-tts"},
+    "video-sr-resource": {"video-sr"},
 }
 
 
@@ -57,7 +59,7 @@ def _load_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def _verify_file(repo_root: Path, entry: dict[str, Any], label: str) -> tuple[Path, dict[str, Any]]:
+def _verify_hash(repo_root: Path, entry: dict[str, Any], label: str) -> Path:
     path = _relative_path(repo_root, entry.get("path"), f"{label}.path")
     if not path.is_file():
         raise ValueError(f"missing source: {entry.get('path')}")
@@ -67,6 +69,11 @@ def _verify_file(repo_root: Path, entry: dict[str, Any], label: str) -> tuple[Pa
     actual = _sha256(path)
     if actual != expected:
         raise ValueError(f"hash mismatch: {entry.get('path')}")
+    return path
+
+
+def _verify_file(repo_root: Path, entry: dict[str, Any], label: str) -> tuple[Path, dict[str, Any]]:
+    path = _verify_hash(repo_root, entry, label)
     return path, _load_json(path)
 
 
@@ -234,6 +241,115 @@ def _tts_group(
     }
 
 
+def _video_sr_groups(raw: dict[str, Any], entry: dict[str, Any], repo_root: Path) -> list[dict[str, Any]]:
+    run_id = raw.get("runId")
+    device = raw.get("device")
+    os_version = raw.get("OS")
+    baseline = raw.get("baseline")
+    color_contract = raw.get("colorContract")
+    quality_entries = entry.get("quality")
+    output_entries = entry.get("outputs")
+    input_entry = entry.get("input")
+    reference_entry = entry.get("reference")
+    if (not isinstance(run_id, str) or not run_id
+            or not isinstance(device, str) or not re.fullmatch(r"iPhone[0-9]+,[0-9]+", device)
+            or not isinstance(os_version, str) or not os_version
+            or not isinstance(color_contract, str) or not color_contract
+            or not isinstance(baseline, dict)
+            or raw.get("output") == baseline.get("output")
+            or not isinstance(quality_entries, dict) or not isinstance(output_entries, dict)
+            or not isinstance(input_entry, dict) or not isinstance(reference_entry, dict)):
+        raise ValueError("invalid Video SR session identity")
+
+    _verify_hash(repo_root, input_entry, "Video SR input")
+    _verify_hash(repo_root, reference_entry, "Video SR reference")
+    if raw.get("inputFileSha256") != input_entry["sha256"]:
+        raise ValueError("invalid Video SR input identity")
+
+    groups = []
+    input_hash = raw.get("inputFileSha256")
+    reference_decoded_hash: str | None = None
+    for suffix, source, backend in (
+        ("sr", raw, "apple.videotoolbox.sr"),
+        ("bicubic", baseline, "apple.coreimage.bicubic"),
+    ):
+        quality_entry = quality_entries.get(suffix)
+        output_entry = output_entries.get(suffix)
+        if not isinstance(quality_entry, dict) or not isinstance(output_entry, dict):
+            raise ValueError(f"invalid Video SR {suffix} evidence entries")
+        _verify_hash(repo_root, output_entry, f"Video SR {suffix} output")
+        _, quality_report = _verify_file(repo_root, quality_entry, f"Video SR {suffix} quality")
+        candidate = quality_report.get("candidate")
+        reference = quality_report.get("reference")
+        metrics = quality_report.get("metrics")
+        decoded_hash = reference.get("decodedSha256") if isinstance(reference, dict) else None
+        if (not isinstance(candidate, dict) or not isinstance(reference, dict)
+                or not isinstance(metrics, dict)
+                or quality_report.get("schemaVersion") != 1
+                or quality_report.get("measurement") != "decoded-output-fidelity"
+                or quality_report.get("qualityVerdict") != "unverified"
+                or quality_report.get("colorComparability") != "matched-metadata"
+                or quality_report.get("comparedFrames") != 48
+                or candidate.get("path") != output_entry.get("path")
+                or reference.get("path") != reference_entry.get("path")
+                or not isinstance(decoded_hash, str)
+                or not re.fullmatch(r"[0-9a-f]{64}", decoded_hash)
+                or not isinstance(candidate.get("decodedSha256"), str)
+                or not re.fullmatch(r"[0-9a-f]{64}", candidate["decodedSha256"])
+                or (reference_decoded_hash is not None and decoded_hash != reference_decoded_hash)
+                or type(metrics.get("psnrDb")) not in (int, float)
+                or not math.isfinite(metrics["psnrDb"]) or metrics["psnrDb"] <= 0
+                or type(metrics.get("ssim")) not in (int, float)
+                or not math.isfinite(metrics["ssim"]) or not 0 <= metrics["ssim"] <= 1
+                or source.get("output") != Path(output_entry["path"]).name):
+            raise ValueError(f"invalid Video SR {suffix} quality identity")
+        reference_decoded_hash = decoded_hash
+        values = source.get("frameProcessingSeconds")
+        memory = [source.get(field) for field in (
+            "residentMemoryBaselineBytes", "residentMemoryPeakBytes",
+            "residentMemoryEndingBytes", "residentMemoryPeakDeltaBytes",
+        )]
+        if (source.get("schemaVersion") != 1 or source.get("validationStatus") != "device"
+                or source.get("state") != "success" or source.get("backendId") != backend
+                or not isinstance(input_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", input_hash)
+                or source.get("inputFileSha256") != input_hash
+                or source.get("inputFrameCount") != 48 or source.get("outputFrameCount") != 48
+                or source.get("outputWidth") != 1280 or source.get("outputHeight") != 720
+                or source.get("timestampsMonotonic") is not True
+                or not isinstance(values, list) or len(values) != 48
+                or any(type(value) not in (float, int) or not math.isfinite(value) or value <= 0
+                       for value in values)
+                or any(type(value) is not int or value < 0 for value in memory)
+                or memory[1] < max(memory[0], memory[2]) or memory[3] != memory[1] - memory[0]
+                or not isinstance(source.get("memoryMeasurement"), str)
+                or not source["memoryMeasurement"]
+                or not isinstance(source.get("output"), str) or not source["output"]):
+            raise ValueError(f"invalid Video SR {suffix} source")
+        groups.append({
+            "kind": "video-sr-resource", "p11Capability": "video-sr",
+            "source": entry["path"], "sourceSha256": entry["sha256"],
+            "scope": "isolated-system-video-sr-probe",
+            "device": device, "OS": os_version, "actualBackend": backend,
+            "identity": {"sessionRunId": run_id, "inputFileSha256": input_hash,
+                         "colorContract": color_contract, "output": source["output"]},
+            "runIds": [run_id if suffix == "sr" else f"{run_id}:bicubic"],
+            "timingsMs": {"frameProcessing": _nearest_rank([value * 1000 for value in values])},
+            "quality": {"status": "unverified", "reason": "natural-video subjective quality unverified",
+                        "measurement": "decoded-output-fidelity", "metrics": metrics,
+                        "source": dict(quality_entry), "output": dict(output_entry),
+                        "reference": dict(reference_entry),
+                        "candidateDecodedSha256": candidate["decodedSha256"],
+                        "referenceDecodedSha256": decoded_hash},
+            "memory": {"status": "observed-sampled", "method": source["memoryMeasurement"],
+                       "baselineBytes": memory[0], "peakSampledBytes": memory[1],
+                       "endingBytes": memory[2], "peakDeltaSampledBytes": memory[3]},
+            "energy": {"status": "unmeasured"},
+            "unverified": ["subjectiveQuality", "truePeakMemory", "gpuPeak", "energy",
+                           "minimumOS", "crossDevice", "productionSDK"],
+        })
+    return groups
+
+
 def _reject_duplicate_run_ids(groups: list[dict[str, Any]]) -> None:
     seen: set[str] = set()
     for group in groups:
@@ -305,8 +421,10 @@ def generate(manifest: dict[str, Any], repo_root: Path) -> dict[str, Any]:
             groups.append(_face_group(raw, capability, entry["path"], digest))
         elif entry["kind"] == "mlxvlm":
             groups.append(_mlx_group(raw, capability, entry["path"], digest, entry.get("expectedSamples")))
-        else:
+        elif entry["kind"] == "tts-resource":
             groups.append(_tts_group(raw, entry, repo_root))
+        else:
+            groups.extend(_video_sr_groups(raw, entry, repo_root))
     _reject_duplicate_run_ids(groups)
     reported = {group["p11Capability"] for group in groups}
     coverage = []
@@ -355,6 +473,14 @@ def _reject_output_aliases(
     sources = manifest.get("sources") or []
     candidates = [manifest.get("readiness"), *sources,
                   *(entry.get("summary") for entry in sources if isinstance(entry, dict) and entry.get("summary"))]
+    for source in sources:
+        if not isinstance(source, dict) or source.get("kind") != "video-sr-resource":
+            continue
+        candidates.extend(source.get(key) for key in ("input", "reference"))
+        for key in ("quality", "outputs"):
+            nested = source.get(key)
+            if isinstance(nested, dict):
+                candidates.extend(nested.values())
     for index, entry in enumerate(candidates):
         if not isinstance(entry, dict):
             continue

@@ -186,6 +186,7 @@ enum VideoSRRunner {
             "inputFileSha256": inputFileSha256,
             "inputFrameCount": frameCount, "outputFrameCount": frameCount, "outputWidth": 1280, "outputHeight": 720,
             "timestampsMonotonic": monotonic,
+            "frameProcessingSeconds": durations,
             "p50Seconds": sorted.isEmpty ? NSNull() : sorted[sorted.count / 2],
             "p95Seconds": sorted.isEmpty ? NSNull() : sorted[min(sorted.count - 1, Int(Double(sorted.count) * 0.95))],
             "residentMemoryBaselineBytes": baselineResidentBytes, "residentMemoryPeakBytes": peakResidentBytes,
