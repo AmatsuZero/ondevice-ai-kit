@@ -1,5 +1,11 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-03 F02 真实 Skia 对象原生回归
+
+在新的 ignored Skia worktree `artifacts/verification/f02-remediation-20261101/skia-native-regression-20261103/` 固定同一 `22f58c9...` revision，接入 `skiko_tests` 原生 `dm`。测试通过 `AtlasTextOpTools::CreateOp` 构造真实 `AtlasTextOp`，用 mock `GrDirectContext` 验证同线程缓存复用及 `GrRecordingContext` 析构清理；另将真实 op 交给 worker 析构，在主线程销毁 context 后再让 worker 退出，测试 TLS 缓存存储释放。仅此 ignored checkout 在实际 `::operator delete` 返回后报告测试事件；正式分发补丁不含该 hook。
+
+原始 `thread_local void*` 版本先见 **RED：2 项中 context 清理通过、worker 退出释放断言失败**；固定 `CacheOwner` 候选后同测试 **2/2 GREEN**。`Skiko_` 专项 **5/5**，宿主 `dm --src tests` **2809/2809 exit 0**；日志有 `CGLChoosePixelFormat failed`，所以不将宿主结果上升为 GPU 或 iOS 真机验收。可供源码复审的[独立补丁与复现步骤](../../probes/skia-atlas-text-cache/README.md)已入库，三份补丁均在干净固定 revision 上通过 `git apply --check`；原始日志、源码与补丁 SHA-256 固定于 ignored `artifacts/verification/f02-remediation-20261101/native-regression-summary.json`。独立源码复审重试返回 HTTP 429，**没有新审查结论**。这补上真实对象与线程退出的原生回归证据，尚未取得经复审的生产修复、独立不可变 Skiko 分发物或正式无 recorder 持续资源验收；F02/P4/P11 仍 `open/not-ready`。
+
 ## 2026-11-02 F02 生产依赖归属与候选门槛
 
 **源码归属**：当前 Demo 的 `demo/shared/build.gradle.kts` 通过 Compose UI 引入渲染器；版本目录固定 Compose `1.11.1`、Kotlin `2.4.0`。独立 committed-source consumer 的 iOS arm64 依赖图显示 `org.jetbrains.skiko:skiko:0.144.6 → skiko-iosarm64:0.144.6`。待修正的 `thread_local void* gCache`、`operator new/delete` 和 `ClearCache()` 都在 Skia `src/gpu/ganesh/ops/AtlasTextOp.cpp`，不在本项目的相机页面或 KMP bridge。Skiko 将对应 Skia 静态库装入 iOS Klib，Compose 再传递引入它。因此源码修复应由 Skia 层承载；本项目负责验证和选择可追溯的 Skiko/Compose 分发物，不能只在 Demo 页面清理状态来代替原生缓存修复。以上是源码及依赖图归属，不是上游维护者已接受补丁的声明。

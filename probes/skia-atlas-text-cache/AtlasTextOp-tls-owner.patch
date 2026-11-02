@@ -1,0 +1,40 @@
+--- a/src/gpu/ganesh/ops/AtlasTextOp.cpp
++++ b/src/gpu/ganesh/ops/AtlasTextOp.cpp
+@@ -66,26 +66,30 @@
+ inline static constexpr int kIndicesPerGlyph = 6;
+ 
+ // If we have thread local, then cache memory for a single AtlasTextOp.
+-static thread_local void* gCache = nullptr;
++struct CacheOwner {
++    void* bytes = nullptr;
++    ~CacheOwner() { ::operator delete(bytes); }
++};
++static thread_local CacheOwner gCache;
+ void* AtlasTextOp::operator new(size_t s) {
+-    if (gCache != nullptr) {
+-        return std::exchange(gCache, nullptr);
++    if (gCache.bytes != nullptr) {
++        return std::exchange(gCache.bytes, nullptr);
+     }
+ 
+     return ::operator new(s);
+ }
+ 
+ void AtlasTextOp::operator delete(void* bytes) noexcept {
+-    if (gCache == nullptr) {
+-        gCache = bytes;
++    if (gCache.bytes == nullptr) {
++        gCache.bytes = bytes;
+         return;
+     }
+     ::operator delete(bytes);
+ }
+ 
+ void AtlasTextOp::ClearCache() {
+-    ::operator delete(gCache);
+-    gCache = nullptr;
++    ::operator delete(gCache.bytes);
++    gCache.bytes = nullptr;
+ }
+ 
+ namespace {

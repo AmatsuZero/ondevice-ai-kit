@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 Skia 原生回归 RED→GREEN
+
+- 用户再次回复可处理 F02 相机授权；该授权及同 PID 十轮真机 trace 已完成，无需重新启动研究 App 或申请权限。本轮继续 F02 Skia 源码门槛，生产 Demo/依赖与九项受保护 dirty/untracked 文件未改。
+- 新建 ignored 固定 Skia `22f58c9...` 隔离 worktree，`skiko_tests` 用真实 `AtlasTextOpTools::CreateOp` 与 mock context 验证同线程缓存、context 析构清理和 worker TLS 退出释放。原始 TLS 指针版本 **2 项中 worker 释放断言 RED**，同一测试在固定 `CacheOwner` 候选 **2/2 GREEN**；`Skiko_` 专项 **5/5**、宿主全量 `dm --src tests` **2809/2809 exit 0**，但出现宿主 CGL 初始化提示，非 GPU/真机验收。测试事件 hook 仅在隔离回归 checkout；[可复现双补丁与正式修复补丁](../probes/skia-atlas-text-cache/README.md)已入库，三份均在干净固定 revision 通过 `git apply --check`。正式补丁 SHA-256 仍 `c4ba9412811a6c68df3f3c9e14e53cb684c7eb849f3f16c0f683c10f6b55fc30`。原始日志与哈希见 `artifacts/verification/f02-remediation-20261101/native-regression-summary.json`。
+- 独立源码复审尝试遇 HTTP 429，无结论；仍需对该原生回归及正式补丁复审，形成独立不可变 Skiko 分发物，完成无 recorder 正式消费端与持续资源验收。F02/P4/P11、发布均 `open/not-ready`。
+
 ## 最新续接 — 2026-11-02 F11 SDK 文件 ASR 独立分组
 
 - 既有 `SpeechRecognitionClient.recognize → AppleSpeechRecognizerBackend.recognize` 五次固定文件真机报告此前已在 readiness，但 grouped 的 `speech-asr-file` 仍无兼容来源。本轮新增独立 `asr-file-sdk-resource`，以 manifest 哈希固定原始报告、bounded summary、来源清单和合成 CAF；核对五个不同成功 run 的后端、归一化文本、RSS、耗时、输入身份和摘要交叉引用，重算最近秩统计。它不合并独立的直连 Speech framework 探针，也不使用设备/麦克风/相册。
