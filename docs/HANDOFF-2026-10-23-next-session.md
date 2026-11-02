@@ -6,6 +6,7 @@
 
 ## 最新续接 — 2026-11-02 F02 tokenized recorder 真机 trace 已配对
 
+- 三份验证/续接文档已单独提交 `107346b7942f7f378b640c5cdd18feee11ffb769` 并同步 `origin` 与 `jihu`；GitHub/GitLab F02 issue `#2` 均已更新正文及新进展评论。仅清理本轮创建的 ignored `consumer-gradle/` 隔离副本（约 18 GB），保留 trace、事件、ledger、解析器和其他受保护内容。
 - 用户已处理隔离研究 App 相机授权。iPhone 16 Pro Max / iOS 27.0.1、最终 dylib UUID=`8F434AF5-713D-3063-98F1-3B583F1F68A4` 的同 PID `35714`、runID=`792FC36B-ACA8-447E-AD1C-F8DAE7764D48` 完成十轮相机页面协议，30 秒活动窗口原生结果增量为 `698/669/663/665/655/677/661/688/693/663`。86 个报告样本，末轮 31/35/60 秒 idle 已观察页面弱引用均为 0；十轮 page-absent 30 秒 RSS 首末 +`8,716,288 B`，不归因于 Atlas。合成图仍只在 Demo 沙盒，报告 `capturedImagesSaved=false`。
 - `Leaks` trace TOC 记录同 PID、同安装路径及 **901.166218 秒**（08:04:51–08:19:52 +08:00），覆盖十轮及最终 idle。Allocations List 共 **111,141 行**；最终 `live=true`、128 B、含 `AtlasTextOp::Make` 栈的两行分别是 TLS 析构注册存储 `0x137978380` 与真正 `operator new` 缓存存储 `0x136d42680`。Leaks 明细 0 行，**不等于零泄漏证明**。
 - 1,380,716 条 token 事件已持久化，`missed=0`、`integrityFailures=0`、解析错误 0；345,133 个 generation。58 个持缓存线程退出观察全部配有同 generation 的 `CacheOwner` exit 和 free 完成。唯一最终 live 缓存存储 `0x136d42680` 从 sequence `1380382` 的新分配至最终 generation `345065` 为 cached，持有 kernel thread `17026203` 在事件采集结束前**没有退出观察**，不能称线程退出后残留。解析器已修正地址复用造成的历史 generation 假匹配；6 个定向测试通过。原始 trace、导出、完整 ledger、校验脚本、SHA-256 汇总都在 ignored `artifacts/verification/f02-tokenized-recorder-20261101/`。
