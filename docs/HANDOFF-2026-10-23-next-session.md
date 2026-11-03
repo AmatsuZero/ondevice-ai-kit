@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F04 双平台跟踪与 F09 前置门槛复核
+
+- 用户确认 F04MicProbe 在返回前台后的最后一次 `zh-CN` 朗读、结束输入显示“ASR 完成”；该轮的状态日志及校验已在下方 F04 检查点和[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)保留，不重复录音。已把提交 `e5fa877` 的有界结果写入 [GitLab F04 #4](https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit/-/issues/4#note_39518) 和 [GitHub F04 #4](https://github.com/AmatsuZero/ondevice-ai-kit/issues/4#issuecomment-6600663373)；GitHub 回读为 1 条评论、issue 仍 OPEN。两端父专项保持开放，P11/发布仍 `open/not-ready`。
+- 授权 Xcode 用户环境只读回查 `xcodebuild -showComponent metaltoolchain` 为 `installed`、Build Version `27B47`。受限沙盒中的 exit 70 来自缓存/CoreSimulator 权限错误，不能据此判组件缺失。F09 已有的固定生产依赖 framework archive 仍在 `OrderedCollections` Swift interface 校验退出 65；本轮未重复归档或修改生产 lock。官方 Swift issue `#91540` 和修复 PR `#91672` 回查均仍 open，PR 未合并；当前没有已验证的生产修复。F09 计划的 binary-only consumer 依赖真实完整 XCFramework，继续保持待执行，不以诊断 wrapper 代替。
+- 本轮没有变更生产源码或九项受保护 dirty/untracked 文件；F09、P11 均保持 `open/not-ready`。
+
 ## 最新续接 — 2026-11-03 F04 证据进入 P11 readiness 与本地干净复跑
 
 - [P11 状态矩阵](validation/p11-status-matrix-20261027.md)已把 iOS ASR 的“麦克风录音未验”收窄为“真实生命周期有界通过、自然 CER/WER/逐 run 资源/完整离线与长期预算未验”；既有 `speech-asr-file` 固定 CAF benchmark 仍是文件输入，不混入麦克风状态日志。新 ignored `artifacts/verification/p11-readiness-20261103-f04-mic/summary.json` SHA-256=`a4d69e08389b6c5f7862110e48a21430c83dfa14c68abecc211d3b1d3788c615`，校验 **164 evidence paths / 179 source hashes / 9 行有 gap**。跟踪的 `benchmark/p11/grouped-report-manifest.json` 已指向该快照，重算 ignored `artifacts/verification/p11-grouped-20261103-f04-mic/summary.json` SHA-256=`450a136aef97ebc28e43c3dc418197034593352e4e665999c9f64691883b9fb8`；仍 **5 项能力/8 组**，所有统计 `groups` 与上一版逐值相同，`coverage` 仅 iOS ASR 未验证文字变化。相关 36 项工具测试、Python 编译与 `git diff --check` 通过；矩阵/manifest 单独提交 `892d2426385bf10233b11640352fe9b85efd964a`。
