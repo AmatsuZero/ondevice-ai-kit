@@ -2,7 +2,14 @@
 
 恢复入口；以最上方最新检查点为准，下方各节保留历史，不是整个项目完成结论。
 
-当前状态：**原路线图执行 closed-with-followups；本会话持续 goal 已按用户要求暂停，待新会话继续专项；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
+当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
+
+## 最新续接 — 2026-11-03 Android 多模态功能优先
+
+- 用户明确先完成功能、后置 corner case；本轮不继续扩展 F04 竞态/资源测试。执行顺序调整为 Android 多模态、Android 超分、真实身份/PAD；Android ASR 仍缺设备离线资源。
+- F07 已增加固定 LiteRT-LM 0.18.1 的同步生产 adapter、公开 `LiteRtLm.createBackend` 与 Android Demo 可选 image bridge。正常 `sendMessage` 返回才作为本轮 completion；异常仍保留资源并 poison。取消暂为丢弃结果并等 sender 返回，快速 native cancel/streaming 后置。默认 Demo 不引入 vendor runtime；`-PenableLiteRtLm=true` 自动显示图像理解、隐藏不支持的视频选择。详见[本轮验证](validation/android-litertlm-sync-demo.md)和[模型包格式](../demo/androidApp/src/litertlm/README.md)。
+- 后端 JVM **29/29**、opt-in Demo **40/40**、默认 Demo **38/38**；两种 APK、固定真实 AAR 编译和 lint 通过，warning 保留。默认依赖图无 LiteRT-LM，opt-in 精确 `0.18.1`。TECNO App/test APK 安装成功，但锁屏/息屏阻断 UI；已精确结束本次测试 PID，未解锁。独立审查服务 429，无结论。ignored 原始日志/APK 位于 `artifacts/verification/android-litertlm-sync-20261103/`。
+- **下一步功能切片**：补模型包选择/导入 UI；有真实授权模型后跑通图片生成。当前没有可用权重，不代为接受 gated 模型许可；不能将 host fake 或成功编译当真实推理完成。随后继续 Android 超分的真实后端和双端身份/PAD。原暂停交接与 F01–F12 表中的 factory 缺席描述是此前检查点，以本节为新状态；所有产品/发布门槛仍开放。
 
 ## 新会话入口 — 2026-11-03 暂停与交接
 

@@ -4,12 +4,25 @@ import android.os.Build
 import io.ondeviceai.core.CapabilityAvailability
 import io.ondeviceai.modelstore.ModelRef
 import io.ondeviceai.modelstore.ModelStore
+import java.io.File
 
 /**
- * Public opt-in availability query; never opens a runtime.
- * Installed assets remain unavailable until the native drain contract is proven.
+ * Opt-in synchronous image backend. Queries and construction never open a runtime.
+ * Native model/device compatibility is checked when generation opens the model.
  */
 object LiteRtLm {
+    /** Cancellation suppresses output and waits for the blocking send before releasing resources. */
+    fun createBackend(
+        store: ModelStore,
+        model: LiteRtLmModel,
+        cacheRoot: File,
+        environment: LiteRtLmRuntimeEnvironment = LiteRtLmRuntimeEnvironment.current(),
+    ): LiteRtLmBackend = LiteRtLmBackend(
+        store, model.ref, LiteRtLmModelSpec(model.modelPathRelative, model.metadataPathsRelative),
+        cacheRoot, LiteRtLmProductionEngineFactory, environment.apiLevel,
+        environment.abis.any { it == "arm64-v8a" || it == "x86_64" }, LiteRtLmProbeState.SYNCHRONOUS,
+    )
+
     suspend fun availability(
         store: ModelStore,
         model: LiteRtLmModel,
@@ -24,7 +37,7 @@ object LiteRtLm {
             closed = false,
             apiLevel = environment.apiLevel,
             supportedAbi = supportedAbi,
-            probeState = LiteRtLmProbeState.UNPROVEN,
+            probeState = LiteRtLmProbeState.SYNCHRONOUS,
         )
     }
 }
@@ -36,7 +49,7 @@ data class LiteRtLmModel(
     val metadataPathsRelative: Set<String>,
 )
 
-/** Device policy inputs. Overriding them cannot bypass the unproven native-runtime gate. */
+/** Device policy inputs. Generation separately checks the actual native model metadata. */
 data class LiteRtLmRuntimeEnvironment(
     val apiLevel: Int,
     val abis: Set<String>,

@@ -53,6 +53,9 @@ internal data class LiteRtLmModelSpec(
     }
 
     companion object {
+        internal fun supportsRuntime(minimum: String): Boolean =
+            runCatching { compareVersions(minimum, "0.18.1") <= 0 }.getOrDefault(false)
+
         private fun isSafeRelativePath(path: String): Boolean =
             path.isNotBlank() && !path.startsWith('/') && !path.startsWith(".odai-") &&
                 '\\' !in path && '\u0000' !in path &&

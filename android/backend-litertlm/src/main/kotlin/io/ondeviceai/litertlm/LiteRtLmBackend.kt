@@ -18,7 +18,7 @@ import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.withContext
 
-/** Image-only opt-in backend. Production construction remains gated by the device drain probe. */
+/** Image-only opt-in backend. Each production request owns one synchronous native session. */
 class LiteRtLmBackend internal constructor(
     private val store: ModelStore,
     private val ref: ModelRef,

@@ -1,9 +1,15 @@
 plugins { alias(libs.plugins.android.application);alias(libs.plugins.kotlin.compose) }
+val enableLiteRtLm = providers.gradleProperty("enableLiteRtLm").orNull == "true"
 android {
  namespace="io.ondeviceai.demo";compileSdk=36
  defaultConfig {applicationId="io.ondeviceai.demo";minSdk=26;targetSdk=36;versionCode=1;versionName="0.1.0";testInstrumentationRunner=providers.gradleProperty("odaiTestRunner").orNull?:"io.ondeviceai.demo.TtsProbeInstrumentation";buildConfigField("String","ODAI_SDK_COMMIT","\""+(providers.gradleProperty("sdkCommit").orNull?:"working-tree")+"\"")}
  buildFeatures {compose=true;buildConfig=true}
  compileOptions {sourceCompatibility=JavaVersion.VERSION_17;targetCompatibility=JavaVersion.VERSION_17}
+ sourceSets.getByName("main").kotlin.srcDir(if (enableLiteRtLm) "src/litertlm/kotlin" else "src/noLitertlm/kotlin")
+ if (enableLiteRtLm) {
+  sourceSets.getByName("test").kotlin.srcDir("src/litertlmTest/kotlin")
+  sourceSets.getByName("androidTest").kotlin.srcDir("src/litertlmAndroidTest/kotlin")
+ }
 }
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     if (name.contains("AndroidTest")) {
@@ -15,6 +21,10 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     }
 }
 dependencies {
+ if (enableLiteRtLm) {
+  implementation(project(":android:backend-litertlm"))
+  testImplementation("org.json:json:20250517")
+ }
  implementation("androidx.compose.foundation:foundation:1.9.3")
  implementation("androidx.compose.material3:material3:1.4.0")
  testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.4.0")

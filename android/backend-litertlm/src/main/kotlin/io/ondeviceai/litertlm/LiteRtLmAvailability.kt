@@ -8,7 +8,7 @@ import io.ondeviceai.modelstore.ModelStore
 import io.ondeviceai.modelstore.ModelRef
 import kotlinx.coroutines.CancellationException
 
-internal enum class LiteRtLmProbeState { UNPROVEN, PROVEN_CUMULATIVE, PROVEN_DELTA }
+internal enum class LiteRtLmProbeState { UNPROVEN, PROVEN_CUMULATIVE, PROVEN_DELTA, SYNCHRONOUS }
 
 internal object LiteRtLmAvailability {
     suspend fun forModel(

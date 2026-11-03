@@ -16,6 +16,21 @@ import kotlin.test.assertEquals
 
 class LiteRtLmPublicAvailabilityTest {
     @Test
+    fun externalConsumerCanConstructAndCloseBackendWithoutNativeAssets() = runBlocking {
+        val root = Files.createTempDirectory("litertlm-public-backend").toFile()
+        try {
+            val store = ModelStore(File(root, "store"), ModelCompatibility(
+                "litertlm.android", "0.18.1", "35", "arm64-v8a"))
+            val backend = LiteRtLm.createBackend(store,
+                LiteRtLmModel(ModelRef("missing", "r1"), "model.bin", setOf("tokenizer.json")),
+                File(root, "cache"), LiteRtLmRuntimeEnvironment(35, setOf("arm64-v8a")))
+            assertEquals(UnavailableReason.MISSING_ASSETS, backend.availability().reason)
+            backend.close()
+            assertEquals(UnavailableReason.CLOSED, backend.availability().reason)
+        } finally { root.deleteRecursively() }
+    }
+
+    @Test
     fun externalConsumerCanQueryMissingAssetsWithoutConstructingBackend() = runBlocking {
         val root = Files.createTempDirectory("litertlm-public-availability").toFile()
         try {

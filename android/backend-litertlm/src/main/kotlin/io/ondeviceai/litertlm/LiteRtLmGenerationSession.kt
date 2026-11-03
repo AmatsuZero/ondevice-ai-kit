@@ -82,7 +82,7 @@ internal class LiteRtLmGenerationSession(
                 LiteRtLmEngineConfig(cacheDir = cache))
             native = opened
             val expectedMode = when (probeState) {
-                LiteRtLmProbeState.PROVEN_CUMULATIVE -> LiteRtLmCallbackMode.CUMULATIVE
+                LiteRtLmProbeState.PROVEN_CUMULATIVE, LiteRtLmProbeState.SYNCHRONOUS -> LiteRtLmCallbackMode.CUMULATIVE
                 LiteRtLmProbeState.PROVEN_DELTA -> LiteRtLmCallbackMode.DELTA
                 LiteRtLmProbeState.UNPROVEN -> throw LiteRtLmError.RuntimeUnavailable()
             }

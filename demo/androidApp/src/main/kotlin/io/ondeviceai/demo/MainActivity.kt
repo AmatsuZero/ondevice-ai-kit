@@ -121,7 +121,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         super.onCreate(savedInstanceState)
         bridge=AndroidFaceBridge(detector,lifecycleScope){result=it};model=FaceViewModel(bridge)
         videoHost = VideoHost(selectFile = { reply -> videoPickerReply = reply; videoPicker.launch("video/*") })
-        if (intent.getBooleanExtra("odai.multimodal.enabled", false)) {
+        if (DemoMultimodalBackendFactory.enabled || intent.getBooleanExtra("odai.multimodal.enabled", false)) {
             val selectMultimodal: (String, (File?) -> Unit, () -> Unit) -> Unit = { mime, reply, failure ->
                     if (multimodalPickerReply != null || multimodalImport?.isActive == true) reply(null)
                     else {
@@ -131,11 +131,15 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                         catch (error: Exception) { multimodalPickerReply = null; multimodalPickerFailure = null; throw error }
                     }
             }
+            val multimodalInputs = MultimodalInputStore(File(cacheDir, "multimodal-input-${UUID.randomUUID()}"))
             multimodalHost = MultimodalHost(
-                MultimodalInputStore(File(cacheDir, "multimodal-input-${UUID.randomUUID()}")),
+                multimodalInputs,
+                bridge = DemoMultimodalBackendFactory.create(this, multimodalInputs, lifecycleScope),
                 selectFile = { reply, failure -> selectMultimodal("image/*", reply, failure) },
-                videoStore = MultimodalInputStore(File(cacheDir, "multimodal-video-${UUID.randomUUID()}")),
-                selectVideo = { reply, failure -> selectMultimodal("video/*", reply, failure) },
+                videoStore = if (DemoMultimodalBackendFactory.imageOnly) null else
+                    MultimodalInputStore(File(cacheDir, "multimodal-video-${UUID.randomUUID()}")),
+                selectVideo = if (DemoMultimodalBackendFactory.imageOnly) null else
+                    { reply, failure -> selectMultimodal("video/*", reply, failure) },
                 importScope = lifecycleScope,
                 canSelectInput = { multimodalPickerReply == null && multimodalImport?.isActive != true })
         }
