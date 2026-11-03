@@ -25,6 +25,8 @@
 
 为便于审查，ignored `build_materials.py` 生成只供本地审查的 `f02-distribution-review-materials-v2.tar.gz`：**27** 个文件、**154,160 B**、SHA-256 `39ce3868d66afb22529356189cc587a8074d1134d66186cbf3a67371ccb2cef6`，包含原 20 份候选材料、新增 `ms-use/COPYING`、对象映射、文件头审计、脚本和补丁；没有 Maven 二进制归档。v1 原包保留不覆盖，v2 未上传，21 份许可材料仍只是候选集合。
 
+固定 HarfBuzz `08b52ae2e44931eef163dbad71697f911fadc323` 的两份生成源码标明 Unicode 16.0.0 的 `IndicSyllabicCategory`、`IndicPositionalCategory`、`Blocks`、`Scripts` 输入，以及 `ms-use/IndicShapingInvalidCluster`。官方 [UCD 16 ReadMe](https://www.unicode.org/Public/16.0.0/ucd/ReadMe.txt)指明版本，[Unicode Terms of Use](https://www.unicode.org/terms_of_use.html)与[Unicode License v3](https://www.unicode.org/license.txt)给出数据文件条款。已下载原样 ReadMe（SHA-256 `14cafa23788d3a20dd21d6b0cdcb8d6dab520781fcd9ad9392f3b88ea607e633`）和当前 License v3（SHA-256 `e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96`）；后者版权行目前为 1991–2026，与 UCD 16 的 2024 源头时间不同。ignored `build_materials_v3.py` 在 v2 基础上加入两份官方文本、生成输入/输出哈希来源表及说明，生成本地 v3 包：**32** 个文件、**157,138 B**、SHA-256 `dfb89b662477a93fe0511f4acfc626b9238eae820735aa728b815c722dc69d2b`。Unicode 条款对生成 C++ 的适用范围与应附的历史版本文字仍需许可审查；v3 未上传，也不构成分发附件定稿。
+
 ## AWT 与 Maven 依赖范围
 
 归档的四个模块为 `skiko`、`skiko-awt` 和双 iOS slice。根 `.module` 的三个 AWT 变体仍指向 `skiko-awt`。后者的二进制 JAR 有 702 个非目录条目，类仅在 `org/jetbrains/skia` 与 `org/jetbrains/skiko` 包，另有两个 `META-INF` 文件；没有 `.so`、`.dylib`、`.dll` 或 `.a` 条目。这是 JAR 内容检查，不是桌面运行验收。
@@ -43,10 +45,12 @@ KGP 2.4.21 的首次离线试验在 `kotlin-stdlib-common:2.4.21` 未缓存时�
 
 AWT 开启时的正常任务列表只含 `publishAwtRuntimeElementsPublicationToBuildRepoRepository`、`publishSkikoJvmRuntimeMacosArm64PublicationToBuildRepoRepository` 和 `...MacosX64...`，没有 Linux/Windows 的同类发布任务（ignored `awt-tasks.log` SHA-256 `ba41bace0dfc43fa748461b31a293b16ea44537f35abb159387d3f29a3aa5925`）。该主机任务配置不足以补齐 AWT POM 所列全部七个 runtime。保留 AWT 目标仅作为编译锚点会让根 `.module` 和项目结构 metadata 继续声明 AWT；直接删改生成元数据不是正常 Gradle publication。后续应调查 KGP/Skiko 的 source-level 元数据配置，或明确跨主机完整 AWT 发布方案，再重新审查。
 
+非 AWT 对照：在同一 ignored Skiko 副本、KGP 2.2.20 下，保持 AWT/Android 关闭和双 iOS arm64 target，单独开启 `skiko.wasm.enabled=true`（上游同时声明 JS 与 Wasm）。离线强制重编 `compileCommonMainKotlinMetadata` **BUILD SUCCESSFUL**，log SHA-256 `aead34e5f6f58561f24670ea5f2ec2be72e70b5562fb7fd5ff56de39c6a641e0`；正常 `generateMetadataFileForKotlinMultiplatformPublication` 通过，root `.module` SHA-256 `310fbc0cbbb21033c9e779fabfc49875f0190a427b4691a5488a4df6b954c278`。生成的 root metadata 声明双 iOS、JS、WasmJs，未声明 AWT。此对照说明该目标组合能通过 metadata 编译，**不是 iOS-only publication**，尚未编译、发布和消费 Web 目标及 runtime，也未审其附加许可与资源义务；不能用它代替已失败的严格双 iOS 对照或切换生产依赖。
+
 ## 分发前的未关闭事项
 
-1. 对上述九个实际编译的第三方组件、Skia/Skiko 及 AWT 包逐项审查头文件、文件级例外和所需 NOTICE，定稿与制品同版本、同哈希索引的分发附件。当前对象清单与 20 份候选材料不能单凭路径映射或四份 POM 元数据视为许可材料齐全。
-2. 明确发行范围：若只支持当前 iOS 消费图，需产生不宣称桌面可用的受支持 publication，并重验 metadata；若保留 AWT 变体，需正常发布、审查和消费上述七个 runtime 模块。当前归档的 AWT Maven POM 依赖不闭合。
+1. 对上述九个实际编译的第三方组件、Skia/Skiko 及任何新增目标逐项审查头文件、文件级例外和所需 NOTICE，定稿与制品同版本、同哈希索引的分发附件。v2 的 21 份组件候选材料与 v3 的 Unicode 参考文本仍不能单凭路径映射或四份 POM 元数据视为许可材料齐全。
+2. 明确发行范围：若只支持当前 iOS 消费图，需产生受支持的 iOS-only publication 并重验 metadata；若保留 AWT 变体，需正常发布、审查和消费上述七个 runtime 模块；若采用 Web 锚点，需完成 JS/WasmJs 目标和 runtime 的正常发布、消费与许可审查。当前四模块归档的 AWT Maven POM 依赖不闭合。
 3. 明确项目专用版本的维护者、托管地址、CI/消费者读取方式、不可变版本规则与撤销流程。当前 109 MB 归档只在本机，未上传 GitHub/GitLab，也没有远程消费者验证。
 4. 选定分发方案后，从空缓存的独立消费者按归档哈希取件，重验两份 iOS Klib、Gradle variant、最终 App 身份和真机资源预算。现有本地构建与十轮 trace 不自动证明远程分发和生产验收。
 

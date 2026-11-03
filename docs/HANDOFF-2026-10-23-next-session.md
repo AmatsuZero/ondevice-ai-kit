@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 Unicode 候选材料与非 AWT metadata 对照
+
+- 固定 HarfBuzz 的生成源码引用 Unicode 16.0.0 数据；官方 UCD ReadMe 与当前 Unicode License v3 已下载、定哈希。ignored 本地 v3 审查包在 v2 基础上加入这两份材料及生成输入/输出来源表：32 文件、157,138 B、SHA-256=`dfb89b662477a93fe0511f4acfc626b9238eae820735aa728b815c722dc69d2b`，未上传；生成 C++ 的条款适用性与历史通知文字待审，不视为许可批准。
+- 固定 Skiko ignored 副本中，关闭 AWT/Android、开启双 iOS arm64 与上游 Web（JS+Wasm）目标后，KGP 2.2.20 metadata 离线强制重编通过（log SHA-256=`aead34e5f6f58561f24670ea5f2ec2be72e70b5562fb7fd5ff56de39c6a641e0`）；根 `.module` 正常生成，SHA-256=`310fbc0cbbb21033c9e779fabfc49875f0190a427b4691a5488a4df6b954c278`，声明 iOS/JS/WasmJs 而无 AWT。这是跨目标编译对照，不是 iOS-only 或已闭合的 Web 分发；Web 构建、runtime、消费者和附加许可均未验。详见[分发审查](validation/f02-distribution-review.md)。F02/P4/P11/发布保持 `open/not-ready`，九项受保护修改保留。
+
 ## 最新续接 — 2026-11-03 F02 文件级许可线索与本地 v2 审查包
 
 - 固定 Skia revision 与已验证对象映射下，ignored 文件头审计复核 1,245 个实际链接编译源文件：1,224 个有许可文字或引用线索、16 个有内联授权文字、5 个没有文件头线索；`summary.json` SHA-256=`64c1d6ac094c38cc283446003a6e7d90594ab83465e78ec48a4445c3d9ed400b`，重跑一致。HarfBuzz 的生成源码引用 `src/ms-use` 输入，原 20 份候选材料缺该子目录 `COPYING`；已加入仅供本地审查的 v2 材料包（21 份候选许可文件、27 个总文件、154,160 B、SHA-256=`39ce3868d66afb22529356189cc587a8074d1134d66186cbf3a67371ccb2cef6`），v1 与 Maven 归档均未覆盖或上传。DNG/HarfBuzz 无头文件、Unicode 生成输入、libjpeg-turbo 内联许可及头文件仍待逐项裁定；详见[分发审查](validation/f02-distribution-review.md#编译源文件的文件头线索复核)。此审计不构成许可批准；F02/P4/P11 和发布仍 `open/not-ready`。九项受保护未提交修改保留。
