@@ -8,6 +8,7 @@
 
 - 固定 Maven 归档四个模块的 POM 与 Gradle `.module` 复核：根 metadata 仍列 AWT 变体；`skiko-awt` 的二进制 JAR 有 702 个非目录条目，仅含两个 JetBrains 包的类及两个 META-INF 文件，无 `.so/.dylib/.dll/.a` 条目。其 POM 引用同版本通用 runtime 加 macOS/Linux/Windows 各 x64/arm64 runtime，共 **7 个模块**，归档均未提供。AWT Gradle runtime variant 依赖表不同，不能将 iOS 已验证消费结果提升为桌面 Maven 闭包。
 - ignored `artifacts/verification/f02-versioned-consumer-20261103/maven-scope-summary.json` SHA-256=`83a616b762f694d3fc5e88a2a597b9a7eadf44e3d6892ee48b4e96089177c259`，同目录脚本可重算。详见[分发审查](validation/f02-distribution-review.md)。下一步选定 iOS 范围的受支持 publication 或补齐七个 runtime；另需许可例外、托管和长期资源门槛。归档未上传、生产依赖未改，F02/P4/P11 与发布保持 `open/not-ready`；原有九项受保护 dirty/untracked 文件未改。
+- 同文进展已写入 GitHub F02 issue `#2` 评论 `6595273992` 与 GitLab F02 issue `#2` note `39342`，回读正文与 ignored `f02-issue-progress-20261103-awt.md` 一致；两端 issue 保持 open。
 
 ## 最新续接 — 2026-11-03 F02 静态库来源与候选许可材料
 
