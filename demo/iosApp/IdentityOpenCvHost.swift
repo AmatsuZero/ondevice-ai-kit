@@ -1,5 +1,6 @@
 import SwiftUI
 import UniformTypeIdentifiers
+import ImageIO
 import ODAIKitDemo
 import ODAIKitIdentity
 import ODAIKitModelStore
@@ -23,6 +24,8 @@ final class IdentityOpenCvHost: NSObject, ObservableObject, UIDocumentPickerDele
     private var job: Task<Void, Never>?
     private var opening = false
     private var closed = false
+    private enum PickerInput { case models, image }
+    private var pickerInput: PickerInput?
 
     init(controller: DemoController, root: URL? = nil) throws {
         self.controller = controller
@@ -47,15 +50,66 @@ final class IdentityOpenCvHost: NSObject, ObservableObject, UIDocumentPickerDele
     func importModels() {
         guard !closed, !busy, !sessionReady, !cleanupFailed else { return }
         busy = true
+        pickerInput = .models
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.folder], asCopy: false)
         picker.delegate = self
-        guard let presenter = presenter() else { busy = false; status = "无法打开模型选择器"; return }
+        guard let presenter = presenter() else { busy = false; pickerInput = nil; status = "无法打开模型选择器"; return }
         presenter.present(picker, animated: true)
     }
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) { busy = false }
+    func selectImageFile() {
+        guard !closed, !busy, sessionReady, !cleanupFailed else { return }
+        controller?.stopCamera()
+        controller?.identityModel.selectProbe(value: nil)
+        busy = true; pickerInput = .image
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.image], asCopy: false)
+        picker.allowsMultipleSelection = false
+        picker.delegate = self
+        guard let presenter = presenter() else { busy = false; pickerInput = nil; status = "无法打开图片文件选择器"; return }
+        presenter.present(picker, animated: true)
+    }
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        if pickerInput == .image { status = "图片选择已取消" }
+        pickerInput = nil; busy = false
+    }
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let folder = urls.first, !closed else { busy = false; return }
-        installModels(from: folder)
+        let input = pickerInput; pickerInput = nil
+        guard let file = urls.first, !closed else { busy = false; return }
+        switch input {
+        case .models: installModels(from: file)
+        case .image: loadImage(from: file)
+        case nil: busy = false
+        }
+    }
+    func loadImage(from file: URL) {
+        guard !closed, sessionReady, !cleanupFailed, let expected = session else { busy = false; return }
+        controller?.stopCamera()
+        controller?.identityModel.selectProbe(value: nil)
+        busy = true; status = "正在读取图片文件…"
+        job = Task { [weak self] in
+            guard let self else { return }
+            defer { busy = false }
+            do {
+                let image = try await Task.detached(priority: .userInitiated) {
+                    guard file.isFileURL else { throw CocoaError(.fileReadUnsupportedScheme) }
+                    let accessed = file.startAccessingSecurityScopedResource()
+                    defer { if accessed { file.stopAccessingSecurityScopedResource() } }
+                    let handle = try FileHandle(forReadingFrom: file)
+                    defer { try? handle.close() }
+                    let bytes = try handle.read(upToCount: 10 * 1024 * 1024 + 1) ?? Data()
+                    guard !bytes.isEmpty, bytes.count <= 10 * 1024 * 1024,
+                          let source = CGImageSourceCreateWithData(bytes as CFData, nil),
+                          let image = DemoController.decodePhoto(source) else { throw CocoaError(.fileReadCorruptFile) }
+                    return image
+                }.value
+                try Task.checkCancellation()
+                guard !closed, sessionReady, session === expected else { return }
+                controller?.useImage(UIImage(cgImage: image))
+                status = "图片已选择；可注册当前用户"
+            } catch {
+                guard !closed else { return }
+                status = error is CancellationError ? "图片读取已取消" : "无法读取所选图片，请选择有效的图片文件"
+            }
+        }
     }
     func installModels(from folder: URL) {
         guard !closed, !sessionReady, !cleanupFailed else { return }
@@ -210,6 +264,7 @@ struct IdentityOpenCvSetupView: View {
                     .disabled(host.busy || !host.modelReady || host.sessionReady || host.cleanupFailed)
             }
             if host.sessionReady {
+                Button("从文件选择图片") { host.selectImageFile() }.disabled(host.busy)
                 Button("删除本次所有注册并停用") { host.deleteLocalEnrollment() }.disabled(host.busy)
             }
         }.padding(.horizontal)

@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Apple 真实 OpenCV Identity 与 Demo
+## 最新续接 — 2026-11-04 Apple Identity Files 输入
+
+- 可选 Apple Identity host 新增“从文件选择图片”，复用现有 ImageIO 方向变换与 controller/opaque probe/注册流程；读取在主线程外，10 MiB 上限，security scope 覆盖解码。失败清除旧身份输入，可重试；未写入 Photos。
+- 新版真实 iPhone host→bridge→ViewModel **18/18**，runId `0A1A9BEA-3721-4EB6-A21E-D7994245FC28`，包含文件输入/错误文件后重试与真实 SFace 注册；验证/普通/flag-disabled Demo 均构建通过，普通 App 已无参数恢复。证据 `artifacts/verification/identity-files-input-20261104/`，见[Files 验证](validation/apple-opencv-identity.md#2026-11-04-files-image-input)。系统 Files provider/触控仍未验，不能把程序化 handler 当 UI 验收。独立 review 再次 429，无结论；九项保护不变，仅本地工作。
+- 下一实质缺口仍为独立 PAD、授权校准策略/数据、Android LM/ASR 资源。[PAD 官方候选](validation/pad-model-candidate.md)已固定 ONNX 来源、哈希、输入与许可标注差异；单独请求其本机下载/复用既有图片的原始分数试验授权，**未获答复前不下载、不推进依赖该许可的工作**。不新增样本、不分发、不接受门控许可、不输出 LIVE/SPOOF/proof。继续保持总目标 active、P4/P11 open/not-ready，不重做下方 Apple 后端。
+
+## 上一检查点 — 2026-11-04 Apple 真实 OpenCV Identity 与 Demo
 
 - 新增独立可选 `apple-opencv/`：已批准 OpenCV 4.12.0 + 固定 YuNet/SFace，真实 CPU 检测/对齐/128维 embedding，通过现有 LocalIdentityBackend 持有/释放模型租约。默认 Apple 包无 OpenCV。官方旧 framework 是静态 archive，已按原二进制转换成 static-library XCFramework；支持 arm64 真机/x86_64 模拟器，无 arm64 模拟器 slice。使用与固定哈希见[包说明](../apple-opencv/README.md)及[验证](validation/apple-opencv-identity.md)。
 - iPhone16 Pro Max 真实 native/session **21/21**，runId `7FF35B5B-D64B-4D95-88D2-D8FB879882AC`；实际 Demo host → IOSIdentityBridge → shared ViewModel **15/15**，runId `90CAC894-C3E4-4BE9-A163-EA041255590C`：模型导入、显式同意后会话、两候选录入、未校准验证/图库拒绝、整次 grant purge/reset 与未完成清理重开禁用。复用同一获批 NASA 图，不代表两个人或准确率；图片通过沙盒传入，未打包。无相机/麦克风、未解锁设备，触控/picker 未验。

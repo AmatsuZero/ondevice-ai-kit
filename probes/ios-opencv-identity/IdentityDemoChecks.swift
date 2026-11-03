@@ -42,10 +42,10 @@ import ODAIKitDemo
             let hash = SHA256.hash(data: bytes).map { String(format: "%02x", $0) }.joined()
             report["inputSHA256"] = hash
             try require(hash == "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5", "approvedInput")
-            guard let image = UIImage(data: bytes) else { throw Failed(name: "imageDecode") }
-            controller.useImage(image)
+            host.loadImage(from: assets.appendingPathComponent("astronaut.png"))
+            try await wait { !host.busy }
             let model = controller.identityModel
-            try require(model.inputReady, "opaqueProbeSelected")
+            try require(model.inputReady && controller.image != nil, "filesOpaqueProbeSelected")
             model.enrollConfigured(backend: IdentityBackendSelectionDefault.shared)
             try await wait { !model.state.busy }
             try require(model.state.enrollment?.outcome == .enrolled, "firstEnrollment")
@@ -53,7 +53,15 @@ import ODAIKitDemo
             model.createCandidateConfigured()
             try await wait { !model.state.busy }
             try require(model.candidates.count == 2 && !model.inputReady, "secondCandidateRequiresNewInput")
-            controller.useImage(image)
+            host.loadImage(from: assets.appendingPathComponent("astronaut.png"))
+            try await wait { !host.busy }
+            try require(model.inputReady, "filesRetrySelected")
+            host.loadImage(from: assets.appendingPathComponent("missing-image.png"))
+            try await wait { !host.busy }
+            try require(!model.inputReady && host.status == "无法读取所选图片，请选择有效的图片文件", "invalidFileClearsOldProbe")
+            host.loadImage(from: assets.appendingPathComponent("astronaut.png"))
+            try await wait { !host.busy }
+            try require(model.inputReady, "filesRetryAfterFailure")
             model.enrollConfigured(backend: IdentityBackendSelectionDefault.shared)
             try await wait { !model.state.busy }
             try require(model.state.enrollment?.outcome == .enrolled, "secondEnrollment")

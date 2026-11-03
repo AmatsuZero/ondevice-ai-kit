@@ -171,7 +171,7 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
             DispatchQueue.main.async { [weak self] in self?.useImage(UIImage(cgImage: cg)) }
         }
     }
-    nonisolated private static func decodePhoto(_ source: CGImageSource) -> CGImage? {
+    nonisolated static func decodePhoto(_ source: CGImageSource) -> CGImage? {
         CGImageSourceCreateThumbnailAtIndex(source, 0, [
             kCGImageSourceCreateThumbnailFromImageAlways: true,
             kCGImageSourceCreateThumbnailWithTransform: true,
