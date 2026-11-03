@@ -20,9 +20,17 @@ After installation, **同意并启用本机注册** creates a local prototype gr
 lasting 30 minutes. Select an upright photo, then **注册**. Only use your own
 or authorized images. A successful enrollment persists an encrypted template
 through IdentityStore/Android Keystore, returns an opaque reference, and stores
-no raw image. **删除本次注册并停用** revokes/deletes the session candidate and
-waits for template purge; ordinary Activity destruction also attempts cleanup.
+no raw image. **同意新增用户** adds a session-local numbered candidate; select a
+candidate, reselect its authorized image and enroll one or more templates.
+Switching candidates clears the prior probe. **删除当前用户** first purges the
+current gallery, then deletes that candidate; other candidates remain.
+**发布模板图库** uses all retained templates but currently returns
+`THRESHOLD_UNVERIFIED` because no calibrated SFace policy exists. A current
+gallery must be deleted before publishing another. Pending deletion has a
+refresh action. **删除本次所有注册并停用** revokes the whole local grant and waits
+for covered template purge; ordinary Activity destruction also attempts cleanup.
 Abrupt process death and cleanup failure recovery UI remain unverified.
+See [candidate/gallery validation](../../../../docs/validation/identity-gallery-demo.md).
 
 The prototype quality rule checks only valid five-landmark geometry. Its binary
 score is not detector confidence, a calibrated image-quality metric, or identity

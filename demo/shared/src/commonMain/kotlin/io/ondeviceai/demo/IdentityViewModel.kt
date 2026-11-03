@@ -14,8 +14,14 @@ data class IdentityDemoConfiguration(
     val enrollmentOptions: IdentityEnrollmentOptions? = null,
     val verificationOptions: IdentityVerificationOptions? = null,
     val identificationOptions: IdentityIdentificationOptions? = null,
-    val livenessOptions: IdentityLivenessOptions? = null
+    val livenessOptions: IdentityLivenessOptions? = null,
+    val ownership: IdentityOwnershipAuthorization? = null,
+    val galleryOptions: IdentityGalleryOptions? = null
 )
+
+/** Session-local labels only; business identities and biometric bytes are never UI state. */
+data class IdentityDemoCandidate(val reference: IdentityCandidateReference, val number: Int,
+    val templates: List<IdentityTemplateReference> = emptyList())
 
 data class IdentityViewState(
     val busy: Boolean = false,
@@ -23,7 +29,8 @@ data class IdentityViewState(
     val verification: IdentityVerificationResult? = null,
     val identification: IdentityIdentificationResult? = null,
     val liveness: IdentityLivenessEvent? = null,
-    val error: IdentityBridgeFailure? = null
+    val error: IdentityBridgeFailure? = null,
+    val deletion: IdentityDeletionStatus? = null
 )
 
 /** Demo state keeps identity operations separate from detection and never exposes subject IDs. */
@@ -35,6 +42,16 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
     private var closed = false
     private var configuration: IdentityDemoConfiguration? = null
     private var selectedProbe: IdentityProbeReference? = null
+    private var nextCandidateNumber = 1
+    private var lastDeletion: IdentityDeletionReceipt? = null
+    private var afterDeletion: (() -> Unit)? = null
+    var candidateDeletionPending by mutableStateOf(false); private set
+    var deletionRecoveryRequired by mutableStateOf(false); private set
+    var candidates by mutableStateOf<List<IdentityDemoCandidate>>(emptyList()); private set
+    var selectedCandidate by mutableStateOf<IdentityCandidateReference?>(null); private set
+    var publishedGallery by mutableStateOf<IdentityGalleryReference?>(null); private set
+    var galleryTemplateCount by mutableStateOf(0); private set
+    var managementEnabled by mutableStateOf(false); private set
     var enrolledTemplate by mutableStateOf<IdentityTemplateReference?>(null)
         private set
     var configured by mutableStateOf(false)
@@ -81,7 +98,15 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         val task = bridge.enroll(probe, candidate, grant, options, backend, object : IdentityCallback<IdentityEnrollmentResult> {
             override fun onSuccess(value: IdentityEnrollmentResult) {
                 if (current != generation || terminalDelivered) return
-                terminalDelivered = true; active = null; enrolledTemplate = value.template; state = IdentityViewState(enrollment = value)
+                terminalDelivered = true; active = null
+                value.template?.let { template ->
+                    enrolledTemplate = template
+                    candidates = candidates.map { row ->
+                        if (row.reference == candidate && template !in row.templates) row.copy(templates = row.templates + template) else row
+                    }
+                    if (configuration?.candidate == candidate) configuration = configuration?.copy(template = template)
+                }
+                state = IdentityViewState(enrollment = value)
             }
             override fun onFailure(error: IdentityBridgeFailure) {
                 if (current != generation || terminalDelivered) return
@@ -154,8 +179,130 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         selectedProbe = null
         inputReady = false
         enrolledTemplate = null
+        nextCandidateNumber = 1
+        candidates = value?.candidate?.let { ref ->
+            listOf(IdentityDemoCandidate(ref, nextCandidateNumber++, listOfNotNull(value.template)))
+        } ?: emptyList()
+        selectedCandidate = value?.candidate
+        publishedGallery = value?.gallery
+        galleryTemplateCount = 0
+        managementEnabled = value?.ownership != null && value.galleryOptions != null
+        lastDeletion = null
+        afterDeletion = null; candidateDeletionPending = false
+        deletionRecoveryRequired = false
         livenessChallenge = null
         state = IdentityViewState()
+    }
+
+    fun createCandidateConfigured() {
+        val value = requireConfiguration() ?: return
+        if (value.ownership == null) { reject(IdentityErrorCode.AUTHORIZATION_REQUIRED); return }
+        manage({ callback -> bridge.createCandidate(value.grant, callback) }) { ref ->
+            candidates = candidates + IdentityDemoCandidate(ref, nextCandidateNumber++)
+            selectCandidateState(ref)
+        }
+    }
+
+    fun selectCandidateConfigured(ref: IdentityCandidateReference) {
+        if (requireConfiguration() == null) return
+        if (candidates.none { it.reference == ref }) { reject(IdentityErrorCode.CANDIDATE_NOT_FOUND); return }
+        beginOperation()
+        selectCandidateState(ref)
+        state = IdentityViewState()
+    }
+
+    private fun selectCandidateState(ref: IdentityCandidateReference?) {
+        selectedCandidate = ref
+        enrolledTemplate = candidates.firstOrNull { it.reference == ref }?.templates?.lastOrNull()
+        configuration = configuration?.copy(candidate = ref, template = enrolledTemplate)
+        selectedProbe = null
+        inputReady = false
+    }
+
+    fun deleteCandidateConfigured() {
+        val value = requireConfiguration() ?: return
+        val owner = value.ownership ?: run { reject(IdentityErrorCode.AUTHORIZATION_REQUIRED); return }
+        val candidate = selectedCandidate ?: run { reject(IdentityErrorCode.CANDIDATE_NOT_FOUND); return }
+        if (candidateDeletionPending || deletionRecoveryRequired) { reject(IdentityErrorCode.BUSY); return }
+        val removeCandidate = {
+            manage({ callback -> bridge.deleteCandidate(candidate, owner, callback) }) { receipt ->
+                candidates = candidates.filterNot { it.reference == candidate }
+                if (selectedCandidate == candidate) selectCandidateState(candidates.firstOrNull()?.reference)
+                observeDeletion(receipt)
+            }
+        }
+        val gallery = publishedGallery
+        if (gallery == null) removeCandidate() else removeGallery(gallery, owner, removeCandidate)
+    }
+
+    fun publishGalleryConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val options = value.galleryOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        if (candidateDeletionPending || deletionRecoveryRequired) { reject(IdentityErrorCode.BUSY); return }
+        if (publishedGallery != null) { reject(IdentityErrorCode.GALLERY_REVISION_CONFLICT); return }
+        val members = candidates.flatMap { it.templates }.distinct()
+        if (members.isEmpty()) { reject(IdentityErrorCode.TEMPLATE_NOT_FOUND); return }
+        manage({ callback -> publishIdentityGallery(bridge, value.grant, options, backend, members, callback) }) { ref ->
+            publishedGallery = ref
+            galleryTemplateCount = members.size
+            configuration = configuration?.copy(gallery = ref)
+        }
+    }
+
+    fun deleteGalleryConfigured() {
+        val value = requireConfiguration() ?: return
+        val owner = value.ownership ?: run { reject(IdentityErrorCode.AUTHORIZATION_REQUIRED); return }
+        val gallery = publishedGallery ?: run { reject(IdentityErrorCode.GALLERY_NOT_FOUND); return }
+        removeGallery(gallery, owner)
+    }
+
+    private fun removeGallery(gallery: IdentityGalleryReference, owner: IdentityOwnershipAuthorization,
+        afterPurge: (() -> Unit)? = null) {
+        manage({ callback -> bridge.deleteGallery(gallery, owner, callback) }) { receipt ->
+            publishedGallery = null; galleryTemplateCount = 0
+            configuration = configuration?.copy(gallery = null)
+            observeDeletion(receipt, afterPurge)
+        }
+    }
+
+    private fun observeDeletion(receipt: IdentityDeletionReceipt, afterPurge: (() -> Unit)? = null) {
+        lastDeletion = receipt
+        afterDeletion = afterPurge
+        candidateDeletionPending = afterPurge != null
+        manage({ callback -> bridge.awaitDeletion(receipt, IdentityDeletionWaitOptions(30_000_000_000), callback) }) { status ->
+            state = state.copy(deletion = status)
+            deletionRecoveryRequired = status == IdentityDeletionStatus.PURGE_FAILED
+            if (status == IdentityDeletionStatus.PURGED) {
+                val continuation = afterDeletion
+                afterDeletion = null; candidateDeletionPending = false
+                continuation?.invoke()
+            }
+        }
+    }
+
+    fun refreshDeletion() {
+        if (closed || deletionRecoveryRequired) return
+        val receipt = lastDeletion ?: return
+        observeDeletion(receipt, afterDeletion)
+    }
+
+    private fun <T> manage(start: (IdentityCallback<T>) -> IdentityBridgeTask, success: (T) -> Unit) {
+        if (closed) return
+        val current = beginOperation()
+        state = IdentityViewState(busy = true)
+        var delivered = false
+        val task = start(object : IdentityCallback<T> {
+            override fun onSuccess(value: T) {
+                if (current != generation || delivered) return
+                delivered = true; active = null; state = IdentityViewState()
+                success(value)
+            }
+            override fun onFailure(error: IdentityBridgeFailure) {
+                if (current != generation || delivered) return
+                delivered = true; active = null; state = IdentityViewState(error = error)
+            }
+        })
+        if (current == generation && state.busy && !delivered) active = task
     }
 
     fun selectProbe(value: IdentityProbeReference?) {

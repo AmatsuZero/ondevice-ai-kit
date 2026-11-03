@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-04 Identity 多候选与图库 Demo
+
+- 共享 Identity 页面已接同一 bridge 内新增/选择/删除候选、多模板计数、发布/删除图库。切换候选清空 probe，验证仅取该候选最后模板；编号仅本会话有效，不保存业务名或原图/向量。OpenCV config 提供 ownership 与 UNVERIFIED gallery policy，因此实际图库发布仍 `THRESHOLD_UNVERIFIED`，不伪造校准结果。详见[验证](validation/identity-gallery-demo.md)。
+- 删除候选先删除当前图库并等待 purge，再删除候选；pending 可刷新继续，`PURGE_FAILED` 为终态，明确显示本会话无法恢复并暂停候选删除，不提供无效刷新。真实 failed-purge 恢复按用户 corner case 指令延期。当前图库需显式删除后才能重新发布。会话停用按整个 local grant 撤销/模板 purge，返回 native revocation receipt。审查的图库未删除 Medium 已补 3 个 RED→GREEN；复审 COMMENT 的终态恢复问题明确延期，并补状态/文案回归。
+- 共享 simulator **80/80**、Identity **327/327**、默认/三 opt-in Demo **48/53**；默认/组合 APK/test APK/lint 与 iOS arm64 compile 通过。TECNO KM9/API35 两候选记录真实注册、单独删除、grant-wide purge、重开存储候选撤销与 receipt PURGED、模型 lease 释放通过，最终源码 run/APK 身份见验证记录；同一获批 NASA 图不代表两个不同人或准确率。ignored 证据 `artifacts/verification/identity-gallery-demo-20261103/`（开始于11月3日）。
+- 设备当前仍 `Asleep`/keyguard showing，未解锁、无 Activity/相机启动，实际触控/picker 未验。九项保护文件保持原样；未 push/merge/release。剩余主要功能/输入：Apple 真实 Identity、独立 PAD、实际 1:1/1:N 所需授权数据/校准策略、Android LM 授权权重和 ASR 离线资源；corner/长期资源后置。下方缺少多用户 UI 的说法为此前状态。
+
 ## 最新续接 — 2026-11-03 Android 精确 1:N index/query
 
 - 补齐 Android `ExactCosineIdentityIndex` 与 encoded-image 真实查询路由，按当前授权 template leases 验证完整 embedding-space/顺序/向量，使用现有 subject-max/topK/策略/撤销/删除机制。OpenCV session 已换为实际 builder；不再是 fixture-only。详见[验证](validation/android-exact-identity-index.md)。

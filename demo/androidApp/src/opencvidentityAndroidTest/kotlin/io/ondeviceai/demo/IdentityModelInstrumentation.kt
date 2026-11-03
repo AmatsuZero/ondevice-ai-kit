@@ -7,6 +7,14 @@ import io.ondeviceai.binding.*
 import io.ondeviceai.identity.IdentityError
 import io.ondeviceai.identity.IdentityErrorCode as NativeError
 import io.ondeviceai.identity.IdentityProbe
+import io.ondeviceai.identity.AndroidKeystoreIdentityKeyProvider
+import io.ondeviceai.identity.IdentityStore
+import io.ondeviceai.identity.AuthorizationGrant
+import io.ondeviceai.identity.CandidateRef
+import io.ondeviceai.identity.EnrollmentOptions
+import io.ondeviceai.identity.IdentityAuthorizationProvider
+import io.ondeviceai.identity.OwnershipAuthorization
+import io.ondeviceai.identity.DeletionStatus
 import io.ondeviceai.modelstore.*
 import io.ondeviceai.opencvidentity.*
 import java.io.ByteArrayOutputStream
@@ -30,6 +38,9 @@ class IdentityModelInstrumentation : Instrumentation() {
                     OpenCvIdentityModel.VERSION, android.os.Build.VERSION.SDK_INT.toString(), android.os.Build.SUPPORTED_ABIS.first()))
                 models.install(manifest, root.resolve("models"))
                 val session = OpenCvPrototypeSession.open(targetContext, models)
+                var secondCandidate: IdentityCandidateReference? = null
+                var secondTemplate: IdentityTemplateReference? = null
+                var teardownReceipt: io.ondeviceai.identity.RevocationReceipt? = null
                 try {
                     try { models.remove(manifest.ref); error("model lease not retained") } catch (_: ModelInUseException) { }
                     val blank = Bitmap.createBitmap(128, 128, Bitmap.Config.ARGB_8888).apply { eraseColor(Color.GRAY) }
@@ -59,8 +70,18 @@ class IdentityModelInstrumentation : Instrumentation() {
                         } finally { portraitBytes.fill(0) }
                         val enrolled = enroll(session, portrait)
                         check(enrolled.outcome == IdentityEnrollmentOutcome.ENROLLED && enrolled.template != null)
+                        secondCandidate = bridgeReply<IdentityCandidateReference> { session.bridge.createCandidate(session.configuration.grant, it) }
+                        secondTemplate = enroll(session, portrait, checkNotNull(secondCandidate)).template
+                        check(secondTemplate != null && secondTemplate != enrolled.template)
+                        val removed = bridgeReply<IdentityDeletionReceipt> {
+                            session.bridge.deleteCandidate(checkNotNull(session.configuration.candidate),
+                                checkNotNull(session.configuration.ownership), it)
+                        }
+                        check(bridgeReply<IdentityDeletionStatus> { session.bridge.awaitDeletion(removed,
+                            IdentityDeletionWaitOptions(30_000_000_000), it) } == IdentityDeletionStatus.PURGED)
+                        report.put("candidateRecordsCreated", 2).put("singleCandidatePurged", true)
                         val failure = CompletableDeferred<IdentityBridgeFailure>()
-                        session.bridge.verify(session.probe(portrait), checkNotNull(enrolled.template), session.configuration.grant,
+                        session.bridge.verify(session.probe(portrait), checkNotNull(secondTemplate), session.configuration.grant,
                             checkNotNull(session.configuration.verificationOptions), callback = object : IdentityCallback<IdentityVerificationResult> {
                                 override fun onSuccess(value: IdentityVerificationResult) { failure.completeExceptionally(IllegalStateException("uncalibrated identity outcome")) }
                                 override fun onFailure(error: IdentityBridgeFailure) { failure.complete(error) }
@@ -93,9 +114,26 @@ class IdentityModelInstrumentation : Instrumentation() {
                         values.fill(0f)
                         report.put("nativeSFaceDimension", 128).put("nativeSFaceFiniteNonzero", true)
                     } finally { aligned.release(); feature.release() }
-                } finally { session.deleteAndClose() }
+                } finally { teardownReceipt = session.deleteAndClose() }
                 check(session.backend.availability().status.name == "UNAVAILABLE")
-                session.deleteAndClose()
+                check(session.deleteAndClose() == teardownReceipt)
+                // Inspect durable purge/revocation after closing the entire original session.
+                val oldGrant = AuthorizationGrant.decodeJSON(session.configuration.grant.canonicalValue)
+                val restoreAuthority = object : IdentityAuthorizationProvider {
+                    override fun authoritativeEpoch(grant: AuthorizationGrant, minimumEpoch: Long, nowMillis: Long) = grant.authorizationEpoch
+                    override fun validateOwnership(authorization: OwnershipAuthorization, nowMillis: Long) = Unit
+                }
+                IdentityStore.open(targetContext, "opencv-local-prototype", oldGrant.purpose, restoreAuthority,
+                    AndroidKeystoreIdentityKeyProvider("opencv-local-prototype")).use { restored ->
+                    check(restored.awaitDeletion(checkNotNull(teardownReceipt)) == DeletionStatus.PURGED)
+                    try {
+                        restored.enroll(IdentityProbe(byteArrayOf(1), "revoked-probe"),
+                            CandidateRef.decodeJSON(checkNotNull(secondCandidate).canonicalValue), oldGrant,
+                            EnrollmentOptions(1.0, "geometric-only-uncalibrated", "v1"), session.backend)
+                        error("session candidate remained authorized")
+                    } catch (error: IdentityError) { check(error.code == NativeError.CANDIDATE_REVOKED) }
+                }
+                report.put("grantWidePurgeRestored", true).put("remainingCandidateRevoked", true)
                 models.remove(manifest.ref)
                 check(models.status(manifest.ref) == ModelStatus.ABSENT)
                 report.put("modelLeaseReleased", true).put("sessionDeletedAndClosed", true)
@@ -111,13 +149,22 @@ class IdentityModelInstrumentation : Instrumentation() {
             result.putString("status", "failed"); result.putString("error", error.stackTraceToString()); finish(1, result)
         }
     }
-    private suspend fun enroll(session: OpenCvPrototypeSession, image: Bitmap): IdentityEnrollmentResult {
+    private suspend fun enroll(session: OpenCvPrototypeSession, image: Bitmap,
+        candidate: IdentityCandidateReference = checkNotNull(session.configuration.candidate)): IdentityEnrollmentResult {
         val reply = CompletableDeferred<IdentityEnrollmentResult>()
-        session.bridge.enroll(session.probe(image), checkNotNull(session.configuration.candidate), session.configuration.grant,
+        session.bridge.enroll(session.probe(image), candidate, session.configuration.grant,
             checkNotNull(session.configuration.enrollmentOptions), callback = object : IdentityCallback<IdentityEnrollmentResult> {
                 override fun onSuccess(value: IdentityEnrollmentResult) { reply.complete(value) }
                 override fun onFailure(error: IdentityBridgeFailure) { reply.completeExceptionally(IllegalStateException(error.toString())) }
             })
+        return reply.await()
+    }
+    private suspend fun <T> bridgeReply(start: (IdentityCallback<T>) -> Unit): T {
+        val reply = CompletableDeferred<T>()
+        start(object : IdentityCallback<T> {
+            override fun onSuccess(value: T) { reply.complete(value) }
+            override fun onFailure(error: IdentityBridgeFailure) { reply.completeExceptionally(IllegalStateException(error.toString())) }
+        })
         return reply.await()
     }
     private fun encode(bitmap: Bitmap) = ByteArrayOutputStream().use { output -> check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)); output.toByteArray() }

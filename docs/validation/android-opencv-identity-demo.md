@@ -14,7 +14,9 @@ calibration data and is neither tracked nor bundled.
 - Optional Demo `-PenableOpenCvIdentity=true`: exact ZIP import with bounded
   extraction and ModelStore SHA-256 checks; explicit local prototype consent;
   real AndroidIdentityBridge enrollment into encrypted IdentityStore/Keystore;
-  deletion, stop/publication suppression and model lease drain.
+  deletion, stop/publication suppression and model lease drain. The subsequent
+  [candidate/gallery slice](identity-gallery-demo.md) adds multi-candidate controls
+  and grant-wide teardown purge.
 - Default Demo excludes OpenCV. All three optional runtimes can compile together.
   Sanitized stage/category diagnostics preserve local failure distinctions.
 - The enrollment quality score is binary valid landmark geometry, with explicit

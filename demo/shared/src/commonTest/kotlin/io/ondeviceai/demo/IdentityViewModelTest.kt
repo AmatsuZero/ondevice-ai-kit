@@ -26,7 +26,59 @@ private class FakeIdentityBridge : IdentityBridge by UnavailableIdentityBridge()
     var lastGallery: IdentityGalleryReference? = null
     var lastGrant: IdentityAuthorizationGrant? = null
     var advertisedAvailability: IdentityBridgeAvailability = IdentityBridgeAvailability.Available("fixture.identity")
+    var candidateCount = 1
+    var closes = 0
+    val deletedCandidates = mutableListOf<IdentityCandidateReference>()
+    val deletedGalleries = mutableListOf<IdentityGalleryReference>()
+    val addedTemplates = mutableListOf<IdentityTemplateReference>()
+    var galleryOptions: IdentityGalleryOptions? = null
+    var deletionStatus = IdentityDeletionStatus.PURGED
+    var indexDeletionStatus: IdentityDeletionStatus? = null
+    val deletionEvents = mutableListOf<String>()
+    var candidateCallback: IdentityCallback<IdentityCandidateReference>? = null
+    var delayCandidate = false
     override fun availability() = advertisedAvailability
+    override fun createCandidate(grant: IdentityAuthorizationGrant, callback: IdentityCallback<IdentityCandidateReference>): IdentityBridgeTask {
+        candidateCallback = callback
+        if (!delayCandidate) callback.onSuccess(IdentityCandidateReference("candidate-${++candidateCount}"))
+        return IdentityTask()
+    }
+    override fun deleteCandidate(reference: IdentityCandidateReference, ownership: IdentityOwnershipAuthorization,
+        callback: IdentityCallback<IdentityDeletionReceipt>): IdentityBridgeTask {
+        deletedCandidates += reference
+        deletionEvents += "delete-candidate"
+        callback.onSuccess(IdentityDeletionReceipt("candidate-receipt", IdentityDeletionStore.IDENTITY))
+        return IdentityTask()
+    }
+    override fun awaitDeletion(receipt: IdentityDeletionReceipt, options: IdentityDeletionWaitOptions,
+        callback: IdentityCallback<IdentityDeletionStatus>): IdentityBridgeTask {
+        deletionEvents += "await-${receipt.store}"
+        callback.onSuccess(if (receipt.store == IdentityDeletionStore.INDEX) indexDeletionStatus ?: deletionStatus else deletionStatus)
+        return IdentityTask()
+    }
+    override fun createGalleryBuilder(baseGallery: IdentityGalleryReference?, grant: IdentityAuthorizationGrant,
+        options: IdentityGalleryOptions, backend: IdentityBackendSelection,
+        callback: IdentityCallback<IdentityGalleryBuilderReference>): IdentityBridgeTask {
+        assertNull(baseGallery); galleryOptions = options; selections += backend
+        callback.onSuccess(IdentityGalleryBuilderReference("builder")); return IdentityTask()
+    }
+    override fun addTemplate(builder: IdentityGalleryBuilderReference, template: IdentityTemplateReference,
+        grant: IdentityAuthorizationGrant, callback: IdentityCallback<Unit>): IdentityBridgeTask {
+        addedTemplates += template; callback.onSuccess(Unit); return IdentityTask()
+    }
+    override fun publishGallery(builder: IdentityGalleryBuilderReference, callback: IdentityCallback<IdentityGalleryReference>): IdentityBridgeTask {
+        callback.onSuccess(IdentityGalleryReference("published-gallery")); return IdentityTask()
+    }
+    override fun closeGalleryBuilder(builder: IdentityGalleryBuilderReference, callback: IdentityCallback<Unit>): IdentityBridgeTask {
+        callback.onSuccess(Unit); return IdentityTask()
+    }
+    override fun deleteGallery(reference: IdentityGalleryReference, ownership: IdentityOwnershipAuthorization,
+        callback: IdentityCallback<IdentityDeletionReceipt>): IdentityBridgeTask {
+        deletedGalleries += reference
+        deletionEvents += "delete-gallery"
+        callback.onSuccess(IdentityDeletionReceipt("gallery-receipt", IdentityDeletionStore.INDEX)); return IdentityTask()
+    }
+    override fun close() { closes++ }
     override fun verify(probe: IdentityProbeReference, template: IdentityTemplateReference,
         grant: IdentityAuthorizationGrant, options: IdentityVerificationOptions,
         backend: IdentityBackendSelection, callback: IdentityCallback<IdentityVerificationResult>): IdentityBridgeTask {
@@ -121,6 +173,128 @@ class IdentityViewModelTest {
         verificationOptions = options,
         identificationOptions = IdentityIdentificationOptions(3, null, "v1"),
         livenessOptions = livenessOptions)
+
+    private fun galleryConfiguration() = hostConfiguration().copy(template = null, gallery = null,
+        ownership = IdentityOwnershipAuthorization("host-store", "owner-proof"),
+        galleryOptions = IdentityGalleryOptions(IdentityThresholdPolicy("host-identification-policy"), "subject-max-v1"))
+
+    private fun completeEnrollment(bridge: FakeIdentityBridge, ref: String) {
+        bridge.enrollmentCallback!!.onSuccess(IdentityEnrollmentResult(IdentityEnrollmentOutcome.ENROLLED,
+            IdentityTemplateReference(ref), IdentityEmbeddingSpace("space"), IdentityQualitySummary(1, 1.0), "quality", metadata()))
+    }
+
+    @Test fun addingAndSelectingCandidatesKeepsBridgeOpenAndSeparatesInputsAndTemplates() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(galleryConfiguration()); model.selectProbe(probe); model.enrollConfigured()
+        completeEnrollment(bridge, "first-template")
+        val first = model.candidates.single().reference
+        model.createCandidateConfigured()
+        assertEquals(2, model.candidates.size)
+        assertEquals(IdentityCandidateReference("candidate-2"), model.selectedCandidate)
+        assertFalse(model.inputReady); assertNull(model.enrolledTemplate); assertEquals(0, bridge.closes)
+        model.selectCandidateConfigured(first)
+        assertFalse(model.inputReady)
+        model.selectProbe(IdentityProbeReference("fresh-input")); model.verifyConfigured()
+        assertEquals(IdentityTemplateReference("first-template"), bridge.lastTemplate)
+        assertEquals(0, bridge.closes)
+    }
+
+    @Test fun multipleEnrollmentsStayWithTheirSelectedCandidate() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(galleryConfiguration()); model.selectProbe(probe); model.enrollConfigured(); completeEnrollment(bridge, "a")
+        model.selectProbe(probe); model.enrollConfigured(); completeEnrollment(bridge, "b")
+        assertEquals(listOf("a", "b"), model.candidates.single().templates.map { it.canonicalValue })
+        model.createCandidateConfigured(); model.selectProbe(probe); model.enrollConfigured(); completeEnrollment(bridge, "c")
+        assertEquals(listOf(2, 1), model.candidates.map { it.templates.size })
+        assertEquals(IdentityTemplateReference("c"), model.enrolledTemplate)
+    }
+
+    @Test fun candidateDeletionRetainsOtherCandidatesAndReportsActualPurgeStatus() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(galleryConfiguration()); val first = model.selectedCandidate
+        model.createCandidateConfigured(); val removed = model.selectedCandidate
+        bridge.deletionStatus = IdentityDeletionStatus.PURGE_PENDING
+        model.deleteCandidateConfigured()
+        assertEquals(listOf(removed), bridge.deletedCandidates)
+        assertEquals(first, model.selectedCandidate)
+        assertEquals(1, model.candidates.size)
+        assertEquals(IdentityDeletionStatus.PURGE_PENDING, model.state.deletion)
+        assertFalse(model.inputReady)
+    }
+
+    @Test fun galleryActionsUseAllTemplatesAndHostPolicyWithoutClosingTheBridge() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        val configuration = galleryConfiguration(); model.configure(configuration)
+        model.selectProbe(probe); model.enrollConfigured(); completeEnrollment(bridge, "a")
+        model.createCandidateConfigured(); model.selectProbe(probe); model.enrollConfigured(); completeEnrollment(bridge, "b")
+        val selection = IdentityBackendSelection.Explicit("host.plugin")
+        model.publishGalleryConfigured(selection)
+        assertEquals(configuration.galleryOptions, bridge.galleryOptions)
+        assertEquals(listOf("a", "b"), bridge.addedTemplates.map { it.canonicalValue })
+        assertEquals(selection, bridge.selections.last())
+        assertEquals(2, model.galleryTemplateCount)
+        assertEquals(IdentityGalleryReference("published-gallery"), model.publishedGallery)
+        model.selectProbe(probe); model.identifyConfigured()
+        assertEquals(model.publishedGallery, bridge.lastGallery)
+        model.deleteGalleryConfigured()
+        assertEquals(listOf(IdentityGalleryReference("published-gallery")), bridge.deletedGalleries)
+        assertNull(model.publishedGallery); assertEquals(0, model.galleryTemplateCount)
+        assertEquals(2, model.candidates.size); assertEquals(0, bridge.closes)
+        assertEquals(IdentityDeletionStatus.PURGED, model.state.deletion)
+    }
+
+    @Test fun cancelledCandidateCallbackCannotReplaceTheCurrentSelection() {
+        val bridge = FakeIdentityBridge().apply { delayCandidate = true }; val model = IdentityViewModel(bridge)
+        model.configure(galleryConfiguration()); val first = model.selectedCandidate
+        model.createCandidateConfigured(); model.cancel()
+        bridge.candidateCallback!!.onSuccess(IdentityCandidateReference("late-candidate"))
+        assertEquals(first, model.selectedCandidate); assertEquals(1, model.candidates.size)
+        assertEquals(IdentityBridgeFailure.Cancelled, model.state.error)
+    }
+
+    @Test fun deletingCandidatePurgesItsGalleryBeforeDeletingTheMember() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(galleryConfiguration()); model.selectProbe(probe); model.enrollConfigured(); completeEnrollment(bridge, "a")
+        model.publishGalleryConfigured(); model.deleteCandidateConfigured()
+        assertEquals(listOf("delete-gallery", "await-INDEX", "delete-candidate", "await-IDENTITY"), bridge.deletionEvents)
+        assertNull(model.publishedGallery); assertTrue(model.candidates.isEmpty())
+        assertEquals(IdentityDeletionStatus.PURGED, model.state.deletion)
+    }
+
+    @Test fun pendingGalleryPurgeDefersCandidateDeletionUntilRefreshed() {
+        val bridge = FakeIdentityBridge().apply { indexDeletionStatus = IdentityDeletionStatus.PURGE_PENDING }
+        val model = IdentityViewModel(bridge)
+        model.configure(galleryConfiguration()); model.selectProbe(probe); model.enrollConfigured(); completeEnrollment(bridge, "a")
+        model.publishGalleryConfigured(); model.deleteCandidateConfigured()
+        assertTrue(bridge.deletedCandidates.isEmpty()); assertEquals(1, model.candidates.size)
+        assertEquals(IdentityDeletionStatus.PURGE_PENDING, model.state.deletion)
+        bridge.indexDeletionStatus = IdentityDeletionStatus.PURGED
+        model.refreshDeletion()
+        assertEquals(listOf(IdentityCandidateReference("host-candidate")), bridge.deletedCandidates)
+        assertTrue(model.candidates.isEmpty()); assertEquals(IdentityDeletionStatus.PURGED, model.state.deletion)
+    }
+
+    @Test fun currentGalleryMustBeDeletedBeforeRepublishing() {
+        val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)
+        model.configure(galleryConfiguration()); model.selectProbe(probe); model.enrollConfigured(); completeEnrollment(bridge, "a")
+        model.publishGalleryConfigured(); model.publishGalleryConfigured()
+        assertEquals(1, bridge.addedTemplates.size)
+        assertEquals(IdentityBridgeFailure.Rejected(IdentityErrorCode.GALLERY_REVISION_CONFLICT), model.state.error)
+        assertEquals(IdentityGalleryReference("published-gallery"), model.publishedGallery)
+    }
+
+    @Test fun failedGalleryPurgeIsTerminalAndRefreshDoesNotPretendToRecover() {
+        val bridge = FakeIdentityBridge().apply { indexDeletionStatus = IdentityDeletionStatus.PURGE_FAILED }
+        val model = IdentityViewModel(bridge)
+        model.configure(galleryConfiguration()); model.selectProbe(probe); model.enrollConfigured(); completeEnrollment(bridge, "a")
+        model.publishGalleryConfigured(); model.deleteCandidateConfigured()
+        assertEquals(IdentityDeletionStatus.PURGE_FAILED, model.state.deletion)
+        assertTrue(model.deletionRecoveryRequired); assertTrue(model.candidateDeletionPending)
+        val events = bridge.deletionEvents.toList()
+        model.selectProbe(probe); model.refreshDeletion()
+        assertEquals(events, bridge.deletionEvents)
+        assertTrue(bridge.deletedCandidates.isEmpty()); assertEquals(1, model.candidates.size)
+    }
 
     @Test fun configuredActionsRequireHostAuthorizationAndInputBeforeBridgeWork() {
         val bridge = FakeIdentityBridge(); val model = IdentityViewModel(bridge)

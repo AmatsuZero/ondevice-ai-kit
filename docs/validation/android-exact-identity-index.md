@@ -24,9 +24,9 @@ Neither an exact index nor a successful native embedding creates a verified
 operating policy. The OpenCV prototype keeps both policies `UNVERIFIED`;
 gallery creation/publication and verification return `THRESHOLD_UNVERIFIED`.
 No guessed tutorial threshold or fabricated calibrated dataset was introduced.
-The current Demo still exposes local enrollment/deletion only; usable multi-user
-gallery controls and real-model recognition outcomes require the separate
-calibration/authorized-data work.
+The subsequent [candidate/gallery Demo slice](identity-gallery-demo.md) adds
+multi-user registration and gallery controls. Real-model gallery publication
+and recognition outcomes still require calibration/authorized-data work.
 
 ## Verification
 

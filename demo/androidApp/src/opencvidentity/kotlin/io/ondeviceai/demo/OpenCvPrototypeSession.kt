@@ -6,6 +6,10 @@ import io.ondeviceai.binding.AndroidIdentityBridge
 import io.ondeviceai.binding.IdentityAuthorizationGrant
 import io.ondeviceai.binding.IdentityCandidateReference
 import io.ondeviceai.binding.IdentityEnrollmentOptions
+import io.ondeviceai.binding.IdentityOwnershipAuthorization
+import io.ondeviceai.binding.IdentityGalleryOptions
+import io.ondeviceai.binding.IdentityIdentificationOptions
+import io.ondeviceai.binding.IdentityPolicyReference
 import io.ondeviceai.binding.IdentityProbeReference
 import io.ondeviceai.binding.IdentityThresholdPolicy
 import io.ondeviceai.binding.IdentityVerificationOptions
@@ -29,7 +33,7 @@ internal class OpenCvPrototypeSession private constructor(
 ) {
     private val input = AtomicReference<Pair<String, IdentityProbe>?>(null)
     private val cleanup = Mutex()
-    private var cleanupResult: Result<Unit>? = null
+    private var cleanupResult: Result<RevocationReceipt>? = null
     private val verification = FaceVerification(store, backend.backendId, listOf(backend))
     private val identification = FaceIdentification(store, indexes, backend.backendId, listOf(backend))
     val bridge = AndroidIdentityBridge(store, indexes,
@@ -42,7 +46,12 @@ internal class OpenCvPrototypeSession private constructor(
         candidate = IdentityCandidateReference(candidate.canonicalJSON()),
         enrollmentOptions = IdentityEnrollmentOptions(1.0, "geometric-only-uncalibrated", "v1"),
         verificationOptions = IdentityVerificationOptions(IdentityThresholdPolicy(
-            OpenCvIdentityModel.unverifiedPolicy(IdentityPolicyKind.VERIFICATION).canonicalJSON()), "v1"))
+            OpenCvIdentityModel.unverifiedPolicy(IdentityPolicyKind.VERIFICATION).canonicalJSON()), "v1"),
+        ownership = consent.ownership().let { IdentityOwnershipAuthorization(it.storeId, it.evidenceRef) },
+        galleryOptions = IdentityGalleryOptions(IdentityThresholdPolicy(
+            OpenCvIdentityModel.unverifiedPolicy(IdentityPolicyKind.IDENTIFICATION).canonicalJSON()), "subject-max-v1"),
+        identificationOptions = IdentityIdentificationOptions(32,
+            OpenCvIdentityModel.unverifiedPolicy(IdentityPolicyKind.IDENTIFICATION).let { IdentityPolicyReference(it.id, it.revision) }, "v1"))
 
     fun probe(bitmap: Bitmap): IdentityProbeReference {
         val bytes = ByteArrayOutputStream().use { output ->
@@ -55,7 +64,7 @@ internal class OpenCvPrototypeSession private constructor(
         } finally { bytes.fill(0) }
     }
 
-    suspend fun deleteAndClose(): Unit = withContext(NonCancellable + Dispatchers.IO) {
+    suspend fun deleteAndClose(): RevocationReceipt = withContext(NonCancellable + Dispatchers.IO) {
         cleanup.withLock {
             cleanupResult?.let { return@withLock it.getOrThrow() }
             val result = runCatching {
@@ -63,12 +72,14 @@ internal class OpenCvPrototypeSession private constructor(
                 consent.close()
                 input.set(null)
                 try {
-                    val receipt = store.deleteCandidate(candidate, consent.ownership())
+                    // Revoke the session's entire domain, including candidates whose UI reply was cancelled.
+                    val receipt = store.revokeGrant(consent.grant.grantId, consent.ownership())
                     verification.close()
                     identification.close()
                     backend.closeAndWait()
                     check(store.awaitDeletion(receipt,
                         IdentityDeadline(SystemIdentityMonotonicClock, 30_000_000_000)) == DeletionStatus.PURGED)
+                    receipt
                 } finally {
                     verification.close()
                     identification.close()
