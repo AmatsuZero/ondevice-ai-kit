@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 Android 真实 Identity 主流程
+
+- 用户批准可选 OpenCV 4.12.0 与官方 YuNet/SFace 权重，并单独批准 NASA public-domain astronaut 仅作本地流程验证。新增 `android:backend-opencv-identity`，真实 CPU 检测→五点对齐→128维归一化 embedding；Demo `-PenableOpenCvIdentity=true` 接模型 ZIP 导入、显式本机授权、AndroidIdentityBridge/Keystore 加密注册及删除。默认无 vendor runtime，SR+LM+Identity 三者组合通过。详见[验证](validation/android-opencv-identity-demo.md)与[使用](../demo/androidApp/src/opencvidentity/README.md)。
+- 最终源码 TECNO KM9/API35 runId=`b542f467-4f2a-4a09-920a-15bd06fc89bb`：授权正例检测/对齐/embedding/bridge 注册、blank 拒绝、未校准策略拒绝、候选删除/幂等 close/模型 lease 释放通过。安装后 APK SHA 与 immutable final 快照一致；无相机、无 Activity、未解锁；不代表准确率/PAD 或 picker/UI 实操。
+- backend **6/6**、默认 Demo **48/48**、三 opt-in **53/53**、共享 simulator **65/65**；APK/test APK/lint、iOS arm64 compile、release AAR/POM 通过。独立有界审查两项 Medium 已修，诊断 UI RED→GREEN，最终 re-review 零 finding、`COMMENT`，不是完整分支 APPROVE。ignored 证据 `artifacts/verification/android-opencv-identity-20261103/`，九项受保护修改保留，未 push/merge/release。
+- **下一功能缺口**：生产 **1:N index/query 尚未实现**（当前 `INDEX_UNAVAILABLE`），不能只归为校准缺口；1:1 未校准仍 `THRESHOLD_UNVERIFIED`。Apple 真实 Identity、独立 PAD、Android LM 授权权重及 Android ASR 离线资源继续开放。真实 picker/同意/注册 UI、自然质量、minOS/长期 native GC 资源、发布门槛不变；先补可本地执行的功能，corner/resource 后置。
+
 ## 最新续接 — 2026-11-03 Android 视频真实超分主流程
 
 - 用户明确授权新增可选官方推理 runtime 与公开许可的官方 SR 示例权重用于本地验证；采用 `com.google.ai.edge.litert:litert:1.4.2` + TensorFlow 官方 MIT ESRGAN 4×，固定模型 SHA-256。新增 `android:backend-litert-sr`，实际解码→RGB/tiled model inference→H.264 编码/AAC passthrough，保留帧 PTS、取消/drain 与输出 lease。Demo `-PenableLiteRtSr=true` 接模型导入、真实私有视频复制、处理和 FileProvider 播放/分享副本；默认无 vendor runtime，可与 LM opt-in 组合。详见[验证](validation/android-video-sr-demo.md)与[使用/profile](../demo/androidApp/src/litertsr/README.md)。

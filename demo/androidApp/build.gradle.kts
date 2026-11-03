@@ -1,11 +1,18 @@
 plugins { alias(libs.plugins.android.application);alias(libs.plugins.kotlin.compose) }
 val enableLiteRtLm = providers.gradleProperty("enableLiteRtLm").orNull == "true"
 val enableLiteRtSr = providers.gradleProperty("enableLiteRtSr").orNull == "true"
+val enableOpenCvIdentity = providers.gradleProperty("enableOpenCvIdentity").orNull == "true"
 android {
  namespace="io.ondeviceai.demo";compileSdk=36
  defaultConfig {applicationId="io.ondeviceai.demo";minSdk=26;targetSdk=36;versionCode=1;versionName="0.1.0";testInstrumentationRunner=providers.gradleProperty("odaiTestRunner").orNull?:"io.ondeviceai.demo.TtsProbeInstrumentation";buildConfigField("String","ODAI_SDK_COMMIT","\""+(providers.gradleProperty("sdkCommit").orNull?:"working-tree")+"\"")}
  buildFeatures {compose=true;buildConfig=true}
  compileOptions {sourceCompatibility=JavaVersion.VERSION_17;targetCompatibility=JavaVersion.VERSION_17}
+ sourceSets.getByName("main").kotlin.srcDir(if (enableOpenCvIdentity) "src/opencvidentity/kotlin" else "src/noOpencvidentity/kotlin")
+ if (enableOpenCvIdentity) {
+  sourceSets.getByName("main").assets.srcDir("src/opencvidentity/assets")
+  sourceSets.getByName("test").kotlin.srcDir("src/opencvidentityTest/kotlin")
+  sourceSets.getByName("androidTest").kotlin.srcDir("src/opencvidentityAndroidTest/kotlin")
+ }
  sourceSets.getByName("main").kotlin.srcDir(if (enableLiteRtSr) "src/litertsr/kotlin" else "src/noLitertsr/kotlin")
  if (enableLiteRtSr) sourceSets.getByName("androidTest").kotlin.srcDir("src/litertsrAndroidTest/kotlin")
  sourceSets.getByName("main").kotlin.srcDir(if (enableLiteRtLm) "src/litertlm/kotlin" else "src/noLitertlm/kotlin")
@@ -24,6 +31,9 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     }
 }
 dependencies {
+ implementation(project(":android:identity"))
+ if (enableOpenCvIdentity) implementation(project(":android:backend-opencv-identity"))
+ if (enableOpenCvIdentity) androidTestImplementation("org.opencv:opencv:4.12.0")
  implementation(project(":android:video"))
  if (enableLiteRtSr) implementation(project(":android:backend-litert-sr"))
  if (enableLiteRtLm) {

@@ -1,6 +1,24 @@
 # P10 identity model selection: prerequisite evidence
 
-Date: 2026-10-17. Status: **blocked-unverified; no production model selected**.
+Date: 2026-10-17; updated 2026-11-03. Status: **Android local experimental
+backend implemented; no production model/policy selected**.
+
+## Android prototype update (2026-11-03)
+
+After explicit user approval, optional official OpenCV 4.12.0 plus the pinned
+YuNet/SFace weights now provide real Android detection, alignment and embedding.
+The default Demo excludes that dependency. Exact asset/runtime hashes, licenses,
+ModelStore binding, build/test results and the approved NASA fixture's positive
+TECNO device flow are recorded in [prototype validation](android-opencv-identity-demo.md).
+The historical no-download/no-dependency statements below describe the earlier
+research checkpoint. The Android experiment supersedes those statements only
+for this approved local scope.
+
+Production 1:N index/query remains unimplemented; the prototype returns typed
+`INDEX_UNAVAILABLE`. Verification has no calibrated policy and rejects with
+`THRESHOLD_UNVERIFIED`. Apple real Identity, independent PAD, authorized accuracy
+data, training-data/redistribution review, minimum-OS and sustained-resource
+acceptance remain open. The approved portrait demonstrates flow only.
 
 This is a prerequisite research record for Task 9 of the [identity implementation plan](../superpowers/plans/2026-10-17-face-identity-liveness.md). It does not complete that task, approve its implementation, or approve any biometric dataset. No model weights were downloaded, tracked, redistributed or executed for this research.
 

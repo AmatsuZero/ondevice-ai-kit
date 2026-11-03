@@ -12,12 +12,23 @@ import io.ondeviceai.binding.*
 
 interface IdentityDemoActions { fun submitLivenessFrame() }
 
+interface IdentityModelSetupDemoActions {
+    val busy: Boolean
+    val status: String
+    val modelReady: Boolean
+    val sessionReady: Boolean
+    fun importModels()
+    fun enableLocalEnrollment()
+    fun deleteLocalEnrollment()
+}
+
 @Composable
 fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityViewModel? = null,
     identityActions: IdentityDemoActions? = null, speech: SpeechViewModel? = null,
     speechActions: SpeechDemoActions? = null, video: VideoViewModel? = null,
     videoActions: VideoDemoActions? = null, multimodal: MultimodalViewModel? = null,
-    multimodalActions: MultimodalDemoActions? = null) {
+    multimodalActions: MultimodalDemoActions? = null,
+    identitySetup: IdentityModelSetupDemoActions? = null) {
     val state = model.state
     val availability = model.bridge.availability()
     var identityVisible by remember { mutableStateOf(false) }
@@ -76,20 +87,29 @@ fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityVie
                     state.result?.benchmarkJson?.let { json -> TextButton(onClick = { actions.exportReport(json) }) { Text("导出报告") } }
                 }
             }
-            if (identityVisible) identity?.let { IdentityControls(it, identityActions) }
+            if (identityVisible) identity?.let { IdentityControls(it, identityActions, identitySetup) }
             }
         }
     }
 }
 
 @Composable
-private fun IdentityControls(model: IdentityViewModel, actions: IdentityDemoActions?) {
+private fun IdentityControls(model: IdentityViewModel, actions: IdentityDemoActions?, setup: IdentityModelSetupDemoActions?) {
     val state = model.state
     var backendId by remember { mutableStateOf("") }
     fun selection(): IdentityBackendSelection = backendId.trim().let {
         if (it.isEmpty()) IdentityBackendSelection.Default else IdentityBackendSelection.Explicit(it)
     }
     HorizontalDivider()
+    setup?.let {
+        Text(it.status)
+        Text("本机原型：仅注册本人或获授权图片；特征加密保存。验证、识别和活体尚未校准。")
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            OutlinedButton(onClick = it::importModels, enabled = !it.busy && !state.busy && !it.sessionReady) { Text("导入身份模型") }
+            OutlinedButton(onClick = it::enableLocalEnrollment, enabled = it.modelReady && !it.busy && !it.sessionReady && !state.busy) { Text("同意并启用本机注册") }
+        }
+        if (it.sessionReady) TextButton(onClick = it::deleteLocalEnrollment, enabled = !it.busy) { Text("删除本次注册并停用") }
+    }
     Text(identityAvailabilityText(model.availability()))
     Text(if (model.configured) "授权配置已加载" else "需要授权配置")
     Text(if (model.inputReady) "身份输入已选择" else "注册、验证和识别需要选择图片")

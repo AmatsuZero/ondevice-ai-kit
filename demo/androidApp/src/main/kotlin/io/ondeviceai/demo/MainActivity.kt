@@ -143,6 +143,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private val speechPermissionGate: SpeechPermissionGate = SpeechPermissionGate { speechPermission.launch(Manifest.permission.RECORD_AUDIO) }
     private var identityModel by mutableStateOf(IdentityViewModel(UnavailableIdentityBridge()))
     private var identityProbeFactory:((Bitmap)->IdentityProbeReference)?=null
+    private var identityRuntime: DemoIdentityRuntime? = null
     private var latestIdentityCameraFrame:Triple<Bitmap,Long,Int>?=null
     private var livenessCapture:Job?=null
     private val cameraExecutor=Executors.newSingleThreadExecutor()
@@ -163,6 +164,11 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
         bridge=AndroidFaceBridge(detector,lifecycleScope){result=it};model=FaceViewModel(bridge)
+        identityRuntime = DemoIdentityBackendFactory.create(this, lifecycleScope, ::configureIdentity) {
+            identityModel.close()
+            identityModel = IdentityViewModel(UnavailableIdentityBridge())
+            identityProbeFactory = null
+        }
         if (DemoVideoBackendFactory.enabled) {
             val store = VideoInputStore(File(cacheDir, "video-input-${UUID.randomUUID()}"))
             videoInputs = store
@@ -224,7 +230,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                     }
                 }
                 FaceScreen(model,this@MainActivity,identityModel,this@MainActivity,speechHost.model,speechHost,videoHost.model,videoHost,
-                    multimodalHost?.model,multimodalHost)
+                    multimodalHost?.model,multimodalHost,identitySetup = identityRuntime)
                 message?.let{Text(it)}
                 report?.let{json->TextButton(onClick={exportReport(json)}){Text("导出 Benchmark JSON")}}
             }}
@@ -335,6 +341,6 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         }
     }
     override fun onStart(){if(::videoHost.isInitialized)videoHost.foreground();super.onStart();if(::speechHost.isInitialized)speechHost.onForeground();multimodalHost?.onForeground()}
-    override fun onStop(){if(::speechHost.isInitialized)speechHost.onBackground();if(::videoHost.isInitialized)videoHost.background(preservePicker=videoPickerReply!=null || videoImport?.isActive==true);multimodalHost?.background(preservePicker=multimodalPickerReply!=null || multimodalImport?.isActive==true);super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
-    override fun onDestroy(){multimodalPickerReply=null;multimodalPickerFailure=null;multimodalImport?.cancel();multimodalHost?.close();if(::speechHost.isInitialized)speechHost.close();if(::videoHost.isInitialized)videoHost.close();videoPickerReply=null;videoImport?.cancel();speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
+    override fun onStop(){identityRuntime?.stop();if(::speechHost.isInitialized)speechHost.onBackground();if(::videoHost.isInitialized)videoHost.background(preservePicker=videoPickerReply!=null || videoImport?.isActive==true);multimodalHost?.background(preservePicker=multimodalPickerReply!=null || multimodalImport?.isActive==true);super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
+    override fun onDestroy(){identityRuntime?.close();multimodalPickerReply=null;multimodalPickerFailure=null;multimodalImport?.cancel();multimodalHost?.close();if(::speechHost.isInitialized)speechHost.close();if(::videoHost.isInitialized)videoHost.close();videoPickerReply=null;videoImport?.cancel();speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
 }

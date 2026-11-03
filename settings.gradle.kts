@@ -4,6 +4,9 @@ dependencyResolutionManagement { repositories {
     providers.gradleProperty("litertlmMavenRepo").orNull?.let { localRepo ->
         maven { url = uri(localRepo); content { includeGroup("com.google.ai.edge.litertlm") } }
     }
+    providers.gradleProperty("opencvMavenRepo").orNull?.let { localRepo ->
+        maven { url = uri(localRepo); content { includeGroup("org.opencv") } }
+    }
     google(); mavenCentral()
 } }
 rootProject.name = "ondevice-ai-kit"
@@ -23,3 +26,4 @@ include(":examples:android-litertlm-native")
 include(":probes:android-litertlm")
 
 include(":android:backend-litert-sr")
+include(":android:backend-opencv-identity")
