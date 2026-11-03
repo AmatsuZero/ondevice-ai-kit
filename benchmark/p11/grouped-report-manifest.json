@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261103-cross-scene/summary.json",
-    "sha256": "be07562ac93dd209b673d60cf13c4cc0eb50956c739d31a00323ad959dc89bdd"
+    "path": "artifacts/verification/p11-readiness-20261103-f04-mic/summary.json",
+    "sha256": "a4d69e08389b6c5f7862110e48a21430c83dfa14c68abecc211d3b1d3788c615"
   },
   "schemaVersion": 1,
   "sources": [
