@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F11 第二场景纳入 P11 readiness 与本地可搬移复现
+
+- 第二场景公开 SDK 五次真机证据已独立纳入 ignored `artifacts/verification/p11-readiness-20261103-cross-scene/summary.json`，SHA-256=`be07562ac93dd209b673d60cf13c4cc0eb50956c739d31a00323ad959dc89bdd`；readiness 校验 **155 evidence paths / 163 source hashes / 9 行有 gap**。跟踪的 `benchmark/p11/grouped-report-manifest.json` 已指向该快照，重算 `artifacts/verification/p11-grouped-20261103-cross-scene/summary.json` SHA-256=`c8b646e52716e470ca6dde531ac8b336d90fa84f519a42c3f22d3874320a9c5a`；`groups` 与 `coverage` 均与上一版逐值相同，仍 **5 项能力/8 组**、`open/not-ready`。新场景与首场景五次请求、20 次持续请求各自独立，不合组。
+- 从提交 `fc0796608c398557364f127fd549672c49ebf01d` 的干净 `git archive` 加本地证据包复跑通过；ignored `artifacts/verification/p11-portable-evidence-20261103-v3/p11-evidence.tar.gz` 含 162 个文件、69,459,841 B，SHA-256=`1a6149d563995674994b22c1963888c1e6b609757d28bfeb03b615d137fcaf92`，索引 SHA-256=`1b210f5aa6dc37d2a306d32c97ba48acc0b11bdbd91e72f3468d46323e7cceef`，回执在同目录 `clean-replay.json`。包未上传，对外分发前仍需内容/许可复核。受保护工程、身份与相机探针等原有未提交文件未改。
+
 ## 最新续接 — 2026-11-03 F11 公开 SDK 第二自然场景五次真机请求
 
 - 用户再次回复可处理 F02 相机授权；固定 `io.ondeviceai.f02versioned10` 此前已有 `authorized` 回执与同 PID 十轮相机 trace，本轮未重复申请权限或启动相机研究 App。授权设备回读 iPhone17,2 / iOS 27.0.1 `connected`。
