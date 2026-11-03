@@ -4,6 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 Android 视频真实超分主流程
+
+- 用户明确授权新增可选官方推理 runtime 与公开许可的官方 SR 示例权重用于本地验证；采用 `com.google.ai.edge.litert:litert:1.4.2` + TensorFlow 官方 MIT ESRGAN 4×，固定模型 SHA-256。新增 `android:backend-litert-sr`，实际解码→RGB/tiled model inference→H.264 编码/AAC passthrough，保留帧 PTS、取消/drain 与输出 lease。Demo `-PenableLiteRtSr=true` 接模型导入、真实私有视频复制、处理和 FileProvider 播放/分享副本；默认无 vendor runtime，可与 LM opt-in 组合。详见[验证](validation/android-video-sr-demo.md)与[使用/profile](../demo/androidApp/src/litertsr/README.md)。
+- 真机 TECNO KM9/API35、公开合成 64×48 两帧 AAC clip→256×192：实际权重处理、音轨保留/丢弃、首帧进度取消/drain/同 client 重入、close 后输出可读、release 后删除均通过。最终 runId=`55ae0b40-3d07-483f-a62f-d8a0dfd2b5cd`，runner `status=passed`。独立 ffprobe/FFmpeg 复核两帧 PTS、4 AAC packet hash/PTS、无音轨输出与全文件解码通过。不是自然/时域质量验收。
+- 新 backend 4/4、video/bridge 17/17、默认 Demo 43/43、双 opt-in Demo 47/47、共享 simulator 65/65；APK/test APK/lint、共享 iOS arm64 compile、backend release AAR/POM 通过。独立 review 一个 medium 输出复核缺口已补 runner 重开文件断言及 fresh device/external validator；无第二次独立 APPROVE。ignored证据 `artifacts/verification/android-video-sr-20261103/`。
+- 原设备仍锁屏/息屏；headless 测试不解锁/不打开 Activity，真实 picker/playback/share UI 仍未验。AAC 负 priming/edit-list、未知色彩、超过短片 profile 均明确拒绝；自然质量/时域/tile seams/更广 profile/长期资源/minOS/发布仍开放。九项保护修改未动，未 push/merge/release。
+- **下一功能优先切片**：继续真实身份/PAD 的可用生产模型与 Demo 路由。Android 多模态仍缺授权 `.litertlm` 权重（不代为接受 gated 条款）；Android ASR 仍缺支持且授权的离线资源。有设备解锁条件再做当前视频模型/媒体 picker、播放分享实操；不回到长期 corner/resource 专项。F06/P11/发布保持 open/not-ready。
+
 ## 最新续接 — 2026-11-03 Android 多模态功能优先
 
 - 用户明确先完成功能、后置 corner case；本轮不继续扩展 F04 竞态/资源测试。执行顺序调整为 Android 多模态、Android 超分、真实身份/PAD；Android ASR 仍缺设备离线资源。

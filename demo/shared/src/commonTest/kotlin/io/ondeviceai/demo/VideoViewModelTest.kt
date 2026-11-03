@@ -8,6 +8,19 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class VideoViewModelTest {
+    @Test fun importDisablesProcessingUntilPublished() {
+        val bridge = FakeVideoBridge()
+        val model = VideoViewModel(bridge)
+        model.selectVideo("token", "clip.mp4")
+        model.setImporting(true)
+        assertFalse(model.state.controlsEnabled)
+        model.process()
+        assertTrue(bridge.requests.isEmpty())
+        model.setImporting(false)
+        model.process()
+        assertEquals(1, bridge.requests.size)
+    }
+
     @Test fun synchronousTerminalDoesNotLeaveBusyHandle() {
         val bridge = FakeVideoBridge().apply { synchronous = true }
         val model = VideoViewModel(bridge)

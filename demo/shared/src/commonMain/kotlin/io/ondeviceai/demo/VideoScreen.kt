@@ -14,7 +14,12 @@ fun VideoScreen(model: VideoViewModel, actions: VideoDemoActions?) {
     var backendId by remember { mutableStateOf("") }
     LaunchedEffect(model) { model.refreshBackends() }
     Text("视频超分", style = MaterialTheme.typography.titleMedium)
-    Text("Apple 当前支持：320×180、24 fps、1–48 帧、BT.709 SDR，4× 输出。音频保留支持单条等长 AAC。")
+    val setup = actions as? VideoModelSetupDemoActions
+    Text(setup?.videoProfileDescription ?: "Apple 当前支持：320×180、24 fps、1–48 帧、BT.709 SDR，4× 输出。音频保留支持单条等长 AAC。")
+    if (setup?.canImportVideoModel == true) {
+        OutlinedButton(onClick = setup::importVideoModel, enabled = state.controlsEnabled) { Text("导入超分模型") }
+    }
+    if (state.importing) Text("正在导入…")
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = { model.selectBackend(VideoBridgeSelection.Default) }, enabled = state.controlsEnabled) { Text("使用默认后端") }
         TextButton(onClick = model::refreshBackends, enabled = !state.refreshing) { Text(if (state.refreshing) "刷新中…" else "刷新后端") }
@@ -46,7 +51,7 @@ fun VideoScreen(model: VideoViewModel, actions: VideoDemoActions?) {
     }
     Button(onClick = model::process, enabled = state.controlsEnabled && state.inputReference != null,
         modifier = Modifier.testTag("video-process")) { Text("开始 4× 超分") }
-    if (!state.controlsEnabled && !state.closed) {
+    if ((state.phase == VideoPhase.RUNNING || state.phase == VideoPhase.CANCELLING) && !state.closed) {
         LinearProgressIndicator(Modifier.fillMaxWidth())
         state.progress?.let { Text("已处理 ${it.completedFrames} / ${it.totalFrames ?: "?"} 帧", Modifier.testTag("video-progress")) }
         TextButton(onClick = model::cancel, enabled = state.phase != VideoPhase.CANCELLING,

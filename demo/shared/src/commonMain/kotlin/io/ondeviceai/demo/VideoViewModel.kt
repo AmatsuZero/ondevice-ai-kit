@@ -8,6 +8,7 @@ data class VideoState(
     val phase: VideoPhase = VideoPhase.IDLE,
     val backends: List<VideoBridgeBackend> = emptyList(),
     val refreshing: Boolean = false,
+    val importing: Boolean = false,
     val queryFailure: VideoBridgeFailure? = null,
     val selection: VideoBridgeSelection = VideoBridgeSelection.Default,
     val audioPolicy: VideoBridgeAudioPolicy = VideoBridgeAudioPolicy.PRESERVE,
@@ -20,7 +21,13 @@ data class VideoState(
     val pendingReleases: Int = 0,
     val closed: Boolean = false,
 ) {
-    val controlsEnabled get() = !closed && phase != VideoPhase.RUNNING && phase != VideoPhase.CANCELLING
+    val controlsEnabled get() = !closed && !importing && phase != VideoPhase.RUNNING && phase != VideoPhase.CANCELLING
+}
+
+interface VideoModelSetupDemoActions {
+    val canImportVideoModel: Boolean
+    val videoProfileDescription: String
+    fun importVideoModel()
 }
 
 interface VideoDemoActions {
@@ -74,6 +81,7 @@ class VideoViewModel(private val bridge: VideoBridge) {
         if (reference != state.inputReference) { cancel(); clearOutput() }
         state = state.copy(inputReference = reference, inputDisplayName = if (reference == null) null else displayName)
     }
+    fun setImporting(importing: Boolean) { if (!state.closed) state = state.copy(importing = importing) }
     fun inputFailed() {
         if (!state.closed) state = state.copy(phase = if (pending) state.phase else VideoPhase.FAILED,
             failure = VideoBridgeFailure(VideoBridgeFailureCode.INVALID_INPUT, "videoImportFailed"))

@@ -88,11 +88,54 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
             }
         }
     }
+    private var videoInputs: VideoInputStore? = null
+    private var videoBridge: AndroidVideoBridge? = null
+    private var videoImport: Job? = null
+    private val videoModelPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null && ::videoHost.isInitialized && videoHost.model.state.controlsEnabled) {
+            videoHost.model.setImporting(true)
+            videoImport = lifecycleScope.launch {
+                try {
+                    withContext(Dispatchers.IO) {
+                        val copy = MultimodalPickerCopy.create(File(cacheDir, "sr-model-${UUID.randomUUID()}"), "ESRGAN.tflite", 5_000_000,
+                            open = { checkNotNull(contentResolver.openInputStream(uri)) }, checkpoint = { ensureActive() })
+                        try { DemoVideoBackendFactory.install(copy.file, File(noBackupFilesDir, "video-sr/ESRGAN.tflite")) }
+                        finally { copy.close() }
+                    }
+                    videoHost.model.refreshBackends()
+                } catch (error: CancellationException) { throw error }
+                catch (_: Exception) { message = "超分模型导入失败，请选择官方 ESRGAN.tflite"; videoHost.model.inputFailed() }
+                finally { videoHost.model.setImporting(false); videoImport = null }
+            }
+        }
+    }
     private var videoPickerReply: ((String?, String?) -> Unit)? = null
     private val videoPicker = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         val reply = videoPickerReply; videoPickerReply = null
-        // No Android backend is registered: do not read or copy media just to report unavailable.
-        reply?.invoke(uri?.let { UUID.randomUUID().toString() }, uri?.let { "已选择的视频（Android 后端待接入）" })
+        val store = videoInputs
+        if (reply != null) {
+            if (uri == null) reply(null, null)
+            else if (store == null) reply(UUID.randomUUID().toString(), "已选择的视频（Android 后端待接入）")
+            else {
+                videoHost.model.setImporting(true)
+                videoImport = lifecycleScope.launch {
+                try {
+                    // Keep ownership until the UI callback either selects or retires the token.
+                    withContext(Dispatchers.IO) {
+                        val name = contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use {
+                            if (it.moveToFirst()) it.getString(0) else null
+                        } ?: "video"
+                        val imported = store.import(name, open = { checkNotNull(contentResolver.openInputStream(uri)) }, checkpoint = { ensureActive() })
+                        var delivered = false
+                        try { withContext(Dispatchers.Main.immediate) { reply(imported.reference, imported.displayName); delivered = true } }
+                        finally { if (!delivered) store.remove(imported.reference) }
+                    }
+                } catch (error: CancellationException) { throw error }
+                catch (_: Exception) { videoHost.model.inputFailed() }
+                finally { videoHost.model.setImporting(false); videoImport = null }
+                }
+            }
+        }
     }
     private val speechPermission: androidx.activity.result.ActivityResultLauncher<String> = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         speechPermissionGate.complete(granted)
@@ -120,7 +163,19 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
         bridge=AndroidFaceBridge(detector,lifecycleScope){result=it};model=FaceViewModel(bridge)
-        videoHost = VideoHost(selectFile = { reply -> videoPickerReply = reply; videoPicker.launch("video/*") })
+        if (DemoVideoBackendFactory.enabled) {
+            val store = VideoInputStore(File(cacheDir, "video-input-${UUID.randomUUID()}"))
+            videoInputs = store
+            videoBridge = AndroidVideoBridge(DemoVideoBackendFactory.create(
+                File(noBackupFilesDir, "video-sr/ESRGAN.tflite"), File(cacheDir, "video-output")), store, lifecycleScope)
+        }
+        videoHost = VideoHost(bridge = videoBridge ?: UnavailableVideoBridge(),
+            selectFile = { reply ->
+                if (videoPickerReply != null || videoImport?.isActive == true) reply(null, null)
+                else { videoPickerReply = reply; videoPicker.launch("video/*") }
+            }, openOutput = { exportVideo(it, false) }, shareOutput = { exportVideo(it, true) },
+            releaseInput = { videoInputs?.remove(it) }, closeInputs = { videoInputs?.close() },
+            importModel = if (DemoVideoBackendFactory.enabled) ({ videoModelPicker.launch(arrayOf("*/*")) }) else null)
         if (DemoMultimodalBackendFactory.enabled || intent.getBooleanExtra("odai.multimodal.enabled", false)) {
             val selectMultimodal: (String, (File?) -> Unit, () -> Unit) -> Unit = { mime, reply, failure ->
                     if (multimodalPickerReply != null || multimodalImport?.isActive == true) reply(null)
@@ -260,7 +315,26 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         }
     }
     override fun exportReport(json:String){report=json;reportPicker.launch("odai-benchmark.json")}
+    private fun exportVideo(reference: String, share: Boolean) {
+        val source = videoBridge?.outputFile(reference) ?: return
+        val reader = try { source.inputStream() } catch (_: Exception) { message = "无法读取视频结果"; return }
+        // Opening the descriptor while the UI owns the lease keeps bytes readable after unlink.
+        @OptIn(ExperimentalCoroutinesApi::class)
+        lifecycleScope.launch(start = CoroutineStart.ATOMIC) {
+            try {
+                val copy = withContext(Dispatchers.IO) { VideoOutputExport.snapshot(reader, File(cacheDir, "video-exports")) }
+                val uri = androidx.core.content.FileProvider.getUriForFile(this@MainActivity, "$packageName.videooutputs", copy)
+                val intent = if (share) Intent(Intent.ACTION_SEND).apply { type = "video/mp4"; putExtra(Intent.EXTRA_STREAM, uri) }
+                    else Intent(Intent.ACTION_VIEW).setDataAndType(uri, "video/mp4")
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                intent.clipData = android.content.ClipData.newRawUri("Video result", uri)
+                startActivity(if (share) Intent.createChooser(intent, "分享视频") else intent)
+            } catch (error: CancellationException) { throw error }
+            catch (_: Exception) { message = "无法打开或分享视频结果" }
+            finally { reader.close() }
+        }
+    }
     override fun onStart(){if(::videoHost.isInitialized)videoHost.foreground();super.onStart();if(::speechHost.isInitialized)speechHost.onForeground();multimodalHost?.onForeground()}
-    override fun onStop(){if(::speechHost.isInitialized)speechHost.onBackground();if(::videoHost.isInitialized)videoHost.background(preservePicker=videoPickerReply!=null);multimodalHost?.background(preservePicker=multimodalPickerReply!=null || multimodalImport?.isActive==true);super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
-    override fun onDestroy(){multimodalPickerReply=null;multimodalPickerFailure=null;multimodalImport?.cancel();multimodalHost?.close();if(::speechHost.isInitialized)speechHost.close();if(::videoHost.isInitialized)videoHost.close();videoPickerReply=null;speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
+    override fun onStop(){if(::speechHost.isInitialized)speechHost.onBackground();if(::videoHost.isInitialized)videoHost.background(preservePicker=videoPickerReply!=null || videoImport?.isActive==true);multimodalHost?.background(preservePicker=multimodalPickerReply!=null || multimodalImport?.isActive==true);super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
+    override fun onDestroy(){multimodalPickerReply=null;multimodalPickerFailure=null;multimodalImport?.cancel();multimodalHost?.close();if(::speechHost.isInitialized)speechHost.close();if(::videoHost.isInitialized)videoHost.close();videoPickerReply=null;videoImport?.cancel();speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
 }

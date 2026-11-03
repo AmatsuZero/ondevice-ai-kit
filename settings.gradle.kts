@@ -21,3 +21,5 @@ include(":examples:android-identity-native")
 include(":examples:android-multimodal-native")
 include(":examples:android-litertlm-native")
 include(":probes:android-litertlm")
+
+include(":android:backend-litert-sr")

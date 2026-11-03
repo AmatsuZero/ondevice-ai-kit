@@ -6,6 +6,18 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 class VideoHostTest {
+    @Test fun reselectClearAndLateReplyRetireOwnedInputTokens() {
+        var reply: ((String?, String?) -> Unit)? = null
+        val retired = mutableListOf<String>()
+        val host = VideoHost(selectFile = { reply = it }, releaseInput = retired::add)
+        host.selectVideoFile(); reply?.invoke("first", "a.mp4")
+        host.selectVideoFile(); reply?.invoke("second", "b.mp4")
+        assertEquals(listOf("first"), retired)
+        host.clearVideoFile()
+        assertEquals(listOf("first", "second"), retired)
+        host.selectVideoFile(); host.close(); reply?.invoke("late", "c.mp4")
+        assertEquals(listOf("first", "second", "late"), retired)
+    }
     @Test fun explicitPickerRoundTripCanReturnAfterActivityStopStart() {
         var reply: ((String?, String?) -> Unit)? = null
         val host = VideoHost(selectFile = { reply = it })

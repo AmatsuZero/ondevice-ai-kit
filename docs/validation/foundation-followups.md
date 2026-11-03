@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-03 功能优先更新：F06 已新增可选 Android LiteRT/ESRGAN 真实后端、模型/视频导入和输出查看/分享接线；小合成 AAC 视频的真机推理、包/帧时间戳、取消重入与输出所有权通过，实际 UI 和自然质量/长期资源仍开放，见[本轮验证](android-video-sr-demo.md)。F07 同步 adapter、production factory 与模型 ZIP 导入已实现；真实图像推理仍缺授权权重，异步 drain 仍 UNPROVEN，见[同步验证](android-litertlm-sync-demo.md)。下方原始缺口以此更新为准。
+
 2026-10-28 用户决定：结束原有长周期执行，将遗留问题转入专项；随后要求按可执行队列继续推进。F01 的 sandbox 子项、F06 的 Apple 非零进度取消子项与 F08 的真实 Files provider 子项现已完成，其余原始验收仍是未通过或未验证。F01–F12 现已在 GitHub 与 GitLab 各建立同名 milestone 和跟踪 issue；链接与更新约定见[专项跟踪索引](foundation-tracking.md)。负责范围指模块责任边界，尚未指派人员。专项未完成前，P11 发布结论保持 `not-ready`。
 
 2026-10-31 F08 已新增第二来源/场景的 Kawaida 瀑布公开素材及真机 9/9 请求；三个自由描述含瀑布/水，但运动与冻结对照严格标签 pair 0/3，诊断性去句号仍 0/3。见[跨场景原始证据](multimodal-video-demo.md#2026-10-31-f08-第二自然场景kawaida-瀑布)。这缩小了“没有第二场景输入”的缺口，F08 自然质量与 P11 发布门禁仍开放。
@@ -25,7 +27,7 @@
 
 **暂不进入近期队列的外部卡点**：F03 需要 iOS15/API26 真机；F05 需要设备支持且授权的 Android ASR 离线资源；F07 真实推理需要可授权 LiteRT-LM 权重，native drain 另缺受支持证明；F10 需要生产模型/PAD、授权数据和校准集。真实 PHPicker 也需要将合成资产写入 Photos；当前按用户要求不做这项写入，因此保留为 F01 的独立后续。输入出现后再恢复对应专项。
 
-**独立技术难题，后置且不冒充外部设备卡点**：F02 的真实对象原生回归与修复补丁已获有界独立复审，固定版本 Skiko 本地发布、独立消费者双 iOS framework 链接及无 recorder 同 PID 真机十轮已完成；仍需生产分发所有权、长期资源预算与原验收。F06 的 Android 生产超分需要先确定可运行且可评价的后端；F09 已用隔离依赖诊断改动完成当前图像/视频 App archive，但生产依赖兼容、增强 XCFramework 与 binary consumer 仍未验；F12 完整复审此前遇服务 429，待形成新的候选差异后重试。它们仍是交付要求，只是不占用上述短队列。当前按用户要求继续推进此表中的可执行专项。
+**独立技术难题，后置且不冒充外部设备卡点**：F02 的真实对象原生回归与修复补丁已获有界独立复审，固定版本 Skiko 本地发布、独立消费者双 iOS framework 链接及无 recorder 同 PID 真机十轮已完成；仍需生产分发所有权、长期资源预算与原验收。F06 的 Android 可选后端已实现并验证小合成视频；仍缺实际 UI、自然质量与持续运行；F09 已用隔离依赖诊断改动完成当前图像/视频 App archive，但生产依赖兼容、增强 XCFramework 与 binary consumer 仍未验；F12 完整复审此前遇服务 429，待形成新的候选差异后重试。它们仍是交付要求，只是不占用上述短队列。当前按用户要求继续推进此表中的可执行专项。
 
 | 编号 / 负责范围 | 问题与已有证据 | 恢复输入 / 下一动作 | 专项退出标准 |
 | --- | --- | --- | --- |
@@ -34,8 +36,8 @@
 | F03 / 最低系统 | [设备矩阵](device-matrix.md)：iOS15/API26 缺设备 | 取得相应真机后恢复启动、availability、权限、选图/相机、取消、前后台、离线门禁 | 两平台最低系统实际运行报告；编译下限不替代运行验收 |
 | F04 / Speech iOS/TTS | [麦克风验证](ios-microphone-asr.md#2026-11-03-显式-closedrain-真机探针)：中文真机结束、显式取消/重入、Home 后取消/回前台重入及单轮插桩 close/drain 有界通过；长期资源/并发竞态、CER/WER、自然 TTS 与离线矩阵仍缺 | 可比较的持续运行与资源预算；另备授权语料、参考文本和网络观测方法 | 麦克风终态、资源 drain、取消重入/后台、CER/WER、自然 TTS 与离线矩阵逐项报告 |
 | F05 / Speech Android | [语音](speech-backends.md)：on-device ASR 返回 MISSING_ASSETS | 提供设备支持且授权的系统离线语音资源 | 真实转写、取消/close/重入、离线与自然质量验收；仍缺资产时明确 unavailable |
-| F06 / Video | [超分](video-sr-backends.md)、[导出取消](apple-video-audio.md)：Apple 非零导出进度取消和部分文件清理已完成真机 3/3；Android 生产后端、自然主观质量/传递函数、峰值资源仍缺证据 | Android 后端独立选择/实现；固定自然视频与质量裁定；Apple 取消专项无新输入时不重复 | 两端各自支持 profile 的真实输出/质量、取消与完整文件清理、持续运行报告，不把插值基线当算法效果 |
-| F07 / Multimodal Android | [drain 合同](android-litertlm-drain-contract.md)、[VLM](mobile-vlm.md)：LiteRT-LM 0.18.1 缺授权权重、production factory 和 native drain barrier | 固定可授权模型 manifest/hash/revision；取得受支持的 native drain 证明方案 | Kotlin consumer 实际生成、callback/取消/drain/close/重入/lease、质量资源报告；证明前维持 UNPROVEN/unavailable，supportsVideo=false |
+| F06 / Video | [超分](video-sr-backends.md)、[导出取消](apple-video-audio.md)：Apple 非零导出进度取消和部分文件清理已完成真机 3/3；Android 可选 LiteRT/ESRGAN 后端及小合成视频真机主流程已通过；实际 UI、自然主观质量/传递函数、峰值资源仍缺证据 | 验证实际 UI、自然视频与扩展 profile；固定自然视频与质量裁定；Apple 取消专项无新输入时不重复 | 两端各自支持 profile 的真实输出/质量、取消与完整文件清理、持续运行报告，不把插值基线当算法效果 |
+| F07 / Multimodal Android | [drain 合同](android-litertlm-drain-contract.md)、[VLM](mobile-vlm.md)：LiteRT-LM 0.18.1 同步 production factory 与模型导入已实现；缺授权权重，异步 native drain 仍 UNPROVEN | 固定可授权模型 manifest/hash/revision 并运行真实图像请求；异步 drain/streaming 后置 | Kotlin consumer 实际生成、callback/取消/drain/close/重入/lease、质量资源报告；证明前维持 UNPROVEN/unavailable，supportsVideo=false |
 | F08 / Multimodal Apple | [图像](apple-mlxvlm-backend.md)、[短视频](apple-mlxvlm-short-video.md)、[Demo](multimodal-video-demo.md)：固定公开自然视频 native 生成/取消/同PID重入、8帧 rational times 和7项生命周期 gate 已通过；共享 Demo 的 VIDEO 路由、取消/离开/重入/AX 输出终态、真实 Files provider 选择及 Home 往返取消/1秒不自动重启/前台重入也通过。tagged trace 已证明 request/backend 来源和 drain/lease release，并把取消定位到 `willResignActive` 后、`didEnterBackground` 前；固定单素材/单 prompt 的五次真机 rubric 中 subject/action/scene 均为 5/5。同源三段 motion/frozen-control task-set 已执行 9/9，但 semantic 仅 1/3、temporal exact-label pair 0/3，结论为 `observed-failure`。物理 iPhone 的生产 Snapshot 与 prepared pixel tensor 边界均已证明固定 motion/frozen 输入各自保留 8/1 个唯一帧；六行文本 token 身份一致。首 token logits 的同输入重复 hash 一致、三组 motion/frozen hash 不同；新增派生的 `ĠMO`/`ĠST` 前缀 margin 中三个 motion margin 均高于 frozen，但 frozen 仍偏向 `ĠMO`，因此模型正确判别静止仍未知。跨场景 temporal quality、物理触控、GPU/能耗、持续资源及更广任务集质量仍缺 | 后续若继续根因定位，测试静止帧语义或观察完整标签概率/视觉特征；再扩展不同来源/场景与可比较的资源测量方法，不重复 Snapshot、adapter 或同一生成任务 | 保留真实 KMP/SDK 输出、时间/帧语义、自然质量及完整交互报告；synthetic 30/30、单一自然视频输出或本轮失败 task-set 都不替代完整自然质量 |
 | F09 / Apple MLX 分发 | [分发](apple-mlxvlm-distribution.md)：当前图像/视频源码的 unsigned Release library-evolution App archive 已通过，使用 ignored OrderedCollections target-scoped flag 与五处 MLXLM unknown-case 诊断改动；示例公共事件 switch 已补未知 case。实际接口图涉及 20 个本地 Swift 模块；尚无增强 XCFramework、两平台 slices 或 binary consumer | 保持生产 lock 与依赖源码不变；另包确定二进制 artifact/传递模块/C/Metal 资源边界，并用当前源码验证 device+simulator 与独立搬移 binary consumer；诊断补丁还需生产依赖兼容方案 | 增强 release archive、swiftinterface 与搬移 binary consumer 实际构建通过 |
 | F10 / Identity/PAD | [身份/活体](p10-face-identity.md)：生产模型、PAD、授权数据、阈值/准确率校准未交付 | 授权模型/数据/使用范围、独立训练/评测集及校准要求 | 1:1、1:N、PAD 指标与阈值、授权撤销/删除和真实设备流程验收；fixture 引擎不提升为生产能力 |
