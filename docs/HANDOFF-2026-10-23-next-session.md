@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 iOS-only 发布配置隔离对照
+
+- 固定 Skiko commit 新建 ignored `artifacts/verification/f02-ios-only-publication-20261103/skiko-spike/` 本地 clone，原 KGP 2.2.20、关闭 AWT/只开双 iOS arm64 的 metadata 强制编译复现 `@OptionalExpectation` 失败，log SHA-256=`7c42b831048bd9da405875d69c61e50bf244ef21c6adf48c0c70823a882d5426`。隔离改 KGP 2.4.0 同错误（SHA-256=`7ed47d189d6f405386362167397e21324af54ed396b4234684baea836233f370`）；恢复 2.2.20、停用自定义 source hierarchy 同错误（SHA-256=`d8d910c3ed42f0ddfa05b8024d4ccb59be98f225b93253e196ec1ce2dbcb29fb`）。KGP 2.4.21 离线缺 `kotlin-stdlib-common`，未进入目标编译，不能下结论且未下载依赖。
+- AWT 开启时此 macOS 主机的正常 BuildRepo 任务仅含通用 runtime 和两个 macOS runtime，没有 Linux/Windows 同类任务，故不能在当前主机直接补齐 AWT POM 的七个同版本 runtime。已有 KMP root `.module` 与项目结构 metadata 均声明 AWT，事后删条目不算正常发布。隔离 clone 的跟踪文件已恢复，实验日志保留；根工作树九项受保护未提交文件未改。详见[分发审查](validation/f02-distribution-review.md)。F02/P4/P11 与发布仍 `open/not-ready`。
+
 ## 最新续接 — 2026-11-03 F02 AWT Maven 分发闭包缺口
 
 - 固定 Maven 归档四个模块的 POM 与 Gradle `.module` 复核：根 metadata 仍列 AWT 变体；`skiko-awt` 的二进制 JAR 有 702 个非目录条目，仅含两个 JetBrains 包的类及两个 META-INF 文件，无 `.so/.dylib/.dll/.a` 条目。其 POM 引用同版本通用 runtime 加 macOS/Linux/Windows 各 x64/arm64 runtime，共 **7 个模块**，归档均未提供。AWT Gradle runtime variant 依赖表不同，不能将 iOS 已验证消费结果提升为桌面 Maven 闭包。

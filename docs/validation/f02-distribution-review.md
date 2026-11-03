@@ -23,6 +23,14 @@
 
 `skiko-awt` POM 还引用同版本的 `skiko-awt-runtime` 和 macOS/Linux/Windows 各 x64/arm64 runtime，共 **7 个模块**，当前归档均无对应 POM 或二进制。AWT Gradle runtime variant 列出的依赖与该 POM 不同，没有列出这七项；因此应分别验证 Maven POM 消费和 Gradle metadata 消费，不能以 iOS variant 已链接推断桌面分发闭包。机器可读清单在 ignored `artifacts/verification/f02-versioned-consumer-20261103/maven-scope-summary.json`，SHA-256 `83a616b762f694d3fc5e88a2a597b9a7eadf44e3d6892ee48b4e96089177c259`；同目录 `audit_maven_scope.py` 可重算。
 
+### iOS-only 正常发布的隔离构建对照
+
+从固定 Skiko `9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0` 本地克隆出新的 ignored `artifacts/verification/f02-ios-only-publication-20261103/skiko-spike/`，仅在该副本测试 `skiko.awt.enabled=false`、两个 iOS arm64 target、其他 native 总开关关闭。原 KGP 2.2.20 的 `compileCommonMainKotlinMetadata --offline --rerun-tasks` 在 `@OptionalExpectation` 报错，log SHA-256 `7c42b831048bd9da405875d69c61e50bf244ef21c6adf48c0c70823a882d5426`。只把隔离副本 KGP 改为 2.4.0 后，同一任务仍在该错误失败（SHA-256 `7ed47d189d6f405386362167397e21324af54ed396b4234684baea836233f370`）；恢复 2.2.20 并暂时停用 Skiko 自定义 source hierarchy 后也仍失败（SHA-256 `d8d910c3ed42f0ddfa05b8024d4ccb59be98f225b93253e196ec1ce2dbcb29fb`）。这两个单因素对照均未找到受支持的 iOS-only 正常发布配置。
+
+KGP 2.4.21 的离线试验在 `kotlin-stdlib-common:2.4.21` 未缓存时、进入目标编译前停止（log SHA-256 `495327cbac7b55767355b4dad41b25ca12c8325496cdd9532620ad990d163886`），**没有该版本通过或失败的编译结论**；未下载依赖。恢复隔离副本的跟踪文件后，只有本轮日志保留为 untracked。
+
+AWT 开启时的正常任务列表只含 `publishAwtRuntimeElementsPublicationToBuildRepoRepository`、`publishSkikoJvmRuntimeMacosArm64PublicationToBuildRepoRepository` 和 `...MacosX64...`，没有 Linux/Windows 的同类发布任务（ignored `awt-tasks.log` SHA-256 `ba41bace0dfc43fa748461b31a293b16ea44537f35abb159387d3f29a3aa5925`）。该主机任务配置不足以补齐 AWT POM 所列全部七个 runtime。保留 AWT 目标仅作为编译锚点会让根 `.module` 和项目结构 metadata 继续声明 AWT；直接删改生成元数据不是正常 Gradle publication。后续应调查 KGP/Skiko 的 source-level 元数据配置，或明确跨主机完整 AWT 发布方案，再重新审查。
+
 ## 分发前的未关闭事项
 
 1. 对上述九个实际编译的第三方组件、Skia/Skiko 及 AWT 包逐项审查头文件、文件级例外和所需 NOTICE，定稿与制品同版本、同哈希索引的分发附件。当前对象清单与 20 份候选材料不能单凭路径映射或四份 POM 元数据视为许可材料齐全。
