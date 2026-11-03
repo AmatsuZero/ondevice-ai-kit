@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F04 显式 close/drain 的单次真机边界
+
+- 在上个 F04 检查点之后，只复制当前 `apple/` 到 ignored `artifacts/verification/f04-close-20261103/apple/` 并为两处 Apple Speech 源码加入状态日志；`diff -qr` 除这两处和未复制的构建缓存外无差异，diff 仅有日志语句。沿用已授权的隔离 `io.ondeviceai.probe.f04mic`，新增 `--f04-close-probe` 自动路径，不改生产 SDK、普通 Demo 或九项受保护 dirty/untracked 文件。签名真机 build 与 `codesign --verify --deep --strict` 通过；App debug dylib SHA-256=`a50783c3db47125b29e3b29fd968ba5deba24f8cfb66ef85dd8724b2e2adac73`。
+- iPhone17,2 / iOS 27.0.1、同 PID `37018`，公开 `SpeechRecognitionClient.startMicrophone(zh-CN)` 返回约 700 ms 后调用 `close()`。状态日志依序验证 engine stop、tap remove、buffer delivery drain/endAudio、原生任务 completed、观察者/handle release、audio session inactive、lease release、operation clear，之后才有 backend/client close return；等待结果为 `CancellationError`，`drain()` 返回，closed client 再 start 被 `.closed` 拒绝。`validate.py` 重算 21 个顺序检查，ignored `summary.json` SHA-256=`88c12afa5c898701d751b0f3d25def820d25f653b90151975d6fc2c7dcfe64e4`，筛选状态日志 SHA-256=`a9258b75492a459e2b9a5a54f34385bf341d9782fb1eaff7eff571120eed9a84`；无音频/转写。仅终止该 PID，普通 SpeechDemo PID `34863` 仍在。详见[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-显式-closedrain-真机探针)。这是单次插桩副本的 close 边界，不是长期泄漏、所有竞态、自然质量或离线验收；F04/P11 与发布仍 `open/not-ready`。
+
 ## 最新续接 — 2026-11-03 F04 真机麦克风结束、取消后重入与 locale 误输入诊断
 
 - iPhone17,2 / iOS 27.0.1 上，隔离 `F04MicProbe` 首轮同 PID `36951` 经当前 SDK/Demo Host 实际完成三次 `start → finishInput → success`，每次 audio session 先 active 后 inactive；用户看到橙点与“ASR 完成”。ignored `artifacts/verification/f04-mic-live-20261103/status-summary.json` 由 `validate_status.py` 复算 **3/3 success**，原始状态日志 SHA-256=`57f8e8a3df30b66af6b7b359698912dbfa3310cbedc2e0487a672dde153da789`。此前 XCTest 在进入测试方法前 UI automation mode 超时，不计麦克风结果。首轮研究 PID 已精确终止。

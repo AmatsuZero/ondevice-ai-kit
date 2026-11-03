@@ -4,7 +4,9 @@
 
 2026-10-31 F08 已新增第二来源/场景的 Kawaida 瀑布公开素材及真机 9/9 请求；三个自由描述含瀑布/水，但运动与冻结对照严格标签 pair 0/3，诊断性去句号仍 0/3。见[跨场景原始证据](multimodal-video-demo.md#2026-10-31-f08-第二自然场景kawaida-瀑布)。这缩小了“没有第二场景输入”的缺口，F08 自然质量与 P11 发布门禁仍开放。
 
-2026-11-03 F04 的 iPhone 真机麦克风完成三轮 `finishInput → success`，另在隔离诊断 App 验到显式取消、取消后重入、Home 后取消及回前台重入成功；`unsupportedDevice` 复现对应请求 locale `she-CN`，不是设备对 `zh-CN` 的能力结论。详见[麦克风验证](ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)。显式 close、完整资源 drain、自然质量和离线矩阵继续开放。
+2026-11-03 F04 的 iPhone 真机麦克风完成三轮 `finishInput → success`，另在隔离诊断 App 验到显式取消、取消后重入、Home 后取消及回前台重入成功；`unsupportedDevice` 复现对应请求 locale `she-CN`，不是设备对 `zh-CN` 的能力结论。详见[麦克风验证](ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)。自然质量和离线矩阵继续开放。
+
+同日追加的[close/drain 真机探针](ios-microphone-asr.md#2026-11-03-显式-closedrain-真机探针)已在单轮插桩副本中观察 engine/tap、buffer delivery、原生任务、观察者和 session lease 顺序释放，以及关闭后拒绝重入；长期泄漏预算、并发竞态和未插桩生产二进制仍未验。
 
 ## 当前可执行队列（2026-10-28）
 
@@ -14,7 +16,7 @@
 | --- | --- | --- |
 | 已完成子项 | **F01：iPhone 沙盒合成 EXIF2/6/7 →生产 DemoController→Vision** | 真机 3/3，结果与边界见 [P4](p4-camera-stability.md)；真实 PHPicker 仍开放。 |
 | 已完成子项 | **F06：Apple 非零导出进度取消与部分文件清理** | 真机 3/3 在 5.33%–7.47% 进度取消，取消时已有 943–1,347 字节部分文件，调用返回前均已删除；同进程 AAC 重入 3/3。见[导出取消](apple-video-audio.md)。 |
-| 1 | **F04 的 iOS 麦克风生命周期部分** | 真机已有 `finishInput → success`、显式取消/重入及 Home 后取消/回前台重入；下一步验证显式 close 与完整 engine/tap/lease drain。自然语音 CER/WER、TTS 主观质量和完整离线矩阵另需授权语料/参考文本，不能由合成 fixture 代替。 |
+| 1 | **F04 的 iOS 麦克风生命周期部分** | 真机已有 `finishInput → success`、显式取消/重入、Home 后取消/回前台重入及单轮插桩 close/drain；下一步验证长期资源预算与并发竞态。自然语音 CER/WER、TTS 主观质量和完整离线矩阵另需授权语料/参考文本，不能由合成 fixture 代替。 |
 | 已完成子项 | **F08：真实 Files provider 选择** | 公开自然飞鸟短视频经系统 Files provider 进入共享页面并完成 native MLXVLM 输出，见[原始记录](multimodal-video-demo.md)。 |
 | 已完成子项 | **F08：Home 往返取消与前台重入** | 真机 XCTest 1/1；真实进入后台，回前台观察到取消，1秒内不自动重启，同一输入再次生成成功；首 token 前 Home 诊断已观察到进入 background 后 106.301 ms drain、107.359 ms terminal；跨素材仍未覆盖。见[原始记录](multimodal-video-demo.md)。 |
 | 已完成子项 | **F08：固定自然视频五次语义 rubric** | iPhone 同一进程 5 个 distinct run 的 subject/action/scene 与 semantic pass 均为 5/5，固定素材/模型/运行时/原始报告均有哈希绑定；这只关闭“更多 distinct runs”的执行子项，不是完整自然质量。见[原始记录](multimodal-video-demo.md)。 |
@@ -30,7 +32,7 @@
 | F01 / iOS Demo | [P4](p4-camera-stability.md)：真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 已完成；真实 PHPicker→controller 仍未验 | sandbox 子项已完成，证据见 `artifacts/verification/p4-picker-sandbox-device/summary.json`；后续若恢复 PHPicker 专项，才考虑合成资产的 Photos provider 路径；当前不写入 Photos | 三例实际选择同一指定合成资产，尺寸/镜像像素及 `apple.vision.face` 成功结果均可复核；sandbox 结果不替代 PHPicker，且不读取私人照片 |
 | F02 / Compose/Skia 资源 | [AtlasTextOp](p4-atlas-text-cache.md)：原始 TLS 指针真实对象回归 RED、`CacheOwner` 候选 GREEN，独立补丁复审 APPROVE；固定版本 `0.144.6-ondevice-f02.1` 本地 BuildRepo 发布 64/64、独立消费者双 iOS framework 重链 14/14、无 recorder 真机十轮 86 样本及同 PID 870.75 秒 Leaks trace 均完成。最终 live 128 B AtlasTextOp 栈 2 行，其中 1 行为 TLS 析构注册；缺少无 recorder 同 generation 线程退出配对，不能判零泄漏。当前 Android Demo 类路径不含 Skiko，隔离替换下 Android 构建 303/303；官方 Skia 固定分支仍是原始 TLS 指针。生产依赖未改 | 裁定可维护、CI/消费者可取得的生产 Skiko iOS 分发与上游归属；其他目标 variant 按实际消费图证明；建立长期资源预算及可比较的线程生命周期证据，再完成原 P4/P11 验收 | 固定生产 runtime UUID、对象地址、分配/析构/free/TLS 与线程生命周期；修复或有证据的边界裁定，并证明持续重入与资源预算 |
 | F03 / 最低系统 | [设备矩阵](device-matrix.md)：iOS15/API26 缺设备 | 取得相应真机后恢复启动、availability、权限、选图/相机、取消、前后台、离线门禁 | 两平台最低系统实际运行报告；编译下限不替代运行验收 |
-| F04 / Speech iOS/TTS | [麦克风验证](ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)：中文真机结束、显式取消/重入、Home 后取消/回前台重入有界通过；显式 close、完整 drain、CER/WER、自然 TTS 与离线矩阵仍缺 | close 生命周期探针及资源状态证据；另备授权语料、参考文本和网络观测方法 | 麦克风终态、资源 drain、取消重入/后台、CER/WER、自然 TTS 与离线矩阵逐项报告 |
+| F04 / Speech iOS/TTS | [麦克风验证](ios-microphone-asr.md#2026-11-03-显式-closedrain-真机探针)：中文真机结束、显式取消/重入、Home 后取消/回前台重入及单轮插桩 close/drain 有界通过；长期资源/并发竞态、CER/WER、自然 TTS 与离线矩阵仍缺 | 可比较的持续运行与资源预算；另备授权语料、参考文本和网络观测方法 | 麦克风终态、资源 drain、取消重入/后台、CER/WER、自然 TTS 与离线矩阵逐项报告 |
 | F05 / Speech Android | [语音](speech-backends.md)：on-device ASR 返回 MISSING_ASSETS | 提供设备支持且授权的系统离线语音资源 | 真实转写、取消/close/重入、离线与自然质量验收；仍缺资产时明确 unavailable |
 | F06 / Video | [超分](video-sr-backends.md)、[导出取消](apple-video-audio.md)：Apple 非零导出进度取消和部分文件清理已完成真机 3/3；Android 生产后端、自然主观质量/传递函数、峰值资源仍缺证据 | Android 后端独立选择/实现；固定自然视频与质量裁定；Apple 取消专项无新输入时不重复 | 两端各自支持 profile 的真实输出/质量、取消与完整文件清理、持续运行报告，不把插值基线当算法效果 |
 | F07 / Multimodal Android | [drain 合同](android-litertlm-drain-contract.md)、[VLM](mobile-vlm.md)：LiteRT-LM 0.18.1 缺授权权重、production factory 和 native drain barrier | 固定可授权模型 manifest/hash/revision；取得受支持的 native drain 证明方案 | Kotlin consumer 实际生成、callback/取消/drain/close/重入/lease、质量资源报告；证明前维持 UNPROVEN/unavailable，supportsVideo=false |
