@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F11 本地证据包干净快照复现
+
+- 从当前 F11 readiness 的 105 个来源哈希、分组清单及其嵌套来源清单取并集，找到 128 个必需文件，其中 104 个是 ignored 本地文件、原始字节合计 23,425,121 B。固定这 104 个常规文件与索引，生成 ignored `artifacts/verification/p11-portable-evidence-20261103-v1/p11-evidence.tar.gz`：105 个归档成员、21,830,385 B，SHA-256=`29f1ff5058eaf697fcb2e3fef31b152efebd63baf15e17d4972f2383d86acdfc`；索引 SHA-256=`88c7ea7c7de16fffda537ce1fbfc89a360bbe99e4c72a3824bbced67aa159864`。包只包含未跟踪证据和自身索引，不覆盖跟踪路径。
+- 从提交 `c15980823af555cf3d43f8d37dea6b1fb9755ff8` 的 `git archive` 解出干净树，再解包并逐文件核验，readiness 校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**，分组报告重算 SHA-256=`7c8fdd7c33b21376b9f6d24f456886c0b370f215379fc3ad3abbddcfd08128fa`，与原输出逐字节相同。ignored `clean-replay.json` SHA-256=`9a3a6c597fe54044745de8e5d86b5d03e398120b5cecb0e0f6c10ae1844cce9f`。这是本地可搬移复现包，未上传；对外分发前仍需检查内容/许可。F11/P11 的 9 行 gap 和发布 `open/not-ready` 不变。
+
 ## 最新续接 — 2026-11-03 F04 真机麦克风预检待受控朗读
 
 - 授权环境 `devicectl list devices` 回读 iPhone 16 Pro Max / UDID `00008140-0008703436D3001C` 为 `connected`；先前受限环境的 CoreDeviceService 超时不是设备离线结论。F04 真实 `zh-CN` 朗读、结束输入、取消/重入、后台与 lease drain 仍缺；已异步询问用户能否在设备旁朗读固定句“今天我们测试手机上的语音识别功能”并处理授权。尚无答复，不将等待视为录音授权，也未安装、启动或录音。
