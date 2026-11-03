@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 iOS-only metadata 配置校正与 AWT 对照
+
+- 复查发现前一检查点的 KGP 2.4.21 首次联网命令误将两个 Native 总开关设为 `true`，实际激活更多 target；该日志不能称为“双 iOS arm64”严格对照。以两个总开关 `false`、仅 device/simulator arm64 子开关 `true` 重跑，`--info` 确认只 commonize `(ios_arm64, ios_simulator_arm64)`；KGP 2.4.21 仍在 metadata 编译因 `@OptionalExpectation` 失败，14 个执行任务，log SHA-256=`ac17af5b366628b59bbc3d895b1f108b96f79770bd7353007a445fe93ff2e25c`。
+- 固定 KGP 2.2.20 与两个 iOS target，只打开 AWT 后 `compileCommonMainKotlinMetadata` **BUILD SUCCESSFUL**，log SHA-256=`39923208477ac222ec062899fbaaf850cf75ff2a80aa5f79a2d0ac31f70a5fbc`。隔离移除 Skiko 自定义 `ExternalSymbolName` 的 `@OptionalExpectation` 后，AWT 关闭时仍有 `commonMain` 的 15 处 `@JvmInline` / `@JvmStatic` 报同类错误，log SHA-256=`1e8a5a51a80a4ca04fdad7a19d0c0249ab307f7cb9d742125f984188d1f63896`。因此不是单一自定义注解或缺少 2.4.21 依赖；仍需受支持的源集/发布结构或完整桌面分发。KGP 2.4.21 打开 AWT 在配置期另因 `awtApiElements` constraints 停止，未得到 metadata 对照。所有 clone 跟踪文件已恢复；详见[分发审查](validation/f02-distribution-review.md)。F02/P4/P11 与发布仍 `open/not-ready`，根工作树原有九项未提交文件未改。
+
 ## 最新续接 — 2026-11-03 F02 KGP 2.4.21 在线依赖对照
 
 - 用户回复现在可处理 F02 相机弹窗；已有 `authorized` 回执和同 PID 十轮无 recorder 真机 trace，因此没有重复申请权限。设备 `00008140-0008703436D3001C` 当前回读 `connected`。F04 的真实麦克风/朗读尚未获得单独答复；预检 App 与普通 Demo 共用 bundle ID，未提前覆盖安装。
