@@ -1,5 +1,11 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-03 F02 上游源码与 Android 消费闭包
+
+只读固定 [JetBrains/skia 的 `skiko` 分支](https://github.com/JetBrains/skia/tree/5e54fca0283d12e0ad303d32aa87c7d13f25eef6) 提交 `5e54fca0283d12e0ad303d32aa87c7d13f25eef6`：其 `src/gpu/ganesh/ops/AtlasTextOp.cpp` 仍声明 `static thread_local void* gCache = nullptr;`，没有 `CacheOwner`，所以该分支提交未包含本轮修复。此前官方 PR 搜索未返回匹配项，但搜索词与权限不能证明其他 PR 不存在；也未据此断言未来 release 状态。
+
+当前 `0.144.6-ondevice-f02.1` 本地 BuildRepo 的 root 元数据只引用 AWT 与双 iOS 模块，没有 Android 变体。独立已提交源码消费者在相同全局版本替换规则下，`:demo:shared:androidCompileClasspath` 与 `:demo:androidApp:debugRuntimeClasspath` 的 `dependencyInsight` 均无 `org.jetbrains.skiko`；`:demo:androidApp:assembleDebug --offline --rerun-tasks` **303/303 executed、BUILD SUCCESSFUL**，APK SHA-256=`f192644381d091434e2596df97fe05954e621310a7d0b7598542307fa0f1ee3a`。因此当前 Demo 的 Android Debug 图不需要 patched Skiko Android 变体；这不扩展为通用 Skiko Android 分发保证，也不代表 Android 真机运行通过。分支元数据、固定源码、Gradle 日志与可重算脚本在 ignored `artifacts/verification/f02-versioned-consumer-20261103/` 及相邻 `f02-remediation-20261101/`，`android-and-upstream-summary.json` SHA-256=`1c4a5916cb146ac30a38a89d3a3e4cf57cbe9415263f166c5da05e8959564599`。生产依赖仍未切换，下一步是确定可维护且可供 CI/消费者取得的 iOS 分发地址及所有权。
+
 ## 2026-11-03 F02 固定版本本地分发与无 recorder 真机十轮
 
 固定 Skia `22f58c9...` 与 Skiko `9a5b398...` 的隔离构建，以新版本 `0.144.6-ondevice-f02.1` 正常发布到本地 BuildRepo；root、AWT 和两个 iOS 模块的 POM/Gradle metadata、SHA-256、root 引用闭包及 Klib 内嵌 `libskia.a` 已由 ignored `artifacts/verification/f02-remediation-20261101/verify_versioned_publication.py` 校验，发布构建 **64/64 executed、BUILD SUCCESSFUL**。摘要 `versioned-publication-summary.json` SHA-256=`ac5df76553e9455b4ef27dee926e4d0d32c7b0c400b43b369c4155c558c0b1a4`。从当前已提交源码导出的独立消费者只在隔离 `settings.gradle.kts` 增加本地仓库与版本替换；Compose 请求解析到 `skiko-iosarm64:0.144.6-ondevice-f02.1`，双 iOS framework 强制重链 **14/14 executed、BUILD SUCCESSFUL**。签名研究 App 的 debug dylib UUID=`6D590307-4220-3180-B4B4-1E04791696CD`、SHA-256=`70755b9c6c1675216cc3f4800083c50f8d08178a19de084f7a229618e3e4586c`，含 `CacheOwner`/TLS 且无研究 recorder ABI；生产依赖未改。
@@ -22,7 +28,7 @@
 
 **进入生产的门槛**：先取得经源码复审的 Skia 修复及可固定版本的 Skiko 分发路径（上游发布，或经独立审查、可复现且可维护的项目专用发布物）；再用当前 Compose/Kotlin 图验证 iOS 双 slice Klib、root/所需 variant、ABI、最终 App 链接及实际 Compose/Metal 渲染路径。正式无 recorder 候选需以独立固定源码 consumer 重建，匹配最终二进制身份，在真机做原 P4 页面协议和持续重入资源观察；instrumented 逐地址事件与正式候选结果分别报告，不把研究记录器本身带入生产。通过这些门槛前，生产依赖、锁定版本和 Demo 均不改，F02/P4/P11 保持 `open/not-ready`。
 
-**尚未证明**：本轮只读上游 issue 搜索未返回匹配项；进一步 PR/fork 查询被自动审批服务 HTTP 429 拒绝且未执行，不能据此断言上游没有修复或正式发布。固定版本只在本地 BuildRepo 发布，生产分发选择、跨平台 variant 完整性及长期资源预算仍待专项裁定；独立代码复审的通过范围见上节。
+**尚未证明**：早期 PR/fork 查询曾被自动审批服务 HTTP 429 拒绝且未执行；本轮对固定官方分支文件的检查及有限关键词 PR 搜索见上节，不能据此断言所有上游分支均无修复。固定版本只在本地 BuildRepo 发布，生产分发选择、跨平台 variant 完整性及长期资源预算仍待专项裁定；独立代码复审的通过范围见上节。
 
 ## 2026-11-02 F02 tokenized recorder 同 PID 真机 trace 结论
 

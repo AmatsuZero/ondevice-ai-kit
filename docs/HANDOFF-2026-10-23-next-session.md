@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 上游固定源码与 Android 消费闭包
+
+- 官方 JetBrains/skia `skiko` 分支固定提交 `5e54fca0283d12e0ad303d32aa87c7d13f25eef6` 的 `AtlasTextOp.cpp` 仍是 `thread_local void* gCache`，不含 `CacheOwner`；有限关键词的官方 PR 搜索没有匹配，不证明其他 PR 或未来版本不存在。最新 Skiko release 的首次只读查询返回 `v0.156.1`，但保存元数据的追加调用被自动审批 HTTP 429 拒绝、未执行；不将 release 查询当作固定候选证据。
+- 本地 `0.144.6-ondevice-f02.1` root 元数据只有 AWT/双 iOS 可用模块，缺 Android 变体。已提交源码独立消费者在同一全局替换规则下，Android shared 编译与 App debug 运行类路径均无 Skiko；离线强制重建 `:demo:androidApp:assembleDebug` **303/303 executed、BUILD SUCCESSFUL**，APK SHA-256=`f192644381d091434e2596df97fe05954e621310a7d0b7598542307fa0f1ee3a`。这只关闭当前 Android Debug 图的版本替换兼容检查，不代表通用 Skiko Android 分发或真机运行。
+- ignored `artifacts/verification/f02-versioned-consumer-20261103/verify_android_and_upstream.py` 重算上游固定文件、root 变体、Android Gradle 日志与 APK，通过后摘要 `android-and-upstream-summary.json` SHA-256=`1c4a5916cb146ac30a38a89d3a3e4cf57cbe9415263f166c5da05e8959564599`。生产依赖和 foundation 九项既有 dirty/untracked 路径未改。下一步确定可维护、CI/消费者可取得的 iOS 分发地址与所有权，再做生产依赖切换和原 P4/P11 验收；**F02/P4/P11、发布仍 open/not-ready**。
+
 ## 最新续接 — 2026-11-03 F02 固定版本分发与无 recorder 真机十轮
 
 - 用户确认可处理新 bundle 的相机授权。独立 `io.ondeviceai.f02versioned10` 权限 helper 在 iPhone 16 Pro Max / iOS 27.0.1 首次请求，App Documents 回读 `authorized`；随后用同 bundle ID 安装正式十轮 App。生产 Demo/Compose/Skiko 依赖未修改，foundation 原有九项 dirty/untracked 文件保留。
