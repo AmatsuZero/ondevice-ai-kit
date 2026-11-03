@@ -17,10 +17,17 @@
 
 对象→编译源文件映射不能判定头文件、单个源码文件的额外许可、生成代码或 AWT 模块的全部义务；这 20 份材料只是供逐项审查的候选集合，尚非分发附件定稿或许可批准。
 
+## AWT 与 Maven 依赖范围
+
+归档的四个模块为 `skiko`、`skiko-awt` 和双 iOS slice。根 `.module` 的三个 AWT 变体仍指向 `skiko-awt`。后者的二进制 JAR 有 702 个非目录条目，类仅在 `org/jetbrains/skia` 与 `org/jetbrains/skiko` 包，另有两个 `META-INF` 文件；没有 `.so`、`.dylib`、`.dll` 或 `.a` 条目。这是 JAR 内容检查，不是桌面运行验收。
+
+`skiko-awt` POM 还引用同版本的 `skiko-awt-runtime` 和 macOS/Linux/Windows 各 x64/arm64 runtime，共 **7 个模块**，当前归档均无对应 POM 或二进制。AWT Gradle runtime variant 列出的依赖与该 POM 不同，没有列出这七项；因此应分别验证 Maven POM 消费和 Gradle metadata 消费，不能以 iOS variant 已链接推断桌面分发闭包。机器可读清单在 ignored `artifacts/verification/f02-versioned-consumer-20261103/maven-scope-summary.json`，SHA-256 `83a616b762f694d3fc5e88a2a597b9a7eadf44e3d6892ee48b4e96089177c259`；同目录 `audit_maven_scope.py` 可重算。
+
 ## 分发前的未关闭事项
 
 1. 对上述九个实际编译的第三方组件、Skia/Skiko 及 AWT 包逐项审查头文件、文件级例外和所需 NOTICE，定稿与制品同版本、同哈希索引的分发附件。当前对象清单与 20 份候选材料不能单凭路径映射或四份 POM 元数据视为许可材料齐全。
-2. 明确项目专用版本的维护者、托管地址、CI/消费者读取方式、不可变版本规则与撤销流程。当前 109 MB 归档只在本机，未上传 GitHub/GitLab，也没有远程消费者验证。
-3. 选定分发方案后，从空缓存的独立消费者按归档哈希取件，重验两份 iOS Klib、Gradle variant、最终 App 身份和真机资源预算。现有本地构建与十轮 trace 不自动证明远程分发和生产验收。
+2. 明确发行范围：若只支持当前 iOS 消费图，需产生不宣称桌面可用的受支持 publication，并重验 metadata；若保留 AWT 变体，需正常发布、审查和消费上述七个 runtime 模块。当前归档的 AWT Maven POM 依赖不闭合。
+3. 明确项目专用版本的维护者、托管地址、CI/消费者读取方式、不可变版本规则与撤销流程。当前 109 MB 归档只在本机，未上传 GitHub/GitLab，也没有远程消费者验证。
+4. 选定分发方案后，从空缓存的独立消费者按归档哈希取件，重验两份 iOS Klib、Gradle variant、最终 App 身份和真机资源预算。现有本地构建与十轮 trace 不自动证明远程分发和生产验收。
 
 F02、原 P4/P11 及发布结论继续为 `open/not-ready`。相机权限和同 PID 十轮无 recorder trace 已完成，见 [AtlasTextOp 调查](p4-atlas-text-cache.md)；无需再次申请相机授权。

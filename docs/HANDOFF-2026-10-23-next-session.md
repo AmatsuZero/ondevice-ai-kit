@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 AWT Maven 分发闭包缺口
+
+- 固定 Maven 归档四个模块的 POM 与 Gradle `.module` 复核：根 metadata 仍列 AWT 变体；`skiko-awt` 的二进制 JAR 有 702 个非目录条目，仅含两个 JetBrains 包的类及两个 META-INF 文件，无 `.so/.dylib/.dll/.a` 条目。其 POM 引用同版本通用 runtime 加 macOS/Linux/Windows 各 x64/arm64 runtime，共 **7 个模块**，归档均未提供。AWT Gradle runtime variant 依赖表不同，不能将 iOS 已验证消费结果提升为桌面 Maven 闭包。
+- ignored `artifacts/verification/f02-versioned-consumer-20261103/maven-scope-summary.json` SHA-256=`83a616b762f694d3fc5e88a2a597b9a7eadf44e3d6892ee48b4e96089177c259`，同目录脚本可重算。详见[分发审查](validation/f02-distribution-review.md)。下一步选定 iOS 范围的受支持 publication 或补齐七个 runtime；另需许可例外、托管和长期资源门槛。归档未上传、生产依赖未改，F02/P4/P11 与发布保持 `open/not-ready`；原有九项受保护 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-03 F02 静态库来源与候选许可材料
 
 - 固定 Skia 两份 `libskia.a` 与版本化 Skiko Klib 内嵌库重新比对，device/simulator 字节各自相同；正常 publication 校验通过。按各自 Ninja 对象规则拆开 arm64/arm64e 四切片：每片 1,288 个对象、0 未映射或歧义，四份对象→源码映射一致，共 1,245 个不同源文件。九个实际编译的外部组件为 dng_sdk、expat、harfbuzz、libjpeg-turbo、libpng、libwebp、piex、wuffs、zlib。
