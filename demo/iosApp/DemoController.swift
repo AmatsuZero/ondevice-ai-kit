@@ -12,7 +12,10 @@ import ODAIKitFace
 final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, @MainActor IdentityDemoActions, PHPickerViewControllerDelegate {
     let bridge = IOSFaceBridge()
     lazy var model = FaceViewModel(bridge: bridge)
-    let identityModel: IdentityViewModel
+    @Published private(set) var identityModel: IdentityViewModel
+    #if ODAI_OPENCV_IDENTITY_DEMO
+    @Published private(set) var identityHost: IdentityOpenCvHost?
+    #endif
     #if ODAI_SPEECH_DEMO
     private(set) var speechHost: SpeechHost?
     #endif
@@ -27,7 +30,7 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
     @Published private(set) var multimodalPreparing = false
     private var multimodalPreparation: MultimodalHostPreparation?
     #endif
-    private let identityProbeFactory: ((CGImage) -> IdentityProbeReference)?
+    private var identityProbeFactory: ((CGImage) -> IdentityProbeReference)?
     private var latestIdentityCameraFrame: CameraFrame?
     private var livenessCapture: Task<Void, Never>?
     private let camera = CameraSource()
@@ -54,6 +57,12 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
         self.identityModel = IdentityViewModel(bridge: identityBridge)
         self.identityProbeFactory = identityProbeFactory
         super.init()
+        #if ODAI_OPENCV_IDENTITY_DEMO
+        MainActor.assumeIsolated {
+            do { identityHost = try IdentityOpenCvHost(controller: self) }
+            catch { message = "身份模型准备失败" }
+        }
+        #endif
         #if ODAI_VIDEO_DEMO
         MainActor.assumeIsolated {
             do { videoHost = try VideoHost.make() }
@@ -115,6 +124,9 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
         NotificationCenter.default.addObserver(self, selector: #selector(memoryWarning), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
     }
     @objc private func background() {
+        #if ODAI_OPENCV_IDENTITY_DEMO
+        identityHost?.stopOpening()
+        #endif
         #if ODAI_MULTIMODAL_DEMO
         Task { @MainActor [weak self] in
             self?.multimodalHost?.background(preservePicker: self?.multimodalPicker?.isPresenting == true)
@@ -181,6 +193,19 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
             self.bridge.inputs[id] = IOSFaceBridge.InputEntry(image: cg, finished: {}, fixture: smokeFixture ? "synthetic-white-64x64-upright-v1" : nil)
             self.model.detect(inputId: id, selection: BridgeBackendSelection(backendId: nil))
         }
+    }
+
+    /// A host replaces a closed session atomically from the UI's point of view.
+    func configureIdentity(bridge: IdentityBridge, configuration: IdentityDemoConfiguration?,
+                           probeFactory: ((CGImage) -> IdentityProbeReference)?) {
+        identityModel.close()
+        let replacement = IdentityViewModel(bridge: bridge)
+        replacement.configure(value: configuration)
+        identityProbeFactory = probeFactory
+        identityModel = replacement
+    }
+    func resetIdentity() {
+        configureIdentity(bridge: UnavailableIdentityBridge(reason: .unverified), configuration: nil, probeFactory: nil)
     }
 
     #if DEBUG
@@ -341,6 +366,9 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
         catch { message = String(describing: error) }
     }
     isolated deinit {
+        #if ODAI_OPENCV_IDENTITY_DEMO
+        identityHost?.close()
+        #endif
         NotificationCenter.default.removeObserver(self)
         cameraStart?.cancel()
         benchmark?.cancel()

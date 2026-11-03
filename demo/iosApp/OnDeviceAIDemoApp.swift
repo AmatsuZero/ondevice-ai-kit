@@ -47,14 +47,17 @@ struct SharedControls: UIViewControllerRepresentable {
                         } else { Text("选择图片或启动相机").foregroundColor(.white) }
                     }.clipped()
                 }
+                #if ODAI_OPENCV_IDENTITY_DEMO
+                if let host = controller.identityHost { IdentityOpenCvSetupView(host: host) }
+                #endif
                 #if ODAI_MULTIMODAL_MLX_DEMO
                 if controller.multimodalPreparing {
                     ProgressView("正在校验本地模型").frame(height: 380)
                 } else {
-                    SharedControls(controller: controller).frame(height: 380)
+                    SharedControls(controller: controller).id(ObjectIdentifier(controller.identityModel)).frame(height: 380)
                 }
                 #else
-                SharedControls(controller: controller).frame(height: 380)
+                SharedControls(controller: controller).id(ObjectIdentifier(controller.identityModel)).frame(height: 380)
                 #endif
                 if let message = controller.message { Text(message).font(.caption) }
                 if controller.cameraPermissionDenied {
@@ -75,6 +78,9 @@ struct SharedControls: UIViewControllerRepresentable {
                 #endif
             }.onDisappear { controller.stopCamera() }
             .onAppear {
+                #if ODAI_OPENCV_IDENTITY_VALIDATION
+                IdentityDemoChecks.start(controller: controller)
+                #endif
                 #if ODAI_MULTIMODAL_DEMO_VALIDATION
                 MultimodalDemoValidation.start(preparing: { [weak controller] in controller?.multimodalPreparing ?? true },
                     host: { [weak controller] in controller?.multimodalHost })

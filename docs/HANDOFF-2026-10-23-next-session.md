@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-04 Apple 真实 OpenCV Identity 与 Demo
+
+- 新增独立可选 `apple-opencv/`：已批准 OpenCV 4.12.0 + 固定 YuNet/SFace，真实 CPU 检测/对齐/128维 embedding，通过现有 LocalIdentityBackend 持有/释放模型租约。默认 Apple 包无 OpenCV。官方旧 framework 是静态 archive，已按原二进制转换成 static-library XCFramework；支持 arm64 真机/x86_64 模拟器，无 arm64 模拟器 slice。使用与固定哈希见[包说明](../apple-opencv/README.md)及[验证](validation/apple-opencv-identity.md)。
+- iPhone16 Pro Max 真实 native/session **21/21**，runId `7FF35B5B-D64B-4D95-88D2-D8FB879882AC`；实际 Demo host → IOSIdentityBridge → shared ViewModel **15/15**，runId `90CAC894-C3E4-4BE9-A163-EA041255590C`：模型导入、显式同意后会话、两候选录入、未校准验证/图库拒绝、整次 grant purge/reset 与未完成清理重开禁用。复用同一获批 NASA 图，不代表两个人或准确率；图片通过沙盒传入，未打包。无相机/麦克风、未解锁设备，触控/picker 未验。
+- 完整默认 Apple **481/481**、可选 host contracts **3/3**；可选 device/test 与 x86_64 simulator test build、KMP device framework、普通/验证/flag-disabled Demo build 通过。设备清理全 grant 并保留 durable marker 至成功；失败或中断后明确禁用，自动恢复按 corner case 约定后置。独立 reviewer 的两个具体意见已修，但服务随后 **429**，无最终独立 APPROVE。九项保护哈希不变；仅本地提交，无 push/merge/release。ignored 证据 `artifacts/verification/apple-opencv-identity-20261104/`。
+- **下一主要功能/输入**：独立 PAD、真实 1:1/1:N 的授权数据与校准策略，Android LM 授权权重及 ASR 离线资源；Apple 真实 embedding/注册与双端 exact index/query 已实现，不从头重做。阈值仍 UNVERIFIED，不伪造 match/识别结果；自然质量、minOS、触控/系统 picker、长期资源与发布仍各自开放。原 roadmap goal 保持 active。
+
 ## 最新续接 — 2026-11-04 Apple 精确 Identity index/query
 
 - Gallery Demo 已本地提交 `cadfea8`。继续补齐 Apple 公开 encoded-image probe 的精确 cosine 1:N index/query；公开 builder 接现有 IndexStore，完整 embedding space/count/dimension/有序 Float32 LE 与当前授权模板 lease 逐位绑定，保留 fixture provenance、subject-max/topK、quality/VERIFIED policy 和最终授权 gate。同步登记 Apple SDK 分发工程源文件。详见[验证](validation/apple-exact-identity-index.md)。
