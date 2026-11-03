@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Apple Identity 真机系统 Files/UI
+## 最新续接 — 2026-11-04 Android 隔离模拟器主流程 UI
+
+- 新建的 `ODAI_MainFlow_20261104` / API36 arm64 复用既有本机系统镜像和 immutable 三 opt-in APK；安装 SHA-256 `dd610a4cfb7ad40a53b8320cd174e2d54b3bc0048108217c1b18b1f127eb6e7f` 与历史快照相同，7份绑定源码匹配，Android/shared 源码自 `cadfea8` 无差异。无新增下载/生产修改；9项保护文件不变。
+- 普通 UI 系统 picker/既有模型导入与授权会话、获批 NASA 图片→真实 OpenCV 注册1模板、未校准验证/图库拒绝、候选物理删除至0模板、整次停用通过。视频系统模型/媒体 picker→实际 ESRGAN 4×（32×24→128×96、2帧/AAC）→播放 Activity→重入→分享 chooser 通过；未选择接收人/发送文件。两份导出独立 FFmpeg 完整解码，帧 PTS 与4个 AAC packet/hash/PTS 匹配。
+- ignored `artifacts/verification/android-mainflow-emulator-20261104/verify.py` fresh `status=passed`，含11份 UI 观察、Activity events、APK/源码/保护校验与两份输出。详见[验证边界](validation/android-mainflow-emulator.md)。Android 真机未解锁；短片播放器仅有启动/返回证据，持续视听、真机触控/任意provider、自然质量/校准/PAD仍缺；不提升 P4/P11/发布，也不重做已通过的后端。
+- 下一主要功能仍为独立 PAD、识别校准及 Android LM/ASR 资源；恢复这些分支时先核对已发出授权问题及用户答复。当前 roadmap goal 保持 active，本切片只补 UI 证据，不回到 corner/长期资源专项。模拟器与隔离 AVD 保留复现，不触碰其他设备/AVD。
+
+## 上一检查点 — 2026-11-04 Apple Identity 真机系统 Files/UI
 
 - 普通 `0e215bb` Demo、无 validation 参数，经真机 UI 自动化完成系统图片 picker 取消/重入、本地 Files 选择获批图片、共享输入 ready、点击注册得到 `ENROLLED · opencv.identity.apple` 与1模板、验证拒绝 `THRESHOLD_UNVERIFIED`、全 grant 删除停用，以及系统文件夹 picker 导入两份固定模型。重启普通 App 为 model-ready、无活动会话/输入；**9/9 观察检查**。见[完整边界](validation/apple-opencv-identity.md#2026-11-04-ordinary-demo-system-files-ui)及[复现](../probes/ios-opencv-identity/FILES-UI.md)。
 - 隔离来源 `io.ondeviceai.fixture.identityfiles` 仅把既有获批图片/models 放在本机 Documents，系统 Files 的 IdentityInput 可见；来源 App 保留作复现，真实 Demo 没有增加 file-sharing 标志。读取回传图哈希与已批准 NASA 图相同，无 Photos 写入、新样本/模型、相机/麦克风或解锁。普通 App binary 与上轮 inventory 相符；9项保护不变。ignored 证据 `artifacts/verification/identity-files-ui-20261104/`；未重试429复审。

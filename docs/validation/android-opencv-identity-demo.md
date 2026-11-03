@@ -1,5 +1,10 @@
 # Android OpenCV Identity prototype
 
+2026-11-04 update: isolated API36 emulator system-picker/consent/real enrollment,
+uncalibrated rejection, candidate deletion and whole-grant teardown are now
+observed through the ordinary UI. See [UI evidence and its hardware boundary](android-mainflow-emulator.md).
+The earlier real-device runs below remain headless evidence.
+
 2026-11-03 local functional slice. **Experimental; production recognition/PAD
 and roadmap release acceptance remain incomplete.** The user explicitly approved
 the optional OpenCV runtime/YuNet/SFace downloads, then separately approved the

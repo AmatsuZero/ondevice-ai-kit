@@ -1,5 +1,11 @@
 # Android learned video SR Demo — 2026-11-03
 
+2026-11-04 update: isolated API36 emulator system model/video pickers, real 4×
+processing, reentry, player Activity handoff and share chooser are now verified.
+Both exported copies passed independent packet/PTS/decode checks. See
+[UI evidence and remaining playback/hardware boundaries](android-mainflow-emulator.md).
+The earlier real-device runs below remain headless evidence.
+
 Implemented optional `android:backend-litert-sr` and Demo `-PenableLiteRtSr=true` main flow: system picker → bounded private input store → AndroidVideoBridge/VideoProcessingClient → real ESRGAN CPU tiles → H.264 MP4/AAC mux → owned output → private FileProvider playback/share copy. The default APK has neither SR nor LM vendor runtime; both opt-ins can be combined. No model is packaged or downloaded by Gradle.
 
 ## Model/runtime and scope

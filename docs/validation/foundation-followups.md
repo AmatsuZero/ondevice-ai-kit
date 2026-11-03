@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-04 F06/F10 Android UI 更新：隔离 API36 模拟器复用既有组合 APK 与已批准素材，系统选图→真实注册1模板→未校准验证/图库拒绝→候选物理删除/整次停用通过；系统模型/视频 picker→真实 ESRGAN 4×→重入→播放器 Activity/分享 chooser 也通过。两份导出经独立 FFmpeg/ffprobe 验证帧 PTS 与4个 AAC packet/hash/PTS；11份 UI 观察及九项保护文件校验通过。见[证据与边界](android-mainflow-emulator.md)。未解锁 Android 真机、未发送文件；这是模拟器 UI 子项，不替代真机触控、持续视听播放、自然质量/校准/PAD或发布。下方“实际 UI 未验”需按此平台边界阅读。
+
 2026-11-04 F10 真机 UI 更新：普通 Apple Demo 已通过系统 Files 图片选择取消/重入/真实注册/未校准验证拒绝/删除停用及模型文件夹导入，**9/9 观察检查**。使用隔离本机 IdentityInput 来源，仅含既有获批图片/固定模型，不写 Photos；普通 App 已无参数恢复。见[真实界面证据](apple-opencv-identity.md#2026-11-04-ordinary-demo-system-files-ui)。这关闭本地 Files provider/自动化点击子项；人工触摸、外部 provider 与校准/PAD 仍缺，下方“实际系统 provider/触控未验”为本检查点之前的历史状态。
 
 2026-11-04 F10 Files 输入更新：可选 Apple host 新增“从文件选择图片”，无需写入 Photos；同一生产读取 handler→opaque probe→真实注册的 iPhone 主流程 **18/18**，普通/flag-disabled Demo 构建通过，普通 App 已恢复。实际系统 provider/触控未验，独立复审 429 无结论。见[验证](apple-opencv-identity.md#2026-11-04-files-image-input)。独立 PAD [官方候选](pad-model-candidate.md)已形成具体本机试验方案，授权等待期间未下载新模型。
