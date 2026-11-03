@@ -21,12 +21,19 @@ fun MultimodalScreen(model: MultimodalViewModel, actions: MultimodalDemoActions?
     val explicit = state.selection as? MultimodalBridgeSelection.Explicit
     var backendId by remember(model, state.selection) { mutableStateOf(explicit?.backendId ?: "") }
     val focus = LocalFocusManager.current
+    val setup = (actions as? MultimodalModelSetupDemoActions)?.takeIf { it.supportsModelSetup }
+    val setupBusy = setup?.modelSetupBusy == true
     val keyboardActions = KeyboardActions(onDone = { focus.clearFocus() })
     LaunchedEffect(model) { model.refreshBackends() }
 
     Text(if (state.inputKind == MultimodalInputKind.VIDEO) "视频理解 · 实验性单视频" else "图像理解 · 单图",
         style = MaterialTheme.typography.titleMedium)
     if (state.inputKind == MultimodalInputKind.VIDEO) Text("视频支持取决于所选后端及输入规格；后端可用不代表视频可用。")
+    if (setup != null) {
+        TextButton(onClick = setup::selectModelBundle, enabled = state.controlsEnabled && !setupBusy,
+            modifier = Modifier.testTag("multimodal-import-model")) { Text("导入本地模型包（ZIP）") }
+        setup.modelSetupStatus?.let { Text(it, Modifier.testTag("multimodal-model-status")) }
+    }
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = { model.selectBackend(MultimodalBridgeSelection.Default) }, enabled = state.controlsEnabled,
             modifier = Modifier.testTag("multimodal-default")) { Text(if (explicit == null) "默认 ✓" else "使用默认后端") }
@@ -46,7 +53,7 @@ fun MultimodalScreen(model: MultimodalViewModel, actions: MultimodalDemoActions?
     Text(state.inputDisplayName ?: if (state.inputReference == null) "尚未选择输入" else "已选择输入",
         Modifier.testTag("multimodal-input"))
     if (actions != null) Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        TextButton(onClick = actions::selectImageFile, enabled = state.controlsEnabled,
+        TextButton(onClick = actions::selectImageFile, enabled = state.controlsEnabled && !setupBusy,
             modifier = Modifier.testTag("multimodal-select-input")) { Text("选择图片") }
         if (actions is MultimodalVideoDemoActions && actions.supportsVideoInput) TextButton(onClick = actions::selectVideoFile,
             enabled = state.controlsEnabled, modifier = Modifier.testTag("multimodal-select-video")) { Text("选择视频") }
@@ -60,7 +67,7 @@ fun MultimodalScreen(model: MultimodalViewModel, actions: MultimodalDemoActions?
         enabled = state.controlsEnabled, singleLine = true,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done), keyboardActions = keyboardActions,
         modifier = Modifier.fillMaxWidth().testTag("multimodal-budget"))
-    Button(onClick = { focus.clearFocus(); model.generate() }, enabled = state.canGenerate,
+    Button(onClick = { focus.clearFocus(); model.generate() }, enabled = state.canGenerate && !setupBusy,
         modifier = Modifier.testTag("multimodal-generate")) { Text("生成") }
     if (state.phase == MultimodalPhase.RUNNING || state.phase == MultimodalPhase.CANCELLING) {
         LinearProgressIndicator(Modifier.fillMaxWidth())

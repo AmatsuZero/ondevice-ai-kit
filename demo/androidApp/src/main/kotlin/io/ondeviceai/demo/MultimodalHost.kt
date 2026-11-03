@@ -14,8 +14,14 @@ class MultimodalHost(
     private val selectVideo: (((File?) -> Unit, () -> Unit) -> Unit)? = null,
     private val importScope: CoroutineScope? = null,
     private val importDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val modelSetup: MultimodalModelSetupDemoActions? = null,
     private val canSelectInput: () -> Boolean = { true },
-) : MultimodalVideoDemoActions {
+) : MultimodalVideoDemoActions, MultimodalModelSetupDemoActions {
+    override val supportsModelSetup get() = modelSetup != null
+    override val modelSetupBusy get() = modelSetup?.modelSetupBusy == true
+    override val modelSetupStatus get() = modelSetup?.modelSetupStatus
+    override fun selectModelBundle() { if (!closed && model.state.controlsEnabled) modelSetup?.selectModelBundle() }
+    override fun closeModelSetup() { modelSetup?.closeModelSetup() }
     override val supportsVideoInput: Boolean get() = videoStore != null && selectVideo != null
     val model = MultimodalViewModel(bridge)
     private var selected: String? = null
@@ -124,6 +130,7 @@ class MultimodalHost(
     fun close() {
         if (!closed) {
             closed = true
+            closeModelSetup()
             pickerGeneration++
             invalidateImport()
             pendingPicker = null

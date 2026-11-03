@@ -13,3 +13,12 @@ interface MultimodalVideoDemoActions : MultimodalDemoActions {
     val supportsVideoInput: Boolean
     fun selectVideoFile()
 }
+
+/** Optional local model setup; platforms without an importer need not implement it. */
+interface MultimodalModelSetupDemoActions {
+    val supportsModelSetup: Boolean
+    val modelSetupBusy: Boolean
+    val modelSetupStatus: String?
+    fun selectModelBundle()
+    fun closeModelSetup()
+}

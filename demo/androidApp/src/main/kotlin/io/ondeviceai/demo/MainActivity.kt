@@ -132,16 +132,21 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                     }
             }
             val multimodalInputs = MultimodalInputStore(File(cacheDir, "multimodal-input-${UUID.randomUUID()}"))
+            val multimodalRuntime = DemoMultimodalBackendFactory.create(this, multimodalInputs, lifecycleScope,
+                canImport = { multimodalHost?.model?.state?.controlsEnabled == true },
+                onImported = { multimodalHost?.model?.refreshBackends() })
             multimodalHost = MultimodalHost(
                 multimodalInputs,
-                bridge = DemoMultimodalBackendFactory.create(this, multimodalInputs, lifecycleScope),
+                bridge = multimodalRuntime.bridge,
                 selectFile = { reply, failure -> selectMultimodal("image/*", reply, failure) },
                 videoStore = if (DemoMultimodalBackendFactory.imageOnly) null else
                     MultimodalInputStore(File(cacheDir, "multimodal-video-${UUID.randomUUID()}")),
                 selectVideo = if (DemoMultimodalBackendFactory.imageOnly) null else
                     { reply, failure -> selectMultimodal("video/*", reply, failure) },
                 importScope = lifecycleScope,
-                canSelectInput = { multimodalPickerReply == null && multimodalImport?.isActive != true })
+                modelSetup = multimodalRuntime.modelSetup,
+                canSelectInput = { multimodalPickerReply == null && multimodalImport?.isActive != true &&
+                    multimodalRuntime.modelSetup?.modelSetupBusy != true })
         }
         speechHost = SpeechHost(lifecycleScope,
             createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },

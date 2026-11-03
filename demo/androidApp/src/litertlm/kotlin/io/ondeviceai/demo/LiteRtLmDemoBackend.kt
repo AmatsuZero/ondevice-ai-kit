@@ -10,6 +10,7 @@ import io.ondeviceai.modelstore.ModelManifest
 import io.ondeviceai.modelstore.ModelStore
 import io.ondeviceai.multimodal.*
 import java.io.File
+import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.withContext
@@ -38,18 +39,44 @@ internal class LiteRtLmDemoBackend(
             val manifestFile = File(imported, "manifest.json")
             val descriptorFile = File(imported, "demo-model.json")
             if (!manifestFile.isFile || !descriptorFile.isFile) return@withLock null
-            val manifest = ModelManifest.parse(manifestFile.readText())
-            val descriptor = JSONObject(descriptorFile.readText())
-            require(descriptor.getInt("schemaVersion") == 1)
-            val paths = descriptor.getJSONArray("metadataPaths")
-            val model = LiteRtLmModel(manifest.ref, descriptor.getString("modelPath"),
-                (0 until paths.length()).map { paths.getString(it) }.toSet())
-            // Validate paths before installing the bundle or constructing any native runtime.
-            require(model.modelPathRelative in manifest.files.map { it.path })
-            require(model.metadataPathsRelative.isNotEmpty() &&
-                manifest.files.map { it.path }.containsAll(model.metadataPathsRelative))
-            store.install(manifest, File(imported, "files"))
-            create(store, model, cacheRoot, environment).also { backend = it }
+            install(imported).also { backend = it }
+        }
+    }
+
+    private suspend fun install(source: File): MultimodalGenerationBackend {
+        val manifest = ModelManifest.parse(File(source, "manifest.json").readText())
+        val descriptor = JSONObject(File(source, "demo-model.json").readText())
+        require(descriptor.getInt("schemaVersion") == 1)
+        val paths = descriptor.getJSONArray("metadataPaths")
+        val model = LiteRtLmModel(manifest.ref, descriptor.getString("modelPath"),
+            (0 until paths.length()).map { paths.getString(it) }.toSet())
+        require(model.modelPathRelative in manifest.files.map { it.path })
+        require(model.metadataPathsRelative.isNotEmpty() && manifest.files.map { it.path }.containsAll(model.metadataPathsRelative))
+        store.install(manifest, File(source, "files"))
+        return create(store, model, cacheRoot, environment)
+    }
+
+    suspend fun replaceImportedBundle(incoming: File) = withContext(Dispatchers.IO) {
+        mutex.withLock {
+            if (closed) throw MultimodalClientError.Closed()
+            val replacement = install(incoming)
+            val backup = File(imported.parentFile, "previous-${UUID.randomUUID()}")
+            try {
+                require(replacement.availability().status == CapabilityStatus.AVAILABLE)
+                backend?.close()
+                backend = null
+                val hadPrevious = imported.exists()
+                if (hadPrevious) check(imported.renameTo(backup))
+                if (!incoming.renameTo(imported)) {
+                    if (hadPrevious) check(backup.renameTo(imported))
+                    error("model import move failed")
+                }
+                backend = replacement
+            } catch (failure: Throwable) {
+                withContext(NonCancellable) { replacement.close() }
+                throw failure
+            }
+            backup.deleteRecursively()
         }
     }
 

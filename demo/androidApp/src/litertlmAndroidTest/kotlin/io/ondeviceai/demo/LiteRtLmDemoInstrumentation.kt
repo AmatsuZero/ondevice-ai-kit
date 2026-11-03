@@ -38,6 +38,7 @@ class LiteRtLmDemoInstrumentation : Instrumentation() {
             node("multimodal-backends") { it.text?.contains("litertlm.android") == true &&
                 it.text?.contains("MISSING_ASSETS") == true }
             node("multimodal-select-input")
+            node("multimodal-import-model")
             check(find(uiAutomation.rootInActiveWindow, "multimodal-select-video") == null)
             check(!node("multimodal-generate").isEnabled)
             report.putString("status", "passed")

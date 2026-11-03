@@ -4,15 +4,14 @@
 
 ## 本地模型包
 
-模型由使用者提供并确认使用权限，App 不下载权重、不替使用者接受许可。把以下目录放入 debug App 的 `files/litertlm/import/`：
+模型由使用者提供并确认使用权限，App 不下载权重、不替使用者接受许可。准备以下内容：
 
 ```text
-import/
-  manifest.json
-  demo-model.json
-  files/
-    model.litertlm
-    model-card.txt
+manifest.json
+demo-model.json
+files/
+  model.litertlm
+  model-card.txt
 ```
 
 `manifest.json` 是 SDK 原生 `ModelManifest` JSON，必须包含实际文件字节数和 SHA-256、来源 revision、许可及归属；`files/` 只能包含该 manifest 列出的文件。要求 `backendId=litertlm.android`、`capability=multimodal.image`、`formatVersion=litertlm-model-v1`、`processing.inputSignature=image-file+text-prompt-v1`，backend version 范围覆盖 `0.18.1`，OS/架构匹配设备。参见 [ModelManifest](../../../../android/model-store/src/main/kotlin/io/ondeviceai/modelstore/ModelManifest.kt)。
@@ -29,6 +28,12 @@ import/
 
 以上文件名只是格式示例，没有附带可用权重。`.litertlm` 本身封装运行时需要的 tokenizer 等数据，`metadataPaths` 用于 manifest 中的模型卡/来源等附属材料，不要求捏造外置 tokenizer 文件。实际模型必须支持 vision、text、CPU 两种模态后端，且声明的最低 runtime 不高于固定的 `0.18.1`。真正生成时由 `ModelInfo` 和 runtime 再检查兼容性。
 
-首次刷新后端会校验并安装本地包到 App 的 `noBackupFilesDir/litertlm/store`，随后沿用 SDK ModelStore 的哈希与 lease 检查；已有相同 revision 不可被不同文件覆盖。缺文件显示 `MISSING_ASSETS`；安装后可选择图片、填写 prompt、点击“生成”，页面显示实际后端、模型 revision 和输出。
+从上述文件所在目录打包，确保 `manifest.json` 是 ZIP 中的第一个 entry，ZIP 不包含额外顶层目录：
 
-此入口用于原型的本地模型接入，目前没有模型目录选择 UI。没有真实模型时，编译和 host fake 测试只能证明接线，不能证明设备生成、速度或模型效果。
+```sh
+rtk proxy zip -r model-bundle.zip manifest.json demo-model.json files
+```
+
+在图像理解页点击“导入本地模型包（ZIP）”，通过系统选择器选取该 ZIP。App 校验文件集合、字节数和 SHA-256，再由 ModelStore 安装到 `noBackupFilesDir/litertlm/store`；已有相同 revision 不可被不同文件覆盖。导入失败保留原模型入口，安装成功后刷新后端。模型包也可按相同目录结构预置到 debug App 的 `files/litertlm/import/`。
+
+缺文件显示 `MISSING_ASSETS`；安装后可选择图片、填写 prompt、点击“生成”，页面显示实际后端、模型 revision 和输出。没有真实模型时，编译和 host fake 测试只能证明接线，不能证明设备生成、速度或模型效果。

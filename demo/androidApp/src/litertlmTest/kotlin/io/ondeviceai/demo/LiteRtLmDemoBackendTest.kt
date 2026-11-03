@@ -41,6 +41,8 @@ class LiteRtLmDemoBackendTest {
             File(imported, "manifest.json").writeText(manifest.toJson())
             File(imported, "demo-model.json").writeText(
                 """{"schemaVersion":1,"modelPath":"model.litertlm","metadataPaths":["model-card.txt"]}""")
+            val incoming = File(root, "selected-bundle")
+            check(imported.renameTo(incoming))
             val store = ModelStore(File(root, "store"), ModelCompatibility("litertlm.android", "0.18.1", "35", "arm64-v8a"))
             var constructions = 0
             var closed = false
@@ -61,6 +63,8 @@ class LiteRtLmDemoBackendTest {
                         override suspend fun close() { closed = true }
                     }
                 })
+            assertEquals(UnavailableReason.MISSING_ASSETS, backend.availability().reason)
+            backend.replaceImportedBundle(incoming)
             assertEquals(CapabilityStatus.AVAILABLE, backend.availability().status)
             assertEquals(ModelStatus.INSTALLED, store.status(manifest.ref))
             assertEquals("host fake output", backend.generate(MultimodalRequest(File(root, "image"), "describe", 37), null).text)

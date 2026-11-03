@@ -1,9 +1,8 @@
 package io.ondeviceai.demo
 
-import android.content.Context
 import android.os.Build
+import androidx.activity.ComponentActivity
 import io.ondeviceai.binding.AndroidMultimodalBridge
-import io.ondeviceai.binding.MultimodalBridge
 import io.ondeviceai.litertlm.LiteRtLmRuntimeEnvironment
 import io.ondeviceai.modelstore.ModelCompatibility
 import io.ondeviceai.modelstore.ModelStore
@@ -15,13 +14,16 @@ internal object DemoMultimodalBackendFactory {
     const val enabled = true
     const val imageOnly = true
 
-    fun create(context: Context, inputs: MultimodalInputStore, scope: CoroutineScope): MultimodalBridge {
+    fun create(context: ComponentActivity, inputs: MultimodalInputStore, scope: CoroutineScope,
+        canImport: () -> Boolean, onImported: () -> Unit): DemoMultimodalRuntime {
         val environment = LiteRtLmRuntimeEnvironment.current()
         val architecture = Build.SUPPORTED_ABIS.firstOrNull { it == "arm64-v8a" || it == "x86_64" } ?: "unsupported"
         val store = ModelStore(File(context.noBackupFilesDir, "litertlm/store"),
             ModelCompatibility("litertlm.android", "0.18.1", Build.VERSION.SDK_INT.toString(), architecture))
         val backend = LiteRtLmDemoBackend(File(context.filesDir, "litertlm/import"), store,
             context.cacheDir, environment)
-        return AndroidMultimodalBridge(MultimodalGenerationClient(backend.backendId, listOf(backend)), inputs, scope)
+        return DemoMultimodalRuntime(
+            AndroidMultimodalBridge(MultimodalGenerationClient(backend.backendId, listOf(backend)), inputs, scope),
+            LiteRtLmDemoModelImport(context, scope, backend, canImport, onImported))
     }
 }
