@@ -4,6 +4,10 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 文件级许可线索与本地 v2 审查包
+
+- 固定 Skia revision 与已验证对象映射下，ignored 文件头审计复核 1,245 个实际链接编译源文件：1,224 个有许可文字或引用线索、16 个有内联授权文字、5 个没有文件头线索；`summary.json` SHA-256=`64c1d6ac094c38cc283446003a6e7d90594ab83465e78ec48a4445c3d9ed400b`，重跑一致。HarfBuzz 的生成源码引用 `src/ms-use` 输入，原 20 份候选材料缺该子目录 `COPYING`；已加入仅供本地审查的 v2 材料包（21 份候选许可文件、27 个总文件、154,160 B、SHA-256=`39ce3868d66afb22529356189cc587a8074d1134d66186cbf3a67371ccb2cef6`），v1 与 Maven 归档均未覆盖或上传。DNG/HarfBuzz 无头文件、Unicode 生成输入、libjpeg-turbo 内联许可及头文件仍待逐项裁定；详见[分发审查](validation/f02-distribution-review.md#编译源文件的文件头线索复核)。此审计不构成许可批准；F02/P4/P11 和发布仍 `open/not-ready`。九项受保护未提交修改保留。
+
 ## 最新续接 — 2026-11-03 P11 F04 文档哈希修复与干净复现
 
 - F04 原 `unsupportedDevice` 的有日志复现已定位为请求输入 `she-CN`；`zh-CN` 真机可用且完成识别。本轮没有改错误枚举、Demo 或生产 SDK。发现上一轮追加[麦克风验证](validation/ios-microphone-asr.md)后，旧 readiness 对该文档的固定哈希失效，`validate_p11_readiness.py` 明确报 `source hash mismatch`。保留旧快照不覆盖；新 ignored `artifacts/verification/p11-readiness-20261103-f04-doc-refresh/summary.json` 仅刷新麦克风与[分组报告](validation/p11-grouped-benchmark.md)两份文档哈希，SHA-256=`61fe84e57ed5477fe7ad10ee20b2a0c6309925b936473ba7562498c1b0b36249`。校验 **164 evidence paths / 179 source hashes / 9 行有 gap**。

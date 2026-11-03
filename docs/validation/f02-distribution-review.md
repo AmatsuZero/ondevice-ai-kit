@@ -17,6 +17,14 @@
 
 对象→编译源文件映射不能判定头文件、单个源码文件的额外许可、生成代码或 AWT 模块的全部义务；这 20 份材料只是供逐项审查的候选集合，尚非分发附件定稿或许可批准。
 
+### 编译源文件的文件头线索复核
+
+在上述固定 revision 与对象清单上，ignored `artifacts/verification/f02-file-license-audit-20261103/audit.py` 扫描 **1,245** 个实际链接编译源文件的前 80 行，并记录每个源文件哈希。重跑得到 **1,224** 个有许可文字或引用线索、**16** 个有内联授权文字、**5** 个没有文件头线索；`summary.json` SHA-256 为 `64c1d6ac094c38cc283446003a6e7d90594ab83465e78ec48a4445c3d9ed400b`，重跑前后相同。这是检索分类，不是文件级许可认定，也未覆盖头文件、生成输入或 AWT。
+
+5 个无头线索文件为 DNG SDK 的 `dng_jpeg_memory_source.cpp`、`dng_safe_arithmetic.cpp`，以及 HarfBuzz 的 `OT/Var/VARC/VARC.cc`、`hb-ot-shaper-indic-table.cc`、`hb-ot-shaper-vowel-constraints.cc`。前两者直接包含的同名头文件中，`dng_safe_arithmetic.h` 有 Android Open Source Project 的 Apache-2.0 头，`dng_jpeg_memory_source.h` 没有许可头；不能直接把任一头文件声明外推为对应 `.cpp` 的许可。HarfBuzz 根 `COPYING` 提醒子目录可能另有许可；生成的 `hb-ot-shaper-vowel-constraints.cc` 明示输入来自 `src/ms-use/IndicShapingInvalidCluster.txt`，而原 20 份材料缺少 `src/ms-use/COPYING`。该文件为 Microsoft MIT 声明，SHA-256 `c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383`。Indic 表和 vowel constraints 还标明 Unicode 数据输入，相关生成输入与许可需专项核对。14 个 libjpeg-turbo Arm NEON 编译源文件含内联许可文字，仍需逐文件比对现有 `LICENSE.md` 与 `README.ijg`，不能仅凭组件级文件判定覆盖。
+
+为便于审查，ignored `build_materials.py` 生成只供本地审查的 `f02-distribution-review-materials-v2.tar.gz`：**27** 个文件、**154,160 B**、SHA-256 `39ce3868d66afb22529356189cc587a8074d1134d66186cbf3a67371ccb2cef6`，包含原 20 份候选材料、新增 `ms-use/COPYING`、对象映射、文件头审计、脚本和补丁；没有 Maven 二进制归档。v1 原包保留不覆盖，v2 未上传，21 份许可材料仍只是候选集合。
+
 ## AWT 与 Maven 依赖范围
 
 归档的四个模块为 `skiko`、`skiko-awt` 和双 iOS slice。根 `.module` 的三个 AWT 变体仍指向 `skiko-awt`。后者的二进制 JAR 有 702 个非目录条目，类仅在 `org/jetbrains/skia` 与 `org/jetbrains/skiko` 包，另有两个 `META-INF` 文件；没有 `.so`、`.dylib`、`.dll` 或 `.a` 条目。这是 JAR 内容检查，不是桌面运行验收。
