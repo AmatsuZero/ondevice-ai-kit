@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F11 公开 SDK 第二自然场景五次真机请求
+
+- 用户再次回复可处理 F02 相机授权；固定 `io.ondeviceai.f02versioned10` 此前已有 `authorized` 回执与同 PID 十轮相机 trace，本轮未重复申请权限或启动相机研究 App。授权设备回读 iPhone17,2 / iOS 27.0.1 `connected`。
+- 使用已有来源与 CC BY 4.0 许可记录的 Kawaida Waterfall `motion-0-2.mp4`（320×180、48 帧、24 fps、2 秒，SHA-256=`b77120a5c64061fa8a92edbe94602ab8b56bbca90dafd27fc4b1351e1ce7c4c4`），新建 ignored 独立 `io.ondeviceai.probe.f11sdkcrossscene` App。签名构建成功，App bundle 内素材哈希一致；可执行文件 UUID=`FA35B854-700A-3497-AC01-06DB739E2474`。同 PID=`36764` 经公开 `VideoProcessingClient → AppleVideoToolboxBackend` 完成 **5/5** 请求，五份独立输出的哈希、48 帧 PTS、HEVC/BT.709/无音轨由 ignored `artifacts/verification/f11-sdk-cross-scene-20261103/validate.py` 重算通过；原始报告 SHA-256=`a46f2ac5583e5f69b351d453ab46883432bdf81e123ef9274764ec4548b627e7`，摘要 SHA-256=`29088ebee47c8cd9bda711d24bc2f0b101d1a63420f90be58804ae8d04e954b9`。整请求 p50/p95=`5122.919791/6435.549208 ms`，约 10 ms 采样 RSS 峰值相对轮前 p50/p95=`123,011,072/258,801,664 B`。研究 PID 精确终止并回读 absent；其他进程未操作。
+- 第二场景与首场景在不同 App/时间/设备负载下测量，不能作严格场景效应比较；五轮不是持续资源或主观质量验收。输出仅在独立 App 沙盒与 ignored 本地证据目录，未写 Photos、未改普通 Demo 或生产依赖。详见[超分复核](validation/video-sr-backends.md#f11-公开-sdk-第二自然场景五次请求2026-11-03)。F11/P11 与发布仍 `open/not-ready`；原有九项受保护 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-03 F11 SDK Video SR 20 轮有界持续资源
 
 - 在 iPhone17,2 / iOS 27.0.1 上以独立 `io.ondeviceai.probe.f11sdksustained` App、PID 36727 顺序完成固定公开视频 `VideoProcessingClient → AppleVideoToolboxBackend` 20/20 次请求，窗口 `107153.034041 ms`。20 份独立 MOV 的哈希、48 帧 PTS、HEVC/BT.709/无音轨均由 ignored `artifacts/verification/f11-sdk-sustained-20261103/validate.py` 重算通过；原始报告 SHA-256=`7703eff1de1fd868a910f03e2201444eec81ca601d87c4706a674702bbeb71c9`，摘要 SHA-256=`cb116e12f89fdf53ff9c6cbeeaa313cc4787d2e149c964e9dfa48f48652d02d0`。整请求 p50/p95=`5176.6325/6453.235666 ms`，约 10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`88,768,512/133,595,136 B`；第 1 到第 20 轮结束 RSS 增加 `1,064,960 B`。旧研究进程同时存在，不能称全机隔离；只精确终止本次 PID 并回读 absent，其他进程未动。详见[超分复核](validation/video-sr-backends.md#f11-公开-sdk-路径-20-次有界持续请求2026-11-03)。

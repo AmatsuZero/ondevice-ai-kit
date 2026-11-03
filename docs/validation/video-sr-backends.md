@@ -1,6 +1,14 @@
 # P7 视频超分后端调研
 
-更新时间：2026-11-02。P7 只比较后端边界和一条固定输入链路的探针条件，不把单帧放大或桌面运行结果当作移动端视频超分交付。
+更新时间：2026-11-03。P7 只比较后端边界和一条固定输入链路的探针条件，不把单帧放大或桌面运行结果当作移动端视频超分交付。
+
+## F11 公开 SDK 第二自然场景五次请求（2026-11-03）
+
+隔离 `io.ondeviceai.probe.f11sdkcrossscene` App 在同一台 iPhone17,2 / iOS 27.0.1 上，以公开 Kawaida Waterfall 视频的 `motion-0-2.mp4` 派生素材调用 `VideoProcessingClient → AppleVideoToolboxBackend` 五次。素材为 320×180、48 帧、24 fps、2 秒，SHA-256=`b77120a5c64061fa8a92edbe94602ab8b56bbca90dafd27fc4b1351e1ce7c4c4`；[来源与许可记录](multimodal-video-demo.md#2026-10-31-f08-第二自然场景kawaida-瀑布)保存在 ignored 本地证据。App bundle 副本哈希相同；可执行文件 UUID=`FA35B854-700A-3497-AC01-06DB739E2474`、SHA-256=`b2c8540a6f5ee533a72d8abc327f684efe42493ec6578e4420fb86f9f711718e`，签名校验通过。素材从 App bundle 读取，输出仅在独立 App Documents 沙盒和 ignored 本地验证目录；未使用 Photos 或私人媒体，也未覆盖普通 Demo。
+
+同一 PID=`36764` 的五个不同 runId 全部成功，五份不同哈希的输出均为 1280×720、48 帧、24 fps、2 秒、无音轨的 HEVC/BT.709 MOV。`artifacts/verification/f11-sdk-cross-scene-20261103/validate.py` 从设备原始报告和五份输出重算身份、哈希、帧时间戳及最近秩统计；报告 SHA-256=`a46f2ac5583e5f69b351d453ab46883432bdf81e123ef9274764ec4548b627e7`，摘要 SHA-256=`29088ebee47c8cd9bda711d24bc2f0b101d1a63420f90be58804ae8d04e954b9`。整请求 wall time p50/p95=`5122.919791/6435.549208 ms`；约 10 ms 采样的进程 RSS 峰值相对各轮开始值 p50/p95=`123,011,072/258,801,664 B`。第 1 轮结束 RSS=`61,652,992 B`，第 5 轮结束=`62,291,968 B`。研究 PID 已单独终止并回读 absent。
+
+这补充了第二自然场景的公开 SDK 成功执行和有界资源数据。它与首场景的五次请求在不同 App、时间窗口及设备负载条件下运行，无法作为严格场景效应比较；五次请求也不能替代 20 次持续观察。采样 RSS 不是真实/GPU 峰值或能耗；没有独立冷启动、主观画质、模型传递函数或最低系统验收。F11/P11 与发布仍为 `open/not-ready`。
 
 ## F11 公开 SDK 路径 20 次有界持续请求（2026-11-03）
 
