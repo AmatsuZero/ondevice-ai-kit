@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 固定版本分发与无 recorder 真机十轮
+
+- 用户确认可处理新 bundle 的相机授权。独立 `io.ondeviceai.f02versioned10` 权限 helper 在 iPhone 16 Pro Max / iOS 27.0.1 首次请求，App Documents 回读 `authorized`；随后用同 bundle ID 安装正式十轮 App。生产 Demo/Compose/Skiko 依赖未修改，foundation 原有九项 dirty/untracked 文件保留。
+- 固定 Skia `22f58c9...`、Skiko `9a5b398...` 的本地 BuildRepo 以 `0.144.6-ondevice-f02.1` 正常发布，**64/64 executed、BUILD SUCCESSFUL**；`verify_versioned_publication.py` 校验 root/AWT/双 iOS 模块的元数据、哈希、引用闭包和 Klib 内嵌 Skia archive。摘要 `artifacts/verification/f02-remediation-20261101/versioned-publication-summary.json` SHA-256=`ac5df76553e9455b4ef27dee926e4d0d32c7b0c400b43b369c4155c558c0b1a4`。从当前已提交源码导出的独立消费者仅隔离依赖解析规则，两个 iOS framework 强制重链 **14/14 executed、BUILD SUCCESSFUL**。独立源码复审重试对真实 `AtlasTextOp` RED→GREEN 和正式补丁给出 **APPROVE**，范围不涵盖分发或真机。
+- 正式十轮 App 签名校验通过，最终 debug dylib UUID=`6D590307-4220-3180-B4B4-1E04791696CD`、SHA-256=`70755b9c6c1675216cc3f4800083c50f8d08178a19de084f7a229618e3e4586c`，无研究 recorder ABI。首次 run `AA5E0D15...`、PID `36544` 完成 86 样本，但 trace 被提前中断、缺少模板/索引，**不用于 trace 结论**。重录 run `76996882...`、PID `36564` 完成十轮 86 样本，Vision 增量均 ≥662；30 秒 page-absent 时 owner/Compose/Metal 弱引用全为 0，bridge 有延迟释放，最终 60 秒 idle 全为 0。RSS 首末 +`10,731,520 B`，不归因于 Atlas。
+- 重录 Leaks trace 自然结束并可导出，TOC 与同 PID、安装路径、时间窗匹配，**870.750431 秒、109,550 Allocations 行、0 Leaks 明细行**。最终 live 128 B `AtlasTextOp::Make` 栈 2 行：一行 TLS 析构注册，一行 `operator new`；无 recorder 不足以配对线程退出和存储生命周期，空 Leaks 明细不等于零泄漏。可重算脚本、回执、XML 与原始报告在 ignored `artifacts/verification/f02-versioned-consumer-20261103/`，`camera-page-versioned10b-summary.json` SHA-256=`cee088f9b5dece31dd54682eece1c68b3f3a613eec4174a951b0b6b92bb4300a`。下一步裁定生产分发所有权、跨平台 variant 与长期资源预算；**F02/P4/P11、发布仍 open/not-ready**。
+
 ## 最新续接 — 2026-11-03 F02 Skia 原生回归 RED→GREEN
 
 - 用户再次回复可处理 F02 相机授权；该授权及同 PID 十轮真机 trace 已完成，无需重新启动研究 App 或申请权限。本轮继续 F02 Skia 源码门槛，生产 Demo/依赖与九项受保护 dirty/untracked 文件未改。

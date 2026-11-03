@@ -1,10 +1,18 @@
 # P4 AtlasTextOp 分配与线程缓存调查
 
+## 2026-11-03 F02 固定版本本地分发与无 recorder 真机十轮
+
+固定 Skia `22f58c9...` 与 Skiko `9a5b398...` 的隔离构建，以新版本 `0.144.6-ondevice-f02.1` 正常发布到本地 BuildRepo；root、AWT 和两个 iOS 模块的 POM/Gradle metadata、SHA-256、root 引用闭包及 Klib 内嵌 `libskia.a` 已由 ignored `artifacts/verification/f02-remediation-20261101/verify_versioned_publication.py` 校验，发布构建 **64/64 executed、BUILD SUCCESSFUL**。摘要 `versioned-publication-summary.json` SHA-256=`ac5df76553e9455b4ef27dee926e4d0d32c7b0c400b43b369c4155c558c0b1a4`。从当前已提交源码导出的独立消费者只在隔离 `settings.gradle.kts` 增加本地仓库与版本替换；Compose 请求解析到 `skiko-iosarm64:0.144.6-ondevice-f02.1`，双 iOS framework 强制重链 **14/14 executed、BUILD SUCCESSFUL**。签名研究 App 的 debug dylib UUID=`6D590307-4220-3180-B4B4-1E04791696CD`、SHA-256=`70755b9c6c1675216cc3f4800083c50f8d08178a19de084f7a229618e3e4586c`，含 `CacheOwner`/TLS 且无研究 recorder ABI；生产依赖未改。
+
+独立 bundle `io.ondeviceai.f02versioned10` 的相机权限 helper 在 iPhone 16 Pro Max / iOS 27.0.1 首次请求后回读 `authorized`，不采集或保存画面。正式 App 用同 bundle ID 继承授权。首次 run `AA5E0D15-0861-459F-87E1-F8D6A58EDDD0` 在 PID `36544` 完成 10 轮、86 样本，但录制被提前中断，只留下原始 `Trace1.run`，不能导出，故不参与 trace 结论。重录 run `76996882-4223-4709-81BD-BAAEBBF3F6A2` 在 PID `36564` 完成 10 轮、86 样本，30 秒活动窗口 Vision 成功增量 `670/687/685/662/664/687/669/668/694/667`。十次页面移除后 30 秒 owner/Compose/Metal 弱引用均为 0；bridge 在八次仍为 1、两次为 0，末轮 31/35/60 秒 idle 均为 0，`allObservedPageObjectsReleased=true`。30 秒 page-absent RSS 首末 +`10,731,520 B`，不按来源归因。
+
+同 PID 的 Leaks trace 自然达到 **870.750431 秒**时限并保存；TOC 的设备、PID、安装路径和时间窗与 App 回执及样本一致。完整 Allocations List **109,550 行**，最终 live 的 128 B `AtlasTextOp::Make` 栈有两行：一行是 TLS 析构注册存储，一行经 `operator new`；两行的线程标签均为 `0x6ff93000`。Leaks 明细为 0 行。无 recorder 版本没有同 generation 的分配、析构、free、线程退出事件，因此无法把最终 live 缓存判定为“线程退出后残留”，也不能从 Leaks 空表推断零泄漏。可重算脚本及原始报告/XML/回执位于 ignored `artifacts/verification/f02-versioned-consumer-20261103/`；`camera-page-versioned10b-summary.json` SHA-256=`cee088f9b5dece31dd54682eece1c68b3f3a613eec4174a951b0b6b92bb4300a`。这关闭固定版本本地发布、当前消费者链接及本次真机持续重入的有界验证；完整跨平台分发、长期资源预算、生产依赖切换与原 P4/P11 验收仍开放，发布仍 `open/not-ready`。
+
 ## 2026-11-03 F02 真实 Skia 对象原生回归
 
 在新的 ignored Skia worktree `artifacts/verification/f02-remediation-20261101/skia-native-regression-20261103/` 固定同一 `22f58c9...` revision，接入 `skiko_tests` 原生 `dm`。测试通过 `AtlasTextOpTools::CreateOp` 构造真实 `AtlasTextOp`，用 mock `GrDirectContext` 验证同线程缓存复用及 `GrRecordingContext` 析构清理；另将真实 op 交给 worker 析构，在主线程销毁 context 后再让 worker 退出，测试 TLS 缓存存储释放。仅此 ignored checkout 在实际 `::operator delete` 返回后报告测试事件；正式分发补丁不含该 hook。
 
-原始 `thread_local void*` 版本先见 **RED：2 项中 context 清理通过、worker 退出释放断言失败**；固定 `CacheOwner` 候选后同测试 **2/2 GREEN**。`Skiko_` 专项 **5/5**，宿主 `dm --src tests` **2809/2809 exit 0**；日志有 `CGLChoosePixelFormat failed`，所以不将宿主结果上升为 GPU 或 iOS 真机验收。可供源码复审的[独立补丁与复现步骤](../../probes/skia-atlas-text-cache/README.md)已入库，三份补丁均在干净固定 revision 上通过 `git apply --check`；原始日志、源码与补丁 SHA-256 固定于 ignored `artifacts/verification/f02-remediation-20261101/native-regression-summary.json`。独立源码复审重试返回 HTTP 429，**没有新审查结论**。这补上真实对象与线程退出的原生回归证据，尚未取得经复审的生产修复、独立不可变 Skiko 分发物或正式无 recorder 持续资源验收；F02/P4/P11 仍 `open/not-ready`。
+原始 `thread_local void*` 版本先见 **RED：2 项中 context 清理通过、worker 退出释放断言失败**；固定 `CacheOwner` 候选后同测试 **2/2 GREEN**。`Skiko_` 专项 **5/5**，宿主 `dm --src tests` **2809/2809 exit 0**；日志有 `CGLChoosePixelFormat failed`，所以不将宿主结果上升为 GPU 或 iOS 真机验收。可供源码复审的[独立补丁与复现步骤](../../probes/skia-atlas-text-cache/README.md)已入库，三份补丁均在干净固定 revision 上通过 `git apply --check`；原始日志、源码与补丁 SHA-256 固定于 ignored `artifacts/verification/f02-remediation-20261101/native-regression-summary.json`。此前独立复审遇 HTTP 429；随后重试对真实对象 RED→GREEN 回归和正式补丁给出 **APPROVE**，范围仅覆盖缓存、context 清理与 worker TLS 退出释放，不覆盖分发或真机。后续固定版本本地分发与无 recorder 真机持续重入见上节；F02/P4/P11 仍 `open/not-ready`。
 
 ## 2026-11-02 F02 生产依赖归属与候选门槛
 
@@ -14,7 +22,7 @@
 
 **进入生产的门槛**：先取得经源码复审的 Skia 修复及可固定版本的 Skiko 分发路径（上游发布，或经独立审查、可复现且可维护的项目专用发布物）；再用当前 Compose/Kotlin 图验证 iOS 双 slice Klib、root/所需 variant、ABI、最终 App 链接及实际 Compose/Metal 渲染路径。正式无 recorder 候选需以独立固定源码 consumer 重建，匹配最终二进制身份，在真机做原 P4 页面协议和持续重入资源观察；instrumented 逐地址事件与正式候选结果分别报告，不把研究记录器本身带入生产。通过这些门槛前，生产依赖、锁定版本和 Demo 均不改，F02/P4/P11 保持 `open/not-ready`。
 
-**尚未证明**：本轮只读上游 issue 搜索未返回匹配项；进一步 PR/fork 查询被自动审批服务 HTTP 429 拒绝且未执行，不能据此断言上游没有修复或正式发布。生产分发选择、跨平台 variant 完整性、独立代码复审及长期资源预算仍待专项裁定。
+**尚未证明**：本轮只读上游 issue 搜索未返回匹配项；进一步 PR/fork 查询被自动审批服务 HTTP 429 拒绝且未执行，不能据此断言上游没有修复或正式发布。固定版本只在本地 BuildRepo 发布，生产分发选择、跨平台 variant 完整性及长期资源预算仍待专项裁定；独立代码复审的通过范围见上节。
 
 ## 2026-11-02 F02 tokenized recorder 同 PID 真机 trace 结论
 

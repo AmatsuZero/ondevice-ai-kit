@@ -21,12 +21,12 @@
 
 **暂不进入近期队列的外部卡点**：F03 需要 iOS15/API26 真机；F05 需要设备支持且授权的 Android ASR 离线资源；F07 真实推理需要可授权 LiteRT-LM 权重，native drain 另缺受支持证明；F10 需要生产模型/PAD、授权数据和校准集。真实 PHPicker 也需要将合成资产写入 Photos；当前按用户要求不做这项写入，因此保留为 F01 的独立后续。输入出现后再恢复对应专项。
 
-**独立技术难题，后置且不冒充外部设备卡点**：F02 已完成不保留全局原始指针的同 PID 真机事件与最终分配配对，独立限定复审为 `WATCH`，仍需生产所有权裁定和原验收；F06 的 Android 生产超分需要先确定可运行且可评价的后端；F09 已用隔离依赖诊断改动完成当前图像/视频 App archive，但生产依赖兼容、增强 XCFramework 与 binary consumer 仍未验；F12 完整复审此前遇服务 429，待形成新的候选差异后重试。它们仍是交付要求，只是不占用上述短队列。当前按用户要求继续推进此表中的可执行专项。
+**独立技术难题，后置且不冒充外部设备卡点**：F02 的真实对象原生回归与修复补丁已获有界独立复审，固定版本 Skiko 本地发布、独立消费者双 iOS framework 链接及无 recorder 同 PID 真机十轮已完成；仍需生产分发所有权、长期资源预算与原验收。F06 的 Android 生产超分需要先确定可运行且可评价的后端；F09 已用隔离依赖诊断改动完成当前图像/视频 App archive，但生产依赖兼容、增强 XCFramework 与 binary consumer 仍未验；F12 完整复审此前遇服务 429，待形成新的候选差异后重试。它们仍是交付要求，只是不占用上述短队列。当前按用户要求继续推进此表中的可执行专项。
 
 | 编号 / 负责范围 | 问题与已有证据 | 恢复输入 / 下一动作 | 专项退出标准 |
 | --- | --- | --- | --- |
 | F01 / iOS Demo | [P4](p4-camera-stability.md)：真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 已完成；真实 PHPicker→controller 仍未验 | sandbox 子项已完成，证据见 `artifacts/verification/p4-picker-sandbox-device/summary.json`；后续若恢复 PHPicker 专项，才考虑合成资产的 Photos provider 路径；当前不写入 Photos | 三例实际选择同一指定合成资产，尺寸/镜像像素及 `apple.vision.face` 成功结果均可复核；sandbox 结果不替代 PHPicker，且不读取私人照片 |
-| F02 / Compose/Skia 资源 | [AtlasTextOp](p4-atlas-text-cache.md)：tokenized recorder 同 PID 十轮真机 trace 完成 1,380,716 条事件与 111,141 行分配配对；58 个持缓存线程退出均有同 generation free 完成。最终两条 live 128 B 中一条是 TLS 析构注册，唯一缓存存储仍由未观察退出的线程持有。真实 Skia 对象原生回归已见原始 TLS 指针 RED、`CacheOwner` 候选 GREEN，宿主 2809/2809 exit 0；独立源码复审仍无结论，生产依赖未改。源码修复归属 Skia，Skiko/Compose 是生产分发链 | 取得经复审的 Skia 修复与可追溯 Skiko 分发物，完成 Compose/Kotlin 兼容、iOS 双 slice 和正式无 recorder 候选验证，再做长期资源门槛及原 P4/P11 验收 | 匹配 runtime UUID、对象地址、分配/析构/free/TLS 与线程生命周期；修复或有证据的边界裁定，并证明持续重入行为 |
+| F02 / Compose/Skia 资源 | [AtlasTextOp](p4-atlas-text-cache.md)：原始 TLS 指针真实对象回归 RED、`CacheOwner` 候选 GREEN，独立补丁复审 APPROVE；固定版本 `0.144.6-ondevice-f02.1` 本地 BuildRepo 发布 64/64、独立消费者双 iOS framework 重链 14/14、无 recorder 真机十轮 86 样本及同 PID 870.75 秒 Leaks trace 均完成。最终 live 128 B AtlasTextOp 栈 2 行，其中 1 行为 TLS 析构注册；缺少无 recorder 同 generation 线程退出配对，不能判零泄漏。生产依赖未改 | 裁定可维护的生产 Skiko 分发/上游归属与跨平台 variant；建立长期资源预算及可比较的线程生命周期证据，再完成原 P4/P11 验收 | 固定生产 runtime UUID、对象地址、分配/析构/free/TLS 与线程生命周期；修复或有证据的边界裁定，并证明持续重入与资源预算 |
 | F03 / 最低系统 | [设备矩阵](device-matrix.md)：iOS15/API26 缺设备 | 取得相应真机后恢复启动、availability、权限、选图/相机、取消、前后台、离线门禁 | 两平台最低系统实际运行报告；编译下限不替代运行验收 |
 | F04 / Speech iOS/TTS | [语音](speech-backends.md)、[麦克风计划](../superpowers/plans/2026-10-20-ios-microphone-asr.md)：自然麦克风终态、中文质量/取消重入/后台、TTS 自然质量与完整离线矩阵仍缺 | 受控授权录音和文本/语言任务集，保留准确转写参考及网络观测方法 | 麦克风终态、资源 drain、取消重入/后台、CER/WER、自然 TTS 与离线矩阵逐项报告 |
 | F05 / Speech Android | [语音](speech-backends.md)：on-device ASR 返回 MISSING_ASSETS | 提供设备支持且授权的系统离线语音资源 | 真实转写、取消/close/重入、离线与自然质量验收；仍缺资产时明确 unavailable |
