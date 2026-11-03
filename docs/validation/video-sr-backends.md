@@ -2,6 +2,12 @@
 
 更新时间：2026-11-02。P7 只比较后端边界和一条固定输入链路的探针条件，不把单帧放大或桌面运行结果当作移动端视频超分交付。
 
+## F11 公开 SDK 路径 20 次有界持续请求（2026-11-03）
+
+独立 `io.ondeviceai.probe.f11sdksustained` App 使用当前 Apple package 的公开 `VideoProcessingClient → AppleVideoToolboxBackend`，在 iPhone17,2 / iOS 27.0.1、同 PID=`36727` 顺序处理同一公开 48 帧视频 20 次，总观察窗口 `107153.034041 ms`。固定输入及 App bundle 副本 SHA-256 均为 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`；App 可执行文件 UUID=`BA131067-35D8-3FA9-A4CD-2A66189E3182`、SHA-256=`0b3e5f8099b69e09a5f04f136c32a38f3aff22120538ad604b87af03829810f2`。签名在授权环境通过 `codesign --verify --deep --strict`。研究 App 与普通 Demo 使用不同 bundle ID，只读自己的固定 bundle 素材，输出仅在 App Documents 沙盒及 ignored 本地证据目录；未用 Photos、私人媒体或模型下载。
+
+20/20 个不同 runId 均成功，20 个不同哈希的 HEVC/BT.709 MOV 各有 1280×720、48 帧、24 fps、2 秒、无音轨，逐帧时间戳经 `artifacts/verification/f11-sdk-sustained-20261103/validate.py` 重新检查。原始报告 SHA-256=`7703eff1de1fd868a910f03e2201444eec81ca601d87c4706a674702bbeb71c9`，校验摘要 SHA-256=`cb116e12f89fdf53ff9c6cbeeaa313cc4787d2e149c964e9dfa48f48652d02d0`。整请求 wall time 最近秩 p50/p95=`5176.6325/6453.235666 ms`；约 10 ms 采样的进程 RSS 峰值相对轮前 p50/p95=`88,768,512/133,595,136 B`。第 1 轮结束 RSS=`61,030,400 B`，第 20 轮结束=`62,095,360 B`，增量=`1,064,960 B`；期间轮后最大=`62,160,896 B`。这是一条约 107 秒、单设备单素材同进程的有界资源趋势，不能推出零泄漏、长期稳定或跨设备预算；采样值也不是真实/GPU 内存峰值或能耗。启动前另有三个旧研究 App 进程，不能声称全机负载隔离；本次 PID 已精确终止并回读 absent，旧进程未动。主观质量、模型传递函数、GPU/energy 和最低系统仍未验证，F11/P11 保持 `open/not-ready`。
+
 ## F11 公开 SDK 路径五次真机请求（2026-11-02）
 
 隔离 `io.ondeviceai.probe.f11sdkresource` App 从当前本地 Swift package 导入公开 `ODAIKitVideo`/`ODAIKitAppleVideo`，实际调用 `VideoProcessingClient → AppleVideoToolboxBackend`，以 `.discard` 音频策略顺序处理固定 Common swifts 48 帧输入五次。这是正式 SDK API 的隔离 consumer，不是下方直接调用系统 VideoToolbox 的探针，也不是 Demo UI 的端到端计时。iPhone17,2 / iOS 27.0.1，单进程 PID=`36128`、runId=`663C8FEA-1690-4B6D-A289-A4A2385CDF64`；签名 App 可执行文件 UUID=`969CD206-A99E-3D7C-9774-A4B2B3626EC9`。输入 SHA-256=`97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`，与既有公开 fixture 及 App bundle 副本一致。没有读取私人媒体、写 Photos 或下载模型；所有输出留在研究 App Documents 及 ignored 本地验证目录，普通 Demo 未替换。

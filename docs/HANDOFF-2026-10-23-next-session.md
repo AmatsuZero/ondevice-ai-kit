@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F11 SDK Video SR 20 轮有界持续资源
+
+- 在 iPhone17,2 / iOS 27.0.1 上以独立 `io.ondeviceai.probe.f11sdksustained` App、PID 36727 顺序完成固定公开视频 `VideoProcessingClient → AppleVideoToolboxBackend` 20/20 次请求，窗口 `107153.034041 ms`。20 份独立 MOV 的哈希、48 帧 PTS、HEVC/BT.709/无音轨均由 ignored `artifacts/verification/f11-sdk-sustained-20261103/validate.py` 重算通过；原始报告 SHA-256=`7703eff1de1fd868a910f03e2201444eec81ca601d87c4706a674702bbeb71c9`，摘要 SHA-256=`cb116e12f89fdf53ff9c6cbeeaa313cc4787d2e149c964e9dfa48f48652d02d0`。整请求 p50/p95=`5176.6325/6453.235666 ms`，约 10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`88,768,512/133,595,136 B`；第 1 到第 20 轮结束 RSS 增加 `1,064,960 B`。旧研究进程同时存在，不能称全机隔离；只精确终止本次 PID 并回读 absent，其他进程未动。详见[超分复核](validation/video-sr-backends.md#f11-公开-sdk-路径-20-次有界持续请求2026-11-03)。
+- 新 ignored readiness `artifacts/verification/p11-readiness-20261103-sdk-sustained/summary.json` 校验 **134 evidence paths / 142 source hashes / 9 行有 gap**；跟踪的 `benchmark/p11/grouped-report-manifest.json` 指向该快照，grouped 重算 `artifacts/verification/p11-grouped-20261103-sdk-sustained/summary.json` SHA-256=`164d623b3c57afb6cb4eef1fcfbdb483e26cb08325da1603d959f2e14f38c652`，`groups` 与 `coverage` 均与前版逐值相同，仍 **5 项能力/8 组**、`open/not-ready`。20 轮属于独立补充诊断，未与五次整请求合组；v1 本地可搬移证据包不含这 37 个新增文件，新 clone 复现须补全新快照列出的 ignored 原始证据。原有九项受保护 dirty/untracked 文件未改；未改普通 Demo/生产依赖。
+
 ## 最新续接 — 2026-11-03 F02 iOS-only metadata 配置校正与 AWT 对照
 
 - 复查发现前一检查点的 KGP 2.4.21 首次联网命令误将两个 Native 总开关设为 `true`，实际激活更多 target；该日志不能称为“双 iOS arm64”严格对照。以两个总开关 `false`、仅 device/simulator arm64 子开关 `true` 重跑，`--info` 确认只 commonize `(ios_arm64, ios_simulator_arm64)`；KGP 2.4.21 仍在 metadata 编译因 `@OptionalExpectation` 失败，14 个执行任务，log SHA-256=`ac17af5b366628b59bbc3d895b1f108b96f79770bd7353007a445fe93ff2e25c`。

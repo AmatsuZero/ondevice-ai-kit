@@ -1,16 +1,18 @@
 # P11 分组 benchmark 快照
 
-初版日期：2026-10-27；2026-11-02 纳入 iOS TTS 五次逐 run、Video SR 双后端 48 帧系统探针、公开 SDK Video SR 五次整请求及生产 SDK client 文件 ASR 五次识别资源报告。2026-11-03 因 F02 验证文档新增限定证据而刷新 readiness 来源哈希；没有新增 benchmark run 或改变 P11 门禁。Video SR SDK 整请求与系统逐帧探针分组，文件 ASR SDK client 与直连 Speech framework 探针也分别保留来源。该快照只聚合能够从哈希固定原始 JSON 严格重算的数据；不补造历史字段，也不把不同能力的 timing 或质量指标合成总分。
+2026-11-03 新增 20 次同 PID 的公开 SDK Video SR 有界持续资源诊断，见[超分复核](video-sr-backends.md#f11-公开-sdk-路径-20-次有界持续请求2026-11-03)。它与既有五次整请求的测量窗口不同，暂作为独立 readiness 证据，不混入当前 `video-sr-sdk-resource` 五样本分组；本表 5 项能力/8 组和发布门禁不因该诊断升级。
+
+初版日期：2026-10-27；2026-11-02 纳入 iOS TTS 五次逐 run、Video SR 双后端 48 帧系统探针、公开 SDK Video SR 五次整请求及生产 SDK client 文件 ASR 五次识别资源报告。2026-11-03 先因 F02 验证文档新增限定证据刷新 readiness 来源哈希，随后把独立的 20 次 SDK Video SR 有界持续运行作为补充证据加入 readiness；没有把它混入五次整请求分组或改变 P11 门禁。Video SR SDK 整请求与系统逐帧探针分组，文件 ASR SDK client 与直连 Speech framework 探针也分别保留来源。该快照只聚合能够从哈希固定原始 JSON 严格重算的数据；不补造历史字段，也不把不同能力的 timing 或质量指标合成总分。
 
 ## 可复现入口
 
-跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、七份原始设备报告及各附属摘要/媒体/质量文件的路径、SHA-256、source kind 和 P11 能力映射。该入口依赖本地 ignored `artifacts/verification/` 原始证据；新 clone 需先取得相同哈希的证据包。生成命令：
+跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、七份分组原始设备报告及各附属摘要/媒体/质量文件的路径、SHA-256、source kind 和 P11 能力映射。新 readiness 另索引 20 次持续运行的报告、20 份 MOV 与复算来源，但不把该诊断加入 grouped `sources`。该入口依赖本地 ignored `artifacts/verification/` 原始证据；旧的 `p11-portable-evidence-20261103-v1` 包不含新增 37 个文件，新 clone 需取得新快照所列完整原始文件。生成命令：
 
 ```sh
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261103-f02-refresh/summary.json
+  --output artifacts/verification/p11-grouped-20261103-sdk-sustained/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。
@@ -36,7 +38,7 @@ python3 tools/p11_grouped_report.py \
 
 ## 覆盖与剩余缺口
 
-readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Speech ASR file、Video SR 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **5项能力/8组**。其余4项保持 `unverified`：Speech ASR Android、Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。readiness 快照校验 **97 evidence paths / 105 source hashes / 9行有 gap**。
+readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Speech ASR file、Video SR 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **5项能力/8组**。其余4项保持 `unverified`：Speech ASR Android、Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。纳入独立 20 次 Video SR 持续诊断后，readiness 快照校验 **134 evidence paths / 142 source hashes / 9行有 gap**；分组结果保持原样。
 
 旧 `f11-videosr-20261030` 成功报告缺少设备/系统/run 身份和逐帧原始值，仍不作为本次 grouped 来源；本次仅使用新真机成功报告。五次 SDK 整请求耗时及进程 RSS 样本在 `video-sr-sdk-resource` 独立组，不将约 5 秒的解码/缩放/编码全程与约 94 ms 的逐帧缩放混成同一统计组。所有 Video SR 质量报告和分组 `quality.status` 均保持 `unverified`，不把单素材 PSNR/SSIM 升级为主观质量通过。文件 ASR 的新分组仅使用 `SpeechRecognitionClient` SDK client 的五次资源数据；既有直连 Speech framework 探针仍是独立证据，不合组。身份、相机与 LiteRT-LM 同理保留各自证据和缺口。
 

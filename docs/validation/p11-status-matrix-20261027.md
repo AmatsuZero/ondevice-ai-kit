@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-11-03 F11 使用独立公开 SDK consumer 在同一 iPhone17,2 / iOS 27.0.1、PID 36727 上对固定公开视频连续运行 20 次，20/20 输出各经哈希、48 帧时间戳和 HEVC/BT.709 校验。约 107 秒的整请求 p50/p95=`5176.6325/6453.235666 ms`，约 10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`88,768,512/133,595,136 B`；首轮结束到末轮结束 RSS 增加 `1,064,960 B`。这是单素材有界趋势，仍缺长期、跨场景、真实/GPU 峰值、能耗及主观质量；旧研究进程存在，未证明全机负载隔离。原始报告 SHA-256=`7703eff1de1fd868a910f03e2201444eec81ca601d87c4706a674702bbeb71c9`，详见[超分复核](video-sr-backends.md#f11-公开-sdk-路径-20-次有界持续请求2026-11-03)。P11 和发布仍 `open/not-ready`。
+
 2026-11-02 F11 另有公开 SDK 路径五次同 PID 真机请求：`VideoProcessingClient → AppleVideoToolboxBackend`，整请求耗时最近秩 p50/p95=`5110.416958/6533.880333 ms`，约10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`77,824,000/259,391,488 B`。五路 48 帧 HEVC 输出均经哈希、时间戳及元数据校验；首末轮编码保真度报告仍为 `qualityVerdict=unverified`。这是隔离 SDK consumer 的整请求测量，已进入独立 `video-sr-sdk-resource` 组，不与系统探针逐帧耗时合组，也不证明长期资源、主观质量或 GPU/energy。原始证据见[超分复核](video-sr-backends.md#f11-公开-sdk-路径五次真机请求2026-11-02)。
 
 同日将既有生产 SDK client 固定文件 ASR 五次真机资源报告加入独立 `asr-file-sdk-resource` 组；最近秩 duration p50/p95=`76.484458/93.435792 ms`，约10 ms 采样进程 RSS 峰值 p50/p95=`36,913,152/36,929,536 B`。固定合成英文 CAF 的归一化全文匹配不证明自然 CER/WER、真实麦克风或离线网络行为；与直连 Speech framework 探针的两次运行也不用于计算 SDK 固有开销。readiness 仍 **97 evidence paths / 105 source hashes / 9 rows with gaps**，grouped 为 **5项能力/8组**；P11 仍 `open/not-ready`。
