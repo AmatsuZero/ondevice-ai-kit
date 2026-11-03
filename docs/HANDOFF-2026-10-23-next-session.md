@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 静态库来源与候选许可材料
+
+- 固定 Skia 两份 `libskia.a` 与版本化 Skiko Klib 内嵌库重新比对，device/simulator 字节各自相同；正常 publication 校验通过。按各自 Ninja 对象规则拆开 arm64/arm64e 四切片：每片 1,288 个对象、0 未映射或歧义，四份对象→源码映射一致，共 1,245 个不同源文件。九个实际编译的外部组件为 dng_sdk、expat、harfbuzz、libjpeg-turbo、libpng、libwebp、piex、wuffs、zlib。
+- ignored `artifacts/verification/f02-versioned-consumer-20261103/linked-source-inventory.json` 固定每个对象来源及 20 份候选许可/NOTICE 哈希，SHA-256=`86ee2e6e9d957788cec2157904c2cf40ffa6a384c7f13a3adbab75aa26d1995b`；本地审查材料包 `f02-distribution-review-materials-v1.tar.gz` 为 38,223 B、SHA-256=`b4d55de0e6de69f8080ebb17f7f25489cfddd0861b421ce6f97f659bec0b37e4`，包含复现脚本但不含 Maven 归档，未上传。详见[分发审查](validation/f02-distribution-review.md)。
+- 还需逐项审查文件级例外、头文件与 AWT 包，确定托管/维护责任、远程消费及长期资源预算。候选材料不构成许可批准；生产依赖未切换，F02/P4/P11 和发布仍 `open/not-ready`。原有九项受保护 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-03 F02 归档许可材料预审
 
 - 用户再次回复现在可处理 F02 相机弹窗；已有 `io.ondeviceai.f02versioned10` 的 `authorized` 回执和同 PID 十轮无 recorder 真机 trace，因此没有重复申请权限或启动研究 App。

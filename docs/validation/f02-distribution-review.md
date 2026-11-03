@@ -9,9 +9,17 @@
 - 归档只含 root、AWT、iOS arm64、iOS simulator arm64 四个 Maven 版本目录。四份 POM 均声明 Apache-2.0。归档成员路径中没有 LICENSE/NOTICE；逐个检查包内 16 个可读取的 JAR/Klib 的条目路径，也没有 LICENSE/NOTICE。路径扫描不证明二进制中不存在版权信息。
 - 固定源码的 Skiko `LICENSE` 为 Apache-2.0，`NOTICE` 提及 Android Open Source Project；Skia 根 `LICENSE` 为 BSD 风格，明确要求二进制分发随文档或其他材料重现版权声明、条件和免责声明。对应本地文件 SHA-256 分别为 `c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4`、`35dd077c24768b53625101cfcc0ad853ae7e2abc08bd2a111a0267760d1406d8`、`5f787c1dee3c56547f09ccc2906ab5f5293c4d8dd6c8654e573216c38e908dbd`。源码树还有多个第三方许可文件；尚未按实际链接内容确定应随分发物附带的完整清单。
 
+## iOS 静态库的源码映射
+
+用固定 Skia 的两份 `args.gn` 与 Ninja 对象规则，分别拆开 device/simulator `libskia.a` 的 arm64、arm64e 切片。四个切片各有 **1,288 个对象**（不含 archive symbol table），每个对象名都唯一映射到一个编译源文件，**0 个未映射或歧义对象**；四份对象→源码映射完全相同，共 **1,245 个不同源文件**。两份静态库 SHA-256 分别为 `c90798bb2ce3fd7aff7f7de0a1ca9e37c19d837749c05b4010b1742dcccc845f`、`5f4790af17452aaac834a0b80bd9afa2b503ff9a55ce737a9a93eaf1b9dab1ca`，均与固定版本 Skiko Klib 内嵌库逐字节相同；正常 publication 校验也重新通过。
+
+对象源码路径指向九个 `third_party/externals` 组件：`dng_sdk`、`expat`、`harfbuzz`、`libjpeg-turbo`、`libpng`、`libwebp`、`piex`、`wuffs`、`zlib`。其余映射路径没有其他 `third_party/` 目录；`modules/skcms` 属 Skia 源码树。完整对象映射、四切片身份和 20 份候选许可/NOTICE 文件哈希保存在 ignored `artifacts/verification/f02-versioned-consumer-20261103/linked-source-inventory.json`（SHA-256 `86ee2e6e9d957788cec2157904c2cf40ffa6a384c7f13a3adbab75aa26d1995b`）。仅供审查的 `f02-distribution-review-materials-v1.tar.gz` 包含该清单、修复补丁、复现脚本和上述 20 份原样材料：38,223 B，SHA-256 `b4d55de0e6de69f8080ebb17f7f25489cfddd0861b421ce6f97f659bec0b37e4`；不包含 109 MB Maven 归档。两份包均未上传。
+
+对象→编译源文件映射不能判定头文件、单个源码文件的额外许可、生成代码或 AWT 模块的全部义务；这 20 份材料只是供逐项审查的候选集合，尚非分发附件定稿或许可批准。
+
 ## 分发前的未关闭事项
 
-1. 从固定构建参数及两份 iOS Klib 内嵌的 `libskia.a` 确认实际打入的第三方代码，整理适用许可和 NOTICE；将 Skiko、Skia 及实际第三方材料做成与制品同版本、同哈希索引的分发附件，重新审查整个附件。当前归档不能单凭四份 POM 的 Apache-2.0 元数据视为许可材料齐全。
+1. 对上述九个实际编译的第三方组件、Skia/Skiko 及 AWT 包逐项审查头文件、文件级例外和所需 NOTICE，定稿与制品同版本、同哈希索引的分发附件。当前对象清单与 20 份候选材料不能单凭路径映射或四份 POM 元数据视为许可材料齐全。
 2. 明确项目专用版本的维护者、托管地址、CI/消费者读取方式、不可变版本规则与撤销流程。当前 109 MB 归档只在本机，未上传 GitHub/GitLab，也没有远程消费者验证。
 3. 选定分发方案后，从空缓存的独立消费者按归档哈希取件，重验两份 iOS Klib、Gradle variant、最终 App 身份和真机资源预算。现有本地构建与十轮 trace 不自动证明远程分发和生产验收。
 
