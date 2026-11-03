@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F04 真机麦克风预检待受控朗读
+
+- 授权环境 `devicectl list devices` 回读 iPhone 16 Pro Max / UDID `00008140-0008703436D3001C` 为 `connected`；先前受限环境的 CoreDeviceService 超时不是设备离线结论。F04 真实 `zh-CN` 朗读、结束输入、取消/重入、后台与 lease drain 仍缺；已异步询问用户能否在设备旁朗读固定句“今天我们测试手机上的语音识别功能”并处理授权。尚无答复，不将等待视为录音授权，也未安装、启动或录音。
+- 从当前 HEAD `8228ba534c1a27d4ee85e5d0152480b6bd114ff7` 离线强制重链 `:demo:shared:linkDebugFrameworkIosArm64` 与 simulator 框架，**14/14 tasks executed、BUILD SUCCESSFUL**；在 ignored `artifacts/verification/f04-preflight-20261103/` 生成隔离 Speech Demo，签名 iphoneos App **BUILD SUCCEEDED**，授权环境 `codesign --verify --deep --strict` exit 0。最终 `SpeechDemo.debug.dylib` UUID=`A6BB87EC-29E6-3BDE-8977-0968DCC9CBAC`、SHA-256=`0bae58a454eb2ca8fca26c144b0c441d837d53ec1838dd77a7f8e13282e5040c`。Info.plist 含 Speech/Microphone 使用说明；这只完成可运行包预检，不是 F04 真实录音或 P11 验收。两份构建日志在同一 ignored 目录，原有九项受保护 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-03 F11 readiness 来源哈希刷新
 
 - 当前 F11 分组报告复现入口在 readiness 校验处因 `docs/validation/p4-atlas-text-cache.md` 来源哈希过期而中止；逐项重算 105 个来源哈希，只有这一项与 2026-11-02 快照不同，原因是之后新增了 F02 有界证据。保留旧快照，另存 ignored `artifacts/verification/p11-readiness-20261103-f02-refresh/summary.json`，并更新跟踪的 `benchmark/p11/grouped-report-manifest.json` 与复现说明。新快照 SHA-256=`5383ac50053b850bc91b6917989998d6084a59a8cd59ed72d5a3d66cd59e1670`；新 clone 仍需取得本地 ignored 原始证据包才能重算。
