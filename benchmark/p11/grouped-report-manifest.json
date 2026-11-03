@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261102-sdk-asr-grouped/summary.json",
-    "sha256": "a2b74c6b168efb943a7c863bb39277411ece8e234319d422e747a0dbe52a83b4"
+    "path": "artifacts/verification/p11-readiness-20261103-f02-refresh/summary.json",
+    "sha256": "5383ac50053b850bc91b6917989998d6084a59a8cd59ed72d5a3d66cd59e1670"
   },
   "schemaVersion": 1,
   "sources": [

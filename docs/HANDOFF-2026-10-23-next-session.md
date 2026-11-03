@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F11 readiness 来源哈希刷新
+
+- 当前 F11 分组报告复现入口在 readiness 校验处因 `docs/validation/p4-atlas-text-cache.md` 来源哈希过期而中止；逐项重算 105 个来源哈希，只有这一项与 2026-11-02 快照不同，原因是之后新增了 F02 有界证据。保留旧快照，另存 ignored `artifacts/verification/p11-readiness-20261103-f02-refresh/summary.json`，并更新跟踪的 `benchmark/p11/grouped-report-manifest.json` 与复现说明。新快照 SHA-256=`5383ac50053b850bc91b6917989998d6084a59a8cd59ed72d5a3d66cd59e1670`；新 clone 仍需取得本地 ignored 原始证据包才能重算。
+- `validate_p11_readiness.py` 新鲜校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**；`p11_grouped_report.py` 重建 ignored `artifacts/verification/p11-grouped-20261103-f02-refresh/summary.json`，SHA-256=`7c8fdd7c33b21376b9f6d24f456886c0b370f215379fc3ad3abbddcfd08128fa`。与上版相比 8 个分组及 9 行 coverage 完全相同，仍为 **5 项能力/8 组**，`p11Gate=open/not-ready`；本轮没有新增设备 run 或升级质量/资源结论。原有九项受保护 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-03 F02 相机授权答复与双端 issue 同步
 
 - 用户回复现在可以处理 F02 研究 App 的系统相机弹窗；核对现有真机回执后确认：`io.ondeviceai.f02versioned10` 已获 `authorized`，无 recorder 正式消费者已在同一 PID `36564` 完成十轮相机页面与自然结束的 Leaks trace（详情见下方固定版本检查点）。因此未重复启动 App 或申请权限。当前受限环境的 `devicectl list devices` 返回 CoreDeviceService 初始化超时；不据此否定已完成的真机证据，也不宣称本轮重新连接成功。

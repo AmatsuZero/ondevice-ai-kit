@@ -1,16 +1,16 @@
 # P11 分组 benchmark 快照
 
-初版日期：2026-10-27；2026-11-02 纳入 iOS TTS 五次逐 run、Video SR 双后端 48 帧系统探针、公开 SDK Video SR 五次整请求及生产 SDK client 文件 ASR 五次识别资源报告。Video SR SDK 整请求与系统逐帧探针分组，文件 ASR SDK client 与直连 Speech framework 探针也分别保留来源。该快照只聚合能够从哈希固定原始 JSON 严格重算的数据；不补造历史字段，也不把不同能力的 timing 或质量指标合成总分。
+初版日期：2026-10-27；2026-11-02 纳入 iOS TTS 五次逐 run、Video SR 双后端 48 帧系统探针、公开 SDK Video SR 五次整请求及生产 SDK client 文件 ASR 五次识别资源报告。2026-11-03 因 F02 验证文档新增限定证据而刷新 readiness 来源哈希；没有新增 benchmark run 或改变 P11 门禁。Video SR SDK 整请求与系统逐帧探针分组，文件 ASR SDK client 与直连 Speech framework 探针也分别保留来源。该快照只聚合能够从哈希固定原始 JSON 严格重算的数据；不补造历史字段，也不把不同能力的 timing 或质量指标合成总分。
 
 ## 可复现入口
 
-跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、七份原始设备报告及各附属摘要/媒体/质量文件的路径、SHA-256、source kind 和 P11 能力映射。生成命令：
+跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、七份原始设备报告及各附属摘要/媒体/质量文件的路径、SHA-256、source kind 和 P11 能力映射。该入口依赖本地 ignored `artifacts/verification/` 原始证据；新 clone 需先取得相同哈希的证据包。生成命令：
 
 ```sh
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261102-sdk-asr/summary.json
+  --output artifacts/verification/p11-grouped-20261103-f02-refresh/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。
