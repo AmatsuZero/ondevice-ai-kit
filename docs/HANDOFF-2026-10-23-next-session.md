@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 相机授权答复与双端 issue 同步
+
+- 用户回复现在可以处理 F02 研究 App 的系统相机弹窗；核对现有真机回执后确认：`io.ondeviceai.f02versioned10` 已获 `authorized`，无 recorder 正式消费者已在同一 PID `36564` 完成十轮相机页面与自然结束的 Leaks trace（详情见下方固定版本检查点）。因此未重复启动 App 或申请权限。当前受限环境的 `devicectl list devices` 返回 CoreDeviceService 初始化超时；不据此否定已完成的真机证据，也不宣称本轮重新连接成功。
+- 将已验证的固定版本、Android 消费闭包、本地不可变归档和剩余门槛同文写入 GitHub F02 issue `#2` 评论 `6594372514` 与 GitLab F02 issue `#2` note `39325`；已分别回读正文，GitHub 为 `OPEN`、GitLab 为 `opened`。评论草稿保留在 ignored `artifacts/verification/f02-versioned-consumer-20261103/f02-issue-progress-20261103.md`。两端 issue 仍 open，生产依赖和原有九项受保护 dirty/untracked 文件未改；**F02/P4/P11、发布仍 open/not-ready**。
+
 ## 最新续接 — 2026-11-03 F02 本地不可变 Maven 归档待审
 
 - 在 ignored `artifacts/verification/f02-versioned-consumer-20261103/` 将固定 `0.144.6-ondevice-f02.1` 的 root/AWT/双 iOS 四个版本目录打成独立 Maven 归档；`COPYFILE_DISABLE=1` 排除 macOS `._` 条目。`verify_versioned_archive.py` 从已验证的正常发布摘要重算，**125/125 文件路径与 SHA-256 匹配，无额外文件或链接**。归档 `109,379,413 B`，SHA-256=`d042a71f6a931320f367387580341f6d05b404196099d51d969308a0a0c2e480`；`versioned-archive-manifest.json` SHA-256=`b05104f0282af5dd0d44b4d3c43168bbdc7f146e904296bcf4ba11886bc5dc76`。
