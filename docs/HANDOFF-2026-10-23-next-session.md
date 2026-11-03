@@ -8,6 +8,7 @@
 
 - 授权环境 `devicectl list devices` 回读 iPhone 16 Pro Max / UDID `00008140-0008703436D3001C` 为 `connected`；先前受限环境的 CoreDeviceService 超时不是设备离线结论。F04 真实 `zh-CN` 朗读、结束输入、取消/重入、后台与 lease drain 仍缺；已异步询问用户能否在设备旁朗读固定句“今天我们测试手机上的语音识别功能”并处理授权。尚无答复，不将等待视为录音授权，也未安装、启动或录音。
 - 从当前 HEAD `8228ba534c1a27d4ee85e5d0152480b6bd114ff7` 离线强制重链 `:demo:shared:linkDebugFrameworkIosArm64` 与 simulator 框架，**14/14 tasks executed、BUILD SUCCESSFUL**；在 ignored `artifacts/verification/f04-preflight-20261103/` 生成隔离 Speech Demo，签名 iphoneos App **BUILD SUCCEEDED**，授权环境 `codesign --verify --deep --strict` exit 0。最终 `SpeechDemo.debug.dylib` UUID=`A6BB87EC-29E6-3BDE-8977-0968DCC9CBAC`、SHA-256=`0bae58a454eb2ca8fca26c144b0c441d837d53ec1838dd77a7f8e13282e5040c`。Info.plist 含 Speech/Microphone 使用说明；这只完成可运行包预检，不是 F04 真实录音或 P11 验收。两份构建日志在同一 ignored 目录，原有九项受保护 dirty/untracked 文件未改。
+- 旧诊断包的 Apple backend 缺当前 `1110 → noResult` 修复，因此另建 ignored `status-only/` 隔离 App：只将与当前桥接/会话源码同语义的诊断日志副本纳入生成工程，Apple Speech 后端仍指向当前 `apple/`；没有导入旧 `apple-diagnostic` 后端或合成探针。签名 iphoneos 构建与授权环境 `codesign --verify --deep --strict` 均 exit 0；最终 debug dylib UUID=`CB61940F-C0D6-304F-9391-F3585E50875B`、SHA-256=`707cb9264341d90b147b2eaf74daf9c404ba1ce8bae4e0a89dd945d8c2985129`。诊断只输出 `ODAI_MIC_` 控制/终态/错误码/route/session 状态，不输出音频或转写；本地来源与包哈希见 ignored `status-only/preflight-manifest.json`（SHA-256=`9175d2184a7deb0a4a0dc764820c6403f1977776d60dc4b429bbea0a2bd44ffc`）。仍未安装、启动或录音；真实生命周期验收待用户受控朗读答复。
 
 ## 最新续接 — 2026-11-03 F11 readiness 来源哈希刷新
 
