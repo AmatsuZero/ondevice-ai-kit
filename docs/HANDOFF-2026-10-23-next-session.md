@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 归档许可材料预审
+
+- 用户再次回复现在可处理 F02 相机弹窗；已有 `io.ondeviceai.f02versioned10` 的 `authorized` 回执和同 PID 十轮无 recorder 真机 trace，因此没有重复申请权限或启动研究 App。
+- 重新运行固定 Maven 归档校验，125 个常规文件匹配、SHA-256 仍为 `d042a71f6a931320f367387580341f6d05b404196099d51d969308a0a0c2e480`。四份 POM 声明 Apache-2.0，但归档及可读取的 JAR/Klib 条目路径均无 LICENSE/NOTICE；固定 Skia 根许可含二进制分发须附版权声明、条件及免责声明的要求，Skiko 源码另有 Apache-2.0 LICENSE 与 AOSP NOTICE。第三方实际链接清单未审。具体哈希和后续门槛见[分发审查](validation/f02-distribution-review.md)。
+- 这只形成分发前的可复核缺口；归档未上传、生产依赖未切换，F02/P4/P11 与发布仍 `open/not-ready`。原有九项受保护 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-03 F11 本地证据包干净快照复现
 
 - 从当前 F11 readiness 的 105 个来源哈希、分组清单及其嵌套来源清单取并集，找到 128 个必需文件，其中 104 个是 ignored 本地文件、原始字节合计 23,425,121 B。固定这 104 个常规文件与索引，生成 ignored `artifacts/verification/p11-portable-evidence-20261103-v1/p11-evidence.tar.gz`：105 个归档成员、21,830,385 B，SHA-256=`29f1ff5058eaf697fcb2e3fef31b152efebd63baf15e17d4972f2383d86acdfc`；索引 SHA-256=`88c7ea7c7de16fffda537ce1fbfc89a360bbe99e4c72a3824bbced67aa159864`。包只包含未跟踪证据和自身索引，不覆盖跟踪路径。
