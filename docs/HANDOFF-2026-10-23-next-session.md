@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 Android + 双 iOS publication 路径缩小
+
+- 固定 Skiko ignored 副本关闭 AWT/Web、启用 Android release 与双 iOS arm64 后，KGP 2.2.20 common metadata 离线强制重编及正常 root `.module` 生成通过；后者只声明 Android+iOS，保存于 ignored `artifacts/verification/f02-ios-only-publication-20261103/android-ios-root.module.json`，SHA-256=`0d39419464d6806e90516b419954cc3c78265f7f6a8e7cb47dd9793737df3ee7`，重生字节相同。Android Kotlin release 编译通过，log SHA-256=`d733d40d23ab1cb2672456bc46e8e197feee103329219b7526ddc2ba3ee29977`。
+- 已在本机 SDK 补装 Android API 33 与 Build Tools 34.0.0，不改固定源码；完整本地发布 dry-run 通过（131 个跳过执行任务，含上游无条件创建的 AWT runtime publication），log SHA-256=`71371ed77a7d56ce360078c919108337cb82a710a83680045a1ae8b54daba21f`。真实 Android release 本地发布停在 `extractReleaseAnnotations` 获取 `intellij-core:31.2.2` JAR：在线 HTTPS 传输长时间无输出后主动停止，离线复查明确缺该 JAR；尚无 AAR、JNI runtime、二进制消费者或扩展许可结论。Web 的 JS/Wasm Kotlin 编译也通过，但 `emcc` 不在 PATH，未执行 runtime 发布；两个配置的 root metadata 已分别定哈希保存。详见[分发审查](validation/f02-distribution-review.md)。F02/P4/P11/发布仍 `open/not-ready`，九项受保护未提交修改保留。
+
 ## 最新续接 — 2026-11-03 F02 Unicode 候选材料与非 AWT metadata 对照
 
 - 固定 HarfBuzz 的生成源码引用 Unicode 16.0.0 数据；官方 UCD ReadMe 与当前 Unicode License v3 已下载、定哈希。ignored 本地 v3 审查包在 v2 基础上加入这两份材料及生成输入/输出来源表：32 文件、157,138 B、SHA-256=`dfb89b662477a93fe0511f4acfc626b9238eae820735aa728b815c722dc69d2b`，未上传；生成 C++ 的条款适用性与历史通知文字待审，不视为许可批准。
