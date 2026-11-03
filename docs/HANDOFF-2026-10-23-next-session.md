@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F04 证据进入 P11 readiness 与本地干净复跑
+
+- [P11 状态矩阵](validation/p11-status-matrix-20261027.md)已把 iOS ASR 的“麦克风录音未验”收窄为“真实生命周期有界通过、自然 CER/WER/逐 run 资源/完整离线与长期预算未验”；既有 `speech-asr-file` 固定 CAF benchmark 仍是文件输入，不混入麦克风状态日志。新 ignored `artifacts/verification/p11-readiness-20261103-f04-mic/summary.json` SHA-256=`a4d69e08389b6c5f7862110e48a21430c83dfa14c68abecc211d3b1d3788c615`，校验 **164 evidence paths / 179 source hashes / 9 行有 gap**。跟踪的 `benchmark/p11/grouped-report-manifest.json` 已指向该快照，重算 ignored `artifacts/verification/p11-grouped-20261103-f04-mic/summary.json` SHA-256=`450a136aef97ebc28e43c3dc418197034593352e4e665999c9f64691883b9fb8`；仍 **5 项能力/8 组**，所有统计 `groups` 与上一版逐值相同，`coverage` 仅 iOS ASR 未验证文字变化。相关 36 项工具测试、Python 编译与 `git diff --check` 通过；矩阵/manifest 单独提交 `892d2426385bf10233b11640352fe9b85efd964a`。
+- 从该提交的干净 `git archive` 加本地证据包重跑，四个 F04 状态校验器、P11 readiness 与 grouped 报告均通过；ignored `artifacts/verification/p11-portable-evidence-20261103-v4/p11-evidence.tar.gz` 含 177 个文件、69,465,820 B，SHA-256=`822725f9e079cdcda35fd4043325677656ce5d1a08f94826e3a437bb77094e6e`，索引 SHA-256=`a0902ba4b92a480ee991ecd461dc150b0e77c6e3fde0783f7a25adc78c143b50`，回执 `clean-replay.json` 在同目录。包未上传，对外分发前仍需内容/许可复核。**P11/发布仍 `open/not-ready`**；原有九项受保护 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-03 F04 显式 close/drain 的单次真机边界
 
 - 在上个 F04 检查点之后，只复制当前 `apple/` 到 ignored `artifacts/verification/f04-close-20261103/apple/` 并为两处 Apple Speech 源码加入状态日志；`diff -qr` 除这两处和未复制的构建缓存外无差异，diff 仅有日志语句。沿用已授权的隔离 `io.ondeviceai.probe.f04mic`，新增 `--f04-close-probe` 自动路径，不改生产 SDK、普通 Demo 或九项受保护 dirty/untracked 文件。签名真机 build 与 `codesign --verify --deep --strict` 通过；App debug dylib SHA-256=`a50783c3db47125b29e3b29fd968ba5deba24f8cfb66ef85dd8724b2e2adac73`。
