@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 P11 F04 文档哈希修复与干净复现
+
+- F04 原 `unsupportedDevice` 的有日志复现已定位为请求输入 `she-CN`；`zh-CN` 真机可用且完成识别。本轮没有改错误枚举、Demo 或生产 SDK。发现上一轮追加[麦克风验证](validation/ios-microphone-asr.md)后，旧 readiness 对该文档的固定哈希失效，`validate_p11_readiness.py` 明确报 `source hash mismatch`。保留旧快照不覆盖；新 ignored `artifacts/verification/p11-readiness-20261103-f04-doc-refresh/summary.json` 仅刷新麦克风与[分组报告](validation/p11-grouped-benchmark.md)两份文档哈希，SHA-256=`61fe84e57ed5477fe7ad10ee20b2a0c6309925b936473ba7562498c1b0b36249`。校验 **164 evidence paths / 179 source hashes / 9 行有 gap**。
+- 跟踪的 `benchmark/p11/grouped-report-manifest.json` 已改指新快照；重算 ignored `artifacts/verification/p11-grouped-20261103-f04-doc-refresh/summary.json` SHA-256=`85ef6ccaa745a3c3398114fe62e8df7e9ede8baf255611d293525737e384a12d`，8 组 `groups` 与 9 行 `coverage` 均与上一版逐值相同。修正分组报告中的旧 155/163 计数及“真实麦克风未验”文字。相关 36 项工具测试、Python 编译与 `git diff --check` 通过；manifest/报告提交 `6b1c33fa50f00c3d03d818cf65ff0641c9f66a30`。
+- 从该提交的干净 `git archive` 加 ignored v5 证据包复跑四个 F04 状态校验器、readiness 与 grouped 均通过：`artifacts/verification/p11-portable-evidence-20261103-v5/p11-evidence.tar.gz` 含 178 个文件、69,466,635 B，SHA-256=`e631054bf97e5a23cb6cbbd5942f193abcfc4234eec9809d57e750daa3677790`，索引 SHA-256=`e390ce0f0bde661c386205d9d1ff2e300742f4de20e213c17729c76db46f4e3e`，回执 `clean-replay.json` 在同目录。包未上传，对外分发前仍需内容/许可复核。原有九项受保护 dirty/untracked 文件保留；F04/P11/发布保持 `open/not-ready`。
+
 ## 最新续接 — 2026-11-03 F04 finish/cancel 确定性交错
 
 - 新增纯本地 `SpeechMicrophoneClientTests`：假原生 `finishInput()` 已进入且暂停时，公开 task 接收 `cancel()`；放行 finish、注入晚到 native success 后，结果为 `CancellationError`，finish/cancel/drain 各一次。未改生产 SDK、未启动麦克风。定向 **9/9**；正常用户环境完整 Apple Swift 套件复跑 exit 0，其中 Speech **75/75**、Identity **313/313**、Face **9/9**；日志 SHA-256=`021c50dee6e7cbf315f7e0c400ef36023b5f4c114d0ff367995a3980261f99ac`，见[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-finishcancel-交错的本地回归)。此前受限沙盒 Vision Code 9、正常用户环境首轮 Identity `busy` 的失败日志仍保留，不掩盖为通过。
