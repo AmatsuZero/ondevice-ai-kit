@@ -73,6 +73,7 @@
 		C814E8CBB34E9BB5B367332B /* IdentityTemplateLease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D92A232996FA126F753F32B /* IdentityTemplateLease.swift */; };
 		CAF02ABB82EC4CFD3C1C26E8 /* ModelDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDD1D6A74A18881F655F23F /* ModelDownloader.swift */; };
 		D1829444BA8E2D81358E27AF /* FaceObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D260AE9C59C8AB60896569 /* FaceObservation.swift */; };
+		D5019E7A502FD0FCD4067482 /* ExactCosineIdentityIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C56FCABD1A23611622F3E /* ExactCosineIdentityIndex.swift */; };
 		D572022EBBF3ED78F901459F /* IdentityStopSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7719F88D02917C7C358D4FB1 /* IdentityStopSignal.swift */; };
 		DAB68DD158DFA4D467C6DCC0 /* SpeechClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24346D636307E745B03B9CE /* SpeechClient.swift */; };
 		DDBAC062C4C652DBF34C1F10 /* ODAIKitModelStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24B559AC07B15B943927A218 /* ODAIKitModelStore.framework */; };
@@ -205,6 +206,7 @@
 		2DC0E37E2EAA2B612D892746 /* MultimodalGenerationClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultimodalGenerationClient.swift; path = Sources/ODAIKitMultimodal/MultimodalGenerationClient.swift; sourceTree = "<group>"; };
 		356B145C70501D9B48F78AC7 /* IdentityOperationTicket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityOperationTicket.swift; path = Sources/ODAIKitIdentity/IdentityOperationTicket.swift; sourceTree = "<group>"; };
 		35C45DD1192427D52D280690 /* LocalIdentityBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LocalIdentityBackend.swift; path = Sources/ODAIKitIdentity/LocalIdentityBackend.swift; sourceTree = "<group>"; };
+		363C56FCABD1A23611622F3E /* ExactCosineIdentityIndex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExactCosineIdentityIndex.swift; path = Sources/ODAIKitIdentity/ExactCosineIdentityIndex.swift; sourceTree = "<group>"; };
 		38B01455551E2B60889705D1 /* AppleVideoToolboxBackend.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppleVideoToolboxBackend.swift; path = Sources/ODAIKitAppleVideo/AppleVideoToolboxBackend.swift; sourceTree = "<group>"; };
 		4098819D18DF89E8F6C0E290 /* IdentityContractCodecs.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IdentityContractCodecs.swift; path = Sources/ODAIKitIdentity/IdentityContractCodecs.swift; sourceTree = "<group>"; };
 		40D260AE9C59C8AB60896569 /* FaceObservation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FaceObservation.swift; path = Sources/ODAIKitFace/FaceObservation.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 				08B11194300552BE993ABDDB /* AppleVideoAudioMuxer.swift */,
 				5269ECAF762D141215774D7D /* MultimodalContracts.swift */,
 				2DC0E37E2EAA2B612D892746 /* MultimodalGenerationClient.swift */,
+				363C56FCABD1A23611622F3E /* ExactCosineIdentityIndex.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -866,6 +869,7 @@
 				52A7399B5E7454CCA0E284CD /* KeychainIdentityKeyProvider.swift in Sources */,
 				B2BC68C7874ADFC190295439 /* LocalIdentityBackend.swift in Sources */,
 				E52090F8A227987A8469D8AC /* TestIdentityBackend.swift in Sources */,
+				D5019E7A502FD0FCD4067482 /* ExactCosineIdentityIndex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

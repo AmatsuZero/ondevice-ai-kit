@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-04 Apple 精确 Identity index/query
+
+- Gallery Demo 已本地提交 `cadfea8`。继续补齐 Apple 公开 encoded-image probe 的精确 cosine 1:N index/query；公开 builder 接现有 IndexStore，完整 embedding space/count/dimension/有序 Float32 LE 与当前授权模板 lease 逐位绑定，保留 fixture provenance、subject-max/topK、quality/VERIFIED policy 和最终授权 gate。同步登记 Apple SDK 分发工程源文件。详见[验证](validation/apple-exact-identity-index.md)。
+- RED 先证明 builder 缺席，再证明 codec 已通过而旧 engine 仍拒绝 encoded probe；完成后完整 Apple **481/481**，其中 Identity **322/322**；Swift Release Identity target 和 unsigned iphoneos Release framework build 均通过。仅合成向量/encoded bytes，没有新增人脸数据、模型或 runtime。独立 review 因服务端 **429** 无结论，不能称独立 APPROVE。九项保护文件哈希不变，未 push/merge/release。
+- 下一主要功能输入仍是 **Apple 真实 embedding adapter/runtime**、独立 PAD、真实 1:1/1:N 所需授权数据/校准策略，以及 Android LM 授权权重/ASR 离线资源。Apple exact query 是已实现机制，不冒充 Apple 真实识别；corner/长期资源仍后置。原 roadmap goal 保持 active。
+
 ## 最新续接 — 2026-11-04 Identity 多候选与图库 Demo
 
 - 共享 Identity 页面已接同一 bridge 内新增/选择/删除候选、多模板计数、发布/删除图库。切换候选清空 probe，验证仅取该候选最后模板；编号仅本会话有效，不保存业务名或原图/向量。OpenCV config 提供 ownership 与 UNVERIFIED gallery policy，因此实际图库发布仍 `THRESHOLD_UNVERIFIED`，不伪造校准结果。详见[验证](validation/identity-gallery-demo.md)。

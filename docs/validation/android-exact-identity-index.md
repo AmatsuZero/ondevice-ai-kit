@@ -74,6 +74,7 @@ non-streamed target/test installation succeeded. No global adb restart or device
 reboot was used. `tests.json`, XML snapshots, installed identity and original
 logs remain in the ignored evidence directory.
 
-Apple real Identity, PAD, calibrated quality,
+The subsequent [Apple exact-query slice](apple-exact-identity-index.md) adds the
+equivalent mechanism. Apple real Identity, PAD, calibrated quality,
 actual picker/consent/gallery UI, minimum-OS and sustained-resource acceptance
 remain open. No push, merge or release is implied.

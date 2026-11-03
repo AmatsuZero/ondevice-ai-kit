@@ -235,11 +235,16 @@ public actor FaceIdentification {
             let outcome: IdentificationOutcome
             if let probeEmbedding = prepared.embedding {
                 let retained = try members.map { try $0.embedding() }
-                guard try lease.indexData() == fixtureIdentificationIndex(retained), probe.fixtureID != nil else {
-                    throw IdentityError(.featureFormatUnsupported)
+                let index = try lease.indexData()
+                let values: [Double]
+                if probe.fixtureID != nil, index == (try fixtureIdentificationIndex(retained)) {
+                    values = try retained.map { try identificationCosine(probeEmbedding, $0) }
+                } else {
+                    values = try ExactCosineIdentityIndex.scores(index, probe: probeEmbedding,
+                        retained: retained, stopSignal: task.signal)
                 }
-                let scores = try Dictionary(uniqueKeysWithValues: snapshot.members.indices.map {
-                    (snapshot.members[$0].ref.id, try identificationCosine(probeEmbedding, retained[$0]))
+                let scores = Dictionary(uniqueKeysWithValues: snapshot.members.indices.map {
+                    (snapshot.members[$0].ref.id, values[$0])
                 })
                 candidates = try rankIdentificationCandidates(snapshot: snapshot, scores: scores, topK: options.topK)
                 outcome = candidates.isEmpty ? .unknown : .candidates

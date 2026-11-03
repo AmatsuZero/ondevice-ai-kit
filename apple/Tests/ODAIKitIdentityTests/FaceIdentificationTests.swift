@@ -234,10 +234,10 @@ extension FaceIdentificationTests {
 
     func testCancelAndOriginRevokeStopBackendAndChooseFinalGateWinner() async throws {
         for revoke in [false, true] {
-            let f = try await engineFixture()
-            let backend = IdentificationTestBackend(base: f.base, blocks: true)
+            let f = try await engineFixture(exactIndex: true)
+            let backend = IdentificationTestBackend(base: f.base, blocks: true, encodedVector: [1, 0])
             let engine = try f.engine(backend)
-            let task = try await engine.identify(probe: f.probe, galleryRef: f.gallery, grant: f.query,
+            let task = try await engine.identify(probe: IdentityProbe(encodedImage: Data([1]), revision: "encoded-cancel"), galleryRef: f.gallery, grant: f.query,
                 options: IdentificationOptions(revision: "1"))
             XCTAssertEqual(backend.entered.wait(timeout: .now() + 2), .success)
             if revoke { _ = try await f.identity.revokeGrant(f.origin.grantId, ownership: f.owner) }
@@ -333,8 +333,39 @@ extension FaceIdentificationTests {
         await f.close()
     }
 
-    private func engineFixture(payload: Data? = nil) async throws -> IdentificationEngineFixture {
-        let f = try await IdentificationEngineFixture(payload: payload)
+    func testEncodedImageProbeUsesExactIndexAndSubjectMaxRanking() async throws {
+        let f = try await engineFixture(exactIndex: true)
+        let backend = IdentificationTestBackend(base: f.base, encodedVector: [1, 0])
+        let engine = try f.engine(backend)
+        let probe = try IdentityProbe(encodedImage: Data([0x01, 0x02]), revision: "synthetic-encoded")
+        let task = try await engine.identify(probe: probe, galleryRef: f.gallery, grant: f.query,
+            options: IdentificationOptions(revision: "1"))
+        let result = try await task.result()
+        XCTAssertEqual(result.outcome, .candidates)
+        XCTAssertEqual(result.candidates.map(\.candidateRef), f.candidates)
+        XCTAssertEqual(result.candidates[0].score, 1, accuracy: 0.000001)
+        XCTAssertEqual(result.candidates[1].score, 0.8, accuracy: 0.000001)
+        XCTAssertEqual(result.galleryCandidateCount, 2); XCTAssertEqual(result.galleryTemplateCount, 3)
+        XCTAssertEqual(result.inputRevision, "synthetic-encoded")
+        let limited = try await engine.identify(probe: probe, galleryRef: f.gallery, grant: f.query,
+            options: IdentificationOptions(topK: 1, revision: "2"))
+        let limitedResult = try await limited.result()
+        XCTAssertEqual(limitedResult.candidates.map(\.candidateRef), [f.candidates[0]])
+        await engine.close(); await f.close()
+    }
+
+    func testEncodedProbeCannotUseLegacyFixtureIndex() async throws {
+        let f = try await engineFixture()
+        let engine = try f.engine(IdentificationTestBackend(base: f.base, encodedVector: [1, 0]))
+        let task = try await engine.identify(probe: IdentityProbe(encodedImage: Data([1]), revision: "encoded"),
+            galleryRef: f.gallery, grant: f.query, options: IdentificationOptions(revision: "1"))
+        do { _ = try await task.result(); XCTFail("encoded probe accepted fixture payload") }
+        catch let error as IdentityError { XCTAssertEqual(error.code, .featureFormatUnsupported) }
+        await engine.close(); await f.close()
+    }
+
+    private func engineFixture(payload: Data? = nil, exactIndex: Bool = false) async throws -> IdentificationEngineFixture {
+        let f = try await IdentificationEngineFixture(payload: payload, exactIndex: exactIndex)
         addTeardownBlock { try? FileManager.default.removeItem(at: f.root) }
         return f
     }
@@ -346,7 +377,7 @@ private struct IdentificationEngineFixture {
     let origin: AuthorizationGrant; let query: AuthorizationGrant; let owner: OwnershipAuthorization
     let candidates: [CandidateRef]; let gallery: GalleryRef; let policy: ThresholdPolicy
     var probe: IdentityProbe { get throws { try IdentityProbe(fixtureID: "probe", vector: [1, 0]) } }
-    init(payload: Data?) async throws {
+    init(payload: Data?, exactIndex: Bool) async throws {
         root = FileManager.default.temporaryDirectory.appendingPathComponent("identification-\(UUID())")
         let keys = IdentificationTestKeys(); authority = IdentificationTestAuthority()
         identity = try IdentityStore(root: root.appendingPathComponent("identity"), purpose: "identity",
@@ -371,7 +402,10 @@ private struct IdentificationEngineFixture {
             threshold: 0.7, qualityFloor: 0.5, operatingPoint: "fixture", datasetRevision: "synthetic-only",
             gallerySizeRange: 1...32, enrollmentRule: "fixture-multiple")
         index = try IndexStore(root: root.appendingPathComponent("index"), identityStore: identity, keyProvider: keys,
-            buildIndex: { embeddings, _ in try payload ?? fixtureIdentificationIndex(embeddings) })
+            buildIndex: { embeddings, signal in
+                if let payload { return payload }
+                return try exactIndex ? ExactCosineIdentityIndex.build(embeddings, stopSignal: signal) : fixtureIdentificationIndex(embeddings)
+            })
         let builder = try await index.createGalleryBuilder(grant: origin, policy: policy)
         for (ref, grant) in templates { try await builder.addTemplate(ref, grant: grant) }
         gallery = try await builder.publish()
@@ -413,22 +447,28 @@ private final class IdentificationTestBackend: IdentityBackend, @unchecked Senda
     private let lock = NSLock(); private var embedded = false; private var closes = 0
     private let onStop: (@Sendable () -> Void)?
     private let declaredId: String?
+    private let encodedVector: [Float]?
     var didEmbed: Bool { lock.lock(); defer { lock.unlock() }; return embedded }
     var closeCount: Int { lock.lock(); defer { lock.unlock() }; return closes }
     init(base: FixtureIdentityBackend, quality: IdentityQuality = try! IdentityQuality(faceCount: 1, score: 1), blocks: Bool = false,
-         onStop: (@Sendable () -> Void)? = nil, declaredId: String? = nil) {
-        self.base = base; self.quality = quality; self.blocks = blocks; self.onStop = onStop; self.declaredId = declaredId
+         onStop: (@Sendable () -> Void)? = nil, declaredId: String? = nil, encodedVector: [Float]? = nil) {
+        self.base = base; self.quality = quality; self.blocks = blocks; self.onStop = onStop; self.declaredId = declaredId; self.encodedVector = encodedVector
     }
     var backendId: String { declaredId ?? base.backendId }; var backendVersion: String { base.backendVersion }
     var modelBinding: ModelBinding { base.modelBinding }; var embeddingSpace: EmbeddingSpaceId { base.embeddingSpace }
     func availability() -> CapabilityAvailability { base.availability() }
     func evaluateQuality(_ probe: IdentityProbe) throws -> IdentityQuality { quality }
-    func embed(_ probe: IdentityProbe) throws -> IdentityEmbedding { try base.embed(probe) }
+    func embed(_ probe: IdentityProbe) throws -> IdentityEmbedding {
+        if probe.encodedImage != nil, let encodedVector {
+            return try IdentityEmbedding(embeddingSpace: embeddingSpace, values: encodedVector)
+        }
+        return try base.embed(probe)
+    }
     func embed(_ probe: IdentityProbe, stopSignal: IdentityStopSignal) throws -> IdentityEmbedding {
         let registration = stopSignal.registerStopHandler { self.release.signal(); self.onStop?() }; defer { registration.close() }
         lock.lock(); embedded = true; lock.unlock(); entered.signal()
         if blocks { _ = release.wait(timeout: .now() + 3) }; try stopSignal.check()
-        return try base.embed(probe)
+        return try embed(probe)
     }
     func close() { lock.lock(); closes += 1; lock.unlock() }
 }
