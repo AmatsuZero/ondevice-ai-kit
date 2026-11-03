@@ -2,7 +2,14 @@
 
 恢复入口；以最上方最新检查点为准，下方各节保留历史，不是整个项目完成结论。
 
-当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
+当前状态：**原路线图执行 closed-with-followups；本会话持续 goal 已按用户要求暂停，待新会话继续专项；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
+
+## 新会话入口 — 2026-11-03 暂停与交接
+
+- 工作树 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation`，分支 `feat/sdk-foundation`。暂停前最新功能提交 `d664f5fd8ba740376111f624ab041d5710e53f05` 包含 F04 finish/close 确定性交错测试及上一检查点；上一轮推送后 `git ls-remote` 回读 GitHub `origin` 与 GitLab `jihu` 的同名分支头均为该 SHA。新会话先复核本地/双端状态，不以此历史回读代替当前网络状态。
+- 本轮暂停前 `git status --short` 仍只有九项原有受保护未提交修改：`demo/iosApp/OnDeviceAIDemo.xcodeproj/project.pbxproj`、`docs/validation/face-identity.md`、`probes/ios-camera-lifecycle/` 下六个 Swift/README 文件、`scripts/generate-camera-resource-app.rb`。不要覆盖、清理或随其他提交一并 stage；新会话先重读实际状态。ignored `artifacts/verification/` 含本地证据与诊断副本，不属于远端提交。
+- **优先下一步**：按[专项清单](validation/foundation-followups.md)继续 F04 的可比较长期资源预算和剩余并发竞态，先确定测量口径、基线与现有覆盖，再在隔离副本执行；真实麦克风测试只在受控窗口进行，不保存音频或自然转写。`unsupportedDevice` 的有日志复现为 `she-CN` 误输入，`zh-CN` 真机成功已验证，不再要求用户重复朗读。单轮 close/drain 真机探针与新增假平台 finish/close 测试不能冒充长期预算。
+- 另一条可继续路径是 F02 固定 Skiko Android+iOS 发布：metadata/编译通过，真实发布缺 `intellij-core:31.2.2` JAR；官方 POM 已取到，本地 JAR 请求 HTTP 429，校验文件请求曾受自动审批复核 429，勿把传输失败算作源码失败或绕过审批重试。F09 生产 XCFramework 仍受 `OrderedCollections` Swift interface 校验阻断；P4/P11/发布和其他专项以各自验收证据判断，保持 `open/not-ready`。最低系统真机目前缺设备，按用户要求后置。
 
 ## 最新续接 — 2026-11-03 F04 finish/close 资源边界回归
 
