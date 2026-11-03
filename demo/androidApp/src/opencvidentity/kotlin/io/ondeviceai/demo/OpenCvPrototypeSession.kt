@@ -96,9 +96,8 @@ internal class OpenCvPrototypeSession private constructor(
                         val keys = AndroidKeystoreIdentityKeyProvider("opencv-local-prototype")
                         store = IdentityStore.open(context, "opencv-local-prototype", consent.grant.purpose, consent, keys)
                         consent.bindStore(store.storeId)
-                        indexes = IndexStore.open(context, "opencv-local-prototype", store, keys, buildIndex = { _, _ ->
-                            throw IdentityError(IdentityErrorCode.INDEX_UNAVAILABLE)
-                        })
+                        indexes = IndexStore.open(context, "opencv-local-prototype", store, keys,
+                            buildIndex = ExactCosineIdentityIndex::build)
                         val candidate = store.createCandidate(consent.grant)
                         OpenCvPrototypeSession(backend, consent, store, indexes, candidate).also { opened = it }
                     } catch (error: Throwable) {

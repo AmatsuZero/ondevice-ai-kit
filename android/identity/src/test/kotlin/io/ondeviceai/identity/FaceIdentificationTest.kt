@@ -74,7 +74,43 @@ class FaceIdentificationTest {
 
     private val fixtures = mutableListOf<IdentificationEngineFixture>()
     @AfterTest fun cleanup() { fixtures.forEach { it.close() } }
-    private fun fixture(payload: ByteArray? = null) = IdentificationEngineFixture(payload).also(fixtures::add)
+    private fun fixture(payload: ByteArray? = null, exact: Boolean = false) = IdentificationEngineFixture(payload, exact).also(fixtures::add)
+
+    @Test fun encodedImageProbeUsesExactIndexAndSubjectAggregation() {
+        val f = fixture(exact = true)
+        // Synthetic backend exercises the public encoded-image input, not fixtureID.
+        val backend = object : IdentityBackend by f.base {
+            override fun evaluateQuality(probe: IdentityProbe) = IdentityQuality(1, 1.0)
+            override fun evaluateQuality(probe: IdentityProbe, stopSignal: IdentityStopSignal): IdentityQuality {
+                stopSignal.check()
+                return evaluateQuality(probe)
+            }
+            override fun embed(probe: IdentityProbe): IdentityEmbedding {
+                assertNull(probe.fixtureID)
+                assertTrue(requireNotNull(probe.encodedImage).contentEquals(byteArrayOf(1, 2, 3)))
+                return IdentityEmbedding(embeddingSpace, listOf(1f, 0f))
+            }
+            override fun embed(probe: IdentityProbe, stopSignal: IdentityStopSignal): IdentityEmbedding {
+                stopSignal.check()
+                return embed(probe)
+            }
+        }
+        val engine = f.engine(backend)
+        val result = engine.identify(IdentityProbe(byteArrayOf(1, 2, 3), "encoded-v1"), f.gallery,
+            f.query, IdentificationOptions(topK = 2, revision = "1")).result()
+        assertEquals(IdentificationOutcome.CANDIDATES, result.outcome)
+        assertEquals(f.candidates, result.candidates.map { it.candidateRef })
+        assertEquals(3, result.galleryTemplateCount)
+        engine.close()
+    }
+
+    @Test fun exactBuilderDoesNotEnableUnverifiedGalleryPolicy() {
+        val f = fixture(exact = true)
+        assertEquals(IdentityErrorCode.THRESHOLD_UNVERIFIED, assertFailsWith<IdentityError> {
+            f.index.createGalleryBuilder(grant = f.origin,
+                policy = f.policy.copy(calibrationStatus = CalibrationStatus.UNVERIFIED, threshold = null))
+        }.code)
+    }
 
     @Test fun independentQueryDomainEpochDoesNotReplaceGalleryPolicyEpoch() {
         val f = fixture(); val engine = f.engine()
@@ -274,7 +310,7 @@ class FaceIdentificationTest {
     }
 }
 
-private class IdentificationEngineFixture(payload: ByteArray?) : AutoCloseable {
+private class IdentificationEngineFixture(payload: ByteArray?, exact: Boolean = false) : AutoCloseable {
     val root = Files.createTempDirectory("identification-engine")
     val keys = IdentificationTestKeys(); val authority = IdentificationTestAuthority()
     val identity = IdentityStore(root.resolve("identity").toFile(), "identity", authority, keys, IdentificationTestWall, IdentificationTestMono)
@@ -284,7 +320,9 @@ private class IdentificationEngineFixture(payload: ByteArray?) : AutoCloseable {
     val candidates = mutableListOf<CandidateRef>()
     val policy = ThresholdPolicy("identify-policy", "1", base.embeddingSpace, "cosine", ScoreDirection.HIGHER_IS_BETTER,
         CalibrationStatus.VERIFIED, IdentityPolicyKind.IDENTIFICATION, 0.7, 0.5, "fixture", "synthetic-only", 1..32, "fixture-multiple")
-    val index = IndexStore(root.resolve("index"), identity, keys) { embeddings, _ -> payload ?: fixtureIdentificationIndex(embeddings) }
+    val index = IndexStore(root.resolve("index"), identity, keys) { embeddings, signal ->
+        payload ?: if (exact) ExactCosineIdentityIndex.build(embeddings, signal) else fixtureIdentificationIndex(embeddings)
+    }
     val gallery: GalleryRef
     val probe get() = IdentityProbe("probe", listOf(1f, 0f))
     init {

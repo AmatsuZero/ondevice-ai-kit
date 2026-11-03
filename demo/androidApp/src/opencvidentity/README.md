@@ -31,9 +31,11 @@ accuracy. Multiple faces are rejected. Input is bounded to 10 MiB encoded,
 to 640 for YuNet. Upstream alignment produces 112×112 BGR crops, SFace internally
 swaps RGB, and the 128 float features are L2-normalized.
 
-**验证** deliberately returns `THRESHOLD_UNVERIFIED`. Production 1:N index/query
-support and calibrated gallery policies remain incomplete, and no PAD backend
-is supplied. Tutorial thresholds are not adopted. Native inference is blocking:
+**验证** deliberately returns `THRESHOLD_UNVERIFIED`. Android now supplies a
+bounded exact cosine 1:N index/query implementation, wired into this session;
+gallery publication still requires a calibrated policy, so this prototype does
+not expose a real identification outcome. See the [index validation](../../../../docs/validation/android-exact-identity-index.md).
+No PAD backend is supplied. Tutorial thresholds are not adopted. Native inference is blocking:
 cancel suppresses publication and waits for the current native call; fast native
 abort, sustained memory/thermal/latency, minimum-system and actual picker UI
 acceptance remain separate work.

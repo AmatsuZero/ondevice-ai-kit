@@ -20,7 +20,9 @@ calibration data and is neither tracked nor bundled.
 - The enrollment quality score is binary valid landmark geometry, with explicit
   host floor 1. It is not calibrated recognition quality. The verification
   policy remains `UNVERIFIED` with no guessed numeric threshold. Real 1:N
-  index/query implementation, its operating policies and PAD remain unfinished.
+  operating policies and PAD remain unfinished. The subsequent [exact-index
+  slice](android-exact-identity-index.md) supplies Android's non-fixture 1:N
+  index/query mechanism without changing the calibration gate.
 
 ## Fixed upstream evidence
 
@@ -108,7 +110,7 @@ for any new biometric fixture; this local NASA sample approval does not extend
 to other people, data collection, packaging or calibration.
 
 Actual DocumentsUI import, explicit consent/button behavior, repeated enrollment
-UI, natural recognition/PAD quality, calibrated policies, 1:N production index,
+UI, natural recognition/PAD quality, calibrated policies and real-model 1:N acceptance,
 Apple real model integration, default/minimum OS device matrix, long-term/native
 GC resource behavior, process-death cleanup and binary consumers remain open.
 No push, merge, publication or production registration is implied.

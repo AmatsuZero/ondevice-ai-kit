@@ -122,7 +122,7 @@ class IdentificationTask internal constructor(
         try { result() } catch (_: IdentityError) { }
     }
 }
-/** Fixed-snapshot query engine; this exploration implementation accepts only internal fixture indexes. */
+/** Fixed-snapshot query engine with exact cosine search and internal fixture compatibility. */
 class FaceIdentification(private val identityStore: IdentityStore, private val indexStore: IndexStore,
     defaultBackendId: String, backends: List<IdentityBackend>,
     private val monotonicClock: IdentityMonotonicClock = SystemIdentityMonotonicClock) : AutoCloseable {
@@ -201,9 +201,11 @@ class FaceIdentification(private val identityStore: IdentityStore, private val i
                 candidates = emptyList(); outcome = IdentificationOutcome.INSUFFICIENT_QUALITY
             } else {
                 val retained = members.map { it.embedding }
-                if (!read.indexData().contentEquals(fixtureIdentificationIndex(retained)) || probe.fixtureID == null)
-                    throw IdentityError(IdentityErrorCode.FEATURE_FORMAT_UNSUPPORTED)
-                val scores = snapshot.members.indices.associate { snapshot.members[it].ref.id to identificationCosine(probeEmbedding, retained[it]) }
+                val index = read.indexData()
+                val values = if (probe.fixtureID != null && index.contentEquals(fixtureIdentificationIndex(retained))) {
+                    retained.map { identificationCosine(probeEmbedding, it) }
+                } else ExactCosineIdentityIndex.scores(index, probeEmbedding, retained, read.operationSignal)
+                val scores = snapshot.members.indices.associate { snapshot.members[it].ref.id to values[it] }
                 candidates = rankIdentificationCandidates(snapshot, scores, options.topK)
                 outcome = if (candidates.isEmpty()) IdentificationOutcome.UNKNOWN else IdentificationOutcome.CANDIDATES
             }

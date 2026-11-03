@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 Android 精确 1:N index/query
+
+- 补齐 Android `ExactCosineIdentityIndex` 与 encoded-image 真实查询路由，按当前授权 template leases 验证完整 embedding-space/顺序/向量，使用现有 subject-max/topK/策略/撤销/删除机制。OpenCV session 已换为实际 builder；不再是 fixture-only。详见[验证](validation/android-exact-identity-index.md)。
+- Identity **327/327**、默认 Demo **48/48**、三 opt-in Demo **53/53**、OpenCV backend **6/6**；默认/组合 APK、test APK、双模块 lint 和 Identity release AAR/POM 通过。有界独立复审最终零 finding、APPROVE；不代表完整分支通过。
+- TECNO KM9/API35 最终源码 runId=`329669f2-2921-4bd6-abdc-2f0cf130bd40`，真实检测/对齐/embedding/注册/删除与验证/图库未校准拒绝通过；已核对安装 APK 哈希。一次 USB 流式安装卡住后，只结束本次 client、按 serial reconnect，非流式重装成功。ignored 证据 `artifacts/verification/android-exact-identity-index-20261103/`。九项保护文件哈希未变，未 push/merge/release。
+- **仍缺的核心功能/输入**：实际模型 1:1/1:N 识别结果需要授权数据与校准策略，当前仍 `THRESHOLD_UNVERIFIED`；可用多用户图库 UI、Apple 真实 Identity、独立 PAD 尚未交付。Android LM 仍缺授权权重、ASR 缺离线资源。真实 picker/同意/注册 UI、自然质量和发布验收未验；长期 corner/resource 继续后置。下面“1:N index/query 尚未实现”为本切片之前的历史状态。
+
 ## 最新续接 — 2026-11-03 Android 真实 Identity 主流程
 
 - 用户批准可选 OpenCV 4.12.0 与官方 YuNet/SFace 权重，并单独批准 NASA public-domain astronaut 仅作本地流程验证。新增 `android:backend-opencv-identity`，真实 CPU 检测→五点对齐→128维归一化 embedding；Demo `-PenableOpenCvIdentity=true` 接模型 ZIP 导入、显式本机授权、AndroidIdentityBridge/Keystore 加密注册及删除。默认无 vendor runtime，SR+LM+Identity 三者组合通过。详见[验证](validation/android-opencv-identity-demo.md)与[使用](../demo/androidApp/src/opencvidentity/README.md)。

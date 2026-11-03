@@ -14,9 +14,10 @@ The historical no-download/no-dependency statements below describe the earlier
 research checkpoint. The Android experiment supersedes those statements only
 for this approved local scope.
 
-Production 1:N index/query remains unimplemented; the prototype returns typed
-`INDEX_UNAVAILABLE`. Verification has no calibrated policy and rejects with
-`THRESHOLD_UNVERIFIED`. Apple real Identity, independent PAD, authorized accuracy
+Android's [exact cosine 1:N index/query](android-exact-identity-index.md) now
+accepts encoded-image probes and is wired into the prototype. Gallery publication
+still requires a calibrated identification policy; the prototype rejects it
+with `THRESHOLD_UNVERIFIED`. Verification also has no calibrated policy. Apple real Identity, independent PAD, authorized accuracy
 data, training-data/redistribution review, minimum-OS and sustained-resource
 acceptance remain open. The approved portrait demonstrates flow only.
 

@@ -66,6 +66,16 @@ class IdentityModelInstrumentation : Instrumentation() {
                                 override fun onFailure(error: IdentityBridgeFailure) { failure.complete(error) }
                             })
                         check((failure.await() as? IdentityBridgeFailure.Rejected)?.code == io.ondeviceai.binding.IdentityErrorCode.THRESHOLD_UNVERIFIED)
+                        val galleryFailure = CompletableDeferred<IdentityBridgeFailure>()
+                        session.bridge.createGalleryBuilder(null, session.configuration.grant,
+                            IdentityGalleryOptions(IdentityThresholdPolicy(OpenCvIdentityModel.unverifiedPolicy(
+                                io.ondeviceai.identity.IdentityPolicyKind.IDENTIFICATION).canonicalJSON()), "subject-max-v1"),
+                            callback = object : IdentityCallback<IdentityGalleryBuilderReference> {
+                                override fun onSuccess(value: IdentityGalleryBuilderReference) { galleryFailure.completeExceptionally(IllegalStateException("uncalibrated gallery admitted")) }
+                                override fun onFailure(error: IdentityBridgeFailure) { galleryFailure.complete(error) }
+                            })
+                        check((galleryFailure.await() as? IdentityBridgeFailure.Rejected)?.code == io.ondeviceai.binding.IdentityErrorCode.THRESHOLD_UNVERIFIED)
+                        report.put("unverifiedGalleryRejected", true)
                         report.put("unverifiedPolicyRejected", true).put("detectionAlignmentVerdict", "passed")
                             .put("approvedFixtureEnrolled", true).put("backendEmbeddingDimension", 128)
                             .put("fixtureSha256", fixtureHash)
