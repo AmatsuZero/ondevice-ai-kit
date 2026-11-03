@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F02 本地不可变 Maven 归档待审
+
+- 在 ignored `artifacts/verification/f02-versioned-consumer-20261103/` 将固定 `0.144.6-ondevice-f02.1` 的 root/AWT/双 iOS 四个版本目录打成独立 Maven 归档；`COPYFILE_DISABLE=1` 排除 macOS `._` 条目。`verify_versioned_archive.py` 从已验证的正常发布摘要重算，**125/125 文件路径与 SHA-256 匹配，无额外文件或链接**。归档 `109,379,413 B`，SHA-256=`d042a71f6a931320f367387580341f6d05b404196099d51d969308a0a0c2e480`；`versioned-archive-manifest.json` SHA-256=`b05104f0282af5dd0d44b4d3c43168bbdc7f146e904296bcf4ba11886bc5dc76`。
+- 这是**本地待审候选**：未上传 GitHub/GitLab、未进入 CI 或生产依赖。正式分发仍需确定可供消费者取得的托管位置、版本冻结/撤销责任和校验流程。F02 跟踪评论同文草稿已存为 ignored `f02-issue-progress-20261103.md`；GitHub issue `#2` 最后仍停在原生回归，GitLab issue `#2` 为 open，但读取 GitLab 最近 notes 连续遇自动审批 429/超时，命令未执行，暂未向任一端写新评论，避免不同步。foundation 原有九项 dirty/untracked 文件未改；**F02/P4/P11、发布仍 open/not-ready**。
+
 ## 最新续接 — 2026-11-03 F02 上游固定源码与 Android 消费闭包
 
 - 官方 JetBrains/skia `skiko` 分支固定提交 `5e54fca0283d12e0ad303d32aa87c7d13f25eef6` 的 `AtlasTextOp.cpp` 仍是 `thread_local void* gCache`，不含 `CacheOwner`；有限关键词的官方 PR 搜索没有匹配，不证明其他 PR 或未来版本不存在。最新 Skiko release 的首次只读查询返回 `v0.156.1`，但保存元数据的追加调用被自动审批 HTTP 429 拒绝、未执行；不将 release 查询当作固定候选证据。
