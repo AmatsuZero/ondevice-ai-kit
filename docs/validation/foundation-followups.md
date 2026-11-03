@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-04 F10 真机 UI 更新：普通 Apple Demo 已通过系统 Files 图片选择取消/重入/真实注册/未校准验证拒绝/删除停用及模型文件夹导入，**9/9 观察检查**。使用隔离本机 IdentityInput 来源，仅含既有获批图片/固定模型，不写 Photos；普通 App 已无参数恢复。见[真实界面证据](apple-opencv-identity.md#2026-11-04-ordinary-demo-system-files-ui)。这关闭本地 Files provider/自动化点击子项；人工触摸、外部 provider 与校准/PAD 仍缺，下方“实际系统 provider/触控未验”为本检查点之前的历史状态。
+
 2026-11-04 F10 Files 输入更新：可选 Apple host 新增“从文件选择图片”，无需写入 Photos；同一生产读取 handler→opaque probe→真实注册的 iPhone 主流程 **18/18**，普通/flag-disabled Demo 构建通过，普通 App 已恢复。实际系统 provider/触控未验，独立复审 429 无结论。见[验证](apple-opencv-identity.md#2026-11-04-files-image-input)。独立 PAD [官方候选](pad-model-candidate.md)已形成具体本机试验方案，授权等待期间未下载新模型。
 
 2026-11-04 Apple F10 更新（`82c1cc3`）：已实现[可选 Apple OpenCV 真实 Identity](apple-opencv-identity.md)，固定 YuNet/SFace 完成检测、对齐、128维 embedding、模型导入、显式同意与加密注册/整授权域删除，并接入现有[精确 cosine index/query](apple-exact-identity-index.md)和共享 Demo。iPhone native/session **21/21**、Demo host→bridge→shared ViewModel **15/15**；默认 Apple **481/481**、可选 host contracts **3/3**，device/simulator test build 与普通 Demo 构建通过，模拟器测试未执行。两候选复用同一获批图片，不证明不同人的识别或准确率；1:1/1:N 策略仍 UNVERIFIED，独立 PAD、授权校准数据及实际触控/picker 验收仍缺。独立 reviewer 两项具体意见已修，随后服务 429，无最终 APPROVE。原 P4/P11/发布门槛不变。

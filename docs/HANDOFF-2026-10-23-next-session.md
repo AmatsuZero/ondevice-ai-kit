@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Apple Identity Files 输入
+## 最新续接 — 2026-11-04 Apple Identity 真机系统 Files/UI
+
+- 普通 `0e215bb` Demo、无 validation 参数，经真机 UI 自动化完成系统图片 picker 取消/重入、本地 Files 选择获批图片、共享输入 ready、点击注册得到 `ENROLLED · opencv.identity.apple` 与1模板、验证拒绝 `THRESHOLD_UNVERIFIED`、全 grant 删除停用，以及系统文件夹 picker 导入两份固定模型。重启普通 App 为 model-ready、无活动会话/输入；**9/9 观察检查**。见[完整边界](validation/apple-opencv-identity.md#2026-11-04-ordinary-demo-system-files-ui)及[复现](../probes/ios-opencv-identity/FILES-UI.md)。
+- 隔离来源 `io.ondeviceai.fixture.identityfiles` 仅把既有获批图片/models 放在本机 Documents，系统 Files 的 IdentityInput 可见；来源 App 保留作复现，真实 Demo 没有增加 file-sharing 标志。读取回传图哈希与已批准 NASA 图相同，无 Photos 写入、新样本/模型、相机/麦克风或解锁。普通 App binary 与上轮 inventory 相符；9项保护不变。ignored 证据 `artifacts/verification/identity-files-ui-20261104/`；未重试429复审。
+- 这关闭的是本地 Files provider/自动化点击主流程，人工触摸、任意外部 provider、准确率/校准与 PAD 仍未验；不提升为 P4/P11/发布完成。下一主功能仍依赖下方列明的 PAD 新模型授权、校准数据/策略、Android LM/ASR 资源；已发出的 PAD 授权问题仍待答复，不视自动续接为授权。
+
+## 上一检查点 — 2026-11-04 Apple Identity Files 输入
 
 - 可选 Apple Identity host 新增“从文件选择图片”，复用现有 ImageIO 方向变换与 controller/opaque probe/注册流程；读取在主线程外，10 MiB 上限，security scope 覆盖解码。失败清除旧身份输入，可重试；未写入 Photos。
 - 新版真实 iPhone host→bridge→ViewModel **18/18**，runId `0A1A9BEA-3721-4EB6-A21E-D7994245FC28`，包含文件输入/错误文件后重试与真实 SFace 注册；验证/普通/flag-disabled Demo 均构建通过，普通 App 已无参数恢复。证据 `artifacts/verification/identity-files-input-20261104/`，见[Files 验证](validation/apple-opencv-identity.md#2026-11-04-files-image-input)。系统 Files provider/触控仍未验，不能把程序化 handler 当 UI 验收。独立 review 再次 429，无结论；九项保护不变，仅本地工作。
