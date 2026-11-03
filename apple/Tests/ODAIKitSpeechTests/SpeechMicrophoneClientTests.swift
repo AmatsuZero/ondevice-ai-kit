@@ -7,20 +7,30 @@ private actor ControlledMicrophoneTask: SpeechMicrophoneRecognitionTask {
     private var waiter: CheckedContinuation<SpeechRecognitionResult, Error>?
     private let ignoresCancellation: Bool
     let cancelled: XCTestExpectation?
+    let finishEntered: XCTestExpectation?
+    private var finishWaiter: CheckedContinuation<Void, Never>?
     private(set) var resultCalls = 0
     private(set) var finishCalls = 0
     private(set) var cancelCalls = 0
 
-    init(ignoresCancellation: Bool = false, cancelled: XCTestExpectation? = nil) {
+    init(ignoresCancellation: Bool = false, cancelled: XCTestExpectation? = nil,
+         finishEntered: XCTestExpectation? = nil) {
         self.ignoresCancellation = ignoresCancellation
         self.cancelled = cancelled
+        self.finishEntered = finishEntered
     }
     func result() async throws -> SpeechRecognitionResult {
         resultCalls += 1
         if let outcome { return try outcome.get() }
         return try await withCheckedThrowingContinuation { waiter = $0 }
     }
-    func finishInput() async { finishCalls += 1 }
+    func finishInput() async {
+        finishCalls += 1
+        if let finishEntered {
+            await withCheckedContinuation { finishWaiter = $0; finishEntered.fulfill() }
+        }
+    }
+    func releaseFinish() { finishWaiter?.resume(); finishWaiter = nil }
     func cancel() async {
         cancelCalls += 1
         cancelled?.fulfill()
@@ -48,6 +58,7 @@ private actor ControlledMicrophoneBackend: SpeechMicrophoneRecognitionBackend {
     private var drainWaiters: [CheckedContinuation<Void, Never>] = []
     private var heldAvailability = false
     private var holdDrain: Bool
+    private(set) var drainCalls = 0
     private(set) var startCalls = 0
     private(set) var closeCalls = 0
 
@@ -80,6 +91,7 @@ private actor ControlledMicrophoneBackend: SpeechMicrophoneRecognitionBackend {
         return tasks[index]
     }
     func drain() async {
+        drainCalls += 1
         if holdDrain {
             await withCheckedContinuation { drainWaiters.append($0); drainEntered?.fulfill() }
         }
@@ -175,6 +187,29 @@ final class SpeechMicrophoneClientTests: XCTestCase {
         let cancels = await native.cancelCalls
         let finishes = await native.finishCalls
         XCTAssertEqual(cancels, 1); XCTAssertEqual(finishes, 0)
+        await client.close()
+    }
+
+    func testCancelWhileFinishInputIsSuspendedWinsOverLateNativeSuccess() async throws {
+        let finishing = expectation(description: "native finish entered")
+        let native = ControlledMicrophoneTask(ignoresCancellation: true, finishEntered: finishing)
+        let backend = ControlledMicrophoneBackend(tasks: [native])
+        let client = try SpeechRecognitionClient(defaultBackendId: backend.backendId, backends: [backend])
+        let task = try await client.startMicrophone(request)
+
+        let finish = Task { await task.finishInput() }
+        await fulfillment(of: [finishing], timeout: 1)
+        await task.cancel()
+        await native.releaseFinish()
+        await finish.value
+        await native.complete(.success(fixture))
+
+        do { _ = try await task.result(); XCTFail("Cancellation must win over late success") }
+        catch { XCTAssertTrue(error is CancellationError) }
+        let counts = await (native.finishCalls, native.cancelCalls, backend.drainCalls)
+        XCTAssertEqual(counts.0, 1)
+        XCTAssertEqual(counts.1, 1)
+        XCTAssertEqual(counts.2, 1)
         await client.close()
     }
 

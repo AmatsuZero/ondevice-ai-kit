@@ -4,6 +4,11 @@
 
 [计划](../superpowers/plans/2026-10-20-ios-microphone-asr.md)、[设计](../superpowers/specs/2026-10-20-ios-microphone-asr-design.md)、[恢复交接](../HANDOFF-2026-10-20-speech-demo-bridge.md)。本机原始日志位于忽略目录 `.superpowers/sdd/2026-10-20-ios-microphone-asr/`，下文简称 `logs/`。
 
+## 2026-11-03 finish/cancel 交错的本地回归
+
+- `SpeechMicrophoneClientTests` 新增确定性交错：让假原生任务的 `finishInput()` 暂停，在它返回前调用公开 task 的 `cancel()`，之后放行 finish 并注入晚到 native success。当前生产协调层返回 `CancellationError`，原生 finish/cancel 各调用一次，backend drain 一次；没有改生产源码，也不采集麦克风。定向测试 **9/9**，正常用户环境完整 Apple Swift 套件最终 exit 0，其中 Speech **75/75**、Identity **313/313**、Face **9/9**。完整复跑日志位于 ignored `artifacts/verification/f04-concurrency-20261103/apple-full-authorized-rerun.log`，SHA-256=`021c50dee6e7cbf315f7e0c400ef36023b5f4c114d0ff367995a3980261f99ac`。
+- 首次受限沙盒全套运行的 Vision 用例报 `com.apple.Vision Code=9`；正常用户环境单独复跑该用例通过。随后正常用户环境全套首轮中一个未修改的 Identity 用例暂报 `busy`，单独复跑和完整复跑均通过。保留两次失败原始日志于同一 ignored 目录，不把它们改写为通过。此测试只覆盖一个受控 SDK 交错，不证明原生音频所有竞态或长期资源预算；F04/P11 与发布仍 `open/not-ready`。
+
 ## 2026-11-03 真机 F04 状态与 locale 诊断
 
 - iPhone17,2 / iOS 27.0.1，隔离 `io.ondeviceai.probe.f04mic`（显示名 `F04MicProbe`）采用当前 SDK、Demo Host 和状态日志桥接；普通 Demo 的安装与源码未覆盖。首轮同 PID `36951` 有 **3/3** 次 `start → session active → finishInput → session inactive → terminal success`，其中后两次为同进程重入。状态日志不保存音频或转写；ignored `artifacts/verification/f04-mic-live-20261103/console-unique.log` SHA-256=`57f8e8a3df30b66af6b7b359698912dbfa3310cbedc2e0487a672dde153da789`，`validate_status.py` 复算为三轮 success。用户同时确认看见橙色录音点与“ASR 完成”。

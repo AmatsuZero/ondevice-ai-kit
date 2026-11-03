@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F04 finish/cancel 确定性交错
+
+- 新增纯本地 `SpeechMicrophoneClientTests`：假原生 `finishInput()` 已进入且暂停时，公开 task 接收 `cancel()`；放行 finish、注入晚到 native success 后，结果为 `CancellationError`，finish/cancel/drain 各一次。未改生产 SDK、未启动麦克风。定向 **9/9**；正常用户环境完整 Apple Swift 套件复跑 exit 0，其中 Speech **75/75**、Identity **313/313**、Face **9/9**；日志 SHA-256=`021c50dee6e7cbf315f7e0c400ef36023b5f4c114d0ff367995a3980261f99ac`，见[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-finishcancel-交错的本地回归)。此前受限沙盒 Vision Code 9、正常用户环境首轮 Identity `busy` 的失败日志仍保留，不掩盖为通过。
+- 这是一个 SDK 竞态回归，不代表原生音频所有交错、真机长期资源或自然质量完成。原有九项受保护 dirty/untracked 文件保留；F04/P11/发布继续 `open/not-ready`。
+
 ## 最新续接 — 2026-11-03 F04 双平台跟踪与 F09 前置门槛复核
 
 - 用户确认 F04MicProbe 在返回前台后的最后一次 `zh-CN` 朗读、结束输入显示“ASR 完成”；该轮的状态日志及校验已在下方 F04 检查点和[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)保留，不重复录音。已把提交 `e5fa877` 的有界结果写入 [GitLab F04 #4](https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit/-/issues/4#note_39518) 和 [GitHub F04 #4](https://github.com/AmatsuZero/ondevice-ai-kit/issues/4#issuecomment-6600663373)；GitHub 回读为 1 条评论、issue 仍 OPEN。两端父专项保持开放，P11/发布仍 `open/not-ready`。
