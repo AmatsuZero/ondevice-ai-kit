@@ -208,6 +208,43 @@ final class AppleSpeechMicrophoneTests: XCTestCase {
         XCTAssertEqual(releasesAfterBarrier, 1)
     }
 
+    func testCloseDuringSuspendedFinishWaitsForCaptureAndSessionRelease() async throws {
+        let fixture = try makeBackend()
+        fixture.microphone.holdStop = true
+        let task = try await fixture.backend.startMicrophone(request)
+        let finishing = Task { await task.finishInput() }
+        await waitUntil { fixture.microphone.stopEntered }
+
+        var closeReturned = false
+        let closing = Task { await fixture.backend.close(); closeReturned = true }
+        var closeStarted = false
+        for _ in 0..<1_000 {
+            if await fixture.backend.availability().reason == .closed {
+                closeStarted = true
+                break
+            }
+            await Task.yield()
+        }
+        XCTAssertTrue(closeStarted)
+        XCTAssertFalse(closeReturned)
+        let releasesBeforeStop = await fixture.lease.count()
+        XCTAssertEqual(releasesBeforeStop, 0)
+        XCTAssertEqual(fixture.microphone.releaseCount, 0)
+
+        fixture.microphone.releaseStop()
+        await finishing.value
+        await waitUntil { fixture.microphone.cancelCount == 1 }
+        fixture.microphone.complete()
+        await fixture.clock.advance(by: 0.02)
+        await closing.value
+        await assertCancellation(task)
+        XCTAssertEqual(fixture.microphone.stopCount, 1)
+        XCTAssertEqual(fixture.microphone.endAudioCount, 1)
+        XCTAssertEqual(fixture.microphone.releaseCount, 1)
+        let releasesAfterClose = await fixture.lease.count()
+        XCTAssertEqual(releasesAfterClose, 1)
+    }
+
     func testCancelOverridesLateFinalAndIsIdempotent() async throws {
         let fixture = try makeBackend()
         let task = try await fixture.backend.startMicrophone(request)

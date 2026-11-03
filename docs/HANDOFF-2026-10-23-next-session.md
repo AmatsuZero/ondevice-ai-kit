@@ -4,6 +4,11 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F04 finish/close 资源边界回归
+
+- 用户指出 `unsupportedDevice` 已定位；有日志的失败请求为误输入 `she-CN`，`zh-CN` 真机已成功，勿再按设备不支持中文追查或要求重复朗读。无日志的更早失败不能反推输入值；精确边界见[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)。
+- 新增 `AppleSpeechMicrophoneTests.testCloseDuringSuspendedFinishWaitsForCaptureAndSessionRelease`：假平台 `stopCapture` 暂停时并发 backend `close()`，确认 close 已开始但未返回、lease 和原生 handle 未释放；放行 stop 后取消、native completed、release 各一次，最终 `CancellationError`。只使用可控桥接，不启动麦克风，不改生产 SDK。定向 Speech 测试 **76/76**，0 failures，ignored `artifacts/verification/f04-finish-close-20261103/speech-tests.log` SHA-256=`c4c1b72c3035daaaa55c5fe6135a666a96e56832c2e81b45388c39165582bd9a`；`git diff --check` 通过。这只补一个确定性交错，长期真机资源预算、自然质量、离线矩阵和 TTS 仍未验；F04/P11/发布保持 `open/not-ready`。九项受保护 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-03 F02 Android + 双 iOS publication 路径缩小
 
 - 固定 Skiko ignored 副本关闭 AWT/Web、启用 Android release 与双 iOS arm64 后，KGP 2.2.20 common metadata 离线强制重编及正常 root `.module` 生成通过；后者只声明 Android+iOS，保存于 ignored `artifacts/verification/f02-ios-only-publication-20261103/android-ios-root.module.json`，SHA-256=`0d39419464d6806e90516b419954cc3c78265f7f6a8e7cb47dd9793737df3ee7`，重生字节相同。Android Kotlin release 编译通过，log SHA-256=`d733d40d23ab1cb2672456bc46e8e197feee103329219b7526ddc2ba3ee29977`。
