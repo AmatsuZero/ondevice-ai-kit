@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户随后要求继续可执行专项，goal active；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新续接 — 2026-11-03 F04 真机麦克风结束、取消后重入与 locale 误输入诊断
+
+- iPhone17,2 / iOS 27.0.1 上，隔离 `F04MicProbe` 首轮同 PID `36951` 经当前 SDK/Demo Host 实际完成三次 `start → finishInput → success`，每次 audio session 先 active 后 inactive；用户看到橙点与“ASR 完成”。ignored `artifacts/verification/f04-mic-live-20261103/status-summary.json` 由 `validate_status.py` 复算 **3/3 success**，原始状态日志 SHA-256=`57f8e8a3df30b66af6b7b359698912dbfa3310cbedc2e0487a672dde153da789`。此前 XCTest 在进入测试方法前 UI automation mode 超时，不计麦克风结果。首轮研究 PID 已精确终止。
+- 用户随后在未连接日志的新进程报告 `BACKEND_UNAVAILABLE unsupportedDevice`。只在 ignored 隔离副本新增 Speech metadata 状态日志并重新安装同一研究 bundle；新 PID `36974` 启动时 `zh-CN` recognizer 存在、`isAvailable=true`、`supportsOnDeviceRecognition=true`。本次复现的首次错误请求实际为 `she-CN`，recognizer 为 nil，两个支持位 false，终态 `SpeechClientError`；因此这次失败来自输入 locale，**不能倒推**先前无日志进程的具体输入，也不能说设备不支持 `zh-CN`。
+- 改为 `zh-CN` 后同 PID 验到 `cancel → session inactive → terminal cancelled`，用户看到 `CANCELLED`；再开始、朗读固定句、结束输入后 `session inactive → terminal success`，用户看到“ASR 完成”。其间两次较短 `finishInput` 返回 `SpeechRecognitionError`，子类型未记录，不算成功。第二轮 ignored `artifacts/verification/f04-metadata-20261103/summary.json` SHA-256=`617aea490f7446ae0de241515041d4c73df7b1d177c36f59f0130105a47768fa`；筛选状态日志 SHA-256=`faf09f86a2a91be80048812f616b963d1a9fa80f5ee35bdf2d534df23a16b495`，无音频/转写。PID `36974` 精确终止并回读缺席。
+- 下一轮 PID `36985` 在用户上滑回桌面并返回后，记录 `start → cancel → session inactive → terminal cancelled`，用户看到 `CANCELLED`；返回前台再朗读、结束输入，记录 `start → finishInput → session inactive → terminal success`，用户看到“ASR 完成”。`artifacts/verification/f04-metadata-20261103/background-summary.json` SHA-256=`4f21d7f333c240ff6404266e839de5123c1df56bfd4dfb9edac62f58211428b9`，状态日志 SHA-256=`addb5c94afdb234d9092663d9d89425a8ab63d0c5bece236d113c31eabec2eab`；仅终止该 PID，普通 SpeechDemo PID `34863` 保留。日志本身无 UIKit 生命周期时间戳，后台动作由用户操作回报。详见[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)。显式 close、完整 drain、准确率、离线和最低系统仍未验；F04/P11 与发布保持 `open/not-ready`。原有九项受保护 dirty/untracked 文件未改。
+
 ## 最新续接 — 2026-11-03 F11 第二场景纳入 P11 readiness 与本地可搬移复现
 
 - 第二场景公开 SDK 五次真机证据已独立纳入 ignored `artifacts/verification/p11-readiness-20261103-cross-scene/summary.json`，SHA-256=`be07562ac93dd209b673d60cf13c4cc0eb50956c739d31a00323ad959dc89bdd`；readiness 校验 **155 evidence paths / 163 source hashes / 9 行有 gap**。跟踪的 `benchmark/p11/grouped-report-manifest.json` 已指向该快照，重算 `artifacts/verification/p11-grouped-20261103-cross-scene/summary.json` SHA-256=`c8b646e52716e470ca6dde531ac8b336d90fa84f519a42c3f22d3874320a9c5a`；`groups` 与 `coverage` 均与上一版逐值相同，仍 **5 项能力/8 组**、`open/not-ready`。新场景与首场景五次请求、20 次持续请求各自独立，不合组。

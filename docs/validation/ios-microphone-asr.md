@@ -1,8 +1,17 @@
 # iOS 麦克风 ASR 验证记录
 
-日期：2026-10-28。实现基线 `d60867c`；locale admission 修复已提交 `36567f2`。真实录音窗口首个成功后仍有1110失败，取消/重入与中文自然录音尚未收口；Task1–5独立审查已通过。P6 和整个 roadmap 保持未收口。
+最初记录日期：2026-10-28；2026-11-03 新增 F04 真机结果。实现基线 `d60867c`；locale admission 修复已提交 `36567f2`。历史窗口曾出现 1110；本次已取得真实中文麦克风结束、取消和取消后重入的有界成功，其他 F04 退出项仍开放。Task1–5 独立审查已通过，P6 原验收仍未收口。
 
 [计划](../superpowers/plans/2026-10-20-ios-microphone-asr.md)、[设计](../superpowers/specs/2026-10-20-ios-microphone-asr-design.md)、[恢复交接](../HANDOFF-2026-10-20-speech-demo-bridge.md)。本机原始日志位于忽略目录 `.superpowers/sdd/2026-10-20-ios-microphone-asr/`，下文简称 `logs/`。
+
+## 2026-11-03 真机 F04 状态与 locale 诊断
+
+- iPhone17,2 / iOS 27.0.1，隔离 `io.ondeviceai.probe.f04mic`（显示名 `F04MicProbe`）采用当前 SDK、Demo Host 和状态日志桥接；普通 Demo 的安装与源码未覆盖。首轮同 PID `36951` 有 **3/3** 次 `start → session active → finishInput → session inactive → terminal success`，其中后两次为同进程重入。状态日志不保存音频或转写；ignored `artifacts/verification/f04-mic-live-20261103/console-unique.log` SHA-256=`57f8e8a3df30b66af6b7b359698912dbfa3310cbedc2e0487a672dde153da789`，`validate_status.py` 复算为三轮 success。用户同时确认看见橙色录音点与“ASR 完成”。
+- 首次真机 XCTest 在进入测试方法前因 UI automation mode 超时，`xcodebuild` exit 65；它没有启动录音，不计产品失败或通过。首轮日志完成后已精确终止 PID `36951`。此后用户在新进程报告 `BACKEND_UNAVAILABLE unsupportedDevice`，该进程没有连接状态日志，无法直接还原请求 locale。
+- 为定位错误，以同一隔离 bundle 重新安装**仅 ignored 诊断副本**，生产 Apple backend 和普通 Demo 未改。新 PID `36974` 的状态日志显示：启动时 `zh-CN` 授权为 3（authorized）、识别器存在、`isAvailable=true`、`supportsOnDeviceRecognition=true`；首次失败请求的实际 locale 为 `she-CN`，`SFSpeechRecognizer` 为 nil，两个支持位因此为 false，随后终态为 `SpeechClientError`。这次复现说明 `unsupportedDevice` 可以由不受支持的输入 locale 触发，不能据此判断 iPhone 不支持 `zh-CN`；它不证明此前未采集日志的 PID `36970` 也输入了 `she-CN`。
+- 改为 `zh-CN` 后，四次请求的识别器和两个支持位均为 true；其中两次 `finishInput` 返回 `SpeechRecognitionError`，其子类型和转写未记录。随后同 PID 实际完成 `start → session active → cancel → session inactive → terminal cancelled`，用户看到 `CANCELLED`；取消后再次 `start → session active → finishInput → session inactive → terminal success`，用户看到“ASR 完成”。最后一轮从 start 到 finishInput 约 6.09 秒。第二轮状态摘要 `artifacts/verification/f04-metadata-20261103/summary.json` SHA-256=`617aea490f7446ae0de241515041d4c73df7b1d177c36f59f0130105a47768fa`；筛选状态日志 SHA-256=`faf09f86a2a91be80048812f616b963d1a9fa80f5ee35bdf2d534df23a16b495`。精确终止 PID `36974` 后回读其缺席，旧 SpeechDemo PID `34863` 仍在。
+- 同一安装的下一轮 PID `36985`，用户在 `zh-CN` 开始录音并看到橙点后上滑回桌面，再返回 App 看见 `CANCELLED`。状态日志为 `start → session active → cancel → session inactive → terminal cancelled`；返回前台再朗读同句并结束，得到 `start → session active → finishInput → session inactive → terminal success`，用户看到“ASR 完成”。`validate_background.py` 复算两轮顺序；ignored `background-summary.json` SHA-256=`4f21d7f333c240ff6404266e839de5123c1df56bfd4dfb9edac62f58211428b9`，筛选状态日志 SHA-256=`addb5c94afdb234d9092663d9d89425a8ab63d0c5bece236d113c31eabec2eab`。日志没有 UIKit 生命周期时间戳，后台/前台动作来源于用户操作回报。仅终止该 PID，回读普通 SpeechDemo PID `34863` 仍在。
+- 通过的范围是本机中文 locale 下真实麦克风结束输入、显式取消与后台触发取消后的同进程重入，以及可观察的 audio session 失活。未验证转写准确率、无网络、完整 engine/tap/lease drain、显式 SDK close、自然 TTS 或最低系统；F04 原退出标准及 P11 发布结论仍 `open/not-ready`。`unsupportedDevice` 对无识别器 locale 的提示较含混，留作单独错误语义改进，不以改码掩盖这次输入证据。
 
 ## 实现与调用边界
 
