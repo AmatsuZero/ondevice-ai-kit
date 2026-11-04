@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-04 F05 资源状态复核：新增无 Activity/录音/下载的独立查询探针，TECNO KM9/API35 的 `checkRecognitionSupport(en-US)` 回调三份语言列表均空，状态NOT_REPORTED，资源就绪仍未确认；未执行转写，不沿用历史错误13冒充新结果。离线构建/lint通过，普通Demo APK不变，原test APK/runner恢复、设备Asleep、九项保护不变。见[证据](speech-backends.md#2026-11-04-android-离线资源只读复核)。
+
 2026-11-04 F10 PAD 更新：用户明确允许固定官方模型与既有图片本机原始分数试验，最终独立 iPhone OpenCV4.12探针 **9/9**，两次有限 `1x2` 输出一致，含设备SHA384/原生诊断 RED→GREEN；RGB/NCHW及报告持久化 host RED→GREEN、构建与 immutable 证据复核通过。固定96位校验值为 SHA-384，已更正此前 SHA-512 误标，未换模型。见[证据与复审裁定](pad-raw-score-smoke.md)。本轮仅关闭目标 runtime 真实推理，不是完整 PAD 后端/活体判定；实验性整图预处理、授权攻击/校准数据与策略、SDK/Demo 接入仍待完成。九项保护及生产 lock 不变；普通 Demo 已无参数恢复；P4/P11/发布保持 open/not-ready。
 
 2026-11-04 F10/F12 复审更新：双独立原生审查后补通 Apple OpenCV 脱敏诊断合同，新增可选 stage/category sink；optional host **6/6**、最终 iPhone native/session **24/24**、probe/普通 Demo build 通过。回调内同步 close 无死锁且模型租约释放，普通 App 已无参数恢复，保护文件及生产 lock 不变。复审 **COMMENT + architect CLEAR**，仍有1个 Medium 大图 PNG 超限 corner 按用户要求后置；不是完整分支/发布 APPROVE。见[证据](apple-opencv-identity.md#2026-11-04-independent-review-and-native-diagnostic-delivery)。PAD、识别校准与 Android LM/ASR 资产仍开放。

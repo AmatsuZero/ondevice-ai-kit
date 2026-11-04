@@ -4,7 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 PAD 官方模型真实 iPhone 原始分数
+## 最新续接 — 2026-11-04 Android ASR 资源状态复核
+
+- 新增只查询 `checkRecognitionSupport(en-US)` 的独立 instrumentation；无 Activity、录音、权限申请或下载。离线 test APK 构建及 lintDebug 通过。TECNO KM9/API35 真实回调三份语言列表仍空，`NOT_REPORTED`，资源就绪未确认；不能把历史错误13当新转写结论。
+- ignored `artifacts/verification/android-asr-assets-20261104/` 绑定源码/immutable test APK/实际安装hash/原始Bundle。普通 Demo hash 不变；备份的原 test APK与runner已恢复，设备Asleep，九项保护不变。见[证据边界](validation/speech-backends.md#2026-11-04-android-离线资源只读复核)。F05仍缺真实转写/取消重入/离线质量；PAD可用判定仍需裁剪协议与授权校准数据，不扩成绕过policy的整图判定。
+
+## 上一检查点 — 2026-11-04 PAD 官方模型真实 iPhone 原始分数
 
 - 用户最新明确“允许”承接此前待答复的固定官方 PAD 模型/既有 NASA 图本机试验。已下载原定 12,270,179-byte ONNX，固定96位校验值实际为 **SHA-384**，已更正文档误标 SHA-512，未换模型；SHA-256 `c4c99af04603b62d7e44f6f4daeb33e0daeccc696008c0b1d62f6f5cebbb3262`。许可 MIT/Apache-2.0 差异仍保留，无分发授权。
 - 新增隔离 `probes/ios-opencv-pad/` 和生成器，复用既有 OpenCV4.12 static arm64；RGB/NCHW 与报告持久化 host RED→GREEN，独立设备 App 构建通过。最终 iPhone **9/9**，runId `0C5B5BD9-F924-4486-BD82-90A64B79C689`，含设备 SHA384 和缺席模型脱敏诊断 RED→GREEN；两次实际 `1x2` 输出一致且有限。明确实验性整图 CUBIC128 预处理，无校准 face crop、判定或 proof。见[证据与边界](validation/pad-raw-score-smoke.md)。

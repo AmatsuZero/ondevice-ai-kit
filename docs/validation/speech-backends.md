@@ -2,6 +2,31 @@
 
 更新时间：2026-10-17。本文记录后端边界、探针与逐步接入的 SDK 模块；各节分别标明代码、分发和真机证据，不把第三方服务凭据、网络可用性或商业许可假设成 SDK 已交付。
 
+## 2026-11-04 Android 离线资源只读复核
+
+新增独立 `AsrAssetStatusInstrumentation`，仅调用 API33 的
+`checkRecognitionSupport(en-US)`；不启动 Activity、不申请权限、不调用
+`startListening` 或下载接口。构建和 `lintDebug` 通过，550 tasks 中9项执行，
+其余 up-to-date；不是重新执行全部语音测试。
+
+TECNO KM9/API35 实际回调 `status=observed`，installed/pending/supported
+on-device language 列表均空，英语三个标志均 false，状态为 **NOT_REPORTED**。
+这说明本次服务元数据**不能确认资源就绪**，不能据此断言新的转写失败，或将
+历史错误13冒充本轮结果。`recognition=not-run`；没有录音、登录或下载。
+
+证据在 ignored `artifacts/verification/android-asr-assets-20261104/`：
+test APK SHA-256 `8a34a3c49ba73030137261ab86eb38ccbdc9674462bee30ad5c00668d70e9263`，
+与实际安装 hash 相符；源码、回调 Bundle、构建/lint 和恢复证据已绑定。
+普通 Demo APK hash 不变，原 test APK 与 runner 已恢复，设备回读 Asleep，
+未解锁；九项保护文件不变。F05 真实转写、取消/重入与离线质量仍未验。
+
+复跑仅需离线构建 `:demo:androidApp:assembleDebugAndroidTest`
+并指定 `-PodaiTestRunner=io.ondeviceai.demo.AsrAssetStatusInstrumentation`，
+安装 **test APK** 后执行
+`adb -s <serial> shell am instrument -w io.ondeviceai.demo.test/io.ondeviceai.demo.AsrAssetStatusInstrumentation`。
+先备份并核验原 test APK，终态后恢复；不需要覆盖普通 App 或解锁。
+资源查询返回 installed 也只代表元数据，仍须另外获准后执行真实音频验证。
+
 ## 统一接口边界
 
 上层使用能力级选择值：`Default` 或 `Explicit(backendId)`。短任务在调用时选择；流式/长任务在会话创建时固定。显式选择不可用时返回结构化错误，不静默回退到另一个后端。结果和 benchmark 必须记录实际 `backendId`、网络/离线属性和音频格式。
