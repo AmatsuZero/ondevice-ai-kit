@@ -49,6 +49,17 @@ release remain `open/not-ready`.
 
 ## 2026-11-04 compatibility candidate, not adopted
 
+The candidate now has [guarded isolated-copy tooling](f09-compatibility-candidate/README.md#2026-11-04-guarded-preparation-tooling).
+It checks exact Git revisions, production lock/runtime binding, patch/input/output
+hashes and complete copied-file inventories without changing source checkouts.
+Focused12/12 and full tools262/262 pass; Python compile/diff checks and protected
+file/production-lock verification pass. The historical cache is correctly
+rejected for missing Git objects, while the separate four-file patch replay
+matches its expected hashes. No full dependency copy, dependency build or
+binary artifact is produced. This tool's independent reviewer returned429
+without a verdict; policy remains draft-not-adopted and Task3 remains incomplete.
+Evidence: `artifacts/verification/f09-overlay-applicator-20261104/`.
+
 Fresh official API reads still report issue91540 open, PR91672 open/unmerged and
 swift-collections latest1.7.5. Related PR92814 has merged to upstream main;
 that is not proof of inclusion in the installed Swift6.4.2. A fresh arm64 iOS18

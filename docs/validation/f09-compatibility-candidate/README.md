@@ -89,16 +89,54 @@ current `.causal`, `.array`, `.arrays` and `.none` handling and explicitly trap
 unknown values as disclosed. This is a coherent proposal for the pending
 maintenance-policy decision, not approval to adopt it or F09 closure.
 
-Two medium adoption/closure gates remain. The manifest declares hash constraints
-but is not an executable enforcement mechanism; a fail-closed applicator must
-validate lock, input, patch and output hashes before any build. Replay also
-provides no dependency tests, device/simulator framework/interface builds,
-dual-slice/20-module/C-resource closure or relocated-consumer/runtime evidence.
+At that review two medium adoption/closure gates remained: executable hash
+enforcement and full binary validation. The preparation tool below now supplies
+the enforcement mechanism with local-fixture tests; the exact historical cache
+still cannot yield a proven full dependency copy. Replay provides no dependency
+tests, device/simulator framework/interface builds, dual-slice/20-module/C-resource
+closure or relocated-consumer/runtime evidence.
 
 Before adopting this proposal: explicit policy decision, still pending.
-After adoption: implement fresh-output/hash-guarded overlay application,
+After adoption: prepare full exact-revision/hash-guarded dependency copies,
 run dependency tests and real device/simulator framework/interface builds,
 package every declared module/C module/resource, inspect both slices, then
 build a relocated source-free consumer and verify resource lookup/runtime.
 Keep F09 `open/not-ready` until those checks pass. No remote publication,
 tag, signing-asset mutation or dependency-cache rewriting is included.
+
+### 2026-11-04 guarded preparation tooling
+
+`tools/apply_mlxvlm_compatibility_overlay.py` prepares fresh copies from **Git
+objects at the exact lock-bound revisions**, ignoring dirty/untracked checkout
+bytes. Raw blob reads preserve files that `git archive` might drop through
+`export-ignore` or alter through `export-subst`. It validates the production
+lock digest, runtime version/revision, patch bytes and declared input/output
+digests, and rejects undeclared patch paths, source/output overlap, existing
+output, symlinks and submodules. Only declared patched files may change; an
+entire resulting file-hash inventory is recorded. Failures leave no output.
+Input repositories, candidate and production lock are never patched.
+Git lazy fetching and terminal prompts are disabled; missing partial-clone
+objects fail locally instead of triggering an implicit dependency fetch.
+
+```sh
+rtk proxy python3 -m tools.apply_mlxvlm_compatibility_overlay \
+  docs/validation/f09-compatibility-candidate apple-mlx/Package.resolved \
+  /path/to/existing/complete/checkouts /path/to/fresh/isolated-copies
+```
+
+The result is a preparation receipt with `policyStatus=draft-not-adopted` and
+`buildStatus=not-run`. Preparing tooling does not adopt the crash/maintenance
+policy or authorize building/distributing a patched binary. It copies only the
+two declared packages; it is not a complete build dependency cache.
+
+Focused local miniature-repository tests pass12/12 with real Git/patch commands.
+The existing historical `f09-target-scoped-20261030` cache is correctly rejected
+at exact-revision lookup because its referenced Git objects are unavailable;
+no prepared output is left. Separately, the already retained four pristine
+source files replay both real patches and match all four output digests. Those
+four files do not establish the missing complete dependency revisions. No new
+dependency fetch, build, device operation or policy adoption occurred. Raw
+evidence is under ignored `artifacts/verification/f09-overlay-applicator-20261104/`.
+The final complete tools suite passes262/262; Python compilation, diff checks,
+nine protected-file hashes and the production lock also pass. Independent
+tool review returned429 without a conclusion. No independent approval is inferred.

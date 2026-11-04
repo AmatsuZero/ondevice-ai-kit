@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 页面修复候选实际 Identity 主流程
+## 最新续接 — 2026-11-04 F09 固定兼容复制工具
+
+- 继续无需用户配合工作，补齐候选审查提出的fail-closed applicator：只从lock绑定的精确Git提交对象复制两项声明依赖到新目录，校验runtime/patch/input/output及完整文件清单，拒绝越界/symlink/submodule/已有输出，失败不发布复制结果；原缓存/生产lock不写。读取raw blob避免git archive的export-ignore/export-subst改变构建输入；receipt保留draft-not-adopted/build-not-run，不采纳待决策略。
+- 定向12/12、完整tools262/262、Python compile/diff及九保护/生产lock通过；初始RED和两项边界RED→GREEN保留，追加legacy patch检查初次仅错误文字断言不匹配、已有拒绝行为始终正确，修正断言后通过，不称新增安全修复。历史缓存缺Git objects时真实CLI按预期拒绝且无输出；已有四份原始源码独立重放两补丁、输出摘要匹配，不冒充完整依赖复制/构建。见[工具及边界](validation/f09-compatibility-candidate/README.md#2026-11-04-guarded-preparation-tooling)。独立tool reviewer429无结论；未新下载/构建二进制/操作手机/采音。
+- ignored `f09-overlay-applicator-20261104/`保存日志与验证。Task3仍缺维护策略决定、完整依赖来源和真实20模块双slice；Task4实际消费/资源runtime、Task5仍未完成。不按工具测试关闭任务。明天2026-11-05北京时间09:00用户在场后再开始单次ASR，功能优先/corner后置保持；基础10/12、P4/P11/发布open/not-ready、goal active。本轮有实现与完整工具回归进展。
+
+## 上一检查点 — 2026-11-04 页面修复候选实际 Identity 主流程
 
 - 既有MainFlow模拟器普通UI重新启用本次本机原型授权，只选择原已授权NASA测试图；固定a27a079/c098fc41布局候选真实注册ENROLLED/1模板，验证与图库发布均THRESHOLD_UNVERIFIED、图库保持未发布。普通删除当前用户后0用户/0模板/物理清理已完成，再全会话删除停用，返回语音页。未提取模板、特征、密钥或收集新样本，未运行已校准识别/PAD。
 - 同PID8481、固定YuNet/SFace/manifest摘要、APK与相机麦克风denied前后保持；公开测试图SHA匹配，未单独捕获内存解码输入摘要。ignored `android-layout-identity-mainflow-20261104/verify.py` fresh PASS，15份证据摘要绑定UI/回执/截图，连同252源码冻结、九保护及生产MLX lock。见[Identity普通主流程](validation/android-mainflow-emulator.md#frozen-layout-candidate-identity-main-flow)。未重建/运行新增SDK测试/独立复审/操作手机或采音。
