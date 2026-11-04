@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Android 页面空间修复
+## 最新续接 — 2026-11-04 F09 consumer 生成器准备
+
+- 在既有F09计划范围补齐binary-only consumer生成器：声明artifact/实际Mach-O校验、原子生成、可搬移相对引用、framework链接/嵌入和bundle资源阶段；生成源码含图像/视频API及实际model Bundle.module/Metal资源smoke，receipt固定not-run。见[分发验证](validation/apple-mlxvlm-distribution.md#2026-11-04-binary-only-consumer-generator)。
+- 定向10/10、完整tools250/250及Python/Ruby语法/diff检查通过；初始Ruby版本混用和Swift缓存权限失败均保留，最终用已有Ruby3.4与可写缓存通过。fixture的hash/Mach-O为测试替身，不是增强binary build；Task3真实20模块产物及Task4双平台消费/资源runtime仍未验，不采用待决兼容overlay。独立review429无结论，作者作有界检查；九保护及生产MLX lock保持。
+- 用户明天2026-11-05北京时间09:00配合设备验证；本轮未操作手机或采音，明天先提示再执行。Android普通页候选仍固定a27a079/c098fc41，不把本轮工具提交称为新APK。基础10/12、P4/P11/发布open/not-ready，goal active；本轮有实现与测试进展。
+
+## 上一检查点 — 2026-11-04 Android 页面空间修复
 
 - 在当前提交三后端组合候选普通UI实际发现非人脸页仍保留大块黑色预览、控件限高380dp；已修复Android宿主按页面隐藏预览、非人脸控件占满可用空间及系统insets，既有iOS调用保持默认限高。可见性在composition读取再SideEffect通知；只在effect读取导致返回不恢复的中间失败已保留并修正。
 - 相同最终无采音/相机/推理回归在旧冻结App失败（speech titleTop1444/2400），新App通过（语音/视频/图像理解178，返回人脸1476）；组合62/62、默认54/54、共享iOS80/80与APK/testAPK/lint/iOS arm64 compile通过。见[页面空间验证](validation/android-demo-layout.md)。只更新既有MainFlow隔离模拟器，未更新真机/LM专用AVD；九保护/生产lock保持，ASR采音仍0次。

@@ -1,5 +1,52 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-04 binary-only consumer generator
+
+Task4's generator is implemented independently of Task3's blocked real artifact
+build. It consumes the manifest and declared XCFramework/resource set:
+
+```sh
+rtk proxy ruby scripts/generate-mlxvlm-binary-consumer.rb \
+  /absolute/artifact-root /absolute/artifact-manifest.json \
+  artifacts/MLXVLMBinaryConsumer
+```
+
+Generation validates the manifest and actual Mach-O layout, copies only the
+declared frameworks and their runtime resource bundles to a fresh output,
+revalidates the copied manifest, then invokes installed XcodeGen. All generated
+project references are relative; no Swift package reference or dependency
+resolution is added. Existing output is preserved. Canonical relative paths,
+bundle layout and relocatable symlinks are checked before output is published.
+The receipt deliberately records `buildStatus=not-run` and
+`runtimeStatus=not-run`.
+
+The generated Swift source exercises image/video API types and provides a
+resource-only runtime smoke: canonical model/Metal hashes, the actual
+`SmolVLM2Model.manifest()` lookup and `MTLDevice.makeLibrary(URL:)`. It writes
+`binary-resource-report.json` to Documents when run; no inference is started.
+XcodeGen2.46's [documented application dependency default](https://github.com/yonaskolb/XcodeGen/blob/2.46.0/Docs/ProjectSpec.md#dependency)
+embeds framework dependencies. Tests inspect the actual framework link/embed
+and bundle-resource build phases, rather than relying only on the spec text.
+The actual Task3 output still has to establish its supported linking layout.
+
+Focused generator tests **10/10**, complete tools suite **250/250**,
+Python `py_compile`, Ruby syntax and `git diff --check` passed. Synthetic
+artifact bytes use mocked canonical hashes/Mach-O probes only in fixture
+tests; XcodeGen/project inspection and generated Swift parsing are real.
+These tests prove generation and relocation, not enhanced binary compilation
+or runtime resource success. The first complete run failed with system Ruby2.6
+loading Ruby3.4 gems; a compatible-Ruby sandbox run then had two Swift cache
+permission errors. The final writable-cache run passed with installed
+Ruby3.4.11. Logs are retained under ignored
+`artifacts/verification/f09-binary-consumer-generator-20261104/`.
+
+Independent review returned429 without findings or approval; the author
+performed a bounded source/API/project check. Task4 remains **in progress**:
+no real20-module artifact set, generic iOS/simulator binary-consumer build or
+resource runtime report exists. Task3's compatibility policy is not adopted;
+production dependencies/lock and nine protected files are unchanged. F09 and
+release remain `open/not-ready`.
+
 ## 2026-11-04 compatibility candidate, not adopted
 
 Fresh official API reads still report issue91540 open, PR91672 open/unmerged and
