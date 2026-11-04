@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Android 隔离模拟器主流程 UI
+## 最新续接 — 2026-11-04 Apple Identity 独立复审与诊断合同修复
+
+- 两条独立原生审查发现 Swift 丢弃原生阶段诊断；已补可选 `OpenCvIdentity.open(modelStore:diagnostic:)`，仅传允许列表 stage/category，验证 NSError domain，不保留原始错误/路径/文本，不修改 core IdentityError。回调在 native gate 解锁后同步执行，回调内关闭/取消继续优先。普通调用保持源码兼容，默认 Apple 包无新依赖。
+- RED 缺席类型→optional host **6/6**；最终不可变 probe 在 iPhone **24/24**，runId `51F4C9E6-01DC-4A01-9952-82F497543AB2`，包含真实检测/embedding/注册/purge、原生诊断回传、回调内同步 close 无死锁/单次发出与模型 lease 释放。探针和普通 Demo 构建通过，普通 App 已在安装结束后无验证参数恢复。九项保护与生产 MLX lock 不变。ignored `artifacts/verification/apple-identity-review-20261104/verify.py` fresh passed，见[证据与复审](validation/apple-opencv-identity.md#2026-11-04-independent-review-and-native-diagnostic-delivery)。
+- 复审 code-reviewer **COMMENT**、architect **CLEAR**，仅有1个 Medium 大图 PNG 重编码超10MiB边界按用户指示后置，未假称已修。进程全局 OpenCV logger/重建整个 shared controller 为既有非阻断关注；不扩大成长资源专项，不声明完整分支 APPROVE。PAD/识别校准/Android LM与ASR资源仍缺；PAD 问题之后未见明确答复。F09 映射确认仍需生产编译器/依赖门槛，新上游研究代理因429未取得状态，不按旧快照断言最新上游。roadmap goal active，发布 open/not-ready，未 push/merge/release。
+
+## 上一检查点 — 2026-11-04 Android 隔离模拟器主流程 UI
 
 - 新建的 `ODAI_MainFlow_20261104` / API36 arm64 复用既有本机系统镜像和 immutable 三 opt-in APK；安装 SHA-256 `dd610a4cfb7ad40a53b8320cd174e2d54b3bc0048108217c1b18b1f127eb6e7f` 与历史快照相同，7份绑定源码匹配，Android/shared 源码自 `cadfea8` 无差异。无新增下载/生产修改；9项保护文件不变。
 - 普通 UI 系统 picker/既有模型导入与授权会话、获批 NASA 图片→真实 OpenCV 注册1模板、未校准验证/图库拒绝、候选物理删除至0模板、整次停用通过。视频系统模型/媒体 picker→实际 ESRGAN 4×（32×24→128×96、2帧/AAC）→播放 Activity→重入→分享 chooser 通过；未选择接收人/发送文件。两份导出独立 FFmpeg 完整解码，帧 PTS 与4个 AAC packet/hash/PTS 匹配。

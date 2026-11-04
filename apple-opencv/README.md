@@ -23,12 +23,14 @@ The script checks size and SHA-256 before extracting. It preserves the official 
 Install `OpenCvIdentityModel.manifest()` through `ModelStore` from a directory containing exactly its two pinned files. Then:
 
 ```swift
-let backend = try await OpenCvIdentity.open(modelStore: models)
+let backend = try await OpenCvIdentity.open(modelStore: models, diagnostic: { event in
+    // Optional: only allowlisted event.stage / event.category are exposed.
+})
 // Use IdentityStore / FaceVerification / FaceIdentification with this backend.
 await backend.closeAndWait() // Join before removing the model revision.
 ```
 
-The factory verifies the complete manifest and exact runtime version, keeps a model lease during initialization and transfers ownership to `LocalIdentityBackend`. Native work is serialized. Stop requests are checked between blocking decode/detect/align/feature stages; close drains the current call. Call these synchronous primitives away from the UI thread. Native errors contain stable codes/stage names only. OpenCV's process-wide logger is set to silent to prevent native ONNX errors from logging file paths.
+The factory verifies the complete manifest and exact runtime version, keeps a model lease during initialization and transfers ownership to `LocalIdentityBackend`. Native work is serialized. Stop requests are checked between blocking decode/detect/align/feature stages; close drains the current call. Call these synchronous primitives away from the UI thread. Native errors map to stable Identity codes; the optional `diagnostic` callback exposes only allowlisted stage/category values and never retains the original NSError or its text/paths. It runs synchronously on the failing caller's thread after releasing the native serialization lock, so keep it brief and synchronize shared observers. Foreign error domains yield `unknown`/`unavailable`; unrecognized stage strings yield `unknown` while retaining the sanitized category. Cancellation and close retain their error precedence, including when requested by the callback. OpenCV's process-wide logger is set to silent to prevent native ONNX errors from logging file paths.
 
 Inputs are upright encoded images; EXIF is ignored. Limits: 10 MiB, axes 16–4096 and at most 4,194,304 pixels. BGR decode and linear resize to long edge 640 precede YuNet (.9 confidence, .3 NMS, top 5000), official SFace alignment and 128-component L2-normalized features. Quality is binary landmark geometry, not calibrated recognition quality. The Apple embedding-space ID is distinct from Android's; cross-platform feature compatibility is not claimed.
 

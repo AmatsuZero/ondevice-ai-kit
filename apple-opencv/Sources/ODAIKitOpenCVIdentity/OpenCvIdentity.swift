@@ -7,7 +7,8 @@ import ODAIKitModelStore
 
 public enum OpenCvIdentity {
     /// Opens only the fixed, hash-verified prototype manifest. Call off the UI path.
-    public static func open(modelStore: ModelStore) async throws -> LocalIdentityBackend {
+    public static func open(modelStore: ModelStore,
+                            diagnostic: (@Sendable (OpenCvIdentityDiagnostic) -> Void)? = nil) async throws -> LocalIdentityBackend {
         try Task.checkCancellation()
         let lease = try await modelStore.acquire(OpenCvIdentityModel.ref)
         var runtime: OpenCvIdentityRuntime?
@@ -18,7 +19,7 @@ public enum OpenCvIdentity {
                 throw IdentityError(.embeddingSpaceMismatch)
             }
             try Task.checkCancellation()
-            let opened = try OpenCvIdentityRuntime(directory: lease.directory)
+            let opened = try OpenCvIdentityRuntime(directory: lease.directory, diagnostic: diagnostic)
             runtime = opened
             try Task.checkCancellation()
             let owned = try await LocalIdentityBackend.open(modelStore: modelStore,
@@ -45,15 +46,20 @@ private final class OpenCvIdentityRuntime: IdentityBackend, @unchecked Sendable 
     private let gate = NSLock()
     private var closed = false
     private var native: ODAIOpenCVRuntime?
+    private let diagnostic: (@Sendable (OpenCvIdentityDiagnostic) -> Void)?
 
-    init(directory: URL) throws {
+    init(directory: URL, diagnostic: (@Sendable (OpenCvIdentityDiagnostic) -> Void)?) throws {
+        self.diagnostic = diagnostic
         guard ODAIOpenCVRuntime.runtimeVersion() == OpenCvIdentityModel.version else {
             throw IdentityError(.backendUnavailable)
         }
         do {
             native = try ODAIOpenCVRuntime(detectorPath: directory.appendingPathComponent(OpenCvIdentityModel.detector).path,
                 recognizerPath: directory.appendingPathComponent(OpenCvIdentityModel.recognizer).path)
-        } catch { throw IdentityError(.backendUnavailable) }
+        } catch {
+            throw OpenCvIdentityNativeFailure(error).identityError(backendId: backendId,
+                modelBinding: modelBinding, diagnostic: diagnostic)
+        }
     }
     private var isClosed: Bool { state.lock(); defer { state.unlock() }; return closed }
     private func failure(_ code: IdentityErrorCode) -> IdentityError {
@@ -78,6 +84,17 @@ private final class OpenCvIdentityRuntime: IdentityBackend, @unchecked Sendable 
         return try IdentityEmbedding(embeddingSpace: embeddingSpace, values: OpenCvIdentityFeatures.normalized(values))
     }
     private func process(_ probe: IdentityProbe, feature: Bool, signal: IdentityStopSignal) throws -> ODAIOpenCVResult {
+        do { return try processLocked(probe, feature: feature, signal: signal) }
+        catch let nativeFailure as OpenCvIdentityNativeFailure {
+            // The native gate is released before calling client code; reentry/close cannot deadlock.
+            let error = nativeFailure.identityError(backendId: backendId, modelBinding: modelBinding,
+                diagnostic: diagnostic)
+            try signal.check()
+            guard !isClosed else { throw failure(.closed) }
+            throw error
+        }
+    }
+    private func processLocked(_ probe: IdentityProbe, feature: Bool, signal: IdentityStopSignal) throws -> ODAIOpenCVResult {
         guard !isClosed else { throw failure(.closed) }
         gate.lock(); defer { gate.unlock() }
         guard !isClosed, let native else { throw failure(.closed) }
@@ -92,14 +109,8 @@ private final class OpenCvIdentityRuntime: IdentityBackend, @unchecked Sendable 
             guard !isClosed else { throw failure(.closed) }
             return result
         } catch {
-            try signal.check()
-            guard !isClosed else { throw failure(.closed) }
-            let code = (error as NSError).code
-            switch code {
-            case 1: throw failure(.invalidInput)
-            case 2: throw failure(.multipleFaces)
-            default: throw failure(.backendUnavailable)
-            }
+            if let error = error as? IdentityError { throw error }
+            throw OpenCvIdentityNativeFailure(error)
         }
     }
     func close() {

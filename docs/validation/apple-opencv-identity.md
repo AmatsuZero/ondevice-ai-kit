@@ -1,5 +1,61 @@
 # Apple OpenCV Identity — local prototype validation
 
+## 2026-11-04 Independent review and native diagnostic delivery
+
+Two independent native lanes reviewed the optional Apple Identity/Files feature
+at base `02615b6`. They confirmed an interface gap: Objective-C++ produced
+sanitized stage/code values, but Swift discarded the stage and matched codes
+without checking the error domain. The diagnostic fix adds an optional,
+source-compatible `OpenCvIdentity.open(modelStore:diagnostic:)` sink. It exposes
+only allowlisted `OpenCvIdentityDiagnostic.Stage` / `Category` values, handles
+foreign domains safely, and retains no raw NSError, paths or exception text.
+The core Identity error contract is unchanged. The sink executes on the failing
+caller thread after releasing the native serialization lock; post-callback
+cancel/closed checks preserve lifecycle precedence, including reentrant close.
+This is an SDK diagnostic interface; it does not add a Demo status stream.
+
+Fresh verification under ignored
+`artifacts/verification/apple-identity-review-20261104/`:
+
+- The new mapper tests first failed compilation because the new diagnostic
+  types were absent; after implementation the full optional host contract
+  suite passed **6/6**, including all three new tests. Known native codes,
+  every allowlisted stage, foreign domains, unknown values, exactly-once
+  delivery and raw-text non-retention are covered. The initial sandbox
+  manifest failure is retained separately and is not counted as RED.
+- A freshly generated probe project and the existing ordinary Demo both
+  built for iOS. An initial reuse of a historical generated project failed
+  because it omitted the existing `IdentitySessionChecks`; regenerating from
+  the current generator resolved that stale-project mismatch. Existing
+  AppIntents/all-orientations warnings remain.
+- Final immutable probe App on iPhone16 Pro Max passed **24/24**, runId
+  `51F4C9E6-01DC-4A01-9952-82F497543AB2`. It required one native
+  `detection` / `invalidInput` diagnostic for the existing blank raster,
+  synchronous callback → backend `close()` returning `.closed` without
+  deadlock, exactly-once emission and subsequent model release. Real approved
+  portrait detection/alignment/128-vector, encrypted enrollment, candidate/
+  grant purge/reopen and UNVERIFIED policy rejection also passed. No new
+  sample/model, camera, microphone or calibration was used.
+- Source/App inventories, exact install/launch paths, pending-report reset
+  and final report hash bind the result to the final candidate. The earlier
+  `A743331D-9086-4298-9F9B-6D7776049C13` 24/24 run was inspected by the
+  architect; the final rerun additionally includes harness failure cleanup.
+  Ordinary Demo installation reached terminal success before the final
+  no-argument launch. Nine protected files and the production MLX lock match
+  their previous hashes. `verify.py` reports `status=passed`.
+
+Independent re-review: `code-reviewer` **COMMENT**, architect **CLEAR** for this
+bounded diagnostic fix, superseding the pre-fix diagnostic blocker. Combined
+recommendation is **COMMENT**, not whole-branch or release approval. One
+**MEDIUM** remains explicitly deferred under the user's corner-case direction:
+`IdentityOpenCvHost.swift` may publish a normalized image whose PNG re-encoding
+exceeds the backend's 10 MiB cap, causing later enrollment rejection. Bound or
+reject the encoded probe before publishing it when that work resumes. Existing
+process-global OpenCV logging and whole shared-controller recreation on
+identity-model replacement are non-blocking integration concerns, outside this
+fix. PAD, recognition calibration, quality/resource matrices and release gates
+remain open; older 429 review statements below describe earlier checkpoints.
+
 2026-11-04. Worktree `.worktrees/foundation`, branch `feat/sdk-foundation`, implementation base `a11c8c8b40f4c6aeb158ba34a6f71ec63a23b008`. Evidence is local/ignored under `artifacts/verification/apple-opencv-identity-20261104/`. No push, merge or release.
 
 The optional `apple-opencv/` package adds real CPU decode → YuNet detection → official SFace alignment → 128-dimensional normalized embedding. The default Apple package remains independent of OpenCV. The optional device Demo imports a fixed model folder, requires explicit 30-minute consent, and routes the existing shared multi-candidate/template/gallery controls through `IOSIdentityBridge`.

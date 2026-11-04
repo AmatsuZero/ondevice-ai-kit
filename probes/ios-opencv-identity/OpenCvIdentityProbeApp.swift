@@ -49,7 +49,9 @@ private enum OpenCvIdentityProbe {
             stage = "install"
             try await models.install(manifest: OpenCvIdentityModel.manifest(), source: assets.appendingPathComponent("models"))
             stage = "open"
-            let opened = try await OpenCvIdentity.open(modelStore: models); backend = opened
+            let diagnostics = ProbeDiagnostics()
+            let opened = try await OpenCvIdentity.open(modelStore: models,
+                diagnostic: { diagnostics.record($0) }); backend = opened
             do { try await models.remove(OpenCvIdentityModel.ref); try require(false, "modelPinned") }
             catch let failure as ModelStoreError { try require(failure == .inUse, "modelPinned") }
             let probe = try IdentityProbe(encodedImage: bytes, revision: "approved-local-portrait")
@@ -71,6 +73,12 @@ private enum OpenCvIdentityProbe {
             try require(blankQuality.faceCount == 0 && blankQuality.score == 0, "blankRejected")
             do { _ = try opened.embed(blank); try require(false, "blankEmbeddingRejected") }
             catch let error as IdentityError { try require(error.code == .invalidInput, "blankEmbeddingRejected") }
+            let nativeDiagnostics = diagnostics.snapshot()
+            try require(nativeDiagnostics.count == 1 && nativeDiagnostics.first?.stage == .detection
+                && nativeDiagnostics.first?.category == .invalidInput, "sanitizedNativeDiagnosticDelivered")
+            report["nativeDiagnostics"] = nativeDiagnostics.map {
+                ["stage": $0.stage.rawValue, "category": $0.category.rawValue]
+            }
             for kind in [IdentityPolicyKind.verification, .identification] {
                 do { try OpenCvIdentityModel.unverifiedPolicy(kind: kind).requireVerified(); try require(false, "policy-\(kind.rawValue)") }
                 catch let error as IdentityError { try require(error.code == .thresholdUnverified, "policy-\(kind.rawValue)") }
@@ -114,6 +122,17 @@ private enum OpenCvIdentityProbe {
             for (name, passed) in try await IdentitySessionChecks.run(models: models, root: root.appendingPathComponent("session"), probe: probe) {
                 try require(passed, name)
             }
+            stage = "diagnosticReentry"
+            let closeDiagnostics = ProbeDiagnostics()
+            let reentrant = try await OpenCvIdentity.open(modelStore: models,
+                diagnostic: { closeDiagnostics.record($0) })
+            backend = reentrant
+            closeDiagnostics.closeOnNextDiagnostic(reentrant)
+            do { _ = try reentrant.embed(blank); try require(false, "diagnosticReentrantClose") }
+            catch let error as IdentityError { try require(error.code == .closed, "diagnosticReentrantClose") }
+            await reentrant.closeAndWait()
+            backend = nil
+            try require(closeDiagnostics.snapshot().count == 1, "diagnosticReentrantCloseEmittedOnce")
             try await models.remove(OpenCvIdentityModel.ref)
             let modelStatus = await models.status(OpenCvIdentityModel.ref)
             try require(modelStatus == .absent, "modelReleased")
@@ -133,6 +152,18 @@ private enum OpenCvIdentityProbe {
         }
         return report["status"] as? String ?? "failed"
     }
+}
+
+private final class ProbeDiagnostics: @unchecked Sendable {
+    private let lock = NSLock()
+    private var values: [OpenCvIdentityDiagnostic] = []
+    private var closeTarget: LocalIdentityBackend?
+    func closeOnNextDiagnostic(_ target: LocalIdentityBackend) { lock.lock(); closeTarget = target; lock.unlock() }
+    func record(_ value: OpenCvIdentityDiagnostic) {
+        lock.lock(); values.append(value); let target = closeTarget; closeTarget = nil; lock.unlock()
+        target?.close()
+    }
+    func snapshot() -> [OpenCvIdentityDiagnostic] { lock.lock(); defer { lock.unlock() }; return values }
 }
 
 /// Only this isolated explicitly launched validation consumer uses this authority.
