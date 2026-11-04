@@ -15,7 +15,7 @@ or sample; the subsequent authorized smoke downloads only the fixed model.
 
 The original ONNX input is `actual_input_1`, NCHW `1×3×128×128`, **RGB**. Normalize each channel as `(pixel - mean) / std`, mean `[151.2405,119.5950,107.8395]`, std `[63.0105,56.4570,55.0035]`. Output `output1` is `1×2`; index 0 denotes the upstream real-person class and index 1 the spoof-image class. The upstream card's BGR note applies to its converted OpenVINO representation, not an instruction to feed BGR to the original ONNX model.
 
-It is a MobileNetV3 classifier trained on CelebA-Spoof. Upstream ACER is a reference dataset result, not this SDK's accuracy or an operating threshold. The repository's existing OpenCV 4.12 DNN can load ONNX and has relevant MobileNetV3 operator dispatch in [the pinned importer](https://github.com/opencv/opencv/blob/49486f61fb25722cbcf586b7f4320921d46fb38e/modules/dnn/src/onnx/onnx_importer.cpp); actual import of this exact asset on the iOS static archive remains untested.
+It is a MobileNetV3 classifier trained on CelebA-Spoof. Upstream ACER is a reference dataset result, not this SDK's accuracy or an operating threshold. The repository's existing OpenCV 4.12 DNN can load ONNX and has relevant MobileNetV3 operator dispatch in [the pinned importer](https://github.com/opencv/opencv/blob/49486f61fb25722cbcf586b7f4320921d46fb38e/modules/dnn/src/onnx/onnx_importer.cpp); the exact asset has since passed the isolated iPhone raw-score smoke in [the runtime evidence](pad-raw-score-smoke.md). This does not validate a face-crop protocol or decision policy.
 
 ## Authorization and implementation boundary
 
@@ -38,3 +38,27 @@ Do not infer a calibrated crop or threshold from the model card. Existing
 FaceLiveness verified-policy admission stays intact: no `LIVE`/`SPOOF`, pass/fail
 or proof from these experimental raw scores. Full PAD functionality still needs
 an authorized evaluation/calibration set and policy.
+
+## 2026-11-04 detector/crop protocol lookup
+
+A bounded official-source review found two different reference paths. The fixed
+[model card](https://docs.openvino.ai/2023.3/omz_models_model_anti_spoof_mn3.html),
+[descriptor](https://github.com/openvinotoolkit/open_model_zoo/blob/e8fb4cd86a516ce5765290e9665f8afe87b79b2e/models/public/anti-spoof-mn3/model.yml)
+and [accuracy config](https://github.com/openvinotoolkit/open_model_zoo/blob/e8fb4cd86a516ce5765290e9665f8afe87b79b2e/models/public/anti-spoof-mn3/accuracy-check.yml)
+define tensors/RGB normalization/CUBIC128 resize; none fixes detection margin,
+landmark alignment, box clipping or the SDK operating threshold.
+
+- Original-author [live demo](https://github.com/kprokofi/light-weight-face-anti-spoofing/blob/82a2c26bacff5462c6f9320c34ae0363ccbed497/demo/demo.py) and [CelebA-Spoof loader](https://github.com/kprokofi/light-weight-face-anti-spoofing/blob/82a2c26bacff5462c6f9320c34ae0363ccbed497/datasets/celeba_spoof.py) crop the returned/annotated bounding box directly, without enlargement or landmark alignment.
+- OMZ's [interactive demo](https://docs.openvino.ai/2023.3/omz_demos_interactive_face_detection_demo_cpp.html), pinned [main.cpp](https://github.com/openvinotoolkit/open_model_zoo/blob/e8fb4cd86a516ce5765290e9665f8afe87b79b2e/demos/interactive_face_detection_demo/cpp/main.cpp) and [detectors.cpp](https://github.com/openvinotoolkit/open_model_zoo/blob/e8fb4cd86a516ce5765290e9665f8afe87b79b2e/demos/interactive_face_detection_demo/cpp/detectors.cpp), instead makes a square face box, defaults to `bb_enlarge_coef=1.2`, `dx_coef=1`, `dy_coef=1`, clips to the frame, and feeds that ROI to the classifier without landmark alignment.
+
+Thus a future SDK crop must be an explicitly application-owned revision,
+binding the detector/version/coordinate mapping, square/enlarge/rounding/clipping
+rules and resize/normalization. Neither reference proves equivalence for the
+existing YuNet/SFace pipeline. Do not label one path as uniquely model-mandated,
+reuse SFace alignment by assumption, or copy a demo threshold as calibration.
+
+The existing `whole-frame-cubic128-rgb-nchw-v1` remains only the completed smoke.
+Actual PAD SDK/Demo decisions still need a chosen capture/crop protocol and
+an authorized genuine/attack evaluation set with an operating point. A scoped
+async request for existing local authorized data/metrics is pending; no new
+samples, corpus download or biometric collection is inferred from continuation.

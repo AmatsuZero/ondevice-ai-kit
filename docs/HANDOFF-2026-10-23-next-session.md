@@ -10,6 +10,7 @@
 - 中间一轮实际 native 初始化后取消，`CANCELLING → CANCELLED` 等待释放且禁生成；同 PID2552 再生成成功。补录原生日志覆盖第三轮初始化与11:44:42.921 accelerator destroy，后置两次PID回读一致；清除输入后cache无文件、picker/incoming无残留，仅空父目录。`verify.py` fresh **57 checks passed**，独立补审 **PASS（限定模拟器普通UI）**。见[新验证](validation/android-litertlm-ui.md)及 ignored `artifacts/verification/android-litertlm-ui-20261104/`。
 - 实际 vision delegate 为 SwiftShader Vulkan/WebGPU、CPU/Software adapter，不是硬件GPU性能。物理设备后置只读观察已Awake/unlocked，不能延用历史Asleep；本轮没有给真机UI输入。真机UI、自然质量、异步drain/streaming与长期资源仍开放。
 - F07不再缺下载/权重或真实图像生成；下一功能缺口是PAD正式SDK/Demo接入与裁剪/校准协议、1:1/1:N阈值、Android ASR系统资源、Apple增强binary。九项保护及MLX lock保持，基础10/12、P4/P11/发布仍open/not-ready；无push/merge/release。
+- PAD官方裁剪调查已完成：原作者直接bbox与OMZ方框1.2×路径不同，无唯一模型强制协议，详见[接入依据](validation/pad-model-candidate.md#2026-11-04-detectorcrop-protocol-lookup)。已异步询问现有授权评估集/采集协议/指标，等待输入；不新增样本/猜测阈值。F09受支持依赖修复刷新代理429，无新结论，勿把历史版本调查称当前上游证明，也不重复诊断archive。上一goalturn有实际UI终态/原生日志/PID/清理新证据，本轮收尾为progress，未满足blocked门槛。
 
 ## 上一检查点 — 2026-11-04 Android LM 真机红图生成通过
 
