@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 最新组合候选 LM 取消与同进程重入
+## 最新续接 — 2026-11-04 ASR 联网复核与次日设备验证准备
+
+- 用户连网后，TECNO默认网络159/Wi-Fi VALIDATED；一次已有授权en-US请求返回requested-without-events-not-ready，独立前后查询仍NOT_REPORTED，资源安装/转写未证，无可跟踪下载句柄。原405普通APK、原test APK/Identity runner及权限已恢复，新鲜restored回读通过；见[次日设备验证](validation/android-asr-next-device-session.md)。
+- 用户曾授权单次最长10秒本机麦克风诊断，随后明确不在设备旁，改约2026-11-05北京时间09:00；本次没有执行采音，也没有安装新探针到真机。独立operator-only单次探针已离线build/AndroidTest lint通过；9.5秒主线程清理＋9.8秒独立进程看门狗、实际销毁耗时与脱敏错误类别，限定独立复审APPROVE。该探针只验framework资源可用，不替代SDK/普通UI转写验收，不保存音频/文本；明天先提示用户再执行，不能仅因时间到/自动续接就采音。
+- 用户要求继续无需其协助的工作；推进当前源码Android三后端组合候选构建与隔离模拟器启动/页面检查。原设备包与保护文件保持；基础10/12、P4/P11/发布open/not-ready，goal active。下方无网络/未授权采音为历史口径。
+
+## 上一检查点 — 2026-11-04 最新组合候选 LM 取消与同进程重入
 
 - 已在既有6GiB LM专用AVD补齐冻结644bbde4…df30候选普通系统红图选择→native初始化后取消→CANCELLING/等待释放→CANCELLED→同输入/同PID5174重入SUCCEEDED→普通清除。254份当前源码匹配，唯一后续差异为ASR test runner顺序；不是HEAD重建。固定授权Gemma四文件摘要/权限保持，清除后cache文件为空；更新后的候选和模型留专用AVD，旧APK可回退，未操作真机包。
 - 两轮SwiftShader软件视觉1448/1448 WebGPU及CPU执行、两对销毁与先销毁后重初始化已记录；不提升硬件GPU/异步drain/自然质量/资源结论。新鲜320/320证据检查通过，含254源码/九保护/MLX lock；独立限定verifier重跑320/320并PASS本轮644模拟器UI范围，不是全分支/发布批准。先误用较旧bd89包的有界运行另留315/315与四份ASR源码差异，不代替644候选。
