@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 F09 consumer 生成器准备
+## 最新续接 — 2026-11-04 页面修复候选实际 SR 主流程
+
+- 固定a27a079/c098fc41页面候选在既有MainFlow隔离模拟器普通系统Photo Picker→Browse→DocumentsUI选原双帧AAC素材，默认ESRGAN真实4×后SUCCEEDED/128×96/2帧/1音轨；输入公开与私有SHA一致，实际输出SHA56600ced…1af4。完整解码/全PTS一致/BT709/四个AAC包hash与PTS通过；首个点击后观测已成功，不称捕获RUNNING或处理耗时。见[主流程证据](validation/android-mainflow-emulator.md#frozen-layout-candidate-sr-main-flow)。
+- 普通清理结果/移除输入后本轮input/output均释放，原两份export摘要保持；PID8481/模型/精确APK和相机麦克风denied保持，返回普通语音页。ignored `android-layout-sr-mainflow-20261104/verify.py` fresh PASS，连同252源码冻结/布局/测试/九保护与MLX lock。未重建/新增SDK测试/操作手机/采音，不提升自然质量、播放或持续资源；该精确包LM/Identity尚未重跑。
+- 用户配合仍约2026-11-05北京时间09:00，先提示再单次ASR诊断；基础10/12、P4/P11/发布open/not-ready，goal active。本轮有普通UI真实推理与独立媒体检查进展。
+
+## 上一检查点 — 2026-11-04 F09 consumer 生成器准备
 
 - 在既有F09计划范围补齐binary-only consumer生成器：声明artifact/实际Mach-O校验、原子生成、可搬移相对引用、framework链接/嵌入和bundle资源阶段；生成源码含图像/视频API及实际model Bundle.module/Metal资源smoke，receipt固定not-run。见[分发验证](validation/apple-mlxvlm-distribution.md#2026-11-04-binary-only-consumer-generator)。
 - 定向10/10、完整tools250/250及Python/Ruby语法/diff检查通过；初始Ruby版本混用和Swift缓存权限失败均保留，最终用已有Ruby3.4与可写缓存通过。fixture的hash/Mach-O为测试替身，不是增强binary build；Task3真实20模块产物及Task4双平台消费/资源runtime仍未验，不采用待决兼容overlay。独立review429无结论，作者作有界检查；九保护及生产MLX lock保持。

@@ -46,6 +46,14 @@ deferred to2026-11-05 09:00 Asia/Shanghai as described in
 This fixes page-space usability. It does not re-run the three model inference
 flows, prove physical touch/camera geometry, or close P4/P11/release gates.
 
+Later on2026-11-04 the same frozen APK separately completed an ordinary system
+video selection → actual ESRGAN4× → AAC-preserving output → ordinary cleanup
+flow on MainFlow. Full decode/PTS/BT.709/AAC packet checks passed; see
+[the exact candidate receipt](android-mainflow-emulator.md#frozen-layout-candidate-sr-main-flow).
+This adds only the bounded synthetic SR main flow to the earlier layout checks;
+LM/Identity inference on this exact layout APK and physical-device acceptance
+remain unverified.
+
 Final source candidate: commit `a27a0795df5acda8e9051518a7a8a5298b4c08f6`,
 252 committed source inputs verified byte-for-byte; BuildConfig carries that
 commit. Frozen App SHA256

@@ -1,5 +1,37 @@
 # Android Identity and video SR system UI — 2026-11-04
 
+## Frozen layout candidate SR main flow
+
+The later layout candidate (source `a27a079`, APK
+`c098fc41dd635cb5e35c2782ad71016f45534352563b3c5c7140bd2a3f8cf1a6`)
+has now run SR through ordinary system/UI controls on the existing
+`ODAI_MainFlow_20261104` / emulator-5580, without a rebuild or physical-phone
+operation. The existing authorized ESRGAN SHA
+`1a380d3744103e11ef343534aaff54815cae40769dcd00c023652a7e5bc47f4b`
+and owned two-frame AAC fixture were reused.
+
+System Photo Picker → Browse → DocumentsUI selected
+`ODAI-combined-2frames-AAC.mp4`; its public/private SHA
+`38cba1f9e37ece3fa13c14bbddb59013517181ac3fbe6c7bceb34813c6227f72`
+matched. Ordinary Start4× produced `SUCCEEDED`,128×96/two frames/one AAC
+track, in the same PID8481. The first post-click observation was already
+successful; no RUNNING interval or duration is claimed. Actual output SHA
+`56600ced93fff52e3269a20ce841a3f4343fdd7d3c6561d119f09791b8981af4`
+was copied and verified against the device. Both files fully decode; both video
+PTS match exactly, BT.709/limited metadata passes, and all four AAC packet
+hashes/PTS match within1µs.
+
+Ordinary Clear result/Remove input released this request's private input/output.
+The two prior exports retained their bytes; model/APK/PID and denied camera/mic
+permissions stayed unchanged. The ordinary speech page was restored without
+capture. Evidence and success screenshot are under ignored
+`artifacts/verification/android-layout-sr-mainflow-20261104/`; its `verify.py`
+also reruns the frozen-layout252-source/hash/test receipt verification and
+independently decodes/probes the copied media. Fresh PASS. No new SDK test,
+inference-quality, playback, sustained-resource or physical-device claim is
+made by this small synthetic run. ASR remains deferred to the user-present
+2026-11-05 09:00 session; release remains open/not-ready.
+
 Bounded local acceptance on the isolated `ODAI_MainFlow_20261104` arm64 emulator,
 Android 16 / API36. The connected TECNO device was not unlocked or used for this
 UI run. Existing installed system-image bytes were reused; no new model, sample
