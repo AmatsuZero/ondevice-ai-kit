@@ -1,0 +1,31 @@
+--- a/Libraries/MLXLMCommon/KVCache.swift
++++ b/Libraries/MLXLMCommon/KVCache.swift
+@@ -2646,2 +2646,4 @@
+         break
++    @unknown default:
++        fatalError("Unsupported attention mask mode")
+     }
+@@ -2830,2 +2832,4 @@
+         return scores
++    @unknown default:
++        fatalError("Unsupported attention mask mode")
+     }
+--- a/Libraries/MLXLMCommon/TurboQuantKVCache.swift
++++ b/Libraries/MLXLMCommon/TurboQuantKVCache.swift
+@@ -1368,2 +1368,4 @@
+             case .none: break
++            @unknown default:
++                fatalError("Unsupported attention mask mode")
+             }
+--- a/Libraries/MLXVLM/Models/Gemma4.swift
++++ b/Libraries/MLXVLM/Models/Gemma4.swift
+@@ -114,2 +114,4 @@
+         return mask
++    @unknown default:
++        fatalError("Unsupported attention mask mode")
+     }
+@@ -210,2 +212,4 @@
+         baseMask = MLXArray.ones([sequenceLength, sequenceLength], dtype: .bool)
++    @unknown default:
++        fatalError("Unsupported attention mask mode")
+     }

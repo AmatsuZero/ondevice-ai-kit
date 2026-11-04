@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Android LM 普通模拟器 UI 通过
+## 最新续接 — 2026-11-04 F09 固定兼容候选已具体化，未采纳
+
+- 官方API fresh：Swift issue91540 open、PR91672 open/unmerged、swift-collections latest1.7.5；相关PR92814已合入main，不证明当前编译器包含。只有Swift6.4.2，本机arm64 iOS18最小interface复现default exit1；仅失败target加selector flag exit0，未重跑完整archive。
+- [候选](validation/f09-compatibility-candidate/README.md)包含4文件/2patch的精确diff、前后SHA和runtime绑定。fresh临时patch replay复现全部4个已记录diagnostic hash；5个unknown分支fatalError风险明确披露。旧diagnostic Git alternate对象库已缺失，4原始源码按固定官方revision只读恢复作比对；未下载完整依赖或改生产lock/缓存。
+- 候选为draft-not-adopted；独立verifier429，无审查结论。下一需显式兼容维护策略决定及review，再推进20模块双slice/资源/独立binary consumer，不能把此候选或旧wrapper当F09通过。PAD授权评估集问题仍待答复，Android ASR资源仍未证。基础10/12、P4/P11/发布open/not-ready，goal active；九项保护与MLX lock不变，无push/merge/release。上一轮有UI证据/提交进展；本轮有新鲜compiler复现和具体候选，不计重复无进展。
+
+## 上一检查点 — 2026-11-04 Android LM 普通模拟器 UI 通过
 
 - 不改生产源码，复用 `c5be267` immutable APK（安装摘要匹配），新隔离 API36 arm64 `ODAI_LM_UI_20261104` / emulator-5582、6GiB RAM/32GiB data；真实系统 ZIP 导入与图片选择均含取消重入，完整授权3.66GB模型安装后，两轮普通 UI 生成 `SUCCEEDED`，32-token输出描述固定红矩形。
 - 中间一轮实际 native 初始化后取消，`CANCELLING → CANCELLED` 等待释放且禁生成；同 PID2552 再生成成功。补录原生日志覆盖第三轮初始化与11:44:42.921 accelerator destroy，后置两次PID回读一致；清除输入后cache无文件、picker/incoming无残留，仅空父目录。`verify.py` fresh **57 checks passed**，独立补审 **PASS（限定模拟器普通UI）**。见[新验证](validation/android-litertlm-ui.md)及 ignored `artifacts/verification/android-litertlm-ui-20261104/`。

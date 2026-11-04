@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-adopted",
+  "productionLockSha256": "e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858",
+  "revisions": {
+    "swift-collections": "35a1edcb8ebd2bfe251d587f0b69e62af28f508c",
+    "mlx-swift-lm": "6e338e5df49424fc0db7c6d58184d622f92ed18a"
+  },
+  "runtimeBinding": {
+    "mlx-swift": "0.32.3@19601207e9a0de51e03ee6ec0c3c5f3784275075"
+  },
+  "files": [
+    {
+      "package": "swift-collections",
+      "path": "Package.swift",
+      "originalSha256": "d03f7808ec49983033cd83fdf7ba2967e2b9f1ca550fc742b253f72c18b84c66",
+      "patchedSha256": "dd3c508cee6a28cea92930d2c5c6a15fe11096405aadbf95d20106211f9b3a4e"
+    },
+    {
+      "package": "mlx-swift-lm",
+      "path": "Libraries/MLXLMCommon/KVCache.swift",
+      "originalSha256": "2d8a9e7fc382cf143779c6f946175ce5e7b6a2c63c6aa29e0fbda49845d78264",
+      "patchedSha256": "90dc1e18eb09af410a1cc12ccb9a6f2b576bd9ae509f032d24b3d98cea48b715"
+    },
+    {
+      "package": "mlx-swift-lm",
+      "path": "Libraries/MLXLMCommon/TurboQuantKVCache.swift",
+      "originalSha256": "467941e124380ebce817d3ea82811834e18305ef1102ae9019a5744eac9ca958",
+      "patchedSha256": "acb9a5593f4783b0b8043dfb980845126356410aa4588c45219c80aa98ec2442"
+    },
+    {
+      "package": "mlx-swift-lm",
+      "path": "Libraries/MLXVLM/Models/Gemma4.swift",
+      "originalSha256": "83c1c9d393a194ff9f6fff69964eed3abad1cc2ca81669dd7ef247073f0e5b4b",
+      "patchedSha256": "8aff4980f4329db0724508d5f45f6e300488bac9fe713e7870b1a77526d01595"
+    }
+  ],
+  "patchSha256": {
+    "swift-collections": "d6ecdb7d17d4745a11a4233788943fae3fc0bbed8dd54154361b07515a9e2c91",
+    "mlx-swift-lm": "a9891c41168c30bea8e0106d93e87016d5caea10527efeb7bce6136949108376"
+  },
+  "scope": "isolated F09 binary build copies only; no source dependency or lock replacement",
+  "knownRisk": "five unknown MLX attention-mask cases trap with fatalError; no fallback"
+}

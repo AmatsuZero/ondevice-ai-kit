@@ -1,5 +1,26 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-04 compatibility candidate, not adopted
+
+Fresh official API reads still report issue91540 open, PR91672 open/unmerged and
+swift-collections latest1.7.5. Related PR92814 has merged to upstream main;
+that is not proof of inclusion in the installed Swift6.4.2. A fresh arm64 iOS18
+minimal module-interface reproduction on this compiler fails with `Element is
+not imported through module Client` (exit1); only the failing target's selector
+flag makes interface verification pass (exit0). No full archive was repeated.
+
+The exact four-file [compatibility candidate](f09-compatibility-candidate/README.md)
+is now reviewable, with two patches, original/patched SHA256 and fixed revisions.
+A fresh temporary patch replay reproduced all four historical diagnostic source
+hashes. Five unknown attention-mask branches explicitly trap; that behavior and
+exact MLX0.32.3 binding are disclosed. The old diagnostic checkout's Git object
+alternates are now absent, so the originals came from four exact-revision
+reference files, not an unverifiable checkout HEAD. Production dependencies and
+lock remain unchanged. Independent review returned429 without a verdict; this
+is a draft policy decision, not adopted support, a binary build or release pass.
+Ignored raw status/compiler/patch evidence is under
+`artifacts/verification/f09-compatibility-policy-20261104/`.
+
 ## F09 binary distribution design checkpoint (2026-10-30)
 
 The binary artifact contract and implementation sequence are defined in:
