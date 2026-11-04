@@ -45,3 +45,13 @@ deferred to2026-11-05 09:00 Asia/Shanghai as described in
 
 This fixes page-space usability. It does not re-run the three model inference
 flows, prove physical touch/camera geometry, or close P4/P11/release gates.
+
+Final source candidate: commit `a27a0795df5acda8e9051518a7a8a5298b4c08f6`,
+252 committed source inputs verified byte-for-byte; BuildConfig carries that
+commit. Frozen App SHA256
+`c098fc41dd635cb5e35c2782ad71016f45534352563b3c5c7140bd2a3f8cf1a6`.
+`frozen/layout-device.log` passes on these exact bytes; the temporary test APK
+was removed, both capture permissions remain denied, and ordinary speech-page
+AX/screenshot were retained. `verify.py` passes for source/APK identity,
+paired regression results, tests, cleanup, nine protected paths and MLX lock.
+This frozen source commit remains the candidate if later documentation changes.

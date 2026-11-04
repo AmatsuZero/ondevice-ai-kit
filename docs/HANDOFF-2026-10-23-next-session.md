@@ -9,6 +9,7 @@
 - 在当前提交三后端组合候选普通UI实际发现非人脸页仍保留大块黑色预览、控件限高380dp；已修复Android宿主按页面隐藏预览、非人脸控件占满可用空间及系统insets，既有iOS调用保持默认限高。可见性在composition读取再SideEffect通知；只在effect读取导致返回不恢复的中间失败已保留并修正。
 - 相同最终无采音/相机/推理回归在旧冻结App失败（speech titleTop1444/2400），新App通过（语音/视频/图像理解178，返回人脸1476）；组合62/62、默认54/54、共享iOS80/80与APK/testAPK/lint/iOS arm64 compile通过。见[页面空间验证](validation/android-demo-layout.md)。只更新既有MainFlow隔离模拟器，未更新真机/LM专用AVD；九保护/生产lock保持，ASR采音仍0次。
 - 用户设备配合改约2026-11-05北京时间09:00；先给开始提示再做单次最长10秒本机诊断，不能自动按时采音。继续无需用户协助的本地验证/冻结；不扩大为新三后端推理或全分支/发布通过。基础10/12、P4/P11/发布open/not-ready，goal active。
+- 最终候选固定源码a27a079/252文件匹配，BuildConfig带commit，APK c098fc41…cf1a6；该精确包layout回归通过、原test包缺席状态已恢复、普通语音页已启动并留AX/截图。ignored `android-demo-layout-20261104/verify.py`新鲜通过，TECNO原405APK/7b9test/Identity runner/权限只读复核不变。候选源码固定为a27a079，不因随后文档提交改称新HEAD build。
 
 ## 上一检查点 — 2026-11-04 ASR 联网复核与次日设备验证准备
 
