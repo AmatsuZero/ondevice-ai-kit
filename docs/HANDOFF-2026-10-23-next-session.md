@@ -4,7 +4,16 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 TECNO 普通 LM UI 与自然图像重入通过
+## 最新续接 — 2026-11-04 TECNO 视频 SR 普通 UI 有界验证
+
+- 固定旧三opt-in APK405d64e1…082c0/SR模型不变，TECNO KM9/API35/arm64/PID26205。普通系统模型与视频picker取消/重入/实际选择、非零进度取消→CANCELLED及部分输出删除通过；未捕获中间CANCELLING。
+- 原48帧自然请求同输入重入后已有非零进度（shutdown日志22encoded frames），13:13:10充电到75%触发OEM退出省电/CONFIG_UI_MODE，Activity同PID重建、codec停止、私有输入/output清理；不是48帧成功/模型崩溃。配置恢复按corner后置，无生产修复。
+- 为完成功能有界序列，明确stream-copy同一High/CRF18派生片前4帧，系统picker选择后成功1280×720/4帧/no-audio；既有32×24/2帧AAC同选中输入连续两次成功128×96/2帧/1音轨。三输出完整FFmpeg解码/PTS≤1µs/BT709，两次AAC4包hash/PTS均匹配。自然输出SHA21b0c5f0…a54c45/191636bytes；不是原无损质量参考或真机48帧验收。
+- 分享第二AAC打开OEM chooser后BACK，未发送；播放自然片经resolver“仅此一次”到Files TosActivity，未接受首次服务条款，实际播放器画面未验。两export与各自原始output一致；移除输入后本轮私有input/output释放，2export按1天策略保留，公开fixture保留。原LM3字节fixture未操作。
+- ignored `artifacts/verification/android-sr-physical-ui-20261104/verify.py` fresh108/108；设备/API/ABI/model/APK、12SR源码/补充当前源码快照、9保护及MLX lock核对。旧APK不验证最新LM策略，完整当前源码与APK等价未宣称。独立证据复审确认有界核心流程；URI→export hash已补自动gate，未留存21帧UI的说法改用shutdown22encoded frames。AAC旧采样未留私有input SHA，保留为证据缺口，不重跑或补造历史。详见[范围与失败记录](validation/android-video-sr-demo.md#2026-11-04-tecno-ordinary-ui-bounded-natural-and-aac-sequence)。F09候选复审另已同步本地commit eed885f，仍draft-not-adopted。
+- 基础10/12、P4/P11/发布open/not-ready，goal active；PAD评估集/协议与F09路线仍待既有问题答复，Android ASR资源未证。无push/merge/release。当前有实际UI/媒体/清理进展，不满足blocked门槛。
+
+## 上一检查点 — 2026-11-04 TECNO 普通 LM UI 与自然图像重入通过
 
 - 设备新鲜预检Awake/unlocked；复用固定optional LM APK及设备已授权模型，无生产改动/重建/下载。先备份原APK与rename保留旧空LM目录，debug私有目录预置后正常ModelStore安装校验。设备完整APK/模型SHA匹配。
 - 普通Activity系统图片picker取消重入→红图生成成功；第二轮实际Mali初始化后点取消，CANCELLING禁生成→CANCELLED；同PID9562选既有公开Common swifts第0帧，64tokens生成成功，输出含蓝天/白云/飞鸟。两轮均显示真实backend/model/revision/runtime，64tokens仍截断，不称完整自然质量。

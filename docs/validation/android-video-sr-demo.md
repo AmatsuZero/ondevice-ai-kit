@@ -4,7 +4,8 @@
 processing, reentry, player Activity handoff and share chooser are now verified.
 Both exported copies passed independent packet/PTS/decode checks. See
 [UI evidence and remaining playback/hardware boundaries](android-mainflow-emulator.md).
-The earlier real-device runs below remain headless evidence.
+The earlier real-device runs below remain headless evidence; the bounded
+TECNO ordinary UI section below adds separate physical evidence.
 
 2026-11-04 natural-input update: the same isolated emulator ordinary Demo also
 completed a 320×180, 48-frame Common swifts clip → 1280×720 H.264 output. The
@@ -16,6 +17,83 @@ private input/output files. See [input identity, evidence and quality
 boundaries](android-mainflow-emulator.md#natural-video-main-flow).
 
 Implemented optional `android:backend-litert-sr` and Demo `-PenableLiteRtSr=true` main flow: system picker → bounded private input store → AndroidVideoBridge/VideoProcessingClient → real ESRGAN CPU tiles → H.264 MP4/AAC mux → owned output → private FileProvider playback/share copy. The default APK has neither SR nor LM vendor runtime; both opt-ins can be combined. No model is packaged or downloaded by Gradle.
+
+## 2026-11-04 TECNO ordinary UI, bounded natural and AAC sequence
+
+Fresh device identity: TECNO KM9, Android15/API35, arm64-v8a, serial
+`15365375C9007986`. The ordinary Demo remained in PID26205 throughout this
+sequence. No production source, runtime dependency or APK was changed/rebuilt; the fixed
+existing model weights were installed through the ordinary importer.
+Installed APK SHA-256 is
+`405d64e1bf67d1879ff96db386282066e7cda612a2b77134377e070feec082c0`,
+the preserved three-opt-in identity-gallery APK. It predates the latest LM
+policy changes; this run does not validate those changes or claim whole-current
+APK/source equivalence. Twelve SR backend/host/shared source hashes still match
+the earlier SR ledger; supplemental current Activity/manifest/Gradle hashes
+are recorded separately without pretending that every file has an APK-build
+hash receipt. Private installed ESRGAN bytes match the fixed model digest.
+
+- Ordinary system DocumentsUI model import: cancel, reenter, select the exact
+  existing model; the backend became available. Video picker cancellation and
+  reentry also passed. Only explicitly prepared project fixtures were selected.
+- The original 320×180/48-frame natural clip was selected with the system picker.
+  The first request was cancelled after a nonzero completed-frame update;
+  `CANCELLED` and deletion of partial output were observed. The intermediate
+  `CANCELLING` state was not captured. Same-input reentry advanced to nonzero
+  processing (shutdown logs record22 encoded frames), then **was interrupted**, not successful: at13:13:10
+  charging reached75%, the OEM exited power-save mode and changed UI mode.
+  System logs show `Config changes=200`/`CONFIG_UI_MODE`, MainActivity recreation
+  in the same PID, codec shutdown and private input/output cleanup. No current
+  PID exit/new crash was recorded. Configuration-state restoration remains
+  deferred; no manifest or lifecycle workaround was added.
+- To finish a bounded functional sequence, stream-copy the first **4 frames** of
+  that same approved H.264 High/CRF18 derivative, without further re-encoding.
+  Input SHA `59046e7ce4279f3666d6d971f005a26628e11b2964e2c6406ea123c68ceff53f`;
+  actual system picker selection and a new processing request produced
+  `SUCCEEDED / 1280×720 · 4 frames · audio0`. Output191,636 bytes,
+  SHA `21b0c5f081c22bd639cc3323ba7a34b9c0068a09ed8e4dda646f63a98ea54c45`.
+  This is a four-frame derived natural clip, not a completed physical48-frame
+  request or the original lossless quality reference.
+- The existing32×24/two-frame AAC fixture completed **twice on the same selected
+  private input and PID**, with distinct output paths:128×96, two frames, one
+  AAC track. Each output fully decoded; all four AAC packet hashes and PTS
+  matched the source. Three outputs' frame PTS matched within1µs and carried
+  BT.709 limited metadata. These are external ffprobe/FFmpeg checks.
+- Sharing the second AAC result opened the OEM chooser (`正在分享视频`), then
+  BACK returned to the Demo. No recipient/target was selected and no file sent.
+  Its FileProvider copy matched the second original output byte-for-byte.
+- Playing the natural result opened the Android resolver. Files was chosen with
+  **Just once**; the actual `ACTION_VIEW` and project `videooutputs/video-results`
+  URI reached `com.google.android.apps.nbu.files/.tos.TosActivity`. Files showed
+  first-use terms, which were not accepted; BACK returned to the Demo. This
+  proves resolver/external-Activity handoff and exact exported bytes, **not
+  visible playback or player acceptance**. The input remained until explicitly
+  removed; the original output had already retired on backgrounding.
+- Removing the input left no run-owned private input/output files. Two exact
+  FileProvider exports remain under their existing one-day retention policy.
+  Public input/model fixtures remain available for reproduction.
+
+Ignored evidence: `artifacts/verification/android-sr-physical-ui-20261104/`.
+Fresh `verify.py`: **108/108 checks passed**, including input/output/model/APK
+identity, three full decodes/PTS/color, two AAC packet comparisons, distinct
+same-input reentry outputs, cancellation cleanup, external UI boundaries,
+nine protected files and the production MLX lock. OEM recreation diagnostics
+are retained as time/project-scoped lines; the original broad diagnostic
+capture was not retained. Independent final review confirmed the bounded core
+flow and manually linked both actual handoff URI basenames to the export hashes;
+those links are now validator-enforced too. Its missing retained21-frame UI
+observation was corrected to the actual shutdown log's22 encoded frames. The
+AAC captures retain the same private input path and system filename, but did not
+record a private-input SHA before retirement; exact private AAC-copy identity
+is an explicit evidence gap, distinct from the exact output audio packet checks.
+This is a bounded evidence review, not full-branch/release approval.
+
+This closes the bounded physical ordinary model/video-picker, processing,
+cancellation/reentry, chooser and external-Activity handoff subitems. Physical
+48-frame completion, actual external playback, arbitrary providers/manual
+human touch, comparative natural/tile/temporal quality, performance/energy,
+minimum API26, sustained resources, distribution and release gates remain open.
+F06/P11/release remain open/not-ready; no push/merge/release.
 
 ## Model/runtime and scope
 
@@ -50,7 +128,8 @@ Preserved failures: the first fixture declared only BT.709 matrix, not full prim
 Independent reviewer inspected this diff and found one medium evidence gap: the runner originally trusted backend metadata without reopening output. Fixed by runner postconditions plus fresh device and external packet/decode checks above. No production high/critical findings reported; no second independent APPROVE is claimed. Author review is separate.
 
 Actual model/video pickers and player/share handoff are verified on the isolated
-emulator as linked above; real-device UI acceptance remains open. The device's
+emulator as linked above; the bounded TECNO section adds physical ordinary UI
+evidence while actual external playback and full-profile acceptance remain open. The device's
 historical locked/asleep state is not a claim about its current state. Native
 headless inference is distinct from UI acceptance. Natural/tile-seam/temporal
 quality, broad input profiles, AAC priming/edit lists, minimum API26 device,
