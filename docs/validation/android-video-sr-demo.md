@@ -18,6 +18,56 @@ boundaries](android-mainflow-emulator.md#natural-video-main-flow).
 
 Implemented optional `android:backend-litert-sr` and Demo `-PenableLiteRtSr=true` main flow: system picker → bounded private input store → AndroidVideoBridge/VideoProcessingClient → real ESRGAN CPU tiles → H.264 MP4/AAC mux → owned output → private FileProvider playback/share copy. The default APK has neither SR nor LM vendor runtime; both opt-ins can be combined. No model is packaged or downloaded by Gradle.
 
+## 2026-11-04 TECNO complete 48-frame natural request
+
+A subsequent ordinary system-picker request on TECNO KM9/API35 completed the
+**full 48-frame** H.264 High/CRF18 Common swifts derivative. The earlier OEM
+configuration-change interruption below remains a separate failed attempt.
+No APK, model, system power setting or production source was changed for this
+request. The installed APK remains `405d64e1…082c0`, predating the latest LM
+policy; this is SR evidence. The fixed ESRGAN model is unchanged.
+
+The actual selected filename was `ODAI-common-swifts-H264-High-48f.mp4`.
+Host and private input SHA-256 matched
+`22b3e924ad5717a8cd278f92fdad3b39b1ed1886106a941e1d9b0287f6b026d8`.
+PID26205 persisted from processing through the captured success state:
+`SUCCEEDED / 1280×720 · 48 frames · 2.0 seconds · audio0`.
+The original output was extracted before background handoff:1,833,519 bytes,
+SHA-256 `5ea2bb2b3198074492e354cc6ccecdf2d0d15530e604e2ef334bb1fadd053264`.
+Independent FFmpeg complete decode and ffprobe confirm48 H.264 frames,
+320×180→1280×720, every PTS matching within1µs, BT.709 limited range and no
+audio. This derived input is not the original lossless quality reference.
+
+The playback button opened the resolver; clicking its Visha recommendation
+launched `com.transsion.magicshow/com.transsion.magicvideo.activities.VideoPlayerActivity`
+directly. Automation then used a stale resolver reference intended for
+“Just once”; the next observed screen was an unexpected episode selector.
+BACK exited and the Demo was relaunched. No visible video frame was captured,
+so actual visual playback remains unverified. Project-scoped logs bind the
+player's exact FileProvider URI basename `a8c04c8a-d557-49db-be2a-3514a799cf6b.mp4`
+to an export with the same original output SHA; the player log records
+`playPosition=2000`. That log does not replace visual acceptance.
+
+At14:06:00 the system recorded `Killing26205 … remove task`; the actor/cause
+of task removal is not established. Relaunch used PID31417 and no selected
+input. Original output had retired, but the exact private input remained
+orphaned after process death. Its SHA was rechecked and only that file/empty
+parent were manually removed. This is **manual recovery**, not ordinary UI
+cleanup acceptance or a same-PID playback return. Three export copies remain
+under the existing one-day retention policy. Process-death recovery remains a
+deferred corner case; no lifecycle workaround was added.
+
+Ignored evidence: `artifacts/verification/android-sr-full48-physical-20261104/`;
+fresh `verify.py` **49/49 passed**, covering full media/input/output identity,
+processing PID, exact player URI/export, explicit process-death/manual-cleanup
+boundary, unchanged APK,12 SR source bindings,9 protected files and MLX lock.
+This closes physical ordinary-UI48-frame completion. Visual playback, quality,
+performance/energy, minimum API26, sustained resources and release remain open.
+For the separate latest-source APK, see
+[combined candidate](android-mainflow-emulator.md#current-three-opt-in-candidate).
+The new bounded independent review returned service429 without a conclusion;
+its review gap remains open despite the local evidence checks passing.
+
 ## 2026-11-04 TECNO ordinary UI, bounded natural and AAC sequence
 
 Fresh device identity: TECNO KM9, Android15/API35, arm64-v8a, serial
@@ -90,7 +140,7 @@ This is a bounded evidence review, not full-branch/release approval.
 
 This closes the bounded physical ordinary model/video-picker, processing,
 cancellation/reentry, chooser and external-Activity handoff subitems. Physical
-48-frame completion, actual external playback, arbitrary providers/manual
+48-frame completion was subsequently verified above; actual external playback, arbitrary providers/manual
 human touch, comparative natural/tile/temporal quality, performance/energy,
 minimum API26, sustained resources, distribution and release gates remain open.
 F06/P11/release remain open/not-ready; no push/merge/release.

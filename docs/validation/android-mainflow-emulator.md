@@ -7,6 +7,54 @@ or runtime was downloaded. This adds UI evidence to the earlier hardware
 [Identity](android-opencv-identity-demo.md) and [video SR](android-video-sr-demo.md)
 headless runs, without replacing hardware acceptance.
 
+## Current three-opt-in candidate
+
+A separate frozen candidate was built from commit
+`71322085d61a80b92e9b30ac599feb284dc99b0f`, with249 tracked Android/Demo/KMP
+build-input hashes and all three flags:
+`enableLiteRtLm`, `enableLiteRtSr`, `enableOpenCvIdentity`.
+APK SHA-256 `bd89bdbf3b39f5753879bb0faccff1dfc185dc3f132f215453c9f8b16fb16bd7`
+(265,836,757 bytes); test APK SHA-256
+`456cf13590cb322eaccc18725f6c3216ac5d3c9138d1af33d1729726c4876abd`.
+DEX contains `CPU_TEXT_GPU_VISION` and the full source commit; arm64 libraries
+include LiteRT LM, LiteRT SR and OpenCV. Runtime dependencies remain0.18.1,
+1.4.2 and4.12.0 respectively. Imported SR/LM/Identity weights are absent from
+the package; the four pre-existing bundled MLKit face assets remain present.
+
+Demo56/56 tests actually executed; backend LM33/33, SR4/4 and Identity6/6
+JUnit results were retained from Gradle `UP-TO-DATE`, not freshly executed.
+`assembleDebug`, `assembleDebugAndroidTest` and `lintDebug` succeeded.
+Initial invalid inherited Java paths and offline OpenCV cache-miss failures
+are retained. Build recovery used the existing cached Temurin21 and restored
+the repository's fixed OpenCV dependency, without upgrading declarations or
+changing Apple caches/lock. An overbroad initial package check rejected all
+model extensions; the corrected gate explicitly permits only the four
+existing MLKit assets and preserves the failed-check explanation.
+
+Only the existing isolated `ODAI_MainFlow_20261104` / emulator-5580 was updated
+using `install -r`, preserving data; the older APK remains available for
+rollback. The TECNO device still has its older APK. Ordinary system picker
+selected `ODAI-combined-2frames-AAC.mp4`, exact host/private input SHA
+`38cba1f9e37ece3fa13c14bbddb59013517181ac3fbe6c7bceb34813c6227f72`.
+SR succeeded at128×96/two frames/one AAC track in PID5514. Original output:
+7,724 bytes, SHA `0af7cab266fd8d73a0fb9d0768206c7a36f9ca5b6b5a4dbf36af1ed7abf32903`.
+Independent full decode/PTS≤1µs/BT.709 and all four AAC packet hashes/PTS pass.
+Ordinary UI input removal released private input/output; PID5514 remained.
+An initial picker tap overlapping the emulator navigation bar returned Home;
+after scrolling the button clear of that bar, selection succeeded. No new
+process crash was observed; this is retained as an automation boundary.
+
+Ignored `artifacts/verification/android-combined-current-20261104/` retains
+frozen APKs,249 source bindings, build/JUnit receipts, install identity,
+ordinary UI states and original media. Fresh `media-verify.py`: **301/301**,
+including media, APK, source/protected/MLX lock and UI-cleanup receipts.
+This current-package run verifies combined packaging and ordinary SR; it
+does not claim current-package LM generation or Identity registration,
+hardware GPU, natural quality, sustained resources or release readiness.
+Historical UI evidence below belongs to its separately identified older APK.
+The new bounded independent review returned service429 without a conclusion;
+local verification does not constitute independent or full-branch approval.
+
 ## Candidate identity
 
 Reused immutable combined APK from

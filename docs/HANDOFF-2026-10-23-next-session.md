@@ -4,7 +4,15 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 TECNO 视频 SR 普通 UI 有界验证
+## 最新续接 — 2026-11-04 真机完整48帧与最新三opt-in候选
+
+- TECNO旧APK405d64e1…082c0/固定ESRGAN不变，系统picker实际选择原48帧High/CRF18自然派生片，PID26205处理至SUCCEEDED：1280×720/48帧/2秒/no-audio。提前提取原output，1,833,519bytes/SHA5ea2bb2b…053264；完整解码/全PTS≤1µs/BT709通过。不是原无损质量参考，历史CONFIG_UI_MODE中断保留。见[完整48帧](validation/android-video-sr-demo.md#2026-11-04-tecno-complete-48-frame-natural-request)。
+- Visha推荐点击后直接进入player；后续误用了旧resolver ref，下一观察为非预期集数选择页，BACK退出。日志证明精确URI→第三export→原output hash及playPosition2000，但未捕获实际视频画面。系统14:06:00以remove task结束旧PID，行为来源未定；重启PID31417，私有输入孤留，经SHA复核后精确手动删除。不能称普通UI清理/同PID播放返回；3export保留1天策略。真机verify.py fresh49/49含明确恢复边界，未改生产代码处理corner。
+- 另从HEAD7132208冻结249份Android/Demo/KMP输入，三opt-in最新组合APK构建/lint通过，SHA bd89bdbf…16bd7，含最新CPU_TEXT_GPU_VISION/固定LM0.18.1、SR1.4.2、OpenCV4.12.0。Demo56/56实际执行，backend33/4/6均Gradle缓存结果，未称重跑。仅install-r更新既有隔离ODAI_MainFlow_20261104，旧APK可回退，未覆盖真机包。
+- 最新组合APK在模拟器PID5514普通picker双帧AAC处理成功128×96/2帧/1音轨，精确私有input/output核对；完整解码/PTS/BT709/AAC4包hash与PTS、普通UI移除输入及input/output释放通过。media-verify.py fresh301/301含249源码/9保护/MLX lock。此包LM实际生成/Identity注册未验。见[组合候选](validation/android-mainflow-emulator.md#current-three-opt-in-candidate)。构建前失效JAVA_HOME/offline缺OpenCV及过宽package gate失败均保留，恢复固定依赖/现有Temurin21，未升级生产声明。
+- 基础10/12，P4/P11/发布open/not-ready，goal active；PAD评估协议/指标与F09维护路线仍待既有答复，Android ASR资源未证。九项保护与MLX lock不变；本轮无生产代码改动，无push/merge/release。独立限定复审服务429未取得结论，保留review缺口；本轮有完整真机终态及当前包实际SR进展，不满足blocked条件。
+
+## 上一检查点 — 2026-11-04 TECNO 视频 SR 普通 UI 有界验证
 
 - 固定旧三opt-in APK405d64e1…082c0/SR模型不变，TECNO KM9/API35/arm64/PID26205。普通系统模型与视频picker取消/重入/实际选择、非零进度取消→CANCELLED及部分输出删除通过；未捕获中间CANCELLING。
 - 原48帧自然请求同输入重入后已有非零进度（shutdown日志22encoded frames），13:13:10充电到75%触发OEM退出省电/CONFIG_UI_MODE，Activity同PID重建、codec停止、私有输入/output清理；不是48帧成功/模型崩溃。配置恢复按corner后置，无生产修复。
