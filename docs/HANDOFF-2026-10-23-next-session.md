@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 页面候选 LM 取消重入
+## 最新续接 — 2026-11-04 F09 本地 ZIP 校验准备
+
+- 新增`tools/validate_mlxvlm_binary_package.py`及8项回归：现有manifest/Mach-O→逐XCFramework根目录ZIP完整字节/清单比对→SwiftPM checksum→真实local binaryTarget ZIP解析→第二consumer本地依赖图与解压产物比对。所有校验/消费绑定同一临时ZIP快照，原产物/锁/缓存不改；不创建真实增强发布ZIP。见[本地包校验准备](validation/apple-mlxvlm-distribution.md#2026-11-04-local-zip-package-validator-preparation)。
+- 定向8/8、完整tools270/270（61.506s）、Python compileall/diff/CLI及252冻结/九保护/生产lock通过，证据ignored `f09-local-package-gate-20261104/`。官方research确认local path可ZIP、remote仅HTTPS、binary target不直接声明资源；实际SwiftPM解析是真实的，模型hash/Mach-O仅夹具替身，不称20模块binary/编译/资源runtime通过。独立review429无结论；作者发现并修复checksum与消费副本绑定问题，纠正首个mutation测试的macOS路径别名后，旧顺序内存重现失败/当前通过，失败与修正均保留。
+- Task5仅准备工具/in progress，Task3/4仍缺维护策略、完整依赖来源、真实双slice与消费/资源runtime；F09/基础10/12/P4/P11/发布open/not-ready、goal active。无手机操作或采音；2026-11-05北京时间09:00仍需用户在场提示后才开始单次ASR。上一轮有LM真实取消重入进展，本轮有实现/完整回归进展；不以工具替代最终交付。
+
+## 上一检查点 — 2026-11-04 页面候选 LM 取消重入
 
 - 仅既有LM模拟器普通UI，精确a27a079/c098fc41布局APK实际原生视觉初始化后取消，观测RUNNING→CANCELLING/等待原生任务释放→CANCELLED，生成重新可用；保留同一picker输入再生成SUCCEEDED，实际backend/model/revision/runtime正确。续接时上一请求已成功，单独保留warmup UI，不混入两请求日志窗口。见[取消重入证据](validation/android-mainflow-emulator.md#frozen-layout-candidate-lm-cancellation-and-reentry)。
 - 同PID6085/四模型摘要/精确APK/相机麦克风denied保持；普通清除后cache/input为空。日志绑定PID与epoch1793801793，两次1448/1448软件视觉及CPU delegate、两对CPU/GPU销毁，第一次销毁早于第二次初始化。SwiftShader不称硬件GPU；同步路线不扩大为异步drain/质量/性能通过。

@@ -1,5 +1,80 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-04 local ZIP package validator preparation
+
+`tools/validate_mlxvlm_binary_package.py` validates **existing** per-framework
+ZIPs against the artifact manifest and actual Mach-O inspector. It does not
+create an enhanced release archive. Every declared artifact needs exactly one
+supplied ZIP containing its XCFramework at archive root, with the same complete
+file inventory and SHA-256 bytes. Nested wrapper roots, missing/extra/duplicate
+entries, unsafe paths, unsupported symlinks and stale binary bytes are rejected.
+The original artifact tree, ZIPs and production dependencies are read-only.
+ZIP inventory, checksum and SwiftPM consumption all use the same temporary
+archive snapshot, so the receipt names the bytes actually resolved.
+
+```sh
+rtk proxy python3 -m tools.validate_mlxvlm_binary_package \
+  /absolute/artifact-manifest.json /absolute/artifact-root \
+  --archive xcframeworks/ODAIKitAppleMLXVLM.xcframework=/absolute/AppleMLXVLM.zip \
+  --archive xcframeworks/ODAIKitMultimodal.xcframework=/absolute/Multimodal.zip
+```
+
+The command needs an `--archive` entry for **every** module-closure artifact;
+the two entries above illustrate the syntax, not a sufficient production set.
+In temporary directories it compares installed SwiftPM `compute-checksum`
+against SHA-256 of each final ZIP, declares one local `binaryTarget(path: ZIP)`
+per framework, and resolves a second consumer whose sole package dependency is
+that binary closure. It verifies SwiftPM's actual extracted XCFramework bytes
+and the resolved dependency graph. SwiftPM compiles the generated package
+manifests; the consumer's Swift source and enhanced libraries are not compiled.
+SwiftPM and Clang caches/configuration stay within that temporary workspace.
+
+Official [PackageDescription Target API](https://docs.swift.org/package-manager/PackageDescription/PackageDescription.html#target)
+and [SE-0272](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0272-swiftpm-binary-dependencies.md#binary-target-artifact-format)
+permit local raw XCFramework or archive paths. Remote binary targets require
+HTTPS; an independent installed Swift6.4.2 experiment rejects `file://`.
+No remote URL/server/publication is used here. Binary targets do not declare
+SwiftPM resources: [SE-0271](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0271-package-manager-resources.md#resources-bundle)
+explains the regular-target bundle contract. This temporary graph excludes
+resource packaging and cannot validate the precompiled `Bundle.module` lookup.
+
+The receipt separates `localGraphStatus` and `localZipResolutionStatus` from
+`consumerBuildStatus=not-run`, `resourceRuntimeStatus=not-run` and
+`remoteArchiveResolutionStatus=not-run`. Synthetic fixtures substitute only
+canonical resource hashes and Mach-O probes; checksum, ZIP parsing, SwiftPM
+manifest compilation/local archive extraction/consumer resolution are real.
+Fixture tests do not establish the complete 20-module production closure.
+
+Task5 is **in progress, tooling preparation only**. Task3's supported dependency
+policy/full source objects/real dual-platform slices and Task4's real consumer
+build/resource runtime remain missing. Real artifact ZIP creation must still
+wait for those gates. No policy adoption, model/dependency download, physical
+device use or remote publication is part of this slice. Evidence and final
+test/review results are recorded under ignored
+`artifacts/verification/f09-local-package-gate-20261104/`.
+
+The initial focused tests **7/7** and full tools suite **269/269** (54.539s)
+passed before the final checksum-snapshot regression was added. Python compileall,
+CLI help and diff checks pass. The existing frozen-source/protected-file/lock
+verifier also passes. Retained intermediate failures include the missing-module
+RED, restricted default Clang cache, incomplete synthetic XCFramework metadata,
+and macOS `/var` versus `/private/var` normalization; these are corrected before
+the final run. Actual local-ZIP resolution has a separate observed RED→GREEN.
+
+Independent focused review returned429 with no verdict; it is not approval.
+Author review found that checksum reads preceded the copy consumed by SwiftPM.
+The implementation now snapshots first, then validates/hashes/resolves only
+that copy. The first mutation test accidentally missed macOS path aliases and
+passed without mutating; its corrected path comparison reproduces the exact
+previous order in memory and fails on the mismatched consumed-ZIP checksum,
+while the fixed implementation passes. Production source is not rewritten by
+that retained reproduction. No second independent review is claimed.
+
+Final corrected focused suite **8/8**, complete tools suite **270/270**
+(61.506s), fixture receipt, compileall/diff and frozen-source/protected/lock
+checks pass. Task5 remains incomplete pending real artifacts, compiled second
+consumer, runtime resources and the other documented acceptance gates.
+
 ## 2026-11-04 binary-only consumer generator
 
 Task4's generator is implemented independently of Task3's blocked real artifact
