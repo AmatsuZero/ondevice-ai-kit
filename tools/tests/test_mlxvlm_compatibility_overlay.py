@@ -176,6 +176,46 @@ class CompatibilityOverlayTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
         self.assertTrue((repo / "link").is_symlink())
 
+    def test_explicit_committed_internal_file_link_is_preserved_with_link_provenance(self):
+        repo = self.dependencies / "mlx-swift-lm"
+        (repo / "CLAUDE.md").symlink_to("keep.txt")
+        self.commit_source("mlx-swift-lm")
+        self.manifest["symlinks"] = [{"package": "mlx-swift-lm", "path": "CLAUDE.md",
+                                      "target": "keep.txt", "sha256": digest(b"keep.txt")}]
+        self.save_manifest()
+        self.apply()
+        link = self.output / "mlx-swift-lm/CLAUDE.md"
+        self.assertTrue(link.is_symlink())
+        self.assertEqual(str(link.readlink()), "keep.txt")
+        self.assertEqual(link.read_text(), "unchanged\n")
+        receipt = json.loads((self.output / "overlay-receipt.json").read_text())
+        self.assertEqual(receipt["symlinks"], {"swift-collections": {}, "mlx-swift-lm": {"CLAUDE.md": {"target": "keep.txt", "sha256": digest(b"keep.txt")}}})
+        self.assertNotIn("CLAUDE.md", receipt["files"]["mlx-swift-lm"])
+
+    def test_declared_link_cannot_hide_changed_target_or_escape(self):
+        repo = self.dependencies / "mlx-swift-lm"
+        (repo / "CLAUDE.md").symlink_to("keep.txt")
+        self.commit_source("mlx-swift-lm")
+        for target, hash_value in (("../escape", digest(b"../escape")),
+                                   ("source.swift", digest(b"source.swift")),
+                                   ("keep.txt", "0" * 64)):
+            with self.subTest(target=target, hash_value=hash_value):
+                self.manifest["symlinks"] = [{"package": "mlx-swift-lm", "path": "CLAUDE.md", "target": target, "sha256": hash_value}]
+                self.save_manifest()
+                with self.assertRaises(ValueError):
+                    self.apply()
+                self.assertFalse(self.output.exists())
+
+    def test_declared_link_target_must_be_a_committed_regular_file(self):
+        repo = self.dependencies / "mlx-swift-lm"
+        (repo / "CLAUDE.md").symlink_to("missing.txt")
+        self.commit_source("mlx-swift-lm")
+        self.manifest["symlinks"] = [{"package": "mlx-swift-lm", "path": "CLAUDE.md", "target": "missing.txt", "sha256": digest(b"missing.txt")}]
+        self.save_manifest()
+        with self.assertRaises(ValueError):
+            self.apply()
+        self.assertFalse(self.output.exists())
+
     def test_missing_runtime_pin_cannot_match_empty_state_string(self):
         self.manifest["runtimeBinding"] = {"absent-package": "None@None"}
         self.save_manifest()

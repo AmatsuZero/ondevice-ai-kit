@@ -37,7 +37,7 @@ def _git(repo: Path, *args: str) -> bytes:
     return result.stdout
 
 
-def _copy_committed(repo: Path, revision: str, destination: Path) -> None:
+def _copy_committed(repo: Path, revision: str, destination: Path, links: dict) -> None:
     resolved = _git(repo, "rev-parse", "--verify", f"{revision}^{{commit}}").decode().strip()
     _require(resolved == revision, f"exact revision unavailable for {repo.name}")
     tree = _git(repo, "ls-tree", "-r", "-z", revision)
@@ -47,10 +47,16 @@ def _copy_committed(repo: Path, revision: str, destination: Path) -> None:
             continue
         metadata, name = entry.split(b"\t", 1)
         mode, kind, oid = metadata.split()
-        _require(mode in {b"100644", b"100755"} and kind == b"blob",
+        _require((mode in {b"100644", b"100755"} or mode == b"120000" and name.decode() in links) and kind == b"blob",
                  f"unsupported symlink/submodule in {repo.name}: {name.decode()}")
         _path(name.decode())
         entries.append((name.decode(), mode, oid))
+    regular = {name for name, mode, _ in entries if mode != b"120000"}
+    _require({name for name, mode, _ in entries if mode == b"120000"} == set(links),
+             f"declared symlink inventory mismatch: {repo.name}")
+    for name, link in links.items():
+        target = (_path(name).parent / _path(link["target"])).as_posix()
+        _require(target in regular, f"symlink target must be a committed regular file: {repo.name}/{name}")
     # Read raw blobs: git archive can omit/export-substitute committed files.
     result = subprocess.run(["git", "--no-lazy-fetch", "-C", str(repo), "cat-file", "--batch"],
                             env={**os.environ, "GIT_TERMINAL_PROMPT": "0"},
@@ -70,14 +76,19 @@ def _copy_committed(repo: Path, revision: str, destination: Path) -> None:
         offset += 1
         target = destination / name
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(data)
-        target.chmod(0o755 if mode == b"100755" else 0o644)
+        if mode == b"120000":
+            _require(data.decode() == links[name]["target"] and _sha(data) == links[name]["sha256"],
+                     f"symlink target/hash mismatch: {repo.name}/{name}")
+            target.symlink_to(data.decode())
+        else:
+            target.write_bytes(data)
+            target.chmod(0o755 if mode == b"100755" else 0o644)
     _require(offset == len(result.stdout), f"unexpected Git blob response: {repo.name}")
 
 
 def _inventory(root: Path) -> dict[str, str]:
     return {p.relative_to(root).as_posix(): _sha(p.read_bytes())
-            for p in sorted(root.rglob("*")) if p.is_file()}
+            for p in sorted(root.rglob("*")) if p.is_file() and not p.is_symlink()}
 
 
 def apply_candidate(candidate: Path, lock: Path, dependencies: Path, output: Path) -> Path:
@@ -121,6 +132,17 @@ def apply_candidate(candidate: Path, lock: Path, dependencies: Path, output: Pat
         _require(isinstance(state.get("version"), str) and isinstance(state.get("revision"), str)
                  and re.fullmatch(r"[0-9a-f]{40}", state["revision"]) is not None
                  and binding == f"{state['version']}@{state['revision']}", f"runtime binding mismatch: {name}")
+    links = {name: {} for name in revisions}
+    link_entries = manifest.get("symlinks", [])
+    _require(isinstance(link_entries, list), "symlinks must be an array")
+    for entry in link_entries:
+        _require(isinstance(entry, dict) and entry.get("package") in links, "invalid symlink package")
+        name, path = entry["package"], str(_path(entry.get("path")))
+        target = str(_path(entry.get("target")))
+        _require(path not in links[name] and isinstance(entry.get("sha256"), str)
+                 and re.fullmatch(r"[0-9a-f]{64}", entry["sha256"]) is not None,
+                 "duplicate symlink or invalid symlink SHA-256")
+        links[name][path] = {"target": target, "sha256": entry["sha256"]}
     entries = manifest.get("files")
     _require(isinstance(entries, list) and entries, "declared files are required")
     declared = {name: {} for name in revisions}
@@ -155,7 +177,7 @@ def apply_candidate(candidate: Path, lock: Path, dependencies: Path, output: Pat
             repo = dependencies / name
             _require(repo.resolve().is_relative_to(dependencies) and not repo.is_symlink(), f"dependency symlink escape: {name}")
             target = stage / name
-            _copy_committed(repo, revision, target)
+            _copy_committed(repo, revision, target, links[name])
             before = _inventory(target)
             for path, entry in declared[name].items():
                 _require(before.get(path) == entry["originalSha256"], f"input SHA-256 mismatch: {name}/{path}")
@@ -165,6 +187,9 @@ def apply_candidate(candidate: Path, lock: Path, dependencies: Path, output: Pat
             after = _inventory(target)
             expected = {**before, **{path: entry["patchedSha256"] for path, entry in declared[name].items()}}
             _require(after == expected, f"output SHA-256 inventory mismatch: {name}")
+            actual_links = {p.relative_to(target).as_posix(): {"target": str(p.readlink()), "sha256": _sha(str(p.readlink()).encode())}
+                            for p in target.rglob("*") if p.is_symlink()}
+            _require(actual_links == links[name], f"output symlink inventory mismatch: {name}")
             inventories[name] = after
         # Inputs are never patched; recheck policy inputs before publishing copies.
         _require(lock.read_bytes() == lock_data and (candidate / "manifest.json").read_bytes() == raw_manifest,
@@ -175,7 +200,7 @@ def apply_candidate(candidate: Path, lock: Path, dependencies: Path, output: Pat
                    "policyStatus": manifest["status"], "buildStatus": "not-run",
                    "manifestSha256": _sha(raw_manifest), "productionLockSha256": _sha(lock_data),
                    "revisions": revisions, "runtimeBinding": bindings,
-                   "patchSha256": patch_hashes, "files": inventories}
+                   "patchSha256": patch_hashes, "files": inventories, "symlinks": links}
         (stage / "overlay-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
         _require(not output.exists() and not output.is_symlink(), f"output already exists: {output}")
         stage.rename(output)

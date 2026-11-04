@@ -9,6 +9,14 @@
   "runtimeBinding": {
     "mlx-swift": "0.32.3@19601207e9a0de51e03ee6ec0c3c5f3784275075"
   },
+  "symlinks": [
+    {
+      "package": "mlx-swift-lm",
+      "path": "CLAUDE.md",
+      "target": "AGENTS.md",
+      "sha256": "a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9"
+    }
+  ],
   "files": [
     {
       "package": "swift-collections",

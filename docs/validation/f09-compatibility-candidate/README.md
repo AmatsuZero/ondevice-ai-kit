@@ -5,6 +5,40 @@ existing [complete binary-closure plan](../../superpowers/plans/2026-10-30-apple
 It does not approve production dependency changes or turn the historical
 wrapper-only diagnostic archive into a release candidate.
 
+### Latest source recovery — 2026-11-04
+
+The retained `apple-mlxvlm-natural-video-20261028/SourcePackages/checkouts`
+cache has readable exact-revision objects for all12 production lock pins,
+including the two initialized MLX C submodules (943 and136 committed entries).
+Gitlinks are checked in their own repositories, not misreported as missing
+blobs in the parent. This supersedes the missing-source blocker below for this
+cache; the separate historical `f09-target-scoped` alternates remain broken.
+No dependency fetch, checkout repair or production-lock change was needed.
+
+The first actual preparation correctly failed at the fixed upstream
+`mlx-swift-lm` symlink `CLAUDE.md → AGENTS.md`. The applicator now supports
+only manifest-declared, exact-target/hash links to committed regular files
+within the same package. Undeclared links, chains/directories/missing targets,
+absolute/parent traversal and submodules remain rejected. The candidate declares
+only this unchanged documentation link; patch bytes and four patched source
+hashes are unchanged. Link target provenance is separate from file-content
+inventory, and is rechecked after patching.
+
+Actual preparation then succeeded:886 `swift-collections` regular files and
+723 `mlx-swift-lm` regular files plus the declared link, with all four patched
+digests matching. The two source caches are not modified. The output is a
+complete copy of **these two packages only**, not an assembled12-package build
+cache. Receipt remains `draft-not-adopted / build-not-run`. No dependency tests,
+framework build, compatibility-policy adoption or distribution is implied.
+
+Focused tests15/15, full tools273/273 (50.746s), Python compile/diff and existing
+protection checks pass. New link support was observed RED→GREEN, then exercised
+on the real fixed revisions. No new independent review was obtained; previous
+patch review does not cover this tool delta. Ignored evidence is under
+`artifacts/verification/f09-existing-source-recovery-20261104/`. Policy adoption,
+real20-module device/simulator builds, consumer/resource runtime and release
+gates remain open.
+
 ## Proposed decision
 
 Allow a versioned compatibility overlay **only in fresh isolated F09 binary
@@ -112,7 +146,9 @@ bytes. Raw blob reads preserve files that `git archive` might drop through
 `export-ignore` or alter through `export-subst`. It validates the production
 lock digest, runtime version/revision, patch bytes and declared input/output
 digests, and rejects undeclared patch paths, source/output overlap, existing
-output, symlinks and submodules. Only declared patched files may change; an
+output, undeclared/unsafe symlinks and submodules. Declared links must match
+their committed target bytes/hash and point directly to a package-local regular
+file; links are inventoried separately. Only declared patched files may change; an
 entire resulting file-hash inventory is recorded. Failures leave no output.
 Input repositories, candidate and production lock are never patched.
 Git lazy fetching and terminal prompts are disabled; missing partial-clone

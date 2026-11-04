@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 F09 本地 ZIP 校验准备
+## 最新续接 — 2026-11-04 F09 现存完整依赖对象恢复
+
+- 新鲜盘点发现自然视频保留cache可读取生产lock全部12依赖的固定Git对象，以及MLX两项C子模块（943/136entry）；旧f09-target-scoped对象失效仍属实。无需下载/修复原cache；Gitlink在自身repo核验，不误称parent缺blob。见[源码恢复](validation/f09-compatibility-candidate/README.md#latest-source-recovery--2026-11-04)。
+- 真实applicator首跑拒绝上游CLAUDE.md→AGENTS.md；新增仅manifest显式声明且target/hash固定、指向包内committed普通文件的link支持，原未声明/越界/chain/目录/缺目标及submodule拒绝保持。RED→GREEN、定向15/15、全tools273/273（50.746s）、compile/diff及保护核验通过；无新独立复审。实际两包copy成功，886+723普通文件及1link，四patched SHA一致；receipt仍draft-not-adopted/build-not-run，不采用维护策略。
+- ignored `f09-existing-source-recovery-20261104/`保存对象清单、真实首失败/成功、copy及测试。缺完整依赖来源的旧阻塞已对该cache解除，但两包copy不是12包build cache，后续仍缺显式兼容维护策略与真实20模块双slice/消费/资源runtime。read-only explore未发现绕开已知阻塞和延期专项的其他已授权用户界面实现缺口；不据此声称全功能完成。
+- 无手机操作/采音；2026-11-05北京时间09:00仍需用户在场提示后执行单次ASR。基础10/12、P4/P11/发布open/not-ready、goal active。本轮有真实源码恢复、实现修复和完整回归进展。
+
+## 上一检查点 — 2026-11-04 F09 本地 ZIP 校验准备
 
 - 新增`tools/validate_mlxvlm_binary_package.py`及8项回归：现有manifest/Mach-O→逐XCFramework根目录ZIP完整字节/清单比对→SwiftPM checksum→真实local binaryTarget ZIP解析→第二consumer本地依赖图与解压产物比对。所有校验/消费绑定同一临时ZIP快照，原产物/锁/缓存不改；不创建真实增强发布ZIP。见[本地包校验准备](validation/apple-mlxvlm-distribution.md#2026-11-04-local-zip-package-validator-preparation)。
 - 定向8/8、完整tools270/270（61.506s）、Python compileall/diff/CLI及252冻结/九保护/生产lock通过，证据ignored `f09-local-package-gate-20261104/`。官方research确认local path可ZIP、remote仅HTTPS、binary target不直接声明资源；实际SwiftPM解析是真实的，模型hash/Mach-O仅夹具替身，不称20模块binary/编译/资源runtime通过。独立review429无结论；作者发现并修复checksum与消费副本绑定问题，纠正首个mutation测试的macOS路径别名后，旧顺序内存重现失败/当前通过，失败与修正均保留。

@@ -1,5 +1,22 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-04 existing complete source objects recovered
+
+An existing natural-video build cache has readable fixed-revision Git objects
+for all12 lock pins and both MLX C submodules. The historical F09 cache still
+fails, but no new dependency download is needed to recover these source inputs.
+The real applicator exposed an undeclared upstream documentation symlink;
+explicit target/hash-bound package-local file-link support now preserves it.
+Both declared packages were actually copied and patched with complete inventories
+(886 +723 regular files and one link). Production cache/lock are untouched.
+See [source recovery and its remaining boundary](f09-compatibility-candidate/README.md#latest-source-recovery--2026-11-04).
+
+Focused15/15 and tools273/273 pass. This removes the previous source-availability
+blocker for that cache, not the pending maintenance-policy or actual framework/
+consumer/resource gates. The prepared two-package copy is not a complete build
+cache, and its receipt remains draft-not-adopted/build-not-run. No new independent
+review, enhanced binary build, model download or device operation occurred.
+
 ## 2026-11-04 local ZIP package validator preparation
 
 `tools/validate_mlxvlm_binary_package.py` validates **existing** per-framework
