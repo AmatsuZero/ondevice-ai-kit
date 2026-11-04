@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 P11 当前功能证据索引
+## 最新续接 — 2026-11-04 最新组合候选 LM 取消与同进程重入
+
+- 已在既有6GiB LM专用AVD补齐冻结644bbde4…df30候选普通系统红图选择→native初始化后取消→CANCELLING/等待释放→CANCELLED→同输入/同PID5174重入SUCCEEDED→普通清除。254份当前源码匹配，唯一后续差异为ASR test runner顺序；不是HEAD重建。固定授权Gemma四文件摘要/权限保持，清除后cache文件为空；更新后的候选和模型留专用AVD，旧APK可回退，未操作真机包。
+- 两轮SwiftShader软件视觉1448/1448 WebGPU及CPU执行、两对销毁与先销毁后重初始化已记录；不提升硬件GPU/异步drain/自然质量/资源结论。新鲜320/320证据检查通过，含254源码/九保护/MLX lock；独立限定verifier重跑320/320并PASS本轮644模拟器UI范围，不是全分支/发布批准。先误用较旧bd89包的有界运行另留315/315与四份ASR源码差异，不代替644候选。
+- 见[本轮验证](validation/android-litertlm-reentry-20261104.md)，ignored `artifacts/verification/android-lm-latest-reentry-20261104/`。无生产改动/新build/SDK单测/下载；实际UI任务和采集均终结。基础10/12、P4/P11/发布open/not-ready、goal active；本轮有真实执行进展。TECNO只读网络仍none，ASR授权下载此前已请求但无可跟踪句柄，PAD协议/数据和F09路线仍待既有输入。
+
+## 上一检查点 — 2026-11-04 P11 当前功能证据索引
 
 - 继续只读复核TECNO默认网络仍none，未重复无回执下载、录音或改网络。ASR真实转写仍待资源/网络输入。
 - 修复P11矩阵与readiness的过时状态：Android SR后端/完整请求/动态重播、LiteRT-LM固定授权模型/同步factory/真机ZIP与生成、双端真实Identity注册删除/精确index均有证据，不再列为未实现。PAD仅独立raw-score smoke，ASR仅入口/授权请求；新状态保留资源就绪、异步drain、校准/PAD、质量/持续资源等缺口，不提升为完整能力或发布通过。
