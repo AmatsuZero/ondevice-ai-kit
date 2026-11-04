@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-04 F06 自然输入主流程更新：隔离 API36 普通 Demo 已将既有 Common swifts 的标准 H.264 High 派生副本 320×180/48帧实际 ESRGAN CPU 4×处理为1280×720。UI终态成功；独立完整解码、48帧/PTS、BT709及无音轨检查通过，移除输入后本轮私有输入/输出释放。原始 High444 profile 平台失败及零decoder候选证据保留，未宣称支持；派生副本不是原无损质量参考。见[证据](android-mainflow-emulator.md#natural-video-main-flow)。单自然输入主流程不代表自然/时域质量、真机UI或性能通过；F06/P11/发布仍open/not-ready。
+
 2026-11-04 F07功能更新：授权Gemma权重已完整下载/校验；显式CPU文本＋GPU视觉在TECNO真实shell链路输出Red。普通API36隔离模拟器系统ZIP/图片picker、两次真实生成、取消/同PID重入及输入/cache清理通过，57项证据检查与独立限定补审PASS，见[UI验证](android-litertlm-ui.md)。实际模拟器delegate为SwiftShader软件GPU；物理设备UI/硬件GPU性能、自然质量、异步drain/streaming及长期资源仍开放，不提升P4/P11/发布。下载或真实图像生成不再是阻塞项。
 
 2026-11-04 F05 资源状态复核：新增无 Activity/录音/下载的独立查询探针，TECNO KM9/API35 的 `checkRecognitionSupport(en-US)` 回调三份语言列表均空，状态NOT_REPORTED，资源就绪仍未确认；未执行转写，不沿用历史错误13冒充新结果。离线构建/lint通过，普通Demo APK不变，原test APK/runner恢复、设备Asleep、九项保护不变。见[证据](speech-backends.md#2026-11-04-android-离线资源只读复核)。

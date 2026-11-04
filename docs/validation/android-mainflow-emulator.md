@@ -65,6 +65,53 @@ copies. Recheck from the foundation worktree with
 `rtk proxy python3 artifacts/verification/android-mainflow-emulator-20261104/verify.py`.
 This is evidence validation, not a replacement for driving the UI again.
 
+## Natural video main flow
+
+An additional ordinary-UI run reused the existing authorized Common swifts
+material, ESRGAN model and the same immutable APK above. No production code,
+model, runtime or APK changed. This APK predates the latest LM execution policy;
+the additional run validates only the unchanged SR implementation. Eight SR
+source bindings matched the prior SR manifest. The App stayed in PID `2523`
+through processing and cleanup.
+
+The original prepared input (`artifacts/P7/natural/prepared/input-180p-4x.mp4`,
+SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`)
+is lossless H.264 High 4:4:4 Predictive, despite its yuv420p pixel format.
+The first UI request returned `FAILED / PLATFORM`. A separate Android
+`MediaExtractor`/`MediaCodecList` probe found zero exact-format decoder
+candidates (profile 64); the original failure is retained.
+
+An explicitly derived copy uses libx264 High, CRF18, yuv420p, no B frames and
+complete BT.709 limited-range VUI. It preserves the same 320×180, 24 fps,
+48-frame/two-second content without audio; this is a lossy re-encoding, not the
+original quality reference. Its SHA-256 is
+`22b3e924ad5717a8cd278f92fdad3b39b1ed1886106a941e1d9b0287f6b026d8`.
+The same native probe found three exact decoder candidates (profile 8).
+
+The system picker selected `ODAI-common-swifts-H264-High-48f.mp4`. Actual CPU
+ESRGAN processing advanced through visible frame progress and returned
+`SUCCEEDED`, `1280×720 · 48 帧 · 2.0 秒 · 音轨 0`. The owned output was extracted
+before leaving the page. Independent ffprobe/FFmpeg checks confirmed all 48
+frames, matching PTS within 1 µs, H.264, BT.709 limited-range metadata, no audio
+and full error-free decoding. Output SHA-256:
+`ddce5b1dd8eeb3dbc9532efe2beb4a5334845bfa163301ff8ca9bc790e517ca5`
+(2,240,688 bytes).
+
+Visual inspection of frames 0/24/47 shows the expected birds, sky and clouds,
+with different bird positions. This is a content sanity check; no comparative
+SR, tile-seam or temporal-quality verdict is claimed. Clicking remove input
+showed `尚未选择视频`; this run's private input and output files disappeared.
+Only the same two prior FileProvider export files remained, as designed.
+
+Ignored evidence root:
+`artifacts/verification/android-sr-natural-20261104/`. It retains both codec
+probes, original failure, derived-input command/hash, UI progress/success and
+cleanup states, screenshot, PID-filtered native log, output, decoded contact
+sheet and external verification. Recheck with
+`rtk proxy python3 artifacts/verification/android-sr-natural-20261104/verify.py`.
+This validates retained evidence, rather than rerunning inference. It also
+checks the eight SR source hashes, nine protected files and production MLX lock.
+
 ## Remaining boundaries
 
 This closes the isolated-emulator system-picker/register/delete and

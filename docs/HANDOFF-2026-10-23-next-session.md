@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 F09 固定兼容候选已具体化，未采纳
+## 最新续接 — 2026-11-04 Android 自然视频 SR 普通 UI 主流程通过
+
+- 复用 `ODAI_MainFlow_20261104` / emulator-5580、原 immutable 组合 APK 和 ESRGAN；本轮未改生产代码或重建。原自然素材 High444 profile 返回FAILED/PLATFORM，独立平台probe为0个exact decoder；保留失败。明确派生同内容H264 High/CRF18副本后，平台probe为3候选，系统picker实际选择并完成48帧CPU ESRGAN。
+- 普通UI终态 `SUCCEEDED / 1280×720 · 48 帧 · 2.0 秒 · 音轨 0`；输出2,240,688字节、SHA `ddce5b1dd8eeb3dbc9532efe2beb4a5334845bfa163301ff8ca9bc790e517ca5`。独立全解码/48帧/PTS≤1µs/BT709/no-audio通过；抽帧仅作内容检查，不称自然/时域质量通过。
+- 提取输出后点移除输入，本轮私有输入/输出文件释放，旧2份export保留；PID2523保持。有界logcat reader已终止。证据脚本 `artifacts/verification/android-sr-natural-20261104/verify.py` fresh通过，含8份源码/9项保护/生产MLX lock；见[验证与边界](validation/android-mainflow-emulator.md#natural-video-main-flow)。AVD与原公开输入保留复现，不操作物理设备。
+- 下一功能仍为PAD正式接入/授权校准、Android ASR资源及Apple增强binary；F09固定补丁路线与PAD评估集异步问题尚待答复，不自动采纳。基础10/12、P4/P11/发布open/not-ready，goal active；仅本地文档提交，无push/merge/release。本轮有实际自然输入终态与外部验证进展。
+
+## 上一检查点 — 2026-11-04 F09 固定兼容候选已具体化，未采纳
 
 - 官方API fresh：Swift issue91540 open、PR91672 open/unmerged、swift-collections latest1.7.5；相关PR92814已合入main，不证明当前编译器包含。只有Swift6.4.2，本机arm64 iOS18最小interface复现default exit1；仅失败target加selector flag exit0，未重跑完整archive。
 - [候选](validation/f09-compatibility-candidate/README.md)包含4文件/2patch的精确diff、前后SHA和runtime绑定。fresh临时patch replay复现全部4个已记录diagnostic hash；5个unknown分支fatalError风险明确披露。旧diagnostic Git alternate对象库已缺失，4原始源码按固定官方revision只读恢复作比对；未下载完整依赖或改生产lock/缓存。

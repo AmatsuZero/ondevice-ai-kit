@@ -6,6 +6,15 @@ Both exported copies passed independent packet/PTS/decode checks. See
 [UI evidence and remaining playback/hardware boundaries](android-mainflow-emulator.md).
 The earlier real-device runs below remain headless evidence.
 
+2026-11-04 natural-input update: the same isolated emulator ordinary Demo also
+completed a 320×180, 48-frame Common swifts clip → 1280×720 H.264 output. The
+input was explicitly re-encoded to a supported High profile after the original
+High 4:4:4 Predictive profile failed platform decoder discovery. All 48 output
+frames fully decoded; PTS matched the derived input within 1 µs, with BT.709
+limited-range metadata and no audio. Removing the input released this run's
+private input/output files. See [input identity, evidence and quality
+boundaries](android-mainflow-emulator.md#natural-video-main-flow).
+
 Implemented optional `android:backend-litert-sr` and Demo `-PenableLiteRtSr=true` main flow: system picker → bounded private input store → AndroidVideoBridge/VideoProcessingClient → real ESRGAN CPU tiles → H.264 MP4/AAC mux → owned output → private FileProvider playback/share copy. The default APK has neither SR nor LM vendor runtime; both opt-ins can be combined. No model is packaged or downloaded by Gradle.
 
 ## Model/runtime and scope
@@ -40,4 +49,12 @@ Preserved failures: the first fixture declared only BT.709 matrix, not full prim
 
 Independent reviewer inspected this diff and found one medium evidence gap: the runner originally trusted backend metadata without reopening output. Fixed by runner postconditions plus fresh device and external packet/decode checks above. No production high/critical findings reported; no second independent APPROVE is claimed. Author review is separate.
 
-Actual model picker/video picker, playback/share UI interaction remain unverified while the connected device is locked/asleep. Native headless inference is distinct from UI acceptance. Natural/tile-seam/temporal quality, broad input profiles, AAC priming/edit lists, minimum API26 device, GPU/energy, sustained resources, binary consumers and full release review remain open. Corner/resource matrices are deferred per user direction; F06/P11/release remain open/not-ready. Nine protected modifications remain untouched. No push/merge/release.
+Actual model/video pickers and player/share handoff are verified on the isolated
+emulator as linked above; real-device UI acceptance remains open. The device's
+historical locked/asleep state is not a claim about its current state. Native
+headless inference is distinct from UI acceptance. Natural/tile-seam/temporal
+quality, broad input profiles, AAC priming/edit lists, minimum API26 device,
+GPU/energy, sustained resources, binary consumers and full release review remain
+open. Corner/resource matrices are deferred per user direction;
+F06/P11/release remain open/not-ready. Nine protected modifications remain
+untouched. No push/merge/release.
