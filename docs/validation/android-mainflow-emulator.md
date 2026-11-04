@@ -1,5 +1,41 @@
 # Android Identity and video SR system UI — 2026-11-04
 
+## Frozen layout candidate Identity main flow
+
+The exact `a27a079`/`c098fc41…cf1a6` layout APK also completed the bounded
+Identity prototype flow on the existing `ODAI_MainFlow_20261104` / emulator-5580.
+Ordinary local consent was enabled for this session and the system Photo Picker
+→ Browse → DocumentsUI selected only the previously authorized NASA fixture
+`odai-approved-astronaut.png`. Its public-file SHA matched
+`88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5`;
+no separate decoded in-memory input hash was captured. The fixed YuNet/SFace
+weights and installation manifest matched before/after.
+
+Ordinary registration returned `ENROLLED · opencv.identity.android` and one
+template. Verification and gallery publication each returned
+`THRESHOLD_UNVERIFIED`, leaving the gallery unpublished. Identification against
+a published gallery and calibrated match decisions are not proved by this run.
+Deleting the current user showed zero users/templates and
+`删除：物理清理已完成`; whole-session deletion then showed
+`本次注册已删除并停用` / `需要授权配置`. These UI/native receipts establish
+the bounded purge flow; no template, embedding or key was extracted, and no
+claim is made that separate encrypted-store metadata files were removed.
+
+APK, PID8481, the three installed model-file hashes and denied camera/microphone
+permissions remained unchanged across all four receipts. The ordinary speech
+page was restored with no face-preview node. The approved image remains in
+the face preview's existing UI state; whole-session disable clears Identity's
+probe/authorization, not the shared face display. No physical phone, capture,
+download, new model or fixture was used.
+
+Ignored `artifacts/verification/android-layout-identity-mainflow-20261104/`
+retains the ordinary UI states, screenshot and read-only package/model receipts.
+Fresh `verify.py` passes15 frozen evidence hashes and the existing252-source,
+layout/test/APK, nine-protected-file and production-MLX-lock checks. No rebuild,
+new SDK tests or independent review was performed. The exact layout candidate
+now has the bounded SR, LM and Identity flows recorded here; calibrated
+recognition/PAD, actual Android ASR transcription and release remain open.
+
 ## Frozen layout candidate LM main flow
 
 The exact `a27a079`/`c098fc41…cf1a6` layout APK now also runs ordinary
@@ -31,8 +67,8 @@ success screenshot and native logs. Its `verify.py` passes and also rechecks
 the frozen252-source/layout/test/protected-file/production-lock evidence.
 One log collection was not executed because automatic approval timed out;
 the allowed single retry succeeded. No new build, SDK test or independent
-review was performed. Together with the SR flow below, this verifies two model
-main flows on the exact layout APK; Identity on that APK remains unverified.
+review was performed. At this checkpoint, together with the SR flow below, this
+verified two model main flows; the later Identity run is recorded above.
 Physical ASR is still deferred to the user-present session.
 
 ## Frozen layout candidate SR main flow

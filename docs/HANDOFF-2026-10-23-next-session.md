@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 页面修复候选实际 LM 主流程
+## 最新续接 — 2026-11-04 页面修复候选实际 Identity 主流程
+
+- 既有MainFlow模拟器普通UI重新启用本次本机原型授权，只选择原已授权NASA测试图；固定a27a079/c098fc41布局候选真实注册ENROLLED/1模板，验证与图库发布均THRESHOLD_UNVERIFIED、图库保持未发布。普通删除当前用户后0用户/0模板/物理清理已完成，再全会话删除停用，返回语音页。未提取模板、特征、密钥或收集新样本，未运行已校准识别/PAD。
+- 同PID8481、固定YuNet/SFace/manifest摘要、APK与相机麦克风denied前后保持；公开测试图SHA匹配，未单独捕获内存解码输入摘要。ignored `android-layout-identity-mainflow-20261104/verify.py` fresh PASS，15份证据摘要绑定UI/回执/截图，连同252源码冻结、九保护及生产MLX lock。见[Identity普通主流程](validation/android-mainflow-emulator.md#frozen-layout-candidate-identity-main-flow)。未重建/运行新增SDK测试/独立复审/操作手机或采音。
+- 该精确布局候选已分别有SR、LM、Identity上述有限主流程证据；仍不能称完整识别/PAD/ASR或发布通过。明天2026-11-05北京时间09:00用户在场后再提示并进行单次ASR诊断，不自动按时采音。功能优先、corner/长期资源后置；基础10/12、P4/P11/发布open/not-ready、goal active。本轮有真实模型普通UI执行进展。
+
+## 上一检查点 — 2026-11-04 页面修复候选实际 LM 主流程
 
 - 已核验旧644APK可回退后，只在既有6GiB LM专用模拟器更新固定a27a079/c098fc41页面候选，保留原授权Gemma四文件。普通DocumentsUI选原合成红图→默认后端/原prompt/32tokens RUNNING→SUCCEEDED，实际文本solid vibrant red rectangle，UI实际backend/model/revision/runtime正确；32token尾句截断，不称完整自然质量。
 - 同PID6085/模型四摘要/相机麦克风denied保持，普通清除后cache/input为空；1448/1448视觉WebGPU与CPU文本执行、单对accelerator销毁记录，SwiftShader为软件视觉而非硬件GPU。新包/模型留原LM AVD，旧包可回退；未重建/SDK测试/新独立复审/操作手机/下载/采音。

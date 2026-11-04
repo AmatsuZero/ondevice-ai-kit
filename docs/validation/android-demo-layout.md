@@ -55,8 +55,10 @@ The same frozen APK subsequently completed a system-selected synthetic red
 image →32-token actual Gemma generation → ordinary cleanup on the existing
 LM AVD; [that receipt](android-mainflow-emulator.md#frozen-layout-candidate-lm-main-flow)
 also proves the configured CPU/software-vision route and matching model/input.
-Identity inference on this exact layout APK and physical-device acceptance
-remain unverified.
+The same APK then completed ordinary NASA-fixture Identity enrollment,
+uncalibrated verification/publication rejection, candidate deletion and whole
+session disable on MainFlow; see [the Identity receipt](android-mainflow-emulator.md#frozen-layout-candidate-identity-main-flow).
+Calibrated recognition/PAD and physical acceptance of this layout APK remain open.
 
 Final source candidate: commit `a27a0795df5acda8e9051518a7a8a5298b4c08f6`,
 252 committed source inputs verified byte-for-byte; BuildConfig carries that
