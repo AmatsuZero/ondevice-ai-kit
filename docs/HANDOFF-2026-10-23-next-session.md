@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Apple Identity 独立复审与诊断合同修复
+## 最新续接 — 2026-11-04 PAD 官方模型真实 iPhone 原始分数
+
+- 用户最新明确“允许”承接此前待答复的固定官方 PAD 模型/既有 NASA 图本机试验。已下载原定 12,270,179-byte ONNX，固定96位校验值实际为 **SHA-384**，已更正文档误标 SHA-512，未换模型；SHA-256 `c4c99af04603b62d7e44f6f4daeb33e0daeccc696008c0b1d62f6f5cebbb3262`。许可 MIT/Apache-2.0 差异仍保留，无分发授权。
+- 新增隔离 `probes/ios-opencv-pad/` 和生成器，复用既有 OpenCV4.12 static arm64；RGB/NCHW 与报告持久化 host RED→GREEN，独立设备 App 构建通过。最终 iPhone **9/9**，runId `0C5B5BD9-F924-4486-BD82-90A64B79C689`，含设备 SHA384 和缺席模型脱敏诊断 RED→GREEN；两次实际 `1x2` 输出一致且有限。明确实验性整图 CUBIC128 预处理，无校准 face crop、判定或 proof。见[证据与边界](validation/pad-raw-score-smoke.md)。
+- ignored `artifacts/verification/pad-raw-score-20261104/` 绑定 immutable App/源码/模型/图片与设备 install/launch/report；最终 PID37633 终止并回读 absent，普通 Demo 无参数恢复。`verify.py` fresh passed，九项保护及生产 MLX lock 不变。独立 review REQUEST CHANGES 的三项 Medium 已按证据修复/裁定：异常保留类别/数值码，不采用会泄漏路径的原始文本建议；无复审 APPROVE。附加 model.yml 取证因自动审批429未执行，研究代理429无结论；不绕过或循环重试。
+- 本切片仅关闭固定 PAD 模型在目标 runtime 能否推理；完整 PAD SDK/Demo 接入、明确人脸预处理/捕获协议、授权攻击/校准数据和策略仍缺。1:1/1:N 校准、Android LM/ASR 资产和 Apple增强二进制分发继续开放。corner/长期资源后置；goal active，P4/P11/发布 open/not-ready，未 push/merge/release。下方“PAD授权未答复”属于此前状态，已被本检查点取代。
+
+## 上一检查点 — 2026-11-04 Apple Identity 独立复审与诊断合同修复
 
 - 两条独立原生审查发现 Swift 丢弃原生阶段诊断；已补可选 `OpenCvIdentity.open(modelStore:diagnostic:)`，仅传允许列表 stage/category，验证 NSError domain，不保留原始错误/路径/文本，不修改 core IdentityError。回调在 native gate 解锁后同步执行，回调内关闭/取消继续优先。普通调用保持源码兼容，默认 Apple 包无新依赖。
 - RED 缺席类型→optional host **6/6**；最终不可变 probe 在 iPhone **24/24**，runId `51F4C9E6-01DC-4A01-9952-82F497543AB2`，包含真实检测/embedding/注册/purge、原生诊断回传、回调内同步 close 无死锁/单次发出与模型 lease 释放。探针和普通 Demo 构建通过，普通 App 已在安装结束后无验证参数恢复。九项保护与生产 MLX lock 不变。ignored `artifacts/verification/apple-identity-review-20261104/verify.py` fresh passed，见[证据与复审](validation/apple-opencv-identity.md#2026-11-04-independent-review-and-native-diagnostic-delivery)。
