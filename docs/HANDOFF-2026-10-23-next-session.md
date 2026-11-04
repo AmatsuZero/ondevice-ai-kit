@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 ASR 联网复核与次日设备验证准备
+## 最新续接 — 2026-11-04 Android 页面空间修复
+
+- 在当前提交三后端组合候选普通UI实际发现非人脸页仍保留大块黑色预览、控件限高380dp；已修复Android宿主按页面隐藏预览、非人脸控件占满可用空间及系统insets，既有iOS调用保持默认限高。可见性在composition读取再SideEffect通知；只在effect读取导致返回不恢复的中间失败已保留并修正。
+- 相同最终无采音/相机/推理回归在旧冻结App失败（speech titleTop1444/2400），新App通过（语音/视频/图像理解178，返回人脸1476）；组合62/62、默认54/54、共享iOS80/80与APK/testAPK/lint/iOS arm64 compile通过。见[页面空间验证](validation/android-demo-layout.md)。只更新既有MainFlow隔离模拟器，未更新真机/LM专用AVD；九保护/生产lock保持，ASR采音仍0次。
+- 用户设备配合改约2026-11-05北京时间09:00；先给开始提示再做单次最长10秒本机诊断，不能自动按时采音。继续无需用户协助的本地验证/冻结；不扩大为新三后端推理或全分支/发布通过。基础10/12、P4/P11/发布open/not-ready，goal active。
+
+## 上一检查点 — 2026-11-04 ASR 联网复核与次日设备验证准备
 
 - 用户连网后，TECNO默认网络159/Wi-Fi VALIDATED；一次已有授权en-US请求返回requested-without-events-not-ready，独立前后查询仍NOT_REPORTED，资源安装/转写未证，无可跟踪下载句柄。原405普通APK、原test APK/Identity runner及权限已恢复，新鲜restored回读通过；见[次日设备验证](validation/android-asr-next-device-session.md)。
 - 用户曾授权单次最长10秒本机麦克风诊断，随后明确不在设备旁，改约2026-11-05北京时间09:00；本次没有执行采音，也没有安装新探针到真机。独立operator-only单次探针已离线build/AndroidTest lint通过；9.5秒主线程清理＋9.8秒独立进程看门狗、实际销毁耗时与脱敏错误类别，限定独立复审APPROVE。该探针只验framework资源可用，不替代SDK/普通UI转写验收，不保存音频/文本；明天先提示用户再执行，不能仅因时间到/自动续接就采音。

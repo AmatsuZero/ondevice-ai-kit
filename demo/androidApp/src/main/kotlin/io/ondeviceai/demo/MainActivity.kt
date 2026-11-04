@@ -26,6 +26,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -220,8 +222,9 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
             openSettings = { startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) },
             asrResources = speechResourceHost)
         setContent {
-            MaterialTheme {Column(Modifier.fillMaxSize().semantics { testTagsAsResourceId = true }) {
-                Box(Modifier.weight(1f).fillMaxWidth().background(Color.Black)) {
+            var facePreviewVisible by remember { mutableStateOf(true) }
+            MaterialTheme {Column(Modifier.fillMaxSize().safeDrawingPadding().semantics { testTagsAsResourceId = true }) {
+                if (facePreviewVisible) Box(Modifier.weight(1f).fillMaxWidth().background(Color.Black).testTag("face-preview")) {
                     if(cameraRunning) AndroidView(factory={context->PreviewView(context).also{previewView=it;bindCamera(it)}},modifier=Modifier.fillMaxSize())
                     else photo?.let{Image(it.asImageBitmap(),"selected image",Modifier.fillMaxSize(),contentScale=ContentScale.Crop)}
                     val current=result
@@ -235,7 +238,9 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                     }
                 }
                 FaceScreen(model,this@MainActivity,identityModel,this@MainActivity,speechHost.model,speechHost,videoHost.model,videoHost,
-                    multimodalHost?.model,multimodalHost,identitySetup = identityRuntime)
+                    multimodalHost?.model,multimodalHost,identitySetup = identityRuntime,
+                    modifier = if (facePreviewVisible) Modifier.heightIn(max = 380.dp) else Modifier.weight(1f),
+                    onFacePageVisibilityChanged = { facePreviewVisible = it })
                 message?.let{Text(it)}
                 report?.let{json->TextButton(onClick={exportReport(json)}){Text("导出 Benchmark JSON")}}
             }}

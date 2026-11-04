@@ -28,13 +28,18 @@ fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityVie
     speechActions: SpeechDemoActions? = null, video: VideoViewModel? = null,
     videoActions: VideoDemoActions? = null, multimodal: MultimodalViewModel? = null,
     multimodalActions: MultimodalDemoActions? = null,
-    identitySetup: IdentityModelSetupDemoActions? = null) {
+    identitySetup: IdentityModelSetupDemoActions? = null,
+    modifier: Modifier = Modifier.heightIn(max = 380.dp),
+    onFacePageVisibilityChanged: (Boolean) -> Unit = {}) {
     val state = model.state
     val availability = model.bridge.availability()
     var identityVisible by remember { mutableStateOf(false) }
     var speechVisible by remember { mutableStateOf(false) }
     var videoVisible by remember { mutableStateOf(false) }
     var multimodalVisible by remember(multimodal) { mutableStateOf(false) }
+    // Read during composition so page changes also re-run the host notification.
+    val facePageVisible = !speechVisible && !videoVisible && !multimodalVisible
+    SideEffect { onFacePageVisibilityChanged(facePageVisible) }
     fun leaveSpeech() { if (speechVisible) { speech?.leavePage(); speechActions?.leavePage() }; speechVisible = false }
     fun leaveVideo() { if (videoVisible) { video?.leavePage(); videoActions?.leavePage() }; videoVisible = false }
     fun leaveMultimodal() {
@@ -45,10 +50,11 @@ fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityVie
     DisposableEffect(video) { onDispose { video?.leavePage(); videoActions?.leavePage() } }
     DisposableEffect(multimodal, multimodalActions) { onDispose { multimodal?.leavePage(); multimodalActions?.leaveMultimodalPage() } }
     MaterialTheme {
-        Column(Modifier.fillMaxWidth().heightIn(max = 380.dp).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("OnDevice AI Kit", style = MaterialTheme.typography.headlineSmall)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TextButton(onClick = { leaveSpeech(); leaveVideo(); leaveMultimodal(); identityVisible = false }) { Text("人脸检测") }
+                TextButton(onClick = { leaveSpeech(); leaveVideo(); leaveMultimodal(); identityVisible = false },
+                    modifier = Modifier.testTag("face-tab")) { Text("人脸检测") }
                 if (identity != null) TextButton(onClick = { leaveSpeech(); leaveVideo(); leaveMultimodal(); identityVisible = true }) { Text("身份与活体") }
                 if (speech != null) TextButton(onClick = {
                     leaveVideo(); leaveMultimodal(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; speechVisible = true
