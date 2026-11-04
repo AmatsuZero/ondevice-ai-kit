@@ -18,6 +18,56 @@ boundaries](android-mainflow-emulator.md#natural-video-main-flow).
 
 Implemented optional `android:backend-litert-sr` and Demo `-PenableLiteRtSr=true` main flow: system picker → bounded private input store → AndroidVideoBridge/VideoProcessingClient → real ESRGAN CPU tiles → H.264 MP4/AAC mux → owned output → private FileProvider playback/share copy. The default APK has neither SR nor LM vendor runtime; both opt-ins can be combined. No model is packaged or downloaded by Gradle.
 
+## 2026-11-04 TECNO visible output frame and ordinary cleanup
+
+The same preserved `405d64e1…082c0` APK and fixed ESRGAN model completed one
+new ordinary system-picker request using the approved original48-frame
+H.264 High/CRF18 derivative. No production source, model, APK or power/network
+setting changed. Fresh preflight found Awake/unlocked, no owned input/output,
+and the original three exports. Private picker input matches
+`22b3e924…f6b026d8`; PID1551 remained the same throughout this sequence.
+
+The new request reached `SUCCEEDED / 1280×720 · 48 frames · 2.0 seconds · audio0`.
+The original output was extracted before leaving the Activity:1,833,519 bytes,
+SHA-256 `a21c0fcf5940aaf5513102f87b1d5cd2f074729a6fcc7b16aeba84f8716e47ea`.
+Full FFmpeg decode, all48 frame PTS within1µs, BT.709 limited-range metadata
+and no audio passed. This is a new output, separate from the earlier5ea2…3264
+result; the derived input remains unsuitable as an original lossless quality reference.
+
+Clicking **播放结果** directly opened the installed Visha player this time,
+without another resolver interaction. Its project-only log records exact URI
+`content://io.ondeviceai.demo.videooutputs/video-results/f617dd4c-aa6c-4c3c-a020-84c8c510c232.mp4`,
+the export hash equals the extracted output, and `playPosition=2000`.
+A direct device screenshot actually shows blue sky, clouds and swifts in the
+player's1080×608 display region at(0,896). Author visual inspection of the
+side-by-side reference agrees; comparison against all48 output frames has
+its best match at frame48, SSIM0.99815. This metric binds displayed content to
+the output; it does **not** measure SR quality.
+
+**Capture limit:** the first30-second `screenrecord` command terminated with
+exit255 and left only one zero-duration video frame; the mobile screenshot
+also returned255. A subsequent direct `screencap` succeeded. The failure cause
+was not established, no second recording was started, and continuous/smooth
+playback remains unverified. The screenshot proves the rendered final frame;
+the position log is additional evidence, not a replacement for continuous capture.
+No microphone was requested; the partial recording contains no audio stream.
+
+BACK returned to the same Demo PID1551. The background transition had retired
+the owned output; clicking **移除输入** then showed **尚未选择视频** and removed
+the exact private input. No manual input cleanup or process restart was needed
+in this sequence. Four exports remain under the existing one-day policy,
+including the unchanged original three. The exact temporary recording was
+hash-checked against its host copy and removed; APK/permissions are unchanged.
+The earlier remove-task/orphan failure remains historical and deferred.
+
+Ignored evidence: `artifacts/verification/android-sr-visible-playback-20261104/`,
+including UI snapshots, original media, exact provider log, screenshot/reference
+comparison, capture failures and cleanup receipts. Fresh `verify.py` **60/60
+evidence checks passed**, including12 SR source hashes,9 protected files and
+production MLX lock. No build, SDK unit tests or new independent review ran.
+This closes this physical rendered-final-frame and ordinary cleanup subcase;
+continuous playback, quality, resources, minimum system and P4/P11/release remain open.
+
 ## 2026-11-04 TECNO complete 48-frame natural request
 
 A subsequent ordinary system-picker request on TECNO KM9/API35 completed the

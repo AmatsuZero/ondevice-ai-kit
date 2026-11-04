@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 TECNO 系统 ZIP 导入到真实生成
+## 最新续接 — 2026-11-04 TECNO 视频结果末帧显示与普通清理
+
+- 固定405APK/ESRGAN不变，原48帧High/CRF18素材再次经普通系统picker进入请求；实际完整48帧SUCCEEDED，1280×720/2秒/no-audio，输出1,833,519bytes/SHA a21c0fcf…6e47ea。输入SHA22b3…026d8；完整解码/全48PTS≤1µs/BT709通过，非无损质量参考。PID1551从开始、外部播放器返回到清理保持。
+- 普通“播放结果”直接进入Visha，未再出现resolver；精确URI basename f617dd4c-aa6c-4c3c-a020-84c8c510c232.mp4、export/original摘要及playPosition2000匹配。直接设备截图实际显示蓝天/白云/飞鸟，作者已目检输出参考对照；1080×608显示区域与48帧比较最佳为第48帧，SSIM0.99815，仅绑定显示内容，不称SR质量或连续流畅播放通过。
+- 首次screenrecord退出255，仅留下零时长单帧文件；mobile截图亦255，直接screencap随后成功，原因未知。没有第二次录制或重跑推理；连续播放仍未证。BACK正常返回同PID，output随后台释放；普通“移除输入”释放本轮input并显示未选择。原3export摘要不变，新第4份按原1天策略保留；录像临时文件经SHA核对精确删除。包/权限不变，未录音/改网络/签名/生产代码，历史remove-task孤留corner未修复。
+- [验证](validation/android-video-sr-demo.md#2026-11-04-tecno-visible-output-frame-and-ordinary-cleanup)与 ignored `artifacts/verification/android-sr-visible-playback-20261104/verify.py` fresh60/60，含12SR源码/9保护/MLX lock；live-run.json已记终态，全部相关命令terminal。无新build/SDK单测/独立复审；只本地文档提交，无push/merge/release。ASR网络、PAD协议/数据及F09策略仍待既有答复；基础10/12、P4/P11/发布open/not-ready、goal active保持。
+
+## 上一检查点 — 2026-11-04 TECNO 系统 ZIP 导入到真实生成
 
 - 不依赖ASR网络/PAD数据/F09策略，补齐F07真机系统ZIP导入。新鲜Awake/unlocked的TECNO/API35核对并保留原405APK/空LM目录后，临时安装冻结644bbd…df30组合候选；255源输入中254匹配，唯一差异是后续ASR测试runner顺序，不称HEAD重建。已授权3.66GB ZIP设备SHA匹配，经普通Demo系统DocumentsUI真实选择，安装busy/按钮disabled→模型已安装/后端可用；未预置App私有模型。导入与ModelStore权重/model card及导入manifest/descriptor摘要匹配，incoming暂存清理。
 - 同普通Activity系统选红图→32tokens SUCCEEDED，输出solid red rectangle；实际backend/model/revision/runtime正确，picker/native输入SHA991b…d3aa，PID32723保持。Mali-G57/Vulkan硬件视觉1448/1448 WebGPU、CPU XNNPACK及单对accelerator销毁已记录；普通UI清除后本轮输入/cache无文件，原三字节fixture保持。不是自然质量/性能/当前包取消重入验收。
