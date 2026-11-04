@@ -1,5 +1,7 @@
 # Foundation 验收记录
 
+2026-11-04 功能优先续接：Android ESRGAN完整请求/动态重播、LiteRT-LM固定授权Gemma/同步factory/真机系统ZIP到生成，以及双端OpenCV Identity注册删除/精确index已实现并有设备证据。后文“缺授权模型/真实推理/Identity后端”属于历史检查点；当前剩余缺口以[P11矩阵](p11-status-matrix-20261027.md)为准。ASR系统资源就绪与真实转写、完整PAD/校准、异步LM drain、分发/质量/持续资源仍未完成。当前readiness校验226证据引用/241来源hash，九行均有gap；既有benchmark保持5项能力/8组，P4/P11与发布仍open/not-ready。
+
 更新日期：2026-10-29（保留分包历史证据）。工作分支 `feat/sdk-foundation`；代码提交以 git 历史为准。构建日志与本机产物放在忽略目录，不提交模型权重、照片、设备标识或签名材料。
 
 ## 当前统一口径

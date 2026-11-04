@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 TECNO 视频结果完整动态重播
+## 最新续接 — 2026-11-04 P11 当前功能证据索引
+
+- 继续只读复核TECNO默认网络仍none，未重复无回执下载、录音或改网络。ASR真实转写仍待资源/网络输入。
+- 修复P11矩阵与readiness的过时状态：Android SR后端/完整请求/动态重播、LiteRT-LM固定授权模型/同步factory/真机ZIP与生成、双端真实Identity注册删除/精确index均有证据，不再列为未实现。PAD仅独立raw-score smoke，ASR仅入口/授权请求；新状态保留资源就绪、异步drain、校准/PAD、质量/持续资源等缺口，不提升为完整能力或发布通过。
+- 旧readiness已因两份后续文档变更而hash失败；审阅并仅刷新五份文档hash（含本轮矩阵/分组说明/验收记录），原有raw benchmark hash不变。新 `artifacts/verification/p11-readiness-20261104-mainflows/summary.json`校验226 evidence引用/241 source hashes/9行gap，跟踪manifest已指向新快照。新增真机证据作为索引，不合入benchmark；重算grouped的8组数据与旧快照JSON完全相同、reportStatus覆盖不变，状态/剩余gap随新矩阵更新。
+- 相关工具36/36、LM317/317、ASR34/34、SR重播及旧60/60、AppleIdentity24项设备/6项host既有证据重验、PAD9项设备既有证据重验通过；均为已有产物校验，不是重新运行真机任务/build/SDK单测。无新独立review。九保护及MLX lock保持；仅本地记录/manifest提交，无push/merge/release，基础10/12、P4/P11/发布open/not-ready、goal active。
+
+## 上一检查点 — 2026-11-04 TECNO 视频结果完整动态重播
 
 - 复用上一轮已保留的 a21c0fcf…6e47ea 输出，不重复推理。原 content URI 的 run-as/am 重开被系统以 calling-package/UID 不匹配拒绝，未改权限；改将精确输出复制到唯一临时 Downloads 路径，由既有 Visha 打开。因此本轮是同字节结果重播，不是再次普通按钮/FileProvider 接线验收。
 - 设备端独立执行10秒无音频录屏及重播，终态 exit0，录得120个屏幕帧、媒体时长3.327067秒；稳定画面的52个屏幕帧按序覆盖全部48个输出帧。逐帧显示对应 SSIM 均值0.989209，仅用于内容绑定；固定2秒静音片段动态重播已证，不代表帧节奏预算、主观画质、音频或长期流畅度。此前255/单帧录屏失败保持历史，不改写为成功。

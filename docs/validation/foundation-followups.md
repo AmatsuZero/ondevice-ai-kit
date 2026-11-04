@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-04 F11追加：P11总表和readiness现已纳入Android ASR资源入口/授权请求、SR完整请求/动态重播、LM真机ZIP/同步生成及双端Identity/PAD原始分数证据，移除已实现后端/模型/factory仍未实现的过时描述。当前校验226证据引用/241来源hash/9行gap；grouped的8组原始统计不变，状态和剩余gap按新证据更新。36项相关工具测试通过；仅重验既有产物，不增加benchmark样本、不升级质量/资源/校准或发布结论。见[P11矩阵](p11-status-matrix-20261027.md)与[可复算入口](p11-grouped-benchmark.md)。ASR最新只读复核仍无默认网络，其他既有待答复项不变。
+
 2026-11-04 F06追加：复用保留输出a21c0fcf…6e47ea的精确临时副本，TECNO/Visha设备端录屏exit0、完整解码120屏幕帧；稳定52帧按序覆盖全部48输出帧，固定2秒静音结果完整动态重播已证。不是再次普通按钮/FileProvider验收，也不代表帧节奏预算、主观质量/音频/长期流畅度。多次ADB断连及exit0部分读取被保留，清理校验阻止误删后按设备hash精确清理六个临时文件；远程glob核验问题改为逐路径hash，原四export不变。BACK回同PID1551，包/权限/空input-output保持；新验证及原60/60通过。见[动态重播](android-video-sr-demo.md#2026-11-04-tecno-complete-dynamic-replay-of-retained-output)。
 
 2026-11-04 F06最新更新：TECNO原包/模型在同PID1551完成原48帧自然派生片普通请求，输出a21c0fcf…6e47ea；实际“播放结果”进入Visha，精确export URI/hash及位置2000ms已绑定，直接截图显示蓝天/白云/飞鸟并最佳匹配输出第48帧（显示内容SSIM0.99815，不是SR质量）。正常BACK返回后普通移除输入，input/output均释放；旧3export保持、新第4份按1天策略保留。60/60证据检查通过，见[末帧显示与清理](android-video-sr-demo.md#2026-11-04-tecno-visible-output-frame-and-ordinary-cleanup)。首次录屏/移动截图255失败保留，录屏只有单帧；连续播放仍未证，历史remove-task/process-death corner不变。

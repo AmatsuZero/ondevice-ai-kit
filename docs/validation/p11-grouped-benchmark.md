@@ -1,5 +1,7 @@
 # P11 分组 benchmark 快照
 
+2026-11-04 已把 Android ASR资源入口/授权请求、ESRGAN完整请求/动态重播、LiteRT-LM真机ZIP导入/真实生成及双端Identity/PAD原始分数证据加入新的readiness快照。旧快照因后续文档变化已不能通过当前哈希校验，当前manifest改指重新固定来源的快照。新增的是功能与缺口证据，不是兼容benchmark样本；下面的5项能力/8组、所有既有逐run统计和质量/资源结论保持不变。
+
 2026-11-03 F04 真机麦克风生命周期已单独纳入当前 readiness；`speech-asr-file` 的固定 CAF 分组仍只计文件输入。因[麦克风验证](ios-microphone-asr.md)后来补充本地 finish/cancel 竞态记录，旧 readiness 对该文档的哈希已失效；当前 manifest 改指重新固定文档哈希的快照。分组统计不因此增加样本，P11/发布仍为 `open/not-ready`。
 
 2026-11-03 新增公开 SDK 的第二自然场景五次真机请求，见[瀑布视频复核](video-sr-backends.md#f11-公开-sdk-第二自然场景五次请求2026-11-03)。它有独立 bundle、输入和运行窗口，作为补充 readiness 证据索引；现有 `video-sr-sdk-resource` 仍只统计首场景的五次请求，不合并两组 p50/p95，也不据此推断场景效应或主观质量。
@@ -10,13 +12,13 @@
 
 ## 可复现入口
 
-跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、七份分组原始设备报告及各附属摘要/媒体/质量文件的路径、SHA-256、source kind 和 P11 能力映射。当前 readiness 另索引 20 次持续运行、第二场景五次请求及 F04 麦克风状态证据，但不把它们加入 grouped `sources`。该入口依赖本地 ignored `artifacts/verification/` 原始证据；旧的 v1–v4 可搬移包不含本次哈希更新，新 clone 需取得当前 manifest 所列完整原始文件。生成命令：
+跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、七份分组原始设备报告及各附属摘要/媒体/质量文件的路径、SHA-256、source kind 和 P11 能力映射。当前 readiness 另索引20次持续运行、第二场景五次请求、F04麦克风状态及2026-11-04新增功能证据，但不把它们加入 grouped `sources`。该入口依赖本地 ignored `artifacts/verification/` 原始证据；旧的 v1–v4 可搬移包不含本次哈希更新，新 clone 需取得当前 manifest 所列完整原始文件。生成命令：
 
 ```sh
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261103-f04-doc-refresh/summary.json
+  --output artifacts/verification/p11-grouped-20261104-mainflows/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。
@@ -42,7 +44,7 @@ python3 tools/p11_grouped_report.py \
 
 ## 覆盖与剩余缺口
 
-readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Speech ASR file、Video SR 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **5项能力/8组**。其余4项保持 `unverified`：Speech ASR Android、Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。加入 F04 真机生命周期证据后，当前 readiness 快照校验 **164 evidence paths / 179 source hashes / 9行有 gap**；分组结果保持原样。
+readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Speech ASR file、Video SR 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **5项能力/8组**。其余4项在 grouped coverage 中保持 `unverified`：Speech ASR Android、Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。这表示缺少兼容分组报告，不表示这些能力均未实现。当前功能状态以[P11矩阵](p11-status-matrix-20261027.md)为准；readiness校验的路径/哈希计数由工具直接输出，九行仍有gap，分组统计不因功能证据索引而增加样本。
 
 旧 `f11-videosr-20261030` 成功报告缺少设备/系统/run 身份和逐帧原始值，仍不作为本次 grouped 来源；本次仅使用新真机成功报告。五次 SDK 整请求耗时及进程 RSS 样本在 `video-sr-sdk-resource` 独立组，不将约 5 秒的解码/缩放/编码全程与约 94 ms 的逐帧缩放混成同一统计组。所有 Video SR 质量报告和分组 `quality.status` 均保持 `unverified`，不把单素材 PSNR/SSIM 升级为主观质量通过。文件 ASR 的新分组仅使用 `SpeechRecognitionClient` SDK client 的五次资源数据；既有直连 Speech framework 探针仍是独立证据，不合组。身份、相机与 LiteRT-LM 同理保留各自证据和缺口。
 

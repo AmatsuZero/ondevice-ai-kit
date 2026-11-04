@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-11-04 功能优先续接：Android LiteRT/ESRGAN 已完成普通系统选择、完整48帧超分与同字节结果动态重播；固定 LiteRT-LM0.18.1/授权 Gemma 已完成 TECNO 系统 ZIP 导入、CPU文本＋硬件GPU视觉真实生成。双端 OpenCV Identity 检测/对齐/embedding/注册删除与精确1:N机制已接入；PAD 仅有独立 iPhone 原始分数试验。下面对应行已更新，不再把这些已实现链路列为缺少后端/权重。ASR 已获授权请求 en-US，资源仍 NOT_REPORTED，最新只读复核仍无默认网络；真实转写未证。新增证据纳入 `artifacts/verification/p11-readiness-20261104-mainflows/summary.json`；不补造延迟/RSS/能耗样本，既有 grouped benchmark 仍为5项能力/8组，九行仍有 gap，P11/发布保持 `open/not-ready`。
+
 2026-11-03 F04 新增 iPhone17,2 / iOS 27.0.1 真实麦克风有界生命周期：隔离 Demo Host 同 PID 三轮 `finishInput → success`，另有显式取消/重入、Home 后取消/回前台重入成功；公开 `SpeechRecognitionClient` 的单轮插桩 close 探针观察到 engine/tap、buffer delivery、原生任务及 session lease 顺序释放，关闭后请求被拒绝。状态与原始日志哈希见[麦克风验证](ios-microphone-asr.md#2026-11-03-显式-closedrain-真机探针)。这些证据只收窄“真实麦克风生命周期未运行”的缺口；未记录音频/转写，也没有自然 CER/WER、麦克风逐 run 延迟/RSS、完整离线矩阵或长期资源预算。`speech-asr-file` 的既有固定 CAF 分组保持不变，F04/P11 发布仍 `open/not-ready`。
 
 2026-11-03 F11 使用独立公开 SDK consumer 在同一 iPhone17,2 / iOS 27.0.1、PID 36727 上对固定公开视频连续运行 20 次，20/20 输出各经哈希、48 帧时间戳和 HEVC/BT.709 校验。约 107 秒的整请求 p50/p95=`5176.6325/6453.235666 ms`，约 10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`88,768,512/133,595,136 B`；首轮结束到末轮结束 RSS 增加 `1,064,960 B`。这是单素材有界趋势，仍缺长期、跨场景、真实/GPU 峰值、能耗及主观质量；旧研究进程存在，未证明全机负载隔离。原始报告 SHA-256=`7703eff1de1fd868a910f03e2201444eec81ca601d87c4706a674702bbeb71c9`，详见[超分复核](video-sr-backends.md#f11-公开-sdk-路径-20-次有界持续请求2026-11-03)。P11 和发布仍 `open/not-ready`。
@@ -33,11 +35,11 @@
 | Face detection | `pass-bounded` | [benchmark](benchmark.md)、[P11 分组报告](p11-grouped-benchmark.md)、[设备矩阵](device-matrix.md) | iOS 15、Android API26、质量阈值、峰值内存、能耗、长期资源 |
 | Speech TTS | `pass-bounded` | [语音后端](speech-backends.md) | 自然语音质量、最低系统、完整离线矩阵 |
 | Speech ASR file | `pass-bounded` | [语音后端](speech-backends.md)、[固定文件探针](ios-asr-file-probe.md)、[真机麦克风生命周期](ios-microphone-asr.md#2026-11-03-显式-closedrain-真机探针)（独立证据，不入固定文件分组） | 麦克风自然 CER/WER/逐 run 资源、完整离线矩阵与长期资源、iOS 15 |
-| Speech ASR Android | `unavailable-assets` | [语音后端](speech-backends.md)、[设备矩阵](device-matrix.md) | 已授权离线资源、真实转写、取消/关闭真机运行 |
-| Video SR | `pass-bounded` | [超分探针](video-sr-backends.md)、[Video Demo](video-bridge-demo.md)、[原生导出取消](apple-video-audio.md) | Android 后端、主观质量、GPU/能耗；最低系统设备验收暂缓 |
+| Speech ASR Android | `unverified-resource-readiness` | [SDK/Demo资源查询和授权下载请求](speech-backends.md#2026-11-04-tecno-授权资源请求与独立-aar-消费)、[设备矩阵](device-matrix.md) | 系统资源实际安装/就绪、设备网络、真实转写、取消/关闭真机运行；下载授权不含录音 |
+| Video SR | `pass-bounded` | [Apple超分](video-sr-backends.md)、[Android完整请求及动态重播](android-video-sr-demo.md)、[Video Demo](video-bridge-demo.md)、[原生导出取消](apple-video-audio.md) | 主观/时域质量、传递函数、帧节奏预算、GPU/能耗与持续资源；最低系统设备验收暂缓 |
 | Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/真实 Files provider/AX 终态/Home 转场 tagged native trace/五次真机语义质量 rubric/同源 motion-control task-set/12轮 RSS 观察](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | temporal exact-label pair 0/3（`observed-failure`）；新增等时等待/clearCache 对照支持约1 GB残留主要来自MLX可回收缓存；整体泄漏与生产资源策略未定；跨场景/多任务集自然 temporal quality、可比较 GPU peak/能耗、发布资源预算、完整物理触控 |
-| Multimodal Android LiteRT-LM | `unverified-production-gate-closed` | [移动端 VLM](mobile-vlm.md)、[drain 合同](android-litertlm-drain-contract.md) | 授权模型 manifest/weights、production factory、native drain、真实推理、质量、GPU/能耗 |
-| Face identity/liveness | `unverified-production-model` | [身份/活体](p10-face-identity.md) | 生产模型、PAD、授权数据、校准、准确率 |
+| Multimodal Android LiteRT-LM | `pass-bounded-sync-image` | [同步factory](android-litertlm-sync-demo.md)、[真机系统ZIP/图片选择与生成](android-litertlm-ui.md)、[异步drain合同](android-litertlm-drain-contract.md) | 异步native drain/streaming、当前候选取消重入、更广自然质量、可比较资源/GPU/能耗；当前不支持视频 |
+| Face identity/liveness | `unverified-calibration-pad` | [Android真实Identity](android-opencv-identity-demo.md)、[Apple真实Identity](apple-opencv-identity.md)、[多候选/图库](identity-gallery-demo.md)、[独立PAD原始分数](pad-raw-score-smoke.md) | PAD捕获/crop与SDK/Demo判定、授权评估/校准数据、1:1/1:N阈值与准确率；原始分数不产生LIVE/SPOOF结论 |
 | Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)（含真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 3/3）、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、真实 PHPicker provider 路径、最低系统、完整 review |
 
 ## 统一结论
@@ -78,7 +80,7 @@
 
 1. 在已冻结 SDK commit 的基础上，冻结剩余模型 revision、输入 fixture 和设备矩阵。
 2. 对每项实际交付能力补齐正确性、质量、延迟、资源、取消和持续运行报告。
-3. 在现有3组/2项能力首版上继续保留逐 run 原始 JSON，为其余实际交付能力补齐按设备、系统、能力和后端分组的 p50/p95 与质量报告，或保持明确 unavailable/unverified。
-4. 解决 LiteRT-LM 授权模型与 native drain、Face Identity 生产模型/PAD/校准、P4 原生残留，以及 iOS 15/Android API26 设备缺口。
+3. 保留当前8组/5项能力的逐run原始JSON，为其余实际交付能力补齐按设备、系统、能力和后端分组的p50/p95与质量报告，或保持明确unavailable/unverified。
+4. 继续 LiteRT-LM 异步 native drain、Android ASR 系统资源就绪、Face Identity/PAD 校准与判定、P4 生产分发/资源，以及 iOS 15/Android API26 设备验收；已完成的固定模型同步图像推理与双端 Identity 注册链路不重复列为未实现。
 
 本矩阵不接受许可证、不下载模型、不改变生产 factory，也不关闭 P4/P11。
