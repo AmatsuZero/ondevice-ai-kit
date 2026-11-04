@@ -8,6 +8,8 @@
 
 - 新增只查询 `checkRecognitionSupport(en-US)` 的独立 instrumentation；无 Activity、录音、权限申请或下载。离线 test APK 构建及 lintDebug 通过。TECNO KM9/API35 真实回调三份语言列表仍空，`NOT_REPORTED`，资源就绪未确认；不能把历史错误13当新转写结论。
 - ignored `artifacts/verification/android-asr-assets-20261104/` 绑定源码/immutable test APK/实际安装hash/原始Bundle。普通 Demo hash 不变；备份的原 test APK与runner已恢复，设备Asleep，九项保护不变。见[证据边界](validation/speech-backends.md#2026-11-04-android-离线资源只读复核)。F05仍缺真实转写/取消重入/离线质量；PAD可用判定仍需裁剪协议与授权校准数据，不扩成绕过policy的整图判定。
+- F07权重调查中间回报列出官方Gemma3n-E2B int4候选，最终代理429，HF元数据未刷新、CPU+vision组合仍未证，不下载/接受许可。[固定候选与输入门槛](validation/android-litertlm-sync-demo.md#2026-11-04-权重输入门槛复核)供后续取得已授权本机文件时复核；无当前权重哈希，不生成假manifest。上轮和本轮均有实际进展，不满足blocked的三轮连续无可执行工作门槛，goal保持active。
+- 已通过结构化异步问题请求“已有获授权CPU+vision .litertlm 的本机路径或精确模型ID”，待用户答复；明确Gemma条款需要使用者接受，现有PAD/SR授权不覆盖该权重。不要重复提问，也不要把自动goal续接当作答复或许可。
 
 ## 上一检查点 — 2026-11-04 PAD 官方模型真实 iPhone 原始分数
 

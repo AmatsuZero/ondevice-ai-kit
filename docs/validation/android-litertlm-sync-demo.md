@@ -2,6 +2,24 @@
 
 日期：2026-11-03。用户调整为功能优先，长期资源与罕见竞态后置。本轮承接 [实施增量](../superpowers/plans/2026-11-03-android-litertlm-synchronous.md)，补齐真实 runtime 调用和 Demo 接线；**没有模型权重，真实设备生成尚未验证**。
 
+## 2026-11-04 权重输入门槛复核
+
+有界 dependency-expert 调查的中间回报引用固定 `0.18.1` 源码
+[`bda624851d74be34d4e1f7fac1fc4155939539c7` README](https://github.com/google-ai-edge/LiteRT-LM/blob/bda624851d74be34d4e1f7fac1fc4155939539c7/README.md)，
+其中使用官方候选
+[`google/gemma-3n-E2B-it-litert-lm`](https://huggingface.co/google/gemma-3n-E2B-it-litert-lm)。
+既有元数据记录的 revision 为 `c03b6f60b8da6c5400b6838a2cf26420f80c0a01`，
+文件 `gemma-3n-E2B-it-int4.litertlm`、3,655,827,456 B，标注
+`gated=manual` / `license=gemma`；**本轮未刷新该 HF 元数据，也没有文件 SHA-256**。
+调查最终遇429，不能作为完成的独立兼容性结论。
+
+候选受 [Gemma 条款](https://ai.google.dev/gemma/terms)与人工许可门槛约束。
+官方示例/一般 vision 声明不证明本 SDK 固定 CPU+vision 组合；得到实际获授权
+文件后，仍先检查 `ModelInfo` 的模态/后端/最低 runtime，再固定真实 hash/manifest，
+最后运行图像请求。未找到已验证的非门控宽松许可替代项；不是不存在此类模型的证明。
+下一输入为已获授权的本机 `.litertlm` 路径（或精确模型 ID/合法访问方式）。
+不下载权重、不代用户接受许可、不请求用户发送 token，也不生成虚假 manifest。
+
 ## 实现
 
 - 公开 `LiteRtLm.createBackend(store, model, cacheRoot, environment)`；构造与 availability 不初始化 native engine。
