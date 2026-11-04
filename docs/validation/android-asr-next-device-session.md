@@ -47,6 +47,38 @@ APK/source and logs are retained in ignored
 `artifacts/verification/android-asr-single-20261104/`. No physical-device install
 or microphone attempt was made after the user deferred the session.
 
+## No-capture emulator preflight
+
+On2026-11-04 the exact prepared test APK (`db759cca…ca12`) was temporarily
+installed only on the existing `ODAI_MainFlow_20261104` / emulator-5580. Its
+source hash matches `prepared.json` and the current committed probe. The ordinary
+App stayed at the frozen layout APK `c098fc41…cf1a6`; no App rebuild/update,
+permission grant or physical-phone operation was involved.
+
+Running the operator runner **without any authorization argument** returned
+`status=precondition-rejected`, `startCount=0`, no `activityStarted`,
+`recognizerDestroyed=false`, and no audio/transcript persistence. This validates
+the rejection branch only: microphone permission was also denied, so it is not
+an authorized-branch, timeout/watchdog, real-service or transcription test.
+The unchanged `RECORD_AUDIO: ignore` appops and denied capture permissions
+support the no-capture boundary; no system-service network/offline claim is made.
+
+Instrumentation terminated its target process as expected. The temporary test
+package was removed to restore its original absent state, and ordinary Demo
+was relaunched (PID8481 before →9996 after) and returned to the speech page.
+The exact App/model hashes, denied permissions/appops and two-file export cache
+inventory matched before/after. Those cache checks establish names only, not
+export-content hash equality. Initial `pm list instrumentation` observations
+used the test package as a target filter and were empty; the post-run query
+uses the actual target package and identifies the installed runner correctly.
+
+Ignored evidence: `artifacts/verification/android-asr-single-no-capture-20261104/`.
+Fresh `verify.py` passes7 evidence hashes, actual result-bundle contents,
+restoration and existing252-source/layout/APK/protected-file/production-lock
+checks. No new production code, SDK tests or independent review was performed.
+Physical microphone attempts remain zero and tomorrow's authorized single
+attempt remains unconsumed.
+
 ## Tomorrow's order
 
 1. Recheck device, APK/runner hashes and permissions; preserve original test APK.

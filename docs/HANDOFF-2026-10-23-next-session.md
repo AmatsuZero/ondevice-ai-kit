@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 F09 固定兼容复制工具
+## 最新续接 — 2026-11-04 ASR 无采音拒绝预检
+
+- 仅在既有MainFlow模拟器临时安装冻结db759cca单次探针test APK，不带授权参数运行；实际bundle为precondition-rejected/startCount0/无activityStarted，capture权限denied与RECORD_AUDIO ignore前后不变。探针source与prepared摘要匹配、普通App仍c098fc41；不是授权分支/超时watchdog/资源就绪/转写验证，手机采音仍0次。
+- 测试结束目标进程按instrumentation行为退出；移除test包恢复原缺席状态，普通App重新启动PID9996并返回语音页。固定模型/App/权限/appops/缓存文件名清单保持，不将文件名核对称内容摘要核验。前两次runner查询误把test包当target filter而空，后置正确target查询识别runner；回执保留原状。ignored `android-asr-single-no-capture-20261104/verify.py` fresh PASS，7份证据摘要及252源码冻结/九保护/生产lock通过；见[次日验证准备](validation/android-asr-next-device-session.md#no-capture-emulator-preflight)。无新生产代码/build/SDK测试/独立复审/手机操作。
+- 明天2026-11-05北京时间09:00用户在场后再提示并进行单次ASR，本次不消耗已授权采音次数。主要剩余阻塞仍为ASR用户在场、PAD/识别校准协议数据、F09维护策略及完整依赖来源；基础10/12、P4/P11/发布open/not-ready、goal active。本轮有真实拒绝分支与恢复验证进展。
+
+## 上一检查点 — 2026-11-04 F09 固定兼容复制工具
 
 - 继续无需用户配合工作，补齐候选审查提出的fail-closed applicator：只从lock绑定的精确Git提交对象复制两项声明依赖到新目录，校验runtime/patch/input/output及完整文件清单，拒绝越界/symlink/submodule/已有输出，失败不发布复制结果；原缓存/生产lock不写。读取raw blob避免git archive的export-ignore/export-subst改变构建输入；receipt保留draft-not-adopted/build-not-run，不采纳待决策略。
 - 定向12/12、完整tools262/262、Python compile/diff及九保护/生产lock通过；初始RED和两项边界RED→GREEN保留，追加legacy patch检查初次仅错误文字断言不匹配、已有拒绝行为始终正确，修正断言后通过，不称新增安全修复。历史缓存缺Git objects时真实CLI按预期拒绝且无输出；已有四份原始源码独立重放两补丁、输出摘要匹配，不冒充完整依赖复制/构建。见[工具及边界](validation/f09-compatibility-candidate/README.md#2026-11-04-guarded-preparation-tooling)。独立tool reviewer429无结论；未新下载/构建二进制/操作手机/采音。
