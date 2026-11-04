@@ -24,8 +24,8 @@ class SpeechDemoInstrumentation : Instrumentation() {
     override fun onStart() {
         val result = Bundle()
         try {
-            val activity = startActivitySync(Intent(targetContext, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) as MainActivity
             if (mode == "asr-download") { downloadEnglishModel(result); finish(-1, result); return }
+            val activity = startActivitySync(Intent(targetContext, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) as MainActivity
             node("speech-tab").performAction(AccessibilityNodeInfo.ACTION_CLICK)
             if (mode == "asr-live") {
                 node("speech-recognize-mic", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK)

@@ -2,6 +2,49 @@
 
 更新时间：2026-10-17。本文记录后端边界、探针与逐步接入的 SDK 模块；各节分别标明代码、分发和真机证据，不把第三方服务凭据、网络可用性或商业许可假设成 SDK 已交付。
 
+## 2026-11-04 TECNO 授权资源请求与独立 AAR 消费
+
+用户已明确允许请求系统下载 en-US 资源；本次不录音。operator-only
+`asr-download` 分支移到 Activity 启动前，避免仅下载时打开 Demo 页面。
+组合 test APK 构建与 `lintDebug` 通过，668 tasks 中18项执行；冻结 test APK
+SHA256 `a679958ad7a35ddfe8ccd6d2cc217b888dd8b708a664bd717d043f2beda3ee84`。
+
+TECNO KM9/API35 的服务无法监听下载事件；既有 operator-only fallback 调用
+void `triggerModelDownload` 后返回 `download=requested-without-events-not-ready`、
+`status=unverified`。这只证明发起请求，不能证明实际排队、下载或安装。
+生产 SDK 继续只用 API34 可观察下载，不采用该 fallback。后置独立查询仍是
+installed/pending/supported 三份列表均空、**NOT_REPORTED**，recognizer 已销毁；
+未调用识别、未请求录音权限、未启动 Activity。不能据此补造新的识别失败。
+
+系统 overlay 配置的 on-device service 为
+`com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSpeechRecognitionService`。
+当时 `dumpsys connectivity` 返回 **`Active default network: none`**，Wi-Fi 原已开启。
+标准语音设置中另一个包 `com.google.android.googlequicksearchbox` 显示 English (US)
+“预装”，不能用它证明上述 on-device service 的资源可用。未点击该页面下载、
+接受条款或更改网络/默认服务设置，已返回 HOME。已询问可用的已保存 Wi-Fi 名称或
+网络恢复信息，等待输入；未将无回执请求当活跃任务轮询。
+
+普通 APK SHA256 `405d64e1bf67d1879ff96db386282066e7cda612a2b77134377e070feec082c0`
+全程不变；原 test APK `7b9e47ce…a621d` 和 `IdentityModelInstrumentation` runner 已恢复。
+相机/麦克风权限原已 granted，前后不变；最后回读 Awake。首次恢复后 SHA 采集 exit1
+原因未明，后续仅重试只读采集成功，未重复安装/下载。ignored
+`artifacts/verification/android-asr-download-20261104/verify.py` **34/34**，
+含实际请求、恢复、网络状态、九项保护及生产 MLX lock；资源就绪仍 **unverified**。
+
+另将资源查询/显式下载入口加入 `examples/android-speech` 原生消费者。仅发布到新的
+ignored worktree-local Maven 目录 `artifacts/verification/android-asr-published-resources-20261104/m2`，
+没有写全局 Maven 仓库或远端。`usePublishedSdk=true` 的 systemAsr/contract
+Debug/Release 四个 AAR 与两项 Debug lint 通过，**120/120 tasks 实际执行**。
+实际依赖解析证明 systemAsr 只消费该仓库的 sdk-core/speech/backend-system-asr，
+contract 只消费 sdk-core/speech；没有 project dependency 或第三方模型 runtime。
+两个 ASR AAR 字节码均包含新资源方法及 `AndroidAsrResources` 引用。
+同目录 `verify.py` **72/72**，绑定28份源输入、9份发布文件、4个消费者 AAR及保护文件。
+这只验证本地发布产物消费；未运行消费者下载/录音，未重跑 SDK 单测。
+
+F05 仍缺联网后资源安装证明与真实转写。旧287项源码绑定属于 f946970 的历史候选，
+本次 runner 改动后不再宣称旧255份快照与当前工作树全部相同。独立复审429无结论，
+未视为批准；基础10/12、P4/P11/发布 open/not-ready 保持。
+
 ## 2026-11-04 Android SDK/Demo 语言资源恢复入口
 
 F05 新增生产 `AndroidAsrResources.check(locale)` 与显式

@@ -4,7 +4,15 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Android ASR 资源恢复功能
+## 最新续接 — 2026-11-04 ASR 授权请求与发布产物消费
+
+- 用户已明确允许 TECNO 系统下载 en-US，本次不录音。operator-only 下载分支移到 Activity 启动前，组合 test APK 构建/lint通过（668 tasks/18 executed）；仅临时替换 test APK，普通405d64e1…082c0包不变。实际请求返回 requested-without-events-not-ready/unverified：服务不支持事件监听，既有operator fallback仅发起void请求；生产SDK未采用fallback。后置独立查询三语言列表仍空、NOT_REPORTED，不是安装或真实识别结果。
+- 当时 Wi-Fi 已开启但 `Active default network: none`；实际on-device service来自com.google.android.as。系统设置另一个Google Search包显示English(US)预装，不能证明on-device资源可用。未改网络/默认服务/接受条款，返回HOME；已异步询问可用已保存Wi-Fi名称或联网恢复信息，等待输入，不重复询问、不轮询无回执下载。后续拿到网络输入再核验后继续，下载授权仍有效，录音未授权。
+- 原test APK7b9e47ce…a621d与IdentityModelInstrumentation runner已恢复；相机/麦克风原granted前后不变，最后Awake。第一次恢复后SHA采集exit1原因未明，仅重试只读采集成功，未重复安装/下载。`artifacts/verification/android-asr-download-20261104/verify.py` fresh34/34含恢复/网络/9保护/MLX lock；resourceReadiness仍unverified。旧287检查属于f946970历史候选，本次runner已变化，不称旧255源码快照仍与工作树全等。
+- 原生speech consumer补资源查询/显式下载示例。隔离worktree-local Maven发布sdk-core/speech/backend-system-asr，`usePublishedSdk=true`四个Debug/Release消费者AAR及两项lint通过，120/120 tasks实际执行；实际解析均指向隔离m2，无project依赖/模型runtime，两个ASR AAR字节码含新入口。`artifacts/verification/android-asr-published-resources-20261104/verify.py` fresh72/72，绑定28源码/9发布文件/4消费者AAR及保护。未写全局Maven或远端、未运行消费者录音/下载、未重跑SDK单测。
+- 详见[验证与恢复边界](validation/speech-backends.md#2026-11-04-tecno-授权资源请求与独立-aar-消费)。独立review429无结论；PAD数据/校准协议和F09维护策略继续待既有答复。当前分支有真实授权请求、诊断与消费者编译进展，无未终结命令；仅本地提交，无push/merge/release。功能优先、corner后置，基础10/12、P4/P11/发布open/not-ready、goal active保持；真实转写不冒充完成。
+
+## 上一检查点 — 2026-11-04 Android ASR 资源恢复功能
 
 - 生产新增 `AndroidAsrResources`：API33精确locale资源查询、API34可观察显式下载；installed/pending/downloadable/not-reported和平台错误分开，onScheduled/进度不计安装。Main拥有/销毁每个recognizer，取消只停止监控。Demo加检查/匹配资源下载确认、状态/进度、麦克风互斥及后台/退出取消/close等待；采用独立optional common provider，不改Apple host协议/生产依赖。见[SDK说明](../android/backend-system-asr/README.md)与[验证](validation/speech-backends.md#2026-11-04-android-sdkdemo-语言资源恢复入口)。
 - 本轮实际执行SDK13/13、组合Demo62/62、默认54/54、共享iOS simulator80/80；iOS arm64 compile、组合APK/testAPK、ASR release AAR和双模块lint通过（ASR0errors/5warnings）。初始未实现编译RED、locale异常类型、快速关闭busy assertion、动态version guard lint失败保留且已修复。独立代码review429无结论，作者另作限定检查，无独立批准。
