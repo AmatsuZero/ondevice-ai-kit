@@ -1,5 +1,46 @@
 # Android LiteRT-LM 普通 UI 验证
 
+## 2026-11-04 TECNO 系统 ZIP 导入与真实生成
+
+复用已获授权的固定 Gemma manifest-first ZIP，无新下载/许可操作。TECNO
+KM9/API35 新鲜检查 Awake/unlocked；普通405d64e1…082c0 APK与原空LM存储先核对保留，
+临时 install-r 冻结组合候选 **644bbde4…df30**。候选255份源码输入中的254份仍匹配当前树，
+唯一差异是后续 headless ASR instrumentation 的一行顺序调整，不是 APK 主源码；
+不宣称从当前HEAD重新构建过候选。ZIP SHA256仍为下方772d5bb5…ea734e、3,655,853,789 B，
+USB推送后设备摘要匹配，未预置App私有模型。
+
+普通 Demo 实际点击“导入本地模型包（ZIP）”→系统 DocumentsUI/下载→选择精确ZIP。
+UI先显示“正在校验并安装本地模型…”且导入按钮disabled，再显示“模型已安装，可以选择图片并生成”；
+后端显示 `litertlm.android · 可用 · minOS 26`。导入副本与ModelStore中的权重、model card
+及导入manifest/descriptor分别匹配原ZIP身份，权重SHA256为2ed7bc3a…4010d6；
+incoming/previous暂存目录已清理，仅剩import目录。
+
+同一普通Activity随后经系统图片picker选既有 `ODAI-solid-red-256.png`，32-token
+请求到达 **SUCCEEDED**，输出 `The image is a solid red rectangle.` 等描述；页面显示
+`litertlm.android`、`gemma-3n-e2b-it`、revision
+`c03b6f60b8da6c5400b6838a2cf26420f80c0a01`、runtime `litertlm-android:0.18.1`。
+picker私有副本与native input.image均为991b54f0…d3aa。PID32723保持；原生日志确认
+Mali-G57 MC2/Vulkan Integrated GPU、视觉1448/1448 WebGPU与CPU XNNPACK，
+终态有且仅有一对CPU/GPU DestroyAccelerator。32tokens仍截断，不称完整自然质量。
+
+普通UI清除输入后“尚未选择输入”、生成disabled；本轮私有输入与native cache已无文件，
+原三字节fixture摘要039058c6…1cfb81不变。随后精确恢复原APK与空LM目录，权限前后原已granted，
+未请求相机/麦克风或录音；原普通Demo无验证参数启动。本轮新建的导入/安装模型副本、
+公开测试ZIP与恢复用临时APK已删除，其他获授权模型/fixture未清理。
+
+恢复阶段保留两项失败：首次只读检查遇 `adb: device ... not found`，确认同序列重新在线后
+继续；流式原APK恢复随后120秒未返回。只读核对确认候选包仍在、主机原安装进程已结束、
+无active/finalized安装会话，历史会话2051014383为destroyed、finalStatus=-100及不完整APK解析失败。
+未把观察超时当完成或并发重装；改将原APK传到本轮专用路径、校验SHA后 `pm install -r` 返回
+Success，最终设备原包SHA/目录/权限与前置状态匹配，临时APK删除。具体传输断连原因未确定，
+不是模型或推理失败，未重启ADB/设备或修改系统网络。
+
+ignored `artifacts/verification/android-litertlm-physical-zip-20261104/` 保留UI快照/截图、
+源码与包绑定、模型/输入摘要、同PID原生日志、失败与精确恢复回执；`verify.py` **317/317证据检查通过**，
+含254份匹配源码、九项保护及生产MLX lock。本次没有新build/SDK单测或独立复审；此前429
+不视为批准。本节关闭真机系统ZIP导入并串联一次真实生成的子项；当前候选取消重入、
+人工触摸/任意provider、自然质量/资源与异步drain仍开放，P4/P11/发布保持open/not-ready。
+
 ## 2026-11-04 最新三后端组合包普通生成
 
 固定组合 APK `bd89bdbf…16bd7`（源码提交7132208；LM/SR/Identity三opt-in）已在

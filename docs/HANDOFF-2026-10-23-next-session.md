@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 ASR 授权请求与发布产物消费
+## 最新续接 — 2026-11-04 TECNO 系统 ZIP 导入到真实生成
+
+- 不依赖ASR网络/PAD数据/F09策略，补齐F07真机系统ZIP导入。新鲜Awake/unlocked的TECNO/API35核对并保留原405APK/空LM目录后，临时安装冻结644bbd…df30组合候选；255源输入中254匹配，唯一差异是后续ASR测试runner顺序，不称HEAD重建。已授权3.66GB ZIP设备SHA匹配，经普通Demo系统DocumentsUI真实选择，安装busy/按钮disabled→模型已安装/后端可用；未预置App私有模型。导入与ModelStore权重/model card及导入manifest/descriptor摘要匹配，incoming暂存清理。
+- 同普通Activity系统选红图→32tokens SUCCEEDED，输出solid red rectangle；实际backend/model/revision/runtime正确，picker/native输入SHA991b…d3aa，PID32723保持。Mali-G57/Vulkan硬件视觉1448/1448 WebGPU、CPU XNNPACK及单对accelerator销毁已记录；普通UI清除后本轮输入/cache无文件，原三字节fixture保持。不是自然质量/性能/当前包取消重入验收。
+- 原APK/空LM存储/权限已恢复，普通Demo无参数启动；本轮新增模型副本、公开ZIP与恢复临时APK精确删除，其他数据保留。恢复先遇短暂device-not-found，后流式恢复安装120s未返；确认原安装进程已结束且无活跃安装，历史session2051014383 destroyed/finalStatus=-100不完整APK解析失败。候选包仍在，未误认恢复完成；专用路径完整传输/校验原APK后pm install-r Success，最终原包SHA一致。断连根因未知，失败证据保留，无ADB/设备重启或系统网络修改。
+- 见[真机ZIP到生成](validation/android-litertlm-ui.md#2026-11-04-tecno-系统-zip-导入与真实生成)，ignored `artifacts/verification/android-litertlm-physical-zip-20261104/verify.py` fresh317/317，含254源码/9保护/生产MLX lock；全部命令terminal。无新构建/SDK单测/独立复审，旧429不作批准。仅本地文档提交，无push/merge/release。ASR等待已保存Wi-Fi或网络恢复信息，PAD校准协议/数据与F09策略仍待既有答复；基础10/12、P4/P11/发布open/not-ready，goal active。
+
+## 上一检查点 — 2026-11-04 ASR 授权请求与发布产物消费
 
 - 用户已明确允许 TECNO 系统下载 en-US，本次不录音。operator-only 下载分支移到 Activity 启动前，组合 test APK 构建/lint通过（668 tasks/18 executed）；仅临时替换 test APK，普通405d64e1…082c0包不变。实际请求返回 requested-without-events-not-ready/unverified：服务不支持事件监听，既有operator fallback仅发起void请求；生产SDK未采用fallback。后置独立查询三语言列表仍空、NOT_REPORTED，不是安装或真实识别结果。
 - 当时 Wi-Fi 已开启但 `Active default network: none`；实际on-device service来自com.google.android.as。系统设置另一个Google Search包显示English(US)预装，不能证明on-device资源可用。未改网络/默认服务/接受条款，返回HOME；已异步询问可用已保存Wi-Fi名称或联网恢复信息，等待输入，不重复询问、不轮询无回执下载。后续拿到网络输入再核验后继续，下载授权仍有效，录音未授权。
