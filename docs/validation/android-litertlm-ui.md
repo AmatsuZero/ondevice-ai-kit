@@ -1,5 +1,67 @@
 # Android LiteRT-LM 普通 UI 验证
 
+## 2026-11-04 TECNO 普通 UI 与自然图像重入
+
+已在获授权 TECNO KM9/API35 的普通 Demo Activity 完成系统 DocumentsUI
+图片选择取消/重入、红图真实生成、原生初始化后的取消与同 PID 自然图像再次生成。
+设备预检为 Awake、keyguard showing=false/inputRestricted=false；本轮没有执行解锁、
+相机或麦克风操作。生产代码未改，未重新构建或下载模型/runtime。
+
+候选 APK 沿用下方模拟器的 `4e8a7c7d…15e868` 完整摘要，安装后设备回读匹配。
+Android/backend 与 Demo 生产源码自 `c5be267` 无差异，固定生产源文件摘要与原构建绑定一致。
+本轮通过已文档化的 debug 私有目录预置，复用设备上的已授权模型包；ModelStore
+按正常生产路径校验安装。设备安装后模型完整 SHA-256 为
+`2ed7bc3a0026c93d5b8a4544b352d9d00cd66ff0bac3ef6a20ac3d2cba4010d6`。
+这次没有在真机重做 3.66 GB ZIP 系统导入；该 UI 子项仍只有下方模拟器证据。
+
+普通 UI 的实际顺序如下：
+
+1. 从图像理解页打开系统选择器，取消返回后仍无输入；再次进入 Downloads，选择本轮
+   固定 `ODAI-solid-red-256.png`（SHA-256 `991b54f0…d3aa`）。未打开私人媒体。
+   `Describe this image.`、32-token 请求 `RUNNING → SUCCEEDED`，最终输出描述
+   `solid red rectangle`，并显示实际 backend/model/revision/runtime。
+2. 对同一输入再次生成。原生日志已出现第二次 Mali adapter 初始化后点击取消，UI 显示
+   `CANCELLING / 等待原生任务释放…`，生成按钮 disabled；随后 `CANCELLED`、恢复操作，
+   无结果交付。12:41:09.679 的 CPU/GPU accelerator destroy 与此次释放对应。
+3. 从系统 Downloads 选择既有获批 Common swifts 自然视频的首帧 PNG，
+   保留同一 prompt，仅将输出预算改为64。再次 `RUNNING → SUCCEEDED`，最终输出提到
+   `bright blue sky`、`white clouds`、`birds`，实际模型身份与第一轮相同。
+   初始化前、取消后及最后清除后 PID 均为 **9562**。
+
+自然图片由原 `artifacts/P7/natural/prepared/input-180p-4x.mp4`（SHA-256
+`97682e3f…f2f1f`）直接解码第0帧，320×180 PNG，23,605字节，SHA-256
+`f49c63e73297294b2252aa0610c248cedb0ba8b51e143e3dd6a3f5d02a76fb29`。
+系统 picker 私有副本与 native `input.image` 的设备摘要均匹配。输出64 tokens仍在
+`peaceful and airy` 处截断；单帧可见内容检查不等于完整自然图像质量，更不验证视频/时域能力。
+
+PID9562过滤日志记录三轮实际 Mali-G57 MC2、Vulkan、`adapterType=Integrated GPU`，
+视觉1448/1448 nodes为 `LITERT_WEBGPU`，CPU文本为XNNPACK。三轮均有CPU/GPU销毁事件。
+这确认该硬件 delegate 路径可运行，不是性能、峰值内存、能耗或长期资源验收。
+缺OpenCL库、GPU准备与UI掉帧等warning保留，不称无warning。
+
+清除输入后本轮 `multimodal-input` 文件和 `cache/litertlm` 文件均为空，生成disabled；
+原有另一个目录中的3字节测试provider fixture按原时间/大小/摘要保留，不声称整个cache为空。
+原Demo APK在测试前备份，原空LM存储目录单独rename保留；测试结束恢复原APK
+（完整SHA-256 `405d64e1bf67d1879ff96db386282066e7cda612a2b77134377e070feec082c0`）
+与原目录，并移除本轮新增私有模型/导入副本。原普通Demo已无验证参数重新启动。
+设备上的本轮公开输入文件保留复现，没有修改其他App或设备设置。
+
+ignored 证据：`artifacts/verification/android-litertlm-physical-ui-20261104/`，含
+准备/恢复脚本及逐步回执、APK备份、设备完整模型/APK身份、系统picker/取消/两次成功/UI清除
+snapshots与截图、自然帧与picker/native绑定、过滤日志、恢复后状态及 `verify.py`。
+新鲜结果 **67 checks passed**，并核对九项保护文件和生产MLX lock。
+初次准备guard停止后核查发现旧空LM目录，改为精确保留；首次verifier误把注册日志计入销毁数，
+失败报告保留，修正为只统计 `DestroyAccelerator` 后通过。二者均不是模型推理失败。
+
+复核命令：
+`rtk proxy python3 artifacts/verification/android-litertlm-physical-ui-20261104/verify.py`。
+它复核已保存证据，不重跑UI/推理。独立有界证据/文档复核重新运行同一脚本，结论
+**PASS（仅本轮TECNO普通UI范围）**，未修改文件或操作设备；下方模拟器PASS仍属原范围。
+真机ZIP导入、人工触摸/任意provider、跨任务自然质量、异步native drain/streaming与资源仍开放。
+P4/P11/发布保持 `open/not-ready`，goal active，未push/merge/release。
+
+## 此前的隔离模拟器 UI
+
 2026-11-04，源码 `c5be267740d904a63f6a634bcd11a45eff2b1a18`。本轮没有修改生产源码或重建 runtime；普通 Demo 在隔离模拟器完成系统 ZIP/图片选择、真实生成、取消和同进程重入。独立有界 verifier 补审结论为 **PASS（仅此 UI 范围）**，不是全分支或发布批准。
 
 ## 环境与身份

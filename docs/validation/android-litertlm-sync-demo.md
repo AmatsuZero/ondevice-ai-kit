@@ -1,6 +1,14 @@
 # Android LiteRT-LM 同步图像生成接入
 
-日期：2026-11-03。用户调整为功能优先，长期资源与罕见竞态后置。本轮承接 [实施增量](../superpowers/plans/2026-11-03-android-litertlm-synchronous.md)，补齐真实 runtime 调用和 Demo 接线；**官方模型、显式 CPU 文本＋GPU 视觉与真实 TECNO 图像生成链路已验证；[普通模拟器 UI](android-litertlm-ui.md)的系统选择器、生成、取消重入已通过，物理设备 UI 仍未验**。
+日期：2026-11-03。用户调整为功能优先，长期资源与罕见竞态后置。本轮承接 [实施增量](../superpowers/plans/2026-11-03-android-litertlm-synchronous.md)，补齐真实 runtime 调用和 Demo 接线；**官方模型、显式 CPU 文本＋GPU 视觉与真实 TECNO 图像生成链路已验证；[普通 UI](android-litertlm-ui.md)已覆盖模拟器系统ZIP导入及TECNO真机图片选择、生成、取消与同PID自然图像重入**。
+
+## 2026-11-04 TECNO 普通 UI 补验
+
+复用固定APK和设备已有授权模型，debug私有目录预置后经正常ModelStore校验；普通Activity
+系统图片选择取消/重入、红图成功、原生初始化后取消等待释放、同PID9562自然飞鸟首帧生成成功，
+**67项证据检查通过**。实际视觉delegate为Mali-G57 MC2/Vulkan硬件GPU；输入/cache清理后
+原APK与空LM目录均恢复。真机未重做ZIP选择，跨任务质量/性能与异步drain仍未验；
+见[具体身份、日志和边界](android-litertlm-ui.md#2026-11-04-tecno-普通-ui-与自然图像重入)。
 
 ## 2026-11-04 普通模拟器 UI 补验
 

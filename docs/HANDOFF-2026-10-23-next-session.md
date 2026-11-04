@@ -4,7 +4,15 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Android 自然视频 SR 普通 UI 主流程通过
+## 最新续接 — 2026-11-04 TECNO 普通 LM UI 与自然图像重入通过
+
+- 设备新鲜预检Awake/unlocked；复用固定optional LM APK及设备已授权模型，无生产改动/重建/下载。先备份原APK与rename保留旧空LM目录，debug私有目录预置后正常ModelStore安装校验。设备完整APK/模型SHA匹配。
+- 普通Activity系统图片picker取消重入→红图生成成功；第二轮实际Mali初始化后点取消，CANCELLING禁生成→CANCELLED；同PID9562选既有公开Common swifts第0帧，64tokens生成成功，输出含蓝天/白云/飞鸟。两轮均显示真实backend/model/revision/runtime，64tokens仍截断，不称完整自然质量。
+- 三轮native日志为Mali-G57 MC2/Vulkan Integrated GPU、vision1448/1448 WebGPU、CPU文本XNNPACK，均有CPU/GPU销毁。清除输入后本轮私有输入/native cache无文件；旧3字节provider fixture保持。原APK `405d64e1…082c0` 与空LM目录已恢复、普通Demo无验证参数重新启动；本轮新增模型/导入副本已删除，公开输入保留复现。
+- `artifacts/verification/android-litertlm-physical-ui-20261104/verify.py` fresh **67/67**，含source/model/APK/输入与原文件恢复、9项保护及MLX lock；独立限定证据/文档复核PASS。首次目录guard和verifier计数失败保留后修正；不是runtime失败。有界PID日志reader已terminal。见[真机UI边界](validation/android-litertlm-ui.md#2026-11-04-tecno-普通-ui-与自然图像重入)。真机ZIP选择、人工触摸/任意provider、自然质量/性能及异步drain未验。
+- 只读代码盘点确认剩余主要实现依赖PAD捕获/授权校准输入、Android ASR资源及F09兼容维护路线；不凭延续消息采纳待答复路线，不猜阈值/扩下载。基础10/12、P4/P11/发布open/not-ready，goal active；本轮实际真机UI进展，不满足blocked门槛。仅本地文档提交，无push/merge/release。
+
+## 上一检查点 — 2026-11-04 Android 自然视频 SR 普通 UI 主流程通过
 
 - 复用 `ODAI_MainFlow_20261104` / emulator-5580、原 immutable 组合 APK 和 ESRGAN；本轮未改生产代码或重建。原自然素材 High444 profile 返回FAILED/PLATFORM，独立平台probe为0个exact decoder；保留失败。明确派生同内容H264 High/CRF18副本后，平台probe为3候选，系统picker实际选择并完成48帧CPU ESRGAN。
 - 普通UI终态 `SUCCEEDED / 1280×720 · 48 帧 · 2.0 秒 · 音轨 0`；输出2,240,688字节、SHA `ddce5b1dd8eeb3dbc9532efe2beb4a5334845bfa163301ff8ca9bc790e517ca5`。独立全解码/48帧/PTS≤1µs/BT709/no-audio通过；抽帧仅作内容检查，不称自然/时域质量通过。
