@@ -50,8 +50,12 @@ Later on2026-11-04 the same frozen APK separately completed an ordinary system
 video selection → actual ESRGAN4× → AAC-preserving output → ordinary cleanup
 flow on MainFlow. Full decode/PTS/BT.709/AAC packet checks passed; see
 [the exact candidate receipt](android-mainflow-emulator.md#frozen-layout-candidate-sr-main-flow).
-This adds only the bounded synthetic SR main flow to the earlier layout checks;
-LM/Identity inference on this exact layout APK and physical-device acceptance
+This adds only the bounded synthetic SR main flow to the earlier layout checks.
+The same frozen APK subsequently completed a system-selected synthetic red
+image →32-token actual Gemma generation → ordinary cleanup on the existing
+LM AVD; [that receipt](android-mainflow-emulator.md#frozen-layout-candidate-lm-main-flow)
+also proves the configured CPU/software-vision route and matching model/input.
+Identity inference on this exact layout APK and physical-device acceptance
 remain unverified.
 
 Final source candidate: commit `a27a0795df5acda8e9051518a7a8a5298b4c08f6`,

@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 页面修复候选实际 SR 主流程
+## 最新续接 — 2026-11-04 页面修复候选实际 LM 主流程
+
+- 已核验旧644APK可回退后，只在既有6GiB LM专用模拟器更新固定a27a079/c098fc41页面候选，保留原授权Gemma四文件。普通DocumentsUI选原合成红图→默认后端/原prompt/32tokens RUNNING→SUCCEEDED，实际文本solid vibrant red rectangle，UI实际backend/model/revision/runtime正确；32token尾句截断，不称完整自然质量。
+- 同PID6085/模型四摘要/相机麦克风denied保持，普通清除后cache/input为空；1448/1448视觉WebGPU与CPU文本执行、单对accelerator销毁记录，SwiftShader为软件视觉而非硬件GPU。新包/模型留原LM AVD，旧包可回退；未重建/SDK测试/新独立复审/操作手机/下载/采音。
+- ignored `android-layout-lm-mainflow-20261104/verify.py` fresh PASS，绑定精确APK与模型/输入、系统picker/运行/输出/清理及252源码冻结、九保护和MLX lock；一次日志自动审核超时未执行，单次重试成功。见[普通LM验证](validation/android-mainflow-emulator.md#frozen-layout-candidate-lm-main-flow)。该精确包SR与LM主流程已证，Identity尚未重跑；ASR仍明天2026-11-05北京时间09:00用户在场后启动。基础10/12、P4/P11/发布open/not-ready，goal active。
+
+## 上一检查点 — 2026-11-04 页面修复候选实际 SR 主流程
 
 - 固定a27a079/c098fc41页面候选在既有MainFlow隔离模拟器普通系统Photo Picker→Browse→DocumentsUI选原双帧AAC素材，默认ESRGAN真实4×后SUCCEEDED/128×96/2帧/1音轨；输入公开与私有SHA一致，实际输出SHA56600ced…1af4。完整解码/全PTS一致/BT709/四个AAC包hash与PTS通过；首个点击后观测已成功，不称捕获RUNNING或处理耗时。见[主流程证据](validation/android-mainflow-emulator.md#frozen-layout-candidate-sr-main-flow)。
 - 普通清理结果/移除输入后本轮input/output均释放，原两份export摘要保持；PID8481/模型/精确APK和相机麦克风denied保持，返回普通语音页。ignored `android-layout-sr-mainflow-20261104/verify.py` fresh PASS，连同252源码冻结/布局/测试/九保护与MLX lock。未重建/新增SDK测试/操作手机/采音，不提升自然质量、播放或持续资源；该精确包LM/Identity尚未重跑。

@@ -1,5 +1,40 @@
 # Android Identity and video SR system UI — 2026-11-04
 
+## Frozen layout candidate LM main flow
+
+The exact `a27a079`/`c098fc41…cf1a6` layout APK now also runs ordinary
+image understanding on the existing6GiB `ODAI_LM_UI_20261104` / emulator-5582.
+The previous644bbde4 APK was verified and retained as a rollback input before
+`install -r`; all four authorized Gemma file hashes and denied camera/microphone
+permissions matched before/after. No physical phone or model download was used.
+
+Ordinary DocumentsUI selected the existing `ODAI-solid-red-256.png`; public and
+private input SHA991b54f0…d3aa matched. Default backend, original prompt
+`Describe this image.` and32-token budget yielded `RUNNING` → `SUCCEEDED` in
+PID6085. The actual UI text begins `The image is a solid, vibrant red rectangle.`
+and displays backend=`litertlm.android`, model=`gemma-3n-e2b-it`,
+revision=`c03b6f60b8da6c5400b6838a2cf26420f80c0a01`,
+runtime=`litertlm-android:0.18.1`. The32-token output ends mid-sentence; no full
+response or natural-image quality claim is made.
+
+PID/time-filtered native logs show CPU/XNNPACK text execution,1448/1448 visual
+nodes using LITERT_WEBGPU on **SwiftShader CPU/software Vulkan**, and one
+CpuAccelerator/LiteRT GPU destruction pair. This proves the configured mixed
+route on this emulator, not hardware-GPU acceleration or asynchronous drain.
+Ordinary Clear input leaves cache/input files empty while PID/models/permissions
+remain unchanged. The new candidate and models stay on the dedicated AVD; the
+previous APK remains available locally. The task and log collection are terminal.
+
+Ignored `artifacts/verification/android-layout-lm-mainflow-20261104/` contains
+the source/APK identity, before/after receipts, actual picker/RUNNING/output AX,
+success screenshot and native logs. Its `verify.py` passes and also rechecks
+the frozen252-source/layout/test/protected-file/production-lock evidence.
+One log collection was not executed because automatic approval timed out;
+the allowed single retry succeeded. No new build, SDK test or independent
+review was performed. Together with the SR flow below, this verifies two model
+main flows on the exact layout APK; Identity on that APK remains unverified.
+Physical ASR is still deferred to the user-present session.
+
 ## Frozen layout candidate SR main flow
 
 The later layout candidate (source `a27a079`, APK
