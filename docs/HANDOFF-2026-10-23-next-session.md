@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 ASR 无采音拒绝预检
+## 最新续接 — 2026-11-04 页面候选 LM 取消重入
+
+- 仅既有LM模拟器普通UI，精确a27a079/c098fc41布局APK实际原生视觉初始化后取消，观测RUNNING→CANCELLING/等待原生任务释放→CANCELLED，生成重新可用；保留同一picker输入再生成SUCCEEDED，实际backend/model/revision/runtime正确。续接时上一请求已成功，单独保留warmup UI，不混入两请求日志窗口。见[取消重入证据](validation/android-mainflow-emulator.md#frozen-layout-candidate-lm-cancellation-and-reentry)。
+- 同PID6085/四模型摘要/精确APK/相机麦克风denied保持；普通清除后cache/input为空。日志绑定PID与epoch1793801793，两次1448/1448软件视觉及CPU delegate、两对CPU/GPU销毁，第一次销毁早于第二次初始化。SwiftShader不称硬件GPU；同步路线不扩大为异步drain/质量/性能通过。
+- ignored `android-layout-lm-reentry-20261104/verify.py` fresh PASS：25份证据摘要及252源码冻结/布局/APK/九保护/生产lock。初版verifier误计进程一次性XNNPACK日志，改为逐请求delegate绑定后通过，初始失败保留；未改runtime/原始证据。无新生产代码/build/SDK测试/独立复审/手机操作或采音。
+- 用户配合仍为2026-11-05北京时间09:00，在场提示后才消耗已授权单次ASR，手机采音仍0次。ASR真实转写、PAD/识别校准、F09策略与完整依赖及实际增强binary仍开放；基础10/12、P4/P11/发布open/not-ready、goal active。本轮普通UI取消重入与清理有实际进展。
+
+## 上一检查点 — 2026-11-04 ASR 无采音拒绝预检
 
 - 仅在既有MainFlow模拟器临时安装冻结db759cca单次探针test APK，不带授权参数运行；实际bundle为precondition-rejected/startCount0/无activityStarted，capture权限denied与RECORD_AUDIO ignore前后不变。探针source与prepared摘要匹配、普通App仍c098fc41；不是授权分支/超时watchdog/资源就绪/转写验证，手机采音仍0次。
 - 测试结束目标进程按instrumentation行为退出；移除test包恢复原缺席状态，普通App重新启动PID9996并返回语音页。固定模型/App/权限/appops/缓存文件名清单保持，不将文件名核对称内容摘要核验。前两次runner查询误把test包当target filter而空，后置正确target查询识别runner；回执保留原状。ignored `android-asr-single-no-capture-20261104/verify.py` fresh PASS，7份证据摘要及252源码冻结/九保护/生产lock通过；见[次日验证准备](validation/android-asr-next-device-session.md#no-capture-emulator-preflight)。无新生产代码/build/SDK测试/独立复审/手机操作。

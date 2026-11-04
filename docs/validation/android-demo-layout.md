@@ -58,6 +58,9 @@ also proves the configured CPU/software-vision route and matching model/input.
 The same APK then completed ordinary NASA-fixture Identity enrollment,
 uncalibrated verification/publication rejection, candidate deletion and whole
 session disable on MainFlow; see [the Identity receipt](android-mainflow-emulator.md#frozen-layout-candidate-identity-main-flow).
+The same APK also completed native-initialized ordinary LM cancellation,
+CANCELLING → CANCELLED, same-input successful reentry and empty-cache cleanup
+on the LM AVD; see [the cancellation receipt](android-mainflow-emulator.md#frozen-layout-candidate-lm-cancellation-and-reentry).
 Calibrated recognition/PAD and physical acceptance of this layout APK remain open.
 
 Final source candidate: commit `a27a0795df5acda8e9051518a7a8a5298b4c08f6`,

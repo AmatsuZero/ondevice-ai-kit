@@ -1,5 +1,43 @@
 # Android Identity and video SR system UI — 2026-11-04
 
+## Frozen layout candidate LM cancellation and reentry
+
+On2026-11-04 the exact source `a27a079` / APK `c098fc41…cf1a6` also
+completed ordinary native-initialized cancellation and same-input reentry on
+the existing `ODAI_LM_UI_20261104` / emulator-5582. The preceding request had
+already reached SUCCEEDED at continuation; that observation is retained as
+`ui-warmup-succeeded.json` and is excluded from the two-request native log window.
+No new model, App build, test package or physical-device action was needed.
+
+With the same system-selected synthetic red PNG, prompt `Describe this image.`
+and32-token budget, ordinary Generate reached RUNNING with a native SwiftShader
+adapter. Ordinary Cancel visibly produced CANCELLING / 等待原生任务释放…,
+with Generate and Cancel disabled, then CANCELLED with Generate enabled and no
+result. The selected picker file remained unchanged and native request files
+were absent at the terminal receipt. Without reselecting, ordinary Generate
+again reached RUNNING → SUCCEEDED and described a solid, vibrant red rectangle.
+The32-token output ends mid-sentence; this is bounded functional evidence.
+The displayed backend/model/revision/runtime match the fixed Gemma configuration.
+
+PID6085, the exact installed APK, all four model hashes and both denied capture
+permissions stayed unchanged. Ordinary Clear Input then left no cache/input
+files. Native logs are restricted to that PID and device epoch1793801793 onward:
+two1448/1448 WebGPU delegates, two CPU decode delegate bindings and two CPU/GPU
+destruction pairs, with first-request destruction before second initialization.
+SwiftShader is CPU/software Vulkan vision, not hardware-GPU performance evidence.
+The cancelling receipt follows the immediate CANCELLING UI observation and does
+not claim the UI was still cancelling when all receipt reads finished.
+
+Ignored `artifacts/verification/android-layout-lm-reentry-20261104/` retains
+UI/receipts/output screenshot/native logs and a25-file evidence hash manifest.
+Fresh `verify.py` passes those hashes and the existing252-source/layout/APK,
+nine-protected-file and production-lock gate. Its initial assertion incorrectly
+expected two process-wide XNNPACK creation messages in an already-warm PID;
+the retained failure is corrected to actual per-request CPU delegate bindings.
+No runtime code or captured result was changed, and no new SDK test/build or
+independent review ran. Async drain, natural quality, physical acceptance of
+this layout APK, ASR, calibrated recognition/PAD and P4/P11/release remain open.
+
 ## Frozen layout candidate Identity main flow
 
 The exact `a27a079`/`c098fc41…cf1a6` layout APK also completed the bounded
