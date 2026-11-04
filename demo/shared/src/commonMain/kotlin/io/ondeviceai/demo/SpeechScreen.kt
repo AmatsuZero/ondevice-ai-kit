@@ -15,6 +15,8 @@ import io.ondeviceai.binding.*
 @Composable
 fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
     val state = model.state
+    val resources = (actions as? SpeechAsrResourceProvider)?.asrResources
+    val controlsEnabled = state.controlsEnabled && resources?.state?.busy != true
     var locale by remember { mutableStateOf("en-US") }
     var text by remember { mutableStateOf("") }
     var voice by remember { mutableStateOf("") }
@@ -26,38 +28,39 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
     Text("语音 · 本机处理", style = MaterialTheme.typography.titleMedium)
     OutlinedTextField(locale, { model.cancel(); locale = it }, label = { Text("语言 / locale") },
         modifier = Modifier.fillMaxWidth().testTag("speech-locale"), singleLine = true,
-        enabled = state.controlsEnabled)
-    BackendControls("TTS", state.tts, state.ttsSelection, state.controlsEnabled,
+        enabled = controlsEnabled)
+    BackendControls("TTS", state.tts, state.ttsSelection, controlsEnabled,
         { model.selectBackend(SpeechBridgeCapability.TTS, it) }, { model.refreshBackends(SpeechBridgeCapability.TTS) })
     OutlinedTextField(text, { model.cancel(); text = it }, label = { Text("朗读文本") },
-        modifier = Modifier.fillMaxWidth().testTag("speech-tts-text"), enabled = state.controlsEnabled,
+        modifier = Modifier.fillMaxWidth().testTag("speech-tts-text"), enabled = controlsEnabled,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
         keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }))
     OutlinedTextField(voice, { model.cancel(); voice = it }, label = { Text("voice ID（可选）") },
-        modifier = Modifier.fillMaxWidth(), singleLine = true, enabled = state.controlsEnabled)
+        modifier = Modifier.fillMaxWidth(), singleLine = true, enabled = controlsEnabled)
     Button(onClick = { model.speak(SpeechBridgeTtsRequest(text, locale, voice.takeIf { it.isNotBlank() })) },
-        enabled = state.controlsEnabled && text.isNotBlank() && locale.isNotBlank(),
+        enabled = controlsEnabled && text.isNotBlank() && locale.isNotBlank(),
         modifier = Modifier.testTag("speech-speak")) { Text("播放 TTS") }
     HorizontalDivider()
-    BackendControls("ASR", state.asr, state.asrSelection, state.controlsEnabled,
+    BackendControls("ASR", state.asr, state.asrSelection, controlsEnabled,
         { model.selectBackend(SpeechBridgeCapability.ASR, it) }, { model.refreshBackends(SpeechBridgeCapability.ASR) })
+    resources?.let { AsrResourceControls(it, locale, state.controlsEnabled) }
     val inputs = state.asr.backends.flatMap { it.supportedInputs }.toSet()
     if (SpeechBridgeInputKind.AUDIO_FILE in inputs) {
         Text("文件识别 · 按上方请求语言识别")
         Text(state.audioDisplayName ?: "尚未选择音频", Modifier.testTag("speech-audio-name"))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedButton(onClick = { actions?.selectAudioFile() }, enabled = state.controlsEnabled && actions != null,
+            OutlinedButton(onClick = { actions?.selectAudioFile() }, enabled = controlsEnabled && actions != null,
                 modifier = Modifier.testTag("speech-select-audio")) { Text("选择音频文件") }
-            TextButton(onClick = { actions?.clearAudioFile() }, enabled = state.controlsEnabled && state.audioReference != null) { Text("移除") }
+            TextButton(onClick = { actions?.clearAudioFile() }, enabled = controlsEnabled && state.audioReference != null) { Text("移除") }
         }
         Button(onClick = { state.audioReference?.let { model.recognize(SpeechBridgeAsrRequest(locale, SpeechBridgeInput.AudioFile(it))) } },
-            enabled = state.controlsEnabled && state.audioReference != null && locale.isNotBlank(),
+            enabled = controlsEnabled && state.audioReference != null && locale.isNotBlank(),
             modifier = Modifier.testTag("speech-recognize-file")) { Text("识别音频文件") }
     }
     if (SpeechBridgeInputKind.MICROPHONE in inputs) {
         Text("麦克风识别 · 请使用 $locale 朗读；开始后会采集声音，需要录音权限和本机语言资源")
         Button(onClick = { model.recognize(SpeechBridgeAsrRequest(locale, SpeechBridgeInput.Microphone)) },
-            enabled = state.controlsEnabled && locale.isNotBlank(), modifier = Modifier.testTag("speech-recognize-mic")) { Text("开始麦克风 ASR") }
+            enabled = controlsEnabled && locale.isNotBlank(), modifier = Modifier.testTag("speech-recognize-mic")) { Text("开始麦克风 ASR") }
     }
     if (inputs.isEmpty()) Text("ASR 输入尚不可用；刷新后端查看原因")
     if (state.canFinishInput) {

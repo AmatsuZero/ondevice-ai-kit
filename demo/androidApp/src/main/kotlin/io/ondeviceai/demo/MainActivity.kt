@@ -209,11 +209,16 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                 canSelectInput = { multimodalPickerReply == null && multimodalImport?.isActive != true &&
                     multimodalRuntime.modelSetup?.modelSetupBusy != true })
         }
+        val speechResources = io.ondeviceai.systemasr.AndroidAsrResources(this)
+        val speechResourceHost = AsrResourceHost(lifecycleScope, speechResources.canObserveDownload,
+            query = speechResources::check, requestDownload = speechResources::download,
+            canStart = { speechHost.canManageAsrResources })
         speechHost = SpeechHost(lifecycleScope,
             createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },
             hasPermission = { Build.VERSION.SDK_INT < 31 || ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED },
             requestPermission = speechPermissionGate::request,
-            openSettings = { startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) })
+            openSettings = { startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) },
+            asrResources = speechResourceHost)
         setContent {
             MaterialTheme {Column(Modifier.fillMaxSize().semantics { testTagsAsResourceId = true }) {
                 Box(Modifier.weight(1f).fillMaxWidth().background(Color.Black)) {

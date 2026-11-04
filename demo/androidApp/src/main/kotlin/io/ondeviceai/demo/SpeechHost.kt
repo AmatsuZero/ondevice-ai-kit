@@ -28,7 +28,8 @@ class SpeechHost(
     private val hasPermission: () -> Boolean,
     private val requestPermission: ((Boolean) -> Unit) -> Unit,
     private val openSettings: () -> Unit,
-) : SpeechBridge, SpeechDemoActions {
+    override val asrResources: AsrResourceHost? = null,
+) : SpeechBridge, SpeechDemoActions, SpeechAsrResourceProvider {
     private val ownerJob = SupervisorJob()
     private val owner = CoroutineScope(scope.coroutineContext.minusKey(Job) + ownerJob)
     private var adapter: SpeechBridge = UnavailableSpeechBridge("initializing")
@@ -55,12 +56,13 @@ class SpeechHost(
     }
 
     fun onForeground() { if (!closed) foreground = true }
-    fun onBackground() { foreground = false; permission?.cancel(); model.background() }
+    val canManageAsrResources: Boolean get() = !closed && foreground && permission == null && model.state.controlsEnabled
+    fun onBackground() { foreground = false; asrResources?.cancel(); permission?.cancel(); model.background() }
     fun close() = model.close()
     override fun selectAudioFile() = Unit
     override fun clearAudioFile() = Unit
     override fun openSpeechSettings() { if (!closed) openSettings() }
-    override fun leavePage() { permission?.cancel(); model.leavePage() }
+    override fun leavePage() { asrResources?.cancel(); permission?.cancel(); model.leavePage() }
 
     override fun queryBackends(capability: SpeechBridgeCapability, callback: SpeechBridgeBackendsCallback): BridgeTask {
         if (closed) { callback.onFailure(failure(SpeechBridgeFailureCode.CLOSED)); return CompletedTask }
@@ -75,6 +77,7 @@ class SpeechHost(
     }
     override fun recognize(request: SpeechBridgeAsrRequest, selection: SpeechBridgeSelection, callback: SpeechBridgeAsrCallback): BridgeTask {
         if (closed) { callback.onFailure(failure(SpeechBridgeFailureCode.CLOSED)); return CompletedTask }
+        if (asrResources?.state?.busy == true) { callback.onFailure(failure(SpeechBridgeFailureCode.BUSY)); return CompletedTask }
         initializationFailures[SpeechBridgeCapability.ASR]?.let { callback.onFailure(it); return CompletedTask }
         if (permission != null) { callback.onFailure(failure(SpeechBridgeFailureCode.BUSY)); return CompletedTask }
         if (!foreground) { callback.onCancelled(); return CompletedTask }
@@ -102,6 +105,7 @@ class SpeechHost(
         if (closing) return
         closing = true
         owner.launch {
+            asrResources?.close()
             initialization.join()
             adapter.close(object : SpeechBridgeCloseCallback {
                 override fun onClosed() = finishClose(null)

@@ -2,6 +2,45 @@
 
 更新时间：2026-10-17。本文记录后端边界、探针与逐步接入的 SDK 模块；各节分别标明代码、分发和真机证据，不把第三方服务凭据、网络可用性或商业许可假设成 SDK 已交付。
 
+## 2026-11-04 Android SDK/Demo 语言资源恢复入口
+
+F05 新增生产 `AndroidAsrResources.check(locale)` 与显式
+`download(locale, onProgress)`，保留现有系统 on-device 技术路线及 minSdk26。
+查询 API33+；下载采用 API34+ 可观察回调，不使用无终态回执的 API33 void
+overload。精确语言列表匹配区分 INSTALLED/PENDING/DOWNLOADABLE/NOT_REPORTED；
+系统错误保留 code，不把空列表、排队或下载进度当安装完成。每次操作在 Main
+拥有/销毁自己的 recognizer；取消是停止监控，不保证取消系统下载。
+详见[SDK 使用](../../android/backend-system-asr/README.md)与
+[设计](../superpowers/specs/2026-11-04-android-asr-resources-design.md)。
+
+Demo 增加当前 locale 的检查、匹配 DOWNLOADABLE 后的显式下载确认及状态显示。
+页面进入/查询不下载、不申请录音权限；资源操作与麦克风 admission 互斥，后台、
+退出取消监控，关闭等待释放。可选 common provider 保持 Apple 原 host 协议不变。
+
+本轮实际执行 ASR **13/13**（新增6）、组合 Demo **62/62**、默认 Demo **54/54**
+（新增6）、shared iOS simulator **80/80**；共享 iOS arm64 compile、组合
+APK/test APK、ASR Release AAR、双模块 lint 通过。最终 combined build 中 SDK/Demo
+测试实际执行，shared 测试/compile 是本轮前次执行后的 up-to-date；不称再次执行。
+ASR lint **0 errors/5 warnings**，保留版本/注解建议。最初缺失API的编译RED、
+locale异常类型失败、快速关闭 busy 未释放的 assertion RED、动态版本条件 lint
+失败均保留，修复后通过，不以成功日志覆盖失败。
+
+ignored `artifacts/verification/android-asr-resources-20261104/` 冻结255份源输入、
+APK、JUnit、构建日志与 UI/设备回执。组合 APK SHA256
+`644bbde40d9904fe8632ffea7e0781df00683c257b4489e53abbb8fcea36df30`，
+基于 e6e7880 的本轮精确源码快照（BuildConfig 为 working-tree），仅 install-r
+更新已有 MainFlow/API36，旧 bd89…16bd7 APK保留可回退，未清数据或更换真机包。
+普通语音页面首次显示“尚未检查”，实际点击后显示“此设备没有可用的本机识别服务”，
+不提供下载按钮；PID6469，新包设备SHA匹配。相机/录音权限前后均denied，
+未点击麦克风/下载、未操作真机或LM专用模拟器；新包的LM/SR/Identity真实任务未重跑。
+`verify.py` fresh **287/287**，含255源码/9保护/生产MLX lock/包/测试/UI状态。
+
+**开放边界**：有服务设备的下载确认/回调/UI实际安装及后续真实转写未验；
+本轮模拟器只有 unsupported-service 路径，不能替代此前 TECNO 的 NOT_REPORTED
+结果，也不关闭资源输入缺口、F05/P11/发布。PAD校准数据与F09维护路线问题保持待答复。
+独立有界代码复审请求返回429、无结论；作者另行核对本轮diff/回调生命周期与
+SDK AAR class目录，未发现须立即修正的问题，不冒充独立批准或完整分支审查。
+
 ## 2026-11-04 Android 离线资源只读复核
 
 新增独立 `AsrAssetStatusInstrumentation`，仅调用 API33 的

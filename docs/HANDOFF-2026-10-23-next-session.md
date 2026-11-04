@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 最新组合包三后端主流程
+## 最新续接 — 2026-11-04 Android ASR 资源恢复功能
+
+- 生产新增 `AndroidAsrResources`：API33精确locale资源查询、API34可观察显式下载；installed/pending/downloadable/not-reported和平台错误分开，onScheduled/进度不计安装。Main拥有/销毁每个recognizer，取消只停止监控。Demo加检查/匹配资源下载确认、状态/进度、麦克风互斥及后台/退出取消/close等待；采用独立optional common provider，不改Apple host协议/生产依赖。见[SDK说明](../android/backend-system-asr/README.md)与[验证](validation/speech-backends.md#2026-11-04-android-sdkdemo-语言资源恢复入口)。
+- 本轮实际执行SDK13/13、组合Demo62/62、默认54/54、共享iOS simulator80/80；iOS arm64 compile、组合APK/testAPK、ASR release AAR和双模块lint通过（ASR0errors/5warnings）。初始未实现编译RED、locale异常类型、快速关闭busy assertion、动态version guard lint失败保留且已修复。独立代码review429无结论，作者另作限定检查，无独立批准。
+- 冻结候选APK644bbde4…df30来自e6e7880+本轮精确255份源输入，BuildConfig working-tree。既有MainFlow/API36 install-r更新，旧bd89 APK已核对并保留可回退，数据未清；PID6469普通语音页面点击资源检查显示UNSUPPORTED_DEVICE，前后相机/录音权限denied，未下载/录音。`artifacts/verification/android-asr-resources-20261104/verify.py` fresh287/287含9保护与MLX lock；无未终结build/instrumentation命令。本轮未操作物理设备/LM专用AVD，新候选三模型实际任务未重跑，前轮bd89三后端证据仍属旧包。
+- 有服务设备的下载确认/回调/实际安装与真实转写仍未验；TECNO此前NOT_REPORTED不能被本轮无服务AVD覆盖。后续先检查已授权系统资源条件，勿把本轮SDK/UI入口完成当作ASR识别完成。PAD捕获/授权校准与F09维护路线仍待既有问题答复，不扩授权或自动采纳。功能优先/corner后置保持；基础10/12，P4/P11/发布open/not-ready，goal active；本轮有实现/构建/真实UI进展，无push/merge/release。
+
+## 上一检查点 — 2026-11-04 最新组合包三后端主流程
 
 - 复用冻结组合APK bd89bdbf…16bd7/源码7132208，无重建。既有MainFlow AVD仅2.4GiB且无LM，不扩容/新建；专用6GiB ODAI_LM_UI_20261104原APK4e8a…15e868核对可回退后install-r，保留既有已授权模型。普通系统picker红图→32token RUNNING→SUCCEEDED，输出solid vibrant red rectangle且显示精确backend/model/revision/runtime；私有input SHA991b…d3aa、固定Gemma四文件前后摘要匹配。
 - 新包LM PID3723保持，实际CPU文本XNNPACK＋SwiftShader/Vulkan软件视觉1448/1448 WebGPU，日志含单对CPU/GPU销毁。普通UI清除输入后cache文件空、模型保持、相机/麦克风未授权；当前包/模型留专用AVD继续，旧包可回退。32tokens仍截断，当前包取消重入/ZIP导入未重验，不沿用旧包覆盖。
