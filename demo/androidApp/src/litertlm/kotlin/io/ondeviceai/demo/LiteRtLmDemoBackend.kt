@@ -4,6 +4,7 @@ import io.ondeviceai.core.CapabilityAvailability
 import io.ondeviceai.core.CapabilityStatus
 import io.ondeviceai.core.UnavailableReason
 import io.ondeviceai.litertlm.LiteRtLm
+import io.ondeviceai.litertlm.LiteRtLmBackendPolicy
 import io.ondeviceai.litertlm.LiteRtLmModel
 import io.ondeviceai.litertlm.LiteRtLmRuntimeEnvironment
 import io.ondeviceai.modelstore.ModelManifest
@@ -49,7 +50,8 @@ internal class LiteRtLmDemoBackend(
         require(descriptor.getInt("schemaVersion") == 1)
         val paths = descriptor.getJSONArray("metadataPaths")
         val model = LiteRtLmModel(manifest.ref, descriptor.getString("modelPath"),
-            (0 until paths.length()).map { paths.getString(it) }.toSet())
+            (0 until paths.length()).map { paths.getString(it) }.toSet(),
+            backendPolicy = liteRtLmBackendPolicy(descriptor))
         require(model.modelPathRelative in manifest.files.map { it.path })
         require(model.metadataPathsRelative.isNotEmpty() && manifest.files.map { it.path }.containsAll(model.metadataPathsRelative))
         store.install(manifest, File(source, "files"))
@@ -103,4 +105,12 @@ internal class LiteRtLmDemoBackend(
         val native = mutex.withLock { closed = true; backend }
         native?.close()
     }
+}
+
+/** Missing policy keeps the original CPU-only contract; unknown selections never fall back. */
+internal fun liteRtLmBackendPolicy(descriptor: JSONObject): LiteRtLmBackendPolicy {
+    if (!descriptor.has("backendPolicy")) return LiteRtLmBackendPolicy.CPU_ONLY
+    val value = descriptor.get("backendPolicy")
+    require(value is String) { "backendPolicy must be a supported string" }
+    return LiteRtLmBackendPolicy.valueOf(value)
 }

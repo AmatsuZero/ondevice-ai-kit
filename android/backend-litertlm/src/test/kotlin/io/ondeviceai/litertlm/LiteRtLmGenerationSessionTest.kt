@@ -23,6 +23,33 @@ import io.ondeviceai.multimodal.MultimodalClientError
 
 class LiteRtLmGenerationSessionTest {
     @Test
+    fun explicitMixedPolicyReachesEngineWithoutChangingDefault() = runBlocking {
+        val fixture = BackendFixture()
+        try {
+            fixture.install()
+            assertEquals(LiteRtLmBackendPolicy.CPU_ONLY, fixture.spec.backendPolicy)
+            var selected: LiteRtLmBackendPolicy? = null
+            val backend = LiteRtLmBackend(fixture.store, fixture.ref,
+                fixture.spec.copy(backendPolicy = LiteRtLmBackendPolicy.CPU_TEXT_GPU_VISION),
+                fixture.cache, LiteRtLmEngineFactory { _, config ->
+                    selected = config.backendPolicy
+                    object : LiteRtLmSession {
+                        override val callbackMode = LiteRtLmCallbackMode.CUMULATIVE
+                        override suspend fun generateImage(image: File, prompt: String, maxOutputTokens: Int,
+                            onSnapshot: (String) -> Unit) = "fixture output"
+                        override fun cancelProcess() = Unit
+                        override suspend fun awaitTerminated() = Unit
+                        override suspend fun close() = Unit
+                    }
+                }, apiLevel = 35, supportedAbi = true, probeState = LiteRtLmProbeState.SYNCHRONOUS)
+            assertEquals("fixture output", backend.generate(MultimodalRequest(fixture.image, "describe")).text)
+            assertEquals(LiteRtLmBackendPolicy.CPU_TEXT_GPU_VISION, selected)
+            backend.close()
+            fixture.store.remove(fixture.ref)
+        } finally { fixture.root.deleteRecursively() }
+    }
+
+    @Test
     fun secondGenerationIsBusyUntilFirstDrainCompletes() = runBlocking {
         val fixture = BackendFixture()
         try {

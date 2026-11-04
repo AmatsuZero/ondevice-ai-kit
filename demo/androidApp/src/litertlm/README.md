@@ -26,7 +26,7 @@ files/
 }
 ```
 
-以上文件名只是格式示例，没有附带可用权重。`.litertlm` 本身封装运行时需要的 tokenizer 等数据，`metadataPaths` 用于 manifest 中的模型卡/来源等附属材料，不要求捏造外置 tokenizer 文件。实际模型必须支持 vision、text、CPU 两种模态后端，且声明的最低 runtime 不高于固定的 `0.18.1`。真正生成时由 `ModelInfo` 和 runtime 再检查兼容性。
+以上文件名只是格式示例，没有附带可用权重。`.litertlm` 本身封装运行时需要的 tokenizer 等数据，`metadataPaths` 用于 manifest 中的模型卡/来源等附属材料，不要求捏造外置 tokenizer 文件。缺省 `backendPolicy` 为 `CPU_ONLY`，要求模型支持 CPU 文本与 CPU 视觉。若已确认模型和设备支持 GPU 视觉，可在 `demo-model.json` 显式加入 `"backendPolicy": "CPU_TEXT_GPU_VISION"`，由 CPU 运行文本、GPU 运行视觉；不自动回退或自动切换。未知值会拒绝导入。实际模型必须同时支持 vision、text 及所选后端，且最低 runtime 不高于固定的 `0.18.1`。`ModelInfo` 的视觉 token budget 为 `-1` 表示未定义；生成时仍由真实模型元数据和 runtime 检查兼容性。安装后的 AVAILABLE 表示资产与设备基本条件满足，不能证明 GPU delegate 能初始化。当前引擎上下文上限为输入＋输出合计 512 tokens，适用于单图短提示；输出预算上限仍是 512，过长请求可能被 runtime 拒绝。
 
 从上述文件所在目录打包，确保 `manifest.json` 是 ZIP 中的第一个 entry，ZIP 不包含额外顶层目录：
 

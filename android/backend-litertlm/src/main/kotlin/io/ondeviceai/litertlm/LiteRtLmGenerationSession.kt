@@ -79,7 +79,7 @@ internal class LiteRtLmGenerationSession(
             }
             opening = true
             val opened = factory.open(spec.resolveModelPath(lease.directory),
-                LiteRtLmEngineConfig(cacheDir = cache))
+                LiteRtLmEngineConfig(backendPolicy = spec.backendPolicy, cacheDir = cache))
             native = opened
             val expectedMode = when (probeState) {
                 LiteRtLmProbeState.PROVEN_CUMULATIVE, LiteRtLmProbeState.SYNCHRONOUS -> LiteRtLmCallbackMode.CUMULATIVE

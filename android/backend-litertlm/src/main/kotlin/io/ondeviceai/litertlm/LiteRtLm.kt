@@ -18,7 +18,7 @@ object LiteRtLm {
         cacheRoot: File,
         environment: LiteRtLmRuntimeEnvironment = LiteRtLmRuntimeEnvironment.current(),
     ): LiteRtLmBackend = LiteRtLmBackend(
-        store, model.ref, LiteRtLmModelSpec(model.modelPathRelative, model.metadataPathsRelative),
+        store, model.ref, LiteRtLmModelSpec(model.modelPathRelative, model.metadataPathsRelative, backendPolicy = model.backendPolicy),
         cacheRoot, LiteRtLmProductionEngineFactory, environment.apiLevel,
         environment.abis.any { it == "arm64-v8a" || it == "x86_64" }, LiteRtLmProbeState.SYNCHRONOUS,
     )
@@ -28,7 +28,7 @@ object LiteRtLm {
         model: LiteRtLmModel,
         environment: LiteRtLmRuntimeEnvironment = LiteRtLmRuntimeEnvironment.current(),
     ): CapabilityAvailability {
-        val spec = LiteRtLmModelSpec(model.modelPathRelative, model.metadataPathsRelative)
+        val spec = LiteRtLmModelSpec(model.modelPathRelative, model.metadataPathsRelative, backendPolicy = model.backendPolicy)
         val supportedAbi = environment.abis.any { it == "arm64-v8a" || it == "x86_64" }
         return LiteRtLmAvailability.forModel(
             store,
@@ -47,6 +47,7 @@ data class LiteRtLmModel(
     val ref: ModelRef,
     val modelPathRelative: String,
     val metadataPathsRelative: Set<String>,
+    val backendPolicy: LiteRtLmBackendPolicy = LiteRtLmBackendPolicy.CPU_ONLY,
 )
 
 /** Device policy inputs. Generation separately checks the actual native model metadata. */

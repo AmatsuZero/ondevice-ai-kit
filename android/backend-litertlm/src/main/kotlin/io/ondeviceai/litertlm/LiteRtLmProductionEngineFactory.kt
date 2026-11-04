@@ -19,17 +19,20 @@ internal object LiteRtLmProductionEngineFactory : LiteRtLmEngineFactory {
     override suspend fun open(modelPath: File, config: LiteRtLmEngineConfig): LiteRtLmSession =
         withContext(Dispatchers.IO) {
             ModelInfo.from(modelPath.absolutePath).use { info ->
-                if (!info.inputModalities().vision || !info.inputModalities().text ||
-                    info.maxVisionTokenBudget() <= 0 ||
-                    BackendType.CPU !in info.supportedBackends(Modality.TEXT) ||
-                    BackendType.CPU !in info.supportedBackends(Modality.VISION) ||
-                    info.minRuntimeVersion()?.let { !LiteRtLmModelSpec.supportsRuntime(it) } == true) {
-                    throw LiteRtLmError.InvalidModel()
-                }
+                val modalities = info.inputModalities()
+                val text = info.supportedBackends(Modality.TEXT)
+                val vision = info.supportedBackends(Modality.VISION)
+                val support = LiteRtLmModelSupport(modalities.text, modalities.vision,
+                    BackendType.CPU in text, BackendType.CPU in vision, BackendType.GPU in vision,
+                    info.maxVisionTokenBudget(), info.minRuntimeVersion())
+                if (!support.supports(config.backendPolicy)) throw LiteRtLmError.InvalidModel()
             }
             val engine = Engine(EngineConfig(
                 modelPath = modelPath.absolutePath,
-                backend = Backend.CPU(), visionBackend = Backend.CPU(),
+                backend = Backend.CPU(), visionBackend = when (config.backendPolicy) {
+                    LiteRtLmBackendPolicy.CPU_ONLY -> Backend.CPU()
+                    LiteRtLmBackendPolicy.CPU_TEXT_GPU_VISION -> Backend.GPU()
+                },
                 maxNumTokens = config.maxNumTokens, maxNumImages = config.maxNumImages,
                 cacheDir = config.cacheDir.absolutePath,
             ))

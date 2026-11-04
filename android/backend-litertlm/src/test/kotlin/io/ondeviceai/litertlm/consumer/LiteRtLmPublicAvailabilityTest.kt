@@ -3,6 +3,7 @@ package io.ondeviceai.litertlm.consumer
 import io.ondeviceai.core.CapabilityStatus
 import io.ondeviceai.core.UnavailableReason
 import io.ondeviceai.litertlm.LiteRtLm
+import io.ondeviceai.litertlm.LiteRtLmBackendPolicy
 import io.ondeviceai.litertlm.LiteRtLmModel
 import io.ondeviceai.litertlm.LiteRtLmRuntimeEnvironment
 import io.ondeviceai.modelstore.ModelCompatibility
@@ -15,6 +16,14 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class LiteRtLmPublicAvailabilityTest {
+    @Test
+    fun publicModelPolicyDefaultsToCpuAndSupportsExplicitMixedSelection() {
+        val model = LiteRtLmModel(ModelRef("model", "r1"), "model.bin", setOf("card.txt"))
+        assertEquals(LiteRtLmBackendPolicy.CPU_ONLY, model.backendPolicy)
+        assertEquals(LiteRtLmBackendPolicy.CPU_TEXT_GPU_VISION,
+            model.copy(backendPolicy = LiteRtLmBackendPolicy.CPU_TEXT_GPU_VISION).backendPolicy)
+    }
+
     @Test
     fun externalConsumerCanConstructAndCloseBackendWithoutNativeAssets() = runBlocking {
         val root = Files.createTempDirectory("litertlm-public-backend").toFile()

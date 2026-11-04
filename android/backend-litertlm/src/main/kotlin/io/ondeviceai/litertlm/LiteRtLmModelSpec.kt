@@ -3,7 +3,8 @@ package io.ondeviceai.litertlm
 import io.ondeviceai.modelstore.ModelManifest
 import java.io.File
 
-internal enum class LiteRtLmBackendPolicy { CPU_ONLY }
+/** Explicit execution selection; generation validates the selected model backends. */
+enum class LiteRtLmBackendPolicy { CPU_ONLY, CPU_TEXT_GPU_VISION }
 
 internal data class LiteRtLmEngineConfig(
     val backendPolicy: LiteRtLmBackendPolicy = LiteRtLmBackendPolicy.CPU_ONLY,
@@ -37,7 +38,6 @@ internal data class LiteRtLmModelSpec(
         require(maxOutputTokens == 512)
         require(maxImageBytes == 16L * 1024 * 1024)
         require(maxNumImages == 1)
-        require(backendPolicy == LiteRtLmBackendPolicy.CPU_ONLY)
     }
 
     fun resolveModelPath(leaseDirectory: File): File = File(leaseDirectory, modelPathRelative)
@@ -77,5 +77,27 @@ internal data class LiteRtLmModelSpec(
             }
             return 0
         }
+    }
+}
+
+/** Vendor-independent view of the actual loaded model, checked before engine creation. */
+internal data class LiteRtLmModelSupport(
+    val text: Boolean,
+    val vision: Boolean,
+    val cpuText: Boolean,
+    val cpuVision: Boolean,
+    val gpuVision: Boolean,
+    val visionTokenBudget: Int,
+    val minimumRuntime: String?,
+) {
+    fun supports(policy: LiteRtLmBackendPolicy): Boolean {
+        // Fixed 0.18.1 ModelInfo documents -1 as undefined, rather than unsupported.
+        val validBudget = visionTokenBudget == -1 || visionTokenBudget > 0
+        val selectedVision = when (policy) {
+            LiteRtLmBackendPolicy.CPU_ONLY -> cpuVision
+            LiteRtLmBackendPolicy.CPU_TEXT_GPU_VISION -> gpuVision
+        }
+        return text && vision && cpuText && selectedVision && validBudget &&
+            (minimumRuntime == null || LiteRtLmModelSpec.supportsRuntime(minimumRuntime))
     }
 }

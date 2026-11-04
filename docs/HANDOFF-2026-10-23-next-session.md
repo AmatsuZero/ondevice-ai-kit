@@ -4,7 +4,27 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Android ASR 资源状态复核
+## 最新续接 — 2026-11-04 Android LM 真机红图生成通过
+
+- 已批准CPU文本＋GPU视觉可选策略完成，默认CPU_ONLY及runtime0.18.1保留。模型下载/USB传输已解决；TECNO/API35设备完整SHA与实际ModelInfo检查通过，真实Demo→ModelStore→client→Android bridge→生产factory输出 `Red`。runId `849795aa-2418-4be0-bd8a-7777acc1acba`，模型revision及runtime匹配，close/lease/input/cache清理均true，严格validator fresh passed。generationMs83332含校验/初始化/生成，非纯decode基线。
+- ignored `artifacts/verification/android-gemma-vision-20261104/` 保留 `mixed-generation-report.json`、完整stdout/stderr、exit、运行APK/hash/源码快照及 `verify-mixed-result.py`。精确PID25760已退出，设备仍Asleep，普通Demo未覆盖、无Activity/相机/麦克风/私人媒体访问。shell功能证据不替代UI/取消重入/自然质量/长期资源。
+- 独立有界review REQUEST CHANGES：instrumentation补显式backendPolicy参数；手工预置畸形descriptor的泛化availability诊断按corner后置，ZIP未知策略导入零安装/零构造回归已补。无复审APPROVE，不扩大为全分支批准；最终本地后端33/33、Demo55/55、APK/testAPK/lint通过，既有模拟器默认admission4pass＋1opt-in skip。
+- 继续优先剩余功能：Android LM系统ZIP/图片选择与生成UI（真机锁屏尚未操作）、PAD正式接入/裁剪协议与授权校准、1:1/1:N阈值、Android ASR真实转写资源、Apple增强binary。基础里程碑10/12，P4/P11/发布仍open/not-ready。九项保护和MLX lock保持；无push/merge/release。
+
+## 上一检查点 — 2026-11-04 显式 CPU 文本＋GPU 视觉实现
+
+- 用户已明确批准 `CPU_TEXT_GPU_VISION` 可选路线并继续；不要重复询问路线/许可。默认CPU_ONLY、固定runtime0.18.1保留，public model/descriptor→spec→session→engine策略已贯通，无自动回退。ModelInfo `-1` 按固定官方源码表示未定义；仍校验模态、所选后端、有效budget和最低runtime。
+- 后端33/33、opt-in Demo54/54、APK/testAPK与lint离线通过，证据 `artifacts/verification/android-gemma-vision-20261104/mixed-local-build.*`。新APK实际模拟器完整模型元数据：CPU vision=false、mixed=true、engineCreated=false，不称GPU初始化/推理完成。真实manifest/descriptor/红图已准备于 ignored `mixed-run/`；真机push-Z与有界独立review进行中。模型下载不再阻塞，当前要验证传输和实际delegate/生成。
+- 九项保护已核对，未修改；当前更改未提交/推送/合并/发布。详细见[Android LM验证](validation/android-litertlm-sync-demo.md)。继续物理设备无Activity推理，不解锁、不碰相机/麦克风/私人媒体；若设备传输阻塞保留准确证据并尝试有界替代路径。P4/P11/发布仍open/not-ready。
+
+## 上一检查点 — 2026-11-04 Gemma 已授权并完整下载
+
+- 用户已明确选择官方 `google/gemma-3n-E2B-it-litert-lm`，并回复“已完成官方许可确认”。固定 revision `c03b6f60b8da6c5400b6838a2cf26420f80c0a01` 访问预检成功；无需再次询问许可或文件输入。代理没有接受条款或读取/输出 token。
+- 用户提供本机 aria2 RPC 和映射目录后，专用任务 `4b692dd317152eaf` 已 `complete/errorCode=0`；3,655,827,456 B 的完整 SHA-256 为 `2ed7bc3a0026c93d5b8a4544b352d9d00cd66ff0bac3ef6a20ac3d2cba4010d6`，与官方 LFS 一致。模型位于 ignored `artifacts/verification/android-gemma-vision-20261104/model/`，另保留用户下载目录专用副本。凭据/签名 URL 不写入文档或证据；没有模型分发。
+- 新增显式 ModelInfo/真实 Demo bridge shell 探针及固定合成红 PNG；后端29/29、opt-in Demo52/52、APK/test APK/lint通过。错误摘要的同大小文件在ModelInfo前被拒绝；生产CPU/vision/runtime gate不改。真机测试App冻结，USB大文件push又无回执；已只结束本轮push并按serial恢复，未解锁、未创建引擎或覆盖普通Demo。当前转到既有专用API36/arm64模拟器先验证ModelInfo，真实推理尚未通过。
+- 详细新鲜证据见[Android LM验证](validation/android-litertlm-sync-demo.md)。下一步先读 actual ModelInfo 报告；兼容后才准备真实manifest/运行图像请求。CPU+vision未证时不静默换GPU/runtime，不把下载或host测试当生成完成。九项保护保持；仅本地工作，未push/merge/release，P4/P11/发布仍open/not-ready。
+
+## 上一检查点 — 2026-11-04 Android ASR 资源状态复核
 
 - 新增只查询 `checkRecognitionSupport(en-US)` 的独立 instrumentation；无 Activity、录音、权限申请或下载。离线 test APK 构建及 lintDebug 通过。TECNO KM9/API35 真实回调三份语言列表仍空，`NOT_REPORTED`，资源就绪未确认；不能把历史错误13当新转写结论。
 - ignored `artifacts/verification/android-asr-assets-20261104/` 绑定源码/immutable test APK/实际安装hash/原始Bundle。普通 Demo hash 不变；备份的原 test APK与runner已恢复，设备Asleep，九项保护不变。见[证据边界](validation/speech-backends.md#2026-11-04-android-离线资源只读复核)。F05仍缺真实转写/取消重入/离线质量；PAD可用判定仍需裁剪协议与授权校准数据，不扩成绕过policy的整图判定。

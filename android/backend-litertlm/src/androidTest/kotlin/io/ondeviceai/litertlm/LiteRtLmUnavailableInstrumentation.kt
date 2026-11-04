@@ -103,13 +103,15 @@ class LiteRtLmUnavailableInstrumentation {
     }
 
     @Test
-    fun publicQueryUsesCurrentDeviceAndKeepsInstalledAssetsUnavailable() = runBlocking {
+    fun publicQueryUsesCurrentDeviceAndReportsInstalledSynchronousAssets() = runBlocking {
         installSyntheticAssets()
         assertEquals(ModelStatus.INSTALLED, store.status(ref))
         val value = LiteRtLm.availability(store,
             LiteRtLmModel(ref, "model.bin", setOf("tokenizer.json")))
-        assertEquals(CapabilityStatus.UNAVAILABLE, value.status)
-        assertEquals(UnavailableReason.UNSUPPORTED_DEVICE, value.reason)
+        // The public API now selects the synchronous path. Availability validates assets
+        // and device policy only; the real model is checked when generation opens it.
+        assertEquals(CapabilityStatus.AVAILABLE, value.status)
+        assertEquals(null, value.reason)
         assertEquals("litertlm.android", value.backendId)
         assertEquals("26", value.minOS)
         assertNoGenerationSideEffects()
