@@ -1,6 +1,10 @@
 # Android LiteRT-LM 同步图像生成接入
 
-日期：2026-11-03。用户调整为功能优先，长期资源与罕见竞态后置。本轮承接 [实施增量](../superpowers/plans/2026-11-03-android-litertlm-synchronous.md)，补齐真实 runtime 调用和 Demo 接线；**官方模型、显式 CPU 文本＋GPU 视觉与真实 TECNO 图像生成链路已验证；系统选择器/UI验收仍未完成**。
+日期：2026-11-03。用户调整为功能优先，长期资源与罕见竞态后置。本轮承接 [实施增量](../superpowers/plans/2026-11-03-android-litertlm-synchronous.md)，补齐真实 runtime 调用和 Demo 接线；**官方模型、显式 CPU 文本＋GPU 视觉与真实 TECNO 图像生成链路已验证；[普通模拟器 UI](android-litertlm-ui.md)的系统选择器、生成、取消重入已通过，物理设备 UI 仍未验**。
+
+## 2026-11-04 普通模拟器 UI 补验
+
+真实系统 ZIP/图片 picker、两次成功生成、中间取消和同 PID 重入、清除输入与文件清理已通过，57项证据检查及独立有界补审PASS。实际为SwiftShader软件GPU；真机UI/硬件GPU性能不在该结论内。见[环境、原始证据与边界](android-litertlm-ui.md)。以下保留各历史检查点，UI缺席表述已由本节更新。
 
 ## 2026-11-04 TECNO 真实模型图像生成通过
 

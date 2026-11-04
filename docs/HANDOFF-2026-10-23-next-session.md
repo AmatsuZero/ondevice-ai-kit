@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 Android LM 真机红图生成通过
+## 最新续接 — 2026-11-04 Android LM 普通模拟器 UI 通过
+
+- 不改生产源码，复用 `c5be267` immutable APK（安装摘要匹配），新隔离 API36 arm64 `ODAI_LM_UI_20261104` / emulator-5582、6GiB RAM/32GiB data；真实系统 ZIP 导入与图片选择均含取消重入，完整授权3.66GB模型安装后，两轮普通 UI 生成 `SUCCEEDED`，32-token输出描述固定红矩形。
+- 中间一轮实际 native 初始化后取消，`CANCELLING → CANCELLED` 等待释放且禁生成；同 PID2552 再生成成功。补录原生日志覆盖第三轮初始化与11:44:42.921 accelerator destroy，后置两次PID回读一致；清除输入后cache无文件、picker/incoming无残留，仅空父目录。`verify.py` fresh **57 checks passed**，独立补审 **PASS（限定模拟器普通UI）**。见[新验证](validation/android-litertlm-ui.md)及 ignored `artifacts/verification/android-litertlm-ui-20261104/`。
+- 实际 vision delegate 为 SwiftShader Vulkan/WebGPU、CPU/Software adapter，不是硬件GPU性能。物理设备后置只读观察已Awake/unlocked，不能延用历史Asleep；本轮没有给真机UI输入。真机UI、自然质量、异步drain/streaming与长期资源仍开放。
+- F07不再缺下载/权重或真实图像生成；下一功能缺口是PAD正式SDK/Demo接入与裁剪/校准协议、1:1/1:N阈值、Android ASR系统资源、Apple增强binary。九项保护及MLX lock保持，基础10/12、P4/P11/发布仍open/not-ready；无push/merge/release。
+
+## 上一检查点 — 2026-11-04 Android LM 真机红图生成通过
 
 - 已批准CPU文本＋GPU视觉可选策略完成，默认CPU_ONLY及runtime0.18.1保留。模型下载/USB传输已解决；TECNO/API35设备完整SHA与实际ModelInfo检查通过，真实Demo→ModelStore→client→Android bridge→生产factory输出 `Red`。runId `849795aa-2418-4be0-bd8a-7777acc1acba`，模型revision及runtime匹配，close/lease/input/cache清理均true，严格validator fresh passed。generationMs83332含校验/初始化/生成，非纯decode基线。
 - ignored `artifacts/verification/android-gemma-vision-20261104/` 保留 `mixed-generation-report.json`、完整stdout/stderr、exit、运行APK/hash/源码快照及 `verify-mixed-result.py`。精确PID25760已退出，设备仍Asleep，普通Demo未覆盖、无Activity/相机/麦克风/私人媒体访问。shell功能证据不替代UI/取消重入/自然质量/长期资源。
