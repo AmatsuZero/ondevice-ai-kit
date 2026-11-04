@@ -1,5 +1,20 @@
 # Android LiteRT-LM 普通 UI 验证
 
+## 2026-11-04 最新三后端组合包普通生成
+
+固定组合 APK `bd89bdbf…16bd7`（源码提交7132208；LM/SR/Identity三opt-in）已在
+既有6GiB `ODAI_LM_UI_20261104` 通过普通系统选红图→32-token真实生成→清除输入。
+PID3723保持；实际输出描述 `solid, vibrant red rectangle`，页面报告固定模型revision
+与runtime0.18.1。私有输入完整SHA与原合成图一致，既有授权Gemma模型四文件摘要前后
+不变；CPU文本XNNPACK、视觉1448/1448 WebGPU实际为SwiftShader软件Vulkan，原生日志
+有一对CPU/GPU销毁。普通UI清除后cache文件为空，相机/麦克风权限仍未授予。
+未重建/重新下载或导入模型；原APK已核对可回退，当前组合包与模型保留在专用AVD。
+
+联合LM/Identity证据核验 **297/297**，含249份源码/9保护/MLX lock；独立复审429无结论。
+这补上最新组合包实际LM执行证据；旧包的取消/重入、ZIP导入不能转算当前包覆盖。
+32tokens输出仍截断，不提升完整自然质量/硬件性能/异步drain/发布结论。
+见[精确身份与联合证据](android-mainflow-emulator.md#current-candidate-lm-and-identity-execution)。
+
 ## 2026-11-04 TECNO 普通 UI 与自然图像重入
 
 已在获授权 TECNO KM9/API35 的普通 Demo Activity 完成系统 DocumentsUI

@@ -1,5 +1,13 @@
 # Identity Demo candidate and gallery controls
 
+2026-11-04 current-candidate update: frozen three-opt-in APK `bd89bdbf…16bd7`
+also completed ordinary system NASA-image selection, one-template enrollment,
+uncalibrated verification/gallery rejection, candidate deletion to zero and
+whole-session disable in MainFlow emulator PID5514. No calibrated recognition
+or PAD result was supplied. The same APK separately completed LM generation;
+joint evidence checks297/297 passed, independent review returned429 without a
+conclusion. See [current-package scope and cleanup evidence](android-mainflow-emulator.md#current-candidate-lm-and-identity-execution).
+
 2026-11-04; work started 2026-11-03. This functional slice continues the
 [Android real Identity prototype](android-opencv-identity-demo.md) and
 [exact index/query](android-exact-identity-index.md).

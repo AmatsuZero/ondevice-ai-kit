@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-04 当前组合包主流程更新：同一冻结三opt-in APK bd89bdbf…16bd7在既有LM专用模拟器完成普通系统红图选择/真实生成/清除输入（PID3723、模型保持、SwiftShader软件视觉及CPU/GPU销毁），在MainFlow完成NASA系统选图/注册1模板/未校准验证与图库拒绝/删至0/整会话停用（PID5514）。联合297项证据检查通过；独立复审429无结论。与前轮同APK的SR成功合起来，最新包三后端主流程各自已实际运行，不能扩大为同设备全链路/当前包取消重入/硬件GPU/质量/发布通过。见[联合边界](android-mainflow-emulator.md#current-candidate-lm-and-identity-execution)。
+
 2026-11-04 F06完整请求/当前候选更新：TECNO旧APK普通UI完成原48帧High派生片，1280×720/2秒/no-audio，独立完整解码/PTS≤1µs/BT709与精确输入输出通过（49项）。Visha收到精确export URI且hash匹配，实际画面未捕获；后置remove-task进程死亡与孤留输入手动清理明确保留，不计普通UI清理。另HEAD7132208最新三opt-in APK构建/lint及Demo56/56实际执行通过；backend33/4/6为缓存结果，仅更新既有隔离模拟器，普通双帧AAC成功/移除输入清理通过（301项），此包LM生成/Identity注册未验。见[真机48帧](android-video-sr-demo.md#2026-11-04-tecno-complete-48-frame-natural-request)与[当前候选](android-mainflow-emulator.md#current-three-opt-in-candidate)。历史失败和发布not-ready不变。
 
 2026-11-04 F06 真机普通UI更新：TECNO/API35系统模型/视频picker取消重入、非零进度取消/部分输出删除、同输入AAC两次成功、自然素材4帧派生片320×180→1280×720、分享chooser及外部Activity返回已验证；108项检查含完整解码/PTS/BT709及两次AAC4包hash/PTS。原48帧请求遇充电75%自动退出省电/CONFIG_UI_MODE重建而中断，未计成功；Files播放入口停首次条款页，未接受条款，实际画面播放未验。清除输入后私有输入/输出释放，两份短期export保留。见[范围与证据](android-video-sr-demo.md#2026-11-04-tecno-ordinary-ui-bounded-natural-and-aac-sequence)。F06/P11/发布仍open/not-ready。

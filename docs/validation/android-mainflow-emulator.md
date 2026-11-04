@@ -48,12 +48,62 @@ Ignored `artifacts/verification/android-combined-current-20261104/` retains
 frozen APKs,249 source bindings, build/JUnit receipts, install identity,
 ordinary UI states and original media. Fresh `media-verify.py`: **301/301**,
 including media, APK, source/protected/MLX lock and UI-cleanup receipts.
-This current-package run verifies combined packaging and ordinary SR; it
-does not claim current-package LM generation or Identity registration,
-hardware GPU, natural quality, sustained resources or release readiness.
+This initial current-package run verifies combined packaging and ordinary SR;
+the subsequent LM and Identity runs are recorded separately below. It does not
+prove hardware GPU, natural quality, sustained resources or release readiness.
 Historical UI evidence below belongs to its separately identified older APK.
 The new bounded independent review returned service429 without a conclusion;
 local verification does not constitute independent or full-branch approval.
+
+## Current candidate LM and Identity execution
+
+The same frozen `bd89bdbf…16bd7` APK subsequently ran both other opt-in
+backends through ordinary UI, without a rebuild. The MainFlow AVD has only
+2.4GiB RAM and no LM model; the existing authorized6GiB
+`ODAI_LM_UI_20261104` / emulator-5582 was used for LM. Its old `4e8a7c7d…15e868`
+APK was hash-checked against the retained rollback APK before `install -r`.
+Existing model files/data were preserved; no model was downloaded/reimported,
+and no new AVD or system configuration was created.
+
+In PID3723, ordinary DocumentsUI selected the existing approved
+`ODAI-solid-red-256.png`. Its private copy matched host SHA-256
+`991b54f01af493986b674dc2eedbc0b3cdf5aa9c9518f16dc379ccd6d9c9d3aa`.
+`Describe this image.` /32-token request reached `RUNNING → SUCCEEDED` and
+described a `solid, vibrant red rectangle`; the output is truncated at the
+budget. The page reported `litertlm.android`, `gemma-3n-e2b-it`, fixed revision
+`c03b6f60b8da6c5400b6838a2cf26420f80c0a01` and runtime0.18.1.
+Model SHA remained `2ed7bc3a…4010d6` before/after. Native logs prove XNNPACK
+text and1448/1448 WebGPU vision nodes on **SwiftShader CPU/Software** Vulkan,
+with one CPU/GPU destroy pair. Ordinary input removal left cache files empty;
+PID3723, all installed model hashes and denied camera/microphone permissions
+remained unchanged. The current package/model are retained on this dedicated
+AVD for continuation, with rollback available.
+
+On `ODAI_MainFlow_20261104` / emulator-5580, PID5514 and the same APK retained
+the fixed installed YuNet/SFace weights. The prototype's local authorization
+was enabled only for the previously approved NASA portrait; system picker
+Browse→Downloads selected `odai-approved-astronaut.png`. Its public device file
+and host fixture matched SHA `88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5`;
+no separate hash of the decoded in-memory probe was captured. Registration
+returned `ENROLLED · opencv.identity.android` and one template. Verification
+and attempted gallery publication returned `THRESHOLD_UNVERIFIED`; the gallery
+remained unpublished. Deleting the candidate showed zero users/templates and
+`删除：物理清理已完成`. Whole-session deletion then showed
+`本次注册已删除并停用` / `需要授权配置`. No template, vector or key was extracted.
+The model directory still contained only its two ONNX files and manifest;
+this directory inventory does not assert that the separate encrypted store's
+metadata/database files were removed. The UI/native deletion receipt is the
+evidence for template purge.
+
+Ignored `artifacts/verification/android-combined-lm-current-20261104/` retains
+LM APK/model/input/PID receipts, UI observations/screenshot, native logs and
+`verify.py`; related Identity observations are under
+`android-combined-current-20261104/identity/`. Fresh **297/297** checks include
+249 frozen source files,9 protected files, MLX lock, actual UI/media identities,
+delegate destruction, cache cleanup and Identity policy/deletion boundaries.
+Independent bounded review again returned429 without a conclusion; no review
+approval is inferred. New-package cancel/reentry, ZIP import, hardware GPU,
+Identity accuracy/calibration, PAD, sustained resources and release remain open.
 
 ## Candidate identity
 

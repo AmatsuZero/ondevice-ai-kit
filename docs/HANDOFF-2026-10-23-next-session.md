@@ -4,7 +4,15 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 真机完整48帧与最新三opt-in候选
+## 最新续接 — 2026-11-04 最新组合包三后端主流程
+
+- 复用冻结组合APK bd89bdbf…16bd7/源码7132208，无重建。既有MainFlow AVD仅2.4GiB且无LM，不扩容/新建；专用6GiB ODAI_LM_UI_20261104原APK4e8a…15e868核对可回退后install-r，保留既有已授权模型。普通系统picker红图→32token RUNNING→SUCCEEDED，输出solid vibrant red rectangle且显示精确backend/model/revision/runtime；私有input SHA991b…d3aa、固定Gemma四文件前后摘要匹配。
+- 新包LM PID3723保持，实际CPU文本XNNPACK＋SwiftShader/Vulkan软件视觉1448/1448 WebGPU，日志含单对CPU/GPU销毁。普通UI清除输入后cache文件空、模型保持、相机/麦克风未授权；当前包/模型留专用AVD继续，旧包可回退。32tokens仍截断，当前包取消重入/ZIP导入未重验，不沿用旧包覆盖。
+- 同一APK在MainFlow PID5514普通系统Browse→Downloads选原获批NASA图片，公开设备文件/host SHA88431…6cb5相同，未另留解码后内存probe摘要。固定YuNet/SFace注册ENROLLED/1模板；验证与图库发布均THRESHOLD_UNVERIFIED且图库未发布。删当前用户显示0用户/0模板及物理清理已完成；整会话删除并停用后需新授权。只盘点模型目录3文件，不把它当独立数据库全清；未提取模板/向量/密钥。
+- 新证据 `artifacts/verification/android-combined-lm-current-20261104/verify.py` fresh297/297，含249源码/9保护/MLX lock；Identity UI与绑定在`android-combined-current-20261104/identity/`。独立限定复审429无结论，不循环重试或冒充批准。见[组合主流程](validation/android-mainflow-emulator.md#current-candidate-lm-and-identity-execution)。前轮同APK实际SR已通过；真机仍旧405APK，未更换或操作真机。
+- 功能优先/Corner后置保持；主要实现缺口仍为PAD完整SDK/Demo与裁剪/授权校准、AndroidASR系统资源、Apple增强binary/F09维护路线，既有问题待答复，不重复询问或把续接视为批准。基础10/12、P4/P11/发布open/not-ready，goal active；本轮有最新包LM/Identity实际终态进展，不满足blocked门槛。无生产代码改动，无push/merge/release。
+
+## 上一检查点 — 2026-11-04 真机完整48帧与最新三opt-in候选
 
 - TECNO旧APK405d64e1…082c0/固定ESRGAN不变，系统picker实际选择原48帧High/CRF18自然派生片，PID26205处理至SUCCEEDED：1280×720/48帧/2秒/no-audio。提前提取原output，1,833,519bytes/SHA5ea2bb2b…053264；完整解码/全PTS≤1µs/BT709通过。不是原无损质量参考，历史CONFIG_UI_MODE中断保留。见[完整48帧](validation/android-video-sr-demo.md#2026-11-04-tecno-complete-48-frame-natural-request)。
 - Visha推荐点击后直接进入player；后续误用了旧resolver ref，下一观察为非预期集数选择页，BACK退出。日志证明精确URI→第三export→原output hash及playPosition2000，但未捕获实际视频画面。系统14:06:00以remove task结束旧PID，行为来源未定；重启PID31417，私有输入孤留，经SHA复核后精确手动删除。不能称普通UI清理/同PID播放返回；3export保留1天策略。真机verify.py fresh49/49含明确恢复边界，未改生产代码处理corner。
