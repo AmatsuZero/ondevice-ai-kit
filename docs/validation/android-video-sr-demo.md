@@ -18,6 +18,52 @@ boundaries](android-mainflow-emulator.md#natural-video-main-flow).
 
 Implemented optional `android:backend-litert-sr` and Demo `-PenableLiteRtSr=true` main flow: system picker → bounded private input store → AndroidVideoBridge/VideoProcessingClient → real ESRGAN CPU tiles → H.264 MP4/AAC mux → owned output → private FileProvider playback/share copy. The default APK has neither SR nor LM vendor runtime; both opt-ins can be combined. No model is packaged or downloaded by Gradle.
 
+## 2026-11-04 TECNO complete dynamic replay of retained output
+
+The retained `f617dd4c…c232.mp4` export was replayed without another inference.
+Its SHA-256 remains `a21c0fcf5940aaf5513102f87b1d5cd2f074729a6fcc7b16aeba84f8716e47ea`.
+An operator attempt to reopen the content URI using `run-as … am start` was
+rejected because the shell calling package did not belong to the app UID.
+No permission was changed. Instead, an exact temporary copy under Downloads
+was opened in the existing Visha player. This replay verifies the same output
+bytes; the previous ordinary button/FileProvider handoff remains separate evidence.
+
+A device-side job recorded the screen for ten seconds and launched the replay,
+then wrote its terminal exit code **0**. The recording fully decodes to120 video
+frames, with no audio stream. Its media duration is3.327067 seconds, while the
+recorder log reports ten seconds; those are distinct observations and do not
+establish a ten-second continuous media timeline. In the stable display region `(0,448,540,304)`,52 captured
+frames at screen PTS1.350144–3.282722 map monotonically to **all48 output frames**,
+including repeated screen presentations. The48 selected display/reference pairs
+have SSIM0.981952–0.994115, mean0.989209. The author inspected the contact sheet;
+these metrics bind displayed content to the output and do not measure SR quality.
+
+This closes complete dynamic replay for this fixed **two-second silent clip**.
+Frame-pacing budgets, other players, subjective quality, audio playback and
+sustained playback remain unverified. The preceding failed255/single-frame
+capture is retained as a historical failure, not retroactively declared successful.
+
+Several transient ADB disconnects occurred. During cleanup, a repeated streaming
+read returned exit0 but only32,256 bytes; the pre-delete equality check stopped
+cleanup with nothing removed. The previously collected1,251,788-byte recording
+still matched the device SHA-256. Cleanup then compared device hashes directly
+with complete host files and removed exactly six temporary paths: the public
+replay copy and the recording/log/exit/PID/launch files. A verifier also exposed
+an ineffective remote shell glob; all four retained exports were subsequently
+hashed by exact individual paths and matched the previous verified checkpoint.
+
+BACK returned to ordinary Demo **尚未选择视频** with the same PID1551. The original
+APK, camera/microphone permission state, all four retained exports and empty
+private video input/output state were preserved. No model, production source,
+network setting or signing asset changed, and no microphone recording occurred.
+
+Ignored evidence: `artifacts/verification/android-sr-replay-20261104/`, including
+device-side terminal logs, complete recording, per-frame correspondence, SSIM,
+failed-read receipt, cleanup hashes and returned Demo screenshot. Fresh
+`verify.py` passed media/correspondence/cleanup checks and the previous **60/60**
+source/protected-file/MLX-lock checks. No build, SDK unit tests or new independent
+review ran. P4/P11/release remain open.
+
 ## 2026-11-04 TECNO visible output frame and ordinary cleanup
 
 The same preserved `405d64e1…082c0` APK and fixed ESRGAN model completed one

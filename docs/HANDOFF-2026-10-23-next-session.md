@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 TECNO 视频结果末帧显示与普通清理
+## 最新续接 — 2026-11-04 TECNO 视频结果完整动态重播
+
+- 复用上一轮已保留的 a21c0fcf…6e47ea 输出，不重复推理。原 content URI 的 run-as/am 重开被系统以 calling-package/UID 不匹配拒绝，未改权限；改将精确输出复制到唯一临时 Downloads 路径，由既有 Visha 打开。因此本轮是同字节结果重播，不是再次普通按钮/FileProvider 接线验收。
+- 设备端独立执行10秒无音频录屏及重播，终态 exit0，录得120个屏幕帧、媒体时长3.327067秒；稳定画面的52个屏幕帧按序覆盖全部48个输出帧。逐帧显示对应 SSIM 均值0.989209，仅用于内容绑定；固定2秒静音片段动态重播已证，不代表帧节奏预算、主观画质、音频或长期流畅度。此前255/单帧录屏失败保持历史，不改写为成功。
+- 中途多次短暂ADB断连；一次重复拉取exit0却仅32256字节，清理校验在删除前停止。原完整录屏与设备SHA一致，随后按设备端hash匹配逐项删除六个精确临时文件。验证还发现远程glob未展开，改四个精确路径逐一hash；原四份export与前检查点一致。BACK回普通Demo、PID1551/原405APK/权限保持，input/output为空，保护文件及MLX lock通过。
+- 见[完整动态重播](validation/android-video-sr-demo.md#2026-11-04-tecno-complete-dynamic-replay-of-retained-output)，ignored `artifacts/verification/android-sr-replay-20261104/verify.py`通过，连同既有60/60；采集和清理均终态。无生产代码/build/SDK单测/新复审/推送或发布。ASR网络、PAD协议/数据、F09策略仍待既有答复；基础10/12、P4/P11/发布open/not-ready、goal active。
+
+## 上一检查点 — 2026-11-04 TECNO 视频结果末帧显示与普通清理
 
 - 固定405APK/ESRGAN不变，原48帧High/CRF18素材再次经普通系统picker进入请求；实际完整48帧SUCCEEDED，1280×720/2秒/no-audio，输出1,833,519bytes/SHA a21c0fcf…6e47ea。输入SHA22b3…026d8；完整解码/全48PTS≤1µs/BT709通过，非无损质量参考。PID1551从开始、外部播放器返回到清理保持。
 - 普通“播放结果”直接进入Visha，未再出现resolver；精确URI basename f617dd4c-aa6c-4c3c-a020-84c8c510c232.mp4、export/original摘要及playPosition2000匹配。直接设备截图实际显示蓝天/白云/飞鸟，作者已目检输出参考对照；1080×608显示区域与48帧比较最佳为第48帧，SSIM0.99815，仅绑定显示内容，不称SR质量或连续流畅播放通过。
