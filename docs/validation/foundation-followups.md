@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-04 F09 候选复审更新：[固定兼容候选](f09-compatibility-candidate/README.md)已获独立只读审查与临时patch重放，4个patched hash及生产lock/runtime绑定匹配，未发现阻断候选可评审性的语义缺陷。仍为draft-not-adopted；缺fail-closed applicator、完整依赖测试和20模块双slice/C/Metal资源/搬移binary consumer，待兼容维护路线明确后恢复。复审不代表采纳批准或F09完成，生产lock/缓存未变。
+
 2026-11-04 F07 真机普通UI更新：TECNO/API35复用固定APK/已有授权模型，系统图片picker取消重入、红图成功、原生初始化后CANCELLING→CANCELLED、同PID9562自然飞鸟首帧再次生成成功；Mali-G57/Vulkan硬件视觉delegate及三轮销毁日志已记录，67项证据检查通过。本轮私有输入/cache清理，原APK/原空LM目录恢复，旧fixture保留。见[真机UI证据](android-litertlm-ui.md#2026-11-04-tecno-普通-ui-与自然图像重入)。真机ZIP导入/人工触摸、完整自然质量/性能、异步drain仍开放，不提升P4/P11/发布。
 
 2026-11-04 F06 自然输入主流程更新：隔离 API36 普通 Demo 已将既有 Common swifts 的标准 H.264 High 派生副本 320×180/48帧实际 ESRGAN CPU 4×处理为1280×720。UI终态成功；独立完整解码、48帧/PTS、BT709及无音轨检查通过，移除输入后本轮私有输入/输出释放。原始 High444 profile 平台失败及零decoder候选证据保留，未宣称支持；派生副本不是原无损质量参考。见[证据](android-mainflow-emulator.md#natural-video-main-flow)。单自然输入主流程不代表自然/时域质量、真机UI或性能通过；F06/P11/发布仍open/not-ready。

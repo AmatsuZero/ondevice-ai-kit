@@ -23,7 +23,7 @@
 
 - 官方API fresh：Swift issue91540 open、PR91672 open/unmerged、swift-collections latest1.7.5；相关PR92814已合入main，不证明当前编译器包含。只有Swift6.4.2，本机arm64 iOS18最小interface复现default exit1；仅失败target加selector flag exit0，未重跑完整archive。
 - [候选](validation/f09-compatibility-candidate/README.md)包含4文件/2patch的精确diff、前后SHA和runtime绑定。fresh临时patch replay复现全部4个已记录diagnostic hash；5个unknown分支fatalError风险明确披露。旧diagnostic Git alternate对象库已缺失，4原始源码按固定官方revision只读恢复作比对；未下载完整依赖或改生产lock/缓存。
-- 候选为draft-not-adopted；独立verifier429，无审查结论。下一需显式兼容维护策略决定及review，再推进20模块双slice/资源/独立binary consumer，不能把此候选或旧wrapper当F09通过。PAD授权评估集问题仍待答复，Android ASR资源仍未证。基础10/12、P4/P11/发布open/not-ready，goal active；九项保护与MLX lock不变，无push/merge/release。上一轮有UI证据/提交进展；本轮有新鲜compiler复现和具体候选，不计重复无进展。
+- 候选仍为draft-not-adopted。后续独立只读复审已完成，取代此前429无结论：锁/revision/runtime、两patch及4文件前后SHA匹配，临时独立重放复现全部patched hash；未发现阻断候选可评审性的语义缺陷。临时副本已删除，原始回显仅在会话，ignored目录保留independent-review-summary.json。采纳门槛仍缺fail-closed applicator，以及完整依赖测试/20模块双slice/C/Metal资源/搬移binary consumer；下一需显式兼容维护策略决定，不能把候选复审或旧wrapper当F09通过。PAD授权评估集问题仍待答复，Android ASR资源仍未证。基础10/12、P4/P11/发布open/not-ready，goal active；九项保护与MLX lock不变，无push/merge/release。上一轮有UI证据/提交进展；本轮有新鲜compiler复现和具体候选，不计重复无进展。
 
 ## 上一检查点 — 2026-11-04 Android LM 普通模拟器 UI 通过
 

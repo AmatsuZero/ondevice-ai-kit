@@ -73,9 +73,30 @@ compiler RED(default exit1)/GREEN(target flag exit0) are recorded separately in
 `related-compiler-fix.json`, `compiler-repro.json` and `compiler-repro/*.log`.
 No full dependency checkout/model/toolchain was downloaded or installed.
 
-Before adopting this proposal: explicit policy decision and bounded independent
-review. The attempted native verifier returned HTTP429 with no review result;
-there is currently no independent approval for this candidate. After adoption: implement fresh-output/hash-guarded overlay application,
+### Bounded independent patch review
+
+A subsequent independent read-only review completed on 2026-11-04, superseding
+the earlier HTTP429 attempt that yielded no result. The reviewer verified lock,
+revision/runtime and patch/source digests, independently replayed both patches
+in a fresh `/private/tmp` copy, and matched all four patched digests. The copy
+was removed after successful replay; this review's command output is retained
+in the session, with a local `independent-review-summary.json` in the evidence
+directory, rather than a surviving raw replay artifact.
+
+The reviewer found no blocking semantic defect for **candidate reviewability**:
+the selector flag affects only OrderedCollections; the five switches retain all
+current `.causal`, `.array`, `.arrays` and `.none` handling and explicitly trap
+unknown values as disclosed. This is a coherent proposal for the pending
+maintenance-policy decision, not approval to adopt it or F09 closure.
+
+Two medium adoption/closure gates remain. The manifest declares hash constraints
+but is not an executable enforcement mechanism; a fail-closed applicator must
+validate lock, input, patch and output hashes before any build. Replay also
+provides no dependency tests, device/simulator framework/interface builds,
+dual-slice/20-module/C-resource closure or relocated-consumer/runtime evidence.
+
+Before adopting this proposal: explicit policy decision, still pending.
+After adoption: implement fresh-output/hash-guarded overlay application,
 run dependency tests and real device/simulator framework/interface builds,
 package every declared module/C module/resource, inspect both slices, then
 build a relocated source-free consumer and verify resource lookup/runtime.
