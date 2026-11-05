@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F12 续接 — 2026-11-05 同源码 Apple/shared host 与基础构建已验
+## 最新 F12 续接 — 2026-11-05 同源码增强 Apple 整 App 已构建
+
+- 接e0438c0/953固定源码及既有KMP framework，不重跑718基础测试/F09打包。12依赖/2C子模块从完整本地Git对象自包含clone，6878源文件逐一核对原始blob；没有overlay、下载或生产依赖切换。旧SourcePackages alternate失效保留，未修改旧缓存。
+- MLX完整Demo unsigned generic iOS+simulator均构建成功；OpenCV Identity独立Demo unsigned generic iOS构建成功，host契约6/6。三App完整sdkCommit/arm64、MLXVLMBackend/Metal/描述资源及OpenCV native/Swift符号检查通过；3产品树/664实际Swift输入哈希固定。两个独立变体，不称组合App；OpenCV无arm64 simulator，不算通过。
+- [构建与边界](validation/apple-committed-candidate.md)，ignored `apple-enhanced-candidate-20261105/summary.json` SHA67802fd9…6591d8；只读verify可复核，8阶段全terminal、无pending。初次private Swift符号收集错误已改为反解，只读重收集，无重建。9保护/生产lock/原手机Demo保持，无采集/签名/新benchmark或设备操作。
+- 下一为这些精确候选在适当设备上的运行，以及Android当前候选TTS/真机、完整复审/许可/生产交付；旧模型验证/F09不重做，不能把历史设备证据改标到新包。P4/P11/发布仍open/not-ready，基础10/12，goal active。
+
+## 上一 F12 续接 — 2026-11-05 同源码 Apple/shared host 与基础构建已验
 
 - 复用e0438c0既有归档，fresh提取953文件/执行位并在各阶段回读；Apple host481、KMP24、shared80及Swift→Demo四组桥接133项全部通过，无失败/跳过。Gradle offline/no-build-cache/rerun-tasks 35/35执行；Binding simulator/shared双平台framework、基础speech/video/multimodal UI Demo unsigned双平台、NativeConsumer simulator构建成功，完整sdkCommit匹配。
 - 六组iOS编译/测试配置120条外部artifact引用/80实际文件及6产品树固定；生产Skiko仍0.144.6，F02生产分发未切换。桥接使用注入后端，不是增强MLX/OpenCV整App、真机或普通UI/权重推理验收。Kotlin cache路径与既有XCTest QoS警告保留；无新增benchmark/下载/采集/签名或手机操作。

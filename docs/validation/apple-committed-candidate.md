@@ -1,7 +1,45 @@
 # 精确提交 Apple/shared 候选 — 2026-11-05
 
 状态：同一源码候选的 Apple host、KMP/shared iOS 单测、基础 Demo/消费者构建和注入后端桥接测试通过。
-本次未重建增强 MLX/OpenCV 整 App，也未做当前候选真机、模型推理或普通 UI 验收；发布仍 `open/not-ready`。
+后续已补同源码增强 MLX 双平台与 OpenCV Identity 设备目标整 App 构建，见下节。
+当前候选真机、模型推理和普通 UI 验收尚未执行；发布仍 `open/not-ready`。
+
+## 增强 MLX 与 OpenCV Identity 整 App 构建
+
+继续使用下方同一953文件归档和已验证KMP framework，没有重跑基础718项或F09打包。
+12个固定依赖、2个C子模块从此前恢复的完整本地Git对象创建自包含clone；
+**6,878份上游文件逐一匹配原始Git blob/SHA/执行位**，没有F09 overlay或生产依赖修改。
+历史SourcePackages的绝对alternate已失效，新隔离缓存不依赖它；原缓存保持不变，未联网fetch。
+构建前后均复核源码、依赖、九保护路径与生产lock；构建后的workspace仍为12个固定revision，无外部artifact/prebuilt下载记录。
+
+| 独立变体 | 构建与产物检查 |
+| --- | --- |
+| MLX完整Demo / generic iOS | unsigned构建成功，arm64、部署声明18.0、完整sdkCommit匹配；真实`MLXVLMBackend`符号及5575字节模型描述、2399192字节Metal库存在 |
+| MLX完整Demo / generic simulator | unsigned构建成功，arm64、部署声明18.0、完整sdkCommit匹配；同一模型描述与2405144字节模拟器Metal库存在 |
+| OpenCV Identity Demo / generic iOS | 新提取同归档并复制既有static native XCFramework及同候选shared framework；unsigned构建成功，arm64、部署声明15.0、完整sdkCommit匹配；ObjC/Swift runtime符号存在，未动态embed OpenCV |
+| 可选OpenCV包host契约 | 显式`ODAI_OPENCV_CONTRACTS_ONLY=1`，6/6、0失败/跳过；不包含native运行验证 |
+
+三份App文件树、664个实际Swift编译输入路径及内容哈希已固定。两平台模型描述均为
+`c074e693…602d54`，与committed resource完全相同；Metal库按实际平台分别记录，没有复用F09或旧工具链硬pin。
+App debug dylib SHA分别为`8ea82da6…a6d2ce`（MLX device）、`8cae8af2…b6ba1f`（MLX simulator）、
+`56146e30…29c7a3`（Identity device）；UUID、动态链接表与实际Swift file lists也保留。
+
+这是**两个独立Demo变体**，不声称合并成一个App。OpenCV既有制品只有arm64 device/x86_64 simulator，
+不提供arm64 simulator，未据此声称该目标通过。MLX scheme同时编译了UITest target，但没有执行UI测试。
+没有签名、安装、模型推理、采集、benchmark新增或操作普通手机Demo；部署声明也不是最低系统运行验收。
+原上游Metal/Swift、AppIntents及方向警告保留。初次native符号收集把private Swift名当作global原名匹配而失败，
+改用实际符号反解后仅重新读取既有App，没有重建产品。
+
+证据为 ignored `artifacts/verification/apple-enhanced-candidate-20261105/`；`summary.json` SHA-256
+`67802fd939f6e67e0f89cccc10d5babd5a168b6d9d7c551f6961af3e866591d8`。
+8个阶段全部terminal，无pending；`inputs.json`、`identity/inputs.json`、原始logs/xcresults、
+`product-inspection.json`和完整产品树保留。只读复核：
+
+```sh
+rtk proxy python3 artifacts/verification/apple-enhanced-candidate-20261105/verify.py
+```
+
+## 前一轮基础 host/shared/桥接验证
 
 与 [Android 候选](android-committed-candidate.md) 使用同一份已核验归档：
 提交 `e0438c030a987ceeff9f9207c2475684749e4d8b`，tree `1a79aabdc997ca99fe441a02b9cb54982ce2c34c`，
@@ -48,5 +86,5 @@ rtk proxy python3 artifacts/verification/apple-committed-candidate-20261105/veri
 ```
 
 本轮新增718项不同层级测试执行（481+24+80+133），不将它们合成为功能覆盖率或benchmark样本。
-下一为同源码增强Apple整App及适当设备运行、当前Android候选TTS支持引擎设备/真机、
+下一为同源码增强Apple整App在适当设备的运行、当前Android候选TTS支持引擎设备/真机、
 独立完整审查与生产交付/许可决策；真实采集、质量/资源、最低系统、F02/PAD校准及P4/P11缺口保持。

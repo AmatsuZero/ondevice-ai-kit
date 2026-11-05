@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-05 F12增强Apple：[同源码整App](apple-committed-candidate.md)MLX unsigned双平台与独立OpenCV Identity设备目标构建通过，6878原始依赖文件/3产品树/664Swift输入固定，可选host契约6/6。没有F09 overlay或下载，也没有当前候选设备运行/采集结论；两个变体不称组合App，OpenCV arm64 simulator仍不支持。9保护/lock/普通手机Demo保持，P4/P11与发布仍open/not-ready。
+
 2026-11-05 F12同源码Apple/shared：[e0438c0隔离候选](apple-committed-candidate.md)953文件回读，Apple481/KMP24/shared80及四组Swift→Demo桥接133项通过；基础Demo unsigned双平台、NativeConsumer simulator和三份KMP framework链接成功。80外部Klib文件/6产品树固定，Skiko仍生产0.144.6；无增强MLX/OpenCV整App或设备运行结论。9保护/lock保持，无新采集/benchmark/下载，P4/P11与发布仍open/not-ready。
 
 2026-11-05 F12同候选运行：[b90e7830精确APK](android-committed-candidate.md#同一-apk-补充运行asrsridentity人脸与-tts)另经固定ASR全文/JNI生命周期、布局、双帧AAC超分/独立解码与Identity注册/未校准拒绝/purge、普通人脸选图通过，68项证据复核。TTS因专用AVD无引擎初始化真实失败并保留；临时测试/文件已清理、普通APK/模型/拒绝权限保持、真机未操作。不替代当前候选真机/Apple/真实采集及全质量资源/交付审查；P4/P11仍open/not-ready。

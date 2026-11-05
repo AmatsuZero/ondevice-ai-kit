@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261105-exact-apple-host/summary.json",
-    "sha256": "3d7be11c1c56aaad9eb2b824af97177c470c1519e476fe419c60de2b9f2fa0bd"
+    "path": "artifacts/verification/p11-readiness-20261105-exact-apple-enhanced/summary.json",
+    "sha256": "3d877610db865f1e9792ffe68a009def7393e991cbc1fdb70022c1496d4ec865"
   },
   "schemaVersion": 1,
   "sources": [

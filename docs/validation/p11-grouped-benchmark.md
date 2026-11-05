@@ -1,5 +1,7 @@
 # P11 分组 benchmark 快照
 
+2026-11-05 F12增强Apple：同源码MLX双平台/OpenCV Identity设备整App构建和6项host契约、产物来源新增，见[边界](apple-committed-candidate.md)；没有benchmark或设备运行样本新增。当前readiness为 `artifacts/verification/p11-readiness-20261105-exact-apple-enhanced/summary.json`，8组原统计、9行gap和发布门禁保持。下方为历史。
+
 2026-11-05 F12同源码Apple/shared：718项分层单测执行、基础Demo/消费者构建和产物来源证据新增，见[验证](apple-committed-candidate.md)；不新增benchmark样本。当前readiness为 `artifacts/verification/p11-readiness-20261105-exact-apple-host/summary.json`，8组原统计/9行gap及发布门禁保持。下方为历史。
 
 2026-11-05 F12同候选补充运行：ASR/SR/Identity/普通人脸及布局通过，AVD无TTS引擎导致初始化失败原样保留，见[边界](android-committed-candidate.md#同一-apk-补充运行asrsridentity人脸与-tts)。当前readiness为 `artifacts/verification/p11-readiness-20261105-exact-runtime/summary.json`；68项复核无新增benchmark样本，原8组统计/9行gap与发布门禁保持。下方为历史。
