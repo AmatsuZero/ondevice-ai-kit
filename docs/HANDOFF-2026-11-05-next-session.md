@@ -1,5 +1,27 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 恢复后新增检查点：TTS私有报告已实现并验证
+
+原“下一项”已于本次续接实施，以下原文为历史。最新结果见
+[Android私有终态验证](validation/android-committed-candidate.md#当前候选真机-tts私有报告终态验证)。
+相同b90e普通APK、独立test-only overlay在TECNO完成**1次最终TTS pass**：PID26894，
+正常播放/活动取消join/重入/close/关闭拒绝齐全；host仍255，私有JSON完整回读SHA验证。
+报告自检成功/预设失败均真实落盘，二者不计TTS功能pass。
+原普通afed App/test/Identity runner、12模型/附属摘要、权限和TTS设置已恢复；
+本轮3报告/4APK临时副本精确删除，WAV缺席，普通MainActivity启动。
+原9保护路径与生产lock不变。没有新采集、下载请求、benchmark或远端操作。
+
+最新原始证据：`artifacts/verification/android-persistent-tts-20261105/`；
+只读复核`rtk proxy python3 artifacts/verification/android-persistent-tts-20261105/verify.py`。
+新readiness：`artifacts/verification/p11-readiness-20261105-persistent-tts/summary.json`；
+移除“精确候选有引擎设备TTS未通过”这一已补证gap，其余质量/最低系统/完整离线与UI缺口保留。
+基础10/12、P4/P11与发布仍open/not-ready。
+
+下一步从F12剩余普通UI/provider或F10获批校准数据/独立审查门槛继续；
+不要重跑已完成TTS、旧三轮结果传输、F09构建或无变化重试Apple失败UI工具。
+本轮solo本地实现与回归不构成独立审查批准。
+
+
 本文件是新的恢复入口；优先于旧 [2026-10-23 长交接](HANDOFF-2026-10-23-next-session.md)中的历史下一步。
 用户最新要求：**先写交接文档，在新会话继续**。本次收尾不再构建、测试或操作设备。
 

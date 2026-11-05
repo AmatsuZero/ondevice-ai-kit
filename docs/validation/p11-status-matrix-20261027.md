@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-11-05 TTS私有终态报告追加：同一b90e普通APK在TECNO/API35取得1次固定输入最终pass，normal/cancel-join/followup/close及关闭拒绝齐全，host255由finish前私有JSON回读补证；旧三轮缺终态不升级。新test-only overlay离线397任务通过，普通App/test/runner、12模型/附属摘要、权限与设置已恢复；无采集/下载请求/benchmark新增。见[证据与限制](android-committed-candidate.md#当前候选真机-tts私有报告终态验证)。9行仍有gap，P4/P11与发布open/not-ready保持。 下方缺终态描述为历史。
+
 2026-11-05 F12真机TTS追加：TECNO授权恢复，既有Google服务支持b90e精确候选三轮normal-done/活动cancel-joined/followup-done；最终结果bundle仍缺，0项最终pass可证明，见[边界](android-committed-candidate.md#当前候选真机-tts生命周期已观察最终结果仍缺)。系统finished-inst及进程/活动instrumentation缺席证明终结；原普通App/test/runner、模型/权限/设置已恢复，无benchmark新增，9行gap/P4/P11/发布open/not-ready保持。
 
 2026-11-05 F12首屏追加：同一iPhone17,2/iOS27.2的OpenCV Identity与MLX隔离签名变体稳定首屏截图已核验，见[显示边界](apple-committed-candidate.md#两种隔离变体的真机首屏渲染)。未触摸/导入/注册/生成，CUA native pipe一次reset后仍失败，UI用例0执行；不升级原bundle全能力验收。两候选停止、原Demo恢复、既有安装URL保持，无benchmark新增，原9行gap/P4/P11/发布open/not-ready保持。

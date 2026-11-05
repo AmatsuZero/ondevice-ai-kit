@@ -1,5 +1,7 @@
 # P11 分组 benchmark 快照
 
+2026-11-05 TTS私有终态报告追加：同一b90e普通APK在TECNO/API35取得1次固定输入最终pass，normal/cancel-join/followup/close及关闭拒绝齐全，host255由finish前私有JSON回读补证；旧三轮缺终态不升级。新test-only overlay离线397任务通过，普通App/test/runner、12模型/附属摘要、权限与设置已恢复；无采集/下载请求/benchmark新增。见[证据与限制](android-committed-candidate.md#当前候选真机-tts私有报告终态验证)。9行仍有gap，P4/P11与发布open/not-ready保持。 当前readiness：`artifacts/verification/p11-readiness-20261105-persistent-tts/summary.json`；下方记录为历史。
+
 2026-11-05 F12真机TTS追加：b90e精确候选在TECNO观察到三轮正常播放/取消/重入，最终bundle未取到，不计最终pass，见[边界](android-committed-candidate.md#当前候选真机-tts生命周期已观察最终结果仍缺)。当前readiness为 `artifacts/verification/p11-readiness-20261105-exact-android-tts/summary.json`；无benchmark新增，8组统计/9行gap/发布门禁保持。下方为历史。
 
 2026-11-05 F12首屏追加：OpenCV Identity和MLX隔离变体真机稳定首屏显示，触摸/模型执行仍未验证，见[边界](apple-committed-candidate.md#两种隔离变体的真机首屏渲染)。当前readiness为 `artifacts/verification/p11-readiness-20261105-exact-apple-rendering/summary.json`；没有benchmark样本，8组统计/9行gap/发布门禁保持。下方为历史。
@@ -50,7 +52,7 @@
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261105-exact-android-tts/summary.json
+  --output artifacts/verification/p11-grouped-20261105-persistent-tts/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。

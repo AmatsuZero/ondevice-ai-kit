@@ -1,6 +1,47 @@
 # 精确提交 Android 组合候选 — 2026-11-05
 
-状态：Android 构建、固定单图 LM、固定英文 ASR/原生生命周期、SR、Identity 与普通人脸检测已通过限定验证；本 AVD 的 TTS 因无引擎初始化失败。后续已在 TECNO 观察到同一候选 TTS 正常播放、取消及重入，但最终测试结果包未取得，见下节。全能力候选验收仍未完成，P4/P11 与发布保持 `open/not-ready`。
+状态：Android 构建、固定单图 LM、固定英文 ASR/原生生命周期、SR、Identity 与普通人脸检测已通过限定验证；本 AVD 的 TTS 因无引擎初始化失败。后续通过私有报告在 TECNO 验证同一候选 TTS 正常播放、取消、重入和close，取得1次最终pass，见下节。全能力候选验收仍未完成，P4/P11 与发布保持 `open/not-ready`。
+
+## 当前候选真机 TTS：私有报告终态验证
+
+2026-11-05 后续在同一 TECNO KM9 / API35 完成 **1次最终 pass**：普通 APK 仍为
+`b90e7830…a64d8d`，没有重建或修改生产代码。仅在新的隔离构建区给原测试增加
+`PersistentTtsProbeInstrumentation`，原953份源码输入前后 SHA 不变；新测试 APK SHA-256 为
+`0e1012ff6f2df402dffe363726d4d0eefcbd2bfcd27a6320bbfb5f760698f334`。
+离线 test-only 构建397任务成功；原SDK正常播放、活动取消、重入及close断言均保留。
+实现及复用说明见 [私有报告探针](../../probes/android-tts-report/README.md)。
+
+先在手机运行两个不调用TTS的 recorder 自检：成功分支保存 `recorder-pass`，预设断言失败保存
+`fail`及错误；均可通过 `run-as` 回读并核对设备/host SHA，且都被功能校验器拒绝为TTS pass。
+之后只运行一次固定英文 TTS，PID **26894**。host 仍 exit255，但此时
+`Instrumentation.finish`前已使用 `AtomicFile`完成私有JSON的写入/关闭，故可独立回读完整报告：
+
+- `terminal=true / phase=finished / probeStatus=pass`，runId与精确SDK commit匹配；
+- `normal-start → normal-done → cancel-request completed=false → cancel-joined → followup-done`；
+- `close-start → close-done → close-rejected → finished`；
+- Google引擎、467个voice、languageStatus=1，合成WAV为 **129,404字节**；
+- SDK backend=`android.text-to-speech`、voice=`en-US-language`；取消结果
+  `cancelled-followup-success`，close后拒绝为`closed`。
+
+报告SHA-256为 `acbd409b8b9cbf17d7deaf4516a87124f80627bb09b2d81fc24e3864251129de`；
+PID/活动instrumentation缺席和系统`finished inst`另有终结收据。host255仍是传输失败，
+不改写为host成功；功能通过来自同一请求的完整报告和原断言。
+旧三轮缺最终结果的记录继续保留，不追溯升级为通过。
+
+原普通 `afed156b…926c461` App、test APK、Identity runner已通过完整USB复制→设备SHA→
+本地`pm install -r`恢复；12份模型/附属摘要、权限、TTS服务/设置与新前置快照相同。
+3份本轮私有报告和4份APK临时副本精确删除，WAV缺席，普通MainActivity恢复启动。
+无录音/相机采集、下载请求或新benchmark样本。仅证明固定输入TTS功能生命周期，普通UI、
+人工听感、完整断网/voice矩阵、最低系统及长期资源继续开放；P4/P11与发布保持`open/not-ready`。
+
+新原始证据在 ignored `artifacts/verification/android-persistent-tts-20261105/`；只读复核：
+
+```sh
+rtk proxy python3 artifacts/verification/android-persistent-tts-20261105/verify.py
+rtk proxy python3 tools/probes/validate_android_tts_report.py \
+  artifacts/verification/android-persistent-tts-20261105/tts-report.json \
+  --run-id tts-20261105-persistent-tts --sdk-commit e0438c030a987ceeff9f9207c2475684749e4d8b
+```
 
 ## 当前候选真机 TTS：生命周期已观察，最终结果仍缺
 
