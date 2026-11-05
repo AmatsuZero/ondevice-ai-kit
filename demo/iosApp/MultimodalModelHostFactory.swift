@@ -13,12 +13,20 @@ enum MultimodalModelHostFactory {
     backend build: (ModelLease) throws -> any MultimodalGenerationBackend
   ) async throws -> MultimodalHost {
     try Task.checkCancellation()
-    try await modelStore.install(manifest: manifest, source: source)
+    if await modelStore.status(manifest.ref) != .installed {
+      try await modelStore.install(manifest: manifest, source: source)
+    }
     try Task.checkCancellation()
     let lease = try await modelStore.acquire(manifest.ref)
     let backend: any MultimodalGenerationBackend
     do {
       try Task.checkCancellation()
+      // A matching ref alone does not prove this is the requested model descriptor.
+      let encoder = JSONEncoder()
+      encoder.outputFormatting = .sortedKeys
+      guard try encoder.encode(lease.manifest) == encoder.encode(manifest) else {
+        throw ModelStoreError.integrity
+      }
       backend = try build(lease)
     } catch {
       await lease.close()

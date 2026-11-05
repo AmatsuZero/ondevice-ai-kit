@@ -85,21 +85,19 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
                     videoStore: try MultimodalInputStore(), videoPicker: { picker.presentVideo(reply: $0) },
                     picker: { picker.present(reply: $0) })
                 #if ODAI_MULTIMODAL_MLX_DEMO
-                if ProcessInfo.processInfo.arguments.contains("--multimodal-mlx-local-model") {
-                    multimodalPreparing = true
-                    let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                    let preparation = MultimodalHostPreparation()
-                    multimodalPreparation = preparation
-                    preparation.start(make: { try await MultimodalMLXHostFactory.make(documents: documents, picker: picker) },
-                        ready: { [weak self] host in
-                            guard let self else { host?.close(); return }
-                            self.multimodalPreparing = false
-                            guard let host else { self.message = "本地模型准备失败"; return }
-                            self.multimodalHost?.close()
-                            if UIApplication.shared.applicationState != .active { host.background() }
-                            self.multimodalHost = host
-                        })
-                }
+                multimodalPreparing = true
+                let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let preparation = MultimodalHostPreparation()
+                multimodalPreparation = preparation
+                preparation.start(make: { try await MultimodalMLXHostFactory.make(documents: documents, picker: picker) },
+                    ready: { [weak self] host in
+                        guard let self else { host?.close(); return }
+                        self.multimodalPreparing = false
+                        guard let host else { self.message = "本地多模态模型未就绪，请检查已导入的模型"; return }
+                        self.multimodalHost?.close()
+                        if UIApplication.shared.applicationState != .active { host.background() }
+                        self.multimodalHost = host
+                    })
                 #endif
             } catch { message = "多模态模块初始化失败" }
         }

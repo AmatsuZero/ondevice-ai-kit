@@ -5,6 +5,83 @@ import ODAIKitMultimodal
 import XCTest
 
 @MainActor final class MultimodalModelHostFactoryTests: XCTestCase {
+  func testInstalledModelReopensAfterImportDirectoryIsRemoved() async throws {
+    let e = try environment()
+    defer { try? FileManager.default.removeItem(at: e.root) }
+    try await e.store.install(manifest: e.manifest, source: e.source)
+    try FileManager.default.removeItem(at: e.source)
+
+    let host = try await make(e) { ModelFactoryBackend(lease: $0) }
+    host.model.refreshBackends()
+    for _ in 0..<1000 where host.model.state.refreshing { await Task.yield() }
+    XCTAssertEqual(host.model.state.backends.first?.backendId, "fixture")
+    XCTAssertNil(host.model.state.output)
+    XCTAssertFalse(FileManager.default.fileExists(atPath: e.source.path))
+    do {
+      try await e.store.remove(e.manifest.ref)
+      XCTFail("reopened host must own the model lease")
+    } catch { XCTAssertEqual(error as? ModelStoreError, .inUse) }
+    host.close()
+    for _ in 0..<1000 where host.model.state.closing { await Task.yield() }
+    try await e.store.remove(e.manifest.ref)
+  }
+
+  func testMissingLocalModelDoesNotConstructBackendOrInputStore() async throws {
+    let e = try environment()
+    defer { try? FileManager.default.removeItem(at: e.root) }
+    try FileManager.default.removeItem(at: e.source)
+    do {
+      _ = try await make(e) { lease in
+        XCTFail("missing local model must remain unavailable")
+        return ModelFactoryBackend(lease: lease)
+      }
+      XCTFail("must reject missing model")
+    } catch {}
+    let status = await e.store.status(e.manifest.ref)
+    XCTAssertEqual(status, .absent)
+    XCTAssertFalse(FileManager.default.fileExists(atPath: e.input.path))
+    XCTAssertFalse(FileManager.default.fileExists(atPath: e.source.path))
+  }
+
+  func testCorruptInstalledModelIsRejectedWithoutBuildingBackend() async throws {
+    let e = try environment()
+    defer { try? FileManager.default.removeItem(at: e.root) }
+    try await e.store.install(manifest: e.manifest, source: e.source)
+    let lease = try await e.store.acquire(e.manifest.ref)
+    let weights = lease.directory.appendingPathComponent("weights.bin")
+    await lease.close()
+    try Data([9, 9, 9]).write(to: weights)
+    do {
+      _ = try await make(e) { lease in
+        XCTFail("corrupt installed model must remain unavailable")
+        return ModelFactoryBackend(lease: lease)
+      }
+      XCTFail("must reject corruption")
+    } catch { XCTAssertEqual(error as? ModelStoreError, .integrity) }
+    XCTAssertEqual(try Data(contentsOf: weights), Data([9, 9, 9]))
+    XCTAssertFalse(FileManager.default.fileExists(atPath: e.input.path))
+    try await e.store.remove(e.manifest.ref)
+  }
+
+  func testInstalledModelWithDifferentExpectedManifestReleasesLeaseAndRejects() async throws {
+    let e = try environment()
+    defer { try? FileManager.default.removeItem(at: e.root) }
+    try await e.store.install(manifest: e.manifest, source: e.source)
+    var expected = e.manifest
+    expected.files[0].sha256 = String(repeating: "0", count: 64)
+    do {
+      _ = try await MultimodalModelHostFactory.make(
+        modelStore: e.store, manifest: expected, source: e.source, inputDirectory: e.input,
+        picker: { $0(nil) }, backend: { lease in
+          XCTFail("same ref must not admit a different manifest")
+          return ModelFactoryBackend(lease: lease)
+        })
+      XCTFail("must reject manifest mismatch")
+    } catch { XCTAssertEqual(error as? ModelStoreError, .integrity) }
+    XCTAssertFalse(FileManager.default.fileExists(atPath: e.input.path))
+    try await e.store.remove(e.manifest.ref)
+  }
+
   func testFactoryVideoHostGeneratesThroughVideoProviderAndBackend() async throws {
     let e = try environment()
     defer { try? FileManager.default.removeItem(at: e.root) }
