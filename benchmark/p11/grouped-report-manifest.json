@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-android-ui-transport/summary.json",
-    "sha256": "4e08e83fd733aedff1335053f93bb9074547dbd5d5aa4210343850b0a4e26a67"
+    "path": "artifacts/verification/p11-readiness-20261106-android-identity-accepted/summary.json",
+    "sha256": "48b693ab054092239147615de6b9e6d174211021dd28aa8be047154870dfac0a"
   },
   "schemaVersion": 1,
   "sources": [

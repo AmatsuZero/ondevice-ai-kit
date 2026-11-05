@@ -1,5 +1,15 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新检查点：Android 普通 Identity 实际子项已通过
+
+先读 [Android 普通 App Identity 验收](HANDOFF-2026-11-06-android-identity-accepted.md)。
+设备重连后在保留的原 `afed156b…` App 完成模型导入、显式同意、公开授权图片注册、
+未校准拒绝、删除与停用。冷启动确认模型仍可用、授权仍关闭、图片预览已清除；原 APK、
+12 份模型及权限不变。没有换包、重建、采集或下载。关闭这一普通 UI 子项，基础10/12、
+P4/P11仍 open/not-ready；不推广为精确b90、Apple UI、校准或发布通过。
+最新 readiness：`artifacts/verification/p11-readiness-20261106-android-identity-accepted/summary.json`。
+不重复本次流程；Apple 更新选择仍待答复。下方 USB 中止为已保留的历史记录。
+
 ## 2026-11-06 最新设备检查点：Android UI 未验，原 App 已恢复
 
 先读 [Android 交互中止与恢复](HANDOFF-2026-11-06-android-ui-transport.md)。已尝试普通
