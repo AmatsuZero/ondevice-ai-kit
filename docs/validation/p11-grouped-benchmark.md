@@ -1,5 +1,9 @@
 # P11 分组 benchmark 快照
 
+2026-11-05 F09追加正式清单、20本地ZIP与第二ZIP消费者两平台编译/真机资源报告证据；当前readiness改为 `artifacts/verification/p11-readiness-20261105-f09-manifest-zip/summary.json`。旧schema1硬pin保持，新schema2记录逐平台生成来源；不增加benchmark样本，F09/package入口/依赖测试及P11发布缺口保留。下段staging快照为历史。
+
+2026-11-05 F09 的真实20模块静态双slice、两平台无源码消费者和真机资源/MLX小算术作为分发侧限定证据加入 readiness；不产生模型推理或性能样本。当前快照为 `artifacts/verification/p11-readiness-20261105-f09-binary-staging/summary.json`，旧schema的Metal固定pin仍未改，正式package门槛仍开放。
+
 2026-11-05 readiness 新增 sherpa 离线 ASR 真实固定样本、用户确认的基本麦克风功能及独立 published AAR 消费证据。仅更新功能状态与来源哈希，不新增 grouped 样本；5项能力/8组、质量/资源及发布缺口保持。当前快照位于 `artifacts/verification/p11-readiness-20261105-offline-asr/summary.json`。
 
 2026-11-04 已把 Android ASR资源入口/授权请求、ESRGAN完整请求/动态重播、LiteRT-LM真机ZIP导入/真实生成及双端Identity/PAD原始分数证据加入新的readiness快照。旧快照因后续文档变化已不能通过当前哈希校验，当前manifest改指重新固定来源的快照。新增的是功能与缺口证据，不是兼容benchmark样本；下面的5项能力/8组、所有既有逐run统计和质量/资源结论保持不变。
@@ -20,7 +24,7 @@
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261105-offline-asr/summary.json
+  --output artifacts/verification/p11-grouped-20261105-f09-binary-staging/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。

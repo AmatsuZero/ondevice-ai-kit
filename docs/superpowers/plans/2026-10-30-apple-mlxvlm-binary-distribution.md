@@ -10,6 +10,46 @@
 
 **Spec:** docs/superpowers/specs/2026-10-30-apple-mlxvlm-binary-distribution-design.md
 
+## 2026-11-05 authorized build continuation
+
+The user explicitly selected the isolated compatibility overlay for local binary
+build validation, including its disclosed unknown-enum trap policy. Normal
+production checkouts/lock and remote publication remain outside this adoption.
+The original candidate manifest/patch bytes stay immutable; a separate decision
+receipt binds them to this run. Existing complete Git objects supply all12 pins
+and both MLX submodules; fresh shared-object clones own all writable refs/files.
+
+Task3 implementation choice: compile the complete source graph in Release with
+library evolution for each platform, then form one static framework per Swift
+module from its actual target object, emitted interfaces and required native
+objects. Static library slices are allowed by the design artifact contract and
+`xcodebuild -create-xcframework`; each target object is shipped exactly once.
+No source-App archive alone or partial closure counts as delivery. Package public
+C headers/module maps separately and prove their use in the source-free consumer.
+
+Observed SDK27.2 rebuild emits different Metal bytes than the old SDK27.1
+reference. Do not copy the old device library into the simulator slice or ignore
+the mismatch. The follow-up artifact schema must bind each compiled resource to
+its actual platform/toolchain/source inputs and output digest, while preserving
+the canonical model JSON pin. Resource loading remains an independent runtime gate.
+
+Current execution: both platform compiles and20 dual-slice static frameworks passed;
+relocated binary-only device/simulator consumers and physical resource/MLX
+arithmetic smoke passed. Full tools278/278 and helper/layout13/13 passed.
+Static archive inspection has real compiler/archive tests,
+including rejection of mixed device/simulator members. Full packaging/consumer
+and resource gates remain incomplete until evidence exists.
+
+Current integration checkpoint: schema2 static/C/per-platform resource provenance
+and notices are implemented; schema1 keeps its original Metal pin. Manifest-driven
+device/simulator consumers, actual20 local ZIP validation/resolution and a second
+ZIP-only consumer's device/simulator builds pass. Physical resource smoke from
+the final generator is bound to the manifest digest. Both staging-review findings
+were reproduced and fixed. Packaging entry/dependency tests/model inference and
+full release acceptance remain open; experiment scripts are not the reusable
+package command required by Task3. No SDK source redistribution license is
+asserted where the project has none.
+
 ## Global Constraints
 
 - Preserve production apple-mlx/Package.resolved and all protected dirty/untracked files.

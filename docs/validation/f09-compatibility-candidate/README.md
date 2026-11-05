@@ -5,6 +5,24 @@ existing [complete binary-closure plan](../../superpowers/plans/2026-10-30-apple
 It does not approve production dependency changes or turn the historical
 wrapper-only diagnostic archive into a release candidate.
 
+### 2026-11-05 user decision and actual isolated builds
+
+The user explicitly selected this overlay for **isolated local build validation**,
+including the disclosed unknown-enum trap behavior. The candidate manifest and
+patch bytes remain unchanged; their historical `draft-not-adopted` labels are
+provenance, while the new decision is bound separately in
+`artifacts/verification/f09-binary-build-20261105/policy-decision.json`.
+This is no authorization for normal source-dependency replacement or publication.
+
+Fresh local clones of all12 production pins and both MLX submodules were built
+with the two hash-guarded patches. Device/simulator Release library-evolution
+compilation passed. Twenty static dual-slice XCFrameworks and a relocated
+binary-only consumer built on both platforms. On iPhone17,2, actual SDK model
+bundle lookup, Metal library loading and a small MLX GPU arithmetic calculation
+passed. Original dependency working trees, production lock and protected paths
+remain unchanged. The complete artifact/packaging/notice/ZIP gates are still
+open; see [the bounded binary evidence](../apple-mlxvlm-distribution.md#2026-11-05-real-static-binary-closure-and-device-resource-smoke).
+
 ### Latest source recovery — 2026-11-04
 
 The retained `apple-mlxvlm-natural-video-20261028/SourcePackages/checkouts`

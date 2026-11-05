@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261105-offline-asr/summary.json",
-    "sha256": "d4066e1e63d05264291640089be064baaaa66f44cf6f72cb905fe64b111d14a9"
+    "path": "artifacts/verification/p11-readiness-20261105-f09-manifest-zip/summary.json",
+    "sha256": "ad6e408426c66a0e15ec7cb9adcf9136f6c8cf7903081bbad7326d1a76ab0dac"
   },
   "schemaVersion": 1,
   "sources": [

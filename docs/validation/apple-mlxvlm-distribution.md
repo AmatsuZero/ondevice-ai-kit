@@ -1,5 +1,134 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-05 manifest-driven static artifacts and ZIP consumers
+
+The staging experiment below now has a real schema-v2 manifest at
+`artifacts/verification/f09-binary-build-20261105/manifest-static/artifact-manifest.json`.
+It covers20 dual-slice static XCFrameworks,4 public C modules,18 platform
+resource files and22 upstream/modified-source notice files. Schema1 retains its
+historical fixed Metal digest. Schema2 instead binds each generated Metal file
+to its own platform receipt: exact source commit/lock, Xcode/Swift, SDK version/
+build, actual Metal compiler, source inventory/overlay hashes and output digest.
+The receipts record build provenance; they do not authenticate an untrusted
+artifact publisher. The model JSON canonical digest remains mandatory.
+
+The maintained generator now supports static link/no-embed, relative public
+C include paths, explicit libc++/Accelerate/Metal, platform-selected resource
+copies and simulator/device-specific resource hashes. Real generated-project
+build phases were executed in the regression test for both platforms and copied
+the corresponding Metal bytes. Actual manifest-generated device and simulator
+Release consumers both built successfully with no source package reference.
+
+All20 per-framework root-layout ZIPs pass exact inventory/byte checks and real
+SwiftPM checksum/local ZIP resolution. A second App uses only20 local ZIP
+`binaryTarget`s plus the separately shipped public C headers/bundles; device and
+arm64 simulator Release builds both pass. Both resolved build trees contain20
+extracted XCFrameworks, no checkout, and exactly one Swift compilation input:
+the consumer probe. An initial attempt to combine C systemLibrary targets and
+binary targets in the same product was rejected by SwiftPM; its error and
+manifest are retained. Explicit C include inputs are the verified arrangement.
+No ZIP or package URL was published.
+
+The final manifest-generated App ran on the existing iPhone. Its persisted
+resource report includes the exact input manifest digest
+`b6648f760216c76722ccb9acec8e455f88f66b0808a86b4ac61db518e50a8091`:
+model Bundle.module lookup and Metal loading passed. PID2134 was terminated,
+confirmed absent and ordinary Demo restored. Earlier reviewed staging App
+PID2122 additionally passed MLX arithmetic. Neither probe ran model inference.
+A driver argument-order failure before App launch was retained and corrected;
+it is not counted as a resource failure or a successful runtime attempt.
+
+Independent staging review found two issues, both reproduced and fixed:
+report persistence failure could leave a passed UI, and static archives could
+understate their deployment floor. Actual Foundation file-write failures now
+return `failed-report-write`; actual mixed iOS18/26 object archives report26.
+The inspector also rejects a binary requiring a higher OS than declared. The
+new resource report binds the input manifest to avoid accepting a stale result.
+Fresh v2 schema/generator reviewer exhausted429 with no verdict; the new
+integration has an author bounded review only, not independent approval. Final
+full tools292/292 pass (42.376s), Python compile and diff checks pass. Historical
+source hashes in `summary.json` are not current-source verification. Use
+`summary-reviewed.json` / `verify-reviewed.py`.
+
+No SDK source redistribution license was found in the committed project root;
+local notices state this explicitly rather than inventing one. These artifacts
+remain local validation outputs. Remaining gates: a reusable complete packaging
+command (the full pipeline currently uses retained experiment scripts), dependency
+tests, binary model inference and final release licensing/acceptance. The broader
+F09/P4/P11/release verdict stays `open/not-ready`.
+
+Recheck the actual local set and regenerate a fresh direct consumer:
+
+```sh
+python3 -m tools.validate_mlxvlm_binary_artifact \
+  artifacts/verification/f09-binary-build-20261105/manifest-static/artifact-manifest.json \
+  artifacts/verification/f09-binary-build-20261105/manifest-static
+python3 -m tools.generate_mlxvlm_binary_consumer \
+  artifacts/verification/f09-binary-build-20261105/manifest-static \
+  artifacts/verification/f09-binary-build-20261105/manifest-static/artifact-manifest.json \
+  /private/tmp/f09-binary-consumer-fresh
+```
+
+## 2026-11-05 real static binary closure and device resource smoke
+
+The user adopted the exact compatibility overlay for isolated local build
+validation. A new committed SDK snapshot (`f3899bb`) and fresh local clones of
+all12 lock pins plus both MLX C submodules compiled in Release/library-evolution
+mode for device and arm64 simulator. The production checkout/cache/lock were not
+patched. Xcode27.2/Swift6.4.2 were used, with automatic dependency resolution
+and updates disabled; no new dependency/model was downloaded.
+
+`tools/package_mlxvlm_static_slices.py` forms one static framework from each
+actual Swift target object and emitted textual interfaces. The four native
+target objects are assigned once: Cmlx/cLogSupport to MLX, _NumericsShims to
+RealModule, yyjson to Hub. All20 modules have real device+simulator XCFrameworks
+and public interfaces, inspected using actual lipo/otool data. No serialized
+Swift module is shipped, so the consumer must compile textual interfaces.
+Static archive support was observed RED→GREEN, including a real mixed-platform
+archive rejected by the inspector. Helper/layout tests13/13 pass.
+
+An isolated consumer copy contains only20 XCFrameworks, four public C header/
+module-map directories and runtime bundles. Its Xcode graph has no Swift package
+reference; device and simulator Release builds passed, and compile logs contain
+no checkout path. This experiment uses a generated local project, not yet the
+final manifest-driven generator or completed public package command. Static
+frameworks are linked without embedding; libc++, Accelerate and Metal are
+explicit, while resources are copied by platform.
+
+On the existing iPhone16 Pro Max/iOS27.0.1, signed consumer PID2073 completed:
+actual `SmolVLM2Model.manifest()` Bundle.module lookup, model metadata checks,
+`MTLDevice.makeLibrary(URL:)`, and `(MLXArray([1,2,3])+1).sum()==9`.
+This runs a small MLX compute path, not model inference or benchmark acceptance.
+PID2073 was terminated/confirmed absent and the ordinary Demo returned without
+validation arguments. No camera/microphone/Photos/private-media access occurred.
+
+The first resource report failed: the generator compared the manifest's local
+store key directly with the different upstream repository ID. Real device RED
+was retained; the corrected upstreamURL/revision/backend comparison passed.
+No SDK model identity or canonical JSON bytes were changed.
+
+Generated Metal bytes differ from the historical SDK27.1 diagnostic reference:
+device SHA256 `ffb9130912e0efd770e62e721e1a475377f44fae329b64fc06e83bd4424f2a04`.
+The canonical JSON stays `c074e693cc0fb9cfb19d6e7a393ffb113108e88d1489a387e8cb06d309602d54`.
+Both platforms retain their separately compiled bundles. The old artifact
+schema's single canonical Metal pin is unchanged and does not accept this new
+staging set. A per-platform build/source/toolchain resource provenance contract
+is still required; no hash mismatch was bypassed and no final manifest is claimed.
+
+Full tools278/278 (47.963s), Python checks and protected9/production-lock/original
+12 working-tree checks pass. Official-doc specialist returned429 without a
+result; no new independent packaging review is claimed. Evidence is ignored in
+`artifacts/verification/f09-binary-build-20261105/`: source snapshot, clone/overlay
+receipt, both source builds, actual20-framework inventories, source-free consumer
+builds, signed App inventory and failed/final device reports.
+
+Remaining F09 gates: reusable complete packaging entry, C/static/per-platform
+resource manifest support, notices and dependency tests, local ZIP and second
+SwiftPM binary consumer, final independent review. F09 and release remain
+`open/not-ready`; historical statements that no real20-module binary or binary
+consumer exists are superseded only within this documented staging experiment.
+
+
 ## 2026-11-04 existing complete source objects recovered
 
 An existing natural-video build cache has readable fixed-revision Git objects

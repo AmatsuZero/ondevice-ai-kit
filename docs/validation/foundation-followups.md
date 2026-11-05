@@ -1,5 +1,9 @@
 # Foundation 后续专项
 
+2026-11-05 F09后续：正式v2清单和generator两平台build、20真实本地ZIP/checksum/SwiftPM解析及第二ZIP消费者两平台编译链接均已通过，真机正式清单绑定资源报告通过。staging审查两项缺陷已复现并修复；完整pipeline仍需正式package入口/依赖测试，binary模型推理和release许可/验收开放。详见[最新分发证据](apple-mlxvlm-distribution.md#2026-11-05-manifest-driven-static-artifacts-and-zip-consumers)。下段staging缺口为历史。
+
+2026-11-05 F09：用户已采用隔离兼容overlay继续本地构建；fresh完整固定依赖和SDK快照实际形成20个静态双sliceXCFramework，搬移binary-only消费者device/simulator编译链接通过，真机Bundle.module/Metal加载与MLX小算术通过。正式manifest的C/static/逐平台资源来源、package入口、notices/依赖测试及ZIP第二consumer尚缺，F09不关闭。见[真实二进制证据](apple-mlxvlm-distribution.md#2026-11-05-real-static-binary-closure-and-device-resource-smoke)。
+
 2026-11-05 F05交付追加：离线 ASR 的独立 published AAR consumer 已通过 sherpa Debug/Release、原有三 flavor Debug 及相关 lint；关闭 sherpa 选项也可在不提供 runtime 仓库时构建。真实依赖解析验证发布制品来源和可选隔离，未运行消费者录音。P11 的 Android ASR 行改为有界基本功能通过，系统 Google 资源和准确性/生命周期/资源等缺口保留。见[验证](android-sherpa-asr.md#independent-published-consumer--2026-11-05)。
 
 2026-11-05 F05最新：可选 `sherpa.onnx.whisper` 无需 Google/系统语言包，固定样本真实推理已通过，但用户两次分别授权的普通麦克风尝试均内容错误，不能验收。现场噪音较大；合成静音/纯噪声假文本已复现，新增同runtime固定MIT Silero VAD后两者真实拒绝，干净/SNR10英文仍匹配，SNR0仍错；系统session降噪可用时启用，现场修复效果待新的授权实测。新增无语音映射与模型准备互斥/初始化防崩溃回归。详见[当前证据](android-sherpa-asr.md)。修复版第三次单独授权采音后用户确认基本正确、少量漏错词，基本功能可用；三次授权均已消耗。系统ASR、质量/生命周期/最低系统与发布缺口保留，未纳入统一benchmark。

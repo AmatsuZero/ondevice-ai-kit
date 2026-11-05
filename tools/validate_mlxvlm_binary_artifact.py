@@ -140,7 +140,8 @@ def validate_manifest(manifest_path: Path, artifact_root: Path) -> None:
     except (OSError, json.JSONDecodeError) as error:
         _fail(f"manifest is not valid JSON: {error}")
     _require(isinstance(payload, dict), "manifest must be an object")
-    _require(payload.get("schemaVersion") == SCHEMA_VERSION, "unsupported schemaVersion")
+    schema_version = payload.get("schemaVersion")
+    _require(schema_version in (SCHEMA_VERSION, 2), "unsupported schemaVersion")
     _require(payload.get("kind") == KIND, "unsupported artifact kind")
     _require(_commit(payload.get("sourceCommit")), "sourceCommit must be a full commit SHA")
     toolchain = payload.get("toolchain")
@@ -188,7 +189,7 @@ def validate_manifest(manifest_path: Path, artifact_root: Path) -> None:
         if path.name == "smolvlm2-model.json":
             _require(actual == EXPECTED_MODEL_SHA256,
                      f"{label} canonical model sha256 mismatch: {actual}")
-        if path.name == "default.metallib":
+        if path.name == "default.metallib" and schema_version == SCHEMA_VERSION:
             _require(actual == EXPECTED_METAL_SHA256,
                      f"{label} canonical Metal sha256 mismatch: {actual}")
     _require(any(Path(value).name == "smolvlm2-model.json" for value in resource_paths),
@@ -273,6 +274,9 @@ def validate_manifest(manifest_path: Path, artifact_root: Path) -> None:
 
     _require(shipped == closure_set,
              f"module closure is incomplete: missing {sorted(closure_set - shipped)}")
+    if schema_version == 2:
+        from tools.validate_mlxvlm_static_artifact import validate_static_manifest
+        validate_static_manifest(payload, root)
 
 
 def _hash_matches_tree(path: Path, expected: Any, label: str) -> None:

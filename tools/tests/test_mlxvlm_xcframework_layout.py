@@ -126,6 +126,69 @@ class MLXVLMXCFrameworkLayoutTests(unittest.TestCase):
             "architectures": ["arm64"], "minimumOS": "17.0", "platforms": {"2"},
         })
 
+    @unittest.skipUnless(shutil.which("xcrun"), "Xcode toolchain unavailable")
+    def test_actual_static_archive_reports_member_platform(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            sdk = subprocess.check_output(["xcrun", "--sdk", "iphoneos", "--show-sdk-path"], text=True).strip()
+            obj = root / "Probe.o"
+            subprocess.run([
+                "xcrun", "clang", "-target", "arm64-apple-ios18.0", "-isysroot", sdk,
+                "-c", "-x", "c", "-o", str(obj), "-",
+            ], input="void probe(void) {}\n", text=True, capture_output=True, check=True)
+            archive = root / "Probe"
+            subprocess.run(["xcrun", "libtool", "-static", "-o", str(archive), str(obj)],
+                           capture_output=True, check=True)
+            self.assertEqual(_inspect_binary(archive), {
+                "architectures": ["arm64"], "minimumOS": "18.0", "platforms": {"2"},
+            })
+
+    @unittest.skipUnless(shutil.which("xcrun"), "Xcode toolchain unavailable")
+    def test_static_archive_with_mixed_platform_members_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            objects = []
+            for platform, triple in [("iphoneos", "arm64-apple-ios18.0"),
+                                     ("iphonesimulator", "arm64-apple-ios18.0-simulator")]:
+                sdk = subprocess.check_output(["xcrun", "--sdk", platform, "--show-sdk-path"], text=True).strip()
+                obj = root / f"{platform}.o"
+                subprocess.run(["xcrun", "clang", "-target", triple, "-isysroot", sdk,
+                                "-c", "-x", "c", "-o", str(obj), "-"],
+                               input=f"void {platform}(void) {{}}\n", text=True, capture_output=True, check=True)
+                objects.append(str(obj))
+            archive = root / "Mixed"
+            subprocess.run(["xcrun", "libtool", "-static", "-o", str(archive), *objects],
+                           capture_output=True, check=True)
+            with self.assertRaisesRegex(ValueError, "platform"):
+                _inspect_binary(archive)
+
+    @unittest.skipUnless(shutil.which("xcrun"), "Xcode toolchain unavailable")
+    def test_static_archive_reports_highest_member_deployment_target(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            sdk = subprocess.check_output(["xcrun", "--sdk", "iphoneos", "--show-sdk-path"], text=True).strip()
+            objects = []
+            # Modern SDKs remap the nonexistent iOS 19 deployment version to 26.
+            for version in (18, 26):
+                obj = root / f"Probe{version}.o"
+                subprocess.run(["xcrun", "clang", "-target", f"arm64-apple-ios{version}.0",
+                                "-isysroot", sdk, "-c", "-x", "c", "-o", str(obj), "-"],
+                               input=f"void probe{version}(void) {{}}", text=True, capture_output=True, check=True)
+                objects.append(str(obj))
+            archive = root / "MixedTargets"
+            subprocess.run(["xcrun", "libtool", "-static", "-o", str(archive), *objects],
+                           capture_output=True, check=True)
+            self.assertEqual(_inspect_binary(archive)["minimumOS"], "26.0")
+
+    def test_binary_requiring_higher_os_than_declared_is_rejected(self):
+        _, artifact = self.make_fixture()
+        self.binary_probe.stop()
+        with patch("tools.inspect_mlxvlm_xcframework._inspect_binary",
+                   side_effect=lambda binary: {"architectures": ["arm64"], "minimumOS": "19.0",
+                                              "platforms": {"7" if "simulator" in str(binary) else "2"}}):
+            with self.assertRaisesRegex(ValueError, "minimum OS"):
+                inspect_xcframework(artifact, "ODAIKitAppleMLXVLM", "18.0")
+
 
 if __name__ == "__main__":
     unittest.main()

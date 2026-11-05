@@ -23,19 +23,23 @@ def _inspect_binary(binary: Path) -> dict:
 
     try:
         file_output = subprocess.check_output(["file", "-b", str(binary)], text=True)
+        architecture_output = subprocess.check_output(["xcrun", "lipo", "-archs", str(binary)], text=True)
         load_commands = subprocess.check_output(["otool", "-l", str(binary)], text=True)
     except (OSError, subprocess.CalledProcessError) as error:
         raise ValueError(f"unable to inspect Mach-O binary {binary}: {error}") from error
-    if "Mach-O" not in file_output:
-        raise ValueError(f"not a Mach-O binary: {binary}")
-    architectures = sorted(set(re.findall(r"\b(?:arm64|arm64e|x86_64|i386)\b", file_output)))
+    if "Mach-O" not in file_output and "ar archive" not in file_output:
+        raise ValueError(f"not a Mach-O binary or static archive: {binary}")
+    architectures = sorted(set(re.findall(r"\b(?:arm64|arm64e|x86_64|i386)\b", architecture_output)))
     if not architectures:
         raise ValueError(f"Mach-O architecture is unavailable: {binary}")
     platforms = set(re.findall(r"\bplatform\s+(\d+)\b", load_commands))
+    if len(platforms) != 1:
+        raise ValueError(f"missing or mixed Mach-O platforms: {binary}")
     versions = re.findall(r"\bminos\s+(\d+(?:\.\d+){1,2})\b", load_commands)
     if not versions:
         raise ValueError(f"Mach-O deployment target is unavailable: {binary}")
-    return {"architectures": architectures, "minimumOS": min(versions, key=_version), "platforms": platforms}
+    # Every archive member must be usable on the declared deployment target.
+    return {"architectures": architectures, "minimumOS": max(versions, key=_version), "platforms": platforms}
 
 
 def _reject_symlink_escapes(path: Path, root: Path) -> None:
@@ -94,6 +98,8 @@ def inspect_xcframework(path: Path, module: str, minimum_os: str) -> dict:
         floor = binary_info["minimumOS"]
         if _version(floor) < _version(minimum_os):
             raise ValueError(f"{path}: Mach-O minimum OS below {minimum_os} in {identifier}")
+        if _version(floor) > _version(minimum_os):
+            raise ValueError(f"{path}: Mach-O minimum OS above declared {minimum_os} in {identifier}")
         interfaces = sorted((framework / "Modules" / f"{module}.swiftmodule").glob("*.swiftinterface"))
         public_interfaces = [item for item in interfaces if not item.name.endswith(".private.swiftinterface")]
         if not public_interfaces:

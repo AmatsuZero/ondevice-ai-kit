@@ -4,6 +4,22 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新 F09 续接 — 2026-11-05 正式清单/ZIP第二消费者已通过
+
+- 已继续执行用户批准的隔离兼容方案，无需再次申请。schema2覆盖20静态双slice/4C模块/18逐平台resource/22notice；schema1旧Metal硬pin保持，schema2按真实工具链/平台/source/overlay/output来源绑定。生产lock和九保护未变，未发布。
+- 正式generator的device/simulator consumer均通过，静态不embed、C头文件相对include、按平台copy bundles。20真实ZIP的完整字节/checksum/SwiftPM本地解析通过；第二ZIP binaryTarget consumer两平台编译链接通过，均仅一份probe SwiftFileList、20解压XCFramework、无checkout。
+- 正式manifest consumer真机资源报告通过且绑定manifest SHA b6648f76…0a8091，PID2134已终止并确认无，普通Demo恢复；先前reviewed staging PID2122额外通过MLX小算术。无模型推理/采音/私人媒体。driver初轮参数位置错误未启动App，修复后完成，不冒称首轮通过。
+- 独立staging审查两项finding均已RED→GREEN修复：写入失败UI不再passed，混合部署目标取最高floor且拒绝低报；正式报告带manifest hash。新v2审查429无结论、不计批准，最终全tools292/292；见 `artifacts/verification/f09-binary-build-20261105/summary-reviewed.json`，用verify-reviewed.py复核；旧summary/verify仅历史源码口径。
+- **下一项：正式可复用package入口/依赖测试**。保留的finalize.py/local-package.py/zip-consumer和完整输出可复用，勿重做模型下载或完整clone。仓库根未声明SDK源码redistribution license，notice标local-validation-only；远程发布仍无授权。模型binary推理和更广release/roadmap门槛未完成，goal保持active。
+
+## 最新 F09 续接 — 2026-11-05 真正20模块双slice与binary consumer已跑通
+
+- 用户明确选择隔离补丁方案继续本地构建，含已披露的未知 attention-mask fatalError 策略；无需重复询问。候选manifest/patch字节不改，单独decision receipt绑定；生产依赖/lock、原cache和九保护保持。
+- fresh12依赖/两C子模块本地clone＋f3899bb committed SDK snapshot＋固定overlay：device/simulator Release/library-evolution均通过。实际target .o按20模块组静态framework，四native对象各归属一次；真实20个双sliceXCFramework结构检查通过，只带文本接口。独立搬移binary consumer无package/checkout输入，两平台编译链接均过。
+- 新消费者在iPhone17,2/iOS27.0.1/PID2073真实Bundle.module模型查找、Metal加载和MLX小算术通过；不是模型推理/质量/性能。首次错误身份比较真实RED保留，生成器改upstreamURL/revision/backend后GREEN。PID已终止并确认无，普通Demo回前台，无采音/相机/私人媒体。
+- helper/layout13/13、全tools278/278通过；Xcode27.2/Swift6.4.2，device Metal新hash ffb91309…4f2a04不同旧规范pin，JSON canonical不变。**旧validator未放宽，新staging没有冒充final artifact manifest**。尚需正式package入口、C/static/逐平台资源来源schema、notices/依赖测试、ZIP+第二SwiftPM consumer与独立审查；F09/P4/P11/发布仍open/not-ready、goal active。
+- 原始证据/可续跑脚本与20产物在ignored `artifacts/verification/f09-binary-build-20261105/`，summary.json/static-stage-report.json/package.py；两个source builds与binary builds均terminal无后台进程。下一直接把已跑通实验接正式manifest/consumer路径，勿重做clone/编译或重新申请策略批准。新research agent429无结果，不重试。
+
 ## 最新交付续接 — 2026-11-05 离线 ASR 独立消费者
 
 - 用户确认修复后麦克风基本正确、仅少量漏错词；ASR 基本功能已可用，三次新采音授权均已消耗。当前工作无采音/设备操作。

@@ -7,12 +7,32 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import shlex
 import shutil
 import subprocess
 import tempfile
 
 from tools.inspect_mlxvlm_xcframework import inspect_xcframework
 from tools.validate_mlxvlm_binary_artifact import validate_manifest, _sha256_tree
+
+
+REPORT_WRITER = '''enum ReportWriteFailure: Error { case missingDirectory }
+
+func persistResourceReport(_ report: [String: String], directory: URL?) -> [String: String] {
+    do {
+        guard let directory else { throw ReportWriteFailure.missingDirectory }
+        let data = try JSONSerialization.data(withJSONObject: report, options: [.sortedKeys])
+        try data.write(to: directory.appendingPathComponent("binary-resource-report.json"), options: .atomic)
+        return report
+    } catch {
+        var failure = report
+        failure["status"] = "failed-report-write"
+        // Only the error type is exposed, never paths or payloads.
+        failure["errorType"] = String(reflecting: type(of: error))
+        return failure
+    }
+}
+'''
 
 
 APP = '''import SwiftUI
@@ -44,11 +64,15 @@ func resource(bundle name: String, file: String, ext: String, expected: String) 
 }
 
 func resourceSmoke() -> [String: String] {
-    var report = ["scope": "binary-resource-only", "inference": "not-run", "status": "failed"]
+    var report = ["scope": "binary-resource-only", "inference": "not-run", "status": "failed",
+                  "artifactManifestSHA256": ARTIFACT_MANIFEST_HASH]
     do {
         _ = try resource(bundle: MODEL_BUNDLE, file: "smolvlm2-model", ext: "json", expected: MODEL_HASH)
         let manifest = try SmolVLM2Model.manifest() // Actual SDK Bundle.module lookup.
-        guard manifest.modelId == SmolVLM2Model.identity.modelId else { throw ResourceFailure.hashMismatch }
+        // Manifest modelId is the local store key, not the upstream repository ID.
+        guard manifest.upstreamURL.path == "/" + SmolVLM2Model.identity.modelId,
+              manifest.upstreamRevision == SmolVLM2Model.identity.modelRevision,
+              manifest.backendId == SmolVLM2Model.backendId else { throw ResourceFailure.hashMismatch }
         report["modelBundleLookup"] = "passed"
         let metal = try resource(bundle: METAL_BUNDLE, file: "default", ext: "metallib", expected: METAL_HASH)
         guard let device = MTLCreateSystemDefaultDevice() else { throw ResourceFailure.unavailableMetal }
@@ -62,22 +86,21 @@ func resourceSmoke() -> [String: String] {
     return report
 }
 
+REPORT_WRITER
+
 @main struct MLXVLMBinaryConsumerApp: App {
     @State private var status = "Resource smoke not run"
     var body: some Scene {
         WindowGroup {
             Text(status).padding().task {
-                let report = resourceSmoke()
+                let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+                let report = persistResourceReport(resourceSmoke(), directory: directory)
                 status = report["status"] ?? "failed"
-                if let data = try? JSONSerialization.data(withJSONObject: report, options: [.sortedKeys]),
-                   let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                    try? data.write(to: directory.appendingPathComponent("binary-resource-report.json"), options: .atomic)
-                }
             }
         }
     }
 }
-'''
+'''.replace("REPORT_WRITER", REPORT_WRITER)
 
 
 def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
@@ -99,6 +122,17 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
         if not isinstance(value, str) or Path(value).is_absolute() or ".." in Path(value).parts or str(Path(value)) != value:
             raise ValueError(f"artifact/resource path must be canonical and relative: {value}")
     validate_manifest(manifest_path, root)
+    static = payload.get("schemaVersion") == 2
+    auxiliary = payload.get("cModules", []) + payload.get("notices", []) if static else []
+    if static:
+        auxiliary += [r["provenance"] for r in payload["resources"] if "provenance" in r]
+    for entry in auxiliary:
+        value = entry["path"]
+        if Path(value).is_absolute() or ".." in Path(value).parts or str(Path(value)) != value:
+            raise ValueError(f"auxiliary path must be canonical and relative: {value}")
+        path = root / value
+        if path.is_symlink() or any(p.is_symlink() for p in path.rglob("*")):
+            raise ValueError(f"auxiliary symlink prevents relocation: {value}")
     if not {"ODAIKitAppleMLXVLM", "ODAIKitMultimodal"}.issubset(payload["moduleClosure"]):
         raise ValueError("binary consumer requires AppleMLXVLM and Multimodal modules")
     for entry in payload["artifacts"]:
@@ -111,9 +145,10 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
 
     # SwiftPM bundle names are part of Bundle.module's runtime contract. Keep
     # bundles intact and copy them to the App's resource root, not loose files.
-    bundles: dict[str, Path] = {}
+    bundles: dict[tuple[str, str], Path] = {}
     bundle_paths: set[Path] = set()
-    canonical: dict[str, dict] = {}
+    canonical: dict[tuple[str, str], dict] = {}
+    platform_bundles: dict[str, set[Path]] = {"device": set(), "simulator": set()}
     for resource in payload["resources"]:
         path = root / resource["path"]
         parents = [p for p in path.parents if p != root and p.is_relative_to(root) and p.suffix == ".bundle"]
@@ -125,15 +160,19 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
         for child in bundle.rglob("*"):
             if child.is_symlink():
                 raise ValueError(f"resource bundle symlinks are unsupported: {child}")
-        previous = bundles.get(bundle.name)
+        platform = resource["platform"] if static else "all"
+        key = (platform, bundle.name)
+        previous = bundles.get(key)
         if previous is not None and _sha256_tree(previous) != _sha256_tree(bundle):
             raise ValueError(f"conflicting resource bundle copies: {bundle.name}")
-        bundles[bundle.name] = bundle
+        bundles[key] = bundle
         bundle_paths.add(bundle)
+        if static:
+            platform_bundles[platform].add(bundle)
         if path.name in {"smolvlm2-model.json", "default.metallib"}:
             if path.parent != bundle:
                 raise ValueError(f"canonical resource must be at bundle root: {resource['path']}")
-            canonical[path.name] = {"bundle": bundle.stem, "sha256": resource["sha256"]}
+            canonical[(platform, path.name)] = {"bundle": bundle.stem, "sha256": resource["sha256"]}
 
     output.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix=".mlxvlm-binary-consumer-", dir=output.parent) as scratch:
@@ -145,25 +184,45 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
             destination = stage / relative
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copytree(root / entry["path"], destination, symlinks=True)
-            dependencies.append({"framework": str(relative)})
+            dependencies.append({"framework": str(relative), **({"embed": False} if static else {})})
         for bundle in sorted(bundle_paths):
             relative = Path("artifacts") / bundle.relative_to(root)
             destination = stage / relative
             if not destination.exists():
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copytree(bundle, destination)
-        resources = [{"path": str(Path("artifacts") / bundle.relative_to(root)),
-                      "buildPhase": "resources", "type": "file"} for bundle in bundles.values()]
+        for entry in auxiliary:
+            source_path = root / entry["path"]
+            target = stage / "artifacts" / entry["path"]
+            if not target.exists():
+                target.parent.mkdir(parents=True, exist_ok=True)
+                if source_path.is_dir():
+                    shutil.copytree(source_path, target)
+                else:
+                    shutil.copyfile(source_path, target)
+        resources = [] if static else [
+            {"path": str(Path("artifacts") / bundle.relative_to(root)), "buildPhase": "resources", "type": "file"}
+            for bundle in bundles.values()]
         (stage / "artifact-manifest.json").write_bytes(manifest_path.read_bytes())
         validate_manifest(stage / "artifact-manifest.json", stage / "artifacts")
-        source = APP
-        for marker, value in {
-            "MODEL_BUNDLE": canonical["smolvlm2-model.json"]["bundle"],
-            "MODEL_HASH": canonical["smolvlm2-model.json"]["sha256"],
-            "METAL_BUNDLE": canonical["default.metallib"]["bundle"],
-            "METAL_HASH": canonical["default.metallib"]["sha256"],
-        }.items():
-            source = source.replace(marker, json.dumps(value))
+        source = APP.replace("ARTIFACT_MANIFEST_HASH", json.dumps(hashlib.sha256(manifest_path.read_bytes()).hexdigest()))
+        def constants(platform):
+            return {
+                "MODEL_BUNDLE": canonical[(platform, "smolvlm2-model.json")]["bundle"],
+                "MODEL_HASH": canonical[(platform, "smolvlm2-model.json")]["sha256"],
+                "METAL_BUNDLE": canonical[(platform, "default.metallib")]["bundle"],
+                "METAL_HASH": canonical[(platform, "default.metallib")]["sha256"],
+            }
+        if static:
+            declarations = "#if targetEnvironment(simulator)\n"
+            declarations += "\n".join(f"let {k} = {json.dumps(v)}" for k, v in constants("simulator").items())
+            declarations += "\n#else\n"
+            declarations += "\n".join(f"let {k} = {json.dumps(v)}" for k, v in constants("device").items())
+            declarations += "\n#endif\n\n"
+            source = source.replace("// Compiled against", declarations + "// Compiled against", 1)
+        else:
+            for marker, value in constants("all").items():
+                source = source.replace(marker, json.dumps(value))
         (stage / "ConsumerApp.swift").write_text(source)
         spec = {"name": "MLXVLMBinaryConsumer", "options": {"deploymentTarget": {"iOS": "18.0"}},
                 "targets": {"MLXVLMBinaryConsumer": {
@@ -172,6 +231,25 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
                     "settings": {"base": {"PRODUCT_BUNDLE_IDENTIFIER": "io.ondeviceai.mlxvlmbinaryconsumer",
                         "SWIFT_VERSION": "6.0", "ARCHS": "arm64", "GENERATE_INFOPLIST_FILE": "YES",
                         "CODE_SIGNING_ALLOWED": "NO", "INFOPLIST_KEY_UILaunchScreen_Generation": "YES"}}}}}
+        if static:
+            target = spec["targets"]["MLXVLMBinaryConsumer"]
+            c_paths = [str(Path("artifacts") / entry["path"]) for entry in payload["cModules"]]
+            target["settings"]["base"].update({
+                "SWIFT_INCLUDE_PATHS": ["$(SRCROOT)/" + p for p in sorted({str(Path(p).parent) for p in c_paths})],
+                "HEADER_SEARCH_PATHS": ["$(SRCROOT)/" + p for p in c_paths],
+                "OTHER_LDFLAGS": "$(inherited) -lc++ -framework Accelerate -framework Metal",
+                "ENABLE_USER_SCRIPT_SANDBOXING": "NO",
+            })
+            script = 'set -eu\ncase "$PLATFORM_NAME" in\n'
+            for platform, sdk in (("device", "iphoneos"), ("simulator", "iphonesimulator")):
+                script += sdk + ")\n"
+                for bundle in sorted(platform_bundles[platform]):
+                    relative = str(Path("artifacts") / bundle.relative_to(root))
+                    script += 'cp -R -- "$SRCROOT"/' + shlex.quote(relative) + ' "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/"\n'
+                script += ";;\n"
+            script += '*) echo "Unsupported resource platform" >&2; exit 1 ;;\nesac\n'
+            target["postBuildScripts"] = [{"name": "Copy platform resource bundles", "script": script,
+                                            "basedOnDependencyAnalysis": False}]
         # JSON is a YAML subset understood by the already-installed XcodeGen.
         (stage / "project.json").write_text(json.dumps(spec, indent=2) + "\n")
         subprocess.run(["xcodegen", "generate", "--spec", str(stage / "project.json"), "--project", str(stage)],
