@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-11-05 F12同源码Apple/shared：Apple481、KMP24、shared80及Swift→Demo四组133项全部通过，基础Demo unsigned双平台/原生消费者构建与framework链接成功，见[精确候选边界](apple-committed-candidate.md)。外部Klib/产品树已固定，Skiko仍0.144.6；无增强MLX/OpenCV整App、当前设备运行或benchmark新增。9行gap及P4/P11/发布open/not-ready保持。
+
 2026-11-05 F12补充同一b90e7830普通候选：固定ASR全文/原生生命周期、SR双帧AAC及独立解码PTS/packet、Identity两候选/未校准拒绝/purge、普通MLKit固定图和布局通过；TTS在无服务/默认引擎null的专用AVD初始化真实失败。68项复核验证这些记录，不是全能力通过。临时文件/test包清理，原普通APK/模型/no_backup摘要/拒绝权限保持，见[同候选边界](android-committed-candidate.md#同一-apk-补充运行asrsridentity人脸与-tts)。9行gap与P4/P11/发布open/not-ready保持。
 
 2026-11-05 F12精确候选：e0438c0归档953文件/14固定输入的组合Android包已offline强制重建，586项JVM与20模块lint无错误；外部依赖/包内资源/完整提交身份核验。新APK b90e7830在专用软件GPU模拟器普通固定红图取消/drain/同PID重入成功及清理44项通过，见[边界](android-committed-candidate.md)。这不是新包全能力或真机验收；9行gap、P4/P11与发布仍open/not-ready，不新增benchmark样本。

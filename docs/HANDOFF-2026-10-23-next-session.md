@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F12 续接 — 2026-11-05 同一候选其他能力运行已验
+## 最新 F12 续接 — 2026-11-05 同源码 Apple/shared host 与基础构建已验
+
+- 复用e0438c0既有归档，fresh提取953文件/执行位并在各阶段回读；Apple host481、KMP24、shared80及Swift→Demo四组桥接133项全部通过，无失败/跳过。Gradle offline/no-build-cache/rerun-tasks 35/35执行；Binding simulator/shared双平台framework、基础speech/video/multimodal UI Demo unsigned双平台、NativeConsumer simulator构建成功，完整sdkCommit匹配。
+- 六组iOS编译/测试配置120条外部artifact引用/80实际文件及6产品树固定；生产Skiko仍0.144.6，F02生产分发未切换。桥接使用注入后端，不是增强MLX/OpenCV整App、真机或普通UI/权重推理验收。Kotlin cache路径与既有XCTest QoS警告保留；无新增benchmark/下载/采集/签名或手机操作。
+- [验证](validation/apple-committed-candidate.md)，ignored `apple-committed-candidate-20261105/summary.json` SHA79c0bca1…d3f5ff；只读verify可回读，全部构建/测试已terminal，无pending。9保护/生产lock保持。两个现有Android AVD均无TTS服务/default null，不重复测试或安装资源。
+- 下一推进同源码增强Apple整App与适当设备、当前Android候选TTS/真机、完整审查/许可和生产交付。旧F09二进制构建与已通过Android模型验证不重做；P4/P11/发布仍open/not-ready，基础10/12，goal active。
+
+## 上一 F12 续接 — 2026-11-05 同一候选其他能力运行已验
 
 - 复用e0438c0精确源码/普通APK b90e7830，不重建普通App；6份仅测试APK各绑定953source与既有英文PCM，专用API36 AVD顺序执行。固定ASR全文匹配/13项JNI生命周期、布局、ESRGAN双帧AAC音轨/取消重入/lease与独立完整解码PTS/packet、Identity两候选/未校准拒绝/purge撤销/lease均通过；普通Browse→DocumentsUI NASA选图后MLKit显示1人脸/512×512与框。
 - **TTS实际失败**：本AVD无TTS服务且默认引擎null，初始化-1；未安装/下载，不算通过。其余基本功能通过不替代真实采集、自然质量/资源/minOS/完整provider或全能力验收。
