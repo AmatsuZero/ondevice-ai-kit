@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F12 续接 — 2026-11-05 同源码增强 Apple 整 App 已构建
+## 最新 F12 续接 — 2026-11-05 精确编译 Apple 隔离变体真机 smoke
+
+- 复用e0438c0既有MLX device产物，只在隔离副本改App/runner bundle ID并沿用既有签名；7份Mach-O含通用架构/UUID/section与原始编译一致，未重建。iPhone17,2/iOS27.2/24B119上64×64白图Swift/KMP→Apple Vision回调成功、0人脸；ModelStore设备manifest与14实际安装模型回读哈希全部匹配。没有多模态生成或新benchmark。
+- 普通UI/TTS四用例在系统automation mode初始化超时，实际0执行/0通过；触摸工具同样代理超时。不重复同一失败门槛。失败后Xcode诊断收集卡住，经精确PID/命令核对SIGINT→SIGTERM收尾/exit143；不是产品用例失败或通过。首轮无对应私钥的证书选择失败和fresh唯一匹配重试保留，未创建/更改签名资产。
+- [限定证据](validation/apple-committed-candidate.md#隔离签名变体真机-smoke-与系统-ui-门槛)，ignored `apple-candidate-runtime-20261105/summary.json` SHA79896e19…d68fa；23阶段全terminal，候选已停、独立UI runner卸载、原OpenCV Demo恢复，全部既有安装URL未变。新隔离候选/模型留手机，不重复安装/复制。9保护/生产lock保持，无采集/私人媒体/下载。TECNO当前ADB unauthorized，未操作。
+- 下一推进系统入口条件变化后的当前候选普通UI/模型生成，或独立OpenCV候选运行/当前Android真机TTS与完整审查、许可/生产交付。不要将alias变体或历史F09证据改标为原bundle全能力通过；不重跑已完成构建/模型下载。基础10/12，P4/P11/发布open/not-ready，goal active。
+
+## 上一 F12 续接 — 2026-11-05 同源码增强 Apple 整 App 已构建
 
 - 接e0438c0/953固定源码及既有KMP framework，不重跑718基础测试/F09打包。12依赖/2C子模块从完整本地Git对象自包含clone，6878源文件逐一核对原始blob；没有overlay、下载或生产依赖切换。旧SourcePackages alternate失效保留，未修改旧缓存。
 - MLX完整Demo unsigned generic iOS+simulator均构建成功；OpenCV Identity独立Demo unsigned generic iOS构建成功，host契约6/6。三App完整sdkCommit/arm64、MLXVLMBackend/Metal/描述资源及OpenCV native/Swift符号检查通过；3产品树/664实际Swift输入哈希固定。两个独立变体，不称组合App；OpenCV无arm64 simulator，不算通过。

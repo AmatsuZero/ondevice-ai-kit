@@ -2,7 +2,48 @@
 
 状态：同一源码候选的 Apple host、KMP/shared iOS 单测、基础 Demo/消费者构建和注入后端桥接测试通过。
 后续已补同源码增强 MLX 双平台与 OpenCV Identity 设备目标整 App 构建，见下节。
-当前候选真机、模型推理和普通 UI 验收尚未执行；发布仍 `open/not-ready`。
+已补精确编译代码的隔离签名变体真机 smoke 和模型安装；普通 UI 入口被系统自动化超时阻断，多模态生成未执行。
+发布仍 `open/not-ready`。
+
+## 隔离签名变体真机 smoke 与系统 UI 门槛
+
+复用上述 e0438c0 的既有 device 编译产物，不重新构建或修改源码。原 bundle ID 已在手机安装，
+因此仅在新的副本中将 App ID 改为 `io.ondeviceai.candidate.e0438c0.multimodal`，
+UI runner 也使用独立 ID；沿用现有 wildcard profile 和唯一匹配的本机签名身份。
+App 的 Info.plist 除 bundle ID 外完全相同；7份 Mach-O（含通用二进制及 dSYM）各架构 UUID、
+全部有效 section 内容均与原编译产物一致。原 unsigned App、签名资产、生产 lock、9保护路径不变。
+
+在 iPhone17,2 / iOS27.2 / 24B119 上得到以下限定证据：
+
+- 既有 `--smoke-blank` 入口完成 Swift→KMP/共享 VM→Apple Vision→回调：64×64 合成白图、
+  `apple.vision.face`、0张脸、完整 sdkCommit 匹配，runId `A3B566E9-F6ED-4402-A337-03CB259169CD`。
+  这是固定负样本链路，不是自然人脸质量或真实触摸验收。
+- 既有 `--multimodal-mlx-local-model` 入口完成 ModelStore 安装；设备 manifest 与 committed 描述逐字段一致，
+  14个实际安装文件回读后字节数/SHA全部匹配。进程 PID2439 与 host factory 的视频临时目录已观察到；
+  **没有请求多模态生成，不能据此声称权重推理或普通 UI 可用**。
+- 4项既有普通 UI/TTS/文件取消用例计划执行，但 runner 在系统 `enabling automation mode` 初始化超时，
+  **实际执行0项、通过0项**。触摸工具也等待测试代理超时。失败后的 Xcode 诊断收集未结束，
+  经完整命令/PID核对后 SIGINT、SIGTERM 收尾，host exit143；不把该退出码当产品用例失败或通过。
+
+首轮签名误选 profile 中没有本机私钥的第一张证书，安装前失败；保留失败副本/收据，
+fresh retry1 改为与既有可用身份求唯一交集，没有创建证书或修改 keychain/profile。
+报告和安装 manifest 的首次读取早于生成，第二次读取成功，没有重复启动同一请求。
+
+候选已停止，独立 UI runner 已卸载；新候选和模型保留，原 `io.ondeviceai.opencv.demo` 已恢复。
+所有既有 App 的安装 URL 均未改变。TECNO 当前 ADB unauthorized，本轮未操作其可用 Demo 或模型。
+无采音/拍摄/私人媒体、新依赖下载或 benchmark 样本；23个设备/测试阶段全部 terminal，无pending。
+这些是**改变 bundle ID 的隔离签名变体**证据，不能升级为原 bundle 或全部能力验收。
+
+原始证据：ignored `artifacts/verification/apple-candidate-runtime-20261105/`；
+summary SHA-256 `79896e19274765045aa0591919900e6967531c37ffe109591ee4821d6edd68fa`。
+完整失败日志、签名输入、安装模型回读、设备与恢复收据均保留；只读复核：
+
+```sh
+rtk proxy python3 artifacts/verification/apple-candidate-runtime-20261105/verify.py
+```
+
+下一为系统自动化入口恢复后的当前候选普通 UI/模型生成、独立 OpenCV 候选运行、Android 当前候选
+支持 TTS 引擎的真机验证，以及完整审查/生产交付/许可。未改变原9行gap或P4/P11发布门槛。
 
 ## 增强 MLX 与 OpenCV Identity 整 App 构建
 

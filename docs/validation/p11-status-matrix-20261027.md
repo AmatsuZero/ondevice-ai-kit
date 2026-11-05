@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-11-05 F12当前编译候选真机追加：隔离bundle的既有编译代码/签名在iPhone17,2/iOS27.2完成合成负样本Vision回调与14个ModelStore安装文件回读核验，见[证据](apple-committed-candidate.md#隔离签名变体真机-smoke-与系统-ui-门槛)。普通UI/TTS在系统automation mode初始化超时，0执行/0通过；无多模态生成/benchmark新增。原App恢复且安装URL不变；限定alias变体，不提升原9行gap、P4/P11或发布。
+
 2026-11-05 F12增强Apple：同e0438c0源码的MLX完整Demo unsigned双平台、独立OpenCV Identity Demo设备构建和6项可选host契约通过，真实链接符号/模型描述/Metal与3产品树已核验，见[证据](apple-committed-candidate.md)。6878上游源文件未加补丁；没有当前候选安装/模型或UI运行、新benchmark或采集。9行gap/P4/P11/发布保持open/not-ready。
 
 2026-11-05 F12同源码Apple/shared：Apple481、KMP24、shared80及Swift→Demo四组133项全部通过，基础Demo unsigned双平台/原生消费者构建与framework链接成功，见[精确候选边界](apple-committed-candidate.md)。外部Klib/产品树已固定，Skiko仍0.144.6；无增强MLX/OpenCV整App、当前设备运行或benchmark新增。9行gap及P4/P11/发布open/not-ready保持。

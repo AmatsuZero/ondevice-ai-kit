@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-05 F12真机追加：[精确编译隔离变体](apple-committed-candidate.md#隔离签名变体真机-smoke-与系统-ui-门槛)在iPhone17,2/iOS27.2完成合成白图Vision回调和14安装模型回读哈希核验；普通UI/TTS四项在系统automation初始化超时，实际0执行/0通过。无新构建/采集/benchmark；候选已停、独立runner卸载、原Demo恢复、既有App安装URL不变。不是原bundle全能力或多模态生成验收；9行gap与P4/P11/发布open/not-ready保持。
+
 2026-11-05 F12增强Apple：[同源码整App](apple-committed-candidate.md)MLX unsigned双平台与独立OpenCV Identity设备目标构建通过，6878原始依赖文件/3产品树/664Swift输入固定，可选host契约6/6。没有F09 overlay或下载，也没有当前候选设备运行/采集结论；两个变体不称组合App，OpenCV arm64 simulator仍不支持。9保护/lock/普通手机Demo保持，P4/P11与发布仍open/not-ready。
 
 2026-11-05 F12同源码Apple/shared：[e0438c0隔离候选](apple-committed-candidate.md)953文件回读，Apple481/KMP24/shared80及四组Swift→Demo桥接133项通过；基础Demo unsigned双平台、NativeConsumer simulator和三份KMP framework链接成功。80外部Klib文件/6产品树固定，Skiko仍生产0.144.6；无增强MLX/OpenCV整App或设备运行结论。9保护/lock保持，无新采集/benchmark/下载，P4/P11与发布仍open/not-ready。
