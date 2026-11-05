@@ -1,6 +1,37 @@
 # 精确提交 Android 组合候选 — 2026-11-05
 
-状态：Android 构建、固定单图 LM、固定英文 ASR/原生生命周期、SR、Identity 与普通人脸检测已通过限定验证；本 AVD 的 TTS 因无引擎初始化失败。全能力候选验收仍未完成，P4/P11 与发布保持 `open/not-ready`。
+状态：Android 构建、固定单图 LM、固定英文 ASR/原生生命周期、SR、Identity 与普通人脸检测已通过限定验证；本 AVD 的 TTS 因无引擎初始化失败。后续已在 TECNO 观察到同一候选 TTS 正常播放、取消及重入，但最终测试结果包未取得，见下节。全能力候选验收仍未完成，P4/P11 与发布保持 `open/not-ready`。
+
+## 当前候选真机 TTS：生命周期已观察，最终结果仍缺
+
+TECNO KM9 / API35 的 ADB 授权恢复后，先核对原普通 App `afed156b…926c461`、Identity 测试包及 runner、
+12份授权模型/附属文件摘要和原权限；手机已有 `com.google.android.tts` 服务，默认引擎设置仍为 `null`。
+临时以 `install -r` 装入既有精确 `b90e7830…a64d8d` 普通候选及既有固定 TTS 测试包 `b6d7dc91…fbacb1a`，
+没有重建、清 App 数据或请求下载。三个固定文本请求的 PID23421、23591、23879 均记录到：
+Google TTS 绑定 → `normal-start/normal-done` → 活动请求 `completed=false` → `cancel-joined` → `followup-done`。
+这证明当前候选已在手机实际执行正常播放、取消等待和后续重入，不再把该手机描述为“无 TTS 引擎”。
+
+三轮 host 观察均 exit255；每次经目标进程缺席、无活动 instrumentation 和系统 `due to finished inst`
+退出记录确认原请求结束后才进入下一轮，没有因观察超时并发重启。第二轮的设备文本文件和第三轮官方 `am instrument -f`
+protobuf 都只留下开始状态。官方 `-f` 实际落在 external-storage 前缀下的同一指定路径，已找到、回读核对 SHA 并精确删除；
+153字节 protobuf 原件保留。**没有最终 pass/result bundle，不能声称3项测试通过，close断言、voice/outputBytes 仍未证**。
+也没有普通 UI、人工听感、完整离线或网络 voice 验收；不再重复这组三次请求。
+
+恢复原包的首次流式安装因 USB 短断失败；按实际包摘要确认仍是候选后，将原 APK 完整 USB 复制到唯一临时路径、
+核对设备 SHA，再本地 `pm install -r` 成功。原普通 App/test/Identity runner 已恢复，12模型/附属摘要、
+权限、TTS 服务/设置与前置快照相同，普通 MainActivity 已启动；临时文本/protobuf/回退 APK 均精确清理。
+无相机/麦克风采集、私人媒体或新 benchmark 样本；不推断系统 TTS 的内部联网行为。
+
+原始证据为 ignored `artifacts/verification/android-exact-physical-tts-20261105/`，
+状态 `partial-physical-TTS-lifecycle-observed-final-result-unavailable`。只读复核：
+
+```sh
+rtk proxy python3 artifacts/verification/android-exact-physical-tts-20261105/verify.py
+```
+
+summary SHA-256 `0ff5a3dacc89409ccd2257875368eb9b027c7ed03107ada1ebae975ae5d7ac58`。
+
+## 原始精确候选构建
 
 本次从提交 `e0438c030a987ceeff9f9207c2475684749e4d8b` 生成独立源码归档，tree 为
 `1a79aabdc997ca99fe441a02b9cb54982ce2c34c`，归档 SHA-256 为

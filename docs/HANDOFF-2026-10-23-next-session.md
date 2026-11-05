@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F12 续接 — 2026-11-05 两种 Apple 隔离变体首屏已显示
+## 最新 F12 续接 — 2026-11-05 Android 精确候选真机 TTS 已观察
+
+- TECNO ADB授权恢复，已有Google TTS服务。先核对原afed普通包/Identity测试runner/12模型附属摘要和权限，再临时装既有b90e精确候选＋b6d7固定TTS测试包；无重建/清数据/下载请求/采集。PID23421/23591/23879均观察normal-done、活动取消join与followup-done，见[真机范围](validation/android-committed-candidate.md#当前候选真机-tts生命周期已观察最终结果仍缺)。
+- 三轮观察host255，文本与官方-f protobuf仅开始状态；系统finished-inst/目标PID与活动instrumentation缺席证明终结，没有并发重启。最终pass/close断言与voice/outputBytes未证，0项最终通过可证明，不继续循环重试。原始证据 `android-exact-physical-tts-20261105/` 的只读verify核对三轮日志/退出、恢复及保护状态，不把记录一致性当功能全通过。
+- 原afed普通App/test/Identity runner已恢复，12模型附属摘要/权限/TTS设置保持，普通Demo启动；首次流式恢复USB短断保留，改完整复制/SHA后本地安装成功，临时APK/文本/protobuf精确清理。readiness为 `artifacts/verification/p11-readiness-20261105-exact-android-tts/summary.json`；9行gap/8组统计/基础10/12/P4/P11/发布open-not-ready保持，目标未完成。
+
+## 上一 F12 续接 — 2026-11-05 两种 Apple 隔离变体首屏已显示
 
 - 复用既有OpenCV Identity编译产物，只改隔离副本bundle ID/显示名并沿用签名；3份Mach-O UUID/section未变。官方devicectl截图显示稳定普通首屏、YuNet/SFace导入提示、原型/未校准声明及灰色注册按钮。既有MLX alias稳定首屏与五能力页签也已截图；切换动画截图保留但不计稳定显示。详见[限定证据](validation/apple-committed-candidate.md#两种隔离变体的真机首屏渲染)。
 - 只有显示证据，没有点击、picker、模型导入、注册或生成。CUA native pipe启动失败，一次reset后仍失败、未发送输入；此前XCTest/移动代理超时不重试。ignored `apple-identity-candidate-runtime-20261105/summary.json` SHA3c65545c…654b6，只读verify通过，21阶段terminal/0pending；两候选停止、原Demo恢复、41既有安装URL/9保护/生产lock保持，无采集/下载/新benchmark。

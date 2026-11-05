@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261105-exact-apple-rendering/summary.json",
-    "sha256": "a006ba4821501895820f027c8fe6bbed1a1cbcf137479e323d3dffba40aaf20f"
+    "path": "artifacts/verification/p11-readiness-20261105-exact-android-tts/summary.json",
+    "sha256": "7ce409aa54984b9962a3331c5f5768e6e0f77ef605d4676c0671a37bad699565"
   },
   "schemaVersion": 1,
   "sources": [
