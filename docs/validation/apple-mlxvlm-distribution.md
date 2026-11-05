@@ -1,5 +1,59 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-05 selected MLX dependency tests
+
+The adopted isolated dependency graph passed **230 logical tests /295 test-case
+executions,0 failures,0 skipped** on macOS27.2 arm64. This combines39 XCTest tests
+and191 Swift Testing tests, including parameterized cases. The8 unedited pinned
+upstream files cover KVCache, cache configuration, TurboQuant/attention,
+bidirectional attention masks, SmolVLM2 tiling, VLM processors, Gemma4 chunked
+prefill and the shared MatmulPrecision helper/probe. No model downloads are
+required; synthetic/random tensors exercise real MLX GPU kernels. Performance
+microbenchmarks were excluded explicitly, consistent with the deferred scope.
+This is a selected upstream suite, not a claim that every upstream test passed.
+
+The first test-host compile failed because it omitted the upstream
+MatmulPrecision helper. Adding that original file fixed the host input; no
+implementation, assertion or tolerance was changed. Both attempts, command
+arguments, copied-source hashes, xcresult and summary are retained under
+`artifacts/verification/f09-mlx-dependency-tests-20261105/`;`verify.py` rechecks
+the fixed dependency inputs, evidence, production lock and nine protected paths.
+Xcode resolution and package updates were disabled. These host tests supplement
+the independent iPhone binary inference below. Unknown future attention-mask
+cases still follow the explicitly adopted trap policy; they are not represented
+as runtime-compatible by these known-case tests.
+
+## 2026-11-05 binary-only fixed-model inference
+
+A fresh manifest-generated consumer of the final20 XCFrameworks completed real
+image and synthetic short-video generation on iPhone17,2. Its actual runtime
+report identifies **iOS27.2 /24B119**, replacing the older device OS assumption
+for this run. PID2184/runId`E68987B2-0AFA-4073-8539-D26F227DA31B` reports the exact
+artifact manifest `bd41785dde0cccf0c26f58d1abb363ceac2e9e52e822c5efb929e97585097efc`,
+SmolVLM2 model revision`fa57db46815177fbdfd65cc85a2b3416a8332268` and runtime
+revision`6e338e5df49424fc0db7c6d58184d622f92ed18a`. All14 model files were checked
+on the host and again inside the device sandbox before model installation.
+
+The public fixed image and29FPS synthetic video each returned nonempty text,
+matching backend/model identity and10/22 updates respectively. The client then
+drained/closed, model removal proved lease release, a closed client rejected a
+new request, owned video snapshots were absent and both fixture hashes remained
+unchanged. The exact PID was terminated and confirmed absent; ordinary Demo
+PID1433 was activated again. No recording, private media or new download occurred.
+Measured single-run intervals are diagnostic only, not P11 benchmark samples or
+quality/performance acceptance. Cancellation/reentry was not exercised in this
+binary probe; previous source-consumer evidence remains separately scoped.
+
+The signed Release build graph contains only`ConsumerApp.swift`, no source
+package/checkouts; all20 copied XCFramework trees match the final distribution.
+The probe is opt-in with`--binary-inference` and imports public SDK interfaces.
+Fresh evidence, scripts, frozen hashes and read-only`verify.py` are under
+`artifacts/verification/f09-binary-inference-20261105/`. The original packaging
+receipt remains immutable and correctly says inference was not run by that
+packaging command. This separate report supplies the new inference evidence;
+independent packaging review, redistribution licensing and release/roadmap gates
+remain open.
+
 ## 2026-11-05 packaging command end-to-end result
 
 The final whole-command run completed successfully in fresh

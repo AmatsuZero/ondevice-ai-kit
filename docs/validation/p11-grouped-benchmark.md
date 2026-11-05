@@ -1,5 +1,7 @@
 # P11 分组 benchmark 快照
 
+2026-11-05追加F09真机binary-only固定图片/短视频推理与精选MLX依赖测试证据：模型身份/关闭清理通过，230逻辑测试/295case执行、0fail/skip。当前readiness为 `artifacts/verification/p11-readiness-20261105-f09-inference/summary.json`；未添加benchmark样本，8组统计保持，独立审查/许可/生产交付与P11发布缺口保留。以下快照均为历史。
+
 2026-11-05再追加正式package入口fresh端到端、新20ZIP/direct与ZIP第二消费者双平台、真机绑定资源、tools297/依赖262证据；当前readiness为 `artifacts/verification/p11-readiness-20261105-f09-packager/summary.json`。8组原benchmark样本不变，MLX依赖/模型binary推理和更广P11发布门槛保持。
 
 2026-11-05 F09追加正式清单、20本地ZIP与第二ZIP消费者两平台编译/真机资源报告证据；当前readiness改为 `artifacts/verification/p11-readiness-20261105-f09-manifest-zip/summary.json`。旧schema1硬pin保持，新schema2记录逐平台生成来源；不增加benchmark样本，F09/package入口/依赖测试及P11发布缺口保留。下段staging快照为历史。
@@ -26,7 +28,7 @@
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261105-f09-binary-staging/summary.json
+  --output artifacts/verification/p11-grouped-20261105-f09-inference/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。

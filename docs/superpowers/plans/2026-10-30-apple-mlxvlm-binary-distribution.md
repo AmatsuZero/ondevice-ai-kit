@@ -58,6 +58,17 @@ Task3/4/5 local artifact and consumer paths have concrete evidence; MLX dependen
 tests, binary inference, independent packager review and release licensing/
 acceptance remain open. No remote publication or overall roadmap completion.
 
+2026-11-05 runtime/dependency follow-up: fresh binary-only signed consumer of the
+same final artifacts passed fixed image+29FPS synthetic-video generation on
+iPhone17,2/iOS27.2, model identity and14-file host/device hashes, drain/close/lease
+release and snapshot cleanup. Selected8 original upstream test files passed230
+logical tests/295 case executions with0 failures/skips on macOS27.2, excluding
+performance microbenchmarks. Initial missing MatmulPrecision helper build failure
+is preserved; adding its exact upstream bytes fixed the test host. No product
+source/assertion/threshold change. Independent packaging review, SDK source
+redistribution license/production delivery and broader release acceptance remain
+open; do not repeat completed artifact builds or model downloads.
+
 ## Global Constraints
 
 - Preserve production apple-mlx/Package.resolved and all protected dirty/untracked files.

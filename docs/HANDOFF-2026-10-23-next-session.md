@@ -4,6 +4,12 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新 F09 续接 — 2026-11-05 binary 模型推理与 MLX 专项测试通过
+
+- 复用最终manifest bd41785d…097efc，fresh无源码消费者signed Release通过，graph仅一份probe Swift源/无checkout，20XCFramework树与产物一致。iPhone17,2实际系统报告**iOS27.2/24B119**；PID2184/runId E68987B2-0AFA-4073-8539-D26F227DA31B完成固定公开图片及29FPS合成短视频真实生成，backend/model身份匹配、非空/10及22updates，14模型文件host+device核验；drain/close/lease删除/关闭后拒绝/帧快照清理/fixture不变通过。PID已终止确认无，普通Demo PID1433恢复。无采音/私人媒体/下载。
+- 原样复制8个固定上游测试文件到隔离macOS宿主，KVCache/config/TurboQuant/attention/SmolVLM/Gemma4 chunked-prefill等**230逻辑测试/295case执行、0fail/skip**（XCTest39+SwiftTesting191）通过；明确排除性能microbenchmark。首轮漏MatmulPrecision helper编译失败，补原文件后通过，未改实现/断言/阈值。不是上游全套测试或未知枚举支持证明。
+- 两份新证据在 `artifacts/verification/f09-binary-inference-20261105/`、`f09-mlx-dependency-tests-20261105/`；冻结summary与只读verify脚本保留，原打包receipt不改。**当前下一缺口是独立packager审查、SDK源码再分发许可/生产交付策略及P4/P11等原验收**；新v2 reviewer此前429无结论，不重试失败代理、不冒称批准。无需重做完整打包/下载/录音，goal保持active。
+
 ## 最新 F09 续接 — 2026-11-05 可复用打包入口端到端已通过
 
 - 本地已提交dfa6c85（20静态产物/v2清单/无源码消费者）。继续实现 `scripts/package-apple-mlxvlm.sh SNAPSHOT SOURCE_PACKAGES FRESH_OUTPUT` 与tools/package_mlxvlm_binary.py：固定输入/补丁/原生revision验证→device/sim Release/library-evolution→20XCFramework/4C/18resource/22notice→清单+ZIP/checksum；无下载/patch输入/签名/发布。
