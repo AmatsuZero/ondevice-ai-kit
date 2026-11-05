@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-05 F12首屏追加：[两种隔离Apple变体](apple-committed-candidate.md#两种隔离变体的真机首屏渲染)在同一iPhone稳定显示OpenCV Identity导入/原型/未校准提示和MLX普通首屏/五能力页签；仅显示，不含触摸/模型执行。CUA native pipe一次reset后仍失败，0用例执行；21阶段terminal，两候选已停、原Demo恢复、41既有安装URL/9保护/lock不变。无构建/采集/下载/benchmark新增；原9行gap及P4/P11/发布open/not-ready保持，不自动循环失败入口。
+
 2026-11-05 F12真机追加：[精确编译隔离变体](apple-committed-candidate.md#隔离签名变体真机-smoke-与系统-ui-门槛)在iPhone17,2/iOS27.2完成合成白图Vision回调和14安装模型回读哈希核验；普通UI/TTS四项在系统automation初始化超时，实际0执行/0通过。无新构建/采集/benchmark；候选已停、独立runner卸载、原Demo恢复、既有App安装URL不变。不是原bundle全能力或多模态生成验收；9行gap与P4/P11/发布open/not-ready保持。
 
 2026-11-05 F12增强Apple：[同源码整App](apple-committed-candidate.md)MLX unsigned双平台与独立OpenCV Identity设备目标构建通过，6878原始依赖文件/3产品树/664Swift输入固定，可选host契约6/6。没有F09 overlay或下载，也没有当前候选设备运行/采集结论；两个变体不称组合App，OpenCV arm64 simulator仍不支持。9保护/lock/普通手机Demo保持，P4/P11与发布仍open/not-ready。

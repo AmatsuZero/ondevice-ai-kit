@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261105-exact-apple-physical/summary.json",
-    "sha256": "1aab76b987b8289be1d1373f663c00e4993311f9ba4edf3047bcd8a45d9b299f"
+    "path": "artifacts/verification/p11-readiness-20261105-exact-apple-rendering/summary.json",
+    "sha256": "a006ba4821501895820f027c8fe6bbed1a1cbcf137479e323d3dffba40aaf20f"
   },
   "schemaVersion": 1,
   "sources": [

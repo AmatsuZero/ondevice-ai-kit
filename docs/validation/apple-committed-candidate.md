@@ -2,8 +2,35 @@
 
 状态：同一源码候选的 Apple host、KMP/shared iOS 单测、基础 Demo/消费者构建和注入后端桥接测试通过。
 后续已补同源码增强 MLX 双平台与 OpenCV Identity 设备目标整 App 构建，见下节。
-已补精确编译代码的隔离签名变体真机 smoke 和模型安装；普通 UI 入口被系统自动化超时阻断，多模态生成未执行。
+已补精确编译代码的隔离签名变体真机 smoke、模型安装及两变体稳定首屏截图；触摸入口仍被自动化工具阻断，多模态生成未执行。
 发布仍 `open/not-ready`。
+
+## 两种隔离变体的真机首屏渲染
+
+复用既有 OpenCV Identity device App，只在新副本修改 bundle ID 为
+`io.ondeviceai.candidate.e0438c0.identity`、显示名为 `ODAI Identity Candidate` 并沿用既有签名。
+Info.plist 仅这两项元数据不同；3份 Mach-O 的 UUID 和有效 section 内容与原编译产物一致，未重建。
+同一 iPhone17,2 / iOS27.2 上使用 Xcode 官方 `devicectl device capture screenshot` 获取项目 App 截图：
+
+- `candidate-screen.png`：OpenCV 普通首屏稳定显示，含空预览、YuNet/SFace 导入提示、原型授权及未校准声明；
+  导入按钮可见，启用注册按钮呈灰色。这只证明显示，不证明点击拒绝、系统 picker、同意授权或 native 模型执行。
+- `mlx-candidate-settled.png`：既有 MLX alias 的普通首屏稳定显示，人脸、Identity、语音、视频、图像理解页签可见；
+  没有可见的模型准备 spinner 或失败信息。没有切换页签、TTS/ASR 或生成验收。
+- `mlx-candidate-screen.png` 捕获于系统 App 切换动画中，保留但不计稳定渲染证据。
+
+CUA 原生入口报 `Sky Computer Use native pipe startup failed`；一次受支持的 reset 后同样失败，未发送 UI 输入。
+此前 XCTest automation mode 和移动测试代理超时未重试；本轮 UI 测试仍0执行。没有导入模型、注册模板、采音、拍照、
+私人媒体、新依赖/模型下载或 benchmark 样本，也不能把 alias 显示升级为原 bundle 或全能力验收。
+
+21个阶段全部 terminal、0 pending；两候选进程已停止，原 `io.ondeviceai.opencv.demo` 已恢复。
+41个既有 App 安装 URL 未变，两隔离候选保留安装，既有 MLX 模型存储保持；9保护路径和生产 lock 不变。
+原始证据为 ignored `artifacts/verification/apple-identity-candidate-runtime-20261105/`，
+summary SHA-256 `3c65545c4a570525456a482e0499d02dc538c354582b631610c2cf6eab8654b6`。
+截图、视觉观察边界、签名及恢复收据均保留；只读复核：
+
+```sh
+rtk proxy python3 artifacts/verification/apple-identity-candidate-runtime-20261105/verify.py
+```
 
 ## 隔离签名变体真机 smoke 与系统 UI 门槛
 

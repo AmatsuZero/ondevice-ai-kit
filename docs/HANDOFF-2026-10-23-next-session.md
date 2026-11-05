@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F12 续接 — 2026-11-05 精确编译 Apple 隔离变体真机 smoke
+## 最新 F12 续接 — 2026-11-05 两种 Apple 隔离变体首屏已显示
+
+- 复用既有OpenCV Identity编译产物，只改隔离副本bundle ID/显示名并沿用签名；3份Mach-O UUID/section未变。官方devicectl截图显示稳定普通首屏、YuNet/SFace导入提示、原型/未校准声明及灰色注册按钮。既有MLX alias稳定首屏与五能力页签也已截图；切换动画截图保留但不计稳定显示。详见[限定证据](validation/apple-committed-candidate.md#两种隔离变体的真机首屏渲染)。
+- 只有显示证据，没有点击、picker、模型导入、注册或生成。CUA native pipe启动失败，一次reset后仍失败、未发送输入；此前XCTest/移动代理超时不重试。ignored `apple-identity-candidate-runtime-20261105/summary.json` SHA3c65545c…654b6，只读verify通过，21阶段terminal/0pending；两候选停止、原Demo恢复、41既有安装URL/9保护/生产lock保持，无采集/下载/新benchmark。
+- readiness索引为 `artifacts/verification/p11-readiness-20261105-exact-apple-rendering/summary.json`，原9行gap/8组统计保持。当前安全分支收尾后不自动循环启动/模型重播或重试失败reviewer；下一需UI工具入口恢复、授权Android设备/TTS引擎、PAD校准协议/数据或独立审查及许可/生产交付条件变化。基础10/12，P4/P11/发布open/not-ready，目标未完成。
+
+## 上一 F12 续接 — 2026-11-05 精确编译 Apple 隔离变体真机 smoke
 
 - 复用e0438c0既有MLX device产物，只在隔离副本改App/runner bundle ID并沿用既有签名；7份Mach-O含通用架构/UUID/section与原始编译一致，未重建。iPhone17,2/iOS27.2/24B119上64×64白图Swift/KMP→Apple Vision回调成功、0人脸；ModelStore设备manifest与14实际安装模型回读哈希全部匹配。没有多模态生成或新benchmark。
 - 普通UI/TTS四用例在系统automation mode初始化超时，实际0执行/0通过；触摸工具同样代理超时。不重复同一失败门槛。失败后Xcode诊断收集卡住，经精确PID/命令核对SIGINT→SIGTERM收尾/exit143；不是产品用例失败或通过。首轮无对应私钥的证书选择失败和fresh唯一匹配重试保留，未创建/更改签名资产。
