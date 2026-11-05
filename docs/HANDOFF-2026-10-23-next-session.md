@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F05 续接 — 2026-11-05 真机固定样本native生命周期通过
+## 最新 F07 续接 — 2026-11-05 最终组合包普通LM取消/重入通过
+
+- 专用6GiB/API36 AVD更新既有最终普通APK afed156b…926c461，原c098回退保留，已装授权Gemma四文件/拒绝相机麦克风权限保持；未下载、改test runner或操作真机。分层来源264hash匹配、2旧测试差异明确，LM arm64 native库不变，不称全量重新构建。
+- 普通系统选原红图→PID9200 native adapter初始化后取消→CANCELLING/生成禁用→CANCELLED→同输入同PID重入SUCCEEDED。实际backend/model/revision/runtime正确，输入SHA991b…d3aa；普通清除后cache/input为空，模型/权限/PID不变。两轮软件SwiftShader WebGPU1448/1448及各自CPU/GPU销毁已记录。
+- [验证](validation/android-litertlm-ui.md#2026-11-05-最终组合包普通-ui-取消与重入)与原始ignored `android-final-combined-lm-20261105/`，只读verify38项通过。首UI命令审批服务429未执行，后续正常审批恢复；picker辅助脚本先拒绝后按focusable属性修正，产品无修改。没有绕过、并发重启或新benchmark。最终APK与模型留专用AVD，物理最终候选/人工触摸/其他provider/异步drain/质量资源/minOS仍缺；goal active，P4/P11/发布open/not-ready。
+
+## 上一 F05 续接 — 2026-11-05 真机固定样本native生命周期通过
 
 - 新增仅androidTest的生命周期runner，普通App afed156b…926c461不重建/不替换，53相关旧源hash匹配；TECNO/API35使用既有英文PCM，实际观察本进程JNI decode后执行取消与活动close。13项检查全部通过：decode/drain期间busy、取消不交付、同backend重入全文匹配、close等待/期间和之后拒绝/idempotent、caller输入不变；不保存转写/音频/线程栈，不打开麦克风。
 - offline测试APK build与lint0error/1既有warning，后端12项JVM以rerun-tasks fresh执行通过（35任务全执行）。原test APK/Identity runner恢复，普通App/5模型/权限全部匹配，普通Demo已激活。首次恢复后PID观察竞争失败保留，修正观察后只复核、不重装；不是产品失败。

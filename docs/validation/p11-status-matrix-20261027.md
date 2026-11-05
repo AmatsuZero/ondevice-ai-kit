@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-11-05 F07最终普通APK afed156b在专用软件GPU模拟器完成系统红图→native初始化后取消/等待释放/生成禁用→同输入同PID重入SUCCEEDED→普通清除，38证据检查通过。真机最终候选/人工触摸、其他provider及异步drain继续开放；无新benchmark/采音，详见[普通UI](android-litertlm-ui.md#2026-11-05-最终组合包普通-ui-取消与重入)。
+
 2026-11-05 F05：可选 CPU `sherpa.onnx.whisper` 已完成普通 Demo 真实麦克风基本功能验收（用户确认基本正确、少量漏错词），以及独立本地 Maven AAR 消费。另在原普通App用固定合成英文观察实际JNI decode后验证取消/drain/同backend重入和活动close/拒绝，13项通过；未采音，真实capture/前后台生命周期仍缺。固定样本英文匹配、静音/纯噪声拒绝；强噪声 SNR0、中文精确匹配仍失败。系统 Google ASR 资源问题单独保留，不再将 Android 全体 ASR 描述成缺真实转写。无新增采音或 grouped benchmark 样本，P11/发布仍 `open/not-ready`。
 
 2026-11-04 功能优先续接：Android LiteRT/ESRGAN 已完成普通系统选择、完整48帧超分与同字节结果动态重播；固定 LiteRT-LM0.18.1/授权 Gemma 已完成 TECNO 系统 ZIP 导入、CPU文本＋硬件GPU视觉真实生成。双端 OpenCV Identity 检测/对齐/embedding/注册删除与精确1:N机制已接入；PAD 仅有独立 iPhone 原始分数试验。下面对应行已更新，不再把这些已实现链路列为缺少后端/权重。ASR 已获授权请求 en-US，资源仍 NOT_REPORTED，最新只读复核仍无默认网络；真实转写未证。新增证据纳入 `artifacts/verification/p11-readiness-20261104-mainflows/summary.json`；不补造延迟/RSS/能耗样本，既有 grouped benchmark 仍为5项能力/8组，九行仍有 gap，P11/发布保持 `open/not-ready`。
@@ -40,7 +42,7 @@
 | Speech ASR Android | `pass-bounded-offline-basic` | [离线SDK/Demo、独立AAR与固定输入native生命周期](android-sherpa-asr.md)、[系统资源入口](speech-backends.md#2026-11-04-tecno-授权资源请求与独立-aar-消费)、[设备矩阵](device-matrix.md) | sherpa 强噪声/中文准确性、真实capture/前后台生命周期、持续资源/API26；系统 Google 语言资源仍不可用；三次新采音授权均已消耗 |
 | Video SR | `pass-bounded` | [Apple超分](video-sr-backends.md)、[Android完整请求及动态重播](android-video-sr-demo.md)、[Video Demo](video-bridge-demo.md)、[原生导出取消](apple-video-audio.md) | 主观/时域质量、传递函数、帧节奏预算、GPU/能耗与持续资源；最低系统设备验收暂缓 |
 | Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/真实 Files provider/AX 终态/Home 转场 tagged native trace/五次真机语义质量 rubric/同源 motion-control task-set/12轮 RSS 观察](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | temporal exact-label pair 0/3（`observed-failure`）；新增等时等待/clearCache 对照支持约1 GB残留主要来自MLX可回收缓存；整体泄漏与生产资源策略未定；跨场景/多任务集自然 temporal quality、可比较 GPU peak/能耗、发布资源预算、完整物理触控 |
-| Multimodal Android LiteRT-LM | `pass-bounded-sync-image` | [同步factory](android-litertlm-sync-demo.md)、[真机系统ZIP/图片选择与生成](android-litertlm-ui.md)、[异步drain合同](android-litertlm-drain-contract.md) | 异步native drain/streaming、当前候选取消重入、更广自然质量、可比较资源/GPU/能耗；当前不支持视频 |
+| Multimodal Android LiteRT-LM | `pass-bounded-sync-image` | [同步factory](android-litertlm-sync-demo.md)、[最终普通APK模拟器取消重入及历史真机ZIP/生成](android-litertlm-ui.md)、[异步drain合同](android-litertlm-drain-contract.md) | 异步native drain/streaming、最终APK物理设备/人工触摸及其他provider、更广自然质量、可比较资源/GPU/能耗；当前不支持视频 |
 | Face identity/liveness | `unverified-calibration-pad` | [Android真实Identity](android-opencv-identity-demo.md)、[Apple真实Identity](apple-opencv-identity.md)、[多候选/图库](identity-gallery-demo.md)、[独立PAD原始分数](pad-raw-score-smoke.md) | PAD捕获/crop与SDK/Demo判定、授权评估/校准数据、1:1/1:N阈值与准确率；原始分数不产生LIVE/SPOOF结论 |
 | Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)（含真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 3/3）、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、真实 PHPicker provider 路径、最低系统、完整 review |
 

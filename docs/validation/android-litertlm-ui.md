@@ -1,5 +1,32 @@
 # Android LiteRT-LM 普通 UI 验证
 
+## 2026-11-05 最终组合包普通 UI 取消与重入
+
+复用保留的最终普通 APK `afed156b…926c461`，在既有专用 AVD
+`ODAI_LM_UI_20261104` / API36 / `emulator-5582` install-r 后运行；相机和麦克风权限继续拒绝，
+不改测试 runner、不操作物理设备、不下载或复制权重。旧布局 APK `c098fc41…cf1a6`
+保留作为精确回退，最终 APK 与已装模型留在专用 AVD。
+
+系统 DocumentsUI 选择原564字节红图后，picker-owned 输入 SHA256=`991b54f0…d3aa`。
+默认 prompt `Describe this image.`、32 tokens。PID **9200** 的 native 日志出现
+`Selected adapter` 后普通点击取消，实际观察 `RUNNING → CANCELLING → CANCELLED`；
+等待期间生成与取消按钮均 disabled，终态重新允许生成。同输入/同PID普通再次生成
+`RUNNING → SUCCEEDED`，可见实际后端 `litertlm.android`、模型 `gemma-3n-e2b-it`、
+revision `c03b6f60b8da6c5400b6838a2cf26420f80c0a01`、runtime `litertlm-android:0.18.1`，
+输出描述纯红矩形。普通清除输入后，本轮 cache/input 文件为空，生成 disabled；四份模型/附属
+文件、拒绝权限和PID均保持。两轮各有1448/1448 WebGPU delegate及CPU/GPU accelerator销毁记录。
+
+这是 SwiftShader/Vulkan **软件 GPU** 模拟器证据，不能替代真机硬件GPU、人工触摸、其他provider、
+自然质量/资源验收或异步drain合同。旧组合快照与最终sherpa相关来源分层核对264份相同hash，
+另2处历史差异仅在测试；arm64 LM native库与旧回退包字节相同。这不是完整重新构建或穷尽的
+APK与源码证明，各历史build身份继续保留。
+
+本地 `artifacts/verification/android-final-combined-lm-20261105/` 保留输入/阶段/UI/XML、
+同PID窗口日志、失败记录、summary和只读 `verify.py`，**38检查通过**。首个UI快照因自动审批服务
+429未执行；后续更安全的只读命令和普通快照分别走正常审批后通过，没有绕过。首次picker脚本
+因节点是focusable而非clickable，在点击前拒绝；按实际属性修正后选中，产品代码未改。
+九保护文件与生产lock保持，无新增benchmark样本/采音/私人媒体，P4/P11/发布仍open/not-ready。
+
 ## 2026-11-04 TECNO 系统 ZIP 导入与真实生成
 
 复用已获授权的固定 Gemma manifest-first ZIP，无新下载/许可操作。TECNO

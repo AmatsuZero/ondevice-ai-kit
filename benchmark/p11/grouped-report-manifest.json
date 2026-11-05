@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261105-sherpa-lifecycle/summary.json",
-    "sha256": "43065f418e87a6948004e70499f26b0250a3c897a3f2a3e4397a0e19756d80dc"
+    "path": "artifacts/verification/p11-readiness-20261105-final-lm/summary.json",
+    "sha256": "5233b0d2098ba1b2bb7ec78e4be441fd0e408c05d704fac9297f91c582e48faa"
   },
   "schemaVersion": 1,
   "sources": [
