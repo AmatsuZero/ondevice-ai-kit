@@ -1,7 +1,41 @@
 # Android ASR next device session
 
-Updated 2026-11-04. Device-assisted work is deferred at the user's request to
-**2026-11-05 09:00 Asia/Shanghai**. No microphone attempt has run in this checkpoint.
+Updated 2026-11-05. The user returned and explicitly requested immediate start.
+The authorized single attempt has now run; the earlier deferred/zero-attempt
+statements below describe the November4 checkpoint only.
+
+## Single physical-device attempt — 2026-11-05
+
+Fresh preflight confirmed TECNO KM9/API35 (`15365375C9007986`), the original
+ordinary App `405d64e1…082c0`, original test package `7b9e47ce…a621d`, Identity
+runner, granted microphone/camera permissions and an awake screen. The frozen
+test APK `db759cca…ca12` and source matched `prepared.json`; only the test package
+was temporarily replaced. No ordinary App update or permission change occurred.
+
+After the user said “立即开始”, one authorized framework invocation returned
+`status=platform-error`, `platformError=13`, `startCount=1`,
+`startToDestroyMillis=120`, `withinAuthorizedLimit=true`, `cancelReturned=true`,
+and `recognizerDestroyed=true`. No `readyForSpeech`, `speechBegan`, `speechEnded`
+or nonempty-result receipt was reported. Code13 is `ERROR_LANGUAGE_UNAVAILABLE`
+(also confirmed against the installed Android SDK source constant); the chosen
+en-US resource remains unavailable. This is a real attempted start and immediate
+platform rejection, not successful transcription or a user speaking failure.
+There was host approval latency after the visible start cue, so the cue alone
+does not establish synchronized speaking/capture timing. No second attempt ran.
+
+The probe reports `audioPersisted=false` and `transcriptPersisted=false`; no
+raw audio, transcript or unrestricted speech logcat was collected. Instrumentation
+exit/code values are not transcription evidence. The on-device factory restriction
+does not independently measure system-service network traffic.
+
+The original test APK/Identity runner and both App/test hashes were restored
+and read back; permissions match preflight. Ordinary MainActivity launch succeeded.
+Ignored evidence is in `artifacts/verification/android-asr-single-20261105/`:
+`before.json`, `installed.json`, `ready.json`, `attempt-started.json`, `result.log`,
+`command.json`, `restored.json` and the bounded session driver. No SDK or ordinary
+speech-UI acceptance is claimed. Resource provisioning, SDK/UI transcription and
+lifecycle validation remain open; do not silently repeat capture or resource
+download requests. F05, P4/P11 and release remain open/not-ready.
 
 ## Fresh network/resource result
 
@@ -79,7 +113,7 @@ checks. No new production code, SDK tests or independent review was performed.
 Physical microphone attempts remain zero and tomorrow's authorized single
 attempt remains unconsumed.
 
-## Tomorrow's order
+## November4 planned order (historical; single attempt now consumed)
 
 1. Recheck device, APK/runner hashes and permissions; preserve original test APK.
 2. Give the user the start cue before consuming the one authorized microphone

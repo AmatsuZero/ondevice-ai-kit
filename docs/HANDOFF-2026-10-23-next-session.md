@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-04 F09 现存完整依赖对象恢复
+## 最新续接 — 2026-11-05 TECNO 单次 ASR 实测
+
+- 用户提前回到手机旁并明确“立即开始”；新鲜核验TECNO KM9/API35、原405普通App/7b9测试包/Identity runner与权限后，仅临时安装冻结db759cca探针。单次结果为platform-error/13（ERROR_LANGUAGE_UNAVAILABLE），startCount1、startToDestroyMillis120、withinAuthorizedLimit/cancelReturned/recognizerDestroyed均true；无readyForSpeech或文本结果。en-US资源仍不可用，不能算转写或SDK/普通UI通过；开始提示后有host审批延迟，不把提示当同步采音证据。
+- 未保存音频/识别文本、未第二次采音/重发下载。原测试包/Identity runner、App/test哈希与权限已回读恢复，普通MainActivity重新启动成功。见[本次实测](validation/android-asr-next-device-session.md#single-physical-device-attempt--2026-11-05)，ignored android-asr-single-20261105/保留前后快照/脱敏bundle/单次标记及driver；此前“采音0次/明天执行”均为历史。没有新生产代码/build/SDK测试或独立复审。
+- 本轮有真实设备新证据，单次采音授权已消耗；后续资源修复与新增采音需遵守原授权边界。ASR SDK/UI、PAD协议/校准及F09维护策略/真实双slice消费仍开放，基础10/12、P4/P11/发布open/not-ready；不将用户配合完成等同全任务完成。
+
+## 上一检查点 — 2026-11-04 F09 现存完整依赖对象恢复
 
 - 新鲜盘点发现自然视频保留cache可读取生产lock全部12依赖的固定Git对象，以及MLX两项C子模块（943/136entry）；旧f09-target-scoped对象失效仍属实。无需下载/修复原cache；Gitlink在自身repo核验，不误称parent缺blob。见[源码恢复](validation/f09-compatibility-candidate/README.md#latest-source-recovery--2026-11-04)。
 - 真实applicator首跑拒绝上游CLAUDE.md→AGENTS.md；新增仅manifest显式声明且target/hash固定、指向包内committed普通文件的link支持，原未声明/越界/chain/目录/缺目标及submodule拒绝保持。RED→GREEN、定向15/15、全tools273/273（50.746s）、compile/diff及保护核验通过；无新独立复审。实际两包copy成功，886+723普通文件及1link，四patched SHA一致；receipt仍draft-not-adopted/build-not-run，不采用维护策略。
