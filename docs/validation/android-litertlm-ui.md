@@ -1,5 +1,33 @@
 # Android LiteRT-LM 普通 UI 验证
 
+## 2026-11-05 最终组合包真机导入、取消与重入
+
+普通最终 APK `afed156b…926c461` 已安装在 TECNO KM9/API35，无需重装。前置 LM 导入目录缺席、
+ModelStore 为空；普通 App/test APK/Identity runner、五份既有 ASR/SR 模型摘要和权限先核对。
+USB 传入既有授权 ZIP `772d5bb5…ea734e`，经真实 DocumentsUI 普通导入，观察安装期间按钮禁用，
+随后“模型已安装，可以选择图片并生成”及 `litertlm.android · 可用`。导入/ModelStore 七份文件
+在运行前后摘要相同，权重为 `2ed7bc3a…4010d6`，与固定 ZIP 一致。
+
+同一普通 Activity 通过系统 picker 选择原564字节红图，私有输入 SHA=`991b54f0…d3aa`，
+prompt `Describe this image.` / budget32。全程 PID **19257**；原生初始化日志确认
+**Mali-G57 MC2 / Vulkan Integrated GPU** 后普通取消，`RUNNING → CANCELLING → CANCELLED`，
+等待期间生成/取消 disabled，终态恢复生成。同输入普通重入后 `RUNNING → SUCCEEDED`，
+可见后端/model/revision/runtime均与固定清单一致，输出描述纯红色矩形。两轮各有1448/1448
+WebGPU视觉delegate和CPU/GPU销毁对，第一轮销毁早于第二轮GPU初始化；仅覆盖同步执行合同。
+
+普通清除后本轮私有输入/native cache已删除；原三字节历史fixture摘要及原cache文件名清单保持，
+不声称所有历史视频cache内容均重新做过摘要。精确删除本轮临时公共ZIP，**保留已安装授权模型**
+供Demo继续使用；普通包/test/runner、五ASR/SR摘要、权限和PID均不变。没有新build、下载、采音、
+相机或私人图片，也没有新增benchmark样本；32tokens输出有界，不作自然质量/速度验收。
+
+ignored `artifacts/verification/android-final-physical-lm-20261105/` 保存阶段/UI/XML、可见结果截图、
+同PID时间窗口native日志、输入绑定和失败记录。冻结summary及只读 `verify.py` **52项检查通过**。
+USB曾在第一图片点击前短暂断开，未执行点击，恢复同序列/同PID后继续；第二轮RUNNING后UI dump
+exit255使主机观察脚本退出，另行观察同一请求直至成功，未重发生成。审批服务数次429/一次超时
+均未执行对应命令，后续正常审批恢复；收尾helper初次仅主机import入口错误，修正后继续，未重启App。
+分层264匹配源码/2历史测试差异仍按上一节边界，非全能力统一候选重建；人工触摸/其他provider、
+异步native drain/streaming、质量/持续资源/minOS及完整审查许可仍缺，P4/P11/发布open/not-ready。
+
 ## 2026-11-05 最终组合包普通 UI 取消与重入
 
 复用保留的最终普通 APK `afed156b…926c461`，在既有专用 AVD

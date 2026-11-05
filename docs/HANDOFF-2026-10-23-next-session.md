@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F07 续接 — 2026-11-05 最终组合包普通LM取消/重入通过
+## 最新 F07 续接 — 2026-11-05 最终组合包真机LM已可用
+
+- TECNO/API35已装最终普通APK afed156b…926c461保持，无重装/test变更；原LM为空后通过USB既有授权ZIP＋普通DocumentsUI导入，七模型/附属摘要前后匹配，五ASR/SR模型/权限不变。**授权LM现留手机可用**，临时公共ZIP已精确删除，不重复下载或导入。
+- 普通系统红图/default prompt/32token，PID19257在Mali-G57 MC2/Vulkan Integrated GPU初始化后普通取消：CANCELLING禁用→CANCELLED可重入；同图同PID重入SUCCEEDED，输出描述红矩形，后端/model/revision/runtime正确。两轮1448/1448及CPU/GPU销毁对，前轮销毁先于重入GPU初始化；普通清除本轮输入/native cache，原历史fixture摘要/cache文件名清单保持。
+- [真机验证](validation/android-litertlm-ui.md#2026-11-05-最终组合包真机导入取消与重入)，ignored `android-final-physical-lm-20261105/` 52项只读复核通过；264分层source匹配/2历史测试差异，不是全量重建。USB短断、UI dump255、审批服务429/超时、host helper import失败均保留；恢复只观察原请求，无重复生成/重启/绕过。上一模型复核会话75378已terminal/pass，暂停恢复后已读取结果；没有pending推理。
+- 无采音/相机/私人媒体/新benchmark；真机最终APK固定图链路已证，人工触摸/其他provider、异步drain、质量资源/minOS、独立审查/许可及P4/P11仍open/not-ready，goal active。
+
+## 上一 F07 续接 — 2026-11-05 最终组合包普通LM取消/重入通过
 
 - 专用6GiB/API36 AVD更新既有最终普通APK afed156b…926c461，原c098回退保留，已装授权Gemma四文件/拒绝相机麦克风权限保持；未下载、改test runner或操作真机。分层来源264hash匹配、2旧测试差异明确，LM arm64 native库不变，不称全量重新构建。
 - 普通系统选原红图→PID9200 native adapter初始化后取消→CANCELLING/生成禁用→CANCELLED→同输入同PID重入SUCCEEDED。实际backend/model/revision/runtime正确，输入SHA991b…d3aa；普通清除后cache/input为空，模型/权限/PID不变。两轮软件SwiftShader WebGPU1448/1448及各自CPU/GPU销毁已记录。
