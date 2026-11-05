@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-android-identity-accepted/summary.json",
-    "sha256": "48b693ab054092239147615de6b9e6d174211021dd28aa8be047154870dfac0a"
+    "path": "artifacts/verification/p11-readiness-20261106-apple-updated/summary.json",
+    "sha256": "0b0c1ded02f1df97df7c3900525556ac4b72dce1d3ef3f51491a00ae04ba8f64"
   },
   "schemaVersion": 1,
   "sources": [

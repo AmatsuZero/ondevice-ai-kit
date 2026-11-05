@@ -1,5 +1,18 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新检查点：Apple 新版更新与两条人工普通流程已通过
+
+先读 [Apple 更新与手动验收交接](HANDOFF-2026-11-06-apple-updated.md)。用户已明确允许
+结束当前会话并更新；既有df46772签名产物安装成功，无参数PID2891启动，页面显示本地
+图像理解模型已就绪。完整回读14份安装模型SHA匹配、其余42个App安装地址保持；模型与
+数据容器未清除。旧进程更新前已自然结束。新版普通人工Files选取公开NASA图片并生成SUCCEEDED，后端/模型revision显示正确；
+用户已完成IdentityInput/models整文件夹导入、显式启用、NASA注册ENROLLED（1用户/1模板）、
+未校准验证拒绝、删除0/0与整会话停用；拒绝/中间0计数为用户目击，注册/停用另有实际截图。
+用户已清除MLX输入；只结束本轮PID2891并冷启动PID2911，稳定首屏确认两模型就绪、授权关闭、
+图片预览为空。两条普通人工流程无需再做；新MLXVLM文件夹导入/取消重试和完整交互矩阵仍未验。
+不再询问更新授权、不重建或重签名；下方“更新待选择”和普通生成未验为历史。
+最新readiness：`artifacts/verification/p11-readiness-20261106-apple-updated/summary.json`。
+
 ## 2026-11-06 最新检查点：Android 普通 Identity 实际子项已通过
 
 先读 [Android 普通 App Identity 验收](HANDOFF-2026-11-06-android-identity-accepted.md)。
