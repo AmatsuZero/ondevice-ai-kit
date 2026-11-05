@@ -20,6 +20,8 @@ MLX_SOURCES = ["demo/iosApp/MultimodalHostPreparation.swift", "demo/iosApp/Multi
 VALIDATION_SOURCES = ["probes/ios-multimodal-demo/AppAccessibility.swift", "probes/ios-multimodal-demo/AppBackgroundObservation.swift", "probes/ios-multimodal-demo/MultimodalDemoValidation.swift", "probes/ios-multimodal-demo/MultimodalDemoActiveValidation.swift", "probes/ios-multimodal-demo/MultimodalDemoBackgroundValidation.swift"]
 
 MULTIMODAL_SOURCES = ["demo/iosApp/MultimodalHost.swift", "demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/MultimodalFilePicker.swift", "kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOSMultimodalInput.swift"]
+IDENTITY_SOURCES = ["demo/iosApp/IdentityOpenCvHost.swift", "demo/iosApp/IdentityOpenCvSession.swift",
+                    "kmp-binding/apple/IOSIdentityBridge.swift"]
 
 class SpeechDemoProjectTests(unittest.TestCase):
     def setUp(self):
@@ -32,7 +34,9 @@ class SpeechDemoProjectTests(unittest.TestCase):
         (self.root / "apple").mkdir()
         (self.root / "apple-mlx").mkdir()
         (self.root / "apple-mlx/Package.resolved").write_text("fixed-lock")
-        for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES + VALIDATION_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
+        (self.root / "apple-opencv/Vendor/opencv2.xcframework").mkdir(parents=True)
+        (self.root / "apple-opencv/Package.swift").write_text("fixture")
+        for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES + IDENTITY_SOURCES + VALIDATION_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
             path = self.root / source
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("fixture")
@@ -46,9 +50,49 @@ class SpeechDemoProjectTests(unittest.TestCase):
         self.output = self.root / "artifacts/speech-demo"
         self.ruby = os.environ.get("RUBY", "ruby")
 
-    def generate(self, video=False, multimodal=False, mlx=False, validation=False, commit="a" * 40):
+    def generate(self, video=False, multimodal=False, mlx=False, validation=False, commit="a" * 40, identity=False):
         return subprocess.run([self.ruby, str(self.root / SCRIPT)], capture_output=True, text=True,
-            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0", "ODAI_MULTIMODAL_MLX_DEMO": "1" if mlx else "0", "ODAI_MULTIMODAL_DEMO_VALIDATION": "1" if validation else "0", "ODAI_VALIDATION_SOURCE_COMMIT": commit})
+            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0", "ODAI_MULTIMODAL_MLX_DEMO": "1" if mlx else "0", "ODAI_MULTIMODAL_DEMO_VALIDATION": "1" if validation else "0", "ODAI_VALIDATION_SOURCE_COMMIT": commit, "ODAI_OPENCV_IDENTITY_DEMO": "1" if identity else "0"})
+
+    def testIdentityOptInCombinesExistingCapabilitiesWithoutDuplicateProducts(self):
+        result = self.generate(video=True, multimodal=True, mlx=True, identity=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        inspected = subprocess.run([self.ruby, "-rxcodeproj", "-rjson", "-e", """
+p = Xcodeproj::Project.open(ARGV[0]); t = p.targets.find { |target| target.name == 'SpeechDemo' }
+puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.real_path.to_s },
+ products: t.package_product_dependencies.map { |d| [d.product_name, d.package.relative_path] },
+ settings: t.build_configurations.map(&:build_settings)})
+""", str(self.output / "SpeechDemo.xcodeproj")], capture_output=True, text=True, check=True)
+        data = json.loads(inspected.stdout)
+        self.assertEqual(sorted(data['sources']), sorted(str(self.root / s) for s in
+            SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES + IDENTITY_SOURCES))
+        products = dict(data['products'])
+        self.assertEqual(len(products), len(data['products']))
+        self.assertEqual(products['ODAIKitIdentity'], str(self.root / 'apple'))
+        self.assertEqual(products['ODAIKitModelStore'], str(self.root / 'apple'))
+        self.assertEqual(products['ODAIKitOpenCVIdentity'], str(self.root / 'apple-opencv'))
+        self.assertEqual(products['ODAIKitAppleMLXVLM'], str(self.root / 'apple-mlx'))
+        for settings in data['settings']:
+            self.assertEqual(settings['IPHONEOS_DEPLOYMENT_TARGET'], '18.0')
+            self.assertEqual(settings['PRODUCT_BUNDLE_IDENTIFIER'], 'io.ondeviceai.combined.demo')
+            self.assertEqual(settings['SUPPORTED_PLATFORMS'], 'iphoneos')
+            for flag in ['ODAI_SPEECH_DEMO', 'ODAI_VIDEO_DEMO', 'ODAI_MULTIMODAL_MLX_DEMO', 'ODAI_OPENCV_IDENTITY_DEMO']:
+                self.assertIn(flag, settings['SWIFT_ACTIVE_COMPILATION_CONDITIONS'])
+        self.assertEqual(self.original.read_bytes(), b'protected project')
+
+    def testMissingIdentityRuntimeRejectsBeforeCreatingOutput(self):
+        shutil.rmtree(self.root / 'apple-opencv/Vendor/opencv2.xcframework')
+        result = self.generate(identity=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertFalse(self.output.exists())
+
+    def testIdentityCanCombineWithSpeechWithoutRequiringMlx(self):
+        shutil.rmtree(self.root / 'apple-mlx')
+        result = self.generate(identity=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        text = (self.output / 'SpeechDemo.xcodeproj/project.pbxproj').read_text()
+        self.assertIn('ODAIKitOpenCVIdentity', text)
+        self.assertNotIn('ODAIKitAppleMLXVLM', text)
 
     def testValidationRequiresEnhancedAndExactCommitBeforeOutput(self):
         for flags in [{"validation": True}, {"video": True, "multimodal": True, "validation": True}, {"video": True, "multimodal": True, "mlx": True, "validation": True, "commit": "dirty"}]:

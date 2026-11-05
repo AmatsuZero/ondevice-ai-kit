@@ -12,6 +12,7 @@ sources += ['kmp-binding/apple/IOSSpeechBridge.swift', 'kmp-binding/apple/IOSSpe
 video_demo = ENV['ODAI_VIDEO_DEMO'] == '1'
 multimodal_demo = ENV['ODAI_MULTIMODAL_DEMO'] == '1'
 mlx_demo = ENV['ODAI_MULTIMODAL_MLX_DEMO'] == '1'
+identity_demo = ENV['ODAI_OPENCV_IDENTITY_DEMO'] == '1'
 validation = ENV['ODAI_MULTIMODAL_DEMO_VALIDATION'] == '1'
 validation_commit = ENV.fetch('ODAI_VALIDATION_SOURCE_COMMIT', '')
 abort('Demo validation requires ODAI_MULTIMODAL_MLX_DEMO=1') if validation && !mlx_demo
@@ -31,6 +32,10 @@ if mlx_demo
   sources += ['demo/iosApp/MultimodalModelHostFactory.swift', 'demo/iosApp/MultimodalHostPreparation.swift',
               'demo/iosApp/MultimodalMLXHostFactory.swift']
 end
+if identity_demo
+  sources += ['demo/iosApp/IdentityOpenCvHost.swift', 'demo/iosApp/IdentityOpenCvSession.swift',
+              'kmp-binding/apple/IOSIdentityBridge.swift']
+end
 sources += ['probes/ios-multimodal-demo/AppAccessibility.swift', 'probes/ios-multimodal-demo/AppBackgroundObservation.swift', 'probes/ios-multimodal-demo/MultimodalDemoValidation.swift', 'probes/ios-multimodal-demo/MultimodalDemoActiveValidation.swift', 'probes/ios-multimodal-demo/MultimodalDemoBackgroundValidation.swift'] if validation
 frameworks = %w[iosSimulatorArm64 iosArm64].map do |platform|
   File.join(root, "demo/shared/build/bin/#{platform}/debugFramework/ODAIKitDemo.framework")
@@ -39,6 +44,7 @@ inputs = sources.map { |path| File.join(root, path) } + frameworks +
   [File.join(root, 'apple'), File.join(root, 'demo/iosApp/Info.plist'),
    File.join(root, 'demo/iosApp/UITests/SpeechDemoUITests.swift')]
 inputs += [File.join(root, 'apple-mlx'), File.join(root, 'apple-mlx/Package.resolved')] if mlx_demo
+inputs += [File.join(root, 'apple-opencv/Package.swift'), File.join(root, 'apple-opencv/Vendor/opencv2.xcframework')] if identity_demo
 inputs.each { |path| abort("Missing input: #{path}") unless File.exist?(path) }
 FileUtils.mkdir_p(File.dirname(directory))
 Dir.mkdir(directory)
@@ -57,10 +63,21 @@ if mlx_demo
   project.root_object.package_references << mlx_package
   products += ['ODAIKitModelStore', 'ODAIKitAppleMLXVLM']
 end
-products.each do |name|
+opencv_package = nil
+if identity_demo
+  opencv_package = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
+  opencv_package.relative_path = File.join(root, 'apple-opencv')
+  project.root_object.package_references << opencv_package
+  products += ['ODAIKitIdentity', 'ODAIKitModelStore', 'ODAIKitOpenCVIdentity']
+end
+products.uniq.each do |name|
   dependency = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
   dependency.product_name = name
-  dependency.package = name == 'ODAIKitAppleMLXVLM' ? mlx_package : package
+  dependency.package = case name
+                       when 'ODAIKitAppleMLXVLM' then mlx_package
+                       when 'ODAIKitOpenCVIdentity' then opencv_package
+                       else package
+                       end
   target.package_product_dependencies << dependency
   file = project.new(Xcodeproj::Project::Object::PBXBuildFile)
   file.product_ref = dependency
@@ -71,8 +88,8 @@ framework_parent = File.join(root, 'demo/shared/build/bin/$(ODAI_KONAN_TARGET)/d
 target.frameworks_build_phase.add_file_reference(project.main_group.new_file(File.join(framework_parent, 'ODAIKitDemo.framework')))
 target.build_configurations.each do |config|
   config.build_settings.merge!({
-    'PRODUCT_BUNDLE_IDENTIFIER' => mlx_demo ? 'io.ondeviceai.multimodalmlxdemo' : 'io.ondeviceai.ondeviceaidemo',
-    'SWIFT_VERSION' => '5.0', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO' + (video_demo ? ' ODAI_VIDEO_DEMO' : '') + (multimodal_demo ? ' ODAI_MULTIMODAL_DEMO' : '') + (mlx_demo ? ' ODAI_MULTIMODAL_MLX_DEMO' : '') + (validation ? ' ODAI_MULTIMODAL_DEMO_VALIDATION' : ''),
+    'PRODUCT_BUNDLE_IDENTIFIER' => identity_demo ? 'io.ondeviceai.combined.demo' : (mlx_demo ? 'io.ondeviceai.multimodalmlxdemo' : 'io.ondeviceai.ondeviceaidemo'),
+    'SWIFT_VERSION' => '5.0', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO' + (video_demo ? ' ODAI_VIDEO_DEMO' : '') + (multimodal_demo ? ' ODAI_MULTIMODAL_DEMO' : '') + (mlx_demo ? ' ODAI_MULTIMODAL_MLX_DEMO' : '') + (identity_demo ? ' ODAI_OPENCV_IDENTITY_DEMO' : '') + (validation ? ' ODAI_MULTIMODAL_DEMO_VALIDATION' : ''),
     'GENERATE_INFOPLIST_FILE' => 'YES', 'INFOPLIST_FILE' => File.join(root, 'demo/iosApp/Info.plist'),
     'INFOPLIST_KEY_UILaunchScreen_Generation' => 'YES', 'INFOPLIST_KEY_UIApplicationSceneManifest_Generation' => 'YES',
     'INFOPLIST_KEY_NSCameraUsageDescription' => '在设备本地检测人脸，不上传图像。',
@@ -85,6 +102,8 @@ target.build_configurations.each do |config|
     'OTHER_LDFLAGS' => ['$(inherited)', '-ObjC', '-lsqlite3'],
     'ODAI_SDK_COMMIT' => 'working-tree'
   })
+  # The existing OpenCV binary has no arm64 simulator slice.
+  config.build_settings['SUPPORTED_PLATFORMS'] = 'iphoneos' if identity_demo
   team = ENV['ODAI_DEVELOPMENT_TEAM']
   config.build_settings['DEVELOPMENT_TEAM'] = team unless team.nil? || team.empty?
 end

@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261105-persistent-tts/summary.json",
-    "sha256": "93c99fee4b29793e502eac7121aa5c20dd35634625bb06c52eb8477126acfe9d"
+    "path": "artifacts/verification/p11-readiness-20261105-combined-demo/summary.json",
+    "sha256": "41e0091044d64a9684ff99b5c2239c9318f5cc6610e3aab1fae29e92d8cfa823"
   },
   "schemaVersion": 1,
   "sources": [

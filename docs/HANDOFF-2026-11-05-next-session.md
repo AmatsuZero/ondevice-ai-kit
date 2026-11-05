@@ -1,5 +1,20 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 最新功能交付：Apple组合Demo
+
+用户反馈推进长期停在补证后，停止了新一轮精确Android LM重复验证；该轮仅只读预检，
+未换APK/未新增推理，既有缓存保留。
+新增[Apple组合Demo](validation/apple-combined-demo.md)：现有Speech/Video/MLXVLM生成入口
+支持`ODAI_OPENCV_IDENTITY_DEMO=1`，同一App接入真实Identity host/bridge/runtime，
+不再仅交付两个分别开启的变体。新的unsigned iOS18/arm64组合产物已编译链接成功，
+实际Mach-O中Identity、MLXVLM、KMP符号与MLX资源存在；304项tools回归通过。
+该产物为`e0438c0`源基点加已登记generator overlay，不能冒充原冻结候选；未签名安装/UI验收。
+未重试失败Apple UI工具，未操作手机、下载、修改生产lock或九个保护路径。
+本地证据`artifacts/verification/apple-combined-demo-20261105/`，复核`verify.py`。
+最新readiness：`artifacts/verification/p11-readiness-20261105-combined-demo/summary.json`。
+后续优先未实现功能/实际使用障碍，缺授权数据/生产决策的门槛单列；不再循环固定样本补证。
+
+
 ## 恢复后新增检查点：TTS私有报告已实现并验证
 
 原“下一项”已于本次续接实施，以下原文为历史。最新结果见
