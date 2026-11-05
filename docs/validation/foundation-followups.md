@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-05 F12同候选运行：[b90e7830精确APK](android-committed-candidate.md#同一-apk-补充运行asrsridentity人脸与-tts)另经固定ASR全文/JNI生命周期、布局、双帧AAC超分/独立解码与Identity注册/未校准拒绝/purge、普通人脸选图通过，68项证据复核。TTS因专用AVD无引擎初始化真实失败并保留；临时测试/文件已清理、普通APK/模型/拒绝权限保持、真机未操作。不替代当前候选真机/Apple/真实采集及全质量资源/交付审查；P4/P11仍open/not-ready。
+
 2026-11-05 F12精确候选：[Android独立归档重建](android-committed-candidate.md)953源码/14固定输入、四后端同时启用、997任务全执行，586项JVM及20模块lint无错误通过；新APK b90e7830在专用AVD完成普通固定图取消/drain/同PID重入/成功/清理，44项运行检查。原手机Demo未操作；同一新APK其他能力/真机与Apple全量候选仍缺，不用旧afed真机证据替代。无新增benchmark或采集，P4/P11与发布保持open/not-ready。
 
 2026-11-05 F07真机最终包：TECNO原afed156b普通App经既有ZIP系统导入后，Mali-G57硬件GPU初始化后取消/等待/同图同PID19257重入成功及普通清除均通过，52项只读复核；授权模型留手机、临时ZIP删除，原App/test/runner/权限与五ASR/SR摘要保持。人工触摸/其他provider、异步合同与质量资源继续开放，见[真机范围](android-litertlm-ui.md#2026-11-05-最终组合包真机导入取消与重入)。

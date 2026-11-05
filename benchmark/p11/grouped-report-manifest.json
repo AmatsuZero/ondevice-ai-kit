@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261105-exact-android/summary.json",
-    "sha256": "29e7e99fa919c85e9e584e8003e131bda45da2d942ddb0e5d7f9e1d19cb88276"
+    "path": "artifacts/verification/p11-readiness-20261105-exact-runtime/summary.json",
+    "sha256": "6c757f0a67d1fc09145c7a14e5a5a794316ed8a3fef30fdd8ad887b6561bb611"
   },
   "schemaVersion": 1,
   "sources": [

@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F12 续接 — 2026-11-05 精确提交 Android 候选构建与 LM 运行通过
+## 最新 F12 续接 — 2026-11-05 同一候选其他能力运行已验
+
+- 复用e0438c0精确源码/普通APK b90e7830，不重建普通App；6份仅测试APK各绑定953source与既有英文PCM，专用API36 AVD顺序执行。固定ASR全文匹配/13项JNI生命周期、布局、ESRGAN双帧AAC音轨/取消重入/lease与独立完整解码PTS/packet、Identity两候选/未校准拒绝/purge撤销/lease均通过；普通Browse→DocumentsUI NASA选图后MLKit显示1人脸/512×512与框。
+- **TTS实际失败**：本AVD无TTS服务且默认引擎null，初始化-1；未安装/下载，不算通过。其余基本功能通过不替代真实采集、自然质量/资源/minOS/完整provider或全能力验收。
+- 本轮新测试目录/公共NASA副本精确清理、临时test包卸载；普通App重开，原LM/ASR/no_backup完整哈希集合和拒绝采集权限保持，手机可用Demo未操作。不宣称删除App管理的测试AndroidKeyStore密钥，无项目签名资产变化。
+- [验证](validation/android-committed-candidate.md#同一-apk-补充运行asrsridentity人脸与-tts)，ignored `android-candidate-runtime-20261105/summary.json` SHAde593ced…edc1e1，68项证据检查通过，包含TTS失败记录一致性。所有运行/构建已terminal，无pending请求；普通候选/模型留AVD，不重复模型测试或下载。下一为同候选TTS合适隔离设备、真实设备/Apple候选与完整审查/交付；P4/P11和发布open/not-ready、goal active。
+
+## 上一 F12 续接 — 2026-11-05 精确提交 Android 候选构建与 LM 运行通过
 
 - 从 e0438c0 committed archive 独立提取953文件并逐一核对Git对象/模式；14份既有固定输入隔离复制，四后端同时启用，offline/no-build-cache/rerun-tasks **997任务全执行**。全17模块586项JVM通过，20模块lint无error/52既有warning；外部运行/测试artifact126/131及包内native/7资源/完整sdkCommit已核验。不含shared/KMP其他host测试重跑。
 - 新普通APK b90e7830…a64d8d在专用API36 AVD经系统红图选择、native初始化后普通取消/CANCELLING禁用/CANCELLED、同图同PID10705重入SUCCEEDED与普通清除通过；44项运行复核。既有4模型/拒绝权限/无test APK/空cache保持，旧afed回退保留。**手机上可用Demo未操作**，新候选仍无真机与ASR/SR/Identity等全能力验收。
