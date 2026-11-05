@@ -125,6 +125,9 @@ data class SpeechRecognitionResult(
     val confidence: Float? = null
 )
 
+/** No usable speech was detected; no transcript should be presented. */
+class SpeechNotDetectedException : IllegalStateException("no speech detected")
+
 interface SpeechRecognitionBackend : SpeechBackend {
     suspend fun recognize(request: SpeechRecognitionRequest): SpeechRecognitionResult
 }

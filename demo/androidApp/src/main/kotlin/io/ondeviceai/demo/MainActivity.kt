@@ -217,7 +217,9 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
             canStart = { speechHost.canManageAsrResources })
         speechHost = SpeechHost(lifecycleScope,
             createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },
-            hasPermission = { Build.VERSION.SDK_INT < 31 || ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED },
+            createAdditionalAsr = { DemoOfflineAsrFactory.create(this) },
+            defaultAsrBackendId = DemoOfflineAsrFactory.defaultBackendId,
+            hasPermission = { ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED },
             requestPermission = speechPermissionGate::request,
             openSettings = { startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) },
             asrResources = speechResourceHost)

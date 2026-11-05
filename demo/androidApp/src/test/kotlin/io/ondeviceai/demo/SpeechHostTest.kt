@@ -7,6 +7,38 @@ import kotlinx.coroutines.*
 import kotlin.test.*
 
 class SpeechHostTest {
+    @Test fun missingOptionalDefaultReportsFailureWithoutCrashingOrRunningSystem() = runBlocking {
+        val system = HostAsrBackend("fixture.system")
+        val host = SpeechHost(CoroutineScope(Dispatchers.Unconfined),
+            createTts = { null }, createAsr = { system },
+            createAdditionalAsr = { error("model preparation failed") },
+            defaultAsrBackendId = "fixture.offline", hasPermission = { true },
+            requestPermission = { it(true) }, openSettings = {})
+        host.model.recognize(SpeechBridgeAsrRequest("en-US", SpeechBridgeInput.Microphone))
+        assertEquals(SpeechPhase.FAILED, host.model.state.phase)
+        assertEquals(0, system.starts)
+        host.close()
+        assertEquals(1, system.closes)
+    }
+
+    @Test fun optionalAsrIsDefaultAndExplicitSystemNeverFallsBack() = runBlocking {
+        val system = HostAsrBackend("fixture.system")
+        val offline = HostAsrBackend("fixture.offline")
+        val host = SpeechHost(CoroutineScope(Dispatchers.Unconfined),
+            createTts = { null }, createAsr = { system }, createAdditionalAsr = { listOf(offline) },
+            defaultAsrBackendId = offline.backendId, hasPermission = { true },
+            requestPermission = { it(true) }, openSettings = {})
+        host.model.recognize(SpeechBridgeAsrRequest("en-US", SpeechBridgeInput.Microphone))
+        assertEquals(1, offline.starts)
+        assertEquals(0, system.starts)
+        host.model.recognize(SpeechBridgeAsrRequest("en-US", SpeechBridgeInput.Microphone),
+            SpeechBridgeSelection.Explicit(system.backendId))
+        assertEquals(1, system.starts)
+        assertEquals(1, offline.starts)
+        host.close()
+        assertEquals(1, system.closes)
+        assertEquals(1, offline.closes)
+    }
     @Test fun permissionRetryReusesPromptAndReceivesOnlyActualResult() = runBlocking {
         for (granted in listOf(true, false)) {
             var prompts = 0
@@ -104,14 +136,14 @@ private class HostTtsBackend : SpeechSynthesisBackend {
     override suspend fun speak(request: SpeechSynthesisRequest) = SpeechSynthesisResult(backendId, null)
     override suspend fun close() { closes++ }
 }
-private class HostAsrBackend : SpeechRecognitionBackend {
-    override val backendId = "fixture.asr"
+private class HostAsrBackend(override val backendId: String = "fixture.asr") : SpeechRecognitionBackend {
     override val capability = SpeechCapability.ASR
     var starts = 0
+    var closes = 0
     override suspend fun availability() = CapabilityAvailability(CapabilityStatus.AVAILABLE, backendId = backendId)
     override suspend fun recognize(request: SpeechRecognitionRequest): SpeechRecognitionResult {
         starts++
         return SpeechRecognitionResult(backendId, "fixture", null)
     }
-    override suspend fun close() {}
+    override suspend fun close() { closes++ }
 }

@@ -4,7 +4,19 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新续接 — 2026-11-05 TECNO 单次 ASR 实测
+## 最新续接 — 2026-11-05 sherpa 离线 ASR 基本可用，精度待优化
+
+- 最终候选 afed156b…926c461 已安装，七组合成重放与12/26/64项回归通过既定门槛，静音/纯噪声拒绝，SNR0/中文精确匹配仍未过；TECNO支持NS，但不据availability认定实际降噪效果。原test/Identity runner/权限、四新模型及原SR摘要已回读。用户又单独授权修复版一次麦克风：SUCCEEDED/实际sherpa/非空，精确匹配仍失败，字符差异5（前次19），用户确认基本正确、少量漏错词，按基本功能可用记录；不是受控效果提升或精度验收结论。累计三次新授权均已消耗，不再自动录音。详见validation顶部。
+
+- 噪声修复：原包合成静音/纯噪声均真实生成假文字，SNR0也错；已用同runtime新增固定MIT Silero VAD、至少256ms语音门禁/200ms前后context、NO_SPEECH错误与提示，并接入可用时的系统session降噪。VAD冷目录真机重放：静音/纯噪声拒绝、干净/SNR10/padded英文匹配，SNR0仍错；不是现场效果通过。新包还修复并发模型复制和默认后端缺席的启动崩溃；最终候选/恢复状态见[验证](validation/android-sherpa-asr.md)顶部及ignored final-candidate.json。后续不得重用早期b67包当修复包，也不得自动开始第三次采音。
+
+- 最新用户反馈：两次分别授权的普通麦克风尝试均识别内容错误，第二次用户完整读完且现场噪音较多；不能按SUCCEEDED判验收。正在用合成静音/噪声排查，不再采音，两次授权均已消耗。下述流程返回结果只代表执行完成。
+
+- 用户批准新增可选 sherpa 后端，Mac 下载固定 runtime/model→可选 APK→USB 安装已完成；默认 `sherpa.onnx.whisper`，显式系统后端不回退。TECNO 固定英文 SDK/JNI 样本精确匹配，中文返回汉字但未精确匹配；约 1.7–2.1 秒。用户随后在场重新授权单次麦克风，普通 Demo 一次点击后 `SUCCEEDED`/实际 sherpa/非空文本，提示句精确匹配未过；不保存原音频/转写文本。见[离线 ASR 证据](validation/android-sherpa-asr.md)。
+- 组合测试 sherpa9/9、speech25/25、Demo63/63；默认Demo55/55、启用/默认构建/lint、ReleaseAAR和共享 iOS arm64 编译通过。后台纯测试进程遭 TECNO freezer 的首次超时保留，改为前台 Activity 后真实推理成功；未改系统省电策略。原测试包/Identity runner/权限恢复，新离线 Demo 保留且原 App 可回退；新模型和原 SR 模型摘要已回读。
+- 9保护路径/生产lock保持。独立review仍无结论；中文质量、取消重入/资源和最低系统等后置，单次麦克风新授权已消耗。系统ASR资源仍未修复；PAD/校准、F09、P4/P11与发布open/not-ready、基础10/12保持。下一先按此新包续接，不再重复下载或系统语言资源请求。
+
+## 上一检查点 — 2026-11-05 TECNO 单次 ASR 实测
 
 - 用户提前回到手机旁并明确“立即开始”；新鲜核验TECNO KM9/API35、原405普通App/7b9测试包/Identity runner与权限后，仅临时安装冻结db759cca探针。单次结果为platform-error/13（ERROR_LANGUAGE_UNAVAILABLE），startCount1、startToDestroyMillis120、withinAuthorizedLimit/cancelReturned/recognizerDestroyed均true；无readyForSpeech或文本结果。en-US资源仍不可用，不能算转写或SDK/普通UI通过；开始提示后有host审批延迟，不把提示当同步采音证据。
 - 未保存音频/识别文本、未第二次采音/重发下载。原测试包/Identity runner、App/test哈希与权限已回读恢复，普通MainActivity重新启动成功。见[本次实测](validation/android-asr-next-device-session.md#single-physical-device-attempt--2026-11-05)，ignored android-asr-single-20261105/保留前后快照/脱敏bundle/单次标记及driver；此前“采音0次/明天执行”均为历史。没有新生产代码/build/SDK测试或独立复审。

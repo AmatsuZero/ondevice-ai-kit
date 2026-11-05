@@ -266,6 +266,8 @@ class AndroidSpeechBridge(
             error.reason.name,
         )
         is ClosedException -> closedFailure()
+        is io.ondeviceai.speech.SpeechNotDetectedException -> SpeechBridgeFailure(
+            SpeechBridgeFailureCode.INVALID_INPUT, "NO_SPEECH")
         is IllegalArgumentException -> invalidInputFailure()
         is IllegalStateException -> if (error.message == "closed") closedFailure() else platformFailure()
         else -> platformFailure()

@@ -413,6 +413,22 @@ class AndroidSpeechBridgeIntegrationTest {
     }
 
     @Test
+    fun noSpeechIsReportedWithoutPretendingRecognitionSucceeded() = runBlocking<Unit> {
+        withTimeout(TEST_TIMEOUT_MILLIS) {
+            val backend = TestAsrBackend("sherpa.onnx.whisper") { throw SpeechNotDetectedException() }
+            BridgeFixture(asr = SpeechRecognitionClient(backend.backendId, listOf(backend))).use { fixture ->
+                val capture = AsrCapture()
+                fixture.onMain {
+                    fixture.bridge.recognize(SpeechBridgeAsrRequest("en-US", SpeechBridgeInput.Microphone),
+                        SpeechBridgeSelection.Default, capture)
+                }
+                assertEquals("NO_SPEECH", capture.failure.await().reason)
+                fixture.shutdown()
+            }
+        }
+    }
+
+    @Test
     fun backendErrorsRetainReasonWithoutUserText() = runBlocking<Unit> {
         withTimeout(TEST_TIMEOUT_MILLIS) {
             val unavailableBackend = TestAsrBackend("android.speech.recognizer") {

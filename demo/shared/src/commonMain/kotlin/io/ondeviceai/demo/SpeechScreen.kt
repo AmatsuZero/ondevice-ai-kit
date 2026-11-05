@@ -58,6 +58,10 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
             modifier = Modifier.testTag("speech-recognize-file")) { Text("识别音频文件") }
     }
     if (SpeechBridgeInputKind.MICROPHONE in inputs) {
+        if (state.asr.backends.any { it.backendId == "sherpa.onnx.whisper" } &&
+            (state.asrSelection as? SpeechBridgeSelection.Explicit)?.backendId.let { it == null || it == "sherpa.onnx.whisper" }) {
+            Text("Whisper 离线短句：支持中英文；说完后停顿约 1 秒，最长采音 10 秒。模型已随应用安装，无需联网。")
+        }
         Text("麦克风识别 · 请使用 $locale 朗读；开始后会采集声音，需要录音权限和本机语言资源")
         Button(onClick = { model.recognize(SpeechBridgeAsrRequest(locale, SpeechBridgeInput.Microphone)) },
             enabled = controlsEnabled && locale.isNotBlank(), modifier = Modifier.testTag("speech-recognize-mic")) { Text("开始麦克风 ASR") }
@@ -75,6 +79,7 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
     Text(state.phase.name, Modifier.testTag(if (state.phase == SpeechPhase.CANCELLED) "speech-cancelled" else "speech-phase"))
     state.failure?.let {
         Text("${it.code} ${it.reason ?: ""}", Modifier.testTag("speech-failure"), color = MaterialTheme.colorScheme.error)
+        if (it.reason == "NO_SPEECH") Text("未检测到足够的语音。请靠近麦克风，并在较安静的环境重试。")
         if (it.reason?.contains("permission", ignoreCase = true) == true) {
             TextButton(onClick = { actions?.openSpeechSettings() }) { Text("打开语音权限设置") }
         }
@@ -101,7 +106,7 @@ private fun BackendControls(label: String, state: SpeechBackendState, selection:
     OutlinedTextField(backendId, { backendId = it; if (it.isNotBlank()) select(SpeechBridgeSelection.Explicit(it.trim())) },
         label = { Text("显式后端 ID（严格选择）") }, singleLine = true,
         enabled = enabled, modifier = Modifier.fillMaxWidth().testTag("speech-${label.lowercase()}-backend"))
-    Text(if (explicit == null) "选择：系统默认" else "选择：${explicit.backendId}")
+    Text(if (explicit == null) "选择：默认后端" else "选择：${explicit.backendId}")
     state.backends.forEach { backend ->
         Text("${backend.backendId} · ${if (backend.availability.available) "available" else backend.availability.reason ?: "unavailable"}" +
             " · minOS ${backend.availability.minimumOS ?: "—"} · offline 声明 ${backend.offline}")

@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-05 F05最新：可选 `sherpa.onnx.whisper` 无需 Google/系统语言包，固定样本真实推理已通过，但用户两次分别授权的普通麦克风尝试均内容错误，不能验收。现场噪音较大；合成静音/纯噪声假文本已复现，新增同runtime固定MIT Silero VAD后两者真实拒绝，干净/SNR10英文仍匹配，SNR0仍错；系统session降噪可用时启用，现场修复效果待新的授权实测。新增无语音映射与模型准备互斥/初始化防崩溃回归。详见[当前证据](android-sherpa-asr.md)。修复版第三次单独授权采音后用户确认基本正确、少量漏错词，基本功能可用；三次授权均已消耗。系统ASR、质量/生命周期/最低系统与发布缺口保留，未纳入统一benchmark。
+
 2026-11-04 F11追加：P11总表和readiness现已纳入Android ASR资源入口/授权请求、SR完整请求/动态重播、LM真机ZIP/同步生成及双端Identity/PAD原始分数证据，移除已实现后端/模型/factory仍未实现的过时描述。当前校验226证据引用/241来源hash/9行gap；grouped的8组原始统计不变，状态和剩余gap按新证据更新。36项相关工具测试通过；仅重验既有产物，不增加benchmark样本、不升级质量/资源/校准或发布结论。见[P11矩阵](p11-status-matrix-20261027.md)与[可复算入口](p11-grouped-benchmark.md)。ASR最新只读复核仍无默认网络，其他既有待答复项不变。
 
 2026-11-04 F06追加：复用保留输出a21c0fcf…6e47ea的精确临时副本，TECNO/Visha设备端录屏exit0、完整解码120屏幕帧；稳定52帧按序覆盖全部48输出帧，固定2秒静音结果完整动态重播已证。不是再次普通按钮/FileProvider验收，也不代表帧节奏预算、主观质量/音频/长期流畅度。多次ADB断连及exit0部分读取被保留，清理校验阻止误删后按设备hash精确清理六个临时文件；远程glob核验问题改为逐路径hash，原四export不变。BACK回同PID1551，包/权限/空input-output保持；新验证及原60/60通过。见[动态重播](android-video-sr-demo.md#2026-11-04-tecno-complete-dynamic-replay-of-retained-output)。

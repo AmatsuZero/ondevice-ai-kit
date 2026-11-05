@@ -29,6 +29,8 @@ class SpeechHost(
     private val requestPermission: ((Boolean) -> Unit) -> Unit,
     private val openSettings: () -> Unit,
     override val asrResources: AsrResourceHost? = null,
+    private val createAdditionalAsr: suspend () -> List<SpeechRecognitionBackend> = { emptyList() },
+    private val defaultAsrBackendId: String? = null,
 ) : SpeechBridge, SpeechDemoActions, SpeechAsrResourceProvider {
     private val ownerJob = SupervisorJob()
     private val owner = CoroutineScope(scope.coroutineContext.minusKey(Job) + ownerJob)
@@ -48,9 +50,24 @@ class SpeechHost(
         if (closed) { ttsBackend?.close(); return@launch }
         val asrBackend = try { createAsr() } catch (error: CancellationException) { throw error }
             catch (_: Exception) { recordInitializationFailure(SpeechBridgeCapability.ASR); null }
+        val asrBackends = buildList {
+            asrBackend?.let(::add)
+            try { addAll(createAdditionalAsr()) }
+            catch (error: CancellationException) { throw error }
+            catch (_: Exception) { recordInitializationFailure(SpeechBridgeCapability.ASR) }
+        }
+        if (closed) { ttsBackend?.close(); asrBackends.forEach { it.close() }; return@launch }
+        val selectedDefault = defaultAsrBackendId ?: asrBackends.firstOrNull()?.backendId
+        val asrClient = if (asrBackends.any { it.backendId == selectedDefault }) {
+            SpeechRecognitionClient(selectedDefault!!, asrBackends)
+        } else {
+            if (selectedDefault != null) recordInitializationFailure(SpeechBridgeCapability.ASR)
+            asrBackends.forEach { it.close() }
+            null
+        }
         adapter = AndroidSpeechBridge(
             tts = ttsBackend?.let { SpeechSynthesisClient(it.backendId, listOf(it)) },
-            asr = asrBackend?.let { SpeechRecognitionClient(it.backendId, listOf(it)) }, scope = owner)
+            asr = asrClient, scope = owner)
         model.refreshBackends(SpeechBridgeCapability.TTS)
         model.refreshBackends(SpeechBridgeCapability.ASR)
     }

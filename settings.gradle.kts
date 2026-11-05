@@ -1,5 +1,8 @@
 pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
 dependencyResolutionManagement { repositories {
+    providers.gradleProperty("sherpaMavenRepo").orNull?.let { localRepo ->
+        maven { url = uri(localRepo); content { includeGroup("com.k2fsa.sherpa.onnx") } }
+    }
     if (providers.gradleProperty("usePublishedSdk").orNull == "true") mavenLocal { content { includeGroup("io.ondeviceai") } }
     providers.gradleProperty("litertlmMavenRepo").orNull?.let { localRepo ->
         maven { url = uri(localRepo); content { includeGroup("com.google.ai.edge.litertlm") } }
@@ -26,4 +29,5 @@ include(":examples:android-litertlm-native")
 include(":probes:android-litertlm")
 
 include(":android:backend-litert-sr")
+include(":android:backend-sherpa-asr")
 include(":android:backend-opencv-identity")
