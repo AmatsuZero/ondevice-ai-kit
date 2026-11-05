@@ -1,5 +1,16 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 最新恢复入口：组合 App 已完成装机与普通启动
+
+续接请先读 [本地模型启动修复与组合装机交接](HANDOFF-2026-11-05-local-model-startup.md)。
+`bad6362` 已移除 MLXVLM 隐藏启动参数要求，并修复已安装模型仍依赖原导入目录的问题；
+79 项 Swift / 304 项 tools 回归及新隔离整包构建通过。**ODAI Combined** 已用既有签名资产装到
+授权 iPhone，无参数启动后生成固定模型安装 manifest，首屏同时显示 Identity 设置与共享功能入口。
+新 App/模型保留，42 个旧 App 安装 URL 不变，普通 Demo 已切回。不是点击/picker/生成验收。
+证据 `artifacts/verification/apple-combined-startup-20261105/`；不要重做已完成的装机/固定样本验证。
+最新 readiness：`artifacts/verification/p11-readiness-20261105-combined-startup/summary.json`。
+P4/P11、质量/触摸/校准与发布仍 open/not-ready；下方“尚未装机/下一项 TTS”等是历史。
+
 ## 最新功能交付：Apple组合Demo
 
 用户反馈推进长期停在补证后，停止了新一轮精确Android LM重复验证；该轮仅只读预检，
