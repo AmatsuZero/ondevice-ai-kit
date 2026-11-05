@@ -50,6 +50,14 @@ full release acceptance remain open; experiment scripts are not the reusable
 package command required by Task3. No SDK source redistribution license is
 asserted where the project has none.
 
+2026-11-05 package follow-up: reusable shell/Python command now passes a fresh
+whole run, including both source builds,20 framework artifacts and all local ZIPs.
+New artifacts pass direct+ZIP-only consumers on both platforms and physical
+manifest-bound resource smoke. Tools297/297; OrderedCollections host262/262.
+Task3/4/5 local artifact and consumer paths have concrete evidence; MLX dependency
+tests, binary inference, independent packager review and release licensing/
+acceptance remain open. No remote publication or overall roadmap completion.
+
 ## Global Constraints
 
 - Preserve production apple-mlx/Package.resolved and all protected dirty/untracked files.

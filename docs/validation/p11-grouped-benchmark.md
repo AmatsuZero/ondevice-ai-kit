@@ -1,5 +1,7 @@
 # P11 分组 benchmark 快照
 
+2026-11-05再追加正式package入口fresh端到端、新20ZIP/direct与ZIP第二消费者双平台、真机绑定资源、tools297/依赖262证据；当前readiness为 `artifacts/verification/p11-readiness-20261105-f09-packager/summary.json`。8组原benchmark样本不变，MLX依赖/模型binary推理和更广P11发布门槛保持。
+
 2026-11-05 F09追加正式清单、20本地ZIP与第二ZIP消费者两平台编译/真机资源报告证据；当前readiness改为 `artifacts/verification/p11-readiness-20261105-f09-manifest-zip/summary.json`。旧schema1硬pin保持，新schema2记录逐平台生成来源；不增加benchmark样本，F09/package入口/依赖测试及P11发布缺口保留。下段staging快照为历史。
 
 2026-11-05 F09 的真实20模块静态双slice、两平台无源码消费者和真机资源/MLX小算术作为分发侧限定证据加入 readiness；不产生模型推理或性能样本。当前快照为 `artifacts/verification/p11-readiness-20261105-f09-binary-staging/summary.json`，旧schema的Metal固定pin仍未改，正式package门槛仍开放。

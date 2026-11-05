@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-05 F09正式入口：完整fresh双平台编译→20XCFramework/4C/18resource/22notice→ZIP/checksum命令已过；新产物direct/ZIP第二consumer两平台及manifest绑定真机resource通过。tools297/297，OrderedCollections host依赖262/262；MLX依赖/模型binary推理/独立packager审查/许可与更广发布验收仍开放，下段入口尚缺为历史。
+
 2026-11-05 F09后续：正式v2清单和generator两平台build、20真实本地ZIP/checksum/SwiftPM解析及第二ZIP消费者两平台编译链接均已通过，真机正式清单绑定资源报告通过。staging审查两项缺陷已复现并修复；完整pipeline仍需正式package入口/依赖测试，binary模型推理和release许可/验收开放。详见[最新分发证据](apple-mlxvlm-distribution.md#2026-11-05-manifest-driven-static-artifacts-and-zip-consumers)。下段staging缺口为历史。
 
 2026-11-05 F09：用户已采用隔离兼容overlay继续本地构建；fresh完整固定依赖和SDK快照实际形成20个静态双sliceXCFramework，搬移binary-only消费者device/simulator编译链接通过，真机Bundle.module/Metal加载与MLX小算术通过。正式manifest的C/static/逐平台资源来源、package入口、notices/依赖测试及ZIP第二consumer尚缺，F09不关闭。见[真实二进制证据](apple-mlxvlm-distribution.md#2026-11-05-real-static-binary-closure-and-device-resource-smoke)。

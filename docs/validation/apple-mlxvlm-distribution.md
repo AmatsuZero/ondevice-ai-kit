@@ -1,5 +1,69 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-05 packaging command end-to-end result
+
+The final whole-command run completed successfully in fresh
+`artifacts/verification/f09-reusable-package-final-20261105/`. Both source
+platforms compiled, all20 XCFrameworks/4 C modules/18 resources/22 notices were
+assembled, schema2 validation and20 ZIP/checksum generation passed. The status
+is `local-artifacts-built`, with publication/runtime/consumer flags deliberately
+left not-run in the packaging-only receipt. Follow-up checks separately passed
+local SwiftPM ZIP resolution and both direct and ZIP-only second consumers on
+device/simulator. The final ZIP graph contains20 extracted artifacts, no source
+checkout and only the probe Swift compilation input on each platform.
+
+Physical resource smoke for these exact new artifacts passed, bound to manifest
+`bd41785dde0cccf0c26f58d1abb363ceac2e9e52e822c5efb929e97585097efc`.
+PID2151 was stopped, confirmed absent and ordinary Demo restored. Final tools
+**297/297** (59.750s), the5 package input/module-map regressions, Python compile,
+shell syntax/diff checks and nine protected paths/production lock pass. Source
+inputs were revalidated after build. The separate host dependency suite remains
+262/262; MLXLM dependency tests and binary model inference were not run. No new
+independent packager review was obtained after the earlier reviewer429 failure.
+
+The local binary packaging/consumer/resource path is now reproducible, while
+F09 release acceptance and broader roadmap/P4/P11 remain open. Frozen command,
+artifact/App/source hashes and original failures are in the new run's
+`summary.json`, `verification.json` and the earlier failed run directory.
+
+## 2026-11-05 reusable local packaging command
+
+`scripts/package-apple-mlxvlm.sh SNAPSHOT SOURCE_PACKAGES FRESH_OUTPUT` now wraps
+`tools.package_mlxvlm_binary`. It validates the committed snapshot inventory and
+production lock, all12 fixed dependency revisions, the exact four adopted
+patched-file hashes, the two native gitlink revisions and unchanged sources.
+It then builds Release/library-evolution for device and arm64 simulator, forms
+all20 static frameworks, creates XCFrameworks, copies public C headers/bundles,
+emits schema2 provenance/notices and creates root-layout ZIPs with SwiftPM
+checksums. It refuses existing output/input overlap; build failure preserves
+logs and records failed/not-ready rather than accepting partial artifacts.
+It never patches a source cache, fetches dependencies, signs or publishes.
+
+The first real run built both platforms but stopped at assembly: cLogSupport
+has an implicit SwiftPM module map, not a source modulemap. A real header-copy
+regression reproduced the missing behavior and now generates the explicit map.
+The fixed assembly was run against the unchanged completed build products in a
+fresh subdirectory. A second whole-command run uses a separate fresh root;
+its final result is recorded in that run's summary/status, not inferred from the
+first two successful compiles. Public header packaging excludes yyjson.c.
+
+The adopted swift-collections revision also ran its real host
+OrderedCollectionsTests: **262 tests,0 failures**. This does not stand in for
+MLXLM's dependency tests or iOS library-evolution/runtime checks. Evidence:
+`artifacts/verification/f09-collections-tests-20261105.log`.
+
+```sh
+sh scripts/package-apple-mlxvlm.sh \
+  artifacts/verification/f09-binary-build-20261105/snapshot \
+  artifacts/verification/f09-binary-build-20261105/SourcePackages \
+  artifacts/verification/f09-reusable-package-fresh
+```
+
+The snapshot/cache arguments are already prepared isolated inputs. This command
+does not acquire missing dependencies or authorize a different compatibility
+policy. Consumer compilation, local ZIP resolution, physical resource/model
+runtime and publication remain separate gates in its status receipt.
+
 ## 2026-11-05 manifest-driven static artifacts and ZIP consumers
 
 The staging experiment below now has a real schema-v2 manifest at

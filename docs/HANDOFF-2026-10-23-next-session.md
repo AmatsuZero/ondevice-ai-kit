@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新 F09 续接 — 2026-11-05 可复用打包入口端到端已通过
+
+- 本地已提交dfa6c85（20静态产物/v2清单/无源码消费者）。继续实现 `scripts/package-apple-mlxvlm.sh SNAPSHOT SOURCE_PACKAGES FRESH_OUTPUT` 与tools/package_mlxvlm_binary.py：固定输入/补丁/原生revision验证→device/sim Release/library-evolution→20XCFramework/4C/18resource/22notice→清单+ZIP/checksum；无下载/patch输入/签名/发布。
+- 首轮双平台build过但组装漏cLogSupport隐式modulemap；真实header用例RED→GREEN，保留旧失败输出。**最终fresh整条命令已过**，新产物的direct+第二ZIP consumer两平台均过，20ZIP完整本地SwiftPM解析通过，graph无checkout/仅probe Swift源。全tools297/297、host OrderedCollectionsTests262/262、input/modulemap5/5、Python/shell/diff/九保护/生产lock通过。
+- 新产物真机resource报告绑定manifest bd41785d…097efc通过；PID2151已终止并确认无，普通Demo恢复，无采音/模型推理/私人媒体。证据 `artifacts/verification/f09-reusable-package-final-20261105/summary.json` 和verification.json；旧first-failure与assembly replay另保留。
+- 当前下一缺口是**MLX依赖专项测试与binary模型推理**，另有独立packager审查缺席（新v2 reviewer429）、源码再分发许可/发布和P4/P11等原验收；不称全目标或release完成。不要重做完整clone/模型下载或重新请求既有策略授权。goal保持active。
+
 ## 最新 F09 续接 — 2026-11-05 正式清单/ZIP第二消费者已通过
 
 - 已继续执行用户批准的隔离兼容方案，无需再次申请。schema2覆盖20静态双slice/4C模块/18逐平台resource/22notice；schema1旧Metal硬pin保持，schema2按真实工具链/平台/source/overlay/output来源绑定。生产lock和九保护未变，未发布。
