@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-05 F12输入冻结：[本地清单](p11-input-freeze.md)已统一5a65f51源码归档951文件、6组27份外部模型及附属文件、14媒体样本、1固定TTS请求和9能力历史身份；只读复核及状态提升/fixture篡改拒绝通过，9保护文件与生产lock保持。缺失旧人脸原fixture和系统模型字节身份明确保留，未从同一候选全能力重建重测；新packager审查429无结论。P4/P11与发布仍open/not-ready，无新增benchmark/录音/设备操作。
+
 2026-11-05 F09推理/依赖：最终20模块产物的fresh binary-only消费者已在iPhone17,2/iOS27.2完成固定图片与29FPS合成视频真实生成，模型身份/14文件host+device hash、drain/close/lease释放/帧清理通过，PID2184终止、普通Demo恢复；8份原样上游测试在macOS27.2通过230逻辑测试/295case执行、0fail/skip。性能microbenchmark排除；首轮漏测试helper编译失败保留并补原文件后通过。详见[分发验证](apple-mlxvlm-distribution.md)。独立审查/源码再分发许可/生产交付策略和P4/P11/质量资源/minOS仍未完成，无新增benchmark样本或录音。
 
 2026-11-05 F09正式入口：完整fresh双平台编译→20XCFramework/4C/18resource/22notice→ZIP/checksum命令已过；新产物direct/ZIP第二consumer两平台及manifest绑定真机resource通过。tools297/297，OrderedCollections host依赖262/262；MLX依赖/模型binary推理/独立packager审查/许可与更广发布验收仍开放，下段入口尚缺为历史。
@@ -98,6 +100,6 @@
 | F09 / Apple MLX 分发 | [分发](apple-mlxvlm-distribution.md)：用户采用隔离固定补丁后，可复用命令完成20模块Release/library-evolution双slice、4C/逐平台资源/notices及20ZIP；direct与ZIP无源码消费者双平台、绑定manifest真机资源和固定图片/视频推理通过。OrderedCollections262及MLX精选230逻辑测试/295case执行通过 | 独立packager审查、SDK源码再分发许可与生产交付策略；保持生产lock/原缓存/保护路径，未知mask仍按已批准策略trap；不重复完成的构建或模型下载 | 本地artifact/consumer/runtime门槛已通过；生产维护、许可、独立审查及发布验收逐项裁定后才能改变release状态 |
 | F10 / Identity/PAD | [Android 实验](android-opencv-identity-demo.md)、[Apple 实验](apple-opencv-identity.md)及[图库控件](identity-gallery-demo.md)：双端真实检测/对齐/embedding/注册删除及精确 1:N index/query 已实现；Apple native/session 21/21、Demo 主流程15/15。实际模型验证/图库发布仍缺校准策略，独立 PAD 未实现；触控/picker 未验 | 独立 PAD 模型与 runtime、授权数据和校准集；实际 Demo UI 验收 | 1:1、1:N、PAD 指标与阈值、授权撤销/删除和真实设备流程验收；本机正例流程不提升为生产识别能力 |
 | F11 / P11 质量/资源/性能 | [状态矩阵](p11-status-matrix-20261027.md)、[分组报告](p11-grouped-benchmark.md)：9行均有 gap，现有5能力/8组兼容报告；iOS TTS 五次逐 run、文件 ASR SDK client 五次逐 run、Video SR 双后端逐帧与公开 SDK 五次整请求均已各自入组。另有公开 SDK Video SR 20 次、约 107 秒的单素材同 PID 有界 RSS 趋势及第二自然场景五次请求，独立索引在 readiness，不混入首场景五次分组。Face/Video SR 无自然主观质量，GPU/energy/长期持续资源未统一 | 固定每能力任务集/阈值、同构测量方法与设备；Power Profiler 工具崩溃需新方案 | 所有实际交付能力正确性/质量/延迟/峰值/取消/持续运行有原始逐run数据与分组报告；不能可靠测量项保持 null 并明确发布裁定 |
-| F12 / 最终复审与候选冻结 | [验收](acceptance.md)：部分限定审查因429未取得结论；完整分支审查/统一模型及fixture冻结尚缺；protected signing不属于可交付修改 | 每专项结束一次有界复审；最后从已提交源码重建实际候选，对 SDK/model/fixture/device 身份冻结 | 未解决 finding 和 review 缺口逐项裁定，所有 P11 原验收通过后才可改变发布结论；合并/tag/发布另受授权边界约束 |
+| F12 / 最终复审与候选冻结 | [输入冻结](p11-input-freeze.md)：951源码文件、6组27模型及附属文件、14媒体/1文本输入和历史设备身份已登记复核；系统模型字节/旧人脸原fixture与统一候选全能力重建重测仍缺；独立审查429无结论；protected signing不属于可交付修改 | 保留当前归档及历史报告身份，补完整分支审查与生产交付裁定；最终从精确提交重建/重测实际候选，不重复既有模型下载 | 未解决 finding 和 review 缺口逐项裁定，所有 P11 原验收通过后才可改变发布结论；合并/tag/发布另受授权边界约束 |
 
 原扩展 SDK/Demo 计划仍保留，以上是执行延期清单，不删除需求。后续按编号启动专项，完成一个关闭一个；本轮收尾后不再自动循环重试这些项目。

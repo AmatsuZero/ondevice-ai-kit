@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F09 续接 — 2026-11-05 binary 模型推理与 MLX 专项测试通过
+## 最新 F12 续接 — 2026-11-05 本地输入冻结与只读复核
+
+- 已冻结5a65f51 committed archive（951文件逐一匹配Git对象/模式、内嵌commit，SHA79835bba…e7a2）；6组外部模型及附属文件27份、14媒体样本、1固定TTS请求和9能力历史证据统一登记。现有9保护路径与生产lock保持。详见[输入冻结](validation/p11-input-freeze.md)，原始清单及只读verify在 `artifacts/verification/p11-input-freeze-20261105/`。
+- 316项历史readiness来源核对通过；历史跟踪文档/benchmark入口按归档版本校验，ignored原始报告/媒体继续校验当前字节。发布提升/fixture hash篡改的内存副本被拒绝。初版清单与首个脚本Git子命令错误均保留，未重建模型或重复F09构建。
+- 状态仍partial-input-freeze：旧人脸benchmark原输入图未定位、系统模型/voice未byte-frozen；归档不等于同一候选9能力全部重建/当前设备重测。新packager reviewer再次429无结论，不重试失败代理。下一为完整分支审查/生产交付与许可裁定，以及原P4/P11验收；无新benchmark、下载、录音或设备操作。goal仍active，不标完整目标完成。
+
+## 上一 F09 续接 — 2026-11-05 binary 模型推理与 MLX 专项测试通过
 
 - 复用最终manifest bd41785d…097efc，fresh无源码消费者signed Release通过，graph仅一份probe Swift源/无checkout，20XCFramework树与产物一致。iPhone17,2实际系统报告**iOS27.2/24B119**；PID2184/runId E68987B2-0AFA-4073-8539-D26F227DA31B完成固定公开图片及29FPS合成短视频真实生成，backend/model身份匹配、非空/10及22updates，14模型文件host+device核验；drain/close/lease删除/关闭后拒绝/帧快照清理/fixture不变通过。PID已终止确认无，普通Demo PID1433恢复。无采音/私人媒体/下载。
 - 原样复制8个固定上游测试文件到隔离macOS宿主，KVCache/config/TurboQuant/attention/SmolVLM/Gemma4 chunked-prefill等**230逻辑测试/295case执行、0fail/skip**（XCTest39+SwiftTesting191）通过；明确排除性能microbenchmark。首轮漏MatmulPrecision helper编译失败，补原文件后通过，未改实现/断言/阈值。不是上游全套测试或未知枚举支持证明。

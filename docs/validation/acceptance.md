@@ -1,5 +1,7 @@
 # Foundation 验收记录
 
+2026-11-05 当前口径：Android离线sherpa ASR基本麦克风功能已获用户确认；F09本地20模块打包、无源码消费者、真机图片/视频推理及精选依赖测试已通过。[输入冻结](p11-input-freeze.md)补齐5a65f51源码归档、6组27份模型及附属文件、14媒体样本、1个TTS请求和9能力历史身份，状态partial-input-freeze；未完成同一候选全能力重建验收。旧人脸原fixture、系统模型字节身份、独立审查、SDK再分发许可/生产交付、完整PAD/校准及原P4/P11质量/资源/最低系统仍缺。基础10/12、发布open/not-ready，8组benchmark未增加样本。用户已恢复持续推进；下方closed-with-followups和计数是历史检查点。
+
 2026-11-04 功能优先续接：Android ESRGAN完整请求/动态重播、LiteRT-LM固定授权Gemma/同步factory/真机系统ZIP到生成，以及双端OpenCV Identity注册删除/精确index已实现并有设备证据。后文“缺授权模型/真实推理/Identity后端”属于历史检查点；当前剩余缺口以[P11矩阵](p11-status-matrix-20261027.md)为准。ASR系统资源就绪与真实转写、完整PAD/校准、异步LM drain、分发/质量/持续资源仍未完成。当前readiness校验226证据引用/241来源hash，九行均有gap；既有benchmark保持5项能力/8组，P4/P11与发布仍open/not-ready。
 
 更新日期：2026-10-29（保留分包历史证据）。工作分支 `feat/sdk-foundation`；代码提交以 git 历史为准。构建日志与本机产物放在忽略目录，不提交模型权重、照片、设备标识或签名材料。
