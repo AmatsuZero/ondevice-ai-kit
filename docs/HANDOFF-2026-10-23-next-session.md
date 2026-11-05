@@ -4,7 +4,14 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F07 续接 — 2026-11-05 最终组合包真机LM已可用
+## 最新 F12 续接 — 2026-11-05 精确提交 Android 候选构建与 LM 运行通过
+
+- 从 e0438c0 committed archive 独立提取953文件并逐一核对Git对象/模式；14份既有固定输入隔离复制，四后端同时启用，offline/no-build-cache/rerun-tasks **997任务全执行**。全17模块586项JVM通过，20模块lint无error/52既有warning；外部运行/测试artifact126/131及包内native/7资源/完整sdkCommit已核验。不含shared/KMP其他host测试重跑。
+- 新普通APK b90e7830…a64d8d在专用API36 AVD经系统红图选择、native初始化后普通取消/CANCELLING禁用/CANCELLED、同图同PID10705重入SUCCEEDED与普通清除通过；44项运行复核。既有4模型/拒绝权限/无test APK/空cache保持，旧afed回退保留。**手机上可用Demo未操作**，新候选仍无真机与ASR/SR/Identity等全能力验收。
+- [验证及复核入口](validation/android-committed-candidate.md)；ignored `android-committed-candidate-20261105/summary.json` SHA73f2adce…5728c。构建/运行已terminal，未留pending请求；新包与模型留专用AVD，不重复构建或下载。审批服务429/超时未执行及host收集错误保留，正常审批后恢复，无绕过。
+- 下一推进同一精确APK其他能力运行与Apple候选/完整复审；不能把旧afed真机证据重标到新包。原9保护路径/生产lock保持，未新增benchmark/采音/拍照。全能力、P4/P11与发布仍open/not-ready，goal active。
+
+## 上一 F07 续接 — 2026-11-05 最终组合包真机LM已可用
 
 - TECNO/API35已装最终普通APK afed156b…926c461保持，无重装/test变更；原LM为空后通过USB既有授权ZIP＋普通DocumentsUI导入，七模型/附属摘要前后匹配，五ASR/SR模型/权限不变。**授权LM现留手机可用**，临时公共ZIP已精确删除，不重复下载或导入。
 - 普通系统红图/default prompt/32token，PID19257在Mali-G57 MC2/Vulkan Integrated GPU初始化后普通取消：CANCELLING禁用→CANCELLED可重入；同图同PID重入SUCCEEDED，输出描述红矩形，后端/model/revision/runtime正确。两轮1448/1448及CPU/GPU销毁对，前轮销毁先于重入GPU初始化；普通清除本轮输入/native cache，原历史fixture摘要/cache文件名清单保持。

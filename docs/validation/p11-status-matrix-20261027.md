@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-11-05 F12精确候选：e0438c0归档953文件/14固定输入的组合Android包已offline强制重建，586项JVM与20模块lint无错误；外部依赖/包内资源/完整提交身份核验。新APK b90e7830在专用软件GPU模拟器普通固定红图取消/drain/同PID重入成功及清理44项通过，见[边界](android-committed-candidate.md)。这不是新包全能力或真机验收；9行gap、P4/P11与发布仍open/not-ready，不新增benchmark样本。
+
 2026-11-05 F07最终包真机：原afed156b普通App在TECNO经系统ZIP导入、系统红图选择、Mali硬件GPU初始化后取消/同PID重入成功与清理通过，52项复核；授权LM留手机可用，原App/test/runner/权限/五ASR-SR模型保持。只关闭最终包固定图真机链路子项，人工触摸/provider、异步drain及质量资源仍缺；无新benchmark/采音，见[证据边界](android-litertlm-ui.md#2026-11-05-最终组合包真机导入取消与重入)。
 
 2026-11-05 F07最终普通APK afed156b在专用软件GPU模拟器完成系统红图→native初始化后取消/等待释放/生成禁用→同输入同PID重入SUCCEEDED→普通清除，38证据检查通过。真机最终候选/人工触摸、其他provider及异步drain继续开放；无新benchmark/采音，详见[普通UI](android-litertlm-ui.md#2026-11-05-最终组合包普通-ui-取消与重入)。

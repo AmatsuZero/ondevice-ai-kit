@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261105-final-physical-lm/summary.json",
-    "sha256": "e52fa5bde9e5b61388a7316d12665a56ce10f78a3e0f7f1bdd91fcad5f61b3fe"
+    "path": "artifacts/verification/p11-readiness-20261105-exact-android/summary.json",
+    "sha256": "29e7e99fa919c85e9e584e8003e131bda45da2d942ddb0e5d7f9e1d19cb88276"
   },
   "schemaVersion": 1,
   "sources": [

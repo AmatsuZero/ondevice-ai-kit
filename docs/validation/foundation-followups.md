@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-05 F12精确候选：[Android独立归档重建](android-committed-candidate.md)953源码/14固定输入、四后端同时启用、997任务全执行，586项JVM及20模块lint无错误通过；新APK b90e7830在专用AVD完成普通固定图取消/drain/同PID重入/成功/清理，44项运行检查。原手机Demo未操作；同一新APK其他能力/真机与Apple全量候选仍缺，不用旧afed真机证据替代。无新增benchmark或采集，P4/P11与发布保持open/not-ready。
+
 2026-11-05 F07真机最终包：TECNO原afed156b普通App经既有ZIP系统导入后，Mali-G57硬件GPU初始化后取消/等待/同图同PID19257重入成功及普通清除均通过，52项只读复核；授权模型留手机、临时ZIP删除，原App/test/runner/权限与五ASR/SR摘要保持。人工触摸/其他provider、异步合同与质量资源继续开放，见[真机范围](android-litertlm-ui.md#2026-11-05-最终组合包真机导入取消与重入)。
 
 2026-11-05 F07最终组合包：专用软件GPU模拟器用afed156b最终普通APK，经系统红图选择、native初始化后取消/CANCELLING禁用、CANCELLED、同输入同PID9200重入真实SUCCEEDED及普通清除通过；38证据检查、四模型/拒绝权限/cache清理均匹配。分层264source hash/2旧测试差异明确，不是全量重建；真机最终候选/人工触摸、其他provider、异步drain及质量资源仍缺，见[范围](android-litertlm-ui.md#2026-11-05-最终组合包普通-ui-取消与重入)。

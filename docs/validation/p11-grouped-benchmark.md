@@ -1,5 +1,7 @@
 # P11 分组 benchmark 快照
 
+2026-11-05 F12精确候选：新增953源码/14输入/586项JVM/组合APK和普通LM生命周期44项证据，见[验证](android-committed-candidate.md)。当前readiness为 `artifacts/verification/p11-readiness-20261105-exact-android/summary.json`，仍9行gap；原8组统计和样本不变，无全能力或发布提升。下方为历史。
+
 2026-11-05 F07真机追加：最终普通APK在TECNO系统ZIP/红图选择、Mali硬件初始化后普通取消/同PID重入成功及清理，52项复核；模型留手机，原状态保持。当前readiness为 `artifacts/verification/p11-readiness-20261105-final-physical-lm/summary.json`，只收窄真机最终包固定图缺口；9行仍有gap、8组统计和样本不变。下方为历史。
 
 2026-11-05 F07追加最终普通APK在专用软件GPU模拟器的native初始化后普通取消/等待/同PID重入/成功及清理，38项复核通过。当前readiness为 `artifacts/verification/p11-readiness-20261105-final-lm/summary.json`；只收窄最终APK模拟器主流程缺口，9行仍有gap、8组统计无新增样本。下方为历史。
@@ -36,7 +38,7 @@
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261105-final-physical-lm/summary.json
+  --output artifacts/verification/p11-grouped-20261105-exact-android/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。
