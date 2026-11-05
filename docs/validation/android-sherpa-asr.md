@@ -1,5 +1,39 @@
 # Android offline ASR — 2026-11-05
 
+## Fixed-input native lifecycle — 2026-11-05
+
+The existing ordinary TECNO KM9/API35 App (`afed156b…926c461`) now passes a
+bounded native lifecycle probe using only the previously authorized synthetic
+English PCM (SHA256 `fc0f3f5b…39df46`). Only the test APK was replaced;
+53 relevant original source hashes match, and the ordinary App was not rebuilt
+or reinstalled. This is evidence for that exact installed App, not a new unified
+candidate or microphone lifecycle acceptance.
+
+The test observes an actual `OfflineRecognizer.decode` native frame in its own
+process before both cancellation and active close. Thirteen boolean checks pass:
+busy rejection during decode and before cancellation drain; no cancelled result
+delivery; successful same-backend reentry matching the fixed text; close waits
+for the active request, rejects new requests during drain and after close, and
+is idempotent. Caller-owned samples remain unchanged. Native frame polling does
+not establish an allocation/free trace or zero-leak/resource budget.
+
+The backend's twelve JVM tests were executed afresh (`--rerun-tasks`,35 tasks
+executed), with zero failures/errors/skips. Offline test-APK build passed;
+backend lint has zero errors and one existing warning. The original test APK and
+Identity runner were restored; ordinary App hash, five ASR/SR model hashes and
+permission strings match the pre-run snapshot. The ordinary Demo was activated.
+The first restoration observation raced a normal process exit after successful
+installation; exact package/model/runner/permission revalidation passed without
+reinstallation. This was a host observation error, not a failed App restoration.
+
+Evidence and a read-only `verify.py` are in
+`artifacts/verification/sherpa-lifecycle-20261105/`. The new runner is
+`demo/androidApp/src/sherpaasrAndroidTest/kotlin/io/ondeviceai/demo/SherpaAsrLifecycleInstrumentation.kt`.
+It opens no microphone and persists no audio, transcript or thread stack.
+Actual capture/background lifecycle still requires a fresh user-present grant;
+accuracy, sustained resources and API26 remain open. No new benchmark samples
+or independent review approval; P11/release remain `open/not-ready`.
+
 ## Latest noise correction — supersedes the earlier candidate below
 
 **Latest: corrected-candidate microphone is basically usable by user confirmation;

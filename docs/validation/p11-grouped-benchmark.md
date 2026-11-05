@@ -1,5 +1,7 @@
 # P11 分组 benchmark 快照
 
+2026-11-05 F05追加真机固定输入native取消/重入/活动close的13检查及12项fresh JVM回归；原App/模型/权限与test runner已恢复，未采音。当前readiness为 `artifacts/verification/p11-readiness-20261105-sherpa-lifecycle/summary.json`；只收窄固定输入生命周期缺口，9行仍有gap，8组统计无新样本。下方为历史。
+
 2026-11-05 F12追加[输入冻结](p11-input-freeze.md)：6组模型、14媒体/1文本及源码归档和历史身份只读复核通过；状态仍partial-input-freeze。当前readiness为 `artifacts/verification/p11-readiness-20261105-input-freeze/summary.json`，9行仍有gap，8组统计/原始样本不变；未宣称统一候选全能力验收。下方快照为历史。
 
 2026-11-05追加F09真机binary-only固定图片/短视频推理与精选MLX依赖测试证据：模型身份/关闭清理通过，230逻辑测试/295case执行、0fail/skip。当前readiness为 `artifacts/verification/p11-readiness-20261105-f09-inference/summary.json`；未添加benchmark样本，8组统计保持，独立审查/许可/生产交付与P11发布缺口保留。以下快照均为历史。
@@ -30,7 +32,7 @@
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261105-input-freeze/summary.json
+  --output artifacts/verification/p11-grouped-20261105-sherpa-lifecycle/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。

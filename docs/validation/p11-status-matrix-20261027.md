@@ -1,6 +1,6 @@
 # P11 状态矩阵与发布结论
 
-2026-11-05 F05：可选 CPU `sherpa.onnx.whisper` 已完成普通 Demo 真实麦克风基本功能验收（用户确认基本正确、少量漏错词），以及独立本地 Maven AAR 消费。固定样本英文匹配、静音/纯噪声拒绝；强噪声 SNR0、中文精确匹配仍失败。系统 Google ASR 资源问题单独保留，不再将 Android 全体 ASR 描述成缺真实转写。无新增采音或 grouped benchmark 样本，P11/发布仍 `open/not-ready`。
+2026-11-05 F05：可选 CPU `sherpa.onnx.whisper` 已完成普通 Demo 真实麦克风基本功能验收（用户确认基本正确、少量漏错词），以及独立本地 Maven AAR 消费。另在原普通App用固定合成英文观察实际JNI decode后验证取消/drain/同backend重入和活动close/拒绝，13项通过；未采音，真实capture/前后台生命周期仍缺。固定样本英文匹配、静音/纯噪声拒绝；强噪声 SNR0、中文精确匹配仍失败。系统 Google ASR 资源问题单独保留，不再将 Android 全体 ASR 描述成缺真实转写。无新增采音或 grouped benchmark 样本，P11/发布仍 `open/not-ready`。
 
 2026-11-04 功能优先续接：Android LiteRT/ESRGAN 已完成普通系统选择、完整48帧超分与同字节结果动态重播；固定 LiteRT-LM0.18.1/授权 Gemma 已完成 TECNO 系统 ZIP 导入、CPU文本＋硬件GPU视觉真实生成。双端 OpenCV Identity 检测/对齐/embedding/注册删除与精确1:N机制已接入；PAD 仅有独立 iPhone 原始分数试验。下面对应行已更新，不再把这些已实现链路列为缺少后端/权重。ASR 已获授权请求 en-US，资源仍 NOT_REPORTED，最新只读复核仍无默认网络；真实转写未证。新增证据纳入 `artifacts/verification/p11-readiness-20261104-mainflows/summary.json`；不补造延迟/RSS/能耗样本，既有 grouped benchmark 仍为5项能力/8组，九行仍有 gap，P11/发布保持 `open/not-ready`。
 
@@ -37,7 +37,7 @@
 | Face detection | `pass-bounded` | [benchmark](benchmark.md)、[P11 分组报告](p11-grouped-benchmark.md)、[设备矩阵](device-matrix.md) | iOS 15、Android API26、质量阈值、峰值内存、能耗、长期资源 |
 | Speech TTS | `pass-bounded` | [语音后端](speech-backends.md) | 自然语音质量、最低系统、完整离线矩阵 |
 | Speech ASR file | `pass-bounded` | [语音后端](speech-backends.md)、[固定文件探针](ios-asr-file-probe.md)、[真机麦克风生命周期](ios-microphone-asr.md#2026-11-03-显式-closedrain-真机探针)（独立证据，不入固定文件分组） | 麦克风自然 CER/WER/逐 run 资源、完整离线矩阵与长期资源、iOS 15 |
-| Speech ASR Android | `pass-bounded-offline-basic` | [离线 SDK/Demo 与独立 AAR 消费](android-sherpa-asr.md)、[系统资源入口](speech-backends.md#2026-11-04-tecno-授权资源请求与独立-aar-消费)、[设备矩阵](device-matrix.md) | sherpa 强噪声/中文准确性、真实取消重入/关闭、持续资源/API26；系统 Google 语言资源仍不可用；三次新采音授权均已消耗 |
+| Speech ASR Android | `pass-bounded-offline-basic` | [离线SDK/Demo、独立AAR与固定输入native生命周期](android-sherpa-asr.md)、[系统资源入口](speech-backends.md#2026-11-04-tecno-授权资源请求与独立-aar-消费)、[设备矩阵](device-matrix.md) | sherpa 强噪声/中文准确性、真实capture/前后台生命周期、持续资源/API26；系统 Google 语言资源仍不可用；三次新采音授权均已消耗 |
 | Video SR | `pass-bounded` | [Apple超分](video-sr-backends.md)、[Android完整请求及动态重播](android-video-sr-demo.md)、[Video Demo](video-bridge-demo.md)、[原生导出取消](apple-video-audio.md) | 主观/时域质量、传递函数、帧节奏预算、GPU/能耗与持续资源；最低系统设备验收暂缓 |
 | Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/真实 Files provider/AX 终态/Home 转场 tagged native trace/五次真机语义质量 rubric/同源 motion-control task-set/12轮 RSS 观察](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | temporal exact-label pair 0/3（`observed-failure`）；新增等时等待/clearCache 对照支持约1 GB残留主要来自MLX可回收缓存；整体泄漏与生产资源策略未定；跨场景/多任务集自然 temporal quality、可比较 GPU peak/能耗、发布资源预算、完整物理触控 |
 | Multimodal Android LiteRT-LM | `pass-bounded-sync-image` | [同步factory](android-litertlm-sync-demo.md)、[真机系统ZIP/图片选择与生成](android-litertlm-ui.md)、[异步drain合同](android-litertlm-drain-contract.md) | 异步native drain/streaming、当前候选取消重入、更广自然质量、可比较资源/GPU/能耗；当前不支持视频 |

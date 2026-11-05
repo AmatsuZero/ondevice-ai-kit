@@ -4,7 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
-## 最新 F12 续接 — 2026-11-05 本地输入冻结与只读复核
+## 最新 F05 续接 — 2026-11-05 真机固定样本native生命周期通过
+
+- 新增仅androidTest的生命周期runner，普通App afed156b…926c461不重建/不替换，53相关旧源hash匹配；TECNO/API35使用既有英文PCM，实际观察本进程JNI decode后执行取消与活动close。13项检查全部通过：decode/drain期间busy、取消不交付、同backend重入全文匹配、close等待/期间和之后拒绝/idempotent、caller输入不变；不保存转写/音频/线程栈，不打开麦克风。
+- offline测试APK build与lint0error/1既有warning，后端12项JVM以rerun-tasks fresh执行通过（35任务全执行）。原test APK/Identity runner恢复，普通App/5模型/权限全部匹配，普通Demo已激活。首次恢复后PID观察竞争失败保留，修正观察后只复核、不重装；不是产品失败。
+- 证据及只读verify在 `artifacts/verification/sherpa-lifecycle-20261105/`，见[验证](validation/android-sherpa-asr.md#fixed-input-native-lifecycle--2026-11-05)。仅关闭固定输入native取消/重入/close子项；真实采音/前后台生命周期、准确性/持续资源/API26与系统Google资源仍缺，新采音授权均已用完。无新benchmark/下载，P4/P11/发布仍open/not-ready、goal active。
+
+## 上一 F12 续接 — 2026-11-05 本地输入冻结与只读复核
 
 - 已冻结5a65f51 committed archive（951文件逐一匹配Git对象/模式、内嵌commit，SHA79835bba…e7a2）；6组外部模型及附属文件27份、14媒体样本、1固定TTS请求和9能力历史证据统一登记。现有9保护路径与生产lock保持。详见[输入冻结](validation/p11-input-freeze.md)，原始清单及只读verify在 `artifacts/verification/p11-input-freeze-20261105/`。
 - 316项历史readiness来源核对通过；历史跟踪文档/benchmark入口按归档版本校验，ignored原始报告/媒体继续校验当前字节。发布提升/fixture hash篡改的内存副本被拒绝。初版清单与首个脚本Git子命令错误均保留，未重建模型或重复F09构建。
