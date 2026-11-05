@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261105-combined-startup/summary.json",
-    "sha256": "4b0908603641f1d47559a07001ae1a1b672f2611deb08b6aa833ddc8f5290134"
+    "path": "artifacts/verification/p11-readiness-20261106-model-folder-import/summary.json",
+    "sha256": "3cf8bba8dd040d38d69f451dfa2aff70df0e0fdc7d4a3ce3951ac1aeeb42c839"
   },
   "schemaVersion": 1,
   "sources": [

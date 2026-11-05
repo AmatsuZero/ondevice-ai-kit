@@ -1,5 +1,14 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新恢复入口：固定模型导入功能与签名包
+
+先读 [模型文件夹导入交接](HANDOFF-2026-11-06-model-folder-import.md)。`df46772` 已补齐
+Apple 增强 Demo 的 Files 固定模型文件夹入口和准备失败后的显式重试；Swift82/tools304、
+组合整包构建与既有资产签名通过，IPA 已备好。设备检查发现旧组合 App 有 PID2562，
+因此未覆盖当前会话；已询问是否允许更新，尚待答复。不重建已完成产物、不重试失败 UI 工具。
+最新 readiness：`artifacts/verification/p11-readiness-20261106-model-folder-import/summary.json`。
+新导入入口尚未装机验收；P4/P11 和发布仍 open/not-ready。下方为此前交付的历史记录。
+
 ## 最新恢复入口：组合 App 已完成装机与普通启动
 
 续接请先读 [本地模型启动修复与组合装机交接](HANDOFF-2026-11-05-local-model-startup.md)。
