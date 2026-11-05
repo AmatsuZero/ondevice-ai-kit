@@ -1,5 +1,12 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新设备检查点：Android UI 未验，原 App 已恢复
+
+先读 [Android 交互中止与恢复](HANDOFF-2026-11-06-android-ui-transport.md)。已尝试普通
+Identity 导入，但 USB 反复断连/unauthorized，未完成模型选择、同意或注册；没有新验收项通过。
+原 `afed156b…` App/test/runner、12 份模型摘要与权限已恢复核验，原 MainActivity 冷启动成功。
+不重做不稳定 USB 下的换包循环；稳定连接后再恢复该流程。Apple 更新选择仍待答复。
+
 ## 2026-11-06 最新恢复入口：固定模型导入功能与签名包
 
 先读 [模型文件夹导入交接](HANDOFF-2026-11-06-model-folder-import.md)。`df46772` 已补齐

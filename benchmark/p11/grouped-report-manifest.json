@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-model-folder-import/summary.json",
-    "sha256": "3cf8bba8dd040d38d69f451dfa2aff70df0e0fdc7d4a3ce3951ac1aeeb42c839"
+    "path": "artifacts/verification/p11-readiness-20261106-android-ui-transport/summary.json",
+    "sha256": "4e08e83fd733aedff1335053f93bb9074547dbd5d5aa4210343850b0a4e26a67"
   },
   "schemaVersion": 1,
   "sources": [
