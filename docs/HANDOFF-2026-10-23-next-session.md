@@ -4,6 +4,13 @@
 
 当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
 
+## 最新交付续接 — 2026-11-05 离线 ASR 独立消费者
+
+- 用户确认修复后麦克风基本正确、仅少量漏错词；ASR 基本功能已可用，三次新采音授权均已消耗。当前工作无采音/设备操作。
+- `examples/android-speech` 新增可选 sherpa flavor、显式选择/取消安全关闭示例及独立 settings。隔离本地 Maven 制品的 Debug/Release 构建、原有 flavors 和 lint 通过；依赖解析无 SDK project，contract/system 不含 sherpa。首次 standalone Kotlin2.2/SDK2.4 metadata 不兼容已通过加载既有固定插件修复，不跳过检查。原工程模式首跑漏 Demo 资产配置，修正后构建通过（72 tasks/28 executed）。
+- P11 Android ASR 行按新证据改为 `pass-bounded-offline-basic`，系统 Google 资源仍未解决，强噪声/中文精度与真实生命周期/资源/API26 保留。无新增benchmark样本；基础10/12、P4/P11/发布仍open/not-ready，完整目标仍active。独立消费者审查429无结论，不重试失败代理。
+- 证据位于 ignored `artifacts/verification/sherpa-asr-consumer-20261105/`；命令见示例 README。保护九路径及生产lock继续保留。接续roadmap功能缺口，勿再自动录音或重复系统资源下载。
+
 ## 最新续接 — 2026-11-05 sherpa 离线 ASR 基本可用，精度待优化
 
 - 最终候选 afed156b…926c461 已安装，七组合成重放与12/26/64项回归通过既定门槛，静音/纯噪声拒绝，SNR0/中文精确匹配仍未过；TECNO支持NS，但不据availability认定实际降噪效果。原test/Identity runner/权限、四新模型及原SR摘要已回读。用户又单独授权修复版一次麦克风：SUCCEEDED/实际sherpa/非空，精确匹配仍失败，字符差异5（前次19），用户确认基本正确、少量漏错词，按基本功能可用记录；不是受控效果提升或精度验收结论。累计三次新授权均已消耗，不再自动录音。详见validation顶部。

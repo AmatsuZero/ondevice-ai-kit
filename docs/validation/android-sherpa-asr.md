@@ -70,6 +70,31 @@ with the candidate evidence. The first no-speech mapping incorrectly violated
 the existing `PLATFORM.reason == null` contract; its real failed test is retained,
 and the corrected mapping passes. No independent review verdict is available.
 
+## Independent published consumer — 2026-11-05
+
+`examples/android-speech` now has an opt-in `sherpaAsr` flavor and a standalone
+settings entry with no SDK projects. Five SDK modules were published only into
+`artifacts/verification/sherpa-asr-consumer-20261105/m2`; the global Maven cache
+and remote repositories were not published to. Sherpa Debug/Release and
+contract/system ASR/system TTS Debug AAR builds passed. Sherpa and contract
+Debug lint report zero errors/warnings. A second standalone build omitting both
+sherpa properties passed contract/system ASR with system ASR lint clean.
+
+Resolved artifacts prove sherpa consumes published sdk-core/speech/backend-sherpa-asr
+and sherpa-onnx2.0.1; contract/system ASR contain neither sherpa backend nor runtime.
+All SDK artifact paths point into the isolated repository; no project components
+are consumed. The initial standalone compile failed because AGP defaulted to
+Kotlin2.2 against SDK2.4 metadata. Loading the existing pinned Kotlin plugin before
+AGP fixed the compiler alignment; metadata checks remain enabled. The first
+root-project check omitted the existing Demo assets property and failed during
+configuration; the corrected project-dependency build passed (72 tasks,28 executed).
+
+This is compile/link/dependency validation only: the consumer was not run on a
+device and no microphone was opened. Build logs, resolved JSON and frozen artifact
+hashes live in the directory above. See the [consumer README](../../examples/android-speech/README.md)
+for commands. Fresh independent review returned429 with no verdict; author
+inspection does not replace it.
+
 ## Earlier candidate and historical evidence
 
 The optional `sherpa.onnx.whisper` SDK runs fixed samples on TECNO KM9/API35,
@@ -154,12 +179,13 @@ sample files are not recordings of the user.
 
 ## Remaining scope
 
-Chinese exact-match quality, silence/noise behavior, real cancellation/reentry,
-long-running resource use and API26 physical acceptance remain unverified.
-The short-utterance amplitude endpoint is not calibrated. These are follow-ups;
-no additional microphone capture is implied by this result. Both newly granted
-single-attempt authorizations are consumed. Do not start another recording.
-Noise/silence robustness investigation is active using synthetic input only.
+Strong-noise SNR0 and Chinese exact-match quality remain unsuccessful. Real
+cancellation/reentry, long-running resource use and API26 physical acceptance
+remain unverified. Synthetic silence and seeded pure noise were rejected by the
+final candidate; that does not prove robustness for every acoustic environment.
+Basic microphone functionality is user-confirmed with minor recognition errors;
+all three new single-attempt authorizations are consumed. No further recording
+is implied.
 
 The Google system backend's language-resource problem remains open. PAD and
 identity calibration, F09 distribution, P4/P11 and release remain open/not-ready;

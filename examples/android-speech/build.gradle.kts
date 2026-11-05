@@ -1,4 +1,8 @@
-plugins { alias(libs.plugins.android.library) }
+plugins {
+    // Keep standalone AGP's built-in Kotlin compiler aligned with SDK metadata.
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.android.library)
+}
 
 android {
     namespace = "io.ondeviceai.speechconsumer"
@@ -11,6 +15,9 @@ android {
         create("contract") { dimension = "backend" }
         create("systemTts") { dimension = "backend" }
         create("systemAsr") { dimension = "backend" }
+        if (providers.gradleProperty("enableSherpaAsr").orNull == "true") {
+            create("sherpaAsr") { dimension = "backend" }
+        }
     }
 
     compileOptions {
@@ -38,5 +45,13 @@ dependencies {
         add("systemTtsImplementation", project(":android:backend-system-tts"))
         add("systemAsrImplementation", project(":android:speech"))
         add("systemAsrImplementation", project(":android:backend-system-asr"))
+    }
+    if (providers.gradleProperty("enableSherpaAsr").orNull == "true") {
+        add("sherpaAsrImplementation", "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+        if (usePublishedSdk) {
+            add("sherpaAsrImplementation", "io.ondeviceai:backend-sherpa-asr:$sdkVersion")
+        } else {
+            add("sherpaAsrImplementation", project(":android:backend-sherpa-asr"))
+        }
     }
 }

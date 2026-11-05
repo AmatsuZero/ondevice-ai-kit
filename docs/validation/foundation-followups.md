@@ -1,5 +1,7 @@
 # Foundation 后续专项
 
+2026-11-05 F05交付追加：离线 ASR 的独立 published AAR consumer 已通过 sherpa Debug/Release、原有三 flavor Debug 及相关 lint；关闭 sherpa 选项也可在不提供 runtime 仓库时构建。真实依赖解析验证发布制品来源和可选隔离，未运行消费者录音。P11 的 Android ASR 行改为有界基本功能通过，系统 Google 资源和准确性/生命周期/资源等缺口保留。见[验证](android-sherpa-asr.md#independent-published-consumer--2026-11-05)。
+
 2026-11-05 F05最新：可选 `sherpa.onnx.whisper` 无需 Google/系统语言包，固定样本真实推理已通过，但用户两次分别授权的普通麦克风尝试均内容错误，不能验收。现场噪音较大；合成静音/纯噪声假文本已复现，新增同runtime固定MIT Silero VAD后两者真实拒绝，干净/SNR10英文仍匹配，SNR0仍错；系统session降噪可用时启用，现场修复效果待新的授权实测。新增无语音映射与模型准备互斥/初始化防崩溃回归。详见[当前证据](android-sherpa-asr.md)。修复版第三次单独授权采音后用户确认基本正确、少量漏错词，基本功能可用；三次授权均已消耗。系统ASR、质量/生命周期/最低系统与发布缺口保留，未纳入统一benchmark。
 
 2026-11-04 F11追加：P11总表和readiness现已纳入Android ASR资源入口/授权请求、SR完整请求/动态重播、LM真机ZIP/同步生成及双端Identity/PAD原始分数证据，移除已实现后端/模型/factory仍未实现的过时描述。当前校验226证据引用/241来源hash/9行gap；grouped的8组原始统计不变，状态和剩余gap按新证据更新。36项相关工具测试通过；仅重验既有产物，不增加benchmark样本、不升级质量/资源/校准或发布结论。见[P11矩阵](p11-status-matrix-20261027.md)与[可复算入口](p11-grouped-benchmark.md)。ASR最新只读复核仍无默认网络，其他既有待答复项不变。
