@@ -17,6 +17,9 @@ final class MultimodalFilePicker: NSObject, UIDocumentPickerDelegate {
 
   func present(reply: @escaping (URL?) -> Void) { present(types: [.png, .jpeg], reply: reply) }
   func presentVideo(reply: @escaping (URL?) -> Void) { present(types: [.movie], reply: reply) }
+  func presentModelFolder(reply: @escaping (URL?) -> Void) {
+    present(types: [.folder], reply: reply)
+  }
   private func present(types: [UTType], reply: @escaping (URL?) -> Void) {
     guard !closed, self.reply == nil else {
       reply(nil)
@@ -60,7 +63,8 @@ final class MultimodalFilePicker: NSObject, UIDocumentPickerDelegate {
   }
 
   static func presenter(in windows: [UIWindow]) -> UIViewController? {
-    let window = windows.first(where: \.isKeyWindow)
+    let window =
+      windows.first(where: \.isKeyWindow)
       ?? windows.first(where: { !$0.isHidden && $0.alpha > 0 && $0.windowLevel == .normal })
       ?? windows.first(where: { !$0.isHidden && $0.alpha > 0 })
     var presenter = window?.rootViewController

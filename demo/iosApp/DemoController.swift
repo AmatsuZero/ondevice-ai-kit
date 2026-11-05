@@ -28,6 +28,8 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
     #endif
     #if ODAI_MULTIMODAL_MLX_DEMO
     @Published private(set) var multimodalPreparing = false
+    @Published private(set) var multimodalModelReady = false
+    @Published private(set) var multimodalSetupStatus = "正在检查本地模型…"
     private var multimodalPreparation: MultimodalHostPreparation?
     #endif
     private var identityProbeFactory: ((CGImage) -> IdentityProbeReference)?
@@ -85,19 +87,8 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
                     videoStore: try MultimodalInputStore(), videoPicker: { picker.presentVideo(reply: $0) },
                     picker: { picker.present(reply: $0) })
                 #if ODAI_MULTIMODAL_MLX_DEMO
-                multimodalPreparing = true
-                let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                let preparation = MultimodalHostPreparation()
-                multimodalPreparation = preparation
-                preparation.start(make: { try await MultimodalMLXHostFactory.make(documents: documents, picker: picker) },
-                    ready: { [weak self] host in
-                        guard let self else { host?.close(); return }
-                        self.multimodalPreparing = false
-                        guard let host else { self.message = "本地多模态模型未就绪，请检查已导入的模型"; return }
-                        self.multimodalHost?.close()
-                        if UIApplication.shared.applicationState != .active { host.background() }
-                        self.multimodalHost = host
-                    })
+                multimodalPreparation = MultimodalHostPreparation()
+                prepareMultimodal()
                 #endif
             } catch { message = "多模态模块初始化失败" }
         }
@@ -121,6 +112,36 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
         NotificationCenter.default.addObserver(self, selector: #selector(foreground), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(memoryWarning), name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
     }
+    #if ODAI_MULTIMODAL_MLX_DEMO
+    func importMultimodalModels() {
+        guard !multimodalPreparing, !multimodalModelReady else { return }
+        multimodalPicker?.presentModelFolder { [weak self] folder in
+            guard let folder else { return }
+            self?.prepareMultimodal(source: folder)
+        }
+    }
+    private func prepareMultimodal(source: URL? = nil) {
+        guard !multimodalPreparing, !multimodalModelReady,
+              let picker = multimodalPicker, let preparation = multimodalPreparation else { return }
+        multimodalPreparing = true
+        multimodalSetupStatus = "正在校验本地模型…"
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        preparation.start(make: { try await MultimodalMLXHostFactory.make(documents: documents, source: source, picker: picker) },
+            ready: { [weak self] host in
+                guard let self else { host?.close(); return }
+                self.multimodalPreparing = false
+                guard let host else {
+                    self.multimodalSetupStatus = "本地模型未就绪；可重新导入固定版本模型文件夹"
+                    return
+                }
+                self.multimodalHost?.close()
+                if UIApplication.shared.applicationState != .active { host.background() }
+                self.multimodalHost = host
+                self.multimodalModelReady = true
+                self.multimodalSetupStatus = "本地图像理解模型已就绪"
+            })
+    }
+    #endif
     @objc private func background() {
         #if ODAI_OPENCV_IDENTITY_DEMO
         identityHost?.stopOpening()

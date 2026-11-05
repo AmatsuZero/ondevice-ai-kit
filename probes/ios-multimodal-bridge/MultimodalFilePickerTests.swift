@@ -3,6 +3,49 @@ import UniformTypeIdentifiers
 import XCTest
 
 @MainActor final class MultimodalFilePickerTests: XCTestCase {
+  func testModelFolderSharesPickerSlotAndAcceptsFirstSelectionOnlyOnce() throws {
+    var presented: UIDocumentPickerViewController?
+    let picker = MultimodalFilePicker(present: {
+      presented = $0
+      return true
+    })
+    var folders = [URL?]()
+    picker.presentModelFolder { folders.append($0) }
+    let controller = try XCTUnwrap(presented)
+    XCTAssertTrue(picker.isPresenting)
+    XCTAssertFalse(controller.allowsMultipleSelection)
+    XCTAssertEqual(controller.documentPickerMode, .open)
+    var rejectedImageRequests = 0
+    picker.present { url in
+      XCTAssertNil(url)
+      rejectedImageRequests += 1
+    }
+    XCTAssertEqual(rejectedImageRequests, 1)
+    let folder = URL(fileURLWithPath: "/fixed-model", isDirectory: true)
+    picker.documentPicker(controller, didPickDocumentsAt: [folder])
+    picker.documentPickerWasCancelled(controller)
+    picker.documentPicker(controller, didPickDocumentsAt: [URL(fileURLWithPath: "/late")])
+    XCTAssertEqual(folders.count, 1)
+    XCTAssertEqual(folders[0], folder)
+    XCTAssertFalse(picker.isPresenting)
+  }
+
+  func testCancellingModelFolderDoesNotDeliverALateFolder() throws {
+    var presented: UIDocumentPickerViewController?
+    let picker = MultimodalFilePicker(present: {
+      presented = $0
+      return true
+    })
+    var folders = [URL?]()
+    picker.presentModelFolder { folders.append($0) }
+    let controller = try XCTUnwrap(presented)
+    picker.documentPickerWasCancelled(controller)
+    picker.documentPicker(controller, didPickDocumentsAt: [URL(fileURLWithPath: "/late")])
+    XCTAssertEqual(folders.count, 1)
+    XCTAssertNil(folders[0])
+    XCTAssertFalse(picker.isPresenting)
+  }
+
   func testVideoPresentationSharesPendingSlotAndDeliversOnce() throws {
     var presented: UIDocumentPickerViewController?
     let picker = MultimodalFilePicker(present: {

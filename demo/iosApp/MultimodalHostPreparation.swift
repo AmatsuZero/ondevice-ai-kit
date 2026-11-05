@@ -12,8 +12,8 @@ final class MultimodalHostPreparation {
   ) {
     guard !started else { return }
     started = true
-    // The task captures no owner; releasing this object cancels late publication.
-    task = Task { @MainActor in
+    // Never retain the owner across preparation; release still cancels late publication.
+    task = Task { @MainActor [weak self] in
       do {
         try Task.checkCancellation()
         let host = try await make()
@@ -23,8 +23,10 @@ final class MultimodalHostPreparation {
         }
         ready(host)
       } catch is CancellationError {
+        self?.started = false
         // Owner cancellation must not publish a replacement or failure.
       } catch {
+        self?.started = false
         if !Task.isCancelled { ready(nil) }
       }
     }

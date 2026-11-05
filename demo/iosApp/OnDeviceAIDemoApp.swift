@@ -51,6 +51,14 @@ struct SharedControls: UIViewControllerRepresentable {
                 if let host = controller.identityHost { IdentityOpenCvSetupView(host: host) }
                 #endif
                 #if ODAI_MULTIMODAL_MLX_DEMO
+                if !controller.multimodalPreparing {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(controller.multimodalSetupStatus).font(.caption)
+                        Button("导入图像理解模型文件夹") { controller.importMultimodalModels() }
+                            .disabled(controller.multimodalModelReady)
+                            .accessibilityIdentifier("multimodal-import-model-folder")
+                    }.frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
+                }
                 if controller.multimodalPreparing {
                     ProgressView("正在校验本地模型").frame(height: 380)
                 } else {

@@ -2,6 +2,41 @@ import Foundation
 import XCTest
 
 @MainActor final class MultimodalHostPreparationTests: XCTestCase {
+  func testFailureAllowsExplicitRetryButSuccessfulPreparationStaysOnceOnly() async throws {
+    let host = try MultimodalHost(store: MultimodalInputStore(), picker: { $0(nil) })
+    defer { host.close() }
+    let owner = MultimodalHostPreparation()
+    var attempts = 0
+    var failures = 0
+    var received: MultimodalHost?
+    owner.start(
+      make: {
+        attempts += 1
+        throw PreparationError.injected
+      },
+      ready: { value in
+        XCTAssertNil(value)
+        failures += 1
+      })
+    for _ in 0..<1000 where failures == 0 { await Task.yield() }
+    XCTAssertEqual(failures, 1)
+
+    owner.start(
+      make: {
+        attempts += 1
+        return host
+      }, ready: { received = $0 })
+    for _ in 0..<1000 where received == nil { await Task.yield() }
+    XCTAssertTrue(received === host)
+    XCTAssertEqual(attempts, 2)
+    owner.start(
+      make: {
+        XCTFail("successful preparation must not start again")
+        return host
+      }, ready: { _ in XCTFail("must publish once") })
+    for _ in 0..<10 { await Task.yield() }
+  }
+
   func testOwnerReleasedDuringPreparationClosesLateHostWithoutPublishing() async throws {
     let host = try MultimodalHost(store: MultimodalInputStore(), picker: { $0(nil) })
     let gate = PreparationGate()
