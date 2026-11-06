@@ -1,5 +1,14 @@
 # Foundation 后续专项
 
+2026-11-07：[F10分数工具](f10-calibration-scores.md)完成绑定／verification／1:N／PAD离线
+聚合，21新+23既有聚焦44过，完整tools510/510、48.281秒；Copilot限定审查38.11秒无finding。
+cbc hy3独立CLI候选119.325秒返回，漏test split的实际失败保留，父修正后三成功+一错绑拒绝过。
+[Nexus消费者准备](f02-nexus-consumer-checklist.md)另由Copilot47.217秒完成审查；父已逐项
+处置匿名／缓存、variant、许可摘要及wrapper意见，未取件或上传，精确出口／本次范围仍待答复。
+Identity97856自然终态1715.484秒／exit0但262144B截断JSON，无完整源码；不再重发，主代理接手。
+Kotlin／test-only构建／资源测量未开始，P11仍10组；九保护／lock保持、无设备操作。
+后续授权数据、ROC／DET／置信推断、生产阈值／策略、远端消费和原P4／P11门槛保持，10/12不变。
+
 2026-11-07 新工具增量：[F10 manifest预检](f10-calibration-manifest.md)已实现，
 23合成测试/独立CLI smoke过，声明用途与证据/媒体摘要、主体/会话/源媒体组隔离受校验，
 不取得数据或校准阈值。[Nexus归档核对](f02-nexus-delivery.md)经Copilot候选/父RED→GREEN修正，

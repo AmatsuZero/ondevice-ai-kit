@@ -1,4 +1,30 @@
-## 2026-11-07 当前：F10/Nexus工具已实现，Identity探针已修正CLI轮数限制
+## 2026-11-07 当前：F10分数工具已验收，Copilot继续完成Nexus准备审查
+
+最新用户要求继续给其他Agent分任务，特别是Nexus/Copilot。Copilot个人额度本轮真实可用，
+最新F10限定源码审查38.11秒完整返回／无finding；随后Nexus消费者方案审查47.217秒完成。
+后者父处置接受独立缓存／匿名环境、实际组件／variant收据、逐项GET及74许可材料摘要要求，
+合并重复意见，否决“外部wrapper路径本身为high缺陷”；来源三文件摘要已保留。
+见[消费者验收准备](validation/f02-nexus-consumer-checklist.md)。未取件／上传／改旧计划，
+精确hosted／本次发布范围待答复项保持，不重复问或刷新旧404。
+
+[F10分数工具](validation/f10-calibration-scores.md)实现manifest／模型／split绑定、verification、
+完整1:N搜索矩阵与PAD聚合；null单列、空分母null、身份级并列拒绝，始终unverified。
+cbc hy3统计候选经两项真实RED修正严格字段；21新+23既有聚焦44过，完整tools510/510、
+48.281秒，所有tools源码／九保护／生产lock保持。另派hy3生成CLI smoke，119.325秒完整返回；
+原漏test split失败保留，父修正后三成功+一摘要错绑拒绝通过，全输入／原始命令与输出已留存。
+三个本轮助手均终态，不再轮询／重发。源码最终tools收据在
+`artifacts/verification/f10-calibration-scores-20261107/tools-suite-final.json`。
+
+Identity hy4free修正轮数后的97856也已自然终态1715.484秒，exit0但stdout恰262144B，
+JSON在reasoning字符串截断，没有完整assistant/result/Kotlin。不是父超时或429；
+原文／父处置保留，不再发第三次，主代理接手原Kotlin实现。此前文档“仍运行”均为历史。
+当前尚未写Kotlin、构建／暂存／安装／运行Identity资源探针；既有50聚焦／34协议检查保持，
+P11仍7能力／10组。下一步按既有Android Identity资源计划实现探针，验代码／test-only构建后
+才按保留恢复协议测一次35行；不要重跑已过ASR／SR／TTS／Apple验收。
+原生429／Qoder403／dsh／OpenCode旧失败线路不重启；无本轮设备操作或重连需求。
+基础10/12、P4/P11 open、release not-ready；授权数据／生产阈值／远端消费等门槛不晋级。
+
+## 2026-11-07 上轮：F10/Nexus工具已实现，Identity探针已修正CLI轮数限制
 
 用户要求增加Nexus/Copilot任务，并明确hy3做短任务、复杂实现放hy4档，免费优先。
 新[F10 manifest工具](validation/f10-calibration-manifest.md)实现声明用途/证据文件摘要、

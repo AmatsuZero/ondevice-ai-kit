@@ -51,6 +51,11 @@
 
 ## 2. cbc：结果格式与长任务
 
+- **自然退出也可能输出截断**：移除轮数限制后的Identity候选自然终止1715.484秒，exit0，
+  stdout恰262144B；JSON在assistant reasoning字符串内截断，只有一个完整user事件，没有完整
+  assistant/result/Kotlin候选。不是监督者超时，也无429证据；保留原文，不修补JSON、不再发第三次。
+  主代理接手原Kotlin实现。证据`.omx/artifacts/cbc-identity-resource-probe-turns-fix-20261107/parent-assessment.json`。
+
 - **max-turns不是耗时上限但仍会截断复杂任务**：Identity资源Kotlin候选自然运行2277.90秒后
   exit0/stdout0B，stderr明确`Max turns (1) exceeded`。无候选，不是父进程超时或额度结论。
   原任务已终态，保留原文后仅修调用配置：新独立`hy4free`任务移除`--max-turns 1`，
@@ -88,7 +93,7 @@
 - 早期 `--output-format json` 返回 JSON **事件数组**，不能假设根对象就是结果。检查最后的结果事件及错误字段，提取真正的任务正文。
 - `hy4free` 早期一次 41 分钟任务由监督者主动取消，不是模型返回失败；其退出 0、正文空也不是成功。后续 F09 审查在没有任务超时的情况下于 431.23 秒完成。
 - 再一次 F09 修复调用于 2263.57 秒自然退出，CLI 退出 0，但原始 JSON 在字符串中截断，启动器解析失败。没有接受实现候选；主代理按已复现问题自行完成 RED/GREEN 修复。证据：`.omx/artifacts/cbc-f09-consumer-fix-20261106/`。
-- 候选任务沿用禁工具/MCP的调用，保留 `--max-turns 1`；不要自行调用工具或递归委派。用户最新允许有限非免费额度 `glm-5.3-flash`、`space-bunny` 用于有理由的高优实现，默认仍优先免费。两个付费模型在本轮尚未实测；不要为确认目录就消耗额度。
+- 候选任务沿用禁工具/MCP的调用；复杂任务不设置 `--max-turns 1` 或耗时终止。不要自行调用工具或递归委派。用户最新允许有限非免费额度 `glm-5.3-flash`、`space-bunny` 用于有理由的高优实现，默认仍优先免费。两个付费模型在本轮尚未实测；不要为确认目录就消耗额度。
 
 ## 3. dsh：配置层、模型参数与 429
 

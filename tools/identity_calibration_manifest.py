@@ -192,14 +192,20 @@ def _reject_constant(value):
     raise ValueError('non-finite JSON number')
 
 
+def load_document(path: Path):
+    """Read strict JSON from one explicit regular document, without following links."""
+    path = Path(path).absolute()
+    with _regular_file(path.parent.resolve(strict=True), path.name) as stream:
+        return json.load(stream, object_pairs_hook=_unique_object, parse_constant=_reject_constant)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('manifest', type=Path)
     args = parser.parse_args()
     try:
         path = args.manifest.absolute()
-        with _regular_file(path.parent.resolve(strict=True), path.name) as stream:
-            document = json.load(stream, object_pairs_hook=_unique_object, parse_constant=_reject_constant)
+        document = load_document(path)
         report = validate_manifest(document, path.parent)
     except (OSError, ValueError, TypeError):
         parser.exit(2, 'invalid calibration manifest; check schema, declarations, files and split isolation\n')
