@@ -1,4 +1,18 @@
-## 2026-11-07 当前：同一636a6eb的Apple组合构建及82项桥接通过
+## 2026-11-07 当前：同一Apple候选图片/视频/OpenCV真机链路已通过并恢复
+
+[当前Apple运行](validation/apple-current-runtime-20261107.md)：复用上轮组合App，不重建/重链接宿主。
+新别名既有资产签名，3原Mach-O有效section/UUID保持；标准hosted非UI XCTest两方法均1/0/0，
+运行时完整commit和原debug dylib UUID一致。原生方法86内部检查全过，18既有输入设备前后SHA一致；
+真实factory→KMP→MLX图片3548.894ms/视频2356.706ms，各一次，OpenCV1脸/128归一化特征，未持久化embedding。
+清除输入/视频snapshot/host close/两模型lease释放/工作目录删除通过，未注册/采集/校准。
+私有终态两次回读SHA一致、xcresult印证；唯一Vision负向smoke成功后已停止，没有重放。
+cbc hy4free生成器678.693秒自然完成、0工具；父修正实际dylib路径/Xcode外部host包装，先前配置失败保留。
+唯一新增候选和私有模型已卸载，原44安装URL/9保护/lock/profile/原App产品保持，普通ODAI Combined已返回。
+证据`artifacts/verification/apple-current-runtime-20261107/`，只读`freeze.py --verify`；全部命令/助手终态。
+不重跑本轮构建/推理；继续其他能力/普通交互、质量资源/交付。3既有待答复不重复问，Qoder403/原生429不重试。
+P11无新样本、仍10组，基础10/12、P4/P11 open、release not-ready；本轮为progress，不关闭完整目标。
+
+## 2026-11-07 上轮：同一636a6eb的Apple组合构建及82项桥接通过
 
 [当前Apple候选](validation/apple-current-candidate-20261107.md)复用Android同一归档，1046源码核验，
 211份SDK/KMP输入与旧e0438c0相同；两shared framework保留原构建身份/Skiko0.144.6，未重建。

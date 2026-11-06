@@ -1,5 +1,9 @@
 # 当前 Apple 组合候选 — 2026-11-07
 
+后续[当前候选真机链路](apple-current-runtime-20261107.md)已在保持原宿主代码的条件下完成
+hosted非UI图片/视频/OpenCV及关闭释放验证，并恢复普通App。下文“未运行真机”描述本构建轮，
+不再代表当前原生链路状态；普通交互与完整验收仍开放。
+
 与[当前 Android 候选](android-current-candidate-20261107.md)使用同一份
 `636a6eb8854db5dff74244c42c3ce0e82bd2be9f` committed 源码归档，完成
 MLX＋OpenCV 组合设备 App 和 MLX arm64 模拟器 App 的构建，以及当前多模态桥接测试 **82/82**。

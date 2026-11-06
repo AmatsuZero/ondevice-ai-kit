@@ -1,5 +1,12 @@
 # Foundation 后续专项
 
+2026-11-07：[当前Apple真机链路](apple-current-runtime-20261107.md)复用636a6eb组合App，
+不重建宿主，3原Mach-O section/UUID保持。hosted非UI XCTest身份/原生两方法均通过，
+86内部检查覆盖18输入SHA、真实factory→KMP→MLX图片/视频生成、OpenCV1脸/128特征及lease/输入释放。
+私有终态两次回读与xcresult一致，各推理一次；临时候选/私有模型已移除、原44安装URL保持并返回普通App。
+cbc hy4free候选678.693秒自然完成，父修正Xcode接线，不计审查批准；旧403/429线路保持停止。
+关闭当前候选原生链路子项；普通Files交互/其他能力、质量资源/校准/交付继续，P11无新样本、10/12不晋级。
+
 2026-11-07：[当前Apple组合候选](apple-current-candidate-20261107.md)与Android同一636a6eb归档，
 1046源码/6878原始上游输入核验；组合MLX＋OpenCV device和MLX-only arm64 simulator构建通过，
 82项当前bridge实际通过、645Swift编译输入及实际App符号/资源/完整commit固定。

@@ -1,5 +1,10 @@
 # 分阶段交付与恢复入口
 
+2026-11-07：[当前Apple真机链路](validation/apple-current-runtime-20261107.md)复用现有636a6eb组合包，
+hosted非UI XCTest两方法通过，86内部检查覆盖真实factory/KMP/MLX图片和视频生成、OpenCV128维特征与释放。
+原代码UUID/18输入摘要保持，唯一临时候选已卸载、原44安装URL保持并返回普通App。
+关闭当前原生链路子项；普通交互/其他能力/质量资源和交付仍缺，无新P11样本，10/12及原发布门槛保持。
+
 2026-11-07：[当前Apple候选](validation/apple-current-candidate-20261107.md)使用Android同一636a6eb归档，
 组合MLX＋OpenCV device和MLX arm64 simulator构建及82项当前bridge通过；shared framework按源码等价
 复用且保留旧构建身份，OpenCV无arm64 simulator保持。新包真机/其他能力、质量资源与交付仍缺，

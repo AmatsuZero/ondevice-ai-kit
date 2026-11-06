@@ -6,6 +6,18 @@
 
 ## 1. 所有助手：进程成功不等于任务成功
 
+- **预编译宿主与测试包装分开**：当前Apple标准hosted非UI XCTest首次外部`TEST_HOST`先被
+  build-for-testing的宿主目标选择、再被build的产物相对路径检查拒绝，均未运行设备。
+  仅编译新test bundle、动态链接实际App根目录的debug dylib，由安装版`xcodebuild.xctestrun(5)`
+  参数提供独立测试副本宿主；加入Xcode运行库后签名，实际两方法/86内部检查通过，原3个Mach-O
+  section/UUID保持。不是UI自动化或普通Files验收。XCTest Swift overlay还需`Developer/usr/lib`的`-I`，
+  单加`Developer/Library/Frameworks`不足。`-test-iterations 1`会在CLI层拒绝且可留下空xcresult目录，
+  默认一次运行应省略该选项、每次使用新结果路径，不删除旧失败/开启自动重试。
+  optional quality score写JSON前显式解包，避免`Double? as Any`；编译warning在实际推理前处理。
+  cbc hy4free本候选678.693秒自然完成，0工具，父修正后验收；不是原样候选成功或发布批准。
+  原日志仍有OpenCV/system Objective-C重名及PNG iCCP警告，不能把两测试通过写成无警告/所有影响已排除。
+  证据`artifacts/verification/apple-current-runtime-20261107/`及对应cbc助手目录；候选已卸载、原44App保持。
+
 - **关闭开发者签名不等于模拟器无任何签名标记**：当前Apple构建指定`CODE_SIGNING_ALLOWED=NO`，
   设备App确实unsigned，模拟器主程序却带`adhoc,linker-signed`、无TeamIdentifier/资源封印。
   父检查统一要求codesign退出1，实际在模拟器误拒；原检查和两平台输出保留后，按平台核验无profile/
