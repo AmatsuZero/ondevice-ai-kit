@@ -1,4 +1,32 @@
-## 2026-11-06 最新：F09 竞态修复通过，安卓五份 APK 已暂存
+## 2026-11-06 最新：精确候选 ASR/SR 私有终态通过，普通 App 已恢复
+
+[本轮实际验收](validation/android-persistent-candidate-20261106.md)：TECNO/API35 上，
+精确 e0438c0/b90e 主 APK 的 ASR 固定输入13项原生生命周期断言通过；SR六项原生断言通过。
+四项记录器成功/故意失败自检均被正确排除在推理证据之外；没有新录音、模型下载或重建主包。
+ASR PID20393；SR PID21382，native runId `0ac8554d-ec79-4047-8786-56870a1112dc`。
+
+SR 首次被校验器拒绝：真实已批准输入为64×48/2帧H.264+AAC，校验器/单测误用了另一夹具的128×96。
+核对原输入 SHA `8277f1da...65d8c`、冻结源码的4倍请求、实际解码及音视频PTS后，
+修正严格输出256×192并新增拒绝其他尺寸的回归。同一原始报告/保留媒体重验通过，**没有重跑推理**；
+原始拒绝 `run-sr-fixed-inference-20261106-collected.json` 保留，最终见同目录 `...-revalidated.json`。
+
+恢复协议已实现、离线/真机IO检查通过，并实际完成恢复：原main/test APK、runner、25私有摘要、
+权限/TTS和四份SR原文件均核对；五份暂存APK/113块精确清理，普通MainActivity返回。
+SR目录因未证明原先不存在而保留。证据目录 `artifacts/verification/android-persistent-candidate-20261106/`，
+摘要 `device-summary.json`，恢复终态 `restore-complete.json` / `restore-state-3.json`。
+**无需重传或重跑本轮ASR/SR。不要再运行旧preflight覆盖before/备份。**
+
+最新完整 tools suite **412项通过/47.682秒**；另有25项离线协议检查，不能相加冒充同一套测试。
+第一次412项运行的三个Swift缓存权限错误日志保留，正常host缓存访问的同套测试通过。
+Copilot恢复代码审查的四处问题已修复并做RED/GREEN；Ollama完成真实测试候选任务，
+复杂协议审查的五条重复建议未采纳。调用、适用范围、无自动超时和踩坑提醒已记入根本地AGENTS。
+
+已提交：`8a1e940`安卓报告工具、`22389f8`F09竞态、`f46c420`助手知识/交接。
+后续尺寸修正和最终验收说明属于新的本地提交；九保护路径/Apple lock保持不变，无push。
+10/12、P4/P11 open、release not-ready和F10 `THRESHOLD_UNVERIFIED`保持；
+下一步沿原followups处理尚未关闭的真实门槛，不再重复本轮固定输入和已完成F09构建。
+
+## 2026-11-06 历史：F09 竞态修复通过，安卓五份 APK 已暂存
 
 本机新增 Ollama `qwen3-coder:30b`（约18GB）已实际接到离线测试候选任务，
 localhost 推理19.99秒完成；父代理修正硬编码路径/导入和边界用例后，8项离线检查通过。

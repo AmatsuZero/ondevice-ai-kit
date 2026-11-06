@@ -67,8 +67,9 @@ def _valid_sr(run_id, sdk_commit):
         'backend': 'litert.esrgan.x4',
         'modelSha256': MODEL_SHA256,
         'frames': 2,
-        'width': 128,
-        'height': 96,
+        # Retained approved input 8277f1da... is 64x48, two H.264 frames + AAC.
+        'width': 256,
+        'height': 192,
         'audioTracks': 1,
         **{f: True for f in SR_FLAGS},
     }
@@ -85,6 +86,12 @@ class ValidTests(unittest.TestCase):
         out = validate_report(report, run_id='r2', sdk_commit='c2', kind='sr', detail=detail)
         self.assertEqual(out['status'], 'passed')
         self.assertEqual(out['qualityVerdict'], 'unverified')
+
+    def test_sr_rejects_dimensions_from_different_fixture(self):
+        report, detail = _valid_sr('fixed-64x48', 'c2')
+        detail.update(width=128, height=96)
+        with self.assertRaises(ReportValidationError):
+            validate_report(report, run_id='fixed-64x48', sdk_commit='c2', kind='sr', detail=detail)
 
 
 class BadIdentityTests(unittest.TestCase):

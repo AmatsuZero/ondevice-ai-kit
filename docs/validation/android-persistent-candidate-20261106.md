@@ -1,5 +1,26 @@
 # Android candidate private reports and helper checkpoint
 
+## Completed physical-device slice
+
+The exact frozen `e0438c030a987ceeff9f9207c2475684749e4d8b` candidate (`b90e...64d8d`) completed fixed-input ASR lifecycle and SR runs on TECNO KM9/API35. Four recorder self-checks also completed and were correctly rejected as inference evidence. No new recording, model download or main APK rebuild was involved.
+
+- ASR: `asr-fixed-inference-20261106`, PID20393, all 13 native cancel/close/reentry flags passed. The private terminal report was read back with its exact SHA; microphone starts remained zero.
+- SR: `sr-fixed-inference-20261106`, PID21382, native run `0ac8554d-ec79-4047-8786-56870a1112dc`. All six native flags passed. The retained authorized input is **64×48**, two H.264 frames plus AAC, SHA `8277f1daa2e8d0aab1425393c929e7b5a18e4bc241901f0012319dd43ca65d8c`. The x4 output is **256×192**. Host decoding confirmed both output frames, preserved/discarded audio tracks, and matching video/audio PTS.
+
+The initial SR receipt was rejected because the validator and its unit fixture both incorrectly expected 128×96 from a different input. The strict expected dimensions and README are corrected; a regression rejects that other profile. The original rejection remains unchanged in `run-sr-fixed-inference-20261106-collected.json`; `run-sr-fixed-inference-20261106-revalidated.json` validates the **same original report and retained media**. Inference was not repeated and no report bytes were rewritten.
+
+The original main/test APKs, runner, 25 private model/journal hashes, permissions/TTS setting and all four original SR files were restored and verified. Five staged APKs and 113 exact manifest-listed chunks were removed; the ordinary MainActivity was returned. SR directories were preserved because their pre-experiment absence was not proven. Recovery also retained known report sidecars and failure/nonterminal bytes without requiring a successful inference result.
+
+Local evidence: `artifacts/verification/android-persistent-candidate-20261106/device-summary.json`, `restore-preservation.json`, `restore-state-3.json`, `restore-complete.json` and `restore-device-result.json`. Device restoration completed in 96.88 seconds; these receipts are local ignored evidence, not clone-distributed files.
+
+Verification now includes **412 tools tests passed in 47.682 seconds**, plus **25 separate offline protocol checks** (16 restoration, one failed-SR collection, eight lifecycle boundaries). The first 412-test sandbox run had three Swift cache permission errors; its failure log is preserved. Running the same suite with normal host cache access passed; Ruby3.4.11 was selected only for the subprocess environment. No global toolchain/cache configuration or production locks changed.
+
+Copilot's concrete restoration review found four blockers, fixed with RED/GREEN checks: partial scratch recovery, atomic local receipts, stable output retention names and preserving preexisting empty directories. Its supplied-context review had zero tool executions. Ollama `qwen3-coder:30b` generated the earlier eight boundary checks; parent review corrected the candidate before use. Its later protocol-only review added no validated issue. The exact prompts/raw results and dispositions are under `.omx/artifacts/` and the helper invocation recipes remain in the root local `AGENTS.md`.
+
+This closes the bounded ASR/SR physical-run and restoration slice. Natural quality, resource/energy, minimum-OS device, calibration, licensing and independent release gates remain outside it. Roadmap remains 10/12, P4/P11 open and release not-ready.
+
+## Historical pre-device checkpoint
+
 Test-only report tooling is implemented and built. No candidate installation or inference has been performed in this slice.
 
 `probes/android-candidate-report/generate.py` adds separate ASR lifecycle and video SR runners to a frozen SDK source snapshot. The original 953 source files remain unchanged. The runners write a private receipt before starting and an atomic terminal report before finishing. Unique run IDs cannot be reused. Recorder self-check modes remain distinguishable from inference, and `tools/probes/validate_android_candidate_report.py` refuses to treat them as inference evidence.

@@ -21,7 +21,7 @@ rtk proxy adb -s SERIAL shell am instrument -w -e runId test-run-01 -e reportMod
 
 ### 3. 测试用例与数据脱敏规则
 - **ASR**：强制复用既有固定合成英文 PCM，严禁调用麦克风；由测试 Runner 产生并核验 Bundle 的 13 项生命周期标志与隐私标志。
-- **SR**：复用现有 2 帧 32×24 AAC 测试夹具，目标输出 128×96 并保留音频；内置 discard / cancel / drain / reentry / native decode 断言；校验器所需的底层原生细节独立输出至 `files/video-sr-validation/report.json`。
+- **SR**：复用现有 2 帧 64×48 H.264/AAC 测试夹具（SHA-256 `8277f1daa2e8d0aab1425393c929e7b5a18e4bc241901f0012319dd43ca65d8c`），目标输出 256×192 并保留音频；内置 discard / cancel / drain / reentry / native decode 断言；校验器所需的底层原生细节独立输出至 `files/video-sr-validation/report.json`。不得与另一份32×24夹具的128×96输出约定混用。
 - **数据脱敏**：报告仅包含白名单原始类型诊断；严禁包含音视频媒体、转录文本或异常堆栈；SR 失败诊断严格缩减为异常类名。
 
 ### 4. 设备操作、合规与验证状态

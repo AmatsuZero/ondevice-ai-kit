@@ -142,8 +142,9 @@ def _validate_sr(report, detail):
     sr = detail
     _require(sr.get('modelSha256') == MODEL_SHA256, 'sr.modelSha256 mismatch', 'VALUE')
     _require(_is_int(sr.get('frames')) and sr['frames'] == 2, 'sr.frames must be int 2', 'VALUE')
-    _require(_is_int(sr.get('width')) and sr['width'] == 128, 'sr.width must be int 128', 'VALUE')
-    _require(_is_int(sr.get('height')) and sr['height'] == 96, 'sr.height must be int 96', 'VALUE')
+    # Fixed approved 64x48 input (8277f1da...) uses the native x4 request.
+    _require(_is_int(sr.get('width')) and sr['width'] == 256, 'sr.width must be int 256', 'VALUE')
+    _require(_is_int(sr.get('height')) and sr['height'] == 192, 'sr.height must be int 192', 'VALUE')
     _require(_is_int(sr.get('audioTracks')) and sr['audioTracks'] == 1, 'sr.audioTracks must be int 1', 'VALUE')
     for flag in _SR_FLAGS:
         _require_true(sr.get(flag), f'sr.{flag}')
