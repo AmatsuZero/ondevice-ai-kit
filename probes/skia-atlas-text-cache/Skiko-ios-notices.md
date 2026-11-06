@@ -64,3 +64,10 @@ The check covers exact repository/archive bytes, all six notice/source archives,
 comments,69 collected files,6module references,40embedded native archives,linked framework
 identities and protected inputs. No upload, remote anonymous consumer, device resource or
 release conclusion is inferred from local compilation and collection.
+
+## Generated iOS App retention
+
+After collection, opt into the generator's normal folder resource with
+`ODAI_THIRD_PARTY_NOTICES_DIR=/abs/collected/notices`. The verified unsigned .3 App retains
+all69 material files exactly. See [instructions and limits](../../docs/validation/f02-app-notices.md).
+This is an explicit consumer step; Maven resolution alone does not embed resources.

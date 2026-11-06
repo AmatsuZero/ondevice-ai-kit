@@ -2,6 +2,41 @@
 require 'xcodeproj'
 require 'fileutils'
 require 'json'
+require 'digest'
+require 'find'
+
+def notice_snapshot(directory)
+  abort('Notice input must be a directory, not a symlink') unless File.directory?(directory) && !File.symlink?(directory)
+  files = {}
+  Find.find(directory) do |path|
+    stat = File.lstat(path)
+    abort("Unsupported notice input: #{path}") unless stat.directory? || stat.file?
+    files[path.delete_prefix(directory + File::SEPARATOR)] = File.binread(path) if stat.file?
+  end
+  begin
+    index = JSON.parse(files.fetch('NOTICE-INDEX.json'))
+  rescue KeyError, JSON::ParserError => error
+    abort("Invalid notice index: #{error.message}")
+  end
+  unless index.is_a?(Hash) && index['schemaVersion'] == 1 && index['files'].is_a?(Array) && !index['files'].empty?
+    abort('Notice index requires schemaVersion 1 and nonempty files')
+  end
+  expected = ['NOTICE-INDEX.json']
+  index['files'].each do |entry|
+    abort('Invalid notice entry') unless entry.is_a?(Hash)
+    path, hash = entry.values_at('path', 'sha256')
+    unless path.is_a?(String) && !path.empty? && !path.include?("\0") && !path.include?('\\') &&
+           path.split('/', -1).none? { |part| ['', '.', '..'].include?(part) } &&
+           hash.is_a?(String) && hash.match?(/\A[0-9a-f]{64}\z/)
+      abort('Unsafe notice path or invalid SHA256')
+    end
+    abort("Duplicate notice path: #{path}") if expected.include?(path)
+    abort("Missing or changed notice: #{path}") unless files.key?(path) && Digest::SHA256.hexdigest(files[path]) == hash
+    expected << path
+  end
+  abort('Notice file set differs from index') unless files.keys.sort == expected.sort
+  files
+end
 
 root = File.expand_path('..', __dir__)
 directory = File.expand_path(ENV.fetch('ODAI_SPEECH_DEMO_DIR', 'artifacts/verification/speech-demo'), root)
@@ -46,6 +81,8 @@ inputs = sources.map { |path| File.join(root, path) } + frameworks +
 inputs += [File.join(root, 'apple-mlx'), File.join(root, 'apple-mlx/Package.resolved')] if mlx_demo
 inputs += [File.join(root, 'apple-opencv/Package.swift'), File.join(root, 'apple-opencv/Vendor/opencv2.xcframework')] if identity_demo
 inputs.each { |path| abort("Missing input: #{path}") unless File.exist?(path) }
+notices_directory = ENV['ODAI_THIRD_PARTY_NOTICES_DIR']
+notices = notice_snapshot(File.expand_path(notices_directory, root)) unless notices_directory.nil? || notices_directory.empty?
 FileUtils.mkdir_p(File.dirname(directory))
 Dir.mkdir(directory)
 project = Xcodeproj::Project.new(File.join(directory, 'SpeechDemo.xcodeproj'))
@@ -84,6 +121,16 @@ products.uniq.each do |name|
   target.frameworks_build_phase.files << file
 end
 sources.each { |source| target.source_build_phase.add_file_reference(project.main_group.new_file(File.join(root, source))) }
+if notices
+  notices.each do |path, bytes|
+    destination = File.join(directory, 'ThirdPartyNotices', path)
+    FileUtils.mkdir_p(File.dirname(destination))
+    File.binwrite(destination, bytes)
+  end
+  resource = project.main_group.new_file('ThirdPartyNotices')
+  resource.last_known_file_type = 'folder'
+  target.resources_build_phase.add_file_reference(resource)
+end
 framework_parent = File.join(root, 'demo/shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework')
 target.frameworks_build_phase.add_file_reference(project.main_group.new_file(File.join(framework_parent, 'ODAIKitDemo.framework')))
 target.build_configurations.each do |config|

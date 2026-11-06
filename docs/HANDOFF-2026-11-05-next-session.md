@@ -1,5 +1,24 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新检查点：F02 unsigned App 许可保留已通过
+
+[实现/证据/复核入口](validation/f02-app-notices.md)。生成器增加可选
+ODAI_THIRD_PARTY_NOTICES_DIR，创建输出前核验索引/精确文件集/摘要及安全路径、拒绝symlink，
+快照已验证字节并使用正常folder resources阶段；默认行为不变。
+新SDK export aa21182加隔离repo/version和generator三overlay，实际.3双iOS链接14任务通过，
+unsigned basic Speech Demo正常构建；App中69文件逐字节与冻结.3消费者材料一致，
+完整App（含debug dylib）与双framework摘要已保留。16生成器测试/312工具测试通过；
+最初三个Swift缓存沙箱错误保留日志，获准缓存访问后全绿。九保护路径/生产lock不变。
+
+证据：artifacts/verification/f02-app-notice-retention-20261106/，只读verify.py。
+最新readiness：artifacts/verification/p11-readiness-20261106-f02-app-notices/summary.json。
+本次仅本地提交；无上传/生产切换/装机/新模型下载，冻结.1/.2/.3不改。
+继续solo，无独立审查批准。基础10/12、P4/P11与release仍open/not-ready。
+下一步：有界核对已定位HarfBuzz生成表的Unicode16/Microsoft OpenType/IANA/SIL来源条款；
+再处理独立远端消费/生产验收。F10无授权校准数据、保持THRESHOLD_UNVERIFIED。
+不重复手机流程、失败Apple自动化、管理API查询或已通过的发布与链接构建。
+下方“最终App保留未验”为历史结论，本次只关闭该本地技术子项。
+
 ## 2026-11-06 最新检查点：F02 许可随包交付与消费者保留已通过
 
 新冻结候选 **`0.144.6-ondevice-f02.3`** 已完成正常Gradle发布及独立KGP2.4消费；

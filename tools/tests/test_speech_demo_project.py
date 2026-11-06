@@ -1,4 +1,5 @@
 import json
+import hashlib
 import os
 from pathlib import Path
 import shutil
@@ -50,9 +51,78 @@ class SpeechDemoProjectTests(unittest.TestCase):
         self.output = self.root / "artifacts/speech-demo"
         self.ruby = os.environ.get("RUBY", "ruby")
 
-    def generate(self, video=False, multimodal=False, mlx=False, validation=False, commit="a" * 40, identity=False):
+    def generate(self, video=False, multimodal=False, mlx=False, validation=False, commit="a" * 40, identity=False, notices=None):
         return subprocess.run([self.ruby, str(self.root / SCRIPT)], capture_output=True, text=True,
-            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0", "ODAI_MULTIMODAL_MLX_DEMO": "1" if mlx else "0", "ODAI_MULTIMODAL_DEMO_VALIDATION": "1" if validation else "0", "ODAI_VALIDATION_SOURCE_COMMIT": commit, "ODAI_OPENCV_IDENTITY_DEMO": "1" if identity else "0"})
+            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0", "ODAI_MULTIMODAL_MLX_DEMO": "1" if mlx else "0", "ODAI_MULTIMODAL_DEMO_VALIDATION": "1" if validation else "0", "ODAI_VALIDATION_SOURCE_COMMIT": commit, "ODAI_OPENCV_IDENTITY_DEMO": "1" if identity else "0", "ODAI_THIRD_PARTY_NOTICES_DIR": "" if notices is None else str(notices)})
+
+    def notice_material(self):
+        path = self.root / "notice-material"
+        path.mkdir()
+        (path / "component").mkdir()
+        text = b"original upstream license\n"
+        (path / "component/LICENSE").write_bytes(text)
+        (path / "NOTICE-INDEX.json").write_text(json.dumps({"schemaVersion": 1, "files": [
+            {"path": "component/LICENSE", "sha256": hashlib.sha256(text).hexdigest()}]}))
+        return path
+
+    def testNoticesOptInSnapshotsIndexedBytesAndAddsFolderResource(self):
+        material = self.notice_material()
+        result = self.generate(notices=material)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        copied = self.output / "ThirdPartyNotices"
+        for name in ["component/LICENSE", "NOTICE-INDEX.json"]:
+            self.assertEqual((copied / name).read_bytes(), (material / name).read_bytes())
+        inspected = subprocess.run([self.ruby, "-rxcodeproj", "-rjson", "-e", """
+p = Xcodeproj::Project.open(ARGV[0]); t = p.targets.find { |target| target.name == 'SpeechDemo' }
+puts JSON.generate(t.resources_build_phase.files.map { |f| [f.file_ref.real_path.to_s, f.file_ref.last_known_file_type] })
+""", str(self.output / "SpeechDemo.xcodeproj")], capture_output=True, text=True, check=True)
+        self.assertIn([str(copied), "folder"], json.loads(inspected.stdout))
+        self.assertEqual(self.original.read_bytes(), b"protected project")
+
+    def testInvalidNoticesRejectBeforeOutput(self):
+        material = self.notice_material()
+        for failure in ["missing-index", "bad-json", "wrong-schema", "tampered", "extra", "missing", "escape", "symlink", "duplicate", "absolute", "bad-hash", "empty", "index-symlink", "root-symlink"]:
+            with self.subTest(failure=failure):
+                source = self.root / failure
+                self.output = self.root / ("output-" + failure)
+                shutil.copytree(material, source)
+                index = source / "NOTICE-INDEX.json"
+                if failure == "missing-index": index.unlink()
+                elif failure == "bad-json": index.write_text("{")
+                elif failure == "wrong-schema": index.write_text(json.dumps({"schemaVersion": 2, "files": []}))
+                elif failure == "tampered": (source / "component/LICENSE").write_text("changed")
+                elif failure == "extra": (source / "EXTRA").write_text("extra")
+                elif failure == "missing": (source / "component/LICENSE").unlink()
+                elif failure == "escape": index.write_text(json.dumps({"schemaVersion": 1, "files": [{"path": "../outside", "sha256": "a" * 64}]}))
+                elif failure == "symlink":
+                    (source / "component/LICENSE").unlink()
+                    (source / "component/LICENSE").symlink_to(material / "component/LICENSE")
+                elif failure == "duplicate":
+                    data = json.loads(index.read_text())
+                    data["files"] *= 2
+                    index.write_text(json.dumps(data))
+                elif failure in ["absolute", "bad-hash", "empty"]:
+                    data = json.loads(index.read_text())
+                    if failure == "absolute": data["files"][0]["path"] = str(material / "component/LICENSE")
+                    elif failure == "bad-hash": data["files"][0]["sha256"] = "invalid"
+                    else: data["files"] = []
+                    index.write_text(json.dumps(data))
+                elif failure == "index-symlink":
+                    index.unlink()
+                    index.symlink_to(material / "NOTICE-INDEX.json")
+                elif failure == "root-symlink":
+                    shutil.rmtree(source)
+                    source.symlink_to(material, target_is_directory=True)
+                result = self.generate(notices=source)
+                self.assertNotEqual(result.returncode, 0, result.stderr)
+                self.assertFalse(self.output.exists())
+                self.assertEqual(self.original.read_bytes(), b"protected project")
+
+    def testDefaultDoesNotCreateNoticeResource(self):
+        result = self.generate()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse((self.output / "ThirdPartyNotices").exists())
+        self.assertNotIn("ThirdPartyNotices", (self.output / "SpeechDemo.xcodeproj/project.pbxproj").read_text())
 
     def testIdentityOptInCombinesExistingCapabilitiesWithoutDuplicateProducts(self):
         result = self.generate(video=True, multimodal=True, mlx=True, identity=True)
