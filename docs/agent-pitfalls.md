@@ -20,6 +20,10 @@
 
 ## 2. cbc：结果格式与长任务
 
+- 公开条款提取不能直接当许可结论：hy3曾把MS-LCID明确的“Regardless of any other terms”
+  反读成网站条款可追加覆盖限制，泛化排除HarfBuzz已入源的生成表，并凭空增加专利门槛。
+  三段授权引文已对原文逐字归一核实，但这些解释均否决；其“exact quotes”字段还混入解释性
+  文字，不能直接发布。查`.omx/artifacts/cbc-public-permissions-20261106/parent-assessment.json`。
 - 早期 `--output-format json` 返回 JSON **事件数组**，不能假设根对象就是结果。检查最后的结果事件及错误字段，提取真正的任务正文。
 - `hy4free` 早期一次 41 分钟任务由监督者主动取消，不是模型返回失败；其退出 0、正文空也不是成功。后续 F09 审查在没有任务超时的情况下于 431.23 秒完成。
 - 再一次 F09 修复调用于 2263.57 秒自然退出，CLI 退出 0，但原始 JSON 在字符串中截断，启动器解析失败。没有接受实现候选；主代理按已复现问题自行完成 RED/GREEN 修复。证据：`.omx/artifacts/cbc-f09-consumer-fix-20261106/`。

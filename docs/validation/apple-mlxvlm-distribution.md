@@ -19,10 +19,13 @@ with0 reported findings; cbc reviewed4 validator/ZIP files and its3 suggestions 
 without a validated new blocker; Copilot reviewed the final consumer publication fix with0
 findings. The seven/four source hashes still match current sources. The consumer generator
 changed for App notice retention, so its old Copilot review is historical and does not
-cover this new modification.
+cover this new modification. A subsequent fresh native code-reviewer independently reviewed
+the two-file App-notice change and regression: APPROVE,0 findings. Exact source hashes are
+retained under `.omx/artifacts/native-incremental-reviews-20261106/`; its scope is only this
+increment, not the whole branch, legal applicability, remote runtime or release.
 Their missing contexts remain explicit; they do not constitute whole-branch, legal or release
 approval. Earlier failed/no-result review entries below are historical for those attempts.
-Receiving organization, maintenance, independent review of the new change, remote environment
+Receiving organization, maintenance, whole-branch review, remote environment
 build/runtime and P4/P11 acceptance remain open. Exact authenticated transport is now verified.
 Evidence: `artifacts/verification/f09-app-notices-20261106/` and
 `.omx/artifacts/f09-git-channel-preflight-20261106/`.

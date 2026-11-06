@@ -1,5 +1,21 @@
 # F02 内部 Nexus 交付准备
 
+## 2026-11-06：.4 精确坐标预检与输入校验补丁审查
+
+当前仍使用冻结的`0.144.6-ondevice-f02.4`作为交付候选，归档108,785,484 B，
+SHA256为`e59efab02e31d2f609e7328b5f8118c86e47e47029c74c4437a70c2b9dc68869`。
+已从正常publication图形成115个版本文件的逐项URL/字节/SHA清单，本地全部匹配；
+明确排除15个可变模块级metadata/sidecar。对已发现hosted候选
+`https://nexus.ugaiot.com/repository/maven-ugreenhome-release/`的115个精确路径
+逐项匿名HEAD，均404且无重定向；未使用凭据、管理API或任何写操作。
+这是时点读证据，不能当作原子不覆盖保证、目标仓库最终选定或上传批准。
+计划与观测：`artifacts/verification/f02-nexus-dot4-preflight-20261106/upload-plan.json`。
+
+第四输入校验补丁和回归工具已取得新的限定native独立审查APPROVE/0 findings，
+见[校验审查边界](f02-notice-validation-20261106.md)。它不在冻结.4发布脚本或旧agy七文件
+审查中；不因此重写.4或称完整.5已发布。公开条款提取经父代理逐条核验，错误解释已否决；
+历史来源适用、维护归属、具体hosted选择、发布授权与远端匿名消费者验收仍开放。
+
 ## 2026-11-06：.4 补齐 HarfBuzz ISC 并修复根项目收集
 
 [HarfBuzz 核对与 .4 交付](f02-harfbuzz-notices.md)：实际编译的 hb-ucd.cc 有独立 ISC

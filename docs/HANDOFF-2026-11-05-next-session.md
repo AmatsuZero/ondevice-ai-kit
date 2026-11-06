@@ -1,4 +1,24 @@
-## 2026-11-06 当前：F09 App材料遗漏已修复，25.3 MB内部候选已上传并回验
+## 2026-11-06 当前：两个增量技术审查通过，Skiko .4 Nexus精确预检完成
+
+新native code-reviewer只读审查已分别返回APPROVE/0 findings：F09生成器的App notice复制修复
+及聚焦回归、F02第四输入校验补丁及portable Gradle回归。四文件摘要/有界结论保留于
+`.omx/artifacts/native-incremental-reviews-20261106/`。这是新的限定范围，不是重启旧失败任务，
+也不扩大旧agy七文件授权/审查，更不是完整分支、法律或发布批准。旧“新补丁/生成器修改
+未审查”现在是历史；原Copilot仍只覆盖修复前版本，新修改由本次独立审查覆盖。
+
+Skiko .4的115个版本文件清单/本地字节/SHA已核对，15可变metadata不进上传计划；
+对既有hosted候选的115个路径匿名HEAD均404，未上传、未用凭据或管理API。
+证据`artifacts/verification/f02-nexus-dot4-preflight-20261106/`；其404是时点观察而非原子保证。
+具体hosted最终选择/维护人员、源条款适用、发布授权与匿名远端消费者仍需闭合。
+
+cbc hy3仅收到公开Unicode/HarfBuzz/MS-LCID原文，110.63秒完成、无工具调用；三段授权引文
+核验通过，反读MS条款/泛化排除生成表/新增专利门槛/解释文字冒充exact quote均被父代理否决。
+原文/处置`.omx/artifacts/cbc-public-permissions-20261106/`，公开抓取摘要另存；不据此批准许可。
+新的资源探路确认现有无recorder候选无同generation析构/free/线程退出信号，不能靠重复旧trace
+补齐；保留已完成58线程配对的instrumented边界。九保护路径/Apple lock保持。
+基础10/12、P4/P11/release不晋级，无新benchmark/质量样本。最新P11快照以manifest指针为准。
+
+## 2026-11-06 上一实现轮：F09 App材料遗漏已修复，25.3 MB内部候选已上传并回验
 
 [本轮验证](validation/f09-app-notice-retention-20261106.md)：冻结SDK生成consumer的真实成功
 模拟器App缺全部24notice；旧实现回归RED后，最小post-build路径保留修复通过19 consumer回归、

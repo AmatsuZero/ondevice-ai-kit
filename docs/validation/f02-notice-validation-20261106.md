@@ -70,11 +70,24 @@ The user subsequently authorized sending the unchanged original seven-file packe
 It completed SUCCESS/one turn in225.17s with no reported new findings; all seven source hashes
 still match. The reviewer did not flag the already reproduced old publisher integrity defect.
 That defect is fixed separately in `3123f3c`; the fourth validation supplement was outside
-this packet and has not received this review. Zero reported findings does not override the
+this packet and has not received that agy review. Zero reported findings does not override the
 actual RED evidence or approve source-specific licensing, the whole branch or release.
 Raw response, exact authorization and parent assessment remain in
 `.omx/artifacts/agy-f02-notice-review-20261106/`; the initial approval rejection is preserved
 as history rather than overwritten. No new test execution is inferred from reviewer prose.
+
+### Subsequent independent validation-supplement review
+
+A fresh native `code-reviewer` reviewed the fourth supplement and portable regression utility
+as a new, bounded source slice: **APPROVE / 0 findings**. It checked the real-directory and
+regular-file/symlink guards, schema/path/digest/exact-membership checks and the output-free
+validation prerequisite for both archive paths. It inspected the14 fixture cases, actual
+buildSrc/72-file JAR and up-to-date/tamper receipts. No Gradle run or test rerun was inferred.
+The exposed non-atomic concurrent-writer limit remains unchanged. Exact current two-file hashes
+and the result are retained in
+`.omx/artifacts/native-incremental-reviews-20261106/f02-publication-validation.json`.
+This fills the supplement's technical review gap; it is not legal, publication, remote-consumer,
+whole-branch or release approval, and it does not expand the old agy packet's scope.
 
 ## Source-reference follow-up
 
@@ -104,3 +117,14 @@ No upstream message was posted, dataset substituted or downloaded, or frozen not
 changed. The source-specific terms, independent approval, maintenance ownership, remote
 anonymous consumer and production resource gates remain open. Foundation10/12, P4/P11 and
 release `open/not-ready` are unchanged; no benchmark samples or product acceptance added.
+
+The later public-only `cbc hy3` extraction completed in110.63s with zero tool requests.
+The primary agent verified three explicit permission quotations against the fetched Unicode,
+HarfBuzz and MS-LCID text. Its interpretation reversed MS-LCID's “Regardless of any other
+terms” clause into a possible overriding website condition; that interpretation was rejected.
+The supplied HarfBuzz root text also does not justify categorically excluding vendored generated
+source tables from “this software”, and no new patent gate was inferred. Prose labelled as an
+exact Microsoft retention quotation was not accepted as license text. Raw result and per-claim
+assessment: `.omx/artifacts/cbc-public-permissions-20261106/`; primary fetches and hashes:
+`.omx/artifacts/f02-public-permissions-20261106/`. No frozen notice text changed and the
+specific historical input/applicability gaps remain; model interpretation is not legal approval.
