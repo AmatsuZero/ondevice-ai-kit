@@ -1,5 +1,33 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新检查点：.4 ISC 补充与实际 SDK/App 交付通过
+
+[详细证据/复核](validation/f02-harfbuzz-notices.md)。332 个实际 HarfBuzz 输入发现
+hb-ucd.cc 的 ISC/Grigori Goronzy 声明在冻结 .3 中遗漏；115 个原样声明块、11 个生成表
+和来源边界已保留。新 .4 正常离线发布 59 任务全部执行，三模块 115 个版本文件（另有
+15 个 module metadata/checksum），六份 notices/source JAR 各含 72 份材料。
+归档 108,785,484 B，SHA256 e59efab02e31d2f609e7328b5f8118c86e47e47029c74c4437a70c2b9dc68869。
+
+SDK544cb15 的全新导出仅叠加隔离仓库/版本/collector 三处配置，实际双 iOS 链接
+14 执行任务通过。SDK root 未应用 KMP 插件，原无 attributes 的 collector 解析失败；
+显式 common/kotlin-metadata/library 后 root 与 KMP standalone 均成功保留 72 文件。
+条件化 useVersion 的早先猜测未修复，已否定、恢复原版本规则；两份 RED 保留，勿重复。
+未修改发布 metadata。dependencyInsight 选择 .4；原提交 generator 正常生成并构建
+unsigned device App，全部 72 notice 和 77 App 文件（含 debug dylib）摘要已核对。
+
+证据：artifacts/verification/f02-harfbuzz-license-review-20261106/（历史准备快照）及
+artifacts/verification/f02-harfbuzz-notice-delivery-20261106/（实际本地交付，read-only verify.py）。
+最新 readiness：artifacts/verification/p11-readiness-20261106-f02-harfbuzz/summary.json。
+九保护路径/生产 lock 未改，旧 .1/.2/.3 及旧消费者/App 证据保留，不重复已过构建。
+只本地提交；无上传/生产切换/装机/新源码模型下载。Nexus 匿名读取、账号发布权限已明确；
+不再询问权限或查询管理API。继续 solo，不重试 reviewer/Apple 自动化/已完成手机流程。
+
+下一步只处理未关闭门槛：生成输入的历史 Unicode 例外、Microsoft/SIL/Arabic PUA 来源适用
+条款及独立许可批准；远端匿名消费与生产维护/资源验收。SIL 主站403未绕过，不能用第三方
+转载当授权。F10 无获授权校准数据，保持 THRESHOLD_UNVERIFIED。
+基础仍 10/12，P4/P11/release open/not-ready；本次修复实际遗漏和 collector，未新增 benchmark。
+下方 .3 的“完整保留”仅指当时69材料逐字节一致，不构成许可完整性结论。
+
 ## 2026-11-06 最新检查点：F02 unsigned App 许可保留已通过
 
 [实现/证据/复核入口](validation/f02-app-notices.md)。生成器增加可选

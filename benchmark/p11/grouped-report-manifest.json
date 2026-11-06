@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-f02-app-notices/summary.json",
-    "sha256": "860c6305f1372391ffeba0b33cb43f50fbcc0638e51f5dcd7dc8614381c0fa73"
+    "path": "artifacts/verification/p11-readiness-20261106-f02-harfbuzz/summary.json",
+    "sha256": "1b7e278d0742f25bbfa3e451f7b67abc32ec3ee87a7814022a76a261f20356e1"
   },
   "schemaVersion": 1,
   "sources": [

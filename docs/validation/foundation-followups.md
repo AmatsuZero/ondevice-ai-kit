@@ -1,5 +1,9 @@
 # Foundation 后续专项
 
+2026-11-06 F02 增量：[HarfBuzz ISC 补充/.4 交付](f02-harfbuzz-notices.md)已完成本地正常发布、
+实际双 iOS SDK 链接和 unsigned App 的 72 份材料保留；修复根项目 notice 变体选择。
+来源条款/独立批准、远端匿名消费、生产资源仍开放，基础 10/12、P4/P11/release 不升级。
+
 2026-11-06 F02 App许可保留：.3真实SDK双iOS链接14任务通过，unsigned App正常构建，
 69文件目录/摘要完全匹配；312工具测试通过。关闭本地App保留子项，详见
 [证据](f02-app-notices.md)。文件条款/独立批准、远端匿名消费和生产资源仍未验。

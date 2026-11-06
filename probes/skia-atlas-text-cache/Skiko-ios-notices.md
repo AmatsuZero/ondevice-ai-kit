@@ -71,3 +71,25 @@ After collection, opt into the generator's normal folder resource with
 `ODAI_THIRD_PARTY_NOTICES_DIR=/abs/collected/notices`. The verified unsigned .3 App retains
 all69 material files exactly. See [instructions and limits](../../docs/validation/f02-app-notices.md).
 This is an explicit consumer step; Maven resolution alone does not embed resources.
+
+## .4 correction and root-build collection
+
+The [HarfBuzz supplement](../../docs/validation/f02-harfbuzz-notices.md) fixes a concrete ISC
+notice omission found in actually compiled `hb-ucd.cc`. New local candidate
+`0.144.6-ondevice-f02.4` carries 72 materials; frozen .3 remains unchanged. Use the same
+publication sequence with the new version and the separately prepared 72-file notice directory.
+Both actual SDK iOS links and the normal unsigned App build pass, with exact material retention.
+
+The collector declares common / kotlin-metadata / library consumer attributes explicitly.
+This is required for the verified SDK root where KMP is only declared with `apply false`;
+without attributes, classifier notation alone failed variant selection. Both a KMP-applied
+standalone consumer and the SDK root now collect the same bytes. Keep the explicit collection
+and App resource steps; candidate resolution alone does not perform them.
+
+```sh
+rtk proxy ./gradlew --offline -PskikoNoticesVersion=0.144.6-ondevice-f02.4 collectSkikoNotices
+```
+
+Pass `-PskikoNoticesVersion` to other Gradle commands in a build that applies this script too:
+the version property is mandatory during configuration. Local delivery is not Nexus publication,
+independent license approval or production acceptance.
