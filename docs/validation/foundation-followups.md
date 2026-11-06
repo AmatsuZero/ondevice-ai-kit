@@ -1,5 +1,11 @@
 # Foundation 后续专项
 
+2026-11-06 F02：[DNG原始通知/.6本地交付](f02-dng-notices.md)修复实际编译头部AOSP声明遗漏。
+qoder完成首项原文提取并经父代理核验；新候选74材料/6JAR/40原Skia静态库、两consumer和
+新unsigned App通知保留通过。App复用.4框架，不计新SDK链接/设备验收；无上传或生产切换。
+OpenCode额度复查仍429，已按用户选择转cbc hy3；qoder配方和已证实新坑已记录。
+旧.4预检仅是历史，当前新.6精确hosted/发布授权/远端消费与资源门槛继续，10/12不变。
+
 2026-11-06 F07只读核查：用户选择的cbc hy4free在148.31秒完成官方0.19.1源码审查、0工具请求。
 主代理核验后确认新版仍无公开Android异步native cancel/join结果接口；已否决助手对版本新增和
 析构不等待的过度推断，详见[版本核查](android-litertlm-later-barrier-20261106.md)。

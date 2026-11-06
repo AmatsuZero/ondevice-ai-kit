@@ -8,6 +8,7 @@ Apply in order to fixed Skiko `9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0`:
 1. `Skiko-ios-only.patch`
 2. `Skiko-ios-source-notices.patch`
 3. `Skiko-ios-notice-publication.patch`
+4. `Skiko-ios-notice-validation.patch` for the current .6 candidate; frozen .4 predates this validator.
 
 Apply in an independent source export outside another Git worktree (or with explicitly scoped
 patch tooling). `git apply` below a parent Git repository can report exit0 while skipping paths;
@@ -93,3 +94,15 @@ rtk proxy ./gradlew --offline -PskikoNoticesVersion=0.144.6-ondevice-f02.4 colle
 Pass `-PskikoNoticesVersion` to other Gradle commands in a build that applies this script too:
 the version property is mandatory during configuration. Local delivery is not Nexus publication,
 independent license approval or production acceptance.
+
+## .6 DNG original-notice correction
+
+The [DNG supplement](../../docs/validation/f02-dng-notices.md) retains the original 623-byte
+AOSP Apache-2.0 notice from the actually compiled `dng_safe_arithmetic.h`, with fixed-source
+provenance. New local `0.144.6-ondevice-f02.6` contains74 materials and applies all four patches.
+Use the existing normal publication command with this version and its separately prepared
+74-file notice directory, then collect with `-PskikoNoticesVersion=0.144.6-ondevice-f02.6`.
+The six notice/source JARs, both consumer collection modes and actual unsigned App material
+retention pass. The App run reuses frozen .4 linked frameworks; no fresh .6 SDK link or device
+acceptance is claimed. .5 was only an isolated notice-JAR experiment; old candidates remain
+unchanged. Read-only receipt verification is `artifacts/verification/f02-dng-notice-delivery-20261106/verify.py`.

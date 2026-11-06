@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-ownership-litertlm/summary.json",
-    "sha256": "403b8d78fca23aeb9a6f37239374df3f3c7fdce069b4e1160a516a1b1c55a157"
+    "path": "artifacts/verification/p11-readiness-20261106-dng-notices/summary.json",
+    "sha256": "32b75fe36c1eefa7e6d312aef7442b6970f82d58dd1259e96c7d6b0f8361443d"
   },
   "schemaVersion": 1,
   "sources": [

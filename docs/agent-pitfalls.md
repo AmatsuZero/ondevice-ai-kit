@@ -1,6 +1,6 @@
 # 助手执行踩坑记录
 
-适用于本项目主代理、cbc、dsh、OpenCode、Copilot、agy、Ollama 和原生子代理。执行前读取与任务相关的条目；遇到相同错误先查本文，再决定是否继续。只允许输出候选、禁止工具的任务，由主代理把相关条目附到提示词，不能为读本文扩大工具权限。
+适用于本项目主代理、cbc、dsh、OpenCode、Copilot、agy、Ollama、qoder 和原生子代理。执行前读取与任务相关的条目；遇到相同错误先查本文，再决定是否继续。只允许输出候选、禁止工具的任务，由主代理把相关条目附到提示词，不能为读本文扩大工具权限。
 
 记录日期：2026-11-06。版本、额度、设备连接状态都是当时观察，继续工作时须重新核对。以下本地证据路径均相对 foundation worktree；`artifacts/`、`.omx/artifacts/` 是本机保留证据，不保证随 Git 分发。
 
@@ -20,6 +20,7 @@
 
 ## 2. cbc：结果格式与长任务
 
+- 本轮DNG核查承认根协议覆盖伴随源码，却又因缺逐文件枚举而判两份`.cpp`缺许可；根协议并无该枚举条件，且前缀摘录不能证明全文无通知。HarfBuzz核查还把tag表误归Unicode16、混淆Windows语言ID与MS-LCID URL，并把只给助手的上下文缺项当作项目阻断项。按固定源码/原文逐项处置，保留正确发现，不整体接受或整体否决。证据：`.omx/artifacts/cbc-hy3-dng-license-scope-20261106/parent-assessment.json`、`cbc-harfbuzz-specific-inputs-20261106/parent-assessment.json`。
 - 公开条款提取不能直接当许可结论：hy3曾把MS-LCID明确的“Regardless of any other terms”
   反读成网站条款可追加覆盖限制，泛化排除HarfBuzz已入源的生成表，并凭空增加专利门槛。
   三段授权引文已对原文逐字归一核实，但这些解释均否决；其“exact quotes”字段还混入解释性
@@ -40,6 +41,7 @@
 
 ## 4. OpenCode：401 与匿名免费额度是两个问题
 
+- 用户要求复查后，同日新隔离任务再次返回`429 provider.free-limit: Free usage limit reached`，`retryAfterMs=34277000`（当时约9.52小时）。停止该线路，按用户已选的cbc hy3接手，同一公开DNG任务31.24秒完成；不用再次询问同一fallback。目录可列模型不代表推理额度恢复。证据：`.omx/artifacts/opencode-dng-license-scope-20261106/`。
 - 保存的 key 返回 `401 api_key_expired`。单独使用临时 XDG 目录、仅在该子进程移除 `OPENCODE_API_KEY` 测试匿名免费层，未修改用户保存的认证。
 - 匿名层返回 `429 provider.free-limit` / `Free usage limit reached`，当时建议约 16 小时后重试。不能因此轮换免费模型或创建账号；用户选择了 agy 接手。
 - 安装版本的模型目录命令是 `opencode models --standalone`；不接受猜测的 positional provider 过滤参数。帮助命令也可能写日志，隔离 XDG 路径仍有用。
@@ -132,3 +134,10 @@
 - **边界/证据**：直接JNI delete不能证明传递析构完全不等待。缺公开barrier不代表同步factory缺席，
   不据此升级依赖或重跑同步推理。见`docs/validation/android-litertlm-later-barrier-20261106.md`、
   `.omx/artifacts/cbc-litertlm-later-barrier-20261106/parent-assessment.json`和公开原文目录。
+
+## 13. qoder：CLI入口、受限网络与逐字核验
+
+- 使用`qodercli`（本轮1.1.84）；`qoder`是另一个App入口。受限shell首次模型目录返回`Failed to fetch model list: Was there a typo in the url or port?`，正常获授权网络目录成功，唯一配置模型`Qwen3.8-Flash`。不要据沙箱失败改认证/网络或换供应商。
+- 首次公开头部提取27.05秒成功，父代理对原源码逐字核对623字节/SHA通过。保留调用、原始结果和父处置；costUSD0/credits0只是本次记账，不保证无限免费。JSON仅返回结果，不能据此声称全事件零工具；调用明确禁工具/MCP。
+- 已安装help不含`--max-turns`，不要从通用文档添加猜测参数；完整已测配方在根本地`AGENTS.md`。不设任务耗时终止，不改保存配置、不加权限绕过、不自动重试429。证据：`.omx/artifacts/qoder-dng-notice-extraction-20261106/`。
+- 原始头部提取帮助发现冻结Skiko`.4`的72材料漏收DNG实际编译头`dng_safe_arithmetic.h`的AOSP声明。必须核对具体编译输入和原始通知，不能只确认组件根LICENSE存在。先保留缺项RED，再用新版本补齐并检查JAR/consumer/App字节；不由材料遗漏直接推断法律违规。

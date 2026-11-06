@@ -1,4 +1,22 @@
-## 2026-11-06 当前：hy4free完成新版LiteRT-LM核查，维护归属已记录
+## 2026-11-06 当前：qoder已接入，DNG原始通知缺项修复为 .6 本地候选
+
+[DNG补充与验证](validation/f02-dng-notices.md)：qodercli/Qwen3.8-Flash首次实际任务27.05秒完成，
+提取623字节AOSP原始声明并经主代理逐字核验；根本地AGENTS.md已记录实测调用。
+OpenCode免费复查仍429，停止该线路；用户已选cbc hy3接手DNG核查并完成，hy4free的
+HarfBuzz核查也已完成，错误推断逐项否决，原始提示/响应/父处置保留，不重复发送。
+
+实际140个DNG编译输入核对发现冻结.4漏收一个AOSP/Apache头部原文，RED保留；
+新`0.144.6-ondevice-f02.6`正常离线publication60任务通过，第四输入校验补丁已实际应用。
+74材料/6JAR/6metadata引用/40原Skia静态库摘要通过；两consumer收集及fresh unsigned App
+74材料逐字节保留通过。App复用冻结.4已链接框架，只验证新通知，没有新.6 SDK框架链接或设备运行。
+归档108,791,304 B，SHA256 `2f426cf8ff6a868abbe49a919445720108c19d7e9a1e58d23ebc3707c9d18fe6`。
+旧.4/旧预检/普通App模型/9保护路径/生产lock不变，无上传或生产切换。
+证据`artifacts/verification/f02-dng-notice-delivery-20261106/`，只读入口`verify.py`。
+下一步从新.6精确候选继续交付门槛；不要重跑本项、旧设备推理或等价许可摘录。
+具体hosted选择/本次发布授权、远端匿名消费与生产资源等保持开放；10/12、P4/P11/release不晋级。
+最新P11指针仍以`benchmark/p11/grouped-report-manifest.json`为准。
+
+## 2026-11-06 上一轮：hy4free完成新版LiteRT-LM核查，维护归属已记录
 
 用户选择`cbc + hy4`后，按本地文档调用`cbc --model hy4free`，仅提供官方公开源码，
 148.31秒自然结束、success、0工具请求；无需继续轮询或重发。固定0.19.1公开Kotlin/JNI仍无
