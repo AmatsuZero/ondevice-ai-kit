@@ -2,6 +2,12 @@
 
 ## 2026-11-06 最新决定：solo、Nexus 渠道与校准数据缺口
 
+后续用户明确允许重试一次 hosted 策略 GET。此次审批通过，但 curl35
+`Recv failure: Connection reset by peer`、HTTP000，未取得响应或策略；一次额度已用完，
+不再自动重试。回执：`artifacts/verification/nexus-skiko-readonly-20261106/authorized-retry-outcome.json`。
+最新 readiness：`artifacts/verification/p11-readiness-20261106-nexus-retry/summary.json`；
+下方审批429为此前尝试的历史结果，仓库策略仍未核实。
+
 用户最新要求保持 **solo**；不再启动或重试独立审查代理。1be81e0 的 architect 审查
 因 429 失败，code-reviewer 按用户要求中断，**没有独立批准**。此前的一次审查授权已被此决定覆盖。
 

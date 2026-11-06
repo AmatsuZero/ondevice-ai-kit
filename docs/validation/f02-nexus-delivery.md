@@ -4,6 +4,11 @@
 当前结论为 **渠道已发现，制品尚不可发布**；本页是交付准备，不是发布批准。
 按用户要求 solo 执行，未使用或保存提供的凭据，未上传、覆盖、删除制品或改生产依赖。
 
+用户随后明确授权一次 hosted 策略 GET 重试。该次审批通过，实际 curl 退出35：
+`Recv failure: Connection reset by peer`，HTTP000，无HTTP响应或策略结论。
+授权次数已用完，不自动重试；回执为同证据目录的 `authorized-retry-outcome.json`。
+以下429记录是首次未执行的历史结果，group403和其他分发门槛不变。
+
 ## 已核实与待核实
 
 匿名 `/service/rest/v1/repositories` 返回200，清单确认以下两个入口存在：
