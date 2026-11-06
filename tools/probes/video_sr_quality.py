@@ -48,6 +48,7 @@ def compare(reference: Path, candidate: Path) -> dict:
     # Validate cadence first, then pair by frame index without duplicating an end frame.
     normalize = f"settb={fps.denominator}/{fps.numerator},setpts=N,format=yuv420p"
     measured = {}
+    frames = [{"frame1Based": index + 1} for index in range(count)]
     with tempfile.TemporaryDirectory(prefix="odai-video-quality-") as directory:
         for metric in ("psnr", "ssim"):
             stats = Path(directory) / f"{metric}.log"
@@ -60,8 +61,23 @@ def compare(reference: Path, candidate: Path) -> dict:
                 "-i", str(candidate), "-filter_complex", filters,
                 "-fps_mode", "passthrough", "-an", "-f", "null", "-",
             ], text=True, capture_output=True, check=True)
-            if len(stats.read_text().splitlines()) != count:
+            lines = stats.read_text().splitlines()
+            if len(lines) != count:
                 raise ValueError(f"{metric} did not compare exactly {count} frames")
+            for index, line in enumerate(lines):
+                fields = dict(re.findall(r"(\w+):([^\s]+)", line))
+                if int(fields.get("n", "0")) != index + 1:
+                    raise ValueError(f"{metric} frame indices are not consecutive")
+                value = float(fields["psnr_avg" if metric == "psnr" else "All"])
+                if math.isnan(value) or (metric == "psnr" and value < 0) or (
+                    metric == "ssim" and not -1 <= value <= 1
+                ):
+                    raise ValueError(f"{metric} frame score is invalid")
+                if metric == "psnr":
+                    frames[index].update(psnrDb=value if math.isfinite(value) else None,
+                                         psnrInfinite=math.isinf(value))
+                else:
+                    frames[index]["ssim"] = value
             pattern = r"average:([0-9.]+|inf)" if metric == "psnr" else r"All:([0-9.]+)"
             matches = re.findall(pattern, result.stderr)
             if not matches:
@@ -86,6 +102,7 @@ def compare(reference: Path, candidate: Path) -> dict:
             "psnrInfinite": math.isinf(measured["psnr"]),
             "ssim": measured["ssim"],
         },
+        "frames": frames,
         "qualityVerdict": "unverified",
         "limitations": "Encoded-output fidelity only; matching source, processing/encoding paths, natural-video suitability and visual quality need separate evidence.",
     }

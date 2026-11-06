@@ -1,5 +1,11 @@
 # Android learned video SR Demo — 2026-11-03
 
+2026-11-06: the retained physical 48-frame output now has an actual
+[reference/bicubic fidelity comparison and per-frame scores](f11-android-sr-fidelity-20261106.md).
+This measures historical output without another inference. Device SR has lower
+PSNR/SSIM than the same-input lossless desktop baseline; encoder/conversion
+differences prevent model-only attribution. Natural quality remains unverified.
+
 2026-11-04 update: isolated API36 emulator system model/video pickers, real 4×
 processing, reentry, player Activity handoff and share chooser are now verified.
 Both exported copies passed independent packet/PTS/decode checks. See

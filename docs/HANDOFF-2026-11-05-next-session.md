@@ -1,5 +1,15 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 当前入口：Android SR 真实输出逐帧质量已测量
+
+复用历史 TECNO 48帧输出，无新推理/装机/采集：[实际结果及限制](validation/f11-android-sr-fidelity-20261106.md)。
+SR PSNR/SSIM=43.646096/0.984451，同CRF18输入FFmpeg bicubic lossless基线=47.334832/0.993559；
+48对均较低，但decoder/色彩/encoder混杂，不裁定模型单因或主观质量通过。
+工具新增逐帧score；第24帧损坏回归RED→GREEN，未改模型/halo/生产encoder。
+证据 `artifacts/verification/f11-android-sr-fidelity-20261106/`；不要重跑相同分数来刷新记录。
+最新 readiness：`artifacts/verification/p11-readiness-20261106-android-sr-fidelity/summary.json`。
+下一质量实验需要可比同设备baseline和更广授权场景；原后置边界、solo及10/12不变。
+
 ## 2026-11-06 当前入口：Apple Identity 声明随 App 交付
 
 两 Apple 生成器遗漏 OpenCV/YuNet/SFace App 资源的问题已修复，生成前读取三份原文，

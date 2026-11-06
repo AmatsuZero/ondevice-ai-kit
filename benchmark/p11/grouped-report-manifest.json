@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-identity-app-notices/summary.json",
-    "sha256": "529b0d31b579a411e3933bd6771c8acb57a3ece0e950a5bf08bf6b2283173c8d"
+    "path": "artifacts/verification/p11-readiness-20261106-android-sr-fidelity/summary.json",
+    "sha256": "326add99a7738db962d9f11c91f4ff62c3b59034880a7ae00aa04e85487ec38a"
   },
   "schemaVersion": 1,
   "sources": [
