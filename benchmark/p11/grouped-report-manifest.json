@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-linux-publication/summary.json",
-    "sha256": "1d311d50576833b7b9a5ad942efe7165c56a6e82aef1e5ed445b2e81f2c1e4f0"
+    "path": "artifacts/verification/p11-readiness-20261106-notice-validation/summary.json",
+    "sha256": "fbefc0c969769625929114d3c67c333a68c7445a91ee156f699bdc546ceb93db"
   },
   "schemaVersion": 1,
   "sources": [

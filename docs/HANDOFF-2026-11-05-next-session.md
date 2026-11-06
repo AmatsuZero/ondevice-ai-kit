@@ -1,4 +1,26 @@
-## 2026-11-06 当前：F09 Linux独占发布实测通过，F02外部审查待具体载荷授权
+## 2026-11-06 当前：F02新发布输入完整性缺陷已复现并补齐校验
+
+[F02新补丁与证据](validation/f02-notice-validation-20261106.md)：原notice发布脚本只检查索引存在，
+真实Gradle在文本篡改后仍正常发布两份错误JAR（RED保留）。新增第四补丁
+`probes/skia-atlas-text-cache/Skiko-ios-notice-validation.patch`校验schema/路径/集合/SHA/符号链接，
+并在归档依赖中再次验证。14项离线Gradle回归通过；实际修复后buildSrc编译和72材料notice-only
+JAR通过，up-to-date时validator仍执行、真实篡改副本拒绝。首次嵌套git apply跳过的结果已否决并保留。
+冻结.4的130文件/6notice-source JAR/40原生库/消费者和App材料复核仍通过，源码/制品原样保留。
+本轮没有完整.5 Maven发布/原生重建/SDK-App重链/上传/设备操作；.5仅单独notice JAR测试名。
+完整tools suite新鲜414/414，50.034秒；与14项Gradle检查分开计数。
+
+Ollama本机两文件补充审查12.58秒返回，父代理复现一条、否决删除source JAR材料的另一条。
+新的公开条款native researcher启动429无结果并停止；父代理核对上游来源/Windows具体许可参考，
+不据此裁定Microsoft/SIL/历史数据或独立批准。SIL主站仍403，不绕过。详见同一验证文档。
+原agy7文件/61651字符packet未改、仍未发送，既有具体载荷授权问题待答复；新第四补丁不在原packet内。
+下一次不要把旧packet的审查范围扩大到此补丁。九保护路径/Apple lock保持。
+agy当前纯文本连通复测15.00秒完成SUCCESS/1turn，使用gemini-3.8-flash-medium，未发送项目源码；
+证据 `.omx/artifacts/agy-availability-check-20261106-5043fdc1/result.json`。不据此替代F02审查。
+F02本轮汇总为 `artifacts/verification/f02-notice-validation-20261106/summary.json`；
+P11对应快照 `artifacts/verification/p11-readiness-20261106-notice-validation/summary.json`。
+最新P11指针以 `benchmark/p11/grouped-report-manifest.json` 为准；10/12、P4/P11 open、release not-ready。
+
+## 2026-11-06 历史：F09 Linux独占发布实测通过，F02外部审查待具体载荷授权
 
 [F09当前验证](validation/f09-consumer-generation-20261106.md)：生成器570b64a0原字节在本机已有
 Linux/aarch64、Python3.12.15/glibc2.41镜像通过13项检查；并发只一胜者、文件/符号链接/既有目录

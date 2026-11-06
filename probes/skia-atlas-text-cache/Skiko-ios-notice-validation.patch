@@ -1,0 +1,73 @@
+diff --git a/skiko/buildSrc/src/main/kotlin/publishing.kt b/skiko/buildSrc/src/main/kotlin/publishing.kt
+--- a/skiko/buildSrc/src/main/kotlin/publishing.kt
++++ b/skiko/buildSrc/src/main/kotlin/publishing.kt
+@@ -100,6 +100,45 @@
+     }
+ }
+ 
++private fun validateThirdPartyNotices(directory: java.io.File) {
++    val root = directory.toPath()
++    val noFollow = java.nio.file.LinkOption.NOFOLLOW_LINKS
++    require(java.nio.file.Files.isDirectory(root, noFollow)) { "Skiko notice input must be a real directory" }
++    val files = mutableMapOf<String, ByteArray>()
++    java.nio.file.Files.walk(root).use { paths ->
++        paths.forEach { path ->
++            if (!java.nio.file.Files.isDirectory(path, noFollow)) {
++                require(java.nio.file.Files.isRegularFile(path, noFollow)) { "Skiko notice input contains an unsupported entry" }
++                files[root.relativize(path).toString().replace(java.io.File.separatorChar, '/')] = java.nio.file.Files.readAllBytes(path)
++            }
++        }
++    }
++    val index = try {
++        groovy.json.JsonSlurper().parseText(files.getValue("NOTICE-INDEX.json").toString(Charsets.UTF_8))
++    } catch (error: Exception) {
++        throw IllegalArgumentException("Skiko notice index is missing or invalid", error)
++    }
++    require(index is Map<*, *> && index["schemaVersion"] == 1) { "Skiko notice index requires schemaVersion 1" }
++    val entries = index["files"]
++    require(entries is List<*> && entries.isNotEmpty()) { "Skiko notice index requires nonempty files" }
++    val expected = mutableSetOf("NOTICE-INDEX.json")
++    for (entry in entries) {
++        require(entry is Map<*, *>) { "Skiko notice entry must be an object" }
++        val path = entry["path"]
++        val hash = entry["sha256"]
++        require(path is String && path.isNotEmpty() && !path.contains('\\') && !path.contains('\u0000') &&
++            path.split('/').none { it.isEmpty() || it == "." || it == ".." } &&
++            hash is String && hash.matches(Regex("[0-9a-f]{64}"))) { "Skiko notice path or SHA256 is invalid" }
++        require(expected.add(path)) { "Skiko notice index contains a duplicate path" }
++        val bytes = files[path]
++        require(bytes != null) { "Skiko notice file is missing: $path" }
++        val actual = java.security.MessageDigest.getInstance("SHA-256").digest(bytes)
++            .joinToString("") { "%02x".format(it.toInt() and 0xff) }
++        require(actual == hash) { "Skiko notice SHA256 differs: $path" }
++    }
++    require(files.keys == expected) { "Skiko notice file set differs from index" }
++}
++
+ private fun SkikoPublishingContext.configurePublicationDefaults() {
+     pomNameForPublication["kotlinMultiplatform"] = "Skiko KMP"
+     kotlin.targets.forEach {
+@@ -114,9 +159,15 @@
+                 "skiko.notices.dir must contain the prepared NOTICE-INDEX.json and original texts"
+             }
++            validateThirdPartyNotices(directory)
+         }
+     }
+     val noticesJar = noticesDirectory?.let { directory ->
++        val validateNotices = project.tasks.register("validateThirdPartyNotices") {
++            // No outputs: validate again for each archive/publish invocation, even when Jars are up-to-date.
++            doLast { validateThirdPartyNotices(directory) }
++        }
+         project.tasks.registerOrGetTask<Jar>("thirdPartyNoticesJar") {
++            dependsOn(validateNotices)
+             archiveClassifier.set("notices")
+             isPreserveFileTimestamps = false
+             isReproducibleFileOrder = true
+@@ -124,6 +175,7 @@
+         }.also {
+             project.tasks.withType(Jar::class.java).configureEach {
+                 if (name == "sourcesJar" || name.endsWith("SourcesJar")) {
++                    dependsOn(validateNotices)
+                     from(directory) { into("META-INF/ondevice-ai-kit/notices") }
+                 }
+             }
