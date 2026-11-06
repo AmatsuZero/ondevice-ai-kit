@@ -1,4 +1,20 @@
-## 2026-11-06 当前：P11纳入精确候选真机终态，历史审查表述已澄清
+## 2026-11-06 当前：F09 Linux独占发布实测通过，F02外部审查待具体载荷授权
+
+[F09当前验证](validation/f09-consumer-generation-20261106.md)：生成器570b64a0原字节在本机已有
+Linux/aarch64、Python3.12.15/glibc2.41镜像通过13项检查；并发只一胜者、文件/符号链接/既有目录
+保留、跨文件系统EXDEV不copy均有实测。新增两项仓库回归在Linux通过，macOS consumer模块18/18。
+镜像不下载、容器禁网/只读源码/非root，未改其他容器/生产代码/普通App/模型。
+Ollama候选22.79秒返回，原候选缺导入/异常和mock问题由主代理修正；原文及处置保留。
+证据 `.omx/artifacts/ollama-linux-publish-checks-20261106/` 和
+`artifacts/verification/f09-linux-publication-20261106/`。不要把18项聚焦结果当作新的完整412项套件。
+
+已备好F02 .4独立技术审查的7文件/61651字符packet，自动审批拒绝向agy发送这份新内部源码载荷，
+要求具体授权；尚未启动、没有发送。用户问题仍待答复，不能改用其他外部线路绕过。
+prompt/scope/拒绝记录 `.omx/artifacts/agy-f02-notice-review-20261106/`；选择只做本地则不发外部。
+该审查不裁定Microsoft/SIL/历史数据条款，也不授权上传Maven制品。
+最新P11指针仍以 `benchmark/p11/grouped-report-manifest.json` 为准；基础10/12、P4/P11/open/not-ready保持。
+
+## 2026-11-06 历史：P11纳入精确候选真机终态，历史审查表述已澄清
 
 [P11更新范围](validation/p11-candidate-lifecycle-20261106.md)：本次追加已有ASR13项/SR6项原生断言、
 原始拒绝及同次SR重验、普通App完整恢复和F09竞态修复证据。快照为

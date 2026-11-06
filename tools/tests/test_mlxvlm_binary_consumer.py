@@ -1,4 +1,5 @@
 import errno
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
 from pathlib import Path
@@ -6,6 +7,7 @@ import plistlib
 import shutil
 import subprocess
 import tempfile
+import threading
 import unittest
 from unittest.mock import patch
 
@@ -228,6 +230,68 @@ class MLXVLMBinaryConsumerTests(unittest.TestCase):
             self.assertEqual(caught.exception.errno, errno.ENOTSUP)
             self.assertTrue(stage.is_dir())
             self.assertFalse(output.exists())
+
+    def test_exclusive_publish_preserves_file_and_symlink_destinations(self):
+        from tools.generate_mlxvlm_binary_consumer import _publish_exclusive
+        for kind in ("file", "directory-symlink", "dangling-symlink"):
+            with self.subTest(kind=kind), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                stage = root / "staged"
+                stage.mkdir()
+                (stage / "new").write_bytes(b"generated\0\xff")
+                output = root / "consumer"
+                target = root / "target"
+                if kind == "file":
+                    output.write_bytes(b"original")
+                else:
+                    if kind == "directory-symlink":
+                        target.mkdir()
+                        (target / "keep").write_bytes(b"original")
+                    output.symlink_to(target)
+                original = output.lstat()
+                with self.assertRaises(FileExistsError):
+                    _publish_exclusive(stage, output)
+                current = output.lstat()
+                self.assertEqual((original.st_dev, original.st_ino),
+                                 (current.st_dev, current.st_ino))
+                self.assertEqual((stage / "new").read_bytes(), b"generated\0\xff")
+                if kind == "file":
+                    self.assertEqual(output.read_bytes(), b"original")
+                else:
+                    self.assertEqual(output.readlink(), target)
+                    if kind == "directory-symlink":
+                        self.assertEqual((target / "keep").read_bytes(), b"original")
+                    else:
+                        self.assertFalse(target.exists())
+
+    def test_exclusive_publish_competing_directories_have_one_winner(self):
+        from tools.generate_mlxvlm_binary_consumer import _publish_exclusive
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            stages = [root / "first", root / "second"]
+            output = root / "consumer"
+            for stage in stages:
+                stage.mkdir()
+                (stage / "owner").write_bytes(stage.name.encode())
+            barrier = threading.Barrier(2)
+
+            def publish(stage):
+                barrier.wait()
+                try:
+                    _publish_exclusive(stage, output)
+                except FileExistsError:
+                    return "exists", stage
+                return "published", stage
+
+            with ThreadPoolExecutor(max_workers=2) as executor:
+                results = list(executor.map(publish, stages))
+            self.assertEqual(sorted(status for status, _ in results),
+                             ["exists", "published"])
+            winner = next(stage for status, stage in results if status == "published")
+            loser = next(stage for status, stage in results if status == "exists")
+            self.assertFalse(winner.exists())
+            self.assertEqual((output / "owner").read_bytes(), winner.name.encode())
+            self.assertEqual((loser / "owner").read_bytes(), loser.name.encode())
 
     def test_missing_simulator_and_raw_unbundled_resources_are_rejected(self):
         root, manifest, artifact, _ = self.inputs()
