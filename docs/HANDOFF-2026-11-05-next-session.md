@@ -1,4 +1,57 @@
-## 2026-11-06 最新：waterfall 同机 SR 对照与外部 CLI 分工
+## 2026-11-06 最新：F09 竞态修复通过，安卓五份 APK 已暂存
+
+本机新增 Ollama `qwen3-coder:30b`（约18GB）已实际接到离线测试候选任务，
+localhost 推理19.99秒完成；父代理修正硬编码路径/导入和边界用例后，8项离线检查通过。
+只覆盖 `lifecycle_run.py` 的 runId/ADB错误边界，不是整个设备协议验证。
+提示词已附踩坑摘录；调用/API/本地额度策略已补入根目录本地 `AGENTS.md`，
+证据 `.omx/artifacts/ollama-lifecycle-tests-20261106/`。未用新的付费 cbc 模型。
+
+[F09 修复及验证](validation/f09-consumer-generation-20261106.md)：manifest 单次冻结，
+验证/拷贝/Swift 常量/receipt 同源；最终发布使用 native exclusive rename，目标存在即失败，
+API/文件系统不支持则拒绝，不退回普通覆盖 rename。Copilot 指出的占位目录替换窗口已修复。
+最终独占重命名实现的 Copilot 复核已返回完整结果，findings 为空；不替代独立发布批准。
+完整 tools suite **411 项通过，54.756 秒**；第一轮 Ruby2.6/3.4 gem 环境冲突的失败日志保留，
+只修正测试子进程 PATH 后重跑。Linux 分支仅文档核实，未在 Linux 运行。
+hy4free 修复调用自然结束但 JSON 截断，无可用候选；没有监督者超时或循环重试。
+
+安卓 candidate/rollback/原test/ASRtest/SRtest 五份暂存均完成，整包 SHA 匹配固定值，
+见 `artifacts/verification/android-persistent-candidate-20261106/stage-resume-06.json`。
+安装前五份整包链路核验和安装后私有数据/权限检查已补齐；**尚未安装、尚无本轮推理通过**。
+agy 的 `lifecycle_run.py` 候选已审查补强，但设备执行尚未验证；restore 协议未完成，
+下一步先完成并验证恢复脚本，然后才安装/自检/执行固定 ASR、SR 和恢复普通 App。
+不可用旧 `device.py` 的 preflight 重写已保留 before/SR backup；先刷新设备连接与活动 instrumentation。
+
+新增[助手踩坑记录](agent-pitfalls.md)：cbc/dsh/OpenCode/Copilot/agy、Ruby、ADB、报告与竞态。
+根目录本地 `AGENTS.md` 要求开工前/遇错查阅，no-tools 提示词由主代理附相关摘录；
+已用于新的 Copilot 最终发布复核任务。免费优先；有限非免费 cbc `glm-5.3-flash` /
+`space-bunny` 仅用于有理由的高优实现，尚未实测或消费其额度。
+九保护路径/Apple lock 继续保留；10/12、P4/P11 open、release not-ready 和 F10 边界不变。
+
+## 2026-11-06 历史：私有报告候选已构建，Copilot 已投入任务
+
+[本轮检查点](validation/android-persistent-candidate-20261106.md)：Android ASR/SR
+test-only 私有报告 overlay、校验器和回归已完成；两份离线 test APK 构建通过，
+完整 tools suite 405 项通过。普通 App/test/模型未替换，尚无本轮候选装机或推理通过。
+根目录本地 `AGENTS.md` 已增加 Copilot 1.0.106 的可复制调用、额度/无超时约束；
+首条实际任务 71.34 秒返回校验器，auto 选中 `gpt-6-luna`，无工具调用。
+父代理审查补强后，953 份源码/两份测试 APK/构建日志/九保护路径/Apple lock 复核通过，
+8 项负例拒绝通过；只读脚本位于
+`artifacts/verification/android-persistent-candidate-20261106/verify.py`。
+
+APK 分块暂存已核对 candidate 的前 8 块；第 9 块 EOF 后手机 offline，
+保留断点，不据 push 输出宣称整包成功，不立即重复要求用户重连。
+先检查第 9 块实际状态再续传；完整 rollback/test 暂存和 run/collect/restore 协议
+尚未齐备，不可直接安装。详见上方检查点及保留 `stage-chunks.py`。
+
+F09 hy4free 审查已完成并复现 manifest 多次读取与输出目录覆盖两处竞态；
+独立修复候选仍在运行，无自动超时，不重复发起。
+现有句柄/证据：`.omx/artifacts/cbc-f09-consumer-fix-20261106/`，
+统一执行 session `39472`（仅诊断信息，续会话先核对进程再用）。
+收到候选后先将新测试运行在旧实现取得 RED，再集成修复和验证；不重建 native SDK。
+两处 pre-fix 实测在 `artifacts/verification/f09-consumer-race-20261106/before-fix.json`，勿覆盖。
+10/12、P4/P11 open、release not-ready 与 F10/最低系统设备边界保持。
+
+## 2026-11-06 历史：waterfall 同机 SR 对照与外部 CLI 分工
 
 沿用本地获授权 Kawaida Waterfall 素材，无新增下载或采集。TECNO/API35 的
 `waterfall-20261106-01`、PID7242 已完成 nearest/bilinear/ESRGAN 三条48帧路径；
