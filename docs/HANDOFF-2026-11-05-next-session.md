@@ -1,5 +1,37 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新技术检查点：F02 双 iOS 正常发布与实际 SDK 消费已通过
+
+F02 的 iOS-only metadata／AWT 闭包阻断已修复，详见
+[分发审查](validation/f02-distribution-review.md)和[复现入口](../probes/skia-atlas-text-cache/Skiko-ios-only.md)。
+固定源码的独立 iOS 补丁移除 JVM 可选注解并按 supportAwt 关闭独立 AWT publication；
+没有改生成 metadata、抑制诊断或切换生产依赖。严格双 iOS RED 为1,022个注解错误，
+修复后13任务通过；正常 release publication58任务通过，生成完整三模块100文件。
+新候选 `0.144.6-ondevice-f02.2`，归档108,176,625 B，SHA256
+`631806c3cf1bee881a41e2b99da4490e368dc37aa0f7d2057f376a4d683eb2de`。
+KGP2.4.0独立consumer9任务、精确SDK71276364+隔离仓库/版本overlay的Compose consumer14任务
+均完成device/simulator framework链接；dependencyInsight确认Compose选择修复版本。
+这关闭本地publication与消费者链接技术子项，未新增benchmark／手机验收或关闭完整F02。
+
+许可范围现覆盖全部40份内嵌静态库、1,860个编译源文件、0未映射对象，新增发现ICU；
+23份上游文本、2份Unicode参考和14份libjpeg内联声明已暂存。两份ICU生成汇编均逐字节还原
+到同一6,296,800 B的iOS数据输入。7个修改源文件的补充声明补丁已备好并通过apply检查，
+**尚未应用到冻结.2或重新出包**。下一项实际工作：在新候选版本应用声明，完成文件／头文件／
+Unicode条款核对，正常发布任务附带notices并验证consumer保留；不要覆盖.1/.2。
+
+证据：`artifacts/verification/f02-ios-publication-20261106/`，`summary.json`为冻结构建记录，
+`license-progress.json`为后续许可准备；只读复核 `rtk proxy python3
+artifacts/verification/f02-ios-publication-20261106/verify.py`。
+四framework、100文件及sidecars、6引用、40内嵌库、旧.1归档、9保护路径和生产lock已复核。
+所有构建/归档命令均已结束，无待恢复session。不重跑已通过的原生构建来刷新记录。
+
+Nexus匿名读取、发布账号上传/覆盖/不可删除权限已明确，不再查询管理API或重复问权限。
+凭据未使用或落盘，无上传、远端消费、生产切换。solo，无独立审查批准；F10仍无获授权校准数据。
+基础仍10/12、P4/P11与发布仍open/not-ready；本次进展是两个真实构建/消费子项通过。
+最新readiness：`artifacts/verification/p11-readiness-20261106-f02-ios-publication/summary.json`。
+下方“publication尚未解决”“本轮仅渠道澄清”等均为此前检查点的历史结论。
+
+
 ## 2026-11-06 最新决定：solo、Nexus 渠道与校准数据缺口
 
 用户确认Nexus拉取无需鉴权；消费者使用匿名HTTPS，发布凭据仅用于上传。

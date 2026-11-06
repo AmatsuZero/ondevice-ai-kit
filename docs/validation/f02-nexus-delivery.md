@@ -55,11 +55,18 @@ TLS校验保持开启。没有制品下载；本地109 MB归档仅做SHA256和�
 
 ## 当前制品门槛
 
-既有 `skiko-0.144.6-ondevice-f02.1-maven-repo.tar.gz` 保持原样：109,379,413 B，
-125文件，SHA256 `d042a71f6a931320f367387580341f6d05b404196099d51d969308a0a0c2e480`。
-其四模块包含AWT，但AWT POM引用七个缺失runtime；严格双iOS metadata构建失败。
-AWT/Web/Android编译锚点各有额外发布义务，不能手改生成metadata后上传。
-第三方许可候选材料亦未定稿，详见 [分发审查](f02-distribution-review.md)。
+2026-11-06新候选 `0.144.6-ondevice-f02.2` 已通过正常双iOS-only Gradle发布：
+3模块/100文件/6引用闭合，独立consumer及SDK Compose双架构framework链接成功。
+归档108,176,625 B，SHA256 `631806c3cf1bee881a41e2b99da4490e368dc37aa0f7d2057f376a4d683eb2de`。
+[专用补丁和复现](../../probes/skia-atlas-text-cache/Skiko-ios-only.md)关闭此前metadata/AWT技术阻断，
+无需扩展桌面/Web/Android发布范围。
 
-服务器可达不关闭上述技术门槛，也不关闭独立审查、生产资源和P4/P11。
-当前F02和发布仍 `open/not-ready`，本轮0新benchmark、0验收项通过，无设备操作。
+冻结.2尚缺修改源文件声明及完整许可交付；声明补丁、23上游文本、2Unicode参考和14份libjpeg
+内联声明已备好，文件/头文件与生成数据审查、正常发布附带和consumer保留仍需完成。
+下一候选使用新版本，不修改冻结.1/.2；详见[分发审查](f02-distribution-review.md)。
+旧.1归档109,379,413 B/125文件/SHA256
+`d042a71f6a931320f367387580341f6d05b404196099d51d969308a0a0c2e480` 保持原样。
+
+Nexus制品拉取按用户说明使用匿名HTTPS；现有账号权限无需再次确认或查询管理API。
+未使用发布凭据，无上传、覆盖、删除或生产切换；远端匿名消费待制品就绪后单独验证。
+本轮没有设备操作/新benchmark，F02和发布仍open/not-ready。

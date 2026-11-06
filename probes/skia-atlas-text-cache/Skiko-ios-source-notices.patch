@@ -1,0 +1,84 @@
+diff --git a/skiko/buildSrc/src/main/kotlin/publishing.kt b/skiko/buildSrc/src/main/kotlin/publishing.kt
+--- a/skiko/buildSrc/src/main/kotlin/publishing.kt
++++ b/skiko/buildSrc/src/main/kotlin/publishing.kt
+@@ -1,3 +1,8 @@
++/*
++ * Modified for ondevice-ai-kit, 2026-11-06.
++ * Skip AWT runtime publication when AWT is disabled.
++ * Original work remains under the upstream Apache-2.0 license.
++ */
+ import org.gradle.api.attributes.Bundling
+ import org.gradle.api.attributes.Category
+ import org.gradle.api.attributes.LibraryElements
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/ColorMatrix.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/ColorMatrix.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/ColorMatrix.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/ColorMatrix.kt
+@@ -1,3 +1,8 @@
++/*
++ * Modified for ondevice-ai-kit, 2026-11-06.
++ * Adapt shared Native metadata for the dedicated iOS-only publication.
++ * Original work remains under the upstream Apache-2.0 license.
++ */
+ package org.jetbrains.skia
+ 
+ import kotlin.jvm.JvmInline
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/Expects.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/Expects.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/Expects.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/Expects.kt
+@@ -1,3 +1,8 @@
++/*
++ * Modified for ondevice-ai-kit, 2026-11-06.
++ * Adapt shared Native metadata for the dedicated iOS-only publication.
++ * Original work remains under the upstream Apache-2.0 license.
++ */
+ package org.jetbrains.skia
+ 
+ internal expect fun <R> commonSynchronized(lock: Any, block: () -> R)
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/IRect.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/IRect.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/IRect.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/IRect.kt
+@@ -1,3 +1,8 @@
++/*
++ * Modified for ondevice-ai-kit, 2026-11-06.
++ * Adapt shared Native metadata for the dedicated iOS-only publication.
++ * Original work remains under the upstream Apache-2.0 license.
++ */
+ package org.jetbrains.skia
+ 
+ import kotlin.jvm.JvmStatic
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/ISize.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/ISize.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/ISize.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/ISize.kt
+@@ -1,3 +1,8 @@
++/*
++ * Modified for ondevice-ai-kit, 2026-11-06.
++ * Adapt shared Native metadata for the dedicated iOS-only publication.
++ * Original work remains under the upstream Apache-2.0 license.
++ */
+ package org.jetbrains.skia
+ 
+ import kotlin.jvm.JvmStatic
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/RRect.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/RRect.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/RRect.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/RRect.kt
+@@ -1,3 +1,8 @@
++/*
++ * Modified for ondevice-ai-kit, 2026-11-06.
++ * Adapt shared Native metadata for the dedicated iOS-only publication.
++ * Original work remains under the upstream Apache-2.0 license.
++ */
+ package org.jetbrains.skia
+ 
+ import org.jetbrains.skia.impl.InteropPointer
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/Rect.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/Rect.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/Rect.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/Rect.kt
+@@ -1,3 +1,8 @@
++/*
++ * Modified for ondevice-ai-kit, 2026-11-06.
++ * Adapt shared Native metadata for the dedicated iOS-only publication.
++ * Original work remains under the upstream Apache-2.0 license.
++ */
+ package org.jetbrains.skia
+ 
+ import org.jetbrains.skia.impl.InteropPointer

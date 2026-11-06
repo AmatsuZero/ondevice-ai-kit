@@ -1,0 +1,133 @@
+diff --git a/skiko/buildSrc/src/main/kotlin/publishing.kt b/skiko/buildSrc/src/main/kotlin/publishing.kt
+--- a/skiko/buildSrc/src/main/kotlin/publishing.kt
++++ b/skiko/buildSrc/src/main/kotlin/publishing.kt
+@@ -190,6 +190,7 @@
+  * which resolves the correct artifact for the current platform.
+  */
+ private fun SkikoPublishingContext.configureAwtRuntimeJarPublication() {
++    if (!project.supportAwt) return
+     val allJvmRuntimeVariants = awtRuntimeTargets.map { (os, arch) ->
+         project.configurations.create("awtRuntimeElements-${targetId(os, arch)}").apply {
+ 
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/ColorMatrix.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/ColorMatrix.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/ColorMatrix.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/ColorMatrix.kt
+@@ -2,7 +2,6 @@
+ 
+ import kotlin.jvm.JvmInline
+ 
+-@JvmInline
+ value class ColorMatrix(val mat: FloatArray) {
+     constructor(
+         m00: Float, m01: Float, m02: Float, m03: Float, m04: Float,
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/Expects.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/Expects.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/Expects.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/Expects.kt
+@@ -17,6 +17,4 @@
+ 
+ internal expect fun compilePattern(regex: String): Pattern
+ 
+-@OptIn(ExperimentalMultiplatform::class)
+-@OptionalExpectation
+ expect annotation class ExternalSymbolName(val name: String)
+\ No newline at end of file
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/IRect.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/IRect.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/IRect.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/IRect.kt
+@@ -58,17 +58,14 @@
+     }
+ 
+     companion object {
+-        @JvmStatic
+         fun makeLTRB(l: Int, t: Int, r: Int, b: Int): IRect {
+             return IRect(l, t, r, b)
+         }
+ 
+-        @JvmStatic
+         fun makeXYWH(l: Int, t: Int, w: Int, h: Int): IRect {
+             return IRect(l, t, l + w, t + h)
+         }
+ 
+-        @JvmStatic
+         fun makeWH(w: Int, h: Int): IRect {
+             return IRect(0, 0, w, h)
+         }
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/ISize.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/ISize.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/ISize.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/ISize.kt
+@@ -35,12 +35,10 @@
+     }
+ 
+     companion object {
+-        @JvmStatic
+         fun make(w: Int, h: Int): ISize {
+             return ISize(w, h)
+         }
+ 
+-        @JvmStatic
+         fun makeEmpty(): ISize {
+             return ISize(0, 0)
+         }
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/RRect.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/RRect.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/RRect.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/RRect.kt
+@@ -57,17 +57,14 @@
+     }
+ 
+     companion object {
+-        @JvmStatic
+         fun makeLTRB(l: Float, t: Float, r: Float, b: Float, radius: Float): RRect {
+             return RRect(l, t, r, b, floatArrayOf(radius))
+         }
+ 
+-        @JvmStatic
+         fun makeLTRB(l: Float, t: Float, r: Float, b: Float, xRad: Float, yRad: Float): RRect {
+             return RRect(l, t, r, b, floatArrayOf(xRad, yRad))
+         }
+ 
+-        @JvmStatic
+         fun makeLTRB(
+             l: Float,
+             t: Float,
+@@ -81,7 +78,6 @@
+             return RRect(l, t, r, b, floatArrayOf(tlRad, trRad, brRad, blRad))
+         }
+ 
+-        @JvmStatic
+         fun makeNinePatchLTRB(
+             l: Float,
+             t: Float,
+@@ -95,7 +91,6 @@
+             return RRect(l, t, r, b, floatArrayOf(lRad, tRad, rRad, tRad, rRad, bRad, lRad, bRad))
+         }
+ 
+-        @JvmStatic
+         fun makeComplexLTRB(l: Float, t: Float, r: Float, b: Float, radii: FloatArray): RRect {
+             return RRect(l, t, r, b, radii)
+         }
+diff --git a/skiko/src/commonMain/kotlin/org/jetbrains/skia/Rect.kt b/skiko/src/commonMain/kotlin/org/jetbrains/skia/Rect.kt
+--- a/skiko/src/commonMain/kotlin/org/jetbrains/skia/Rect.kt
++++ b/skiko/src/commonMain/kotlin/org/jetbrains/skia/Rect.kt
+@@ -86,22 +86,18 @@
+     }
+ 
+     companion object {
+-        @JvmStatic
+         fun makeLTRB(l: Float, t: Float, r: Float, b: Float): Rect {
+             return Rect(l, t, r, b)
+         }
+ 
+-        @JvmStatic
+         fun makeWH(w: Float, h: Float): Rect {
+             return Rect(0f, 0f, w, h)
+         }
+ 
+-        @JvmStatic
+         fun makeWH(size: Point): Rect {
+             return makeWH(size.x, size.y)
+         }
+ 
+-        @JvmStatic
+         fun makeXYWH(l: Float, t: Float, w: Float, h: Float): Rect {
+             return Rect(l, t, l + w, t + h)
+         }

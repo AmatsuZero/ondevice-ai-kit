@@ -1,5 +1,41 @@
 # F02 固定 Skiko 候选分发审查（2026-11-03）
 
+## 2026-11-06：iOS-only 发布闭包已修复，许可附件继续准备
+
+当前候选为 **`0.144.6-ondevice-f02.2`**，固定Skiko/Skia revision与下方.1相同。
+[专用源级补丁](../../probes/skia-atlas-text-cache/Skiko-ios-only.patch) SHA256
+`bad349963f7fc09593f00e8b17b0428858da7922a8c938f7aedcdc62abc94413`，只用于iOS发布。
+修复严格双iOS shared Native metadata的JVM可选注解，并按supportAwt关闭独立AWT runtime
+publication；不修改生成POM/module、不抑制编译诊断。原1,022个注解错误的离线RED已保留，
+修复后13任务metadata编译与58任务正常release发布均通过。
+
+正常输出恰为 `skiko`、`skiko-iosarm64`、`skiko-iossimulatorarm64`，100文件及6个
+available-at引用全部闭合，无AWT/Android/Web变体。归档108,176,625 B，SHA256
+`631806c3cf1bee881a41e2b99da4490e368dc37aa0f7d2057f376a4d683eb2de`。
+KGP2.4.0的独立commonMain/native consumer及SDK71276364的实际Compose consumer
+均链接device/simulator framework成功（9/14任务）；后者仅增加隔离仓库和版本overlay，
+dependencyInsight确认Compose的Skiko0.144.6解析到.2。不是装机或资源预算验收。
+
+全部40份内嵌静态库已逐字节匹配固定Skia输入，所有架构slice对象映射到1,860个不同编译源，
+0未映射，覆盖10个external组件（新增ICU444源）。旧清单仅覆盖libskia.a，不能代表整个Klib。
+全部1,860文件头已重新分类；7个无头线索文件包括原5项和两个生成ICU数据汇编。
+两汇编的.long/.byte内容逐字节匹配同一iOS icudtl.dat（6,296,800 B），输入含Unicode版权/条款引用。
+23份上游文本、2份Unicode参考、14份libjpeg原样内联声明已暂存，**尚非完整分发附件批准**。
+另备[7源文件修改声明补丁](../../probes/skia-atlas-text-cache/Skiko-ios-source-notices.patch)，
+通过在.2源树上的apply检查；冻结.2源码JAR尚未包含它，需新版本重新构建，不能替换.2。
+
+本地证据 `artifacts/verification/f02-ios-publication-20261106/`：`summary.json`、
+`publication-graph.json`、`all-static-source-inventory.json`、`all-source-header-audit.json`、
+`icu-data-provenance.json`、`license-progress.json`及原始build logs。
+只读 `verify.py`复核100文件/sidecars、6引用、归档成员、40内嵌库、4framework和保护输入；
+[复现命令](../../probes/skia-atlas-text-cache/Skiko-ios-only.md)已跟踪。
+
+剩余实际门槛：新候选应用修改声明；文件/头文件例外与HarfBuzz生成Unicode条款核对；
+正常publication附带同版本notices并验consumer保留；Nexus匿名远端取件/编译与生产资源验收。
+发布账号权限已明确，管理API不再是前置条件；尚无独立审查批准、维护团队指派或远端发布。
+.1/.2均保留不覆盖，F02/P4/P11仍open/not-ready。
+下文为.1及探索历史；其“未解决iOS-only”结论已被本节的实际源级修复取代。
+
 2026-11-06：用户已指定内部 Nexus host，渠道不再是完全未知；匿名发现、候选入口与
 尚未核实的仓库策略见 [Nexus交付准备](f02-nexus-delivery.md)。本地归档未上传，
 下文publication闭包、许可定稿、维护团队和远端消费者等门槛仍有效。

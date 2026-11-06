@@ -7,6 +7,8 @@
 | `AtlasTextOp-tls-owner.patch` | 不含测试 hook 的候选修复：TLS 单槽改由 `CacheOwner` 在线程退出时释放 |
 | `native-regression-baseline.patch` | 在原始 TLS 指针源码上接入真实 `AtlasTextOp` 测试和测试事件，预期 worker 退出用例失败 |
 | `native-regression-candidate.patch` | 在相同固定源码上接入候选修复、相同测试和测试事件，预期通过 |
+| `Skiko-ios-only.patch` / [说明](Skiko-ios-only.md) | 固定Skiko的iOS-only源码发布补丁，修复共享Native metadata注解失败并关闭未启用AWT的独立发布；不修改生产依赖 |
+| [Skiko-ios-source-notices.patch](Skiko-ios-source-notices.patch) | Supplement for the next immutable iOS candidate: dated modification notices in all seven changed source files; not applied to frozen .2 |
 
 两份回归补丁**各自独立应用到干净的同一 revision**，不要顺序叠加。测试事件仅在回归补丁中；它在实际 `::operator delete` 返回后记一次释放。生产候选只有 `AtlasTextOp-tls-owner.patch`。测试通过 `AtlasTextOpTools::CreateOp` 构造真实对象：同线程验证单槽复用和 `GrRecordingContext` 析构清理；跨线程让主线程销毁 context、worker 线程销毁 op 并退出，验证 worker 的 TLS 缓存最终释放。
 
