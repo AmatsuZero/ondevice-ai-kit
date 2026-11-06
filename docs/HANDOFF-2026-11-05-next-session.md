@@ -1,5 +1,21 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 当前入口：Android 同设备 SR 三路对照已完成
+
+[结果与限制](validation/f11-android-sr-controlled-20261106.md)：TECNO/API35，
+`controlled-20261106-02`/PID3027，三路同decoder/encoder/color/mux各48帧完成；
+nearest SSIM0.990077、Android bilinear0.992679、ESRGAN0.984451，SR对两基线均48/48较低。
+新SR decoded SHA与历史普通App输出完全相同；本片固定profile输出保真度未改善，
+不归因于不同桌面codec，也不升级为主观质量/普遍模型结论，不改生产模型/halo/encoder。
+初始无页面probe被TECNO Hiber冻结（所有线程do_freezer_trap），已保留现场；
+仅增加非导出前台Activity后，同一媒体源码快照完整成功，build/lint和2项源码准备测试通过。
+缺输入终态失败报告已实测；额外cancel检查因USB/观察脚本问题无启动/终态证据，保留unverified。
+独立工具包/四个哈希核验staging已清理，原App/test/runner/25份模型私有摘要核对见证据。
+证据 `artifacts/verification/android-sr-controlled-foreground-20261106/`，只读`verify.py`。
+最新readiness：`artifacts/verification/p11-readiness-20261106-android-sr-controlled/summary.json`。
+solo、10/12、P4/P11/open/not-ready及原后置门槛保持。不要重复本片三路实验刷新记录。
+后续需有不同获授权场景或针对质量问题的具体假设；不凭本轮负向分数任意换模型。
+
 ## 2026-11-06 当前入口：Android 同编解码 SR 对照工具已构建，待真机
 
 [运行协议](../probes/android-sr-quality/README.md)：独立 test-only 包

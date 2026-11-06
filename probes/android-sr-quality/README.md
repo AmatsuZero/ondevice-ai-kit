@@ -1,8 +1,16 @@
 # Controlled Android SR quality probe
 
 Local test-only package `io.ondeviceai.probe.srquality`, with its own
-instrumentation and private files. No Activity, permissions, network, capture,
-or model download. It does not replace the ordinary Demo or its test package.
+instrumentation and private files. A minimal foreground test Activity keeps
+the screen on while visible. No permissions, network, capture or model
+download. It does not replace the ordinary Demo or its test package.
+
+The first headless physical-device run stopped progressing at frame 4:
+TECNO Hiber logged that it froze the test UID, and every inspected thread was
+in `do_freezer_trap`. A cancel sentinel cannot execute while the whole process
+is frozen. That nonterminal report and partial output were retained before
+stopping only the dedicated probe. The foreground Activity addresses this
+test-host boundary without changing media/model code or global power settings.
 
 `prepare.py` snapshots five production files. Four remain byte-identical;
 `AndroidSrMedia.kt` gains only a codec-name observer. Its decoder, color
@@ -26,7 +34,7 @@ rtk proxy env JAVA_HOME=/path/to/existing/jdk21 ./gradlew \
 The module is excluded unless explicitly enabled. LiteRT 1.4.2 is the existing
 production dependency. Generated sources/build products are not source files
 to commit. Check the APK SHA, merged manifest and packaged source inventory
-before installing. The current build has four lint warnings, including the
+before installing. The build has four lint warnings, including the
 production `KEY_MAX_B_FRAMES` constant introduced at API29; this probe has not
 established API26 compatibility.
 
@@ -62,6 +70,11 @@ A failed current output is removed; previously completed controls remain.
 Create `files/sr-quality/<id>/cancel` via `run-as` to cancel at the next codec,
 frame or tile checkpoint. A missing/nonterminal report is not a pass.
 
+The instrumentation starts the foreground Activity before processing and
+finishes it after persisting the terminal report. Keep that Activity visible
+for the experiment; do not interpret an OEM background freeze as codec/model
+execution time or as a tested cancellation outcome.
+
 If ADB disconnects, inspect the same report, recorded PID and active
 instrumentation after reconnecting. Do not start a second run while the first
 may be active. Collect terminal report and all completed outputs, matching
@@ -75,5 +88,8 @@ the same frames. Original source color interpretation remains a limitation.
 quality, resource budgets or release readiness. After collecting evidence and
 confirming the instrumentation has stopped, remove only this probe's verified
 temporary paths/package if appropriate; preserve original App/models and host
-evidence. Runtime execution, cancellation and failure-report behavior still
-require physical-device verification.
+evidence. The foreground physical run completed all three48-frame paths;
+the headless missing-input run persisted its terminal failure. An additional
+cancel check did not produce a report during USB interruptions; cancellation
+remains unverified. Results and limits are in
+[the controlled comparison](../../docs/validation/f11-android-sr-controlled-20261106.md).

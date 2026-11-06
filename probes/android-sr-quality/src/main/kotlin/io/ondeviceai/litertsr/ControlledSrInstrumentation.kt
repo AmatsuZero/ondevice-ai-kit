@@ -1,6 +1,8 @@
 package io.ondeviceai.litertsr
 
 import android.app.Instrumentation
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.AtomicFile
@@ -11,7 +13,7 @@ import java.security.MessageDigest
 import org.json.JSONArray
 import org.json.JSONObject
 
-/** Test-only same-codec controls; no Activity, media capture, network or model download. */
+/** Test-only same-codec controls; no media capture, network or model download. */
 class ControlledSrInstrumentation : Instrumentation() {
     private lateinit var runId: String
     override fun onCreate(arguments: Bundle?) {
@@ -39,8 +41,12 @@ class ControlledSrInstrumentation : Instrumentation() {
         }
         fun checkpoint() { check(!File(directory, "cancel").exists()) { "cancelled" } }
         var resultCode = 1
+        var foreground: Activity? = null
         try {
             persist()
+            foreground = startActivitySync(Intent(targetContext, QualityProbeActivity::class.java)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+            report.put("foregroundActivityStarted", true); persist()
             val inputs = File(targetContext.filesDir, "controlled-sr-inputs")
             val input = File(inputs, "input.mp4")
             val model = File(inputs, "ESRGAN.tflite")
@@ -101,6 +107,7 @@ class ControlledSrInstrumentation : Instrumentation() {
             report.put("status", "failed").put("error", error.toString())
         } finally {
             report.put("terminal", true); persist()
+            foreground?.let { activity -> runOnMainSync { activity.finish() } }
             finish(resultCode, Bundle().apply { putString("status", report.getString("status")) })
         }
     }
