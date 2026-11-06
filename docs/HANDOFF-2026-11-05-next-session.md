@@ -2,11 +2,13 @@
 
 ## 2026-11-06 最新决定：solo、Nexus 渠道与校准数据缺口
 
+用户确认Nexus拉取无需鉴权；消费者使用匿名HTTPS，发布凭据仅用于上传。
+不再将管理API403解释为制品读取权限缺口；制品就绪后验证实际匿名拉取与编译。
 用户进一步明确账号可上传、可覆盖、不可删除；权限不再待确认，不再查询管理API。
 release不覆盖由发布流程保证，无删除权限不阻塞新增版本；消费组不明时可用hosted直连。
 下一步聚焦F02包的依赖闭包／许可附件，远端连接和独立消费留到制品准备好后验证。
 本节下方仓库权限／不可覆盖策略未核实的描述按此更新理解。
-最新readiness：`artifacts/verification/p11-readiness-20261106-nexus-permissions/summary.json`。
+最新readiness：`artifacts/verification/p11-readiness-20261106-nexus-anonymous-read/summary.json`。
 
 后续用户明确允许重试一次 hosted 策略 GET。此次审批通过，但 curl35
 `Recv failure: Connection reset by peer`、HTTP000，未取得响应或策略；一次额度已用完，

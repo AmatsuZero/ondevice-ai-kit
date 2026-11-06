@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-nexus-permissions/summary.json",
-    "sha256": "5579e42492f231a65c39b1bd8635431f22d2395d7b8f9454bbd0af1e2b17218c"
+    "path": "artifacts/verification/p11-readiness-20261106-nexus-anonymous-read/summary.json",
+    "sha256": "9b4cd88c2e55f3feabcca8d3408f3c71e855997e1388d4b74024317ff1daa23d"
   },
   "schemaVersion": 1,
   "sources": [
