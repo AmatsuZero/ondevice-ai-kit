@@ -1,5 +1,15 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 当前交互起点：MLX文件夹导入隔离验收已准备
+
+先读 [隔离导入验收起点](HANDOFF-2026-11-06-apple-import-check.md)。原App两条人工流程
+不重复；仅为尚未验证的新MLX文件夹入口新增ODAI Import Check隔离副本，原43个App及
+主App模型保持。未重建源码，既有签名资产未变，三个Mach-O代码section相同。
+固定14文件已放入IdentityInput/ODAI-MLX-14-20261106，隔离App普通启动显示模型未就绪、
+导入按钮可用。已请用户打开导入选择器后取消并反馈，尚待答复；0新子项通过，不计准备为验收。
+直接从该人工步骤继续，不重装/重签/重复制模型。最新readiness：
+`artifacts/verification/p11-readiness-20261106-apple-import-prepared/summary.json`。
+
 ## 2026-11-06 最新检查点：Apple 新版更新与两条人工普通流程已通过
 
 先读 [Apple 更新与手动验收交接](HANDOFF-2026-11-06-apple-updated.md)。用户已明确允许
