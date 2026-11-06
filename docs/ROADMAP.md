@@ -1,5 +1,10 @@
 # 分阶段交付与恢复入口
 
+2026-11-07：[当前Android TTS](validation/android-current-tts-20261107.md)复用636a6eb/dfccaa95主包，
+仅新建203KB测试包；真机一次正常播放/活动取消等待/重入/close/关闭拒绝的持久终态通过。
+ADB255后只观察同次运行；34离线协议检查通过，原App/test/runner、25私有摘要/4SR文件及设置恢复，
+暂存和报告精确清理并返回普通App。关闭当前TTS运行子项，无新P11样本，10/12及原发布门槛保持。
+
 2026-11-07：[当前Apple真机链路](validation/apple-current-runtime-20261107.md)复用现有636a6eb组合包，
 hosted非UI XCTest两方法通过，86内部检查覆盖真实factory/KMP/MLX图片和视频生成、OpenCV128维特征与释放。
 原代码UUID/18输入摘要保持，唯一临时候选已卸载、原44安装URL保持并返回普通App。

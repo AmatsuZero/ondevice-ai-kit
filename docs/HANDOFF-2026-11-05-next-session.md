@@ -1,4 +1,23 @@
-## 2026-11-07 当前：同一Apple候选图片/视频/OpenCV真机链路已通过并恢复
+## 2026-11-07 当前：同一Android候选TTS持久终态已通过并恢复
+
+[当前TTS真机](validation/android-current-tts-20261107.md)复用636a6eb/dfccaa95精确主APK，
+仅新建202774B测试包，离线397任务/1046原源码/完整commit/Manifest/DEX/签名兼容核验。
+TECNO/API35实际一次normal→活动cancelAndJoin→followup→close→关闭拒绝通过，PID26132，
+十阶段完整，终态SHA916ba565…03541；host255和首份normal-start非终态均保留，未重发。
+两个recorder自检分开通过/拒绝为推理，34离线协议检查通过，既有4报告测试分列。
+135段原字节重建预先采用set-C禁止覆盖复制，partial/final全SHA、exit0；四APK全量SHA安装前核对。
+原afed主包/原test/Identity runner、25私有摘要/4SR文件/权限/TTS设置与服务清单恢复，
+同次终态再次独立回读一致，报告/四暂存APK/增量/元数据精确清理、唯一目录空后删除、WAV缺失。
+普通MainActivity已返回；9保护/生产lock保持，无录音/新采集/模型下载/上传/push。
+cbc hy3限定两文件审查295.361秒自然完成，完整JSON/0工具，父核对两意见未改源码；
+原文与处置`.omx/artifacts/cbc-current-tts-collector-review-20261107/`，全部命令和助手已终态。
+证据`artifacts/verification/android-current-tts-20261107/`冻结110文件，`freeze.py --verify`通过。
+关闭当前TTS真机子项；不要重跑本轮构建/自检/TTS或已完成的ASR/SR/Apple验收，无需用户重连。
+Qoder已登记且此前两任务成功，最新403保持停止；其他原生429等不重试，3既有待答复不重复问。
+P11无新样本仍10组，基础10/12、P4/P11 open、release not-ready；本轮为progress，完整目标继续。
+下一步推进其他未验能力/质量资源或交付门槛；最低系统延期/F10缺授权校准数据等原退出标准保持。
+
+## 2026-11-07 上轮：同一Apple候选图片/视频/OpenCV真机链路已通过并恢复
 
 [当前Apple运行](validation/apple-current-runtime-20261107.md)：复用上轮组合App，不重建/重链接宿主。
 新别名既有资产签名，3原Mach-O有效section/UUID保持；标准hosted非UI XCTest两方法均1/0/0，

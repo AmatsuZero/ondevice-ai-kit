@@ -1,5 +1,13 @@
 # Foundation 后续专项
 
+2026-11-07：[当前Android TTS](android-current-tts-20261107.md)沿用636a6eb/dfccaa95原主APK，
+仅构建203KB test-only包，1046原源码保持；一次真机normal/活动取消join/followup/close/关闭拒绝终态通过。
+ADB255和第一份非终态保留后只回读同run；两记录器自检分开校验，34离线协议检查通过。
+新传输协议提前改为noclobber复制，设备重建exit0；四份APK全量SHA在安装前核对。
+原App/test/Identity runner、25私有摘要/4SR文件/权限/TTS恢复，临时文件精确清理并返回普通App。
+cbc hy3限定审查295.361秒自然完成，父核对两意见未改源码；Qoder403/原生429线路不重启。
+关闭当前修复TTS真机子项；未新增P11样本/采集/下载/上传，10/12、P4/P11及release not-ready保持。
+
 2026-11-07：[当前Apple真机链路](apple-current-runtime-20261107.md)复用636a6eb组合App，
 不重建宿主，3原Mach-O section/UUID保持。hosted非UI XCTest身份/原生两方法均通过，
 86内部检查覆盖18输入SHA、真实factory→KMP→MLX图片/视频生成、OpenCV1脸/128特征及lease/输入释放。

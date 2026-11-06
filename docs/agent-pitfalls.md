@@ -121,6 +121,11 @@
 
 ## 8. ADB：EOF、offline、unauthorized 与暂存
 
+- **提前修协议，保留非终态**：当前TTS新协议在设备暂存前已将旧最终`ln`改为`set -C; cat > 新路径`，
+  partial和final全SHA都验，设备重建exit0；三项实际shell检查覆盖已有目标不可覆盖/损坏partial拒绝/成功发布。
+  同次真实TTS主机255后第一份报告只到normal-start，保留后只再次回读，最终十阶段完整通过；
+  不因非终态或USB中断重发推理。恢复前独立回读同SHA，原App及私有状态恢复后精确清理。
+  34离线协议检查、真实运行与恢复证据`artifacts/verification/android-current-tts-20261107/`。
 - **帮助文本仍须实际验证**：TECNO的toybox dd帮助列出`conv=excl`但实际拒绝；改用`set -C; cat > 新路径`。
   `iflag=skip_bytes,count_bytes`已用16固定字符stdin/stdout实测。135段重建完整SHA通过后，最终`ln`仍被设备
   Permission denied拒绝；保留exit1/已完成partial，复核整包SHA后禁止覆盖复制采用，不重跑构建或改签名。
