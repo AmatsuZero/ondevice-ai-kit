@@ -1,5 +1,19 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新检查点：F09 内部闭源许可已选定并接线
+
+用户已选择“仅内部闭源使用和分发”；[内部分发约定](validation/internal-distribution.md)
+与根LICENSE已落地，`3b5150d` 把提交时LICENSE纳入snapshot和notices，旧快照不借用新条款。
+真实notice-only验证150文件/20归属/23notice，未重建原生框架、未发布。
+另修复mlx/mlx-c新增.cpp漏检，真实缓存/149源码/12依赖校验通过；定向13/13、全tools309/309。
+首轮Ruby2.6/3.4混用失败已保留；后续工具命令固定
+`RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`，不需安装gem。
+详情[F09验证](validation/apple-mlxvlm-distribution.md)；证据分别在
+`artifacts/verification/f09-internal-license-20261106/` 和 `f09-native-cache-inputs-20261106/`。
+最新readiness：`artifacts/verification/p11-readiness-20261106-internal-distribution/summary.json`。
+项目许可选择不再阻塞；独立审查、实际生产渠道/接收组织及其余校准/质量门槛保持。
+不重复询问许可、不重做已验手机流程；9保护路径/生产lock保留，10/12及P4/P11仍open/not-ready。
+
 ## 2026-11-06 最新检查点：Apple 文件夹导入完整普通流程已验收
 
 先读 [Apple 导入验收收尾](HANDOFF-2026-11-06-apple-import-accepted.md)。用户已完成取消、

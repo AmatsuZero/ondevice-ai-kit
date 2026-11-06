@@ -39,5 +39,5 @@ Interface: `_notices(distribution, cache, lock, source_commit, snapshot) -> tupl
 - [x] RED: project notice copy/reference/hash and legacy no-license cases; actual third-party text remains exact.
 - [x] Copy `packages/LICENSE` to `notices/ondevice-ai-kit/LICENSE`; SDK attributions refer to that file, without guessing a public SPDX license.
 - [x] Run both affected suites, then all tools using the installed Ruby 3.4 executable via `RUBY` (13 targeted; 309 full).
-- [ ] Generate fresh notice-only evidence from a committed snapshot; do not rewrite old native artifacts.
-- [ ] Update handoff/readiness, verify protected files, diff and commit locally.
+- [x] Generate fresh notice-only evidence from committed `3b5150d`: 150 snapshot files, 20 attributions, 23 notices; old native artifacts unchanged.
+- [x] Update handoff and preserve protected files; code/policy committed locally as `3b5150d`. Evidence/readiness checkpoint follows separately, without publication.

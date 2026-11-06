@@ -1,5 +1,46 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-06 internal distribution policy and native input gate
+
+The user selected **internal closed-source use and distribution**. The project
+now has an [internal-use license](../../LICENSE) and an explicit
+[delivery policy](internal-distribution.md); MIT/Apache licensing of original SDK
+code was not selected. Third-party code/models/media retain their own terms.
+This resolves the project-license choice; it does not approve publication,
+independent review, production acceptance or the wider P4/P11 gates.
+
+Commit `3b5150d` carries the root LICENSE into exact-commit snapshots as
+`packages/LICENSE`. Packaging copies those committed bytes into
+`notices/ondevice-ai-kit/LICENSE`, hashes them and points SDK attributions to
+that file. A legacy snapshot without LICENSE stays explicitly unspecified and
+local-validation-only, rather than borrowing today's worktree policy.
+Fresh notice-only assembly from that commit verified 150 snapshot files (the
+same149 package/source files plus LICENSE),20 attributions and23 notices.
+No native compilation, artifact replacement, signing or upload was performed.
+Evidence: `artifacts/verification/f09-internal-license-20261106/`.
+
+A separate real-Git regression reproduced an input integrity defect: the old
+native submodule status check hid untracked files, so new `.cpp` files in either
+`mlx` or `mlx-c` passed validation. Both are now rejected before build. Clean
+gitlinks still pass; the retained real149-file snapshot/12 dependency pins/two
+native submodules also pass the corrected gate. Evidence:
+`artifacts/verification/f09-native-cache-inputs-20261106/`.
+
+Targeted tests13/13 and the complete tools suite309/309 pass. The first full
+attempt (306 tests,15 failures/6 errors) mixed system Ruby2.6 with Ruby3.4 gems;
+using the existing Ruby3.4 executable through `RUBY` resolved the environment
+failure without installing anything. Both logs are retained. These are author
+implementation/regression results, not independent review approval.
+Nine protected paths and the production lock remain unchanged. Existing final
+20-framework inference/build evidence remains separately scoped to its original
+commit; the notice-only result is not a new native artifact/runtime result.
+
+Read-only recheck from the foundation worktree:
+
+```sh
+rtk proxy env PYTHONPATH=. python3 artifacts/verification/f09-internal-license-20261106/verify.py
+```
+
 ## 2026-11-05 selected MLX dependency tests
 
 The adopted isolated dependency graph passed **230 logical tests /295 test-case

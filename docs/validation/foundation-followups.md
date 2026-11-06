@@ -1,5 +1,12 @@
 # Foundation 后续专项
 
+2026-11-06 F09：用户明确选定内部闭源使用/分发，`3b5150d` 已加入项目条款和精确提交
+LICENSE→snapshot→notices 接线，关闭“项目自身许可未选择”缺口；第三方许可、独立审查及
+生产验收不据此通过。新notice-only检查150文件/20归属/23notice，未重建原生制品。
+同时复现并修复mlx/mlx-c未跟踪.cpp漏检，真实缓存重新校验通过；完整tools309/309。
+见[内部分发约定](internal-distribution.md)和[F09当前结果](apple-mlxvlm-distribution.md)。
+P4/P11及10/12保持；下方“SDK源码许可未定”是历史，不能作为当前仍待选择的问题重复询问。
+
 2026-11-05 TTS私有终态报告追加：同一b90e普通APK在TECNO/API35取得1次固定输入最终pass，normal/cancel-join/followup/close及关闭拒绝齐全，host255由finish前私有JSON回读补证；旧三轮缺终态不升级。新test-only overlay离线397任务通过，普通App/test/runner、12模型/附属摘要、权限与设置已恢复；无采集/下载请求/benchmark新增。见[证据与限制](android-committed-candidate.md#当前候选真机-tts私有报告终态验证)。9行仍有gap，P4/P11与发布open/not-ready保持。 下方缺终态描述为历史。
 
 2026-11-05 F12当前候选真机TTS：[b90e精确候选](android-committed-candidate.md#当前候选真机-tts生命周期已观察最终结果仍缺)在恢复ADB授权的TECNO上已有Google服务，三PID均观察正常播放完成、活动取消join和重入完成；host255导致最终bundle缺失，文本/官方protobuf仅开始状态，不计最终pass或close通过，不再重试。原afed普通App/test/runner、12模型/附属摘要/权限/TTS设置恢复保持，临时文件清理，无采集/下载请求/benchmark；9行gap及P4/P11/发布门禁保持。
