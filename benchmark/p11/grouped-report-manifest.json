@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-android-sr-controlled/summary.json",
-    "sha256": "1e7de4d655757196eec119bf0718b2e151c2e7e75c52e360c427295079b33964"
+    "path": "artifacts/verification/p11-readiness-20261106-android-sr-waterfall/summary.json",
+    "sha256": "1eab9befff50b57c3ee094ce72705de5eaefea61e2356952d0331f67a5cc7931"
   },
   "schemaVersion": 1,
   "sources": [

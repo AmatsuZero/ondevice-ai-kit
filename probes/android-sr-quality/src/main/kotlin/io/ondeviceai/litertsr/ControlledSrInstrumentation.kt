@@ -16,10 +16,12 @@ import org.json.JSONObject
 /** Test-only same-codec controls; no media capture, network or model download. */
 class ControlledSrInstrumentation : Instrumentation() {
     private lateinit var runId: String
+    private var fixtureName = "common-swifts"
     override fun onCreate(arguments: Bundle?) {
         super.onCreate(arguments)
         runId = requireNotNull(arguments?.getString("runId"))
         require(runId.matches(Regex("[A-Za-z0-9-]{1,80}")))
+        fixtureName = arguments?.getString("fixture") ?: "common-swifts"
         start()
     }
 
@@ -28,7 +30,7 @@ class ControlledSrInstrumentation : Instrumentation() {
         check(!directory.exists() && directory.mkdirs()) { "Run ID already exists" }
         val reportFile = AtomicFile(File(directory, "report.json"))
         val rows = JSONArray()
-        val report = JSONObject().put("schemaVersion", 1).put("runId", runId)
+        val report = JSONObject().put("schemaVersion", 1).put("runId", runId).put("fixture", fixtureName)
             .put("pid", android.os.Process.myPid()).put("terminal", false).put("status", "running")
             .put("device", android.os.Build.MODEL).put("sdk", android.os.Build.VERSION.SDK_INT)
             .put("runs", rows).put("qualityVerdict", "unverified")
@@ -50,7 +52,13 @@ class ControlledSrInstrumentation : Instrumentation() {
             val inputs = File(targetContext.filesDir, "controlled-sr-inputs")
             val input = File(inputs, "input.mp4")
             val model = File(inputs, "ESRGAN.tflite")
-            check(sha(input) == "22b3e924ad5717a8cd278f92fdad3b39b1ed1886106a941e1d9b0287f6b026d8")
+            val expectedInputSha = when (fixtureName) {
+                "common-swifts" -> "22b3e924ad5717a8cd278f92fdad3b39b1ed1886106a941e1d9b0287f6b026d8"
+                "kawaida-waterfall" -> "0903963764dc26c24c051ea1ab8e1e1974e4287bebfa9c61024784e24c139cc7"
+                else -> error("Unknown approved fixture")
+            }
+            val expectedWidth = if (fixtureName == "common-swifts") 1280 else 480
+            check(sha(input) == expectedInputSha) { "Input does not match selected approved fixture" }
             check(LiteRtSrModel.valid(model)) { "fixed model missing or invalid" }
             report.put("inputSha256", sha(input)).put("modelSha256", sha(model))
                 .put("sourceInventory", JSONObject(targetContext.assets.open("sr-source-inventory.json").bufferedReader().use { it.readText() }))
@@ -86,7 +94,7 @@ class ControlledSrInstrumentation : Instrumentation() {
                             process { pixels, width, height -> EsrganTiles.upscale(pixels, width, height, ::checkpoint, interpreter::infer) }
                         }
                     }
-                    check(info.width == 1280 && info.height == 720 && info.frameCount == 48 && info.audioTrackCount == 0)
+                    check(info.width == expectedWidth && info.height == 720 && info.frameCount == 48 && info.audioTrackCount == 0)
                     val trace = SrCodecTrace.entries
                     check(trace.length() == 2)
                     val identity = trace.toString()

@@ -1,3 +1,30 @@
+## 2026-11-06 最新：waterfall 同机 SR 对照与外部 CLI 分工
+
+沿用本地获授权 Kawaida Waterfall 素材，无新增下载或采集。TECNO/API35 的
+`waterfall-20261106-01`、PID7242 已完成 nearest/bilinear/ESRGAN 三条48帧路径；
+同一软件解码器与编码器、输入/转换/编码设置/封装。输出均480×720/24fps、无音轨，
+设备/host/report摘要一致。PSNR依次30.444918/30.706528/29.970242，
+SSIM0.852670/0.861147/0.858508。ESRGAN低于nearest8/48帧、低于bilinear39/48帧；
+平均SSIM高于nearest低于bilinear，不同于鸟类场景全部低于两对照。
+两场景不足以给出主观/时域质量或模型整体优劣结论；不新增资源benchmark或关闭门禁。
+见[第二场景结果](validation/f11-android-sr-waterfall-20261106.md)。
+
+新fixture白名单只改隔离probe；offline assemble/lint332任务通过、0error/7warnings。
+清理前确认terminal及无probe进程/活动instrumentation；专用包与三份摘要匹配staging删除。
+原main/test APK及路径、runner和25项模型/私有状态摘要不变，普通App前台；9保护路径/Apple lock不变。
+本地证据：`artifacts/verification/android-sr-waterfall-20261106/`，`verify.py`只读复核。
+
+用户最新允许外部CLI分工，覆盖此前一律solo限制：hy3承担简单纯工具或下载/摘要任务，
+hy4free承担中等复杂任务，主代理负责设备、集成和验证。本轮不需要下载。
+`cbc --model hy3`产出报告校验器，`cbc --model hy4free`产出观察器；父代理审查修订并集成。
+观察器识别exit0空白/损坏JSON为尚不可读，不将host退出当成功，不重启设备请求；
+报告校验器核验身份/源码/codec/尺寸/48帧和未验证质量结论。二者已用于保留报告/采集脚本；完整tools回归369项通过（53.4秒）。
+OpenCode免费模型返回`provider.auth401/api_key_expired`，未改凭据、未循环重试，任务转hy4free。
+提示词/原始输出在`.omx/artifacts/simple-delegation-20261106/`和`ask-*-sr-tools-20261106.md`。
+外部分工是实现辅助，不等于独立发布审查；不重试旧429 reviewer。
+最新readiness：`artifacts/verification/p11-readiness-20261106-android-sr-waterfall/summary.json`。
+基础仍10/12，P4/P11 open，release not-ready；F10无授权校准数据、THRESHOLD_UNVERIFIED保持。
+
 # Foundation / Demo 新会话交接 — 2026-11-05
 
 ## 2026-11-06 当前入口：Android 同设备 SR 三路对照已完成
