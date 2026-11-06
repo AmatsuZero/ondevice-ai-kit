@@ -1,3 +1,5 @@
+import errno
+import hashlib
 import json
 from pathlib import Path
 import plistlib
@@ -122,6 +124,110 @@ class MLXVLMBinaryConsumerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "exists"):
             generate(root, manifest, output)
         self.assertEqual((output / "keep").read_text(), "preserve")
+
+    def test_manifest_changes_during_xcodegen_do_not_change_consumer_identity(self):
+        root, manifest, *_ = self.inputs()
+        original = manifest.read_bytes()
+        original_hash = hashlib.sha256(original).hexdigest()
+        run = subprocess.run
+
+        def change_manifest(*args, **kwargs):
+            payload = json.loads(original)
+            payload["sourceCommit"] = "f" * 40
+            manifest.write_text(json.dumps(payload))
+            return run(*args, **kwargs)
+
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "consumer"
+            with patch("tools.generate_mlxvlm_binary_consumer.subprocess.run", side_effect=change_manifest):
+                generate(root, manifest, output)
+            self.assertNotEqual(manifest.read_bytes(), original)
+            self.assertEqual((output / "artifact-manifest.json").read_bytes(), original)
+            receipt = json.loads((output / "consumer-inputs.json").read_text())
+            self.assertEqual(receipt["artifactManifestSHA256"], original_hash)
+            self.assertEqual(receipt["sourceCommit"], json.loads(original)["sourceCommit"])
+            self.assertIn('"artifactManifestSHA256": "' + original_hash + '"',
+                          (output / "ConsumerApp.swift").read_text())
+
+    def test_empty_output_created_during_xcodegen_is_preserved(self):
+        root, manifest, *_ = self.inputs()
+        run = subprocess.run
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "consumer"
+            created = []
+
+            def create_output(*args, **kwargs):
+                result = run(*args, **kwargs)
+                output.mkdir()
+                created.append(output.stat())
+                return result
+
+            with patch("tools.generate_mlxvlm_binary_consumer.subprocess.run", side_effect=create_output):
+                with self.assertRaises((FileExistsError, ValueError)):
+                    generate(root, manifest, output)
+            self.assertEqual((output.stat().st_dev, output.stat().st_ino),
+                             (created[0].st_dev, created[0].st_ino))
+            self.assertEqual(list(output.iterdir()), [])
+            self.assertEqual(list(Path(directory).glob(".mlxvlm-binary-consumer-*")), [])
+
+    def test_manifest_validation_and_copy_use_the_same_frozen_bytes(self):
+        from tools.validate_mlxvlm_binary_artifact import validate_manifest
+        root, manifest, *_ = self.inputs()
+        original = manifest.read_bytes()
+
+        def change_original(path, artifact_root):
+            payload = json.loads(original)
+            payload["sourceCommit"] = "f" * 40
+            manifest.write_text(json.dumps(payload))
+            return validate_manifest(path, artifact_root)
+
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "consumer"
+            with patch("tools.generate_mlxvlm_binary_consumer.validate_manifest", side_effect=change_original):
+                generate(root, manifest, output)
+            self.assertEqual((output / "artifact-manifest.json").read_bytes(), original)
+
+    def test_exclusive_publish_preserves_existing_empty_directory(self):
+        from tools.generate_mlxvlm_binary_consumer import _publish_exclusive
+        with tempfile.TemporaryDirectory() as directory:
+            stage = Path(directory) / "staged"
+            stage.mkdir()
+            (stage / "new-content").write_text("generated")
+            output = Path(directory) / "consumer"
+            output.mkdir()
+            original = output.stat()
+            with self.assertRaises(FileExistsError):
+                _publish_exclusive(stage, output)
+            self.assertEqual((output.stat().st_dev, output.stat().st_ino),
+                             (original.st_dev, original.st_ino))
+            self.assertEqual(list(output.iterdir()), [])
+            self.assertEqual((stage / "new-content").read_text(), "generated")
+
+    def test_exclusive_publish_preserves_existing_nonempty_directory(self):
+        from tools.generate_mlxvlm_binary_consumer import _publish_exclusive
+        with tempfile.TemporaryDirectory() as directory:
+            stage = Path(directory) / "staged"
+            stage.mkdir()
+            output = Path(directory) / "consumer"
+            output.mkdir()
+            (output / "keep").write_text("concurrent writer")
+            with self.assertRaises(FileExistsError):
+                _publish_exclusive(stage, output)
+            self.assertEqual((output / "keep").read_text(), "concurrent writer")
+            self.assertTrue(stage.is_dir())
+
+    def test_unavailable_exclusive_api_never_falls_back_to_overwrite(self):
+        from tools.generate_mlxvlm_binary_consumer import _publish_exclusive
+        with tempfile.TemporaryDirectory() as directory:
+            stage = Path(directory) / "staged"
+            stage.mkdir()
+            output = Path(directory) / "consumer"
+            with patch("tools.generate_mlxvlm_binary_consumer.ctypes.CDLL", return_value=object()):
+                with self.assertRaises(OSError) as caught:
+                    _publish_exclusive(stage, output)
+            self.assertEqual(caught.exception.errno, errno.ENOTSUP)
+            self.assertTrue(stage.is_dir())
+            self.assertFalse(output.exists())
 
     def test_missing_simulator_and_raw_unbundled_resources_are_rejected(self):
         root, manifest, artifact, _ = self.inputs()

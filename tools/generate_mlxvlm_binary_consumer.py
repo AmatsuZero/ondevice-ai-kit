@@ -3,13 +3,17 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
+import errno
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
 import shlex
 import shutil
 import subprocess
+import sys
 import tempfile
 
 from tools.inspect_mlxvlm_xcframework import inspect_xcframework
@@ -103,6 +107,30 @@ REPORT_WRITER
 '''.replace("REPORT_WRITER", REPORT_WRITER)
 
 
+def _publish_exclusive(source: Path, destination: Path) -> None:
+    """Publish in one exclusive rename operation; never fall back to overwrite."""
+    library = ctypes.CDLL(None, use_errno=True)
+    paths = (os.fsencode(source), os.fsencode(destination))
+    try:
+        if sys.platform == "darwin":
+            rename = library.renamex_np
+            rename.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_uint]
+            arguments = (*paths, 0x00000004)  # Apple RENAME_EXCL.
+        elif sys.platform.startswith("linux"):
+            rename = library.renameat2
+            rename.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_int,
+                               ctypes.c_char_p, ctypes.c_uint]
+            arguments = (-100, paths[0], -100, paths[1], 1)  # AT_FDCWD, RENAME_NOREPLACE.
+        else:
+            raise OSError(errno.ENOTSUP, "exclusive directory publication is unsupported")
+    except AttributeError as error:
+        raise OSError(errno.ENOTSUP, "exclusive rename API is unavailable") from error
+    rename.restype = ctypes.c_int
+    if rename(*arguments) != 0:
+        code = ctypes.get_errno()
+        raise OSError(code, os.strerror(code), str(destination))
+
+
 def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
     """Validate/copy explicit artifacts and generate a source-free Xcode project."""
     output = Path(output).absolute()
@@ -110,7 +138,9 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
         raise ValueError(f"consumer output already exists: {output}")
     root = Path(artifact_root).resolve(strict=True)
     manifest_path = Path(manifest_path).resolve(strict=True)
-    payload = json.loads(manifest_path.read_text())
+    manifest_bytes = manifest_path.read_bytes()
+    manifest_hash = hashlib.sha256(manifest_bytes).hexdigest()
+    payload = json.loads(manifest_bytes.decode("utf-8"))
     if not isinstance(payload, dict):
         raise ValueError("manifest must be an object")
     for field in ("artifacts", "resources"):
@@ -121,7 +151,12 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
         value = entry.get("path")
         if not isinstance(value, str) or Path(value).is_absolute() or ".." in Path(value).parts or str(Path(value)) != value:
             raise ValueError(f"artifact/resource path must be canonical and relative: {value}")
-    validate_manifest(manifest_path, root)
+    # The validator accepts a path. Give it the same bytes used for the copy,
+    # Swift constant and receipt even if the caller's manifest changes later.
+    with tempfile.TemporaryDirectory(prefix="mlxvlm-manifest-") as directory:
+        frozen_manifest = Path(directory) / "manifest.json"
+        frozen_manifest.write_bytes(manifest_bytes)
+        validate_manifest(frozen_manifest, root)
     static = payload.get("schemaVersion") == 2
     auxiliary = payload.get("cModules", []) + payload.get("notices", []) if static else []
     if static:
@@ -203,9 +238,9 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
         resources = [] if static else [
             {"path": str(Path("artifacts") / bundle.relative_to(root)), "buildPhase": "resources", "type": "file"}
             for bundle in bundles.values()]
-        (stage / "artifact-manifest.json").write_bytes(manifest_path.read_bytes())
+        (stage / "artifact-manifest.json").write_bytes(manifest_bytes)
         validate_manifest(stage / "artifact-manifest.json", stage / "artifacts")
-        source = APP.replace("ARTIFACT_MANIFEST_HASH", json.dumps(hashlib.sha256(manifest_path.read_bytes()).hexdigest()))
+        source = APP.replace("ARTIFACT_MANIFEST_HASH", json.dumps(manifest_hash))
         def constants(platform):
             return {
                 "MODEL_BUNDLE": canonical[(platform, "smolvlm2-model.json")]["bundle"],
@@ -255,10 +290,10 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
         subprocess.run(["xcodegen", "generate", "--spec", str(stage / "project.json"), "--project", str(stage)],
                        check=True, capture_output=True, text=True)
         receipt = {"schemaVersion": 1, "kind": "apple-mlxvlm-binary-consumer",
-                   "sourceCommit": payload["sourceCommit"], "artifactManifestSHA256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
+                   "sourceCommit": payload["sourceCommit"], "artifactManifestSHA256": manifest_hash,
                    "buildStatus": "not-run", "runtimeStatus": "not-run", "sourcePackages": False}
         (stage / "consumer-inputs.json").write_text(json.dumps(receipt, indent=2) + "\n")
-        stage.rename(output)
+        _publish_exclusive(stage, output)
 
 
 if __name__ == "__main__":
