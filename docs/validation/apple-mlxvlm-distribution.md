@@ -1,5 +1,24 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-06 current internal delivery and source-review status
+
+The [complete internal-delivery candidate](f09-internal-git-delivery-20261106.md) now includes
+the selected project LICENSE and explicit later-policy/original-build provenance. Its complete
+transport is25,288,674 bytes, below the user's50 MB threshold, so the selected channel is
+internal Git artifact/Release delivery. Nothing was uploaded. All20 existing frameworks,
+4 C modules,18 resources and original build receipts remain unchanged;24 notices survive
+transport extraction and new consumer generation. No native/consumer compile or device run
+was repeated. The old frozen artifacts remain intact.
+
+Supplied-source reviews have completed: agy reviewed7 snapshot/packager/overlay/policy files
+with0 reported findings; cbc reviewed4 validator/ZIP files and its3 suggestions were assessed
+without a validated new blocker; Copilot reviewed the final consumer publication fix with0
+findings. The seven/four source hashes and final generator text still match current sources.
+Their missing contexts remain explicit; they do not constitute whole-branch, legal or release
+approval. Earlier failed/no-result review entries below are historical for those attempts.
+Receiving organization, maintenance, actual remote delivery/consumer and P4/P11 acceptance
+remain open. Evidence: `artifacts/verification/f09-git-delivery-20261106/`.
+
 ## 2026-11-06 internal distribution policy and native input gate
 
 The user selected **internal closed-source use and distribution**. The project

@@ -1,4 +1,24 @@
-## 2026-11-06 当前：F02新发布输入完整性缺陷已复现并补齐校验
+## 2026-11-06 当前：F09完整内部交付包25.3 MB，F02已获授权并完成补充审查
+
+[F09交付候选](validation/f09-internal-git-delivery-20261106.md)：用户选择Git，超过50 MB走Nexus。
+Apple完整ZIP25,288,674 B，按规则准备内部Git制品/Release；Skiko `.4`108,785,484 B走Nexus。
+新Apple副本含20框架/4C/18资源/24份notice。原编译提交f3899bb和全部非notice/原build receipt保持，
+许可独立绑定3b5150d，149源码输入等价；ZIP解压和新consumer生成/24材料逐字节保留通过。
+不重编译native/consumer、不操作设备、不上传。接收组织/维护团队、实际上传端点/远端消费仍未定。
+本机Ollama14.74秒返回方案建议，主代理采纳来源JSON结构/值校验，逐条处置及原文保留。
+原agy7/cbc4文件摘要与Copilot最终consumer正文仍匹配，专项清单已移除将这些补充审查写作未取得结果的表述。
+
+用户明确回复“1.可以”，授权原F02七文件/61651字符外发。agy225.17秒完整SUCCESS/1turn，
+无新finding；全部7份源码未变。它未指出已用真实Gradle复现的旧publisher缺陷，不能推翻RED；
+3123f3c第四验证补丁不在packet，未据此取得审查。原拒绝记录保留，后续授权/结果/父处置新增，
+证据 `.omx/artifacts/agy-f02-notice-review-20261106/`。不要再把该包写作未发送或重复申请授权。
+详见[F02边界](validation/f02-notice-validation-20261106.md)。不升格为完整分支、许可或发布批准。
+
+本轮交付证据 `artifacts/verification/f09-git-delivery-20261106/`；P11对应快照
+`artifacts/verification/p11-readiness-20261106-internal-delivery/summary.json`，以manifest当前指针为准。
+九保护路径/Apple lock保持；10/12、P4/P11 open、release not-ready，无新增benchmark。
+
+## 2026-11-06 历史：F02新发布输入完整性缺陷已复现并补齐校验
 
 [F02新补丁与证据](validation/f02-notice-validation-20261106.md)：原notice发布脚本只检查索引存在，
 真实Gradle在文本篡改后仍正常发布两份错误JAR（RED保留）。新增第四补丁
@@ -660,5 +680,5 @@ TTS verifier验证日志/恢复/缺失结果记录的一致性，**不代表最�
 
 新会话启动可直接说：
 
-> 阅读 `.worktrees/foundation/docs/HANDOFF-2026-11-05-next-session.md`，从“尚未实现的TTS私有报告方案”续接。
-> 保留原9个保护路径、普通手机App和模型，不重复旧三轮观察方案或F09构建；功能优先，发布缺口保持真实。
+> 阅读 `.worktrees/foundation/docs/HANDOFF-2026-11-05-next-session.md`，从顶部当前交付状态续接。
+> TTS/ASR/SR终态已验、F02已授权审查完成；保留原9个保护路径、普通手机App和模型，不重复已过设备/构建流程，推进尚缺的接收维护/远端交付和来源适用性门槛。

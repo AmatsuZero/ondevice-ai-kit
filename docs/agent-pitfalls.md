@@ -11,6 +11,7 @@
 - **等待**：用户明确要求助手任务不按耗时或静默自动终止。短轮询只用于观察同一个进程，不是任务超时；不要因此重复发起或切换付费模型。
 - **额度**：429、认证失败或明确额度耗尽时停止该线路，保留原错，按用户选择换供应商；其他独立线路继续。禁止循环换模型规避供应商共享额度。
 - **证据边界**：候选生成、主代理集成、单元测试、构建、真机验收、独立发布批准分开记录。任何一项都不能自动替代下一项。
+- **零finding不推翻复现**：F02原7文件agy审查未报告已被真实Gradle RED证明的旧publisher输入缺陷；第四补丁在packet外。保留审查结果及父处置，不能把无新finding写成新补丁/整个发布无缺陷。证据 `.omx/artifacts/agy-f02-notice-review-20261106/parent-assessment.json`。
 
 ## 2. cbc：结果格式与长任务
 
@@ -84,6 +85,7 @@
 
 ## 10. F09 consumer：manifest 与输出目录竞态
 
+- 许可刷新与编译来源分开：旧20模块二进制仍绑定f3899bb；后续内部许可来自3b5150d。先证明原149 SDK输入与新150文件快照仅多LICENSE，再在新副本刷新notices，保留原build receipt和非notice字节，单列许可来源。不能把有效旧编译收据标作失效或改写成新构建。完整25,288,674 B运输包/24材料保留证据 `artifacts/verification/f09-git-delivery-20261106/`。
 - 审查建议需核对schema上下文：v1保留旧固定Metal摘要，v2明确采用按平台构建输出/收据；不能给v2强加v1摘要而拒绝现有合法产物。共享validator已对实际Metal文件执行摘要校验，收据一致性不等于发布者认证；static framework内ar归档也不要求可执行位（实际0644）。cbc补充审查的3条意见按此核实后未采纳，10项static测试及字节篡改/收据不符拒绝检查通过。证据：`.omx/artifacts/cbc-f09-packaging-supplement-20261106/parent-checks.json`、`parent-assessment.json`；契约见 `docs/validation/apple-mlxvlm-distribution.md`。
 - 多次读取可变 manifest，会导致 payload、验证、拷贝、Swift 常量、收据引用不同字节。只读一次，保留原始 bytes 和 hash；向只接受 Path 的校验器提供冻结临时文件，使用显式 artifact root。
 - POSIX 普通 rename 可覆盖已存在的空目录，先 `exists()` 再 rename 也有竞态。第一版 mkdir 占位仍可能在最终 rename 前被替换；不能只在失败清理时核对 inode。

@@ -64,9 +64,17 @@ Ollama `qwen3-coder:30b` returned a bounded two-file review in12.58s. Parent rep
 confirmed the integrity finding. Its suggestion to remove notices from source JARs was
 rejected because those materials are a required part of the distribution. Raw response and
 assessment: `.omx/artifacts/ollama-f02-publication-review-20261106/`. This is supplied-context
-local technical assistance, not independent license or release approval. The original agy
-seven-file packet is unchanged and remains unsent pending its existing authorization question;
-the new validation supplement lies outside that packet's scope.
+local technical assistance, not independent license or release approval.
+
+The user subsequently authorized sending the unchanged original seven-file packet to agy.
+It completed SUCCESS/one turn in225.17s with no reported new findings; all seven source hashes
+still match. The reviewer did not flag the already reproduced old publisher integrity defect.
+That defect is fixed separately in `3123f3c`; the fourth validation supplement was outside
+this packet and has not received this review. Zero reported findings does not override the
+actual RED evidence or approve source-specific licensing, the whole branch or release.
+Raw response, exact authorization and parent assessment remain in
+`.omx/artifacts/agy-f02-notice-review-20261106/`; the initial approval rejection is preserved
+as history rather than overwritten. No new test execution is inferred from reviewer prose.
 
 ## Source-reference follow-up
 
