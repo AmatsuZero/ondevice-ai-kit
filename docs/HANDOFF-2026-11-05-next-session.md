@@ -1,5 +1,17 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 来源跟进：上游事实已定位，停止重复检索/构建
+
+[官方历史及维护者回复](validation/f02-upstream-origin.md)：已确认 Arabic PUA 的原始加入
+与后续纯改名/generator 提交；behdad 对 packTab 输出的条件性说明已记录，数据来源具体
+问题仍交给原作者。Microsoft Typography 公开仓库只是 issue placeholder，其许可证不自动
+覆盖私有文档中的固定输入；SIL primary403未绕过。讨论对应另一revision/IANA2025-01-21，
+本候选继续绑定实际2025-03-10/header/hash。无新附件义务结论，不造.5、不重跑构建。
+证据 artifacts/verification/f02-upstream-origin-20261106/；最新 readiness 位于
+artifacts/verification/p11-readiness-20261106-f02-upstream-origin/summary.json。
+下一步需要来源作者澄清或获授权的适用性审查；没有新输入时不重复相同页面检索。
+.4 本地交付提交 fa0080c，生产/远端/独立批准和10/12、P4/P11/not-ready边界均保持。
+
 ## 2026-11-06 最新检查点：.4 ISC 补充与实际 SDK/App 交付通过
 
 [详细证据/复核](validation/f02-harfbuzz-notices.md)。332 个实际 HarfBuzz 输入发现
