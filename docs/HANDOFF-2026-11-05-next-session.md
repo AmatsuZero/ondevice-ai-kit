@@ -1,4 +1,24 @@
-## 2026-11-06 当前：qoder已接入，DNG原始通知缺项修复为 .6 本地候选
+## 2026-11-06 当前：.6自身SDK链接/App完成，TTS限定审查及两个待答复项
+
+新证据`artifacts/verification/f02-dot6-sdk-consumer-20261106/`：`.6`自身SDK设备/arm64模拟器
+15任务全部执行、107.28秒通过；新unsigned App74材料逐字节保留，9.71秒。
+dependencyInsight选择.6、990输入/框架UUID/SHA固定；原544cb159导出与当前SDK源码无差异。
+本次不复用.4框架，补齐上一轮的边界；原.4/原notice-only .6证据不改。
+新115坐标匿名HEAD均404，计划`artifacts/verification/f02-nexus-dot6-preflight-20261106/`，
+尚未上传。已向用户询问具体hosted及这次108.8MB内部候选的上传范围，等待答复，不重复询问账号权限。
+远端consumer仅准备在`artifacts/verification/f02-nexus-dot6-consumer-20261106/`，未执行网络消费。
+
+[TTS源码限定审查](validation/tts-scoped-review-20261106.md)五文件由新code-reviewer返回
+0finding/限定APPROVE；architect终态429无结果，停止不重试，综合审查unavailable而非通过。
+两份测试模块使用显式缓存JDK21实际重跑252任务、59项测试全过；不要把审查器无效JAVA_HOME
+或第一次up-to-date检查当作新鲜执行。外部架构意见载荷5文件/36186字符已准备未发送，
+已询问cbc hy3/qoder/暂不改派，待选择。不要自行重启失败native或冒充其角色。
+qoder另一个纯落盘函数候选70.24秒返回，父代理复现FIFO阻塞并修正，16离线检查通过；
+仅为未来远端字节收集准备，不计上传/验收。根本地AGENTS.md及pitfalls已记录。
+9保护路径/生产lock/普通App模型不变，无源码功能修改、上传或设备操作。10/12、P4/P11不晋级。
+本轮无本代理存活的命令/模型助手或设备操作；最新P11指针以manifest为准。
+
+## 2026-11-06 上一轮：qoder已接入，DNG原始通知缺项修复为 .6 本地候选
 
 [DNG补充与验证](validation/f02-dng-notices.md)：qodercli/Qwen3.8-Flash首次实际任务27.05秒完成，
 提取623字节AOSP原始声明并经主代理逐字核验；根本地AGENTS.md已记录实测调用。

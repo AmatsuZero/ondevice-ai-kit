@@ -1,5 +1,11 @@
 # Foundation 后续专项
 
+2026-11-06 F02/F12增量：`.6`自身SDK双iOS链接15任务及基于新框架的unsigned App74材料
+保留通过；115个新Nexus精确路径匿名HEAD均404，上传范围待答复，远端消费未执行。
+[TTS五文件限定源码审查](tts-scoped-review-20261106.md)code-reviewer无finding，
+architect429无结果并停止；不计综合批准。显式JDK21实际重跑TTS/Demo JVM59项全过。
+补充架构意见供应商待选择，不重试原生429；10/12及原设备/质量/资源缺口不变。
+
 2026-11-06 F02：[DNG原始通知/.6本地交付](f02-dng-notices.md)修复实际编译头部AOSP声明遗漏。
 qoder完成首项原文提取并经父代理核验；新候选74材料/6JAR/40原Skia静态库、两consumer和
 新unsigned App通知保留通过。App复用.4框架，不计新SDK链接/设备验收；无上传或生产切换。

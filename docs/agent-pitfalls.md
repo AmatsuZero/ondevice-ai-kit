@@ -137,6 +137,7 @@
 
 ## 13. qoder：CLI入口、受限网络与逐字核验
 
+- 后续通用落盘候选70.24秒成功，但先`O_RDONLY`打开FIFO会在`fstat`拒绝前阻塞；父代理保留负向RED后加`O_NONBLOCK|O_NOFOLLOW`并拒绝非bytes输入，修正版16项离线检查通过。候选外围多了说明文字，只提取唯一完整JSON代码块，未修补截断内容。不把修正后测试归给原始候选，不把通用函数生成当上传。证据：`.omx/artifacts/qoder-verified-download-20261106/`。
 - 使用`qodercli`（本轮1.1.84）；`qoder`是另一个App入口。受限shell首次模型目录返回`Failed to fetch model list: Was there a typo in the url or port?`，正常获授权网络目录成功，唯一配置模型`Qwen3.8-Flash`。不要据沙箱失败改认证/网络或换供应商。
 - 首次公开头部提取27.05秒成功，父代理对原源码逐字核对623字节/SHA通过。保留调用、原始结果和父处置；costUSD0/credits0只是本次记账，不保证无限免费。JSON仅返回结果，不能据此声称全事件零工具；调用明确禁工具/MCP。
 - 已安装help不含`--max-turns`，不要从通用文档添加猜测参数；完整已测配方在根本地`AGENTS.md`。不设任务耗时终止，不改保存配置、不加权限绕过、不自动重试429。证据：`.omx/artifacts/qoder-dng-notice-extraction-20261106/`。
