@@ -1,5 +1,11 @@
 # Foundation 后续专项
 
+2026-11-07：[当前Android候选](android-current-candidate-20261107.md)冻结636a6eb/1046源码/14输入，
+四后端离线997任务全执行，599JVM通过、20模块lint0error；包/签名/46native/7ASR资源已核验。
+cbc候选经父四项负向RED修正后10检查通过，本地以原包+9.85MB新数据精确还原456.35MB签名APK。
+手机原App/25私有摘要/4SR文件等仅只读核对保持；新包未装机、设备端重建未验，不用旧运行证据晋级。
+10/12、P4/P11 open、release not-ready保持。
+
 2026-11-07：[Android LiteRT-LM资源](android-litertlm-resources-20261107.md)新增普通afed APK
 在TECNO/API35的1预热+5测量，6次固定红图/模型身份/输入保持/缓存清理均通过；整SDK调用
 p50/p95=56477.465/57068.401ms，采样进程RSS峰值3,905,445,888–3,978,801,152B。

@@ -1,4 +1,25 @@
-## 2026-11-07 当前：LiteRT-LM新增5次资源样本，P11由9组增至10组
+## 2026-11-07 当前：新源码Android候选已构建，字节复用本地通过，尚未装机
+
+[当前候选](validation/android-current-candidate-20261107.md)：冻结636a6eb，1046源码/14既有输入，
+四后端同时启用，离线无build-cache显式rerun，997任务全部执行；599JVM实际通过，20模块lint0error/52warning。
+原build-checks只计主模块588，最终construction-summary补示例/探针11，共75XML，不改旧收据。
+主APK456350170B/SHA dfccaa95…879a7，test139454B/SHA2848cc8f…d0b0a；包/完整commit/签名兼容，
+46native/7ASR资源逐字节保持。首次父检查误读badging字段，改读XML后过，产品未改、构建未重跑。
+新语音/Sherpa/SR清理改动已编入新包，**未装机验收**，不复用旧afed/b90e运行结论。
+
+既有cbc hy3请求415.712秒自然完成、完整正文/0工具事件；父补充四项真实RED后修正源文件变化检测、
+描述符释放和清理保护，10离线检查GREEN。本机135段从原afed复用446501165B，仅9849005B新literal，
+重建完整456350170B摘要与新候选相同，签名再验通过。约97.84%主包传输削减仅为本地可行性，未推送/设备重建。
+助手原文/父处置`.omx/artifacts/cbc-apk-byte-plan-20261107/`已终态，不要重发或继续轮询。
+只读设备观察确认TECNO/API35原afed主包/原test/Identity runner、25私有摘要/4SR文件/权限/TTS保持；
+9保护/生产lock不变，无安装/采集/推理/下载/上传，当前无需重连。
+
+证据`artifacts/verification/android-current-candidate-20261107/`，只读`freeze.py --verify`。
+下一步先完善设备端精确拼接/暂存/回滚并核对所有APK全量摘要，再验收当前修复；不重复本轮构建或旧设备推理。
+Qoder配方早已写根AGENTS，最新403保持停止；原生429/dsh/OpenCode线路未重启。
+既有3待答复项不重复问。P11最新manifest仍10组，基础10/12、P4/P11 open/release not-ready保持。
+
+## 2026-11-07 上一轮：LiteRT-LM新增5次资源样本，P11由9组增至10组
 
 [资源测量](validation/android-litertlm-resources-20261107.md)：普通afed APK在TECNO/API35同PID11157
 完成1warmup+5measure，6次固定红图/模型身份/输入保持/缓存文件清理均通过。

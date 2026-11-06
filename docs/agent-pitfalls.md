@@ -33,6 +33,11 @@
 
 ## 2. cbc：结果格式与长任务
 
+- 2026-11-07原始ZIP字节复用候选在415.712秒自然完成，不是超时失败。父代理四项负向检查复现：
+  只按初始长度重算SHA会漏追加字节；固定FD未核对路径替换；失败清理无身份核对会删掉替换后的文件；
+  第二输入在try外打开失败会泄漏第一FD。修正固定FD读ZIP、前后身份/size/metadata/SHA与finally关闭后，
+  10离线检查通过，真实签名APK本地精确还原；这不是设备重建或发布批准。
+  证据`.omx/artifacts/cbc-apk-byte-plan-20261107/`及`artifacts/verification/android-current-candidate-20261107/`。
 - 2026-11-07视频审查建议把帧数过滤`<`改为`<=`；主代理实测原实现能保留`(3,null)→(3,8)`的总帧数补充，而建议会丢第二次更新。累计计数相同不等于完整事件重复，不能仅据测试名称推断严格去重协议。建议RED/原源码恢复/完整video18+Demo56实际通过及SR4缓存通过见`artifacts/verification/video-client-review-20261107/`。这是对建议的否决，不是产品缺陷修复或发布批准。
 - 本轮DNG核查承认根协议覆盖伴随源码，却又因缺逐文件枚举而判两份`.cpp`缺许可；根协议并无该枚举条件，且前缀摘录不能证明全文无通知。HarfBuzz核查还把tag表误归Unicode16、混淆Windows语言ID与MS-LCID URL，并把只给助手的上下文缺项当作项目阻断项。按固定源码/原文逐项处置，保留正确发现，不整体接受或整体否决。证据：`.omx/artifacts/cbc-hy3-dng-license-scope-20261106/parent-assessment.json`、`cbc-harfbuzz-specific-inputs-20261106/parent-assessment.json`。
 - 公开条款提取不能直接当许可结论：hy3曾把MS-LCID明确的“Regardless of any other terms”
