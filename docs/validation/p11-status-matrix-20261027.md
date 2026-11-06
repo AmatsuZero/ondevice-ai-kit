@@ -1,5 +1,7 @@
 # P11 状态矩阵与发布结论
 
+2026-11-06 精确候选真机追加：TECNO/API35 的同一 `e0438c0`／`b90e7830` 完成固定ASR原生生命周期13项和SR6项断言；四项记录器自检不计推理。SR64×48→256×192及音视频PTS经原媒体核对，最初错误尺寸拒绝记录保留，同次结果重验通过；普通App/test/runner、25份私有摘要和四份SR文件恢复。见[验收与恢复](android-persistent-candidate-20261106.md)及[当前P11索引](p11-candidate-lifecycle-20261106.md)。本次关闭两项有界真机验收，新增benchmark样本0；9行原有质量/资源等gap及P4/P11/open/not-ready保持。
+
 2026-11-05 TTS私有终态报告追加：同一b90e普通APK在TECNO/API35取得1次固定输入最终pass，normal/cancel-join/followup/close及关闭拒绝齐全，host255由finish前私有JSON回读补证；旧三轮缺终态不升级。新test-only overlay离线397任务通过，普通App/test/runner、12模型/附属摘要、权限与设置已恢复；无采集/下载请求/benchmark新增。见[证据与限制](android-committed-candidate.md#当前候选真机-tts私有报告终态验证)。9行仍有gap，P4/P11与发布open/not-ready保持。 下方缺终态描述为历史。
 
 2026-11-05 F12真机TTS追加：TECNO授权恢复，既有Google服务支持b90e精确候选三轮normal-done/活动cancel-joined/followup-done；最终结果bundle仍缺，0项最终pass可证明，见[边界](android-committed-candidate.md#当前候选真机-tts生命周期已观察最终结果仍缺)。系统finished-inst及进程/活动instrumentation缺席证明终结；原普通App/test/runner、模型/权限/设置已恢复，无benchmark新增，9行gap/P4/P11/发布open/not-ready保持。

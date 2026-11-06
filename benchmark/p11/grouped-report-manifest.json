@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-android-sr-waterfall/summary.json",
-    "sha256": "1eab9befff50b57c3ee094ce72705de5eaefea61e2356952d0331f67a5cc7931"
+    "path": "artifacts/verification/p11-readiness-20261106-candidate-lifecycle-final/summary.json",
+    "sha256": "f194096c17155265d162ba73262a38c17945b8392fc001dd1f955f4683082a8b"
   },
   "schemaVersion": 1,
   "sources": [

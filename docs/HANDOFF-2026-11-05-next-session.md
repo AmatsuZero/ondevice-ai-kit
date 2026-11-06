@@ -1,3 +1,23 @@
+## 2026-11-06 当前：P11纳入精确候选真机终态，历史审查表述已澄清
+
+[P11更新范围](validation/p11-candidate-lifecycle-20261106.md)：本次追加已有ASR13项/SR6项原生断言、
+原始拒绝及同次SR重验、普通App完整恢复和F09竞态修复证据。快照为
+`artifacts/verification/p11-readiness-20261106-candidate-lifecycle-final/summary.json`。
+两项有界真机验收关闭；原8组benchmark及p50/p95不变，新增样本0、质量帧对0，九行原gap保留。
+不重传/安装/重跑已完成Android片段。412tools测试与25协议检查仍单列。
+
+用户询问的“三个审查实例容量不足”是10月19日P10历史记录，保存内容没有具体供应商/模型名。
+10月24日代码/架构限定审查已完成，Android专项曾429；ROADMAP历史段落已标明，不能用于判断当前助手可用性。
+cbc hy3已完成新的4文件F09 validator审查；3条意见按v2契约/实际ar归档核对后无新增已验证阻断，
+10项static回归通过，处置见P11更新文档；不升格为独立发布批准。
+
+agy新的7文件packager补充审查首轮认证失败（num_turns0），原错保留；用户说明网络恢复并明确要求一次重试。
+retry1已正常完成：保存登录认证成功、完整SUCCESS/1turn、348.12秒，7文件哈希匹配、findings为空；
+缺失上下文仍保留，不升格为whole-branch/许可/发布批准。conversation `aee4c8b7-f83c-4429-a13c-c01425931416`。
+cbc与agy这两项任务均终态，无需继续轮询或重发。证据 `.omx/artifacts/agy-f09-packaging-supplement-retry1-20261106/`，
+其中 `parent-assessment.json` 和对应 `ask-agy-...md`保留核验。无凭据/默认配置改动。
+基础10/12、P4/P11/open/not-ready及F10、最低系统、许可/资源/质量边界保持。
+
 ## 2026-11-06 最新：精确候选 ASR/SR 私有终态通过，普通 App 已恢复
 
 [本轮实际验收](validation/android-persistent-candidate-20261106.md)：TECNO/API35 上，
