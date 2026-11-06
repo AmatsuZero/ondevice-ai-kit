@@ -1,3 +1,19 @@
+## 2026-11-07 当前：同一636a6eb的Apple组合构建及82项桥接通过
+
+[当前Apple候选](validation/apple-current-candidate-20261107.md)复用Android同一归档，1046源码核验，
+211份SDK/KMP输入与旧e0438c0相同；两shared framework保留原构建身份/Skiko0.144.6，未重建。
+12依赖/2子模块6878份原始上游输入固定，无F09 overlay/fetch/生产lock改动。
+MLX＋OpenCV组合device79.542秒、MLX-only arm64 simulator128.919秒构建成功；
+实际App完整commit/两后端符号/模型导入标识符/645Swift输入/平台Metal/模型描述/三OpenCV通知核验。
+当前bridge82/82、0fail/skip，13.012秒，逐用例和xcresult一致；不重复未变host/KMP/Android测试。
+设备包unsigned；模拟器为linker-only adhoc、无开发者身份/provisioning。首次父检查误拒模拟器标记，
+失败原文保留；仅修检查后读同一产物通过，无重建。cbc hy3检查清单50.618秒自然成功，
+多项不适用建议经父更正；不是源码/整分支/发布批准。Qoder403/原生429等未重试。
+9保护/生产lock保持，无手机/采集/推理/下载/上传，三个既有待答复项不重复问。
+证据`artifacts/verification/apple-current-candidate-20261107/`，只读`freeze.py --verify`。
+下一步继续当前Apple新包真机/普通交互或其他尚未覆盖能力及质量资源/交付；不要重跑本轮构建/82测试、
+Android599测试或已完成ASR/SR探针。当前无需用户重连。P11仍10组，基础10/12、P4/P11 open、release not-ready。
+
 ## 2026-11-07 当前：同一新候选真机ASR/SR通过，设备字节重建与原App恢复完成
 
 [当前包真机](validation/android-current-device-20261107.md)：原636a6eb/dfccaa95候选未重建或重签，

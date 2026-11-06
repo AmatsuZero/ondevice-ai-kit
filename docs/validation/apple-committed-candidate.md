@@ -1,5 +1,9 @@
 # 精确提交 Apple/shared 候选 — 2026-11-05
 
+2026-11-07：[同一当前636a6eb归档的Apple候选](apple-current-candidate-20261107.md)已完成
+MLX＋OpenCV组合device及MLX arm64 simulator构建、当前bridge82项测试。
+本页e0438c0原始收据与两shared framework构建身份保留，不改写为当前源码重建/真机验收。
+
 状态：同一源码候选的 Apple host、KMP/shared iOS 单测、基础 Demo/消费者构建和注入后端桥接测试通过。
 后续已补同源码增强 MLX 双平台与 OpenCV Identity 设备目标整 App 构建，见下节。
 已补精确编译代码的隔离签名变体真机 smoke、模型安装及两变体稳定首屏截图；触摸入口仍被自动化工具阻断，多模态生成未执行。

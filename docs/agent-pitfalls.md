@@ -6,6 +6,12 @@
 
 ## 1. 所有助手：进程成功不等于任务成功
 
+- **关闭开发者签名不等于模拟器无任何签名标记**：当前Apple构建指定`CODE_SIGNING_ALLOWED=NO`，
+  设备App确实unsigned，模拟器主程序却带`adhoc,linker-signed`、无TeamIdentifier/资源封印。
+  父检查统一要求codesign退出1，实际在模拟器误拒；原检查和两平台输出保留后，按平台核验无profile/
+  `_CodeSignature`及精确linker-only状态，读取同一App通过，无重建/开发者签名/安装。
+  不要改包移除合法linker标记来迎合检查；证据`artifacts/verification/apple-current-candidate-20261107/`。
+
 - **ADB255与持久终态分别核验**：LiteRT-LM资源测量主机命令255/空输出，不能据此宣布失败并重跑。
   同一runId后续自行写出6行completed/terminal，760666原始字节与设备SHA一致；没有提交第二次推理。
   后续not-found使首次restore在变更前停止，恢复连接后仅继续原test恢复，推理不重做。
@@ -32,6 +38,11 @@
 - **零finding不推翻复现**：F02原7文件agy审查未报告已被真实Gradle RED证明的旧publisher输入缺陷；第四补丁在packet外。保留审查结果及父处置，不能把无新finding写成新补丁/整个发布无缺陷。证据 `.omx/artifacts/agy-f02-notice-review-20261106/parent-assessment.json`。
 
 ## 2. cbc：结果格式与长任务
+
+- 当前Apple四文件检查清单误要求静态SwiftPM/OpenCV产物出现在`App/Frameworks`，又建议启动unsigned
+  真机App、错用提交号字段及简写切片范围。主代理按实际Mach-O/Swift输入/Info.plist/平台资源核验，
+  多项更正、未采纳产品finding；检查清单不计审查批准。原文/处置
+  `.omx/artifacts/cbc-apple-combined-checklist-20261107/`，实际两构建及82bridge通过。
 
 - 2026-11-07设备协议审查把输入里正确的`('original-test', d.TEST, d.SHA_OLD_TEST)`错引成主包摘要，
   又把未提供的lifecycle_run模块推断为不存在。父代理核对原始prompt/实际调用者并否决四条意见，

@@ -1,5 +1,10 @@
 # 分阶段交付与恢复入口
 
+2026-11-07：[当前Apple候选](validation/apple-current-candidate-20261107.md)使用Android同一636a6eb归档，
+组合MLX＋OpenCV device和MLX arm64 simulator构建及82项当前bridge通过；shared framework按源码等价
+复用且保留旧构建身份，OpenCV无arm64 simulator保持。新包真机/其他能力、质量资源与交付仍缺，
+P11没有新增样本，基础10/12、P4/P11 open、release not-ready保持。
+
 2026-11-07：[Android LiteRT-LM资源](validation/android-litertlm-resources-20261107.md)新增普通afed APK
 在TECNO/API35的1预热+5测量，6次固定红图/模型身份/输入保持/缓存清理均通过；整SDK调用
 p50/p95=56477.465/57068.401ms，采样进程RSS峰值3,905,445,888–3,978,801,152B。

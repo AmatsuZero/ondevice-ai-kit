@@ -1,5 +1,13 @@
 # Foundation 后续专项
 
+2026-11-07：[当前Apple组合候选](apple-current-candidate-20261107.md)与Android同一636a6eb归档，
+1046源码/6878原始上游输入核验；组合MLX＋OpenCV device和MLX-only arm64 simulator构建通过，
+82项当前bridge实际通过、645Swift编译输入及实际App符号/资源/完整commit固定。
+两shared framework按源码等价复用，仍属e0438c0/Skiko0.144.6，未重建；OpenCV无arm64 simulator保持。
+CODE_SIGNING_ALLOWED=NO；模拟器linker-only adhoc的首次父检查误拒已记录更正，无App重建。
+九保护/lock保持，无手机/采集/推理/下载/上传；关闭当前Apple构建和变更bridge子项，真机及完整F12继续。
+cbc限定检查清单已处置，不计完整审查；P11无新增样本，基础10/12及release not-ready保持。
+
 2026-11-07：[同一当前Android候选真机](android-current-device-20261107.md)ASR13/SR6 native检查通过，
 各一次持久终态；两帧SR完整解码/尺寸/PTS/AAC保持或丢弃通过。手机原包+9.85MB增量真实重建新签名APK，
 五份全量SHA在安装前核验；原App/test/Identity runner、25私有摘要/4SR文件/权限/TTS恢复并精确清理。
@@ -238,6 +246,6 @@ P4/P11及10/12保持；下方“SDK源码许可未定”是历史，不能作为
 | F09 / Apple MLX 分发 | [分发](apple-mlxvlm-distribution.md)：20模块双slice、4C/资源和真机固定推理已过；内部许可已选。25.3 MB候选已上传私有GitLab并认证回验摘要；App材料遗漏修复后双目标unsigned构建保留24材料，414工具测试及新增改动的限定独立审查通过 | 接收组织、维护团队、远端环境编译/运行、完整分支/法律/发布审查；保留生产lock/原缓存/保护路径，不重复已过构建或上传 | 原SDK编译、App材料和远端字节结果分列；生产维护、许可适用、完整复审与发布验收逐项裁定后才能改变release状态 |
 | F10 / Identity/PAD | [Android 实验](android-opencv-identity-demo.md)、[Apple 实验](apple-opencv-identity.md)及[图库控件](identity-gallery-demo.md)：双端真实检测/对齐/embedding/注册删除及精确 1:N index/query 已实现；Apple native/session 21/21、Demo 主流程15/15。实际模型验证/图库发布仍缺校准策略，独立 PAD 未实现；触控/picker 未验 | 独立 PAD 模型与 runtime、授权数据和校准集；实际 Demo UI 验收 | 1:1、1:N、PAD 指标与阈值、授权撤销/删除和真实设备流程验收；本机正例流程不提升为生产识别能力 |
 | F11 / P11 质量/资源/性能 | [状态矩阵](p11-status-matrix-20261027.md)、[分组报告](p11-grouped-benchmark.md)：9行均有 gap，现有7能力/10组兼容报告；新增普通afed APK的Android ASR30次和LiteRT-LM5次资源测量，其余逐run/逐帧分组保持。另有公开 SDK Video SR20次约107秒的同PID有界RSS趋势及第二自然场景五次请求，独立索引在readiness。当前候选ASR/SR生命周期回归不新增benchmark样本。Face/Video SR无自然主观质量，GPU/energy/长期持续资源未统一 | 固定每能力任务集/阈值、同构测量方法与设备；Power Profiler 工具崩溃需新方案 | 所有实际交付能力正确性/质量/延迟/峰值/取消/持续运行有原始逐run数据与分组报告；不能可靠测量项保持 null 并明确发布裁定 |
-| F12 / 最终复审与候选冻结 | [原输入冻结](p11-input-freeze.md)保留；[当前636a6eb候选](android-current-candidate-20261107.md)1046源码/14输入、599JVM/四后端构建通过，[真机ASR13/SR6](android-current-device-20261107.md)与精确字节重建/回滚完成。Apple和其他能力的当前统一候选、系统模型字节/旧人脸原fixture、完整分支独立审查仍缺；protected signing不属于可交付修改 | 保留精确归档/当前和历史报告身份，继续未覆盖能力/Apple实际候选与完整审查/生产交付裁定；不重复已过构建、ASR/SR或既有模型下载 | 未解决 finding 和 review 缺口逐项裁定，所有 P11 原验收通过后才可改变发布结论；合并/tag/发布另受授权边界约束 |
+| F12 / 最终复审与候选冻结 | [原输入冻结](p11-input-freeze.md)保留；[当前636a6eb Android候选](android-current-candidate-20261107.md)1046源码/14输入、599JVM/四后端构建通过，[真机ASR13/SR6](android-current-device-20261107.md)与精确字节重建/回滚完成。[同归档Apple](apple-current-candidate-20261107.md)组合device/MLX simulator构建及当前bridge82项通过，shared framework保留旧构建身份。Apple新包真机与其他能力当前统一验收、系统模型字节/旧人脸原fixture、完整分支独立审查仍缺；protected signing不属于可交付修改 | 保留精确归档/当前和历史报告身份，继续未覆盖能力/Apple实际运行与完整审查/生产交付裁定；不重复已过构建、ASR/SR、82项bridge或既有模型下载 | 未解决 finding 和 review 缺口逐项裁定，所有 P11 原验收通过后才可改变发布结论；合并/tag/发布另受授权边界约束 |
 
 原扩展 SDK/Demo 计划仍保留，以上是执行延期清单，不删除需求。后续按编号启动专项，完成一个关闭一个；本轮收尾后不再自动循环重试这些项目。
