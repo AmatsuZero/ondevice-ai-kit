@@ -1,3 +1,21 @@
+## 2026-11-07 当前：F10校准探索已完成，Identity资源探针仍在生成
+
+用户明确要求交给AI Agent探索F10；cbc hy3候选89.495秒自然完成、完整JSON/0工具。
+主代理随后核验官方页面、纠正过时入口／归属／许可／统计建议，见
+[探索与下一批小任务](validation/f10-calibration-exploration-20261107.md)。
+London Set是用途待确认的CC BY候选；Replay/CelebA非商业限制、OULU EULA与SiW协议仍需分别核验，
+IJB官方分发已停止，不使用未经核验镜像。本轮无数据下载/新增采集/第三方联系/条款接受/阈值变更。
+可以先做数据协议manifest、split/score检查、离线指标；本轮尚未实现这些工具，F10生产门槛不关闭。
+
+另一个已授权的Android Identity资源任务正在推进，设计/计划/纯reducer/P11支持已落盘，
+50项聚焦、34协议检查与最新完整tools457/457通过；两个本机Ollama限定静态意见已逐项处置。
+证据`artifacts/verification/android-identity-resources-20261107/`，ledger为其`progress.md`。
+cbc hy4free原进程仍待终态：session8608，`.omx/artifacts/cbc-identity-resource-probe-20261107/`；
+不超时、不重复派单。尚未取得Kotlin候选、未构建测试包、未暂存/安装/推理，P11未新增样本、仍7能力/10组。
+待其返回后按既有计划审查/编译，并用已准备的独立保留恢复协议取得实际35行报告后才接入manifest。
+9保护/生产lock保持；原App与模型未操作。Qoder403等旧失败线路不重启，3既有待答复不重复问。
+基础10/12、P4/P11 open、release not-ready；完整roadmap目标保持active。
+
 ## 2026-11-07 当前：同一Android候选TTS持久终态已通过并恢复
 
 [当前TTS真机](validation/android-current-tts-20261107.md)复用636a6eb/dfccaa95精确主APK，

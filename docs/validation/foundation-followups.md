@@ -1,5 +1,12 @@
 # Foundation 后续专项
 
+2026-11-07：[F10校准探索](f10-calibration-exploration-20261107.md)由cbc hy3完成候选研究，
+主代理核验官方来源并更正IJB停止分发、Replay许可和SiW归属等错误。London Set有明确CC BY版权
+许可但本项目具体用途／同意范围未确认；常见PAD数据不能自动用于企业生产校准。
+数据／协议manifest、split/score校验与离线指标可先推进，尚未实现；未下载／采集／联系第三方／改阈值。
+F10不再作为“完全无事可做”的等待项，生产数据和验收门槛仍保留。
+
+
 2026-11-07：[当前Android TTS](android-current-tts-20261107.md)沿用636a6eb/dfccaa95原主APK，
 仅构建203KB test-only包，1046原源码保持；一次真机normal/活动取消join/followup/close/关闭拒绝终态通过。
 ADB255和第一份非终态保留后只回读同run；两记录器自检分开校验，34离线协议检查通过。

@@ -51,6 +51,13 @@
 
 ## 2. cbc：结果格式与长任务
 
+- **数据集候选必须核验当前官方入口**：cbc本次F10研究把已于2023-03-14停止分发的IJB写成可填表下载，
+  把Replay-Attack的1300段写为1200、SiW-M归属／含义写错；父代理用官方页面更正。
+  CelebA-Spoof／Replay的非商业限制不因“内部使用”自动消失，code license不等于数据授权。
+  本地校准用途与数据再分发分别判断；伪名hash不是匿名证明，相关pair也不能当独立低FAR试次。
+  89.495秒完整JSON／0工具只是研究候选成功，不是授权或校准通过；报告与处置
+  `docs/validation/f10-calibration-exploration-20261107.md`及对应`.omx/artifacts/cbc-f10-calibration-exploration-20261107/`。
+
 - 当前Apple四文件检查清单误要求静态SwiftPM/OpenCV产物出现在`App/Frameworks`，又建议启动unsigned
   真机App、错用提交号字段及简写切片范围。主代理按实际Mach-O/Swift输入/Info.plist/平台资源核验，
   多项更正、未采纳产品finding；检查清单不计审查批准。原文/处置
