@@ -120,3 +120,15 @@
 - 随后的恢复协议审查14.50秒返回，但5条建议都重复或忽略提示词里已有的约束；主代理逐项否决，没有据此宣称独立批准。复杂设备恢复协议继续由主代理集成验证；该本地模型优先承担小型纯函数/测试候选。证据：`.omx/artifacts/ollama-restore-protocol-20261106/parent-assessment.json`。
 - Linux边界候选22.79秒返回，但缺少目标导入，把目录发布写成普通文件移动，多个拒绝场景未预期异常，缺失API的mock也没有作用于实际调用。未原样执行；主代理修正并补齐后，在真实Linux完成13项检查，并把两个关键场景加入仓库、双平台复验。生成候选不等于通过测试；证据 `.omx/artifacts/ollama-linux-publish-checks-20261106/parent-assessment.json`。
 - 证据：`.omx/artifacts/ollama-lifecycle-tests-20261106/` 的原始 request/response、候选、主代理修订脚本、`tests.log` 和 `parent-verification.json`。这只证明本地任务生成及离线边界测试，不是设备推理验收。
+
+## 13. LiteRT-LM：检索摘要、版本新增与原生静止合同
+
+- **现象/原因**：Context7说明把空`awaitClose {}`解释成等待native callback drain；固定0.19.1
+  实际先关闭Flow，JNI在Java终态回调返回后仍清理引用/attachment。检索摘要的解释不是源码合同。
+- **有效处理**：查固定commit的Kotlin与JNI顺序，区分channel完成、回调栈退出和原生队列静止。
+  内部`WaitUntilDone`可能超时，析构的`.IgnoreError()`也不是应用可观察的成功结果。
+- **版本比较**：hy4free仅收到新版源码，却把`terminal_reached`及若干配置/方法称为新增；
+  主代理对旧版摘要和原文核对，发现已存在，否决这类推断。没有旧源码时只报告新版事实。
+- **边界/证据**：直接JNI delete不能证明传递析构完全不等待。缺公开barrier不代表同步factory缺席，
+  不据此升级依赖或重跑同步推理。见`docs/validation/android-litertlm-later-barrier-20261106.md`、
+  `.omx/artifacts/cbc-litertlm-later-barrier-20261106/parent-assessment.json`和公开原文目录。

@@ -57,6 +57,8 @@ consumer构建使用与远端完全同摘要的本地解压包；此次下载证
 `.omx/artifacts/native-incremental-reviews-20261106/f09-app-notices.json`。
 历史冻结证据与失败记录不改写；新证据单独记录当前身份和差异。
 
-本轮关闭App材料保留、内部候选包认证传输两个工程子项。实际接收组织/维护人员尚未命名，
+本轮关闭App材料保留、内部候选包认证传输两个工程子项。
+后续用户明确由其本人维护Apple/Skiko两类包，见[维护归属](delivery-maintenance.md)；
+接收组织名称仍未指定。
 第三方来源条款、完整分支/发布复审、生产资源与质量、最低系统延期及F10校准仍按原门槛保持。
 没有新增benchmark样本或质量帧对；基础10/12、P4/P11 open、release not-ready。

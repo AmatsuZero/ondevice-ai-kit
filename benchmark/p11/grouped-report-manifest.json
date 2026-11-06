@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-incremental-reviews/summary.json",
-    "sha256": "e3992922cafa6249a2ea0f7ded0d431106720ca62870c470494dd6f926ad1f98"
+    "path": "artifacts/verification/p11-readiness-20261106-ownership-litertlm/summary.json",
+    "sha256": "403b8d78fca23aeb9a6f37239374df3f3c7fdce069b4e1160a516a1b1c55a157"
   },
   "schemaVersion": 1,
   "sources": [

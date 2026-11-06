@@ -1,5 +1,32 @@
 # LiteRT-LM 0.18.1 native drain 合同修正
 
+后续[0.19.1公开源码核查](android-litertlm-later-barrier-20261106.md)已完成：仍未暴露所需的
+Android异步native cancel/join结果合同；不升级依赖、不把已有同步路径改回未实现。
+
+## 2026-11-06：异步接口复核与现有同步路径
+
+新的只读官方参考核查确认：固定Android0.18.1的Conversation公开接口没有可区分成功/失败的
+异步native join/drain barrier。相关三类JNI入口是void `nativeSendMessageAsync`、
+`nativeConversationCancelProcess`和`nativeDeleteConversation`；完整JNI清单还包含其他
+引擎/Session/benchmark方法，不能把这三项描述成全部JNI API。
+
+固定[Conversation.kt的Flow实现](https://github.com/google-ai-edge/LiteRT-LM/blob/bda624851d74be34d4e1f7fac1fc4155939539c7/kotlin/java/com/google/ai/edge/litertlm/Conversation.kt#L441)
+在`onDone`关闭Kotlin flow，`awaitClose {}`为空；collector结束不提供native回调栈退出证明，
+也没有在该清理块转发cancel/join。固定C++取消合同还指出取消后session被poison，
+后续异步调用不受支持。下方callback/isAlive/close与忽略WaitUntilDone错误的限制继续成立；
+AAR内`.so`与上游固定commit的逐项构建对应仍未证明，不据此实现新的生产异步路径。
+
+这不表示当前生产factory缺席：后续已实现并验过
+[同步sendMessage路径](android-litertlm-sync-demo.md)，正常阻塞返回后才释放本轮sender所有权；
+取消丢弃结果并等待sender返回。异步streaming/快速native取消仍是独立未验能力。
+以下“factory/设备推理未完成、模型缺失”属于2026-10-27的原异步调查，不能重复用于否定
+后来的同步factory、已授权模型和真实固定图像推理结果。
+
+本次未改依赖、源码或probe状态，未下载模型、构建或操作设备。新研究结论/固定AAR及缓存摘要
+保留于`.omx/artifacts/litertlm-async-barrier-recheck-20261106/`；后续版本核查另列，不自动升级。
+
+## 2026-10-27 原始异步调查
+
 2026-10-27。原设计的 `terminalCallbackThenDeadConversation` 假设已被固定 AAR 字节码否定：`Conversation.isAlive` 是 Kotlin 对象生命周期标志，不能证明 native 生成结束。生产 factory 继续不可用；尚未建立替代 drain barrier。
 
 ## 固定证据

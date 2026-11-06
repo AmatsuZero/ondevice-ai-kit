@@ -1,5 +1,14 @@
 # Foundation 后续专项
 
+2026-11-06 F07只读核查：用户选择的cbc hy4free在148.31秒完成官方0.19.1源码审查、0工具请求。
+主代理核验后确认新版仍无公开Android异步native cancel/join结果接口；已否决助手对版本新增和
+析构不等待的过度推断，详见[版本核查](android-litertlm-later-barrier-20261106.md)。
+固定0.18.1同步factory/真实推理保持，不升级或重跑；异步后置边界不变。
+
+2026-11-06 维护归属：用户明确回答“我本人”，Apple/Skiko包均由用户本人维护，
+见[维护记录](delivery-maintenance.md)。不再重复询问负责人；接收组织名称/Skiko具体hosted
+选择与其余许可/生产验收继续单列。原制品和旧收据不改写。
+
 2026-11-06 最新增量：F09 App材料修复两文件及F02第四输入校验补丁/回归工具已分别取得
 fresh native只读审查APPROVE/0 findings，限于本次四文件技术范围，不是全分支或发布批准。
 Skiko .4 Nexus候选115版本文件清单/本地摘要及逐项匿名HEAD404已保留，15可变metadata排除，

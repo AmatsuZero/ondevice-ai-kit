@@ -1,4 +1,22 @@
-## 2026-11-06 当前：两个增量技术审查通过，Skiko .4 Nexus精确预检完成
+## 2026-11-06 当前：hy4free完成新版LiteRT-LM核查，维护归属已记录
+
+用户选择`cbc + hy4`后，按本地文档调用`cbc --model hy4free`，仅提供官方公开源码，
+148.31秒自然结束、success、0工具请求；无需继续轮询或重发。固定0.19.1公开Kotlin/JNI仍无
+可报告成功/失败的异步native cancel/join接口，内部WaitUntilDone的失败/超时状态在析构被忽略。
+主代理核对关键行/摘要并否决“Engine析构完全不等待”和若干“新版新增”推断，
+详见[版本核查](validation/android-litertlm-later-barrier-20261106.md)。不升级0.18.1、不改同步factory，
+不重做已有推理；本次API研究结束，异步能力继续后置。原native429不重试。
+公开来源与任务原始输出分别保留于`.omx/artifacts/litertlm-later-api-public-20261106/`和
+`.omx/artifacts/cbc-litertlm-later-barrier-20261106/`；没有新源码、测试、构建、设备或上传。
+
+## 2026-11-06 当前：Apple/Skiko维护负责人已明确为用户本人
+
+用户对内部SDK接收/维护归属问题回复“我本人”。[维护归属](validation/delivery-maintenance.md)
+记录Apple候选包和Skiko修复包均由用户本人维护；不再重复询问负责人，不从CI账号推断组织。
+接收组织名称尚未提供，Skiko具体hosted仍是候选；没有因此上传/覆盖或修改旧冻结包/历史计划。
+源码/测试保持7e96485不变；P11最新指针仍以`benchmark/p11/grouped-report-manifest.json`为准。
+
+## 2026-11-06 上一审查轮：两个增量技术审查通过，Skiko .4 Nexus精确预检完成
 
 新native code-reviewer只读审查已分别返回APPROVE/0 findings：F09生成器的App notice复制修复
 及聚焦回归、F02第四输入校验补丁及portable Gradle回归。四文件摘要/有界结论保留于
@@ -9,7 +27,7 @@
 Skiko .4的115个版本文件清单/本地字节/SHA已核对，15可变metadata不进上传计划；
 对既有hosted候选的115个路径匿名HEAD均404，未上传、未用凭据或管理API。
 证据`artifacts/verification/f02-nexus-dot4-preflight-20261106/`；其404是时点观察而非原子保证。
-具体hosted最终选择/维护人员、源条款适用、发布授权与匿名远端消费者仍需闭合。
+具体hosted最终选择、源条款适用、发布授权与匿名远端消费者仍需闭合；维护负责人现已明确为用户本人。
 
 cbc hy3仅收到公开Unicode/HarfBuzz/MS-LCID原文，110.63秒完成、无工具调用；三段授权引文
 核验通过，反读MS条款/泛化排除生成表/新增专利门槛/解释文字冒充exact quote均被父代理否决。
