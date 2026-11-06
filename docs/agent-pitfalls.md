@@ -6,6 +6,11 @@
 
 ## 1. 所有助手：进程成功不等于任务成功
 
+- **JSON整数不能仅用相等判断**：cbc的ASR资源汇总候选把`True==1`、`False==0`和整数等值float
+  接受为schema/count/index等合法整数；11项负向子用例复现后，用`type(value) is int`逐字段修正。
+  不能靠`isinstance(value,int)`排除bool。10项reducer/40项聚焦及完整tools426通过；
+  原候选、RED/GREEN见`artifacts/verification/android-asr-resources-20261107/`和
+  `.omx/artifacts/cbc-asr-resource-summary-20261107/`。该运行明确绑定普通afed APK，不能冒作新SDK清理代码。
 - **delete返回false不是释放成功**：SR输出租约忽略两次`File.delete()`，真实非空条目删除失败却向bridge报告成功，导致重试句柄被移除。原租约两个JVM探针RED后，共用精确路径`Files.deleteIfExists`并保留双错误/处理错误；不递归删其他条目。cbc候选只把第二错误放进消息且若干测试未清理目录，均由主代理修正。SR10+启用SR的Demo56实际通过、video18缓存通过；证据`artifacts/verification/sr-output-cleanup-20261107/`。正式测试不依赖临时反射探针的编译器类名。
 - **工程材料不等于App材料**：F09 consumer工程含24份notice，真实成功构建的App却全部缺失。
   修复需实际执行构建复制动作并检查App字节，覆盖同名LICENSE/带引号路径；旧审查不覆盖新修改。

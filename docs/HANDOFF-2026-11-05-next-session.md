@@ -1,4 +1,24 @@
-## 2026-11-07 当前：SR文件删除失败不再报告释放成功
+## 2026-11-07 当前：Android ASR新增30次资源样本，P11由8组增至9组
+
+[资源补测](validation/android-asr-resources-20261107.md)：普通afed APK在TECNO/API35同PID8577
+完成5warmup+30measure，固定英文/后端/输入保持35/35。整SDK调用包含校验/VAD/native构造解码
+释放，p50/p95=1807.033/1827.525ms；采样进程RSS峰值范围471,339,008–481,583,104B。
+实际2919个点、median间隔22.464ms，不能称精确20ms或真实峰值。原始JSON154363B/SHA
+fccd0377…fc7a26保留，原App/test/Identity runner、25私有摘要/4SR文件/权限/TTS设置保持或恢复，
+精确临时包/报告已清理并返回普通App。没有麦克风/新模型/下载/上传；无需重连或重跑本项。
+新test-only副本397任务离线通过，953原源码/14输入核验；6份Sherpa生产源码匹配原安装记录。
+e0438c0仅是test编译源码，未声称整个afed App提交；当前Sherpa清理改动未装机、不据此验收。
+cbc hy3候选54.378秒完成，11严格类型负向子用例暴露缺陷，父修正后reducer10/P11聚焦40、
+完整tools426通过（46.483秒）。Ollama两片段意见13.588秒完成、3条因违背实际join/数组/计时
+顺序全否决，不算独立批准。两个助手原提示/原输出/父处置均保留，不重发请求。
+本轮真正新增P11兼容资源样本30，报告覆盖由5项能力/8组变为6项/9组；旧8组不变。
+自然CER/WER、真实峰值/SDK归因/能耗、持续预算、最低系统和原校准/交付门槛仍缺，10/12、
+P4/P11/release不晋级。9保护/生产lock保持，既有3个待答复项不重复问。
+证据`artifacts/verification/android-asr-resources-20261107/`，只读`freeze.py --verify`；
+最新P11以`benchmark/p11/grouped-report-manifest.json`为准。下一步沿剩余可执行交付/资源门槛，
+不重复已完成ASR资源或旧设备推理，不重启429/403助手。
+
+## 2026-11-07 上一轮：SR文件删除失败不再报告释放成功
 
 [SR清理修复](validation/android-sr-output-cleanup-20261107.md)：原输出lease忽略`File.delete`结果，
 两个实际旧匿名lease的JVM探针均RED，证明存在无法删除条目时仍返回成功，bridge会移除重试句柄。

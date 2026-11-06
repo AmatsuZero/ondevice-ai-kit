@@ -1,5 +1,11 @@
 # Foundation 后续专项
 
+2026-11-07：[Android ASR资源补测](android-asr-resources-20261107.md)新增普通afed APK在TECNO/API35
+5warmup+30measure，固定英文35/35，整调用p50/p95=1807.033/1827.525ms，进程采样RSS峰值
+471,339,008–481,583,104B。原App/test、25私有摘要、4SR文件与权限设置保持或恢复。
+cbc汇总候选修正严格类型后通过10项检查，P11聚焦40/完整tools426通过；现在6项能力/9组。
+无新采音/模型/下载/上传，不证明当前SDK新清理代码或自然质量/长期资源预算，10/12及发布门禁不变。
+
 2026-11-07：[真实SR输出释放错误](android-sr-output-cleanup-20261107.md)经旧租约2项RED后修复。
 文件/目录删除失败现在上抛，保留bridge重试句柄和原处理错误；不递归删除其他条目。
 SR10+启用SR的Demo56实际执行通过、video18缓存通过，lint0error/2既有warning。

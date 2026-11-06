@@ -1,5 +1,12 @@
 # P11 状态矩阵与发布结论
 
+2026-11-07 Android ASR新增可分组资源：普通afed APK在TECNO/API35同PID完成5warmup+30measure，
+35次固定英文/后端/输入保持通过；SDK整调用p50/p95=1807.033/1827.525ms，采样进程RSS峰值
+471,339,008–481,583,104B。原App/test/25私有摘要/4SR文件/权限设置恢复或保持。
+见[原始证据与边界](android-asr-resources-20261107.md)。这使grouped覆盖从5项能力/8组增至
+6项/9组；原8组不变。不是当前新SDK清理代码、自然质量、真实峰值/能耗或长期预算验收；
+9行仍有gap，基础10/12、P4/P11及发布open/not-ready保持。
+
 2026-11-06 精确候选真机追加：TECNO/API35 的同一 `e0438c0`／`b90e7830` 完成固定ASR原生生命周期13项和SR6项断言；四项记录器自检不计推理。SR64×48→256×192及音视频PTS经原媒体核对，最初错误尺寸拒绝记录保留，同次结果重验通过；普通App/test/runner、25份私有摘要和四份SR文件恢复。见[验收与恢复](android-persistent-candidate-20261106.md)及[当前P11索引](p11-candidate-lifecycle-20261106.md)。本次关闭两项有界真机验收，新增benchmark样本0；9行原有质量/资源等gap及P4/P11/open/not-ready保持。
 
 2026-11-05 TTS私有终态报告追加：同一b90e普通APK在TECNO/API35取得1次固定输入最终pass，normal/cancel-join/followup/close及关闭拒绝齐全，host255由finish前私有JSON回读补证；旧三轮缺终态不升级。新test-only overlay离线397任务通过，普通App/test/runner、12模型/附属摘要、权限与设置已恢复；无采集/下载请求/benchmark新增。见[证据与限制](android-committed-candidate.md#当前候选真机-tts私有报告终态验证)。9行仍有gap，P4/P11与发布open/not-ready保持。 下方缺终态描述为历史。

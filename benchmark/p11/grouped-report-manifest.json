@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261107-sr-output-cleanup/summary.json",
-    "sha256": "62f0a7bea8bea6272c19d2a65a1d8d609fa15b3e9136ab2e8adb7422dd97ecff"
+    "path": "artifacts/verification/p11-readiness-20261107-android-asr-resources/summary.json",
+    "sha256": "ca0dcf334b2be1301d29112a5cb9def2a61c4146f0b9ac6e22d9bb1101b6a29a"
   },
   "schemaVersion": 1,
   "sources": [
@@ -69,22 +69,11 @@
       "sha256": "8ac77be85c3834c78ffdcb8965340d2fd43db581e4781b1a71c4717cf4fb159d"
     },
     {
-      "kind": "video-sr-sdk-resource",
-      "p11Capability": "video-sr",
-      "path": "artifacts/verification/f11-sdk-resource-20261102/device-documents/f11-sdk-resource-663C8FEA-1690-4B6D-A289-A4A2385CDF64.json",
-      "sha256": "ca6e1a4bb5dc8375368b4b1822623ae84186bfcd5caf8f2333532342aacd2aa5",
-      "summary": {
-        "path": "artifacts/verification/f11-sdk-resource-20261102/summary.json",
-        "sha256": "a130d3ae406dac3fd521e87d9b3cc88305a68bcda983c7e871be2465f028eec0"
-      },
       "input": {
         "path": "artifacts/verification/f11-sdk-resource-20261102/input-180p-4x.mp4",
         "sha256": "97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f"
       },
-      "reference": {
-        "path": "artifacts/P7/natural/prepared/reference-720p.mkv",
-        "sha256": "fadf8e529c1cd7688473f1e2f7bf6dc33194435bc0dabe388664a03354221a6a"
-      },
+      "kind": "video-sr-sdk-resource",
       "outputs": [
         {
           "path": "artifacts/verification/f11-sdk-resource-20261102/device-documents/sdk-output-663C8FEA-1690-4B6D-A289-A4A2385CDF64-1.mov",
@@ -107,6 +96,8 @@
           "sha256": "a21bd123ecbe2d659776845861bb633121797810b06a7d5414454a109ff6264d"
         }
       ],
+      "p11Capability": "video-sr",
+      "path": "artifacts/verification/f11-sdk-resource-20261102/device-documents/f11-sdk-resource-663C8FEA-1690-4B6D-A289-A4A2385CDF64.json",
       "quality": {
         "first": {
           "path": "artifacts/verification/f11-sdk-resource-20261102/quality-first.json",
@@ -116,24 +107,51 @@
           "path": "artifacts/verification/f11-sdk-resource-20261102/quality-last.json",
           "sha256": "a6db070ddcf67d0dddecfaeef2219191de628918fcf0f9547add75e97d17c54e"
         }
+      },
+      "reference": {
+        "path": "artifacts/P7/natural/prepared/reference-720p.mkv",
+        "sha256": "fadf8e529c1cd7688473f1e2f7bf6dc33194435bc0dabe388664a03354221a6a"
+      },
+      "sha256": "ca6e1a4bb5dc8375368b4b1822623ae84186bfcd5caf8f2333532342aacd2aa5",
+      "summary": {
+        "path": "artifacts/verification/f11-sdk-resource-20261102/summary.json",
+        "sha256": "a130d3ae406dac3fd521e87d9b3cc88305a68bcda983c7e871be2465f028eec0"
       }
     },
     {
+      "input": {
+        "path": "artifacts/P6IOSASR/fixture/asr-fixture.caf",
+        "sha256": "ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e"
+      },
       "kind": "asr-file-sdk-resource",
       "p11Capability": "speech-asr-file",
       "path": "artifacts/verification/f11-speech-asr-sdk-resources-20261030/device-report-final.json",
       "sha256": "40d65c13c9ec7065ff639d51063e4508d186a004d38884689f1325074ecf6578",
-      "summary": {
-        "path": "artifacts/verification/f11-speech-asr-sdk-resources-20261030/summary-sdk.json",
-        "sha256": "2b436735c860cc278f28232b1eb2d0e40492c16b8ec4c8c9ca797e0f4a9b4e04"
-      },
       "sourceManifest": {
         "path": "artifacts/verification/f11-speech-asr-sdk-resources-20261030/source-manifest.json",
         "sha256": "8ae79f1efcc8f150fc58934739d2004054c86df29ecb3ecd8448b820278b469a"
       },
+      "summary": {
+        "path": "artifacts/verification/f11-speech-asr-sdk-resources-20261030/summary-sdk.json",
+        "sha256": "2b436735c860cc278f28232b1eb2d0e40492c16b8ec4c8c9ca797e0f4a9b4e04"
+      }
+    },
+    {
       "input": {
-        "path": "artifacts/P6IOSASR/fixture/asr-fixture.caf",
-        "sha256": "ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e"
+        "path": "artifacts/verification/android-asr-resources-20261107/test-assets/english.pcm",
+        "sha256": "fc0f3f5bb9b06a4c21e12321d5fb0bc7d3e3151dca855e5ed9693907ce39df46"
+      },
+      "kind": "asr-android-resource",
+      "p11Capability": "speech-asr-android",
+      "path": "artifacts/verification/android-asr-resources-20261107/device-report.json",
+      "sha256": "fccd037718e284ff49719200ba50d1f5275de93453e286cd83519108e3fc7a26",
+      "sourceManifest": {
+        "path": "artifacts/verification/android-asr-resources-20261107/source-manifest.json",
+        "sha256": "594c6c8b3e6d4d7d597fdd51ca8748cd6c15cdc8ded0dced3626b06236128f01"
+      },
+      "summary": {
+        "path": "artifacts/verification/android-asr-resources-20261107/summary.json",
+        "sha256": "68b3d6960d88e51738b4f4dfd1403e53914532e62ec13a38c24e653165d68fc2"
       }
     }
   ]

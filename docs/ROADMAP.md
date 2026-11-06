@@ -1,5 +1,10 @@
 # 分阶段交付与恢复入口
 
+2026-11-07：新增[Android离线ASR逐轮资源](validation/android-asr-resources-20261107.md)，
+普通afed APK真实TECNO/API35的5预热+30测量及原状态恢复已完成；P11 grouped覆盖由5项/8组
+增至6项/9组，旧组不变。固定输入不替代自然质量，采样进程RSS不替代真实峰值/能耗/长期预算，
+当前新SDK清理代码未装机。基础仍10/12，P4/P11 open、release not-ready；最新指针见manifest。
+
 2026-11-06 当前补充：精确 `e0438c0`／`b90e7830` Android 候选在 TECNO/API35 完成固定输入 ASR 的13项原生生命周期断言和 SR 的6项断言，普通 App/test、25份私有摘要及原SR文件已恢复。SR尺寸夹具错误已按原报告/媒体重验修正，没有重跑推理；[验收记录](validation/android-persistent-candidate-20261106.md)与[P11索引更新](validation/p11-candidate-lifecycle-20261106.md)区分两项有界真机验收和性能样本。F09 consumer 的manifest冻结及独占发布修复已验证。基础仍10/12，P4/P11 open，发布not-ready；下方10月记录保留各次历史状态。
 
 2026-10-28 路线图执行收尾：用户要求将当前可复核结果冻结，并把模型资产、P4 原生资源、统一质量/资源和最低系统设备列为后续专项。收尾记录见[路线图收尾记录](validation/roadmap-closure-20261028.md)。基础里程碑仍为 **10/12**，P4/P11 仍未完成；P11 发布结论继续为 `open/not-ready`。

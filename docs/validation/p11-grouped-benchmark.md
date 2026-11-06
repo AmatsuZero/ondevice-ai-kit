@@ -1,5 +1,12 @@
 # P11 分组 benchmark 快照
 
+2026-11-07 当前：[Android 离线 ASR 资源](android-asr-resources-20261107.md)新增真实 TECNO/API35
+同 PID 的5次预热和30次测量，完整 SDK 请求 p50/p95=`1807.033/1827.525ms`，
+采样进程 RSS 峰值范围=`471,339,008–481,583,104B`。现在为 **6项能力/9组**，原8组不变。
+原普通 `afed156b` APK与测试包/模型/设置均保持或恢复；这不是新SDK清理代码的运行证据。
+当前 readiness 以 `benchmark/p11/grouped-report-manifest.json` 为准；以下11月5日快照是历史。
+自然 CER/WER、真实峰值/SDK归因/能耗、持续预算及P4/P11发布缺口保留。
+
 2026-11-05 TTS私有终态报告追加：同一b90e普通APK在TECNO/API35取得1次固定输入最终pass，normal/cancel-join/followup/close及关闭拒绝齐全，host255由finish前私有JSON回读补证；旧三轮缺终态不升级。新test-only overlay离线397任务通过，普通App/test/runner、12模型/附属摘要、权限与设置已恢复；无采集/下载请求/benchmark新增。见[证据与限制](android-committed-candidate.md#当前候选真机-tts私有报告终态验证)。9行仍有gap，P4/P11与发布open/not-ready保持。 当前readiness：`artifacts/verification/p11-readiness-20261105-persistent-tts/summary.json`；下方记录为历史。
 
 2026-11-05 F12真机TTS追加：b90e精确候选在TECNO观察到三轮正常播放/取消/重入，最终bundle未取到，不计最终pass，见[边界](android-committed-candidate.md#当前候选真机-tts生命周期已观察最终结果仍缺)。当前readiness为 `artifacts/verification/p11-readiness-20261105-exact-android-tts/summary.json`；无benchmark新增，8组统计/9行gap/发布门禁保持。下方为历史。
@@ -46,13 +53,13 @@
 
 ## 可复现入口
 
-跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、七份分组原始设备报告及各附属摘要/媒体/质量文件的路径、SHA-256、source kind 和 P11 能力映射。当前 readiness 另索引20次持续运行、第二场景五次请求、F04麦克风状态及2026-11-04新增功能证据，但不把它们加入 grouped `sources`。该入口依赖本地 ignored `artifacts/verification/` 原始证据；旧的 v1–v4 可搬移包不含本次哈希更新，新 clone 需取得当前 manifest 所列完整原始文件。生成命令：
+跟踪的输入清单位于 `benchmark/p11/grouped-report-manifest.json`，固定 readiness、八份分组原始设备报告及各附属摘要/媒体/质量文件的路径、SHA-256、source kind 和 P11 能力映射。当前 readiness 另索引20次持续运行、第二场景五次请求、F04麦克风状态及2026-11-04新增功能证据，但不把它们加入 grouped `sources`。该入口依赖本地 ignored `artifacts/verification/` 原始证据；旧的 v1–v4 可搬移包不含本次哈希更新，新 clone 需取得当前 manifest 所列完整原始文件。生成命令：
 
 ```sh
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261105-persistent-tts/summary.json
+  --output artifacts/verification/p11-grouped-20261107-android-asr-resources/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。
@@ -69,6 +76,7 @@ python3 tools/p11_grouped_report.py \
 | Face detection | TECNO KM9 / Android 15 | `android.mlkit.face.bundled` | inference `10.853538 / 18.088231 ms`（30样本） | 原始 quality 为空；peak memory、energy、GPU peak 均未测 |
 | Speech TTS | iPhone / iOS 27.0.1 | `apple.avspeech` | duration `2779.726917 / 2779.791875 ms`（5次，先有1次 warm-up） | `en-US` Samantha 固定文本；约10 ms 间隔采样 RSS 峰值 p50/p95=`44,810,240 / 44,810,240 B`，真实峰值、自然音质、断网、GPU/energy 未验 |
 | Speech ASR file SDK | iPhone / iOS 27.0.1 | `apple.speech.recognizer` | duration `76.484458 / 93.435792 ms`（5次，先有1次 warm-up） | 固定合成 `en-US` CAF，5/5 归一化全文匹配；约10 ms 间隔采样进程 RSS 峰值 p50/p95=`36,913,152 / 36,929,536 B`；麦克风生命周期另有有界真机证据，自然 CER/WER、断网、真实峰值/GPU/energy 未验 |
+| Speech ASR Android SDK | TECNO KM9 / Android API35 | `sherpa.onnx.whisper` | request wall `1807.033 / 1827.525 ms`（30次，先有5次 warm-up） | 固定合成英文；含校验/VAD/native构造解码释放；采样进程RSS峰值范围471,339,008–481,583,104B；普通afed APK专属，不是当前新SDK清理代码、自然质量或生产资源预算验收 |
 | Video SR | iPhone17,2 / iOS 27.0.1 | `apple.videotoolbox.sr` | frame processing `93.619833 / 95.641250 ms`（48帧） | 进程 RSS 采样峰值增量 `87,801,856 B`；单素材编码保真度 PSNR/SSIM=`36.776212/0.979250`，主观质量未验 |
 | Video SR baseline | iPhone17,2 / iOS 27.0.1 | `apple.coreimage.bicubic` | frame processing `1.457208 / 1.583791 ms`（48帧） | 顺序执行的进程 RSS 采样峰值增量 `507,904 B`；同素材编码保真度 PSNR/SSIM=`38.872866/0.983506`，不是独立冷启动对照 |
 | Video SR SDK 整请求 | iPhone17,2 / iOS 27.0.1 | `apple.videotoolbox.sr` | request wall `5110.416958 / 6533.880333 ms`（5次，首轮含预热） | 约10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`77,824,000 / 259,391,488 B`；首末轮单素材编码保真度 PSNR/SSIM=`36.777730/0.979295`、`36.776212/0.979250`，主观质量未验 |
@@ -78,7 +86,7 @@ python3 tools/p11_grouped_report.py \
 
 ## 覆盖与剩余缺口
 
-readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Speech ASR file、Video SR 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **5项能力/8组**。其余4项在 grouped coverage 中保持 `unverified`：Speech ASR Android、Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。这表示缺少兼容分组报告，不表示这些能力均未实现。当前功能状态以[P11矩阵](p11-status-matrix-20261027.md)为准；readiness校验的路径/哈希计数由工具直接输出，九行仍有gap，分组统计不因功能证据索引而增加样本。
+readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Speech ASR file、Speech ASR Android、Video SR 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **6项能力/9组**。其余3项在 grouped coverage 中保持 `unverified`：Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。这表示缺少兼容分组报告，不表示这些能力均未实现。当前功能状态以[P11矩阵](p11-status-matrix-20261027.md)为准；readiness校验的路径/哈希计数由工具直接输出，九行仍有gap。
 
 旧 `f11-videosr-20261030` 成功报告缺少设备/系统/run 身份和逐帧原始值，仍不作为本次 grouped 来源；本次仅使用新真机成功报告。五次 SDK 整请求耗时及进程 RSS 样本在 `video-sr-sdk-resource` 独立组，不将约 5 秒的解码/缩放/编码全程与约 94 ms 的逐帧缩放混成同一统计组。所有 Video SR 质量报告和分组 `quality.status` 均保持 `unverified`，不把单素材 PSNR/SSIM 升级为主观质量通过。文件 ASR 的新分组仅使用 `SpeechRecognitionClient` SDK client 的五次资源数据；既有直连 Speech framework 探针仍是独立证据，不合组。身份、相机与 LiteRT-LM 同理保留各自证据和缺口。
 

@@ -18,10 +18,12 @@ except ModuleNotFoundError:  # Direct `python tools/p11_grouped_report.py` invoc
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from tools import benchmark_report, mlxvlm_benchmark_report, validate_p11_readiness
 
+from tools.probes import android_asr_resource_report
+
 
 SCHEMA_VERSION = 1
 _KINDS = {"face", "mlxvlm", "tts-resource", "video-sr-resource", "video-sr-sdk-resource",
-          "asr-file-sdk-resource"}
+          "asr-file-sdk-resource", "asr-android-resource"}
 _KIND_CAPABILITIES = {
     "face": {"face-detection"},
     "mlxvlm": {"multimodal-apple"},
@@ -29,6 +31,7 @@ _KIND_CAPABILITIES = {
     "video-sr-resource": {"video-sr"},
     "video-sr-sdk-resource": {"video-sr"},
     "asr-file-sdk-resource": {"speech-asr-file"},
+    "asr-android-resource": {"speech-asr-android"},
 }
 
 
@@ -366,6 +369,56 @@ def _asr_file_sdk_group(raw: dict[str, Any], entry: dict[str, Any], repo_root: P
     }
 
 
+def _android_asr_group(raw: dict[str, Any], entry: dict[str, Any], repo_root: Path) -> dict[str, Any]:
+    computed = android_asr_resource_report.summarize(raw)
+    evidence = [entry.get(key) for key in ("summary", "sourceManifest", "input")]
+    if not all(isinstance(item, dict) for item in evidence):
+        raise ValueError("invalid Android ASR evidence entries")
+    paths = [_relative_path(repo_root, item.get("path"), "Android ASR evidence path")
+             for item in (entry, *evidence)]
+    for index, path in enumerate(paths):
+        if any(_is_alias(path, earlier) for earlier in paths[:index]):
+            raise ValueError("Android ASR evidence alias")
+    _, summary = _verify_file(repo_root, entry["summary"], "Android ASR summary")
+    _, provenance = _verify_file(repo_root, entry["sourceManifest"], "Android ASR provenance")
+    _verify_hash(repo_root, entry["input"], "Android ASR input")
+    expected_summary = {**computed, "rawReportSha256": entry["sha256"],
+                        "sourceManifestSha256": entry["sourceManifest"]["sha256"]}
+    hashes = provenance.get("sourceHashes")
+    if (summary != expected_summary or provenance.get("schemaVersion") != 1
+            or provenance.get("runtimeScope") != "installed-ordinary-app-fixed-input-resource"
+            or not isinstance(provenance.get("appSha256"), str)
+            or not re.fullmatch(r"[0-9a-f]{64}", provenance["appSha256"])
+            or provenance.get("installedAppSourceCommit") is not None
+            or not isinstance(provenance.get("frozenBuildSourceCommit"), str)
+            or not re.fullmatch(r"[0-9a-f]{40}", provenance["frozenBuildSourceCommit"])
+            or not isinstance(hashes, dict)
+            or hashes.get(entry["path"]) != entry["sha256"]
+            or hashes.get(entry["input"]["path"]) != entry["input"]["sha256"]
+            or raw["inputSHA256"] != entry["input"]["sha256"]
+            or not isinstance(raw.get("deviceModel"), str) or not raw["deviceModel"]
+            or type(raw.get("sdkInt")) is not int or raw["sdkInt"] < 26):
+        raise ValueError("invalid Android ASR summary or provenance identity")
+    measured = raw["samples"][5:]
+    return {
+        "kind": "asr-android-resource", "p11Capability": "speech-asr-android",
+        "source": entry["path"], "sourceSha256": entry["sha256"],
+        "summary": dict(entry["summary"]), "sourceManifest": dict(entry["sourceManifest"]),
+        "device": raw["deviceModel"], "OS": f"Android API{raw['sdkInt']}",
+        "actualBackend": raw["backendId"], "scope": raw["timingMethod"],
+        "identity": {"sessionRunId": raw["runId"], "processIdentifier": raw["pid"],
+                     "appSha256": provenance["appSha256"], "input": dict(entry["input"]),
+                     "installedAppSourceCommit": None,
+                     "frozenTestBuildSourceCommit": provenance["frozenBuildSourceCommit"]},
+        "runIds": [f"{raw['runId']}-sample-{row['index']}" for row in measured],
+        "timingsMs": {"requestWall": _nearest_rank([row["durationNs"] / 1e6 for row in measured])},
+        "quality": {"status": "unverified", "reason": "fixed synthetic match is not natural CER/WER"},
+        "memory": {"status": "observed-sampled", "method": raw["measurementMethod"],
+                   "peakSampledBytes": _nearest_rank([row["rssPeakSampledBytes"] for row in measured])},
+        "energy": {"status": "unmeasured"}, "unverified": list(computed["unverified"]),
+    }
+
+
 def _video_sr_groups(raw: dict[str, Any], entry: dict[str, Any], repo_root: Path) -> list[dict[str, Any]]:
     run_id = raw.get("runId")
     device = raw.get("device")
@@ -684,6 +737,8 @@ def generate(manifest: dict[str, Any], repo_root: Path) -> dict[str, Any]:
             groups.append(_tts_group(raw, entry, repo_root))
         elif entry["kind"] == "asr-file-sdk-resource":
             groups.append(_asr_file_sdk_group(raw, entry, repo_root))
+        elif entry["kind"] == "asr-android-resource":
+            groups.append(_android_asr_group(raw, entry, repo_root))
         elif entry["kind"] == "video-sr-resource":
             groups.extend(_video_sr_groups(raw, entry, repo_root))
         else:
@@ -737,7 +792,7 @@ def _reject_output_aliases(
     candidates = [manifest.get("readiness"), *sources,
                   *(entry.get("summary") for entry in sources if isinstance(entry, dict) and entry.get("summary"))]
     for source in sources:
-        if isinstance(source, dict) and source.get("kind") == "asr-file-sdk-resource":
+        if isinstance(source, dict) and source.get("kind") in ("asr-file-sdk-resource", "asr-android-resource"):
             candidates.extend(source.get(key) for key in ("sourceManifest", "input"))
         if not isinstance(source, dict) or source.get("kind") not in ("video-sr-resource", "video-sr-sdk-resource"):
             continue

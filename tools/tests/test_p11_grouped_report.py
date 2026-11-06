@@ -6,8 +6,11 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from tools import p11_grouped_report as report
+from tools.probes import android_asr_resource_report
+from tools.tests.test_android_asr_resource_report import fixture as android_asr_resource_run
 
 
 def face_run(run_id="face-1", device="phone"):
@@ -164,6 +167,88 @@ def sdk_file_asr_run():
 
 
 class GroupedReportTests(unittest.TestCase):
+    def android_asr_manifest(self, root):
+        raw = android_asr_resource_run()
+        raw.update(deviceModel="TECNO KM9", sdkInt=35)
+        readiness = {"schemaVersion": 1, "rows": [
+            {"capability": "speech-asr-android", "status": "pass-bounded", "unverified": ["quality"]}],
+            "p11Gate": {"status": "open", "finalReleaseConclusion": "not-ready"}}
+        manifest = self.write_manifest(root, [("android-asr", raw, "asr-android-resource",
+                                              "speech-asr-android")], readiness=readiness)
+        entry = manifest["sources"][0]
+        input_path = root / "english.pcm"
+        input_path.write_bytes(b"synthetic fixture bytes for hash-binding tests")
+        input_hash = hashlib.sha256(input_path.read_bytes()).hexdigest()
+        raw["inputSHA256"] = input_hash
+        raw_path = root / entry["path"]
+        raw_path.write_text(json.dumps(raw))
+        entry["sha256"] = hashlib.sha256(raw_path.read_bytes()).hexdigest()
+        entry["input"] = {"path": input_path.name, "sha256": input_hash}
+        provenance = {"schemaVersion": 1, "runtimeScope": "installed-ordinary-app-fixed-input-resource",
+                      "appSha256": "a" * 64, "installedAppSourceCommit": None,
+                      "frozenBuildSourceCommit": "b" * 40,
+                      "sourceHashes": {entry["path"]: entry["sha256"], input_path.name: input_hash}}
+        provenance_path = root / "source-manifest.json"
+        provenance_path.write_text(json.dumps(provenance))
+        entry["sourceManifest"] = {"path": provenance_path.name,
+                                   "sha256": hashlib.sha256(provenance_path.read_bytes()).hexdigest()}
+        # The reducer's independent tests enforce the real pinned PCM hash. Here
+        # only the fixture identity is substituted; real hash checks still execute.
+        with patch.object(android_asr_resource_report, "INPUT_SHA256", input_hash):
+            summary = android_asr_resource_report.summarize(raw)
+        summary.update(rawReportSha256=entry["sha256"],
+                       sourceManifestSha256=entry["sourceManifest"]["sha256"])
+        summary_path = root / "asr-summary.json"
+        summary_path.write_text(json.dumps(summary))
+        entry["summary"] = {"path": summary_path.name,
+                            "sha256": hashlib.sha256(summary_path.read_bytes()).hexdigest()}
+        return manifest
+
+    def test_android_asr_adds_thirty_measurements_with_runtime_boundary(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = self.android_asr_manifest(root)
+            with patch.object(android_asr_resource_report, "INPUT_SHA256", manifest["sources"][0]["input"]["sha256"]):
+                result = report.generate(manifest, root)
+        group = result["groups"][0]
+        self.assertEqual(group["p11Capability"], "speech-asr-android")
+        self.assertEqual(len(group["runIds"]), 30)
+        self.assertEqual(len(set(group["runIds"])), 30)
+        self.assertEqual(group["timingsMs"]["requestWall"], {"count": 30, "p50": 15.0, "p95": 29.0})
+        self.assertIsNone(group["identity"]["installedAppSourceCommit"])
+        self.assertIn("current SDK cleanup changes", group["unverified"])
+        self.assertEqual(group["quality"]["status"], "unverified")
+        self.assertEqual(result["coverage"][0]["reportStatus"], "reported")
+        self.assertEqual(result["p11Gate"]["status"], "open")
+
+    def test_android_asr_rejects_summary_and_input_identity_changes(self):
+        for corruption in ("summary", "input", "source-manifest", "duplicate", "alias"):
+            with self.subTest(corruption=corruption), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                manifest = self.android_asr_manifest(root)
+                entry = manifest["sources"][0]
+                if corruption == "summary":
+                    path = root / entry["summary"]["path"]
+                    value = json.loads(path.read_text())
+                    value["durationMs"]["p50"] = 999
+                    path.write_text(json.dumps(value))
+                    entry["summary"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+                elif corruption == "input":
+                    (root / entry["input"]["path"]).write_bytes(b"changed input")
+                elif corruption == "source-manifest":
+                    path = root / entry["sourceManifest"]["path"]
+                    value = json.loads(path.read_text())
+                    value["sourceHashes"][entry["path"]] = "f" * 64
+                    path.write_text(json.dumps(value))
+                    entry["sourceManifest"]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+                elif corruption == "alias":
+                    entry["sourceManifest"] = dict(entry["summary"])
+                else:
+                    manifest["sources"].append(dict(entry))
+                with patch.object(android_asr_resource_report, "INPUT_SHA256", entry["input"]["sha256"]):
+                    with self.assertRaises(ValueError):
+                        report.generate(manifest, root)
+
     def write_manifest(self, root, sources, readiness=None):
         if readiness is None:
             readiness = {
