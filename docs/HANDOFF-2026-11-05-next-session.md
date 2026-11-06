@@ -1,5 +1,37 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新检查点：F02 许可随包交付与消费者保留已通过
+
+新冻结候选 **`0.144.6-ondevice-f02.3`** 已完成正常Gradle发布及独立KGP2.4消费；
+[许可交付复现与消费者任务](../probes/skia-atlas-text-cache/Skiko-ios-notices.md)。
+三个模块/115文件，每个模块的notices JAR及sources JAR均含同一69文件材料；
+6个源码文件在3份source JAR内共18处修改声明已核实，buildSrc修改声明另在真实输入核实。
+消费者显式取root notices classifier，Sync输出69文件与索引逐字节一致；
+commonMain/device/simulator framework链接通过，10任务成功。未将Maven解析当作最终App自动嵌入。
+
+原生许可输入扩至3994个本地文件/2115头文件；每目标1902个对象均有VALID Ninja依赖，
+无缺本地文件或新external组件。材料包括原23份上游文本、2份Unicode参考、14份libjpeg源码
+内联声明，另补24份头部原文、DNG PATENTS及嵌套Expat COPYING；保留IJG/DNG归属文字。
+全部40内嵌静态库继续匹配固定输入。**文件级/历史Unicode条款、独立许可批准、远端匿名消费、
+最终App保留与生产资源验收仍未关闭**；不把材料打包成功计为许可裁定。
+
+证据：`artifacts/verification/f02-notice-delivery-20261106/`，
+`summary.json`、`publication-graph.json`、`patch-application.json`、`consumer-retention.json`、
+`native-header-summary.json`及logs。只读 `rtk proxy python3
+artifacts/verification/f02-notice-delivery-20261106/verify.py`。
+归档108,522,716 B/115文件，SHA256
+`3276597b2f422091ee13a5854c79625d5248ca49c54fa9d1c136eb427836ca93`。
+.1/.2复核未变，九保护路径/生产lock不变。所有命令已结束，无待恢复session。
+
+真实RED/修复记录保留：错误JAVA_HOME在Gradle前退出；根sourcesJar大小写漏附已修；
+导出目录在父Git下时git apply会exit0但Skipped，已在独立tmp重验三份补丁并逐字节匹配7输入。
+恢复时不要重跑这些已修问题或已通过构建，也不要修改冻结.3；后续制品变更使用新版本。
+Nexus匿名拉取和发布权限不再询问；无凭据使用/上传/生产切换、无装机、新下载或benchmark。
+继续solo，无独立审查批准；F10无授权校准数据，基础10/12、P4/P11/发布仍open/not-ready。
+最新readiness：`artifacts/verification/p11-readiness-20261106-f02-notices/summary.json`。
+下一步对已定位的文件级/生成Unicode条款做有界核对，再进入独立远端消费/生产验收门槛。
+下方.2“声明补丁尚未应用/许可只暂存”等为历史：已在.3应用并验证材料随包交付。
+
 ## 2026-11-06 最新技术检查点：F02 双 iOS 正常发布与实际 SDK 消费已通过
 
 F02 的 iOS-only metadata／AWT 闭包阻断已修复，详见

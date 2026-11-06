@@ -1,5 +1,29 @@
 # F02 固定 Skiko 候选分发审查（2026-11-03）
 
+## 2026-11-06：.3 修改声明、正常附件与消费者保留通过
+
+当前新冻结候选 `0.144.6-ondevice-f02.3`，正常release发布59任务（最终51执行/8up-to-date）；
+三个模块115文件。三个notices JAR和三个source JAR均含相同69文件原文及SHA256索引。
+7个修改源文件均有实际注释，分发的6个Kotlin文件在3份source JAR中的18处声明全部核实。
+消费者通过显式notices classifier收集材料，69文件与输入摘要完全一致；负向缺失/篡改/额外
+文件检查均拒绝。独立KGP2.4消费者10任务、commonMain和双iOS framework链接成功。
+
+许可输入核对新增保留Ninja depfiles：两个target各1902对象均VALID、无未映射/缺失本地文件，
+覆盖3994本地输入、2115头文件，仍10个external组件。新增24份头部原文（含3份内联许可）、
+DNG PATENTS和嵌套Expat COPYING，保留原23上游文本/2Unicode参考/14份libjpeg内联声明及
+IJG/DNG归属。40内嵌Skia静态库摘要全部保持；不是对全部条款的独立许可裁定。
+
+归档108,522,716 B/115文件，SHA256
+`3276597b2f422091ee13a5854c79625d5248ca49c54fa9d1c136eb427836ca93`。
+证据 `artifacts/verification/f02-notice-delivery-20261106/`，原.1/.2不变。
+[三补丁顺序、发布及消费者收集](../../probes/skia-atlas-text-cache/Skiko-ios-notices.md)已跟踪。
+源码/材料/双iOS消费者复核 `verify.py`通过；保留root sourcesJar漏附与nested git apply跳过的
+RED记录，修复后均校验真实字节，不只看命令exit0。没有上传、远端消费或生产切换。
+
+已关闭的是**修改声明写入分发源码、正常许可附件、独立消费者材料保留**等本地技术子项。
+文件级例外/历史Unicode条款、独立许可批准、Nexus远端匿名消费、最终App材料保留与生产
+资源验收仍未关闭；F02/P4/P11仍open/not-ready。下方.2的尚未应用/尚未附带结论为历史。
+
 ## 2026-11-06：iOS-only 发布闭包已修复，许可附件继续准备
 
 当前候选为 **`0.144.6-ondevice-f02.2`**，固定Skiko/Skia revision与下方.1相同。

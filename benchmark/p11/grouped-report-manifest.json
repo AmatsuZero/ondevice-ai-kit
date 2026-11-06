@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-f02-ios-publication/summary.json",
-    "sha256": "e240eac5b9379f0d4d4c8f4883ca91bdaabdd695d9bc86cfc5a80a9bc36c5556"
+    "path": "artifacts/verification/p11-readiness-20261106-f02-notices/summary.json",
+    "sha256": "cf5329fd7b619b052b88cb33b201a9cadb41c856c4a75e52e07fa586a4254123"
   },
   "schemaVersion": 1,
   "sources": [

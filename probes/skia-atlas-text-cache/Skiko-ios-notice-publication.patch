@@ -1,0 +1,36 @@
+diff --git a/skiko/buildSrc/src/main/kotlin/publishing.kt b/skiko/buildSrc/src/main/kotlin/publishing.kt
+--- a/skiko/buildSrc/src/main/kotlin/publishing.kt
++++ b/skiko/buildSrc/src/main/kotlin/publishing.kt
+@@ -104,9 +104,32 @@
+         pomNameForPublication[it.name] = "Skiko ${toTitleCase(it.name)}"
+     }
+ 
++    // Optional explicit notice input for the dedicated internal iOS publication.
++    val noticesDirectory = project.providers.gradleProperty("skiko.notices.dir").orNull?.let {
++        project.file(it).also { directory ->
++            require(directory.isDirectory && directory.resolve("NOTICE-INDEX.json").isFile) {
++                "skiko.notices.dir must contain the prepared NOTICE-INDEX.json and original texts"
++            }
++        }
++    }
++    val noticesJar = noticesDirectory?.let { directory ->
++        project.tasks.registerOrGetTask<Jar>("thirdPartyNoticesJar") {
++            archiveClassifier.set("notices")
++            isPreserveFileTimestamps = false
++            isReproducibleFileOrder = true
++            from(directory) { into("META-INF/ondevice-ai-kit/notices") }
++        }.also {
++            project.tasks.withType(Jar::class.java).configureEach {
++                if (name == "sourcesJar" || name.endsWith("SourcesJar")) {
++                    from(directory) { into("META-INF/ondevice-ai-kit/notices") }
++                }
++            }
++        }
++    }
+     publishing {
+         publications.configureEach {
+             this as MavenPublication
++            noticesJar?.let { artifact(it) }
+             groupId = SkikoArtifacts.groupId
+ 
+             // Necessary for publishing to Maven Central
