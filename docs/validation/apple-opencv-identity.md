@@ -123,3 +123,19 @@ An isolated `io.ondeviceai.fixture.identityfiles` source app exposes only its te
 Observed through actual system picker and ordinary shared UI: explicit local activation; image picker open/cancel (`图片选择已取消`); reentry and **Browse → On My iPhone → IdentityInput → approved-astronaut.png**; shared **身份输入已选择**; tapping **注册** produced **ENROLLED · opencv.identity.apple** and **1 个模板**; **验证** returned **THRESHOLD_UNVERIFIED**; full-grant deletion reported **本次所有注册已删除并停用**. Then the real folder picker selected **IdentityInput/models** using **打开**, and returned the installed/consent-ready status. Ordinary App restart showed model-ready, no active session and no selected image. The app binary hash matches the earlier ordinary build inventory. These observations are in `initial-ui.json`, `ui-flow.json`, `ui-cleanup.json`, `model-ui-flow.json` and `final-ui.json`; only known fixture/app/system-control observations were retained.
 
 See the [reproduction procedure](../../probes/ios-opencv-identity/FILES-UI.md). This is automated interaction on a physical iPhone, not human-touch acceptance. It does not validate arbitrary iCloud/external providers, multi-person accuracy, calibrated verification/identification, PAD, or the full roadmap/release. Earlier headless reports and their narrower boundaries remain historical evidence. The nine protected hashes still match; no new independent review was retried after the documented 429.
+## 2026-11-06 App notice retention
+
+Both Apple App generators now snapshot the existing OpenCV, YuNet and SFace
+license texts into `OpenCVIdentityNotices` and add that folder to the normal
+resources build phase. The Combined generator does this when Identity is
+enabled, alongside optional Skiko notices; standalone Demo/probe Apps always
+include the folder. Missing, empty or symlinked notice inputs fail before output
+creation. Default Apps without Identity do not require those inputs.
+
+An actual fresh unsigned device probe build retained all three files byte for
+byte (SHA-256 checked). Generator regressions cover Combined and standalone
+Demo/probe resource membership and invalid-input rejection. Evidence:
+`artifacts/verification/identity-app-notices-20261106/`. This closes an App
+resource omission, not production redistribution approval, training-data rights,
+calibration, runtime acceptance or the remaining P4/P11 gates. Existing installed
+Apps/models were not updated.

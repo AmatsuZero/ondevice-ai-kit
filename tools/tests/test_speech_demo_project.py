@@ -32,11 +32,16 @@ class SpeechDemoProjectTests(unittest.TestCase):
         self.root = Path(temp.name).resolve()
         (self.root / "scripts").mkdir()
         shutil.copy(ROOT / SCRIPT, self.root / SCRIPT)
+        shutil.copy(ROOT / "scripts/generate-opencv-identity-app.rb", self.root / "scripts")
         (self.root / "apple").mkdir()
         (self.root / "apple-mlx").mkdir()
         (self.root / "apple-mlx/Package.resolved").write_text("fixed-lock")
         (self.root / "apple-opencv/Vendor/opencv2.xcframework").mkdir(parents=True)
         (self.root / "apple-opencv/Package.swift").write_text("fixture")
+        notices = self.root / "apple-opencv/Notices"
+        notices.mkdir()
+        for name in ["OpenCV-LICENSE.txt", "YuNet-LICENSE.txt", "SFace-LICENSE.txt"]:
+            shutil.copyfile(ROOT / "apple-opencv/Notices" / name, notices / name)
         for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES + IDENTITY_SOURCES + VALIDATION_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
             path = self.root / source
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -50,6 +55,71 @@ class SpeechDemoProjectTests(unittest.TestCase):
         self.original.write_bytes(b"protected project")
         self.output = self.root / "artifacts/speech-demo"
         self.ruby = os.environ.get("RUBY", "ruby")
+
+    def generate_opencv(self, kind="demo"):
+        if kind == "probe":
+            for name in ["OpenCvIdentityProbeApp.swift", "IdentitySessionChecks.swift"]:
+                path = self.root / "probes/ios-opencv-identity" / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("fixture")
+        return subprocess.run([self.ruby, str(self.root / "scripts/generate-opencv-identity-app.rb")],
+            capture_output=True, text=True, env={**os.environ, "ODAI_OPENCV_APP_DIR": str(self.output),
+                "ODAI_OPENCV_APP_KIND": kind, "ODAI_OPENCV_VALIDATE_HOST": "0"})
+
+    def testIdentityNoticesTravelWithCombinedAndStandaloneApps(self):
+        for kind in ["combined", "demo", "probe"]:
+            with self.subTest(kind=kind):
+                self.output = self.root / ("output-" + kind)
+                result = self.generate(identity=True, notices=self.notice_material()) if kind == "combined" else self.generate_opencv(kind)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                copied = self.output / "OpenCVIdentityNotices"
+                expected = {name: (self.root / "apple-opencv/Notices" / name).read_bytes()
+                            for name in ["OpenCV-LICENSE.txt", "YuNet-LICENSE.txt", "SFace-LICENSE.txt"]}
+                self.assertTrue(copied.is_dir(), "Identity App omitted runtime/model notices")
+                self.assertEqual({p.name: p.read_bytes() for p in copied.iterdir()}, expected)
+                project = self.output / ("SpeechDemo.xcodeproj" if kind == "combined" else "OpenCvIdentity.xcodeproj")
+                inspected = subprocess.run([self.ruby, "-rxcodeproj", "-rjson", "-e", """
+p = Xcodeproj::Project.open(ARGV[0]); t = p.targets.find { |target| target.product_type == 'com.apple.product-type.application' }
+puts JSON.generate(t.resources_build_phase.files.map { |f| [f.file_ref.real_path.to_s, f.file_ref.last_known_file_type] })
+""", str(project)], capture_output=True, text=True, check=True)
+                self.assertIn([str(copied), "folder"], json.loads(inspected.stdout))
+                if kind == "combined":
+                    self.assertTrue((self.output / "ThirdPartyNotices/component/LICENSE").is_file())
+                self.assertEqual(self.original.read_bytes(), b"protected project")
+
+    def testMissingOrLinkedIdentityNoticesRejectBeforeOutput(self):
+        for kind in ["combined", "demo"]:
+            for failure in ["missing", "empty", "symlink", "directory-symlink"]:
+                with self.subTest(kind=kind, failure=failure):
+                    self.output = self.root / (kind + "-" + failure)
+                    directory = self.root / "apple-opencv/Notices"
+                    path = directory / "SFace-LICENSE.txt"
+                    original = path.read_bytes()
+                    if failure == "directory-symlink":
+                        held = directory.with_name("held-notices")
+                        directory.rename(held)
+                        directory.symlink_to(held, target_is_directory=True)
+                    else:
+                        path.unlink()
+                        if failure == "empty": path.write_bytes(b"")
+                        elif failure == "symlink": path.symlink_to(ROOT / "apple-opencv/Notices/SFace-LICENSE.txt")
+                    try:
+                        result = self.generate(identity=True) if kind == "combined" else self.generate_opencv()
+                        self.assertNotEqual(result.returncode, 0)
+                        self.assertFalse(self.output.exists(), "Invalid notice input left partial App output")
+                    finally:
+                        if failure == "directory-symlink":
+                            directory.unlink()
+                            held.rename(directory)
+                        else:
+                            if path.is_symlink() or path.exists(): path.unlink()
+                            path.write_bytes(original)
+
+    def testDefaultAppDoesNotRequireIdentityNotices(self):
+        shutil.rmtree(self.root / "apple-opencv/Notices")
+        result = self.generate()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse((self.output / "OpenCVIdentityNotices").exists())
 
     def generate(self, video=False, multimodal=False, mlx=False, validation=False, commit="a" * 40, identity=False, notices=None):
         return subprocess.run([self.ruby, str(self.root / SCRIPT)], capture_output=True, text=True,

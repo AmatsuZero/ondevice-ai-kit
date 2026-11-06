@@ -21,6 +21,13 @@ end
 validate_host = kind == 'demo' && ENV['ODAI_OPENCV_VALIDATE_HOST'] == '1'
 sources << 'probes/ios-opencv-identity/IdentityDemoChecks.swift' if validate_host
 sources.each { |s| abort("Missing input: #{s}") unless File.file?(File.join(root, s)) }
+notice_directory = File.join(root, 'apple-opencv/Notices')
+abort('Invalid OpenCV notice directory') unless File.directory?(notice_directory) && !File.symlink?(notice_directory)
+notices = %w[OpenCV-LICENSE.txt YuNet-LICENSE.txt SFace-LICENSE.txt].to_h do |name|
+  path = File.join(notice_directory, name)
+  abort("Missing or invalid OpenCV notice: #{name}") unless File.file?(path) && !File.symlink?(path) && File.size?(path)
+  [name, File.binread(path)]
+end
 FileUtils.mkdir_p(directory)
 project = Xcodeproj::Project.new(File.join(directory, 'OpenCvIdentity.xcodeproj'))
 target = project.new_target(:application, 'OpenCvIdentity', :ios, '15.0')
@@ -39,6 +46,12 @@ target = project.new_target(:application, 'OpenCvIdentity', :ios, '15.0')
   end
 end
 sources.each { |s| target.source_build_phase.add_file_reference(project.main_group.new_file(File.join(root, s))) }
+notice_output = File.join(directory, 'OpenCVIdentityNotices')
+Dir.mkdir(notice_output)
+notices.each { |name, bytes| File.binwrite(File.join(notice_output, name), bytes) }
+resource = project.main_group.new_file('OpenCVIdentityNotices')
+resource.last_known_file_type = 'folder'
+target.resources_build_phase.add_file_reference(resource)
 target.build_configurations.each do |config|
   config.build_settings.merge!({
     'SWIFT_VERSION' => '5.0', 'PRODUCT_BUNDLE_IDENTIFIER' => "io.ondeviceai.opencv.#{kind}",

@@ -81,6 +81,16 @@ inputs = sources.map { |path| File.join(root, path) } + frameworks +
 inputs += [File.join(root, 'apple-mlx'), File.join(root, 'apple-mlx/Package.resolved')] if mlx_demo
 inputs += [File.join(root, 'apple-opencv/Package.swift'), File.join(root, 'apple-opencv/Vendor/opencv2.xcframework')] if identity_demo
 inputs.each { |path| abort("Missing input: #{path}") unless File.exist?(path) }
+identity_notices = {}
+if identity_demo
+  notice_directory = File.join(root, 'apple-opencv/Notices')
+  abort('Invalid OpenCV notice directory') unless File.directory?(notice_directory) && !File.symlink?(notice_directory)
+  %w[OpenCV-LICENSE.txt YuNet-LICENSE.txt SFace-LICENSE.txt].each do |name|
+    path = File.join(notice_directory, name)
+    abort("Missing or invalid OpenCV notice: #{name}") unless File.file?(path) && !File.symlink?(path) && File.size?(path)
+    identity_notices[name] = File.binread(path)
+  end
+end
 notices_directory = ENV['ODAI_THIRD_PARTY_NOTICES_DIR']
 notices = notice_snapshot(File.expand_path(notices_directory, root)) unless notices_directory.nil? || notices_directory.empty?
 FileUtils.mkdir_p(File.dirname(directory))
@@ -121,6 +131,14 @@ products.uniq.each do |name|
   target.frameworks_build_phase.files << file
 end
 sources.each { |source| target.source_build_phase.add_file_reference(project.main_group.new_file(File.join(root, source))) }
+unless identity_notices.empty?
+  destination = File.join(directory, 'OpenCVIdentityNotices')
+  Dir.mkdir(destination)
+  identity_notices.each { |name, bytes| File.binwrite(File.join(destination, name), bytes) }
+  resource = project.main_group.new_file('OpenCVIdentityNotices')
+  resource.last_known_file_type = 'folder'
+  target.resources_build_phase.add_file_reference(resource)
+end
 if notices
   notices.each do |path, bytes|
     destination = File.join(directory, 'ThirdPartyNotices', path)

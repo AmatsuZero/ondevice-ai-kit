@@ -1,5 +1,17 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 当前入口：Apple Identity 声明随 App 交付
+
+两 Apple 生成器遗漏 OpenCV/YuNet/SFace App 资源的问题已修复，生成前读取三份原文，
+缺失/空文件/symlink 拒绝；Combined 与独立 Demo/probe 使用正常 folder resource。
+新 unsigned probe App 三文件 SHA 原样匹配，生成器回归覆盖三配置和错误输入。
+证据 `artifacts/verification/identity-app-notices-20261106/`；生产许可批准不因保留声明而通过。
+普通手机 App/模型未更新。最新 readiness 指向
+`artifacts/verification/p11-readiness-20261106-identity-app-notices/summary.json`。
+
+下方 TTS“尚未实现”段落仅为历史，私有终态已在 b4db1fe 实现并取得真机最终 pass，
+不要重新实现或运行。继续 solo；10/12、P4/P11/open/not-ready 与原后置边界保持。
+
 ## 2026-11-06 来源跟进：上游事实已定位，停止重复检索/构建
 
 [官方历史及维护者回复](validation/f02-upstream-origin.md)：已确认 Arabic PUA 的原始加入
