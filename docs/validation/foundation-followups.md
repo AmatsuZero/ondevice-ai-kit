@@ -1,5 +1,11 @@
 # Foundation 后续专项
 
+2026-11-07：[同一当前Android候选真机](android-current-device-20261107.md)ASR13/SR6 native检查通过，
+各一次持久终态；两帧SR完整解码/尺寸/PTS/AAC保持或丢弃通过。手机原包+9.85MB增量真实重建新签名APK，
+五份全量SHA在安装前核验；原App/test/Identity runner、25私有摘要/4SR文件/权限/TTS恢复并精确清理。
+27离线协议检查通过；599原构建测试不重跑。当前修复的这两项真机缺口关闭，其他F12门槛保持。
+无新benchmark/采集/下载/上传，10/12、P4/P11 open、release not-ready保持。
+
 2026-11-07：[当前Android候选](android-current-candidate-20261107.md)冻结636a6eb/1046源码/14输入，
 四后端离线997任务全执行，599JVM通过、20模块lint0error；包/签名/46native/7ASR资源已核验。
 cbc候选经父四项负向RED修正后10检查通过，本地以原包+9.85MB新数据精确还原456.35MB签名APK。
@@ -231,7 +237,7 @@ P4/P11及10/12保持；下方“SDK源码许可未定”是历史，不能作为
 | F08 / Multimodal Apple | [图像](apple-mlxvlm-backend.md)、[短视频](apple-mlxvlm-short-video.md)、[Demo](multimodal-video-demo.md)：固定公开自然视频 native 生成/取消/同PID重入、8帧 rational times 和7项生命周期 gate 已通过；共享 Demo 的 VIDEO 路由、取消/离开/重入/AX 输出终态、真实 Files provider 选择及 Home 往返取消/1秒不自动重启/前台重入也通过。tagged trace 已证明 request/backend 来源和 drain/lease release，并把取消定位到 `willResignActive` 后、`didEnterBackground` 前；固定单素材/单 prompt 的五次真机 rubric 中 subject/action/scene 均为 5/5。同源三段 motion/frozen-control task-set 已执行 9/9，但 semantic 仅 1/3、temporal exact-label pair 0/3，结论为 `observed-failure`。物理 iPhone 的生产 Snapshot 与 prepared pixel tensor 边界均已证明固定 motion/frozen 输入各自保留 8/1 个唯一帧；六行文本 token 身份一致。首 token logits 的同输入重复 hash 一致、三组 motion/frozen hash 不同；新增派生的 `ĠMO`/`ĠST` 前缀 margin 中三个 motion margin 均高于 frozen，但 frozen 仍偏向 `ĠMO`，因此模型正确判别静止仍未知。跨场景 temporal quality、物理触控、GPU/能耗、持续资源及更广任务集质量仍缺 | 后续若继续根因定位，测试静止帧语义或观察完整标签概率/视觉特征；再扩展不同来源/场景与可比较的资源测量方法，不重复 Snapshot、adapter 或同一生成任务 | 保留真实 KMP/SDK 输出、时间/帧语义、自然质量及完整交互报告；synthetic 30/30、单一自然视频输出或本轮失败 task-set 都不替代完整自然质量 |
 | F09 / Apple MLX 分发 | [分发](apple-mlxvlm-distribution.md)：20模块双slice、4C/资源和真机固定推理已过；内部许可已选。25.3 MB候选已上传私有GitLab并认证回验摘要；App材料遗漏修复后双目标unsigned构建保留24材料，414工具测试及新增改动的限定独立审查通过 | 接收组织、维护团队、远端环境编译/运行、完整分支/法律/发布审查；保留生产lock/原缓存/保护路径，不重复已过构建或上传 | 原SDK编译、App材料和远端字节结果分列；生产维护、许可适用、完整复审与发布验收逐项裁定后才能改变release状态 |
 | F10 / Identity/PAD | [Android 实验](android-opencv-identity-demo.md)、[Apple 实验](apple-opencv-identity.md)及[图库控件](identity-gallery-demo.md)：双端真实检测/对齐/embedding/注册删除及精确 1:N index/query 已实现；Apple native/session 21/21、Demo 主流程15/15。实际模型验证/图库发布仍缺校准策略，独立 PAD 未实现；触控/picker 未验 | 独立 PAD 模型与 runtime、授权数据和校准集；实际 Demo UI 验收 | 1:1、1:N、PAD 指标与阈值、授权撤销/删除和真实设备流程验收；本机正例流程不提升为生产识别能力 |
-| F11 / P11 质量/资源/性能 | [状态矩阵](p11-status-matrix-20261027.md)、[分组报告](p11-grouped-benchmark.md)：9行均有 gap，现有5能力/8组兼容报告；iOS TTS 五次逐 run、文件 ASR SDK client 五次逐 run、Video SR 双后端逐帧与公开 SDK 五次整请求均已各自入组。另有公开 SDK Video SR 20 次、约 107 秒的单素材同 PID 有界 RSS 趋势及第二自然场景五次请求，独立索引在 readiness，不混入首场景五次分组。Face/Video SR 无自然主观质量，GPU/energy/长期持续资源未统一 | 固定每能力任务集/阈值、同构测量方法与设备；Power Profiler 工具崩溃需新方案 | 所有实际交付能力正确性/质量/延迟/峰值/取消/持续运行有原始逐run数据与分组报告；不能可靠测量项保持 null 并明确发布裁定 |
-| F12 / 最终复审与候选冻结 | [输入冻结](p11-input-freeze.md)：951源码文件、6组27模型及附属文件、14媒体/1文本输入和历史设备身份已登记复核；系统模型字节/旧人脸原fixture与统一候选全能力重建重测仍缺；独立审查429无结论；protected signing不属于可交付修改 | 保留当前归档及历史报告身份，补完整分支审查与生产交付裁定；最终从精确提交重建/重测实际候选，不重复既有模型下载 | 未解决 finding 和 review 缺口逐项裁定，所有 P11 原验收通过后才可改变发布结论；合并/tag/发布另受授权边界约束 |
+| F11 / P11 质量/资源/性能 | [状态矩阵](p11-status-matrix-20261027.md)、[分组报告](p11-grouped-benchmark.md)：9行均有 gap，现有7能力/10组兼容报告；新增普通afed APK的Android ASR30次和LiteRT-LM5次资源测量，其余逐run/逐帧分组保持。另有公开 SDK Video SR20次约107秒的同PID有界RSS趋势及第二自然场景五次请求，独立索引在readiness。当前候选ASR/SR生命周期回归不新增benchmark样本。Face/Video SR无自然主观质量，GPU/energy/长期持续资源未统一 | 固定每能力任务集/阈值、同构测量方法与设备；Power Profiler 工具崩溃需新方案 | 所有实际交付能力正确性/质量/延迟/峰值/取消/持续运行有原始逐run数据与分组报告；不能可靠测量项保持 null 并明确发布裁定 |
+| F12 / 最终复审与候选冻结 | [原输入冻结](p11-input-freeze.md)保留；[当前636a6eb候选](android-current-candidate-20261107.md)1046源码/14输入、599JVM/四后端构建通过，[真机ASR13/SR6](android-current-device-20261107.md)与精确字节重建/回滚完成。Apple和其他能力的当前统一候选、系统模型字节/旧人脸原fixture、完整分支独立审查仍缺；protected signing不属于可交付修改 | 保留精确归档/当前和历史报告身份，继续未覆盖能力/Apple实际候选与完整审查/生产交付裁定；不重复已过构建、ASR/SR或既有模型下载 | 未解决 finding 和 review 缺口逐项裁定，所有 P11 原验收通过后才可改变发布结论；合并/tag/发布另受授权边界约束 |
 
 原扩展 SDK/Demo 计划仍保留，以上是执行延期清单，不删除需求。后续按编号启动专项，完成一个关闭一个；本轮收尾后不再自动循环重试这些项目。

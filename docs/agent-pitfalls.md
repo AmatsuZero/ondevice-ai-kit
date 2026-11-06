@@ -33,6 +33,10 @@
 
 ## 2. cbc：结果格式与长任务
 
+- 2026-11-07设备协议审查把输入里正确的`('original-test', d.TEST, d.SHA_OLD_TEST)`错引成主包摘要，
+  又把未提供的lifecycle_run模块推断为不存在。父代理核对原始prompt/实际调用者并否决四条意见，
+  不为这些意见改正确实现或放宽split APK准入；之后真实恢复通过。审查末尾未执行的“已保持设备”文字
+  同样不是证据。见`.omx/artifacts/cbc-current-device-protocol-review-20261107/parent-assessment.json`。
 - 2026-11-07原始ZIP字节复用候选在415.712秒自然完成，不是超时失败。父代理四项负向检查复现：
   只按初始长度重算SHA会漏追加字节；固定FD未核对路径替换；失败清理无身份核对会删掉替换后的文件；
   第二输入在try外打开失败会泄漏第一FD。修正固定FD读ZIP、前后身份/size/metadata/SHA与finally关闭后，
@@ -94,6 +98,12 @@
 
 ## 8. ADB：EOF、offline、unauthorized 与暂存
 
+- **帮助文本仍须实际验证**：TECNO的toybox dd帮助列出`conv=excl`但实际拒绝；改用`set -C; cat > 新路径`。
+  `iflag=skip_bytes,count_bytes`已用16固定字符stdin/stdout实测。135段重建完整SHA通过后，最终`ln`仍被设备
+  Permission denied拒绝；保留exit1/已完成partial，复核整包SHA后禁止覆盖复制采用，不重跑构建或改签名。
+  首次只读not-found与短unauthorized会自行恢复，不立即要求用户重连；只读观察可等待同一设备后复读一次，
+  安装/删除/重建/推理不自动重放。27协议检查及真正新候选ASR/SR/恢复证据
+  `artifacts/verification/android-current-device-20261107/`；旧b90e协议的“主包不可替换”仅约束它自身冻结实验。
 - `adb push` 先打印 `1 file pushed` 再报 EOF，不证明设备保留了完整文件；重连后曾确认暂存目标不存在。每次以远端文件摘要为准。
 - 连接会在 `device` / `offline` / `unauthorized` 间变化。先刷新状态；只有需要用户确认 USB 调试时再请用户操作。错误建议里的 `adb kill-server` 不是执行全局重启的授权，也不要反复要求杀 App。
 - 本轮改用 8 MiB、`adb push -Z` 分块；只跳过已核对 SHA 的块，再核对重组整包。部分块存在但摘要不符时停止并诊断该精确文件，不能盲目覆盖或据传输输出写成功收据。

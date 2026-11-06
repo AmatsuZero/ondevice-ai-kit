@@ -1,4 +1,26 @@
-## 2026-11-07 当前：新源码Android候选已构建，字节复用本地通过，尚未装机
+## 2026-11-07 当前：同一新候选真机ASR/SR通过，设备字节重建与原App恢复完成
+
+[当前包真机](validation/android-current-device-20261107.md)：原636a6eb/dfccaa95候选未重建或重签，
+在TECNO/API35取得ASR13项native和SR6项native通过，实际各一次，两个持久报告均绑定当前完整commit/精确APK。
+ASR无麦克风；SR独立native runId=e4c1c7e1-37e8-4ae7-a91b-89ee92fe64ef，与原报告不同。
+输入/两份输出完整解码通过，两帧64×48→256×192，视频PTS≤1µs，AAC packet hash/PTS保留或按请求丢弃。
+两新test-only APK213242/214249B，1046原源码/2overlay前后保持，固定PCM/manifest/DEX/签名核验。
+
+手机端原包+9849005B literal实际还原456350170B新包完整SHA；五份本地/远端APK摘要在安装前全部核验。
+原重建最终硬链接被拒绝，原exit1保留；已核对完整partial后禁止覆盖复制采用，不重跑135段。
+设备帮助的conv=excl实际拒绝也保留；只读USB255/not-found/closed/短unauthorized后复读，写操作/推理不自动重放。
+27离线检查通过（恢复16/传输6/观察5）；cbc hy3限定审查120.147秒完成，四条意见按原文/调用者否决，
+含错引本来正确的回滚常量；不计最终修改/整分支/发布批准，原文`.omx/artifacts/cbc-current-device-protocol-review-20261107/`。
+
+原afed主包/原test/Identity runner、25私有摘要/4SR文件/权限/TTS已恢复核验；精确临时报告/五APK/增量/元数据
+清理、唯一临时目录为空后删除，已返回原MainActivity。9保护/生产lock保持，无新采集/下载/上传。
+证据`artifacts/verification/android-current-device-20261107/`，只读`freeze.py --verify`。
+本轮关闭当前修复ASR/SR真机子项；不要再跑同次探针/重建/安装或重新做上轮599测试。
+Qoder403/原生429等线路未重启；3既有待答复项不重复询问，当前无需重连。
+P11仍10组，无新benchmark样本，10/12、P4/P11 open、release not-ready不晋级。
+下一步继续当前候选尚未证明的其他能力/Apple或实际质量资源/交付门槛，保留完整F12退出标准。
+
+## 2026-11-07 上一轮：新源码Android候选已构建，字节复用本地通过，尚未装机
 
 [当前候选](validation/android-current-candidate-20261107.md)：冻结636a6eb，1046源码/14既有输入，
 四后端同时启用，离线无build-cache显式rerun，997任务全部执行；599JVM实际通过，20模块lint0error/52warning。
