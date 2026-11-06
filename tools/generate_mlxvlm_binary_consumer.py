@@ -283,7 +283,13 @@ def generate(artifact_root: Path, manifest_path: Path, output: Path) -> None:
                     script += 'cp -R -- "$SRCROOT"/' + shlex.quote(relative) + ' "$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/"\n'
                 script += ";;\n"
             script += '*) echo "Unsupported resource platform" >&2; exit 1 ;;\nesac\n'
-            target["postBuildScripts"] = [{"name": "Copy platform resource bundles", "script": script,
+            script += 'notice_root="$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH"\n'
+            for notice in payload["notices"]:
+                path = Path(notice["path"])
+                script += 'mkdir -p -- "$notice_root"/' + shlex.quote(str(path.parent)) + '\n'
+                script += 'cp -- "$SRCROOT"/' + shlex.quote(str(Path("artifacts") / path))
+                script += ' "$notice_root"/' + shlex.quote(str(path)) + '\n'
+            target["postBuildScripts"] = [{"name": "Copy platform resource bundles and notices", "script": script,
                                             "basedOnDependencyAnalysis": False}]
         # JSON is a YAML subset understood by the already-installed XcodeGen.
         (stage / "project.json").write_text(json.dumps(spec, indent=2) + "\n")

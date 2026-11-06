@@ -1,6 +1,13 @@
 # Foundation 后续专项
 
-2026-11-06 当前：F09已形成[完整内部交付候选](f09-internal-git-delivery-20261106.md)，
+2026-11-06 当前：[F09 App许可保留/内部上传](f09-app-notice-retention-20261106.md)已完成：
+真实构建复现App缺24材料后，最小复制修复通过19 consumer回归、完整tools414项和双目标
+unsigned App构建/24摘要核验。25,288,674 B Apple候选在用户具体确认后单次PUT到私有极狐，
+HTTP201及认证回下载SHA通过；无Release/tag。agy7/cbc4摘要仍匹配，新增生成器修改超出原
+Copilot审查，不能再称当前12文件全匹配。Nexus、维护归属、复审及生产质量/资源门槛继续。
+基础10/12、P4/P11/release不升级；无新增benchmark。下段原准备轮的未上传/源码匹配描述为历史。
+
+2026-11-06 上一准备轮：F09已形成[完整内部交付候选](f09-internal-git-delivery-20261106.md)，
 20框架/4C模块/18资源和24份notice的完整ZIP为25,288,674 B，按用户规则准备Git内部制品交付；
 108,785,484 B的Skiko `.4`走Nexus。原二进制和编译来源不变，新许可来源单独绑定，未上传。
 F09的agy7文件、cbc4文件和Copilot最终consumer限定源码审查已有结果，当前源码身份仍匹配；

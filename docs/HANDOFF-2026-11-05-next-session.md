@@ -1,4 +1,24 @@
-## 2026-11-06 当前：F09完整内部交付包25.3 MB，F02已获授权并完成补充审查
+## 2026-11-06 当前：F09 App材料遗漏已修复，25.3 MB内部候选已上传并回验
+
+[本轮验证](validation/f09-app-notice-retention-20261106.md)：冻结SDK生成consumer的真实成功
+模拟器App缺全部24notice；旧实现回归RED后，最小post-build路径保留修复通过19 consumer回归、
+完整tools414/414（58.757秒）和generic模拟器/设备双目标unsigned Release构建，App24摘要全匹配。
+SDK未重编译，设备未操作。首次启动器Python入口错误保留；修正模块入口后的构建才是有效结果。
+本机Ollama15.85秒返回候选核查，父代理复现/修复/实测；不是独立批准。
+
+用户对精确25.3 MB候选上传问题回复`ok`后，私有极狐项目461/home/common/ondevice-ai-kit
+单次PUT HTTP201，认证下载25,288,674 B/SHA639205a7…a152ed完全匹配。
+包名`odai-apple-mlxvlm-internal-candidate`，版本`20261106-sha256-`加完整SHA；无Release/tag。
+具体URL/授权/单次上传/下载收据见`.omx/artifacts/f09-git-channel-preflight-20261106/`及验证文档。
+不用重复上传；原坐标已存在，原本地包/冻结证据不改写。108.8 MB Skiko仍走Nexus，本轮未上传。
+
+原agy7/cbc4源码仍匹配；生成器已改变，原Copilot审查仅覆盖修复前版本，新增修改仍缺独立审查。
+不能再写当前12/12全匹配。接收组织/维护人员、源条款、完整复审与生产验收继续开放。
+本轮两个工程子项关闭，基础10/12、P4/P11 open、release not-ready；无新benchmark或质量帧对。
+九保护路径和Apple lock保持；新证据`artifacts/verification/f09-app-notices-20261106/`，
+P11快照以`benchmark/p11/grouped-report-manifest.json`当前指针为准。继续剩余门槛，不重跑本轮片段。
+
+## 2026-11-06 上一准备轮：F09完整内部交付包25.3 MB，F02已获授权并完成补充审查
 
 [F09交付候选](validation/f09-internal-git-delivery-20261106.md)：用户选择Git，超过50 MB走Nexus。
 Apple完整ZIP25,288,674 B，按规则准备内部Git制品/Release；Skiko `.4`108,785,484 B走Nexus。

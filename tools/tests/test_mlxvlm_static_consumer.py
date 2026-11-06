@@ -46,6 +46,18 @@ class StaticBinaryConsumerTests(unittest.TestCase):
             target.parent.mkdir(exist_ok=True)
             original_path.rename(target)
             resource["path"] = str(target.relative_to(root))
+        # Same-named licenses must retain both their paths and distinct bytes.
+        notice_bytes = {
+            "NOTICES.txt": b"local static staging notices\n",
+            "notices/vendor 'one/LICENSE": b"first vendor license\n",
+            "notices/vendor $two/LICENSE": b"second vendor license\n",
+        }
+        for path, content in notice_bytes.items():
+            notice = root / path
+            notice.parent.mkdir(parents=True, exist_ok=True)
+            notice.write_bytes(content)
+        payload["notices"] = [{"path": path, "sha256": hashlib.sha256(content).hexdigest()}
+                             for path, content in notice_bytes.items()]
         manifest.write_text(json.dumps(payload))
         with patch("tools.inspect_mlxvlm_xcframework._inspect_binary", side_effect=lambda p: {
             "architectures": ["arm64"], "minimumOS": "18.0",
@@ -80,7 +92,11 @@ class StaticBinaryConsumerTests(unittest.TestCase):
                 "TARGET_BUILD_DIR": str(products), "UNLOCALIZED_RESOURCES_FOLDER_PATH": "Probe.app"})
             original_metal = root / "resources" / platform / "metal.bundle/default.metallib"
             self.assertEqual((app / "metal.bundle/default.metallib").read_bytes(), original_metal.read_bytes())
-            self.assertEqual({p.name for p in app.iterdir()}, {"model.bundle", "metal.bundle"})
+            for path, content in notice_bytes.items():
+                self.assertTrue((app / path).is_file(), f"App missing notice: {path}")
+                self.assertEqual((app / path).read_bytes(), content)
+            self.assertEqual({p.name for p in app.iterdir()},
+                             {"model.bundle", "metal.bundle", "NOTICES.txt", "notices"})
         source = (moved / "ConsumerApp.swift").read_text()
         self.assertIn(hashlib.sha256(manifest.read_bytes()).hexdigest(), source)
         self.assertIn("#if targetEnvironment(simulator)", source)

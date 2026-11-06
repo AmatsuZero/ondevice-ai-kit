@@ -6,6 +6,11 @@
 
 ## 1. 所有助手：进程成功不等于任务成功
 
+- **工程材料不等于App材料**：F09 consumer工程含24份notice，真实成功构建的App却全部缺失。
+  修复需实际执行构建复制动作并检查App字节，覆盖同名LICENSE/带引号路径；旧审查不覆盖新修改。
+  现已通过双目标unsigned App的24摘要及414工具测试，证据`artifacts/verification/f09-app-notices-20261106/`。
+- **Python包入口**：依赖`from tools...`的生成器用`python -m tools.generate_mlxvlm_binary_consumer`，
+  直接执行文件可能在构建前报`ModuleNotFoundError`。记录启动器失败，不能当作SDK构建失败。
 - **现象**：退出码 0，但没有正文、JSON 不完整，或只有模型目录/连通测试结果。
 - **处理**：同时检查进程退出码、完整响应、结构化错误和任务验收结果。保留原始 stdout/stderr，解析失败就报告未取得可用结果；不能补齐截断 JSON 后当作模型成功输出。
 - **等待**：用户明确要求助手任务不按耗时或静默自动终止。短轮询只用于观察同一个进程，不是任务超时；不要因此重复发起或切换付费模型。

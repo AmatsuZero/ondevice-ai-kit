@@ -4,20 +4,28 @@
 
 The [complete internal-delivery candidate](f09-internal-git-delivery-20261106.md) now includes
 the selected project LICENSE and explicit later-policy/original-build provenance. Its complete
-transport is25,288,674 bytes, below the user's50 MB threshold, so the selected channel is
-internal Git artifact/Release delivery. Nothing was uploaded. All20 existing frameworks,
+transport is25,288,674 bytes, below the user's50 MB threshold. After explicit approval,
+it was uploaded to the private GitLab Generic Package candidate coordinate; HTTP201 and
+authenticated download length/SHA256 passed. See [App retention and upload evidence](f09-app-notice-retention-20261106.md).
+All20 existing frameworks,
 4 C modules,18 resources and original build receipts remain unchanged;24 notices survive
-transport extraction and new consumer generation. No native/consumer compile or device run
-was repeated. The old frozen artifacts remain intact.
+transport extraction. A real consumer build exposed omitted App notices; the generator now
+copies each notice with its relative path. Fresh unsigned simulator/device consumer builds
+retain all24 notice hashes;414 tools tests pass. No SDK native rebuild or device run was
+repeated. The old frozen artifacts remain intact.
 
 Supplied-source reviews have completed: agy reviewed7 snapshot/packager/overlay/policy files
 with0 reported findings; cbc reviewed4 validator/ZIP files and its3 suggestions were assessed
 without a validated new blocker; Copilot reviewed the final consumer publication fix with0
-findings. The seven/four source hashes and final generator text still match current sources.
+findings. The seven/four source hashes still match current sources. The consumer generator
+changed for App notice retention, so its old Copilot review is historical and does not
+cover this new modification.
 Their missing contexts remain explicit; they do not constitute whole-branch, legal or release
 approval. Earlier failed/no-result review entries below are historical for those attempts.
-Receiving organization, maintenance, actual remote delivery/consumer and P4/P11 acceptance
-remain open. Evidence: `artifacts/verification/f09-git-delivery-20261106/`.
+Receiving organization, maintenance, independent review of the new change, remote environment
+build/runtime and P4/P11 acceptance remain open. Exact authenticated transport is now verified.
+Evidence: `artifacts/verification/f09-app-notices-20261106/` and
+`.omx/artifacts/f09-git-channel-preflight-20261106/`.
 
 ## 2026-11-06 internal distribution policy and native input gate
 

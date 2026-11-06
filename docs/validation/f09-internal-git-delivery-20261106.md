@@ -2,7 +2,10 @@
 
 用户选定 Git 渠道，超过50 MB的制品走 Nexus。本地完整 Apple 交付 ZIP 为
 **25,288,674 B（约25.3 MB）**，因此按该规则准备内部 Git 制品／Release 交付；
-Skiko `.4` 归档为108,785,484 B，继续准备 Nexus 交付。此轮未上传。
+Skiko `.4` 归档为108,785,484 B，继续准备 Nexus 交付。
+后续用户对具体上传请求回复`ok`，Apple同一ZIP已上传私有GitLab Generic Packages，
+HTTP201和认证回下载字节/摘要通过，见[上传与App保留验证](f09-app-notice-retention-20261106.md)。
+下方原本地准备与来源记录保留，不将旧收据改写成远端结果。
 
 本机 Apple 包：
 `artifacts/verification/f09-git-delivery-20261106/ODAIKitAppleMLXVLM-internal-notice-candidate-20261106.zip`
@@ -26,7 +29,9 @@ SDK快照增加`packages/LICENSE`；149份原输入逐字节相同。没有原�
 `prepare.py`及`preparation.json`保留在同一证据目录：319份非notice文件不变，
 原完整分发树和20份ZIP未改。新manifest及static gate通过；完整ZIP解压后文件集合、
 摘要和manifest再验通过。使用解压产物生成新的独立consumer，24份notice逐字节保留。
-这次未重新编译consumer、运行设备或验证远端下载。
+原准备轮没有编译consumer、运行设备或验证远端下载。后续实际consumer构建发现App
+遗漏24份材料；生成器已修复，新的双目标unsigned构建保留24份材料，完整tools414项通过。
+远端传输亦已按同一ZIP摘要验证；未重编译SDK或运行设备。
 
 本机Ollama在14.74秒返回方案建议；主代理采纳来源JSON的结构和值检查，
 保留已正确标注的原编译提交和有效旧build receipt。原文及逐条处置：
@@ -35,10 +40,11 @@ SDK快照增加`packages/LICENSE`；149份原输入逐字节相同。没有原�
 ## 当前审查与剩余条件
 
 已完成的限定源码审查现已与当前源码核对：agy7文件、cbc4文件均无摘要漂移；
-Copilot最终consumer生成器全文与当前源码一致。agy报告0条新finding；cbc的3条意见
+Copilot最终consumer生成器全文在原准备时匹配；之后App保留修复改变了生成器，
+该审查现为历史，不覆盖新增修改。agy报告0条新finding；cbc的3条意见
 经原契约/实际归档核实均未确认新阻断；Copilot报告0条finding。
 它们不合并为完整分支、法律或生产发布批准，原缺失上下文继续保留。
 
-实际接收组织、维护团队、内部Git上传端点与远端消费者仍需落定；最终复审、
+内部Git端点与精确候选包传输已落定；实际接收组织、维护团队、远端环境编译/运行仍未验证；最终复审、
 P4/P11质量/资源和已延期最低系统门槛仍开放。九份保护输入和Apple锁文件不变。
 基础仍10/12、P4/P11 open、release not-ready，无新增benchmark样本。
