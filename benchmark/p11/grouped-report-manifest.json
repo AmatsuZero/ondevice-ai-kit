@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261106-dot6-sdk-tts/summary.json",
-    "sha256": "a0dd8320650a45d21b4ca0b3d55240aba7fe81d406bc72ccfbf378247247051d"
+    "path": "artifacts/verification/p11-readiness-20261107-speech-cleanup/summary.json",
+    "sha256": "3243da2c6b1aa5a22fe912d45cb0fd2d4bc0962fd1409a0c21bd540d27b4d226"
   },
   "schemaVersion": 1,
   "sources": [

@@ -1,4 +1,23 @@
-## 2026-11-06 当前：.6自身SDK链接/App完成，TTS限定审查及两个待答复项
+## 2026-11-07 当前：Android语音两个清理缺陷已修，qoder403停止
+
+[语音清理验证](validation/android-speech-cleanup-20261107.md)：原生只读审查发现ASR异步progress异常
+逃逸，主代理发现SpeechClient关闭首个backend报错后其余不释放。两项原实现真实RED后分别修复；
+原生executor负责ASR两个文件，主代理负责speech两个文件，互不覆盖。speech29/ASR14/TTS3/Demo56
+共102JVM测试通过；两模块lint0error/6warning。四个新回归覆盖异常释放、同异常对象和取消owner的joiner。
+首轮错误身份断言与未执行任务旧XML已保留并排除，不能当通过；最终实际执行/源码hash见
+`artifacts/verification/speech-cleanup-20261107/`，只读`freeze.py --verify`。
+
+新四文件限定复审返回终态429，无结果、不重试；不计独立批准。辅助协程文档researcher也429停止，
+主代理通过Context7核对官方stacktrace recovery说明并记录，非researcher成功结果。
+qoder独立通用测试矩阵（无项目源码）返回403/pricingUrl/error_code112，无候选，停止未重试；
+原始输出`.omx/artifacts/qoder-close-cases-20261107/`，根AGENTS及pitfalls已更新。
+已询问这条optional矩阵改cbc hy3还是主代理，待回复；先前TTS外部provider和.6具体hosted上传仍待回复，
+不重复问、不由沉默推断授权。本轮没有上传、设备、下载或采集。
+九保护路径/生产lock/普通App模型保持；基础10/12、P4/P11/release不晋级。
+最新P11以manifest指针为准；后续可从Sherpa等尚未证明当前源码审查覆盖的独立slice继续，
+不重启本轮失败的原生审查器、不重复已通过设备推理或.6构建。
+
+## 2026-11-06 上一轮：.6自身SDK链接/App完成，TTS限定审查及两个待答复项
 
 新证据`artifacts/verification/f02-dot6-sdk-consumer-20261106/`：`.6`自身SDK设备/arm64模拟器
 15任务全部执行、107.28秒通过；新unsigned App74材料逐字节保留，9.71秒。

@@ -39,6 +39,23 @@ class AsrResourcesTest {
         assertEquals(1, engine.destroys)
     }
 
+    @Test fun progressCallbackFailureFailsDownloadWithoutEscapingTheListener() = runBlocking {
+        val engine = ResourceEngine()
+        val callerFailure = IllegalStateException("caller progress failure")
+        val result = async(start = CoroutineStart.UNDISPATCHED) {
+            runCatching { session(engine).download("en-US") { throw callerFailure } }
+        }
+        val listener = requireNotNull(engine.listener)
+
+        assertNull(runCatching { listener.onProgress(41) }.exceptionOrNull())
+        val failure = assertIs<IllegalStateException>(result.await().exceptionOrNull())
+        assertEquals("caller progress failure", failure.message)
+        assertTrue(failure === callerFailure || failure.cause === callerFailure)
+        listener.onProgress(99)
+        listener.onInstalled()
+        assertEquals(1, engine.destroys)
+    }
+
     @Test fun installedCallbackAndPlatformErrorAreDistinctAndReleaseEngines() = runBlocking { supervisorScope {
         val engine = ResourceEngine()
         val installed = async(start = CoroutineStart.UNDISPATCHED) { session(engine).download("en-US") {} }

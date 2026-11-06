@@ -2,6 +2,12 @@
 
 2026-11-06 F02/F12增量：`.6`自身SDK双iOS链接15任务及基于新框架的unsigned App74材料
 保留通过；115个新Nexus精确路径匿名HEAD均404，上传范围待答复，远端消费未执行。
+2026-11-07：[Android语音两个清理缺陷](android-speech-cleanup-20261107.md)经真实RED后修复：
+registry逐backend关闭并聚合错误，ASR异步progress异常归入session并释放recognizer。
+speech29/ASR14/TTS3/Demo56共102JVM测试通过，两模块lint无error/6warning；新四文件复审429无结果。
+qoder新通用测试任务403/pricingUrl/error112停止，无候选，不自动重试；不算独立review/设备或发布验收。
+九保护/lock保持，无上传/下载/采集；10/12、P4/P11及release not-ready不变。
+
 [TTS五文件限定源码审查](tts-scoped-review-20261106.md)code-reviewer无finding，
 architect429无结果并停止；不计综合批准。显式JDK21实际重跑TTS/Demo JVM59项全过。
 补充架构意见供应商待选择，不重试原生429；10/12及原设备/质量/资源缺口不变。

@@ -72,7 +72,11 @@ internal class AsrResourceSession(
                             }
                             override fun onSupport(support: AsrLanguageSupport) = complete(support.status(language))
                             override fun onProgress(percent: Int) {
-                                if (continuation.isActive) progress(percent.coerceIn(0, 100))
+                                if (continuation.isActive) try {
+                                    progress(percent.coerceIn(0, 100))
+                                } catch (error: Throwable) {
+                                    if (continuation.isActive) continuation.resumeWithException(error)
+                                }
                             }
                             override fun onInstalled() = complete(AsrAssetStatus.INSTALLED)
                             override fun onScheduled() = complete(AsrAssetStatus.PENDING)

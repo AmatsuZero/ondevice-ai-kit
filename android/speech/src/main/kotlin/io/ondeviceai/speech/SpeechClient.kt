@@ -71,12 +71,17 @@ class SpeechClient(val capability: SpeechCapability, private val defaultBackendI
         }
         if (ownsClose) {
             withContext(NonCancellable) {
-                try {
-                    table.values.forEach { it.close() }
-                    completion.complete(Unit)
-                } catch (error: Throwable) {
-                    completion.completeExceptionally(error)
+                var failure: Throwable? = null
+                table.values.forEach { backend ->
+                    try {
+                        backend.close()
+                    } catch (error: Throwable) {
+                        val previous = failure
+                        if (previous == null) failure = error
+                        else if (previous !== error) previous.addSuppressed(error)
+                    }
                 }
+                failure?.let { completion.completeExceptionally(it) } ?: completion.complete(Unit)
             }
         }
         completion.await()

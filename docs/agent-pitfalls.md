@@ -137,8 +137,14 @@
 
 ## 13. qoder：CLI入口、受限网络与逐字核验
 
+- 2026-11-07新通用关闭测试矩阵任务返回exit1、`error_during_execution`、HTTP403并附`pricingUrl`、`error_code:112`，0输出token/无候选。停止该线路，等待用户选择fallback，不重试/改登录/换模型；不能据此断言具体余额或支付状态。此前成功记录仍有效。原提示无项目源码，失败及父处置见`.omx/artifacts/qoder-close-cases-20261107/`。
 - 后续通用落盘候选70.24秒成功，但先`O_RDONLY`打开FIFO会在`fstat`拒绝前阻塞；父代理保留负向RED后加`O_NONBLOCK|O_NOFOLLOW`并拒绝非bytes输入，修正版16项离线检查通过。候选外围多了说明文字，只提取唯一完整JSON代码块，未修补截断内容。不把修正后测试归给原始候选，不把通用函数生成当上传。证据：`.omx/artifacts/qoder-verified-download-20261106/`。
 - 使用`qodercli`（本轮1.1.84）；`qoder`是另一个App入口。受限shell首次模型目录返回`Failed to fetch model list: Was there a typo in the url or port?`，正常获授权网络目录成功，唯一配置模型`Qwen3.8-Flash`。不要据沙箱失败改认证/网络或换供应商。
 - 首次公开头部提取27.05秒成功，父代理对原源码逐字核对623字节/SHA通过。保留调用、原始结果和父处置；costUSD0/credits0只是本次记账，不保证无限免费。JSON仅返回结果，不能据此声称全事件零工具；调用明确禁工具/MCP。
 - 已安装help不含`--max-turns`，不要从通用文档添加猜测参数；完整已测配方在根本地`AGENTS.md`。不设任务耗时终止，不改保存配置、不加权限绕过、不自动重试429。证据：`.omx/artifacts/qoder-dng-notice-extraction-20261106/`。
 - 原始头部提取帮助发现冻结Skiko`.4`的72材料漏收DNG实际编译头`dng_safe_arithmetic.h`的AOSP声明。必须核对具体编译输入和原始通知，不能只确认组件根LICENSE存在。先保留缺项RED，再用新版本补齐并检查JAR/consumer/App字节；不由材料遗漏直接推断法律违规。
+
+## 14. Kotlin协程测试：异常副本与未执行任务的旧XML
+
+- 2026-11-07关闭/ASR回归首次GREEN在跨协程`assertSame`失败；实际错误类型和内容相同，堆栈含协程恢复边界。官方文档说明恢复可复制异常并将原异常设为cause，suppressed保留在原异常。测试改核对类型/内容、必要时原cause及实际close/destroy效果，不为测试改生产传播逻辑或全局关闭恢复。原RED/GREEN及文档见`artifacts/verification/speech-cleanup-20261107/`。
+- Gradle在speech测试失败后未执行ASR任务，但ASR旧XML仍存在。不能把XML存在当本轮执行证据；检查准确task行和状态，区分executed/cached/not-run，跨模块必要时用`--continue`。本轮旧XML已明确排除，后续实际ASR14与speech29、TTS3/Demo56全过；源码/收据绑定，不能把修正测试前的失败称为成功。
