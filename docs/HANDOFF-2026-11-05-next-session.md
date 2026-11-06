@@ -1,4 +1,19 @@
-## 2026-11-07 当前：cbc视频限定审查已处置，进度元数据回归已验证
+## 2026-11-07 当前：SR文件删除失败不再报告释放成功
+
+[SR清理修复](validation/android-sr-output-cleanup-20261107.md)：原输出lease忽略`File.delete`结果，
+两个实际旧匿名lease的JVM探针均RED，证明存在无法删除条目时仍返回成功，bridge会移除重试句柄。
+小内部`deleteSrOutput`共用于交付lease和部分输出，精确删除两路径、缺失幂等、双错误suppressed、
+清理失败保留原处理错误；不递归删其他条目。公开API/native/准入/drain保持，临时反射探针移入证据。
+最终SR10及`enableLiteRtSr=true`的Demo56实际执行通过，video18缓存通过；lint0error/2既有warning。
+cbc hy3候选106.301秒完成，父代理修正错误保留/临时目录清理；Ollama最终三文件9.108秒0finding，
+仅限定静态意见，不计整分支/发布批准。证据`artifacts/verification/sr-output-cleanup-20261107/`，
+两个助手原文各在`.omx/artifacts/`同名目录；无需重跑本项或再次发送审查。
+Context7正文fetch失败未重试，API26支持改核对已装Android SDK元数据与JDK21原文。
+9保护/生产lock/普通App模型保持，无设备/采集/下载/上传；新源码未称真机已验。
+10/12、P4/P11/release与原质量/资源/校准缺口不晋级；既有3个待答复项仍待回复，不重复问。
+最新P11以manifest指针为准，下一步继续尚可独立验证的交付或资源门槛，不重复已过host测试。
+
+## 2026-11-07 上一轮：cbc视频限定审查已处置，进度元数据回归已验证
 
 [视频审查](validation/android-video-client-review-20261107.md)：恢复既有cbc hy3进程后，
 确认260.577秒自然成功、完整三文件结果。唯一low建议`<→<=`被父代理否决：

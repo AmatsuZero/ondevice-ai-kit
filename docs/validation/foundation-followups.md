@@ -1,5 +1,10 @@
 # Foundation 后续专项
 
+2026-11-07：[真实SR输出释放错误](android-sr-output-cleanup-20261107.md)经旧租约2项RED后修复。
+文件/目录删除失败现在上抛，保留bridge重试句柄和原处理错误；不递归删除其他条目。
+SR10+启用SR的Demo56实际执行通过、video18缓存通过，lint0error/2既有warning。
+cbc候选经父代理修正，Ollama最终三文件限定意见无finding；无设备/下载/采集/上传，原发布门槛不变。
+
 2026-11-07：[Android视频限定审查](android-video-client-review-20261107.md)由cbc hy3完成。
 唯一同帧数去重建议经实测会丢totalFrames补充，已否决并逐字恢复原生产源码；新增一项回归。
 完整video18+Demo56实际执行通过，SR4缓存通过，video lint0error/1NewerVersionAvailable warning；不计产品修复或设备/发布验收。

@@ -34,6 +34,7 @@ class LiteRtVideoSuperResolutionBackend(private val modelFile: File, private val
                 check(directory.mkdir())
                 val output = directory.resolve("output.mp4")
                 var delivered = false
+                var processingFailure: Throwable? = null
                 try {
                     val context = currentCoroutineContext()
                     val info = EsrganInterpreter(modelFile).use { model ->
@@ -45,12 +46,15 @@ class LiteRtVideoSuperResolutionBackend(private val modelFile: File, private val
                     val lease = object : VideoOutputLease {
                         override val file = output
                         override val info = info
-                        override suspend fun release() { withContext(Dispatchers.IO) { file.delete(); directory.delete() }; Unit }
+                        override suspend fun release() { withContext(Dispatchers.IO) { deleteSrOutput(file, directory) } }
                     }
                     undelivered = lease
                     delivered = true
                     lease
-                } finally { if (!delivered) { output.delete(); directory.delete() } }
+                } catch (failure: Throwable) {
+                    processingFailure = failure
+                    throw failure
+                } finally { if (!delivered) deleteSrOutput(output, directory, processingFailure) }
             }
             undelivered = null
             result

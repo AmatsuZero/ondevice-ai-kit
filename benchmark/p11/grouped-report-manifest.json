@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261107-video-client-review/summary.json",
-    "sha256": "dd294d4ba908f7165ea6350eaa6fca1629cc11072b3bd6aa9216b7a9cfdd35b0"
+    "path": "artifacts/verification/p11-readiness-20261107-sr-output-cleanup/summary.json",
+    "sha256": "62f0a7bea8bea6272c19d2a65a1d8d609fa15b3e9136ab2e8adb7422dd97ecff"
   },
   "schemaVersion": 1,
   "sources": [
