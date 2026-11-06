@@ -123,12 +123,12 @@ def validate_cache(cache: Path, snapshot: Path) -> dict:
         expected = _output("git", "-C", str(mlx), "ls-tree", "HEAD", path).split()[2]
         _require(_output("git", "-C", str(mlx / path), "rev-parse", "HEAD") == expected,
                  f"native source revision drift: {name}")
-        _require(not _output("git", "-C", str(mlx / path), "status", "--porcelain", "--untracked-files=no"),
+        _require(not _output("git", "-C", str(mlx / path), "status", "--porcelain", "--untracked-files=all"),
                  f"native source edits: {name}")
     return lock
 
 
-def _notices(distribution: Path, cache: Path, lock: dict, source_commit: str) -> tuple[list, list]:
+def _notices(distribution: Path, cache: Path, lock: dict, source_commit: str, snapshot: Path) -> tuple[list, list]:
     directory = distribution / "notices"; directory.mkdir()
     attributions = []
     for pin in lock["pins"]:
@@ -148,14 +148,23 @@ def _notices(distribution: Path, cache: Path, lock: dict, source_commit: str) ->
         shutil.copyfile(cache / "checkouts/mlx-swift/Source/Cmlx" / name, target)
     for source in sorted(CANDIDATE.glob("*.patch")):
         shutil.copyfile(source, directory / source.name)
+    project_license = snapshot / "packages/LICENSE"
+    license_reference = "Project license unspecified; local validation only"
+    license_status = "Local validation only; no SDK source redistribution license is established.\n"
+    if project_license.is_file():
+        target = directory / "ondevice-ai-kit/LICENSE"
+        target.parent.mkdir()
+        shutil.copyfile(project_license, target)
+        license_reference = "See notices/ondevice-ai-kit/LICENSE"
+        license_status = "Local validation only; project license terms are included in notices/ondevice-ai-kit/LICENSE.\n"
     (directory / "LOCAL-VALIDATION-ONLY.txt").write_text(
-        "Local validation only; no SDK source redistribution license is established.\n"
+        license_status +
         "The two exact compatibility patches modify only isolated dependency copies.\n"
         "OrderedCollections: target-scoped textual interface selector workaround.\n"
         "MLXLMCommon/Gemma4: five unknown future attention-mask cases intentionally trap.\n")
     for module in SDK_MODULES:
         attributions.append({"module": module, "source": "https://github.com/AmatsuZero/ondevice-ai-kit",
-                             "revision": source_commit, "license": "Project license unspecified; local validation only"})
+                             "revision": source_commit, "license": license_reference})
     notices = [{"path": str(p.relative_to(distribution)), "sha256": sha(p)}
                for p in sorted(directory.rglob("*")) if p.is_file()]
     return attributions, notices
@@ -237,7 +246,7 @@ def _assemble(output: Path, snapshot: Path, cache: Path, inventory: dict, lock: 
         copy_public_c_module(source, name, target)
         payload["cModules"].append({"name": name, "owner": owner, "path": str(target.relative_to(distribution)),
                                    "sha256": tree(target), "moduleMapSHA256": sha(target / "module.modulemap")})
-    payload["sourceAttributions"], payload["notices"] = _notices(distribution, cache, lock, inventory["sourceCommit"])
+    payload["sourceAttributions"], payload["notices"] = _notices(distribution, cache, lock, inventory["sourceCommit"], snapshot)
     manifest = distribution / "artifact-manifest.json"; _json(manifest, payload)
     validate_manifest(manifest, distribution)
     archives = output / "archives"; archives.mkdir()

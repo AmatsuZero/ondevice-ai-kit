@@ -2,6 +2,9 @@
 
 面向多 App 复用的端侧 AI SDK。原生 SDK 独立分发，KMP 只承载桥接协议和 Demo 业务/UI。
 
+项目自身代码采用[内部使用许可](LICENSE)，允许获授权组织内部使用、修改及分发，不授予公开发布或对外分发许可。
+第三方依赖、模型和素材继续遵循各自许可；本许可不代表生产验收或发布批准。
+
 分阶段状态与下一工作包见 [ROADMAP](docs/ROADMAP.md)。按原始阶段停止点复核，当前基础里程碑 **10/12**（P4、P11 未完成）；历史检查点中的 5/12 已被此口径取代，详见[逐阶段证据](docs/validation/roadmap-progress-audit-20261026.md)。完整 SDK/Demo 扩展交付、独立审查和统一真机验收仍在进行，10/12 不表示整体完成百分比。
 
 当前实现：iOS 15+ Vision 人脸检测/语义关键点、Android API 26+ bundled ML Kit 人脸检测；可选的 Apple AVSpeech TTS、Apple 文件/麦克风 ASR、Android 系统 TTS，以及 Android on-device ASR 模块；任务取消/关闭、1+1 最新帧队列；带 SHA256 校验、原子安装、revision lease 的模型目录与 HTTPS 下载协调器；原生 benchmark JSON 与分组报告工具。

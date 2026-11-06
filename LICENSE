@@ -1,0 +1,36 @@
+OnDevice AI Kit — Internal Use License
+SPDX-License-Identifier: LicenseRef-OnDeviceAI-Internal
+
+All rights reserved, except for the permissions expressly granted below.
+
+1. Scope
+These terms apply to original project code and documentation in this repository
+and their compiled forms. They do not replace any separately identified
+third-party license or grant rights to third-party code, dependencies, models,
+weights, datasets, or media. Those materials remain subject to their own terms.
+
+2. Permitted internal use
+An organization authorized by the applicable copyright holders to receive this
+project may use, reproduce, modify, build, and distribute its source and binary
+forms within that organization for its internal purposes. Internal copies and
+distributions must retain these terms, applicable copyright notices, and all
+required third-party licenses, notices, and modification notices.
+
+3. External distribution
+No permission is granted to publish, sublicense, sell, or distribute project
+source or binaries outside the authorized organization, including by public
+repositories or public package registries. Any such use requires separate
+written permission from the applicable rights holders. Possession of a copy or
+access to a repository does not by itself authorize external distribution.
+
+4. Third-party rights
+Restrictions on original project material do not restrict rights independently
+granted by third-party licenses. Recipients must comply with those licenses,
+including their notice, attribution, source, and modification requirements.
+No trademark rights are granted by these terms.
+
+5. Warranty and liability
+THE PROJECT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+NONINFRINGEMENT. TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE COPYRIGHT
+HOLDERS SHALL NOT BE LIABLE FOR CLAIMS OR DAMAGES ARISING FROM ITS USE.

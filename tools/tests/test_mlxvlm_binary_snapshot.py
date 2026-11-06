@@ -78,6 +78,25 @@ class MLXVLMBinarySnapshotTests(unittest.TestCase):
                 snapshot(repo, commit, output)
             self.assertFalse(output.exists())
 
+    def test_project_license_uses_committed_bytes_and_is_inventoried(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            repo, _ = self.make_repo(root)
+            license_path = repo / "LICENSE"
+            license_path.write_bytes(b"committed internal license\n")
+            subprocess.run(["git", "-C", str(repo), "add", "LICENSE"], check=True)
+            subprocess.run(["git", "-C", str(repo), "-c", "user.name=Snapshot Test",
+                            "-c", "user.email=snapshot@example.invalid", "commit", "-qm", "license"], check=True)
+            commit = subprocess.check_output(["git", "-C", str(repo), "rev-parse", "HEAD"], text=True).strip()
+            license_path.write_bytes(b"later uncommitted license\n")
+            output = snapshot(repo, commit, root / "snapshot")
+            self.assertTrue((output / "packages/LICENSE").is_file(), "committed project license must travel with snapshot")
+            self.assertEqual((output / "packages/LICENSE").read_bytes(), b"committed internal license\n")
+            inventory = json.loads((output / "source-inventory.json").read_text())
+            entry = next(e for e in inventory["files"] if e["path"] == "packages/LICENSE")
+            self.assertEqual(entry["sha256"], hashlib.sha256(b"committed internal license\n").hexdigest())
+            self.assertEqual(license_path.read_bytes(), b"later uncommitted license\n")
+
     def test_existing_output_is_preserved(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -23,6 +23,8 @@ def _git(root: Path, *arguments: str) -> bytes:
 
 
 def _included(path: str) -> bool:
+    if path == "LICENSE":
+        return True
     parts = Path(path).parts
     if len(parts) < 2 or parts[0] not in {"apple", "apple-mlx"}:
         return False
@@ -43,7 +45,7 @@ def snapshot(root: Path, source_commit: str, output: Path) -> Path:
     resolved = _git(root, "rev-parse", "--verify", f"{source_commit}^{{commit}}").decode().strip()
     if resolved.lower() != source_commit.lower():
         raise ValueError("source_commit does not resolve to the requested exact commit")
-    tree = _git(root, "ls-tree", "-r", "-z", source_commit, "--", "apple", "apple-mlx")
+    tree = _git(root, "ls-tree", "-r", "-z", source_commit, "--", "apple", "apple-mlx", "LICENSE")
     entries: list[tuple[str, bytes]] = []
     for item in tree.split(b"\0"):
         if not item:
