@@ -1,5 +1,25 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新决定：solo、Nexus 渠道与校准数据缺口
+
+用户最新要求保持 **solo**；不再启动或重试独立审查代理。1be81e0 的 architect 审查
+因 429 失败，code-reviewer 按用户要求中断，**没有独立批准**。此前的一次审查授权已被此决定覆盖。
+
+用户提供内部 Nexus `https://nexus.ugaiot.com`，匿名清单与候选版本检索已成功；
+release hosted / consumer group 的候选入口及证据见 [F02 Nexus 交付准备](validation/f02-nexus-delivery.md)。
+组配置查询 403，hosted 策略查询因自动审批服务 429 未执行；不推定组成员、不可覆盖策略或发布权限。
+凭据未使用、未写入文件；没有上传或切换生产依赖。现有四模块包仍缺 AWT 闭包及许可定稿，不能直接发布。
+
+用户确认 **没有获授权的 F10 身份／PAD 校准数据集**。生产校准、阈值、识别准确率和
+LIVE/SPOOF 判定仍未验；保留 `THRESHOLD_UNVERIFIED`，不以 NASA 图片或合成数据代替，
+不新增拍摄、不重复要求用户操作手机。已有注册／删除／停用和图像生成验收保持。
+
+本轮仅完成渠道发现与外部输入澄清，0 新功能／benchmark／验收项通过；基础10/12、
+P4/P11 与发布仍 `open/not-ready`。最新 readiness：
+`artifacts/verification/p11-readiness-20261106-delivery-inputs/summary.json`。
+恢复时先看本节，不重复问许可、数据集是否存在或审查代理授权。下一项技术工作仍是
+F02 受支持的完整 publication 与许可附件；仓库策略和维护团队未核实前保留分发门槛。
+
 ## 2026-11-06 最新检查点：F09 内部闭源许可已选定并接线
 
 用户已选择“仅内部闭源使用和分发”；[内部分发约定](validation/internal-distribution.md)
