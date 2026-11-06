@@ -1,3 +1,26 @@
+## 2026-11-07 当前：LiteRT-LM新增5次资源样本，P11由9组增至10组
+
+[资源测量](validation/android-litertlm-resources-20261107.md)：普通afed APK在TECNO/API35同PID11157
+完成1warmup+5measure，6次固定红图/模型身份/输入保持/缓存文件清理均通过。
+整SDK调用含ModelStore验证/快照/native初始化send释放，p50/p95=56477.465/57068.401ms；
+测量RSS采样峰值范围3,905,445,888–3,978,801,152B，15275点，实际median22.325231/max63.891154ms。
+五次小样本不能当长期预算/自然质量或GPU分配通过。原始JSON760666B/SHAd1580dad…e19ad4a。
+主机ADB255/空输出后仅观察同run，最终completed/terminal6行；不重发。首次恢复遇not-found
+在变更前停止，重连后原test/Identity runner恢复、25私有摘要/4SR文件/权限/TTS保持，精确临时
+报告/包/owned工作目录清理并返回普通App。既有Gemma保留，无采集/下载/上传或普通App替换。
+final294380B test-only离线构建953原源码/14输入核验；e0438c0只指test编译，13份LM历史
+源码上下文相同不冒充整afed App提交。当前SDK清理改动未装机、不据此验收。
+cbc hy3完整候选194.892秒、0tool-use；父集成新增精确prompt身份负向回归，自己的新适配器
+schema bool缺陷也RED→GREEN。reducer11/P11聚焦44、完整tools440通过44.302秒。
+本地Ollama最终探针8.279秒无finding，仅单文件静态意见，不计独立发布批准。
+两助手原文/父处置各在.omx/artifacts，未重启429/403线路或未到恢复时间的OpenCode。
+P11 grouped现在7能力/10组，旧9组逐组相同；新增兼容benchmark样本5，warmup1排除。
+9保护/生产lock保持。原质量/GPU/能耗/资源预算/校准/交付/最低系统缺口继续，10/12、P4/P11
+open/release not-ready不晋级；既有3个待答复项不重复问。当前无需重连或重跑本项。
+证据`artifacts/verification/android-litertlm-resources-20261107/`，只读`freeze.py --verify`；
+最新P11仍以`benchmark/p11/grouped-report-manifest.json`为准。下一步继续剩余可执行门槛，
+不重复本轮推理/构建/测试，不改写旧ASR冻结证据。
+
 ## 2026-11-07 当前：Android ASR新增30次资源样本，P11由8组增至9组
 
 [资源补测](validation/android-asr-resources-20261107.md)：普通afed APK在TECNO/API35同PID8577

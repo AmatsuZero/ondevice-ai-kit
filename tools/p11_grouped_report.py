@@ -18,12 +18,12 @@ except ModuleNotFoundError:  # Direct `python tools/p11_grouped_report.py` invoc
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from tools import benchmark_report, mlxvlm_benchmark_report, validate_p11_readiness
 
-from tools.probes import android_asr_resource_report
+from tools.probes import android_asr_resource_report, android_litertlm_resource_report
 
 
 SCHEMA_VERSION = 1
 _KINDS = {"face", "mlxvlm", "tts-resource", "video-sr-resource", "video-sr-sdk-resource",
-          "asr-file-sdk-resource", "asr-android-resource"}
+          "asr-file-sdk-resource", "asr-android-resource", "litertlm-android-resource"}
 _KIND_CAPABILITIES = {
     "face": {"face-detection"},
     "mlxvlm": {"multimodal-apple"},
@@ -32,6 +32,7 @@ _KIND_CAPABILITIES = {
     "video-sr-sdk-resource": {"video-sr"},
     "asr-file-sdk-resource": {"speech-asr-file"},
     "asr-android-resource": {"speech-asr-android"},
+    "litertlm-android-resource": {"multimodal-android-litertlm"},
 }
 
 
@@ -419,6 +420,62 @@ def _android_asr_group(raw: dict[str, Any], entry: dict[str, Any], repo_root: Pa
     }
 
 
+def _android_litertlm_group(raw: dict[str, Any], entry: dict[str, Any], repo_root: Path) -> dict[str, Any]:
+    computed = android_litertlm_resource_report.summarize(raw)
+    evidence = [entry.get(key) for key in ("summary", "sourceManifest", "input")]
+    if not all(isinstance(item, dict) for item in evidence):
+        raise ValueError("invalid Android LiteRT-LM evidence entries")
+    paths = [_relative_path(repo_root, item.get("path"), "Android LiteRT-LM evidence path")
+             for item in (entry, *evidence)]
+    for index, path in enumerate(paths):
+        if any(_is_alias(path, earlier) for earlier in paths[:index]):
+            raise ValueError("Android LiteRT-LM evidence alias")
+    _, summary = _verify_file(repo_root, entry["summary"], "Android LiteRT-LM summary")
+    _, provenance = _verify_file(repo_root, entry["sourceManifest"], "Android LiteRT-LM provenance")
+    _verify_hash(repo_root, entry["input"], "Android LiteRT-LM input")
+    expected_summary = {**computed, "rawReportSha256": entry["sha256"],
+                        "sourceManifestSha256": entry["sourceManifest"]["sha256"]}
+    hashes = provenance.get("sourceHashes")
+    if (summary != expected_summary or type(provenance.get("schemaVersion")) is not int or provenance["schemaVersion"] != 1
+            or provenance.get("runtimeScope") != "installed-ordinary-app-fixed-input-resource"
+            or not isinstance(provenance.get("appSha256"), str)
+            or not re.fullmatch(r"[0-9a-f]{64}", provenance["appSha256"])
+            or provenance.get("installedAppSourceCommit") is not None
+            or not isinstance(provenance.get("frozenBuildSourceCommit"), str)
+            or not re.fullmatch(r"[0-9a-f]{40}", provenance["frozenBuildSourceCommit"])
+            or not isinstance(hashes, dict)
+            or hashes.get(entry["path"]) != entry["sha256"]
+            or hashes.get(entry["input"]["path"]) != entry["input"]["sha256"]
+            or raw["inputSHA256"] != entry["input"]["sha256"]
+            or provenance.get("modelSHA256") != raw["modelSHA256"]
+            or provenance.get("modelRevision") != raw["modelRevision"]
+            or not isinstance(raw.get("deviceModel"), str) or not raw["deviceModel"]
+            or type(raw.get("sdkInt")) is not int or raw["sdkInt"] < 26):
+        raise ValueError("invalid Android LiteRT-LM summary or provenance identity")
+    measured = raw["samples"][1:]
+    return {
+        "kind": "litertlm-android-resource", "p11Capability": "multimodal-android-litertlm",
+        "source": entry["path"], "sourceSha256": entry["sha256"],
+        "summary": dict(entry["summary"]), "sourceManifest": dict(entry["sourceManifest"]),
+        "device": raw["deviceModel"], "OS": f"Android API{raw['sdkInt']}",
+        "actualBackend": raw["backendId"], "scope": raw["timingMethod"],
+        "identity": {"sessionRunId": raw["runId"], "processIdentifier": raw["pid"],
+                     "appSha256": provenance["appSha256"], "input": dict(entry["input"]),
+                     "installedAppSourceCommit": None,
+                     "frozenTestBuildSourceCommit": provenance["frozenBuildSourceCommit"],
+                     "modelId": raw["modelId"], "modelRevision": raw["modelRevision"],
+                     "runtimeRevision": raw["runtimeRevision"], "modelSHA256": raw["modelSHA256"],
+                     "promptSHA256": raw["promptSHA256"], "maxOutputTokens": raw["maxOutputTokens"],
+                     "backendPolicy": raw["backendPolicy"]},
+        "runIds": [f"{raw['runId']}-sample-{row['index']}" for row in measured],
+        "timingsMs": {"requestWall": _nearest_rank([row["durationNs"] / 1e6 for row in measured])},
+        "quality": {"status": "unverified", "reason": "fixed red-word match is not natural image quality"},
+        "memory": {"status": "observed-sampled", "method": raw["measurementMethod"],
+                   "peakSampledBytes": _nearest_rank([row["rssPeakSampledBytes"] for row in measured])},
+        "energy": {"status": "unmeasured"}, "unverified": list(computed["unverified"]),
+    }
+
+
 def _video_sr_groups(raw: dict[str, Any], entry: dict[str, Any], repo_root: Path) -> list[dict[str, Any]]:
     run_id = raw.get("runId")
     device = raw.get("device")
@@ -739,6 +796,8 @@ def generate(manifest: dict[str, Any], repo_root: Path) -> dict[str, Any]:
             groups.append(_asr_file_sdk_group(raw, entry, repo_root))
         elif entry["kind"] == "asr-android-resource":
             groups.append(_android_asr_group(raw, entry, repo_root))
+        elif entry["kind"] == "litertlm-android-resource":
+            groups.append(_android_litertlm_group(raw, entry, repo_root))
         elif entry["kind"] == "video-sr-resource":
             groups.extend(_video_sr_groups(raw, entry, repo_root))
         else:
@@ -792,7 +851,7 @@ def _reject_output_aliases(
     candidates = [manifest.get("readiness"), *sources,
                   *(entry.get("summary") for entry in sources if isinstance(entry, dict) and entry.get("summary"))]
     for source in sources:
-        if isinstance(source, dict) and source.get("kind") in ("asr-file-sdk-resource", "asr-android-resource"):
+        if isinstance(source, dict) and source.get("kind") in ("asr-file-sdk-resource", "asr-android-resource", "litertlm-android-resource"):
             candidates.extend(source.get(key) for key in ("sourceManifest", "input"))
         if not isinstance(source, dict) or source.get("kind") not in ("video-sr-resource", "video-sr-sdk-resource"):
             continue

@@ -6,6 +6,13 @@
 
 ## 1. 所有助手：进程成功不等于任务成功
 
+- **ADB255与持久终态分别核验**：LiteRT-LM资源测量主机命令255/空输出，不能据此宣布失败并重跑。
+  同一runId后续自行写出6行completed/terminal，760666原始字节与设备SHA一致；没有提交第二次推理。
+  后续not-found使首次restore在变更前停止，恢复连接后仅继续原test恢复，推理不重做。
+  固定prompt不能只核对摘要形状；cbc按给定合同返回shape校验，父集成时新增wrong-valid-hex
+  用例后固定精确值。父新增P11适配器的schema bool接受也经负向RED修正。44聚焦/完整tools440通过。
+  证据`artifacts/verification/android-litertlm-resources-20261107/`。小样本/采样RSS仍不是质量或预算通过。
+
 - **JSON整数不能仅用相等判断**：cbc的ASR资源汇总候选把`True==1`、`False==0`和整数等值float
   接受为schema/count/index等合法整数；11项负向子用例复现后，用`type(value) is int`逐字段修正。
   不能靠`isinstance(value,int)`排除bool。10项reducer/40项聚焦及完整tools426通过；

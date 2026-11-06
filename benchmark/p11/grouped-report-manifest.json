@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261107-android-asr-resources/summary.json",
-    "sha256": "ca0dcf334b2be1301d29112a5cb9def2a61c4146f0b9ac6e22d9bb1101b6a29a"
+    "path": "artifacts/verification/p11-readiness-20261107-android-litertlm-resources/summary.json",
+    "sha256": "e98d645300b78552711483d4f9d79a9ab862fa270d8274f1ee926b89c587aa14"
   },
   "schemaVersion": 1,
   "sources": [
@@ -152,6 +152,24 @@
       "summary": {
         "path": "artifacts/verification/android-asr-resources-20261107/summary.json",
         "sha256": "68b3d6960d88e51738b4f4dfd1403e53914532e62ec13a38c24e653165d68fc2"
+      }
+    },
+    {
+      "kind": "litertlm-android-resource",
+      "p11Capability": "multimodal-android-litertlm",
+      "path": "artifacts/verification/android-litertlm-resources-20261107/device-report.json",
+      "sha256": "d1580dad6fb640233ea8a7a1b62059861f3ef8de0b3b53ad66d8da7c6e19ad4a",
+      "summary": {
+        "path": "artifacts/verification/android-litertlm-resources-20261107/summary.json",
+        "sha256": "0fc3e37a705f54580013450e0565fbec7ccb6df35eea27061c978931a1fc3372"
+      },
+      "sourceManifest": {
+        "path": "artifacts/verification/android-litertlm-resources-20261107/source-manifest.json",
+        "sha256": "7a35774e4f62a2263fc8bc0ff92b9cf61395fb3291184b88f7b33e42844dbd30"
+      },
+      "input": {
+        "path": "artifacts/verification/android-litertlm-resources-20261107/test-assets/solid-red-256.png",
+        "sha256": "991b54f01af493986b674dc2eedbc0b3cdf5aa9c9518f16dc379ccd6d9c9d3aa"
       }
     }
   ]

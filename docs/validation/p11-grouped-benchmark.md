@@ -1,8 +1,15 @@
 # P11 分组 benchmark 快照
 
-2026-11-07 当前：[Android 离线 ASR 资源](android-asr-resources-20261107.md)新增真实 TECNO/API35
+2026-11-07：[Android LiteRT-LM资源](android-litertlm-resources-20261107.md)新增普通afed APK
+在TECNO/API35的1预热+5测量，6次固定红图/模型身份/输入保持/缓存清理均通过；整SDK调用
+p50/p95=56477.465/57068.401ms，采样进程RSS峰值3,905,445,888–3,978,801,152B。
+P11现7项能力/10组，旧9组不变；原App/test/Identity runner和私有文件已恢复/保持，普通App已返回。
+完整tools440通过；cbc候选经父固定prompt身份、Ollama限定意见无finding。ADB255由同run持久终态
+核实，不重发推理；临时掉线只恢复原test。基础10/12、P4/P11 open及release not-ready保持。
+
+2026-11-07 上一轮：[Android 离线 ASR 资源](android-asr-resources-20261107.md)新增真实 TECNO/API35
 同 PID 的5次预热和30次测量，完整 SDK 请求 p50/p95=`1807.033/1827.525ms`，
-采样进程 RSS 峰值范围=`471,339,008–481,583,104B`。现在为 **6项能力/9组**，原8组不变。
+采样进程 RSS 峰值范围=`471,339,008–481,583,104B`。当时为 **6项能力/9组**，原8组不变。
 原普通 `afed156b` APK与测试包/模型/设置均保持或恢复；这不是新SDK清理代码的运行证据。
 当前 readiness 以 `benchmark/p11/grouped-report-manifest.json` 为准；以下11月5日快照是历史。
 自然 CER/WER、真实峰值/SDK归因/能耗、持续预算及P4/P11发布缺口保留。
@@ -59,12 +66,12 @@
 python3 tools/p11_grouped_report.py \
   benchmark/p11/grouped-report-manifest.json \
   --repo-root . \
-  --output artifacts/verification/p11-grouped-20261107-android-asr-resources/summary.json
+  --output artifacts/verification/p11-grouped-20261107-android-litertlm-resources/summary.json
 ```
 
 工具先验证 readiness 快照及其 `sourceHashes` 指向的全部证据哈希，再验证所有 benchmark 来源哈希和仓库内路径，按来源调用 face/MLXVLM 的既有 reporter 或 TTS/Video SR 的专用校验与重算；全局重复 `runId`、输出覆盖输入、同路径/软链接/现有硬链接别名、变更后的来源或逃逸路径均拒绝。所有校验完成后才写输出。
 
-来源 `kind` 与 P11 能力映射也是固定合同：`face` 只能报告 `face-detection`，`mlxvlm` 只能报告 `multimodal-apple`，`tts-resource` 只能报告 `speech-tts`，`asr-file-sdk-resource` 只能报告 `speech-asr-file`，`video-sr-resource` 与 `video-sr-sdk-resource` 都只能报告 `video-sr`。TTS 同时核对原始报告、既有摘要及两者的哈希关系，重算五次逐 run 最近秩百分位；SDK 文件 ASR 同时核对原始报告、bounded summary、来源清单及固定 CAF 的哈希关系，五次不同成功 run 的后端/归一化文本身份和资源值，再重算最近秩百分位。系统 Video SR 在单次成功报告内核对两路输入/帧数/设备身份，分别从 48 个逐帧耗时重算最近秩百分位，并以 manifest 哈希绑定输入、参考视频、两路输出 MOV 和两份质量 JSON。SDK Video SR 核对五个不同请求 runId、整请求 wall time、采样 RSS、输入和五路输出哈希，以及首末轮质量报告与相应输出、同一参考解码帧的身份。质量始终 `unverified`。工具拒绝把一个来源重标记成另一个能力，也拒绝将系统逐帧与 SDK 整请求的数据合为一个统计组。
+来源 `kind` 与 P11 能力映射也是固定合同：`asr-android-resource` 只能报告 `speech-asr-android`，`litertlm-android-resource` 只能报告 `multimodal-android-litertlm`；两者核对原报告、独立摘要、来源清单、固定输入与各自预热/测量窗口，LiteRT-LM另固定模型/revision/runtime/prompt/预算身份。`face` 只能报告 `face-detection`，`mlxvlm` 只能报告 `multimodal-apple`，`tts-resource` 只能报告 `speech-tts`，`asr-file-sdk-resource` 只能报告 `speech-asr-file`，`video-sr-resource` 与 `video-sr-sdk-resource` 都只能报告 `video-sr`。TTS 同时核对原始报告、既有摘要及两者的哈希关系，重算五次逐 run 最近秩百分位；SDK 文件 ASR 同时核对原始报告、bounded summary、来源清单及固定 CAF 的哈希关系，五次不同成功 run 的后端/归一化文本身份和资源值，再重算最近秩百分位。系统 Video SR 在单次成功报告内核对两路输入/帧数/设备身份，分别从 48 个逐帧耗时重算最近秩百分位，并以 manifest 哈希绑定输入、参考视频、两路输出 MOV 和两份质量 JSON。SDK Video SR 核对五个不同请求 runId、整请求 wall time、采样 RSS、输入和五路输出哈希，以及首末轮质量报告与相应输出、同一参考解码帧的身份。质量始终 `unverified`。工具拒绝把一个来源重标记成另一个能力，也拒绝将系统逐帧与 SDK 整请求的数据合为一个统计组。
 
 ## 当前分组结果
 
@@ -77,6 +84,7 @@ python3 tools/p11_grouped_report.py \
 | Speech TTS | iPhone / iOS 27.0.1 | `apple.avspeech` | duration `2779.726917 / 2779.791875 ms`（5次，先有1次 warm-up） | `en-US` Samantha 固定文本；约10 ms 间隔采样 RSS 峰值 p50/p95=`44,810,240 / 44,810,240 B`，真实峰值、自然音质、断网、GPU/energy 未验 |
 | Speech ASR file SDK | iPhone / iOS 27.0.1 | `apple.speech.recognizer` | duration `76.484458 / 93.435792 ms`（5次，先有1次 warm-up） | 固定合成 `en-US` CAF，5/5 归一化全文匹配；约10 ms 间隔采样进程 RSS 峰值 p50/p95=`36,913,152 / 36,929,536 B`；麦克风生命周期另有有界真机证据，自然 CER/WER、断网、真实峰值/GPU/energy 未验 |
 | Speech ASR Android SDK | TECNO KM9 / Android API35 | `sherpa.onnx.whisper` | request wall `1807.033 / 1827.525 ms`（30次，先有5次 warm-up） | 固定合成英文；含校验/VAD/native构造解码释放；采样进程RSS峰值范围471,339,008–481,583,104B；普通afed APK专属，不是当前新SDK清理代码、自然质量或生产资源预算验收 |
+| Multimodal Android SDK | TECNO KM9 / Android API35 | `litertlm.android` Gemma3n E2B/0.18.1/CPU_TEXT_GPU_VISION | whole generate `56477.465 / 57068.401 ms`（5次，先有1次warm-up） | 固定红图；含3.6GB模型校验/快照/native创建send释放；采样RSS峰值范围3,905,445,888–3,978,801,152B，非自然质量/真实GPU峰值或持续预算验收 |
 | Video SR | iPhone17,2 / iOS 27.0.1 | `apple.videotoolbox.sr` | frame processing `93.619833 / 95.641250 ms`（48帧） | 进程 RSS 采样峰值增量 `87,801,856 B`；单素材编码保真度 PSNR/SSIM=`36.776212/0.979250`，主观质量未验 |
 | Video SR baseline | iPhone17,2 / iOS 27.0.1 | `apple.coreimage.bicubic` | frame processing `1.457208 / 1.583791 ms`（48帧） | 顺序执行的进程 RSS 采样峰值增量 `507,904 B`；同素材编码保真度 PSNR/SSIM=`38.872866/0.983506`，不是独立冷启动对照 |
 | Video SR SDK 整请求 | iPhone17,2 / iOS 27.0.1 | `apple.videotoolbox.sr` | request wall `5110.416958 / 6533.880333 ms`（5次，首轮含预热） | 约10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`77,824,000 / 259,391,488 B`；首末轮单素材编码保真度 PSNR/SSIM=`36.777730/0.979295`、`36.776212/0.979250`，主观质量未验 |
@@ -86,7 +94,7 @@ python3 tools/p11_grouped_report.py \
 
 ## 覆盖与剩余缺口
 
-readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Speech ASR file、Speech ASR Android、Video SR 和 multimodal Apple 具有兼容的原始 grouped benchmark，共 **6项能力/9组**。其余3项在 grouped coverage 中保持 `unverified`：Multimodal Android LiteRT-LM、Face identity/liveness、Camera demo resource release。这表示缺少兼容分组报告，不表示这些能力均未实现。当前功能状态以[P11矩阵](p11-status-matrix-20261027.md)为准；readiness校验的路径/哈希计数由工具直接输出，九行仍有gap。
+readiness 的9项能力全部出现在输出 coverage 中；face detection、Speech TTS、Speech ASR file、Speech ASR Android、Video SR、multimodal Apple 和 multimodal Android LiteRT-LM 具有兼容的原始 grouped benchmark，共 **7项能力/10组**。其余2项在 grouped coverage 中保持 `unverified`：Face identity/liveness、Camera demo resource release。这表示缺少兼容分组报告，不表示这些能力均未实现。当前功能状态以[P11矩阵](p11-status-matrix-20261027.md)为准；readiness校验的路径/哈希计数由工具直接输出，九行仍有gap。
 
 旧 `f11-videosr-20261030` 成功报告缺少设备/系统/run 身份和逐帧原始值，仍不作为本次 grouped 来源；本次仅使用新真机成功报告。五次 SDK 整请求耗时及进程 RSS 样本在 `video-sr-sdk-resource` 独立组，不将约 5 秒的解码/缩放/编码全程与约 94 ms 的逐帧缩放混成同一统计组。所有 Video SR 质量报告和分组 `quality.status` 均保持 `unverified`，不把单素材 PSNR/SSIM 升级为主观质量通过。文件 ASR 的新分组仅使用 `SpeechRecognitionClient` SDK client 的五次资源数据；既有直连 Speech framework 探针仍是独立证据，不合组。身份、相机与 LiteRT-LM 同理保留各自证据和缺口。
 

@@ -1,9 +1,16 @@
 # Foundation 后续专项
 
+2026-11-07：[Android LiteRT-LM资源](android-litertlm-resources-20261107.md)新增普通afed APK
+在TECNO/API35的1预热+5测量，6次固定红图/模型身份/输入保持/缓存清理均通过；整SDK调用
+p50/p95=56477.465/57068.401ms，采样进程RSS峰值3,905,445,888–3,978,801,152B。
+P11现7项能力/10组，旧9组不变；原App/test/Identity runner和私有文件已恢复/保持，普通App已返回。
+完整tools440通过；cbc候选经父固定prompt身份、Ollama限定意见无finding。ADB255由同run持久终态
+核实，不重发推理；临时掉线只恢复原test。基础10/12、P4/P11 open及release not-ready保持。
+
 2026-11-07：[Android ASR资源补测](android-asr-resources-20261107.md)新增普通afed APK在TECNO/API35
 5warmup+30measure，固定英文35/35，整调用p50/p95=1807.033/1827.525ms，进程采样RSS峰值
 471,339,008–481,583,104B。原App/test、25私有摘要、4SR文件与权限设置保持或恢复。
-cbc汇总候选修正严格类型后通过10项检查，P11聚焦40/完整tools426通过；现在6项能力/9组。
+cbc汇总候选修正严格类型后通过10项检查，P11聚焦40/完整tools426通过；当时6项能力/9组。
 无新采音/模型/下载/上传，不证明当前SDK新清理代码或自然质量/长期资源预算，10/12及发布门禁不变。
 
 2026-11-07：[真实SR输出释放错误](android-sr-output-cleanup-20261107.md)经旧租约2项RED后修复。

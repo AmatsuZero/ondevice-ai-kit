@@ -1,5 +1,12 @@
 # P11 状态矩阵与发布结论
 
+2026-11-07：[Android LiteRT-LM资源](android-litertlm-resources-20261107.md)新增普通afed APK
+在TECNO/API35的1预热+5测量，6次固定红图/模型身份/输入保持/缓存清理均通过；整SDK调用
+p50/p95=56477.465/57068.401ms，采样进程RSS峰值3,905,445,888–3,978,801,152B。
+P11现7项能力/10组，旧9组不变；原App/test/Identity runner和私有文件已恢复/保持，普通App已返回。
+完整tools440通过；cbc候选经父固定prompt身份、Ollama限定意见无finding。ADB255由同run持久终态
+核实，不重发推理；临时掉线只恢复原test。基础10/12、P4/P11 open及release not-ready保持。
+
 2026-11-07 Android ASR新增可分组资源：普通afed APK在TECNO/API35同PID完成5warmup+30measure，
 35次固定英文/后端/输入保持通过；SDK整调用p50/p95=1807.033/1827.525ms，采样进程RSS峰值
 471,339,008–481,583,104B。原App/test/25私有摘要/4SR文件/权限设置恢复或保持。
