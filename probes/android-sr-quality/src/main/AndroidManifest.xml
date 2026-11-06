@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application android:label="Controlled SR Quality Probe" android:testOnly="true"
+        android:allowBackup="false" android:hasCode="true" />
+    <instrumentation android:name="io.ondeviceai.litertsr.ControlledSrInstrumentation"
+        android:targetPackage="io.ondeviceai.probe.srquality" android:functionalTest="true" />
+</manifest>

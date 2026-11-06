@@ -1,5 +1,22 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 当前入口：Android 同编解码 SR 对照工具已构建，待真机
+
+[运行协议](../probes/android-sr-quality/README.md)：独立 test-only 包
+`io.ondeviceai.probe.srquality`，不覆盖普通 App/test/模型。五份生产输入快照仅增加
+codec-name observer；nearest → Android bilinear → ESRGAN 共用原 decoder/color/encoder/mux。
+私有 AtomicFile 记录进度/失败/终态，输出要求 1280×720、48帧、无音轨及相同 codec 选择。
+首次构建的 completedFrames 字段错误已修复，离线 assembleDebug/lintDebug 通过
+（0 errors/4 warnings），318 tools tests 通过。未运行设备/取消/失败报告验证，不是质量通过。
+
+证据与冻结 APK：`artifacts/verification/android-sr-controlled-probe-20261106/`。
+本轮新鲜 ADB 清单为空；设备连接后先检查包/活动 instrumentation，验证缺输入失败报告，
+再用已有授权 CRF18 clip/ESRGAN 模型执行一次对照，回读同一 runId，不因断连重启。
+先核对 APK/source 输入摘要；源代码若变更需重新 prepare 到新目录。
+不重测旧历史分数、不改 halo/生产 encoder、不替代成模拟器结论。
+仅补本地工具，没有新 benchmark 样本；readiness 仍引用下节已提交 fidelity 快照。
+solo、九保护路径/生产 lock、10/12、P4/P11/open/not-ready 和全部后置门槛保持。
+
 ## 2026-11-06 当前入口：Android SR 真实输出逐帧质量已测量
 
 复用历史 TECNO 48帧输出，无新推理/装机/采集：[实际结果及限制](validation/f11-android-sr-fidelity-20261106.md)。
