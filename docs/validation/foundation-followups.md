@@ -1,9 +1,19 @@
 # Foundation 后续专项
 
+2026-11-07 新工具增量：[F10 manifest预检](f10-calibration-manifest.md)已实现，
+23合成测试/独立CLI smoke过，声明用途与证据/媒体摘要、主体/会话/源媒体组隔离受校验，
+不取得数据或校准阈值。[Nexus归档核对](f02-nexus-delivery.md)经Copilot候选/父RED→GREEN修正，
+9测试过，实际`.6`115成员/108791304B与原计划一致；旧归档/计划保持，无取件或上传。
+Copilot限定终审的Cc URL漏检已由两工具5真实失败复现并修正，最终聚焦32过，最终完整tools489项/47.714秒通过；收据见
+`artifacts/verification/f10-calibration-manifest-20261107/tools-suite-after-review.json`。
+Identity hy4free原8608因`Max turns (1) exceeded`自然终态/无候选；仅改调用轮数配置，独立97856仍运行，
+不超时/重发。未构建测试包或操作设备，P11仍10组；授权数据/score指标/生产校准、Nexus具体上传范围/
+远端消费及原资源门槛继续开放，基础10/12、P4/P11/release不晋级。
+
 2026-11-07：[F10校准探索](f10-calibration-exploration-20261107.md)由cbc hy3完成候选研究，
 主代理核验官方来源并更正IJB停止分发、Replay许可和SiW归属等错误。London Set有明确CC BY版权
 许可但本项目具体用途／同意范围未确认；常见PAD数据不能自动用于企业生产校准。
-数据／协议manifest、split/score校验与离线指标可先推进，尚未实现；未下载／采集／联系第三方／改阈值。
+该探索轮未实现工程；后续manifest已实现见上，score协议与离线指标仍待推进；未下载／采集／联系第三方／改阈值。
 F10不再作为“完全无事可做”的等待项，生产数据和验收门槛仍保留。
 
 

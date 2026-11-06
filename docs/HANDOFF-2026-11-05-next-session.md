@@ -1,4 +1,29 @@
-## 2026-11-07 当前：F10校准探索已完成，Identity资源探针仍在生成
+## 2026-11-07 当前：F10/Nexus工具已实现，Identity探针已修正CLI轮数限制
+
+用户要求增加Nexus/Copilot任务，并明确hy3做短任务、复杂实现放hy4档，免费优先。
+新[F10 manifest工具](validation/f10-calibration-manifest.md)实现声明用途/证据文件摘要、
+媒体摘要、calibration/test主体与源媒体组隔离、enrollment/probe会话/源媒体隔离及PAD标签/PAI校验。
+23项合成测试与独立CLI smoke通过；仅输出聚合与unverified状态，不导入真人数据或生成阈值。
+split/score协议完整性、离线指标、candidate-policy/report绑定仍需继续；实际数据授权缺口不关闭。
+
+[Nexus计划/归档核对](validation/f02-nexus-delivery.md)由Copilot先审准备脚本，再生成独立核对器候选。
+主代理以真实RED修正Maven路径索引、URL歧义文件名和nofollow能力缺失；9项合成测试通过。
+实际`.6`108791304B归档与原计划115项逐成员一致，二者摘要保持；无网络/凭据/上传或远端消费。
+具体hosted/本次候选上传范围待答复继续保留，不重复提问；旧404未刷新、不改写冻结包。
+Copilot限定终审61.71秒/0工具发现Unicode Cc URL漏检，主代理在两工具复现5项失败后修正，
+32项最终聚焦过，最终完整tools489项/47.714秒通过，源码/测试前后摘要一致；收据以`artifacts/verification/f10-calibration-manifest-20261107/tools-suite-after-review.json`为准。
+早先488测试结果是此修复前的中间收据，不冒作最终源码验证。9保护/Apple lock保持，未操作设备。
+
+原Identity hy4free session8608自然结束2277.90秒，stdout为空、stderr`Max turns (1) exceeded`。
+无可用Kotlin候选；不是父代理超时或429。原件保留后，仅移除调用`--max-turns 1`限制，
+新独立hy4free任务session97856正在运行：`.omx/artifacts/cbc-identity-resource-probe-turns-fix-20261107/`。
+继续观察同一进程，不因静默/时长重发；代码验收/测试包构建/暂存/安装/资源推理仍未开始。
+既有reducer/P11与50聚焦/34协议检查保持，实际P11仍7能力/10组，没有新Identity样本。
+根AGENTS与agent-pitfalls记录了轮数坑及工具分工；原生429/Qoder403/dsh/OpenCode旧失败不重试。
+本轮为实际工程progress；基础10/12、P4/P11 open、release not-ready，完整roadmap目标继续active。
+下一步取得97856的真实终态后按既有Identity计划集成；其运行时可推进F10 score/指标工具或其他未完成交付门槛。
+
+## 2026-11-07 上轮：F10校准探索已完成，Identity资源探针仍在生成
 
 用户明确要求交给AI Agent探索F10；cbc hy3候选89.495秒自然完成、完整JSON/0工具。
 主代理随后核验官方页面、纠正过时入口／归属／许可／统计建议，见

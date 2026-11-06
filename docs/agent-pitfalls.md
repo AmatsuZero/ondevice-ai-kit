@@ -51,6 +51,13 @@
 
 ## 2. cbc：结果格式与长任务
 
+- **max-turns不是耗时上限但仍会截断复杂任务**：Identity资源Kotlin候选自然运行2277.90秒后
+  exit0/stdout0B，stderr明确`Max turns (1) exceeded`。无候选，不是父进程超时或额度结论。
+  原任务已终态，保留原文后仅修调用配置：新独立`hy4free`任务移除`--max-turns 1`，
+  工具/MCP继续禁用，不扩大权限或改全局设置；新结果须独立验收，不能提前计成功。
+  根AGENTS通用cbc候选配方已去掉该限制；证据`cbc-identity-resource-probe-20261107/`
+  与`cbc-identity-resource-probe-turns-fix-20261107/`（均在`.omx/artifacts/`）。
+
 - **数据集候选必须核验当前官方入口**：cbc本次F10研究把已于2023-03-14停止分发的IJB写成可填表下载，
   把Replay-Attack的1300段写为1200、SiW-M归属／含义写错；父代理用官方页面更正。
   CelebA-Spoof／Replay的非商业限制不因“内部使用”自动消失，code license不等于数据授权。
@@ -110,6 +117,16 @@
 - 独立 README、chunker、run/collect 候选分别已返回；候选仍须主代理审查和验证。证据：`.omx/artifacts/agy-candidate-readme-20261106/`、`agy-apk-chunk-plan-20261106/`、`agy-candidate-run-collect-20261106/`。
 
 ## 6. Copilot：空工具列表与 JSONL
+
+- **路径层级/传输语义必须实际测**：本轮Nexus核对器候选把`org/jetbrains/skiko/module/version/file`
+  的module/version索引提前一层，自己的成功测试真实失败；父修正后7项过。再用带`?`/`#`/
+  `%2f`/空白的成员文件名和缺少nofollow支持做出6项真实RED，再以Maven文件名字符集和
+  fail-closed修正，9项过，实际`.6`115成员核对通过。保留原候选，不能说模型原样完成；
+  证据`.omx/artifacts/copilot-f02-archive-validator-20261107/`与
+  `artifacts/verification/f02-nexus-plan-archive-20261107/`。旧冻结计划/归档保持。
+- **待办不是完成声明**：首次Nexus审查把`remainingBeforeUpload`列表内“Exact hosted destination
+  confirmed”误当作当前已确认。它是前置条件列表；父处置否决此finding，不改旧证据。
+  同次调用内部WebSocket`ECONNRESET`后CLI自然重试并完成，不是父代理重复请求或429。
 
 - 本轮安装 `copilot 1.0.106`，`--model auto` 实际选择 `gpt-6-luna`。这是该次计划/账户可用模型的结果，不是永久免费目录。
 - `--available-tools=` 被 CLI 接受，但工具 schema 仍出现在元数据；不能声称该参数已彻底移除所有工具。候选任务加显式 shell/read/write/url/memory deny，关闭内置及保存的自定义 MCP，并审查实际工具请求/执行事件。本轮已审查的调用未发生工具调用。
