@@ -1,4 +1,21 @@
-## 2026-11-07 当前：Android语音两个清理缺陷已修，qoder403停止
+## 2026-11-07 当前：Sherpa错误与取消保留已修，本机Ollama协助
+
+[Sherpa清理验证](validation/android-sherpa-cleanup-20261107.md)：decoder.close原plain finally
+会覆盖解码错误和CancellationException；原实现8项session测试中两项新增回归真实RED。
+内部decoder继承AutoCloseable并用现有stdlib use，保留主错误/suppressed清理错误，删除手写finally。
+实际Sherpa14+启用Sherpa的Demo56共70测试通过；speech29为up-to-date，不称新执行；lint0error/1warning。
+首轮缺本地Maven配置的失败未跑测试，不计产品RED；复用冻结AAR/POM及7模型/通知，9输入摘要长度核验。
+证据`artifacts/verification/sherpa-cleanup-20261107/`，只读`freeze.py --verify`。
+
+本机Ollama qwen3-coder:30b两文件静态意见14.429秒完成，接受已复现的覆盖问题，
+否决取消时立即放行仍在同步JNI的建议和异常身份假设。原文/父处置
+`.omx/artifacts/ollama-sherpa-session-20261107/`；不计最终源码独立审查，未重启429/403线路。
+本轮无设备/采集/下载/上传；普通App模型、9保护与生产lock保持，10/12、P4/P11/release不晋级。
+此前.6具体hosted上传范围、TTS外部provider及qoder optional矩阵fallback仍待回复，不重复询问。
+最新P11以manifest指针为准。下一步继续剩余生产交付与尚未证明的后端源码审查，
+不重复本轮已过host测试、既有设备推理、.6 SDK构建或失败审查器。
+
+## 2026-11-07 上一轮：Android语音两个清理缺陷已修，qoder403停止
 
 [语音清理验证](validation/android-speech-cleanup-20261107.md)：原生只读审查发现ASR异步progress异常
 逃逸，主代理发现SpeechClient关闭首个backend报错后其余不释放。两项原实现真实RED后分别修复；

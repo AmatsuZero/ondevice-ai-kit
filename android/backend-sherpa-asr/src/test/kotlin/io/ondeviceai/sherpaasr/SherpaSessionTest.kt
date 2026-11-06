@@ -93,6 +93,48 @@ class SherpaSessionTest {
         Unit
     }
 
+    @Test fun decoderCleanupFailureKeepsDecodeFailureAndReleasesAdmission() = runBlocking<Unit> {
+        val pcm = floatArrayOf(.1f, .2f)
+        val decodeFailure = IllegalArgumentException("decode failed")
+        val cleanupFailure = IllegalStateException("decoder close failed")
+        var releases = 0
+        var creates = 0
+        val session = SherpaSession({
+            if (creates++ == 0) object : SherpaDecoder {
+                override fun decode(samples: FloatArray, language: String): String = throw decodeFailure
+                override fun close() { releases++; throw cleanupFailure }
+            } else Decoder()
+        })
+
+        val failure = assertFailsWith<IllegalArgumentException> { session.transcribe("en") { pcm } }
+
+        assertEquals("decode failed", failure.message)
+        assertEquals(listOf(cleanupFailure), decodeFailure.suppressed.toList())
+        assertEquals(1, releases)
+        assertTrue(pcm.all { it == 0f })
+        assertEquals("recognized", session.transcribe("en") { floatArrayOf(.3f) }.transcript)
+        session.close()
+    }
+
+    @Test fun decoderCleanupFailureCannotReplaceCancellation() = runBlocking<Unit> {
+        val pcm = floatArrayOf(.1f)
+        val cancellation = CancellationException("decode cancelled")
+        val cleanupFailure = IllegalStateException("decoder close failed")
+        var releases = 0
+        val session = SherpaSession({ object : SherpaDecoder {
+            override fun decode(samples: FloatArray, language: String): String = throw cancellation
+            override fun close() { releases++; throw cleanupFailure }
+        } })
+
+        val failure = assertFailsWith<CancellationException> { session.transcribe("en") { pcm } }
+
+        assertEquals("decode cancelled", failure.message)
+        assertEquals(listOf(cleanupFailure), cancellation.suppressed.toList())
+        assertEquals(1, releases)
+        assertTrue(pcm.all { it == 0f })
+        session.close()
+    }
+
     private class Decoder(val text: String = "recognized", val action: () -> Unit = {}) : SherpaDecoder {
         var language: String? = null
         var releases = 0

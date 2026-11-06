@@ -5,9 +5,9 @@ import io.ondeviceai.core.ClosedException
 import io.ondeviceai.speech.SpeechRecognitionResult
 import kotlinx.coroutines.*
 
-internal interface SherpaDecoder {
+internal interface SherpaDecoder : AutoCloseable {
     fun decode(samples: FloatArray, language: String): String
-    fun close()
+    override fun close()
 }
 
 /** Owns one capture/decode at a time. Synchronous JNI is drained before releasing admission. */
@@ -36,15 +36,12 @@ internal class SherpaSession(
                 require(waveform.isNotEmpty() && waveform.size <= 160_000 && waveform.all { it.isFinite() }) {
                     "expected at most ten seconds of finite mono 16kHz samples"
                 }
-                val engine = decoder()
-                try {
+                decoder().use { engine ->
                     currentCoroutineContext().ensureActive()
                     val text = engine.decode(waveform, language)
                     currentCoroutineContext().ensureActive()
                     check(text.isNotBlank()) { "speech recognizer returned no result" }
                     SpeechRecognitionResult(BACKEND_ID, text)
-                } finally {
-                    engine.close()
                 }
                 } finally { waveform.fill(0f) }
             } finally {

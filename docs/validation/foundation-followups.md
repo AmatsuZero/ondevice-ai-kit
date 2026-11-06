@@ -2,6 +2,10 @@
 
 2026-11-06 F02/F12增量：`.6`自身SDK双iOS链接15任务及基于新框架的unsigned App74材料
 保留通过；115个新Nexus精确路径匿名HEAD均404，上传范围待答复，远端消费未执行。
+2026-11-07：[Sherpa原始错误/取消保留](android-sherpa-cleanup-20261107.md)两项原实现RED后，
+改用stdlib use保留原错误和suppressed释放错误；实际后端14+启用Sherpa Demo56全过、lint0error/1warning。
+本机Ollama确认一项、另一即时放行JNI建议否决，不计最终独立审查；无设备/下载/采集/上传，门禁不变。
+
 2026-11-07：[Android语音两个清理缺陷](android-speech-cleanup-20261107.md)经真实RED后修复：
 registry逐backend关闭并聚合错误，ASR异步progress异常归入session并释放recognizer。
 speech29/ASR14/TTS3/Demo56共102JVM测试通过，两模块lint无error/6warning；新四文件复审429无结果。

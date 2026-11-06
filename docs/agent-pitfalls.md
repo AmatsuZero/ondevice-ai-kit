@@ -113,6 +113,7 @@
 
 ## 12. Ollama：本地连通、完成标志与候选质量
 
+- 2026-11-07 Sherpa两文件本机审查14.429秒返回。异常覆盖发现经原实现两项真实RED确认；但“取消时立即放行下一次同步JNI”违反drain前不得重入的合同，已否决。其“协程异常身份保留”假设同样错误。使用标准库use的修复由主代理实现并实测，不把预修复静态意见当最终独立批准。证据`.omx/artifacts/ollama-sherpa-session-20261107/`。
 - F02两文件审查12.58秒返回：索引/材料未校验一条已用真实Gradle复现并修复；另一条建议删除source JAR中的notices，与明确交付契约冲突而未采纳。不能把助手的一组建议全部接受，或把本地技术补充当独立许可批准。证据 `.omx/artifacts/ollama-f02-publication-review-20261106/`。
 - `ollama --version` 在受限沙箱提示无法连接，不代表服务没开。经正常获授权 host 路径，只读 localhost 目录成功，确认 `qwen3-coder:30b` 已安装、约18GB；不要因为沙箱警告另起服务或重新下载。
 - 固定 `127.0.0.1:11434`，不继承可能指向其他主机的 `OLLAMA_HOST`；本轮通过禁代理的标准库 HTTP 请求访问本机，没有云端调用。
@@ -148,3 +149,8 @@
 
 - 2026-11-07关闭/ASR回归首次GREEN在跨协程`assertSame`失败；实际错误类型和内容相同，堆栈含协程恢复边界。官方文档说明恢复可复制异常并将原异常设为cause，suppressed保留在原异常。测试改核对类型/内容、必要时原cause及实际close/destroy效果，不为测试改生产传播逻辑或全局关闭恢复。原RED/GREEN及文档见`artifacts/verification/speech-cleanup-20261107/`。
 - Gradle在speech测试失败后未执行ASR任务，但ASR旧XML仍存在。不能把XML存在当本轮执行证据；检查准确task行和状态，区分executed/cached/not-run，跨模块必要时用`--continue`。本轮旧XML已明确排除，后续实际ASR14与speech29、TTS3/Demo56全过；源码/收据绑定，不能把修正测试前的失败称为成功。
+
+## 15. Sherpa离线构建：指定已冻结的本地Maven仓库
+
+- 直接运行Sherpa模块`--offline`会报`No cached version of com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1 available`，测试尚未启动，不能当产品RED或重新下载。复用`artifacts/verification/android-committed-candidate-20261105/inputs/maven/sherpa`，以`-PsherpaMavenRepo=<绝对路径>`显式传入；先按同目录`inputs.json`的externalInputs校验AAR/POM摘要和长度。
+- Demo真实启用此后端还需`-PenableSherpaAsr=true -PsherpaAsrAssetsDir=<已冻结inputs/assets/sherpa-whisper-tiny绝对路径>`，核对全部七份既有模型/通知文件；默认Demo测试不等于启用后端配置验证。本轮14后端+56启用Demo测试实际执行通过，speech29为up-to-date。不修改全局Maven、不联网下载、不把host通过当设备JNI验收。证据`artifacts/verification/sherpa-cleanup-20261107/`。
