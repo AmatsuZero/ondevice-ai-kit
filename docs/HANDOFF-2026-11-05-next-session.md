@@ -1,5 +1,15 @@
 # Foundation / Demo 新会话交接 — 2026-11-05
 
+## 2026-11-06 最新检查点：Apple 文件夹导入完整普通流程已验收
+
+先读 [Apple 导入验收收尾](HANDOFF-2026-11-06-apple-import-accepted.md)。用户已完成取消、
+错误 ONNX 目录、正确目录重试导入、一次普通生成及清除输入；无需再操作或杀 App。
+安装14文件SHA匹配，无私有回退源；隔离App冷启动复用就绪后已停止，原Combined PID2911
+已返回前台，43个原App安装URL保持。本次关闭1个实际验收子项，0新benchmark，
+基础10/12、P4/P11及发布仍open/not-ready。下方准备记录和等待问题均为历史，不重复。
+最新readiness：`artifacts/verification/p11-readiness-20261106-apple-import-accepted/summary.json`。
+本轮命令已结束；下一步聚焦独立审查、生产交付/许可和获批校准数据等剩余门槛，勿循环已验流程。
+
 ## 2026-11-06 当前交互起点：MLX文件夹导入隔离验收已准备
 
 先读 [隔离导入验收起点](HANDOFF-2026-11-06-apple-import-check.md)。原App两条人工流程
