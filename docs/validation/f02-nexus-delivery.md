@@ -4,6 +4,32 @@
 下文各历史“维护团队未定”不再是当前待答问题；组织名称与具体hosted选择仍未指定。
 本决定没有触发新上传或修改冻结候选。
 
+## 2026-11-07：当前 .6 归档与发布计划逐文件核对
+
+用户要求将Nexus任务分给Copilot。本次限定准备脚本审查65.85秒完整返回，随后
+只读核对器候选96.6秒返回，实际均无工具调用。主代理发现候选Maven路径层级错误，
+保留真实失败后修正；新增URL歧义路径与nofollow能力缺失的6项真实失败也已修正。
+9项合成测试涵盖更改成员后重算外层摘要、缺失/新增/重复成员、链接/特殊文件、实际读取中变更。
+原候选不能称为原样通过，Copilot结果也不是法律或发布批准。
+
+新增`tools/nexus_plan_archive.py`不依赖网络、凭据或磁盘解包，已对当前实际`.6`
+计划/归档的115个普通文件逐项核验路径/大小/SHA256；108,791,304B归档仍为
+`2f426cf8ff6a868abbe49a919445720108c19d7e9a1e58d23ebc3707c9d18fe6`，
+旧计划摘要`d7ebde9aac7877f050f29e13e94b6f766b4d3317b902c990ec666c347854baf8`保持。
+证据：`artifacts/verification/f02-nexus-plan-archive-20261107/actual-receipt.json`。
+
+```sh
+rtk proxy python3 -m tools.nexus_plan_archive \
+  artifacts/verification/f02-nexus-dot6-preflight-20261106/upload-plan.json \
+  artifacts/verification/f02-dng-notice-delivery-20261106/skiko-0.144.6-ondevice-f02.6-maven-repo.tar.gz
+```
+
+本次关闭“计划条目与归档内容直接一致”的本地检查子项，没有改旧冻结文件、重新发布、
+上传、查询管理API或取件。输出明确`uploaded=false`、`remoteConsumerValidated=false`。
+此前具体hosted/本次候选上传范围待回复项继续保留，不重复询问；旧115次404不会因此刷新。
+获相应授权且发布完成后，仍需无凭据空缓存的逐项HTTPS实际取件、大小/摘要核验、Gradle
+variant解析和消费者编译。来源条款适用、独立批准、生产依赖/资源及原P4/P11门槛不变。
+
 ## 2026-11-06：.6 补齐 DNG 原始通知，当前本地候选递增
 
 [DNG补充](f02-dng-notices.md)确认冻结.4漏收实际编译头的AOSP原始声明；新本地候选
