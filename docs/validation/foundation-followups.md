@@ -1,5 +1,10 @@
 # Foundation 后续专项
 
+2026-11-07：[Android视频限定审查](android-video-client-review-20261107.md)由cbc hy3完成。
+唯一同帧数去重建议经实测会丢totalFrames补充，已否决并逐字恢复原生产源码；新增一项回归。
+完整video18+Demo56实际执行通过，SR4缓存通过，video lint0error/1NewerVersionAvailable warning；不计产品修复或设备/发布验收。
+原429/403助手未重试，9保护/lock保持；10/12、P4/P11/release not-ready及既有待答复不变。
+
 2026-11-06 F02/F12增量：`.6`自身SDK双iOS链接15任务及基于新框架的unsigned App74材料
 保留通过；115个新Nexus精确路径匿名HEAD均404，上传范围待答复，远端消费未执行。
 2026-11-07：[Sherpa原始错误/取消保留](android-sherpa-cleanup-20261107.md)两项原实现RED后，

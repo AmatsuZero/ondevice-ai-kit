@@ -1,4 +1,19 @@
-## 2026-11-07 当前：Sherpa错误与取消保留已修，本机Ollama协助
+## 2026-11-07 当前：cbc视频限定审查已处置，进度元数据回归已验证
+
+[视频审查](validation/android-video-client-review-20261107.md)：恢复既有cbc hy3进程后，
+确认260.577秒自然成功、完整三文件结果。唯一low建议`<→<=`被父代理否决：
+同一completedFrames可补充totalFrames，原实现新聚焦测试1/1通过、建议1/1真实失败，
+随后生产源码逐字恢复。最终video18+Demo56共74项实际执行通过，SR4缓存通过；video lint0error/1NewerVersionAvailable warning。
+本轮只增加一个元数据回归及fixture可选参数，未修改生产代码、不计产品缺陷修复。
+审查不含后端/新测试/整分支或发布批准；原文和处置
+`.omx/artifacts/cbc-video-client-review-20261107/`，验证`artifacts/verification/video-client-review-20261107/`。
+第一次受限Gradle缓存锁失败未启动测试，保留排除；不把旧XML当本轮通过。
+qoder已登记配方且此前两项成功，但最新403线路保持停止；未重试429/403助手或未到恢复时间的OpenCode。
+9保护/生产lock/普通App模型保持，无设备/采集/下载/上传。10/12、P4/P11/release不晋级。
+既有.6精确hosted上传范围、TTS外部provider及qoder optional矩阵fallback仍待回复，不重复询问。
+最新P11以manifest指针为准；无需重跑本轮视频测试或继续同一审查请求。
+
+## 2026-11-07 上一轮：Sherpa错误与取消保留已修，本机Ollama协助
 
 [Sherpa清理验证](validation/android-sherpa-cleanup-20261107.md)：decoder.close原plain finally
 会覆盖解码错误和CancellationException；原实现8项session测试中两项新增回归真实RED。

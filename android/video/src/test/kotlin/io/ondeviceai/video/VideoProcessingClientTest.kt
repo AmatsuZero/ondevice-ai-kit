@@ -129,6 +129,26 @@ class VideoProcessingClientTest {
         client.close(); second.output.release()
     }
 
+    @Test fun sameFrameProgressCanUpdateTotalFrames() = runBlocking {
+        withTimeout(10_000) {
+            val backend = FixtureBackend(blockProcess = true)
+            val client = VideoProcessingClient(backend.backendId, listOf(backend))
+            val updates = Collections.synchronizedList(mutableListOf<VideoProcessingProgress>())
+            val operation = async { client.process(request, progress = { updates.add(it) }) }
+            try {
+                backend.processing.entered.await()
+                backend.emit(0, 3)
+                backend.emit(0, 3, totalFrames = 8)
+                assertEquals(listOf(VideoProcessingProgress(3), VideoProcessingProgress(3, 8)), updates.toList())
+            } finally {
+                backend.processing.open()
+                val result = operation.await()
+                client.close()
+                result.output.release()
+            }
+        }
+    }
+
     private suspend fun awaitClosed(client: VideoProcessingClient) {
         withTimeout(10_000) {
             while (true) {
@@ -182,7 +202,7 @@ private class FixtureBackend(
         // Returning inside NonCancellable intentionally simulates an external API ignoring cancel.
         return withContext(NonCancellable) { processing.waitIgnoringCancellation(); outputs[index] }
     }
-    fun emit(index: Int, frames: Int) { callbacks[index]?.invoke(VideoProcessingProgress(frames)) }
+    fun emit(index: Int, frames: Int, totalFrames: Int? = null) { callbacks[index]?.invoke(VideoProcessingProgress(frames, totalFrames)) }
     override suspend fun drain() { currentCoroutineContext().ensureActive(); draining.waitIgnoringCancellation() }
     override suspend fun close() { closes.incrementAndGet() }
 }
