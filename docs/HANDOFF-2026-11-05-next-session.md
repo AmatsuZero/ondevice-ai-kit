@@ -1,3 +1,25 @@
+## 2026-11-07 当前：Nexus/Copilot新增工具已验收；Android同次运行仍未完成
+
+用户要求继续派Nexus任务并确认Copilot是否有用。两条新任务均自然终态：Copilot个人额度
+84.31秒完整返回GET收据工具候选，实际gpt-6-luna/0工具/0session error；cbc hy3
+65.496秒给12项边界矩阵/0工具。原文、调用、用量及父处置已保留，不再轮询/重发。
+[GET核对工具](validation/f02-nexus-get-receipts.md)已集成，先父11测试RED；候选变更测试
+的只读fd/EBADF假绿经真实RED修正。新增20项，与原9合计29聚焦通过；完整tools530/530、
+49.150秒，源码/9保护/Apple lock保持，三文件py_compile通过。工具只核对未来留存收据/字节，
+不证明匿名传输；无Nexus请求/凭据/上传/旧404刷新/冻结归档重验。精确hosted/本次范围待答复保持。
+
+**Android候选主App和Identity测试包仍在设备上，原包尚未恢复。** 前述“未写Kotlin/构建/运行”
+已被后续实际工作取代：新Kotlin完成并经Copilot58.327秒限定审查，test-only APK210886B，
+SHA8d4e5000…38232，离线397任务完成；安装保留协议通过，且仅签发一次资源测量。
+runId=`identity-resource-20261107-01`，PID31731；主机255空日志后两次报告保持running/7样本。
+本轮再次只读观察同PID/同runId/7样本/terminal=false，主线程wchan=`do_freezer_trap`，
+未重发推理、未force-stop、未前台启动/改系统设置。此前活动instrumentation未完成，
+恢复脚本拒绝在活动运行下替换APK；应继续诊断/恢复这一次，而非另发运行。
+见 `artifacts/verification/android-identity-resources-20261107/same-run-nexus-dispatch-observation.json`。
+本次原始7样本不能加入P11；manifest仍7能力/10组。基础10/12，P4/P11 open，release not-ready。
+下一步可继续同次设备恢复，或实现消费者variant/来源与74许可材料收据、F10离线指标；
+不要重跑已过ASR/SR/TTS/Apple构建或重启已失败额度线路。完整roadmap目标保持active。
+
 ## 2026-11-07 当前：F10分数工具已验收，Copilot继续完成Nexus准备审查
 
 最新用户要求继续给其他Agent分任务，特别是Nexus/Copilot。Copilot个人额度本轮真实可用，

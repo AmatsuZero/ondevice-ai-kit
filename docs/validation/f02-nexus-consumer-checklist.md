@@ -5,6 +5,9 @@
 原文与父处置：`.omx/artifacts/copilot-f02-remote-consumer-audit-20261107/`。
 这是准备方案审查，没有执行 Gradle、取件、上传或重新查询 Nexus。
 
+后续[GET收据核对工具](f02-nexus-get-receipts.md)已实现并完成530项tools回归；
+可核对未来留存字节，尚未执行真实GET，不能据此提升远端消费者状态。
+
 现有 `.6` 消费者在
 `artifacts/verification/f02-nexus-dot6-consumer-20261106/consumer/`；
 旧 `command.json` 和冻结计划保持原样。当前结论为 **prepared-not-run**。

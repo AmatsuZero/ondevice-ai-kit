@@ -123,6 +123,15 @@
 
 ## 6. Copilot：空工具列表与 JSONL
 
+- **失败测试也要证明触发了目标行为**：Nexus GET候选的变更测试向只读验证fd `pwrite`，
+  EBADF被泛化ValueError捕获，文件并未改变却显示测试通过。父新增实际字节变化断言后RED，
+  改用独立写句柄修改同一inode，检查原读取字节/实际修改/拒绝结果后GREEN。
+  不是核对器已证缺陷，不能把错误测试的绿灯当作fd签名覆盖。新增20+既有9聚焦29过，
+  完整tools530过；证据 `artifacts/verification/f02-nexus-get-receipts-20261107/`。
+- **离线收据不证明网络来源**：GET/status/auth字段与实际留存字节都正确，只能证明一致性。
+  Nexus核对器固定 `anonymousExecutionVerified=false`、`remoteConsumerValidated=false`；
+  实际传输匿名性、Gradle来源/variant/编译、许可适用性仍分别验收，不伪造真实GET收据。
+
 - **路径层级/传输语义必须实际测**：本轮Nexus核对器候选把`org/jetbrains/skiko/module/version/file`
   的module/version索引提前一层，自己的成功测试真实失败；父修正后7项过。再用带`?`/`#`/
   `%2f`/空白的成员文件名和缺少nofollow支持做出6项真实RED，再以Maven文件名字符集和
