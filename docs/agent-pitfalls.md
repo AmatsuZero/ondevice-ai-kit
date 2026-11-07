@@ -74,6 +74,9 @@
 
 ## 2. cbc：结果格式与长任务
 
+- **源码诊断不能把“输入影响logits”推成编码正确或故障在logits之后**：hy4free F08分析347.304秒/58事件/0工具错误确有文件，但distinct tensors/logits不排除所有对齐/编码缺陷。其“新token等价性诊断”已被项目既有真实tokenizer uniform parity覆盖（历史2/2无skip/30全过），提案还混用两场景输入。父保留源差异和无已证bug结论，拒绝过度推论及重复执行；以后提供既有测试覆盖，缺助手上下文不算项目缺陷。证据`cbc-f08-temporal-rootcause-20261107/parent-assessment.json`。
+
+
 - **Kotlin终态回写分支的val也必须真实编译**：功能探针修正persist异常处理后，局部`val finalStatus`在try/catch两处赋值，Android编译报`val cannot be reassigned`。助手只改为`var`，397任务test-only构建通过，前两份失败日志及旧候选保留。不用外层CLI成功推断编译成功。证据`cbc-identity-functional-{reviewfix,compileval}-20261107`和`android-identity-functional-final-20261107/build-identity.log`。
 
 

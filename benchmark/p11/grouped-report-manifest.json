@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261107-functional-remote-final/summary.json",
-    "sha256": "07d046839b9f1d1a051fe73abcc5b3adaf4b88261b53ea263a8e3f0198885a25"
+    "path": "artifacts/verification/p11-readiness-20261107-functional-remote-checkpoint/summary.json",
+    "sha256": "703ccf3a93a2d2b7e313cb1caf6b78f844a90d8b7c277fc3aff79357f114b84c"
   },
   "schemaVersion": 1,
   "sources": [

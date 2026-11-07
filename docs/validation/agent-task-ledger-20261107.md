@@ -29,7 +29,7 @@
 | 员工照探针独立复核最小修正 | cbc hy3，三处快速实现纠错 | terminal-delivered；187.206秒三项修正已核对；实际编译暴露局部val重复赋值 | `.omx/artifacts/cbc-identity-functional-reviewfix-20261107/`；93460终态，无父超时，照片/原名/私有清单未供应 | 不再轮询；失败编译原件保留，下一行仅改声明关键字 |
 | 员工照探针最终编译修正 | cbc hy3，单关键字实际文件交付 | completed；18.405秒，val→var，最终27643B Kotlin原样集成，397任务18.562秒构建通过 | `.omx/artifacts/cbc-identity-functional-compileval-20261107/`；9951/60684终态；实际源码SHA917134df… | 唯一功能run与负向/清理均已过，不再轮询或重跑 |
 | 功能探针用法与验收文档 | cbc hy3，两个有界文档直接交付 | completed；初稿102.878秒，四项文档事实修正70.607秒，最终两文档原样集成 | `.omx/artifacts/cbc-identity-functional-docs-20261107/`；仅通用源码/aggregate facts，无照片/原名/私有清单 | 93643/40973均终态，不再轮询；实际norm绝对值/空host输出/相册措辞/Markdown链接修正通过；不是生产校准批准 |
-| F08时序质量定位 | cbc hy4free，较复杂的固定源码/真实证据比较 | running；44815，无自动超时/无付费调用，隔离文件交付 | `.omx/artifacts/cbc-f08-temporal-rootcause-20261107/`；11份明确上下文，旧native/tensor/logit/margin/两场景失败及当前adapter摘要保持 | 比较pinned upstream与当前adapter，区分已证bug/有意差异/未知假设；只交一个最小新诊断，不重复旧生成或放宽正式评分 |
+| F08时序质量定位 | cbc hy4free，较复杂的固定源码/真实证据比较 | terminal-partially-accepted；347.304秒、58完整事件/0工具错误，三文件实际交付 | `.omx/artifacts/cbc-f08-temporal-rootcause-20261107/`；11份明确上下文，旧native/tensor/logit/margin/两场景失败及当前adapter摘要保持 | 44815终态不再轮询；无具体bug证据，保留源码差异；拒绝logits后因果/全面排除缺陷和“全新token等价性检查”表述，已有真实tokenizer parity2/2/无skip；原文及父处置保持，不集成误导文档/不重复设备测试 |
 | cbc长输出诊断与后续交付规则 | 主代理，本地原字节/启动器核查，不调用模型 | completed；原启动器已重定向文件且无超时；2MiB合成链路逐字节通过，内部根因未确定 | `.omx/artifacts/cbc-output-diagnosis-20261107/diagnosis.json`；更新根AGENTS和踩坑记录 | 后续新复杂任务使用真实沙盒限制的候选文件交付/短收据；本轮直接交付已验收，但不证明旧截断根因，不重发旧请求 |
 | Nexus74材料核对器 | Copilot auto，个人额度的小工具 | candidate已由父修正并集成，32聚焦及545全tools通过 | `.omx/artifacts/copilot-nexus-notice-materials-20261107/`；40.77秒完整响应；实际`.6`73索引材料+index通过，保留父schema错误RED与修正 | 最终源码独立复核待下行任务；远端消费/许可仍未通过 |
 | Roadmap当前表交叉审计 | cbc hy3，短一致性审查 | completed，父已处置 | `.omx/artifacts/cbc-roadmap-status-crosscheck-host-20261107/`；119.69秒/0工具；原受限启动失败在不带host的同名目录，未计模型失败 | 2条采纳、1条部分采纳；父额外发现已改当前表，不再运行此任务 |
@@ -54,4 +54,6 @@ Android持续重开已真实验收并恢复：final/summary.json，20周期/200�
 
 66846清理已exit0；额外主机只读复核84866已exit0：原App/test/runner/25私有摘要/四SR/权限/TTS恢复，精确APK暂存与两个probe工作目录缺席。受限首次ADB因本机smartsocket EPERM失败不算设备断开，原错误摘要另存；未要求用户重连。设备12图/manifest及本地12派生图/原名映射/私有清单已精确清除；226原JPEG全部重hash不变。keysCleared仅provider backing arrays/maps，不承诺所有内部SecretKeySpec副本擦除。`artifacts/verification/android-identity-functional-final-20261107/summary.json`绑定127文件，功能-only；生产校准/PAD/准确率/阈值/benchmark均未晋级。
 
-功能文档最终：`.omx/artifacts/cbc-identity-functional-docs-final-20261107/`，README2982B/SHA413b5685…、验收2739B/SHA3db71c7d…已按源码和实际报告验收并逐字节集成；初稿及四项修正diff保留。当前仅F08时序质量44815运行。
+功能文档最终：`.omx/artifacts/cbc-identity-functional-docs-final-20261107/`，README2982B/SHA413b5685…、验收2739B/SHA3db71c7d…已按源码和实际报告验收并逐字节集成；初稿及四项修正diff保留。当前无运行助手；44815已终态，父部分采纳/否决见上表。
+
+当前本地检查点`e8b97518626e9cf3f78bff832b6e55e225ed5167`（12精确owned路径，无push）；功能与远端推理证据已写入readiness，初步4894引用/5101摘要及11组保持，49工具测试通过。hy4free诊断无法证明新代码bug，其下一诊断混用飞鸟fixture/瀑布prompt且与既有真实tokenizer对照覆盖重叠；不直接执行该建议。缺上下文是助手包边界，不是项目新增缺陷。

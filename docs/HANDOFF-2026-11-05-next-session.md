@@ -1,8 +1,14 @@
+## 2026-11-07 本地检查点已保存
+
+`e8b97518626e9cf3f78bff832b6e55e225ed5167`，12个精确owned文件，功能探针/README/F10验收/F09远端推理与字节核对/进度记录/readiness指针；无push，九保护dirty/untracked仍原样。397任务test-only真实构建与同次12图功能、负向/清理恢复均已验收，49相关工具检查通过；最终probe源码与实际编译副本逐字节一致。
+
+F08助手44815已终态并按下段处置，当前无助手运行；不再poll旧句柄或因“新诊断”重复已做token parity。readiness最终当前指针由`benchmark/p11/grouped-report-manifest.json`读取；旧functional-remote-final快照保持冻结，后续台账更新会产生新的checkpoint快照，不回写旧证据。完整goal active、10/12/P4/P11/九行gap/not-ready保持；后续继续真正独立的质量/资源/最终复审任务，生产授权校准数据与Nexus精确hosted/115文件范围仍待已有问题输入。
+
 ## 2026-11-07 最新：员工图仅功能试验与F09新远端推理已实际验收
 
 本检查点基于HEAD b23a49f；后续本地保存提交以git log/收据为准，本轮不push。员工照片授权仅“功能试验”。唯一`functional-photo-20261107-a1`：12输入全部128维有限归一化特征提取、隔离加密注册、实际`THRESHOLD_UNVERIFIED`和PURGED；host255但同次持久completed/terminal报告hash验证通过，不重跑。缺输入负向failed/0图/工作清理正确。最终agy主体+cbc修正Kotlin27643B/SHA917134df…原样集成，397任务18.562秒test-only编译通过，前两次失败及Copilot三finding处置保留。
 
-66846精确清理exit0；84866额外只读恢复复核exit0：原main/test/runner/25私有模型/四SR/权限/TTS、APK暂存与probe工作目录通过。设备12图/manifest及本地派生图/原名映射/私有清单已清除；226原JPEG全部重hash不变，原目录未改动。keysCleared只指provider backing arrays/maps，无内部所有副本擦除保证。summary绑定127文件；数据不能再用于校准、准确率、阈值或PAD。cbc hy3文档93643已终态102.878秒，四项纠错40973已终态70.607秒；最终README/验收文档原样集成，没有照片/原名/清单供助手读取。当前仅新F08时序质量cbc hy4free44815运行，`.omx/artifacts/cbc-f08-temporal-rootcause-20261107/`，只比较11份固定源码/证据、写一个可证伪的新诊断。当前adapter/snapshot摘要与旧真机边界检查一致，不重跑native/tensor/logit/margin或相同生成。
+66846精确清理exit0；84866额外只读恢复复核exit0：原main/test/runner/25私有模型/四SR/权限/TTS、APK暂存与probe工作目录通过。设备12图/manifest及本地派生图/原名映射/私有清单已清除；226原JPEG全部重hash不变，原目录未改动。keysCleared只指provider backing arrays/maps，无内部所有副本擦除保证。summary绑定127文件；数据不能再用于校准、准确率、阈值或PAD。cbc hy3文档93643已终态102.878秒，四项纠错40973已终态70.607秒；最终README/验收文档原样集成，没有照片/原名/清单供助手读取。cbc hy4free44815已终态347.304秒、58事件/0工具错误，`.omx/artifacts/cbc-f08-temporal-rootcause-20261107/parent-assessment.json`保留部分采纳/否决：无具体契约bug证据；“故障必在logits之后/所有对齐bug已排除”不成立；所提token parity已有macOS真实tokenizer2/2无skip，原30测试日志已核实，且建议混用飞鸟fixture/瀑布prompt。不集成其误导正文，不执行重复诊断。当前无运行助手。
 
 [F09新远端制品推理](validation/f09-remote-inference-20261107.md)已用先前真实GET的25,288,674B包，新consumer unsigned Release11.037秒/24材料通过；iPhonePID4332图片3067.592ms/视频2281.231ms，14模型摘要、非空输出、close/租约/无新增snapshot保持，新别名精确卸载、原44App/lock/profile保持，summary绑定930文件。不再列“该远端制品尚未真机推理”。旧[字节等价记录](validation/f09-runtime-equivalence-20261107.md)保持其资源-only历史范围。
 
