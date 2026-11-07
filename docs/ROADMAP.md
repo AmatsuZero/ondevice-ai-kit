@@ -1,5 +1,11 @@
 # 分阶段交付与恢复入口
 
+2026-11-07：[Android Identity资源](validation/android-identity-resources-20261107.md)在当前636/dfcc主包
+完成一次受控5预热+30测量，72个RESUMED检查点/close/lease/清理通过；p50/p95=133.174/148.906ms，
+采样进程RSS峰值约473MB（含首页）。原先需前台恢复的中断运行单列且排除，不重发同一请求。
+原App/test/25私有摘要/设置/SR恢复，精确清理并返回普通App；531tools过。P11新增30样本至8能力/11组，
+旧10组保持，Identity校准/PAD和持续资源等门槛不变；10/12、P4/P11 open及release not-ready保持。
+
 2026-11-07：[当前Android TTS](validation/android-current-tts-20261107.md)复用636a6eb/dfccaa95主包，
 仅新建203KB测试包；真机一次正常播放/活动取消等待/重入/close/关闭拒绝的持久终态通过。
 ADB255后只观察同次运行；34离线协议检查通过，原App/test/runner、25私有摘要/4SR文件及设置恢复，

@@ -18,12 +18,12 @@ except ModuleNotFoundError:  # Direct `python tools/p11_grouped_report.py` invoc
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from tools import benchmark_report, mlxvlm_benchmark_report, validate_p11_readiness
 
-from tools.probes import android_asr_resource_report, android_litertlm_resource_report
+from tools.probes import android_asr_resource_report, android_litertlm_resource_report, android_identity_resource_report
 
 
 SCHEMA_VERSION = 1
 _KINDS = {"face", "mlxvlm", "tts-resource", "video-sr-resource", "video-sr-sdk-resource",
-          "asr-file-sdk-resource", "asr-android-resource", "litertlm-android-resource"}
+          "asr-file-sdk-resource", "asr-android-resource", "litertlm-android-resource", "identity-android-resource"}
 _KIND_CAPABILITIES = {
     "face": {"face-detection"},
     "mlxvlm": {"multimodal-apple"},
@@ -33,6 +33,7 @@ _KIND_CAPABILITIES = {
     "asr-file-sdk-resource": {"speech-asr-file"},
     "asr-android-resource": {"speech-asr-android"},
     "litertlm-android-resource": {"multimodal-android-litertlm"},
+    "identity-android-resource": {"face-identity-liveness"},
 }
 
 
@@ -367,6 +368,65 @@ def _asr_file_sdk_group(raw: dict[str, Any], entry: dict[str, Any], repo_root: P
         "energy": {"status": "unmeasured"},
         "unverified": ["microphone", "naturalSpeechCERWER", "offlineNetworkBehavior",
                        "truePeakMemory", "gpuPeak", "energy", "minimumOS", "crossDevice"],
+    }
+
+
+def _android_identity_group(raw: dict[str, Any], entry: dict[str, Any], repo_root: Path) -> dict[str, Any]:
+    computed = android_identity_resource_report.summarize(raw)
+    evidence = [entry.get(key) for key in ("summary", "sourceManifest", "input")]
+    if not all(isinstance(item, dict) for item in evidence):
+        raise ValueError("invalid Android Identity evidence entries")
+    paths = [_relative_path(repo_root, item.get("path"), "Android Identity evidence path")
+             for item in (entry, *evidence)]
+    for index, path in enumerate(paths):
+        if any(_is_alias(path, earlier) for earlier in paths[:index]):
+            raise ValueError("Android Identity evidence alias")
+    _, summary = _verify_file(repo_root, entry["summary"], "Android Identity summary")
+    _, provenance = _verify_file(repo_root, entry["sourceManifest"], "Android Identity provenance")
+    _verify_hash(repo_root, entry["input"], "Android Identity input")
+    expected_summary = {**computed, "rawReportSha256": entry["sha256"],
+                        "sourceManifestSha256": entry["sourceManifest"]["sha256"]}
+    hashes = provenance.get("sourceHashes")
+    if (json.dumps(summary, sort_keys=True, allow_nan=False) != json.dumps(expected_summary, sort_keys=True, allow_nan=False) or type(provenance.get("schemaVersion")) is not int
+            or provenance["schemaVersion"] != 1
+            or provenance.get("runtimeScope") != "current-candidate-fixed-input-resource"
+            or provenance.get("appSha256") != "dfccaa95a809b4f37b8d384cd32f92c37c7422178803dc1ff5d44a88654879a7"
+            or provenance.get("installedAppSourceCommit") != raw["sdkCommit"]
+            or provenance.get("frozenBuildSourceCommit") != raw["sdkCommit"]
+            or not isinstance(provenance.get("testApkSha256"), str)
+            or not re.fullmatch(r"[0-9a-f]{64}", provenance["testApkSha256"])
+            or provenance.get("modelSHA256") != raw["modelSHA256"]
+            or provenance.get("modelRevision") != raw["modelRevision"]
+            or provenance.get("runtimeVersion") != raw["runtimeVersion"]
+            or provenance.get("preprocessRevision") != raw["preprocessRevision"]
+            or not isinstance(hashes, dict)
+            or hashes.get(entry["path"]) != entry["sha256"]
+            or hashes.get(entry["input"]["path"]) != entry["input"]["sha256"]
+            or raw["inputSHA256"] != entry["input"]["sha256"]):
+        raise ValueError("invalid Android Identity summary or provenance identity")
+    for name, digest in hashes.items():
+        _verify_hash(repo_root, {"path": name, "sha256": digest}, "Android Identity source")
+    measured = raw["samples"][5:]
+    return {
+        "kind": "identity-android-resource", "p11Capability": "face-identity-liveness",
+        "source": entry["path"], "sourceSha256": entry["sha256"],
+        "summary": dict(entry["summary"]), "sourceManifest": dict(entry["sourceManifest"]),
+        "device": raw["deviceModel"], "OS": f"Android API{raw['sdkInt']}",
+        "actualBackend": raw["backendId"], "scope": raw["timingMethod"],
+        "identity": {"sessionRunId": raw["runId"], "processIdentifier": raw["pid"],
+                     "appSha256": provenance["appSha256"], "testApkSha256": provenance["testApkSha256"],
+                     "installedAppSourceCommit": raw["sdkCommit"], "input": dict(entry["input"]),
+                     "modelRevision": raw["modelRevision"], "runtimeVersion": raw["runtimeVersion"],
+                     "preprocessRevision": raw["preprocessRevision"], "modelSHA256": raw["modelSHA256"]},
+        "runIds": [f"{raw['runId']}-sample-{row['index']}" for row in measured],
+        "timingsMs": {"qualityAndEmbedWall": _nearest_rank([row["durationNs"] / 1e6 for row in measured])},
+        "quality": {"status": "unverified", "reason": "fixed-image representation sanity is not recognition accuracy or PAD"},
+        "memory": {"status": "observed-sampled", "method": raw["measurementMethod"],
+                   "processScope": raw["processScope"], "foregroundPolicy": raw["foregroundPolicy"],
+                   "beforeBackendOpenRssBytes": raw["beforeBackendOpenRssBytes"],
+                   "peakSampledBytes": _nearest_rank([row["rssPeakSampledBytes"] for row in measured]),
+                   "samplingIntervalsMs": computed["samplingIntervalsMs"]},
+        "energy": {"status": "unmeasured"}, "unverified": list(computed["unverified"]),
     }
 
 
@@ -798,6 +858,8 @@ def generate(manifest: dict[str, Any], repo_root: Path) -> dict[str, Any]:
             groups.append(_android_asr_group(raw, entry, repo_root))
         elif entry["kind"] == "litertlm-android-resource":
             groups.append(_android_litertlm_group(raw, entry, repo_root))
+        elif entry["kind"] == "identity-android-resource":
+            groups.append(_android_identity_group(raw, entry, repo_root))
         elif entry["kind"] == "video-sr-resource":
             groups.extend(_video_sr_groups(raw, entry, repo_root))
         else:
@@ -851,7 +913,7 @@ def _reject_output_aliases(
     candidates = [manifest.get("readiness"), *sources,
                   *(entry.get("summary") for entry in sources if isinstance(entry, dict) and entry.get("summary"))]
     for source in sources:
-        if isinstance(source, dict) and source.get("kind") in ("asr-file-sdk-resource", "asr-android-resource", "litertlm-android-resource"):
+        if isinstance(source, dict) and source.get("kind") in ("asr-file-sdk-resource", "asr-android-resource", "litertlm-android-resource", "identity-android-resource"):
             candidates.extend(source.get(key) for key in ("sourceManifest", "input"))
         if not isinstance(source, dict) or source.get("kind") not in ("video-sr-resource", "video-sr-sdk-resource"):
             continue
@@ -864,6 +926,15 @@ def _reject_output_aliases(
             nested = source.get(key)
             if isinstance(nested, dict):
                 candidates.extend(nested.values())
+    for source in sources:
+        if not isinstance(source, dict) or source.get("kind") != "identity-android-resource":
+            continue
+        entry = source.get("sourceManifest")
+        if isinstance(entry, dict):
+            _, provenance = _verify_file(repo_root, entry, "Android Identity provenance")
+            hashes = provenance.get("sourceHashes")
+            if isinstance(hashes, dict):
+                candidates.extend({"path": name} for name in hashes)
     for index, entry in enumerate(candidates):
         if not isinstance(entry, dict):
             continue

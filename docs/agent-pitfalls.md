@@ -6,6 +6,17 @@
 
 ## 1. 所有助手：进程成功不等于任务成功
 
+- **活动测试也可能停在内核冻结**：Identity原run01停7行，PID31731/活动instrumentation仍在，
+  主/测试线程wchan均 `do_freezer_trap`，ActivityManager isFrozen=false；不能据此判OpenCV死锁。
+  确认普通staging空且保留私有hash后，仅前台化同PID一次，原请求自然完成35行/close/lease/清理。
+  该受干预运行排除干净基线。恢复原包后，新的受控Schema2在计时前启动首页并做72个RESUMED检查点，
+  同一新请求完整通过且原状态再次恢复。内核/OEM具体触发仍未证明，不改系统freezer设置、不杀进程重跑。
+  主线程读状态、instrumentation线程断言，避免检查异常直接杀主looper而丢失败报告。
+  RSS必须标识包含UI，检查点不等于连续可见；证据 `artifacts/verification/android-identity-foreground-resources-20261107/`。
+- **传输prepare/stage分开**：新目录先执行本地prepare生成payload-manifest，再stage。
+  父遗漏prepare时stage先创建了登记的空目录后报FileNotFound；无APK复制/安装/推理。
+  保留错误、补prepare，再校验同目录/intent继续，不能另开推理或把准备失败记为SDK失败。
+
 - **预编译宿主与测试包装分开**：当前Apple标准hosted非UI XCTest首次外部`TEST_HOST`先被
   build-for-testing的宿主目标选择、再被build的产物相对路径检查拒绝，均未运行设备。
   仅编译新test bundle、动态链接实际App根目录的debug dylib，由安装版`xcodebuild.xctestrun(5)`

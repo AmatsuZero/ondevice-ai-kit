@@ -1,3 +1,30 @@
+## 2026-11-07 当前：Identity资源真机与恢复完成，P11新增30条；Nexus/F10仍待推进
+
+上一轮Nexus工具2571de8为真实progress。用户询问今天能否完成全部：已说明按当前证据12/12不现实；
+最低系统后置不冒作通过，授权校准数据、P4原生残留和实际交付等门槛继续。完整roadmap目标active。
+
+[Android Identity资源](validation/android-identity-resources-20261107.md)新受控Schema2运行PID4454，
+`identity-foreground-resource-20261107-01`，一次5预热+30测量，72RESUMED检查/close/lease/临时目录清理通过；
+host255后只回读同run，原始SHA8ed478ba…11b61。p50/p95=133.174/148.906ms；进程峰值约473MB含首页。
+新test-only212190B/SHA95c26941…e52de，原636/dfcc主包未重建，offline397任务/42秒、1046源码与
+Manifest/DEX/签名兼容核验。51聚焦/34协议/完整tools531/531、48.933秒，保护/锁/源码保持。
+
+前一run01/PID31731确实在内核do_freezer_trap；保留私有状态/空staging后一次前台化同PID，原请求自然
+完成35行，并恢复原App，不重发。旧运行含干预，排除干净基线；不声称已证明OEM机制或OpenCV死锁。
+Copilot42.21秒方案审查/0工具/错误，父采纳存储/schema/RSS范围意见；最终patch非完整独立发布审查。
+新run从计时前前台启动，检查主线程读/测试线程断言，源/summary/grouped显式UI进程范围。
+首次新stage漏本地prepare的失败已保留，只创建登记目录；补prepare后恢复同目录，无APK/推理重放。
+
+**两次运行的原afed主包、原test/Identity runner、25私有摘要、权限/TTS与四SR文件均已恢复核验。**
+临时报告/APK/分块/重建元数据已精确清理，普通MainActivity已返回；没有残留活动测试或候选替换。
+旧run证据 `artifacts/verification/android-identity-resources-20261107/`，新证据在
+`android-identity-foreground-resources-20261107/`；不要重复本轮构建/测量。
+
+P11 manifest新增30样本，现8能力/11组，原10组逐项保持；Identity行仍unverified-calibration-pad，
+9行保留gap，10/12、P4/P11 open、release not-ready。Nexus实际上传/远端消费和许可适用、F10授权
+数据/ROC/DET/置信/生产策略仍开放。下一步可分派hy4做复杂实现、hy3做短校验，免费优先；
+Copilot本次实际可用。旧429/403/认证失败线路不自动重启，不重复已存在的hosted/上传范围问题。
+
 ## 2026-11-07 当前：Nexus/Copilot新增工具已验收；Android同次运行仍未完成
 
 用户要求继续派Nexus任务并确认Copilot是否有用。两条新任务均自然终态：Copilot个人额度
