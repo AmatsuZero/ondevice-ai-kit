@@ -1,5 +1,9 @@
 # F02 Nexus 匿名消费者验收准备
 
+2026-11-07补充：[74材料核对器](f02-nexus-notice-materials.md)已集成，32聚焦/545全tools通过，
+对实际既有`.6`collector与外部冻结index逐字节核对74材料通过；不重新构建或取件，
+`remoteConsumerValidated=false`。下方“核验材料”执行项现在有可调用工具，实际远端阶段仍未运行。
+
 2026-11-07，Copilot 使用现有个人额度完成限定只读审查，47.217 秒自然结束；
 实际模型 `gpt-6-luna`，完整 JSON、无 session error 或工具事件，七份输入摘要保持。
 原文与父处置：`.omx/artifacts/copilot-f02-remote-consumer-audit-20261107/`。
@@ -30,3 +34,9 @@ Copilot 将“出口待定”列为 finding，父处置保留为已知执行门�
 
 此清单没有使用发布凭据、不改生产依赖或旧冻结文件，也不重问既有待答复项。
 实际发布与远端取件继续依照 [Nexus 交付准备](f02-nexus-delivery.md) 的现有边界。
+
+2026-11-07追加：cbc hy3在84.803秒完成实际3份module与消费者配置核查，12个iOS variant
+经父逐字段核实，期望清单在`.omx/artifacts/cbc-dot6-variant-audit-20261107/expected-variants-reviewed.json`。
+助手因module JSON未列notices而推断缺artifact、因未供command而推断缺property，父分别用既有
+3个notices计划条目/本地consumer和实际command.json否决；不新增产品阻断或重跑构建。
+该清单是预期输入，不是远端实际选中variant/来源收据；真实远端阶段仍未执行。
