@@ -1,3 +1,5 @@
+2026-11-07：[Speech六文件最终限定复核](android-speech-final-review-20261107.md)两条cbc hy4free咨询复审均完成，未新增确认缺陷；沿用102项及Sherpa70项实际执行证据，本批不重跑。原错误解释另存父更正；不代替native双审/整分支或发布批准。[F06官方取证](f06-transfer-evidence-20261107.md)保留3份官方文档GET200及3份SDK头，在本范围未见明确RGB传递函数合同，experimental sRGB/质量门槛保持。助手文档已原样集成，旧冻结exit1及原件保留；10/12/P4/P11/not-ready不变。
+
 2026-11-07 F08文档收尾：[验收记录](f08-system-prompt-diagnostic-20261107.md)/probe README及中央pitfalls已由hy4free直接写并经父核实集成。初稿/订正/一行修正分别462.992/400.276/13.779秒均终态；hy3实际429后按用户要求暂停到16:18:54本地，届时仅可复查。下段“文档待选择”是此前历史；当前无运行助手。四次固定诊断无输出变化、原quality失败及10/12/not-ready保持。
 
 2026-11-07 F08：[独立system-message探针](../../probes/apple-mlxvlm-system-prompt/SystemPromptProbe.swift)与实际Mac报告`artifacts/verification/f08-system-prompt-diagnostic-20261107/summary.json`已验收。固定飞鸟pair-0、原/中性system×motion/frozen恰4次全部原始` MOVING.`；本范围未观察输出敏感性，原birds/waterfall0/3不变。5无生成负向检查、token全文等价/同像素共用/producer join/快照清理及21来源/6878upstream/九保护保持通过；最终Release12.373s含1类弃用warning。助手直接写源码与配置，父原样集成；cbc hy3后续文档429无交付已停止，等已发模型选择。无新benchmark/生产修改/发布或roadmap晋级，质量/预算等门槛继续。

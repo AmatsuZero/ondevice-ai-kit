@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261107-system-prompt-final/summary.json",
-    "sha256": "84d5fc0ee603f9f21ee209a165723d49908cbfbc3e611a5bace601d8ac5f969e"
+    "path": "artifacts/verification/p11-readiness-20261107-speech-final-review/summary.json",
+    "sha256": "093e6f6e9654783c3f6077a404ea569391d8f87bea2c7ff94e19bd20345ee32a"
   },
   "schemaVersion": 1,
   "sources": [

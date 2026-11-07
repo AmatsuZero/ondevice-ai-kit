@@ -1,3 +1,25 @@
+## 2026-11-07 Speech六文件复核与F06证据已集成
+
+两份cbc hy4free外部限定复审均已终态，无新确认finding；原错误解释和父更正分别保留，不替代native双审或整分支/发布批准。文档初稿及最小订正79461/91161均终态，订正247.216秒、77完整事件/23次Read或Edit/0工具错误；两份验收文档及pitfalls正文由助手直接写，父逐字节集成并核验链接/来源。见[Speech记录](validation/android-speech-final-review-20261107.md)和[F06取证](validation/f06-transfer-evidence-20261107.md)。
+
+本轮无新测试/推理/设备/模型/下载/上传/付费调用；九保护与生产lock保持。新readiness以benchmark/p11/grouped-report-manifest.json当前指针为准，旧summary及原verify exit1不改；11组/10条source records不新增。10/12、P4/P11 open、release not-ready和完整goal保持；只有低系统设备获准延期。当前助手均终态，不poll旧句柄或新发重复任务。hy3在16:18:54本地前禁用；agy429暂停，原估计重查非恢复保证。下一小时报告15:03:29本地。下段running为此前历史。
+
+## 2026-11-07 14:30 最新：复审已收，只有文档助手运行
+
+53882/29890两cbc hy4free六文件复审均终态、无新确认finding，所有输入/源码/候选hash和真实工具事件已核验；别poll旧句柄。父纠错保留在两任务parent-assessment.json，不把JVM替身说成真实JNI、不采纳错误CancellationException继承/无条件活性/未证二次resume解释。新文档任务unified79461/PID98567仅候选4文件运行，`.omx/artifacts/cbc-speech-f06-docs-20261107/`，无超时/付费fallback；下一步等同次终态→读审原样集成→新readiness/精确本地提交，旧快照不改。
+
+F06只读官方查证已取得三MarkdownGET200和三SDK头，无本范围显式传递函数合同，不关闭原实验sRGB/质量门槛。原生researcher新scope启动429无结果已停；agy429已由用户选择hy4free接手完成。hy3到16:18:54本地前禁用，其他原保护/App/模型/lock/goal active和10/12保持，无设备变更/新测试/模型生成/上传/push。第4小时汇报已记录，下次15:03:29本地。
+
+## 2026-11-07 14:12 Speech线路切换已执行
+
+agy97116真实终态exit3/28.847s、Individual quota reached/RESOURCE_EXHAUSTED429、0文件，已停止，估计复查2026-11-14 08:25:21本地不保证恢复。用户明确选择cbc hy4free接手缺陷审查，新unified29890已启动，独立目录`.omx/artifacts/cbc-speech-defects-review-20261107/`；原cbc生命周期53882继续。仅观察这两次任务，不poll终态agy或重试旧native。下段agy运行中为此前状态；roadmap/goal/保护及hy3暂停保持，尚无最终审查结论。
+
+## 2026-11-07 14:06 当前续接点：Speech六文件外部复审运行中
+
+HEAD `71df0fb5f04367e34dfd0acb01d9c946786b72bb`。新agy PID58850/unified97116及cbc hy4free PID58974/unified53882已启动，只读六份当前Speech/ASR/Sherpa源码测试、写各自隔离候选审查文件；无自动超时，尚无结果。真实OS检查确认任务目录可写、目录外/context副本拒写、员工照片目录拒读。见`.omx/artifacts/{agy,cbc}-speech-final-review-20261107/`；只能观察同次进程，不重发。当前两份实现修复摘要/真实测试证据保持，旧freeze命令因三份协调文档后续变化exit1，另存bounded-refreeze-check.json，不改旧冻结或重复测试。外部意见不冒充native角色/完整发布批准，旧失败native不重启。
+
+hy3暂停到16:18:54本地／08:18:54UTC不变；本次文档已由hy4free完成。第4小时汇报14:03已发，下次15:03:29本地。roadmap10/12、P4/P11/发布open/not-ready与完整goal active保持；保护九文件、原App/模型与生产lock不变，无push。下段“所有助手终态”是启动前检查点，以本段及实际result.json为准。
+
 ## 2026-11-07 F08检查点已完整整理
 
 F08单system变量诊断源码/配置/README/验收文档和踩坑已验收。hy4free文档462.992秒初稿、400.276秒订正，最后README一行13.779秒修正后原样集成；精确路径遗漏导致16条工具读取错已保留并写中央pitfalls，不归为模型超时。当前所有助手、构建和推理均终态；不poll65312/22941/90639或下方旧句柄。最终readiness从benchmark/p11/grouped-report-manifest.json读取，旧快照保留；尚无push。hy3用户禁用到2026-11-07 16:18:54本地／08:18:54UTC，届时仅可复查，不保证恢复。AGENTS和精确quota status均已记录。

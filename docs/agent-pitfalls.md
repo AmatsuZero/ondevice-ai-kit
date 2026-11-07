@@ -386,3 +386,33 @@
 - 处理：替代线路由用户明确选择 hy4free，未自动轮换；助手未递归调用模型（本 docs 任务本身已运行，确有模型调用），父代理记录操作暂停，未授权付费调用。
 - 证据：`.omx/artifacts/cbc-f08-system-prompt-docs-20261107/raw.jsonl`、`.omx/artifacts/cbc-f08-system-prompt-docs-20261107/parent-assessment.json`、`.omx/artifacts/cbc-hy3-quota-pause-20261107/status.json`。
 - 边界：`2026-11-07T16:18:54+08:00` 为服务端上报的 reset 时间，仅是**最早可复核时点**，不保证届时额度恢复；在此之前不调用 hy3。四次生成的诊断与各固定结果事实均不因此改变。
+
+# 2026-11-07 Speech限定复核与F06取证补录
+
+## 1. agy 429 与 hy4free 回退
+- 现象：`agy`（`gemini-3.8-flash-medium`）出结果前 429 `RESOURCE_EXHAUSTED`、exit 3、收文件 0。
+- 原因：单账号额度耗尽；估算重置 2026-11-14 08:25:21 Asia/Shanghai（约，来自服务端延迟 584292s），仅估算、无恢复保证；`hy3` 亦按用户指令暂停并记录重置时间。
+- 有效处理：该线路不重试，仅重置后复核（recheck only）；按用户选择回退 `cbc hy4free`，未自动付费回退。
+- 边界：不循环换模型规避共享额度；不把估算重置当恢复保证；失败 URL/凭据不入文档。
+- 证据：`.omx/artifacts/ask-agy-speech-final-review-20261107.md`、`.omx/artifacts/agy-speech-final-review-20261107/parent-assessment.json`。
+
+## 2. 两处复核解释性错误已更正
+- 现象：长评的异常层级/catch 解释、以及把私有 `Decoder` + `CountDownLatch` 测试称作真实 JNI 的措辞，均被父评估驳回。
+- 原因：JVM 上 `CancellationException` 属 `Exception`；该测试是 JVM 测试替身，验证协程取消/排空编排，非真实 JNI；`NonCancellable` 不强制挂起后端完成，`AsrResources.kt:89` 的 `isActive` 检查使双重恢复未证实。
+- 有效处理：原 REVIEW 不改，另取真实源码/测试证据；零新缺陷不写成新补丁或发布无缺陷。
+- 边界：不得把该 JVM 测试称为真实 JNI；候选审查不替代真机/发布验收。
+- 证据：`.omx/artifacts/cbc-speech-final-review-20261107/parent-assessment.json`、`.omx/artifacts/cbc-speech-defects-review-20261107/parent-assessment.json`、`.omx/artifacts/cbc-speech-final-review-20261107/cancellation-hierarchy.txt`。
+
+## 3. 冻结哈希稳定与旧 --verify
+- 现象：两份冻结 summary 的旧全量 `--verify` 仍 exit 1。
+- 原因：各 56 项哈希中 53 项一致，仅 3 份可变协调文档漂移（`docs/HANDOFF-2026-11-05-next-session.md`、`docs/agent-pitfalls.md`、`docs/validation/foundation-followups.md`）；源/测试/原始证据稳定，9 条受保护路径与 production lock 未变。
+- 有效处理：保留原 exit 1 与旧 summary/脚本，补有界 source/test/evidence 哈希收据 `.omx/artifacts/speech-final-review-20261107/bounded-refreeze-check.json`（无新原生执行或原生研究结论），不重跑推理。
+- 边界：不把旧 `--verify` 说成当前通过。
+- 证据：`artifacts/verification/speech-cleanup-20261107/summary.json`、`artifacts/verification/sherpa-cleanup-20261107/summary.json`。
+
+## 4. 官方 Markdown 工具不支持 vs 原始 GET 200
+- 现象：网页工具无法解析官方 text/markdown（400）。
+- 原因：工具内容类型限制，非官方页面不可用。
+- 有效处理：改用原始官方 GET，三份 `.md` 均 200，精确字节/SHA 记于 `.omx/artifacts/f06-transfer-parent-evidence-20261107/retrieval.json`；结论仅为"所检视文档/头文件未见明确 RGB 传递函数契约"。
+- 边界：不据"无明确契约"推断 sRGB/线性必需或正确，不把未验证 gate 当通过。
+- 证据：`.omx/artifacts/f06-transfer-parent-evidence-20261107/`、`.omx/artifacts/native-f06-transfer-evidence-20261107/`、`.omx/artifacts/f06-transfer-parent-evidence-20261107/retrieval.json`、`.omx/artifacts/f06-transfer-parent-evidence-20261107/header-inventory.json`。

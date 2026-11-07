@@ -1,3 +1,29 @@
+## 2026-11-07 Speech/F06本批验收完成
+
+| 任务 | 助手 | 实际结果 | 记录/下一步 |
+| --- | --- | --- | --- |
+| Speech生命周期六文件复审 | cbc hy4free免费 | 611.550秒/50事件/15工具/0工具错，0新确认finding | cbc-speech-final-review-20261107原件与父更正保留；非整分支批准 |
+| Speech缺陷六文件复审 | 用户选定cbc hy4free免费 | 680.198秒/48事件/13工具/0工具错，0新确认finding | cbc-speech-defects-review-20261107；agy429原错保留，不重试 |
+| 两份验收文档/踩坑补录 | cbc hy4free免费 | 初稿及订正均终态；订正247.216秒/77事件/23工具/0工具错；两文档及补录原样集成 | cbc-speech-f06-docs{,-fix}-20261107；不再poll79461/91161 |
+
+当前无运行助手。父仅核验/集成及更新证据指针；无新测试/推理/设备/付费/上传，九保护/lock保持。10/12和原生产门槛未关闭。hy3暂停到16:18:54本地；旧running段落仅历史。
+
+## 2026-11-07 14:30 当前：两份复审终态，文档交付运行中
+
+cbc生命周期53882已终态611.550s/50完整事件/15工具，缺陷29890已终态680.198s/48事件/13工具；均3文件实际交付、0工具错误、0新确认finding，精确context/源码/候选hash匹配。原件不改，父处置纠正Exception继承、无条件活性保证、JVM替身冒称真实JNI及未证二次resume；不为这些说明错误改生产源码或重复测试。见两任务parent-assessment.json和ask索引。
+
+新cbc hy4free文档79461/PID98567实际运行，只写两份验收说明/pitfalls补充/DELIVERY候选；OS正/负/私有读边界再次通过，尚无文档验收。F06父已读三份Apple官方Markdown（GET200）及三份iPhoneOS27.2SDK头；本检查范围未见显式模型传递函数要求，不等于穷尽证明/质量通过。新native researcher启动429无结果已停，不重试。10/12/not-ready与hy3暂停保持；下方两cbc运行中是此前状态。
+
+## 2026-11-07 14:12 线路更新：agy额度终态，用户选择hy4free接手
+
+agy97116已终态exit3/28.847s、RESOURCE_EXHAUSTED HTTP429、0文件，服务端提示162h18m12s；约2026-11-14 08:25:21本地仅为估计复查时间，不是恢复保证。原raw/错误/父处置保留，不重试该线路。用户已选cbc hy4free，新独立缺陷审查unified29890实际启动，见`.omx/artifacts/cbc-speech-defects-review-20261107/`；原生命周期审查53882继续。两份相同固定源码、不同审查职责/候选目录，不给彼此结论。hy3暂停、无任务超时/付费fallback保持。下方agy运行中是启动时历史，以实际result.json为准。
+
+## 2026-11-07 14:06 当前：Speech修复后六文件限定复审
+
+当前HEAD `71df0fb`。agy免费flash-medium（PID58850/session97116）与cbc hy4free（PID58974/session53882）已实际启动，分别检查缺陷/回归及生命周期/所有权边界；各自只写隔离REVIEW.md/findings.json/DELIVERY.md，不改源码、不运行测试或设备。证据`.omx/artifacts/{agy,cbc}-speech-final-review-20261107/`。两路任务目录写入成功，目录外与context副本写入、Downloads读取拒绝已由真实OS检查确认；无任务超时/付费fallback。hy3在16:18:54本地前禁用保持。仅已派发/读材料，尚无结论，不替代缺失的native双路或整分支批准。
+
+两份旧Speech/Sherpa freeze各56hash中53保持，变化仅交接/pitfalls/followups三份后续协调文档；六份实际源码/测试及原始运行证据一致。原verify exit1保留，未改旧summary/脚本、未重跑测试；只读收据`.omx/artifacts/speech-final-review-20261107/bounded-refreeze-check.json`。14:03第4小时汇报已记录，下次15:03:29本地到期。F08原四次诊断无质量修复、10/12/not-ready保持。
+
 ## F08最终文档已验收（先前运行中条目为历史）
 
 hy4free文档462.992s/订正400.276s/README一行13.779s均已实际终态。最终README/验收文档原样复制，pitfalls助手文本原样追加；主代理另记录派发时漏精确三文件路径导致16次Read缺文件/误读目录。源码33183B/SHA0d5a4089…与实际构建逐字节一致，配置/README/validation/pitfalls摘要可在F08 summary追溯。所有助手/命令已结束；hy3暂停到16:18:54本地仍生效，无自动重试/付费fallback。四次生成/5负向/清理通过仅关闭诊断子项，不改变正式quality0of3、benchmark或roadmap10of12/not-ready。
