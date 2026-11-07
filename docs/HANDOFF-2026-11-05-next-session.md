@@ -1,3 +1,68 @@
+## 2026-11-07 最新执行约束与关键路径
+
+最新实际增量：[F09远端消费者](validation/f09-remote-consumer-20261107.md)新GET25,288,674B/SHA通过，
+344文件远端解压；全新consumer/DerivedData的双平台Release编译13.60/16.37秒，两App各24材料匹配；
+模拟器PID4921的manifest绑定模型bundle/Metal资源运行通过，并精确停止/卸载新增测试App。
+787文件摘要/九保护保持；构建仍同一物理Mac，无新实机/推理/SDK重编/上传。原“远端编译未执行”
+已被本条限定范围取代，不把模拟器资源结果包装为实机或完整发布接受。
+
+持续重开hy4free探针44550已自然终态931.375秒，process0但result为error_during_execution/
+empty_model_response：上游finish_reason=error、900332ms仅reasoning/无text或tool call，无交付。
+没有父耗时超时/已观察quota，不再轮询/重发原单。用户随后明确选择agy免费接手，
+新任务PID19582/unified66400正在运行，见`.omx/artifacts/agy-identity-reopen-probe-20261107/`。
+任务根正负写入检查通过；CLI自身会话/brain写入被限制已观察，尚无文件，不称交付成功，
+不擅自放行全局目录或开重复任务。hy3初稿351.851秒的
+后段短周期误接受/warmup峰值及schema错误已交回新任务73425，161.615秒修正文件逐字节集成。
+新测试对原候选真实4fail；父15GREEN/221独立变异、完整tools578/578（53.677秒）通过，
+源码/九保护/Apple lock保持。助手因自行加cd导致测试命令不符allowlist而被拒，原错/诚实blocked
+说明保留；实际测试由父完成，没有扩大助手权限。旧候选/复现/共享协议保持。
+还未编译/安装/运行新持续重开probe，合成测试不算持续资源实机通过。各最终状态以台账为准。
+
+用户再次明确：本周目标保留所有roadmap任务，唯一允许延期的是低系统版本设备实机验证。
+当前表称F03，先前对话曾称F04，后续按任务名称识别，不因编号争论扩大豁免。
+每次付费cbc调用前先向用户确认具体任务/模型/范围；根AGENTS已覆盖旧standing authorization。
+持续执行期间每小时报告真实已验收增量、运行任务、阻断和下一小时目标；没有跨会话自动推送工具。
+关键路径拆分在`.omx/plans/roadmap-critical-path-20261107.md`，本批Kotlin持续重开探针和独立reducer
+均已准备，真实启动/验收以助手台账和对应process/result收据为准，不计准备为完成。
+宿主只读ADB检查设备15365375C9007986在线（transport37947）；受限进程启动ADB失败是本机权限边界，
+不能拿它要求用户重连。本轮尚未安装/运行新probe。
+
+hy3文档任务10691已自然终态420.615秒；文档捏造tuple/string API、错误阈值并列语义和PAD路径，
+已拒绝集成，原件/父处置保存`.omx/artifacts/cbc-f10-docs-final-20261107/`。不再轮询旧句柄，
+不把其no-findings当批准，不开另一轮泛文档任务。下方“待文档终态”为历史。
+
+## 2026-11-07 当前：Agent直接交付F10经验曲线，源码原样集成；563tools通过
+
+cbc hy4free文件交付467.413秒自然完成，56完整JSONL事件/最终success；实际模块/测试逐字节集成，
+主代理未代写实现。18定向、3110独立pairwise AUC/逐threshold决策核对、完整tools563/563过，
+56.557秒、九保护保持。来源及原RED/GREEN见`.omx/artifacts/cbc-f10-file-delivery-trace-fix-20261107/`，
+验收在`artifacts/verification/f10-calibration-curves-20261107/`。原DELIVERY称“无工具/权限失败”不实：
+初始Bash目录盘点被拒，部分Read路径缺失；原文保持，父处置另存，实际许可的测试命令确实RED/GREEN。
+
+cbc hy3独立PAD接入初稿106.841秒完成并保存，父核实已有部分测试，不再重复派发；
+未经校准的raw score也不能包装成必选outcome的LivenessDecision。文档修正、曲线API说明及限定
+静态复核已交hy3直接写，session10691，`.omx/artifacts/cbc-f10-docs-final-20261107/`；待终态与父验收。
+曲线仅描述输入观测，不选阈值、不接入bound score流水线；真实数据/置信推断/EER/生产策略仍缺。
+无下载/采集/设备/上传/新benchmark，10/12、P4/P11 open和release not-ready保持，完整目标active。
+
+## 2026-11-07 上一轮：按用户新指令，cbc直接写F10候选文件，主代理只读审查/验证
+
+用户明确要求AI Agent直接写文件，主代理不再接手实现正文。新文件交付任务交cbc hy4free：
+仅候选模块、测试、DELIVERY.md；已有statistics副本不改，不接入生产阈值。
+系统沙盒已验证任务目录可写/目录外拒写。首次启动仅因cbc自身traces目录EPERM停止，尚无模型结果；
+保留原错后，以调用级profile只放行新CLI进程PID专属跟踪目录，项目/凭据/全局配置仍不可写。
+修正后的调用已启动，进程终态/实际候选仍待核对；没有自动任务超时，也不因静默重发。
+证据`.omx/artifacts/cbc-f10-file-delivery-trace-fix-20261107/`，候选位于
+`/private/tmp/odai-cbc-f10-file-delivery-20261107/candidate/`。这是用户新指定的交付方式，旧截断请求保留。
+
+## 2026-11-07 补充：长输出截断诊断已记录，候选文件交付方案待真实验收
+
+用户建议复杂结果直接写文档/文件。已确认原F10调用也把stdout写文件、无任务超时；保留344064B
+不完整JSON。新2MiB合成输出经rtk逐字节通过，内部截断原因仍未确定，不归因为token/网络/CLI刷新。
+根AGENTS、踩坑记录和助手台账已补充：后续新复杂任务优先在经验证的隔离目录写候选文件、仅回短收据；
+本条诊断本身未扩大旧任务权限或调用模型；后续按上方新指令启动的独立文件交付仍待验收，不计roadmap完成。诊断证据见
+`.omx/artifacts/cbc-output-diagnosis-20261107/diagnosis.json`。
+
 ## 2026-11-07 当前：全任务状态核对已闭环，545tools通过；已按能力再派两项并验收
 
 用户要求复核其他任务完成情况，避免把已做事项反复列待办，并在核对后继续按能力派发/及时记录。

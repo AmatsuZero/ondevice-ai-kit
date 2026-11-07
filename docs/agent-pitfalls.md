@@ -74,6 +74,53 @@
 
 ## 2. cbc：结果格式与长任务
 
+- **上游15分钟终止不能归因为父超时**：持续重开Kotlin任务931.375秒自然结束，30完整JSONL，
+  process0但result.error_during_execution/empty_model_response。供应商原错为finish_reason=error，
+  900332ms仅reasoning、无text/tool call；无实际文件。父未设置任务超时，也没有观察到quota错误。
+  保留原件并停该线路；用户明确选agy免费接手，不能静默改付费或重发旧请求。
+  证据`cbc-identity-reopen-probe-20261107/parent-assessment.json`。
+
+
+- **green测试也可能漏掉协议变量和采样阶段**：持续重开汇总候选12测试通过，却用session起点
+  校验每周期30秒，后段仅1秒的周期仍被接受；RSS只聚合measurement，遗漏warmup高峰且输出
+  min/max对象，违背共享协议的全样本单个max整数。父独立变异真实复现后拒绝集成，交回助手
+  写定向RED/GREEN，不改协议迎合实现。证据`.omx/artifacts/cbc-identity-reopen-reducer-20261107/parent-red.json`。
+  后续hy3定向修正161.615秒终态，父对原候选4fail/修正15GREEN及221独立变异、完整578tools通过；
+  文件原样集成。助手命令自行加cd被精确allowlist拒绝，未绕过权限；实际检查由父执行，
+  不能把父结果写成助手自行运行。
+
+- **文档候选也必须对真实API验收**：hy3文档420.615秒完整交付，不代表内容通过。
+  它将dict/严格bool/返回dict的empirical_curve写成tuple/string标签/对象方法，并把inclusive
+  cutoff误写为并列拒绝；PAD源码路径/既有覆盖也有误。原件、no-findings声明及父拒绝均保存，
+  三文档未集成，不再派广泛文档重试。证据`cbc-f10-docs-final-20261107/parent-assessment.json`。
+
+- **直接文件交付首例已验收，不能连带相信交付说明**：hy4free467.413秒自然终态，56完整JSONL
+  事件/最终success；模块和测试逐字节集成，无父源码修补。18定向、3110独立穷举、完整563tools通过，
+  九保护保持。原DELIVERY称“无工具/权限失败”却漏掉一条被拒Bash盘点和缺文件Read；保留原件，
+  原始tool trace与实际测试RED/GREEN分别另存父处置，不能照抄助手自述。
+  这证明本次直接文件交付有效，不能推出旧批量JSON的内部截断原因或所有未来任务均不会截断。
+  新禁Bash文档任务已把真实pitfalls副本放在已声明路径，避免助手再用未授权盘点查缺失文件。
+  证据`cbc-f10-file-delivery-trace-fix-20261107/parent-tool-assessment.json`与
+  `artifacts/verification/f10-calibration-curves-20261107/`。
+
+- **直接文件交付需区分候选写权限与CLI运行目录**：2026-11-07按用户新指令启用Read/Write/Edit与
+  单条unittest命令。macOS嵌套sandbox-exec先报sandbox_apply EPERM，宿主相同profile的正/负写入检查通过。
+  首次真实调用随后在`~/.codebuddy/traces/<本次PID>`mkdir时报EPERM，exit0/error事件且无候选，
+  属启动权限错误，不是额度耗尽。保留失败后，只为新进程的精确PID跟踪目录增加写权限，
+  任务候选仍隔离，项目/凭据/全局配置不可写；不放行整个用户目录或整个traces树。
+  修正调用后续实际文件/测试验收见上条；不能把沙盒预检或启动成功当F10完成。
+  证据`cbc-f10-file-delivery-20261107/`与`cbc-f10-file-delivery-trace-fix-20261107/`（`.omx/artifacts/`）。
+
+- **stdout落盘不等于候选文件交付**：F10启动器原本就将stdout直接重定向到`raw.json`，
+  无任务超时；344064B原文UTF-8有效但JSON不完整。2026-11-07重新解析仅取得两个完整事件，
+  随后的事件在字符串中中断；未取得可验收候选。相同`rtk proxy`链路的2097152B合成输出逐字节通过。
+  只能确认本次响应落盘不完整，尚不能认定模型token上限、网络或CLI刷新退出缺陷；二进制静态线索不作运行证明。
+  后续新的复杂任务优先让具备文件工具的助手在经验证的隔离任务目录写候选源码/文档，最终只回路径、
+  字节数、SHA-256、检查和阻塞；主代理读取实际文件验收。先验证真实沙盒/路径限制，提示词、cwd、
+  allowlist或`--add-dir`都不能单独证明隔离。不扩大旧禁工具任务权限，不重发已失败同单。
+  若无法建立有界写权限，继续禁工具并把新任务拆成小交付；stream-json仅为待验证选项，不宣称已修复。
+  本条最初诊断时方案未验；后续首例已验见上条，旧失败与诊断原件保持。证据`.omx/artifacts/cbc-output-diagnosis-20261107/diagnosis.json`。
+
 - 2026-11-07经验曲线hy4free也自然退出1647.306秒/exit0、stderr空，但raw JSON恰344064B，
   在字符串中截断，无完整assistant/result/候选；保留原始字节与解析错，主代理接手，不补JSON/重发。
   原生进程句柄52594已终态，不再轮询。没有父超时或quota证据；原件`cbc-f10-empirical-curves-20261107/`。

@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261107-status-audit/summary.json",
-    "sha256": "a7c1d0831c46949bc64e23565e99632d9770d3f509c8b6a06ae61e03d54418a0"
+    "path": "artifacts/verification/p11-readiness-20261107-agy-handoff/summary.json",
+    "sha256": "24883ea181e507cb4bd6d7be8f61e2f0843f0b8a1f6ba9f7febd52972ce31d13"
   },
   "schemaVersion": 1,
   "sources": [
@@ -155,39 +155,39 @@
       }
     },
     {
+      "input": {
+        "path": "artifacts/verification/android-litertlm-resources-20261107/test-assets/solid-red-256.png",
+        "sha256": "991b54f01af493986b674dc2eedbc0b3cdf5aa9c9518f16dc379ccd6d9c9d3aa"
+      },
       "kind": "litertlm-android-resource",
       "p11Capability": "multimodal-android-litertlm",
       "path": "artifacts/verification/android-litertlm-resources-20261107/device-report.json",
       "sha256": "d1580dad6fb640233ea8a7a1b62059861f3ef8de0b3b53ad66d8da7c6e19ad4a",
-      "summary": {
-        "path": "artifacts/verification/android-litertlm-resources-20261107/summary.json",
-        "sha256": "0fc3e37a705f54580013450e0565fbec7ccb6df35eea27061c978931a1fc3372"
-      },
       "sourceManifest": {
         "path": "artifacts/verification/android-litertlm-resources-20261107/source-manifest.json",
         "sha256": "7a35774e4f62a2263fc8bc0ff92b9cf61395fb3291184b88f7b33e42844dbd30"
       },
-      "input": {
-        "path": "artifacts/verification/android-litertlm-resources-20261107/test-assets/solid-red-256.png",
-        "sha256": "991b54f01af493986b674dc2eedbc0b3cdf5aa9c9518f16dc379ccd6d9c9d3aa"
+      "summary": {
+        "path": "artifacts/verification/android-litertlm-resources-20261107/summary.json",
+        "sha256": "0fc3e37a705f54580013450e0565fbec7ccb6df35eea27061c978931a1fc3372"
       }
     },
     {
+      "input": {
+        "path": "artifacts/verification/android-identity-foreground-resources-20261107/test-assets/approved-astronaut.png",
+        "sha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5"
+      },
       "kind": "identity-android-resource",
       "p11Capability": "face-identity-liveness",
       "path": "artifacts/verification/android-identity-foreground-resources-20261107/device-report.json",
       "sha256": "8ed478ba928f060722a87928655777e591fd7a40f20d99cf579b29d306111b61",
-      "summary": {
-        "path": "artifacts/verification/android-identity-foreground-resources-20261107/summary.json",
-        "sha256": "0fa26d497811bd283b3a5c8c9e5679135ed52e1d25cb9a457c52d9d6febb8bbf"
-      },
       "sourceManifest": {
         "path": "artifacts/verification/android-identity-foreground-resources-20261107/source-manifest.json",
         "sha256": "e428f61d72cee3425ec017c719b2e3e9380d8efc2fc748e8271175cad5313823"
       },
-      "input": {
-        "path": "artifacts/verification/android-identity-foreground-resources-20261107/test-assets/approved-astronaut.png",
-        "sha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5"
+      "summary": {
+        "path": "artifacts/verification/android-identity-foreground-resources-20261107/summary.json",
+        "sha256": "0fa26d497811bd283b3a5c8c9e5679135ed52e1d25cb9a457c52d9d6febb8bbf"
       }
     }
   ]

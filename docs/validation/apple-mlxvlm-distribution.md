@@ -1,5 +1,18 @@
 # Apple MLXVLM 分发验证
 
+## 2026-11-07 remote artifact consumer increment
+
+[Fresh remote consumer evidence](f09-remote-consumer-20261107.md): authenticated GET of the
+published25,288,674-byte archive matched its full SHA256;344 files were validated and used
+for a new consumer and separate DerivedData. Release simulator/device builds passed in
+13.60/16.37s with all24 App notices. The simulator resource report bound the exact artifact
+manifest and passed model-bundle lookup and Metal-library load; the newly installed test
+App was stopped and removed. All nine protected paths stayed unchanged. This is same-host
+isolated remote-artifact consumption, not another physical build machine, new device
+runtime/inference, source-license applicability or release approval. Do not repeat the
+completed remote compile as a pending prerequisite. Evidence hashes:787 files in
+`artifacts/verification/f09-remote-consumer-20261107/summary.json`.
+
 ## 2026-11-06 current internal delivery and source-review status
 
 The [complete internal-delivery candidate](f09-internal-git-delivery-20261106.md) now includes
