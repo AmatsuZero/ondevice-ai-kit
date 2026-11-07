@@ -74,6 +74,13 @@
 
 ## 2. cbc：结果格式与长任务
 
+- **采集说明也要逐项对照真实校验器**：hy3初稿编造manifest字段/要求train并混淆PAD指标；
+  第一轮修正仍把sourceURL私有host误写禁止、把nonresponse当未定义。真实源码只检查无凭据HTTPS/
+  host/空白/端口；OnResponse以有效响应为分母，nonresponse数量/总试验率单列，只有空分母为null。
+  两轮错误原件与父拒绝保持，最终由助手订正后原样集成；不要从测试名称推断规则，也不改validator
+  来迎合文档。身份与PAD分别准备，选内部采集渠道不等于已取得签署/数据或已授权PAD对照制作。
+  证据`.omx/artifacts/cbc-f10-consent-collection-final-20261107/parent-assessment.json`。
+
 - **上游15分钟终止不能归因为父超时**：持续重开Kotlin任务931.375秒自然结束，30完整JSONL，
   process0但result.error_during_execution/empty_model_response。供应商原错为finish_reason=error，
   900332ms仅reasoning、无text/tool call；无实际文件。父未设置任务超时，也没有观察到quota错误。

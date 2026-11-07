@@ -7,6 +7,7 @@ from pathlib import Path
 
 from tools.identity_calibration_manifest import load_document, validate_manifest
 from tools.identity_calibration_statistics import binary_counts, search_counts
+from tools.identity_calibration_curves import empirical_curve
 
 
 def _require(condition, message):
@@ -44,7 +45,7 @@ def _reference(row, key, selected, role):
 
 
 def _verification(rows, selected, threshold, higher):
-    seen, records = set(), []
+    seen, records, curve_records = set(), [], []
     for row in rows:
         _fields(row, 'enrollmentId probeId score')
         enrollment = _reference(row, 'enrollmentId', selected, 'enrollment')
@@ -52,25 +53,38 @@ def _verification(rows, selected, threshold, higher):
         pair = (enrollment['id'], probe['id'])
         _require(pair not in seen, 'duplicate verification pair')
         seen.add(pair)
-        records.append(dict(positive=enrollment['subjectId'] == probe['subjectId'],
-                            accepted=_accepted(row['score'], threshold, higher)))
+        positive = enrollment['subjectId'] == probe['subjectId']
+        accepted = _accepted(row['score'], threshold, higher)
+        records.append(dict(positive=positive, accepted=accepted))
+        curve_records.append(dict(positive=positive, score=row['score']))
     counts = binary_counts(records)
     metrics = dict(farOnResponse=counts['negative']['errorRateOnResponse'],
                    frrOnResponse=counts['positive']['errorRateOnResponse'], counts=counts)
+    # Descriptive curve over the validated bound pairs; no policy is chosen.
+    metrics['empiricalCurves'] = dict(overall=empirical_curve(curve_records, higher))
     return dict(kind='supplied-pairs', comparisonCount=len(rows), decision='inclusive-threshold'), metrics
 
 
 def _pad(rows, selected, threshold, higher):
     seen, records, pai_records = set(), [], {}
+    curve_records, bona_fide_curve_records, attack_curve_records = [], [], {}
     for row in rows:
         _fields(row, 'sampleId score')
         sample = _reference(row, 'sampleId', selected, 'presentation')
         _require(sample['id'] not in seen, 'duplicate presentation')
         seen.add(sample['id'])
-        record = dict(positive=sample['label'] == 'bona-fide', accepted=_accepted(row['score'], threshold, higher))
+        positive = sample['label'] == 'bona-fide'
+        accepted = _accepted(row['score'], threshold, higher)
+        record = dict(positive=positive, accepted=accepted)
+        curve_record = dict(positive=positive, score=row['score'])
         records.append(record)
+        curve_records.append(curve_record)
         if sample['label'] == 'attack':
-            pai_records.setdefault(sample['pai'], []).append(record)
+            pai = sample['pai']
+            pai_records.setdefault(pai, []).append(record)
+            attack_curve_records.setdefault(pai, []).append(curve_record)
+        else:
+            bona_fide_curve_records.append(curve_record)
     _require(seen == set(selected), 'incomplete PAD split coverage')
     counts = binary_counts(records)
     by_pai = {}
@@ -81,6 +95,15 @@ def _pad(rows, selected, threshold, higher):
     worst = max(rates) if rates and all(rate is not None for rate in rates) else None
     metrics = dict(bpcerOnResponse=counts['positive']['errorRateOnResponse'],
                    apcerWorstPAIOnResponse=worst, byPAI=by_pai, counts=counts)
+    # Descriptive curves only: overall over all presentations, and per PAI over
+    # all selected bona-fide plus attacks of exactly that PAI. Nonresponses stay
+    # in their own group as None; the PAI order is sorted and deterministic.
+    overall_curve = empirical_curve(curve_records, higher)
+    by_pai_curves = {}
+    for pai in sorted(pai_records):
+        group = bona_fide_curve_records + attack_curve_records.get(pai, [])
+        by_pai_curves[pai] = empirical_curve(group, higher)
+    metrics['empiricalCurves'] = dict(overall=overall_curve, byPAI=by_pai_curves)
     return dict(kind='complete-selected-split-presentations', presentationCount=len(rows),
                 decision='inclusive-threshold'), metrics
 
@@ -153,7 +176,8 @@ def summarize(manifest: dict, scores: dict, root: Path) -> dict:
                 calibrationStatus='unverified', thresholdOrigin='caller-supplied-unverified',
                 rateDenominators='error-rates-on-responses; nonresponse-rates-on-total-trials',
                 unverified=['legal authority and actual score provenance', 'labels and undisclosed leakage',
-                            'independent trials and population representativeness', 'ROC/DET and confidence inference',
+                            'independent trials and population representativeness',
+                            'population/independent validation and confidence inference; empirical response-only curves are descriptive, not validated',
                             'production thresholds and policies', 'PAD or recognition acceptance', 'release readiness'])
 
 

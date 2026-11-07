@@ -1,3 +1,20 @@
+## 2026-11-07 最新：F10绑定经验曲线和内部采集清单已验收
+
+cbc hy4free95982已自然终态1959.539秒，scores.py10401B/SHA8cc28ce0…及新测试25365B/SHA0948aec2…
+逐字节集成；旧模块RED、78聚焦、1024报告/2048曲线/512识别差分通过，完整594tools45.580秒过。
+首次19fail/8error是已记录Ruby2.6加载3.4gems，原日志保持；仅本次PATH对齐，无源码/全局变更。
+Copilot35383已终态30.26秒，五文件限定只读无finding/0工具/0error，源摘要匹配；非整分支批准。
+
+用户选择公司内部组织知情同意采集，并问为何有“活体攻击”；已解释照片/屏幕/视频替代真人
+是呈现攻击对照。身份与PAD用途/同意范围分开准备，渠道选择不等于已同意全部PAD测试。
+新docs/validation/f10-internal-consent-collection-20261107.md由hy3编写，经schema及sourceURL/
+OnResponse分母两轮真实纠错后最终13816B/SHA8be1b7fe…原样集成。98161/70209/78215均终态，
+初稿未集成/原件与父处置保持。当前无运行助手，不再轮询上述所有旧句柄。
+
+验收artifacts/verification/f10-bound-curves-20261107/summary.json；无新真实数据/签署/拍摄/
+阈值/设备/上传/benchmark。F10仍缺生产数据/校准/PAD捕获协议；10/12、P4/P11/9gap/not-ready保持。
+下一小时报告仍12:03:29本地到期；继续完整roadmap，只有低系统设备验证获准延期。
+
 ## 2026-11-07 最新已验收：持续重开20周期/10分钟与F09远端真机资源
 
 `artifacts/verification/android-identity-sustained-reopen-final-20261107/summary.json`，
