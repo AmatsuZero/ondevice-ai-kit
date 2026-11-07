@@ -1,5 +1,12 @@
 # 当前 Apple 候选真机原生链路 — 2026-11-07
 
+2026-11-07 后续状态审计：原`freeze.py --verify`命令的最后一条全局manifest摘要断言已因
+后续Identity benchmark索引更新而失效，原命令本次exit1，不能写成当前全量通过。
+440份冻结文件、同一2个XCTest方法/86检查、18输入与恢复条件另行只读复核通过；
+详见[补充核对与边界](roadmap-status-audit-20261107.md)。原冻结脚本、summary和设备报告保持原样，
+不重跑设备。下方命令是原冻结时的验证入口，其全局指针条件不再代表当前manifest。
+
+
 同一 `636a6eb8854db5dff74244c42c3ce0e82bd2be9f` [组合候选](apple-current-candidate-20261107.md)
 在 iPhone17,2 / iOS27.2 完成真实图片、视频生成和 OpenCV 公开图片特征提取。
 生产 factory → host → KMP ViewModel → Swift bridge → MLXVLMBackend 链路通过，

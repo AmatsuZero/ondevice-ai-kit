@@ -1,5 +1,11 @@
 # P11 分组 benchmark 快照
 
+2026-11-07 当前状态已按[逐项审计](roadmap-status-audit-20261107.md)更新：**9状态行、8能力/11组**，
+当前636候选Identity新增30次测量，旧10组逐项保持；相机资源行仍无兼容benchmark，9行均有gap。
+Android当前ASR/SR/TTS与Apple当前非UI原生链路已各自验收，不能替代统一质量/资源或生产交付。
+下方每个日期条目为对应时点历史，当前来源始终以`benchmark/p11/grouped-report-manifest.json`为准。
+
+
 2026-11-07：[Android LiteRT-LM资源](android-litertlm-resources-20261107.md)新增普通afed APK
 在TECNO/API35的1预热+5测量，6次固定红图/模型身份/输入保持/缓存清理均通过；整SDK调用
 p50/p95=56477.465/57068.401ms，采样进程RSS峰值3,905,445,888–3,978,801,152B。

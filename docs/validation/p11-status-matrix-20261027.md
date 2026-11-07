@@ -1,5 +1,11 @@
 # P11 状态矩阵与发布结论
 
+2026-11-07 当前状态已按[逐项审计](roadmap-status-audit-20261107.md)更新：**9状态行、8能力/11组**，
+当前636候选Identity新增30次测量，旧10组逐项保持；相机资源行仍无兼容benchmark，9行均有gap。
+Android当前ASR/SR/TTS与Apple当前非UI原生链路已各自验收，不能替代统一质量/资源或生产交付。
+下方每个日期条目为对应时点历史，当前来源始终以`benchmark/p11/grouped-report-manifest.json`为准。
+
+
 2026-11-07：[Android LiteRT-LM资源](android-litertlm-resources-20261107.md)新增普通afed APK
 在TECNO/API35的1预热+5测量，6次固定红图/模型身份/输入保持/缓存清理均通过；整SDK调用
 p50/p95=56477.465/57068.401ms，采样进程RSS峰值3,905,445,888–3,978,801,152B。
@@ -78,7 +84,7 @@ P11现7项能力/10组，旧9组不变；原App/test/Identity runner和私有文
 | Multimodal Apple | `pass-bounded` | [Apple MLXVLM](apple-mlxvlm-backend.md)、[自然短视频 native 输出/8帧时间/取消重入](apple-mlxvlm-short-video.md)、[共享 Demo 自然视频 VIDEO 路由/真实 Files provider/AX 终态/Home 转场 tagged native trace/五次真机语义质量 rubric/同源 motion-control task-set/12轮 RSS 观察](multimodal-video-demo.md)、[P11 分组报告](p11-grouped-benchmark.md)、[Metal 资源观察](mobile-vlm.md#2026-10-27-metal-单目标分配观察固定公开-fixture) | temporal exact-label pair 0/3（`observed-failure`）；新增等时等待/clearCache 对照支持约1 GB残留主要来自MLX可回收缓存；整体泄漏与生产资源策略未定；跨场景/多任务集自然 temporal quality、可比较 GPU peak/能耗、发布资源预算、完整物理触控 |
 | Multimodal Android LiteRT-LM | `pass-bounded-sync-image` | [同步factory](android-litertlm-sync-demo.md)、[最终普通APK真机系统导入/硬件GPU取消重入与清理](android-litertlm-ui.md)、[异步drain合同](android-litertlm-drain-contract.md) | 异步native drain/streaming、人工触摸及其他provider、更广自然质量、可比较资源/GPU/能耗；当前不支持视频 |
 | Face identity/liveness | `unverified-calibration-pad` | [Android真实Identity](android-opencv-identity-demo.md)、[Apple真实Identity](apple-opencv-identity.md)、[多候选/图库](identity-gallery-demo.md)、[独立PAD原始分数](pad-raw-score-smoke.md) | PAD捕获/crop与SDK/Demo判定、授权评估/校准数据、1:1/1:N阈值与准确率；原始分数不产生LIVE/SPOOF结论 |
-| Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)（含真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 3/3）、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 18×GrOp/2304B 根因、TLS/destructor 归属、真实 PHPicker provider 路径、最低系统、完整 review |
+| Camera demo resource release | `unverified-native-residuals` | [相机验证](p4-camera-stability.md)（含真机 sandbox EXIF2/6/7→生产 `useImage`→Vision 3/3）、[AtlasTextOp 调查](p4-atlas-text-cache.md) | 生产Skiko/Skia交付与长期原生资源、TLS/destructor归属、真实PHPicker provider、最低系统和最终整分支review；2026-10-28 P4限定全范围审查已完成 |
 
 ## 统一结论
 
@@ -118,7 +124,7 @@ P11现7项能力/10组，旧9组不变；原App/test/Identity runner和私有文
 
 1. 在已冻结 SDK commit 的基础上，冻结剩余模型 revision、输入 fixture 和设备矩阵。
 2. 对每项实际交付能力补齐正确性、质量、延迟、资源、取消和持续运行报告。
-3. 保留当前8组/5项能力的逐run原始JSON，为其余实际交付能力补齐按设备、系统、能力和后端分组的p50/p95与质量报告，或保持明确unavailable/unverified。
+3. 保留当前11组/8项能力的逐run原始JSON，为其余实际交付能力补齐按设备、系统、能力和后端分组的p50/p95与质量报告，或保持明确unavailable/unverified。
 4. 继续 LiteRT-LM 异步 native drain、Android ASR 系统资源就绪、Face Identity/PAD 校准与判定、P4 生产分发/资源，以及 iOS 15/Android API26 设备验收；已完成的固定模型同步图像推理与双端 Identity 注册链路不重复列为未实现。
 
 本矩阵不接受许可证、不下载模型、不改变生产 factory，也不关闭 P4/P11。

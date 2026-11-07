@@ -1,5 +1,9 @@
 # 分阶段交付与恢复入口
 
+2026-11-07：[全任务状态审计](validation/roadmap-status-audit-20261107.md)已核对原P0–P11与F01–F12，
+更新当前表中过期的维护人、PAD smoke、真机和分组状态。Apple Git上传/回验已完成，
+Skiko `.6`本地交付已完成、Nexus上传/远端消费未执行；8能力/11组且9行均有gap。
+
 2026-11-07：[Android Identity资源](validation/android-identity-resources-20261107.md)在当前636/dfcc主包
 完成一次受控5预热+30测量，72个RESUMED检查点/close/lease/清理通过；p50/p95=133.174/148.906ms，
 采样进程RSS峰值约473MB（含首页）。原先需前台恢复的中断运行单列且排除，不重发同一请求。
@@ -41,7 +45,7 @@ P11现7项能力/10组，旧9组不变；原App/test/Identity runner和私有文
 
 **基础里程碑 10/12 已完成：P0–P3、P5–P10；P4 和 P11 未完成。** 依据加入 P11 时的原始 12 阶段基线 `cda5ba8`，按各工作包自己的停止点计数。此前反复报告的 5/12 混入了后续 SDK/Demo、第二平台、生产模型和最终验收要求，无法准确反映阶段性成果；详见[计数复核与逐阶段证据](validation/roadmap-progress-audit-20261026.md)。这不是完整项目的完成比例或发布许可。
 
-**本轮执行已收尾，完整 SDK/Demo 尚未最终验收。** 剩余问题已转入 [F01–F12 后续专项](validation/foundation-followups.md)，逐项保留证据、恢复输入和退出标准。生产功能与最终验收仍是项目目标，本轮不再自动展开新的取证、模型接入或审查重试。
+**2026-10-28那一轮已收尾；当前已按用户要求恢复推进完整roadmap。** 剩余问题继续由 [F01–F12 后续专项](validation/foundation-followups.md)跟踪。原阶段停止点、功能子项、真机和生产交付分开计数，当前审计见[逐项状态复核](validation/roadmap-status-audit-20261107.md)；不重试已失败额度线路。
 
 2026-10-28 用户调整执行优先级：最低系统设备暂缺，iOS15/Android API26 的设备运行验收暂缓，保持 `deferred/unverified`，待设备具备后恢复；当前继续推进其余实现与验收，编译下限保持不变。
 
@@ -216,7 +220,11 @@ P11现7项能力/10组，旧9组不变；原App/test/Identity runner和私有文
 
 状态继续记为未验证，不以模拟器/编译结果代替真机证据。验收行见 [设备矩阵](validation/device-matrix.md)。
 
-## 当前阶段与独立工作包
+## 原阶段与独立工作包（历史停止点）
+
+下表保留各原工作包停止时的范围与结论，不是2026-11-07所有扩展功能的当前状态。
+后续已完成的模型、普通UI和当前真机等增量以[全任务审计](validation/roadmap-status-audit-20261107.md)
+及[当前F01–F12队列](validation/foundation-followups.md)为准。
 
 按原始停止点，12 个基础里程碑中 **10 个已完成（P0–P3、P5–P10），2 个尚未完成（P4、P11）**。本轮执行以遗留项转专项收尾，P4/P11 继续保留原验收缺口；下表是阶段证据索引，后续执行状态以 [F01–F12](validation/foundation-followups.md) 为准。完成调研、探针或设计不等于对应生产能力已交付。
 

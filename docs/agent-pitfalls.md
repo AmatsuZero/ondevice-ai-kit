@@ -6,6 +6,18 @@
 
 ## 1. 所有助手：进程成功不等于任务成功
 
+- **当前表格与历史日志分开**：2026-11-07复核发现F09维护人、F10普通UI/PAD smoke、F11的7/10和
+  F12 Apple原生运行仍沿用旧待办。以精确报告/commit/APK核实后更新当前F表和一页矩阵；历史条目保留日期。
+  原P0–P11阶段10/12不等于生产完成率。辅助审查误把F02本地publication解释成远端上传，并建议旧`.4`；
+  父核实最新为`.6`本地已过、远端未执行，不能整体照抄。证据`artifacts/verification/roadmap-status-audit-20261107/`。
+- **冻结运行不要绑定可变全局指针作唯一完成判据**：Apple原`freeze.py --verify`最后比较全局benchmark manifest，
+  后续新增Identity组后必然失败；440冻结文件/86原生检查未变。保留原exit1，补只读原生证据与旧分组保持检查，
+  不改旧冻结summary/脚本、不重跑推理，也不把原全量命令说成通过。
+- **给助手实际schema再定契约**：notice checker最初父提示只给index两字段，但真实`.6`有七字段含来源/未批准说明。
+  实际74材料验证RED后，允许冻结reference里的provenance字段、严格可选schemaVersion，仍绑定外部SHA和全部字节；
+  不删metadata来迎合检查，不把preservation变成许可批准。见`f02-nexus-notice-materials-20261107/`及助手父处置。
+
+
 - **活动测试也可能停在内核冻结**：Identity原run01停7行，PID31731/活动instrumentation仍在，
   主/测试线程wchan均 `do_freezer_trap`，ActivityManager isFrozen=false；不能据此判OpenCV死锁。
   确认普通staging空且保留私有hash后，仅前台化同PID一次，原请求自然完成35行/close/lease/清理。
@@ -61,6 +73,10 @@
 - **零finding不推翻复现**：F02原7文件agy审查未报告已被真实Gradle RED证明的旧publisher输入缺陷；第四补丁在packet外。保留审查结果及父处置，不能把无新finding写成新补丁/整个发布无缺陷。证据 `.omx/artifacts/agy-f02-notice-review-20261106/parent-assessment.json`。
 
 ## 2. cbc：结果格式与长任务
+
+- 2026-11-07经验曲线hy4free也自然退出1647.306秒/exit0、stderr空，但raw JSON恰344064B，
+  在字符串中截断，无完整assistant/result/候选；保留原始字节与解析错，主代理接手，不补JSON/重发。
+  原生进程句柄52594已终态，不再轮询。没有父超时或quota证据；原件`cbc-f10-empirical-curves-20261107/`。
 
 - **自然退出也可能输出截断**：移除轮数限制后的Identity候选自然终止1715.484秒，exit0，
   stdout恰262144B；JSON在assistant reasoning字符串内截断，只有一个完整user事件，没有完整

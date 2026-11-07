@@ -1,3 +1,35 @@
+## 2026-11-07 当前：全任务状态核对已闭环，545tools通过；已按能力再派两项并验收
+
+用户要求复核其他任务完成情况，避免把已做事项反复列待办，并在核对后继续按能力派发/及时记录。
+[全任务审计](validation/roadmap-status-audit-20261107.md)已核对原P0–P11与F01–F12：
+10/12原停止点保持，修正当前表中的本人维护、F10普通注册删除/PAD smoke、F11的8能力/11组、
+F12 Android TTS及Apple原生真机等过期状态。Apple25.3MB包GitLab上传/认证回下载已完成；
+Skiko`.6`108.8MB/115版本文件/双iOS SDK链接/74材料本地已完成，Nexus上传和真实远端消费未执行。
+既有具体hosted/本次范围问题仍待答复，不重复问；没有本轮网络取件/上传或重跑设备。
+
+3356证据路径/2741来源核对、11分组逐项保持；Android当前ASR/SR/TTS/Identity资源、普通Identity
+和Apple人工导入留存证据核验通过。Apple旧freeze全量命令仅全局manifest摘要断言因后续索引更新
+exit1；440冻结文件/86原生检查另行只读通过，原失败/冻结脚本/summary保持，详见审计补充。
+
+[材料核对器](validation/f02-nexus-notice-materials.md)已验收：父先6项RED，候选实际schema不匹配
+失败保留后修正，现32聚焦与完整tools545/545、56.503秒通过；源码/九保护/生产lock保持。
+受限545测试的三个Swift缓存权限错误另存，正常主机复验过，无生产源码修改。实际`.6`74材料
+对外部冻结index逐字节通过，输出remote/legal/network恒false；不冒作许可裁定或远端接受。
+
+按能力新派两项均已自然终态并父验收：Copilot最终四文件源码复核25.75秒/0工具/0finding；
+cbc hy3实际3份module/消费者配置84.803秒/0工具，12个variant逐字段核实，期望receipt清单已保留。
+其notices不存在/property缺失推断被既有3个计划条目/实际command否决，无新增产品阻断。
+更早hy3当前表交叉审计119.69秒也已处置；原受限EPERM/端口失败独立保留，非provider额度失败。
+
+F10 cbc hy4free原session52594/PID19468已自然终态，1647.306秒/exit0；
+`.omx/artifacts/cbc-f10-empirical-curves-20261107/raw.json`344064B在字符串中截断，
+没有完整JSON/assistant/result/可用候选，不是父超时或已证明quota。原文和terminal-assessment保留。
+**本轮所有助手均已终态，不再轮询旧句柄；主代理接手原pure empirical-curve实现。**
+不修补截断JSON、不重发同单、不选生产阈值或构造授权数据；ROC/DET/统计指标未因此完成。
+原生429/Qoder403/dsh429/OpenCode失败线路未重试。
+实时状态和已完成任务不再轮询的句柄见[助手台账](validation/agent-task-ledger-20261107.md)。
+完整roadmap目标active；最低系统deferred、P4/P11 open、9行gap、release not-ready保持。
+
 ## 2026-11-07 当前：Identity资源真机与恢复完成，P11新增30条；Nexus/F10仍待推进
 
 上一轮Nexus工具2571de8为真实progress。用户询问今天能否完成全部：已说明按当前证据12/12不现实；
