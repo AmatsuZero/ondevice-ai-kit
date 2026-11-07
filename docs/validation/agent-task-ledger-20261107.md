@@ -1,3 +1,21 @@
+## F08最终文档已验收（先前运行中条目为历史）
+
+hy4free文档462.992s/订正400.276s/README一行13.779s均已实际终态。最终README/验收文档原样复制，pitfalls助手文本原样追加；主代理另记录派发时漏精确三文件路径导致16次Read缺文件/误读目录。源码33183B/SHA0d5a4089…与实际构建逐字节一致，配置/README/validation/pitfalls摘要可在F08 summary追溯。所有助手/命令已结束；hy3暂停到16:18:54本地仍生效，无自动重试/付费fallback。四次生成/5负向/清理通过仅关闭诊断子项，不改变正式quality0of3、benchmark或roadmap10of12/not-ready。
+
+## 文档线路已更新（用户刚确认）
+
+cbc hy3暂停到2026-11-07 16:18:54 Asia/Shanghai／08:18:54UTC，此前禁用，时间到仅可复查非额度保证。精确记录`.omx/artifacts/cbc-hy3-quota-pause-20261107/status.json`及根AGENTS。F08文档改交hy4free，任务`cbc-f08-system-prompt-docs-hy4free-20261107`/unified65312运行；只写三份候选，不递归委派，无超时/付费fallback。上一原hy3任务终态429/0文件保持，不poll50400。
+
+## 最新增量：F08 system-message诊断（2026-11-07 13:30）
+
+| 线路 | 实际交付与父验收 | 当前状态 |
+| --- | --- | --- |
+| agy flash-medium | 初稿496.999s/219events/2次未建文件Read错误；修正305.681s/0tool error，33183B源码原样集成；父Release12.373s/5负向/恰4生成与清理通过 | 终态；只限诊断，原质量失败保持 |
+| cbc hy3配置 | 52.591/34.241/14.025s三份真实终态；资源断言和父指定目标类型经实际核验订正，最终project.yml原样集成 | 终态，无付费 |
+| cbc hy3文档 | 5.03s/process0，但provider429/quota6004/error_during_execution，无候选；服务端重置16:18:54本地 | 线路停止；已发fallback问题，等用户选择 |
+
+唯一runId system-message-birds-pair0-20261107-a1/PID89329，Mac原/中性system×motion/frozen全部原始` MOVING.`；不追加同类推理、不改正式rubric、0benchmark/0roadmap关闭。证据`artifacts/verification/f08-system-prompt-diagnostic-20261107/summary.json`。前置XcodeGen错误/嵌套sandbox EPERM/首轮真实Swift编译失败均保存；最终1类弃用warning保留。无当前助手/命令运行；旧句柄不poll。完整goal active/10of12/P4/P11及release not-ready保持。
+
 # AI助手任务台账 — 2026-11-07
 
 本台账由主代理维护。状态取自真实进程/完整结果/验收收据，历史任务不因本表刷新而重发。

@@ -74,6 +74,9 @@
 
 ## 2. cbc：结果格式与长任务
 
+- **修正文档同样要列全精确owned路径**：F08 hy4free修正提示只写“三份现有Markdown”但漏完整文件清单，原始96事件包含16条缺文件/误读目录错误，随后实际交付；父提示不充分，不能归为额度或耗时失败。下一次派发把每个候选绝对路径列进提示，只改已列文件、不用Read探目录；原错保留 `.omx/artifacts/cbc-f08-system-prompt-docs-corrections-20261107/parent-assessment.json`。这是主代理编排记录，非助手自测。
+
+
 - **源码诊断不能把“输入影响logits”推成编码正确或故障在logits之后**：hy4free F08分析347.304秒/58事件/0工具错误确有文件，但distinct tensors/logits不排除所有对齐/编码缺陷。其“新token等价性诊断”已被项目既有真实tokenizer uniform parity覆盖（历史2/2无skip/30全过），提案还混用两场景输入。父保留源差异和无已证bug结论，拒绝过度推论及重复执行；以后提供既有测试覆盖，缺助手上下文不算项目缺陷。证据`cbc-f08-temporal-rootcause-20261107/parent-assessment.json`。
 
 
@@ -346,3 +349,40 @@
 
 - 直接运行Sherpa模块`--offline`会报`No cached version of com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1 available`，测试尚未启动，不能当产品RED或重新下载。复用`artifacts/verification/android-committed-candidate-20261105/inputs/maven/sherpa`，以`-PsherpaMavenRepo=<绝对路径>`显式传入；先按同目录`inputs.json`的externalInputs校验AAR/POM摘要和长度。
 - Demo真实启用此后端还需`-PenableSherpaAsr=true -PsherpaAsrAssetsDir=<已冻结inputs/assets/sherpa-whisper-tiny绝对路径>`，核对全部七份既有模型/通知文件；默认Demo测试不等于启用后端配置验证。本轮14后端+56启用Demo测试实际执行通过，speech29为up-to-date。不修改全局Maven、不联网下载、不把host通过当设备JNI验收。证据`artifacts/verification/sherpa-cleanup-20261107/`。
+
+
+# 探针踩坑补遗（2026-11-07）
+
+本补遗只记 macOS 系统消息诊断探针自身的坑，**不证明生产 bug**；按「现象 → 已证实原因 → 有效处理 → 证据 → 不可越过的边界」记录，不含密钥/凭据/用户媒体/线程堆栈。固定结果事实不因本补遗改变。
+
+## 1. XcodeGen `commandLineTool` 不是合法 spec 类型
+
+- 现象：`project.yml` 把目标类型写成 `commandLineTool`，XcodeGen 生成阶段即失败，未进入编译。
+- 原因：`commandLineTool` 非 XcodeGen 合法 `type`；初始父提示词即给错，实际 gen 在编译前报错。
+- 处理：改用 `type: tool`（macOS 15 / Swift 6），经配置轮次修订后最终构建通过。
+- 证据：`artifacts/verification/f08-system-prompt-diagnostic-20261107/` 的配置轮次与最终构建记录（12.373s）。
+- 边界：属探针构建配置错误，非生产 target/SDK 缺陷；配置修订成功不等于发布批准。
+
+## 2. 外层 `sandbox-exec` 阻断嵌套 SwiftPM `sandbox_apply`
+
+- 现象：首次在构建外再加一层网络 `sandbox-exec`，嵌套 SwiftPM 的 `sandbox_apply` 返回 EPERM，构建被阻断。
+- 原因：外层沙盒与嵌套 SwiftPM 沙盒叠加冲突，属沙盒层问题，非源码/依赖错误。
+- 处理：保留首次失败；最终构建改用普通获批 host + 固定本地缓存 + offline/pinned 标志，不额外叠加外层沙盒。
+- 证据：保留的首次失败与 `artifacts/verification/f08-system-prompt-diagnostic-20261107/parent-validation.json`（`compile.networkDeniedByOSProfile=false`）。
+- 边界：不关闭全局工具沙盒；不得宣称最终构建由 OS 强制禁网，禁网结论仅针对运行时推理进程。
+
+## 3. `LMInput.image.frames` 为可选 `[THW]`
+
+- 现象：首次 Swift 编译在 `ModelContainer.perform` 闭包报闭包推断错（105.773s）。
+- 原因：原始 `[ObservationRow]` 结果本已符合 `Sendable`，编译失败并非由非 `Sendable` 结果造成；读审另确认可选 `[THW]?` 被当作单个 `THW` 映射、neutral 失败时丢掉 original 行。已观察编译报闭包推断错；读审确认可选数组错误，修正后实际编译通过，但未单独隔离全部推断报错的因果。
+- 处理：部分结果修复另计，`FixtureOutcome` 只用于承载部分行与失败元数据（neutral 失败时保留已完成的 original 行，部分结果不丢），并非证明旧结果非 `Sendable`。
+- 证据：`artifacts/verification/f08-system-prompt-diagnostic-20261107/` 的首次编译（105.773s）、最终构建（12.373s）与告警记录。
+- 边界：仅探针 helper 修正，不改动生产 adapter；最终仍留 1 类 `init(cString:)` 弃用告警，非零告警。
+
+## hy3 额度 429（操作路由，非探针缺陷）
+
+- 现象：本 docs 任务原路由 hy3 返回 `status 429` / `code 6004`，未产出任何文件；进程退出 0 不等于任务成功。
+- 原因：错误为频率限制/类别额度（provider 429 / `code 6004`），不等于账单额度精确耗尽；按既定规则停止该线路、保留原错，不循环换模型规避共享额度。
+- 处理：替代线路由用户明确选择 hy4free，未自动轮换；助手未递归调用模型（本 docs 任务本身已运行，确有模型调用），父代理记录操作暂停，未授权付费调用。
+- 证据：`.omx/artifacts/cbc-f08-system-prompt-docs-20261107/raw.jsonl`、`.omx/artifacts/cbc-f08-system-prompt-docs-20261107/parent-assessment.json`、`.omx/artifacts/cbc-hy3-quota-pause-20261107/status.json`。
+- 边界：`2026-11-07T16:18:54+08:00` 为服务端上报的 reset 时间，仅是**最早可复核时点**，不保证届时额度恢复；在此之前不调用 hy3。四次生成的诊断与各固定结果事实均不因此改变。

@@ -1,3 +1,23 @@
+## 2026-11-07 F08检查点已完整整理
+
+F08单system变量诊断源码/配置/README/验收文档和踩坑已验收。hy4free文档462.992秒初稿、400.276秒订正，最后README一行13.779秒修正后原样集成；精确路径遗漏导致16条工具读取错已保留并写中央pitfalls，不归为模型超时。当前所有助手、构建和推理均终态；不poll65312/22941/90639或下方旧句柄。最终readiness从benchmark/p11/grouped-report-manifest.json读取，旧快照保留；尚无push。hy3用户禁用到2026-11-07 16:18:54本地／08:18:54UTC，届时仅可复查，不保证恢复。AGENTS和精确quota status均已记录。
+
+本次四次生成全部` MOVING.`，没有观察到system-message输出敏感性；F08自然时域质量仍失败，不追加同类生成。5无生成负向、真实Release12.373秒/1类弃用warning及完整清理已验，生产源码/模型/九保护保持；见docs/validation/f08-system-prompt-diagnostic-20261107.md。roadmap仍10/12、P4/P11/发布open/not-ready、完整goal active；剩余质量/资源、生产授权校准数据、Nexus精确hosted/本次115文件范围和最终全分支复审继续。只有低系统物理设备获准延期。下一小时汇报14:03:29本地到期。
+
+## 2026-11-07 文档线路选择已答复
+
+用户明确本次改交cbc hy4free，并要求hy3在北京时间16:18:54前不再调用。已记录根AGENTS.md和`.omx/artifacts/cbc-hy3-quota-pause-20261107/status.json`；该时间仅服务端报告的最早复查窗口，不保证额度恢复。新任务`.omx/artifacts/cbc-f08-system-prompt-docs-hy4free-20261107/`由unified65312运行，只写README/验证文档/pitfalls候选；无自动任务超时/付费fallback，不重发旧hy3任务。下段“等待选择/无运行助手”是此前检查点，以本段及实际result.json为准。
+
+## 2026-11-07 最新：F08单变量诊断已完成，未解决temporal质量
+
+基于HEAD b2945c9；最终保存以git log为准。本次在Mac隔离consumer用固定本地SmolVLM2/公开飞鸟pair-0，仅改original/neutral system，恰好4次生成全部原始` MOVING.`。唯一runId `system-message-birds-pair0-20261107-a1`/PID89329/进程5.211秒exit0、terminal success；无观察到输出敏感性，不能据此判其他prompt/编码无缺陷或模型必然无能力。birds/waterfall原pair0/3保持，0新benchmark/0roadmap关闭。
+
+源码由agy直接写，496.999秒初稿、305.681秒修正；Optional THW/部分完成行保留修正后33183B/SHA0d5a4089…与实际编译副本逐字节一致，已原样集成为`probes/apple-mlxvlm-system-prompt/SystemPromptProbe.swift`。cbc hy3配置52.591/34.241/14.025秒三轮，最终XcodeGen `type: tool`，原样集成project.yml。首轮parent指定commandLineTool被XcodeGen拒，随后额外外层sandbox导致SwiftPM嵌套sandbox_apply EPERM，再后真实Swift首编105.773秒报闭包推断错，失败原件保留；修正后实际Release12.373秒通过，1类String(cString:)弃用warning保留。5项无生成负向/防覆盖检查、720vs702 tokens及原adapter全文等价、同fixture pixels/THW共用、fresh cache/join、两个snapshot删除通过。21来源模型素材/6878upstream/九保护/生产锁保持；ComfyUI8188队列空后才运行，未停其进程。runtime OS网络拒绝，最终build为普通已批准host+固定缓存/离线flags，不能称其OS网络拒绝。无手机变更、下载、上传、push或付费调用。
+
+证据`artifacts/verification/f08-system-prompt-diagnostic-20261107/summary.json`及parent-validation.json。所有助手/构建/推理句柄均已终态，不再poll52727/56910/10989/83677/41580/57466/69524/19297/50400。cbc hy3文档任务实际5.03秒provider429/quota6004、0候选（process0不等于成功），服务端提示16:18:54本地重置，线路停止。README/验证文档/pitfalls补充尚未交付，已发模型切换问题等待用户选择，不自动换付费或同供应商轮换。
+
+安卓本次只读确认15365375C9007986为device；受限shell smartsocket EPERM经approved host检查解决，不要求用户重连。10/12、P4/P11/发布open/not-ready及完整goal active保持；只有低系统物理设备获准延期，其余质量/资源、生产授权校准数据、Nexus精确hosted/115文件范围及最终复审继续。13:03已发第3小时汇报，下一次14:03:29本地到期（仅当前持续会话）。
+
 ## 2026-11-07 本地检查点已保存
 
 `e8b97518626e9cf3f78bff832b6e55e225ed5167`，12个精确owned文件，功能探针/README/F10验收/F09远端推理与字节核对/进度记录/readiness指针；无push，九保护dirty/untracked仍原样。397任务test-only真实构建与同次12图功能、负向/清理恢复均已验收，49相关工具检查通过；最终probe源码与实际编译副本逐字节一致。

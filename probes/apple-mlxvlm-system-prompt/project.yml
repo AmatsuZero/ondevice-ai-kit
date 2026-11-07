@@ -1,0 +1,44 @@
+name: SystemPromptProbe
+options:
+  deploymentTarget:
+    macOS: '15.0'
+  # Production helper sources are copied unchanged by the parent next to this
+  # config; XcodeGen references them by name. Do not add AppleMLX/BaseSDK or
+  # any iOS App target (see task + existing-project.yml scope).
+packages:
+  MLX:
+    url: https://github.com/ml-explore/mlx-swift
+    exactVersion: 0.32.3
+  MLXLM:
+    url: https://github.com/ml-explore/mlx-swift-lm.git
+    revision: 6e338e5df49424fc0db7c6d58184d622f92ed18a
+  Transformers:
+    url: https://github.com/huggingface/swift-transformers.git
+    revision: b38443e44d93eca770f2eb68e2a4d0fa100f9aa2
+targets:
+  SystemPromptProbe:
+    type: tool
+    platform: macOS
+    sources:
+      - path: SystemPromptProbe.swift
+      - path: MLXVLMVideoInputAdapter.swift
+      - path: MLXVLMVideoSnapshot.swift
+      - path: LocalTokenizerLoader.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.systempromptprobe
+        SWIFT_VERSION: '6.0'
+        # Swift 6 complete strict concurrency (full checking, no minimal mode).
+        SWIFT_STRICT_CONCURRENCY: complete
+        # No signing: unsigned macOS CLI build.
+        CODE_SIGNING_ALLOWED: NO
+        ENABLE_HARDENED_RUNTIME: NO
+    dependencies:
+      - package: MLX
+        product: MLX
+      - package: MLXLM
+        product: MLXLMCommon
+      - package: MLXLM
+        product: MLXVLM
+      - package: Transformers
+        product: Tokenizers

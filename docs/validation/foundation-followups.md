@@ -1,3 +1,7 @@
+2026-11-07 F08文档收尾：[验收记录](f08-system-prompt-diagnostic-20261107.md)/probe README及中央pitfalls已由hy4free直接写并经父核实集成。初稿/订正/一行修正分别462.992/400.276/13.779秒均终态；hy3实际429后按用户要求暂停到16:18:54本地，届时仅可复查。下段“文档待选择”是此前历史；当前无运行助手。四次固定诊断无输出变化、原quality失败及10/12/not-ready保持。
+
+2026-11-07 F08：[独立system-message探针](../../probes/apple-mlxvlm-system-prompt/SystemPromptProbe.swift)与实际Mac报告`artifacts/verification/f08-system-prompt-diagnostic-20261107/summary.json`已验收。固定飞鸟pair-0、原/中性system×motion/frozen恰4次全部原始` MOVING.`；本范围未观察输出敏感性，原birds/waterfall0/3不变。5无生成负向检查、token全文等价/同像素共用/producer join/快照清理及21来源/6878upstream/九保护保持通过；最终Release12.373s含1类弃用warning。助手直接写源码与配置，父原样集成；cbc hy3后续文档429无交付已停止，等已发模型选择。无新benchmark/生产修改/发布或roadmap晋级，质量/预算等门槛继续。
+
 2026-11-07 员工图片仅本地功能试验已验收：12张派生输入全部完成特征提取、隔离注册、实际`THRESHOLD_UNVERIFIED`拒绝和PURGED；缺输入负向持久失败正确。原App/模型/权限/TTS恢复，设备及本地派生输入/映射清除，226原图摘要保持。见[功能验收](android-identity-functional-20261107.md)；不作为生产校准、准确率、阈值选择或PAD数据，F10原门槛保持。
 
 2026-11-07 新增实际软件验收：[F10绑定经验曲线](f10-calibration-scores.md#2026-11-07-接线与内部采集准备已验收)
