@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261107-bound-curves-final/summary.json",
-    "sha256": "a617c4f9931e773336f55a2af6f481465906187de9d79b49e9f5c2e9b5e8ee2f"
+    "path": "artifacts/verification/p11-readiness-20261107-functional-remote-final/summary.json",
+    "sha256": "07d046839b9f1d1a051fe73abcc5b3adaf4b88261b53ea263a8e3f0198885a25"
   },
   "schemaVersion": 1,
   "sources": [

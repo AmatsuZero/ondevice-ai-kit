@@ -74,6 +74,9 @@
 
 ## 2. cbc：结果格式与长任务
 
+- **Kotlin终态回写分支的val也必须真实编译**：功能探针修正persist异常处理后，局部`val finalStatus`在try/catch两处赋值，Android编译报`val cannot be reassigned`。助手只改为`var`，397任务test-only构建通过，前两份失败日志及旧候选保留。不用外层CLI成功推断编译成功。证据`cbc-identity-functional-{reviewfix,compileval}-20261107`和`android-identity-functional-final-20261107/build-identity.log`。
+
+
 - **采集说明也要逐项对照真实校验器**：hy3初稿编造manifest字段/要求train并混淆PAD指标；
   第一轮修正仍把sourceURL私有host误写禁止、把nonresponse当未定义。真实源码只检查无凭据HTTPS/
   host/空白/端口；OnResponse以有效响应为分母，nonresponse数量/总试验率单列，只有空分母为null。
@@ -195,6 +198,9 @@
 
 ## 5. agy：打印超时不是后台任务终态
 
+- **通用JSON API不能直接套用Android**：2026-11-07通用功能探针调用`JSONObject.keySet()`，真实Android test-only编译在两处报`Unresolved reference keySet`；尚未安装或传入员工图。交回助手使用当前Android支持的`keys()`迭代器并保留严格schema；源码交付/外层SUCCESS不等于编译通过。原失败保留`artifacts/verification/android-identity-functional-20261107/build-identity.log`。
+- **文件工具的元数据不能猜作实际字节收据**：同次DELIVERY声称Kotlin29220B而父实际读得26129B；原件不改，验收仅用实际文件大小/SHA和工具事件。`read_file`分段已指定StartLine时再叠绝对ByteOffset可因范围内长度计算而失败；有精确文件清单时不探测未供应README。候选缺席的Read、权限拒绝和后续真实交付分别记录，不作为额度错误或无工具失败。
+
 - **runOnMainSync外catch接不住主线程runnable错误**：SDK的SyncRunnable先执行`mTarget.run()`，再设置complete/notify，无catch/finally；清理flag时在lambda直接check/throw可能导致main崩溃或调用者等待，不能声称外层catch必将写出失败报告。应在lambda内捕获到AtomicReference，正常返回后在instrumentation线程处理，仍保留runOnMainSync自身错误catch。本机SDK37源码行490–496/2648–2674与摘要保存在`.omx/artifacts/agy-identity-reopen-mainthread-fix-20261107/mainthread-evidence.json`；发现时未安装；随后由agy修正并原样集成，最终20周期/600.9秒真机及恢复通过，见`docs/validation/android-identity-reopen-20261107.md`。
 
 - **headless读取范围与进程退出必须分开核验**：持续重开初稿真实写出Kotlin后，最小修正调用因context位于candidate工作目录外，read_file缺规则而auto-denied；process0/外层SUCCESS/空response且文件摘要未变，不是交付。保留终态后，新调用只用`--settings`会话内`permissions.allow`中的精确`read_file(绝对路径)`规则补齐已供应上下文读取；OS写沙盒仍只允许独立taskRoot。不要使用危险跳过权限、放行全局brain/auth/config或将此权限失败算quota。证据 `.omx/artifacts/agy-identity-reopen-probe-fix-20261107/parent-assessment.json`、`agy-identity-reopen-probe-fix-readscope-20261107/`；后者随后136.692秒实际交付；进一步主线程修正74.402秒后，最终构建/20周期真机/恢复已通过。外层SUCCESS仍须逐次核对实际文件与检查。
@@ -243,6 +249,9 @@
 - 证据：`artifacts/verification/f09-consumer-fix-20261106/tools-tests.log`、`tools-tests-ruby-aligned-result.json`。首次失败保留，不覆盖。
 
 ## 8. ADB：EOF、offline、unauthorized 与暂存
+
+- **同次功能请求255不等于失败或可重发**：12图功能run主机exit255/空输出，但唯一runId的私有持久报告completed/terminal、12次实际未校准拒绝及全部清理状态通过。只收取同次原始报告、独立核对hash/计数/错误码/负向/恢复后验收；不修host退出码或再推理。设备输入及本地派生/映射精确删除，226原图全部重hash保持；该结果仅功能，不提升校准/PAD/准确率。额外受限只读观察smartsocket EPERM属于本机沙盒，宿主只读复核通过，不能再次要求用户重连。证据`android-identity-functional-final-20261107/summary.json`。
+
 
 - **提前修协议，保留非终态**：当前TTS新协议在设备暂存前已将旧最终`ln`改为`set -C; cat > 新路径`，
   partial和final全SHA都验，设备重建exit0；三项实际shell检查覆盖已有目标不可覆盖/损坏partial拒绝/成功发布。
