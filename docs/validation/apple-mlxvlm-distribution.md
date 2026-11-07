@@ -1,3 +1,13 @@
+## 2026-11-07 fresh remote consumer physical resource increment
+
+The already downloaded, newly generated/built remote consumer additionally passed model Bundle.module lookup
+and actual device Metal library loading on the physical iPhone. An absent isolated alias was signed using existing
+assets; all original Mach-O sections/UUIDs, 24 notices and source App tree remained unchanged. The exact test PID
+was stopped and the newly installed alias removed; the old consumer and ordinary Apps were preserved.
+See [remote consumer evidence](f09-remote-consumer-20261107.md). No new SDK/consumer compilation, upload,
+model inference, production change or broad quality/resource acceptance is claimed. Earlier no-device statements
+refer to the preceding simulator-only checkpoint, not this appended physical resource run.
+
 # Apple MLXVLM 分发验证
 
 ## 2026-11-07 remote artifact consumer increment

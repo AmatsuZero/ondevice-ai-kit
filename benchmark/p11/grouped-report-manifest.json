@@ -1,7 +1,7 @@
 {
   "readiness": {
-    "path": "artifacts/verification/p11-readiness-20261107-agy-handoff/summary.json",
-    "sha256": "24883ea181e507cb4bd6d7be8f61e2f0843f0b8a1f6ba9f7febd52972ce31d13"
+    "path": "artifacts/verification/p11-readiness-20261107-device-checkpoint/summary.json",
+    "sha256": "6678b1712783b421a7a406a93e79a553a6d888c166d7ef0ec0b7ea1f0db086cc"
   },
   "schemaVersion": 1,
   "sources": [

@@ -16,8 +16,8 @@
 | F06 / Video SR | Apple输出/取消/音轨与部分文件清理；Android普通UI48帧、完整动态重播/返回清理，当前636候选SR6检查 | 自然/时域质量、传递函数、帧节奏/峰值/能耗/持续预算及延期角落 |
 | F07 / Android多模态 | 固定授权模型同步CPU文本/GPU图像、普通系统导入、Mali取消重入和清理；旧afed包5测量 | 异步native drain/streaming、其他provider、广泛质量/预算；当前supportsVideo=false |
 | F08 / Apple多模态 | 既有Files/短视频/取消重入；普通人工模型导入→生成→清除→冷启动；当前636非UI真实图片/视频及释放 | 两来源temporal motion/control均0/3的observed-failure；广泛自然质量、当前候选普通交互统一验收、GPU/能耗/预算 |
-| F09 / Apple二进制交付 | 20模块双slice/4C/资源、App24材料；GitLab包HTTP201；新增[新远端取件后隔离consumer](f09-remote-consumer-20261107.md)双平台Release/两App各24材料及模拟器模型bundle/Metal运行通过；本人维护已明确 | 新consumer实机/推理、完整分支/来源许可/生产验收；构建同一物理Mac，不称另一机器接受；未创建Release或tag |
-| F10 / Identity/PAD | 双端真实特征/注册删除/未校准拒绝和普通控件流程；当前Android30资源测量；独立PAD固定模型iPhone9/9原始分数；manifest/score/ROC-AUC工具 | 获授权身份/攻击数据、1:1/1:N/PAD校准与生产阈值、PAD capture/crop及SDK/Demo判定；原始分数不作LIVE/SPOOF |
+| F09 / Apple二进制交付 | 20模块双slice/4C/资源、App24材料；GitLab包HTTP201；新增[新远端取件后隔离consumer](f09-remote-consumer-20261107.md)双平台Release/两App各24材料、模拟器及实际iPhone模型bundle/Metal运行通过；新增实机测试别名已清理；本人维护已明确 | 新consumer真实推理、完整分支/来源许可/生产验收；构建同一物理Mac，不称另一机器接受；未创建Release或tag |
+| F10 / Identity/PAD | 双端真实特征/注册删除/未校准拒绝和普通控件流程；当前Android30资源测量及20周期/600.9秒持续重开160测量和全部恢复；独立PAD固定模型iPhone9/9原始分数；manifest/score/ROC-AUC工具 | 获授权身份/攻击数据、1:1/1:N/PAD校准与生产阈值、PAD capture/crop及SDK/Demo判定；原始分数不作LIVE/SPOOF |
 | F11 / 统一质量资源 | 9状态行中8能力已有11组兼容报告；Identity新增30测量，旧10组保持 | 9行均有gap；统一自然质量、真实峰值、GPU/energy和持续预算；相机资源行无兼容benchmark |
 | F12 / 当前候选与最终复审 | Android636归档、599JVM/四后端构建、ASR13/SR6/TTS/Identity资源与恢复；同归档Apple构建/bridge82、真机2个XCTest方法/86原生检查 | 当前候选全能力统一交互/质量资源和完整分支独立审查、最终生产验收；旧局部审查不升级为整分支批准 |
 

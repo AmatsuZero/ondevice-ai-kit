@@ -1,3 +1,50 @@
+## 2026-11-07 最新已验收：持续重开20周期/10分钟与F09远端真机资源
+
+`artifacts/verification/android-identity-sustained-reopen-final-20261107/summary.json`，
+唯一runId identity-reopen-20261107-20cycles-a1/PID11557：20周期/200调用（160测量）/
+600908.639ms/462前台检查，严格reducer接受；p50/p95=128.708/139.669ms，进程RSS峰570290176B，
+close-wait末−首=-5492736B。host提前返回导致首次collector非终态，原错/attempt1保持；
+只回读同次运行至终态attempt2，无重复推理。原main/test/runner/25私有/四SR/权限/TTS全部恢复，
+精确owned暂存/报告/work清理、九保护/Apple lock过。只关闭固定paced10min子项，非预算/零泄漏/生产通过。
+最终probe由agy直接写并原样集成；397任务49秒test-only构建与34编排边界检查过，主APK不重建。
+
+`artifacts/verification/f09-remote-physical-20261107/summary.json`补此前fresh remote consumer物理iPhone
+Bundle.module/Metal库资源运行，PID4276；原consumer/SDK无重编，Mach-O有效section/UUID/24材料保持。
+复用既有签名资产，只装安装前不存在别名io.ondeviceai.remoteconsumer.f09.c20261107，精确停止/卸载，
+原消费者/普通App安装URL及profile/lock/保护保持；无本consumer推理。旧模拟器checkpoint仍保持。
+
+当前唯一助手cbc hy4free unified95982（`.omx/artifacts/cbc-f10-bound-curves-20261107/`）仍运行，
+只写scores模块/新回归/DELIVERY候选；无自动任务超时/付费fallback。不得轮询旧终态句柄。
+11:04已发首小时汇报，`.omx/artifacts/roadmap-hourly-reporting-20261107/report-01.json`；
+下一次12:03:29本地到期，仅持续执行会话，未配置跨会话推送。目标仍active，10/12/P4/P11未晋级。
+
+## 2026-11-07 最新：安卓10分钟持续重开已单次启动
+
+agy主线程修正90158已终态74.402秒，Kotlin20243B/SHAd60781e7…逐字节集成，
+前两次交付/无编辑失败/完整工具事件均保留，不再轮询旧句柄。最终test-only397任务49秒通过，
+测试APK215574B/SHA0f1564cc…，签名/DEX/1046冻结源码及主APK检查过；34编排安全检查过。
+新证据`artifacts/verification/android-identity-sustained-reopen-final-20261107/`，fresh原App/25私有/
+四SR/runner/权限/TTS预检、分块暂存和安装均过；pipeline unified77249正在同runId
+`identity-reopen-20261107-20cycles-a1`执行20周期至少10min，未收取或裁定通过。
+它按序collect→restore→cleanup；任一步失败即停止，先观察同runId/实际状态，禁止重发推理。
+前一版构建/预检证据另保留，未装过。新cbc hy4free95982运行，
+`.omx/artifacts/cbc-f10-bound-curves-20261107/`，只写score模块/新回归/DELIVERY候选，
+把已有经验曲线接入1:1/逐PAI bound score报告，不选阈值，不把1:N pair曲线混成搜索指标。
+免费，无任务超时/自动付费fallback；父尚未接收/验收文件。首小时03:03:29UTC汇报仍待到期。
+
+## 2026-11-07 持续重开探针当前修正（取代下方旧running状态）
+
+当前HEAD为12ab766（13个精确owned paths，本地无push）；完整tools578已过、九保护及生产lock保持。
+agy初稿66400已自然完成410.031秒，实际19690B Kotlin已读审，但两处需修：清理屏幕常亮flag时吞错，
+以及测量结束timestamp重写。未集成/编译/运行。最小修正32085因context路径headless read_file规则缺失，
+22.852秒终态/外层SUCCESS但空response且文件未改；原证据和父处置保留，不当quota/超时/成功交付。
+当前仅新修正unified81979运行，`.omx/artifacts/agy-identity-reopen-probe-fix-readscope-20261107/`，
+精确session-only read allowlist、同样独立目录OS写边界，无全局配置修改/危险跳过/付费调用。
+主代理只写编排适配；新`artifacts/verification/android-identity-sustained-reopen-20261107/`的构建/
+transport/run/restore已准备，29项离线边界检查过。宿主ADB15365375C9007986在线；未安装新probe。
+下一步只接收81979终态、验证两处diff、原样集成、test-only构建/保留检查/同runId真机/恢复。
+首个每小时汇报仍03:03:29UTC（11:03:29本地）到期；10/12、P4/P11与完整目标active保持。
+
 ## 2026-11-07 最新执行约束与关键路径
 
 最新实际增量：[F09远端消费者](validation/f09-remote-consumer-20261107.md)新GET25,288,674B/SHA通过，

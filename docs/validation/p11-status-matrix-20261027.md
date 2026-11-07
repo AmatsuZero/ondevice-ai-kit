@@ -1,3 +1,8 @@
+2026-11-07补充：固定Android Identity持续重开20周期/200调用（160测量）/600908.639ms/462前台检查
+及所有恢复/清理通过，详见[真实运行](android-identity-reopen-20261107.md)。原11个grouped benchmark不改，
+本次不是新的兼容分组采样；RSS是进程采样，不裁定生产预算或零泄漏。F09新远端consumer物理iPhone
+模型bundle/Metal资源也通过，独立别名已移除；未执行该consumer推理。P11仍open/not-ready。
+
 # P11 状态矩阵与发布结论
 
 2026-11-07 当前状态已按[逐项审计](roadmap-status-audit-20261107.md)更新：**9状态行、8能力/11组**，

@@ -10,10 +10,14 @@
 | F10 PAD接入梳理初稿 | cbc hy3，独立源码/接口关系梳理并直接写文档 | terminal-needs-corrections；106.841秒写出6675B文档，源快照未变 | `.omx/artifacts/cbc-pad-integration-map-20261107/`；初稿与父处置保留 | 已有复制/缺配置测试不能再当新缺口；raw score不能凭空包装成必选outcome的LivenessDecision；修正任务见下行，不轮询session2004 |
 | F10文档定稿与限定静态复核 | cbc hy3，模块使用文档/PAD图修正/源码测试限定意见 | terminal-rejected；420.615秒，实际API/并列阈值/PAD路径有误，三文档未集成 | `.omx/artifacts/cbc-f10-docs-final-20261107/parent-assessment.json`；原文件另存rejected-candidate，进程成功不等于内容正确 | 不再轮询10691，不重复广泛文档任务；保留可用实现及563测试事实 |
 | Android持续重开探针 | cbc hy4free，复杂有界Kotlin实现 | terminal-provider-error；931.375秒自然终态、empty_model_response，无文件 | `.omx/artifacts/cbc-identity-reopen-probe-20261107/`；独立新探针；20周期/至少10分钟，无自动任务超时 | 原始上游finish_reason=error保留，无父超时/已观察quota；不再轮询44550；用户选定agy免费接手，见下行 |
-| Android持续重开探针接手 | agy gemini-3.8-flash-medium，用户明确选择免费路线 | running；PID19582/unified66400；任务目录写入正负检查通过，尚无交付 | `.omx/artifacts/agy-identity-reopen-probe-20261107/`；accept-edits/sandbox，无耗时超时；CLI自身会话目录写入被隔离拒绝已观察 | 保留当前同次运行/错误，不重发或放行整个用户目录；主代理待实际文件后编译/真机/恢复 |
+| Android持续重开探针接手 | agy gemini-3.8-flash-medium，用户明确选择免费路线 | terminal-needs-corrections；410.031秒实际写出19690B Kotlin，父已完整读审，两处需修正，未集成/编译 | `.omx/artifacts/agy-identity-reopen-probe-20261107/`；原文件SHA497b47c1…；保持全局会话写入拒绝日志 | 不轮询66400；交回助手修正KEEP_SCREEN_ON清理失败吞错与测量结束时间改写，见下行 |
+| Android持续重开探针两处修正 | agy免费，同一已选线路的最小修正 | terminal-no-edit；22.852秒，read_file缺headless读取规则，空response/文件未变 | `.omx/artifacts/agy-identity-reopen-probe-fix-20261107/parent-assessment.json`；result外层SUCCESS不能当交付 | 不轮询32085；不是quota/auth或任务超时。修正精确session-only读取规则后新任务见下行 |
+| Android持续重开探针读取范围修正 | agy免费，实际文件修改由助手完成 | terminal-delivered；136.692秒，19928B Kotlin两处diff原样集成；父397构建任务/43秒及签名/DEX/1046源码检查过 | `.omx/artifacts/agy-identity-reopen-probe-fix-readscope-20261107/`；SHA22179df7…；普通App25私有文件/四SR/runner/权限/TTS预检过，未安装 | 父随后从Android SDK证实main runnable抛错无法被外层catch可靠接住；不称最终验收，进一步修正见下行 |
+| Android持续重开主线程清理修正 | agy免费，最小失败路径修正 | terminal-delivered；74.402秒实际20243B Kotlin，唯一mainthread清理diff原样集成 | `.omx/artifacts/agy-identity-reopen-mainthread-fix-20261107/`；SHAd60781e7…；34编排边界检查过 | final测试overlay构建63373进行中；通过后新pipeline按序check/preflight/stage/install/同runId10min/collect/restore/cleanup，任一步中断不自动重放 |
 | Android持续重开汇总 | cbc hy3，严格纯函数与负向测试 | terminal-needs-corrections；351.851秒交付，父独立复现两个缺陷，未集成 | `.omx/artifacts/cbc-identity-reopen-reducer-20261107/parent-red.json`；后段1秒周期误接受，warmup峰值遗漏/输出schema错 | 原件保持，不再轮询47486；定向修正交回助手，见下行 |
 | Android持续重开汇总定向修正 | cbc hy3，已复现两处错误的最小修正/回归 | completed；161.615秒原样集成；父15测试/221变异、完整578tools通过 | `.omx/artifacts/cbc-identity-reopen-reducer-fix-20261107/`；共享协议保持，不允许为迎合错误修改协议 | 新回归对原候选真实4fail，修正15GREEN；助手自行加cd使测试命令被拒已保留，实际测试由父执行；完整578/53.677秒、源码/九保护/lock保持 |
 | F09远端消费者 | 主代理，既有工具的实际网络/构建/运行验收 | bounded-pass；新GET/344文件→全新双平台consumer编译→模拟器资源运行→精确卸载 | `artifacts/verification/f09-remote-consumer-20261107/summary.json`；787文件摘要、两App各24材料、九保护保持 | 实机资源/推理与其他生产门槛保持；同一物理Mac，不称另一机器通过 |
+| F10经验曲线绑定到真实score报告 | cbc hy4free，现有纯模块的有界集成与回归 | running；unified95982；无自动任务超时，只写隔离候选 | `.omx/artifacts/cbc-f10-bound-curves-20261107/`；owned scores.py、新test、DELIVERY；Read/Write/Edit，禁止Bash/MCP，免费 | 1:1/逐PAI描述性ROC/AUC保留原manifest/score绑定；不生成阈值、不把1:N pair ROC冒称搜索指标。父等待实际文件后验收 |
 | cbc长输出诊断与后续交付规则 | 主代理，本地原字节/启动器核查，不调用模型 | completed；原启动器已重定向文件且无超时；2MiB合成链路逐字节通过，内部根因未确定 | `.omx/artifacts/cbc-output-diagnosis-20261107/diagnosis.json`；更新根AGENTS和踩坑记录 | 后续新复杂任务优先经真实沙盒限制的候选文件交付/短收据；尚未实测此方案，不算F10实现完成，不重发旧请求 |
 | Nexus74材料核对器 | Copilot auto，个人额度的小工具 | candidate已由父修正并集成，32聚焦及545全tools通过 | `.omx/artifacts/copilot-nexus-notice-materials-20261107/`；40.77秒完整响应；实际`.6`73索引材料+index通过，保留父schema错误RED与修正 | 最终源码独立复核待下行任务；远端消费/许可仍未通过 |
 | Roadmap当前表交叉审计 | cbc hy3，短一致性审查 | completed，父已处置 | `.omx/artifacts/cbc-roadmap-status-crosscheck-host-20261107/`；119.69秒/0工具；原受限启动失败在不带host的同名目录，未计模型失败 | 2条采纳、1条部分采纳；父额外发现已改当前表，不再运行此任务 |
@@ -21,7 +25,13 @@
 | .6真实variant/消费者核查 | cbc hy3，短metadata/config审计 | completed，84.803秒/0工具；父逐项处置 | `.omx/artifacts/cbc-dot6-variant-audit-20261107/`；3份实际module原字节已对冻结计划摘要，含当前未运行消费者配置 | 12个variant逐字段对原metadata、3notices路径及既有property核实；期望清单已存，否决新缺失推断；不再轮询session37246 |
 
 已知停止线路：原生审查429、Qoder403、dsh429、OpenCode401/free429不自动重试。
-agy上次明确授权网络修复后的独立任务成功，可留作后续合适工作；本轮未重新调用。
+agy本轮已按用户选择实际调用，状态见表；旧终态不得反复轮询。
 Ollama已有本机模型可承担小型候选，但本轮未新发任务。免费优先；用户最新覆盖：每次付费cbc调用前先确认具体任务/模型/范围，不因耗时自动切换。
 
 唯一获准延期项为低系统版本设备实机验证（当前F03，旧对话编号不一致）；F10授权校准/攻击数据、Nexus精确出口/本次上传范围属于本周待解决输入，不是新增豁免。完整拆分见 `.omx/plans/roadmap-critical-path-20261107.md`。持续执行期间每小时汇报真实增量；未配置跨会话后台推送。已完成的GitLab上传、本地SDK链接、普通导入/注册/清除不重复。
+
+最终持续重开probe SHAd60781e7…、test APK0f1564cc…（215574B）已构建397任务/49秒；签名/DEX/1046源码检查过，fresh原App/25私有文件/四SR/runner/权限/TTS预检过，分块staging/安装过。pipeline unified77249当前执行唯一`identity-reopen-20261107-20cycles-a1`，报告在final目录；尚未收集/裁定通过。编排在`artifacts/verification/android-identity-sustained-reopen-final-20261107/pipeline.py`，任一步失败停止，不重放。
+
+F09远端消费者补充：`artifacts/verification/f09-remote-physical-20261107/summary.json`实际iPhone modelBundleLookup/metalLibraryLoad通过；源consumer未重编，Mach-O有效section/UUID及24材料保持，新别名已卸载，既有App安装URL/保护文件/lock/profile保持。无模型推理/新上传。
+
+Android持续重开已真实验收并恢复：final/summary.json，20周期/200调用（160测量）/600908.639ms/462前台检查，p50/p95=128.708/139.669ms；峰值570290176B，close-wait末−首=-5492736B。首次collector非终态因host提前返回，原失败保持；回读同PID11557/同runId至terminal，未重发推理。原App/test/runner/25私有/四SR/权限/TTS及精确临时清理全部过。仅有界10min，非零泄漏/预算/生产通过；见android-identity-reopen-20261107.md。

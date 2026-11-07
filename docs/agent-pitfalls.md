@@ -188,6 +188,10 @@
 
 ## 5. agy：打印超时不是后台任务终态
 
+- **runOnMainSync外catch接不住主线程runnable错误**：SDK的SyncRunnable先执行`mTarget.run()`，再设置complete/notify，无catch/finally；清理flag时在lambda直接check/throw可能导致main崩溃或调用者等待，不能声称外层catch必将写出失败报告。应在lambda内捕获到AtomicReference，正常返回后在instrumentation线程处理，仍保留runOnMainSync自身错误catch。本机SDK37源码行490–496/2648–2674与摘要保存在`.omx/artifacts/agy-identity-reopen-mainthread-fix-20261107/mainthread-evidence.json`；发现时未安装；随后由agy修正并原样集成，最终20周期/600.9秒真机及恢复通过，见`docs/validation/android-identity-reopen-20261107.md`。
+
+- **headless读取范围与进程退出必须分开核验**：持续重开初稿真实写出Kotlin后，最小修正调用因context位于candidate工作目录外，read_file缺规则而auto-denied；process0/外层SUCCESS/空response且文件摘要未变，不是交付。保留终态后，新调用只用`--settings`会话内`permissions.allow`中的精确`read_file(绝对路径)`规则补齐已供应上下文读取；OS写沙盒仍只允许独立taskRoot。不要使用危险跳过权限、放行全局brain/auth/config或将此权限失败算quota。证据 `.omx/artifacts/agy-identity-reopen-probe-fix-20261107/parent-assessment.json`、`agy-identity-reopen-probe-fix-readscope-20261107/`；后者随后136.692秒实际交付；进一步主线程修正74.402秒后，最终构建/20周期真机/恢复已通过。外层SUCCESS仍须逐次核对实际文件与检查。
+
 - 一次新任务在CLI内部60秒认证等待后返回 `authentication failed or timed out`，`conversation_id`空、`num_turns=0`；这不是模型容量或监督者任务超时。用户说明网络恢复并明确要求重试后，新进程静默认证成功，348.12秒取得完整SUCCESS/1turn和7文件审查结果。尚无完整输出时只报告“已提交/仍等待”，不能提前报可用审查。保留两次记录，不改凭据，不把失败的OAuth URL复制进提示词/文档。证据：`.omx/artifacts/agy-f09-packaging-supplement-20261106/`、`agy-f09-packaging-supplement-retry1-20261106/`。
 - 使用 `--print-timeout 0`。首次 180 秒打印超时返回 `DEADLINE_EXCEEDED`，当时后台 turn 尚在运行，不能立即重发。后续保留日志确认 CLI store manager / language server 已退出，仍不构成该审查通过。
 - `--conversation ID --print ...` 会提交新一轮，不能当作只读状态查询。
