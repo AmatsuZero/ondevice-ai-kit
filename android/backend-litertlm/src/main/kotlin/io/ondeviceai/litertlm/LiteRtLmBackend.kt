@@ -17,6 +17,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
 /** Image-only opt-in backend. Each production request owns one synchronous native session. */
 class LiteRtLmBackend internal constructor(
@@ -29,6 +31,8 @@ class LiteRtLmBackend internal constructor(
     private val supportedAbi: Boolean,
     private val probeState: LiteRtLmProbeState,
     private val cacheCleaner: LiteRtLmCacheCleaner = LiteRtLmCacheCleaner { it.deleteRecursively() },
+    private val terminationTimeoutMs: Long = 30_000L,
+    private val cleanupDispatcher: CoroutineDispatcher = Dispatchers.IO,
     private val availabilitySource: suspend () -> CapabilityAvailability = {
         LiteRtLmAvailability.forModel(store, ref, spec, false, apiLevel, supportedAbi, probeState)
     },
@@ -80,7 +84,7 @@ class LiteRtLmBackend internal constructor(
                     backendId, available.reason ?: UnavailableReason.BACKEND_NOT_LINKED)
             }
             return LiteRtLmGenerationSession(store, ref, spec, cacheRoot, factory, probeState,
-                cacheCleaner).run(request, update)
+                cacheCleaner, terminationTimeoutMs, cleanupDispatcher).run(request, update)
         } catch (failure: LiteRtLmError.DrainFailure) {
             synchronized(lock) { poisoned = true }
             throw failure

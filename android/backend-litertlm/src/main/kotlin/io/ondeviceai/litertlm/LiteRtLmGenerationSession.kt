@@ -11,13 +11,18 @@ import java.io.File
 import java.io.IOException
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.TimeoutCancellationException
 
 internal fun interface LiteRtLmCacheCleaner {
     fun delete(directory: File): Boolean
@@ -34,7 +39,18 @@ internal class LiteRtLmGenerationSession(
     private val factory: LiteRtLmEngineFactory,
     private val probeState: LiteRtLmProbeState,
     private val cacheCleaner: LiteRtLmCacheCleaner,
+    private val terminationTimeoutMs: Long = 30_000L,
+    private val cleanupDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
+    // Surviving cleanup owner. It is independent of the caller's coroutine/Job so the safe
+    // release (native.close -> owned-cache delete -> lease.close, each at most once) can
+    // outlive a caller that returned or was cancelled after a late exact-death timeout.
+    // Per-generation scope: the launched coroutine holds the needed references and completes
+    // on its own once the exact-death barrier resolves with success. If the exact barrier
+    // never resolves (or resolves with failure), the owner never proceeds past awaitTerminated
+    // and the lease/cache remain retained — fail-closed, not guaranteed released forever.
+    private val cleanupScope = CoroutineScope(SupervisorJob() + cleanupDispatcher)
+
     suspend fun run(request: MultimodalRequest, update: ((MultimodalTextUpdate) -> Unit)?): MultimodalTextOutput =
         withContext(Dispatchers.IO) {
         if (request.maxOutputTokens !in 1..spec.maxOutputTokens || !request.imageFile.isFile ||
@@ -129,10 +145,52 @@ internal class LiteRtLmGenerationSession(
             try {
                 if (native != null) {
                     unsafeNative = true
-                    withTimeout(30_000L) {
-                        if (started) native.cancelProcess()
-                        native.awaitTerminated()
+                    // Stage 1 — exact-death termination wait. This is the ONLY stage bounded by
+                    // the caller's termination timeout. A timeout here is the late-exact-death
+                    // signal and hands safe-release ownership to a surviving coroutine. native.close
+                    // / owned-cache delete / lease.close below are NOT bounded by this timeout, so a
+                    // timeout (or any failure) from them is a genuine cleanup error, never a
+                    // late-death handoff that would launch another native.close.
+                    try {
+                        withTimeout(terminationTimeoutMs) {
+                            if (started) native.cancelProcess()
+                            native.awaitTerminated()
+                        }
+                    } catch (timeout: TimeoutCancellationException) {
+                        // Late exact-death handoff. The barrier did not confirm within the caller's
+                        // budget; the caller observes DrainFailure and the backend is still poisoned
+                        // (unchanged). A genuine native barrier failure (incl. a native-reported
+                        // timeout from this stage) is not treated as confirmed termination: the
+                        // surviving coroutine re-awaits and only releases on true completion.
+                        //
+                        // Exact ordering / safety: ONLY exact barrier success permits the sequence
+                        // native.close -> owned cache successful delete -> lease.close, each at most
+                        // once. Barrier failure, native.close failure, or a cacheCleaner result of
+                        // false/throw MUST NOT release the lease (fail-closed). On any failure the
+                        // continuation returns without releasing the lease and without raising an
+                        // uncaught exception.
+                        val nativeRef = native
+                        val cacheRef = cache
+                        val leaseRef = lease
+                        if (nativeRef != null && leaseRef != null) {
+                            cleanupScope.launch {
+                                try {
+                                    nativeRef.awaitTerminated()
+                                    nativeRef.close()
+                                    if (cacheRef != null && cacheRef.exists() && !cacheCleaner.delete(cacheRef)) {
+                                        return@launch
+                                    }
+                                    leaseRef.close()
+                                } catch (_: Throwable) {
+                                    return@launch
+                                }
+                            }
+                        }
+                        throw LiteRtLmError.DrainFailure()
                     }
+                    // Timely stage: no termination timeout in scope. Any failure (incl. a
+                    // TimeoutCancellationException raised by a timed native.close) is handled by the
+                    // generic catch below and NEVER launches another native.close / cache delete.
                     native.close()
                     unsafeNative = false
                 }
