@@ -1,6 +1,6 @@
 # Android 图像理解 Demo（LiteRT-LM）
 
-显式构建 `-PenableLiteRtLm=true :demo:androidApp:assembleDebug` 后，普通 Demo 会显示图像理解页面，使用真实 `litertlm.android` 后端。默认构建不引入 LiteRT-LM。先支持单图+文本和最终结果；不显示视频选择，不假装有视频模型支持。生成任务取消后会丢弃结果、等待同步发送返回，再释放输入及模型资源，可能需要等待剩余生成时间。
+显式构建 `-PenableLiteRtLm=true :demo:androidApp:assembleDebug` 后，普通 Demo 会显示图像理解页面，使用真实 `litertlm.android` 后端。默认构建不引入 LiteRT-LM。该 Demo 通过显式公开的 `LiteRtLm.createProcessBackend` 接入「进程化」后端：生成在独立的 LiteRT-LM 进程中完成（固定 0.18.1 文本回调路径，官方 MessageCallback 仅回传最新分块，按 DELTA 拼接）。先支持单图+文本和最终结果；不显示视频选择，不假装有视频模型支持。生成任务取消后会抑制后续输出；清理会回收自有进程，并在释放输入/模型租约之前等待最初注册的 Binder death，可能需要等待剩余生成时间；取消或回收（retire）并不保证立即停止或立即回收 GPU delegate——仍在进行的生成可能继续跑完。本段只描述接线与取消/回收语义，不代表立即完成或资源（含 GPU delegate）即时释放已被验证。
 
 ## 本地模型包
 

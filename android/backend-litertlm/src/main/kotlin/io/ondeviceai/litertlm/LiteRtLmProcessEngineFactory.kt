@@ -16,8 +16,11 @@ import kotlinx.coroutines.CancellationException
  * bind/claim rejection markers are preserved by that client.
  *
  * The current explicit [LiteRtLmCallbackMode] is an INTERNAL test/proven-input configuration and is
- * NOT proof that an installed binary is proven. There is no public asynchronous backend-creation API
- * or default switch in this factory.
+ * NOT proof that an installed binary is proven. The public [LiteRtLm.createProcessBackend] explicit
+ * builder selects the pinned 0.18.1 DELTA text path; this internal factory can also be constructed
+ * directly (e.g. by instrumentation) with an explicit [LiteRtLmCallbackMode], which remains the
+ * test/proven-input mechanism. No other public asynchronous backend-creation API or default switch
+ * exists.
  */
 internal class LiteRtLmProcessEngineFactory(
     context: Context,

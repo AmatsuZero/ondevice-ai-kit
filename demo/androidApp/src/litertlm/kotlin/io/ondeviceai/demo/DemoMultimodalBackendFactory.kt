@@ -3,6 +3,7 @@ package io.ondeviceai.demo
 import android.os.Build
 import androidx.activity.ComponentActivity
 import io.ondeviceai.binding.AndroidMultimodalBridge
+import io.ondeviceai.litertlm.LiteRtLm
 import io.ondeviceai.litertlm.LiteRtLmRuntimeEnvironment
 import io.ondeviceai.modelstore.ModelCompatibility
 import io.ondeviceai.modelstore.ModelStore
@@ -21,7 +22,10 @@ internal object DemoMultimodalBackendFactory {
         val store = ModelStore(File(context.noBackupFilesDir, "litertlm/store"),
             ModelCompatibility("litertlm.android", "0.18.1", Build.VERSION.SDK_INT.toString(), architecture))
         val backend = LiteRtLmDemoBackend(File(context.filesDir, "litertlm/import"), store,
-            context.cacheDir, environment)
+            context.cacheDir, environment,
+            create = { modelStore, model, cacheRoot, env ->
+                LiteRtLm.createProcessBackend(context, modelStore, model, cacheRoot, env)
+            })
         return DemoMultimodalRuntime(
             AndroidMultimodalBridge(MultimodalGenerationClient(backend.backendId, listOf(backend)), inputs, scope),
             LiteRtLmDemoModelImport(context, scope, backend, canImport, onImported))
