@@ -1,0 +1,58 @@
+# W3 Acceptance Matrix — Remaining Cases (Corrected)
+
+Scope: on-device speech recognition acceptance. Documentation/planning artifact only
+— no tests were executed and no execution commands are included. Every case row below
+is UNRUN. This doc is NOT a quality approval.
+
+## Corrections vs the prior W3 doc
+- Kept original removals: row 1 (observer path stabilization / 17-test retest) and
+  row 8 (generic integration) are duplicate / non-actionable already-accepted work;
+  no new path, tool, or download is opened here.
+- API references corrected to the supplied source: `SpeechRecognitionClient` and
+  `SpeechRecognitionRequest(locale)` (NO `audioFile` field). `SpeechBridgeAsrRequest`
+  is NOT used. Swift `SpeechMicrophoneRecognitionRequest` exists on iOS only.
+- System ASR backend (`android.speech.recognizer` / `AndroidSpeechRecognizerBackend`)
+  is MICROPHONE-ONLY: `recognize` -> `RecognitionSession.recognize` ->
+  `engine.start(locale)` -> `SpeechRecognizer.startListening(intent)`.
+- File-fixture rows must NOT use the system Android backend; R4 uses the file-capable
+  Sherpa backend (Android) or `AppleSpeechRecognizerBackend` file path (Apple).
+- No generic new authorization is granted for file fixtures; no download/capture is
+  authorized in this pass.
+
+## Remaining concrete cases (UNRUN, <=5 rows)
+| ID | Case | Input | Owner | Status | Primary assertion |
+|----|------|-------|-------|--------|-------------------|
+| R1 | On-device system en-US recognition | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | System backend MICROPHONE-ONLY: `SpeechRecognitionRequest(locale)` (no audioFile); `SpeechRecognizer.startListening`; TECNO en-US resource unavailable/unverified; error13/MISSING_ASSETS vs nonempty transcript + exact backend; own engine cancel/destroy bounded; NO no-mic path |
+| R2 | Mic: background speech handling | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | Background speech handled per spec; no SHA of raw input (no file exists) |
+| R3 | Mic: interruption / cancel / reentry | Real mic, user start cue | android-ondevice-asr / ios-ondevice-asr | unrun (needs user) | Android `SpeechRecognitionRequest(locale)` + session cancel/reentry; iOS Swift `SpeechMicrophoneRecognitionRequest`; reacts to interrupt/cancel, re-enters cleanly |
+| R4 | zh-CN / noisy file quality | Offline file fixture (no mic) | android-ondevice-asr (Sherpa) / ios-ondevice-asr (Apple file) | unrun (fixture blocked) | File transcription via file-capable Sherpa backend (Android) or `AppleSpeechRecognizerBackend` file path (Apple); NOT `AndroidSpeechRecognizerBackend` |
+| R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | unrun (pending hardware) | Observer attaches own App PID; Android run-as reads only permitted process; iOS uses existing mechanism |
+
+## Preserved / blocked states (NOT runnable cases)
+- TECNO en-US resources: unavailable / unverified, no live download performed. Blocked
+  state preserved; no assertion that such resources exist. R1 is mic-only and waits
+  on an authorized mic session + verified resources.
+- Cross-language / noisy public fixtures: NOT supplied. Exact source/reference/licence
+  must be frozen BEFORE any run. R4 stays blocked until then; uses file-capable backend.
+- W8 staged ASR current 9 sources match the parent baseline; device vanished before
+  install, so PENDING HARDWARE, not a nonexistent tool.
+- Resource observer is Android-only (run-as). Apple attach uses existing iOS mechanism;
+  no new implementation opened.
+
+## Authorization / evidence notes
+- Mic sessions (R1/R2/R3) require the actual user's participation and explicit start
+  cue; an existing mic grant alone does NOT authorize recording. No download/capture is
+  authorized now.
+- File-fixture R4 needs NO microphone; it uses a file-capable backend, not the system
+  `AndroidSpeechRecognizerBackend`. No generic new authorization is documented.
+- No SHA original-input assertion for raw mic input, because no source file exists.
+- Distinction maintained: framework resource failure (error13/MISSING_ASSETS, missing
+  fixture, vanished device) is separate from an SDK defect (wrong behavior of the
+  supplied API). Offline requirement (file cases run without network) is separate from
+  measured network isolation.
+
+## Minimal next action (primary)
+Without a user present: primary owner runs W8 current-source9 physical ASR/Sherpa
+publicPCM resource attach when the device returns — NOT the impossible system-file R1.
+R1/R2/R3 wait on an authorized mic session and verified resources. R4 waits on a frozen
+fixture; R5 waits on hardware return. No execution is included in these docs.
