@@ -1,5 +1,15 @@
 pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
 dependencyResolutionManagement { repositories {
+    exclusiveContent {
+        forRepository {
+            maven { url = uri("https://nexus.ugaiot.com/repository/maven-ugreenhome-release/") }
+        }
+        filter {
+            includeVersion("org.jetbrains.skiko", "skiko", "0.144.6-ondevice-f02.6")
+            includeVersion("org.jetbrains.skiko", "skiko-iosarm64", "0.144.6-ondevice-f02.6")
+            includeVersion("org.jetbrains.skiko", "skiko-iossimulatorarm64", "0.144.6-ondevice-f02.6")
+        }
+    }
     providers.gradleProperty("sherpaMavenRepo").orNull?.let { localRepo ->
         maven { url = uri(localRepo); content { includeGroup("com.k2fsa.sherpa.onnx") } }
     }

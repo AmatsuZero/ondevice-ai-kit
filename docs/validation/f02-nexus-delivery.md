@@ -1,4 +1,47 @@
+# 当前状态与范围（2026-11-08 02:23 Asia/Shanghai）
+
+本页为 F02 Nexus 交付准备记录，**非发布批准**。截至本时点的当前状态优先于下方所有历史段落中的过期“当前验收/待办”表述：
+
+- **Skiko `.6` 交付全部完成**：115/115 上传、匿名精确字节/SHA 回读、全新缓存双 iOS 消费者构建/74 通知材料、生产默认接入（settings.gradle.kts + demo/shared）与有界独立生产接入审查均已完成。**无新上传、消费者构建或接入工作**。资源/最终整分支审查仍分别计 W8/W2 开放。证据：`artifacts/verification/f02-nexus-dot6-published-20261107/{delivery-receipt,parent-run,parent-assessment}.json`、`artifacts/verification/f02-nexus-dot6-remote-consumer-copilot-toolchain-20261107/summary.json`、`artifacts/verification/f02-production-integration-20261107-2150/summary.json`、`.omx/artifacts/copilot-skiko-production-final-review-20261107-2213/parent-assessment.json`。
+- **Identity 本地提取已完成（取代旧"实际评分未跑"表述）**：116 个已准备样本完成本地提取，3 genuine（本人独立拍摄probe对注册照）与112 target-vs-other enrollment 描述性比较已在本地评估；有界单探针人功能基线，非 held-out 多人生产 FAR/FRR/阈值/PAD 验收。证据：`artifacts/verification/f10-host-extractor-accepted-20261107-2234/actual-local-summary.json`。
+- **HarfBuzz 固定版本已提交软件的根 Old MIT 授权未按类别排除生成代码**：既有已接受源码范围报告支持该内部托管软件分发（受通知约束）；缺失原始数据集来源或 SIL403 为证据局限，非已确立禁止或自动新分发/重打包阻断。整分支发布批准仍为 false。证据：`.omx/artifacts/copilot-harfbuzz-applicability-20261107-2010/host-launch/candidate/REPORT.md`、`.omx/artifacts/copilot-harfbuzz-applicability-20261107-2010/host-launch/parent-assessment.json`、`.omx/artifacts/cbc-harfbuzz-specific-inputs-20261106/parent-assessment.json`、`.omx/artifacts/cbc-public-permissions-20261106/parent-assessment.json`；无需臆造独立作者许可或强制外部法律签署。
+- **唯一延期项 F03 低系统实体设备**：用户离开设备；模拟器安全函数允许，但模拟器不能认证相机/活体/物理 GPU/性能/低系统硬件。
+- 付费 CBC 暂停，最多一个原生子助手；不把当前实时助手计数或额度重置写死进持久队列。基础 roadmap 仍记 10/12（历史计数，非完成百分比），P4/P11 开放，release **not-ready**。
+
+下方 2026-11-07 及更早段落为历史记录，原文保留。
+
+---
+
+## 2026-11-07 当前验收（历史记录，2026-11-08 已取代）：Skiko .6 匿名远端消费已通过
+
+Copilot直接交付的消费runner经订正/8项离线检查后，父用既有Gradle9.4.1/JDK21、全新Gradle依赖与项目缓存实际执行7个任务，424.377秒/exit0，双iOS framework链接及74材料通过。新缓存下载文件按实际module files.name→files.url映射，逐项对冻结115文件计划核对字节/SHA通过；独立回算framework摘要与既有checker再次验收通过。`artifacts/verification/f02-nexus-dot6-remote-consumer-copilot-toolchain-20261107/summary.json`记录remoteConsumerValidated=true；通用材料checker自己的remoteConsumerValidated=false仍原样保留其窄范围。**不能再列为“.6未上传/未消费”**。实际上传115/115早已通过，此处是后续独立消费，不重做上传。完整F02来源许可/生产依赖与预算不随此关闭。
+
+员工照获本地Identity评估/校准授权已记录，113原照+3本人独立自拍已作匿名、去元数据、尺寸归一化准备；实际评分未跑。hy4free提取器910.473秒自然上游empty_model_response/0文件/无父超时/无429，已停止不自动重试，用户接手线路待答。Copilot汇总工具310.376秒直接3文件/5离线测试及600独立数值比较/实际CLI通过。飞鸟guard旧候选已读审，隔离同版本依赖副本追加后实际编译88.805秒/BUILD SUCCEEDED，无新模型推理/生产锁修改。CBC付费暂停、无新原生助手。
+
+## 2026-11-07T18:02:51+08:00：Skiko .6实际交付115/115完成，消费验证交本地Ollama
+
+固定`.6`/原115路径新交付实际完成：全115匿名preflight404，逐项just-before404后单次PUT，115匿名byte/SHA回读通过、0冲突/0错误/0删除/无自动重试。证据`artifacts/verification/f02-nexus-dot6-published-20261107/{delivery-receipt,parent-run,parent-assessment}.json`；凭据仅父进程关闭回显stdin/env，不入argv/文件/助手。**不能再将本次`.6`列为未上传**，旧404/prepared记录保留其历史范围。新独立Gradle消费仍待实际运行，不预先打勾。
+
+用户要求简单消费验证交Ollama；本地qwen3-coder:30b任务`.omx/artifacts/ollama-dot6-consumer-verification-20261107`/unified23968已实际启动，只通用消费runner/离线测试/DELIVERY，无凭据或私有数据，父验收后执行新缓存双iOS link/74材料。免费hy4free飞鸟guard订正unified15288已实际启动，只改hook校验前置，父随后隔离build/forward；不重发既有任务，无耗时超时。cbc付费暂停、原生最多1且当前0运行。
+
+已完成本人iPhone评估1参考+3独立自拍及恢复；SR本地工具/6000比较/真实48帧双路对照通过，质量仍unverified。10/12、P4/P11/not-ready保持，本轮真实增量以上述精确子项计，下一步远端消费与飞鸟内部边界取证。
+
 # F02 内部 Nexus 交付准备
+
+## 2026-11-07 16:12：实时状态核实，保留已完成子项
+
+按用户要求重新核实，匿名GET当前`0.144.6-ondevice-f02.6`三个模块的`.module`：
+`skiko`、`skiko-iosarm64`、`skiko-iossimulatorarm64`，在既有hosted
+`maven-ugreenhome-release`与消费group `UgreenHome-Maven-group`共6个精确URL全部HTTP404。
+无凭据、重定向、上传或管理API。原始响应及摘要：
+`artifacts/verification/nexus-dot6-status-recheck-20261107/summary.json`。
+这只证明上述6地址当前无法取件，不证明所有仓库/版本均不存在。
+
+**已经完成**：`.6`本地115文件发布/归档一致性、双iOS SDK链接和74材料App保留。
+原`actual-final-receipt.json`仍明确`uploaded=false`、`remoteConsumerValidated=false`，
+远端consumer的`prepared.json`仍为`prepared-not-run`。本地工作不重做；本版本在上述
+入口的实际远端发布/消费尚无通过证据。Apple F09的GitLab上传、远端消费者构建及
+真机图片/视频推理已通过，是另一制品；不能合并成“Nexus交付都未做”或“都已完成”。
 
 用户后续回答“我本人”，已确认Skiko与Apple包由用户本人维护，见[维护归属](delivery-maintenance.md)。
 下文各历史“维护团队未定”不再是当前待答问题；组织名称与具体hosted选择仍未指定。
@@ -153,3 +196,9 @@ TLS校验保持开启。没有制品下载；本地109 MB归档仅做SHA256和�
 Nexus读取按用户说明使用匿名HTTPS，发布账号上传/覆盖/不可删除权限无需再次确认或查询
 管理API。未使用发布凭据，无上传、覆盖、删除或生产切换；远端匿名消费待制品就绪后验证。
 本轮没有设备操作/新benchmark，F02和发布仍open/not-ready。
+
+### 2026-11-07T13:51:16.218736+00:00 已关闭：Skiko `.6` 生产默认依赖接入
+
+Copilot两轮候选（461.195秒4文件、328.714秒2文件订正）经父校验，生产settings与demo/shared已默认只对两个iOS target替换`.6`，精确module/version路由到匿名Nexus。真实生产Gradle **79.891秒/exit0，319任务（77实际/242up-to-date）**；双iOS debug framework链接通过，四compile/test配置实际选中patched root/native，8条klib artifact及notice jar摘要与已发布计划保持，74材料逐字节摘要通过；Android APK成功、compile配置无Skiko模块、没有Android替换规则。**生产默认接入不再列待办**，不重复115文件上传或全新cache消费。
+
+证据`artifacts/verification/f02-production-integration-20261107-2150/summary.json`及`selection-report.txt`；portable verifier已原样保存`probes/skia-atlas-text-cache/verify-production-selection.gradle.kts`。首次命令因无效继承JAVA_HOME在Gradle前失败，保留原错，进程级选用项目现有JDK21后通过；无全局配置变更、device安装或upload。完整F02资源/最终审查仍分别计W8，不把此子项通过冒作整个release。
