@@ -1,8 +1,26 @@
 # W3 Acceptance Matrix — Remaining Cases (Corrected)
 
-Scope: on-device speech recognition acceptance. Documentation/planning artifact only
-— no tests were executed and no execution commands are included. Every case row below
-is UNRUN. This doc is NOT a quality approval.
+Scope: on-device speech recognition acceptance. The original matrix was a planning
+artifact; the execution-status update below records subsequent bounded results.
+This doc is NOT a quality approval.
+
+## Execution update — 2026-11-09 00:52 +08
+
+- R4 is partially exercised: the same three public English synthetic-20-dB files
+  completed on Android emulator/Sherpa and iPhone/Apple file recognition. Fixture
+  source/tests and bounded evidence were accepted in `a39f3c9`; Chinese and
+  real-world-noise validation remain open. See
+  [bounded noise acceptance](w3-controlled-noise-accepted-20261109.md).
+- R5 has an accepted emulator observer/window engineering slice in `8ae4a1b`.
+  The physical attempt froze before completed requests, was not accepted and was
+  restored. Physical resource/GPU/energy/budget gates remain open. See
+  [observation-window acceptance](w8-asr-window-accepted-20261109.md).
+- R1–R3 remain unrun and still need the user's explicit microphone start cue and
+  applicable system resources. Android continues on the existing emulator first;
+  the user need not reconnect a phone for current functional work.
+
+The original blocked-input and next-action notes below are historical planning
+context; this update and the linked receipts govern their current execution status.
 
 ## Corrections vs the prior W3 doc
 - Kept original removals: row 1 (observer path stabilization / 17-test retest) and
@@ -19,14 +37,14 @@ is UNRUN. This doc is NOT a quality approval.
 - No generic new authorization is granted for file fixtures; no download/capture is
   authorized in this pass.
 
-## Remaining concrete cases (UNRUN, <=5 rows)
+## Remaining concrete cases (<=5 rows)
 | ID | Case | Input | Owner | Status | Primary assertion |
 |----|------|-------|-------|--------|-------------------|
 | R1 | On-device system en-US recognition | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | System backend MICROPHONE-ONLY: `SpeechRecognitionRequest(locale)` (no audioFile); `SpeechRecognizer.startListening`; TECNO en-US resource unavailable/unverified; error13/MISSING_ASSETS vs nonempty transcript + exact backend; own engine cancel/destroy bounded; NO no-mic path |
 | R2 | Mic: background speech handling | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | Background speech handled per spec; no SHA of raw input (no file exists) |
 | R3 | Mic: interruption / cancel / reentry | Real mic, user start cue | android-ondevice-asr / ios-ondevice-asr | unrun (needs user) | Android `SpeechRecognitionRequest(locale)` + session cancel/reentry; iOS Swift `SpeechMicrophoneRecognitionRequest`; reacts to interrupt/cancel, re-enters cleanly |
-| R4 | zh-CN / noisy file quality | Offline file fixture (no mic) | android-ondevice-asr (Sherpa) / ios-ondevice-asr (Apple file) | unrun (fixture blocked) | File transcription via file-capable Sherpa backend (Android) or `AppleSpeechRecognizerBackend` file path (Apple); NOT `AndroidSpeechRecognizerBackend` |
-| R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | unrun (pending hardware) | Observer attaches own App PID; Android run-as reads only permitted process; iOS uses existing mechanism |
+| R4 | zh-CN / noisy file quality | Offline file fixture (no mic) | android-ondevice-asr (Sherpa) / ios-ondevice-asr (Apple file) | partial: synthetic-English function accepted; Chinese/real-noise open | File transcription via file-capable Sherpa backend (Android) or `AppleSpeechRecognizerBackend` file path (Apple); NOT `AndroidSpeechRecognizerBackend` |
+| R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | partial: emulator window accepted; physical budgets open | Observer attaches own App PID; Android run-as reads only permitted process; iOS uses existing mechanism |
 
 ## Preserved / blocked states (NOT runnable cases)
 - TECNO en-US resources: unavailable / unverified, no live download performed. Blocked
