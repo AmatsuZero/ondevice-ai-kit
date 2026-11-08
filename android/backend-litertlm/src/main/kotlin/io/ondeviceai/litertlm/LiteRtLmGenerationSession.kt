@@ -78,8 +78,16 @@ internal class LiteRtLmGenerationSession(
                 }
             }
             opening = true
-            val opened = factory.open(spec.resolveModelPath(lease.directory),
-                LiteRtLmEngineConfig(backendPolicy = spec.backendPolicy, cacheDir = cache))
+            val opened = try {
+                factory.open(spec.resolveModelPath(lease.directory),
+                    LiteRtLmEngineConfig(backendPolicy = spec.backendPolicy, cacheDir = cache))
+            } catch (rejection: LiteRtLmPreOwnershipRejection) {
+                opening = false
+                throw rejection.rejection
+            } catch (cancellation: LiteRtLmPreOwnershipCancellation) {
+                opening = false
+                throw cancellation.cancellation
+            }
             native = opened
             val expectedMode = when (probeState) {
                 LiteRtLmProbeState.PROVEN_CUMULATIVE, LiteRtLmProbeState.SYNCHRONOUS -> LiteRtLmCallbackMode.CUMULATIVE
