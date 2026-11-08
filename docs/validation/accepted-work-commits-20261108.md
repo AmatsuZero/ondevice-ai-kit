@@ -1,3 +1,26 @@
+# 当前提交核对 — 2026-11-08T11:10:11+08:00
+
+Roadmap分支为`feat/sdk-foundation`，工作区`.worktrees/foundation`；仓库主目录仍为`main`。昨日14:59至今日10:42确有已验收成果未及时提交的空档，已通过独立切片提交补齐。
+
+今日10:42–10:49的6笔实现/交付提交和`377580b`记录提交已存在；本次另增2笔实现：
+
+| 提交 | 实际范围 |
+| --- | --- |
+| `2563221` | LiteRT-LM专属Service、coordinator、state/codec、Parcel传输及对应测试/文档，12文件 |
+| `2ce6a96` | LiteRT-LM Context客户端、Main解绑线程修复及3份Instrumentation/文档，5文件 |
+
+提交前重新核对38当前源码摘要、实际模块JUnit XML90/90、同APK模拟器原始日志13/13、构建exit0和lint0error/2既有warning；没有重复推理或仅凭助手自述验收。每笔精确路径和Git blob摘要一致，index为空、9保护路径与Apple生产lock保持。以上是已验收Service/client切片入Git，W5/P11整体仍开放。
+
+本次只读实查`origin/feat/sdk-foundation`为`8226666`，包含原6笔实现/交付提交；`377580b`和本次两笔实现尚未在origin，未执行本次推送。极狐远端只读查询被自动审批服务429拦截、未执行；本地极狐tracking ref不可替代本次远端证据。
+
+W3原CBC任务自然交付3候选，当前待主代理验收；W8不重复启动，W1继续既有验收。剩余工作包数量仍7，W6专家独占。每个切片验收后及时提交。
+
+证据：`artifacts/verification/accepted-work-commit-checkpoint-20261108/litertlm-process-slices-precommit.json`与`litertlm-process-slice-{1,2}-commit.json`；客户端验收见[litertlm-process-client-20261108.md](litertlm-process-client-20261108.md)。本地artifact路径不保证随Git分发。
+
+以下为10:48历史快照，其“尚未推送”和助手运行状态保留当时时间范围。
+
+---
+
 # 已验收切片提交与CBC并发记录
 
 现场核对：2026-11-08 10:48:25 +0800；分支 `feat/sdk-foundation`。
