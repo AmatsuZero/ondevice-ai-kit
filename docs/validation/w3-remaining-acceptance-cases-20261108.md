@@ -4,6 +4,23 @@ Scope: on-device speech recognition acceptance. The original matrix was a planni
 artifact; the execution-status update below records subsequent bounded results.
 This doc is NOT a quality approval.
 
+## Reconciliation update — 2026-11-09 07:41 +08
+
+- Free hy3 completed the independent public-evidence gap audit; the parent then
+  verified current Swift source continuity and the historical status-receipt hashes.
+  Existing iPhone lifecycle success is retained without a new recording. This
+  does not pass every interruption/authorization/TTS case or a production budget.
+- The Android locale prerequisite now has a completed default 3-clip/4-request
+  regression plus exact native rejection for three malformed locale values.
+  Temporary test aliases and staging were removed; Chinese quality remains open.
+- A separate free-hy3 Apple file-probe locale candidate has been dispatched to
+  prepare the Chinese file path. No source integration, new fixture, build or
+  Chinese runtime pass is implied by dispatch.
+- Latest ADB: real phone unauthorized; existing emulators available. W8 foreground
+  candidate failed source review and is under scoped free-hy4free correction.
+- See [parent reconciliation](w3-acceptance-reconciliation-20261109.md). Raw prior
+  matrix notes below are historical; actual source/backend/input boundaries govern.
+
 ## Execution update — 2026-11-09 00:52 +08
 
 - R4 is partially exercised: the same three public English synthetic-20-dB files
@@ -15,9 +32,11 @@ This doc is NOT a quality approval.
   The physical attempt froze before completed requests, was not accepted and was
   restored. Physical resource/GPU/energy/budget gates remain open. See
   [observation-window acceptance](w8-asr-window-accepted-20261109.md).
-- R1–R3 remain unrun and still need the user's explicit microphone start cue and
-  applicable system resources. Android continues on the existing emulator first;
-  the user need not reconnect a phone for current functional work.
+- R1/R2 and the remaining Android microphone portions of R3 remain unverified
+  and need a fresh explicit microphone start cue and applicable system resources.
+  Prior iPhone cancel/reentry/background-cancel and one instrumented close/drain
+  result are retained after source/receipt reconciliation; they are not
+  classified as never executed. See the November 9 reconciliation below.
 
 The original blocked-input and next-action notes below are historical planning
 context; this update and the linked receipts govern their current execution status.
@@ -42,7 +61,7 @@ context; this update and the linked receipts govern their current execution stat
 |----|------|-------|-------|--------|-------------------|
 | R1 | On-device system en-US recognition | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | System backend MICROPHONE-ONLY: `SpeechRecognitionRequest(locale)` (no audioFile); `SpeechRecognizer.startListening`; TECNO en-US resource unavailable/unverified; error13/MISSING_ASSETS vs nonempty transcript + exact backend; own engine cancel/destroy bounded; NO no-mic path |
 | R2 | Mic: background speech handling | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | Background speech handled per spec; no SHA of raw input (no file exists) |
-| R3 | Mic: interruption / cancel / reentry | Real mic, user start cue | android-ondevice-asr / ios-ondevice-asr | unrun (needs user) | Android `SpeechRecognitionRequest(locale)` + session cancel/reentry; iOS Swift `SpeechMicrophoneRecognitionRequest`; reacts to interrupt/cancel, re-enters cleanly |
+| R3 | Mic: interruption / cancel / reentry | Real mic, fresh start cue for new capture | android-ondevice-asr / ios-ondevice-asr | partial: prior iPhone scoped lifecycle retained; Android capture/interruption gaps open | Android `SpeechRecognitionRequest(locale)` + session cancel/reentry; iOS Swift `SpeechMicrophoneRecognitionRequest`; reacts to interrupt/cancel, re-enters cleanly |
 | R4 | zh-CN / noisy file quality | Offline file fixture (no mic) | android-ondevice-asr (Sherpa) / ios-ondevice-asr (Apple file) | partial: synthetic-English function accepted; Chinese/real-noise open | File transcription via file-capable Sherpa backend (Android) or `AppleSpeechRecognizerBackend` file path (Apple); NOT `AndroidSpeechRecognizerBackend` |
 | R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | partial: emulator window accepted; physical budgets open | Observer attaches own App PID; Android run-as reads only permitted process; iOS uses existing mechanism |
 

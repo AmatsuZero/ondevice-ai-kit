@@ -32,6 +32,7 @@ class NaturalAsrInstrumentation : Instrumentation() {
     private lateinit var sourceFingerprint: String
     private lateinit var installedAppSha256: String
     private var resourceWindow: Boolean = false
+    private var locale: String = "en-US"
 
     private data class Sample(val id: String, val reference: String)
 
@@ -94,6 +95,19 @@ class NaturalAsrInstrumentation : Instrumentation() {
                 "resourceWindow must be 'true' or absent, got: '$resourceWindowArg'")
         }
 
+        // Opt-in locale. Absent => en-US (default, byte-equivalent report). Only exact "en-US"
+        // or "zh-CN" accepted; any other value is rejected here, before the report directory is
+        // reserved or any model/native work begins.
+        val localeArg = args.getString("locale")
+        val localeProvided = localeArg != null
+        locale = when (localeArg) {
+            null -> "en-US"
+            "en-US" -> "en-US"
+            "zh-CN" -> "zh-CN"
+            else -> throw IllegalArgumentException(
+                "locale must be 'en-US' or 'zh-CN' or absent, got: '$localeArg'")
+        }
+
         for (sample in SAMPLES) {
             val key = "inputSha_${sample.id}"
             val sha = requireNotNull(args.getString(key)) { "$key required" }
@@ -134,6 +148,9 @@ class NaturalAsrInstrumentation : Instrumentation() {
             .put("finalCloseSucceeded", false)
         if (resourceWindow) {
             report.put("resourceWindow", true)
+        }
+        if (localeProvided) {
+            report.put("locale", locale)
         }
         persist()
         start()
@@ -250,7 +267,7 @@ class NaturalAsrInstrumentation : Instrumentation() {
                         val started = SystemClock.elapsedRealtimeNanos()
                         var ended = 0L
                         val result = try {
-                            recognizer.transcribe(segInput, "en-US")
+                            recognizer.transcribe(segInput, locale)
                         } finally {
                             ended = SystemClock.elapsedRealtimeNanos()
                         }

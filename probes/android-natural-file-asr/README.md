@@ -23,3 +23,34 @@ ADB stdout failed; first inspect the same runId and process.
 Accepted emulator evidence and the unaccepted physical freezer attempt are in
 `docs/validation/w8-asr-window-accepted-20261109.md`. This runner does not establish
 physical GPU, energy, peak memory, continuous inference, or resource budgets.
+
+# Optional instrumentation argument: `locale`
+
+The existing file-only Sherpa probe hardcodes `recognizer.transcribe(segInput, "en-US")`.
+An optional instrumentation argument `locale` is now accepted. It is a prerequisite for
+subsequent locale-controlled experiments only.
+
+- Accepted values: exact `en-US` or exact `zh-CN`. Nothing else.
+- Absent argument keeps the default `en-US`. The default report is byte-equivalent
+  (no `locale` field, no behavior change).
+- Empty string, `En-US`, `zh-cn`, `zh_CN`, `fr-FR`, or any other value is rejected in
+  `onCreate` **before** the report file is reserved and **before** any model/native work.
+- The selected exact locale is passed to the real, existing transcribe call.
+- The exact selected `locale` is added to the report **only if** the caller explicitly
+  supplied the parameter; default (absent) retains the existing report fields.
+
+## Strict evidence limits
+
+This parameter change does **NOT** provide a Chinese fixture. All existing assets,
+fixed LibriSpeech clip IDs, English reference transcripts, sample counts, the fixed
+third-clip split, the 160000-sample production bound, and resource-window disclosure
+are unchanged and remain English.
+
+Switching the decoder locale alone is **NOT** Chinese-language or quality acceptance.
+It does not reinterpret English transcripts as Chinese references, does not change fixed
+clip metadata, does not select any acceptance threshold, and does not claim a W3 closure.
+
+Future Chinese acceptance must independently freeze a correctly attributed and licensed
+audio/reference manifest and fixture-specific metadata. No private photos, names,
+embeddings, or scores are supplied or permitted. No tests, build, device, network,
+download, capture, or publish is authorized for this candidate task.
