@@ -1,5 +1,33 @@
 # DATA-AND-PARITY — Local-Only Multi-Person Validation Plan (corrected W7)
 
+## Current executable scope — user update, 2026-11-08
+
+The user can supply only their own new data in the near term. Do not request the
+illustrative eight-person pilot below as a prerequisite for engineering work.
+
+- Reuse the user's existing locally held enrollment photo and three previously
+  captured photos. Confirm local identity, distinct source hashes and capture
+  sessions before counting any genuine comparison; do not ask for the same photos
+  again merely because the active task changed.
+- First validate the paired probes using the existing public approved astronaut
+  fixture. Then, after probe acceptance, replay the same authorized personal file
+  bytes locally on Apple and Android to check feature/decision contracts.
+- A single subject can support a personal functional trial and cross-platform
+  consistency checks. It cannot supply two subject-disjoint calibration/test
+  cohorts or establish population FAR/FRR and production thresholds. Keep the
+  existing executor's insufficient-data rejection and uncalibrated state.
+- Prior authorization for the locally held employee-photo set remains recorded.
+  Reusing a work photo or creating edited copies does not create independent new
+  captures. No broader data availability is inferred from that authorization.
+- PAD remains separate: no new PAD-use authorization, attack-labelled dataset,
+  collection, or liveness acceptance is implied by this personal Identity trial.
+- Photos, names, embeddings and personal scores remain local. External assistants
+  receive source/contracts and public or synthetic fixtures only.
+
+The multi-person sections below describe a future production-validation dependency,
+not a current collection request or a completed gate. Current status: personal
+functional/parity execution pending; multi-person calibration and PAD remain open.
+
 ## 0. Ownership & boundaries
 - Local-only: employee photos, names, embeddings, personal scores never leave the local trust boundary.
 - Retouch/modified copies are NOT independent capture; excluded from "new independent probe" counts.
