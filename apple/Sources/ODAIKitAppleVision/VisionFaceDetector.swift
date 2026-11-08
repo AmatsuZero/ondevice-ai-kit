@@ -1,5 +1,6 @@
 import Foundation
 import Vision
+import CoreML
 import ODAIKitCore
 import ODAIKitFace
 
@@ -43,6 +44,22 @@ public actor VisionFaceDetector: FaceDetector {
         let task = Task.detached(priority: .userInitiated) { () throws -> [ODAIKitFace.FaceObservation] in
             try Task.checkCancellation()
             let request: VNImageBasedRequest = options.landmarks ? VNDetectFaceLandmarksRequest() : VNDetectFaceRectanglesRequest()
+            #if targetEnvironment(simulator)
+            if #available(iOS 17.0, *) {
+                let stages = try request.supportedComputeStageDevices
+                guard !stages.isEmpty else {
+                    throw KitError.backend("vision: empty compute stage device mapping")
+                }
+                for (stage, devices) in stages {
+                    guard let cpu = devices.first(where: { if case .cpu = $0 { return true }; return false }) else {
+                        throw KitError.backend("vision: no supported CPU compute device for stage \(stage)")
+                    }
+                    request.setComputeDevice(cpu, for: stage)
+                }
+            } else {
+                request.usesCPUOnly = true
+            }
+            #endif
             let handler = VNImageRequestHandler(cgImage: input.image, orientation: input.orientation, options: [:])
             try handler.perform([request]); try Task.checkCancellation()
             return ((request.results as? [VNFaceObservation]) ?? []).map { face in

@@ -58,4 +58,10 @@ final class VisionFaceDetectorTests: XCTestCase {
         await closing.value
         await detector.close()
     }
+    func testBlankImageLandmarksTrueUsesRealVisionAndReturnsSuccessfulEmptyResult() async throws {
+        let detector = VisionFaceDetector()
+        let result = try await detector.detect(input: image(), options: FaceOptions(landmarks: true))
+        XCTAssertTrue(result.faces.isEmpty); XCTAssertEqual(result.backendId, "apple.vision.face")
+        await detector.close()
+    }
 }
