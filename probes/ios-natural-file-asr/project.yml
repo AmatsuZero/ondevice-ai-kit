@@ -1,0 +1,36 @@
+name: W3AppleFile
+options:
+  bundleIdPrefix: io.ondeviceai.probe
+  deploymentTarget:
+    iOS: "15.0"
+  generateEmptyDirectories: true
+packages:
+  ODAIKitLocal:
+    path: ../../apple
+targets:
+  W3AppleFile:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: W3AppleFileApp.swift
+      - path: AudioFixtures
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w3natural20261108
+        PRODUCT_NAME: W3AppleFile
+        DISPLAY_NAME: ODAI W3 File ASR
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "使用已有公开音频验证本机离线文件转写，不采集麦克风"
+        CODE_SIGNING_ALLOWED: NO
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - package: ODAIKitLocal
+        product: ODAIKitCore
+      - package: ODAIKitLocal
+        product: ODAIKitSpeech
+      - package: ODAIKitLocal
+        product: ODAIKitAppleSpeech
