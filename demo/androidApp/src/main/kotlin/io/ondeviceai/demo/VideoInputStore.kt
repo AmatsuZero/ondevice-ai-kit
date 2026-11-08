@@ -3,7 +3,9 @@ package io.ondeviceai.demo
 import io.ondeviceai.binding.AndroidVideoInputLease
 import io.ondeviceai.binding.AndroidVideoInputProvider
 import java.io.File
+import java.io.IOException
 import java.io.InputStream
+import java.nio.file.Files
 import java.util.UUID
 
 /** Private media imports survive selection retirement until the processing lease is released. */
@@ -40,7 +42,13 @@ class VideoInputStore(private val root: File, private val maxBytes: Long = 256L 
                 published = true
             }
             return Input(reference, displayName.substringAfterLast('/').substringAfterLast('\\').filterNot(Char::isISOControl).take(160).ifBlank { "video" })
-        } finally { if (!published) { file.delete(); synchronized(this) { removeRootIfClosed() } } }
+        } finally {
+            if (!published) synchronized(this) {
+                val entry = Entry(file, retired = true)
+                entries[reference] = entry
+                collect(reference, entry)
+            }
+        }
     }
     @Synchronized override fun acquire(reference: String): AndroidVideoInputLease {
         check(!closed)
@@ -56,13 +64,20 @@ class VideoInputStore(private val root: File, private val maxBytes: Long = 256L 
     }
     @Synchronized fun remove(reference: String) { entries[reference]?.let { it.retired = true; collect(reference, it) } }
     @Synchronized fun close() {
-        if (closed) return
         closed = true
         entries.toMap().forEach { (reference, entry) -> entry.retired = true; collect(reference, entry) }
         removeRootIfClosed()
     }
     private fun collect(reference: String, entry: Entry) {
-        if (entry.retired && entry.readers == 0) { entry.file.delete(); entries.remove(reference); removeRootIfClosed() }
+        if (entry.retired && entry.readers == 0) {
+            try {
+                Files.deleteIfExists(entry.file.toPath())
+                entries.remove(reference)
+            } catch (_: IOException) {
+                // Retain ownership so a later remove or close can retry.
+            }
+        }
+        removeRootIfClosed()
     }
     private fun removeRootIfClosed() { if (closed && root.listFiles()?.isEmpty() == true) root.delete() }
 }
