@@ -131,7 +131,7 @@ struct VideoToolboxSREngine: AppleVideoProcessingEngine {
             try await processor.process(parameters: parameters)
             try Task.checkCancellation()
             let encoded = try Self.buffer(width: 1280, height: 720, format: kCVPixelFormatType_32BGRA)
-            Self.render(CIImage(cvPixelBuffer: destinationBuffer), to: encoded, context: context)
+            Self.render(AppleVideoOpaqueFrame.image(from: destinationBuffer), to: encoded, context: context)
             let deadline = ProcessInfo.processInfo.systemUptime + 5
             while !sink.isReadyForMoreMediaData {
                 guard writer.status == .writing, ProcessInfo.processInfo.systemUptime < deadline else { throw AppleVideoError.writerFailed }
