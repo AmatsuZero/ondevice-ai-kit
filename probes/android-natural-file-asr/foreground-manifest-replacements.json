@@ -1,0 +1,6 @@
+[
+  {
+    "old": "    <application\n        android:allowBackup=\"false\"\n        android:label=\"Natural ASR Acceptance\" />",
+    "new": "    <application\n        android:allowBackup=\"false\"\n        android:label=\"Natural ASR Acceptance\">\n        <activity\n            android:name=\"io.ondeviceai.demo.ForegroundProbeActivity\"\n            android:exported=\"false\" />\n    </application>"
+  }
+]

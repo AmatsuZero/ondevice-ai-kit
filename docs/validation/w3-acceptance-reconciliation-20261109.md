@@ -4,6 +4,21 @@ The remaining count is unchanged: W3 is open. This update removes duplicate
 acceptance work and records a bounded locale regression; it does not approve
 Chinese/real-world-noise quality or system microphone availability.
 
+## Current bounded acceptance update — 2026-11-09 08:24 +08
+
+- Apple explicit locale is now integrated, source-reviewed, unsigned-build checked
+  and exercised by 12 host pure-parser cases. It has not been installed or launched;
+  App failure-report/auth and Chinese recognition remain unverified. See
+  [locale prerequisite](w3-apple-locale-prerequisite-20261109.md).
+- W8 now has one accepted TECNO/API35 four-request current-source observation with
+  24 PID-bound RSS/thread/raw-CPU samples and verified alias/stage restoration.
+  GPU/energy/sustained budgets remain open. See
+  [physical observation](w8-physical-asr-observation-20261109.md).
+- Independent bounded evidence review approved both slices with zero issues.
+  W3 remains open. Chinese natural-speech source freezing is next; neither a
+  new Chinese profile nor Chinese quality has been accepted. Old running/blocked
+  notes below are historical and superseded only for these exact slices.
+
 ## Existing evidence retained
 
 Free CBC hy3 delivered `GAP-MATRIX.md` and `DELIVERY.md` in 144.319 seconds in

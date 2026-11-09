@@ -58,7 +58,6 @@ final class W3FileModel: ObservableObject {
     // System Speech model revision/hash, which are NOT exposed by these APIs.
     private let sdkSourceCommit = "6d503dd9e389f3c2b8ef56be4d613f77fd0cddbe"
     private let backendId = "apple.speech.recognizer"
-    private let locale = "en-US"
 
     func runLocalFileASR() async {
         // Once-only concurrency guard; NEVER auto-run from onAppear.
@@ -66,6 +65,12 @@ final class W3FileModel: ObservableObject {
         isRunning = true
         hasRun = true
         self.reportFilename = "w3-file-report.json"
+
+        // Resolve the optional explicit --odai-asr-locale argument (opt-in only).
+        // Absent flag preserves en-US and existing default behavior. Unrelated
+        // OS/test launch args are ignored. Malformed input yields a safe fixed
+        // category; argument parsing never crashes app init.
+        let (resolvedLocale, localeArgumentError) = Self.resolveLocaleArgument(CommandLine.arguments)
 
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let reportURL = docs.appendingPathComponent(reportFilename)
@@ -106,7 +111,7 @@ final class W3FileModel: ObservableObject {
             "networkBehavior": "not measured",
             "requiresOnDeviceRecognition": true,
             "backendId": backendId,
-            "locale": Self.normalizedLocale(locale),
+            "locale": Self.normalizedLocale(resolvedLocale),
             "state": "running",
             "phase": "init",
             "status": "started",
@@ -129,12 +134,20 @@ final class W3FileModel: ObservableObject {
         var failure: [String: Any]?
         if let pe = manifest.parseError { failure = pe }
 
+        // Explicit --odai-asr-locale argument was malformed: short-circuit with a
+        // bounded failed receipt (safe fixed category) BEFORE any production
+        // backend/client construction, Speech authorization, or recognition.
+        if failure == nil, let locErr = localeArgumentError {
+            failure = ["stage": "locale-argument",
+                       "error": ["type": "input", "category": locErr]]
+        }
+
         // One real production backend + one real client, explicit selection.
         var backend: AppleSpeechRecognizerBackend?
         var client: SpeechRecognitionClient?
         if failure == nil {
             do {
-                let b = try AppleSpeechRecognizerBackend(locale: locale, timeout: 30)
+                let b = try AppleSpeechRecognizerBackend(locale: resolvedLocale, timeout: 30)
                 backend = b
                 let backs: [any SpeechRecognitionBackend] = [b]
                 client = try SpeechRecognitionClient(defaultBackendId: backendId, backends: backs)
@@ -189,7 +202,7 @@ final class W3FileModel: ObservableObject {
                 let request: SpeechRecognitionRequest
                 do {
                     // locale normalized by the actual API; en-US -> en_US.
-                    request = try SpeechRecognitionRequest(locale: locale, audioFile: audioURL)
+                    request = try SpeechRecognitionRequest(locale: resolvedLocale, audioFile: audioURL)
                 } catch {
                     failure = ["stage": "request-build",
                                "error": ["type": "input", "category": safeCategory(error)]]
@@ -317,6 +330,39 @@ final class W3FileModel: ObservableObject {
 
     private static func normalizedLocale(_ value: String) -> String {
         Locale.canonicalIdentifier(from: value.replacingOccurrences(of: "-", with: "_"))
+    }
+
+    /// Parse the optional explicit `--odai-asr-locale` launch argument (opt-in
+    /// only). Absent flag preserves "en-US" and existing default behavior.
+    /// Unrelated OS/test launch args are ignored (never rejected or reported).
+    /// Duplicate flag, missing value, empty/unsupported/case variant are errors,
+    /// each returned as a safe fixed category (never the arbitrary argument
+    /// string). The locale is NEVER derived from phone settings or reinterpreted
+    /// from English references.
+    private static func resolveLocaleArgument(_ args: [String]) -> (locale: String, error: String?) {
+        guard let idx = args.firstIndex(of: "--odai-asr-locale") else {
+            return ("en-US", nil)
+        }
+        // Duplicate flag is an error.
+        if args.dropFirst(idx + 1).contains("--odai-asr-locale") {
+            return ("en-US", "odai-asr-locale-duplicate-flag")
+        }
+        let valueIdx = idx + 1
+        guard valueIdx < args.count else {
+            return ("en-US", "odai-asr-locale-missing-value")
+        }
+        let value = args[valueIdx]
+        if value.isEmpty {
+            return ("en-US", "odai-asr-locale-missing-value")
+        }
+        if value == "en-US" {
+            return ("en-US", nil)
+        }
+        if value == "zh-CN" {
+            return ("zh-CN", nil)
+        }
+        // Unsupported value or case variant are errors.
+        return ("en-US", "odai-asr-locale-unsupported-value")
     }
 
     /// Parse the EXACT frozen manifest schema (schemaVersion 1):

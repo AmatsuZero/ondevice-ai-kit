@@ -1,6 +1,9 @@
 package io.ondeviceai.demo
 
 import android.app.Instrumentation
+import android.app.Activity
+import android.content.Intent
+import java.util.concurrent.TimeUnit
 import android.os.Bundle
 import android.os.Process
 import android.os.SystemClock
@@ -33,6 +36,8 @@ class NaturalAsrInstrumentation : Instrumentation() {
     private lateinit var installedAppSha256: String
     private var resourceWindow: Boolean = false
     private var locale: String = "en-US"
+    private var foregroundWindow: Boolean = false
+    private var foregroundActivity: Activity? = null
 
     private data class Sample(val id: String, val reference: String)
 
@@ -93,6 +98,19 @@ class NaturalAsrInstrumentation : Instrumentation() {
             "true" -> true
             else -> throw IllegalArgumentException(
                 "resourceWindow must be 'true' or absent, got: '$resourceWindowArg'")
+        }
+
+        // Opt-in visible foreground probe window. Absent => disabled (default, byte-equivalent
+        // report). Only the exact literal "true" enables it; any other value is rejected here,
+        // before the report directory is reserved or any model/native work begins. When enabled,
+        // a visible own Activity is shown during bounded physical resource observation; it never
+        // starts inference itself.
+        val foregroundWindowArg = args.getString("foregroundWindow")
+        foregroundWindow = when (foregroundWindowArg) {
+            null -> false
+            "true" -> true
+            else -> throw IllegalArgumentException(
+                "foregroundWindow must be 'true' or absent, got: '$foregroundWindowArg'")
         }
 
         // Opt-in locale. Absent => en-US (default, byte-equivalent report). Only exact "en-US"
@@ -167,6 +185,53 @@ class NaturalAsrInstrumentation : Instrumentation() {
         val ownedOriginals = mutableListOf<FloatArray>()
         val ownedSlices = mutableListOf<FloatArray>()
         try {
+            // Opt-in visible foreground probe Activity, started BEFORE any onStart work (asset
+            // validation, model load, observer bind). Only when explicitly enabled. It is the
+            // target main APK's own non-exported Activity, launched with NEW_TASK via
+            // Instrumentation.startActivitySync; it never performs inference. Start and resume
+            // are proven by test-owned public lifecycle acknowledgements, NOT by hidden Activity
+            // getters and NOT by startActivitySync's return alone. On any failed start or
+            // unacknowledged resume we fail closed: rethrow so the existing outer catch/finally
+            // produces a failed terminal and ALL ASR/model/asset work below is skipped.
+            if (foregroundWindow) {
+                report.put("foregroundWindow", true)
+                report.put("foregroundRequested", true)
+                report.put("foregroundStarted", false)
+                report.put("foregroundResumed", false)
+                report.put("foregroundFinishRequested", false)
+                report.put("foregroundFinishing", false)
+                report.put("foregroundDestroyed", false)
+                report.put("foregroundTeardownFailed", false)
+                try {
+                    val intent = Intent(targetContext, ForegroundProbeActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    // Retain the EXACT instance immediately, before anything that can throw, so
+                    // the finally teardown can always finish it even if the resume check throws.
+                    val started = startActivitySync(intent)
+                    foregroundActivity = started
+                    val probe = started as ForegroundProbeActivity
+                    report.put("foregroundStarted", true)
+                    // Bounded wait for the public onResume acknowledgement. This blocks ONLY the
+                    // instrumentation worker; the main looper stays free to deliver callbacks.
+                    val resumeArrived = probe.resumeArrived.await(5000L, TimeUnit.MILLISECONDS)
+                    val resumedHolder = BooleanArray(1)
+                    runOnMainSync {
+                        resumedHolder[0] = probe.resumeAcked && !probe.pauseAcked
+                    }
+                    val resumed = resumeArrived && resumedHolder[0]
+                    report.put("foregroundResumed", resumed)
+                    if (!resumed) {
+                        throw IllegalStateException("foreground resume acknowledgement not observed")
+                    }
+                } catch (fgError: Throwable) {
+                    // Sanitized metadata only (class name, no message/stack). Re-throw so the
+                    // outer catch/finally produces the failed terminal and skips all work.
+                    report.put("foregroundErrorClass", fgError.javaClass.name)
+                    report.put("foregroundFailed", true)
+                    throw fgError
+                }
+            }
+
             // Validate all raw assets BEFORE any model load. Own the raw byte arrays and their
             // derived snapshot arrays IMMEDIATELY after each read, before validation; any
             // future/unprocessed raw asset is therefore cleared on error in the finally block.
@@ -365,8 +430,49 @@ class NaturalAsrInstrumentation : Instrumentation() {
             ownedWaveforms.forEach { it.fill(0f) }
             ownedOriginals.forEach { it.fill(0f) }
             ownedSlices.forEach { it.fill(0f) }
-            // Completed only after all requests, caller input unchanged, and close succeeded.
-            if (workCompleted && report.optBoolean("finalCloseSucceeded")) {
+            // Opt-in foreground teardown: finish ONLY the exact started instance, on the main
+            // thread via runOnMainSync. Separate lifecycle observations (finishing/destroyed)
+            // and the public onDestroy acknowledgement are recorded as actually observed; no
+            // visibility/focus/freezer success is inferred. Teardown failure is recorded in
+            // SEPARATE sanitized metadata and forces the terminal status to failed without
+            // overwriting the primary errorClass or the backend cleanupErrorClass.
+            if (foregroundWindow) {
+                val target = foregroundActivity
+                if (target != null) {
+                    report.put("foregroundFinishRequested", true)
+                    var teardownOk = false
+                    try {
+                        val probe = target as ForegroundProbeActivity
+                        val finishingHolder = BooleanArray(1)
+                        val destroyedHolder = BooleanArray(1)
+                        val destroyAckHolder = BooleanArray(1)
+                        // Finish the EXACT instance and read its public lifecycle state on Main.
+                        runOnMainSync {
+                            target.finish()
+                            finishingHolder[0] = target.isFinishing
+                            destroyedHolder[0] = target.isDestroyed
+                            destroyAckHolder[0] = probe.destroyAcked
+                        }
+                        report.put("foregroundFinishing", finishingHolder[0])
+                        report.put("foregroundDestroyed", destroyedHolder[0] || destroyAckHolder[0])
+                        // Teardown is acknowledged only from real observations; a false
+                        // finishing/destroyed result is a failed lifecycle teardown.
+                        teardownOk = finishingHolder[0] || destroyedHolder[0] || destroyAckHolder[0]
+                    } catch (fgCloseError: Throwable) {
+                        report.put("foregroundTeardownErrorClass", fgCloseError.javaClass.name)
+                    } finally {
+                        foregroundActivity = null
+                    }
+                    report.put("foregroundTeardownFailed", !teardownOk)
+                    if (!teardownOk && report.optString("status") != "failed") {
+                        report.put("status", "failed")
+                    }
+                }
+            }
+            // Completed only after all requests, caller input unchanged, close succeeded, and
+            // (for the opt-in foreground path) lifecycle teardown did not fail.
+            if (workCompleted && report.optBoolean("finalCloseSucceeded") &&
+                !report.optBoolean("foregroundTeardownFailed")) {
                 report.put("status", "completed")
             }
             report.put("terminal", true)
