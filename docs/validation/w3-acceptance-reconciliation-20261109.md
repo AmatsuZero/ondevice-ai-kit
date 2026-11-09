@@ -4,6 +4,21 @@ The remaining count is unchanged: W3 is open. This update removes duplicate
 acceptance work and records a bounded locale regression; it does not approve
 Chinese/real-world-noise quality or system microphone availability.
 
+## Latest bounded diagnosis — 2026-11-09 10:00 +08
+
+Apple same-input Mandarin3/3 and32checks/restoration were subsequently accepted
+(CER16/92); Android baseline3clips/5requests CER44/92 remains measured, not quality
+approval. Durable VAD diagnostics now passed25physical checks and recorded all
+five preparation ranges; three stopped early. The isolated diagnostic patch and
+host37checks were committed as `36d0583`; production sources were unchanged.
+A separately frozen one-line no-VAD file control worsened CER to53/92 while the
+unsliced second clip's output stayed exact. Removing VAD is not accepted as the
+production fix. Both new batches have been restored. See [VAD measurement](w3-vad-diagnostic-parent-20261109.md)
+and [same-input control](w3-no-vad-control-20261109.md). All earlier “Apple not
+launched/Chinese source not yet frozen” statements below are historical.
+W8 sustained/GPU/energy/budget, Android system capture/resource and remaining
+W3 quality gaps stay open; no new microphone recording was authorized or used.
+
 ## Current bounded acceptance update — 2026-11-09 08:24 +08
 
 - Apple explicit locale is now integrated, source-reviewed, unsigned-build checked

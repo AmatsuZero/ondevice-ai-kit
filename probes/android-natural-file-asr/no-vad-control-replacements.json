@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "purpose": "diagnostic isolatedcopy only; never apply production",
+  "replacements": [
+    {
+      "path": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaAsrBackend.kt",
+      "old": "session.transcribe(locale) { model.verify(); WhisperSpeechGate.prepare(model, samples) }",
+      "new": "session.transcribe(locale) { model.verify(); samples.copyOf() }"
+    }
+  ]
+}
