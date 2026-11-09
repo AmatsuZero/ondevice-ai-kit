@@ -1,0 +1,9 @@
+FLEURS public Mandarin Chinese (cmn_hans_cn) test subset
+Source: Google FLEURS, https://huggingface.co/datasets/google/fleurs
+License declared by the pinned official dataset card: Creative Commons Attribution 4.0 International (CC BY 4.0).
+License: https://creativecommons.org/licenses/by/4.0/
+Pinned source revision: 70bb2e84b976b7e960aa89f1c648e09c59f894dd
+Attribution: FLEURS dataset contributors / Google; see pinned official README and citation.
+Changes: original mono 16kHz float WAV converted by installed ffmpeg to mono 16kHz signed 16-bit little-endian PCM WAV, dither disabled; no trimming, denoising, added noise or resampling. Raw references retain the original TSV raw-transcription text and punctuation.
+Selection: first three matching WAV entries in the pinned test archive; no model-output filtering. This small subset is not a representative quality benchmark. No implication of contributor endorsement.
+Canonical audio/PCM and source hashes are frozen in the local manifest and receipts.

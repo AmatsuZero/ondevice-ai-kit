@@ -1,0 +1,24 @@
+{
+  "replacements": [
+    {
+      "old": "    private val SAMPLES = listOf(\n        Sample(\"1272-128104-0000\",\n            \"MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL\"),\n        Sample(\"1272-128104-0001\",\n            \"NOR IS MISTER QUILTER'S MANNER LESS INTERESTING THAN HIS MATTER\"),\n        Sample(\"1272-128104-0002\",\n            \"HE TELLS US THAT AT THIS FESTIVE SEASON OF THE YEAR WITH CHRISTMAS AND ROAST BEEF \" +\n                \"LOOMING BEFORE US SIMILES DRAWN FROM EATING AND ITS RESULTS OCCUR MOST READILY TO THE MIND\")\n    )",
+      "new": "    private val SAMPLES = listOf(\n        Sample(\"fleurs-cmn-test-1906\",\n            \"“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”\"),\n        Sample(\"fleurs-cmn-test-2006\",\n            \"钙、钾等元素属于金属，银和金等元素当然也是金属。\"),\n        Sample(\"fleurs-cmn-test-1883\",\n            \"桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。\")\n    )"
+    },
+    {
+      "old": "    private val EXPECTED_SAMPLES = listOf(93680, 77040, 199760)",
+      "new": "    private val EXPECTED_SAMPLES = listOf(166080, 132480, 221760)"
+    },
+    {
+      "old": "            .put(\"plannedRequests\", 4).put(\"completedRequests\", 0)",
+      "new": "            .put(\"plannedRequests\", 5).put(\"completedRequests\", 0)"
+    },
+    {
+      "old": "        }\n\n        for (sample in SAMPLES) {",
+      "new": "        }\n\n        // Mandarin compiled variant: the explicit zh-CN profile locale is required. The strict\n        // en-US|zh-CN parser above has already rejected any other value; here we additionally\n        // require that zh-CN was explicitly supplied (not defaulted from absent) so this variant\n        // never silently runs the English baseline. Fail closed before reservation/model work.\n        require(localeProvided && locale == \"zh-CN\") {\n            \"this Mandarin profile variant requires explicit locale 'zh-CN'\"\n        }\n\n        for (sample in SAMPLES) {"
+    },
+    {
+      "old": "    /**\n     * Fixed chunking rule (chosen before decode): a clip with <= [MAX_TRANSCRIBE_SAMPLES] samples\n     * is one entire slice; a longer clip is split at its integer midpoint into two equal slices.\n     * Full coverage, no overlap, no gap. Third clip (199760) -> [0,99880), [99880,199760).\n     */",
+      "new": "    /**\n     * Fixed chunking rule (chosen before decode): a clip with <= [MAX_TRANSCRIBE_SAMPLES] samples\n     * is one entire slice; a longer clip is split at its integer midpoint into two equal slices.\n     * Full coverage, no overlap, no gap. Mandarin variant: clips 166080 and 221760 exceed the\n     * 160000 bound -> two slices each (2/1/2); 132480 fits in one -> total 5 planned requests.\n     */"
+    }
+  ]
+}
