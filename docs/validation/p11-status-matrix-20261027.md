@@ -1,3 +1,13 @@
+## 当前状态指针（2026-11-09 09:01 +08）
+
+**去重八包剩余4包：W3/W6/W7/W8；W1/W2/W4/W5 已关闭。** Skiko`.6`实际Nexus交付/匿名回读/全新缓存双iOS远端消费、Apple交付及远端消费者真机推理均已验收；W2不重开。W4既定适用范围与用户盲选、W5真实native/Service/KMP/Demo生命周期及late-cleanup验收已关闭，资源预算归W8。依据：[最新防重复清单](progress-side-update-20261107-2014.md)、[W4裁定](w4-neutral-playback-20261108.md)、[W5订正复审](w5-late-cleanup-rereview-20261108.md)。
+
+W3当前优先中文质量归因：Android三文件/五请求已完成，但原CER44/92不是质量通过；Apple同输入3/3、32父检查与恢复通过，原CER16/92；免费hy4free诊断已完成限定复核，VAD实际范围待测。W8已有真机ASR进程资源采样，GPU/能耗/持续及跨能力预算逐项裁定。W7多人独立生产校准/PAD仍阻塞，近期仅本人样本不替代多人；提取/评分工具与单人双端试验不重复。W6 Qwen由用户专家负责，主线不重复测试，仅接收其质量与资源结论。
+
+P11/release仍 `open/not-ready`；原阶段10/12与八包计数分别保留。仅F03低系统实体设备按既定授权延期；W7数据缺口未获延期。当前来源为[ROADMAP](../ROADMAP.md)、[主交接](../HANDOFF-2026-11-05-next-session.md)最新段落及[08:30报告](progress-20261109-0830.md)。下方各日期为历史快照，旧未交付/剩6包/员工照旧授权/SmolVLM2结果不代表当前状态。
+
+当前manifest仍指向旧readiness冻结快照，6398来源hash当前有249处缺失/变化（含已清理构建缓存及后续源码/文档）；已保留原快照并分类核对，尚不能称当前readiness校验通过，不因此重开W2。
+
 2026-11-07 功能子项新增：[Android员工图功能验收](android-identity-functional-20261107.md)，12输入全部实际提取/隔离加密注册/`THRESHOLD_UNVERIFIED`/删除，缺输入负向正确；原App/25私有模型/四SR/权限/TTS恢复，输入派生副本/映射已清除，226原图保持。授权仅功能试验，无校准/准确率/PAD/阈值或benchmark样本新增；9行gap及10/12/P4/P11/not-ready保持。
 
 2026-11-07后续：[F09远端制品新消费者](f09-remote-inference-20261107.md)在真机完成图片/视频推理，

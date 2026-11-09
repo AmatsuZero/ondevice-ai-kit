@@ -1,8 +1,14 @@
 # 分阶段交付与恢复入口
 
-2026-11-07：[全任务状态审计](validation/roadmap-status-audit-20261107.md)已核对原P0–P11与F01–F12，
-更新当前表中过期的维护人、PAD smoke、真机和分组状态。Apple Git上传/回验已完成，
-Skiko `.6`本地交付已完成、Nexus上传/远端消费未执行；8能力/11组且9行均有gap。
+## 当前验收状态（2026-11-09 09:01 +08）
+
+去重八包中 **W1/W2/W4/W5 已关闭；W3/W6/W7/W8 四包仍开放**。基础阶段10/12是原P0–P11停止点计数，不能当作当前八包或生产发布比例；P11/release仍为 `open/not-ready`。
+
+**Skiko `.6` 已完成 Nexus 实际交付、匿名回读，以及全新依赖缓存的双 iOS 远端消费；Apple 已完成实际交付与远端消费者真机图片/视频推理。W2 已关闭，不再派发上传或消费验证。** 依据：[W2范围裁定](validation/w2-source-delivery-decision-20261108.md)、[Nexus实际交付](validation/f02-nexus-delivery.md)、[Apple远端推理](validation/f09-remote-inference-20261107.md)。
+
+W3优先质量归因：英文/受控噪声及中文Android文件链路已有实测，中文CER44/92保留原规则；Apple同输入3/3、32父检查与恢复通过，CER16/92；免费hy4free诊断已完成限定复核，VAD实际范围待测，不以功能通过替代质量。W8按稳定能力逐项核对已有测量、缺失测量、预算与判定。W7已有工具/单人双端试验不重做；近期仅本人可供样本，多人生产校准和单独授权的PAD数据仍是原目标阻塞项，不自动延期或关闭。W6由用户专家独占，主线只接收结论。
+
+当前依据：[最新验收清单](validation/progress-side-update-20261107-2014.md)、[本轮进度](validation/progress-20261109-0830.md)、[P11状态页](validation/p11-status-matrix-20261027.md)。以下按日期保留历史，旧“未交付/剩余六包”不作当前派发依据。
 
 2026-11-07：[Android Identity资源](validation/android-identity-resources-20261107.md)在当前636/dfcc主包
 完成一次受控5预热+30测量，72个RESUMED检查点/close/lease/清理通过；p50/p95=133.174/148.906ms，
