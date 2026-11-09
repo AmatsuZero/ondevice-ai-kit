@@ -8,7 +8,7 @@
 
 W3优先质量归因：英文/受控噪声及中文Android文件链路已有实测，中文CER44/92保留原规则；Apple同输入3/3、32父检查与恢复通过，CER16/92；免费hy4free诊断已完成限定复核，VAD实际范围待测，不以功能通过替代质量。W8按稳定能力逐项核对已有测量、缺失测量、预算与判定。W7已有工具/单人双端试验不重做；近期仅本人可供样本，多人生产校准和单独授权的PAD数据仍是原目标阻塞项，不自动延期或关闭。W6由用户专家独占，主线只接收结论。
 
-当前依据：[最新验收清单](validation/progress-side-update-20261107-2014.md)、[本轮进度](validation/progress-20261109-0830.md)、[P11状态页](validation/p11-status-matrix-20261027.md)。以下按日期保留历史，旧“未交付/剩余六包”不作当前派发依据。
+当前依据：[Apple中文同输入](validation/w3-apple-mandarin-observed-20261109.md)、[W8逐项资源判定](validation/w8-resource-dispositions-20261109.md)、[最新验收清单](validation/progress-side-update-20261107-2014.md)、[本轮进度](validation/progress-20261109-0830.md)、[P11状态页](validation/p11-status-matrix-20261027.md)。以下按日期保留历史，旧“未交付/剩余六包”不作当前派发依据。
 
 2026-11-07：[Android Identity资源](validation/android-identity-resources-20261107.md)在当前636/dfcc主包
 完成一次受控5预热+30测量，72个RESUMED检查点/close/lease/清理通过；p50/p95=133.174/148.906ms，

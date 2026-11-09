@@ -1,0 +1,34 @@
+# W8 resource dispositions — 2026-11-09
+
+W8 remains **open**. This is the parent-verified inventory of existing bounded measurements and remaining acceptance work. No device run or resource-budget pass is added by this document. W1/W2/W4/W5 remain closed; W7 multiperson calibration/PAD is blocked, not deferred; new W6 quality/resource tests remain expert-owned.
+
+Free CBC hy3 first delivered an inventory in 235.725 s. A separate correction completed in 408.045 s and wrote three actual files within its isolated task root (one level above the wrapper's expected `candidate` directory). The parent copied identical SHA-verified bytes into the evidence directory; the original result with an empty `files` map is preserved. No retry was used. Candidate files are evidence, not automatic acceptance of every proposal.
+
+## Existing measurements, missing measurements, budget and disposition
+
+**Budget for every row: not found in the supplied acceptance documents; unverified.** Measurements below characterize the recorded source/device/window. They do not retrospectively define production limits. Missing grouped-report coverage is distinct from missing measurements.
+
+| Capability / source scope | Existing measurement | Missing or unresolved | Disposition |
+| --- | --- | --- | --- |
+| Face / Apple Vision | 30 fixed samples, inference p50/p95 2.432/3.065 ms | Reliable memory peak, applicable GPU and energy measurements; budget | Preserve bounded timing; budget unverified |
+| Face / Android bundled ML Kit | 30 fixed samples, 10.853538/18.088231 ms | Reliable memory peak, applicable GPU and energy measurements; budget | Preserve bounded timing; budget unverified |
+| Apple TTS | 5 measured + warm-up, duration 2779.726917/2779.791875 ms; sampled RSS 44,810,240 B | Sustained playback/close resource protocol, true peak, energy and applicable GPU; budget | Preserve fixed-text characterization |
+| Apple file ASR | Historical fixed CAF 5 measured + warm-up, 76.484458/93.435792 ms; sampled RSS p50/p95 36,913,152/36,929,536 B | Sustained resource protocol, true peak/energy and applicable GPU; budget | Preserve historical resource sample; new Mandarin quality is W3, not this resource verdict |
+| Android Sherpa / historical ordinary afed APK | 30 measured +5 warm-up, 1807.033/1827.525 ms; sampled RSS 471,339,008–481,583,104 B | Source-era limitation; GPU/energy/sustained budget | Preserve as historical, do not recast as current source |
+| Android Sherpa / accepted current-source W8 observation | 4 requests, 24 same-PID samples/30 s, RSS 223,408,128–411,172,864 B, 36–45 threads, CPU +1273 raw ticks | GPU/energy and sustained budget; window includes 45.003 s idle | Accept bounded observation; no repeat of this accepted batch; no CPU-percent/zero-leak claim |
+| Android LiteRT-LM / historical ordinary afed APK | 5 measured +warm-up, 56477.465/57068.401 ms; sampled RSS 3,905,445,888–3,978,801,152 B | Current-source resource characterization, GPU allocation/reclaim, energy and sustained budget | Preserve historical measurement; W5 function/lifecycle remains closed |
+| Apple SR / direct frame probe and bicubic | 48 frames: SR93.619833/95.641250 ms, RSS delta87,801,856 B; bicubic1.457208/1.583791 ms, delta507,904 B | Independent cold-start comparison, GPU/energy/budget | Keep frame scope separate from whole-request scope; W4 closure retained |
+| Apple SR / public SDK | Existing 5-request sample; **20-request/107.153 s bounded sustained** and **second-scene5-request** samples also exist | GPU/energy, broader sustained/cross-device budget | Preserve all three scopes; **do not dispatch another equivalent 20-request run** |
+| Android Identity / frozen636 APK | 30 measured:133.174/148.906 ms; existing20cycles/200calls/600.909 s,160 measured:128.708/139.669 ms; sampledVmRSS570,290,176 B | GPU/energy/true peak and production budget | Accept bounded characterization; resource work need not wait for multiperson calibration/PAD |
+| Camera / P4-era source | Physical lifecycle/owner-release, 120 s runs, sampledRSS/footprint, allocations and Leaks traces exist | Current Skiko repair-package source comparability and remaining ownership/GPU/energy/budget; compatible grouped format | Preserve historical measurements; **not “no probe/no measurements”**; a GrOp trace alone is not a root-cause verdict |
+| Apple VLM / historical SmolVLM2 | Historical30synthetic measurements and bounded RSS retained | Current quality/resource acceptance received from W6 expert | Expert-owned; **no new SmolVLM2/Qwen prompt/model/device/GPU tests from W8** |
+
+## Parent acceptance boundaries and next actions
+
+The correction is accepted as an inventory input with these exclusions: its Identity row's proposed dependency on multiperson/PAD is **not** a resource prerequisite; its camera text does **not** establish that a Skiko fix or ownership outcome has been verified; individual “smallest task” suggestions are not an automatic schedule. Absence of an instrument from these supplied documents does not prove no instrument exists. Historical Apple Metal capture is W6 evidence and does not approve every capability's GPU peak.
+
+The next three resource actions are bounded planning gates: (1) freeze the exact sustained TTS playback/close protocol using its existing sampler; (2) choose a genuinely distinct sustained current-source Sherpa protocol after the W3 diagnostic run, preserving the accepted batch; (3) verify the exact Skiko repair-package/source identity before deciding which camera resource comparison is actually missing. Before execution each needs an explicit window/workload, receipt and device slot. GPU/energy measurement feasibility and prospective production budgets remain separate open decisions. No existing sample is rerun merely to fill the table.
+
+Sources: [grouped measurements](p11-grouped-benchmark.md), [SR20-request and second-scene records](video-sr-backends.md), [P4 camera records](p4-camera-stability.md), [current physical ASR](w8-physical-asr-observation-20261109.md), [historical Android ASR](android-asr-resources-20261107.md), [historical LiteRT-LM](android-litertlm-resources-20261107.md), [Identity resource](android-identity-resources-20261107.md), [Identity20cycles](android-identity-reopen-20261107.md), [W4closure](w4-neutral-playback-20261108.md), [W5closure](w5-late-cleanup-accepted-20261108.md).
+
+Local candidate originals: `.omx/artifacts/cbc-hy3-w8-resource-reconciliation-20261109-0900/`; actual file recovery, source manifests and raw CLI events retained. Parent freshly matched both SR summary hashes and their raw-report hashes; no device rerun. Current readiness manifest still points to a historical snapshot with source drift, as separately recorded in the [P11 status](p11-status-matrix-20261027.md).
