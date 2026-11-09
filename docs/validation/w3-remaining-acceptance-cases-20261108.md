@@ -4,7 +4,33 @@ Scope: on-device speech recognition acceptance. The original matrix was a planni
 artifact; the execution-status update below records subsequent bounded results.
 This doc is NOT a quality approval.
 
-## Current bounded acceptance update — 2026-11-09 08:24 +08
+## Current bounded acceptance update — 2026-11-09 11:10 +08
+
+- Apple explicit locale has now been built and exercised on the iPhone with the
+  same frozen three public FLEURS Mandarin clips: 3/3 completed, 32 parent checks,
+  CER 16/92. Android Sherpa completed five requests covering those three clips,
+  CER 44/92. These are bounded observations, not a quality pass. Apple whole clips
+  and Android slices/different backends do not establish the cause of the gap.
+  See [Apple observation](w3-apple-mandarin-observed-20261109.md),
+  [Android observation](w3-mandarin-android-observed-20261109.md) and
+  [current reconciliation](w3-acceptance-reconciliation-20261109.md).
+- The original scoring rule remains frozen: NFC/casefold, whitespace removed for
+  CER, punctuation/digits/script distinctions retained. Removing VAD in one
+  isolated control worsened CER to 53/92. It is not an accepted fix. Upstream
+  v2.0.1 supports dynamic language; the constructor-only `zh` candidate was not
+  run or integrated. See [native language check](w3-whisper-language-source-check-20261109.md).
+- W8 current-source physical ASR observation (four requests, 24 same-PID samples)
+  is accepted for its bounded scope. The distinct sustained Sherpa candidate ended
+  with upstream `empty_model_response` and no files; it has not been built or run.
+  The separately accepted TTS twenty-cycle result does not close ASR resources.
+- R1/R2 and Android R3 still require applicable system speech resources and a fresh
+  microphone start cue. Keep the reconciled prior iPhone lifecycle evidence;
+  do not repeat already accepted file runs, fixtures, scorers or resource tools.
+- W3 remains open. W1/W2/W4/W5 are closed; W6 is expert-owned, W7 has outstanding
+  multiperson/PAD data gates, and W8 resource budgets remain open. Historical
+  updates below do not override this current status.
+
+## Historical bounded acceptance update — 2026-11-09 08:24 +08
 
 - Apple explicit locale is now integrated, source-reviewed, unsigned-build checked
   and exercised by 12 host pure-parser cases. It has not been installed or launched;
@@ -77,17 +103,18 @@ context; this update and the linked receipts govern their current execution stat
 | R1 | On-device system en-US recognition | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | System backend MICROPHONE-ONLY: `SpeechRecognitionRequest(locale)` (no audioFile); `SpeechRecognizer.startListening`; TECNO en-US resource unavailable/unverified; error13/MISSING_ASSETS vs nonempty transcript + exact backend; own engine cancel/destroy bounded; NO no-mic path |
 | R2 | Mic: background speech handling | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | Background speech handled per spec; no SHA of raw input (no file exists) |
 | R3 | Mic: interruption / cancel / reentry | Real mic, fresh start cue for new capture | android-ondevice-asr / ios-ondevice-asr | partial: prior iPhone scoped lifecycle retained; Android capture/interruption gaps open | Android `SpeechRecognitionRequest(locale)` + session cancel/reentry; iOS Swift `SpeechMicrophoneRecognitionRequest`; reacts to interrupt/cancel, re-enters cleanly |
-| R4 | zh-CN / noisy file quality | Offline file fixture (no mic) | android-ondevice-asr (Sherpa) / ios-ondevice-asr (Apple file) | partial: synthetic-English function accepted; Chinese/real-noise open | File transcription via file-capable Sherpa backend (Android) or `AppleSpeechRecognizerBackend` file path (Apple); NOT `AndroidSpeechRecognizerBackend` |
-| R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | partial: emulator window accepted; physical budgets open | Observer attaches own App PID; Android run-as reads only permitted process; iOS uses existing mechanism |
+| R4 | zh-CN / noisy file quality | Frozen public FLEURS / controlled-noise files (no mic) | android-ondevice-asr (Sherpa) / ios-ondevice-asr (Apple file) | partial: both platforms completed Mandarin and synthetic-English noise; Mandarin quality attribution/representative real noise open | Preserve CER44/92 Android vs16/92 Apple with backend/slicing limits; no-VAD53/92 is not a fix; file-capable backends only |
+| R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | partial: emulator and four-request physical observation accepted; sustained Sherpa candidate not delivered; GPU/energy/budgets open | Preserve24physical samples and prior historical resources; no repeat accepted batch; own-PID binding and honest paced-idle scope |
 
 ## Preserved / blocked states (NOT runnable cases)
 - TECNO en-US resources: unavailable / unverified, no live download performed. Blocked
   state preserved; no assertion that such resources exist. R1 is mic-only and waits
   on an authorized mic session + verified resources.
-- Cross-language / noisy public fixtures: NOT supplied. Exact source/reference/licence
-  must be frozen BEFORE any run. R4 stays blocked until then; uses file-capable backend.
-- W8 staged ASR current 9 sources match the parent baseline; device vanished before
-  install, so PENDING HARDWARE, not a nonexistent tool.
+- Public Mandarin and controlled-noise fixtures have been frozen and run; do not
+  reacquire them. Representative real-world noise and reliable Mandarin quality
+  attribution remain open. Preserve source/reference/licence and scoring rules.
+- W8 current-source four-request physical run has completed. Earlier vanished-device
+  or unauthorized notes describe their original attempts, not current acceptance.
 - Resource observer is Android-only (run-as). Apple attach uses existing iOS mechanism;
   no new implementation opened.
 
@@ -105,6 +132,8 @@ context; this update and the linked receipts govern their current execution stat
 
 ## Minimal next action (primary)
 Without a user present: primary owner runs W8 current-source9 physical ASR/Sherpa
-publicPCM resource attach when the device returns — NOT the impossible system-file R1.
-R1/R2/R3 wait on an authorized mic session and verified resources. R4 waits on a frozen
-fixture; R5 waits on hardware return. No execution is included in these docs.
+distinct sustained resource protocol after an actual candidate passes review/build;
+the already accepted four-request attach is not repeated. R1/R2/Android R3 wait on
+a fresh authorized mic session and verified resources. R4 continues quality attribution
+and representative real noise; existing frozen Mandarin inputs are available. This
+status-document correction itself performs no device run or quality acceptance.
