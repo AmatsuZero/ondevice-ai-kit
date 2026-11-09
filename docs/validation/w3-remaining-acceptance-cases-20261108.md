@@ -4,7 +4,7 @@ Scope: on-device speech recognition acceptance. The original matrix was a planni
 artifact; the execution-status update below records subsequent bounded results.
 This doc is NOT a quality approval.
 
-## Current bounded acceptance update — 2026-11-09 11:10 +08
+## Current bounded acceptance update — 2026-11-09
 
 - Apple explicit locale has now been built and exercised on the iPhone with the
   same frozen three public FLEURS Mandarin clips: 3/3 completed, 32 parent checks,
@@ -20,9 +20,13 @@ This doc is NOT a quality approval.
   v2.0.1 supports dynamic language; the constructor-only `zh` candidate was not
   run or integrated. See [native language check](w3-whisper-language-source-check-20261109.md).
 - W8 current-source physical ASR observation (four requests, 24 same-PID samples)
-  is accepted for its bounded scope. The distinct sustained Sherpa candidate ended
-  with upstream `empty_model_response` and no files; it has not been built or run.
-  The separately accepted TTS twenty-cycle result does not close ASR resources.
+  remains accepted. The later primary-owned sustained Sherpa probe is now built,
+  physically exercised and accepted in `c213a4b`:20cycles/40calls/600.503s paced,
+  265parentchecks, second raw read exact, aliases/stage removed and ordinary paths
+  preserved. It supersedes the earlier hy4free no-file candidate status; its
+  failure remains historical. The ordinary App also returned to the foreground
+  after the post-restoration ADB authorization gap. See [sustained acceptance](w8-sherpa-sustained-20261109.md).
+  GPU/energy/production budgets remain open; no equivalent ASR batch is needed.
 - R1/R2 and Android R3 still require applicable system speech resources and a fresh
   microphone start cue. Keep the reconciled prior iPhone lifecycle evidence;
   do not repeat already accepted file runs, fixtures, scorers or resource tools.
@@ -104,7 +108,7 @@ context; this update and the linked receipts govern their current execution stat
 | R2 | Mic: background speech handling | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | Background speech handled per spec; no SHA of raw input (no file exists) |
 | R3 | Mic: interruption / cancel / reentry | Real mic, fresh start cue for new capture | android-ondevice-asr / ios-ondevice-asr | partial: prior iPhone scoped lifecycle retained; Android capture/interruption gaps open | Android `SpeechRecognitionRequest(locale)` + session cancel/reentry; iOS Swift `SpeechMicrophoneRecognitionRequest`; reacts to interrupt/cancel, re-enters cleanly |
 | R4 | zh-CN / noisy file quality | Frozen public FLEURS / controlled-noise files (no mic) | android-ondevice-asr (Sherpa) / ios-ondevice-asr (Apple file) | partial: both platforms completed Mandarin and synthetic-English noise; Mandarin quality attribution/representative real noise open | Preserve CER44/92 Android vs16/92 Apple with backend/slicing limits; no-VAD53/92 is not a fix; file-capable backends only |
-| R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | partial: emulator and four-request physical observation accepted; sustained Sherpa candidate not delivered; GPU/energy/budgets open | Preserve24physical samples and prior historical resources; no repeat accepted batch; own-PID binding and honest paced-idle scope |
+| R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | partial: emulator, four-request physical and20cycle/40call sustained Sherpa observations accepted; GPU/energy/budgets open | Preserve24physical samples and26222sustained RSS samples; no equivalent rerun; own-PID binding and honest paced-idle scope |
 
 ## Preserved / blocked states (NOT runnable cases)
 - TECNO en-US resources: unavailable / unverified, no live download performed. Blocked
@@ -131,9 +135,15 @@ context; this update and the linked receipts govern their current execution stat
   measured network isolation.
 
 ## Minimal next action (primary)
-Without a user present: primary owner runs W8 current-source9 physical ASR/Sherpa
-distinct sustained resource protocol after an actual candidate passes review/build;
-the already accepted four-request attach is not repeated. R1/R2/Android R3 wait on
-a fresh authorized mic session and verified resources. R4 continues quality attribution
-and representative real noise; existing frozen Mandarin inputs are available. This
-status-document correction itself performs no device run or quality acceptance.
+The sustained current-source Sherpa measurement is completed; do not redispatch
+it or the accepted four-request attach. R1/R2/Android R3 wait on a fresh authorized
+mic session and verified resources. R4 continues quality attribution and
+representative real noise; existing frozen Mandarin inputs remain available.
+A distinct free-hy4free single-clip SDK/direct-native parity candidate is running;
+it must prove identical prepared waveform bytes before a direct decode. Candidate
+delivery is not build/runtime/quality acceptance. W8 continues distinct workload
+energy/GPU/budget work. This status correction itself performs no inference.
+
+## 2026-11-09 13:04: native parity control accepted
+
+[One public unsliced2006 SDK/directnative experiment](w3-native-parity-control-20261109.md) passed44parent checks andrestoration. Actualpreparedfloat32LESHA/countmatchedindependenthost92928samples; exactsamehypothesiswithpriorSDKbaseline. Currentpath didnotaddtextdifferenceonthisclip; model-onlyrootcause/generalSDKcorrectnessnotproved. PrimaryrawCER44/92unchanged. Nextsinglecandidateanalysisfreehy3running; no production/scorer/modeldefaultchange.

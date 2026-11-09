@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "kind": "android-natural-file-asr/prepared-fingerprint-replacement-plan",
+  "purpose": "On an ISOLATED COPY of SherpaAsrBackend.kt, observe the ACTUAL prepared float32 LE bytes (SHA-256 + sample count) BEFORE native decode, so the parent can compare the SDK session/orchestration hypothesis against a direct native Whisper hypothesis for the PUBLIC unsliced Mandarin clip2006. Production source is unchanged.",
+  "scope": "isolated-copy-only",
+  "productionSourceUnchanged": true,
+  "reversible": true,
+  "reversal": "On the isolated copy: source.replace(old,new) applies the single diagnostic; source.replace(new,old) restores the exact original. old occurs exactly once; new does not contain old; the 8 leading spaces of the original expression line stay in the file and belong to NEITHER old NOR new, so both directions are exact inverses.",
+  "fingerprintFile": {
+    "name": "odai-native-parity-prepared.txt",
+    "location": "alias app noBackupFilesDir/sherpa-whisper-tiny-65176e2d-vad9e2449e1 (model.directory)",
+    "absentBeforeRequired": true,
+    "oneExactNewFile": true,
+    "format": "one line of text: preparedFloat32LeSha256=<64 lowercase hex>|preparedSampleCount=<int>",
+    "contentKind": "tiny numeric text",
+    "rawPcmPersisted": false,
+    "float32LeSha256Definition": "java.nio.ByteBuffer.allocate(n*4).order(java.nio.ByteOrder.LITTLE_ENDIAN); putFloat for each sample; SHA-256 of buffer.array(); lowercase hex",
+    "durability": "written and flushed via FileOutputStream.use (close); the observed values are ALSO durably recorded in the exclusive AtomicFile report"
+  },
+  "constraints": [
+    "keep model.verify() and WhisperSpeechGate.prepare(model, samples); do NOT bypass or change the real VAD gate",
+    "observe the prepared array BEFORE returning it to native decode (SherpaSession zeroes waveform in its finally)",
+    "fully qualified java.* types inside the expression; no new production imports or dependencies",
+    "the callback must NOT reference any test/instrumentation-only class from main code",
+    "exclusive file creation (absent-before required); no raw PCM or waveform persisted",
+    "one SDK call + one direct native call only; no third decode, retry, new model, or scoring change"
+  ],
+  "replacements": [
+    {
+      "file": "SherpaAsrBackend.kt",
+      "package": "io.ondeviceai.sherpaasr",
+      "target": "the single FILE-path transcribe expression (NOT the microphone recognize() -> session.transcribe(request.locale) { ... capture() } path)",
+      "occurrences": 1,
+      "unique": true,
+      "old": "session.transcribe(locale) { model.verify(); WhisperSpeechGate.prepare(model, samples) }",
+      "new": "session.transcribe(locale) {\n            model.verify()\n            val prepared = WhisperSpeechGate.prepare(model, samples)\n            val buffer = java.nio.ByteBuffer.allocate(prepared.size * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN)\n            for (index in prepared.indices) buffer.putFloat(prepared[index])\n            val digest = java.security.MessageDigest.getInstance(\"SHA-256\").digest(buffer.array())\n            val digits = \"0123456789abcdef\"\n            val sha = java.lang.StringBuilder(digest.size * 2)\n            for (byteValue in digest) {\n                val value = byteValue.toInt() and 0xff\n                sha.append(digits[value ushr 4]).append(digits[value and 0x0f])\n            }\n            val fingerprint = java.io.File(model.directory, \"odai-native-parity-prepared.txt\")\n            check(!fingerprint.exists()) { \"prepared fingerprint already present\" }\n            check(fingerprint.createNewFile()) { \"prepared fingerprint create failed\" }\n            java.io.FileOutputStream(fingerprint).use { output ->\n                val payload = \"preparedFloat32LeSha256=$sha|preparedSampleCount=${prepared.size}\"\n                output.write(payload.toByteArray(java.nio.charset.StandardCharsets.UTF_8))\n                output.flush()\n            }\n            prepared\n        }"
+    }
+  ]
+}
