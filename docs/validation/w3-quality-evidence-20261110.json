@@ -1,0 +1,637 @@
+{
+  "schemaVersion": 1,
+  "derivedAt": "2026-11-10T11:42:56.195906+08:00",
+  "scope": "Frozen public-file observations only; existing runs, no new recognition; typed errors are not empty hypotheses",
+  "normalizationSource": "tools/speech_error_metrics.py",
+  "scorerSha256": "d398bb35438b9f4eb399fc404e02c0c2a7184a7cea7c7a6d32e4a321f8e2b39e",
+  "mandarinSource": {
+    "dataset": "google/fleurs",
+    "config": "cmn_hans_cn/test",
+    "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+    "license": "CC-BY-4.0",
+    "attributionNotice": "probes/android-natural-file-asr/mandarin-SOURCE-NOTICE.txt"
+  },
+  "mandarin": {
+    "apple": {
+      "rawReport": "artifacts/verification/w3-apple-mandarin-file-20261109-0845/w3-file-report.json",
+      "rawReportSha256": "fe656824d5fa5f75582fb25da3c94c4a80568a0bbc0a9a206698847f7ba167d4",
+      "runId": "74506118-862E-47B2-9698-5D6620113AD8",
+      "pairs": [
+        {
+          "id": "fleurs-cmn-test-1906",
+          "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+          "hypothesis": "这并不是告别这是一个篇章的结束也是新篇章的开始"
+        },
+        {
+          "id": "fleurs-cmn-test-2006",
+          "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+          "hypothesis": "盖甲等元素属于金属银河金等元素当然也是金属"
+        },
+        {
+          "id": "fleurs-cmn-test-1883",
+          "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+          "hypothesis": "桥下垂直净空15米该项目与201年8月完工但直到2017年3月才开始通车"
+        }
+      ],
+      "scoring": {
+        "schemaVersion": 1,
+        "kind": "speech-error-metrics",
+        "normalization": {
+          "unicodeNormalization": "NFC, optional casefold, then NFC",
+          "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+          "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+          "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+          "preserved": "Punctuation, accents, and digits are not stripped",
+          "casefold": true,
+          "distance": "Minimum unit Levenshtein edit distance",
+          "tracebackTieOrder": [
+            "exact match",
+            "substitution (diagonal)",
+            "deletion",
+            "insertion"
+          ]
+        },
+        "rows": [
+          {
+            "id": "fleurs-cmn-test-1906",
+            "word": {
+              "referenceUnits": 1,
+              "hypothesisUnits": 1,
+              "substitutions": 1,
+              "deletions": 0,
+              "insertions": 0,
+              "errors": 1,
+              "rate": 1.0,
+              "defined": true
+            },
+            "character": {
+              "referenceUnits": 28,
+              "hypothesisUnits": 23,
+              "substitutions": 0,
+              "deletions": 5,
+              "insertions": 0,
+              "errors": 5,
+              "rate": 0.17857142857142858,
+              "defined": true
+            },
+            "referenceSHA256": "6f20dd84a6c686c60507428e037063762c5a15bb7e9e9777c1047049b62a9152",
+            "hypothesisSHA256": "a95113b21fc6c04f025808eeb63cfe495deb9429fa3de9c9969009f062ad1eaa"
+          },
+          {
+            "id": "fleurs-cmn-test-2006",
+            "word": {
+              "referenceUnits": 1,
+              "hypothesisUnits": 1,
+              "substitutions": 1,
+              "deletions": 0,
+              "insertions": 0,
+              "errors": 1,
+              "rate": 1.0,
+              "defined": true
+            },
+            "character": {
+              "referenceUnits": 24,
+              "hypothesisUnits": 21,
+              "substitutions": 3,
+              "deletions": 3,
+              "insertions": 0,
+              "errors": 6,
+              "rate": 0.25,
+              "defined": true
+            },
+            "referenceSHA256": "2d42d361528b866e81c186dbd81aa97a7358e8cb3a6e948baa362e5e49801060",
+            "hypothesisSHA256": "a6f8fddaff1b9dc5845bbde0dd97370a57fea2e1f2432bd8438978e4f2aa7f0b"
+          },
+          {
+            "id": "fleurs-cmn-test-1883",
+            "word": {
+              "referenceUnits": 11,
+              "hypothesisUnits": 1,
+              "substitutions": 1,
+              "deletions": 10,
+              "insertions": 0,
+              "errors": 11,
+              "rate": 1.0,
+              "defined": true
+            },
+            "character": {
+              "referenceUnits": 40,
+              "hypothesisUnits": 36,
+              "substitutions": 1,
+              "deletions": 4,
+              "insertions": 0,
+              "errors": 5,
+              "rate": 0.125,
+              "defined": true
+            },
+            "referenceSHA256": "acddf7b33dba632b9346b3d9c273c766288203af0ff1bca9f542b0b4c1636aad",
+            "hypothesisSHA256": "0f3f4c2ab85e48f15a1ec9c5e7bea6e1353cb2f929dcc48f138a1184ebb8bf57"
+          }
+        ],
+        "aggregate": {
+          "word": {
+            "referenceUnits": 13,
+            "hypothesisUnits": 3,
+            "substitutions": 3,
+            "deletions": 10,
+            "insertions": 0,
+            "errors": 13,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 92,
+            "hypothesisUnits": 80,
+            "substitutions": 4,
+            "deletions": 12,
+            "insertions": 0,
+            "errors": 16,
+            "rate": 0.17391304347826086,
+            "defined": true
+          }
+        },
+        "qualityVerdict": "unverified",
+        "productionReady": false
+      }
+    },
+    "android": {
+      "rawReport": "artifacts/verification/w3-mandarin-profile-staging-20261109-0833/device-report.json",
+      "rawReportSha256": "29b5c67e607d7b18114f1094954dd78341e131346d88ca2846e85adb2ee5f1b1",
+      "runId": "92244554af19a3eec9733896fc352bd28c3eb479e3648ea83a168806f8ff202b",
+      "pairs": [
+        {
+          "id": "fleurs-cmn-test-1906",
+          "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+          "hypothesis": "這並不是告別這是一個偏膠的 也是新天章的开始"
+        },
+        {
+          "id": "fleurs-cmn-test-2006",
+          "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+          "hypothesis": "該家的元素屬於金屬 銀河金的元素當然也是金屬"
+        },
+        {
+          "id": "fleurs-cmn-test-1883",
+          "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+          "hypothesis": "喬下垂直進空15米 該項目於21年8月 但直到2017-3月才開始通知"
+        }
+      ],
+      "scoring": {
+        "schemaVersion": 1,
+        "kind": "speech-error-metrics",
+        "normalization": {
+          "unicodeNormalization": "NFC, optional casefold, then NFC",
+          "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+          "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+          "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+          "preserved": "Punctuation, accents, and digits are not stripped",
+          "casefold": true,
+          "distance": "Minimum unit Levenshtein edit distance",
+          "tracebackTieOrder": [
+            "exact match",
+            "substitution (diagonal)",
+            "deletion",
+            "insertion"
+          ]
+        },
+        "rows": [
+          {
+            "id": "fleurs-cmn-test-1906",
+            "word": {
+              "referenceUnits": 1,
+              "hypothesisUnits": 2,
+              "substitutions": 1,
+              "deletions": 0,
+              "insertions": 1,
+              "errors": 2,
+              "rate": 2.0,
+              "defined": true
+            },
+            "character": {
+              "referenceUnits": 28,
+              "hypothesisUnits": 21,
+              "substitutions": 8,
+              "deletions": 7,
+              "insertions": 0,
+              "errors": 15,
+              "rate": 0.5357142857142857,
+              "defined": true
+            },
+            "referenceSHA256": "6f20dd84a6c686c60507428e037063762c5a15bb7e9e9777c1047049b62a9152",
+            "hypothesisSHA256": "c892c493e897ed06d6c565d317fdf4f6dab5e84c052ade9533d0bf61e0c36271"
+          },
+          {
+            "id": "fleurs-cmn-test-2006",
+            "word": {
+              "referenceUnits": 1,
+              "hypothesisUnits": 2,
+              "substitutions": 1,
+              "deletions": 0,
+              "insertions": 1,
+              "errors": 2,
+              "rate": 2.0,
+              "defined": true
+            },
+            "character": {
+              "referenceUnits": 24,
+              "hypothesisUnits": 21,
+              "substitutions": 11,
+              "deletions": 3,
+              "insertions": 0,
+              "errors": 14,
+              "rate": 0.5833333333333334,
+              "defined": true
+            },
+            "referenceSHA256": "2d42d361528b866e81c186dbd81aa97a7358e8cb3a6e948baa362e5e49801060",
+            "hypothesisSHA256": "e2ba954f103874f362335873499b73008d06639784adf03f1d08b9c979fb6072"
+          },
+          {
+            "id": "fleurs-cmn-test-1883",
+            "word": {
+              "referenceUnits": 11,
+              "hypothesisUnits": 3,
+              "substitutions": 3,
+              "deletions": 8,
+              "insertions": 0,
+              "errors": 11,
+              "rate": 1.0,
+              "defined": true
+            },
+            "character": {
+              "referenceUnits": 40,
+              "hypothesisUnits": 33,
+              "substitutions": 8,
+              "deletions": 7,
+              "insertions": 0,
+              "errors": 15,
+              "rate": 0.375,
+              "defined": true
+            },
+            "referenceSHA256": "acddf7b33dba632b9346b3d9c273c766288203af0ff1bca9f542b0b4c1636aad",
+            "hypothesisSHA256": "0d4b136d07fd2655436a7e2625b1b1fe246d12a0b29ed5bade450d5751bdca47"
+          }
+        ],
+        "aggregate": {
+          "word": {
+            "referenceUnits": 13,
+            "hypothesisUnits": 7,
+            "substitutions": 5,
+            "deletions": 8,
+            "insertions": 2,
+            "errors": 15,
+            "rate": 1.1538461538461537,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 92,
+            "hypothesisUnits": 75,
+            "substitutions": 27,
+            "deletions": 17,
+            "insertions": 0,
+            "errors": 44,
+            "rate": 0.4782608695652174,
+            "defined": true
+          }
+        },
+        "qualityVerdict": "unverified",
+        "productionReady": false
+      }
+    }
+  },
+  "amiSource": {
+    "dataset": "AMI Meeting Corpus",
+    "datasetUrl": "https://groups.inf.ed.ac.uk/ami/download/",
+    "revision": "audio-sha256:38887e3bf7b597fe348f3818e9fc9844d7a1e15382aab52e5316dc3228fb6c1d;manual-archive-sha256:b56e5babb2496b8795deeeda7e71178d7fbc9963f94276cf2a3f4b56ebbc9f9d",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "AMI Consortium, AMI Meeting Corpus, ES2002a, Array1-01, manual word/segment annotations.",
+    "officialLicenseUrl": "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml",
+    "originalWav": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2002a/audio/ES2002a.Array1-01.wav",
+      "bytes": 40727594,
+      "sha256": "38887e3bf7b597fe348f3818e9fc9844d7a1e15382aab52e5316dc3228fb6c1d"
+    }
+  },
+  "amiManifestSha256": "498bed3b1ce1315f18d54871e7b8a3c8452ed43d014edbe56392964f12e64b85",
+  "ami": [
+    {
+      "platform": "android",
+      "clipId": "ami-ES2002a-D-330",
+      "runId": "w3-ami-20261110-01",
+      "state": "typed-error",
+      "errorClass": "io.ondeviceai.speech.SpeechNotDetectedException",
+      "report": "artifacts/verification/w3-ami-pilot-20261110/android/device-report.json",
+      "reportSha256": "17007c90252160bedcf25db6a545097a97a75aff22bc0bf5e324464d30888f4d",
+      "originalBatch": true,
+      "reference": "And I'm Andrew and I'm uh our marketing",
+      "referenceSha256": "f0634500174cd70d683e87c898cb613ab0f88fd38fec064cece770188780449f",
+      "descriptiveScore": null
+    },
+    {
+      "platform": "apple",
+      "clipId": "ami-ES2002a-D-330",
+      "runId": "F27D555C-D503-4083-B5A2-AB63BB8AA598",
+      "state": "recognized",
+      "transcript": "I'm marketing",
+      "failure": null,
+      "report": "artifacts/verification/w3-ami-pilot-20261110/apple/w3-file-report.json",
+      "reportSha256": "9aa7afe2d984153535bc25123213a3997639feb6600309a84a44542d92096ceb",
+      "originalBatch": true,
+      "reference": "And I'm Andrew and I'm uh our marketing",
+      "referenceSha256": "f0634500174cd70d683e87c898cb613ab0f88fd38fec064cece770188780449f",
+      "descriptiveScore": {
+        "schemaVersion": 1,
+        "kind": "speech-error-metrics",
+        "normalization": {
+          "unicodeNormalization": "NFC, optional casefold, then NFC",
+          "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+          "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+          "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+          "preserved": "Punctuation, accents, and digits are not stripped",
+          "casefold": true,
+          "distance": "Minimum unit Levenshtein edit distance",
+          "tracebackTieOrder": [
+            "exact match",
+            "substitution (diagonal)",
+            "deletion",
+            "insertion"
+          ]
+        },
+        "rows": [
+          {
+            "id": "ami-ES2002a-D-330",
+            "word": {
+              "referenceUnits": 8,
+              "hypothesisUnits": 2,
+              "substitutions": 0,
+              "deletions": 6,
+              "insertions": 0,
+              "errors": 6,
+              "rate": 0.75,
+              "defined": true
+            },
+            "character": {
+              "referenceUnits": 32,
+              "hypothesisUnits": 12,
+              "substitutions": 0,
+              "deletions": 20,
+              "insertions": 0,
+              "errors": 20,
+              "rate": 0.625,
+              "defined": true
+            },
+            "referenceSHA256": "f0634500174cd70d683e87c898cb613ab0f88fd38fec064cece770188780449f",
+            "hypothesisSHA256": "82bf2737b942023a39e2dac9a2e78567e05cdc58853f56fa0a4bf2dac23c242e"
+          }
+        ],
+        "aggregate": {
+          "word": {
+            "referenceUnits": 8,
+            "hypothesisUnits": 2,
+            "substitutions": 0,
+            "deletions": 6,
+            "insertions": 0,
+            "errors": 6,
+            "rate": 0.75,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 32,
+            "hypothesisUnits": 12,
+            "substitutions": 0,
+            "deletions": 20,
+            "insertions": 0,
+            "errors": 20,
+            "rate": 0.625,
+            "defined": true
+          }
+        },
+        "qualityVerdict": "unverified",
+        "productionReady": false
+      }
+    },
+    {
+      "platform": "apple",
+      "clipId": "ami-ES2002a-C-294",
+      "runId": "F27D555C-D503-4083-B5A2-AB63BB8AA598",
+      "state": "typed-error",
+      "transcript": null,
+      "failure": {
+        "stage": "recognize-clip-2",
+        "error": {
+          "domain": "kAFAssistantErrorDomain",
+          "code": 1110,
+          "type": "platform"
+        }
+      },
+      "report": "artifacts/verification/w3-ami-pilot-20261110/apple/w3-file-report.json",
+      "reportSha256": "9aa7afe2d984153535bc25123213a3997639feb6600309a84a44542d92096ceb",
+      "originalBatch": true,
+      "reference": "Well, my favourite animal would be a monkey.",
+      "referenceSha256": "a55b55acfd1e35ed46ee25085feba9600868a5d9ac8cb71a58a646b83286a976",
+      "descriptiveScore": null
+    },
+    {
+      "platform": "android",
+      "clipId": "ami-ES2002a-C-294",
+      "runId": "w3-ami-C294-20261110-01",
+      "state": "typed-error",
+      "transcript": null,
+      "errorClass": "io.ondeviceai.speech.SpeechNotDetectedException",
+      "report": "artifacts/verification/w3-ami-unattempted-20261110/android/w3-ami-C294-20261110-01/device-report.json",
+      "reportSha256": "2c73155751333d0d75bc116370dad460ad9eed204a7cdf3d02897469541398f1",
+      "originalBatch": false,
+      "reference": "Well, my favourite animal would be a monkey.",
+      "referenceSha256": "a55b55acfd1e35ed46ee25085feba9600868a5d9ac8cb71a58a646b83286a976",
+      "descriptiveScore": null
+    },
+    {
+      "platform": "android",
+      "clipId": "ami-ES2002a-B-146",
+      "runId": "w3-ami-B146-20261110-01",
+      "state": "recognized",
+      "transcript": "I need to discuss the project finance.",
+      "errorClass": null,
+      "report": "artifacts/verification/w3-ami-unattempted-20261110/android/w3-ami-B146-20261110-01/device-report.json",
+      "reportSha256": "73915edc5f1271f0c85356b4b94f4a2a25f4336975ce41270bd3d9e3e49c7877",
+      "originalBatch": false,
+      "reference": "Okay, uh we now need to discuss the project finance. Um",
+      "referenceSha256": "f2720acb32f03d19be31fb2c0e55bec62e045317c9dd6490be54efd847c64d36",
+      "descriptiveScore": {
+        "schemaVersion": 1,
+        "kind": "speech-error-metrics",
+        "normalization": {
+          "unicodeNormalization": "NFC, optional casefold, then NFC",
+          "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+          "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+          "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+          "preserved": "Punctuation, accents, and digits are not stripped",
+          "casefold": true,
+          "distance": "Minimum unit Levenshtein edit distance",
+          "tracebackTieOrder": [
+            "exact match",
+            "substitution (diagonal)",
+            "deletion",
+            "insertion"
+          ]
+        },
+        "rows": [
+          {
+            "id": "ami-ES2002a-B-146",
+            "word": {
+              "referenceUnits": 11,
+              "hypothesisUnits": 7,
+              "substitutions": 1,
+              "deletions": 4,
+              "insertions": 0,
+              "errors": 5,
+              "rate": 0.45454545454545453,
+              "defined": true
+            },
+            "character": {
+              "referenceUnits": 45,
+              "hypothesisUnits": 32,
+              "substitutions": 1,
+              "deletions": 13,
+              "insertions": 0,
+              "errors": 14,
+              "rate": 0.3111111111111111,
+              "defined": true
+            },
+            "referenceSHA256": "f2720acb32f03d19be31fb2c0e55bec62e045317c9dd6490be54efd847c64d36",
+            "hypothesisSHA256": "98d558b2c008fcb90a733926bbfb3a9e0a30a554868ceb81081309261a58fbac"
+          }
+        ],
+        "aggregate": {
+          "word": {
+            "referenceUnits": 11,
+            "hypothesisUnits": 7,
+            "substitutions": 1,
+            "deletions": 4,
+            "insertions": 0,
+            "errors": 5,
+            "rate": 0.45454545454545453,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 45,
+            "hypothesisUnits": 32,
+            "substitutions": 1,
+            "deletions": 13,
+            "insertions": 0,
+            "errors": 14,
+            "rate": 0.3111111111111111,
+            "defined": true
+          }
+        },
+        "qualityVerdict": "unverified",
+        "productionReady": false
+      }
+    },
+    {
+      "platform": "apple",
+      "clipId": "ami-ES2002a-B-146",
+      "runId": "BFE82AA1-8460-44E1-94F2-5E2E9C2ED85A",
+      "state": "recognized",
+      "transcript": "I need to discuss project finance",
+      "report": "artifacts/verification/w3-ami-unattempted-20261110/apple/w3-file-report.json",
+      "reportSha256": "8d9bf376594bb98ca22238587eb95437b26fb7523d2cf246199de55fd0eb0db2",
+      "originalBatch": false,
+      "reference": "Okay, uh we now need to discuss the project finance. Um",
+      "referenceSha256": "f2720acb32f03d19be31fb2c0e55bec62e045317c9dd6490be54efd847c64d36",
+      "descriptiveScore": {
+        "schemaVersion": 1,
+        "kind": "speech-error-metrics",
+        "normalization": {
+          "unicodeNormalization": "NFC, optional casefold, then NFC",
+          "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+          "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+          "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+          "preserved": "Punctuation, accents, and digits are not stripped",
+          "casefold": true,
+          "distance": "Minimum unit Levenshtein edit distance",
+          "tracebackTieOrder": [
+            "exact match",
+            "substitution (diagonal)",
+            "deletion",
+            "insertion"
+          ]
+        },
+        "rows": [
+          {
+            "id": "ami-ES2002a-B-146",
+            "word": {
+              "referenceUnits": 11,
+              "hypothesisUnits": 6,
+              "substitutions": 2,
+              "deletions": 5,
+              "insertions": 0,
+              "errors": 7,
+              "rate": 0.6363636363636364,
+              "defined": true
+            },
+            "character": {
+              "referenceUnits": 45,
+              "hypothesisUnits": 28,
+              "substitutions": 1,
+              "deletions": 17,
+              "insertions": 0,
+              "errors": 18,
+              "rate": 0.4,
+              "defined": true
+            },
+            "referenceSHA256": "f2720acb32f03d19be31fb2c0e55bec62e045317c9dd6490be54efd847c64d36",
+            "hypothesisSHA256": "643a1db3059cbd02d8abedc2d9dc359b5066974adfa1ae8a8068d5699b06df1f"
+          }
+        ],
+        "aggregate": {
+          "word": {
+            "referenceUnits": 11,
+            "hypothesisUnits": 6,
+            "substitutions": 2,
+            "deletions": 5,
+            "insertions": 0,
+            "errors": 7,
+            "rate": 0.6363636363636364,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 45,
+            "hypothesisUnits": 28,
+            "substitutions": 1,
+            "deletions": 17,
+            "insertions": 0,
+            "errors": 18,
+            "rate": 0.4,
+            "defined": true
+          }
+        },
+        "qualityVerdict": "unverified",
+        "productionReady": false
+      }
+    }
+  ],
+  "amiObservedCoverage": {
+    "plannedPlatformClipPairs": 6,
+    "observedPlatformClipPairs": 6,
+    "notAttempted": 0,
+    "androidRecognized": 1,
+    "androidTypedErrors": 2,
+    "appleRecognized": 2,
+    "appleTypedErrors": 1
+  },
+  "prefix": {
+    "runId": "w3-prefix-20261110-local-02",
+    "rawReportSha256": "6b23710526d8c8d8dbde78075cff6d70f419fa7dd898b0f361ae4e7a2bba6d74",
+    "baseline": "也是新天章的开始",
+    "prefixRestored": "结束也是新天将的开始",
+    "outputChanged": true,
+    "cropReferenceAvailable": false,
+    "fullClipCerRecomputed": false
+  },
+  "qualityThresholds": null,
+  "qualityVerdict": "unverified",
+  "productionReady": false,
+  "originalAmiBatchesRemainFailed": true,
+  "newMicrophoneStarts": 0,
+  "newRecognitionRequests": 0
+}
