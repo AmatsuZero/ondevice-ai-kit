@@ -1,0 +1,132 @@
+{
+  "status": "local probe accepted; physical load not attempted",
+  "core": {
+    "sourceSHA256": "0bac095d4cd8151257900827bfc3e013a7b2d0b2bebd92b674b06e39c98f999c",
+    "compilePassed": true,
+    "hostBehaviorGroupsPassed": 17,
+    "assertionsPassed": 63,
+    "frozenSixSpecsMatch": true,
+    "exactCandidateBytesIntegrated": true,
+    "realNativeCalls": 0,
+    "deviceOperations": 0,
+    "androidBuildPassed": false,
+    "scope": "pure core only; wrapper/build/device remain pending",
+    "priorFailures": [
+      "original candidate Kotlin NoSuchFileException compile error",
+      "first correction15groups pass2clockcases fail; copy receiver timing erased recorded error"
+    ],
+    "negativeControlMissingBehaviorRejected": 14
+  },
+  "wrapperHostGroups": 12,
+  "wrapperHostAssertions": 44,
+  "wrapperModelVerificationDouble": true,
+  "wrapperOriginalConfigurationRedRetained": true,
+  "fixedTokenizerPath": "modelRoot/tokenizer",
+  "parentOriginalTokenizerPromptErrorCorrected": true,
+  "buildSeconds": 27.55682112499926,
+  "buildTasks": [
+    "assembleDebug",
+    "assembleDebugAndroidTest",
+    "lintDebug"
+  ],
+  "lintWarnings": [
+    {
+      "id": "OldTargetApi",
+      "severity": "Warning",
+      "message": "Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the `android.os.Build.VERSION_CODES` javadoc for details."
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of org.jetbrains.kotlin.multiplatform than 2.4.0 is available: 2.4.21"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning",
+      "message": "A newer version of org.jetbrains.kotlin.plugin.compose than 2.4.0 is available: 2.4.21"
+    },
+    {
+      "id": "ChromeOsAbiSupport",
+      "severity": "Warning",
+      "message": "Missing x86_64 ABI support for ChromeOS"
+    },
+    {
+      "id": "DataExtractionRules",
+      "severity": "Warning",
+      "message": "The attribute `android:allowBackup` is deprecated from Android 12 and higher and may be removed in future versions. Consider adding the attribute `android:dataExtractionRules` specifying an `@xml` resource which configures cloud backups and device transfers on Android 12 and higher."
+    },
+    {
+      "id": "MissingApplicationIcon",
+      "severity": "Warning",
+      "message": "Should explicitly set `android:icon`, there is no default"
+    },
+    {
+      "id": "SetTextI18n",
+      "severity": "Warning",
+      "message": "String literal in `setText` can not be translated. Use Android resources instead."
+    }
+  ],
+  "lintErrorCount": 0,
+  "actualPackage": {
+    "files": {
+      "main.apk": {
+        "bytes": 32431920,
+        "sha256": "fdd802cbb62ca990327e993a51326a7f7cf2b7a6e16aefb8f7e069a080dba718",
+        "package": "io.ondeviceai.acceptance.qwenload"
+      },
+      "test.apk": {
+        "bytes": 19000,
+        "sha256": "fe7178545276776ad1de821700acba516cd2dc1a2bc24efc4d1ed2a8e8cf06e3",
+        "package": "io.ondeviceai.acceptance.qwenload.test"
+      }
+    },
+    "deviceOperations": 0,
+    "actualClassesVerified": [
+      "QwenLoadActivity",
+      "ModelSpec",
+      "QwenModelFiles",
+      "LoadState",
+      "LoadCoordinator",
+      "LoadHandle",
+      "QwenLoadInstrumentation"
+    ],
+    "runtimeLibraries": {
+      "lib/arm64-v8a/libonnxruntime.so": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+      "lib/arm64-v8a/libsherpa-onnx-c-api.so": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+      "lib/arm64-v8a/libsherpa-onnx-cxx-api.so": "de94e0952a124eb22e86d754e11aa0489a065affc837911a8ed5e7fd843baad6",
+      "lib/arm64-v8a/libsherpa-onnx-jni.so": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575"
+    },
+    "permissions": {
+      "main.apk": [],
+      "test.apk": []
+    },
+    "commonSigningCertificateSHA256": "78b42bc2133b97526ec42f6fd4ed42874238c7eb9c504317879f3a18cc57000d",
+    "sourceFingerprint": "605181e50ea9357c292be93e2bf634742c40566a13984a0ff0b83fdb8b9c0ecd"
+  },
+  "parentResourceGuardChecks": 11,
+  "resourceTargetBytes": 1610612736,
+  "sourceFiles": {
+    "AndroidManifest.xml": "56d2e159f07a0d9ebbfd2d333699c14675bf2f9f630c6f1671ee78053e085a24",
+    "gradlew": "aed171fb114f82e6eaea4970a245a200e0582a7dcc8ec0891ca41b6e4a62b754",
+    "build.gradle.kts": "f6bf5347986d019ca8a533b0863a9a777150d04a1f170eb7af3e77e4e0b71663",
+    "settings.gradle.kts": "02588897e140f9140e129a2ac4e611f4d8cc1678df0b6dd151d55b9d7f9f8cd8",
+    "main-src/QwenLoadActivity.kt": "a71dff3a50634a6fc3697f9560c51ccc620592f4644a0ecd11cffbc383662d50",
+    "main-src/QwenLoadCore.kt": "0bac095d4cd8151257900827bfc3e013a7b2d0b2bebd92b674b06e39c98f999c",
+    "test-src/QwenLoadInstrumentation.kt": "e13790df30858c46971e60db6249c49f87cc4267b8e985d532dbb38885d7f5b3",
+    "gradle/wrapper/gradle-wrapper.jar": "55243ef57851f12b070ad14f7f5bb8302daceeebc5bce5ece5fa6edb23e1145c",
+    "gradle/wrapper/gradle-wrapper.properties": "032a71c92fc7f3c1cadf8880f0554b71aa6beb411f97ac253aa93932cb3784d5"
+  },
+  "phoneLastGate": {
+    "awake": false,
+    "unlocked": false,
+    "activeInstrumentation": false,
+    "newAliasAbsent": true
+  },
+  "realPhoneInstalls": 0,
+  "realNativeConstructorAttempts": 0,
+  "realDecodeCalls": 0,
+  "microphoneStarts": 0,
+  "ordinaryProductionHashesUnchanged": true,
+  "w3Closed": false,
+  "sourceBranchPush": false
+}

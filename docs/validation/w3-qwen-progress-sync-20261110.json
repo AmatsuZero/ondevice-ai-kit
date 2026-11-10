@@ -1,0 +1,36 @@
+{
+  "recordedAt": "2026-11-10T13:25:43.033144+00:00",
+  "marker": "<!-- w3-qwen-provenance-review-20261110 -->",
+  "issues": [
+    {
+      "provider": "github",
+      "id": 6768379450,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6768379450",
+      "readbackIdenticalExceptKnownTerminalNewline": true,
+      "sha256": "d8bb45e6b63532035a76b535515f57f53a5a2260ad6138f1d09674c489d9b713"
+    },
+    {
+      "provider": "gitlab",
+      "id": 42524,
+      "url": "https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit/-/issues/15#note_42524",
+      "readbackIdenticalExceptKnownTerminalNewline": true,
+      "sha256": "b244f77e98911f94db339d535bdf59b728bb9184434de37ad0a318223482d26c"
+    }
+  ],
+  "githubWiki": {
+    "remoteCommit": "a79b0df3a2510b6064983b8212a9d7533e985311",
+    "contentSHA256": "21c4aad9b76298a439ade4cd44b811e198696c4d0647bf17698ef62efd81c16d",
+    "readbackIdentical": true,
+    "sourceBranchPush": false
+  },
+  "gitlabWiki": {
+    "slug": "W3\u8bed\u97f3\u9a8c\u6536\u4e0e\u540e\u7eed\u6539\u8fdb",
+    "contentSHA256": "21c4aad9b76298a439ade4cd44b811e198696c4d0647bf17698ef62efd81c16d",
+    "readbackIdentical": true
+  },
+  "sourceBranchPush": false,
+  "issuesRemainOpen": true,
+  "scope": "Mac supplied-context review accepted;6supplier files match;Android core accepted17groups63assertions, wrapper not yet accepted at publication;W3open",
+  "firstReadFailure": "GitHub gh api TLS handshake timeout;zero mutation;retained original error, subsequent distinct read succeeded",
+  "publishedBodySHA256": "d8bb45e6b63532035a76b535515f57f53a5a2260ad6138f1d09674c489d9b713"
+}

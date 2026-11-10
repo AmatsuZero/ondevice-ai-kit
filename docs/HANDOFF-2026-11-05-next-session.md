@@ -1,3 +1,23 @@
+## 2026-11-10：W3 Android load-only已完成本地准备，等待TECNO解锁
+
+Mac独立确认与新增supplied-context复核通过；生产不变，W3仍open。当前入口：
+`docs/validation/w3-qwen-android-probe-ready-20261110.md`和`probes/android-qwen-load/README.md`。
+外部候选core17组/63断言、wrapper12组/44断言、父guard11检查通过；两个APK离线构建27.557s，
+lint0error/7warning，实际DEX七类、四arm64库/AAR摘要、零请求权限及同debug证书已核。
+sourceFingerprint=605181e50ea9357c292be93e2bf634742c40566a13984a0ff0b83fdb8b9c0ecd。
+
+TECNO最近只读awake=false/unlocked=false，无活动instrumentation，新alias未安装，零加载/解码。
+已向用户发解锁请求（只一次load-only，无stream/decode/麦克风/AiAi）；不要重复请求下载授权或重跑旧批次。
+解锁后先刷新gate及来源/普通App清单，按父脚本prepare→run→collect→restore各一次，RSS1.5GiB目标不变。
+采样失败/超预算停止，收同run证据，非终态不补造释放；不要自动重试。完整两阶段手机质量/成本仍未测。
+
+当前无活动helper。原hy4free多文件任务988.938s真实empty_model_response/零文件拒收；拆分core首稿编译失败、
+首修正2clock错误completed、wrapper父提示tokenizer根路径错误均保留。外部定点修复后按原字节集成，主代理未代写实现。
+Mac复核原文和父裁定见`w3-qwen-host-review-accepted-20261110.*`；原native429无结果未重试。
+六供应文件已与ModelScope size/SHA一致，其声明Apache-2.0/quantized；最终许可归属交付物仍缺。
+两端#15和Wiki已更新并回读，receipt=`docs/validation/w3-qwen-progress-sync-20261110.json`；未推源码分支。
+本地新增cff030c/cb73f14/e60d49b/893196e/522f2ed；其余dirty/untracked保留。
+
 ## 2026-11-10：W3 Qwen两阶段独立质量确认通过，进入Android候选门
 
 用户要求继续改进，主代理已完成模型重选及实际Mac验证，不再等待用户接受R4/R5现状。

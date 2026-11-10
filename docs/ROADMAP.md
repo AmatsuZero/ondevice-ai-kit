@@ -1,6 +1,6 @@
 # 分阶段交付与恢复入口
 
-W3最新（2026-11-10）：Qwen3-ASR0.6B int8两阶段候选通过Mac独立确认：52/52语音成功，中文CER7.12%、近场英文WER8.53%、AMI远场WER27.43%；13/13静音/会议间隙挑战为空，117次decode。进入Android候选设计，手机质量/完整成本、模型通知链及独立复审仍缺；Mac约2.83GB采样RSS不替代手机预算。生产源码/App/模型未替换，W3仍open。详见[本轮结果](validation/w3-qwen-independent-observed-20261110.md)。下方较早W3“评审重选/待答”均为历史。
+W3最新（2026-11-10）：Qwen两阶段Mac独立确认及限定复核通过，中文CER7.12%、近场英文WER8.53%、AMI远场WER27.43%；13挑战为空，117decode。Android隔离load-only已过core17组/63断言、wrapper12组/44断言、guard11检查及build/lint/实包核验（7warning/0error）。TECNO安全锁屏，新alias未安装，零模型构造；待解锁后只做一次加载/释放，手机1.5GiB目标未放宽。六供应文件size/SHA一致及Apache-2.0声明已补证，最终再分发通知包仍缺。生产源码/App/模型未替换，W3仍open。[当前准备](validation/w3-qwen-android-probe-ready-20261110.md)。下方较早W3“评审重选/待答”均为历史。
 
 ## 当前验收状态（2026-11-09 11:42 +08）
 

@@ -12,7 +12,9 @@
 原native429无结果仍保留；Android和发布不在该复核范围。六份实际运行文件已与供应仓库size/SHA全匹配，
 供应方声明Apache-2.0，最终许可/归属交付物仍未验收，见[供应链核对](../validation/w3-qwen-supply-chain-observed-20261110.md)。
 Android先冻结[load-only合同](../validation/w3-qwen-android-load-protocol-20261110.md)，保持1.5GiB门；
-首多文件helper因upstream empty_model_response零交付而拒收，已拆为core和wrapper任务，未安装或加载手机模型。
+首多文件helper因upstream empty_model_response零交付而拒收；拆分交付后core17组/63断言、wrapper12组/44断言、
+父guard11检查及Android构建/lint/实包已通过（lint7warning/0error）。当前TECNO仍安全锁屏，
+新alias未安装，零构造/解码；待解锁后只执行一次load-only，[完整准备收据](../validation/w3-qwen-android-probe-ready-20261110.md)。
 
 最新决定及两端在线记录见[结果报告](../reports/w3-speech-status-20261110.md)和[发布回读收据](../validation/w3-issue-wiki-sync-20261110.json)。主代理负责提出可验证的质量改进及资源预算建议，先固定假设、输入、评分和停止条件。新增 AMI 原三片/+20 dB 六臂 VAD 真机对照：原幅度 false/false/true，放大后 true/false/true；按事前规则拒绝固定增益路线，不继续扫参或进入该路线 ASR。零 Whisper/麦克风/下载，已双读及恢复，[结果](../validation/w3-ami-gain-observed-20261110.md)。
 

@@ -40,7 +40,7 @@
 ### Task 3: Android加载资源前置
 
 - [x] 在任何手机推理前冻结`docs/validation/w3-qwen-android-load-protocol-20261110.md`；保持1.5GiB目标。
-- [ ] 免费hy4free交独立load-only候选；主代理做真实文件/故障验收、build/lint/实包核验。
+- [x] 首hy4free多文件任务empty_model_response零交付保留；拆分外部交付的core17组/63断言、wrapper12组/44断言、guard11检查及build/lint/实包核验通过，7warning/0error。见`docs/validation/w3-qwen-android-probe-ready-20261110.md`。
 - [ ] 真机仅一次构造/释放，零stream/decode/麦克风；终态双读、资源裁定与普通App恢复。
 
 执行裁定：按用户明确分工，外部助手写实现候选，主代理写计划/验收并集成；执行技能中的主代理直接实现步骤不适用于本仓库。native已429无结果，不重试或记为独立复审通过。加载门未通过前不派发文件识别批次。

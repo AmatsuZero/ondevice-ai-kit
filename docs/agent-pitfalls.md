@@ -6,6 +6,10 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **Kotlin copy参数的副作用会被旧receiver覆盖**：Qwen加载core首修正中`s = s.copy(loadNanos = elapsed(t0))`先求旧`s`，elapsed捕获计时异常并更新`s.errorClass`，随后旧copy清掉错误；真实17组host检查15过、2组错误completed。外部定点订正先取duration局部值，再从当前s.copy，17组/63断言通过；保留首稿NoSuchFileException(File/String)编译错误。native/Android设备尚未运行，不能写成真机析构已验。证据`.omx/artifacts/w3-model-reselection-20261110/android-load-host/candidate-core-{fixed-diagnostic,final}-result.json`。
+
+- **CBC Empty stream 与退出0分开判定**：Android Qwen多文件候选在988.938s自然结束，CLI exit0，真实result为`error_during_execution`/`empty_model_response`，原文`Empty stream: upstream ended the turn with finish_reason=error after emitting reasoning but no text or tool call`，候选目录零文件。已验证的写sandbox与无permission denial不证明交付；本次不是429、没有监督超时。保留原prompt/stream/result，不重发同任务。可推进不同的小范围纯core任务，但不能假造源码或把助手内部推理作为交付。证据`.omx/artifacts/w3-model-reselection-20261110/helpers/odai-hy4free-w3-qwen-android-load-20261110/parent-assessment.json`。
+
 - **fsync前先flush；终态在清理后写**：隔离VAD原稿对buffered Python file先fsync且提前completed，不能证明结果已落盘或清理完成。修正后先flush再fsync，持久化running/planned rows，异常保留原错误，清理后写终态；5/5fake-runtime及13组实际报告双读通过。不要将Python引用清理/GC写成C++析构ack。
 - **路径与异常检查不能被清理掩盖**：Qwen首稿有list<=set、realpath后再检查symlink、del recognizer后读取、setter错误被未初始化samples掩盖。保留原RED，逐项外部候选修正并通过9项fake检查；在realpath前逐组件检查且拒绝有symlink祖先的model root，finally变量先初始化，释放后不再读已删除局部。
 - **计数放在真实native调用边界**：两阶段Qwen原稿在create/setter/accept前就递增decode数，14组故障检查有6组误报。免费hy3将三处递增与报告持久化移到accept成功后、decode前；最终14/14通过，真实13输入22次decode一致。计数是dispatch尝试，decode抛错仍计数；不能把计划数当实际调用。
