@@ -6,6 +6,8 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **AVD控制台身份响应含CRLF，逐行精确校验**：模拟器父脚本首preflight假定`name\nOK`，实际ADB回`W3_Qwen_Load_20261110\r\nOK\r\n`，零安装/构造时断言失败。保留raw与首稿，仅对控制台响应使用`splitlines()==[精确AVD名,"OK"]`；三种错名/失败状态/多余行仍拒绝。随后唯一模拟器load-only completed、28父检查/双读/恢复通过；不能借换行订正放宽serial/qemu/API/ABI，也不改实体run。结束时最后一次`/proc`读取在instrumentation退出后失去PID，已保留terminalObservationGap，不能称连续采样或true peak。证据`artifacts/verification/w3-qwen-load-emulator-20261110/`及`docs/validation/w3-qwen-emulator-load-accepted-20261110.md`。
+
 - **Kotlin copy参数的副作用会被旧receiver覆盖**：Qwen加载core首修正中`s = s.copy(loadNanos = elapsed(t0))`先求旧`s`，elapsed捕获计时异常并更新`s.errorClass`，随后旧copy清掉错误；真实17组host检查15过、2组错误completed。外部定点订正先取duration局部值，再从当前s.copy，17组/63断言通过；保留首稿NoSuchFileException(File/String)编译错误。native/Android设备尚未运行，不能写成真机析构已验。证据`.omx/artifacts/w3-model-reselection-20261110/android-load-host/candidate-core-{fixed-diagnostic,final}-result.json`。
 
 - **CBC Empty stream 与退出0分开判定**：Android Qwen多文件候选在988.938s自然结束，CLI exit0，真实result为`error_during_execution`/`empty_model_response`，原文`Empty stream: upstream ended the turn with finish_reason=error after emitting reasoning but no text or tool call`，候选目录零文件。已验证的写sandbox与无permission denial不证明交付；本次不是429、没有监督超时。保留原prompt/stream/result，不重发同任务。可推进不同的小范围纯core任务，但不能假造源码或把助手内部推理作为交付。证据`.omx/artifacts/w3-model-reselection-20261110/helpers/odai-hy4free-w3-qwen-android-load-20261110/parent-assessment.json`。

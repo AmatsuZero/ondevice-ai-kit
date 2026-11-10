@@ -17,6 +17,9 @@ Parent acceptance scripts:
   actual APK classes, permissions, ABI, fixed native-library hashes and common signing certificate.
 - `device_acceptance.py preflight|prepare|run|collect|restore`: parent-owned single physical-device run.
   It reads the device identity from ignored local evidence, never from a committed serial.
+- `emulator_acceptance.py preflight|prepare|run|collect|restore`: separate user-requested emulator supplement.
+  It requires exact API36 ARM64/qemu/AVD identity and an independent run/evidence root. Its executed parent
+  differs only in the portable root locator; this is verified in the emulator acceptance receipt.
 
 Local project/evidence: `artifacts/verification/w3-qwen-load-20261110/` and
 `.omx/artifacts/w3-model-reselection-20261110/`. These paths are ignored and are not a portable build setup.
@@ -29,3 +32,7 @@ RSS is sampled with a 1.5 GiB target; it is not a true peak. `prepare` installs 
 stages the public fixed model, `run` attempts one construction/release with parent resource protection,
 `collect` reads the same result twice, and `restore` removes only manifest-bound artifacts. Native crash
 or protection stop may leave a nonterminal report; retain it as failure evidence rather than inventing release.
+
+The unique emulator load-only run has completed and its temporary AVD has been stopped/cleaned. Do not
+resubmit it. See [the accepted supplement](../../docs/validation/w3-qwen-emulator-load-accepted-20261110.md).
+It does not satisfy the pending physical TECNO resource/quality gates or exercise any ASR decoding.
