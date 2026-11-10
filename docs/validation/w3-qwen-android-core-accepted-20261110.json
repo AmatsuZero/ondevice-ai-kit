@@ -1,0 +1,17 @@
+{
+  "sourceSHA256": "0bac095d4cd8151257900827bfc3e013a7b2d0b2bebd92b674b06e39c98f999c",
+  "compilePassed": true,
+  "hostBehaviorGroupsPassed": 17,
+  "assertionsPassed": 63,
+  "frozenSixSpecsMatch": true,
+  "exactCandidateBytesIntegrated": true,
+  "realNativeCalls": 0,
+  "deviceOperations": 0,
+  "androidBuildPassed": false,
+  "scope": "pure core only; wrapper/build/device remain pending",
+  "priorFailures": [
+    "original candidate Kotlin NoSuchFileException compile error",
+    "first correction15groups pass2clockcases fail; copy receiver timing erased recorded error"
+  ],
+  "negativeControlMissingBehaviorRejected": 14
+}

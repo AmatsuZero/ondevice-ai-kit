@@ -110,6 +110,28 @@ fun main() {
   expect(injected && releases==1 && r.releaseSucceeded);expect(r.status=="error")
   expect(r.persistErrorClass?.contains("IOException")==true)
  }
+ case("clock failure after acquired handle still releases") {
+  var created=false;var released=false;var releases=0
+  val r=LoadCoordinator({created=true;LoadHandle{releases++;released=true}},{true},{},
+      {if(created && !released)throw IllegalStateException("clock");System.nanoTime()}).execute()
+  expect(releases==1 && r.constructorReturned && r.releaseSucceeded, r.toString())
+  expect(r.constructorAttempts==1 && r.releaseAttempts==1 && r.status=="error", r.toString())
+  expect(r.errorClass?.contains("IllegalStateException")==true, r.toString())
+ }
+ case("clock failure after release cannot hide successful return") {
+  var released=false;var releases=0
+  val r=LoadCoordinator({LoadHandle{releases++;released=true}},{true},{},
+      {if(released)throw IllegalStateException("clock");System.nanoTime()}).execute()
+  expect(releases==1 && r.releaseSucceeded && r.releaseAttempts==1, r.toString())
+  expect(r.status=="error" && r.errorClass?.contains("IllegalStateException")==true, r.toString())
+ }
+ case("constructor error survives failing duration observation") {
+  var thrown=false
+  val r=LoadCoordinator({thrown=true;throw UnsupportedOperationException("primary constructor")},{true},{},
+      {if(thrown)throw IllegalStateException("clock");System.nanoTime()}).execute()
+  expect(r.constructorAttempts==1 && !r.constructorReturned && r.releaseAttempts==0)
+  expect(r.errorClass?.contains("UnsupportedOperationException")==true && r.errorMessage=="primary constructor")
+ }
  case("model checks use real disk bytes and refuse corruption") {
   val dir=temp()
   try {
