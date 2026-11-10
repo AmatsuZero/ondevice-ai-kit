@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-11-10T12:06:21.105170+08:00",
+  "scope": "Documentation checkpoint of retained runs; no new execution or expanded acceptance",
+  "rawArtifactsStorage": "Local foundation artifacts; raw reports are not distributed in this Git commit",
+  "tecnoScope": {
+    "deviceModel": "TECNO KM9",
+    "androidApi": 35,
+    "backend": "system on-device ASR",
+    "service": "com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSpeechRecognitionService",
+    "rows": [
+      "R1",
+      "R2",
+      "R3.android-remainder"
+    ],
+    "disposition": "accepted-known-limitation",
+    "scopeDecisionComplete": true,
+    "functionalPass": false,
+    "notGeneralAndroidExclusion": true,
+    "notAllTecnoSpeechExcluded": true
+  },
+  "actualResultsPreserved": {
+    "R1": "FAILED/BACKEND_UNAVAILABLE/MISSING_ASSETS",
+    "R2": "not-executed-resource-prerequisite",
+    "R3.android-remainder": "not-executed-resource-prerequisite",
+    "R3.ios": "retain-prior-scoped-evidence",
+    "resourceSdkError": 15,
+    "resourceReadyVerified": false,
+    "downloadSdkCallsAcrossAllAttempts": 1
+  },
+  "tecnoEvidencePins": {
+    "artifacts/verification/w3-resource-root-fix-20261110/device-report.json": {
+      "bytes": 635,
+      "sha256": "580d628a6daffd33c3319d1d15195fc51a92f7938a09c39a7e1c9b34cf161f7c"
+    },
+    "artifacts/verification/w3-resource-root-fix-20261110/parent-acceptance.json": {
+      "bytes": 1930,
+      "sha256": "6315d0a6ef7e3a8278316f5d236deb08b7ecdcf6a15a2defa14bcf882d746a7e"
+    },
+    "artifacts/verification/w3-resource-root-fix-20261110/restoration.json": {
+      "bytes": 477,
+      "sha256": "5b3d055cb74e1b9a5d96a996467031ec13af807da6c67708ac260333d7815ea8"
+    },
+    "artifacts/verification/w3-resource-provision-20261110/zero-sdk-attempt-assessment.json": {
+      "bytes": 1068,
+      "sha256": "2aa05b6dd481ce0789ac15c82f563d4d5549941e7f6157f07092c2b74ea80ff3"
+    },
+    "artifacts/verification/w3-ami-unattempted-20261110/comparison-summary.json": {
+      "bytes": 3564,
+      "sha256": "4dd51b0903d4b5088fef4bb09ae62cb120d32c9a998d567366f22a5ddd141d78"
+    }
+  },
+  "publicQualityRawReportPins": {
+    "artifacts/verification/w3-apple-mandarin-file-20261109-0845/w3-file-report.json": "fe656824d5fa5f75582fb25da3c94c4a80568a0bbc0a9a206698847f7ba167d4",
+    "artifacts/verification/w3-mandarin-profile-staging-20261109-0833/device-report.json": "29b5c67e607d7b18114f1094954dd78341e131346d88ca2846e85adb2ee5f1b1",
+    "artifacts/verification/w3-ami-pilot-20261110/android/device-report.json": "17007c90252160bedcf25db6a545097a97a75aff22bc0bf5e324464d30888f4d",
+    "artifacts/verification/w3-ami-pilot-20261110/apple/w3-file-report.json": "9aa7afe2d984153535bc25123213a3997639feb6600309a84a44542d92096ceb",
+    "artifacts/verification/w3-ami-unattempted-20261110/android/w3-ami-C294-20261110-01/device-report.json": "2c73155751333d0d75bc116370dad460ad9eed204a7cdf3d02897469541398f1",
+    "artifacts/verification/w3-ami-unattempted-20261110/android/w3-ami-B146-20261110-01/device-report.json": "73915edc5f1271f0c85356b4b94f4a2a25f4336975ce41270bd3d9e3e49c7877",
+    "artifacts/verification/w3-ami-unattempted-20261110/apple/w3-file-report.json": "8d9bf376594bb98ca22238587eb95437b26fb7523d2cf246199de55fd0eb0db2",
+    "artifacts/verification/w3-prefix-control-20261110-local/run02/device-report.json": "6b23710526d8c8d8dbde78075cff6d70f419fa7dd898b0f361ae4e7a2bba6d74"
+  },
+  "appleSustainedRawReport": {
+    "path": "artifacts/verification/w3-apple-asr-sustained-20261110/report-terminal.json",
+    "sha256": "1d6f4185cee55521f0f87d4a4d9077a4a3a245af552774ccfebf63dfd02b5862"
+  },
+  "appleSustained": {
+    "cycles": 20,
+    "measuredRequests": 40,
+    "measuredRSSSampleCount": 898,
+    "sampledRSSMaxBytes": 113082368,
+    "restored": true,
+    "truePeak": false,
+    "energy": false,
+    "gpu": false,
+    "budgetVerdict": "unverified"
+  },
+  "qualityVerdict": "unverified",
+  "qualityThresholds": null,
+  "W3": "open",
+  "pendingDispositions": [
+    "R4-quality",
+    "R5-missing-fields-and-production-budget"
+  ],
+  "documentationHashes": {
+    "docs/roadmap/W3-speech.md": "ae805f1a0145a2423e440e8ab00e07de8c1b9000147be05ee2feb4337eb4bf39",
+    "docs/validation/w3-acceptance-reconciliation-20261109.md": "db11b8fa5b259a719340b9ca04a2af4a8a5cbb19307961d9154983b33cb26a85",
+    "docs/validation/w3-apple-mandarin-observed-20261109.md": "70fdd0b3f312cd116339334bce2a516994d2e558fd12407279465e92a6a6967f",
+    "docs/validation/w3-remaining-acceptance-cases-20261108.md": "995245ec5d923953ef0aef159e36094f60921444d140b3cf111254a7851ebc47",
+    "docs/validation/w3-ami-pilot-observed-20261110.md": "427372876c0ab8878e8ed2c2fa043f8dc48c10143defdab0760d33860283c7fd",
+    "docs/validation/w3-ami-unattempted-observed-20261110.md": "cb7012170958e0271c77091590a87365d2f33691456a0e74dbc7dc0c282419c6",
+    "docs/validation/w3-mandarin-error-alignment-20261109.md": "64bad29b92dbc650b2876aa03b671638ec7eec5b0e33ecc5f518daf36a0ac2be",
+    "docs/validation/w3-mic-noise-next-20261110.md": "b1c5557f314f1b25f0a4ee4bb59f300d69c8760dfc787e6b052afa9523036adb",
+    "docs/validation/w3-prefix-candidate-contract-review-20261110.md": "20665972a6209d368dca8b320b8f878da3b7b593b5184945636d87d3fbf549e8",
+    "docs/validation/w3-system-resource-provision-observed-20261110.md": "187eb964952992a8fbd13e9dfb4c8abb377734449a3604797c9b4f2a9c9369b5",
+    "docs/validation/w3-system-resource-provision-preflight-20261110.md": "bb1d426bab1a16096d87b79b7afa00d8ab0b2a39bfc2019f72ca82bdafbfe192",
+    "docs/validation/w3-tecno-system-asr-scope-disposition-20261110.md": "aa33d668d74e964fe63c755bc29a57cece92ba5b6eb81f0f2a60f38765e9af49",
+    "docs/validation/w3-whisper-base-candidate-20261109.md": "e98de8f26b6ff822860cebfeb25e9d96d54b54201b7b533241fd07d324f7e8b4",
+    "docs/validation/w8-resource-dispositions-20261109.md": "1a87840283c6e2b287cb72f50ea497f1b9a9a92a5c8ca58002feb36709ad9f1d",
+    "docs/validation/w8-sherpa-sustained-20261109.md": "308e94144f095fbca4857f266a1b5928f39cb33ee9fe9173472a2db4034cfc7b"
+  },
+  "newRecognitionRequests": 0,
+  "newMicrophoneStarts": 0,
+  "newDownloads": 0,
+  "independentFinalReview": "not completed; no retry of the failed native review lane",
+  "pushed": false
+}

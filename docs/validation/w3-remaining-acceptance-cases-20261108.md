@@ -1,10 +1,53 @@
 # W3 Acceptance Matrix — Remaining Cases (Corrected)
 
+Latest physical observation 2026-11-10 11:52 +08: Apple FILE ASR completed one frozen
+20-cycle/40-measured-recognition batch in626.212s including593.928s paced idle;428parent
+checks, double terminal-read equality and44original-App restoration passed. This advances
+R5's Apple measurement, not its budget: system Speech-service memory/true peak/GPU/energy
+remain unmeasured and no production threshold exists. No TTS/Sherpa rerun. See
+[physical ASR acceptance](w8-apple-asr-sustained-20261110.md).
+R4's reproducible public evidence and pending decision are in
+[the quality packet](w3-quality-disposition-ready-20261110.md); R4/R5 remain open.
+
+Latest scope disposition 2026-11-10: the user explicitly accepted the current TECNO KM9/API35
+system-ASR limitation within W3 acceptance. R1 remains attempted/failed; R2 and Android R3 remain
+not executed. Their current TECNO scope dispositions are complete as accepted known limitations,
+not functional passes or a general Android exclusion. No retry, unlock wait, download or capture task
+remains active for these rows. See [scope decision](w3-tecno-system-asr-scope-disposition-20261110.md).
+R4 quality and R5/W8 resource budgets remain open. The approved resource request returned actual
+error15, readiness unverified; the consumed one-shot authorization is unchanged. See
+[observed resource result](w3-system-resource-provision-observed-20261110.md).
+
+## Current execution boundary — 2026-11-10
+
+Fixed-prefix diagnosis is complete. One explicitly selected system microphone request failed
+MISSING_ASSETS; R1 remains attempted/failed and Android R2/R3 were not executed. The subsequent
+user scope decision accepts these current TECNO limitations; it does not supply recognition evidence.
+AMI's original fail-fast batches remain failed, but a new frozen single-clip contract covered only
+the three previously unattempted pairs. Six platform/clip pairs now have observations across distinct
+runs: Android1/3 recognized and2 no-speech; Apple2/3 recognized and1 platform1110. No replay,
+new capture, parameter sweep or quality pass. See [current W3](../roadmap/W3-speech.md) and
+[AMI supplement](w3-ami-unattempted-observed-20261110.md). R5 still references W8.
+
+## Historical execution boundary — 2026-11-09 20:25 +08
+
+W3 remains open. Do not sweep models. Only run a discriminating check when the
+source, license, reference text, and exact input hashes are fixed. The three
+existing Apple WAV payloads have now been verified byte-identical to the Android
+PCM inputs after decoding; the parent receipt is
+`artifacts/verification/w3-cross-platform-input-parity-20261109/parent-acceptance.json`.
+The existing CER values and backend/segmentation limits remain unchanged. The
+older “single-clip parity candidate is running” statement below is superseded:
+the candidate is terminal and accepted, base experiment is terminal and rejected,
+and the current queue reports no active helper or W3 task to poll/relaunch. See
+the latest queue（本机留存：`.omx/artifacts/current-helper-queue-20261109-2025.json`）
+and latest progress（本机留存：`docs/validation/progress-20261109-2025.md`）.
+
 Scope: on-device speech recognition acceptance. The original matrix was a planning
 artifact; the execution-status update below records subsequent bounded results.
 This doc is NOT a quality approval.
 
-## Current bounded acceptance update — 2026-11-09
+## Historical bounded acceptance update — 2026-11-09
 
 - Apple explicit locale has now been built and exercised on the iPhone with the
   same frozen three public FLEURS Mandarin clips: 3/3 completed, 32 parent checks,
@@ -32,7 +75,7 @@ This doc is NOT a quality approval.
   do not repeat already accepted file runs, fixtures, scorers or resource tools.
 - W3 remains open. W1/W2/W4/W5 are closed; W6 is expert-owned, W7 has outstanding
   multiperson/PAD data gates, and W8 resource budgets remain open. Historical
-  updates below do not override this current status.
+  updates do not override the newer current execution/scope boundary above.
 
 ## Historical bounded acceptance update — 2026-11-09 08:24 +08
 
@@ -104,16 +147,17 @@ context; this update and the linked receipts govern their current execution stat
 ## Remaining concrete cases (<=5 rows)
 | ID | Case | Input | Owner | Status | Primary assertion |
 |----|------|-------|-------|--------|-------------------|
-| R1 | On-device system en-US recognition | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | System backend MICROPHONE-ONLY: `SpeechRecognitionRequest(locale)` (no audioFile); `SpeechRecognizer.startListening`; TECNO en-US resource unavailable/unverified; error13/MISSING_ASSETS vs nonempty transcript + exact backend; own engine cancel/destroy bounded; NO no-mic path |
-| R2 | Mic: background speech handling | Real mic, user start cue | android-ondevice-asr | unrun (needs user) | Background speech handled per spec; no SHA of raw input (no file exists) |
-| R3 | Mic: interruption / cancel / reentry | Real mic, fresh start cue for new capture | android-ondevice-asr / ios-ondevice-asr | partial: prior iPhone scoped lifecycle retained; Android capture/interruption gaps open | Android `SpeechRecognitionRequest(locale)` + session cancel/reentry; iOS Swift `SpeechMicrophoneRecognitionRequest`; reacts to interrupt/cancel, re-enters cleanly |
-| R4 | zh-CN / noisy file quality | Frozen public FLEURS / controlled-noise files (no mic) | android-ondevice-asr (Sherpa) / ios-ondevice-asr (Apple file) | partial: both platforms completed Mandarin and synthetic-English noise; Mandarin quality attribution/representative real noise open | Preserve CER44/92 Android vs16/92 Apple with backend/slicing limits; no-VAD53/92 is not a fix; file-capable backends only |
-| R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | partial: emulator, four-request physical and20cycle/40call sustained Sherpa observations accepted; GPU/energy/budgets open | Preserve24physical samples and26222sustained RSS samples; no equivalent rerun; own-PID binding and honest paced-idle scope |
+| R1 | On-device system en-US recognition | Real mic, user start cue | android-ondevice-asr | current TECNO scope resolved: accepted known limitation; actual request FAILED/BACKEND_UNAVAILABLE/MISSING_ASSETS | No successful microphone recognition evidence; no new capture/download authorized; no retry required under accepted scope |
+| R2 | Mic: background speech handling | Real mic, user start cue | android-ondevice-asr | current TECNO scope resolved: accepted known limitation; actual case not executed due to resources | No background-speech functional pass; synthetic noise does not replace this case |
+| R3 | Mic: interruption / cancel / reentry | Real mic, fresh start cue for new capture | android-ondevice-asr / ios-ondevice-asr | current TECNO Android remainder resolved as accepted known limitation, not executed; prior iPhone scoped evidence retained | No active Android capture lifecycle pass invented; existing iPhone scope unchanged, no equivalent rerun |
+| R4 | zh-CN / noisy file quality | Frozen public FLEURS / controlled noise / AMI far-field English (no mic) | android-ondevice-asr (Sherpa) / ios-ondevice-asr (Apple file) | observations complete for fixed AMI pairs across distinct runs, with errors; quality open | Preserve Chinese CER44/92 vs16/92 and backend/slicing limits; prefix diagnosis complete; AMI Android1/3/Apple2/3 recognized, no-speech/1110 retained; no approved quality threshold |
+| R5 | W8 stable-path resource attach | Own App PID | android-ondevice-asr / ios-ondevice-asr | Apple20cycle/40call/626.212s andSherpa20cycle/40call/600.503s sustained observations accepted; missing-field/budget decisions open | Preserve all original windows,898Apple measured RSS samples and26222Sherpa RSS samples; no equivalent rerun; own-PID/OS-service boundary and paced-idle scope explicit |
 
 ## Preserved / blocked states (NOT runnable cases)
-- TECNO en-US resources: unavailable / unverified, no live download performed. Blocked
-  state preserved; no assertion that such resources exist. R1 is mic-only and waits
-  on an authorized mic session + verified resources.
+- Current TECNO en-US resource readiness is unverified after the approved one-shot SDK request
+  returned error15. User accepted this configuration's system-ASR limitation for R1/R2/Android R3.
+  Raw failed/not-executed states remain; no resource ready or mic pass is asserted. No unlock wait
+  or repeat request remains in the active scope; the one-shot download authorization is consumed.
 - Public Mandarin and controlled-noise fixtures have been frozen and run; do not
   reacquire them. Representative real-world noise and reliable Mandarin quality
   attribution remain open. Preserve source/reference/licence and scoring rules.
@@ -134,16 +178,20 @@ context; this update and the linked receipts govern their current execution stat
   supplied API). Offline requirement (file cases run without network) is separate from
   measured network isolation.
 
-## Minimal next action (primary)
+## Historical next action (superseded 2026-11-09 19:50 +08)
 The sustained current-source Sherpa measurement is completed; do not redispatch
 it or the accepted four-request attach. R1/R2/Android R3 wait on a fresh authorized
 mic session and verified resources. R4 continues quality attribution and
 representative real noise; existing frozen Mandarin inputs remain available.
-A distinct free-hy4free single-clip SDK/direct-native parity candidate is running;
-it must prove identical prepared waveform bytes before a direct decode. Candidate
-delivery is not build/runtime/quality acceptance. W8 continues distinct workload
-energy/GPU/budget work. This status correction itself performs no inference.
+The single-clip SDK/native parity task is terminal and accepted in
+`w3-native-parity-control-20261109.md`; the fixed Whisper base comparison is
+terminal and rejected for promotion. Do not poll or relaunch either. W8 follows
+the newer user gate in the current queue: wait for an authorized physical-device
+workflow and existing valid signing identity/profile before further Apple ASR
+code or physical runs. This historical status block performs no inference.
 
 ## 2026-11-09 13:04: native parity control accepted
 
 [One public unsliced2006 SDK/directnative experiment](w3-native-parity-control-20261109.md) passed44parent checks andrestoration. Actualpreparedfloat32LESHA/countmatchedindependenthost92928samples; exactsamehypothesiswithpriorSDKbaseline. Currentpath didnotaddtextdifferenceonthisclip; model-onlyrootcause/generalSDKcorrectnessnotproved. PrimaryrawCER44/92unchanged. Nextsinglecandidateanalysisfreehy3running; no production/scorer/modeldefaultchange.
+
+Historical note only: the phrase “Nextsinglecandidateanalysisfreehy3running” records the 13:04 snapshot. The corresponding fixed base candidate later completed and was rejected at 14:26 (see [base disposition](w3-whisper-base-candidate-20261109.md)); no such W3 task remains active or should be restarted.

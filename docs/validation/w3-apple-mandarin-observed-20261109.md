@@ -2,7 +2,7 @@
 
 W3 remains **open**. One file-only iPhone run recognized all three frozen public FLEURS clips. This accepts the bounded call/lifecycle observation, not Mandarin quality or production readiness.
 
-The input is `google/fleurs`, `cmn_hans_cn/test`, revision `70bb2e84b976b7e960aa89f1c648e09c59f894dd`, CC-BY-4.0. Manifest SHA256 is `87610e63a23f9f0510cd1c35c70ea108e1928da3889f02f4b88d6161a81be9b8`. Parent checks verify that WAV payload PCM is identical to the Android raw PCM. No new media, model, reference or scoring rule was introduced.
+The input is `google/fleurs`, `cmn_hans_cn/test`, revision `70bb2e84b976b7e960aa89f1c648e09c59f894dd`, CC-BY-4.0. Manifest SHA256 is `87610e63a23f9f0510cd1c35c70ea108e1928da3889f02f4b88d6161a81be9b8`. The offline parent receipt now records that all three WAV payloads are byte-identical to the Android raw PCM after decoding: `artifacts/verification/w3-cross-platform-input-parity-20261109/parent-acceptance.json` (SHA-256 `75908e783aec72450d2735bafaeb00176c909a78873432c97785d3f79a1ae1a0`). No new media, model, reference or scoring rule was introduced.
 
 | Clip | Apple CER errors / reference characters | Android CER errors / reference characters |
 | --- | --- | --- |

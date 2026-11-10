@@ -27,4 +27,6 @@ No equivalent batch is needed. Remaining W8 work is the capability-specific miss
 
 Post-restoration operator check: ADB became `unauthorized` after both aliases and the exact stage had already been removed and ordinary paths verified. Returning the ordinary App to the foreground was not executed; it remains an operator step, not a failed/repeated measurement. Exact errors are retained in `foreground-return-readonly-check.json`. No further installation, inference or global ADB restart was attempted.
 
+Subsequent recovery: after a fresh read-only ADB check returned `device`, all six ordinary package paths matched again and the ordinary `io.ondeviceai.demo/.MainActivity` was returned to the foreground. `foreground-restoration.json` records the successful HOT launch/current resumed activity. The earlier unauthorized error is preserved; the operator restoration step is now complete. No test was repeated.
+
 Cleanup completed11:43: three exact inactive local cache directories removed259,645,133 nominal file bytes;76 retained file hashes matched. Concurrent available space changed26,293,788,672→26,428,993,536B; no exclusive recovery claim. APKs, sources, output/signing metadata and raw reports remain.
