@@ -1,0 +1,1645 @@
+{
+  "sources": [
+    "GoogleFLEURS pinned70bb2e84 CC-BY-4.0",
+    "AMIConsortium manual1.6.2 CC-BY-4.0;publicArray1-01"
+  ],
+  "cases": [
+    {
+      "id": "fleurs-cmn_hans_cn-1805",
+      "datasetID": "1805",
+      "filename": "10112798408996336578.wav",
+      "reference": "Scotturb 403 路公共汽车定期发车前往辛特拉 (Sintra)，在罗卡角停靠。",
+      "samples": 121920,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1805.pcm",
+      "sha256": "ddee0d951c5ecfa143134ae3b1f126ea70e76b9e87870d012f6830ed09b6e29f"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1965",
+      "datasetID": "1965",
+      "filename": "10134195680525011353.wav",
+      "reference": "这里几乎都是沙滩，游泳很安全，大部分地方都有新西兰圣诞树的树荫。",
+      "samples": 109440,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1965.pcm",
+      "sha256": "012e2eb91001d8a4966dd3e1fb65e706ab6d823cd96dddcf0f6de4896815bbe4"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1903",
+      "datasetID": "1903",
+      "filename": "10142207404499844309.wav",
+      "reference": "当所有可用的资源在一个组织的职能部门之间得到有效利用时，创造力和独创性就会发生。",
+      "samples": 116160,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1903.pcm",
+      "sha256": "3aeedf27352039c125341d0b66c586a438f64e973a9cef7bcc4f9433a9c88835"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1953",
+      "datasetID": "1953",
+      "filename": "10144930991730701959.wav",
+      "reference": "他随后被转送到剑桥的阿登布鲁克医院。",
+      "samples": 80640,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1953.pcm",
+      "sha256": "77b7b11210844e85a4027757fd1cdcf725e76a71ced1e23a332dc2d7becc0afa"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1830",
+      "datasetID": "1830",
+      "filename": "10147383166642115307.wav",
+      "reference": "执政党西南非洲人民组织 (SWAPO) 也在议会选举中保持了多数席位。",
+      "samples": 101760,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1830.pcm",
+      "sha256": "32201ea0511a0285c0da43ca492357524fc3af05e0682fddedb6663b1f4c8082"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1910",
+      "datasetID": "1910",
+      "filename": "10154699825088384418.wav",
+      "reference": "巴黎人是出了名的以自我中心、粗鲁和傲慢。",
+      "samples": 81600,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1910.pcm",
+      "sha256": "a0f4a823683fd54f0d9d18517245f9bc202fa2e9eb9c30f496d1f2eb7518f39d"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1902",
+      "datasetID": "1902",
+      "filename": "1015891181557233386.wav",
+      "reference": "起初，他被送往位于大雅茅斯的詹姆斯·佩吉特医院进行救治。",
+      "samples": 111360,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1902.pcm",
+      "sha256": "2da6818a6ded59c8a48abb110442f47544cc76f5a4f7e2ff8a7d0c9d10010363"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1905",
+      "datasetID": "1905",
+      "filename": "10279011772105822622.wav",
+      "reference": "摩尔多瓦的首都是基希讷乌。当地语言是罗马尼亚语，但俄语也被广泛使用。",
+      "samples": 120960,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1905.pcm",
+      "sha256": "c3df5181a3e4db9ae99f2149704e8ccd1fd35e4076d0f668a8b2f3bdd08cce7e"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1772",
+      "datasetID": "1772",
+      "filename": "10325486695909573217.wav",
+      "reference": "因此，很可能这个符号只是作为一个标签添加的。",
+      "samples": 146880,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1772.pcm",
+      "sha256": "e98e44d3ff0aa23cd9e63d58136cbf1850fd070f75f46e4ed38347a353759344"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1792",
+      "datasetID": "1792",
+      "filename": "10343405611041314630.wav",
+      "reference": "这被称为化学物质的 pH 值。你可以使用红甘蓝汁制作指示剂。",
+      "samples": 140160,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1792.pcm",
+      "sha256": "1158f7d461c64a47e37818104ce46240b36d111ed067ca19360f9b51cc8a0c30"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1962",
+      "datasetID": "1962",
+      "filename": "10388181945260949729.wav",
+      "reference": "pH 值以被测化学品中的氢（pH 中的 H）离子数量表示。",
+      "samples": 135360,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1962.pcm",
+      "sha256": "c3d7a02f86783fe14fd7e34e4714e1686bf137c671f6fb0b1512b7ddaa1fda25"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1884",
+      "datasetID": "1884",
+      "filename": "10400579561005332584.wav",
+      "reference": "具体说来，据说可以通过正确解读微表情来判断一个人是否在撒谎。",
+      "samples": 110400,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1884.pcm",
+      "sha256": "c268c789b772bd302ffd4f217f227cf4cd4dcf85be9b0c93ef6f797dae8fa99a"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1958",
+      "datasetID": "1958",
+      "filename": "10480388653191520950.wav",
+      "reference": "这座城市与该国其他城市形成了鲜明对比，因为它更多的是阿拉伯风格，而不是非洲风格。",
+      "samples": 154560,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1958.pcm",
+      "sha256": "74369c2be16ac04f36e00da1d0db5fe39d3aed45276693046f365c638fc2c130"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1871",
+      "datasetID": "1871",
+      "filename": "10481669967989866997.wav",
+      "reference": "在中东温暖的气候中，房子并不是多重要。",
+      "samples": 111360,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1871.pcm",
+      "sha256": "03a066eba992c84246696180810c01b61d5b7d050bc41e5b8b3b8cc6c7e5fd62"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1698",
+      "datasetID": "1698",
+      "filename": "10544065594858743613.wav",
+      "reference": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小粒子组成。",
+      "samples": 155520,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1698.pcm",
+      "sha256": "c0cf0ea82e08a6e7f364626fdecf3c4f7d8dedbf3d3b24f96ff029fc1ca312a4"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-2002",
+      "datasetID": "2002",
+      "filename": "10571681330551714048.wav",
+      "reference": "它让玩家可以通过在空中移动设备来控制电子游戏中的运动和操作。",
+      "samples": 108480,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-2002.pcm",
+      "sha256": "bee96356b12cce5f98776905b7cff01e92fca56e052e0997e977ee19a9bf8999"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1661",
+      "datasetID": "1661",
+      "filename": "1061358881165519725.wav",
+      "reference": "他没有设定削减数额，只是表示将根据中国的经济产出来决定数额。",
+      "samples": 123840,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1661.pcm",
+      "sha256": "e9394e90b72ecde7d22f242b32dcf2c20fbf7bed68cafa6a89e341e933279744"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1697",
+      "datasetID": "1697",
+      "filename": "10674527227632117693.wav",
+      "reference": "他一直无法用药物来缓解疼痛，因为比赛禁止参赛者服用这些药物。",
+      "samples": 156480,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1697.pcm",
+      "sha256": "bc45683ef6eff1f4a58502edfa5bd7e90e4f5cb2b79bdcf7e1879cf9abc5f988"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1821",
+      "datasetID": "1821",
+      "filename": "10694001904489787463.wav",
+      "reference": "大脑病理和行为之间的相关性可以为科学家们的研究提供支持。",
+      "samples": 126720,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1821.pcm",
+      "sha256": "f4bd7a624646121f15f41d3e3f538c0f07d18bb3eff57ec4c8838e0a78490f7d"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1808",
+      "datasetID": "1808",
+      "filename": "10700749092778973179.wav",
+      "reference": "战争结束两年后，曾经的盟友如今成了敌人，冷战随即开始。",
+      "samples": 103680,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "languageConfig": "cmn_hans_cn",
+      "pcmPath": "inputs/fleurs-cmn_hans_cn-1808.pcm",
+      "sha256": "fdb29e3346a08dec51ca79f5ddca66a2fd73906aa53cd978c92c57017849d584"
+    },
+    {
+      "id": "fleurs-en_us-1675",
+      "datasetID": "1675",
+      "filename": "10052240106321793346.wav",
+      "reference": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+      "samples": 140160,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1675.pcm",
+      "sha256": "05586359c8c54a5fcd24761af9ae0e21b636c4cc2f696b56ef2f8ee6cc5a4ac5"
+    },
+    {
+      "id": "fleurs-en_us-1728",
+      "datasetID": "1728",
+      "filename": "10197164397713068203.wav",
+      "reference": "The cabbage juice changes color depending on how acidic or basic (alkaline) the chemical is.",
+      "samples": 92160,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1728.pcm",
+      "sha256": "1cf1221ee097d042ef3cd020809bea09394626a31ac989b945c22c46ecf6fc1f"
+    },
+    {
+      "id": "fleurs-en_us-1972",
+      "datasetID": "1972",
+      "filename": "10233995782544396174.wav",
+      "reference": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+      "samples": 69120,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1972.pcm",
+      "sha256": "0ff9f8ba6e913bcab4c77c2883c11e3a63d554eb341ce99d683f5d8c921accd4"
+    },
+    {
+      "id": "fleurs-en_us-1914",
+      "datasetID": "1914",
+      "filename": "10335587906469246566.wav",
+      "reference": "Twentieth century research has shown that there are two pools of genetic variation: hidden and expressed.",
+      "samples": 111360,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1914.pcm",
+      "sha256": "e13d4263bc8bd3442c788d0696df0344beb66eb7bcec68e0b67083d44d530581"
+    },
+    {
+      "id": "fleurs-en_us-1806",
+      "datasetID": "1806",
+      "filename": "1036771894648013441.wav",
+      "reference": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses, easier to reach than those built in modern times.",
+      "samples": 158400,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1806.pcm",
+      "sha256": "b991029a13b6e97fb547937e9ad82f941b57f0b60b01c5d1d89d19237a36bd0d"
+    },
+    {
+      "id": "fleurs-en_us-1776",
+      "datasetID": "1776",
+      "filename": "1038214857203833067.wav",
+      "reference": "Through the night between 150 and 200 copies were made, now known as \"Dunlap broadsides\".",
+      "samples": 76800,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1776.pcm",
+      "sha256": "2821c39358fc8049953945d8042d1833d86cb2245ca468cf5afc31ee1fe1a438"
+    },
+    {
+      "id": "fleurs-en_us-1802",
+      "datasetID": "1802",
+      "filename": "1042003289011443756.wav",
+      "reference": "The Internet combines elements of both mass and interpersonal communication.",
+      "samples": 91520,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1802.pcm",
+      "sha256": "24fe577bb7fdeabe18ca0c86da8cc1933f270331cb6567893c6be4c06f978760"
+    },
+    {
+      "id": "fleurs-en_us-1992",
+      "datasetID": "1992",
+      "filename": "1046653381869710616.wav",
+      "reference": "The term safari in popular use refers to overland travel to view the stunning African wildlife, particularly on savanna.",
+      "samples": 138240,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1992.pcm",
+      "sha256": "9c9a81e00df5617314c141a676eb01447539b46697e6607e7cf11fc389ce7f75"
+    },
+    {
+      "id": "fleurs-en_us-2005",
+      "datasetID": "2005",
+      "filename": "10471564175308895403.wav",
+      "reference": "But there are a lot of things about birds that still look like a dinosaur.",
+      "samples": 85760,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-2005.pcm",
+      "sha256": "13e249d77ff99fa7d255acf98216b31f11d1bdb59e286d56fec5cfb888ce5c75"
+    },
+    {
+      "id": "fleurs-en_us-1674",
+      "datasetID": "1674",
+      "filename": "10492135991603561867.wav",
+      "reference": "In some areas boiling water for a minute is enough, in others several minutes are needed.",
+      "samples": 90240,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1674.pcm",
+      "sha256": "1243ac24a74d6cdeee5162cb6967dbeb0ddbebe00ce03c809db7fb872de5e66b"
+    },
+    {
+      "id": "fleurs-en_us-1952",
+      "datasetID": "1952",
+      "filename": "10492761258488775721.wav",
+      "reference": "Anyone who's going to drive at high latitudes or over mountain passes should consider the possibility of snow, ice, or freezing temperatures.",
+      "samples": 137280,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1952.pcm",
+      "sha256": "b3ad159ace71890d6c1e1c0c54506fe32cb3c3c1f797e625b4d561a3651f2e19"
+    },
+    {
+      "id": "fleurs-en_us-1749",
+      "datasetID": "1749",
+      "filename": "1054805305879816018.wav",
+      "reference": "It was ruled by the \"Vichy\" French. These were French people who had made peace with the Germans in 1940 and worked with the invaders instead of fighting them.",
+      "samples": 153600,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1749.pcm",
+      "sha256": "96b712b1b2470b668739a530bcf3da185ea64828967a53c8c9f2859bbbeec027"
+    },
+    {
+      "id": "fleurs-en_us-1662",
+      "datasetID": "1662",
+      "filename": "10614481583312370701.wav",
+      "reference": "Alloys are basically a mixture of two or more metals. Don't forget that there are many elements on the periodic table.",
+      "samples": 134080,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1662.pcm",
+      "sha256": "b6e506b249cb0b44e643e8a32475a53e56513c8f34622c49448c3752a17b0e77"
+    },
+    {
+      "id": "fleurs-en_us-1858",
+      "datasetID": "1858",
+      "filename": "10751756685109361684.wav",
+      "reference": "Danielle Lantagne, a UN expert on the disease, stated the outbreak was likely caused by the peacekeepers.",
+      "samples": 100800,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1858.pcm",
+      "sha256": "e8138f2c1b81addf0479f2abf0edbe38be2e2e5a2eb0a29fd12efdb602e53ff4"
+    },
+    {
+      "id": "fleurs-en_us-1909",
+      "datasetID": "1909",
+      "filename": "10849792007407044602.wav",
+      "reference": "Virtual teams are held to the same standards of excellence as conventional teams, but there are subtle differences.",
+      "samples": 90240,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1909.pcm",
+      "sha256": "743a920543850ab40540466a1b7b896ce5281c7887390c5adb136d874c78f300"
+    },
+    {
+      "id": "fleurs-en_us-1897",
+      "datasetID": "1897",
+      "filename": "10861831846737909528.wav",
+      "reference": "In the north the region is bounded by the Sahel, and in the south and west by the Atlantic Ocean.",
+      "samples": 153280,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1897.pcm",
+      "sha256": "d15856e4a4d0a6e14da769ae7f5606c275e9f413800661c47bb48e7f853a6cc7"
+    },
+    {
+      "id": "fleurs-en_us-1953",
+      "datasetID": "1953",
+      "filename": "10899527843662463911.wav",
+      "reference": "He was subsequently relocated to Addenbrooke's Hospital in Cambridge.",
+      "samples": 109440,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1953.pcm",
+      "sha256": "c18f050d51601807dd1417cabbfddeb16bbe116c7cca16590ae543e0e0eac596"
+    },
+    {
+      "id": "fleurs-en_us-1740",
+      "datasetID": "1740",
+      "filename": "10903101168349732260.wav",
+      "reference": "The pyramid sound and light show is one of the most interesting things in the area for kids.",
+      "samples": 133440,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1740.pcm",
+      "sha256": "3c68cf7df9bbcea81639f6d3b0c78ece387538ce913907c2a98113e0a7ec52d0"
+    },
+    {
+      "id": "fleurs-en_us-1987",
+      "datasetID": "1987",
+      "filename": "10937407360976471523.wav",
+      "reference": "The crash occurred high up in mountainous terrain, and is believed to have been the result of hostile fire.",
+      "samples": 157120,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1987.pcm",
+      "sha256": "e6f9b4c2ba1cfb2fdbd33b63879e52b83f0e9e065897a471f3e744aa3541a3c7"
+    },
+    {
+      "id": "fleurs-en_us-1990",
+      "datasetID": "1990",
+      "filename": "10938576782105608041.wav",
+      "reference": "Blogs can also help improve student writing. While students often begin their blog experience with sloppy grammar and spelling, the presence of an audience generally changes that.",
+      "samples": 140160,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "languageConfig": "en_us",
+      "pcmPath": "inputs/fleurs-en_us-1990.pcm",
+      "sha256": "f0eedcd572d0907bbf9c0463d3921ff3dbd3989e05ed5faa2e63a91412da69e2"
+    },
+    {
+      "id": "ami-ES2003a.sync.171-C",
+      "meeting": "ES2003a",
+      "speaker": "C",
+      "start": "234.312",
+      "end": "242.088",
+      "reference": "So elephants are big, strong and gentle, and they have great memories, and they begin with the letter E_, just like Ebenezer.",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2003a.C.words120",
+      "lastWordID": "ES2003a.C.words146",
+      "lexicalWords": 22,
+      "samples": 124416,
+      "pcmPath": "inputs/ami-ES2003a.sync.171-C.pcm",
+      "sha256": "3657e2bec908c402df6523cb86abef3cb7c3865afd86b96b2cc2b4e9161bcef8"
+    },
+    {
+      "id": "ami-ES2003a.sync.93-B",
+      "meeting": "ES2003a",
+      "speaker": "B",
+      "start": "720.904",
+      "end": "729.11",
+      "reference": "Okay. Now we better actually just get on with the uh the meat of the project. So I'm gonna guess that we've all used remote controls.",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2003a.B.words642",
+      "lastWordID": "ES2003a.B.words670",
+      "lexicalWords": 26,
+      "samples": 131296,
+      "pcmPath": "inputs/ami-ES2003a.sync.93-B.pcm",
+      "sha256": "2c8fa6ea84f3d1544be8b3d6f95da02032c6c947f96ccfdb1a104beafb8e8ad1"
+    },
+    {
+      "id": "ami-ES2003a.sync.95-B",
+      "meeting": "ES2003a",
+      "speaker": "B",
+      "start": "730.39",
+      "end": "735.4",
+      "reference": "Any ideas of where you think a new remote control could go into this market?",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2003a.B.words671",
+      "lastWordID": "ES2003a.B.words686",
+      "lexicalWords": 15,
+      "samples": 80160,
+      "pcmPath": "inputs/ami-ES2003a.sync.95-B.pcm",
+      "sha256": "275c708e6e7865ca625449872c08b9807267801b4440c72bcade20b18b97b827"
+    },
+    {
+      "id": "ami-ES2003a.sync.209-C",
+      "meeting": "ES2003a",
+      "speaker": "C",
+      "start": "944.12",
+      "end": "952.696",
+      "reference": "Uh, you wanna be able to change angles in interactive television, so you need buttons to change the television angle, the camera angles and stuff like that.",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2003a.C.words423",
+      "lastWordID": "ES2003a.C.words453",
+      "lexicalWords": 27,
+      "samples": 137216,
+      "pcmPath": "inputs/ami-ES2003a.sync.209-C.pcm",
+      "sha256": "b262eb47f6f6e6890c76c9f3b95e113d3e0177af2c7f5b5f6da8f1f64b5c9f21"
+    },
+    {
+      "id": "ami-ES2003a.sync.267-D",
+      "meeting": "ES2003a",
+      "speaker": "D",
+      "start": "1002.088",
+      "end": "1006.248",
+      "reference": "Well when you're talking about gaming and stuff, do you think they should have some sort of",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2003a.D.words181",
+      "lastWordID": "ES2003a.D.words198",
+      "lexicalWords": 17,
+      "samples": 66560,
+      "pcmPath": "inputs/ami-ES2003a.sync.267-D.pcm",
+      "sha256": "085ec99a8aee157763182ec855ecb77fada8b4e55c53a33b9664955e6ef8be13"
+    },
+    {
+      "id": "ami-ES2003a.sync.29-A",
+      "meeting": "ES2003a",
+      "speaker": "A",
+      "start": "1067.784",
+      "end": "1070.952",
+      "reference": "slightly unconventional or attractive uh",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2003a.A.words545",
+      "lastWordID": "ES2003a.A.words549",
+      "lexicalWords": 5,
+      "samples": 50688,
+      "pcmPath": "inputs/ami-ES2003a.sync.29-A.pcm",
+      "sha256": "420fca6eb65876435937e44ab3e2e91c68437cc242fd1f1d19664aee78f8a9f9"
+    },
+    {
+      "id": "ami-ES2003a.sync.129-B",
+      "meeting": "ES2003a",
+      "speaker": "B",
+      "start": "1088.216",
+      "end": "1092.613",
+      "reference": "Okay. That's definitely something that we should be able to do quite easily.",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2003a.B.words1058",
+      "lastWordID": "ES2003a.B.words1072",
+      "lexicalWords": 13,
+      "samples": 70352,
+      "pcmPath": "inputs/ami-ES2003a.sync.129-B.pcm",
+      "sha256": "92372954467727dc91a9d9d54390854b596a731b88c4a5d338e18430260d1da5"
+    },
+    {
+      "id": "ami-ES2003a.sync.131-B",
+      "meeting": "ES2003a",
+      "speaker": "B",
+      "start": "1092.934",
+      "end": "1097.192",
+      "reference": "I would I would have hoped so anyway. Um, right.",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2003a.B.words1073",
+      "lastWordID": "ES2003a.B.words1085",
+      "lexicalWords": 10,
+      "samples": 68128,
+      "pcmPath": "inputs/ami-ES2003a.sync.131-B.pcm",
+      "sha256": "9f10fcc5c571a3a081aeb770cb3ace9fff8189fb44a893c1b6580e0fe76ecaa3"
+    },
+    {
+      "id": "ami-ES2003a.sync.133-B",
+      "meeting": "ES2003a",
+      "speaker": "B",
+      "start": "1100.029",
+      "end": "1109.496",
+      "reference": "I'd say we finish this one up, we get started, I'll get in, I'll write up what we've um kind of quickly done, and I'll get that out to everybody.",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2003a.B.words1086",
+      "lastWordID": "ES2003a.B.words1120",
+      "lexicalWords": 30,
+      "samples": 151472,
+      "pcmPath": "inputs/ami-ES2003a.sync.133-B.pcm",
+      "sha256": "0bee300259333260a5ee83134ebfd0a10e457c14470f8094fa7fc5c0ae4f5fe2"
+    },
+    {
+      "id": "ami-ES2004a.sync.121-B",
+      "meeting": "ES2004a",
+      "speaker": "B",
+      "start": "162.088",
+      "end": "168.104",
+      "reference": "what we're thinking, how it's gonna go and then the detailed design, how we're actually gonna put it into practice and make it work.",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2004a.B.words269",
+      "lastWordID": "ES2004a.B.words295",
+      "lexicalWords": 24,
+      "samples": 96256,
+      "pcmPath": "inputs/ami-ES2004a.sync.121-B.pcm",
+      "sha256": "ec3815294a798571695d9bc7647711971e7eaaafa964f38eb482d30ce0639b7d"
+    },
+    {
+      "id": "ami-ES2004a.sync.131-B",
+      "meeting": "ES2004a",
+      "speaker": "B",
+      "start": "246.712",
+      "end": "250.84",
+      "reference": "Okay. I'm not gonna ask you to guess, I'm going to tell you that's supposed to be a tiger.",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2004a.B.words352",
+      "lastWordID": "ES2004a.B.words373",
+      "lexicalWords": 19,
+      "samples": 66048,
+      "pcmPath": "inputs/ami-ES2004a.sync.131-B.pcm",
+      "sha256": "863640d5522fe1a48adc1900136604344d22b7c433c5c6a119f6d7d9f2bac0c4"
+    },
+    {
+      "id": "ami-ES2006a.sync.277-C",
+      "meeting": "ES2006a",
+      "speaker": "C",
+      "start": "76.664",
+      "end": "82.824",
+      "reference": "And then that's it. So we've got twenty five minutes to do that, that's until eleven twenty five.",
+      "locale": "en-US",
+      "cohort": "english-far",
+      "firstWordID": "ES2006a.C.words157",
+      "lastWordID": "ES2006a.C.words177",
+      "lexicalWords": 18,
+      "samples": 98560,
+      "pcmPath": "inputs/ami-ES2006a.sync.277-C.pcm",
+      "sha256": "fe3d531be0dbaeff783266f1abd46834b4f76ae35951e53e57b1d94987e8ae45"
+    },
+    {
+      "id": "ami-negative-ES2003a-0",
+      "meeting": "ES2003a",
+      "start": "163.16",
+      "end": "168.16",
+      "samples": 80000,
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "reference": "",
+      "labelBasis": "no timed word/nonword annotation on any of4speakers;0.5s margins; not human-audited nonspeech groundtruth",
+      "pcmPath": "inputs/ami-negative-ES2003a-0.pcm",
+      "sha256": "52d2b4c183809730b18e7f48a268b2d9c592736966a54c2f9ddd66faa20d583e"
+    },
+    {
+      "id": "ami-negative-ES2003a-1",
+      "meeting": "ES2003a",
+      "start": "195.253",
+      "end": "200.253",
+      "samples": 80000,
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "reference": "",
+      "labelBasis": "no timed word/nonword annotation on any of4speakers;0.5s margins; not human-audited nonspeech groundtruth",
+      "pcmPath": "inputs/ami-negative-ES2003a-1.pcm",
+      "sha256": "5413d23ae7475c3e3ddd03289bfbe8b991095e12c7f1b94265b963197131767b"
+    },
+    {
+      "id": "ami-negative-ES2003a-2",
+      "meeting": "ES2003a",
+      "start": "276.628",
+      "end": "281.628",
+      "samples": 80000,
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "reference": "",
+      "labelBasis": "no timed word/nonword annotation on any of4speakers;0.5s margins; not human-audited nonspeech groundtruth",
+      "pcmPath": "inputs/ami-negative-ES2003a-2.pcm",
+      "sha256": "08423e78d572548365c9ac0ca063744936ac9ffc5af3dfa7469e07c22f9d27d9"
+    },
+    {
+      "id": "ami-negative-ES2004a-0",
+      "meeting": "ES2004a",
+      "start": "2.26",
+      "end": "7.26",
+      "samples": 80000,
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "reference": "",
+      "labelBasis": "no timed word/nonword annotation on any of4speakers;0.5s margins; not human-audited nonspeech groundtruth",
+      "pcmPath": "inputs/ami-negative-ES2004a-0.pcm",
+      "sha256": "0ab694a5a8a760585e76faa014808019aa56a1ede71844094e20f597d573d83c"
+    },
+    {
+      "id": "ami-negative-ES2004a-1",
+      "meeting": "ES2004a",
+      "start": "35.22",
+      "end": "40.22",
+      "samples": 80000,
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "reference": "",
+      "labelBasis": "no timed word/nonword annotation on any of4speakers;0.5s margins; not human-audited nonspeech groundtruth",
+      "pcmPath": "inputs/ami-negative-ES2004a-1.pcm",
+      "sha256": "441a5409fba63e68618379dd5b976564b7c27a3b45cdbc7aabf1803ef70afb1f"
+    },
+    {
+      "id": "ami-negative-ES2004a-2",
+      "meeting": "ES2004a",
+      "start": "53.68",
+      "end": "58.68",
+      "samples": 80000,
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "reference": "",
+      "labelBasis": "no timed word/nonword annotation on any of4speakers;0.5s margins; not human-audited nonspeech groundtruth",
+      "pcmPath": "inputs/ami-negative-ES2004a-2.pcm",
+      "sha256": "60263b27f630d7f1e071c6082f58a7717bde4f3fa5c7a927f6d44d34f893d2a9"
+    },
+    {
+      "id": "ami-negative-ES2006a-0",
+      "meeting": "ES2006a",
+      "start": "119.34",
+      "end": "124.34",
+      "samples": 80000,
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "reference": "",
+      "labelBasis": "no timed word/nonword annotation on any of4speakers;0.5s margins; not human-audited nonspeech groundtruth",
+      "pcmPath": "inputs/ami-negative-ES2006a-0.pcm",
+      "sha256": "6979c986fab34a8e12da0db5db6c6dee39c1cf5401600375635910f647b1bb6c"
+    },
+    {
+      "id": "ami-negative-ES2006a-1",
+      "meeting": "ES2006a",
+      "start": "252.4",
+      "end": "257.4",
+      "samples": 80000,
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "reference": "",
+      "labelBasis": "no timed word/nonword annotation on any of4speakers;0.5s margins; not human-audited nonspeech groundtruth",
+      "pcmPath": "inputs/ami-negative-ES2006a-1.pcm",
+      "sha256": "4b47c204b26f19162f10c61a2b03546ff84ab55f3f09c170eb34724deff5b47e"
+    },
+    {
+      "id": "ami-negative-ES2006a-2",
+      "meeting": "ES2006a",
+      "start": "343.044",
+      "end": "348.044",
+      "samples": 80000,
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "reference": "",
+      "labelBasis": "no timed word/nonword annotation on any of4speakers;0.5s margins; not human-audited nonspeech groundtruth",
+      "pcmPath": "inputs/ami-negative-ES2006a-2.pcm",
+      "sha256": "12917449786723b550065296bdfdb690868bd960f533cfeb04e358da78d2aeac"
+    },
+    {
+      "id": "independent-silence-3s-zh-CN",
+      "cohort": "silence",
+      "locale": "zh-CN",
+      "reference": "",
+      "samples": 48000,
+      "pcmPath": "inputs/independent-silence-3s-zh-CN.pcm",
+      "sha256": "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0"
+    },
+    {
+      "id": "independent-silence-10s-zh-CN",
+      "cohort": "silence",
+      "locale": "zh-CN",
+      "reference": "",
+      "samples": 160000,
+      "pcmPath": "inputs/independent-silence-10s-zh-CN.pcm",
+      "sha256": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b"
+    },
+    {
+      "id": "independent-silence-3s-en-US",
+      "cohort": "silence",
+      "locale": "en-US",
+      "reference": "",
+      "samples": 48000,
+      "pcmPath": "inputs/independent-silence-3s-en-US.pcm",
+      "sha256": "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0"
+    },
+    {
+      "id": "independent-silence-10s-en-US",
+      "cohort": "silence",
+      "locale": "en-US",
+      "reference": "",
+      "samples": 160000,
+      "pcmPath": "inputs/independent-silence-10s-en-US.pcm",
+      "sha256": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b"
+    }
+  ],
+  "datasetRevision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+  "selectionSHA256": "ab3c54e0fa28834469b103b44a1dca22a511e4c779109e0a14994fd05f2c204d",
+  "conversion": {
+    "format": "16000Hz/mono/s16LE",
+    "gainApplied": false,
+    "fleursOriginalWavRecords": [
+      {
+        "id": "fleurs-cmn_hans_cn-1805",
+        "originalWavSHA256": "714a1785c636060d6a8f284abcf786c876f70b07e0a8ea966c476abf1e890fe7",
+        "originalBytes": 487738,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "ddee0d951c5ecfa143134ae3b1f126ea70e76b9e87870d012f6830ed09b6e29f",
+        "pcmBytes": 243840
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1965",
+        "originalWavSHA256": "52cd9b630b984ed486d69f8ee8dd841a57f875c752e1af411e0a39dabd3e00cb",
+        "originalBytes": 437818,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "012e2eb91001d8a4966dd3e1fb65e706ab6d823cd96dddcf0f6de4896815bbe4",
+        "pcmBytes": 218880
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1903",
+        "originalWavSHA256": "cd570cba752dd4214a9c6ec050759172932e4bc4df18ed2a2bb0d8a9e30172db",
+        "originalBytes": 464698,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "3aeedf27352039c125341d0b66c586a438f64e973a9cef7bcc4f9433a9c88835",
+        "pcmBytes": 232320
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1953",
+        "originalWavSHA256": "9f1ab1af9c909d2710aa3e1b0af70d490e2104b5992a47e4c59469e3068b939f",
+        "originalBytes": 322618,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "77b7b11210844e85a4027757fd1cdcf725e76a71ced1e23a332dc2d7becc0afa",
+        "pcmBytes": 161280
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1830",
+        "originalWavSHA256": "3f4b1c4d04301904d8f33fad773e71ba13cc5adb69d96d241c3867ba6c13495e",
+        "originalBytes": 407098,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "32201ea0511a0285c0da43ca492357524fc3af05e0682fddedb6663b1f4c8082",
+        "pcmBytes": 203520
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1910",
+        "originalWavSHA256": "49a1d118b44c83e35ce60df9ea90f54a89740551be65730728ea3175894f1ed1",
+        "originalBytes": 326458,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "a0f4a823683fd54f0d9d18517245f9bc202fa2e9eb9c30f496d1f2eb7518f39d",
+        "pcmBytes": 163200
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1902",
+        "originalWavSHA256": "34dff751ff55dbd0c49fd83481ea2e3fe4d3d6d4e4e484fa8cb2bd7f325c5950",
+        "originalBytes": 445498,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "2da6818a6ded59c8a48abb110442f47544cc76f5a4f7e2ff8a7d0c9d10010363",
+        "pcmBytes": 222720
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1905",
+        "originalWavSHA256": "aa3163b32efca0893a63d3e706738380e8de8d1e8a521445ad06456658c9edc3",
+        "originalBytes": 483898,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "c3df5181a3e4db9ae99f2149704e8ccd1fd35e4076d0f668a8b2f3bdd08cce7e",
+        "pcmBytes": 241920
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1772",
+        "originalWavSHA256": "ac5538ad679226aac725cf75dc42646a47f97fe607eeed444261a7757ce782dd",
+        "originalBytes": 587578,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "e98e44d3ff0aa23cd9e63d58136cbf1850fd070f75f46e4ed38347a353759344",
+        "pcmBytes": 293760
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1792",
+        "originalWavSHA256": "c399b78e60770324e7f630e67063bbe090ad89510708ff1f9bd98533601eca9c",
+        "originalBytes": 560698,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "1158f7d461c64a47e37818104ce46240b36d111ed067ca19360f9b51cc8a0c30",
+        "pcmBytes": 280320
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1962",
+        "originalWavSHA256": "ae22ba9aae5bbaa3cbf6357c3c77c28fc287dd19972694273264397497fb7c07",
+        "originalBytes": 541498,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "c3d7a02f86783fe14fd7e34e4714e1686bf137c671f6fb0b1512b7ddaa1fda25",
+        "pcmBytes": 270720
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1884",
+        "originalWavSHA256": "4944fffae7a34611d6ddbfb4b20bdca9f853216867c4f4b56be23a1b45d21495",
+        "originalBytes": 441658,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "c268c789b772bd302ffd4f217f227cf4cd4dcf85be9b0c93ef6f797dae8fa99a",
+        "pcmBytes": 220800
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1958",
+        "originalWavSHA256": "f2df2f22ebb505f9f1af8411ed0da69d7a496df66cf9a0d849c229ed28ac7936",
+        "originalBytes": 618298,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "74369c2be16ac04f36e00da1d0db5fe39d3aed45276693046f365c638fc2c130",
+        "pcmBytes": 309120
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1871",
+        "originalWavSHA256": "d83eb2739552b233229af2df27a5b882a790a8af6281ef7a323e72bd38b59618",
+        "originalBytes": 445498,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "03a066eba992c84246696180810c01b61d5b7d050bc41e5b8b3b8cc6c7e5fd62",
+        "pcmBytes": 222720
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1698",
+        "originalWavSHA256": "2009e6b155ac2b1dfe8aef5e585a46b313387be1f3868ac422331cc685419e61",
+        "originalBytes": 622138,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "c0cf0ea82e08a6e7f364626fdecf3c4f7d8dedbf3d3b24f96ff029fc1ca312a4",
+        "pcmBytes": 311040
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-2002",
+        "originalWavSHA256": "1a2ee4403d2a88e6f8b382da0ac60b2a787de3f93e5f2f6883203e6a7fec5532",
+        "originalBytes": 433978,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "bee96356b12cce5f98776905b7cff01e92fca56e052e0997e977ee19a9bf8999",
+        "pcmBytes": 216960
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1661",
+        "originalWavSHA256": "35bda8450990ea1636e5bfbaea0a1c302042caaa87475919c8288ac1ebb0a05c",
+        "originalBytes": 495418,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "e9394e90b72ecde7d22f242b32dcf2c20fbf7bed68cafa6a89e341e933279744",
+        "pcmBytes": 247680
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1697",
+        "originalWavSHA256": "7dd080907920c8e2fbf95961244720bf63d57097d55b0bc6bc3c886c610f4f65",
+        "originalBytes": 625978,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "bc45683ef6eff1f4a58502edfa5bd7e90e4f5cb2b79bdcf7e1879cf9abc5f988",
+        "pcmBytes": 312960
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1821",
+        "originalWavSHA256": "3099b69f60d5b8624b66b25bc740a10fd6bfab4202fec7a4f9eaaf07c0a9f0c5",
+        "originalBytes": 506938,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "f4bd7a624646121f15f41d3e3f538c0f07d18bb3eff57ec4c8838e0a78490f7d",
+        "pcmBytes": 253440
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1808",
+        "originalWavSHA256": "0ef43439120f6e482ad8e496822f4934dc53d8a171303021d60a10b1028abce2",
+        "originalBytes": 414778,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "fdb29e3346a08dec51ca79f5ddca66a2fd73906aa53cd978c92c57017849d584",
+        "pcmBytes": 207360
+      },
+      {
+        "id": "fleurs-en_us-1675",
+        "originalWavSHA256": "7603cae3294309ef70d234180cefccc3b13865ee525262228a636069b9b62841",
+        "originalBytes": 560698,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "05586359c8c54a5fcd24761af9ae0e21b636c4cc2f696b56ef2f8ee6cc5a4ac5",
+        "pcmBytes": 280320
+      },
+      {
+        "id": "fleurs-en_us-1728",
+        "originalWavSHA256": "b174be7730f0aab6a26762130b66f2125392b50550645727bd057d8479fb6219",
+        "originalBytes": 368698,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "1cf1221ee097d042ef3cd020809bea09394626a31ac989b945c22c46ecf6fc1f",
+        "pcmBytes": 184320
+      },
+      {
+        "id": "fleurs-en_us-1972",
+        "originalWavSHA256": "bfa2f3fb72a05cbcb7c0000a460435f2d0eedca7c5cc90f01aacc89127df7f63",
+        "originalBytes": 276538,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "0ff9f8ba6e913bcab4c77c2883c11e3a63d554eb341ce99d683f5d8c921accd4",
+        "pcmBytes": 138240
+      },
+      {
+        "id": "fleurs-en_us-1914",
+        "originalWavSHA256": "14c9f40d7087ed487823917a9bc1838a037d78d315a694f7ace632651c612a61",
+        "originalBytes": 445498,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "e13d4263bc8bd3442c788d0696df0344beb66eb7bcec68e0b67083d44d530581",
+        "pcmBytes": 222720
+      },
+      {
+        "id": "fleurs-en_us-1806",
+        "originalWavSHA256": "9514bffb9e0bd3397f2cf90041eff51b87e68293335f7ff904515a19f8d416e3",
+        "originalBytes": 633658,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "b991029a13b6e97fb547937e9ad82f941b57f0b60b01c5d1d89d19237a36bd0d",
+        "pcmBytes": 316800
+      },
+      {
+        "id": "fleurs-en_us-1776",
+        "originalWavSHA256": "0471eb4c8306e143524c09a45c2b4137204ac2a19fc7ed896ed8391ac864347c",
+        "originalBytes": 307258,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "2821c39358fc8049953945d8042d1833d86cb2245ca468cf5afc31ee1fe1a438",
+        "pcmBytes": 153600
+      },
+      {
+        "id": "fleurs-en_us-1802",
+        "originalWavSHA256": "80c74220cd80f918367c517e5ddff1ea9b2d366b7711b83a276a828564cfcc49",
+        "originalBytes": 366138,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "24fe577bb7fdeabe18ca0c86da8cc1933f270331cb6567893c6be4c06f978760",
+        "pcmBytes": 183040
+      },
+      {
+        "id": "fleurs-en_us-1992",
+        "originalWavSHA256": "32bafaf58802bef28cbde443d173e51c0afe7c58c8260cb0f5776e2c60a2a3a5",
+        "originalBytes": 553018,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "9c9a81e00df5617314c141a676eb01447539b46697e6607e7cf11fc389ce7f75",
+        "pcmBytes": 276480
+      },
+      {
+        "id": "fleurs-en_us-2005",
+        "originalWavSHA256": "5a56cbc0ec373f9873b762d79e8b6874c889ba07e2bd195c40098e84bd170f5e",
+        "originalBytes": 343098,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "13e249d77ff99fa7d255acf98216b31f11d1bdb59e286d56fec5cfb888ce5c75",
+        "pcmBytes": 171520
+      },
+      {
+        "id": "fleurs-en_us-1674",
+        "originalWavSHA256": "ed78d88661c8f76d7b8951665a3c2e9adea23828fe3e70fd9df95465cb8f8ede",
+        "originalBytes": 361018,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "1243ac24a74d6cdeee5162cb6967dbeb0ddbebe00ce03c809db7fb872de5e66b",
+        "pcmBytes": 180480
+      },
+      {
+        "id": "fleurs-en_us-1952",
+        "originalWavSHA256": "3f498f6216c60544714c9b334c4cfe4811b60b2dadbc710e68d127371a5ffdfd",
+        "originalBytes": 549178,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "b3ad159ace71890d6c1e1c0c54506fe32cb3c3c1f797e625b4d561a3651f2e19",
+        "pcmBytes": 274560
+      },
+      {
+        "id": "fleurs-en_us-1749",
+        "originalWavSHA256": "62a8881cf2a0aaec9fa70155b452ce23e5a46738490fe764011b927b24842ef1",
+        "originalBytes": 614458,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "96b712b1b2470b668739a530bcf3da185ea64828967a53c8c9f2859bbbeec027",
+        "pcmBytes": 307200
+      },
+      {
+        "id": "fleurs-en_us-1662",
+        "originalWavSHA256": "0f92f2bed63210286148e6947faf7ca90bb635ec7525bcb7f48bdedfe79b425d",
+        "originalBytes": 536378,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "b6e506b249cb0b44e643e8a32475a53e56513c8f34622c49448c3752a17b0e77",
+        "pcmBytes": 268160
+      },
+      {
+        "id": "fleurs-en_us-1858",
+        "originalWavSHA256": "07cce1e9fe871d0d584490855fcb02a029eb6a0cc6e37b316e39990c4164a1a2",
+        "originalBytes": 403258,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "e8138f2c1b81addf0479f2abf0edbe38be2e2e5a2eb0a29fd12efdb602e53ff4",
+        "pcmBytes": 201600
+      },
+      {
+        "id": "fleurs-en_us-1909",
+        "originalWavSHA256": "48040b2408179454e0299ee86e69c7f1e59c66003a8967aa3ae0b06e53eb654e",
+        "originalBytes": 361018,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "743a920543850ab40540466a1b7b896ce5281c7887390c5adb136d874c78f300",
+        "pcmBytes": 180480
+      },
+      {
+        "id": "fleurs-en_us-1897",
+        "originalWavSHA256": "6684928f432514e69a5fb8157b817981e63f2c2697ce09c4dbe8a946e1a30062",
+        "originalBytes": 613178,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "d15856e4a4d0a6e14da769ae7f5606c275e9f413800661c47bb48e7f853a6cc7",
+        "pcmBytes": 306560
+      },
+      {
+        "id": "fleurs-en_us-1953",
+        "originalWavSHA256": "6fb8634b7820a56c76d53120be3accf3c63059a338fdef4b0fe2ca09665ee0a8",
+        "originalBytes": 437818,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "c18f050d51601807dd1417cabbfddeb16bbe116c7cca16590ae543e0e0eac596",
+        "pcmBytes": 218880
+      },
+      {
+        "id": "fleurs-en_us-1740",
+        "originalWavSHA256": "6450b7622ccab79fd14d3d317c9d88e6e54bbad391004e12e0aa981bd77fb764",
+        "originalBytes": 533818,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "3c68cf7df9bbcea81639f6d3b0c78ece387538ce913907c2a98113e0a7ec52d0",
+        "pcmBytes": 266880
+      },
+      {
+        "id": "fleurs-en_us-1987",
+        "originalWavSHA256": "5c67e2a8371caa74a5445a30dedd91dc43e4b6a8a7ffadbf67e06d7acc1349eb",
+        "originalBytes": 628538,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "e6f9b4c2ba1cfb2fdbd33b63879e52b83f0e9e065897a471f3e744aa3541a3c7",
+        "pcmBytes": 314240
+      },
+      {
+        "id": "fleurs-en_us-1990",
+        "originalWavSHA256": "34eef6d3531779f297c25d5f695baf92a37ef32149e293d79b9afac4ff36654c",
+        "originalBytes": 560698,
+        "originalStream": {
+          "codec_name": "pcm_f32le",
+          "sample_fmt": "flt",
+          "sample_rate": "16000",
+          "channels": 1
+        },
+        "pcmSHA256": "f0eedcd572d0907bbf9c0463d3921ff3dbd3989e05ed5faa2e63a91412da69e2",
+        "pcmBytes": 280320
+      }
+    ]
+  },
+  "amiRanges": [
+    {
+      "id": "ami-ES2003a.sync.171-C",
+      "startSample": 3748992,
+      "endSample": 3873408,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=7498028-7746859",
+      "status": "complete",
+      "path": "inputs/ami-ES2003a.sync.171-C.pcm",
+      "bytes": 248832,
+      "sha256": "3657e2bec908c402df6523cb86abef3cb7c3865afd86b96b2cc2b4e9161bcef8"
+    },
+    {
+      "id": "ami-ES2003a.sync.93-B",
+      "startSample": 11534464,
+      "endSample": 11665760,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=23068972-23331563",
+      "status": "complete",
+      "path": "inputs/ami-ES2003a.sync.93-B.pcm",
+      "bytes": 262592,
+      "sha256": "2c8fa6ea84f3d1544be8b3d6f95da02032c6c947f96ccfdb1a104beafb8e8ad1"
+    },
+    {
+      "id": "ami-ES2003a.sync.95-B",
+      "startSample": 11686240,
+      "endSample": 11766400,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=23372524-23532843",
+      "status": "complete",
+      "path": "inputs/ami-ES2003a.sync.95-B.pcm",
+      "bytes": 160320,
+      "sha256": "275c708e6e7865ca625449872c08b9807267801b4440c72bcade20b18b97b827"
+    },
+    {
+      "id": "ami-ES2003a.sync.209-C",
+      "startSample": 15105920,
+      "endSample": 15243136,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=30211884-30486315",
+      "status": "complete",
+      "path": "inputs/ami-ES2003a.sync.209-C.pcm",
+      "bytes": 274432,
+      "sha256": "b262eb47f6f6e6890c76c9f3b95e113d3e0177af2c7f5b5f6da8f1f64b5c9f21"
+    },
+    {
+      "id": "ami-ES2003a.sync.267-D",
+      "startSample": 16033408,
+      "endSample": 16099968,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=32066860-32199979",
+      "status": "complete",
+      "path": "inputs/ami-ES2003a.sync.267-D.pcm",
+      "bytes": 133120,
+      "sha256": "085ec99a8aee157763182ec855ecb77fada8b4e55c53a33b9664955e6ef8be13"
+    },
+    {
+      "id": "ami-ES2003a.sync.29-A",
+      "startSample": 17084544,
+      "endSample": 17135232,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=34169132-34270507",
+      "status": "complete",
+      "path": "inputs/ami-ES2003a.sync.29-A.pcm",
+      "bytes": 101376,
+      "sha256": "420fca6eb65876435937e44ab3e2e91c68437cc242fd1f1d19664aee78f8a9f9"
+    },
+    {
+      "id": "ami-ES2003a.sync.129-B",
+      "startSample": 17411456,
+      "endSample": 17481808,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=34822956-34963659",
+      "status": "complete",
+      "path": "inputs/ami-ES2003a.sync.129-B.pcm",
+      "bytes": 140704,
+      "sha256": "92372954467727dc91a9d9d54390854b596a731b88c4a5d338e18430260d1da5"
+    },
+    {
+      "id": "ami-ES2003a.sync.131-B",
+      "startSample": 17486944,
+      "endSample": 17555072,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=34973932-35110187",
+      "status": "complete",
+      "path": "inputs/ami-ES2003a.sync.131-B.pcm",
+      "bytes": 136256,
+      "sha256": "9f10fcc5c571a3a081aeb770cb3ace9fff8189fb44a893c1b6580e0fe76ecaa3"
+    },
+    {
+      "id": "ami-ES2003a.sync.133-B",
+      "startSample": 17600464,
+      "endSample": 17751936,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=35200972-35503915",
+      "status": "complete",
+      "path": "inputs/ami-ES2003a.sync.133-B.pcm",
+      "bytes": 302944,
+      "sha256": "0bee300259333260a5ee83134ebfd0a10e457c14470f8094fa7fc5c0ae4f5fe2"
+    },
+    {
+      "id": "ami-ES2004a.sync.121-B",
+      "startSample": 2593408,
+      "endSample": 2689664,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-01.wav",
+      "requestedRange": "bytes=5186860-5379371",
+      "status": "complete",
+      "path": "inputs/ami-ES2004a.sync.121-B.pcm",
+      "bytes": 192512,
+      "sha256": "ec3815294a798571695d9bc7647711971e7eaaafa964f38eb482d30ce0639b7d"
+    },
+    {
+      "id": "ami-ES2004a.sync.131-B",
+      "startSample": 3947392,
+      "endSample": 4013440,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-01.wav",
+      "requestedRange": "bytes=7894828-8026923",
+      "status": "complete",
+      "path": "inputs/ami-ES2004a.sync.131-B.pcm",
+      "bytes": 132096,
+      "sha256": "863640d5522fe1a48adc1900136604344d22b7c433c5c6a119f6d7d9f2bac0c4"
+    },
+    {
+      "id": "ami-ES2006a.sync.277-C",
+      "startSample": 1226624,
+      "endSample": 1325184,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2006a/audio/ES2006a.Array1-01.wav",
+      "requestedRange": "bytes=2453292-2650411",
+      "status": "complete",
+      "path": "inputs/ami-ES2006a.sync.277-C.pcm",
+      "bytes": 197120,
+      "sha256": "fe3d531be0dbaeff783266f1abd46834b4f76ae35951e53e57b1d94987e8ae45"
+    },
+    {
+      "id": "ami-negative-ES2003a-0",
+      "startSample": 2610560,
+      "endSample": 2690560,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=5221164-5381163",
+      "status": "complete",
+      "path": "inputs/ami-negative-ES2003a-0.pcm",
+      "bytes": 160000,
+      "sha256": "52d2b4c183809730b18e7f48a268b2d9c592736966a54c2f9ddd66faa20d583e"
+    },
+    {
+      "id": "ami-negative-ES2003a-1",
+      "startSample": 3124048,
+      "endSample": 3204048,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=6248140-6408139",
+      "status": "complete",
+      "path": "inputs/ami-negative-ES2003a-1.pcm",
+      "bytes": 160000,
+      "sha256": "5413d23ae7475c3e3ddd03289bfbe8b991095e12c7f1b94265b963197131767b"
+    },
+    {
+      "id": "ami-negative-ES2003a-2",
+      "startSample": 4426048,
+      "endSample": 4506048,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "requestedRange": "bytes=8852140-9012139",
+      "status": "complete",
+      "path": "inputs/ami-negative-ES2003a-2.pcm",
+      "bytes": 160000,
+      "sha256": "08423e78d572548365c9ac0ca063744936ac9ffc5af3dfa7469e07c22f9d27d9"
+    },
+    {
+      "id": "ami-negative-ES2004a-0",
+      "startSample": 36160,
+      "endSample": 116160,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-01.wav",
+      "requestedRange": "bytes=72364-232363",
+      "status": "complete",
+      "path": "inputs/ami-negative-ES2004a-0.pcm",
+      "bytes": 160000,
+      "sha256": "0ab694a5a8a760585e76faa014808019aa56a1ede71844094e20f597d573d83c"
+    },
+    {
+      "id": "ami-negative-ES2004a-1",
+      "startSample": 563520,
+      "endSample": 643520,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-01.wav",
+      "requestedRange": "bytes=1127084-1287083",
+      "status": "complete",
+      "path": "inputs/ami-negative-ES2004a-1.pcm",
+      "bytes": 160000,
+      "sha256": "441a5409fba63e68618379dd5b976564b7c27a3b45cdbc7aabf1803ef70afb1f"
+    },
+    {
+      "id": "ami-negative-ES2004a-2",
+      "startSample": 858880,
+      "endSample": 938880,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-01.wav",
+      "requestedRange": "bytes=1717804-1877803",
+      "status": "complete",
+      "path": "inputs/ami-negative-ES2004a-2.pcm",
+      "bytes": 160000,
+      "sha256": "60263b27f630d7f1e071c6082f58a7717bde4f3fa5c7a927f6d44d34f893d2a9"
+    },
+    {
+      "id": "ami-negative-ES2006a-0",
+      "startSample": 1909440,
+      "endSample": 1989440,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2006a/audio/ES2006a.Array1-01.wav",
+      "requestedRange": "bytes=3818924-3978923",
+      "status": "complete",
+      "path": "inputs/ami-negative-ES2006a-0.pcm",
+      "bytes": 160000,
+      "sha256": "6979c986fab34a8e12da0db5db6c6dee39c1cf5401600375635910f647b1bb6c"
+    },
+    {
+      "id": "ami-negative-ES2006a-1",
+      "startSample": 4038400,
+      "endSample": 4118400,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2006a/audio/ES2006a.Array1-01.wav",
+      "requestedRange": "bytes=8076844-8236843",
+      "status": "complete",
+      "path": "inputs/ami-negative-ES2006a-1.pcm",
+      "bytes": 160000,
+      "sha256": "4b47c204b26f19162f10c61a2b03546ff84ab55f3f09c170eb34724deff5b47e"
+    },
+    {
+      "id": "ami-negative-ES2006a-2",
+      "startSample": 5488704,
+      "endSample": 5568704,
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2006a/audio/ES2006a.Array1-01.wav",
+      "requestedRange": "bytes=10977452-11137451",
+      "status": "complete",
+      "path": "inputs/ami-negative-ES2006a-2.pcm",
+      "bytes": 160000,
+      "sha256": "12917449786723b550065296bdfdb690868bd960f533cfeb04e358da78d2aeac"
+    }
+  ],
+  "amiSourceHeaders": {
+    "ES2003a": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2003a/audio/ES2003a.Array1-01.wav",
+      "totalSourceBytes": 36472536,
+      "dataOffset": 44,
+      "dataBytes": 36472492,
+      "format": [
+        1,
+        1,
+        16000,
+        32000,
+        2,
+        16
+      ],
+      "headerSHA256": "1000cf90246b91c69a5e0d0b18ac6b3b1f2861b2b2d3ec496b54c294430f8573",
+      "sourceRange": "bytes=0-4095"
+    },
+    "ES2004a": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2004a/audio/ES2004a.Array1-01.wav",
+      "totalSourceBytes": 33579394,
+      "dataOffset": 44,
+      "dataBytes": 33579350,
+      "format": [
+        1,
+        1,
+        16000,
+        32000,
+        2,
+        16
+      ],
+      "headerSHA256": "722223d9348b00e52778c0eec381bb4e70a27191698723365fe87e0d6494982e",
+      "sourceRange": "bytes=0-4095"
+    },
+    "ES2006a": {
+      "url": "https://groups.inf.ed.ac.uk/ami/AMICorpusMirror/amicorpus/ES2006a/audio/ES2006a.Array1-01.wav",
+      "totalSourceBytes": 41098968,
+      "dataOffset": 44,
+      "dataBytes": 41098924,
+      "format": [
+        1,
+        1,
+        16000,
+        32000,
+        2,
+        16
+      ],
+      "headerSHA256": "4c8f0b7097095375347dc2b749e34d0e4513b4ad1245b46c24cecaca49259b6b",
+      "sourceRange": "bytes=0-4095"
+    }
+  },
+  "license": "CC-BY-4.0; Google FLEURS and AMI Consortium; original references and source URLs retained."
+}

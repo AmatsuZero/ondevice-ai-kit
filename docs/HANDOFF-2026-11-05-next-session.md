@@ -1,3 +1,22 @@
+## 2026-11-10：W3 Qwen两阶段独立质量确认通过，进入Android候选门
+
+用户要求继续改进，主代理已完成模型重选及实际Mac验证，不再等待用户接受R4/R5现状。
+Qwen0.6B int8强制语言语音质量有正向信号但2/2静音幻觉；Silero v5准入漏AMI C段，拒绝；
+纯auto虽4/4非语音为空，却将C段误判中文/远场WER17/27，拒绝。新两阶段只用auto是否严格空判准入，
+有语音则fresh stream按请求语言解码完整原幅度PCM。开发13输入22decode已过。
+
+独立集52语音+13挑战已唯一运行：52/52语音成功，中文42/590=7.12%、近场英文32/375=8.53%、
+AMI62/226=27.43%；13挑战均空，117实际decode，事前工程确认门全满足。会议间隙标签仅按无标注事件，
+未经人工听审，不外推所有真实噪声。源码809fe34f…/协议dd4d8bc7…/原报告8bc5f6b2…，终态双读一致。
+Mac采样RSS2828926976B，单片完整两阶段最大2.134s；不是手机1.5GiB预算、峰值/GPU/能耗或native析构证明。
+
+已本地提交745733c、7042b66；新独立报告见docs/validation/w3-qwen-independent-observed-20261110.md。
+普通手机App/模型、生产源码和依赖未替换，无麦克风/AiAi/网络或默认服务改动。当前TECNO在线，
+只读MemTotal约7.80GB/MemAvailable约2.69GB，需新鲜设备gate；不能拿Mac通过直接接生产。
+下一步为Android候选、模型包再分发通知链及独立复审。原native review429无结果不重试，所有本任务CBC终态。
+本地证据根.omx/artifacts/w3-model-reselection-20261110/；冗余整AMI下载在两FLEURS流及21局部输入取得后精确停止，
+原始完成/partial与SIGTERM收据保留，不是下载全成功。W3/W6/W7/W8仍open，其他责任和dirty保留。
+
 ## 2026-11-07 Speech六文件复核与F06证据已集成
 
 两份cbc hy4free外部限定复审均已终态，无新确认finding；原错误解释和父更正分别保留，不替代native双审或整分支/发布批准。文档初稿及最小订正79461/91161均终态，订正247.216秒、77完整事件/23次Read或Edit/0工具错误；两份验收文档及pitfalls正文由助手直接写，父逐字节集成并核验链接/来源。见[Speech记录](validation/android-speech-final-review-20261107.md)和[F06取证](validation/f06-transfer-evidence-20261107.md)。

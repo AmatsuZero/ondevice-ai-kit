@@ -4,6 +4,14 @@
 
 记录日期：2026-11-06。版本、额度、设备连接状态都是当时观察，继续工作时须重新核对。以下本地证据路径均相对 foundation worktree；`artifacts/`、`.omx/artifacts/` 是本机保留证据，不保证随 Git 分发。
 
+## W3 host probes: validation and native dispatch receipts (2026-11-10)
+
+- **fsync前先flush；终态在清理后写**：隔离VAD原稿对buffered Python file先fsync且提前completed，不能证明结果已落盘或清理完成。修正后先flush再fsync，持久化running/planned rows，异常保留原错误，清理后写终态；5/5fake-runtime及13组实际报告双读通过。不要将Python引用清理/GC写成C++析构ack。
+- **路径与异常检查不能被清理掩盖**：Qwen首稿有list<=set、realpath后再检查symlink、del recognizer后读取、setter错误被未初始化samples掩盖。保留原RED，逐项外部候选修正并通过9项fake检查；在realpath前逐组件检查且拒绝有symlink祖先的model root，finally变量先初始化，释放后不再读已删除局部。
+- **计数放在真实native调用边界**：两阶段Qwen原稿在create/setter/accept前就递增decode数，14组故障检查有6组误报。免费hy3将三处递增与报告持久化移到accept成功后、decode前；最终14/14通过，真实13输入22次decode一致。计数是dispatch尝试，decode抛错仍计数；不能把计划数当实际调用。
+- **构建含静音修复不等于当前模型已拒绝静音**：实际Sherpa2.0.1/af2d8d81源码含#3907，但它检查encoder特征而非原PCM。本批强制语言的全零输入仍出文本；自动语言4非语音为空却将AMI英文C段误判中文。两阶段仅开发集通过，独立集/手机/许可仍另验，不反推上游全部模型有缺陷。
+- 证据：`.omx/artifacts/w3-model-reselection-20261110/`、`probes/host-qwen-asr/`及`docs/validation/w3-qwen-*-20261110.*`。原失败、helper原始事件和各版本摘要保留。
+
 ## 1. 所有助手：进程成功不等于任务成功
 
 - **当前表格与历史日志分开**：2026-11-07复核发现F09维护人、F10普通UI/PAD smoke、F11的7/10和
