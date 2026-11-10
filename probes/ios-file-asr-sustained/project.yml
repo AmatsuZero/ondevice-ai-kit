@@ -1,0 +1,36 @@
+name: W8AppleASRSustained
+options:
+  bundleIdPrefix: io.ondeviceai.probe
+  deploymentTarget:
+    iOS: "15.0"
+  generateEmptyDirectories: true
+packages:
+  ODAIKitLocal:
+    path: ../../apple
+targets:
+  W8AppleASRSustained:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: W8AppleASRSustainedApp.swift
+      - path: ../ios-natural-file-asr/AudioFixtures
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w8appleasrsustained20261109
+        PRODUCT_NAME: W8AppleASRSustained
+        DISPLAY_NAME: ODAI W8 Apple ASR
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Info.plist
+        CODE_SIGNING_ALLOWED: NO
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - package: ODAIKitLocal
+        product: ODAIKitCore
+      - package: ODAIKitLocal
+        product: ODAIKitSpeech
+      - package: ODAIKitLocal
+        product: ODAIKitAppleSpeech
