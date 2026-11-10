@@ -1,0 +1,7 @@
+{
+  "url": "https://raw.githubusercontent.com/QwenLM/Qwen3-ASR/7c6daf77a2421100f5fb066495372c00129d39ff/LICENSE",
+  "repositoryCommit": "7c6daf77a2421100f5fb066495372c00129d39ff",
+  "bytes": 11343,
+  "sha256": "a44a6081c73ad75f0255bb2bb5cab74ef1829565a895a24e53a4f11290ab7655",
+  "modelLicenseDeclaration": "Apache-2.0 in original HF card; this is upstream repository license, not additional evidence of model artifact contents"
+}
