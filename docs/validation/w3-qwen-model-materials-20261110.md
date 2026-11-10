@@ -29,3 +29,6 @@ Android load-only 探针仍已构建且未执行。本次末尾 fresh preflight 
 [机器收据](w3-qwen-model-materials-20261110.json)保留全部材料摘要。
 原件及本机包位于 `.omx/artifacts/w3-model-reselection-20261110/redistribution-materials/`；
 两个 helper 的 prompt、原始事件、sandbox 检查和父裁定分别留在同证据根的 `helpers/` 下。
+
+材料已本地提交`ceead2e`，并随模拟器加载结果同步两端Issue/Wiki；
+[逐端回读收据](w3-qwen-emulator-materials-sync-20261110.json)。没有推源码分支或上传模型。

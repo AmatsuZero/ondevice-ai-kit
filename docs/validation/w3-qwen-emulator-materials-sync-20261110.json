@@ -1,0 +1,38 @@
+{
+  "recordedAt": "2026-11-10T14:20:51.699882+00:00",
+  "marker": "<!-- w3-qwen-probe-materials-20261110 -->",
+  "issues": [
+    {
+      "provider": "github",
+      "id": 6769683009,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6769683009",
+      "readbackIdenticalExceptKnownTerminalNewline": true,
+      "bodySHA256": "b60eb070b11c2ebd8b07749a6c0b0c766bc9d0eae3675fd26c10638450644330"
+    },
+    {
+      "provider": "gitlab",
+      "id": 42541,
+      "url": "https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit/-/issues/15#note_42541",
+      "readbackIdenticalExceptKnownTerminalNewline": true,
+      "bodySHA256": "dbfa754b2538dc404499b9482cb9dc32a90129530886ea1dc250bd7fbb70a5ff"
+    }
+  ],
+  "githubWiki": {
+    "remoteCommit": "c49a3f06f356c140cbd4fd73c33dfeee73fb1ea0",
+    "readbackIdentical": true,
+    "contentSHA256": "f5130548ee6611c642a5ebe77224a31cbd67a61ee39f0768bcb9b24c0b043c5a",
+    "sourceBranchPushed": false
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "readbackIdentical": true,
+    "contentSHA256": "f5130548ee6611c642a5ebe77224a31cbd67a61ee39f0768bcb9b24c0b043c5a"
+  },
+  "sourceBranchPushed": false,
+  "scope": "Android36 ARM64 emulator single load/release accepted; 24 model materials assembled; physical TECNO and complete two-pass quality/cost unverified; W3 open",
+  "firstWikiHostFailure": "Git quoted Chinese path in --name-only; zero wiki remote writes. Corrected to NUL-separated exact paths; original error retained.",
+  "sourceCommits": [
+    "ceead2e",
+    "9bc11c8"
+  ]
+}

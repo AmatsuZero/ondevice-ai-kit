@@ -321,5 +321,33 @@
     "resolvedRootMatches": true,
     "astOtherwiseIdentical": true,
     "modelRunRepeated": false
+  },
+  "additionalDuplicateCacheCleanup": {
+    "removedExactCacheDirectories": [
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/source/build",
+        "canonical": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-20261110/source/build",
+        "fileCount": 434,
+        "bytes": 290257479
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/source/.gradle",
+        "canonical": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-20261110/source/.gradle",
+        "fileCount": 15,
+        "bytes": 540998
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/source/.kotlin",
+        "canonical": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-20261110/source/.kotlin",
+        "fileCount": 0,
+        "bytes": 0
+      }
+    ],
+    "nominalBytes": 290798477,
+    "canonicalSHAComparisons": 449,
+    "keepFileSHARechecks": 77,
+    "freeBefore": 91040980992,
+    "freeAfter": 91333386240,
+    "exclusiveReclamationAttribution": false
   }
 }

@@ -15,7 +15,7 @@
 不含模型/runtime二进制，最终生产通知保留/运行时许可/独立发布复审仍缺。
 实体TECNO安全锁屏，未安装Qwen alias、未消耗其独占run；用户离机期间不再重复发解锁提示。
 下一项为Android两阶段文件识别与完整成本设计；模拟器证据不可代替TECNO/API35验收，W3仍open。
-无活动helper/识别任务、无麦克风/AiAi/源码push；两端issue/wiki本次增量待同步。
+无活动helper/识别任务、无麦克风/AiAi/源码push；两端#15及Wiki本次增量已发布回读，收据w3-qwen-emulator-materials-sync-20261110.json。
 
 ## 2026-11-10：W3 Android load-only已完成本地准备，等待TECNO解锁
 

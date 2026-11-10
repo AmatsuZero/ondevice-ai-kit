@@ -6,6 +6,8 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **Git中文路径盘点用NUL输出，别按quoted显示名比对**：Wiki精确stage后`git diff --cached --name-only`将中文名转成带引号的八进制转义，父端按真实文件名比较失败；当时零commit/push。只改为`--name-only -z`并按NUL拆分，确认仅目标页后提交/推送，远端内容逐字回读通过；不更改全局`core.quotePath`，也不因本地检查失败重复发布issue。原错与恢复见`.omx/artifacts/w3-model-reselection-20261110/redistribution-materials/publication/`。
+
 - **AVD控制台身份响应含CRLF，逐行精确校验**：模拟器父脚本首preflight假定`name\nOK`，实际ADB回`W3_Qwen_Load_20261110\r\nOK\r\n`，零安装/构造时断言失败。保留raw与首稿，仅对控制台响应使用`splitlines()==[精确AVD名,"OK"]`；三种错名/失败状态/多余行仍拒绝。随后唯一模拟器load-only completed、28父检查/双读/恢复通过；不能借换行订正放宽serial/qemu/API/ABI，也不改实体run。结束时最后一次`/proc`读取在instrumentation退出后失去PID，已保留terminalObservationGap，不能称连续采样或true peak。证据`artifacts/verification/w3-qwen-load-emulator-20261110/`及`docs/validation/w3-qwen-emulator-load-accepted-20261110.md`。
 
 - **Kotlin copy参数的副作用会被旧receiver覆盖**：Qwen加载core首修正中`s = s.copy(loadNanos = elapsed(t0))`先求旧`s`，elapsed捕获计时异常并更新`s.errorClass`，随后旧copy清掉错误；真实17组host检查15过、2组错误completed。外部定点订正先取duration局部值，再从当前s.copy，17组/63断言通过；保留首稿NoSuchFileException(File/String)编译错误。native/Android设备尚未运行，不能写成真机析构已验。证据`.omx/artifacts/w3-model-reselection-20261110/android-load-host/candidate-core-{fixed-diagnostic,final}-result.json`。

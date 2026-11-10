@@ -29,6 +29,8 @@
 关闭后只删除七份本任务闲置虚拟磁盘/initrd，共3811372312名义B；522份保留文件逐SHA复核，
 普通AVD未被操作。未保存其运行前配置SHA，故只记录当前SHA，不声称普通AVD逐字前后证明。
 全部配置、源码/APK、原始双读/采样/错误、helper与清理收据仍在本机证据目录。
+另对复制自原构建的449份缓存逐SHA与保留的canonical副本比对后，精确删除三个闲置目录，
+共290798477名义B；77份其余文件SHA保持。没有清全局缓存或原构建证据。
 
 依据：[事前合同](w3-qwen-android-emulator-load-protocol-20261110.md)、
 [原始设备报告](w3-qwen-emulator-load-report-20261110.json)、
@@ -39,3 +41,7 @@
 
 下一项可继续设计 Android 两阶段文件识别与资源测量；本批没有创建stream，不能记为该项通过。
 TECNO实体结果、真实噪声质量、完整两阶段成本、持续资源、GPU/能耗和最终发布仍分别保留原门槛，W3保持open。
+
+本次增量已发布至GitHub/GitLab的W3 #15及专题Wiki，逐端回读一致；
+[同步收据](w3-qwen-emulator-materials-sync-20261110.json)记录链接、内容SHA和Wiki commit。
+源码提交`ceead2e`/`9bc11c8`仍只在本地，未推源码分支。
