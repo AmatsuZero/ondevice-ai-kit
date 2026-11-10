@@ -14,7 +14,7 @@ PID25102/startTicks221524649，49RSS样本max1407234048B=1.310589GiB，系统ava
 W3仍open：加载采样子门通过不等于完整两阶段FILE质量/成本、warmRTF、持续/GPU/energy或发布通过。
 下一项由免费外部助手交Android两阶段候选，先host/build/package/复核，再冻结新文件识别合同；
 勿重跑本load-only、旧Whisper/Apple/AMI或AiAi，不再把此项记为等待解锁。无活动helper。
-两端#15/Wiki本次真机增量待同步；未push源码。
+真机验收本地提交cb3ff40；两端#15/Wiki本次增量已发布逐端回读，收据w3-qwen-physical-load-sync-20261111.json；未push源码。
 
 ## 2026-11-10：W3模拟器单次加载完成，实体TECNO未执行
 

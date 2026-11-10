@@ -35,3 +35,7 @@
 下一项为 Android 两阶段 FILE ASR 的候选、完整同输入质量对照与实际成本测量。
 本项没有创建任何stream，warm RTF、完整两阶段内存、持续资源、true peak、GPU/能耗及生产通知/发布复审仍另验。
 W3保持open，不将load-only通过改写为整包完成。
+
+本次结果已本地提交`cb3ff40`；GitHub/GitLab的W3 #15及专题Wiki均已发布并逐端回读，
+[同步收据](w3-qwen-physical-load-sync-20261111.json)记录评论链接、内容摘要和Wiki commit。
+没有推送源码分支或上传模型/音频。

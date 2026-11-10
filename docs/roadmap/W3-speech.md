@@ -19,16 +19,16 @@
 供应方声明Apache-2.0，最终许可/归属交付物仍未验收，见[供应链核对](../validation/w3-qwen-supply-chain-observed-20261110.md)。
 Android先冻结[load-only合同](../validation/w3-qwen-android-load-protocol-20261110.md)，保持1.5GiB门；
 首多文件helper因upstream empty_model_response零交付而拒收；拆分交付后core17组/63断言、wrapper12组/44断言、
-父guard11检查及Android构建/lint/实包已通过（lint7warning/0error）。当前TECNO仍安全锁屏，
-其新alias未安装、零构造/解码；用户不在机器旁，已改为先执行独立模拟器补充，不再等待当前解锁提示。
+父guard11检查及Android构建/lint/实包已通过（lint7warning/0error）。11月10日TECNO安全锁屏，
+当时新alias未安装、零构造/解码；用户不在机器旁，因此先执行独立模拟器补充。
 同APK在Android36 ARM64临时AVD完成一次构造/释放，采样最大RSS1.204823GiB，28父检查/双读/恢复通过。
-模拟器已关闭，未替换TECNO/API35证据；真机1.5GiB及两阶段质量/成本仍未验收，
+模拟器已关闭，未替换TECNO/API35证据；11月11日真机加载子门随后通过，完整两阶段质量/成本仍未验收，
 见[准备收据](../validation/w3-qwen-android-probe-ready-20261110.md)和[模拟器结果](../validation/w3-qwen-emulator-load-accepted-20261110.md)。
 
 已另行验收[模型许可与归属材料包](../validation/w3-qwen-model-materials-20261110.md)：24文件、
 六运行文件重核、21来源SHA和归属文档8链接通过；既有Apache-2.0全文与供应声明分别标明来源。
 不含模型/runtime二进制，不修改冻结APK；最终生产包通知保留、运行时许可和发布复审仍另验。
-TECNO最新仍安全锁屏；材料包本项没有设备动作，随后仅运行上述独立模拟器load-only。
+材料包本项没有设备动作；模拟器和随后真机的独立load-only结果分别保留，不重复执行。
 
 最新决定及两端在线记录见[结果报告](../reports/w3-speech-status-20261110.md)和[发布回读收据](../validation/w3-issue-wiki-sync-20261110.json)。主代理负责提出可验证的质量改进及资源预算建议，先固定假设、输入、评分和停止条件。新增 AMI 原三片/+20 dB 六臂 VAD 真机对照：原幅度 false/false/true，放大后 true/false/true；按事前规则拒绝固定增益路线，不继续扫参或进入该路线 ASR。零 Whisper/麦克风/下载，已双读及恢复，[结果](../validation/w3-ami-gain-observed-20261110.md)。
 
