@@ -1,0 +1,590 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "fleurs-cmn_hans_cn-1805",
+      "samples": 121920,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "ddee0d951c5ecfa143134ae3b1f126ea70e76b9e87870d012f6830ed09b6e29f",
+      "reference": "Scotturb 403 路公共汽车定期发车前往辛特拉 (Sintra)，在罗卡角停靠。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1805.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1965",
+      "samples": 109440,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "012e2eb91001d8a4966dd3e1fb65e706ab6d823cd96dddcf0f6de4896815bbe4",
+      "reference": "这里几乎都是沙滩，游泳很安全，大部分地方都有新西兰圣诞树的树荫。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1965.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1903",
+      "samples": 116160,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "3aeedf27352039c125341d0b66c586a438f64e973a9cef7bcc4f9433a9c88835",
+      "reference": "当所有可用的资源在一个组织的职能部门之间得到有效利用时，创造力和独创性就会发生。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1903.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1953",
+      "samples": 80640,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "77b7b11210844e85a4027757fd1cdcf725e76a71ced1e23a332dc2d7becc0afa",
+      "reference": "他随后被转送到剑桥的阿登布鲁克医院。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1953.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1830",
+      "samples": 101760,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "32201ea0511a0285c0da43ca492357524fc3af05e0682fddedb6663b1f4c8082",
+      "reference": "执政党西南非洲人民组织 (SWAPO) 也在议会选举中保持了多数席位。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1830.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1910",
+      "samples": 81600,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "a0f4a823683fd54f0d9d18517245f9bc202fa2e9eb9c30f496d1f2eb7518f39d",
+      "reference": "巴黎人是出了名的以自我中心、粗鲁和傲慢。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1910.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1902",
+      "samples": 111360,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "2da6818a6ded59c8a48abb110442f47544cc76f5a4f7e2ff8a7d0c9d10010363",
+      "reference": "起初，他被送往位于大雅茅斯的詹姆斯·佩吉特医院进行救治。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1902.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1905",
+      "samples": 120960,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "c3df5181a3e4db9ae99f2149704e8ccd1fd35e4076d0f668a8b2f3bdd08cce7e",
+      "reference": "摩尔多瓦的首都是基希讷乌。当地语言是罗马尼亚语，但俄语也被广泛使用。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1905.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1772",
+      "samples": 146880,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "e98e44d3ff0aa23cd9e63d58136cbf1850fd070f75f46e4ed38347a353759344",
+      "reference": "因此，很可能这个符号只是作为一个标签添加的。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1772.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1792",
+      "samples": 140160,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "1158f7d461c64a47e37818104ce46240b36d111ed067ca19360f9b51cc8a0c30",
+      "reference": "这被称为化学物质的 pH 值。你可以使用红甘蓝汁制作指示剂。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1792.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1962",
+      "samples": 135360,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "c3d7a02f86783fe14fd7e34e4714e1686bf137c671f6fb0b1512b7ddaa1fda25",
+      "reference": "pH 值以被测化学品中的氢（pH 中的 H）离子数量表示。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1962.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1884",
+      "samples": 110400,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "c268c789b772bd302ffd4f217f227cf4cd4dcf85be9b0c93ef6f797dae8fa99a",
+      "reference": "具体说来，据说可以通过正确解读微表情来判断一个人是否在撒谎。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1884.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1958",
+      "samples": 154560,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "74369c2be16ac04f36e00da1d0db5fe39d3aed45276693046f365c638fc2c130",
+      "reference": "这座城市与该国其他城市形成了鲜明对比，因为它更多的是阿拉伯风格，而不是非洲风格。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1958.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1871",
+      "samples": 111360,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "03a066eba992c84246696180810c01b61d5b7d050bc41e5b8b3b8cc6c7e5fd62",
+      "reference": "在中东温暖的气候中，房子并不是多重要。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1871.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1698",
+      "samples": 155520,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "c0cf0ea82e08a6e7f364626fdecf3c4f7d8dedbf3d3b24f96ff029fc1ca312a4",
+      "reference": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小粒子组成。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1698.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-2002",
+      "samples": 108480,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "bee96356b12cce5f98776905b7cff01e92fca56e052e0997e977ee19a9bf8999",
+      "reference": "它让玩家可以通过在空中移动设备来控制电子游戏中的运动和操作。",
+      "asset": "inputs/fleurs-cmn_hans_cn-2002.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1661",
+      "samples": 123840,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "e9394e90b72ecde7d22f242b32dcf2c20fbf7bed68cafa6a89e341e933279744",
+      "reference": "他没有设定削减数额，只是表示将根据中国的经济产出来决定数额。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1661.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1697",
+      "samples": 156480,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "bc45683ef6eff1f4a58502edfa5bd7e90e4f5cb2b79bdcf7e1879cf9abc5f988",
+      "reference": "他一直无法用药物来缓解疼痛，因为比赛禁止参赛者服用这些药物。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1697.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1821",
+      "samples": 126720,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "f4bd7a624646121f15f41d3e3f538c0f07d18bb3eff57ec4c8838e0a78490f7d",
+      "reference": "大脑病理和行为之间的相关性可以为科学家们的研究提供支持。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1821.pcm"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1808",
+      "samples": 103680,
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "sha256": "fdb29e3346a08dec51ca79f5ddca66a2fd73906aa53cd978c92c57017849d584",
+      "reference": "战争结束两年后，曾经的盟友如今成了敌人，冷战随即开始。",
+      "asset": "inputs/fleurs-cmn_hans_cn-1808.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1675",
+      "samples": 140160,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "05586359c8c54a5fcd24761af9ae0e21b636c4cc2f696b56ef2f8ee6cc5a4ac5",
+      "reference": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+      "asset": "inputs/fleurs-en_us-1675.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1728",
+      "samples": 92160,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "1cf1221ee097d042ef3cd020809bea09394626a31ac989b945c22c46ecf6fc1f",
+      "reference": "The cabbage juice changes color depending on how acidic or basic (alkaline) the chemical is.",
+      "asset": "inputs/fleurs-en_us-1728.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1972",
+      "samples": 69120,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "0ff9f8ba6e913bcab4c77c2883c11e3a63d554eb341ce99d683f5d8c921accd4",
+      "reference": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+      "asset": "inputs/fleurs-en_us-1972.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1914",
+      "samples": 111360,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "e13d4263bc8bd3442c788d0696df0344beb66eb7bcec68e0b67083d44d530581",
+      "reference": "Twentieth century research has shown that there are two pools of genetic variation: hidden and expressed.",
+      "asset": "inputs/fleurs-en_us-1914.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1806",
+      "samples": 158400,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "b991029a13b6e97fb547937e9ad82f941b57f0b60b01c5d1d89d19237a36bd0d",
+      "reference": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses, easier to reach than those built in modern times.",
+      "asset": "inputs/fleurs-en_us-1806.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1776",
+      "samples": 76800,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "2821c39358fc8049953945d8042d1833d86cb2245ca468cf5afc31ee1fe1a438",
+      "reference": "Through the night between 150 and 200 copies were made, now known as \"Dunlap broadsides\".",
+      "asset": "inputs/fleurs-en_us-1776.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1802",
+      "samples": 91520,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "24fe577bb7fdeabe18ca0c86da8cc1933f270331cb6567893c6be4c06f978760",
+      "reference": "The Internet combines elements of both mass and interpersonal communication.",
+      "asset": "inputs/fleurs-en_us-1802.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1992",
+      "samples": 138240,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "9c9a81e00df5617314c141a676eb01447539b46697e6607e7cf11fc389ce7f75",
+      "reference": "The term safari in popular use refers to overland travel to view the stunning African wildlife, particularly on savanna.",
+      "asset": "inputs/fleurs-en_us-1992.pcm"
+    },
+    {
+      "id": "fleurs-en_us-2005",
+      "samples": 85760,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "13e249d77ff99fa7d255acf98216b31f11d1bdb59e286d56fec5cfb888ce5c75",
+      "reference": "But there are a lot of things about birds that still look like a dinosaur.",
+      "asset": "inputs/fleurs-en_us-2005.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1674",
+      "samples": 90240,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "1243ac24a74d6cdeee5162cb6967dbeb0ddbebe00ce03c809db7fb872de5e66b",
+      "reference": "In some areas boiling water for a minute is enough, in others several minutes are needed.",
+      "asset": "inputs/fleurs-en_us-1674.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1952",
+      "samples": 137280,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "b3ad159ace71890d6c1e1c0c54506fe32cb3c3c1f797e625b4d561a3651f2e19",
+      "reference": "Anyone who's going to drive at high latitudes or over mountain passes should consider the possibility of snow, ice, or freezing temperatures.",
+      "asset": "inputs/fleurs-en_us-1952.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1749",
+      "samples": 153600,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "96b712b1b2470b668739a530bcf3da185ea64828967a53c8c9f2859bbbeec027",
+      "reference": "It was ruled by the \"Vichy\" French. These were French people who had made peace with the Germans in 1940 and worked with the invaders instead of fighting them.",
+      "asset": "inputs/fleurs-en_us-1749.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1662",
+      "samples": 134080,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "b6e506b249cb0b44e643e8a32475a53e56513c8f34622c49448c3752a17b0e77",
+      "reference": "Alloys are basically a mixture of two or more metals. Don't forget that there are many elements on the periodic table.",
+      "asset": "inputs/fleurs-en_us-1662.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1858",
+      "samples": 100800,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "e8138f2c1b81addf0479f2abf0edbe38be2e2e5a2eb0a29fd12efdb602e53ff4",
+      "reference": "Danielle Lantagne, a UN expert on the disease, stated the outbreak was likely caused by the peacekeepers.",
+      "asset": "inputs/fleurs-en_us-1858.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1909",
+      "samples": 90240,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "743a920543850ab40540466a1b7b896ce5281c7887390c5adb136d874c78f300",
+      "reference": "Virtual teams are held to the same standards of excellence as conventional teams, but there are subtle differences.",
+      "asset": "inputs/fleurs-en_us-1909.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1897",
+      "samples": 153280,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "d15856e4a4d0a6e14da769ae7f5606c275e9f413800661c47bb48e7f853a6cc7",
+      "reference": "In the north the region is bounded by the Sahel, and in the south and west by the Atlantic Ocean.",
+      "asset": "inputs/fleurs-en_us-1897.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1953",
+      "samples": 109440,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "c18f050d51601807dd1417cabbfddeb16bbe116c7cca16590ae543e0e0eac596",
+      "reference": "He was subsequently relocated to Addenbrooke's Hospital in Cambridge.",
+      "asset": "inputs/fleurs-en_us-1953.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1740",
+      "samples": 133440,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "3c68cf7df9bbcea81639f6d3b0c78ece387538ce913907c2a98113e0a7ec52d0",
+      "reference": "The pyramid sound and light show is one of the most interesting things in the area for kids.",
+      "asset": "inputs/fleurs-en_us-1740.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1987",
+      "samples": 157120,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "e6f9b4c2ba1cfb2fdbd33b63879e52b83f0e9e065897a471f3e744aa3541a3c7",
+      "reference": "The crash occurred high up in mountainous terrain, and is believed to have been the result of hostile fire.",
+      "asset": "inputs/fleurs-en_us-1987.pcm"
+    },
+    {
+      "id": "fleurs-en_us-1990",
+      "samples": 140160,
+      "locale": "en-US",
+      "cohort": "english-near",
+      "sha256": "f0eedcd572d0907bbf9c0463d3921ff3dbd3989e05ed5faa2e63a91412da69e2",
+      "reference": "Blogs can also help improve student writing. While students often begin their blog experience with sloppy grammar and spelling, the presence of an audience generally changes that.",
+      "asset": "inputs/fleurs-en_us-1990.pcm"
+    },
+    {
+      "id": "ami-ES2003a.sync.171-C",
+      "samples": 124416,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "3657e2bec908c402df6523cb86abef3cb7c3865afd86b96b2cc2b4e9161bcef8",
+      "reference": "So elephants are big, strong and gentle, and they have great memories, and they begin with the letter E_, just like Ebenezer.",
+      "asset": "inputs/ami-ES2003a.sync.171-C.pcm"
+    },
+    {
+      "id": "ami-ES2003a.sync.93-B",
+      "samples": 131296,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "2c8fa6ea84f3d1544be8b3d6f95da02032c6c947f96ccfdb1a104beafb8e8ad1",
+      "reference": "Okay. Now we better actually just get on with the uh the meat of the project. So I'm gonna guess that we've all used remote controls.",
+      "asset": "inputs/ami-ES2003a.sync.93-B.pcm"
+    },
+    {
+      "id": "ami-ES2003a.sync.95-B",
+      "samples": 80160,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "275c708e6e7865ca625449872c08b9807267801b4440c72bcade20b18b97b827",
+      "reference": "Any ideas of where you think a new remote control could go into this market?",
+      "asset": "inputs/ami-ES2003a.sync.95-B.pcm"
+    },
+    {
+      "id": "ami-ES2003a.sync.209-C",
+      "samples": 137216,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "b262eb47f6f6e6890c76c9f3b95e113d3e0177af2c7f5b5f6da8f1f64b5c9f21",
+      "reference": "Uh, you wanna be able to change angles in interactive television, so you need buttons to change the television angle, the camera angles and stuff like that.",
+      "asset": "inputs/ami-ES2003a.sync.209-C.pcm"
+    },
+    {
+      "id": "ami-ES2003a.sync.267-D",
+      "samples": 66560,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "085ec99a8aee157763182ec855ecb77fada8b4e55c53a33b9664955e6ef8be13",
+      "reference": "Well when you're talking about gaming and stuff, do you think they should have some sort of",
+      "asset": "inputs/ami-ES2003a.sync.267-D.pcm"
+    },
+    {
+      "id": "ami-ES2003a.sync.29-A",
+      "samples": 50688,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "420fca6eb65876435937e44ab3e2e91c68437cc242fd1f1d19664aee78f8a9f9",
+      "reference": "slightly unconventional or attractive uh",
+      "asset": "inputs/ami-ES2003a.sync.29-A.pcm"
+    },
+    {
+      "id": "ami-ES2003a.sync.129-B",
+      "samples": 70352,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "92372954467727dc91a9d9d54390854b596a731b88c4a5d338e18430260d1da5",
+      "reference": "Okay. That's definitely something that we should be able to do quite easily.",
+      "asset": "inputs/ami-ES2003a.sync.129-B.pcm"
+    },
+    {
+      "id": "ami-ES2003a.sync.131-B",
+      "samples": 68128,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "9f10fcc5c571a3a081aeb770cb3ace9fff8189fb44a893c1b6580e0fe76ecaa3",
+      "reference": "I would I would have hoped so anyway. Um, right.",
+      "asset": "inputs/ami-ES2003a.sync.131-B.pcm"
+    },
+    {
+      "id": "ami-ES2003a.sync.133-B",
+      "samples": 151472,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "0bee300259333260a5ee83134ebfd0a10e457c14470f8094fa7fc5c0ae4f5fe2",
+      "reference": "I'd say we finish this one up, we get started, I'll get in, I'll write up what we've um kind of quickly done, and I'll get that out to everybody.",
+      "asset": "inputs/ami-ES2003a.sync.133-B.pcm"
+    },
+    {
+      "id": "ami-ES2004a.sync.121-B",
+      "samples": 96256,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "ec3815294a798571695d9bc7647711971e7eaaafa964f38eb482d30ce0639b7d",
+      "reference": "what we're thinking, how it's gonna go and then the detailed design, how we're actually gonna put it into practice and make it work.",
+      "asset": "inputs/ami-ES2004a.sync.121-B.pcm"
+    },
+    {
+      "id": "ami-ES2004a.sync.131-B",
+      "samples": 66048,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "863640d5522fe1a48adc1900136604344d22b7c433c5c6a119f6d7d9f2bac0c4",
+      "reference": "Okay. I'm not gonna ask you to guess, I'm going to tell you that's supposed to be a tiger.",
+      "asset": "inputs/ami-ES2004a.sync.131-B.pcm"
+    },
+    {
+      "id": "ami-ES2006a.sync.277-C",
+      "samples": 98560,
+      "locale": "en-US",
+      "cohort": "english-far",
+      "sha256": "fe3d531be0dbaeff783266f1abd46834b4f76ae35951e53e57b1d94987e8ae45",
+      "reference": "And then that's it. So we've got twenty five minutes to do that, that's until eleven twenty five.",
+      "asset": "inputs/ami-ES2006a.sync.277-C.pcm"
+    },
+    {
+      "id": "ami-negative-ES2003a-0",
+      "samples": 80000,
+      "locale": "en-US",
+      "cohort": "nonspeech-noise",
+      "sha256": "52d2b4c183809730b18e7f48a268b2d9c592736966a54c2f9ddd66faa20d583e",
+      "reference": "",
+      "asset": "inputs/ami-negative-ES2003a-0.pcm"
+    },
+    {
+      "id": "ami-negative-ES2003a-1",
+      "samples": 80000,
+      "locale": "en-US",
+      "cohort": "nonspeech-noise",
+      "sha256": "5413d23ae7475c3e3ddd03289bfbe8b991095e12c7f1b94265b963197131767b",
+      "reference": "",
+      "asset": "inputs/ami-negative-ES2003a-1.pcm"
+    },
+    {
+      "id": "ami-negative-ES2003a-2",
+      "samples": 80000,
+      "locale": "en-US",
+      "cohort": "nonspeech-noise",
+      "sha256": "08423e78d572548365c9ac0ca063744936ac9ffc5af3dfa7469e07c22f9d27d9",
+      "reference": "",
+      "asset": "inputs/ami-negative-ES2003a-2.pcm"
+    },
+    {
+      "id": "ami-negative-ES2004a-0",
+      "samples": 80000,
+      "locale": "en-US",
+      "cohort": "nonspeech-noise",
+      "sha256": "0ab694a5a8a760585e76faa014808019aa56a1ede71844094e20f597d573d83c",
+      "reference": "",
+      "asset": "inputs/ami-negative-ES2004a-0.pcm"
+    },
+    {
+      "id": "ami-negative-ES2004a-1",
+      "samples": 80000,
+      "locale": "en-US",
+      "cohort": "nonspeech-noise",
+      "sha256": "441a5409fba63e68618379dd5b976564b7c27a3b45cdbc7aabf1803ef70afb1f",
+      "reference": "",
+      "asset": "inputs/ami-negative-ES2004a-1.pcm"
+    },
+    {
+      "id": "ami-negative-ES2004a-2",
+      "samples": 80000,
+      "locale": "en-US",
+      "cohort": "nonspeech-noise",
+      "sha256": "60263b27f630d7f1e071c6082f58a7717bde4f3fa5c7a927f6d44d34f893d2a9",
+      "reference": "",
+      "asset": "inputs/ami-negative-ES2004a-2.pcm"
+    },
+    {
+      "id": "ami-negative-ES2006a-0",
+      "samples": 80000,
+      "locale": "en-US",
+      "cohort": "nonspeech-noise",
+      "sha256": "6979c986fab34a8e12da0db5db6c6dee39c1cf5401600375635910f647b1bb6c",
+      "reference": "",
+      "asset": "inputs/ami-negative-ES2006a-0.pcm"
+    },
+    {
+      "id": "ami-negative-ES2006a-1",
+      "samples": 80000,
+      "locale": "en-US",
+      "cohort": "nonspeech-noise",
+      "sha256": "4b47c204b26f19162f10c61a2b03546ff84ab55f3f09c170eb34724deff5b47e",
+      "reference": "",
+      "asset": "inputs/ami-negative-ES2006a-1.pcm"
+    },
+    {
+      "id": "ami-negative-ES2006a-2",
+      "samples": 80000,
+      "locale": "en-US",
+      "cohort": "nonspeech-noise",
+      "sha256": "12917449786723b550065296bdfdb690868bd960f533cfeb04e358da78d2aeac",
+      "reference": "",
+      "asset": "inputs/ami-negative-ES2006a-2.pcm"
+    },
+    {
+      "id": "independent-silence-3s-zh-CN",
+      "samples": 48000,
+      "locale": "zh-CN",
+      "cohort": "silence",
+      "sha256": "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0",
+      "reference": "",
+      "asset": "inputs/independent-silence-3s-zh-CN.pcm"
+    },
+    {
+      "id": "independent-silence-10s-zh-CN",
+      "samples": 160000,
+      "locale": "zh-CN",
+      "cohort": "silence",
+      "sha256": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b",
+      "reference": "",
+      "asset": "inputs/independent-silence-10s-zh-CN.pcm"
+    },
+    {
+      "id": "independent-silence-3s-en-US",
+      "samples": 48000,
+      "locale": "en-US",
+      "cohort": "silence",
+      "sha256": "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0",
+      "reference": "",
+      "asset": "inputs/independent-silence-3s-en-US.pcm"
+    },
+    {
+      "id": "independent-silence-10s-en-US",
+      "samples": 160000,
+      "locale": "en-US",
+      "cohort": "silence",
+      "sha256": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b",
+      "reference": "",
+      "asset": "inputs/independent-silence-10s-en-US.pcm"
+    }
+  ]
+}

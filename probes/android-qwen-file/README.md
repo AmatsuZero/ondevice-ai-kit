@@ -1,0 +1,21 @@
+# Isolated Android Qwen two-stage FILE ASR
+
+This is an acceptance probe, outside the ordinary Demo and production backend. No microphone, system ASR, AiAi, network permission, new download or production default change is part of this probe.
+
+Core source is supplied by free external CBC and integrated unchanged after parent Kotlin checks (42 groups / 264 assertions). See `docs/validation/w3-qwen-android-file-core-20261111.md` and the implementation plan. The Android wrapper, actual APK and device run are separate gates; until their receipts exist, this directory is not device-ready.
+
+The fixed pipeline uses full original 16kHz s16LE PCM, auto language admission based on exact empty raw text, then a fresh stream forced to the requested language. It preserves the 65 independent inputs and reference text from the existing Mac confirmation. No VAD, gain, crop or text filtering is applied. Annotation-negative AMI intervals have not been manually listened to.
+
+Parent tools:
+
+- `check_core.py CANDIDATE OUTPUT_DIR`: real Kotlin execution with fault injection; output directories are exclusive.
+- `check_wrapper.py CORE ACTIVITY INSTRUMENTATION OUTPUT_DIR`: real case core and fixture bytes, host Android/JNI doubles. This does not prove native/device runtime.
+- `check_parent.py`: resource boundary and false-acceptance regressions, synthetic reports only.
+- `prepare_build.py`: requires accepted candidate hashes; generates an isolated Gradle harness and freezes a distinct run plan.
+- `build_acceptance.py build|verify`: offline Gradle/lint, then actual APK class/manifest/permission/native/signing and all 65 packaged asset checks.
+- `device_acceptance.py preflight|prepare|run|collect|restore`: sequential one-shot physical acceptance, never replaying the consumed load-only run. Invoke dependent stages only after their prerequisites pass.
+- `verify_report.py`: unchanged scorer and prior engineering thresholds, reports coverage/failures independently. Failed or unexecuted rows are not replaced with empty hypotheses.
+
+All shell commands use `rtk proxy`. Evidence roots are `.omx/artifacts/w3-qwen-file-20261111/` and `artifacts/verification/w3-qwen-file-20261111/`. The ordinary Apps/models remain protected by exact manifests and hashes. Source branch push is not part of this probe.
+
+The parent stops the exact new alias if sampled RSS exceeds 1.5GiB, available memory falls below 512MiB, a case/load window exceeds 120 seconds or observation fails. A stopped/in-flight decode has incomplete last-persisted counters; never claim these are exact final dispatch counts. Samples are not true-peak/GPU/energy or sustained-resource proof. Preserve raw reports, failures and source/model/input fingerprints, collect the same run, then restore only the exact temporary aliases/staging.
