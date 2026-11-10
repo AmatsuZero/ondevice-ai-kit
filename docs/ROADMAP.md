@@ -1,6 +1,6 @@
 # 分阶段交付与恢复入口
 
-W3最新（2026-11-10）：Qwen两阶段Mac独立确认及限定复核通过（中文CER7.12%、近场英文WER8.53%、AMI远场WER27.43%，13挑战为空/117decode）。同APK新增Android36 ARM64独立模拟器单次加载/释放通过，构造2.419s、17采样maxRSS1.204823GiB，28父检查/双读/恢复完成，AVD已关闭。实体TECNO尚未安装/加载，1.5GiB及两阶段质量/成本门仍未验收。24文件许可归属材料已提交，生产包通知/运行时许可/发布复审仍另验。生产未替换，W3仍open。[模拟器结果](validation/w3-qwen-emulator-load-accepted-20261110.md)；[材料](validation/w3-qwen-model-materials-20261110.md)。下方较早W3状态均为历史。
+W3最新（2026-11-11）：Qwen同冻结APK在TECNO完成唯一load-only：构造1/成功9.382s、释放1/成功；49采样maxRSS1.310589GiB，未触发1.5GiB停止门。33父检查/终态双读/模型与普通App恢复通过，零stream/decode/麦克风/AiAi。模拟器结果和Mac独立质量保留；Android完整两阶段FILE质量/成本、生产通知/运行时许可/发布复审仍另验，W3保持open。[真机结果](validation/w3-qwen-physical-load-accepted-20261111.md)。下方较早W3状态均为历史。
 
 ## 当前验收状态（2026-11-09 11:42 +08）
 

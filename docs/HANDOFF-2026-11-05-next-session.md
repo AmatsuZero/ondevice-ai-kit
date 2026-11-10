@@ -1,3 +1,21 @@
+## 2026-11-11：W3 TECNO真机load-only通过并恢复
+
+用户确认已解锁；fresh Awake/unlocked、2.82GB available、无alias后，使用原冻结APK与
+runId w3-qwen-load-20261110-01唯一实际加载。构造1/成功9.381619386s、release1/成功0.272898154s；
+PID25102/startTicks221524649，49RSS样本max1407234048B=1.310589GiB，系统available最小1964892160B，
+未触发1.5GiB/512MiB/120s门，host14.206945750s无stop/gap。terminal/completed双读SHA
+91d27c572d8bf205807a3df4377fc878068f1906466d36b8c60d96e37f46ce8c，33父检查、六Qwen摘要后核通过。
+只卸本次两alias/清manifest精确staging；六普通App路径、四普通模型hash保持，普通Demo实际恢复前台。
+零stream/decode/麦克风/AiAi/网络请求，生产未改、无自动重试。原run日期不变，实际执行在11月11日。
+
+入口docs/validation/w3-qwen-physical-load-accepted-20261111.md与对应JSON/原始报告；
+本机artifacts/verification/w3-qwen-load-20261110/保留transfer/双读/采样/恢复和清理收据。
+本次无新下载/构建大缓存；临时传输文件已删，原APK/源码/模型及所有证据保留，78旧dirty路径保持。
+W3仍open：加载采样子门通过不等于完整两阶段FILE质量/成本、warmRTF、持续/GPU/energy或发布通过。
+下一项由免费外部助手交Android两阶段候选，先host/build/package/复核，再冻结新文件识别合同；
+勿重跑本load-only、旧Whisper/Apple/AMI或AiAi，不再把此项记为等待解锁。无活动helper。
+两端#15/Wiki本次真机增量待同步；未push源码。
+
 ## 2026-11-10：W3模拟器单次加载完成，实体TECNO未执行
 
 用户不在机器旁，明确要求用模拟器推进。既有Android36/default/arm64-v8a镜像新建独立临时AVD，

@@ -36,3 +36,7 @@ or protection stop may leave a nonterminal report; retain it as failure evidence
 The unique emulator load-only run has completed and its temporary AVD has been stopped/cleaned. Do not
 resubmit it. See [the accepted supplement](../../docs/validation/w3-qwen-emulator-load-accepted-20261110.md).
 It does not satisfy the pending physical TECNO resource/quality gates or exercise any ASR decoding.
+
+The physical TECNO load-only run also completed on 2026-11-11 using the original frozen runId.
+Its exact aliases/staging have been restored; do not resubmit it. See [physical acceptance](../../docs/validation/w3-qwen-physical-load-accepted-20261111.md).
+This passes only the physical loading/sampled-resource subgate; full two-pass FILE ASR remains unverified.
