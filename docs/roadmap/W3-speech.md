@@ -8,6 +8,12 @@
 没有降低通过线。当前允许进入Android候选设计；Mac采样RSS约2.83GB不证明手机1.5GiB目标，
 模型再分发通知链和独立审查仍未通过。生产源码/普通App/模型未替换；详见[独立结果](../validation/w3-qwen-independent-observed-20261110.md)。
 
+后续已完成[Mac代码/证据限定复核](../validation/w3-qwen-host-review-accepted-20261110.md)，未发现Critical/Important，
+原native429无结果仍保留；Android和发布不在该复核范围。六份实际运行文件已与供应仓库size/SHA全匹配，
+供应方声明Apache-2.0，最终许可/归属交付物仍未验收，见[供应链核对](../validation/w3-qwen-supply-chain-observed-20261110.md)。
+Android先冻结[load-only合同](../validation/w3-qwen-android-load-protocol-20261110.md)，保持1.5GiB门；
+首多文件helper因upstream empty_model_response零交付而拒收，已拆为core和wrapper任务，未安装或加载手机模型。
+
 最新决定及两端在线记录见[结果报告](../reports/w3-speech-status-20261110.md)和[发布回读收据](../validation/w3-issue-wiki-sync-20261110.json)。主代理负责提出可验证的质量改进及资源预算建议，先固定假设、输入、评分和停止条件。新增 AMI 原三片/+20 dB 六臂 VAD 真机对照：原幅度 false/false/true，放大后 true/false/true；按事前规则拒绝固定增益路线，不继续扫参或进入该路线 ASR。零 Whisper/麦克风/下载，已双读及恢复，[结果](../validation/w3-ami-gain-observed-20261110.md)。
 
 随后独立复用既有单行 FILE no-VAD 控制，三段原幅度 AMI 全部返回非空文本，但 WER21/27；D/C 各8/8词错误，B仍5/11。功能信号满足不代表质量通过，不采用生产全局绕过。唯一实际批次已双读及恢复，[结果](../validation/w3-ami-no-vad-observed-20261110.md)。本轮两条前处理假设已结束；下一阶段先评审模型/场景匹配与资源取舍，不继续扫前处理参数，也不把实验失败变成待用户接受现状的阻塞。
