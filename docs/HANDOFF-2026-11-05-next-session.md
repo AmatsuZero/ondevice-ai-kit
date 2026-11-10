@@ -1,3 +1,26 @@
+## 2026-11-11：W3两阶段core及父验收已提交，外壳同次调用仍在运行
+
+当前本地HEAD b0aa371（f124ab2核心、8b0a969父验收、b0aa371两端同步收据）；未push源码。
+`probes/android-qwen-file/QwenTwoStageCore.kt`是外部hy3原样交付，真实Kotlin42组/264断言通过，
+stage错误/释放后gate及捕获release错误仍继续的原失败均保留。父7测试、原scorer31测试通过；
+独立hy3父源码限定复核295.065s无Critical/Important，原文/父裁定已归档。主代理未代写探针实现。
+固定65PCM及六模型重核，清单8d1cfd7465e70f413b741701250d61c31170b25a6978a256a4df0349efa0910f已纳入源码。
+新别名未安装、新FILE零构造/解码。原真机load-only已消耗不重跑，生产/普通App模型不变。
+
+唯一活动实现：免费hy4free外壳候选 `/private/tmp/odai-hy4free-w3-qwen-file-wrapper-20261111/`，
+会话12762，CBC PID36962/launcher36961；同次调用尚未终态，无文件/错误，不因时长终止/重发/付费回退。
+先续看原raw/result和实际文件。父提示将输入ID过窄写为[A-Za-z0-9-]+，但冻结ID有下划线/点；
+若原交付照此实现，先以真实65资产host检查保留RED，再交独立小修正，允许安全basename且保留原ID/清单SHA；
+不要改已运行prompt或重命名输入。`WrapperChecks.kt/check_wrapper.py`已RED，须先验真实core+wrapper后再构建。
+父工具prepare_build/build_acceptance/device_acceptance/verify_report已提交，仅准备，不能当已构建/设备通过。
+后续：外壳验收→离线构建/lint/实包→限定独立复核→新run w3-qwen-file-20261111-01固定65文件一次；
+1.5GiB/<512MiB/每片120s保护，触线收同run/恢复不重试。执行前重查awake/unlocked；最近只读为true/true。
+
+核心与父验收本次发布marker `w3-qwen-android-file-core-parent-20261111` 已用，勿重复发。
+GH#15评论6782434113，GL#15note42551；双端专题Wiki逐字回读一致，GH Wiki aa763ee3a97cc9f46cec9660b2714c2f4ac6416e。
+收据docs/validation/w3-qwen-android-file-core-parent-sync-20261111.json。旧“无两阶段源码”已过时，
+整包仍open，Android实际质量/完整成本、许可/发布缺口未通过。没有新native child，旧native429不重试。
+
 ## 2026-11-11：W3 TECNO真机load-only通过并恢复
 
 用户确认已解锁；fresh Awake/unlocked、2.82GB available、无alias后，使用原冻结APK与
