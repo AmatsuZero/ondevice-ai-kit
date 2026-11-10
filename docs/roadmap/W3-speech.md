@@ -2,6 +2,12 @@
 
 更新：2026-11-11。状态：**open；用户已明确要求继续改进，R4/R5 不再等待用户选择接受现状**。当前 TECNO 的 R1–R3 系统 ASR 已按用户接受的已知限制完成范围裁定；固定前缀、AMI 六个端/片段及两端持续观测已归档，质量与生产预算未通过。
 
+新增[Android两阶段core验收](../validation/w3-qwen-android-file-core-20261111.md)及[父验收限定复核](../validation/w3-qwen-android-file-parent-review-20261111.md)：
+外部候选已原样集成，真实Kotlin42组/264断言、父7测试及原scorer31测试通过；本地提交f124ab2/8b0a969。
+65公开输入/六模型已重核；清单、原reference和1.5GiB/512MiB/每片120s停止线保持。当前外壳候选仍生成中，
+未构建/安装新FILE APK、零新设备decode；两端#15/Wiki本次增量已发布回读，源码未push，见[收据](../validation/w3-qwen-android-file-core-parent-sync-20261111.json)。
+本项不代表手机质量/完整成本通过；stage错误及释放后前台门回归失败和原修正均保留。
+
 新增[TECNO真机load-only验收](../validation/w3-qwen-physical-load-accepted-20261111.md)：用户解锁后沿用冻结run，
 构造1/成功9.381619386s、释放1/成功0.272898154s；49样本maxRSS1.310589GiB，未触发1.5GiB停止门。
 33父检查/同run双读/六模型复核/普通App恢复通过；零stream/decode/麦克风/AiAi。

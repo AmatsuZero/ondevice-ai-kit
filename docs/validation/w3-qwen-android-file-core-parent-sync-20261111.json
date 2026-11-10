@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "at": "2026-11-10T23:44:25.545409+00:00",
+  "marker": "<!-- w3-qwen-android-file-core-parent-20261111 -->",
+  "issues": [
+    {
+      "provider": "github",
+      "id": 6782434113,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6782434113",
+      "bodySHA256": "61542a5df88a46bb5218d7388a04c5fbc0b47ac46cdfe3b3d952042d5b484b68",
+      "readbackIdenticalExceptKnownTerminalNewline": true
+    },
+    {
+      "provider": "gitlab",
+      "id": 42551,
+      "url": "https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit/-/issues/15#note_42551",
+      "bodySHA256": "86e8d32f6d30e7c6a9d5d117da47f68bb8f852ff4526025bdcb3c8cfb2e26a9d",
+      "readbackIdenticalExceptKnownTerminalNewline": true
+    }
+  ],
+  "githubWikiCommit": "aa763ee3a97cc9f46cec9660b2714c2f4ac6416e",
+  "wikiSHA256": "c2c8bddae3f25358152cccae3a6ae68e3648ed0a840a13516dec29c587f6ffe5",
+  "bothReadbackIdentical": true,
+  "sourceBranchPushed": false,
+  "issuesRemainOpen": true,
+  "localSourceCommits": [
+    "f124ab2",
+    "8b0a969"
+  ],
+  "scope": "core/parent host gates only; wrapper/APK/new device decode pending; W3open"
+}
