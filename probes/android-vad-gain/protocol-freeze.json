@@ -1,0 +1,91 @@
+{
+  "frozenAt": "2026-11-10T14:05:50.634997+08:00",
+  "hypothesis": "A fixed x10 amplitude transform changes Silero VAD speech-window evidence and may resolve the2AMI no-speech outcomes; low amplitude alone is not root-cause proof.",
+  "scope": "isolated VAD-only diagnostic; six arms, no ASR, no microphone, no waveform persistence, no production change",
+  "cases": [
+    {
+      "id": "ami-ES2002a-D-330",
+      "rawPcmSha256": "6f9370f42ec71311823ff5820cb97b88beb9c04db838685c2100a82830dbaf61",
+      "bytes": 112032,
+      "samples": 56016,
+      "rmsDbfs": -44.8612558681976,
+      "peak": 0.0377197265625,
+      "fixedGain": 10.0,
+      "resultPeak": 0.377197265625,
+      "clippedSamples": 0,
+      "referenceSha256": "f0634500174cd70d683e87c898cb613ab0f88fd38fec064cece770188780449f"
+    },
+    {
+      "id": "ami-ES2002a-C-294",
+      "rawPcmSha256": "0d65b45518193214e1be06a2bbffd5cafa03696727a0c5addea7e61c72e4ff0d",
+      "bytes": 114144,
+      "samples": 57072,
+      "rmsDbfs": -47.128132367019965,
+      "peak": 0.020904541015625,
+      "fixedGain": 10.0,
+      "resultPeak": 0.20904541015625,
+      "clippedSamples": 0,
+      "referenceSha256": "a55b55acfd1e35ed46ee25085feba9600868a5d9ac8cb71a58a646b83286a976"
+    },
+    {
+      "id": "ami-ES2002a-B-146",
+      "rawPcmSha256": "3e884a0ffe26fc41bc9c499102471231ac2c11479581ed3a85fad0cbebc6a0f0",
+      "bytes": 183424,
+      "samples": 91712,
+      "rmsDbfs": -50.030575267062154,
+      "peak": 0.021728515625,
+      "fixedGain": 10.0,
+      "resultPeak": 0.21728515625,
+      "clippedSamples": 0,
+      "referenceSha256": "f2720acb32f03d19be31fb2c0e55bec62e045317c9dd6490be54efd847c64d36"
+    }
+  ],
+  "armOrder": [
+    [
+      "ami-ES2002a-D-330",
+      1
+    ],
+    [
+      "ami-ES2002a-D-330",
+      10
+    ],
+    [
+      "ami-ES2002a-C-294",
+      1
+    ],
+    [
+      "ami-ES2002a-C-294",
+      10
+    ],
+    [
+      "ami-ES2002a-B-146",
+      1
+    ],
+    [
+      "ami-ES2002a-B-146",
+      10
+    ]
+  ],
+  "nativePins": {
+    "name": "silero_vad.onnx",
+    "bytes": 643854,
+    "sha256": "9e2449e1087496d8d4caba907f23e0bd3f78d91fa552479bb9c23ac09cbb1fd6"
+  },
+  "runtimeDependency": "com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1",
+  "unchanged": {
+    "vadWindow": 512,
+    "threshold": 0.5,
+    "vadThreads": 1,
+    "provider": "cpu",
+    "utteranceBufferSourceSha256": "668af68a844e02a4f4a454966b435569ba5dbd6214a742b5002ac6913a7226bc"
+  },
+  "predeclaredInterpretation": {
+    "detectionSignal": "Compare per-clip original/gain speech-window count, probability range and detected flag under freshVAD. Need both old failures become detected and original successful B remain detected before considering subsequentASR gain condition.",
+    "stopIfNoBenefit": "If either prior no-speech remains or prior successfulclip regresses, stop this fixed-gain candidate; no sweep of amplitude/threshold/crops.",
+    "notSufficient": "Detection benefit does not prove accuracy, false-positive safety, speech/noise separation or suitability for productAGC. Do not ship or declare W3pass from thisdiagnostic.",
+    "followup": "Only if detection signal passes, freeze a separate ASR quality protocol retaining baseline rawreports and scorer. No automatic replay of old sustained batches."
+  },
+  "failurePolicy": "Expected SpeechNotDetectedException is data. Any other failure, release, persistence or foreground interruption fails batch and retains partial rows; do not auto-repeat.",
+  "deviceGate": "actual TECNO awake+unlocked and no active unrelated instrumentation before installation/run; do not bypass keyguard",
+  "externalSources": "Current upstream sources are background reference only, not proof of pinned AAR semantics; actual numerical test uses pinnedAndroidruntime."
+}
