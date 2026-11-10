@@ -1,0 +1,27 @@
+{
+  "candidateSHA256": "8c8d1aa49ad7347cadc22dfc9e81ef4652363823ee80f2cb8a99dac79a694904",
+  "realVadCalls": 0,
+  "asrCalls": 0,
+  "results": [
+    {
+      "name": "nominal-padding-config-and-durable-progress",
+      "passed": true
+    },
+    {
+      "name": "last-input-invalid-blocks-all-native",
+      "passed": true
+    },
+    {
+      "name": "original-constructor-error-persisted",
+      "passed": true
+    },
+    {
+      "name": "input-float-mutation-rejected",
+      "passed": true
+    },
+    {
+      "name": "existing-report-preserved-no-native",
+      "passed": true
+    }
+  ]
+}
