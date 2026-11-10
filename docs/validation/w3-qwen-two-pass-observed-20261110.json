@@ -1,0 +1,836 @@
+{
+  "assessment": {
+    "developmentScreenPassed": true,
+    "gates": {
+      "zhCER": true,
+      "enNearWER": true,
+      "enFarWER": true,
+      "eachFarWER": true,
+      "all9SpeechAnd4Negatives": true
+    },
+    "actualDecodeCalls": 22,
+    "rawReportSHA256": "b4a60c09952c1a4142e832290e0fc9a79ce4879371e3f9352b4c9ece1776aa8f",
+    "independentConfirmation": false,
+    "androidAcceptance": false,
+    "productionPromoted": false
+  },
+  "scores": {
+    "mandarin": {
+      "schemaVersion": 1,
+      "kind": "speech-error-metrics",
+      "normalization": {
+        "unicodeNormalization": "NFC, optional casefold, then NFC",
+        "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+        "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+        "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+        "preserved": "Punctuation, accents, and digits are not stripped",
+        "casefold": true,
+        "distance": "Minimum unit Levenshtein edit distance",
+        "tracebackTieOrder": [
+          "exact match",
+          "substitution (diagonal)",
+          "deletion",
+          "insertion"
+        ]
+      },
+      "rows": [
+        {
+          "id": "fleurs-cmn-test-1906",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 28,
+            "hypothesisUnits": 26,
+            "substitutions": 1,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 3,
+            "rate": 0.10714285714285714,
+            "defined": true
+          },
+          "referenceSHA256": "6f20dd84a6c686c60507428e037063762c5a15bb7e9e9777c1047049b62a9152",
+          "hypothesisSHA256": "e2e078855e68e05dd47fedfdaa20a34e90211900ef758bc1d82e3f1e59f6c467"
+        },
+        {
+          "id": "fleurs-cmn-test-2006",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 24,
+            "hypothesisUnits": 24,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "2d42d361528b866e81c186dbd81aa97a7358e8cb3a6e948baa362e5e49801060",
+          "hypothesisSHA256": "2d42d361528b866e81c186dbd81aa97a7358e8cb3a6e948baa362e5e49801060"
+        },
+        {
+          "id": "fleurs-cmn-test-1883",
+          "word": {
+            "referenceUnits": 11,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 10,
+            "insertions": 0,
+            "errors": 11,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 40,
+            "hypothesisUnits": 40,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "acddf7b33dba632b9346b3d9c273c766288203af0ff1bca9f542b0b4c1636aad",
+          "hypothesisSHA256": "3efaac0825114b9b88605e4e453e90f58428b288bc659c7503941292cccd4b20"
+        }
+      ],
+      "aggregate": {
+        "word": {
+          "referenceUnits": 13,
+          "hypothesisUnits": 3,
+          "substitutions": 2,
+          "deletions": 10,
+          "insertions": 0,
+          "errors": 12,
+          "rate": 0.9230769230769231,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 92,
+          "hypothesisUnits": 90,
+          "substitutions": 1,
+          "deletions": 2,
+          "insertions": 0,
+          "errors": 3,
+          "rate": 0.03260869565217391,
+          "defined": true
+        }
+      },
+      "qualityVerdict": "unverified",
+      "productionReady": false
+    },
+    "english-near": {
+      "schemaVersion": 1,
+      "kind": "speech-error-metrics",
+      "normalization": {
+        "unicodeNormalization": "NFC, optional casefold, then NFC",
+        "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+        "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+        "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+        "preserved": "Punctuation, accents, and digits are not stripped",
+        "casefold": true,
+        "distance": "Minimum unit Levenshtein edit distance",
+        "tracebackTieOrder": [
+          "exact match",
+          "substitution (diagonal)",
+          "deletion",
+          "insertion"
+        ]
+      },
+      "rows": [
+        {
+          "id": "1272-128104-0000",
+          "word": {
+            "referenceUnits": 17,
+            "hypothesisUnits": 17,
+            "substitutions": 3,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 3,
+            "rate": 0.17647058823529413,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 73,
+            "hypothesisUnits": 76,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 3,
+            "errors": 3,
+            "rate": 0.0410958904109589,
+            "defined": true
+          },
+          "referenceSHA256": "9ed9a726f8b973252de284bf878668198435473d4af80795424178eff5e7fb48",
+          "hypothesisSHA256": "1b78ac320743c466179b3e97ffaec37b8591ab287bbc3df95d9a7d4949053b4f"
+        },
+        {
+          "id": "1272-128104-0001",
+          "word": {
+            "referenceUnits": 10,
+            "hypothesisUnits": 10,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.1,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 54,
+            "hypothesisUnits": 55,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 1,
+            "rate": 0.018518518518518517,
+            "defined": true
+          },
+          "referenceSHA256": "40402bb3c5333804fe25892134f56d0cb726e428464c2fde185e2989544b58c6",
+          "hypothesisSHA256": "e3b9b48c4e61fd27d06a32a87249276b9f3f8ae6dbbad4e0649519126e22926f"
+        },
+        {
+          "id": "1272-128104-0002",
+          "word": {
+            "referenceUnits": 32,
+            "hypothesisUnits": 32,
+            "substitutions": 3,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 3,
+            "rate": 0.09375,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 141,
+            "hypothesisUnits": 144,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 3,
+            "errors": 3,
+            "rate": 0.02127659574468085,
+            "defined": true
+          },
+          "referenceSHA256": "0d7fe75e82db9bc05001924fb526cb0ee00147c979b93d61c88ebc70a74b2eb5",
+          "hypothesisSHA256": "437657bb343827743e7f8553c4211677d4b8869f55365e8f39c362428ec9ebbb"
+        }
+      ],
+      "aggregate": {
+        "word": {
+          "referenceUnits": 59,
+          "hypothesisUnits": 59,
+          "substitutions": 7,
+          "deletions": 0,
+          "insertions": 0,
+          "errors": 7,
+          "rate": 0.11864406779661017,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 268,
+          "hypothesisUnits": 275,
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 7,
+          "errors": 7,
+          "rate": 0.026119402985074626,
+          "defined": true
+        }
+      },
+      "qualityVerdict": "unverified",
+      "productionReady": false
+    },
+    "english-far": {
+      "schemaVersion": 1,
+      "kind": "speech-error-metrics",
+      "normalization": {
+        "unicodeNormalization": "NFC, optional casefold, then NFC",
+        "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+        "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+        "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+        "preserved": "Punctuation, accents, and digits are not stripped",
+        "casefold": true,
+        "distance": "Minimum unit Levenshtein edit distance",
+        "tracebackTieOrder": [
+          "exact match",
+          "substitution (diagonal)",
+          "deletion",
+          "insertion"
+        ]
+      },
+      "rows": [
+        {
+          "id": "ami-ES2002a-D-330",
+          "word": {
+            "referenceUnits": 8,
+            "hypothesisUnits": 7,
+            "substitutions": 4,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 5,
+            "rate": 0.625,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 32,
+            "hypothesisUnits": 33,
+            "substitutions": 4,
+            "deletions": 4,
+            "insertions": 5,
+            "errors": 13,
+            "rate": 0.40625,
+            "defined": true
+          },
+          "referenceSHA256": "f0634500174cd70d683e87c898cb613ab0f88fd38fec064cece770188780449f",
+          "hypothesisSHA256": "c3e8587b896b70bf642be396f903a485c7933f4c94a0553223d184237c42f414"
+        },
+        {
+          "id": "ami-ES2002a-C-294",
+          "word": {
+            "referenceUnits": 8,
+            "hypothesisUnits": 6,
+            "substitutions": 1,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 3,
+            "rate": 0.375,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 37,
+            "hypothesisUnits": 25,
+            "substitutions": 2,
+            "deletions": 12,
+            "insertions": 0,
+            "errors": 14,
+            "rate": 0.3783783783783784,
+            "defined": true
+          },
+          "referenceSHA256": "a55b55acfd1e35ed46ee25085feba9600868a5d9ac8cb71a58a646b83286a976",
+          "hypothesisSHA256": "8a53d2cd13317267292870e5c6625da73471daa9bfbff07e573c006cec782773"
+        },
+        {
+          "id": "ami-ES2002a-B-146",
+          "word": {
+            "referenceUnits": 11,
+            "hypothesisUnits": 8,
+            "substitutions": 2,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 5,
+            "rate": 0.45454545454545453,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 45,
+            "hypothesisUnits": 38,
+            "substitutions": 2,
+            "deletions": 7,
+            "insertions": 0,
+            "errors": 9,
+            "rate": 0.2,
+            "defined": true
+          },
+          "referenceSHA256": "f2720acb32f03d19be31fb2c0e55bec62e045317c9dd6490be54efd847c64d36",
+          "hypothesisSHA256": "748cc0ac76be51d5c596dba59a9ab5ec3a0aab8fc27b20ead9d82d5c2da9c8e6"
+        }
+      ],
+      "aggregate": {
+        "word": {
+          "referenceUnits": 27,
+          "hypothesisUnits": 21,
+          "substitutions": 7,
+          "deletions": 6,
+          "insertions": 0,
+          "errors": 13,
+          "rate": 0.48148148148148145,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 114,
+          "hypothesisUnits": 96,
+          "substitutions": 8,
+          "deletions": 23,
+          "insertions": 5,
+          "errors": 36,
+          "rate": 0.3157894736842105,
+          "defined": true
+        }
+      },
+      "qualityVerdict": "unverified",
+      "productionReady": false
+    }
+  },
+  "process": {
+    "exitCode": 0,
+    "elapsedSeconds": 16.265749332997075,
+    "pid": 31826,
+    "guard": null,
+    "rssSampleCount": 32,
+    "sampledMaxRssBytes": 2844786688,
+    "samplingBoundary": "Mac runner process ps rss at approximately 0.5s; not true peak, Android budget, GPU or energy",
+    "runnerUnchanged": true,
+    "protocolUnchanged": true,
+    "reportSHA256": "b4a60c09952c1a4142e832290e0fc9a79ce4879371e3f9352b4c9ece1776aa8f",
+    "terminalReadIdentical": true,
+    "reportStatus": "completed",
+    "recognizedRows": 13
+  },
+  "report": {
+    "status": "completed",
+    "runId": "w3-qwen-two-pass-dev-20261110-01",
+    "protocolSHA256": "a3299a0cf427dd8434da305893860f981ab1d0290c584ec42d60107798da24fb",
+    "runnerSHA256": "809fe34fbed820e2e77a78249adba5866a6011826054932ecb72c84a6dad1f07",
+    "runtimeVersion": "2.0.1",
+    "config": {
+      "num_threads": 2,
+      "sample_rate": 16000,
+      "feature_dim": 128,
+      "decoding_method": "greedy_search",
+      "provider": "cpu",
+      "max_total_len": 512,
+      "max_new_tokens": 128,
+      "temperature": 1e-06,
+      "top_p": 0.8,
+      "seed": 42,
+      "hotwords": "",
+      "languageMode": "admit-auto-then-forced"
+    },
+    "rows": [
+      {
+        "id": "fleurs-cmn-test-1906",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 166080,
+        "pcmSha256": "8c8996345c5ffbf90f802ed67d9d3a8257ef12a0768453492ce351e03754912a",
+        "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+        "status": "recognized",
+        "text": "这并不是告别，这是一个篇章的结束，也是新篇章的开始。",
+        "elapsed": 1.7784180830021796,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "这并不是告别，这是一个篇章的结束，也是新篇章的开始。",
+          "elapsed": 0.8861947500008682,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn-test-2006",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 132480,
+        "pcmSha256": "333699e4542733689279698f52497c652dd23ed063f81a2ab861f6ab533f02b9",
+        "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+        "status": "recognized",
+        "text": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+        "elapsed": 1.5532514170008653,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+          "elapsed": 0.7985130420020141,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn-test-1883",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 221760,
+        "pcmSha256": "b5176ee748e64389a64d0eb56d7114020290e676a90fa48cf49e2db5b53ae33c",
+        "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+        "status": "recognized",
+        "text": "桥下垂直净空15米。该项目于2011年8月完工，但直到2017年3月才开始通车。",
+        "elapsed": 2.3884980830007407,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "桥下垂直净空十五米。该项目于二零一一年八月完工，但直到二零一七年三月才开始通车。",
+          "elapsed": 1.2001112080033636,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "1272-128104-0000",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 93680,
+        "pcmSha256": "156e1e1821700d4c4ad31a63e6d901a5088d5ee155fafd02a9d0d2de37f771e6",
+        "reference": "MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL",
+        "status": "recognized",
+        "text": "Mister. Quilter is the apostle of the middle classes, and we are glad to welcome his gospel.",
+        "elapsed": 1.253842166999675,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Mister. Quilter is the apostle of the middle classes, and we are glad to welcome his gospel.",
+          "elapsed": 0.63205658300285,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "1272-128104-0001",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 77040,
+        "pcmSha256": "bca0b38f0be340f804ab1d522f4d2a1b339f3cb237913347d1af0847ae48160e",
+        "reference": "NOR IS MISTER QUILTER'S MANNER LESS INTERESTING THAN HIS MATTER",
+        "status": "recognized",
+        "text": "Nor is Mister Quilter's manner less interesting than his matter.",
+        "elapsed": 0.952065917001164,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Nor is Mister Quilter's manner less interesting than his matter.",
+          "elapsed": 0.5049614169984125,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "1272-128104-0002",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 199760,
+        "pcmSha256": "f683cb79705da5840f7e920921f2f5b61d396b3bb8b24db57703745785f5ec55",
+        "reference": "HE TELLS US THAT AT THIS FESTIVE SEASON OF THE YEAR WITH CHRISTMAS AND ROAST BEEF LOOMING BEFORE US SIMILES DRAWN FROM EATING AND ITS RESULTS OCCUR MOST READILY TO THE MIND",
+        "status": "recognized",
+        "text": "He tells us that at this festive season of the year, with Christmas and roast beef looming before us, similes drawn from eating and its results occur most readily to the mind.",
+        "elapsed": 2.3987466670005233,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "He tells us that at this festive season of the year, with Christmas and roast beef looming before us, similes drawn from eating and its results occur most readily to the mind.",
+          "elapsed": 1.2122814999966067,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2002a-D-330",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 56016,
+        "pcmSha256": "6f9370f42ec71311823ff5820cb97b88beb9c04db838685c2100a82830dbaf61",
+        "reference": "And I'm Andrew and I'm uh our marketing",
+        "status": "recognized",
+        "text": "Hello, I'm Andrew, and I'm a marketing.",
+        "elapsed": 0.7523317089980992,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "I'm Andrew, and I'm a marketing.",
+          "elapsed": 0.3799703330005286,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2002a-C-294",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 57072,
+        "pcmSha256": "0d65b45518193214e1be06a2bbffd5cafa03696727a0c5addea7e61c72e4ff0d",
+        "reference": "Well, my favourite animal would be a monkey.",
+        "status": "recognized",
+        "text": "That animal would be a monkey.",
+        "elapsed": 0.6923961669999699,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "那把木牌，monkey。",
+          "elapsed": 0.3440253330009,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2002a-B-146",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 91712,
+        "pcmSha256": "3e884a0ffe26fc41bc9c499102471231ac2c11479581ed3a85fad0cbebc6a0f0",
+        "reference": "Okay, uh we now need to discuss the project finance. Um",
+        "status": "recognized",
+        "text": "Okay, when I need to discuss project finance.",
+        "elapsed": 0.9994885000014619,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Okay, I need to discuss the project finance.",
+          "elapsed": 0.49366233299952,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "silence-5s-zh-CN",
+        "cohort": "silence",
+        "locale": "zh-CN",
+        "samples": 80000,
+        "pcmSha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.3651340420001361,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.36473020799894584,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "silence-5s-en-US",
+        "cohort": "silence",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.3493028749981022,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.348696832999849,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "synthetic-noise-40dBFS",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "2c7053af133d5679bbf6317a1845acc9ee3b83ef2baa7b8e6b89181490f42107",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.36212275000070804,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.3615835419986979,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "synthetic-noise-20dBFS",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "21a64a5c827d64ab49d0e856fcea1b5af269ca4b950ecdaed894df2dbfc24c99",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.38800220900157,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.3876653340012126,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      }
+    ],
+    "modelFiles": {
+      "README.md": {
+        "bytes": 328,
+        "sha256": "bbc6dbeb9dce5b4ed0e839057137e9cba4bf05c5797277d36a80e22594414e14",
+        "verified": true
+      },
+      "conv_frontend.onnx": {
+        "bytes": 44148281,
+        "sha256": "d22dc4423e0940e49884e903d2ea2f7e5567c14fc1aed97e4e26d6b8f208ef9e",
+        "verified": true
+      },
+      "decoder.int8.onnx": {
+        "bytes": 755914231,
+        "sha256": "4f6885be5959ae26af3089d38ee7972c5fafbeeb1cf8d5e76eab6d8b61ca5771",
+        "verified": true
+      },
+      "encoder.int8.onnx": {
+        "bytes": 182491662,
+        "sha256": "60748d3e6744a57c9c91e1b17424a6c2990567e8adceb0783940c03ed98fa9d9",
+        "verified": true
+      },
+      "test_wavs/README.md": {
+        "bytes": 76,
+        "sha256": "3c088a32079cfc8ed0239735295fbf7ffe657bf5ac21696f294f6a19e8e30fad",
+        "verified": true
+      },
+      "test_wavs/ar1.wav": {
+        "bytes": 168044,
+        "sha256": "700b3c274f2fedffbb6016f03c574adaad7aa0291acc1a1ba72f07112051073f",
+        "verified": true
+      },
+      "test_wavs/cantonese.wav": {
+        "bytes": 526444,
+        "sha256": "ec832e035c13c670e0cf68dee0ca5dfae38bf2c583aab31e587441cb3eba3f3f",
+        "verified": true
+      },
+      "test_wavs/codeswitch.wav": {
+        "bytes": 549550,
+        "sha256": "2def7fa41004d0a7d148d4afbf4c467c9d112d8b373996123e9a4c43d94957c7",
+        "verified": true
+      },
+      "test_wavs/de.wav": {
+        "bytes": 215084,
+        "sha256": "80bb10c44085a7ce01a17abaf6a2095ed37e1695fca41cc0ea9733f1f24a749c",
+        "verified": true
+      },
+      "test_wavs/es1.wav": {
+        "bytes": 164844,
+        "sha256": "4543f94738445a38306fb80bb0329ef5ca6d81ab1b6c3f15af1de1c3382f4b31",
+        "verified": true
+      },
+      "test_wavs/f1_noise.wav": {
+        "bytes": 1677606,
+        "sha256": "7ae35f5d8f038e518f3abdeda5f78d71cb2f67c9ca29cb9a49a0b4d0702909bd",
+        "verified": true
+      },
+      "test_wavs/fast1.wav": {
+        "bytes": 1003794,
+        "sha256": "b43bbd0bd982c3cc88081f64389bf29fe9e9a01287d44f0b15887bc49c2b352a",
+        "verified": true
+      },
+      "test_wavs/fr1.wav": {
+        "bytes": 191916,
+        "sha256": "c6421b34feccbe7fdfaa8b641b8ecb7bcd7b9f2c237c7b82712c860be524db4e",
+        "verified": true
+      },
+      "test_wavs/ja1.wav": {
+        "bytes": 448100,
+        "sha256": "d926ed0159a2d750d1ae7835e60a5cb5f8737629f7bb3de6cd111a3614d5dc67",
+        "verified": true
+      },
+      "test_wavs/noise1-en.wav": {
+        "bytes": 2831516,
+        "sha256": "3664ef02fa664da93d94a1afc271bda31c0f8d07a9f3c74ac6cd1e5aabe8572c",
+        "verified": true
+      },
+      "test_wavs/noise2.wav": {
+        "bytes": 741186,
+        "sha256": "33f85268f7fbad6b3152b9ab051edab1a85082fde66bccff61d7f5ef7b437e58",
+        "verified": true
+      },
+      "test_wavs/qiqiu1.wav": {
+        "bytes": 1631150,
+        "sha256": "1b69a0fce35936979824c1751a11c285559a635aeb91160d1da3b00118321495",
+        "verified": true
+      },
+      "test_wavs/raokouling.wav": {
+        "bytes": 1831074,
+        "sha256": "3cc59ec494f71135ff5761717e20597f0559b43f793dd72ae4924b86c5e038d8",
+        "verified": true
+      },
+      "test_wavs/rap1.wav": {
+        "bytes": 935868,
+        "sha256": "ac6186d732b59c664776f84238f586d3e6c97adbc8b9f66e939ddcab5773cf3c",
+        "verified": true
+      },
+      "test_wavs/ru1.wav": {
+        "bytes": 152364,
+        "sha256": "e48b22f32d4d1c38f0a94a58acfc43bb8f5b7fc3b0ac01ea49372040ca831acf",
+        "verified": true
+      },
+      "test_wavs/transcript.txt": {
+        "bytes": 5386,
+        "sha256": "9cab82a507e1e5a7743336f2e40fabdaa1eb6181818d7a3768925abc03effd24",
+        "verified": true
+      },
+      "tokenizer/merges.txt": {
+        "bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "verified": true
+      },
+      "tokenizer/tokenizer_config.json": {
+        "bytes": 12487,
+        "sha256": "4942d005604266809309cabc9f4e9cb89ce855d59b14681fdc0e1cc62ea26c4c",
+        "verified": true
+      },
+      "tokenizer/vocab.json": {
+        "bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+        "verified": true
+      }
+    },
+    "cleanup": {
+      "python_refs_dropped": true,
+      "note": "Python references dropped/GC requested; native release not proven by Python API"
+    },
+    "error": null,
+    "resource": {
+      "ru_maxrss": 2844803072,
+      "platform": "darwin"
+    },
+    "pid": 31826,
+    "model_load_elapsed": 1.2421948750015872
+  }
+}

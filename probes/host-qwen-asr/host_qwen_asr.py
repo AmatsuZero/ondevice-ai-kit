@@ -85,8 +85,8 @@ def validate_protocol(proto):
     if proto.get('runtimeVersion') != '2.0.1':
         raise ValueError('runtimeVersion must be 2.0.1')
     mode = proto.get('languageMode', 'forced')
-    if mode not in ('forced', 'auto'):
-        raise ValueError('languageMode must be forced or auto')
+    if mode not in ('forced', 'auto', 'admit-auto-then-forced'):
+        raise ValueError('languageMode must be forced, auto or admit-auto-then-forced')
     run_id = proto.get('runId')
     if not isinstance(run_id, str) or run_id == '':
         raise ValueError('runId must be nonempty string')
@@ -229,7 +229,8 @@ def main():
                 'samples': case['samples'], 'pcmSha256': case['sha256'],
                 'reference': case['reference'], 'status': 'not-attempted', 'text': None,
                 'elapsed': None, 'error_type': None, 'error_message': None,
-                'languageOption': None})
+                'languageOption': None, 'admission': None,
+                'nativeDecodeCalls': 0, 'admissionRejected': False})
         report['rows'] = rows
         write_report(fd, report)
 
@@ -258,30 +259,81 @@ def main():
             write_report(fd, report)
             stream = None
             samples = None
+            t1 = time.monotonic()
             try:
-                if mode == 'auto':
-                    lang = ''
+                if mode == 'admit-auto-then-forced':
+                    stream = recognizer.create_stream()
+                    admit_text = ''
+                    t_admit = time.monotonic()
+                    try:
+                        stream.set_option('language', '')
+                        samples = np.frombuffer(pcm, dtype='<i2').astype(np.float32) / 32768.0
+                        stream.accept_waveform(16000, samples)
+                        row['nativeDecodeCalls'] += 1
+                        write_report(fd, report)
+                        recognizer.decode_stream(stream)
+                        admit_text = stream.result.text
+                        if stream is not None:
+                            stream = None
+                        row['admission'] = {'rawText': admit_text,
+                                            'elapsed': time.monotonic() - t_admit,
+                                            'languageOption': '', 'status': 'recognized'}
+                        row['languageOption'] = ''
+                        write_report(fd, report)
+                        if admit_text == '':
+                            row['text'] = ''
+                            row['admissionRejected'] = True
+                            row['languageOption'] = ''
+                            row['status'] = 'recognized'
+                            row['elapsed'] = time.monotonic() - t1
+                        else:
+                            lang = 'Chinese' if case['locale'] == 'zh-CN' else 'English'
+                            stream = recognizer.create_stream()
+                            stream.set_option('language', lang)
+                            stream.accept_waveform(16000, samples)
+                            row['nativeDecodeCalls'] += 1
+                            write_report(fd, report)
+                            recognizer.decode_stream(stream)
+                            final_text = stream.result.text
+                            if stream is not None:
+                                stream = None
+                            row['text'] = final_text
+                            row['languageOption'] = lang
+                            row['status'] = 'recognized'
+                            row['elapsed'] = time.monotonic() - t1
+                    finally:
+                        if stream is not None:
+                            stream = None
+                        if samples is not None:
+                            try:
+                                samples.fill(0)
+                            except Exception:
+                                pass
                 else:
-                    lang = 'Chinese' if case['locale'] == 'zh-CN' else 'English'
-                stream = recognizer.create_stream()
-                try:
-                    stream.set_option('language', lang)
-                    row['languageOption'] = lang
-                    samples = np.frombuffer(pcm, dtype='<i2').astype(np.float32) / 32768.0
-                    t1 = time.monotonic()
-                    stream.accept_waveform(16000, samples)
-                    recognizer.decode_stream(stream)
-                    row['text'] = stream.result.text
-                    row['elapsed'] = time.monotonic() - t1
-                    row['status'] = 'recognized'
-                finally:
-                    if stream is not None:
-                        stream = None
-                    if samples is not None:
-                        try:
-                            samples.fill(0)
-                        except Exception:
-                            pass
+                    if mode == 'auto':
+                        lang = ''
+                    else:
+                        lang = 'Chinese' if case['locale'] == 'zh-CN' else 'English'
+                    stream = recognizer.create_stream()
+                    try:
+                        stream.set_option('language', lang)
+                        row['languageOption'] = lang
+                        samples = np.frombuffer(pcm, dtype='<i2').astype(np.float32) / 32768.0
+                        stream.accept_waveform(16000, samples)
+                        row['nativeDecodeCalls'] += 1
+                        write_report(fd, report)
+                        recognizer.decode_stream(stream)
+                        row['text'] = stream.result.text
+                        row['status'] = 'recognized'
+                        row['elapsed'] = time.monotonic() - t1
+                    finally:
+                        if stream is not None:
+                            stream = None
+                        if samples is not None:
+                            try:
+                                samples.fill(0)
+                            except Exception:
+                                pass
             except Exception as e:
                 row['status'] = 'error'
                 row['error_type'] = type(e).__name__

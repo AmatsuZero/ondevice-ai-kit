@@ -46,3 +46,16 @@ rtk proxy <isolated-python> probes/host-qwen-asr/check_admission.py probes/host-
 The real fixed diagnostic admitted 8/9 speech cases and rejected 4/4 nonspeech
 cases, so this admission candidate was rejected. See
 `docs/validation/w3-qwen-admission-observed-20261110.md` for the boundary and hashes.
+
+`languageMode` defaults to `forced`; `auto` explicitly sets an empty language
+option. The isolated `admit-auto-then-forced` mode runs a fresh automatic stream
+first, skips the second decode only for exactly empty raw text, and otherwise
+runs a fresh stream with the request language on the same whole waveform.
+`check_language.py` and `check_two_pass.py` use fake runtimes to check the actual
+options, first-stage report visibility, waveform reuse, dispatch counts and
+original exceptions. This is an evaluation probe, not an SDK backend.
+
+The two-stage development screen passed its frozen gates (9 speech and 4
+nonspeech inputs, 22 decode calls). Independent quality confirmation, model
+redistribution notices and Android performance/quality acceptance remain open.
+See `docs/validation/w3-qwen-two-pass-observed-20261110.md`.
