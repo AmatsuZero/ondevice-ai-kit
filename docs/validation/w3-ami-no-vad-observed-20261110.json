@@ -1,0 +1,381 @@
+{
+  "protocol": {
+    "frozenAt": "2026-11-10T14:45:42.681952+08:00",
+    "hypothesis": "Pinned Whisper tiny can or cannot transcribe the2raw AMI files rejected by productionVAD; distinguish detection gate from downstream recognition.",
+    "source": "same three AMI publicclips/references/rawPCM as existingbaseline",
+    "clips": [
+      {
+        "id": "ami-ES2002a-D-330",
+        "reference": "And I'm Andrew and I'm uh our marketing",
+        "referenceSha256": "f0634500174cd70d683e87c898cb613ab0f88fd38fec064cece770188780449f",
+        "speaker": "D",
+        "segmentId": "ES2002a.sync.330",
+        "segmentStart": "81.575",
+        "segmentEnd": "84.576",
+        "cropStart": "81.325",
+        "cropEnd": "84.826",
+        "sourceStartFrame": 1301200,
+        "sourceEndFrame": 1357216,
+        "samples": 56016,
+        "wavPath": "audio/ami-ES2002a-D-330.wav",
+        "pcmPath": "audio/ami-ES2002a-D-330.pcm",
+        "rawPcmSha256": "6f9370f42ec71311823ff5820cb97b88beb9c04db838685c2100a82830dbaf61",
+        "rawPcmBytes": 112032,
+        "slices": [
+          {
+            "start": 0,
+            "end": 56016
+          }
+        ],
+        "pcmWav": {
+          "bytes": 112076,
+          "sha256": "53e6a0302430b42d90e34a05588176acbced689728a8729813de617d2e673ad7",
+          "sampleRate": 16000,
+          "channels": 1,
+          "sampleWidth": 2,
+          "frames": 56016,
+          "durationSeconds": 3.501
+        },
+        "ffmpegDecodedPcmMatches": true
+      },
+      {
+        "id": "ami-ES2002a-C-294",
+        "reference": "Well, my favourite animal would be a monkey.",
+        "referenceSha256": "a55b55acfd1e35ed46ee25085feba9600868a5d9ac8cb71a58a646b83286a976",
+        "speaker": "C",
+        "segmentId": "ES2002a.sync.294",
+        "segmentStart": "254.613",
+        "segmentEnd": "257.68",
+        "cropStart": "254.363",
+        "cropEnd": "257.93",
+        "sourceStartFrame": 4069808,
+        "sourceEndFrame": 4126880,
+        "samples": 57072,
+        "wavPath": "audio/ami-ES2002a-C-294.wav",
+        "pcmPath": "audio/ami-ES2002a-C-294.pcm",
+        "rawPcmSha256": "0d65b45518193214e1be06a2bbffd5cafa03696727a0c5addea7e61c72e4ff0d",
+        "rawPcmBytes": 114144,
+        "slices": [
+          {
+            "start": 0,
+            "end": 57072
+          }
+        ],
+        "pcmWav": {
+          "bytes": 114188,
+          "sha256": "482d12de60fa81097686f4e753a37a0f8be7e57e823af3a870598d1bcf9a2910",
+          "sampleRate": 16000,
+          "channels": 1,
+          "sampleWidth": 2,
+          "frames": 57072,
+          "durationSeconds": 3.567
+        },
+        "ffmpegDecodedPcmMatches": true
+      },
+      {
+        "id": "ami-ES2002a-B-146",
+        "reference": "Okay, uh we now need to discuss the project finance. Um",
+        "referenceSha256": "f2720acb32f03d19be31fb2c0e55bec62e045317c9dd6490be54efd847c64d36",
+        "speaker": "B",
+        "segmentId": "ES2002a.sync.146",
+        "segmentStart": "465.488",
+        "segmentEnd": "470.72",
+        "cropStart": "465.238",
+        "cropEnd": "470.97",
+        "sourceStartFrame": 7443808,
+        "sourceEndFrame": 7535520,
+        "samples": 91712,
+        "wavPath": "audio/ami-ES2002a-B-146.wav",
+        "pcmPath": "audio/ami-ES2002a-B-146.pcm",
+        "rawPcmSha256": "3e884a0ffe26fc41bc9c499102471231ac2c11479581ed3a85fad0cbebc6a0f0",
+        "rawPcmBytes": 183424,
+        "slices": [
+          {
+            "start": 0,
+            "end": 91712
+          }
+        ],
+        "pcmWav": {
+          "bytes": 183468,
+          "sha256": "e0b7424f28d8d2dff706f8d2e7235ce32171f7eeff444e0f8281a1d8aa102d0a",
+          "sampleRate": 16000,
+          "channels": 1,
+          "sampleWidth": 2,
+          "frames": 91712,
+          "durationSeconds": 5.732
+        },
+        "ffmpegDecodedPcmMatches": true
+      }
+    ],
+    "onlyBehaviorChange": [
+      {
+        "path": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaAsrBackend.kt",
+        "old": "session.transcribe(locale) { model.verify(); WhisperSpeechGate.prepare(model, samples) }",
+        "new": "session.transcribe(locale) { model.verify(); samples.copyOf() }"
+      }
+    ],
+    "unchanged": [
+      "rawPCM/amplitude",
+      "crop",
+      "locale en-US",
+      "Whisper tiny and Silero model files",
+      "runtime2.0.1",
+      "session/decoder ownership",
+      "scorer normalization"
+    ],
+    "order": [
+      "ami-ES2002a-D-330",
+      "ami-ES2002a-C-294",
+      "ami-ES2002a-B-146"
+    ],
+    "requests": 3,
+    "execution": "one batch, original first-error-stop semantics; no repeats if runtimeerror; preserve partial rows",
+    "evaluation": "Report recognized/error separately and existingCER/WER per recognized row. A promising diagnostic requires3recognized and baseline-success B notworse; do not define productpass from these3clips. If rejected do not sweep models/crops/gain/VADthreshold.",
+    "priorChineseControl": "no-VAD worsened Mandarin44/92to53/92; retain and do not ship global VADbypass",
+    "microphoneStarts": 0,
+    "resourceDownloads": 0,
+    "qualityVerdict": "unverified",
+    "sourcePlanSha256": "324ec7f4592a458fd01e7a45a10a967dffc7ee23004c978ee2dc81e1ff0355bc"
+  },
+  "rawReportSha256": "cfb1a95a3c9d635e2c3e085556e375860eeb1f6216e55d8b96b1059ab0a86bf3",
+  "rows": [
+    {
+      "id": "ami-ES2002a-D-330",
+      "reference": "And I'm Andrew and I'm uh our marketing",
+      "hypothesis": "I'm going to do it and I'm working.",
+      "inputSha256": "6f9370f42ec71311823ff5820cb97b88beb9c04db838685c2100a82830dbaf61",
+      "inputBytes": 112032,
+      "sampleRate": 16000,
+      "samples": 56016,
+      "startedElapsedNs": 2157598460873448,
+      "endedElapsedNs": 2157600306611679,
+      "durationNs": 1845738231,
+      "backendId": "sherpa.onnx.whisper",
+      "callerInputUnchanged": true,
+      "segments": [
+        {
+          "index": 0,
+          "offsetSamples": 0,
+          "samples": 56016,
+          "startedElapsedNs": 2157598460873448,
+          "endedElapsedNs": 2157600306611679,
+          "durationNs": 1845738231,
+          "backendId": "sherpa.onnx.whisper",
+          "hypothesis": "I'm going to do it and I'm working.",
+          "callerInputUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "ami-ES2002a-C-294",
+      "reference": "Well, my favourite animal would be a monkey.",
+      "hypothesis": "(multi-e-e-e-e-e-e-e-e-",
+      "inputSha256": "0d65b45518193214e1be06a2bbffd5cafa03696727a0c5addea7e61c72e4ff0d",
+      "inputBytes": 114144,
+      "sampleRate": 16000,
+      "samples": 57072,
+      "startedElapsedNs": 2157600337688910,
+      "endedElapsedNs": 2157602606944910,
+      "durationNs": 2269256000,
+      "backendId": "sherpa.onnx.whisper",
+      "callerInputUnchanged": true,
+      "segments": [
+        {
+          "index": 0,
+          "offsetSamples": 0,
+          "samples": 57072,
+          "startedElapsedNs": 2157600337688910,
+          "endedElapsedNs": 2157602606944910,
+          "durationNs": 2269256000,
+          "backendId": "sherpa.onnx.whisper",
+          "hypothesis": "(multi-e-e-e-e-e-e-e-e-",
+          "callerInputUnchanged": true
+        }
+      ]
+    },
+    {
+      "id": "ami-ES2002a-B-146",
+      "reference": "Okay, uh we now need to discuss the project finance. Um",
+      "hypothesis": "Okay, I will not need to discuss the project finals.",
+      "inputSha256": "3e884a0ffe26fc41bc9c499102471231ac2c11479581ed3a85fad0cbebc6a0f0",
+      "inputBytes": 183424,
+      "sampleRate": 16000,
+      "samples": 91712,
+      "startedElapsedNs": 2157602638980910,
+      "endedElapsedNs": 2157604586389448,
+      "durationNs": 1947408538,
+      "backendId": "sherpa.onnx.whisper",
+      "callerInputUnchanged": true,
+      "segments": [
+        {
+          "index": 0,
+          "offsetSamples": 0,
+          "samples": 91712,
+          "startedElapsedNs": 2157602638980910,
+          "endedElapsedNs": 2157604586389448,
+          "durationNs": 1947408538,
+          "backendId": "sherpa.onnx.whisper",
+          "hypothesis": "Okay, I will not need to discuss the project finals.",
+          "callerInputUnchanged": true
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "schemaVersion": 1,
+    "kind": "speech-error-metrics",
+    "normalization": {
+      "unicodeNormalization": "NFC, optional casefold, then NFC",
+      "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+      "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+      "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+      "preserved": "Punctuation, accents, and digits are not stripped",
+      "casefold": true,
+      "distance": "Minimum unit Levenshtein edit distance",
+      "tracebackTieOrder": [
+        "exact match",
+        "substitution (diagonal)",
+        "deletion",
+        "insertion"
+      ]
+    },
+    "rows": [
+      {
+        "id": "ami-ES2002a-D-330",
+        "word": {
+          "referenceUnits": 8,
+          "hypothesisUnits": 8,
+          "substitutions": 8,
+          "deletions": 0,
+          "insertions": 0,
+          "errors": 8,
+          "rate": 1.0,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 32,
+          "hypothesisUnits": 28,
+          "substitutions": 11,
+          "deletions": 7,
+          "insertions": 3,
+          "errors": 21,
+          "rate": 0.65625,
+          "defined": true
+        },
+        "referenceSHA256": "f0634500174cd70d683e87c898cb613ab0f88fd38fec064cece770188780449f",
+        "hypothesisSHA256": "07ec87a054465c464fb503f32209bf8cfec583362a94d9bb4c1b1c92d3425f39"
+      },
+      {
+        "id": "ami-ES2002a-C-294",
+        "word": {
+          "referenceUnits": 8,
+          "hypothesisUnits": 1,
+          "substitutions": 1,
+          "deletions": 7,
+          "insertions": 0,
+          "errors": 8,
+          "rate": 1.0,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 37,
+          "hypothesisUnits": 23,
+          "substitutions": 17,
+          "deletions": 14,
+          "insertions": 0,
+          "errors": 31,
+          "rate": 0.8378378378378378,
+          "defined": true
+        },
+        "referenceSHA256": "a55b55acfd1e35ed46ee25085feba9600868a5d9ac8cb71a58a646b83286a976",
+        "hypothesisSHA256": "d7fffe3ffb96f911258b512b9556175d25d47b6f7eb3363901b0941a299c291d"
+      },
+      {
+        "id": "ami-ES2002a-B-146",
+        "word": {
+          "referenceUnits": 11,
+          "hypothesisUnits": 10,
+          "substitutions": 4,
+          "deletions": 1,
+          "insertions": 0,
+          "errors": 5,
+          "rate": 0.45454545454545453,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 45,
+          "hypothesisUnits": 43,
+          "substitutions": 7,
+          "deletions": 3,
+          "insertions": 1,
+          "errors": 11,
+          "rate": 0.24444444444444444,
+          "defined": true
+        },
+        "referenceSHA256": "f2720acb32f03d19be31fb2c0e55bec62e045317c9dd6490be54efd847c64d36",
+        "hypothesisSHA256": "5c76b40e802742755cdadc23f15ef6c70db195634aea6c9b5cc5645b4a887d88"
+      }
+    ],
+    "aggregate": {
+      "word": {
+        "referenceUnits": 27,
+        "hypothesisUnits": 19,
+        "substitutions": 13,
+        "deletions": 8,
+        "insertions": 0,
+        "errors": 21,
+        "rate": 0.7777777777777778,
+        "defined": true
+      },
+      "character": {
+        "referenceUnits": 114,
+        "hypothesisUnits": 94,
+        "substitutions": 35,
+        "deletions": 24,
+        "insertions": 4,
+        "errors": 63,
+        "rate": 0.5526315789473685,
+        "defined": true
+      }
+    },
+    "qualityVerdict": "unverified",
+    "productionReady": false
+  },
+  "disposition": {
+    "recordedAt": "2026-11-10T14:53:54.941504+08:00",
+    "functionalNonemptyRows": 3,
+    "baselineNonemptyRowsAcrossRuns": 1,
+    "baselineErrorsRemainSeparate": true,
+    "corpusWER": {
+      "referenceUnits": 27,
+      "hypothesisUnits": 19,
+      "substitutions": 13,
+      "deletions": 8,
+      "insertions": 0,
+      "errors": 21,
+      "rate": 0.7777777777777778,
+      "defined": true
+    },
+    "baselineBWordErrors": 5,
+    "candidateBWordErrors": 5,
+    "prospectiveBNoRegressionPassed": true,
+    "noVADVerdict": "not accepted as production fix; C output matches no reference words; nonempty output is not quality proof",
+    "rawReportSha256": "cfb1a95a3c9d635e2c3e085556e375860eeb1f6216e55d8b96b1059ab0a86bf3",
+    "qualityVerdict": "unverified",
+    "productionChanged": false,
+    "corpusCER": {
+      "referenceUnits": 114,
+      "hypothesisUnits": 94,
+      "substitutions": 35,
+      "deletions": 24,
+      "insertions": 4,
+      "errors": 63,
+      "rate": 0.5526315789473685,
+      "defined": true
+    },
+    "prospectiveFunctionalSignalPassed": true,
+    "interpretation": "Predeclared functional signal passed (3nonempty rows and B noWERregression), but neither new full-sentence output is accurate (D/CWER100%). This was not a predeclared productpass gate; do not claim prospective signal failed or score typed errors as emptyhypotheses."
+  },
+  "restorationVerified": true,
+  "ordinarySourceAndProtectedFilesUnchanged": 12
+}

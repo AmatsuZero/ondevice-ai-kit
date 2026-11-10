@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "kind": "android-vad-gain",
+  "runId": "w3-vad-gain-20261110-01",
+  "sourceFingerprint": "5cbd5ed829b77276f9b09d49ea8b92fd050b36aeed7312bae89a708fd6f362de",
+  "pid": 27834,
+  "rows": [
+    {
+      "clipId": "ami-ES2002a-D-330",
+      "pcmSHA": "6f9370f42ec71311823ff5820cb97b88beb9c04db838685c2100a82830dbaf61",
+      "gain": 1,
+      "reference": "And I'm Andrew and I'm uh our marketing",
+      "observation": {
+        "inputCount": 56016,
+        "processedCount": 56016,
+        "classifierCalls": 109,
+        "speechWindows": 0,
+        "speechSamples": 0,
+        "detected": false,
+        "preparedSamples": 0,
+        "gain": 1,
+        "probabilityMin": 0.034879744,
+        "probabilityMax": 0.46140623,
+        "probabilityMean": 0.12599504
+      }
+    },
+    {
+      "clipId": "ami-ES2002a-D-330",
+      "pcmSHA": "6f9370f42ec71311823ff5820cb97b88beb9c04db838685c2100a82830dbaf61",
+      "gain": 10,
+      "reference": "And I'm Andrew and I'm uh our marketing",
+      "observation": {
+        "inputCount": 56016,
+        "processedCount": 56016,
+        "classifierCalls": 109,
+        "speechWindows": 84,
+        "speechSamples": 43008,
+        "detected": true,
+        "preparedSamples": 46416,
+        "gain": 10,
+        "probabilityMin": 0.051070064,
+        "probabilityMax": 0.9931165,
+        "probabilityMean": 0.71149105
+      }
+    },
+    {
+      "clipId": "ami-ES2002a-C-294",
+      "pcmSHA": "0d65b45518193214e1be06a2bbffd5cafa03696727a0c5addea7e61c72e4ff0d",
+      "gain": 1,
+      "reference": "Well, my favourite animal would be a monkey.",
+      "observation": {
+        "inputCount": 57072,
+        "processedCount": 57072,
+        "classifierCalls": 111,
+        "speechWindows": 0,
+        "speechSamples": 0,
+        "detected": false,
+        "preparedSamples": 0,
+        "gain": 1,
+        "probabilityMin": 0.004359424,
+        "probabilityMax": 0.10000324,
+        "probabilityMean": 0.030256724
+      }
+    },
+    {
+      "clipId": "ami-ES2002a-C-294",
+      "pcmSHA": "0d65b45518193214e1be06a2bbffd5cafa03696727a0c5addea7e61c72e4ff0d",
+      "gain": 10,
+      "reference": "Well, my favourite animal would be a monkey.",
+      "observation": {
+        "inputCount": 57072,
+        "processedCount": 57072,
+        "classifierCalls": 111,
+        "speechWindows": 5,
+        "speechSamples": 2560,
+        "detected": false,
+        "preparedSamples": 0,
+        "gain": 10,
+        "probabilityMin": 0.05348894,
+        "probabilityMax": 0.63981044,
+        "probabilityMean": 0.20939668
+      }
+    },
+    {
+      "clipId": "ami-ES2002a-B-146",
+      "pcmSHA": "3e884a0ffe26fc41bc9c499102471231ac2c11479581ed3a85fad0cbebc6a0f0",
+      "gain": 1,
+      "reference": "Okay, uh we now need to discuss the project finance. Um",
+      "observation": {
+        "inputCount": 91712,
+        "processedCount": 70784,
+        "classifierCalls": 138,
+        "speechWindows": 63,
+        "speechSamples": 32256,
+        "detected": true,
+        "preparedSamples": 38656,
+        "gain": 1,
+        "probabilityMin": 0.004671693,
+        "probabilityMax": 0.98313606,
+        "probabilityMean": 0.5340851
+      }
+    },
+    {
+      "clipId": "ami-ES2002a-B-146",
+      "pcmSHA": "3e884a0ffe26fc41bc9c499102471231ac2c11479581ed3a85fad0cbebc6a0f0",
+      "gain": 10,
+      "reference": "Okay, uh we now need to discuss the project finance. Um",
+      "observation": {
+        "inputCount": 91712,
+        "processedCount": 91712,
+        "classifierCalls": 179,
+        "speechWindows": 160,
+        "speechSamples": 81920,
+        "detected": true,
+        "preparedSamples": 89792,
+        "gain": 10,
+        "probabilityMin": 0.07979965,
+        "probabilityMax": 0.99895024,
+        "probabilityMean": 0.82952505
+      }
+    }
+  ],
+  "expectedRows": 6,
+  "recognizerCalls": 0,
+  "microphoneStarts": 0,
+  "audioPersisted": false,
+  "status": "completed",
+  "terminal": true,
+  "releasesSucceeded": true,
+  "foreground": {
+    "started": true,
+    "resumed": true,
+    "resumeAcked": true,
+    "pauseAcked": true,
+    "finishing": true,
+    "destroyed": true,
+    "destroyAcked": true
+  },
+  "model": {
+    "path": "/data/data/io.ondeviceai.acceptance.vadgain/no_backup/sherpa-whisper-tiny-65176e2d-vad9e2449e1/silero_vad.onnx",
+    "bytes": 643854,
+    "sha256": "9e2449e1087496d8d4caba907f23e0bd3f78d91fa552479bb9c23ac09cbb1fd6"
+  }
+}

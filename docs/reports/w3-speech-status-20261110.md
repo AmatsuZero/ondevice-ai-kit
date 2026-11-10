@@ -75,3 +75,9 @@
 发布回读已完成：两端 #15 保持开放，原 #4/#5/#11 各一次关联评论；GitLab 四页 Wiki 逐字回读，GitHub 四页和 Home 导航以 Wiki 提交 `94b19255c3e585e9654f814ae7cc2be502ea9fc9` 发布并逐文件核对。GitLab issue 服务裁去正文末尾换行，其余内容一致；未因回读差异重复发布。
 
 本任务仅 push GitHub Wiki 仓库。同期只读复查发现 GitLab 源码分支已由 `4ee9b72` 独立前进至 `37f1e25`，GitHub 源码仍为 `11134567`；两端源码不同步，不能将该变化归因本次发布。完整 URL、评论 ID、页面 SHA 和前后源码状态见[机器收据](../validation/w3-issue-wiki-sync-20261110.json)。
+
+## 最新改进实验
+
+新增六臂VAD实测：原AMI三片检出false/false/true，+20dB后true/false/true，未解决C漏检，按事前规则拒绝固定增益。55host断言/构建/lint及原App恢复通过；[完整结果](../validation/w3-ami-gain-observed-20261110.md)。
+
+随后独立复用已有FILE no-VAD控制，三段原文件均返回非空文本，但WER21/27（77.78%），D/C各8/8词错误、B仍5/11；功能信号满足，准确率没有解决，不采用生产全局绕过。[完整结果](../validation/w3-ami-no-vad-observed-20261110.md)。两批均唯一提交、终态双读和模型/App恢复完成，未开麦克风或下载。原基线及全部失败保持，不据此宣称W3完成。下一阶段评审模型/场景与资源取舍，停止当前前处理参数尝试。

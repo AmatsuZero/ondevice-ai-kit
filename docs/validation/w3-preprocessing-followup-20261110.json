@@ -1,0 +1,173 @@
+{
+  "at": "2026-11-10T15:02:07.616104+08:00",
+  "gainObservation": {
+    "at": "2026-11-10T14:39:31.558972+08:00",
+    "pid": 27834,
+    "reportSha256": "b333bdf753cc5c04adff72bd5f0dc68746a05797026c3d63cb9b4b140cdb1d5e",
+    "doubleReadEqual": true,
+    "nativeVadArms": 6,
+    "recognizerCalls": 0,
+    "microphoneStarts": 0,
+    "sourceAndProtectedUnchanged": 12,
+    "restoration": {
+      "ordinaryPathsEqual": true,
+      "ordinaryModelHashesEqual": true,
+      "onlyExactAliasesRemoved": true,
+      "stageRemoved": true,
+      "ordinaryLaunch": "Starting: Intent { cmp=io.ondeviceai.demo/.MainActivity }\n",
+      "microphoneStarts": 0
+    },
+    "ordinaryForeground": [
+      "topResumedActivity=ActivityRecord{997e4e1 u0 io.ondeviceai.demo/.MainActivity t308}"
+    ],
+    "verdict": "reject fixed+20dB candidate by prospective rule; no ASR followup on thisgainroute",
+    "originalDetected": [
+      false,
+      false,
+      true
+    ],
+    "gainDetected": [
+      true,
+      false,
+      true
+    ],
+    "baselineEquivalentFlags": true,
+    "qualityVerdict": "unverified",
+    "productionChanged": false
+  },
+  "gainRemotePublication": {
+    "githubWikiCommit": "28963b867b5f7a96b608fbfb5398b4a771a7eefc",
+    "githubWikiPageSha256": "b0696d66360f7df59cf0be29533e166f0e6a54117109f0b010666c34e3f28f94",
+    "gitlabWikiPageSha256": "b0696d66360f7df59cf0be29533e166f0e6a54117109f0b010666c34e3f28f94",
+    "githubIssueCommentId": 6760926102,
+    "gitlabIssueCommentId": 41947,
+    "allReadBack": true
+  },
+  "noVADObservation": {
+    "at": "2026-11-10T14:55:37.164439+08:00",
+    "status": "accepted diagnostic observation, not productionfix",
+    "sourceAndProtectedUnchanged": 12,
+    "original3ReferencePcmAndSlicesMatched": true,
+    "oneBackendCopyLineReversible": true,
+    "closeAndForegroundTeardownPassed": true,
+    "terminalDoubleRead": {
+      "runId": "w3-ami-novad-20261110-01",
+      "status": "completed",
+      "bytes": 2846,
+      "sha256": "cfb1a95a3c9d635e2c3e085556e375860eeb1f6216e55d8b96b1059ab0a86bf3",
+      "twoReadsByteIdentical": true,
+      "modelsAfterMatch": {
+        "silero_vad.onnx": true,
+        "tiny-encoder.int8.onnx": true,
+        "tiny-decoder.int8.onnx": true,
+        "tiny-tokens.txt": true
+      },
+      "ordinaryAppsAndModelsUnchanged": true
+    },
+    "restoration": {
+      "removedOnlyNewAliases": {
+        "io.ondeviceai.acceptance.aminovad.test": "Success",
+        "io.ondeviceai.acceptance.aminovad": "Success"
+      },
+      "stageRemoved": "/data/local/tmp/odai-w3-ami-w3-ami-novad-20261110-01",
+      "ordinaryAppPathsAndModelHashesUnchanged": true,
+      "returnedOrdinaryApp": "Starting: Intent { cmp=io.ondeviceai.demo/.MainActivity }",
+      "sourceProtectedHashesUnchanged": true
+    },
+    "ordinaryForeground": [
+      "topResumedActivity=ActivityRecord{997e4e1 u0 io.ondeviceai.demo/.MainActivity t308}"
+    ],
+    "quality": {
+      "recordedAt": "2026-11-10T14:53:54.941504+08:00",
+      "functionalNonemptyRows": 3,
+      "baselineNonemptyRowsAcrossRuns": 1,
+      "baselineErrorsRemainSeparate": true,
+      "corpusWER": {
+        "referenceUnits": 27,
+        "hypothesisUnits": 19,
+        "substitutions": 13,
+        "deletions": 8,
+        "insertions": 0,
+        "errors": 21,
+        "rate": 0.7777777777777778,
+        "defined": true
+      },
+      "baselineBWordErrors": 5,
+      "candidateBWordErrors": 5,
+      "prospectiveBNoRegressionPassed": true,
+      "noVADVerdict": "not accepted as production fix; C output matches no reference words; nonempty output is not quality proof",
+      "rawReportSha256": "cfb1a95a3c9d635e2c3e085556e375860eeb1f6216e55d8b96b1059ab0a86bf3",
+      "qualityVerdict": "unverified",
+      "productionChanged": false,
+      "corpusCER": {
+        "referenceUnits": 114,
+        "hypothesisUnits": 94,
+        "substitutions": 35,
+        "deletions": 24,
+        "insertions": 4,
+        "errors": 63,
+        "rate": 0.5526315789473685,
+        "defined": true
+      },
+      "prospectiveFunctionalSignalPassed": true,
+      "interpretation": "Predeclared functional signal passed (3nonempty rows and B noWERregression), but neither new full-sentence output is accurate (D/CWER100%). This was not a predeclared productpass gate; do not claim prospective signal failed or score typed errors as emptyhypotheses."
+    },
+    "microphoneStarts": 0,
+    "productionChanged": false
+  },
+  "noVADRemotePublication": {
+    "at": "2026-11-10T15:02:07.616104+08:00",
+    "githubWikiCommit": "1385c6a219032e57f6126865f0b41d501bca3cee",
+    "bothWikiContentSha256": "1bbc0777bc278f70c8fa351c9ad8538e16c9e3d1baf9782ca4ae871fd9a584b6",
+    "wikiReadBackEqual": true,
+    "githubIssueCommentId": 6761186159,
+    "gitlabIssueCommentId": 41983,
+    "allReadBack": true,
+    "W3State": "open",
+    "sourceBranchPushedByThisTask": false
+  },
+  "cacheCleanup": [
+    {
+      "at": "2026-11-10T15:00:55.264948+08:00",
+      "removed": [
+        {
+          "path": ".omx/artifacts/w3-ami-gain-investigation-20261110/android/source/build",
+          "nominalFileBytes": 295534480,
+          "fileCount": 594,
+          "lsofExitCode": 1
+        },
+        {
+          "path": ".omx/artifacts/w3-ami-gain-investigation-20261110/android/source/.gradle",
+          "nominalFileBytes": 736399,
+          "fileCount": 15,
+          "lsofExitCode": 1
+        }
+      ],
+      "retainedFileHashesVerified": 171,
+      "retainedBytesPreserved": true,
+      "ordinaryAppModelPathsUntouched": true
+    },
+    {
+      "at": "2026-11-10T15:00:55.840972+08:00",
+      "removed": [
+        {
+          "path": ".omx/artifacts/w3-ami-no-vad-20261110/source/build",
+          "nominalFileBytes": 294237290,
+          "fileCount": 574,
+          "lsofExitCode": 1
+        },
+        {
+          "path": ".omx/artifacts/w3-ami-no-vad-20261110/source/.gradle",
+          "nominalFileBytes": 674951,
+          "fileCount": 15,
+          "lsofExitCode": 1
+        }
+      ],
+      "retainedFileHashesVerified": 72,
+      "retainedBytesPreserved": true,
+      "ordinaryAppModelPathsUntouched": true
+    }
+  ],
+  "qualityVerdict": "unverified",
+  "productionChanged": false
+}

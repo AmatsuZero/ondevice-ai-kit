@@ -10,7 +10,10 @@ tests detection sensitivity, not ASR quality or a production gain algorithm.
 See [frozen protocol](../../docs/validation/w3-ami-gain-protocol-20261110.md),
 [machine protocol](protocol-freeze.json), and
 [offline acceptance](../../docs/validation/w3-ami-gain-offline-acceptance-20261110.json).
-Current state: **55 host checks and Android build/lint passed; no device run**.
+Current state: **55 host checks and Android build/lint passed; the single physical
+six-arm run completed and was restored**. Original detected flags false/false/true
+became true/false/true with ×10 gain. The fixed-gain candidate was rejected by the
+prospective rule. See [observed result](../../docs/validation/w3-ami-gain-observed-20261110.md).
 
 `VadGainMeasurement.kt` is pure Kotlin with an injected detector. Host checks use
 the byte-identical production `UtteranceBuffer.kt`, a host-only exception double
