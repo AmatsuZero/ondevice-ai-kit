@@ -1,0 +1,37 @@
+{
+  "marker": "w3-qwen-arena-emulator-observed-20261111",
+  "resultCommit": "4a5bb4c40075717590e6b857b0096a2fb3b99288",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6797909773,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6797909773",
+      "sha256": "d59a27b6d5cb9f7cd553466ea8384631630bc7ccbf2b09067a9f1eeaf023c8e2",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43208,
+      "url": null,
+      "sha256": "e0c7ecaba50c361824e3ae851b4c3a360e9eff9708b5cf2be00df327aa43fd0d",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "67b4c92f0182e462eecfd60c9b5ea816f64f78f4",
+    "sha256": "fa452ab9ee1f8a4e80e66057c1be2e3fe8ef45d2f8c5b3cec7dd1fbc6a3f5001",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "fa452ab9ee1f8a4e80e66057c1be2e3fe8ef45d2f8c5b3cec7dd1fbc6a3f5001",
+    "readbackExact": true
+  },
+  "twoWikiHashesMatch": true,
+  "readbackExact": true,
+  "w3Status": "open",
+  "r4Status": "open",
+  "r5Status": "open",
+  "scope": "Supplemental Android36 ARM64 emulator, fixed65 files only",
+  "resultDocument": "docs/validation/w3-qwen-arena-emulator-observed-20261111.md",
+  "rawEvidenceLocalOnly": true
+}
