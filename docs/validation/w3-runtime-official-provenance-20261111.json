@@ -1,0 +1,381 @@
+{
+  "observedAt": "2026-11-11T04:29:38.540054+00:00",
+  "localAar": {
+    "path": "artifacts/verification/sherpa-asr-20261105/inputs/downloads/sherpa-onnx-2.0.1.aar",
+    "bytes": 49441341,
+    "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7"
+  },
+  "officialRelease": {
+    "id": 424419758,
+    "tag_name": "v2.0.1",
+    "target_commitish": "master",
+    "published_at": "2026-10-26T15:24:29Z",
+    "html_url": "https://github.com/k2-fsa/sherpa-onnx/releases/tag/v2.0.1"
+  },
+  "officialAsset": {
+    "id": 678742021,
+    "name": "sherpa-onnx-2.0.1.aar",
+    "size": 49441341,
+    "digest": "sha256:a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+    "browser_download_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/v2.0.1/sherpa-onnx-2.0.1.aar",
+    "created_at": "2026-10-26T16:25:45Z",
+    "updated_at": "2026-10-26T16:25:48Z"
+  },
+  "officialTagObject": {
+    "sha": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "type": "commit",
+    "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/commits/af2d8d81dbfa61c4cea4c568da78f3982edca005"
+  },
+  "officialAssetDigestMatchesLocal": true,
+  "officialTagMatchesMaterialSourceCommit": true,
+  "newBinaryDownloads": 0,
+  "sourceToPrebuiltBuildAttestationVerified": false,
+  "fullRecursiveStaticCompositionVerified": false,
+  "productionReady": false,
+  "rawEvidence": {
+    "workflow-runs.json": {
+      "bytes": 1274838,
+      "sha256": "c8dfe50e66aafe9e7935a3d0b9ce2b7c42c5c8a92fb38dafd0891b0cea1d8e13"
+    },
+    "release.json": {
+      "bytes": 500790,
+      "sha256": "50d31785c87330925a9e82c4fe6fa0b26d2cdf2a777367de3448087b7c3612b9"
+    },
+    "android-jobs.json": {
+      "bytes": 7550,
+      "sha256": "c4e60c45a3d5d05a6a445f6be05e830eccecb3073529803af265373bf3aa2033"
+    },
+    "workflow-run-summary.json": {
+      "bytes": 41530,
+      "sha256": "006422ca2b205b43ffa5e09e1bff6a6e2338ee299bbdfc1d010ee6a58f81a8e4"
+    },
+    "tag-ref.json": {
+      "bytes": 337,
+      "sha256": "dca7efe7750f1b686dd4ef0d550341a05ac05329d979523e2c4118754faa3815"
+    }
+  },
+  "officialAndroidJobs": [
+    {
+      "id": 121661567095,
+      "name": "Android libs (ubuntu-latest)",
+      "head_sha": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-26T15:36:57Z",
+      "completed_at": "2026-10-26T15:49:43Z",
+      "html_url": "https://github.com/k2-fsa/sherpa-onnx/actions/runs/40348432396/job/121661567095"
+    },
+    {
+      "id": 121678359263,
+      "name": "Android AAR (ubuntu-latest)",
+      "head_sha": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-26T16:23:06Z",
+      "completed_at": "2026-10-26T16:25:52Z",
+      "html_url": "https://github.com/k2-fsa/sherpa-onnx/actions/runs/40348432396/job/121678359263"
+    }
+  ],
+  "buildJobTimingCorroboratesAssetUpload": true,
+  "buildJobTimingDoesNotProveByteCorrespondence": true,
+  "scope": "Official release asset identity verified by published digest and size, tag maps to material source commit; successful Android jobs on same commit corroborate timeline only. Not byte-reproducibility or exhaustive dependency/build-flag provenance.",
+  "arm64OrtSelfReportedMetadata": {
+    "member": "jni/arm64-v8a/libonnxruntime.so",
+    "bytes": 22249560,
+    "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+    "strings": [
+      "VERS_1.28.2",
+      "ORT Build Info: git-branch=HEAD, git-commit-id=33ca962, fp8-kv-cache=1, build type=Release"
+    ],
+    "officialTag": "v1.28.2",
+    "officialTagObject": {
+      "sha": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+      "type": "commit",
+      "url": "https://api.github.com/repos/microsoft/onnxruntime/git/commits/33ca9628233dc8f002435e868d4c2e9f82766ca1"
+    },
+    "scope": "Self-reported binary version/short commit matches official tag, not a proof of all build flags or absence of patches."
+  },
+  "officialWorkflowLogEvidence": {
+    "libsJobId": 121661567095,
+    "aarJobId": 121678359263,
+    "libsArtifactZipDigestMatchesDownstreamLog": "9718873918fad3a9f7a1156420e5e8f46810970c5fb07383e467cf841265fe68",
+    "aarArtifactZipDigest": "fd4f1e0ef080de31957df23069624215b69858fbc364637399f4cd983f6bd594",
+    "artifactZipDigestsAreNotAarDigests": true,
+    "releaseUploadNameObserved": true,
+    "ndk": "30.0.16248370",
+    "buildType": "Release",
+    "jniEnabled": true,
+    "cApiEnabled": true,
+    "ttsEnabled": true,
+    "speakerDiarizationEnabled": true,
+    "onnxruntimeDependencyObserved": "https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-android-1.28.2.zip",
+    "observations": [
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 343,
+        "text": "2026-10-26T15:37:03.6085407Z HEAD is now at af2d8d81 Release v2.0.1 (#4115)"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 712,
+        "text": "2026-10-26T15:37:26.2925356Z + wget -c -q https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 713,
+        "text": "2026-10-26T15:37:27.4998464Z + unzip onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 714,
+        "text": "2026-10-26T15:37:27.5044079Z Archive:  onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 751,
+        "text": "2026-10-26T15:37:28.0042070Z + rm onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 778,
+        "text": "2026-10-26T15:37:28.0125372Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DSHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF -DSHERPA_ONNX_ENABLE_C_API=ON -DCMAKE_INSTALL_PREFIX=./install -DSHERPA_ONNX_ENABLE_RKNN=OFF -DSHERPA_ONNX_ENABLE_QNN=OFF -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-21 .."
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 797,
+        "text": "2026-10-26T15:37:51.9625010Z -- SHERPA_ONNX_ENABLE_CHECK OFF"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 799,
+        "text": "2026-10-26T15:37:51.9625327Z -- SHERPA_ONNX_ENABLE_JNI ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 800,
+        "text": "2026-10-26T15:37:51.9625476Z -- SHERPA_ONNX_ENABLE_C_API ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 802,
+        "text": "2026-10-26T15:37:51.9625793Z -- SHERPA_ONNX_ENABLE_GPU OFF"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 814,
+        "text": "2026-10-26T15:37:51.9628598Z -- SHERPA_ONNX_ENABLE_TTS ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 815,
+        "text": "2026-10-26T15:37:51.9628846Z -- SHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1517,
+        "text": "2026-10-26T15:40:54.9303364Z + wget -c -q https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1519,
+        "text": "2026-10-26T15:40:55.4683185Z + unzip onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1520,
+        "text": "2026-10-26T15:40:55.4695104Z Archive:  onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1557,
+        "text": "2026-10-26T15:40:55.9644068Z + rm onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1577,
+        "text": "2026-10-26T15:40:55.9726832Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DSHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF -DSHERPA_ONNX_ENABLE_C_API=ON -DCMAKE_INSTALL_PREFIX=./install -DSHERPA_ONNX_ENABLE_RKNN=OFF -DANDROID_ABI=armeabi-v7a -DANDROID_ARM_NEON=ON -DANDROID_PLATFORM=android-21 .."
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1599,
+        "text": "2026-10-26T15:40:56.1815816Z -- SHERPA_ONNX_ENABLE_CHECK OFF"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1601,
+        "text": "2026-10-26T15:40:56.1816354Z -- SHERPA_ONNX_ENABLE_JNI ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1602,
+        "text": "2026-10-26T15:40:56.1816498Z -- SHERPA_ONNX_ENABLE_C_API ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1604,
+        "text": "2026-10-26T15:40:56.1816821Z -- SHERPA_ONNX_ENABLE_GPU OFF"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1616,
+        "text": "2026-10-26T15:40:56.1818679Z -- SHERPA_ONNX_ENABLE_TTS ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 1617,
+        "text": "2026-10-26T15:40:56.1818832Z -- SHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2279,
+        "text": "2026-10-26T15:43:41.2523947Z + wget -c -q https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2280,
+        "text": "2026-10-26T15:43:41.7416453Z + unzip onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2281,
+        "text": "2026-10-26T15:43:41.7429107Z Archive:  onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2318,
+        "text": "2026-10-26T15:43:42.2173014Z + rm onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2338,
+        "text": "2026-10-26T15:43:42.2256063Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DSHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF -DCMAKE_INSTALL_PREFIX=./install -DANDROID_ABI=x86_64 -DSHERPA_ONNX_ENABLE_C_API=ON -DSHERPA_ONNX_ENABLE_WEBSOCKET=OFF -DANDROID_PLATFORM=android-21 .."
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2357,
+        "text": "2026-10-26T15:43:43.9610691Z -- SHERPA_ONNX_ENABLE_CHECK OFF"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2359,
+        "text": "2026-10-26T15:43:43.9611162Z -- SHERPA_ONNX_ENABLE_JNI ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2360,
+        "text": "2026-10-26T15:43:43.9611385Z -- SHERPA_ONNX_ENABLE_C_API ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2362,
+        "text": "2026-10-26T15:43:43.9611871Z -- SHERPA_ONNX_ENABLE_GPU OFF"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2374,
+        "text": "2026-10-26T15:43:43.9614909Z -- SHERPA_ONNX_ENABLE_TTS ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 2375,
+        "text": "2026-10-26T15:43:43.9615147Z -- SHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3071,
+        "text": "2026-10-26T15:46:28.6082101Z + wget -c -q https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3073,
+        "text": "2026-10-26T15:46:29.1087507Z + unzip onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3074,
+        "text": "2026-10-26T15:46:29.1099532Z Archive:  onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3111,
+        "text": "2026-10-26T15:46:29.6049700Z + rm onnxruntime-android-1.28.2.zip"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3133,
+        "text": "2026-10-26T15:46:29.6125852Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DCMAKE_INSTALL_PREFIX=./install -DANDROID_ABI=x86 -DSHERPA_ONNX_ENABLE_C_API=ON -DSHERPA_ONNX_ENABLE_WEBSOCKET=OFF -DANDROID_PLATFORM=android-21 .."
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3152,
+        "text": "2026-10-26T15:46:31.5764835Z -- SHERPA_ONNX_ENABLE_CHECK OFF"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3154,
+        "text": "2026-10-26T15:46:31.5765312Z -- SHERPA_ONNX_ENABLE_JNI ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3155,
+        "text": "2026-10-26T15:46:31.5765544Z -- SHERPA_ONNX_ENABLE_C_API ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3157,
+        "text": "2026-10-26T15:46:31.5766026Z -- SHERPA_ONNX_ENABLE_GPU OFF"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3169,
+        "text": "2026-10-26T15:46:31.5768998Z -- SHERPA_ONNX_ENABLE_TTS ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3170,
+        "text": "2026-10-26T15:46:31.5769236Z -- SHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION ON"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "line": 3929,
+        "text": "2026-10-26T15:49:25.0956966Z SHA256 digest of uploaded artifact zip is 9718873918fad3a9f7a1156420e5e8f46810970c5fb07383e467cf841265fe68"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-aar.log",
+        "line": 344,
+        "text": "2026-10-26T16:23:11.5705399Z HEAD is now at af2d8d81 Release v2.0.1 (#4115)"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-aar.log",
+        "line": 578,
+        "text": "2026-10-26T16:23:18.8802385Z SHA256 digest of downloaded artifact is 9718873918fad3a9f7a1156420e5e8f46810970c5fb07383e467cf841265fe68"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-aar.log",
+        "line": 780,
+        "text": "2026-10-26T16:24:50.5233820Z SHA256 digest of uploaded artifact zip is fd4f1e0ef080de31957df23069624215b69858fbc364637399f4cd983f6bd594"
+      },
+      {
+        "log": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-aar.log",
+        "line": 1457,
+        "text": "2026-10-26T16:25:45.6788821Z Uploading sherpa-onnx-2.0.1.aar to sherpa-onnx-2.0.1.aar in release v2.0.1."
+      }
+    ],
+    "limitations": [
+      "Upstream log is build execution evidence, not local byte-reproducibility or exhaustive static components",
+      "No exact AAR file SHA printed in observed upload step; official release asset digest separately matches local",
+      "Nested prebuilt ORT archive not downloaded or recursively verified"
+    ],
+    "initialLogReadFailure": "gh CLI refused terminal escape sequences before stdout; same public logs captured with --allow-escape-sequences in separate directory, originals retained",
+    "logHashes": {
+      "android-libs.log": {
+        "bytes": 414518,
+        "sha256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6"
+      },
+      "android-aar.log": {
+        "bytes": 117868,
+        "sha256": "ab83e33122f92e915d11e07e4829fdfc17e020fd4cfe803f81cb528c710ecc28"
+      }
+    }
+  }
+}

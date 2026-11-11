@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-11T04:30:49.580626+00:00",
+  "marker": "w3-runtime-materials-cost-20261111",
+  "sourceCommit": "fd95f8c",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6787028706,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6787028706",
+      "sha256": "5574642839107481105d76bdd3be2070fb092c97d1034e5fcdad3fd4dc5650d0",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 42860,
+      "url": null,
+      "sha256": "ed6bfc1c2c3e3ac056a27c28cdfc59c7d453c8e926a5a838b8c0d94f4ab6a404",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "b5b354141abdcfa03c1e3c41f723e4332af9890a",
+    "sha256": "6119da702ebece15ce0962c8fcd1301aa13f30a283e8a2b1d84e8985ee28e8de",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "6119da702ebece15ce0962c8fcd1301aa13f30a283e8a2b1d84e8985ee28e8de",
+    "readbackExact": true
+  },
+  "wikiContentHashEqual": true,
+  "w3Status": "open",
+  "localEvidenceRoot": ".omx/artifacts/w3-runtime-materials-20261111/publication",
+  "publicationScope": "Runtime material preparation and existing-results cost recomputation. No new device or inference execution."
+}

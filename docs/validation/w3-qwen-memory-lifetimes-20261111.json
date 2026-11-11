@@ -1,0 +1,895 @@
+{
+  "schemaVersion": 1,
+  "scope": "Static source/model graph research; no runtime sessions, native loads, device runs or inference",
+  "sherpaCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "ortCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+  "sourceReceipts": [
+    {
+      "name": "ort-tag",
+      "tagObject": {
+        "sha": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+        "type": "commit",
+        "url": "https://api.github.com/repos/microsoft/onnxruntime/git/commits/33ca9628233dc8f002435e868d4c2e9f82766ca1"
+      }
+    },
+    {
+      "name": "session-state.cc",
+      "repository": "microsoft/onnxruntime",
+      "ref": "v1.28.2",
+      "path": "onnxruntime/core/framework/session_state.cc",
+      "blobSHA1": "241eb8362ddfa0d87fbd84016476d074ad7832b4",
+      "bytes": 88593,
+      "sha256": "c1b87182848d2c21e57910d52d569e30639001989702bc7d4e2c131d263fa1e3",
+      "url": "https://github.com/microsoft/onnxruntime/blob/v1.28.2/onnxruntime/core/framework/session_state.cc",
+      "blobVerified": true
+    },
+    {
+      "name": "session-state.h",
+      "repository": "microsoft/onnxruntime",
+      "ref": "v1.28.2",
+      "path": "onnxruntime/core/framework/session_state.h",
+      "blobSHA1": "28aaf8e72670d1b0ff1f98fac41db4f27ec23bb9",
+      "bytes": 23786,
+      "sha256": "f5ab045eacbfdf34aaa1d21f32a8018d279b21c3e09eb63d1487bbd07b0a6bdb",
+      "url": "https://github.com/microsoft/onnxruntime/blob/v1.28.2/onnxruntime/core/framework/session_state.h",
+      "blobVerified": true
+    },
+    {
+      "name": "execution-frame.cc",
+      "repository": "microsoft/onnxruntime",
+      "ref": "v1.28.2",
+      "path": "onnxruntime/core/framework/execution_frame.cc",
+      "blobSHA1": "59efae597ceb2f8b364dd489de6006ada05d200a",
+      "bytes": 45143,
+      "sha256": "ef874102877e88e6b6c6a5d93e267cf68c121e32843f650e587529e476a1db05",
+      "url": "https://github.com/microsoft/onnxruntime/blob/v1.28.2/onnxruntime/core/framework/execution_frame.cc",
+      "blobVerified": true
+    },
+    {
+      "name": "execution-frame.h",
+      "repository": "microsoft/onnxruntime",
+      "ref": "v1.28.2",
+      "path": "onnxruntime/core/framework/execution_frame.h",
+      "blobSHA1": "7b5a8fd8a4b01fa1c32e45e50b4611a2bfe72397",
+      "bytes": 12340,
+      "sha256": "b52c6768a84ca66bdc927e3f611a10204e4f94dd75bc784a69153e908fc1035a",
+      "url": "https://github.com/microsoft/onnxruntime/blob/v1.28.2/onnxruntime/core/framework/execution_frame.h",
+      "blobVerified": true
+    },
+    {
+      "name": "allocator.cc",
+      "repository": "microsoft/onnxruntime",
+      "ref": "v1.28.2",
+      "path": "onnxruntime/core/framework/allocator.cc",
+      "blobSHA1": "5c4e41d9fb1da73ac5e856edba74a268d6cffa69",
+      "bytes": 13956,
+      "sha256": "00e9fed73b59fd61a95af9fe235799abb459079276afa274c26e6dd5669a8438",
+      "url": "https://github.com/microsoft/onnxruntime/blob/v1.28.2/onnxruntime/core/framework/allocator.cc",
+      "blobVerified": true
+    },
+    {
+      "name": "inference-session.cc",
+      "repository": "microsoft/onnxruntime",
+      "ref": "v1.28.2",
+      "path": "onnxruntime/core/session/inference_session.cc",
+      "blobSHA1": "22e3da231366be0f6ef36e1426ad2842193a6aa0",
+      "bytes": 211391,
+      "sha256": "efe1951013f6f370cc33debacec06b18afb9675e94f1467752942d59d8e368d2",
+      "url": "https://github.com/microsoft/onnxruntime/blob/v1.28.2/onnxruntime/core/session/inference_session.cc",
+      "blobVerified": true
+    },
+    {
+      "name": "offline-stream.cc",
+      "repository": "k2-fsa/sherpa-onnx",
+      "ref": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "path": "sherpa-onnx/csrc/offline-stream.cc",
+      "blobSHA1": "af51c6fb1242b39f8d1685b8a8fac2b8cfb4e17b",
+      "bytes": 16926,
+      "sha256": "de642dbb398f58621412976b3421a125d78b098e25bb7b9ba1a02bf495ee14bf",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-stream.cc",
+      "blobVerified": true
+    },
+    {
+      "name": "offline-stream.h",
+      "repository": "k2-fsa/sherpa-onnx",
+      "ref": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "path": "sherpa-onnx/csrc/offline-stream.h",
+      "blobSHA1": "4ff78342119e8aa2c780a2661f63a49cc680fcf9",
+      "bytes": 5058,
+      "sha256": "dbb7f437b0ef88948a33546b00d1c965d6771e1ca0541b6aec739315348c5d11",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-stream.h",
+      "blobVerified": true
+    },
+    {
+      "name": "memory-pattern.h",
+      "exitCode": 1
+    },
+    {
+      "name": "sequential-executor.cc",
+      "repository": "microsoft/onnxruntime",
+      "ref": "v1.28.2",
+      "path": "onnxruntime/core/framework/sequential_executor.cc",
+      "blobSHA1": "233b26650c28c483c4879ae0ced9ed3391a0f956",
+      "bytes": 33911,
+      "sha256": "c3e074519432105024bb9c38019b70c5142015bd0e3288835e7214b7363fc6cc",
+      "url": "https://github.com/microsoft/onnxruntime/blob/v1.28.2/onnxruntime/core/framework/sequential_executor.cc",
+      "blobVerified": true
+    },
+    {
+      "name": "mem-pattern.h",
+      "repository": "microsoft/onnxruntime",
+      "ref": "v1.28.2",
+      "path": "onnxruntime/core/framework/mem_pattern.h",
+      "blobSHA1": "1addbd843beb8890811067d516b942d3df99a185",
+      "bytes": 1756,
+      "sha256": "b2efdcb23438fb5102f036b32f33c7e387dad7bdcd447d1fec386e71d7aa4416",
+      "url": "https://github.com/microsoft/onnxruntime/blob/v1.28.2/onnxruntime/core/framework/mem_pattern.h",
+      "blobVerified": true,
+      "prior404Preserved": "memory-pattern.h.response.json",
+      "recovery": "Read exact include core/framework/mem_pattern.h from session-state.h; fetched its repository path."
+    }
+  ],
+  "modelGraph": {
+    "schemaVersion": 1,
+    "scope": "Read-only protobuf metadata/graph-input inspection. No ORT session, native load or inference. Skips tensor payloads.",
+    "model": {
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-model-reselection-20261110/model/sherpa-onnx-qwen3-asr-0.6B-int8-2026-03-25/decoder.int8.onnx",
+      "bytes": 755914231,
+      "sha256": "4f6885be5959ae26af3089d38ee7972c5fafbeeb1cf8d5e76eab6d8b61ca5771",
+      "manifestMatches": true
+    },
+    "sourceSchema": "https://github.com/onnx/onnx/blob/v1.21.0/onnx/onnx.proto3",
+    "metadata": {
+      "onnx.infer": "onnxruntime.quant"
+    },
+    "inputs": [
+      {
+        "name": "input_ids",
+        "elemType": 7,
+        "shape": [
+          "batch",
+          "seq"
+        ]
+      },
+      {
+        "name": "audio_features",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "n_audio_tokens",
+          1024
+        ]
+      },
+      {
+        "name": "attention_mask",
+        "elemType": 7,
+        "shape": [
+          "batch",
+          "seq"
+        ]
+      },
+      {
+        "name": "cache_position",
+        "elemType": 7,
+        "shape": [
+          "seq"
+        ]
+      },
+      {
+        "name": "cache_key_0",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_0",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_1",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_1",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_2",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_2",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_3",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_3",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_4",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_4",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_5",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_5",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_6",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_6",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_7",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_7",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_8",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_8",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_9",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_9",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_10",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_10",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_11",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_11",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_12",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_12",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_13",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_13",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_14",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_14",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_15",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_15",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_16",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_16",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_17",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_17",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_18",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_18",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_19",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_19",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_20",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_20",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_21",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_21",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_22",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_22",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_23",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_23",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_24",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_24",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_25",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_25",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_26",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_26",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_key_27",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      },
+      {
+        "name": "cache_value_27",
+        "elemType": 1,
+        "shape": [
+          "batch",
+          "max_total_len",
+          8,
+          128
+        ]
+      }
+    ],
+    "parserChecks": 7,
+    "newModelCalls": 0,
+    "newDownloads": 0,
+    "notProven": [
+      "runtime allocation sizes",
+      "native option effect",
+      "measured savings",
+      "full ONNX semantic validation"
+    ]
+  },
+  "kvBasicDataFormula": {
+    "numLayers": 28,
+    "keyAndValue": 2,
+    "batch": 1,
+    "configuredLength": 512,
+    "heads": 8,
+    "headDim": 128,
+    "bytesPerFloat32": 4,
+    "bytes": 117440512,
+    "MiB": 112,
+    "scope": "Basic tensor data implied by parsed graph shapes and fixed-source CreateEmptyKVCache; not allocator overhead, decoder outputs, weights, activations or measured RSS."
+  },
+  "helperAssessment": {
+    "process": {
+      "exitCode": 0,
+      "seconds": 138.8036191249994,
+      "files": {
+        "MEMORY-LIFETIMES.md": {
+          "bytes": 9113,
+          "sha256": "754b328d8f71f1f0a326bc3b88da3386665e00a558ef79fa78bc827d75e6c318"
+        }
+      }
+    },
+    "actualToolCounts": {
+      "Read": 18,
+      "Write": 1
+    },
+    "toolErrors": [
+      {
+        "type": "tool_result",
+        "tool_use_id": "chatcmpl-tool-aba6fe05c0336893",
+        "content": [
+          {
+            "type": "text",
+            "text": "<tool_use_error>Path is a directory, not a file: ../context\nThis tool can only read files, not directories.\n\nSuggestions:\n  • Use Glob for pattern matching (e.g., glob(\"*.ts\"))\n  • Use Bash with ls/find for exploration (e.g., bash(\"find . -type f\"))\n  • Specify the full file path instead\n\nDirectory listing for \"../context\" (17 entries):\n  📄 inference-session.cc.excerpts.txt\n  📄 offline-recognizer-qwen3-asr-impl.cc.excerpts.txt\n  📄 observed-scope.md\n  📄 offline-qwen3-asr-model.cc.excerpts.txt\n  📄 sequential-executor.cc.excerpts.txt\n  📄 session-state.h.excerpts.txt\n  📄 mem-pattern.h.excerpts.txt\n  📄 execution-frame.h.excerpts.txt\n  📄 session.cc.excerpts.txt\n  📄 offline-recognizer-qwen3-asr-impl.h.excerpts.txt\n  📄 w3-qwen-cost-options-20261111.md\n  📄 agent-pitfalls.md\n  📄 execution-frame.cc.excerpts.txt\n  📄 session-state.cc.excerpts.txt\n  📄 w3-qwen-arena-observed-20261111.md\n  📄 offline-stream.h.excerpts.txt\n  📄 allocator.cc.excerpts.txt</tool_use_error>"
+          }
+        ],
+        "is_error": true,
+        "_meta": {
+          "rawResponse": {
+            "is_error": true,
+            "tool_error_code": "1003"
+          }
+        }
+      }
+    ],
+    "contextHashesUnchanged": true,
+    "reportWithinRequested9000Bytes": false,
+    "acceptedAsFinal": false,
+    "acceptedSourceFacts": [
+      "Separate CPU arena and memory-pattern option branches",
+      "MemoryPatternGroup metadata differs from execution-frame-owned activation buffer",
+      "GenerateText allocates local KV; recognizer retains three sessions",
+      "Fixed positive exported KV length overrides config, dynamic length falls back to config"
+    ],
+    "parentCorrections": [
+      "Actual decoder graph KV length is dynamic max_total_len; current config512 applies. Report table wrongly calls this model fixed512.",
+      "No measured bound proves cached metadata is small or the only cross-clip state; allocator and runtime internal state not exhaustively covered.",
+      "Several citations reference unsupplied or wrong line ranges (allocator74-78 vs actual175-177, memory pattern64-75 vs actual file below64). Use actual fixed-source line checks.",
+      "ActualFree does not imply RSS falls; physical free returning OS memory also depends on system allocator, not just BFCArena.",
+      "No new device run authorized or performed; recommendation for allocator tracing remains to be scoped against actual unchanged AAR observability.",
+      "Output9113B exceeds9000B limit; retained as partial research evidence, not unqualified acceptance."
+    ]
+  },
+  "sourceAnchors": {
+    "patternMetadata": [
+      "onnxruntime/core/framework/mem_pattern.h:10",
+      "onnxruntime/core/framework/session_state.h:527",
+      "onnxruntime/core/framework/session_state.cc:952"
+    ],
+    "actualPatternBuffers": [
+      "onnxruntime/core/framework/execution_frame.cc:437",
+      "onnxruntime/core/framework/execution_frame.cc:509",
+      "onnxruntime/core/framework/execution_frame.h:254"
+    ],
+    "allocatorFree": [
+      "onnxruntime/core/framework/allocator.cc:175"
+    ],
+    "kvModelDimension": [
+      "sherpa-onnx/csrc/offline-qwen3-asr-model.cc:311",
+      "sherpa-onnx/csrc/offline-qwen3-asr-model.cc:533"
+    ],
+    "kvLocalAndOption": [
+      "sherpa-onnx/csrc/offline-recognizer-qwen3-asr-impl.cc:839",
+      "sherpa-onnx/csrc/offline-recognizer-qwen3-asr-impl.cc:841"
+    ]
+  },
+  "newDeviceOperations": 0,
+  "newInferenceCalls": 0,
+  "newModelOrRuntimeBinaryDownloads": 0,
+  "nativeConfigurationConsumptionVerified": false,
+  "rootCauseVerified": false,
+  "memorySavingsVerified": false,
+  "nextSingleVariableRunApprovedByThisReport": false,
+  "w3Status": "open",
+  "limitations": [
+    "Original report citations and fixed512 assumption corrected by parent",
+    "Memory-pattern map footprint not measured",
+    "No native allocation observability in current process-RSS-only samples",
+    "Actual native cleanup of interrupted batch remains unknown"
+  ],
+  "androidHeapApiSource": {
+    "sourceURL": "https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-15.0.0_r1/core/java/android/os/Debug.java?format=TEXT",
+    "bytes": 103639,
+    "sha256": "30073f59c9622cdbceab0835f0115e2b1b169ee1652b6000d7af919ae3f81be7",
+    "scope": "AOSP Android15 source only, no runtime download"
+  },
+  "selectedUnattemptedDiagnostic": {
+    "priorRunId": "w3-qwen-arena-20261111-01",
+    "priorReportSHA256": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d",
+    "originalIndex": 25,
+    "row": {
+      "id": "fleurs-en_us-1776",
+      "locale": "en-US",
+      "cohort": "english-near",
+      "samples": 76800,
+      "pcmSha256": "2821c39358fc8049953945d8042d1833d86cb2245ca468cf5afc31ee1fe1a438",
+      "reference": "Through the night between 150 and 200 copies were made, now known as \"Dunlap broadsides\".",
+      "status": "planned",
+      "caseNanos": null,
+      "caseState": null
+    },
+    "statusPlanned": true,
+    "noStageDispatchRecorded": true,
+    "selectionReason": "first original row strictly after interrupted index24; predetermined for heap diagnostics, not quality output",
+    "newDeviceOrInferenceCalls": 0
+  },
+  "parentCheckErrors": {
+    "scope": "Parent metadata/check errors preserved; no inference or model changes",
+    "firstFailure": {
+      "error": "AssertionError",
+      "cause": "looked for past_key/past_value name prefix, but actual graph input names cache_key/cache_value",
+      "effects": "no report or model mutation"
+    },
+    "syntheticCheckFailure": {
+      "error": "ValueError: truncated field",
+      "cause": "handbuilt synthetic protobuf lengths were one byte too large at nested tensor/type/shape/dimension",
+      "recovery": "preserved inspect_decoder_inputs-first.py, corrected fixture lengths only; seven parser checks then passed"
+    },
+    "jsonlInventoryFailure": {
+      "error": "JSONDecodeError: Extra data",
+      "cause": "read RSS .jsonl as one JSON object",
+      "recovery": "read each line; 413 rows verified; original samples unchanged"
+    }
+  },
+  "parserSHA256": "c7e1a9e65093389d13ad3bf946e860e88bb66775975405edba029faf9740a32f"
+}

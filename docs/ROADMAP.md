@@ -1,3 +1,5 @@
+W3新增（2026-11-11）：运行时材料fd95f8c已同步双端#15/Wiki并回读；[官方AAR身份](validation/w3-runtime-official-provenance-20261111.md)的公布digest/size/tag已核实，实际上游日志确认TTS/diarization启用，递归/发布门仍缺。[固定内存生命周期](validation/w3-qwen-memory-lifetimes-20261111.md)已核实际动态KV512基础112MiB，非峰值/根因；只选原未执行index25的heap诊断外部候选生成中，无新设备推理，W3open。
+
 W3新增（2026-11-11）：固定Sherpa运行时来源材料50文件（20许可/26构建源），46GitBlob/hash、39链接和50tar成员核对通过，AAR16so/四ABI已枚举；递归静态组成、source-to-prebuilt及生产通知/发布复审仍缺。[材料](validation/w3-runtime-materials-20261111.md)。原报告复算拒绝统一auto捷径（已知远场退步），无新模型/设备调用，W3open。[成本依据](validation/w3-qwen-cost-options-20261111.md)。
 
 W3最新（2026-11-11）：arena-off真机唯一run完成24/65，中文20/20 CER6.78%；第25项期间RSS1.525410GiB越固定1.5GiB门停止，英文仅4项、AMI/挑战未执行，完整质量成本未过。413样本/258.937s、同run政策补核/双读/模型后核及普通App恢复通过；原批已消耗不重放，W3open。[真机结果](validation/w3-qwen-arena-observed-20261111.md)。下方待解锁为历史。

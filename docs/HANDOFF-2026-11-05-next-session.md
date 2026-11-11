@@ -1,3 +1,10 @@
+## 2026-11-11：W3材料已提交同步，官方AAR身份核实；heap单文件候选生成中
+
+57精确文件已本地提交fd95f8c；50材料hash/46GitBlob/39链接/50tar/108冻结重核通过。续接保护77/78保持，F08交接有新漂移，未归因/未回滚。材料成本marker w3-runtime-materials-cost-20261111已用：GH#15comment6787028706、GL#15note42860、GHWiki b5b354141abdcfa03c1e3c41f723e4332af9890a，两WikiSHA6119da702ebece15ce0962c8fcd1301aa13f30a283e8a2b1d84e8985ee28e8de一致；收据docs/validation/w3-runtime-materials-sync-20261111.json。勿重发此marker，源码未push。
+官方Release v2.0.1 asset678742021/49441341B/公布SHA与本地AAR一致，tagaf2d8d81一致；同commit实际android两job日志有libs上传/下游下载ZIP摘要及精确release上传名、NDK30.0.16248370，TTS/diarization确为ON。ORT实际字符串1.28.2/33ca962与官方tag一致，但嵌套预编译ORT/递归静态组成/完整构建对应/生产通知/发布复审仍缺；不新下载二进制。入口docs/validation/w3-runtime-official-provenance-20261111.{md,json}。
+固定ORT/source核清pattern映射与frame缓冲不同，不能据此称泄漏或省内存；实际decoder静态图60输入/56KV动态max_total_len、float32、8x128，当前config512基础KV112MiB，非峰值。父解析7检查过，初名称/fixture长度/JSONL错误保留。hy3研究138.804s自然终态18Read/1Write/1目录Read错误，9113B超要求且fixed512等结论需订正，原文非最终验收。入口docs/validation/w3-qwen-memory-lifetimes-20261111.{md,json}。
+下一独立heap诊断已按spec固定只选原planned index25 fleurs-en_us-1776，原index0-24不重放。沿用两阶段/arena-off/原资源门，Debug三堆计数只在边界，不声称持续native峰值；父缺候选RED已保留。唯一活动免费hy4free /private/tmp/odai-hy4free-w3-qwen-heap-wrapper-20261111/，exec25699/launcher81114，实际OS写scope/context不可写检查后启动；仅新wrapper，尚无交付/构建/新设备合同。只续同次，不因时长重派。计划docs/superpowers/plans/2026-11-11-w3-qwen-heap-diagnostic.md。设备保持restored，无新识别/采音/AiAi/模型下载/生产改动；旧native429不重试，W3open。
+
 ## 2026-11-11：W3 runtime材料已准备，成本捷径按已有证据拒绝
 
 新增probes/sherpa-runtime-materials/2.0.1-a8d09d1d/共50文件，20许可/声明+26构建源+2AAR清单+manifest+外部目录；46来源size/SHA/GitBlob、39链接、50tar成员逐字节通过。AAR26ZIP条目/21文件/16so四ABI实际枚举/动态NEEDED/SONAME/build-id（部分null）。不含binary/model，不改原108冻结文件/APK/生产。既有Sherpa/tiny通知未缺失；runtime递归静态组成/source-to-prebuilt/最终生产通知和发布复审仍缺，W3open。入口docs/validation/w3-runtime-materials-20261111.{md,json}。

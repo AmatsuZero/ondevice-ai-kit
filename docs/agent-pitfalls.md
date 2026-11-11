@@ -6,6 +6,8 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **不能把固定维示例套成当前ONNX图事实**：2026-11-11只读内存报告正确指出“正数导出KV维可覆盖config”，却将未读取的当前模型称为固定512，并称pattern缓存体量小；父端核实际decoder SHA后按官方protobuf schema读取60输入，56KV均为float32 `[batch,max_total_len,8,128]`，长度是动态符号，当前走config512分支，基础KV静态数据量112MiB。7项解析检查通过，首名称筛选/手工fixture长度错误保留；pattern体量、allocator保留和峰值仍未测，不能由源生命周期推定实际RSS或跨片泄漏。公开官方构建日志另实证TTS/diarization=ON，不能因应用仅ASR排除对应依赖。边界与证据见`docs/validation/w3-qwen-memory-lifetimes-20261111.{md,json}`、`w3-runtime-official-provenance-20261111.{md,json}`及本机`.omx/artifacts/w3-qwen-ort-lifecycle-20261111/`。
+
 - **framework/shell目录同inode不保证readlink字面相同**：arena真机政策收取把framework `/data/data/.../no_backup` 与shell relative解析出的 `/data/user/0/.../no_backup`比较，误记receipt/file false；首补核又假定两种absolute path均解析到同一字符串而断言失败。原报告/评分保持，后仅续取同run，精确三路径目录及配置各自sameUID device/inode相同、有界21B读取精确20B/SHA/receipt/provider全部一致，5错inode/错路径变异拒绝。补核原冻结源码/APK未改，也不新增模型调用；完整验收仍因内存停止等六门失败，不能用路径恢复声称native配置生效。证据`docs/validation/w3-qwen-arena-observed-20261111.md`及本机`framework-path-diagnostic.json`、`allocator-policy-framework-collected.json`；未来父端不能单凭shell规范化字符串代替framework路径身份。
 
 - **复核清单要区分直接绑定与传递绑定，同run续取不等于重放**：arena父工具只读复核指出essential集合遗漏，部分Kotlin其实已受candidate/sourceFiles与APK摘要传递绑定，但baseline检查确未直接必需；以完整有效合成合同为基线逐一删四项，实测4fail后补直接集合。政策收据缺失则结构化失败；基线collection完成、政策读取中断时新增collect-policy，先绑原双读/run/source/六模型收据和当前APK/设备报告SHA，仅有界续取；评分改用新安全basename保留旧失败。相关RED/原报告保留，22父+原8父/31metricsGREEN；零新native，合同冻结后只读preflight锁屏零安装。证据`docs/validation/w3-qwen-arena-parent-review-20261111.md`与本次`parent-review-{red,fixed-green}/`；“复核无阻断”不能代替未过设备门。
