@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "marker": "w3-qwen-kv288-emulator-observed-20261111",
+  "localCommits": [
+    "c66ece0ed1f16f16573910ba6e73670119a9d2c4",
+    "26dd36007d383981bb71d8ec5d1bf10f11646698",
+    "bceb42431d55e1452bbb091d84c63a03563a4283"
+  ],
+  "issues": {
+    "gh": {
+      "id": 6800044674,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6800044674",
+      "sha256": "8b4e80720b2851a1e7552113d574751d9bdf783ce7c2080bf69b50b600de9ba7",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43212,
+      "url": null,
+      "sha256": "c387808ceb495c1d033966d8f1a75689f919729f3113c57dc0fb162818f43a9e",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "de8161c7f29c3550e7d1b975105512a67b4e2fd7",
+    "sha256": "3b78939679cff32275d41fb31ad073e890642327f75e08e883c6f6aee2418b7a",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "3b78939679cff32275d41fb31ad073e890642327f75e08e883c6f6aee2418b7a",
+    "readbackExact": true
+  },
+  "wikiContentsIdentical": true,
+  "gitlabKnownNormalization": "only trailing newlines stripped from issue body",
+  "sourceBranch": "feat/sdk-foundation",
+  "sourceBranchPushed": false,
+  "result": "65 final strings and117 stages identical to512; original quality gates passed; no sampledRSS reduction demonstrated",
+  "reportSHA256": "c0dea0ab799229b952d6d089be986b77f9be3d9bd366da27db271a69834a8132",
+  "supplementalEmulatorEvidenceOnly": true,
+  "physicalHeapRunConsumed": false,
+  "w3Complete": false,
+  "goalStatus": "active",
+  "evidenceRoot": "artifacts/verification/w3-qwen-kv288-emulator-20261111",
+  "noInferenceReplayedDuringPublication": true
+}

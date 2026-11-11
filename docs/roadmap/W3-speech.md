@@ -1,5 +1,7 @@
 ## 2026-11-11 更新：KV288模拟器对照完成，未证RSS收益
 
+本地c66ece0/26dd360/bceb424已提交，双端#15/wiki已回读一致（GHcomment6800044674、GLnote43212、GHWiki de8161c7）；[同步收据](../validation/w3-qwen-kv288-emulator-observed-sync-20261111.json)。源码分支未push，marker已用勿重发。
+
 独立固定65文件批次completed，117阶段/65最终文本与原KV512逐字一致；中文CER6.78%、英文近场WER9.87%、AMI远场WER28.32%，13挑战严格空，工程质量门通过。采样最高RSS1,542,725,632B，比原512高3,719,168B；静态KV少49MiB未体现为采样峰值下降，独立墙钟差不建立受控加速。448冻结、18执行门、同run双读/政策收取/恢复/关闭通过；无新麦克风/AiAi/下载/生产变化。详见[结果与剩余门](../validation/w3-qwen-kv288-emulator-observed-20261111.md)。本项仅模拟器补充，TECNO完整质量/资源、truepeak/GPU/energy及发布余门保持，W3/R4/R5open；原heap真机run仍未消耗。
 
 ## KV 预检同步检查点（2026-11-11）
