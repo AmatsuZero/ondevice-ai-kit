@@ -1,3 +1,9 @@
+## 新增：嵌套 ORT 下载依赖与通知关联（2026-11-11）
+
+14 条 arm64 Fetch 已与固定源码声明及通知逐行关联：13 源码依赖、1 Linux host protoc，不是 14 个运行时库。父核 2 GitBlob/14 行/13 通知段；完整声明 SHA1 保留但未下载归档重算。mp11 仅关联通用 Boost 段，嵌套 Eigen 精确 commit 与 Sherpa 5.0.1 分开；补丁命令的条件范围已按真实源码订正，不推定历史应用成功。[有界映射](../validation/w3-runtime-ort-dependency-map-20261111.md)／[收据](../validation/w3-runtime-ort-dependency-map-20261111.json)。
+
+原材料和 108/120 冻结守卫保持，W3/R4/R5 仍 open；递归最终组成/完整二进制对应/生产通知/发布复审仍缺。ADB 和 Mobile MCP 均无 Android，heap 唯一 run 未消耗，下一设备动作仍为原合同 fresh preflight；不开麦克风/AiAi、不下载二进制或放宽资源门。
+
 ## 同步检查点（2026-11-11）
 
 嵌套 ORT 补核本地已提交 `19ef630`，两端 #15 与 Wiki 已逐字回读；两 Wiki SHA 一致，新 marker 已用，见[同步收据](../validation/w3-runtime-ort-build-observed-sync-20261111.json)。本轮结束前 ADB 清单仍空，heap 120 项冻结守卫保持、唯一 run 未消耗；没有新安装/推理/二进制下载。W3/R4/R5 仍 open，下一项是 TECNO 连接恢复后的原合同单片诊断；出处及生产余门保持。

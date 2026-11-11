@@ -1,3 +1,8 @@
+## 2026-11-11：W3嵌套ORT下载依赖与通知逐行关联通过
+
+免费hy3首稿因补丁条件错误/缺固定链接拒收；独立定点订正版原字节集成，父核14条实际Fetch=13源码依赖+1Linuxhostprotoc，与固定ORT33ca962的deps.txt/externalcmake及13个ThirdPartyNotices段逐行对应。声明archiveSHA1没有重下载校验，mp11仅通用Boost段，不证明完整归属；嵌套Eigen固定1d8b82b不混同Sherpa5.0.1。protobuf/flatbuffers的Patch_FOUND与date/GSL无同一guard分别保留，源码声明不能证明历史补丁成功。入口docs/validation/w3-runtime-ort-dependency-map-20261111.{md,json}，独立目录probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/。
+2GitBlob/14行/13通知段/原50+15材料/前ORT4文件及108+120冻结守卫通过；0归档或二进制下载/新设备推理。ADB清单空，MobileMCP亦无Android；heap唯一run仍未消耗。无活动helper，旧native429不重试。W3/R4/R5open、goalactive，source-to-AAR/递归最终组成/生产通知/发布复审仍未过；待本项精确提交和新marker双端同步。下方记录保持。
+
 ## 2026-11-11：W3嵌套ORT补核已提交并同步双端
 
 本地19ef630精确10文件，86份既有dirty内容保持，源码未push。免费hy3订正版/父验收与2GitBlob/50日志摘录、原50+15材料/108+120冻结守卫通过；源码→exactAAR/递归组成/生产通知/独立发布复审仍缺，W3/R4/R5open、goalactive。marker w3-ort-build-provenance-followup-20261111已用：GH#15comment6795218620、GL#15note43195、GHWiki2e6bc5b20c5cac1471d4f1f3fe5dc87b4d5f4883，两WikiSHAb377f4f75bcae4eb28de298d0bbba6d9935c20cc73b4388446862234dba52e3f逐字回读一致；收据docs/validation/w3-runtime-ort-build-observed-sync-20261111.json，勿重发。

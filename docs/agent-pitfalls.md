@@ -1,3 +1,8 @@
+## W3 ORT 依赖映射：host 工具、声明摘要与补丁 guard（2026-11-11）
+
+- **现象/已证实原因**：有界映射首稿把 protobuf/date/GSL/flatbuffers 四组补丁全部写成受 Patch_FOUND 控制；固定源码实际只有 protobuf/flatbuffers 有同一条件，date/GSL 在所查声明中没有。补丁命令存在或 Found Patch 行均不足以证明历史 patch 成功。首稿归档后交免费 hy3 定点订正，父逐行核对。
+- **恢复/边界**：14 条 Fetch 区分 13 源码依赖与 Linux host protoc；deps.txt 的 SHA1 是声明而非本次归档实测。mp11 没有显式 URL_HASH 参数不证明别处没有校验，通用 Boost 通知不证明 mp11 的完整归属；嵌套 ORT Eigen 精确 commit 与 Sherpa 5.0.1 是不同依赖边。通知存在不证明最终静态成员。证据 `docs/validation/w3-runtime-ort-dependency-map-20261111.{md,json}` 与本机 `ort-dependency-notice-map/`；不由这份映射关闭 W3 或发布门。
+
 ## W3 嵌套 ORT：release tag 不等于实际执行头（2026-11-11）
 
 - **症状/已证实原因**：出处首稿将 tag 与 executed 工作流参数写反，虚构 overwrite 矛盾；将 attestation 404 当不存在，并将组合 ZIP 与单 ABI 工件 ZIP 摘要不同当矛盾。固定 GitBlob 和真实 job/head/log 证实 tag 为 1.27.1/release-v1.27.1-2/false，实际执行为 1.28.2/test-ci/true；collect 日志与后者一致。
