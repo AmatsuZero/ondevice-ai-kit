@@ -1,3 +1,7 @@
+## 2026-11-11 W3父验收增量
+
+heap父端21项合成拒收+原工具61项回归通过；外部wrapper429零交付仍待线路选择。原资源门/未执行单片保持，无设备/推理/构建；实际标签、时钟对齐、实包和独立复核仍缺，W3open。详见docs/validation/w3-qwen-heap-parent-preparation-20261111.md，源码未push。
+
 W3当前（2026-11-11）：官方运行时出处/内存边界证据已提交f9b4ad0并同步双端#15/Wiki；新heap实现免费hy4free真实429/code6004、零候选，提示15:12:49+08重置，停线待接续选择。[当前准备与阻塞](validation/w3-qwen-heap-preparation-20261111.md)。父缺候选RED，无新构建/装机/推理；W3仍open，下方生成中为历史。
 
 W3新增（2026-11-11）：运行时材料fd95f8c已同步双端#15/Wiki并回读；[官方AAR身份](validation/w3-runtime-official-provenance-20261111.md)的公布digest/size/tag已核实，实际上游日志确认TTS/diarization启用，递归/发布门仍缺。[固定内存生命周期](validation/w3-qwen-memory-lifetimes-20261111.md)已核实际动态KV512基础112MiB，非峰值/根因；只选原未执行index25的heap诊断外部候选生成中，无新设备推理，W3open。

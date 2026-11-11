@@ -1,3 +1,8 @@
+## 2026-11-11：W3 heap父端离线报告校验21项通过；外部实现仍待额度线路
+
+新增父端verify_report/check_parent，仅主代理验收脚本；21项合成拒收及原arena22/FILE8/metrics31共82项通过，全部原RED保留。核固定index25/原报告planned、单片计数、heap事件/原始RSS/政策报告绑定/冻结关键摘要；128合法129拒收，采样三项不强加求和。uptime原负1秒容差保持，原host缺minAvailable由trace重算。实际标签须源复核后绑定；两个时钟精确对齐、device/prepare/build工具仍缺，不能当已冻结/真机或R4R5通过。入口docs/validation/w3-qwen-heap-parent-preparation-20261111.md。
+外部wrapper仍零文件，原hy4free429待此前用户线路选择，不自动重试/换模型；native旧429不重试，无新助手/设备/推理/下载/生产改动。当前只自审，独立复核未过；W3open/goalactive，源码未push。新父端结果仅本地记录，上一轮设备/出处/配额结果已双端同步，不重复发布旧marker。
+
 ## 2026-11-11：W3 heap候选quota终态零文件；本轮证据双端已同步
 
 本地fd95f8c材料/成本与f9b4ad0官方出处/内存生命周期/诊断准备已提交，源码未push。最新marker w3-runtime-provenance-lifetimes-20261111已用：GH#15comment6787469165、GL#15note42870、GHWiki fea6bdbcb8a246fd403d65f69060baef0bb95bf2，两WikiSHA5bd975f90c2d3c67c207eaa9122d7d1cd23ce66143c8745fc4d20adbb88df8cc一致。收据docs/validation/w3-runtime-lifetimes-sync-20261111.json；旧材料marker也已用，勿重发。

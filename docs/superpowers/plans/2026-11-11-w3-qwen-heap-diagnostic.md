@@ -12,6 +12,8 @@
 
 当前执行：父host适配器/故障检查与缺候选RED已准备；免费hy4free一次调用真实429/code6004、零候选，停线等待接续选择。尚未通过Kotlin/构建/设备门，[具体阻塞](../../validation/w3-qwen-heap-preparation-20261111.md)。
 
+父端独立准备：只读`verify_report.py/check_parent.py`已通过21项合成检查和原工具61项回归，见[范围与RED/GREEN](../../validation/w3-qwen-heap-parent-preparation-20261111.md)。Task1缺候选，Task2整体未完成；此项只推进不依赖候选的父验收部分。后续`heapBoundaryLabels`须由实际源码复核写入合同；收取需报告SHA绑定的政策收据、固定run-plan及原始RSS，min available由trace重算，不需改变旧host摘要。两个时钟精确对齐仍未实现，不能据此放行设备。
+
 ## Global Constraints
 
 仅`fleurs-en_us-1776`/index25；最多1构造/2stream/2decode。原模型、AAR、两阶段/English及arena-off政策保持。1.5GiB/512MiB/120s不变；不开麦克风/AiAi/下载、不改生产或旧冻结文件。native child旧429不重试。

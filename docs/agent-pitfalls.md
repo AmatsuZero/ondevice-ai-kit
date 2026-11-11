@@ -1,3 +1,7 @@
+## W3 heap父验收补充（2026-11-11）
+
+- **单片准备不能沿用全量完成判断或缺省资源观测**：新heap父端以原65输入清单固定index25；保留原共同模型/配置/释放检查，但不合成其余64行，也不输出全量quality/production通过。原host摘要没有min available，必须从同PID/startTicks原始RSS重算；终态观测gap不能忽略。扩展加载时间/typed数值/观测gap先7fail，修正后21项通过。采样API为非原子，不强加三项求和；原守卫允许uptime取整windowAge>=-1，新parser先误拒负0.005、巨大整数溢出，RED1fail/1error后修正。边界非空label不足以证明覆盖，须实际source复核后冻结语义映射；传递evaluator必需hash漏项的RED也已保留。所有本项为父端合成/离线验证，没有新Kotlin/实包/设备或native根因证明。证据docs/validation/w3-qwen-heap-parent-preparation-20261111.md及本机heap-parent-preparation/。
+
 # 助手执行踩坑记录
 
 适用于本项目主代理、cbc、dsh、OpenCode、Copilot、agy、Ollama、qoder 和原生子代理。执行前读取与任务相关的条目；遇到相同错误先查本文，再决定是否继续。只允许输出候选、禁止工具的任务，由主代理把相关条目附到提示词，不能为读本文扩大工具权限。
