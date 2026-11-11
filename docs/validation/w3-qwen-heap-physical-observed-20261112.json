@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-11T22:56:50.645712+00:00",
+  "runId": "w3-qwen-heap-20261111-01",
+  "runConsumed": true,
+  "replayAllowed": false,
+  "sourceHeadAtRun": "33c8e8950882362566d1a42bc43de65a53365785",
+  "sourceFingerprint": "a79adaa583e3707be20055e2fc6dd01f6ca58a4da5da686cf21196666d0ce7e1",
+  "frozenFiles": 120,
+  "diagnosticFrozenSHA256": "111cb4a5705604fb23110187382490a46a41e7aa17903c9c3cee3f2ec84a7bfd",
+  "reportSHA256": "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e",
+  "device": {
+    "model": "TECNO KM9",
+    "androidApi": 35,
+    "abi": "arm64-v8a"
+  },
+  "selectedOriginalIndex": 25,
+  "selectedClipId": "fleurs-en_us-1776",
+  "audioSamples": 76800,
+  "audioSeconds": 4.8,
+  "deviceTerminal": true,
+  "deviceStatus": "completed",
+  "diagnosticAccepted": false,
+  "executionAccepted": false,
+  "parentCheckCount": 20,
+  "parentChecksPassed": 19,
+  "failedParentChecks": [
+    "typedResourceObservations"
+  ],
+  "countsAreExactTerminalEvidence": true,
+  "actualConstructors": 1,
+  "actualCreatedStreams": 2,
+  "actualDecodeCalls": 2,
+  "heapEventCount": 18,
+  "hostSeconds": 25.02289066600497,
+  "loadSeconds": 9.570995693,
+  "caseSeconds": 9.314667385,
+  "recognizerReleaseSeconds": 0.253385154,
+  "sampledMaxRssBytes": 1445167104,
+  "sampledMaxRssGiB": 1.345916748046875,
+  "minDeviceAvailableBytes": 2157887488,
+  "rssSamples": 41,
+  "stopReason": null,
+  "terminalObservationGap": "RuntimeError:(('shell', 'run-as', 'io.ondeviceai.acceptance.qwenheap', 'cat', '/proc/29724/status'), 1, '', 'cat: /proc/29724/status: No such file or directory\\n')",
+  "lastObservedReportEqualsFinal": false,
+  "lastObservedReportStatus": "running",
+  "heapSelectedBoundaries": [
+    {
+      "seq": 0,
+      "label": "initial-before-report",
+      "elapsedRealtimeNanos": 2301387368123368,
+      "nativeHeapSizeBytes": 13942784,
+      "nativeHeapAllocatedBytes": 6921168,
+      "nativeHeapFreeBytes": 2087872
+    },
+    {
+      "seq": 1,
+      "label": "constructor-before",
+      "elapsedRealtimeNanos": 2301391172793599,
+      "nativeHeapSizeBytes": 28598272,
+      "nativeHeapAllocatedBytes": 21337424,
+      "nativeHeapFreeBytes": 2805088
+    },
+    {
+      "seq": 2,
+      "label": "constructor-returned",
+      "elapsedRealtimeNanos": 2301400743956676,
+      "nativeHeapSizeBytes": 1115049984,
+      "nativeHeapAllocatedBytes": 1081139296,
+      "nativeHeapFreeBytes": 27362688
+    },
+    {
+      "seq": 8,
+      "label": "core-persist",
+      "elapsedRealtimeNanos": 2301405887115676,
+      "nativeHeapSizeBytes": 1116327936,
+      "nativeHeapAllocatedBytes": 1081647728,
+      "nativeHeapFreeBytes": 28062640
+    },
+    {
+      "seq": 13,
+      "label": "core-persist",
+      "elapsedRealtimeNanos": 2301410091847138,
+      "nativeHeapSizeBytes": 1116442624,
+      "nativeHeapAllocatedBytes": 1081754704,
+      "nativeHeapFreeBytes": 28131328
+    },
+    {
+      "seq": 15,
+      "label": "case-returned",
+      "elapsedRealtimeNanos": 2301410109886753,
+      "nativeHeapSizeBytes": 1116442624,
+      "nativeHeapAllocatedBytes": 1081444768,
+      "nativeHeapFreeBytes": 28441264
+    },
+    {
+      "seq": 16,
+      "label": "recognizer-released",
+      "elapsedRealtimeNanos": 2301410371230830,
+      "nativeHeapSizeBytes": 119562240,
+      "nativeHeapAllocatedBytes": 27918000,
+      "nativeHeapFreeBytes": 87995040
+    },
+    {
+      "seq": 17,
+      "label": "activity-torn-down",
+      "elapsedRealtimeNanos": 2301411027385523,
+      "nativeHeapSizeBytes": 119836672,
+      "nativeHeapAllocatedBytes": 28093888,
+      "nativeHeapFreeBytes": 88085392
+    }
+  ],
+  "stageMetrics": [
+    {
+      "language": "auto",
+      "metrics": {
+        "word": {
+          "referenceUnits": 15,
+          "hypothesisUnits": 15,
+          "substitutions": 4,
+          "deletions": 0,
+          "insertions": 0,
+          "errors": 4,
+          "rate": 0.26666666666666666,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 75,
+          "hypothesisUnits": 70,
+          "substitutions": 2,
+          "deletions": 6,
+          "insertions": 1,
+          "errors": 9,
+          "rate": 0.12,
+          "defined": true
+        }
+      },
+      "decodeNanos": 4856408385,
+      "decodeRTF": 1.0117517468750001
+    },
+    {
+      "language": "English",
+      "metrics": {
+        "word": {
+          "referenceUnits": 15,
+          "hypothesisUnits": 17,
+          "substitutions": 6,
+          "deletions": 0,
+          "insertions": 2,
+          "errors": 8,
+          "rate": 0.5333333333333333,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 75,
+          "hypothesisUnits": 82,
+          "substitutions": 8,
+          "deletions": 6,
+          "insertions": 13,
+          "errors": 27,
+          "rate": 0.36,
+          "defined": true
+        }
+      },
+      "decodeNanos": 4093997231,
+      "decodeRTF": 0.8529160897916668
+    }
+  ],
+  "truePeakMeasured": false,
+  "preciseClockAlignmentVerified": false,
+  "nativePolicyEffectVerified": false,
+  "engineeringQualityAccepted": false,
+  "productionReady": false,
+  "w3Status": "open",
+  "r4Status": "open",
+  "r5Status": "open",
+  "microphoneStarts": 0,
+  "networkRequests": 0,
+  "restoration": {
+    "removedOnlyExactNewAliases": [
+      "io.ondeviceai.acceptance.qwenheap.test",
+      "io.ondeviceai.acceptance.qwenheap"
+    ],
+    "exactStagingRemoved": "/data/local/tmp/w3-qwen-heap-20261111-01",
+    "ordinaryAppsModelsUnchanged": true,
+    "ordinaryAppReturned": true
+  },
+  "preDocumentProtectedCount": 94,
+  "preDocumentProtectedChanges": [],
+  "evidenceRoot": "artifacts/verification/w3-qwen-heap-20261111",
+  "evidenceHashes": {
+    "artifacts/verification/w3-qwen-heap-20261111/allocator-policy-collected.json": "168538273b612fb0d9fc5421b00b9874ac1f146ffc5f956bf0e7401f058415d1",
+    "artifacts/verification/w3-qwen-heap-20261111/build-result.json": "cf3a3a4bebae35dfc301c7ba77be6a8b3bf7af223360d7ee3b47d812289c14a2",
+    "artifacts/verification/w3-qwen-heap-20261111/build.log": "595213f2d51b017a11f527b3e9e44899d2881207fe6cee990ec41174d39707cd",
+    "artifacts/verification/w3-qwen-heap-20261111/candidate-accepted.json": "3656648cfd75c9e77ceee454036bda7aa29438a30e66faa487a160a61d94fceb",
+    "artifacts/verification/w3-qwen-heap-20261111/collection.json": "7e68099932aa39f98d110e59f7211067967130852c2d2f5c41aa2892d668b932",
+    "artifacts/verification/w3-qwen-heap-20261111/device-before.json": "fe491fe395cd24797b1aaee77ffbb610000564342c819591814da029e4a90381",
+    "artifacts/verification/w3-qwen-heap-20261111/device-report-confirm.json": "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e",
+    "artifacts/verification/w3-qwen-heap-20261111/device-report.json": "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e",
+    "artifacts/verification/w3-qwen-heap-20261111/device-transport-observation-confirm.json": "c82f40e14113c7d30e358da15a06be4fc4a4aefa4caa4138f28f47cbe330cc53",
+    "artifacts/verification/w3-qwen-heap-20261111/device-transport-observation.json": "c93cfedc8556d06afe659bdb70831612edf58c207e3980e0afa64d2fef760783",
+    "artifacts/verification/w3-qwen-heap-20261111/diagnostic-frozen.json": "111cb4a5705604fb23110187382490a46a41e7aa17903c9c3cee3f2ec84a7bfd",
+    "artifacts/verification/w3-qwen-heap-20261111/freeze-verified.json": "ff5fb8c54faef299b10d1fcb006f23ce6fd438da3f77125e41384ae5038c777e",
+    "artifacts/verification/w3-qwen-heap-20261111/heap-recorder-dex-supplement.json": "69845d6ef0d69781280846e7b5374052e6fac1b76cbcc5f18cf0d62faa40fea8",
+    "artifacts/verification/w3-qwen-heap-20261111/host-result.json": "e5527edfa39b113f6dfd862b810aa8cfddc8b9aa6a4fd7d04dd01d1b8d4a1d45",
+    "artifacts/verification/w3-qwen-heap-20261111/install-main.apk.json": "7fa7aaa3c2439feb480503199ab109aa452e86ddd7618b1082adfa64a193a8e4",
+    "artifacts/verification/w3-qwen-heap-20261111/install-test.apk.json": "7fa7aaa3c2439feb480503199ab109aa452e86ddd7618b1082adfa64a193a8e4",
+    "artifacts/verification/w3-qwen-heap-20261111/instrumentation.log": "8ff85831cc40d638c460e5e80c434f888aed18e3d5a91ee85d131133b9a5e726",
+    "artifacts/verification/w3-qwen-heap-20261111/last-observed-report.json": "f6876483dace7f99fab0bfc9516e31438b45cc5f2c0e2cbd02146c47d4e70246",
+    "artifacts/verification/w3-qwen-heap-20261111/package-verified.json": "a8f94ddb0e71ee7ed9df57d13c61aa340e09d84441c02db9cf635f28c842329d",
+    "artifacts/verification/w3-qwen-heap-20261111/parent-heap-acceptance.json": "3575b70f0531560aeecc94935cf41f4415c15e1a5bef7e494b8f57c2cb31681d",
+    "artifacts/verification/w3-qwen-heap-20261111/preflight-first.json": "81c7183ffa65fd400574f8912a49cf5b41da27c6a9e508511ccece829b8dd4c7",
+    "artifacts/verification/w3-qwen-heap-20261111/prepared.json": "e5c1ad50befa784337d20115de9fc5197fc683f33aaae5cf03991cbe0f83af10",
+    "artifacts/verification/w3-qwen-heap-20261111/production-before.json": "4e1b0486be19582a9b001eefa6b279ae80419710e516a258595cb3c74f3a8330",
+    "artifacts/verification/w3-qwen-heap-20261111/restoration.json": "0e32c49303ab6a251d5846d70c78872de129cfefc68103afb0a097ded9a4d6a5",
+    "artifacts/verification/w3-qwen-heap-20261111/rss-samples.jsonl": "596bbd4e0c9681485da4afd307e904616826ccbea281bf6b43dcba3788309b0f",
+    "artifacts/verification/w3-qwen-heap-20261111/run-plan.json": "15b36af9adb758ae22767fbe77b0b5a2198de9b8bf293f1def0eb02bef72b789",
+    "artifacts/verification/w3-qwen-heap-20261111/run-started.json": "668ed5788750aa8d991b3cab9cc043ae9304a6d1f4c55b5e0de1d9dd352340bf",
+    "artifacts/verification/w3-qwen-heap-20261111/transfer-conv_frontend.onnx.json": "43c728a835836162b4665b46dd7daaad35deda2b146227e7fc3f4469a6838d25",
+    "artifacts/verification/w3-qwen-heap-20261111/transfer-decoder.int8.onnx.json": "050d763025af343d5505c21c6c34225821b3e9f3ca8fc002769f048c1f78d443",
+    "artifacts/verification/w3-qwen-heap-20261111/transfer-encoder.int8.onnx.json": "27ce74e38c46188b7ede15b1407063a4f2b08b2ac53ece15cb11502b9d1a1c2d",
+    "artifacts/verification/w3-qwen-heap-20261111/transfer-main.apk.json": "1b88be442750eccd6195901f6d01ccb3fb60dcb0e1de3d759fb7c0a6acb55259",
+    "artifacts/verification/w3-qwen-heap-20261111/transfer-test.apk.json": "10cea7579805328c007721a9c0a1397afc01b3732f273fd7558797c17d68b345",
+    "artifacts/verification/w3-qwen-heap-20261111/transfer-tokenizer-merges.txt.json": "4b7c80e06d74303065f1cc5c1170144b418e86b4708001b549f5bda81df86597",
+    "artifacts/verification/w3-qwen-heap-20261111/transfer-tokenizer-tokenizer_config.json.json": "8fe4a0b86db41e6cb7b08f75b0101a8177fb789e6031ba6706b463998c473075",
+    "artifacts/verification/w3-qwen-heap-20261111/transfer-tokenizer-vocab.json.json": "ba394652d849733af6c73496de2ac161cccc71a1634460ce126b7688bc44c41e"
+  },
+  "validation": {
+    "freshCollectedEvidenceEqualsSaved": true,
+    "parentRegressionCommand": [
+      "rtk",
+      "proxy",
+      "python3",
+      "probes/android-qwen-heap/check_parent.py"
+    ],
+    "parentRegressionExitCode": 0,
+    "stdoutPath": ".omx/artifacts/w3-qwen-heap-resumed-20261112-064631/parent-tests.stdout",
+    "stderrPath": ".omx/artifacts/w3-qwen-heap-resumed-20261112-064631/parent-tests.stderr"
+  },
+  "collectionRecovery": {
+    "sameRunOnly": true,
+    "policyReceiptMatches": true,
+    "boundedPolicyBytes": 20,
+    "boundedReadLimitBytes": 21,
+    "initialCollectErrorEvidence": "tool-result-observation only; original collect stdout/stderr were not separately redirected",
+    "initialQuotedWrapperError": "AttributeError before adb; raw stdout/stderr saved",
+    "correctedContinuationPath": ".omx/artifacts/w3-qwen-heap-policy-continuation-20261112/collect-policy-quoted-v2.py"
+  },
+  "remaining": [
+    "full TECNO fixed65 quality and resource acceptance",
+    "terminal resource-observation gap remains under frozen rejection",
+    "runtime source-to-exact-AAR and recursive binary composition",
+    "production notices and independent release review",
+    "true peak, GPU, energy and prospective production budget"
+  ]
+}

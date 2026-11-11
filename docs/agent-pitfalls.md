@@ -1,3 +1,8 @@
+## W3 实体 heap：末端采样缺口与同 run 续取（2026-11-12）
+
+- **现象/已证边界**：原物理 heap 单片报告 completed/1 构造2解码，但主机在 instrumentation 结束附近读取 `/proc/PID/status` 遇 ENOENT；最后观察报告仍 running，与最终双读报告不同。冻结验收严格拒绝 non-null `terminalObservationGap`，实际 19/20，只缺 typedResourceObservations。不能把 exit0、完整终态或低于 RSS 停止线写成诊断通过，不能事后清 gap 或重放已消耗 run。
+- **恢复/范围**：政策 stat 再次遭遇已知 ADB 参数重组，只把原同 run 读取适配为 `shlex.join` 后续取；冻结源码不改、零新解码。首包装器误引用物理 adapter 未导出的 EVIDENCE，AttributeError 在 ADB 前终止；独立 v2 用已固定路径并先重跑 preflight 后成功。原 collect 没单独重定向 stderr，仅工具结果观察可用；不能宣称磁盘原 stderr 已保留。收据 `docs/validation/w3-qwen-heap-physical-observed-20261112.json`，raw/续取 `.omx/artifacts/w3-qwen-heap-policy-continuation-20261112/`。两个别名与 staging 已精确恢复；后续采样器修复须面向未来独立合同，不追改本次结果。
+
 ## 原始 partial 保持不能只检查长度（2026-11-12）
 
 完整归档检查器原先只核两个历史partial尺寸，父端另有SHA核验但未纳入可重跑入口。隔离副本中保持尺寸、翻转一个字节，两次真实负向检查均被误接受（2fail）；补固定SHA256后3/3回归通过，原始归档/partial不改。任何“历史原件保持”结论须由对应内容摘要支撑，不能只凭文件存在、大小或manifest中的true。证据`.omx/artifacts/w3-runtime-materials-20261111/partial-integrity-20261112/`及`docs/validation/w3-runtime-partial-integrity-20261112.md`；不因此扩大source-to-AAR或发布结论。

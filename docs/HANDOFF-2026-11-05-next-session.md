@@ -1,3 +1,9 @@
+## 2026-11-12：TECNO 原 heap run 已执行并恢复，19/20 资源观察未通过
+
+**`w3-qwen-heap-20261111-01` 已 CONSUMED，不再按下方旧 UNCONSUMED 记录启动。** 真机 index25/1776 完整 terminal：1 构造/2 流/2 解码、18 heap、41 RSS；最高 1,445,167,104B、最小 available 2,157,887,488B，全部实际释放/teardown 成功。父端仅 `typedResourceObservations=false`，原 host 保留退出时 ENOENT 的 terminalObservationGap，最后观察报告仍 running，不能放宽 gate 或称诊断验收通过。
+
+报告 SHA `e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e`；同 run 政策只读引号续取成功，原 collect 工具结果观察及续取初稿 AttributeError/v2 原输出均保留。两个隔离别名和 staging 按冻结 restore 精确清除，普通 App/模型保持；文档更新前 94 保护路径无漂移，22 父端回归通过、120 冻结守卫保持。结果 `docs/validation/w3-qwen-heap-physical-observed-20261112.{md,json}`，原件 `artifacts/verification/w3-qwen-heap-20261111/`，恢复证据 `.omx/artifacts/w3-qwen-heap-resumed-20261112-064631/`。W3/R4/R5 open；不重跑原物理/模拟器批次。后续可修未来父端退出时的采样边界，需独立验证/冻结新计划；本次失败不追认为通过。
+
 ## 2026-11-12：W3历史partial摘要保护已提交及同步
 
 本地`c937097`精确7文件；GH#15 comment6808565871、GL#15 note43215、GHWiki366e489587fb865e72feeb180197a3be7707e15c，两Wiki SHA41c4e8a42d1688c4cfa55cdeb1c823c9f69a3c575b50bb413edca04f9371a7c1逐字回读一致。收据`validation/w3-runtime-partial-integrity-sync-20261112.json`，marker已用。首次GitLab GET EOF后独立读取恢复，未重复GitHub评论；远端写入均各1次。源码分支未push，0设备/推理/新下载，物理heaprun未消耗；W3/R4/R5open、goalactive。下一步仍是实体连接后的原合同诊断或继续无设备静态收尾，不能把模拟器替代TECNO。

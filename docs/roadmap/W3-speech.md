@@ -1,3 +1,9 @@
+## 2026-11-12：TECNO 原始 heap 单片已消耗，末端资源观察未验收
+
+`w3-qwen-heap-20261111-01` 已在 TECNO KM9/API35 完成固定 index25，**原 run 已消耗，禁止重放**。报告双读一致：1 构造/2 流/2 解码、18 heap 事件；41 RSS 样本最高 1,445,167,104B（1.346GiB），释放后 native allocated 27,918,000B。父端 19/20 项通过，唯一 `typedResourceObservations=false`：退出时 `/proc/PID/status` 消失，最后观察报告仍为 running；保留 non-null `terminalObservationGap`，`diagnosticAccepted=false`，不追认连续采样或 true peak。
+
+政策 `stat` 的远端参数边界失败后，仅同 run 有界续取成功；未改冻结源码/报告/门限，未重新解码。原始 collect 失败仅工具结果观察，未单独重定向原 stderr；续取首包装器 AttributeError 及 v2 原始输出均保留。两个隔离别名/精确 staging 已移除，普通 App/模型恢复，94 保护路径在文档更新前摘要不变。22 父端回归通过，120 冻结守卫保持。详见[实体观察](../validation/w3-qwen-heap-physical-observed-20261112.md)与[机器收据](../validation/w3-qwen-heap-physical-observed-20261112.json)。W3/R4/R5、完整手机质量/资源及生产发布余门保持 open；下方 UNCONSUMED/待实体连接为历史。
+
 ## 2026-11-12：历史partial摘要保护已提交并双端同步
 
 本地`c937097`精确7文件；GH#15 comment6808565871、GL#15 note43215、GH Wiki366e489，两Wiki逐字回读且SHA一致。[同步收据](../validation/w3-runtime-partial-integrity-sync-20261112.json)，marker `w3-runtime-partial-integrity-20261112`已用勿重复。首次GitLab读取遇EOF，GitHub评论已回读且未重复写；后续独立读取/写入成功。原13归档、27文本、旧partial和冻结守卫保持；W3/R4/R5及实体真机/生产余门仍open。
