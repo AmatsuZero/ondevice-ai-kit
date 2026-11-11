@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-11T11:56:43.109534+00:00",
+  "scope": "Official nested ORT arm64 build and four-ABI collection text observations; bounded helper research reviewed by primary.",
+  "candidateIntegratedByteForByte": true,
+  "helper": {
+    "model": "hy3",
+    "process": {
+      "exitCode": 0,
+      "seconds": 87.55544841699884,
+      "files": {
+        "ORT-PROVENANCE.md": {
+          "bytes": 6034,
+          "sha256": "a58c5d96cdf48df739702739e1b11c247301d7749c86989a01e7debcf5d110db"
+        }
+      }
+    },
+    "contextHashesUnchanged": 8,
+    "scopePreflightPassed": true,
+    "toolUseCounts": {
+      "Read": 7,
+      "Write": 1
+    },
+    "toolErrors": [
+      {
+        "result": {
+          "type": "tool_result",
+          "tool_use_id": "chatcmpl-tool-b83765bdd5c11983",
+          "content": [
+            {
+              "type": "text",
+              "text": "<tool_use_error>File does not exist.</tool_use_error>"
+            }
+          ],
+          "is_error": true,
+          "_meta": {
+            "rawResponse": {
+              "is_error": true,
+              "tool_error_code": "1001"
+            }
+          }
+        },
+        "invocation": {
+          "type": "tool_use",
+          "id": "chatcmpl-tool-b83765bdd5c11983",
+          "name": "Read",
+          "input": {
+            "file_path": "/private/tmp/odai-hy3-w3-ort-provenance-correction-20261111/candidate/ORT-PROVENANCE.md"
+          }
+        }
+      }
+    ],
+    "resultErrorAttributionCorrection": "Final helper message attributes missing-file error to original-rejected.md. Actual tool ID maps it to the candidate output precreation read. Original-rejected.md read succeeded.",
+    "selfReportedSizeCorrection": "Final message says about 5KiB; actual 6034 bytes (below 6KiB), verified independently.",
+    "initialCandidateAccepted": false,
+    "correctedCandidateAcceptedForBoundedResearch": true
+  },
+  "sourceWorkflowGitBlobsVerified": 2,
+  "workflowSources": {
+    "android-shared-workflow": {
+      "url": "https://github.com/csukuangfj/onnxruntime-libs/blob/5cc3d2e84d9eade2562cf29a93fa3a520a75ca57/.github/workflows/android-shared.yaml",
+      "bytes": 7470,
+      "sha256": "6d62d67c90d582dccef81b5b963c38eac02926e91e9bbecbb10fc873dd74399b",
+      "gitBlob": "7919f6b338f7e8991684d2bb45056475fd77acb3"
+    },
+    "executed-android-workflow": {
+      "url": "https://github.com/csukuangfj/onnxruntime-libs/blob/bb069649de9edc4689b2c5f9609e5499ae0bee9d/.github/workflows/android-shared.yaml",
+      "bytes": 7459,
+      "sha256": "b8440e0ac250c83efa4f79152b6379cdf022565e21ed94a34fdd80f52d67bea9",
+      "gitBlob": "5a5b7595e53d1aaac298498b829d91d7b98de8fa"
+    }
+  },
+  "logFilesVerified": {
+    "ort-arm64": {
+      "bytes": 938628,
+      "sha256": "d2f7a0facac749ab6c165535a3fce3295b137d904048255c5e700203e8a1f274",
+      "lines": 7431
+    },
+    "ort-collect": {
+      "bytes": 53494,
+      "sha256": "6e4adeb3b6eff9354c032e824bdaea37889b75c0cf8a0b4bbcef887288d5b5e2",
+      "lines": 656
+    }
+  },
+  "logExcerptsVerified": 50,
+  "releaseAssetMetadataVerified": {
+    "name": "onnxruntime-android-1.28.2.zip",
+    "id": 544593317,
+    "size": 33765715,
+    "digest": "sha256:01518867f78241138b6aa25925802e843a4fa9085af8d303d49e35bbb52aff4d",
+    "created_at": "2026-09-04T16:24:05Z",
+    "updated_at": "2026-09-04T16:24:07Z",
+    "browser_download_url": "https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-android-1.28.2.zip"
+  },
+  "arm64ObservedSourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+  "arm64OnlyConfig": {
+    "NNAPI": true,
+    "androidAPI": 27,
+    "LTO": true,
+    "mimalloc": false
+  },
+  "arm64ArtifactZIPDigest": "4a63146d05fe87c3a6f9df6a03ee6a86a90e59da146ff9c98dd5559dc562a30a",
+  "matchingSOFileSizes": {
+    "jni/arm64-v8a/libonnxruntime.so": 22249560,
+    "jni/armeabi-v7a/libonnxruntime.so": 15359592,
+    "jni/x86/libonnxruntime.so": 26491148,
+    "jni/x86_64/libonnxruntime.so": 25581120
+  },
+  "memberDigestEqualityVerified": false,
+  "attestationQueryStatus": 404,
+  "attestationExistenceConclusion": "unverified; 404 is a query observation only",
+  "hfMirrorObservation": {
+    "repository": "csukuangfj2/android-onnxruntime-libs",
+    "currentRevision": "66a75f607848c2643147860dd1dbd6a91f482a5f",
+    "currentSiblings": [
+      {
+        "rfilename": ".gitattributes"
+      }
+    ],
+    "noMirrorDigestAvailable": true
+  },
+  "originalMaterialFilesUnchanged": 50,
+  "priorSupplementFilesUnchanged": 15,
+  "arenaFrozenFilesUnchanged": 108,
+  "heapFrozenFilesUnchanged": 120,
+  "heapFrozenContractSHA256": "111cb4a5705604fb23110187382490a46a41e7aa17903c9c3cee3f2ec84a7bfd",
+  "dirtyFilesPreservedBeforeStatusUpdates": 86,
+  "materialRoot": "probes/sherpa-runtime-materials/2.0.1-ort-observed-20261111",
+  "fileHashes": {
+    "probes/sherpa-runtime-materials/2.0.1-ort-observed-20261111/tag-android-shared.yaml": {
+      "bytes": 7470,
+      "sha256": "6d62d67c90d582dccef81b5b963c38eac02926e91e9bbecbb10fc873dd74399b"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-observed-20261111/executed-android-shared.yaml": {
+      "bytes": 7459,
+      "sha256": "b8440e0ac250c83efa4f79152b6379cdf022565e21ed94a34fdd80f52d67bea9"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-observed-20261111/observations.json": {
+      "bytes": 16572,
+      "sha256": "d831189bdd563c27ef9b19051659bba13eaf60690cab0c50c191103ec88eb0b7"
+    },
+    "docs/validation/w3-runtime-ort-build-observed-20261111.md": {
+      "bytes": 6034,
+      "sha256": "a58c5d96cdf48df739702739e1b11c247301d7749c86989a01e7debcf5d110db"
+    }
+  },
+  "localEvidenceRoot": ".omx/artifacts/w3-runtime-materials-20261111/ort-provenance-followup",
+  "sourceToPrebuiltAttestationVerified": false,
+  "exhaustiveStaticCompositionVerified": false,
+  "productionNoticeRetentionVerified": false,
+  "independentReleaseReviewAccepted": false,
+  "newModelCalls": 0,
+  "newDeviceMutations": 0,
+  "newBinaryDownloads": 0,
+  "productionChanges": false,
+  "heapRunConsumed": false,
+  "w3Status": "open",
+  "r4Status": "open",
+  "r5Status": "open",
+  "sourceBranchPushed": false,
+  "initialParentVerifierFailure": "Prior script compared actual SHA string with receipt {bytes, sha256} dict. This was a verifier type error, not a file mismatch; corrected keyed comparison verifies all 65 materials.",
+  "validationScope": "Source blobs, log excerpts, actual helper tool events, material bytes and frozen structural guards; no tests/build/device inference rerun for this text-only followup.",
+  "parentValidationCorrection": "First fresh acceptance assertion expected 未主张, actual candidate has 未据其主张. Literal assertion corrected before any integration; source claim unchanged. Full keyed material checks and both structural guards then passed."
+}

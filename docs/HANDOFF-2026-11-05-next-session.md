@@ -1,3 +1,8 @@
+## 2026-11-11：W3嵌套ORT官方构建记录补核，heap仍待设备
+
+免费hy3首稿拒收，订正版6034B/SHAa58c5d96cdf48df739702739e1b11c247301d7749c86989a01e7debcf5d110db原样集成。实际arm64job101086389995的source33ca962/NNAPI/API27/LTO/mimallocOFF与工件上传下载摘要核实；executedheadbb069649与tag5cc3d2e8工作流不同，首稿写反已纠正，overwrite无矛盾。collect可见Maven1.26.0回退覆盖四ABI、HF首次拒绝和空重试；size匹配不等于memberhash，404不证明没有attestation/许可。2GitBlob/50日志摘录、原50+15材料/108+120冻结守卫全过。入口docs/validation/w3-runtime-ort-parent-assessment-20261111.md及w3-runtime-ort-build-observed-20261111.{md,json}；独立材料probes/sherpa-runtime-materials/2.0.1-ort-observed-20261111/，旧目录不改。
+当前ADB清单仍空，0安装/推理/模型或runtimebinary下载；heaprun未消耗，无prepared/run-started/collection。源码精确对应/递归组成/生产通知/独立发布复审仍缺，W3/R4/R5open、goalactive。无活动helper，旧native429不重试；下一项按原heap合同freshpreflight→prepare→唯一诊断→同run收取恢复，不重建或重放旧批。本项待精确本地提交及新marker双端同步；下方历史保持。
+
 ## 2026-11-11：W3 heap冻结120项，当前ADB无设备
 
 实现与双复核已本地提交7f1d2f9（源码未push）；原字节wrapper33组274/记录器13组100、实际Android75任务/65PCM四库/lint0e7w、父103/tools691通过。单片合同w3-qwen-heap-20261111-01冻结120摘要SHA111cb4a5705604fb23110187382490a46a41e7aa17903c9c3cee3f2ec84a7bfd，守卫通过。fresh preflight在current-user只读查询失败，ADB清单为空/TECNO device not found；不能推断锁屏/授权。零安装/模型传输/native，run未消耗，无prepared/run-started/collection。入口docs/validation/w3-qwen-heap-ready-20261111.{md,json}。

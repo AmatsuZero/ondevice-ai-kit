@@ -1,3 +1,9 @@
+## W3 嵌套 ORT：release tag 不等于实际执行头（2026-11-11）
+
+- **症状/已证实原因**：出处首稿将 tag 与 executed 工作流参数写反，虚构 overwrite 矛盾；将 attestation 404 当不存在，并将组合 ZIP 与单 ABI 工件 ZIP 摘要不同当矛盾。固定 GitBlob 和真实 job/head/log 证实 tag 为 1.27.1/release-v1.27.1-2/false，实际执行为 1.28.2/test-ci/true；collect 日志与后者一致。
+- **恢复/边界**：保留拒收首稿，免费 hy3 定点订正后父核 2 GitBlob/50 精确摘录。404 只代表具体查询，大小相符不是成员摘要相同；不同容器摘要不作等价判断。只审 arm64 构建配置，不能推广四 ABI 或证明 final AAR 无其他补丁。HF 首次拒绝后空重试使整体 job success 不能证明镜像发布。证据 `docs/validation/w3-runtime-ort-parent-assessment-20261111.md` 与本机 `ort-provenance-followup/`。
+- **父校验器也须匹配收据形状**：既有 fileHashes 的值为 `{bytes, sha256}`，与实际 SHA 字符串直接比较的断言失败是脚本类型错误；按字段比较后原 50+15 文件均保持。候选创建前 Read 的 tool ID 必须实际关联，不能照搬最终文字对错误路径的误报。
+
 ## W3 heap实包与复核：真实布局及冻结清单（2026-11-11）
 
 - **合成夹具不能复制错误目录假设**：实际prepare找不到`android-qwen-file/QwenLoadCore.kt`，真实文件位于`android-qwen-load`。首次在写source/Gradle前停止；按真实目录先改夹具得到9errors RED，再修prepare/build/device三处，19检查GREEN。未在错误目录补源码或改旧冻结文件。

@@ -1,3 +1,5 @@
+W3最新（2026-11-11）：嵌套ORT官方arm64构建/collect文本补核通过，2GitBlob/50日志摘录、原50+15材料和108/120冻结保持；executed/tag差异、Maven1.26.0回退及HF空重试已记录。精确二进制对应/递归静态组成/生产通知/发布复审仍缺；ADB清单空、heaprun未消耗，W3/R4/R5open。[父裁定](validation/w3-runtime-ort-parent-assessment-20261111.md)。
+
 ## 2026-11-11 W3构建依赖补核
 
 官方job实际Eigen5.0.1/四ABI，ARM WebSocket ON/x86 OFF已核；原3.4.0保持候选范围。补15文件、13来源GitBlob/20日志摘录/四ABI/17链接/15tar成员通过，原50材料及108冻结保持，无新设备/推理/二进制下载。最终so成员、递归组成和生产/独立复审仍缺，W3open。[补核证据](validation/w3-runtime-build-dependency-reconciliation-20261111.md)。

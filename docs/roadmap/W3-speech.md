@@ -1,3 +1,9 @@
+## 最新进展：嵌套 ORT 构建出处补核（2026-11-11）
+
+免费 hy3 订正版原字节经父验收；实际 arm64 日志确认 ORT 33ca962、NNAPI/API27/LTO/mimalloc OFF，arm64 工件上传/下载摘要一致。实际执行头与 release tag 工作流不同，已纠正首稿写反；collect 的 Maven 1.26.0 回退+四 ABI .so 覆盖及 HF 拒绝/空重试保留。四成员大小只是印证，404 只代表具体查询结果；源码到 exact AAR/递归静态组成/生产通知/发布复审仍缺，不能从构建参数推出手机内存根因。2 GitBlob/50 日志摘录、原 50+15 材料和 108/120 冻结全部保持。[父裁定](../validation/w3-runtime-ort-parent-assessment-20261111.md)／[机器收据](../validation/w3-runtime-ort-build-observed-20261111.json)。
+
+TECNO 当前 ADB 清单仍空；零新安装/推理/二进制下载，heap 唯一 run 尚未消耗。W3/R4/R5 保持 open；下一设备动作仍为相同冻结合同 fresh preflight，不重放旧批、不放宽资源门。下方此前记录作为历史保留。
+
 # W3：语音识别质量与剩余场景验收
 
 更新：2026-11-11。状态：**open；用户已明确要求继续改进，R4/R5 不再等待用户选择接受现状**。当前 TECNO 的 R1–R3 系统 ASR 已按用户接受的已知限制完成范围裁定；固定前缀、AMI 六个端/片段及两端持续观测已归档，质量与生产预算未通过。
