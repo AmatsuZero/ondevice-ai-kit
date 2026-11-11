@@ -1,3 +1,7 @@
+## 2026-11-11：W3 heap父端路由准备
+
+主代理仅完成父验收prepare/build/device及报告增量，未代写外部wrapper。路由19/报告22/原回归61共102，完整tools691通过；stale-host真实RED→GREEN、原误通过保留。构建前重核host测试和副本绑定，设备前完整冻结/双复核；uptime读取区间有容差，精确时钟映射未证。原108冻结/77保护保持，已有F08漂移保留；0新助手/构建/设备/native，只自审。外部hy4free429待原接续线路选择，无自动重试/换线；W3open。见w3-qwen-heap-routing-preparation-20261111.md。
+
 ## 2026-11-11：W3 heap父端独立准备
 
 主代理只写父验收verify_report/check_parent，未代写外部wrapper；21合成+22arena/8FILE/31metrics共82项通过，原RED/自审裁定保留。单片、heap/原始RSS/进程/政策报告/冻结绑定已检查，实际标签/时钟对齐、设备工具、实包和独立复核仍缺；外部hy4free429待原线路答复、无自动重试。0新助手/设备/模型调用/下载/生产，W3open。详见w3-qwen-heap-parent-preparation-20261111.md。

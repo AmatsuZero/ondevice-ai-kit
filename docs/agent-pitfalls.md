@@ -1,3 +1,7 @@
+## W3 heap父端路由补充（2026-11-11）
+
+- **准备时核过host不代表构建时仍有效**：build首稿只核host/base收据字节，prepare后改HeapWrapperChecks.kt仍进入renderer；初测试被后续其他断言掩盖而意外通过，加sentinel后真实RED为RuntimeError。恢复是在渲染/工具前重跑verify_host并逐个绑定仓库与准备源码；19路由/22报告检查通过，原误通过与RED保留。RSS读取仅保存uptime前后区间及一秒容差，不能写成精确时钟对齐/峰值。所有本项为合成/离线父验收，未构建或操作设备；外部wrapper、实包和独立复核仍缺。证据docs/validation/w3-qwen-heap-routing-preparation-20261111.md及本机heap-routing-preparation/。
+
 ## W3 heap父验收补充（2026-11-11）
 
 - **单片准备不能沿用全量完成判断或缺省资源观测**：新heap父端以原65输入清单固定index25；保留原共同模型/配置/释放检查，但不合成其余64行，也不输出全量quality/production通过。原host摘要没有min available，必须从同PID/startTicks原始RSS重算；终态观测gap不能忽略。扩展加载时间/typed数值/观测gap先7fail，修正后21项通过。采样API为非原子，不强加三项求和；原守卫允许uptime取整windowAge>=-1，新parser先误拒负0.005、巨大整数溢出，RED1fail/1error后修正。边界非空label不足以证明覆盖，须实际source复核后冻结语义映射；传递evaluator必需hash漏项的RED也已保留。所有本项为父端合成/离线验证，没有新Kotlin/实包/设备或native根因证明。证据docs/validation/w3-qwen-heap-parent-preparation-20261111.md及本机heap-parent-preparation/。

@@ -1,3 +1,8 @@
+## 2026-11-11：W3 heap父端路由准备通过，外部wrapper仍缺
+
+新增prepare/build/device路由与19检查，报告扩至22；原回归61共102定向、完整tools691通过（metrics重叠不累计），七Python语法通过。构建前重核host测试/源码，修复stale-host到renderer的已复现缺口；原误通过/真实RED均保留。任何ADB前要求完整冻结/双复核，固定index25一片/1构造2stream2decode/原资源门；RSS带uptime读前后区间及一秒容差，preciseClockAlignmentVerified=false，不证明峰值/精确映射。详见docs/validation/w3-qwen-heap-routing-preparation-20261111.md及JSON。
+原108冻结保持，78保护77匹配；其他任务F08交接既有漂移保留。0新助手/构建/设备/native，外部Kotlin/真实host/实包/独立复核/新合同均缺，当前只自审；W3open/goalactive，源码未push。原hy4free429终态零文件，重置提示已过但不自动重试/换模型；仍待此前接续线路选择，旧native429不重试。不得用诊断准备关闭R4/R5或重放旧批。
+
 ## 2026-11-11：W3 heap父端离线报告校验21项通过；外部实现仍待额度线路
 
 新增父端verify_report/check_parent，仅主代理验收脚本；21项合成拒收及原arena22/FILE8/metrics31共82项通过，全部原RED保留。核固定index25/原报告planned、单片计数、heap事件/原始RSS/政策报告绑定/冻结关键摘要；128合法129拒收，采样三项不强加求和。uptime原负1秒容差保持，原host缺minAvailable由trace重算。实际标签须源复核后绑定；两个时钟精确对齐、device/prepare/build工具仍缺，不能当已冻结/真机或R4R5通过。入口docs/validation/w3-qwen-heap-parent-preparation-20261111.md。

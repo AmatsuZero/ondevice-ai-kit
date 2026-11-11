@@ -4,7 +4,7 @@
 
 当前[heap诊断准备](../validation/w3-qwen-heap-preparation-20261111.md)：免费hy4free真实429/code6004、零文件，提示北京时间15:12:49重置；已停线无重试/自动换模型，等待接续线路选择。父缺候选RED、spec/计划和故障检查已准备，尚无Kotlin/实包/新设备合同或识别。下方“候选生成中”是该调用终态前的历史；W3仍open，不能把配额阻塞写成设计不可实现。
 
-已独立推进[heap父端报告验收](../validation/w3-qwen-heap-parent-preparation-20261111.md)：21项合成检查及原工具61项回归通过，核固定单片、heap事件、原始RSS、进程及冻结证据；0设备/构建/推理。实际标签/收据对齐、实包、独立复核和两个时钟精确对齐仍缺；不将单片诊断或合成通过当R4/R5通过。
+已推进[heap父端构建/设备路由准备](../validation/w3-qwen-heap-routing-preparation-20261111.md)：路由19/报告22及原工具61共102项定向检查、完整tools691项通过。构建前重新核host测试与源码；任何ADB前要求完整冻结/双复核。RSS新增uptime读取区间，仍不宣称精确时钟映射/峰值。原108冻结保持，0新助手/构建/设备/推理；外部wrapper/实际标签/实包/独立复核仍缺。此前[报告验收21项](../validation/w3-qwen-heap-parent-preparation-20261111.md)为历史准备，不能把本项或单片诊断当R4/R5通过。
 
 最新[arena-off 真机结果](../validation/w3-qwen-arena-observed-20261111.md)：唯一新 run 完成24/65项，中文20/20非空、CER40/590=6.78%；近场英文仅4/20、子集WER9/67=13.43%，AMI与挑战全部未执行。第25项期间采样RSS1637896192B=1.525410GiB超过固定1.5GiB，父按约停止；413样本/258.937s，已完成片段两阶段RTF1.04–1.68。非终态精确最终调用数未知，无整recognizer释放/destroy ack。报告双读、六模型后核、精确alias/staging清理与普通App前台恢复通过。framework与shell路径字面值误判的原评分保留，同run只读device/inode及有界20B补核通过；108冻结文件/APK未改，native内部effect仍unverified。批次已消耗，不重放/提高预算；中文指标有进展，完整执行、Android全量质量/成本和发布仍未过。下方“等待解锁/零安装”均为此前准备记录。
 

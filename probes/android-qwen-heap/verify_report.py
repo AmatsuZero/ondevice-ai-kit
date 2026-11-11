@@ -209,6 +209,11 @@ def resource_summary(root, host, report):
         assert sample['windowAgeSeconds'] <= 120
         assert integer(sample['rssBytes']) and integer(sample['deviceAvailableBytes'])
         assert sample['activeCaseIndex'] is None or (type(sample['activeCaseIndex']) is int and sample['activeCaseIndex'] == 0)
+        before=sample['deviceUptimeReadBeforeNs'];after=sample['deviceUptimeReadAfterNs']
+        assert integer(before) and integer(after) and before<=after
+        assert sample['deviceUptimeWindowLowerNs']==max(0,before-1_000_000_000)
+        assert sample['deviceUptimeWindowUpperNs']==after+1_000_000_000
+        assert sample['preciseClockAlignmentVerified'] is False
     maximum = max(sample['rssBytes'] for sample in samples)
     assert type(host['samples']) is int and host['samples'] == len(samples)
     assert type(host['sampledMaxRssBytes']) is int and host['sampledMaxRssBytes'] == maximum

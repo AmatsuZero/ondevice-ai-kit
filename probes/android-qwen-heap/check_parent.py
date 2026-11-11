@@ -283,9 +283,15 @@ class HeapParentChecks(unittest.TestCase):
             files={path: hashlib.sha256(content).hexdigest() for path, content in files.items()})
         raw = json.dumps(self.report).encode(); report_sha = hashlib.sha256(raw).hexdigest()
         samples = [dict(elapsedSeconds=1.0, pid=123, startTicks='456', rssBytes=1024**3,
-                        deviceAvailableBytes=536870912, activeCaseIndex=0, windowAgeSeconds=1.0),
+                        deviceAvailableBytes=536870912, activeCaseIndex=0, windowAgeSeconds=1.0,
+                        deviceUptimeReadBeforeNs=100_000_000_000,deviceUptimeReadAfterNs=100_010_000_000,
+                        deviceUptimeWindowLowerNs=99_000_000_000,deviceUptimeWindowUpperNs=101_010_000_000,
+                        preciseClockAlignmentVerified=False),
                    dict(elapsedSeconds=2.0, pid=123, startTicks='456', rssBytes=1024**3,
-                        deviceAvailableBytes=536870912, activeCaseIndex=None, windowAgeSeconds=2.0)]
+                        deviceAvailableBytes=536870912, activeCaseIndex=None, windowAgeSeconds=2.0,
+                        deviceUptimeReadBeforeNs=101_000_000_000,deviceUptimeReadAfterNs=101_010_000_000,
+                        deviceUptimeWindowLowerNs=100_000_000_000,deviceUptimeWindowUpperNs=102_010_000_000,
+                        preciseClockAlignmentVerified=False)]
         host = {**self.host, 'pid': 123, 'startTicks': '456', 'terminalObservationGap': None}
         payloads = {
             'diagnostic-frozen.json': contract, 'host-result.json': host,
@@ -384,6 +390,19 @@ class HeapParentChecks(unittest.TestCase):
                     verify.main(root)
                 result = json.loads((root/'parent-heap-acceptance.json').read_text())
                 self.assertFalse(result['diagnosticAccepted'])
+
+    def test_missing_or_inverted_device_clock_read_interval_is_rejected(self):
+        for change in (
+            lambda sample:sample.pop('deviceUptimeReadBeforeNs'),
+            lambda sample:sample.update(deviceUptimeReadBeforeNs=102_000_000_000),
+            lambda sample:sample.update(preciseClockAlignmentVerified=True),
+        ):
+            with self.subTest(change=change),tempfile.TemporaryDirectory(prefix='odai-heap-clock-') as folder:
+                repo=Path(folder);root=self.write_collection_fixture(repo);path=root/'rss-samples.jsonl'
+                samples=[json.loads(line) for line in path.read_text().splitlines()];change(samples[0])
+                path.write_text(''.join(json.dumps(item)+'\n' for item in samples))
+                with patch.object(verify,'ROOT',repo),self.assertRaises((AssertionError,ValueError,KeyError)):
+                    verify.collected_evidence(root)
 
 
 if __name__ == '__main__':

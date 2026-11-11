@@ -66,6 +66,7 @@ object Debug {
     (output / 'base-hashes.json').write_text(json.dumps({
         'scaffoldSHA256': hashlib.sha256(BASE.read_bytes()).hexdigest(),
         'adapterSHA256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'heapChecksSHA256': hashlib.sha256(Path(__file__).with_name('HeapWrapperChecks.kt').read_bytes()).hexdigest(),
         'oldProbeSourcesModified': False, 'selectedOriginalIndex': 25,
     }, indent=2) + '\n')
     return code

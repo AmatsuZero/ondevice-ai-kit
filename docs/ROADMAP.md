@@ -1,3 +1,7 @@
+## 2026-11-11 W3父端路由增量
+
+heap准备/构建/设备入口和报告校验通过102定向检查，完整tools691通过；构建前重核host测试/源码，任何ADB前完整冻结/双复核，RSS保留uptime读取区间，不宣称精确映射或峰值。原108冻结不变，0新助手/构建/设备/native，外部wrapper429零交付仍待接续线路；W3open。[当前证据](validation/w3-qwen-heap-routing-preparation-20261111.md)，源码未push。
+
 ## 2026-11-11 W3父验收增量
 
 heap父端21项合成拒收+原工具61项回归通过；外部wrapper429零交付仍待线路选择。原资源门/未执行单片保持，无设备/推理/构建；实际标签、时钟对齐、实包和独立复核仍缺，W3open。详见docs/validation/w3-qwen-heap-parent-preparation-20261111.md，源码未push。

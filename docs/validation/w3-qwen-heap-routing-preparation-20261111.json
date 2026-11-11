@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "scope": "Parent-only heap source/build/device routing preparation; no real wrapper or device acceptance",
+  "updatedAt": "2026-11-11T08:39:20.861235+00:00",
+  "sourceHashes": {
+    "probes/android-qwen-heap/prepare_build.py": "241170ee714ec5eee28cbb6095aea34715b52410a490b55e25c394fd5d1be0aa",
+    "probes/android-qwen-heap/build_acceptance.py": "8c44aca17844c83de539b80e36c61036004ee304ca9cbc2ada0e13be369a82d0",
+    "probes/android-qwen-heap/device_acceptance.py": "42788048fb3bd17435c6cfb407fa0d2df83cd6008c220403b089fc574a159af8",
+    "probes/android-qwen-heap/check_routing.py": "cf5250ebbe5e45b3439007b08481b3da991d939004a412934782cfe834d759e2",
+    "probes/android-qwen-heap/check_parent.py": "9f660111896f76f4156f439971177301f3242cd2c3cec0b41eeda5ac5b452698",
+    "probes/android-qwen-heap/check_wrapper.py": "4457e7cffa1cfb3ac73f311ea11eb1b3c7e329cab68971eb078d0322c4fde385",
+    "probes/android-qwen-heap/verify_report.py": "205c65b8a8be4503f59f111962db4e706c31b6f899ea784011028e609db37cb6"
+  },
+  "targetedChecks": {
+    "routing": {
+      "tests": 19,
+      "exitCode": 0
+    },
+    "heap-parent": {
+      "tests": 22,
+      "exitCode": 0
+    },
+    "arena-parent": {
+      "tests": 22,
+      "exitCode": 0
+    },
+    "file-parent": {
+      "tests": 8,
+      "exitCode": 0
+    },
+    "metrics": {
+      "tests": 31,
+      "exitCode": 0
+    }
+  },
+  "targetedCheckCount": 102,
+  "fullTools": {
+    "exitCode": 0,
+    "seconds": 57.66451633399993,
+    "tests": 691,
+    "subprocessRubyBin": "/Users/daubert/.rvm/rubies/ruby-3.4.11/bin"
+  },
+  "pythonSyntaxPassed": true,
+  "frozenFilesUnchanged": 108,
+  "protectedNormalizedMatched": 77,
+  "protectedTotal": 78,
+  "otherTaskDriftPreserved": [
+    "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md"
+  ],
+  "headBefore": "9e6e909159b6c25460dbd206a2d8c6ce4c2591ee",
+  "rootAndPreparedSourcesRecheckedBeforeBuild": true,
+  "clockCapture": "device proc uptime read interval with conservative one-second tolerance",
+  "preciseClockAlignmentVerified": false,
+  "realWrapperAvailable": false,
+  "realHostWrapperChecksPassed": false,
+  "androidBuildPassed": false,
+  "packageVerificationPassed": false,
+  "independentReviewPassed": false,
+  "newNativeRunFrozen": false,
+  "newDeviceOperations": 0,
+  "newNativeCalls": 0,
+  "newHelperCalls": 0,
+  "w3Status": "open",
+  "goalStatus": "active",
+  "sourceBranchPushed": false,
+  "selfReview": "Parent author read preparation, adapters, report verifier and inherited build/device paths. Independent review still required before any run.",
+  "knownFailureEvidence": [
+    "post-resume-stale-host-red",
+    "post-resume-stale-host-corrected-red",
+    "post-resume-stale-host-green"
+  ],
+  "localEvidenceRoot": ".omx/artifacts/w3-qwen-ort-lifecycle-20261111/heap-routing-preparation"
+}
