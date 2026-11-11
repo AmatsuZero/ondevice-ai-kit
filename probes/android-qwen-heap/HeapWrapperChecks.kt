@@ -25,15 +25,17 @@
         reset(); try {
             Runtime.heapFailWhen={true};start();expect(Runtime.creates==0 && Runtime.streams==0)
             expect(Runtime.code==0)
-            if(report().exists() && report().length()>0) {
-                val j=json();expect(j.getString("status")=="failed")
-                expect(j.getString("heapTelemetryErrorClass")=="java.lang.IllegalStateException")
-            }
+            failed();val j=json()
+            expect(j.getString("heapTelemetryErrorClass")=="java.lang.IllegalStateException")
+            val e=j.getJSONArray("heapEvents").getJSONObject(0)
+            expect(e.getString("errorClass")=="java.lang.IllegalStateException")
+            for(k in listOf("nativeHeapSizeBytes","nativeHeapAllocatedBytes","nativeHeapFreeBytes")) expect(e.isNull(k))
         } finally {Runtime.root.deleteRecursively()}
     }
     case("negative heap values fail closed before constructor") {
         reset(); try {
             Runtime.heapNegative=true;start();expect(Runtime.creates==0 && Runtime.streams==0 && Runtime.code==0)
+            failed();expect(!json().isNull("heapTelemetryErrorClass"))
         } finally {Runtime.root.deleteRecursively()}
     }
     case("heap failure after real constructor blocks streams and still releases") {

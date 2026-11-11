@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-11T05:00:39.785385+00:00",
+  "marker": "w3-runtime-provenance-lifetimes-20261111",
+  "sourceCommit": "f9b4ad0",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6787469165,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6787469165",
+      "sha256": "97d06e9f60cf8efaafc0e518e2e7b44d6283fc39f05e2eff005eb68c0d0ec32f",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 42870,
+      "url": null,
+      "sha256": "af9e31eb42a3bef16046b89625f4ef7bf829b3068bf730eee3bb59e76ba9fd8e",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "fea6bdbcb8a246fd403d65f69060baef0bb95bf2",
+    "sha256": "5bd975f90c2d3c67c207eaa9122d7d1cd23ce66143c8745fc4d20adbb88df8cc",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "5bd975f90c2d3c67c207eaa9122d7d1cd23ce66143c8745fc4d20adbb88df8cc",
+    "readbackExact": true
+  },
+  "wikiContentHashEqual": true,
+  "w3Status": "open",
+  "goalStatus": "active",
+  "localEvidenceRoot": ".omx/artifacts/w3-qwen-ort-lifecycle-20261111/publication",
+  "scope": "Official published AAR identity, public build log observations, fixed-source memory lifetimes, static actual decoder graph, and truthful zero-file helper quota blocker; no new device or inference run"
+}

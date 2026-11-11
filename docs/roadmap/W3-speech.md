@@ -2,6 +2,8 @@
 
 更新：2026-11-11。状态：**open；用户已明确要求继续改进，R4/R5 不再等待用户选择接受现状**。当前 TECNO 的 R1–R3 系统 ASR 已按用户接受的已知限制完成范围裁定；固定前缀、AMI 六个端/片段及两端持续观测已归档，质量与生产预算未通过。
 
+当前[heap诊断准备](../validation/w3-qwen-heap-preparation-20261111.md)：免费hy4free真实429/code6004、零文件，提示北京时间15:12:49重置；已停线无重试/自动换模型，等待接续线路选择。父缺候选RED、spec/计划和故障检查已准备，尚无Kotlin/实包/新设备合同或识别。下方“候选生成中”是该调用终态前的历史；W3仍open，不能把配额阻塞写成设计不可实现。
+
 最新[arena-off 真机结果](../validation/w3-qwen-arena-observed-20261111.md)：唯一新 run 完成24/65项，中文20/20非空、CER40/590=6.78%；近场英文仅4/20、子集WER9/67=13.43%，AMI与挑战全部未执行。第25项期间采样RSS1637896192B=1.525410GiB超过固定1.5GiB，父按约停止；413样本/258.937s，已完成片段两阶段RTF1.04–1.68。非终态精确最终调用数未知，无整recognizer释放/destroy ack。报告双读、六模型后核、精确alias/staging清理与普通App前台恢复通过。framework与shell路径字面值误判的原评分保留，同run只读device/inode及有界20B补核通过；108冻结文件/APK未改，native内部effect仍unverified。批次已消耗，不重放/提高预算；中文指标有进展，完整执行、Android全量质量/成本和发布仍未过。下方“等待解锁/零安装”均为此前准备记录。
 
 新增[运行时材料](../validation/w3-runtime-materials-20261111.md)：50文件含20许可/声明、26构建源，46来源GitBlob/hash、39链接与50压缩成员通过；实际AAR21文件/16so四ABI已枚举。递归静态组成、source-to-prebuilt、最终生产通知与发布复审仍缺。[成本复算](../validation/w3-qwen-cost-options-20261111.md)拒绝统一auto-only捷径：已知开发远场WER17/27，原两阶段13/27；后验独立集较好aggregate不足以取消此失败。零新推理/设备动作，先追固定runtime的分配/生命周期与发布出处，不因源键存在即开新run。

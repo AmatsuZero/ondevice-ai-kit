@@ -10,6 +10,8 @@
 
 **Spec:** [固定合同](../specs/2026-11-11-w3-qwen-heap-diagnostic.md)
 
+当前执行：父host适配器/故障检查与缺候选RED已准备；免费hy4free一次调用真实429/code6004、零候选，停线等待接续选择。尚未通过Kotlin/构建/设备门，[具体阻塞](../../validation/w3-qwen-heap-preparation-20261111.md)。
+
 ## Global Constraints
 
 仅`fleurs-en_us-1776`/index25；最多1构造/2stream/2decode。原模型、AAR、两阶段/English及arena-off政策保持。1.5GiB/512MiB/120s不变；不开麦克风/AiAi/下载、不改生产或旧冻结文件。native child旧429不重试。

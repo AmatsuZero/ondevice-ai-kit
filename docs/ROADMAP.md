@@ -1,3 +1,5 @@
+W3当前（2026-11-11）：官方运行时出处/内存边界证据已提交f9b4ad0并同步双端#15/Wiki；新heap实现免费hy4free真实429/code6004、零候选，提示15:12:49+08重置，停线待接续选择。[当前准备与阻塞](validation/w3-qwen-heap-preparation-20261111.md)。父缺候选RED，无新构建/装机/推理；W3仍open，下方生成中为历史。
+
 W3新增（2026-11-11）：运行时材料fd95f8c已同步双端#15/Wiki并回读；[官方AAR身份](validation/w3-runtime-official-provenance-20261111.md)的公布digest/size/tag已核实，实际上游日志确认TTS/diarization启用，递归/发布门仍缺。[固定内存生命周期](validation/w3-qwen-memory-lifetimes-20261111.md)已核实际动态KV512基础112MiB，非峰值/根因；只选原未执行index25的heap诊断外部候选生成中，无新设备推理，W3open。
 
 W3新增（2026-11-11）：固定Sherpa运行时来源材料50文件（20许可/26构建源），46GitBlob/hash、39链接和50tar成员核对通过，AAR16so/四ABI已枚举；递归静态组成、source-to-prebuilt及生产通知/发布复审仍缺。[材料](validation/w3-runtime-materials-20261111.md)。原报告复算拒绝统一auto捷径（已知远场退步），无新模型/设备调用，W3open。[成本依据](validation/w3-qwen-cost-options-20261111.md)。

@@ -1,3 +1,7 @@
+## 2026-11-11：W3 heap外部实现429终态，证据已双端回读
+
+f9b4ad0官方出处/内存边界/诊断准备已本地提交；最新GH#15comment6787469165、GL#15note42870及两Wiki相同SHA5bd975f9…8df8cc已回读。hy4free实现5.395s真实429/code6004、0工具/0文件；15:12:49+08重置仅提示，停线无自动重试/换线，待用户恢复路径答复。父缺候选RED和fault tests已准备，尚无Kotlin/实包/新设备合同；无新推理/采集/下载/生产变更，active helper0，W3open/goalactive。见w3-qwen-heap-preparation-20261111.md及最新queue；生成中条目为历史。
+
 ## 2026-11-11：W3运行时材料提交/双端同步与内存诊断准备
 
 本地fd95f8c精确57路径；材料/成本已同步GH#15comment6787028706、GL#15note42860及两Wiki相同SHA6119da70…8e8de。固定AAR官方asset摘要/大小与tag已核、实际构建日志取得；精确递归组成/发布仍未过。固定ORT生命周期与实际decoder动态KV图已核，基础KV112MiB非RSS峰值，外部研究不实fixed512/缓存小等措辞经父订正。免费hy3研究已终态138.804s；唯一新hy4free只写独立heap wrapper，原planned index25单文件、原算法/政策/预算保持，父缺候选RED，无新设备/模型调用。W3open；旧native429/付费/新Copilot不重试。当前队列.omx/artifacts/current-helper-queue-20261111-w3-file.json。
