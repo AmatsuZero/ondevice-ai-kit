@@ -1,3 +1,8 @@
+## 2026-11-11：W3现有AAR符号检查无法关闭静态组成门
+
+已只读现有AAR四arm64成员：全部无.symtab/有.dynsym，普通nm定义符号空、动态输出存在，但十组组件名查询未得可核验组成证据。无匹配不证明组件不存在，也不推断何时/如何被strip；不继续相同符号扫描。原size/SHA/工具完整输出保留，入口docs/validation/w3-runtime-static-symbol-observation-20261111.{md,json}。0新助手/设备/模型/二进制下载，原50材料/15补充/108冻结保持。
+上一项893cc5b构建依赖补核与a8aa745双端同步已完成。当前实质余项仍是外部heap wrapper/真实host/实包/独立复核/冻结/唯一诊断；此前免费接续线路问题未答、无活动helper，不重试原429/换模型，旧批不重放、资源门保持。W3open/goalactive，源码未push。本符号局限仅本地记录，不另发重复issue进展。
+
 ## 2026-11-11：W3构建依赖补核已同步双端
 
 本地893cc5b精确22路径（源码未push）；15补充文件/13GitBlob/20日志摘录/四ABI/17链接/15tar成员通过，原50材料/108冻结保持。三份上游空白原样保留且摘要重核，任务自写diff检查通过。新marker w3-build-dependency-reconciliation-20261111已用：GH#15comment6791839114、GL#15note43063，GHWikicf007a39b11c93e20cc10d52e5f87c6176a17357，两WikiSHA126ddebf6cae34116c1cd07f1e7e0bd6921e4a70a48ed66477dd52a7f3303f2c一致；收据docs/validation/w3-runtime-build-dependency-sync-20261111.json。勿重发旧marker。

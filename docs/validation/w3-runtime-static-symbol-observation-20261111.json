@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-11T09:15:42.308016+00:00",
+  "aarSHA256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+  "arm64Libraries": [
+    {
+      "member": "jni/arm64-v8a/libonnxruntime.so",
+      "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+      "bytes": 22249560,
+      "hasStaticSymtab": false,
+      "hasDynsym": true,
+      "candidateComponentSymbols": 0,
+      "toolOutputs": {
+        "sections.stdout": {
+          "bytes": 2941,
+          "sha256": "f0a8d869f230650d0fa25397c83c8a8da68862b9e594c41a208d083995f164f3"
+        },
+        "sections.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "symbols.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "symbols.stderr": {
+          "bytes": 161,
+          "sha256": "026d98785b9606f22eda793635803af4d0471b282ad9c062e1fd6264dcfc3525"
+        },
+        "dynamic-symbols.stdout": {
+          "bytes": 480,
+          "sha256": "3d7df0e8ab682b63a86db44b85983057fa1427e9d8fb3213107a5c20616ec8db"
+        },
+        "dynamic-symbols.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-c-api.so",
+      "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+      "bytes": 4303136,
+      "hasStaticSymtab": false,
+      "hasDynsym": true,
+      "candidateComponentSymbols": 0,
+      "toolOutputs": {
+        "sections.stdout": {
+          "bytes": 2928,
+          "sha256": "d8f51c233a8d2a74be2b3b82f47140c43c4825a1d9933f705c2e37b425a11619"
+        },
+        "sections.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "symbols.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "symbols.stderr": {
+          "bytes": 167,
+          "sha256": "a8cf0f42d9128fc26364ce9156f1743abcde33a568a4c0c17775f0bdef5b55d5"
+        },
+        "dynamic-symbols.stdout": {
+          "bytes": 10233,
+          "sha256": "f7cfb55740e74ffcba7241b69bbaf3d699c21b1bad2701dfc22d8d97534fe844"
+        },
+        "dynamic-symbols.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-cxx-api.so",
+      "sha256": "de94e0952a124eb22e86d754e11aa0489a065affc837911a8ed5e7fd843baad6",
+      "bytes": 272848,
+      "hasStaticSymtab": false,
+      "hasDynsym": true,
+      "candidateComponentSymbols": 0,
+      "toolOutputs": {
+        "sections.stdout": {
+          "bytes": 2927,
+          "sha256": "407879980d43ca0f1dc469e1efd2ca42e6809ca128a553f481a51e9622883304"
+        },
+        "sections.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "symbols.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "symbols.stderr": {
+          "bytes": 169,
+          "sha256": "9c45d1f686d4fe04dbc8e5080ea816885dd189aa5bfcb2f4ff9e0b3a77cdcaf7"
+        },
+        "dynamic-symbols.stdout": {
+          "bytes": 65452,
+          "sha256": "1a80563835d7c42ce255c75ebb1700c7403127f026f15a3bae5d45021db76148"
+        },
+        "dynamic-symbols.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-jni.so",
+      "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575",
+      "bytes": 4609320,
+      "hasStaticSymtab": false,
+      "hasDynsym": true,
+      "candidateComponentSymbols": 0,
+      "toolOutputs": {
+        "sections.stdout": {
+          "bytes": 2928,
+          "sha256": "9581a198cce3c17668f1e784772f7801788048d920f1e570ca5bbb85f2489e36"
+        },
+        "sections.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "symbols.stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "symbols.stderr": {
+          "bytes": 165,
+          "sha256": "8fb0394c1c0e2d0ada03ea81eb495f4c65eae0cf8d8fe1655b982abc464841e1"
+        },
+        "dynamic-symbols.stdout": {
+          "bytes": 10051,
+          "sha256": "28fb85382326de8faa067d3b544c858ee9faa7fbc1bf1c364dfc050aeecd1b94"
+        },
+        "dynamic-symbols.stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    }
+  ],
+  "allFourStaticSymtabsAbsent": true,
+  "selectedComponentSymbolQueriesYieldedNoEvidence": true,
+  "queryTerms": [
+    "utf8proc",
+    "kiss_fft",
+    "fbank",
+    "sentencepiece",
+    "fst::",
+    "Eigen::",
+    "kaldi_decoder",
+    "websocketpp",
+    "asio::",
+    "hclust"
+  ],
+  "noMatchDoesNotProveAbsence": true,
+  "exhaustiveStaticCompositionVerified": false,
+  "nextAction": "Stop symbol-based closure attempt. Resume external heap candidate only after user free-provider selection. No binary download or rebuild from this observation.",
+  "newBinaryDownloads": 0,
+  "newDeviceOperations": 0,
+  "newModelCalls": 0,
+  "newHelperCalls": 0,
+  "w3Status": "open",
+  "goalStatus": "active",
+  "localEvidenceRoot": ".omx/artifacts/w3-runtime-materials-20261111/static-member-observation"
+}
