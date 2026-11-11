@@ -1,0 +1,30 @@
+{
+  "marker": "w3-qwen-arena-policy-prepared-20261111",
+  "sourceHead": "6a9618e",
+  "sourceBranchPushed": false,
+  "w3Status": "open",
+  "issues": {
+    "gh": {
+      "id": 6784219537,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6784219537",
+      "sha256": "a1c6c55931582c8b829728035e3a6844597e463fce9be8f2293ccc3aa8bfb117",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 42570,
+      "url": null,
+      "sha256": "8b16c33a9dc3f007d5b414fd7b10f53aec2043cd6914873162922594f84a4b3b",
+      "readbackExact": true
+    }
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "b69fc7155a89cc55192325cc5558d8a0801220da147a1f928011ba5df80b34d4",
+    "readbackExact": true
+  },
+  "githubWiki": {
+    "commit": "5e5dea45615b66b00ac71547039faac086650523",
+    "sha256": "b69fc7155a89cc55192325cc5558d8a0801220da147a1f928011ba5df80b34d4",
+    "readbackExact": true
+  }
+}

@@ -1,3 +1,15 @@
+## 2026-11-11：W3 arena政策模块已验收，独立外壳同次调用运行中
+
+新增本地a5c11e7（真机结果同步与交接）、523ea07（源码/实际AAR可行性）、6a9618e（外部政策模块），未push源码。
+默认FILE唯一run仍已消耗，0完成/实际最终decode未知，设备恢复；1.5GiB门不变，不重跑。
+单变量EnableCpuMemArena=0的source/JVM准备通过：17源GitBlob核、18源码片段、4实际AAR DTO；cpu:config的CPU/CUDA条件完整追踪已闭合，不能把配置字符串存在当native生效/节省证明。
+外部模块初稿12组39过、超大稀疏替换RED/OOME已保留；独立修正版SHA c86b96b68fb617f4920736bfa257ecf90280d9d1565ad9010725a5dbd56812e0原样集成，13组41/集成重验/API34classpath3类通过。源码probes/android-qwen-arena/QwenArenaPolicy.kt。
+双端#15政策进展GHcomment6784219537/GLnote42570及Wiki5e5dea45615b66b00ac71547039faac086650523已回读；前次memory-stop GH6783604164/GL42553同样已发布。收据docs/validation/w3-qwen-arena-policy-sync-20261111.json。
+当前唯一活动helper是免费hy4free独立外壳 `/private/tmp/odai-hy4free-w3-qwen-arena-wrapper-20261111/`，会话16280，launcher61166/CLI61167；已实际Read，尚无终态/交付。只续同次，不因时长重发/付费回退；quota则停线。
+父验收probes/android-qwen-arena/check_wrapper.py已缺候选RED，复用原24组并新增政策/真实构造参数/写失败/篡改4组；prepare_build/build_acceptance只准备，未构建。先收外壳→host→实包→独立复核；无新native run合同/安装/模型调用。
+外壳用独立class/report/Gradle alias，不改旧FILE源/APK/report；新native诊断需另冻结，不改ID偷重放旧run。不开麦克风/AiAi/新下载/生产/默认。W3仍open。
+无新native child；旧429不重试。78保护文件剥离本任务prepend后保持，别整体stage旧dirty。下方“无helper/先同步”均是此前检查点。
+
 ## 2026-11-11：W3 FILE真机内存门停止并恢复，原批已消耗
 
 本地HEAD7593b25，源码未push。外壳独立免费hy3复核已自然终态，无Critical/Important；原文线程说明错误由官方文档及父裁定订正，不额外smoke。
