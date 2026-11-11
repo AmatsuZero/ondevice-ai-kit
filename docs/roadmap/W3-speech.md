@@ -4,6 +4,8 @@
 
 最新[arena-off 真机结果](../validation/w3-qwen-arena-observed-20261111.md)：唯一新 run 完成24/65项，中文20/20非空、CER40/590=6.78%；近场英文仅4/20、子集WER9/67=13.43%，AMI与挑战全部未执行。第25项期间采样RSS1637896192B=1.525410GiB超过固定1.5GiB，父按约停止；413样本/258.937s，已完成片段两阶段RTF1.04–1.68。非终态精确最终调用数未知，无整recognizer释放/destroy ack。报告双读、六模型后核、精确alias/staging清理与普通App前台恢复通过。framework与shell路径字面值误判的原评分保留，同run只读device/inode及有界20B补核通过；108冻结文件/APK未改，native内部effect仍unverified。批次已消耗，不重放/提高预算；中文指标有进展，完整执行、Android全量质量/成本和发布仍未过。下方“等待解锁/零安装”均为此前准备记录。
 
+新增[运行时材料](../validation/w3-runtime-materials-20261111.md)：50文件含20许可/声明、26构建源，46来源GitBlob/hash、39链接与50压缩成员通过；实际AAR21文件/16so四ABI已枚举。递归静态组成、source-to-prebuilt、最终生产通知与发布复审仍缺。[成本复算](../validation/w3-qwen-cost-options-20261111.md)拒绝统一auto-only捷径：已知开发远场WER17/27，原两阶段13/27；后验独立集较好aggregate不足以取消此失败。零新推理/设备动作，先追固定runtime的分配/生命周期与发布出处，不因源键存在即开新run。
+
 最新设备诊断准备（2026-11-11）：父工具独立复核发现已修正，22检查+原8父/31评分通过；arena单变量新合同已冻结108项摘要。TECNO fresh preflight Awake=false/unlocked=false、新alias不存在，零安装/构造/解码，等待本次解锁。原FILE批保持失败并已消耗；新run只请求关闭arena，1.5GiB/512MiB/120s不变。[最新准备与边界](../validation/w3-qwen-arena-ready-20261111.md)。下方“尚未冻结/父复核中”是此前准备记录。
 
 内存变体实包准备完成（2026-11-11）：外部 arena-off 外壳原样集成，30组4113断言、政策重验13组41、离线构建27.24s/lint0error7warning及实包16类/65PCM/四arm64摘要/零权限通过；独立源码复核无Critical/Important代码缺陷。父端独立诊断工具17检查通过、复核进行中；新设备合同尚未冻结/安装/运行，native消费、省内存和Android质量仍未验证。[实包](../validation/w3-qwen-arena-wrapper-20261111.md)／[复核](../validation/w3-qwen-arena-wrapper-review-20261111.md)／[拟定合同](../validation/w3-qwen-arena-diagnostic-protocol-20261111.md)。下方“外壳仍生成中”是此前准备记录。

@@ -1,3 +1,10 @@
+## 2026-11-11：W3 runtime材料已准备，成本捷径按已有证据拒绝
+
+新增probes/sherpa-runtime-materials/2.0.1-a8d09d1d/共50文件，20许可/声明+26构建源+2AAR清单+manifest+外部目录；46来源size/SHA/GitBlob、39链接、50tar成员逐字节通过。AAR26ZIP条目/21文件/16so四ABI实际枚举/动态NEEDED/SONAME/build-id（部分null）。不含binary/model，不改原108冻结文件/APK/生产。既有Sherpa/tiny通知未缺失；runtime递归静态组成/source-to-prebuilt/最终生产通知和发布复审仍缺，W3open。入口docs/validation/w3-runtime-materials-20261111.{md,json}。
+免费hy3范围/目录/定点订正三次均终态245.406/122.307/101.319s；实际25/14/6Read各1Write、各1toolerror（超长/目录/缺文件），与前两次自报错误有出入。原文/原事件/父裁定全保留，修正目录6240B/SHA81392f744786a33b396175d49657b503695e3fe3bb0049c061b4183387b56ab9原字节集成。无活动helper/native/识别，旧native429不重试，不因时长/EOF重派。
+已有报告零新推理复算：uniform auto在已知开发中文CER15/92（两阶段3/92）、远场WER17/27（两阶段13/27）退步，因此不能只凭后独立集较好aggregate删第二阶段。固定Qwen源码无result.lang赋值、报告无可信detected-language，不能凭DTO字段发明快速路径。25片采样窗口非阶段精确对齐，不证明leak/allocator根因。EnableMemPattern键存在仍非native消费/收益证明，先追固定ORT生命周期再决定新假设，不扫参/重放/提高预算。入口docs/validation/w3-qwen-cost-options-20261111.{md,json}。
+下一项核固定AAR官方发布来源，递归组件继续补证；设备已恢复，旧及arena run均消耗。新的材料/成本本项尚未同步两端，arena设备结果marker已用勿重发。源码分支未push；78resume保护摘要与原108合同保持，原78快照的两F08漂移已另存不回滚。下方目录待订正/待发布属历史。
+
 ## 2026-11-11：W3 arena设备结果双端已同步
 
 本地结果713f211；GH#15comment6786642535、GL#15note42843已回读，两WikiSHA a3d6f46a7465e1a9604505f069622ab44afcae45f0695d7f978a12bc818dd1e8一致，GHWiki394efcf30127b385b16074c426c19bf789901a0f。收据docs/validation/w3-qwen-arena-observed-sync-20261111.json。首次GL只读EOF保留，恢复只处理GL，未重发GH。源码未push。
