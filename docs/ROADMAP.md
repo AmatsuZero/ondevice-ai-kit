@@ -1,3 +1,5 @@
+W3同步（2026-11-11）：嵌套ORT依赖通知映射本地c2177b7，双端#15/Wiki逐字回读且Wiki摘要一致；ADB清单仍空、原heap120冻结保持/run未消耗，W3/R4/R5仍open。[同步收据](validation/w3-runtime-ort-dependency-map-sync-20261111.json)。
+
 W3新增（2026-11-11）：嵌套ORT的14条Fetch逐行关联固定源码/通知（13源码依赖+1hostprotoc，2GitBlob/13通知段）；archive摘要仍是声明，mp11仅通用Boost，最终递归组成/出处与生产门仍缺。ADB/MobileMCP均无Android，heaprun未消耗、W3/R4/R5open。[映射与收据](validation/w3-runtime-ort-dependency-map-20261111.md)。
 
 W3同步（2026-11-11）：嵌套ORT补核本地19ef630，双端#15/Wiki逐字回读且Wiki摘要一致；ADB清单仍空、原heap120冻结保持/run未消耗，W3/R4/R5仍open。[同步收据](validation/w3-runtime-ort-build-observed-sync-20261111.json)。

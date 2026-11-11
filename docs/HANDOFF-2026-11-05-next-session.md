@@ -1,3 +1,8 @@
+## 2026-11-11：W3嵌套ORT依赖通知映射已提交同步
+
+本地c2177b7精确9文件，86份既有dirty内容保持，源码未push。免费hy3机器映射/定点MD五Edit原字节经父验收，2GitBlob/14Fetch/13通知段、原50+15材料/前ORT4文件/108+120冻结守卫通过；源码→exactAAR/递归组成/生产通知/独立发布复审仍缺，W3/R4/R5open、goalactive。marker w3-ort-dependency-notice-map-20261111已用：GH#15comment6795653564、GL#15note43203、GHWiki08528d9753ffa84fb5b6e36e55d73a60971805cb，两WikiSHAb02eb937740f20298becff515ad1c0fb7a1726f02ead874cceefd93f586377eb逐字回读一致；收据docs/validation/w3-runtime-ort-dependency-map-sync-20261111.json，勿重发。
+结束前freshADB清单仍空，不能推断锁屏/USB授权；0安装/推理/模型或runtimebinary下载。heaprun w3-qwen-heap-20261111-01仍未消耗、无prepared/run-started/collection；无活动helper，旧native429不重试。下一有效动作是TECNO恢复连接后按原合同freshpreflight→prepare→唯一index25诊断→同run收取/评分/恢复；不重新派实现、不重放旧批、不放宽资源门。下方未同步是历史。
+
 ## 2026-11-11：W3嵌套ORT下载依赖与通知逐行关联通过
 
 免费hy3首稿因补丁条件错误/缺固定链接拒收；独立定点订正版原字节集成，父核14条实际Fetch=13源码依赖+1Linuxhostprotoc，与固定ORT33ca962的deps.txt/externalcmake及13个ThirdPartyNotices段逐行对应。声明archiveSHA1没有重下载校验，mp11仅通用Boost段，不证明完整归属；嵌套Eigen固定1d8b82b不混同Sherpa5.0.1。protobuf/flatbuffers的Patch_FOUND与date/GSL无同一guard分别保留，源码声明不能证明历史补丁成功。入口docs/validation/w3-runtime-ort-dependency-map-20261111.{md,json}，独立目录probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/。
