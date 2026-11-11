@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "redFailures": 2,
+  "greenTests": 3,
+  "scope": "parent local evidence verification only",
+  "sameSizeTamperingRejected": true,
+  "originalPartialHashesRetained": true,
+  "completeArchiveCheck": {
+    "acceptedWithinStatedScope": true,
+    "verifiedSourceArchives": 13,
+    "verifiedArchiveBytes": 53628041,
+    "archiveBackedRootNoticeFiles": 24,
+    "mp11SupplementalSourceFiles": 3,
+    "archiveBackedTextFiles": 27,
+    "prior11ArchiveEvidencePreserved": true,
+    "originalTimeoutsAndPartialsPreserved": true,
+    "oldMaterialFilesUnchanged": 68,
+    "frozenGuards": {
+      "arena108": 108,
+      "heap120": 120,
+      "emulator327": 327,
+      "kv288448": 448
+    },
+    "physicalHeapRunConsumed": false,
+    "newDeviceOrInferenceCalls": 0,
+    "productionReady": false,
+    "w3Complete": false
+  },
+  "sourceOnlyReview": {
+    "model": "hy3",
+    "seconds": 79.44466500001727,
+    "verdict": "accept",
+    "blockingFindings": 0,
+    "toolsDisabled": true
+  },
+  "reviewedSourceFiles": {
+    "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/check_complete.py": {
+      "bytes": 5402,
+      "sha256": "16e3453709c1b0f6df23b30257ee03d8aa022558d9ff9bfef2e4b758f932d670"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/test_check_complete.py": {
+      "bytes": 2476,
+      "sha256": "a53ddfcb09b7b8a5c2a00a4900a1ab9382b26f788c297a1e2eb44f432383d4a1"
+    }
+  },
+  "newNetworkCalls": 0,
+  "newDeviceOrInferenceCalls": 0,
+  "physicalHeapRunConsumed": false,
+  "w3Complete": false,
+  "goalStatus": "active"
+}

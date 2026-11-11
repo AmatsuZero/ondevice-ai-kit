@@ -1,3 +1,7 @@
+## 原始 partial 保持不能只检查长度（2026-11-12）
+
+完整归档检查器原先只核两个历史partial尺寸，父端另有SHA核验但未纳入可重跑入口。隔离副本中保持尺寸、翻转一个字节，两次真实负向检查均被误接受（2fail）；补固定SHA256后3/3回归通过，原始归档/partial不改。任何“历史原件保持”结论须由对应内容摘要支撑，不能只凭文件存在、大小或manifest中的true。证据`.omx/artifacts/w3-runtime-materials-20261111/partial-integrity-20261112/`及`docs/validation/w3-runtime-partial-integrity-20261112.md`；不因此扩大source-to-AAR或发布结论。
+
 ## 超时归档可独立恢复，但不能抹去失败或唯一归因（2026-11-12）
 
 固定cpuinfo/onnx归档最初经默认代理读取TimeoutError；保留原终态/partial并核SHA后，独立调用级`ProxyHandler({})`的HEAD返回200，随后各一次GET取得完整归档且声明SHA1、独立SHA256/尺寸匹配。有效恢复是新目录保留直连收据，不改全局代理、不覆盖旧11/13记录、不自动重试；HEAD本身不等于完整下载成功，不同时点的成功也不证明代理是所有超时的唯一根因。合并13/13归档及27文本的检查仍不证明最终AAR成员、source-to-AAR或生产通知。证据`.omx/artifacts/w3-runtime-materials-20261111/ort-source-archives-recovery-20261112/`和`docs/validation/w3-runtime-source-archives-complete-20261112.md`。
