@@ -1,0 +1,398 @@
+{
+  "runId": "w3-qwen-arena-emulator-20261111-01",
+  "sourceFingerprint": "d3d1a844ebd7e0c9cfe1347c194770e04bc60e11b7300bbee254cd9eb51ec9c1",
+  "reportSHA256": "696ee418d3de9c6fa7b51b8854ff163788e248495bb8d1d8728a826b1d5266b2",
+  "status": "completed",
+  "terminal": true,
+  "supplementalEmulatorEvidenceOnly": true,
+  "independentHeldOutConfirmation": false,
+  "executionAccepted": true,
+  "engineeringQualityAccepted": true,
+  "qualityScope": "This Android36 ARM64 emulator and unchanged fixed 65 public files only; no phone or production acceptance",
+  "parentCheckCount": 18,
+  "completedConsistentRows": 65,
+  "speechSuccessfulNonempty": 52,
+  "strictEmptyChallenges": 13,
+  "actualConstructors": 1,
+  "actualCreatedStreams": 117,
+  "actualDecodeCalls": 117,
+  "countsAreExactTerminalEvidence": true,
+  "hostSeconds": 145.46351729199523,
+  "loadSeconds": 1.917291501,
+  "recognizerReleaseSeconds": 0.065306042,
+  "rssSamples": 574,
+  "sampledMaxRssBytes": 1539006464,
+  "sampledMaxRssGiB": 1.4333114624023438,
+  "minDeviceAvailableBytes": 1466806272,
+  "rssLimitBytes": 1610612736,
+  "availableLimitBytes": 536870912,
+  "truePeakMeasured": false,
+  "stopReason": null,
+  "terminalObservationGap": null,
+  "caseRtfRange": [
+    0.1061303042,
+    0.5106159261143411
+  ],
+  "cohorts": {
+    "mandarin": {
+      "count": 20,
+      "errors": 40,
+      "referenceUnits": 590,
+      "rate": 0.06779661016949153,
+      "threshold": 0.2,
+      "passed": true
+    },
+    "english-near": {
+      "count": 20,
+      "errors": 37,
+      "referenceUnits": 375,
+      "rate": 0.09866666666666667,
+      "threshold": 0.2,
+      "passed": true
+    },
+    "english-far": {
+      "count": 12,
+      "errors": 64,
+      "referenceUnits": 226,
+      "rate": 0.2831858407079646,
+      "threshold": 0.35,
+      "passed": true
+    }
+  },
+  "challenges": {
+    "silence": {
+      "expected": 4,
+      "completed": 4,
+      "strictEmpty": 4,
+      "engineeringGatePassed": true,
+      "humanListeningAudit": null
+    },
+    "nonspeech-noise": {
+      "expected": 9,
+      "completed": 9,
+      "strictEmpty": 9,
+      "engineeringGatePassed": true,
+      "humanListeningAudit": false
+    }
+  },
+  "sameInputComparison": {
+    "mandarin": {
+      "mac": {
+        "count": 20,
+        "ids": [
+          "fleurs-cmn_hans_cn-1805",
+          "fleurs-cmn_hans_cn-1965",
+          "fleurs-cmn_hans_cn-1903",
+          "fleurs-cmn_hans_cn-1953",
+          "fleurs-cmn_hans_cn-1830",
+          "fleurs-cmn_hans_cn-1910",
+          "fleurs-cmn_hans_cn-1902",
+          "fleurs-cmn_hans_cn-1905",
+          "fleurs-cmn_hans_cn-1772",
+          "fleurs-cmn_hans_cn-1792",
+          "fleurs-cmn_hans_cn-1962",
+          "fleurs-cmn_hans_cn-1884",
+          "fleurs-cmn_hans_cn-1958",
+          "fleurs-cmn_hans_cn-1871",
+          "fleurs-cmn_hans_cn-1698",
+          "fleurs-cmn_hans_cn-2002",
+          "fleurs-cmn_hans_cn-1661",
+          "fleurs-cmn_hans_cn-1697",
+          "fleurs-cmn_hans_cn-1821",
+          "fleurs-cmn_hans_cn-1808"
+        ],
+        "emulator": {
+          "referenceUnits": 590,
+          "hypothesisUnits": 578,
+          "substitutions": 18,
+          "deletions": 17,
+          "insertions": 5,
+          "errors": 40,
+          "rate": 0.06779661016949153,
+          "defined": true
+        },
+        "other": {
+          "referenceUnits": 590,
+          "hypothesisUnits": 580,
+          "substitutions": 18,
+          "deletions": 17,
+          "insertions": 7,
+          "errors": 42,
+          "rate": 0.0711864406779661,
+          "defined": true
+        },
+        "identicalRawOutputs": 16
+      },
+      "tecno": {
+        "count": 20,
+        "ids": [
+          "fleurs-cmn_hans_cn-1805",
+          "fleurs-cmn_hans_cn-1965",
+          "fleurs-cmn_hans_cn-1903",
+          "fleurs-cmn_hans_cn-1953",
+          "fleurs-cmn_hans_cn-1830",
+          "fleurs-cmn_hans_cn-1910",
+          "fleurs-cmn_hans_cn-1902",
+          "fleurs-cmn_hans_cn-1905",
+          "fleurs-cmn_hans_cn-1772",
+          "fleurs-cmn_hans_cn-1792",
+          "fleurs-cmn_hans_cn-1962",
+          "fleurs-cmn_hans_cn-1884",
+          "fleurs-cmn_hans_cn-1958",
+          "fleurs-cmn_hans_cn-1871",
+          "fleurs-cmn_hans_cn-1698",
+          "fleurs-cmn_hans_cn-2002",
+          "fleurs-cmn_hans_cn-1661",
+          "fleurs-cmn_hans_cn-1697",
+          "fleurs-cmn_hans_cn-1821",
+          "fleurs-cmn_hans_cn-1808"
+        ],
+        "emulator": {
+          "referenceUnits": 590,
+          "hypothesisUnits": 578,
+          "substitutions": 18,
+          "deletions": 17,
+          "insertions": 5,
+          "errors": 40,
+          "rate": 0.06779661016949153,
+          "defined": true
+        },
+        "other": {
+          "referenceUnits": 590,
+          "hypothesisUnits": 578,
+          "substitutions": 18,
+          "deletions": 17,
+          "insertions": 5,
+          "errors": 40,
+          "rate": 0.06779661016949153,
+          "defined": true
+        },
+        "identicalRawOutputs": 20
+      }
+    },
+    "english-near": {
+      "mac": {
+        "count": 20,
+        "ids": [
+          "fleurs-en_us-1675",
+          "fleurs-en_us-1728",
+          "fleurs-en_us-1972",
+          "fleurs-en_us-1914",
+          "fleurs-en_us-1806",
+          "fleurs-en_us-1776",
+          "fleurs-en_us-1802",
+          "fleurs-en_us-1992",
+          "fleurs-en_us-2005",
+          "fleurs-en_us-1674",
+          "fleurs-en_us-1952",
+          "fleurs-en_us-1749",
+          "fleurs-en_us-1662",
+          "fleurs-en_us-1858",
+          "fleurs-en_us-1909",
+          "fleurs-en_us-1897",
+          "fleurs-en_us-1953",
+          "fleurs-en_us-1740",
+          "fleurs-en_us-1987",
+          "fleurs-en_us-1990"
+        ],
+        "emulator": {
+          "referenceUnits": 375,
+          "hypothesisUnits": 376,
+          "substitutions": 32,
+          "deletions": 2,
+          "insertions": 3,
+          "errors": 37,
+          "rate": 0.09866666666666667,
+          "defined": true
+        },
+        "other": {
+          "referenceUnits": 375,
+          "hypothesisUnits": 374,
+          "substitutions": 27,
+          "deletions": 3,
+          "insertions": 2,
+          "errors": 32,
+          "rate": 0.08533333333333333,
+          "defined": true
+        },
+        "identicalRawOutputs": 14
+      },
+      "tecno": {
+        "count": 4,
+        "ids": [
+          "fleurs-en_us-1675",
+          "fleurs-en_us-1728",
+          "fleurs-en_us-1972",
+          "fleurs-en_us-1914"
+        ],
+        "emulator": {
+          "referenceUnits": 67,
+          "hypothesisUnits": 66,
+          "substitutions": 8,
+          "deletions": 1,
+          "insertions": 0,
+          "errors": 9,
+          "rate": 0.13432835820895522,
+          "defined": true
+        },
+        "other": {
+          "referenceUnits": 67,
+          "hypothesisUnits": 66,
+          "substitutions": 8,
+          "deletions": 1,
+          "insertions": 0,
+          "errors": 9,
+          "rate": 0.13432835820895522,
+          "defined": true
+        },
+        "identicalRawOutputs": 4
+      }
+    },
+    "english-far": {
+      "mac": {
+        "count": 12,
+        "ids": [
+          "ami-ES2003a.sync.171-C",
+          "ami-ES2003a.sync.93-B",
+          "ami-ES2003a.sync.95-B",
+          "ami-ES2003a.sync.209-C",
+          "ami-ES2003a.sync.267-D",
+          "ami-ES2003a.sync.29-A",
+          "ami-ES2003a.sync.129-B",
+          "ami-ES2003a.sync.131-B",
+          "ami-ES2003a.sync.133-B",
+          "ami-ES2004a.sync.121-B",
+          "ami-ES2004a.sync.131-B",
+          "ami-ES2006a.sync.277-C"
+        ],
+        "emulator": {
+          "referenceUnits": 226,
+          "hypothesisUnits": 216,
+          "substitutions": 48,
+          "deletions": 13,
+          "insertions": 3,
+          "errors": 64,
+          "rate": 0.2831858407079646,
+          "defined": true
+        },
+        "other": {
+          "referenceUnits": 226,
+          "hypothesisUnits": 214,
+          "substitutions": 44,
+          "deletions": 15,
+          "insertions": 3,
+          "errors": 62,
+          "rate": 0.2743362831858407,
+          "defined": true
+        },
+        "identicalRawOutputs": 7
+      },
+      "tecno": {
+        "count": 0,
+        "ids": [],
+        "emulator": null,
+        "other": null,
+        "identicalRawOutputs": 0
+      }
+    }
+  },
+  "sameOrderedInputsBound": 65,
+  "physicalSameInputOutputsIdentical": 24,
+  "nativePolicyEffectVerified": false,
+  "policyCollection": {
+    "privateRoot": "/data/data/io.ondeviceai.acceptance.qwenarena/no_backup",
+    "receiptMatches": true,
+    "fileBytesMatch": true,
+    "runId": "w3-qwen-arena-emulator-20261111-01",
+    "reportSHA256": "696ee418d3de9c6fa7b51b8854ff163788e248495bb8d1d8728a826b1d5266b2",
+    "nativePolicyEffectVerified": false,
+    "readLimitBytes": 21,
+    "boundedReadBytes": 20,
+    "boundedReadSHA256": "df3e015e389b92d6c5b60d02bef3023485693ee0186c872cf3ce2c5b5dc7470b",
+    "directoryIdentity": "10150 65076 491775 4096",
+    "fileIdentity": "10150 65076 90118 20",
+    "twoReadsIdentical": true
+  },
+  "collectionFailurePreserved": "collect.stderr; exact report path literal occurs twice, not once",
+  "policyReadOnlyRecovery": "collect_policy_report_path.py; 3 offline regression checks; same run only; no native replay",
+  "restored": {
+    "removedOnlyExactNewAliases": [
+      "io.ondeviceai.acceptance.qwenarena.test",
+      "io.ondeviceai.acceptance.qwenarena"
+    ],
+    "exactStagingRemoved": "/data/local/tmp/w3-qwen-arena-emulator-20261111-01",
+    "ordinaryAppsModelsUnchanged": true,
+    "emulatorLauncherReturned": true,
+    "supplementalEmulatorEvidenceOnly": true
+  },
+  "emulatorStopped": true,
+  "cleanup": {
+    "nominalBytes": 3859410200,
+    "freeBytesBefore": 75802525696,
+    "freeBytesAfter": 79601889280,
+    "ordinaryAVDNotTargeted": true,
+    "originalModelsAndReportsRetained": true
+  },
+  "originalArenaFrozenFiles": 108,
+  "physicalHeapFrozenFiles": 120,
+  "physicalHeapRunConsumed": false,
+  "freeze": {
+    "files": 327,
+    "sha256": "4d6b8ba92805e381347c4a98b8a787a3f4e38cb606f73745c494f0b006184102"
+  },
+  "verification": {
+    "adapterGroups": 4,
+    "identityNegatives": 9,
+    "policyContinuationGroups": 3,
+    "originalParentChecks": 30,
+    "parentAcceptanceChecks": 18,
+    "sameInputBindingAssertions": 65,
+    "independentPreRunReview": "hy3 accepted; tool-free static review; later collector literal count defect preserved separately",
+    "toolsTests": 691,
+    "toolsExitCode": 0,
+    "rubyVersion": "3.4.11",
+    "failedToolSetupPreserved": [
+      "tools-suite-result.json (0 tests)",
+      "tools-suite-corrected-result.json (Ruby2.6 mismatch41 failures)"
+    ]
+  },
+  "protectedDirtyFilesUnchanged": 84,
+  "otherTaskDriftPreserved": {
+    "docs/agent-pitfalls.md": {
+      "before": "32ea8cc67486a92e8fb025ab84d9bb5f2b743f03c85c100cf493e83f98a006bf",
+      "after": "04368cea35b0ef298f5053d4189fb4782fec52ceeba44065c02d3ae1bbf35077"
+    },
+    "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md": {
+      "before": "f279f265a813f0cb1ea8d59741dcd4581d6ff3e9be3d93a63763223ffdf69c40",
+      "after": "83e6566132d298a53660ebb07023723e904db7c02956e99dfe34290454820685"
+    },
+    "docs/validation/f08-qwen2vl-preprocess-coverage-20261111.md": {
+      "before": "ad817f97b97b2a80121561fa209b25eb2f34bfc2c2d2f8b68185b056e807e404",
+      "after": "63ec946190b1c33fb0aeb0bd9ba68b32347a2af24b4b7aca60d5c27d9bb76a0d"
+    }
+  },
+  "ordinaryAVDConfigUnchanged": true,
+  "microphoneStarts": 0,
+  "networkRequests": 0,
+  "aiaiRequests": 0,
+  "downloads": 0,
+  "productionChanges": false,
+  "sourceBranchPushed": false,
+  "rawEvidenceLocalOnly": true,
+  "productionReady": false,
+  "w3Status": "open",
+  "r4Status": "open",
+  "r5Status": "open",
+  "remainingGates": [
+    "Physical full-corpus quality and memory budget",
+    "Runtime exact recursive binary composition/source mapping",
+    "Production integration and complete notices",
+    "Independent release review"
+  ],
+  "finalIndependentReview": {
+    "accepted": true,
+    "findings": [],
+    "scope": "tool-free supplied evidence/code review; no direct device observation",
+    "receipt": "docs/validation/w3-qwen-arena-emulator-review-20261111.json"
+  }
+}

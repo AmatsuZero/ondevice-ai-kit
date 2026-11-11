@@ -1,3 +1,10 @@
+## 2026-11-11 补充：W3 模拟器证据已完成，物理堆待续
+- 模拟器补充证据 `w3-qwen-arena-emulator-20261111-01` 完成；已验结果文档 `validation/w3-qwen-arena-emulator-observed-20261111.md`，后续精确暂存自身前缀和 HEAD，既有 dirty 内容保持未暂存，保留他人编辑未暂存。
+- 87 个先存脏文件查 84 匹配、3 漂移（其他活跃工作，已保留）：`docs/agent-pitfalls.md`、`docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md`、`docs/validation/f08-qwen2vl-preprocess-coverage-20261111.md`。
+- 普通 Medium_Phone 配置未变；仅删 7 个生成的非活跃任务磁盘文件（路径/非符号链接/Git 未跟踪/无打开写者/哈希校验后），原始日志/源码/APK/模型/配置/报告保留。
+- 新适配 4 测试组/9 身份阴性 +3 续跑回归 +30 原父检查通过（已验证）；完整 tools 691 项已通过（父端新鲜结果；测试目录/Ruby 环境失败原件保留）。
+- 下一步：设备连接后物理堆 `w3-qwen-heap-20261111-01` 原始单例诊断。
+
 ## 2026-11-11：W3模拟器单片已提交并双端同步
 
 本地39794cb仅本任务7文件，源码分支未push；独立模拟器run完成1构造/2stream/2decode、18heap/23RSS、20诊断/完整tools691通过，采样最高1.353703GiB。原真机120冻结及未消耗run保持；同run政策只读引用修正/双读/模型后核/精确恢复/关闭及约3.83GB任务虚拟磁盘清理完成。免费hy3复核接受，exec后全局覆盖维护性minor延后，无活动helper，旧native429不重试。

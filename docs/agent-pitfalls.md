@@ -1,3 +1,11 @@
+## 采集适配计数断言失败与只读恢复（w3-qwen-arena-emulator-20261111）
+- 症状：采集在报告双读与六模型后哈希后失败于冻结父文件 line130 断言 `collector.count(old)==1`：实际完整堆源码含两处精确报告目录字面量（prior_collection + 未用 main REPORT 赋值），故计数=2。
+- 已验证成因：327 项冻结合同所绑定的原 heap 父脚本有两处报告目录字面量，适配误假设仅一处；非 adb 远程 stat 分割错误（本批已用 shlex.join 修复，未发生）。
+- 有效只读恢复：独立 `collect_policy_report_path.py` 仅改这两处字面量后重绑新 OUT/RUN/APP/带引号 adb，仅调用 preflight+collect_policy，无模型重放；三个测试用例的一次离线回归加一次同 run 只读续取成功。
+- 边界：恢复仅限采集脚本字面量重绑，不动原始 327 冻结/适配/APK/报告/stderr；`nativePolicyEffectVerified=false` 仍 false；跨环境差异不证明运行时唯一成因。
+- 证据：`artifacts/verification/w3-qwen-arena-emulator-20261111/collection.json`、`collect.stderr`、`policy-continuation-frozen.json`、`allocator-policy-collected.json`。
+- 注：运行前免费 hy3 静态审阅接受/无发现，但仅审阅局限且漏掉此适配计数错误，非完整运行后批准，不可称为运行后全量批准。
+
 ## W3 模拟器政策收取：ADB 远程参数需引用（2026-11-11）
 
 - **现象与已证原因**：模拟器唯一 heap run 已完成且报告双读成功，但政策收取 `adb shell run-as ... stat -c '%u %d %i %s' no_backup` 的 Python 多参数形式在远端被重新拆开，真实 exit1，stderr 把 `%d/%i/%s` 当文件。仅将远端 tokens 用 `shlex.join` 合成一个 shell 参数后，同一只读 stat 返回完整四数字、exit0，证明是远端参数边界问题。
