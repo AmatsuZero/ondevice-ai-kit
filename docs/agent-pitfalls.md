@@ -6,6 +6,12 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **failed 状态不能代替异常与片段绑定**：2026-11-11 Android FILE外壳首稿21组/343断言通过，但补充检查发现外层err只写局部Throwable，未进入FileRunState，锁屏/model/constructor失败的报告errorClass/message均null；case失败又提前清空activeCaseIndex/起始时间。加入实际异常类与失败片段绑定回归后24组有5组失败；原稿/RED保留，交独立免费hy3定点修正，不因status=failed就认定故障证据完整。同次扩展Speech tools首跑56项12fail/4error，命中本文第7节Ruby2.6混用3.4gem；只对测试子进程对齐已安装Ruby3.4.11后同56项通过，未改生成器/global环境。证据`.omx/artifacts/w3-qwen-file-20261111/{wrapper-errors-red,wrapper-clock-red,speech-tools-ruby-aligned-result.json}`。
+
+- **success终态也可只剩工具语法标记**：2026-11-11免费hy4free Android FILE外壳候选自然结束2119.316s，CLI0/result success，但result原文仅`｜DSML｜｜tool_calls`，8Read/0Write/0Edit、零文件、无tool error或quota错误。写沙盒与context摘要均保持；拒收，不把模型内部/工具语法当源码，不因时长终止，不重发原多文件任务。恢复为独立小模块（输入字节校验、可见Activity、薄调度）逐项host验收；实包/设备仍须后续。证据`.omx/artifacts/w3-qwen-file-20261111/helpers/odai-hy4free-w3-qwen-file-wrapper-20261111/parent-assessment.json`。
+
+- **两阶段结果取回不等于阶段完成**：2026-11-11 Qwen Kotlin core首稿38组/224断言通过，但补充阶段状态与最后前台门回归后42组有16组失败。源码在`text()`返回时提前标stage completed，从未写stage.errorClass，且缺少每阶段释放后的gate；因此释放失败仍标completed、最后结果/释放后失去前台可使整case虚报completed。新失败已保留并交外部助手定点修正；回归要求先释放、再检查阶段结束gate、最后标completed，原错误与releaseError分开保留，gate失败不新增下一阶段。此时尚无新设备调用或修正通过证据；见`.omx/artifacts/w3-qwen-file-20261111/core-review-red/`及隔离`CoreChecks.kt`。
+
 - **Git中文路径盘点用NUL输出，别按quoted显示名比对**：Wiki精确stage后`git diff --cached --name-only`将中文名转成带引号的八进制转义，父端按真实文件名比较失败；当时零commit/push。只改为`--name-only -z`并按NUL拆分，确认仅目标页后提交/推送，远端内容逐字回读通过；不更改全局`core.quotePath`，也不因本地检查失败重复发布issue。原错与恢复见`.omx/artifacts/w3-model-reselection-20261110/redistribution-materials/publication/`。
 
 - **AVD控制台身份响应含CRLF，逐行精确校验**：模拟器父脚本首preflight假定`name\nOK`，实际ADB回`W3_Qwen_Load_20261110\r\nOK\r\n`，零安装/构造时断言失败。保留raw与首稿，仅对控制台响应使用`splitlines()==[精确AVD名,"OK"]`；三种错名/失败状态/多余行仍拒绝。随后唯一模拟器load-only completed、28父检查/双读/恢复通过；不能借换行订正放宽serial/qemu/API/ABI，也不改实体run。结束时最后一次`/proc`读取在instrumentation退出后失去PID，已保留terminalObservationGap，不能称连续采样或true peak。证据`artifacts/verification/w3-qwen-load-emulator-20261110/`及`docs/validation/w3-qwen-emulator-load-accepted-20261110.md`。
