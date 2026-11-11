@@ -1,0 +1,267 @@
+{
+  "scope": "source/JVM/static only; zero model/device execution",
+  "w3Status": "open",
+  "previousPhysicalRunConsumed": true,
+  "sourceHead": "a5c11e7",
+  "helper": {
+    "exitCode": 0,
+    "seconds": 275.5499185830122,
+    "files": {
+      "MEMORY-FEASIBILITY.md": {
+        "bytes": 7879,
+        "sha256": "c41429bad8ba176c0b3db4f15cc6541bd7af96b7ce6876fcf8ba8d86948448d6"
+      }
+    }
+  },
+  "contextHashesPreserved": true,
+  "toolCounts": {
+    "Read": 15,
+    "Write": 1
+  },
+  "toolErrorsRetained": [
+    "Read whole pitfalls exceeded20000tokens",
+    "Read directory ../context rejected"
+  ],
+  "sourceFragmentChecks": {
+    "checks": 18,
+    "modelsLoaded": 0,
+    "nativeInferenceCalls": 0,
+    "scope": "source-fragments-with-adapters",
+    "fragments": {
+      "Trim": "73b53b097d8431c2155327cdc32b9ed80b5a8fb2d0db5eaaf0d1cae0a388cd91",
+      "ToIntOrDefault": "1c2388bb855436cbaf9c05d9459f6032f90bdd0d387c8d8c667358813292244b",
+      "ParseConfigAndSplit": "a5128d41ff4bfaed5fb75e9908937b3da7f72740f1d264cfa7162a4c76684122",
+      "IsCudaProvider": "1aef2cee7b300eb91e62027a0f96de71fdae930c345ecdd123bbb42c3c1b0eec",
+      "MemoryOptions": "dd14add371ca3fef10d5bc0cddc51277d9939a05e06447f5c1d49bd9e4a242e9",
+      "StringToProvider": "af8f689f5a58dc0d1fb39130ea1615132bfee763f583fca8b6084410af57bee0",
+      "SessionOptionsForwarder": "91137b1a93505b6bfe05c4416b4cfc895188935ec627b1fa6b4d26ebfdf37e5b"
+    },
+    "androidBinaryExecutionProved": false,
+    "memorySavingsProved": false
+  },
+  "actualAarDtoChecks": {
+    "checks": 4,
+    "modelsLoaded": 0,
+    "recognizersConstructed": 0,
+    "scope": "actual-AAR-JVM-DTO",
+    "offlineRecognizerClassInitialized": false,
+    "nativeLibraryPath": "/nonexistent-odai-no-native",
+    "classesJarSHA256": "0ee4991c56c19ef5a8a573b01891193d7298ffe7ebcc68f42b944361d8869d93",
+    "stdlibPath": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.2.20/5380b19fa1924399b62ce3a1faffebb2b4f82272/kotlin-stdlib-2.2.20.jar",
+    "jniDispatchProved": false
+  },
+  "actualAarStaticEvidence": {
+    "aarSHA256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+    "libraries": {
+      "jni/arm64-v8a/libonnxruntime.so": {
+        "bytes": 22249560,
+        "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+        "stringOffsets": {
+          "EnableMemPattern": -1,
+          "EnableCpuMemArena": -1,
+          "SessionConfig.": -1,
+          "SplitProviderAndConfig": -1,
+          "Provider config path is empty": -1,
+          "Qwen3ASR": -1,
+          "GetSessionOptionsImpl": -1,
+          "1.24.": -1,
+          "1.23.": -1
+        }
+      },
+      "jni/arm64-v8a/libsherpa-onnx-c-api.so": {
+        "bytes": 4303136,
+        "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+        "stringOffsets": {
+          "EnableMemPattern": 213746,
+          "EnableCpuMemArena": 237300,
+          "SessionConfig.": 276176,
+          "SplitProviderAndConfig": 203206,
+          "Provider config path is empty": 241380,
+          "Qwen3ASR": 153670,
+          "GetSessionOptionsImpl": 159295,
+          "1.24.": -1,
+          "1.23.": -1
+        }
+      },
+      "jni/arm64-v8a/libsherpa-onnx-cxx-api.so": {
+        "bytes": 272848,
+        "sha256": "de94e0952a124eb22e86d754e11aa0489a065affc837911a8ed5e7fd843baad6",
+        "stringOffsets": {
+          "EnableMemPattern": -1,
+          "EnableCpuMemArena": -1,
+          "SessionConfig.": -1,
+          "SplitProviderAndConfig": -1,
+          "Provider config path is empty": -1,
+          "Qwen3ASR": -1,
+          "GetSessionOptionsImpl": -1,
+          "1.24.": -1,
+          "1.23.": -1
+        }
+      },
+      "jni/arm64-v8a/libsherpa-onnx-jni.so": {
+        "bytes": 4609320,
+        "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575",
+        "stringOffsets": {
+          "EnableMemPattern": 220594,
+          "EnableCpuMemArena": 246571,
+          "SessionConfig.": 282216,
+          "SplitProviderAndConfig": 208836,
+          "Provider config path is empty": 250659,
+          "Qwen3ASR": 153369,
+          "GetSessionOptionsImpl": 159571,
+          "1.24.": -1,
+          "1.23.": -1
+        }
+      }
+    },
+    "javap": {
+      "OfflineModelConfig": {
+        "exitCode": 1,
+        "stderr": "The operation couldn’t be completed. Unable to locate a Java Runtime.\nPlease visit http://www.java.com for information on installing Java.\n\n"
+      },
+      "OfflineQwen3AsrModelConfig": {
+        "exitCode": 1,
+        "stderr": "The operation couldn’t be completed. Unable to locate a Java Runtime.\nPlease visit http://www.java.com for information on installing Java.\n\n"
+      }
+    }
+  },
+  "sourceReceipts": [
+    {
+      "path": "sherpa-onnx/csrc/session.cc",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 24469,
+      "sha256": "a9947ef352e900ef715f5da8605bdfa523134d93bd751dbcff4843de11aa3695",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/session.cc"
+    },
+    {
+      "path": "sherpa-onnx/csrc/session.h",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 1862,
+      "sha256": "3847eebd5004b4cf352fe80cfc5341a98aa660376c4826d18061544685455abc",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/session.h"
+    },
+    {
+      "path": "sherpa-onnx/csrc/offline-qwen3-asr-model.cc",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 31135,
+      "sha256": "75bdb24f09884666d810b3119ae1e2a373d92041ac24d8afb1d06318ad6e44d5",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-qwen3-asr-model.cc"
+    },
+    {
+      "path": "sherpa-onnx/csrc/offline-qwen3-asr-model.h",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 3433,
+      "sha256": "46ec70a90055231ae1d877435f0dbfbd307ed92dcff27559c8f91549583f09e0",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-qwen3-asr-model.h"
+    },
+    {
+      "path": "sherpa-onnx/csrc/offline-qwen3-asr-model-config.h",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 2039,
+      "sha256": "fd62ade1d1c32b75429b27ccd103d00e0c47daf728e9d841c82f96a5180aee49",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-qwen3-asr-model-config.h"
+    },
+    {
+      "path": "sherpa-onnx/csrc/offline-model-config.h",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 5361,
+      "sha256": "795bdaa4b0c59796e487f7bfeb5c6e3b9b7f54dc0b1f16ea6d7d063b984e1c6c",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-model-config.h"
+    },
+    {
+      "path": "sherpa-onnx/csrc/offline-recognizer-qwen3-asr-impl.h",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 3587,
+      "sha256": "18847ca40b5906dd040112a7b47e7b49db2140380ad3ee11bc263e3f50a198a8",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-recognizer-qwen3-asr-impl.h"
+    },
+    {
+      "path": "sherpa-onnx/kotlin-api/OfflineRecognizer.kt",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 56760,
+      "sha256": "8103b67ec65910a71e6b8d4bca7934f77c1af47b68a5c18cdca0ce3f956247a7",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/kotlin-api/OfflineRecognizer.kt"
+    },
+    {
+      "path": "sherpa-onnx/csrc/offline-recognizer-qwen3-asr-impl.cc",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 41307,
+      "sha256": "d9daad0eafcd066fa088eb06d858ecfd394fef35ce1e6f595ab934e6e5525824",
+      "url": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-recognizer-qwen3-asr-impl.cc"
+    },
+    {
+      "path": "sherpa-onnx/csrc/provider.cc",
+      "localName": "provider.cc",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 1078,
+      "sha256": "4920ddb6975464e0d42a3224e17f230f4a474fb0ee8d8547b7372fd51062557a",
+      "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/provider.cc"
+    },
+    {
+      "path": "sherpa-onnx/csrc/text-utils.h",
+      "localName": "text-utils.h",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 13124,
+      "sha256": "2b58e2ba38b8ea215bb4878861f5c1ff9982a43b74351bf2cb0eca9c4227d104",
+      "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/text-utils.h"
+    },
+    {
+      "path": "sherpa-onnx/csrc/text-utils.cc",
+      "localName": "text-utils.cc",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 51432,
+      "sha256": "16eb0413968dc6b0efd02f9b60b5c792959a8a78df509273961f9f7706c16511",
+      "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/text-utils.cc"
+    },
+    {
+      "path": "sherpa-onnx/jni/offline-recognizer.cc",
+      "localName": "jni-offline-recognizer.cc",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 30762,
+      "sha256": "3d4f81f47ed42aa925eda51b9f80bb446f0d82f17309f163e57077fba68d3457",
+      "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/jni/offline-recognizer.cc"
+    },
+    {
+      "path": "sherpa-onnx/csrc/offline-model-config.cc",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 8385,
+      "sha256": "24bfebd024ea681f82bfe45232e1510feebf394ed889d1136ea1edc47b6b52e2",
+      "gitBlobSHA1": "7d452b74b4f535acb93a3749ee330bbc1a9a608c",
+      "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-model-config.cc"
+    },
+    {
+      "path": "sherpa-onnx/csrc/offline-qwen3-asr-model-config.cc",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 4446,
+      "sha256": "ecf7af948f6eeb4b534fff300ea87832aeca20a955b1a71bba1c24f65e9f78ee",
+      "gitBlobSHA1": "a6c03198151af0e32ce53e7c514e23d741fbde6d",
+      "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-qwen3-asr-model-config.cc"
+    },
+    {
+      "path": "sherpa-onnx/csrc/provider.h",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 1093,
+      "sha256": "d2cce3aa3846018790a4caeac7b5532512e857daa3a088b7682fbf14d92c3364",
+      "gitBlobSHA1": "0ad5be284f1c13c471e5985d9cc62e8f2b22f714",
+      "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/provider.h"
+    },
+    {
+      "path": "sherpa-onnx/csrc/offline-recognizer.cc",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "bytes": 6220,
+      "sha256": "e0e25c5dd74d25cc721dc3549977ae3e36a651f3030a3d473690cb5d6518cddd",
+      "gitBlobSHA1": "c9d85ecc825e52bf50edc5b866ae86687606f826",
+      "url": "https://raw.githubusercontent.com/k2-fsa/sherpa-onnx/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/offline-recognizer.cc"
+    }
+  ],
+  "nativePolicyConsumptionProved": false,
+  "memorySavingsProved": false,
+  "next": "external pure Kotlin arena policy candidate; no native run contract yet",
+  "allSourceGitBlobsVerified": true,
+  "parentCorrections": [
+    "session.h generic forwarding closes omitted-context gap",
+    "parent budget stop, no observed crash",
+    "sampled RSS is not true peak",
+    "native policy effect and memory savings unverified"
+  ]
+}

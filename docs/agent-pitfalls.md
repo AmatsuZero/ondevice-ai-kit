@@ -6,6 +6,9 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **provider后缀须追完整条件；host适配器与真实runtime分开**：W3静态调查初见Qwen只认精确cpu，完整源码确认该flag仅与IsCudaProvider合取，cpu:config仍禁用CUDA，不需据局部条件修模型。session.h模板原样转发provider；固定AAR字符串/JVM DTO和18项源码片段检查仍不证明native配置生效或节省RSS。首次C++检查将日志宏设空导致两项unused Werror，只改测试日志适配器为fprintf；首次JVM stdlib选到非runtime jar导致NoClassDefFoundError，明确使用精确kotlin-stdlib-2.2.20.jar并核Intrinsics.class后4项通过。保留初始失败，未改全局环境/生产/旧run；证据`docs/validation/w3-qwen-arena-feasibility-20261111.md`与本次memory-investigation目录。
+
+
 - **强停后的decode0仅是最后持久化计数**：2026-11-11 TECNO Qwen FILE首片时采样RSS1703575552B超过1.5GiB，父按合同force-stop。原报告非终态、stage.createReturned=true/acceptAttempts1/decodeAttempts0，计数写入在dispatch之前，不能据此宣称实际零decode/显式release成功。父评估新增“非终态精确计数未知、另保留lastPersisted计数”回归，RED(0isnotNone)→8testsGREEN；原报告/初次评分不改，同run双读及恢复通过，无重跑。独立复核另把Instrumentation.onStart误称App主线程并建议额外smoke；官方Android参考确认start()新建线程调用onStart()，runOnMainSync需非App主线程，原说明保留并由父订正，不加试跑。父prepare另曾复制不存在的gradlew.bat，零build/device失败后保留partial，仅复制POSIX所需wrapper并前置核必需文件。证据`docs/validation/w3-qwen-android-file-{observed,wrapper-review}-20261111.md`及本次`.omx/artifacts/w3-qwen-file-20261111/`。
 
 - **failed 状态不能代替异常与片段绑定**：2026-11-11 Android FILE外壳首稿21组/343断言通过，但补充检查发现外层err只写局部Throwable，未进入FileRunState，锁屏/model/constructor失败的报告errorClass/message均null；case失败又提前清空activeCaseIndex/起始时间。加入实际异常类与失败片段绑定回归后24组有5组失败；原稿/RED保留，交独立免费hy3定点修正，不因status=failed就认定故障证据完整。同次扩展Speech tools首跑56项12fail/4error，命中本文第7节Ruby2.6混用3.4gem；只对测试子进程对齐已安装Ruby3.4.11后同56项通过，未改生成器/global环境。证据`.omx/artifacts/w3-qwen-file-20261111/{wrapper-errors-red,wrapper-clock-red,speech-tools-ruby-aligned-result.json}`。

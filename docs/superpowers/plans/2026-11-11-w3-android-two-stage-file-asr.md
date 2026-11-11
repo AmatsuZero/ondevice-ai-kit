@@ -56,7 +56,7 @@
 - [x] Prepare only the new aliases and exact staging; run once sequentially with parent RSS/time monitoring. Stop on failure without retrying.
 - [x] Collect same-run report twice, verify counters/rows/release/teardown and score only complete successful rows against unchanged references; report full coverage and failures separately.
 - [x] Restore ordinary App, verify protected App paths/model hashes, remove only exact temporary staging/aliases and collect cleanup receipt.
-- [ ] Record and commit exact task files/hunks; update both existing issue/wiki entries with one deduplicated marker and remote readback. W3 remains open for any unmet Android/resource/license/release gates.
+- [x] Record and commit exact task files/hunks; update both existing issue/wiki entries with one deduplicated marker and remote readback. W3 remains open for any unmet Android/resource/license/release gates.
 
 ## Execution rulings and ledger
 
@@ -82,3 +82,4 @@
 
 - Task2 independent review completed329.023s/noCriticalImportant; M1 concurrent-writer race deferred outside exclusive run, M2 five-second waits fail closed. Reviewer threading explanation was incorrect; official Android reference confirms start() creates a separate thread for onStart(); no extra smoke/replay. Original review and parent correction retained.
 - Task3 actual one-shot reached first case then stopped at1703575552B=1.586578GiB sampledRSS, above1.5GiB. Constructor1/returned9.019537s,38samples,17.742s,0completed/64planned. Nonterminal counts not exact; no release/destroy ack claimed. Double reads/six-model/ordinary-App+model checks/actual restoration passed. Parent nonterminal-count precision regression RED→8testsGREEN, raw/initial evaluation unchanged. The run is consumed; quality unverified and current resource gate failed, no retry/threshold change. W3 remains open; investigate bounded existing-runtime memory options next.
+- Task3 recording complete: local7593b25/a5c11e7; deduplicated memory-stop marker published to GH#15 comment6783604164 and GL#15note42553; both Wiki pages read back byte-identically (SHAdd5eb5ca…). GH Wiki3a3e853822996f76e1d01c98bda0d9eff88e7478. No source branch push. This completes the planned measurement and record, not the failed resource/quality gate.
