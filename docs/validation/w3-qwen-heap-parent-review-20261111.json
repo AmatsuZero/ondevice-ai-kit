@@ -1,0 +1,171 @@
+{
+  "status": "accepted-after-parent-fix-and-cross-lane-source-evidence",
+  "independentParentReviewAccepted": true,
+  "model": "hy3",
+  "reviewTask": "/private/tmp/odai-hy3-w3-heap-parent-review-20261111",
+  "seconds": 480.6208064579987,
+  "reviewFileSHA256": "872c3ca8a5ed74db04d0b973b61c2dbfef4107122de2c368fa89bfc9c5c92afc",
+  "originalReview": {
+    "reviewScope": "Independent read-only parent review of W3 Qwen heap diagnostic: preparation/build/package/device/report routing and reviewed-freeze gating, prior to any new device run. Owned file: candidate/review.json. No implementation edits, no shell/build/device execution. Source lane QwenHeapInstrumentation.kt not in allowed context, so source-level label verification is out of scope (reported as limit).",
+    "examinedFiles": [
+      "context/check_parent.py",
+      "context/check_routing.py",
+      "context/prepare_build.py",
+      "context/build_acceptance.py",
+      "context/device_acceptance.py",
+      "context/verify_report.py",
+      "context/base-device.py",
+      "context/base-report.py",
+      "context/base-build.py",
+      "context/arena-report.py",
+      "context/agent-pitfalls.md",
+      "context/manifest.json",
+      "context/spec.md",
+      "context/package-verified.json",
+      "context/candidate-accepted.json"
+    ],
+    "findings": [
+      {
+        "severity": "medium",
+        "file": "context/device_acceptance.py",
+        "line": 62,
+        "scenario": "verify_frozen_contract() builds the `required` frozen-artifact set but omits 'probes/android-qwen-file/cases.json', which collected_evidence (context/verify_report.py:243) DOES require and evaluate consumes via module-level FROZEN_MANIFEST. A freeze can be generated and pass the device guard (no adb) without pinning the base manifest source.",
+        "effect": "Incomplete 'complete reviewed freeze': the device guard does not bind the manifest source that evaluate reads live. evaluate fails closed on mismatch (manifest==FROZEN_MANIFEST), so no false ACCEPT, but a reviewer cannot confirm at freeze time that the manifest equals the pinned base; freeze integrity is weaker than collected_evidence.",
+        "recommendation": "Add 'probes/android-qwen-file/cases.json' to the verify_frozen_contract required set (and ensure it is present in contract['files']) so the device guard and collected_evidence share one authoritative required-set."
+      },
+      {
+        "severity": "medium",
+        "file": "context/verify_report.py",
+        "line": 43,
+        "scenario": "heap_evidence() enforces `8 <= len(events) <= 128`. The 7 named sampling points (initial, constructor-before, constructor-returned, core-persist, case-returned, recognizer-released, teardown) plus '每个corePersist' yield exactly 8 only if the instrumentation emits TWO core-persist samples. If QwenHeapInstrumentation.kt emits exactly ONE core-persist (7 boundary events), a structurally valid diagnostic is rejected (heapBoundaryEvidence=False), blocking a legitimate run.",
+        "effect": "Potential false rejection of a valid one-case run, or a silent unverified assumption (two core-persists) baked into the lower bound. The fixture/contract assume 8 events (2 core-persists, consistent with a two-stage case) but the exact count is a source-lane fact not in allowed context.",
+        "recommendation": "Confirm against QwenHeapInstrumentation.kt the exact core-persist count. If one, relax the lower bound to 7 (and keep core-persist>=1); otherwise document the two-core-persist requirement explicitly in spec/contract."
+      },
+      {
+        "severity": "medium",
+        "file": "context/device_acceptance.py / context/verify_report.py",
+        "line": 105,
+        "scenario": "heapBoundaryLabels mapping from logical keys to the ACTUAL Kotlin-emitted label strings is not verifiable: QwenHeapInstrumentation.kt is excluded from allowed context. Routing only enforces (a) 7 distinct non-empty strings, (b) each non-core boundary appears exactly once, (c) positional/ordering binding, and (d) last core-persist stages == report final stages. The contract's 7 distinct strings could be arbitrary; whether they equal emitted telemetry is unverified.",
+        "effect": "Cannot claim source-lane approval. Two failure modes: (1) if freeze labels != Kotlin emit, a valid run is rejected (fail-closed, no false ACCEPT); (2) source-lane correctness of the mapping itself is unconfirmed. No route accepts a report whose event labels don't match the contract, so the bound is safe against wrong ACCEPT but the mapping truth is open.",
+        "recommendation": "Include QwenHeapInstrumentation.kt in review context; pin and diff the exact emitted label strings against contract['heapBoundaryLabels']. Until then do not assert source-lane label correctness."
+      }
+    ],
+    "heapBoundaryLabels": {
+      "verifiedFromSource": false,
+      "reason": "QwenHeapInstrumentation.kt not in allowed context; exact emitted strings unverifiable. Routing-enforced constraints only:",
+      "routingEnforced": {
+        "initial": "distinct non-empty string, exactly 1 event, earliest position",
+        "constructor-before": "distinct non-empty string, exactly 1 event",
+        "constructor-returned": "distinct non-empty string, exactly 1 event",
+        "core-persist": "distinct non-empty string, >=1 event(s); last one must precede case-returned and its stages must equal report final stages",
+        "case-returned": "distinct non-empty string, exactly 1 event, after last core-persist",
+        "recognizer-released": "distinct non-empty string, exactly 1 event",
+        "teardown": "distinct non-empty string, exactly 1 event, latest position"
+      }
+    },
+    "limitations": [
+      "Source lane QwenHeapInstrumentation.kt excluded from allowed context: exact heap label strings, heapEvents emission count, and sticky-error behavior NOT verified from source (finding 3, and heapBoundaryLabels.unverifiedFromSource).",
+      "No device/RSS/native/allocator effects were executed or measured; all such claims are out of scope and not asserted.",
+      "Entire W3 completion not claimed; review covers parent routing/freeze/report gating only.",
+      "Gating inputs not hashed into the freeze contract but transitively pinned: host-result.json and base-hashes.json integrity is covered via candidate-accepted.json hostReceipt/baseHashesSHA256 (in frozen files); still, the device guard does not re-run verify_host, unlike build (acceptable: device depends on package/run-plan, not host receipt).",
+      "Two review flags + review artifacts ARE correctly bound: verify_frozen_contract requires independentSourceReviewAccepted/independentParentReviewAccepted True AND pins docs/validation/w3-qwen-heap-parent-review-20261111.json and wrapper-review in files; flags are read directly from the contract, so they cannot be bypassed by merely removing declared files. The review JSON verdict itself is not parsed (trusts the human flag), so a True flag with a changes-required file is not auto-detected.",
+      "QwenLoadCore real layout (probes/android-qwen-load) is correctly bound in prepare/build/device and tested by 19 routing tests; no layout bug found in reviewed code."
+    ],
+    "verdict": "changes-required"
+  },
+  "actualToolCalls": {
+    "Read": 15,
+    "Write": 1
+  },
+  "actualToolErrors": [],
+  "immutableContextHashesMatched": true,
+  "currentSourceBindings": {
+    "spec.md": {
+      "reviewedSHA256": "84bb94001268caac900a7df2eec51447a08f92c55c2a17d9d8063f3710975679",
+      "currentSHA256": "84bb94001268caac900a7df2eec51447a08f92c55c2a17d9d8063f3710975679"
+    },
+    "package-verified.json": {
+      "reviewedSHA256": "a8f94ddb0e71ee7ed9df57d13c61aa340e09d84441c02db9cf635f28c842329d",
+      "currentSHA256": "a8f94ddb0e71ee7ed9df57d13c61aa340e09d84441c02db9cf635f28c842329d"
+    },
+    "candidate-accepted.json": {
+      "reviewedSHA256": "3656648cfd75c9e77ceee454036bda7aa29438a30e66faa487a160a61d94fceb",
+      "currentSHA256": "3656648cfd75c9e77ceee454036bda7aa29438a30e66faa487a160a61d94fceb"
+    },
+    "prepare_build.py": {
+      "reviewedSHA256": "58b4db073b0862010592cf963a8668985a5d702defdf421ff53a84342fba89cd",
+      "currentSHA256": "58b4db073b0862010592cf963a8668985a5d702defdf421ff53a84342fba89cd"
+    },
+    "build_acceptance.py": {
+      "reviewedSHA256": "f062a79eeb30839de53f1e0d9fa59d1052a7928af561b98386215277dd1ac8bb",
+      "currentSHA256": "f062a79eeb30839de53f1e0d9fa59d1052a7928af561b98386215277dd1ac8bb"
+    },
+    "device_acceptance.py": {
+      "reviewedSHA256": "8a74065027d5cefd972f113d5f130a3fdbbd94e8b952ee1b7aea9a9a1ce10c65",
+      "currentSHA256": "388ab099e6413d9594d2b685a162f0e8774d2e8bf99c90dee7730552e01f6359"
+    },
+    "verify_report.py": {
+      "reviewedSHA256": "205c65b8a8be4503f59f111962db4e706c31b6f899ea784011028e609db37cb6",
+      "currentSHA256": "205c65b8a8be4503f59f111962db4e706c31b6f899ea784011028e609db37cb6"
+    },
+    "check_parent.py": {
+      "reviewedSHA256": "9f660111896f76f4156f439971177301f3242cd2c3cec0b41eeda5ac5b452698",
+      "currentSHA256": "9f660111896f76f4156f439971177301f3242cd2c3cec0b41eeda5ac5b452698"
+    },
+    "check_routing.py": {
+      "reviewedSHA256": "2c6e315101277f1cc6b1c5741646bef1623df51a340f166e8a06026e271dfb4f",
+      "currentSHA256": "85d11ee12916a9507d31c5cb0d46be40c77499965ff69828a923082a9e1142a6"
+    },
+    "base-device.py": {
+      "reviewedSHA256": "b7a8a7084b92d86382fa096656c09339b5267ac8bb972968610a9fffacb11435",
+      "currentSHA256": "b7a8a7084b92d86382fa096656c09339b5267ac8bb972968610a9fffacb11435"
+    },
+    "base-report.py": {
+      "reviewedSHA256": "1de39f2aabf8da99094b27447f289792c93a8b465fc36ff1b0865d9ddea7c17d",
+      "currentSHA256": "1de39f2aabf8da99094b27447f289792c93a8b465fc36ff1b0865d9ddea7c17d"
+    },
+    "arena-report.py": {
+      "reviewedSHA256": "55bb5fdd1ae5ae54a6ef9ff7f86f67740675168926b1ea6de512d7cb0579e2a8",
+      "currentSHA256": "55bb5fdd1ae5ae54a6ef9ff7f86f67740675168926b1ea6de512d7cb0579e2a8"
+    },
+    "base-build.py": {
+      "reviewedSHA256": "e8d47e41e4e847faa802998cc74b7dab24c08c2a1fc256c0fc26ccdc5b630e04",
+      "currentSHA256": "e8d47e41e4e847faa802998cc74b7dab24c08c2a1fc256c0fc26ccdc5b630e04"
+    }
+  },
+  "dispositions": [
+    {
+      "finding": 1,
+      "status": "fixed",
+      "primaryOwnedPythonFix": true,
+      "change": "Require probes/android-qwen-file/cases.json in verify_frozen_contract before any adb.",
+      "regression": "DeviceRoutingChecks.test_missing_base_manifest_hash_fails_before_any_adb",
+      "red": "Original guard reached mocked adb when the base manifest hash was omitted; test failed.",
+      "green": "All20 routing checks pass; omission fails before adb."
+    },
+    {
+      "finding": 2,
+      "status": "resolved-by-source-evidence-no-relaxation",
+      "evidence": "QwenTwoStageCore.kt initial doPersist(snapshot(running)) at193 and final persist(built) at278, plus runOneStage dispatch snapshots; wrapper corePersist at327-342 captures each callback. Even empty-auto successful case has multiple core-persist events. Failed runs are not diagnosticAccepted.",
+      "ruling": "Keep8..128. A7-event accepted terminal report is not produced by the fixed core; no two-stage assumption is required."
+    },
+    {
+      "finding": 3,
+      "status": "resolved-by-independent-source-lane",
+      "evidence": "w3-qwen-heap-wrapper-review-20261111.json reviewed the exact wrapper SHA and all7 labels. Parent reviewer did not have source context and correctly declined that claim.",
+      "ruling": "Freeze the exact7-label map from the accepted source review; do not claim parent reviewer independently verified Kotlin."
+    }
+  ],
+  "postFixTests": {
+    "targetedChecks": 103,
+    "fullToolsChecks": 691,
+    "allPassed": true,
+    "evidence": ".omx/artifacts/w3-qwen-ort-lifecycle-20261111/heap-hy3-resume1/parent-review-final-tests.json",
+    "subprocessRubyBin": "/Users/daubert/.rvm/rubies/ruby-3.4.11/bin"
+  },
+  "scope": "Parent freeze/routing/report acceptance only; original changes-required review is retained. Fix acceptance and cross-lane integration are primary judgments, not a second external review.",
+  "deviceOperations": 0,
+  "newNativeRunFrozen": false,
+  "engineeringQualityAccepted": false,
+  "productionReady": false
+}

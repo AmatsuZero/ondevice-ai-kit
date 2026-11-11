@@ -1,3 +1,8 @@
+## 2026-11-11：W3 heap实现、实包与双复核已验，待冻结单片诊断
+
+用户选择免费hy3。外部小片段/接线/定点修正原字节集成；wrapper33组274、记录器13组100、真实Android75任务20.244s/lint0e7w/65PCM四库及实际DEX核验通过。源码复核接受；父复核480.621s原changes-required保留，基础manifest漏hash已真实RED→GREEN，当前103定向/完整tools691通过；事件数量/七标签通过原core和独立源码证据解决，不声称父复核读过Kotlin。真实QwenLoadCore目录错误/根错误覆盖及工具setup失败均有原件；入口docs/validation/w3-qwen-heap-wrapper-20261111.{md,json}及双复核JSON。
+尚无新冻结或设备操作，当前无活动helper；旧native429不重试。下一步精确提交已验实现/父修正，再冻结原planned index25 fleurs-en_us-1776唯一run w3-qwen-heap-20261111-01，fresh设备门后执行。1构造/最多2stream2decode、两阶段/arena-off和1.5GiB/512MiB/120s/整240s不变。旧批不重放、不开麦克风/AiAi、不下载或改生产。W3/R4/R5仍open、goalactive；双端本次尚未发布，源码未push。下方“候选缺失/待线路”属历史。
+
 ## 2026-11-11：W3现有AAR符号检查无法关闭静态组成门
 
 已只读现有AAR四arm64成员：全部无.symtab/有.dynsym，普通nm定义符号空、动态输出存在，但十组组件名查询未得可核验组成证据。无匹配不证明组件不存在，也不推断何时/如何被strip；不继续相同符号扫描。原size/SHA/工具完整输出保留，入口docs/validation/w3-runtime-static-symbol-observation-20261111.{md,json}。0新助手/设备/模型/二进制下载，原50材料/15补充/108冻结保持。

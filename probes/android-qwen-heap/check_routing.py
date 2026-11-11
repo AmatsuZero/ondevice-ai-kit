@@ -48,7 +48,8 @@ class PrepareRoutingChecks(unittest.TestCase):
         fp=sha(json.dumps(source_files,sort_keys=True,separators=(',',':')).encode())
         (old/'candidate-accepted.json').write_text(json.dumps(dict(sourceFiles=source_files,sourceFingerprint=fp)))
         for name in prepare.SHARED_MAIN:
-            target=root/'probes/android-qwen-file'/name;target.parent.mkdir(parents=True,exist_ok=True)
+            directory = 'android-qwen-load' if name == 'QwenLoadCore.kt' else 'android-qwen-file'
+            target=root/'probes'/directory/name;target.parent.mkdir(parents=True,exist_ok=True)
             target.write_bytes(paths['main-src/'+name])
         for name in ('probes/android-qwen-heap/QwenHeapInstrumentation.kt',
                      'probes/android-qwen-arena/QwenArenaPolicy.kt'):
@@ -164,7 +165,7 @@ class BuildRoutingChecks(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix='odai-heap-build-core-') as folder:
             repo=Path(folder);old,host=PrepareRoutingChecks.fixture(self,repo);out=repo/'new'
             prepare.main(host,root=repo,out=out,old=old)
-            (repo/'probes/android-qwen-file/QwenLoadCore.kt').write_text('changed after preparation')
+            (repo/'probes/android-qwen-load/QwenLoadCore.kt').write_text('changed after preparation')
             with patch.object(build,'ROOT',repo),patch.object(build,'OUT',out),patch('subprocess.run') as process, \
                     patch.object(build,'driver_source',side_effect=RuntimeError('changed core reached renderer')) as renderer:
                 with self.assertRaises(AssertionError):build.main('build')
@@ -230,6 +231,7 @@ class DeviceRoutingChecks(unittest.TestCase):
         for name,value in [('package-verified.json',package),('run-plan.json',plan),('production-before.json',{})]:
             (out/name).write_text(json.dumps(value))
         dependencies={'probes/android-qwen-file/device_acceptance.py','probes/android-qwen-file/verify_report.py',
+                      'probes/android-qwen-file/cases.json',
                       'probes/android-qwen-arena/verify_report.py','tools/speech_error_metrics.py',
                       '.omx/artifacts/w3-model-reselection-20261110/model-manifest.json',
                       'docs/superpowers/specs/2026-11-11-w3-qwen-heap-diagnostic.md',
@@ -276,6 +278,15 @@ class DeviceRoutingChecks(unittest.TestCase):
                 with patch.object(device,'ROOT',repo),patch.object(device,'OUT',out),patch.object(device,'adb') as adb:
                     with self.assertRaises(AssertionError):device.main('prepare')
                     adb.assert_not_called()
+
+    def test_missing_base_manifest_hash_fails_before_any_adb(self):
+        with tempfile.TemporaryDirectory(prefix='odai-heap-manifest-freeze-') as folder:
+            repo=Path(folder);out,contract=self.freeze_fixture(repo)
+            contract['files'].pop('probes/android-qwen-file/cases.json')
+            (out/'diagnostic-frozen.json').write_text(json.dumps(contract))
+            with patch.object(device,'ROOT',repo),patch.object(device,'OUT',out),patch.object(device,'adb') as adb:
+                with self.assertRaises(AssertionError):device.main('prepare')
+                adb.assert_not_called()
 
     def test_inherited_run_dispatch_preserves_exact_one_shot_scope(self):
         with tempfile.TemporaryDirectory(prefix='odai-heap-dispatch-') as folder:

@@ -40,7 +40,9 @@ def verify_prepared(action):
     assert base_path.resolve()==(ROOT/receipt['hostReceipt']['baseHashesPath']).resolve()
     bindings={'probes/android-qwen-heap/QwenHeapInstrumentation.kt':'test-src/QwenHeapInstrumentation.kt',
               'probes/android-qwen-arena/QwenArenaPolicy.kt':'main-src/QwenArenaPolicy.kt'}
-    bindings.update({'probes/android-qwen-file/'+name:'main-src/'+name for name in preparation.SHARED_MAIN})
+    bindings.update({'probes/android-qwen-file/'+name:'main-src/'+name for name in preparation.SHARED_MAIN
+                     if name != 'QwenLoadCore.kt'})
+    bindings['probes/android-qwen-load/QwenLoadCore.kt']='main-src/QwenLoadCore.kt'
     for original,copied in bindings.items():
         assert sha(ROOT/original)==files[copied],'root and prepared source differ'
     if action=='build':

@@ -63,6 +63,7 @@ def verify_frozen_contract():
     required={prefix+name for name in ('main.apk','test.apk','package-verified.json','candidate-accepted.json',
                                       'run-plan.json','production-before.json','source/test-assets/cases.json')}
     required|={PRIOR,'probes/android-qwen-file/device_acceptance.py','probes/android-qwen-file/verify_report.py',
+               'probes/android-qwen-file/cases.json',
                'probes/android-qwen-arena/verify_report.py','tools/speech_error_metrics.py',
                '.omx/artifacts/w3-model-reselection-20261110/model-manifest.json',
                'docs/superpowers/specs/2026-11-11-w3-qwen-heap-diagnostic.md',
@@ -74,7 +75,8 @@ def verify_frozen_contract():
     bindings={'probes/android-qwen-heap/QwenHeapInstrumentation.kt':'test-src/QwenHeapInstrumentation.kt',
               'probes/android-qwen-arena/QwenArenaPolicy.kt':'main-src/QwenArenaPolicy.kt'}
     bindings.update({'probes/android-qwen-file/'+name:'main-src/'+name for name in
-                     ('QwenTwoStageCore.kt','QwenFileActivity.kt','QwenFileInputs.kt','QwenFileReport.kt','QwenLoadCore.kt')})
+                     ('QwenTwoStageCore.kt','QwenFileActivity.kt','QwenFileInputs.kt','QwenFileReport.kt')})
+    bindings['probes/android-qwen-load/QwenLoadCore.kt']='main-src/QwenLoadCore.kt'
     required|=set(bindings)
     assert required<=set(files),'required frozen artifact hashes absent'
     for relative,wanted in files.items():

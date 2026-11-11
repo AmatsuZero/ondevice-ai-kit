@@ -1,3 +1,9 @@
+## W3 heap实包与复核：真实布局及冻结清单（2026-11-11）
+
+- **合成夹具不能复制错误目录假设**：实际prepare找不到`android-qwen-file/QwenLoadCore.kt`，真实文件位于`android-qwen-load`。首次在写source/Gradle前停止；按真实目录先改夹具得到9errors RED，再修prepare/build/device三处，19检查GREEN。未在错误目录补源码或改旧冻结文件。
+- **冻结必需集合要与实际evaluator一致**：hy3父复核发现基础`cases.json`漏项；只删其hash的完整合成合同仍触及mock ADB，真实1RED。补入设备守卫required后20路由/103定向/完整tools691通过。父复核没读Kotlin，不能把其事件数量/标签疑问当源码定论：原core必有initial/final persist，七标签由另一份独立源码复核确认，冻结需使用该映射。原changes-required报告与父裁定分别保留。
+- **core返回错误需先进入根状态再做易失败采样**：新增同时decode+heap失败检查发现外壳根错误被heap错误覆盖，真实1RED；外部定点补丁只在case-returned采样前传递既有case错误，33组274通过。清理真实结果和primary/persist/heap错误仍分别记录。证据`docs/validation/w3-qwen-heap-wrapper-20261111.md`及同名父/源码复核JSON；以上不证明设备、内存收益或W3完成。
+
 ## W3 heap记录器：JSON null与首错身份（2026-11-11）
 
 - **`isNull`通过不证明nullable字段存在**：外部heap记录器首稿实际Kotlin-Werror及13组80断言通过，但`JSONObject.put(key, null)`会移除key，未采到的数字、无活动case和成功事件errorClass未显式持久化。补`has(key)`与溢出后首错对象身份检查，原稿真实12项失败；独立hy3只修`JSONObject.NULL`和先检查sticky首错后检查事件上限，13组100断言通过。原稿/初绿/RED/修正版保持；不弱化报告字段门，不把片段验收当外壳/Android/设备通过。整份wrapper此前自然939.548s空响应、15Read/0Write/零候选，非429或监督超时，内部原因未知；只走独立小片段和接线任务，不重发原请求。证据`.omx/artifacts/w3-qwen-ort-lifecycle-20261111/heap-hy3-resume1/`。

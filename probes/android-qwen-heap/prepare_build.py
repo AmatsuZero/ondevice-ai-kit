@@ -69,7 +69,8 @@ def main(host_path, *, root=ROOT, out=OUT, old=OLD):
         if name != 'test-src/QwenFileInstrumentation.kt':
             content[name] = path.read_bytes()
     for name in SHARED_MAIN:
-        assert sha(root/'probes/android-qwen-file'/name) == files['main-src/'+name], name
+        directory = 'android-qwen-load' if name == 'QwenLoadCore.kt' else 'android-qwen-file'
+        assert sha(root/'probes'/directory/name) == files['main-src/'+name], name
     gradle = content['build.gradle.kts'].decode().replace('io.ondeviceai.acceptance.qwenfile', 'io.ondeviceai.acceptance.qwenheap')
     gradle = replace_once(gradle, 'io.ondeviceai.acceptance.qwenheap.QwenFileInstrumentation',
                           'io.ondeviceai.acceptance.qwenfile.QwenHeapInstrumentation')

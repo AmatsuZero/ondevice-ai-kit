@@ -10,9 +10,9 @@
 
 **Spec:** [固定合同](../specs/2026-11-11-w3-qwen-heap-diagnostic.md)
 
-当前执行：用户已选免费`hy3`接续。新整份wrapper调用自然939.547520875s终态，CLI0但真实`empty_model_response`，15Read/0Write/零候选；原hy4free429保留，不重发原任务。恢复拆为独立纯heap记录器候选及后续外壳接线，最终仍只集成一份wrapper；中间fragment仅本机候选，不扩大spec文件或设备范围。父`check_recorder.py`/`RecorderChecks.kt`已准备并观察缺候选RED；记录器尚未通过实际Kotlin。新任务`/private/tmp/odai-hy3-w3-heap-recorder-20261111/`，只续同次到终态。尚未通过Kotlin/构建/设备门，[原准备边界](../../validation/w3-qwen-heap-preparation-20261111.md)。
+当前执行：用户选免费`hy3`接续后，原空响应调用保留，独立记录器/接线与定点修正已实际交付。最终wrapper原字节集成后33组274断言、记录器13组100；离线Android构建20.244s/75任务、lint0error7warning/65PCM四库实包通过。双独立复核已处理：基础manifest必需hash漏项真实RED后修正，当前父103及Ruby对齐完整tools691通过。另两项通过原core持久化顺序与独立源码标签证据解决，原changes-required报告保留。尚无新冻结/设备操作，W3open。[当前源码与实包](../../validation/w3-qwen-heap-wrapper-20261111.md)。
 
-父端准备增量：`prepare_build.py/build_acceptance.py/device_acceptance.py`及原报告校验通过路由19/报告22/原回归61共102项，完整tools691项通过，见[当前范围与失败记录](../../validation/w3-qwen-heap-routing-preparation-20261111.md)。Task1缺候选，Task2整体未完成；此项只推进不依赖候选的父验收部分。构建前重核真实host及测试/源码摘要，设备前要求完整冻结与双复核；`heapBoundaryLabels`须由实际源码复核写入合同。RSS保留设备uptime读取区间与一秒容差，精确时钟映射仍未证明；政策收据需绑定报告SHA，min available从原始trace重算。不能据此放行设备或将准备写成实包通过。
+此前父端准备为路由19/报告22/原回归61共102项，见[历史准备与失败记录](../../validation/w3-qwen-heap-routing-preparation-20261111.md)。当前候选/实包与双复核已具备；Task2仍需完整冻结和设备验收。构建前重核真实host及测试/源码摘要，设备前要求完整冻结与双复核；`heapBoundaryLabels`由实际源码复核写入合同。RSS保留设备uptime读取区间与一秒容差，精确时钟映射仍未证明；政策收据绑定报告SHA，min available从原始trace重算。
 
 ## Global Constraints
 
@@ -32,9 +32,9 @@
 
 **Interfaces:** 新class `io.ondeviceai.acceptance.qwenfile.QwenHeapInstrumentation`；复用原`TwoStageCaseRunner`/`QwenFileReport`/`QwenArenaPolicy`。JSON字段以spec为准。
 
-- [ ] 建父host adapter：保留原wrapper24组/政策6组的适用故障，完整65校验但成功rows1/stream2；增加heap故障与清理真值检查。
-- [ ] 缺候选先RED；外部免费CBC只写一个wrapper文件，真实OS沙盒/context不可写。
-- [ ] 审阅终态/raw/实际文件，原字节集成；真实Kotlin+原core/inputs/report/policy运行全部检查，失败保留并仅定点外部订正。
+- [x] 建父host adapter：保留原wrapper24组的适用故障，完整65校验但成功rows1/stream2；增加heap故障与清理真值检查，最终33组274断言。
+- [x] 缺候选先RED；外部免费CBC在真实OS沙盒/context不可写边界内交付记录器与精确接线补丁，最终仅集成一个wrapper文件。
+- [x] 审阅终态/raw/实际文件，原字节集成；真实Kotlin+原core/inputs/report/policy运行全部检查，原RED与定点外部订正保留。
 - [ ] 单独提交已验实现与host证据；保留旧冻结108项及其他dirty。
 
 ### Task 2: 实包、复核、冻结及唯一诊断
@@ -43,7 +43,7 @@
 
 **Interfaces:** 独立app/test alias与report目录见spec；冻结新sourceFingerprint与精确文件集合。父读heapEvents/错误/一row，独立核stage计数与保留政策，不推断native内部生效。
 
-- [ ] 离线build/lint，核实际manifest/DEX/四库/65assets/签名，旧APK不替换；父负向检查缺hash/错input/超调用/失败heap门。
-- [ ] 外部免费助手独立只读复核source/实包/父合同，解决实质缺陷，不能重试native429。
+- [x] 离线build/lint，核实际manifest/DEX/四库/65assets/签名，旧APK不替换；父负向检查缺hash/错input/超调用/失败heap门。真实目录布局暴露的父路由错误已RED→GREEN。
+- [x] 外部免费助手独立只读复核source/供应实包收据/父合同，漏manifest已RED→GREEN；事件数量/标签由独立源码证据解决，不重试native429。两位复核未亲自运行构建/设备。
 - [ ] 冻结实际摘要后fresh设备前置；锁屏时保留pending，不自动解锁。唯一新run有阶段边界/堆数据方可判本诊断完成，资源越线/采样失败按约停止且不重放。
 - [ ] 同run双读、模型/App后核及精确alias/staging恢复；结果/局限/失败同步两端issue/wiki，W3全量门仍单独裁定。

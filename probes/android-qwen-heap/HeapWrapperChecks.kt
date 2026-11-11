@@ -78,3 +78,17 @@
             expect(Runtime.streamReleases==1 && Runtime.releases==1);allZero()
         } finally {Runtime.root.deleteRecursively()}
     }
+    case("decode primary survives a heap fault during final core persistence") {
+        reset(); try {
+            Runtime.decodeFail=true;Runtime.heapFailWhen={Runtime.decodes>0};start();failed()
+            val j=json()
+            expect(j.getString("errorClass")=="java.lang.IllegalStateException")
+            expect(j.getString("errorMessage")=="injected-decode", "heap error replaced actual decode primary")
+            expect(!j.isNull("heapTelemetryErrorClass"))
+            val cs=j.getJSONArray("rows").getJSONObject(0).getJSONObject("caseState")
+            expect(cs.getString("errorMessage")=="injected-decode" && !cs.isNull("persistErrorClass"))
+            expect(Runtime.decodes==1 && Runtime.streams==1 && Runtime.streamReleases==1 && Runtime.releases==1)
+            expect(j.getBoolean("recognizerReleaseSucceeded") && j.getJSONObject("foreground").getBoolean("teardownAck"))
+            allZero()
+        } finally {Runtime.root.deleteRecursively()}
+    }
