@@ -2,7 +2,7 @@
 
 This is an acceptance probe, outside the ordinary Demo and production backend. No microphone, system ASR, AiAi, network permission, new download or production default change is part of this probe.
 
-Core source is supplied by free external CBC and integrated unchanged after parent Kotlin checks (42 groups / 264 assertions). See `docs/validation/w3-qwen-android-file-core-20261111.md` and the implementation plan. The Android wrapper, actual APK and device run are separate gates; until their receipts exist, this directory is not device-ready.
+Core and wrapper sources are supplied by free external CBC and integrated unchanged after parent Kotlin checks (core 42 groups / 264 assertions, wrapper 24 groups / 364 assertions). The actual APK and independent wrapper review passed. The single physical FILE run then stopped at sampled RSS 1.586578 GiB, above the fixed 1.5 GiB limit, before any complete case. It is consumed and must not be replayed. See `docs/validation/w3-qwen-android-file-observed-20261111.md`; current Android quality/resource acceptance remains open.
 
 The fixed pipeline uses full original 16kHz s16LE PCM, auto language admission based on exact empty raw text, then a fresh stream forced to the requested language. It preserves the 65 independent inputs and reference text from the existing Mac confirmation. No VAD, gain, crop or text filtering is applied. Annotation-negative AMI intervals have not been manually listened to.
 

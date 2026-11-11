@@ -95,10 +95,14 @@ def evaluate(report, host, manifest, source_fingerprint):
                              'humanListeningAudit':False if cohort=='nonspeech-noise' else None}
     execution = all(checks.values())
     quality = execution and all(c['engineeringGatePassed'] for c in cohorts.values()) and all(c['engineeringGatePassed'] for c in challenges.values())
+    exact_counts = checks['terminal'] and checks['host'] and checks['counters']
     return {'schemaVersion':1, 'checks':checks, 'rowChecks':row_checks, 'executionAccepted':execution,
             'engineeringQualityAccepted':quality, 'cohorts':cohorts, 'challenges':challenges,
             'completedConsistentRows':len(valid), 'plannedRows':65,
-            'actualDecodeCallsObserved':decode_sum, 'actualCreatedStreamsObserved':stream_sum,
+            'actualDecodeCallsObserved':decode_sum if exact_counts else None,
+            'actualCreatedStreamsObserved':stream_sum if exact_counts else None,
+            'countsAreExactTerminalEvidence':exact_counts,
+            'lastPersistedDecodeCalls':decode_sum, 'lastPersistedCreatedStreams':stream_sum,
             'truePeakMeasured':False, 'productionReady':False,
             'scope':'Fixed public file pipeline only; no microphone/system ASR/sustained GPU or energy acceptance.'}
 

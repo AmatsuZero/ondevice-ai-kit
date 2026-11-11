@@ -6,6 +6,8 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **强停后的decode0仅是最后持久化计数**：2026-11-11 TECNO Qwen FILE首片时采样RSS1703575552B超过1.5GiB，父按合同force-stop。原报告非终态、stage.createReturned=true/acceptAttempts1/decodeAttempts0，计数写入在dispatch之前，不能据此宣称实际零decode/显式release成功。父评估新增“非终态精确计数未知、另保留lastPersisted计数”回归，RED(0isnotNone)→8testsGREEN；原报告/初次评分不改，同run双读及恢复通过，无重跑。独立复核另把Instrumentation.onStart误称App主线程并建议额外smoke；官方Android参考确认start()新建线程调用onStart()，runOnMainSync需非App主线程，原说明保留并由父订正，不加试跑。父prepare另曾复制不存在的gradlew.bat，零build/device失败后保留partial，仅复制POSIX所需wrapper并前置核必需文件。证据`docs/validation/w3-qwen-android-file-{observed,wrapper-review}-20261111.md`及本次`.omx/artifacts/w3-qwen-file-20261111/`。
+
 - **failed 状态不能代替异常与片段绑定**：2026-11-11 Android FILE外壳首稿21组/343断言通过，但补充检查发现外层err只写局部Throwable，未进入FileRunState，锁屏/model/constructor失败的报告errorClass/message均null；case失败又提前清空activeCaseIndex/起始时间。加入实际异常类与失败片段绑定回归后24组有5组失败；原稿/RED保留，交独立免费hy3定点修正，不因status=failed就认定故障证据完整。同次扩展Speech tools首跑56项12fail/4error，命中本文第7节Ruby2.6混用3.4gem；只对测试子进程对齐已安装Ruby3.4.11后同56项通过，未改生成器/global环境。证据`.omx/artifacts/w3-qwen-file-20261111/{wrapper-errors-red,wrapper-clock-red,speech-tools-ruby-aligned-result.json}`。
 
 - **success终态也可只剩工具语法标记**：2026-11-11免费hy4free Android FILE外壳候选自然结束2119.316s，CLI0/result success，但result原文仅`｜DSML｜｜tool_calls`，8Read/0Write/0Edit、零文件、无tool error或quota错误。写沙盒与context摘要均保持；拒收，不把模型内部/工具语法当源码，不因时长终止，不重发原多文件任务。恢复为独立小模块（输入字节校验、可见Activity、薄调度）逐项host验收；实包/设备仍须后续。证据`.omx/artifacts/w3-qwen-file-20261111/helpers/odai-hy4free-w3-qwen-file-wrapper-20261111/parent-assessment.json`。

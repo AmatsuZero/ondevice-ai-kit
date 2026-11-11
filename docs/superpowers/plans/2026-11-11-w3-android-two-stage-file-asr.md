@@ -46,16 +46,16 @@
 - [x] Freeze the wrapper/report interface using the accepted core; write parent failure/lifecycle checks before the wrapper candidate.
 - [x] Dispatch a separate small external candidate using the load-only lifecycle/model verifier as immutable context; new distinct package and reports.
 - [x] Verify all input/model bytes before JNI, exclusive reservation, initial running report, foreground gates, one recognizer, actual stage/row evidence, explicit stream/recognizer release, Activity teardown and final write failure.
-- [ ] Run targeted Kotlin checks, offline build/lint and inspect actual APK classes, permissions, ABI/native digests, manifest, signatures and source fingerprint. Independent bounded review before device execution.
+- [x] Run targeted Kotlin checks, offline build/lint and inspect actual APK classes, permissions, ABI/native digests, manifest, signatures and source fingerprint. Independent bounded review before device execution.
 
 ## Task 3: New bounded Android file run and acceptance
 
 **Files:** parent device acceptance/scoring scripts and `docs/validation/w3-qwen-android-file-*`.
 
-- [ ] Freeze new run ID, source/APK/model/input fingerprints, 65-input order and parent stop conditions before any decode; recheck device state and exact restoration manifest.
-- [ ] Prepare only the new aliases and exact staging; run once sequentially with parent RSS/time monitoring. Stop on failure without retrying.
-- [ ] Collect same-run report twice, verify counters/rows/release/teardown and score only complete successful rows against unchanged references; report full coverage and failures separately.
-- [ ] Restore ordinary App, verify protected App paths/model hashes, remove only exact temporary staging/aliases and collect cleanup receipt.
+- [x] Freeze new run ID, source/APK/model/input fingerprints, 65-input order and parent stop conditions before any decode; recheck device state and exact restoration manifest.
+- [x] Prepare only the new aliases and exact staging; run once sequentially with parent RSS/time monitoring. Stop on failure without retrying.
+- [x] Collect same-run report twice, verify counters/rows/release/teardown and score only complete successful rows against unchanged references; report full coverage and failures separately.
+- [x] Restore ordinary App, verify protected App paths/model hashes, remove only exact temporary staging/aliases and collect cleanup receipt.
 - [ ] Record and commit exact task files/hunks; update both existing issue/wiki entries with one deduplicated marker and remote readback. W3 remains open for any unmet Android/resource/license/release gates.
 
 ## Execution rulings and ledger
@@ -79,3 +79,6 @@
 - Task2 module acceptance: external Inputs SHA02567c13 (8groups/406373assertions), Activity SHAdd859f76 (6assertions), Report SHA74cb2ab4 (22assertions) integrated unchanged. Report initial compiler RED for two omitted DTOs; distinct external correction only added declarations. Original helper failures and actual scope checks retained. Thin instrumentation hy3 task `/private/tmp/odai-hy3-w3-qwen-file-instrumentation-20261111/` is separate; whole wrapper/APK/device remains unaccepted.
 
 - Task2 wrapper/package checkpoint: first wrapper21groups343pass, supplemental error/case-binding regressions RED5groups; focused external correction SHA7dc3eaa6 integrated unchanged and24groups364pass. Actual offline build25.378s/lint0error7warning; actual APK13classes/65assets/zero permissions/four native-library digests/common debug signing verified. Parent scaffold missing-bat failure preserved and POSIX prereqs fixed before source creation. Independent bounded hy3 wrapper/package review is running separately; no physical FILE install/constructor/decode yet. SourceFingerprint ef4665190423630afa548d4c6b4ea1a4706f98ab29761437887742a7872f8696; run remains w3-qwen-file-20261111-01.
+
+- Task2 independent review completed329.023s/noCriticalImportant; M1 concurrent-writer race deferred outside exclusive run, M2 five-second waits fail closed. Reviewer threading explanation was incorrect; official Android reference confirms start() creates a separate thread for onStart(); no extra smoke/replay. Original review and parent correction retained.
+- Task3 actual one-shot reached first case then stopped at1703575552B=1.586578GiB sampledRSS, above1.5GiB. Constructor1/returned9.019537s,38samples,17.742s,0completed/64planned. Nonterminal counts not exact; no release/destroy ack claimed. Double reads/six-model/ordinary-App+model checks/actual restoration passed. Parent nonterminal-count precision regression RED→8testsGREEN, raw/initial evaluation unchanged. The run is consumed; quality unverified and current resource gate failed, no retry/threshold change. W3 remains open; investigate bounded existing-runtime memory options next.

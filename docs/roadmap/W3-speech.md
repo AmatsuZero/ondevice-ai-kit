@@ -2,10 +2,16 @@
 
 更新：2026-11-11。状态：**open；用户已明确要求继续改进，R4/R5 不再等待用户选择接受现状**。当前 TECNO 的 R1–R3 系统 ASR 已按用户接受的已知限制完成范围裁定；固定前缀、AMI 六个端/片段及两端持续观测已归档，质量与生产预算未通过。
 
+最新[Android FILE真机结果](../validation/w3-qwen-android-file-observed-20261111.md)：用户解锁后唯一65文件合同实际执行，
+构造1/返回9.019537s；首片处理期间RSS1703575552B=1.586578GiB，超过固定1.5GiB，父进程按约停止。
+38样本/17.742s、零完整片段、余64planned；非终态最后持久化decode0不能解释为实际零调用，精确最终次数未知。
+同run双读/六模型后核/普通App及模型恢复通过；未重试、未提高门槛。当前候选Android资源门未过，质量仍unverified。
+后续先查既有runtime/model的内存控制可行性，不重放已消耗run、不再请用户接受R4/R5现状。
+
 新增[Android FILE实包检查](../validation/w3-qwen-android-file-package-20261111.md)：外部候选原样集成，
 真实Kotlin外壳24组/364断言、支持模块与原core通过；离线构建25.378s、lint0错误/7警告，
-实际APK13类/65PCM/零权限/四原生库摘要及同debug证书已核。独立外壳/包复核进行中，
-新FILE零安装/构造/解码；TECNO最近又锁屏，设备前置将在复核完成后刷新。
+实际APK13类/65PCM/零权限/四原生库摘要及同debug证书已核。[独立外壳/包复核](../validation/w3-qwen-android-file-wrapper-review-20261111.md)完成，
+无Critical/Important；一处线程说明按官方文档订正。之后实体FILE执行按上述内存停止结果裁定，不能倒写质量通过。
 输入模块/Activity/报告已本地提交2b64ba4；原漏DTO、异常未序列化/失败片段绑定丢失的RED均保留。
 
 此前[Android两阶段core验收](../validation/w3-qwen-android-file-core-20261111.md)及[父验收限定复核](../validation/w3-qwen-android-file-parent-review-20261111.md)：

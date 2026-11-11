@@ -72,6 +72,21 @@ class ParentChecks(unittest.TestCase):
         self.host['stopReason']='sampled_rss_above_1_5_gib'
         self.assertFalse(self.evaluate()['engineeringQualityAccepted'])
 
+    def test_nonterminal_persisted_zero_is_not_an_exact_decode_count(self):
+        self.report.update(terminal=False,status='running',nativeDecodeCalls=0,streamsCreated=1)
+        for row in self.report['rows']:
+            row.update(status='planned',caseState=None,caseNanos=None)
+        self.report['rows'][0].update(status='running',caseState={
+            'status':'running','stages':[{'createReturned':True,'decodeAttempts':0}]})
+        self.host['stopReason']='sampled_rss_above_1_5_gib'
+        result=self.evaluate()
+        self.assertIsNone(result['actualDecodeCallsObserved'])
+        self.assertIsNone(result['actualCreatedStreamsObserved'])
+        self.assertFalse(result['countsAreExactTerminalEvidence'])
+        self.assertEqual(result['lastPersistedDecodeCalls'],0)
+        self.assertEqual(result['lastPersistedCreatedStreams'],1)
+        self.assertEqual(result['completedConsistentRows'],0)
+
     def test_inflight_case_never_scores_as_empty(self):
         row=self.report['rows'][0];row.update(status='running',caseState=None,caseNanos=None)
         r=self.evaluate();self.assertFalse(r['executionAccepted'])
