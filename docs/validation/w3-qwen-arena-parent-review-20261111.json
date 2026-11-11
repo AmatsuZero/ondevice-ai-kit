@@ -1,0 +1,41 @@
+{
+  "reportSHA256": "1c3d28dfba5840335c67349e430a527ef61bd5e6e1792266bfa173e85bbcfead",
+  "bytes": 8657,
+  "seconds": 334.10216591700737,
+  "contextHashesUnchanged": 22,
+  "toolCounts": {
+    "Read": 25,
+    "Write": 1
+  },
+  "toolErrors": [
+    "[{'type': 'text', 'text': '<tool_use_error>File does not exist.</tool_use_error>'}]",
+    "[{'type': 'text', 'text': '<tool_use_error>Path is a directory, not a file: .\\nThis tool can only read files, not directories.\\n\\nSuggestions:\\n  \u2022 Use Glob for pattern matching (e.g., glob(\"*.ts\"))\\n  \u2022 Use Bash with ls/find for exploration (e.g., bash(\"find . -type f\"))\\n  \u2022 Specify the full file path instead\\n\\nDirectory listing for \".\" (1 entries):\\n  \ud83d\udcc1 .omx/</tool_use_error>'}]",
+    "[{'type': 'text', 'text': '<tool_use_error>Path is a directory, not a file: ../context\\nThis tool can only read files, not directories.\\n\\nSuggestions:\\n  \u2022 Use Glob for pattern matching (e.g., glob(\"*.ts\"))\\n  \u2022 Use Bash with ls/find for exploration (e.g., bash(\"find . -type f\"))\\n  \u2022 Specify the full file path instead\\n\\nDirectory listing for \"../context\" (23 entries):\\n  \ud83d\udcc4 parent-entrypoint-red-stdout.txt\\n  \ud83d\udcc4 source-review.md\\n  \ud83d\udcc4 context-index.json\\n  \ud83d\udcc4 baseline-device_acceptance.py\\n  \ud83d\udcc4 ba"
+  ],
+  "originalImportantFindings": 1,
+  "parentDisposition": "partly substantiated essential-set omission; fix pass with positive-valid and per-file omission regressions; source receipts already transitively bind build source",
+  "nativePolicyEffectVerified": false,
+  "deviceOperations": 0,
+  "acceptedForFreezeAfterFixes": true,
+  "fixValidationPending": false,
+  "parentTests": 22,
+  "baselineParentTests": 8,
+  "metricsTests": 31,
+  "finalParentSources": {
+    "probes/android-qwen-arena/device_acceptance.py": "3d09a4028dce2b9cc76437192d6495d899ccc9a40ade97c50b9c6ffb9fb0a843",
+    "probes/android-qwen-arena/verify_report.py": "55bb5fdd1ae5ae54a6ef9ff7f86f67740675168926b1ea6de512d7cb0579e2a8",
+    "probes/android-qwen-arena/check_parent.py": "d3cff8e6fc82839c42f5f28a021081663da284ab40e94d69bb46e459ca469fa0"
+  },
+  "fixedFindings": [
+    "essential hashes direct coverage",
+    "structured missing policy collection failure",
+    "policy-only recovery bound to prior same-run collection and installed/current device hashes",
+    "recovered score uses new output while preserving original failure"
+  ],
+  "remainingLimits": [
+    "exclusive evidence outputs are never overwritten",
+    "no new device/native evidence",
+    "same UID TOCTOU/exclusive alias assumption",
+    "sampled maxRSS not true peak"
+  ]
+}

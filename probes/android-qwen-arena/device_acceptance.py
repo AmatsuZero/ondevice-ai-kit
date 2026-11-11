@@ -47,6 +47,10 @@ def verify_frozen_contract(path=OUT / 'diagnostic-frozen.json'):
         'probes/android-qwen-arena/check_parent.py',
         'probes/android-qwen-file/device_acceptance.py',
         'probes/android-qwen-file/verify_report.py',
+        'probes/android-qwen-file/check_parent.py',
+        'probes/android-qwen-arena/QwenArenaInstrumentation.kt',
+        'probes/android-qwen-arena/QwenArenaPolicy.kt',
+        'probes/android-qwen-file/QwenFileActivity.kt',
         'docs/validation/w3-qwen-arena-wrapper-review-20261111.json',
         'docs/validation/w3-qwen-arena-parent-review-20261111.json',
         'docs/validation/w3-qwen-arena-diagnostic-protocol-20261111.md',
@@ -99,8 +103,26 @@ def collect_policy():
     print(json.dumps(result))
 
 
+def verify_prior_collection():
+    collection = json.loads((OUT / 'collection.json').read_text())
+    raw = (OUT / 'device-report.json').read_bytes()
+    package = json.loads((OUT / 'package-verified.json').read_text())
+    report = json.loads(raw)
+    assert collection['reportPresent'] is True and collection['twoReadsIdentical'] is True
+    assert raw == (OUT / 'device-report-confirm.json').read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == collection['sha256']
+    assert report['runId'] == RUN and report['sourceFingerprint'] == package['sourceFingerprint']
+    assert len(collection['modelHashesAfterMatch']) == 6 and all(collection['modelHashesAfterMatch'].values())
+    for name, app in [('main.apk', APP), ('test.apk', APP + '.test')]:
+        path = adb('shell', 'pm', 'path', app).decode().strip().removeprefix('package:')
+        assert path.startswith('/data/app/') and path.endswith('/base.apk') and '\n' not in path
+        assert adb('shell', 'sha256sum', path).decode().split()[0] == package['files'][name]['sha256']
+    remote_report = 'files/w3-qwen-arena/report-' + RUN + '.json'
+    assert adb('shell', 'run-as', APP, 'sha256sum', remote_report).decode().split()[0] == collection['sha256']
+
+
 def main(action):
-    assert action in ('preflight', 'prepare', 'run', 'collect', 'restore')
+    assert action in ('preflight', 'prepare', 'run', 'collect', 'collect-policy', 'restore')
     verify_frozen_contract()
     assert adb('shell', 'am', 'get-current-user').decode().strip() == '0'
     baseline.OUT = OUT
@@ -110,6 +132,13 @@ def main(action):
     baseline.STAGE = '/data/local/tmp/' + RUN
     baseline.REPORT = 'files/w3-qwen-arena/report-' + RUN + '.json'
     baseline.RUNNER = RUNNER
+    if action == 'collect-policy':
+        # Resume only the bounded read after baseline collection has completed;
+        # never repeat instrumentation or overwrite already collected evidence.
+        verify_prior_collection()
+        baseline.main('preflight')
+        collect_policy()
+        return
     baseline.main(action)
     if action == 'collect':
         collect_policy()

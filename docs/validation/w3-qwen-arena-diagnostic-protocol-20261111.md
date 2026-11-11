@@ -30,6 +30,8 @@
 3. `run` 单次登记后只提交一次 instrumentation，以 PID/startTicks 绑定采样，复用旧父端预算监控。prepare 不调用模型；run 不请求系统 ASR/网络/麦克风。
 4. `collect` 读取同 run 报告两次并与设备 SHA 对照，复核六模型与普通 App/模型；另从 canonical alias no_backup 取最多 21B 政策文件，精确 20B 内容/SHA 与实际 provider/receipt 绑定。报告始终 `nativePolicyEffectVerified=false`：文件/参数正确或 RSS 下降都不足以证明 ORT 内部设置读回或唯一根因。
 5. 父评分深拷贝后仅将 baseline evaluator 的 provider 字面值适配；原始报告不改。实际 provider 另独立核定，政策文件收取失败不能验收。继承完整覆盖、计数、错误、清理、固定阈值检查。
-6. `restore` 只卸本次精确 alias，按分块传输清单核定并清除本次 staging，普通 App/模型摘要保持，实际恢复普通 Demo 前台；保留本机源码/APK/报告/raw/失败证据。collect 中途失败先查同 run、续取或恢复，不再运行识别。
+6. `restore` 只卸本次精确 alias，按分块传输清单核定并清除本次 staging，普通 App/模型摘要保持，实际恢复普通 Demo 前台；保留本机源码/APK/报告/raw/失败证据。collect 中途失败先查同 run、续取或恢复，不再运行识别。若基线 collection 已完成而政策读取尚未落盘，用独立 `collect-policy`：先核原双读/报告摘要、同 run/source、六模型收据及当前安装 APK/设备报告 SHA，再做只读 preflight 和有界政策读取；不重跑 baseline collect 或识别。已有政策/评分输出的排他写入保留，不为重算覆盖原件。
+
+缺政策收据时评分明确失败且不声称精确调用数。政策续取完成后可向 `verify_report.py` 传一个新的 `parent-arena-acceptance-<suffix>.json` 输出名，保留原失败结果；不会重跑识别、删除或覆盖旧证据。
 
 本机根：`artifacts/verification/w3-qwen-arena-wrapper-20261111/`。父入口为 [device_acceptance.py](../../probes/android-qwen-arena/device_acceptance.py) 和 [verify_report.py](../../probes/android-qwen-arena/verify_report.py)；设备未过门时，不调用 run。即使本文件诊断通过，生产通知保留、运行时传递性许可、发布复审和其他适用验收仍独立；W3 不由本协议直接关闭。

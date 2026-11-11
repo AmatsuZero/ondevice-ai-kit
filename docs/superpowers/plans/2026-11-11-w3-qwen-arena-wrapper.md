@@ -48,7 +48,7 @@ Every snapshot (including initial/failed/terminal) uses `probeVariant="cpu-arena
 - [x] Prepare new isolated Gradle application/test IDs`io.ondeviceai.acceptance.qwenarena[.test]`, explicit runner`io.ondeviceai.acceptance.qwenfile.QwenArenaInstrumentation`, unchanged nonexported Activity class. Reuse frozen actual assets/native artifacts.
 - [x] Offline build/lint; inspect actual DEX, runner/target manifest, zero permissions, all65packaged PCM,4arm64native hashes and debug certificate. No install/run command in this task.
 - [x] Bounded independent review of accepted exact source/package checks; report scope limits and blockers.
-- [ ] Commit exact files/hunks, refresh W3/handoff/issues/wiki with deduplicated prepared-only result. Keep native effect/savings/quality and W3open.
+- [x] Commit exact files/hunks, refresh W3/handoff/issues/wiki with deduplicated prepared-only result. Keep native effect/savings/quality and W3open.
 
 Self-review: all5review failure classes map to host or real package validation; full-scope Android quality still requires a separately frozen future diagnostic contract. This plan does not authorize replaying any consumed run or relaxing acceptance.
 

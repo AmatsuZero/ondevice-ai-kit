@@ -6,6 +6,8 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **复核清单要区分直接绑定与传递绑定，同run续取不等于重放**：arena父工具只读复核指出essential集合遗漏，部分Kotlin其实已受candidate/sourceFiles与APK摘要传递绑定，但baseline检查确未直接必需；以完整有效合成合同为基线逐一删四项，实测4fail后补直接集合。政策收据缺失则结构化失败；基线collection完成、政策读取中断时新增collect-policy，先绑原双读/run/source/六模型收据和当前APK/设备报告SHA，仅有界续取；评分改用新安全basename保留旧失败。相关RED/原报告保留，22父+原8父/31metricsGREEN；零新native，合同冻结后只读preflight锁屏零安装。证据`docs/validation/w3-qwen-arena-parent-review-20261111.md`与本次`parent-review-{red,fixed-green}/`；“复核无阻断”不能代替未过设备门。
+
 - **新父端合同不能允许空摘要清单，政策取回也须有界**：2026-11-11 arena父端首稿17项扩展检查中，essential hashes可为空、收政策用cat无上限；两故障回归实际2fail后，要求关键实包/计划/生产保护/父源码/双复核/协议摘要全部存在，并仅head读取21B核精确20B。新增main入口无报告时又缺显式计数/coverage，KeyError RED后补countsAreExactTerminalEvidence=false/completedConsistentRows=0；最终17检查通过。全部synthetic/host，零设备/native；不把通过当合同已冻结或配置native生效。证据`.omx/artifacts/w3-qwen-arena-wrapper-20261111/{parent-boundary-red,parent-entrypoint-red,parent-final-green}/`，旧父工具/已消耗run不改。
 
 - **固定20B配置也需有界读取，不能先readAllBytes再校验**：W3arena候选首稿Kotlin-Werror/12组39断言通过；补2GiB稀疏文件替换后，verify实际抛`OutOfMemoryError: Required array size too large`，无大数组分配成功。长度预检后仍readAllBytes有增长窗口；独立外部定点修正两处均最多读21B并核EOF/内容，13组41断言/集成后重验/AndroidAPI34classpath通过。原稿/RED保留，不改测试期待，修正版原样集成但未接native/跑设备。证据`docs/validation/w3-qwen-arena-policy-20261111.md`与`.omx/artifacts/w3-qwen-file-20261111/memory-investigation/policy-oversize-red/`；该稀疏fixture在finally精确删除，其他测试临时根保留。

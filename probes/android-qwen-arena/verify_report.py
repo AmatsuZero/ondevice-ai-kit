@@ -4,6 +4,8 @@ import copy
 import hashlib
 import importlib.util
 import json
+import re
+import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'artifacts/verification/w3-qwen-arena-wrapper-20261111'
@@ -45,16 +47,20 @@ def evaluate(report, host, manifest, source_fingerprint, private_root):
     return result
 
 
-def main(root=OUT):
+def main(root=OUT, output_name='parent-arena-acceptance.json'):
+    assert re.fullmatch(r'parent-arena-acceptance(?:-[a-z0-9-]+)?\.json', output_name)
     report_path = root / 'device-report.json'
-    if not report_path.is_file():
+    collection_path = root / 'allocator-policy-collected.json'
+    if not report_path.is_file() or not collection_path.is_file():
         result = {'executionAccepted': False, 'engineeringQualityAccepted': False,
-                  'reason': 'no device report collected', 'actualDecodeCallsObserved': None,
+                  'reason': ('no device report collected' if not report_path.is_file()
+                             else 'policy collection absent; resume same run collection'),
+                  'actualDecodeCallsObserved': None,
                   'countsAreExactTerminalEvidence': False, 'completedConsistentRows': 0,
                   'nativePolicyEffectVerified': False, 'productionReady': False}
     else:
         raw = report_path.read_bytes()
-        collection = json.loads((root / 'allocator-policy-collected.json').read_text())
+        collection = json.loads(collection_path.read_text())
         result = evaluate(json.loads(raw), json.loads((root / 'host-result.json').read_text()),
                           json.loads((root / 'source/test-assets/cases.json').read_text()),
                           json.loads((root / 'package-verified.json').read_text())['sourceFingerprint'],
@@ -63,11 +69,12 @@ def main(root=OUT):
         result['executionAccepted'] = all(result['checks'].values())
         result['engineeringQualityAccepted'] = result['executionAccepted'] and result['engineeringQualityAccepted']
         result['reportSHA256'] = hashlib.sha256(raw).hexdigest()
-    with (root / 'parent-arena-acceptance.json').open('x') as stream:
+    with (root / output_name).open('x') as stream:
         json.dump(result, stream, ensure_ascii=False, indent=2)
         stream.write('\n')
     print(json.dumps({key: result[key] for key in ('executionAccepted', 'engineeringQualityAccepted', 'nativePolicyEffectVerified')}))
 
 
 if __name__ == '__main__':
-    main()
+    assert len(sys.argv) <= 2
+    main(output_name=sys.argv[1] if len(sys.argv) == 2 else 'parent-arena-acceptance.json')
