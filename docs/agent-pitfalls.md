@@ -1,3 +1,7 @@
+## KV288政策收取须保留真实variant（2026-11-11）
+
+旧heap collector为原arena变体创建`normalized=dict(report,probeVariant='cpu-arena-off-v1')`；复制到KV288后虽然已换verifier，仍将真实kv288身份写回旧值，父离线政策测试真实1fail/6。只将适配中的该句改为`normalized=report`，原报告不改、容量288/实际variant仍严格检查，最终完整冻结7组GREEN；本次唯一run双读/有界21B政策收取及18父门通过。原512 collector/合同保持，不通过放宽新verifier或重新推理恢复。证据`artifacts/verification/w3-qwen-kv288-emulator-20261111/{parent-first.stderr,parent-frozen.stderr,allocator-policy-collected.json}`。
+
 ## KV288父端prepare：跳过唯一旧文件后需建目标父目录（2026-11-11）
 
 新隔离prepare跳过原唯一test-src文件后，该目录未由复制循环创建；copy2新wrapper真实FileNotFoundError，后续build被缺candidate收据阻断，零Gradle/device。保留partial source并补明确mkdir后fresh79文件/75-taskbuild/实包及32组6003host通过。未来跳过整目录唯一文件时须显式建新目标父目录；准备失败后先核恢复再执行依赖步骤，不把后续阻断当第二根因。证据artifacts/verification/w3-qwen-kv288-emulator-20261111/{prepare-first-failure.json,source-prepare-missing-test-dir/}。

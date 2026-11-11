@@ -1,3 +1,7 @@
+## 2026-11-11：W3 KV288模拟器实测及逐条对照完成
+
+独立run w3-qwen-kv288-emulator-20261111-01已消耗：65completed/117decode，65最终串及117阶段除耗时外与原512相同，13挑战严格空；中文CER6.78%、近场WER9.87%、远场WER28.32%过原门。采样最高RSS1542725632B比原512高3719168B，未证RSS收益/受控加速；静态少49MiB不等于修复。448冻结及原108/120/327守卫通过、实体heaprun未消耗；18执行门、同run双读/政策/六模型后核/恢复/关闭通过，精确清7任务磁盘，普通AVD保持。源码c66ece0、父工具26dd360；结果validation/w3-qwen-kv288-emulator-observed-20261111.{md,json}，父check_observed.py新鲜通过，免费hy3运行后材料限定复核62.739s接受（两单位错误父订正），无活动helper/native429不重试。结果提交/本次双端同步稍后另附收据；W3/R4/R5open、goalactive，无新麦克风/AiAi/下载/生产变化。用户不在机器旁，模拟器补充已完成，真机/生产余门不由此替代。
+
 ## 2026-11-11：W3 KV容量预检已提交及双端同步
 
 本地3892aba精确5文件；GH#15comment6798586630、GL#15note43211、GHWiki baf35aedc6d9517e0ddf191cec23c84d0b23793f，两WikiSHA fd6286272e6e3360c8a07e1398d91b2c76d1e6c9bca131e66a7127b73564416f逐字回读一致。收据validation/w3-qwen-kv-capacity-preflight-sync-20261111.json；marker w3-qwen-kv-capacity-preflight-20261111已用勿重发。原65模拟器已完成，288仅静态预检/复核接受，下一独立实现/实包/冻结/实测均未开始；无活动helper、旧native429不重试。原真机合同/run保护保持，W3/R4/R5open、goalactive，源码分支未push。
