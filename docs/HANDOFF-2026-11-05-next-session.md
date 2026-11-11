@@ -1,3 +1,19 @@
+## 2026-11-11：W3新FILE外壳与实包已通过，独立复核运行中
+
+本地已提交2b64ba4（三支持模块）、3a6fc1d（外壳/实包）、ebaa256（只stage本任务pitfalls条目），未push源码。
+外部hy3外壳最终SHA7dc3eaa6…原样集成，24组/364断言；Inputs8组406373、Activity6、Report22、core42组264通过。
+离线构建25.378s/lint0error7warning，实际两APK13类/65PCM/零权限/四arm64库摘要/同debug证书核验通过。
+sourceFingerprint ef4665190423630afa548d4c6b4ea1a4706f98ab29761437887742a7872f8696；新run w3-qwen-file-20261111-01未消耗。
+原hy4free已自然终态零文件拒收，不再poll12762；薄外壳与错误修正均已终态，原失败/全部raw保留。
+当前唯一活动helper是免费hy3独立复核 `/private/tmp/odai-hy3-w3-qwen-file-wrapper-review-20261111/`，会话40596。
+复核上下文24文件只读，源码/APK/device执行属于主代理；无新native调用，旧native429不重试。
+新FILE零安装/构造/解码，TECNO最新preflight awake=false/unlocked=false/available2917212160B；无活动instrumentation。
+先收同次复核结果/父裁定，再刷新设备gate；用户已授权固定公开FILE路线，不开麦克风/AiAi/新下载/生产改动。
+若未解锁，只请解锁，不要重问下载/是否接受R4R5。设备按prepare→唯一run→collect双读→评分→restore；
+RSS>1.5GiB、available<512MiB、单片/load>120s停止、不重放load-only/不调参重试。源码/签名/输入冻结在本地verification目录。
+新包尚未同步issue/wiki；此前core marker已用勿重复。最新入口docs/validation/w3-qwen-android-file-package-20261111.md。
+下方“外壳生成中”均为历史。78保护文件剥离本任务prepend后保持，原dirtyhunks仍未提交。
+
 ## 2026-11-11：W3两阶段core及父验收已提交，外壳同次调用仍在运行
 
 当前本地HEAD b0aa371（f124ab2核心、8b0a969父验收、b0aa371两端同步收据）；未push源码。
