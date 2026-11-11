@@ -1,3 +1,7 @@
+## 2026-11-12：历史partial摘要保护已提交并双端同步
+
+本地`c937097`精确7文件；GH#15 comment6808565871、GL#15 note43215、GH Wiki366e489，两Wiki逐字回读且SHA一致。[同步收据](../validation/w3-runtime-partial-integrity-sync-20261112.json)，marker `w3-runtime-partial-integrity-20261112`已用勿重复。首次GitLab读取遇EOF，GitHub评论已回读且未重复写；后续独立读取/写入成功。原13归档、27文本、旧partial和冻结守卫保持；W3/R4/R5及实体真机/生产余门仍open。
+
 ## 2026-11-12：历史partial摘要保护已补齐
 
 完整归档校验器此前只核历史partial长度；两个同长度单字节篡改真实被误接受。保留原件后补固定SHA256，原始证据正向和两个隔离负向回归3/3通过，13归档/27文本/旧68材料及108/120/327/448守卫保持；免费hy3只读源码复核接受，无阻塞发现。[本次证据](../validation/w3-runtime-partial-integrity-20261112.md)。零新网络/设备/推理，实体heap run未消耗，W3/R4/R5及生产发布余门仍open。

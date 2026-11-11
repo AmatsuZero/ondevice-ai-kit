@@ -1,3 +1,7 @@
+## 2026-11-12：W3历史partial摘要保护已提交及同步
+
+本地`c937097`精确7文件；GH#15 comment6808565871、GL#15 note43215、GHWiki366e489587fb865e72feeb180197a3be7707e15c，两Wiki SHA41c4e8a42d1688c4cfa55cdeb1c823c9f69a3c575b50bb413edca04f9371a7c1逐字回读一致。收据`validation/w3-runtime-partial-integrity-sync-20261112.json`，marker已用。首次GitLab GET EOF后独立读取恢复，未重复GitHub评论；远端写入均各1次。源码分支未push，0设备/推理/新下载，物理heaprun未消耗；W3/R4/R5open、goalactive。下一步仍是实体连接后的原合同诊断或继续无设备静态收尾，不能把模拟器替代TECNO。
+
 ## 2026-11-12：W3历史partial摘要保护已验
 
 父验收脚本原仅核两个历史partial尺寸，隔离副本同长度篡改真实2fail；保留原件后加入固定SHA256，同组3tests GREEN、完整13归档/27文本/旧68材料和108/120/327/448守卫通过。免费hy3提供上下文只读源码复核79.445s接受，无阻塞发现；不是独立二进制/发布批准。证据`validation/w3-runtime-partial-integrity-20261112.md`及本机`partial-integrity-20261112/`。无新网络/设备/推理，原物理heap run未消耗，W3/R4/R5open、goalactive；此项待精确提交/新marker同步。无活动helper，旧native429不重试；既有dirty及原失败保持。
