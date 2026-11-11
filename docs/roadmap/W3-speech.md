@@ -1,3 +1,7 @@
+## KV 预检同步检查点（2026-11-11）
+
+本地 `3892aba`，GH#15 comment6798586630 / GL#15 note43211 / GH Wiki `baf35ae` 已逐字回读，两Wiki摘要一致；[同步收据](../validation/w3-qwen-kv-capacity-preflight-sync-20261111.json)。仅静态容量预检通过，尚未执行288容量实验，W3/R4/R5仍open。新marker已用，源码分支未push。
+
 ## KV 容量预检（2026-11-11）
 
 实际固定 tokenizer 重编译、1001 帧数边界与65文件两阶段上界复核通过；空hotwords/≤10秒/128生成token的最小容量275，预选288。基础KV静态差额49MiB，256会将最坏生成上限缩至109，已排除。免费hy3材料限定复核接受/无发现；尚无新Kotlin/APK/ASR或实测省内存，不关闭W3/R4/R5。[预检与后续边界](../validation/w3-qwen-kv-capacity-preflight-20261111.md)。原108/120冻结及未消耗物理heap合同保持；模拟器可继续新单变量实验，实体质量/预算仍另验。

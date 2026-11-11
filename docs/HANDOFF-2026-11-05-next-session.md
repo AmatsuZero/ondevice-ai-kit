@@ -1,3 +1,7 @@
+## 2026-11-11：W3 KV容量预检已提交及双端同步
+
+本地3892aba精确5文件；GH#15comment6798586630、GL#15note43211、GHWiki baf35aedc6d9517e0ddf191cec23c84d0b23793f，两WikiSHA fd6286272e6e3360c8a07e1398d91b2c76d1e6c9bca131e66a7127b73564416f逐字回读一致。收据validation/w3-qwen-kv-capacity-preflight-sync-20261111.json；marker w3-qwen-kv-capacity-preflight-20261111已用勿重发。原65模拟器已完成，288仅静态预检/复核接受，下一独立实现/实包/冻结/实测均未开始；无活动helper、旧native429不重试。原真机合同/run保护保持，W3/R4/R5open、goalactive，源码分支未push。
+
 ## 2026-11-11：W3 KV容量预检已验，模拟器可续独立实验
 
 固定源码tokenizer重编译/真实执行一致，1001帧数与65文件静态界通过：最大context148，保留128生成需275，预选constructor288，基础KV112→63MiB（静态差49MiB）。256最坏仅109生成，拒绝；stream option单改不缩KV。免费hy3只读材料复核accept/无findings；未改Kotlin/构建APK/运行ASR，不证明RSS收益、质量一致或TECNO预算。入口validation/w3-qwen-kv-capacity-preflight-20261111.{md,json}及review JSON，原始证据artifacts/verification/w3-qwen-kv-capacity-preflight-20261111/。原arena108/heap120冻结重核通过，物理heaprun未消耗；ADB清单空不能推断锁屏。

@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-11",
+  "marker": "w3-qwen-kv-capacity-preflight-20261111",
+  "localCommit": "3892aba9533eb94d752661c9cec04d29c3131a09",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6798586630,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6798586630",
+      "sha256": "57b7908048c6dfc08077591eb003f57154f48017f381f244e4ff5ecc9e8abb7e",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43211,
+      "url": null,
+      "sha256": "d62a305c57afcc64fe4159cfd9de92247620df74d82705c3ba0b85a143cfbaf3",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "baf35aedc6d9517e0ddf191cec23c84d0b23793f",
+    "sha256": "fd6286272e6e3360c8a07e1398d91b2c76d1e6c9bca131e66a7127b73564416f",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "fd6286272e6e3360c8a07e1398d91b2c76d1e6c9bca131e66a7127b73564416f",
+    "readbackExact": true
+  },
+  "wikiHashesIdentical": true,
+  "bodySHA256": "57b7908048c6dfc08077591eb003f57154f48017f381f244e4ff5ecc9e8abb7e",
+  "evidenceDirectory": "artifacts/verification/w3-qwen-kv-capacity-preflight-20261111/publication",
+  "w3Complete": false,
+  "newAsrCalls": 0
+}
