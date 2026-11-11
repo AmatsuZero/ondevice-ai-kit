@@ -1,3 +1,7 @@
+## 2026-11-12：W3完整归档补充已提交及同步
+
+本地`0ede6a9`精确11文件；GH#15 comment6808351603、GL#15 note43214、GHWiki89cc333eb6ecb8d8ace6350ab2aaa22d5399b6bf，两Wiki SHA409355d4357f9453211643c682e61c7218670f030b1f8943727e61b2a9db037c逐字回读一致。收据`validation/w3-runtime-source-archives-complete-sync-20261112.json`；marker已用勿重发，源码分支未push。免费hy3 README候选40.277s原字节集成，父核13归档/27文本/旧68材料/108+120+327+448守卫及两个旧partial SHA通过；不是新恢复改动的独立源码/二进制发布复审。88份其他dirty不变，F08交接和pitfalls的并发变化保留且未暂存。无活动helper，旧native429不重试。当前ADB清单空，不能推断锁屏；模拟器65已完成，物理heap唯一run未消耗。W3/R4/R5open、goalactive，下一实体诊断仍须原合同fresh preflight；source-to-AAR/递归组成/生产通知/独立发布余门保持。
+
 ## 2026-11-12：W3 ORT归档恢复补充已完成
 
 新增 `w3-runtime-source-archives-complete-20261112`：保留原11/13归档失败/partial后，固定 cpuinfo 与 onnx 各一次调用级直连 GET 成功；13/13归档SHA1/SHA256/尺寸和27份归档支持文本通过，旧68材料与108/120/327/448守卫保持。没有改变全局代理、没有设备/推理/模型/运行时下载，物理heap run仍未消耗。旧 `w3-runtime-source-archives-20261112` 记录不改；本项不证明source-to-AAR、递归组成、生产通知、发布或W3/R4/R5完成。结果与检查入口：`docs/validation/w3-runtime-source-archives-complete-20261112.{md,json}`。

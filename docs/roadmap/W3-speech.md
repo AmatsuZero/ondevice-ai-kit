@@ -1,3 +1,7 @@
+## 2026-11-12：归档完整性补充已提交并双端同步
+
+本地`0ede6a9`精确11文件；GH#15 comment6808351603、GL#15 note43214、GH Wiki89cc333，两Wiki逐字回读且SHA一致。[同步收据](../validation/w3-runtime-source-archives-complete-sync-20261112.json)，marker `w3-runtime-source-archives-complete-20261112`已用勿重复。原13/13归档、27文本及冻结守卫保持；无新设备/推理，物理heap run未消耗，源码分支未push。ADB清单仍空，不推断锁屏；模拟器固定65文件已完成，不重放。W3/R4/R5和实体质量/资源、生产发布余门保持open。
+
 ## 2026-11-12：ORT源码归档完整性补充
 
 在保留原11/13归档超时、partial和失败终态的前提下，两个固定 codeload 请求各一次直连恢复成功；13/13归档的声明SHA1、独立SHA256和尺寸均匹配，共53,628,041B，27份归档支撑文本已逐字节复核。父脚本先重核旧材料再重核合并集，68份旧材料及108/120/327/448守卫保持，新增设备/推理0，物理heap run未消耗。该项只完成源码归档完整性；递归二进制组成、source-to-AAR、生产通知、发布和TECNO真机质量/资源门仍未通过，W3/R4/R5保持open。详见[补充结果](../validation/w3-runtime-source-archives-complete-20261112.md)和[机器收据](../validation/w3-runtime-source-archives-complete-20261112.json)。
