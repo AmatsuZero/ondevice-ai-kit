@@ -1,3 +1,8 @@
+## 2026-11-11：W3 heap父端路由已提交并同步双端
+
+本轮15精确路径本地提交a152a8c（源码未push）；102定向/完整tools691/七Python语法通过，原108冻结保持、77/78保护及已有F08漂移保留。双端#15新marker w3-heap-parent-routing-20261111已用：GHcomment6791328270、GLnote43056；GHWiki42d1479a50a021a81c0a40a3a253280c0106ad39，两WikiSHA ad24ddb96d6e0ca8a67d3357c3df3162d68633b3a6ca923519775daf042ee7a6逐字回读一致。收据docs/validation/w3-qwen-heap-routing-sync-20261111.json，勿重发旧marker。
+仍无外部heap Kotlin候选/真实host/实包/独立复核/新冻结run；0新助手/设备/推理。已再次结构化请求免费接续线路（hy3或重置后hy4free），当前未答；不因普通继续/时间已过自动换线或重试。旧native429不重试，W3open/goalactive。下一步只有明确接续选择后才新开独立候选任务；原prompt/raw/15context保持，新任务须带最新host tests和pitfalls，原样集成后按计划验收。
+
 ## 2026-11-11：W3 heap父端路由准备通过，外部wrapper仍缺
 
 新增prepare/build/device路由与19检查，报告扩至22；原回归61共102定向、完整tools691通过（metrics重叠不累计），七Python语法通过。构建前重核host测试/源码，修复stale-host到renderer的已复现缺口；原误通过/真实RED均保留。任何ADB前要求完整冻结/双复核，固定index25一片/1构造2stream2decode/原资源门；RSS带uptime读前后区间及一秒容差，preciseClockAlignmentVerified=false，不证明峰值/精确映射。详见docs/validation/w3-qwen-heap-routing-preparation-20261111.md及JSON。

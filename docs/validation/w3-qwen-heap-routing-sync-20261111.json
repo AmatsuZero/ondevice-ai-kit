@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-11T08:48:01.840890+00:00",
+  "marker": "w3-heap-parent-routing-20261111",
+  "sourceCommit": "a152a8c6c2d76a07cc350935a818c114ca2fc2eb",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6791328270,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6791328270",
+      "sha256": "68f83d189af69eb8f4883d17b0f4ba5304414a88ba145fe8a82087573cc35af1",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43056,
+      "url": null,
+      "sha256": "15432cd2dca96cba66bca3834256e38ea8a0e300b62decbb8449f9aec8e00d4a",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "42d1479a50a021a81c0a40a3a253280c0106ad39",
+    "sha256": "ad24ddb96d6e0ca8a67d3357c3df3162d68633b3a6ca923519775daf042ee7a6",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "ad24ddb96d6e0ca8a67d3357c3df3162d68633b3a6ca923519775daf042ee7a6",
+    "readbackExact": true
+  },
+  "wikiContentHashEqual": true,
+  "w3Status": "open",
+  "goalStatus": "active",
+  "scope": "Parent heap preparation and routing only; external wrapper, real host/package/review/device gates remain incomplete",
+  "localEvidenceRoot": ".omx/artifacts/w3-qwen-ort-lifecycle-20261111/heap-routing-publication"
+}
