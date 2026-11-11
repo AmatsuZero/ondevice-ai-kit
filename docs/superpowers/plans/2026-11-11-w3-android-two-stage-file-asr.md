@@ -44,8 +44,8 @@
 **Files:** `probes/android-qwen-file/QwenFileActivity.kt`, `QwenFileInstrumentation.kt`, parent build/package acceptance and README.
 
 - [x] Freeze the wrapper/report interface using the accepted core; write parent failure/lifecycle checks before the wrapper candidate.
-- [ ] Dispatch a separate small external candidate using the load-only lifecycle/model verifier as immutable context; new distinct package and reports.
-- [ ] Verify all input/model bytes before JNI, exclusive reservation, initial running report, foreground gates, one recognizer, actual stage/row evidence, explicit stream/recognizer release, Activity teardown and final write failure.
+- [x] Dispatch a separate small external candidate using the load-only lifecycle/model verifier as immutable context; new distinct package and reports.
+- [x] Verify all input/model bytes before JNI, exclusive reservation, initial running report, foreground gates, one recognizer, actual stage/row evidence, explicit stream/recognizer release, Activity teardown and final write failure.
 - [ ] Run targeted Kotlin checks, offline build/lint and inspect actual APK classes, permissions, ABI/native digests, manifest, signatures and source fingerprint. Independent bounded review before device execution.
 
 ## Task 3: New bounded Android file run and acceptance
@@ -77,3 +77,5 @@
 - Task2 decomposition ruling: original hy4free wrapper task naturally ended2119.316s, CLI0/resultsuccess but literal DSML tool marker, eight Read/zero Write/zero files; rejected and archived. No quota/error or supervisor timeout. Do not resubmit. New distinct small candidates: `QwenFileInputs.kt` (callback-based65asset verification/PCM conversion, no Android), `QwenFileActivity.kt` (minimal accepted Activity rename/status), then one thin `QwenFileInstrumentation.kt` consuming accepted modules. Inputs8behavioralgroups and Activity6lifecyclechecks were RED before dispatch. Parent build/wrapper acceptance now includes actual input module bytes/classes. No weakened input/model/quality/resource contract.
 
 - Task2 module acceptance: external Inputs SHA02567c13 (8groups/406373assertions), Activity SHAdd859f76 (6assertions), Report SHA74cb2ab4 (22assertions) integrated unchanged. Report initial compiler RED for two omitted DTOs; distinct external correction only added declarations. Original helper failures and actual scope checks retained. Thin instrumentation hy3 task `/private/tmp/odai-hy3-w3-qwen-file-instrumentation-20261111/` is separate; whole wrapper/APK/device remains unaccepted.
+
+- Task2 wrapper/package checkpoint: first wrapper21groups343pass, supplemental error/case-binding regressions RED5groups; focused external correction SHA7dc3eaa6 integrated unchanged and24groups364pass. Actual offline build25.378s/lint0error7warning; actual APK13classes/65assets/zero permissions/four native-library digests/common debug signing verified. Parent scaffold missing-bat failure preserved and POSIX prereqs fixed before source creation. Independent bounded hy3 wrapper/package review is running separately; no physical FILE install/constructor/decode yet. SourceFingerprint ef4665190423630afa548d4c6b4ea1a4706f98ab29761437887742a7872f8696; run remains w3-qwen-file-20261111-01.

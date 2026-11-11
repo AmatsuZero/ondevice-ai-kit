@@ -20,9 +20,12 @@ def main():
     for relative, digest in accepted['files'].items():
         assert sha(ROOT/relative) == digest, relative
     assert accepted['coreHostPassed'] and accepted['wrapperHostPassed']
-    SOURCE.mkdir(exist_ok=False)
     original = ROOT/'artifacts/verification/w3-qwen-load-20261110/source'
-    for relative in ('gradlew','gradlew.bat','gradle/wrapper/gradle-wrapper.jar','gradle/wrapper/gradle-wrapper.properties','settings.gradle.kts'):
+    wrapper_files = ('gradlew','gradle/wrapper/gradle-wrapper.jar','gradle/wrapper/gradle-wrapper.properties','settings.gradle.kts')
+    for relative in wrapper_files + ('build.gradle.kts', 'AndroidManifest.xml'):
+        assert (original/relative).is_file(), relative
+    SOURCE.mkdir(exist_ok=False)
+    for relative in wrapper_files:
         dest=SOURCE/relative;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(original/relative,dest)
     gradle = (original/'build.gradle.kts').read_text().replace('io.ondeviceai.acceptance.qwenload','io.ondeviceai.acceptance.qwenfile').replace('QwenLoadInstrumentation','QwenFileInstrumentation')
     (SOURCE/'build.gradle.kts').write_text(gradle)

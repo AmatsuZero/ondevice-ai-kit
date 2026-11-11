@@ -38,6 +38,7 @@ object Runtime {
  var finished=CountDownLatch(1)
  var streams=0;var streamReleases=0;var decodes=0;var streamReleaseFail=false
  var decodeFail=false;var emptyAuto=false;var badAsset:String?=null
+ var failElapsedAt=0;var elapsedCalls=0;var failElapsedAfterDecode=false
  var failWhen:((JSONObject)->Boolean)?=null
  val streamEvents=mutableListOf<String>();val accepted=mutableListOf<FloatArray>()
 }
@@ -56,7 +57,16 @@ object Runtime {
     stubs['CoreDoubles.kt'] = stubs['CoreDoubles.kt'].replace('listOf(ModelSpec("mock",1,"0".repeat(64)))','frozenSpecs')
     stubs['Context.kt'] = stubs['Context.kt'].replace('open class Context {',
                   'open class Context { val assets=android.content.res.AssetManager()')
-    stubs['Bundle.kt'] += '\nobject SystemClock {fun elapsedRealtimeNanos()=System.nanoTime()}\n'
+    stubs['Bundle.kt'] += '''
+object SystemClock {fun elapsedRealtimeNanos():Long {
+ checks.Runtime.elapsedCalls++
+ if(checks.Runtime.elapsedCalls==checks.Runtime.failElapsedAt || (checks.Runtime.failElapsedAfterDecode && checks.Runtime.decodes>0)) {
+  checks.Runtime.failElapsedAfterDecode=false
+  throw IllegalStateException("injected-elapsed-clock")
+ }
+ return System.nanoTime()
+}}
+'''
     stubs['Assets.kt'] = '''package android.content.res
 import checks.Runtime
 import java.io.File

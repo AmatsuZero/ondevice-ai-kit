@@ -21,6 +21,7 @@ private fun reset() {
     Runtime.finished=java.util.concurrent.CountDownLatch(1)
     Runtime.streams=0; Runtime.streamReleases=0; Runtime.decodes=0; Runtime.streamReleaseFail=false
     Runtime.decodeFail=false; Runtime.emptyAuto=false; Runtime.badAsset=null; Runtime.failWhen=null
+    Runtime.failElapsedAt=0;Runtime.elapsedCalls=0;Runtime.failElapsedAfterDecode=false
     Runtime.streamEvents.clear(); Runtime.accepted.clear()
     File(Runtime.root,"no_backup/qwen3-asr-0.6b-int8-393f8a14/tokenizer").mkdirs()
 }
@@ -92,11 +93,13 @@ fun main(args: Array<String>) {
         finally { Runtime.root.deleteRecursively() }
     }
     case("initial lock blocks validation and constructor") {
-        reset(); try { Runtime.locked=true; start(); failed(); expect(Runtime.creates==0 && Runtime.verifies==0) }
+        reset(); try { Runtime.locked=true; start(); failed(); expect(Runtime.creates==0 && Runtime.verifies==0)
+            expect(json().getString("errorClass")=="java.io.IOException" && json().getString("errorMessage").isNotEmpty(),"initial lock actual error missing") }
         finally { Runtime.root.deleteRecursively() }
     }
     case("model corruption blocks constructor") {
-        reset(); try { Runtime.verifyFail=true; start(); failed(); expect(Runtime.creates==0 && Runtime.verifies==1) }
+        reset(); try { Runtime.verifyFail=true; start(); failed(); expect(Runtime.creates==0 && Runtime.verifies==1)
+            expect(json().getString("errorClass")=="java.lang.SecurityException" && json().getString("errorMessage")=="injected-model-invalid","model error missing") }
         finally { Runtime.root.deleteRecursively() }
     }
     for(asset in listOf("cases.json","inputs/fleurs-cmn_hans_cn-1805.pcm")) case("asset corruption $asset blocks all native") {
@@ -112,6 +115,7 @@ fun main(args: Array<String>) {
             Runtime.constructorFail=true; start(); failed()
             expect(Runtime.creates==1 && Runtime.releases==0 && Runtime.streams==0)
             expect(json().getInt("actualConstructors")==1 && !json().getBoolean("constructorReturned"))
+            expect(json().getString("errorClass")=="java.lang.UnsupportedOperationException" && json().getString("errorMessage")=="injected-constructor","constructor error missing")
         } finally { Runtime.root.deleteRecursively() }
     }
     case("decode failure preserves actual count releases stream and recognizer stops remaining rows") {
@@ -121,6 +125,7 @@ fun main(args: Array<String>) {
             expect(j.getInt("nativeDecodeCalls")==1)
             expect(j.getJSONArray("rows").getJSONObject(0).getString("status")=="error")
             expect(j.getJSONArray("rows").getJSONObject(1).getString("status")=="planned")
+            expect(j.getInt("activeCaseIndex")==0 && !j.isNull("caseStartedElapsedRealtimeNanos"),"failed case binding cleared")
             allZero()
         } finally { Runtime.root.deleteRecursively() }
     }
@@ -129,6 +134,32 @@ fun main(args: Array<String>) {
             Runtime.streamReleaseFail=true; start(); failed()
             expect(Runtime.streamReleases==1 && Runtime.decodes==1 && Runtime.streams==1 && Runtime.releases==1)
             expect(!json().getJSONArray("rows").getJSONObject(0).getJSONObject("caseState").getJSONArray("stages").getJSONObject(0).getBoolean("releaseSucceeded"))
+            allZero()
+        } finally { Runtime.root.deleteRecursively() }
+    }
+    case("case clock failure still clears PCM and releases recognizer") {
+        reset(); try {
+            Runtime.failElapsedAt=1;start();failed()
+            expect(Runtime.creates==1 && Runtime.decodes==0 && Runtime.releases==1)
+            expect(json().getString("errorClass")=="java.lang.IllegalStateException")
+            allZero()
+        } finally { Runtime.root.deleteRecursively() }
+    }
+    case("elapsed clock failure after decode preserves case binding and both cleanup levels") {
+        reset(); try {
+            Runtime.failElapsedAfterDecode=true;start();failed()
+            expect(Runtime.decodes==1 && Runtime.streamReleases==1 && Runtime.releases==1)
+            expect(json().getInt("activeCaseIndex")==0)
+            expect(json().getJSONArray("rows").getJSONObject(1).getString("status")=="planned")
+            allZero()
+        } finally { Runtime.root.deleteRecursively() }
+    }
+    case("decode failure remains primary when recognizer release also fails") {
+        reset(); try {
+            Runtime.decodeFail=true;Runtime.releaseFail=true;start();failed()
+            expect(json().getString("errorClass")=="java.lang.IllegalStateException")
+            expect(json().getString("recognizerReleaseErrorClass")=="java.lang.IllegalArgumentException")
+            expect(Runtime.decodes==1 && Runtime.streamReleases==1 && Runtime.releases==1)
             allZero()
         } finally { Runtime.root.deleteRecursively() }
     }
