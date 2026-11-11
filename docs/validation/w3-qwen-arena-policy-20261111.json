@@ -1,0 +1,50 @@
+{
+  "scope": "pure policy source/JVM filesystem/Android34classpath only; zero native/device",
+  "status": "policy-module-accepted",
+  "sourceSHA256": "c86b96b68fb617f4920736bfa257ecf90280d9d1565ad9010725a5dbd56812e0",
+  "integratedByteForByte": true,
+  "initialHelper": {
+    "exitCode": 0,
+    "seconds": 326.95404308299476,
+    "files": {
+      "QwenArenaPolicy.kt": {
+        "bytes": 7901,
+        "sha256": "699bb859f06853d4590677396a6ef9f68efc70a9fb1018d49be461b73fcb9281"
+      }
+    }
+  },
+  "correctionHelper": {
+    "exitCode": 0,
+    "seconds": 113.97279808299209,
+    "files": {
+      "QwenArenaPolicy.kt": {
+        "bytes": 9380,
+        "sha256": "c86b96b68fb617f4920736bfa257ecf90280d9d1565ad9010725a5dbd56812e0"
+      }
+    }
+  },
+  "hostChecks": {
+    "sourceSHA256": "c86b96b68fb617f4920736bfa257ecf90280d9d1565ad9010725a5dbd56812e0",
+    "testsSHA256": "4e883cc4aaaecc6afa1e0d6ad5639ea374ea47adea48f799c5d1a0acbdb4adba",
+    "compileExitCode": 0,
+    "nativeCalls": 0,
+    "deviceOperations": 0,
+    "runtimeExitCode": 0,
+    "output": "PASS exact bytes, canonical provider and independently computed receipt\nPASS existing child directory is never adopted or overwritten\nPASS missing root and regular file root are rejected without changes\nPASS symlink private root does not redirect writes\nPASS symlink ancestor does not redirect writes\nPASS normalization cannot erase a symlink before dot-dot\nPASS symlink reserved child does not overwrite external data\nPASS equal-size content tampering is rejected\nPASS extra policy key is rejected\nPASS oversized sparse config is rejected before an unbounded read\nPASS receipt fields are independently bound\nPASS missing config and symlink replacement reject verification\nPASS alternate root cannot borrow a valid receipt\nRESULT groups=13 assertions=41 nativeCalls=0 deviceOperations=0\nretainedTestRoot=/private/tmp/odai-arena-policy-check-10324371601824429115\n"
+  },
+  "androidApiClasspath": {
+    "exitCode": 0,
+    "classes": 3,
+    "androidJarSHA256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad",
+    "noJdkClasspath": true,
+    "noAndroidRuntimeExecution": true
+  },
+  "initialPolicyToolErrors": 2,
+  "correctionToolErrors": 2,
+  "allContextHashesPreserved": true,
+  "nativePolicyConsumed": false,
+  "memorySavingsProved": false,
+  "w3Status": "open",
+  "oldFileRunConsumed": true,
+  "newNativeRunFrozen": false
+}

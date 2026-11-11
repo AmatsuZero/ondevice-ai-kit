@@ -30,17 +30,21 @@
 
 **Interface:** package `io.ondeviceai.acceptance.qwenarena`; `data class ArenaPolicyReceipt(val provider: String, val configPath: String, val bytes: Long, val sha256: String)`; `object QwenArenaPolicy { fun prepare(privateRoot: java.io.File): ArenaPolicyReceipt; fun verify(privateRoot: java.io.File, receipt: ArenaPolicyReceipt) }`. `prepare` reserves child `cpu-arena-off` and file `cpu.config`; repeated prepare fails. `verify` binds to that exact child/file and checks all receipt fields and bytes, without writing.
 
-- [ ] Parent writes/runs absent-candidate RED and real Kotlin filesystem assertions.
-- [ ] Separate free hy3 candidate, exact single-file ownership and tested OS sandbox; inspect actual file/tool/result events.
-- [ ] Compile/run the candidate against real parent checks. Preserve any failure; correction is a distinct bounded task.
-- [ ] Integrate external bytes unchanged and commit source/validation.
+- [x] Parent writes/runs absent-candidate RED and real Kotlin filesystem assertions.
+- [x] Separate free hy3 candidate, exact single-file ownership and tested OS sandbox; inspect actual file/tool/result events.
+- [x] Compile/run the candidate against real parent checks. Preserve any failure; correction is a distinct bounded task.
+- [x] Integrate external bytes unchanged and commit source/validation.
 
 ## Task2: Report precise preparation and next gate
 
 **Files:** validation report and `probes/android-qwen-arena/README.md`.
 
-- [ ] Archive source feasibility report verbatim with parent corrections/context-read limits and source/AAR/JVM evidence.
-- [ ] Record local policy evidence and scope; mark native consumption/savings/quality unverified.
-- [ ] Preserve consumed default FILE run and fixed budget. Wrapper integration/build/review/new contract are pending; this task starts no new native run.
+- [x] Archive source feasibility report verbatim with parent corrections/context-read limits and source/AAR/JVM evidence.
+- [x] Record local policy evidence and scope; mark native consumption/savings/quality unverified.
+- [x] Preserve consumed default FILE run and fixed budget. Wrapper integration/build/review/new contract are pending; this task starts no new native run.
 
 Self-review: all five failure classes map to task1 real filesystem checks or task2 reporting. No new quality thresholds or authority claims. Implementation remains with external CBC under the user's explicit execution method; no additional approval handoff.
+
+Execution: first external candidate naturally completed326.954s,7901B/SHA699bb859…, source only. Actual Kotlin -Werror compiled;12groups39assertions passed. Parent supplemental symlink-before-dot-dot test passed; the oversized2GiB sparse-file test failed with `OutOfMemoryError: Required array size too large` at verify's unbounded `Files.readAllBytes`, before any large allocation succeeded. Original source/raw/RED retained; no integration/device run. Distinct freehy3 correction owns one source, bounded at most21byte reads in both reread paths and fixes misleading absoluteFile comment. No test relaxation or original-request mutation.
+
+Final correction113.973s/9380B/SHAc86b96b6… passed13groups41assertions, integrated byte-for-byte and checked again. Existing AndroidAPI34jar with-no-jdk/-Werror compiled3classes; absentAPI35jar prerequisite retained, no download. No native/device execution. Policy preparation plan complete; wrapper/new diagnostic work remains separate and W3open.

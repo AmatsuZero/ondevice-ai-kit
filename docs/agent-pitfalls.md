@@ -6,6 +6,9 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **固定20B配置也需有界读取，不能先readAllBytes再校验**：W3arena候选首稿Kotlin-Werror/12组39断言通过；补2GiB稀疏文件替换后，verify实际抛`OutOfMemoryError: Required array size too large`，无大数组分配成功。长度预检后仍readAllBytes有增长窗口；独立外部定点修正两处均最多读21B并核EOF/内容，13组41断言/集成后重验/AndroidAPI34classpath通过。原稿/RED保留，不改测试期待，修正版原样集成但未接native/跑设备。证据`docs/validation/w3-qwen-arena-policy-20261111.md`与`.omx/artifacts/w3-qwen-file-20261111/memory-investigation/policy-oversize-red/`；该稀疏fixture在finally精确删除，其他测试临时根保留。
+
+
 - **provider后缀须追完整条件；host适配器与真实runtime分开**：W3静态调查初见Qwen只认精确cpu，完整源码确认该flag仅与IsCudaProvider合取，cpu:config仍禁用CUDA，不需据局部条件修模型。session.h模板原样转发provider；固定AAR字符串/JVM DTO和18项源码片段检查仍不证明native配置生效或节省RSS。首次C++检查将日志宏设空导致两项unused Werror，只改测试日志适配器为fprintf；首次JVM stdlib选到非runtime jar导致NoClassDefFoundError，明确使用精确kotlin-stdlib-2.2.20.jar并核Intrinsics.class后4项通过。保留初始失败，未改全局环境/生产/旧run；证据`docs/validation/w3-qwen-arena-feasibility-20261111.md`与本次memory-investigation目录。
 
 
