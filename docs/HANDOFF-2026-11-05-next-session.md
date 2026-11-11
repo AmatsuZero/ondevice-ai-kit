@@ -1,3 +1,7 @@
+## 2026-11-12：W3固定ORT归档/许可补核已验
+
+13映射源码依赖实际11完整归档SHA1匹配，verified bytes30858504；21根/rootLICENSES许可+3mp11源码声明+2固定commitLICENSE共26文本，机器manifest在probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/。cpuinfo/onnx归档TimeoutError部分文件/原错保留、不重试，仅补独立GitBlob且archiveDigestVerified=false；mp11无独立LICENSE，KleidiAI根LICENSES首次漏筛真实失败/partial保留后订正。父check_materials.py新鲜通过，68旧材料/108/120/327/448守卫完好、物理heaprun未消耗。免费hy3 source-only复核148.511s限定接受，两low元数据项修正；README候选23.762s及三点订正26.175s原字节验收。最终递归二进制组成/source-toAAR/生产通知/发布及实体质量资源门保持，W3/R4/R5open、goalactive，源分支未push。准备精确提交与新marker双端同步；无活动helper，旧native429不重试；ADB清单空不推断锁屏。
+
 ## 2026-11-11：W3 KV288实测已提交及双端同步
 
 本地c66ece0/26dd360/bceb424已验；GH#15comment6800044674、GL#15note43212、GHWiki de8161c7f29c3550e7d1b975105512a67b4e2fd7，两WikiSHA3b78939679cff32275d41fb31ad073e890642327f75e08e883c6f6aee2418b7a逐字回读一致。收据validation/w3-qwen-kv288-emulator-observed-sync-20261111.json；marker w3-qwen-kv288-emulator-observed-20261111已用勿重发。65/117与512逐字相同、工程质量通过，RSS采样峰值未降，不称内存修复/受控加速。check_observed.py新鲜通过，448/108/120/327守卫完好，原物理heaprun未消耗；任务AVD已恢复/关闭并精确清7磁盘，普通AVD保留，无活动helper，旧native429不重试。W3/R4/R5open、goalactive，源码分支未push；下一实体heap/完整手机质量资源和生产发布余门保持，模拟器本批勿重放。

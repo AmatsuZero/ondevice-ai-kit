@@ -1,3 +1,7 @@
+## 固定源码归档不一定含根级LICENSE文件（2026-11-12）
+
+ORT依赖材料逐归档重核时，mp11的boost-1.82.0归档没有任何独立license/licence/copying命名文件，但README/头文件明确BSL1.0声明；KleidiAI v1.20.0两全文位于根LICENSES/，只筛根级普通文件实际AssertionError。保留首partial后仅加入根LICENSES直接子文件，并保留mp11三份源码声明，不能补造包内LICENSE。cpuinfo/onnx归档流超时保留partial、不自动重试，只补精确commit LICENSE GitBlob且archiveDigestVerified=false。最终11归档SHA1匹配、26文本逐字节核对、68旧材料及108/120/327/448守卫通过；不是最终二进制组成/生产通知通过。证据.omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/与validation/w3-runtime-source-archives-20261112.md。
+
 ## KV288政策收取须保留真实variant（2026-11-11）
 
 旧heap collector为原arena变体创建`normalized=dict(report,probeVariant='cpu-arena-off-v1')`；复制到KV288后虽然已换verifier，仍将真实kv288身份写回旧值，父离线政策测试真实1fail/6。只将适配中的该句改为`normalized=report`，原报告不改、容量288/实际variant仍严格检查，最终完整冻结7组GREEN；本次唯一run双读/有界21B政策收取及18父门通过。原512 collector/合同保持，不通过放宽新verifier或重新推理恢复。证据`artifacts/verification/w3-qwen-kv288-emulator-20261111/{parent-first.stderr,parent-frozen.stderr,allocator-policy-collected.json}`。
