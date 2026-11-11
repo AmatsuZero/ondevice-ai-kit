@@ -1,3 +1,7 @@
+## 2026-11-12：实体 heap 观察已提交与同步
+
+本地 `4ab293a` 精确5文件；GH#15comment6809240255/GL#15note43216/GHWiki2a0fe736991070f53c9ba221d4937e575b768cfa逐字回读，双Wiki SHA4ed945d222cf460d7fb5ac084372d0f041f58d6038c7a23b9765a821cddb2c9a一致。收据validation/w3-qwen-heap-physical-observed-sync-20261112.json，新marker已用勿重复。原实体heaprun已CONSUMED/精确恢复；19/20/资源末端gap未验收，22父回归/120冻结通过，W3/R4/R5open。免费hy3117.125s完成供给事实报告复核/候选，父订正采样/总窗口/不实配额关联，未当独立设备或发布批准。首次GL读取EOF恢复后仅新写GL，GH同ID无重复；初stderr被launcher覆盖，工具结果观察与该证据限制均保留。源码分支未push。
+
 ## 2026-11-12：TECNO 原 heap run 已执行并恢复，19/20 资源观察未通过
 
 **`w3-qwen-heap-20261111-01` 已 CONSUMED，不再按下方旧 UNCONSUMED 记录启动。** 真机 index25/1776 完整 terminal：1 构造/2 流/2 解码、18 heap、41 RSS；最高 1,445,167,104B、最小 available 2,157,887,488B，全部实际释放/teardown 成功。父端仅 `typedResourceObservations=false`，原 host 保留退出时 ENOENT 的 terminalObservationGap，最后观察报告仍 running，不能放宽 gate 或称诊断验收通过。

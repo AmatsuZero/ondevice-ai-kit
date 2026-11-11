@@ -1,3 +1,7 @@
+## 2026-11-12：实体 heap 结果已提交并双端同步
+
+本地 `4ab293a` 精确5文件；GH#15 comment6809240255、GL#15 note43216、GH Wiki `2a0fe73` 已逐字回读，两Wiki SHA一致。[同步收据](../validation/w3-qwen-heap-physical-observed-sync-20261112.json)，marker `w3-qwen-heap-physical-observed-20261112` 已用勿重复。原 heap run 已消耗并恢复；19/20资源观察未验收，W3/R4/R5保持open。首次GitLab GET遇EOF，恢复后幂等同步；首次stderr被复用launcher覆盖，仅保留工具结果观察，收据明确披露。源码分支未push。
+
 ## 2026-11-12：TECNO 原始 heap 单片已消耗，末端资源观察未验收
 
 `w3-qwen-heap-20261111-01` 已在 TECNO KM9/API35 完成固定 index25，**原 run 已消耗，禁止重放**。报告双读一致：1 构造/2 流/2 解码、18 heap 事件；41 RSS 样本最高 1,445,167,104B（1.346GiB），释放后 native allocated 27,918,000B。父端 19/20 项通过，唯一 `typedResourceObservations=false`：退出时 `/proc/PID/status` 消失，最后观察报告仍为 running；保留 non-null `terminalObservationGap`，`diagnosticAccepted=false`，不追认连续采样或 true peak。
