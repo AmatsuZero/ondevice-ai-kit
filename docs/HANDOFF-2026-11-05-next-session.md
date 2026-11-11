@@ -1,3 +1,8 @@
+## 2026-11-11：W3构建依赖补核已同步双端
+
+本地893cc5b精确22路径（源码未push）；15补充文件/13GitBlob/20日志摘录/四ABI/17链接/15tar成员通过，原50材料/108冻结保持。三份上游空白原样保留且摘要重核，任务自写diff检查通过。新marker w3-build-dependency-reconciliation-20261111已用：GH#15comment6791839114、GL#15note43063，GHWikicf007a39b11c93e20cc10d52e5f87c6176a17357，两WikiSHA126ddebf6cae34116c1cd07f1e7e0bd6921e4a70a48ed66477dd52a7f3303f2c一致；收据docs/validation/w3-runtime-build-dependency-sync-20261111.json。勿重发旧marker。
+Eigen5.0.1实际job与原3.4.0候选分清，ARM/x86 WebSocket差异有日志；最终so静态组成/来源精确对应/生产通知/独立复审仍缺，W3open。0新助手/设备/模型/二进制下载；外部heap wrapper及免费接续选择仍缺，不重试原429或换线。下一项回到明确线路后独立候选/host/实包/复核/冻结/唯一未执行文件诊断；原run均不重放，预算保持。
+
 ## 2026-11-11：W3官方构建依赖补核，原材料保持
 
 不依赖外部wrapper，父核现存官方libs job：四ABI实际Eigen5.0.1（原3.4.0仅递归源码候选），ARM WebSocket开关ON/x86两ABI OFF；固定Sherpa父CMake路径顺序与实际5.0.1日志相符。补充目录probes/sherpa-runtime-materials/2.0.1-build-observed-20261111共15文件（4源/9许可+manifest/README），13GitBlob/20日志摘录/四ABI/17链接/15tar成员通过，原50材料与原108冻结全部保持。下载/配置不证明最终so静态成员；精确预编译对应、递归完整组成/生产通知/独立复审仍缺，W3open。入口docs/validation/w3-runtime-build-dependency-reconciliation-20261111.{md,json}。
