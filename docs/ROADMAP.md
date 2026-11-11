@@ -1,3 +1,7 @@
+## 2026-11-11 W3构建依赖补核
+
+官方job实际Eigen5.0.1/四ABI，ARM WebSocket ON/x86 OFF已核；原3.4.0保持候选范围。补15文件、13来源GitBlob/20日志摘录/四ABI/17链接/15tar成员通过，原50材料及108冻结保持，无新设备/推理/二进制下载。最终so成员、递归组成和生产/独立复审仍缺，W3open。[补核证据](validation/w3-runtime-build-dependency-reconciliation-20261111.md)。
+
 ## 2026-11-11 W3父端路由增量
 
 heap准备/构建/设备入口和报告校验通过102定向检查，完整tools691通过；构建前重核host测试/源码，任何ADB前完整冻结/双复核，RSS保留uptime读取区间，不宣称精确映射或峰值。原108冻结不变，0新助手/构建/设备/native，外部wrapper429零交付仍待接续线路；W3open。[当前证据](validation/w3-qwen-heap-routing-preparation-20261111.md)，源码未push。

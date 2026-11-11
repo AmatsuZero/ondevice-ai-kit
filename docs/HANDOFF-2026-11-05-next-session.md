@@ -1,3 +1,8 @@
+## 2026-11-11：W3官方构建依赖补核，原材料保持
+
+不依赖外部wrapper，父核现存官方libs job：四ABI实际Eigen5.0.1（原3.4.0仅递归源码候选），ARM WebSocket开关ON/x86两ABI OFF；固定Sherpa父CMake路径顺序与实际5.0.1日志相符。补充目录probes/sherpa-runtime-materials/2.0.1-build-observed-20261111共15文件（4源/9许可+manifest/README），13GitBlob/20日志摘录/四ABI/17链接/15tar成员通过，原50材料与原108冻结全部保持。下载/配置不证明最终so静态成员；精确预编译对应、递归完整组成/生产通知/独立复审仍缺，W3open。入口docs/validation/w3-runtime-build-dependency-reconciliation-20261111.{md,json}。
+无新助手/设备/模型/二进制下载，未改生产或旧材料；外部heap Kotlin仍缺、此前免费接续选择未答，不重试429或换线。父路由提交a152a8c及同步463aec7保持；本补核暂未双端发布，源码未push。继续先提交/同步本项，再按真实接续答复开独立候选；不可重复旧marker。
+
 ## 2026-11-11：W3 heap父端路由已提交并同步双端
 
 本轮15精确路径本地提交a152a8c（源码未push）；102定向/完整tools691/七Python语法通过，原108冻结保持、77/78保护及已有F08漂移保留。双端#15新marker w3-heap-parent-routing-20261111已用：GHcomment6791328270、GLnote43056；GHWiki42d1479a50a021a81c0a40a3a253280c0106ad39，两WikiSHA ad24ddb96d6e0ca8a67d3357c3df3162d68633b3a6ca923519775daf042ee7a6逐字回读一致。收据docs/validation/w3-qwen-heap-routing-sync-20261111.json，勿重发旧marker。

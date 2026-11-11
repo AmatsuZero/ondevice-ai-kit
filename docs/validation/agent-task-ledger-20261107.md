@@ -1,3 +1,7 @@
+## 2026-11-11：W3构建依赖对应补核
+
+父核既有官方job和固定源，Eigen实际5.0.1与原递归候选3.4.0分开；ARM WebSocket ON/x86 OFF。原样收录4固定构建源/9许可，共15补充文件，13GitBlob/20日志/四ABI/17链接/15tar成员核过；原50材料/108冻结保持。无新助手/设备/模型/二进制，非最终so静态成员或生产通知/独立复审通过；W3open，免费接续问题仍未答。见w3-runtime-build-dependency-reconciliation-20261111.md。
+
 ## 2026-11-11：W3 heap父端路由准备
 
 主代理仅完成父验收prepare/build/device及报告增量，未代写外部wrapper。路由19/报告22/原回归61共102，完整tools691通过；stale-host真实RED→GREEN、原误通过保留。构建前重核host测试和副本绑定，设备前完整冻结/双复核；uptime读取区间有容差，精确时钟映射未证。原108冻结/77保护保持，已有F08漂移保留；0新助手/构建/设备/native，只自审。外部hy4free429待原接续线路选择，无自动重试/换线；W3open。见w3-qwen-heap-routing-preparation-20261111.md。

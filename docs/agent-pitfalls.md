@@ -1,3 +1,7 @@
+## W3父工程构建依赖与ABI（2026-11-11）
+
+- **子依赖默认版本不等于父工程实际include，开关也不能跨ABI泛化**：原kaldi-decoder候选eigen模块写3.4.0，但固定Sherpa父CMake先登记自身模块路径、再附加decoder路径；官方实际四ABI均下载/configure5.0.1。ARM WebSocket ON并下载websocketpp/asio，x86两ABI OFF。核固定父模块和原始job行号后，补实际5.0.1与两组件许可，原3.4.0候选材料不改；下载/全局开关仍不证明最终so内嵌成员。13来源GitBlob/20摘录/四ABI/原50材料摘要通过，无重建或设备动作。证据docs/validation/w3-runtime-build-dependency-reconciliation-20261111.md及本机build-dependency-reconciliation/。
+
 ## W3 heap父端路由补充（2026-11-11）
 
 - **准备时核过host不代表构建时仍有效**：build首稿只核host/base收据字节，prepare后改HeapWrapperChecks.kt仍进入renderer；初测试被后续其他断言掩盖而意外通过，加sentinel后真实RED为RuntimeError。恢复是在渲染/工具前重跑verify_host并逐个绑定仓库与准备源码；19路由/22报告检查通过，原误通过与RED保留。RSS读取仅保存uptime前后区间及一秒容差，不能写成精确时钟对齐/峰值。所有本项为合成/离线父验收，未构建或操作设备；外部wrapper、实包和独立复核仍缺。证据docs/validation/w3-qwen-heap-routing-preparation-20261111.md及本机heap-routing-preparation/。

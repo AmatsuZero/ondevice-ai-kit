@@ -10,6 +10,8 @@
 
 新增[运行时材料](../validation/w3-runtime-materials-20261111.md)：50文件含20许可/声明、26构建源，46来源GitBlob/hash、39链接与50压缩成员通过；实际AAR21文件/16so四ABI已枚举。递归静态组成、source-to-prebuilt、最终生产通知与发布复审仍缺。[成本复算](../validation/w3-qwen-cost-options-20261111.md)拒绝统一auto-only捷径：已知开发远场WER17/27，原两阶段13/27；后验独立集较好aggregate不足以取消此失败。零新推理/设备动作，先追固定runtime的分配/生命周期与发布出处，不因源键存在即开新run。
 
+新增[构建依赖补核](../validation/w3-runtime-build-dependency-reconciliation-20261111.md)：官方job四ABI实际下载/configure Eigen5.0.1，原3.4.0只是递归源码候选；ARM的WebSocket开关ON、x86两ABI OFF。新补4构建源/9许可原文，13GitBlob核验，原50材料不改。下载/配置不证明每个最终so成员，递归/生产通知/独立复审仍缺；0新模型/设备/二进制下载，W3open。
+
 上述材料已本地提交fd95f8c并同步双端#15/Wiki、回读一致。[官方AAR出处](../validation/w3-runtime-official-provenance-20261111.md)已核官方asset digest/size及tag，实际上游job日志确认TTS/diarization启用，不能以只用ASR排除对应分支；嵌套预编译ORT/递归组成与发布仍未过。[固定内存生命周期](../validation/w3-qwen-memory-lifetimes-20261111.md)和实际decoder动态KV图已核，config512基础KV112MiB，非峰值/泄漏或节省证明。新[heap诊断计划](../superpowers/plans/2026-11-11-w3-qwen-heap-diagnostic.md)只选原未执行index25的公开1776，外部候选生成中；不改变模型、两阶段、arena政策或预算，尚无新设备运行合同/识别。
 
 最新设备诊断准备（2026-11-11）：父工具独立复核发现已修正，22检查+原8父/31评分通过；arena单变量新合同已冻结108项摘要。TECNO fresh preflight Awake=false/unlocked=false、新alias不存在，零安装/构造/解码，等待本次解锁。原FILE批保持失败并已消耗；新run只请求关闭arena，1.5GiB/512MiB/120s不变。[最新准备与边界](../validation/w3-qwen-arena-ready-20261111.md)。下方“尚未冻结/父复核中”是此前准备记录。
