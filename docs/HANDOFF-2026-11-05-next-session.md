@@ -1,3 +1,8 @@
+## 2026-11-11：W3模拟器单片已提交并双端同步
+
+本地39794cb仅本任务7文件，源码分支未push；独立模拟器run完成1构造/2stream/2decode、18heap/23RSS、20诊断/完整tools691通过，采样最高1.353703GiB。原真机120冻结及未消耗run保持；同run政策只读引用修正/双读/模型后核/精确恢复/关闭及约3.83GB任务虚拟磁盘清理完成。免费hy3复核接受，exec后全局覆盖维护性minor延后，无活动helper，旧native429不重试。
+新marker w3-qwen-heap-emulator-observed-20261111已用：GH#15comment6796604921、GL#15note43207、GHWiki41480486dbbafd967ce832cca95e83faafdc4f9c；两WikiSHA55432cc2fc8256523c97c492341225fc0a6eaaa2b8f5569a5cb74f86d7920984逐字回读一致。首次GH GET TLS timeout原件保留，零POST后fresh读取恢复；无重复发帖或推理。收据docs/validation/w3-qwen-heap-emulator-observed-sync-20261111.json。W3/R4/R5仍open；下一有效真机动作仍原heap合同fresh preflight，不重放旧批或放宽资源门。此前“仅待TECNO/goalblocked”为历史，实际goal状态以get_goal为准。
+
 # 交接补充（2026-11-11 前缀，取代「仅等待 TECNO」）
 
 - 历史「仅等待 TECNO」记为既往：用户重开模拟器路径并执行完成一次有界验证（运行 w3-qwen-heap-emulator-20261111-01）。

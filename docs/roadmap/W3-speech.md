@@ -1,3 +1,7 @@
+## 模拟器同步检查点（2026-11-11）
+
+独立单片实测本地提交`39794cb`，两端#15及Wiki已逐字回读，Wiki摘要一致；见[同步收据](../validation/w3-qwen-heap-emulator-observed-sync-20261111.json)。原真机120冻结/run未消耗，模拟器已恢复关闭；W3/R4/R5仍open，完整手机质量/资源及发布余门保持。
+
 # W3 语音路线补充（2026-11-11 前缀）
 
 - 历史状态「仅等待 TECNO」已过时：用户重开模拟器路径并已执行（实测见 [w3-qwen-heap-emulator-observed-20261111.md](../validation/w3-qwen-heap-emulator-observed-20261111.md)）。

@@ -1,0 +1,60 @@
+{
+  "marker": "w3-qwen-heap-emulator-observed-20261111",
+  "status": "both-issues-and-wikis-readback-verified",
+  "sourceCommit": "39794cbdda11d43e93885ce0b4eb3ff83d68799d",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6796604921,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6796604921",
+      "sha256": "10a1b471f4e8af1d8d3d20d7841e8496f66f658935a6de354269a22f6abf3d2e",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43207,
+      "url": null,
+      "sha256": "0623946977a3b0df06395ee52392b5e11f02f2b00906066e6cc38c0dae48ae79",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "41480486dbbafd967ce832cca95e83faafdc4f9c",
+    "sha256": "55432cc2fc8256523c97c492341225fc0a6eaaa2b8f5569a5cb74f86d7920984",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "55432cc2fc8256523c97c492341225fc0a6eaaa2b8f5569a5cb74f86d7920984",
+    "readbackExact": true
+  },
+  "wikiBytesMatch": true,
+  "bodySHA256": "10a1b471f4e8af1d8d3d20d7841e8496f66f658935a6de354269a22f6abf3d2e",
+  "preservedPublicationFailure": {
+    "operation": "first GitHub comments GET",
+    "error": "net/http: TLS handshake timeout",
+    "writeAttempted": false,
+    "recovery": "fresh marker lookup succeeded; each issue posted/read once, no inference replay"
+  },
+  "emulatorRunId": "w3-qwen-heap-emulator-20261111-01",
+  "emulatorDiagnosticAccepted": true,
+  "completedRows": 1,
+  "actualConstructors": 1,
+  "actualStreams": 2,
+  "actualDecodeCalls": 2,
+  "heapEvents": 18,
+  "rssSamples": 23,
+  "sampledMaxRssBytes": 1453527040,
+  "diagnosticChecksPassed": 20,
+  "toolsTestsPassed": 691,
+  "physicalHeapFrozenFilesUnchanged": 120,
+  "physicalRunConsumed": false,
+  "emulatorStopped": true,
+  "taskGeneratedDiskNominalBytesRemoved": 3833720088,
+  "noModelOrRuntimeBinaryDownloads": true,
+  "microphoneStarts": 0,
+  "systemAsrRequests": 0,
+  "w3Status": "open",
+  "r4Status": "open",
+  "r5Status": "open",
+  "evidence": "artifacts/verification/w3-qwen-heap-emulator-20261111/publication"
+}
