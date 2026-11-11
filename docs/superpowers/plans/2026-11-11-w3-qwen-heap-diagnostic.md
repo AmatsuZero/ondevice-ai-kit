@@ -10,7 +10,7 @@
 
 **Spec:** [固定合同](../specs/2026-11-11-w3-qwen-heap-diagnostic.md)
 
-当前执行：父host适配器/故障检查与缺候选RED已准备；免费hy4free一次调用真实429/code6004、零候选，停线等待接续选择。尚未通过Kotlin/构建/设备门，[具体阻塞](../../validation/w3-qwen-heap-preparation-20261111.md)。
+当前执行：用户已选免费`hy3`接续。新整份wrapper调用自然939.547520875s终态，CLI0但真实`empty_model_response`，15Read/0Write/零候选；原hy4free429保留，不重发原任务。恢复拆为独立纯heap记录器候选及后续外壳接线，最终仍只集成一份wrapper；中间fragment仅本机候选，不扩大spec文件或设备范围。父`check_recorder.py`/`RecorderChecks.kt`已准备并观察缺候选RED；记录器尚未通过实际Kotlin。新任务`/private/tmp/odai-hy3-w3-heap-recorder-20261111/`，只续同次到终态。尚未通过Kotlin/构建/设备门，[原准备边界](../../validation/w3-qwen-heap-preparation-20261111.md)。
 
 父端准备增量：`prepare_build.py/build_acceptance.py/device_acceptance.py`及原报告校验通过路由19/报告22/原回归61共102项，完整tools691项通过，见[当前范围与失败记录](../../validation/w3-qwen-heap-routing-preparation-20261111.md)。Task1缺候选，Task2整体未完成；此项只推进不依赖候选的父验收部分。构建前重核真实host及测试/源码摘要，设备前要求完整冻结与双复核；`heapBoundaryLabels`须由实际源码复核写入合同。RSS保留设备uptime读取区间与一秒容差，精确时钟映射仍未证明；政策收据需绑定报告SHA，min available从原始trace重算。不能据此放行设备或将准备写成实包通过。
 

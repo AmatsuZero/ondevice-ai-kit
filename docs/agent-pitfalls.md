@@ -1,3 +1,7 @@
+## W3 heap记录器：JSON null与首错身份（2026-11-11）
+
+- **`isNull`通过不证明nullable字段存在**：外部heap记录器首稿实际Kotlin-Werror及13组80断言通过，但`JSONObject.put(key, null)`会移除key，未采到的数字、无活动case和成功事件errorClass未显式持久化。补`has(key)`与溢出后首错对象身份检查，原稿真实12项失败；独立hy3只修`JSONObject.NULL`和先检查sticky首错后检查事件上限，13组100断言通过。原稿/初绿/RED/修正版保持；不弱化报告字段门，不把片段验收当外壳/Android/设备通过。整份wrapper此前自然939.548s空响应、15Read/0Write/零候选，非429或监督超时，内部原因未知；只走独立小片段和接线任务，不重发原请求。证据`.omx/artifacts/w3-qwen-ort-lifecycle-20261111/heap-hy3-resume1/`。
+
 ## W3父工程构建依赖与ABI（2026-11-11）
 
 - **子依赖默认版本不等于父工程实际include，开关也不能跨ABI泛化**：原kaldi-decoder候选eigen模块写3.4.0，但固定Sherpa父CMake先登记自身模块路径、再附加decoder路径；官方实际四ABI均下载/configure5.0.1。ARM WebSocket ON并下载websocketpp/asio，x86两ABI OFF。核固定父模块和原始job行号后，补实际5.0.1与两组件许可，原3.4.0候选材料不改；下载/全局开关仍不证明最终so内嵌成员。13来源GitBlob/20摘录/四ABI/原50材料摘要通过，无重建或设备动作。证据docs/validation/w3-runtime-build-dependency-reconciliation-20261111.md及本机build-dependency-reconciliation/。
