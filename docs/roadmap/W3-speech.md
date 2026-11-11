@@ -2,7 +2,9 @@
 
 更新：2026-11-11。状态：**open；用户已明确要求继续改进，R4/R5 不再等待用户选择接受现状**。当前 TECNO 的 R1–R3 系统 ASR 已按用户接受的已知限制完成范围裁定；固定前缀、AMI 六个端/片段及两端持续观测已归档，质量与生产预算未通过。
 
-当前[heap源码与实包](../validation/w3-qwen-heap-wrapper-20261111.md)：用户明确选免费hy3，独立小片段与接线原字节集成；33组274断言/记录器13组100、离线构建75任务/lint0error7warning/65PCM四库核验通过。双独立复核已处理：父manifest漏绑真实RED→GREEN，103定向与完整tools691通过；标签/事件数量由源码证据确认。下一步冻结原未执行index25/1776单片诊断并检查fresh设备门，当前尚无新冻结/设备操作。旧hy4free429与hy3整份空响应原件保留，无自动重试；下方缺候选/待线路为历史。W3、R4/R5保持open。
+当前[heap单片准备](../validation/w3-qwen-heap-ready-20261111.md)：已验源码/实包本地提交`7f1d2f9`，唯一index25/1776诊断已冻结120摘要、守卫通过；fresh preflight发现ADB清单为空、指定TECNO `device not found`，零安装/解码，run未消耗。连接恢复后继续同合同，不能把连接不可用写成锁屏或授权错误。免费hy3外部候选原字节集成后33组274/记录器13组100、Android75任务/lint0e7w/65PCM四库、修后父103/tools691通过；双复核问题已处理。旧429/空响应/RED原件保留，下方缺候选/待线路为历史。W3、R4/R5保持open。
+
+本项已同步双端#15及Wiki、逐字回读，两Wiki内容摘要一致；GH comment6794749094、GL note43194、GHWiki92af270。源码未push，首次GitLab读取EOF已保留并仅续其同步；见[同步收据](../validation/w3-qwen-heap-ready-sync-20261111.json)，新marker已用勿重发。
 
 此前[heap父端构建/设备路由准备](../validation/w3-qwen-heap-routing-preparation-20261111.md)102项为历史；当前新增manifest拒收后103项。构建前重新核host测试与源码；任何ADB前要求完整冻结/双复核。RSS只保留uptime读取区间，不宣称精确时钟映射/峰值。原108冻结保持；单片准备或诊断仍不能关闭R4/R5。
 

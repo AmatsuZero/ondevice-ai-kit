@@ -10,7 +10,7 @@
 
 **Spec:** [固定合同](../specs/2026-11-11-w3-qwen-heap-diagnostic.md)
 
-当前执行：用户选免费`hy3`接续后，原空响应调用保留，独立记录器/接线与定点修正已实际交付。最终wrapper原字节集成后33组274断言、记录器13组100；离线Android构建20.244s/75任务、lint0error7warning/65PCM四库实包通过。双独立复核已处理：基础manifest必需hash漏项真实RED后修正，当前父103及Ruby对齐完整tools691通过。另两项通过原core持久化顺序与独立源码标签证据解决，原changes-required报告保留。尚无新冻结/设备操作，W3open。[当前源码与实包](../../validation/w3-qwen-heap-wrapper-20261111.md)。
+当前执行：已验实现本地提交`7f1d2f9`，单片run冻结120摘要/守卫通过。fresh preflight发现ADB清单为空、指定TECNO `device not found`，零安装/解码，run未消耗；不把连接不可用写成锁屏或授权错误。[当前准备与阻塞](../../validation/w3-qwen-heap-ready-20261111.md)。此前免费hy3原字节集成后wrapper33组274、记录器13组100、真实Android75任务/lint0e7w/65PCM四库实包、修后父103及tools691通过；双复核问题已分别处理。W3open。
 
 此前父端准备为路由19/报告22/原回归61共102项，见[历史准备与失败记录](../../validation/w3-qwen-heap-routing-preparation-20261111.md)。当前候选/实包与双复核已具备；Task2仍需完整冻结和设备验收。构建前重核真实host及测试/源码摘要，设备前要求完整冻结与双复核；`heapBoundaryLabels`由实际源码复核写入合同。RSS保留设备uptime读取区间与一秒容差，精确时钟映射仍未证明；政策收据绑定报告SHA，min available从原始trace重算。
 
@@ -35,7 +35,7 @@
 - [x] 建父host adapter：保留原wrapper24组的适用故障，完整65校验但成功rows1/stream2；增加heap故障与清理真值检查，最终33组274断言。
 - [x] 缺候选先RED；外部免费CBC在真实OS沙盒/context不可写边界内交付记录器与精确接线补丁，最终仅集成一个wrapper文件。
 - [x] 审阅终态/raw/实际文件，原字节集成；真实Kotlin+原core/inputs/report/policy运行全部检查，原RED与定点外部订正保留。
-- [ ] 单独提交已验实现与host证据；保留旧冻结108项及其他dirty。
+- [x] 单独提交已验实现与host证据`7f1d2f9`；保留旧冻结108项及其他dirty。
 
 ### Task 2: 实包、复核、冻结及唯一诊断
 
@@ -47,3 +47,5 @@
 - [x] 外部免费助手独立只读复核source/供应实包收据/父合同，漏manifest已RED→GREEN；事件数量/标签由独立源码证据解决，不重试native429。两位复核未亲自运行构建/设备。
 - [ ] 冻结实际摘要后fresh设备前置；锁屏时保留pending，不自动解锁。唯一新run有阶段边界/堆数据方可判本诊断完成，资源越线/采样失败按约停止且不重放。
 - [ ] 同run双读、模型/App后核及精确alias/staging恢复；结果/局限/失败同步两端issue/wiki，W3全量门仍单独裁定。
+
+Task2 checkpoint：120文件摘要已冻结，`verify_frozen_contract()`通过；fresh只读前置停在ADB设备不存在。无prepared/run-started/collection，未产生新heap/RSS实测；整个Task2尚未完成。连接恢复后只继续同合同，不重构候选或重放旧批。
