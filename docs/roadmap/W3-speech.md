@@ -1,3 +1,7 @@
+## 2026-11-12：ORT源码归档完整性补充
+
+在保留原11/13归档超时、partial和失败终态的前提下，两个固定 codeload 请求各一次直连恢复成功；13/13归档的声明SHA1、独立SHA256和尺寸均匹配，共53,628,041B，27份归档支撑文本已逐字节复核。父脚本先重核旧材料再重核合并集，68份旧材料及108/120/327/448守卫保持，新增设备/推理0，物理heap run未消耗。该项只完成源码归档完整性；递归二进制组成、source-to-AAR、生产通知、发布和TECNO真机质量/资源门仍未通过，W3/R4/R5保持open。详见[补充结果](../validation/w3-runtime-source-archives-complete-20261112.md)和[机器收据](../validation/w3-runtime-source-archives-complete-20261112.json)。
+
 ## 2026-11-12 更新：固定ORT源码归档与许可补核
 
 已本地提交5d274e6并同步双端#15/wiki，GHcomment6800980175/GLnote43213/GHWiki71350a6，逐字回读一致；[同步收据](../validation/w3-runtime-source-archives-sync-20261112.json)。新marker已用，源码分支未push。

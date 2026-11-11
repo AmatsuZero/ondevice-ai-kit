@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "marker": "w3-runtime-source-archives-complete-20261112",
+  "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+  "baseManifestSHA256": "679cae84ea146460162434c6d3fa8d3bd44fc3a6c9e2e17b2b7a1b048035f254",
+  "verifiedSourceArchives": 13,
+  "archiveDigestMissing": [],
+  "verifiedArchiveBytes": 53628041,
+  "archiveBackedRootNoticeFiles": 24,
+  "mp11SupplementalSourceFiles": 3,
+  "archiveBackedTextFiles": 27,
+  "original11ArchiveEvidencePreserved": true,
+  "originalTimeoutsAndPartialsPreserved": true,
+  "directTransport": {
+    "requests": 2,
+    "automaticRetry": false,
+    "globalProxyChanged": false,
+    "results": [
+      {
+        "depsKey": "pytorch_cpuinfo",
+        "bytes": 3857758,
+        "sha1": "e58d4b47c16a982111c897e669ae4f1821a393d7",
+        "sha256": "2ed3ebc6c2656cc0aafc7af319e5cb0f97cc9b415eae180f566def84f1ca6a29"
+      },
+      {
+        "depsKey": "onnx",
+        "bytes": 18911779,
+        "sha1": "2b2cd58ac7a26df5371266149e0c76776330cdf1",
+        "sha256": "8dc1181d33529a1249e031226126d0699ac9bdfc571ee530ee3a12f4656f2be3"
+      }
+    ]
+  },
+  "frozenGuards": {
+    "arena108": 108,
+    "heap120": 120,
+    "emulator327": 327,
+    "kv288448": 448
+  },
+  "newDeviceOrInferenceCalls": 0,
+  "physicalHeapRunConsumed": false,
+  "historicPatchExecutionVerified": false,
+  "exhaustiveRecursiveCompositionVerified": false,
+  "sourceToAARVerified": false,
+  "finalBinaryMembershipVerified": false,
+  "productionNoticeIntegrationVerified": false,
+  "productionReady": false,
+  "w3Complete": false,
+  "goalStatus": "active"
+}

@@ -1,3 +1,7 @@
+## 2026-11-12：W3 ORT归档恢复补充已完成
+
+新增 `w3-runtime-source-archives-complete-20261112`：保留原11/13归档失败/partial后，固定 cpuinfo 与 onnx 各一次调用级直连 GET 成功；13/13归档SHA1/SHA256/尺寸和27份归档支持文本通过，旧68材料与108/120/327/448守卫保持。没有改变全局代理、没有设备/推理/模型/运行时下载，物理heap run仍未消耗。旧 `w3-runtime-source-archives-20261112` 记录不改；本项不证明source-to-AAR、递归组成、生产通知、发布或W3/R4/R5完成。结果与检查入口：`docs/validation/w3-runtime-source-archives-complete-20261112.{md,json}`。
+
 ## 2026-11-12：W3归档许可补核已提交并双端同步
 
 本地5d274e6精确34文件；GH#15comment6800980175、GL#15note43213、GHWiki71350a645a5bf7ed426cdfb94702d9086a4038f3，两WikiSHAb2622459a673713981f2ef4abe62c2e6f9e6130ed294e585febf4df08e1a6fc7逐字回读一致。收据validation/w3-runtime-source-archives-sync-20261112.json；marker w3-runtime-source-archives-20261112已用勿重发。11完整归档/26文本/13映射父核及68旧材料/108+120+327+448守卫通过，cpuinfo/onnx超时归档未验、只保留固定commit许可，不重试；无设备/推理，物理heaprun未消耗。W3/R4/R5open、goalactive，生产及source-toAAR仍未过。源分支未push，无活动helper/native429不重试。许可原文字节及其23处既有空白提示保持，精确暂存shared自身前缀且其他dirty保留。

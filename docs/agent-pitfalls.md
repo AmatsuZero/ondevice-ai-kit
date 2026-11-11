@@ -1,3 +1,7 @@
+## 超时归档可独立恢复，但不能抹去失败或唯一归因（2026-11-12）
+
+固定cpuinfo/onnx归档最初经默认代理读取TimeoutError；保留原终态/partial并核SHA后，独立调用级`ProxyHandler({})`的HEAD返回200，随后各一次GET取得完整归档且声明SHA1、独立SHA256/尺寸匹配。有效恢复是新目录保留直连收据，不改全局代理、不覆盖旧11/13记录、不自动重试；HEAD本身不等于完整下载成功，不同时点的成功也不证明代理是所有超时的唯一根因。合并13/13归档及27文本的检查仍不证明最终AAR成员、source-to-AAR或生产通知。证据`.omx/artifacts/w3-runtime-materials-20261111/ort-source-archives-recovery-20261112/`和`docs/validation/w3-runtime-source-archives-complete-20261112.md`。
+
 ## 固定源码归档不一定含根级LICENSE文件（2026-11-12）
 
 ORT依赖材料逐归档重核时，mp11的boost-1.82.0归档没有任何独立license/licence/copying命名文件，但README/头文件明确BSL1.0声明；KleidiAI v1.20.0两全文位于根LICENSES/，只筛根级普通文件实际AssertionError。保留首partial后仅加入根LICENSES直接子文件，并保留mp11三份源码声明，不能补造包内LICENSE。cpuinfo/onnx归档流超时保留partial、不自动重试，只补精确commit LICENSE GitBlob且archiveDigestVerified=false。最终11归档SHA1匹配、26文本逐字节核对、68旧材料及108/120/327/448守卫通过；不是最终二进制组成/生产通知通过。证据.omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/与validation/w3-runtime-source-archives-20261112.md。

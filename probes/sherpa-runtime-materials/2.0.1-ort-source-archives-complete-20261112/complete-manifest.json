@@ -1,0 +1,569 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+  "baseManifest": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/source-notice-manifest.json",
+  "baseManifestSHA256": "679cae84ea146460162434c6d3fa8d3bd44fc3a6c9e2e17b2b7a1b048035f254",
+  "sourceDependencyCount": 13,
+  "sourceArchiveDigestVerifiedCount": 13,
+  "sourceArchiveDigestMissing": [],
+  "verifiedArchiveBytes": 53628041,
+  "archiveBackedRootNoticeFiles": 24,
+  "supplementalMp11SourceFiles": 3,
+  "dependencies": [
+    {
+      "observedName": "abseil_cpp",
+      "url": "https://github.com/abseil/abseil-cpp/archive/refs/tags/20250814.0.zip",
+      "logLine": 868,
+      "depsKey": "abseil_cpp",
+      "depsLine": 12,
+      "declaredArchiveSHA1": "a9eb1d648cbca4d4d788737e971a6a7a63726b07",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "abseil-cpp",
+      "noticeStartLine": 2841,
+      "noticeEndLine": 3046,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 3194036,
+      "archiveSHA1": "a9eb1d648cbca4d4d788737e971a6a7a63726b07",
+      "archiveSHA256": "b2bdcf6682d8cb53df365bcc5d6c318a22e55821d9978a10fdb61404c026daff",
+      "archiveRoot": "abseil-cpp-20250814.0",
+      "rootNotices": [
+        {
+          "archiveMember": "abseil-cpp-20250814.0/AUTHORS",
+          "bytes": 295,
+          "sha256": "1fd39030c119b4c97014f59e0ad0ed65f23475bbdf55a52740f31eb82b34b4ee",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/abseil_cpp/AUTHORS"
+        },
+        {
+          "archiveMember": "abseil-cpp-20250814.0/LICENSE",
+          "bytes": 11361,
+          "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/abseil_cpp/LICENSE"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "re2",
+      "url": "https://github.com/google/re2/archive/refs/tags/2024-07-02.zip",
+      "logLine": 926,
+      "depsKey": "re2",
+      "depsLine": 54,
+      "declaredArchiveSHA1": "646e1728269cde7fcef990bf4a8e87b047882e88",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "google/re2",
+      "noticeStartLine": 2240,
+      "noticeEndLine": 2268,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 451539,
+      "archiveSHA1": "646e1728269cde7fcef990bf4a8e87b047882e88",
+      "archiveSHA256": "a835fe55fbdcd8e80f38584ab22d0840662c67f2feb36bd679402da9641dc71e",
+      "archiveRoot": "re2-2024-07-02",
+      "rootNotices": [
+        {
+          "archiveMember": "re2-2024-07-02/LICENSE",
+          "bytes": 1558,
+          "sha256": "6040cda75d90b1738292a631d89934c411ef7ffd543c4d6a1b7edfc8edf29449",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/re2/LICENSE"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "Protobuf",
+      "url": "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v21.12.zip",
+      "logLine": 941,
+      "depsKey": "protobuf",
+      "depsLine": 43,
+      "declaredArchiveSHA1": "7cf2733949036c7d52fda017badcab093fe73bfa",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "protocolbuffers/protobuf",
+      "noticeStartLine": 92,
+      "noticeEndLine": 128,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 7180794,
+      "archiveSHA1": "7cf2733949036c7d52fda017badcab093fe73bfa",
+      "archiveSHA256": "6a31b662deaeb0ac35e6287bda2f3369b19836e6c9f8828d4da444346f420298",
+      "archiveRoot": "protobuf-21.12",
+      "rootNotices": [
+        {
+          "archiveMember": "protobuf-21.12/LICENSE",
+          "bytes": 1732,
+          "sha256": "6e5e117324afd944dcf67f36cf329843bc1a92229a8cd9bb573d7a83130fea7d",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/protobuf/LICENSE"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "date",
+      "url": "https://github.com/HowardHinnant/date/archive/refs/tags/v3.0.1.zip",
+      "logLine": 1009,
+      "depsKey": "date",
+      "depsLine": 15,
+      "declaredArchiveSHA1": "2dac0c81dc54ebdd8f8d073a75c053b04b56e159",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "HowardHinnant/date",
+      "noticeStartLine": 2075,
+      "noticeEndLine": 2108,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 941286,
+      "archiveSHA1": "2dac0c81dc54ebdd8f8d073a75c053b04b56e159",
+      "archiveSHA256": "f4300b96f7a304d4ef9bf6e0fa3ded72159f7f2d0f605bdde3e030a0dba7cf9f",
+      "archiveRoot": "date-3.0.1",
+      "rootNotices": [
+        {
+          "archiveMember": "date-3.0.1/LICENSE.txt",
+          "bytes": 1637,
+          "sha256": "c90f6c00fb961170560299cbda28ca2d45804913aa8b2a9f36dbb8e0028d6930",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/date/LICENSE.txt"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "mp11",
+      "url": "https://github.com/boostorg/mp11/archive/refs/tags/boost-1.82.0.zip",
+      "logLine": 1025,
+      "depsKey": "mp11",
+      "depsLine": 36,
+      "declaredArchiveSHA1": "9bc9e01dffb64d9e0773b2e44d2f22c51aace063",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "Boost",
+      "noticeStartLine": 2327,
+      "noticeEndLine": 2353,
+      "noticeMapping": "generic-Boost-section-not-package-specific",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 232716,
+      "archiveSHA1": "9bc9e01dffb64d9e0773b2e44d2f22c51aace063",
+      "archiveSHA256": "81431bdc44c439a324e02c07ed067f8f556419fd86f2d8b486ff568df6aac899",
+      "archiveRoot": "mp11-boost-1.82.0",
+      "rootNotices": [],
+      "supplementalSourceEvidence": [
+        {
+          "archiveMember": "mp11-boost-1.82.0/README.md",
+          "bytes": 1017,
+          "sha256": "3308ce47301af513c12f048cc773e38788b274e312bea7634011113a729a561e",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/mp11-source-evidence/README.md"
+        },
+        {
+          "archiveMember": "mp11-boost-1.82.0/include/boost/mp11.hpp",
+          "bytes": 641,
+          "sha256": "0833ec323b3026fedf48af005792b5b61a1ec941e08a972cd2226f8f447d6079",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/mp11-source-evidence/mp11.hpp"
+        },
+        {
+          "archiveMember": "mp11-boost-1.82.0/include/boost/mp11/version.hpp",
+          "bytes": 437,
+          "sha256": "dd748ea2e612e47f8dd573fa1808df95115a60581099343aa159bc7b80b1483f",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/mp11-source-evidence/version.hpp"
+        }
+      ]
+    },
+    {
+      "observedName": "nlohmann_json",
+      "url": "https://github.com/nlohmann/json/archive/refs/tags/v3.11.3.zip",
+      "logLine": 1037,
+      "depsKey": "json",
+      "depsLine": 32,
+      "declaredArchiveSHA1": "5e88795165cc8590138d1f47ce94ee567b85b4d6",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "nlohmann/json",
+      "noticeStartLine": 3075,
+      "noticeEndLine": 3098,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 8489998,
+      "archiveSHA1": "5e88795165cc8590138d1f47ce94ee567b85b4d6",
+      "archiveSHA256": "04022b05d806eb5ff73023c280b68697d12b93e1b7267a0b22a1a39ec7578069",
+      "archiveRoot": "json-3.11.3",
+      "rootNotices": [
+        {
+          "archiveMember": "json-3.11.3/LICENSE.MIT",
+          "bytes": 1076,
+          "sha256": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/LICENSE.MIT"
+        },
+        {
+          "archiveMember": "json-3.11.3/LICENSES/Apache-2.0.txt",
+          "bytes": 10280,
+          "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/Apache-2.0.txt"
+        },
+        {
+          "archiveMember": "json-3.11.3/LICENSES/BSD-3-Clause.txt",
+          "bytes": 1460,
+          "sha256": "5a93d5831e1297ab10fe643e1a631e83be392896da14ee2951285a79012df69d",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/BSD-3-Clause.txt"
+        },
+        {
+          "archiveMember": "json-3.11.3/LICENSES/GPL-3.0-only.txt",
+          "bytes": 34670,
+          "sha256": "b6a8bf63ae2c95b0aa256ee774680d7bd18f21f457da75466f7610b3b16acc4e",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/GPL-3.0-only.txt"
+        },
+        {
+          "archiveMember": "json-3.11.3/LICENSES/MIT.txt",
+          "bytes": 1078,
+          "sha256": "b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/MIT.txt"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "GSL",
+      "url": "https://github.com/microsoft/GSL/archive/refs/tags/v4.2.1.zip",
+      "logLine": 1040,
+      "depsKey": "microsoft_gsl",
+      "depsLine": 33,
+      "declaredArchiveSHA1": "1094e3bb7a8af763dcb136ccd676e6e75e614eec",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "Microsoft GSL",
+      "noticeStartLine": 1040,
+      "noticeEndLine": 1063,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 84222,
+      "archiveSHA1": "1094e3bb7a8af763dcb136ccd676e6e75e614eec",
+      "archiveSHA256": "c9291d95f5f6e5c561990d06a589b01d89e553d0f366f0ce723dd1788e7a6076",
+      "archiveRoot": "GSL-4.2.1",
+      "rootNotices": [
+        {
+          "archiveMember": "GSL-4.2.1/LICENSE",
+          "bytes": 1157,
+          "sha256": "4c21dc82a1c7186ea754fd59d504c00947953a3401fe8e24eaa44109ef8e2555",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/microsoft_gsl/LICENSE"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "safeint",
+      "url": "https://github.com/dcleblanc/SafeInt/archive/refs/tags/3.0.28.zip",
+      "logLine": 1041,
+      "depsKey": "safeint",
+      "depsLine": 55,
+      "declaredArchiveSHA1": "23f252040ff6cb9f1fd18575b32fa8fb5928daac",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "dcleblanc/SafeInt",
+      "noticeStartLine": 3101,
+      "noticeEndLine": 3124,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 626378,
+      "archiveSHA1": "23f252040ff6cb9f1fd18575b32fa8fb5928daac",
+      "archiveSHA256": "3ffbd9a2fdff45da77da3e7269e9aa512ea43bed5c38ce8fd8f3d1068a032c3f",
+      "archiveRoot": "SafeInt-3.0.28",
+      "rootNotices": [
+        {
+          "archiveMember": "SafeInt-3.0.28/LICENSE",
+          "bytes": 1066,
+          "sha256": "a46919cc8f01eb73f6e4b84af0d41b46b2a33b87c74e864279ef585079f82da4",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/safeint/LICENSE"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "flatbuffers",
+      "url": "https://github.com/google/flatbuffers/archive/refs/tags/v23.5.26.zip",
+      "logLine": 1053,
+      "depsKey": "flatbuffers",
+      "depsLine": 25,
+      "declaredArchiveSHA1": "59422c3b5e573dd192fead2834d25951f1c1670c",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "google/flatbuffers",
+      "noticeStartLine": 2563,
+      "noticeEndLine": 2768,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 3209602,
+      "archiveSHA1": "59422c3b5e573dd192fead2834d25951f1c1670c",
+      "archiveSHA256": "57bd580c0772fd1a726c34ab8bf05325293bc5f9c165060a898afa1feeeb95e1",
+      "archiveRoot": "flatbuffers-23.5.26",
+      "rootNotices": [
+        {
+          "archiveMember": "flatbuffers-23.5.26/LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/flatbuffers/LICENSE"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "Eigen3",
+      "url": "https://github.com/eigen-mirror/eigen/archive/1d8b82b0740839c0de7f1242a3585e3390ff5f33/eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33.zip",
+      "logLine": 1180,
+      "depsKey": "eigen",
+      "depsLine": 24,
+      "declaredArchiveSHA1": "05b19b49e6fbb91246be711d801160528c135e34",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "Eigen",
+      "noticeStartLine": 417,
+      "noticeEndLine": 799,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 4075744,
+      "archiveSHA1": "05b19b49e6fbb91246be711d801160528c135e34",
+      "archiveSHA256": "6a60d76351f97132669daeeb721d6bf14b008101883ad2d687a3201c5c461eb0",
+      "archiveRoot": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33",
+      "rootNotices": [
+        {
+          "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.APACHE",
+          "bytes": 11362,
+          "sha256": "03379001a7b12a2ec997a25554247d985270b353c10d5bafee9ac8d6519820b7",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.APACHE"
+        },
+        {
+          "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.BSD",
+          "bytes": 1517,
+          "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.BSD"
+        },
+        {
+          "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.MINPACK",
+          "bytes": 2193,
+          "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.MINPACK"
+        },
+        {
+          "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.MPL2",
+          "bytes": 16727,
+          "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.MPL2"
+        },
+        {
+          "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.README",
+          "bytes": 264,
+          "sha256": "db640ff2bd90c6abd6a4d3fbb351e0ee4d555417cf840492054d1cbb2ea85644",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.README"
+        },
+        {
+          "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/LICENSE",
+          "bytes": 16725,
+          "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/LICENSE"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "kleidiai",
+      "url": "https://github.com/ARM-software/kleidiai/archive/refs/tags/v1.20.0.tar.gz",
+      "logLine": 1184,
+      "depsKey": "kleidiai",
+      "depsLine": 62,
+      "declaredArchiveSHA1": "6895e72b3d5cf1173358164cb3d64c9d7d33cc84",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "KleidiAI",
+      "noticeStartLine": 6051,
+      "noticeEndLine": 6121,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "archiveBytes": 2372189,
+      "archiveSHA1": "6895e72b3d5cf1173358164cb3d64c9d7d33cc84",
+      "archiveSHA256": "e4b84c369f0f39af1660ac71c30f74038d4b89e1f20dde070bb96398382a111f",
+      "archiveRoot": "kleidiai-1.20.0",
+      "rootNotices": [
+        {
+          "archiveMember": "kleidiai-1.20.0/LICENSES/Apache-2.0.txt",
+          "bytes": 10280,
+          "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/kleidiai/Apache-2.0.txt"
+        },
+        {
+          "archiveMember": "kleidiai-1.20.0/LICENSES/BSD-3-Clause.txt",
+          "bytes": 1460,
+          "sha256": "5a93d5831e1297ab10fe643e1a631e83be392896da14ee2951285a79012df69d",
+          "byteForByteRetained": true,
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/kleidiai/BSD-3-Clause.txt"
+        }
+      ],
+      "supplementalSourceEvidence": []
+    },
+    {
+      "observedName": "pytorch_cpuinfo",
+      "url": "https://github.com/pytorch/cpuinfo/archive/4628dc060ce4e82345dc166bbac875609db4ff69.zip",
+      "logLine": 1039,
+      "depsKey": "pytorch_cpuinfo",
+      "depsLine": 53,
+      "declaredArchiveSHA1": "e58d4b47c16a982111c897e669ae4f1821a393d7",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "pytorch/cpuinfo",
+      "noticeStartLine": 4419,
+      "noticeEndLine": 4452,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "rootNotices": [
+        {
+          "archiveMember": "cpuinfo-4628dc060ce4e82345dc166bbac875609db4ff69/LICENSE",
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/pytorch_cpuinfo/LICENSE",
+          "bytes": 1424,
+          "sha256": "8e7e60636c3aa0cb03571a1a841ce5697f9551ff92b3c426c2561613d15ade70",
+          "byteForByteRetained": true
+        }
+      ],
+      "priorArchiveFailurePreserved": "TimeoutError; original partial and error retained; no archive retry",
+      "priorFixedCommitNotices": [
+        {
+          "archiveMember": "fixed-commit/LICENSE",
+          "path": "notices/pytorch_cpuinfo/LICENSE",
+          "bytes": 1424,
+          "sha256": "8e7e60636c3aa0cb03571a1a841ce5697f9551ff92b3c426c2561613d15ade70",
+          "byteForByteRetained": true,
+          "gitBlobSHA1": "3f9a4f020cec01f29e5b9dce6630e02d82f2118d",
+          "sourceURL": "https://github.com/pytorch/cpuinfo/blob/4628dc060ce4e82345dc166bbac875609db4ff69/LICENSE",
+          "sourceCommit": "4628dc060ce4e82345dc166bbac875609db4ff69",
+          "sourceType": "fixed-commit-git-blob-not-archive-member"
+        }
+      ],
+      "archiveBytes": 3857758,
+      "archiveSHA1": "e58d4b47c16a982111c897e669ae4f1821a393d7",
+      "archiveSHA256": "2ed3ebc6c2656cc0aafc7af319e5cb0f97cc9b415eae180f566def84f1ca6a29",
+      "recoveryTransport": "direct-no-proxy-invocation-only"
+    },
+    {
+      "observedName": "onnx",
+      "url": "https://github.com/onnx/onnx/archive/refs/tags/v1.22.0.zip",
+      "logLine": 1140,
+      "depsKey": "onnx",
+      "depsLine": 40,
+      "declaredArchiveSHA1": "2b2cd58ac7a26df5371266149e0c76776330cdf1",
+      "archiveDigestVerifiedHere": true,
+      "role": "source-dependency",
+      "noticeHeading": "onnx",
+      "noticeStartLine": 208,
+      "noticeEndLine": 414,
+      "noticeMapping": "component-heading-present",
+      "finalBinaryMembershipVerified": false,
+      "rootNotices": [
+        {
+          "archiveMember": "onnx-1.22.0/LICENSE",
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/onnx/LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "byteForByteRetained": true
+        },
+        {
+          "archiveMember": "onnx-1.22.0/NOTICE",
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/onnx/NOTICE",
+          "bytes": 2133,
+          "sha256": "4d680fb1f48f07f134c9f7a8d715303b8f5160b5757bc9eec4cac783703ea592",
+          "byteForByteRetained": true
+        }
+      ],
+      "priorArchiveFailurePreserved": "TimeoutError; original partial and error retained; no archive retry",
+      "priorFixedCommitNotices": [
+        {
+          "archiveMember": "fixed-commit/LICENSE",
+          "path": "notices/onnx/LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "byteForByteRetained": true,
+          "gitBlobSHA1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+          "sourceURL": "https://github.com/onnx/onnx/blob/2bb50465112feca9003e1ed654d77f01ff1415ca/LICENSE",
+          "sourceCommit": "2bb50465112feca9003e1ed654d77f01ff1415ca",
+          "sourceType": "fixed-commit-git-blob-not-archive-member"
+        }
+      ],
+      "archiveBytes": 18911779,
+      "archiveSHA1": "2b2cd58ac7a26df5371266149e0c76776330cdf1",
+      "archiveSHA256": "8dc1181d33529a1249e031226126d0699ac9bdfc571ee530ee3a12f4656f2be3",
+      "recoveryTransport": "direct-no-proxy-invocation-only"
+    }
+  ],
+  "overlay": [
+    {
+      "depsKey": "pytorch_cpuinfo",
+      "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives-recovery-20261112/downloads/pytorch_cpuinfo.zip",
+      "archiveSHA1": "e58d4b47c16a982111c897e669ae4f1821a393d7",
+      "archiveSHA256": "2ed3ebc6c2656cc0aafc7af319e5cb0f97cc9b415eae180f566def84f1ca6a29",
+      "archiveBytes": 3857758,
+      "rootNotices": [
+        {
+          "archiveMember": "cpuinfo-4628dc060ce4e82345dc166bbac875609db4ff69/LICENSE",
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/pytorch_cpuinfo/LICENSE",
+          "bytes": 1424,
+          "sha256": "8e7e60636c3aa0cb03571a1a841ce5697f9551ff92b3c426c2561613d15ade70",
+          "byteForByteRetained": true
+        }
+      ],
+      "priorGitBlobLicenseMatchesArchive": true
+    },
+    {
+      "depsKey": "onnx",
+      "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives-recovery-20261112/downloads/onnx.zip",
+      "archiveSHA1": "2b2cd58ac7a26df5371266149e0c76776330cdf1",
+      "archiveSHA256": "8dc1181d33529a1249e031226126d0699ac9bdfc571ee530ee3a12f4656f2be3",
+      "archiveBytes": 18911779,
+      "rootNotices": [
+        {
+          "archiveMember": "onnx-1.22.0/LICENSE",
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/onnx/LICENSE",
+          "bytes": 11358,
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "byteForByteRetained": true
+        },
+        {
+          "archiveMember": "onnx-1.22.0/NOTICE",
+          "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/onnx/NOTICE",
+          "bytes": 2133,
+          "sha256": "4d680fb1f48f07f134c9f7a8d715303b8f5160b5757bc9eec4cac783703ea592",
+          "byteForByteRetained": true
+        }
+      ],
+      "priorGitBlobLicenseMatchesArchive": true
+    }
+  ],
+  "originalTimeoutReceiptsAndPartialsPreserved": true,
+  "globalProxyChanged": false,
+  "newRuntimeBinaryOrModelDownloads": 0,
+  "newDeviceOrInferenceCalls": 0,
+  "historicPatchExecutionVerified": false,
+  "exhaustiveRecursiveCompositionVerified": false,
+  "sourceToAARVerified": false,
+  "finalBinaryMembershipVerified": false,
+  "productionNoticeIntegrationVerified": false,
+  "productionReady": false,
+  "w3Complete": false
+}
