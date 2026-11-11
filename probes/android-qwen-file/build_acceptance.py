@@ -67,7 +67,7 @@ result = {'files': {}, 'deviceOperations': 0, 'actualClassesVerified': [], 'runt
 certs = []
 for apk, name, package, classes in [
     (main[0], 'main.apk', 'io.ondeviceai.acceptance.qwenfile',
-     ['QwenFileActivity', 'ModelSpec', 'QwenModelFiles', 'CaseStream', 'StageState', 'CaseState', 'TwoStageCaseRunner']),
+     ['QwenFileActivity', 'QwenFileInputs', 'InputCase', 'QwenFileReport', 'FileRow', 'FileRunState', 'ModelSpec', 'QwenModelFiles', 'CaseStream', 'StageState', 'CaseState', 'TwoStageCaseRunner']),
     (test[0], 'test.apk', 'io.ondeviceai.acceptance.qwenfile.test', ['QwenFileInstrumentation'])
 ]:
     badging = command([aapt, 'dump', 'badging', apk])

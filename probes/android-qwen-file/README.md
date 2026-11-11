@@ -9,6 +9,7 @@ The fixed pipeline uses full original 16kHz s16LE PCM, auto language admission b
 Parent tools:
 
 - `check_core.py CANDIDATE OUTPUT_DIR`: real Kotlin execution with fault injection; output directories are exclusive.
+- `check_inputs.py CANDIDATE OUTPUT_DIR`, `check_activity.py CANDIDATE OUTPUT_DIR` and `check_report.py CANDIDATE OUTPUT_DIR`: supporting-module checks; see `docs/validation/w3-qwen-android-file-modules-20261111.md` for accepted hashes and original failures.
 - `check_wrapper.py CORE ACTIVITY INSTRUMENTATION OUTPUT_DIR`: real case core and fixture bytes, host Android/JNI doubles. This does not prove native/device runtime.
 - `check_parent.py`: resource boundary and false-acceptance regressions, synthetic reports only.
 - `prepare_build.py`: requires accepted candidate hashes; generates an isolated Gradle harness and freezes a distinct run plan.

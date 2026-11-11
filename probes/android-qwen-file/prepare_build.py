@@ -30,7 +30,7 @@ def main():
     (SOURCE/'AndroidManifest.xml').write_text(manifest)
     for d in ('main-src','test-src','test-assets/inputs'):
         (SOURCE/d).mkdir(parents=True,exist_ok=True)
-    for name in ('QwenTwoStageCore.kt','QwenFileActivity.kt'):
+    for name in ('QwenTwoStageCore.kt','QwenFileActivity.kt','QwenFileInputs.kt','QwenFileReport.kt'):
         shutil.copy2(ROOT/'probes/android-qwen-file'/name,SOURCE/'main-src'/name)
     shutil.copy2(ROOT/'probes/android-qwen-file/QwenFileInstrumentation.kt',SOURCE/'test-src/QwenFileInstrumentation.kt')
     shutil.copy2(ROOT/'probes/android-qwen-load/QwenLoadCore.kt',SOURCE/'main-src/QwenLoadCore.kt')

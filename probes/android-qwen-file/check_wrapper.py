@@ -134,7 +134,8 @@ class OfflineRecognizerResult(val text:String)
                 jar('org.jetbrains.kotlinx', 'kotlinx-coroutines-core-jvm', '1.8.0')]
     java = ROOT / 'artifacts/toolchains/jdk-21.0.2.jdk/Contents/Home/bin/java'
     classes = output / 'classes'; classes.mkdir()
-    sources = [core, activity, wrapper]
+    sources = [core, activity, wrapper, Path(__file__).with_name('QwenFileInputs.kt'),
+               Path(__file__).with_name('QwenFileReport.kt')]
     args = [str(java), '-cp', ':'.join(map(str, compiler)), 'org.jetbrains.kotlin.cli.jvm.K2JVMCompiler',
             '-no-reflect', '-no-stdlib', '-classpath', ':'.join(map(str, [stdlib, annotations, jsonjar])),
             '-d', str(classes)] + list(map(str, sources + list(output.glob('*.kt'))))
