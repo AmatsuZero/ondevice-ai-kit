@@ -1,3 +1,12 @@
+## 2026-11-11：W3 FILE真机内存门停止并恢复，原批已消耗
+
+本地HEAD7593b25，源码未push。外壳独立免费hy3复核已自然终态，无Critical/Important；原文线程说明错误由官方文档及父裁定订正，不额外smoke。
+用户确认解锁后，唯一run w3-qwen-file-20261111-01构造1/成功9.019536847s；首片处理时38样本maxRSS1703575552B（1.586578GiB）超过固定1.5GiB，父按合同停止。0完成/可评分，首片running、64planned；非终态实际最终decode计数未知，最后持久化decode0不能当零解码。没有显式release/destroy ack。
+同run双读SHA98d978911f42fae673317ddd63d6f30415d31096dfe9d9ebe197cc10aa0d77b7一致；六模型及普通App/模型后核通过，精确alias/PID/instrumentation/stage均无，普通Demo实际前台。结果docs/validation/w3-qwen-android-file-observed-20261111.md，恢复artifacts/verification/w3-qwen-file-20261111/restoration-checked.json。
+本批及原load-only均已消耗，不重跑、不提高资源门。无麦克风/AiAi/新模型下载/生产修改。W3保持open，Android质量/完整成本与最终许可/发布复审仍缺。
+当前无活动helper。先将本次真机结果同步两端#15/Wiki并逐字回读，再只读核既有runtime内存配置；cpu:config解析虽存在，但Qwen自身CPU判断只比较cpu/空字符串，必须核分支及固定AAR，不能直接采用或开新run。
+下方“复核运行中/新FILE未消耗/零安装”均为历史。78保护文件剥离本任务精确prepend后保持，旧dirty/untracked不整体stage。
+
 ## 2026-11-11：W3新FILE外壳与实包已通过，独立复核运行中
 
 本地已提交2b64ba4（三支持模块）、3a6fc1d（外壳/实包）、ebaa256（只stage本任务pitfalls条目），未push源码。
