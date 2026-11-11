@@ -1,3 +1,7 @@
+## KV288父端prepare：跳过唯一旧文件后需建目标父目录（2026-11-11）
+
+新隔离prepare跳过原唯一test-src文件后，该目录未由复制循环创建；copy2新wrapper真实FileNotFoundError，后续build被缺candidate收据阻断，零Gradle/device。保留partial source并补明确mkdir后fresh79文件/75-taskbuild/实包及32组6003host通过。未来跳过整目录唯一文件时须显式建新目标父目录；准备失败后先核恢复再执行依赖步骤，不把后续阻断当第二根因。证据artifacts/verification/w3-qwen-kv288-emulator-20261111/{prepare-first-failure.json,source-prepare-missing-test-dir/}。
+
 ## 采集适配计数断言失败与只读恢复（w3-qwen-arena-emulator-20261111）
 - 症状：采集在报告双读与六模型后哈希后失败于冻结父文件 line130 断言 `collector.count(old)==1`：实际完整堆源码含两处精确报告目录字面量（prior_collection + 未用 main REPORT 赋值），故计数=2。
 - 已验证成因：327 项冻结合同所绑定的原 heap 父脚本有两处报告目录字面量，适配误假设仅一处；非 adb 远程 stat 分割错误（本批已用 shlex.join 修复，未发生）。
