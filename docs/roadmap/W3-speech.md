@@ -1,3 +1,7 @@
+## 同步检查点（2026-11-11）
+
+嵌套 ORT 补核本地已提交 `19ef630`，两端 #15 与 Wiki 已逐字回读；两 Wiki SHA 一致，新 marker 已用，见[同步收据](../validation/w3-runtime-ort-build-observed-sync-20261111.json)。本轮结束前 ADB 清单仍空，heap 120 项冻结守卫保持、唯一 run 未消耗；没有新安装/推理/二进制下载。W3/R4/R5 仍 open，下一项是 TECNO 连接恢复后的原合同单片诊断；出处及生产余门保持。
+
 ## 最新进展：嵌套 ORT 构建出处补核（2026-11-11）
 
 免费 hy3 订正版原字节经父验收；实际 arm64 日志确认 ORT 33ca962、NNAPI/API27/LTO/mimalloc OFF，arm64 工件上传/下载摘要一致。实际执行头与 release tag 工作流不同，已纠正首稿写反；collect 的 Maven 1.26.0 回退+四 ABI .so 覆盖及 HF 拒绝/空重试保留。四成员大小只是印证，404 只代表具体查询结果；源码到 exact AAR/递归静态组成/生产通知/发布复审仍缺，不能从构建参数推出手机内存根因。2 GitBlob/50 日志摘录、原 50+15 材料和 108/120 冻结全部保持。[父裁定](../validation/w3-runtime-ort-parent-assessment-20261111.md)／[机器收据](../validation/w3-runtime-ort-build-observed-20261111.json)。

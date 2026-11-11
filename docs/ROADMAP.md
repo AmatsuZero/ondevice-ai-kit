@@ -1,3 +1,5 @@
+W3同步（2026-11-11）：嵌套ORT补核本地19ef630，双端#15/Wiki逐字回读且Wiki摘要一致；ADB清单仍空、原heap120冻结保持/run未消耗，W3/R4/R5仍open。[同步收据](validation/w3-runtime-ort-build-observed-sync-20261111.json)。
+
 W3最新（2026-11-11）：嵌套ORT官方arm64构建/collect文本补核通过，2GitBlob/50日志摘录、原50+15材料和108/120冻结保持；executed/tag差异、Maven1.26.0回退及HF空重试已记录。精确二进制对应/递归静态组成/生产通知/发布复审仍缺；ADB清单空、heaprun未消耗，W3/R4/R5open。[父裁定](validation/w3-runtime-ort-parent-assessment-20261111.md)。
 
 ## 2026-11-11 W3构建依赖补核
