@@ -6,6 +6,8 @@
 
 ## W3 host probes: validation and native dispatch receipts (2026-11-10)
 
+- **framework/shell目录同inode不保证readlink字面相同**：arena真机政策收取把framework `/data/data/.../no_backup` 与shell relative解析出的 `/data/user/0/.../no_backup`比较，误记receipt/file false；首补核又假定两种absolute path均解析到同一字符串而断言失败。原报告/评分保持，后仅续取同run，精确三路径目录及配置各自sameUID device/inode相同、有界21B读取精确20B/SHA/receipt/provider全部一致，5错inode/错路径变异拒绝。补核原冻结源码/APK未改，也不新增模型调用；完整验收仍因内存停止等六门失败，不能用路径恢复声称native配置生效。证据`docs/validation/w3-qwen-arena-observed-20261111.md`及本机`framework-path-diagnostic.json`、`allocator-policy-framework-collected.json`；未来父端不能单凭shell规范化字符串代替framework路径身份。
+
 - **复核清单要区分直接绑定与传递绑定，同run续取不等于重放**：arena父工具只读复核指出essential集合遗漏，部分Kotlin其实已受candidate/sourceFiles与APK摘要传递绑定，但baseline检查确未直接必需；以完整有效合成合同为基线逐一删四项，实测4fail后补直接集合。政策收据缺失则结构化失败；基线collection完成、政策读取中断时新增collect-policy，先绑原双读/run/source/六模型收据和当前APK/设备报告SHA，仅有界续取；评分改用新安全basename保留旧失败。相关RED/原报告保留，22父+原8父/31metricsGREEN；零新native，合同冻结后只读preflight锁屏零安装。证据`docs/validation/w3-qwen-arena-parent-review-20261111.md`与本次`parent-review-{red,fixed-green}/`；“复核无阻断”不能代替未过设备门。
 
 - **新父端合同不能允许空摘要清单，政策取回也须有界**：2026-11-11 arena父端首稿17项扩展检查中，essential hashes可为空、收政策用cat无上限；两故障回归实际2fail后，要求关键实包/计划/生产保护/父源码/双复核/协议摘要全部存在，并仅head读取21B核精确20B。新增main入口无报告时又缺显式计数/coverage，KeyError RED后补countsAreExactTerminalEvidence=false/completedConsistentRows=0；最终17检查通过。全部synthetic/host，零设备/native；不把通过当合同已冻结或配置native生效。证据`.omx/artifacts/w3-qwen-arena-wrapper-20261111/{parent-boundary-red,parent-entrypoint-red,parent-final-green}/`，旧父工具/已消耗run不改。

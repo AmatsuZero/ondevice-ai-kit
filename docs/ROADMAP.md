@@ -1,3 +1,5 @@
+W3最新（2026-11-11）：arena-off真机唯一run完成24/65，中文20/20 CER6.78%；第25项期间RSS1.525410GiB越固定1.5GiB门停止，英文仅4项、AMI/挑战未执行，完整质量成本未过。413样本/258.937s、同run政策补核/双读/模型后核及普通App恢复通过；原批已消耗不重放，W3open。[真机结果](validation/w3-qwen-arena-observed-20261111.md)。下方待解锁为历史。
+
 W3最新（2026-11-11）：arena父工具复核修正后22检查+原8父/31评分通过，108摘要新诊断合同冻结；TECNO当前安全锁屏、零新安装/模型调用，已请求这次解锁。外壳/APK不变，原失败不重放、资源门不放宽，W3open。[最新准备](validation/w3-qwen-arena-ready-20261111.md)。下方未冻结/复核中为历史。
 
 W3最新（2026-11-11）：CPU arena-off独立外壳/实包已通过30组4113/政策13组41、离线构建27.24s/lint0e7w及16类65PCM核验，独立源码复核无Critical/Important代码缺陷；父诊断17检查通过、复核进行中，尚无新冻结run/安装/native。原FILE内存失败保留、预算不放宽，W3open。[实包](validation/w3-qwen-arena-wrapper-20261111.md)／[拟定诊断](validation/w3-qwen-arena-diagnostic-protocol-20261111.md)。下方生成中是历史。

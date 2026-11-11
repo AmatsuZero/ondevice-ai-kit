@@ -2,6 +2,8 @@
 
 更新：2026-11-11。状态：**open；用户已明确要求继续改进，R4/R5 不再等待用户选择接受现状**。当前 TECNO 的 R1–R3 系统 ASR 已按用户接受的已知限制完成范围裁定；固定前缀、AMI 六个端/片段及两端持续观测已归档，质量与生产预算未通过。
 
+最新[arena-off 真机结果](../validation/w3-qwen-arena-observed-20261111.md)：唯一新 run 完成24/65项，中文20/20非空、CER40/590=6.78%；近场英文仅4/20、子集WER9/67=13.43%，AMI与挑战全部未执行。第25项期间采样RSS1637896192B=1.525410GiB超过固定1.5GiB，父按约停止；413样本/258.937s，已完成片段两阶段RTF1.04–1.68。非终态精确最终调用数未知，无整recognizer释放/destroy ack。报告双读、六模型后核、精确alias/staging清理与普通App前台恢复通过。framework与shell路径字面值误判的原评分保留，同run只读device/inode及有界20B补核通过；108冻结文件/APK未改，native内部effect仍unverified。批次已消耗，不重放/提高预算；中文指标有进展，完整执行、Android全量质量/成本和发布仍未过。下方“等待解锁/零安装”均为此前准备记录。
+
 最新设备诊断准备（2026-11-11）：父工具独立复核发现已修正，22检查+原8父/31评分通过；arena单变量新合同已冻结108项摘要。TECNO fresh preflight Awake=false/unlocked=false、新alias不存在，零安装/构造/解码，等待本次解锁。原FILE批保持失败并已消耗；新run只请求关闭arena，1.5GiB/512MiB/120s不变。[最新准备与边界](../validation/w3-qwen-arena-ready-20261111.md)。下方“尚未冻结/父复核中”是此前准备记录。
 
 内存变体实包准备完成（2026-11-11）：外部 arena-off 外壳原样集成，30组4113断言、政策重验13组41、离线构建27.24s/lint0error7warning及实包16类/65PCM/四arm64摘要/零权限通过；独立源码复核无Critical/Important代码缺陷。父端独立诊断工具17检查通过、复核进行中；新设备合同尚未冻结/安装/运行，native消费、省内存和Android质量仍未验证。[实包](../validation/w3-qwen-arena-wrapper-20261111.md)／[复核](../validation/w3-qwen-arena-wrapper-review-20261111.md)／[拟定合同](../validation/w3-qwen-arena-diagnostic-protocol-20261111.md)。下方“外壳仍生成中”是此前准备记录。
@@ -107,7 +109,7 @@ Android先冻结[load-only合同](../validation/w3-qwen-android-load-protocol-20
 - [x] R1 范围裁定：当前 TECNO 系统 on-device en-US 识别按用户接受的已知限制收口；实测仍 BACKEND_UNAVAILABLE/MISSING_ASSETS，未通过。无新的下载或录音授权，不再安排重试。
 - [x] R2 范围裁定：当前 TECNO 系统麦克风背景语音因资源前置未满足而未执行，按已知限制接受；没有用合成噪声文件代替通过。
 - [x] R3 范围裁定：当前 TECNO 系统麦克风中断/取消/重入余项因资源前置未满足而未执行，按已知限制接受；已验 iPhone 生命周期保留原范围，不重复录制。
-- [ ] R4：Qwen两阶段Mac独立确认已过，原tiny/Apple失败保留；当前缺Android新候选的实际质量/完整两阶段成本及再分发/独立复审，不把Mac结果改记手机通过。原前缀、AMI六组合、固定增益/no-VAD均已结束；不再重放旧诊断，见[新候选结果](../validation/w3-qwen-independent-observed-20261110.md)。
+- [ ] R4：Qwen两阶段Mac独立确认已过，原tiny/Apple失败保留；Android arena-off已完成中文20/20且CER6.78%，但整批在24/65后内存停止，英文仅4项、AMI/挑战未执行，完整质量/成本及再分发/独立复审仍缺。不能拿Mac或中文指标代替全量手机通过。原前缀、AMI六组合、固定增益/no-VAD均已结束；不再重放已消耗诊断，见[手机本批](../validation/w3-qwen-arena-observed-20261111.md)。
 - [ ] R5：Apple FILE ASR与Sherpa同来源持续观测均已验收，不再重跑；主代理继续提出可靠可测项、缺测边界和预算建议，需产品取舍时提交具体方案。不能把采样RSS或长达600s的paced批次当预算通过。[Apple本批](../validation/w8-apple-asr-sustained-20261110.md)，整包资源要求继续归W8。
 
 ## 责任、风险与交付

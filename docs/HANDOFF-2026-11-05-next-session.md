@@ -1,3 +1,12 @@
+## 2026-11-11：W3 arena真机24/65后内存停止，已恢复
+
+唯一run w3-qwen-arena-20261111-01已消耗：构造1/成功9.075710385s，413RSS样本/258.937s，max1637896192B=1.525410GiB超过固定1.5GiB，父按约force-stop。24完整/1中断running/40planned；中文20/20 CER40/590=6.78%，英文4/20子集WER9/67=13.43%，AMI12/挑战13全部未执行。完成子集case7.252–12.210s/RTF1.04–1.68，非native-only/warm预算。整执行/全量质量/成本未过，W3open，不能再让用户接受R4R5现状或重放原批。
+非终态最后持久化decode49/stream50，实际最终数未知；无整recognizer显式release/destroyack。报告双读SHA3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d，六模型/普通App模型后核及精确alias/PID/instrumentation/staging清理、普通Demo前台通过。
+父原政策收取将/data/user/0与framework/data/data字面比较误拒；保留原false评分和首补核断言失败，后只读三路径sameUID device/inode身份、有界21B读精确20B/SHA/receipt/provider核通过，5错身份变异拒绝。原108冻结文件/APK不改，不重建；native内部effect仍false/unverified，不能拿不同停止进度RSS差称节省量。补核脚本.omx/artifacts/w3-qwen-arena-wrapper-20261111/collect-framework-policy.py，新收据allocator-policy-framework-collected.json及parent-arena-acceptance-framework.json。
+入口docs/validation/w3-qwen-arena-observed-20261111.{md,json}，本机原件artifacts/verification/w3-qwen-arena-wrapper-20261111/。不开麦克风/AiAi/新模型下载/生产改动，旧默认FILE/load-only也不重放。
+本次已取18份固定官方小文本/GitBlob核，runtime材料盘点进行；免费hy3运行时范围报告已终态245.406s，候选7691B有多处源码计数/排除/工具错误自报需父订正，尚非许可验收，勿重派同任务。目录/private/tmp/odai-hy3-w3-runtime-notice-scope-20261111/，会话83360终态。旧native429不重试。
+78保护文件续接时76原hash一致，另两F08文档已有漂移，另存resume-protected-before并保持；不要回滚或整体stage。本文和ROADMAP只stage本任务新prepend。新设备结果尚待两端issue/wiki同步，旧prepared marker勿重复；源码分支未push。下方锁屏零安装为历史。
+
 ## 2026-11-11：W3 arena诊断已冻结，TECNO锁屏零安装
 
 外壳/实包见本地d42a6f5；新父工具review334.102s/22context保持，主要发现已单次修正，22parent+原8parent/31metricsGREEN。缺四essential项与政策收据结构化失败的RED保留；独立collect-policy绑定原双读/run/source/六模型收据及当前APK/设备报告SHA，评分新basename保留旧失败。原外部wrapper/policy/APK未改，无重建/新native child。
