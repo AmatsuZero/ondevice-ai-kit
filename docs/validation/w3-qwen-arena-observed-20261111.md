@@ -29,3 +29,5 @@
 补核仅排除了父端路径字面值误判；新评分仍因 terminal、host、release、teardown、rowsComplete、rssSamples 六项失败而拒绝完整验收。生产通知保留、运行时传递性许可、独立发布复审和剩余 W3/W8 资源项继续独立，不因本子集通过而关闭。
 
 [机器收据](w3-qwen-arena-observed-20261111.json)包含 24 对公开 reference/hypothesis、耗时与证据摘要，便于复算。冻结合同见[诊断协议](w3-qwen-arena-diagnostic-protocol-20261111.md)；本机全部原件位于 `artifacts/verification/w3-qwen-arena-wrapper-20261111/`，补核父脚本位于 `.omx/artifacts/w3-qwen-arena-wrapper-20261111/collect-framework-policy.py`。本机目录不保证随 Git 分发。
+
+结果已同步 GitHub #15 comment6786642535、GitLab #15 note42843 及双端专题 Wiki；GH Wiki commit `394efcf30127b385b16074c426c19bf789901a0f`，两页内容 SHA `a3d6f46a7465e1a9604505f069622ab44afcae45f0695d7f978a12bc818dd1e8` 相同。首次 GitLab 只读请求 EOF 原件保留，恢复仅处理 GitLab，没有重复发送已成功的 GitHub 评论。[逐端回读收据](w3-qwen-arena-observed-sync-20261111.json)。

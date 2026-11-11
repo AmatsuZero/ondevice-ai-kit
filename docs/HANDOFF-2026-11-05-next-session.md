@@ -1,3 +1,9 @@
+## 2026-11-11：W3 arena设备结果双端已同步
+
+本地结果713f211；GH#15comment6786642535、GL#15note42843已回读，两WikiSHA a3d6f46a7465e1a9604505f069622ab44afcae45f0695d7f978a12bc818dd1e8一致，GHWiki394efcf30127b385b16074c426c19bf789901a0f。收据docs/validation/w3-qwen-arena-observed-sync-20261111.json。首次GL只读EOF保留，恢复只处理GL，未重发GH。源码未push。
+新运行时材料helper已终态且原文/错误保留：25Read/1Write，实际1次pitfalls超限，与自报零错误矛盾；18份源码误记23，未供许可文本即填许可标签、未证排除项不能照抄。原候选未当最终许可验收。父已盘点AAR21实际文件/16so（四ABI各四库）及ELF动态依赖，取得7来源的8份许可/通知文本并核GitBlob；传递依赖仍在追踪，不能据dynamic NEEDED排除静态组件。原108合同保持，设备已恢复、无活动识别。
+下方尚待发布/助手进行中为历史。
+
 ## 2026-11-11：W3 arena真机24/65后内存停止，已恢复
 
 唯一run w3-qwen-arena-20261111-01已消耗：构造1/成功9.075710385s，413RSS样本/258.937s，max1637896192B=1.525410GiB超过固定1.5GiB，父按约force-stop。24完整/1中断running/40planned；中文20/20 CER40/590=6.78%，英文4/20子集WER9/67=13.43%，AMI12/挑战13全部未执行。完成子集case7.252–12.210s/RTF1.04–1.68，非native-only/warm预算。整执行/全量质量/成本未过，W3open，不能再让用户接受R4R5现状或重放原批。
