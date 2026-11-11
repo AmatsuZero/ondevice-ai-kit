@@ -1,3 +1,8 @@
+## W3 模拟器政策收取：ADB 远程参数需引用（2026-11-11）
+
+- **现象与已证原因**：模拟器唯一 heap run 已完成且报告双读成功，但政策收取 `adb shell run-as ... stat -c '%u %d %i %s' no_backup` 的 Python 多参数形式在远端被重新拆开，真实 exit1，stderr 把 `%d/%i/%s` 当文件。仅将远端 tokens 用 `shlex.join` 合成一个 shell 参数后，同一只读 stat 返回完整四数字、exit0，证明是远端参数边界问题。
+- **有效恢复与边界**：原冻结父脚本/APK/报告不改；独立 `collect_policy_quoted.py` 先核原冻结、精确模拟器身份及同 run 双读/六模型/包摘要，再只读续取，保留 same UID/device/inode 和有界21B/精确20B门。没有重新解码、放宽路径/资源或消耗物理合同。原错误与续取收据均保留于 `artifacts/verification/w3-qwen-heap-emulator-20261111/`；本次20诊断检查通过仅是模拟器单片证据，不关闭W3/R4/R5。参见 `docs/validation/w3-qwen-heap-emulator-observed-20261111.md`。
+
 ## W3 ORT 依赖映射：host 工具、声明摘要与补丁 guard（2026-11-11）
 
 - **现象/已证实原因**：有界映射首稿把 protobuf/date/GSL/flatbuffers 四组补丁全部写成受 Patch_FOUND 控制；固定源码实际只有 protobuf/flatbuffers 有同一条件，date/GSL 在所查声明中没有。补丁命令存在或 Found Patch 行均不足以证明历史 patch 成功。首稿归档后交免费 hy3 定点订正，父逐行核对。

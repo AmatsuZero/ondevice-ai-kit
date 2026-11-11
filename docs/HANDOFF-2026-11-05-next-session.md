@@ -1,3 +1,12 @@
+# 交接补充（2026-11-11 前缀，取代「仅等待 TECNO」）
+
+- 历史「仅等待 TECNO」记为既往：用户重开模拟器路径并执行完成一次有界验证（运行 w3-qwen-heap-emulator-20261111-01）。
+- 本次诊断结果：运行 w3-qwen-heap-emulator-20261111-01，固定 index25 fleurs-en_us-1776 / 4.8s，1 构造器 / 2 流 / 2 解码，无麦克风、无 AiAi、无网络请求；18 个边界事件、23 个 RSS 样本，采样最大 RSS 1.353702545GiB（设备可用最小 1535139840B），构造返回后约 1027.171MiB、识别器释放后 22.842MiB、Activity 拆除后 22.440MiB；W3 / R4 / R5 仍 open。
+- 真机批次 w3-qwen-heap-20261111-01 仍 UNCONSUMED，120 冻结文件完好，按既有 run/collect/restore 协议执行；后续物理路线保持不变。
+- 本交接任务后无活动助手跟进；旧的 native429 不重试。
+- 验证产物根 artifacts/verification/w3-qwen-heap-emulator-20261111/；起草时同步待定，不就此断言后续提交或远端动作。
+- 保护约束（普通边界）：普通 App / test / runner、权限 / TTS 默认值须保留；不清数据、不卸载、不恢复 / 暂存 / 提交用户原有改动。受历史控制的 25 项模型 journal 摘要、9 份受保护路径与四份 SR 文件不在此处作为新测量结果引用，以既有基线为准。
+
 ## 2026-11-11：W3当前执行阻塞审核，下一步仅待TECNO连接
 
 依赖通知映射本地c2177b7及同步107f255已验；GH#15comment6795653564、GL#15note43203、GHWiki08528d9753ffa84fb5b6e36e55d73a60971805cb，两WikiSHAb02eb937740f20298becff515ad1c0fb7a1726f02ead874cceefd93f586377eb逐字回读一致。源码未push，86份既有dirty内容保持，activehelpers=[]。父冻结守卫108/120保持、heaprun未消耗。

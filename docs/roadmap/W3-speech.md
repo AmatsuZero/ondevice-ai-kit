@@ -1,3 +1,11 @@
+# W3 语音路线补充（2026-11-11 前缀）
+
+- 历史状态「仅等待 TECNO」已过时：用户重开模拟器路径并已执行（实测见 [w3-qwen-heap-emulator-observed-20261111.md](../validation/w3-qwen-heap-emulator-observed-20261111.md)）。
+- 本次模拟器有界验证结果：运行 w3-qwen-heap-emulator-20261111-01，固定 index25 fleurs-en_us-1776 / 4.8s，1 构造器 / 2 流 / 2 解码，无麦克风、无 AiAi、无网络请求；18 个边界事件、23 个 RSS 样本，采样最大 RSS 1.353702545GiB（设备可用最小 1535139840B），构造返回后约 1027.171MiB、识别器释放后 22.842MiB、Activity 拆除后 22.440MiB。
+- W3 / R4 / R5 仍为 open；模拟器有界验证不等于 TECNO 真机验收、工程质量接受或发布接受，发布未就绪。
+- 下一步可执行物理路线保持不变（仍待真机批次 w3-qwen-heap-20261111-01，120 冻结文件完好）。
+- 本前缀不新增活动助手；旧的 native429 不再重试。
+
 ## 同步检查点（2026-11-11）
 
 嵌套 ORT 依赖通知映射本地已提交 `c2177b7`，两端 #15 与 Wiki 已逐字回读；两 Wiki SHA 一致，新 marker 已用，见[同步收据](../validation/w3-runtime-ort-dependency-map-sync-20261111.json)。本轮结束前 ADB 清单仍空，heap 120 项冻结守卫保持、唯一 run 未消耗；没有新安装/推理/二进制下载。W3/R4/R5 仍 open，下一项是 TECNO 连接恢复后的原合同单片诊断；出处及生产余门保持。
