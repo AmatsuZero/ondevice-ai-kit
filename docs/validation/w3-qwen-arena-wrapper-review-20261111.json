@@ -1,0 +1,25 @@
+{
+  "acceptedForPreparation": true,
+  "criticalCodeFindings": 0,
+  "importantCodeFindings": 0,
+  "reportSHA256": "0dfa2582be0c8db58fbaf4f870f46f2a0daf386ed4d28b7eecad59cc91e0b41f",
+  "bytes": 14508,
+  "seconds": 287.6331613749935,
+  "contextHashesUnchanged": 29,
+  "toolCounts": {
+    "Read": 25,
+    "Write": 1
+  },
+  "toolErrors": [
+    "[{'type': 'text', 'text': '<tool_use_error>File does not exist.</tool_use_error>'}]"
+  ],
+  "parentCorrections": [
+    "nine write sites, not ten",
+    "new and old source fingerprints differ; same asset hashes are distinct from source fingerprints",
+    "sampled maxRSS is not true peak",
+    "evidence review is not independent execution/hash recomputation"
+  ],
+  "deviceOperations": 0,
+  "nativePolicyEffectVerified": false,
+  "newNativeRunFrozen": false
+}

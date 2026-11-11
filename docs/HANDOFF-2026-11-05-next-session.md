@@ -1,3 +1,13 @@
+## 2026-11-11：W3 arena新外壳/实包通过，父端诊断工具复核中
+
+本地已新增76779d2政策同步/父准备，未push源码。外部hy4free同次调用16280自然结束768.671s，21937B/SHA bdcc9a5ef409c0f0533d902ec12298e8d50a40936b93613cbae4b4568a136cb3原样集成；36Read/1Write/19缺失路径错误保留，补齐现有model verifier/spec后11context摘要保持。
+真实policy/core/65PCM host30组4113、政策重验13组41通过；独立app/test qwenarena[.test]，runner仍qwenfile.QwenArenaInstrumentation；离线build27.240s/lint0error7warning、实包16类65PCM/四arm64hash/零权限/同debug证书通过。新sourceFingerprint d3d1a844ebd7e0c9cfe1347c194770e04bc60e11b7300bbee254cd9eb51ec9c1。
+独立免费hy3源码/实包复核287.633s无Critical/Important代码缺陷；原文九write误称十、sourceFingerprint/asset及peak措辞由父订正，未改源码。入口docs/validation/w3-qwen-arena-wrapper-20261111.md及wrapper-review报告。
+父新增device_acceptance/verify_report/check_parent仅做验收路由/评分，原设备守卫复用未改；17synthetic检查通过，essential freeze hashes/最多21B收取两边界RED→GREEN、无报告显式计数补齐RED→GREEN；原8parent/31metrics通过。
+当前唯一活动helper免费hy3父工具/拟定合同只读复核 /private/tmp/odai-hy3-w3-qwen-arena-parent-review-20261111/，会话3470（launcher6727，scope中CLI PID按receipt核）。只续同次，旧native429不重试。
+新run w3-qwen-arena-20261111-01仅拟定，尚无run-plan/diagnostic-frozen/安装/构造/解码。先收父复核与裁定→冻结实际摘要/生产保护/合同→fresh设备门，未解锁不绕过。旧FILE/load-only run均消耗不重放；1.5GiB/512MiB/120s不改，不开麦克风/AiAi/新模型下载/生产。
+当前源码/实包prepared结果尚未新发两端（政策marker已用勿重复）。保留78旧dirty/untracked与原source/APK/raw；共享文档只stage本次prefix。W3仍open，native消费/节省/Android质量/完整成本和生产通知/运行时许可/发布复审均不由host证明。下方“外壳生成中”属历史。
+
 ## 2026-11-11：W3 arena政策模块已验收，独立外壳同次调用运行中
 
 新增本地a5c11e7（真机结果同步与交接）、523ea07（源码/实际AAR可行性）、6a9618e（外部政策模块），未push源码。

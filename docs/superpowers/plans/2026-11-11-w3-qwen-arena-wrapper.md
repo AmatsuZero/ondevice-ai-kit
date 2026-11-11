@@ -36,18 +36,20 @@ Every snapshot (including initial/failed/terminal) uses `probeVariant="cpu-arena
 
 **Files:** external`QwenArenaInstrumentation.kt`; parent`check_wrapper.py`/`ArenaWrapperChecks.kt`.
 
-- [ ] Run absent-wrapper RED, retain unchanged baseline host scaffold hashes.
-- [ ] One moderate external hy4free candidate owns only new wrapper file, tested task-directory write sandbox and immutable full context. No quota retry/paid fallback.
-- [ ] Run actual candidate+accepted policy with original24groups plus policy-specific faults. Preserve RED and send any correction as a distinct small task.
-- [ ] Integrate external bytes unchanged and record exact hashes.
+- [x] Run absent-wrapper RED, retain unchanged baseline host scaffold hashes.
+- [x] One moderate external hy4free candidate owns only new wrapper file, tested task-directory write sandbox and immutable full context. No quota retry/paid fallback.
+- [x] Run actual candidate+accepted policy with original24groups plus policy-specific faults. Preserve RED and send any correction as a distinct small task.
+- [x] Integrate external bytes unchanged and record exact hashes.
 
 ## Task2: Distinct package and independent review
 
 **Files:** parent preparation/package scripts and validation report.
 
-- [ ] Prepare new isolated Gradle application/test IDs`io.ondeviceai.acceptance.qwenarena[.test]`, explicit runner`io.ondeviceai.acceptance.qwenfile.QwenArenaInstrumentation`, unchanged nonexported Activity class. Reuse frozen actual assets/native artifacts.
-- [ ] Offline build/lint; inspect actual DEX, runner/target manifest, zero permissions, all65packaged PCM,4arm64native hashes and debug certificate. No install/run command in this task.
-- [ ] Bounded independent review of accepted exact source/package checks; report scope limits and blockers.
+- [x] Prepare new isolated Gradle application/test IDs`io.ondeviceai.acceptance.qwenarena[.test]`, explicit runner`io.ondeviceai.acceptance.qwenfile.QwenArenaInstrumentation`, unchanged nonexported Activity class. Reuse frozen actual assets/native artifacts.
+- [x] Offline build/lint; inspect actual DEX, runner/target manifest, zero permissions, all65packaged PCM,4arm64native hashes and debug certificate. No install/run command in this task.
+- [x] Bounded independent review of accepted exact source/package checks; report scope limits and blockers.
 - [ ] Commit exact files/hunks, refresh W3/handoff/issues/wiki with deduplicated prepared-only result. Keep native effect/savings/quality and W3open.
 
 Self-review: all5review failure classes map to host or real package validation; full-scope Android quality still requires a separately frozen future diagnostic contract. This plan does not authorize replaying any consumed run or relaxing acceptance.
+
+Parent acceptance refinement before candidate delivery: add a fresh lock injected after the policy snapshot and inspect every initial/running/failed/terminal snapshot attempt. Together with the four original policy groups, the wrapper has 30 groups; these checks do not execute native/model code.

@@ -1,3 +1,5 @@
+W3最新（2026-11-11）：CPU arena-off独立外壳/实包已通过30组4113/政策13组41、离线构建27.24s/lint0e7w及16类65PCM核验，独立源码复核无Critical/Important代码缺陷；父诊断17检查通过、复核进行中，尚无新冻结run/安装/native。原FILE内存失败保留、预算不放宽，W3open。[实包](validation/w3-qwen-arena-wrapper-20261111.md)／[拟定诊断](validation/w3-qwen-arena-diagnostic-protocol-20261111.md)。下方生成中是历史。
+
 W3最新（2026-11-11）：CPU arena单变量政策模块已原样集成，13组41/AndroidAPI34classpath通过；17固定源/18片段/4实际AAR DTO准备通过，未证明native消费/省内存。双端#15/Wiki已回读，本地523ea07/6a9618e；独立外壳仍生成中，无新APK/模型调用，原FILE内存失败批已消耗不重放，W3保持open。[政策模块](validation/w3-qwen-arena-policy-20261111.md)／[外壳计划](superpowers/plans/2026-11-11-w3-qwen-arena-wrapper.md)。
 
 W3最新（2026-11-11）：唯一65文件真机run在首片处理时采样RSS1.586578GiB超过固定1.5GiB门停止，0完成/可评分、实际最终decode数未知；同run双读/六模型后核/普通App恢复通过。本地7593b25，原批已消耗不重跑；下一项核既有runtime内存控制，Android质量/成本未过，W3保持open。[真机结果](validation/w3-qwen-android-file-observed-20261111.md)。下方待复核/未运行均为历史。

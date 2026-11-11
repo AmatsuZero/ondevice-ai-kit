@@ -18,12 +18,15 @@ def main():
         (output/'result.json').write_text(json.dumps(r,indent=2)+'\n');print(json.dumps(r));return 1
     baseline = BASE.read_text()
     tests = TESTS.read_text().replace('QwenFileInstrumentation','QwenArenaInstrumentation').replace('w3-qwen-file/','w3-qwen-arena/')
-    tests = replace_once(tests, 'Runtime.streamEvents.clear(); Runtime.accepted.clear()', 'Runtime.streamEvents.clear(); Runtime.accepted.clear();Runtime.capturedProvider=null')
+    tests = replace_once(tests, 'Runtime.streamEvents.clear(); Runtime.accepted.clear()', 'Runtime.streamEvents.clear(); Runtime.accepted.clear();Runtime.capturedProvider=null;Runtime.snapshotAttempts.clear()')
     extra = Path(__file__).with_name('ArenaWrapperChecks.kt').read_text()
     tests = replace_once(tests, '    println("ASSERTIONS=', extra+'\n    println("ASSERTIONS=')
     scaffold = replace_once(baseline, "stubs['Checks.kt'] = Path(__file__).with_name('WrapperChecks.kt').read_text()", "stubs['Checks.kt'] = arena_tests")
     inject = '''
-    stubs['Runtime.kt'] = stubs['Runtime.kt'].replace('var writes=0;', 'var capturedProvider:String?=null;var writes=0;')
+    stubs['Runtime.kt'] = stubs['Runtime.kt'].replace('var writes=0;', 'val snapshotAttempts=mutableListOf<org.json.JSONObject>();var capturedProvider:String?=null;var writes=0;')
+    old = '  out.close()'
+    assert stubs['AtomicFile.kt'].count(old)==1
+    stubs['AtomicFile.kt'] = stubs['AtomicFile.kt'].replace(old, old + '\\n  Runtime.snapshotAttempts+=JSONObject(pending.readText())')
     old = 'm.provider=="cpu"'
     assert stubs['Native.kt'].count(old)==1
     stubs['Native.kt'] = stubs['Native.kt'].replace(old, 'm.provider.startsWith("cpu:")')

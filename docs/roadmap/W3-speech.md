@@ -2,6 +2,8 @@
 
 更新：2026-11-11。状态：**open；用户已明确要求继续改进，R4/R5 不再等待用户选择接受现状**。当前 TECNO 的 R1–R3 系统 ASR 已按用户接受的已知限制完成范围裁定；固定前缀、AMI 六个端/片段及两端持续观测已归档，质量与生产预算未通过。
 
+内存变体实包准备完成（2026-11-11）：外部 arena-off 外壳原样集成，30组4113断言、政策重验13组41、离线构建27.24s/lint0error7warning及实包16类/65PCM/四arm64摘要/零权限通过；独立源码复核无Critical/Important代码缺陷。父端独立诊断工具17检查通过、复核进行中；新设备合同尚未冻结/安装/运行，native消费、省内存和Android质量仍未验证。[实包](../validation/w3-qwen-arena-wrapper-20261111.md)／[复核](../validation/w3-qwen-arena-wrapper-review-20261111.md)／[拟定合同](../validation/w3-qwen-arena-diagnostic-protocol-20261111.md)。下方“外壳仍生成中”是此前准备记录。
+
 内存改进准备（2026-11-11）：固定源码17文件/18片段检查及实际AAR DTO4检查支持`cpu:config`下单独关闭CPU arena，尚未证明native消费或省内存。外部政策模块修正有界读取后13组41断言/集成重验及AndroidAPI34classpath通过，本地523ea07/6a9618e；双端#15/Wiki已发布回读，GH Wiki5e5dea4。独立Android外壳仍在生成；无新APK/安装/模型调用，原FILE批已消耗不重放，1.5GiB门保持。[可行性](../validation/w3-qwen-arena-feasibility-20261111.md)／[政策模块](../validation/w3-qwen-arena-policy-20261111.md)／[外壳计划](../superpowers/plans/2026-11-11-w3-qwen-arena-wrapper.md)。
 
 最新[Android FILE真机结果](../validation/w3-qwen-android-file-observed-20261111.md)：用户解锁后唯一65文件合同实际执行，
