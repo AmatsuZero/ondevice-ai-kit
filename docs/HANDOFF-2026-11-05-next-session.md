@@ -1,3 +1,8 @@
+## 2026-11-11：W3 KV容量预检已验，模拟器可续独立实验
+
+固定源码tokenizer重编译/真实执行一致，1001帧数与65文件静态界通过：最大context148，保留128生成需275，预选constructor288，基础KV112→63MiB（静态差49MiB）。256最坏仅109生成，拒绝；stream option单改不缩KV。免费hy3只读材料复核accept/无findings；未改Kotlin/构建APK/运行ASR，不证明RSS收益、质量一致或TECNO预算。入口validation/w3-qwen-kv-capacity-preflight-20261111.{md,json}及review JSON，原始证据artifacts/verification/w3-qwen-kv-capacity-preflight-20261111/。原arena108/heap120冻结重核通过，物理heaprun未消耗；ADB清单空不能推断锁屏。
+下一新实现由免费CBC交候选，独立类/alias/report/run、只改constructor512→288且如实报告，保持模型/65顺序/两阶段/128生成/arena-off/评分/资源门；host/Android实包/独立复核/新冻结后才做独立模拟器实验。原512模拟器65已通过并同步，不重发旧marker；物理原单片仍待连接。W3/R4/R5open、goalactive；本预检待精确提交，无活动helper，旧native429不重试。
+
 ## 2026-11-11：W3模拟器65文件结果已提交并同步
 
 本地 `4a5bb4c` 精确7文件，源码未push；新marker `w3-qwen-arena-emulator-observed-20261111` 已用勿重发。GH#15 comment6797909773、GL#15 note43208、GHWiki67b4c92，两WikiSHA fa452ab9ee1f8a4e80e66057c1be2e3fe8ef45d2f8c5b3cec7dd1fbc6a3f5001逐字回读一致，收据validation/w3-qwen-arena-emulator-observed-sync-20261111.json。65completed/117decode、18父执行/37定向/691tools及hy3材料限定复核通过；原政策适配断言失败经同run只读收取恢复，无推理重放。原arena108/heap120守卫完好，物理heaprun仍未消耗，普通AVD不动，任务AVD已关闭并精确删7生成磁盘。W3/R4/R5open，下一原物理单片诊断待设备连接；完整手机质量/资源及发布余门保持。

@@ -1,0 +1,31 @@
+{
+  "verdict": "accept",
+  "findings": [],
+  "confirmedClaims": [
+    "Before/after prompt token counts verified against supplied actual tokenizer output: beforeIds=9 tokens, afterIds=6 tokens, audio_pad=1 token, language Chinese/English=2 each, asr_text=1 token (offline-recognizer-qwen3-asr-impl.cc:439-457; supplied tokenizer-counts.json).",
+    "Requested-language stage prompt = 9(before)+6(after)+2(language)+1(asr_text)=18; auto stage = 9+6=15; matches capacity-preflight promptTokenCounts (BuildSourceIds offline-recognizer-qwen3-asr-impl.cc:459-504).",
+    "FeatToAudioTokensLen(1000,100)=130 verified: 1000/100=10 * conv_out_len_3x_stride2(100)=13 = 130 (offline-recognizer-qwen3-asr-impl.cc:77-108); parent states C++ 0..1000 matched independent Python arithmetic.",
+    "Maximum requested context = 18 + 130 = 148; maximum audio tokens 130 bounds all 65 cases (worst independent-silence-10s: 160000 samples -> 1000 frames -> 130 audio tokens -> 148 context).",
+    "KV-write off-by-one check: prefill fills context_len positions; generation writes (generated-1) further positions; for 128 generated tokens total slots = context + 127; worst case 148 + 127 = 275 (decode loop offline-recognizer-qwen3-asr-impl.cc:1025-1068, capacity() in verify_capacity.py).",
+    "Rounding smallest multiple of 32 >= 275 = 288 (32*9), computed before any inference; (275+31)//32*32 = 288.",
+    "Stream option alone does NOT shrink allocation: CreateEmptyKVCache is sized from model max_total_len_ set at construction (offline-qwen3-asr-model.cc:311-318, 533-546); stream max_total_len_opt only sets runtime max_seq_len (offline-recognizer-qwen3-asr-impl.cc:843-847). Current graph dim1 dynamic, so it falls to config 512 -> constructor change to 288 required.",
+    "Base KV bytes: one_slot = 28 layers * 2 * 8 heads * 128 dim * 4 bytes(float32) = 229376; 512 -> 117440512 (112 MiB), 288 -> 66060288 (63 MiB), delta 51380224 (~49 MiB); matches capacity-preflight.baseKVBytes.",
+    "Rejected capacity 256 worst-case generated = 1 + max(256-148,0) = 109 tokens (19 fewer than 128); consistent with loop break at cur_len >= max_seq_len (offline-recognizer-qwen3-asr-impl.cc:1028-1031).",
+    "All 65 static bounds pass need <= 288; no new ORT session or ASR inference performed in this preflight."
+  ],
+  "limitations": [
+    "KV MiB arithmetic assumes float32 KV dtype (4 bytes); this matches the parent's graph parse ('56 float32 KV inputs') but the dtype was not independently re-verified in this read-only preflight. If a served model used fp16 KV, the delta would halve.",
+    "Audio-token count is an upper bound: model uses min(expected_audio_token_len, conv_num_frames) (offline-recognizer-qwen3-asr-impl.cc:1210), so actual context is <= bound; 288 remains safe/conservative.",
+    "Scope limited to empty hotwords, <=10s 16k mono inputs, the exact supplied tokenizer/source (commit af2d8d81), and maxNewTokens=128. Non-empty hotwords or longer audio would increase context and may exceed 288.",
+    "No measured RSS savings, no quality/float-parity proof, no device physical-budget acceptance, and no source-to-exact-AAR mapping verification are claimed or implied.",
+    "Dynamic vs fixed graph: conclusion assumes the experiment reuses the current dynamic-dim graph (falls to config). If the graph were re-exported with a fixed dim1, max_total_len would come from the graph instead and a constructor config change would be unnecessary.",
+    "Source mapping to the exact AAR remains unverified; W3/R4/R5 completion not assessed.",
+    "reviewScope: supplied context only; no tools or direct device/runtime observation."
+  ],
+  "reviewScope": "supplied context only; no tools or direct device/runtime observation",
+  "model": "cbc hy3",
+  "evidenceDirectory": "artifacts/verification/w3-qwen-kv-capacity-preflight-20261111/hy3-review",
+  "parentAcceptedStaticPreflight": true,
+  "parentClarification": "For a fixed-length graph constructor config cannot resize the fixed dimension; the review wording unnecessary is not evidence of safe alternative graph capacity.",
+  "originalReviewSHA256": "0465d8f08f8fdc0ce29df4f53401c13295e8f68e187d2e1e4a767aacc0eb2e70"
+}
