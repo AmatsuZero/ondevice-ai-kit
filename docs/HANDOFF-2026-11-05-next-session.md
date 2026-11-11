@@ -1,3 +1,7 @@
+## 2026-11-12：W3归档许可补核已提交并双端同步
+
+本地5d274e6精确34文件；GH#15comment6800980175、GL#15note43213、GHWiki71350a645a5bf7ed426cdfb94702d9086a4038f3，两WikiSHAb2622459a673713981f2ef4abe62c2e6f9e6130ed294e585febf4df08e1a6fc7逐字回读一致。收据validation/w3-runtime-source-archives-sync-20261112.json；marker w3-runtime-source-archives-20261112已用勿重发。11完整归档/26文本/13映射父核及68旧材料/108+120+327+448守卫通过，cpuinfo/onnx超时归档未验、只保留固定commit许可，不重试；无设备/推理，物理heaprun未消耗。W3/R4/R5open、goalactive，生产及source-toAAR仍未过。源分支未push，无活动helper/native429不重试。许可原文字节及其23处既有空白提示保持，精确暂存shared自身前缀且其他dirty保留。
+
 ## 2026-11-12：W3固定ORT归档/许可补核已验
 
 13映射源码依赖实际11完整归档SHA1匹配，verified bytes30858504；21根/rootLICENSES许可+3mp11源码声明+2固定commitLICENSE共26文本，机器manifest在probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/。cpuinfo/onnx归档TimeoutError部分文件/原错保留、不重试，仅补独立GitBlob且archiveDigestVerified=false；mp11无独立LICENSE，KleidiAI根LICENSES首次漏筛真实失败/partial保留后订正。父check_materials.py新鲜通过，68旧材料/108/120/327/448守卫完好、物理heaprun未消耗。免费hy3 source-only复核148.511s限定接受，两low元数据项修正；README候选23.762s及三点订正26.175s原字节验收。最终递归二进制组成/source-toAAR/生产通知/发布及实体质量资源门保持，W3/R4/R5open、goalactive，源分支未push。准备精确提交与新marker双端同步；无活动helper，旧native429不重试；ADB清单空不推断锁屏。

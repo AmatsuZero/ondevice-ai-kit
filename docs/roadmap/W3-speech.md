@@ -1,5 +1,7 @@
 ## 2026-11-12 更新：固定ORT源码归档与许可补核
 
+已本地提交5d274e6并同步双端#15/wiki，GHcomment6800980175/GLnote43213/GHWiki71350a6，逐字回读一致；[同步收据](../validation/w3-runtime-source-archives-sync-20261112.json)。新marker已用，源码分支未push。
+
 13条源码依赖中11个完整归档SHA1与固定声明一致，独立SHA256/26文本已保留；cpuinfo/onnx归档TimeoutError原件保留，未重试，只补固定commit LICENSE GitBlob并继续标归档未验。mp11无独立LICENSE，保留3份包内BSL声明；KleidiAI根LICENSES两全文补齐。68旧材料及108/120/327/448守卫通过，无设备/推理/模型或runtimebinary下载。详见[补核结果](../validation/w3-runtime-source-archives-20261112.md)；最终二进制递归组成/source-toAAR/生产通知/发布及实体质量资源门仍缺，W3/R4/R5open。
 
 ## 2026-11-11 更新：KV288模拟器对照完成，未证RSS收益
