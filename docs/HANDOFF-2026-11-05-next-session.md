@@ -1,3 +1,7 @@
+## 2026-11-13：outer lifecycle 已提交并双端同步
+
+本地13559ad仅10自有文件；GH#15comment6839003228、GL#15note44037、GHWiki6181115e逐字回读，双Wiki SHAc58e6e1cf548db215edee6d5e4552c10ac4514f0bfe81cafb2217a21d34973b9一致，[收据](validation/w3-terminal-lifecycle-sync-20261113.json)。marker已用勿重发、源码分支未push。GL首次list连接reset原件保留，幂等续段复用GH原ID、GL一次新写。265项是host证据；adapterC完整准备/收取/部分恢复、新freeze、同run真机仍缺；W3/R4/R5open、goalactive。
+
 ## 2026-11-13：outer lifecycle 已集成验收，继续 adapter C
 
 免费hy3源码/精确补丁原样集成terminal_device_lifecycle.py，startup22+finish7+run22=51新方法、既有201观察+13守卫合计265新鲜通过，41AST；旧120冻结/原失败/95其他dirty/81准备源/两APK保持。[验证](validation/w3-terminal-lifecycle-20261113.md)。严格bytes和中断恢复均有真实RED→GREEN；首审误认observed为receipt，补实际协调器/Kotlin/不同startup-terminalhash测试后补审accept，原revise保留。恢复最多两次5s等待，非整个恢复5s。无活动helper、所有旧句柄终态勿poll，native旧429不重试。下一adapterC需真实冻结/身份接线、prepare/collect/policy、部分prepare所有权journal及精确恢复，不能只过四路由测试就freeze。新freeze/同run真机和生产余门仍缺，ADB为空、零新设备/推理；W3/R4/R5open、goalactive，源码未push。

@@ -200,6 +200,15 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
   and original OS error for invalid non-directory intermediates. No real freeze
   or device readiness is inferred from synthetic APKs/unexecuted placeholders.
 - [ ] Freeze a separate complete contract with inputs, hashes, budgets and restoration. Run only if the current Android channel, identity and unlock prerequisites are verified.
+- [x] Bridge actual startup/run/finish on host: external exact candidates and
+  patches, real-subprocess 51 startup/finish/run methods, complete265 checks and
+  41AST pass. Shared pre-Popen clock, consumed marker, strict transport bytes,
+  terminal raw hash and interrupt-preserving recovery are verified. Supplemental
+  source review accepts after actual coordinator/Kotlin/hash evidence corrects
+  the original review's receipt misunderstanding. Commit13559ad; no source push.
+- [ ] Complete adapter C: guarded source adaptation and live identity callbacks,
+  prepare/collect/policy, durable pre-side-effect ownership claims and exact
+  partial-prepare recovery. Do not use four routing checks as full acceptance.
 - [ ] Collect exact same-run terminal evidence and restore the new alias/staging. Never infer device acceptance from pure components.
 
 ### Task 4: Evidence and delivery

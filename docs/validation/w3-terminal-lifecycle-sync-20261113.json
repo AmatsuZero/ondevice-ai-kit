@@ -1,0 +1,33 @@
+{
+  "sourceCommit": "13559ad",
+  "marker": "<!-- w3-terminal-lifecycle-20261113 -->",
+  "issues": {
+    "gh": {
+      "id": 6839003228,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6839003228",
+      "sha256": "6a0cfdd6eaaec4595a347ba78a19ff10b2d1589d8681b054bd33c7c079b1bfed",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44037,
+      "url": null,
+      "sha256": "7e1bda6b61d21e8398414cefcdf254d412dc6dfc28fcec7a1e4dc66b180e8d76",
+      "readbackExact": true
+    }
+  },
+  "gitlabWiki": {
+    "slug": "W3\u8bed\u97f3\u9a8c\u6536\u4e0e\u540e\u7eed\u6539\u8fdb",
+    "sha256": "c58e6e1cf548db215edee6d5e4552c10ac4514f0bfe81cafb2217a21d34973b9",
+    "readbackExact": true
+  },
+  "githubWiki": {
+    "commit": "6181115ec4f4c572a0d7bbfe4a8046fcc178a99e",
+    "sha256": "c58e6e1cf548db215edee6d5e4552c10ac4514f0bfe81cafb2217a21d34973b9",
+    "readbackExact": true
+  },
+  "initialGitLabIssueFailure": "read connection reset by peer on list; no GitLab write yet",
+  "recovery": "idempotent resume reused same GHcomment, one GLnote written then exact readback; no global network changes",
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "R4R5Accepted": false
+}
