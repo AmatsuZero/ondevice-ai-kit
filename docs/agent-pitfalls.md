@@ -1,3 +1,9 @@
+## TECNO USB 枚举不等于 ADB 可用（2026-11-12）
+
+- **现象/已证原因层级**：Mac IORegistry 能枚举 TECNO POVA Slim 5G，但 `adb devices -l` 为空、Mobile MCP 仅列 iPhone；native USB backend 日志持续 `usb_read/usb_write failed with status: e00002ed`。本机 IOKit 定义该状态为 `kIOReturnNotResponding`，只能说明 USB 读写未响应，不能推断 USB 调试关闭、锁屏、线材坏或其他 App 抢占。
+- **恢复与边界**：本次 `adb reconnect`、一次 host daemon kill/start 后仍未恢复；不重复重启或触发推理。需先恢复实体传输再 fresh preflight，不能用 USB 清单冒充可执行设备，也不能重放已消耗 heap run。用户侧解锁/插拔后的恢复仍待观察。证据 `artifacts/verification/w3-android-retry-20261112-092504/receipt.json`；原诊断 `w3-android-transport-20261112-080920/` 保留。
+- **后续已观察恢复**：用户确认重新插拔并解锁后，ADB 先空、`reconnect` 已识别精确 serial，随后列表/`get-state` 均为 device；fresh shell 读取到 KM9/API35/arm64、Awake、`showing=false`、MemAvailable 3023384 kB。只能确认此时恢复，不能把具体根因归给线材/锁屏/daemon 或宣称持续稳定。证据 `artifacts/verification/w3-android-recovered-20261112-0936/preflight.json`；零推理、零安装。
+
 ## W3 实体 heap：末端采样缺口与同 run 续取（2026-11-12）
 
 - **现象/已证边界**：原物理 heap 单片报告 completed/1 构造2解码，但主机在 instrumentation 结束附近读取 `/proc/PID/status` 遇 ENOENT；最后观察报告仍 running，与最终双读报告不同。冻结验收严格拒绝 non-null `terminalObservationGap`，实际 19/20，只缺 typedResourceObservations。不能把 exit0、完整终态或低于 RSS 停止线写成诊断通过，不能事后清 gap 或重放已消耗 run。

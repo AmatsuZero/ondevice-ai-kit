@@ -1,3 +1,9 @@
+## 2026-11-12：TECNO 传输恢复与终态观测纯组件收尾
+
+用户解锁并重新插拔后，TECNO `15365375C9007986` 恢复为 ADB `device`；fresh preflight 为 KM9/API35/arm64-v8a、亮屏、`showing=false`、MemAvailable 3023384 kB，普通 Demo APK 路径保持。恢复前 `e00002ed` 和恢复后证据分别在 `artifacts/verification/w3-android-retry-20261112-092504/` 与 `artifacts/verification/w3-android-recovered-20261112-0936/`。无麦克风/AiAi/下载/推理。
+
+已消耗的 `w3-qwen-file-20261111-01` 与 `w3-qwen-heap-20261111-01` 不重放；前者首片超 1.5 GiB，后者 19/20 留有 terminalObservationGap。新的终态观测纯组件已通过 Kotlin `-Werror`/45+跨轮回归、Python 22 项测试及 Kotlin/Python ACK 四组逐字节对照，旧 120 冻结与 false verdict SHA 不变。源码复核的非 ASCII 复现经父实测不成立，reject 边界已补测；组件仍未接入独立 IO wrapper、Android 实包或新设备合同，W3/R4/R5 保持 open。
+
 ## 2026-11-12：实体 heap 观察已提交与同步
 
 本地 `4ab293a` 精确5文件；GH#15comment6809240255/GL#15note43216/GHWiki2a0fe736991070f53c9ba221d4937e575b768cfa逐字回读，双Wiki SHA4ed945d222cf460d7fb5ac084372d0f041f58d6038c7a23b9765a821cddb2c9a一致。收据validation/w3-qwen-heap-physical-observed-sync-20261112.json，新marker已用勿重复。原实体heaprun已CONSUMED/精确恢复；19/20/资源末端gap未验收，22父回归/120冻结通过，W3/R4/R5open。免费hy3117.125s完成供给事实报告复核/候选，父订正采样/总窗口/不实配额关联，未当独立设备或发布批准。首次GL读取EOF恢复后仅新写GL，GH同ID无重复；初stderr被launcher覆盖，工具结果观察与该证据限制均保留。源码分支未push。

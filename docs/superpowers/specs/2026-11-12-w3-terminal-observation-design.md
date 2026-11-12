@@ -1,0 +1,69 @@
+# W3 future terminal observation handshake
+
+The consumed physical heap run remains rejected (19/20). Its frozen sources,
+APKs, reports and non-null terminalObservationGap are immutable. The observed
+host race is concrete: after a running report, instrumentation finishes before
+the next /proc/PID/status read. Reading a later completed report cannot recover
+the missing resource observation.
+
+This change prepares a future independent probe. It does not authorize replay,
+new microphone/AiAi work, model downloads, production edits or a relaxed gate.
+The user requested autonomous W3 improvements; the exact handshake is the
+primary agent's engineering choice, not a user-selected product budget.
+
+## Approach
+
+Reading terminal reports earlier only narrows the race. Accepting ENOENT after
+exit would discard the required evidence. Instead, hold instrumentation alive
+for a bounded acknowledgement after all existing release/teardown operations
+and immutable terminal-report persistence have completed.
+
+The first deliverable is a pure Kotlin handshake component and host Python
+validator. Both must be usable from a separately named future wrapper/driver;
+neither imports, rewrites or executes the consumed frozen driver. Integration,
+Android build/package review and a new frozen device contract follow separately.
+
+## Contract
+
+- Device binding: runId matches `[A-Za-z0-9-]{1,80}`, source fingerprint and
+  terminal report SHA256 match `[a-f0-9]{64}`, PID is a positive integer,
+  startTicks is canonical positive decimal fitting signed 64-bit.
+- ACK payload is exact UTF-8 ASCII (at most 1024 bytes), with six newline-terminated lines:
+  `ODAI-TERMINAL-ACK-v1`, runId, sourceFingerprint, decimal PID, startTicks,
+  terminalReportSHA256. No JSON conversion or newline normalization.
+- Wait budget: monotonic milliseconds, 1..30000 inclusive; poll at most every
+  50 ms and never sleep past the remaining budget. A callback must bound each
+  filesystem/transport read; callback execution is not preemptible by this pure
+  component. The future wrapper supplies local bounded reads, not ADB calls.
+- Before polling/after every callback, reject negative or regressing clocks,
+  elapsed budget exhaustion, invalid/oversize/mismatching ACK, or callback errors.
+  ACK at exactly the deadline is too late. All failures remain typed failures;
+  no retries, success defaults, or swallowing interruptions.
+- Host ACK requires two identical nonempty raw terminal-report reads; matching
+  runId, sourceFingerprint and positive integer PID; literal terminal=true;
+  a completed or failed status; a final resource sample with the same positive
+  PID and startTicks before and after the two report reads; positive integer
+  RSS and available bytes within existing 1.5 GiB / 512 MiB inclusive limits.
+  The final sample's monotonic uptime interval must contain both report reads.
+  Validation of schema/counters/releases remains the future evaluator's job;
+  ACK acknowledges observation, never quality or successful inference.
+- Host observations must be strictly typed (bool is not int), bounded JSON
+  bytes (<=1 MiB), finite nonnegative monotonic nanoseconds fitting signed
+  64-bit, and represent an actual sampled interval, not inferred continuity.
+- A future host writes its final observed bytes/sample durably before publishing
+  ACK, continues enforcing stops until then, then waits for bounded process exit
+  without another /proc read. Early process exit or any pre-ACK observation
+  failure remains a gap. Failure results do not clear a previous gap.
+- Future filesystem integration must reject stale ACK before any native work,
+  symlinks/path escapes and oversized/growing reads. ACK publication must be
+  exclusive and bound to the exact run. These IO checks are outside the pure
+  components and cannot be claimed from pure host tests.
+
+## Exit criteria
+
+Fault regressions prove wait-until-ACK, bounded timeout, strict identity/bytes,
+callback/clock failure propagation and host observation ordering. Actual Kotlin
+compilation and Python tests pass; a separate supplied-source review assesses
+their scope. The old frozen hashes and old failed verdict remain unchanged.
+This component milestone is not Android packaging, device acceptance, continuous
+sampling, true peak, allocator root cause, W3/R4/R5 completion or release approval.

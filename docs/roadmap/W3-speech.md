@@ -1,3 +1,13 @@
+## 2026-11-12：TECNO 传输恢复，但不重放已消耗批次
+
+用户解锁并重新插拔后，ADB 恢复为 `15365375C9007986 device usb:1048576X`；fresh preflight 读取到 TECNO KM9/API35/arm64-v8a、`showing=false`、`mWakefulness=Awake`、`MemAvailable=3023384 kB`，普通 Demo APK 路径仍存在。恢复前的 `e00002ed` 诊断和本次 preflight 均保留于 `artifacts/verification/w3-android-retry-20261112-092504/`、`artifacts/verification/w3-android-recovered-20261112-0936/`；无麦克风、AiAi、模型下载或推理。
+
+此前 `w3-qwen-file-20261111-01` 已在首片超过 1.5 GiB 并 CONSUMED，实体 heap `w3-qwen-heap-20261111-01` 也已 CONSUMED 且 19/20 留有末端观察缺口，因此本次恢复不重放这两个 run。新的终态观测组件尚未完成独立 IO wrapper、Android build/lint/实包和新冻结合同，不能把传输恢复写成 Android 质量通过。
+
+## 2026-11-12：终态观测握手纯组件通过
+
+未来独立合同的 Kotlin barrier 通过 `-Werror` 编译、45 项检查和跨迭代 clock regression；Python host validator 通过 22 项测试，Kotlin `AckFixture` 与 Python ACK 在 completed/failed、边界 PID/startTicks 四组输入上逐字节一致。旧 120 份冻结文件、heap 原报告和 false verdict SHA 全部保持。独立 supplied-context 复核没有可复现的高/中问题；一条非 ASCII 复现描述经父实测不成立，相关 reject 边界已补测。该里程碑仅证明纯合同与字节协议，不证明 IO、进程真实性、连续资源采样、Android 实包、真机质量或 W3/R4/R5 完成。
+
 ## 2026-11-12：实体 heap 结果已提交并双端同步
 
 本地 `4ab293a` 精确5文件；GH#15 comment6809240255、GL#15 note43216、GH Wiki `2a0fe73` 已逐字回读，两Wiki SHA一致。[同步收据](../validation/w3-qwen-heap-physical-observed-sync-20261112.json)，marker `w3-qwen-heap-physical-observed-20261112` 已用勿重复。原 heap run 已消耗并恢复；19/20资源观察未验收，W3/R4/R5保持open。首次GitLab GET遇EOF，恢复后幂等同步；首次stderr被复用launcher覆盖，仅保留工具结果观察，收据明确披露。源码分支未push。
