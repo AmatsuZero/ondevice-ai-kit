@@ -1,3 +1,7 @@
+## 2026-11-12：终态观测纯组件已提交及双端同步
+
+本地 `a9cc09e` 精确16文件，源码分支未push；GH#15 comment6812703119、GL#15 note43284、GH Wiki550adb7已逐字回读，两Wiki SHA4e92eed215ea252bdb0bf91e43daff60c90c172e245144923505630c28a5628c一致。[同步收据](../validation/w3-terminal-observation-components-sync-20261112.json)，marker `w3-terminal-observation-components-20261112` 已用勿重复。Kotlin45+跨轮回归/Python22/ACK四组及旧120冻结/false verdict保持；仅纯组件与只读传输恢复，不代表IO/Android实包/真机质量。已消耗run不重放，无活动helper，旧native429不重试；W3/R4/R5open、goalactive，下一步独立IO wrapper/driver与新设备合同。
+
 ## 2026-11-12：TECNO 传输恢复，但不重放已消耗批次
 
 用户解锁并重新插拔后，ADB 恢复为 `15365375C9007986 device usb:1048576X`；fresh preflight 读取到 TECNO KM9/API35/arm64-v8a、`showing=false`、`mWakefulness=Awake`、`MemAvailable=3023384 kB`，普通 Demo APK 路径仍存在。恢复前的 `e00002ed` 诊断和本次 preflight 均保留于 `artifacts/verification/w3-android-retry-20261112-092504/`、`artifacts/verification/w3-android-recovered-20261112-0936/`；无麦克风、AiAi、模型下载或推理。

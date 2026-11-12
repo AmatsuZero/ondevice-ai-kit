@@ -58,5 +58,5 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
 
 ### Task 4: Evidence and delivery
 
-- [ ] Save source/hash/test/review receipts, preserve protected dirty files, update the handoff and W3 current-state note.
-- [ ] Commit only exact accepted files. Synchronize substantive results to the existing Issue/Wiki using a fresh idempotency marker; keep source push separate.
+- [x] Save source/hash/test/review receipts, preserve protected dirty files, update the handoff and W3 current-state note.
+- [x] Commit only exact accepted files. Synchronize substantive results to the existing Issue/Wiki using a fresh idempotency marker; keep source push separate.
