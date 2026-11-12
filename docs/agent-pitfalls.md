@@ -1,3 +1,13 @@
+## W3片段接线：给出真实ACK API和nullable类型（2026-11-12）
+
+首片段合并真实6编译错误：主代理窄prompt把TerminalAckFile误写为File单参数/read()、把FileRunState身份字段误写为nonnull；实际API是TerminalAckFile(existingCanonicalDir,runId)、readOrNull()、state.runId/sourceFingerprint与局部ticks/ACKfile可空。给出实际声明后外部精确patch，又出现File(File)多余包装真实1error；外部单行直传dir后58组783断言GREEN。不能改正确共享API/状态/测试迎合错误prompt，原失败与主代理上下文限制均保留。writer serialization须留在原try/catch内以保留wrapperPersistError；最终hash只取成功持久化返回bytes，ACKerror不改终态。证据`wrapper-{combined-host,api-fix-host,corrected-host,integrated-host}/`。
+
+构建工具也误把真实relative adaptermap当absolute；首有效收据FAIL，修后8GREEN。下一canonical alias/dangling receipt真实4ERROR，不能先resolve再称拒绝alias，也不能用exists漏掉悬空链接；外部再修后10GREEN。旧source/报告不动。证据`build-tools-{candidate,key-fix,canonical-red,canonical-fix,integrated-host}/`。两条host编译参数名warning来自既有doubles，不能宣称-Werror。APK构建/核验不等于Android运行时/全W3完成。
+
+## W3 wrapper整份空流：保留失败后拆独立片段（2026-11-12）
+
+原hy4free整份wrapper请求自然903s终态CLI0/raw0，stderr精确`Empty stream: upstream ended the turn with finish_reason=error after emitting reasoning but no text or tool call`（17474chunks/3773031bytes/900757ms）；未交付源码、无观察到quota/auth错误、无主代理时长终止。原prompt/raw/stderr/收据保留于`wrapper-whole-empty/`，不把内部推理或退出0算候选、不重发原整份任务。按既有小片段路线独立分出IO helper、preflight/snapshot/writer与后续final接线，完成前不得集成或称wrapper已验。实际host编译/实包/设备门不变。
+
 ## W3三适配器组合：真实嵌套argv与复核上下文（2026-11-12）
 
 - 初始父10检查3fail中，两条真实sourceFingerprint格式预检迟于callback，精确外部补丁补64位小写hex；另一条父测试错误只允许OSError，既有durable writer对stale路径抛ValueError也合法，按实际合同纠正。测试不能为假定异常类改正确writer。

@@ -264,6 +264,94 @@ handshake, not a continuous polling/launch/restore driver, full release verifier
 true peak measurement or device acceptance. Full wrapper/host-loop/build/frozen
 run gates remain mandatory.
 
+## Independent Android wrapper
+
+The new wrapper is `probes/android-qwen-terminal/QwenTerminalInstrumentation.kt`,
+class `io.ondeviceai.acceptance.qwenfile.QwenTerminalInstrumentation`, in a new
+alias `io.ondeviceai.acceptance.qwenterminal`. It derives from the unchanged heap
+wrapper in a distinct file, retains the selected public index25/1776 input and
+all existing model/PCM/allocator/foreground/release/teardown/error/heap safeguards,
+and uses only `files/w3-qwen-terminal`. The old source, APK, run and failed
+acceptance remain immutable. This repeats the public diagnostic input in a new
+terminal-observation protocol, not the consumed old run or a quality experiment.
+
+For platform dependency injection the constructor has defaulted parameters
+`readProcessStat: (Int) -> ByteArray` and
+`waitForTerminalAck: (TerminalAckFile, TerminalObservationBinding) -> Unit`.
+The generated class must retain an actual JVM no-argument constructor for Android.
+Normal stat IO reads `/proc/<own-pid>/stat` with a fixed65537-byte cap and closed
+stream; the wrapper validates1..65536 ASCII bytes, exact PID prefix, last `) `
+boundary and field22 positive canonical decimal startTicks<=Long.MAX_VALUE before
+the first report write or native call. Test doubles may provide malformed bytes,
+and cannot bypass that wrapper validation. The normal wait uses the existing
+barrier with exact ACK file reads, SystemClock.elapsedRealtime, Thread.sleep and
+the unchanged30s deadline. These dependencies do not alter production App APIs.
+
+Before reserving/writing a report or starting Activity/native work, construct
+`TerminalAckFile` in the canonical owned directory and call `requireAbsent()`.
+Any existing final/stage entry is rejected. Snapshots add `processStartTicks`
+and protocol metadata; the new probeVariant is
+`cpu-arena-off-heap-terminal-ack-v1`. The terminal report is persisted only after
+all actual release/teardown attempts as in the heap wrapper. Its writer returns
+the exact serialized bytes successfully handed to AtomicFile.finishWrite;
+the terminal SHA256 is computed from those bytes. Never reserialize to compute
+the binding hash or rewrite the terminal report after starting the ACK wait.
+
+Only a successfully persisted terminal report starts the wait, including a
+truthful failed terminal. Pass the same runId/fingerprint/PID/startTicks and exact
+terminal SHA to the existing binding/barrier. ACK failure or timeout makes the
+instrumentation result canceled without changing prior recognition/release/
+teardown evidence or the immutable terminal bytes. The finish Bundle carries
+boolean `terminalAckAttempted`/`terminalAckReceived`, optional string
+`terminalAckErrorClass`/`terminalAckErrorMessage`, and optional string
+`terminalReportSha256`. Successful recognition returns RESULT_OK only if the
+ACK was received; an ACK for a failed report still returns RESULT_CANCELED.
+There are no retries, extra native calls, capture, network, model changes or
+automatic cleanup. Host Android/native doubles verify ordering and fault paths;
+the normal platform IO, APK and device contract remain separate gates.
+
+## Running-process polling integration
+
+The next bounded driver slice is `terminal_polling.observe_until_terminal(root,
+binding, *, adb, serial, package, process_poll, timeout_seconds=2.0,
+monotonic_ns=time.monotonic_ns, sleep=time.sleep, runner=None)`. The launcher
+remains responsible for freezing/consuming the new run, checking installed APKs,
+starting instrumentation and establishing its first report's exact PID/startTicks.
+The polling slice starts only after that report exists, never launches or stops
+a process and never restores packages. These outer responsibilities remain open
+until the complete driver is reviewed and frozen.
+
+The loop preflights the four-key binding, adapter configuration, callbacks and
+canonical private output root, then durably creates a new-only `poll-start.json`
+before process/clock/transport callbacks. It checks `process_poll()` returns None
+for a running process; an exact int means an early exit and bool is invalid.
+Each iteration takes an actual `AdbProcessSampler` sample with unchanged identity
+and resource budgets, then a fresh `AdbTerminalReportReader` read. Strict JSON
+rejects duplicates/nonfinite values; its runId/fingerprint/PID/processStartTicks,
+protocol, variant and exact integer 30000-ms metadata must match. `terminal` is an
+exact bool, status is running when false and completed/failed when true, phase
+is a nonempty string and activeCaseIndex is null or exact zero.
+
+Each sample and report SHA are durably recorded as `poll-sample-NNNNNN.json`.
+For a running report, phase/index progress must stay within the inclusive120s
+host window and total polling within inclusive240s. One monotonic host clock
+is validated across every call, including the remote coordinator's calls; any
+regression or callback/IO/resource/identity failure stops immediately. Sleeps
+request0.25s and remain a bounded callback responsibility. Host timing is not
+device uptime or a true peak measurement.
+
+A valid terminal report enters the actual existing remote coordinator exactly
+once, with local paths `terminal-observed.json`, `terminal-receipt.json`,
+`terminal-ack.txt`, `terminal-before-link.json`. That coordinator takes two new
+reads and all three samples, writes durable evidence and publishes ACK. After
+successful publication the loop returns immediately without another process poll
+or resource read, avoiding an artificial post-ACK exit race. It returns the
+coordinator result plus pollSamples and explicit false qualityAccepted and
+truePeakMeasured. A failed terminal is still only observed. Exceptions retain
+the actual typed publication uncertainty and partial evidence; no retry/rollback
+or report rewrite is permitted. The outer driver must still handle errors,
+bounded instrumentation completion, collection and exact restoration.
+
 ## Exit criteria
 
 Fault regressions prove wait-until-ACK, bounded timeout, strict identity/bytes,

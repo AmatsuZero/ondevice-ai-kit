@@ -1,0 +1,101 @@
+{
+  "at": "2026-11-12T12:14:56.651133+00:00",
+  "pythonTerminalMethods": 171,
+  "buildToolMethods": 10,
+  "pythonFilesParsed": 29,
+  "wrapperHostGroups": 58,
+  "wrapperHostAssertions": 783,
+  "hostCompileWarnings": 2,
+  "wrapperSHA256": "d78d1ece1a88f6815022f7db261607e6106c73eeedf5e52f291a2a3887454c58",
+  "sourceSHA256": {
+    "probes/android-qwen-terminal/check_preparation.py": "e0817a78f98fc825a3f5464939341383a770692585b4cc9783d592d52ab5b66e",
+    "probes/android-qwen-terminal/prepare_build.py": "85b6079a8bcdffcf7cdd2a584d4b1b0cc7b43d686154e3c23faa4487b9990579",
+    "probes/android-qwen-terminal/check_wrapper.py": "dfa33bbc10b1a4b07661ff7721859313e6ed588dad39a1654b55f9e5147b5119",
+    "probes/android-qwen-terminal/README.md": "14ce622b742f336dd1299378e5f9ae53f8afdbff45a30d16f8d3fbd1c60f0506",
+    "probes/android-qwen-terminal/build_acceptance.py": "5072fdb4eea6615556b9cf9eb2c53820bcc4e76e30c685cdf0ab2b6f34d58b8d",
+    "probes/android-qwen-terminal/TerminalWrapperChecks.kt": "f907af1804e5570968760b83edc2adc36e314784924dc27fbf4d03bcf18444c8",
+    "probes/android-qwen-terminal/QwenTerminalInstrumentation.kt": "d78d1ece1a88f6815022f7db261607e6106c73eeedf5e52f291a2a3887454c58"
+  },
+  "oldFrozenFilesVerified": 120,
+  "oldReportAndFalseVerdictUnchanged": true,
+  "protectedDirtyNonOwnedPathsVerified": 96,
+  "preparedSourceFiles": 81,
+  "package": {
+    "files": {
+      "main.apk": {
+        "bytes": 32464750,
+        "sha256": "88757e37ac741a6bf7b3256f1d7378852b0e6c9bd9464762dd6155be81c7dd13",
+        "package": "io.ondeviceai.acceptance.qwenterminal"
+      },
+      "test.apk": {
+        "bytes": 7917636,
+        "sha256": "6104d8b51051ac834c2e8bc2cadd42f24673bc24d012fb766124b77a07a08815",
+        "package": "io.ondeviceai.acceptance.qwenterminal.test"
+      }
+    },
+    "deviceOperations": 0,
+    "actualClassesVerified": [
+      "QwenFileActivity",
+      "QwenFileInputs",
+      "InputCase",
+      "QwenFileReport",
+      "FileRow",
+      "FileRunState",
+      "ModelSpec",
+      "QwenModelFiles",
+      "CaseStream",
+      "StageState",
+      "CaseState",
+      "TwoStageCaseRunner",
+      "QwenArenaPolicy",
+      "ArenaPolicyReceipt",
+      "ArenaPolicyException",
+      "QwenTerminalInstrumentation",
+      "TerminalAckFile",
+      "TerminalObservationBinding",
+      "TerminalObservationBarrier"
+    ],
+    "runtimeLibraries": {
+      "lib/arm64-v8a/libonnxruntime.so": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+      "lib/arm64-v8a/libsherpa-onnx-c-api.so": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+      "lib/arm64-v8a/libsherpa-onnx-cxx-api.so": "de94e0952a124eb22e86d754e11aa0489a065affc837911a8ed5e7fd843baad6",
+      "lib/arm64-v8a/libsherpa-onnx-jni.so": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575"
+    },
+    "permissions": {
+      "main.apk": [],
+      "test.apk": []
+    },
+    "commonSigningCertificateSHA256": "78b42bc2133b97526ec42f6fd4ed42874238c7eb9c504317879f3a18cc57000d",
+    "actualTestAssetsVerified": 65,
+    "sourceFingerprint": "ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5",
+    "exactRunnerVerified": "io.ondeviceai.acceptance.qwenfile.QwenTerminalInstrumentation",
+    "nativePolicyEffectVerified": false,
+    "newNativeRunFrozen": false,
+    "terminalObservationDeviceVerified": false
+  },
+  "build": {
+    "exitCode": 0,
+    "tasks": 75,
+    "offline": true,
+    "lintPassed": true
+  },
+  "sourceReview": {
+    "verdict": "accept",
+    "findings": [],
+    "limitations": [
+      "Review scoped to the supplied wrapper diff plus the listed immutable dependency sources (TerminalAckFile.kt, TerminalObservationBarrier.kt with TerminalObservationBinding, prepare_build.py, build_acceptance.py [terminal + base FILE], FileRunState, serializer header). Unchanged native/core/allocator/foreground/release/teardown/heap and the original FILE wrapper/old 120-file logic are outside this diff review per contract.",
+      "Teardown/cleanup ordering relative to terminal persist+wait is not visible in the diff; the contract asserts 'realcleanup then persistterminal then wait' and the diff only adds the persist+wait block at the end. Ordering is not contradicted but cannot be independently confirmed from the diff alone — it relies on the stated preservation of unchanged teardown.",
+      "Actual gradle build/lint/APK package verification driven by build_acceptance.py is the next step and is NOT yet claimed or executed (parent evidence: 'Actual build/lint/package is next, NOT yet claimed'). This review covers source and binding correctness, not the build outcome.",
+      "Host acceptance (compile 0 / runtime 0, 58 PASS groups, 783 assertions) does not establish Android/device/OEM runtime behavior; terminalObservationDeviceVerified is explicitly False by design and host acceptance does not change that.",
+      "External observer ACK-file production (writing exact-byte ack-$runId.txt) is out of scope; only the wrapper-side read/validate/wait binding (TerminalAckFile.readOrNull + TerminalObservationBarrier.awaitAck) is reviewed.",
+      "Injected-callback paths (readProcessStat, waitForTerminalAck) are reviewed by construction and default-lambda validation, not by independent runtime reproduction; the defaults delegate to terminalReadProcessStat/terminalProcessStartTicks/terminalAwaitAck which are themselves statically validated against the supplied TerminalAckFile/Barrier APIs."
+    ]
+  },
+  "deviceOperations": 0,
+  "inferenceCalls": 0,
+  "fullDriverImplemented": false,
+  "newNativeRunFrozen": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false
+}

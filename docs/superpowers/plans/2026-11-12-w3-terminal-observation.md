@@ -113,7 +113,27 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
 - [x] Add a fresh subprocess-capable report reader for the distinct `files/w3-qwen-terminal/report-<run_id>.json` namespace. External4 +parent7 methods and full Python139 pass; exact source review accepts. Original large test request ended CLI0/raw0/context400 with no source, retained; a distinct reduced4-method request delivered. Its direct missing-module RED and both full GREEN groups gate integration. Initial source3fail/9error strict-type defect and test path-adjective ambiguity are corrected through exact external edits, with original failures retained. Actual Android host-loop ordering/remote ACK publication remain separate gates.
 
   Ruling (2026-11-12): six independent parent real-subprocess report-reader methods directly fail with missing-module RED while the unchanged no-source-context external test request remains live. Source generation may overlap that independent test request. Integration still requires received/reviewed external tests, their direct missing-feature RED and both full GREEN groups. No request is duplicated and no tests-first gate is removed.
-- [ ] Wire local bounded ACK reads after release/teardown/terminal persistence; stale ACK refusal precedes native calls.
+- [x] Wire local bounded ACK reads after release/teardown/terminal persistence; stale ACK refusal precedes native calls.
+
+  Next actual wrapper: distinct QwenTerminalInstrumentation with a JVM no-arg
+  constructor, bounded own-proc-stat validation, stale final/stage refusal before
+  report/Activity/native, exact terminal bytes/hash after real cleanup, immutable
+  terminal while awaiting the existing barrier, and explicit Bundle ACK result.
+  Extend the accepted heap host scaffold and add ordering/fault cases before the
+  external wrapper candidate; do not modify the old wrapper or frozen sources.
+
+  Completion (2026-11-12): exact independently delivered platform/preflight/final
+  fragments plus narrow glue corrections yield58hostgroups/783assertions;
+  real JVM noargs, invalid ownstat, stale final/stage, failed terminal, ACKfaults
+  and original-error/terminal-byte preservation pass. Initial whole request was
+  CLI0/raw0/Empty stream; not reissued. Primary's inaccurate API/nullability
+  fragment context caused6compileerrors, next external glue had1Fileconstructor
+  error; all retained and corrected externally. Writer serialization returned
+  inside its original error boundary. Tools10checks, cached offline75-task
+  Android build/lint, actualAPK19classes/65assets/4exactruntime members pass.
+  Independent diff-scoped wrapper +full tools source review accepts, no findings;
+  unchanged teardown is outside that review but executed by parent host checks.
+  Full launch/polling/restore driver, newfreeze and device proof remain open.
 
   Next slice: receive `TerminalAckFileChecks.kt` first for the specified `TerminalAckFile` interface; compile the direct missing-type RED before the external implementation. Reuse cached JVM/NIO patterns, fixed 1025-byte cap and final/stage stale checks; leave actual wrapper ordering and Android package/device evidence open until separately tested.
 
