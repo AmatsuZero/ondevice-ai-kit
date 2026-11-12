@@ -1,3 +1,7 @@
+## 2026-11-12：新鲜报告读取器同步检查点
+
+本地`4a3d914`已同步GH#15comment6821125095/GL#15note43821/GHWiki f2ceae9b，双Wiki SHA f47f343ae2f206ceed21c35aae6d896235abe0a6304366856fe4ec21b7257d14逐字一致，[收据](../validation/w3-adb-terminal-report-reader-sync-20261112.json)。marker已用勿重发，源码分支未push；139 Python/源码复核不替代实际host-loop、远端ACK、Android新实包/合同与真机生产余门，W3/R4/R5仍open。
+
 ## 2026-11-12：新鲜报告传输适配器已验
 
 完整Python139（新增外部4+父7）、AST及supplied-source复核accept通过；真实本地fake-ADB/shell验证每次新读、远端脚本静态guard、head上界与超时/错误，不等于Android实机传输或完整host-loop。[验证](../validation/w3-adb-terminal-report-reader-20261112.md)。原context400零交付/类型3fail9error/提示路径歧义均保留后修正。旧120冻结/原失败保持；远端ACK发布测试进行中，实包/新合同/真机质量资源及生产发布余门继续，W3/R4/R5open，源码未push。
