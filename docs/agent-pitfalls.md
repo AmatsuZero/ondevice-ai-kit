@@ -1,3 +1,9 @@
+## W3 ADB采样器：完整消息恢复与精确补丁验收（2026-11-12）
+
+- CBC测试响应自然退出0、raw恰262144B、最终result字符串截断；4个完整事件中event3仍含完整可解析17测试源码。只恢复这个完整JSON消息、核语法/摘要并做真实缺实现RED，不补截断尾、不宣称根JSON/最终result完整，也未重发测试请求。event1另有CLI自行“Connection interrupted. Retrying automatically...”文字；只能称主代理未重发，不能笼统称CLI无重试或推断quota错误。原件/完整事件/恢复源码与边界在`sampler-tests-candidate/`。
+- 首实现只输出伪Write文字、没有实际候选文件/所需JSON；仅抽文本到隔离目录做拒收验收，26方法真实6fail/3error（ticks构造溢出、str/bytes子类、空字段AttributeError）。外部精确old/new窄修又只换if行而移错旧body，IndentationError在执行前拒收；独立单块修正后26GREEN、整套128GREEN。候选/语法失败/结构化替换均保留；伪工具不当实际落盘，补丁存在不当通过。证据`.omx/artifacts/w3-terminal-observation-20261112/sampler-{implementation-candidate,boundary-fix,indentation-fix,parent-acceptance}/`。
+- 真子进程stand-in证明默认subprocess错误/超时传播和参数引用，不证明真实Android读取或旧末端gap已修复。进程采样器只返回测量，零值不被补成默认成功值；预算继续由协调器独立拒绝。
+
 ## W3 协调器：预检时机、时钟即停与源码复核复现（2026-11-12）
 
 - 首实现22+7检查绿，但扩展父检查真实9fail/1error：output全路径lstat跟随中间symlink且缺父目录到发布才失败；倒退时钟收齐四次才拒绝；str子类/NaN与binding类型校验遗漏。全部输出父链须在callback前nofollow预检，时钟首次倒退立即停止，快照/严格有限JSON再发布。原候选拒收，独立修正34GREEN、最终102GREEN；具体原失败计数仅对应保留的那一轮，不外推后来新增子例。

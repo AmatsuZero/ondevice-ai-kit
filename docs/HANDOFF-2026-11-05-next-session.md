@@ -1,3 +1,7 @@
+## 2026-11-12：ADB进程采样器已集成，128检查及源码复核通过
+
+`AdbProcessSampler`已按外部候选/精确补丁集成；17外部+9父验收、整套Python128/128及语法通过，真本地子进程stand-in覆盖默认调用/错误/超时。最终源码复核accept，无critical/important；一处测试头旧注释minor延后。旧120冻结/报告双读/false verdict保持，真实ADB只读清单为空、零安装/推理/采样。[验证与交付限制](validation/w3-adb-process-sampler-20261112.md)：原测试raw262144B截断，仅恢复完整event3源码，CLI内部connection retry文字保留；首伪Write文本6fail/3error、窄修IndentationError均拒收，原件与13.993s单块修复保留。所有sampler请求已终态，无活动helper/native重试；W3/R4/R5open、goalactive，源码分支未push。下一Android本地ACK IO/真实报告传输/独立wrapper-driver/实包、新冻结合同和真机余门，旧run不重放；marker同步另附收据。
+
 ## 2026-11-12：实际ADB采样器合同已定义，测试候选仍在同请求生成
 
 接口`AdbProcessSampler.sample()`固定stat/status/meminfo/stat四读、PID/startTicks与有界响应/timeout/单串远端引用；计划与设计已补实际合同。免费hy3 tests-first请求在`/private/tmp/odai-w3-adb-process-sampler-tests-20261112/`，统一exec session26116/PID10754已观察存活，stdout/stderr均空、无terminal收据，未交付测试；继续收同一请求，不因静默/观察超时重发或付费切换。当前ADB列表为空，只有只读devices检查、零安装/推理；证据`.omx/artifacts/w3-terminal-observation-20261112/sampler-readonly-preflight/`及`sampler-next-task.json`。当前完整suite仍是已验102，尚未添加sampler测试；交付后先审查并取得真实缺实现RED，再接实现候选/实际传输与AndroidACK接入。W3/R4/R5open、goalactive，旧run不重放。

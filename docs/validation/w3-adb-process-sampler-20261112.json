@@ -1,0 +1,67 @@
+{
+  "at": "2026-11-12T08:21:16.533264+00:00",
+  "scope": "subprocess-capable-ADB-process-sampling-adapter-tested-with-local-standin",
+  "pythonTests": 128,
+  "samplerTests": 26,
+  "externalTests": 17,
+  "primaryAcceptanceTests": 9,
+  "fullSuiteSeconds": 2.919,
+  "sourceHashes": {
+    "adb_process_sampler.py": "d77d0068d00cffe904c9d42b29c5f186733c1682c74814242175d633064b932b",
+    "test_adb_process_sampler.py": "5772f07de4f236369040d148b3b113840f75eb8e3060c41ba11b0cacd29b874d",
+    "test_adb_sampler_parent_acceptance.py": "54bbdf5b9fb69b37ac3235b581b3ac9289e0f8353197935d011a0bf8f5fb0d5f"
+  },
+  "syntaxChecks": true,
+  "sourceChangesFromExternalCandidatesAndExactEdits": true,
+  "firstCandidateRejected": true,
+  "firstExpandedFailures": 6,
+  "firstExpandedErrors": 3,
+  "intermediateSyntaxFailure": "IndentationError rejected before execution",
+  "helperDurationsMs": {
+    "initialImplementation": 196066,
+    "boundaryEdits": 48107,
+    "indentationEdit": 13993,
+    "finalReview": 123215
+  },
+  "externalTestRootJSONComplete": false,
+  "externalTestRawBytes": 262144,
+  "completeExternalTestMessageRecovered": true,
+  "externalTestCompleteSourceEvent": 3,
+  "originalTestCLIConnectionRetryObserved": true,
+  "primaryExternalTestReinvocations": 0,
+  "review": {
+    "verdict": "accept",
+    "findings": [
+      {
+        "severity": "minor",
+        "file": "test_adb_process_sampler.py",
+        "location": "module docstring",
+        "trigger": "Reading the test module header before reviewing the import and passing runs",
+        "effect": "Docstring states 'These are TESTS FIRST: no implementation of adb_process_sampler exists yet', but the adapter is implemented and imported via `from adb_process_sampler import AdbProcessSampler`. The stale comment can mislead a reader into thinking the module under test is missing.",
+        "suggested_check": "Update the docstring to state the implementation exists and these tests exercise the real adapter through injected runners and a local fake-ADB."
+      }
+    ],
+    "limitations": [
+      "All 26 tests validate behavior through injected runner callables and a local fake-ADB subprocess; no real Android device was contacted and the ADB devices list was empty. The original consumed physical run was rejected (19/20) and is not replayed, so real-device transport behavior remains unverified.",
+      "The source trusts the selected ADB binary/transport and kernel /proc output as ordinary diagnostic inputs. Protection is limited to the remote `head -c 65537` cap plus per-read response size (1..65536), ASCII, NUL, and strict parse/identity checks. It does not defend against a compromised or spoofing transport that returns well-formed but incorrect values (e.g., a PID that matches between the two stat reads but is not the intended process).",
+      "No clock/tick-to-time mapping, budget/quota acceptance, peak-memory tracking, remote ACK, or quality assertions are implemented or claimed, consistent with scope; these are not source defects.",
+      "An internal CLI connection-retry was observed during prior tooling; this review does not assert that no such retry occurred, but it is outside the supplied source's responsibility and not a source defect.",
+      "No integration, device, or release gates are required as source fixes for this review; such gates are out of scope."
+    ]
+  },
+  "reviewScope": "static supplied-context only",
+  "oldFrozenFilesVerified": 120,
+  "oldReportSHA256": "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e",
+  "oldFalseVerdictSHA256": "3575b70f0531560aeecc94935cf41f4415c15e1a5bef7e494b8f57c2cb31681d",
+  "realAdbCallsInTests": 0,
+  "readOnlyAdbDeviceEnumerations": 1,
+  "androidDeviceListEmpty": true,
+  "actualAndroidSampling": false,
+  "installations": 0,
+  "inferenceCalls": 0,
+  "mediaCapture": 0,
+  "modelOrRuntimeDownloads": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false
+}

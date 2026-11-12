@@ -1,3 +1,5 @@
+W3（2026-11-12）：ADB采样适配器整套Python128/128、源码复核通过，仅本地stand-in证据；Android ACK IO/新鲜报告传输/实包/新合同与真机质量资源仍待验，W3/R4/R5 open。见[验证](validation/w3-adb-process-sampler-20261112.md)。
+
 W3发布后错误信号（2026-11-12）：首文件层03059a8已双端同步，medium已以显式异常/cause解决、2RED→完整67GREEN；实际协调器/Android实包/新真机合同未验，W3/R4/R5open。[窄修](validation/w3-terminal-publication-error-signal-20261112.md)。
 
 W3本地文件原语（2026-11-12）：Python67/67（文件45+纯校验22）/语法/旧120冻结与false verdict保持；实际协调器、Android实包与新真机合同未验，W3/R4/R5open。[验证](validation/w3-terminal-file-primitives-20261112.md)。

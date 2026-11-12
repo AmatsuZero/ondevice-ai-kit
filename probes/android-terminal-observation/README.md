@@ -1,9 +1,9 @@
 # Terminal observation contract components
 
 This isolated probe supplies a bounded Kotlin ACK barrier, a pure Python
-validator, local file primitives and a local observation coordinator for a future
-independent W3 run. It does not run Android, sample `/proc`, perform inference,
-or change the consumed heap run.
+validator, local file primitives, a local observation coordinator and an ADB
+process-sampling adapter for a future independent W3 run. Android runner
+integration and device acceptance remain pending. No consumed run is changed.
 
 `TerminalObservationBinding.ackBytes()` and Python `acknowledgement()` share six
 ASCII lines terminated by LF: protocol, run ID, fingerprint, PID, process start
@@ -21,8 +21,10 @@ rtk proxy python3 -B -m unittest discover -s probes/android-terminal-observation
 The Kotlin runner requires a new output directory and writes compilation output,
 test output and a receipt containing the Java/classpath for `AckFixtureKt`.
 It compiles with `-Werror`, runs 45 checks and the cross-iteration clock regression.
-The Python suite contains 102 test methods: 22 validator checks, 45 local file
-checks and 35 coordinator checks, with additional boundary subtests.
+The Python suite contains 128 test methods: 22 validator checks, 45 local file
+checks, 35 coordinator checks and 26 ADB sampler checks, with additional boundary
+subtests. Sampler tests use injected responses and real local subprocesses that
+stand in for ADB; the suite does not connect to a phone.
 `AckFixture.kt` emits actual Kotlin bytes for cross-language comparison.
 
 The callbacks used by the Kotlin barrier must themselves have bounded execution;
@@ -55,8 +57,19 @@ and ACK in that order. Its resource summary is the greater RSS and lower availab
 value of two samples. Errors stop the operation without retry or rollback of
 earlier durable outputs.
 
+`AdbProcessSampler` supplies a subprocess-capable sample callback. It reads
+stat/status/meminfo/stat for one configured PID/startTicks, validating identity
+and required values after each read. Remote commands use one safely quoted
+string and `head -c 65537`; responses must be 1..65536 bytes of ASCII without NUL.
+Each call has a configured timeout of at most two seconds. Errors propagate
+without retry. The adapter returns measurements, including zero; resource
+acceptance remains the coordinator's responsibility. The normal subprocess
+boundary is tested with a private fake ADB executable. Actual Android process
+sampling remains unverified.
+
 These tests verify local IO and callback ordering. Real device sample collection,
 fresh report transport, Android ACK IO, Android build/package review and a fresh
 frozen device contract remain separate work. See the [pure-component scope](../../docs/validation/w3-terminal-observation-components-20261112.md),
 [local file validation](../../docs/validation/w3-terminal-file-primitives-20261112.md)
-and [coordinator validation](../../docs/validation/w3-terminal-coordinator-20261112.md).
+[coordinator validation](../../docs/validation/w3-terminal-coordinator-20261112.md)
+and [sampler validation](../../docs/validation/w3-adb-process-sampler-20261112.md).
