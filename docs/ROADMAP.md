@@ -1,3 +1,5 @@
+W3（2026-11-12）：三适配器终态协调器完整Python171/25AST、原120冻结/失败摘要及源码复核裁定accept；实际本地主机组合验证第三采样与journal先于ACK link，仅一次handshake，非Android/完整driver。独立wrapper候选生成中，真机/生产余门继续，W3/R4/R5open、源码未push。见[验证](validation/w3-adb-terminal-observation-20261112.md)。
+
 W3远端ACK发布器`9a6ed92`已同步两端#15/Wiki并逐字回读，源码未push；见[同步收据](validation/w3-adb-terminal-ack-publisher-sync-20261112.json)。157检查不关闭W3/R4/R5，实际协调器/新实包合同及真机生产余门继续。
 
 W3（2026-11-12）：远端ACK发布适配器完整Python157/源码复核通过，仅host stand-in证据；远端协调器组合测试与实现候选各在原请求生成，完整host-loop/实包/新合同及真机生产余门继续，W3/R4/R5open。见[验证](validation/w3-adb-terminal-ack-publisher-20261112.md)。

@@ -1,0 +1,62 @@
+{
+  "at": "2026-11-12T11:41:28.890356+00:00",
+  "scope": "three-real-ADB-adapters-composed-with-local-transport-stand-ins",
+  "suite": {
+    "at": "2026-11-12T11:40:04.205158+00:00",
+    "exitCode": 0,
+    "totalMethods": 171,
+    "externalMethods": 4,
+    "parentMethods": 10,
+    "pythonFilesParsed": 25,
+    "frozenOldFilesVerified": 120,
+    "oldReportAndFalseVerdictSHA256": {
+      "artifacts/verification/w3-qwen-heap-20261111/device-report-confirm.json": "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e",
+      "artifacts/verification/w3-qwen-heap-20261111/parent-heap-acceptance.json": "3575b70f0531560aeecc94935cf41f4415c15e1a5bef7e494b8f57c2cb31681d"
+    },
+    "protectedDirtyNonOwnedFilesVerified": 96,
+    "sourceSHA256": {
+      "adb_terminal_observation.py": "4dca5a93ce500bf9c81514fabca73939b54b5c829bb483f08de8edf504aea85a",
+      "test_adb_terminal_observation.py": "9a76b6742bc145affcde366c1ae91b7118f9434a1188aa07459e1b33477df6dd",
+      "test_remote_observation_parent.py": "760cbb9fa93673668a6f6d049e2e34a465bde5eee656ecfa3a7523d96d77737d",
+      "test_remote_observation_boundaries.py": "1d55519567beee9a4de75eeadd9a60e1267a8b82fb10ecb1e672edaab2b223e8"
+    },
+    "actualAndroidOperations": 0
+  },
+  "directExternalAndParentMissingModuleREDBeforeIntegration": true,
+  "sourceReviewAdjudication": {
+    "priorVerdict": "revise",
+    "verdictAfterEvidence": "accept",
+    "dispositions": [
+      {
+        "finding": 1,
+        "decision": "withdraw",
+        "reason": "Exact dependency source shows terminal_observation_coordinator.py:62 defines `def _probe_path(root_resolved, rel, parts):` — the function is DEFINED in the imported module, not merely re-exported, and terminal_file_io has NO _probe_path (helperInTerminalFileIo:false). Reproduction confirms remoteModuleImported:true, helperDefinedIn that path, helperSourceLine:62, and parent identity-checked function.__module__. The prior ImportError/fragility concern assumed _probe_path lived only under terminal_file_io and was at best an undocumented re-export; this is refuted. The original dependency paragraph's ambiguous grouping of _probe_path after terminal_file_io descriptions was a documentation/agent limitation, not an implementation failure."
+      },
+      {
+        "finding": 2,
+        "decision": "withdraw",
+        "reason": "Actual validator terminal_observer.py:169-170 requires `\"terminalObservationGap\" not in obs or obs.get(\"terminalObservationGap\") is not None` -> raise ValueError(\"gap invalid\"). Reproduction confirms gapNoneAcceptedByActualValidator:true and missingGapRejected:\"gap invalid\". The prior concern that the None field could be rejected is inverted: the field is MANDATORY and must be exactly None; removing it breaks the accepted ACK contract with ValueError('gap invalid'). ackBytes proves a successful acknowledgement was produced with the None field present."
+      }
+    ],
+    "remainingFindings": [],
+    "limitations": [
+      "Source-only adjudication; no tools/MCP/shell executed by me. Reproduction evidence (remoteModuleImported, helperDefinedIn, helperSourceLine, gapNoneAcceptedByActualValidator, missingGapRejected, ackBytes) is parent-supplied, not independently re-executed here.",
+      "External tests are still under correction; no integration/full-suite/device acceptance claim is made. This limitation is preserved even though both findings are withdrawn.",
+      "Original review dependency-paragraph ambiguity (grouping _probe_path after terminal_file_io descriptions) is recorded as a parent-context/agent limitation, not proof of implementation failure; resolved by exact line reference showing _probe_path is defined in terminal_observation_coordinator:62.",
+      "Candidate source SHA256 (4dca5a93ce500bf9c81514fabca73939b54b5c829bb483f08de8edf504aea85a) and primary 10-methods GREEN evidence are carried forward unchanged; neither is re-verified here beyond the supplied reproduction.",
+      "Other edits and the separate external tests-only correction effort are preserved untouched; no recursive delegation and no source changes performed."
+    ]
+  },
+  "sourceReviewReproduction": "remote-review-reproduction/receipt.json",
+  "reviewScope": "supplied-source original review plus bounded fact adjudication; parent executes acceptance",
+  "actualAndroidTransportVerified": false,
+  "fullPollingLaunchRestoreDriver": false,
+  "deviceOperations": 0,
+  "inferenceCalls": 0,
+  "mediaCapture": 0,
+  "systemAsrRequests": 0,
+  "modelOrRuntimeDownloads": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false
+}

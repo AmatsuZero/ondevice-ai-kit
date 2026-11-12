@@ -1,3 +1,7 @@
+## 2026-11-12：三适配器终态协调器已验
+
+完整Python171/25AST（新增外部4+父10）、旧120冻结/原失败摘要及96其他dirty路径保持；源码复核两条意见经依赖/validator实测撤回，最终accept。[验证](../validation/w3-adb-terminal-observation-20261112.md)。实际本地fake-ADB/shell组合sampler/两次fresh read/publisher，先持久化证据，第三同进程采样与journal完成后才link；覆盖进程退出及IO失败。只是单次handshake，非完整driver/Android。独立wrapper候选生成中，实包/新合同/真机质量资源与生产余门继续，W3/R4/R5open，源码未push。
+
 ## 2026-11-12：远端ACK发布器同步检查点
 
 本地`9a6ed92`已同步GH#15comment6821804614/GL#15note43931/GHWiki62a38e2b，双Wiki SHA4cf4fced5810277dddf8ac985248b2b929337d81ac6827fa9805f2aa43d11771逐字一致，[收据](../validation/w3-adb-terminal-ack-publisher-sync-20261112.json)。marker已用勿重发，源码未push。157 Python/源码accept只验主机适配器，实际协调器/完整host-loop/Android实包合同与真机质量资源及生产余门继续，W3/R4/R5open。

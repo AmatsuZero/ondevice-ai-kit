@@ -1,3 +1,9 @@
+## W3三适配器组合：真实嵌套argv与复核上下文（2026-11-12）
+
+- 初始父10检查3fail中，两条真实sourceFingerprint格式预检迟于callback，精确外部补丁补64位小写hex；另一条父测试错误只允许OSError，既有durable writer对stale路径抛ValueError也合法，按实际合同纠正。测试不能为假定异常类改正确writer。
+- 外部fake-ADB测试把run-as嵌套脚本当裸cat/head/ln，实际3fail/3error；外部transport补丁又漏nonlocal，实际5errors。分别精确外部窄修、原件/真实失败保留。直接缺模块RED必须在无源码目录执行；一次同目录误测不算RED，另取真正RED。最终14新方法/整套171通过，非Android证据。
+- 源码复核误归属_probe_path并怀疑gap=None；真实函数定义在terminal_observation_coordinator:62，validator要求gap存在且None。父import/validator复现后限定裁定撤回，无源码改动。供给依赖说明含糊属于主代理上下文限制，原revise/裁定均保留，禁止为不可复现意见改正确协议。证据`.omx/artifacts/w3-terminal-observation-20261112/remote-{review-reproduction,review-adjudication,external-final-red,repository-acceptance}/`。
+
 ## W3远端ACK：精确类型、完整标识符与占位路径（2026-11-12）
 
 - 首发布器外部8方法2fail：bytes子类响应被接受，测试又把stage占位词当字面文件名。父边界再真实8fail/2error：五阶段均接受bytes子类，三个标识符的match/$接受尾随换行，math.isfinite先转换超大整数触发OverflowError。外部精确补丁改exact bytes/fullmatch/仅float有限性检查后，外部8+父6真实本地subprocess/file+父4边界及完整Python157通过。原件、RED和修补JSON均保留于`.omx/artifacts/w3-terminal-observation-20261112/publisher-*`。

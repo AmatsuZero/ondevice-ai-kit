@@ -1,8 +1,8 @@
 # Terminal observation contract components
 
 This isolated probe supplies a bounded Kotlin ACK barrier, a pure Python
-validator, local file primitives, a local observation coordinator and an ADB
-process-sampling adapter for a future independent W3 run. Android runner
+validator, local file primitives, local and transport-aware observation
+coordinators, and three ADB adapters for a future independent W3 run. Android runner
 integration and device acceptance remain pending. No consumed run is changed.
 
 `TerminalAckFile` reads the generated alias-private ACK file without writing or
@@ -42,9 +42,9 @@ rtk proxy python3 -B -m unittest discover -s probes/android-terminal-observation
 The Kotlin runner requires a new output directory and writes compilation output,
 test output and a receipt containing the Java/classpath for `AckFixtureKt`.
 It compiles with `-Werror`, runs 45 checks and the cross-iteration clock regression.
-The Python suite contains 157 test methods: 22 validator checks, 45 local file
+The Python suite contains 171 test methods: 22 validator checks, 45 local file
 checks, 35 coordinator checks, 26 ADB sampler checks, 11 report-reader checks
-and 18 ACK-publisher checks,
+18 ACK-publisher checks and 14 remote-coordinator checks,
 with additional boundary
 subtests. Sampler tests use injected responses and real local subprocesses that
 stand in for ADB; the suite does not connect to a phone.
@@ -119,9 +119,26 @@ failure, directory-sync failure and real subprocess timeout. AOSP source review
 supports the command semantics; actual OEM shell/toybox and filesystem behavior
 remain a separate device gate.
 
+`publish_remote_terminal_observation()` composes all three actual adapters. It
+preflights the binding/configuration/output paths, encloses two fresh report
+reads in same-process resource samples, validates the exact report bytes and
+persists the local observed report, receipt and ACK. After remote stage readback
+and file fsync, its before-link callback takes a third same-process resource
+sample and durably writes a separate journal before allowing publication.
+Six timestamps use one host monotonic clock domain. Any error stops without
+retry or rollback; publication uncertainty remains typed and evidence is retained.
+
+Four external methods and ten parent methods cover composition, binding
+snapshots, resource rejection and clock regression. Six parent methods execute
+the real adapters through a local fake ADB, host shell, hardlink and fsync,
+including the old process-exit race, journal failure preventing publication and
+directory-fsync failure leaving a complete final. This is one terminal handshake;
+it is not the complete polling/launch/restore driver or Android device evidence.
+
 These tests verify local IO and callback ordering. Real device sample collection,
 fresh report transport, Android ACK IO, Android build/package review and a fresh
 frozen device contract remain separate work. See the [pure-component scope](../../docs/validation/w3-terminal-observation-components-20261112.md),
 [local file validation](../../docs/validation/w3-terminal-file-primitives-20261112.md)
 [coordinator validation](../../docs/validation/w3-terminal-coordinator-20261112.md)
-and [sampler validation](../../docs/validation/w3-adb-process-sampler-20261112.md).
+[sampler validation](../../docs/validation/w3-adb-process-sampler-20261112.md)
+and [remote-coordinator validation](../../docs/validation/w3-adb-terminal-observation-20261112.md).

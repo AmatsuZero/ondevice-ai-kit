@@ -1,3 +1,7 @@
+## 2026-11-12：三适配器协调器已集成验收，下一项是独立 Android wrapper
+
+实际 sampler/reader/publisher 组合已集成，外部4+父10及完整Python171/25AST通过，旧120冻结/原失败摘要及96其他dirty路径保持；[验证](validation/w3-adb-terminal-observation-20261112.md)。源码复核两条意见经实际依赖/validator反证后撤回、最终accept，无源码迎合性改动。原预检/测试传输/遗漏nonlocal失败和误放源码目录的无效RED均保留，真正缺模块RED另取。主机组合已验证第三采样/journal先于link，仍非Android或完整polling/launch/restore。下方29935/78032等历史live记录已终态，勿poll。唯一live为免费hy4free wrapper原session38140，目录`/private/tmp/odai-w3-terminal-wrapper-implementation-20261112/`，不重发；独立wrapper父工具已实际缺类型编译RED，候选尚未验收。当前ADB只读清单为空，零安装/推理；新wrapper-driver/实包/冻结合同与真机生产余门继续，W3/R4/R5open、goalactive，源码未push。实时指针`sampler-next-task.json`已刷新。
+
 ## 2026-11-12：远端ACK发布器已提交并双端同步
 
 本地`9a6ed92`精确13文件，源码未push；GH#15comment6821804614、GL#15note43931、GHWiki62a38e2b逐字回读，双Wiki SHA4cf4fced5810277dddf8ac985248b2b929337d81ac6827fa9805f2aa43d11771一致，[收据](validation/w3-adb-terminal-ack-publisher-sync-20261112.json)。marker已用勿重复，各目标各一次新写入。157检查/源码accept及旧冻结/原失败保持；所有publisher请求均终态。当前仅远端协调器独立tests原session22761（hy3）/source原session72144（hy4free）在生成，父6真实组合验收已missing-module RED；等待交付和实际GREEN，不能从静默重发。真实Android/完整wrapper-driver/新实包合同和真机生产余门继续；W3/R4/R5open、goalactive，无新设备操作。
