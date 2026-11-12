@@ -1,3 +1,7 @@
+## 2026-11-12：ADB采样器已提交并双端同步，下一ACK文件测试进行中
+
+本地`0c32369`精确11文件，源码未push；GH#15comment6818565098、GL#15note43566、GHWiki050db10d逐字回读，两Wiki SHAad1637746ef2878f08096a86e6515faac09b30633390d06c50e5d9f24eddbe95一致。[同步收据](validation/w3-adb-process-sampler-sync-20261112.json)，marker已用勿重发、各目标各一次新写入。128Python/旧120冻结/原失败保持，99原dirty扣除自身前缀后无漂移。sampler请求全部终态，旧native429不重试。下一独立`TerminalAckFileChecks.kt`免费hy3 no-tools请求在`/private/tmp/odai-w3-terminal-ack-file-tests-20261112/`，exec session73332，尚未收取；只领取此测试文件、原请求不重发。接口合同已补本地spec/plan尚未暂存；先审查候选/真实Kotlin缺类型RED，再外部实现、实际编译/验证，后续wrapper-driver/Android实包/新冻结合同/真机余门继续。W3/R4/R5open、goalactive，当前ADB清单为空，不重复要求解锁。
+
 ## 2026-11-12：ADB进程采样器已集成，128检查及源码复核通过
 
 `AdbProcessSampler`已按外部候选/精确补丁集成；17外部+9父验收、整套Python128/128及语法通过，真本地子进程stand-in覆盖默认调用/错误/超时。最终源码复核accept，无critical/important；一处测试头旧注释minor延后。旧120冻结/报告双读/false verdict保持，真实ADB只读清单为空、零安装/推理/采样。[验证与交付限制](validation/w3-adb-process-sampler-20261112.md)：原测试raw262144B截断，仅恢复完整event3源码，CLI内部connection retry文字保留；首伪Write文本6fail/3error、窄修IndentationError均拒收，原件与13.993s单块修复保留。所有sampler请求已终态，无活动helper/native重试；W3/R4/R5open、goalactive，源码分支未push。下一Android本地ACK IO/真实报告传输/独立wrapper-driver/实包、新冻结合同和真机余门，旧run不重放；marker同步另附收据。

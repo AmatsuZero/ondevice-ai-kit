@@ -82,3 +82,8 @@ independent wrapper/driver names, build/lint/APK review and a new frozen unconsu
 device contract. Full physical quality/resources, source-to-AAR/recursive binary
 composition, production notices and release review remain open. No consumed run
 is replayed or accepted retroactively.
+
+Synchronized after local commit `0c32369`: GitHub #15 comment 6818565098,
+GitLab #15 note 43566 and GitHub Wiki `050db10d` were read back exactly; both
+Wiki content hashes match. [Synchronization receipt](w3-adb-process-sampler-sync-20261112.json).
+The source branch remains unpushed.

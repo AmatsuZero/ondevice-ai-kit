@@ -1,3 +1,7 @@
+## 2026-11-12：ADB采样器同步检查点
+
+`0c32369`本地提交，双端#15/Wiki已逐字回读且Wiki摘要一致，[收据](../validation/w3-adb-process-sampler-sync-20261112.json)。128检查与原冻结保持仅为host stand-in验收，真实Android采样/ACK IO/新鲜报告传输/实包/新合同及真机质量资源和生产发布余门继续；W3/R4/R5open、源码分支未push。下项ACK文件tests-first候选正在独立生成。
+
 ## 2026-11-12：ADB进程采样适配器已验
 
 外部候选及精确窄修集成，整套Python128/128（sampler26）、语法与旧120冻结/原失败摘要保持；默认subprocess以真实本地fake-ADB验证错误/超时/引用和身份中途变化，最终supplied-context源码复核accept、仅旧测试头注释minor延后。[验证](../validation/w3-adb-process-sampler-20261112.md)。真实Android未采样，当前只读设备清单为空；Android ACK IO/新鲜报告传输/独立实包/新冻结合同及全量真机质量资源和生产发布余门继续，W3/R4/R5open，源码分支未push。原测试响应截断完整消息恢复、CLI内部连接重试及候选拒收均透明保留。
