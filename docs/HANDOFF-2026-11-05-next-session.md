@@ -1,3 +1,7 @@
+## 2026-11-12：实际ADB采样器合同已定义，测试候选仍在同请求生成
+
+接口`AdbProcessSampler.sample()`固定stat/status/meminfo/stat四读、PID/startTicks与有界响应/timeout/单串远端引用；计划与设计已补实际合同。免费hy3 tests-first请求在`/private/tmp/odai-w3-adb-process-sampler-tests-20261112/`，统一exec session26116/PID10754已观察存活，stdout/stderr均空、无terminal收据，未交付测试；继续收同一请求，不因静默/观察超时重发或付费切换。当前ADB列表为空，只有只读devices检查、零安装/推理；证据`.omx/artifacts/w3-terminal-observation-20261112/sampler-readonly-preflight/`及`sampler-next-task.json`。当前完整suite仍是已验102，尚未添加sampler测试；交付后先审查并取得真实缺实现RED，再接实现候选/实际传输与AndroidACK接入。W3/R4/R5open、goalactive，旧run不重放。
+
 ## 2026-11-12：本地协调器已提交并双端同步
 
 本地`1e70b86`精确11文件、源码分支未push；GH#15comment6817725675、GL#15note43492、GHWiki aeb41fad逐字回读，双Wiki SHA518ca13ef9ed88aebcf3d48098c1ae8cf7d27acdf80c3eca417681c24cc77a75一致。[收据](validation/w3-terminal-coordinator-sync-20261112.json)，marker已用勿重发；各目标仅一次新写入，按attempt留日志。102Python/旧120冻结/原false verdict保持，99既有dirty扣除自身前缀后保持。下一实际ADB采样器tests-first候选已启动免费hy3，无native重试/设备调用；W3/R4/R5open、goalactive，真实报告传输/Android ACK IO/实包/新合同及真机生产余门继续。

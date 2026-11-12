@@ -111,6 +111,26 @@ report was freshly transported from Android. Real same-process collection,
 transport bounds, Android ACK IO and the independently frozen run remain
 separate integration gates.
 
+## Actual process-sampling adapter
+
+The next host adapter uses the selected ADB executable/serial/package and fixed
+PID/startTicks. Each sample reads `/proc/PID/stat`, `/proc/PID/status`,
+`/proc/meminfo`, then `/proc/PID/stat` again as four sequential `exec-out run-as`
+commands. Both stat reads must match the expected identity. Parse field 22 after
+the last parenthesized comm delimiter; names may contain spaces and parentheses.
+Status PID must match, and RSS/MemAvailable kB values convert exactly to bytes.
+Missing, duplicate, malformed or overflowing required values and transport
+failures stop immediately. This adapter reports measurements; the coordinator
+continues enforcing the existing resource gates.
+
+Each remote command is one `shlex.join` string, with validated application ID,
+serial and numeric PID, and `head -c 65537` to detect data over the 65536-byte
+response bound. Each invocation has a timeout of at most two seconds, no retries,
+no shell compound commands and no mutation. Constructor rejects invalid config
+before any ADB call. Injected-runner tests prove parsing and invocation behavior;
+actual ADB results remain a separate device integration check. This adapter alone
+does not refresh terminal reports, publish a remote ACK or prove gap recovery.
+
 ## Exit criteria
 
 Fault regressions prove wait-until-ACK, bounded timeout, strict identity/bytes,
