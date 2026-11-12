@@ -1,3 +1,7 @@
+## 2026-11-12：ACK文件读取器已验
+
+23真实文件检查（13外部+6屏障联调+4父边界）和缓存API33无JDK编译通过；外部复核两条意见经真实File表示/源码反证后撤回，最终accept。[验证](../validation/w3-terminal-ack-file-20261112.md)。仅主机文件与API编译证据，非Android运行时/旧gap修复。旧120冻结/原失败保持；实际报告传输、远端ACK发布、新wrapper-driver/实包/新冻结合同及真机质量资源和生产发布余门继续，W3/R4/R5open、源码分支未push。新鲜报告读取测试同一请求仍live，候选未集成。
+
 ## 2026-11-12：ADB采样器同步检查点
 
 `0c32369`本地提交，双端#15/Wiki已逐字回读且Wiki摘要一致，[收据](../validation/w3-adb-process-sampler-sync-20261112.json)。128检查与原冻结保持仅为host stand-in验收，真实Android采样/ACK IO/新鲜报告传输/实包/新合同及真机质量资源和生产发布余门继续；W3/R4/R5open、源码分支未push。下项ACK文件tests-first候选正在独立生成。

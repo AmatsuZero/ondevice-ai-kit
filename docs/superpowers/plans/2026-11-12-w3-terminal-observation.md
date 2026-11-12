@@ -61,7 +61,21 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
 
   Completion: both groups satisfied RED before integration, all 26 passed after exact helper edits; full 128 and source review accepted. The earlier live request is terminal. Final: minor (deferred): test module header still describes its original missing-implementation stage; README and validation record current implementation/test state.
 - [ ] Derive new wrapper/driver names, report paths and unconsumed run identity; do not execute the old driver.
+- [ ] Add a fresh subprocess-capable report reader for the distinct `files/w3-qwen-terminal/report-<run_id>.json` namespace. Separate external tests-first/source candidates, exact raw bytes and safely quoted static type/symlink guards; no cache/retry or device mutation. Reader tests may overlap the already-RED ACK reader source task because they own independent files. Actual host-loop ordering/remote ACK publication remain separate gates.
+
+  Ruling (2026-11-12): six independent parent real-subprocess report-reader methods directly fail with missing-module RED while the unchanged no-source-context external test request remains live. Source generation may overlap that independent test request. Integration still requires received/reviewed external tests, their direct missing-feature RED and both full GREEN groups. No request is duplicated and no tests-first gate is removed.
 - [ ] Wire local bounded ACK reads after release/teardown/terminal persistence; stale ACK refusal precedes native calls.
+
+  Next slice: receive `TerminalAckFileChecks.kt` first for the specified `TerminalAckFile` interface; compile the direct missing-type RED before the external implementation. Reuse cached JVM/NIO patterns, fixed 1025-byte cap and final/stage stale checks; leave actual wrapper ordering and Android package/device evidence open until separately tested.
+
+  Completion (2026-11-12): direct missing-type RED preceded source integration;
+  13 external +6 reader/barrier +4 parent boundary checks and cached API33
+  `-no-jdk` compilation pass. Initial missing-return and normalized-alias
+  candidates were rejected. Final review's two findings were withdrawn after
+  actual File-constructor representation and current-return-syntax evidence;
+  adjudication accepts. No device IO, wrapper ordering, APK or old-gap recovery
+  is inferred. The distinct remote-report tests remain live and source integration
+  remains gated on their delivery/RED/GREEN.
 - [ ] Reproduce the old exit race and IO-failure cases using the actual new host loop and wrapper fault doubles, then build/lint/check real APK contents and obtain source/parent review.
 - [ ] Freeze a separate complete contract with inputs, hashes, budgets and restoration. Run only if the current Android channel, identity and unlock prerequisites are verified.
 - [ ] Collect exact same-run terminal evidence and restore the new alias/staging. Never infer device acceptance from pure components.

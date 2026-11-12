@@ -131,6 +131,53 @@ before any ADB call. Injected-runner tests prove parsing and invocation behavior
 actual ADB results remain a separate device integration check. This adapter alone
 does not refresh terminal reports, publish a remote ACK or prove gap recovery.
 
+## Device ACK file adapter
+
+The next device filesystem adapter is `TerminalAckFile(privateRoot: File,
+runId: String)` in the existing terminal package. It exposes the generated
+`file: File` (`ack-<runId>.txt`), `requireAbsent()` and `readOrNull(): ByteArray?`.
+It reads raw bytes for the existing barrier to validate; it never normalizes,
+creates, deletes or acknowledges files itself. `requireAbsent()` rejects both
+the final path and its fixed `.stage` sibling, including dangling symlinks,
+before the future wrapper begins Activity/native work. During polling, an absent
+final path returns null even while the host is writing its separate stage file.
+
+The root must already be a canonical absolute nonsymlink directory. Checks
+compare the observable supplied `File` path with the canonical path;
+the adapter cannot recover separators already normalized by the `File`
+constructor before invocation. Dot/parent components and symlink ancestry that
+remain in the supplied path are refused. Symlinks/nonregular final files are
+refused, including before channel open;
+reads use no-follow options, a fixed at-most-1025-byte buffer, closed channels,
+and reject zero or over1024-byte finals and observed size changes. A zero-progress
+read is a failure. Missing final is the only null result; other IO errors
+propagate without retry or cleanup. This is an alias-private single-writer
+boundary, not atomic race immunity against malicious same-UID mutation or a
+preemptible filesystem syscall guarantee. Existing cached Java NIO patterns are
+reused without changing the consumed allocator-policy source. JVM tests precede
+implementation; Android API compilation/packaging and real IO remain later gates.
+
+## Fresh remote report reader
+
+The new wrapper namespace is `files/w3-qwen-terminal`; no consumed driver or
+report path is reused. `AdbTerminalReportReader(adb, serial, package, run_id,
+timeout_seconds=2.0, runner=None).read()` performs a fresh subprocess call on
+every read and returns exact nonempty raw bytes, at most 1 MiB. Its generated
+report path is `files/w3-qwen-terminal/report-<run_id>.json`. Constructor config
+uses the sampler's exact-string and ASCII identity bounds; timeout is finite,
+positive and at most two seconds. Invalid config fails before transport.
+
+One safely quoted `exec-out run-as <package> sh -c <fixed script>` checks the
+`files` directory, new report directory and final file for their required type
+and absence of symlinks, then invokes `head -c 1048577` on that exact final.
+Transport errors/timeouts, non-exact bytes and empty/overbound output propagate
+or fail without retry, fallback or cached data. The reader does not parse JSON,
+normalize bytes, mutate the device or clear an observation gap. The existing
+validator must still compare two actual reads between same-process samples.
+This private-alias script is not descriptor-level remote metadata stability or
+an atomic defense against malicious same-UID path replacement. Fault doubles
+and local fake subprocesses precede actual Android transport acceptance.
+
 ## Exit criteria
 
 Fault regressions prove wait-until-ACK, bounded timeout, strict identity/bytes,

@@ -1,3 +1,8 @@
+## W3 ACK文件：规范路径与复核意见需真实复现（2026-11-12）
+
+- 首候选Kotlin缺return真实编译失败；下一版比较rootPath.normalize()与realPath，13+6检查绿但父dot/parent别名检查失败。应比较传入File仍可观察的原Path，保留原始祖先symlink检查；外部整块修正后23GREEN、API33无JDK编译通过。
+- 最终源码复核把重复斜杠归一化误归因于toPath，且引用当前源码不存在的非局部return out。JDK21与真实reader复现证明File构造时已去重斜杠，File.path也无法恢复历史String；dot/parent路径仍真实拒绝。原revise保留，限定复核撤回两条并accept；不为不可复现意见改正确源码。证据`.omx/artifacts/w3-terminal-observation-20261112/ack-file-{candidate-check,corrected-green,boundary-green,review-reproduction,review-adjudication}/`。这仍非Android运行时或旧末端gap验收。
+
 ## W3 ADB采样器：完整消息恢复与精确补丁验收（2026-11-12）
 
 - CBC测试响应自然退出0、raw恰262144B、最终result字符串截断；4个完整事件中event3仍含完整可解析17测试源码。只恢复这个完整JSON消息、核语法/摘要并做真实缺实现RED，不补截断尾、不宣称根JSON/最终result完整，也未重发测试请求。event1另有CLI自行“Connection interrupted. Retrying automatically...”文字；只能称主代理未重发，不能笼统称CLI无重试或推断quota错误。原件/完整事件/恢复源码与边界在`sampler-tests-candidate/`。

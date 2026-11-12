@@ -5,6 +5,27 @@ validator, local file primitives, a local observation coordinator and an ADB
 process-sampling adapter for a future independent W3 run. Android runner
 integration and device acceptance remain pending. No consumed run is changed.
 
+`TerminalAckFile` reads the generated alias-private ACK file without writing or
+normalizing bytes. Its constructor accepts an existing final so it can be read;
+`requireAbsent()` separately refuses stale final/stage entries before future
+native work. Reads use no-follow file attributes/open, a fixed 1025-byte buffer
+and closed channels, rejecting empty/oversized/nonregular files, zero-progress
+reads and observed size changes. The existing barrier validates exact protocol
+bytes and the deadline. The portable acceptance runner covers 13 external file
+checks, 6 real-file/barrier checks and 4 parent boundary checks on macOS fixtures:
+
+```sh
+rtk proxy python3 probes/android-terminal-observation/check_ack_file.py /private/tmp/w3-ack-file-check-new
+```
+
+Pass `--android-jar /absolute/cached/platform/android.jar` for a separate
+`-no-jdk` Android API classpath compilation. This does not run on Android or
+establish the APK's minimum API. A `File` argument can already have normalized
+duplicate separators before construction; validation compares its observable
+path and rejects retained dot/parent components and symlink ancestry. The private
+single-writer scope does not promise atomic protection from malicious same-UID
+path replacement or preemptible filesystem calls.
+
 `TerminalObservationBinding.ackBytes()` and Python `acknowledgement()` share six
 ASCII lines terminated by LF: protocol, run ID, fingerprint, PID, process start
 ticks, and terminal-report SHA256. The host validator requires identical terminal
