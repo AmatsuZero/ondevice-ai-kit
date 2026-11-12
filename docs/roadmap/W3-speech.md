@@ -1,3 +1,7 @@
+## 2026-11-12：终态 wrapper 同步检查点
+
+本地`7688972`已同步GH#15comment6823427235/GL#15note43993/GHWiki0c629927，双Wiki SHA5be586a4c4661b4f9908f08c8cf17053e08341bbabb25139d6272e9d32cddd59逐字一致，[收据](../validation/w3-qwen-terminal-wrapper-sync-20261112.json)。marker已用勿重发，源码未push；完整驱动/新合同与同run真机、生产余门继续，W3/R4/R5open。下一poll-loop父6组已direct缺模块RED，外部4方法tests-first原请求仍live、实现未生成。
+
 ## 2026-11-12：独立终态 wrapper、build/lint 与实包已验
 
 58host组/783断言、Python171+构建工具10/29AST、缓存离线75任务和实际APK19类/65资源/4runtime匹配，独立diff范围源码及构建工具复核accept，无发现；旧120冻结/原失败摘要与96其他dirty路径保持。[验证](../validation/w3-qwen-terminal-wrapper-20261112.md)。新alias/report目录独立，终态持久化后精确hash/30秒ACK等待、失败不重写、坏stat与陈旧ACK阻断已在host验。原整份Empty stream、主代理API上下文导致的6compile errors及外部1File构造错误、工具路径4errors均保留修正。完整轮询/启动/恢复驱动、新冻结合同与真机质量资源和生产发布余门仍缺；零新设备/推理，W3/R4/R5open，源码未push。

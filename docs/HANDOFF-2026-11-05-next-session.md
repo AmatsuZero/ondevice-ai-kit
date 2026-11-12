@@ -1,3 +1,7 @@
+## 2026-11-12：终态 wrapper 已提交并双端同步
+
+本地`7688972`精确15文件，GH#15comment6823427235/GL#15note43993/GHWiki0c629927逐字回读，双Wiki SHA5be586a4c4661b4f9908f08c8cf17053e08341bbabb25139d6272e9d32cddd59一致，[收据](validation/w3-qwen-terminal-wrapper-sync-20261112.json)。marker已用勿重发，源码未push；58组783断言/75任务/实包仅host+Android包证据，W3/R4/R5open、goalactive。当前只剩poll-loop独立tests-first原session5180live；父6方法已实际direct缺模块RED于`poll-parent/`，实现尚未生成。全套驱动/新合同/同run真机与生产余门继续；不重放consumed旧run、不提前请解锁。
+
 ## 2026-11-12：独立终态 wrapper 与实际 Android 包已验
 
 外部小片段及精确窄修原字节集成，58host组/783断言、Python171+构建工具10、29AST、缓存离线75任务build/lint、实际APK19类/65资源/4runtime逐字节匹配；源码diff范围及完整构建工具复核accept，无发现。[验证](validation/w3-qwen-terminal-wrapper-20261112.md)。sourceFP`ff5b57b0…`，新alias`qwenterminal`，未执行新run；旧120冻结/原失败摘要及96其他dirty路径保持。首整份wrapper CLI0/raw0/Empty stream未交付、不重发；独立片段首编译6errors来自主代理API/nullability上下文错误，后1File(File)错误，均保留后外部修正，构建工具路径错误与10checks修正也保留。当前只有poll-loop独立4方法tests-first请求原session5180（hy3，`/private/tmp/odai-w3-terminal-poll-tests-20261112/`）在生成，其他上方历史live全部终态勿poll。主代理正写独立实机前的轮询/启动/恢复驱动，完整驱动/新冻结合同与真机生产余门未验；零安装/推理/麦克风/AiAi/模型或runtime下载、W3/R4/R5open、goalactive。不要因已有包就请用户解锁或运行旧driver。
