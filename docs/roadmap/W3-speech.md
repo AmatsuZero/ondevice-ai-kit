@@ -1,3 +1,7 @@
+## 2026-11-12：运行中轮询同步检查点
+
+本地`da4a888`已同步GH#15comment6825203978/GL#15note44009/GHWikib4b269eb，双Wiki SHA28fb6b571e882bdd641e8d145fc67c05bcf75f77f2c29f04574bb553f652a28b逐字一致，[收据](../validation/w3-terminal-polling-sync-20261112.json)。marker已用，源码未push；新鲜194项通过只证明host链路。outer冻结守卫/完整生命周期、新合同、同run真机与生产余门继续，W3/R4/R5open。
+
 ## 2026-11-12：运行中轮询验收检查点
 
 新增23方法、完整Python194/33AST通过，旧120冻结/原失败、95其他dirty路径、81准备源和两APK保持；[验证](../validation/w3-terminal-polling-20261112.md)。实际本地fake-ADB/subprocess验证先持久化、严格身份/预算、新鲜报告、终态一次ACK且发布后即返。静态复核accept；父端补三类跨回调121s真实RED→外部窄修GREEN。首阶段从loop起计时的更保守minor延后。完整outer启动/收取/部分准备失败恢复、新冻结与同run真机尚缺；W3/R4/R5open、零新设备/推理、源码未push。

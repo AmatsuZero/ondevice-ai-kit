@@ -1,0 +1,33 @@
+{
+  "issues": {
+    "gh": {
+      "id": 6825203978,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6825203978",
+      "sha256": "03506b8fb0c57b0a0888fae4ebc019a5e624547c69a31db2a1035f409f9525b4",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44009,
+      "url": null,
+      "sha256": "b63d53b0fe1c81d86d6ba9045aaabbea4960959e2827ec97d538d243a913fed8",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "b4b269eb80779c5d766ac68dc016eb807cd83a64",
+    "sha256": "28fb6b571e882bdd641e8d145fc67c05bcf75f77f2c29f04574bb553f652a28b",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "28fb6b571e882bdd641e8d145fc67c05bcf75f77f2c29f04574bb553f652a28b",
+    "readbackExact": true
+  },
+  "sourceCommit": "da4a888",
+  "marker": "<!-- w3-terminal-polling-20261112 -->",
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "originalGitLabEOF": "poll-publication/20261112T134040725540-glab-comments-fresh-page-1.stderr",
+  "recovery": "Exact-host NO_PROXY in publication subprocess only;idempotency query re-used GH comment"
+}

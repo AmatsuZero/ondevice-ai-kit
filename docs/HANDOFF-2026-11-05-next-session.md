@@ -1,3 +1,7 @@
+## 2026-11-12：运行中轮询已提交并双端同步
+
+本地`da4a888`精确11文件，GH#15comment6825203978/GL#15note44009/GHWikib4b269eb逐字回读，双Wiki SHA28fb6b571e882bdd641e8d145fc67c05bcf75f77f2c29f04574bb553f652a28b一致，[收据](validation/w3-terminal-polling-sync-20261112.json)。marker已用勿重发，源码未push。新鲜194项/26.857s/OK；GL首EOF保留，仅子进程精确host NO_PROXY恢复。下一outer冻结守卫/完整生命周期/新合同与同run真机继续，W3/R4/R5open、goalactive。
+
 ## 2026-11-12：运行中轮询已验收，外层生命周期继续
 
 免费hy3候选/窄修原字节集成，新增23方法、完整Python194/33AST通过；旧120冻结/原失败、95其他dirty路径、81准备源和两APK保持。[验证](validation/w3-terminal-polling-20261112.md)。静态复核accept，父端另补poll/sample/read跨121s三个真实RED并经外部修正GREEN；首阶段从loop起计时的保守minor延后。所有旧source-review/phase-fix及fragment请求均终态勿poll。下一完整outer启动/收取/部分prepare失败精确恢复仅有4路由RED与brief，尚未实现/冻结/跑设备；不重放旧consumed run。W3/R4/R5open、goalactive，零新安装/推理，源码未push。
