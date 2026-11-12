@@ -1,3 +1,7 @@
+## 2026-11-12：首轮未知phase预算漏洞已修正
+
+接线规划中新发现首poll/sample/read跨121s、anchor_phase=None绕过预算，真实3RED；恰好120s三例通过。hy3原62054/PID22993自然28.463s终态，单组count5删除phase-known条件，2方法GREEN后原样集成。新鲜196观察+13守卫=209方法、36AST、旧120冻结/原失败、95其他dirty、81源/两APK保持；[验证](validation/w3-terminal-first-window-20261112.md)。仅父端精确diff/实际RED→GREEN，无新独立全源复核。无在途helper，全部旧句柄终态勿poll。下一先实现brief中initial_progress可选API（已明确phase/index/startedNs）以跨startup保持首120s窗口，并共享runstart起240s总时钟，再B/C完整生命周期；该API尚未实现，勿直接写B后悄然重置预算。真实freeze/设备仍缺，ADB最新为空、W3/R4/R5open、goalactive，源码未push。
+
 ## 2026-11-12：冻结守卫已提交并双端同步
 
 本地`426ecf4`精确10文件，GH#15comment6826101329/GL#15note44016/GHWiki4503d449逐字回读，双Wiki SHAd0ff0b3b0d1347a166d52b4ba8235011a251d8ee78bcb3ad42c2d3eef2e3f4f5一致，[收据](validation/w3-terminal-device-contract-sync-20261112.json)。marker已用，源码未push；207方法/35AST仅host验收。当前无在途helper、全部旧句柄终态勿poll。下一outer启动/收取/部分准备恢复分片B/C、新freeze和同run真机继续；ADB最新为空、零新设备，W3/R4/R5open、goalactive。

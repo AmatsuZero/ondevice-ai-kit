@@ -1,3 +1,7 @@
+## W3阶段窗口：首phase尚未命名也不能免预算（2026-11-12）
+
+先前194GREEN/静态accept未覆盖第一轮：anchor_ns已从loopstart建立，却以anchor_phase!=None为五处预算前提；第一poll/sample/read耗121s时均真实错误ACK。新增2方法取得3RED，120s三等号案例原本通过；外部仅删五处phase-known条件，完整196观察+13守卫GREEN。不要把后续phase跨回调已修当首轮也已覆盖；未知phase时仍有保守起点和预算。startup接线还须显式传递首阶段起点、共享240s时钟，不能另起loop后重置窗口。证据poll-first-window-parent/red.*、poll-first-window-candidate/及同名repository-acceptance/；无真机/旧run重放。
+
 ## W3冻结守卫：最终裁定须区分类名、组件和异常继承（2026-11-12）
 
 独立review原revise，父真实证据表明UnicodeDecodeError已继承ValueError；包收据exactRunnerVerified是qualifiedclass，RUNNER是package/class组件，拆分后相等，不能据两者表示不同改正确协议。11Python driver/adapter复核范围与既有Kotlin/build/实包证据分开。固定已验包19unique非空str类名作为本次profile加强，四类coherent收据实际4RED→外部单块修正→完整13GREEN；其他正确表示不做无据改动，保留原revise与父裁定。正确literal重复和非法中间路径原OSError两minor延后；不把纯guard207host方法当真实freeze或设备完成。证据outer-freeze-source-review/及outer-freeze-final-candidate/。

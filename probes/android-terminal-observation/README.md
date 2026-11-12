@@ -43,9 +43,9 @@ rtk proxy python3 -B -m unittest discover -s probes/android-terminal-observation
 The Kotlin runner requires a new output directory and writes compilation output,
 test output and a receipt containing the Java/classpath for `AckFixtureKt`.
 It compiles with `-Werror`, runs 45 checks and the cross-iteration clock regression.
-The Python suite contains 194 test methods: 22 validator checks, 45 local file
+The Python suite contains 196 test methods: 22 validator checks, 45 local file
 checks, 35 coordinator checks, 26 ADB sampler checks, 11 report-reader checks
-18 ACK-publisher checks, 14 remote-coordinator checks and 23 polling checks,
+18 ACK-publisher checks, 14 remote-coordinator checks and 25 polling checks,
 with additional boundary
 subtests. Sampler tests use injected responses and real local subprocesses that
 stand in for ADB; the suite does not connect to a phone.
@@ -147,7 +147,9 @@ coordinator exactly once and returns immediately after publication, without a
 post-ACK process/resource/clock call. Failed terminal reports remain observation
 only. The first phase is conservatively timed from loop start; its first-read
 overhead reduces the remaining phase window. This low-priority review observation
-is retained. Four external and nineteen parent methods use actual local fake-ADB
+is retained. All five window guards also apply before the first phase is named;
+first poll/sample/read crossings at 121s fail, while exactly 120s remains inclusive.
+Four external and twenty-one parent methods use actual local fake-ADB
 subprocesses; they do not establish Android behavior or the outer lifecycle.
 
 These tests verify local IO and callback ordering. Real device sample collection,
@@ -160,3 +162,5 @@ recorded APKs. See the [pure-component scope](../../docs/validation/w3-terminal-
 and [remote-coordinator validation](../../docs/validation/w3-adb-terminal-observation-20261112.md).
 
 See [polling validation](../../docs/validation/w3-terminal-polling-20261112.md).
+The later [first-window correction](../../docs/validation/w3-terminal-first-window-20261112.md)
+records the independently reproduced initial-loop hole and its exact five-condition fix.

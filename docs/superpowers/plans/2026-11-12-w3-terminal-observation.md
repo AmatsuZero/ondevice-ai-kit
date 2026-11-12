@@ -170,6 +170,16 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
   Full outer launch/collect/partial-prepare restore, complete new freeze and
   same-run device proof remain open; four outer routing checks have missing-driver
   RED only. See docs/validation/w3-terminal-polling-20261112.md.
+
+  Follow-up (2026-11-12): while defining startup integration, first poll/sample/read
+  advancing121s before anchor_phase was named bypassed the120s guard;three actual
+  RED subcases and three inclusive120s successes are retained. Exact hy3 deletion
+  of the phase-known conjunct from five existing guards makes both new methods
+  GREEN. The loop-start anchor and all known-phase/API/protocol behavior remain.
+  Next interface dependency: initial_progress must carry the first verified
+  phase/index and conservative run-start hostns into polling so startup cannot
+  reset the120s first window. That optional API extension is specified in the
+  outer-driver brief, not implemented or device-verified yet.
 - [x] Validate a future complete frozen contract locally before any device action.
   The separate terminal_device_contract.py candidate covers strict JSON/paths,
   exact source/APK/plan/budget bindings, production protections and both current

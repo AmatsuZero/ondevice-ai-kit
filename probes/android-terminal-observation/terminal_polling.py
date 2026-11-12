@@ -163,7 +163,7 @@ def observe_until_terminal(root, binding, *, adb, serial, package, process_poll,
     anchor_index = None
     while True:
         guard_ns = clock()
-        if anchor_phase is not None and (guard_ns - anchor_ns) > 120000000000:
+        if (guard_ns - anchor_ns) > 120000000000:
             raise ValueError('progress window expired')
         pp = process_poll()
         if pp is None:
@@ -175,16 +175,16 @@ def observe_until_terminal(root, binding, *, adb, serial, package, process_poll,
         else:
             raise ValueError('process_poll returned invalid type')
         poll_clock_ns = clock()
-        if anchor_phase is not None and (poll_clock_ns - anchor_ns) > 120000000000:
+        if (poll_clock_ns - anchor_ns) > 120000000000:
             raise ValueError('progress window expired')
         sample = sampler.sample()
         _validate_sample(sample, snapshot)
         sample_ns = clock()
-        if anchor_phase is not None and (sample_ns - anchor_ns) > 120000000000:
+        if (sample_ns - anchor_ns) > 120000000000:
             raise ValueError('progress window expired')
         raw = reader.read()
         read_ns = clock()
-        if anchor_phase is not None and (read_ns - anchor_ns) > 120000000000:
+        if (read_ns - anchor_ns) > 120000000000:
             raise ValueError('progress window expired')
         report = _parse_report(raw, snapshot)
         phase = report['phase']
@@ -221,7 +221,7 @@ def observe_until_terminal(root, binding, *, adb, serial, package, process_poll,
                 'truePeakMeasured': False,
             }
         guard_ns = clock()
-        if anchor_phase is not None and (guard_ns - anchor_ns) > 120000000000:
+        if (guard_ns - anchor_ns) > 120000000000:
             raise ValueError('progress window expired')
         sleep(0.25)
         clock()

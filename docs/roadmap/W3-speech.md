@@ -1,3 +1,7 @@
+## 2026-11-12：首轮阶段窗口修正检查点
+
+首poll/sample/read跨121s的3个真实RED经hy3五处条件删除转GREEN，120s等号三例保持；新鲜196+13共209方法/36AST及全部旧冻结、失败、保护和实包摘要通过。[验证](../validation/w3-terminal-first-window-20261112.md)。这是host边界补漏，非Android证明；下一startup/polling首阶段与总时钟衔接、完整outer/恢复、新freeze和同run真机继续，W3/R4/R5open，零新设备/推理、源码未push。
+
 ## 2026-11-12：冻结守卫同步检查点
 
 `426ecf4`本地提交，GH#15comment6826101329/GL#15note44016/GHWiki4503d449逐字回读、双Wiki SHAd0ff0b3b0d1347a166d52b4ba8235011a251d8ee78bcb3ad42c2d3eef2e3f4f5一致，[收据](../validation/w3-terminal-device-contract-sync-20261112.json)。marker已用、源码未push；207方法不能代替完整outer/真实freeze/设备。下一生命周期及sourceadapter继续，W3/R4/R5open。
