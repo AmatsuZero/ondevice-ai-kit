@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-12T23:45:11.939953+00:00",
+  "observationMethods": 201,
+  "guardMethods": 14,
+  "terminalMethods": 59,
+  "newAdapterMethods": 8,
+  "totalMethods": 274,
+  "ASTFiles": 43,
+  "suites": [
+    {
+      "name": "observation",
+      "exitCode": 0,
+      "elapsedSeconds": 28.72965112500242
+    },
+    {
+      "name": "contract",
+      "exitCode": 0,
+      "elapsedSeconds": 1.6877959159901366
+    },
+    {
+      "name": "terminal",
+      "exitCode": 0,
+      "elapsedSeconds": 25.420661540993024
+    }
+  ],
+  "integration": {
+    "sourceExact": true,
+    "guardExact": true,
+    "testChange": "parents[4] to parents[2] only",
+    "sourceSHA256": {
+      "terminal_source_adapter.py": "d350bd340bab4f2676eb0ddf7c9ad5f6c95039b4738afca76db12c7b21b4c87c",
+      "terminal_device_contract.py": "440276fb0bedb6afaba583227b0c686092d041b98961a9f83fbcaf68cbbb6704",
+      "test_terminal_source_adapter_parent.py": "96fb96ce01daa4fc263a32b706d54972e261058a40d2242dcf0576a183328bb2"
+    }
+  },
+  "protection": {
+    "frozen": 120,
+    "protected": 95,
+    "prepared": 81,
+    "APKs": 2,
+    "drift": [],
+    "deviceOperations": 0
+  },
+  "sourceReview": "accept",
+  "sourceReviewEvidence": "source-adapter-parent/source-review",
+  "directRed": "source-adapter-parent/direct-red8.stderr",
+  "mandatoryDependencyRed": "source-adapter-parent/mandatory-source-red.stderr",
+  "deviceOperations": 0,
+  "newRunFrozen": false,
+  "terminalObservationDeviceVerified": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false
+}

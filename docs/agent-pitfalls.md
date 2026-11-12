@@ -1,3 +1,7 @@
+## W3新增源依赖：合同和双复核的coherent漏项（2026-11-13）
+
+源码适配片段8GREEN后，真实负例同时从合同files与两份复核sourceSHA256删新terminal_source_adapter.py，旧guard仍接受。只在可选files里列依赖不充分；hy3单组把它加入DRIVERS，带动REQUIRED/REVIEWED同时强制，14守卫/完整274GREEN。纯适配pin旧FILE确切SHA、保存安全helperAST、去旧四action尾和__main__、逐call加freezehook；仍未实现所有权/prepare/恢复，不能把sourcecallbacks占位当完整driver。原RED/候选/复核在source-adapter-parent/及source-adapter-repository-acceptance/，无设备作用或旧run重放。
+
 ## W3 outer lifecycle：终态原文哈希与中断恢复（2026-11-13）
 
 首审误把terminal-observed.json当binding/sample receipt，建议startup hash；实际adb_terminal_observation.py把双读first原bytes写observed、另写terminal-receipt.json。真实fake-ADB先running后terminal，两SHA不同，finish必须用终态raw；补协调器/Kotlin原文后hy3复核accept，原revise保留。另presence用==会接受bytearray/bytes子类，transport须exactbytes；except Exception漏KeyboardInterrupt/SystemExit，实际RED为stops0/日志未关。hy3精确修正BaseException及secondary恢复后51新方法/完整265GREEN。恢复有两次各5s等待，不能称总5s。副作用/冻结/ownership仍由未完成adapterC证明，host不等于Android。证据lifecycle-source-review/、startup-parent/interrupt-fixed-candidate/及lifecycle-repository-acceptance/；旧run不重放。

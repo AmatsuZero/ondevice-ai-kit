@@ -434,3 +434,19 @@ hash must not replace the terminal hash.
 Parent tests use actual local fake-ADB subprocesses and a child waiting for the
 real ACK file. Complete source adaptation, partial-prepare restoration, final
 reviews, a new freeze and same-run device acceptance remain separate gates.
+
+## Pure FILE source adaptation (2026-11-13)
+
+`terminal_source_adapter.adapt_source` accepts only exact str matching the pinned
+immutable FILE driver SHA. It changes the new output/alias/run/report/runner and
+the one-case/two-decode assertion, injects `_terminal_before_transport()` directly
+before each inherited subprocess, and removes all old prepare/run/collect/restore
+branches plus the module launcher. The remaining preflight is inherited;
+`_terminal_dispatch(action, locals())` delegates other actions to future C.
+Safe transfer/hash/identity/ordinary helper bodies remain AST-identical.
+Adaptation, import and source evaluation perform no device or subprocess action.
+
+Both callbacks are explicit unresolved outer-driver obligations. Existing transfer
+helpers alone do not record ownership or provide partial-prepare recovery. The
+new adapter source must be mandatory in the frozen file closure and both complete
+review receipts; a coherent omission from all three must fail validation.

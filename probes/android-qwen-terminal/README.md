@@ -68,3 +68,12 @@ Collection and partial-prepare restoration remain pending, as do a new complete
 freeze and same-run Android acceptance. See
 [lifecycle validation](../../docs/validation/w3-terminal-lifecycle-20261113.md).
 See [guard validation](../../docs/validation/w3-terminal-device-contract-20261112.md).
+
+`terminal_source_adapter.adapt_source(source)` pins the immutable FILE driver
+bytes and returns a pure adapted source: fixed terminal identity, a frozen-guard
+callback before each inherited ADB subprocess, and a dispatcher in place of the
+old prepare/run/collect/restore branches. It preserves the existing transfer,
+model/hash and ordinary-state helpers. Its guard and dispatcher callbacks remain
+the future device driver's responsibility; evaluation does not execute an action.
+The frozen-contract guard requires this dependency in both source review maps.
+See [source adapter validation](../../docs/validation/w3-terminal-source-adapter-20261113.md).

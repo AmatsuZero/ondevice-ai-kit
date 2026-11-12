@@ -44,7 +44,7 @@ SOURCE_BINDINGS = BINDINGS
 OBS = ('terminal_observer.py', 'terminal_file_io.py', 'terminal_observation_coordinator.py',
        'adb_process_sampler.py', 'adb_terminal_report_reader.py',
        'adb_terminal_ack_publisher.py', 'adb_terminal_observation.py', 'terminal_polling.py')
-DRIVERS = ('device_acceptance.py', 'terminal_device_contract.py', 'terminal_device_lifecycle.py')
+DRIVERS = ('device_acceptance.py', 'terminal_device_contract.py', 'terminal_device_lifecycle.py', 'terminal_source_adapter.py')
 REQUIRED = set(BINDINGS) | {'probes/android-terminal-observation/' + n for n in OBS}
 REQUIRED |= {'probes/android-qwen-terminal/' + n for n in DRIVERS}
 REQUIRED |= {'probes/android-qwen-terminal/' + n for n in
