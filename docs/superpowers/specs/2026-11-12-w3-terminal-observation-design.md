@@ -360,3 +360,36 @@ compilation and Python tests pass; a separate supplied-source review assesses
 their scope. The old frozen hashes and old failed verdict remain unchanged.
 This component milestone is not Android packaging, device acceptance, continuous
 sampling, true peak, allocator root cause, W3/R4/R5 completion or release approval.
+
+## Outer frozen-contract guard (2026-11-12)
+
+The separately implemented `terminal_device_contract.verify_frozen_contract(root, out)`
+is pure local validation, before every future device action. It performs no ADB,
+process launch, writes or freeze creation. Root/output must be existing canonical
+directories, and output is exactly `artifacts/verification/w3-qwen-terminal-20261112`.
+A new `diagnostic-frozen.json` must bind the fixed run/alias/runner/source identity,
+explicit accepted source/parent review receipts, exact inclusive resource/time
+budgets, every required source/APK/plan/protection path and every copied source.
+
+The guard uses strict finite JSON with duplicate-key refusal, safe POSIX relative
+paths, no symlink traversal and streaming file hashes. Package verification remains
+bound prior evidence, not new APK inspection. It requires 81 copied source hashes
+through the existing source receipt fingerprint, direct root-to-copy Kotlin bindings,
+all three host receipts, fixed one-file plan, 65-case manifest with selected index25,
+production protection hashes and current source hashes in both review receipts.
+The current fixed package receipt must contain exactly19 unique nonempty string
+class names, including the three terminal-protocol classes. This strengthens the
+original three-class subset gate for this particular packaged profile.
+Historical `newNativeRunFrozen=false` fields are not rewritten. The actual model
+files, current device user/identity/unlock and installed package state remain the
+outer lifecycle's separate live gates.
+
+Required budget values: RSS1610612736B, available536870912B, initial available
+2147483648B, phase120s, total240s, startup20s, after-ACK15s, ACK30000ms. Exact typed
+plan values and mandatory path sets are fixed in the independent parent acceptance
+source under `.omx/artifacts/w3-terminal-observation-20261112/outer-freeze-parent/`.
+The observed symlink checks assume immutable private inputs, without claiming
+atomic protection against a malicious concurrent same-UID filesystem writer.
+The source uses synthetic APKs/unexecuted driver placeholders and cannot prove
+package/device/lifecycle acceptance. A future real freeze is blocked until the full
+outer implementation, final source/parent reviews and current hash verification exist.

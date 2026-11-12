@@ -1,3 +1,7 @@
+## W3冻结守卫：最终裁定须区分类名、组件和异常继承（2026-11-12）
+
+独立review原revise，父真实证据表明UnicodeDecodeError已继承ValueError；包收据exactRunnerVerified是qualifiedclass，RUNNER是package/class组件，拆分后相等，不能据两者表示不同改正确协议。11Python driver/adapter复核范围与既有Kotlin/build/实包证据分开。固定已验包19unique非空str类名作为本次profile加强，四类coherent收据实际4RED→外部单块修正→完整13GREEN；其他正确表示不做无据改动，保留原revise与父裁定。正确literal重复和非法中间路径原OSError两minor延后；不把纯guard207host方法当真实freeze或设备完成。证据outer-freeze-source-review/及outer-freeze-final-candidate/。
+
 ## W3轮询：回调耗时不能被新阶段重置（2026-11-12）
 
 22方法初绿后，父端分别在实际poll/sample/read回调使host时钟推进121s，新terminal阶段重置anchor并错误ACK，三个子例真实RED。应在每个回调返回后先检查旧阶段120s窗口，再接受新阶段；外部仅加三处守卫后23方法/全套194GREEN。开始文件也须在clock/process/transport前持久化，process poll须精确int或None。静态accept遗漏该故障，不能代替真实时钟边界验收；原复核、RED与裁定保留于poll-source-review-hy3/、poll-order-fixed-candidate/、poll-final-candidate/。首阶段从loop起计时目前更保守，minor延后；此项只证明host stand-in，不证明Android/完整outer/旧gap恢复。

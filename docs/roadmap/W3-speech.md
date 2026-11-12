@@ -1,3 +1,7 @@
+## 2026-11-12：外层冻结守卫验收检查点
+
+守卫13+既有194共207方法/35AST通过，旧120冻结/原失败、95其他dirty、81准备源和两APK保持；[验证](../validation/w3-terminal-device-contract-20261112.md)。严格JSON/路径/固定身份预算及源码、包、计划、保护、双Python复核摘要在本地校验；固定19类profile四例RED→外部单块修正GREEN，独立revise经父裁定最终accept。仅合成夹具，完整outer生命周期/新真实freeze/同run真机未完成；零新设备/推理，W3/R4/R5open、源码未push。
+
 ## 2026-11-12：运行中轮询同步检查点
 
 本地`da4a888`已同步GH#15comment6825203978/GL#15note44009/GHWikib4b269eb，双Wiki SHA28fb6b571e882bdd641e8d145fc67c05bcf75f77f2c29f04574bb553f652a28b逐字一致，[收据](../validation/w3-terminal-polling-sync-20261112.json)。marker已用，源码未push；新鲜194项通过只证明host链路。outer冻结守卫/完整生命周期、新合同、同run真机与生产余门继续，W3/R4/R5open。

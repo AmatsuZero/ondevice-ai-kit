@@ -170,6 +170,19 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
   Full outer launch/collect/partial-prepare restore, complete new freeze and
   same-run device proof remain open; four outer routing checks have missing-driver
   RED only. See docs/validation/w3-terminal-polling-20261112.md.
+- [x] Validate a future complete frozen contract locally before any device action.
+  The separate terminal_device_contract.py candidate covers strict JSON/paths,
+  exact source/APK/plan/budget bindings, production protections and both current
+  review receipts. Initial10 methods0FAIL122ERROR from a wrong decoder API and
+  isolated fixture-hardcode/top-contract-link defects are retained. Exact hy3
+  five-replacement correction yields12 parent methods GREEN. Fresh supplied-source
+  review prompted a fixed19-unique-string class profile: four actual RED subcases
+  precede an exact external single-block fix; complete13 parent methods GREEN.
+  Other findings are adjudicated against actual exception inheritance, package
+  class/component identity and the declared11-Python-file review scope. Final
+  parent decision accepts. Minor (deferred): duplicated correct runner literal
+  and original OS error for invalid non-directory intermediates. No real freeze
+  or device readiness is inferred from synthetic APKs/unexecuted placeholders.
 - [ ] Freeze a separate complete contract with inputs, hashes, budgets and restoration. Run only if the current Android channel, identity and unlock prerequisites are verified.
 - [ ] Collect exact same-run terminal evidence and restore the new alias/staging. Never infer device acceptance from pure components.
 
