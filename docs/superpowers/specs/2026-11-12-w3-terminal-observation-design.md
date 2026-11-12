@@ -59,6 +59,33 @@ Android build/package review and a new frozen device contract follow separately.
   exclusive and bound to the exact run. These IO checks are outside the pure
   components and cannot be claimed from pure host tests.
 
+## Local file integration boundary
+
+The first IO step exposes only `read_stable(root, relative, max_bytes)` and
+`write_new_durable(root, relative, payload)`. It does not hide fresh report reads
+behind observation timestamps collected by its caller. The future coordinator
+must collect and record its actual before/read1/read2/after events, validate them,
+and durably save the report and observation receipt before publishing an ACK.
+
+Reads use a canonical private root, no-follow directory traversal, a bounded
+max+1 read, before/after FD metadata and final path identity checks. Writes stage
+complete bytes in the same directory, fsync the file, publish atomically without
+overwrite, and fsync the directory. The final target remains absent while data
+is being written. Error cleanup checks ownership and preserves existing or
+observably replaced entries.
+
+This local primitive assumes a private single-writer directory. Inode checks do
+not provide atomic compare-and-unlink against malicious same-UID writers; the
+Python standard library offers no such operation. These tests therefore prove
+the observed fixture races and failure paths, not that adversarial guarantee or
+the separate Android filesystem/transport boundary.
+
+If directory fsync or staging cleanup fails after publication, propagate the
+filesystem error and retain its meaning: the complete final file may already be
+visible and its directory durability is unverified. The future coordinator must
+stop, preserve same-operation evidence and never automatically retry, clear an
+observation gap, or equate file visibility with durable publication.
+
 ## Exit criteria
 
 Fault regressions prove wait-until-ACK, bounded timeout, strict identity/bytes,

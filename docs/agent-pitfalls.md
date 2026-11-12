@@ -1,3 +1,10 @@
+## W3 文件原语：skip-green、目录 FD 自比较与候选循环回归（2026-11-12）
+
+- 缺实现时吞 ImportError 并 skip 全套会得到 exit0，不能当 tests-first RED。必须直接导入并保存真实 ModuleNotFoundError；本次首稿 30 skipped 已拒收。实际 growth/replacement 用原始 os.read delegate 修改真实 fixture，以 FD dev/ino 选目标并确认修改确实执行，不能绑定 os.open 的绝对路径拼写。
+- 持有目录 FD 后再次 fstat 同一个 FD，不能发现该目录的名字已被替换。原32项绿色后，父端11项仍6fail：exact int/str 子类、root symlink祖先、root/父目录真实置换。应复核命名路径与保留目录链的 dev/ino；文件比较用 ns 元数据，最终路径 stat 不跟随 symlink。静态审查的 low 评级不能豁免已明确且被复现违反的合同。
+- 下一候选在 staging 的 while True 成功 open 后漏 break，实测43项4fail/21error，出现 EMFILE；是本次源码循环回归，不能归因为配额、CBC启动、系统fd限制或设备故障。原件/失败保留、零设备，独立窄修后须重跑完整套件；不要提高全局限制或接入失败候选。
+- 证据 `.omx/artifacts/w3-terminal-observation-20261112/io-{tests-helper,tests-correction,implementation-candidate,implementation-correction,boundaries-correction}/`。原子发布需先 staging 写完整/fsync，再无覆盖发布；目录 fsync 失败不能宣称新名字已持久化。私有单写者范围不提供恶意同UID写者下的原子 compare-and-unlink 保证，也不代替 Android/真机验收。
+
 ## TECNO USB 枚举不等于 ADB 可用（2026-11-12）
 
 - **现象/已证原因层级**：Mac IORegistry 能枚举 TECNO POVA Slim 5G，但 `adb devices -l` 为空、Mobile MCP 仅列 iPhone；native USB backend 日志持续 `usb_read/usb_write failed with status: e00002ed`。本机 IOKit 定义该状态为 `kIOReturnNotResponding`，只能说明 USB 读写未响应，不能推断 USB 调试关闭、锁屏、线材坏或其他 App 抢占。

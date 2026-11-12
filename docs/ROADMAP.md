@@ -1,3 +1,5 @@
+W3本地文件原语（2026-11-12）：Python67/67（文件45+纯校验22）/语法/旧120冻结与false verdict保持；实际协调器、Android实包与新真机合同未验，W3/R4/R5open。[验证](validation/w3-terminal-file-primitives-20261112.md)。
+
 W3模拟器同步（2026-11-11）：本地39794cb、双端#15/Wiki已逐字回读，Wiki摘要一致；单片20父诊断/tools691通过，原真机120冻结/run未消耗，W3/R4/R5仍open。[收据](validation/w3-qwen-heap-emulator-observed-sync-20261111.json)。
 
 W3模拟器（2026-11-11）：独立heap单片完成1构造/2stream/2decode、18heap事件/23RSS，20父诊断和tools691通过，采样最高1.353703GiB；同run只读政策续取/恢复/关闭通过，原真机120冻结/run未消耗，W3/R4/R5仍open。[实测](validation/w3-qwen-heap-emulator-observed-20261111.md)。

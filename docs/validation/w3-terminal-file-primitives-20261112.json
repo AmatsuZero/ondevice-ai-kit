@@ -1,0 +1,37 @@
+{
+  "at": "2026-11-12T05:35:11.379361+00:00",
+  "pythonTestMethods": 67,
+  "localFileMethods": 45,
+  "pureValidatorMethods": 22,
+  "testExitCode": 0,
+  "syntaxChecks": true,
+  "sourceSHA256": {
+    "check_barrier.py": "10c4320f33b7ddd2674e36f6b3b3b023194d4c7fe999a4c6395dc57060322a60",
+    "terminal_file_io.py": "f117ab1dff49e9f256aa64df38b890c169bafde4e24fac227d52c3a9944ea8b4",
+    "terminal_observer.py": "b86c9dda1a3ea45bcbd55cd207ce40bc74a2c3e37af83741938027c6971ce9ac",
+    "test_file_io_parent_acceptance.py": "b768c7e2518943454bdfd05430368c4e4b282d322b8ad4696158718803592211",
+    "test_host_boundaries.py": "1be9c5ab114d0c717074112435fbfec8e794fd20398b43dd7aeeb18364ce8dc9",
+    "test_terminal_file_io.py": "540cb835ea5df819eabcc5dbe80fd0055bce0a4c29afeb4226575b428b4c1294",
+    "test_terminal_observer.py": "73d520a33cf5efba38b5b48f406b57ded2a1cbe55c41bec1fa816afb41d9f906"
+  },
+  "oldFrozenFilesUnchanged": 120,
+  "oldReportAndFalseVerdictUnchanged": true,
+  "protectedFilesChecked": 98,
+  "protectedDrift": [],
+  "scope": "local-private-single-writer-file-primitives",
+  "actualDeviceIO": false,
+  "W3Complete": false,
+  "postpublicationFsyncErrorTest": true,
+  "postpublicationUnlinkErrorTest": true,
+  "review": {
+    "method": "supplied-context hy3 read-only final source",
+    "durationMs": 227484,
+    "findings": 4,
+    "mediumFindings": 1,
+    "disposition": "Postpublication errors propagate and can leave visible complete target/staging; documented stop/no-retry for future caller, not actual-driver proof. Canonical-root alias rejection intentional. Oversize-unreachable review claim disproved by real growth.",
+    "sourceReviewRawSHA256": "7bb30df3cc06d7d22d8ea6713e3e9939409d69e0a5426adb22c44df442a77f25",
+    "independentDeviceOrReleaseApproval": false
+  },
+  "frozenReportSHA256": "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e",
+  "frozenFalseVerdictSHA256": "3575b70f0531560aeecc94935cf41f4415c15e1a5bef7e494b8f57c2cb31681d"
+}

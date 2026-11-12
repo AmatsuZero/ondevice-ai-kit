@@ -1,3 +1,9 @@
+## 2026-11-12：本地终态文件原语验收，实际协调器仍待接入
+
+`probes/android-terminal-observation/` 新增stable read与staging/fsync/无覆盖发布，免费hy3候选及单块补丁集成，主代理独立验收。Python新鲜67/67（文件45+纯校验22）及语法检查通过，旧120冻结/报告/false verdict与98其他保护文件保持；原32绿后的6边界失败、漏break的EMFILE、伪Read零交付均原件保留。最终源码复核227.484s；发布后fsync/unlink错误可留下完整target，已实测并明确遇错即停/不得自动重试，非持久化或实际driver通过。详见[验证与剩余门](validation/w3-terminal-file-primitives-20261112.md)。
+
+无活动helper，旧native429不重试；无设备/推理/麦克风/AiAi/下载，源码分支未push。下一步实际host同PID/startTicks before/read1/read2/after与收据先持久化，再独立Kotlin wrapper/Android实包/新冻结合同；旧run已消耗不重放，W3/R4/R5open、goalactive。本项Issue/Wiki同步将另附收据，不复用旧marker。
+
 ## 2026-11-12：终态观测纯组件已提交及双端同步
 
 本地 `a9cc09e` 精确16文件，源码分支未push；GH#15 comment6812703119、GL#15 note43284、GH Wiki550adb7已逐字回读，两Wiki SHA4e92eed215ea252bdb0bf91e43daff60c90c172e245144923505630c28a5628c一致。[同步收据](validation/w3-terminal-observation-components-sync-20261112.json)，marker `w3-terminal-observation-components-20261112` 已用勿重复。Kotlin45+跨轮回归/Python22/ACK四组及旧120冻结/false verdict保持；仅纯组件与只读传输恢复，不代表IO/Android实包/真机质量。已消耗run不重放，无活动helper，旧native429不重试；W3/R4/R5open、goalactive，下一步独立IO wrapper/driver与新设备合同。
