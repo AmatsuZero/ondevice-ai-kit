@@ -218,6 +218,52 @@ must verify the actual run-as shell/toybox commands and hardlink/file+directory
 fsync behavior in its owned private directory. Host stand-ins cannot satisfy
 that gate. No device channel is currently present.
 
+## Remote observation coordinator
+
+The next transport-aware coordinator is a distinct probe module,
+`adb_terminal_observation.py`, exposing
+`publish_remote_terminal_observation(root, observed_report_relative,
+receipt_relative, ack_relative, before_link_relative, binding, *, adb, serial,
+package, timeout_seconds=2.0, monotonic_ns=time.monotonic_ns, runner=None)`.
+It composes the three existing ADB adapters, rather than accepting previously
+collected measurements. A supplied runner has the publisher's three-argument
+signature `(argv, timeout_seconds, stdin_bytes)`; reader/sampler calls adapt it
+with `None` stdin. The normal path uses the adapters' actual subprocess runners.
+
+Binding is an exact dict with exactly `runId`, `sourceFingerprint`, `pid` and
+`startTicks`, validated with the existing identity bounds and snapshotted before
+callbacks. The terminal report hash is derived from the actual first read, never
+provided or guessed by the caller. Preflight validates config, callable clock
+and optional runner, an existing canonical private root and four distinct safe
+relative output paths with existing nonsymlink parents and absent final entries,
+before any transport or clock callback. It does not create directories.
+
+Ordering is host monotonic t0, process sample1, fresh report1, t1, fresh report2,
+t2, process sample2, t3. Validate exact bounded nondecreasing clocks immediately,
+same PID/startTicks, RSS <=1.5 GiB and available >=512 MiB at each sample. Reuse
+the existing validator to compare exact terminal bytes, strict JSON, binding and
+the enclosing observation; its existing max-RSS/min-available summary applies.
+Persist observed report bytes, deterministic strict JSON receipt and local ACK
+in that order with `write_new_durable`, then invoke the actual remote publisher.
+The receipt has schemaVersion1, binding including derived hash, terminalReportSha256,
+observation, sampleBefore, sampleAfter and clockDomain `host-monotonic-ns`.
+
+The publisher's before-link callback takes t4, a third same-process/resource
+sample, then t5, checking t3<=t4<=t5 immediately. It durably writes the distinct
+before-link journal before returning. Journal fields are schemaVersion1, the
+same full binding, terminalReportSha256, sampleBeforeLink, sampleStartedNs,
+sampleFinishedNs and clockDomain `host-monotonic-ns`. Deterministic strict JSON
+uses sorted keys, no NaN, compact separators and UTF-8. Receipt/sample snapshots
+cannot be changed by later callbacks. The return dict has `observation` and
+`publication`, the latter the actual publisher result.
+
+Every failure stops without retry, rollback or deleting already persisted
+evidence. A third-sample/journal failure must prevent link publication and retain
+the publisher's typed phase/cause/uncertainty signal. This is a single terminal
+handshake, not a continuous polling/launch/restore driver, full release verifier,
+true peak measurement or device acceptance. Full wrapper/host-loop/build/frozen
+run gates remain mandatory.
+
 ## Exit criteria
 
 Fault regressions prove wait-until-ACK, bounded timeout, strict identity/bytes,

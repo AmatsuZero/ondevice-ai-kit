@@ -1,0 +1,56 @@
+{
+  "at": "2026-11-12T11:00:46.647833+00:00",
+  "scope": "remote-ACK-adapter-with-local-subprocess-file-stand-ins",
+  "suite": {
+    "at": "2026-11-12T10:53:34.688734+00:00",
+    "exitCode": 0,
+    "totalMethods": 157,
+    "newPublisherMethods": 18,
+    "externalMethods": 8,
+    "parentMethods": 10,
+    "pythonFilesParsed": 21,
+    "frozenOldFilesVerified": 120,
+    "oldReportAndFalseVerdict": {
+      "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e": "artifacts/verification/w3-qwen-heap-20261111/device-report-confirm.json",
+      "3575b70f0531560aeecc94935cf41f4415c15e1a5bef7e494b8f57c2cb31681d": "artifacts/verification/w3-qwen-heap-20261111/parent-heap-acceptance.json"
+    },
+    "sourceSHA256": {
+      "adb_terminal_ack_publisher.py": "027bb285d567edcf1784c407a369324e0c3d235ea041dd1b73b92cfc45283e57",
+      "test_adb_terminal_ack_publisher.py": "b5bef5b43e9f4a8fc4178c08ee81e58a1b96bbce34bb907d9aecfc18ded87544",
+      "test_ack_publisher_parent.py": "0f2f1b9495ce77b8542c5c46e8ba055083bfe3ac7b867ffdaf261baa8791aa3a",
+      "test_ack_publisher_boundaries.py": "68d413808590e13b2740a732736134435176e26a82a3a6137ad84dfac8cc4d1c"
+    },
+    "actualAndroidOperations": 0
+  },
+  "directMissingModuleExternalAndParentREDBeforeIntegration": true,
+  "initialExternalFailures": 2,
+  "initialBoundaryFailures": 8,
+  "initialBoundaryErrors": 2,
+  "externalSourceAndTestCorrectionsAppliedExactly": true,
+  "sourceReview": {
+    "verdict": "accept",
+    "findings": [],
+    "limitations": [
+      "W3/R4/R5 remain open per supplied evidence: verification of real Android/OEM/filesystem gates (toybox ln -T, toybox fsync on file and directory, run-as, device shell single-quote nesting) is not possible from this source alone and is explicitly noted as pending.",
+      "Source intentionally does not wire the full hostloop; the contract assigns the same-process resource check and durable journal to the caller via the before_link callback, so those responsibilities are out of this source's scope by design.",
+      "No tests or commands were executed in this review (no tools/shell); conclusions are from static reading of the supplied source against the contract only.",
+      "durability_verified=True on the success path relies on device fsync semantics that are externally gated and unverified here; the source itself cannot prove hardware/fs durability.",
+      "Shell-command correctness (single-quote nesting of the sh -c script under shlex.join) holds only because package/run_id/path characters are contract-validated into shlex-safe sets; this coupling is correct as written but depends on that validation staying intact."
+    ]
+  },
+  "sourceReviewDurationMs": 250139,
+  "protectedDirtyPathsOutsideOwnedSharedFilesVerified": 96,
+  "remoteCoordinatorTestsSession": 22761,
+  "remoteCoordinatorImplementationSession": 72144,
+  "remoteCoordinatorIntegrated": false,
+  "actualAndroidTransportVerified": false,
+  "fullHostLoopWired": false,
+  "deviceOperations": 0,
+  "inferenceCalls": 0,
+  "mediaCapture": 0,
+  "systemAsrRequests": 0,
+  "modelOrRuntimeDownloads": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false
+}

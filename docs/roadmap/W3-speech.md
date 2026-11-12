@@ -1,3 +1,7 @@
+## 2026-11-12：远端ACK发布适配器已验
+
+完整Python157/21AST（新增外部8+父10）、旧120冻结/原失败摘要及源码复核accept通过；真实本地subprocess/file验证stage完整回读、fsync/无覆盖link、发布前callback与失败不确定性，非Android/OEM或硬件持久性证明。[验证](../validation/w3-adb-terminal-ack-publisher-20261112.md)。原2externalFAIL/8boundaryFAIL2ERROR和测试占位路径/rm子串错误均保留后外部精确修正。下一实际三适配器协调器组合验收已缺模块RED，独立测试/实现候选在各自原请求中；完整host-loop、实包、新合同、真机质量资源和生产发布余门继续，W3/R4/R5open，源码未push。
+
 ## 2026-11-12：新鲜报告读取器同步检查点
 
 本地`4a3d914`已同步GH#15comment6821125095/GL#15note43821/GHWiki f2ceae9b，双Wiki SHA f47f343ae2f206ceed21c35aae6d896235abe0a6304366856fe4ec21b7257d14逐字一致，[收据](../validation/w3-adb-terminal-report-reader-sync-20261112.json)。marker已用勿重发，源码分支未push；139 Python/源码复核不替代实际host-loop、远端ACK、Android新实包/合同与真机生产余门，W3/R4/R5仍open。

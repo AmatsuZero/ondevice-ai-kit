@@ -1,3 +1,7 @@
+## 2026-11-12：远端ACK发布器157检查及复核通过
+
+外部候选/精确修正已集成，完整Python157/21AST、旧120冻结/原heap报告/false verdict保持；外部8+父6真实本地subprocess/file+父4边界均GREEN，源码复核250.139s accept无发现，[验证](validation/w3-adb-terminal-ack-publisher-20261112.md)。首2externalFAIL/8boundaryFAIL2ERROR及错误stage字面量/rm子串断言均保留、分属外部源码和测试精确修正；不当Android/OEM或硬件持久性证明。远端协调器父6组合检查已missing-module RED，独立tests原session22761与hy4free source原session72144 live；源集成仍等外部测试审查/directRED/两组GREEN，不重发。完整host-loop/独立wrapper-driver/Android实包/新冻结合同和真机生产余门继续，W3/R4/R5open、goalactive，源码未push。报告读取器同步729630f/marker已用勿重复；本次发布器同步另附收据。
+
 ## 2026-11-12：新鲜报告读取器已提交并双端同步
 
 本地`4a3d914`精确12文件，源码未push；GH#15comment6821125095、GL#15note43821、GHWiki f2ceae9b逐字回读，两Wiki SHA f47f343ae2f206ceed21c35aae6d896235abe0a6304366856fe4ec21b7257d14一致，[收据](validation/w3-adb-terminal-report-reader-sync-20261112.json)。marker已用勿重复，各目标各一次新写入。139 Python/AST/源码复核及旧120冻结/原失败保持；远端ACK实现仍为原session70958，测试80077已终态交付但含stage占位路径断言，先审查/directRED并修正，不重发原请求。实际host-loop/Android实包/新合同与真机生产余门继续；W3/R4/R5open、goalactive。

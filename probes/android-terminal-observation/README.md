@@ -42,8 +42,9 @@ rtk proxy python3 -B -m unittest discover -s probes/android-terminal-observation
 The Kotlin runner requires a new output directory and writes compilation output,
 test output and a receipt containing the Java/classpath for `AckFixtureKt`.
 It compiles with `-Werror`, runs 45 checks and the cross-iteration clock regression.
-The Python suite contains 139 test methods: 22 validator checks, 45 local file
-checks, 35 coordinator checks, 26 ADB sampler checks and 11 report-reader checks,
+The Python suite contains 157 test methods: 22 validator checks, 45 local file
+checks, 35 coordinator checks, 26 ADB sampler checks, 11 report-reader checks
+and 18 ACK-publisher checks,
 with additional boundary
 subtests. Sampler tests use injected responses and real local subprocesses that
 stand in for ADB; the suite does not connect to a phone.
@@ -98,6 +99,25 @@ the adapter; the latter execute a real local fake ADB and host shell, including
 changing bytes, static symlinks, the head bound, errors/stderr and timeouts.
 Actual Android command behavior and fresh-read ordering inside the full host
 loop remain unverified.
+
+`AdbTerminalAckPublisher.publish(payload, before_link=...)` uses five bounded
+transports: guarded noclobber stage write with exact stdin, bounded exact stage
+readback, file fsync, exclusive hardlink publication, and directory fsync. Its
+required callback runs after stage fsync and before link publication. The caller
+must use that callback to check the same process and persist the final resource
+journal; the adapter alone does not establish that full ordering. Stage remains
+until explicit restoration. Each publisher permits one actual attempt; invalid
+arguments do not consume it. There are no retries or automatic cleanup.
+
+`RemoteAckPublicationError` retains the original cause and phase, with
+`stage_may_remain=True` and `durability_verified=False`. `publication_possible`
+becomes true as soon as the link command is invoked: even a timeout can leave a
+complete final visible. Success records successful file/directory fsync command
+returns, not hardware crash durability. Tests cover actual local shell/files,
+hardlink and fsync stand-ins, including short writes, stale entries, callback
+failure, directory-sync failure and real subprocess timeout. AOSP source review
+supports the command semantics; actual OEM shell/toybox and filesystem behavior
+remain a separate device gate.
 
 These tests verify local IO and callback ordering. Real device sample collection,
 fresh report transport, Android ACK IO, Android build/package review and a fresh

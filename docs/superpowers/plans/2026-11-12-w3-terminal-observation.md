@@ -59,6 +59,25 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
   and typed publication-uncertainty failures. AOSP toybox source review confirms
   syscall/error behavior; mksh noclobber source is captured. Device capability,
   full coordinator ordering and actual Android execution remain unverified.
+
+  Ruling (2026-11-12): six primary real-subprocess/file publisher methods now
+  directly fail with missing-module RED. Source generation may overlap the
+  unchanged independent no-source-context external test request; integration
+  still waits for delivered/reviewed external tests, their direct RED and both
+  complete GREEN groups. This is separate file ownership, not a request restart.
+
+  Adapter completion (2026-11-12): external8 +primary6 real-subprocess/file
+  methods +primary4 boundary methods pass, with the complete Python157 suite.
+  External and parent direct missing-module RED preceded integration. Original
+  response exact-type, trailing-newline and huge-timeout failures were corrected
+  by exact external patches; a separate external patch corrected test placeholder
+  paths and the false rm-substring prohibition. Actual caller persistence and
+  before-link same-process resource/journal integration are still open, as are
+  OEM command capabilities and the complete new wrapper/driver.
+
+  Source review completion: supplied-source free hy3 review accepted the exact
+  corrected publisher with no findings; no review commands were executed and
+  real OEM/fsync/hardware behavior remains unverified.
 - [x] Reproduce and document postpublication directory-fsync and staging-unlink failures: a complete target can remain visible despite an exception. Future callers stop and retain the same-operation evidence, never automatically retry or infer durability from visibility.
 - [x] Resolve the final review's medium error-signal finding in code: typed postpublication error, exact boolean flags and original cause; two missing-type RED cases become GREEN with the full 67-test suite.
 - [x] Verify a local coordinator's actual read/sample/clock/write ordering and immutable report/receipt snapshots with injected callbacks; 35 coordinator methods and full Python 102 pass. Supplied-context source review accepts; its missing-binding KeyError claim is not reproducible (both fields already reject as ValueError before ACK/writes). This is local IO evidence; the Android publication item above remains open.
@@ -68,6 +87,18 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
 
   Completion: both groups satisfied RED before integration, all 26 passed after exact helper edits; full 128 and source review accepted. The earlier live request is terminal. Final: minor (deferred): test module header still describes its original missing-implementation stage; README and validation record current implementation/test state.
 - [ ] Derive new wrapper/driver names, report paths and unconsumed run identity; do not execute the old driver.
+- [ ] Compose the three actual ADB adapters in the specified remote observation
+  coordinator: two fresh reads enclosed by samples, durable local report/receipt/ACK,
+  then third sample and durable before-link journal inside the remote publisher
+  callback. External compact tests first, direct RED, primary actual subprocess
+  acceptance, exact external source, full GREEN and source review precede any
+  new wrapper/driver execution. Full polling/launch/restore is a separate gate.
+
+  Ruling (2026-11-12): six primary real-subprocess composition methods directly
+  fail with missing-module RED. Source generation may overlap the unchanged
+  no-source-context external four-method test request; integration still waits
+  for delivered/reviewed external tests, direct external RED and both complete
+  GREEN groups. There is no test-request restart or implementation by primary.
 - [x] Add a fresh subprocess-capable report reader for the distinct `files/w3-qwen-terminal/report-<run_id>.json` namespace. External4 +parent7 methods and full Python139 pass; exact source review accepts. Original large test request ended CLI0/raw0/context400 with no source, retained; a distinct reduced4-method request delivered. Its direct missing-module RED and both full GREEN groups gate integration. Initial source3fail/9error strict-type defect and test path-adjective ambiguity are corrected through exact external edits, with original failures retained. Actual Android host-loop ordering/remote ACK publication remain separate gates.
 
   Ruling (2026-11-12): six independent parent real-subprocess report-reader methods directly fail with missing-module RED while the unchanged no-source-context external test request remains live. Source generation may overlap that independent test request. Integration still requires received/reviewed external tests, their direct missing-feature RED and both full GREEN groups. No request is duplicated and no tests-first gate is removed.

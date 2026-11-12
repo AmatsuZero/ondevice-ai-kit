@@ -1,3 +1,5 @@
+W3（2026-11-12）：远端ACK发布适配器完整Python157/源码复核通过，仅host stand-in证据；远端协调器组合测试与实现候选各在原请求生成，完整host-loop/实包/新合同及真机生产余门继续，W3/R4/R5open。见[验证](validation/w3-adb-terminal-ack-publisher-20261112.md)。
+
 W3新鲜报告读取器`4a3d914`已同步两端#15/Wiki并逐字回读，源码未push；见[同步收据](validation/w3-adb-terminal-report-reader-sync-20261112.json)。139检查不关闭W3/R4/R5，远端ACK及实际设备链路继续。
 
 W3（2026-11-12）：新鲜报告读取器完整Python139/源码复核通过，仅本地fake-ADB/shell证据；实际host-loop/远端ACK/新实包与真机生产余门继续，W3/R4/R5 open。见[验证](validation/w3-adb-terminal-report-reader-20261112.md)。

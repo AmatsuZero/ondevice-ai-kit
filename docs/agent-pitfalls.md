@@ -1,3 +1,8 @@
+## W3远端ACK：精确类型、完整标识符与占位路径（2026-11-12）
+
+- 首发布器外部8方法2fail：bytes子类响应被接受，测试又把stage占位词当字面文件名。父边界再真实8fail/2error：五阶段均接受bytes子类，三个标识符的match/$接受尾随换行，math.isfinite先转换超大整数触发OverflowError。外部精确补丁改exact bytes/fullmatch/仅float有限性检查后，外部8+父6真实本地subprocess/file+父4边界及完整Python157通过。原件、RED和修补JSON均保留于`.omx/artifacts/w3-terminal-observation-20261112/publisher-*`。
+- 测试用STAGE完整路径，禁止命令不能用rm子串匹配，因为合法w3-qwen-terminal本身含rm；单独外部测试修正，不改实现迎合假路径。exec-in退出0不证明完整stage，必须有界逐字节回读再fsync/回调/link/目录fsync。link一旦调用即保留publication_possible，目录fsync失败可留下完整final，停止且不重试/清证据。host /bin/sh与os.link/os.fsync站位不证明Android OEM命令、恶意同UID竞态防护或硬件崩溃持久性。
+
 ## W3报告读取：context400不是交付，提示形容词不是路径（2026-11-12）
 
 - 原13方法测试请求自然终态CLI0/raw0，stderr为400 prompt is too long:100001>100000；实际prompt3696B，不能推断有效context来源、quota或主代理超时。原件保留，独立缩为4方法后87.465s完整交付；不重启live请求、不把外层0当成功。
