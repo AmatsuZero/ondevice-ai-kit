@@ -178,6 +178,46 @@ This private-alias script is not descriptor-level remote metadata stability or
 an atomic defense against malicious same-UID path replacement. Fault doubles
 and local fake subprocesses precede actual Android transport acceptance.
 
+## Remote atomic ACK publication
+
+The next adapter is `AdbTerminalAckPublisher(adb, serial, package, run_id,
+timeout_seconds=2.0, runner=None)`, with `publish(payload, *, before_link)`.
+Config uses the report reader's exact-string/ASCII/timeout bounds. Payload must
+be exact bytes of length 1..1024; the existing validator supplies protocol-valid
+ACK bytes. A callable `before_link` is required. Invalid arguments cause no
+transport; the first actual attempt consumes this publisher instance, including
+failure. No retry or cleanup occurs.
+
+Five bounded transports use safely quoted fixed paths in `files/w3-qwen-terminal`:
+write a new `ack-<run_id>.txt.stage` via exec-in with nonsymlink-parent/stale-entry
+guards and `(umask 077 && set -C && cat > stage)`; read back the regular nonsymlink
+stage with `head -c 1025` and compare exact bytes; `toybox fsync stage` without
+`-d`; call `before_link`; `toybox ln -T stage final` without force/symlink flags;
+then `toybox fsync directory` without `-d`. Stage is retained until restoration.
+An exec-in exit alone never establishes complete remote bytes. All command
+responses except the exact stage readback must be empty bytes.
+
+The caller durably saves the report, observation receipt and ACK locally before
+invoking this adapter. Its before-link callback must make the final same-process
+resource check and durably record that check before allowing publication. This
+integration remains a separate gate. Any failure stops immediately with
+`RemoteAckPublicationError`: original cause, exact phase, `stage_may_remain=True`,
+`durability_verified=False`, and `publication_possible=True` from the start of
+the link invocation onward. A timeout cannot prove the remote command did not
+act. Success means all required commands, including file/directory fsync,
+returned successfully; it does not prove hardware crash durability.
+
+Official AOSP Android15 toybox fsync/ln/lib sources confirm fsync error signals,
+read-only directory opens and exclusive `ln -T` behavior. The mksh `set -C`
+source uses `O_CREAT|O_EXCL` for an absent file; final/stage entry guards remain
+required. Captured source bytes and the source-only review are under
+`.omx/artifacts/w3-terminal-observation-20261112/remote-ack-*`. An exact
+`android/device.config` lookup returned 404; upstream source does not establish
+OEM binary configuration. Before real use, the separately reviewed frozen driver
+must verify the actual run-as shell/toybox commands and hardlink/file+directory
+fsync behavior in its owned private directory. Host stand-ins cannot satisfy
+that gate. No device channel is currently present.
+
 ## Exit criteria
 
 Fault regressions prove wait-until-ACK, bounded timeout, strict identity/bytes,

@@ -1,3 +1,8 @@
+## W3报告读取：context400不是交付，提示形容词不是路径（2026-11-12）
+
+- 原13方法测试请求自然终态CLI0/raw0，stderr为400 prompt is too long:100001>100000；实际prompt3696B，不能推断有效context来源、quota或主代理超时。原件保留，独立缩为4方法后87.465s完整交付；不重启live请求、不把外层0当成功。
+- 首读取器缺serial/package/runId exact-str guard，父端真实3fail/9error；外部整块修正后GREEN。小测试又把父prompt中形容词generated写进路径字面量，3pass/1fail是测试/提示歧义，外部单行修正而非改实现迎合假路径。外部与父组缺模块RED、修后11GREEN/完整139GREEN及源码复核accept均保留于`.omx/artifacts/w3-terminal-observation-20261112/report-reader-*`。真实本地fake-ADB/shell不证明Android命令与新host-loop已验。
+
 ## W3 ACK文件：规范路径与复核意见需真实复现（2026-11-12）
 
 - 首候选Kotlin缺return真实编译失败；下一版比较rootPath.normalize()与realPath，13+6检查绿但父dot/parent别名检查失败。应比较传入File仍可观察的原Path，保留原始祖先symlink检查；外部整块修正后23GREEN、API33无JDK编译通过。

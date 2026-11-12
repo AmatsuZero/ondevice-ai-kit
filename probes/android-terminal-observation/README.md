@@ -42,8 +42,9 @@ rtk proxy python3 -B -m unittest discover -s probes/android-terminal-observation
 The Kotlin runner requires a new output directory and writes compilation output,
 test output and a receipt containing the Java/classpath for `AckFixtureKt`.
 It compiles with `-Werror`, runs 45 checks and the cross-iteration clock regression.
-The Python suite contains 128 test methods: 22 validator checks, 45 local file
-checks, 35 coordinator checks and 26 ADB sampler checks, with additional boundary
+The Python suite contains 139 test methods: 22 validator checks, 45 local file
+checks, 35 coordinator checks, 26 ADB sampler checks and 11 report-reader checks,
+with additional boundary
 subtests. Sampler tests use injected responses and real local subprocesses that
 stand in for ADB; the suite does not connect to a phone.
 `AckFixture.kt` emits actual Kotlin bytes for cross-language comparison.
@@ -87,6 +88,16 @@ without retry. The adapter returns measurements, including zero; resource
 acceptance remains the coordinator's responsibility. The normal subprocess
 boundary is tested with a private fake ADB executable. Actual Android process
 sampling remains unverified.
+
+`AdbTerminalReportReader.read()` performs a new subprocess call on every read of
+the distinct `files/w3-qwen-terminal/report-<run_id>.json` path. A safely quoted
+remote script checks static directory/file types and symlinks, then reads at most
+1 MiB +1 byte. It returns exact 1..1 MiB bytes without JSON parsing, caching,
+normalization or retries. Four external tests and seven parent methods verify
+the adapter; the latter execute a real local fake ADB and host shell, including
+changing bytes, static symlinks, the head bound, errors/stderr and timeouts.
+Actual Android command behavior and fresh-read ordering inside the full host
+loop remain unverified.
 
 These tests verify local IO and callback ordering. Real device sample collection,
 fresh report transport, Android ACK IO, Android build/package review and a fresh

@@ -52,6 +52,13 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
 
 - [x] Implement bounded local file primitives separately from the actual device sampling coordinator. A combined API that accepts previously collected observation times while hiding new report reads cannot establish the required ordering; do not integrate that rejected interface. Local file checks 45/45 and existing validator checks 22/22 pass; actual device IO remains separate.
 - [ ] Publish ACK atomically only after its bytes and the actual observation receipt are durably written. A device must not see a newly created empty/partial ACK while a writer is still filling it; exclusive creation alone is insufficient. Preserve inode ownership during failure cleanup.
+
+  Next transport slice: external compact tests-first `AdbTerminalAckPublisher`
+  candidate; exact stage readback after exec-in, file fsync, required before-link
+  resource/journal callback, exclusive hardlink, directory fsync, retained stage
+  and typed publication-uncertainty failures. AOSP toybox source review confirms
+  syscall/error behavior; mksh noclobber source is captured. Device capability,
+  full coordinator ordering and actual Android execution remain unverified.
 - [x] Reproduce and document postpublication directory-fsync and staging-unlink failures: a complete target can remain visible despite an exception. Future callers stop and retain the same-operation evidence, never automatically retry or infer durability from visibility.
 - [x] Resolve the final review's medium error-signal finding in code: typed postpublication error, exact boolean flags and original cause; two missing-type RED cases become GREEN with the full 67-test suite.
 - [x] Verify a local coordinator's actual read/sample/clock/write ordering and immutable report/receipt snapshots with injected callbacks; 35 coordinator methods and full Python 102 pass. Supplied-context source review accepts; its missing-binding KeyError claim is not reproducible (both fields already reject as ValueError before ACK/writes). This is local IO evidence; the Android publication item above remains open.
@@ -61,7 +68,7 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
 
   Completion: both groups satisfied RED before integration, all 26 passed after exact helper edits; full 128 and source review accepted. The earlier live request is terminal. Final: minor (deferred): test module header still describes its original missing-implementation stage; README and validation record current implementation/test state.
 - [ ] Derive new wrapper/driver names, report paths and unconsumed run identity; do not execute the old driver.
-- [ ] Add a fresh subprocess-capable report reader for the distinct `files/w3-qwen-terminal/report-<run_id>.json` namespace. Separate external tests-first/source candidates, exact raw bytes and safely quoted static type/symlink guards; no cache/retry or device mutation. Reader tests may overlap the already-RED ACK reader source task because they own independent files. Actual host-loop ordering/remote ACK publication remain separate gates.
+- [x] Add a fresh subprocess-capable report reader for the distinct `files/w3-qwen-terminal/report-<run_id>.json` namespace. External4 +parent7 methods and full Python139 pass; exact source review accepts. Original large test request ended CLI0/raw0/context400 with no source, retained; a distinct reduced4-method request delivered. Its direct missing-module RED and both full GREEN groups gate integration. Initial source3fail/9error strict-type defect and test path-adjective ambiguity are corrected through exact external edits, with original failures retained. Actual Android host-loop ordering/remote ACK publication remain separate gates.
 
   Ruling (2026-11-12): six independent parent real-subprocess report-reader methods directly fail with missing-module RED while the unchanged no-source-context external test request remains live. Source generation may overlap that independent test request. Integration still requires received/reviewed external tests, their direct missing-feature RED and both full GREEN groups. No request is duplicated and no tests-first gate is removed.
 - [ ] Wire local bounded ACK reads after release/teardown/terminal persistence; stale ACK refusal precedes native calls.

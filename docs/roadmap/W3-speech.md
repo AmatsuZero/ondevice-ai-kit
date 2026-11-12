@@ -1,3 +1,7 @@
+## 2026-11-12：新鲜报告传输适配器已验
+
+完整Python139（新增外部4+父7）、AST及supplied-source复核accept通过；真实本地fake-ADB/shell验证每次新读、远端脚本静态guard、head上界与超时/错误，不等于Android实机传输或完整host-loop。[验证](../validation/w3-adb-terminal-report-reader-20261112.md)。原context400零交付/类型3fail9error/提示路径歧义均保留后修正。旧120冻结/原失败保持；远端ACK发布测试进行中，实包/新合同/真机质量资源及生产发布余门继续，W3/R4/R5open，源码未push。
+
 ## 2026-11-12：ACK文件读取器同步检查点
 
 `eca410d`本地提交，两端#15/Wiki逐字回读且Wiki摘要相同，[收据](../validation/w3-terminal-ack-file-sync-20261112.json)。marker已用，源码分支未push；23文件检查/API33编译仅组件证据，真实报告传输/远端ACK/实包/新合同及真机生产余门继续，W3/R4/R5open。报告读取测试原请求仍live、无重复请求。
