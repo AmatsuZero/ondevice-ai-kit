@@ -1,3 +1,7 @@
+## 2026-11-12：发布后错误信号已在代码中解决
+
+首本地文件层`03059a8`已双端同步：GH#15comment6815684553、GL#15note43363、GHWiki53f9e875，双Wiki SHA7bc68d2f2643b8e147ddcca7131a783abf6bd99b3f8652fa526a2d933695ad66逐字一致，[收据](validation/w3-terminal-file-primitives-sync-20261112.json)。新medium窄修提供`PublishedButNotDurableError`/明确published与durability标记/原cause；2类型RED→完整67GREEN，源码SHA2c9e885c…，无新设备/推理/下载，未再完整独立复审。[窄修](validation/w3-terminal-publication-error-signal-20261112.md)。无活动helper，旧native429不重试；新错误信号检查点将另附同步收据，源码分支未push。实际协调器/Android实包/新合同及真机余门继续，W3/R4/R5open、goalactive。
+
 ## 2026-11-12：本地终态文件原语验收，实际协调器仍待接入
 
 `probes/android-terminal-observation/` 新增stable read与staging/fsync/无覆盖发布，免费hy3候选及单块补丁集成，主代理独立验收。Python新鲜67/67（文件45+纯校验22）及语法检查通过，旧120冻结/报告/false verdict与98其他保护文件保持；原32绿后的6边界失败、漏break的EMFILE、伪Read零交付均原件保留。最终源码复核227.484s；发布后fsync/unlink错误可留下完整target，已实测并明确遇错即停/不得自动重试，非持久化或实际driver通过。详见[验证与剩余门](validation/w3-terminal-file-primitives-20261112.md)。

@@ -1,3 +1,5 @@
+后续更新：初始检查点 `03059a8` 已双端同步，见[收据](w3-terminal-file-primitives-sync-20261112.json)；复核medium随后进一步在代码中以显式发布后错误类型解决，见[窄修验证](w3-terminal-publication-error-signal-20261112.md)。下文保留初始检查点事实及当时源码摘要。
+
 # W3 本地终态文件原语验证（2026-11-12）
 
 隔离目录 `probes/android-terminal-observation/` 新增本地有界稳定读取与

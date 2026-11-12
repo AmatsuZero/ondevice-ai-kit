@@ -81,7 +81,9 @@ the observed fixture races and failure paths, not that adversarial guarantee or
 the separate Android filesystem/transport boundary.
 
 If directory fsync or staging cleanup fails after publication, propagate the
-filesystem error and retain its meaning: the complete final file may already be
+filesystem error as `PublishedButNotDurableError` (an `OSError` subclass), with
+`published=True`, `durability_verified=False` and the original cause retained.
+Set `staging_may_remain=True` for a staging-unlink failure. The complete final file may already be
 visible and its directory durability is unverified. The future coordinator must
 stop, preserve same-operation evidence and never automatically retry, clear an
 observation gap, or equate file visibility with durable publication.

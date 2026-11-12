@@ -1,3 +1,5 @@
+W3发布后错误信号（2026-11-12）：首文件层03059a8已双端同步，medium已以显式异常/cause解决、2RED→完整67GREEN；实际协调器/Android实包/新真机合同未验，W3/R4/R5open。[窄修](validation/w3-terminal-publication-error-signal-20261112.md)。
+
 W3本地文件原语（2026-11-12）：Python67/67（文件45+纯校验22）/语法/旧120冻结与false verdict保持；实际协调器、Android实包与新真机合同未验，W3/R4/R5open。[验证](validation/w3-terminal-file-primitives-20261112.md)。
 
 W3模拟器同步（2026-11-11）：本地39794cb、双端#15/Wiki已逐字回读，Wiki摘要一致；单片20父诊断/tools691通过，原真机120冻结/run未消耗，W3/R4/R5仍open。[收据](validation/w3-qwen-heap-emulator-observed-sync-20261111.json)。

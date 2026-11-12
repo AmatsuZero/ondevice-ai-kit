@@ -1,3 +1,7 @@
+## 2026-11-12：发布后错误信号已修正
+
+文件层首检查点`03059a8`双端#15/Wiki逐字回读，[收据](../validation/w3-terminal-file-primitives-sync-20261112.json)。复核medium继续在代码中解决：显式PublishedButNotDurableError标记目标已发布/目录持久性未验及原cause，2类型RED→完整67GREEN；无设备/新推理，实际协调器、Android实包和新真机合同仍待验，W3/R4/R5open。[窄修验证](../validation/w3-terminal-publication-error-signal-20261112.md)。
+
 ## 2026-11-12：本地终态文件原语已验收
 
 稳定读取/命名目录链复核和staging/fsync/无覆盖发布已按候选集成；新鲜Python67/67（文件45+纯校验22）、语法及旧120冻结/原false verdict保持。6项边界真实RED→GREEN，漏break/伪Read失败原件保留；最终外部源码复核及发布后fsync/unlink故障已裁定，错误可留下完整target，禁止自动重试或推断持久化。仅本地私有单写者范围，无新设备/模型调用；实际采样协调器、Android wrapper/实包、新合同及真机质量资源仍待验，W3/R4/R5open。[验证与边界](../validation/w3-terminal-file-primitives-20261112.md)。

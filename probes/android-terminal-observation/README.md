@@ -38,8 +38,11 @@ existing target, and fsync the directory. These checks assume a private
 single-writer root; inode comparisons do not provide atomic conditional unlink
 against malicious same-UID writers.
 
-An exception after publication can leave the complete final file visible and
-may leave its own staging hard link. Visibility does not prove directory
+`PublishedButNotDurableError`, an `OSError` subclass, marks postpublication
+directory-fsync or staging-unlink errors with `published=True` and
+`durability_verified=False`, retaining the original error as its cause.
+`staging_may_remain=True` additionally marks a staging-unlink failure. The
+complete final file may be visible; visibility does not prove directory
 durability. The caller must stop, retain the failure and inspect the same
 operation's evidence; it must not automatically retry or treat the exception as
 proof that no bytes were published.

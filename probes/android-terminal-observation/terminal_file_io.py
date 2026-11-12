@@ -17,6 +17,15 @@ from pathlib import Path
 MAX_BYTES = 1048576
 
 
+class PublishedButNotDurableError(OSError):
+    published = True
+    durability_verified = False
+
+    def __init__(self, message, *, staging_may_remain=False):
+        self.staging_may_remain = staging_may_remain
+        super().__init__(message)
+
+
 def _validate_root(root):
     root_path = Path(root)
     root_abs = root_path.absolute()
@@ -231,9 +240,15 @@ def write_new_durable(root, relative, payload):
             if exc.errno == errno.EEXIST:
                 raise FileExistsError('target exists')
             raise
-        os.unlink(staging, dir_fd=dirfd)
+        try:
+            os.unlink(staging, dir_fd=dirfd)
+        except OSError as exc:
+            raise PublishedButNotDurableError('published target; directory durability unverified: ' + str(exc), staging_may_remain=True) from exc
         staging = None
-        os.fsync(dirfd)
+        try:
+            os.fsync(dirfd)
+        except OSError as exc:
+            raise PublishedButNotDurableError('published target; directory durability unverified: ' + str(exc)) from exc
     except Exception:
         if staging is not None and staging_ino is not None and fds:
             parent_fd = fds[-1]

@@ -100,8 +100,9 @@ class FileBoundaries(unittest.TestCase):
 
     def test_write_error_cleans_owned_stage(self):
         with mock.patch('os.write', side_effect=OSError('fixture-write-failure')):
-            with self.assertRaisesRegex(OSError, 'fixture-write-failure'):
+            with self.assertRaisesRegex(OSError, 'fixture-write-failure') as caught:
                 fio.write_new_durable(self.root, 'ack', b'ack')
+        self.assertIs(type(caught.exception), OSError)
         self.assertEqual(sorted(p.name for p in self.root.iterdir()), ['report'])
 
     def test_publication_collision_preserves_other_writer(self):
@@ -149,8 +150,14 @@ class FileBoundaries(unittest.TestCase):
             return real_fsync(fd)
 
         with mock.patch('os.fsync', side_effect=fsync):
-            with self.assertRaisesRegex(OSError, 'fixture-directory-fsync-failure'):
+            with self.assertRaisesRegex(OSError, 'fixture-directory-fsync-failure') as caught:
                 fio.write_new_durable(self.root, 'ack', b'ack')
+        self.assertIs(type(caught.exception), fio.PublishedButNotDurableError)
+        self.assertIs(caught.exception.published, True)
+        self.assertIs(caught.exception.durability_verified, False)
+        self.assertIs(caught.exception.staging_may_remain, False)
+        self.assertIsInstance(caught.exception.__cause__, OSError)
+        self.assertIn('published target; directory durability unverified', str(caught.exception))
         self.assertEqual(observed, ['directory-fsync-failed'])
         self.assertEqual((self.root / 'ack').read_bytes(), b'ack')
         self.assertEqual(sorted(p.name for p in self.root.iterdir()), ['ack', 'report'])
@@ -164,8 +171,14 @@ class FileBoundaries(unittest.TestCase):
             return real_unlink(path, *args, **kwargs)
 
         with mock.patch('os.unlink', side_effect=unlink):
-            with self.assertRaisesRegex(OSError, 'fixture-staging-unlink-failure'):
+            with self.assertRaisesRegex(OSError, 'fixture-staging-unlink-failure') as caught:
                 fio.write_new_durable(self.root, 'ack', b'ack')
+        self.assertIs(type(caught.exception), fio.PublishedButNotDurableError)
+        self.assertIs(caught.exception.published, True)
+        self.assertIs(caught.exception.durability_verified, False)
+        self.assertIs(caught.exception.staging_may_remain, True)
+        self.assertIsInstance(caught.exception.__cause__, OSError)
+        self.assertIn('published target; directory durability unverified', str(caught.exception))
         self.assertEqual((self.root / 'ack').read_bytes(), b'ack')
         self.assertEqual((self.root / 'report').read_bytes(), b'complete-report')
         stages = [p for p in self.root.iterdir() if p.name.startswith('.')]
