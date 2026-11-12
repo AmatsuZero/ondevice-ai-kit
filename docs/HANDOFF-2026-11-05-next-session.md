@@ -1,3 +1,7 @@
+## 2026-11-13：outer lifecycle 已集成验收，继续 adapter C
+
+免费hy3源码/精确补丁原样集成terminal_device_lifecycle.py，startup22+finish7+run22=51新方法、既有201观察+13守卫合计265新鲜通过，41AST；旧120冻结/原失败/95其他dirty/81准备源/两APK保持。[验证](validation/w3-terminal-lifecycle-20261113.md)。严格bytes和中断恢复均有真实RED→GREEN；首审误认observed为receipt，补实际协调器/Kotlin/不同startup-terminalhash测试后补审accept，原revise保留。恢复最多两次5s等待，非整个恢复5s。无活动helper、所有旧句柄终态勿poll，native旧429不重试。下一adapterC需真实冻结/身份接线、prepare/collect/policy、部分prepare所有权journal及精确恢复，不能只过四路由测试就freeze。新freeze/同run真机和生产余门仍缺，ADB为空、零新设备/推理；W3/R4/R5open、goalactive，源码未push。
+
 ## 2026-11-12：initial_progress 已双端同步，继续 outer lifecycle
 
 本地`9fb7529`已记录于GH#15comment6828593679/GL#15note44030/GHWiki8ce77136；逐字回读、双Wiki SHAab436b57c4633611c2f870f8810e3842bd1d7f033e13329b441f6e8374d5dcb9一致。同步收据`validation/w3-terminal-initial-progress-sync-20261112.json`；marker已用、源码未push。214项为host证据；完整outer、新freeze及同run真机仍缺，W3/R4/R5open。下一免费hy3候选继续启动/收取/恢复，不重放旧consumedrun。

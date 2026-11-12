@@ -49,5 +49,22 @@ APKs and unexecuted lifecycle placeholders; they do not prove device readiness.
 rtk proxy python3 -B probes/android-qwen-terminal/check_device_contract.py
 ```
 
-Full outer launch, collection and partial-prepare restoration remain pending.
+`terminal_device_lifecycle.py` supplies the one-shot startup/run bridge. It shares
+the clock created before launch with polling, binds the first report to an actual
+PID/startTicks sample, and checks the instrumentation's final ACK flags, result
+code and exact terminal report hash. A consumed launch cannot be retried. Failure,
+including interruption, retains the original exception and secondary recovery
+errors. Host recovery uses at most two waits of five seconds each; callback time
+is additional. Successful ACK is followed only by a 15-second wait and local
+evidence reads.
+
+```sh
+rtk proxy python3 -B -m unittest discover -s probes/android-qwen-terminal -p 'test_*.py' -v
+```
+
+These tests use local fake-ADB subprocesses. The injected launch/frozen/stop
+callbacks still require the complete device adapter and ownership checks.
+Collection and partial-prepare restoration remain pending, as do a new complete
+freeze and same-run Android acceptance. See
+[lifecycle validation](../../docs/validation/w3-terminal-lifecycle-20261113.md).
 See [guard validation](../../docs/validation/w3-terminal-device-contract-20261112.md).

@@ -393,3 +393,44 @@ atomic protection against a malicious concurrent same-UID filesystem writer.
 The source uses synthetic APKs/unexecuted driver placeholders and cannot prove
 package/device/lifecycle acceptance. A future real freeze is blocked until the full
 outer implementation, final source/parent reviews and current hash verification exist.
+
+## Outer lifecycle bridge (2026-11-13, acceptance contract)
+
+The new `terminal_device_lifecycle.py` is integrated from bounded external
+candidates. This contract covers host lifecycle behavior; it does not establish
+device acceptance or completion of the outer adapter.
+
+`wait_for_startup` takes a shared, already initialized exact `_PollClock` and its
+original `started_ns`. It validates configuration and new outputs before callbacks,
+writes startup-start durably, and discovers the actual alias PID and same-UID
+process start ticks. Identity and real resource budgets are rechecked while
+waiting for the first strict report; only explicit absence is retried. The
+inclusive 20-second window covers every individual transport, poll and sleep.
+The first report's phase/index uses the conservative original run-start anchor.
+
+`parse_instrumentation_finish` requires exact bounded UTF-8 bytes, matching raw
+report SHA, exactly true terminalAckAttempted/terminalAckReceived and one actual
+finish code: -1 for completed or 0 for failed. Duplicates, unexpected result
+fields and failure envelopes are rejected. Quality remains false.
+
+`run_diagnostic` fixes the new alias/run/runner, preflights outputs and starts the
+shared 240-second clock before Popen. A durable new-only marker consumes the run,
+including launch failure. The future device adapter supplies live launch checks,
+fresh frozen verification before every transport/Popen, and ownership-proven exact
+alias stop. It passes the real startup binding/progress to polling. After ACK it
+performs only a bounded 15-second wait and local evidence/log reads; no additional
+process poll, resource sample or clock callback. Failure preserves the original
+typed exception and partial evidence, records secondary recovery errors, and uses
+bounded host termination/wait without relaunch or ACK retry.
+
+Recovery catches interruptions as well as ordinary exceptions. Secondary
+interruptions cannot mask the primary error. Each host wait is bounded to five
+seconds, at most twice (up to ten seconds of waits plus callback overhead).
+Finish SHA is computed from `terminal-observed.json`, which the coordinator
+writes as the exact terminal report bytes. `terminal-receipt.json` is the separate
+binding/sample receipt. The first startup report may still be running, and its
+hash must not replace the terminal hash.
+
+Parent tests use actual local fake-ADB subprocesses and a child waiting for the
+real ACK file. Complete source adaptation, partial-prepare restoration, final
+reviews, a new freeze and same-run device acceptance remain separate gates.

@@ -1,0 +1,71 @@
+{
+  "at": "2026-11-12T23:28:10.039686+00:00",
+  "observationMethods": 201,
+  "guardMethods": 13,
+  "lifecycleMethods": 51,
+  "totalMethods": 265,
+  "ASTFiles": 41,
+  "suites": [
+    {
+      "name": "observation",
+      "exitCode": 0,
+      "elapsedSeconds": 28.126716124999803
+    },
+    {
+      "name": "contract",
+      "exitCode": 0,
+      "elapsedSeconds": 1.6013111670035869
+    },
+    {
+      "name": "lifecycle",
+      "exitCode": 0,
+      "elapsedSeconds": 24.271113584021805
+    }
+  ],
+  "sourceSHA256": "5b6bd1a91321a155898ce0b5414ea5395ed831d65da0357b2b0706251d20b89e",
+  "sourceIntegratedExact": true,
+  "testMigration": [
+    {
+      "file": "probes/android-qwen-terminal/test_terminal_startup_parent.py",
+      "originalSHA256": "87f5dee59566970fc2549fd7ba88f8c002e46752ef72f42fe5f4aa51adebc764",
+      "newSHA256": "07ca31c82806398fc3a13ed7b7f0233c0f6a171d1614af6542ba7b583fd318f8",
+      "onlyTestPathMigration": true
+    },
+    {
+      "file": "probes/android-qwen-terminal/test_instrumentation_finish_parent.py",
+      "originalSHA256": "b74eb625a72af7994b1bf6a101ce24b7088541e606caa4362c57b64fee80e9c1",
+      "newSHA256": "a001aa4db0f38361592ae61ca635508a7d683ce503742653801a766c25b1f9dd",
+      "onlyTestPathMigration": true
+    },
+    {
+      "file": "probes/android-qwen-terminal/test_terminal_run_parent.py",
+      "originalSHA256": "5eded7e9094c0e675a9221e5c0716de3b4bff97d74491a49aa2b7b43c6d96857",
+      "newSHA256": "2eac8ba42810e3c965bc527bdeca7fdea2cdb17f6ca5f2674fabf98046437a28",
+      "onlyTestPathMigration": true
+    }
+  ],
+  "protection": {
+    "oldFrozenFilesVerified": 120,
+    "frozenDrift": [],
+    "protectedDirtyPathsVerified": 95,
+    "protectedDrift": [],
+    "preparedSourceFilesVerified": 81,
+    "preparedSourceDrift": [],
+    "apkDrift": [],
+    "oldReportSHA256": "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e",
+    "oldVerdictSHA256": "3575b70f0531560aeecc94935cf41f4415c15e1a5bef7e494b8f57c2cb31681d",
+    "deviceOperations": 0
+  },
+  "sourceReview": "accept",
+  "reviewEvidence": ".omx/artifacts/w3-terminal-observation-20261112/lifecycle-source-review",
+  "parentRegressionAfterReview": "SystemExit with secondary KeyboardInterrupt RED/GREEN",
+  "deviceOperations": 0,
+  "modelInferenceCalls": 0,
+  "microphoneStarts": 0,
+  "aiAiRequests": 0,
+  "newRunFrozen": false,
+  "terminalObservationDeviceVerified": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false
+}

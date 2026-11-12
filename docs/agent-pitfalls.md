@@ -1,3 +1,7 @@
+## W3 outer lifecycle：终态原文哈希与中断恢复（2026-11-13）
+
+首审误把terminal-observed.json当binding/sample receipt，建议startup hash；实际adb_terminal_observation.py把双读first原bytes写observed、另写terminal-receipt.json。真实fake-ADB先running后terminal，两SHA不同，finish必须用终态raw；补协调器/Kotlin原文后hy3复核accept，原revise保留。另presence用==会接受bytearray/bytes子类，transport须exactbytes；except Exception漏KeyboardInterrupt/SystemExit，实际RED为stops0/日志未关。hy3精确修正BaseException及secondary恢复后51新方法/完整265GREEN。恢复有两次各5s等待，不能称总5s。副作用/冻结/ownership仍由未完成adapterC证明，host不等于Android。证据lifecycle-source-review/、startup-parent/interrupt-fixed-candidate/及lifecycle-repository-acceptance/；旧run不重放。
+
 ## W3启动进度：首报告快照必须在同一总时钟下衔接（2026-11-12）
 
 `initial_progress` 的有效形状是精确普通dict：phase非空str、activeCaseIndex为None或精确int0、startedNs为非负有界精确int；非法值须在任何callback/transport/write前拒绝，快照必须复制后写入poll-start。旧None默认保持行为。首clock晚于startedNs才允许进入poll；首phase使用startedNs，回调跨121s失败、120s等号通过，phase变化才从新鲜read_ns重置。测试先把合法None和合法完整dict误列为负例，导致候选假失败；修正后5/5真实fake-ADB通过。outer启动仍须传真实首报告并共享Popen前的240s时钟，不能以新loop重置预算；host证据不等于Android。证据`initial-progress-parent/`及`w3-terminal-initial-progress-20261112.{md,json}`。
