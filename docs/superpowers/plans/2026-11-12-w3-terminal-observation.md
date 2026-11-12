@@ -209,6 +209,12 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
 - [ ] Complete adapter C: guarded source adaptation and live identity callbacks,
   prepare/collect/policy, durable pre-side-effect ownership claims and exact
   partial-prepare recovery. Do not use four routing checks as full acceptance.
+  Source adaptation sub-slice accepted at f084bd0: pinned immutable FILE source,
+  no old action execution/module launcher, per-call frozen hook, unchanged helper
+  AST and8actualfakeADB parent methods. Mandatory source closure omission RED is
+  fixed with external DRIVERS addition; full274/43AST pass, source review accept.
+  Live callbacks/dispatcher/ownership/prepare/collect/restore remain unimplemented;
+  this sub-slice does not complete the C item or authorize a new real freeze.
 - [ ] Collect exact same-run terminal evidence and restore the new alias/staging. Never infer device acceptance from pure components.
 
 ### Task 4: Evidence and delivery

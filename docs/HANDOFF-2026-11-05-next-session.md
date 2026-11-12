@@ -1,3 +1,7 @@
+## 2026-11-13：源码适配已提交并双端同步
+
+本地f084bd0精确10文件；GH#15comment6839306309/GL#15note44038/GHWiki0056ffbc逐字回读，双Wiki SHA63dc95235a11c3af661b3e527ccd5c764a8847f400f02b2ad2578daed0bbd8dd一致，[收据](validation/w3-terminal-source-adapter-sync-20261113.json)。marker已用勿重发、源码分支未push。本轮所有helper/验收/同步进程终态，无active请求，旧句柄勿poll。下一durable claims/prepare/部分恢复按adapter-c-next-brief.md；完整driver/newfreeze/same-run设备仍缺，274项仅host。W3/R4/R5open、goalactive。
+
 ## 2026-11-13：纯源码适配已验收，下一prepare/ownership
 
 hy3 exact terminal_source_adapter.py及DRIVERS单组补丁已集成，8新父方法真实fakeADB通过、必需依赖漏项真实RED→14守卫GREEN；完整201观察+14守卫+59终态=274/43AST通过，旧120冻结/原失败/95其他dirty/81源/两APK保持。独立source-only reviewaccept无finding。[验证](validation/w3-terminal-source-adapter-20261113.md)。仅纯源适配，_terminal_before_transport/_terminal_dispatch仍缺实际device_acceptance接线，不能据此freeze。下一按.omx/artifacts/w3-terminal-observation-20261112/adapter-c-next-brief.md做durable stage/install/所有flatpart前置claims、prepare和独立于collection的精确恢复；使用原8MiBtransfer前可按size预声明全部parts，不能只靠完成transfer收据。所有本轮helper/测试终态勿poll；native旧429不重试。ADB为空、零新设备/推理，W3/R4/R5open、goalactive，源码未push。
