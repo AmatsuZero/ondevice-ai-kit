@@ -1,8 +1,8 @@
 # Terminal observation contract components
 
 This isolated probe supplies a bounded Kotlin ACK barrier, a pure Python
-validator and local file primitives for a future independent W3 run. It does not
-run Android, sample `/proc`, coordinate actual ACK publication, perform inference,
+validator, local file primitives and a local observation coordinator for a future
+independent W3 run. It does not run Android, sample `/proc`, perform inference,
 or change the consumed heap run.
 
 `TerminalObservationBinding.ackBytes()` and Python `acknowledgement()` share six
@@ -21,8 +21,8 @@ rtk proxy python3 -B -m unittest discover -s probes/android-terminal-observation
 The Kotlin runner requires a new output directory and writes compilation output,
 test output and a receipt containing the Java/classpath for `AckFixtureKt`.
 It compiles with `-Werror`, runs 45 checks and the cross-iteration clock regression.
-The Python suite contains 67 test methods: 22 validator checks and 45 local file
-checks, with additional boundary subtests.
+The Python suite contains 102 test methods: 22 validator checks, 45 local file
+checks and 35 coordinator checks, with additional boundary subtests.
 `AckFixture.kt` emits actual Kotlin bytes for cross-language comparison.
 
 The callbacks used by the Kotlin barrier must themselves have bounded execution;
@@ -47,7 +47,16 @@ durability. The caller must stop, retain the failure and inspect the same
 operation's evidence; it must not automatically retry or treat the exception as
 proof that no bytes were published.
 
-Stale ACK refusal on Android, actual sampling order, durable observation
-receipts before ACK publication, Android build/package review and a fresh frozen
-device contract remain separate work. See the [pure-component scope](../../docs/validation/w3-terminal-observation-components-20261112.md)
-and [local file validation](../../docs/validation/w3-terminal-file-primitives-20261112.md).
+`publish_terminal_observation()` preflights four distinct paths and takes two
+actual local report reads between injected process samples. Four timestamps use
+one host monotonic clock domain. It validates each sample, snapshots callback
+data and durably publishes the observed report, deterministic strict JSON receipt
+and ACK in that order. Its resource summary is the greater RSS and lower available
+value of two samples. Errors stop the operation without retry or rollback of
+earlier durable outputs.
+
+These tests verify local IO and callback ordering. Real device sample collection,
+fresh report transport, Android ACK IO, Android build/package review and a fresh
+frozen device contract remain separate work. See the [pure-component scope](../../docs/validation/w3-terminal-observation-components-20261112.md),
+[local file validation](../../docs/validation/w3-terminal-file-primitives-20261112.md)
+and [coordinator validation](../../docs/validation/w3-terminal-coordinator-20261112.md).

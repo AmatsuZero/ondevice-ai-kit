@@ -1,3 +1,7 @@
+## 2026-11-12：本地终态协调器已验，下一步真实设备接入
+
+本地文件读写与注入采样协调器已原字节集成：完整Python102/102、语法及旧120冻结/原报告/false verdict保持。首实现扩展父检查9fail/1error拒收，独立边界修正34GREEN；最终源码复核accept，缺binding字段KeyError意见经父复现不成立，补1方法后102GREEN。原件和裁定见[验证](validation/w3-terminal-coordinator-20261112.md)。仅本地IO/回调证据，无ADB/推理/下载，源码分支未push；新marker同步另附收据。旧run已消耗不重放，W3/R4/R5open、goalactive，native旧429不重试。下一步真实有界同进程采样/新鲜报告传输、Android ACK IO/独立wrapper-driver/实包及新冻结合同，再取真机末端证据；完整手机质量资源与生产发布余门保持。
+
 ## 2026-11-12：本地文件层与错误信号已提交并同步
 
 源码`03059a8`/`aa98874`均本地精确提交、分支未push。错误信号增量GH#15comment6815909994、GL#15note43367、GHWiki ef6f938e已逐字回读，双Wiki SHAf40a05d86708083b9ff3409b68e1e49d6d345847a90a7684d2ddc2eae9068252一致；[同步收据](validation/w3-terminal-publication-error-signal-sync-20261112.json)，两个新marker均已用勿重复。首次GL列表EOF前只写GH，幂等续段复用同GH ID、GL仅一次；初stderr被同名重跑覆盖，只有工具观察而非磁盘原stderr，限制已记录。67Python/语法/旧120冻结及原false verdict保持，99原dirty扣除自身共享前缀后保持；无活动helper/native重试/设备调用。下一步实际采样协调器与新Android wrapper/实包/冻结合同，W3/R4/R5open、goalactive；不能重放已消耗run或用本地层代替整包完成。

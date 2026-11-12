@@ -1,3 +1,8 @@
+## W3 协调器：预检时机、时钟即停与源码复核复现（2026-11-12）
+
+- 首实现22+7检查绿，但扩展父检查真实9fail/1error：output全路径lstat跟随中间symlink且缺父目录到发布才失败；倒退时钟收齐四次才拒绝；str子类/NaN与binding类型校验遗漏。全部输出父链须在callback前nofollow预检，时钟首次倒退立即停止，快照/严格有限JSON再发布。原候选拒收，独立修正34GREEN、最终102GREEN；具体原失败计数仅对应保留的那一轮，不外推后来新增子例。
+- 最终静态复核accept附minor称缺PID/startTicks会KeyError；父实跑两者均在sample校验先ValueError、无ACK/写出，故不为不可复现建议改源码。保留原意见与父裁定并补回归。证据`.omx/artifacts/w3-terminal-observation-20261112/coordinator-{implementation-candidate,boundaries-fix,final-review}/`。本地回调与文件顺序不是实际设备采样/传输证明；host monotonic不得混作device uptime。
+
 ## W3 文件原语：skip-green、目录 FD 自比较与候选循环回归（2026-11-12）
 
 - 缺实现时吞 ImportError 并 skip 全套会得到 exit0，不能当 tests-first RED。必须直接导入并保存真实 ModuleNotFoundError；本次首稿 30 skipped 已拒收。实际 growth/replacement 用原始 os.read delegate 修改真实 fixture，以 FD dev/ino 选目标并确认修改确实执行，不能绑定 os.open 的绝对路径拼写。

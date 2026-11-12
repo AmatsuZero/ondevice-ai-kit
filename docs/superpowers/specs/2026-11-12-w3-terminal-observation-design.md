@@ -88,6 +88,29 @@ visible and its directory durability is unverified. The future coordinator must
 stop, preserve same-operation evidence and never automatically retry, clear an
 observation gap, or equate file visibility with durable publication.
 
+## Local coordinator before device transport
+
+The next local coordinator takes source-report and three distinct new output
+paths, binding, a process-sample callback and one monotonic-nanosecond callback.
+Its order is clock/sample-before/read1/clock/read2/clock/sample-after/clock,
+followed by validation and durable report/receipt/ACK writes in that order.
+The four times share the host monotonic clock domain; they are not device
+`/proc/uptime` or a proven cross-clock mapping.
+
+Each sample independently supplies exact PID/startTicks/RSS/available values and
+must pass identity/type/resource gates. The observation uses the greater RSS
+and lower available value across the two samples, without implying a peak.
+The deterministic UTF-8 JSON receipt preserves the original binding, report
+SHA256, observation and both sample snapshots. Later mutation of callback-owned
+dicts must not rewrite earlier evidence. All output paths are preflighted new;
+publication failures retain prior durable outputs and are never retried.
+
+This layer performs actual local file reads and callback invocations. Its tests
+cannot prove that an injected callback samples the real device or that a local
+report was freshly transported from Android. Real same-process collection,
+transport bounds, Android ACK IO and the independently frozen run remain
+separate integration gates.
+
 ## Exit criteria
 
 Fault regressions prove wait-until-ACK, bounded timeout, strict identity/bytes,
