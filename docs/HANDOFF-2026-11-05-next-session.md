@@ -1,3 +1,7 @@
+## 2026-11-12：运行中轮询已验收，外层生命周期继续
+
+免费hy3候选/窄修原字节集成，新增23方法、完整Python194/33AST通过；旧120冻结/原失败、95其他dirty路径、81准备源和两APK保持。[验证](validation/w3-terminal-polling-20261112.md)。静态复核accept，父端另补poll/sample/read跨121s三个真实RED并经外部修正GREEN；首阶段从loop起计时的保守minor延后。所有旧source-review/phase-fix及fragment请求均终态勿poll。下一完整outer启动/收取/部分prepare失败精确恢复仅有4路由RED与brief，尚未实现/冻结/跑设备；不重放旧consumed run。W3/R4/R5open、goalactive，零新安装/推理，源码未push。
+
 ## 2026-11-12：终态 wrapper 已提交并双端同步
 
 本地`7688972`精确15文件，GH#15comment6823427235/GL#15note43993/GHWiki0c629927逐字回读，双Wiki SHA5be586a4c4661b4f9908f08c8cf17053e08341bbabb25139d6272e9d32cddd59一致，[收据](validation/w3-qwen-terminal-wrapper-sync-20261112.json)。marker已用勿重发，源码未push；58组783断言/75任务/实包仅host+Android包证据，W3/R4/R5open、goalactive。当前只剩poll-loop独立tests-first原session5180live；父6方法已实际direct缺模块RED于`poll-parent/`，实现尚未生成。全套驱动/新合同/同run真机与生产余门继续；不重放consumed旧run、不提前请解锁。

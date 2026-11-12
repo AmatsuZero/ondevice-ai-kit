@@ -2,8 +2,9 @@
 
 This isolated probe supplies a bounded Kotlin ACK barrier, a pure Python
 validator, local file primitives, local and transport-aware observation
-coordinators, and three ADB adapters for a future independent W3 run. Android runner
-integration and device acceptance remain pending. No consumed run is changed.
+coordinators, and three ADB adapters for a future independent W3 run. The independent Android wrapper has passed host/build/package checks; full outer
+launch/restore integration, a new frozen run and device acceptance remain pending.
+No consumed run is changed.
 
 `TerminalAckFile` reads the generated alias-private ACK file without writing or
 normalizing bytes. Its constructor accepts an existing final so it can be read;
@@ -42,9 +43,9 @@ rtk proxy python3 -B -m unittest discover -s probes/android-terminal-observation
 The Kotlin runner requires a new output directory and writes compilation output,
 test output and a receipt containing the Java/classpath for `AckFixtureKt`.
 It compiles with `-Werror`, runs 45 checks and the cross-iteration clock regression.
-The Python suite contains 171 test methods: 22 validator checks, 45 local file
+The Python suite contains 194 test methods: 22 validator checks, 45 local file
 checks, 35 coordinator checks, 26 ADB sampler checks, 11 report-reader checks
-18 ACK-publisher checks and 14 remote-coordinator checks,
+18 ACK-publisher checks, 14 remote-coordinator checks and 23 polling checks,
 with additional boundary
 subtests. Sampler tests use injected responses and real local subprocesses that
 stand in for ADB; the suite does not connect to a phone.
@@ -135,10 +136,27 @@ including the old process-exit race, journal failure preventing publication and
 directory-fsync failure leaving a complete final. This is one terminal handshake;
 it is not the complete polling/launch/restore driver or Android device evidence.
 
+`observe_until_terminal()` starts after the outer launcher has bound the first
+report to the actual PID/startTicks. It writes a new-only durable poll-start
+record before callbacks, samples the actual process and reads each report afresh,
+validates strict metadata/JSON, and records raw report hashes. A shared monotonic
+clock enforces the inclusive 240s total window; loop guards enforce the inclusive
+120s phase/index window before and after callbacks. A newly observed phase cannot
+reset an already expired window. On terminal it invokes the actual remote
+coordinator exactly once and returns immediately after publication, without a
+post-ACK process/resource/clock call. Failed terminal reports remain observation
+only. The first phase is conservatively timed from loop start; its first-read
+overhead reduces the remaining phase window. This low-priority review observation
+is retained. Four external and nineteen parent methods use actual local fake-ADB
+subprocesses; they do not establish Android behavior or the outer lifecycle.
+
 These tests verify local IO and callback ordering. Real device sample collection,
-fresh report transport, Android ACK IO, Android build/package review and a fresh
-frozen device contract remain separate work. See the [pure-component scope](../../docs/validation/w3-terminal-observation-components-20261112.md),
+full outer lifecycle, Android/OEM ACK IO and a fresh frozen device contract
+remain separate work. The existing wrapper build/package result is bounded to its
+recorded APKs. See the [pure-component scope](../../docs/validation/w3-terminal-observation-components-20261112.md),
 [local file validation](../../docs/validation/w3-terminal-file-primitives-20261112.md)
 [coordinator validation](../../docs/validation/w3-terminal-coordinator-20261112.md)
 [sampler validation](../../docs/validation/w3-adb-process-sampler-20261112.md)
 and [remote-coordinator validation](../../docs/validation/w3-adb-terminal-observation-20261112.md).
+
+See [polling validation](../../docs/validation/w3-terminal-polling-20261112.md).

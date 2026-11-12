@@ -1,0 +1,49 @@
+{
+  "exitCode": 0,
+  "testMethods": 194,
+  "pythonFilesParsed": 33,
+  "oldFrozenFilesVerified": 120,
+  "oldReportAndFailedVerdictDrift": [],
+  "protectedDirtyPathsVerified": 95,
+  "protectedDrift": [],
+  "preparedSourceFilesVerified": 81,
+  "preparedSourceAndApkDrift": [],
+  "rootSourceSHA256": {
+    "probes/android-terminal-observation/test_terminal_poll_boundaries.py": "5e94f9ded7d12487e5cfce3da34ffdb4f96cfe8259180f54234c167eef03cdab",
+    "probes/android-terminal-observation/test_terminal_polling.py": "f6f69bb13eaa31f59b5b6ed6e7083fdea3e24d60a053dfea1bf68222f8fe28f0",
+    "probes/android-terminal-observation/test_terminal_poll_parent.py": "bea568cf61014a7eb313b0664c625057266b179c3528a8b59263c345c8c6637b",
+    "probes/android-terminal-observation/terminal_polling.py": "1a37f9c533043d054937ee1b288bca8ca0caffe24d7329ceef679b2dd11961e2"
+  },
+  "deviceOperations": 0,
+  "inferenceCalls": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "at": "2026-11-12T13:33:54.971332+00:00",
+  "newPollingMethods": 23,
+  "externalMethods": 4,
+  "parentMethods": 6,
+  "boundaryMethods": 13,
+  "sourceReview": {
+    "reviewVerdict": "accept",
+    "reviewSourceSHA256": "85f0e866adadf4d847bb68986628c69c5fb2b1e2dfc467bd57d8a39810f37408",
+    "finalSourceSHA256": "1a37f9c533043d054937ee1b288bca8ca0caffe24d7329ceef679b2dd11961e2",
+    "parentFindingFixed": "120s phase budget could be bypassed by process/sample/read callback time advance then terminal phase reset",
+    "red": "poll-order-fixed-candidate/expanded-window-red.stderr",
+    "green": "poll-final-candidate/acceptance.stderr",
+    "exactExternalFix": "poll-phase-window-fix-hy3/patch.json",
+    "remainingBlockingFindings": [],
+    "deferredMinor": {
+      "severity": "low",
+      "lines": "anchor_phase=None branch (approx: 'if anchor_phase is None: anchor_phase = phase; anchor_index = active_case_index') and 'anchor_ns = start_ns' initialization",
+      "issue": "The first observed phase is anchored to start_ns (loop start, captured just after poll-start.json) rather than to the read_ns of the first report, while every subsequent phase is anchored to its own read_ns. This makes the inclusive 120s host window for the FIRST phase strictly shorter than for later phases (under-allowance by the sampling/read overhead of iteration 1).",
+      "concreteTrigger": "Drive the loop with a single non-terminal phase that first appears at read_ns_1 (~4s after start_ns) and persists. The top/bottom guard fires at guard_ns where guard_ns - start_ns > 120000000000, i.e. at ~120s of loop time, which is only ~116s of actual phase persistence from first observation — slightly under the contract's inclusive 120s window for that phase.",
+      "requiredFix": "In the 'if anchor_phase is None' branch, also set anchor_ns = read_ns (the timestamp of the first observed report) so the first phase's 120s window is measured from its first observation, matching the behavior of subsequent phase changes."
+    },
+    "reviewLimitationCorrection": "_PollClock enforces total240s and regression only;120s is guarded in the loop. Static review missed the concrete pending callback crossing; parent actual three-case RED and final GREEN establish the fix.",
+    "scope": "Host actual fake-ADB/subprocess/shell/files only. No Android/OEM or complete lifecycle proof."
+  },
+  "fullOuterDriverImplemented": false,
+  "newRunFrozen": false,
+  "terminalObservationDeviceVerified": false,
+  "sourceBranchPushed": false
+}

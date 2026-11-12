@@ -1,3 +1,7 @@
+## W3轮询：回调耗时不能被新阶段重置（2026-11-12）
+
+22方法初绿后，父端分别在实际poll/sample/read回调使host时钟推进121s，新terminal阶段重置anchor并错误ACK，三个子例真实RED。应在每个回调返回后先检查旧阶段120s窗口，再接受新阶段；外部仅加三处守卫后23方法/全套194GREEN。开始文件也须在clock/process/transport前持久化，process poll须精确int或None。静态accept遗漏该故障，不能代替真实时钟边界验收；原复核、RED与裁定保留于poll-source-review-hy3/、poll-order-fixed-candidate/、poll-final-candidate/。首阶段从loop起计时目前更保守，minor延后；此项只证明host stand-in，不证明Android/完整outer/旧gap恢复。
+
 ## W3片段接线：给出真实ACK API和nullable类型（2026-11-12）
 
 首片段合并真实6编译错误：主代理窄prompt把TerminalAckFile误写为File单参数/read()、把FileRunState身份字段误写为nonnull；实际API是TerminalAckFile(existingCanonicalDir,runId)、readOrNull()、state.runId/sourceFingerprint与局部ticks/ACKfile可空。给出实际声明后外部精确patch，又出现File(File)多余包装真实1error；外部单行直传dir后58组783断言GREEN。不能改正确共享API/状态/测试迎合错误prompt，原失败与主代理上下文限制均保留。writer serialization须留在原try/catch内以保留wrapperPersistError；最终hash只取成功持久化返回bytes，ACKerror不改终态。证据`wrapper-{combined-host,api-fix-host,corrected-host,integrated-host}/`。

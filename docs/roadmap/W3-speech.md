@@ -1,3 +1,7 @@
+## 2026-11-12：运行中轮询验收检查点
+
+新增23方法、完整Python194/33AST通过，旧120冻结/原失败、95其他dirty路径、81准备源和两APK保持；[验证](../validation/w3-terminal-polling-20261112.md)。实际本地fake-ADB/subprocess验证先持久化、严格身份/预算、新鲜报告、终态一次ACK且发布后即返。静态复核accept；父端补三类跨回调121s真实RED→外部窄修GREEN。首阶段从loop起计时的更保守minor延后。完整outer启动/收取/部分准备失败恢复、新冻结与同run真机尚缺；W3/R4/R5open、零新设备/推理、源码未push。
+
 ## 2026-11-12：终态 wrapper 同步检查点
 
 本地`7688972`已同步GH#15comment6823427235/GL#15note43993/GHWiki0c629927，双Wiki SHA5be586a4c4661b4f9908f08c8cf17053e08341bbabb25139d6272e9d32cddd59逐字一致，[收据](../validation/w3-qwen-terminal-wrapper-sync-20261112.json)。marker已用勿重发，源码未push；完整驱动/新合同与同run真机、生产余门继续，W3/R4/R5open。下一poll-loop父6组已direct缺模块RED，外部4方法tests-first原请求仍live、实现未生成。

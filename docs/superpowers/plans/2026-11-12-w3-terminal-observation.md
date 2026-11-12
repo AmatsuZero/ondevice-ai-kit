@@ -146,6 +146,30 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
   is inferred. The distinct remote-report tests remain live and source integration
   remains gated on their delivery/RED/GREEN.
 - [ ] Reproduce the old exit race and IO-failure cases using the actual new host loop and wrapper fault doubles, then build/lint/check real APK contents and obtain source/parent review.
+
+  Wrapper fault checks/build/lint/APK and its diff-scoped source review are done;
+  actual running-process loop/outer launcher-restorer remain separate work.
+  Ruling (2026-11-12): six primary real-local-ADB polling acceptance methods have
+  actual direct missing-module RED. The independent four-method no-source-context
+  external test request remains unchanged. Source generation may overlap it;
+  integration still waits for delivered/reviewed tests, their direct RED and
+  all external/parent GREEN, followed by full suite and source review. Separate
+  file ownership is not a duplicate/restart or removal of the tests-first gate.
+
+  Polling completion (2026-11-12): after the terminal whole-request Empty stream,
+  the user selected free hy3. Exact compact candidates and narrow external fixes
+  are integrated; external4 +parent6 +boundary13 methods and full Python194/33AST
+  pass. Old120 frozen files/original failed verdict,95 protected paths,81 prepared
+  wrapper sources and both APKs stay unchanged. Initial19 methods41FAIL13ERROR,
+  later21 methods2FAIL, ordering/type1FAIL1ERROR and three callback-crossing RED
+  cases are retained. The final external patch checks the old120s window after
+  poll/sample/read, before any new phase can reset it. Static source review accepts;
+  its missed callback defect is covered by actual parent RED-to-GREEN adjudication.
+  Final: minor (deferred): first phase begins at loop start, conservatively reducing
+  its allowance by first-read overhead. No Android/OEM behavior is inferred.
+  Full outer launch/collect/partial-prepare restore, complete new freeze and
+  same-run device proof remain open; four outer routing checks have missing-driver
+  RED only. See docs/validation/w3-terminal-polling-20261112.md.
 - [ ] Freeze a separate complete contract with inputs, hashes, budgets and restoration. Run only if the current Android channel, identity and unlock prerequisites are verified.
 - [ ] Collect exact same-run terminal evidence and restore the new alias/staging. Never infer device acceptance from pure components.
 
