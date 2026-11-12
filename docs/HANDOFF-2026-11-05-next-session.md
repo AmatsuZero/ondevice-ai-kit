@@ -1,3 +1,7 @@
+## 2026-11-12：initial_progress 已验收，下一步实现 outer driver
+
+免费hy3候选将startup首份phase/index/startedNs接入轮询；本地当前源码未push。父端先取得5方法缺keyword RED；首稿测试误列合法None和完整dict，修正后实际5/5 fake-ADB GREEN/1.067s。完整轮询201/24.876s、冻结守卫13/1.707s、37AST通过，源复核accept。[验证](validation/w3-terminal-initial-progress-20261112.md)。参数校验、快照持久化、首时钟前startedNs校验、首120s锚点和无post-ACK读取已锁定；旧None行为保持。所有helper终态勿poll，首稿/测试纠正/候选保留。下一步B必须Popen前创建共享240s时钟，并传实际首报告快照；然后C source adapter/prepare/collect/partial restore。完整outer/newfreeze/same-run设备仍缺，ADB为空、零新设备/推理，W3/R4/R5open、goalactive。
+
 ## 2026-11-12：首轮预算修正已提交并双端同步，下一接线接口已明确
 
 本地`02da853`精确9文件；GH#15comment6826483246/GL#15note44021/GHWikic152f702逐字回读，双Wiki SHA74662df5ddb6ea1196a3586d4cf94606033fe26ab285c7cf6143df76569d9ebf一致，[收据](validation/w3-terminal-first-window-sync-20261112.json)。源码未push，marker已用勿重发。新鲜196+13=209方法/36AST及旧冻结/失败/95保护/81源/两APK保持；本轮三个代码点da4a888、426ecf4、02da853均已提交同步。当前所有helper/验证/发布进程终态，无在途调用。下一直接按outer-driver-next-brief.md末尾initial_progress契约写父测试RED→免费hy3可选API候选→全套/守卫，再B启动run与Csourceadapter/部分prepare恢复；该API和完整driver尚不存在，不先跑设备。最新ADB为空，不推断锁屏；真实freeze/同run真机和生产余门未验，W3/R4/R5open、goalactive。

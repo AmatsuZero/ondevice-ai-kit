@@ -1,3 +1,7 @@
+## 2026-11-12：启动进度衔接验收检查点
+
+`initial_progress` 已接入：非空精确快照在任何callback/ADB前验证并持久化，startedNs锚定首阶段120s而不重置共享240s；5个新增父方法、完整轮询201、冻结守卫13、37AST通过，复核accept。[验证](../docs/validation/w3-terminal-initial-progress-20261112.md)。仍只具host证据；完整outer启动/ACK/收取/部分恢复、新freeze和同run真机未完成，W3/R4/R5open。
+
 ## 2026-11-12：首轮预算修正同步检查点
 
 本地`02da853`已同步GH#15comment6826483246/GL#15note44021/GHWikic152f702，双Wiki SHA74662df5ddb6ea1196a3586d4cf94606033fe26ab285c7cf6143df76569d9ebf逐字一致，[收据](../validation/w3-terminal-first-window-sync-20261112.json)。源码未push、marker已用；209方法/36AST仅host证据。下一initial_progress跨startup预算接线接口、完整outer/恢复、新真实freeze与同run真机继续；W3/R4/R5open。

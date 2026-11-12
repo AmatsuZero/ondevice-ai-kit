@@ -118,7 +118,7 @@ class _PollClock:
         return value
 def observe_until_terminal(root, binding, *, adb, serial, package, process_poll,
                            timeout_seconds=2.0, monotonic_ns=time.monotonic_ns,
-                           sleep=time.sleep, runner=None):
+                           sleep=time.sleep, runner=None, initial_progress=None):
     snapshot = _binding_snapshot(binding)
     if isinstance(timeout_seconds, bool) or not isinstance(timeout_seconds, (int, float)):
         raise ValueError('timeout_seconds must be int/float')
@@ -128,6 +128,36 @@ def observe_until_terminal(root, binding, *, adb, serial, package, process_poll,
         raise ValueError('process_poll/monotonic_ns/sleep must be callable')
     if runner is not None and not callable(runner):
         raise ValueError('runner must be callable or None')
+    # Validate initial_progress before any transport, callbacks or writes.
+    ip_snapshot = None
+    ip_phase = None
+    ip_active_case_index = None
+    ip_started_ns = None
+    if initial_progress is not None:
+        if type(initial_progress) is not dict:
+            raise TypeError('initial_progress must be exact dict')
+        if set(initial_progress.keys()) != {'phase', 'activeCaseIndex', 'startedNs'}:
+            raise ValueError('initial_progress must have exactly phase, activeCaseIndex, startedNs')
+        _ip_phase = initial_progress['phase']
+        _ip_aci = initial_progress['activeCaseIndex']
+        _ip_started = initial_progress['startedNs']
+        if type(_ip_phase) is not str or _ip_phase == '':
+            raise ValueError('initial_progress.phase must be non-empty str')
+        if _ip_aci is not None:
+            if type(_ip_aci) is not int or _ip_aci != 0:
+                raise ValueError('initial_progress.activeCaseIndex must be None or 0')
+        if type(_ip_started) is not int:
+            raise ValueError('initial_progress.startedNs must be exact int')
+        if _ip_started < 0 or _ip_started > 9223372036854775807:
+            raise ValueError('initial_progress.startedNs out of range')
+        ip_snapshot = {
+            'phase': _ip_phase,
+            'activeCaseIndex': _ip_aci,
+            'startedNs': _ip_started,
+        }
+        ip_phase = _ip_phase
+        ip_active_case_index = _ip_aci
+        ip_started_ns = _ip_started
     pid = snapshot['pid']
     start_ticks = snapshot['startTicks']
     run_id = snapshot['runId']
@@ -153,14 +183,23 @@ def observe_until_terminal(root, binding, *, adb, serial, package, process_poll,
         'binding': copy.deepcopy(snapshot),
         'timeout_seconds': timeout_seconds,
     }
+    if ip_snapshot is not None:
+        start_payload['initialProgress'] = copy.deepcopy(ip_snapshot)
     write_new_durable(root, 'poll-start.json',
                       json.dumps(start_payload, sort_keys=True, allow_nan=False).encode('utf-8'))
     start_ns = clock()
+    if ip_snapshot is not None and ip_started_ns > start_ns:
+        raise ValueError('initial progress startedNs after first clock')
     poll_samples = 0
     index = 0
-    anchor_ns = start_ns
-    anchor_phase = None
-    anchor_index = None
+    if ip_snapshot is None:
+        anchor_ns = start_ns
+        anchor_phase = None
+        anchor_index = None
+    else:
+        anchor_ns = ip_started_ns
+        anchor_phase = ip_phase
+        anchor_index = ip_active_case_index
     while True:
         guard_ns = clock()
         if (guard_ns - anchor_ns) > 120000000000:

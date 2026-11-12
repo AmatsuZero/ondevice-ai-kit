@@ -180,6 +180,12 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
   phase/index and conservative run-start hostns into polling so startup cannot
   reset the120s first window. That optional API extension is specified in the
   outer-driver brief, not implemented or device-verified yet.
+
+  Completion (2026-11-12): `initial_progress` exact snapshot API integrated from
+  free hy3 candidate. Five parent methods pass after correcting two test-input
+  mistakes (legal None/default and legal complete dict); full observation201,
+  guard13 and 37-file AST checks pass. Supplied-source review accepts. The
+  outer driver still must obtain and pass the real startup snapshot.
 - [x] Validate a future complete frozen contract locally before any device action.
   The separate terminal_device_contract.py candidate covers strict JSON/paths,
   exact source/APK/plan/budget bindings, production protections and both current

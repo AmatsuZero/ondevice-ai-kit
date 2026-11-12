@@ -164,3 +164,5 @@ and [remote-coordinator validation](../../docs/validation/w3-adb-terminal-observ
 See [polling validation](../../docs/validation/w3-terminal-polling-20261112.md).
 The later [first-window correction](../../docs/validation/w3-terminal-first-window-20261112.md)
 records the independently reproduced initial-loop hole and its exact five-condition fix.
+
+`observe_until_terminal` also accepts an optional `initial_progress` snapshot from a verified startup report. The exact snapshot is persisted before callbacks and anchors the first 120-second window without resetting the shared 240-second clock. Host tests cover invalid types, startup expiry, inclusive equality, callback crossings and caller mutation; this does not establish Android lifecycle behavior.

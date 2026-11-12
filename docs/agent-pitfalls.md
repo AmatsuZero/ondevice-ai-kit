@@ -1,3 +1,7 @@
+## W3启动进度：首报告快照必须在同一总时钟下衔接（2026-11-12）
+
+`initial_progress` 的有效形状是精确普通dict：phase非空str、activeCaseIndex为None或精确int0、startedNs为非负有界精确int；非法值须在任何callback/transport/write前拒绝，快照必须复制后写入poll-start。旧None默认保持行为。首clock晚于startedNs才允许进入poll；首phase使用startedNs，回调跨121s失败、120s等号通过，phase变化才从新鲜read_ns重置。测试先把合法None和合法完整dict误列为负例，导致候选假失败；修正后5/5真实fake-ADB通过。outer启动仍须传真实首报告并共享Popen前的240s时钟，不能以新loop重置预算；host证据不等于Android。证据`initial-progress-parent/`及`w3-terminal-initial-progress-20261112.{md,json}`。
+
 ## W3阶段窗口：首phase尚未命名也不能免预算（2026-11-12）
 
 先前194GREEN/静态accept未覆盖第一轮：anchor_ns已从loopstart建立，却以anchor_phase!=None为五处预算前提；第一poll/sample/read耗121s时均真实错误ACK。新增2方法取得3RED，120s三等号案例原本通过；外部仅删五处phase-known条件，完整196观察+13守卫GREEN。不要把后续phase跨回调已修当首轮也已覆盖；未知phase时仍有保守起点和预算。startup接线还须显式传递首阶段起点、共享240s时钟，不能另起loop后重置窗口。证据poll-first-window-parent/red.*、poll-first-window-candidate/及同名repository-acceptance/；无真机/旧run重放。
