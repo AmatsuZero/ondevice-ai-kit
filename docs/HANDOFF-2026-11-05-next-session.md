@@ -1,3 +1,7 @@
+## 2026-11-12：本地文件层与错误信号已提交并同步
+
+源码`03059a8`/`aa98874`均本地精确提交、分支未push。错误信号增量GH#15comment6815909994、GL#15note43367、GHWiki ef6f938e已逐字回读，双Wiki SHAf40a05d86708083b9ff3409b68e1e49d6d345847a90a7684d2ddc2eae9068252一致；[同步收据](validation/w3-terminal-publication-error-signal-sync-20261112.json)，两个新marker均已用勿重复。首次GL列表EOF前只写GH，幂等续段复用同GH ID、GL仅一次；初stderr被同名重跑覆盖，只有工具观察而非磁盘原stderr，限制已记录。67Python/语法/旧120冻结及原false verdict保持，99原dirty扣除自身共享前缀后保持；无活动helper/native重试/设备调用。下一步实际采样协调器与新Android wrapper/实包/冻结合同，W3/R4/R5open、goalactive；不能重放已消耗run或用本地层代替整包完成。
+
 ## 2026-11-12：发布后错误信号已在代码中解决
 
 首本地文件层`03059a8`已双端同步：GH#15comment6815684553、GL#15note43363、GHWiki53f9e875，双Wiki SHA7bc68d2f2643b8e147ddcca7131a783abf6bd99b3f8652fa526a2d933695ad66逐字一致，[收据](validation/w3-terminal-file-primitives-sync-20261112.json)。新medium窄修提供`PublishedButNotDurableError`/明确published与durability标记/原cause；2类型RED→完整67GREEN，源码SHA2c9e885c…，无新设备/推理/下载，未再完整独立复审。[窄修](validation/w3-terminal-publication-error-signal-20261112.md)。无活动helper，旧native429不重试；新错误信号检查点将另附同步收据，源码分支未push。实际协调器/Android实包/新合同及真机余门继续，W3/R4/R5open、goalactive。

@@ -1,5 +1,7 @@
 # W3 发布后错误信号修正（2026-11-12）
 
+本地`aa98874`已同步两端#15/Wiki并逐字回读；源码分支未push，[同步收据](w3-terminal-publication-error-signal-sync-20261112.json)。
+
 最终源码复核提出的medium已进一步在代码中解决：`PublishedButNotDurableError`
 继承`OSError`，明确`published=True`、`durability_verified=False`，保留原错误cause。
 发布后的staging unlink失败另置`staging_may_remain=True`。发布前错误仍为原普通

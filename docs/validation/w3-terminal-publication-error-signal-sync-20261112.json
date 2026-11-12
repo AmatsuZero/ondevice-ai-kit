@@ -1,0 +1,35 @@
+{
+  "marker": "w3-terminal-publication-error-signal-20261112",
+  "sourceCommit": "aa98874",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6815909994,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6815909994",
+      "sha256": "5aa5a6239dd6f4507a8e69133145b2d84e8c36454e5c849569d46956f7e4cad0",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43367,
+      "url": null,
+      "sha256": "106863d8d90d08cd7a05bc9cf7bb381073dac08e0a6b64fc12812c7429d110e4",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "ef6f938ef6bc8868064d9c833c517311cda13523",
+    "sha256": "f40a05d86708083b9ff3409b68e1e49d6d345847a90a7684d2ddc2eae9068252",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3\u8bed\u97f3\u9a8c\u6536\u4e0e\u540e\u7eed\u6539\u8fdb",
+    "sha256": "f40a05d86708083b9ff3409b68e1e49d6d345847a90a7684d2ddc2eae9068252",
+    "readbackExact": true
+  },
+  "wikiBytesEqual": true,
+  "writesPerNewIssueOrWiki": 1,
+  "initialGitLabListReadFailure": "EOF before GitLab write; Github comment already created and read back; subsequent idempotent issue stage reused same GH id and wrote GitLab once",
+  "initialFailureEvidenceLimit": "Initial EOF was observed in tool output; script re-run replaced its same-named stderr file, so this note is not an original retained stderr artifact.",
+  "W3Complete": false,
+  "goalStatus": "active"
+}

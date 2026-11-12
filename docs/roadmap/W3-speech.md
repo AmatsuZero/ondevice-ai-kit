@@ -1,3 +1,7 @@
+## 2026-11-12：本地文件层双端同步检查点
+
+本地`03059a8`/`aa98874`，两端#15及Wiki逐字回读、双Wiki摘要一致，[错误信号同步收据](../validation/w3-terminal-publication-error-signal-sync-20261112.json)。新marker已用勿重复，源码分支未push；Python67/67与旧冻结保持，无新设备/推理。实际协调器/Android实包/新冻结合同和完整真机质量资源仍未验，W3/R4/R5open。
+
 ## 2026-11-12：发布后错误信号已修正
 
 文件层首检查点`03059a8`双端#15/Wiki逐字回读，[收据](../validation/w3-terminal-file-primitives-sync-20261112.json)。复核medium继续在代码中解决：显式PublishedButNotDurableError标记目标已发布/目录持久性未验及原cause，2类型RED→完整67GREEN；无设备/新推理，实际协调器、Android实包和新真机合同仍待验，W3/R4/R5open。[窄修验证](../validation/w3-terminal-publication-error-signal-20261112.md)。
