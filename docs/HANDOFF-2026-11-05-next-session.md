@@ -1,3 +1,7 @@
+## 2026-11-12：三适配器协调器已提交并双端同步
+
+本地`407b5ce`精确12文件，GH#15comment6822648826/GL#15note43975/GHWiki482f2863逐字回读，双Wiki SHA9b6b1bab3024db48bc8175ad0eecf8b158254330d3b73a3d4d45ef28f9e41c89一致，[收据](validation/w3-adb-terminal-observation-sync-20261112.json)。GitLab先EOF/reset，保留失败后仅本次子进程NO_PROXY精确host恢复，未改全局；marker已用勿重发，源码未push。171检查不关闭W3/R4/R5。当前两个独立live请求：wrapper原session38140（hy4free）、prepare/build工具原session88658（hy3，目录`/private/tmp/odai-w3-terminal-build-tools-20261112/`），不重发；两组父检查分别已真实缺类型/缺模块RED，候选尚未验收。完整driver/实包合同与真机生产余门继续、goalactive；旧live历史均终态勿poll。
+
 ## 2026-11-12：三适配器协调器已集成验收，下一项是独立 Android wrapper
 
 实际 sampler/reader/publisher 组合已集成，外部4+父10及完整Python171/25AST通过，旧120冻结/原失败摘要及96其他dirty路径保持；[验证](validation/w3-adb-terminal-observation-20261112.md)。源码复核两条意见经实际依赖/validator反证后撤回、最终accept，无源码迎合性改动。原预检/测试传输/遗漏nonlocal失败和误放源码目录的无效RED均保留，真正缺模块RED另取。主机组合已验证第三采样/journal先于link，仍非Android或完整polling/launch/restore。下方29935/78032等历史live记录已终态，勿poll。唯一live为免费hy4free wrapper原session38140，目录`/private/tmp/odai-w3-terminal-wrapper-implementation-20261112/`，不重发；独立wrapper父工具已实际缺类型编译RED，候选尚未验收。当前ADB只读清单为空，零安装/推理；新wrapper-driver/实包/冻结合同与真机生产余门继续，W3/R4/R5open、goalactive，源码未push。实时指针`sampler-next-task.json`已刷新。

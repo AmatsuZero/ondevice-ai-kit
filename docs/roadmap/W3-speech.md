@@ -1,3 +1,7 @@
+## 2026-11-12：三适配器协调器同步检查点
+
+本地`407b5ce`已同步GH#15comment6822648826/GL#15note43975/GHWiki482f2863，双Wiki SHA9b6b1bab3024db48bc8175ad0eecf8b158254330d3b73a3d4d45ef28f9e41c89逐字一致，[收据](../validation/w3-adb-terminal-observation-sync-20261112.json)。marker已用勿重发，源码未push。171检查不代表Android/完整driver；独立wrapper/build工具候选及实包合同、真机生产余门继续，W3/R4/R5open。
+
 ## 2026-11-12：三适配器终态协调器已验
 
 完整Python171/25AST（新增外部4+父10）、旧120冻结/原失败摘要及96其他dirty路径保持；源码复核两条意见经依赖/validator实测撤回，最终accept。[验证](../validation/w3-adb-terminal-observation-20261112.md)。实际本地fake-ADB/shell组合sampler/两次fresh read/publisher，先持久化证据，第三同进程采样与journal完成后才link；覆盖进程退出及IO失败。只是单次handshake，非完整driver/Android。独立wrapper候选生成中，实包/新合同/真机质量资源与生产余门继续，W3/R4/R5open，源码未push。
