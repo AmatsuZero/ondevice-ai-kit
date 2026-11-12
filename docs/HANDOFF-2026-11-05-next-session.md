@@ -1,3 +1,7 @@
+## 2026-11-12：首轮预算修正已提交并双端同步，下一接线接口已明确
+
+本地`02da853`精确9文件；GH#15comment6826483246/GL#15note44021/GHWikic152f702逐字回读，双Wiki SHA74662df5ddb6ea1196a3586d4cf94606033fe26ab285c7cf6143df76569d9ebf一致，[收据](validation/w3-terminal-first-window-sync-20261112.json)。源码未push，marker已用勿重发。新鲜196+13=209方法/36AST及旧冻结/失败/95保护/81源/两APK保持；本轮三个代码点da4a888、426ecf4、02da853均已提交同步。当前所有helper/验证/发布进程终态，无在途调用。下一直接按outer-driver-next-brief.md末尾initial_progress契约写父测试RED→免费hy3可选API候选→全套/守卫，再B启动run与Csourceadapter/部分prepare恢复；该API和完整driver尚不存在，不先跑设备。最新ADB为空，不推断锁屏；真实freeze/同run真机和生产余门未验，W3/R4/R5open、goalactive。
+
 ## 2026-11-12：首轮未知phase预算漏洞已修正
 
 接线规划中新发现首poll/sample/read跨121s、anchor_phase=None绕过预算，真实3RED；恰好120s三例通过。hy3原62054/PID22993自然28.463s终态，单组count5删除phase-known条件，2方法GREEN后原样集成。新鲜196观察+13守卫=209方法、36AST、旧120冻结/原失败、95其他dirty、81源/两APK保持；[验证](validation/w3-terminal-first-window-20261112.md)。仅父端精确diff/实际RED→GREEN，无新独立全源复核。无在途helper，全部旧句柄终态勿poll。下一先实现brief中initial_progress可选API（已明确phase/index/startedNs）以跨startup保持首120s窗口，并共享runstart起240s总时钟，再B/C完整生命周期；该API尚未实现，勿直接写B后悄然重置预算。真实freeze/设备仍缺，ADB最新为空、W3/R4/R5open、goalactive，源码未push。

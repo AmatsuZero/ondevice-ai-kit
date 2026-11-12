@@ -1,3 +1,7 @@
+## 2026-11-12：首轮预算修正同步检查点
+
+本地`02da853`已同步GH#15comment6826483246/GL#15note44021/GHWikic152f702，双Wiki SHA74662df5ddb6ea1196a3586d4cf94606033fe26ab285c7cf6143df76569d9ebf逐字一致，[收据](../validation/w3-terminal-first-window-sync-20261112.json)。源码未push、marker已用；209方法/36AST仅host证据。下一initial_progress跨startup预算接线接口、完整outer/恢复、新真实freeze与同run真机继续；W3/R4/R5open。
+
 ## 2026-11-12：首轮阶段窗口修正检查点
 
 首poll/sample/read跨121s的3个真实RED经hy3五处条件删除转GREEN，120s等号三例保持；新鲜196+13共209方法/36AST及全部旧冻结、失败、保护和实包摘要通过。[验证](../validation/w3-terminal-first-window-20261112.md)。这是host边界补漏，非Android证明；下一startup/polling首阶段与总时钟衔接、完整outer/恢复、新freeze和同run真机继续，W3/R4/R5open，零新设备/推理、源码未push。
