@@ -1,3 +1,7 @@
+## 2026-11-12 启动阶段进度衔接已双端同步
+
+本地`9fb7529`已记录于GH#15comment6828593679/GL#15note44030/GHWiki8ce77136；逐字回读、双Wiki SHAab436b57c4633611c2f870f8810e3842bd1d7f033e13329b441f6e8374d5dcb9一致。同步收据`../validation/w3-terminal-initial-progress-sync-20261112.json`；marker已用、源码未push。214项为host证据；完整outer、新freeze及同run真机仍缺，W3/R4/R5open。下一免费hy3候选继续启动/收取/恢复，不重放旧consumedrun。
+
 ## 2026-11-12：启动进度衔接验收检查点
 
 `initial_progress` 已接入：非空精确快照在任何callback/ADB前验证并持久化，startedNs锚定首阶段120s而不重置共享240s；5个新增父方法、完整轮询201、冻结守卫13、37AST通过，复核accept。[验证](../docs/validation/w3-terminal-initial-progress-20261112.md)。仍只具host证据；完整outer启动/ACK/收取/部分恢复、新freeze和同run真机未完成，W3/R4/R5open。

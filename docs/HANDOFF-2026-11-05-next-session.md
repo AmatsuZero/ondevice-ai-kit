@@ -1,3 +1,7 @@
+## 2026-11-12：initial_progress 已双端同步，继续 outer lifecycle
+
+本地`9fb7529`已记录于GH#15comment6828593679/GL#15note44030/GHWiki8ce77136；逐字回读、双Wiki SHAab436b57c4633611c2f870f8810e3842bd1d7f033e13329b441f6e8374d5dcb9一致。同步收据`validation/w3-terminal-initial-progress-sync-20261112.json`；marker已用、源码未push。214项为host证据；完整outer、新freeze及同run真机仍缺，W3/R4/R5open。下一免费hy3候选继续启动/收取/恢复，不重放旧consumedrun。
+
 ## 2026-11-12：initial_progress 已验收，下一步实现 outer driver
 
 免费hy3候选将startup首份phase/index/startedNs接入轮询；本地当前源码未push。父端先取得5方法缺keyword RED；首稿测试误列合法None和完整dict，修正后实际5/5 fake-ADB GREEN/1.067s。完整轮询201/24.876s、冻结守卫13/1.707s、37AST通过，源复核accept。[验证](validation/w3-terminal-initial-progress-20261112.md)。参数校验、快照持久化、首时钟前startedNs校验、首120s锚点和无post-ACK读取已锁定；旧None行为保持。所有helper终态勿poll，首稿/测试纠正/候选保留。下一步B必须Popen前创建共享240s时钟，并传实际首报告快照；然后C source adapter/prepare/collect/partial restore。完整outer/newfreeze/same-run设备仍缺，ADB为空、零新设备/推理，W3/R4/R5open、goalactive。
