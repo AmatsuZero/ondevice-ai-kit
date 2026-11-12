@@ -1,3 +1,7 @@
+## 2026-11-12：ACK文件读取器同步检查点
+
+`eca410d`本地提交，两端#15/Wiki逐字回读且Wiki摘要相同，[收据](../validation/w3-terminal-ack-file-sync-20261112.json)。marker已用，源码分支未push；23文件检查/API33编译仅组件证据，真实报告传输/远端ACK/实包/新合同及真机生产余门继续，W3/R4/R5open。报告读取测试原请求仍live、无重复请求。
+
 ## 2026-11-12：ACK文件读取器已验
 
 23真实文件检查（13外部+6屏障联调+4父边界）和缓存API33无JDK编译通过；外部复核两条意见经真实File表示/源码反证后撤回，最终accept。[验证](../validation/w3-terminal-ack-file-20261112.md)。仅主机文件与API编译证据，非Android运行时/旧gap修复。旧120冻结/原失败保持；实际报告传输、远端ACK发布、新wrapper-driver/实包/新冻结合同及真机质量资源和生产发布余门继续，W3/R4/R5open、源码分支未push。新鲜报告读取测试同一请求仍live，候选未集成。

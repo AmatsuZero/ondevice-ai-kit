@@ -1,3 +1,7 @@
+## 2026-11-12：ACK文件读取器已提交并双端同步
+
+本地`eca410d`精确14文件，源码未push；GH#15comment6819919480、GL#15note43704、GHWiki56e1068b及两Wiki SHA1ae05e8e5024065b0bd6b6d9f9330fb3c34a99e8a1510a1a453d83f6ba2582c3逐字回读一致，[收据](validation/w3-terminal-ack-file-sync-20261112.json)。marker已用勿重发，各目标各一次新写入。23文件检查/API33编译与复核adjudication accept，旧120冻结/原失败保持；97原dirty扣除自身前缀保持，两W3 spec/plan为本任务。报告读取测试仍同一session77499 live，父7GREEN的source候选未集成；先收外部测试/directRED/GREEN，真实传输/远端ACK/新wrapper-driver/实包/新合同及真机生产余门继续。当前ADB清单为空，不重复解锁请求；W3/R4/R5open、goalactive。
+
 ## 2026-11-12：ACK文件读取器23检查与API33编译通过
 
 外部候选/定点修正原字节集成，13外部+6真实reader/barrier+4父边界均GREEN，缓存API33 -no-jdk编译通过；原missing-return/normalize别名失败保留。复核原revise两条经JDK21实际File复现/当前return源码反证，复核方撤回并accept。[验证](validation/w3-terminal-ack-file-20261112.md)。旧120冻结/原报告/false verdict保持，当前ADB清单为空，零安装/推理/捕获/下载。独立新鲜报告读取测试仍在原免费hy3请求session77499（`/private/tmp/odai-w3-adb-terminal-report-tests-20261112/`），未交付、不重发；实现候选父7方法GREEN、尚未集成，先收测试/直接缺模块RED/全GREEN再验收。后续真实报告传输/远端ACK原子发布/新wrapper-driver/Android实包/新合同和真机生产余门继续；W3/R4/R5open、goalactive，源码分支未push。
