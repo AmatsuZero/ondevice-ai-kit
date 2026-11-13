@@ -1,3 +1,7 @@
+## 2026-11-13 durable prepare 已双端同步
+
+本地c49af17已记录GH#15comment6840031693、GL#15note44041与GHWiki4ba23221；逐字回读、双Wiki SHA2e560d93f499271df3fff6b93330e4b4b25b5a463301b5e743491ce60ece80b1一致。[收据](../validation/w3-terminal-prepare-sync-20261113.json)。marker已用勿重发、源码未push；304项仅host，实际恢复/完整driver/新冻结/同run设备仍缺，W3/R4/R5open。
+
 ## 2026-11-13 durable prepare：304项host通过，实际恢复与真机仍待验
 
 免费hy3隔离prepare已集成，新增29父方法；完整304方法/49AST、旧冻结及普通保护摘要保持，前置stage/8MiBpart/installclaims和最终APK/model复核通过。独立源码复核经零参数cleanup契约澄清accept，原意见/实际RED保留。[验证](../validation/w3-terminal-prepare-20261113.md)。实际cleanup恢复尚未实现，下一独立于collection所有权恢复/完整driver/新冻结/同run设备；ADB为空、零新设备操作，W3/R4/R5保持open，goalactive，源码未push。
