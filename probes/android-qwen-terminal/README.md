@@ -71,12 +71,15 @@ See [guard validation](../../docs/validation/w3-terminal-device-contract-2026111
 
 `terminal_source_adapter.adapt_source(source)` pins the immutable FILE driver
 bytes and returns a pure adapted source: fixed terminal identity, a frozen-guard
-callback before each inherited ADB subprocess, and a dispatcher in place of the
-old prepare/run/collect/restore branches. It preserves the existing transfer,
+callback before each inherited ADB subprocess, and a dispatcher for all six
+actions, including preflight and collect-policy. It preserves the existing transfer,
 model/hash and ordinary-state helpers. Its guard and dispatcher callbacks remain
 the future device driver's responsibility; evaluation does not execute an action.
 The frozen-contract guard requires this dependency in both source review maps.
 See [source adapter validation](../../docs/validation/w3-terminal-source-adapter-20261113.md).
+The six-action extension has nine routing/purity tests and eleven real
+fake-ADB prepare integration tests; it still requires the complete outer driver.
+See [routing extension](../../docs/validation/w3-terminal-six-action-routing-20261113.md).
 
 `terminal_device_prepare.prepare(root, ctx, *, serial, cleanup, nonce_factory)`
 records durable stage/all-chunk and install claims before their device effects.

@@ -17,7 +17,9 @@ _OLD_ASSERT = "assert plan['maxNativeDecodeCalls'] == 130 and plan['caseCount'] 
 _NEW_ASSERT = "assert plan['maxNativeDecodeCalls'] == 2 and plan['caseCount'] == 1"
 _OLD_CALL = "        proc = subprocess.run(adb + list(args), capture_output=True, timeout=timeout)"
 _NEW_CALL = "        _terminal_before_transport()" + chr(10) + "        proc = subprocess.run(adb + list(args), capture_output=True, timeout=timeout)"
-_TAIL_ANCHOR = "    elif action == 'prepare':"
+_OLD_ACTION_ASSERT = "    assert action in ('preflight', 'prepare', 'run', 'collect', 'restore')"
+_NEW_ACTION_ASSERT = "    assert action in ('preflight', 'prepare', 'run', 'collect', 'collect-policy', 'restore')"
+_TAIL_ANCHOR = "    if action == 'preflight':"
 
 
 def adapt_source(source: str) -> str:
@@ -33,7 +35,8 @@ def adapt_source(source: str) -> str:
     out = out.replace(_OLD_RUNNER, _NEW_RUNNER, 1)
     out = out.replace(_OLD_ASSERT, _NEW_ASSERT, 1)
     out = out.replace(_OLD_CALL, _NEW_CALL, 1)
+    out = out.replace(_OLD_ACTION_ASSERT, _NEW_ACTION_ASSERT, 1)
     idx = out.index(_TAIL_ANCHOR)
-    out = out[:idx] + "    else: return _terminal_dispatch(action, locals())" + chr(10)
+    out = out[:idx] + "    return _terminal_dispatch(action, locals())" + chr(10)
     compile(out, '<adapted terminal source>', 'exec')
     return out

@@ -1,3 +1,7 @@
+## 2026-11-13 六action路由扩展已验收
+
+免费hy3最小候选已集成，preflight/prepare/run/collect/collect-policy/restore全部进入新dispatcher；原FILE源码/固定SHA及安全helper保持。真实fakeADB父1方法先1FAIL1ERROR，修后新1+旧8+prepare11共20定向方法通过。此前348全套仍是其原时点证据，不冒称新349全套。[验证](../validation/w3-terminal-six-action-routing-20261113.md)。下一实际driver/launch/cleanup与完整双复核/新freeze/同runTECNO；零设备操作，W3/R4/R5open。
+
 ## 2026-11-13 policy 收取已提交并双端同步
 
 本地61bd94f精确12文件；GH#15comment6848217074、GL#15note44512与GHWiki4932b648逐字回读，双Wiki SHA5511653225a1344e876483410b9369f56383455328655a4a0c642cc9a91347ce一致。[收据](../validation/w3-terminal-policy-sync-20261113.json)。marker已用勿重发，源码未push。348方法/56AST为host证据；六action路由/完整driver/当前完整双复核/新freeze/同run真机继续，W3/R4/R5open。

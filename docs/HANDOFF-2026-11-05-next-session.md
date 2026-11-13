@@ -1,3 +1,7 @@
+## 2026-11-13：六action适配已验收，下一实际driver
+
+免费hy3实际149.565s交最小候选，terminal_source_adapter.py原返回字节集成，preflight和collect-policy新增路由；新1+旧8+prepare11=20定向通过，旧120冻结/失败/95保护/81源/两APK保持。[验证](validation/w3-terminal-six-action-routing-20261113.md)。全部本轮helper/test已终态，无活动请求；不poll旧句柄。实际device_acceptance.py尚缺，下一完整dispatcher/launch/单次cleanup检查allRestored，再完整当前双复核/新freeze/同run设备；零设备、W3/R4/R5open、goalactive，源码未push。
+
 ## 2026-11-13：policy 收取已提交并双端同步
 
 本地61bd94f精确12文件；GH#15comment6848217074/GL#15note44512/GHWiki4932b648已逐字回读，双Wiki SHA5511653225a1344e876483410b9369f56383455328655a4a0c642cc9a91347ce一致，[收据](validation/w3-terminal-policy-sync-20261113.json)。marker已用勿重发、源码未push。policy全部helper/测试/发布终态，旧句柄勿poll；下一sixaction路由父1方法已实际1FAIL1ERROR，独立免费hy3候选已派发，当前状态/唯一句柄以outer-lifecycle-live-20261113.json为准。再完整driver/cleanup（allRestored）/当前完整双复核/新freeze/同run真机。348仅host，ADB为空、零新设备，W3/R4/R5open、goalactive。
