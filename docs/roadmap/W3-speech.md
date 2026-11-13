@@ -1,3 +1,7 @@
+## 2026-11-13 完整driver已提交并双端同步
+
+本地7e607ef精确12文件；GH#15comment6849755902/GL#15note44580/GHWikiac69cc7b已逐字回读，双Wiki SHA1cffa443fdf654a2cd522712a5d7636fc246281effb4c095cfd3d36606fb0525一致，[收据](../validation/w3-terminal-driver-sync-20261113.json)。marker已用勿重发，源码未push。376/62AST、双完整复核和新140freeze通过；所有helper/验收/发布终态勿poll。ADB为空、run未消费，下一fresh设备前置后仅一次固定新terminalrun及同run收取/恢复；W3/R4/R5仍open。
+
 ## 2026-11-13 完整终态文件驱动与新freeze已验收
 
 免费hy3两片段/六块精确订正已原字节集成实际device_acceptance.py；新launch8/dispatcher13/fullfakeADB链路2及原route4通过，当前完整376方法/62AST、120旧冻结/原失败/95保护/81准备源/两APK摘要保持。现行16Python源码两份独立复核accept，原JSON回显截断与SHA转录订正均保留；实际新freeze140文件已通过完整guard。[验证](../validation/w3-terminal-driver-20261113.md)。当前ADB为空，run未消费，无新真机/麦克风/AiAi/下载；下一设备出现后freshpreflight再单次prepare/run/collect/policy/restore。W3/R4/R5仍open；完整Android质量/资源与生产再分发/发布门仍缺，源码未push。

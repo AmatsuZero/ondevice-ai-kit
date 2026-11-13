@@ -1,3 +1,5 @@
+W3完整终态driver本地`7e607ef`：376方法/62AST、16模块双复核accept、新140文件freeze已验；双端#15/Wiki已逐字同步且摘要一致，源码未push。ADB为空、run未消费；真机质量/资源及生产发布余门保持，W3/R4/R5open。[验证](validation/w3-terminal-driver-20261113.md)／[同步收据](validation/w3-terminal-driver-sync-20261113.json)。
+
 W3终态wrapper`7688972`已同步两端#15/Wiki并逐字回读，双Wiki摘要一致、源码未push；[同步收据](validation/w3-qwen-terminal-wrapper-sync-20261112.json)。58组783断言/实包证据不关闭W3/R4/R5，完整驱动与真机生产余门继续。
 
 W3（2026-11-12）：独立终态wrapper已通过58组/783断言、构建工具10项、Python171及缓存离线75任务build/lint，实包19类/65资源/4runtime匹配，源码diff复核accept；完整轮询/启动/恢复驱动与新合同、真机生产余门仍待验，W3/R4/R5open、源码未push。见[验证](validation/w3-qwen-terminal-wrapper-20261112.md)。
