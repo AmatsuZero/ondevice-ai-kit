@@ -1,3 +1,7 @@
+## W3 完整driver：真实ctx、消费证明与验收入口（2026-11-13）
+
+两份免费hy3片段完整交付并组合后，原launch6通过；扩展负例实际揭示dispatcher丢adb（collector真实KeyError）、消费计数字段等值接受bool/startedNs越int64、marker证明读取二次中断替换主异常，以及preflight漏绑定/输入和collection/poll输出。外部六块精确修正后，launch8/dispatch13/真实本地fakeADB六action链路2通过；完整回归和双完整源码复核各有独立收据，不能据候选CLI0提前宣称通过。父夹具另补真实/data祖先映射、临时候选BASE指向不可变FILE和ACK exec-in；resource失败的两次精确force-stop分别来自lifecycle和restore，不是facade重复stop。完整回归首命令误选旧artifact13测试，缺新增必需模块导致2ERROR；保留原日志并使用仓库现行check_device_contract.py取得18GREEN，不改正确guard迁就旧夹具。证据driver-parent/、driver-{launch,dispatch}-candidate/、driver-fix1-candidate/及driver-repository-acceptance/。仅host，非真机/质量/原生政策effect。
+
 ## W3 policy：逐读持久化与 JSON 返回形状（2026-11-13）
 
 首本地片段把实际顶层 allocatorPolicy 误放 config；外部定点修正后保持 config.provider/requestedEnableCpuMemArena 绑定。首 wrapper 为源码占位符，未验收、未执行伪工具。首8方法两子例失败是返回 tuple 与落盘 JSON list 不同；hy3 仅把三个返回记录转 list，内部身份校验不改。独立中断故障实证第二读抛错时首读未保存；外部把首 durable write 移至第二读之前，canonical-root 旧源 RED/新源 GREEN 保留。父首 green 用未 resolve 的临时根遭共享路径守卫拒绝，只修父夹具，不放宽实现。最终348方法/56AST、保护摘要及 bounded source review accept；host 非 Android/原生政策 effect/质量通过。证据 policy-parent/、policy-repository-acceptance/。

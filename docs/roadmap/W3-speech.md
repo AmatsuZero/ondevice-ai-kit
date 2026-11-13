@@ -1,3 +1,7 @@
+## 2026-11-13 完整终态文件驱动与新freeze已验收
+
+免费hy3两片段/六块精确订正已原字节集成实际device_acceptance.py；新launch8/dispatcher13/fullfakeADB链路2及原route4通过，当前完整376方法/62AST、120旧冻结/原失败/95保护/81准备源/两APK摘要保持。现行16Python源码两份独立复核accept，原JSON回显截断与SHA转录订正均保留；实际新freeze140文件已通过完整guard。[验证](../validation/w3-terminal-driver-20261113.md)。当前ADB为空，run未消费，无新真机/麦克风/AiAi/下载；下一设备出现后freshpreflight再单次prepare/run/collect/policy/restore。W3/R4/R5仍open；完整Android质量/资源与生产再分发/发布门仍缺，源码未push。
+
 ## 2026-11-13 六action路由扩展已验收
 
 免费hy3最小候选已集成，preflight/prepare/run/collect/collect-policy/restore全部进入新dispatcher；原FILE源码/固定SHA及安全helper保持。真实fakeADB父1方法先1FAIL1ERROR，修后新1+旧8+prepare11共20定向方法通过。此前348全套仍是其原时点证据，不冒称新349全套。[验证](../validation/w3-terminal-six-action-routing-20261113.md)。下一实际driver/launch/cleanup与完整双复核/新freeze/同runTECNO；零设备操作，W3/R4/R5open。

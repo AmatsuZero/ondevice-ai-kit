@@ -1,3 +1,7 @@
+## 2026-11-13：完整driver与新freeze已验收，下一真机
+
+实际device_acceptance.py已由免费hy3两完整片段/六块精确修正集成，完整当前376方法/62AST、新23方法及原route4均通过，旧120冻结/原失败/95保护/81准备源/两APK保持。独立16Python双复核accept，完整140文件新freeze已读回guard通过；[验证](validation/w3-terminal-driver-20261113.md)。原JSON回显截断/ctx漏adb/精确类型/中断/陈旧输出RED及父夹具/旧contract入口误选均留原件。当前所有helper/验收终态勿poll、无active请求；ADB为空、run未消费，无新设备操作。下一先核fresh设备及freeze，设备出现后只执行固定单次新terminalrun；不重放FILE/heap、不放宽资源门。W3/R4/R5open、goalactive，完整真机质量/资源与生产发布/再分发门未验，源码未push。
+
 ## 2026-11-13：六action适配已验收，下一实际driver
 
 免费hy3实际149.565s交最小候选，terminal_source_adapter.py原返回字节集成，preflight和collect-policy新增路由；新1+旧8+prepare11=20定向通过，旧120冻结/失败/95保护/81源/两APK保持。[验证](validation/w3-terminal-six-action-routing-20261113.md)。全部本轮helper/test已终态，无活动请求；不poll旧句柄。实际device_acceptance.py尚缺，下一完整dispatcher/launch/单次cleanup检查allRestored，再完整当前双复核/新freeze/同run设备；零设备、W3/R4/R5open、goalactive，源码未push。
