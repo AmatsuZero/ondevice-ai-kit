@@ -1,3 +1,7 @@
+## W3 restore：null不是缺失、前台子串及inode夹具（2026-11-13）
+
+原交付raw262144B截断，只提取完整event2sourceJSON、不补tail。首liveuser期望抛错为父误读，实际合同durablefalse/零mutation；inode初hookctxcall未拦text原闭包，改真实fakeADBls子进程rename/copy取得1RED。广义catch把坏/链接created当缺失、bool/duplicate/missingordinaryhash/扩大children/foreignAPKclaim共8子例真实RED，严格本地证明后18GREEN。再发现JSONnull返回None与缺失混淆（1方法3RED），resumed仅substring误认foreignsuffix/u10及主异常errors空（2方法5RED），外部精确小补丁后20GREEN/完整325GREEN。readoptional只catchFileNotFoundError，present顶层必须dict；APKclaim绑定冻结+实际；删除前重验nonce/stat，unknown保留；当前resumed须精确组件和u0。原BaseException身份与次生journal中断note保持。恢复单次已有recovered/outcome即拒，未来closure检查allRestored并传播不确定性，不自动重试。独立reviewaccept，缺preflight全文的限制已用实际定义核对；host非Android。证据restore-parent/与restore-repository-acceptance/。
+
 ## W3 prepare：printf夹具、marker长度与原异常API（2026-11-13）
 
 首11方法1FAIL/3ERROR实际来自父fakeADB把shlex的literal backslash-n误比为换行；真实/bin/sh产生nonce+NL后只修夹具，原候选11GREEN。真实边界另揭旧两APKtransfer收据漏preflight、宽runner、bool/float/nonce尾换行、祖先链接、stat及marker33字节前缀接受suffix；head34/exact33bytes、canonicalASCIIstat和完整祖先检查经外部窄修通过。首patch一块old含真实换行count0未应用，不手改；下一小块精确修正。最终type(marker)isbytes仍遗漏，实际2RED再外部单条件修正。普通pm路径不证明APK内容，前后ordinaryAPKHashes及最终新alias重hash有2真实RED→GREEN。独立review误把零参cleanup()解读为cleanup(exc)，补原明确API/真实首错身份与次生中断、TEST-alone/activeinstrumentation拒绝后accept撤回major。保留原revise，不改正确API。root=actualOUT、digest/parse_kb为modulelevel须显式注入；29父/304全套仅host，不证明cleanup真实恢复或完整driver。证据prepare-parent/与prepare-repository-acceptance/。

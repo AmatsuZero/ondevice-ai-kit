@@ -1,3 +1,7 @@
+## 2026-11-13 所有权恢复：325项host通过，完整驱动及真机待验
+
+免费hy3隔离restore已集成，20新增恢复父方法；完整325方法/51AST及保护摘要通过，独立源码accept。malformed/null/外来claim先拒、stage/alias冻结所有权验证、未知目录保留、精确逐文件恢复与user0前台回读已验。[验证](../validation/w3-terminal-restore-20261113.md)。恢复为单次，不依赖collection；cleanup closure仍待接线并检查allRestored，完整driver/收取policy/完整双复核/新冻结/同run设备仍缺。ADB为空、零新设备操作，W3/R4/R5保持open、goalactive，源码未push。
+
 ## 2026-11-13 durable prepare 已双端同步
 
 本地c49af17已记录GH#15comment6840031693、GL#15note44041与GHWiki4ba23221；逐字回读、双Wiki SHA2e560d93f499271df3fff6b93330e4b4b25b5a463301b5e743491ce60ece80b1一致。[收据](../validation/w3-terminal-prepare-sync-20261113.json)。marker已用勿重发、源码未push；304项仅host，实际恢复/完整driver/新冻结/同run设备仍缺，W3/R4/R5open。

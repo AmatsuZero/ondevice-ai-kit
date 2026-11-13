@@ -42,7 +42,7 @@ receipts, root-to-copy bindings and both current Python-driver review receipts.
 The fixed package profile requires 19 unique nonempty class-name strings. It
 rejects observed symlinks including the contract itself, but assumes immutable
 private input files rather than an adversarial concurrent writer. It performs no
-ADB, process launch, writes or real freeze. The 15 methods below use synthetic
+ADB, process launch, writes or real freeze. The 16 methods below use synthetic
 APKs and unexecuted lifecycle placeholders; they do not prove device readiness.
 
 ```sh
@@ -64,8 +64,8 @@ rtk proxy python3 -B -m unittest discover -s probes/android-qwen-terminal -p 'te
 
 These tests use local fake-ADB subprocesses. The injected launch/frozen/stop
 callbacks still require the complete device adapter and ownership checks.
-Collection and partial-prepare restoration remain pending, as do a new complete
-freeze and same-run Android acceptance. See
+Collection, restoration callback wiring, a new complete freeze and same-run
+Android acceptance remain pending. See
 [lifecycle validation](../../docs/validation/w3-terminal-lifecycle-20261113.md).
 See [guard validation](../../docs/validation/w3-terminal-device-contract-20261112.md).
 
@@ -87,6 +87,22 @@ restricted FILE-helper API: root must equal its actual OUT; the outer dispatcher
 must pass actual module-level digest/parse_kb along with its locals.
 
 Its 29 tests use actual local fake-ADB children. The cleanup callback still needs
-ownership-proven restoration, independent of collection; the complete dispatcher,
-new freeze and same-run Android verification remain pending. See
+to invoke ownership-proven restoration and check its result; the complete
+dispatcher, new freeze and same-run Android verification remain pending. See
 [prepare validation](../../docs/validation/w3-terminal-prepare-20261113.md).
+
+`terminal_device_restore.restore(root, ctx, *, serial)` independently reads
+durable ownership claims, without requiring successful preparation or collection.
+It checks ordinary package paths, APK bytes and models before and after recovery.
+Only aliases matching frozen APK claims may be removed; stage deletion requires
+exact marker and directory identity, the preclaimed child set, and regular files
+without links. It removes explicit files, the marker last, then the empty stage.
+Unknown content or uncertain ownership is retained with `allRestored=false`.
+Returning to Demo requires a current resumed record with user0 and exact Activity.
+
+The 20 restore tests use local fake-ADB subprocesses, including partial effects,
+malformed/null claims, directory replacement, foreground identity and journal
+interruptions. Restore is single-use: an existing recovered journal or outcome
+blocks another attempt. The future zero-argument cleanup closure must inspect
+`allRestored` and propagate uncertainty while preserving the original failure.
+See [restore validation](../../docs/validation/w3-terminal-restore-20261113.md).
