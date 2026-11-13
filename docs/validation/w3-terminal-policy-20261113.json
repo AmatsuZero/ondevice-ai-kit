@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "scope": "requested allocator policy collection; host only",
+  "sourceSHA256": {
+    "probes/android-qwen-terminal/terminal_device_policy.py": "9643bc2f50a30c9d531d4b208bd8b2f86de700d3c82a2741322f4ef6acb9650a",
+    "probes/android-qwen-terminal/terminal_device_collect.py": "65e46aefeb9817c7cd1ef68aa6843d7525271ab440a115ac79c09cc5d16b8f72",
+    "probes/android-qwen-terminal/terminal_device_contract.py": "eb6cceb9ecfea5606e4054908a004d71f9d3aad801fa664a30712ddc3a7551dc",
+    "probes/android-qwen-terminal/test_terminal_policy_parent.py": "5412ce90ca8b051e63fecc1193dd1e8e8e966ac6796d07d6f6910497a2066cbb",
+    "probes/android-qwen-terminal/test_policy_read_order_parent.py": "8130e65be40e10f24fd106aa30ea048de6dd574f306036ee218cb0ac736b10e7",
+    "probes/android-qwen-terminal/check_device_contract.py": "b9e91de62b5ed7a98fe7f22219391e467ff7655e6917af2f23b694645fcc6cda",
+    "probes/android-qwen-terminal/README.md": "0bf9bf527ed2e7b7b5124811c90ee2d229bf3cb9a85421ca7a90feb910103f22"
+  },
+  "methods": {
+    "OBS": 201,
+    "GUARD": 18,
+    "TERMINAL": 129,
+    "TOTAL": 348,
+    "AST": 56
+  },
+  "candidatePolicyMethods": 8,
+  "readOrderMethods": 1,
+  "collectorRegressionMethods": 12,
+  "review": "accept",
+  "reviewPaths": [
+    "policy-parent/source-review/review.json",
+    "policy-parent/source-review/source-hashes.json"
+  ],
+  "protection": {
+    "frozen": 120,
+    "protected": 95,
+    "prepared": 81,
+    "APKs": 2,
+    "drift": [],
+    "deviceOperations": 0
+  },
+  "firstPolicySuite": {
+    "methods": 8,
+    "failures": 2,
+    "errors": 0,
+    "cause": "returned tuple identities versus persisted JSON lists"
+  },
+  "readOrderFailure": {
+    "methods": 1,
+    "errors": 1,
+    "cause": "second-read interruption left first raw evidence absent; canonical root RED and GREEN retained"
+  },
+  "parentFixtureCorrection": "resolve tempfile root; first green guard failure preserved",
+  "cleanup": {
+    "removed": [
+      {
+        "path": ".omx/artifacts/w3-terminal-observation-20261112/policy-parent/__pycache__/policy-before-order-fix.cpython-315.pyc",
+        "bytes": 17631,
+        "sha256": "442ad7361d10c1e84116958832b87f819a6717699b5108f4b072b002a4459ee9"
+      },
+      {
+        "path": ".omx/artifacts/w3-terminal-observation-20261112/policy-parent/__pycache__/test_policy_mandatory_contract.cpython-315.pyc",
+        "bytes": 41540,
+        "sha256": "caaaeed579027c0ddfeae29539e9ab3e1b4169ebc21d6b3da8799b982b02ac95"
+      },
+      {
+        "path": ".omx/artifacts/w3-terminal-observation-20261112/policy-parent/__pycache__/test_terminal_policy_parent.cpython-315.pyc",
+        "bytes": 24284,
+        "sha256": "58962f427eff9d2aa424cd2ecafe8dec5bf0648d03c948b43d96aa2ad51e75f2"
+      },
+      {
+        "path": ".omx/artifacts/w3-terminal-observation-20261112/policy-parent/combined-candidate/__pycache__/terminal_device_collect.cpython-315.pyc",
+        "bytes": 25880,
+        "sha256": "5ad80cd113d136a70b9c7a4370cd9a0a259195404486db2e639dc3508f326ca0"
+      },
+      {
+        "path": ".omx/artifacts/w3-terminal-observation-20261112/policy-parent/combined-candidate/__pycache__/terminal_device_contract.cpython-315.pyc",
+        "bytes": 29726,
+        "sha256": "c3fbd18e6ef4543a33bcc1ad1b5d38a075794b25297f02f3e38abc0f931feffb"
+      },
+      {
+        "path": ".omx/artifacts/w3-terminal-observation-20261112/policy-parent/combined-candidate/__pycache__/terminal_device_policy.cpython-315.pyc",
+        "bytes": 17718,
+        "sha256": "e836e05d0706e8c54a5984661025c3aafd7728c7a9f47b98a03aa755497475f4"
+      },
+      {
+        "path": ".omx/artifacts/w3-terminal-observation-20261112/policy-parent/local-fragment/__pycache__/fragment.cpython-315.pyc",
+        "bytes": 6334,
+        "sha256": "7631ade213c47d5629374acea29f988b6bdf26ab8efd3f95bfa5aa34976661c8"
+      },
+      {
+        "path": "probes/android-qwen-terminal/__pycache__/terminal_device_policy.cpython-315.pyc",
+        "bytes": 17666,
+        "sha256": "23f08a46df40384e7952627d51c691a3b447e7a0a43ef3ae1b4a7d0984250599"
+      },
+      {
+        "path": "probes/android-qwen-terminal/__pycache__/test_policy_read_order_parent.cpython-315.pyc",
+        "bytes": 4710,
+        "sha256": "1172119fe0978ffeb83a073b7f1695eacfd3c8cd67294139317a7baaa7eafda8"
+      },
+      {
+        "path": "probes/android-qwen-terminal/__pycache__/test_terminal_policy_parent.cpython-315.pyc",
+        "bytes": 25218,
+        "sha256": "c04a990f88d0d480b772d9428ea734c8caf7c2027aa801eb634d1a5ae3019fc6"
+      }
+    ],
+    "kept": [],
+    "removedBytes": 210707,
+    "freeBytesBefore": 78604804096,
+    "freeBytesAfter": 78604689408,
+    "observedFreeDeltaBytes": -114688,
+    "preserved": "all sources/candidates/tests/prompts/raw failures/reviews/receipts/APKs/models; no broad cache or device cleanup"
+  },
+  "validationMarkdownSHA256": "ddb18810c3401ff886c64b95ee11cb5dffa67f30f7ae4dd49d650d70900a98a4",
+  "deviceOperations": 0,
+  "ADBEmpty": true,
+  "newSourceFreeze": false,
+  "currentFullDriverDualReviews": false,
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "remaining": [
+    "complete six-action adapter routing",
+    "complete dispatcher/launch/cleanup closure",
+    "current complete dual source reviews",
+    "new complete freeze",
+    "same-run TECNO evidence",
+    "full physical quality/resources and distribution gates"
+  ]
+}

@@ -52,7 +52,9 @@ def _require(cond, msg):
         raise ValueError(msg)
 
 
-def _load_local(root, ctx, serial):
+def _load_local(root, ctx, serial, *, check_outputs=True):
+
+    _require(isinstance(check_outputs, bool), "check_outputs must be bool")
     _require(isinstance(serial, str) and serial != '', 'serial must be non-blank')
     _require(serial.strip() == serial, 'serial must not have surrounding whitespace')
     _require(not any(ord(c) < 0x20 for c in serial), 'serial must not contain control chars')
@@ -94,7 +96,8 @@ def _load_local(root, ctx, serial):
 
     locals_info = _read_locals(root, serial, ctx)
 
-    _preflight_outputs(root, _DEVICE_OUTPUT_RELS)
+    if check_outputs:
+        _preflight_outputs(root, _DEVICE_OUTPUT_RELS)
 
     run_started = _read_json(root, 'run-started.json')
     host_result = _read_json(root, 'host-result.json')

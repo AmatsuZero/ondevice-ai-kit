@@ -1,3 +1,7 @@
+## W3 policy：逐读持久化与 JSON 返回形状（2026-11-13）
+
+首本地片段把实际顶层 allocatorPolicy 误放 config；外部定点修正后保持 config.provider/requestedEnableCpuMemArena 绑定。首 wrapper 为源码占位符，未验收、未执行伪工具。首8方法两子例失败是返回 tuple 与落盘 JSON list 不同；hy3 仅把三个返回记录转 list，内部身份校验不改。独立中断故障实证第二读抛错时首读未保存；外部把首 durable write 移至第二读之前，canonical-root 旧源 RED/新源 GREEN 保留。父首 green 用未 resolve 的临时根遭共享路径守卫拒绝，只修父夹具，不放宽实现。最终348方法/56AST、保护摘要及 bounded source review accept；host 非 Android/原生政策 effect/质量通过。证据 policy-parent/、policy-repository-acceptance/。
+
 ## W3 collect：模块简称、实际ctx与类型等值（2026-11-13）
 
 整份603s/root262144B截断仅完整输入无源码；拆分B终态也只伪Bash文字，无工具执行。A片段完整JSON但模块简称restore/lifecycle、猜测ctx扁平字段/文件list与local路径误加remote前缀；主代理早期提示也用了模块简称及不足的ctx表达式，需给真实源码和精确容器。远端独立3方法实测1FAIL2ERROR（第二文件名、未拒双读变化、dict属性），外部窄修后3GREEN；完整12方法再抓finish嵌套dict 1==True/0==False三FAIL，逐字段exact type+value后GREEN。首缺env/缺candidate的父包装器未跑实际验收，分别保留、不计通过。复核high错误要求坏本地proof写outcome，按零写出约定撤回；真实缺package/plan先ValueError，models/adb KeyError也零ADB/零写出，统一诊断仅low延后。最终accept/338host，非Android；证据collect-parent/与collect-repository-acceptance/。

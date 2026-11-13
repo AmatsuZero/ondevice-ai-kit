@@ -1,3 +1,7 @@
+## 2026-11-13：policy 收取已验收，下一完整驱动
+
+免费hy3 exact terminal_device_policy.py 与 collector纯本地proof可复用开关、guard必需依赖已集成；完整348方法/56AST、旧120冻结/原失败/95保护/81准备源/两APK保持，限定源码reviewaccept。[验证](validation/w3-terminal-policy-20261113.md)。原metadata层级、wrapper占位、tuple/list两FAIL、第二读中断丢首证据RED、父临时根订正均保留。全部本轮helper和测试终态勿poll，无active请求；下一按policy-parent/next-driver-brief.md补完整dispatcher/launch/cleanup（allRestored exactTrue），再当前完整双复核/新freeze/同run真机。ADB为空、零新设备/推理，W3/R4/R5open、goalactive，源码未push。
+
 ## 2026-11-13：报告收取已提交并双端同步
 
 本地c355643精确10文件；GH#15comment6841828362/GL#15note44112/GHWikie757b385逐字回读，双Wiki SHAaa3142b9a66a8a4cc92729cdcbd3b3412cb44a18a5d52eefce8a1c99c16f5e78一致，[收据](validation/w3-terminal-collect-sync-20261113.json)。marker已用勿重发、源码未push；本轮helper/父测试/发布句柄均终态，勿poll。下一collect-parent/policy-next-brief.md已更新实际本地proof复用边界：policy在collection之后，不能直接调用含输出preflight的_load_local；须由外部hy3最小拆分并保留旧12测试。再完整dispatcher/launch/cleanup（检查allRestored）/当前完整双复核/新freeze/同run设备。338/53AST仅host，ADB仍空、零真实设备操作，W3/R4/R5open、goalactive。

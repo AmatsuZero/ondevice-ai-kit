@@ -1,3 +1,7 @@
+## 2026-11-13 allocator policy 收取已验收，完整驱动继续
+
+免费hy3候选及精确窄修已集成；新增8项policy与1项逐读中断检查，完整348方法/56AST、旧冻结/失败/95保护/81准备源/两APK摘要保持，限定源码复核accept。三路径身份/UID及两次21B上限读取验证20B请求配置；逐读持久化和JSON返回形状的真实RED→GREEN保留。[验证](../validation/w3-terminal-policy-20261113.md)。仅host与请求配置证据，非native effect/质量/真机；下一完整dispatcher/launch/cleanup（检查allRestored）、当前完整双复核、新freeze与同run设备。ADB为空、零新设备操作，W3/R4/R5open、源码未push。
+
 ## 2026-11-13 有界报告收取已双端同步
 
 本地c355643已记录GH#15comment6841828362、GL#15note44112与GHWikie757b385；逐字回读，双Wiki SHAaa3142b9a66a8a4cc92729cdcbd3b3412cb44a18a5d52eefce8a1c99c16f5e78一致。[收据](../validation/w3-terminal-collect-sync-20261113.json)。marker已用勿重发，源码未push；338项/53AST仅host，policy/完整driver/cleanup/当前完整双复核/新freeze/同run真机仍缺，W3/R4/R5open。

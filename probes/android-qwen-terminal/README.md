@@ -117,6 +117,23 @@ exception. A final publication failure is propagated without rewriting or retry.
 
 The 12 parent tests use actual local fake-ADB subprocesses. A failed terminal can
 be collected as observation evidence; quality, true peak and native-policy-effect
-acceptance remain false. Full dispatcher/policy/cleanup integration, current full
+acceptance remain false. Full dispatcher/cleanup integration, current full
 source reviews, a new freeze and same-run Android verification remain pending.
 See [collection validation](../../docs/validation/w3-terminal-collect-20261113.md).
+
+`terminal_device_policy.collect_policy(root, ctx, *, serial)` reuses the local
+terminal/ACK/finish proof after successful report collection, checks that both
+saved reports and the collection receipt are bound to the same raw bytes, and
+preflights its own new outputs before transport. It checks the exact requested
+20-byte allocator configuration through three fixed path aliases, with matching
+UID/device/inode/size and directory/file type checks before and after two bounded
+reads. Each raw read is persisted before the next operation. The public receipt
+matches its persisted JSON representation. Null policy after a failed constructor
+records absence without inventing file evidence.
+
+This is read-only device configuration evidence. Native policy effect, quality,
+true peak and automatic retry remain false. Local invalid proof produces no
+transport or output; operational errors preserve the original BaseException and
+already-persisted raw bytes. Final publication is not rewritten or retried. The
+freeze guard requires this module in the contract and both source review maps.
+See [policy validation](../../docs/validation/w3-terminal-policy-20261113.md).
