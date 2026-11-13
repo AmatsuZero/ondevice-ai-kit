@@ -1,3 +1,7 @@
+## 2026-11-13：有界报告收取已验收，下一policy与完整驱动
+
+免费hy3 terminal_device_collect.py已按候选原字节集成；12新增父方法、完整338方法/53AST及旧120冻结/原失败/95其他/81准备源/两APK摘要通过，独立源码accept。完整整份截断/伪工具无源码、真实字典接口/文件名/双读差异和finish类型3RED保留；本地无效先零ADB/零写出，操作异常durablefalse且主对象不变，最终发布错误不重写。[验证](validation/w3-terminal-collect-20261113.md)。下一allocator-policy收取与完整dispatcher/launch/restoreclosure（检查allRestored），然后当前完整双源码复核/新freeze/同run真机；不重放consumed FILE/heap。ADB为空、零真实设备/推理/麦克风/AiAi/下载，W3/R4/R5open、goalactive、源码未push。
+
 ## 2026-11-13：所有权恢复已提交并双端同步
 
 本地9498437精确10文件；GH#15comment6840767799/GL#15note44044/GHWiki1488f6af逐字回读，双Wiki SHA5590c9e3a5c41da1ff35a572006fa647c5c5c6d19052ee7a2426e30aaf82a82a一致，[收据](validation/w3-terminal-restore-sync-20261113.json)。marker已用勿重发，源码未push。全部本轮helper/测试/发布终态，无active请求；旧句柄勿poll。下一按restore-parent/next-driver-brief.md与adapter-Cbrief接完整driver/run校验/collection-policy/cleanupclosure，再当前双复核/新freeze/同run设备；325仅host、ADB为空、W3/R4/R5open、goalactive。

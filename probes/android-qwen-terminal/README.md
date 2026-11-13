@@ -42,7 +42,7 @@ receipts, root-to-copy bindings and both current Python-driver review receipts.
 The fixed package profile requires 19 unique nonempty class-name strings. It
 rejects observed symlinks including the contract itself, but assumes immutable
 private input files rather than an adversarial concurrent writer. It performs no
-ADB, process launch, writes or real freeze. The 16 methods below use synthetic
+ADB, process launch, writes or real freeze. The 17 methods below use synthetic
 APKs and unexecuted lifecycle placeholders; they do not prove device readiness.
 
 ```sh
@@ -64,7 +64,7 @@ rtk proxy python3 -B -m unittest discover -s probes/android-qwen-terminal -p 'te
 
 These tests use local fake-ADB subprocesses. The injected launch/frozen/stop
 callbacks still require the complete device adapter and ownership checks.
-Collection, restoration callback wiring, a new complete freeze and same-run
+Allocator-policy collection, restoration callback wiring, a new complete freeze and same-run
 Android acceptance remain pending. See
 [lifecycle validation](../../docs/validation/w3-terminal-lifecycle-20261113.md).
 See [guard validation](../../docs/validation/w3-terminal-device-contract-20261112.md).
@@ -106,3 +106,17 @@ interruptions. Restore is single-use: an existing recovered journal or outcome
 blocks another attempt. The future zero-argument cleanup closure must inspect
 `allRestored` and propagate uncertainty while preserving the original failure.
 See [restore validation](../../docs/validation/w3-terminal-restore-20261113.md).
+
+`terminal_device_collect.collect(root, ctx, *, serial)` validates local terminal,
+ACK, observation, before-link and instrumentation-finish evidence before any
+transport or output writes. It then preserves two fresh bounded report reads,
+binds their exact bytes and SHA to that evidence, and checks ordinary packages,
+APK bytes and models before and after collection. Local invalid proof leaves no
+outcome; operational failure records a false outcome and preserves the original
+exception. A final publication failure is propagated without rewriting or retry.
+
+The 12 parent tests use actual local fake-ADB subprocesses. A failed terminal can
+be collected as observation evidence; quality, true peak and native-policy-effect
+acceptance remain false. Full dispatcher/policy/cleanup integration, current full
+source reviews, a new freeze and same-run Android verification remain pending.
+See [collection validation](../../docs/validation/w3-terminal-collect-20261113.md).

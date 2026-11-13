@@ -1,3 +1,7 @@
+## W3 collect：模块简称、实际ctx与类型等值（2026-11-13）
+
+整份603s/root262144B截断仅完整输入无源码；拆分B终态也只伪Bash文字，无工具执行。A片段完整JSON但模块简称restore/lifecycle、猜测ctx扁平字段/文件list与local路径误加remote前缀；主代理早期提示也用了模块简称及不足的ctx表达式，需给真实源码和精确容器。远端独立3方法实测1FAIL2ERROR（第二文件名、未拒双读变化、dict属性），外部窄修后3GREEN；完整12方法再抓finish嵌套dict 1==True/0==False三FAIL，逐字段exact type+value后GREEN。首缺env/缺candidate的父包装器未跑实际验收，分别保留、不计通过。复核high错误要求坏本地proof写outcome，按零写出约定撤回；真实缺package/plan先ValueError，models/adb KeyError也零ADB/零写出，统一诊断仅low延后。最终accept/338host，非Android；证据collect-parent/与collect-repository-acceptance/。
+
 ## W3 restore：null不是缺失、前台子串及inode夹具（2026-11-13）
 
 原交付raw262144B截断，只提取完整event2sourceJSON、不补tail。首liveuser期望抛错为父误读，实际合同durablefalse/零mutation；inode初hookctxcall未拦text原闭包，改真实fakeADBls子进程rename/copy取得1RED。广义catch把坏/链接created当缺失、bool/duplicate/missingordinaryhash/扩大children/foreignAPKclaim共8子例真实RED，严格本地证明后18GREEN。再发现JSONnull返回None与缺失混淆（1方法3RED），resumed仅substring误认foreignsuffix/u10及主异常errors空（2方法5RED），外部精确小补丁后20GREEN/完整325GREEN。readoptional只catchFileNotFoundError，present顶层必须dict；APKclaim绑定冻结+实际；删除前重验nonce/stat，unknown保留；当前resumed须精确组件和u0。原BaseException身份与次生journal中断note保持。恢复单次已有recovered/outcome即拒，未来closure检查allRestored并传播不确定性，不自动重试。独立reviewaccept，缺preflight全文的限制已用实际定义核对；host非Android。证据restore-parent/与restore-repository-acceptance/。
