@@ -221,3 +221,19 @@ Interface: `acknowledgement(first: bytes, second: bytes, binding: dict, observat
 
 - [x] Save source/hash/test/review receipts, preserve protected dirty files, update the handoff and W3 current-state note.
 - [x] Commit only exact accepted files. Synchronize substantive results to the existing Issue/Wiki using a fresh idempotency marker; keep source push separate.
+
+### Durable prepare slice accepted (2026-11-13)
+
+- [x] Freehy3 source and exact corrections integrated as terminal_device_prepare.py;
+  29 real fake-ADB parent methods, all304 host methods and49AST pass.
+- [x] Stage/all8MiBchildren/install preclaims and exactnonce/UID/dev/ino before push;
+  original/new APK hashes, sixmodels, runner and ordinary state rechecked.
+- [x] Required/reviewed dependency closure rejects coherent prepare omission;
+  oldfrozen/failed/protected/prepared/APK hashes unchanged. Source review accept
+  after explicitzeroargcleanup clarification; originalrevise remains retained.
+- [ ] Actual ownership-proven restoration independent of collection, complete
+  dispatcher and current full-source/parent reviews, newfreeze and same-run device.
+  prepare calls injected cleanup only; never claim actualrestore from this slice.
+
+See docs/validation/w3-terminal-prepare-20261113.md. No sourcebranch push, no
+newdevice operation, W3/R4/R5open and goalactive.

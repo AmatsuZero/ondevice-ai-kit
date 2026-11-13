@@ -1,3 +1,7 @@
+## W3 prepare：printf夹具、marker长度与原异常API（2026-11-13）
+
+首11方法1FAIL/3ERROR实际来自父fakeADB把shlex的literal backslash-n误比为换行；真实/bin/sh产生nonce+NL后只修夹具，原候选11GREEN。真实边界另揭旧两APKtransfer收据漏preflight、宽runner、bool/float/nonce尾换行、祖先链接、stat及marker33字节前缀接受suffix；head34/exact33bytes、canonicalASCIIstat和完整祖先检查经外部窄修通过。首patch一块old含真实换行count0未应用，不手改；下一小块精确修正。最终type(marker)isbytes仍遗漏，实际2RED再外部单条件修正。普通pm路径不证明APK内容，前后ordinaryAPKHashes及最终新alias重hash有2真实RED→GREEN。独立review误把零参cleanup()解读为cleanup(exc)，补原明确API/真实首错身份与次生中断、TEST-alone/activeinstrumentation拒绝后accept撤回major。保留原revise，不改正确API。root=actualOUT、digest/parse_kb为modulelevel须显式注入；29父/304全套仅host，不证明cleanup真实恢复或完整driver。证据prepare-parent/与prepare-repository-acceptance/。
+
 ## W3新增源依赖：合同和双复核的coherent漏项（2026-11-13）
 
 源码适配片段8GREEN后，真实负例同时从合同files与两份复核sourceSHA256删新terminal_source_adapter.py，旧guard仍接受。只在可选files里列依赖不充分；hy3单组把它加入DRIVERS，带动REQUIRED/REVIEWED同时强制，14守卫/完整274GREEN。纯适配pin旧FILE确切SHA、保存安全helperAST、去旧四action尾和__main__、逐call加freezehook；仍未实现所有权/prepare/恢复，不能把sourcecallbacks占位当完整driver。原RED/候选/复核在source-adapter-parent/及source-adapter-repository-acceptance/，无设备作用或旧run重放。

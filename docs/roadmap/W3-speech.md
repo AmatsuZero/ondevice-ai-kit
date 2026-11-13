@@ -1,3 +1,7 @@
+## 2026-11-13 durable prepare：304项host通过，实际恢复与真机仍待验
+
+免费hy3隔离prepare已集成，新增29父方法；完整304方法/49AST、旧冻结及普通保护摘要保持，前置stage/8MiBpart/installclaims和最终APK/model复核通过。独立源码复核经零参数cleanup契约澄清accept，原意见/实际RED保留。[验证](../validation/w3-terminal-prepare-20261113.md)。实际cleanup恢复尚未实现，下一独立于collection所有权恢复/完整driver/新冻结/同run设备；ADB为空、零新设备操作，W3/R4/R5保持open，goalactive，源码未push。
+
 ## 2026-11-12 启动阶段进度衔接已双端同步
 
 本地`9fb7529`已记录于GH#15comment6828593679/GL#15note44030/GHWiki8ce77136；逐字回读、双Wiki SHAab436b57c4633611c2f870f8810e3842bd1d7f033e13329b441f6e8374d5dcb9一致。同步收据`../validation/w3-terminal-initial-progress-sync-20261112.json`；marker已用、源码未push。214项为host证据；完整outer、新freeze及同run真机仍缺，W3/R4/R5open。下一免费hy3候选继续启动/收取/恢复，不重放旧consumedrun。

@@ -42,7 +42,7 @@ receipts, root-to-copy bindings and both current Python-driver review receipts.
 The fixed package profile requires 19 unique nonempty class-name strings. It
 rejects observed symlinks including the contract itself, but assumes immutable
 private input files rather than an adversarial concurrent writer. It performs no
-ADB, process launch, writes or real freeze. The 13 methods below use synthetic
+ADB, process launch, writes or real freeze. The 15 methods below use synthetic
 APKs and unexecuted lifecycle placeholders; they do not prove device readiness.
 
 ```sh
@@ -77,3 +77,16 @@ model/hash and ordinary-state helpers. Its guard and dispatcher callbacks remain
 the future device driver's responsibility; evaluation does not execute an action.
 The frozen-contract guard requires this dependency in both source review maps.
 See [source adapter validation](../../docs/validation/w3-terminal-source-adapter-20261113.md).
+
+`terminal_device_prepare.prepare(root, ctx, *, serial, cleanup, nonce_factory)`
+records durable stage/all-chunk and install claims before their device effects.
+It verifies local inputs, exact ownership marker/stat, installed APKs, runner,
+private models and preserved ordinary APK/model bytes. Failure calls the injected
+zero-argument cleanup once and preserves the original BaseException. This is a
+restricted FILE-helper API: root must equal its actual OUT; the outer dispatcher
+must pass actual module-level digest/parse_kb along with its locals.
+
+Its 29 tests use actual local fake-ADB children. The cleanup callback still needs
+ownership-proven restoration, independent of collection; the complete dispatcher,
+new freeze and same-run Android verification remain pending. See
+[prepare validation](../../docs/validation/w3-terminal-prepare-20261113.md).

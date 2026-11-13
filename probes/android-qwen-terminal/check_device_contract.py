@@ -42,7 +42,7 @@ OBS = ('terminal_observer.py', 'terminal_file_io.py', 'terminal_observation_coor
        'adb_process_sampler.py', 'adb_terminal_report_reader.py',
        'adb_terminal_ack_publisher.py', 'adb_terminal_observation.py', 'terminal_polling.py')
 DRIVERS = ('device_acceptance.py', 'terminal_device_contract.py', 'terminal_device_lifecycle.py',
-           'terminal_source_adapter.py')
+           'terminal_source_adapter.py', 'terminal_device_prepare.py')
 REQUIRED = set(BINDINGS) | {'probes/android-terminal-observation/'+n for n in OBS}
 REQUIRED |= {'probes/android-qwen-terminal/'+n for n in DRIVERS}
 REQUIRED |= {'probes/android-qwen-terminal/'+n for n in
@@ -136,6 +136,21 @@ class TerminalDeviceContractParent(unittest.TestCase):
         with fixture() as (root,out,contract):
             self.verify(module,root,out)
             adapter='probes/android-qwen-terminal/terminal_source_adapter.py'
+            del contract['files'][adapter]
+            for name in REVIEWS:
+                review=json.loads((root/name).read_text())
+                del review['sourceSHA256'][adapter]
+                write_json(root/name,review)
+                contract['files'][name]=digest(root/name)
+            write_json(out/'diagnostic-frozen.json',contract)
+            with self.assertRaises((ValueError,AssertionError)):
+                self.verify(module,root,out)
+
+    def test_prepare_cannot_be_coherently_excluded_from_freeze_and_reviews(self):
+        module=load_module()
+        with fixture() as (root,out,contract):
+            self.verify(module,root,out)
+            adapter='probes/android-qwen-terminal/terminal_device_prepare.py'
             del contract['files'][adapter]
             for name in REVIEWS:
                 review=json.loads((root/name).read_text())

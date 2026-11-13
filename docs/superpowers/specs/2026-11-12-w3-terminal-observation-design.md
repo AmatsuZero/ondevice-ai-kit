@@ -450,3 +450,45 @@ Both callbacks are explicit unresolved outer-driver obligations. Existing transf
 helpers alone do not record ownership or provide partial-prepare recovery. The
 new adapter source must be mandatory in the frozen file closure and both complete
 review receipts; a coherent omission from all three must fail validation.
+
+## Durable preparation claims (2026-11-13)
+
+The preparation API is `prepare(root, ctx, *, serial, cleanup, nonce_factory)`.
+It uses the actual immutable FILE helpers through the pure source adapter. The
+outer dispatcher must enrich its copied locals with the real module-level digest
+and parse_kb definitions. Every inherited transport remains frozen-hooked; this
+API does not create a complete driver or freeze, run native decoding, or supply
+the still-required ownership-proven recovery callback.
+
+All two APK/six model regular files and their path ancestors, sizes and hashes,
+fixed exact serial/FP/run/plan and new-only output paths are validated before
+preparation effects. Current user0, exact TECNO identity, awake/unlocked state,
+no active instrumentation, >=2GiB available memory, new-alias absence and stage
+absence (including dangling links) are checked. Original package paths, APK
+hashes and ordinary model hashes are captured before mutation.
+
+A durable device-before snapshot precedes a durable stage claim containing a
+random lowercase32hex nonce and every expected flat final/8MiB part name. The
+mutation flag is set before mkdir. Directory/marker nonlinks, exact markerbytes
+and actual UID/dev/ino must be verified and durably recorded before any push.
+Read34bytes to verify the marker is exactly33bytes; a33byte prefix alone cannot
+reject a suffix. Canonical ASCIIdecimal stat fields reject extra/sign/Unicode
+or leading-zero forms. Missing/partial ownership is never fabricated.
+
+Each exact new alias/install SHA is durably claimed before installation. Existing
+transfer logic remains unchanged. Installed aliases/runner, all six private
+model hashes, same-UID proc readability and original packages/APKs/models are
+rechecked before publishing prepared.json with nativeCalls0. A failure after
+mutation may have begun calls injected cleanup exactly once; the original
+BaseException survives any secondary cleanup interruption with an attached note.
+
+Receipt names: device-before.json; ownership-stage-claimed.json (children,nonce);
+ownership-stage-created.json (stageIdentity uid/dev/ino); ownership-install-main-
+claimed.json and ownership-install-test-claimed.json (alias,sha256); prepared.json.
+All carry fixed run/FP as applicable. The before snapshot also stores
+ordinaryAPKHashes, because pm-path equality alone does not prove APK preservation.
+
+This is a host preparation contract. Complete restoration independent of
+collection, the outer dispatcher, both complete driver reviews, a new frozen
+contract and same-run device acceptance remain separate requirements. Include
+terminal_device_prepare.py in mandatory DRIVERS/REQUIRED/REVIEWED closure.

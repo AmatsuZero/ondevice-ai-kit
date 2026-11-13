@@ -1,3 +1,7 @@
+## 2026-11-13：durable prepare 已验收，下一独立恢复
+
+免费hy3源码/精确窄修原样集成terminal_device_prepare.py；29新父方法、完整201观察+15守卫+88终态=304/49AST通过，旧120冻结/原失败/95其他dirty/81源/两APK保持。stage/all8MiBparts/aliasinstall前置持久claims、精确marker/stat与最终普通/新APK摘要均验。[验证](validation/w3-terminal-prepare-20261113.md)。父printf夹具纠正、边界实际RED和patch count0原件保留；首审误读cleanup签名，补明确零参数契约/实际复现后accept撤回major。root必须等实际OUT；digest/parse_kb须dispatcher显式注入。cleanup仅callback，实际所有权恢复仍缺；下一按.omx/artifacts/w3-terminal-observation-20261112/prepare-parent/restore-next-brief.md做独立于collection精确恢复，再完整driver/双复核/新freeze/同run设备。全部helper/验收终态勿poll，无active请求；ADB为空，零新设备/推理，W3/R4/R5open、goalactive，源码未push。
+
 ## 2026-11-13：源码适配已提交并双端同步
 
 本地f084bd0精确10文件；GH#15comment6839306309/GL#15note44038/GHWiki0056ffbc逐字回读，双Wiki SHA63dc95235a11c3af661b3e527ccd5c764a8847f400f02b2ad2578daed0bbd8dd一致，[收据](validation/w3-terminal-source-adapter-sync-20261113.json)。marker已用勿重发、源码分支未push。本轮所有helper/验收/同步进程终态，无active请求，旧句柄勿poll。下一durable claims/prepare/部分恢复按adapter-c-next-brief.md；完整driver/newfreeze/same-run设备仍缺，274项仅host。W3/R4/R5open、goalactive。

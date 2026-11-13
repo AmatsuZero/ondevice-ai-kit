@@ -1,0 +1,115 @@
+{
+  "suites": [
+    {
+      "name": "observation",
+      "exitCode": 0,
+      "elapsedSeconds": 30.276695791981183,
+      "methods": 201
+    },
+    {
+      "name": "contract",
+      "exitCode": 0,
+      "methods": 15,
+      "elapsedSeconds": 2.150576624990208
+    },
+    {
+      "name": "terminal",
+      "exitCode": 0,
+      "methods": 88,
+      "elapsedSeconds": 82.79942200001096
+    }
+  ],
+  "ASTFiles": 49,
+  "totalMethods": 304,
+  "at": "2026-11-13T00:25:11.444340+00:00",
+  "protection": {
+    "frozen": 120,
+    "protected": 95,
+    "prepared": 81,
+    "APKs": 2,
+    "drift": [],
+    "deviceOperations": 0
+  },
+  "integration": [
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/prepare-parent/final-candidate/terminal_device_prepare.py",
+      "target": "probes/android-qwen-terminal/terminal_device_prepare.py",
+      "sourceExact": true,
+      "sourceSHA256": "128a58746228961a3b89bab9ab8978c0df8939c59cee615f1c2ec58acf592072",
+      "targetSHA256": "128a58746228961a3b89bab9ab8978c0df8939c59cee615f1c2ec58acf592072",
+      "harnessEdits": 0
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/prepare-parent/guard-candidate/terminal_device_contract.py",
+      "target": "probes/android-qwen-terminal/terminal_device_contract.py",
+      "sourceExact": true,
+      "sourceSHA256": "3864b99d25e8a017a3f4ba8b25b9a3d99a568e4d1892f8aeaf54262eabd7370d",
+      "targetSHA256": "3864b99d25e8a017a3f4ba8b25b9a3d99a568e4d1892f8aeaf54262eabd7370d",
+      "harnessEdits": 0
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/prepare-parent/prepare_fixture.py",
+      "target": "probes/android-qwen-terminal/terminal_prepare_fixture.py",
+      "sourceExact": false,
+      "sourceSHA256": "81cee88d649f8b9b2db758da066581404f3444cbd4da0e815e3b713c75eeecb2",
+      "targetSHA256": "e29a8b1480688a2c5e676e233548665efd9aaa5d954712df5e1b2474e1277a4f",
+      "harnessEdits": 1
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/prepare-parent/test_terminal_prepare_parent.py",
+      "target": "probes/android-qwen-terminal/test_terminal_prepare_parent.py",
+      "sourceExact": false,
+      "sourceSHA256": "39ed1f6da4f1f670550ffa54c8d6f545ece272ef6aed12d33d087fbf83e7a5ae",
+      "targetSHA256": "147da9c2f9ff5413f4167afacf538600beceff2a6aeff1a403bfac81f670bbe4",
+      "harnessEdits": 2
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/prepare-parent/test_terminal_prepare_boundaries.py",
+      "target": "probes/android-qwen-terminal/test_terminal_prepare_boundaries.py",
+      "sourceExact": false,
+      "sourceSHA256": "6e3f583b48107289115657cf2103c50ca1939a2e29d80771ec9be7fb5eaa4a25",
+      "targetSHA256": "4a2673f23ea0db865dda223d3d583f661ad0b37d64292522f1434aedfab89a70",
+      "harnessEdits": 2
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/prepare-parent/test_terminal_prepare_final_hashes.py",
+      "target": "probes/android-qwen-terminal/test_terminal_prepare_final_hashes.py",
+      "sourceExact": false,
+      "sourceSHA256": "7760cf812d1ed1135d6da19152d83a586debd29c01883d81181ef1f61887501d",
+      "targetSHA256": "f75391f74368543c439b801c4f40cf803d74f24f3a3522de9ce2cb8c4733c98e",
+      "harnessEdits": 2
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/prepare-parent/test_terminal_prepare_faults.py",
+      "target": "probes/android-qwen-terminal/test_terminal_prepare_faults.py",
+      "sourceExact": false,
+      "sourceSHA256": "9fa13f5f5d18fd4d01c0cfde5e056ff0a975ec9b910cc74e302b9aaed64c4149",
+      "targetSHA256": "0f1ef3a38da04d0572649e6323ac37731e77828b9bdd17d17e568dbd08b880a5",
+      "harnessEdits": 2
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/prepare-parent/test_prepare_mandatory_contract.py",
+      "target": "probes/android-qwen-terminal/check_device_contract.py",
+      "sourceExact": false,
+      "sourceSHA256": "24d239f71970bca71b8f038b11cb89001bdfa158c0f12b792cdce16259e0f1ee",
+      "targetSHA256": "a233bc54f1c8bdb38da6bf32e52fa8cc230da1f91c49b8a22a9a44501b1a89da",
+      "harnessEdits": 1
+    }
+  ],
+  "newPrepareMethods": 29,
+  "sourceReview": "accept after explicit zeroarg cleanup contract clarification; original revise preserved",
+  "sourceBranchPushed": false,
+  "newRunFrozen": false,
+  "deviceOperations": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceReviewEvidence": "prepare-parent/source-review/{review,clarified-review,parent-reproduction}.json",
+  "newDependencyRed": "prepare-parent/mandatory-red.stderr",
+  "initialRed": "prepare-parent/direct-red.stderr",
+  "boundaryRed": [
+    "prepare-parent/candidate/boundaries-expanded-red.stderr",
+    "prepare-parent/candidate/final-hashes-red.stderr",
+    "prepare-parent/partial-boundary-candidate/remaining-red.stderr",
+    "prepare-parent/combined-candidate/marker-types-red.stderr"
+  ]
+}
