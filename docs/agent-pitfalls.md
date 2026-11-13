@@ -1,3 +1,7 @@
+## W3复审组包：复用校验器先核路径合同（2026-11-13）
+
+父首包纳入两份原`.github/workflows`支撑文本，既有nexus_notice_materials对组件首字符的约束实际拒收ValueError；原文/hash无漂移，不能改正确校验器迁就组包。保留原失败collection/索引/脚本及可重复拒收，只把这两支撑路径映射为github-source，supportFiles.repositoryPath保留原位置，57许可/声明仍原路径原字节。修后141文件/8链接/ZIP逐成员/独立再打包通过，两隔离复制件的同长篡改与删除均拒收；只是文本保留，不等于最终组成/生产包保留/发布接受。证据`.omx/artifacts/w3-release-review-20261113/`及docs/validation/w3-release-review-materials-20261113.md。
+
 ## W3 完整driver：真实ctx、消费证明与验收入口（2026-11-13）
 
 两份免费hy3片段完整交付并组合后，原launch6通过；扩展负例实际揭示dispatcher丢adb（collector真实KeyError）、消费计数字段等值接受bool/startedNs越int64、marker证明读取二次中断替换主异常，以及preflight漏绑定/输入和collection/poll输出。外部六块精确修正后，launch8/dispatch13/真实本地fakeADB六action链路2通过；完整回归和双完整源码复核各有独立收据，不能据候选CLI0提前宣称通过。父夹具另补真实/data祖先映射、临时候选BASE指向不可变FILE和ACK exec-in；resource失败的两次精确force-stop分别来自lifecycle和restore，不是facade重复stop。完整回归首命令误选旧artifact13测试，缺新增必需模块导致2ERROR；保留原日志并使用仓库现行check_device_contract.py取得18GREEN，不改正确guard迁就旧夹具。证据driver-parent/、driver-{launch,dispatch}-candidate/、driver-fix1-candidate/及driver-repository-acceptance/。仅host，非真机/质量/原生政策effect。

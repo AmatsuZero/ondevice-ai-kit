@@ -1,3 +1,7 @@
+## 2026-11-13 W3复审材料归集
+
+57份许可/声明与81份支撑文本已组成141文件本地复审包，字节保留、8链接、ZIP成员及两负例通过；[验证](validation/w3-release-review-materials-20261113.md)。只推进发布准备，最终二进制组成/生产通知/发布接受和TECNO完整质量资源仍缺，W3/R4/R5open；原140freeze与未消费terminalrun保持。
+
 W3完整终态driver本地`7e607ef`：376方法/62AST、16模块双复核accept、新140文件freeze已验；双端#15/Wiki已逐字同步且摘要一致，源码未push。ADB为空、run未消费；真机质量/资源及生产发布余门保持，W3/R4/R5open。[验证](validation/w3-terminal-driver-20261113.md)／[同步收据](validation/w3-terminal-driver-sync-20261113.json)。
 
 W3终态wrapper`7688972`已同步两端#15/Wiki并逐字回读，双Wiki摘要一致、源码未push；[同步收据](validation/w3-qwen-terminal-wrapper-sync-20261112.json)。58组783断言/实包证据不关闭W3/R4/R5，完整驱动与真机生产余门继续。

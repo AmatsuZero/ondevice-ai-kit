@@ -1,0 +1,58 @@
+{
+  "status": "local-text-review-package-accepted",
+  "candidateVersion": "w3-20261113-review",
+  "candidateBytes": 5033,
+  "candidateSHA256": "a33bc25d43a83106d1600c4164c86829bbac2f35c912dfec54d9caaebdd38d86",
+  "selectedTextFiles": 57,
+  "selectedTextBytes": 703471,
+  "supportTextFiles": 81,
+  "totalIndexedFiles": 141,
+  "indexSHA256": "cb8ebb281953bebbbe0f48a256791aaa6012478529fe6d303e053b876a47b97f",
+  "materialValidation": {
+    "schemaVersion": 1,
+    "kind": "nexus-notice-material-consistency",
+    "candidateVersion": "w3-20261113-review",
+    "indexSha256": "cb8ebb281953bebbbe0f48a256791aaa6012478529fe6d303e053b876a47b97f",
+    "validatedMaterialCount": 141,
+    "validationStatus": "pass-bounded",
+    "networkPerformedByThisTool": false,
+    "remoteConsumerValidated": false,
+    "legalApproval": false
+  },
+  "rootIndexLinks": 8,
+  "allRootIndexLinksResolve": true,
+  "negativeResults": [
+    {
+      "mutation": "same-size-byte-change",
+      "rejected": true
+    },
+    {
+      "mutation": "missing-file",
+      "rejected": true
+    }
+  ],
+  "zip": {
+    "path": "artifacts/verification/w3-release-review-20261113/accepted/w3-release-review-texts.zip",
+    "bytes": 375246,
+    "sha256": "d542e194cf2da358efe2c04ab8f404c4c87b9db2157c378c9cdcdae564eb26ba",
+    "exactMembersVerified": true,
+    "independentRepackByteIdentical": true
+  },
+  "protectedPreexistingFiles": 100,
+  "protectedDrift": [],
+  "newDeviceOperations": 0,
+  "newNetworkDownloads": 0,
+  "productionChanges": 0,
+  "finalBinaryCompositionVerified": false,
+  "sourceToAARVerified": false,
+  "productionNoticeRetentionVerified": false,
+  "independentReleaseReviewAccepted": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "evidence": ".omx/artifacts/w3-release-review-20261113",
+  "candidateIntegration": "byte-for-byte helper text",
+  "sourceIndexReference": "probes/speech-release-materials/20261113/NOTICE-INDEX.reference.json",
+  "goalStatusObserved": "active",
+  "hostDriverTestRerun": false,
+  "deviceRunConsumed": false
+}

@@ -1,3 +1,7 @@
+## 2026-11-13 W3统一复审包已验收
+
+新增57许可/声明703471B+81支撑文本的141文件本地ZIP，免费hy3索引5033B逐字集成；既有validator、8链接、完整ZIP成员、两负例和独立再打包通过。[验证](validation/w3-release-review-materials-20261113.md)。首路径拒收原件保留，两`.github`支撑路径映射但源码/57选定路径不改；100既有dirty/untracked与140terminalfreeze保持。无新设备/下载/推理，原单次terminalrun未消费、当前goalactive。材料包非最终组成/生产通知/发布接受；W3/R4/R5open，下一fresh物理设备前置及固定同run终态/质量资源，生产余门继续。全部本轮helper和包验收终态，不poll旧句柄。
+
 ## 2026-11-13：完整driver已提交并双端同步
 
 本地7e607ef精确12文件；GH#15comment6849755902/GL#15note44580/GHWikiac69cc7b逐字回读，双Wiki SHA1cffa443fdf654a2cd522712a5d7636fc246281effb4c095cfd3d36606fb0525一致，[收据](validation/w3-terminal-driver-sync-20261113.json)。marker已用、源码未push。全部helper/验收/发布已终态，无active请求，勿poll旧句柄。下一fresh核设备与完整140freeze：当前ADB为空、prepared/device-before/run-started皆无、run未消费。新driver已具备本地验收/376方法62AST/16模块双复核；不要重写driver/重派复核/重放FILE或heap。设备可用后按固定新terminal单次顺序动作和同run证据继续；W3/R4/R5open、goalactive，质量资源及生产余门未验。
