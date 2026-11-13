@@ -1,3 +1,7 @@
+## 2026-11-13 复审材料已提交并双端同步
+
+本地fb8b038精确9文件；GH#15comment6852524086/GL#15note44721/GHWikiffbebdd0逐字回读，双Wiki SHA6b0afb78095b3aa6b1d22a6377a6cbd5b97216ed869a8dbcde2e62030fc9ad5e一致，[收据](../validation/w3-release-review-materials-sync-20261113.json)。marker已用勿重发、源码未push；141文本包只是字节保留，完整真机质量/资源、最终组成/生产通知/发布仍缺，W3/R4/R5open。原140终态freeze与未消费run保持。
+
 ## 2026-11-13 模型与运行时复审包已验收
 
 免费hy3交付统一索引，57份许可/声明703471B与81份支撑文本组成141文件本地复审包；既有校验器/8链接/ZIP逐成员/独立再打包及篡改、缺失两负例通过，100原工作区文件与140终态freeze保持。首`.github`路径拒收保留，仅两支撑路径映射且原路径另记；[验证](../validation/w3-release-review-materials-20261113.md)。这是字节保留与发布准备，不证明最终组成/source-to-AAR/生产通知保留或独立发布接受；W3/R4/R5仍open。无新设备、下载、推理或生产变化，固定terminalrun未消费；下一真机fresh前置与同run验收，发布余门另补。
