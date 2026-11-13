@@ -1,3 +1,7 @@
+## 2026-11-13 所有权恢复已双端同步
+
+本地9498437已记录GH#15comment6840767799、GL#15note44044与GHWiki1488f6af；逐字回读、双Wiki SHA5590c9e3a5c41da1ff35a572006fa647c5c5c6d19052ee7a2426e30aaf82a82a一致。[收据](../validation/w3-terminal-restore-sync-20261113.json)。marker已用勿重发，源码未push；325项仅host，完整driver/收取policy/cleanup接线/完整双复核/新冻结/同run真机待完成，W3/R4/R5open。
+
 ## 2026-11-13 所有权恢复：325项host通过，完整驱动及真机待验
 
 免费hy3隔离restore已集成，20新增恢复父方法；完整325方法/51AST及保护摘要通过，独立源码accept。malformed/null/外来claim先拒、stage/alias冻结所有权验证、未知目录保留、精确逐文件恢复与user0前台回读已验。[验证](../validation/w3-terminal-restore-20261113.md)。恢复为单次，不依赖collection；cleanup closure仍待接线并检查allRestored，完整driver/收取policy/完整双复核/新冻结/同run设备仍缺。ADB为空、零新设备操作，W3/R4/R5保持open、goalactive，源码未push。

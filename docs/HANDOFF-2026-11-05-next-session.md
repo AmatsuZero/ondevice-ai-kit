@@ -1,3 +1,7 @@
+## 2026-11-13：所有权恢复已提交并双端同步
+
+本地9498437精确10文件；GH#15comment6840767799/GL#15note44044/GHWiki1488f6af逐字回读，双Wiki SHA5590c9e3a5c41da1ff35a572006fa647c5c5c6d19052ee7a2426e30aaf82a82a一致，[收据](validation/w3-terminal-restore-sync-20261113.json)。marker已用勿重发，源码未push。全部本轮helper/测试/发布终态，无active请求；旧句柄勿poll。下一按restore-parent/next-driver-brief.md与adapter-Cbrief接完整driver/run校验/collection-policy/cleanupclosure，再当前双复核/新freeze/同run设备；325仅host、ADB为空、W3/R4/R5open、goalactive。
+
 ## 2026-11-13：所有权恢复已验收，下一完整驱动
 
 免费hy3 exact terminal_device_restore.py已集成；20新恢复父方法、完整201观察+16守卫+108终态=325/51AST通过，独立source reviewaccept。严格claims/null拒绝、冻结APK绑定、未知children/置换inode保留、逐文件marker最后恢复与精确resumeduser0已验，原RED/父夹具订正保留。[验证](validation/w3-terminal-restore-20261113.md)。旧120冻结/原失败/95其他/81源/两APK摘要保持；8任务pyc清理285942B。restore一次性且独立collection，未来零参cleanup须检查allRestored；完整driver/收取policy/当前双复核/新freeze/同run真机仍缺。下一restore-parent/next-driver-brief.md及adapter-Cbrief；所有本轮helper/test终态勿poll，无active请求。ADB为空、零新设备/推理，W3/R4/R5open、goalactive、源码未push。
