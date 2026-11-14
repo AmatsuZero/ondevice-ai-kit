@@ -1,3 +1,7 @@
+## 2026-11-14 W3其余三ABI构建日志补核
+
+免费hy3限定复核accept；新取三日志加原arm64，四ABI实际source33ca962/API27/NNAPI与LTO ON/mimalloc OFF逐行有证，四上传artifact ZIP摘要各与collect下载相等。[验证](validation/w3-ort-all-abi-20261114.md)。首gh转义保护拒收原错保留，只对日志文件启允许转义捕获，不向终端渲染；非provider/远端job失败。103保护/161freeze保持，无新二进制/构建/设备执行；ADB清单空、新run零prepare/消费。完整source-to-AAR/组成/生产通知和质量资源余门仍缺，W3/R4/R5open。全部本轮helper/父验收终态，goal active。
+
 ## 2026-11-14 W3四ABI补证已提交并双端同步
 
 本地6610d76精确11文件；GH#15comment6869554526/GL#15note44785/GHWikif8df415逐字回读，双Wiki SHA578c9272253ff6309c6536ca161835fab538025559bd8a82d6fa19bb4496e88a一致，[收据](validation/w3-ort-release-members-sync-20261114.json)。marker已用勿重发、源码未push；首次只读GH TLS超时保留。全部本轮下载/hy3/验收/发布终态，无活动句柄。新prepare/run未开始；ADB短读成功后fresh前置error:closed，待稳定连接再同新合同继续，不重放旧run。W3/R4/R5及质量资源/生产余门open，goal active。

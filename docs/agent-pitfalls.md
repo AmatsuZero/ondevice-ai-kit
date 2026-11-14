@@ -1,3 +1,7 @@
+## W3 gh日志：终端转义保护不是job失败（2026-11-14）
+
+三份公开ORT job日志的gh api初读均exit1/stdout0，stderr明确要求--allow-escape-sequences；不是provider429、远端构建失败或缺日志。按本机gh api --help，仅对三个精确日志请求加该输出选项并捕获到文件，三份完整原始字节exit0/stderr0；不向终端渲染原始控制序列，不改全局配置/凭据，保留首错误。对供助手的摘录逐行核原始log和SHA，不把CMake ON标志当实际CPU执行/静态组成。证据.omx/artifacts/w3-ort-all-abi-20261114/及[验证](validation/w3-ort-all-abi-20261114.md)。
+
 ## W3 TECNO准备：真实ADB参数重组与不存在包exit1（2026-11-14）
 
 原140freeze/376host通过后，真实prepare的`stat -c '%u %d %i'`仍远端拆参，stdout2000、stderr把%d/%i当文件；原fakeADB多argv保持token边界掩盖已知问题。自动恢复同类stat失败且把TECNO的`pm path`不存在包exit1/双空误判异常。零安装/模型传输/native；保留原restoration=false，仅二次核nonce/UID/dev/inode/唯一marker后精确rm marker+rmdir空目录，补充恢复不追改失败。未来三处stat单字符串shlex.join；包不存在仅exact int0/1且stdout/stderr exactemptybytes，其他错误/畸形保留。首候选错误删CR且只验prefix，4畸形真实RED；外部窄修后384方法/64AST/新161freeze通过，原140实际字节快照经历史guard证明。新run/output隔离，不重放原失败prepare/consumed FILE/heap、不改APK/Kotlin/预算。复审勿猜ctx语义：真实FILE call/text默认accepted0、非零先抛，rm也一样；补绑定与真实父夹具后hy3撤回medium/low。首绑定复现缺test ! -L支持/错误消息表示断言过严均保留，不改正确实现。新设备fresh前置途中ADB掉线，USB枚举不证明ADB/锁屏/授权。证据`.omx/artifacts/w3-terminal-{physical-20261114-0036,portability-20261114}/`、[验证](validation/w3-terminal-portability-20261114.md)。

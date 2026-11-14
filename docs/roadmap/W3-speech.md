@@ -1,3 +1,7 @@
+## 2026-11-14：四ABI构建参数与工件传递补证
+
+其余三实际job日志已补核：四ABI同source33ca962、API27/NNAPI/LTO/mimalloc OFF，四上传artifact ZIP摘要分别与collect下载一致；hy3限定复核accept，原转义输出拒收保留。[验证](../validation/w3-ort-all-abi-20261114.md)。不与组合ZIP摘要混比，不证明完整源码对应、实际allocator收益或发布接受；质量资源/生产余门及W3/R4/R5仍open，ADB空且新run未prepare/消费。
+
 ## 2026-11-14：ORT四ABI补证已双端同步
 
 6610d76精确11文件；GH#15comment6869554526/GL#15note44785/GHWikif8df415逐字回读，双Wiki摘要一致，[收据](../validation/w3-ort-release-members-sync-20261114.json)。marker已用、源码未push；成员字节对应成立，W3/R4/R5质量资源和生产余门仍open。新run零prepare/消费，等待ADB稳定后现合同继续。

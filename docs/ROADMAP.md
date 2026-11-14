@@ -1,3 +1,7 @@
+## 2026-11-14 W3：四ABI构建出处补核
+
+新补三ABI实际日志，四ABI源码/选定参数及artifact上传下载摘要逐行一致，hy3限定复核accept；[验证](validation/w3-ort-all-abi-20261114.md)。原失败、103保护与161freeze保持；未执行真机，W3/R4/R5质量资源和生产余门open。
+
 ## 2026-11-14 W3：四ABI补证同步收据
 
 本地6610d76精确11文件；双端Issue/Wiki已逐字回读、Wiki摘要一致，[收据](validation/w3-ort-release-members-sync-20261114.json)。源码未push；W3/R4/R5及完整质量资源/生产余门保持open。
