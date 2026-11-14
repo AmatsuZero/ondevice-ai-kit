@@ -1,3 +1,7 @@
+## 2026-11-14：主机修正已提交并双端同步
+
+本地c1af030精确25文件；GH#15comment6869202111、GL#15note44784、GH Wiki38f11b7均逐字回读，两Wiki摘要一致。[同步收据](../validation/w3-terminal-portability-sync-20261114.json)。marker已用勿重发，源码未push；384方法64AST/161新freeze通过仅代表host。当前USB见TECNO但ADB空/一次重启后e00002ed；新run未prepare/未消费，连接恢复后新合同fresh前置及单次文件诊断继续。W3/R4/R5与生产余门保持open。
+
 ## 2026-11-14：TECNO准备故障已恢复，隔离主机修正通过
 
 原单次prepare在18.925s因ADB stat拆参失败，零安装/传模型/解码；原false恢复报告保留，精确手动恢复补充已确认普通App/models不变。hy3候选修三处stat和TECNO空exit1包不存在语义，原RED保留；384方法/64AST、103保护摘要、16模块双复审通过，新161文件freeze已验。新run `w3-qwen-terminal-20261114-01`、独立输出、相同两APK/81准备源；原140快照经历史guard验证，不重写失败或重放旧FILE/heap。新fresh前置时ADB掉线，USB见TECNO但ADB空，零新prepare/消费。[验证与边界](../validation/w3-terminal-portability-20261114.md)。W3/R4/R5仍open；连接恢复后同新合同继续，质量/资源/生产发布余门不放宽。

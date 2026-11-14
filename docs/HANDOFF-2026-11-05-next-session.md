@@ -1,3 +1,7 @@
+## 2026-11-14 W3主机修正已提交并双端同步
+
+本地c1af030精确25文件，GH#15comment6869202111/GL#15note44784/GHWiki38f11b7已逐字回读，双Wiki SHA94efd66ac142ee27b915f3f765880bd460306102abbfd67e2ae7cd6db62e724f一致，[收据](validation/w3-terminal-portability-sync-20261114.json)。新marker已用勿重发，源码未push。全部本轮hy3/父测试/native复审/发布均终态，旧句柄勿poll；384方法64AST、新161freeze与原140快照、103dirty remainder均验。新20261114-01 preflight途中ADB掉线，USB见TECNO但ADB空，一次server重启仍e00002ed；新prepare/run未开始，勿重放旧失败prepare/FILE/heap。用户重新连接后fresh同新合同继续；W3/R4/R5与质量资源/生产余门open，goal active。
+
 ## 2026-11-14 W3真机准备失败已恢复，主机修正及新冻结已验收
 
 TECNO曾连接/解锁并通过fresh前置，但原prepare18.925s在ADB stat远端拆参失败，零安装/传模型/native；原restoration=false保留，精确marker+rmdir手动恢复补充确认普通六App/模型不变。免费hy3三stat引用+OEM pm path空exit1窄判已精确集成；旧4FAIL/首稿畸形4RED保留。新run `w3-qwen-terminal-20261114-01`/独立输出，384方法64AST/103保护摘要、16模块双复审接受、新161freeze守卫通过；两APK/81准备源同字节，原140完整快照经历史guard验证。新fresh前置中ADB掉线，当前USB仍见TECNO但ADB空，零新prepare/消费；不写成锁屏或授权错误。[验证](validation/w3-terminal-portability-20261114.md)。当前helper/父验收/复审终态；勿poll旧句柄、勿重放原FILE/heap/失败prepare。下一仅连接恢复后的新合同fresh前置及单次诊断，门限不变；W3/R4/R5及生产余门仍open，goal active。
