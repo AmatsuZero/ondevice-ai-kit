@@ -1,3 +1,7 @@
+## 2026-11-14 W3：ORT四ABI成员对应补证
+
+固定上游发布ZIP与Sherpa AAR四个ORT SO逐字节匹配，完整SHA/Python及Info-ZIP核验通过；[验证](validation/w3-ort-release-members-20261114.md)。仅补发布成员对应，不是完整source-to-AAR、组成/生产发布或W3接受。TECNO短读成功后fresh前置仍error:closed，零新prepare/消费；W3/R4/R5质量资源门保持。
+
 ## 2026-11-14 W3主机修正同步回读
 
 本地c1af030；GH#15comment6869202111/GL#15note44784/GHWiki38f11b7及双Wiki摘要一致，见[收据](validation/w3-terminal-portability-sync-20261114.json)。源码未push、marker已用；新合同384host/161freeze已验，USB见TECNO但ADB空/e00002ed，新prepare/run尚未开始，W3/R4/R5和真机/生产余门仍open。

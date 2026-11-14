@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-11-14T01:36:51.842337+00:00",
+  "helperVerdictPreserved": "revise",
+  "parentVerdict": "accept-bounded-observation",
+  "mediumDisposition": "Actual pinned archive has each of the four exact canonical jni paths. Independent Info-ZIP reads those exact paths and confirms SHA256 plus full byte equality. The suffix fallback therefore did not affect this observation; no claim of a general-purpose canonical-path verifier is accepted.",
+  "lowDisposition": "The success fields are reached only after four exact ABI targets, size/SHA256 and byte assertions. No asserts were weakened and Python optimization was not enabled. A hypothetical future weakening is outside this observed run.",
+  "helperExecutionClaimAccepted": false,
+  "scriptChangedAfterReview": false,
+  "independentParserVerification": "independent-unzip-verification.json",
+  "sourceToAarProvenanceVerified": false,
+  "W3Complete": false
+}

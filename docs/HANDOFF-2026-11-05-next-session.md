@@ -1,3 +1,7 @@
+## 2026-11-14 W3 ORT四ABI发布成员已核
+
+固定上游发布ZIP与现有Sherpa AAR四个ORT SO逐字节相同，完整归档SHA、Python/独立Info-ZIP两读通过；300s下载超时原错保留，一次精确206续传后才接受。hy3原revise及父限定裁定保留，不写成完整source-to-AAR或生产接受。[验证](validation/w3-ort-release-members-20261114.md)。103保护/161freeze保持；新合同三短读成功后preflight又error:closed，零新prepare/消费，不重放旧run或反复重启ADB。W3/R4/R5与完整真机质量/资源/生产余门open；全部本轮下载/复审/验收终态，goal active。
+
 ## 2026-11-14 W3主机修正已提交并双端同步
 
 本地c1af030精确25文件，GH#15comment6869202111/GL#15note44784/GHWiki38f11b7已逐字回读，双Wiki SHA94efd66ac142ee27b915f3f765880bd460306102abbfd67e2ae7cd6db62e724f一致，[收据](validation/w3-terminal-portability-sync-20261114.json)。新marker已用勿重发，源码未push。全部本轮hy3/父测试/native复审/发布均终态，旧句柄勿poll；384方法64AST、新161freeze与原140快照、103dirty remainder均验。新20261114-01 preflight途中ADB掉线，USB见TECNO但ADB空，一次server重启仍e00002ed；新prepare/run未开始，勿重放旧失败prepare/FILE/heap。用户重新连接后fresh同新合同继续；W3/R4/R5与质量资源/生产余门open，goal active。

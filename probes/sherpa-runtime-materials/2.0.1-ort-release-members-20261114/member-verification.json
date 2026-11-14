@@ -1,0 +1,59 @@
+{
+  "observedAt": "2026-11-14T01:35:47.491965+00:00",
+  "releaseAssetId": 544593317,
+  "releaseArchive": {
+    "path": "artifacts/verification/w3-ort-release-members-20261114/onnxruntime-android-1.28.2.zip",
+    "bytes": 33765715,
+    "sha256": "01518867f78241138b6aa25925802e843a4fa9085af8d303d49e35bbb52aff4d"
+  },
+  "sherpaAar": {
+    "path": "artifacts/verification/sherpa-asr-20261105/inputs/downloads/sherpa-onnx-2.0.1.aar",
+    "bytes": 49441341,
+    "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7"
+  },
+  "releaseZipEntries": 36,
+  "aarZipEntries": 26,
+  "members": [
+    {
+      "aarPath": "jni/arm64-v8a/libonnxruntime.so",
+      "releasePath": "jni/arm64-v8a/libonnxruntime.so",
+      "bytes": 22249560,
+      "releaseSHA256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+      "aarSHA256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+      "byteEqual": true
+    },
+    {
+      "aarPath": "jni/armeabi-v7a/libonnxruntime.so",
+      "releasePath": "jni/armeabi-v7a/libonnxruntime.so",
+      "bytes": 15359592,
+      "releaseSHA256": "7a8f17a707e52e0ac3a026be319272876d9eae61f4bb19585292772d785f7744",
+      "aarSHA256": "7a8f17a707e52e0ac3a026be319272876d9eae61f4bb19585292772d785f7744",
+      "byteEqual": true
+    },
+    {
+      "aarPath": "jni/x86/libonnxruntime.so",
+      "releasePath": "jni/x86/libonnxruntime.so",
+      "bytes": 26491148,
+      "releaseSHA256": "fcb6cd80415f7951e58fdd8158a238946dce3710d5fee492b67174d5131f9eee",
+      "aarSHA256": "fcb6cd80415f7951e58fdd8158a238946dce3710d5fee492b67174d5131f9eee",
+      "byteEqual": true
+    },
+    {
+      "aarPath": "jni/x86_64/libonnxruntime.so",
+      "releasePath": "jni/x86_64/libonnxruntime.so",
+      "bytes": 25581120,
+      "releaseSHA256": "087e84297cad64acb823c3d901d6e0cc934e91add7cdb20da802cd1c0bea5c3e",
+      "aarSHA256": "087e84297cad64acb823c3d901d6e0cc934e91add7cdb20da802cd1c0bea5c3e",
+      "byteEqual": true
+    }
+  ],
+  "allFourMembersByteEqual": true,
+  "fullSourceToAarProvenanceVerified": false,
+  "recursiveStaticCompositionVerified": false,
+  "productionNoticeRetentionVerified": false,
+  "independentReleaseAcceptanceVerified": false,
+  "deviceOperations": 0,
+  "runtimeReplacement": false,
+  "W3Complete": false,
+  "R4R5Accepted": false
+}

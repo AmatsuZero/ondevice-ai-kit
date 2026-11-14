@@ -1,0 +1,17 @@
+{
+  "startedAt": "2026-11-14T01:34:10.280377+00:00",
+  "url": "https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-android-1.28.2.zip",
+  "rangeStart": 23739891,
+  "expectedTotal": 33765715,
+  "automaticRetries": 0,
+  "status": 206,
+  "contentRange": "bytes 23739891-33765714/33765715",
+  "contentLength": "10025824",
+  "success": true,
+  "tailBytes": 10025824,
+  "tailSHA256": "107a3012e8930ea2dcee28041159ad55a652ad4ba7070318238698211998dd6e",
+  "completeBytes": 33765715,
+  "completeSHA256": "01518867f78241138b6aa25925802e843a4fa9085af8d303d49e35bbb52aff4d",
+  "originalPartialPreserved": true,
+  "finishedAt": "2026-11-14T01:35:29.342062+00:00"
+}

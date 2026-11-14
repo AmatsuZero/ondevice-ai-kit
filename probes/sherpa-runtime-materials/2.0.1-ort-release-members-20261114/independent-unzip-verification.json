@@ -1,0 +1,34 @@
+{
+  "observedAt": "2026-11-14T01:36:16.058240+00:00",
+  "members": [
+    {
+      "path": "jni/arm64-v8a/libonnxruntime.so",
+      "bytes": 22249560,
+      "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+      "independentParser": "Info-ZIP unzip -p",
+      "byteEqual": true
+    },
+    {
+      "path": "jni/armeabi-v7a/libonnxruntime.so",
+      "bytes": 15359592,
+      "sha256": "7a8f17a707e52e0ac3a026be319272876d9eae61f4bb19585292772d785f7744",
+      "independentParser": "Info-ZIP unzip -p",
+      "byteEqual": true
+    },
+    {
+      "path": "jni/x86/libonnxruntime.so",
+      "bytes": 26491148,
+      "sha256": "fcb6cd80415f7951e58fdd8158a238946dce3710d5fee492b67174d5131f9eee",
+      "independentParser": "Info-ZIP unzip -p",
+      "byteEqual": true
+    },
+    {
+      "path": "jni/x86_64/libonnxruntime.so",
+      "bytes": 25581120,
+      "sha256": "087e84297cad64acb823c3d901d6e0cc934e91add7cdb20da802cd1c0bea5c3e",
+      "independentParser": "Info-ZIP unzip -p",
+      "byteEqual": true
+    }
+  ],
+  "allFourEqual": true
+}
