@@ -14,22 +14,22 @@ sys.path[:0]=[str(Path(__file__).resolve().parent),
               str(ROOT/'probes/android-terminal-observation')]
 import test_terminal_startup_parent as startup_fixture
 
-RUN='w3-qwen-terminal-20261112-01'
+RUN='w3-qwen-terminal-20261114-01'
 APP='io.ondeviceai.acceptance.qwenterminal'
 RUNNER=APP+'.test/io.ondeviceai.acceptance.qwenfile.QwenTerminalInstrumentation'
 INSTRUMENT=r'''
 if sys.argv[3:8]==['shell','am','instrument','-w','-r']:
-    assert sys.argv[8:]==['-e','runId','w3-qwen-terminal-20261112-01','-e','sourceFingerprint','a'*64,'io.ondeviceai.acceptance.qwenterminal.test/io.ondeviceai.acceptance.qwenfile.QwenTerminalInstrumentation']
+    assert sys.argv[8:]==['-e','runId','w3-qwen-terminal-20261114-01','-e','sourceFingerprint','a'*64,'io.ondeviceai.acceptance.qwenterminal.test/io.ondeviceai.acceptance.qwenfile.QwenTerminalInstrumentation']
     import time,hashlib
     (p/'child-started').touch()
     mode=(p/'finish-mode').read_text() if (p/'finish-mode').exists() else 'ok'
     if mode=='early': sys.exit(0)
     deadline=time.monotonic()+10
-    ack=p/'remote/files/w3-qwen-terminal/ack-w3-qwen-terminal-20261112-01.txt'
+    ack=p/'remote/files/w3-qwen-terminal/ack-w3-qwen-terminal-20261114-01.txt'
     while not ack.exists():
         if time.monotonic()>deadline: sys.exit(22)
         time.sleep(.005)
-    report=(p/'remote/files/w3-qwen-terminal/report-w3-qwen-terminal-20261112-01.json').read_bytes()
+    report=(p/'remote/files/w3-qwen-terminal/report-w3-qwen-terminal-20261114-01.json').read_bytes()
     value=json.loads(report)
     print('INSTRUMENTATION_RESULT: terminalAckAttempted=true')
     print('INSTRUMENTATION_RESULT: terminalAckReceived='+('false' if mode=='bad-ack' else 'true'))

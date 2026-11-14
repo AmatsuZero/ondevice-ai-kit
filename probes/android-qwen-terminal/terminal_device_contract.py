@@ -15,10 +15,10 @@ import os
 import stat
 from pathlib import Path
 
-OUTPUT = 'artifacts/verification/w3-qwen-terminal-20261112'
+OUTPUT = 'artifacts/verification/w3-qwen-terminal-20261114'
 FP = 'ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5'
 APP = 'io.ondeviceai.acceptance.qwenterminal'
-RUN = 'w3-qwen-terminal-20261112-01'
+RUN = 'w3-qwen-terminal-20261114-01'
 RUNNER = APP + '.test/io.ondeviceai.acceptance.qwenfile.QwenTerminalInstrumentation'
 BUDGETS = dict(maxRssBytes=1610612736, minAvailableBytes=536870912,
                minInitialAvailableBytes=2147483648, phaseSeconds=120,
@@ -54,8 +54,8 @@ REQUIRED |= {'probes/android-qwen-file/device_acceptance.py', 'probes/android-qw
              '.omx/artifacts/w3-model-reselection-20261110/android-target-local.json',
              'docs/superpowers/specs/2026-11-12-w3-terminal-observation-design.md',
              'docs/superpowers/plans/2026-11-12-w3-terminal-observation.md'}
-REVIEWS = ('docs/validation/w3-qwen-terminal-driver-source-review-20261112.json',
-           'docs/validation/w3-qwen-terminal-driver-parent-review-20261112.json')
+REVIEWS = ('docs/validation/w3-qwen-terminal-driver-source-review-20261114.json',
+           'docs/validation/w3-qwen-terminal-driver-parent-review-20261114.json')
 REVIEWED = {'probes/android-qwen-terminal/' + n for n in DRIVERS}
 REVIEWED |= {'probes/android-terminal-observation/' + n for n in OBS}
 LOCAL = ('main.apk', 'test.apk', 'package-verified.json', 'candidate-accepted.json',

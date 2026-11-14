@@ -68,7 +68,7 @@ class TerminalSourceAdapterParent(unittest.TestCase):
     def fake_context(self):
         temp=tempfile.TemporaryDirectory(prefix='terminal-adapter-parent-');self.addCleanup(temp.cleanup)
         root=Path(temp.name).resolve();out=root/'out';evidence=root/'evidence';out.mkdir();evidence.mkdir()
-        fp='a'*64;run='w3-qwen-terminal-20261112-01';app='io.ondeviceai.acceptance.qwenterminal'
+        fp='a'*64;run='w3-qwen-terminal-20261114-01';app='io.ondeviceai.acceptance.qwenterminal'
         for name,value in [('package-verified.json',{'sourceFingerprint':fp,'files':{}}),('candidate-accepted.json',{'sourceFiles':{}}),('production-before.json',{}),('run-plan.json',{'runId':run,'sourceFingerprint':fp,'manifestSHA256':'8d1cfd7465e70f413b741701250d61c31170b25a6978a256a4df0349efa0910f','maxNativeDecodeCalls':2,'caseCount':1})]:
             (out/name).write_text(json.dumps(value))
         (evidence/'android-target-local.json').write_text(json.dumps({'serial':'fake-serial'}))
@@ -127,8 +127,8 @@ else:raise AssertionError(args)
         ns=self.namespace()
         self.assertEqual(ns['APP'],'io.ondeviceai.acceptance.qwenterminal')
         self.assertEqual(ns['TEST'],ns['APP']+'.test')
-        self.assertEqual(ns['RUN'],'w3-qwen-terminal-20261112-01')
-        self.assertEqual(ns['OUT'],ROOT/'artifacts/verification/w3-qwen-terminal-20261112')
+        self.assertEqual(ns['RUN'],'w3-qwen-terminal-20261114-01')
+        self.assertEqual(ns['OUT'],ROOT/'artifacts/verification/w3-qwen-terminal-20261114')
         self.assertEqual(ns['REPORT'],'files/w3-qwen-terminal/report-'+ns['RUN']+'.json')
         self.assertEqual(ns['RUNNER'],ns['TEST']+'/io.ondeviceai.acceptance.qwenfile.QwenTerminalInstrumentation')
 

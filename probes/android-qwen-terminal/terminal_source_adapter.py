@@ -4,11 +4,11 @@ import hashlib
 PINNED_SHA256 = 'b7a8a7084b92d86382fa096656c09339b5267ac8bb972968610a9fffacb11435'
 
 _OLD_OUT = "OUT = ROOT / 'artifacts/verification/w3-qwen-file-20261111'"
-_NEW_OUT = "OUT = ROOT / 'artifacts/verification/w3-qwen-terminal-20261112'"
+_NEW_OUT = "OUT = ROOT / 'artifacts/verification/w3-qwen-terminal-20261114'"
 _OLD_APP = "APP = 'io.ondeviceai.acceptance.qwenfile'"
 _NEW_APP = "APP = 'io.ondeviceai.acceptance.qwenterminal'"
 _OLD_RUN = "RUN = 'w3-qwen-file-20261111-01'"
-_NEW_RUN = "RUN = 'w3-qwen-terminal-20261112-01'"
+_NEW_RUN = "RUN = 'w3-qwen-terminal-20261114-01'"
 _OLD_REPORT = "REPORT = 'files/w3-qwen-file/report-' + RUN + '.json'"
 _NEW_REPORT = "REPORT = 'files/w3-qwen-terminal/report-' + RUN + '.json'"
 _OLD_RUNNER = "RUNNER = TEST + '/' + APP + '.QwenFileInstrumentation'"

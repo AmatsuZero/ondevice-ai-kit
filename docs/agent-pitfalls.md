@@ -1,3 +1,7 @@
+## W3 TECNO准备：真实ADB参数重组与不存在包exit1（2026-11-14）
+
+原140freeze/376host通过后，真实prepare的`stat -c '%u %d %i'`仍远端拆参，stdout2000、stderr把%d/%i当文件；原fakeADB多argv保持token边界掩盖已知问题。自动恢复同类stat失败且把TECNO的`pm path`不存在包exit1/双空误判异常。零安装/模型传输/native；保留原restoration=false，仅二次核nonce/UID/dev/inode/唯一marker后精确rm marker+rmdir空目录，补充恢复不追改失败。未来三处stat单字符串shlex.join；包不存在仅exact int0/1且stdout/stderr exactemptybytes，其他错误/畸形保留。首候选错误删CR且只验prefix，4畸形真实RED；外部窄修后384方法/64AST/新161freeze通过，原140实际字节快照经历史guard证明。新run/output隔离，不重放原失败prepare/consumed FILE/heap、不改APK/Kotlin/预算。复审勿猜ctx语义：真实FILE call/text默认accepted0、非零先抛，rm也一样；补绑定与真实父夹具后hy3撤回medium/low。首绑定复现缺test ! -L支持/错误消息表示断言过严均保留，不改正确实现。新设备fresh前置途中ADB掉线，USB枚举不证明ADB/锁屏/授权。证据`.omx/artifacts/w3-terminal-{physical-20261114-0036,portability-20261114}/`、[验证](validation/w3-terminal-portability-20261114.md)。
+
 ## W3复审组包：复用校验器先核路径合同（2026-11-13）
 
 父首包纳入两份原`.github/workflows`支撑文本，既有nexus_notice_materials对组件首字符的约束实际拒收ValueError；原文/hash无漂移，不能改正确校验器迁就组包。保留原失败collection/索引/脚本及可重复拒收，只把这两支撑路径映射为github-source，supportFiles.repositoryPath保留原位置，57许可/声明仍原路径原字节。修后141文件/8链接/ZIP逐成员/独立再打包通过，两隔离复制件的同长篡改与删除均拒收；只是文本保留，不等于最终组成/生产包保留/发布接受。证据`.omx/artifacts/w3-release-review-20261113/`及docs/validation/w3-release-review-materials-20261113.md。

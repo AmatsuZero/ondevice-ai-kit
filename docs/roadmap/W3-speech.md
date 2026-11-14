@@ -1,3 +1,7 @@
+## 2026-11-14：TECNO准备故障已恢复，隔离主机修正通过
+
+原单次prepare在18.925s因ADB stat拆参失败，零安装/传模型/解码；原false恢复报告保留，精确手动恢复补充已确认普通App/models不变。hy3候选修三处stat和TECNO空exit1包不存在语义，原RED保留；384方法/64AST、103保护摘要、16模块双复审通过，新161文件freeze已验。新run `w3-qwen-terminal-20261114-01`、独立输出、相同两APK/81准备源；原140快照经历史guard验证，不重写失败或重放旧FILE/heap。新fresh前置时ADB掉线，USB见TECNO但ADB空，零新prepare/消费。[验证与边界](../validation/w3-terminal-portability-20261114.md)。W3/R4/R5仍open；连接恢复后同新合同继续，质量/资源/生产发布余门不放宽。
+
 ## 2026-11-13 复审材料已提交并双端同步
 
 本地fb8b038精确9文件；GH#15comment6852524086/GL#15note44721/GHWikiffbebdd0逐字回读，双Wiki SHA6b0afb78095b3aa6b1d22a6377a6cbd5b97216ed869a8dbcde2e62030fc9ad5e一致，[收据](../validation/w3-release-review-materials-sync-20261113.json)。marker已用勿重发、源码未push；141文本包只是字节保留，完整真机质量/资源、最终组成/生产通知/发布仍缺，W3/R4/R5open。原140终态freeze与未消费run保持。

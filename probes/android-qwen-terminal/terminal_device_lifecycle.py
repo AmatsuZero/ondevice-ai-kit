@@ -346,7 +346,7 @@ def run_diagnostic(root, *, adb, serial, source_fingerprint, verify_launch,
     import terminal_file_io as _tf
 
     APP = 'io.ondeviceai.acceptance.qwenterminal'
-    RUN = 'w3-qwen-terminal-20261112-01'
+    RUN = 'w3-qwen-terminal-20261114-01'
     RUNNER = APP + '.test/io.ondeviceai.acceptance.qwenfile.QwenTerminalInstrumentation'
 
     def _require_callable(name, value, allow_none):

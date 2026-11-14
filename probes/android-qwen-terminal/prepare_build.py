@@ -7,7 +7,7 @@ import shutil
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT/'artifacts/verification/w3-qwen-terminal-20261112'
+OUT = ROOT/'artifacts/verification/w3-qwen-terminal-20261114'
 OLD = ROOT/'artifacts/verification/w3-qwen-file-20261111'
 SHARED_MAIN = ('QwenTwoStageCore.kt', 'QwenFileActivity.kt', 'QwenFileInputs.kt',
                'QwenFileReport.kt', 'QwenLoadCore.kt')

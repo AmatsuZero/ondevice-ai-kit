@@ -1,3 +1,7 @@
+## 2026-11-14 W3真机准备失败已恢复，主机修正及新冻结已验收
+
+TECNO曾连接/解锁并通过fresh前置，但原prepare18.925s在ADB stat远端拆参失败，零安装/传模型/native；原restoration=false保留，精确marker+rmdir手动恢复补充确认普通六App/模型不变。免费hy3三stat引用+OEM pm path空exit1窄判已精确集成；旧4FAIL/首稿畸形4RED保留。新run `w3-qwen-terminal-20261114-01`/独立输出，384方法64AST/103保护摘要、16模块双复审接受、新161freeze守卫通过；两APK/81准备源同字节，原140完整快照经历史guard验证。新fresh前置中ADB掉线，当前USB仍见TECNO但ADB空，零新prepare/消费；不写成锁屏或授权错误。[验证](validation/w3-terminal-portability-20261114.md)。当前helper/父验收/复审终态；勿poll旧句柄、勿重放原FILE/heap/失败prepare。下一仅连接恢复后的新合同fresh前置及单次诊断，门限不变；W3/R4/R5及生产余门仍open，goal active。
+
 ## 2026-11-13 W3复审材料已提交并同步
 
 fb8b038精确9文件；GH#15comment6852524086/GL#15note44721/GHWikiffbebdd0逐字回读，双Wiki SHA6b0afb78095b3aa6b1d22a6377a6cbd5b97216ed869a8dbcde2e62030fc9ad5e一致，[收据](validation/w3-release-review-materials-sync-20261113.json)。marker已用勿重发、源码未push；全部本轮helper/包验收/发布终态，不poll旧句柄。141文本包非发布接受，原140freeze及未消费terminalrun保持；当前goalactive，下一fresh设备前置与固定同run验收，质量资源/生产余门仍缺，W3/R4/R5open。

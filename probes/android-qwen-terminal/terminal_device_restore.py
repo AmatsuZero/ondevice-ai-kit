@@ -15,6 +15,7 @@ no effect is taken without a matching durable proof of prior ownership.
 
 import json
 import re
+import shlex
 from pathlib import Path
 
 import terminal_file_io as tf
@@ -22,7 +23,7 @@ from adb_terminal_observation import _preflight_outputs
 
 APP = 'io.ondeviceai.acceptance.qwenterminal'
 TEST = APP + '.test'
-RUN = 'w3-qwen-terminal-20261112-01'
+RUN = 'w3-qwen-terminal-20261114-01'
 STAGE = '/data/local/tmp/' + RUN
 FIXED_FP = 'ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5'
 NONCE_RE = re.compile(r'^[0-9a-f]{32}$')
@@ -338,10 +339,45 @@ def _verify_pre(ctx, receipt, before):
     return True
 
 
+def _alias_absent(ctx, alias):
+    proc = ctx['call']('shell', 'pm', 'path', alias, accepted=(0, 1))
+    if type(proc.returncode) is not int or proc.returncode not in (0, 1):
+        raise RuntimeError('pm path unexpected returncode: ' + alias)
+    out = proc.stdout
+    err = proc.stderr
+    if type(out) is not bytes or type(err) is not bytes:
+        raise RuntimeError('pm path non-bytes output: ' + alias)
+    if out == b'' and err == b'':
+        return True
+    if err != b'':
+        raise RuntimeError('pm path produced stderr: ' + alias)
+    if proc.returncode != 0:
+        raise RuntimeError('pm path nonzero with output: ' + alias)
+    try:
+        text = out.decode('utf-8')
+    except UnicodeDecodeError as exc:
+        raise RuntimeError('pm path non-UTF-8 output: ' + alias) from exc
+    lines = text.split('\n')
+    if lines and lines[-1] == '':
+        lines.pop()
+    if not lines:
+        raise RuntimeError('pm path empty package list: ' + alias)
+    for line in lines:
+        for ch in line:
+            o = ord(ch)
+            if o < 0x20 or o == 0x7f or ch.isspace():
+                raise RuntimeError('pm path control byte in output: ' + alias)
+        if line == '':
+            raise RuntimeError('pm path blank line: ' + alias)
+        if not line.startswith('package:/') or not line.endswith('.apk'):
+            raise RuntimeError('pm path malformed line: ' + alias)
+        if line[len('package:/'): -len('.apk')] == '':
+            raise RuntimeError('pm path empty path: ' + alias)
+    return False
+
+
 def _recover_alias(ctx, receipt, install_claims, alias):
-    path_out = ctx['text']('shell', 'pm', 'path', alias)
-    present = path_out.strip() != '' and 'package:' in path_out
-    if not present:
+    if _alias_absent(ctx, alias):
         receipt['operations'].append({'op': 'alias-absent', 'alias': alias})
         return True
     claim = install_claims.get(alias)
@@ -364,8 +400,7 @@ def _recover_alias(ctx, receipt, install_claims, alias):
         receipt['operations'].append({'op': 'force-stop', 'alias': alias})
     result = ctx['text']('shell', 'pm', 'uninstall', alias, timeout=60)
     receipt['operations'].append({'op': 'uninstall', 'alias': alias, 'result': result})
-    after = ctx['text']('shell', 'pm', 'path', alias)
-    if result != 'Success' or after.strip() != '':
+    if result != 'Success' or not _alias_absent(ctx, alias):
         raise RuntimeError('uninstall not verified for ' + alias + ': result=' + str(result))
     receipt['operations'].append({'op': 'alias-removed', 'alias': alias})
     return True
@@ -403,7 +438,7 @@ def _recover_stage(ctx, root, receipt, before):
     if type(marker) is not bytes or len(marker) != 33 or marker != (stage_claim['nonce'] + '\n').encode('ascii'):
         receipt['errors'].append('marker token mismatch, retaining whole stage')
         return False
-    stat = ctx['text']('shell', 'stat', '-c', '%u %d %i', STAGE).split()
+    stat = ctx['text']('shell', shlex.join(['stat', '-c', '%u %d %i', STAGE])).split()
     if len(stat) != 3 or not all(re.fullmatch(r'(?:0|[1-9][0-9]*)', s) for s in stat):
         receipt['errors'].append('stage stat field invalid, retaining whole stage')
         return False
@@ -472,7 +507,7 @@ def _recover_stage(ctx, root, receipt, before):
     if type(remarker) is not bytes or len(remarker) != 33 or remarker != (stage_claim['nonce'] + '\n').encode('ascii'):
         receipt['errors'].append('marker token mismatch before delete, retaining whole stage')
         return False
-    restat = ctx['text']('shell', 'stat', '-c', '%u %d %i', STAGE).split()
+    restat = ctx['text']('shell', shlex.join(['stat', '-c', '%u %d %i', STAGE])).split()
     if len(restat) != 3 or not all(re.fullmatch(r'(?:0|[1-9][0-9]*)', s) for s in restat):
         receipt['errors'].append('stage stat field invalid before delete, retaining whole stage')
         return False

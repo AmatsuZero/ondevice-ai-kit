@@ -9,7 +9,7 @@ from adb_terminal_observation import _preflight_outputs
 
 APP = 'io.ondeviceai.acceptance.qwenterminal'
 TEST = APP + '.test'
-RUN = 'w3-qwen-terminal-20261112-01'
+RUN = 'w3-qwen-terminal-20261114-01'
 STAGE = '/data/local/tmp/' + RUN
 MODEL = 'no_backup/qwen3-asr-0.6b-int8-393f8a14'
 FIXED_FP = 'ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5'
@@ -200,7 +200,7 @@ def prepare(root, ctx, *, serial, cleanup, nonce_factory=default_uuid4_hex):
         if type(marker) is not bytes or len(marker) != 33 or marker != (nonce + '\n').encode('ascii'):
             raise RuntimeError('marker read mismatch')
         import re
-        stat = ctx['text']('shell', 'stat', '-c', '%u %d %i', STAGE).split()
+        stat = ctx['text']('shell', shlex.join(['stat', '-c', '%u %d %i', STAGE])).split()
         if len(stat) != 3 or not all(re.fullmatch(r'(?:0|[1-9][0-9]*)', s) for s in stat):
             raise RuntimeError('stage stat field mismatch')
         uid, dev, ino = int(stat[0]), int(stat[1]), int(stat[2])

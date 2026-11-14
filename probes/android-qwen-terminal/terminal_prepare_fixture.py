@@ -14,7 +14,7 @@ from terminal_file_io import read_stable,write_new_durable
 
 APP='io.ondeviceai.acceptance.qwenterminal'
 TEST=APP+'.test'
-RUN='w3-qwen-terminal-20261112-01'
+RUN='w3-qwen-terminal-20261114-01'
 FP='ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5'
 STAGE='/data/local/tmp/'+RUN
 MODEL='no_backup/qwen3-asr-0.6b-int8-393f8a14'
@@ -25,7 +25,7 @@ import hashlib,json,os,shlex,shutil,sys
 from pathlib import Path
 p=Path(__file__).resolve().parent
 APP='io.ondeviceai.acceptance.qwenterminal';TEST=APP+'.test'
-RUN='w3-qwen-terminal-20261112-01';STAGE='/data/local/tmp/'+RUN
+RUN='w3-qwen-terminal-20261114-01';STAGE='/data/local/tmp/'+RUN
 args=sys.argv[1:];assert args[:2]==['-s','serial-01'];a=args[2:]
 with (p/'calls.jsonl').open('a') as f:f.write(json.dumps(a)+'\n')
 out=p/'out';device=p/'device'

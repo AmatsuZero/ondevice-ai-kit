@@ -15,11 +15,11 @@ from terminal_source_adapter import adapt_source
 from adb_terminal_observation import _preflight_outputs
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / 'artifacts/verification/w3-qwen-terminal-20261112'
+OUT = ROOT / 'artifacts/verification/w3-qwen-terminal-20261114'
 EVIDENCE = ROOT / '.omx/artifacts/w3-model-reselection-20261110'
 APP = 'io.ondeviceai.acceptance.qwenterminal'
 TEST = APP + '.test'
-RUN = 'w3-qwen-terminal-20261112-01'
+RUN = 'w3-qwen-terminal-20261114-01'
 STAGE = '/data/local/tmp/' + RUN
 REPORT = 'files/w3-qwen-terminal/report-' + RUN + '.json'
 RUNNER = TEST + '/io.ondeviceai.acceptance.qwenfile.QwenTerminalInstrumentation'

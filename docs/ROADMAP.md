@@ -1,3 +1,7 @@
+## 2026-11-14 W3隔离主机修正
+
+TECNO原prepare因远端stat参数/恢复pm path语义失败且零解码，原失败保留、手动恢复补充已验。hy3候选修正经384方法64AST/103保护/16模块双复审，新161freeze读回通过；旧140快照历史guard及相同两APK/81源保持。新20261114-01合同fresh前置遇ADB device not found，USB仍可见、ADB空，零新prepare/消费。[验证](validation/w3-terminal-portability-20261114.md)。W3/R4/R5和完整真机质量/资源/生产余门仍open。
+
 ## 2026-11-13 W3复审材料同步完成
 
 fb8b038已记录GH#15comment6852524086/GL#15note44721/GHWikiffbebdd0，两Wiki逐字回读同SHA；[收据](validation/w3-release-review-materials-sync-20261113.json)。材料141文件已验、源码未push，真机与生产余门保持open。

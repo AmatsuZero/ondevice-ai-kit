@@ -23,7 +23,7 @@ if os.environ.get('ODAI_POLICY_COLLECT_SOURCE'):
     spec.loader.exec_module(terminal_device_collect)
 
 APP = 'io.ondeviceai.acceptance.qwenterminal'
-RUN = 'w3-qwen-terminal-20261112-01'
+RUN = 'w3-qwen-terminal-20261114-01'
 POLICY = b'EnableCpuMemArena=0\n'
 REL = 'no_backup/cpu-arena-off/cpu.config'
 FRAMEWORK = '/data/data/' + APP + '/no_backup'

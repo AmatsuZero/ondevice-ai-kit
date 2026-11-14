@@ -13,7 +13,7 @@ from adb_terminal_observation import _preflight_outputs
 from adb_terminal_report_reader import AdbTerminalReportReader
 
 APP = 'io.ondeviceai.acceptance.qwenterminal'
-RUN = 'w3-qwen-terminal-20261112-01'
+RUN = 'w3-qwen-terminal-20261114-01'
 FIXED_FP = 'ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5'
 MODEL = 'no_backup/qwen3-asr-0.6b-int8-393f8a14'
 REPORT = 'files/w3-qwen-terminal/report-' + RUN + '.json'

@@ -6,7 +6,7 @@ import json
 import sys
 
 ROOT=Path(__file__).resolve().parents[2]
-OUT=ROOT/'artifacts/verification/w3-qwen-terminal-20261112'
+OUT=ROOT/'artifacts/verification/w3-qwen-terminal-20261114'
 BASE=ROOT/'probes/android-qwen-file/build_acceptance.py'
 
 
@@ -59,7 +59,7 @@ def verify_prepared(action):
 def driver_source():
     source=BASE.read_text()
     source=replace_once(source,"OUT = ROOT / 'artifacts/verification/w3-qwen-file-20261111'",
-                         "OUT = ROOT / 'artifacts/verification/w3-qwen-terminal-20261112'")
+                         "OUT = ROOT / 'artifacts/verification/w3-qwen-terminal-20261114'")
     source=replace_once(source,"'io.ondeviceai.acceptance.qwenfile',","'io.ondeviceai.acceptance.qwenterminal',")
     source=replace_once(source,"'io.ondeviceai.acceptance.qwenfile.test', ['QwenFileInstrumentation']",
                          "'io.ondeviceai.acceptance.qwenterminal.test', ['QwenTerminalInstrumentation', 'TerminalAckFile', 'TerminalObservationBinding', 'TerminalObservationBarrier']")
