@@ -1,3 +1,7 @@
+## 2026-11-14：四ABI出处同步，ADB替代后端未恢复
+
+da36cb0已双端Issue/Wiki逐字回读、Wiki摘要一致，[收据](../validation/w3-ort-all-abi-sync-20261114.json)。一次实际libusb后端三读仍not found，现已恢复NATIVE，mdns为空；[恢复证据](../validation/w3-adb-libusb-20261114.md)。新run零prepare/消费，等外部连接状态改变再fresh前置；不重复重启、不把USB枚举当ADB可用。质量资源/生产余门及W3/R4/R5保持open。
+
 ## 2026-11-14：四ABI构建参数与工件传递补证
 
 其余三实际job日志已补核：四ABI同source33ca962、API27/NNAPI/LTO/mimalloc OFF，四上传artifact ZIP摘要分别与collect下载一致；hy3限定复核accept，原转义输出拒收保留。[验证](../validation/w3-ort-all-abi-20261114.md)。不与组合ZIP摘要混比，不证明完整源码对应、实际allocator收益或发布接受；质量资源/生产余门及W3/R4/R5仍open，ADB空且新run未prepare/消费。

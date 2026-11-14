@@ -1,3 +1,7 @@
+## 2026-11-14 W3四ABI同步与一次ADB后端恢复尝试
+
+da36cb0精确8文件；GH#15comment6869759662/GL#15note44786/GHWiki77eea1e逐字回读，双Wiki SHA84c1cae1a309a33a6b08bbbcecaf8ef90d980f4834cd6a9324bc863bc5cf4eb2一致，[收据](validation/w3-ort-all-abi-sync-20261114.json)。首次GL notes GET EOF保留，marker已用勿重发、源码未push。随后USB仍见TECNO，官方手册/本机确证下仅一次ADB_LIBUSB=1实际启用，但三读仍device not found；已恢复NATIVE且mdns服务空，[恢复尝试](validation/w3-adb-libusb-20261114.md)。不再切换/重启循环，不推断锁屏/授权/线材根因；新合同零prepare/消费，待外部连接状态改变。103保护/161freeze保持，W3/R4/R5与质量资源/生产余门open，goal active。全部本轮helper/服务试验/发布终态。
+
 ## 2026-11-14 W3其余三ABI构建日志补核
 
 免费hy3限定复核accept；新取三日志加原arm64，四ABI实际source33ca962/API27/NNAPI与LTO ON/mimalloc OFF逐行有证，四上传artifact ZIP摘要各与collect下载相等。[验证](validation/w3-ort-all-abi-20261114.md)。首gh转义保护拒收原错保留，只对日志文件启允许转义捕获，不向终端渲染；非provider/远端job失败。103保护/161freeze保持，无新二进制/构建/设备执行；ADB清单空、新run零prepare/消费。完整source-to-AAR/组成/生产通知和质量资源余门仍缺，W3/R4/R5open。全部本轮helper/父验收终态，goal active。

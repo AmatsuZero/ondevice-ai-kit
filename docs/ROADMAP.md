@@ -1,3 +1,7 @@
+## 2026-11-14 W3：出处补证同步与ADB恢复边界
+
+四ABI日志补核已双端同步回读，[收据](validation/w3-ort-all-abi-sync-20261114.json)。一次libusb主机后端恢复未成功、NATIVE已恢复，无新prepare/解码；[证据](validation/w3-adb-libusb-20261114.md)。W3/R4/R5质量资源和生产余门保持，待设备连接恢复。
+
 ## 2026-11-14 W3：四ABI构建出处补核
 
 新补三ABI实际日志，四ABI源码/选定参数及artifact上传下载摘要逐行一致，hy3限定复核accept；[验证](validation/w3-ort-all-abi-20261114.md)。原失败、103保护与161freeze保持；未执行真机，W3/R4/R5质量资源和生产余门open。
