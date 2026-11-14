@@ -1,3 +1,7 @@
+## 2026-11-14：ORT四ABI补证已双端同步
+
+6610d76精确11文件；GH#15comment6869554526/GL#15note44785/GHWikif8df415逐字回读，双Wiki摘要一致，[收据](../validation/w3-ort-release-members-sync-20261114.json)。marker已用、源码未push；成员字节对应成立，W3/R4/R5质量资源和生产余门仍open。新run零prepare/消费，等待ADB稳定后现合同继续。
+
 ## 2026-11-14：四ABI ORT发布成员与AAR逐字节对应
 
 固定ZIP完整SHA通过，四SO的SHA和字节经Python/独立Info-ZIP均匹配，补齐此前仅成员大小的缺口；下载超时/精确206恢复与hy3原revise、父限定裁定保留。[验证](../validation/w3-ort-release-members-20261114.md)。这不证明完整源码对应、递归静态组成或生产发布接受。103保护/161freeze保持，新真机前置仍error:closed、零prepare/消费；W3/R4/R5及质量资源/生产余门open。

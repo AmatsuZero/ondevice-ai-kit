@@ -1,3 +1,7 @@
+## 2026-11-14 W3：四ABI补证同步收据
+
+本地6610d76精确11文件；双端Issue/Wiki已逐字回读、Wiki摘要一致，[收据](validation/w3-ort-release-members-sync-20261114.json)。源码未push；W3/R4/R5及完整质量资源/生产余门保持open。
+
 ## 2026-11-14 W3：ORT四ABI成员对应补证
 
 固定上游发布ZIP与Sherpa AAR四个ORT SO逐字节匹配，完整SHA/Python及Info-ZIP核验通过；[验证](validation/w3-ort-release-members-20261114.md)。仅补发布成员对应，不是完整source-to-AAR、组成/生产发布或W3接受。TECNO短读成功后fresh前置仍error:closed，零新prepare/消费；W3/R4/R5质量资源门保持。
