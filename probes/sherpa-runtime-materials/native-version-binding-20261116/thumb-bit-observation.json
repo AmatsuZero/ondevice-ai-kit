@@ -1,0 +1,12 @@
+{
+  "tool": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-readelf",
+  "sameLLVMFamilyAsObjdump": true,
+  "selectedSymbolRows": [
+    "   141: 000e9ef1    16 FUNC    GLOBAL DEFAULT    15 SherpaOnnxGetVersionStr",
+    "   239: 000e9f11    16 FUNC    GLOBAL DEFAULT    15 SherpaOnnxGetGitDate",
+    "   295: 000e9f01    16 FUNC    GLOBAL DEFAULT    15 SherpaOnnxGetGitSha1"
+  ],
+  "rawDynamicSymbolValuesOdd": true,
+  "llvmNmDisplayedThumbBitCleared": true,
+  "wrongDefaultModeOutputPreserved": true
+}

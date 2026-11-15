@@ -1,0 +1,52 @@
+
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/x86/libsherpa-onnx-c-api.so:	file format elf32-i386
+
+Disassembly of section .text:
+
+00148f90 <SherpaOnnxGetVersionStr>:
+  148f90: 55                           	pushl	%ebp
+  148f91: 89 e5                        	movl	%esp, %ebp
+  148f93: 83 e4 fc                     	andl	$-0x4, %esp
+  148f96: e8 00 00 00 00               	calll	0x148f9b <SherpaOnnxGetVersionStr+0xb>
+  148f9b: 58                           	popl	%eax
+  148f9c: 81 c0 65 42 37 00            	addl	$0x374265, %eax         # imm = 0x374265
+  148fa2: 8d 80 c9 5b b6 ff            	leal	-0x49a437(%eax), %eax
+  148fa8: 89 ec                        	movl	%ebp, %esp
+  148faa: 5d                           	popl	%ebp
+  148fab: c3                           	retl
+  148fac: cc                           	int3
+  148fad: cc                           	int3
+  148fae: cc                           	int3
+  148faf: cc                           	int3
+
+00148fb0 <SherpaOnnxGetGitSha1>:
+  148fb0: 55                           	pushl	%ebp
+  148fb1: 89 e5                        	movl	%esp, %ebp
+  148fb3: 83 e4 fc                     	andl	$-0x4, %esp
+  148fb6: e8 00 00 00 00               	calll	0x148fbb <SherpaOnnxGetGitSha1+0xb>
+  148fbb: 58                           	popl	%eax
+  148fbc: 81 c0 45 42 37 00            	addl	$0x374245, %eax         # imm = 0x374245
+  148fc2: 8d 80 3a ac b6 ff            	leal	-0x4953c6(%eax), %eax
+  148fc8: 89 ec                        	movl	%ebp, %esp
+  148fca: 5d                           	popl	%ebp
+  148fcb: c3                           	retl
+  148fcc: cc                           	int3
+  148fcd: cc                           	int3
+  148fce: cc                           	int3
+  148fcf: cc                           	int3
+
+00148fd0 <SherpaOnnxGetGitDate>:
+  148fd0: 55                           	pushl	%ebp
+  148fd1: 89 e5                        	movl	%esp, %ebp
+  148fd3: 83 e4 fc                     	andl	$-0x4, %esp
+  148fd6: e8 00 00 00 00               	calll	0x148fdb <SherpaOnnxGetGitDate+0xb>
+  148fdb: 58                           	popl	%eax
+  148fdc: 81 c0 25 42 37 00            	addl	$0x374225, %eax         # imm = 0x374225
+  148fe2: 8d 80 ce ee b5 ff            	leal	-0x4a1132(%eax), %eax
+  148fe8: 89 ec                        	movl	%ebp, %esp
+  148fea: 5d                           	popl	%ebp
+  148feb: c3                           	retl
+  148fec: cc                           	int3
+  148fed: cc                           	int3
+  148fee: cc                           	int3
+  148fef: cc                           	int3

@@ -1,0 +1,40 @@
+
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/x86_64/libsherpa-onnx-c-api.so:	file format elf64-x86-64
+
+Disassembly of section .text:
+
+0000000000141000 <SherpaOnnxGetVersionStr>:
+  141000: 48 8d 05 09 37 ef ff         	leaq	-0x10c8f7(%rip), %rax   # 0x34710
+  141007: c3                           	retq
+  141008: cc                           	int3
+  141009: cc                           	int3
+  14100a: cc                           	int3
+  14100b: cc                           	int3
+  14100c: cc                           	int3
+  14100d: cc                           	int3
+  14100e: cc                           	int3
+  14100f: cc                           	int3
+
+0000000000141010 <SherpaOnnxGetGitSha1>:
+  141010: 48 8d 05 31 87 ef ff         	leaq	-0x1078cf(%rip), %rax   # 0x39748
+  141017: c3                           	retq
+  141018: cc                           	int3
+  141019: cc                           	int3
+  14101a: cc                           	int3
+  14101b: cc                           	int3
+  14101c: cc                           	int3
+  14101d: cc                           	int3
+  14101e: cc                           	int3
+  14101f: cc                           	int3
+
+0000000000141020 <SherpaOnnxGetGitDate>:
+  141020: 48 8d 05 8f c8 ee ff         	leaq	-0x113771(%rip), %rax   # 0x2d8b6
+  141027: c3                           	retq
+  141028: cc                           	int3
+  141029: cc                           	int3
+  14102a: cc                           	int3
+  14102b: cc                           	int3
+  14102c: cc                           	int3
+  14102d: cc                           	int3
+  14102e: cc                           	int3
+  14102f: cc                           	int3

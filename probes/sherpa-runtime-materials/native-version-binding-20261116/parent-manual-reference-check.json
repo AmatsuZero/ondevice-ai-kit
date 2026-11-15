@@ -1,0 +1,110 @@
+{
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "originalSourceGitBlobSHA1": "fad4f4608123d9fe30c9e2543f79952dd403a5fd",
+  "reconstructedObservedPatchGitBlobSHA1": "149297a10a8ba54619e57615d844bbf5c7b21b1b",
+  "reconstructedObservedPatchSHA256": "c4addca669aa59aa7aef9d8862acc761d94d3a36eb26ab0d0ea60eb5a41e106d",
+  "expectedFromPatchedSource": {
+    "SherpaOnnxGetVersionStr": "2.0.1",
+    "SherpaOnnxGetGitSha1": "af2d8d81",
+    "SherpaOnnxGetGitDate": "Mon Oct 26 14:57:12 2026"
+  },
+  "checks": [
+    {
+      "abi": "arm64-v8a",
+      "aarMember": "jni/arm64-v8a/libsherpa-onnx-c-api.so",
+      "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+      "sameBytesAsOriginalAAR": true,
+      "values": {
+        "SherpaOnnxGetVersionStr": {
+          "literalVA": 217477,
+          "literalFileOffset": 217477,
+          "value": "2.0.1"
+        },
+        "SherpaOnnxGetGitSha1": {
+          "literalVA": 237784,
+          "literalFileOffset": 237784,
+          "value": "af2d8d81"
+        },
+        "SherpaOnnxGetGitDate": {
+          "literalVA": 190088,
+          "literalFileOffset": 190088,
+          "value": "Mon Oct 26 14:57:12 2026"
+        }
+      }
+    },
+    {
+      "abi": "x86_64",
+      "aarMember": "jni/x86_64/libsherpa-onnx-c-api.so",
+      "sha256": "8285ecf2e6275374d4c8c5b46020cbb1de82db9bd6b6baad011fdc480cf10ba2",
+      "sameBytesAsOriginalAAR": true,
+      "values": {
+        "SherpaOnnxGetVersionStr": {
+          "literalVA": 214800,
+          "literalFileOffset": 214800,
+          "value": "2.0.1"
+        },
+        "SherpaOnnxGetGitSha1": {
+          "literalVA": 235336,
+          "literalFileOffset": 235336,
+          "value": "af2d8d81"
+        },
+        "SherpaOnnxGetGitDate": {
+          "literalVA": 186550,
+          "literalFileOffset": 186550,
+          "value": "Mon Oct 26 14:57:12 2026"
+        }
+      }
+    },
+    {
+      "abi": "x86",
+      "aarMember": "jni/x86/libsherpa-onnx-c-api.so",
+      "sha256": "e1e483cc4a09aaadf7f72c1d406c010bba05e3a05fc763a4536117508ab3f390",
+      "sameBytesAsOriginalAAR": true,
+      "values": {
+        "SherpaOnnxGetVersionStr": {
+          "literalVA": 142793,
+          "literalFileOffset": 142793,
+          "value": "2.0.1"
+        },
+        "SherpaOnnxGetGitSha1": {
+          "literalVA": 163386,
+          "literalFileOffset": 163386,
+          "value": "af2d8d81"
+        },
+        "SherpaOnnxGetGitDate": {
+          "literalVA": 114894,
+          "literalFileOffset": 114894,
+          "value": "Mon Oct 26 14:57:12 2026"
+        }
+      }
+    },
+    {
+      "abi": "armeabi-v7a",
+      "aarMember": "jni/armeabi-v7a/libsherpa-onnx-c-api.so",
+      "sha256": "cb5d912ec19b4f76582047d082db63f304f3e584cc89130e393337f4cea6ebe7",
+      "sameBytesAsOriginalAAR": true,
+      "values": {
+        "SherpaOnnxGetVersionStr": {
+          "literalVA": 368154,
+          "literalFileOffset": 368154,
+          "value": "2.0.1"
+        },
+        "SherpaOnnxGetGitSha1": {
+          "literalVA": 387954,
+          "literalFileOffset": 387954,
+          "value": "af2d8d81"
+        },
+        "SherpaOnnxGetGitDate": {
+          "literalVA": 341208,
+          "literalFileOffset": 341208,
+          "value": "Mon Oct 26 14:57:12 2026"
+        }
+      }
+    }
+  ],
+  "method": "parent manual operand arithmetic from preserved LLVM disassembly plus independent stdlib PT_LOAD file mapping; not dynamic execution or a generic verifier",
+  "all12LiteralsMatchPatchedSource": true,
+  "wholeSourceEquivalent": false,
+  "P1Complete": false,
+  "W3Complete": false
+}

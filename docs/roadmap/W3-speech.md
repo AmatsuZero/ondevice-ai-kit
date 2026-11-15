@@ -1,3 +1,7 @@
+## 2026-11-16：四ABI native版本函数已核原始指令引用
+
+[本次证据](../validation/w3-native-version-binding-20261116.md)覆盖四份固定C-API库、三函数/12个字面量，均与version.cc修改/两CI原38行相符；标准库解码与父LLVM手算地址一致，12测试及8个仅内存负例通过。四hy3完整终态、限定复核无finding；首候选/夹具错误保留，161freeze通过。未构建、执行native或触碰设备；版本字段不证明完整源码/组成，P1–P4/R4/R5/W3保持open。完整目标不缩减，源码未push，当前待本次精确提交/双端同步。
+
 ## 2026-11-16：JVM重建结果已双端记录
 
 c36e33b（42文件）及[同步收据](../validation/w3-jvm-raw-reconstruction-sync-20261116.json)：GH#15 comment6897387938/GL#15 note44871/GH Wiki faeca96均逐字回读，双Wiki内容SHA df2d98507404f5635641df8f31e5be6e66030f137465bcd2c761f9aeabebaa9a一致。四免费hy3与三发布均终态，源码分支未push。125成员/553965B原载荷重建对应已接受；完整历史输入、DEX/native、最终生产采用、完整组成/通知及发布复审仍缺，P1–P4/R4/R5/W3保持open，完整目标不缩减。继续优先hy3，不自动重试旧quota/源站429或USB/FILE。
@@ -512,7 +516,7 @@ Android先冻结[load-only合同](../validation/w3-qwen-android-load-protocol-20
 
 生产发布验收独立于R4质量和R5资源，以下均未通过：
 
-- [ ] P1 源码/构建/运行时对应：四ORT成员/日志、CI整AAR/16库及[21成员/九输入组与冻结隔离消费者](../validation/w3-p1-member-matrix-20261115.md)增量已验；[当前SDK本地发布与独立消费者绑定](../validation/w3-sdk-consumer-binding-20261115.md)已父验，hy3已接受历史切片，并新增[当前Demo debug/release与独立消费者debug/release证据](../validation/w3-app-variants-delivery-20261115.md)。新增[JVM124class及module原payload重建](../validation/w3-jvm-raw-reconstruction-20261115.md)全部逐字节相同。最终生产App采用及逐输入组完整性/可信度接受仍缺；现有App DEX类名覆盖仍不等于DEX语义等价。
+- [ ] P1 源码/构建/运行时对应：四ORT成员/日志、CI整AAR/16库及[21成员/九输入组与冻结隔离消费者](../validation/w3-p1-member-matrix-20261115.md)增量已验；[当前SDK本地发布与独立消费者绑定](../validation/w3-sdk-consumer-binding-20261115.md)已父验，hy3已接受历史切片，并新增[当前Demo debug/release与独立消费者debug/release证据](../validation/w3-app-variants-delivery-20261115.md)。新增[JVM124class及module原payload重建](../validation/w3-jvm-raw-reconstruction-20261115.md)全部逐字节相同；[四ABI C-API版本函数12个字面量](../validation/w3-native-version-binding-20261116.md)与既有源码/CI修改一致，仍非完整native源码证明。最终生产App采用及逐输入组完整性/可信度接受仍缺；现有App DEX类名覆盖仍不等于DEX语义等价。
 - [ ] P2 递归最终组成：将直接、静态嵌入及传递组件与最终二进制关联，明确版本、源码、许可及归属，解释未覆盖项。
 - [ ] P3 交付物通知：在实际生产候选及消费/打包后核验适用许可、通知和修改说明保留；本地材料ZIP不代替实际交付物。
 - [ ] P4 独立发布复审：固定同一候选与P1–P3材料，记录审阅覆盖、问题处置和接受结论；局部源码/日志审查不代替完整发布接受。

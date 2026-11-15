@@ -1,0 +1,33 @@
+
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/armeabi-v7a/libsherpa-onnx-c-api.so:	file format elf32-littlearm
+
+Disassembly of section .text:
+
+000e9ef0 <SherpaOnnxGetVersionStr>:
+   e9ef0: b580         	push	{r7, lr}
+   e9ef2: 466f         	mov	r7, sp
+   e9ef4: 4801         	ldr	r0, [pc, #0x4]          @ 0xe9efc <SherpaOnnxGetVersionStr+0xc>
+   e9ef6: 4478         	add	r0, pc
+   e9ef8: bd80         	pop	{r7, pc}
+   e9efa: bf00         	nop
+   e9efc: ff20 fff6    	<unknown>
+
+000e9f00 <SherpaOnnxGetGitSha1>:
+   e9f00: b580         	push	{r7, lr}
+   e9f02: 466f         	mov	r7, sp
+   e9f04: 4801         	ldr	r0, [pc, #0x4]          @ 0xe9f0c <SherpaOnnxGetGitSha1+0xc>
+   e9f06: 4478         	add	r0, pc
+   e9f08: bd80         	pop	{r7, pc}
+   e9f0a: bf00         	nop
+   e9f0c: 4c68         	ldr	r4, [pc, #0x1a0]        @ 0xea0b0 <SherpaOnnxCreateOnlineRecognizer+0x180>
+   e9f0e: fff7 b580    	<unknown>
+
+000e9f10 <SherpaOnnxGetGitDate>:
+   e9f10: b580         	push	{r7, lr}
+   e9f12: 466f         	mov	r7, sp
+   e9f14: 4801         	ldr	r0, [pc, #0x4]          @ 0xe9f1c <SherpaOnnxGetGitDate+0xc>
+   e9f16: 4478         	add	r0, pc
+   e9f18: bd80         	pop	{r7, pc}
+   e9f1a: bf00         	nop
+   e9f1c: 95be         	str	r5, [sp, #0x2f8]
+   e9f1e: fff6 b580    	<unknown>

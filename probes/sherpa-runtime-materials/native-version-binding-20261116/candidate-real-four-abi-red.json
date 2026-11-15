@@ -1,0 +1,60 @@
+[
+  {
+    "abi": "arm64-v8a",
+    "accepted": false,
+    "errorType": "ValueError",
+    "error": "bad ADD immediate",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 10, in <module>\n  File \"/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py\", line 150, in inspect_binary\n    _need(((w1 >> 31) & 1) == 1 and ((w1 >> 30) & 3) == 0 and\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n          ((w1 >> 24) & 0x1f) == 0x11 and ((w1 >> 23) & 1) == 0 and\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n          ((w1 >> 22) & 1) == 0 and ((w1 >> 9) & 0x1f) == 0 and\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n          (w1 & 31) == 0, 'bad ADD immediate')\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py\", line 15, in _need\n    raise ValueError(msg)\nValueError: bad ADD immediate\n"
+  },
+  {
+    "abi": "armeabi-v7a",
+    "accepted": false,
+    "errorType": "ValueError",
+    "error": "too many values to unpack (expected 2, got 3)",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 10, in <module>\n  File \"/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py\", line 173, in inspect_binary\n    pad, _ = read_range(code_va + 10, gap, True)\n    ^^^^^^\nValueError: too many values to unpack (expected 2, got 3)\n"
+  },
+  {
+    "abi": "x86",
+    "accepted": false,
+    "errorType": "ValueError",
+    "error": "bad i386 CALL",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 10, in <module>\n  File \"/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py\", line 184, in inspect_binary\n    _need(b[9] == 0xe8 and tuple(b[10:14]) == (0, 0, 0, 0), 'bad i386 CALL')\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py\", line 15, in _need\n    raise ValueError(msg)\nValueError: bad i386 CALL\n"
+  },
+  {
+    "abi": "x86_64",
+    "accepted": true,
+    "result": {
+      "elf_class": 64,
+      "machine": 62,
+      "symbols": {
+        "SherpaOnnxGetVersionStr": {
+          "symbolValue": 1314816,
+          "codeVA": 1314816,
+          "codeFileOffset": 1314816,
+          "codeHex": "488d050937efffc3",
+          "literalVA": 214800,
+          "literalFileOffset": 214800,
+          "value": "2.0.1"
+        },
+        "SherpaOnnxGetGitSha1": {
+          "symbolValue": 1314832,
+          "codeVA": 1314832,
+          "codeFileOffset": 1314832,
+          "codeHex": "488d053187efffc3",
+          "literalVA": 235336,
+          "literalFileOffset": 235336,
+          "value": "af2d8d81"
+        },
+        "SherpaOnnxGetGitDate": {
+          "symbolValue": 1314848,
+          "codeVA": 1314848,
+          "codeFileOffset": 1314848,
+          "codeHex": "488d058fc8eeffc3",
+          "literalVA": 186550,
+          "literalFileOffset": 186550,
+          "value": "Mon Oct 26 14:57:12 2026"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,213 @@
+{
+  "libraries": [
+    {
+      "abi": "arm64-v8a",
+      "bytes": 4303136,
+      "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+      "independentParentAddressesEqual": true,
+      "result": {
+        "elf_class": 64,
+        "machine": 183,
+        "symbols": {
+          "SherpaOnnxGetVersionStr": {
+            "symbolValue": 1353512,
+            "codeVA": 1353512,
+            "codeFileOffset": 1353512,
+            "codeHex": "40f7fff000140691c0035fd6",
+            "literalVA": 217477,
+            "literalFileOffset": 217477,
+            "value": "2.0.1"
+          },
+          "SherpaOnnxGetGitSha1": {
+            "symbolValue": 1353524,
+            "codeVA": 1353524,
+            "codeFileOffset": 1353524,
+            "codeHex": "80f7ff9000600391c0035fd6",
+            "literalVA": 237784,
+            "literalFileOffset": 237784,
+            "value": "af2d8d81"
+          },
+          "SherpaOnnxGetGitDate": {
+            "symbolValue": 1353536,
+            "codeVA": 1353536,
+            "codeFileOffset": 1353536,
+            "codeHex": "20f7ff9000201a91c0035fd6",
+            "literalVA": 190088,
+            "literalFileOffset": 190088,
+            "value": "Mon Oct 26 14:57:12 2026"
+          }
+        }
+      }
+    },
+    {
+      "abi": "armeabi-v7a",
+      "bytes": 3157748,
+      "sha256": "cb5d912ec19b4f76582047d082db63f304f3e584cc89130e393337f4cea6ebe7",
+      "independentParentAddressesEqual": true,
+      "result": {
+        "elf_class": 32,
+        "machine": 40,
+        "symbols": {
+          "SherpaOnnxGetVersionStr": {
+            "symbolValue": 958193,
+            "codeVA": 958192,
+            "codeFileOffset": 958192,
+            "codeHex": "80b56f460148784480bd",
+            "literalVA": 368154,
+            "literalFileOffset": 368154,
+            "value": "2.0.1"
+          },
+          "SherpaOnnxGetGitSha1": {
+            "symbolValue": 958209,
+            "codeVA": 958208,
+            "codeFileOffset": 958208,
+            "codeHex": "80b56f460148784480bd",
+            "literalVA": 387954,
+            "literalFileOffset": 387954,
+            "value": "af2d8d81"
+          },
+          "SherpaOnnxGetGitDate": {
+            "symbolValue": 958225,
+            "codeVA": 958224,
+            "codeFileOffset": 958224,
+            "codeHex": "80b56f460148784480bd",
+            "literalVA": 341208,
+            "literalFileOffset": 341208,
+            "value": "Mon Oct 26 14:57:12 2026"
+          }
+        }
+      }
+    },
+    {
+      "abi": "x86",
+      "bytes": 4954780,
+      "sha256": "e1e483cc4a09aaadf7f72c1d406c010bba05e3a05fc763a4536117508ab3f390",
+      "independentParentAddressesEqual": true,
+      "result": {
+        "elf_class": 32,
+        "machine": 3,
+        "symbols": {
+          "SherpaOnnxGetVersionStr": {
+            "symbolValue": 1347472,
+            "codeVA": 1347472,
+            "codeFileOffset": 1347472,
+            "codeHex": "5589e583e4fce8000000005881c0654237008d80c95bb6ff89ec5dc3",
+            "literalVA": 142793,
+            "literalFileOffset": 142793,
+            "value": "2.0.1"
+          },
+          "SherpaOnnxGetGitSha1": {
+            "symbolValue": 1347504,
+            "codeVA": 1347504,
+            "codeFileOffset": 1347504,
+            "codeHex": "5589e583e4fce8000000005881c0454237008d803aacb6ff89ec5dc3",
+            "literalVA": 163386,
+            "literalFileOffset": 163386,
+            "value": "af2d8d81"
+          },
+          "SherpaOnnxGetGitDate": {
+            "symbolValue": 1347536,
+            "codeVA": 1347536,
+            "codeFileOffset": 1347536,
+            "codeHex": "5589e583e4fce8000000005881c0254237008d80ceeeb5ff89ec5dc3",
+            "literalVA": 114894,
+            "literalFileOffset": 114894,
+            "value": "Mon Oct 26 14:57:12 2026"
+          }
+        }
+      }
+    },
+    {
+      "abi": "x86_64",
+      "bytes": 4782648,
+      "sha256": "8285ecf2e6275374d4c8c5b46020cbb1de82db9bd6b6baad011fdc480cf10ba2",
+      "independentParentAddressesEqual": true,
+      "result": {
+        "elf_class": 64,
+        "machine": 62,
+        "symbols": {
+          "SherpaOnnxGetVersionStr": {
+            "symbolValue": 1314816,
+            "codeVA": 1314816,
+            "codeFileOffset": 1314816,
+            "codeHex": "488d050937efffc3",
+            "literalVA": 214800,
+            "literalFileOffset": 214800,
+            "value": "2.0.1"
+          },
+          "SherpaOnnxGetGitSha1": {
+            "symbolValue": 1314832,
+            "codeVA": 1314832,
+            "codeFileOffset": 1314832,
+            "codeHex": "488d053187efffc3",
+            "literalVA": 235336,
+            "literalFileOffset": 235336,
+            "value": "af2d8d81"
+          },
+          "SherpaOnnxGetGitDate": {
+            "symbolValue": 1314848,
+            "codeVA": 1314848,
+            "codeFileOffset": 1314848,
+            "codeHex": "488d058fc8eeffc3",
+            "literalVA": 186550,
+            "literalFileOffset": 186550,
+            "value": "Mon Oct 26 14:57:12 2026"
+          }
+        }
+      }
+    }
+  ],
+  "sameLengthInMemoryNegativeControls": [
+    {
+      "abi": "arm64-v8a",
+      "case": "changed-literal-byte",
+      "parserDecodesChangedValue": true,
+      "parentExpectedSourceComparisonRejected": true
+    },
+    {
+      "abi": "arm64-v8a",
+      "case": "changed-return-opcode",
+      "parserRejected": true,
+      "error": "bad RET"
+    },
+    {
+      "abi": "armeabi-v7a",
+      "case": "changed-literal-byte",
+      "parserDecodesChangedValue": true,
+      "parentExpectedSourceComparisonRejected": true
+    },
+    {
+      "abi": "armeabi-v7a",
+      "case": "changed-return-opcode",
+      "parserRejected": true,
+      "error": "bad Thumb prologue/return"
+    },
+    {
+      "abi": "x86",
+      "case": "changed-literal-byte",
+      "parserDecodesChangedValue": true,
+      "parentExpectedSourceComparisonRejected": true
+    },
+    {
+      "abi": "x86",
+      "case": "changed-return-opcode",
+      "parserRejected": true,
+      "error": "bad i386 epilogue"
+    },
+    {
+      "abi": "x86_64",
+      "case": "changed-literal-byte",
+      "parserDecodesChangedValue": true,
+      "parentExpectedSourceComparisonRejected": true
+    },
+    {
+      "abi": "x86_64",
+      "case": "changed-return-opcode",
+      "parserRejected": true,
+      "error": "bad x86-64 form"
+    }
+  ],
+  "all12LiteralsMatch": true,
+  "rawByteDecoderAgreesWithIndependentManualLLVMOperandArithmetic": true,
+  "dynamicNativeExecution": false
+}

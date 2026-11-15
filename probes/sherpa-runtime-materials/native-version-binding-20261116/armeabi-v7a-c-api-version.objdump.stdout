@@ -1,0 +1,22 @@
+
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/armeabi-v7a/libsherpa-onnx-c-api.so:	file format elf32-littlearm
+
+Disassembly of section .text:
+
+000e9ef0 <SherpaOnnxGetVersionStr>:
+   e9ef0: 466fb580     	strbtmi	r11, [pc], -r0, lsl #11
+   e9ef4: 44784801     	ldrbtmi	r4, [r8], #-2049
+   e9ef8: bf00bd80     	svclt	#0xbd80
+   e9efc: fff6ff20     	<unknown>
+
+000e9f00 <SherpaOnnxGetGitSha1>:
+   e9f00: 466fb580     	strbtmi	r11, [pc], -r0, lsl #11
+   e9f04: 44784801     	ldrbtmi	r4, [r8], #-2049
+   e9f08: bf00bd80     	svclt	#0xbd80
+   e9f0c: fff74c68     	<unknown>
+
+000e9f10 <SherpaOnnxGetGitDate>:
+   e9f10: 466fb580     	strbtmi	r11, [pc], -r0, lsl #11
+   e9f14: 44784801     	ldrbtmi	r4, [r8], #-2049
+   e9f18: bf00bd80     	svclt	#0xbd80
+   e9f1c: fff695be     	<unknown>

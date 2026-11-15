@@ -1,3 +1,7 @@
+## W3 native版本检查：Thumb模式、指令位域与ELF夹具偏移（2026-11-16）
+
+四ABI原C-API库版本函数已导出，但普通符号表空不代表无动态符号；nm显示会清Thumb低位，raw dynsym为odd。默认objdump按ARM误解Thumb成strbt/svc/unknown，强制thumbv7后恢复；POP后的fn+12是literal pool，不是执行异常。hy3首稿ADD位条件自相矛盾/寄存器移位错、i386 CALL偏移9而实际6、三返回值解包成二导致7tests/6errors及真实仅1/4通过，保留拒收原件；七精确修正后12指令引用/8损坏控制通过。新增signed-ADRP夹具又误写ELF64 p_paddr+24，须分别扩filesz+32/memsz+40；ADD shift位为22，独立两处测试修正后12方法全过。parent只接受原字节helper解码实现和限定复核，版本字符串可伪造、不证明全native源码/组成或执行；检查参考NDK beta3不冒充历史工具链。见[验证](validation/w3-native-version-binding-20261116.md)及.omx/artifacts/w3-native-version-20261116T002000/；原quota/源站429未重试。
+
 ## W3编译工具传输超时与JVM重建证据边界（2026-11-16）
 
 Kotlin1.7.20不在本机缓存；默认代理路径传输首compiler JAR于5505024B读超时，原部分文件/错误保留，不能当hy3配额或编译失败。确认原进程终态后一次新调用仅直连同官方Maven host，8工具60939801B完整核SHA1/SHA256；无全局代理/凭据/生产依赖改变，路径及分块参数均变，不能唯一归因某一因素。后续唯一CLI编译3.059s，124class+module原始payload全相同并经父InfoZIP独立流核；不是JAR ZIP/DEX/native或完整AGP环境重放，不以剥SMAP/注解求通过。driver只验22真实resolved源码GitBlob/SHA，symlink blob由先前来源审计验证，不能混写为本工具重验链接。文稿首稿“未新增运行/下载”、旧live/stage措辞和175保护绝对未改等已拒收，17处helper精确修正及父删一歧义短语留档；真实编译工具下载不冒充模型/ASR runtime下载。原preparation receipt为编译前快照，现有产物见probes/sherpa-runtime-materials/jvm-raw-reconstruction-20261115/，所有进程终态、无待poll；P1/P4/W3不自动关闭。

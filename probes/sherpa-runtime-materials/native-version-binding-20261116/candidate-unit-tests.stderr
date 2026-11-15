@@ -1,0 +1,116 @@
+test_literal_offset_arithmetic_for_each_architecture (test_inspect_native_version.InspectNativeVersionTests.test_literal_offset_arithmetic_for_each_architecture) ... 
+  test_literal_offset_arithmetic_for_each_architecture (test_inspect_native_version.InspectNativeVersionTests.test_literal_offset_arithmetic_for_each_architecture) (mode='a64') ... ERROR
+  test_literal_offset_arithmetic_for_each_architecture (test_inspect_native_version.InspectNativeVersionTests.test_literal_offset_arithmetic_for_each_architecture) (mode='thumb') ... ERROR
+  test_literal_offset_arithmetic_for_each_architecture (test_inspect_native_version.InspectNativeVersionTests.test_literal_offset_arithmetic_for_each_architecture) (mode='x86') ... ERROR
+test_rejects_bad_pointer_or_ret (test_inspect_native_version.InspectNativeVersionTests.test_rejects_bad_pointer_or_ret) ... ok
+test_rejects_missing_nul_and_non_utf8_literals (test_inspect_native_version.InspectNativeVersionTests.test_rejects_missing_nul_and_non_utf8_literals) ... ok
+test_rejects_missing_or_duplicate_target_symbols (test_inspect_native_version.InspectNativeVersionTests.test_rejects_missing_or_duplicate_target_symbols) ... ok
+test_rejects_truncated_headers_and_bad_tables (test_inspect_native_version.InspectNativeVersionTests.test_rejects_truncated_headers_and_bad_tables) ... ok
+test_rejects_unmapped_nonfilebacked_and_ambiguous_va (test_inspect_native_version.InspectNativeVersionTests.test_rejects_unmapped_nonfilebacked_and_ambiguous_va) ... ok
+test_supported_architectures_and_binding (test_inspect_native_version.InspectNativeVersionTests.test_supported_architectures_and_binding) ... 
+  test_supported_architectures_and_binding (test_inspect_native_version.InspectNativeVersionTests.test_supported_architectures_and_binding) (mode='a64') ... ERROR
+  test_supported_architectures_and_binding (test_inspect_native_version.InspectNativeVersionTests.test_supported_architectures_and_binding) (mode='thumb') ... ERROR
+  test_supported_architectures_and_binding (test_inspect_native_version.InspectNativeVersionTests.test_supported_architectures_and_binding) (mode='x86') ... ERROR
+
+======================================================================
+ERROR: test_literal_offset_arithmetic_for_each_architecture (test_inspect_native_version.InspectNativeVersionTests.test_literal_offset_arithmetic_for_each_architecture) (mode='a64')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/test_inspect_native_version.py", line 177, in test_literal_offset_arithmetic_for_each_architecture
+    result = inspect_binary(bytes(buf))
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 150, in inspect_binary
+    _need(((w1 >> 31) & 1) == 1 and ((w1 >> 30) & 3) == 0 and
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          ((w1 >> 24) & 0x1f) == 0x11 and ((w1 >> 23) & 1) == 0 and
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          ((w1 >> 22) & 1) == 0 and ((w1 >> 9) & 0x1f) == 0 and
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          (w1 & 31) == 0, 'bad ADD immediate')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 15, in _need
+    raise ValueError(msg)
+ValueError: bad ADD immediate
+
+======================================================================
+ERROR: test_literal_offset_arithmetic_for_each_architecture (test_inspect_native_version.InspectNativeVersionTests.test_literal_offset_arithmetic_for_each_architecture) (mode='thumb')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/test_inspect_native_version.py", line 177, in test_literal_offset_arithmetic_for_each_architecture
+    result = inspect_binary(bytes(buf))
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 173, in inspect_binary
+    pad, _ = read_range(code_va + 10, gap, True)
+    ^^^^^^
+ValueError: too many values to unpack (expected 2, got 3)
+
+======================================================================
+ERROR: test_literal_offset_arithmetic_for_each_architecture (test_inspect_native_version.InspectNativeVersionTests.test_literal_offset_arithmetic_for_each_architecture) (mode='x86')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/test_inspect_native_version.py", line 177, in test_literal_offset_arithmetic_for_each_architecture
+    result = inspect_binary(bytes(buf))
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 184, in inspect_binary
+    _need(b[9] == 0xe8 and tuple(b[10:14]) == (0, 0, 0, 0), 'bad i386 CALL')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 15, in _need
+    raise ValueError(msg)
+ValueError: bad i386 CALL
+
+======================================================================
+ERROR: test_supported_architectures_and_binding (test_inspect_native_version.InspectNativeVersionTests.test_supported_architectures_and_binding) (mode='a64')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/test_inspect_native_version.py", line 151, in test_supported_architectures_and_binding
+    result, meta = self._inspect(mode)
+                   ~~~~~~~~~~~~~^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/test_inspect_native_version.py", line 145, in _inspect
+    return inspect_binary(bytes(buf)), meta
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 150, in inspect_binary
+    _need(((w1 >> 31) & 1) == 1 and ((w1 >> 30) & 3) == 0 and
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          ((w1 >> 24) & 0x1f) == 0x11 and ((w1 >> 23) & 1) == 0 and
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          ((w1 >> 22) & 1) == 0 and ((w1 >> 9) & 0x1f) == 0 and
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+          (w1 & 31) == 0, 'bad ADD immediate')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 15, in _need
+    raise ValueError(msg)
+ValueError: bad ADD immediate
+
+======================================================================
+ERROR: test_supported_architectures_and_binding (test_inspect_native_version.InspectNativeVersionTests.test_supported_architectures_and_binding) (mode='thumb')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/test_inspect_native_version.py", line 151, in test_supported_architectures_and_binding
+    result, meta = self._inspect(mode)
+                   ~~~~~~~~~~~~~^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/test_inspect_native_version.py", line 145, in _inspect
+    return inspect_binary(bytes(buf)), meta
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 173, in inspect_binary
+    pad, _ = read_range(code_va + 10, gap, True)
+    ^^^^^^
+ValueError: too many values to unpack (expected 2, got 3)
+
+======================================================================
+ERROR: test_supported_architectures_and_binding (test_inspect_native_version.InspectNativeVersionTests.test_supported_architectures_and_binding) (mode='x86')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/test_inspect_native_version.py", line 151, in test_supported_architectures_and_binding
+    result, meta = self._inspect(mode)
+                   ~~~~~~~~~~~~~^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/test_inspect_native_version.py", line 145, in _inspect
+    return inspect_binary(bytes(buf)), meta
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 184, in inspect_binary
+    _need(b[9] == 0xe8 and tuple(b[10:14]) == (0, 0, 0, 0), 'bad i386 CALL')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/inspect_native_version.py", line 15, in _need
+    raise ValueError(msg)
+ValueError: bad i386 CALL
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.002s
+
+FAILED (errors=6)

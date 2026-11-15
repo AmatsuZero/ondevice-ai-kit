@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "rtk",
+    "proxy",
+    "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-objdump",
+    "--triple=thumbv7-linux-android",
+    "-d",
+    "--disassemble-symbols=SherpaOnnxGetGitSha1,SherpaOnnxGetGitDate,SherpaOnnxGetVersionStr",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/armeabi-v7a/libsherpa-onnx-c-api.so"
+  ],
+  "exitCode": 0,
+  "priorDefaultDecodeRetained": true
+}

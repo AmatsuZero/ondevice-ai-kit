@@ -1,3 +1,7 @@
+## 2026-11-16 W3：native版本字段静态对应增量
+
+四ABI固定C-API库三函数/12字面量与既有version.cc/CI修改一致，hy3原始字节解码、12测试/8同长内存负例及限定独立复核通过；[验证](validation/w3-native-version-binding-20261116.md)。只补P1版本字段对应，完整native源码/组成、生产采用与发布接受及R4/R5仍缺，W3保持open；无新构建或设备调用，不重试旧FILE/USB/429。
+
 ## 2026-11-15 W3 ORT嵌套通知同步完成
 
 本地910ac8c精确99文件；GH#15comment6894671804/GL#15note44863/GHWikia7fa188均逐字回读，双Wiki SHA 139f3cf32a6849d52d17a6dfed7653e8e3926c94caf4f9c24653563f7e9fc8e1一致，[同步收据](validation/w3-ort-nested-notice-integration-sync-20261115.json)。marker已用勿重发，源码未push；四hy3/两构建/三个发布均终态、无待poll。173原字节或共享余字节及161freeze保持；96条空白诊断仅限13个已绑定原文/上游patch/重建diff路径，其他文字通过，不格式化证据。26原文/63合并通知的子集技术保留通过；P1–P4/R4/R5/W3均open、goal active；下一完整递归组成与最终生产采用/发布接受，或实体连接变化后固定未消费run的真机验收。不重试旧quota、不重取归档/重跑已验构建/旧FILE或USB恢复循环，零新设备/麦克风/AiAi/下载。
