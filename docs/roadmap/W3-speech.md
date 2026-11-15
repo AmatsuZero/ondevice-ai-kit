@@ -1,3 +1,7 @@
+## 2026-11-15：hy3完成JVM通知集成与独立Maven最终APK保留
+
+用户指定hy3实际交付小清单/独立APK夹具；首伪工具输出原样拒收，无配额错误或自动换模型。10原许可/归属及索引进模块assets，Debug/Release AAR/lint/隔离本地发布通过；独立application消费新坐标，11资产72718B与原文相同、四ABI16SO同固定runtime，删除/同长改单字节均拒收，[验证](../validation/w3-jvm-notice-integration-20261115.md)。原Release成员/173保护/161freeze保持，零设备/模型或识别逻辑变更。已知JVM子集技术保留通过，不代表native通知、完整P2/P3/P4或W3完成；原hy4/native429停线，后续可按用户新选择用hy3小切片推进。
+
 ## 2026-11-15：四ABI声明动态依赖已补核
 
 固定16SO/ABI/SONAME通过；92条DT_NEEDED边的16内部目标均在同ABI AAR中，76外部边的五名称在已有NDK四ABI/API21的20参考桩库存在，四ABI逻辑图同，[验证](../validation/w3-native-linkage-20261115.md)。两工具为同LLVM前端，参考桩库非真机加载/最低API接受；16无普通symtab且有dynsym，初始arm64 no symbols保留，导出阴性不能排除静态/内联/dlopen组成。173保护/161freeze保持、零构建/helper/设备/生产改动，P1–P4/R4/R5/W3继续open，原429停线、新线路待答。

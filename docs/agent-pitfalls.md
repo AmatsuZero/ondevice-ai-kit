@@ -1,3 +1,7 @@
+## W3 hy3候选：伪工具正文与空tools的观测边界（2026-11-15）
+
+hy4free实际429不证明hy3不可用。用户新选hy3后首调用5.676s/exit0/result success，但正文仅伪Bash工具文字，无候选JSON/真实工具事件，已拒收。空tools参数下init仍列69工具名称；列表本身不证明实际权限或执行，不能声称工具禁用已被验证。独立小清单任务同时缩小提示、调用级deny/空setting-sources/纯文本system prompt后28.537s完整交付；另独立APK候选68.832s完整交付，均零已观察真实工具事件。多项同时改变，不能把成功归因于某单一选项。父端核id/唯一目标/原字节并实构建，11资产在AAR/独立Maven APK保留、缺失/改单字节负例拒收；这是JVM子集技术证据，不代替P2完整组成/P4发布接受。保留首失败及三份raw收据，不付费/自动fallback/重试原quota；见`probes/sherpa-runtime-materials/jvm-notice-integration-20261115/`和`.omx/artifacts/w3-p3-jvm-hy3-selection-20261115T111916Z/`。
+
 ## W3 ELF：no symbols与NEEDED阴性不能排除静态组成（2026-11-15）
 
 固定AAR四arm64库的llvm-nm普通读取exit0/stdout空/stderr no symbols；16库实际section均无SHT_SYMTAB而有SHT_DYNSYM。有效核对是保留原件，分别读动态导出和DT_NEEDED，核同ABI内部边及参考桩库，不把普通表缺失当无组件/成功组成审计。16SO共92边、五外部名称/20已有NDK桩库已核；readelf/readobj同LLVM只能算两前端核对，不能称独立实现。NEEDED没有libc++_shared不证明无静态C++；导出阴性不能排除隐藏/内联代码，dlopen分支也不被穷尽。已有NDK30 beta3桩库只作名称/字节参考，不能冒充历史job工具链、真机加载或最低API兼容。证据`.omx/artifacts/w3-native-linkage-20261115/`及[验证](validation/w3-native-linkage-20261115.md)。

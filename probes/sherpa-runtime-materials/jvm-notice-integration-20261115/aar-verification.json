@@ -1,0 +1,32 @@
+{
+  "aars": [
+    {
+      "kind": "debug",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/android/backend-sherpa-asr/build/outputs/aar/backend-sherpa-asr-debug.aar",
+      "bytes": 69916,
+      "sha256": "9ed961698131aba5f329717da35a369085fa970284a6b6a6d1aead805ed67162",
+      "memberCount": 15,
+      "expectedAssets": 11,
+      "assetOriginalByteEquality": true,
+      "pythonAndInfozipEqual": true,
+      "originalReleaseMembersUnchanged": false
+    },
+    {
+      "kind": "release",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-p3-jvm-hy3-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+      "bytes": 68052,
+      "sha256": "098bb261b5ef0da3c8a39b5fa3b61add2dc52e9a4b41c17675c9c9204c3f11ef",
+      "memberCount": 15,
+      "expectedAssets": 11,
+      "assetOriginalByteEquality": true,
+      "pythonAndInfozipEqual": true,
+      "originalReleaseMembersUnchanged": true
+    }
+  ],
+  "assetBytes": 72718,
+  "protectedOriginalPaths": 173,
+  "protectedOriginalPathsUnchanged": true,
+  "newAssetsOnlyRelativeToPreviousRelease": true,
+  "noticeSetComplete": false,
+  "apkConsumerVerified": false
+}

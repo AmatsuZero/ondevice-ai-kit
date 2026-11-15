@@ -1,3 +1,7 @@
+## 2026-11-15 W3 hy3已实际交付JVM通知集成与独立APK候选
+
+用户新选hy3后，本轮三请求均无quota；首伪工具正文拒收，缩小候选28.537s及独立APK夹具68.832s完整交付。10份原许可/归属63392B及索引已集成模块assets；离线Debug/Release AAR/lint/隔离Maven发布12.290s通过。独立Maven最终APK10.904s通过，11通知/72718B原字节保留、16SO四ABI同固定runtime；删除/同长改单字节两负例拒收。[验证](validation/w3-jvm-notice-integration-20261115.md)。原Release四成员不变，173保护/161freeze保持；零设备/麦克风/AiAi/下载/模型变更。只关闭该已知JVM子集技术保留，P1–P4/R4/R5/W3仍open。hy4原429不重试，hy3仅证明本轮实际可用，不保证未来配额；下一native通知选择/补丁说明、完整组成及独立发布复审，实体现有run仍待连接变化，不重复USB恢复或旧文件批次。
+
 ## 2026-11-15 W3声明动态依赖已提交并双端同步
 
 本地c2fa9c0精确33文件；GH#15comment6891817301/GL#15note44859/GHWiki92692e1逐字回读，双Wiki SHAa0a7df8c43527c7b6172e4a4ebe8a767f4e5c809127b988d1f87c377aa910b8e一致，[同步收据](validation/w3-native-linkage-sync-20261115.json)。GL首GET connection reset原件保留，后续完整分页恢复、GH原marker仅回读，无全局代理/凭据改动；marker已用勿重发、源码未push。本轮工具均终态，173原余字节/161freeze保持，32原readelf行尾空格不改，其他文字通过。零新helper/构建/设备/生产实现；P1–P4/R4/R5/W3仍open、goal active。下一实际通知候选/独立最终APK与完整组成复核待新所选线路，或实体连接变化后固定合同验收；原429不重试，不重扫这16库或循环USB恢复。

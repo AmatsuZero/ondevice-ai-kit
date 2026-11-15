@@ -1,0 +1,89 @@
+[
+  {
+    "artifactDir": ".omx/artifacts/w3-p3-jvm-hy3-20261115T111653Z",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 5.676,
+      "endedAtUTC": "2026-11-15T11:17:17.854146+00:00",
+      "stdoutBytes": 8799,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "subtype": "success",
+    "isError": false,
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 17099,
+        "outputTokens": 45,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 192000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "actualToolEvents": 0,
+    "promptSHA256": "fbf2c18c831e0326b82024bbc83476997044c71062e8f8774957ac214a1a6216",
+    "rawEventsSHA256": "0dd8b44e2bf3d95de16c7048ebdeedd03a8b63366c407f74d43dcd50a1d71101",
+    "rawEventsBytes": 8799,
+    "candidateAccepted": false
+  },
+  {
+    "artifactDir": ".omx/artifacts/w3-p3-jvm-hy3-selection-20261115T111916Z",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 28.537,
+      "endedAtUTC": "2026-11-15T11:20:04.582220+00:00",
+      "stdoutBytes": 40395,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "subtype": "success",
+    "isError": false,
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 6071,
+        "outputTokens": 5733,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 192000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "actualToolEvents": 0,
+    "promptSHA256": "f9c3f5cea86c1ed88000b6f6c987487f73339b591c56ec12bec9cb7fc61068d9",
+    "rawEventsSHA256": "5a1843e3d4bcec9b9bb5d0de9687637493b97d3499d352f637c60c94b3e854fd",
+    "rawEventsBytes": 40395,
+    "candidateAccepted": true
+  },
+  {
+    "artifactDir": ".omx/artifacts/w3-p3-apk-hy3-20261115T112302Z",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 68.832,
+      "endedAtUTC": "2026-11-15T11:24:27.857780+00:00",
+      "stdoutBytes": 87587,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "subtype": "success",
+    "isError": false,
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 5509,
+        "outputTokens": 15949,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 192000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "actualToolEvents": 0,
+    "promptSHA256": "a89cf6e4afe41d67f716fbd91aa2840f23fbe1dfa667e353a0ba7e203c00ed15",
+    "rawEventsSHA256": "39d6058b2a01e7fabb76641336bf9259593bce81039cb10b6ebaf71ffec406b6",
+    "rawEventsBytes": 87587,
+    "candidateAccepted": true
+  }
+]
