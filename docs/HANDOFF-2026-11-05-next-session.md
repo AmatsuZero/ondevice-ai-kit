@@ -1,3 +1,7 @@
+## 2026-11-15 W3第三方补丁与嵌套声明已提交并同步
+
+本地eecac89精确22文件；固定归档35源/三文件原Android补丁重建/四ABI构建观察及两嵌套声明已父验。GH#15comment6891032691/GL#15note44855/GHWiki22fd388b逐字回读，双Wiki SHA4f8f980920be88630cecb127064c9f38d4384abb9d025eda48b5dd7fb53e91a3一致，[同步收据](validation/w3-sentencepiece-patch-sync-20261115.json)。marker已用勿重发，源码未push；本轮CMake/API/发布均终态，零helper/设备。171保护中167原余字节不变，4个已核恰一末尾LF并发删除保留且未带stage，161freeze通过；完整diff-check2只限两份原样上游证据12行，其他文字检查0，不格式化证据。P1–P4/R4/R5/W3仍open、goal active；原native/CBC429不重试，待所选新线路。后续继续实际递归组成/生产通知集成或可运行真机验收，不重复已核源/补丁/归档/USB恢复，也不以主仓库diff只有version.cc宣称第三方未改。
+
 ## 2026-11-15 W3第三方补丁与Darts嵌套声明已核
 
 P2补核发现四ABI实际simple-sentencepiece Android线程移除补丁；355335B归档SHA匹配固定CMake URL_HASH，35普通文件GitBlob均同原tree。现有CMake3.22.1仅执行原helper/Android body，三个文件前后字节/diff已保存，四ABI编译/静态库目标及声明链接路径关联。另补此前材料无的darts-clone BSD2与原ThreadPool zlib-style原声明；Android原ThreadPool实现已换stub，勿误称MIT或最终必然嵌入。[验证](validation/w3-sentencepiece-patch-20261115.md)。历史CI补丁后源码未直接归档，完整机器码/递归组成与实际通知集成仍缺，P1–P4/R4/R5/W3保持open。无helper/设备/生产源码改动，原native/CBC429停线，goal active；不要重取此归档、重跑源码闭包或USB恢复。

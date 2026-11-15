@@ -1,0 +1,33 @@
+{
+  "sourceCommit": "eecac893424d4fa7d7cdd679b187072cb27ee7b6",
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-sentencepiece-patch-20261115 -->",
+  "bodySHA256": "cb4b8086e25ede94b77c34a82e79509ace8893dac56c8bf02a13c1efd9be8ef5",
+  "issues": {
+    "gh": {
+      "id": 6891032691,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6891032691",
+      "sha256": "cb4b8086e25ede94b77c34a82e79509ace8893dac56c8bf02a13c1efd9be8ef5",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44855,
+      "url": null,
+      "sha256": "623668afece223ef41f04f9a014dcc9fab7c2201bd8b3ed1ecac6039950127f2",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "22fd388b31593a75ad6dca58841bca3e036028a7",
+    "sha256": "4f8f980920be88630cecb127064c9f38d4384abb9d025eda48b5dd7fb53e91a3",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "4f8f980920be88630cecb127064c9f38d4384abb9d025eda48b5dd7fb53e91a3",
+    "readbackExact": true
+  },
+  "wikiContentsSHA256Equal": true,
+  "P2Complete": false,
+  "W3Complete": false
+}
