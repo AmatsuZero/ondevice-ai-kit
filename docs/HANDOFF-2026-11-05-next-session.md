@@ -1,3 +1,7 @@
+## 2026-11-15 W3 JVM通知代码已提交并双端同步
+
+本地75ed042精确34文件；GH#15comment6893680368/GL#15note44860/GHWikidcf1f432逐字回读，双Wiki SHA bdf3bde77677b6543bb6197c149001b3a5d971ddf99b9bce3b8a92e6ff00f1e5一致，[同步收据](validation/w3-jvm-notice-integration-sync-20261115.json)。marker已用勿重发，源码分支未push；三个hy3/两构建/发布均终态，零设备/下载，173原字节或共享余字节/161freeze保持，34文件diff-check0。已知JVM通知技术保留通过；P1–P4/R4/R5/W3仍open，下一native通知与修改说明/完整组成/P4复审。当前hy3有实际交付证据，未来新quota仍停线；不按hy4专属失败误停hy3，也不重试原hy4/native429。
+
 ## 2026-11-15 W3 hy3已实际交付JVM通知集成与独立APK候选
 
 用户新选hy3后，本轮三请求均无quota；首伪工具正文拒收，缩小候选28.537s及独立APK夹具68.832s完整交付。10份原许可/归属63392B及索引已集成模块assets；离线Debug/Release AAR/lint/隔离Maven发布12.290s通过。独立Maven最终APK10.904s通过，11通知/72718B原字节保留、16SO四ABI同固定runtime；删除/同长改单字节两负例拒收。[验证](validation/w3-jvm-notice-integration-20261115.md)。原Release四成员不变，173保护/161freeze保持；零设备/麦克风/AiAi/下载/模型变更。只关闭该已知JVM子集技术保留，P1–P4/R4/R5/W3仍open。hy4原429不重试，hy3仅证明本轮实际可用，不保证未来配额；下一native通知选择/补丁说明、完整组成及独立发布复审，实体现有run仍待连接变化，不重复USB恢复或旧文件批次。

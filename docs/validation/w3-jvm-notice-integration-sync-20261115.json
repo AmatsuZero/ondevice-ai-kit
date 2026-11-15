@@ -1,0 +1,38 @@
+{
+  "sourceCommit": "75ed0424a867b4c813aed28c5e19455f7ddc55e9",
+  "sourceCommitFileCount": 34,
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-jvm-notice-integration-20261115 -->",
+  "issues": {
+    "gh": {
+      "id": 6893680368,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6893680368",
+      "sha256": "83b5de01de353a569953934c3e4ec0b46e20a82ec7a4221e4fd18ce9fec09eae",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44860,
+      "url": null,
+      "sha256": "0bf83b01848bbfff3ad1c8f0da238f9aefa22a4f506e6d0dd550fd880df518cb",
+      "readbackExact": true
+    }
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "bdf3bde77677b6543bb6197c149001b3a5d971ddf99b9bce3b8a92e6ff00f1e5",
+    "readbackExact": true
+  },
+  "githubWiki": {
+    "commit": "dcf1f432c751967e216682d9acffc114ced54a9e",
+    "sha256": "bdf3bde77677b6543bb6197c149001b3a5d971ddf99b9bce3b8a92e6ff00f1e5",
+    "readbackExact": true
+  },
+  "wikiContentSHA256Equal": true,
+  "localChecks": "Debug/Release AAR + lint + isolated Maven final APK; 11 notice assets byte-equal; four ABI/16 runtime SO byte-equal; missing and changed-byte negatives rejected",
+  "protectedPathsOrRemaindersVerified": 173,
+  "frozenContractFilesVerified": 161,
+  "noDeviceOperations": true,
+  "P1P2P3P4R4R5W3Complete": false,
+  "helperRoute": "hy3 actual complete small candidates; original hy4free/native 429 not retried",
+  "remaining": "native notice selection and modification statements; complete composition and independent release acceptance; real-device quality/resource coverage"
+}
