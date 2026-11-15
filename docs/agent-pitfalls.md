@@ -1,3 +1,7 @@
+## W3 Gitiles与CBC流：按真实封装解析原字节（2026-11-16）
+
+离线恢复首读Gitiles直接json.loads失败，原响应以精确`)]}'\n`防XSSI行开头；仅在内存移除首5字节后解析、原响应不改。CBC launcher明确使用stream-json，若按单文档json.loads会报Extra data: line2 column1(char2514)，不能归因候选JSON损坏/配额；按每非空行解析后需另验完整result、is_error、modelUsage与真实tool_use。两hy3终态51.601/34.411s、零观察工具调用；目录/root→patches→三blob原字节身份与原receipt对应已验，不冒充commit对象/签名或历史apply。证据.omx/artifacts/w3-ndk-offline-recovery-20261116T0710/{initial-read-error.json,parent-read-errors.json,parent-acceptance.json}；无重发/源站请求。
+
 ## W3 R5：统计目标、原值精度与完整批次边界（2026-11-16）
 
 预算文稿首稿固定毫秒未约束文件时长、以completed复杂片段建档，容易把部分成功统计当全批通过；修正版改为未来固定候选/设备/PCM时长档案的各语音组两阶段RTF与App采样RSS草案，失败/缺测先报、完整终态缺失不能预算通过，原65质量范围和1.5GiB实验守卫不变。限定hy3复核另指出p95≤1只约束第95百分位，不保证每请求；精确old/new已集成。父离线checker手抄过精Apple时长常量触发断言，保留初稿/失败后直接与原raw acceptance的median/p95比较，210项含161freeze通过；未改原报告或重跑设备。记录草案、独立供应上下文审阅、父复算与产品预算批准分开，不以文稿/模型success关闭R5/W3。见[方案及收据](validation/w3-r5-resource-options-20261116.md)、.omx/artifacts/w3-r5-options-20261116T005018/。

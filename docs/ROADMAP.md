@@ -1,3 +1,7 @@
+## 2026-11-16 W3：离线补齐三条NDK正文
+
+[验收](validation/w3-ndk-offline-body-recovery-20261116.md)：原134声明/76正文/58缺失不变，新overlay79正文/55缺失（声明行计数）；精确root→patches→blob/原收据及523检查通过，两hy3终态，零源站请求/下载/构建/设备。不能由正文恢复推历史apply、最终组成或发布接受；W3/R4/R5/P1–P4保持open、goal active，完整目标不缩减。当前待本次精确提交/双端同步，原quota/源站停线和未消费真机合同不变。
+
 ## 2026-11-16 W3：R5预算形成具体草案
 
 [方案与缺测边界](validation/w3-r5-resource-options-20261116.md)由免费hy3交付/限定复核，父原始证据复算210项含161freeze通过；未来Qwen各语音组p95两阶段RTF≤1/App采样RSS≤1GiB仅待产品批准草案，不追认旧结果、不缩原65质量或1.5GiB诊断守卫。R4/R5/P1–P4/W3/W8仍open；零新真机调用、模型下载或生产实现变更。

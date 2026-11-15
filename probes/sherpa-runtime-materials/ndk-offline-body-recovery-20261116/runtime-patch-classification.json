@@ -1,0 +1,43 @@
+[
+  {
+    "id": "ndk-r30:18",
+    "category": "compiler code and compiler test; not runtime build config",
+    "targetPaths": [
+      "llvm/lib/CodeGen/SelectionDAG/DAGCombiner.cpp",
+      "llvm/test/CodeGen/X86/cmp-shiftX-maskX.ll"
+    ],
+    "verifiedSourceEffect": "Complete body adds a FIXME local workaround in DAGCombiner::visitSETCC: after any existing Combined early return, it unconditionally returns SDValue(), bypassing the remaining icmp eq/ne (and X, C0) versus (shift X, C1) optimization. The X86 CodeGen lit test gains UNSUPPORTED: target={{.*}}, so it is conditionally unsupported for every target.",
+    "limits": [
+      "This classification is compiler code/tests only; it is not runtime build config and gives no Sherpa/ORT linkage evidence.",
+      "The body was reused offline after the original HTTP 429; no new request, application, build, device run, or final-code retention is implied.",
+      "Blob/tree identity verifies retained response relationships only, not signed provenance or historical apply."
+    ]
+  },
+  {
+    "id": "ndk-r30:58",
+    "category": "other runtime build config; compiler-rt CMake discovery only",
+    "targetPaths": [
+      "compiler-rt/cmake/Modules/CompilerRTUtils.cmake"
+    ],
+    "verifiedSourceEffect": "Complete body changes load_llvm_config from find_package(LLVM HINTS ${LLVM_CMAKE_DIR}) to find_package(LLVM HINTS ${LLVM_CMAKE_DIR} CMAKE_FIND_ROOT_PATH_BOTH), permitting host LLVMConfig discovery when CMAKE_FIND_ROOT_PATH_MODE_PACKAGE is ONLY during cross compilation. It remains conditional on the macro being called and still warns if LLVM is not found.",
+    "limits": [
+      "compiler-rt family membership is not automatic proof of linkage to Sherpa/ORT.",
+      "The body was reused offline after the original HTTP 429; no new request, application, build, device run, or final-code retention is implied.",
+      "Blob/tree identity verifies retained response relationships only, not signed provenance or historical apply."
+    ]
+  },
+  {
+    "id": "ndk-r30:59",
+    "category": "libcxxabi runtime build config; conditional demangling library target",
+    "targetPaths": [
+      "libcxxabi/CMakeLists.txt",
+      "libcxxabi/src/CMakeLists.txt"
+    ],
+    "verifiedSourceEffect": "Complete body adds LIBCXXABI_DEMANGLE_STATIC_OUTPUT_NAME defaulting to c++demangle and option LIBCXXABI_STATIC_DEMANGLE_LIBRARY defaulting to OFF, with a fatal check requiring LIBCXXABI_NON_DEMANGLING_TERMINATE when enabled. It removes cxa_demangle.cpp from default sources and appends it only when the option is off; when on, it creates cxxabi_demangle_static from abort_message.cpp/cxa_demangle.cpp/headers with cxx-headers and cxxabi-headers, C++20 properties, a build target, and a conditional install target.",
+    "limits": [
+      "The demangle option and conditional target do not prove final member retention, resulting C++ library composition, or Sherpa/ORT linkage.",
+      "The body was reused offline after the original HTTP 429; no new request, application, build, device run, or final-code retention is implied.",
+      "Blob/tree identity verifies retained response relationships only, not signed provenance or historical apply."
+    ]
+  }
+]

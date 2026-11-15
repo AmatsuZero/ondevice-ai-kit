@@ -1,3 +1,7 @@
+## 2026-11-16 W3 NDK离线正文恢复已验收
+
+[报告](validation/w3-ndk-offline-body-recovery-20261116.md)及probes/sherpa-runtime-materials/ndk-offline-body-recovery-20261116/：r30三条正文与r27d原字节精确blob相同，原134/76/58历史不改，新overlay79有正文/55缺失声明行，非79个唯一文件。父523检查含109原材料/6内存负例/161freeze/176集成前保护通过；hy3候选51.601s、独立供应文本复核34.411s终态，三文稿问题精确修正，zero观察tool-use。Gitiles前缀与JSONL解析初错/原失败保留；零源站请求/下载/构建/设备、原源码站429不重试。commit对象/签名/历史apply/最终native组成/P1–P4/R4/R5/W3未完成，goal active，完整目标不缩减。当前待本次精确提交/双端同步，源码不push；无实体变化不再ADB/USB恢复或旧FILE，未消费one-file合同不变。
+
 ## 2026-11-16 W3 R5草案已提交及双端同步
 
 bf4d1e0精确6文件；GH#15 comment6902769542/GL#15 note44873与双Wiki逐字回读，GH Wiki dc0e197、双Wiki SHA4744821434328170f41e7eb2dbf99e762621fa51e587eabdf48388fc6d1b99ee；[同步收据](validation/w3-r5-resource-options-sync-20261116.json)。marker已用勿重发，三hy3/三发布均终态，无待poll；源码未push。R5可靠测量/预算建议子项已形成具体可审方案，不等于预算批准或整包验收，210check含161freeze、176原工作保持；小数首错误和文稿修正保留，零新构建/设备/下载。R4/R5/P1–P4/W3/W8仍open、goal运行时最终回读blocked（W3未完成）。下一推进未决完整生产组成/发布证据；真机有实体连接新变化后才能fresh既有未消费单文件诊断，不重放65/旧FILE或USB恢复循环，不自动重试旧quota/源站429。

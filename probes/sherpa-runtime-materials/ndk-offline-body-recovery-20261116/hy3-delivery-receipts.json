@@ -1,0 +1,126 @@
+{
+  "requests": [
+    {
+      "lane": "hy3-candidate",
+      "model": "hy3",
+      "sessionId": "01a1e175-20a9-769f-a3e6-19c224387e06",
+      "process": {
+        "exitCode": 0,
+        "elapsedSeconds": 51.601,
+        "endedAtUTC": "2026-11-15T23:06:02.563221+00:00",
+        "stdoutBytes": 60841,
+        "stderrBytes": 0,
+        "automaticRetry": false,
+        "automaticFallback": false
+      },
+      "resultSubtype": "success",
+      "isError": false,
+      "observedToolUse": 0,
+      "modelUsage": {
+        "hy3": {
+          "inputTokens": 8264,
+          "outputTokens": 11144,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "contextWindow": 960000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "promptSHA256": "42c6f364c27c00603ff9b5f7f66eb2ff46c1af0c3cba03f2003aad47477ea3f5",
+      "rawEventsSHA256": "20420412805605f34ac5b3406b4409ac24bf7da673459e6a3778cbd66ee8f684",
+      "artifactRoot": ".omx/artifacts/w3-ndk-offline-recovery-20261116T0710/hy3-candidate",
+      "scope": "supplied-context only; no execution claim"
+    },
+    {
+      "lane": "hy3-review",
+      "model": "hy3",
+      "sessionId": "01a1e178-f380-7b53-9dd1-cab3b4f452a3",
+      "process": {
+        "exitCode": 0,
+        "elapsedSeconds": 34.411,
+        "endedAtUTC": "2026-11-15T23:09:56.152989+00:00",
+        "stdoutBytes": 47031,
+        "stderrBytes": 0,
+        "automaticRetry": false,
+        "automaticFallback": false
+      },
+      "resultSubtype": "success",
+      "isError": false,
+      "observedToolUse": 0,
+      "modelUsage": {
+        "hy3": {
+          "inputTokens": 7979,
+          "outputTokens": 7665,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "contextWindow": 960000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "promptSHA256": "698dc187fb0a3dbb52dfc7a60a11019df46b8f65bfc524f0bedb7045d5f6f02e",
+      "rawEventsSHA256": "3671a80e40175d72c2c63fcc79451145a608c65605473f18f9bf0faaae23a24f",
+      "artifactRoot": ".omx/artifacts/w3-ndk-offline-recovery-20261116T0710/hy3-review",
+      "scope": "supplied-context only; no execution claim"
+    }
+  ],
+  "review": {
+    "verdict": "accept_with_exact_replacements",
+    "findings": [
+      {
+        "severity": "info",
+        "description": "Body classifications and verified source effects match the supplied complete patches: ndk-r30:18 is compiler code/test, ndk-r30:58 is compiler-rt CMake discovery build config, and ndk-r30:59 is libcxxabi runtime build config; no classification correction is required."
+      },
+      {
+        "severity": "high",
+        "description": "The report cites a nonexistent old validation report path; replace it with the real existing report path."
+      },
+      {
+        "severity": "high",
+        "description": "The report's broad no publication/delegation phrase is misleading; scope it to this recovery and state that hy3 text calls are not runtime inference while parent will later commit/publish docs."
+      },
+      {
+        "severity": "high",
+        "description": "The provenance boundary must name parent's current tree/blob and receipt/revision checks and explicitly exclude retained/verified commit objects and signatures."
+      },
+      {
+        "severity": "info",
+        "description": "No blockers found; scope remains supplied-context classification/report review with exact replacements only for the named validation doc, and no implementation or changes elsewhere."
+      }
+    ],
+    "replacements": [
+      {
+        "old": "旧校验：`docs/validation/w3-ndk-offline-recovery-20261116.md`。",
+        "new": "旧校验：`docs/validation/w3-ndk-runtime-patch-selection-20261115.md`。"
+      },
+      {
+        "old": "source-host 429 停止，无新源站请求/重试/设备/构建/下载/发布/委托。",
+        "new": "source-host 429 停止；本次 recovery 无新源站 HTTP（含重试）、构建、设备操作或下载；hy3 文本调用不是 runtime inference；文档由 parent 后续 commit/publish。"
+      },
+      {
+        "old": "信任边界仅到 retained response/tree/blob 关系，不是签名、来源可信、历史 apply 或最终产物证明。",
+        "new": "信任边界仅为 retained bytes/response 关系；parent 正在校验 root tree -> patches tree -> 三个 blob 关系及原始 request receipt hashes/revision URL 对应关系；commit objects/signatures 未保留/未验证，不主张完整 trusted provenance、历史 apply 或最终产物证明。"
+      }
+    ],
+    "executionClaim": "No execution; supplied-context only"
+  },
+  "acceptedExactReplacements": [
+    {
+      "old": "旧校验：`docs/validation/w3-ndk-offline-recovery-20261116.md`。",
+      "new": "旧校验：`docs/validation/w3-ndk-runtime-patch-selection-20261115.md`。"
+    },
+    {
+      "old": "source-host 429 停止，无新源站请求/重试/设备/构建/下载/发布/委托。",
+      "new": "source-host 429 停止；本次 recovery 无新源站 HTTP（含重试）、构建、设备操作或下载；hy3 文本调用不是 runtime inference；文档由 parent 后续 commit/publish。"
+    },
+    {
+      "old": "信任边界仅到 retained response/tree/blob 关系，不是签名、来源可信、历史 apply 或最终产物证明。",
+      "new": "信任边界仅为 retained bytes/response 关系；parent 正在校验 root tree -> patches tree -> 三个 blob 关系及原始 request receipt hashes/revision URL 对应关系；commit objects/signatures 未保留/未验证，不主张完整 trusted provenance、历史 apply 或最终产物证明。"
+    },
+    {
+      "old": "parent 正在校验 root tree -> patches tree -> 三个 blob 关系及原始 request receipt hashes/revision URL 对应关系",
+      "new": "parent 已校验 root tree -> patches tree -> 三个 blob 关系及原始 request receipt hashes/revision URL 对应关系",
+      "reason": "parent verification completed; mechanical evidence-state update"
+    }
+  ],
+  "parentVerificationSeparate": true
+}
