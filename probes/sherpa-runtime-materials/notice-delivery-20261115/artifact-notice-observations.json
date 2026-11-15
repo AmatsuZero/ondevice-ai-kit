@@ -1,0 +1,256 @@
+{
+  "sourceHead": "a18292ac56e7c694fd2e7efb2550864a0b3ef21e",
+  "artifacts": [
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT.aar",
+      "bytes": 16220,
+      "sha256": "5eba342740cc766e9f7f226b055257ee68071a5cadc86dd9cdaff8d7f1c6a444",
+      "roles": [
+        "io.ondeviceai:sdk-core:0.1.0-SNAPSHOT",
+        "contractDebugRuntimeClasspath:io.ondeviceai:sdk-core:0.1.0-SNAPSHOT",
+        "systemAsrDebugRuntimeClasspath:io.ondeviceai:sdk-core:0.1.0-SNAPSHOT",
+        "sherpaAsrDebugRuntimeClasspath:io.ondeviceai:sdk-core:0.1.0-SNAPSHOT"
+      ],
+      "kind": "sdk-aar",
+      "membersIncludingNested": 17,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT-sources.jar",
+      "bytes": 2160,
+      "sha256": "2680eef0cf4e21a4d6fb6acd84677d9055005e89e51c9a7b30fedd21a63e0920",
+      "roles": [
+        "io.ondeviceai:sdk-core:0.1.0-SNAPSHOT:sources"
+      ],
+      "kind": "source-jar-diagnostic-only",
+      "membersIncludingNested": 4,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT.aar",
+      "bytes": 47127,
+      "sha256": "af39a696fd5ac750b7dcf2f8c08e407956dcab51bd66ebe2e54dcf8cfd99c0e6",
+      "roles": [
+        "io.ondeviceai:speech:0.1.0-SNAPSHOT",
+        "contractDebugRuntimeClasspath:io.ondeviceai:speech:0.1.0-SNAPSHOT",
+        "systemAsrDebugRuntimeClasspath:io.ondeviceai:speech:0.1.0-SNAPSHOT",
+        "sherpaAsrDebugRuntimeClasspath:io.ondeviceai:speech:0.1.0-SNAPSHOT"
+      ],
+      "kind": "sdk-aar",
+      "membersIncludingNested": 36,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT-sources.jar",
+      "bytes": 2595,
+      "sha256": "96a5087d5c186c6a2fd085b0bd917c88ee8597f2828f0214c51767ff442cb09a",
+      "roles": [
+        "io.ondeviceai:speech:0.1.0-SNAPSHOT:sources"
+      ],
+      "kind": "source-jar-diagnostic-only",
+      "membersIncludingNested": 2,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+      "bytes": 38862,
+      "sha256": "6de95f567932747fb98ffc7b15ee66e0cca75a6674f63c87e40e8bc9b2852028",
+      "roles": [
+        "io.ondeviceai:backend-sherpa-asr:0.1.0-SNAPSHOT",
+        "sherpaAsrDebugRuntimeClasspath:io.ondeviceai:backend-sherpa-asr:0.1.0-SNAPSHOT"
+      ],
+      "kind": "sdk-aar",
+      "membersIncludingNested": 23,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT-sources.jar",
+      "bytes": 6887,
+      "sha256": "717d7d213296fae42601c0e02a8d9f50f9928ce597018b519a69af13144f1bb4",
+      "roles": [
+        "io.ondeviceai:backend-sherpa-asr:0.1.0-SNAPSHOT:sources"
+      ],
+      "kind": "source-jar-diagnostic-only",
+      "membersIncludingNested": 6,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-asr/0.1.0-SNAPSHOT/backend-system-asr-0.1.0-SNAPSHOT.aar",
+      "bytes": 57807,
+      "sha256": "532761a217f5d348ab04312803232dcea8939d8953ca22ac171354c9c5334d60",
+      "roles": [
+        "io.ondeviceai:backend-system-asr:0.1.0-SNAPSHOT",
+        "systemAsrDebugRuntimeClasspath:io.ondeviceai:backend-system-asr:0.1.0-SNAPSHOT"
+      ],
+      "kind": "sdk-aar",
+      "membersIncludingNested": 43,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-asr/0.1.0-SNAPSHOT/backend-system-asr-0.1.0-SNAPSHOT-sources.jar",
+      "bytes": 7004,
+      "sha256": "6826f45172a05642058275e7ed36899aae38d9af94a12f5ac882546a7fc12e9a",
+      "roles": [
+        "io.ondeviceai:backend-system-asr:0.1.0-SNAPSHOT:sources"
+      ],
+      "kind": "source-jar-diagnostic-only",
+      "membersIncludingNested": 5,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-tts/0.1.0-SNAPSHOT/backend-system-tts-0.1.0-SNAPSHOT.aar",
+      "bytes": 29599,
+      "sha256": "3abc28f8cfda580b8cc94ecede7dbcf0cba0dc5f9d390c8678bf817beff840df",
+      "roles": [
+        "io.ondeviceai:backend-system-tts:0.1.0-SNAPSHOT"
+      ],
+      "kind": "sdk-aar",
+      "membersIncludingNested": 21,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-tts/0.1.0-SNAPSHOT/backend-system-tts-0.1.0-SNAPSHOT-sources.jar",
+      "bytes": 2917,
+      "sha256": "6f01f8293ebb94365cc107cbb323cd19812a4641dffb3d376d2d6e6c6b56c82e",
+      "roles": [
+        "io.ondeviceai:backend-system-tts:0.1.0-SNAPSHOT:sources"
+      ],
+      "kind": "source-jar-diagnostic-only",
+      "membersIncludingNested": 2,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/android-speech-consumer-sherpaAsr-debug.aar",
+      "bytes": 8755,
+      "sha256": "91f634851d792b99293c76f3be7b5b5a3cafedb89429f1187c02928e15551a19",
+      "roles": [
+        "library-consumer:debug"
+      ],
+      "kind": "consumer-aar",
+      "membersIncludingNested": 10,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/android-speech-consumer-sherpaAsr-release.aar",
+      "bytes": 8381,
+      "sha256": "acefa8bef1bfe752463ee432b66ca8212e8d81117b4ab8ce947d5d5646f2a94c",
+      "roles": [
+        "library-consumer:release"
+      ],
+      "kind": "consumer-aar",
+      "membersIncludingNested": 10,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.10.2/4a9f78ef49483748e2c129f3d124b8fa249dafbf/kotlinx-coroutines-core-jvm-1.10.2.jar",
+      "bytes": 1479317,
+      "sha256": "5ca175b38df331fd64155b35cd8cae1251fa9ee369709b36d42e0a288ccce3fd",
+      "roles": [
+        "contractDebugRuntimeClasspath:org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2",
+        "systemAsrDebugRuntimeClasspath:org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2",
+        "sherpaAsrDebugRuntimeClasspath:org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2"
+      ],
+      "kind": "resolved-dependency",
+      "membersIncludingNested": 841,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.10.2/c8705d275d81f19e8afaf3ff9b5bf7a4b6b6c19b/kotlinx-coroutines-android-1.10.2.jar",
+      "bytes": 17826,
+      "sha256": "e713f1f874244115a07571065cffa0f24f5e78300e9720fea16de3af1d75fd41",
+      "roles": [
+        "contractDebugRuntimeClasspath:org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2",
+        "systemAsrDebugRuntimeClasspath:org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2",
+        "sherpaAsrDebugRuntimeClasspath:org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"
+      ],
+      "kind": "resolved-dependency",
+      "membersIncludingNested": 16,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar",
+      "bytes": 1841929,
+      "sha256": "ccb14ff83fabcb11458b798dbc9824748ccdffeec79c9aba789e6ed1cda86b1c",
+      "roles": [
+        "contractDebugRuntimeClasspath:org.jetbrains.kotlin:kotlin-stdlib:2.4.0",
+        "systemAsrDebugRuntimeClasspath:org.jetbrains.kotlin:kotlin-stdlib:2.4.0",
+        "sherpaAsrDebugRuntimeClasspath:org.jetbrains.kotlin:kotlin-stdlib:2.4.0"
+      ],
+      "kind": "resolved-dependency",
+      "membersIncludingNested": 1002,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar",
+      "bytes": 29371,
+      "sha256": "7b0f19724082cbfcbc66e5abea2b9bc92cf08a1ea11e191933ed43801eb3cd05",
+      "roles": [
+        "contractDebugRuntimeClasspath:org.jetbrains:annotations:23.0.0",
+        "systemAsrDebugRuntimeClasspath:org.jetbrains:annotations:23.0.0",
+        "sherpaAsrDebugRuntimeClasspath:org.jetbrains:annotations:23.0.0"
+      ],
+      "kind": "resolved-dependency",
+      "membersIncludingNested": 59,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    },
+    {
+      "path": "artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar",
+      "bytes": 49441341,
+      "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+      "roles": [
+        "sherpaAsrDebugRuntimeClasspath:com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1"
+      ],
+      "kind": "resolved-dependency",
+      "membersIncludingNested": 146,
+      "noticeLikeMembers": [],
+      "knownTextMatches": [],
+      "utf8TextSignals": []
+    }
+  ],
+  "archiveCount": 17,
+  "containersIncludingNested": 25,
+  "membersIncludingNested": 2243,
+  "referenceTextCount": 58,
+  "verification": "Python zipfile and Info-ZIP ordered member lists and concatenated uncompressed payloads equal, including one-level nested JAR contents",
+  "runtimeResolutionScope": "three existing Debug runtime configurations only; Release compilation separately observed",
+  "nameAndExactTextScansAreComplianceDetermination": false,
+  "finalCompositionComplete": false,
+  "finalAppInspected": false,
+  "productionNoticeRetentionVerified": false,
+  "P3Complete": false,
+  "deviceOperations": 0,
+  "helperInvocations": 0,
+  "builds": 0
+}

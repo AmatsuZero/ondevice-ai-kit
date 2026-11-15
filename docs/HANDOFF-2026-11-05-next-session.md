@@ -1,3 +1,7 @@
+## 2026-11-15 W3现有SDK通知缺口已定位
+
+当前17产物/25含嵌套容器/2243非目录成员经Python与Info-ZIP有序清单及解压负载交叉核对，当前Sherpa SDK/runtime没有独立通知资源；thin library-consumer不是最终App，不能以其无通知声称打包丢弃。[验证](validation/w3-notice-delivery-20261115.md)。47源码输入未变，161freeze通过，零构建/helper/设备/生产实现；58已知来源文本仅作参照，不是全部适用或完整清单。下一生产通知选择/index/原文/补丁说明及独立最终APK保留验收已给精确brief；等待已提出的新免费线路选择，原native/CBC429不重试、不自动fallback。P1–P4/R4/R5/W3仍open、goal active；不要重扫已验归档/重建旧消费者或循环USB恢复，普通App/models保持。
+
 ## 2026-11-15 W3第三方补丁与嵌套声明已提交并同步
 
 本地eecac89精确22文件；固定归档35源/三文件原Android补丁重建/四ABI构建观察及两嵌套声明已父验。GH#15comment6891032691/GL#15note44855/GHWiki22fd388b逐字回读，双Wiki SHA4f8f980920be88630cecb127064c9f38d4384abb9d025eda48b5dd7fb53e91a3一致，[同步收据](validation/w3-sentencepiece-patch-sync-20261115.json)。marker已用勿重发，源码未push；本轮CMake/API/发布均终态，零helper/设备。171保护中167原余字节不变，4个已核恰一末尾LF并发删除保留且未带stage，161freeze通过；完整diff-check2只限两份原样上游证据12行，其他文字检查0，不格式化证据。P1–P4/R4/R5/W3仍open、goal active；原native/CBC429不重试，待所选新线路。后续继续实际递归组成/生产通知集成或可运行真机验收，不重复已核源/补丁/归档/USB恢复，也不以主仓库diff只有version.cc宣称第三方未改。

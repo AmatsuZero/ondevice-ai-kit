@@ -1,3 +1,7 @@
+## 2026-11-15：现有SDK通知交付缺口已确认
+
+固定17产物/25容器/2243非目录成员的有序清单与解压负载经Python/Info-ZIP交叉核对；当前Sherpa SDK/runtime没有独立通知资源，[验证](../validation/w3-notice-delivery-20261115.md)。thin library-consumer不代表最终App，不能据其缺失断定打包丢弃；58参照文本不是完整/全部适用清单。生产通知选择、SDK集成和独立最终APK保留验收任务已准备，原native/CBC429停线，等待已提新线路选择。47源码/161freeze保持，零构建/helper/设备/生产改动；P1–P4/R4/R5/W3保持open。
+
 ## 2026-11-15：第三方线程移除补丁与Darts声明已补核
 
 固定simple-sentencepiece归档355335B/SHA与上游CMake相同，35普通源GitBlob全核；原Android补丁三文件已按原CMake逻辑重建，四ABI日志的编译/静态库目标及声明链接路径对应。此前材料未收录的darts-clone BSD2与原ThreadPool zlib-style声明已原字节保留，[验证](../validation/w3-sentencepiece-patch-20261115.md)。原ThreadPool被Android空stub替换，不能误记MIT或必然最终嵌入；没有历史CI补丁后源码/最终机器码穷尽证明或生产通知集成。P1–P4/R4/R5/W3保持open，原429停线，无helper/设备/生产实现变更。

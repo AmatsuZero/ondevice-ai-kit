@@ -1,3 +1,7 @@
+## W3通知交付：thin消费者不证明最终打包丢失（2026-11-15）
+
+当前17份产物（含5 sources JAR辅助项）全成员检查没有独立通知资源；Sherpa SDK外层仅4非目录成员，runtime外层21含16SO，通知集成本身尚缺。两份8KB级consumer是thin library AAR，未合并传递runtime；其无通知不能证明AGP丢弃，也不能作最终App保留验收。有效后续是先固定适用组件/原声明及修改说明，集成SDK通知，再用独立最终APK提取比对；58历史/新来源参照不能不加选择直接当完整适用清单。本轮Python/Info-ZIP有序列表及串接解压负载相同，未构建/安装/改生产；名字与精确文本阴性不是法律符合性裁定。证据`probes/sherpa-runtime-materials/notice-delivery-20261115/`及[验证](validation/w3-notice-delivery-20261115.md)。
+
 ## W3第三方构建目录补丁与bundled header声明也属于输入（2026-11-15）
 
 Sherpa主仓库git diff只有version.cc，不证明下载的第三方源未改。固定simple-sentencepiece.cmake在Android分支会改threadpool.h/ssentencepiece.h/ssentencepiece.cc；四ABI日志均报告patch并编译静态目标。有效核验为归档URL_HASH+全部35普通文件同固定tree、仅执行原helper/body并保留三文件前后/diff，再关联实际日志与声明链接边；本地重建仍不等于直接取得历史CI补丁后源码/最终机器码。该固定归档darts.h另带BSD2/Susumu Yata声明，不能被根Apache文本代替；原ThreadPool为zlib-style文本，Android补丁换空stub，不能误记MIT或由原源码存在断言最终必然嵌入。补丁产生的两处空白行保留原字节，不为diff检查格式化证据。证据`.omx/artifacts/w3-sentencepiece-patch-20261115/`及[验证](validation/w3-sentencepiece-patch-20261115.md)。
