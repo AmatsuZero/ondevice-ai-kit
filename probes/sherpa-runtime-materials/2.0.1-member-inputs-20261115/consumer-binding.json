@@ -1,0 +1,89 @@
+{
+  "coordinate": "com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1",
+  "aar": {
+    "path": "artifacts/verification/sherpa-asr-20261105/inputs/downloads/sherpa-onnx-2.0.1.aar",
+    "bytes": 49441341,
+    "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7"
+  },
+  "mavenAar": {
+    "path": "artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar",
+    "bytes": 49441341,
+    "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7"
+  },
+  "mavenAarByteEqual": true,
+  "apk": {
+    "path": "artifacts/verification/w3-qwen-terminal-20261114/main.apk",
+    "bytes": 32464750,
+    "sha256": "88757e37ac741a6bf7b3256f1d7378852b0e6c9bd9464762dd6155be81c7dd13"
+  },
+  "testApk": {
+    "path": "artifacts/verification/w3-qwen-terminal-20261114/test.apk",
+    "bytes": 7917636,
+    "sha256": "6104d8b51051ac834c2e8bc2cadd42f24673bc24d012fb766124b77a07a08815"
+  },
+  "preparedBuildInput": {
+    "path": "artifacts/verification/w3-qwen-terminal-20261114/source/build.gradle.kts",
+    "bytes": 1085,
+    "sha256": "be806003b98278a475b82d3183d70750fba6e4a3486a325407d67e90e54a33b5"
+  },
+  "preparedRepositoryConfig": {
+    "path": "artifacts/verification/w3-qwen-terminal-20261114/source/settings.gradle.kts",
+    "bytes": 663,
+    "sha256": "02588897e140f9140e129a2ac4e611f4d8cc1678df0b6dd151d55b9d7f9f8cd8"
+  },
+  "parentBuildDriver": {
+    "path": "probes/android-qwen-file/build_acceptance.py",
+    "bytes": 6224,
+    "sha256": "e8d47e41e4e847faa802998cc74b7dab24c08c2a1fc256c0fc26ccdc5b630e04"
+  },
+  "frozenContract": {
+    "path": "artifacts/verification/w3-qwen-terminal-20261114/diagnostic-frozen.json",
+    "bytes": 25790,
+    "sha256": "6387847c79904c7f67d03dfec7c92c79e69467b408064f5a7fb96bbe3494d7fa"
+  },
+  "sourceFingerprint": "ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5",
+  "nativeMembers": [
+    {
+      "apkPath": "lib/arm64-v8a/libonnxruntime.so",
+      "aarPath": "jni/arm64-v8a/libonnxruntime.so",
+      "bytes": 22249560,
+      "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+      "byteEqual": true
+    },
+    {
+      "apkPath": "lib/arm64-v8a/libsherpa-onnx-c-api.so",
+      "aarPath": "jni/arm64-v8a/libsherpa-onnx-c-api.so",
+      "bytes": 4303136,
+      "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+      "byteEqual": true
+    },
+    {
+      "apkPath": "lib/arm64-v8a/libsherpa-onnx-cxx-api.so",
+      "aarPath": "jni/arm64-v8a/libsherpa-onnx-cxx-api.so",
+      "bytes": 272848,
+      "sha256": "de94e0952a124eb22e86d754e11aa0489a065affc837911a8ed5e7fd843baad6",
+      "byteEqual": true
+    },
+    {
+      "apkPath": "lib/arm64-v8a/libsherpa-onnx-jni.so",
+      "aarPath": "jni/arm64-v8a/libsherpa-onnx-jni.so",
+      "bytes": 4609320,
+      "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575",
+      "byteEqual": true
+    }
+  ],
+  "jarClassesInDex": 124,
+  "jarClassesMissingInDex": [],
+  "additionalGeneratedSherpaClasses": [
+    "com.k2fsa.sherpa.onnx.R"
+  ],
+  "dexEvidence": {
+    "path": ".omx/artifacts/w3-p1-member-matrix-20261115/consumer-apk-dex.stdout",
+    "bytes": 1520512,
+    "sha256": "f7c1a6218a7751678a1eacc28095e89f53de6823360fe9482af23b5a970289d7"
+  },
+  "classNameMatchIsByteEquality": false,
+  "productionCandidate": false,
+  "deviceExecutedByThisCheck": false,
+  "scope": "Existing isolated frozen consumer only; no production adoption assertion"
+}

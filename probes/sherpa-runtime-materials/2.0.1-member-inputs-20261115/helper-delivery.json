@@ -1,0 +1,15 @@
+{
+  "model": "hy3",
+  "initialCandidateAccepted": false,
+  "initialFindings": [
+    "fixed/pinned translated as repaired AAR",
+    "unsupported recovery-call count",
+    "length too large"
+  ],
+  "correctionCandidateAccepted": true,
+  "readmeByteExactToCandidatePlusFinalNewline": true,
+  "readmeSHA256": "98c13f151f80c07e9fb1a3e970502b01b3e8e20fb1e56946e2e9e7c3be4bc927",
+  "initialRawRetained": true,
+  "correctionToolUseBlocks": 0,
+  "noProviderRetryOrPaidFallback": true
+}

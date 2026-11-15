@@ -1,0 +1,222 @@
+"""Record bounded P1 observations from existing immutable artifacts; no build/device work."""
+from pathlib import Path
+import hashlib
+import io
+import json
+import re
+import shlex
+import zipfile
+import xml.etree.ElementTree as ET
+
+ROOT = Path(__file__).resolve().parents[3]
+OUT = Path(__file__).resolve().parent
+DEST = ROOT / 'probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115'
+SOURCE = 'af2d8d81dbfa61c4cea4c568da78f3982edca005'
+RUNTIME = ROOT / 'artifacts/verification/sherpa-asr-20261105/inputs/downloads/sherpa-onnx-2.0.1.aar'
+CONSUMER = ROOT / 'artifacts/verification/w3-qwen-terminal-20261114'
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def read(path):
+    return json.loads((ROOT / path).read_bytes())
+
+
+def identity(path):
+    path = Path(path)
+    data = path.read_bytes()
+    return {'path': str(path.relative_to(ROOT)), 'bytes': len(data), 'sha256': digest(data)}
+
+
+def emit(name, data):
+    encoded = (json.dumps(data, ensure_ascii=False, indent=2) + '\n').encode()
+    (OUT / name).write_bytes(encoded)
+    (DEST / name).write_bytes(encoded)
+
+
+def plain(line):
+    return re.sub(r'^\S+Z ', '', re.sub(r'\x1b\[[0-9;]*[A-Za-z]', '', line))
+
+
+aar_bytes = RUNTIME.read_bytes()
+assert len(aar_bytes) == 49441341
+assert digest(aar_bytes) == 'a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7'
+members = read('probes/sherpa-runtime-materials/2.0.1-a8d09d1d/aar-members.json')
+ci = read('probes/sherpa-runtime-materials/2.0.1-ci-members-20261115/observations.json')
+ort = read('probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/member-verification.json')
+ort_inputs = json.loads((OUT / 'ort-per-abi-inputs.json').read_text())
+source_inputs = json.loads((OUT / 'source-input-receipts.json').read_text())
+tree_path = ROOT / '.omx/artifacts/w3-model-reselection-20261110/sherpa-v201-tree.raw'
+tree_bytes = tree_path.read_bytes()
+tree = json.loads(tree_bytes)
+assert tree['sha'] == SOURCE and tree['truncated'] is False
+assert digest(tree_bytes) == 'c1e7beafad4f8f5d001b3dfbb8709aef6cd610f3f0896c33d91f68b1a04a81b7'
+by_source = {r['path']: r for r in tree['tree']}
+for row in source_inputs:
+    data = (ROOT / row['materialPath']).read_bytes()
+    assert len(data) == row['bytes'] and digest(data) == row['sha256']
+    blob = hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+    assert blob == row['gitBlobSHA1'] == by_source[row['path']]['sha']
+
+class_map = json.loads((OUT / 'class-source-tree-map.json').read_text())
+for row in class_map:
+    assert by_source[row['sourcePath']]['sha'] == row['gitBlobSHA1']
+assert len(class_map) == 124
+assert len({r['sourcePath'] for r in class_map}) == 22
+emit('class-source-map.json', {'sourceCommit': SOURCE, 'treeEvidence': identity(tree_path),
+     'mappingMethod': 'Actual javap SourceFile attribute matched to fixed complete Git tree; not rebuilt class equality',
+     'classes': class_map})
+
+log_root = ROOT / '.omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected'
+libs_log = log_root / 'android-libs.log'
+libs_lines = libs_log.read_text().splitlines()
+commands = []
+for number, line in enumerate(libs_lines, 1):
+    text = plain(line)
+    if text.startswith('+ cmake -DCMAKE_TOOLCHAIN_FILE='):
+        tokens = shlex.split(text.removeprefix('+ '))
+        flags = dict(t[2:].split('=', 1) for t in tokens if t.startswith('-D') and '=' in t)
+        commands.append({'abi': flags['ANDROID_ABI'], 'line': number, 'text': line, 'flags': flags})
+assert {r['abi'] for r in commands} == {'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'}
+assert len(commands) == 4
+
+patch = json.loads((OUT / 'sherpa-version-patch-observed.json').read_text())
+version_path = DEST / 'source-evidence/sherpa-onnx/csrc/version.cc'
+original_version = version_path.read_bytes()
+changed_version = original_version
+for old, new in [(b'Mon Oct 26 21:50:15 2026', b'Mon Oct 26 14:57:12 2026'),
+                 (b'96255a1b', b'af2d8d81')]:
+    assert changed_version.count(old) == 1
+    changed_version = changed_version.replace(old, new, 1)
+before_blob = hashlib.sha1(b'blob ' + str(len(original_version)).encode() + b'\0' + original_version).hexdigest()
+after_blob = hashlib.sha1(b'blob ' + str(len(changed_version)).encode() + b'\0' + changed_version).hexdigest()
+assert before_blob.startswith('fad4f460') and after_blob.startswith('149297a1')
+(OUT / 'version-observed-build.cc').write_bytes(changed_version)
+patch_record = {'path': 'sherpa-onnx/csrc/version.cc', 'sourceGitBlobSHA1': before_blob,
+                'reconstructedObservedPatchGitBlobSHA1': after_blob,
+                'reconstructedObservedPatchSHA256': digest(changed_version),
+                'bothOfficialJobDiffPrefixesMatched': True,
+                'evidence': patch,
+                'scope': 'Recorded tracked version/date changes; does not assert absence of all other or generated input changes'}
+
+packaging_root = 'probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/'
+packaging = {'id': 'sherpa-aar-packaging', 'sourceCommit': SOURCE,
+             'sourcePaths': ['android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts',
+                             'android/SherpaOnnxAar/gradle/libs.versions.toml',
+                             'android/SherpaOnnxAar/gradle/wrapper/gradle-wrapper.properties',
+                             'android/SherpaOnnxAar/sherpa_onnx/src/main/AndroidManifest.xml'],
+             'declaredTools': {'gradle': '8.6', 'agp': '8.4.0', 'kotlin': '1.7.20'},
+             'observedJobTools': {'gradle': '8.6', 'setupJava': 'temurin 21'},
+             'settings': {'compileSdk': 34, 'minSdk': 21, 'jvmTarget': '1.8', 'releaseMinify': False},
+             'command': './gradlew :sherpa_onnx:assembleRelease',
+             'workflow': packaging_root + '.github/workflows/android.yaml',
+             'jobLog': identity(log_root / 'android-aar.log')}
+groups = {'sherpaSourceCommit': SOURCE, 'sherpaVersionPatch': patch_record,
+          'sherpaNative': [{'id': 'sherpa-native-' + row['abi'], 'sourceCommit': SOURCE,
+                            'actualCmake': row, 'jobLog': identity(libs_log),
+                            'sourceTargets': [packaging_root + 'sherpa-onnx/csrc/CMakeLists.txt',
+                                              packaging_root + 'sherpa-onnx/c-api/CMakeLists.txt',
+                                              packaging_root + 'sherpa-onnx/jni/CMakeLists.txt'],
+                            'patchGroup': 'sherpaVersionPatch'} for row in commands],
+          'packaging': packaging,
+          'ortNative': [{'id': 'ort-native-' + row['abi'], **row,
+                         'executedWorkflowCommit': 'bb069649de9edc4689b2c5f9609e5499ae0bee9d',
+                         'patchSummary': 'Remove SOVERSION and target VERSION statements in cmake/onnxruntime.cmake',
+                         'releaseMemberEvidence': 'probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/member-verification.json',
+                         'dependencyInputEvidence': [
+                             'probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/dependency-notice-map.json',
+                             'probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/complete-manifest.json'],
+                         'limitations': 'Selected flags and tracked patch observed; not certification of exhaustive inputs or raw CI per-ABI member reread'} for row in ort_inputs],
+          'inputCompletenessVerified': False}
+emit('build-input-groups.json', groups)
+
+m2 = ROOT / 'artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar'
+assert m2.read_bytes() == aar_bytes
+package_receipt = json.loads((CONSUMER / 'package-verified.json').read_text())
+for filename in ('main.apk', 'test.apk'):
+    assert identity(CONSUMER / filename)['sha256'] == package_receipt['files'][filename]['sha256']
+apk_libs = []
+with zipfile.ZipFile(RUNTIME) as aar, zipfile.ZipFile(CONSUMER / 'main.apk') as apk:
+    expected_libs = {'lib/' + p[4:] for p in aar.namelist() if p.startswith('jni/arm64-v8a/') and p.endswith('.so')}
+    actual_libs = {p for p in apk.namelist() if p.startswith('lib/') and p.endswith('.so')}
+    assert expected_libs == actual_libs and len(actual_libs) == 4
+    for path in sorted(actual_libs):
+        data = apk.read(path)
+        original = 'jni/' + path[4:]
+        assert data == aar.read(original)
+        apk_libs.append({'apkPath': path, 'aarPath': original, 'bytes': len(data), 'sha256': digest(data), 'byteEqual': True})
+    dex_lines = (OUT / 'consumer-apk-dex.stdout').read_text().splitlines()
+    dex_names = {line.split()[-1] for line in dex_lines if line.startswith('C ')}
+    class_names = {r['classPath'][:-6].replace('/', '.') for r in class_map}
+    assert class_names <= dex_names
+    extras = sorted(n for n in dex_names - class_names if n.startswith('com.k2fsa.sherpa.onnx.'))
+    assert extras == ['com.k2fsa.sherpa.onnx.R']
+    rows = []
+    ci_members = {r['aarPath']: r for r in ci['nativeMembers']}
+    ort_members = {r['aarPath']: r for r in ort['members']}
+    with zipfile.ZipFile(io.BytesIO(aar.read('classes.jar'))) as jar:
+        jar_files = [n for n in jar.namelist() if not n.endswith('/')]
+        assert len(jar_files) == 125
+        assert len([n for n in jar_files if n.endswith('.class')]) == 124
+        assert [n for n in jar_files if not n.endswith('.class')] == ['META-INF/sherpa_onnx_release.kotlin_module']
+    for item in members['members']:
+        path = item['path']
+        data = aar.read(path)
+        assert len(data) == item['bytes'] and digest(data) == item['sha256']
+        row = dict(item, ciFullAarCorrespondence=True)
+        if path.endswith('.so'):
+            abi = path.split('/')[1]
+            assert ci_members[path]['sha256'] == item['sha256']
+            row['inputGroup'] = ('ort-native-' if path.endswith('/libonnxruntime.so') else 'sherpa-native-') + abi
+            row['ciNativeByteEquality'] = True
+            if path.endswith('/libonnxruntime.so'):
+                assert ort_members[path]['aarSHA256'] == item['sha256']
+                row['nestedOrtReleaseByteEquality'] = True
+            row['consumerSelection'] = 'byte-equal in frozen terminal APK' if abi == 'arm64-v8a' else 'not selected by arm64-only probe'
+        elif path == 'classes.jar':
+            row.update(inputGroup='sherpa-aar-packaging', sourceMap='class-source-map.json',
+                       classCount=124, sourceFileCount=22, jarOtherMember='META-INF/sherpa_onnx_release.kotlin_module',
+                       consumerSelection='124/124 class names in DEX; transformed bytes not claimed equal')
+        elif path == 'AndroidManifest.xml':
+            tree_xml = ET.fromstring(data)
+            assert tree_xml.attrib['package'] == 'com.k2fsa.sherpa.onnx'
+            assert tree_xml.find('uses-sdk').attrib['{http://schemas.android.com/apk/res/android}minSdkVersion'] == '21'
+            row.update(inputGroup='sherpa-aar-packaging', sourceAttribution='AGP merged source manifest + namespace/minSdk settings; generated output', consumerSelection='merged by consumer packaging; raw byte equality not claimed')
+        elif path in ('R.txt', 'proguard.txt'):
+            assert data == b''
+            row.update(inputGroup='sherpa-aar-packaging', sourceAttribution='Empty generated symbol/consumer-rule output', consumerSelection='packaging metadata; no executable payload')
+        else:
+            assert path == 'META-INF/com/android/build/gradle/aar-metadata.properties'
+            row.update(inputGroup='sherpa-aar-packaging', sourceAttribution='AGP generated AAR metadata', generatedProperties=data.decode(), consumerSelection='build metadata; no executable payload')
+        row['sourceBuildInputCoverage'] = 'recorded attribution and selected observed inputs; completeness remains open'
+        rows.append(row)
+    assert {r['path'] for r in rows} == {i.filename for i in aar.infolist() if not i.is_dir()}
+    directories = [i.filename for i in aar.infolist() if i.is_dir()]
+    assert len(rows) == 21 and len(directories) == 5
+
+consumer = {'coordinate': 'com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1', 'aar': identity(RUNTIME),
+            'mavenAar': identity(m2), 'mavenAarByteEqual': True,
+            'apk': identity(CONSUMER / 'main.apk'), 'testApk': identity(CONSUMER / 'test.apk'),
+            'preparedBuildInput': identity(CONSUMER / 'source/build.gradle.kts'),
+            'preparedRepositoryConfig': identity(CONSUMER / 'source/settings.gradle.kts'),
+            'parentBuildDriver': identity(ROOT / 'probes/android-qwen-file/build_acceptance.py'),
+            'frozenContract': identity(CONSUMER / 'diagnostic-frozen.json'),
+            'sourceFingerprint': package_receipt['sourceFingerprint'], 'nativeMembers': apk_libs,
+            'jarClassesInDex': 124, 'jarClassesMissingInDex': [], 'additionalGeneratedSherpaClasses': extras,
+            'dexEvidence': identity(OUT / 'consumer-apk-dex.stdout'),
+            'classNameMatchIsByteEquality': False, 'productionCandidate': False,
+            'deviceExecutedByThisCheck': False, 'scope': 'Existing isolated frozen consumer only; no production adoption assertion'}
+emit('consumer-binding.json', consumer)
+emit('member-matrix.json', {'aar': identity(RUNTIME), 'nonDirectoryMembers': 21, 'nativeMembers': 16,
+                          'directoryEntries': directories, 'rows': rows,
+                          'allAarNonDirectoryMembersEnumerated': True,
+                          'actualFrozenProbeBindingVerified': True, 'productionCandidateBindingVerified': False,
+                          'fullSourceBuildInputCoverageVerified': False,
+                          'P1Complete': False, 'P2P3P4Accepted': False, 'R4R5Accepted': False, 'W3Complete': False})
+emit('sherpa-version-patch.json', patch_record)
+print(json.dumps({'allAarMembers': 21, 'nativeMembers': 16, 'classNamesMapped': 124,
+                  'kotlinSourcePaths': 22, 'sourceInputsVerified': len(source_inputs),
+                  'consumerNativeMembersByteEqual': 4, 'sourceAndPatchedVersionBlobPrefixMatched': True,
+                  'P1Complete': False}))

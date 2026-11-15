@@ -1,0 +1,161 @@
+{
+  "scope": "Bounded member matrix and frozen isolated consumer binding; not production acceptance",
+  "aarMembers": 21,
+  "nativeMembers": 16,
+  "inputGroups": 9,
+  "classNamesMapped": 124,
+  "kotlinSourcePaths": 22,
+  "newSourceReceiptFiles": 13,
+  "newSourceReceiptBytes": 39085,
+  "supplementReferencedSourcePaths": 7,
+  "consumerNativeByteEqualMembers": 4,
+  "freshInfoZipMembers": 21,
+  "freshJavapClassIdentityAndSourceFileChecks": 124,
+  "freezeFiles": 161,
+  "protectedSnapshotFiles": 170,
+  "protectedOutsideOwnedSharedUnchanged": 166,
+  "sharedDirtyRemainderPreserved": true,
+  "independentReviewAcceptedIncrement": true,
+  "independentReviewFindings": {
+    "blocking": 0,
+    "lowScopeLimitations": 2
+  },
+  "native429Retried": false,
+  "firstHy4TruncatedDeliveryAccepted": false,
+  "materials": [
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/README.md",
+      "bytes": 1272,
+      "sha256": "98c13f151f80c07e9fb1a3e970502b01b3e8e20fb1e56946e2e9e7c3be4bc927"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/build-input-groups.json",
+      "bytes": 55282,
+      "sha256": "ccb67810e01d0f7c6c9f12eec7f0c09dbe34510236349b3219c8dce650b0f669"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/class-source-map.json",
+      "bytes": 38122,
+      "sha256": "4dde5dd98f0239cc88501931dbe077a9edb62829c0c95c6786e9a9ec1b9b726f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/consumer-binding.json",
+      "bytes": 3492,
+      "sha256": "4f303e6e4de1d42c793378ca20fb0cb11edb7a4d7799959d9fba815c818e05b6"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/helper-delivery.json",
+      "bytes": 477,
+      "sha256": "85b81bc58f87cc86c1cc1a2e1ef81a9f35d308b44d7169fee2d94629fd2213f3"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/license-material.json",
+      "bytes": 356,
+      "sha256": "6c1c3e19c8873483ea50a36e1a6903b35d05d34faa7f2faa84c5dfbfc56b28c3"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/member-matrix.json",
+      "bytes": 11191,
+      "sha256": "a0a90d31eb2dffa00b02b3a078ece07d57fd587f8904b98bde75125c0712ba7e"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/referenced-source-path-bindings.json",
+      "bytes": 3361,
+      "sha256": "8926a61443da800da21cac818b6c71b76631dd08c12206274ecb5933663f8459"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/sherpa-version-patch.json",
+      "bytes": 5425,
+      "sha256": "87a379d62ccb2030b6cc48d9897a170680b69eb2665e2896b4dba159dee4b159"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/build.gradle.kts",
+      "bytes": 280,
+      "sha256": "14c99ea468fcd09dd491e659882dc6694f172f20569d9f32d4596230967069f5"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/gradle/libs.versions.toml",
+      "bytes": 998,
+      "sha256": "198ab638cc32b137e1eaf0879b414622546f2cd91b50a32177825269db6e053f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/gradle/wrapper/gradle-wrapper.properties",
+      "bytes": 230,
+      "sha256": "9f014b10e840a2409d5133dba7affc8db60b2b3e24309e8263b990f51da1b697"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/settings.gradle.kts",
+      "bytes": 545,
+      "sha256": "59b218d977e6cd9c6f404949bba808b3891729ff8b29265d44905f188fc48f2c"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/sherpa_onnx/consumer-rules.pro",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/sherpa_onnx/proguard-rules.pro",
+      "bytes": 750,
+      "sha256": "56fd960cf225f6ca40f982b13a5dbb0d8bc3dfde13ff76422825c6070d0a1890"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/sherpa_onnx/src/main/AndroidManifest.xml",
+      "bytes": 121,
+      "sha256": "f0f4b47043b24ea2136dabe1cd4309c3b71d84d779889989dbe6d6e5126bfd56"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/build-android-arm64-v8a.sh",
+      "bytes": 9750,
+      "sha256": "3dc0e938694ba3d570aca1e629c8ddad4adb3cdc3f669c14b3295eefba79954a"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/build-android-armv7-eabi.sh",
+      "bytes": 7880,
+      "sha256": "5c8cddeb1b0ed32f94ab5e0e64e88dca2ffec02fdb65d05c77587f43643a87a8"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/build-android-x86-64.sh",
+      "bytes": 7089,
+      "sha256": "3b7e5bc482c8472dc1ffa161d6f334bf4475c74769afe3ef9253bb734e1741f9"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/build-android-x86.sh",
+      "bytes": 6011,
+      "sha256": "9ec0f29ef9e24bbced43cdb009664316a99b5d75c9c9020f1cbff01382278bd9"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/new-release.sh",
+      "bytes": 4852,
+      "sha256": "b708dbf8e0e8b79040250f0e4473ed5de9d3a77050a9f8ab46cc5267b4b3bf35"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/sherpa-onnx/csrc/version.cc",
+      "bytes": 579,
+      "sha256": "5715a42c4f392f4fb5941cb73f58e9bbf250cb514f8f7fb7d067393aec034471"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-input-receipts.json",
+      "bytes": 6468,
+      "sha256": "6a34e4773fe7a82bb16fbb393fb7cabf60f1e851ddd508dff12568fd2c0c166f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/verification-source.py.txt",
+      "bytes": 14212,
+      "sha256": "e83652c45f353999db6eab3c4b7fea10a423e7348b48874c6cac1d2e0954155f"
+    }
+  ],
+  "P1Complete": false,
+  "P2P3P4Accepted": false,
+  "R4R5Accepted": false,
+  "W3Complete": false,
+  "productionDependencyChanges": 0,
+  "deviceActions": 0,
+  "newModelsDownloaded": 0,
+  "sourceBranchPushed": false,
+  "cleanupPromptDuplicateBytes": 303548
+}

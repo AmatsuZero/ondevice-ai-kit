@@ -1,3 +1,7 @@
+## 2026-11-15 W3已核成员输入与既有冻结消费者
+
+[成员矩阵](validation/w3-p1-member-matrix-20261115.md)覆盖21非目录成员/9输入组，124class映射22Kotlin源路径、APK四arm64 SO逐字节对应；实际version.cc日期/SHA补丁和嵌套ORT四ABI输入已关联。类名/SourceFile不是字节码语义等价；输入完整性及实际生产采用绑定仍缺。hy4free完整限定复核accept增量，两LOW边界已保留；170保护/161freeze保持、零设备/模型/生产变更，质量资源及P1–P4/W3仍open、源码未push。
+
 ## 2026-11-15 W3：CI输出与发布AAR字节对应
 
 官方CI整AAR及四ABI全部16库已与固定发布AAR逐字节对应，双解压工具/完整ZIP摘要与原日志核验通过；[验证](validation/w3-sherpa-ci-members-20261115.md)。独立复核接受P1增量，实际消费者/生产绑定与逐成员输入覆盖仍缺；W3/R4/R5及P1–P4保持open，零设备/模型/生产变更。

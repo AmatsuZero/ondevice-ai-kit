@@ -1,3 +1,11 @@
+## W3固定源码仍须纳入实际发布脚本补丁（2026-11-15）
+
+Sherpa固定source `af2d8d81dbfa61c4cea4c568da78f3982edca005` 的官方libs/AAR两job仍由 `new-release.sh` 修改 `version.cc` 日期和短SHA；实际日志diff为 `fad4f460..149297a1`。按固定源码及脚本重建两处修改，前后GitBlob前缀均匹配，已记录为实际补丁。不能从固定tag/source或短tracked diff宣称“无补丁”或所有生成输入无修改；逐成员矩阵须保留来源、实际观察及未覆盖项。证据 `.omx/artifacts/w3-p1-member-matrix-20261115/` 与[验证](validation/w3-p1-member-matrix-20261115.md)。
+
+## W3复核JSON截断不是独立接受（2026-11-15）
+
+用户选定hy4free只读复核自然627.210秒、exit0/stderr空，但原JSON数组恰262144B、字符串未闭合，只有一条完整message、没有完整result；不能由exit0或部分分析恢复成接受结论。保留原prompt/raw/父拒收，独立缩小供应输入、去重投影并改stream-json交付；该变化不证明原截断的内部原因，也不能预先声称是通用修复。未观察provider429，不自动付费或切供应商。完整终态及父裁定另留收据；报告必须说明实际供应范围与未执行限制。
+
 ## W3 GitLab EOF：调用级路由恢复与幂等发布（2026-11-15）
 
 Issue同步已完成GH写入/回读后，GL notes的20行和独立5行读取均立即EOF；不能重发GH或把读取失败写成GL发布完成。同一精确host的无凭据curl直连返回HTTP404、继承路由报connection reset；随后仅该glab子进程移除HTTP_PROXY/HTTPS_PROXY/ALL_PROXY及小写同名项，并设NO_PROXY/no_proxy为`*`，相同20行GET成功。此对照确认本次可用的调用级路由，不证明代理是所有历史EOF的唯一根因。恢复只作用当前子进程，不改全局代理/凭据；原错误保留，完整分页查唯一marker后才写，已存在GH marker仅回读。证据`.omx/artifacts/w3-closure-scope-20261115/publication/`；不把Issue/Wiki同步或网络恢复当W3质量/资源/发布接受。
