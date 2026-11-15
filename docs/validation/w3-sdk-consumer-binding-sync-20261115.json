@@ -1,0 +1,42 @@
+{
+  "evidenceCommit": "eeff14e48c191ae641eede8da52224bcb79d8956",
+  "marker": "<!-- w3-sdk-consumer-binding-20261115 -->",
+  "githubIssue": {
+    "id": 6890550272,
+    "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6890550272",
+    "sha256": "96c31d75cb52f5d515fd899d3930a43cbeadf6a6bf8a8d8c3965ba699917db34",
+    "readbackExact": true
+  },
+  "gitlabIssue": {
+    "id": 44853,
+    "url": null,
+    "sha256": "1df44a727b3f374568c7238db58680b6dc2deaa614ace768f02eafbba12c721c",
+    "readbackExact": true,
+    "project": 461,
+    "issue": 15
+  },
+  "githubWiki": {
+    "commit": "a77cf1d5e1c5bf933fd819da13521947c6b980b4",
+    "sha256": "47081e547ff050f628e92339d73699883326a868d31f9b5c801f4d39a7f0280e",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "47081e547ff050f628e92339d73699883326a868d31f9b5c801f4d39a7f0280e",
+    "readbackExact": true
+  },
+  "wikiContentSHA256Equal": true,
+  "parentBuildAndConsumerBindingVerified": true,
+  "independentReviewAccepted": false,
+  "independentReviewStatus": "hy4free quota429; no report; user-selected route pending",
+  "SDKRuntimeAarByteBindingVerified": true,
+  "productionFinalAppAdoptionVerified": false,
+  "P1Complete": false,
+  "W3Complete": false,
+  "sourceBranchPushed": false,
+  "freezeFiles": 161,
+  "protectedOutsideOwnedSharedUnchanged": 166,
+  "productionDependencyChanges": 0,
+  "externalSdkPublication": false,
+  "artifactRoot": ".omx/artifacts/w3-sdk-consumer-binding-20261115"
+}

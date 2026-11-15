@@ -1,3 +1,7 @@
+## 2026-11-15 W3当前SDK消费链已提交并同步，独立复核待选线
+
+本地eeff14e精确23文件；当前五SDK发布/两consumer编译/Debug实际artifact解析、14源JAR与15metadata绑定父验通过，独立hy4复核真实429无报告。GH#15comment6890550272/GL#15note44853/GHWikia77cf1d5逐字回读，双Wiki SHA47081e547ff050f628e92339d73699883326a868d31f9b5c801f4d39a7f0280e一致，[同步收据](validation/w3-sdk-consumer-binding-sync-20261115.json)。marker已用勿重发，源码未push；所有本轮build/helper/API终态，勿poll旧句柄。hy4free停线至服务端重置2026-11-16 10:15:32+08观察后仅候选，当前已提用户Qoder/本地Ollama/暂缓选择，不能自动fallback或把reset当恢复。新五SDK/Maven仓库及两consumer二进制和原始失败保留，只有规范副本已核的69506B prompt重复件清理。170保护/161freeze在父验时通过，当前SDK候选绑定不是最终App/通知/完整输入/生产批准。P1–P4、R4/R5/W3仍open、goal active；下一所选独立复核与P1实际source/build-input边界，勿重跑已验本地构建或旧设备诊断。
+
 ## 2026-11-15 W3当前SDK发布及独立消费者绑定已父验
 
 已有发布/解析任务复用，五SDK新隔离Maven仓库实际发布；137任务30执行，Sherpa Release Kotlin重新编译，当前AAR38862B/SHA6de95f56…不同于旧02ee869e。独立consumer Release27/3执行、Debug23/2执行均编译通过；实际Debug三配置选中新SDK且无project component，runtime与a8d09d1d固定AAR全字节相同。14源JAR文件及15metadata条目、170保护/161freeze通过，旧35制品保持。[验证](validation/w3-sdk-consumer-binding-20261115.md)。限定hy4复核真实429/code6004、0token/无报告，已停线、重置2026-11-16 10:15:32+08；已提用户线路选择，不自动切换/重试，所有本轮CLI终态。当前父验不是独立接受/最终App采用/P1完备/生产通知或发布批准；P1–P4、R4/R5/W3仍open、goal active，源码未push。规范prompt/raw及新SDK/Maven候选均保留，只清69506B临时prompt重复件。下一以用户所选复核线路及P1实际输入边界继续，不重跑已验构建。
