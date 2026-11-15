@@ -1,3 +1,7 @@
+## W3终检：Git status比较须固定untracked参数（2026-11-16）
+
+原保护快照按--untracked-files=all逐文件保存；终检漏该参数，Git默认把三个原untracked文件归并成两个目录，触发状态原字节比较失败。原失败/两份输出保留；相同--porcelain=v1 -z --untracked-files=all后9698B完全相同，176原内容摘要另独立通过。只修检查调用，不改文件/配置/忽略规则，不能把目录汇总当文件丢失。证据.omx/artifacts/w3-ndk-offline-recovery-20261116T0710/terminal-status-{initial-rejection,corrected}.json。
+
 ## W3 Gitiles与CBC流：按真实封装解析原字节（2026-11-16）
 
 离线恢复首读Gitiles直接json.loads失败，原响应以精确`)]}'\n`防XSSI行开头；仅在内存移除首5字节后解析、原响应不改。CBC launcher明确使用stream-json，若按单文档json.loads会报Extra data: line2 column1(char2514)，不能归因候选JSON损坏/配额；按每非空行解析后需另验完整result、is_error、modelUsage与真实tool_use。两hy3终态51.601/34.411s、零观察工具调用；目录/root→patches→三blob原字节身份与原receipt对应已验，不冒充commit对象/签名或历史apply。证据.omx/artifacts/w3-ndk-offline-recovery-20261116T0710/{initial-read-error.json,parent-read-errors.json,parent-acceptance.json}；无重发/源站请求。
