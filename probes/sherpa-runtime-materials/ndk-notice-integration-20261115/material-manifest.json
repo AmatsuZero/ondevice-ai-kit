@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "sourceHEAD": "ba95e98cc616d2df9e60b42f40c8a3ade31e1644",
+  "fileCount": 23,
+  "totalBytes": 84845,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1186,
+      "sha256": "686f267a470aaf0bdeb3cff34e6d730082c99013f703ed3f4f3f05dfebff5295"
+    },
+    {
+      "path": "aar-verification.json",
+      "bytes": 1282,
+      "sha256": "c16193a191a7f5095f4dfa4d9189bc62b5511aee5146fda918ab50321a94156c"
+    },
+    {
+      "path": "apk-build-invocation.json",
+      "bytes": 1065,
+      "sha256": "3c7ffca48362da2658ec3d7e5af88383a9bb171c87b6abe46ab70d0c4b211196"
+    },
+    {
+      "path": "apk-build-process.json",
+      "bytes": 99,
+      "sha256": "3b1706031a66f989a19fe7e121265071a143f4c6e2c385ee2597069117e6e6e6"
+    },
+    {
+      "path": "apk-build.stderr",
+      "bytes": 250,
+      "sha256": "8da39de6cb923047d35236ed262a74965faf488cbc82be3b1db8ee3adc1d36b3"
+    },
+    {
+      "path": "apk-build.stdout",
+      "bytes": 2432,
+      "sha256": "24bbbe1b212e75ac5f63362d0be5f5d17ba860716b3ea30a8e5f8ff490060e01"
+    },
+    {
+      "path": "apk-verification.json",
+      "bytes": 9779,
+      "sha256": "da9edfb75456ffdc72768d6a406761c7ab670ea3dda08b087db79710289be9df"
+    },
+    {
+      "path": "build-invocation.json",
+      "bytes": 1141,
+      "sha256": "5f9fe9f417ca784d04d3c75d4fe980fb5cc134c462c70cccb1831d3ff661da5a"
+    },
+    {
+      "path": "build-process.json",
+      "bytes": 100,
+      "sha256": "0be7440be30eb041fba7bf323a6915178d5afa07e260f17199823bcc263e315b"
+    },
+    {
+      "path": "build.stderr",
+      "bytes": 250,
+      "sha256": "8da39de6cb923047d35236ed262a74965faf488cbc82be3b1db8ee3adc1d36b3"
+    },
+    {
+      "path": "build.stdout",
+      "bytes": 33812,
+      "sha256": "fc30df8a9f2267fa241a827f5406d4b5fd0f47fce617ecd52dab0d687acd4076"
+    },
+    {
+      "path": "eight-source-identities-verified.json",
+      "bytes": 126,
+      "sha256": "5abe06e4a33f65af327b55de2265875d742a0e4466a3cb07a1f180e50563db6d"
+    },
+    {
+      "path": "expected-assets.json",
+      "bytes": 10326,
+      "sha256": "246248c28dda8e02bd508380b37cb67eaf76c422f28c24054e1c5ac60b586c57"
+    },
+    {
+      "path": "fixture-copy.json",
+      "bytes": 658,
+      "sha256": "78ae388fcec1c03c641f42e7f4328856a3afb911fe7dfc6d9933fd9bc2db31bf"
+    },
+    {
+      "path": "guard-review.json",
+      "bytes": 1333,
+      "sha256": "2cc0e7f8c72075ec7396fec3adbf0c4b3a85409df404d8a7c51974495c55e027"
+    },
+    {
+      "path": "hy3-delivery-receipts.json",
+      "bytes": 1510,
+      "sha256": "acac77ac92ea68e811be0b96986288905d1f05918f967f4586d3286e4eb1f0f6"
+    },
+    {
+      "path": "initial-cross-tool-order-failure.json",
+      "bytes": 364,
+      "sha256": "ce6a17fb42fc5e49586b2d38a449a64ca0adafb595fb514dd6140b6501b334bd"
+    },
+    {
+      "path": "integration-receipt.json",
+      "bytes": 384,
+      "sha256": "5ba7f635b85f48f2177426ad31e1a7e77824ed5b96545b8b18b8ecefb093a5ae"
+    },
+    {
+      "path": "notice-assets-before.json",
+      "bytes": 9589,
+      "sha256": "8809d95caded1930afb25c163f0fe0847c9f8a85c6f9fe7e4ddac3555166ebb9"
+    },
+    {
+      "path": "notice-index.json",
+      "bytes": 5779,
+      "sha256": "714fa857b603f9d4c1d87106c42ca040b12096db29a8273c5b3c5f5b62ae603e"
+    },
+    {
+      "path": "parent-acceptance.json",
+      "bytes": 544,
+      "sha256": "7224feb58274bfced8b5a6965562d58910febe53db97fad0d597fb3bd3c10ef1"
+    },
+    {
+      "path": "parent-delivery-acceptance.json",
+      "bytes": 590,
+      "sha256": "b40afa6b960064b5d59cfd91405292e4652dc5aa4e60e36754d4a96790075fd4"
+    },
+    {
+      "path": "resolved-artifacts.json",
+      "bytes": 2246,
+      "sha256": "b1f897bb27cd5c5af9d45e685f60e982a2267501817ade0655c9d98e4aa2d762"
+    }
+  ],
+  "rootManifestExcludedFromOwnInventory": true,
+  "actualNoticeRetentionVerified": true,
+  "independentReleaseAcceptance": false,
+  "W3Complete": false
+}

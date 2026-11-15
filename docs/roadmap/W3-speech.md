@@ -1,3 +1,7 @@
+## 2026-11-15：hy3完成NDK根许可交付与独立APK保留
+
+[验证](../validation/w3-ndk-notice-integration-20261115.md)新增四原许可66823B及独立索引；旧63项不变，合并68通知770479B在新AAR/隔离Maven最终APK逐字节保留。Debug/Release/lint/本地发布通过，Release ca0065f2、APK33c3fdab；四ABI16SO和非通知AAR成员不变，十个notice-only ZIP负例拒收。两个免费hy3完整终态、限定复核无finding，非P4/完整组成接受；finalBinaryPresenceVerified=false指native-code组成未证，不是通知字节验证失败。原checker顺序错误已离线纠正且原失败保留，无重建/设备；161freeze和174保护基线通过。P1–P4/R4/R5/W3完整范围继续open，真实最终生产采用/全量质量/资源预算及发布复审仍缺；源码站429与旧quota停线，零下载/AiAi/麦克风，不回放旧FILE或USB循环。
+
 ## 2026-11-15：hy3完成NDK runtime补丁选择补证
 
 [验证](../validation/w3-ndk-runtime-patch-selection-20261115.md)及材料保留134声明/75与59活动metadata精确对应、76正文和58缺失；17项路径分类不等于最终链接/保留，r27d applied-success生成器不外推r30。六tree/40edge已核，cherry正文未逐一绑定预期tree blob。来源站429停新请求，2错误patch URL及额外BUILD.md404/r30落盘失败保留，不伪作完整取证。免费hy3三请求完整终态，修正版加guard两处替换集成；四根许可仍为未来候选，下一离线通知集成及独立Maven APK保留验收。当前63生产通知未改、零新构建/设备/模型或runtime二进制下载；P1–P4/R4/R5/W3完整范围均open，原quota/旧FILE/USB循环不重试。

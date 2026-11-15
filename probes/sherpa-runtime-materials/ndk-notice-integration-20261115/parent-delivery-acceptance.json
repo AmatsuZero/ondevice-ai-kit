@@ -1,0 +1,21 @@
+{
+  "acceptedByParent": true,
+  "scope": "selected component-root license delivery and actual AAR/independent Maven final APK retention only",
+  "noticeCount": 68,
+  "noticeBytes": 770479,
+  "priorAssetsUnchanged": 63,
+  "rawNewLicenseCopies": 4,
+  "newLicenseBytes": 66823,
+  "newIndexes": 1,
+  "nonNoticeAARMembersUnchanged": true,
+  "negativeFixturesRejected": 10,
+  "fourABIsNativeLibrariesExact": 16,
+  "frozenFiles": 161,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "W3Complete": false
+}

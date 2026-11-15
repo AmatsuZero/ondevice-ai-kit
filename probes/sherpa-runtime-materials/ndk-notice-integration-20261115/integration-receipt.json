@@ -1,0 +1,16 @@
+{
+  "helperModel": "hy3",
+  "helperResult": "success",
+  "helperToolsObserved": 0,
+  "rawLicenseCopies": 4,
+  "rawLicenseBytes": 66823,
+  "newIndex": 1,
+  "priorAssetsUnchanged": 63,
+  "combinedAssets": 68,
+  "combinedAssetBytes": 770479,
+  "readmeAppendExact": true,
+  "newDeviceCalls": 0,
+  "sourceHostRequests": 0,
+  "modelsOrRuntimeBinariesDownloaded": 0,
+  "W3Complete": false
+}

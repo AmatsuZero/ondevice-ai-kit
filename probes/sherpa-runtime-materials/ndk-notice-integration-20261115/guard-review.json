@@ -1,0 +1,13 @@
+{
+  "verdict": "accept_bounded_increment",
+  "findings": [],
+  "acceptedScope": "仅接受选定 NDK C++ 组件根 LICENSE.TXT 的源通知补充交付，以及 Debug/Release AAR、隔离 Maven 发布与真实独立 APK 中的 notice 字节保留证据；不构成 P4、发布合规、完整工具链 NOTICE 或最终二进制组成验收。",
+  "limitations": [
+    "复核仅依据父级回执与证据文本；未执行构建/设备/下载/源码请求，也不替代父级集成和验收。",
+    "source-host HTTP429 不等于 hy3 quota；本轮 sourceHostRequests=0，source-host 与原始 native/hy4free 配额通道均停止，未重试或模型回退。",
+    "四个条目 finalBinaryPresenceVerified=false 仅表示未证明 native-code 最终存在/组成，不表示 notice 字节无法验证。",
+    "源/default STL flags/DT_NEEDED 不能证明最终静态/内联组成、每个组件/sanitizer/架构/补丁体覆盖或法律发布接受；r30 标识绑定到既有 r27d 原文副本，未虚构本地 r30 副本。",
+    "无 whole-toolchain NOTICE、完整性证明或法律批准；child index 故意不完整，仅覆盖列出的组件根原文。",
+    "新 APK 的 stripped 上游库按原样打包，SDK XML version 4 警告保留；无安装、推断、生产 app 采用或真实资源预算验收。"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "acceptedByParent": true,
+  "guardVerdict": "accept_bounded_increment",
+  "guardSuppliedContextOnly": true,
+  "reportAndReadmeIntegratedByteForByte": true,
+  "helperRequestsTerminal": 2,
+  "protectedOriginalFilesOrSuffixesPreserved": 174,
+  "outOfScopeConcurrentUpdatesPreserved": [],
+  "priorAssetsUnchanged": 63,
+  "totalNoticeAssets": 68,
+  "totalNoticeBytes": 770479,
+  "actualAARAndFinalMavenAPKNoticeRetentionVerified": true,
+  "finalNativeCompositionVerified": false,
+  "independentReleaseAcceptance": false,
+  "W3Complete": false
+}

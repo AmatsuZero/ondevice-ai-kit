@@ -67,3 +67,7 @@ The module-relative index location is `src/main/assets/ondeviceai/sherpa-asr/not
 mp11 README/header excerpts are copyright/license declarations, not full BSL; the existing full BSL is sibling `native/asio-asio-1-24-0-observed-build/LICENSE_1_0.txt`. The JSON embedded attributions document retains CC0.
 
 JSON test/tool/generic GPL/Apache/BSD texts are not automatically selected merely because they are present in the archive; dep5 mapping and JSON tests OFF are the recorded basis. KleidiAI compiled-source heads are Apache; generic BSD root text alone does not prove retained BSD code. The nested Eigen commit differs from the Sherpa Eigen version and stays separate.
+
+## NDK C++ notice supplement
+
+`android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/` carries component-root `LICENSE.TXT` files for `compiler-rt`, `libcxx`, `libcxxabi`, and `libunwind` from the recorded NDK r27d/r30 LLVM-base source identities. This is an intentionally incomplete supplement to the existing notices for those selected component roots only. It does not establish final binary presence, patch/body coverage, sanitizer or architecture inclusion, final artifact composition, legal release acceptance, or complete P2/P3/P4 acceptance, and it makes no license-compliance conclusion.

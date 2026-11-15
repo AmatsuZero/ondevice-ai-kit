@@ -1,0 +1,11 @@
+{
+  "failure": "initial cross-tool payload assertion failed after sorting requested member names",
+  "initialVerifier": "verify-delivery-initial.py",
+  "rawBytes": 770479,
+  "sortedBytes": 770479,
+  "archiveBytes": 770479,
+  "unzipMatchesSorted": false,
+  "unzipMatchesArchiveOrder": true,
+  "allPythonPerMemberHashesPassed": true,
+  "newBuildsOrDeviceCalls": 0
+}

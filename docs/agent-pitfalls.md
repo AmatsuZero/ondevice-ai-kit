@@ -1,3 +1,7 @@
+## W3 InfoZIP串接按archive顺序而非请求参数排序（2026-11-15）
+
+新68通知全部逐文件hash通过，首跨工具checker仍断言失败；原脚本将请求名sorted后拼Python payload，而`unzip -p archive <names...>`实测按归档成员顺序输出。独立诊断两侧均770479B，unzip与archive-order完全相同、与sorted不同。有效恢复只改checker为已核archive清单顺序，保留初脚本/失败JSON，不重建产物、不改通知或削弱逐文件校验；随后两AAR/独立APK清单和payload全同。十个负例为notice-only ZIP、同一校验器拒删除/同长改单字节，不能写成修改签名APK或设备执行。证据`.omx/artifacts/w3-ndk-notice-integration-20261115T143311Z/`及`probes/sherpa-runtime-materials/ndk-notice-integration-20261115/`。这只核技术保留，不证明全部native组成或法律发布接受。
+
 ## W3 NDK source-info URL与批次/落盘边界（2026-11-15）
 
 r27d source-info的两个dash后缀patch URL实际404，固定formatter只认fullhash和可选`_vN`，将`-v0`/`-r522817`错归root；metadata实际为`cherry/`。仅记录正确路径，来源站429后不自动重取/切镜像。134请求以concurrency4先排程后汇总，76正文/58失败（56HTTP429、2patch404），不能描述fail-fast；独立BUILD.md404不计入58。独立r30模块五HTTP成功body因父目录未创建而未落盘、另三429，八份均不可作文件证据，也不能外推r27d生成器语义。恢复是新任务先创建目录/保留逐请求回执/验证真实字节；源站停线与hy3配额分开。r27d实际类名`DeviceLibcxxBuilder`，误找`LibCxxBuilder`或非唯一匹配导致本地准备失败，未调用模型；完整失败保留。证据`probes/sherpa-runtime-materials/ndk-runtime-patch-selection-20261115/`和`.omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/`。tree/blob/成功应用声明和源码路径分类均不证明历史执行、最终archive保留或完整许可适用性。
