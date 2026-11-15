@@ -1,3 +1,7 @@
+## W3 GitLab EOF：调用级路由恢复与幂等发布（2026-11-15）
+
+Issue同步已完成GH写入/回读后，GL notes的20行和独立5行读取均立即EOF；不能重发GH或把读取失败写成GL发布完成。同一精确host的无凭据curl直连返回HTTP404、继承路由报connection reset；随后仅该glab子进程移除HTTP_PROXY/HTTPS_PROXY/ALL_PROXY及小写同名项，并设NO_PROXY/no_proxy为`*`，相同20行GET成功。此对照确认本次可用的调用级路由，不证明代理是所有历史EOF的唯一根因。恢复只作用当前子进程，不改全局代理/凭据；原错误保留，完整分页查唯一marker后才写，已存在GH marker仅回读。证据`.omx/artifacts/w3-closure-scope-20261115/publication/`；不把Issue/Wiki同步或网络恢复当W3质量/资源/发布接受。
+
 ## W3 gh日志：终端转义保护不是job失败（2026-11-14）
 
 三份公开ORT job日志的gh api初读均exit1/stdout0，stderr明确要求--allow-escape-sequences；不是provider429、远端构建失败或缺日志。按本机gh api --help，仅对三个精确日志请求加该输出选项并捕获到文件，三份完整原始字节exit0/stderr0；不向终端渲染原始控制序列，不改全局配置/凭据，保留首错误。对供助手的摘录逐行核原始log和SHA，不把CMake ON标志当实际CPU执行/静态组成。证据.omx/artifacts/w3-ort-all-abi-20261114/及[验证](validation/w3-ort-all-abi-20261114.md)。

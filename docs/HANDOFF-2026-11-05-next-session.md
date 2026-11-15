@@ -1,3 +1,7 @@
+## 2026-11-15 W3分类已提交并双端同步
+
+本地1af1c5e精确8文件，原MEDIUM经限定只读复核接受修正；GH#15comment6889158935/GL#15note44850/GHWiki20d85a9逐字回读，双Wiki SHAe72cc54bc85a5f7bda286996489bd900dad08d76940a07a3fa7cc42dddf1917b一致，[收据](validation/w3-closure-scope-sync-20261115.json)。GL两次GET EOF原件保留，仅调用级清除代理后同20行GET及完整分页/发布成功；GH唯一marker未重发，不改全局代理/凭据。共享文档F08并发变化未暂存或回退，原报告/失败保留。当前所有本轮发布/helper终态，勿poll旧句柄；新run仍零prepare/消费，ADB空，不重复server/backend试验。R4质量/R5资源/P1–P4生产发布分别open，goal active；源码未push，实体连接恢复后按现161冻结合同fresh前置继续。
+
 ## 2026-11-15 W3范围分类与USB恢复同步收尾
 
 USB恢复失败已同步GH#15comment6869943486/GL#15note44849/GHWiki8662a9c，双Wiki逐字回读SHA一致；[收据](validation/w3-adb-libusb-sync-20261115.json)，旧marker勿重发、源码未push。原GL分页EOF和失去HEAD/config的旧Wiki目录保留，20行完整分页及独立fresh clone恢复已验。只读范围复核MEDIUM已落实为[现行验收分类与证据边界](validation/w3-closure-scope-20261115.md)：R1–R3仅范围裁定，R4质量/R5资源与P1–P4生产发布分开，全部未通过项仍open；没有唯一“加密证明”形式要求，也不能以局部日志/四SO或材料数量替代完整对应/组成/通知/独立发布复审。当前冻结守卫通过后ADB清单仍空；不重复server/backend实验、新run零prepare/消费。所有本轮发布/helper旧句柄终态；外部连接恢复后同新合同fresh前置，质量资源及生产余门继续，goal active。

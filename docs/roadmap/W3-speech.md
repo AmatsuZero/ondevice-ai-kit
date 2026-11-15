@@ -1,3 +1,7 @@
+## 2026-11-15：分类修正已双端同步
+
+本地1af1c5e及只读复核仅接受文档finding修正；双端#15与Wiki已逐字回读，Wiki SHA一致，[收据](../validation/w3-closure-scope-sync-20261115.json)。GL首次EOF保留、调用级路由恢复后完整分页发布，GH marker未重发；源码未push。冻结合同保持，新run未prepare/消费；R4/R5及P1–P4分别open，不能以本次文档或同步完成关闭W3。
+
 ## 2026-11-15：验收范围分类与USB恢复收据
 
 R1–R3按当前TECNO已知限制完成范围裁定，不是功能成功；R4文件质量、R5/W8资源和P1–P4生产发布分别保持open。[现行证据边界](../validation/w3-closure-scope-20261115.md)明确实际源码/构建/AAR对应、递归组成、交付物通知及独立复审的充分证据；不要求唯一“加密证明”，也不以四ORT成员/日志局部补证关闭整包。USB恢复结果已双端Issue/Wiki逐字回读，[收据](../validation/w3-adb-libusb-sync-20261115.json)。本次冻结守卫通过、ADB清单仍空，新run零prepare/消费，不重复后端或server试验。
