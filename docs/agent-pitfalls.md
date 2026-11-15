@@ -1,3 +1,7 @@
+## W3当前SDK消费复核实际hy4free配额失败（2026-11-15）
+
+当前SDK/独立consumer已真实本地构建及制品解析，随后hy4free只读复核3.092秒自然exit0，但result为error_during_execution/is_error=true、HTTP429/code6004/categoryquota、0token/无报告；不是仍在运行、构建失败或已完成复核。服务端重置2026-11-16 10:15:32 UTC+8仅是时间观察，不证明恢复。保存raw/prompt/父停线裁定，停止该线路并提用户选择，禁止自动换模型/付费/重试；本地核验与旧独立接受范围不受撤销。证据`.omx/artifacts/w3-sdk-consumer-binding-20261115/`与[验证](validation/w3-sdk-consumer-binding-20261115.md)。
+
 ## W3固定源码仍须纳入实际发布脚本补丁（2026-11-15）
 
 Sherpa固定source `af2d8d81dbfa61c4cea4c568da78f3982edca005` 的官方libs/AAR两job仍由 `new-release.sh` 修改 `version.cc` 日期和短SHA；实际日志diff为 `fad4f460..149297a1`。按固定源码及脚本重建两处修改，前后GitBlob前缀均匹配，已记录为实际补丁。不能从固定tag/source或短tracked diff宣称“无补丁”或所有生成输入无修改；逐成员矩阵须保留来源、实际观察及未覆盖项。证据 `.omx/artifacts/w3-p1-member-matrix-20261115/` 与[验证](validation/w3-p1-member-matrix-20261115.md)。

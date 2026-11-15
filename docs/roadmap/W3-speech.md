@@ -1,3 +1,7 @@
+## 2026-11-15：当前SDK与独立消费者绑定已父验
+
+复用现有任务新本地发布五SDK，Sherpa后端实际重新编译，AAR38862B/SHA6de95f56…；独立消费者Debug/Release编译通过，Debug三配置实际选中新SDK、无project component，runtime与固定a8d09d1d AAR全字节一致。14源JAR文件/15metadata条目及170保护/161freeze通过；[验证](../validation/w3-sdk-consumer-binding-20261115.md)。当前SDK消费证据补齐增量，不证明最终App采用、穷尽构建输入或P2–P4；hy4复核429/code6004未交报告，已停线等用户选择，不能计独立通过。P1/R4/R5/W3保持open，无新设备/模型或远端SDK发布，源码未push。
+
 ## 2026-11-15：成员输入归属及冻结消费者绑定已核
 
 21/21非目录成员全部关联9输入组，124class实际SourceFile映射22固定Kotlin路径/GitBlob；既有隔离APK类名覆盖及四arm64 SO字节绑定通过。Sherpa两job实际version.cc日期/SHA补丁重建匹配，嵌套ORT四ABI实际source/patch/API27配置已逐项关联；[验证](../validation/w3-p1-member-matrix-20261115.md)。hy4free完整限定复核accept增量，两LOW边界已保留；不能把矩阵数量当输入完整性接受，实际生产候选采用绑定仍缺，P1与P2–P4、R4/R5、W3继续open。原native429/hy4截断拒收保留；170保护/161freeze保持，无新设备/模型/生产变更。
@@ -420,7 +424,7 @@ Android先冻结[load-only合同](../validation/w3-qwen-android-load-protocol-20
 
 生产发布验收独立于R4质量和R5资源，以下均未通过：
 
-- [ ] P1 源码/构建/运行时对应：覆盖实际采用AAR全部运行时成员和交付ABI，关联实际源码、补丁、构建输入/配置与输出；四ORT成员/日志、CI整AAR/16库及[21成员/九输入组与冻结隔离消费者绑定](../validation/w3-p1-member-matrix-20261115.md)增量已验。实际生产候选采用绑定、逐输入组完整性/可信度接受仍缺；类名/SourceFile不等于字节码等价。
+- [ ] P1 源码/构建/运行时对应：四ORT成员/日志、CI整AAR/16库及[21成员/九输入组与冻结隔离消费者](../validation/w3-p1-member-matrix-20261115.md)增量已验；[当前SDK本地发布与独立消费者绑定](../validation/w3-sdk-consumer-binding-20261115.md)已父验、独立复核因429待恢复。最终生产App采用及逐输入组完整性/可信度接受仍缺；类名/SourceFile不等于字节码等价。
 - [ ] P2 递归最终组成：将直接、静态嵌入及传递组件与最终二进制关联，明确版本、源码、许可及归属，解释未覆盖项。
 - [ ] P3 交付物通知：在实际生产候选及消费/打包后核验适用许可、通知和修改说明保留；本地材料ZIP不代替实际交付物。
 - [ ] P4 独立发布复审：固定同一候选与P1–P3材料，记录审阅覆盖、问题处置和接受结论；局部源码/日志审查不代替完整发布接受。

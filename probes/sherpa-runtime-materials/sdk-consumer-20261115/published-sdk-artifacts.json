@@ -1,0 +1,320 @@
+{
+  "sourceHead": "a18292ac56e7c694fd2e7efb2550864a0b3ef21e",
+  "artifacts": [
+    {
+      "coordinate": "io.ondeviceai:sdk-core:0.1.0-SNAPSHOT",
+      "aar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT.aar",
+        "bytes": 16220,
+        "sha256": "5eba342740cc766e9f7f226b055257ee68071a5cadc86dd9cdaff8d7f1c6a444"
+      },
+      "sourceJar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT-sources.jar",
+        "bytes": 2160,
+        "sha256": "2680eef0cf4e21a4d6fb6acd84677d9055005e89e51c9a7b30fedd21a63e0920"
+      },
+      "pom": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT.pom",
+        "bytes": 1209,
+        "sha256": "efc8cc0444233772dfdfd3b1322317b3253a80503c348f6983bdbbec8084e436"
+      },
+      "moduleMetadata": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT.module",
+        "bytes": 3303,
+        "sha256": "3999764c5d0f2fcbdf411ab869ba472aa1d7efe5a2954123ef2c850a651dc764"
+      },
+      "localOutputByteEqual": true,
+      "nativeMembers": []
+    },
+    {
+      "coordinate": "io.ondeviceai:speech:0.1.0-SNAPSHOT",
+      "aar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT.aar",
+        "bytes": 47127,
+        "sha256": "af39a696fd5ac750b7dcf2f8c08e407956dcab51bd66ebe2e54dcf8cfd99c0e6"
+      },
+      "sourceJar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT-sources.jar",
+        "bytes": 2595,
+        "sha256": "96a5087d5c186c6a2fd085b0bd917c88ee8597f2828f0214c51767ff442cb09a"
+      },
+      "pom": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT.pom",
+        "bytes": 1393,
+        "sha256": "381a3df259a13c629f49b6a742afe152766e393f12144839be4758b8217c45db"
+      },
+      "moduleMetadata": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT.module",
+        "bytes": 3622,
+        "sha256": "9fb9b999383368572ac7dcb11fa4e0663b51b73c15103da91ee4e8df2c8aa80e"
+      },
+      "localOutputByteEqual": true,
+      "nativeMembers": []
+    },
+    {
+      "coordinate": "io.ondeviceai:backend-sherpa-asr:0.1.0-SNAPSHOT",
+      "aar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+        "bytes": 38862,
+        "sha256": "6de95f567932747fb98ffc7b15ee66e0cca75a6674f63c87e40e8bc9b2852028"
+      },
+      "sourceJar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT-sources.jar",
+        "bytes": 6887,
+        "sha256": "717d7d213296fae42601c0e02a8d9f50f9928ce597018b519a69af13144f1bb4"
+      },
+      "pom": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.pom",
+        "bytes": 1588,
+        "sha256": "2dc593f1221bdd0f5e340128b056bf68d3bccde24159f319576a249a320383dd"
+      },
+      "moduleMetadata": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.module",
+        "bytes": 3869,
+        "sha256": "08d195123b6ed05d19a72b5fc09047f66a8b8497bf9272e94a48b6955eb05e50"
+      },
+      "localOutputByteEqual": true,
+      "nativeMembers": []
+    },
+    {
+      "coordinate": "io.ondeviceai:backend-system-asr:0.1.0-SNAPSHOT",
+      "aar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-asr/0.1.0-SNAPSHOT/backend-system-asr-0.1.0-SNAPSHOT.aar",
+        "bytes": 57807,
+        "sha256": "532761a217f5d348ab04312803232dcea8939d8953ca22ac171354c9c5334d60"
+      },
+      "sourceJar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-asr/0.1.0-SNAPSHOT/backend-system-asr-0.1.0-SNAPSHOT-sources.jar",
+        "bytes": 7004,
+        "sha256": "6826f45172a05642058275e7ed36899aae38d9af94a12f5ac882546a7fc12e9a"
+      },
+      "pom": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-asr/0.1.0-SNAPSHOT/backend-system-asr-0.1.0-SNAPSHOT.pom",
+        "bytes": 1403,
+        "sha256": "611d18fc23517aebb99adaab388ae0d83f52ea66620152ce4f5149778c996d85"
+      },
+      "moduleMetadata": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-asr/0.1.0-SNAPSHOT/backend-system-asr-0.1.0-SNAPSHOT.module",
+        "bytes": 3702,
+        "sha256": "9011ab9d0ec3b8ba32c5b286e021bd467c28f017442eb677a2735dac2d1366fc"
+      },
+      "localOutputByteEqual": true,
+      "nativeMembers": []
+    },
+    {
+      "coordinate": "io.ondeviceai:backend-system-tts:0.1.0-SNAPSHOT",
+      "aar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-tts/0.1.0-SNAPSHOT/backend-system-tts-0.1.0-SNAPSHOT.aar",
+        "bytes": 29599,
+        "sha256": "3abc28f8cfda580b8cc94ecede7dbcf0cba0dc5f9d390c8678bf817beff840df"
+      },
+      "sourceJar": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-tts/0.1.0-SNAPSHOT/backend-system-tts-0.1.0-SNAPSHOT-sources.jar",
+        "bytes": 2917,
+        "sha256": "6f01f8293ebb94365cc107cbb323cd19812a4641dffb3d376d2d6e6c6b56c82e"
+      },
+      "pom": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-tts/0.1.0-SNAPSHOT/backend-system-tts-0.1.0-SNAPSHOT.pom",
+        "bytes": 1403,
+        "sha256": "a124352e544cf0e438df78df63de9ffdf9239781d05243a875b15cb0cad19a9e"
+      },
+      "moduleMetadata": {
+        "path": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-tts/0.1.0-SNAPSHOT/backend-system-tts-0.1.0-SNAPSHOT.module",
+        "bytes": 3702,
+        "sha256": "71473478abcecde104c0f5ef588aff120f7b9efbeb2f4d2fa98d7e48f21eb187"
+      },
+      "localOutputByteEqual": true,
+      "nativeMembers": []
+    }
+  ],
+  "metadataFileChecks": [
+    {
+      "module": "sdk-core",
+      "variant": "releaseVariantReleaseApiPublication",
+      "file": "sdk-core-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "5eba342740cc766e9f7f226b055257ee68071a5cadc86dd9cdaff8d7f1c6a444"
+    },
+    {
+      "module": "sdk-core",
+      "variant": "releaseVariantReleaseRuntimePublication",
+      "file": "sdk-core-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "5eba342740cc766e9f7f226b055257ee68071a5cadc86dd9cdaff8d7f1c6a444"
+    },
+    {
+      "module": "sdk-core",
+      "variant": "releaseVariantReleaseSourcePublication",
+      "file": "sdk-core-0.1.0-SNAPSHOT-sources.jar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "2680eef0cf4e21a4d6fb6acd84677d9055005e89e51c9a7b30fedd21a63e0920"
+    },
+    {
+      "module": "speech",
+      "variant": "releaseVariantReleaseApiPublication",
+      "file": "speech-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "af39a696fd5ac750b7dcf2f8c08e407956dcab51bd66ebe2e54dcf8cfd99c0e6"
+    },
+    {
+      "module": "speech",
+      "variant": "releaseVariantReleaseRuntimePublication",
+      "file": "speech-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "af39a696fd5ac750b7dcf2f8c08e407956dcab51bd66ebe2e54dcf8cfd99c0e6"
+    },
+    {
+      "module": "speech",
+      "variant": "releaseVariantReleaseSourcePublication",
+      "file": "speech-0.1.0-SNAPSHOT-sources.jar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "96a5087d5c186c6a2fd085b0bd917c88ee8597f2828f0214c51767ff442cb09a"
+    },
+    {
+      "module": "backend-sherpa-asr",
+      "variant": "releaseVariantReleaseApiPublication",
+      "file": "backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "6de95f567932747fb98ffc7b15ee66e0cca75a6674f63c87e40e8bc9b2852028"
+    },
+    {
+      "module": "backend-sherpa-asr",
+      "variant": "releaseVariantReleaseRuntimePublication",
+      "file": "backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "6de95f567932747fb98ffc7b15ee66e0cca75a6674f63c87e40e8bc9b2852028"
+    },
+    {
+      "module": "backend-sherpa-asr",
+      "variant": "releaseVariantReleaseSourcePublication",
+      "file": "backend-sherpa-asr-0.1.0-SNAPSHOT-sources.jar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "717d7d213296fae42601c0e02a8d9f50f9928ce597018b519a69af13144f1bb4"
+    },
+    {
+      "module": "backend-system-asr",
+      "variant": "releaseVariantReleaseApiPublication",
+      "file": "backend-system-asr-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "532761a217f5d348ab04312803232dcea8939d8953ca22ac171354c9c5334d60"
+    },
+    {
+      "module": "backend-system-asr",
+      "variant": "releaseVariantReleaseRuntimePublication",
+      "file": "backend-system-asr-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "532761a217f5d348ab04312803232dcea8939d8953ca22ac171354c9c5334d60"
+    },
+    {
+      "module": "backend-system-asr",
+      "variant": "releaseVariantReleaseSourcePublication",
+      "file": "backend-system-asr-0.1.0-SNAPSHOT-sources.jar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "6826f45172a05642058275e7ed36899aae38d9af94a12f5ac882546a7fc12e9a"
+    },
+    {
+      "module": "backend-system-tts",
+      "variant": "releaseVariantReleaseApiPublication",
+      "file": "backend-system-tts-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "3abc28f8cfda580b8cc94ecede7dbcf0cba0dc5f9d390c8678bf817beff840df"
+    },
+    {
+      "module": "backend-system-tts",
+      "variant": "releaseVariantReleaseRuntimePublication",
+      "file": "backend-system-tts-0.1.0-SNAPSHOT.aar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "3abc28f8cfda580b8cc94ecede7dbcf0cba0dc5f9d390c8678bf817beff840df"
+    },
+    {
+      "module": "backend-system-tts",
+      "variant": "releaseVariantReleaseSourcePublication",
+      "file": "backend-system-tts-0.1.0-SNAPSHOT-sources.jar",
+      "hashAlgorithmsVerified": [
+        "sha512",
+        "sha256",
+        "sha1",
+        "md5"
+      ],
+      "sha256": "6f01f8293ebb94365cc107cbb323cd19812a4641dffb3d376d2d6e6c6b56c82e"
+    }
+  ],
+  "runtimePomDependency": [
+    {
+      "groupId": "com.k2fsa.sherpa.onnx",
+      "artifactId": "sherpa-onnx",
+      "version": "2.0.1",
+      "scope": "runtime"
+    }
+  ]
+}

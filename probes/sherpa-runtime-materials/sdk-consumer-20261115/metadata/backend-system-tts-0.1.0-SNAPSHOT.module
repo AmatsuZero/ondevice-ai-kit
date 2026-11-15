@@ -1,0 +1,117 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.ondeviceai",
+    "module": "backend-system-tts",
+    "version": "0.1.0-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.4.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.ondeviceai",
+          "module": "speech",
+          "version": {
+            "requires": "0.1.0-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "backend-system-tts-0.1.0-SNAPSHOT.aar",
+          "url": "backend-system-tts-0.1.0-SNAPSHOT.aar",
+          "size": 29599,
+          "sha512": "0fc65ab2e28006e3a4189d8c7a277c145e9a312c834dcbe5a0b5c165b811b3ac56062dfed8f6f3eb8b61389b09cdcc01fc34ea750598d67e3c436989d9d1d6b4",
+          "sha256": "3abc28f8cfda580b8cc94ecede7dbcf0cba0dc5f9d390c8678bf817beff840df",
+          "sha1": "e075d92a341ab71fbf6103f94490d34dbb1f4951",
+          "md5": "d6e6399bbed31ae2b902a301b2322873"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "io.ondeviceai",
+          "module": "speech",
+          "version": {
+            "requires": "0.1.0-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "backend-system-tts-0.1.0-SNAPSHOT.aar",
+          "url": "backend-system-tts-0.1.0-SNAPSHOT.aar",
+          "size": 29599,
+          "sha512": "0fc65ab2e28006e3a4189d8c7a277c145e9a312c834dcbe5a0b5c165b811b3ac56062dfed8f6f3eb8b61389b09cdcc01fc34ea750598d67e3c436989d9d1d6b4",
+          "sha256": "3abc28f8cfda580b8cc94ecede7dbcf0cba0dc5f9d390c8678bf817beff840df",
+          "sha1": "e075d92a341ab71fbf6103f94490d34dbb1f4951",
+          "md5": "d6e6399bbed31ae2b902a301b2322873"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "backend-system-tts-0.1.0-SNAPSHOT-sources.jar",
+          "url": "backend-system-tts-0.1.0-SNAPSHOT-sources.jar",
+          "size": 2917,
+          "sha512": "a8a9e9140be2d94050dd9d4e57b0708f3391d81a900cef539b7f19129540befba1b834dea3d399968c83bc9c54ed20689e8924aa54110a260025e339512268d4",
+          "sha256": "6f01f8293ebb94365cc107cbb323cd19812a4641dffb3d376d2d6e6c6b56c82e",
+          "sha1": "66ae1a2df42d815f0b40d9611a57fe58aa74b1a3",
+          "md5": "66a197615943091ea3502641f2c7af1c"
+        }
+      ]
+    }
+  ]
+}

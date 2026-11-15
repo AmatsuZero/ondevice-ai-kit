@@ -1,0 +1,124 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.ondeviceai",
+    "module": "backend-sherpa-asr",
+    "version": "0.1.0-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.4.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.ondeviceai",
+          "module": "speech",
+          "version": {
+            "requires": "0.1.0-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+          "url": "backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+          "size": 38862,
+          "sha512": "cd15beb6f4ba2d5b66cf636dbadd700f2b552760d5e45adfaa40d0cecaef3678e49b915b7583aec915615e4b277aa796267b6197ce7b6b7b9fc0a621b9885cf0",
+          "sha256": "6de95f567932747fb98ffc7b15ee66e0cca75a6674f63c87e40e8bc9b2852028",
+          "sha1": "31c8ef23c91a844c4dcbbbbd70dfd83ed2e54d15",
+          "md5": "9b38bed47281644f4f79c79bad755260"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "com.k2fsa.sherpa.onnx",
+          "module": "sherpa-onnx",
+          "version": {
+            "requires": "2.0.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "io.ondeviceai",
+          "module": "speech",
+          "version": {
+            "requires": "0.1.0-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+          "url": "backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+          "size": 38862,
+          "sha512": "cd15beb6f4ba2d5b66cf636dbadd700f2b552760d5e45adfaa40d0cecaef3678e49b915b7583aec915615e4b277aa796267b6197ce7b6b7b9fc0a621b9885cf0",
+          "sha256": "6de95f567932747fb98ffc7b15ee66e0cca75a6674f63c87e40e8bc9b2852028",
+          "sha1": "31c8ef23c91a844c4dcbbbbd70dfd83ed2e54d15",
+          "md5": "9b38bed47281644f4f79c79bad755260"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "backend-sherpa-asr-0.1.0-SNAPSHOT-sources.jar",
+          "url": "backend-sherpa-asr-0.1.0-SNAPSHOT-sources.jar",
+          "size": 6887,
+          "sha512": "e4178122c121808f15870f5c8a65804ba97f1bb609c3feeb8b3bdce01f0a92dc7ee5d7695c2f0eafddd59ff22b1d1e31f51f998a6b176cf5bbac6eec4be11563",
+          "sha256": "717d7d213296fae42601c0e02a8d9f50f9928ce597018b519a69af13144f1bb4",
+          "sha1": "a384b4bab0f187dafe3e2cbc17df0afac9c9cc5f",
+          "md5": "cc1488872e3b3b1c3f2373b5d58e0522"
+        }
+      ]
+    }
+  ]
+}

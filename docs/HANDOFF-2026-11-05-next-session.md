@@ -1,3 +1,7 @@
+## 2026-11-15 W3当前SDK发布及独立消费者绑定已父验
+
+已有发布/解析任务复用，五SDK新隔离Maven仓库实际发布；137任务30执行，Sherpa Release Kotlin重新编译，当前AAR38862B/SHA6de95f56…不同于旧02ee869e。独立consumer Release27/3执行、Debug23/2执行均编译通过；实际Debug三配置选中新SDK且无project component，runtime与a8d09d1d固定AAR全字节相同。14源JAR文件及15metadata条目、170保护/161freeze通过，旧35制品保持。[验证](validation/w3-sdk-consumer-binding-20261115.md)。限定hy4复核真实429/code6004、0token/无报告，已停线、重置2026-11-16 10:15:32+08；已提用户线路选择，不自动切换/重试，所有本轮CLI终态。当前父验不是独立接受/最终App采用/P1完备/生产通知或发布批准；P1–P4、R4/R5/W3仍open、goal active，源码未push。规范prompt/raw及新SDK/Maven候选均保留，只清69506B临时prompt重复件。下一以用户所选复核线路及P1实际输入边界继续，不重跑已验构建。
+
 ## 2026-11-15 W3成员矩阵已提交并双端同步
 
 本地2ca58af精确33文件，21成员/九输入组与既有隔离消费者增量经hy4free完整限定复核接受，两LOW及父补七路径收据边界保留。GH#15comment6890225516/GL#15note44852/GHWiki1f2ac678逐字回读，双Wiki SHA7318a80149f7ec373f9363cfd5b490f428ae93f831ca6e8c5b72063cc120c1bd一致，[同步收据](validation/w3-p1-member-matrix-sync-20261115.json)。GH首GET TLS超时零写入，原件保留；调用级直连及完整分页恢复，marker已用勿重发、不改全局代理/凭据。所有本轮helper/发布终态，勿poll旧句柄；原native429不重试，627.210秒hy4 JSON截断拒收不追改。161freeze/166非本次共享路径与原dirty保持，ADB清单仍空、新run零prepare/消费；源码未push、goal active。P1实际生产候选采用与输入完整性可信度复核，P2–P4及R4/R5/W3仍open；不以数量、隔离消费者或SDK既有metadata图关闭。下一继续上述实际边界；不重复已验归档/日志/构建/ADB恢复试验、不以模拟器替代真机。

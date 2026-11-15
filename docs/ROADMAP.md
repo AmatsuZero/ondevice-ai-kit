@@ -1,3 +1,7 @@
+## 2026-11-15 W3当前SDK消费链已父验，独立复核待恢复
+
+[当前SDK消费链](validation/w3-sdk-consumer-binding-20261115.md)：五SDK实际本地发布、当前Sherpa AAR6de95f56…，独立消费者Debug/Release编译与Debug实际制品解析通过；14源JAR文件、15metadata条目及固定runtime字节对应通过。原生库由runtime传递提供，尚无最终App打包/安装/通知证明。hy4复核429/code6004无报告已停线，等待用户线路选择；父验不写独立接受。P1完整输入/可信度及P2–P4、R4/R5/W3仍open，170保护/161freeze保持，无新设备/模型/远端SDK发布。
+
 ## 2026-11-15 W3已核成员输入与既有冻结消费者
 
 [成员矩阵](validation/w3-p1-member-matrix-20261115.md)覆盖21非目录成员/9输入组，124class映射22Kotlin源路径、APK四arm64 SO逐字节对应；实际version.cc日期/SHA补丁和嵌套ORT四ABI输入已关联。类名/SourceFile不是字节码语义等价；输入完整性及实际生产采用绑定仍缺。hy4free完整限定复核accept增量，两LOW边界已保留；170保护/161freeze保持、零设备/模型/生产变更，质量资源及P1–P4/W3仍open、源码未push。
