@@ -72,3 +72,5 @@ Abseil 在 non-Windows 且 Patch_FOUND 时仍声明应用两份 CUDA 命名补�
 另一次 hy3 限定供应文本技术复核 54.255 秒完整 success，接受该 bounded increment；一项 MEDIUM 要求双端明确全部验收项仍 open，三项 LOW 要求构建收据不单独作证、限定“未变”的成员范围及保留补丁证据边界，均由本报告/父处置及待发布正文明确落实。原复核见 `bounded-review.json`，父处置见 `review-disposition.json`。该复核未执行工具/验收，也不代表完整法律或生产发布接受。P1 最终生产采用/输入完整性、P2 完整递归组成、P3 全部适用通知和 P4 同一候选完整发布接受仍未齐；R4 真机全量覆盖及 R5/W8 可靠资源/预算保持原缺口，不降低门槛。
 
 173 个原保护文件的原字节/共享原余字节及 161 个冻结文件通过。完整 staged diff-check 的原许可、上游源码/patch 和重建 diff 空白诊断均逐路径核绑定原字节，未格式化原件；其余本轮文字 diff-check 通过，具体见 `diff-check-disposition.json`。
+
+代码已本地提交为 `910ac8c`（99 文件），双端 Issue/Wiki 已逐字回读同步，见 [同步收据](w3-ort-nested-notice-integration-sync-20261115.json)。源码分支未 push。
