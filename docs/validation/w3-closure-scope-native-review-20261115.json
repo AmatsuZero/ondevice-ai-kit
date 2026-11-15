@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "reviewType": "read-only W3 closure-scope review",
+  "status": "complete",
+  "reviewer": "native code-review lane",
+  "constraintsObserved": [
+    "No source, documentation, test, device, network, build, or artifact changes were made outside this owned report.",
+    "No historical FILE, heap, microphone, AiAi, download, or model run was replayed."
+  ],
+  "question": {
+    "cryptographicFullSourceToExactAarProof": "Is it an original R4/R5 gate or later runtime-adoption/release evidence?",
+    "completeRecursiveFinalStaticComponentInventory": "Is it an original R4/R5 gate or later runtime-adoption/release evidence?"
+  },
+  "disposition": "RETAIN_AS_CURRENT_W3_PRODUCTION_RELEASE_GATES__NOT_R4_R5_QUALITY_OR_RESOURCE_GATES",
+  "conclusion": [
+    "The original remaining-case matrix defines R4 as zh-CN/noisy file quality and R5 as a stable-path own-App-PID resource attachment. It does not make source-to-AAR identity or a recursive static-component inventory an R4 or R5 acceptance assertion.",
+    "The current W3 roadmap explicitly lists exact recursive runtime binary composition/source mapping, production integration/notification, and independent release review among the remaining W3 work. Therefore these items are not optional later evidence that may be discarded when judging W3 overall closure.",
+    "The current documents require the evidence outcome (exact source/binary mapping and recursive final composition) but do not prescribe one unique cryptographic proof construction. A proposed proof method must be reviewed for sufficiency; it must not be silently weakened to partial archive, build-log, or four-ORT-member correspondence.",
+    "R4 quality failures/limits and R5/W8 resource-budget gaps remain independently open. Provenance/release evidence cannot substitute for their quality or resource acceptance, and quality/resource observations cannot substitute for the provenance/release gates."
+  ],
+  "scopeClassification": {
+    "originalR1ToR5Matrix": {
+      "classification": "R4/R5-only acceptance scope",
+      "evidence": [
+        {
+          "location": "docs/validation/w3-remaining-acceptance-cases-20261108.md:147-154",
+          "finding": "The matrix makes R4 a frozen-public-file quality case and R5 an own-App-PID stable-path resource case; neither row requests source-to-AAR identity or recursive binary composition."
+        },
+        {
+          "location": "docs/validation/w3-remaining-acceptance-cases-20261108.md:161-163",
+          "finding": "Representative real-noise and reliable Mandarin quality attribution remain open."
+        }
+      ],
+      "result": "Neither requested provenance item is an original R4 or R5 criterion."
+    },
+    "currentW3ProductionAndReleaseScope": {
+      "classification": "Current W3 overall closeout requirement",
+      "evidence": [
+        {
+          "location": "docs/roadmap/W3-speech.md:241-245",
+          "finding": "After declaring the simulator supplement non-R4/R5/non-phone acceptance, the roadmap lists exact recursive runtime binary composition/source mapping, production integration/notification, and independent release review as remaining work."
+        },
+        {
+          "location": "docs/roadmap/W3-speech.md:267",
+          "finding": "The roadmap keeps recursive final composition, complete binary correspondence, production notification, and release review outstanding while W3/R4/R5 remain open."
+        },
+        {
+          "location": "docs/roadmap/W3-speech.md:291-295",
+          "finding": "The materials inventory is explicitly incomplete for recursive static composition and source-to-prebuilt mapping; it keeps production notification/review outstanding."
+        }
+      ],
+      "result": "Both requested items are mandatory for a claim that W3 as a whole, including its declared production/release closeout, is complete."
+    },
+    "evidenceAlreadyAcceptedButInsufficient": {
+      "evidence": [
+        {
+          "location": "docs/validation/w3-runtime-source-archives-complete-20261112.md:21-25",
+          "finding": "All 13 source archives were accepted within scope, while recursive final composition, source-to-exact-AAR identity, final AAR-member attribution, production notification, and release readiness were explicitly excluded."
+        },
+        {
+          "location": "docs/validation/w3-ort-release-members-20261114.md:14-22; commit 6610d76",
+          "finding": "Four ORT members match a fixed release ZIP and the fixed Sherpa AAR, but the record expressly excludes complete source-to-AAR mapping, recursive static composition, production notification, and final release acceptance."
+        },
+        {
+          "location": "docs/validation/w3-ort-all-abi-20261114.md:14-23; commit da36cb0",
+          "finding": "Four ABI build logs and artifact-transfer hashes establish selected build-path facts, but expressly do not prove complete cryptographic source-to-AAR correspondence, recursive final static composition, notification retention, or final release acceptance."
+        }
+      ],
+      "result": "The existing materials are supporting provenance evidence only; combining them does not silently close the two requested gates."
+    },
+    "stillOpenQualityAndResourceRequirements": {
+      "evidence": [
+        {
+          "location": "docs/validation/w3-remaining-acceptance-cases-20261108.md:153-154",
+          "finding": "R4 remains quality-open with platform/clip errors and no approved quality threshold; R5 retains missing-field/budget decisions despite accepted sustained observations."
+        },
+        {
+          "location": "docs/validation/w8-resource-dispositions-20261109.md:29-31",
+          "finding": "The repository has no approved numeric production limits per capability/device/source, so observations cannot be promoted to a resource-budget pass."
+        },
+        {
+          "location": "docs/validation/w3-runtime-source-archives-complete-20261112.md:25",
+          "finding": "The source-archive acceptance separately preserves W3/R4/R5 and TECNO complete quality/resource, true-peak, GPU, energy, and production acceptance as open."
+        }
+      ],
+      "result": "No provenance conclusion changes R4 quality, R5/W8 budget, or TECNO device-quality/resource status."
+    }
+  },
+  "finding": {
+    "severity": "MEDIUM",
+    "title": "W3 closeout requirements lack a single named acceptance-matrix row and sufficient-proof definition",
+    "impact": "Treating the older R1-R5 matrix as exhaustive would incorrectly remove current W3 production/release requirements; treating partial provenance receipts as the requested exact proof would incorrectly close them. Either interpretation could produce a false W3-complete claim.",
+    "rootCause": "The current roadmap adds production/release closeout work outside the original R1-R5 case table, while the individual evidence receipts deliberately describe their own insufficiency.",
+    "requiredResolution": "Retain both items in the W3 closeout ledger under a distinct production/release category, separate from R4 quality and R5/W8 resource acceptance. Before closure, define the accepted proof artifact, its source/build/AAR boundaries, recursive component coverage, and independent review criterion."
+  },
+  "rootCauseFallbackCheck": {
+    "status": "pass",
+    "assessment": "No fallback may reclassify the absence of an original R4/R5 row as authorization to drop current W3 closeout work. Archive completeness, build-log correspondence, and selected ORT-member equality are documented partial evidence with visible limitations, not alternate success paths."
+  },
+  "recommendation": "REQUEST_CHANGES_TO_W3_CLOSEOUT_CLAIM_ONLY: do not mark W3 complete until the distinct production/release gates and the independently open R4/R5 requirements are each resolved or explicitly scope-disposed by the authorized owner."
+}

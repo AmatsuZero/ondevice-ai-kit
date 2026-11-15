@@ -1,3 +1,7 @@
+## 2026-11-15 W3范围分类与USB恢复同步收尾
+
+USB恢复失败已同步GH#15comment6869943486/GL#15note44849/GHWiki8662a9c，双Wiki逐字回读SHA一致；[收据](validation/w3-adb-libusb-sync-20261115.json)，旧marker勿重发、源码未push。原GL分页EOF和失去HEAD/config的旧Wiki目录保留，20行完整分页及独立fresh clone恢复已验。只读范围复核MEDIUM已落实为[现行验收分类与证据边界](validation/w3-closure-scope-20261115.md)：R1–R3仅范围裁定，R4质量/R5资源与P1–P4生产发布分开，全部未通过项仍open；没有唯一“加密证明”形式要求，也不能以局部日志/四SO或材料数量替代完整对应/组成/通知/独立发布复审。当前冻结守卫通过后ADB清单仍空；不重复server/backend实验、新run零prepare/消费。所有本轮发布/helper旧句柄终态；外部连接恢复后同新合同fresh前置，质量资源及生产余门继续，goal active。
+
 ## 2026-11-14 W3四ABI同步与一次ADB后端恢复尝试
 
 da36cb0精确8文件；GH#15comment6869759662/GL#15note44786/GHWiki77eea1e逐字回读，双Wiki SHA84c1cae1a309a33a6b08bbbcecaf8ef90d980f4834cd6a9324bc863bc5cf4eb2一致，[收据](validation/w3-ort-all-abi-sync-20261114.json)。首次GL notes GET EOF保留，marker已用勿重发、源码未push。随后USB仍见TECNO，官方手册/本机确证下仅一次ADB_LIBUSB=1实际启用，但三读仍device not found；已恢复NATIVE且mdns服务空，[恢复尝试](validation/w3-adb-libusb-20261114.md)。不再切换/重启循环，不推断锁屏/授权/线材根因；新合同零prepare/消费，待外部连接状态改变。103保护/161freeze保持，W3/R4/R5与质量资源/生产余门open，goal active。全部本轮helper/服务试验/发布终态。

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "reviewedSourceCommit": "f09f41992ceeed0fbdf86de9d96ba966ae8c3d5d",
+  "nativeOriginalSHA256": "ddf734e4826714e6fab745f6ff1816c52413cff0b554dd05953c4dc2bbdcc09d",
+  "nativeReportPreservedExact": true,
+  "findingDisposition": "Resolved; fresh independent read-only review accepted document finding resolution only",
+  "scopeOnly": true,
+  "uniqueCryptographicProofRequired": false,
+  "existingPartialEvidencePromotedToFullProof": false,
+  "R1R2R3": "TECNO scope-disposed; raw failure/nonexecution retained",
+  "R4": "open: complete physical quality not accepted",
+  "R5W8": "open: missing fields/budget not accepted",
+  "P1SourceBuildRuntime": "open",
+  "P2RecursiveComposition": "open",
+  "P3ProductionNoticeRetention": "open",
+  "P4IndependentReleaseReview": "open",
+  "newPrepareStarted": false,
+  "newRunConsumed": false,
+  "W3Complete": false,
+  "currentSourceBranchPushed": false,
+  "linksChecked": [
+    {
+      "document": "docs/validation/w3-closure-scope-20261115.md",
+      "target": "w3-remaining-acceptance-cases-20261108.md",
+      "exists": true
+    },
+    {
+      "document": "docs/validation/w3-closure-scope-20261115.md",
+      "target": "../roadmap/W3-speech.md",
+      "exists": true
+    },
+    {
+      "document": "docs/validation/w3-closure-scope-20261115.md",
+      "target": "w3-runtime-source-archives-complete-20261112.md",
+      "exists": true
+    },
+    {
+      "document": "docs/validation/w3-closure-scope-20261115.md",
+      "target": "w3-ort-release-members-20261114.md",
+      "exists": true
+    },
+    {
+      "document": "docs/validation/w3-closure-scope-20261115.md",
+      "target": "w3-ort-all-abi-20261114.md",
+      "exists": true
+    },
+    {
+      "document": "docs/validation/w3-closure-scope-20261115.md",
+      "target": "w3-release-review-materials-20261113.md",
+      "exists": true
+    },
+    {
+      "document": "docs/validation/w3-closure-scope-20261115.md",
+      "target": "w8-resource-dispositions-20261109.md",
+      "exists": true
+    },
+    {
+      "document": "docs/validation/w3-closure-scope-20261115.md",
+      "target": "w3-closure-scope-native-review-20261115.json",
+      "exists": true
+    },
+    {
+      "document": "docs/validation/w3-closure-scope-20261115.md",
+      "target": "w3-adb-libusb-sync-20261115.json",
+      "exists": true
+    }
+  ],
+  "evidenceRoot": ".omx/artifacts/w3-closure-scope-20261115",
+  "followupReviewSHA256": "4c9cbb88e28ce82ed9d133e0188f9b126b317af93168dc7c88f62fcd01572ab0",
+  "followupReviewStatus": "ACCEPT_DOCUMENT_FINDING_RESOLUTION_ONLY",
+  "sharedDirtyRemainderPreserved": true,
+  "concurrentF08ChangesExcludedFromStage": true
+}

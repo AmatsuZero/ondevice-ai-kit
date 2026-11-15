@@ -1,3 +1,7 @@
+## 2026-11-15 W3：验收分类与证据边界
+
+W3仍open：R1–R3是TECNO限制裁定，R4质量、R5/W8资源及P1–P4源码对应/递归组成/生产通知/独立发布复审分别未过；[现行清单](validation/w3-closure-scope-20261115.md)。USB恢复结果已双端回读，[同步收据](validation/w3-adb-libusb-sync-20261115.json)；冻结守卫通过但ADB仍空，新run未prepare/消费。
+
 ## 2026-11-14 W3：出处补证同步与ADB恢复边界
 
 四ABI日志补核已双端同步回读，[收据](validation/w3-ort-all-abi-sync-20261114.json)。一次libusb主机后端恢复未成功、NATIVE已恢复，无新prepare/解码；[证据](validation/w3-adb-libusb-20261114.md)。W3/R4/R5质量资源和生产余门保持，待设备连接恢复。
