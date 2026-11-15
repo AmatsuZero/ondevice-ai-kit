@@ -1,3 +1,7 @@
+## W3 Git mode120000的Kotlin blob是链接文本（2026-11-15）
+
+旧class-source映射按SourceFile匹配固定tree路径，却未区分mode；AAR模块22个.kt均为120000，总1568B，gitBlobSHA1固定的是相对链接文本，不能当真实Kotlin源码hash。有效恢复是取实际link blob、规范化相对目标、要求同固定tree内100644普通blob，再核真实源码GitBlob/大小/SHA；不得按同名猜目标或创建真实本地symlink。22真实源141269B/124实际SourceFile与声明集合通过；共享kotlin-api中第23个OfflineDiacritization.kt无模块链接，明确排除，不盲加输入。旧已接受快照保留并新增resolved字段，class元数据对应仍不等于重建字节码/完整构建输入。原系统javap shim无JRE错误保留，复用既有JDK21绝对路径即可，不安装或改全局。证据`.omx/artifacts/w3-jvm-source-links-20261115/`及[验证](validation/w3-jvm-source-resolution-20261115.md)。
+
 ## W3当前SDK消费复核实际hy4free配额失败（2026-11-15）
 
 当前SDK/独立consumer已真实本地构建及制品解析，随后hy4free只读复核3.092秒自然exit0，但result为error_during_execution/is_error=true、HTTP429/code6004/categoryquota、0token/无报告；不是仍在运行、构建失败或已完成复核。服务端重置2026-11-16 10:15:32 UTC+8仅是时间观察，不证明恢复。保存raw/prompt/父停线裁定，停止该线路并提用户选择，禁止自动换模型/付费/重试；本地核验与旧独立接受范围不受撤销。证据`.omx/artifacts/w3-sdk-consumer-binding-20261115/`与[验证](validation/w3-sdk-consumer-binding-20261115.md)。

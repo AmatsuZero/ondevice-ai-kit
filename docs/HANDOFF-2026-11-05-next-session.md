@@ -1,3 +1,7 @@
+## 2026-11-15 W3 JVM链接已解析到真实源码
+
+本轮发现并修正旧GitBlob指向120000链接文本的边界：22链接1568B已逐条解析到22普通Kotlin源141269B，同固定tree/GitBlob/SHA通过；43官方blob读取及一源复用，124class fresh SourceFile/双ZIP读取对应通过。旧映射原字节保留，新入口[验证](validation/w3-jvm-source-resolution-20261115.md)。只证明声明源集合及元数据对应，不是class/DEX等价或完整生成/原生输入；P1–P4/R4/R5/W3仍open。170原保护路径在文档前均未变、161freeze通过，fresh ADB空、新run零prepare/消费；不重复恢复或模型执行。系统javap shim失败原件留，沿用已有JDK21.0.7后通过，无安装/全局改动。原native429与hy4free真实quota429仍停线，等待所选复核线路，勿按旧用户hy4选择重发；源码未push、goal active。
+
 ## 2026-11-15 W3当前SDK消费链已提交并同步，独立复核待选线
 
 本地eeff14e精确23文件；当前五SDK发布/两consumer编译/Debug实际artifact解析、14源JAR与15metadata绑定父验通过，独立hy4复核真实429无报告。GH#15comment6890550272/GL#15note44853/GHWikia77cf1d5逐字回读，双Wiki SHA47081e547ff050f628e92339d73699883326a868d31f9b5c801f4d39a7f0280e一致，[同步收据](validation/w3-sdk-consumer-binding-sync-20261115.json)。marker已用勿重发，源码未push；所有本轮build/helper/API终态，勿poll旧句柄。hy4free停线至服务端重置2026-11-16 10:15:32+08观察后仅候选，当前已提用户Qoder/本地Ollama/暂缓选择，不能自动fallback或把reset当恢复。新五SDK/Maven仓库及两consumer二进制和原始失败保留，只有规范副本已核的69506B prompt重复件清理。170保护/161freeze在父验时通过，当前SDK候选绑定不是最终App/通知/完整输入/生产批准。P1–P4、R4/R5/W3仍open、goal active；下一所选独立复核与P1实际source/build-input边界，勿重跑已验本地构建或旧设备诊断。

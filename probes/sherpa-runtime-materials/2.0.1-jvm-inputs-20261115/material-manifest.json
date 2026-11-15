@@ -1,0 +1,218 @@
+{
+  "files": {
+    "LICENSE": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "README.md": {
+      "bytes": 1717,
+      "sha256": "f21220ece769582caf6340fe4c1a3d141b137c2eb6ccf2c52a42fac8469596b7"
+    },
+    "class-source-map.json": {
+      "bytes": 83237,
+      "sha256": "211b409ce14c1bfdd3415d35c2dbabc44b533d9a4cc99e2594c2ceec14acec56"
+    },
+    "jvm-input-group.json": {
+      "bytes": 12841,
+      "sha256": "8d97b3ed960fdb7b73ab629a14d8b797c2ff914e68897755c1b82e86fc0260bd"
+    },
+    "license-material.json": {
+      "bytes": 603,
+      "sha256": "d4d36e456f932c8ba97b3f725dacadfe4e599164947f9b75897c21c4fc002362"
+    },
+    "link-blobs/AudioTagging.kt.txt": {
+      "bytes": 68,
+      "sha256": "d2760c7c22328f0ac87dc9542afe0f0e84144caf08f58dff65478d2296d227c2"
+    },
+    "link-blobs/DenoisedAudio.kt.txt": {
+      "bytes": 69,
+      "sha256": "47f123604582ef33517d3f9e82e6c064c11f86f80ebb197e8f54afbb8d75e301"
+    },
+    "link-blobs/FeatureConfig.kt.txt": {
+      "bytes": 69,
+      "sha256": "8bdafcd4fc94a9ac28f4614b0a0e4d732ef6bdcc9cde7d07bdc1c894278bbd65"
+    },
+    "link-blobs/HomophoneReplacerConfig.kt.txt": {
+      "bytes": 79,
+      "sha256": "22d7e894b5666d880a54a7504c9768e9f04a07309c0a5035179b4b08cda490fe"
+    },
+    "link-blobs/KeywordSpotter.kt.txt": {
+      "bytes": 70,
+      "sha256": "eb4652deec01a59461c896c7ef19dc4a6da1e3d393cd30282d5d31deda4f5867"
+    },
+    "link-blobs/OfflinePunctuation.kt.txt": {
+      "bytes": 74,
+      "sha256": "1b7c909fd5936598d7daa706cd39bdaa5e1599ad3364aadef8504b0d381d6415"
+    },
+    "link-blobs/OfflineRecognizer.kt.txt": {
+      "bytes": 73,
+      "sha256": "bb74d4fcf1f587ac9cf69b06485113e7432175146f1f9b8134d8ac0f03796894"
+    },
+    "link-blobs/OfflineSpeakerDiarization.kt.txt": {
+      "bytes": 81,
+      "sha256": "468fce32e3bd4116c97497efe3df629c17d1785856bde1eb1cb26c84df2492ac"
+    },
+    "link-blobs/OfflineSpeechDenoiser.kt.txt": {
+      "bytes": 77,
+      "sha256": "a53fb1ebf5caa585de70bc2c6d6cd1a919791dd2a5a796fa2a1a3ccf37581cc5"
+    },
+    "link-blobs/OfflineStream.kt.txt": {
+      "bytes": 69,
+      "sha256": "2263670b3396892c27305b04a36582d9fa5a7bc4714b3b84342ee5a578af0d1e"
+    },
+    "link-blobs/OnlinePunctuation.kt.txt": {
+      "bytes": 73,
+      "sha256": "7c3085cc67930d8bbe8d282c039be58405628cc010bf210c7f13aea6340d54f5"
+    },
+    "link-blobs/OnlineRecognizer.kt.txt": {
+      "bytes": 72,
+      "sha256": "788c3f14ed247bd668636eb7899c009eca0b5b9e09be014ac5be6decbd7e938b"
+    },
+    "link-blobs/OnlineSpeechDenoiser.kt.txt": {
+      "bytes": 76,
+      "sha256": "9a0061bba695a55a455fc992733f2cf36fee0b626705cb06fa2c7c3af3b473ce"
+    },
+    "link-blobs/OnlineStream.kt.txt": {
+      "bytes": 68,
+      "sha256": "7e9404b84109372fa9391dec3eef2f88334d2b85399bf7c25f67f9762de145ce"
+    },
+    "link-blobs/QnnConfig.kt.txt": {
+      "bytes": 65,
+      "sha256": "56cbd41a0f472c4ab2c67fa44250c16f084f6ae71edf7b9668469693e145c0ef"
+    },
+    "link-blobs/Speaker.kt.txt": {
+      "bytes": 63,
+      "sha256": "e7686ce9cda8f2cc2a43f51e2054a77b41253634bcb6a15d3751fabdb1a9b8e3"
+    },
+    "link-blobs/SpeakerEmbeddingExtractorConfig.kt.txt": {
+      "bytes": 87,
+      "sha256": "6b037c1b2ae7946ee05bfc2142b5539d3c58614d35a592b6e176f2e17ca94c7a"
+    },
+    "link-blobs/SpokenLanguageIdentification.kt.txt": {
+      "bytes": 84,
+      "sha256": "415cbb3e2d2b5614b99e49e09f0cf1d9aee46a8ceb1b94a663c2459cb1fe5239"
+    },
+    "link-blobs/Tts.kt.txt": {
+      "bytes": 59,
+      "sha256": "59786200fc8c8f4c7287e51a975c5e993aadf47446da367c6295f8800b643887"
+    },
+    "link-blobs/Vad.kt.txt": {
+      "bytes": 59,
+      "sha256": "512f0c34d1a0aa1d067a8e7a97d422d640ee425ad1be24c39a266393179b1166"
+    },
+    "link-blobs/VersionInfo.kt.txt": {
+      "bytes": 67,
+      "sha256": "8a363837615f8bb64609b9b88cb30124ededcab0e48afc46be99d63fa1083791"
+    },
+    "link-blobs/WaveReader.kt.txt": {
+      "bytes": 66,
+      "sha256": "24b35948cf25a1d72ade295faa0653f3f919f8cd2c374944e7bd3e77d592df74"
+    },
+    "member-matrix.json": {
+      "bytes": 11922,
+      "sha256": "a3ad3e8dcca2426fa5b39011ec6ceb8aa8b3d82531d0aa27f96a2515e4437956"
+    },
+    "parent-verification.json": {
+      "bytes": 1050,
+      "sha256": "735e3460e5d69ea3dedff35c28b98ff0afad65bb751ffb3a565a8ef542ba0458"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/AudioTagging.kt": {
+      "bytes": 5105,
+      "sha256": "ca873e716e7ccb3e86443e38f7b5f840bb4ccd067532b6c26454fab3956d3f88"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/DenoisedAudio.kt": {
+      "bytes": 357,
+      "sha256": "0a426f3f12edb5c2dff486ddc7accb6675a666bf6c852f48d28ce37f49afc69f"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/FeatureConfig.kt": {
+      "bytes": 301,
+      "sha256": "829c7adc4db1324f21b9a9cbf5bf10eacf759714fe50956f48317c1ffef044f6"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/HomophoneReplacerConfig.kt": {
+      "bytes": 170,
+      "sha256": "fe926b6413f4d87e67c41feb21b8363923a67cbd3a5eb687b76390a5f1f7db60"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/KeywordSpotter.kt": {
+      "bytes": 5062,
+      "sha256": "6d8387534b942a979424a1d6721fd285f85df8bfca0ea392860f11fe06f31d06"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/OfflinePunctuation.kt": {
+      "bytes": 1428,
+      "sha256": "b7e52364dfd00d6057e355e03ba965826491bd78b3df2a1cf6c77e1ee2e55b4e"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/OfflineRecognizer.kt": {
+      "bytes": 56760,
+      "sha256": "8103b67ec65910a71e6b8d4bca7934f77c1af47b68a5c18cdca0ce3f956247a7"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/OfflineSpeakerDiarization.kt": {
+      "bytes": 3258,
+      "sha256": "4017f3b1359f6c3f35a0c46ed4e939d2578fe7773c8686c786bd6a591e4b8921"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/OfflineSpeechDenoiser.kt": {
+      "bytes": 2973,
+      "sha256": "02cc81b23f7a09741e9eb32405d4cbc350779fa591c0fc2634488c0386e2fa36"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/OfflineStream.kt": {
+      "bytes": 1080,
+      "sha256": "5c90b7c060cdd0a2222cc935b54f69465a4a7544de29240bafe4d3a8d86dbb6e"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/OnlinePunctuation.kt": {
+      "bytes": 1446,
+      "sha256": "5622b11cdf848470e4733247bb73a2ac5cedb6b9d1f79dc922df416ed9cb21f7"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/OnlineRecognizer.kt": {
+      "bytes": 30509,
+      "sha256": "3204ff816361d99d94dda1e8c26681f6d4a5ad749a68d8fee93b4e8bb2b21d17"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/OnlineSpeechDenoiser.kt": {
+      "bytes": 1748,
+      "sha256": "c270d1b192cd9c380f0cd14befd4b9f13ef6abd90fe009ec428f2c303ad0ab5e"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/OnlineStream.kt": {
+      "bytes": 1178,
+      "sha256": "6b9f8de317e6a0bb51f0f29d940617b781cb31b190e1c725dd438231836c06ab"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/QnnConfig.kt": {
+      "bytes": 156,
+      "sha256": "86c963f27677f690eb0d6639735052eba5e60d9f81ccd4c1df0aa831fd680d6f"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/Speaker.kt": {
+      "bytes": 4712,
+      "sha256": "4dcc84f4cf0682e0e4da837ba00130d66ad7aec4f803af4c021de3434246e871"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/SpeakerEmbeddingExtractorConfig.kt": {
+      "bytes": 200,
+      "sha256": "d90c0ce88dce309813e720ff46abba737401e7e562f9635ee13fd5b32ce106c6"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/SpokenLanguageIdentification.kt": {
+      "bytes": 2976,
+      "sha256": "a4633a327730508ae03b767c5931be006e2c2123f7687faa32bf992aee5de6cc"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/Tts.kt": {
+      "bytes": 15694,
+      "sha256": "291d30c045ae1cb88a87cce8d6794189e5e63f6ecefd012259694932a5594f38"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/Vad.kt": {
+      "bytes": 4113,
+      "sha256": "eaae2b8748b3ed1f44d7da83179a815494edced7dc3ce38376d573c4a1c50d9b"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/VersionInfo.kt": {
+      "bytes": 627,
+      "sha256": "8a9ada883d8cb802b4e70cc6770af20f4b7d85935a16b0b71974d22d55d0c90a"
+    },
+    "source-evidence/sherpa-onnx/kotlin-api/WaveReader.kt": {
+      "bytes": 1416,
+      "sha256": "1b4abcf6c7afdb6e8cc4cd4a71098eec4b45c473b470c71671fd20b641aee8e7"
+    },
+    "source-link-resolution.json": {
+      "bytes": 33603,
+      "sha256": "dbfd433461badad891692963c16496bbe062ba5f03a1c322567f01cd118128db"
+    },
+    "verification-source.py.txt": {
+      "bytes": 11618,
+      "sha256": "cc047203350e280b49919dd22539e8d493d56716b7716ceff69a664eb1c95506"
+    }
+  },
+  "fileCountExcludingThisManifest": 53,
+  "noSymlinks": true
+}

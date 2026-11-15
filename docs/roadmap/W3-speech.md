@@ -1,3 +1,7 @@
+## 2026-11-15：JVM链接已解析到真实Kotlin源码
+
+旧映射22个GitBlob实际为120000链接文本1568B；现已逐条解析并保留22份普通源码141269B，GitBlob/大小/SHA通过。固定main/release声明集合、124class fresh SourceFile及双ZIP读取均对应；旧快照不变，[最新验证](../validation/w3-jvm-source-resolution-20261115.md)。这是源码字节与元数据闭包，非重建class/DEX等价、完整生成/原生输入或最终App采用；独立复核仍受原429停线，P1–P4/R4/R5/W3保持open。170保护/161freeze保持、fresh ADB空，新run零prepare/消费，无生产实现或模型改动，源码未push。
+
 ## 2026-11-15：当前SDK与独立消费者绑定已父验
 
 复用现有任务新本地发布五SDK，Sherpa后端实际重新编译，AAR38862B/SHA6de95f56…；独立消费者Debug/Release编译通过，Debug三配置实际选中新SDK、无project component，runtime与固定a8d09d1d AAR全字节一致。14源JAR文件/15metadata条目及170保护/161freeze通过；[验证](../validation/w3-sdk-consumer-binding-20261115.md)。当前SDK消费证据补齐增量，不证明最终App采用、穷尽构建输入或P2–P4；hy4复核429/code6004未交报告，已停线等用户选择，不能计独立通过。P1/R4/R5/W3保持open，无新设备/模型或远端SDK发布，源码未push。

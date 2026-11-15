@@ -1,3 +1,7 @@
+## 2026-11-15 W3 JVM真实源码归属修正
+
+22个120000链接1568B已解析到22普通Kotlin源141269B，实际124class SourceFile与固定声明集合通过；旧链接blob保留，新记录增resolved源码摘要，[验证](validation/w3-jvm-source-resolution-20261115.md)。不证明重建class/DEX等价或完整构建输入；独立复核受原429停线，P1–P4/R4/R5/W3仍open。161freeze通过、fresh ADB空、新run未prepare/消费，无模型/生产实现变更，源码未push。
+
 ## 2026-11-15 W3当前SDK消费链已父验，独立复核待恢复
 
 [当前SDK消费链](validation/w3-sdk-consumer-binding-20261115.md)：五SDK实际本地发布、当前Sherpa AAR6de95f56…，独立消费者Debug/Release编译与Debug实际制品解析通过；14源JAR文件、15metadata条目及固定runtime字节对应通过。原生库由runtime传递提供，尚无最终App打包/安装/通知证明。hy4复核429/code6004无报告已停线，等待用户线路选择；父验不写独立接受。P1完整输入/可信度及P2–P4、R4/R5/W3仍open，170保护/161freeze保持，无新设备/模型/远端SDK发布。

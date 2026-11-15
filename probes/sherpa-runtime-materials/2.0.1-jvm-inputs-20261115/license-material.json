@@ -1,0 +1,16 @@
+{
+  "license": "Apache-2.0",
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "licenseEvidence": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/license-material.json",
+    "bytes": 356,
+    "sha256": "6c1c3e19c8873483ea50a36e1a6903b35d05d34faa7f2faa84c5dfbfc56b28c3"
+  },
+  "localLicense": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/LICENSE",
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "upstreamSourceFilesModified": false,
+  "productionNoticeAcceptance": false
+}

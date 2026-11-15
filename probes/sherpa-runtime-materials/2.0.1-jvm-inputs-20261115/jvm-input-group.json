@@ -1,0 +1,296 @@
+{
+  "id": "sherpa-aar-packaging",
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "sourcePaths": [
+    "android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts",
+    "android/SherpaOnnxAar/gradle/libs.versions.toml",
+    "android/SherpaOnnxAar/gradle/wrapper/gradle-wrapper.properties",
+    "android/SherpaOnnxAar/sherpa_onnx/src/main/AndroidManifest.xml"
+  ],
+  "declaredTools": {
+    "gradle": "8.6",
+    "agp": "8.4.0",
+    "kotlin": "1.7.20"
+  },
+  "observedJobTools": {
+    "gradle": "8.6",
+    "setupJava": "temurin 21"
+  },
+  "settings": {
+    "compileSdk": 34,
+    "minSdk": 21,
+    "jvmTarget": "1.8",
+    "releaseMinify": false
+  },
+  "command": "./gradlew :sherpa_onnx:assembleRelease",
+  "workflow": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/.github/workflows/android.yaml",
+  "jobLog": {
+    "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-aar.log",
+    "bytes": 117868,
+    "sha256": "ab83e33122f92e915d11e07e4829fdfc17e020fd4cfe803f81cb528c710ecc28"
+  },
+  "baseBuildInputGroups": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/build-input-groups.json",
+    "bytes": 55282,
+    "sha256": "ccb67810e01d0f7c6c9f12eec7f0c09dbe34510236349b3219c8dce650b0f669"
+  },
+  "jvmSourceSelection": {
+    "fixedMainSourceEntries": [
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/AudioTagging.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "25c36e3965df6417767202d08e4617ed11de1a9d",
+        "size": 68,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/25c36e3965df6417767202d08e4617ed11de1a9d"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/DenoisedAudio.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "074222621829a7378a5b18592d255341e5d4a543",
+        "size": 69,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/074222621829a7378a5b18592d255341e5d4a543"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/FeatureConfig.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "952fae878af49e0fe7b3828c8f83782495d77828",
+        "size": 69,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/952fae878af49e0fe7b3828c8f83782495d77828"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/HomophoneReplacerConfig.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "b9f74be21cfeffc93bd053ce570374f9990e0630",
+        "size": 79,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/b9f74be21cfeffc93bd053ce570374f9990e0630"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/KeywordSpotter.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "4392376a1fe9192841126304ce7db835a2fb9a27",
+        "size": 70,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/4392376a1fe9192841126304ce7db835a2fb9a27"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/OfflinePunctuation.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "1eed71678d4d8a11b49b9d3835c4397f65d6681f",
+        "size": 74,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/1eed71678d4d8a11b49b9d3835c4397f65d6681f"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/OfflineRecognizer.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "faa3ab4acfadac2a1bc5e8b5e12dc8c3ccc5c0e4",
+        "size": 73,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/faa3ab4acfadac2a1bc5e8b5e12dc8c3ccc5c0e4"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "d850dd7fdce300a5802e4bd6ba829d700f93a634",
+        "size": 81,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/d850dd7fdce300a5802e4bd6ba829d700f93a634"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "315fe746e27fca003f53b080dcd4e5ff589c04a9",
+        "size": 77,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/315fe746e27fca003f53b080dcd4e5ff589c04a9"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/OfflineStream.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "2a3aff864e5c09277236fa0c3cb0b1e3768b51e5",
+        "size": 69,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/2a3aff864e5c09277236fa0c3cb0b1e3768b51e5"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/OnlinePunctuation.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "986f9e5838672c88febc36af57cc55eb1af3ea9a",
+        "size": 73,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/986f9e5838672c88febc36af57cc55eb1af3ea9a"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/OnlineRecognizer.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "5bb19ee10e7d84f9455599dcf0bf000e6c8aece3",
+        "size": 72,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/5bb19ee10e7d84f9455599dcf0bf000e6c8aece3"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "734afe91e66f669445af7d2575a47e3cda81d644",
+        "size": 76,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/734afe91e66f669445af7d2575a47e3cda81d644"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/OnlineStream.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "d4518b89bfb96439eb3f3a01870b43680414c742",
+        "size": 68,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/d4518b89bfb96439eb3f3a01870b43680414c742"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/QnnConfig.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "cfd1fc18fa9bd3ae12d6ad35be9060c2c448a38c",
+        "size": 65,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/cfd1fc18fa9bd3ae12d6ad35be9060c2c448a38c"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/Speaker.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "66441dea739da5afb005d4d6c802922cca423dc1",
+        "size": 63,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/66441dea739da5afb005d4d6c802922cca423dc1"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "754102447c5daf521ae7c01a045c6fcd6020ea8a",
+        "size": 87,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/754102447c5daf521ae7c01a045c6fcd6020ea8a"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "de79a7d20a95c2125c2e5884ad382362363cff19",
+        "size": 84,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/de79a7d20a95c2125c2e5884ad382362363cff19"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/Tts.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "f1392e7712fd27ab75a43bfb00a5f062b4e16d46",
+        "size": 59,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/f1392e7712fd27ab75a43bfb00a5f062b4e16d46"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/Vad.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "761b158ce91b8b43a3892587f4c0fe158674e418",
+        "size": 59,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/761b158ce91b8b43a3892587f4c0fe158674e418"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/VersionInfo.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "d384e0da94a89e0e0ca8b5b9560ffcd12dc2dbc9",
+        "size": 67,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/d384e0da94a89e0e0ca8b5b9560ffcd12dc2dbc9"
+      },
+      {
+        "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/WaveReader.kt",
+        "mode": "120000",
+        "type": "blob",
+        "sha": "05c8fb2463d534c266d5875305d52ebb9a533a3e",
+        "size": 66,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/05c8fb2463d534c266d5875305d52ebb9a533a3e"
+      }
+    ],
+    "fixedReleaseSourceEntries": [],
+    "regularTargetCount": 22,
+    "regularTargetBytes": 141269,
+    "sourceLinkResolution": "source-link-resolution.json",
+    "excludedSource": [
+      {
+        "path": "sherpa-onnx/kotlin-api/OfflineDiacritization.kt",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "0fc20bd47af2c70927df851462a749cb2f7f166f",
+        "size": 1484,
+        "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/0fc20bd47af2c70927df851462a749cb2f7f166f"
+      }
+    ],
+    "exclusionReason": "Present in shared kotlin-api directory but no main/release module source entry or AAR class SourceFile maps to it; selected fixed module link closure excludes it. This does not prove absence of every possible generated input."
+  },
+  "selectedBuildEvidence": [
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/.github/workflows/android.yaml",
+      "bytes": 10493,
+      "sha256": "c6bbf8e700f944903301bf36f3627fd24f65e072df2c0904226ed153491b31ba"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts",
+      "bytes": 1062,
+      "sha256": "3adfa152822feaf28348275a471925ac052dd66e24d2a2a8c968f69b2070bfbd"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/new-release.sh",
+      "bytes": 4852,
+      "sha256": "b708dbf8e0e8b79040250f0e4473ed5de9d3a77050a9f8ab46cc5267b4b3bf35"
+    },
+    {
+      "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-aar.log",
+      "bytes": 117868,
+      "sha256": "ab83e33122f92e915d11e07e4829fdfc17e020fd4cfe803f81cb528c710ecc28"
+    }
+  ],
+  "actualJobObservations": [
+    {
+      "line": 319,
+      "text": "2026-10-26T16:23:11.1306074Z af2d8d81dbfa61c4cea4c568da78f3982edca005"
+    },
+    {
+      "line": 344,
+      "text": "2026-10-26T16:23:11.5705399Z HEAD is now at af2d8d81 Release v2.0.1 (#4115)"
+    },
+    {
+      "line": 347,
+      "text": "2026-10-26T16:23:11.5787587Z af2d8d81dbfa61c4cea4c568da78f3982edca005"
+    },
+    {
+      "line": 482,
+      "text": "2026-10-26T16:23:13.3459099Z index fad4f460..149297a1 100644"
+    },
+    {
+      "line": 717,
+      "text": "2026-10-26T16:24:37.1140838Z > Task :sherpa_onnx:compileReleaseKotlin"
+    },
+    {
+      "line": 718,
+      "text": "2026-10-26T16:24:37.1151158Z w: /home/runner/work/sherpa-onnx/sherpa-onnx/android/SherpaOnnxAar/sherpa_onnx/src/main/java/com/k2fsa/sherpa/onnx/Tts.kt: (299, 5): Parameter 'dictDir' is never used"
+    },
+    {
+      "line": 721,
+      "text": "2026-10-26T16:24:41.6165368Z > Task :sherpa_onnx:compileReleaseJavaWithJavac NO-SOURCE"
+    },
+    {
+      "line": 730,
+      "text": "2026-10-26T16:24:47.3144502Z BUILD SUCCESSFUL in 1m 27s"
+    },
+    {
+      "line": 731,
+      "text": "2026-10-26T16:24:47.3145094Z 28 actionable tasks: 28 executed"
+    }
+  ],
+  "patchBoundary": "new-release.sh does not select .kt files for its replacements; observed tracked diff is version.cc date/SHA. Not a complete generated-input or environment inventory.",
+  "declaredKotlinSourceLinkClosureVerified": true,
+  "semanticClassEqualityVerified": false,
+  "fullBuildInputCompletenessVerified": false
+}

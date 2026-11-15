@@ -1,0 +1,177 @@
+from pathlib import Path
+import base64, hashlib, io, json, posixpath, re, shutil, struct, subprocess, zipfile
+
+ROOT = Path('/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation')
+OPS = ROOT / '.omx/artifacts/w3-jvm-source-links-20261115'
+OUT = ROOT / 'probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115'
+OLD = ROOT / 'probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115'
+def sha(data): return hashlib.sha256(data).hexdigest()
+def blob(data): return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+def load(p): return json.loads(p.read_bytes())
+def save(p, obj): p.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + '\n')
+def identity(p):
+    data = p.read_bytes()
+    return {'path': str(p.relative_to(ROOT)), 'bytes': len(data), 'sha256': sha(data)}
+def run(name, args):
+    p = subprocess.run(['rtk', 'proxy', *args], cwd=ROOT, capture_output=True, timeout=55)
+    (OPS / (name + '.stdout')).write_bytes(p.stdout)
+    (OPS / (name + '.stderr')).write_bytes(p.stderr)
+    assert p.returncode == 0, (name, p.returncode)
+    return p.stdout
+
+treepath = ROOT / '.omx/artifacts/w3-model-reselection-20261110/sherpa-v201-tree.raw'
+tree = load(treepath)
+resolution = load(OUT / 'source-link-resolution.json')
+assert sha(treepath.read_bytes()) == resolution['treeSHA256']
+assert tree['truncated'] is False and tree['sha'] == resolution['sourceCommit']
+entries = {r['path']: r for r in tree['tree']}
+links = resolution['links']
+assert len(links) == 22
+for r in links:
+    link = (ROOT / r['linkEvidencePath']).read_bytes()
+    source = (ROOT / r['resolvedEvidencePath']).read_bytes()
+    original = entries[r['sourcePath']]
+    target = entries[r['resolvedPath']]
+    assert original['mode'] == r['sourceMode'] == '120000'
+    assert target['mode'] == r['resolvedMode'] == '100644'
+    assert original['sha'] == r['gitBlobSHA1'] == blob(link)
+    assert target['sha'] == r['resolvedGitBlobSHA1'] == blob(source)
+    assert sha(link) == r['linkSHA256'] and sha(source) == r['resolvedSHA256']
+    assert len(link) == r['linkBytes'] == original['size']
+    assert len(source) == r['resolvedBytes'] == target['size']
+    assert link.decode() == r['linkText']
+    assert posixpath.normpath(posixpath.join(posixpath.dirname(r['sourcePath']), link.decode())) == r['resolvedPath']
+    for rec, expected in ((r, link), (r['sourceAcquisition'], source)):
+        if 'apiResponsePath' in rec:
+            raw = (ROOT / rec['apiResponsePath']).read_bytes()
+            assert sha(raw) == rec['apiResponseSHA256']
+            response = json.loads(raw)
+            assert base64.b64decode(response['content']) == expected
+        else:
+            assert (ROOT / rec['reusedExistingPath']).read_bytes() == expected
+
+prefix = 'android/SherpaOnnxAar/sherpa_onnx/src/'
+main_sources = [r for r in tree['tree'] if r['path'].startswith(prefix + 'main/')
+                and r['path'].endswith(('.kt', '.java'))]
+release_sources = [r for r in tree['tree'] if r['path'].startswith(prefix + 'release/')
+                   and r['path'].endswith(('.kt', '.java'))]
+assert {r['path'] for r in main_sources} == {r['sourcePath'] for r in links}
+assert release_sources == []
+assert len({r['resolvedPath'] for r in links}) == 22
+api_sources = [r for r in tree['tree'] if r['path'].startswith('sherpa-onnx/kotlin-api/')
+               and r['path'].endswith('.kt') and r['type'] == 'blob']
+excluded = [r for r in api_sources if r['path'] not in {x['resolvedPath'] for x in links}]
+assert len(api_sources) == 23 and excluded == resolution['excludedFromAarLinkSet']
+assert [r['path'] for r in excluded] == ['sherpa-onnx/kotlin-api/OfflineDiacritization.kt']
+
+oldmap = load(OLD / 'class-source-map.json')
+matrix = load(OLD / 'member-matrix.json')
+aar = ROOT / matrix['aar']['path']
+assert identity(aar) == matrix['aar']
+with zipfile.ZipFile(aar) as archive:
+    jar = archive.read('classes.jar')
+assert run('infozip-classes-jar', ['unzip', '-p', str(aar), 'classes.jar']) == jar
+class_row = next(r for r in matrix['rows'] if r['path'] == 'classes.jar')
+assert sha(jar) == class_row['sha256'] and len(jar) == class_row['bytes']
+jarpath = OPS / 'classes.jar'
+jarpath.write_bytes(jar)
+with zipfile.ZipFile(io.BytesIO(jar)) as z:
+    class_names = sorted(n for n in z.namelist() if n.endswith('.class'))
+assert len(class_names) == 124
+assert set(class_names) == {r['classPath'] for r in oldmap['classes']}
+zip_names = run('infozip-jar-list', ['unzip', '-Z1', str(jarpath)]).decode().splitlines()
+assert sorted(n for n in zip_names if n.endswith('.class')) == class_names
+javap = run('javap-sourcefile', ['/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home/bin/javap', '-v', '-classpath', str(jarpath),
+                               *[n[:-6].replace('/', '.') for n in class_names]]).decode()
+run('javap-version', ['/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home/bin/javap', '-version'])
+sources = re.findall(r'^SourceFile: "([^"]+)"$', javap, flags=re.M)
+assert len(sources) == 124
+mapped = {r['classPath']: r for r in oldmap['classes']}
+by_path = {r['sourcePath']: r for r in links}
+rows = []
+for name, source_name in zip(class_names, sources):
+    old = mapped[name]
+    assert source_name == old['sourceFile']
+    r = by_path[old['sourcePath']]
+    assert r['gitBlobSHA1'] == old['gitBlobSHA1']
+    rows.append({**old, 'gitBlobKind': 'symlink-text', 'sourceMode': r['sourceMode'],
+                 'resolvedPath': r['resolvedPath'], 'resolvedMode': r['resolvedMode'],
+                 'resolvedGitBlobSHA1': r['resolvedGitBlobSHA1'],
+                 'resolvedBytes': r['resolvedBytes'], 'resolvedSHA256': r['resolvedSHA256']})
+assert {r['sourcePath'] for r in rows} == set(by_path)
+assert {r['sourceFile'] for r in rows} == {Path(r['resolvedPath']).name for r in links}
+save(OUT / 'class-source-map.json', {
+    'sourceCommit': resolution['sourceCommit'], 'treeEvidence': identity(treepath),
+    'supersedesForJvmResolution': identity(OLD / 'class-source-map.json'),
+    'mappingMethod': 'Fresh javap SourceFile values for all actual classes.jar classes; fixed tree symlink-text blobs resolved to retained regular Kotlin source blobs. No rebuilt class or DEX semantic equality claim.',
+    'classesJar': {'bytes': len(jar), 'sha256': sha(jar)}, 'classes': rows,
+    'semanticClassEqualityVerified': False})
+
+groups = load(OLD / 'build-input-groups.json')
+packaging = groups['packaging']
+workflow = ROOT / packaging['workflow']
+log = ROOT / packaging['jobLog']['path']
+assert identity(log) == packaging['jobLog']
+bindings = load(OLD / 'referenced-source-path-bindings.json')
+save(OPS / 'bindings-schema.json', {'type': type(bindings).__name__, 'keys': list(bindings) if isinstance(bindings, dict) else []})
+buildfile = ROOT / 'probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts'
+release = OLD / 'source-evidence/new-release.sh'
+for path, source_path in ((workflow, '.github/workflows/android.yaml'),
+                          (buildfile, 'android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts'),
+                          (release, 'new-release.sh')):
+    assert blob(path.read_bytes()) == entries[source_path]['sha']
+buildtext = buildfile.read_text()
+assert 'sourceSets' not in buildtext and 'isMinifyEnabled = false' in buildtext
+logtext = log.read_text()
+required_log = [resolution['sourceCommit'], 'HEAD is now at af2d8d81',
+                '> Task :sherpa_onnx:compileReleaseKotlin',
+                '> Task :sherpa_onnx:compileReleaseJavaWithJavac NO-SOURCE',
+                'Tts.kt: (299, 5): Parameter',
+                'BUILD SUCCESSFUL in 1m 27s', '28 actionable tasks: 28 executed',
+                'index fad4f460..149297a1 100644']
+assert all(x in logtext for x in required_log)
+tts = next(r for r in links if r['sourcePath'].endswith('/Tts.kt'))
+assert 'dictDir:' in (ROOT / tts['resolvedEvidencePath']).read_text().splitlines()[298]
+log_lines = [{'line': i+1, 'text': line} for i, line in enumerate(logtext.splitlines())
+             if any(x in line for x in required_log)]
+save(OUT / 'jvm-input-group.json', {
+    **packaging, 'baseBuildInputGroups': identity(OLD / 'build-input-groups.json'),
+    'jvmSourceSelection': {'fixedMainSourceEntries': main_sources, 'fixedReleaseSourceEntries': release_sources,
+        'regularTargetCount': 22, 'regularTargetBytes': 141269, 'sourceLinkResolution': 'source-link-resolution.json',
+        'excludedSource': excluded,
+        'exclusionReason': 'Present in shared kotlin-api directory but no main/release module source entry or AAR class SourceFile maps to it; selected fixed module link closure excludes it. This does not prove absence of every possible generated input.'},
+    'selectedBuildEvidence': [identity(workflow), identity(buildfile), identity(release), identity(log)],
+    'actualJobObservations': log_lines,
+    'patchBoundary': 'new-release.sh does not select .kt files for its replacements; observed tracked diff is version.cc date/SHA. Not a complete generated-input or environment inventory.',
+    'declaredKotlinSourceLinkClosureVerified': True, 'semanticClassEqualityVerified': False,
+    'fullBuildInputCompletenessVerified': False})
+
+for row in matrix['rows']:
+    if row['path'] == 'classes.jar':
+        row.update({'sourceMap': 'class-source-map.json',
+                    'resolvedJvmInputGroup': 'jvm-input-group.json',
+                    'sourceLinkResolution': 'source-link-resolution.json',
+                    'sourceBuildInputCoverage': '124 actual SourceFile values bind to 22 verified symlink blobs and 22 retained regular Kotlin sources; generated/compiler/environment completeness and semantic equality remain unverified'})
+matrix.update({'baseMemberMatrix': identity(OLD / 'member-matrix.json'),
+               'baseBuildInputGroups': identity(OLD / 'build-input-groups.json'),
+               'supersedesJvmSourceAttributionOnly': True,
+               'fullSourceBuildInputCoverageVerified': False, 'P1Complete': False, 'W3Complete': False})
+save(OUT / 'member-matrix.json', matrix)
+shutil.copyfile(OLD / 'LICENSE', OUT / 'LICENSE')
+save(OUT / 'license-material.json', {'license': 'Apache-2.0', 'sourceCommit': resolution['sourceCommit'],
+                                   'licenseEvidence': identity(OLD / 'license-material.json'),
+                                   'localLicense': identity(OUT / 'LICENSE'),
+                                   'upstreamSourceFilesModified': False, 'productionNoticeAcceptance': False})
+save(OUT / 'parent-verification.json', {
+    'disposition': 'PASS_bounded_source_resolution', 'sourceCommit': resolution['sourceCommit'],
+    'verifiedLinkCount': 22, 'verifiedSourceCount': 22, 'linkBytes': 1568, 'sourceBytes': 141269,
+    'actualClassCount': 124, 'sourceFileCount': 22, 'sharedKotlinApiFiles': 23, 'excludedFiles': 1,
+    'apiFetchCount': 43, 'reusedSourceCount': 1, 'pythonAndInfozipJarBytesEqual': True,
+    'freshJavapSourceFileMappingsEqual': True, 'mainReleaseDeclaredSourceSetEqual': True,
+    'oldRecordPreserved': identity(OLD / 'class-source-map.json'),
+    'semanticClassEqualityVerified': False, 'completeBuildInputsVerified': False,
+    'independentReview': 'unavailable; native429 and CBC hy4free quota429 are not approval',
+    'productionCandidateBindingVerified': False, 'P1Complete': False, 'P2P3P4Accepted': False,
+    'R4R5Accepted': False, 'W3Complete': False})
+shutil.copyfile(Path(__file__), OUT / 'verification-source.py.txt')
+print((OUT / 'parent-verification.json').read_text())
