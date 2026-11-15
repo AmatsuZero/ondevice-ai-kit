@@ -1,3 +1,7 @@
+## 2026-11-15 W3 NDK补丁与通知已提交双端同步
+
+本地ba95e98（115文件）/f9a720b（35文件）；GH#15comment6896331442/GL#15note44866/GHWikic4a2339逐字回读，双Wiki SHAfb97fcfb8e4666608a36d392c05871c590557b249195698dbd1ce6b5b0cdb542一致，[收据](validation/w3-ndk-runtime-patch-notice-sync-20261115.json)。marker已用勿重发，源码分支未push；五免费hy3/两构建/三发布均完整终态，无待poll。110来源材料文件/24通知材料文件hash、68资产770479B、174通知集成保护原字节或共享余字节及161freeze通过；来源前段173/174原字节或suffix保持，另一F08文档并发修改保留排除，不回滚。四原许可66823B及索引已实际进AAR/独立Maven最终APK，四ABI16SO/非通知成员不变、十notice-only ZIP负例拒收；不计完整P2/P3/P4。源码站429停新请求，76/134正文/17路径分类及额外404/落盘失败保持，原native/hy4free429不重试。P1–P4/R4/R5/W3全open、goal active、完整目标不缩减；下一补缺失来源覆盖/最终生产采用/独立发布接受，实体连接变化后fresh未消费固定run。不重取已验输入/旧FILE/heap或USB恢复循环，零新设备/麦克风/AiAi/模型runtime二进制下载。
+
 ## 2026-11-15 W3 hy3交付NDK根许可补充，实包保留通过
 
 [验证](validation/w3-ndk-notice-integration-20261115.md)：四原许可66823B及独立索引已集成，旧63通知原字节不变，合并68项770479B。离线Debug/Release AAR、lint、隔离Maven发布和独立最终APK通过；Release ca0065f2/APK33c3fdab，四ABI16SO/非通知AAR成员同前，10个notice-only ZIP删除/改单字节负例拒收，不冒充改签名APK。两个免费hy3均完整终态，限定复核accept_bounded_increment/无finding，非P4；八来源身份同原source map，r30复用规范r27d字节。初跨工具排序断言失败原件保留，已证unzip按archive顺序，离线修checker后通过、零重建/设备。161freeze保持，174保护基线在报告/共享更新前不变；源码站及旧quota停线，无新下载/AiAi/麦克风/模型/真机。P1–P4/R4/R5/W3仍open、goal active，完整目标不缩减；最终生产采用、完整组成/通知与发布复审及真机质量/预算仍缺。下一实体连接变化后fresh未消费固定run，或补尚缺来源覆盖/可信度，不重取已验输入/旧FILE/USB恢复循环。当前待精确提交及双端同步，源码分支不push。

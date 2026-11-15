@@ -1,3 +1,7 @@
+## 2026-11-15：hy3的NDK补丁及通知交付已双端记录
+
+本地ba95e98（115文件）/f9a720b（35文件）；GH#15comment6896331442/GL#15note44866/GHWikic4a2339逐字回读，双Wiki SHAfb97fcfb8e46…一致，[同步收据](../validation/w3-ndk-runtime-patch-notice-sync-20261115.json)。五免费hy3、两构建、三发布均终态；110来源/24通知材料文件、68资产770479B、174保护余字节/161freeze已核，源码未push。76/134补丁正文仍有缺失，四根许可和child索引实包保留通过不等于完整组成/发布接受；P1–P4/R4/R5/W3及完整目标保持open。源码站/旧quota停线，实体连接变化后才fresh固定未消费run，不重放旧FILE/USB循环。
+
 ## 2026-11-15：hy3完成NDK根许可交付与独立APK保留
 
 [验证](../validation/w3-ndk-notice-integration-20261115.md)新增四原许可66823B及独立索引；旧63项不变，合并68通知770479B在新AAR/隔离Maven最终APK逐字节保留。Debug/Release/lint/本地发布通过，Release ca0065f2、APK33c3fdab；四ABI16SO和非通知AAR成员不变，十个notice-only ZIP负例拒收。两个免费hy3完整终态、限定复核无finding，非P4/完整组成接受；finalBinaryPresenceVerified=false指native-code组成未证，不是通知字节验证失败。原checker顺序错误已离线纠正且原失败保留，无重建/设备；161freeze和174保护基线通过。P1–P4/R4/R5/W3完整范围继续open，真实最终生产采用/全量质量/资源预算及发布复审仍缺；源码站429与旧quota停线，零下载/AiAi/麦克风，不回放旧FILE或USB循环。
