@@ -1,0 +1,146 @@
+[
+  {
+    "path": "cmake/external/abseil-cpp.cmake",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "46c035caad2f9f1eda5de1ddbb81d90ca5a7d278",
+    "bytes": 4680,
+    "sha256": "911b6db9ebd7e2024fc4b6fd41a2b4532dbef59f382b9722290896e9c4b13fcc",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/external/abseil-cpp.cmake"
+  },
+  {
+    "path": "cmake/external/eigen.cmake",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "2f55860f34c70bfa39b21449a527b37d137a38d4",
+    "bytes": 788,
+    "sha256": "9db439c44f215186d3e8bde7970affd03d8fa911d89cac19adc30ed681ff32a2",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/external/eigen.cmake"
+  },
+  {
+    "path": "cmake/external/helper_functions.cmake",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "e8044411e42013bfb197557922b063b74656ecdf",
+    "bytes": 2674,
+    "sha256": "ae5cc8332e93737d92301a3f70cfa5c2fdb529d6a366d403932853f4bb640fa7",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/external/helper_functions.cmake"
+  },
+  {
+    "path": "cmake/onnxruntime.cmake",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "e3130fcacbdc4af1e8065f94f1b213dbb7c2ffe0",
+    "bytes": 24072,
+    "sha256": "c0a96b3168108ae6d9eead52ac0d23fb98dac83727218fcb3baaf8b6ccfaedca",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/onnxruntime.cmake"
+  },
+  {
+    "path": "cmake/onnxruntime_mlas.cmake",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "319c897b8349c739304d4a317db6408faee628c7",
+    "bytes": 51146,
+    "sha256": "09ea9f0282519dc63de285b3e8b02990d1ba49bcc2648f248ba20f13b00bbe43",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/onnxruntime_mlas.cmake"
+  },
+  {
+    "path": "cmake/patches/date/date.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "b3c384b62e8340886638a4e5cf9b0aea3775e249",
+    "bytes": 685,
+    "sha256": "19fa16e45c7fa52373f922f47ea66591eec52d48d5c9bb7bc5302f0dcacd70de",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/date/date.patch"
+  },
+  {
+    "path": "cmake/patches/eigen/s390x-build-werror.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "d6aab355e2f2fdc5ba55ce99d2fd4818ed895f90",
+    "bytes": 610,
+    "sha256": "a1a7b0ca8382cb00542587b6bc725f59abd59ad5bb491825f7876ad6e344ef0b",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/eigen/s390x-build-werror.patch"
+  },
+  {
+    "path": "cmake/patches/eigen/s390x-build.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "e97c30a598c2bcaa6275ae3116736112e04e9d88",
+    "bytes": 17794,
+    "sha256": "6d41f4504f665bc591336c668a1aa16ffc5e0f02fe9c2f9c46c6f5660b54c849",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/eigen/s390x-build.patch"
+  },
+  {
+    "path": "cmake/patches/flatbuffers/flatbuffers.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "9fb58e301bba8eaa61ca59519aee93ab12840a59",
+    "bytes": 1190,
+    "sha256": "9c597b79b3b35302a19b31a42b4680c4e36f9c3934a5b1b988ddd5a36c68ee33",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/flatbuffers/flatbuffers.patch"
+  },
+  {
+    "path": "cmake/patches/gsl/1213.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "3802d8033f033d8c36dd9e572199a60c93b47413",
+    "bytes": 425,
+    "sha256": "5e5c5870214ef47099b70390e409599a7139416a2108c8255d8bc7a301d9754b",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/gsl/1213.patch"
+  },
+  {
+    "path": "cmake/patches/onnx/onnx.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "acd5505beaff624f1b4d6d7655a55fa9f78d05eb",
+    "bytes": 2390,
+    "sha256": "1470c713e0399e690e8c057e7e1a05456f66e010bd3c9804b7a989eaded70935",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/onnx/onnx.patch"
+  },
+  {
+    "path": "cmake/patches/protobuf/protobuf_android_log.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "56bca9d325a75ab3832462a54a16bc0164a1c58d",
+    "bytes": 1100,
+    "sha256": "89b3fae15ab93a394e5854bd0d1f1d63dedae12e7b638274e667b85debeffb94",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/protobuf/protobuf_android_log.patch"
+  },
+  {
+    "path": "cmake/patches/protobuf/protobuf_cmake.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "e315420e4defeb7e538f43fe238902349f9284ea",
+    "bytes": 2299,
+    "sha256": "15c25dc027cdae5fabe907d1ca9d9372c654277e82c50c3c706d4f5946a6933d",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/protobuf/protobuf_cmake.patch"
+  },
+  {
+    "path": "cmake/patches/protobuf/protobuf_s390x.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "039eb8931339a5eeee5190533b3ed914ef4911ad",
+    "bytes": 733,
+    "sha256": "c648a9222b7dbfd7989c0f392c3f5774d4a95e217e0df193316c54389ad0387a",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/protobuf/protobuf_s390x.patch"
+  },
+  {
+    "path": "cmake/vcpkg-ports/abseil/absl_cuda13_member_template.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "d02134cc244a961b14e0b7fe7324f5690ec1e8a7",
+    "bytes": 3708,
+    "sha256": "c9677fbb8d25cdcc0e8e1b3f158930fd8e77639d1b0098da9396381be81de733",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/vcpkg-ports/abseil/absl_cuda13_member_template.patch"
+  },
+  {
+    "path": "cmake/vcpkg-ports/abseil/absl_cuda_warnings.patch",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "gitBlobSHA1": "e80384705ece0205be5eb6428e2c982e4d4ebeb5",
+    "bytes": 2295,
+    "sha256": "dfc09be4b38a1ff5a4e19fe3781ec86d32196581f644b85a43f4fa851bcc8151",
+    "APIRepository": "microsoft/onnxruntime",
+    "repositoryPath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/vcpkg-ports/abseil/absl_cuda_warnings.patch"
+  }
+]

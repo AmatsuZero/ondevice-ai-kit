@@ -1,3 +1,7 @@
+## 2026-11-15 W3 ORT嵌套通知与补丁说明已交付
+
+免费hy3四请求均完整success，限定复核accept_bounded_increment；26原文109766B/子索引及补丁说明已集成，合并63项697877B，离线AAR/lint/隔离Maven发布和独立最终APK通过，十负例拒收、四ABI16SO同固定runtime。[验证](validation/w3-ort-nested-notice-integration-20261115.md)。7组件11patch/21文件本地重建及四ABI编译观察已核，但Found Patch不证明历史apply/LTO保留；JSON测试工具/泛型许可与KleidiAI泛型BSD未盲选，mp11声明不冒充完整BSL。通知改变包字节，非通知成员/固定runtime未变；P1–P4/R4/R5/W3均open，零设备/麦克风/AiAi/模型下载。当前待精确提交及新marker双端同步，源码不push；173原保护余字节/161freeze通过。四helper/两构建均终态，无待poll旧句柄。下一完整组成/最终App采用/完整发布接受，或实体连接变化后的固定合同；不重取已验归档、重试旧quota/旧批次或循环USB恢复。
+
 ## 2026-11-15 W3 hy3限定复核已提交并双端同步
 
 本地2d2c659精确6文件；GH#15comment6894183734/GL#15note44862/GHWiki6272bf98709338e78ad3db6565d157df3f559849均逐字回读，双Wiki SHA 37dd1d7ccd9812e240760e78f27a85effd5330100474dd40bbd365fc782d3ef8一致，[同步收据](validation/w3-sdk-binding-hy3-review-sync-20261115.json)。marker已用勿重发，源码分支未push。hy3本轮新复核及全部发布进程均终态，无待poll句柄；173原字节或共享余字节/161freeze/diff-check通过，零新构建/设备。历史SDK限定增量接受，不是最新HEAD/完整P1或P4；P1–P4/R4/R5/W3仍open、goal active。下一ORT嵌套27项实际组成与通知选材、最终生产采用/发布接受，或实体连接变化后的固定合同真机验收；不重试旧quota、旧批次/构建或USB恢复循环。

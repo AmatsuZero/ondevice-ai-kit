@@ -1,3 +1,11 @@
+## W3 ORT补丁：带timestamp的旧文件头不是实际目标（2026-11-15）
+
+Eigen的s390x-build-werror.patch旧`---`行为`.orig<TAB>timestamp`，首父提取脚本按旧整行找archive member而失败。有效恢复是按`+++`真实目标并去tab timestamp，保留初始失败/目录，只补失败组件；其余六组件不重跑。11原patch在新归档提取目录本地check/apply成功及21文件前后hash，不是历史CI post-patch tree、GNU patch重放或最终机器码效果。四原日志只有Found Patch直接行，不能由工具被发现宣称历史apply已证。证据[验证](validation/w3-ort-nested-notice-integration-20261115.md)及`.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/`。
+
+## W3 ORT通知：恢复overlay可省略archiveRoot（2026-11-15）
+
+complete-manifest的cpuinfo/ONNX恢复项已有绑定archiveMember/摘要却没有可选archiveRoot，父集成预检KeyError发生在生产写入/构建前。有效恢复是保留失败，按已验member根目录记录来源派生，先核完31项恰一处置和全部原字节再写/构建；不猜版本、不覆盖旧归档/manifest。首候选“通知集成不改变AAR/build output”亦不准确，独立hy3措辞修正已应用：仅非通知成员及固定runtime/library未变，63通知资产改变新SDK/APK字节。完整产物与十负例才支撑子集交付，exit0或helper自报不单独作证。
+
 ## W3 native通知：可选字段及完整候选构建门（2026-11-15）
 
 父集成假定58项参照都有sourceManifest，Darts id57无此可选字段，触发KeyError；23原文本已复制而索引/修改说明未完成时又误启构建。该12.285s/exit0仅证明不完整状态可构建，明确拒作验收。有效恢复是保留失败/首AAR/旧m2，依据真实Darts material-manifest核绑定，确认25新资产完整后在新m2-complete重建；原文不改。完整AAR/独立Maven APK保留36资产、六负例拒收才构成本轮技术接受，仍不证明完整组成/发布。证据`probes/sherpa-runtime-materials/native-notice-integration-20261115/`及`.omx/artifacts/w3-native-notice-integration-20261115T115026Z/`。

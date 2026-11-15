@@ -1,0 +1,27 @@
+{
+  "aars": [
+    {
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ort-nested-composition-20261115/backend-sherpa-asr-debug.aar",
+      "sha256": "d1e50463eb34fa42b46825ff8bc98ef8034c9aa950582be36f2edab5815ccb1c",
+      "noticeCount": 63,
+      "noticeBytes": 697877,
+      "variant": "debug",
+      "bytes": 221673,
+      "priorNonNoticeMembersUnchanged": true,
+      "pythonAndInfozipAssetsEqual": true
+    },
+    {
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ort-nested-composition-20261115/backend-sherpa-asr-release.aar",
+      "sha256": "188a558c72e89abd4cee7ca2e411527a7d4d88b0961b16ce415875f3bbe964ab",
+      "noticeCount": 63,
+      "noticeBytes": 697877,
+      "variant": "release",
+      "bytes": 219809,
+      "priorNonNoticeMembersUnchanged": true,
+      "pythonAndInfozipAssetsEqual": true
+    }
+  ],
+  "isolatedLocalPublicationMatchesRelease": true,
+  "noticeCount": 63,
+  "noticeBytes": 697877
+}

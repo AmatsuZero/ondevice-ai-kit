@@ -398,8 +398,9 @@
         55,
         56
       ],
-      "disposition": "deferred_recursive_final_composition",
-      "reason": "ORT nested source/reference notices belong to a separate nested version chain and are deferred to recursive final-composition selection, not declared irrelevant; the retained root ORT ThirdPartyNotices does not replace that review."
+      "disposition": "supplemented_by_child_ort_nested_index",
+      "reason": "The blanket deferral is replaced because a bounded child supplement now records selected and explicitly unselected dispositions for the fixed ORT nested subset; root group ids remain 30-56 and all extra status lives only in the child index.",
+      "detailsIndex": "native/ort-nested/index.json"
     },
     {
       "ids": [
@@ -410,7 +411,7 @@
     }
   ],
   "blockers": [
-    "ORT nested source/reference notices (ids 30 through 56) remain deferred to recursive final-composition selection; root ORT ThirdPartyNotices does not replace that review.",
+    "ORT nested source/reference notices (ids 30 through 56) now have a bounded supplemental disposition in native/ort-nested/index.json; full nested composition and final retained-code applicability remain open, and the root ORT ThirdPartyNotices does not replace that review.",
     "websocketpp/asio notices are bounded by ARM-only observed enablement/download with x86 and x86_64 OFF; exact retained code and final ABI composition are not proven.",
     "Known upstream modifications remain separate in UPSTREAM-MODIFICATIONS.md; this candidate does not assert compliance approval.",
     "Parent must verify mechanically bound source bytes and run builds/negative checks; no execution or test result is claimed in this candidate."

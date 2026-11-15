@@ -1,0 +1,1 @@
+Pre-mutation integration validation failed: KeyError: 'archiveRoot' at row27. No production bytes changed and no build started. The complete manifest's two recovered-overlay dependencies omit archiveRoot. Use bound archiveMember root with explicit derivation when archiveRoot is absent; do not invent a version.

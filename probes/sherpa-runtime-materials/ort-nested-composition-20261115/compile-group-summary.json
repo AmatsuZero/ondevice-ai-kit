@@ -1,0 +1,1191 @@
+{
+  "arm64-v8a": {
+    "compileGroups": {
+      "abseil_cpp": 124,
+      "protobuf": 32,
+      "flatbuffers": 4,
+      "onnx": 60,
+      "kleidiai": 239,
+      "re2": 22,
+      "pytorch_cpuinfo": 18
+    },
+    "linkRows": [
+      {
+        "line": 2261,
+        "text": "2026-09-04T15:56:53.6554615Z [2/1279] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_spinlock_wait.a"
+      },
+      {
+        "line": 2265,
+        "text": "2026-09-04T15:56:54.7476481Z [6/1279] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_log_severity.a"
+      },
+      {
+        "line": 2266,
+        "text": "2026-09-04T15:56:54.7635985Z [7/1279] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_raw_logging_internal.a"
+      },
+      {
+        "line": 2271,
+        "text": "2026-09-04T15:56:56.2214740Z [12/1279] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_utf8_for_code_point.a"
+      },
+      {
+        "line": 2273,
+        "text": "2026-09-04T15:56:56.3435384Z [14/1279] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_base.a"
+      },
+      {
+        "line": 2275,
+        "text": "2026-09-04T15:56:56.5660382Z [16/1279] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_throw_delegate.a"
+      },
+      {
+        "line": 2280,
+        "text": "2026-09-04T15:56:57.9284994Z [21/1279] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_decode_rust_punycode.a"
+      },
+      {
+        "line": 2282,
+        "text": "2026-09-04T15:56:58.1514562Z [23/1279] Linking CXX static library _deps/abseil_cpp-build/absl/numeric/libabsl_int128.a"
+      },
+      {
+        "line": 2283,
+        "text": "2026-09-04T15:56:58.1604643Z [24/1279] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_string_view.a"
+      },
+      {
+        "line": 2298,
+        "text": "2026-09-04T15:57:03.7854436Z [39/1279] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_strings_internal.a"
+      },
+      {
+        "line": 2310,
+        "text": "2026-09-04T15:57:08.9094327Z [51/1279] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_cpu_detect.a"
+      },
+      {
+        "line": 2317,
+        "text": "2026-09-04T15:57:10.6044429Z [58/1279] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_demangle_rust.a"
+      },
+      {
+        "line": 2318,
+        "text": "2026-09-04T15:57:10.6164435Z [59/1279] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_strings.a"
+      },
+      {
+        "line": 2330,
+        "text": "2026-09-04T15:57:15.9064720Z [71/1279] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_civil_time.a"
+      },
+      {
+        "line": 2331,
+        "text": "2026-09-04T15:57:15.9214670Z [72/1279] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_time_zone.a"
+      },
+      {
+        "line": 2332,
+        "text": "2026-09-04T15:57:15.9334606Z [73/1279] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_malloc_internal.a"
+      },
+      {
+        "line": 2334,
+        "text": "2026-09-04T15:57:15.9994277Z [75/1279] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_internal.a"
+      },
+      {
+        "line": 2341,
+        "text": "2026-09-04T15:57:18.8223897Z [82/1279] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_debugging_internal.a"
+      },
+      {
+        "line": 2342,
+        "text": "2026-09-04T15:57:18.8364603Z [83/1279] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_demangle_internal.a"
+      },
+      {
+        "line": 2344,
+        "text": "2026-09-04T15:57:19.1125098Z [85/1279] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_str_format_internal.a"
+      },
+      {
+        "line": 2347,
+        "text": "2026-09-04T15:57:20.3154405Z [88/1279] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_time.a"
+      },
+      {
+        "line": 2348,
+        "text": "2026-09-04T15:57:20.3255257Z [89/1279] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_tracing_internal.a"
+      },
+      {
+        "line": 2349,
+        "text": "2026-09-04T15:57:20.3334428Z [90/1279] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc32c.a"
+      },
+      {
+        "line": 2351,
+        "text": "2026-09-04T15:57:20.4584682Z [92/1279] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_stacktrace.a"
+      },
+      {
+        "line": 2352,
+        "text": "2026-09-04T15:57:20.4664430Z [93/1279] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_symbolize.a"
+      },
+      {
+        "line": 2354,
+        "text": "2026-09-04T15:57:20.8374578Z [95/1279] Linking CXX static library _deps/abseil_cpp-build/absl/hash/libabsl_city.a"
+      },
+      {
+        "line": 2358,
+        "text": "2026-09-04T15:57:22.5034467Z [99/1279] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_graphcycles_internal.a"
+      },
+      {
+        "line": 2359,
+        "text": "2026-09-04T15:57:22.5124646Z [100/1279] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_kernel_timeout_internal.a"
+      },
+      {
+        "line": 2372,
+        "text": "2026-09-04T15:57:26.9564570Z [113/1279] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_cord_state.a"
+      },
+      {
+        "line": 2373,
+        "text": "2026-09-04T15:57:26.9675170Z [114/1279] Linking CXX static library _deps/abseil_cpp-build/absl/hash/libabsl_hash.a"
+      },
+      {
+        "line": 2374,
+        "text": "2026-09-04T15:57:26.9765167Z [115/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_proto.a"
+      },
+      {
+        "line": 2377,
+        "text": "2026-09-04T15:57:28.1074457Z [118/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_fnmatch.a"
+      },
+      {
+        "line": 2378,
+        "text": "2026-09-04T15:57:28.1165199Z [119/1279] Linking CXX static library _deps/abseil_cpp-build/absl/profiling/libabsl_exponential_biased.a"
+      },
+      {
+        "line": 2387,
+        "text": "2026-09-04T15:57:32.8484484Z [128/1279] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_synchronization.a"
+      },
+      {
+        "line": 2423,
+        "text": "2026-09-04T15:57:43.8964386Z [164/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_entry.a"
+      },
+      {
+        "line": 2425,
+        "text": "2026-09-04T15:57:44.6864594Z [166/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_vlog_config_internal.a"
+      },
+      {
+        "line": 2426,
+        "text": "2026-09-04T15:57:44.6974569Z [167/1279] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cord_internal.a"
+      },
+      {
+        "line": 2427,
+        "text": "2026-09-04T15:57:44.7064651Z [168/1279] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_functions.a"
+      },
+      {
+        "line": 2428,
+        "text": "2026-09-04T15:57:44.7154629Z [169/1279] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_handle.a"
+      },
+      {
+        "line": 2430,
+        "text": "2026-09-04T15:57:45.0970370Z [171/1279] Linking CXX static library _deps/protobuf-build/libprotobuf-lite.a"
+      },
+      {
+        "line": 2451,
+        "text": "2026-09-04T15:57:47.6865778Z [180/1279] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_commandlineflag_internal.a"
+      },
+      {
+        "line": 2454,
+        "text": "2026-09-04T15:57:47.8144549Z [183/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_globals.a"
+      },
+      {
+        "line": 2457,
+        "text": "2026-09-04T15:57:49.1954387Z [186/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_globals.a"
+      },
+      {
+        "line": 2458,
+        "text": "2026-09-04T15:57:49.2044377Z [187/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_sink.a"
+      },
+      {
+        "line": 2460,
+        "text": "2026-09-04T15:57:49.9304588Z [189/1279] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_info.a"
+      },
+      {
+        "line": 2466,
+        "text": "2026-09-04T15:57:50.1141715Z [195/1279] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_strerror.a"
+      },
+      {
+        "line": 2467,
+        "text": "2026-09-04T15:57:50.1251572Z [196/1279] Linking CXX static library _deps/abseil_cpp-build/absl/container/libabsl_hashtablez_sampler.a"
+      },
+      {
+        "line": 2469,
+        "text": "2026-09-04T15:57:50.9124792Z [198/1279] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_examine_stack.a"
+      },
+      {
+        "line": 2471,
+        "text": "2026-09-04T15:57:50.9774492Z [200/1279] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_program_name.a"
+      },
+      {
+        "line": 2474,
+        "text": "2026-09-04T15:57:53.2634547Z [203/1279] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_commandlineflag.a"
+      },
+      {
+        "line": 2476,
+        "text": "2026-09-04T15:57:53.3944205Z [205/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_format.a"
+      },
+      {
+        "line": 2478,
+        "text": "2026-09-04T15:57:53.4260877Z [207/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_log_sink_set.a"
+      },
+      {
+        "line": 2479,
+        "text": "2026-09-04T15:57:53.4346415Z [208/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_nullguard.a"
+      },
+      {
+        "line": 2480,
+        "text": "2026-09-04T15:57:53.4455026Z [209/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_structured_proto.a"
+      },
+      {
+        "line": 2481,
+        "text": "2026-09-04T15:57:53.4574313Z [210/1279] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cord.a"
+      },
+      {
+        "line": 2526,
+        "text": "2026-09-04T15:58:01.2156036Z [219/1279] Linking CXX static library _deps/abseil_cpp-build/absl/container/libabsl_raw_hash_set.a"
+      },
+      {
+        "line": 2527,
+        "text": "2026-09-04T15:58:01.2257101Z [220/1279] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_leak_check.a"
+      },
+      {
+        "line": 2528,
+        "text": "2026-09-04T15:58:01.2374756Z [221/1279] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_config.a"
+      },
+      {
+        "line": 2529,
+        "text": "2026-09-04T15:58:01.2494300Z [222/1279] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_marshalling.a"
+      },
+      {
+        "line": 2530,
+        "text": "2026-09-04T15:58:01.2584799Z [223/1279] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_private_handle_accessor.a"
+      },
+      {
+        "line": 2553,
+        "text": "2026-09-04T15:58:04.9614550Z [228/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_message.a"
+      },
+      {
+        "line": 2554,
+        "text": "2026-09-04T15:58:04.9824469Z [229/1279] Linking CXX static library _deps/flatbuffers-build/libflatbuffers.a"
+      },
+      {
+        "line": 2555,
+        "text": "2026-09-04T15:58:05.0014387Z [230/1279] Linking CXX static library _deps/onnx-build/libonnx_proto.a"
+      },
+      {
+        "line": 5030,
+        "text": "2026-09-04T16:19:01.0746231Z [1191/1279] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_reflection.a"
+      },
+      {
+        "line": 5031,
+        "text": "2026-09-04T16:19:01.0862972Z [1192/1279] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_internal.a"
+      },
+      {
+        "line": 5032,
+        "text": "2026-09-04T16:19:01.0974602Z [1193/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_check_op.a"
+      },
+      {
+        "line": 5033,
+        "text": "2026-09-04T16:19:01.1084510Z [1194/1279] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_conditions.a"
+      },
+      {
+        "line": 5076,
+        "text": "2026-09-04T16:19:18.4158192Z [1237/1279] Linking C static library _deps/kleidiai-build/libkleidiai.a"
+      },
+      {
+        "line": 5081,
+        "text": "2026-09-04T16:19:18.4984341Z [1242/1279] Linking CXX static library _deps/onnx-build/libonnx.a"
+      },
+      {
+        "line": 5090,
+        "text": "2026-09-04T16:19:18.7754425Z [1251/1279] Linking CXX static library _deps/pytorch_cpuinfo-build/libcpuinfo.a"
+      },
+      {
+        "line": 5091,
+        "text": "2026-09-04T16:19:18.7978497Z [1252/1279] Linking CXX static library _deps/re2-build/libre2.a"
+      },
+      {
+        "line": 5144,
+        "text": "2026-09-04T16:21:50.0821238Z [1277/1279] Linking CXX shared library libonnxruntime.so"
+      }
+    ]
+  },
+  "armeabi-v7a": {
+    "compileGroups": {
+      "abseil_cpp": 124,
+      "protobuf": 32,
+      "flatbuffers": 4,
+      "onnx": 60,
+      "re2": 22,
+      "pytorch_cpuinfo": 18
+    },
+    "linkRows": [
+      {
+        "line": 2159,
+        "text": "2026-09-04T15:56:13.1581950Z [2/984] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_spinlock_wait.a"
+      },
+      {
+        "line": 2162,
+        "text": "2026-09-04T15:56:14.3449793Z [5/984] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_log_severity.a"
+      },
+      {
+        "line": 2165,
+        "text": "2026-09-04T15:56:14.3625920Z [8/984] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_raw_logging_internal.a"
+      },
+      {
+        "line": 2170,
+        "text": "2026-09-04T15:56:15.5416591Z [13/984] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_utf8_for_code_point.a"
+      },
+      {
+        "line": 2172,
+        "text": "2026-09-04T15:56:15.5599745Z [15/984] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_throw_delegate.a"
+      },
+      {
+        "line": 2174,
+        "text": "2026-09-04T15:56:15.6203497Z [17/984] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_base.a"
+      },
+      {
+        "line": 2178,
+        "text": "2026-09-04T15:56:16.6580432Z [21/984] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_decode_rust_punycode.a"
+      },
+      {
+        "line": 2180,
+        "text": "2026-09-04T15:56:16.8859916Z [23/984] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_string_view.a"
+      },
+      {
+        "line": 2182,
+        "text": "2026-09-04T15:56:16.9229946Z [25/984] Linking CXX static library _deps/abseil_cpp-build/absl/numeric/libabsl_int128.a"
+      },
+      {
+        "line": 2196,
+        "text": "2026-09-04T15:56:20.9810535Z [39/984] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_strings_internal.a"
+      },
+      {
+        "line": 2208,
+        "text": "2026-09-04T15:56:24.9899994Z [51/984] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_cpu_detect.a"
+      },
+      {
+        "line": 2215,
+        "text": "2026-09-04T15:56:26.2730779Z [58/984] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_demangle_rust.a"
+      },
+      {
+        "line": 2216,
+        "text": "2026-09-04T15:56:26.2846294Z [59/984] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_strings.a"
+      },
+      {
+        "line": 2228,
+        "text": "2026-09-04T15:56:30.3869857Z [71/984] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_civil_time.a"
+      },
+      {
+        "line": 2229,
+        "text": "2026-09-04T15:56:30.3969768Z [72/984] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_time_zone.a"
+      },
+      {
+        "line": 2230,
+        "text": "2026-09-04T15:56:30.4060353Z [73/984] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_malloc_internal.a"
+      },
+      {
+        "line": 2232,
+        "text": "2026-09-04T15:56:30.4509963Z [75/984] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_internal.a"
+      },
+      {
+        "line": 2239,
+        "text": "2026-09-04T15:56:32.6030115Z [82/984] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_debugging_internal.a"
+      },
+      {
+        "line": 2240,
+        "text": "2026-09-04T15:56:32.6089842Z [83/984] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_demangle_internal.a"
+      },
+      {
+        "line": 2242,
+        "text": "2026-09-04T15:56:32.7489969Z [85/984] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_str_format_internal.a"
+      },
+      {
+        "line": 2245,
+        "text": "2026-09-04T15:56:33.5610042Z [88/984] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_time.a"
+      },
+      {
+        "line": 2246,
+        "text": "2026-09-04T15:56:33.5699963Z [89/984] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_tracing_internal.a"
+      },
+      {
+        "line": 2247,
+        "text": "2026-09-04T15:56:33.5759736Z [90/984] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc32c.a"
+      },
+      {
+        "line": 2249,
+        "text": "2026-09-04T15:56:33.7431794Z [92/984] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_stacktrace.a"
+      },
+      {
+        "line": 2250,
+        "text": "2026-09-04T15:56:33.7505186Z [93/984] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_symbolize.a"
+      },
+      {
+        "line": 2252,
+        "text": "2026-09-04T15:56:34.1620145Z [95/984] Linking CXX static library _deps/abseil_cpp-build/absl/hash/libabsl_city.a"
+      },
+      {
+        "line": 2256,
+        "text": "2026-09-04T15:56:35.3060171Z [99/984] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_graphcycles_internal.a"
+      },
+      {
+        "line": 2257,
+        "text": "2026-09-04T15:56:35.3119882Z [100/984] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_kernel_timeout_internal.a"
+      },
+      {
+        "line": 2270,
+        "text": "2026-09-04T15:56:38.7216366Z [113/984] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_cord_state.a"
+      },
+      {
+        "line": 2271,
+        "text": "2026-09-04T15:56:38.7282518Z [114/984] Linking CXX static library _deps/abseil_cpp-build/absl/hash/libabsl_hash.a"
+      },
+      {
+        "line": 2272,
+        "text": "2026-09-04T15:56:38.7358584Z [115/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_proto.a"
+      },
+      {
+        "line": 2275,
+        "text": "2026-09-04T15:56:39.6419881Z [118/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_fnmatch.a"
+      },
+      {
+        "line": 2276,
+        "text": "2026-09-04T15:56:39.6512018Z [119/984] Linking CXX static library _deps/abseil_cpp-build/absl/profiling/libabsl_exponential_biased.a"
+      },
+      {
+        "line": 2285,
+        "text": "2026-09-04T15:56:43.2615645Z [128/984] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_synchronization.a"
+      },
+      {
+        "line": 2321,
+        "text": "2026-09-04T15:56:51.6440011Z [164/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_entry.a"
+      },
+      {
+        "line": 2323,
+        "text": "2026-09-04T15:56:52.2639954Z [166/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_vlog_config_internal.a"
+      },
+      {
+        "line": 2324,
+        "text": "2026-09-04T15:56:52.2729919Z [167/984] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cord_internal.a"
+      },
+      {
+        "line": 2325,
+        "text": "2026-09-04T15:56:52.2809922Z [168/984] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_functions.a"
+      },
+      {
+        "line": 2326,
+        "text": "2026-09-04T15:56:52.2880766Z [169/984] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_handle.a"
+      },
+      {
+        "line": 2328,
+        "text": "2026-09-04T15:56:52.5650122Z [171/984] Linking CXX static library _deps/protobuf-build/libprotobuf-lite.a"
+      },
+      {
+        "line": 2349,
+        "text": "2026-09-04T15:56:54.5851713Z [180/984] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_commandlineflag_internal.a"
+      },
+      {
+        "line": 2352,
+        "text": "2026-09-04T15:56:54.6830471Z [183/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_globals.a"
+      },
+      {
+        "line": 2355,
+        "text": "2026-09-04T15:56:55.8019803Z [186/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_globals.a"
+      },
+      {
+        "line": 2356,
+        "text": "2026-09-04T15:56:55.8099857Z [187/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_sink.a"
+      },
+      {
+        "line": 2359,
+        "text": "2026-09-04T15:56:56.3272041Z [190/984] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_info.a"
+      },
+      {
+        "line": 2364,
+        "text": "2026-09-04T15:56:56.4122172Z [195/984] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_strerror.a"
+      },
+      {
+        "line": 2365,
+        "text": "2026-09-04T15:56:56.4204972Z [196/984] Linking CXX static library _deps/abseil_cpp-build/absl/container/libabsl_hashtablez_sampler.a"
+      },
+      {
+        "line": 2367,
+        "text": "2026-09-04T15:56:57.0760105Z [198/984] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_examine_stack.a"
+      },
+      {
+        "line": 2369,
+        "text": "2026-09-04T15:56:57.1230016Z [200/984] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_program_name.a"
+      },
+      {
+        "line": 2372,
+        "text": "2026-09-04T15:56:58.9080171Z [203/984] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_commandlineflag.a"
+      },
+      {
+        "line": 2374,
+        "text": "2026-09-04T15:56:59.1041450Z [205/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_format.a"
+      },
+      {
+        "line": 2376,
+        "text": "2026-09-04T15:56:59.1420368Z [207/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_log_sink_set.a"
+      },
+      {
+        "line": 2377,
+        "text": "2026-09-04T15:56:59.1499499Z [208/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_nullguard.a"
+      },
+      {
+        "line": 2378,
+        "text": "2026-09-04T15:56:59.1586625Z [209/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_structured_proto.a"
+      },
+      {
+        "line": 2379,
+        "text": "2026-09-04T15:56:59.1687863Z [210/984] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cord.a"
+      },
+      {
+        "line": 2424,
+        "text": "2026-09-04T15:57:04.9996262Z [219/984] Linking CXX static library _deps/abseil_cpp-build/absl/container/libabsl_raw_hash_set.a"
+      },
+      {
+        "line": 2425,
+        "text": "2026-09-04T15:57:05.0049941Z [220/984] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_leak_check.a"
+      },
+      {
+        "line": 2426,
+        "text": "2026-09-04T15:57:05.0109714Z [221/984] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_config.a"
+      },
+      {
+        "line": 2427,
+        "text": "2026-09-04T15:57:05.0229879Z [222/984] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_marshalling.a"
+      },
+      {
+        "line": 2428,
+        "text": "2026-09-04T15:57:05.0289957Z [223/984] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_private_handle_accessor.a"
+      },
+      {
+        "line": 2451,
+        "text": "2026-09-04T15:57:08.2630276Z [228/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_message.a"
+      },
+      {
+        "line": 2452,
+        "text": "2026-09-04T15:57:08.2749759Z [229/984] Linking CXX static library _deps/onnx-build/libonnx_proto.a"
+      },
+      {
+        "line": 2454,
+        "text": "2026-09-04T15:57:08.4070288Z [231/984] Linking CXX static library _deps/flatbuffers-build/libflatbuffers.a"
+      },
+      {
+        "line": 4634,
+        "text": "2026-09-04T16:12:45.1871489Z [897/984] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_reflection.a"
+      },
+      {
+        "line": 4635,
+        "text": "2026-09-04T16:12:45.1960010Z [898/984] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_internal.a"
+      },
+      {
+        "line": 4636,
+        "text": "2026-09-04T16:12:45.2050032Z [899/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_check_op.a"
+      },
+      {
+        "line": 4637,
+        "text": "2026-09-04T16:12:45.2112390Z [900/984] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_conditions.a"
+      },
+      {
+        "line": 4683,
+        "text": "2026-09-04T16:12:58.7873943Z [946/984] Linking CXX static library _deps/onnx-build/libonnx.a"
+      },
+      {
+        "line": 4693,
+        "text": "2026-09-04T16:12:59.1289940Z [956/984] Linking CXX static library _deps/pytorch_cpuinfo-build/libcpuinfo.a"
+      },
+      {
+        "line": 4694,
+        "text": "2026-09-04T16:12:59.1311612Z [957/984] Linking CXX static library _deps/re2-build/libre2.a"
+      },
+      {
+        "line": 4747,
+        "text": "2026-09-04T16:15:23.4042580Z [982/984] Linking CXX shared library libonnxruntime.so"
+      }
+    ]
+  },
+  "x86": {
+    "compileGroups": {
+      "abseil_cpp": 124,
+      "protobuf": 32,
+      "flatbuffers": 4,
+      "onnx": 60,
+      "re2": 22,
+      "pytorch_cpuinfo": 20
+    },
+    "linkRows": [
+      {
+        "line": 2155,
+        "text": "2026-09-04T15:56:29.4378099Z [2/987] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_spinlock_wait.a"
+      },
+      {
+        "line": 2158,
+        "text": "2026-09-04T15:56:30.5145840Z [5/987] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_log_severity.a"
+      },
+      {
+        "line": 2159,
+        "text": "2026-09-04T15:56:30.5316148Z [6/987] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_raw_logging_internal.a"
+      },
+      {
+        "line": 2165,
+        "text": "2026-09-04T15:56:32.0543759Z [12/987] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_utf8_for_code_point.a"
+      },
+      {
+        "line": 2167,
+        "text": "2026-09-04T15:56:32.3200132Z [14/987] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_base.a"
+      },
+      {
+        "line": 2169,
+        "text": "2026-09-04T15:56:32.4141171Z [16/987] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_throw_delegate.a"
+      },
+      {
+        "line": 2174,
+        "text": "2026-09-04T15:56:33.8492664Z [21/987] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_decode_rust_punycode.a"
+      },
+      {
+        "line": 2176,
+        "text": "2026-09-04T15:56:33.9950180Z [23/987] Linking CXX static library _deps/abseil_cpp-build/absl/numeric/libabsl_int128.a"
+      },
+      {
+        "line": 2177,
+        "text": "2026-09-04T15:56:34.0009998Z [24/987] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_string_view.a"
+      },
+      {
+        "line": 2192,
+        "text": "2026-09-04T15:56:39.3849430Z [39/987] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_strings_internal.a"
+      },
+      {
+        "line": 2204,
+        "text": "2026-09-04T15:56:44.5847552Z [51/987] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_cpu_detect.a"
+      },
+      {
+        "line": 2211,
+        "text": "2026-09-04T15:56:46.3238795Z [58/987] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_demangle_rust.a"
+      },
+      {
+        "line": 2212,
+        "text": "2026-09-04T15:56:46.3421011Z [59/987] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_strings.a"
+      },
+      {
+        "line": 2224,
+        "text": "2026-09-04T15:56:51.6610211Z [71/987] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_civil_time.a"
+      },
+      {
+        "line": 2225,
+        "text": "2026-09-04T15:56:51.6760247Z [72/987] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_time_zone.a"
+      },
+      {
+        "line": 2226,
+        "text": "2026-09-04T15:56:51.6865493Z [73/987] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_malloc_internal.a"
+      },
+      {
+        "line": 2228,
+        "text": "2026-09-04T15:56:51.7460189Z [75/987] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_internal.a"
+      },
+      {
+        "line": 2235,
+        "text": "2026-09-04T15:56:54.3715941Z [82/987] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_debugging_internal.a"
+      },
+      {
+        "line": 2236,
+        "text": "2026-09-04T15:56:54.3817053Z [83/987] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_demangle_internal.a"
+      },
+      {
+        "line": 2238,
+        "text": "2026-09-04T15:56:54.9470252Z [85/987] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_str_format_internal.a"
+      },
+      {
+        "line": 2241,
+        "text": "2026-09-04T15:56:55.8580335Z [88/987] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_time.a"
+      },
+      {
+        "line": 2242,
+        "text": "2026-09-04T15:56:55.8670359Z [89/987] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_tracing_internal.a"
+      },
+      {
+        "line": 2244,
+        "text": "2026-09-04T15:56:56.4770184Z [91/987] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc32c.a"
+      },
+      {
+        "line": 2245,
+        "text": "2026-09-04T15:56:56.4860176Z [92/987] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_stacktrace.a"
+      },
+      {
+        "line": 2246,
+        "text": "2026-09-04T15:56:56.4950358Z [93/987] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_symbolize.a"
+      },
+      {
+        "line": 2248,
+        "text": "2026-09-04T15:56:56.6870124Z [95/987] Linking CXX static library _deps/abseil_cpp-build/absl/hash/libabsl_city.a"
+      },
+      {
+        "line": 2252,
+        "text": "2026-09-04T15:56:58.3160912Z [99/987] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_graphcycles_internal.a"
+      },
+      {
+        "line": 2253,
+        "text": "2026-09-04T15:56:58.3280632Z [100/987] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_kernel_timeout_internal.a"
+      },
+      {
+        "line": 2266,
+        "text": "2026-09-04T15:57:02.5950053Z [113/987] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_cord_state.a"
+      },
+      {
+        "line": 2267,
+        "text": "2026-09-04T15:57:02.6039917Z [114/987] Linking CXX static library _deps/abseil_cpp-build/absl/hash/libabsl_hash.a"
+      },
+      {
+        "line": 2268,
+        "text": "2026-09-04T15:57:02.6100028Z [115/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_proto.a"
+      },
+      {
+        "line": 2271,
+        "text": "2026-09-04T15:57:04.1540173Z [118/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_fnmatch.a"
+      },
+      {
+        "line": 2272,
+        "text": "2026-09-04T15:57:04.1630235Z [119/987] Linking CXX static library _deps/abseil_cpp-build/absl/profiling/libabsl_exponential_biased.a"
+      },
+      {
+        "line": 2282,
+        "text": "2026-09-04T15:57:08.8350545Z [129/987] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_synchronization.a"
+      },
+      {
+        "line": 2317,
+        "text": "2026-09-04T15:57:19.5010016Z [164/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_entry.a"
+      },
+      {
+        "line": 2319,
+        "text": "2026-09-04T15:57:20.3358894Z [166/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_vlog_config_internal.a"
+      },
+      {
+        "line": 2320,
+        "text": "2026-09-04T15:57:20.3470455Z [167/987] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cord_internal.a"
+      },
+      {
+        "line": 2321,
+        "text": "2026-09-04T15:57:20.3556718Z [168/987] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_functions.a"
+      },
+      {
+        "line": 2322,
+        "text": "2026-09-04T15:57:20.3656657Z [169/987] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_handle.a"
+      },
+      {
+        "line": 2324,
+        "text": "2026-09-04T15:57:20.9920830Z [171/987] Linking CXX static library _deps/protobuf-build/libprotobuf-lite.a"
+      },
+      {
+        "line": 2345,
+        "text": "2026-09-04T15:57:23.3860248Z [180/987] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_commandlineflag_internal.a"
+      },
+      {
+        "line": 2348,
+        "text": "2026-09-04T15:57:23.7110289Z [183/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_globals.a"
+      },
+      {
+        "line": 2351,
+        "text": "2026-09-04T15:57:24.9410170Z [186/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_globals.a"
+      },
+      {
+        "line": 2352,
+        "text": "2026-09-04T15:57:24.9500074Z [187/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_sink.a"
+      },
+      {
+        "line": 2354,
+        "text": "2026-09-04T15:57:25.5890906Z [189/987] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_info.a"
+      },
+      {
+        "line": 2360,
+        "text": "2026-09-04T15:57:25.9670289Z [195/987] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_strerror.a"
+      },
+      {
+        "line": 2361,
+        "text": "2026-09-04T15:57:25.9720128Z [196/987] Linking CXX static library _deps/abseil_cpp-build/absl/container/libabsl_hashtablez_sampler.a"
+      },
+      {
+        "line": 2363,
+        "text": "2026-09-04T15:57:26.6950523Z [198/987] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_examine_stack.a"
+      },
+      {
+        "line": 2365,
+        "text": "2026-09-04T15:57:26.7600499Z [200/987] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_program_name.a"
+      },
+      {
+        "line": 2368,
+        "text": "2026-09-04T15:57:29.0221488Z [203/987] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_commandlineflag.a"
+      },
+      {
+        "line": 2370,
+        "text": "2026-09-04T15:57:29.0354102Z [205/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_format.a"
+      },
+      {
+        "line": 2372,
+        "text": "2026-09-04T15:57:29.1460868Z [207/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_log_sink_set.a"
+      },
+      {
+        "line": 2373,
+        "text": "2026-09-04T15:57:29.1550235Z [208/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_nullguard.a"
+      },
+      {
+        "line": 2374,
+        "text": "2026-09-04T15:57:29.1653627Z [209/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_structured_proto.a"
+      },
+      {
+        "line": 2375,
+        "text": "2026-09-04T15:57:29.1770280Z [210/987] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cord.a"
+      },
+      {
+        "line": 2420,
+        "text": "2026-09-04T15:57:36.7230510Z [219/987] Linking CXX static library _deps/abseil_cpp-build/absl/container/libabsl_raw_hash_set.a"
+      },
+      {
+        "line": 2421,
+        "text": "2026-09-04T15:57:36.7331718Z [220/987] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_leak_check.a"
+      },
+      {
+        "line": 2422,
+        "text": "2026-09-04T15:57:36.7451114Z [221/987] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_config.a"
+      },
+      {
+        "line": 2423,
+        "text": "2026-09-04T15:57:36.7562591Z [222/987] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_marshalling.a"
+      },
+      {
+        "line": 2424,
+        "text": "2026-09-04T15:57:36.7667939Z [223/987] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_private_handle_accessor.a"
+      },
+      {
+        "line": 2447,
+        "text": "2026-09-04T15:57:40.4400136Z [228/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_message.a"
+      },
+      {
+        "line": 2448,
+        "text": "2026-09-04T15:57:40.4610238Z [229/987] Linking CXX static library _deps/flatbuffers-build/libflatbuffers.a"
+      },
+      {
+        "line": 2449,
+        "text": "2026-09-04T15:57:40.4820037Z [230/987] Linking CXX static library _deps/onnx-build/libonnx_proto.a"
+      },
+      {
+        "line": 4632,
+        "text": "2026-09-04T16:17:34.8369380Z [899/987] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_reflection.a"
+      },
+      {
+        "line": 4633,
+        "text": "2026-09-04T16:17:34.8392974Z [900/987] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_internal.a"
+      },
+      {
+        "line": 4634,
+        "text": "2026-09-04T16:17:34.8468282Z [901/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_check_op.a"
+      },
+      {
+        "line": 4635,
+        "text": "2026-09-04T16:17:34.8490295Z [902/987] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_conditions.a"
+      },
+      {
+        "line": 4683,
+        "text": "2026-09-04T16:17:52.2739926Z [950/987] Linking CXX static library _deps/onnx-build/libonnx.a"
+      },
+      {
+        "line": 4691,
+        "text": "2026-09-04T16:17:52.4938956Z [958/987] Linking CXX static library _deps/re2-build/libre2.a"
+      },
+      {
+        "line": 4692,
+        "text": "2026-09-04T16:17:52.5082404Z [959/987] Linking CXX static library _deps/pytorch_cpuinfo-build/libcpuinfo.a"
+      },
+      {
+        "line": 4746,
+        "text": "2026-09-04T16:20:26.8694125Z [985/987] Linking CXX shared library libonnxruntime.so"
+      }
+    ]
+  },
+  "x86_64": {
+    "compileGroups": {
+      "abseil_cpp": 124,
+      "protobuf": 32,
+      "flatbuffers": 4,
+      "onnx": 60,
+      "re2": 22,
+      "pytorch_cpuinfo": 20
+    },
+    "linkRows": [
+      {
+        "line": 2158,
+        "text": "2026-09-04T15:56:50.5444600Z [2/1047] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_spinlock_wait.a"
+      },
+      {
+        "line": 2162,
+        "text": "2026-09-04T15:56:51.4421974Z [6/1047] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_log_severity.a"
+      },
+      {
+        "line": 2163,
+        "text": "2026-09-04T15:56:51.4531455Z [7/1047] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_raw_logging_internal.a"
+      },
+      {
+        "line": 2168,
+        "text": "2026-09-04T15:56:52.4915560Z [12/1047] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_utf8_for_code_point.a"
+      },
+      {
+        "line": 2170,
+        "text": "2026-09-04T15:56:52.6769959Z [14/1047] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_throw_delegate.a"
+      },
+      {
+        "line": 2173,
+        "text": "2026-09-04T15:56:52.7444107Z [17/1047] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_base.a"
+      },
+      {
+        "line": 2177,
+        "text": "2026-09-04T15:56:53.6350194Z [21/1047] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_decode_rust_punycode.a"
+      },
+      {
+        "line": 2179,
+        "text": "2026-09-04T15:56:53.7345624Z [23/1047] Linking CXX static library _deps/abseil_cpp-build/absl/numeric/libabsl_int128.a"
+      },
+      {
+        "line": 2180,
+        "text": "2026-09-04T15:56:53.7386105Z [24/1047] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_string_view.a"
+      },
+      {
+        "line": 2195,
+        "text": "2026-09-04T15:56:57.3595242Z [39/1047] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_strings_internal.a"
+      },
+      {
+        "line": 2207,
+        "text": "2026-09-04T15:57:01.0179476Z [51/1047] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_cpu_detect.a"
+      },
+      {
+        "line": 2214,
+        "text": "2026-09-04T15:57:02.2107091Z [58/1047] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_demangle_rust.a"
+      },
+      {
+        "line": 2215,
+        "text": "2026-09-04T15:57:02.2216792Z [59/1047] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_strings.a"
+      },
+      {
+        "line": 2227,
+        "text": "2026-09-04T15:57:06.1259812Z [71/1047] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_civil_time.a"
+      },
+      {
+        "line": 2228,
+        "text": "2026-09-04T15:57:06.1363295Z [72/1047] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_time_zone.a"
+      },
+      {
+        "line": 2229,
+        "text": "2026-09-04T15:57:06.1424836Z [73/1047] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_malloc_internal.a"
+      },
+      {
+        "line": 2231,
+        "text": "2026-09-04T15:57:06.1865255Z [75/1047] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_internal.a"
+      },
+      {
+        "line": 2238,
+        "text": "2026-09-04T15:57:08.0515261Z [82/1047] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_debugging_internal.a"
+      },
+      {
+        "line": 2239,
+        "text": "2026-09-04T15:57:08.0635446Z [83/1047] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_demangle_internal.a"
+      },
+      {
+        "line": 2241,
+        "text": "2026-09-04T15:57:08.5955398Z [85/1047] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_str_format_internal.a"
+      },
+      {
+        "line": 2244,
+        "text": "2026-09-04T15:57:08.7732864Z [88/1047] Linking CXX static library _deps/abseil_cpp-build/absl/time/libabsl_time.a"
+      },
+      {
+        "line": 2245,
+        "text": "2026-09-04T15:57:08.7785645Z [89/1047] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_tracing_internal.a"
+      },
+      {
+        "line": 2246,
+        "text": "2026-09-04T15:57:08.7845210Z [90/1047] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc32c.a"
+      },
+      {
+        "line": 2248,
+        "text": "2026-09-04T15:57:09.0693758Z [92/1047] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_stacktrace.a"
+      },
+      {
+        "line": 2249,
+        "text": "2026-09-04T15:57:09.0780715Z [93/1047] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_symbolize.a"
+      },
+      {
+        "line": 2251,
+        "text": "2026-09-04T15:57:09.8295679Z [95/1047] Linking CXX static library _deps/abseil_cpp-build/absl/hash/libabsl_city.a"
+      },
+      {
+        "line": 2255,
+        "text": "2026-09-04T15:57:10.4755395Z [99/1047] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_graphcycles_internal.a"
+      },
+      {
+        "line": 2256,
+        "text": "2026-09-04T15:57:10.4805123Z [100/1047] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_kernel_timeout_internal.a"
+      },
+      {
+        "line": 2269,
+        "text": "2026-09-04T15:57:13.4035678Z [113/1047] Linking CXX static library _deps/abseil_cpp-build/absl/crc/libabsl_crc_cord_state.a"
+      },
+      {
+        "line": 2270,
+        "text": "2026-09-04T15:57:13.4125053Z [114/1047] Linking CXX static library _deps/abseil_cpp-build/absl/hash/libabsl_hash.a"
+      },
+      {
+        "line": 2271,
+        "text": "2026-09-04T15:57:13.4155317Z [115/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_proto.a"
+      },
+      {
+        "line": 2274,
+        "text": "2026-09-04T15:57:14.2256168Z [118/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_fnmatch.a"
+      },
+      {
+        "line": 2275,
+        "text": "2026-09-04T15:57:14.2315231Z [119/1047] Linking CXX static library _deps/abseil_cpp-build/absl/profiling/libabsl_exponential_biased.a"
+      },
+      {
+        "line": 2284,
+        "text": "2026-09-04T15:57:17.2868925Z [128/1047] Linking CXX static library _deps/abseil_cpp-build/absl/synchronization/libabsl_synchronization.a"
+      },
+      {
+        "line": 2320,
+        "text": "2026-09-04T15:57:24.6633389Z [164/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_entry.a"
+      },
+      {
+        "line": 2322,
+        "text": "2026-09-04T15:57:25.1315845Z [166/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_vlog_config_internal.a"
+      },
+      {
+        "line": 2323,
+        "text": "2026-09-04T15:57:25.1385172Z [167/1047] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cord_internal.a"
+      },
+      {
+        "line": 2324,
+        "text": "2026-09-04T15:57:25.1427930Z [168/1047] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_functions.a"
+      },
+      {
+        "line": 2325,
+        "text": "2026-09-04T15:57:25.1505209Z [169/1047] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_handle.a"
+      },
+      {
+        "line": 2327,
+        "text": "2026-09-04T15:57:25.4575050Z [171/1047] Linking CXX static library _deps/protobuf-build/libprotobuf-lite.a"
+      },
+      {
+        "line": 2348,
+        "text": "2026-09-04T15:57:27.2125335Z [180/1047] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_commandlineflag_internal.a"
+      },
+      {
+        "line": 2351,
+        "text": "2026-09-04T15:57:27.2655231Z [183/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_globals.a"
+      },
+      {
+        "line": 2354,
+        "text": "2026-09-04T15:57:28.1865310Z [186/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_globals.a"
+      },
+      {
+        "line": 2355,
+        "text": "2026-09-04T15:57:28.1914941Z [187/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_sink.a"
+      },
+      {
+        "line": 2357,
+        "text": "2026-09-04T15:57:28.6455507Z [189/1047] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cordz_info.a"
+      },
+      {
+        "line": 2363,
+        "text": "2026-09-04T15:57:28.7394909Z [195/1047] Linking CXX static library _deps/abseil_cpp-build/absl/base/libabsl_strerror.a"
+      },
+      {
+        "line": 2364,
+        "text": "2026-09-04T15:57:28.7455008Z [196/1047] Linking CXX static library _deps/abseil_cpp-build/absl/container/libabsl_hashtablez_sampler.a"
+      },
+      {
+        "line": 2366,
+        "text": "2026-09-04T15:57:29.3345394Z [198/1047] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_examine_stack.a"
+      },
+      {
+        "line": 2368,
+        "text": "2026-09-04T15:57:29.3735181Z [200/1047] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_program_name.a"
+      },
+      {
+        "line": 2372,
+        "text": "2026-09-04T15:57:30.8307734Z [204/1047] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_commandlineflag.a"
+      },
+      {
+        "line": 2373,
+        "text": "2026-09-04T15:57:30.8370692Z [205/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_format.a"
+      },
+      {
+        "line": 2375,
+        "text": "2026-09-04T15:57:31.1215455Z [207/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_log_sink_set.a"
+      },
+      {
+        "line": 2376,
+        "text": "2026-09-04T15:57:31.1305400Z [208/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_nullguard.a"
+      },
+      {
+        "line": 2377,
+        "text": "2026-09-04T15:57:31.1365126Z [209/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_structured_proto.a"
+      },
+      {
+        "line": 2378,
+        "text": "2026-09-04T15:57:31.1438636Z [210/1047] Linking CXX static library _deps/abseil_cpp-build/absl/strings/libabsl_cord.a"
+      },
+      {
+        "line": 2423,
+        "text": "2026-09-04T15:57:36.0816611Z [219/1047] Linking CXX static library _deps/abseil_cpp-build/absl/container/libabsl_raw_hash_set.a"
+      },
+      {
+        "line": 2424,
+        "text": "2026-09-04T15:57:36.0845236Z [220/1047] Linking CXX static library _deps/abseil_cpp-build/absl/debugging/libabsl_leak_check.a"
+      },
+      {
+        "line": 2425,
+        "text": "2026-09-04T15:57:36.0935154Z [221/1047] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_config.a"
+      },
+      {
+        "line": 2426,
+        "text": "2026-09-04T15:57:36.0987592Z [222/1047] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_marshalling.a"
+      },
+      {
+        "line": 2427,
+        "text": "2026-09-04T15:57:36.1080390Z [223/1047] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_private_handle_accessor.a"
+      },
+      {
+        "line": 2450,
+        "text": "2026-09-04T15:57:38.8145287Z [228/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_message.a"
+      },
+      {
+        "line": 2451,
+        "text": "2026-09-04T15:57:38.8265078Z [229/1047] Linking CXX static library _deps/onnx-build/libonnx_proto.a"
+      },
+      {
+        "line": 2453,
+        "text": "2026-09-04T15:57:39.0835320Z [231/1047] Linking CXX static library _deps/flatbuffers-build/libflatbuffers.a"
+      },
+      {
+        "line": 4694,
+        "text": "2026-09-04T16:11:38.8145260Z [958/1047] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_reflection.a"
+      },
+      {
+        "line": 4695,
+        "text": "2026-09-04T16:11:38.8235353Z [959/1047] Linking CXX static library _deps/abseil_cpp-build/absl/flags/libabsl_flags_internal.a"
+      },
+      {
+        "line": 4696,
+        "text": "2026-09-04T16:11:38.8295186Z [960/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_check_op.a"
+      },
+      {
+        "line": 4697,
+        "text": "2026-09-04T16:11:38.8355206Z [961/1047] Linking CXX static library _deps/abseil_cpp-build/absl/log/libabsl_log_internal_conditions.a"
+      },
+      {
+        "line": 4745,
+        "text": "2026-09-04T16:11:51.1451376Z [1009/1047] Linking CXX static library _deps/onnx-build/libonnx.a"
+      },
+      {
+        "line": 4755,
+        "text": "2026-09-04T16:11:51.4295176Z [1019/1047] Linking CXX static library _deps/pytorch_cpuinfo-build/libcpuinfo.a"
+      },
+      {
+        "line": 4756,
+        "text": "2026-09-04T16:11:51.4415226Z [1020/1047] Linking CXX static library _deps/re2-build/libre2.a"
+      },
+      {
+        "line": 4809,
+        "text": "2026-09-04T16:14:06.5410433Z [1045/1047] Linking CXX shared library libonnxruntime.so"
+      }
+    ]
+  }
+}

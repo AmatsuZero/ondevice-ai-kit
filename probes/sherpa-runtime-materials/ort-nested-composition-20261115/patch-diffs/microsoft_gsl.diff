@@ -1,0 +1,13 @@
+diff --git a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/microsoft_gsl/before/include/gsl/assert b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/microsoft_gsl/after/include/gsl/assert
+index d3e6ccd..e166db0 100644
+--- a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/microsoft_gsl/before/include/gsl/assert
++++ b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/microsoft_gsl/after/include/gsl/assert
+@@ -49,7 +49,7 @@
+ #define GSL_SUPPRESS(x) [[gsl::suppress(#x)]]
+ #else
+ #if defined(_MSC_VER) && !defined(__INTEL_COMPILER) && !defined(__NVCC__)
+-#define GSL_SUPPRESS(x) [[gsl::suppress(x)]]
++#define GSL_SUPPRESS(x) [[gsl::suppress(#x)]]
+ #else
+ #define GSL_SUPPRESS(x)
+ #endif // _MSC_VER

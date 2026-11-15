@@ -1,3 +1,7 @@
+## 2026-11-15 ORT嵌套通知与上游补丁已补交
+
+免费hy3四请求均完整success，限定复核accept_bounded_increment；26原文109766B/子索引及补丁说明已集成，合并63项697877B，离线AAR/lint/隔离Maven发布和独立最终APK通过，十负例拒收、四ABI16SO同固定runtime。[验证](../validation/w3-ort-nested-notice-integration-20261115.md)。7组件11patch/21文件本地重建及四ABI编译观察已核，但Found Patch不证明历史apply/LTO保留；JSON测试工具/泛型许可与KleidiAI泛型BSD未盲选，mp11声明不冒充完整BSL。通知改变包字节，非通知成员/固定runtime未变；P1–P4/R4/R5/W3均open，零设备/麦克风/AiAi/模型下载。本轮只补P2/P3已知子集；R4英文/AMI/挑战全量、R5/W8资源预算和P1/P4等完整接受继续缺失，不降低门槛或重放旧FILE。
+
 ## 2026-11-15：hy3补交历史SDK绑定限定复核
 
 免费hy3完整返回accept_bounded_increment，无quota/已观察工具事件；历史a18292ac/6de95f56的五模块/14源文件/15metadata及Debug库消费者绑定内部对应已接受。唯一LOW时间身份措辞已修正汇总并加历史前缀，最新native候选51b705c/5ae065d2另有验收，旧receipt及原hy4free429不改，[复核](../validation/w3-sdk-binding-hy3-review-20261115.md)。未执行新构建/设备/法律或完整发布复审，P1完整输入及最终App、P2–P4/R4/R5/W3仍open。

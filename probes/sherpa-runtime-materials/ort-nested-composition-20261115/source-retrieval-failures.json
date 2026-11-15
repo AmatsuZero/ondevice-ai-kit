@@ -1,0 +1,12 @@
+{
+  "failed": [
+    {
+      "path": "cmake/external/kleidiai.cmake",
+      "message": "Not Found",
+      "status": "404"
+    }
+  ],
+  "batchCollectorAbortedAfterFirst404": true,
+  "successfulCompletedSiblingCallsPreserved": true,
+  "resubmitted": false
+}

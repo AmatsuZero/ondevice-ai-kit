@@ -1,0 +1,51 @@
+{
+  "verdict": "accept_bounded_increment",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "location": "modificationsAppend > Limits; dual issue/wiki update",
+      "description": "The appendix caveat names only full P2/P4 closure, while the supplied pitfall states R4/R5/P1/P2/P3/P4/W3 remain open and the receipts set w3Complete, productionReady, and completeCompositionVerified to false.",
+      "requiredAction": "State explicitly in the issue/wiki that this increment closes none of R4/R5/P1/P2/P3/P4/W3."
+    },
+    {
+      "severity": "LOW",
+      "location": "build-process.json; apk-build-process.json",
+      "description": "Only exitCode and elapsedSeconds are supplied. Under the supplied pitfall, exit0 alone is not a full success result with real bytes; byte-bearing support is present in the AAR/APK verification and negative cases, not in these process records.",
+      "requiredAction": "Keep these process records ancillary and do not cite them alone as build or release proof."
+    },
+    {
+      "severity": "LOW",
+      "location": "aar-verification.json priorNonNoticeMembersUnchanged; apk-verification.originalAPKUnchanged; modificationsAppend scope text",
+      "description": "The 'unchanged' fields are scoped to non-notice members or original APK recheck, while the appendix correctly says notice integration changes notice-bearing AAR/APK package bytes. Unqualified reuse could overclaim package byte identity.",
+      "requiredAction": "Qualify these fields in the dual update as non-notice/library stability, not absence of notice-driven package byte changes."
+    },
+    {
+      "severity": "LOW",
+      "location": "patch-hash-verification.json; modificationsAppend > Evidence boundary",
+      "description": "The supplied fields explicitly deny replay/compilation here and direct historical post-patch tree retrieval. Local reconstruction exit codes and before/after hashes do not prove machine-code effect.",
+      "requiredAction": "Do not upgrade Found Patch logs or local reconstruction into historical patch execution, retained-code proof, or machine-code/LTO equivalence in the issue/wiki summary."
+    }
+  ],
+  "acceptedScope": [
+    "Bounded technical increment only: replacement of dispositions for root ids 30-56 and the corresponding ORT blocker, plus child-only ids 101-104, with explicit unselections 39-42 and 53 retained.",
+    "Supplied receipt claims for 26 selected originals, 109766 selected original bytes, 63 combined notices, 697877 notice bytes, preservation of the prior 23 root entries/groups and prior bytes, and hy3 wording correction with the initial candidate retained.",
+    "Notice-bearing AAR/APK evidence as supplied: debug/release AAR hashes and byte counts, APK hash and byte count, 63-notice retention, 16-library ABI stability, and rejection of the listed notice member deletion/change-byte cases.",
+    "Patch explanation bounded to 11 patch files, 7 components, and 21 component files, with source/guard-level descriptions, local reconstruction caveats, and explicit denial of historical post-patch tree retrieval, replay, compilation, machine-code effect, and LTO retention proof.",
+    "Index caveats for incomplete bounded scope, JSON test/tool/generic notice non-selection, KleidiAI BSD root text non-attribution, Eigen nested-commit separation, and mp11 source excerpts not being a full BSL license."
+  ],
+  "notAccepted": [
+    "Full ORT nested composition, exhaustive retained-code proof, final LTO retention, complete JVM/native recursive composition, or legal release sufficiency.",
+    "Production readiness, W3 completion, or closure of R4/R5/P1/P2/P3/P4/W3.",
+    "Any claim that AAR/APK package bytes are unchanged because runtime/library logic or the fixed runtime AAR is unchanged.",
+    "Selection of JSON ids 39-42 or KleidiAI BSD id53 as retained-code license evidence merely from archive presence.",
+    "Any claim that Found Patch lines, local check/apply exit codes, or before/after source hashes establish historical patch application or machine-code equivalence.",
+    "Any demand for impossible binary equivalence as a mandatory acceptance method, or any recommendation to retry known hy4free/native429 failures or use paid fallback."
+  ],
+  "checksNotExecuted": [
+    "No tools, file reads/writes, shell commands, network access, git operations, local commit, issue update, or wiki update were executed by this reviewer.",
+    "No independent verification of source bytes, hashes, provenance, AAR/APK hashes, notice counts, negative cases, or build outputs was executed.",
+    "No build, APK build, patch replay, compilation, runtime test, or negative-case rerun was executed.",
+    "No historical post-patch tree retrieval, final binary composition analysis, LTO retention analysis, or machine-code equivalence check was executed.",
+    "No legal review or release acceptance was performed."
+  ]
+}

@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "scope": "bounded fixed ORT nested notice and source/patch technical evidence; not exhaustive final composition or release acceptance",
+  "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3574,
+      "sha256": "5f2768481bb8cab324a1fc8507d72b641d412255e6a44c3c214b90894282a12c"
+    },
+    {
+      "path": "aar-verification.json",
+      "bytes": 1023,
+      "sha256": "7ffddd7ababd01739b302c211aa540f4dced8f6f912ddcbc0482bdadc8551a3a"
+    },
+    {
+      "path": "additional-notice-sources.json",
+      "bytes": 2475,
+      "sha256": "ffdd8ca053793840e1446c45ee28d214cb8e6466933023622a827745a9a83569"
+    },
+    {
+      "path": "apk-build-invocation.json",
+      "bytes": 1065,
+      "sha256": "87a3d793726521d37e16fe248705249e18967af595a80b33dc9069e81a89d2a2"
+    },
+    {
+      "path": "apk-build-process.json",
+      "bytes": 47,
+      "sha256": "5b0a61bf1418a5f8a9616f6a60f82274bddea8eac99b42517242f4b9a1b272c4"
+    },
+    {
+      "path": "apk-verification.json",
+      "bytes": 10585,
+      "sha256": "aed49dae3c60499a62bd1880f6401c6c4085ce7790c13f0c8db9f3a3a505c6af"
+    },
+    {
+      "path": "archive-evidence/json/.reuse/dep5",
+      "bytes": 830,
+      "sha256": "31134b925e554bafca51a1d51bd739bfca0e7184a9b12183b776254655c2a979"
+    },
+    {
+      "path": "archive-evidence/protobuf/cmake/libprotobuf-lite.cmake",
+      "bytes": 6677,
+      "sha256": "3b6125134c3795d8e720edbce31ed818fee772480e64bde4fc6b6b62489fa4fb"
+    },
+    {
+      "path": "archive-evidence/pytorch_cpuinfo/CMakeLists.txt",
+      "bytes": 45089,
+      "sha256": "f2d8a764f8750f500c02f5bf14a729b2b36822905331182d04d06017bcbf27a9"
+    },
+    {
+      "path": "archive-evidence/pytorch_cpuinfo/src/cpuinfo/log.h",
+      "bytes": 2415,
+      "sha256": "cdbc1feebcdf4c7e36cf70181767336648966de8386f37c0c7b956ba5532adf8"
+    },
+    {
+      "path": "archive-evidence/pytorch_cpuinfo/src/log.c",
+      "bytes": 6101,
+      "sha256": "3ec56da70717b2fd013f03f97a02db9500f2b9137751e622eb3d68de37c9ad33"
+    },
+    {
+      "path": "archive-extraction-receipts.json",
+      "bytes": 12982,
+      "sha256": "3e117e15bc97d92427583e7ddb1257942cde1cbf693757cf7be42d35896eb355"
+    },
+    {
+      "path": "bound-index.json",
+      "bytes": 31969,
+      "sha256": "351edd4964624b709f34830c5eb09a76f24f652616bdda55e17cbabb43610141"
+    },
+    {
+      "path": "bounded-review.json",
+      "bytes": 4904,
+      "sha256": "64e7b7c8d5fb4cd5a315bdf3512452dfae666dd83a2f8abffa57306bc099816a"
+    },
+    {
+      "path": "build-invocation.json",
+      "bytes": 1141,
+      "sha256": "f37a5a2d138ced177efcc5e91f2cd3c55c0507456844718e8355793b9173ecfb"
+    },
+    {
+      "path": "build-process.json",
+      "bytes": 48,
+      "sha256": "cb3f7de50c6de9687fcea21bba5d2e4557bfb8070f527208cc0fe790d7d4ec62"
+    },
+    {
+      "path": "compile-group-summary.json",
+      "bytes": 52391,
+      "sha256": "5335919b7509e3fe5331a22c0bcdca0d49d8ef8a24ae6043ab6ea1e6249c5cff"
+    },
+    {
+      "path": "diff-check-disposition.json",
+      "bytes": 1739,
+      "sha256": "927a8845b4f93c3226e950d6a8a48b474e56649c42cfa2a92e6b37409fed3d2e"
+    },
+    {
+      "path": "expected-assets.json",
+      "bytes": 11920,
+      "sha256": "ae3b09e2ee9ef3e176a715d18aead7629b883f74ef59c98047d7a746a5b1d217"
+    },
+    {
+      "path": "fixture-copy.json",
+      "bytes": 1143,
+      "sha256": "6e30fdb32e088e6c4f46f3d615419de48c1d6fb3d2caae541ce715fcd74a9a8b"
+    },
+    {
+      "path": "helper-receipts.json",
+      "bytes": 3083,
+      "sha256": "9dd7ee10f63905630387677a3c0ca63611d58d75aeda777b42227958ab419f34"
+    },
+    {
+      "path": "initial-integration-failure.txt",
+      "bytes": 312,
+      "sha256": "0a52266307f0a357f9ecfebe666900d0a8149055386ed548e565bea76dd26ac6"
+    },
+    {
+      "path": "initial-patch-reconstruction-failure.txt",
+      "bytes": 475,
+      "sha256": "68db5d0281ffdae00953179ab6a11a1d027be07777a62f6ff5f8f6783c8505f3"
+    },
+    {
+      "path": "integration-receipt.json",
+      "bytes": 988,
+      "sha256": "abb740506ad93de6c52a3276597afe96860796d780c0d2c4527eb8e4404343d4"
+    },
+    {
+      "path": "kleidiai-compiled-attributions.json",
+      "bytes": 33090,
+      "sha256": "6fa3e5419f0bedf65d7aa65e2ba0852c97bff11c9acc4e17283a8eb5a0abf418"
+    },
+    {
+      "path": "modifications-candidate.json",
+      "bytes": 10309,
+      "sha256": "c328c4ba5954984b28bebf69988c8638486174fe69ee641c6a67418d4214d49f"
+    },
+    {
+      "path": "notices/json-v3.11.3/UPSTREAM-LICENSE.md",
+      "bytes": 1984,
+      "sha256": "08c345dca1019879171c2c465410f7bee984bbfbdb177afd2d95bf9ff6267602"
+    },
+    {
+      "path": "notices/kleidiai-v1.20.0/COPYRIGHT-102.txt",
+      "bytes": 153,
+      "sha256": "8680f229fa3c82c384502e63f379a90bd8ae717f5c5834157508b3b9427aa404"
+    },
+    {
+      "path": "notices/kleidiai-v1.20.0/COPYRIGHT-103.txt",
+      "bytes": 158,
+      "sha256": "0b7f57890fc72850bd8a095724a03e4162223a86d6c21d365e2700d96733b4e4"
+    },
+    {
+      "path": "notices/kleidiai-v1.20.0/COPYRIGHT-104.txt",
+      "bytes": 153,
+      "sha256": "ce1bce432346c273656ce8eaceb91835710c459b972b162a75e783a45204d711"
+    },
+    {
+      "path": "patch-diffs/abseil_cpp.diff",
+      "bytes": 8898,
+      "sha256": "29ae4810bf12a92f3f26a32ab67abab944f2251d72c6d5e281cda979b3442e25"
+    },
+    {
+      "path": "patch-diffs/date.diff",
+      "bytes": 1050,
+      "sha256": "599f4dcabc58504b5322dcab2185e0347c33f457f74e74c0504eeb8b97c49b4e"
+    },
+    {
+      "path": "patch-diffs/eigen.diff",
+      "bytes": 15263,
+      "sha256": "c9fd41f719da67d94a3672c4ceeadd43f966a9ecb1b0e85705526d6d85d0dd99"
+    },
+    {
+      "path": "patch-diffs/flatbuffers.diff",
+      "bytes": 1998,
+      "sha256": "74f967290439fb23d596bdc795e5c68ba552464c4c4269eeac4233436d4315a7"
+    },
+    {
+      "path": "patch-diffs/microsoft_gsl.diff",
+      "bytes": 823,
+      "sha256": "96040417a3394fb9173e917be605821e886a2c89230120723ee858cfeb9995d3"
+    },
+    {
+      "path": "patch-diffs/onnx.diff",
+      "bytes": 3114,
+      "sha256": "7e7afe725a5211be16078ea873d25ad6dc1237d08b8d670f5e254727b85eeb5c"
+    },
+    {
+      "path": "patch-diffs/protobuf.diff",
+      "bytes": 5863,
+      "sha256": "de1ec5c97ef51561d1afd86fa5a002b30655bdcc92a9b5ddf7aca25b0b6345c3"
+    },
+    {
+      "path": "patch-hash-verification.json",
+      "bytes": 206,
+      "sha256": "7d4dd9fba3b4378101d6d8962fce0ea17b7f401a8a49fc2545131758ff46d5ba"
+    },
+    {
+      "path": "patch-observations.json",
+      "bytes": 512,
+      "sha256": "9b95ce489c674440ad01231fcf5a4cf7c4f54883beb3b8de20415bf432ed67da"
+    },
+    {
+      "path": "patch-reconstruction.json",
+      "bytes": 9663,
+      "sha256": "ba693122326cf372c320d2f70e7ddf513515755f849cc441e335ccb1714ec45a"
+    },
+    {
+      "path": "resolved-artifacts.json",
+      "bytes": 2974,
+      "sha256": "9a2a935828b88568b243a07ff178f8d7967efaea70fbb4871f3dba29da31bd4b"
+    },
+    {
+      "path": "review-disposition.json",
+      "bytes": 1020,
+      "sha256": "e5bc0589889168194a743456825bf6c28574661a30d55aabd87210e8782dad26"
+    },
+    {
+      "path": "selection-candidate.json",
+      "bytes": 16961,
+      "sha256": "334a605bd7428995708f46b47f9e263395bc29b7f3b3447fcac7f40c2a9ac03a"
+    },
+    {
+      "path": "source-evidence/cmake/external/abseil-cpp.cmake",
+      "bytes": 4680,
+      "sha256": "911b6db9ebd7e2024fc4b6fd41a2b4532dbef59f382b9722290896e9c4b13fcc"
+    },
+    {
+      "path": "source-evidence/cmake/external/eigen.cmake",
+      "bytes": 788,
+      "sha256": "9db439c44f215186d3e8bde7970affd03d8fa911d89cac19adc30ed681ff32a2"
+    },
+    {
+      "path": "source-evidence/cmake/external/helper_functions.cmake",
+      "bytes": 2674,
+      "sha256": "ae5cc8332e93737d92301a3f70cfa5c2fdb529d6a366d403932853f4bb640fa7"
+    },
+    {
+      "path": "source-evidence/cmake/onnxruntime.cmake",
+      "bytes": 24072,
+      "sha256": "c0a96b3168108ae6d9eead52ac0d23fb98dac83727218fcb3baaf8b6ccfaedca"
+    },
+    {
+      "path": "source-evidence/cmake/onnxruntime_mlas.cmake",
+      "bytes": 51146,
+      "sha256": "09ea9f0282519dc63de285b3e8b02990d1ba49bcc2648f248ba20f13b00bbe43"
+    },
+    {
+      "path": "source-evidence/cmake/patches/date/date.patch",
+      "bytes": 685,
+      "sha256": "19fa16e45c7fa52373f922f47ea66591eec52d48d5c9bb7bc5302f0dcacd70de"
+    },
+    {
+      "path": "source-evidence/cmake/patches/eigen/s390x-build-werror.patch",
+      "bytes": 610,
+      "sha256": "a1a7b0ca8382cb00542587b6bc725f59abd59ad5bb491825f7876ad6e344ef0b"
+    },
+    {
+      "path": "source-evidence/cmake/patches/eigen/s390x-build.patch",
+      "bytes": 17794,
+      "sha256": "6d41f4504f665bc591336c668a1aa16ffc5e0f02fe9c2f9c46c6f5660b54c849"
+    },
+    {
+      "path": "source-evidence/cmake/patches/flatbuffers/flatbuffers.patch",
+      "bytes": 1190,
+      "sha256": "9c597b79b3b35302a19b31a42b4680c4e36f9c3934a5b1b988ddd5a36c68ee33"
+    },
+    {
+      "path": "source-evidence/cmake/patches/gsl/1213.patch",
+      "bytes": 425,
+      "sha256": "5e5c5870214ef47099b70390e409599a7139416a2108c8255d8bc7a301d9754b"
+    },
+    {
+      "path": "source-evidence/cmake/patches/onnx/onnx.patch",
+      "bytes": 2390,
+      "sha256": "1470c713e0399e690e8c057e7e1a05456f66e010bd3c9804b7a989eaded70935"
+    },
+    {
+      "path": "source-evidence/cmake/patches/protobuf/protobuf_android_log.patch",
+      "bytes": 1100,
+      "sha256": "89b3fae15ab93a394e5854bd0d1f1d63dedae12e7b638274e667b85debeffb94"
+    },
+    {
+      "path": "source-evidence/cmake/patches/protobuf/protobuf_cmake.patch",
+      "bytes": 2299,
+      "sha256": "15c25dc027cdae5fabe907d1ca9d9372c654277e82c50c3c706d4f5946a6933d"
+    },
+    {
+      "path": "source-evidence/cmake/patches/protobuf/protobuf_s390x.patch",
+      "bytes": 733,
+      "sha256": "c648a9222b7dbfd7989c0f392c3f5774d4a95e217e0df193316c54389ad0387a"
+    },
+    {
+      "path": "source-evidence/cmake/vcpkg-ports/abseil/absl_cuda13_member_template.patch",
+      "bytes": 3708,
+      "sha256": "c9677fbb8d25cdcc0e8e1b3f158930fd8e77639d1b0098da9396381be81de733"
+    },
+    {
+      "path": "source-evidence/cmake/vcpkg-ports/abseil/absl_cuda_warnings.patch",
+      "bytes": 2295,
+      "sha256": "dfc09be4b38a1ff5a4e19fe3781ec86d32196581f644b85a43f4fa851bcc8151"
+    },
+    {
+      "path": "source-receipts.json",
+      "bytes": 7659,
+      "sha256": "3fa7f7521d5c0b3e4848bb536ada9f210d47270c473bb7c630802daf0acf6abd"
+    },
+    {
+      "path": "source-retrieval-failures.json",
+      "bytes": 255,
+      "sha256": "28179c8ad2265ae013c524451eb8dbc9586168ddd77fe3dc46c659d852e9fb71"
+    },
+    {
+      "path": "wording-candidate.json",
+      "bytes": 1518,
+      "sha256": "a6941b3f7702e79cbca86631acf290e11fbbfa0d674b435d363b03048695be21"
+    }
+  ],
+  "runtimeLogicChanged": false,
+  "newDeviceCalls": 0,
+  "productionReady": false,
+  "w3Complete": false
+}

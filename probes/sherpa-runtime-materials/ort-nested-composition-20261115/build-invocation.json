@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "rtk",
+    "proxy",
+    "./gradlew",
+    ":android:sdk-core:publishReleasePublicationToMavenLocal",
+    ":android:speech:publishReleasePublicationToMavenLocal",
+    ":android:backend-sherpa-asr:publishReleasePublicationToMavenLocal",
+    ":android:backend-system-asr:publishReleasePublicationToMavenLocal",
+    ":android:backend-system-tts:publishReleasePublicationToMavenLocal",
+    "--offline",
+    "--no-daemon",
+    "--max-workers=2",
+    "--console=plain",
+    "-PsherpaMavenRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2",
+    "-Dmaven.repo.local=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ort-nested-composition-20261115/m2-complete",
+    ":android:backend-sherpa-asr:assembleDebug",
+    ":android:backend-sherpa-asr:assembleRelease",
+    ":android:backend-sherpa-asr:lintDebug"
+  ],
+  "JAVA_HOME": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+  "ANDROID_HOME": "/Users/daubert/Library/Android/sdk",
+  "offline": true,
+  "completeNoticeAssetCount": 63
+}

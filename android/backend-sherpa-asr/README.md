@@ -59,3 +59,11 @@ notices in the APK assets and pins the AAR and four model artifacts. Model sourc
 JVM notice assets under android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/ cover a known subset for the JVM slice only. Original upstream texts and attribution excerpts are preserved byte-for-byte without edits. They do not prove final DEX content or complete composition, and P2/P3/P4/W3 applicability reviews remain open.
 
 Native notices for this module are declared in android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/index.json, with selected raw notice files' raw bytes preserved unchanged under that native/ directory for the bounded known native subset only. This is not a complete final-composition notice set. Known upstream modifications are tracked separately in UPSTREAM-MODIFICATIONS.md, and broader verification remains open. No complete legal approval is implied.
+
+## ORT nested notices supplement
+
+The module-relative index location is `src/main/assets/ondeviceai/sherpa-asr/notices/native/ort-nested/index.json`. It records a known incomplete subset, original selected copies, and explicit unselections; it is documentation for that subset only.
+
+mp11 README/header excerpts are copyright/license declarations, not full BSL; the existing full BSL is sibling `native/asio-asio-1-24-0-observed-build/LICENSE_1_0.txt`. The JSON embedded attributions document retains CC0.
+
+JSON test/tool/generic GPL/Apache/BSD texts are not automatically selected merely because they are present in the archive; dep5 mapping and JSON tests OFF are the recorded basis. KleidiAI compiled-source heads are Apache; generic BSD root text alone does not prove retained BSD code. The nested Eigen commit differs from the Sherpa Eigen version and stays separate.

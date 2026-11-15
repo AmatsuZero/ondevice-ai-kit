@@ -1,0 +1,31 @@
+diff --git a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/flatbuffers/before/CMakeLists.txt b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/flatbuffers/after/CMakeLists.txt
+index a895a34..45b638d 100644
+--- a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/flatbuffers/before/CMakeLists.txt
++++ b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/flatbuffers/after/CMakeLists.txt
+@@ -280,7 +280,7 @@ set(FlatBuffers_GRPCTest_SRCS
+ # Append FLATBUFFERS_CXX_FLAGS to CMAKE_CXX_FLAGS.
+ if(DEFINED FLATBUFFERS_CXX_FLAGS)
+   message(STATUS "extend CXX_FLAGS with ${FLATBUFFERS_CXX_FLAGS}")
+-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLATBUFFERS_CXX_FLAGS}")
++  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FLATBUFFERS_CXX_FLAGS} -Wno-error=stringop-overflow")
+ endif()
+ message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+ 
+diff --git a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/flatbuffers/before/include/flatbuffers/flatbuffers.h b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/flatbuffers/after/include/flatbuffers/flatbuffers.h
+index bc828a3..3d3effe 100644
+--- a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/flatbuffers/before/include/flatbuffers/flatbuffers.h
++++ b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/flatbuffers/after/include/flatbuffers/flatbuffers.h
+@@ -213,7 +213,12 @@ inline const char * const *ElementaryTypeNames() {
+ // We're explicitly defining the signedness since the signedness of integer
+ // bitfields is otherwise implementation-defined and causes warnings on older
+ // GCC compilers.
+-struct TypeCode {
++
++struct
++#if defined(_AIX) && defined(__clang__)
++__attribute__((packed))
++#endif
++TypeCode {
+   // ElementaryType
+   unsigned short base_type : 4;
+   // Either vector (in table) or array (in struct)
