@@ -1,0 +1,30 @@
+{
+  "evidenceCommit": "c2fa9c0b5b5b02bb2d78d039a5e16e95d2bf974c",
+  "marker": "<!-- w3-native-linkage-20261115 -->",
+  "githubIssue": {
+    "number": 15,
+    "commentId": 6891817301,
+    "readbackExact": true,
+    "duplicateWrite": false
+  },
+  "gitlabIssue": {
+    "project": 461,
+    "number": 15,
+    "noteId": 44859,
+    "readbackExactIgnoringTrailingNewlinesOnly": true
+  },
+  "githubWikiCommit": "92692e1c3d92b4260bcb41300c8d4e0096e297d7",
+  "bothWikisSHA256": "a0a7df8c43527c7b6172e4a4ebe8a767f4e5c809127b988d1f87c377aa910b8e",
+  "bothWikisReadbackExact": true,
+  "firstGitLabIssueRead": "connection reset by peer; terminal failure before GitLab write; original stderr preserved",
+  "recovery": "Fresh complete pagination and unique-marker readback; existing GitHub comment reused; no global route or credential changes",
+  "publicationEvidence": ".omx/artifacts/w3-native-linkage-20261115/publication",
+  "sourceBranchPushed": false,
+  "newHelperInvocations": 0,
+  "deviceOperations": 0,
+  "builds": 0,
+  "newImplementation": false,
+  "P1P2P3P4Accepted": false,
+  "W3Complete": false,
+  "goalRemainsActive": true
+}

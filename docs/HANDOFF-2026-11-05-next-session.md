@@ -1,3 +1,7 @@
+## 2026-11-15 W3声明动态依赖已提交并双端同步
+
+本地c2fa9c0精确33文件；GH#15comment6891817301/GL#15note44859/GHWiki92692e1逐字回读，双Wiki SHAa0a7df8c43527c7b6172e4a4ebe8a767f4e5c809127b988d1f87c377aa910b8e一致，[同步收据](validation/w3-native-linkage-sync-20261115.json)。GL首GET connection reset原件保留，后续完整分页恢复、GH原marker仅回读，无全局代理/凭据改动；marker已用勿重发、源码未push。本轮工具均终态，173原余字节/161freeze保持，32原readelf行尾空格不改，其他文字通过。零新helper/构建/设备/生产实现；P1–P4/R4/R5/W3仍open、goal active。下一实际通知候选/独立最终APK与完整组成复核待新所选线路，或实体连接变化后固定合同验收；原429不重试，不重扫这16库或循环USB恢复。
+
 ## 2026-11-15 W3四ABI的ELF声明依赖已核
 
 固定AAR全部16SO原字节、ABI/SONAME核对通过；readelf/readobj集合相同但来自同LLVM，不冒充独立解析器。92条DT_NEEDED边含16同ABI内部边/76参考桩库边，五外部名称在已有NDK四ABI/API21共20桩库均存在，四ABI图同，[验证](validation/w3-native-linkage-20261115.md)。已有NDK beta3仅参考，非历史job工具链/真机符号或最低API通过。16有dynsym无symtab，四arm64初读exit0/no symbols原件保留；动态导出阴性/没有libc++_shared NEEDED不能排除静态C++或dlopen组成。173保护/161freeze保持，零构建/下载/helper/设备/生产实现，原429停线且新线路选择待答；P1–P4/R4/R5/W3仍open、goal active，不重跑旧库或USB循环。
