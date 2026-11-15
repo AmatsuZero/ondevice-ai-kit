@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUTC": "2026-11-15T23:47:45.834360+00:00",
+  "marker": "<!-- w3-dex-correspondence-20261116 -->",
+  "evidenceCommit": "3cf41c6a6d2b2c0de7c41a24da44b04a89b4506d",
+  "githubIssue": {
+    "id": 6903390954,
+    "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6903390954",
+    "sha256": "254cc48720ac058587296cfe3bdc9342c3d26a029b93e575e0329ac2b00744a5",
+    "readbackExact": true
+  },
+  "gitlabIssue": {
+    "id": 44875,
+    "url": null,
+    "sha256": "d1e7566d31df8cd326bf6b969cb94c472742a9d39b6fdb47b4a66d458f25c072",
+    "readbackExact": true
+  },
+  "githubWiki": {
+    "commit": "09176852c4a42b04526d2488ca570339ed09d9e2",
+    "sha256": "afd069bbafa086a64552c1de6d299bece4900a1c04267e0ceb45c3815656df26",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "afd069bbafa086a64552c1de6d299bece4900a1c04267e0ceb45c3815656df26",
+    "readbackExact": true
+  },
+  "wikiContentSHA256Matches": true,
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "goalSnapshotStatus": "active",
+  "classesPerAPK": 124,
+  "classComparisons": 496,
+  "methodDeclarationsPerAPK": 1967,
+  "methodDeclarationsAcrossComparisons": 7868,
+  "D8Executions": 6,
+  "newKotlinCompilations": 0,
+  "newAPKBuilds": 0,
+  "newDeviceCalls": 0,
+  "frozenFilesVerified": 161,
+  "initialProtectedContentUnchanged": 172,
+  "concurrentOutsideSliceChangesPreserved": 4
+}

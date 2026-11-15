@@ -1,3 +1,7 @@
+## 2026-11-16 W3 JVM→DEX 对应已双端记录
+
+3cf41c6及[同步收据](validation/w3-dex-correspondence-sync-20261116.json)：四APK各124runtime类完整原反汇编文本一致，真实DEX损坏负例拒收；GH#15 6903390954/GL#15 44875、GH Wiki0917685及双Wiki SHAafd069bb…df26已逐字回读。只接受该P1子项；完整native/输入、最终生产采用与P2–P4/R4/R5/W3仍open，源码未push。
+
 ## W3 DEX 证据状态（2026-11-16，本地已接受 DEX 子项）
 
 新增 P1 JVM→DEX 子项：D8 9.1.31/min-api26 实际 6 次执行；Debug direct 124/124；带 Android bootclasspath 的 intermediate 后接同一 merge 为 49/124，no-lib intermediate 后接同一无 `--lib` 的 no-desugaring merge 为 124/124。零新 Kotlin 编译/APK 构建/下载/设备/推理/生产编辑。只证明 124 运行时类完整 baksmali 原文本一致；P1/P2/P3/P4/R4/R5/W3 仍未完成，其中 P1 仅该 DEX 子项被父端接受，详见 [报告](validation/w3-dex-correspondence-20261116.md)。

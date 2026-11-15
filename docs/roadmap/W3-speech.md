@@ -1,3 +1,7 @@
+## 2026-11-16：四 APK 的 DEX 对应子项已提交及双端记录
+
+本地3cf41c6（64文件）；[同步收据](../validation/w3-dex-correspondence-sync-20261116.json)记录GH#15 comment6903390954/GL#15 note44875及GH Wiki0917685，双Wiki SHAafd069bb…df26逐字回读相同。两免费hy3完整终态；四APK各124runtime类完整baksmali原文本相同（496类比较），真实DEX损坏负例拒收，161freeze保持。172原内容未变，4并发范围外变化保留，非176全部未变；零新Kotlin编译/APK构建/下载/设备，D8实际6次。历史AGP bootclasspath、完整native/组成/生产接受和R4/R5仍缺，P1–P4/W3保持open、goal active；源码未push，marker已用勿重发。
+
 ## W3 P1 JVM→DEX 对应性子项（2026-11-16，本地已接受 DEX 子项）
 
 新增父端已接受的具体子项：四个既有 APK 的 124 个运行时类，完整 baksmali 原文本相等（496 类比较、7868 `.method` 声明；每 APK 124/1967，声明含 native/abstract）。仅限原文本，不含 whole DEX/语义等价，排除 18 个 SDK backend 类以及任何其它 App/native 类。详见 [报告](../validation/w3-dex-correspondence-20261116.md)。P1/W3 仍开放，生产采纳未完成。

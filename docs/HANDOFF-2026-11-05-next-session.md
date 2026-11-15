@@ -1,3 +1,7 @@
+## 2026-11-16 W3 DEX 对应已提交及双端同步
+
+本地3cf41c6精确64文件；GH#15 comment6903390954/GL#15 note44875/GH Wiki0917685及双Wiki SHAafd069bbafa086a64552c1de6d299bece4900a1c04267e0ceb45c3815656df26逐字回读，[收据](validation/w3-dex-correspondence-sync-20261116.json)。marker已用勿重发，源码未push；两hy3及三发布均终态、无待poll。四APK各124runtime类完整baksmali文本一致，496类比较/每APK1967方法声明（含native/abstract），非wholeDEX字节或形式语义证明；首75类差异/有无bootclasspath控制及真实DEX损坏负例全保留。D8实际6次，零新Kotlin编译/APK构建/下载/设备；161freeze保持，172原内容未变及4并发范围外变化均保留。无新Python缓存，零删除，canonical输入/全部原始证据保留。P1–P4/R4/R5/W3仍open、goal active；下一缺完整native/输入可信度/最终生产采用及发布接受，不缩减完整目标，不重放旧quota/源站429/USB/FILE。实体连接变化后才fresh未消费固定单文件合同，1.5GiB守卫不变。
+
 ## 2026-11-16 W3 DEX 本地已接受子项交接
 
 仅新增 P1 JVM→DEX 运行时类对应性子项，父端已接受；报告在 [validation/w3-dex-correspondence-20261116.md](validation/w3-dex-correspondence-20261116.md)。父端已接受该 DEX 子项报告；commit/dual-publication 未完成前仅作 handoff，本稿不声称整体集成或已发布，源分支未推送。P1/P2/P3/P4/R4/R5/W3 仍未完成（P1 仅该 DEX 子项已接受）；R4 Android 24/65 在 1.5GiB 停止，R5 预算草案待定，55 NDK body 声明受 source-host 429 阻塞。无 USB/ADB/mic/AiAi/下载，不重试已知配额失败或 429。
