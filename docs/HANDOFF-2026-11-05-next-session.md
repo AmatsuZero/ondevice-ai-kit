@@ -1,3 +1,7 @@
+## 2026-11-15 W3 hy3限定复核已提交并双端同步
+
+本地2d2c659精确6文件；GH#15comment6894183734/GL#15note44862/GHWiki6272bf98709338e78ad3db6565d157df3f559849均逐字回读，双Wiki SHA 37dd1d7ccd9812e240760e78f27a85effd5330100474dd40bbd365fc782d3ef8一致，[同步收据](validation/w3-sdk-binding-hy3-review-sync-20261115.json)。marker已用勿重发，源码分支未push。hy3本轮新复核及全部发布进程均终态，无待poll句柄；173原字节或共享余字节/161freeze/diff-check通过，零新构建/设备。历史SDK限定增量接受，不是最新HEAD/完整P1或P4；P1–P4/R4/R5/W3仍open、goal active。下一ORT嵌套27项实际组成与通知选材、最终生产采用/发布接受，或实体连接变化后的固定合同真机验收；不重试旧quota、旧批次/构建或USB恢复循环。
+
 ## 2026-11-15 W3 hy3已补交历史SDK消费绑定限定复核
 
 新免费hy3请求68.813s完整success、无quota/已观察工具事件，accept_bounded_increment；唯一LOW为历史“当前”措辞已用前缀和closure汇总处置，[验证](validation/w3-sdk-binding-hy3-review-20261115.md)。接受只限a18292ac/6de95f56历史绑定，最新native通知候选为51b705c/5ae065d2；旧材料/旧hy4free429不改、不重试。本次未重算二进制/构建/设备或法律/P4接受，P1–P4/R4/R5/W3仍open。该hy3请求已终态，无旧句柄待poll；先前native双端同步见7a57cb8及收据，源码未push。下一ORT嵌套27项实际组成/通知选择与最终App/P4或实体连接变化后的固定合同验收；不重复旧库扫描/构建/USB循环。
