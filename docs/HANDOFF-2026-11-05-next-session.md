@@ -1,3 +1,7 @@
+## 2026-11-15 W3 native通知已提交并双端同步
+
+本地51b705c精确50文件；GH#15comment6894114254/GL#15note44861/GHWikifc260f8efed10553efbd94e9393f914d74fc1871均逐字回读，双Wiki SHA 0666076e20c233797db4d49f2d3573e535d4ced549b17cac84c058c7d2fc5937一致，[同步收据](validation/w3-native-notice-integration-sync-20261115.json)。新marker已用勿重发，源码分支未push。三原许可空白诊断按原字节保留，其他提交文字diff-check0；173保护余字节/161freeze通过，无设备操作。P1–P4/R4/R5/W3仍open；用户选择hy3有效，另一个历史SDK绑定的限定只读复核已启动于.omx/artifacts/w3-sdk-binding-hy3-review-20261115T121231Z，尚待终态，不能按旧hy4/native429误报hy3停用或计独立发布通过。
+
 ## 2026-11-15 W3 native通知与修改说明已集成并验收
 
 免费hy3三请求均完整交付且无quota；23原文本452769B及index/修改说明共25新资产，加原JVM合计36项550583B。完整候选离线AAR/lint/隔离发布11.135s通过，独立Maven APK7.709s通过，36资产原字节保留、四ABI16SO同固定runtime，六删除/改单字节负例拒收。[验证](validation/w3-native-notice-integration-20261115.md)。首父绑定漏Darts可选sourceManifest及不完整提前构建原件保留且不计通过；新m2-complete才是已验候选。ORT两sed命令不等于所有VERSION被删，四ABI所示多行VERSION仍在，新解释已记录、旧材料不改。173原保护/161freeze收尾通过，零设备/下载/模型变更。P1–P4/R4/R5/W3仍open，下一完整递归组成/ORT嵌套27项与独立发布复核；不重复原429、旧文件批次或USB恢复，无实体连接变化不重探。当前代码待精确提交及新marker双端同步，源码未push。

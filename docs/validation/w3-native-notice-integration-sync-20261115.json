@@ -1,0 +1,32 @@
+{
+  "marker": "<!-- w3-native-notice-integration-20261115 -->",
+  "sourceCommit": "51b705c65e049526a188cb19d781ced7c01ed025",
+  "issues": {
+    "gh": {
+      "id": 6894114254,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6894114254",
+      "sha256": "b817db7cd0ba675f4676ca58db6804978579a46e7f7c4f88a9389cbe225bbaf2",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44861,
+      "url": null,
+      "sha256": "5a8395738aaaa2d41f405d40acaf64f07e7ce342383906a9935721c4df16a920",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "fc260f8efed10553efbd94e9393f914d74fc1871",
+    "sha256": "0666076e20c233797db4d49f2d3573e535d4ced549b17cac84c058c7d2fc5937",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "0666076e20c233797db4d49f2d3573e535d4ced549b17cac84c058c7d2fc5937",
+    "readbackExact": true
+  },
+  "wikiBytesEqual": true,
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "rawPublicationDir": ".omx/artifacts/w3-native-notice-integration-20261115T115026Z/publication"
+}
