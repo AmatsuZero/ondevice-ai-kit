@@ -1,3 +1,7 @@
+## 2026-11-15 W3 hy3完成NDK补丁选择限定增量
+
+[验证](validation/w3-ndk-runtime-patch-selection-20261115.md)：两版metadata活动集合75/59与134声明精确对应，76正文保留/58缺失（56来源站429、2错误patch URL404）；额外BUILD.md404和8份未落盘r30模块分开计数。r27d生成器只序列化成功应用声明，不能外推r30或历史执行/最终保留；17项仅按路径分类，6tree/40edge通过。三个免费hy3完整终态，首稿拒收、修正版加guard精确两替换已集成；原native/hy4free429不重试。来源站停止新请求，下一用已有四原许可离线集成与真实AAR/独立Maven APK保留验收，不待源站恢复。当前63生产通知未改、零新构建/设备/模型或runtime二进制下载；P1–P4/R4/R5/W3保持open、goal active，完整目标不缩减。保护中并发F08更新保留排除；本次严格保护初检因并发更新失败原件保留，非模型或构建错误。源码分支不push，当前待精确本地提交和双端同步。
+
 ## 2026-11-15 W3 hy3默认链接规则已提交同步
 
 本地242b829精确39文件；GH#15comment6895513815/GL#15note44865/GHWiki945320251bbac4f6f3d74894ad32b9d3b7876926均逐字回读，双Wiki SHA9aa9e55a1659d69376b53a93f1302efeb26874f7f37bec990dacf37411c6b90f一致，[收据](validation/w3-cxx-linkage-rules-sync-20261115.json)。新marker已用勿重发，源码分支未push；三hy3/三发布进程均终态，无待poll。34材料文件/151441B payload逐项hash、171原保护/共享余字节、161freeze/diff-check通过，三F08范围外并发更新保留排除；63生产通知无diff。零新构建/设备/ELF重扫/模型或runtime二进制下载；P1–P4/R4/R5/W3全open、goal active。下一runtime相关patch/notice适用性、输入覆盖与可信度接受及最终生产采用/发布复审；实体连接变化后再fresh固定未消费合同。不要重试原quota、重取已验材料、旧FILE/heap或USB恢复循环；CMake默认规则不能替代历史archive抽取/最终保留。

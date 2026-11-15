@@ -1,0 +1,126 @@
+)]}'
+{
+  "id": "549605a0af536671af98427c9e15e47f28faf167",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "aed151755249fe8f9fe814449727dcdf247fdb46",
+      "name": "Add-cmake-c-cxx-asm-linker-flags-v2.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "04ceae749fe70ddacd1a03fe7549dee456e858b4",
+      "name": "Add-stubs-and-headers-for-nl_types-APIs-v2.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "b947a2c906f97c08bd9c75fae5c20b5f5664b54f",
+      "name": "Add-stubs-and-headers-for-nl_types-APIs.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "b5536f2236fa15c64d8eef9ba7d9acb43ada1e1f",
+      "name": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "3c51f17d513a6d2f583574773c3d795a80d52fe9",
+      "name": "Disable-integer-sanitizer-for-__libcpp_blsr.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "8b60dd8c931413e788c4908c530e6cb37f6fa22c",
+      "name": "Disable-std-utilities-charconv-charconv.msvc-test.pa.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e13a088834336e02091a3914e4c643f1aa7c2ba7",
+      "name": "Disable-unsigned-integer-overflow-checks-for-s.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "c11ad4a54243b47bc23aee826bb7cb33bcce2696",
+      "name": "Disable-vfork-fork-events-v2.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "f782c280c7f0fa2f08d7c6c9792f66a70290ee72",
+      "name": "Fix-for-x86-ndk-sysroot-define.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "524892a05516d03c180793ce4ad1f69eda3a43be",
+      "name": "PATCHES.json"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "a7632e619c640bf9e2331628086e7a41cab818ed",
+      "name": "Revert-Clang-counted_by-Refactor-__builtin_dynamic_o.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "0bd8281203608543072b8b05f6410b1e274fcf0e",
+      "name": "Revert-Fix-diagnostic-for-stdatomic.h-before-C++23.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e639f6a027c37b7bb3c7cd9bd662b075aea24d3d",
+      "name": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "09d117f4f359bc8d25bba8a8094e9f5ade1bf461",
+      "name": "Revert-clang-Headers-Do-not-define-varargs-macros-for-__need___va_list.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "9dafbd412603c6189d4656add3f65834a22171f8",
+      "name": "Revert-libc-Don-t-implement-stdatomic.h-before-C-23-.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "c9ae05a2c40bf6deae61d5eb943849bd281712fb",
+      "name": "Revert-libc-Don-t-implement-stdatomic.h-before-C-23-v2.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "cfcb1db3e375d280bd587e884775b01f9cad7518",
+      "name": "Revert-libc-Don-t-implement-stdatomic.h-before-C-23-v3.patch"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "488923ca135f0b1ab3416aeba6fceaed4a15d19c",
+      "name": "cherry"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "002b51a2ac695e9acb1a377adaa0532807f6275c",
+      "name": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "21533ee8f77a251f9143f16c9043f8a68e419dae",
+      "name": "move-cxa-demangle-into-libcxxdemangle.patch"
+    }
+  ]
+}

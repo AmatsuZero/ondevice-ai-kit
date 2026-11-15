@@ -1,3 +1,7 @@
+## 2026-11-15：hy3完成NDK runtime补丁选择补证
+
+[验证](../validation/w3-ndk-runtime-patch-selection-20261115.md)及材料保留134声明/75与59活动metadata精确对应、76正文和58缺失；17项路径分类不等于最终链接/保留，r27d applied-success生成器不外推r30。六tree/40edge已核，cherry正文未逐一绑定预期tree blob。来源站429停新请求，2错误patch URL及额外BUILD.md404/r30落盘失败保留，不伪作完整取证。免费hy3三请求完整终态，修正版加guard两处替换集成；四根许可仍为未来候选，下一离线通知集成及独立Maven APK保留验收。当前63生产通知未改、零新构建/设备/模型或runtime二进制下载；P1–P4/R4/R5/W3完整范围均open，原quota/旧FILE/USB循环不重试。
+
 ## 2026-11-15：hy3默认链接规则已双端记录
 
 本地242b829精确39文件；GH#15comment6895513815/GL#15note44865/GH Wiki9453202逐字回读，双Wiki SHA9aa9e55a…一致，[同步收据](../validation/w3-cxx-linkage-rules-sync-20261115.json)。三个免费hy3请求均完整终态，首稿拒收/修正版集成/限定复核接受保留；34材料文件、171原保护余字节、三F08并发文件排除及161freeze已核，63生产通知未改。源码未push、零新构建/设备；P1–P4/R4/R5/W3仍open、完整目标保持。下一runtime补丁/适用通知及输入覆盖可信度；无连接变化不重试USB/旧FILE。

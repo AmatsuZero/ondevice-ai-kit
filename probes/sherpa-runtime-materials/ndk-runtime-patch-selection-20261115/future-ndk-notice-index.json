@@ -1,0 +1,166 @@
+{
+  "path": "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/index.json",
+  "status": "future_candidate_only_not_integrated",
+  "candidateOnly": true,
+  "integratedIntoProduction": false,
+  "incomplete": true,
+  "finalBinaryPresenceVerified": false,
+  "currentProductionAssetCountUnchanged": 63,
+  "noticePolicy": {
+    "copyMode": "verbatim_original_component_root_license_txt",
+    "preserveApache2LlvmExceptionAndOriginalLegacyNotices": true,
+    "regenerateOrSummarize": false,
+    "replaceWithGenericSpdxText": false,
+    "includeWholeToolchainNotice": false,
+    "claimCompleteLegalConditions": false
+  },
+  "sourceRevisionBindings": [
+    {
+      "tag": "ndk-r27d",
+      "llvmBaseRevision": "3c92011b600bdf70424e2547594dd461fe411a41"
+    },
+    {
+      "tag": "ndk-r30",
+      "llvmBaseRevision": "2d287f51eff2a5fbf84458a33f7fb2493cf67965"
+    }
+  ],
+  "sourceRetentionMap": {
+    "identityBasis": "original source relative path plus canonical retained path plus bytes plus sha256",
+    "match": "byte-for-byte across fixed r27d/r30 LLVM BASE revisions",
+    "canonicalCopyReusedForR30": true
+  },
+  "uniqueDestinationCount": 4,
+  "components": [
+    {
+      "component": "compiler-rt",
+      "destination": "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/compiler-rt/LICENSE.TXT",
+      "selectionStatus": "future_candidate_only_not_integrated",
+      "sources": [
+        {
+          "tag": "ndk-r27d",
+          "originalIdentity": {
+            "llvmBaseRevision": "3c92011b600bdf70424e2547594dd461fe411a41",
+            "originalSourceRelativePath": "ndk-r27d/llvm-base/compiler-rt/LICENSE.TXT"
+          },
+          "canonicalRetentionIdentity": {
+            "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/compiler-rt/LICENSE.TXT",
+            "bytes": 16708,
+            "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d"
+          }
+        },
+        {
+          "tag": "ndk-r30",
+          "originalIdentity": {
+            "llvmBaseRevision": "2d287f51eff2a5fbf84458a33f7fb2493cf67965",
+            "originalSourceRelativePath": "ndk-r30/llvm-base/compiler-rt/LICENSE.TXT"
+          },
+          "canonicalRetentionIdentity": {
+            "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/compiler-rt/LICENSE.TXT",
+            "bytes": 16708,
+            "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d"
+          }
+        }
+      ]
+    },
+    {
+      "component": "libcxx",
+      "destination": "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libcxx/LICENSE.TXT",
+      "selectionStatus": "future_candidate_only_not_integrated",
+      "sources": [
+        {
+          "tag": "ndk-r27d",
+          "originalIdentity": {
+            "llvmBaseRevision": "3c92011b600bdf70424e2547594dd461fe411a41",
+            "originalSourceRelativePath": "ndk-r27d/llvm-base/libcxx/LICENSE.TXT"
+          },
+          "canonicalRetentionIdentity": {
+            "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libcxx/LICENSE.TXT",
+            "bytes": 16703,
+            "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b"
+          }
+        },
+        {
+          "tag": "ndk-r30",
+          "originalIdentity": {
+            "llvmBaseRevision": "2d287f51eff2a5fbf84458a33f7fb2493cf67965",
+            "originalSourceRelativePath": "ndk-r30/llvm-base/libcxx/LICENSE.TXT"
+          },
+          "canonicalRetentionIdentity": {
+            "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libcxx/LICENSE.TXT",
+            "bytes": 16703,
+            "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b"
+          }
+        }
+      ]
+    },
+    {
+      "component": "libcxxabi",
+      "destination": "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libcxxabi/LICENSE.TXT",
+      "selectionStatus": "future_candidate_only_not_integrated",
+      "sources": [
+        {
+          "tag": "ndk-r27d",
+          "originalIdentity": {
+            "llvmBaseRevision": "3c92011b600bdf70424e2547594dd461fe411a41",
+            "originalSourceRelativePath": "ndk-r27d/llvm-base/libcxxabi/LICENSE.TXT"
+          },
+          "canonicalRetentionIdentity": {
+            "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libcxxabi/LICENSE.TXT",
+            "bytes": 16706,
+            "sha256": "e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c"
+          }
+        },
+        {
+          "tag": "ndk-r30",
+          "originalIdentity": {
+            "llvmBaseRevision": "2d287f51eff2a5fbf84458a33f7fb2493cf67965",
+            "originalSourceRelativePath": "ndk-r30/llvm-base/libcxxabi/LICENSE.TXT"
+          },
+          "canonicalRetentionIdentity": {
+            "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libcxxabi/LICENSE.TXT",
+            "bytes": 16706,
+            "sha256": "e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c"
+          }
+        }
+      ]
+    },
+    {
+      "component": "libunwind",
+      "destination": "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libunwind/LICENSE.TXT",
+      "selectionStatus": "future_candidate_only_not_integrated",
+      "sources": [
+        {
+          "tag": "ndk-r27d",
+          "originalIdentity": {
+            "llvmBaseRevision": "3c92011b600bdf70424e2547594dd461fe411a41",
+            "originalSourceRelativePath": "ndk-r27d/llvm-base/libunwind/LICENSE.TXT"
+          },
+          "canonicalRetentionIdentity": {
+            "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libunwind/LICENSE.TXT",
+            "bytes": 16706,
+            "sha256": "b5efebcaca80879234098e52d1725e6d9eb8fb96a19fce625d39184b705f7b6d"
+          }
+        },
+        {
+          "tag": "ndk-r30",
+          "originalIdentity": {
+            "llvmBaseRevision": "2d287f51eff2a5fbf84458a33f7fb2493cf67965",
+            "originalSourceRelativePath": "ndk-r30/llvm-base/libunwind/LICENSE.TXT"
+          },
+          "canonicalRetentionIdentity": {
+            "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libunwind/LICENSE.TXT",
+            "bytes": 16706,
+            "sha256": "b5efebcaca80879234098e52d1725e6d9eb8fb96a19fce625d39184b705f7b6d"
+          }
+        }
+      ]
+    }
+  ],
+  "nonClaims": [
+    "do not claim these four are now integrated into production assets",
+    "do not claim whole-toolchain notice is included",
+    "do not claim all toolchain components are present",
+    "do not claim complete legal conditions",
+    "do not claim final binary presence"
+  ]
+}

@@ -1,0 +1,330 @@
+)]}'
+{
+  "id": "0d8513cbd8db61a0f1656869a81639c07c8b6140",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "8335b067ea4e1894fc34d1c48f3c5ddc4b2b55dc",
+      "name": ".gitignore"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "MODULE_LICENSE_APACHE2"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "MODULE_LICENSE_BSD_LIKE"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "MODULE_LICENSE_MIT"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "86e3dd5008eeffa6eeb941b971fc218405474ab6",
+      "name": "OWNERS"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "3e510443c4d1a3b218e648014f6fc2490bacd3ee",
+      "name": "PREUPLOAD.cfg"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "a17806b050dd22492a97156737ec618781142410",
+      "name": "README.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "__init__.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "68a4fa99783a30603825b63cd262fb1184926b76",
+      "name": "android_llvm_next_flags.go"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "809c4a48fd3a8ee59275e7239cdf5b977b3dbdb9",
+      "name": "android_version.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "c626f8487ad94ab000303b0c52175b59307dcbd9",
+      "name": "base_builders.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "23cf020da8fcbd4fa55842990fc0c099e66eb632",
+      "name": "bisect_build.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "95d0ad13b44f58da2c288d80c4428db346d5ac14",
+      "name": "bisect_driver.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "6c47f25eee76a5202c0be584d9b2a1cbc3a2010a",
+      "name": "build.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e054426d0436e8a2ed1d876dafef08708eed193f",
+      "name": "builder_registry.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "294c727df416b0f1d2e85b1a53adee56017d6ba8",
+      "name": "builders.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "41a0b6df4d9bb43691bbfa302afd88522e189cf7",
+      "name": "cherrypick_cl.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "90ff4d3030360274c46ea7ced4c6511c5190e3d8",
+      "name": "cherrypick_cl_hook.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "1b6ecdc4aef7970ace21b6773a4d4f11f15cc65b",
+      "name": "clang-tidy.sh"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e44450c604fadc30050ff769c483354945bd1ebf",
+      "name": "configs.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "08d313b9f9e94cfaa99ce62d8c31725cbd5f57aa",
+      "name": "constants.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "bb9a63acdc42f179de659ff7bff4705d899a7b5a",
+      "name": "do_build.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "09ef37b81e39c09ad6cab6bcf29f4b4d36840c66",
+      "name": "do_kythe_xref.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "53027d668db0958a04c0265cd9be0cf00bda063e",
+      "name": "do_test_compiler.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "a8c926903c0cc98b0cc7f6ffa0b63b91dd2770b1",
+      "name": "docker"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "8f4cd57b87a22d297bd1b2ce4aa88e4f3b29b88f",
+      "name": "docs"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "6d2202fb1372f11aa57772e40dfdff4dba2af6ce",
+      "name": "fetch_kokoro_prebuilts.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "13fb1a9100ae75f3383301dfe86bad08ee373b4c",
+      "name": "hosts.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "c1ffccfa40756e27d220ca6948fc77e3f934abbb",
+      "name": "kernel-boot-tests"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "7779bbd53f12e7428a8a12662b08ae2911259b94",
+      "name": "kokoro"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "a29cf2b636ad8ab1fe300bf0e63e902fb628d25f",
+      "name": "kythe_vnames.json"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "f2cc1251acb901bf8c0371e4a4bc387e2b9dcd78",
+      "name": "kythe_xref.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "16840d942e73d7785b0081f92df571e2e9215cd9",
+      "name": "mapfile.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "ba0b15b3c74382cf154a80f12cd1cee86342041e",
+      "name": "merge_from_upstream.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "ebfcf3b570a5ce60ad729e22246bbb9949bf41cc",
+      "name": "orderfiles"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "1634697380e52c55cb31729207f6332092c078d8",
+      "name": "patches"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "c4e14112cfb4419627966f332ddd414d12f649eb",
+      "name": "paths.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "0f0e9c093339ebe9b633a1ad2b292003bfcb1dca",
+      "name": "py3_utils.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "5f0cb1c34c879cca5095e4f298f6b4355cf7aa57",
+      "name": "pylintrc"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "b375806025c5eef5b735ae7f0bb3447bcc8a787f",
+      "name": "remove-prebuilts.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "15b282f49b9935a42cce03b08f87f95024e6a504",
+      "name": "source_manager.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "bb59cf2e47ce5c079ab2ded4dae32cf71cbef7fd",
+      "name": "test"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "5ce14d916a05ac3b986a28c60069154e79933285",
+      "name": "test_compiler.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "09aca064b49c99f0c87c9a6e66a16112923a1968",
+      "name": "timer.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "2700a0f7dd12535db77c2a136ccbda29bd329834",
+      "name": "toolchain_errors.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "7cc65d519c37ef2992b3f6a6bc87a341af9d31a7",
+      "name": "toolchains.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "4bbc14043a3f10243c3e5e9fee4959e371ebbc9d",
+      "name": "trim_patch_data.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "b7100c770e3d69a2e979474385230ba8cad76b07",
+      "name": "update-binutils.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "3072f57303e72a2e57866ddb3533a583867ff7ce",
+      "name": "update-clang-stable.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "ac47b84873b5eedd0fa777f00b3ec08500f34365",
+      "name": "update-kernel-toolchain.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "aa587b157ebb0b0087d4981fba7a2eeaf2c462ad",
+      "name": "update-prebuilts.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "c3dd0fbec0ebb1c1ab9403d824ea6cc8512cbc3d",
+      "name": "utils.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "d2bd133f28b4f02c069486c8158397bac55fd167",
+      "name": "version.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "0064e8b58f3a227c0e19cc731f8e728b343cf674",
+      "name": "win_sdk.py"
+    }
+  ]
+}

@@ -1,3 +1,7 @@
+## W3 NDK source-info URL与批次/落盘边界（2026-11-15）
+
+r27d source-info的两个dash后缀patch URL实际404，固定formatter只认fullhash和可选`_vN`，将`-v0`/`-r522817`错归root；metadata实际为`cherry/`。仅记录正确路径，来源站429后不自动重取/切镜像。134请求以concurrency4先排程后汇总，76正文/58失败（56HTTP429、2patch404），不能描述fail-fast；独立BUILD.md404不计入58。独立r30模块五HTTP成功body因父目录未创建而未落盘、另三429，八份均不可作文件证据，也不能外推r27d生成器语义。恢复是新任务先创建目录/保留逐请求回执/验证真实字节；源站停线与hy3配额分开。r27d实际类名`DeviceLibcxxBuilder`，误找`LibCxxBuilder`或非唯一匹配导致本地准备失败，未调用模型；完整失败保留。证据`probes/sherpa-runtime-materials/ndk-runtime-patch-selection-20261115/`和`.omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/`。tree/blob/成功应用声明和源码路径分类均不证明历史执行、最终archive保留或完整许可适用性。
+
 ## W3 CMake默认规则：legacy与非legacy不可合并（2026-11-15）
 
 hy3首稿把Sherpa默认legacy与ORT显式legacy=false混在CMake Common分支，并把未设置STL的投影null写成命令观察，已拒收且原件保留。固定r30 wrapper默认legacy=true、include后return；只有该分支NOT ANDROID_STL时默认c++_static并加-static-libstdc++。ORT按实际CMake3.31.6 Common的无truthy STL/无旧GNU目录及unified分支条件解释；四ABI编译flags的-stdlib=libc++仍不证明历史最终静态archive抽取。查过的hooks/flags没有选择覆盖，不等于所有cache/target覆盖已穷尽。两既有CI ZIP的20/1成员无cache/link/response，不能重新下载同包或用进度行假充完整命令。父投影KeyError:logPath仅因observed-toolchains含一条path聚合row；保留首错，选择实际日志row恢复，不重跑编译。见[验证](validation/w3-cxx-linkage-rules-20261115.md)及`.omx/artifacts/w3-cxx-linkage-20261115T134154Z/`，全部W3门槛保持。

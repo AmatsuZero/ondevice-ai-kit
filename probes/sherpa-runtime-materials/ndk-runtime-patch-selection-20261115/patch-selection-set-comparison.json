@@ -1,0 +1,22 @@
+[
+  {
+    "tag": "ndk-r27d",
+    "numericClangRevision": 522817,
+    "metadataEntries": 131,
+    "activeAndroidEntries": 75,
+    "declaredSourceInfoEntries": 75,
+    "activeSetEqualsSourceInfoViaMetadata": true,
+    "activeOnly": [],
+    "declaredOnly": []
+  },
+  {
+    "tag": "ndk-r30",
+    "numericClangRevision": 574158,
+    "metadataEntries": 114,
+    "activeAndroidEntries": 59,
+    "declaredSourceInfoEntries": 59,
+    "activeSetEqualsSourceInfoViaMetadata": true,
+    "activeOnly": [],
+    "declaredOnly": []
+  }
+]

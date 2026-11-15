@@ -1,0 +1,14 @@
+{
+  "host": "android.googlesource.com",
+  "observedError": "HTTP Error 429: Too Many Requests",
+  "newHostRequestsStopped": true,
+  "automaticRetry": false,
+  "automaticAlternateHost": false,
+  "patchRequestsScheduledBeforeResultsObserved": 134,
+  "concurrency": 4,
+  "successfulRetainedPatches": 76,
+  "failedPatchRequests": 58,
+  "r30BuilderLostBodies": "five successful HTTP bodies were not retained because destination parent was absent; not accepted as source evidence",
+  "sourceGenerationSemanticsConfirmedForR27dOnly": true,
+  "hy3LaneUnaffected": true
+}

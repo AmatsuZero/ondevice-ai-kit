@@ -1,0 +1,3926 @@
+[
+  {
+    "id": "ndk-r27d:1",
+    "tag": "ndk-r27d",
+    "label": "79a32609759af317a62184c2c7b1300263a336c8-v0.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "79a32609759af317a62184c2c7b1300263a336c8-v0.patch",
+    "metadataPatchPath": "cherry/79a32609759af317a62184c2c7b1300263a336c8-v0.patch",
+    "declaredURLPathMatchesMetadata": false,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [hwasan] Remove memory attrs from instrumented functions. (#92974)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/79a32609759af317a62184c2c7b1300263a336c8-v0.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525365
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 404: Not Found",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:2",
+    "tag": "ndk-r27d",
+    "label": "9a2fd97d391caf1060e303f636d7113501788d2f-r522817.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "9a2fd97d391caf1060e303f636d7113501788d2f-r522817.patch",
+    "metadataPatchPath": "cherry/9a2fd97d391caf1060e303f636d7113501788d2f-r522817.patch",
+    "declaredURLPathMatchesMetadata": false,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Reapply^2 \"[HWASan] remove incorrectly inferred attributes\" (#106622) (#106816)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/9a2fd97d391caf1060e303f636d7113501788d2f-r522817.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 548556
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 404: Not Found",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:3",
+    "tag": "ndk-r27d",
+    "label": "Add-cmake-c-cxx-asm-linker-flags.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Add-cmake-c-cxx-asm-linker-flags.patch",
+    "metadataPatchPath": "Add-cmake-c-cxx-asm-linker-flags.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Add cmake c,cxx,asm,linker flags"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Add-cmake-c-cxx-asm-linker-flags.patch",
+      "version_range": {
+        "from": 510928,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "82db3a79b15b628560e212a5097183333e2efab41a94a2dae70d7ccd81e8084a",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/bolt/CMakeLists.txt b/bolt/CMakeLists.txt"
+    ]
+  },
+  {
+    "id": "ndk-r27d:4",
+    "tag": "ndk-r27d",
+    "label": "Add-stubs-and-headers-for-nl_types-APIs.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Add-stubs-and-headers-for-nl_types-APIs.patch",
+    "metadataPatchPath": "Add-stubs-and-headers-for-nl_types-APIs.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Add stubs and headers for nl_types APIs."
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Add-stubs-and-headers-for-nl_types-APIs.patch",
+      "version_range": {
+        "from": 370808,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "bba2c01db66c2e29d29b600c342a258b6bb0cb5a0428d22870385bb1065263fe",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/openmp/runtime/src/CMakeLists.txt b/openmp/runtime/src/CMakeLists.txt",
+      "diff --git a/openmp/runtime/src/android/nl_types.h b/openmp/runtime/src/android/nl_types.h",
+      "diff --git a/openmp/runtime/src/android/nltypes_stubs.cpp b/openmp/runtime/src/android/nltypes_stubs.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:5",
+    "tag": "ndk-r27d",
+    "label": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "metadataPatchPath": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Increase max allocation size to allow BOLTing clang and rustc"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+      "version_range": {
+        "from": 450784,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "f296dee815f856aefb4eefb736588cb9441940742c2d03d197a7f5c9e675695f",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/bolt/runtime/instr.cpp b/bolt/runtime/instr.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:6",
+    "tag": "ndk-r27d",
+    "label": "Bail out jump threading on indirect branches (#103688)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/3c9022c965b85951f30af140da591f819acef8a0.patch",
+    "metadataPatchPath": "cherry/3c9022c965b85951f30af140da591f819acef8a0.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Bail out jump threading on indirect branches (#103688)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/3c9022c965b85951f30af140da591f819acef8a0.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 549232
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "eb5fcd1c8740efc8b4096b8ed41b8b0ce5aa4075d85f14f54f0d8b6323b7c2d7",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Transforms/Utils/Local.cpp b/llvm/lib/Transforms/Utils/Local.cpp",
+      "diff --git a/llvm/test/Transforms/SimplifyCFG/switch-branch-fold-indirectbr-102351.ll b/llvm/test/Transforms/SimplifyCFG/switch-branch-fold-indirectbr-102351.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:7",
+    "tag": "ndk-r27d",
+    "label": "Carving out -Wformat warning about scoped enums into a",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/73ed2153beb529973741344874c0084d24c2f268.patch",
+    "metadataPatchPath": "cherry/73ed2153beb529973741344874c0084d24c2f268.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Carving out -Wformat warning about scoped enums into a subwarning (#88595)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/73ed2153beb529973741344874c0084d24c2f268.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 534384
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "d79d0ac1bba0f1b5aea0c4500f0e7034f7d78680367cd67b6f0c7f361dd6db34",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Sema/SemaChecking.cpp b/clang/lib/Sema/SemaChecking.cpp",
+      "diff --git a/clang/test/FixIt/format-darwin-enum-class.cpp b/clang/test/FixIt/format-darwin-enum-class.cpp",
+      "diff --git a/clang/test/FixIt/format.cpp b/clang/test/FixIt/format.cpp",
+      "diff --git a/clang/test/SemaCXX/format-strings.cpp b/clang/test/SemaCXX/format-strings.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:8",
+    "tag": "ndk-r27d",
+    "label": "Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+    "metadataPatchPath": "Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Disable PhaseOrdering ARM arm_mult_q15.ll test"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+      "version_range": {
+        "from": 510928,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "a09f2241e469a1e609b094ffcaeb68f496c82905e1caaa82ce9de9b81e01df82",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/test/Transforms/PhaseOrdering/ARM/arm_mult_q15.ll b/llvm/test/Transforms/PhaseOrdering/ARM/arm_mult_q15.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:9",
+    "tag": "ndk-r27d",
+    "label": "Disable-vfork-fork-events.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Disable-vfork-fork-events.patch",
+    "metadataPatchPath": "Disable-vfork-fork-events.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Disable vfork/fork events"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Disable-vfork-fork-events.patch",
+      "version_range": {
+        "from": 468909,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "a6e4d97d059894bae82a6af7c26b2af4c97a0a3c3c1255c98e8a1fa475ef65e9",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunicationClient.cpp b/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunicationClient.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:10",
+    "tag": "ndk-r27d",
+    "label": "Do not require external uses for roots and single use for",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/18473eb108e29c7c9d9fcb5d0d8c271948aca330.patch",
+    "metadataPatchPath": "cherry/18473eb108e29c7c9d9fcb5d0d8c271948aca330.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [SLP]Do not require external uses for roots and single use for other instructions in computeMinimumValueSizes. (#72679)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/18473eb108e29c7c9d9fcb5d0d8c271948aca330.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523832
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "e6b6fcd609d815fd041bf33cdcef5ec8f3e2e7fa50cf93b4d6dde3c0ed057074",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Transforms/Vectorize/SLPVectorizer.cpp b/llvm/lib/Transforms/Vectorize/SLPVectorizer.cpp",
+      "diff --git a/llvm/test/Transforms/SLPVectorizer/X86/int-bitcast-minbitwidth.ll b/llvm/test/Transforms/SLPVectorizer/X86/int-bitcast-minbitwidth.ll",
+      "diff --git a/llvm/test/Transforms/SLPVectorizer/X86/minbitwidth-transformed-operand.ll b/llvm/test/Transforms/SLPVectorizer/X86/minbitwidth-transformed-operand.ll",
+      "diff --git a/llvm/test/Transforms/SLPVectorizer/X86/root-trunc-extract-reuse.ll b/llvm/test/Transforms/SLPVectorizer/X86/root-trunc-extract-reuse.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:11",
+    "tag": "ndk-r27d",
+    "label": "Don't perform ODR checks in GMF",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/a0b6747804e46665ecfd00295b60432bfe1775b6.patch",
+    "metadataPatchPath": "cherry/a0b6747804e46665ecfd00295b60432bfe1775b6.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [C++20] [Modules] Don't perform ODR checks in GMF"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/a0b6747804e46665ecfd00295b60432bfe1775b6.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525833
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "7fbc8acb87359ea470402256ac1b2fb34baac6dc966818216985a105a2fec7a1",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/docs/ReleaseNotes.rst b/clang/docs/ReleaseNotes.rst",
+      "diff --git a/clang/include/clang/Serialization/ASTReader.h b/clang/include/clang/Serialization/ASTReader.h",
+      "diff --git a/clang/lib/Serialization/ASTReader.cpp b/clang/lib/Serialization/ASTReader.cpp",
+      "diff --git a/clang/lib/Serialization/ASTReaderDecl.cpp b/clang/lib/Serialization/ASTReaderDecl.cpp",
+      "diff --git a/clang/lib/Serialization/ASTWriter.cpp b/clang/lib/Serialization/ASTWriter.cpp",
+      "diff --git a/clang/lib/Serialization/ASTWriterDecl.cpp b/clang/lib/Serialization/ASTWriterDecl.cpp",
+      "diff --git a/clang/test/Modules/concept.cppm b/clang/test/Modules/concept.cppm",
+      "diff --git a/clang/test/Modules/no-eager-load.cppm b/clang/test/Modules/no-eager-load.cppm",
+      "diff --git a/clang/test/Modules/polluted-operator.cppm b/clang/test/Modules/polluted-operator.cppm"
+    ]
+  },
+  {
+    "id": "ndk-r27d:12",
+    "tag": "ndk-r27d",
+    "label": "Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "metadataPatchPath": "Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Ensure that we use our toolchain's lipo, and not the system version"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+      "version_range": {
+        "from": 407598,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "be814908517462677660c8aff7485e5867c1cd1e6e91bc6aeaa57a7c22f7497b",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/CMakeLists.txt b/clang/CMakeLists.txt",
+      "diff --git a/clang/runtime/CMakeLists.txt b/clang/runtime/CMakeLists.txt",
+      "diff --git a/compiler-rt/cmake/Modules/AddCompilerRT.cmake b/compiler-rt/cmake/Modules/AddCompilerRT.cmake",
+      "diff --git a/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake b/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake",
+      "diff --git a/llvm/cmake/modules/LLVMExternalProjectUtils.cmake b/llvm/cmake/modules/LLVMExternalProjectUtils.cmake"
+    ]
+  },
+  {
+    "id": "ndk-r27d:13",
+    "tag": "ndk-r27d",
+    "label": "Fix MFS warning format",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/3ea92ea2f9d236569f82825cdba6d59bcc22495c.patch",
+    "metadataPatchPath": "cherry/3ea92ea2f9d236569f82825cdba6d59bcc22495c.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Fix MFS warning format"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/3ea92ea2f9d236569f82825cdba6d59bcc22495c.patch",
+      "version_range": {
+        "from": 510928,
+        "until": 525168
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "b2d4db333949d3686f095a96bf96efc850f1af6c32c313c6abe4567e9ed4b67c",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/CodeGen/TargetPassConfig.cpp b/llvm/lib/CodeGen/TargetPassConfig.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:14",
+    "tag": "ndk-r27d",
+    "label": "Fix __isOSVersionAtLeast for Android (#80496)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch",
+    "metadataPatchPath": "cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Fix __isOSVersionAtLeast for Android (#80496)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 528245
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "5cddb2be6d78db60acb8c04405df535cc13dcf801e9250b6a842154ff1b0fe54",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/compiler-rt/lib/builtins/os_version_check.c b/compiler-rt/lib/builtins/os_version_check.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:15",
+    "tag": "ndk-r27d",
+    "label": "Fix test failure if CLANG_VENDOR contains spaces (#81017)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/d6c2cbbc6513bd412b34f3bf70e21b5a363b2fd9.patch",
+    "metadataPatchPath": "cherry/d6c2cbbc6513bd412b34f3bf70e21b5a363b2fd9.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Fix test failure if CLANG_VENDOR contains spaces (#81017)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/d6c2cbbc6513bd412b34f3bf70e21b5a363b2fd9.patch",
+      "version_range": {
+        "from": 518518,
+        "until": 526967
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "0e22e2a2e521e1f2b4cfaf48200b3aab297db78b9c295ba93eafa1276d6ec3c3",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/utils/UpdateTestChecks/common.py b/llvm/utils/UpdateTestChecks/common.py"
+    ]
+  },
+  {
+    "id": "ndk-r27d:16",
+    "tag": "ndk-r27d",
+    "label": "Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+    "metadataPatchPath": "Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Ignore flags that typically get used with bpf but ar"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+      "version_range": {
+        "from": 510928,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "6dc9e769fe4e635690364c46ef70a49664f9fd2c6a47f795851a40e4bddc1281",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Driver/ToolChains/Clang.cpp b/clang/lib/Driver/ToolChains/Clang.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:17",
+    "tag": "ndk-r27d",
+    "label": "Move raw_string_ostream back to raw_ostream.cpp (#79224)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/bb65f5a5d95736cf08b282c1ded7f5cceed5fd7e.patch",
+    "metadataPatchPath": "cherry/bb65f5a5d95736cf08b282c1ded7f5cceed5fd7e.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Move raw_string_ostream back to raw_ostream.cpp (#79224)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/bb65f5a5d95736cf08b282c1ded7f5cceed5fd7e.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525444
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "cad5f57b24bff096ed4eb68eb0352139a4535859668224ae525f3f117235edc5",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Support/raw_ostream.cpp b/llvm/lib/Support/raw_ostream.cpp",
+      "diff --git a/llvm/lib/Support/raw_socket_stream.cpp b/llvm/lib/Support/raw_socket_stream.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:18",
+    "tag": "ndk-r27d",
+    "label": "Reapply \"[Sema] Fix crash on invalid code with parenthesized",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch",
+    "metadataPatchPath": "cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Reapply \"[Sema] Fix crash on invalid code with parenthesized aggregate initialization\" (#76272)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 522920
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "6f396d7ca5cb7c6c6a7dbd24c7490f6697a8962cf90853574cdcc72ba47a03b9",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Sema/SemaInit.cpp b/clang/lib/Sema/SemaInit.cpp",
+      "diff --git a/clang/test/SemaCXX/crash-GH76228.cpp b/clang/test/SemaCXX/crash-GH76228.cpp",
+      "diff --git a/clang/test/SemaCXX/paren-list-agg-init.cpp b/clang/test/SemaCXX/paren-list-agg-init.cpp",
+      "diff --git a/libcxx/test/libcxx/utilities/expected/expected.expected/transform_error.mandates.verify.cpp b/libcxx/test/libcxx/utilities/expected/expected.expected/transform_error.mandates.verify.cpp",
+      "diff --git a/libcxx/test/libcxx/utilities/expected/expected.void/transform_error.mandates.verify.cpp b/libcxx/test/libcxx/utilities/expected/expected.void/transform_error.mandates.verify.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:19",
+    "tag": "ndk-r27d",
+    "label": "Remove-inline_asm-tests-for-now.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Remove-inline_asm-tests-for-now.patch",
+    "metadataPatchPath": "Remove-inline_asm-tests-for-now.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Remove inline_asm tests for now"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Remove-inline_asm-tests-for-now.patch",
+      "version_range": {
+        "from": 510928,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "6351e1e58adf250c1244287cd1378b2b710c19cd3e5754092efd334545159bfb",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/test/CodeGen/BPF/store_imm.ll b/llvm/test/CodeGen/BPF/store_imm.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:20",
+    "tag": "ndk-r27d",
+    "label": "Revert \"Reapply \"RegisterCoalescer: Add implicit-def of super",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/c4146121e940b6b853148c780568dee38b97382f.patch",
+    "metadataPatchPath": "cherry/c4146121e940b6b853148c780568dee38b97382f.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Revert \"Reapply \"RegisterCoalescer: Add implicit-def of super register when coalescing SUBREG_TO_REG\"\""
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/c4146121e940b6b853148c780568dee38b97382f.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523042
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "6a1887d2300ae58499b55660f8308fc2aa7c5d57b3e4277b1c80b9a8453729d7",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/CodeGen/RegisterCoalescer.cpp b/llvm/lib/CodeGen/RegisterCoalescer.cpp",
+      "diff --git a/llvm/test/CodeGen/AArch64/GlobalISel/arm64-pcsections.ll b/llvm/test/CodeGen/AArch64/GlobalISel/arm64-pcsections.ll",
+      "diff --git a/llvm/test/CodeGen/X86/coalescer-breaks-subreg-to-reg-liveness.ll b/llvm/test/CodeGen/X86/coalescer-breaks-subreg-to-reg-liveness.ll",
+      "diff --git a/llvm/test/CodeGen/X86/coalescer-implicit-def-regression-imp-operand-assert.mir b/llvm/test/CodeGen/X86/coalescer-implicit-def-regression-imp-operand-assert.mir",
+      "diff --git a/llvm/test/CodeGen/X86/coalescing-subreg-to-reg-requires-subrange-update.mir b/llvm/test/CodeGen/X86/coalescing-subreg-to-reg-requires-subrange-update.mir",
+      "diff --git a/llvm/test/CodeGen/X86/subreg-to-reg-coalescing.mir b/llvm/test/CodeGen/X86/subreg-to-reg-coalescing.mir"
+    ]
+  },
+  {
+    "id": "ndk-r27d:21",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[AArch64] merge index address with large offset into",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/915c3d9e5a2d1314afe64cd6116a3b6c9809ec90.patch",
+    "metadataPatchPath": "cherry/915c3d9e5a2d1314afe64cd6116a3b6c9809ec90.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Revert \"[AArch64] merge index address with large offset into base address\""
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/915c3d9e5a2d1314afe64cd6116a3b6c9809ec90.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525817
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "1aec727afef7dfd494fdc63f16ca573c603e6923fe26af401d3ca20aa6b95786",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/AArch64/AArch64InstrInfo.cpp b/llvm/lib/Target/AArch64/AArch64InstrInfo.cpp",
+      "diff --git a/llvm/lib/Target/AArch64/AArch64InstrInfo.h b/llvm/lib/Target/AArch64/AArch64InstrInfo.h",
+      "diff --git a/llvm/lib/Target/AArch64/AArch64LoadStoreOptimizer.cpp b/llvm/lib/Target/AArch64/AArch64LoadStoreOptimizer.cpp",
+      "diff --git a/llvm/test/CodeGen/AArch64/arm64-addrmode.ll b/llvm/test/CodeGen/AArch64/arm64-addrmode.ll",
+      "diff --git a/llvm/test/CodeGen/AArch64/large-offset-ldr-merge.mir b/llvm/test/CodeGen/AArch64/large-offset-ldr-merge.mir"
+    ]
+  },
+  {
+    "id": "ndk-r27d:22",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[LSR][TTI][RISCV] Disable terminator folding for",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/5ce067d592b78fd3142364e06bae4da2a3a1e944.patch",
+    "metadataPatchPath": "cherry/5ce067d592b78fd3142364e06bae4da2a3a1e944.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Revert \"[LSR][TTI][RISCV] Disable terminator folding for RISC-V.\""
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/5ce067d592b78fd3142364e06bae4da2a3a1e944.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523871
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "20afd203ebcbb99d1bd5d1d69d90994c07a87b9873b8349a8bfd258898f851f4",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/RISCVTargetTransformInfo.h b/llvm/lib/Target/RISCV/RISCVTargetTransformInfo.h",
+      "diff --git a/llvm/test/CodeGen/RISCV/branch-on-zero.ll b/llvm/test/CodeGen/RISCV/branch-on-zero.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/riscv-codegenprepare-asm.ll b/llvm/test/CodeGen/RISCV/riscv-codegenprepare-asm.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/fixed-vectors-fp-buildvec.ll b/llvm/test/CodeGen/RISCV/rvv/fixed-vectors-fp-buildvec.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/fixed-vectors-strided-load-store-asm.ll b/llvm/test/CodeGen/RISCV/rvv/fixed-vectors-strided-load-store-asm.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/sink-splat-operands-i1.ll b/llvm/test/CodeGen/RISCV/rvv/sink-splat-operands-i1.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/sink-splat-operands.ll b/llvm/test/CodeGen/RISCV/rvv/sink-splat-operands.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/vsetvli-insert-crossbb.ll b/llvm/test/CodeGen/RISCV/rvv/vsetvli-insert-crossbb.ll",
+      "diff --git a/llvm/test/Transforms/LoopStrengthReduce/RISCV/lsr-cost-compare.ll b/llvm/test/Transforms/LoopStrengthReduce/RISCV/lsr-cost-compare.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:23",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[PowerPC] Add test after #75271 on PPC. NFC.",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/ece1359857c547a156ed743643bccbfd0f09bf2a.patch",
+    "metadataPatchPath": "cherry/ece1359857c547a156ed743643bccbfd0f09bf2a.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Revert \"[PowerPC] Add test after #75271 on PPC. NFC. (#75616)\""
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/ece1359857c547a156ed743643bccbfd0f09bf2a.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523041
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "1b14f1b230fcf50702e62c6eeacf693546e125ed14d0349a636571eaec7c26fb",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/test/CodeGen/PowerPC/coalescer-remat-with-undef-implicit-def-operand.mir b/llvm/test/CodeGen/PowerPC/coalescer-remat-with-undef-implicit-def-operand.mir"
+    ]
+  },
+  {
+    "id": "ndk-r27d:24",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[RISCV][ISel] Combine scalable vector add/sub/mul",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/4e347b4e38b95bc455d0e620e11ac58fc0172a94.patch",
+    "metadataPatchPath": "cherry/4e347b4e38b95bc455d0e620e11ac58fc0172a94.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Revert \"[RISCV][ISel] Combine scalable vector add/sub/mul with zero/sign extension (#72340)\""
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/4e347b4e38b95bc455d0e620e11ac58fc0172a94.patch",
+      "version_range": {
+        "from": 522809,
+        "until": 522987
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "bd896c4a2c469613fe996499e601c8d53699f2c0bb561a44f4624c9b627d3e13",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/RISCVISelLowering.cpp b/llvm/lib/Target/RISCV/RISCVISelLowering.cpp",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/ctlz-sdnode.ll b/llvm/test/CodeGen/RISCV/rvv/ctlz-sdnode.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/vscale-vw-web-simplification.ll b/llvm/test/CodeGen/RISCV/rvv/vscale-vw-web-simplification.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:25",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[hwasan] Add fixed_shadow_base flag\" (#95435)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch",
+    "metadataPatchPath": "cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Revert \"[hwasan] Add fixed_shadow_base flag\" (#95435)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 539669
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "700c2cf3602782248f7dfeb2385afb059634156af0626732c5014d7858c76d70",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/compiler-rt/lib/hwasan/hwasan_flags.inc b/compiler-rt/lib/hwasan/hwasan_flags.inc",
+      "diff --git a/compiler-rt/lib/hwasan/hwasan_linux.cpp b/compiler-rt/lib/hwasan/hwasan_linux.cpp",
+      "diff --git a/compiler-rt/test/hwasan/TestCases/Linux/fixed-shadow.c b/compiler-rt/test/hwasan/TestCases/Linux/fixed-shadow.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:26",
+    "tag": "ndk-r27d",
+    "label": "Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+    "metadataPatchPath": "Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Revert [Driver] Allow target override containing . in executable name"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+      "version_range": {
+        "from": 521684,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "0aa4e90dff039eec1c942f8704d63377eb50bb3c70379b25868f95fd5dcfc883",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Driver/ToolChain.cpp b/clang/lib/Driver/ToolChain.cpp",
+      "diff --git a/clang/test/Driver/target-override.c b/clang/test/Driver/target-override.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:27",
+    "tag": "ndk-r27d",
+    "label": "Revert-Enable-IAS-In-Backend-v2.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Revert-Enable-IAS-In-Backend-v2.patch",
+    "metadataPatchPath": "Revert-Enable-IAS-In-Backend-v2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Revert Enable IAS In Backend"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Revert-Enable-IAS-In-Backend-v2.patch",
+      "version_range": {
+        "from": 484093,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "e8b7656917b56a30244d6e3dc9c5e6eaf64ff3783e215fbb228335ee281a5e80",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/BPF/MCTargetDesc/BPFMCAsmInfo.h b/llvm/lib/Target/BPF/MCTargetDesc/BPFMCAsmInfo.h",
+      "diff --git a/llvm/test/CodeGen/BPF/inline_asm.ll b/llvm/test/CodeGen/BPF/inline_asm.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:28",
+    "tag": "ndk-r27d",
+    "label": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "metadataPatchPath": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Revert Recommit [DAGCombiner] Transform `(icmp eq/ne (and X,C0),(shift X,C1))` to use rotate or to getter constants. (2nd Try)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+      "version_range": {
+        "from": 522817,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "fef9c036716421b14ea34759659d2d71f5007ea7ebf57848b817320ab28c4e80",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/CodeGen/SelectionDAG/DAGCombiner.cpp b/llvm/lib/CodeGen/SelectionDAG/DAGCombiner.cpp",
+      "diff --git a/llvm/test/CodeGen/X86/cmp-shiftX-maskX.ll b/llvm/test/CodeGen/X86/cmp-shiftX-maskX.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:29",
+    "tag": "ndk-r27d",
+    "label": "Support-for-WASM-as-native-IR.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "Support-for-WASM-as-native-IR.patch",
+    "metadataPatchPath": "Support-for-WASM-as-native-IR.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Support WASM as native IR"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Support-for-WASM-as-native-IR.patch",
+      "version_range": {
+        "from": 510928,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "5df3f02faed412eefd160b643f2ec5a81b58467798612377d163b92a5f88ed89",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Basic/Targets/WebAssembly.h b/clang/lib/Basic/Targets/WebAssembly.h",
+      "diff --git a/llvm/include/llvm/TargetParser/Triple.h b/llvm/include/llvm/TargetParser/Triple.h",
+      "diff --git a/llvm/lib/Target/WebAssembly/WebAssemblyISelLowering.cpp b/llvm/lib/Target/WebAssembly/WebAssemblyISelLowering.cpp",
+      "diff --git a/llvm/lib/Target/WebAssembly/WebAssemblyTargetMachine.cpp b/llvm/lib/Target/WebAssembly/WebAssemblyTargetMachine.cpp",
+      "diff --git a/llvm/lib/TargetParser/Triple.cpp b/llvm/lib/TargetParser/Triple.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:30",
+    "tag": "ndk-r27d",
+    "label": "[AArch64][Clang] Fix linker error for function",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/1be0d9d7d88a9bdabe6ef4d81720ddf4cf6f71c1.patch",
+    "metadataPatchPath": "cherry/1be0d9d7d88a9bdabe6ef4d81720ddf4cf6f71c1.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64][Clang] Fix linker error for function multiversioning (#74358)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/1be0d9d7d88a9bdabe6ef4d81720ddf4cf6f71c1.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525059
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "a6e0a1329e6dd8c7ff69a90371e462c226f50e9529d91bc41bdc4c86c32b1bff",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/CodeGen/CodeGenModule.cpp b/clang/lib/CodeGen/CodeGenModule.cpp",
+      "diff --git a/clang/test/CodeGen/attr-target-clones-aarch64.c b/clang/test/CodeGen/attr-target-clones-aarch64.c",
+      "diff --git a/clang/test/CodeGen/attr-target-version.c b/clang/test/CodeGen/attr-target-version.c",
+      "diff --git a/clang/test/CodeGenCXX/attr-target-clones-aarch64.cpp b/clang/test/CodeGenCXX/attr-target-clones-aarch64.cpp",
+      "diff --git a/clang/test/CodeGenCXX/attr-target-version.cpp b/clang/test/CodeGenCXX/attr-target-version.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:31",
+    "tag": "ndk-r27d",
+    "label": "[AArch64][FMV] Support feature MOPS in Function Multi",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch",
+    "metadataPatchPath": "cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64][FMV] Support feature MOPS in Function Multi Versioning. (#78788)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525237
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "7e7865989d89adbe02bd031c2407e7d3b8dd79c2861efb6c20fbc0f57d273d91",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/test/CodeGen/attr-target-version.c b/clang/test/CodeGen/attr-target-version.c",
+      "diff --git a/clang/test/Sema/attr-target-clones-aarch64.c b/clang/test/Sema/attr-target-clones-aarch64.c",
+      "diff --git a/clang/test/SemaCXX/attr-target-version.cpp b/clang/test/SemaCXX/attr-target-version.cpp",
+      "diff --git a/compiler-rt/lib/builtins/cpu_model/aarch64.c b/compiler-rt/lib/builtins/cpu_model/aarch64.c",
+      "diff --git a/compiler-rt/lib/builtins/cpu_model/aarch64/fmv/mrs.inc b/compiler-rt/lib/builtins/cpu_model/aarch64/fmv/mrs.inc",
+      "diff --git a/compiler-rt/lib/builtins/cpu_model/aarch64/hwcap.inc b/compiler-rt/lib/builtins/cpu_model/aarch64/hwcap.inc",
+      "diff --git a/llvm/include/llvm/TargetParser/AArch64TargetParser.h b/llvm/include/llvm/TargetParser/AArch64TargetParser.h"
+    ]
+  },
+  {
+    "id": "ndk-r27d:32",
+    "tag": "ndk-r27d",
+    "label": "[AArch64][GISel] Don't pointlessly lower G_TRUNC (#81479)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/070848c17c2944afa494d42d3ad42929f3379842.patch",
+    "metadataPatchPath": "cherry/070848c17c2944afa494d42d3ad42929f3379842.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64][GISel] Don't pointlessly lower G_TRUNC (#81479)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/070848c17c2944afa494d42d3ad42929f3379842.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 527460
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "f383d02c8ca7fa150d32649e80a527da59cb45b4dc109b59939e7ca3f49624af",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.cpp b/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.cpp",
+      "diff --git a/llvm/test/CodeGen/AArch64/GlobalISel/legalize-xtn.mir b/llvm/test/CodeGen/AArch64/GlobalISel/legalize-xtn.mir"
+    ]
+  },
+  {
+    "id": "ndk-r27d:33",
+    "tag": "ndk-r27d",
+    "label": "[Clang] Fix IsOverload for function templates (#77323)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/69066ab31959968ebcbca71f3872bdedef8fb8cd.patch",
+    "metadataPatchPath": "cherry/69066ab31959968ebcbca71f3872bdedef8fb8cd.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Clang] Fix IsOverload for function templates (#77323)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/69066ab31959968ebcbca71f3872bdedef8fb8cd.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523435
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "d58f2fe207461aabde53ef9855d4960ed83e792c5bc882aa2c6627fb26fe418a",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Sema/SemaOverload.cpp b/clang/lib/Sema/SemaOverload.cpp",
+      "diff --git a/clang/test/CXX/over/over.load/p2-0x.cpp b/clang/test/CXX/over/over.load/p2-0x.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:34",
+    "tag": "ndk-r27d",
+    "label": "[Clang][AST] Fix a crash on attaching doc comments (#78716)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/5f4ee5a2dfa97fe32ee62d1d67aa1413d5a059e6.patch",
+    "metadataPatchPath": "cherry/5f4ee5a2dfa97fe32ee62d1d67aa1413d5a059e6.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Clang][AST] Fix a crash on attaching doc comments (#78716)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/5f4ee5a2dfa97fe32ee62d1d67aa1413d5a059e6.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525852
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "8427cfcee703674b7907f66ac0cc0a2c9732c1ae17d103f84c40bd4693945b65",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/AST/ASTContext.cpp b/clang/lib/AST/ASTContext.cpp",
+      "diff --git a/clang/test/AST/ast-crash-doc-function-template.cpp b/clang/test/AST/ast-crash-doc-function-template.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:35",
+    "tag": "ndk-r27d",
+    "label": "[Clang][Sema] Tweak tryCaptureVariable for unevaluated",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/3d361b225fe89ce1d8c93639f27d689082bd8dad.patch",
+    "metadataPatchPath": "cherry/3d361b225fe89ce1d8c93639f27d689082bd8dad.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Clang][Sema] Tweak tryCaptureVariable for unevaluated lambdas (#93206)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/3d361b225fe89ce1d8c93639f27d689082bd8dad.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 538556
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "76304dc1d4e2cda6fa998f2ae5fef6b0c17765e3736189617c432c7158ca6aca",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/include/clang/AST/DeclBase.h b/clang/include/clang/AST/DeclBase.h",
+      "diff --git a/clang/lib/Parse/ParseExprCXX.cpp b/clang/lib/Parse/ParseExprCXX.cpp",
+      "diff --git a/clang/lib/Sema/SemaExpr.cpp b/clang/lib/Sema/SemaExpr.cpp",
+      "diff --git a/clang/lib/Sema/SemaLambda.cpp b/clang/lib/Sema/SemaLambda.cpp",
+      "diff --git a/clang/lib/Sema/TreeTransform.h b/clang/lib/Sema/TreeTransform.h",
+      "diff --git a/clang/test/SemaCXX/lambda-unevaluated.cpp b/clang/test/SemaCXX/lambda-unevaluated.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:36",
+    "tag": "ndk-r27d",
+    "label": "[Driver,CodeGen] Support -mtls-dialect= (#79256)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/36b4a9ccd9f7e04010476e6b2a311f2052a4ac20.patch",
+    "metadataPatchPath": "cherry/36b4a9ccd9f7e04010476e6b2a311f2052a4ac20.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Driver,CodeGen] Support -mtls-dialect= (#79256)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/36b4a9ccd9f7e04010476e6b2a311f2052a4ac20.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525716
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "b3b8ae99ca3362f2159d9d0a3fb151f60e6e4e296445b4be594cbdde4eabb97e",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/include/clang/Basic/CodeGenOptions.def b/clang/include/clang/Basic/CodeGenOptions.def",
+      "diff --git a/clang/include/clang/Driver/Options.td b/clang/include/clang/Driver/Options.td",
+      "diff --git a/clang/lib/CodeGen/BackendUtil.cpp b/clang/lib/CodeGen/BackendUtil.cpp",
+      "diff --git a/clang/lib/Driver/ToolChains/Clang.cpp b/clang/lib/Driver/ToolChains/Clang.cpp",
+      "diff --git a/clang/lib/Driver/ToolChains/CommonArgs.cpp b/clang/lib/Driver/ToolChains/CommonArgs.cpp",
+      "diff --git a/clang/lib/Driver/ToolChains/CommonArgs.h b/clang/lib/Driver/ToolChains/CommonArgs.h",
+      "diff --git a/clang/test/CodeGen/RISCV/tls-dialect.c b/clang/test/CodeGen/RISCV/tls-dialect.c",
+      "diff --git a/clang/test/Driver/tls-dialect.c b/clang/test/Driver/tls-dialect.c",
+      "diff --git a/llvm/include/llvm/TargetParser/Triple.h b/llvm/include/llvm/TargetParser/Triple.h"
+    ]
+  },
+  {
+    "id": "ndk-r27d:37",
+    "tag": "ndk-r27d",
+    "label": "[Driver] Add -fandroid-pad-segment/-fno-android-pad-segment",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/5133a8f5590d74d9d15631742a3d84f978394dbd.patch",
+    "metadataPatchPath": "cherry/5133a8f5590d74d9d15631742a3d84f978394dbd.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Driver] Add -fandroid-pad-segment/-fno-android-pad-segment (#77244)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/5133a8f5590d74d9d15631742a3d84f978394dbd.patch",
+      "version_range": {
+        "from": 510928,
+        "until": 524498
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "352b8f54f5c19fe91c33158c7cd4a00681fbecd443a92645df7b1a5931f0c515",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/include/clang/Driver/Options.td b/clang/include/clang/Driver/Options.td",
+      "diff --git a/clang/lib/Driver/ToolChains/Gnu.cpp b/clang/lib/Driver/ToolChains/Gnu.cpp",
+      "diff --git a/clang/test/Driver/Inputs/basic_android_tree/sysroot/usr/lib/crt_pad_segment.o b/clang/test/Driver/Inputs/basic_android_tree/sysroot/usr/lib/crt_pad_segment.o",
+      "diff --git a/clang/test/Driver/linux-ld.c b/clang/test/Driver/linux-ld.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:38",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Clean up R_RISCV_RELAX code. NFC",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/ccb99f221422b8de5e1ae04d3427f15878f7cd93.patch",
+    "metadataPatchPath": "cherry/ccb99f221422b8de5e1ae04d3427f15878f7cd93.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [ELF] Clean up R_RISCV_RELAX code. NFC"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/ccb99f221422b8de5e1ae04d3427f15878f7cd93.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525571
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "9f9411aaf7e49bbeed7e961ca7f02b0f13183b34a82164b6347d0cbd5e5336cc",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lld/ELF/Arch/RISCV.cpp b/lld/ELF/Arch/RISCV.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:39",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Fix terminology: TLS optimizations instead of TLS",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/849951f8759171cb6c74d3ccbcf154506fc1f0ae.patch",
+    "metadataPatchPath": "cherry/849951f8759171cb6c74d3ccbcf154506fc1f0ae.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [ELF] Fix terminology: TLS optimizations instead of TLS relaxation. NFC"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/849951f8759171cb6c74d3ccbcf154506fc1f0ae.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525574
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "0c288979f038a21586fb6cfd12dfdf6aa2ac7c0937ab4aea287f88894c8e044c",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lld/ELF/Relocations.cpp b/lld/ELF/Relocations.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:40",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Implement R_RISCV_TLSDESC for RISC-V",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/1117fdd7c16873eb389e988c6a39ad922bae0fd0.patch",
+    "metadataPatchPath": "cherry/1117fdd7c16873eb389e988c6a39ad922bae0fd0.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [ELF] Implement R_RISCV_TLSDESC for RISC-V"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/1117fdd7c16873eb389e988c6a39ad922bae0fd0.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525603
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "a558bdce9777e0fe0c2a123335d603a8bfe0821513c8048adb816a0cf1756520",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lld/ELF/Arch/RISCV.cpp b/lld/ELF/Arch/RISCV.cpp",
+      "diff --git a/lld/ELF/Relocations.cpp b/lld/ELF/Relocations.cpp",
+      "diff --git a/lld/test/ELF/riscv-tlsdesc-gd-mixed.s b/lld/test/ELF/riscv-tlsdesc-gd-mixed.s",
+      "diff --git a/lld/test/ELF/riscv-tlsdesc-relax.s b/lld/test/ELF/riscv-tlsdesc-relax.s",
+      "diff --git a/lld/test/ELF/riscv-tlsdesc.s b/lld/test/ELF/riscv-tlsdesc.s"
+    ]
+  },
+  {
+    "id": "ndk-r27d:41",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Support R_RISCV_SET_ULEB128/R_RISCV_SUB_ULEB128 in",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/3fa17954dedd59bfad9cef1778719fb6312a5949.patch",
+    "metadataPatchPath": "cherry/3fa17954dedd59bfad9cef1778719fb6312a5949.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [ELF] Support R_RISCV_SET_ULEB128/R_RISCV_SUB_ULEB128 in SHF_ALLOC sections (#77261)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/3fa17954dedd59bfad9cef1778719fb6312a5949.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523507
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "dea751af2677a9e9de5a9850412cd31544781b44460c8143572c29cecc082b9b",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lld/ELF/Arch/RISCV.cpp b/lld/ELF/Arch/RISCV.cpp",
+      "diff --git a/lld/ELF/InputSection.cpp b/lld/ELF/InputSection.cpp",
+      "diff --git a/lld/ELF/Relocations.cpp b/lld/ELF/Relocations.cpp",
+      "diff --git a/lld/ELF/Target.h b/lld/ELF/Target.h",
+      "diff --git a/lld/test/ELF/riscv-reloc-leb128.s b/lld/test/ELF/riscv-reloc-leb128.s"
+    ]
+  },
+  {
+    "id": "ndk-r27d:42",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Suppress --no-allow-shlib-undefined diagnostic when a",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/e390bda9782b461f10433aa6728acf87521e22a5.patch",
+    "metadataPatchPath": "cherry/e390bda9782b461f10433aa6728acf87521e22a5.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [ELF] Suppress --no-allow-shlib-undefined diagnostic when a SharedSymbol is overridden by a hidden visibility Defined which is later discarded"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/e390bda9782b461f10433aa6728acf87521e22a5.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525045
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "7969019e9960f00043525c578e8e77bf2524ae075451c6c7e262150371d3650a",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lld/ELF/InputFiles.cpp b/lld/ELF/InputFiles.cpp",
+      "diff --git a/lld/ELF/Symbols.h b/lld/ELF/Symbols.h",
+      "diff --git a/lld/ELF/Writer.cpp b/lld/ELF/Writer.cpp",
+      "diff --git a/lld/test/ELF/allow-shlib-undefined.s b/lld/test/ELF/allow-shlib-undefined.s"
+    ]
+  },
+  {
+    "id": "ndk-r27d:43",
+    "tag": "ndk-r27d",
+    "label": "[FMV] Change feature priorities according to ACLE. (#79316)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/f214933bc538c719403804069941de301487c39b.patch",
+    "metadataPatchPath": "cherry/f214933bc538c719403804069941de301487c39b.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [FMV] Change feature priorities according to ACLE. (#79316)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/f214933bc538c719403804069941de301487c39b.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525974
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:44",
+    "tag": "ndk-r27d",
+    "label": "[FMV] Use lexicographic order of feature names when mangling.",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/e81ef463f10851bfbcd56a4f3450821f1e7c862f.patch",
+    "metadataPatchPath": "cherry/e81ef463f10851bfbcd56a4f3450821f1e7c862f.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [FMV] Use lexicographic order of feature names when mangling. (#83464)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/e81ef463f10851bfbcd56a4f3450821f1e7c862f.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 529162
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "ff47b65e69bea9873ee59cedcf39d2396cdb19ae134a9048b0fee23edc295103",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/CodeGen/Targets/AArch64.cpp b/clang/lib/CodeGen/Targets/AArch64.cpp",
+      "diff --git a/clang/test/CodeGen/attr-target-clones-aarch64.c b/clang/test/CodeGen/attr-target-clones-aarch64.c",
+      "diff --git a/clang/test/CodeGen/attr-target-version.c b/clang/test/CodeGen/attr-target-version.c",
+      "diff --git a/clang/test/CodeGenCXX/attr-target-clones-aarch64.cpp b/clang/test/CodeGenCXX/attr-target-clones-aarch64.cpp",
+      "diff --git a/clang/test/CodeGenCXX/attr-target-version.cpp b/clang/test/CodeGenCXX/attr-target-version.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:45",
+    "tag": "ndk-r27d",
+    "label": "[MTE] Disable all MTE protection of globals in sections",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/c9f5b5c935bd12d76d4bafff61d8116cb3229972.patch",
+    "metadataPatchPath": "cherry/c9f5b5c935bd12d76d4bafff61d8116cb3229972.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [MTE] Disable all MTE protection of globals in sections (#78443)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/c9f5b5c935bd12d76d4bafff61d8116cb3229972.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 524963
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "6b8e111c7fe523970c5bb7cf0eebf786fa64fede287cc07390a220dece631e71",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/test/CodeGen/memtag-globals-asm.cpp b/clang/test/CodeGen/memtag-globals-asm.cpp",
+      "diff --git a/llvm/lib/Target/AArch64/AArch64GlobalsTagging.cpp b/llvm/lib/Target/AArch64/AArch64GlobalsTagging.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:46",
+    "tag": "ndk-r27d",
+    "label": "[Modules] Don't replace local declarations with external",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/487967af82053cd08022635a2ff768385d936c80.patch",
+    "metadataPatchPath": "cherry/487967af82053cd08022635a2ff768385d936c80.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Modules] Don't replace local declarations with external declaration with lower visibility"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/487967af82053cd08022635a2ff768385d936c80.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 535006
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:47",
+    "tag": "ndk-r27d",
+    "label": "[NFC][FMV] Add tests to demonstrate feature priorities.",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/f6290e0daf5aff7132cab097fb13aad8a20ad070.patch",
+    "metadataPatchPath": "cherry/f6290e0daf5aff7132cab097fb13aad8a20ad070.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [NFC][FMV] Add tests to demonstrate feature priorities. (#79455)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/f6290e0daf5aff7132cab097fb13aad8a20ad070.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525665
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "a91e2764a26bb7c18e1aa95a49645b5df26e50f22e501e5fadcb062b7ad5082b",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/test/CodeGen/attr-target-version.c b/clang/test/CodeGen/attr-target-version.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:48",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Check type is legal before combining mgather to vlse",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/06c89bd59ca2279f76a41e851b7b2df634a6191e.patch",
+    "metadataPatchPath": "cherry/06c89bd59ca2279f76a41e851b7b2df634a6191e.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [RISCV] Check type is legal before combining mgather to vlse intrinsic (#81107)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/06c89bd59ca2279f76a41e851b7b2df634a6191e.patch",
+      "version_range": {
+        "from": 513157,
+        "until": 527083
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "c5c15d61def5c88b454fc35b7278c2a1e6a6df8bae8a72c50e14f523e08e8620",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/RISCVISelLowering.cpp b/llvm/lib/Target/RISCV/RISCVISelLowering.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:49",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Fix TLSDESC comment. NFC (#79403)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/1f454ede4660477c3782595975def90c26c19881.patch",
+    "metadataPatchPath": "cherry/1f454ede4660477c3782595975def90c26c19881.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [RISCV] Fix TLSDESC comment. NFC (#79403)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/1f454ede4660477c3782595975def90c26c19881.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525559
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "01910fc6eff53a9d476b33dacfaa59e3db6f92e6abfaac2ab55a70e58c34ed53",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/RISCVISelLowering.cpp b/llvm/lib/Target/RISCV/RISCVISelLowering.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:50",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Force relocations if initial MCSubtargetInfo contains",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/6c207ee5d20d2b054509123e6d0507df1332b376.patch",
+    "metadataPatchPath": "cherry/6c207ee5d20d2b054509123e6d0507df1332b376.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [RISCV] Force relocations if initial MCSubtargetInfo contains FeatureRelax (#77436)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/6c207ee5d20d2b054509123e6d0507df1332b376.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523615
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "d58918fde2202f0a514be45bd423cf90d626e0bc42372ad83b070737ac11a631",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/MCTargetDesc/RISCVELFStreamer.cpp b/llvm/lib/Target/RISCV/MCTargetDesc/RISCVELFStreamer.cpp",
+      "diff --git a/llvm/test/CodeGen/RISCV/option-relax-relocation.ll b/llvm/test/CodeGen/RISCV/option-relax-relocation.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:51",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Store RVC and TSO ELF flags explicitly in",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/6afda56faa6260cff4e6e9264226737d96d952c1.patch",
+    "metadataPatchPath": "cherry/6afda56faa6260cff4e6e9264226737d96d952c1.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [RISCV] Store RVC and TSO ELF flags explicitly in RISCVTargetStreamer. NFCI (#83344)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/6afda56faa6260cff4e6e9264226737d96d952c1.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 529091
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:52",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Support TLSDESC in the RISC-V backend (#66915)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/03a61d34ebf4f8eeaa6861bec3ab39c75bb41778.patch",
+    "metadataPatchPath": "cherry/03a61d34ebf4f8eeaa6861bec3ab39c75bb41778.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [RISCV] Support TLSDESC in the RISC-V backend (#66915)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/03a61d34ebf4f8eeaa6861bec3ab39c75bb41778.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 525314
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:53",
+    "tag": "ndk-r27d",
+    "label": "[SCCP] Check whether the default case is reachable (#76295)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/d218092543b3f9ba2204d7c8fe5ac70befa3d772.patch",
+    "metadataPatchPath": "cherry/d218092543b3f9ba2204d7c8fe5ac70befa3d772.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [SCCP] Check whether the default case is reachable (#76295)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/d218092543b3f9ba2204d7c8fe5ac70befa3d772.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523414
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "6c38d11babfa87d476d090445b57d428673b0824facd43e76d7391cd451b6c54",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Transforms/Utils/SCCPSolver.cpp b/llvm/lib/Transforms/Utils/SCCPSolver.cpp",
+      "diff --git a/llvm/test/Transforms/SCCP/switch.ll b/llvm/test/Transforms/SCCP/switch.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:54",
+    "tag": "ndk-r27d",
+    "label": "[SLP]Fix a crash for reduced values with minbitwidth, which",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/39b2104b4a4e0990eddc763eab99b28e8deab953.patch",
+    "metadataPatchPath": "cherry/39b2104b4a4e0990eddc763eab99b28e8deab953.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [SLP]Fix a crash for reduced values with minbitwidth, which are reused."
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/39b2104b4a4e0990eddc763eab99b28e8deab953.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523953
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:55",
+    "tag": "ndk-r27d",
+    "label": "[X86][AVX512BF16] Add a few missing insert/extract patterns",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/55c466da2f2f0baa509eb709b8de8926bd498b9b.patch",
+    "metadataPatchPath": "cherry/55c466da2f2f0baa509eb709b8de8926bd498b9b.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [X86][AVX512BF16] Add a few missing insert/extract patterns"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/55c466da2f2f0baa509eb709b8de8926bd498b9b.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 529623
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "c3b2563469be895ac7046dbece324eab3b3707644bb4cdda8e3799fe348e92be",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/X86/X86InstrAVX512.td b/llvm/lib/Target/X86/X86InstrAVX512.td",
+      "diff --git a/llvm/test/CodeGen/X86/bfloat.ll b/llvm/test/CodeGen/X86/bfloat.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:56",
+    "tag": "ndk-r27d",
+    "label": "[clang] Refactor target attribute mangling. (#81893)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/b42b7c8a123863d86db9abc8b6a1340b920f6573.patch",
+    "metadataPatchPath": "cherry/b42b7c8a123863d86db9abc8b6a1340b920f6573.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang] Refactor target attribute mangling. (#81893)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/b42b7c8a123863d86db9abc8b6a1340b920f6573.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 528964
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "e9dd1c84671526ce1eb7660e7419f7b1215d89184e1a9bf1caa7ec05cd653bf0",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/CodeGen/ABIInfo.cpp b/clang/lib/CodeGen/ABIInfo.cpp",
+      "diff --git a/clang/lib/CodeGen/ABIInfo.h b/clang/lib/CodeGen/ABIInfo.h",
+      "diff --git a/clang/lib/CodeGen/CodeGenModule.cpp b/clang/lib/CodeGen/CodeGenModule.cpp",
+      "diff --git a/clang/lib/CodeGen/Targets/AArch64.cpp b/clang/lib/CodeGen/Targets/AArch64.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:57",
+    "tag": "ndk-r27d",
+    "label": "[clang][CodeGen] Allow `memcpy` replace with trivial auto var",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/b433076fcbacba8a3b91446390bbea5843322bcd.patch",
+    "metadataPatchPath": "cherry/b433076fcbacba8a3b91446390bbea5843322bcd.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang][CodeGen] Allow `memcpy` replace with trivial auto var init"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/b433076fcbacba8a3b91446390bbea5843322bcd.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 530567
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:58",
+    "tag": "ndk-r27d",
+    "label": "[clang][Sema] Fix a CTAD regression after 42239d2e9 (#86914)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/0f6ed4c394fd8f843029f6919230bf8df8618529.patch",
+    "metadataPatchPath": "cherry/0f6ed4c394fd8f843029f6919230bf8df8618529.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang][Sema] Fix a CTAD regression after 42239d2e9 (#86914)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/0f6ed4c394fd8f843029f6919230bf8df8618529.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 532220
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:59",
+    "tag": "ndk-r27d",
+    "label": "[clang][Sema] Skip the RequiresExprBodyDecls for lambda",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/9fe5aa31eccff49632e40bcdad6e64fc00190889.patch",
+    "metadataPatchPath": "cherry/9fe5aa31eccff49632e40bcdad6e64fc00190889.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang][Sema] Skip the RequiresExprBodyDecls for lambda dependencies (#83997)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/9fe5aa31eccff49632e40bcdad6e64fc00190889.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 529789
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "c0a7d203855a59e513fc7801a9e3ce3b301114d9c4ef7e059885f32be1007ceb",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Sema/TreeTransform.h b/clang/lib/Sema/TreeTransform.h",
+      "diff --git a/clang/test/SemaTemplate/concepts-lambda.cpp b/clang/test/SemaTemplate/concepts-lambda.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:60",
+    "tag": "ndk-r27d",
+    "label": "[clang][fmv] Drop .ifunc from target_version's entrypoint's",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/99d743320c5dddb780f1fb2f49414b10e6a52a05.patch",
+    "metadataPatchPath": "cherry/99d743320c5dddb780f1fb2f49414b10e6a52a05.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang][fmv] Drop .ifunc from target_version's entrypoint's mangling (#81194)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/99d743320c5dddb780f1fb2f49414b10e6a52a05.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 527155
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:61",
+    "tag": "ndk-r27d",
+    "label": "[libc++] Fix incorrect macro push/pop in unwrap_iter.h",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/7b4622514d232ce5f7110dd8b20d90e81127c467.patch",
+    "metadataPatchPath": "cherry/7b4622514d232ce5f7110dd8b20d90e81127c467.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libc++] Fix missing and incorrect push/pop macros (#79204)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/7b4622514d232ce5f7110dd8b20d90e81127c467.patch",
+      "version_range": {
+        "from": 510928,
+        "until": 525596
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:62",
+    "tag": "ndk-r27d",
+    "label": "[libc++][regex] Correctly adjust match prefix for zero-length",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/e9adcc488f96a9f2b8c4344f5e3c7ca6639b9562.patch",
+    "metadataPatchPath": "cherry/e9adcc488f96a9f2b8c4344f5e3c7ca6639b9562.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libc++][regex] Correctly adjust match prefix for zero-length matches. (#94550)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/e9adcc488f96a9f2b8c4344f5e3c7ca6639b9562.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 539017
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:63",
+    "tag": "ndk-r27d",
+    "label": "[libunwind][WebAssembly] Fix libunwind.cpp guard (#78230)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/4967d98eda48bed4a6f382d240f5a33177bc654c.patch",
+    "metadataPatchPath": "cherry/4967d98eda48bed4a6f382d240f5a33177bc654c.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libunwind][WebAssembly] Fix libunwind.cpp guard (#78230)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/4967d98eda48bed4a6f382d240f5a33177bc654c.patch",
+      "version_range": {
+        "from": 520136,
+        "until": 524265
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:64",
+    "tag": "ndk-r27d",
+    "label": "[lld] [MTE] Allow android note for static executables.",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/a831a21e4d8d41b044edaf61a90debb2ad756bda.patch",
+    "metadataPatchPath": "cherry/a831a21e4d8d41b044edaf61a90debb2ad756bda.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [lld] [MTE] Allow android note for static executables. (#77078)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/a831a21e4d8d41b044edaf61a90debb2ad756bda.patch",
+      "version_range": {
+        "from": 510928,
+        "until": 523405
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:65",
+    "tag": "ndk-r27d",
+    "label": "[lld][ELF] Allow Arm PC-relative relocations in PIC links",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/d21fb06a6e36048e6729c51c351ff8c4055e8381.patch",
+    "metadataPatchPath": "cherry/d21fb06a6e36048e6729c51c351ff8c4055e8381.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [lld][ELF] Allow Arm PC-relative relocations in PIC links (#77304)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/d21fb06a6e36048e6729c51c351ff8c4055e8381.patch",
+      "version_range": {
+        "from": 520377,
+        "until": 523844
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "e0bd90f9b63da392795993ea315549159edfc00c8af8a8a0f90347f6f8f58f76",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lld/ELF/Relocations.cpp b/lld/ELF/Relocations.cpp",
+      "diff --git a/lld/test/ELF/arm-adr.s b/lld/test/ELF/arm-adr.s"
+    ]
+  },
+  {
+    "id": "ndk-r27d:66",
+    "tag": "ndk-r27d",
+    "label": "[lldb][NFC] Fix compilation issue on windows (#76453)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/f3f4387e02b0ed637b5d843e8937116334329a65.patch",
+    "metadataPatchPath": "cherry/f3f4387e02b0ed637b5d843e8937116334329a65.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [lldb][NFC] Fix compilation issue on windows (#76453)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/f3f4387e02b0ed637b5d843e8937116334329a65.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 523089
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "0be4ac17c9972aed69bc89983b064efccaed7909dc7d64d16aaf7336863982d1",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lldb/source/Plugins/Process/Windows/Common/TargetThreadWindows.cpp b/lldb/source/Plugins/Process/Windows/Common/TargetThreadWindows.cpp",
+      "diff --git a/lldb/unittests/Thread/ThreadTest.cpp b/lldb/unittests/Thread/ThreadTest.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:67",
+    "tag": "ndk-r27d",
+    "label": "[llvm-objcopy] Add --remove-symbol-prefix (#79415)",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/1b87ebce924e507cbc27c2e0dc623941d16388c9.patch",
+    "metadataPatchPath": "cherry/1b87ebce924e507cbc27c2e0dc623941d16388c9.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [llvm-objcopy] Add --remove-symbol-prefix (#79415)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/1b87ebce924e507cbc27c2e0dc623941d16388c9.patch",
+      "version_range": {
+        "from": 510928,
+        "until": 526891
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "7f452ddf26a78cb66ee06d0efa0de389f77b03a88fc8f04efbb0451a8a0bdb41",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/docs/CommandGuide/llvm-objcopy.rst b/llvm/docs/CommandGuide/llvm-objcopy.rst",
+      "diff --git a/llvm/include/llvm/ObjCopy/CommonConfig.h b/llvm/include/llvm/ObjCopy/CommonConfig.h",
+      "diff --git a/llvm/lib/ObjCopy/ConfigManager.cpp b/llvm/lib/ObjCopy/ConfigManager.cpp",
+      "diff --git a/llvm/lib/ObjCopy/ELF/ELFObjcopy.cpp b/llvm/lib/ObjCopy/ELF/ELFObjcopy.cpp",
+      "diff --git a/llvm/test/tools/llvm-objcopy/ELF/prefix-symbols-remove.test b/llvm/test/tools/llvm-objcopy/ELF/prefix-symbols-remove.test",
+      "diff --git a/llvm/tools/llvm-objcopy/ObjcopyOptions.cpp b/llvm/tools/llvm-objcopy/ObjcopyOptions.cpp",
+      "diff --git a/llvm/tools/llvm-objcopy/ObjcopyOpts.td b/llvm/tools/llvm-objcopy/ObjcopyOpts.td"
+    ]
+  },
+  {
+    "id": "ndk-r27d:68",
+    "tag": "ndk-r27d",
+    "label": "avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "metadataPatchPath": "avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[libc++][Android] fs tests: avoid fifo/socket/hardlink SELinux denials"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+      "version_range": {
+        "from": 498229,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "a2ef134dd468076fe3a18a97ca42dce8a17919e66491182b0f470c1bf5299769",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_size.pass.cpp b/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_size.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_type_obs.pass.cpp b/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_type_obs.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/hard_link_count.pass.cpp b/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/hard_link_count.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy/copy.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy/copy.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy_file/copy_file.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy_file/copy_file.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.create_hard_link/create_hard_link.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.create_hard_link/create_hard_link.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.equivalent/equivalent.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.equivalent/equivalent.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.hard_lk_ct/hard_link_count.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.hard_lk_ct/hard_link_count.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.is_empty/is_empty.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.is_empty/is_empty.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.status/status.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.status/status.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.symlink_status/symlink_status.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.symlink_status/symlink_status.pass.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:69",
+    "tag": "ndk-r27d",
+    "label": "avoid-triggering-fdsan-in-filebuf-test.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "avoid-triggering-fdsan-in-filebuf-test.patch",
+    "metadataPatchPath": "avoid-triggering-fdsan-in-filebuf-test.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[libc++][Android] Avoid triggering fdsan in filebuf test"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "avoid-triggering-fdsan-in-filebuf-test.patch",
+      "version_range": {
+        "from": 475365,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:70",
+    "tag": "ndk-r27d",
+    "label": "bionic-includes-plus-sign-for-nan-v2.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "bionic-includes-plus-sign-for-nan-v2.patch",
+    "metadataPatchPath": "bionic-includes-plus-sign-for-nan-v2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[libc++][Android] Bionic also includes + for NAN"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "bionic-includes-plus-sign-for-nan-v2.patch",
+      "version_range": {
+        "from": 510928,
+        "until": 530511
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "c14fe8535d167cb1c619e2890109a862c5289c457500b16854c56a8b15fab8bb",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxx/test/std/localization/locale.categories/category.numeric/locale.nm.put/facet.num.put.members/put_long_double.pass.cpp b/libcxx/test/std/localization/locale.categories/category.numeric/locale.nm.put/facet.num.put.members/put_long_double.pass.cpp",
+      "diff --git a/libcxx/utils/libcxx/test/features.py b/libcxx/utils/libcxx/test/features.py"
+    ]
+  },
+  {
+    "id": "ndk-r27d:71",
+    "tag": "ndk-r27d",
+    "label": "clang driver: enable fast unaligned access for Android on",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "cherry/b20360abeb3a80281dc082f1e093abd13cb1ee4c.patch",
+    "metadataPatchPath": "cherry/b20360abeb3a80281dc082f1e093abd13cb1ee4c.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] clang driver: enable fast unaligned access for Android on RISCV64 (#85704)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/b20360abeb3a80281dc082f1e093abd13cb1ee4c.patch",
+      "version_range": {
+        "from": 522817,
+        "until": 531316
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r27d:72",
+    "tag": "ndk-r27d",
+    "label": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "metadataPatchPath": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[compiler-rt] Allow finding LLVMConfig if CMAKE_FIND_ROOT_PATH_MODE_PACKAGE is set to ONLY"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+      "version_range": {
+        "from": 487747,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "3e1e2a5cec77206efb39c0c90d5ab692abbfb26d9f169fed8025ae7a76e1491c",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/compiler-rt/cmake/Modules/CompilerRTUtils.cmake b/compiler-rt/cmake/Modules/CompilerRTUtils.cmake"
+    ]
+  },
+  {
+    "id": "ndk-r27d:73",
+    "tag": "ndk-r27d",
+    "label": "disable-symlink-resolve-test-on-android.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "disable-symlink-resolve-test-on-android.patch",
+    "metadataPatchPath": "disable-symlink-resolve-test-on-android.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[libc++][Android] Disable test_no_resolve_symlink_on_symlink on Android"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "disable-symlink-resolve-test-on-android.patch",
+      "version_range": {
+        "from": 498229,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "43da3d11f2b648967ddc12a72a88bee2506be3c81629245faacccbb138b61b53",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.permissions/permissions.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.permissions/permissions.pass.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:74",
+    "tag": "ndk-r27d",
+    "label": "hide-locale-lit-features-for-bionic-v2.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "hide-locale-lit-features-for-bionic-v2.patch",
+    "metadataPatchPath": "hide-locale-lit-features-for-bionic-v2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[libc++][Android] Hide locale Lit features for Bionic"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "hide-locale-lit-features-for-bionic-v2.patch",
+      "version_range": {
+        "from": 510928,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "8a2631e1b4eefd87f5f580f65bb901e509fbafef7f84cd723bfea14ecc0df29e",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxx/utils/libcxx/test/dsl.py b/libcxx/utils/libcxx/test/dsl.py"
+    ]
+  },
+  {
+    "id": "ndk-r27d:75",
+    "tag": "ndk-r27d",
+    "label": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "numericClangRevision": 522817,
+    "declaredPatchPath": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "metadataPatchPath": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[libc++abi] Optionally move __cxa_demangle into libc++demangle.a"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "move-cxa-demangle-into-libcxxdemangle.patch",
+      "version_range": {
+        "from": 475365,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "6a8879953b2133491d4bc6be97332d4d031b837e0175227969f4ef7f7d6ef8b9",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxxabi/CMakeLists.txt b/libcxxabi/CMakeLists.txt",
+      "diff --git a/libcxxabi/src/CMakeLists.txt b/libcxxabi/src/CMakeLists.txt"
+    ]
+  },
+  {
+    "id": "ndk-r30:1",
+    "tag": "ndk-r30",
+    "label": "Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+    "metadataPatchPath": "Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Add cmake c,cxx,asm,linker flags"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+      "version_range": {
+        "from": 544322,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "e30dd1381197034099f6b84bf1a47f5ff2cf4c33948fe84cd55b1004f819fb91",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/bolt/CMakeLists.txt b/bolt/CMakeLists.txt"
+    ]
+  },
+  {
+    "id": "ndk-r30:2",
+    "tag": "ndk-r30",
+    "label": "Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+    "metadataPatchPath": "Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Add stubs and headers for nl_types APIs."
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+      "version_range": {
+        "from": 563880,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "8d348f8c2fb63952d587d3d46fd2cda6abfe5a2a9bc82a52ab4d2e5fc711e460",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/openmp/runtime/src/CMakeLists.txt b/openmp/runtime/src/CMakeLists.txt",
+      "diff --git a/openmp/runtime/src/android/nl_types.h b/openmp/runtime/src/android/nl_types.h",
+      "diff --git a/openmp/runtime/src/android/nltypes_stubs.cpp b/openmp/runtime/src/android/nltypes_stubs.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:3",
+    "tag": "ndk-r30",
+    "label": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "metadataPatchPath": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Increase max allocation size to allow BOLTing clang and rustc"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+      "version_range": {
+        "from": 450784,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "f296dee815f856aefb4eefb736588cb9441940742c2d03d197a7f5c9e675695f",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/bolt/runtime/instr.cpp b/bolt/runtime/instr.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:4",
+    "tag": "ndk-r30",
+    "label": "Cap IntRange::Width to MaxWidth (#145356)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/5bbe1536dfa6f1dce8737e466c209c553d614e50.patch",
+    "metadataPatchPath": "cherry/5bbe1536dfa6f1dce8737e466c209c553d614e50.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Cap IntRange::Width to MaxWidth (#145356)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/5bbe1536dfa6f1dce8737e466c209c553d614e50.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 580366
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "61eb9fcd59022b15a30d8d7bb45254a27b968a966c7e0502b0091db0eb1a4783",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Sema/SemaChecking.cpp b/clang/lib/Sema/SemaChecking.cpp",
+      "diff --git a/clang/test/Sema/implicit-int-conversion-on-int.c b/clang/test/Sema/implicit-int-conversion-on-int.c"
+    ]
+  },
+  {
+    "id": "ndk-r30:5",
+    "tag": "ndk-r30",
+    "label": "Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "metadataPatchPath": "Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Disable integer sanitizer for __libcxx_blsr"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+      "version_range": {
+        "from": 563880,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "83c392d2d95339b7988fb29d041aa9493c65ebd4a2ebf50a77102eaccd739d99",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxx/include/__bit/blsr.h b/libcxx/include/__bit/blsr.h"
+    ]
+  },
+  {
+    "id": "ndk-r30:6",
+    "tag": "ndk-r30",
+    "label": "Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "metadataPatchPath": "Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Disable std/utilities/charconv/charconv.msvc/test.pass.cpp test"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+      "version_range": {
+        "from": 553667,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "a9883b3ca03633dd8fa375d53a163a60e1f79e3f4b9502a04cd069a7d3d0f0fd",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxx/test/std/utilities/charconv/charconv.msvc/test.pass.cpp b/libcxx/test/std/utilities/charconv/charconv.msvc/test.pass.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:7",
+    "tag": "ndk-r30",
+    "label": "Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "metadataPatchPath": "Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Disable unsigned-integer-overflow checks for std::sort"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Disable-unsigned-integer-overflow-checks-for-s.patch",
+      "version_range": {
+        "from": 574158,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "6ac890d3e831093171068315214038ddd27ea974006bff2bccb314ccd5976977",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxx/include/__algorithm/sort.h b/libcxx/include/__algorithm/sort.h"
+    ]
+  },
+  {
+    "id": "ndk-r30:8",
+    "tag": "ndk-r30",
+    "label": "Disable-vfork-fork-events-v2.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "Disable-vfork-fork-events-v2.patch",
+    "metadataPatchPath": "Disable-vfork-fork-events-v2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Disable vfork/fork events"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Disable-vfork-fork-events-v2.patch",
+      "version_range": {
+        "from": 546236,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "af5a23bc75c5f59927341750139b639815abf882817cda492780384b26812d7f",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunicationClient.cpp b/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunicationClient.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:9",
+    "tag": "ndk-r30",
+    "label": "Fix an error introduced in #138518 (#142988)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/f53216793e15588d65601196b7a0625f73c12cea.patch",
+    "metadataPatchPath": "cherry/f53216793e15588d65601196b7a0625f73c12cea.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Fix an error introduced in #138518 (#142988)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/f53216793e15588d65601196b7a0625f73c12cea.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 577943
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:10",
+    "tag": "ndk-r30",
+    "label": "Fix restoring callee-saves from FP with hazard padding (#143371)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/d8e8ab79773f739c602c5869f80c6c5b5962c558.patch",
+    "metadataPatchPath": "cherry/d8e8ab79773f739c602c5869f80c6c5b5962c558.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64][SME] Fix restoring callee-saves from FP with hazard padding (#143371)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/d8e8ab79773f739c602c5869f80c6c5b5962c558.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 579344
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "ba3ef7b95149a39d9a8b92826e33d1516e8b307b2cd2a0debb041821067a5178",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/AArch64/AArch64FrameLowering.cpp b/llvm/lib/Target/AArch64/AArch64FrameLowering.cpp",
+      "diff --git a/llvm/test/CodeGen/AArch64/stack-hazard.ll b/llvm/test/CodeGen/AArch64/stack-hazard.ll"
+    ]
+  },
+  {
+    "id": "ndk-r30:11",
+    "tag": "ndk-r30",
+    "label": "Fix-for-x86-ndk-sysroot-define.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "Fix-for-x86-ndk-sysroot-define.patch",
+    "metadataPatchPath": "Fix-for-x86-ndk-sysroot-define.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Fix for x86 ndk sysroot define being mixed with parameter for i686 lldb build"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Fix-for-x86-ndk-sysroot-define.patch",
+      "version_range": {
+        "from": 574158,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:12",
+    "tag": "ndk-r30",
+    "label": "Reapply \"IR: Remove uselist for constantdata (#137313)\"",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/9383fb23e18bb983d0024fb956a0a724ef9eb03d.patch",
+    "metadataPatchPath": "cherry/9383fb23e18bb983d0024fb956a0a724ef9eb03d.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Reapply \"IR: Remove uselist for constantdata (#137313)\" (#138961)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/9383fb23e18bb983d0024fb956a0a724ef9eb03d.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 574618
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:13",
+    "tag": "ndk-r30",
+    "label": "Remove delayed typo expressions (#143423)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/9eef4d1c5fa6b1bcbbe675c14ca8301d5d346f7b.patch",
+    "metadataPatchPath": "cherry/9eef4d1c5fa6b1bcbbe675c14ca8301d5d346f7b.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Remove delayed typo expressions (#143423)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/9eef4d1c5fa6b1bcbbe675c14ca8301d5d346f7b.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 578806
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:14",
+    "tag": "ndk-r30",
+    "label": "Revert \"[HIP] use offload wrapper for non-device-only non-rdc",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/f5e499a3383c1e3b9f60e60151075e8d9c1c3166.patch",
+    "metadataPatchPath": "cherry/f5e499a3383c1e3b9f60e60151075e8d9c1c3166.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Revert \"[HIP] use offload wrapper for non-device-only non-rdc (#132869)\" (#143432)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/f5e499a3383c1e3b9f60e60151075e8d9c1c3166.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 578300
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:15",
+    "tag": "ndk-r30",
+    "label": "Revert \"[clang][Dependency Scanning] Report What a Module",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/8f4fd864033601aad99a10c2b878769b84df7537.patch",
+    "metadataPatchPath": "cherry/8f4fd864033601aad99a10c2b878769b84df7537.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Revert \"[clang][Dependency Scanning] Report What a Module Exports during Scanning (#137421)\" (#140820)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/8f4fd864033601aad99a10c2b878769b84df7537.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 577150
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:16",
+    "tag": "ndk-r30",
+    "label": "Revert \"[lld] Merge equivalent symbols found during ICF",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/fd3fecfc0936703f2715fe6fea890e81b0b3c2ac.patch",
+    "metadataPatchPath": "cherry/fd3fecfc0936703f2715fe6fea890e81b0b3c2ac.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] Revert \"[lld] Merge equivalent symbols found during ICF (#134342)\""
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/fd3fecfc0936703f2715fe6fea890e81b0b3c2ac.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 575244
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "e095bef60479b0c5b3c778fc9d0b6b850047991a6a9451c2db01c12270040592",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/lld/ELF/ICF.cpp b/lld/ELF/ICF.cpp",
+      "diff --git a/lld/ELF/SymbolTable.cpp b/lld/ELF/SymbolTable.cpp",
+      "diff --git a/lld/ELF/SymbolTable.h b/lld/ELF/SymbolTable.h",
+      "diff --git a/lld/test/ELF/aarch64-got-merging-icf.s b/lld/test/ELF/aarch64-got-merging-icf.s",
+      "diff --git a/lld/test/ELF/icf-preemptible.s b/lld/test/ELF/icf-preemptible.s"
+    ]
+  },
+  {
+    "id": "ndk-r30:17",
+    "tag": "ndk-r30",
+    "label": "Revert global widening transform (#144652)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/183acdd27985afd332463e3d9fd4a2ca46d85cf1-v2.patch",
+    "metadataPatchPath": "cherry/183acdd27985afd332463e3d9fd4a2ca46d85cf1-v2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [GlobalOpt] Revert global widening transform (#144652)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/183acdd27985afd332463e3d9fd4a2ca46d85cf1-v2.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 580792
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:18",
+    "tag": "ndk-r30",
+    "label": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "metadataPatchPath": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Revert Recommit [DAGCombiner] Transform `(icmp eq/ne (and X,C0),(shift X,C1))` to use rotate or to getter constants. (2nd Try)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+      "version_range": {
+        "from": 522817,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:19",
+    "tag": "ndk-r30",
+    "label": "Revert-libc-Don-t-implement-stdatomic.h-before-C-23-v3.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "Revert-libc-Don-t-implement-stdatomic.h-before-C-23-v3.patch",
+    "metadataPatchPath": "Revert-libc-Don-t-implement-stdatomic.h-before-C-23-v3.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "Revert [libc++] Don't implement <stdatomic.h> before C++23 (#123130)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "Revert-libc-Don-t-implement-stdatomic.h-before-C-23-v3.patch",
+      "version_range": {
+        "from": 569304,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:20",
+    "tag": "ndk-r30",
+    "label": "ThinLTOBitcodeWriter: Emit __cfi_check to full LTO part of",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/ff85dbdf6b399eac7bffa13e579f0f5e6edac3c0.patch",
+    "metadataPatchPath": "cherry/ff85dbdf6b399eac7bffa13e579f0f5e6edac3c0.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] ThinLTOBitcodeWriter: Emit __cfi_check to full LTO part of bitcode file."
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/ff85dbdf6b399eac7bffa13e579f0f5e6edac3c0.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 587473
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "14d2fa0fd9dfb5e1f567e94da2508f5eb8c751532922ab6a1aa5661462cd28d8",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp b/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp",
+      "diff --git a/llvm/test/Transforms/ThinLTOBitcodeWriter/cfi-check.ll b/llvm/test/Transforms/ThinLTOBitcodeWriter/cfi-check.ll"
+    ]
+  },
+  {
+    "id": "ndk-r30:21",
+    "tag": "ndk-r30",
+    "label": "ThinLTOBitcodeWriter: Split modules with __cfi_check and no",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/43c85afce9c25141de79da6731b1d5f8bb2491b1.patch",
+    "metadataPatchPath": "cherry/43c85afce9c25141de79da6731b1d5f8bb2491b1.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] ThinLTOBitcodeWriter: Split modules with __cfi_check and no type metadata."
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/43c85afce9c25141de79da6731b1d5f8bb2491b1.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 588422
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:22",
+    "tag": "ndk-r30",
+    "label": "ValueMapper: Delete unused initializers of replaced appending",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/1f38d49ebe96417e368a567efa4d650b8a9ac30f.patch",
+    "metadataPatchPath": "cherry/1f38d49ebe96417e368a567efa4d650b8a9ac30f.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] ValueMapper: Delete unused initializers of replaced appending globals."
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/1f38d49ebe96417e368a567efa4d650b8a9ac30f.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 597042
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:23",
+    "tag": "ndk-r30",
+    "label": "[AArch64] Ensure the LR is preserved if we must call",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/af7166a3f126ce4e4d2a05eccc1358bd0427cf0f.patch",
+    "metadataPatchPath": "cherry/af7166a3f126ce4e4d2a05eccc1358bd0427cf0f.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64] Ensure the LR is preserved if we must call __arm_get_current_vg (#145760)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/af7166a3f126ce4e4d2a05eccc1358bd0427cf0f.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 580344
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:24",
+    "tag": "ndk-r30",
+    "label": "[AArch64] Restrict .variant_pcs directive to ELF targets",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/3aaf44f95de24339d73c0093576a4a3cc42404ad.patch",
+    "metadataPatchPath": "cherry/3aaf44f95de24339d73c0093576a4a3cc42404ad.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64] Restrict .variant_pcs directive to ELF targets (#138924)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/3aaf44f95de24339d73c0093576a4a3cc42404ad.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 575668
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:25",
+    "tag": "ndk-r30",
+    "label": "[AArch64][SME] Disable tail calls for callees that require",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/bfb54e8ba6262a509343985c018f9a8d52963734.patch",
+    "metadataPatchPath": "cherry/bfb54e8ba6262a509343985c018f9a8d52963734.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64][SME] Disable tail calls for callees that require saving ZT0 (#165371)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/bfb54e8ba6262a509343985c018f9a8d52963734.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 595389
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:26",
+    "tag": "ndk-r30",
+    "label": "[AArch64][SME] Fix accessing the emergency spill slot with",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/b5cf03033251a642b184b2e0ea6bdac171c17702.patch",
+    "metadataPatchPath": "cherry/b5cf03033251a642b184b2e0ea6bdac171c17702.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64][SME] Fix accessing the emergency spill slot with hazard padding (#142190)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/b5cf03033251a642b184b2e0ea6bdac171c17702.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 577444
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:27",
+    "tag": "ndk-r30",
+    "label": "[AArch64][SME] Precommit tests for LUT4I `Chain` issues (NFC)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/cd0f560cc7e88bffedc4c34e3eb3efbf00dcb3ef.patch",
+    "metadataPatchPath": "cherry/cd0f560cc7e88bffedc4c34e3eb3efbf00dcb3ef.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64][SME] Precommit tests for LUT4I `Chain` issues (NFC) (#161505)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/cd0f560cc7e88bffedc4c34e3eb3efbf00dcb3ef.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 592434
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:28",
+    "tag": "ndk-r30",
+    "label": "[AArch64][SME] Preserve `Chain` when selecting multi-vector",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/031fb7414fd6edf20e0cd7f7783666313169a0d2.patch",
+    "metadataPatchPath": "cherry/031fb7414fd6edf20e0cd7f7783666313169a0d2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [AArch64][SME] Preserve `Chain` when selecting multi-vector LUT4Is (#161494)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/031fb7414fd6edf20e0cd7f7783666313169a0d2.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 592533
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:29",
+    "tag": "ndk-r30",
+    "label": "[ARM] Add tablegen patterns for vsdot and vudot high index.",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/2f43659011be6287bb57f2c43f988727c100ccc2.patch",
+    "metadataPatchPath": "cherry/2f43659011be6287bb57f2c43f988727c100ccc2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [ARM] Add tablegen patterns for vsdot and vudot high index. (#174728)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/2f43659011be6287bb57f2c43f988727c100ccc2.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 603250
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "18d3d2ab86c0ccd99401a183b3098fb95299e8cf4211f8b99bcea5789c8092b2",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/llvm/lib/Target/ARM/ARMInstrNEON.td b/llvm/lib/Target/ARM/ARMInstrNEON.td",
+      "diff --git a/llvm/test/CodeGen/ARM/neon-dot-product.ll b/llvm/test/CodeGen/ARM/neon-dot-product.ll"
+    ]
+  },
+  {
+    "id": "ndk-r30:30",
+    "tag": "ndk-r30",
+    "label": "[ARM] Update and extend neon-dot-product.ll. NFC",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/7635474d26f82e7fd109746f754564ade78d1a51.patch",
+    "metadataPatchPath": "cherry/7635474d26f82e7fd109746f754564ade78d1a51.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [ARM] Update and extend neon-dot-product.ll. NFC"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/7635474d26f82e7fd109746f754564ade78d1a51.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 602300
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:31",
+    "tag": "ndk-r30",
+    "label": "[BACKPORT] [lldb][lldb-server] Fix zip file lookup ignoring last entry",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/5ed875a06cb0a6d543f719ad72df2a1660e42cb9.patch",
+    "metadataPatchPath": "cherry/5ed875a06cb0a6d543f719ad72df2a1660e42cb9.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[BACKPORT] [lldb][lldb-server] Fix zip file lookup ignoring last entry in the zip file (#173966)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/5ed875a06cb0a6d543f719ad72df2a1660e42cb9.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 608878
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:32",
+    "tag": "ndk-r30",
+    "label": "[C] Fix a false-positive with tentative defn compat (#139738)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/e3f87e15910a5f1c5552fc3ef57e7dda3f68901a.patch",
+    "metadataPatchPath": "cherry/e3f87e15910a5f1c5552fc3ef57e7dda3f68901a.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [C] Fix a false-positive with tentative defn compat (#139738)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/e3f87e15910a5f1c5552fc3ef57e7dda3f68901a.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 575291
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:33",
+    "tag": "ndk-r30",
+    "label": "[C] Handle comma operator for implicit int->enum conversions",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/b59ab701e94cce455a53358cbe5082a3efb58fbf.patch",
+    "metadataPatchPath": "cherry/b59ab701e94cce455a53358cbe5082a3efb58fbf.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [C] Handle comma operator for implicit int->enum conversions (#138752)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/b59ab701e94cce455a53358cbe5082a3efb58fbf.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 574501
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:34",
+    "tag": "ndk-r30",
+    "label": "[Clang] Fix a regression introduced by #140073 (#140288)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/efa28338d858e1ea2bf705d50a0404bc602c8fe1.patch",
+    "metadataPatchPath": "cherry/efa28338d858e1ea2bf705d50a0404bc602c8fe1.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Clang] Fix a regression introduced by #140073 (#140288)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/efa28338d858e1ea2bf705d50a0404bc602c8fe1.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 575735
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:35",
+    "tag": "ndk-r30",
+    "label": "[Clang] Fix an assertion in the resolution of perfect matches",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/090f46d8d246762401c41c5486dde299382d6c90.patch",
+    "metadataPatchPath": "cherry/090f46d8d246762401c41c5486dde299382d6c90.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Clang] Fix an assertion in the resolution of perfect matches (#140073)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/090f46d8d246762401c41c5486dde299382d6c90.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 575615
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:36",
+    "tag": "ndk-r30",
+    "label": "[Clang] Preserve CXXParenListInitExpr in TreeTransform.",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/13926e149081ca2771bdea7c08c07d92d87f7818.patch",
+    "metadataPatchPath": "cherry/13926e149081ca2771bdea7c08c07d92d87f7818.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Clang] Preserve CXXParenListInitExpr in TreeTransform. (#138518)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/13926e149081ca2771bdea7c08c07d92d87f7818.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 574256
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:37",
+    "tag": "ndk-r30",
+    "label": "[Clang] Separate implicit int conversion on negation sign to",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/0ada5c7b1a52afb668bc42dd2d5573e5805433d1.patch",
+    "metadataPatchPath": "cherry/0ada5c7b1a52afb668bc42dd2d5573e5805433d1.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [Clang] Separate implicit int conversion on negation sign to new diagnostic group (#139429)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/0ada5c7b1a52afb668bc42dd2d5573e5805433d1.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 577453
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:38",
+    "tag": "ndk-r30",
+    "label": "[CodeGenPrepare] Make sure instruction get from SunkAddrs is",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/59c6d70ed8120b8864e5f796e2bf3de5518a0ef0.patch",
+    "metadataPatchPath": "cherry/59c6d70ed8120b8864e5f796e2bf3de5518a0ef0.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [CodeGenPrepare] Make sure instruction get from SunkAddrs is before MemoryInst (#139303)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/59c6d70ed8120b8864e5f796e2bf3de5518a0ef0.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 575589
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:39",
+    "tag": "ndk-r30",
+    "label": "[ELF,RISCV] Fix oscillation due to call relaxation",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/8957e64a20fc7f4277565c6cfe3e555c119783ce.patch",
+    "metadataPatchPath": "cherry/8957e64a20fc7f4277565c6cfe3e555c119783ce.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [ELF,RISCV] Fix oscillation due to call relaxation"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/8957e64a20fc7f4277565c6cfe3e555c119783ce.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 578415
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:40",
+    "tag": "ndk-r30",
+    "label": "[ELF] Postpone ASSERT error",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/5859863bab7fb1cd98b6028293cba6ba25f7d514.patch",
+    "metadataPatchPath": "cherry/5859863bab7fb1cd98b6028293cba6ba25f7d514.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [ELF] Postpone ASSERT error"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/5859863bab7fb1cd98b6028293cba6ba25f7d514.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 577064
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:41",
+    "tag": "ndk-r30",
+    "label": "[HWASan] fix missing BTI attribute on personality function",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/a76cf062a57097ad7971325551854bd5f3d38d94.patch",
+    "metadataPatchPath": "cherry/a76cf062a57097ad7971325551854bd5f3d38d94.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [HWASan] fix missing BTI attribute on personality function thunks (#139138)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/a76cf062a57097ad7971325551854bd5f3d38d94.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 574745
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:42",
+    "tag": "ndk-r30",
+    "label": "[InstSimplify] Fix Compilation Hang in",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/4a6adf42d80a91f79c9c7c8d0c7801f9575d40dd.patch",
+    "metadataPatchPath": "cherry/4a6adf42d80a91f79c9c7c8d0c7801f9575d40dd.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [InstSimplify] Fix Compilation Hang in simplifyExtractValueInst (#190279)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/4a6adf42d80a91f79c9c7c8d0c7801f9575d40dd.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 613667
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:43",
+    "tag": "ndk-r30",
+    "label": "[LoopIdiomVectorize] Fix FindFirstByte successors (#156945)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/2873d9fac550a248a1c62cfc106ac31fef84fa7d.patch",
+    "metadataPatchPath": "cherry/2873d9fac550a248a1c62cfc106ac31fef84fa7d.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [LoopIdiomVectorize] Fix FindFirstByte successors (#156945)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/2873d9fac550a248a1c62cfc106ac31fef84fa7d.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 589350
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:44",
+    "tag": "ndk-r30",
+    "label": "[analyzer] Harden RegionStoreManager::bindArray (#153177)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/8dd2846fcf7b0ad254f3768149d28fe87af9b15d.patch",
+    "metadataPatchPath": "cherry/8dd2846fcf7b0ad254f3768149d28fe87af9b15d.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [analyzer] Harden RegionStoreManager::bindArray (#153177)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/8dd2846fcf7b0ad254f3768149d28fe87af9b15d.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 592552
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:45",
+    "tag": "ndk-r30",
+    "label": "[clang] Don't evaluate the initializer of constexpr-unknown",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/97885213bd4507b204b050c3cd570e365d21cc7d.patch",
+    "metadataPatchPath": "cherry/97885213bd4507b204b050c3cd570e365d21cc7d.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang] Don't evaluate the initializer of constexpr-unknown parameters. (#142498)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/97885213bd4507b204b050c3cd570e365d21cc7d.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 577646
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:46",
+    "tag": "ndk-r30",
+    "label": "[clang] Fix nondeterminism in MemberPointerType (#137910)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/0764f65a7fb06703610b33a86ca79025fa4050a4.patch",
+    "metadataPatchPath": "cherry/0764f65a7fb06703610b33a86ca79025fa4050a4.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang] Fix nondeterminism in MemberPointerType (#137910)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/0764f65a7fb06703610b33a86ca79025fa4050a4.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 574242
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:47",
+    "tag": "ndk-r30",
+    "label": "[clang] Remove hasValue() check in",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/8b3d4bdf8bade1d1faa8ff3fcbdda7060f8b46d8-v2.patch",
+    "metadataPatchPath": "cherry/8b3d4bdf8bade1d1faa8ff3fcbdda7060f8b46d8-v2.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang] Remove hasValue() check in `RecordExprEvaluator::VisitCXXConstructExpr()` (#154610)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/8b3d4bdf8bade1d1faa8ff3fcbdda7060f8b46d8-v2.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 584948
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:48",
+    "tag": "ndk-r30",
+    "label": "[clang][ARM] Fix setting of MaxAtomicInlineWidth. (#151404)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/558277ae4db665bea93686db4b4538c1c2c0cf4d.patch",
+    "metadataPatchPath": "cherry/558277ae4db665bea93686db4b4538c1c2c0cf4d.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang][ARM] Fix setting of MaxAtomicInlineWidth. (#151404)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/558277ae4db665bea93686db4b4538c1c2c0cf4d.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 585039
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "d72598f4e8c4d26a905ab6ddb3065c0105aa0f6ff128d4fe332abaeba3558260",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Basic/Targets/ARM.cpp b/clang/lib/Basic/Targets/ARM.cpp",
+      "diff --git a/clang/test/CodeGen/atomic-arm.c b/clang/test/CodeGen/atomic-arm.c",
+      "diff --git a/clang/test/CodeGen/pr45476.cpp b/clang/test/CodeGen/pr45476.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:49",
+    "tag": "ndk-r30",
+    "label": "[clang][Modules] Keep current-TU global-module-fragment",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/564b027db16dc14c2027cd5a2fbb8bf1d3877b85.patch",
+    "metadataPatchPath": "cherry/564b027db16dc14c2027cd5a2fbb8bf1d3877b85.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [clang][Modules] Keep current-TU global-module-fragment internal-linkage functions viable in overload resolution (#210825)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/564b027db16dc14c2027cd5a2fbb8bf1d3877b85.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 627322
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "4509bed41774da72d8654d3aaf0dd0c6970a042bc6847da265d7626c750ee477",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/clang/lib/Sema/SemaOverload.cpp b/clang/lib/Sema/SemaOverload.cpp",
+      "diff --git a/clang/test/Modules/gmf-internal-linkage-in-template.cppm b/clang/test/Modules/gmf-internal-linkage-in-template.cppm"
+    ]
+  },
+  {
+    "id": "ndk-r30:50",
+    "tag": "ndk-r30",
+    "label": "[compiler-rt][AArch64] Don't use x18 in __arm_sme_save",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch",
+    "metadataPatchPath": "cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [compiler-rt][AArch64] Don't use x18 in __arm_sme_save (#157802)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 590288
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "4eec14da6800f8f29669d996cc7ef9ddfe620980d17bd0d4753595e7167731b9",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/compiler-rt/lib/builtins/aarch64/sme-abi.S b/compiler-rt/lib/builtins/aarch64/sme-abi.S"
+    ]
+  },
+  {
+    "id": "ndk-r30:51",
+    "tag": "ndk-r30",
+    "label": "[libc++] Add tests for the ABI break introduced by switching",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/2a83cf5d0e592890f74c5d5ff4a30ae4cf54b61b.patch",
+    "metadataPatchPath": "cherry/2a83cf5d0e592890f74c5d5ff4a30ae4cf54b61b.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libc++] Add tests for the ABI break introduced by switching to _LIBCPP_COMPRESSED_PAIR (#154559)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/2a83cf5d0e592890f74c5d5ff4a30ae4cf54b61b.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 587558
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:52",
+    "tag": "ndk-r30",
+    "label": "[libc++] Expand Android libc++ test config files (#142846)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch",
+    "metadataPatchPath": "cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libc++] Expand Android libc++ test config files (#142846)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 578705
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "5836dbd95212aa195eb0f86398b94196c9dcb324cb70cd0cb624ae57f8de50a9",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxx/cmake/caches/AndroidNDK.cmake b/libcxx/cmake/caches/AndroidNDK.cmake",
+      "diff --git a/libcxx/test/configs/llvm-libc++-android-ndk.cfg.in b/libcxx/test/configs/llvm-libc++-android.cfg.in",
+      "diff --git a/libcxxabi/test/configs/llvm-libc++abi-android-ndk.cfg.in b/libcxxabi/test/configs/llvm-libc++abi-android.cfg.in"
+    ]
+  },
+  {
+    "id": "ndk-r30:53",
+    "tag": "ndk-r30",
+    "label": "[libc++] Fix ABI break introduced by switching to",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch",
+    "metadataPatchPath": "cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libc++] Fix ABI break introduced by switching to _LIBCPP_COMPRESSED_PAIR (#154686)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 587656
+      }
+    },
+    "retainedBodyAvailable": true,
+    "retainedBodySHA256": "5d72ce3c080ab4553d6ef992a32d98ab1794c310a37c1714dc16414a93409910",
+    "readFailure": null,
+    "runtimeTargetHeaders": [
+      "diff --git a/libcxx/docs/ReleaseNotes/21.rst b/libcxx/docs/ReleaseNotes/21.rst",
+      "diff --git a/libcxx/include/__memory/compressed_pair.h b/libcxx/include/__memory/compressed_pair.h",
+      "diff --git a/libcxx/include/string b/libcxx/include/string",
+      "diff --git a/libcxx/test/libcxx/containers/associative/map/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/associative/map/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/associative/set/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/associative/set/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/associative/unord.map/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/associative/unord.map/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/associative/unord.set/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/associative/unord.set/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/sequences/deque/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/sequences/deque/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/sequences/list/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/sequences/list/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/sequences/vector.bool/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/sequences/vector.bool/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/sequences/vector/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/sequences/vector/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/default.pass.cpp b/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/default.pass.cpp",
+      "diff --git a/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/nullptr.pass.cpp b/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/nullptr.pass.cpp",
+      "diff --git a/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/pointer.pass.cpp b/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/pointer.pass.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:54",
+    "tag": "ndk-r30",
+    "label": "[libc++] Fix padding calculation for function reference types",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/769c42f4a552a75c8c38870ddc1b50d2ea874e4e.patch",
+    "metadataPatchPath": "cherry/769c42f4a552a75c8c38870ddc1b50d2ea874e4e.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libc++] Fix padding calculation for function reference types (#142125)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/769c42f4a552a75c8c38870ddc1b50d2ea874e4e.patch",
+      "version_range": {
+        "from": 563880,
+        "until": 577632
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:55",
+    "tag": "ndk-r30",
+    "label": "[libc++] Move std::abs into __math/abs.h (#139586)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/584cc376870505821b5ff0b0e80be85ee563ff0c.patch",
+    "metadataPatchPath": "cherry/584cc376870505821b5ff0b0e80be85ee563ff0c.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libc++] Move std::abs into __math/abs.h (#139586)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/584cc376870505821b5ff0b0e80be85ee563ff0c.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 579457
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:56",
+    "tag": "ndk-r30",
+    "label": "[libc++] Update `__mbstate_t.h` to include path to Android's",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/5320cc50b6b4e3684ff4ba93a5c2c2429c09386b.patch",
+    "metadataPatchPath": "cherry/5320cc50b6b4e3684ff4ba93a5c2c2429c09386b.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libc++] Update `__mbstate_t.h` to include path to Android's `mbstate_t.h` (#192307)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/5320cc50b6b4e3684ff4ba93a5c2c2429c09386b.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 615212
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:57",
+    "tag": "ndk-r30",
+    "label": "[libc][bazel] Re-enable memcpy prefetching on x86. (#138945)",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "cherry/98d26b8f67e6abdac24591138f07dc34e7f0e36e.patch",
+    "metadataPatchPath": "cherry/98d26b8f67e6abdac24591138f07dc34e7f0e36e.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[UPSTREAM] [libc][bazel] Re-enable memcpy prefetching on x86. (#138945)"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "cherry/98d26b8f67e6abdac24591138f07dc34e7f0e36e.patch",
+      "version_range": {
+        "from": 574158,
+        "until": 574609
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:58",
+    "tag": "ndk-r30",
+    "label": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "metadataPatchPath": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[compiler-rt] Allow finding LLVMConfig if CMAKE_FIND_ROOT_PATH_MODE_PACKAGE is set to ONLY"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+      "version_range": {
+        "from": 487747,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  },
+  {
+    "id": "ndk-r30:59",
+    "tag": "ndk-r30",
+    "label": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "numericClangRevision": 574158,
+    "declaredPatchPath": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "metadataPatchPath": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "declaredURLPathMatchesMetadata": true,
+    "metadata": {
+      "metadata": {
+        "info": [],
+        "title": "[libc++abi] Optionally move __cxa_demangle into libc++demangle.a"
+      },
+      "platforms": [
+        "android"
+      ],
+      "rel_patch_path": "move-cxa-demangle-into-libcxxdemangle.patch",
+      "version_range": {
+        "from": 475365,
+        "until": null
+      }
+    },
+    "retainedBodyAvailable": false,
+    "retainedBodySHA256": null,
+    "readFailure": "HTTP Error 429: Too Many Requests",
+    "runtimeTargetHeaders": []
+  }
+]

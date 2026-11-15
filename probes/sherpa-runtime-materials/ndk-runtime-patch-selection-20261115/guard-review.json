@@ -1,0 +1,36 @@
+{
+  "verdict": "accept_bounded_increment",
+  "findings": [
+    {
+      "severity": "LOW",
+      "location": "reportMarkdown > Receipt 与范围",
+      "detail": "The 58-body-missing count was worded as if the independent r27d BUILD.md 404 were included. Supplied scope keeps it outside the 58/134 patch-request count; the required replacement separates it."
+    },
+    {
+      "severity": "LOW",
+      "location": "reportMarkdown > 来源结果",
+      "detail": "Parsing of applied/failed/inapplicable output was attributed to write_source_info. Supplied r27d excerpt assigns parsing to get_source_info and serialization of only applied_patches to write_source_info; the required replacement fixes attribution."
+    }
+  ],
+  "requiredTextReplacements": [
+    {
+      "document": "reportMarkdown",
+      "old": "（56 次 HTTP 429、2 个 bad URL，含 r27d BUILD.md 404）。独立 r30 builder 另丢失 5 份成功 body，并记录 3 次 429；",
+      "new": "（56 次 HTTP 429、2 个 bad URL（HTTP 404））。独立的 r27d BUILD.md 404 是额外来源 404，不计入这 58/134。独立 r30 builder 另丢失 5 份成功 body，并记录 3 次 429；"
+    },
+    {
+      "document": "reportMarkdown",
+      "old": "- r27d write_source_info 可解析 `The following patches applied successfully:`，区分 applied/failed/inapplicable，但实际 writer 只序列化 pi.applied_patches；r27d source info 因而是官方 applied-success 声明，强于泛泛依赖列表，但不证明历史执行真实性、最终归档成员关系，也不覆盖 r30。",
+      "new": "- r27d get_source_info 可解析 `The following patches applied successfully:`，区分 applied/failed/inapplicable；但 write_source_info 只序列化 pi.applied_patches；r27d source info 因而是官方 applied-success 声明，强于泛泛依赖列表，但不证明历史执行真实性、最终归档成员关系，也不覆盖 r30。"
+    }
+  ],
+  "acceptedScope": "Accept the bounded increment as source-text/metadata/classification/future-candidate work after the two minimal report replacements; no P4/legal release acceptance and no completion of R4/R5/P1-P4/W3.",
+  "limitations": [
+    "Review is supplied-context only; no commands were executed in this review.",
+    "Official source text was downloaded/retained, but no runtime binaries or models were downloaded; no build/CMake evaluation, ELF scan, device operation, link proof, or final APK/archive retention proof is accepted.",
+    "The 134 patch-request accounting remains 76 retained and 58 missing (56 HTTP 429 and 2 bad patch URLs/HTTP 404); source-host 429 is not hy3 quota and no retries/fallback are assumed. The independent r27d BUILD.md 404 and the 8 unavailable r30 builder module bodies (5 local write failures, 3 HTTP 429) remain additional limitations, not reviewed file evidence.",
+    "Metadata agreement and r27d applied-success source info do not prove historical apply execution, final retention, or r30 generator semantics.",
+    "The four root LICENSE.TXT entries are candidate-only raw original copies with incomplete=true/finalBinaryPresenceVerified=false; no whole-toolchain NOTICE, full applicable-notice set, or final binary presence is established.",
+    "The 17 classifications are source-path scope only and do not establish final link, STL/NDK choice, ABI, sanitizer/architecture inclusion, or legal release conditions."
+  ]
+}
