@@ -1,0 +1,43 @@
+{
+  "evidenceCommit": "2ca58af4e0314812989840a05499837a5c5a7c37",
+  "marker": "<!-- w3-p1-member-matrix-20261115 -->",
+  "githubIssue": {
+    "id": 6890225516,
+    "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6890225516",
+    "sha256": "76e4cf90942b370a2a23ade9d4b94fa5c9c87f2580094966f06f45375279103d",
+    "readbackExact": true
+  },
+  "gitlabIssue": {
+    "id": 44852,
+    "url": null,
+    "sha256": "3db1181956847b313804acd957784e43bfe090b2d41878b5538109ea50cc48b7",
+    "readbackExact": true,
+    "project": 461,
+    "issue": 15
+  },
+  "githubWiki": {
+    "commit": "1f2ac678750cc50536ea05e3344401d248cecb22",
+    "sha256": "7318a80149f7ec373f9363cfd5b490f428ae93f831ca6e8c5b72063cc120c1bd",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "7318a80149f7ec373f9363cfd5b490f428ae93f831ca6e8c5b72063cc120c1bd",
+    "readbackExact": true
+  },
+  "wikiContentSHA256Equal": true,
+  "publicationRecovery": {
+    "firstGithubRead": "net/http: TLS handshake timeout",
+    "firstAttemptIssueWrites": 0,
+    "recovery": "single invocation-only direct route with full pagination and marker guard",
+    "globalProxyOrCredentialsChanged": false
+  },
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "P1Complete": false,
+  "productionDependencyChanges": 0,
+  "freezeFiles": 161,
+  "protectedOutsideOwnedSharedUnchanged": 166,
+  "artifactRoot": ".omx/artifacts/w3-p1-member-matrix-20261115"
+}

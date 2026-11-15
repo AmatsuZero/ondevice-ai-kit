@@ -1,3 +1,7 @@
+## 2026-11-15 W3成员矩阵已提交并双端同步
+
+本地2ca58af精确33文件，21成员/九输入组与既有隔离消费者增量经hy4free完整限定复核接受，两LOW及父补七路径收据边界保留。GH#15comment6890225516/GL#15note44852/GHWiki1f2ac678逐字回读，双Wiki SHA7318a80149f7ec373f9363cfd5b490f428ae93f831ca6e8c5b72063cc120c1bd一致，[同步收据](validation/w3-p1-member-matrix-sync-20261115.json)。GH首GET TLS超时零写入，原件保留；调用级直连及完整分页恢复，marker已用勿重发、不改全局代理/凭据。所有本轮helper/发布终态，勿poll旧句柄；原native429不重试，627.210秒hy4 JSON截断拒收不追改。161freeze/166非本次共享路径与原dirty保持，ADB清单仍空、新run零prepare/消费；源码未push、goal active。P1实际生产候选采用与输入完整性可信度复核，P2–P4及R4/R5/W3仍open；不以数量、隔离消费者或SDK既有metadata图关闭。下一继续上述实际边界；不重复已验归档/日志/构建/ADB恢复试验、不以模拟器替代真机。
+
 ## 2026-11-15 W3成员矩阵与冻结消费者绑定已核
 
 21/21非目录成员对应9输入组；124class→22固定Kotlin源路径/GitBlob、APK类名覆盖及4份arm64 SO字节相等均已核。两Sherpa job实际version.cc日期/SHA补丁已重建匹配，不写无补丁；嵌套ORT四ABI实际source/patch/API27/NNAPI/LTO关联保持。[验证](validation/w3-p1-member-matrix-20261115.md)。hy4free完整限定复核accept增量，两LOW边界已保留；原native429与627.210秒hy4 JSON截断拒收保留。170保护/161freeze保持，ADB空、新run未prepare/消费；零安装/模型/生产变更。P1输入完整性/生产候选绑定及P2–P4、R4/R5、W3保持open；源码未push、goal active。既有SDK输出/POM/module和fresh离线metadata图仅另作本地观察，未纳入本次事实复核或冒充生产采用。
