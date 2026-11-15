@@ -1,3 +1,7 @@
+## 2026-11-15 W3四JVM依赖声明及stdlib嵌套归属已补核
+
+当前四JVM坐标POM/三固定来源/12原文本81755B已核；stdlib四个源包成员与固定commit逐字节同，四对应class存在，GWT/Guava/ThreeTenBp/Boost原归属及条款保留，[验证](validation/w3-jvm-dependency-notices-20261115.md)。不能把顶层Apache或Compiler NOTICE当完整stdlib通知；非字节码重建/最终DEX或完整组成接受。原无缓存POM/sha512404/根目录漏选失败与精确恢复保留，原材料不覆盖；生产通知brief已补本增量。161freeze通过后唯一ADB清单为空，零prepare/新helper/构建/生产实现；原native/CBC429停线，新免费线路选择待答，不重复提问/调用。P1–P4/R4/R5/W3仍open、goal active；下一通知生产候选或实体连接变化后固定合同验收，不重取这些声明/重扫旧产物或循环USB恢复。
+
 ## 2026-11-15 W3通知缺口已提交并双端同步
 
 本地5c92ca6精确14文件；当前SDK/runtime无独立通知资源已由产物验证，未改生产。GH#15comment6891210671/GL#15note44856/GHWikiac864c84逐字回读，双Wiki SHAdd144c86d5d637d5439a5395b9af341a1fdb1f93e8952d0f6caa8b7b9cb06361一致，[同步收据](validation/w3-notice-delivery-sync-20261115.json)。marker已用勿重发、源码未push；本轮所有检查/发布终态，零helper/构建/设备。173原字节或共享余字节及161freeze通过，精确通知集成/独立最终APK验收brief已备；原native/CBC429不重试，已提出的新免费线路选择待答，不重复问或用沉默替代。P1–P4/R4/R5/W3仍open、goal active；下一按所选线路交付实际生产通知候选，或实体连接变化后的固定合同验收，不重扫已验产物/循环USB恢复。

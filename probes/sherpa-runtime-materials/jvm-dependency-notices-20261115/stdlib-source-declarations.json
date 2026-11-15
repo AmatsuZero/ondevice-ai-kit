@@ -1,0 +1,100 @@
+{
+  "sourceJar": {
+    "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/8425dbb0afc60557c0fe28e19700b758bc8822cc/kotlin-stdlib-2.4.0-sources.jar",
+    "bytes": 757669,
+    "sha256": "bca27f834e278d08c1b85a40e636450867e8251c284fd4c24e9879bb99e301c5"
+  },
+  "sourceHeaderOrCommentHits": [
+    {
+      "member": "commonMain/kotlin/collections/AbstractList.kt",
+      "bytes": 6440,
+      "sha256": "f81916c3a94808ab1df9d853c1c63ef9fc9f7ca4b7d382509cc6e4b74b953a10",
+      "matches": [
+        {
+          "line": 7,
+          "text": " * Based on GWT AbstractList"
+        }
+      ]
+    },
+    {
+      "member": "commonMain/kotlin/collections/AbstractMap.kt",
+      "bytes": 5389,
+      "sha256": "21309988b541e460b4de3c7c7b2b752cce1c29e33f1b33eefe9581ea5cb4fb6e",
+      "matches": [
+        {
+          "line": 7,
+          "text": " * Based on GWT AbstractMap"
+        }
+      ]
+    },
+    {
+      "member": "commonMain/kotlin/time/Instant.kt",
+      "bytes": 38177,
+      "sha256": "25b71947b2763a1885dd40157ad76dcfc480c7bee8f559dc95be9b648c1d551b",
+      "matches": [
+        {
+          "line": 7,
+          "text": " * Based on the ThreeTenBp project."
+        },
+        {
+          "line": 8,
+          "text": " * Copyright (c) 2007-present, Stephen Colebourne & Michael Nascimento Santos"
+        },
+        {
+          "line": 492,
+          "text": "            // org.threeten.bp.LocalDate#toEpochDay"
+        },
+        {
+          "line": 531,
+          "text": "            // org.threeten.bp.LocalDate#ofEpochDay"
+        }
+      ]
+    },
+    {
+      "member": "jvmMain/kotlin/collections/MapsJVM.kt",
+      "bytes": 12758,
+      "sha256": "64f9494b4d4e1ea4396812566eca3e6b1f6acb0541eb7829d2eb9c1b7296fe4e",
+      "matches": [
+        {
+          "line": 294,
+          "text": " * Calculate the initial capacity of a map, based on Guava's"
+        },
+        {
+          "line": 295,
+          "text": " * [com.google.common.collect.Maps.capacity](https://github.com/google/guava/blob/v28.2/guava/src/com/google/common/collect/Maps.java#L325)"
+        }
+      ]
+    },
+    {
+      "member": "jvmMain/kotlin/util/MathJVM.kt",
+      "bytes": 43709,
+      "sha256": "6d7e734fc889f6eefd52be265a159f6309bbd558d1594390b01fc9ec56594db7",
+      "matches": [
+        {
+          "line": 180,
+          "text": "// Inverse hyperbolic function implementations derived from boost special math functions,"
+        },
+        {
+          "line": 181,
+          "text": "// Copyright Eric Ford & Hubert Holin 2001."
+        }
+      ]
+    },
+    {
+      "member": "jvmMain/kotlin/util/UnsignedJVM.kt",
+      "bytes": 4959,
+      "sha256": "8606bfcdb979b9a87da2da017b3c12b5fc5aa952e1ea36222d9f1edb0d14e80d",
+      "matches": [
+        {
+          "line": 11,
+          "text": "// Division and remainder are based on Guava's UnsignedLongs implementation"
+        },
+        {
+          "line": 12,
+          "text": "// Copyright 2011 The Guava Authors"
+        }
+      ]
+    }
+  ],
+  "binaryCompositionOrBytecodeEquivalenceProven": false
+}

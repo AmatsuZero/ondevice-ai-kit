@@ -1,0 +1,29 @@
+{
+  "cached-pom-missing.json": {
+    "component": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2",
+    "symptom": "coordinate-version cache has no */*.pom; initial inventory asserted at zero POMs",
+    "failureBeforeAnyDownload": true,
+    "deviceListExitCode": 0,
+    "devicesPresent": false,
+    "recovery": "inspect exact cache and fixed official metadata; do not infer absent license or change caches"
+  },
+  "sha512-unavailable.json": {
+    "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.4.0/kotlin-stdlib-2.4.0.pom.sha512",
+    "httpStatus": 404,
+    "completedPomBytes": 2299,
+    "completedPomSHA256": "8194ff79a9ee24a7fa3f74a6b179c04a1859de8b987a4f0983056e59451721de",
+    "completedCoordinates": 2,
+    "noOverwriteOrRefetchOfCompletedInputs": true,
+    "recovery": "reuse saved POM; compare existing cached POM and fetch fixed published SHA1 metadata; finish annotations independently"
+  },
+  "root-license-directory-failure.json": {
+    "symptom": "root-only regular-file selection returned no license text for fixed Kotlin v2.4.0; assert files failed",
+    "completedRootTreesRetained": [
+      "kotlinx.coroutines-root-tree.raw",
+      "kotlin-root-tree.raw"
+    ],
+    "verifiedCause": "Kotlin root has a license directory rather than matching root regular files",
+    "recovery": "read fixed license subtree; reuse successful root metadata and coroutines LICENSE; finish untouched annotations separately",
+    "noProviderFailure": true
+  }
+}

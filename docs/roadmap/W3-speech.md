@@ -1,3 +1,7 @@
+## 2026-11-15：JVM声明补齐并确认stdlib嵌套归属
+
+当前四解析JVM坐标的POM与三固定来源已核，12原始文本81755B保留；Kotlin stdlib四源成员与固定commit逐字节同，四对应class存在，GWT/Guava/ThreeTenBp/Boost条款及归属已补，[验证](../validation/w3-jvm-dependency-notices-20261115.md)。顶层Apache/Compiler NOTICE不能替代适用嵌套通知；完整组成/字节码等价/最终DEX及生产通知未通过，P1–P4/R4/R5/W3保持open。唯一ADB清单为空，零prepare/helper/构建/生产实现；原429停线，待已提出的新线路选择。
+
 ## 2026-11-15：现有SDK通知交付缺口已确认
 
 固定17产物/25容器/2243非目录成员的有序清单与解压负载经Python/Info-ZIP交叉核对；当前Sherpa SDK/runtime没有独立通知资源，[验证](../validation/w3-notice-delivery-20261115.md)。thin library-consumer不代表最终App，不能据其缺失断定打包丢弃；58参照文本不是完整/全部适用清单。生产通知选择、SDK集成和独立最终APK保留验收任务已准备，原native/CBC429停线，等待已提新线路选择。47源码/161freeze保持，零构建/helper/设备/生产改动；P1–P4/R4/R5/W3保持open。

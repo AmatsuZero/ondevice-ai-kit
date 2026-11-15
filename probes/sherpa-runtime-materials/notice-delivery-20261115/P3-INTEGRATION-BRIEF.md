@@ -14,7 +14,7 @@
 
 候选必须提供通知选择表，逐项写明来源路径、原文字节摘要、组件/revision、采用理由、适用边界、交付路径。按已确认的实际构建版本选材；不能把历史 Eigen 3.4 候选、实际 Sherpa Eigen 5.0.1、嵌套 ORT 依赖混成一种版本。Darts 声明及已观察的上游 Android 补丁说明不得遗漏；原 ThreadPool 的实现已换为空 stub，不能声明其必然最终嵌入。对组成尚未确认的材料显式保留未决或补充说明，不能将全部 58 份参照文本自动当必要通知。
 
-原许可、声明、归属逐字节保留，单独记录修改说明，不改写上游条款。此任务不包含 Qwen/Whisper 模型权重交付，模型材料另按其固定来源处理。Kotlin、coroutines、annotations 等已解析依赖也在生产消费链的适用清单核对范围内；本轮未补取它们的声明，候选不得凭名称猜测条款。
+原许可、声明、归属逐字节保留，单独记录修改说明，不改写上游条款。此任务不包含 Qwen/Whisper 模型权重交付，模型材料另按其固定来源处理。Kotlin、coroutines、annotations 等四个已解析依赖的POM/固定来源声明已另补在 [JVM材料](../jvm-dependency-notices-20261115/README.md)。Kotlin stdlib有GWT、Guava、ThreeTenBp、Boost四条实际源示例/对应class成员，候选须核嵌套归属；其Compiler NOTICE只作范围证据，不能自动当stdlib通知。该补充不证明完整递归组成或最终DEX保留，候选仍不得凭名称猜条款或仅复制POM顶层Apache声明。
 
 ## 必须由父端执行的验收
 

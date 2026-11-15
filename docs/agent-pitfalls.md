@@ -1,3 +1,7 @@
+## W3 JVM通知：POM顶层声明与Compiler NOTICE不能覆盖stdlib嵌套来源（2026-11-15）
+
+四解析JVM坐标POM均有Apache声明，但固定Kotlin许可README及实际sources JAR包含GWT/Guava/ThreeTenBp/Boost来源；四示例与固定commit逐字节同、当前JAR四class存在，BSD3/BSL1.0及原归属不能遗漏。Kotlin license/NOTICE自称Compiler distribution，勿直接当stdlib所需NOTICE；类存在仍非重建等价/最终R8或DEX保留。根级筛选又漏license目录的失败按既有坑恢复：只读精确subtree，不重取已成功输入。固定Kotlin POM.sha512实际404，复用本体、校已发布SHA1与原缓存；不把无缓存POM/缺某种checksum当无声明，或把SHA1写成SHA512。原失败、12原文本81755B与元数据见`probes/sherpa-runtime-materials/jvm-dependency-notices-20261115/`；只补材料，非生产通知/完整组成或发布通过。
+
 ## W3通知交付：thin消费者不证明最终打包丢失（2026-11-15）
 
 当前17份产物（含5 sources JAR辅助项）全成员检查没有独立通知资源；Sherpa SDK外层仅4非目录成员，runtime外层21含16SO，通知集成本身尚缺。两份8KB级consumer是thin library AAR，未合并传递runtime；其无通知不能证明AGP丢弃，也不能作最终App保留验收。有效后续是先固定适用组件/原声明及修改说明，集成SDK通知，再用独立最终APK提取比对；58历史/新来源参照不能不加选择直接当完整适用清单。本轮Python/Info-ZIP有序列表及串接解压负载相同，未构建/安装/改生产；名字与精确文本阴性不是法律符合性裁定。证据`probes/sherpa-runtime-materials/notice-delivery-20261115/`及[验证](validation/w3-notice-delivery-20261115.md)。
