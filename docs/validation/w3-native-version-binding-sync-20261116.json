@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-16",
+  "verifiedAtUTC": "2026-11-15T16:44:44.680582+00:00",
+  "evidenceCommit": "92c5943abb0358f5f828dab7763532b005edc42f",
+  "evidenceFiles": 34,
+  "marker": "<!-- w3-native-version-binding-20261116 -->",
+  "bodySHA256": "81250cc592d9a243833d116ab3344fdcc0c55acdcf2731908d8548d749cefa0e",
+  "issues": {
+    "gh": {
+      "id": 6897809741,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6897809741",
+      "sha256": "81250cc592d9a243833d116ab3344fdcc0c55acdcf2731908d8548d749cefa0e",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44872,
+      "url": null,
+      "sha256": "28b273d782255b5c58a27bb9db72dcbcd38b023c433667b4d1627c1cc960400a",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "773962eba7a5602779e8c3608a81e78b37bd07ab",
+    "sha256": "2fd706e2c16a7e955b8a60a057faad2153fd0a527a6d292208de7394448913c5",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "2fd706e2c16a7e955b8a60a057faad2153fd0a527a6d292208de7394448913c5",
+    "readbackExact": true
+  },
+  "bothWikiContentsEqual": true,
+  "allFourHy3RequestsTerminal": true,
+  "allThreePublicationProcessesTerminal": true,
+  "sourceBranchPushed": false,
+  "staticVersionLiteralBindings": 12,
+  "fourOriginalAARMemberChecks": 4,
+  "unitMethodsPassed": 12,
+  "sameLengthInMemoryNegativeControls": 8,
+  "negativeControlBoundary": "four decoder rejections for RET modifications and four parent expected-source comparison rejections for changed literal bytes",
+  "materialFiles": 25,
+  "frozenFilesVerified": 161,
+  "protectedWorkingFilesPreserved": 176,
+  "rawStderrWhitespaceWarningsPreserved": 2,
+  "sourceDocsOtherEvidenceDiffCheckExitCode": 0,
+  "cleanupNominalBytesRemoved": 15406,
+  "nativeCodeExecuted": false,
+  "newBuilds": 0,
+  "newDeviceCalls": 0,
+  "modelsOrAsrRuntimeDownloaded": false,
+  "wholeNativeSourceEquivalent": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "W3Complete": false,
+  "goalRemains": "active"
+}

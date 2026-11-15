@@ -1,3 +1,7 @@
+## 2026-11-16 W3 native版本字段对应已提交并双端同步
+
+92c5943精确34文件；GH#15 comment6897809741/GL#15 note44872/GH Wiki773962e逐字回读，双Wiki SHA2fd706e2c16a7e955b8a60a057faad2153fd0a527a6d292208de7394448913c5一致，[收据](validation/w3-native-version-binding-sync-20261116.json)。marker已用，源码未push，四hy3/三发布均终态，无待poll。四AAR C-API成员/12静态字面量、12测试/8仅内存负例及限定复核通过，25材料hash/161freeze/176原工作内容保持；首候选与夹具错误、原stderr两处尾空格保留，未格式化证据。精确清15406B单pyc，原ELF/AAR/全部prompt/raw保留；无新构建或设备动作。P1–P4/R4/R5/W3仍open、goal active。下一核R5现有预算建议与可靠测量缺口，提出具体可审方案；实体连接有新变化后再fresh固定未消费合同，不重试旧quota/源站429/USB/旧FILE。
+
 ## 2026-11-16 W3四ABI native版本字段已关联实际指令
 
 [验收](validation/w3-native-version-binding-20261116.md)：四份原AAR C-API库的版本/SHA/日期三导出函数，12个原始指令引用与version.cc既有CI修改一致；父LLVM操作数手算和hy3标准库原始字节解码地址相同，四成员同AAR。12项测试、8个同长仅内存损坏对照及161freeze通过；四免费hy3终态，限定复核accept/无finding，首候选6错误与后续测试夹具偏移错误均保留，解码器按helper精确集成。176既有工作文件在共享更新前不变，精确清15406B单个无open的pyc；零构建/设备/AiAi/麦克风/模型runtime下载。版本字面量可伪造，不是完整native源码/组成或生产接受；P1–P4/R4/R5/W3全open、goal active。当前待精确本地提交与双端记录；源码不push、不重试旧quota/源站429/USB/旧FILE。

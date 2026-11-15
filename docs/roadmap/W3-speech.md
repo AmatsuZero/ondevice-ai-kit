@@ -1,3 +1,7 @@
+## 2026-11-16：native版本字段对应已双端归档
+
+92c5943（34文件）及[同步收据](../validation/w3-native-version-binding-sync-20261116.json)：GH#15 comment6897809741/GL#15 note44872/GH Wiki773962e逐字回读，双Wiki SHA2fd706e2c16a7e955b8a60a057faad2153fd0a527a6d292208de7394448913c5一致。25材料/161freeze/176既有工作内容保持，四hy3及三发布均终态；12静态字面量对应不等于全部native源码/组成或发布接受。P1–P4/R4/R5/W3保持open，源码未push；下一R5可靠测量/预算方案，实体连接变化后续固定未消费run，不回放旧FILE或USB恢复循环。
+
 ## 2026-11-16：四ABI native版本函数已核原始指令引用
 
 [本次证据](../validation/w3-native-version-binding-20261116.md)覆盖四份固定C-API库、三函数/12个字面量，均与version.cc修改/两CI原38行相符；标准库解码与父LLVM手算地址一致，12测试及8个仅内存负例通过。四hy3完整终态、限定复核无finding；首候选/夹具错误保留，161freeze通过。未构建、执行native或触碰设备；版本字段不证明完整源码/组成，P1–P4/R4/R5/W3保持open。完整目标不缩减，源码未push，当前待本次精确提交/双端同步。
