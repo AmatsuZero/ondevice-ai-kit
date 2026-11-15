@@ -1,3 +1,7 @@
+## 2026-11-15：NDK/C++来源增量已双端记录
+
+本地36b6b48（100文件）及[同步收据](../validation/w3-ndk-runtime-provenance-sync-20261115.json)：GH#15comment6895112846/GL#15note44864/GHWikic601a1d逐字回读，双Wiki SHA a0741a9f…一致。免费hy3四请求均终态，171原保护/两W6范围外更新保留、161freeze与diff-check通过；三个重复任务缓存名义18551376B已精确清理。零新设备/构建，63生产通知未动；P1–P4/R4/R5/W3仍open，完整待办目标保持。下一实际cache/link/retention与runtime补丁/通知适用性，不重复已验材料或旧设备请求。
+
 ## 2026-11-15：NDK/C++ runtime来源增量，W3待办保持完整
 
 [验证](../validation/w3-ndk-runtime-provenance-20261115.md)固定八条ABI命令的两条工具链，并核两枚arm64产物note：Sherpa r30/16248370/API21、ORT r27d/13750724/API27；ORT编译器comment与公开manifest对应。69源路径/61唯一字节、30tree及官方runtime/LLVM来源与通知候选已核；GNU Linux静态选项不是Android STL选择，x86无显式OFF，ORT显式跳过legacy，不能合并推断最终静态组成。四免费hy3请求终态，guard限定接受，首两文档稿拒收后最终稿已核。63生产通知未改、零新构建/设备；P1–P4/R4/R5/W3全open，完整剩余目标不缩减，下一实际cache/link/retention与runtime补丁/通知适用性。

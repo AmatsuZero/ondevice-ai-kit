@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "36b6b481b1519cc967023b4ddc8de277cacfde1a",
+  "sourceFileCount": 100,
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-ndk-runtime-provenance-20261115 -->",
+  "issues": {
+    "gh": {
+      "id": 6895112846,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6895112846",
+      "sha256": "774536044ccf7d33abbeee7603a2408e278d1802f9d1fab7e10b1652a1fd2c04",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44864,
+      "url": null,
+      "sha256": "6092caf97d1228f355345e67b0d1e7eb063b5c99e472b6b7b948ca7a1420a72d",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "c601a1d49750004a6e8580a720e6d4ccbb379a9b",
+    "sha256": "a0741a9fc4c57e7050d0703051919fdec2e1687c0f8c47001a00211f890fcd89",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3\u8bed\u97f3\u9a8c\u6536\u4e0e\u540e\u7eed\u6539\u8fdb",
+    "sha256": "a0741a9fc4c57e7050d0703051919fdec2e1687c0f8c47001a00211f890fcd89",
+    "readbackExact": true
+  },
+  "wikiContentSHA256Equal": true,
+  "allReadbacksExact": true,
+  "allFourHy3RequestsTerminal": true,
+  "newBuilds": 0,
+  "newDeviceCalls": 0,
+  "originalProtectedBytesOrRemaindersVerified": 171,
+  "outsideW6UpdatesPreservedAndExcluded": 2,
+  "frozenContractFileCount": 161,
+  "cleanupDuplicateCacheFilesRemoved": 3,
+  "cleanupNominalBytesRemoved": 18551376,
+  "R4R5P1P2P3P4W3RemainOpen": true
+}

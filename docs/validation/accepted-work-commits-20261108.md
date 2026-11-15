@@ -1,3 +1,7 @@
+## 2026-11-15 W3 NDK/C++来源：36b6b48
+
+精确100文件；八ABI命令、两arm64原产物note、69源路径/61唯一字节及30tree与许可候选已父验。四免费hy3请求终态，限定guard接受、首两文档拒收后最终稿原字节采用。171原保护/两W6更新保留、161freeze/diff-check通过；GH#15comment6895112846/GL#15note44864和双Wiki回读同SHA，[收据](w3-ndk-runtime-provenance-sync-20261115.json)。只接受来源增量，零新构建/设备或生产通知编辑；P1–P4/R4/R5/W3保持open，源码未push。
+
 # 当前提交核对 — 2026-11-08T11:10:11+08:00
 
 Roadmap分支为`feat/sdk-foundation`，工作区`.worktrees/foundation`；仓库主目录仍为`main`。昨日14:59至今日10:42确有已验收成果未及时提交的空档，已通过独立切片提交补齐。
