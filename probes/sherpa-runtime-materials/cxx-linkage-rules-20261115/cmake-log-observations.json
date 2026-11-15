@@ -1,0 +1,192 @@
+[
+  {
+    "path": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/armeabi-v7a.log",
+    "sha256": "d9b140c42f76a75311d433b686e6e34269ace02a9c5850ec290949c496afa0cc",
+    "cmakeVersionObservations": [
+      {
+        "line": 488,
+        "text": "2026-09-04T15:55:48.2369228Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/armeabi-v7a/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      },
+      {
+        "line": 520,
+        "text": "2026-09-04T15:55:54.0945292Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/armeabi-v7a/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      },
+      {
+        "line": 551,
+        "text": "2026-09-04T15:55:54.7612728Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/armeabi-v7a/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      }
+    ],
+    "versionMatchCount": 55,
+    "cxxFlagsObservations": [
+      {
+        "line": 1150,
+        "text": "2026-09-04T15:56:06.2662108Z -- CMAKE_CXX_FLAGS: -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -ffunction-sections -fdata-sections"
+      }
+    ],
+    "explicitSTLObservations": []
+  },
+  {
+    "path": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/x86.log",
+    "sha256": "15bb74c3a6c3dd6f5cc22440e7da55342d74e5fac19197493ca9e297fad618fc",
+    "cmakeVersionObservations": [
+      {
+        "line": 488,
+        "text": "2026-09-04T15:55:52.2054665Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/x86/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      },
+      {
+        "line": 520,
+        "text": "2026-09-04T15:56:02.9311941Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/x86/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      },
+      {
+        "line": 551,
+        "text": "2026-09-04T15:56:04.4139548Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/x86/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      }
+    ],
+    "versionMatchCount": 55,
+    "cxxFlagsObservations": [
+      {
+        "line": 1146,
+        "text": "2026-09-04T15:56:20.6540004Z -- CMAKE_CXX_FLAGS: -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -ffunction-sections -fdata-sections"
+      }
+    ],
+    "explicitSTLObservations": []
+  },
+  {
+    "path": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/x86_64.log",
+    "sha256": "fa15439c8f6bb1343939933b304288a04d1964e87fea993b163053787353f1b6",
+    "cmakeVersionObservations": [
+      {
+        "line": 488,
+        "text": "2026-09-04T15:56:00.4869137Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/x86_64/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      },
+      {
+        "line": 520,
+        "text": "2026-09-04T15:56:17.4867458Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/x86_64/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      },
+      {
+        "line": 551,
+        "text": "2026-09-04T15:56:19.5123007Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/x86_64/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      }
+    ],
+    "versionMatchCount": 55,
+    "cxxFlagsObservations": [
+      {
+        "line": 1146,
+        "text": "2026-09-04T15:56:41.7759927Z -- CMAKE_CXX_FLAGS: -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -ffunction-sections -fdata-sections"
+      }
+    ],
+    "explicitSTLObservations": []
+  },
+  {
+    "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+    "sha256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6",
+    "cmakeVersionObservations": [
+      {
+        "line": 779,
+        "text": "2026-10-26T15:37:29.3865413Z -- CMake version: 3.31.6"
+      },
+      {
+        "line": 841,
+        "text": "2026-10-26T15:37:58.2998146Z -- CMake version: 3.31.6"
+      },
+      {
+        "line": 1581,
+        "text": "2026-10-26T15:40:55.9744355Z -- CMake version: 3.31.6"
+      }
+    ],
+    "versionMatchCount": 8,
+    "cxxFlagsObservations": [
+      {
+        "line": 865,
+        "text": "2026-10-26T15:37:59.5845469Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 891,
+        "text": "2026-10-26T15:38:02.5177040Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 939,
+        "text": "2026-10-26T15:38:09.2630337Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 940,
+        "text": "2026-10-26T15:38:09.2631480Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 1667,
+        "text": "2026-10-26T15:40:57.0680536Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 1693,
+        "text": "2026-10-26T15:40:59.6525226Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 1741,
+        "text": "2026-10-26T15:41:05.7680565Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 1742,
+        "text": "2026-10-26T15:41:05.7681924Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 2425,
+        "text": "2026-10-26T15:43:44.9067536Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 2451,
+        "text": "2026-10-26T15:43:47.5165494Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 2495,
+        "text": "2026-10-26T15:43:51.8446599Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 2496,
+        "text": "2026-10-26T15:43:51.8447732Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 3220,
+        "text": "2026-10-26T15:46:32.5912101Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 3246,
+        "text": "2026-10-26T15:46:35.3714522Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 3290,
+        "text": "2026-10-26T15:46:39.6956613Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      },
+      {
+        "line": 3291,
+        "text": "2026-10-26T15:46:39.6957844Z -- CMAKE_CXX_FLAGS: -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  "
+      }
+    ],
+    "explicitSTLObservations": []
+  },
+  {
+    "path": ".omx/artifacts/w3-runtime-materials-20261111/ort-provenance-followup/ort-arm64.log",
+    "sha256": "d2f7a0facac749ab6c165535a3fce3295b137d904048255c5e700203e8a1f274",
+    "cmakeVersionObservations": [
+      {
+        "line": 488,
+        "text": "2026-09-04T15:55:54.3850265Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/arm64-v8a/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      },
+      {
+        "line": 520,
+        "text": "2026-09-04T15:56:12.7217344Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/arm64-v8a/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      },
+      {
+        "line": 551,
+        "text": "2026-09-04T15:56:14.2835479Z   /home/runner/work/onnxruntime-libs/onnxruntime-libs/build-shared/arm64-v8a/Release/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)"
+      }
+    ],
+    "versionMatchCount": 59,
+    "cxxFlagsObservations": [
+      {
+        "line": 1139,
+        "text": "2026-09-04T15:56:37.2831487Z -- CMAKE_CXX_FLAGS: -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -ffunction-sections -fdata-sections"
+      }
+    ],
+    "explicitSTLObservations": []
+  }
+]

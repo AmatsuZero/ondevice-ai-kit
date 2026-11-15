@@ -1,3 +1,7 @@
+## 2026-11-15：C++默认链接分支补证，hy3修正版已集成
+
+[验证](../validation/w3-cxx-linkage-rules-20261115.md)绑定CMake3.31.6官方源码与五原日志，30源/元数据路径去重22文件、6NDK tree/18子对象边已核；两CI ZIP无历史cache/link/response。Sherpa默认legacy和ORT显式非legacy分别给出条件化静态libc++规则，不能由GNU OFF、编译flags或链接进度判最终archive保留。免费hy3首稿分支/null措辞拒收，修正版原字节集成；未做新构建/ELF重扫/设备或63通知变更，P1–P4/R4/R5/W3完整范围均保持open。下一runtime补丁/通知适用性、覆盖与可信度接受；实体连接有变化后再fresh固定未消费run，不循环USB或旧FILE。
+
 ## 2026-11-15：NDK/C++来源增量已双端记录
 
 本地36b6b48（100文件）及[同步收据](../validation/w3-ndk-runtime-provenance-sync-20261115.json)：GH#15comment6895112846/GL#15note44864/GHWikic601a1d逐字回读，双Wiki SHA a0741a9f…一致。免费hy3四请求均终态，171原保护/两W6范围外更新保留、161freeze与diff-check通过；三个重复任务缓存名义18551376B已精确清理。零新设备/构建，63生产通知未动；P1–P4/R4/R5/W3仍open，完整待办目标保持。下一实际cache/link/retention与runtime补丁/通知适用性，不重复已验材料或旧设备请求。

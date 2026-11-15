@@ -1,3 +1,7 @@
+## W3 CMake默认规则：legacy与非legacy不可合并（2026-11-15）
+
+hy3首稿把Sherpa默认legacy与ORT显式legacy=false混在CMake Common分支，并把未设置STL的投影null写成命令观察，已拒收且原件保留。固定r30 wrapper默认legacy=true、include后return；只有该分支NOT ANDROID_STL时默认c++_static并加-static-libstdc++。ORT按实际CMake3.31.6 Common的无truthy STL/无旧GNU目录及unified分支条件解释；四ABI编译flags的-stdlib=libc++仍不证明历史最终静态archive抽取。查过的hooks/flags没有选择覆盖，不等于所有cache/target覆盖已穷尽。两既有CI ZIP的20/1成员无cache/link/response，不能重新下载同包或用进度行假充完整命令。父投影KeyError:logPath仅因observed-toolchains含一条path聚合row；保留首错，选择实际日志row恢复，不重跑编译。见[验证](validation/w3-cxx-linkage-rules-20261115.md)及`.omx/artifacts/w3-cxx-linkage-20261115T134154Z/`，全部W3门槛保持。
+
 ## W3 NDK：Linux GNU开关不能排除Android C++ runtime（2026-11-15）
 
 固定Sherpa option仅在NOT BUILD_SHARED_LIBS且CMAKE_SYSTEM_NAME=Linux分支控制GNU libstdc++/libgcc；Android共享构建的OFF不选择libc++，x86命令又没有显式OFF。ORT实际NDK27.3.13750724/legacy=false与SherpaNDK30.0.16248370的默认legacy路线须分开，本机r27/beta3仅参考。两枚arm64原产物note分别为r27d/13750724/API27与r30/16248370/API21，ORT comment可对应compiler manifest；JNI缺comment警告不是缺NDK note。上游Python解码仍用同一参考LLVM定位，不能称完整独立解析器；tree/blob核对不等于签名/可信构建。75/59 patch引用、whole-toolchain NOTICE及基础LLVM LICENSE不证明所有补丁已应用、最终保留或完整适用通知。hy3首两稿的缩小W3范围、工具零执行混写和ORT JNI误名已拒收，最终稿保持完整目标与真实成员。见[验证](validation/w3-ndk-runtime-provenance-20261115.md)及`.omx/artifacts/w3-ndk-runtime-20261115T130823Z/`，不重放旧构建或全库扫描来替代缺失link证据。

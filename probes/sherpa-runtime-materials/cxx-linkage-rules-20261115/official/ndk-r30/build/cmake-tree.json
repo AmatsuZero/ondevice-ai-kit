@@ -1,0 +1,42 @@
+)]}'
+{
+  "id": "bc14437605f89ffc687d33f73ffcfb2331ee2752",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "51e31ab38eda5f4725753c32ef3bcb4ec90af159",
+      "name": "adjust_api_level.cmake"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4badd868cea491199926a7ab002f7d36af7b6ff3",
+      "name": "android-legacy.toolchain.cmake"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "86c09a82b4056687e053e0ecba8e8e520e668678",
+      "name": "android.toolchain.cmake"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e78a2bdaa4c440176409cabf705c3efbd30f532a",
+      "name": "exports.cmake"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "17c15c4f5e8f20cbc13bc89f76b60c64e00effcb",
+      "name": "flags.cmake"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "2d649848210e8cafb3a7b5add933136c44a6bc20",
+      "name": "hooks"
+    }
+  ]
+}

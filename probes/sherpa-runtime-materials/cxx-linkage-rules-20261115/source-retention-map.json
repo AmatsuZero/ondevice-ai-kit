@@ -1,0 +1,212 @@
+[
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Copyright.txt",
+    "retainedPath": "official/cmake-3.31.6/Copyright.txt",
+    "bytes": 5477,
+    "sha256": "0676e30827684487aa0ea8f72f01e9460a6320fa34a2888df0ad1dd3e8a06eb8",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Help/variable/CMAKE_ANDROID_STL_TYPE.rst",
+    "retainedPath": "official/cmake-3.31.6/Help/variable/CMAKE_ANDROID_STL_TYPE.rst",
+    "bytes": 1121,
+    "sha256": "9bd403f450136cd44eff0a2c60525ab3f22e7ba2fcb44f71419eacb90a76ea51",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Modules/Platform/Android-Clang-CXX.cmake",
+    "retainedPath": "official/cmake-3.31.6/Modules/Platform/Android-Clang-CXX.cmake",
+    "bytes": 322,
+    "sha256": "f5a58e160d3e1f2c7667d1e123124a96f0d899db0d9071d1947f3d14e1816dbf",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Modules/Platform/Android-Clang.cmake",
+    "retainedPath": "official/cmake-3.31.6/Modules/Platform/Android-Clang.cmake",
+    "bytes": 3279,
+    "sha256": "d17bd45f7cbf418df844b5d81b050b5e6cf7904eb548379739b851a0014ebda6",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Modules/Platform/Android-Common.cmake",
+    "retainedPath": "official/cmake-3.31.6/Modules/Platform/Android-Common.cmake",
+    "bytes": 8228,
+    "sha256": "4c92f92b74d8934829409f73f7debf552fb04b45ed3ac28405f36ab5560c7fd2",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Modules/Platform/Android-Determine.cmake",
+    "retainedPath": "official/cmake-3.31.6/Modules/Platform/Android-Determine.cmake",
+    "bytes": 25062,
+    "sha256": "a2d98e6a2ce645dda4492fecc663e40f61eb28b23f04071dfad8b1e9765a4f1b",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-tag-object.json",
+    "retainedPath": "official/cmake-tag-object.json",
+    "bytes": 2580,
+    "sha256": "788bf1235a4d101fa414d3081ca46e7726d55b9e40a671627882632bea8d18e9",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-tag-ref.json",
+    "retainedPath": "official/cmake-tag-ref.json",
+    "bytes": 327,
+    "sha256": "1e1137fa7e5d741f8cd1d82517ebf58fba0d78ab9c891027fa066fe9f454a4c2",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/fetch-receipts.json",
+    "retainedPath": "official/fetch-receipts.json",
+    "bytes": 3609,
+    "sha256": "cb23be5ed6b68ce5a37fae050a1cde79670e6903dd2d2f56fd126db9a31dbc87",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-fetch-receipts.json",
+    "retainedPath": "official/ndk-fetch-receipts.json",
+    "bytes": 11623,
+    "sha256": "189bfbe20679d71d308a999617796791dd2b5461f7c7d4d28e0bfdd3316cdc02",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake/exports.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/exports.cmake",
+    "bytes": 3097,
+    "sha256": "507011718b06a0c798c0259b0bdadbf1ec4eececd35552972f8b2def111e803a",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake/flags.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/flags.cmake",
+    "bytes": 4644,
+    "sha256": "f717810dc295a51231672e1779f0299b46dcd6a672117425b7052c307069df61",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake/hooks/post/Android-Clang.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/post/Android-Clang.cmake",
+    "bytes": 708,
+    "sha256": "cb7638e373e4e47666935a666aaa19ebd1908ae0560afe0fa42f53e096c68ee3",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake/hooks/post/Android-Determine.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/post/Android-Determine.cmake",
+    "bytes": 960,
+    "sha256": "36687672d108ded2847d9934666a9aadcecc5898a15ea4304ed0b27f320e6976",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake/hooks/post-tree.json",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/post-tree.json",
+    "bytes": 827,
+    "sha256": "6eee1b8349c44ad1e4845bdedf4ce28b6d714bef2f0655d2775b39d6dcfa7acc",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake/hooks/pre/Android-Clang.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/pre/Android-Clang.cmake",
+    "bytes": 714,
+    "sha256": "5c8d0e12e5c1084b4686fec21989a6bd81aedf070b0988920581bae8600d87c8",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake/hooks/pre/Android-Determine.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/pre/Android-Determine.cmake",
+    "bytes": 718,
+    "sha256": "d1d6c7c89852bb63f03c801556a4ee223391c0b01eb42ab30fd3377e01a08ce5",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake/hooks/pre-tree.json",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/pre-tree.json",
+    "bytes": 827,
+    "sha256": "3f2dd6e1cefb5d37a68aee5a56569576858d5cf23deb18ad37b2b8b152943050",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake/hooks-tree.json",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks-tree.json",
+    "bytes": 344,
+    "sha256": "ee16485f72dbe4e1167979b5e0f04dcdbb4a7ad4dd550723c818a7b03eb8d0f3",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r27d/build/cmake-tree.json",
+    "retainedPath": "official/ndk-r27d/build/cmake-tree.json",
+    "bytes": 957,
+    "sha256": "80253067fcf5978baf0d7756b8425ae16dc9fcdc49e4f4ebd2693cb27a10c808",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake/exports.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/exports.cmake",
+    "bytes": 3097,
+    "sha256": "507011718b06a0c798c0259b0bdadbf1ec4eececd35552972f8b2def111e803a",
+    "duplicateBytes": true
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake/flags.cmake",
+    "retainedPath": "official/ndk-r30/build/cmake/flags.cmake",
+    "bytes": 4720,
+    "sha256": "efbd7098eb9850910094a2b372560705518d6c3203471074cddd4195068299e0",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake/hooks/post/Android-Clang.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/post/Android-Clang.cmake",
+    "bytes": 708,
+    "sha256": "cb7638e373e4e47666935a666aaa19ebd1908ae0560afe0fa42f53e096c68ee3",
+    "duplicateBytes": true
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake/hooks/post/Android-Determine.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/post/Android-Determine.cmake",
+    "bytes": 960,
+    "sha256": "36687672d108ded2847d9934666a9aadcecc5898a15ea4304ed0b27f320e6976",
+    "duplicateBytes": true
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake/hooks/post-tree.json",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/post-tree.json",
+    "bytes": 827,
+    "sha256": "6eee1b8349c44ad1e4845bdedf4ce28b6d714bef2f0655d2775b39d6dcfa7acc",
+    "duplicateBytes": true
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake/hooks/pre/Android-Clang.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/pre/Android-Clang.cmake",
+    "bytes": 714,
+    "sha256": "5c8d0e12e5c1084b4686fec21989a6bd81aedf070b0988920581bae8600d87c8",
+    "duplicateBytes": true
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake/hooks/pre/Android-Determine.cmake",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/pre/Android-Determine.cmake",
+    "bytes": 718,
+    "sha256": "d1d6c7c89852bb63f03c801556a4ee223391c0b01eb42ab30fd3377e01a08ce5",
+    "duplicateBytes": true
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake/hooks/pre-tree.json",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks/pre-tree.json",
+    "bytes": 827,
+    "sha256": "3f2dd6e1cefb5d37a68aee5a56569576858d5cf23deb18ad37b2b8b152943050",
+    "duplicateBytes": true
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake/hooks-tree.json",
+    "retainedPath": "official/ndk-r27d/build/cmake/hooks-tree.json",
+    "bytes": 344,
+    "sha256": "ee16485f72dbe4e1167979b5e0f04dcdbb4a7ad4dd550723c818a7b03eb8d0f3",
+    "duplicateBytes": true
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/ndk-r30/build/cmake-tree.json",
+    "retainedPath": "official/ndk-r30/build/cmake-tree.json",
+    "bytes": 957,
+    "sha256": "1ff905ab08ef465d1f278897e168d702aab0df9329bdab687a456ebe1a34fc3a",
+    "duplicateBytes": false
+  }
+]

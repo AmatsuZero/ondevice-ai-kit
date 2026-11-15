@@ -1,3 +1,7 @@
+## 2026-11-15 W3 CMake/NDK默认链接规则已补证
+
+[验证](validation/w3-cxx-linkage-rules-20261115.md)及`probes/sherpa-runtime-materials/cxx-linkage-rules-20261115/`保留CMake3.31.6固定commit、两NDK hooks/flags/exports、30源/元数据路径去重22文件及6tree/18edge；五原日志/两既有ZIP已核，无新历史cache/link/response。Sherpa默认legacy与ORT显式legacy=false分别推导静态libc++默认规则，历史cache/覆盖和link-time archive保留未证。hy3首稿分支混写/null误读已拒收，修正版40.075s完整success并原字节集成；不计P4。零新构建/ELF重扫/设备/模型或runtime二进制下载/63生产通知改变；P1–P4/R4/R5/W3均open、goal active，完整目标不缩减。父投影聚合row缺logPath的KeyError已保留并按实际log行恢复，非编译失败。原174保护中三F08范围外文件有并发更新，保留且排除本次提交。下一runtime相关补丁与通知适用性、完整输入覆盖及最终App采用/发布接受；无实体连接变化不重探、不重试quota/旧FILE。当前待最终核验、精确提交及新marker双端同步，源码不push。
+
 ## 2026-11-15 W3 NDK/C++来源已提交并双端同步
 
 本地36b6b48精确100文件；GH#15comment6895112846/GL#15note44864/GHWikic601a1d均逐字回读，双Wiki SHA a0741a9fc4c57e7050d0703051919fdec2e1687c0f8c47001a00211f890fcd89一致，[同步收据](validation/w3-ndk-runtime-provenance-sync-20261115.json)。marker已用勿重发，源码分支未push；四hy3/三个发布进程均终态、无待poll。171原保护余字节/两W6范围外更新保留，161freeze/diff-check通过；三个相同且无open handle的任务缓存精确清18551376B名义量，canonical与全部证据保留，不归因并发free变化。零新构建/设备；P1–P4/R4/R5/W3全open、goal active。下一实际cache/link/retention及runtime补丁/通知适用性，或实体连接变化后固定未消费run；不重试旧quota、重扫旧库、重取归档/旧FILE/heap或循环USB恢复。

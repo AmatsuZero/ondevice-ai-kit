@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "sourceHEAD": "34229197e4eea80e73ea5bae058af659d88f13f1",
+  "purpose": "fixed CMake3.31.6 and two NDK toolchain conditional C++ default rules; full W3 remains in scope",
+  "fileCount": 33,
+  "totalBytes": 151441,
+  "rootManifestExcludedFromOwnInventory": true,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 942,
+      "sha256": "03dfd6239d92d7838c9179db368c2b47d549d0922f5be29c7b344982a1e83961"
+    },
+    {
+      "path": "ci-zip-link-evidence-inventory.json",
+      "bytes": 1266,
+      "sha256": "cf3744d484a4e3e447bf0dcc99edcbc5f8d1860698ff715790dfab129feeb6a8"
+    },
+    {
+      "path": "cmake-log-observations.json",
+      "bytes": 10453,
+      "sha256": "44cf9d3401b9bd508e1b2c8c46f8c53a25e13526029c952804a2ed216b6e8b82"
+    },
+    {
+      "path": "guard-review-receipt.json",
+      "bytes": 563,
+      "sha256": "96ce1127f7026b37b8d15747f88c15945dd3155c5d4cb15210796a8b04fb9704"
+    },
+    {
+      "path": "guard-review.json",
+      "bytes": 1643,
+      "sha256": "ea3d0118c1e58e5a88bf295dc4b14a4aa34534ebf8caa21b772210b308913186"
+    },
+    {
+      "path": "hy3-report-receipt.json",
+      "bytes": 1175,
+      "sha256": "e9235168ef80a6be070b75acc6e18423b5295bf70323699957246f60da5d798f"
+    },
+    {
+      "path": "ndk-tree-binding.json",
+      "bytes": 5529,
+      "sha256": "6eb04d42c3dd36c0f5a68b50be293abf46854eba16ddecb64b434c5e44505a56"
+    },
+    {
+      "path": "official/cmake-3.31.6/Copyright.txt",
+      "bytes": 5477,
+      "sha256": "0676e30827684487aa0ea8f72f01e9460a6320fa34a2888df0ad1dd3e8a06eb8"
+    },
+    {
+      "path": "official/cmake-3.31.6/Help/variable/CMAKE_ANDROID_STL_TYPE.rst",
+      "bytes": 1121,
+      "sha256": "9bd403f450136cd44eff0a2c60525ab3f22e7ba2fcb44f71419eacb90a76ea51"
+    },
+    {
+      "path": "official/cmake-3.31.6/Modules/Platform/Android-Clang-CXX.cmake",
+      "bytes": 322,
+      "sha256": "f5a58e160d3e1f2c7667d1e123124a96f0d899db0d9071d1947f3d14e1816dbf"
+    },
+    {
+      "path": "official/cmake-3.31.6/Modules/Platform/Android-Clang.cmake",
+      "bytes": 3279,
+      "sha256": "d17bd45f7cbf418df844b5d81b050b5e6cf7904eb548379739b851a0014ebda6"
+    },
+    {
+      "path": "official/cmake-3.31.6/Modules/Platform/Android-Common.cmake",
+      "bytes": 8228,
+      "sha256": "4c92f92b74d8934829409f73f7debf552fb04b45ed3ac28405f36ab5560c7fd2"
+    },
+    {
+      "path": "official/cmake-3.31.6/Modules/Platform/Android-Determine.cmake",
+      "bytes": 25062,
+      "sha256": "a2d98e6a2ce645dda4492fecc663e40f61eb28b23f04071dfad8b1e9765a4f1b"
+    },
+    {
+      "path": "official/cmake-tag-object.json",
+      "bytes": 2580,
+      "sha256": "788bf1235a4d101fa414d3081ca46e7726d55b9e40a671627882632bea8d18e9"
+    },
+    {
+      "path": "official/cmake-tag-ref.json",
+      "bytes": 327,
+      "sha256": "1e1137fa7e5d741f8cd1d82517ebf58fba0d78ab9c891027fa066fe9f454a4c2"
+    },
+    {
+      "path": "official/fetch-receipts.json",
+      "bytes": 3609,
+      "sha256": "cb23be5ed6b68ce5a37fae050a1cde79670e6903dd2d2f56fd126db9a31dbc87"
+    },
+    {
+      "path": "official/ndk-fetch-receipts.json",
+      "bytes": 11623,
+      "sha256": "189bfbe20679d71d308a999617796791dd2b5461f7c7d4d28e0bfdd3316cdc02"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake/exports.cmake",
+      "bytes": 3097,
+      "sha256": "507011718b06a0c798c0259b0bdadbf1ec4eececd35552972f8b2def111e803a"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake/flags.cmake",
+      "bytes": 4644,
+      "sha256": "f717810dc295a51231672e1779f0299b46dcd6a672117425b7052c307069df61"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake/hooks/post/Android-Clang.cmake",
+      "bytes": 708,
+      "sha256": "cb7638e373e4e47666935a666aaa19ebd1908ae0560afe0fa42f53e096c68ee3"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake/hooks/post/Android-Determine.cmake",
+      "bytes": 960,
+      "sha256": "36687672d108ded2847d9934666a9aadcecc5898a15ea4304ed0b27f320e6976"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake/hooks/post-tree.json",
+      "bytes": 827,
+      "sha256": "6eee1b8349c44ad1e4845bdedf4ce28b6d714bef2f0655d2775b39d6dcfa7acc"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake/hooks/pre/Android-Clang.cmake",
+      "bytes": 714,
+      "sha256": "5c8d0e12e5c1084b4686fec21989a6bd81aedf070b0988920581bae8600d87c8"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake/hooks/pre/Android-Determine.cmake",
+      "bytes": 718,
+      "sha256": "d1d6c7c89852bb63f03c801556a4ee223391c0b01eb42ab30fd3377e01a08ce5"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake/hooks/pre-tree.json",
+      "bytes": 827,
+      "sha256": "3f2dd6e1cefb5d37a68aee5a56569576858d5cf23deb18ad37b2b8b152943050"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake/hooks-tree.json",
+      "bytes": 344,
+      "sha256": "ee16485f72dbe4e1167979b5e0f04dcdbb4a7ad4dd550723c818a7b03eb8d0f3"
+    },
+    {
+      "path": "official/ndk-r27d/build/cmake-tree.json",
+      "bytes": 957,
+      "sha256": "80253067fcf5978baf0d7756b8425ae16dc9fcdc49e4f4ebd2693cb27a10c808"
+    },
+    {
+      "path": "official/ndk-r30/build/cmake/flags.cmake",
+      "bytes": 4720,
+      "sha256": "efbd7098eb9850910094a2b372560705518d6c3203471074cddd4195068299e0"
+    },
+    {
+      "path": "official/ndk-r30/build/cmake-tree.json",
+      "bytes": 957,
+      "sha256": "1ff905ab08ef465d1f278897e168d702aab0df9329bdab687a456ebe1a34fc3a"
+    },
+    {
+      "path": "parent-acceptance.json",
+      "bytes": 890,
+      "sha256": "2bbdfbcd88f81ad39c78ab8d4fe45d5a38fca4de7057167d36600a20193c8bf3"
+    },
+    {
+      "path": "projection-initial-failure.json",
+      "bytes": 324,
+      "sha256": "bfde652e5872c02d0022e6b9770072659bfbae24606331ee1e92719f4c1b29f3"
+    },
+    {
+      "path": "runtime-linkage-log-excerpts.json",
+      "bytes": 37696,
+      "sha256": "f194308fcc69fb385f69ea1789bea32c9b327e4eda2fcd1bc6e31c650cd39441"
+    },
+    {
+      "path": "source-retention-map.json",
+      "bytes": 9859,
+      "sha256": "fc599c89f1d57e4820bd7279a878efbdcbda9ebf382a0580fd778ae65454114d"
+    }
+  ],
+  "newBuilds": 0,
+  "newDeviceCalls": 0,
+  "ELFRescans": 0,
+  "productionNoticeEdits": 0,
+  "finalArchiveRetentionVerified": false,
+  "independentReleaseAcceptanceVerified": false,
+  "W3Complete": false
+}

@@ -1,0 +1,39 @@
+[
+  {
+    "path": ".omx/artifacts/w3-sherpa-ci-members-20261115/android-libs.zip",
+    "bytes": 50566279,
+    "sha256": "9718873918fad3a9f7a1156420e5e8f46810970c5fb07383e467cf841265fe68",
+    "members": [
+      "arm64-v8a/README.md",
+      "arm64-v8a/libonnxruntime.so",
+      "arm64-v8a/libsherpa-onnx-c-api.so",
+      "arm64-v8a/libsherpa-onnx-cxx-api.so",
+      "arm64-v8a/libsherpa-onnx-jni.so",
+      "armeabi-v7a/README.md",
+      "armeabi-v7a/libonnxruntime.so",
+      "armeabi-v7a/libsherpa-onnx-c-api.so",
+      "armeabi-v7a/libsherpa-onnx-cxx-api.so",
+      "armeabi-v7a/libsherpa-onnx-jni.so",
+      "x86/README.md",
+      "x86/libonnxruntime.so",
+      "x86/libsherpa-onnx-c-api.so",
+      "x86/libsherpa-onnx-cxx-api.so",
+      "x86_64/README.md",
+      "x86/libsherpa-onnx-jni.so",
+      "x86_64/libonnxruntime.so",
+      "x86_64/libsherpa-onnx-c-api.so",
+      "x86_64/libsherpa-onnx-cxx-api.so",
+      "x86_64/libsherpa-onnx-jni.so"
+    ],
+    "linkEvidenceMatches": []
+  },
+  {
+    "path": ".omx/artifacts/w3-sherpa-ci-members-20261115/android-aar.zip",
+    "bytes": 49199032,
+    "sha256": "fd4f1e0ef080de31957df23069624215b69858fbc364637399f4cd983f6bd594",
+    "members": [
+      "sherpa-onnx-2.0.1.aar"
+    ],
+    "linkEvidenceMatches": []
+  }
+]
