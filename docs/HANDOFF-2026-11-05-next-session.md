@@ -1,3 +1,7 @@
+## 2026-11-15 W3 JVM依赖材料已提交并双端同步
+
+本地3be4c5e精确37文件；四坐标POM/12原文本81755B/四stdlib源与class成员限定核对已父验。GH#15comment6891440808/GL#15note44857/GHWiki5c350194逐字回读，双Wiki SHA3794d5b8df4d134453327bb67b786d5a37bb2c751a0cb0fce3ebed6e7d5d6c47一致，[同步收据](validation/w3-jvm-dependency-notices-sync-20261115.json)。marker已用勿重发、源码未push；本轮所有下载/核验/发布终态，零新helper/构建/生产实现，唯一ADB清单为空、零prepare。173原字节或共享余字节/47源码/161freeze通过；完整diff-check2限原annotations30CRLF及原Kotlin README两尾空格，其他本轮文字0，原文不格式化。P1–P4/R4/R5/W3仍open、goal active，下一新免费线路选择后的实际通知候选/最终APK保留或实体连接变化后固定合同验收；原native/CBC429不重试，不重取本轮声明、重复旧任务或USB恢复循环。
+
 ## 2026-11-15 W3四JVM依赖声明及stdlib嵌套归属已补核
 
 当前四JVM坐标POM/三固定来源/12原文本81755B已核；stdlib四个源包成员与固定commit逐字节同，四对应class存在，GWT/Guava/ThreeTenBp/Boost原归属及条款保留，[验证](validation/w3-jvm-dependency-notices-20261115.md)。不能把顶层Apache或Compiler NOTICE当完整stdlib通知；非字节码重建/最终DEX或完整组成接受。原无缓存POM/sha512404/根目录漏选失败与精确恢复保留，原材料不覆盖；生产通知brief已补本增量。161freeze通过后唯一ADB清单为空，零prepare/新helper/构建/生产实现；原native/CBC429停线，新免费线路选择待答，不重复提问/调用。P1–P4/R4/R5/W3仍open、goal active；下一通知生产候选或实体连接变化后固定合同验收，不重取这些声明/重扫旧产物或循环USB恢复。
