@@ -1,3 +1,7 @@
+## 2026-11-15 W3 JVM真实源码修正已提交并同步
+
+本地8a6ca11精确60文件；22实际link/22普通源/124class映射及声明集合父验通过，旧快照不改写。GH#15comment6890836126/GL#15note44854/GHWiki1334278e逐字回读，双Wiki SHA25f1930158409112545aaf6027a3107c797c069bca1af252b913cfe8f7e854a3一致，[同步收据](validation/w3-jvm-source-resolution-sync-20261115.json)。marker已用勿重发，源码未push；所有本轮API/发布/验收均终态，无新helper调用。170保护原余字节/161freeze通过、ADB空、新run未prepare/消费；P1完整输入/最终App、P2–P4及R4/R5/W3继续open、goal active。原native429不重试，hy4free仍按2026-11-16 10:15:32+08服务端观察停线，旧用户选择已消费，待新线路选择，勿重发旧review。下一补实际生产候选/递归输入边界，真机出现后fresh前置按现161合同继续；不重复已验源码闭包/本地构建/USB恢复。
+
 ## 2026-11-15 W3 JVM链接已解析到真实源码
 
 本轮发现并修正旧GitBlob指向120000链接文本的边界：22链接1568B已逐条解析到22普通Kotlin源141269B，同固定tree/GitBlob/SHA通过；43官方blob读取及一源复用，124class fresh SourceFile/双ZIP读取对应通过。旧映射原字节保留，新入口[验证](validation/w3-jvm-source-resolution-20261115.md)。只证明声明源集合及元数据对应，不是class/DEX等价或完整生成/原生输入；P1–P4/R4/R5/W3仍open。170原保护路径在文档前均未变、161freeze通过，fresh ADB空、新run零prepare/消费；不重复恢复或模型执行。系统javap shim失败原件留，沿用已有JDK21.0.7后通过，无安装/全局改动。原native429与hy4free真实quota429仍停线，等待所选复核线路，勿按旧用户hy4选择重发；源码未push、goal active。
