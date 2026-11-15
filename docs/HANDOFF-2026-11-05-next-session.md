@@ -1,3 +1,7 @@
+## 2026-11-16 W3 JVM原字节重建验收通过（编译11月15日）
+
+[报告](validation/w3-jvm-raw-reconstruction-20261115.md)：固定22真实Kotlin源141269B，经Kotlin1.7.20/Java21.0.7/JVM1.8直接CLI唯一编译3.059s，124class和一份module共125payload/553965B与原AAR全部原字节相同；父InfoZIP独立提取/全流再次证实，零归一化/注解SMAP剥离/flag扫描。新增probe/test由hy3原字节交付，8测试及4真实payload负例通过；四hy3终态，代码复核无finding，证据文稿17精确修正及父删一歧义短语保留。原编译器传输5505024B读超时留档；同官方Maven调用级直连恢复189.285s，5编译工具下载/3缓存复制共8项60939801B hash通过，不改全局缓存/生产依赖，不冒称零总下载或唯一网络归因。两下载/唯一编译均终态，旧未提交live前缀已替换、没有待poll；原准备快照保留。JVM对应子项已补证，不代表完整历史AGP输入、JAR ZIP、DEX/native、P1/P4/W3通过。304选定源/68通知/161freeze及175原保护保持；精确清56,634B两处无open的Python缓存，完整工具链/编译class/原jar/首失败和候选保留。零设备/AiAi/麦克风/新APK/signing/模型或ASR runtime下载。P1–P4/R4/R5/W3完整目标保持open/goal active；当前待精确本地提交及新marker双端同步，源码不push，不重放旧FILE/USB/已验构建或旧quota/源站请求。
+
 ## 2026-11-15 W3四APK交付已提交并双端同步
 
 本地05a0432精确45文件；GH#15comment6896719826/GL#15note44867/GHWiki84f0446均逐字回读，双Wiki SHA ba29ea677e6c7c311168e66d1ed4adb3b6aef2e9cb91bb44552e4992203957d3一致，[收据](validation/w3-app-variants-delivery-sync-20261115.json)。新marker已使用勿重发，源码分支未push。本轮新增免费hy3文稿41.105s完整success，原4046字超限保留，仅精确删两段冗余及Markdown空行整理后3963字接受；四hy3及三发布均终态，无待poll。45路径/40材料/四APK hash、304选定源/68通知/七模型许可/161freeze通过；175保护原字节保持，但不能统称suffix相等：两F08文件为前缀，pitfalls另929B插入只在内存删除后精确恢复原268388B摘要，原严格失败/诊断保留，并发内容保留且未纳提交。隔离consumer的build/.gradle已核无tracked/open文件后精确清775747669B名义量，四验收APK/三夹具源码和全部原始证据保留；不归因其他磁盘变化。零新构建/设备/AiAi/麦克风/模型runtime下载。P1–P4/R4/R5/W3全open、goal active、完整目标不缩减；下一处理尚缺输入可信度/完整组成/适用通知与发布接受，或实体连接变化后fresh固定未消费合同，不重试旧quota/源站429/旧FILE或USB循环。

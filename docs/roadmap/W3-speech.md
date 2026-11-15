@@ -1,3 +1,7 @@
+## 2026-11-16：JVM重建不再仅有类名对应
+
+[11月15日实际编译证据](../validation/w3-jvm-raw-reconstruction-20261115.md)：22真实源/141269B，Kotlin1.7.20/JVM1.8唯一运行3.059s；124class及module元数据共125payload/553965B全部同原AAR，父InfoZIP独立原始流对照通过，未归一化或剥元数据。hy3新probe/test原字节集成，8测试/4负例/161freeze通过、四helper终态；原工具传输超时及调用级同站直连恢复均保留，不改生产依赖/68通知或模型，不下载ASR runtime、不开设备/麦克风/AiAi。该JVM子项已补证，完整历史AGP输入/DEX/native和P1–P4/R4/R5/W3仍open；完整目标不变，不重扫旧库或重跑旧FILE/USB。当前待精确提交与双端同步，源码不push。
+
 ## 2026-11-15：四APK证据已提交并双端同步
 
 本地05a0432（45文件），GH#15comment6896719826/GL#15note44867/GHWiki84f0446逐字回读，双Wiki摘要ba29ea677e6c7c311168e66d1ed4adb3b6aef2e9cb91bb44552e4992203957d3一致；[收据](../validation/w3-app-variants-delivery-sync-20261115.json)，新marker已用勿重发、源码未push。新增hy3文稿41.105s完整终态，本轮四hy3与发布均完成；四APK/161freeze复核通过。175原保护字节保持，补充精确边界：pitfalls的范围外929B段为中间插入，不是suffix相等；只在内存移除后恢复原摘要，工作内容与两F08前缀保留、排除提交，初失败留档。隔离consumer缓存精确清775747669B，验收APK/夹具/原始证据保留。零新构建/设备/下载，P1–P4/R4/R5/W3保持open，完整目标与未消费真机合同不变；不重跑已验构建/旧FILE或USB恢复。
@@ -504,7 +508,7 @@ Android先冻结[load-only合同](../validation/w3-qwen-android-load-protocol-20
 
 生产发布验收独立于R4质量和R5资源，以下均未通过：
 
-- [ ] P1 源码/构建/运行时对应：四ORT成员/日志、CI整AAR/16库及[21成员/九输入组与冻结隔离消费者](../validation/w3-p1-member-matrix-20261115.md)增量已验；[当前SDK本地发布与独立消费者绑定](../validation/w3-sdk-consumer-binding-20261115.md)已父验，hy3已接受历史切片，并新增[当前Demo debug/release与独立消费者debug/release证据](../validation/w3-app-variants-delivery-20261115.md)。最终生产App采用及逐输入组完整性/可信度接受仍缺；类名/SourceFile不等于字节码等价。
+- [ ] P1 源码/构建/运行时对应：四ORT成员/日志、CI整AAR/16库及[21成员/九输入组与冻结隔离消费者](../validation/w3-p1-member-matrix-20261115.md)增量已验；[当前SDK本地发布与独立消费者绑定](../validation/w3-sdk-consumer-binding-20261115.md)已父验，hy3已接受历史切片，并新增[当前Demo debug/release与独立消费者debug/release证据](../validation/w3-app-variants-delivery-20261115.md)。新增[JVM124class及module原payload重建](../validation/w3-jvm-raw-reconstruction-20261115.md)全部逐字节相同。最终生产App采用及逐输入组完整性/可信度接受仍缺；现有App DEX类名覆盖仍不等于DEX语义等价。
 - [ ] P2 递归最终组成：将直接、静态嵌入及传递组件与最终二进制关联，明确版本、源码、许可及归属，解释未覆盖项。
 - [ ] P3 交付物通知：在实际生产候选及消费/打包后核验适用许可、通知和修改说明保留；本地材料ZIP不代替实际交付物。
 - [ ] P4 独立发布复审：固定同一候选与P1–P3材料，记录审阅覆盖、问题处置和接受结论；局部源码/日志审查不代替完整发布接受。

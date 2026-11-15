@@ -1,0 +1,159 @@
+{
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "links": [
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/AudioTagging.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 5105,
+      "resolvedSHA256": "ca873e716e7ccb3e86443e38f7b5f840bb4ccd067532b6c26454fab3956d3f88",
+      "resolvedGitBlobSHA1": "740f67792e91ad39ffde2e89a91c88369913447e"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/DenoisedAudio.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 357,
+      "resolvedSHA256": "0a426f3f12edb5c2dff486ddc7accb6675a666bf6c852f48d28ce37f49afc69f",
+      "resolvedGitBlobSHA1": "9296fac4523df19620aae94d029bbd2491ce63b8"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/FeatureConfig.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 301,
+      "resolvedSHA256": "829c7adc4db1324f21b9a9cbf5bf10eacf759714fe50956f48317c1ffef044f6",
+      "resolvedGitBlobSHA1": "2d2eba4543d8a90ac1a04ece4b371bd4f9bc1579"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/HomophoneReplacerConfig.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 170,
+      "resolvedSHA256": "fe926b6413f4d87e67c41feb21b8363923a67cbd3a5eb687b76390a5f1f7db60",
+      "resolvedGitBlobSHA1": "8baa3ffafc803cdd15576cb267e32bd803739a66"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/KeywordSpotter.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 5062,
+      "resolvedSHA256": "6d8387534b942a979424a1d6721fd285f85df8bfca0ea392860f11fe06f31d06",
+      "resolvedGitBlobSHA1": "0468a580ece789ee2000d13a007fb575dd98413a"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflinePunctuation.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 1428,
+      "resolvedSHA256": "b7e52364dfd00d6057e355e03ba965826491bd78b3df2a1cf6c77e1ee2e55b4e",
+      "resolvedGitBlobSHA1": "806e3693fbfc8feec8fe2f2b744f898b311f85e7"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineRecognizer.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 56760,
+      "resolvedSHA256": "8103b67ec65910a71e6b8d4bca7934f77c1af47b68a5c18cdca0ce3f956247a7",
+      "resolvedGitBlobSHA1": "30b1bccee40e5727f6404bfb6b7bc416e2dce253"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineSpeakerDiarization.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 3258,
+      "resolvedSHA256": "4017f3b1359f6c3f35a0c46ed4e939d2578fe7773c8686c786bd6a591e4b8921",
+      "resolvedGitBlobSHA1": "8c15b2e35988015c0fbc55185291c00699bc032b"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineSpeechDenoiser.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 2973,
+      "resolvedSHA256": "02cc81b23f7a09741e9eb32405d4cbc350779fa591c0fc2634488c0386e2fa36",
+      "resolvedGitBlobSHA1": "63855c88085ccbc2e0396ca45d0a1a70500d9eb8"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineStream.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 1080,
+      "resolvedSHA256": "5c90b7c060cdd0a2222cc935b54f69465a4a7544de29240bafe4d3a8d86dbb6e",
+      "resolvedGitBlobSHA1": "c354228eec0f688cbb469d92a19ff2d73c68bf73"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlinePunctuation.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 1446,
+      "resolvedSHA256": "5622b11cdf848470e4733247bb73a2ac5cedb6b9d1f79dc922df416ed9cb21f7",
+      "resolvedGitBlobSHA1": "7fd9802122e5622aecd7a73d9b6d2c2be6e78441"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlineRecognizer.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 30509,
+      "resolvedSHA256": "3204ff816361d99d94dda1e8c26681f6d4a5ad749a68d8fee93b4e8bb2b21d17",
+      "resolvedGitBlobSHA1": "985d5346ac7e12c24ab5323e94667add71ccb3cf"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlineSpeechDenoiser.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 1748,
+      "resolvedSHA256": "c270d1b192cd9c380f0cd14befd4b9f13ef6abd90fe009ec428f2c303ad0ab5e",
+      "resolvedGitBlobSHA1": "9102cf70e166ca3450c72c537b149a02c989481b"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlineStream.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 1178,
+      "resolvedSHA256": "6b9f8de317e6a0bb51f0f29d940617b781cb31b190e1c725dd438231836c06ab",
+      "resolvedGitBlobSHA1": "10497eb0e42b7e73652404db8e0c3003f8e2adb8"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/QnnConfig.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 156,
+      "resolvedSHA256": "86c963f27677f690eb0d6639735052eba5e60d9f81ccd4c1df0aa831fd680d6f",
+      "resolvedGitBlobSHA1": "ea7aa5119c1f0d9737e802c1b73098c3403779fc"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Speaker.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 4712,
+      "resolvedSHA256": "4dcc84f4cf0682e0e4da837ba00130d66ad7aec4f803af4c021de3434246e871",
+      "resolvedGitBlobSHA1": "cd69b26ca75de5517bb6e44c8a9fba3c3276a7a4"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/SpeakerEmbeddingExtractorConfig.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 200,
+      "resolvedSHA256": "d90c0ce88dce309813e720ff46abba737401e7e562f9635ee13fd5b32ce106c6",
+      "resolvedGitBlobSHA1": "0ae2bb9b1b6394b02bbe953d746e19f5953d4a04"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/SpokenLanguageIdentification.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 2976,
+      "resolvedSHA256": "a4633a327730508ae03b767c5931be006e2c2123f7687faa32bf992aee5de6cc",
+      "resolvedGitBlobSHA1": "cfd01372b7a3825e5afd89bcf1a7cf70022b0e66"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Tts.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 15694,
+      "resolvedSHA256": "291d30c045ae1cb88a87cce8d6794189e5e63f6ecefd012259694932a5594f38",
+      "resolvedGitBlobSHA1": "33f22bb2107ba1d76a2fa728e7ecae2eae3b3772"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Vad.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 4113,
+      "resolvedSHA256": "eaae2b8748b3ed1f44d7da83179a815494edced7dc3ce38376d573c4a1c50d9b",
+      "resolvedGitBlobSHA1": "434cb2495816409a26c01b617828d9b4f94ef56e"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/VersionInfo.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 627,
+      "resolvedSHA256": "8a9ada883d8cb802b4e70cc6770af20f4b7d85935a16b0b71974d22d55d0c90a",
+      "resolvedGitBlobSHA1": "2623341136ad3152e477a197eaa66a91b061a12f"
+    },
+    {
+      "resolvedEvidencePath": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/WaveReader.kt",
+      "resolvedMode": "100644",
+      "resolvedBytes": 1416,
+      "resolvedSHA256": "1b4abcf6c7afdb6e8cc4cd4a71098eec4b45c473b470c71671fd20b641aee8e7",
+      "resolvedGitBlobSHA1": "27d2bf5bd2f72138090301874e4e59555dca85d4"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "replacements": [
+    {
+      "document": "reportMarkdown",
+      "old": "状态：有界接受候选。primary 接收前不宣称本次 evidence review 完成。新工作未提交，无 commit identity；待工具侧 7 文件 stage 扩展，不做 source branch push。未编辑实现、二进制或生产依赖，未新增下载或运行。",
+      "new": "状态：parent 已接受有界证据范围：单次实际编译后固定 AAR 的 124 class + `META-INF/sherpa_onnx_release.kotlin_module` 共 125 个原始载荷成员逐字节相等；本次 evidence review 在该范围内完成。本增量实际下载 5 个 compiler-tool JAR、复制 3 个 cache tool（8 tools，60939801B）并调用编译器一次（3.059s）。未编辑实现或二进制，生产依赖未变；无 ASR runtime/model/device/AiAi/mic/inference、新 APK 或 signing。"
+    },
+    {
+      "document": "reportMarkdown",
+      "old": "阻断项：无。范围变化：由编译前准备快照更新为单次实际编译后的 JVM class/module 原始载荷逐字节证据闭环；仅接受有意义的 P1 JVM 子组，不代表 P1 closure、P4 或 W3 完成。历史 preparation-receipt.json 保持不变，待提交 handoff prefix 已被 terminal receipts 取代。",
+      "new": "阻断项：无。范围变化：由编译前准备快照更新为单次实际编译后的 JVM class/module 原始载荷逐字节证据闭环；仅接受有意义的 P1 JVM 子组，不代表 P1 closure、P4 或 W3 完成。preparation-receipt 与 integrated-verification 是 compile 前历史快照，时间边界保持不变。"
+    },
+    {
+      "document": "reportMarkdown",
+      "old": "- 304 selected sources、68 production notices、161 frozen files 未变；protected baseline 175 files 未变。",
+      "new": "- 304 selected sources、68 production notices、161 frozen files 未变；protected baseline 175 files 在自身 handoff status prefix 之后保留原始内容字节，除该显式 prefix 外未改，snapshot 日期保留。"
+    },
+    {
+      "document": "reportMarkdown",
+      "old": "- link/target git blob 与 SHA checks 保留在完整 mapping 中；编译未修改这些文件。",
+      "new": "- 该 projection 验证的是 22 个 resolved normal-source files 的 SHA256 与 Git blob；不读取或重新验证 symlink blob。link blob/target resolution 已由先前独立 provenance audit 验证并保留在完整 mapping 中；编译未修改这些文件。"
+    },
+    {
+      "document": "reportMarkdown",
+      "old": "- 直接 CLI（非 AGP）：Kotlin `1.7.20`，Java `21.0.7`，JVM target `1.8`，module-name `sherpa_onnx_release`。",
+      "new": "- 直接 CLI（非 AGP）：Kotlin `1.7.20`，Java `21.0.7`，JVM target `1.8`，module-name `sherpa_onnx_release`。未重放原始 Gradle/AGP/AndroidX 完整 classpath；direct CLI 的 8 tool jars 与隔离 compile classpath 足以复现 125 个 payload 成员，Kotlin stdlib `1.7.20` 不是 product runtime version change。"
+    },
+    {
+      "document": "reportMarkdown",
+      "old": "比较由 parent 完成，不是 helper execution。",
+      "new": "该比较由 parent 完成。"
+    },
+    {
+      "document": "probeReadmeMarkdown",
+      "old": "- driver 接收 exact-field projection：只用 `resolvedEvidencePath`、`resolvedMode`、`resolvedBytes`、`resolvedSHA256`、`resolvedGitBlobSHA1` 五个 identity fields；完整 immutable original mapping 与 provenance 单独保留，source/map 未改，编译未改源文件。",
+      "new": "- driver 接收 exact-field projection：只用 `resolvedEvidencePath`、`resolvedMode`、`resolvedBytes`、`resolvedSHA256`、`resolvedGitBlobSHA1` 五个 identity fields；验证 22 个 resolved normal-source files 的 SHA256 与 Git blob，不读取或重新验证 symlink blob。link blob/target resolution 由先前独立 provenance audit 验证并保留在完整 mapping 中；source/map 未改，编译未改源文件。"
+    },
+    {
+      "document": "probeReadmeMarkdown",
+      "old": "- unit tests=8，exit 0，0.118s；integrated source matches candidate；frozen=161，protected=175。pre-compile integrated snapshot 中 `byteReconstructionVerified=false`、`W3Complete=false` 属于历史时点，不覆盖后续 raw verification。",
+      "new": "- unit tests=8，exit 0，0.118s；integrated source matches candidate；frozen=161，protected=175。protected baseline 175 files 在自身 handoff status prefix 之后保留原始内容字节，除该显式 prefix 外未改，snapshot 日期保留。pre-compile integrated snapshot 中 `byteReconstructionVerified=false`、`W3Complete=false` 属于历史时点，不覆盖后续 raw verification。"
+    },
+    {
+      "document": "probeReadmeMarkdown",
+      "old": "- compile classpath 边界：android34 `android.jar` + Kotlin stdlib `1.7.20` + annotations `13.0`；未重放原始 Gradle/AGP/AndroidX full classpath。",
+      "new": "- compile classpath 边界：android34 `android.jar` + Kotlin stdlib `1.7.20` + annotations `13.0`；未重放原始 Gradle/AGP/AndroidX full classpath。direct CLI 的 8 tool jars 与隔离 compile classpath 足以复现 125 个 payload members；Kotlin stdlib `1.7.20` 是编译工具版本，不代表产品 runtime version change。"
+    },
+    {
+      "document": "probeReadmeMarkdown",
+      "old": "- 无 normalization、SMAP、annotation stripping、flag sweep；不声称 rebuilt JAR ZIP envelope equality，不推断 DEX/native/signed distribution/P4/full P1 closure/W3 completion。",
+      "new": "- 无 normalization、SMAP、annotation stripping、flag sweep；不声称 rebuilt JAR ZIP envelope equality，不推断 DEX/native/signed distribution/P4/full P1 closure/W3 completion；不设置唯一密码学证明要求。"
+    },
+    {
+      "document": "probeReadmeMarkdown",
+      "old": "- 不新增下载或运行；无设备、AiAi、mic、inference、model 或 ASR runtime product binary 下载；signing 与 consumer APK rebuild 不在范围。",
+      "new": "- 不请求额外下载或运行；实际范围为上述 5 个 compiler-tool JAR 下载、3 个 cache copies 与一次编译器调用。无设备、AiAi、mic、inference、model、ASR runtime product binary、新 APK 或 signing；consumer APK rebuild 不在范围。"
+    },
+    {
+      "document": "materialReadmeMarkdown",
+      "old": "- 完整 immutable original mapping 保留；primary driver 只消费 5 个 source identity fields，并做 link/target git blob 与 SHA checks。sourceAndMapUnmodified=true，编译不修改源文件。",
+      "new": "- 完整 immutable original mapping 保留；primary driver 只消费 5 个 source identity fields，验证 22 个 resolved normal-source files 的 SHA256 与 Git blob，不读取或重新验证 symlink blob。link blob/target resolution 由先前独立 provenance audit 验证并保留在完整 mapping 中；sourceAndMapUnmodified=true，编译不修改源文件。"
+    },
+    {
+      "document": "materialReadmeMarkdown",
+      "old": "- 304 selected sources、68 production notices、161 frozen files 未变；protected baseline 175 files 未变。旧 handoff prefix 描述 session 21094 live 下载状态，已由 terminal receipts 取代；不删除历史记录，但不作为当前状态。",
+      "new": "- 304 selected sources、68 production notices、161 frozen files 未变；protected baseline 175 files 在自身 handoff status prefix 之后保留原始内容字节，除该显式 prefix 外未改，snapshot 日期保留。"
+    },
+    {
+      "document": "materialReadmeMarkdown",
+      "old": "- direct CLI Kotlin `1.7.20`、Java `21.0.7`、JVM target `1.8`、module `sherpa_onnx_release`；compile classpath 为 android34 `android.jar` + stdlib `1.7.20` + annotations `13.0`，未重放 full Gradle/AGP/AndroidX classpath。",
+      "new": "- direct CLI Kotlin `1.7.20`、Java `21.0.7`、JVM target `1.8`、module `sherpa_onnx_release`；compile classpath 为 android34 `android.jar` + stdlib `1.7.20` + annotations `13.0`，未重放 full Gradle/AGP/AndroidX classpath。direct CLI 的 8 tool jars 与隔离 compile classpath 足以复现 125 个 payload members；Kotlin stdlib `1.7.20` 不是 product runtime version change。"
+    },
+    {
+      "document": "materialReadmeMarkdown",
+      "old": "set/order/payload proof per receipt",
+      "new": "original archive-order stream verification per receipt，不表示 rebuilt archive ordering proof"
+    },
+    {
+      "document": "materialReadmeMarkdown",
+      "old": "- 8 unit tests 与 4 parent real payload negative controls passed；supplied-context hy3 review 无 finding，但仅支持 single execution 候选，primary 接收前不宣称本 evidence review 完成。",
+      "new": "- 8 unit tests 与 4 parent real payload negative controls passed；supplied-context hy3 review 无 finding。parent 已接受 single-execution raw byte equality 证据；P1/P4/W3 仍 open，不设置唯一密码学证明要求。"
+    },
+    {
+      "document": "materialReadmeMarkdown",
+      "old": "新工作未提交，无 commit identity；不提出新的下载或运行。",
+      "new": "不请求额外下载或运行；实际范围为上述 5 个 compiler-tool JAR 下载、3 个 cache copies 与一次编译器调用。无设备、AiAi、mic、inference、model、ASR runtime product binary、新 APK 或 signing；生产依赖未变。"
+    }
+  ],
+  "notes": [
+    "No blockers.",
+    "Scope wording changed from pending acceptance/zero execution/commit boilerplate to parent-accepted byte-equality scope with actual downloads and one compiler invocation stated; P1/P4/W3 remain open and no unique cryptographic proof requirement was added.",
+    "Removed helper/stage/commit/handoff pending boilerplate from the supplied documents and corrected driver/preflight distinctions without adding file paths.",
+    "No receipt files, hashes, links, source bytes, counts, or timestamps were edited; no implementation changes were made."
+  ]
+}

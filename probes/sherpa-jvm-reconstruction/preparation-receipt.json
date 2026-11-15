@@ -1,0 +1,86 @@
+{
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "runtimeAARSHA256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+  "classesJarSHA256": "0ee4991c56c19ef5a8a573b01891193d7298ffe7ebcc68f42b944361d8869d93",
+  "candidateFiles": [
+    {
+      "path": "rebuild_jvm.py",
+      "sha256": "fe05b1f007329ddb5e4d3e1ec243e901be2c4611192913ac03c769964f6d1f84"
+    },
+    {
+      "path": "test_rebuild_jvm.py",
+      "sha256": "cb458293a8720f4d777130d4808517856842d3083f7db19a3b0cd25611e480a6"
+    }
+  ],
+  "helperRequests": [
+    {
+      "task": "hy3-driver",
+      "model": "hy3",
+      "process": {
+        "exitCode": 0,
+        "elapsedSeconds": 106.001,
+        "endedAtUTC": "2026-11-15T15:31:11.884121+00:00",
+        "stdoutBytes": 130045,
+        "stderrBytes": 0,
+        "automaticRetry": false,
+        "automaticFallback": false
+      },
+      "observedToolEvents": 0,
+      "promptSHA256": "05d782a4fe3ccb7c1bc23f36bf6a79a76fe6c425eced0b98a05417d1e8931696",
+      "eventsSHA256": "562f8b36a3760cfecbeaefd2629cbc82839a220abcf489f19f979a3cd8686f9a",
+      "candidateSHA256": "c1918cffd054fd658ce492a944cb5468c33b9245bcc2b5dfac280108a48c08c7"
+    },
+    {
+      "task": "hy3-review",
+      "model": "hy3",
+      "process": {
+        "exitCode": 0,
+        "elapsedSeconds": 33.881,
+        "endedAtUTC": "2026-11-15T15:38:24.839821+00:00",
+        "stdoutBytes": 40837,
+        "stderrBytes": 0,
+        "automaticRetry": false,
+        "automaticFallback": false
+      },
+      "observedToolEvents": 0,
+      "promptSHA256": "8faf05fce527f2f568bbafd8109de94d7ca97adaad6f6d0a560608a375652118",
+      "eventsSHA256": "76cf7a27f35916593839c1982f83d89fb9ee4c8b9997f03cd695036d047edfb1",
+      "candidateSHA256": "926c75e36a4431ac07e02156643b804db846b7f474923f17c37939ad1b4b3068"
+    }
+  ],
+  "review": {
+    "verdict": "accept_for_single_execution",
+    "findings": [],
+    "acceptedScope": "Bounded accept for one primary-controlled direct K2 JVM compiler diagnostic run only. The driver enforces exact sourceMap field shape/commit and per-source byte/SHA/git-blob checks for the 22 projected sources, verifies pinned AAR/classes.jar hashes and 124-class plus one-module membership, then requires raw byte equality for all 124 class members and META-INF/sherpa_onnx_release.kotlin_module, rejecting missing/extra/different members. No blockers or scope expansion found. Raw compiler stdout/stderr are embedded in invocation.json/report.json, not separate files.",
+    "limitations": [
+      "Review is supplied-context only; no tools/commands were used and no compilation or result is claimed. Supplied parent preflight/test notes are context, not independently executed.",
+      "Single fixed direct CLI run with exact Java/Kotlin 1.7.20 tooling, android34, stdlib/annotations classpath; not an AGP reproduction and not a complete original classpath claim.",
+      "Additional original AndroidX dependencies not imported by the 22 sources are not supplied; any byte-match remains under that classpath limitation.",
+      "Source/AAR provenance rests on primary-controlled config/hash manifest and exact-field projection; candidate validates configured hashes and fields but does not independently prove upstream provenance or original sourceMap dictionary equivalence.",
+      "Scope is raw class/module payload comparison only; no ZIP-JAR equality, DEX semantics, native source build, signing, model/ASR download, device/mic/AiAi execution, global changes, P1complete/P4/W3, or 429-retry authority.",
+      "Supplied unit tests directly cover source projection and member comparison helpers; AAR verification and CLI invocation were reviewed statically only, and output/config safety relies on the stated controlled absolute paths."
+    ]
+  },
+  "tests": {
+    "exitCode": 0,
+    "elapsedSeconds": 0.056,
+    "temporaryDirectory": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/test-tmp",
+    "testDirectory": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/candidate"
+  },
+  "parentPreflight": {
+    "sourceCount": 22,
+    "sourceBytes": 141269,
+    "originalMembers": 125,
+    "originalClassCount": 124,
+    "parentRealPayloadNegativeCasesRejected": 4,
+    "exactSelfComparisonControlPassed": true,
+    "newCompileStarted": false
+  },
+  "compilerStarted": false,
+  "byteReconstructionVerified": false,
+  "P1Complete": false,
+  "P4Accepted": false,
+  "W3Complete": false,
+  "taskArtifactRoot": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z",
+  "scope": "tested driver accepted for single controlled execution only; compiler tooling download remains live"
+}

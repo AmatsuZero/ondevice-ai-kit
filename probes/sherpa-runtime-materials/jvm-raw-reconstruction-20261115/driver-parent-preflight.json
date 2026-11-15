@@ -1,0 +1,9 @@
+{
+  "sourceCount": 22,
+  "sourceBytes": 141269,
+  "originalMembers": 125,
+  "originalClassCount": 124,
+  "parentRealPayloadNegativeCasesRejected": 4,
+  "exactSelfComparisonControlPassed": true,
+  "newCompileStarted": false
+}

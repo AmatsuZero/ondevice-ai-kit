@@ -1,0 +1,112 @@
+{
+  "startedAtUTC": "2026-11-15T15:46:27.087472+00:00",
+  "route": "invocation-only direct same official Maven endpoint, ProxyHandler({}); no global changes",
+  "originalTerminalTransferPreserved": true,
+  "artifacts": [
+    {
+      "coordinate": "org.jetbrains.kotlin:kotlin-compiler-embeddable:1.7.20",
+      "destination": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-compiler-embeddable-1.7.20.jar",
+      "httpStatus": 200,
+      "declaredContentLength": "53395419",
+      "observedBytes": 53395419,
+      "source": "Maven-Central-fixed-version",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-compiler-embeddable/1.7.20/kotlin-compiler-embeddable-1.7.20.jar",
+      "repositorySidecarSHA1": "8db18559a581dd2c36ddfd5046af145650f5b126",
+      "bytes": 53395419,
+      "sha256": "5ec2be1872dc47b9dcb466f1781eded6c59d9eee18657d4b0f1148e619caea36",
+      "sha1": "8db18559a581dd2c36ddfd5046af145650f5b126",
+      "accepted": true
+    },
+    {
+      "coordinate": "org.jetbrains.kotlin:kotlin-stdlib:1.7.20",
+      "destination": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-stdlib-1.7.20.jar",
+      "httpStatus": 200,
+      "declaredContentLength": "1537347",
+      "observedBytes": 1537347,
+      "source": "Maven-Central-fixed-version",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.7.20/kotlin-stdlib-1.7.20.jar",
+      "repositorySidecarSHA1": "726594ea9ba2beb2ee113647fefa9a10f9fabe52",
+      "bytes": 1537347,
+      "sha256": "7779ec96b9acbf92ca023858ac04543f9d2c3bdf1722425fff42f25ff3acfc9b",
+      "sha1": "726594ea9ba2beb2ee113647fefa9a10f9fabe52",
+      "accepted": true
+    },
+    {
+      "coordinate": "org.jetbrains.kotlin:kotlin-script-runtime:1.7.20",
+      "destination": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-script-runtime-1.7.20.jar",
+      "httpStatus": 200,
+      "declaredContentLength": "42178",
+      "observedBytes": 42178,
+      "source": "Maven-Central-fixed-version",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-script-runtime/1.7.20/kotlin-script-runtime-1.7.20.jar",
+      "repositorySidecarSHA1": "0bcd1cc6f865e632550357fcc59f5ffd532615a8",
+      "bytes": 42178,
+      "sha256": "696f56daac19b75a20fdffa899f0a40750ba7cdf910dd198af7f05692d31e015",
+      "sha1": "0bcd1cc6f865e632550357fcc59f5ffd532615a8",
+      "accepted": true
+    },
+    {
+      "coordinate": "org.jetbrains.kotlin:kotlin-reflect:1.7.20",
+      "destination": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-reflect-1.7.20.jar",
+      "httpStatus": 200,
+      "declaredContentLength": "3135706",
+      "observedBytes": 3135706,
+      "source": "Maven-Central-fixed-version",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-reflect/1.7.20/kotlin-reflect-1.7.20.jar",
+      "repositorySidecarSHA1": "12b2501e33bb6373e8e347c86d85481863629381",
+      "bytes": 3135706,
+      "sha256": "afe70b6faf6c23f6fedcb0cf88b07cb1778139f4b744ae13b23eb8bbc4ee09f8",
+      "sha1": "12b2501e33bb6373e8e347c86d85481863629381",
+      "accepted": true
+    },
+    {
+      "coordinate": "org.jetbrains.kotlin:kotlin-daemon-embeddable:1.7.20",
+      "destination": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-daemon-embeddable-1.7.20.jar",
+      "httpStatus": 200,
+      "declaredContentLength": "729190",
+      "observedBytes": 729190,
+      "source": "Maven-Central-fixed-version",
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-daemon-embeddable/1.7.20/kotlin-daemon-embeddable-1.7.20.jar",
+      "repositorySidecarSHA1": "1e24355adad8d529d75d5b19eab55484057431ba",
+      "bytes": 729190,
+      "sha256": "e669ab8d2677d00f799fc86018551fbd9bd6b3c1d09fdb3f0eec8c4f44f62e63",
+      "sha1": "1e24355adad8d529d75d5b19eab55484057431ba",
+      "accepted": true
+    },
+    {
+      "coordinate": "org.jetbrains.intellij.deps:trove4j:1.0.20200330",
+      "destination": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/trove4j-1.0.20200330.jar",
+      "source": "existing-cache-copy",
+      "originalPath": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.deps/trove4j/1.0.20200330/3afb14d5f9ceb459d724e907a21145e8ff394f02/trove4j-1.0.20200330.jar",
+      "cacheDirectorySHA1": "3afb14d5f9ceb459d724e907a21145e8ff394f02",
+      "bytes": 572985,
+      "sha256": "c5fd725bffab51846bf3c77db1383c60aaaebfe1b7fe2f00d23fe1b7df0a439d",
+      "sha1": "3afb14d5f9ceb459d724e907a21145e8ff394f02",
+      "accepted": true
+    },
+    {
+      "coordinate": "net.java.dev.jna:jna:5.6.0",
+      "destination": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/jna-5.6.0.jar",
+      "source": "existing-cache-copy",
+      "originalPath": "/Users/daubert/.gradle/caches/modules-2/files-2.1/net.java.dev.jna/jna/5.6.0/330f2244e9030119ab3030fc3fededc86713d9cc/jna-5.6.0.jar",
+      "cacheDirectorySHA1": "330f2244e9030119ab3030fc3fededc86713d9cc",
+      "bytes": 1509440,
+      "sha256": "5557e235a8aa2f9766d5dc609d67948f2a8832c2d796cea9ef1d6cbe0b3b7eaf",
+      "sha1": "330f2244e9030119ab3030fc3fededc86713d9cc",
+      "accepted": true
+    },
+    {
+      "coordinate": "org.jetbrains:annotations:13.0",
+      "destination": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/annotations-13.0.jar",
+      "source": "existing-cache-copy",
+      "originalPath": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar",
+      "cacheDirectorySHA1": "919f0dfe192fb4e063e7dacadee7f8bb9a2672a9",
+      "bytes": 17536,
+      "sha256": "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478",
+      "sha1": "919f0dfe192fb4e063e7dacadee7f8bb9a2672a9",
+      "accepted": true
+    }
+  ],
+  "automaticRetry": false,
+  "automaticFallback": false
+}

@@ -1,0 +1,16 @@
+{
+  "original": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-link-resolution.json",
+  "originalSHA256": "dbfd433461badad891692963c16496bbe062ba5f03a1c322567f01cd118128db",
+  "projection": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/source-map-projection.json",
+  "projectionSHA256": "fe829a5ab832b7ba9e65e290285ccfc7717780c297e50d8d7158ad40bc4a7423",
+  "sourceCount": 22,
+  "retainedFields": [
+    "resolvedEvidencePath",
+    "resolvedMode",
+    "resolvedBytes",
+    "resolvedSHA256",
+    "resolvedGitBlobSHA1"
+  ],
+  "sourceAndMapUnmodified": true,
+  "reason": "driver receives exact declared subset; complete original and provenance are retained separately"
+}

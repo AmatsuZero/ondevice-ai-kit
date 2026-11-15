@@ -1,0 +1,14 @@
+{
+  "startedAtUTC": "2026-11-15T15:30:22.778156+00:00",
+  "scope": "isolated compiler tooling and compile-time classpath only; no target runtime/model download or production dependency change",
+  "artifacts": [
+    {
+      "coordinate": "org.jetbrains.kotlin:kotlin-compiler-embeddable:1.7.20",
+      "destination": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/toolchain/kotlin-compiler-embeddable-1.7.20.jar",
+      "error": "The read operation timed out",
+      "accepted": false
+    }
+  ],
+  "automaticRetry": false,
+  "automaticFallback": false
+}

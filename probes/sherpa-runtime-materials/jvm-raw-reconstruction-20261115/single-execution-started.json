@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "rtk",
+    "proxy",
+    "python3",
+    "probes/sherpa-jvm-reconstruction/rebuild_jvm.py",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/run-01-config-ready.json"
+  ],
+  "startedAtUTC": "2026-11-15T15:50:49.559729+00:00",
+  "expectedOutputRoot": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/run-01",
+  "invocations": 1,
+  "automaticRetry": false,
+  "flagSweep": false
+}

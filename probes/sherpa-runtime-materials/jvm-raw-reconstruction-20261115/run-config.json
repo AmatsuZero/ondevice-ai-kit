@@ -1,0 +1,25 @@
+{
+  "repoRoot": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation",
+  "outputRoot": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/run-01",
+  "java": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home/bin/java",
+  "compilerClasspath": [
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-compiler-embeddable-1.7.20.jar",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-stdlib-1.7.20.jar",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-script-runtime-1.7.20.jar",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-reflect-1.7.20.jar",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-daemon-embeddable-1.7.20.jar",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/trove4j-1.0.20200330.jar",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/jna-5.6.0.jar",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/annotations-13.0.jar"
+  ],
+  "compileClasspath": [
+    "/Users/daubert/Library/Android/sdk/platforms/android-34/android.jar",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-stdlib-1.7.20.jar",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/annotations-13.0.jar"
+  ],
+  "sourceMap": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/source-map-projection.json",
+  "runtimeAAR": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar",
+  "expectedAARSHA256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+  "expectedClassesJarSHA256": "0ee4991c56c19ef5a8a573b01891193d7298ffe7ebcc68f42b944361d8869d93",
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005"
+}

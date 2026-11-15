@@ -1,0 +1,11 @@
+{
+  "unitTests": 8,
+  "unitExitCode": 0,
+  "elapsedSeconds": 0.118,
+  "integratedSourceMatchesCandidate": true,
+  "frozenFiles": 161,
+  "protectedFilesUnchanged": 175,
+  "compilerStarted": false,
+  "byteReconstructionVerified": false,
+  "W3Complete": false
+}

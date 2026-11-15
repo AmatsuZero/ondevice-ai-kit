@@ -1,3 +1,7 @@
+## W3编译工具传输超时与JVM重建证据边界（2026-11-16）
+
+Kotlin1.7.20不在本机缓存；默认代理路径传输首compiler JAR于5505024B读超时，原部分文件/错误保留，不能当hy3配额或编译失败。确认原进程终态后一次新调用仅直连同官方Maven host，8工具60939801B完整核SHA1/SHA256；无全局代理/凭据/生产依赖改变，路径及分块参数均变，不能唯一归因某一因素。后续唯一CLI编译3.059s，124class+module原始payload全相同并经父InfoZIP独立流核；不是JAR ZIP/DEX/native或完整AGP环境重放，不以剥SMAP/注解求通过。driver只验22真实resolved源码GitBlob/SHA，symlink blob由先前来源审计验证，不能混写为本工具重验链接。文稿首稿“未新增运行/下载”、旧live/stage措辞和175保护绝对未改等已拒收，17处helper精确修正及父删一歧义短语留档；真实编译工具下载不冒充模型/ASR runtime下载。原preparation receipt为编译前快照，现有产物见probes/sherpa-runtime-materials/jvm-raw-reconstruction-20261115/，所有进程终态、无待poll；P1/P4/W3不自动关闭。
+
 ## W3共享文档保护：并发新增段不一定是前缀（2026-11-15）
 
 四APK提交前fresh检查移除自己的前缀/反向状态替换后，仍在docs/agent-pitfalls.md触发AssertionError：范围外F08 GPU预检929B段插在既有两段之间。保留首失败；核其精确边界/摘要后仅在内存移除，恢复原268388B及SHA2568d06e26d76ef4eaf5c7ff5f0ffb26880b9fc34f163907929c1a129c69f42f0a6，实际工作文件不回滚。两其他F08文件为前缀保留，175保护不能统称全部字节或suffix相等；精确暂存仍为新W3内容加HEAD，排除并发变化。该诊断只说明原文有序字节仍在，不授权忽略任意diff或扩大提交；无重建/产品/设备改变。见probes/sherpa-runtime-materials/app-variants-sync-20261115/fresh-protection-insertion-diagnosis.json及原失败收据。新hy3发布稿4046字超4000限制，原候选保留，仅精确删冗余/整理空行后接受，不将exit0当文稿自动验收。
