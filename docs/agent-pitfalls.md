@@ -1,3 +1,7 @@
+## W3 Demo产物：配置对应的真实APK与project消费边界（2026-11-15）
+
+旧默认Demo APK不含Sherpa资产，隔离main.apk也不是普通Demo交付证据。有效恢复是先保留旧APK，再用已有任务显式enableSherpaAsr/assets/m2离线构建，保存本次新产物及参数；系统Java shim无JRE仅在子进程复用已有JDK21，不改全局。新APK四ABI16SO、7资产/3许可原字节相等及124runtime/18backend类名已核，backend Kotlin为up-to-date，不声称全量重建。Demo的project依赖不能冒充独立Maven最终消费者，三根/模型许可不能覆盖完整通知或递归组成；SDK XML warning原件保留，构建成功不等于安装/推理/资源/生产接受。证据`.omx/artifacts/w3-demo-apk-delivery-20261115/`及[验证](validation/w3-demo-apk-delivery-20261115.md)。
+
 ## W3 JVM通知：POM顶层声明与Compiler NOTICE不能覆盖stdlib嵌套来源（2026-11-15）
 
 四解析JVM坐标POM均有Apache声明，但固定Kotlin许可README及实际sources JAR包含GWT/Guava/ThreeTenBp/Boost来源；四示例与固定commit逐字节同、当前JAR四class存在，BSD3/BSL1.0及原归属不能遗漏。Kotlin license/NOTICE自称Compiler distribution，勿直接当stdlib所需NOTICE；类存在仍非重建等价/最终R8或DEX保留。根级筛选又漏license目录的失败按既有坑恢复：只读精确subtree，不重取已成功输入。固定Kotlin POM.sha512实际404，复用本体、校已发布SHA1与原缓存；不把无缓存POM/缺某种checksum当无声明，或把SHA1写成SHA512。原失败、12原文本81755B与元数据见`probes/sherpa-runtime-materials/jvm-dependency-notices-20261115/`；只补材料，非生产通知/完整组成或发布通过。

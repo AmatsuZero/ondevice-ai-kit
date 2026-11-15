@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "rtk",
+    "proxy",
+    "./gradlew",
+    ":android:backend-sherpa-asr:assembleDebug",
+    ":demo:androidApp:assembleDebug",
+    "--offline",
+    "--console=plain",
+    "-PenableSherpaAsr=true",
+    "-PenableLiteRtLm=false",
+    "-PenableLiteRtSr=false",
+    "-PenableOpenCvIdentity=false",
+    "-PsherpaMavenRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2",
+    "-PsherpaAsrAssetsDir=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/assets",
+    "-PsdkCommit=de5e7bc2cbbda23bc8d3a1a87783ea9d8f9d8987"
+  ],
+  "JAVA_HOME": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+  "sourceHead": "de5e7bc2cbbda23bc8d3a1a87783ea9d8f9d8987",
+  "offline": true,
+  "deviceOperations": 0,
+  "newImplementation": false,
+  "recoveryOf": "build-process.json"
+}

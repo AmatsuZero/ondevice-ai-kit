@@ -1,0 +1,14 @@
+[
+  {
+    "source": "demo/androidApp/build/outputs/apk/debug/androidApp-debug.apk",
+    "retained": "artifacts/verification/w3-demo-apk-delivery-20261115/androidApp-debug.apk",
+    "bytes": 244926013,
+    "sha256": "b4036696717aff8ecbd45dc5372f3ec7d96a330fda4cff5cc68d05a0aa9d0f20"
+  },
+  {
+    "source": "android/backend-sherpa-asr/build/outputs/aar/backend-sherpa-asr-debug.aar",
+    "retained": "artifacts/verification/w3-demo-apk-delivery-20261115/backend-sherpa-asr-debug.aar",
+    "bytes": 40726,
+    "sha256": "a39766683cab79bcbf8476aafe40b1e6fdc3030f44550159b6c796146e5ddfff"
+  }
+]

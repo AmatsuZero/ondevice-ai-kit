@@ -1,3 +1,7 @@
+## 2026-11-15 W3现有Sherpa Demo的APK保留已核
+
+相同离线构建参数仅子进程复用已有JDK21后8.834秒成功，335任务/25执行；backend Kotlin为up-to-date，非全量重编。新Demo APK244926013B/SHA b4036696…，四ABI16SO与固定AAR全字节同，7资产含3许可原字节保留，124runtime/18backend类名及factory存在；563/4归档成员Python/Info-ZIP两读逐字节同，[验证](validation/w3-demo-apk-delivery-20261115.md)。Demo使用project依赖，非独立Maven最终消费者；新AAR仍无通知资源，非完整组成/生产通知/发布接受。304选定输入/47SDK/7资产/173保护/161freeze通过；原Java失败与SDK XML警告保留，零设备/下载/helper/生产实现。P1–P4/R4/R5/W3仍open、goal active；已提新免费线路选择待答，原native/CBC429不重试，勿按旧hy4选择重发。
+
 ## 2026-11-15 W3 JVM依赖材料已提交并双端同步
 
 本地3be4c5e精确37文件；四坐标POM/12原文本81755B/四stdlib源与class成员限定核对已父验。GH#15comment6891440808/GL#15note44857/GHWiki5c350194逐字回读，双Wiki SHA3794d5b8df4d134453327bb67b786d5a37bb2c751a0cb0fce3ebed6e7d5d6c47一致，[同步收据](validation/w3-jvm-dependency-notices-sync-20261115.json)。marker已用勿重发、源码未push；本轮所有下载/核验/发布终态，零新helper/构建/生产实现，唯一ADB清单为空、零prepare。173原字节或共享余字节/47源码/161freeze通过；完整diff-check2限原annotations30CRLF及原Kotlin README两尾空格，其他本轮文字0，原文不格式化。P1–P4/R4/R5/W3仍open、goal active，下一新免费线路选择后的实际通知候选/最终APK保留或实体连接变化后固定合同验收；原native/CBC429不重试，不重取本轮声明、重复旧任务或USB恢复循环。

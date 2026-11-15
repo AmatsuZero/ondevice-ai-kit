@@ -1,0 +1,82 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 2412,
+      "sha256": "dd38338cc5d25e8319b550f34aaf9c51d0fb03c1a6535b1e61ba3f4fa3d28931"
+    },
+    "apk-badging.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "apk-badging.stdout": {
+      "bytes": 5450,
+      "sha256": "5c004bc6ee31de1721bd03059c9541e8d35f88eafe24048c8da85e2bd2fdda04"
+    },
+    "apk-dex-process.json": {
+      "bytes": 470,
+      "sha256": "f0c81d80436d1da57508b45e291c1cc80f4ef67e84abdd37ee66e1fc539177e6"
+    },
+    "artifact-verification.json": {
+      "bytes": 3498,
+      "sha256": "5a5892d9ddb09de3eb67f0d8504729c45121008af25398b55495d1e6cf5e7f31"
+    },
+    "asset-bindings.json": {
+      "bytes": 2199,
+      "sha256": "53a290dd8b0d6a808f88b243efce37cf1b13ed13db8f83ae09c71d7cce1c92d6"
+    },
+    "build-jdk21-invocation.json": {
+      "bytes": 936,
+      "sha256": "3a946bbb841b6906450c3d2cd552b8f7089af31371e6b6f199f1a7e7726f1889"
+    },
+    "build-jdk21-process.json": {
+      "bytes": 985,
+      "sha256": "421a273a0c977d529900bb7ce32737aec1ab1d24044f6ba0be9cf3c746ce60cd"
+    },
+    "build-jdk21.stderr": {
+      "bytes": 250,
+      "sha256": "8da39de6cb923047d35236ed262a74965faf488cbc82be3b1db8ee3adc1d36b3"
+    },
+    "build-jdk21.stdout": {
+      "bytes": 27429,
+      "sha256": "e10dbfe06786d7fcb2283d4a5b0eec252ce1924c418435c76f60c7431bc1af95"
+    },
+    "build-outputs.json": {
+      "bytes": 590,
+      "sha256": "f806676e0ee7857fd620f1de175c87b335428470ec181ee4249c5fc0570e9d88"
+    },
+    "build-plan.json": {
+      "bytes": 2710,
+      "sha256": "3d378ca2cfb5418dd2e0f2642c97e7ec8156b5e15b2c4984843e0683af5d2be5"
+    },
+    "build-process.json": {
+      "bytes": 757,
+      "sha256": "f4e00ff63aa5ed68780f3cc78af3c3a0b0f93ce8b052fab8891fed91c6b91b87"
+    },
+    "build.stderr": {
+      "bytes": 142,
+      "sha256": "23531437063d4675e9d6b7036fbf4e19978f0e25a90279babf75c40d496d637f"
+    },
+    "build.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "class-name-coverage.json": {
+      "bytes": 8087,
+      "sha256": "66b2ac24360fa0c9e83f5677f83a46100e48b512439e30cbc44af7bcd04e27d0"
+    },
+    "local-evidence-references.json": {
+      "bytes": 900,
+      "sha256": "6f8ce5d66042f82d1fa1ea760c32091a23565f172f64f476a7cbeca5c5d0261c"
+    },
+    "notice-observation.json": {
+      "bytes": 980,
+      "sha256": "d73104e29ea62e1a9525cd2f5922d9ed773b20fd995a413800e760e34b791f83"
+    },
+    "runtime-members.json": {
+      "bytes": 3979,
+      "sha256": "fd72442dc10bcdccc25bb4812a241d24af2493c2737e99cf6b7aecdfd2a76239"
+    }
+  },
+  "binariesIncluded": false,
+  "scope": "Existing Demo project-dependency APK delivery observation; not complete notices or production acceptance"
+}

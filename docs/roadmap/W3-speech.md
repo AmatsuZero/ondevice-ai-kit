@@ -1,3 +1,7 @@
+## 2026-11-15：现有Sherpa Demo的真实APK保留通过
+
+已有离线任务复用JDK21后8.834秒成功，335/25执行/310 up-to-date；新APK四ABI16SO与固定runtime逐字节同，7资产含3许可全保留，124runtime/18backend类名及Demo factory覆盖，归档Python/Info-ZIP交叉核验通过，[验证](../validation/w3-demo-apk-delivery-20261115.md)。Demo用project依赖，非独立Maven最终消费者；backend AAR仍无独立通知资源，三许可不代表完整适用通知，P1–P4/R4/R5/W3继续open。304选定输入/47SDK/173保护/161freeze保持，原Java失败保留，零设备/下载/helper/生产实现；原429停线，新线路选择待答。
+
 ## 2026-11-15：JVM声明补齐并确认stdlib嵌套归属
 
 当前四解析JVM坐标的POM与三固定来源已核，12原始文本81755B保留；Kotlin stdlib四源成员与固定commit逐字节同，四对应class存在，GWT/Guava/ThreeTenBp/Boost条款及归属已补，[验证](../validation/w3-jvm-dependency-notices-20261115.md)。顶层Apache/Compiler NOTICE不能替代适用嵌套通知；完整组成/字节码等价/最终DEX及生产通知未通过，P1–P4/R4/R5/W3保持open。唯一ADB清单为空，零prepare/helper/构建/生产实现；原429停线，待已提出的新线路选择。
