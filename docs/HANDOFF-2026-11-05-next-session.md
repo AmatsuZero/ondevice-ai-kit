@@ -1,3 +1,7 @@
+## 2026-11-15 W3 hy3已补交历史SDK消费绑定限定复核
+
+新免费hy3请求68.813s完整success、无quota/已观察工具事件，accept_bounded_increment；唯一LOW为历史“当前”措辞已用前缀和closure汇总处置，[验证](validation/w3-sdk-binding-hy3-review-20261115.md)。接受只限a18292ac/6de95f56历史绑定，最新native通知候选为51b705c/5ae065d2；旧材料/旧hy4free429不改、不重试。本次未重算二进制/构建/设备或法律/P4接受，P1–P4/R4/R5/W3仍open。该hy3请求已终态，无旧句柄待poll；先前native双端同步见7a57cb8及收据，源码未push。下一ORT嵌套27项实际组成/通知选择与最终App/P4或实体连接变化后的固定合同验收；不重复旧库扫描/构建/USB循环。
+
 ## 2026-11-15 W3 native通知已提交并双端同步
 
 本地51b705c精确50文件；GH#15comment6894114254/GL#15note44861/GHWikifc260f8efed10553efbd94e9393f914d74fc1871均逐字回读，双Wiki SHA 0666076e20c233797db4d49f2d3573e535d4ced549b17cac84c058c7d2fc5937一致，[同步收据](validation/w3-native-notice-integration-sync-20261115.json)。新marker已用勿重发，源码分支未push。三原许可空白诊断按原字节保留，其他提交文字diff-check0；173保护余字节/161freeze通过，无设备操作。P1–P4/R4/R5/W3仍open；用户选择hy3有效，另一个历史SDK绑定的限定只读复核已启动于.omx/artifacts/w3-sdk-binding-hy3-review-20261115T121231Z，尚待终态，不能按旧hy4/native429误报hy3停用或计独立发布通过。

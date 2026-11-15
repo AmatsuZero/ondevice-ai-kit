@@ -1,3 +1,7 @@
+## 2026-11-15：hy3补交历史SDK绑定限定复核
+
+免费hy3完整返回accept_bounded_increment，无quota/已观察工具事件；历史a18292ac/6de95f56的五模块/14源文件/15metadata及Debug库消费者绑定内部对应已接受。唯一LOW时间身份措辞已修正汇总并加历史前缀，最新native候选51b705c/5ae065d2另有验收，旧receipt及原hy4free429不改，[复核](../validation/w3-sdk-binding-hy3-review-20261115.md)。未执行新构建/设备/法律或完整发布复审，P1完整输入及最终App、P2–P4/R4/R5/W3仍open。
+
 ## 2026-11-15：hy3完成已知native通知与上游修改说明交付
 
 23原文本452769B及索引/修改说明共25新资产已进Sherpa SDK，合并既有JVM共36项550583B。完整候选AAR/lint/本地隔离发布通过；独立Maven最终APK36通知原字节保留、四ABI16SO同固定runtime，六负例拒收，[验证](../validation/w3-native-notice-integration-20261115.md)。hy3三请求均完整，无quota；限定文本复核不冒充P4。首Darts绑定错误及不完整提前构建拒作通过，原件保留；ORT命令与实际diff范围解释已修正。原JVM资产/173保护/161freeze保持，零设备/模型/识别逻辑改变；完整ORT嵌套27项/递归组成及适用通知仍缺，P1–P4/R4/R5/W3保持open。
