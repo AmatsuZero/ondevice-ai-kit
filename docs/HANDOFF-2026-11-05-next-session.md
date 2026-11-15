@@ -1,3 +1,7 @@
+## 2026-11-15 W3 hy3已补交两条NDK/C++来源证据
+
+本轮四个免费hy3请求均完整success/终态；guard复核46.385s，首两文档稿因范围/命名/措辞拒收，最终稿原字节采用。八命令固定Sherpa r30与ORT r27d；两arm64原产物note/API/build及ORT compiler comment对应，JNI缺comment警告保留。69源路径/61唯一字节、30tree和两版LLVM声明/许可已核，[验证](validation/w3-ndk-runtime-provenance-20261115.md)；材料只补来源，63生产通知未动、零新构建/设备/完整NDK或模型下载，P1–P4/R4/R5/W3全open、goal active，完整W3待办范围不缩减。161冻结守卫通过；171原保护字节保持，另两W6文档范围外更新已保留并记前后hash，不回滚/不纳本轮提交。下一实际cache/link/retention与runtime相关patch/通知适用性，或实体连接变化后固定未消费合同；不重扫旧库/重取归档/重试quota或USB循环。本轮待精确提交及新marker双端同步；源码分支不push。
+
 ## 2026-11-15 W3 ORT嵌套通知已提交并双端同步
 
 本地910ac8c精确99文件；GH#15comment6894671804/GL#15note44863/GHWikia7fa188均逐字回读，双Wiki SHA 139f3cf32a6849d52d17a6dfed7653e8e3926c94caf4f9c24653563f7e9fc8e1一致，[同步收据](validation/w3-ort-nested-notice-integration-sync-20261115.json)。marker已用勿重发，源码未push；四hy3/两构建/三个发布均终态、无待poll。173原字节或共享余字节及161freeze保持；96条空白诊断仅限13个已绑定原文/上游patch/重建diff路径，其他文字通过，不格式化证据。P1–P4/R4/R5/W3均open、goal active；下一完整递归组成与最终生产采用/发布接受，或实体连接变化后固定未消费run的真机验收。不重试旧quota、不重取归档/重跑已验构建/旧FILE或USB恢复循环，零新设备/麦克风/AiAi/下载。

@@ -1,3 +1,9 @@
+## W3 NDK：Linux GNU开关不能排除Android C++ runtime（2026-11-15）
+
+固定Sherpa option仅在NOT BUILD_SHARED_LIBS且CMAKE_SYSTEM_NAME=Linux分支控制GNU libstdc++/libgcc；Android共享构建的OFF不选择libc++，x86命令又没有显式OFF。ORT实际NDK27.3.13750724/legacy=false与SherpaNDK30.0.16248370的默认legacy路线须分开，本机r27/beta3仅参考。两枚arm64原产物note分别为r27d/13750724/API27与r30/16248370/API21，ORT comment可对应compiler manifest；JNI缺comment警告不是缺NDK note。上游Python解码仍用同一参考LLVM定位，不能称完整独立解析器；tree/blob核对不等于签名/可信构建。75/59 patch引用、whole-toolchain NOTICE及基础LLVM LICENSE不证明所有补丁已应用、最终保留或完整适用通知。hy3首两稿的缩小W3范围、工具零执行混写和ORT JNI误名已拒收，最终稿保持完整目标与真实成员。见[验证](validation/w3-ndk-runtime-provenance-20261115.md)及`.omx/artifacts/w3-ndk-runtime-20261115T130823Z/`，不重放旧构建或全库扫描来替代缺失link证据。
+
+官方源码的build/cmake路径亦会命中仓库通用build/忽略规则：初次git add exit1且仅四原文未暂存；有效恢复是核check-ignore后仅对这四个已绑定原文件精确git add -f，不改ignore规则、不将其当生成缓存删除。首失败和部分暂存状态保留。
+
 ## W3 ORT补丁：带timestamp的旧文件头不是实际目标（2026-11-15）
 
 Eigen的s390x-build-werror.patch旧`---`行为`.orig<TAB>timestamp`，首父提取脚本按旧整行找archive member而失败。有效恢复是按`+++`真实目标并去tab timestamp，保留初始失败/目录，只补失败组件；其余六组件不重跑。11原patch在新归档提取目录本地check/apply成功及21文件前后hash，不是历史CI post-patch tree、GNU patch重放或最终机器码效果。四原日志只有Found Patch直接行，不能由工具被发现宣称历史apply已证。证据[验证](validation/w3-ort-nested-notice-integration-20261115.md)及`.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/`。

@@ -1,0 +1,21 @@
+)]}'
+{
+  "commit": "2b678cf8a4be7421f7fe6206cc7f29219cf817c6",
+  "tree": "51504e5248c8ff1f28d1a8579bb1411cbaf6a35b",
+  "parents": [
+    "f1f3b5bf4532dd53a462d2347c74cc62157ff9e8",
+    "123c5e3f65e755952866b5ef4a1ee54fe60cb155"
+  ],
+  "author": {
+    "name": "Android Build Coastguard Worker",
+    "email": "android-build-coastguard-worker@google.com",
+    "time": "Wed Jun 25 16:09:57 2025 -0700"
+  },
+  "committer": {
+    "name": "Android Build Coastguard Worker",
+    "email": "android-build-coastguard-worker@google.com",
+    "time": "Wed Jun 25 16:09:57 2025 -0700"
+  },
+  "message": "Merge cherrypicks of [\u0027android-review.googlesource.com/3675246\u0027] into ndk-r27-release.\n\nChange-Id: I94e7dbd356f8b28579c90780e20f3a1d8709ae42\n",
+  "tree_diff": []
+}

@@ -1,3 +1,7 @@
+## 2026-11-15：NDK/C++ runtime来源增量，W3待办保持完整
+
+[验证](../validation/w3-ndk-runtime-provenance-20261115.md)固定八条ABI命令的两条工具链，并核两枚arm64产物note：Sherpa r30/16248370/API21、ORT r27d/13750724/API27；ORT编译器comment与公开manifest对应。69源路径/61唯一字节、30tree及官方runtime/LLVM来源与通知候选已核；GNU Linux静态选项不是Android STL选择，x86无显式OFF，ORT显式跳过legacy，不能合并推断最终静态组成。四免费hy3请求终态，guard限定接受，首两文档稿拒收后最终稿已核。63生产通知未改、零新构建/设备；P1–P4/R4/R5/W3全open，完整剩余目标不缩减，下一实际cache/link/retention与runtime补丁/通知适用性。
+
 ## 2026-11-15 ORT嵌套通知与补丁增量已提交同步
 
 本地910ac8c精确99文件；GH#15comment6894671804/GL#15note44863/GHWikia7fa188均逐字回读，双Wiki SHA 139f3cf32a6849d52d17a6dfed7653e8e3926c94caf4f9c24653563f7e9fc8e1一致，[同步收据](../validation/w3-ort-nested-notice-integration-sync-20261115.json)。marker已用勿重发，源码未push；四hy3/两构建/三个发布均终态、无待poll。173原字节或共享余字节及161freeze保持；96条空白诊断仅限13个已绑定原文/上游patch/重建diff路径，其他文字通过，不格式化证据。固定Release AAR188a558c/独立Maven APK88a208e7已核；P1–P4/R4/R5/W3均open、goal active；下一完整递归组成与最终生产采用/发布接受，或实体连接变化后固定未消费run的真机验收。不重试旧quota、不重取归档/重跑已验构建/旧FILE或USB恢复循环，零新设备/麦克风/AiAi/下载。

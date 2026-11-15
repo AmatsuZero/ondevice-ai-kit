@@ -1,0 +1,94 @@
+{
+  "verdict": "accept_bounded_interpretation",
+  "findings": [
+    {
+      "severity": "HIGH",
+      "claim": "Incorrectly collapsed: SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF proves Sherpa Android used dynamic libc++ or no static C++ runtime.",
+      "reason": "The observed Sherpa commands set BUILD_SHARED_LIBS=ON on Android with NDK r30. The fixed CMake guard applies the static GNU option block only under NOT BUILD_SHARED_LIBS AND CMAKE_SYSTEM_NAME STREQUAL Linux, where true adds -static-libstdc++ -static-libgcc. That branch is separate from Android NDK STL selection and from libc++/libc++abi/unwind retention.",
+      "source": "sherpa android-libs.log lines 778,1577,2338,3133; sherpa-onnx/CMakeLists.txt lines 73,531-538"
+    },
+    {
+      "severity": "HIGH",
+      "claim": "Incorrectly collapsed: ORT r27d and Sherpa r30 both used the legacy toolchain branch because NDK toolchains default to legacy true.",
+      "reason": "Both supplied NDK toolchain files default to the legacy file only when ANDROID_USE_LEGACY_TOOLCHAIN_FILE is undefined. The ORT commands explicitly pass false, so the r27d legacy include-and-return branch is bypassed. The observed Sherpa commands do not pass that variable, so on the supplied command state the r30 default legacy branch applies; other cache state was not supplied.",
+      "source": "ORT arm64/armeabi-v7a/x86/x86_64 logs line 455; sherpa android-libs.log lines 778,1577,2338,3133; r27d and r30 android.toolchain.cmake lines 47-56"
+    },
+    {
+      "severity": "MEDIUM",
+      "claim": "Incorrectly collapsed: all four Sherpa ABIs explicitly set SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF.",
+      "reason": "The arm64, armeabi-v7a, and x86_64 commands include that flag; the x86 command shown does not. This does not change the shared-Android guard analysis, but it does not support a claim of four explicit OFF settings.",
+      "source": "sherpa android-libs.log lines 778,1577,2338,3133"
+    },
+    {
+      "severity": "HIGH",
+      "claim": "Incorrectly collapsed: legacy NDK default c++_static or CMAKE_CXX_FLAGS -stdlib=libc++ proves final retained libc++, libc++abi, or unwind code.",
+      "reason": "The legacy files set ANDROID_STL c++_static only when ANDROID_STL is unset, and ORT bypasses legacy via false. The ORT flags show a C++ standard-library compile intent, not final link/retention. The supplied ELF evidence says DYNSYM/no SYMTAB, no libc++_shared DT_NEEDED, and std::__ndk1 exports do not establish retained implementation, exact version, static absence, or complete composition.",
+      "source": "r27d/r30 android-legacy.toolchain.cmake lines 241-242,357-372/366-381; ORT logs line 1139/1150/1146; elfEvidence"
+    },
+    {
+      "severity": "MEDIUM",
+      "claim": "Incorrectly collapsed: reference-only local NDKs or release-tag source files prove the packaged runtime kit identity and full notice set.",
+      "reason": "The context explicitly marks 27.0.12077973 and 30.0.16138531-beta3 as reference-only local NDKs. Version bindings associate release tags with version snippets, but do not alone prove packaged kit identity, final composition, or applicable full notices.",
+      "source": "officialVersionBindings; referenceOnlyLocalNDKs; supplied pitfalls"
+    },
+    {
+      "severity": "MEDIUM",
+      "claim": "The excerpts are sufficient to close notice applicability.",
+      "reason": "They establish selected build configuration and branch guards only. No supplied evidence maps all final SOs/AAR/Maven artifacts to runtime components, source packages, licenses, notice texts, or exclusions, so full-notice conclusions remain out of scope.",
+      "source": "observations; officialSourceExcerpts; boundaries R4/R5/P1/P2/P3/P4/W3"
+    }
+  ],
+  "supportedClaims": [
+    {
+      "claim": "ORT was built against the toolchain path for NDK 27.3.13750724, bound in the supplied release bindings to r27d, with Clang 18.0.4, onnxruntime_BUILD_SHARED_LIB=ON, ANDROID_PLATFORM/MIN_SDK=27, ANDROID_USE_LEGACY_TOOLCHAIN_FILE=false, and CMAKE_CXX_FLAGS containing -stdlib=libc++.",
+      "source": "ORT arm64/armeabi-v7a/x86/x86_64 logs lines 455,493-494,1139/1150/1146; officialVersionBindings r27d"
+    },
+    {
+      "claim": "Sherpa was built in the supplied job against the toolchain path for NDK 30.0.16248370, bound in the supplied release bindings to r30, with Clang 21.0.0, BUILD_SHARED_LIBS=ON, JNI/C API enabled, and ANDROID_PLATFORM=android-21.",
+      "source": "sherpa android-libs.log lines 649-654,778,781,1577,1583,2338,2341,3133,3136; officialVersionBindings r30"
+    },
+    {
+      "claim": "In both supplied NDK toolchain files, ANDROID_USE_LEGACY_TOOLCHAIN_FILE=false skips the legacy include-and-return branch; if the variable is undefined, the file defaults to legacy true and includes android-legacy.toolchain.cmake.",
+      "source": "r27d and r30 android.toolchain.cmake lines 47-56"
+    },
+    {
+      "claim": "The legacy toolchain files set ANDROID_STL to c++_static only when it is not otherwise set and reject GNU STL/STLPort options; this is a conditional source-file rule, not proof of any final artifact's retained runtime code.",
+      "source": "r27d/r30 android-legacy.toolchain.cmake lines 241-253,357-372/366-381"
+    },
+    {
+      "claim": "SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY is documented and guarded as a Linux static-build GNU libstdc++/libgcc option: it is evaluated only when BUILD_SHARED_LIBS is OFF and CMAKE_SYSTEM_NAME is Linux.",
+      "source": "sherpa-onnx/CMakeLists.txt lines 73,531-538"
+    },
+    {
+      "claim": "The supplied ELF observations are negative/limited: final SOs have DYNSYM and no SYMTAB, none has libc++_shared DT_NEEDED, and exported std::__ndk1 names show interface ABI namespace presence, not retained implementation, exact version, static absence, or complete composition.",
+      "source": "elfEvidence"
+    }
+  ],
+  "prohibitedOverclaims": [
+    "Final Sherpa or ORT binaries statically retain libc++/libc++abi/unwind code merely because an NDK legacy default or option default exists.",
+    "Final binaries use libc++_shared because CMAKE_CXX_FLAGS contains -stdlib=libc++, BUILD_SHARED_LIBS=ON, or no libc++_shared DT_NEEDED is observed.",
+    "SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF proves Android libc++ dynamic linkage; it is not the Android NDK STL selector.",
+    "ORT used the r27d legacy toolchain branch or legacy c++_static default despite explicitly passing ANDROID_USE_LEGACY_TOOLCHAIN_FILE=false.",
+    "Sherpa explicitly disabled the legacy toolchain, or explicitly set SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF for all four ABIs.",
+    "No SYMTAB, no libc++_shared DT_NEEDED, or absence of expected symbol names proves absence of hidden, inlined, stripped, or dlopened code.",
+    "Source-tag files alone prove the packaged NDK kit identity, final composition, or applicable full notices.",
+    "Reference-only local NDK 27.0.12077973 or 30.0.16138531-beta3 were the actual build toolchains.",
+    "These CMake/NDK excerpts close full notice applicability or legal acceptance."
+  ],
+  "nextEvidence": [
+    "Historical CMakeCache.txt, link.txt/response files, and compile/link command exports for ORT and Sherpa showing final ANDROID_STL/CMAKE_ANDROID_STL_TYPE, linker flags, and whether any cache variables overrode legacy or STL state.",
+    "Complete NDK package manifests/source receipts tied to the observed NDK paths if packaged kit identity is to be claimed beyond path/version binding.",
+    "Final-artifact ELF dependency, relocation, symbol-version, and section evidence read with retained originals and independently interpreted, including libc++/libc++abi/unwind-specific evidence.",
+    "Packaged AAR/Maven/POM/source inventories mapping every retained native component to exact notice texts and license obligations.",
+    "Missing or corrected x86 Sherpa command/cache evidence before claiming uniform explicit option values across ABIs."
+  ],
+  "boundaries": {
+    "R4": "open",
+    "R5": "open",
+    "P1": "open",
+    "P2": "open",
+    "P3": "open",
+    "P4": "open",
+    "W3": "open"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "observerTool": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-readelf",
+  "observerToolIsReferenceNotHistoricalInput": true,
+  "members": [
+    {
+      "member": "jni/arm64-v8a/libonnxruntime.so",
+      "path": ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libonnxruntime.so",
+      "bytes": 22249560,
+      "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+      "argv": [
+        "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-readelf",
+        "--notes",
+        "--string-dump=.comment",
+        ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libonnxruntime.so"
+      ],
+      "exitCode": 0,
+      "stdoutSHA256": "670d25261f5b6fd490737b0529bb829e212417c12ce3f54be21dbb1664e6aed2",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-jni.so",
+      "path": ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-jni.so",
+      "bytes": 4609320,
+      "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575",
+      "argv": [
+        "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-readelf",
+        "--notes",
+        "--string-dump=.comment",
+        ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-jni.so"
+      ],
+      "exitCode": 0,
+      "stdoutSHA256": "7adfd2d925e37feaf0c3d91ae35a1e6cacc400ac804fba58852531c8a4495025",
+      "stderrSHA256": "1f2e49d4d99c36e6b79db2cbadb7438eae1fff00278d01cd49ec2cefbeea60a9"
+    }
+  ]
+}

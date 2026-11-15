@@ -1,0 +1,46 @@
+[
+  {
+    "label": "guard-review",
+    "elapsedSeconds": 46.385,
+    "sessionId": "01a1df55-e5a1-7208-9865-a380bdb02533",
+    "model": "hy3",
+    "processExitCode": 0,
+    "resultSubtype": "success",
+    "observedToolEvents": 0,
+    "accepted": true,
+    "rawArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/guard-review"
+  },
+  {
+    "label": "report-candidate",
+    "elapsedSeconds": 48.791,
+    "sessionId": "01a1df5f-9950-7fdc-9afb-94f5c56f860c",
+    "model": "hy3",
+    "processExitCode": 0,
+    "resultSubtype": "success",
+    "observedToolEvents": 0,
+    "accepted": false,
+    "rawArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/report-candidate"
+  },
+  {
+    "label": "report-correction",
+    "elapsedSeconds": 31.939,
+    "sessionId": "01a1df62-015f-7376-a1be-abb8f208cdfc",
+    "model": "hy3",
+    "processExitCode": 0,
+    "resultSubtype": "success",
+    "observedToolEvents": 0,
+    "accepted": false,
+    "rawArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/report-correction"
+  },
+  {
+    "label": "report-editorial",
+    "elapsedSeconds": 56.651,
+    "sessionId": "01a1df64-3028-7368-91ca-9b88f2f0cf03",
+    "model": "hy3",
+    "processExitCode": 0,
+    "resultSubtype": "success",
+    "observedToolEvents": 0,
+    "accepted": true,
+    "rawArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/report-editorial"
+  }
+]

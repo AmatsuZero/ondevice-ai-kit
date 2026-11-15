@@ -1,0 +1,25 @@
+{
+  "refs/heads/mirror-goog-ndk-r30-release": {
+    "value": "687f4b2409deb7d7dd898662156647aca0164333"
+  },
+  "refs/tags/ndk-r27d": {
+    "value": "13447502af3f446b0010f618b52ea18819b3dfb5",
+    "peeled": "99de7583356a3ae1af2686e0659b646bdacb88c7"
+  },
+  "refs/tags/ndk-r30": {
+    "value": "20b998816b3103ec8a2b0cd00191b8ff40cfa9bb",
+    "peeled": "c0a0a3e6712eeb645090766058cda091da0fdf70"
+  },
+  "refs/tags/ndk-r30-beta1": {
+    "value": "8a696f33bb40793acbf9c93b93fc113d484a80b6",
+    "peeled": "792d7ed4ec5032dc3372696181ca1025e657c4b6"
+  },
+  "refs/tags/ndk-r30-beta2": {
+    "value": "85b78b84118c3a5337a3ea16b8b415cfd2078300",
+    "peeled": "f830fc20f1be20b99c95ec70b999f53569d91efe"
+  },
+  "refs/tags/ndk-r30-rc1": {
+    "value": "5e68aa4dd49ffae387f97a2e8591fe6c91332513",
+    "peeled": "33bb785a06e03bd2f720b06c23779a7abca05245"
+  }
+}

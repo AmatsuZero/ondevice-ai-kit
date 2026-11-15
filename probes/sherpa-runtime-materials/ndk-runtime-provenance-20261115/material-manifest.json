@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 1,
+  "sourceHEAD": "903154d1b25a99d2553f6f3390ce6ea571654b73",
+  "purpose": "bounded NDK and C++ runtime provenance inputs; all W3 remaining requirements stay in scope",
+  "fileCount": 94,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1518,
+      "sha256": "c2aa1918de5902b49b30f8b15f60dfdf9cb1043b073114e3a79c4a5f829e9410"
+    },
+    {
+      "path": "elf-notes/libonnxruntime.so.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "elf-notes/libonnxruntime.so.stdout",
+      "bytes": 823,
+      "sha256": "670d25261f5b6fd490737b0529bb829e212417c12ce3f54be21dbb1664e6aed2"
+    },
+    {
+      "path": "elf-notes/libonnxruntime.so.upstream-decoder.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "elf-notes/libonnxruntime.so.upstream-decoder.stdout",
+      "bytes": 102,
+      "sha256": "0c89662cd7f091dea3deed77a73dd591e1f36252ad3e7b672d05f6edd58790b3"
+    },
+    {
+      "path": "elf-notes/libsherpa-onnx-jni.so.stderr",
+      "bytes": 234,
+      "sha256": "1f2e49d4d99c36e6b79db2cbadb7438eae1fff00278d01cd49ec2cefbeea60a9"
+    },
+    {
+      "path": "elf-notes/libsherpa-onnx-jni.so.stdout",
+      "bytes": 792,
+      "sha256": "7adfd2d925e37feaf0c3d91ae35a1e6cacc400ac804fba58852531c8a4495025"
+    },
+    {
+      "path": "elf-notes/libsherpa-onnx-jni.so.upstream-decoder.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "elf-notes/libsherpa-onnx-jni.so.upstream-decoder.stdout",
+      "bytes": 101,
+      "sha256": "17bc7d5b59befa3f80621c1f3a1d27c6bb48489adc4963f341f57777064f48a0"
+    },
+    {
+      "path": "elf-notes-decoded.json",
+      "bytes": 1875,
+      "sha256": "2340ec020ca76c17ca0c13b4d63ffc5a30de3a9a855a140dffe3ace796728758"
+    },
+    {
+      "path": "elf-notes-receipt.json",
+      "bytes": 1708,
+      "sha256": "a618b864784589765258088aa665c4ce116403742a0e78cff7cb39fa75d358ef"
+    },
+    {
+      "path": "git-tree-verification.json",
+      "bytes": 6642,
+      "sha256": "6f016eea6be1598372f2596c943e9973c9a1426a740c1ccf2b79c621b5459cee"
+    },
+    {
+      "path": "graph-acceptance.json",
+      "bytes": 238,
+      "sha256": "b5e192901ca9e4654ce4f9026a682da237bfee634b08128ea3c27a07688a06da"
+    },
+    {
+      "path": "guard-review-receipt.json",
+      "bytes": 544,
+      "sha256": "cb8a0efa1736c2e65dc09e89020d437cbdac8374e904184880b024c4a5ce8c9d"
+    },
+    {
+      "path": "guard-review.json",
+      "bytes": 8094,
+      "sha256": "4e48f766d1e55401a45ede920accb8d5621fd15326ac3099e4b200b1b76bd7c8"
+    },
+    {
+      "path": "helper-deliveries.json",
+      "bytes": 1387,
+      "sha256": "668ec9f44c1980e1e5d1f6a477233f6747d0a767f2aefa3f3728b064c31c44c7"
+    },
+    {
+      "path": "observed-toolchains.json",
+      "bytes": 24719,
+      "sha256": "239734ea3be4a752dd7f2965f438473e81376dce44c0c07930423ef4f61cff7b"
+    },
+    {
+      "path": "official-receipts/clang-binding-fetch.json",
+      "bytes": 5216,
+      "sha256": "7c758caba0759bc30590ac6859ebfc9a31281014b1ac708d373a6f26c1bc84c9"
+    },
+    {
+      "path": "official-receipts/clang-materials-fetch.json",
+      "bytes": 8088,
+      "sha256": "891f20e03b6eb7c67d9c6a79308d76885832e68e94ff6607c96591a0c612a821"
+    },
+    {
+      "path": "official-receipts/clang-text-binding-fetch.json",
+      "bytes": 3053,
+      "sha256": "4525ee4f7f33da433fe3664461a67108752ff84c11e0338da2872e32da646fa6"
+    },
+    {
+      "path": "official-receipts/llvm-runtime-license-fetch.json",
+      "bytes": 6191,
+      "sha256": "9c34270607b05ebecccc5dac23fcf51087138fbaff8a3193a8b9504dcf70b334"
+    },
+    {
+      "path": "official-receipts/release-r27d.json",
+      "bytes": 9727,
+      "sha256": "3c13385f314e5823cb922e3a7d6c00ec3c19c93291cb27b68cde100a863fb783"
+    },
+    {
+      "path": "official-receipts/release-r30.json",
+      "bytes": 3721,
+      "sha256": "2058462c9884925c6e3f181dcacc8ba9d3297ac35e7b7cfb7a40994620781145"
+    },
+    {
+      "path": "official-receipts/runtime-abi-trees-fetch.json",
+      "bytes": 5913,
+      "sha256": "aa63e7ff8195192105cd94e0dac2ab228a4b552e5d4892f5059cfe5a8c7a573f"
+    },
+    {
+      "path": "official-receipts/runtime-lib-trees-fetch.json",
+      "bytes": 10555,
+      "sha256": "987763ddb2d64ee0d7cf5790c1292c9c35aeca7cb81b836a1f558c273b82322e"
+    },
+    {
+      "path": "official-receipts/selected-packages.json",
+      "bytes": 2774,
+      "sha256": "153651e638a71e013102746209b693a95727325919bd8f7b21f95193f19bfa59"
+    },
+    {
+      "path": "official-receipts/selected-refs.json",
+      "bytes": 847,
+      "sha256": "c4f1354e409e489859b71de0280329db85297fccfdda8021405af569db0a3bc1"
+    },
+    {
+      "path": "official-receipts/source-fetch.json",
+      "bytes": 3319,
+      "sha256": "59c7e636bcbe44a0dab2a641fa1330afa5f45d8f3eabaf1b6d511e8cb3957671"
+    },
+    {
+      "path": "official-receipts/tag-commit-bindings.json",
+      "bytes": 1519,
+      "sha256": "10c3b442a56b9314941b4d5bf29d4e26de8a0ab63193dae0b69d080926680644"
+    },
+    {
+      "path": "parent-acceptance.json",
+      "bytes": 907,
+      "sha256": "348b333842e34cb819e4bb6d1addf3cc029a9a6b681ddae6fa72b0937647e99f"
+    },
+    {
+      "path": "source-composition-projection.json",
+      "bytes": 5150,
+      "sha256": "6cffef3041282272f00fcda7314f7eaedb19b46383bcf55ca2d6ce8a3f88ce7e"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/build/cmake/android-legacy.toolchain.cmake",
+      "bytes": 29775,
+      "sha256": "517fefa5c8f0d12075d771df4c84d42e3a9ee62141859443d932214cfe9b6403"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/build/cmake/android.toolchain.cmake",
+      "bytes": 10343,
+      "sha256": "22c1f80acd4a272be56b108b97320197046f407412757d3651c098327ea59a60"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/checkbuild.py",
+      "bytes": 841,
+      "sha256": "e3fee98294b8969a6e1a0d1cab15d85462476c55f161f5ea26b6856cb314f34c"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/AndroidVersion.txt",
+      "bytes": 112,
+      "sha256": "9413ab74d395501e360c484b4d34efd790eef54bcaee85884f3687446898593f"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/BUILD_INFO",
+      "bytes": 23826,
+      "sha256": "0812d2ee49a0d5ca553588a44a0eeeef9601e54847b3b229ecf72c008070ca29"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/NOTICE",
+      "bytes": 130424,
+      "sha256": "f96f763beb66a7ba7a667647fc64c0226ace875e590c831fdd9579ec1c1d91e1"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64/lib-tree.json",
+      "bytes": 657,
+      "sha256": "966538f143b96c91993a9c772eebe0313fb4bdb886413e4683eec7761be71529"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64-tree.json",
+      "bytes": 347,
+      "sha256": "303582630b10a668a3497daa4bed1730dfa573212fcae6d3ba19d20d40d181d7"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm/lib-tree.json",
+      "bytes": 657,
+      "sha256": "cc08f3081e0579ec50cd9b8c09bcd9c5f370feaff72dc30c5e9f979f7810a137"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm-tree.json",
+      "bytes": 347,
+      "sha256": "debae6c531466acff975c0ffffafc1839c4cd67b0f03dfbc93ac6e7ca99c562c"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386/lib-tree.json",
+      "bytes": 657,
+      "sha256": "b7ea70045fe0bc622ae5ee929debd02ee54b00ed96c42b87cc5b0a3f796b947b"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386-tree.json",
+      "bytes": 347,
+      "sha256": "68a828be91ae1039b4e12ccb6c9e3214452fdcfd14dad8e1ef468d866edbf8f5"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64/lib-tree.json",
+      "bytes": 657,
+      "sha256": "f97b9c2bc9fc88771b9b56479e6659f8ed9e1004f4fd1ee4fca818fbcffb742b"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64-tree.json",
+      "bytes": 347,
+      "sha256": "d307d71412bd41294b5838abceb4cb6c5474e83b8bfb79816f8d88bf49af4f14"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk-tree.json",
+      "bytes": 751,
+      "sha256": "3a236d62f7a971405c18480a03715ae5634e7fad8e591609c5929cc91f76e3ac"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++-tree.json",
+      "bytes": 930,
+      "sha256": "fa26cf634285f0151657f03bf748338a94df1e0ee397d26df8704939c7cc0417"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+      "bytes": 16590,
+      "sha256": "5c8a07e442b511e7749ccedc3005e3006bd9b688a0d396c4216307ec4c8c7ca4"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d/manifest_13691557.xml",
+      "bytes": 4813,
+      "sha256": "3400d26f172e935472bcc524223d5b08953f706cf55b8440811ca910a1baef66"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/clang-r522817d-tree.json",
+      "bytes": 2761,
+      "sha256": "ddac3f965d7f19675062b6f72ab741ea80e91ab9afd591b04a28bc4684db13b3"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/commit.json",
+      "bytes": 766,
+      "sha256": "f37d5ef978279dd9369f752ce7a6041294da5873b160078a7ecb34bd849afc83"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/linux-x86/root.json",
+      "bytes": 4033,
+      "sha256": "c8ba44097943d8850251bcda178682236b431be0b6658063bfad572be345f8bc"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/llvm-base/compiler-rt/LICENSE.TXT",
+      "bytes": 16708,
+      "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/llvm-base/libcxx/LICENSE.TXT",
+      "bytes": 16703,
+      "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/llvm-base/libcxxabi/LICENSE.TXT",
+      "bytes": 16706,
+      "sha256": "e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/llvm-base/libunwind/LICENSE.TXT",
+      "bytes": 16706,
+      "sha256": "b5efebcaca80879234098e52d1725e6d9eb8fb96a19fce625d39184b705f7b6d"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/manifest/commit.json",
+      "bytes": 916,
+      "sha256": "7818c5c974b9ecedd67910437c177108d3fb6a6b21b0cc6995b6f7f1de131f8f"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/manifest/default.xml",
+      "bytes": 3442,
+      "sha256": "d26372ec1164c3ae1634353296546f43645e3afb0018ca53bb254313f2c2dfae"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/manifest/root.json",
+      "bytes": 219,
+      "sha256": "dd5ff7e8f2942175df7bb332cc23c814ba425a0d912960cb6bbba2169fc7b4fe"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/ndk/NOTICE",
+      "bytes": 577,
+      "sha256": "c870d52f42a8f93023b99a85fe68d02637d6b04e5f35bbcd7f98759adb4e4d49"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/ndk/ndk/checkbuild.py",
+      "bytes": 91780,
+      "sha256": "a36e1d66d48d6052eebc1c17527724c81ff3fd015df0dc8ecba1ba2d3e088f68"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/ndk/ndk/toolchains.py",
+      "bytes": 11545,
+      "sha256": "f439a67155b04e50e7326c0976946a4ea9aaae98861c920c9b240efb743baff9"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/ndk/parse_elfnote.py",
+      "bytes": 7705,
+      "sha256": "f4a364bf88095aee4434d9df757cffbc9f117ea58e6603b28c8ef97891c4922d"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/ndk/sources/cxx-stl-tree.json",
+      "bytes": 214,
+      "sha256": "9c7e56038f46bffcc17b808e8253837300a75f69cb955625131ae3b8420bdd3e"
+    },
+    {
+      "path": "source-evidence/ndk-r27d/root.json",
+      "bytes": 5196,
+      "sha256": "4b65a68a78a800024fe1b766f7f076b159e58277c2a8708ed932f1f80c26dd70"
+    },
+    {
+      "path": "source-evidence/ndk-r30/build/cmake/android-legacy.toolchain.cmake",
+      "bytes": 30389,
+      "sha256": "be4ed442df676e42f3477b922fe9e13652f54c3aabefa584181cdc065d607b87"
+    },
+    {
+      "path": "source-evidence/ndk-r30/build/cmake/android.toolchain.cmake",
+      "bytes": 10358,
+      "sha256": "98f1804e1a06e1d20a50933d2ea437fe43017fc6d1e4f6bc2d2838f6bbd44b4c"
+    },
+    {
+      "path": "source-evidence/ndk-r30/checkbuild.py",
+      "bytes": 770,
+      "sha256": "90a6d0da02ea6c14b095a252ebc197db25f31c618c83a559f2e5ee36cf1f651c"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/AndroidVersion.txt",
+      "bytes": 112,
+      "sha256": "50f8283fa70fe63736cf031db7ebba878de94c8c43f02a40fea0d87ba1f6c4f5"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/BUILD_INFO",
+      "bytes": 24257,
+      "sha256": "b7d7021e452c01068e938ea18bbec1d2ee77ae8544d3bc3c7038255c07460326"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64/lib-tree.json",
+      "bytes": 657,
+      "sha256": "f2ec9115ab83d6f97b1b71411b53520b5302344232c1adc5ce1e8a3373fe7643"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64-tree.json",
+      "bytes": 347,
+      "sha256": "e6958cae4cdfaa4c2fa6f916418a1bc90a0288b18e47dcaed2b8db0123ad7fb2"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm/lib-tree.json",
+      "bytes": 657,
+      "sha256": "d5219cc719dad229106f0aa6be55bcfd2d6ed9cfb0e0555ae6f87814ec2a8ac4"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm-tree.json",
+      "bytes": 347,
+      "sha256": "57b072c6c213c3ea1a2cdd900548e34f33b9fce7ad17fa08dd16a4b6aecb5fa7"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386/lib-tree.json",
+      "bytes": 657,
+      "sha256": "52688eb6089c157d83b15a050d4cf487778a5ce5140208a843607c436843f74e"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386-tree.json",
+      "bytes": 347,
+      "sha256": "270f0c24abae90bdd1277fae3d5203c53edb3559eebdfa000ee1ba247d5d85c0"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64/lib-tree.json",
+      "bytes": 657,
+      "sha256": "093c2dc27f2f96cf34dde657db49ba7f4c9ecdc75abe33b715683a5e07c584c9"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64-tree.json",
+      "bytes": 347,
+      "sha256": "00d02555ebb898ac30c5f0d099bbea4874b6dd328428396be9cade976062f5fd"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk-tree.json",
+      "bytes": 751,
+      "sha256": "c760e1719275b0dcc28775d811b2dbaed669d38944342c7d8f2db319249548fa"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++-tree.json",
+      "bytes": 930,
+      "sha256": "e2413c0a19220953de9ce805ac004f26301f029f7503e9c487a1ae362d6f831f"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/aosp_manifest_16134705.xml",
+      "bytes": 5566,
+      "sha256": "3101de9d6af821ad2fc47a811f272573fe829f939f8229179f1d96f3c9111b82"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+      "bytes": 13235,
+      "sha256": "22a60039318372c44c09b6bbb5aa5acb770a006ed3a2efaa372434e5ba4be0b2"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c/manifest_16134705.xml",
+      "bytes": 4956,
+      "sha256": "b9311b6363728fefa936407d3d3070a9bb51a4a8b8535326ed326cd1cd42f092"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/clang-r574158c-tree.json",
+      "bytes": 2916,
+      "sha256": "685fc1c702a32b163cc983b93c758d40773a57a0a37ec0140edcd2e69944e6de"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/commit.json",
+      "bytes": 778,
+      "sha256": "8cb2baeaaa755752db620ccca51f03e009cfc1d22924d04860f82defc8779955"
+    },
+    {
+      "path": "source-evidence/ndk-r30/linux-x86/root.json",
+      "bytes": 3609,
+      "sha256": "e98887e765d675fce02967db069e3a978eb9aa23bea532a02398d4987599fe9b"
+    },
+    {
+      "path": "source-evidence/ndk-r30/manifest/commit.json",
+      "bytes": 915,
+      "sha256": "c29a1133a49c47d886efac2261b7a41a6a111845cc9fcdcbc429c1a44b09bc5f"
+    },
+    {
+      "path": "source-evidence/ndk-r30/manifest/default.xml",
+      "bytes": 2929,
+      "sha256": "6a9f2f96580f676b8eb0de4bc4a25c331713c3d891c97165df6cd39b7125cc3c"
+    },
+    {
+      "path": "source-evidence/ndk-r30/manifest/root.json",
+      "bytes": 219,
+      "sha256": "f692d85052d945f22fc86c0871e5144b22c43db049a27c332b465b40f74c9ef6"
+    },
+    {
+      "path": "source-evidence/ndk-r30/ndk/ndk/checkbuild.py",
+      "bytes": 91451,
+      "sha256": "aaf08dbbd9e9c84f7cad94600de5993011f1cac8982ead4fdc77a00e1e49dc1a"
+    },
+    {
+      "path": "source-evidence/ndk-r30/ndk/ndk/toolchains.py",
+      "bytes": 12003,
+      "sha256": "36e2a44aaaac420e49a1cbd306249e50a0878601ed66a37e8c8c843d3781a329"
+    },
+    {
+      "path": "source-evidence/ndk-r30/root.json",
+      "bytes": 5603,
+      "sha256": "cd1e5cb2793015bc30055c309fb1e500e6a12f6ad65123be3b2fac446da04e35"
+    },
+    {
+      "path": "source-retention-map.json",
+      "bytes": 34973,
+      "sha256": "7e092cb8169ded85f2ec6c43fa1fea6b42319e6808849f301e4708c458d4749b"
+    },
+    {
+      "path": "toolchain-matrix.json",
+      "bytes": 1943,
+      "sha256": "047a2ed91727d1a9ca6aabcd5475dc49e619267d5280d977778f3ed4d2a9b556"
+    }
+  ],
+  "totalBytes": 786834,
+  "rootManifestExcludedFromOwnInventory": true,
+  "deviceCalls": 0,
+  "newBuilds": 0,
+  "productionNoticeEdits": 0,
+  "completeFinalCompositionVerified": false,
+  "independentReleaseAcceptanceVerified": false,
+  "W3Complete": false
+}

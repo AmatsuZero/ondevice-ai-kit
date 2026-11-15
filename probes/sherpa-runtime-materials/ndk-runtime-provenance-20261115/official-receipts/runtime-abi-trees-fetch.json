@@ -1,0 +1,112 @@
+[
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r27d",
+    "path": "clang-r522817d/android_libc++/ndk/aarch64/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r27d/clang-r522817d/android_libc++/ndk/aarch64/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64-tree.json",
+    "status": 200,
+    "bytes": 347,
+    "sha256": "303582630b10a668a3497daa4bed1730dfa573212fcae6d3ba19d20d40d181d7"
+  },
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r27d",
+    "path": "clang-r522817d/android_libc++/ndk/arm/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r27d/clang-r522817d/android_libc++/ndk/arm/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm-tree.json",
+    "status": 200,
+    "bytes": 347,
+    "sha256": "debae6c531466acff975c0ffffafc1839c4cd67b0f03dfbc93ac6e7ca99c562c"
+  },
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r27d",
+    "path": "clang-r522817d/android_libc++/ndk/i386/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r27d/clang-r522817d/android_libc++/ndk/i386/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386-tree.json",
+    "status": 200,
+    "bytes": 347,
+    "sha256": "68a828be91ae1039b4e12ccb6c9e3214452fdcfd14dad8e1ef468d866edbf8f5"
+  },
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r27d",
+    "path": "clang-r522817d/android_libc++/ndk/x86_64/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r27d/clang-r522817d/android_libc++/ndk/x86_64/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64-tree.json",
+    "status": 200,
+    "bytes": 347,
+    "sha256": "d307d71412bd41294b5838abceb4cb6c5474e83b8bfb79816f8d88bf49af4f14"
+  },
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/ndk",
+    "revision": "99de7583356a3ae1af2686e0659b646bdacb88c7",
+    "path": "parse_elfnote.py",
+    "url": "https://android.googlesource.com/platform/ndk/+/99de7583356a3ae1af2686e0659b646bdacb88c7/parse_elfnote.py?format=TEXT",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/ndk/parse_elfnote.py",
+    "status": 200,
+    "bytes": 7705,
+    "sha256": "f4a364bf88095aee4434d9df757cffbc9f117ea58e6603b28c8ef97891c4922d"
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r30",
+    "path": "clang-r574158c/android_libc++/ndk/aarch64/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r30/clang-r574158c/android_libc++/ndk/aarch64/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64-tree.json",
+    "status": 200,
+    "bytes": 347,
+    "sha256": "e6958cae4cdfaa4c2fa6f916418a1bc90a0288b18e47dcaed2b8db0123ad7fb2"
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r30",
+    "path": "clang-r574158c/android_libc++/ndk/arm/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r30/clang-r574158c/android_libc++/ndk/arm/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm-tree.json",
+    "status": 200,
+    "bytes": 347,
+    "sha256": "57b072c6c213c3ea1a2cdd900548e34f33b9fce7ad17fa08dd16a4b6aecb5fa7"
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r30",
+    "path": "clang-r574158c/android_libc++/ndk/i386/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r30/clang-r574158c/android_libc++/ndk/i386/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386-tree.json",
+    "status": 200,
+    "bytes": 347,
+    "sha256": "270f0c24abae90bdd1277fae3d5203c53edb3559eebdfa000ee1ba247d5d85c0"
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r30",
+    "path": "clang-r574158c/android_libc++/ndk/x86_64/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r30/clang-r574158c/android_libc++/ndk/x86_64/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64-tree.json",
+    "status": 200,
+    "bytes": 347,
+    "sha256": "00d02555ebb898ac30c5f0d099bbea4874b6dd328428396be9cade976062f5fd"
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/ndk",
+    "revision": "c0a0a3e6712eeb645090766058cda091da0fdf70",
+    "path": "parse_elfnote.py",
+    "url": "https://android.googlesource.com/platform/ndk/+/c0a0a3e6712eeb645090766058cda091da0fdf70/parse_elfnote.py?format=TEXT",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/parse_elfnote.py",
+    "status": 200,
+    "bytes": 7705,
+    "sha256": "f4a364bf88095aee4434d9df757cffbc9f117ea58e6603b28c8ef97891c4922d"
+  }
+]

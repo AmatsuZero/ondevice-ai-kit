@@ -1,0 +1,98 @@
+[
+  {
+    "component": "onnxruntime",
+    "abi": "arm64-v8a",
+    "line": 455,
+    "ndk": "27.3.13750724",
+    "api": "android-27",
+    "legacy": "false",
+    "stl": null,
+    "staticGNUOption": null,
+    "buildShared": "ON",
+    "lto": "ON"
+  },
+  {
+    "component": "onnxruntime",
+    "abi": "armeabi-v7a",
+    "line": 455,
+    "ndk": "27.3.13750724",
+    "api": "android-27",
+    "legacy": "false",
+    "stl": null,
+    "staticGNUOption": null,
+    "buildShared": "ON",
+    "lto": "ON"
+  },
+  {
+    "component": "onnxruntime",
+    "abi": "x86",
+    "line": 455,
+    "ndk": "27.3.13750724",
+    "api": "android-27",
+    "legacy": "false",
+    "stl": null,
+    "staticGNUOption": null,
+    "buildShared": "ON",
+    "lto": "ON"
+  },
+  {
+    "component": "onnxruntime",
+    "abi": "x86_64",
+    "line": 455,
+    "ndk": "27.3.13750724",
+    "api": "android-27",
+    "legacy": "false",
+    "stl": null,
+    "staticGNUOption": null,
+    "buildShared": "ON",
+    "lto": "ON"
+  },
+  {
+    "component": "sherpa-onnx",
+    "abi": "arm64-v8a",
+    "line": 778,
+    "ndk": "30.0.16248370",
+    "api": "android-21",
+    "legacy": null,
+    "stl": null,
+    "staticGNUOption": "OFF",
+    "buildShared": "ON",
+    "lto": null
+  },
+  {
+    "component": "sherpa-onnx",
+    "abi": "armeabi-v7a",
+    "line": 1577,
+    "ndk": "30.0.16248370",
+    "api": "android-21",
+    "legacy": null,
+    "stl": null,
+    "staticGNUOption": "OFF",
+    "buildShared": "ON",
+    "lto": null
+  },
+  {
+    "component": "sherpa-onnx",
+    "abi": "x86_64",
+    "line": 2338,
+    "ndk": "30.0.16248370",
+    "api": "android-21",
+    "legacy": null,
+    "stl": null,
+    "staticGNUOption": "OFF",
+    "buildShared": "ON",
+    "lto": null
+  },
+  {
+    "component": "sherpa-onnx",
+    "abi": "x86",
+    "line": 3133,
+    "ndk": "30.0.16248370",
+    "api": "android-21",
+    "legacy": null,
+    "stl": null,
+    "staticGNUOption": null,
+    "buildShared": "ON",
+    "lto": null
+  }
+]

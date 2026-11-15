@@ -1,0 +1,246 @@
+)]}'
+{
+  "id": "964450b044bace1c8f0acd52e25f2970d0ee9580",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "2b83a1f41a6419b228f2e4cf4e6456338520a65b",
+      "name": ".clang-format"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "19b1f6db22cdd21b58a42aaa381c15b31a3f6a5e",
+      "name": ".github"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "68d603ff02b1e80ef594eb5d2f6f0bba57930489",
+      "name": ".gitignore"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "b259cc3983b56e8e6bdd69aa5c7a70ff6d1e3e47",
+      "name": "Android.mk"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "9552196748eaf489bb510d95e01d7c507c3ac112",
+      "name": "CONTRIBUTING.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "b84e1b65e75eb5e3f1b0265a0b89b5d56d89f2f9",
+      "name": "CleanSpec.mk"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "0b73323920fef06ed69ab63b4eed33d220f5be4f",
+      "name": "MANIFEST.in"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "d6c092292c614ce80204df312cfb89cdbb946035",
+      "name": "NOTICE"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4d438764c5a73e58f35dd65beff74f9e70223a0e",
+      "name": "OWNERS"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "12706de66220f4b892091c96978893a852395d4b",
+      "name": "README.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "2c8755e1490f29161ecd2e9009b82e320f4de05d",
+      "name": "UserReadme.md"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "e962d27b31c104750db4ffadb81cc0fc0052b4f8",
+      "name": "build"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "3be57080e97731dca64c1b437942acd82ed94493",
+      "name": "buildtests.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "260d60da05043614c511f78a13f558e2eeb5aff8",
+      "name": "checkbuild.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "92e96c6e7ec5ac86d05409a7123d946318d095e6",
+      "name": "ci.ps1"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "323f7264c71c3de9057f0942dc0bfb0997e78a52",
+      "name": "ci.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "07f8c1811edde165dcab3da34e2a6eb8291f7900",
+      "name": "ci.sh"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "a0b98893b948249ad22907dba7c08fd65afdbabe",
+      "name": "docs"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "3c9ea0689683c2a5e3d92b8fb9889750b0659cd9",
+      "name": "infra"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "ce62cce675c2846a88474b51b4f774a025a74398",
+      "name": "meta"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "6c87cb6684c88bde9c66fd1a452e84fe6d49c657",
+      "name": "navbar.md"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "7f84e0afabe8a05b2d172d97cd765d53bed9719a",
+      "name": "ndk-gdb"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "eaa909b36861b4b1c6ea6500927963f17336782d",
+      "name": "ndk-gdb.cmd"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "21eeef73a62970b56645a7f1c085510253c86ac3",
+      "name": "ndk-stack"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "3a2446e6269b89ee9791654f3723f9c5d1a22fc1",
+      "name": "ndk-stack.cmd"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "44f888c546b4acb7aecb675ddb952afe1c77063c",
+      "name": "ndk-which"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "f24e4d3f0d619acd539a2f17eee97bff6baa8b63",
+      "name": "ndk"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "92f88414f29bbf7d4d7a49e0948de56194ed3d83",
+      "name": "ndkstack.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "6be45c05a603cce208a76b953a0709f141827aad",
+      "name": "parse_elfnote.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "01e7cb1be5ea73af9831fa44354e211b7c4791aa",
+      "name": "poetry.lock"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "5e4ac6e4ce5bb0fed245b4e48355eb2855099f3e",
+      "name": "pyproject.toml"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4c9595c4e3ee89498a7db27edf624e2c7edb9cf8",
+      "name": "qa_config.json"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "018c095ca50d458ea7bf917bb69c8ad0f067f4c4",
+      "name": "run_tests.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "a3a4f37a095551d4b75cfaf129a9b052435ce514",
+      "name": "samples"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "e166dfaf536afca8f63816629269b29cffc2e8cc",
+      "name": "scripts"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e5b2d77786c666ee9349ff2bce5ded4542fd4bb1",
+      "name": "setup.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "63ec57896f900e1637eecbc0b926e5930bcd4e33",
+      "name": "sources"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "1e253f06df97206cd19611706e06924a441b019f",
+      "name": "tests"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "61293d9c92e16edeb6d94748d9f3b7897d2e49c9",
+      "name": "unittest.cfg"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "13f52f4a51909c27901efe7fbb4653a97ed3e172",
+      "name": "wrap.sh"
+    }
+  ]
+}

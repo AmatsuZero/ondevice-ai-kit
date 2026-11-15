@@ -1,0 +1,18 @@
+)]}'
+{
+  "id": "6bf215a44c9d9b6b86679c7ebbb9b9fb8d5bc0cc",
+  "entries": [
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "4b7ebb41a78777c33ba696e1ae63855ee753fea2",
+      "name": "include"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "b48be558cc03b2512f386f40256d96be42a311f7",
+      "name": "lib"
+    }
+  ]
+}

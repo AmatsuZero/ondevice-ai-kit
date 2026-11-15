@@ -1,0 +1,12 @@
+[
+  {
+    "tag": "ndk-r27d",
+    "rootToRuntimeAndSourceEdgesChecked": 19,
+    "reachableAbiLibraryDirectories": 4
+  },
+  {
+    "tag": "ndk-r30",
+    "rootToRuntimeAndSourceEdgesChecked": 20,
+    "reachableAbiLibraryDirectories": 4
+  }
+]

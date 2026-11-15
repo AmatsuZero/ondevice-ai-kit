@@ -1,0 +1,190 @@
+[
+  {
+    "tag": "ndk-r27d",
+    "clang": "clang-r522817d",
+    "clangVersion": "18.0.4",
+    "baseLLVMRevision": "3c92011b600bdf70424e2547594dd461fe411a41",
+    "llvmAndroidSourceRevisions": [
+      "3503453cd6ccac933b4a1ec5255b7fc29851ea6b"
+    ],
+    "listedPatchReferences": 75,
+    "manifestProjects": [
+      {
+        "path": "toolchain/llvm-project",
+        "name": "toolchain/llvm-project",
+        "revision": "d8003a456d14a3deb8054cdaa529ffbf02d9b262"
+      },
+      {
+        "path": "toolchain/llvm_android",
+        "name": "toolchain/llvm_android",
+        "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b"
+      }
+    ],
+    "runtimeABITrees": {
+      "aarch64": {
+        "id": "bb653eb2149226787fc331dba5a8f5d799b8c1f3",
+        "entries": [
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "de7a000e78e092aa03ee00c7237406b1a3165a91",
+            "name": "include"
+          },
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "3e149c6b1d5b71bab1b344d990c3d40c59a472fd",
+            "name": "lib"
+          }
+        ]
+      },
+      "arm": {
+        "id": "60194fd1495d173256295ef6262ccbf6dab8979d",
+        "entries": [
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "de7a000e78e092aa03ee00c7237406b1a3165a91",
+            "name": "include"
+          },
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "9db03e51ee6ec628faf045fac1a0bf2f6acf0a2b",
+            "name": "lib"
+          }
+        ]
+      },
+      "i386": {
+        "id": "0f4709957c3babd20e77ad48ed1ed94cfe102cf8",
+        "entries": [
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "de7a000e78e092aa03ee00c7237406b1a3165a91",
+            "name": "include"
+          },
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "236e73597f79588dc1c50f4705c24061deddff29",
+            "name": "lib"
+          }
+        ]
+      },
+      "x86_64": {
+        "id": "166009ccd8707c7a6d75c112d081237c2058bd5d",
+        "entries": [
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "de7a000e78e092aa03ee00c7237406b1a3165a91",
+            "name": "include"
+          },
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "2ebb771a01a8fe7794feb8567b196728150ec9c6",
+            "name": "lib"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "tag": "ndk-r30",
+    "clang": "clang-r574158c",
+    "clangVersion": "21.0.0",
+    "baseLLVMRevision": "2d287f51eff2a5fbf84458a33f7fb2493cf67965",
+    "llvmAndroidSourceRevisions": [
+      "9e20ac0b949feedcfe3da791189310f6ebcbc7a8"
+    ],
+    "listedPatchReferences": 59,
+    "manifestProjects": [
+      {
+        "path": "toolchain/llvm-project",
+        "name": "toolchain/llvm-project",
+        "revision": "9f872551d3c681d06fd303b36f16ed5c274735eb",
+        "upstream": "mirror-goog-llvm-r574158-release",
+        "remote": "aosp"
+      },
+      {
+        "path": "toolchain/llvm_android",
+        "name": "toolchain/llvm_android",
+        "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+        "upstream": "mirror-goog-llvm-r574158-release",
+        "remote": "aosp"
+      }
+    ],
+    "runtimeABITrees": {
+      "aarch64": {
+        "id": "6bf215a44c9d9b6b86679c7ebbb9b9fb8d5bc0cc",
+        "entries": [
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "4b7ebb41a78777c33ba696e1ae63855ee753fea2",
+            "name": "include"
+          },
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "b48be558cc03b2512f386f40256d96be42a311f7",
+            "name": "lib"
+          }
+        ]
+      },
+      "arm": {
+        "id": "5fc953edba345e9bc1d3b51d4cdf3fd29cd9b899",
+        "entries": [
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "4b7ebb41a78777c33ba696e1ae63855ee753fea2",
+            "name": "include"
+          },
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "69c5637025340e06209889a331132c3c076cd308",
+            "name": "lib"
+          }
+        ]
+      },
+      "i386": {
+        "id": "13d3221d8eebc28ce83057e9973251438349c975",
+        "entries": [
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "4b7ebb41a78777c33ba696e1ae63855ee753fea2",
+            "name": "include"
+          },
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "29e063c8005298c925f6e3160bdac298fb8fb193",
+            "name": "lib"
+          }
+        ]
+      },
+      "x86_64": {
+        "id": "c3b5d28f63f2bbfd8969bc960d245b544857dd31",
+        "entries": [
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "4b7ebb41a78777c33ba696e1ae63855ee753fea2",
+            "name": "include"
+          },
+          {
+            "mode": 16384,
+            "type": "tree",
+            "id": "dcb2191b97cbc4dfe198f563642a3e46647f4da1",
+            "name": "lib"
+          }
+        ]
+      }
+    }
+  }
+]

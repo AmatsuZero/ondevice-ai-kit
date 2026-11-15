@@ -1,0 +1,82 @@
+[
+  {
+    "tag": "ndk-r27d",
+    "commit": "99de7583356a3ae1af2686e0659b646bdacb88c7",
+    "path": "",
+    "url": "https://android.googlesource.com/platform/ndk/+/99de7583356a3ae1af2686e0659b646bdacb88c7/?format=JSON",
+    "status": 200,
+    "bytes": 5196,
+    "sha256": "4b65a68a78a800024fe1b766f7f076b159e58277c2a8708ed932f1f80c26dd70",
+    "elapsedSeconds": 0.258
+  },
+  {
+    "tag": "ndk-r27d",
+    "commit": "99de7583356a3ae1af2686e0659b646bdacb88c7",
+    "path": "build/cmake/android.toolchain.cmake",
+    "url": "https://android.googlesource.com/platform/ndk/+/99de7583356a3ae1af2686e0659b646bdacb88c7/build/cmake/android.toolchain.cmake?format=TEXT",
+    "status": 200,
+    "bytes": 10343,
+    "sha256": "22c1f80acd4a272be56b108b97320197046f407412757d3651c098327ea59a60",
+    "elapsedSeconds": 0.525
+  },
+  {
+    "tag": "ndk-r27d",
+    "commit": "99de7583356a3ae1af2686e0659b646bdacb88c7",
+    "path": "build/cmake/android-legacy.toolchain.cmake",
+    "url": "https://android.googlesource.com/platform/ndk/+/99de7583356a3ae1af2686e0659b646bdacb88c7/build/cmake/android-legacy.toolchain.cmake?format=TEXT",
+    "status": 200,
+    "bytes": 29775,
+    "sha256": "517fefa5c8f0d12075d771df4c84d42e3a9ee62141859443d932214cfe9b6403",
+    "elapsedSeconds": 0.775
+  },
+  {
+    "tag": "ndk-r27d",
+    "commit": "99de7583356a3ae1af2686e0659b646bdacb88c7",
+    "path": "checkbuild.py",
+    "url": "https://android.googlesource.com/platform/ndk/+/99de7583356a3ae1af2686e0659b646bdacb88c7/checkbuild.py?format=TEXT",
+    "status": 200,
+    "bytes": 841,
+    "sha256": "e3fee98294b8969a6e1a0d1cab15d85462476c55f161f5ea26b6856cb314f34c",
+    "elapsedSeconds": 0.359
+  },
+  {
+    "tag": "ndk-r30",
+    "commit": "c0a0a3e6712eeb645090766058cda091da0fdf70",
+    "path": "",
+    "url": "https://android.googlesource.com/platform/ndk/+/c0a0a3e6712eeb645090766058cda091da0fdf70/?format=JSON",
+    "status": 200,
+    "bytes": 5603,
+    "sha256": "cd1e5cb2793015bc30055c309fb1e500e6a12f6ad65123be3b2fac446da04e35",
+    "elapsedSeconds": 1.505
+  },
+  {
+    "tag": "ndk-r30",
+    "commit": "c0a0a3e6712eeb645090766058cda091da0fdf70",
+    "path": "build/cmake/android.toolchain.cmake",
+    "url": "https://android.googlesource.com/platform/ndk/+/c0a0a3e6712eeb645090766058cda091da0fdf70/build/cmake/android.toolchain.cmake?format=TEXT",
+    "status": 200,
+    "bytes": 10358,
+    "sha256": "98f1804e1a06e1d20a50933d2ea437fe43017fc6d1e4f6bc2d2838f6bbd44b4c",
+    "elapsedSeconds": 0.506
+  },
+  {
+    "tag": "ndk-r30",
+    "commit": "c0a0a3e6712eeb645090766058cda091da0fdf70",
+    "path": "build/cmake/android-legacy.toolchain.cmake",
+    "url": "https://android.googlesource.com/platform/ndk/+/c0a0a3e6712eeb645090766058cda091da0fdf70/build/cmake/android-legacy.toolchain.cmake?format=TEXT",
+    "status": 200,
+    "bytes": 30389,
+    "sha256": "be4ed442df676e42f3477b922fe9e13652f54c3aabefa584181cdc065d607b87",
+    "elapsedSeconds": 0.474
+  },
+  {
+    "tag": "ndk-r30",
+    "commit": "c0a0a3e6712eeb645090766058cda091da0fdf70",
+    "path": "checkbuild.py",
+    "url": "https://android.googlesource.com/platform/ndk/+/c0a0a3e6712eeb645090766058cda091da0fdf70/checkbuild.py?format=TEXT",
+    "status": 200,
+    "bytes": 770,
+    "sha256": "90a6d0da02ea6c14b095a252ebc197db25f31c618c83a559f2e5ee36cf1f651c",
+    "elapsedSeconds": 0.5
+  }
+]

@@ -1,0 +1,1 @@
+/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-readelf: warning: '.omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-jni.so': could not find section '.comment'

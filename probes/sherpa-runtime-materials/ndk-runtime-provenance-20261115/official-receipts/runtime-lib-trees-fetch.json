@@ -1,0 +1,298 @@
+[
+  {
+    "tag": "ndk-r27d",
+    "revision": "2b678cf8a4be7421f7fe6206cc7f29219cf817c6",
+    "path": "clang-r522817d/android_libc++/ndk/aarch64/lib/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/2b678cf8a4be7421f7fe6206cc7f29219cf817c6/clang-r522817d/android_libc++/ndk/aarch64/lib/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64/lib-tree.json",
+    "status": 200,
+    "bytes": 657,
+    "sha256": "966538f143b96c91993a9c772eebe0313fb4bdb886413e4683eec7761be71529",
+    "treeID": "3e149c6b1d5b71bab1b344d990c3d40c59a472fd",
+    "entries": [
+      {
+        "mode": 33261,
+        "type": "blob",
+        "id": "962bb451c0f24f497f49ec02d343dcd7fa408077",
+        "name": "libc++_shared.so"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "2f1623547f6e3cbef2a29e70682825d52bb96ab7",
+        "name": "libc++_static.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "42e0e3e1b2296c3516852c80e55b2405d964ddc7",
+        "name": "libc++abi.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "8983928d1b647c9ff8052aec191b402877990588",
+        "name": "libc++experimental.a"
+      }
+    ]
+  },
+  {
+    "tag": "ndk-r27d",
+    "revision": "2b678cf8a4be7421f7fe6206cc7f29219cf817c6",
+    "path": "clang-r522817d/android_libc++/ndk/arm/lib/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/2b678cf8a4be7421f7fe6206cc7f29219cf817c6/clang-r522817d/android_libc++/ndk/arm/lib/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm/lib-tree.json",
+    "status": 200,
+    "bytes": 657,
+    "sha256": "cc08f3081e0579ec50cd9b8c09bcd9c5f370feaff72dc30c5e9f979f7810a137",
+    "treeID": "9db03e51ee6ec628faf045fac1a0bf2f6acf0a2b",
+    "entries": [
+      {
+        "mode": 33261,
+        "type": "blob",
+        "id": "da328bdef688b5803a7730c34d71b5f331e14d0a",
+        "name": "libc++_shared.so"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "4239a0b756d12f013d4a9bd9df571c9f7a8dcc5e",
+        "name": "libc++_static.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "eec8e21d529fb48f52eea3e1e090658e651b55bd",
+        "name": "libc++abi.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "b01354ad8c8e1036413fed1076b4a4309c1784e1",
+        "name": "libc++experimental.a"
+      }
+    ]
+  },
+  {
+    "tag": "ndk-r27d",
+    "revision": "2b678cf8a4be7421f7fe6206cc7f29219cf817c6",
+    "path": "clang-r522817d/android_libc++/ndk/i386/lib/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/2b678cf8a4be7421f7fe6206cc7f29219cf817c6/clang-r522817d/android_libc++/ndk/i386/lib/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386/lib-tree.json",
+    "status": 200,
+    "bytes": 657,
+    "sha256": "b7ea70045fe0bc622ae5ee929debd02ee54b00ed96c42b87cc5b0a3f796b947b",
+    "treeID": "236e73597f79588dc1c50f4705c24061deddff29",
+    "entries": [
+      {
+        "mode": 33261,
+        "type": "blob",
+        "id": "60117f506212742ef545b67a14f0ce1b9b1ca0de",
+        "name": "libc++_shared.so"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "e4cf441a3f64114b70bd5aab8e079724d3e0e205",
+        "name": "libc++_static.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "944bbdb95260238d14482c8ec30cb3217c5f2b5f",
+        "name": "libc++abi.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "d13084eaf468a5319dfb22a334b1dc2f5067440f",
+        "name": "libc++experimental.a"
+      }
+    ]
+  },
+  {
+    "tag": "ndk-r27d",
+    "revision": "2b678cf8a4be7421f7fe6206cc7f29219cf817c6",
+    "path": "clang-r522817d/android_libc++/ndk/x86_64/lib/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/2b678cf8a4be7421f7fe6206cc7f29219cf817c6/clang-r522817d/android_libc++/ndk/x86_64/lib/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64/lib-tree.json",
+    "status": 200,
+    "bytes": 657,
+    "sha256": "f97b9c2bc9fc88771b9b56479e6659f8ed9e1004f4fd1ee4fca818fbcffb742b",
+    "treeID": "2ebb771a01a8fe7794feb8567b196728150ec9c6",
+    "entries": [
+      {
+        "mode": 33261,
+        "type": "blob",
+        "id": "f950e8134a626987884942b6292d134885a71904",
+        "name": "libc++_shared.so"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "cb95cc306a7bcfdc09663eea08c1bb7f8a242e0f",
+        "name": "libc++_static.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "505574f1fe04250ebff68bbdec238dee5f800a4e",
+        "name": "libc++abi.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "d0e9d50bb4f199b5fe6b31e20c5276b520ec0fc9",
+        "name": "libc++experimental.a"
+      }
+    ]
+  },
+  {
+    "tag": "ndk-r30",
+    "revision": "b726ba7eb54b490467464bd4a02427b7b956f9ff",
+    "path": "clang-r574158c/android_libc++/ndk/aarch64/lib/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/b726ba7eb54b490467464bd4a02427b7b956f9ff/clang-r574158c/android_libc++/ndk/aarch64/lib/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64/lib-tree.json",
+    "status": 200,
+    "bytes": 657,
+    "sha256": "f2ec9115ab83d6f97b1b71411b53520b5302344232c1adc5ce1e8a3373fe7643",
+    "treeID": "b48be558cc03b2512f386f40256d96be42a311f7",
+    "entries": [
+      {
+        "mode": 33261,
+        "type": "blob",
+        "id": "43105b21bbe1b431c12b50d769c41a05d0f59e06",
+        "name": "libc++_shared.so"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "e5d2f6c92939244eb199e911564bd9266d7ddba5",
+        "name": "libc++_static.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "bca2bf86a21421fb98897f27564f9f0be445637d",
+        "name": "libc++abi.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "fe77345606aeeae79d1da50263c6b8f23d0098b4",
+        "name": "libc++experimental.a"
+      }
+    ]
+  },
+  {
+    "tag": "ndk-r30",
+    "revision": "b726ba7eb54b490467464bd4a02427b7b956f9ff",
+    "path": "clang-r574158c/android_libc++/ndk/arm/lib/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/b726ba7eb54b490467464bd4a02427b7b956f9ff/clang-r574158c/android_libc++/ndk/arm/lib/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm/lib-tree.json",
+    "status": 200,
+    "bytes": 657,
+    "sha256": "d5219cc719dad229106f0aa6be55bcfd2d6ed9cfb0e0555ae6f87814ec2a8ac4",
+    "treeID": "69c5637025340e06209889a331132c3c076cd308",
+    "entries": [
+      {
+        "mode": 33261,
+        "type": "blob",
+        "id": "11a9d647234c5bf56db7bb09cd58e410d36a084e",
+        "name": "libc++_shared.so"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "412f1bddd27cbbb49fbff50e3f56c17b7ee8894e",
+        "name": "libc++_static.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "c86da3cb156db204025d9c79f1091a3d1741f3d8",
+        "name": "libc++abi.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "28122ff308047500cb35db18263cea1d4e44ae8c",
+        "name": "libc++experimental.a"
+      }
+    ]
+  },
+  {
+    "tag": "ndk-r30",
+    "revision": "b726ba7eb54b490467464bd4a02427b7b956f9ff",
+    "path": "clang-r574158c/android_libc++/ndk/i386/lib/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/b726ba7eb54b490467464bd4a02427b7b956f9ff/clang-r574158c/android_libc++/ndk/i386/lib/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386/lib-tree.json",
+    "status": 200,
+    "bytes": 657,
+    "sha256": "52688eb6089c157d83b15a050d4cf487778a5ce5140208a843607c436843f74e",
+    "treeID": "29e063c8005298c925f6e3160bdac298fb8fb193",
+    "entries": [
+      {
+        "mode": 33261,
+        "type": "blob",
+        "id": "6baeeb7d13ba3b7728778145fb8c40f949630d55",
+        "name": "libc++_shared.so"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "69397676c1754cbdf944582aad774e381431c313",
+        "name": "libc++_static.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "404cb8fd4c785811f58f939f1c16159b0150c9a8",
+        "name": "libc++abi.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "d90b828d70b9e8a224e9c30a5a80cebd62739d5a",
+        "name": "libc++experimental.a"
+      }
+    ]
+  },
+  {
+    "tag": "ndk-r30",
+    "revision": "b726ba7eb54b490467464bd4a02427b7b956f9ff",
+    "path": "clang-r574158c/android_libc++/ndk/x86_64/lib/",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/b726ba7eb54b490467464bd4a02427b7b956f9ff/clang-r574158c/android_libc++/ndk/x86_64/lib/?format=JSON",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64/lib-tree.json",
+    "status": 200,
+    "bytes": 657,
+    "sha256": "093c2dc27f2f96cf34dde657db49ba7f4c9ecdc75abe33b715683a5e07c584c9",
+    "treeID": "dcb2191b97cbc4dfe198f563642a3e46647f4da1",
+    "entries": [
+      {
+        "mode": 33261,
+        "type": "blob",
+        "id": "5a01ef4ba30df5a0da1f909a7cc1ef047c28951f",
+        "name": "libc++_shared.so"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "cf9ab929fa187863da1266bbdc91a16622ff5f6f",
+        "name": "libc++_static.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "f036b104155c8b8b990ee3b59f70a34c283fc0ab",
+        "name": "libc++abi.a"
+      },
+      {
+        "mode": 33188,
+        "type": "blob",
+        "id": "d8022ea767ccc562b2c5c3a7b0a7b84c32fd2bd7",
+        "name": "libc++experimental.a"
+      }
+    ]
+  }
+]
