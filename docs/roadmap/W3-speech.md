@@ -1,3 +1,7 @@
+## 2026-11-15：hy3默认链接规则已双端记录
+
+本地242b829精确39文件；GH#15comment6895513815/GL#15note44865/GH Wiki9453202逐字回读，双Wiki SHA9aa9e55a…一致，[同步收据](../validation/w3-cxx-linkage-rules-sync-20261115.json)。三个免费hy3请求均完整终态，首稿拒收/修正版集成/限定复核接受保留；34材料文件、171原保护余字节、三F08并发文件排除及161freeze已核，63生产通知未改。源码未push、零新构建/设备；P1–P4/R4/R5/W3仍open、完整目标保持。下一runtime补丁/适用通知及输入覆盖可信度；无连接变化不重试USB/旧FILE。
+
 ## 2026-11-15：C++默认链接分支补证，hy3修正版已集成
 
 [验证](../validation/w3-cxx-linkage-rules-20261115.md)绑定CMake3.31.6官方源码与五原日志，30源/元数据路径去重22文件、6NDK tree/18子对象边已核；两CI ZIP无历史cache/link/response。Sherpa默认legacy和ORT显式非legacy分别给出条件化静态libc++规则，不能由GNU OFF、编译flags或链接进度判最终archive保留。免费hy3首稿分支/null措辞拒收，修正版原字节集成；未做新构建/ELF重扫/设备或63通知变更，P1–P4/R4/R5/W3完整范围均保持open。下一runtime补丁/通知适用性、覆盖与可信度接受；实体连接有变化后再fresh固定未消费run，不循环USB或旧FILE。

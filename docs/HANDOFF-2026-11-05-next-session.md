@@ -1,3 +1,7 @@
+## 2026-11-15 W3 hy3默认链接规则已提交同步
+
+本地242b829精确39文件；GH#15comment6895513815/GL#15note44865/GHWiki945320251bbac4f6f3d74894ad32b9d3b7876926均逐字回读，双Wiki SHA9aa9e55a1659d69376b53a93f1302efeb26874f7f37bec990dacf37411c6b90f一致，[收据](validation/w3-cxx-linkage-rules-sync-20261115.json)。新marker已用勿重发，源码分支未push；三hy3/三发布进程均终态，无待poll。34材料文件/151441B payload逐项hash、171原保护/共享余字节、161freeze/diff-check通过，三F08范围外并发更新保留排除；63生产通知无diff。零新构建/设备/ELF重扫/模型或runtime二进制下载；P1–P4/R4/R5/W3全open、goal active。下一runtime相关patch/notice适用性、输入覆盖与可信度接受及最终生产采用/发布复审；实体连接变化后再fresh固定未消费合同。不要重试原quota、重取已验材料、旧FILE/heap或USB恢复循环；CMake默认规则不能替代历史archive抽取/最终保留。
+
 ## 2026-11-15 W3 CMake/NDK默认链接规则已补证
 
 [验证](validation/w3-cxx-linkage-rules-20261115.md)及`probes/sherpa-runtime-materials/cxx-linkage-rules-20261115/`保留CMake3.31.6固定commit、两NDK hooks/flags/exports、30源/元数据路径去重22文件及6tree/18edge；五原日志/两既有ZIP已核，无新历史cache/link/response。Sherpa默认legacy与ORT显式legacy=false分别推导静态libc++默认规则，历史cache/覆盖和link-time archive保留未证。hy3首稿分支混写/null误读已拒收，修正版40.075s完整success并原字节集成；不计P4。零新构建/ELF重扫/设备/模型或runtime二进制下载/63生产通知改变；P1–P4/R4/R5/W3均open、goal active，完整目标不缩减。父投影聚合row缺logPath的KeyError已保留并按实际log行恢复，非编译失败。原174保护中三F08范围外文件有并发更新，保留且排除本次提交。下一runtime相关补丁与通知适用性、完整输入覆盖及最终App采用/发布接受；无实体连接变化不重探、不重试quota/旧FILE。当前待最终核验、精确提交及新marker双端同步，源码不push。
