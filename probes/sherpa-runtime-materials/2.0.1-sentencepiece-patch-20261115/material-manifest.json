@@ -1,0 +1,66 @@
+{
+  "files": {
+    "LICENSE": {
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    "README.md": {
+      "bytes": 1886,
+      "sha256": "cb4ed766b84a4780a2899f460b6b40aa483940aaf0b86c6369e1b97ee9561e92"
+    },
+    "android-threading-removal.diff": {
+      "bytes": 6373,
+      "sha256": "3cbcc4df51bd9fedf17023ce1b8bb74d7bb0331a10659d2a2eb7819dff7a1b7b"
+    },
+    "bundled-notices.json": {
+      "bytes": 2340,
+      "sha256": "df82f0672749dc193eea2285e314be8e17da8d697449954e7e2962d1564e042d"
+    },
+    "notices/ThreadPool/NOTICE.txt": {
+      "bytes": 888,
+      "sha256": "9482aedd90951aacfb826f2eb41d47afcd502628576c4906755f2efa4be97daa"
+    },
+    "notices/darts-clone/NOTICE.txt": {
+      "bytes": 1320,
+      "sha256": "da10583073e582390115d4d4abdc12ca395776ab2a9e11b10d440b115ad9c6b9"
+    },
+    "original/ssentencepiece/csrc/darts.h": {
+      "bytes": 53998,
+      "sha256": "a0ff15abf69e2651dedef5acacf474b7b8d20ace8cd5dd79dd201e99ccfee91d"
+    },
+    "original/ssentencepiece/csrc/ssentencepiece.cc": {
+      "bytes": 8088,
+      "sha256": "57a65cc7620f7fc8973e5c57d59459a1a6c1ad3b4c8321d931e9afaf3421e9b7"
+    },
+    "original/ssentencepiece/csrc/ssentencepiece.h": {
+      "bytes": 3238,
+      "sha256": "16478b55035aee9d345636596997e9fa8c7c01a916d732b1d70a4b13cc32f8e3"
+    },
+    "original/ssentencepiece/csrc/threadpool.h": {
+      "bytes": 3255,
+      "sha256": "a0737647480c4fbab218b3540b4be0cb35edf9b4e869e275f56f79f0d25d2830"
+    },
+    "patch-record.json": {
+      "bytes": 20300,
+      "sha256": "466b28634abe7d09f42a53a6c84ea3745e0e2f141d605751be9f879111d97afd"
+    },
+    "patched/ssentencepiece/csrc/ssentencepiece.cc": {
+      "bytes": 7547,
+      "sha256": "ec8f6afbadd6b046a551dbb0f347a02eb2f598bdbf8051ed2e4a3154c3193d83"
+    },
+    "patched/ssentencepiece/csrc/ssentencepiece.h": {
+      "bytes": 2898,
+      "sha256": "667ba718d0c1dfa94d217ad9569d1ca9a25d0265dd8859e07d5cdfad849b7c92"
+    },
+    "patched/ssentencepiece/csrc/threadpool.h": {
+      "bytes": 125,
+      "sha256": "b18b622ed3b8642aaa8ca38f99a85e8aefb3e1efad01d11b0f04b02b02232f46"
+    },
+    "verification-source.py.txt": {
+      "bytes": 13929,
+      "sha256": "ecb0d414cdf162c5bced102ebb7517f9594e4361138300bdb955058a6a66ea6d"
+    }
+  },
+  "fileCountExcludingThisManifest": 15,
+  "originalAndReconstructedUpstreamWhitespacePreserved": true
+}

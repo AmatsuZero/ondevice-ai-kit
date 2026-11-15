@@ -1,3 +1,7 @@
+## W3第三方构建目录补丁与bundled header声明也属于输入（2026-11-15）
+
+Sherpa主仓库git diff只有version.cc，不证明下载的第三方源未改。固定simple-sentencepiece.cmake在Android分支会改threadpool.h/ssentencepiece.h/ssentencepiece.cc；四ABI日志均报告patch并编译静态目标。有效核验为归档URL_HASH+全部35普通文件同固定tree、仅执行原helper/body并保留三文件前后/diff，再关联实际日志与声明链接边；本地重建仍不等于直接取得历史CI补丁后源码/最终机器码。该固定归档darts.h另带BSD2/Susumu Yata声明，不能被根Apache文本代替；原ThreadPool为zlib-style文本，Android补丁换空stub，不能误记MIT或由原源码存在断言最终必然嵌入。补丁产生的两处空白行保留原字节，不为diff检查格式化证据。证据`.omx/artifacts/w3-sentencepiece-patch-20261115/`及[验证](validation/w3-sentencepiece-patch-20261115.md)。
+
 ## W3 Git mode120000的Kotlin blob是链接文本（2026-11-15）
 
 旧class-source映射按SourceFile匹配固定tree路径，却未区分mode；AAR模块22个.kt均为120000，总1568B，gitBlobSHA1固定的是相对链接文本，不能当真实Kotlin源码hash。有效恢复是取实际link blob、规范化相对目标、要求同固定tree内100644普通blob，再核真实源码GitBlob/大小/SHA；不得按同名猜目标或创建真实本地symlink。22真实源141269B/124实际SourceFile与声明集合通过；共享kotlin-api中第23个OfflineDiacritization.kt无模块链接，明确排除，不盲加输入。旧已接受快照保留并新增resolved字段，class元数据对应仍不等于重建字节码/完整构建输入。原系统javap shim无JRE错误保留，复用既有JDK21绝对路径即可，不安装或改全局。证据`.omx/artifacts/w3-jvm-source-links-20261115/`及[验证](validation/w3-jvm-source-resolution-20261115.md)。

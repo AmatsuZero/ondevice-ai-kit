@@ -1,3 +1,7 @@
+## 2026-11-15 W3第三方补丁与Darts嵌套声明已核
+
+P2补核发现四ABI实际simple-sentencepiece Android线程移除补丁；355335B归档SHA匹配固定CMake URL_HASH，35普通文件GitBlob均同原tree。现有CMake3.22.1仅执行原helper/Android body，三个文件前后字节/diff已保存，四ABI编译/静态库目标及声明链接路径关联。另补此前材料无的darts-clone BSD2与原ThreadPool zlib-style原声明；Android原ThreadPool实现已换stub，勿误称MIT或最终必然嵌入。[验证](validation/w3-sentencepiece-patch-20261115.md)。历史CI补丁后源码未直接归档，完整机器码/递归组成与实际通知集成仍缺，P1–P4/R4/R5/W3保持open。无helper/设备/生产源码改动，原native/CBC429停线，goal active；不要重取此归档、重跑源码闭包或USB恢复。
+
 ## 2026-11-15 W3 JVM真实源码修正已提交并同步
 
 本地8a6ca11精确60文件；22实际link/22普通源/124class映射及声明集合父验通过，旧快照不改写。GH#15comment6890836126/GL#15note44854/GHWiki1334278e逐字回读，双Wiki SHA25f1930158409112545aaf6027a3107c797c069bca1af252b913cfe8f7e854a3一致，[同步收据](validation/w3-jvm-source-resolution-sync-20261115.json)。marker已用勿重发，源码未push；所有本轮API/发布/验收均终态，无新helper调用。170保护原余字节/161freeze通过、ADB空、新run未prepare/消费；P1完整输入/最终App、P2–P4及R4/R5/W3继续open、goal active。原native429不重试，hy4free仍按2026-11-16 10:15:32+08服务端观察停线，旧用户选择已消费，待新线路选择，勿重发旧review。下一补实际生产候选/递归输入边界，真机出现后fresh前置按现161合同继续；不重复已验源码闭包/本地构建/USB恢复。

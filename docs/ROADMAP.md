@@ -1,3 +1,7 @@
+## 2026-11-15 W3第三方源码补丁与嵌套声明
+
+simple-sentencepiece固定归档35源核对，Android三文件上游补丁已重建并对应四ABI实际编译；补收darts-clone BSD2及原ThreadPool声明，[验证](validation/w3-sentencepiece-patch-20261115.md)。本项补强P2特定组件来源/修改，不代表完整最终机器码组成或生产通知集成；P1–P4/R4/R5/W3仍open，原429线路停线，无新设备/模型或生产实现变更。
+
 ## 2026-11-15 W3 JVM真实源码归属修正
 
 22个120000链接1568B已解析到22普通Kotlin源141269B，实际124class SourceFile与固定声明集合通过；旧链接blob保留，新记录增resolved源码摘要，[验证](validation/w3-jvm-source-resolution-20261115.md)。不证明重建class/DEX等价或完整构建输入；独立复核受原429停线，P1–P4/R4/R5/W3仍open。161freeze通过、fresh ADB空、新run未prepare/消费，无模型/生产实现变更，源码未push。

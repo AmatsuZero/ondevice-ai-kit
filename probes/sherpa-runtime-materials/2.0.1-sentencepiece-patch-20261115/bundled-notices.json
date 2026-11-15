@@ -1,0 +1,56 @@
+{
+  "componentSource": "simple-sentencepiece v0.7 fixed archive",
+  "archiveSHA256": "1748a822060a35baa9f6609f84efc8eb54dc0e74b9ece3d82367b7119fdc75af",
+  "notices": [
+    {
+      "component": "darts-clone",
+      "licenseTextLabel": "BSD-2-Clause",
+      "role": "unchanged header included by patched ssentencepiece.h",
+      "source": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/original/ssentencepiece/csrc/darts.h",
+        "bytes": 53998,
+        "sha256": "a0ff15abf69e2651dedef5acacf474b7b8d20ace8cd5dd79dd201e99ccfee91d",
+        "gitBlobSHA1": "8c3194eec42a6e4964eb1fd633c926a85272fc7b"
+      },
+      "notice": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/notices/darts-clone/NOTICE.txt",
+        "bytes": 1320,
+        "sha256": "da10583073e582390115d4d4abdc12ca395776ab2a9e11b10d440b115ad9c6b9"
+      },
+      "sourceByteRange": [
+        96,
+        1416
+      ],
+      "noticeIsExactOriginalCommentBytes": true,
+      "independentComponentRevisionOutsideFixedArchiveVerified": false,
+      "exactFinalRetainedMachineCodeVerified": false,
+      "productionNoticeRetentionVerified": false
+    },
+    {
+      "component": "ThreadPool",
+      "licenseTextLabel": "original zlib-style notice",
+      "role": "original implementation replaced with empty Android stub; historical source notice retained",
+      "source": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/original/ssentencepiece/csrc/threadpool.h",
+        "bytes": 3255,
+        "sha256": "a0737647480c4fbab218b3540b4be0cb35edf9b4e869e275f56f79f0d25d2830",
+        "gitBlobSHA1": "264ff492ab778096fe89cfec4cdeaafea1b60a5b"
+      },
+      "notice": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/notices/ThreadPool/NOTICE.txt",
+        "bytes": 888,
+        "sha256": "9482aedd90951aacfb826f2eb41d47afcd502628576c4906755f2efa4be97daa"
+      },
+      "sourceByteRange": [
+        94,
+        982
+      ],
+      "noticeIsExactOriginalCommentBytes": true,
+      "independentComponentRevisionOutsideFixedArchiveVerified": false,
+      "exactFinalRetainedMachineCodeVerified": false,
+      "productionNoticeRetentionVerified": false
+    }
+  ],
+  "productionNoticeRetentionVerified": false,
+  "P2Complete": false
+}

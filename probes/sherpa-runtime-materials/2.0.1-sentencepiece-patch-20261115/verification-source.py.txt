@@ -1,0 +1,212 @@
+from pathlib import Path, PurePosixPath
+import difflib, hashlib, json, shutil, subprocess, tarfile
+
+ROOT = Path('/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation')
+OPS = ROOT / '.omx/artifacts/w3-sentencepiece-patch-20261115'
+OUT = ROOT / 'probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115'
+PLAN = json.loads((OPS / 'plan.json').read_text())
+def sha(data): return hashlib.sha256(data).hexdigest()
+def blob(data): return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+def save(path, value): path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n')
+def identity(path):
+    raw = path.read_bytes()
+    return {'path': str(path.relative_to(ROOT)), 'bytes': len(raw), 'sha256': sha(raw)}
+def run(name, args):
+    p = subprocess.run(['rtk', 'proxy', *args], cwd=OPS, capture_output=True, timeout=30)
+    (OPS / (name + '.stdout')).write_bytes(p.stdout)
+    (OPS / (name + '.stderr')).write_bytes(p.stderr)
+    save(OPS / (name + '-process.json'), {'exitCode': p.returncode, 'args': args})
+    assert p.returncode == 0, (name, p.returncode)
+    return p.stdout
+
+module = ROOT / PLAN['sourceModulePath']
+module_data = module.read_bytes()
+assert sha(module_data) == PLAN['sourceModuleSHA256']
+fixed_tree = json.loads((ROOT / '.omx/artifacts/w3-model-reselection-20261110/sherpa-v201-tree.raw').read_bytes())
+assert fixed_tree['sha'] == PLAN['sourceCommit'] and fixed_tree['truncated'] is False
+module_entry = next(r for r in fixed_tree['tree'] if r['path'] == 'cmake/simple-sentencepiece.cmake')
+assert module_entry['mode'] == '100644' and module_entry['sha'] == blob(module_data)
+component_tree = json.loads((ROOT / PLAN['originalTreePath']).read_bytes())
+assert component_tree['sha'] == '62dd423df1d51da5ea06f1c3a046fc04f01b4f39'
+assert component_tree['truncated'] is False
+entries = {r['path']: r for r in component_tree['tree']}
+archive = OPS / 'simple-sentencepiece-v0.7.tar.gz'
+assert sha(archive.read_bytes()) == PLAN['expectedArchiveSHA256']
+original = {}
+archive_files = []
+with tarfile.open(archive, 'r:gz') as tf:
+    members = tf.getmembers()
+    names = [m.name for m in members]
+    assert len(names) == len(set(names))
+    for member in members:
+        path = PurePosixPath(member.name)
+        assert not path.is_absolute() and '..' not in path.parts
+        relative = '/'.join(path.parts[1:])
+        if member.isfile():
+            data = tf.extractfile(member).read()
+            assert relative in entries and entries[relative]['type'] == 'blob'
+            assert entries[relative]['mode'] in ('100644', '100755')
+            assert blob(data) == entries[relative]['sha'] and len(data) == entries[relative]['size']
+            archive_files.append(relative)
+            if relative in PLAN['files'] or relative == 'LICENSE':
+                original[relative] = data
+    expected_regular = {r['path'] for r in component_tree['tree']
+                        if r['type'] == 'blob' and r['mode'] in ('100644', '100755')}
+    assert set(archive_files) == expected_regular
+assert set(original) == set(PLAN['files']) | {'LICENSE'}
+for name in PLAN['files']:
+    before = OUT / 'original' / name
+    patched = OUT / 'patched' / name
+    before.parent.mkdir(parents=True, exist_ok=True)
+    patched.parent.mkdir(parents=True, exist_ok=True)
+    before.write_bytes(original[name])
+    patched.write_bytes(original[name])
+
+text = module_data.decode()
+helper_start = text.index('function(write_file_if_different path content)')
+helper_end = text.index('endfunction()', helper_start) + len('endfunction()')
+body_start = text.index('    # On Termux,', text.index('  elseif(CMAKE_SYSTEM_NAME STREQUAL Android)'))
+message = '    message(STATUS "Patched ssentencepiece for Android: all threading removed")'
+body_end = text.index(message, body_start) + len(message)
+helper = text[helper_start:helper_end]
+body = text[body_start:body_end]
+script = ('# Exact selected helper and Android patch body; no FetchContent/configure/build.\n'
+          'set(simple-sentencepiece_SOURCE_DIR "' + str(OUT / 'patched') + '")\n' + helper + '\n' + body + '\n')
+script_path = OPS / 'apply-android-patch.cmake'
+script_path.write_text(script)
+cmake = Path('/Users/daubert/Library/Android/sdk/cmake/3.22.1/bin/cmake')
+assert cmake.is_file()
+version = run('cmake-version', [str(cmake), '--version']).decode().splitlines()[0]
+assert '3.22.1' in version
+stdout = run('apply-android-patch', [str(cmake), '-P', str(script_path)])
+assert stdout.count(b'Patched ssentencepiece for Android: all threading removed') == 1
+
+rows = []
+diff = ''
+for name in PLAN['files']:
+    before = OUT / 'original' / name
+    after = OUT / 'patched' / name
+    assert before.read_bytes() != after.read_bytes(), name
+    diff += ''.join(difflib.unified_diff(before.read_text().splitlines(keepends=True),
+                                        after.read_text().splitlines(keepends=True),
+                                        fromfile='original/' + name, tofile='patched/' + name))
+    rows.append({'path': name, 'sourceTreeGitBlobSHA1': entries[name]['sha'],
+                 'before': {**identity(before), 'gitBlobSHA1': blob(before.read_bytes())},
+                 'reconstructedAfter': {**identity(after), 'gitBlobSHA1': blob(after.read_bytes())}})
+assert len(rows) == 3
+header = (OUT / 'patched/ssentencepiece/csrc/ssentencepiece.h').read_text()
+source = (OUT / 'patched/ssentencepiece/csrc/ssentencepiece.cc').read_text()
+assert 'ThreadPool' not in header and 'pool_' not in header and 'std::thread' not in header
+assert 'pool_->enqueue' not in source and 'std::future<' not in source and 'result.get()' not in source
+(OUT / 'android-threading-removal.diff').write_text(diff)
+(OUT / 'LICENSE').write_bytes(original['LICENSE'])
+old_license = ROOT / 'probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/simple-sentencepiece/LICENSE'
+assert old_license.read_bytes() == original['LICENSE']
+
+groups_path = ROOT / 'probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/build-input-groups.json'
+groups = json.loads(groups_path.read_bytes())
+matrix_path = ROOT / 'probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/member-matrix.json'
+matrix = json.loads(matrix_path.read_bytes())
+log_path = ROOT / groups['sherpaNative'][0]['jobLog']['path']
+assert identity(log_path) == groups['sherpaNative'][0]['jobLog']
+lines = log_path.read_text().splitlines()
+native_groups = sorted(groups['sherpaNative'], key=lambda g: g['actualCmake']['line'])
+abi_rows = []
+for index, group in enumerate(native_groups):
+    start = group['actualCmake']['line'] - 1
+    end = native_groups[index + 1]['actualCmake']['line'] - 1 if index + 1 < len(native_groups) else len(lines)
+    needles = ('Downloading simple-sentencepiece https://github.com/pkufool/simple-sentencepiece/archive/refs/tags/v0.7.tar.gz',
+               'Patched ssentencepiece for Android: all threading removed',
+               'ssentencepiece_core.dir/ssentencepiece.cc.o',
+               'Linking CXX static library ../../../../lib/libssentencepiece_core.a',
+               'Built target ssentencepiece_core')
+    observed = [{'line': i + 1, 'text': lines[i]} for i in range(start, end)
+                if any(needle in lines[i] for needle in needles)]
+    assert all(any(needle in r['text'] for r in observed) for needle in needles), group['id']
+    assert sum('Patched ssentencepiece for Android: all threading removed' in r['text'] for r in observed) == 1
+    abi = group['actualCmake']['abi']
+    members = [r for r in matrix['rows'] if r['path'].startswith('jni/' + abi + '/')
+               and not r['path'].endswith('/libonnxruntime.so')]
+    assert len(members) == 3
+    abi_rows.append({'abi': abi, 'inputGroup': group['id'], 'logEvidence': observed,
+                     'correspondingSherpaMembers': [{k: r[k] for k in ('path', 'bytes', 'sha256')} for r in members],
+                     'declaredLinkChain': ['ssentencepiece_core -> sherpa-onnx-core',
+                         'sherpa-onnx-core -> sherpa-onnx-jni / sherpa-onnx-c-api',
+                         'sherpa-onnx-c-api -> sherpa-onnx-cxx-api'],
+                     'exactRetainedMachineCodeVerified': False})
+cmake_paths = ['sherpa-onnx/csrc/CMakeLists.txt', 'sherpa-onnx/jni/CMakeLists.txt', 'sherpa-onnx/c-api/CMakeLists.txt']
+link_evidence = []
+for path in cmake_paths:
+    p = ROOT / 'probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx' / path
+    entry = next(r for r in fixed_tree['tree'] if r['path'] == path)
+    assert blob(p.read_bytes()) == entry['sha']
+    snippets = [{'line': i + 1, 'text': line} for i, line in enumerate(p.read_text().splitlines())
+                if ('target_link_libraries(sherpa-onnx-core' in line or 'ssentencepiece_core' in line
+                    or 'target_link_libraries(sherpa-onnx-jni sherpa-onnx-core)' in line
+                    or 'target_link_libraries(sherpa-onnx-c-api sherpa-onnx-core)' in line
+                    or 'target_link_libraries(sherpa-onnx-cxx-api sherpa-onnx-c-api)' in line)]
+    link_evidence.append({'source': identity(p), 'gitBlobSHA1': entry['sha'], 'lines': snippets})
+save(OUT / 'patch-record.json', {
+    'sherpaSourceCommit': PLAN['sourceCommit'], 'module': {**identity(module), 'gitBlobSHA1': module_entry['sha']},
+    'component': 'simple-sentencepiece', 'declaredSourceRef': 'v0.7',
+    'componentTreeSHA1': component_tree['sha'],
+    'archive': {**identity(archive), 'url': PLAN['archiveURL'], 'expectedSHA256': PLAN['expectedArchiveSHA256'],
+                'allRegularArchiveMembersMatchFixedTree': True, 'regularFileCount': len(archive_files)},
+    'patchSelection': {'helperLines': [text[:helper_start].count('\n') + 1, text[:helper_end].count('\n') + 1],
+                       'helperSHA256': sha(helper.encode()),
+                       'androidBodyLines': [text[:body_start].count('\n') + 1, text[:body_end].count('\n') + 1],
+                       'androidBodySHA256': sha(body.encode()), 'wrapper': identity(script_path),
+                       'cmakeExecutable': str(cmake), 'cmakeVersion': version,
+                       'onlyExactSelectedPatchLogicExecuted': True,
+                       'fullConfigureBuildOrCIReplay': False},
+    'changedFiles': rows, 'diff': identity(OUT / 'android-threading-removal.diff'),
+    'license': identity(OUT / 'LICENSE'), 'licenseMatchesExistingMaterial': True,
+    'fourAbiObservedPatches': abi_rows, 'officialJobLog': identity(log_path),
+    'declaredLinkEvidence': link_evidence, 'baseBuildInputGroups': identity(groups_path),
+    'baseMemberMatrix': identity(matrix_path),
+    'ciPatchedSourceBytesDirectlyArchived': False, 'exactFinalRetainedMachineCodeVerified': False,
+    'recursiveFinalCompositionComplete': False, 'productionNoticeRetentionVerified': False,
+    'independentReleaseReviewAccepted': False, 'P1Complete': False, 'P2Complete': False,
+    'P3P4Accepted': False, 'R4R5Accepted': False, 'W3Complete': False})
+bundled = []
+with tarfile.open(archive, 'r:gz') as tf:
+    for component, source_name, license_name, role in (
+        ('darts-clone', 'ssentencepiece/csrc/darts.h', 'BSD-2-Clause', 'unchanged header included by patched ssentencepiece.h'),
+        ('ThreadPool', 'ssentencepiece/csrc/threadpool.h', 'original zlib-style notice', 'original implementation replaced with empty Android stub; historical source notice retained')):
+        member = next(m for m in tf.getmembers() if m.isfile() and m.name.endswith('/' + source_name))
+        raw = tf.extractfile(member).read()
+        assert blob(raw) == entries[source_name]['sha']
+        path = OUT / 'original' / source_name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.exists():
+            assert path.read_bytes() == raw
+        else:
+            path.write_bytes(raw)
+        first = raw.index(b'/*')
+        last = raw.index(b'*/', first) + 2
+        notice = raw[first:last]
+        notice_path = OUT / 'notices' / component / 'NOTICE.txt'
+        notice_path.parent.mkdir(parents=True, exist_ok=True)
+        notice_path.write_bytes(notice)
+        bundled.append({'component': component, 'licenseTextLabel': license_name, 'role': role,
+                        'source': {**identity(path), 'gitBlobSHA1': entries[source_name]['sha']},
+                        'notice': identity(notice_path), 'sourceByteRange': [first, last],
+                        'noticeIsExactOriginalCommentBytes': True,
+                        'independentComponentRevisionOutsideFixedArchiveVerified': False,
+                        'exactFinalRetainedMachineCodeVerified': False,
+                        'productionNoticeRetentionVerified': False})
+assert '#include "ssentencepiece/csrc/darts.h"' in header
+assert 'Darts::DoubleArray da_;' in header
+record = json.loads((OUT / 'patch-record.json').read_bytes())
+record['bundledSourceNotices'] = bundled
+record['nestedNoticeDiscovery'] = 'Existing bounded W3 material text search had no darts-clone/Susumu Yata or ThreadPool/Jakob Progsch notices before this task. This is not a claim about every repository, final App or binary text.'
+save(OUT / 'patch-record.json', record)
+save(OUT / 'bundled-notices.json', {'componentSource': 'simple-sentencepiece v0.7 fixed archive',
+                                  'archiveSHA256': PLAN['expectedArchiveSHA256'], 'notices': bundled,
+                                  'productionNoticeRetentionVerified': False, 'P2Complete': False})
+shutil.copyfile(Path(__file__), OUT / 'verification-source.py.txt')
+print(json.dumps({'archiveBytes': archive.stat().st_size, 'allArchiveRegularFilesVerified': len(archive_files),
+                  'actualChangedFiles': len(rows), 'fourAbiPatchObservations': len(abi_rows),
+                  'nestedNoticesRetained': len(bundled),
+                  'patchReconstruction': 'PASS', 'actualHistoricalPatchedBytesArchived': False,
+                  'P2Complete': False, 'W3Complete': False}, indent=2))

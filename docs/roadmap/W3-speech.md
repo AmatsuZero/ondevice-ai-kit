@@ -1,3 +1,7 @@
+## 2026-11-15：第三方线程移除补丁与Darts声明已补核
+
+固定simple-sentencepiece归档355335B/SHA与上游CMake相同，35普通源GitBlob全核；原Android补丁三文件已按原CMake逻辑重建，四ABI日志的编译/静态库目标及声明链接路径对应。此前材料未收录的darts-clone BSD2与原ThreadPool zlib-style声明已原字节保留，[验证](../validation/w3-sentencepiece-patch-20261115.md)。原ThreadPool被Android空stub替换，不能误记MIT或必然最终嵌入；没有历史CI补丁后源码/最终机器码穷尽证明或生产通知集成。P1–P4/R4/R5/W3保持open，原429停线，无helper/设备/生产实现变更。
+
 ## 2026-11-15：JVM链接已解析到真实Kotlin源码
 
 旧映射22个GitBlob实际为120000链接文本1568B；现已逐条解析并保留22份普通源码141269B，GitBlob/大小/SHA通过。固定main/release声明集合、124class fresh SourceFile及双ZIP读取均对应；旧快照不变，[最新验证](../validation/w3-jvm-source-resolution-20261115.md)。这是源码字节与元数据闭包，非重建class/DEX等价、完整生成/原生输入或最终App采用；独立复核仍受原429停线，P1–P4/R4/R5/W3保持open。170保护/161freeze保持、fresh ADB空，新run零prepare/消费，无生产实现或模型改动，源码未push。
