@@ -1,3 +1,7 @@
+## 2026-11-16：JVM重建结果已双端记录
+
+c36e33b（42文件）及[同步收据](../validation/w3-jvm-raw-reconstruction-sync-20261116.json)：GH#15 comment6897387938/GL#15 note44871/GH Wiki faeca96均逐字回读，双Wiki内容SHA df2d98507404f5635641df8f31e5be6e66030f137465bcd2c761f9aeabebaa9a一致。四免费hy3与三发布均终态，源码分支未push。125成员/553965B原载荷重建对应已接受；完整历史输入、DEX/native、最终生产采用、完整组成/通知及发布复审仍缺，P1–P4/R4/R5/W3保持open，完整目标不缩减。继续优先hy3，不自动重试旧quota/源站429或USB/FILE。
+
 ## 2026-11-16：JVM重建不再仅有类名对应
 
 [11月15日实际编译证据](../validation/w3-jvm-raw-reconstruction-20261115.md)：22真实源/141269B，Kotlin1.7.20/JVM1.8唯一运行3.059s；124class及module元数据共125payload/553965B全部同原AAR，父InfoZIP独立原始流对照通过，未归一化或剥元数据。hy3新probe/test原字节集成，8测试/4负例/161freeze通过、四helper终态；原工具传输超时及调用级同站直连恢复均保留，不改生产依赖/68通知或模型，不下载ASR runtime、不开设备/麦克风/AiAi。该JVM子项已补证，完整历史AGP输入/DEX/native和P1–P4/R4/R5/W3仍open；完整目标不变，不重扫旧库或重跑旧FILE/USB。当前待精确提交与双端同步，源码不push。

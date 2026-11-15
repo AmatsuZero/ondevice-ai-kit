@@ -1,3 +1,7 @@
+## 2026-11-16 W3 JVM重建已提交并双端同步
+
+本地证据提交c36e33b（42文件）；GH#15 comment6897387938/GL#15 note44871及GH Wiki faeca96均逐字回读，双Wiki SHA df2d98507404f5635641df8f31e5be6e66030f137465bcd2c761f9aeabebaa9a一致，[同步收据](validation/w3-jvm-raw-reconstruction-sync-20261116.json)。新marker已使用，源码分支未push；四hy3与三发布进程均终态，无待poll。125 JVM载荷原字节重建子项接受不扩为完整历史AGP/DEX/native或生产发布通过。后续候选/限定复核继续优先免费hy3，旧hy4free/native/源站429不自动重试。P1–P4/R4/R5/W3仍open、goal active；实体连接有新变化后才fresh未消费固定文件合同，不重复USB恢复或旧FILE/heap，不开麦克风/AiAi、不下载模型。
+
 ## 2026-11-16 W3 JVM原字节重建验收通过（编译11月15日）
 
 [报告](validation/w3-jvm-raw-reconstruction-20261115.md)：固定22真实Kotlin源141269B，经Kotlin1.7.20/Java21.0.7/JVM1.8直接CLI唯一编译3.059s，124class和一份module共125payload/553965B与原AAR全部原字节相同；父InfoZIP独立提取/全流再次证实，零归一化/注解SMAP剥离/flag扫描。新增probe/test由hy3原字节交付，8测试及4真实payload负例通过；四hy3终态，代码复核无finding，证据文稿17精确修正及父删一歧义短语保留。原编译器传输5505024B读超时留档；同官方Maven调用级直连恢复189.285s，5编译工具下载/3缓存复制共8项60939801B hash通过，不改全局缓存/生产依赖，不冒称零总下载或唯一网络归因。两下载/唯一编译均终态，旧未提交live前缀已替换、没有待poll；原准备快照保留。JVM对应子项已补证，不代表完整历史AGP输入、JAR ZIP、DEX/native、P1/P4/W3通过。304选定源/68通知/161freeze及175原保护保持；精确清56,634B两处无open的Python缓存，完整工具链/编译class/原jar/首失败和候选保留。零设备/AiAi/麦克风/新APK/signing/模型或ASR runtime下载。P1–P4/R4/R5/W3完整目标保持open/goal active；当前待精确本地提交及新marker双端同步，源码不push，不重放旧FILE/USB/已验构建或旧quota/源站请求。
