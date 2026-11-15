@@ -1,3 +1,7 @@
+## 2026-11-15 W3四ABI的ELF声明依赖已核
+
+固定AAR全部16SO原字节、ABI/SONAME核对通过；readelf/readobj集合相同但来自同LLVM，不冒充独立解析器。92条DT_NEEDED边含16同ABI内部边/76参考桩库边，五外部名称在已有NDK四ABI/API21共20桩库均存在，四ABI图同，[验证](validation/w3-native-linkage-20261115.md)。已有NDK beta3仅参考，非历史job工具链/真机符号或最低API通过。16有dynsym无symtab，四arm64初读exit0/no symbols原件保留；动态导出阴性/没有libc++_shared NEEDED不能排除静态C++或dlopen组成。173保护/161freeze保持，零构建/下载/helper/设备/生产实现，原429停线且新线路选择待答；P1–P4/R4/R5/W3仍open、goal active，不重跑旧库或USB循环。
+
 ## 2026-11-15 W3 Demo产物证据已提交并双端同步
 
 本地a1bb1a6精确24文件；GH#15comment6891675681/GL#15note44858/GHWikid063ae2逐字回读，双Wiki SHA26a08769db655f0afd1b6ffe8d74582085e243414ae1ccc2c983db90db6a2d83一致，[同步收据](validation/w3-demo-apk-delivery-sync-20261115.json)。marker已用勿重发、源码未push。本轮构建/验收/发布均终态，零新helper/设备/生产实现；173原字节或共享余字节、161freeze通过。完整diff-check唯一诊断为原Java失败stderr第3行末尾空行，其余本轮文字通过；原日志不格式化。P1–P4/R4/R5/W3仍open、goal active；下一新所选免费线路的实际通知候选/独立最终APK，或实体连接变化后的固定合同验收，不重建本轮已验Demo、不重试原429或循环USB恢复。

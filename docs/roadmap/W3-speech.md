@@ -1,3 +1,7 @@
+## 2026-11-15：四ABI声明动态依赖已补核
+
+固定16SO/ABI/SONAME通过；92条DT_NEEDED边的16内部目标均在同ABI AAR中，76外部边的五名称在已有NDK四ABI/API21的20参考桩库存在，四ABI逻辑图同，[验证](../validation/w3-native-linkage-20261115.md)。两工具为同LLVM前端，参考桩库非真机加载/最低API接受；16无普通symtab且有dynsym，初始arm64 no symbols保留，导出阴性不能排除静态/内联/dlopen组成。173保护/161freeze保持、零构建/helper/设备/生产改动，P1–P4/R4/R5/W3继续open，原429停线、新线路待答。
+
 ## 2026-11-15：现有Sherpa Demo的真实APK保留通过
 
 已有离线任务复用JDK21后8.834秒成功，335/25执行/310 up-to-date；新APK四ABI16SO与固定runtime逐字节同，7资产含3许可全保留，124runtime/18backend类名及Demo factory覆盖，归档Python/Info-ZIP交叉核验通过，[验证](../validation/w3-demo-apk-delivery-20261115.md)。Demo用project依赖，非独立Maven最终消费者；backend AAR仍无独立通知资源，三许可不代表完整适用通知，P1–P4/R4/R5/W3继续open。304选定输入/47SDK/173保护/161freeze保持，原Java失败保留，零设备/下载/helper/生产实现；原429停线，新线路选择待答。

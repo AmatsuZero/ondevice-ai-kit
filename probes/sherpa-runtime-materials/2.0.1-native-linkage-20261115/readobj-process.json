@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "rtk",
+    "proxy",
+    "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-readobj",
+    "--file-header",
+    "--needed-libs",
+    "--notes",
+    "--elf-output-style=JSON",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libonnxruntime.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-c-api.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-cxx-api.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-jni.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/armeabi-v7a/libonnxruntime.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/armeabi-v7a/libsherpa-onnx-c-api.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/armeabi-v7a/libsherpa-onnx-cxx-api.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/armeabi-v7a/libsherpa-onnx-jni.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/x86/libonnxruntime.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/x86/libsherpa-onnx-c-api.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/x86/libsherpa-onnx-cxx-api.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/x86/libsherpa-onnx-jni.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/x86_64/libonnxruntime.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/x86_64/libsherpa-onnx-c-api.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/x86_64/libsherpa-onnx-cxx-api.so",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/x86_64/libsherpa-onnx-jni.so"
+  ],
+  "exitCode": 0
+}

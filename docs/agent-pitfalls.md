@@ -1,3 +1,7 @@
+## W3 ELF：no symbols与NEEDED阴性不能排除静态组成（2026-11-15）
+
+固定AAR四arm64库的llvm-nm普通读取exit0/stdout空/stderr no symbols；16库实际section均无SHT_SYMTAB而有SHT_DYNSYM。有效核对是保留原件，分别读动态导出和DT_NEEDED，核同ABI内部边及参考桩库，不把普通表缺失当无组件/成功组成审计。16SO共92边、五外部名称/20已有NDK桩库已核；readelf/readobj同LLVM只能算两前端核对，不能称独立实现。NEEDED没有libc++_shared不证明无静态C++；导出阴性不能排除隐藏/内联代码，dlopen分支也不被穷尽。已有NDK30 beta3桩库只作名称/字节参考，不能冒充历史job工具链、真机加载或最低API兼容。证据`.omx/artifacts/w3-native-linkage-20261115/`及[验证](validation/w3-native-linkage-20261115.md)。
+
 ## W3 Demo产物：配置对应的真实APK与project消费边界（2026-11-15）
 
 旧默认Demo APK不含Sherpa资产，隔离main.apk也不是普通Demo交付证据。有效恢复是先保留旧APK，再用已有任务显式enableSherpaAsr/assets/m2离线构建，保存本次新产物及参数；系统Java shim无JRE仅在子进程复用已有JDK21，不改全局。新APK四ABI16SO、7资产/3许可原字节相等及124runtime/18backend类名已核，backend Kotlin为up-to-date，不声称全量重建。Demo的project依赖不能冒充独立Maven最终消费者，三根/模型许可不能覆盖完整通知或递归组成；SDK XML warning原件保留，构建成功不等于安装/推理/资源/生产接受。证据`.omx/artifacts/w3-demo-apk-delivery-20261115/`及[验证](validation/w3-demo-apk-delivery-20261115.md)。
