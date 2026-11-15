@@ -1,3 +1,7 @@
+## 2026-11-16 W3 NDK三条正文已提交及双端同步
+
+本地eae61a4精确11文件；GH#15 comment6902992453/GL#15 note44874、GH Wiki74ba5d9与双Wiki内容SHA53902b76e4637bf56482e92388721dfeef26266684d08869972c4f0a9740b9f5逐字回读；[收据](validation/w3-ndk-offline-body-recovery-sync-20261116.json)。marker已用勿重发；两hy3及三发布均终态，无待poll。523检查含6内存负例/161freeze/176原保护，原历史134/76/58不改，新overlay79有正文/55缺失声明行。零下载/源站请求/构建/设备；无新缓存、零删除，全部原始候选/错误保留，源码分支未push。W3/R4/R5/P1–P4仍open、goal active、完整目标不缩减；剩余55正文、完整组成/可信度/生产及发布接受、真机质量和预算继续缺失。不自动重试源站/旧quota或USB/旧FILE；实体连接变化后才fresh未消费固定单文件合同。
+
 ## 2026-11-16 W3 NDK离线正文恢复已验收
 
 [报告](validation/w3-ndk-offline-body-recovery-20261116.md)及probes/sherpa-runtime-materials/ndk-offline-body-recovery-20261116/：r30三条正文与r27d原字节精确blob相同，原134/76/58历史不改，新overlay79有正文/55缺失声明行，非79个唯一文件。父523检查含109原材料/6内存负例/161freeze/176集成前保护通过；hy3候选51.601s、独立供应文本复核34.411s终态，三文稿问题精确修正，zero观察tool-use。Gitiles前缀与JSONL解析初错/原失败保留；零源站请求/下载/构建/设备、原源码站429不重试。commit对象/签名/历史apply/最终native组成/P1–P4/R4/R5/W3未完成，goal active，完整目标不缩减。当前待本次精确提交/双端同步，源码不push；无实体变化不再ADB/USB恢复或旧FILE，未消费one-file合同不变。

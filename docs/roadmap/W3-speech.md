@@ -1,3 +1,7 @@
+## 2026-11-16：NDK离线正文恢复已双端记录
+
+本地eae61a4（11文件）；[同步收据](../validation/w3-ndk-offline-body-recovery-sync-20261116.json)记录GH#15 comment6902992453/GL#15 note44874、GH Wiki74ba5d9及双Wiki相同SHA53902b76…b9f5，逐字回读。两hy3及三发布均终态、无待poll；原134/76/58历史保持，新overlay79/55声明行，523检查/161freeze/176原保护通过、零新设备/下载/构建。仍缺55正文及完整来源/组成/生产采用和发布接受，R4/R5/P1–P4/W3保持open、goal active。完整目标/未消费真机合同不变；源码分支未push，不回放旧quota/源站/USB/FILE。
+
 ## 2026-11-16：NDK三条缺失正文已离线补齐
 
 [本轮验证](../validation/w3-ndk-offline-body-recovery-20261116.md)以精确tree/blob复用原r27d正文覆盖r30的18/58/59；原134声明与76/58历史不改，新overlay为79有正文/55缺失声明行。523检查含109原材料/6内存负例/161freeze/176集成前保护通过；两免费hy3完整终态，限定复核三项文稿问题已精确修正。零源站请求/下载/构建/设备，commit对象/签名/历史apply/最终native组成未证。W3/R4/R5/P1–P4仍open、goal active、完整目标不缩减；源码不push，当前待精确本地提交及双端记录。

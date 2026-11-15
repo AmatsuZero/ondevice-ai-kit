@@ -1,3 +1,7 @@
+## 2026-11-16 W3：三条NDK正文恢复已提交同步
+
+本地eae61a4及[双端收据](validation/w3-ndk-offline-body-recovery-sync-20261116.json)确认GH/GL Issue#15及两Wiki逐字回读。新overlay79有正文/55缺失声明行，原134/76/58历史不变；523检查/161freeze及保护通过，零新下载/构建/设备。W3/R4/R5/P1–P4仍open、goal active，完整目标与未消费真机合同不缩减；不重试旧quota/源码站或USB/旧FILE，源码未push。
+
 ## 2026-11-16 W3：离线补齐三条NDK正文
 
 [验收](validation/w3-ndk-offline-body-recovery-20261116.md)：原134声明/76正文/58缺失不变，新overlay79正文/55缺失（声明行计数）；精确root→patches→blob/原收据及523检查通过，两hy3终态，零源站请求/下载/构建/设备。不能由正文恢复推历史apply、最终组成或发布接受；W3/R4/R5/P1–P4保持open、goal active，完整目标不缩减。当前待本次精确提交/双端同步，原quota/源站停线和未消费真机合同不变。
