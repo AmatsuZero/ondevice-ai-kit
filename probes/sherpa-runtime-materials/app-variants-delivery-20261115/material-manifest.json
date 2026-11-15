@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "sourceHEAD": "fbf059f41527769129ba635e9511d297d3e5ede7",
+  "fileCount": 39,
+  "totalBytes": 182006,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1188,
+      "sha256": "adc608949251e2348f874afe75220f7ab8ccdf850a86b84c8bcd6f29d2112a7d"
+    },
+    {
+      "path": "apk-signature-observations.json",
+      "bytes": 1263,
+      "sha256": "4c9de13c2115710e05069fd4dc8e4f01976d8748b40cc585147c2687ae1d6b60"
+    },
+    {
+      "path": "app-variants-verification.json",
+      "bytes": 6785,
+      "sha256": "9c9c63f39a497b4558f50f16d88eef30dc6d773cc01892b04ec44645b1c4f674"
+    },
+    {
+      "path": "consumer-debug-default-invocation.json",
+      "bytes": 1096,
+      "sha256": "faea635ec357a94e40110817475d995cbe27f6ca708fa823f5351e5757d9621b"
+    },
+    {
+      "path": "consumer-debug-default-process.json",
+      "bytes": 127,
+      "sha256": "6d77065476b0d22eb5f7ee85db6ac85b551e62f2e6da2da5517bfcae1279084d"
+    },
+    {
+      "path": "consumer-debug-default.stderr",
+      "bytes": 250,
+      "sha256": "8da39de6cb923047d35236ed262a74965faf488cbc82be3b1db8ee3adc1d36b3"
+    },
+    {
+      "path": "consumer-debug-default.stdout",
+      "bytes": 2432,
+      "sha256": "c6c0597d51ba0123705624ff514ea38626cc842458c16b2a59c224cb43912a6c"
+    },
+    {
+      "path": "consumer-invalid-variant-invocation.json",
+      "bytes": 1096,
+      "sha256": "1c4ad16698ceecd10ff36a77e78210a6139aea4a0f13443cf5c6426ee7780fcd"
+    },
+    {
+      "path": "consumer-invalid-variant-process.json",
+      "bytes": 129,
+      "sha256": "75c7e7ee6d7c3696c75374d09571907c8ad152c4f61c1bb050e594f515640c4c"
+    },
+    {
+      "path": "consumer-invalid-variant.stderr",
+      "bytes": 570,
+      "sha256": "ea490d564d0f28d5deafa33bab1cf8e6868274d50eb315beb3096bee3c178474"
+    },
+    {
+      "path": "consumer-invalid-variant.stdout",
+      "bytes": 646,
+      "sha256": "aefeb7c8bf1cfde96ecc3a80866b47f650b70a2ae7660e56ef679c1acd516740"
+    },
+    {
+      "path": "consumer-release-invocation.json",
+      "bytes": 1124,
+      "sha256": "f9aa159d32942a76203cb62c62cbf34d648b8222d3e1d1e7332cf7df55e89c97"
+    },
+    {
+      "path": "consumer-release-process.json",
+      "bytes": 122,
+      "sha256": "7970c619725066128175cf5b0518e8d7e5f46dfc445bf48959c24139d95c7501"
+    },
+    {
+      "path": "consumer-release.stderr",
+      "bytes": 250,
+      "sha256": "8da39de6cb923047d35236ed262a74965faf488cbc82be3b1db8ee3adc1d36b3"
+    },
+    {
+      "path": "consumer-release.stdout",
+      "bytes": 2893,
+      "sha256": "70f3010cae4c0b1998b5e4cb1c1dde4bfe9a120691afb10e9793f855bbbb739a"
+    },
+    {
+      "path": "consumer-runtime-graphs-verified.json",
+      "bytes": 6678,
+      "sha256": "25b88918a29ac5a505314306248321bc4753d26971f5501f4f534a1affa3550a"
+    },
+    {
+      "path": "consumer-variant-results.json",
+      "bytes": 420,
+      "sha256": "305258ab6ab20dfd2807d50212c70fb485b64f0e80587839ab40701345026d74"
+    },
+    {
+      "path": "debug-BuildConfig.java",
+      "bytes": 526,
+      "sha256": "04cb57d06efceb61febc3376e868f53ad6094af085b6d2479746a0d8b4c71840"
+    },
+    {
+      "path": "demo-build-invocation.json",
+      "bytes": 1050,
+      "sha256": "1ca3376c18d403514f9eecd47d8eb52d396a7c30ab89fe138be8b214226e03b5"
+    },
+    {
+      "path": "demo-build-outputs.json",
+      "bytes": 460,
+      "sha256": "18784b0ad3a7a04597cb68ca7f4616ae8705f03409f1ab34791a7b13e8076e76"
+    },
+    {
+      "path": "demo-build-process.json",
+      "bytes": 99,
+      "sha256": "f39eeca0fa4c220fdd2375ef9653118787e772ef26eef8609113c9f76f78ffe1"
+    },
+    {
+      "path": "demo-build.stderr",
+      "bytes": 250,
+      "sha256": "8da39de6cb923047d35236ed262a74965faf488cbc82be3b1db8ee3adc1d36b3"
+    },
+    {
+      "path": "demo-build.stdout",
+      "bytes": 54731,
+      "sha256": "f162d0881fabde40e4b46ea6686886bba4222b75b218134959a43b4baadde8f8"
+    },
+    {
+      "path": "demo-other-native-members-boundary.json",
+      "bytes": 6296,
+      "sha256": "0751868969b65a01d94ecee4a461a57aa00a5ea81fe4ed1587ff4f8e37d58863"
+    },
+    {
+      "path": "editorial-corrections.json",
+      "bytes": 1772,
+      "sha256": "7195a05615996be0a459608c041a93792b8f9d5278338d58f9d66fab2bab028b"
+    },
+    {
+      "path": "fixture/build.gradle.kts",
+      "bytes": 4794,
+      "sha256": "08182616d84f7f1dd8b5f6ac15f26e3daf599ac1f2c61ecdaab2dfb00fbb624e"
+    },
+    {
+      "path": "fixture/settings.gradle.kts",
+      "bytes": 1564,
+      "sha256": "a5d640c16c8c9a0ee27f8487aa5bfc31b158f4b5e3e02c11abc0b3c47efd0f12"
+    },
+    {
+      "path": "fixture/src/main/AndroidManifest.xml",
+      "bytes": 220,
+      "sha256": "7d3661814175e00d4cd389edb7f8e189a1cc34764c4895459c71d991a16b94ec"
+    },
+    {
+      "path": "fixture-integration.json",
+      "bytes": 901,
+      "sha256": "4bc997ee9677d40f7675f4f207622c71cc54f9a5f0ebfcf02ac838676b4c162b"
+    },
+    {
+      "path": "guard-review.json",
+      "bytes": 4452,
+      "sha256": "1815fb04139a43816bb70e9669e219efc9114f21c08257bf8f805b3fb5be6072"
+    },
+    {
+      "path": "hy3-delivery-receipts.json",
+      "bytes": 2235,
+      "sha256": "4e23895496f4d1a691ad23d16c7b0b2f1056cc74f32c14fe0b5c845538887b50"
+    },
+    {
+      "path": "initial-native-set-assertion-diagnosis.json",
+      "bytes": 3616,
+      "sha256": "1bd601f5aef1ad682f2a41129a414b8c19ddf962bdf06dd4eeb2412e23a31171"
+    },
+    {
+      "path": "model-assets-before.json",
+      "bytes": 1475,
+      "sha256": "5260ee0014d435ac71c6bfbd43bc269146fbb7ca6b5cbb3f91a816fec7f70ce3"
+    },
+    {
+      "path": "notice-assets-before.json",
+      "bytes": 10326,
+      "sha256": "246248c28dda8e02bd508380b37cb67eaf76c422f28c24054e1c5ac60b586c57"
+    },
+    {
+      "path": "parent-acceptance.json",
+      "bytes": 981,
+      "sha256": "5d5bbe0e52d3534715d8ca2e1b69923e4223a98040f4eb941044c8c6874e5cf4"
+    },
+    {
+      "path": "previous-apks-preserved.json",
+      "bytes": 631,
+      "sha256": "71a5519ff24783ff79824f7dd1ac458d138ad7647315709a7e444eb864e3f305"
+    },
+    {
+      "path": "release-BuildConfig.java",
+      "bytes": 505,
+      "sha256": "39f39ceb09b6ffbbf854d147d10614bc96b3ed7412cd376a8fbaf1417fa2eb79"
+    },
+    {
+      "path": "review-parent-initial-disposition.json",
+      "bytes": 397,
+      "sha256": "9706461956f462c373ede68b249c29141a2126f55eba7cd7192d2c963a309c74"
+    },
+    {
+      "path": "source-inputs-before.json",
+      "bytes": 57656,
+      "sha256": "d02d4745ae08ada9b30b63ded25f5c69b87ea58eaa09f8763276068bfb76ae70"
+    }
+  ],
+  "rootManifestExcludedFromOwnInventory": true,
+  "binaryAPKsIncluded": false,
+  "W3Complete": false
+}

@@ -1,0 +1,67 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+> Task :preBuild UP-TO-DATE
+> Task :preReleaseBuild UP-TO-DATE
+> Task :mergeReleaseJniLibFolders
+> Task :checkReleaseDuplicateClasses
+> Task :generateReleaseResources
+> Task :packageReleaseResources
+> Task :processReleaseNavigationResources
+> Task :parseReleaseLocalResources
+> Task :generateReleaseRFile
+> Task :compileReleaseKotlin NO-SOURCE
+> Task :javaPreCompileRelease
+> Task :compileReleaseJavaWithJavac NO-SOURCE
+> Task :mergeReleaseNativeLibs
+> Task :checkReleaseAarMetadata
+> Task :mapReleaseSourceSetPaths
+> Task :compileReleaseNavigationResources
+> Task :mergeReleaseResources
+> Task :createReleaseCompatibleScreenManifests
+> Task :extractDeepLinksRelease
+> Task :processReleaseMainManifest
+> Task :processReleaseManifest
+> Task :processReleaseManifestForPackage
+
+> Task :stripReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libonnxruntime.so, libsherpa-onnx-c-api.so, libsherpa-onnx-cxx-api.so, libsherpa-onnx-jni.so. Run with --info option to learn more.
+
+> Task :extractReleaseNativeSymbolTables
+> Task :mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :desugarReleaseFileDependencies
+> Task :mergeReleaseStartupProfile
+> Task :processReleaseResources
+> Task :dexBuilderRelease
+> Task :mergeReleaseArtProfile
+> Task :mergeExtDexRelease
+> Task :mergeReleaseGlobalSynthetics
+> Task :generateReleaseAssets UP-TO-DATE
+> Task :mergeReleaseAssets
+> Task :mergeDexRelease
+> Task :compileReleaseArtProfile
+> Task :compressReleaseAssets
+> Task :extractReleaseVersionControlInfo
+> Task :extractProguardFiles
+> Task :generateReleaseLintVitalReportModel
+> Task :processReleaseJavaRes NO-SOURCE
+> Task :mergeReleaseJavaResource
+> Task :optimizeReleaseResources
+> Task :collectReleaseDependencies
+> Task :sdkReleaseDependencyData
+> Task :writeReleaseAppMetadata
+> Task :writeReleaseSigningConfigVersions
+> Task :verifyNoticeConsumer
+> Task :lintVitalAnalyzeRelease
+> Task :lintVitalReportRelease
+> Task :lintVitalRelease
+> Task :packageRelease
+> Task :createReleaseApkListingFileRedirect
+> Task :assembleRelease
+
+BUILD SUCCESSFUL in 10s
+46 actionable tasks: 46 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html
+]9;4;0

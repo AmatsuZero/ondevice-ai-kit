@@ -1,3 +1,7 @@
+## 2026-11-15：当前Demo与独立Maven消费者Debug/Release实包已核
+
+[验证](../validation/w3-app-variants-delivery-20261115.md)：真实Demo及独立Maven消费者四APK均保留68通知770479B/四ABI16ASR库；Demo额外七原模型许可资产和16历史非ASR库均原字节保持。Demo37.920s成功，独立Release真实releaseRuntimeClasspath八制品对应固定ca0065f2 AAR，默认Debug及非法variant拒收已验。两Release未签名，未安装/推理/分发；Whisper-tiny路径不冒充Qwen质量修复。三免费hy3完整终态，175保护余字节/304选定源/161freeze通过；checker全库集合误判及文稿纠正原件保留。P1–P4/R4/R5/W3完整范围均open，源码/旧quota停线，不重放旧FILE/USB循环。当前P1历史hy3复核已接受、P2四根许可已集成的旧状态措辞同步纠正，门槛与历史证据不变。
+
 ## 2026-11-15：hy3的NDK补丁及通知交付已双端记录
 
 本地ba95e98（115文件）/f9a720b（35文件）；GH#15comment6896331442/GL#15note44866/GHWikic4a2339逐字回读，双Wiki SHAfb97fcfb8e46…一致，[同步收据](../validation/w3-ndk-runtime-patch-notice-sync-20261115.json)。五免费hy3、两构建、三发布均终态；110来源/24通知材料文件、68资产770479B、174保护余字节/161freeze已核，源码未push。76/134补丁正文仍有缺失，四根许可和child索引实包保留通过不等于完整组成/发布接受；P1–P4/R4/R5/W3及完整目标保持open。源码站/旧quota停线，实体连接变化后才fresh固定未消费run，不重放旧FILE/USB循环。
@@ -496,7 +500,7 @@ Android先冻结[load-only合同](../validation/w3-qwen-android-load-protocol-20
 
 生产发布验收独立于R4质量和R5资源，以下均未通过：
 
-- [ ] P1 源码/构建/运行时对应：四ORT成员/日志、CI整AAR/16库及[21成员/九输入组与冻结隔离消费者](../validation/w3-p1-member-matrix-20261115.md)增量已验；[当前SDK本地发布与独立消费者绑定](../validation/w3-sdk-consumer-binding-20261115.md)已父验、独立复核因429待恢复。最终生产App采用及逐输入组完整性/可信度接受仍缺；类名/SourceFile不等于字节码等价。
+- [ ] P1 源码/构建/运行时对应：四ORT成员/日志、CI整AAR/16库及[21成员/九输入组与冻结隔离消费者](../validation/w3-p1-member-matrix-20261115.md)增量已验；[当前SDK本地发布与独立消费者绑定](../validation/w3-sdk-consumer-binding-20261115.md)已父验，hy3已接受历史切片，并新增[当前Demo debug/release与独立消费者debug/release证据](../validation/w3-app-variants-delivery-20261115.md)。最终生产App采用及逐输入组完整性/可信度接受仍缺；类名/SourceFile不等于字节码等价。
 - [ ] P2 递归最终组成：将直接、静态嵌入及传递组件与最终二进制关联，明确版本、源码、许可及归属，解释未覆盖项。
 - [ ] P3 交付物通知：在实际生产候选及消费/打包后核验适用许可、通知和修改说明保留；本地材料ZIP不代替实际交付物。
 - [ ] P4 独立发布复审：固定同一候选与P1–P3材料，记录审阅覆盖、问题处置和接受结论；局部源码/日志审查不代替完整发布接受。

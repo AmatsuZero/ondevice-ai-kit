@@ -1,0 +1,12 @@
+{
+  "technicalReview": "accept_bounded_increment",
+  "editorialDraftAccepted": false,
+  "issues": [
+    "README incorrectly claims APKs under small metadata material directory",
+    "status correction drops final native-code retention gap",
+    "unrelated Django word in limitations"
+  ],
+  "newCorrectionTask": "hy3-correction",
+  "originalReviewPreserved": true,
+  "newBuildsOrDeviceCalls": 0
+}

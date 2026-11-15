@@ -1,0 +1,902 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+> Task :android:backend-sherpa-asr:preBuild UP-TO-DATE
+> Task :android:backend-sherpa-asr:preDebugBuild UP-TO-DATE
+> Task :android:sdk-core:preBuild UP-TO-DATE
+> Task :android:sdk-core:preDebugBuild UP-TO-DATE
+> Task :android:sdk-core:writeDebugAarMetadata UP-TO-DATE
+> Task :android:speech:preBuild UP-TO-DATE
+> Task :android:speech:preDebugBuild UP-TO-DATE
+> Task :android:speech:writeDebugAarMetadata UP-TO-DATE
+> Task :android:backend-sherpa-asr:checkDebugAarMetadata UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeDebugNativeLibs NO-SOURCE
+> Task :android:backend-sherpa-asr:stripDebugDebugSymbols NO-SOURCE
+> Task :android:backend-sherpa-asr:copyDebugJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :android:backend-sherpa-asr:generateDebugResources UP-TO-DATE
+> Task :android:backend-sherpa-asr:packageDebugResources UP-TO-DATE
+> Task :android:backend-sherpa-asr:processDebugNavigationResources UP-TO-DATE
+> Task :android:backend-sherpa-asr:parseDebugLocalResources UP-TO-DATE
+> Task :android:backend-sherpa-asr:generateDebugRFile UP-TO-DATE
+> Task :android:sdk-core:generateDebugResources UP-TO-DATE
+> Task :android:sdk-core:packageDebugResources UP-TO-DATE
+> Task :android:sdk-core:processDebugNavigationResources UP-TO-DATE
+> Task :android:sdk-core:parseDebugLocalResources UP-TO-DATE
+> Task :android:sdk-core:generateDebugRFile UP-TO-DATE
+> Task :android:sdk-core:compileDebugKotlin UP-TO-DATE
+> Task :android:sdk-core:javaPreCompileDebug UP-TO-DATE
+> Task :android:sdk-core:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:sdk-core:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :android:speech:generateDebugResources UP-TO-DATE
+> Task :android:speech:packageDebugResources UP-TO-DATE
+> Task :android:speech:processDebugNavigationResources UP-TO-DATE
+> Task :android:speech:parseDebugLocalResources UP-TO-DATE
+> Task :android:speech:generateDebugRFile UP-TO-DATE
+> Task :android:speech:compileDebugKotlin UP-TO-DATE
+> Task :android:speech:javaPreCompileDebug UP-TO-DATE
+> Task :android:speech:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:speech:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :android:backend-sherpa-asr:extractDebugAnnotations UP-TO-DATE
+> Task :android:backend-sherpa-asr:extractDeepLinksForAarDebug UP-TO-DATE
+> Task :android:backend-sherpa-asr:generateDebugAssets UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeDebugAssets UP-TO-DATE
+> Task :android:backend-sherpa-asr:compileDebugKotlin UP-TO-DATE
+> Task :android:backend-sherpa-asr:javaPreCompileDebug UP-TO-DATE
+> Task :android:backend-sherpa-asr:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:backend-sherpa-asr:mergeDebugGeneratedProguardFiles UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeDebugConsumerProguardFiles UP-TO-DATE
+> Task :android:backend-sherpa-asr:prepareDebugArtProfile UP-TO-DATE
+> Task :android:backend-sherpa-asr:prepareLintJarForPublish UP-TO-DATE
+> Task :android:backend-sherpa-asr:processDebugManifest UP-TO-DATE
+> Task :android:backend-sherpa-asr:processDebugJavaRes UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeDebugJavaResource UP-TO-DATE
+> Task :android:backend-sherpa-asr:syncDebugLibJars UP-TO-DATE
+> Task :android:backend-sherpa-asr:writeDebugAarMetadata UP-TO-DATE
+> Task :android:backend-sherpa-asr:bundleDebugAar UP-TO-DATE
+> Task :android:backend-sherpa-asr:assembleDebug UP-TO-DATE
+> Task :demo:androidApp:preBuild UP-TO-DATE
+> Task :demo:androidApp:preDebugBuild UP-TO-DATE
+> Task :demo:androidApp:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :kmp-binding:kmpPartiallyResolvedDependenciesChecker
+> Task :kmp-binding:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :android:face:preBuild UP-TO-DATE
+> Task :android:face:preReleaseBuild UP-TO-DATE
+> Task :android:face:generateReleaseResources UP-TO-DATE
+> Task :android:face:packageReleaseResources UP-TO-DATE
+> Task :android:face:processReleaseNavigationResources UP-TO-DATE
+> Task :android:face:parseReleaseLocalResources UP-TO-DATE
+> Task :android:face:generateReleaseRFile UP-TO-DATE
+> Task :android:sdk-core:preReleaseBuild UP-TO-DATE
+> Task :android:sdk-core:generateReleaseResources UP-TO-DATE
+> Task :android:sdk-core:packageReleaseResources UP-TO-DATE
+> Task :android:sdk-core:processReleaseNavigationResources UP-TO-DATE
+> Task :android:sdk-core:parseReleaseLocalResources UP-TO-DATE
+> Task :android:sdk-core:generateReleaseRFile UP-TO-DATE
+> Task :android:sdk-core:compileReleaseKotlin UP-TO-DATE
+> Task :android:sdk-core:javaPreCompileRelease UP-TO-DATE
+> Task :android:sdk-core:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:sdk-core:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :android:face:compileReleaseKotlin UP-TO-DATE
+> Task :android:face:javaPreCompileRelease UP-TO-DATE
+> Task :android:face:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:face:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :android:identity:preBuild UP-TO-DATE
+> Task :android:identity:preReleaseBuild UP-TO-DATE
+> Task :android:identity:generateReleaseResources UP-TO-DATE
+> Task :android:identity:packageReleaseResources UP-TO-DATE
+> Task :android:identity:processReleaseNavigationResources UP-TO-DATE
+> Task :android:identity:parseReleaseLocalResources UP-TO-DATE
+> Task :android:identity:generateReleaseRFile UP-TO-DATE
+> Task :android:model-store:preBuild UP-TO-DATE
+> Task :android:model-store:preReleaseBuild UP-TO-DATE
+> Task :android:model-store:generateReleaseResources UP-TO-DATE
+> Task :android:model-store:packageReleaseResources UP-TO-DATE
+> Task :android:model-store:processReleaseNavigationResources UP-TO-DATE
+> Task :android:model-store:parseReleaseLocalResources UP-TO-DATE
+> Task :android:model-store:generateReleaseRFile UP-TO-DATE
+> Task :android:model-store:compileReleaseKotlin UP-TO-DATE
+> Task :android:model-store:javaPreCompileRelease UP-TO-DATE
+> Task :android:model-store:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:model-store:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :android:identity:compileReleaseKotlin UP-TO-DATE
+> Task :android:identity:javaPreCompileRelease UP-TO-DATE
+> Task :android:identity:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:identity:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :android:multimodal:preBuild UP-TO-DATE
+> Task :android:multimodal:preReleaseBuild UP-TO-DATE
+> Task :android:multimodal:generateReleaseResources UP-TO-DATE
+> Task :android:multimodal:packageReleaseResources UP-TO-DATE
+> Task :android:multimodal:processReleaseNavigationResources UP-TO-DATE
+> Task :android:multimodal:parseReleaseLocalResources UP-TO-DATE
+> Task :android:multimodal:generateReleaseRFile UP-TO-DATE
+> Task :android:multimodal:compileReleaseKotlin UP-TO-DATE
+> Task :android:multimodal:javaPreCompileRelease UP-TO-DATE
+> Task :android:multimodal:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:multimodal:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :android:speech:preReleaseBuild UP-TO-DATE
+> Task :android:speech:generateReleaseResources UP-TO-DATE
+> Task :android:speech:packageReleaseResources UP-TO-DATE
+> Task :android:speech:processReleaseNavigationResources UP-TO-DATE
+> Task :android:speech:parseReleaseLocalResources UP-TO-DATE
+> Task :android:speech:generateReleaseRFile UP-TO-DATE
+> Task :android:speech:compileReleaseKotlin UP-TO-DATE
+> Task :android:speech:javaPreCompileRelease UP-TO-DATE
+> Task :android:speech:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:speech:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :android:video:preBuild UP-TO-DATE
+> Task :android:video:preReleaseBuild UP-TO-DATE
+> Task :android:video:generateReleaseResources UP-TO-DATE
+> Task :android:video:packageReleaseResources UP-TO-DATE
+> Task :android:video:processReleaseNavigationResources UP-TO-DATE
+> Task :android:video:parseReleaseLocalResources UP-TO-DATE
+> Task :android:video:generateReleaseRFile UP-TO-DATE
+> Task :android:video:compileReleaseKotlin UP-TO-DATE
+> Task :android:video:javaPreCompileRelease UP-TO-DATE
+> Task :android:video:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:video:bundleLibCompileToJarRelease UP-TO-DATE
+> Task :kmp-binding:compileAndroidMain UP-TO-DATE
+> Task :kmp-binding:androidPreBuild UP-TO-DATE
+> Task :kmp-binding:preAndroidMainBuild UP-TO-DATE
+> Task :kmp-binding:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :android:backend-mlkit:preBuild UP-TO-DATE
+> Task :android:backend-mlkit:preDebugBuild UP-TO-DATE
+> Task :android:backend-mlkit:generateDebugResources UP-TO-DATE
+> Task :android:backend-mlkit:packageDebugResources UP-TO-DATE
+> Task :android:backend-mlkit:processDebugNavigationResources UP-TO-DATE
+> Task :android:backend-mlkit:parseDebugLocalResources UP-TO-DATE
+> Task :android:backend-mlkit:generateDebugRFile UP-TO-DATE
+> Task :android:face:preDebugBuild UP-TO-DATE
+> Task :android:face:generateDebugResources UP-TO-DATE
+> Task :android:face:packageDebugResources UP-TO-DATE
+> Task :android:face:processDebugNavigationResources UP-TO-DATE
+> Task :android:face:parseDebugLocalResources UP-TO-DATE
+> Task :android:face:generateDebugRFile UP-TO-DATE
+> Task :android:face:compileDebugKotlin UP-TO-DATE
+> Task :android:face:javaPreCompileDebug UP-TO-DATE
+> Task :android:face:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:face:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :android:backend-mlkit:compileDebugKotlin UP-TO-DATE
+> Task :android:backend-mlkit:javaPreCompileDebug UP-TO-DATE
+> Task :android:backend-mlkit:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:backend-mlkit:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :android:backend-sherpa-asr:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :android:backend-system-asr:preBuild UP-TO-DATE
+> Task :android:backend-system-asr:preDebugBuild UP-TO-DATE
+> Task :android:backend-system-asr:generateDebugResources UP-TO-DATE
+> Task :android:backend-system-asr:packageDebugResources UP-TO-DATE
+> Task :android:backend-system-asr:processDebugNavigationResources UP-TO-DATE
+> Task :android:backend-system-asr:parseDebugLocalResources UP-TO-DATE
+> Task :android:backend-system-asr:generateDebugRFile UP-TO-DATE
+> Task :android:backend-system-asr:compileDebugKotlin UP-TO-DATE
+> Task :android:backend-system-asr:javaPreCompileDebug UP-TO-DATE
+> Task :android:backend-system-asr:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:backend-system-asr:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :android:backend-system-tts:preBuild UP-TO-DATE
+> Task :android:backend-system-tts:preDebugBuild UP-TO-DATE
+> Task :android:backend-system-tts:generateDebugResources UP-TO-DATE
+> Task :android:backend-system-tts:packageDebugResources UP-TO-DATE
+> Task :android:backend-system-tts:processDebugNavigationResources UP-TO-DATE
+> Task :android:backend-system-tts:parseDebugLocalResources UP-TO-DATE
+> Task :android:backend-system-tts:generateDebugRFile UP-TO-DATE
+> Task :android:backend-system-tts:compileDebugKotlin UP-TO-DATE
+> Task :android:backend-system-tts:javaPreCompileDebug UP-TO-DATE
+> Task :android:backend-system-tts:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:backend-system-tts:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :android:identity:preDebugBuild UP-TO-DATE
+> Task :android:identity:generateDebugResources UP-TO-DATE
+> Task :android:identity:packageDebugResources UP-TO-DATE
+> Task :android:identity:processDebugNavigationResources UP-TO-DATE
+> Task :android:identity:parseDebugLocalResources UP-TO-DATE
+> Task :android:identity:generateDebugRFile UP-TO-DATE
+> Task :android:model-store:preDebugBuild UP-TO-DATE
+> Task :android:model-store:generateDebugResources UP-TO-DATE
+> Task :android:model-store:packageDebugResources UP-TO-DATE
+> Task :android:model-store:processDebugNavigationResources UP-TO-DATE
+> Task :android:model-store:parseDebugLocalResources UP-TO-DATE
+> Task :android:model-store:generateDebugRFile UP-TO-DATE
+> Task :android:model-store:compileDebugKotlin UP-TO-DATE
+> Task :android:model-store:javaPreCompileDebug UP-TO-DATE
+> Task :android:model-store:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:model-store:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :android:identity:compileDebugKotlin UP-TO-DATE
+> Task :android:identity:javaPreCompileDebug UP-TO-DATE
+> Task :android:identity:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:identity:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :android:video:preDebugBuild UP-TO-DATE
+> Task :android:video:generateDebugResources UP-TO-DATE
+> Task :android:video:packageDebugResources UP-TO-DATE
+> Task :android:video:processDebugNavigationResources UP-TO-DATE
+> Task :android:video:parseDebugLocalResources UP-TO-DATE
+> Task :android:video:generateDebugRFile UP-TO-DATE
+> Task :android:video:compileDebugKotlin UP-TO-DATE
+> Task :android:video:javaPreCompileDebug UP-TO-DATE
+> Task :android:video:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:video:bundleLibCompileToJarDebug UP-TO-DATE
+> Task :demo:androidApp:generateDebugBuildConfig
+> Task :demo:androidApp:generateDebugResources UP-TO-DATE
+> Task :demo:androidApp:packageDebugResources UP-TO-DATE
+> Task :kmp-binding:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :android:multimodal:preDebugBuild UP-TO-DATE
+> Task :android:multimodal:processDebugNavigationResources UP-TO-DATE
+> Task :demo:shared:androidPreBuild UP-TO-DATE
+> Task :demo:shared:preAndroidMainBuild UP-TO-DATE
+> Task :demo:shared:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :demo:androidApp:processDebugNavigationResources UP-TO-DATE
+> Task :demo:androidApp:parseDebugLocalResources UP-TO-DATE
+> Task :demo:androidApp:generateDebugRFile UP-TO-DATE
+> Task :demo:shared:kmpPartiallyResolvedDependenciesChecker
+> Task :demo:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :demo:shared:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :demo:shared:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :demo:shared:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :demo:shared:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :demo:shared:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :demo:shared:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :demo:shared:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :demo:shared:generateResourceAccessorsForCommonMain SKIPPED
+> Task :demo:shared:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :demo:shared:generateComposeResClass SKIPPED
+> Task :demo:shared:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :demo:shared:compileAndroidMain UP-TO-DATE
+> Task :demo:shared:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :demo:androidApp:javaPreCompileDebug UP-TO-DATE
+> Task :android:backend-mlkit:generateDebugAssets UP-TO-DATE
+> Task :android:backend-mlkit:mergeDebugAssets UP-TO-DATE
+> Task :android:backend-system-asr:generateDebugAssets UP-TO-DATE
+> Task :android:backend-system-asr:mergeDebugAssets UP-TO-DATE
+> Task :android:backend-system-tts:generateDebugAssets UP-TO-DATE
+> Task :android:backend-system-tts:mergeDebugAssets UP-TO-DATE
+> Task :android:face:generateDebugAssets UP-TO-DATE
+> Task :android:face:mergeDebugAssets UP-TO-DATE
+> Task :android:identity:generateDebugAssets UP-TO-DATE
+> Task :android:identity:mergeDebugAssets UP-TO-DATE
+> Task :android:model-store:generateDebugAssets UP-TO-DATE
+> Task :android:model-store:mergeDebugAssets UP-TO-DATE
+> Task :android:multimodal:generateDebugAssets UP-TO-DATE
+> Task :android:multimodal:mergeDebugAssets UP-TO-DATE
+> Task :android:sdk-core:generateDebugAssets UP-TO-DATE
+> Task :android:sdk-core:mergeDebugAssets UP-TO-DATE
+> Task :android:speech:generateDebugAssets UP-TO-DATE
+> Task :android:speech:mergeDebugAssets UP-TO-DATE
+> Task :android:video:generateDebugAssets UP-TO-DATE
+> Task :android:video:mergeDebugAssets UP-TO-DATE
+> Task :demo:androidApp:generateDebugAssets UP-TO-DATE
+> Task :demo:androidApp:mergeDebugAssets
+> Task :demo:androidApp:compressDebugAssets
+> Task :android:backend-sherpa-asr:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :demo:shared:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :kmp-binding:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :android:identity:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :android:video:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :android:backend-mlkit:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :android:backend-system-tts:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :android:backend-system-asr:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :android:speech:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :android:model-store:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :android:face:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :android:multimodal:generateDebugResources UP-TO-DATE
+> Task :android:multimodal:packageDebugResources UP-TO-DATE
+> Task :android:multimodal:parseDebugLocalResources UP-TO-DATE
+> Task :android:multimodal:generateDebugRFile UP-TO-DATE
+> Task :android:multimodal:compileDebugKotlin UP-TO-DATE
+> Task :android:multimodal:javaPreCompileDebug UP-TO-DATE
+> Task :android:multimodal:compileDebugJavaWithJavac NO-SOURCE
+> Task :android:multimodal:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :android:sdk-core:bundleLibRuntimeToJarDebug UP-TO-DATE
+> Task :demo:androidApp:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:backend-mlkit:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:backend-mlkit:compileDebugLibraryResources UP-TO-DATE
+> Task :android:backend-sherpa-asr:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:backend-sherpa-asr:compileDebugLibraryResources UP-TO-DATE
+> Task :android:backend-system-asr:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:backend-system-asr:compileDebugLibraryResources UP-TO-DATE
+> Task :android:backend-system-tts:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:backend-system-tts:compileDebugLibraryResources UP-TO-DATE
+> Task :android:face:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:face:compileDebugLibraryResources UP-TO-DATE
+> Task :android:identity:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:identity:compileDebugLibraryResources UP-TO-DATE
+> Task :android:model-store:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:model-store:compileDebugLibraryResources UP-TO-DATE
+> Task :android:multimodal:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:multimodal:compileDebugLibraryResources UP-TO-DATE
+> Task :android:sdk-core:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:sdk-core:compileDebugLibraryResources UP-TO-DATE
+> Task :android:speech:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:speech:compileDebugLibraryResources UP-TO-DATE
+> Task :android:video:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:video:compileDebugLibraryResources UP-TO-DATE
+> Task :kmp-binding:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :android:backend-mlkit:writeDebugAarMetadata UP-TO-DATE
+> Task :android:backend-system-asr:writeDebugAarMetadata UP-TO-DATE
+> Task :android:backend-system-tts:writeDebugAarMetadata UP-TO-DATE
+> Task :android:face:writeDebugAarMetadata UP-TO-DATE
+> Task :android:identity:writeDebugAarMetadata UP-TO-DATE
+> Task :android:model-store:writeDebugAarMetadata UP-TO-DATE
+> Task :android:multimodal:writeDebugAarMetadata UP-TO-DATE
+> Task :android:video:writeDebugAarMetadata UP-TO-DATE
+> Task :demo:shared:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :demo:androidApp:checkDebugAarMetadata UP-TO-DATE
+> Task :demo:androidApp:mapDebugSourceSetPaths UP-TO-DATE
+> Task :demo:androidApp:compileDebugNavigationResources UP-TO-DATE
+> Task :demo:androidApp:mergeDebugResources UP-TO-DATE
+> Task :demo:androidApp:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :kmp-binding:processAndroidMainManifest UP-TO-DATE
+> Task :android:backend-mlkit:extractDeepLinksDebug UP-TO-DATE
+> Task :android:backend-mlkit:processDebugManifest UP-TO-DATE
+> Task :android:backend-sherpa-asr:extractDeepLinksDebug UP-TO-DATE
+> Task :android:backend-system-asr:extractDeepLinksDebug UP-TO-DATE
+> Task :android:backend-system-asr:processDebugManifest UP-TO-DATE
+> Task :android:backend-system-tts:extractDeepLinksDebug UP-TO-DATE
+> Task :android:backend-system-tts:processDebugManifest UP-TO-DATE
+> Task :android:face:extractDeepLinksDebug UP-TO-DATE
+> Task :android:face:processDebugManifest UP-TO-DATE
+> Task :android:identity:extractDeepLinksDebug UP-TO-DATE
+> Task :android:identity:processDebugManifest UP-TO-DATE
+> Task :android:model-store:extractDeepLinksDebug UP-TO-DATE
+> Task :android:model-store:processDebugManifest UP-TO-DATE
+> Task :android:multimodal:extractDeepLinksDebug UP-TO-DATE
+> Task :android:multimodal:processDebugManifest UP-TO-DATE
+> Task :android:sdk-core:extractDeepLinksDebug UP-TO-DATE
+> Task :android:sdk-core:processDebugManifest UP-TO-DATE
+> Task :android:speech:extractDeepLinksDebug UP-TO-DATE
+> Task :android:speech:processDebugManifest UP-TO-DATE
+> Task :android:video:extractDeepLinksDebug UP-TO-DATE
+> Task :android:video:processDebugManifest UP-TO-DATE
+> Task :demo:androidApp:extractDeepLinksDebug UP-TO-DATE
+> Task :demo:shared:processAndroidMainManifest UP-TO-DATE
+> Task :demo:androidApp:processDebugMainManifest UP-TO-DATE
+> Task :demo:androidApp:processDebugManifest UP-TO-DATE
+> Task :demo:androidApp:processDebugManifestForPackage UP-TO-DATE
+> Task :demo:androidApp:processDebugResources UP-TO-DATE
+> Task :kmp-binding:processAndroidMainJavaRes UP-TO-DATE
+> Task :android:backend-mlkit:processDebugJavaRes UP-TO-DATE
+> Task :android:backend-system-asr:processDebugJavaRes UP-TO-DATE
+> Task :android:backend-system-tts:processDebugJavaRes UP-TO-DATE
+> Task :android:face:processDebugJavaRes UP-TO-DATE
+> Task :android:identity:processDebugJavaRes UP-TO-DATE
+> Task :android:model-store:processDebugJavaRes UP-TO-DATE
+> Task :android:multimodal:processDebugJavaRes UP-TO-DATE
+> Task :android:sdk-core:processDebugJavaRes UP-TO-DATE
+> Task :android:speech:processDebugJavaRes UP-TO-DATE
+> Task :android:video:processDebugJavaRes UP-TO-DATE
+> Task :demo:shared:processAndroidMainJavaRes UP-TO-DATE
+> Task :demo:androidApp:checkDebugDuplicateClasses UP-TO-DATE
+> Task :demo:androidApp:mergeExtDexDebug UP-TO-DATE
+> Task :android:backend-sherpa-asr:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :demo:shared:bundleLibRuntimeToDirAndroidMain UP-TO-DATE
+> Task :kmp-binding:bundleLibRuntimeToDirAndroidMain UP-TO-DATE
+> Task :android:identity:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :android:video:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :android:backend-mlkit:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :android:backend-system-tts:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :android:backend-system-asr:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :android:speech:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :android:model-store:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :android:face:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :android:multimodal:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :android:sdk-core:bundleLibRuntimeToDirDebug UP-TO-DATE
+> Task :demo:androidApp:mergeLibDexDebug UP-TO-DATE
+> Task :kmp-binding:mergeAndroidMainJniLibFolders UP-TO-DATE
+> Task :kmp-binding:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :kmp-binding:copyAndroidMainJniLibsProjectOnly UP-TO-DATE
+> Task :android:backend-mlkit:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:backend-mlkit:mergeDebugNativeLibs NO-SOURCE
+> Task :android:backend-mlkit:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:backend-sherpa-asr:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:backend-system-asr:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:backend-system-asr:mergeDebugNativeLibs NO-SOURCE
+> Task :android:backend-system-asr:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:backend-system-tts:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:backend-system-tts:mergeDebugNativeLibs NO-SOURCE
+> Task :android:backend-system-tts:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:face:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:face:mergeDebugNativeLibs NO-SOURCE
+> Task :android:face:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:identity:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:identity:mergeDebugNativeLibs NO-SOURCE
+> Task :android:identity:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:model-store:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:model-store:mergeDebugNativeLibs NO-SOURCE
+> Task :android:model-store:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:multimodal:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:multimodal:mergeDebugNativeLibs NO-SOURCE
+> Task :android:multimodal:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:sdk-core:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:sdk-core:mergeDebugNativeLibs NO-SOURCE
+> Task :android:sdk-core:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:speech:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:speech:mergeDebugNativeLibs NO-SOURCE
+> Task :android:speech:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :android:video:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:video:mergeDebugNativeLibs NO-SOURCE
+> Task :android:video:copyDebugJniLibsProjectOnly UP-TO-DATE
+> Task :demo:androidApp:mergeDebugJniLibFolders UP-TO-DATE
+> Task :demo:shared:mergeAndroidMainJniLibFolders UP-TO-DATE
+> Task :demo:shared:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :demo:shared:copyAndroidMainJniLibsProjectOnly UP-TO-DATE
+> Task :demo:androidApp:mergeDebugNativeLibs UP-TO-DATE
+> Task :demo:androidApp:stripDebugDebugSymbols UP-TO-DATE
+> Task :demo:androidApp:validateSigningDebug UP-TO-DATE
+> Task :demo:androidApp:writeDebugAppMetadata UP-TO-DATE
+> Task :demo:androidApp:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:backend-mlkit:preReleaseBuild UP-TO-DATE
+> Task :android:backend-mlkit:mergeReleaseJniLibFolders
+> Task :android:backend-mlkit:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:backend-mlkit:copyReleaseJniLibsProjectOnly
+> Task :android:backend-sherpa-asr:preReleaseBuild UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:backend-sherpa-asr:copyReleaseJniLibsProjectOnly
+> Task :android:backend-system-asr:preReleaseBuild UP-TO-DATE
+> Task :android:backend-system-asr:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :android:backend-system-asr:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:backend-system-asr:copyReleaseJniLibsProjectOnly
+> Task :android:backend-system-tts:preReleaseBuild UP-TO-DATE
+> Task :android:backend-system-tts:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :android:backend-system-tts:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:backend-system-tts:copyReleaseJniLibsProjectOnly
+> Task :android:face:mergeReleaseJniLibFolders
+> Task :android:face:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:face:copyReleaseJniLibsProjectOnly
+> Task :android:identity:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :android:identity:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:identity:copyReleaseJniLibsProjectOnly
+> Task :android:model-store:mergeReleaseJniLibFolders
+> Task :android:model-store:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:model-store:copyReleaseJniLibsProjectOnly
+> Task :android:multimodal:mergeReleaseJniLibFolders
+> Task :android:multimodal:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:multimodal:copyReleaseJniLibsProjectOnly
+> Task :android:sdk-core:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :android:sdk-core:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:sdk-core:copyReleaseJniLibsProjectOnly
+> Task :android:speech:mergeReleaseJniLibFolders UP-TO-DATE
+> Task :android:speech:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:speech:copyReleaseJniLibsProjectOnly
+> Task :android:video:mergeReleaseJniLibFolders
+> Task :android:video:mergeReleaseNativeLibs NO-SOURCE
+> Task :android:video:copyReleaseJniLibsProjectOnly
+> Task :demo:androidApp:preReleaseBuild UP-TO-DATE
+> Task :demo:androidApp:mergeReleaseJniLibFolders
+> Task :demo:androidApp:mergeReleaseNativeLibs
+
+> Task :demo:androidApp:stripReleaseDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libface_detector_v2_jni.so, libimage_processing_util_jni.so, libonnxruntime.so, libsherpa-onnx-c-api.so, libsherpa-onnx-cxx-api.so, libsherpa-onnx-jni.so, libsurface_util_jni.so. Run with --info option to learn more.
+
+> Task :demo:androidApp:extractReleaseNativeSymbolTables
+> Task :demo:androidApp:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :android:backend-sherpa-asr:generateReleaseResources UP-TO-DATE
+> Task :android:backend-sherpa-asr:packageReleaseResources UP-TO-DATE
+> Task :android:backend-sherpa-asr:processReleaseNavigationResources UP-TO-DATE
+> Task :android:backend-sherpa-asr:parseReleaseLocalResources UP-TO-DATE
+> Task :android:backend-sherpa-asr:generateReleaseRFile UP-TO-DATE
+> Task :android:backend-sherpa-asr:compileReleaseKotlin UP-TO-DATE
+> Task :android:backend-sherpa-asr:javaPreCompileRelease UP-TO-DATE
+> Task :android:backend-sherpa-asr:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:backend-sherpa-asr:bundleLibRuntimeToDirRelease
+> Task :android:identity:bundleLibRuntimeToDirRelease
+
+> Task :demo:androidApp:compileDebugKotlin
+w: file:///Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/demo/androidApp/src/main/kotlin/io/ondeviceai/demo/MainActivity.kt:306:185 'fun setTargetResolution(p0: Size): ImageAnalysis.Builder' is deprecated. Deprecated in Java.
+w: file:///Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/demo/androidApp/src/main/kotlin/io/ondeviceai/demo/MainActivity.kt:341:54 This is a delicate API and its use requires care. Make sure you fully read and understand documentation of the declaration that is marked as a delicate API.
+
+> Task :demo:androidApp:compileDebugJavaWithJavac
+> Task :demo:androidApp:dexBuilderDebug
+> Task :demo:androidApp:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :demo:androidApp:processDebugJavaRes UP-TO-DATE
+> Task :demo:androidApp:mergeDebugJavaResource UP-TO-DATE
+> Task :demo:androidApp:mergeProjectDexDebug
+> Task :android:video:bundleLibRuntimeToDirRelease
+> Task :android:backend-mlkit:generateReleaseResources
+> Task :android:backend-mlkit:packageReleaseResources
+> Task :android:backend-mlkit:processReleaseNavigationResources
+> Task :android:backend-mlkit:parseReleaseLocalResources
+> Task :demo:androidApp:packageDebug
+> Task :demo:androidApp:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :demo:androidApp:assembleDebug
+> Task :android:backend-mlkit:javaPreCompileRelease
+> Task :android:backend-system-tts:generateReleaseResources UP-TO-DATE
+> Task :android:backend-system-tts:packageReleaseResources UP-TO-DATE
+> Task :android:backend-system-tts:processReleaseNavigationResources UP-TO-DATE
+> Task :android:backend-system-tts:parseReleaseLocalResources UP-TO-DATE
+> Task :android:backend-system-tts:generateReleaseRFile UP-TO-DATE
+> Task :android:backend-mlkit:generateReleaseRFile
+> Task :android:backend-system-tts:compileReleaseKotlin UP-TO-DATE
+> Task :android:backend-system-tts:javaPreCompileRelease UP-TO-DATE
+> Task :android:backend-system-tts:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:backend-system-tts:bundleLibRuntimeToDirRelease
+> Task :android:backend-system-asr:generateReleaseResources UP-TO-DATE
+> Task :android:backend-system-asr:packageReleaseResources UP-TO-DATE
+> Task :android:backend-system-asr:processReleaseNavigationResources UP-TO-DATE
+> Task :android:backend-system-asr:parseReleaseLocalResources UP-TO-DATE
+> Task :android:backend-system-asr:generateReleaseRFile UP-TO-DATE
+> Task :android:backend-system-asr:compileReleaseKotlin UP-TO-DATE
+> Task :android:backend-system-asr:javaPreCompileRelease UP-TO-DATE
+> Task :android:backend-system-asr:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:backend-system-asr:bundleLibRuntimeToDirRelease
+> Task :android:speech:bundleLibRuntimeToDirRelease
+> Task :android:model-store:bundleLibRuntimeToDirRelease
+> Task :android:face:bundleLibRuntimeToDirRelease
+> Task :android:multimodal:bundleLibRuntimeToDirRelease
+> Task :android:sdk-core:bundleLibRuntimeToDirRelease
+> Task :demo:androidApp:checkReleaseDuplicateClasses
+> Task :android:backend-sherpa-asr:bundleLibCompileToJarRelease
+> Task :android:backend-system-asr:bundleLibCompileToJarRelease
+> Task :android:backend-system-tts:bundleLibCompileToJarRelease
+> Task :demo:androidApp:generateReleaseBuildConfig
+> Task :demo:androidApp:generateReleaseResources
+> Task :demo:androidApp:packageReleaseResources
+> Task :demo:androidApp:processReleaseNavigationResources
+> Task :demo:androidApp:parseReleaseLocalResources
+> Task :demo:androidApp:generateReleaseRFile
+> Task :demo:androidApp:javaPreCompileRelease
+> Task :android:backend-mlkit:mapReleaseSourceSetPaths
+> Task :android:backend-mlkit:compileReleaseLibraryResources
+> Task :android:backend-sherpa-asr:mapReleaseSourceSetPaths UP-TO-DATE
+> Task :android:backend-sherpa-asr:compileReleaseLibraryResources
+> Task :android:backend-system-asr:mapReleaseSourceSetPaths UP-TO-DATE
+> Task :android:backend-system-asr:compileReleaseLibraryResources
+> Task :android:backend-system-tts:mapReleaseSourceSetPaths
+> Task :android:backend-system-tts:compileReleaseLibraryResources
+> Task :android:face:mapReleaseSourceSetPaths
+> Task :android:face:compileReleaseLibraryResources
+> Task :android:identity:mapReleaseSourceSetPaths
+> Task :android:identity:compileReleaseLibraryResources
+> Task :android:model-store:mapReleaseSourceSetPaths
+> Task :android:model-store:compileReleaseLibraryResources
+> Task :android:multimodal:mapReleaseSourceSetPaths
+> Task :android:multimodal:compileReleaseLibraryResources
+> Task :android:sdk-core:mapReleaseSourceSetPaths UP-TO-DATE
+> Task :android:sdk-core:compileReleaseLibraryResources UP-TO-DATE
+> Task :android:speech:mapReleaseSourceSetPaths UP-TO-DATE
+> Task :android:speech:compileReleaseLibraryResources UP-TO-DATE
+> Task :android:video:mapReleaseSourceSetPaths UP-TO-DATE
+> Task :android:video:compileReleaseLibraryResources UP-TO-DATE
+> Task :android:backend-mlkit:compileReleaseKotlin
+> Task :android:backend-mlkit:compileReleaseJavaWithJavac NO-SOURCE
+> Task :android:backend-mlkit:writeReleaseAarMetadata
+> Task :android:backend-mlkit:bundleLibCompileToJarRelease
+> Task :android:backend-mlkit:bundleLibRuntimeToDirRelease
+> Task :android:backend-sherpa-asr:writeReleaseAarMetadata UP-TO-DATE
+> Task :android:backend-system-asr:writeReleaseAarMetadata UP-TO-DATE
+> Task :android:backend-system-tts:writeReleaseAarMetadata UP-TO-DATE
+> Task :android:face:writeReleaseAarMetadata UP-TO-DATE
+> Task :android:identity:writeReleaseAarMetadata UP-TO-DATE
+> Task :android:model-store:writeReleaseAarMetadata UP-TO-DATE
+> Task :android:multimodal:writeReleaseAarMetadata UP-TO-DATE
+> Task :android:sdk-core:writeReleaseAarMetadata UP-TO-DATE
+> Task :android:speech:writeReleaseAarMetadata UP-TO-DATE
+> Task :android:video:writeReleaseAarMetadata UP-TO-DATE
+> Task :demo:androidApp:checkReleaseAarMetadata
+> Task :demo:androidApp:mapReleaseSourceSetPaths
+> Task :demo:androidApp:compileReleaseNavigationResources
+> Task :demo:androidApp:mergeReleaseResources
+> Task :demo:androidApp:createReleaseCompatibleScreenManifests
+> Task :android:backend-mlkit:extractDeepLinksRelease
+> Task :android:backend-mlkit:processReleaseManifest
+> Task :android:backend-sherpa-asr:extractDeepLinksRelease
+> Task :android:backend-sherpa-asr:processReleaseManifest UP-TO-DATE
+> Task :android:backend-system-asr:extractDeepLinksRelease
+> Task :android:backend-system-asr:processReleaseManifest UP-TO-DATE
+> Task :android:backend-system-tts:extractDeepLinksRelease
+> Task :android:backend-system-tts:processReleaseManifest UP-TO-DATE
+> Task :android:face:extractDeepLinksRelease
+> Task :android:face:processReleaseManifest
+> Task :android:identity:extractDeepLinksRelease
+> Task :android:identity:processReleaseManifest UP-TO-DATE
+> Task :android:model-store:extractDeepLinksRelease
+> Task :android:model-store:processReleaseManifest
+> Task :android:multimodal:extractDeepLinksRelease
+> Task :android:multimodal:processReleaseManifest
+> Task :android:sdk-core:extractDeepLinksRelease
+> Task :android:sdk-core:processReleaseManifest UP-TO-DATE
+> Task :android:speech:extractDeepLinksRelease
+> Task :android:speech:processReleaseManifest UP-TO-DATE
+> Task :android:video:extractDeepLinksRelease
+> Task :android:video:processReleaseManifest
+> Task :demo:androidApp:extractDeepLinksRelease
+> Task :demo:androidApp:processReleaseMainManifest
+> Task :demo:androidApp:processReleaseManifest
+> Task :demo:androidApp:processReleaseManifestForPackage
+> Task :demo:androidApp:processReleaseResources
+> Task :demo:androidApp:desugarReleaseFileDependencies
+> Task :demo:androidApp:mergeReleaseStartupProfile
+
+> Task :demo:androidApp:compileReleaseKotlin
+w: file:///Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/demo/androidApp/src/main/kotlin/io/ondeviceai/demo/MainActivity.kt:306:185 'fun setTargetResolution(p0: Size): ImageAnalysis.Builder' is deprecated. Deprecated in Java.
+w: file:///Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/demo/androidApp/src/main/kotlin/io/ondeviceai/demo/MainActivity.kt:341:54 This is a delicate API and its use requires care. Make sure you fully read and understand documentation of the declaration that is marked as a delicate API.
+
+> Task :demo:androidApp:compileReleaseJavaWithJavac
+> Task :demo:androidApp:dexBuilderRelease
+> Task :kmp-binding:prepareAndroidMainArtProfile
+> Task :android:backend-mlkit:prepareReleaseArtProfile
+> Task :android:backend-sherpa-asr:prepareReleaseArtProfile UP-TO-DATE
+> Task :android:backend-system-asr:prepareReleaseArtProfile UP-TO-DATE
+> Task :android:backend-system-tts:prepareReleaseArtProfile UP-TO-DATE
+> Task :android:face:prepareReleaseArtProfile
+> Task :android:identity:prepareReleaseArtProfile UP-TO-DATE
+> Task :android:model-store:prepareReleaseArtProfile
+> Task :android:multimodal:prepareReleaseArtProfile
+> Task :android:sdk-core:prepareReleaseArtProfile UP-TO-DATE
+> Task :android:speech:prepareReleaseArtProfile UP-TO-DATE
+> Task :android:video:prepareReleaseArtProfile
+> Task :demo:shared:prepareAndroidMainArtProfile
+> Task :demo:androidApp:mergeReleaseArtProfile
+> Task :android:backend-sherpa-asr:bundleLibRuntimeToJarRelease
+> Task :demo:androidApp:mergeExtDexRelease
+> Task :android:identity:bundleLibRuntimeToJarRelease
+> Task :android:video:bundleLibRuntimeToJarRelease
+> Task :android:backend-mlkit:bundleLibRuntimeToJarRelease
+> Task :demo:androidApp:mergeDexRelease
+> Task :android:backend-system-tts:bundleLibRuntimeToJarRelease
+> Task :android:backend-system-asr:bundleLibRuntimeToJarRelease
+> Task :android:speech:bundleLibRuntimeToJarRelease
+> Task :android:model-store:bundleLibRuntimeToJarRelease
+> Task :android:face:bundleLibRuntimeToJarRelease
+> Task :android:multimodal:bundleLibRuntimeToJarRelease
+> Task :android:sdk-core:bundleLibRuntimeToJarRelease
+> Task :android:backend-mlkit:generateReleaseAssets UP-TO-DATE
+> Task :android:backend-mlkit:mergeReleaseAssets
+> Task :android:backend-sherpa-asr:generateReleaseAssets UP-TO-DATE
+> Task :demo:androidApp:mergeReleaseGlobalSynthetics
+> Task :android:backend-sherpa-asr:mergeReleaseAssets UP-TO-DATE
+> Task :android:backend-system-asr:generateReleaseAssets UP-TO-DATE
+> Task :android:backend-system-asr:mergeReleaseAssets UP-TO-DATE
+> Task :android:backend-system-tts:generateReleaseAssets UP-TO-DATE
+> Task :android:backend-system-tts:mergeReleaseAssets UP-TO-DATE
+> Task :android:face:generateReleaseAssets UP-TO-DATE
+> Task :android:face:mergeReleaseAssets
+> Task :android:identity:generateReleaseAssets UP-TO-DATE
+> Task :android:identity:mergeReleaseAssets UP-TO-DATE
+> Task :android:model-store:generateReleaseAssets UP-TO-DATE
+> Task :android:model-store:mergeReleaseAssets
+> Task :android:multimodal:generateReleaseAssets UP-TO-DATE
+> Task :android:multimodal:mergeReleaseAssets
+> Task :android:sdk-core:generateReleaseAssets UP-TO-DATE
+> Task :android:sdk-core:mergeReleaseAssets UP-TO-DATE
+> Task :android:speech:generateReleaseAssets UP-TO-DATE
+> Task :android:speech:mergeReleaseAssets UP-TO-DATE
+> Task :android:video:generateReleaseAssets UP-TO-DATE
+> Task :android:video:mergeReleaseAssets
+> Task :demo:androidApp:generateReleaseAssets UP-TO-DATE
+> Task :demo:androidApp:mergeReleaseAssets
+> Task :demo:androidApp:compileReleaseArtProfile
+> Task :demo:androidApp:extractReleaseVersionControlInfo
+> Task :kmp-binding:prepareLintJarForPublish UP-TO-DATE
+> Task :android:backend-mlkit:extractProguardFiles UP-TO-DATE
+> Task :android:face:processReleaseJavaRes
+> Task :android:face:createFullJarRelease
+> Task :android:face:extractProguardFiles UP-TO-DATE
+> Task :android:sdk-core:processReleaseJavaRes UP-TO-DATE
+> Task :android:sdk-core:createFullJarRelease
+> Task :android:sdk-core:extractProguardFiles UP-TO-DATE
+> Task :android:sdk-core:generateReleaseLintModel
+> Task :android:sdk-core:prepareLintJarForPublish UP-TO-DATE
+> Task :android:face:generateReleaseLintModel
+> Task :android:face:prepareLintJarForPublish UP-TO-DATE
+> Task :android:backend-mlkit:generateReleaseLintVitalModel
+> Task :android:face:checkReleaseAarMetadata
+> Task :android:face:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:face:copyReleaseJniLibsProjectAndLocalJars
+> Task :android:face:extractDeepLinksForAarRelease
+> Task :android:face:extractReleaseAnnotations
+> Task :android:face:mergeReleaseGeneratedProguardFiles
+> Task :android:face:mergeReleaseConsumerProguardFiles
+> Task :android:face:mergeReleaseJavaResource
+> Task :android:face:syncReleaseLibJars
+> Task :android:face:bundleReleaseLocalLintAar
+> Task :android:sdk-core:checkReleaseAarMetadata UP-TO-DATE
+> Task :android:sdk-core:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:sdk-core:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :android:sdk-core:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :android:sdk-core:extractReleaseAnnotations UP-TO-DATE
+> Task :android:sdk-core:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :android:sdk-core:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :android:sdk-core:mergeReleaseJavaResource UP-TO-DATE
+> Task :android:sdk-core:syncReleaseLibJars UP-TO-DATE
+> Task :android:sdk-core:bundleReleaseLocalLintAar
+> Task :android:face:writeReleaseLintModelMetadata
+> Task :android:sdk-core:writeReleaseLintModelMetadata
+> Task :android:backend-mlkit:lintVitalAnalyzeRelease
+> Task :android:backend-mlkit:prepareLintJarForPublish UP-TO-DATE
+> Task :android:backend-sherpa-asr:extractProguardFiles UP-TO-DATE
+> Task :android:speech:processReleaseJavaRes UP-TO-DATE
+> Task :android:speech:createFullJarRelease
+> Task :android:speech:extractProguardFiles UP-TO-DATE
+> Task :android:speech:generateReleaseLintModel
+> Task :android:speech:prepareLintJarForPublish UP-TO-DATE
+> Task :android:backend-sherpa-asr:generateReleaseLintVitalModel
+> Task :android:speech:checkReleaseAarMetadata UP-TO-DATE
+> Task :android:speech:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:speech:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :android:speech:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :android:speech:extractReleaseAnnotations UP-TO-DATE
+> Task :android:speech:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :android:speech:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :android:speech:mergeReleaseJavaResource UP-TO-DATE
+> Task :android:speech:syncReleaseLibJars UP-TO-DATE
+> Task :android:speech:bundleReleaseLocalLintAar
+> Task :android:speech:writeReleaseLintModelMetadata
+> Task :android:backend-sherpa-asr:lintVitalAnalyzeRelease
+> Task :android:backend-system-asr:extractProguardFiles UP-TO-DATE
+> Task :android:backend-system-asr:generateReleaseLintVitalModel
+> Task :android:backend-system-asr:lintVitalAnalyzeRelease
+> Task :android:backend-system-asr:prepareLintJarForPublish UP-TO-DATE
+> Task :android:backend-system-tts:extractProguardFiles UP-TO-DATE
+> Task :android:backend-system-tts:generateReleaseLintVitalModel
+> Task :android:backend-system-tts:lintVitalAnalyzeRelease
+> Task :android:backend-system-tts:prepareLintJarForPublish UP-TO-DATE
+> Task :android:face:generateReleaseLintVitalModel
+> Task :android:face:lintVitalAnalyzeRelease
+> Task :android:identity:extractProguardFiles UP-TO-DATE
+> Task :android:model-store:processReleaseJavaRes
+> Task :android:model-store:createFullJarRelease
+> Task :android:model-store:extractProguardFiles UP-TO-DATE
+> Task :android:model-store:generateReleaseLintModel
+> Task :android:model-store:prepareLintJarForPublish UP-TO-DATE
+> Task :android:identity:generateReleaseLintVitalModel
+> Task :android:model-store:checkReleaseAarMetadata
+> Task :android:model-store:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:model-store:copyReleaseJniLibsProjectAndLocalJars
+> Task :android:model-store:extractDeepLinksForAarRelease
+> Task :android:model-store:extractReleaseAnnotations
+> Task :android:model-store:mergeReleaseGeneratedProguardFiles
+> Task :android:model-store:mergeReleaseConsumerProguardFiles
+> Task :android:model-store:mergeReleaseJavaResource
+> Task :android:model-store:syncReleaseLibJars
+> Task :android:model-store:bundleReleaseLocalLintAar
+> Task :android:model-store:writeReleaseLintModelMetadata
+> Task :demo:androidApp:compressReleaseAssets
+> Task :android:identity:prepareLintJarForPublish UP-TO-DATE
+> Task :android:model-store:generateReleaseLintVitalModel
+> Task :android:model-store:lintVitalAnalyzeRelease
+> Task :android:multimodal:extractProguardFiles UP-TO-DATE
+> Task :android:multimodal:generateReleaseLintVitalModel
+> Task :android:identity:lintVitalAnalyzeRelease
+> Task :android:multimodal:prepareLintJarForPublish UP-TO-DATE
+> Task :android:sdk-core:generateReleaseLintVitalModel
+> Task :android:sdk-core:lintVitalAnalyzeRelease
+> Task :android:speech:generateReleaseLintVitalModel
+> Task :android:multimodal:lintVitalAnalyzeRelease
+> Task :android:video:extractProguardFiles UP-TO-DATE
+> Task :android:video:generateReleaseLintVitalModel
+> Task :android:speech:lintVitalAnalyzeRelease
+> Task :android:video:prepareLintJarForPublish UP-TO-DATE
+> Task :kmp-binding:createFullJarAndroidMain UP-TO-DATE
+> Task :android:backend-mlkit:processReleaseJavaRes
+> Task :android:backend-mlkit:createFullJarRelease
+> Task :android:backend-mlkit:generateReleaseLintModel
+> Task :android:backend-sherpa-asr:processReleaseJavaRes UP-TO-DATE
+> Task :android:backend-sherpa-asr:createFullJarRelease
+> Task :android:backend-sherpa-asr:generateReleaseLintModel
+> Task :android:backend-system-asr:processReleaseJavaRes UP-TO-DATE
+> Task :android:backend-system-asr:createFullJarRelease
+> Task :android:backend-system-asr:generateReleaseLintModel
+> Task :android:backend-system-tts:processReleaseJavaRes UP-TO-DATE
+> Task :android:backend-system-tts:createFullJarRelease
+> Task :android:backend-system-tts:generateReleaseLintModel
+> Task :android:identity:processReleaseJavaRes UP-TO-DATE
+> Task :android:identity:createFullJarRelease
+> Task :android:identity:generateReleaseLintModel
+> Task :android:multimodal:processReleaseJavaRes
+> Task :android:multimodal:createFullJarRelease
+> Task :android:multimodal:generateReleaseLintModel
+> Task :android:video:processReleaseJavaRes
+> Task :android:video:createFullJarRelease
+> Task :android:video:generateReleaseLintModel
+> Task :demo:androidApp:extractProguardFiles UP-TO-DATE
+> Task :demo:shared:createFullJarAndroidMain UP-TO-DATE
+> Task :demo:shared:prepareLintJarForPublish UP-TO-DATE
+> Task :android:video:lintVitalAnalyzeRelease
+> Task :demo:androidApp:generateReleaseLintVitalReportModel
+> Task :android:backend-sherpa-asr:checkReleaseAarMetadata UP-TO-DATE
+> Task :android:backend-sherpa-asr:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:backend-sherpa-asr:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :android:backend-sherpa-asr:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :android:backend-sherpa-asr:extractReleaseAnnotations UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :android:backend-sherpa-asr:mergeReleaseJavaResource UP-TO-DATE
+> Task :android:backend-sherpa-asr:syncReleaseLibJars UP-TO-DATE
+> Task :android:backend-sherpa-asr:bundleReleaseLocalLintAar
+> Task :demo:shared:checkAndroidMainAarMetadata UP-TO-DATE
+> Task :demo:shared:extractAndroidMainAnnotations UP-TO-DATE
+> Task :demo:shared:mergeAndroidMainJavaResource UP-TO-DATE
+> Task :demo:shared:syncAndroidMainLibJars UP-TO-DATE
+> Task :demo:shared:bundleAndroidMainLocalLintAar UP-TO-DATE
+> Task :kmp-binding:checkAndroidMainAarMetadata UP-TO-DATE
+> Task :kmp-binding:extractAndroidMainAnnotations UP-TO-DATE
+> Task :kmp-binding:mergeAndroidMainJavaResource UP-TO-DATE
+> Task :kmp-binding:syncAndroidMainLibJars UP-TO-DATE
+> Task :kmp-binding:bundleAndroidMainLocalLintAar UP-TO-DATE
+> Task :android:identity:checkReleaseAarMetadata UP-TO-DATE
+> Task :android:identity:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:identity:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :android:identity:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :android:identity:extractReleaseAnnotations UP-TO-DATE
+> Task :android:identity:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :android:identity:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :android:identity:mergeReleaseJavaResource UP-TO-DATE
+> Task :android:identity:syncReleaseLibJars UP-TO-DATE
+> Task :android:identity:bundleReleaseLocalLintAar
+> Task :android:video:checkReleaseAarMetadata
+> Task :android:video:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:video:copyReleaseJniLibsProjectAndLocalJars
+> Task :android:video:extractDeepLinksForAarRelease
+> Task :android:video:extractReleaseAnnotations
+> Task :android:video:mergeReleaseGeneratedProguardFiles
+> Task :android:video:mergeReleaseConsumerProguardFiles
+> Task :android:video:mergeReleaseJavaResource
+> Task :android:backend-mlkit:checkReleaseAarMetadata
+> Task :android:video:syncReleaseLibJars
+> Task :android:video:bundleReleaseLocalLintAar
+> Task :android:backend-mlkit:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:backend-mlkit:copyReleaseJniLibsProjectAndLocalJars
+> Task :android:backend-mlkit:extractDeepLinksForAarRelease
+> Task :android:backend-mlkit:extractReleaseAnnotations
+> Task :android:backend-mlkit:mergeReleaseGeneratedProguardFiles
+> Task :android:backend-mlkit:mergeReleaseConsumerProguardFiles
+> Task :android:backend-system-tts:checkReleaseAarMetadata UP-TO-DATE
+> Task :android:backend-system-tts:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:backend-mlkit:mergeReleaseJavaResource
+> Task :android:backend-system-tts:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :android:backend-mlkit:syncReleaseLibJars
+> Task :android:backend-mlkit:bundleReleaseLocalLintAar
+> Task :android:backend-system-tts:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :android:backend-system-tts:extractReleaseAnnotations UP-TO-DATE
+> Task :android:backend-system-tts:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :android:backend-system-tts:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :android:backend-system-tts:mergeReleaseJavaResource UP-TO-DATE
+> Task :android:backend-system-tts:syncReleaseLibJars UP-TO-DATE
+> Task :android:backend-system-tts:bundleReleaseLocalLintAar
+> Task :android:backend-system-asr:checkReleaseAarMetadata UP-TO-DATE
+> Task :android:backend-system-asr:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:backend-system-asr:copyReleaseJniLibsProjectAndLocalJars UP-TO-DATE
+> Task :android:backend-system-asr:extractDeepLinksForAarRelease UP-TO-DATE
+> Task :android:backend-system-asr:extractReleaseAnnotations UP-TO-DATE
+> Task :android:backend-system-asr:mergeReleaseGeneratedProguardFiles UP-TO-DATE
+> Task :android:backend-system-asr:mergeReleaseConsumerProguardFiles UP-TO-DATE
+> Task :android:backend-system-asr:mergeReleaseJavaResource UP-TO-DATE
+> Task :android:backend-system-asr:syncReleaseLibJars UP-TO-DATE
+> Task :android:backend-system-asr:bundleReleaseLocalLintAar
+> Task :android:multimodal:checkReleaseAarMetadata
+> Task :android:multimodal:stripReleaseDebugSymbols NO-SOURCE
+> Task :android:multimodal:copyReleaseJniLibsProjectAndLocalJars
+> Task :android:multimodal:extractDeepLinksForAarRelease
+> Task :android:multimodal:extractReleaseAnnotations
+> Task :android:multimodal:mergeReleaseGeneratedProguardFiles
+> Task :android:multimodal:mergeReleaseConsumerProguardFiles
+> Task :android:backend-mlkit:writeReleaseLintModelMetadata
+> Task :android:multimodal:mergeReleaseJavaResource
+> Task :android:backend-sherpa-asr:writeReleaseLintModelMetadata
+> Task :android:multimodal:syncReleaseLibJars
+> Task :android:multimodal:bundleReleaseLocalLintAar
+> Task :android:backend-system-asr:writeReleaseLintModelMetadata
+> Task :android:backend-system-tts:writeReleaseLintModelMetadata
+> Task :android:identity:writeReleaseLintModelMetadata
+> Task :android:multimodal:writeReleaseLintModelMetadata
+> Task :android:video:writeReleaseLintModelMetadata
+> Task :demo:androidApp:processReleaseJavaRes
+> Task :demo:androidApp:mergeReleaseJavaResource
+> Task :demo:androidApp:optimizeReleaseResources
+> Task :demo:androidApp:collectReleaseDependencies
+> Task :demo:androidApp:sdkReleaseDependencyData
+> Task :demo:androidApp:writeReleaseAppMetadata
+> Task :demo:androidApp:writeReleaseSigningConfigVersions
+> Task :demo:androidApp:lintVitalAnalyzeRelease
+> Task :demo:androidApp:lintVitalReportRelease
+> Task :demo:androidApp:lintVitalRelease
+> Task :demo:androidApp:packageRelease
+> Task :demo:androidApp:createReleaseApkListingFileRedirect
+> Task :demo:androidApp:assembleRelease
+
+[Incubating] Problems report is available at: file:///Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 37s
+739 actionable tasks: 261 executed, 478 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html
+]9;4;0

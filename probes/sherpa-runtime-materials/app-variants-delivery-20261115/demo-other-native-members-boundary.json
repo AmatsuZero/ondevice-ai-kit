@@ -1,0 +1,176 @@
+[
+  {
+    "apk": "androidApp-debug.apk",
+    "extraMemberCount": 16,
+    "allExtraMembersByteEqualToHistoricalDemo": true,
+    "extras": [
+      {
+        "member": "lib/arm64-v8a/libandroidx.graphics.path.so",
+        "bytes": 10096,
+        "sha256": "41e9a793c43a0f4fddb19e33f346bace464f30f888ba7b9eaf96294ea115bfb6"
+      },
+      {
+        "member": "lib/arm64-v8a/libface_detector_v2_jni.so",
+        "bytes": 8520960,
+        "sha256": "d2d105239f5c723838a6bea81ee9cf828b8a56b4de4bc1f4a2556b320d758851"
+      },
+      {
+        "member": "lib/arm64-v8a/libimage_processing_util_jni.so",
+        "bytes": 32544,
+        "sha256": "f0e4611db0d6b68942d8ba6977519f3dd1cdbffa87b7fc16d8006696ba954af4"
+      },
+      {
+        "member": "lib/arm64-v8a/libsurface_util_jni.so",
+        "bytes": 4896,
+        "sha256": "6cb2eac3c68e6a82ce2a5ea5aba86749eb8c609914392e125f6cdfbc208992f8"
+      },
+      {
+        "member": "lib/armeabi-v7a/libandroidx.graphics.path.so",
+        "bytes": 7252,
+        "sha256": "41399eba6fc2a60f6f14642375c1824f3cf25eb8fec7397d753730a3ceda3e2b"
+      },
+      {
+        "member": "lib/armeabi-v7a/libface_detector_v2_jni.so",
+        "bytes": 5388224,
+        "sha256": "21e48bd253e1c87edee42bce9a51048ac3082d681446d0d05a79c4ad0f5e187b"
+      },
+      {
+        "member": "lib/armeabi-v7a/libimage_processing_util_jni.so",
+        "bytes": 24448,
+        "sha256": "7467e79ba28f412ce46f24dfae5a0479e0bd20b94d834963d1ac4fdb19e406c1"
+      },
+      {
+        "member": "lib/armeabi-v7a/libsurface_util_jni.so",
+        "bytes": 3460,
+        "sha256": "ee762c748052666a20c3cffbffb8acef9a405b873d13fb1479cef63fff7aaea0"
+      },
+      {
+        "member": "lib/x86/libandroidx.graphics.path.so",
+        "bytes": 9284,
+        "sha256": "eb0570b41fd3bff25d8204a967c03bd7550719e768b791f680cc40cbe35f29af"
+      },
+      {
+        "member": "lib/x86/libface_detector_v2_jni.so",
+        "bytes": 9658172,
+        "sha256": "8f00013284c6f5abf8cf0e978570039dd9e54c66774aabc99ff28cb6856a4ef8"
+      },
+      {
+        "member": "lib/x86/libimage_processing_util_jni.so",
+        "bytes": 41276,
+        "sha256": "c7164d82c027179a1c7448b9805a555769a2c6789709bb8fbc29311e4d0437e3"
+      },
+      {
+        "member": "lib/x86/libsurface_util_jni.so",
+        "bytes": 3812,
+        "sha256": "516fc48059f0b1064057eaaf0c9916e28610dec07b73839ab345bc9feee9a598"
+      },
+      {
+        "member": "lib/x86_64/libandroidx.graphics.path.so",
+        "bytes": 10760,
+        "sha256": "4e56c996f13670e70082658de7880c4020eabf4f25e43387f88ed78a713fc9f0"
+      },
+      {
+        "member": "lib/x86_64/libface_detector_v2_jni.so",
+        "bytes": 9685400,
+        "sha256": "bd2a0761c113a5285aff5591cc9a516fce8b351175151ba2e0390b2bfe64d8fe"
+      },
+      {
+        "member": "lib/x86_64/libimage_processing_util_jni.so",
+        "bytes": 49496,
+        "sha256": "f5d02c9c50c33a45c2125f63f4d6c954aec0e9b1a6ade25074f146ed92264efe"
+      },
+      {
+        "member": "lib/x86_64/libsurface_util_jni.so",
+        "bytes": 4912,
+        "sha256": "84d8ca201f2160b2ca3a5bd2886994f7287ee7cd09fe73b081f5b236dda8496d"
+      }
+    ]
+  },
+  {
+    "apk": "androidApp-release-unsigned.apk",
+    "extraMemberCount": 16,
+    "allExtraMembersByteEqualToHistoricalDemo": true,
+    "extras": [
+      {
+        "member": "lib/arm64-v8a/libandroidx.graphics.path.so",
+        "bytes": 10096,
+        "sha256": "41e9a793c43a0f4fddb19e33f346bace464f30f888ba7b9eaf96294ea115bfb6"
+      },
+      {
+        "member": "lib/arm64-v8a/libface_detector_v2_jni.so",
+        "bytes": 8520960,
+        "sha256": "d2d105239f5c723838a6bea81ee9cf828b8a56b4de4bc1f4a2556b320d758851"
+      },
+      {
+        "member": "lib/arm64-v8a/libimage_processing_util_jni.so",
+        "bytes": 32544,
+        "sha256": "f0e4611db0d6b68942d8ba6977519f3dd1cdbffa87b7fc16d8006696ba954af4"
+      },
+      {
+        "member": "lib/arm64-v8a/libsurface_util_jni.so",
+        "bytes": 4896,
+        "sha256": "6cb2eac3c68e6a82ce2a5ea5aba86749eb8c609914392e125f6cdfbc208992f8"
+      },
+      {
+        "member": "lib/armeabi-v7a/libandroidx.graphics.path.so",
+        "bytes": 7252,
+        "sha256": "41399eba6fc2a60f6f14642375c1824f3cf25eb8fec7397d753730a3ceda3e2b"
+      },
+      {
+        "member": "lib/armeabi-v7a/libface_detector_v2_jni.so",
+        "bytes": 5388224,
+        "sha256": "21e48bd253e1c87edee42bce9a51048ac3082d681446d0d05a79c4ad0f5e187b"
+      },
+      {
+        "member": "lib/armeabi-v7a/libimage_processing_util_jni.so",
+        "bytes": 24448,
+        "sha256": "7467e79ba28f412ce46f24dfae5a0479e0bd20b94d834963d1ac4fdb19e406c1"
+      },
+      {
+        "member": "lib/armeabi-v7a/libsurface_util_jni.so",
+        "bytes": 3460,
+        "sha256": "ee762c748052666a20c3cffbffb8acef9a405b873d13fb1479cef63fff7aaea0"
+      },
+      {
+        "member": "lib/x86/libandroidx.graphics.path.so",
+        "bytes": 9284,
+        "sha256": "eb0570b41fd3bff25d8204a967c03bd7550719e768b791f680cc40cbe35f29af"
+      },
+      {
+        "member": "lib/x86/libface_detector_v2_jni.so",
+        "bytes": 9658172,
+        "sha256": "8f00013284c6f5abf8cf0e978570039dd9e54c66774aabc99ff28cb6856a4ef8"
+      },
+      {
+        "member": "lib/x86/libimage_processing_util_jni.so",
+        "bytes": 41276,
+        "sha256": "c7164d82c027179a1c7448b9805a555769a2c6789709bb8fbc29311e4d0437e3"
+      },
+      {
+        "member": "lib/x86/libsurface_util_jni.so",
+        "bytes": 3812,
+        "sha256": "516fc48059f0b1064057eaaf0c9916e28610dec07b73839ab345bc9feee9a598"
+      },
+      {
+        "member": "lib/x86_64/libandroidx.graphics.path.so",
+        "bytes": 10760,
+        "sha256": "4e56c996f13670e70082658de7880c4020eabf4f25e43387f88ed78a713fc9f0"
+      },
+      {
+        "member": "lib/x86_64/libface_detector_v2_jni.so",
+        "bytes": 9685400,
+        "sha256": "bd2a0761c113a5285aff5591cc9a516fce8b351175151ba2e0390b2bfe64d8fe"
+      },
+      {
+        "member": "lib/x86_64/libimage_processing_util_jni.so",
+        "bytes": 49496,
+        "sha256": "f5d02c9c50c33a45c2125f63f4d6c954aec0e9b1a6ade25074f146ed92264efe"
+      },
+      {
+        "member": "lib/x86_64/libsurface_util_jni.so",
+        "bytes": 4912,
+        "sha256": "84d8ca201f2160b2ca3a5bd2886994f7287ee7cd09fe73b081f5b236dda8496d"
+      }
+    ]
+  }
+]

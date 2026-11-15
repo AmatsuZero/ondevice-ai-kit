@@ -1,3 +1,7 @@
+## W3真实Demo原生库全集不等于ASR运行时集合（2026-11-15）
+
+当前父checker首断言把真实Demo所有SO当固定Sherpa/ORT16库，实际Demo有32：16ASR和16既有graphics.path/face_detector/image_processing/surface_util（各四ABI）。历史原Demo已含后16，两个新Demo Debug/Release extras与历史逐字节相同；最小独立消费者才恰有16ASR。有效恢复是保留原checker/失败，显式核16ASR精确子集及16历史extras边界，不删库、不改产品/依赖、不放宽ASR字节门或重建。真实Demo的project依赖、独立Maven消费及Release未签名状态分别报告；ASR通知保留不能覆盖全Demo许可/组成。证据`.omx/artifacts/w3-app-variants-20261115T145000Z/`及`probes/sherpa-runtime-materials/app-variants-delivery-20261115/`。helper README误称小材料目录含APK、状态修正漏最终native保留缺口和无关词已拒收，由新小修正文稿精确修正；APK仅留本地ignored artifacts，不能由文稿位置误述把二进制纳Git或缩减P2门。
+
 ## W3 InfoZIP串接按archive顺序而非请求参数排序（2026-11-15）
 
 新68通知全部逐文件hash通过，首跨工具checker仍断言失败；原脚本将请求名sorted后拼Python payload，而`unzip -p archive <names...>`实测按归档成员顺序输出。独立诊断两侧均770479B，unzip与archive-order完全相同、与sorted不同。有效恢复只改checker为已核archive清单顺序，保留初脚本/失败JSON，不重建产物、不改通知或削弱逐文件校验；随后两AAR/独立APK清单和payload全同。十个负例为notice-only ZIP、同一校验器拒删除/同长改单字节，不能写成修改签名APK或设备执行。证据`.omx/artifacts/w3-ndk-notice-integration-20261115T143311Z/`及`probes/sherpa-runtime-materials/ndk-notice-integration-20261115/`。这只核技术保留，不证明全部native组成或法律发布接受。

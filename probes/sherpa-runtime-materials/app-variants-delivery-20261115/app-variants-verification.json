@@ -1,0 +1,204 @@
+{
+  "sourceHEAD": "fbf059f41527769129ba635e9511d297d3e5ede7",
+  "artifacts": [
+    {
+      "kind": "demo",
+      "variant": "debug",
+      "path": "artifacts/verification/w3-app-variants-20261115/androidApp-debug.apk",
+      "bytes": 244934281,
+      "sha256": "85aff749d85257b4e9368b618b4fa22ab0b0d47ff2d429a5aa7e2aa087ba6688",
+      "noticeAssets": 68,
+      "noticeBytes": 770479,
+      "modelAssets": 7,
+      "originalModelAndLicenseBytesPreserved": true,
+      "ASRNativeLibraries": 16,
+      "totalNativeLibraries": 32,
+      "otherNativeLibraries": 16,
+      "otherNativeMembersEqualHistoricalDemo": true,
+      "ABIs": [
+        "arm64-v8a",
+        "armeabi-v7a",
+        "x86",
+        "x86_64"
+      ],
+      "fullOrderedArchiveListingEqual": true,
+      "selectedASRAssetAndNativePayloadByteEqual": true,
+      "selectedPayload": {
+        "bytes": 264653112,
+        "sha256": "5f5cc9e16a68fdc60253b5411dbb8627ee808f5c940b2e0d3e16631691daa464"
+      },
+      "dexClassCoverage": {
+        "runtimeClasses": 124,
+        "backendClasses": 18,
+        "demoFactoryPresent": true,
+        "method": "defined class-name presence only; not semantic/bytecode equivalence",
+        "toolExitCode": 0,
+        "elapsedSeconds": 1.751,
+        "stdout": {
+          "bytes": 26585214,
+          "sha256": "63a48f54ba6b7f448229ac19050e13acc391fcab784f90b4f496928bcb81f45a"
+        }
+      }
+    },
+    {
+      "kind": "demo",
+      "variant": "release",
+      "path": "artifacts/verification/w3-app-variants-20261115/androidApp-release-unsigned.apk",
+      "bytes": 236322599,
+      "sha256": "43b2c5b9e4beebe1712747bf0943dbbcdcfb742f34d18800ea413b265f9010e1",
+      "noticeAssets": 68,
+      "noticeBytes": 770479,
+      "modelAssets": 7,
+      "originalModelAndLicenseBytesPreserved": true,
+      "ASRNativeLibraries": 16,
+      "totalNativeLibraries": 32,
+      "otherNativeLibraries": 16,
+      "otherNativeMembersEqualHistoricalDemo": true,
+      "ABIs": [
+        "arm64-v8a",
+        "armeabi-v7a",
+        "x86",
+        "x86_64"
+      ],
+      "fullOrderedArchiveListingEqual": true,
+      "selectedASRAssetAndNativePayloadByteEqual": true,
+      "selectedPayload": {
+        "bytes": 264653112,
+        "sha256": "7624d9724600363552d1a22249b4cb94c775d5718cf451959b0a98d8cd9ec24c"
+      },
+      "dexClassCoverage": {
+        "runtimeClasses": 124,
+        "backendClasses": 18,
+        "demoFactoryPresent": true,
+        "method": "defined class-name presence only; not semantic/bytecode equivalence",
+        "toolExitCode": 0,
+        "elapsedSeconds": 1.472,
+        "stdout": {
+          "bytes": 26577052,
+          "sha256": "b2e2b8483afad8fcbe9cc001b0b5c14535ee78f7f5684357f5a9538566f7263f"
+        }
+      }
+    },
+    {
+      "kind": "independent-consumer",
+      "variant": "debug",
+      "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-debug.apk",
+      "bytes": 128102798,
+      "sha256": "33c3fdab3ac862f7b7645c5ff7c1820c7a5da806718a4317ff7b25ff43145edc",
+      "noticeAssets": 68,
+      "noticeBytes": 770479,
+      "modelAssets": 0,
+      "originalModelAndLicenseBytesPreserved": false,
+      "ASRNativeLibraries": 16,
+      "totalNativeLibraries": 16,
+      "otherNativeLibraries": 0,
+      "otherNativeMembersEqualHistoricalDemo": false,
+      "ABIs": [
+        "arm64-v8a",
+        "armeabi-v7a",
+        "x86",
+        "x86_64"
+      ],
+      "fullOrderedArchiveListingEqual": true,
+      "selectedASRAssetAndNativePayloadByteEqual": true,
+      "selectedPayload": {
+        "bytes": 126930867,
+        "sha256": "6d807d19aa80bd9d3cf929b36961cab5ecde54682024ed18d67755b81bc8729e"
+      },
+      "dexClassCoverage": {
+        "runtimeClasses": 124,
+        "backendClasses": 18,
+        "demoFactoryPresent": false,
+        "method": "defined class-name presence only; not semantic/bytecode equivalence",
+        "toolExitCode": 0,
+        "elapsedSeconds": 0.564,
+        "stdout": {
+          "bytes": 2456268,
+          "sha256": "80d42a9bf5a8a4e599f517f5b229128081491d80b4ba1c66a56884fe1fdf0323"
+        }
+      }
+    },
+    {
+      "kind": "independent-consumer",
+      "variant": "release",
+      "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-release-unsigned.apk",
+      "bytes": 127673445,
+      "sha256": "affc7579eec2d2e61b7b4b7ec8e798f91f5183aed8549dabf0d7c4f09582608e",
+      "noticeAssets": 68,
+      "noticeBytes": 770479,
+      "modelAssets": 0,
+      "originalModelAndLicenseBytesPreserved": false,
+      "ASRNativeLibraries": 16,
+      "totalNativeLibraries": 16,
+      "otherNativeLibraries": 0,
+      "otherNativeMembersEqualHistoricalDemo": false,
+      "ABIs": [
+        "arm64-v8a",
+        "armeabi-v7a",
+        "x86",
+        "x86_64"
+      ],
+      "fullOrderedArchiveListingEqual": true,
+      "selectedASRAssetAndNativePayloadByteEqual": true,
+      "selectedPayload": {
+        "bytes": 126930867,
+        "sha256": "6d807d19aa80bd9d3cf929b36961cab5ecde54682024ed18d67755b81bc8729e"
+      },
+      "dexClassCoverage": {
+        "runtimeClasses": 124,
+        "backendClasses": 18,
+        "demoFactoryPresent": false,
+        "method": "defined class-name presence only; not semantic/bytecode equivalence",
+        "toolExitCode": 0,
+        "elapsedSeconds": 0.567,
+        "stdout": {
+          "bytes": 2455234,
+          "sha256": "6bf52862abf3a5ab539df5e8986d5deac26d3271e855c5f3f70189400fb46ea6"
+        }
+      }
+    }
+  ],
+  "noticeCountPerAPK": 68,
+  "noticeBytesPerAPK": 770479,
+  "demoModelAndRootLicenseAssets": 7,
+  "sourceInputsVerified": 304,
+  "protectedFiles": 175,
+  "protectedChangesPreserved": [
+    {
+      "path": "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md",
+      "before": {
+        "bytes": 135934,
+        "sha256": "8b7d369ae89ac7d763e9478ae994027d10bacd247c0559f9e27da6b67fcd73ec"
+      },
+      "after": {
+        "bytes": 137104,
+        "sha256": "ae961c74e533f465979d3e34dbd81150b51f4ac663842c45a456156a30edb667"
+      },
+      "originalSuffixPreserved": true
+    },
+    {
+      "path": "docs/roadmap/W6-video-understanding.md",
+      "before": {
+        "bytes": 33469,
+        "sha256": "a610fc041a26b83d750d0aa1600c3c97d980d57d643fa81bc6ff63bde615ed1b"
+      },
+      "after": {
+        "bytes": 34155,
+        "sha256": "3a63f1b62bd132eac3572720961b3c56401866b7bee240b303f86c4fb090914d"
+      },
+      "originalSuffixPreserved": true
+    }
+  ],
+  "frozenFiles": 161,
+  "invalidVariantRejectedAtConfiguration": true,
+  "releaseArtifactsUnsigned": true,
+  "noInstallationOrInference": true,
+  "noNewModelRuntimeBinaryDownloads": true,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "W3Complete": false
+}

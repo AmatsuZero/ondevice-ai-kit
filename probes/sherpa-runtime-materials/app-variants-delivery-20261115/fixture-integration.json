@@ -1,0 +1,24 @@
+{
+  "source": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/apk-consumer",
+  "copies": [
+    {
+      "path": "build.gradle.kts",
+      "bytes": 4487,
+      "originalSHA256": "5d4dbce01b4d4f2de7c31dacb47e7f66fa598733bf93f5427164ed2794d99c8d"
+    },
+    {
+      "path": "settings.gradle.kts",
+      "bytes": 1564,
+      "originalSHA256": "a5d640c16c8c9a0ee27f8487aa5bfc31b158f4b5e3e02c11abc0b3c47efd0f12"
+    },
+    {
+      "path": "src/main/AndroidManifest.xml",
+      "bytes": 220,
+      "originalSHA256": "7d3661814175e00d4cd389edb7f8e189a1cc34764c4895459c71d991a16b94ec"
+    }
+  ],
+  "candidateSHA256": "a50d6b2a0b2d1428ee47aabd83e34ffb51c74d3de3990f2a6cc0380b010df920",
+  "mechanicalExactReplacements": 4,
+  "newBuildFileSHA256": "08182616d84f7f1dd8b5f6ac15f26e3daf599ac1f2c61ecdaab2dfb00fbb624e",
+  "productionChanges": 0
+}

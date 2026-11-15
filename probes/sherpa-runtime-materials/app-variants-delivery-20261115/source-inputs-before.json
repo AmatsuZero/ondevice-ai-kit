@@ -1,0 +1,1218 @@
+{
+  "android/backend-litert-sr/build.gradle.kts": {
+    "bytes": 818,
+    "sha256": "fefe9d97190bfbdf27451d601b9750d957213005250bd292582ce4b99c12a58b"
+  },
+  "android/backend-litert-sr/src/main/kotlin/io/ondeviceai/litertsr/AndroidSrMedia.kt": {
+    "bytes": 15871,
+    "sha256": "7b36a0fe2d9db3529383df69b8c92403916400057424d3401ac50294608bfa55"
+  },
+  "android/backend-litert-sr/src/main/kotlin/io/ondeviceai/litertsr/EsrganInterpreter.kt": {
+    "bytes": 1905,
+    "sha256": "f3e2243887ca97b6260788de4fe1fa0d3cd22da210a6b76e676aa3e8fa82c1ab"
+  },
+  "android/backend-litert-sr/src/main/kotlin/io/ondeviceai/litertsr/EsrganTiles.kt": {
+    "bytes": 1130,
+    "sha256": "04645389239205cd11fc08eb455a3ac23be3c94d3f47916acfe4d363b3b3c1de"
+  },
+  "android/backend-litert-sr/src/main/kotlin/io/ondeviceai/litertsr/LiteRtSrModel.kt": {
+    "bytes": 1456,
+    "sha256": "b33b152542188cfdd22ca5de956e89f2fc9d9ee583c647a56d596b766c455dc8"
+  },
+  "android/backend-litert-sr/src/main/kotlin/io/ondeviceai/litertsr/LiteRtVideoSuperResolutionBackend.kt": {
+    "bytes": 3481,
+    "sha256": "1b62a3e5541816f0bcfad6188ae24112727b24210d7e181b6d65f4a009ac1d15"
+  },
+  "android/backend-litert-sr/src/main/kotlin/io/ondeviceai/litertsr/SrOutputCleanup.kt": {
+    "bytes": 836,
+    "sha256": "27d45a21f9cc70393bcfe381653c0d74191eccecb71c09a9d01d8e17411a4b39"
+  },
+  "android/backend-litert-sr/src/main/kotlin/io/ondeviceai/litertsr/VideoColor.kt": {
+    "bytes": 983,
+    "sha256": "b0c5ee778228dc7ebeef4e9e419cb3d790def5d89ecaf51109cbe0263dc4357a"
+  },
+  "android/backend-litert-sr/src/test/kotlin/io/ondeviceai/litertsr/EsrganTilesTest.kt": {
+    "bytes": 759,
+    "sha256": "84063af23a1173f7978f92d159aec8836517424eabfd3d5973a9611767b1d79c"
+  },
+  "android/backend-litert-sr/src/test/kotlin/io/ondeviceai/litertsr/LiteRtSrModelTest.kt": {
+    "bytes": 1237,
+    "sha256": "5df09713ff57212fc9caffd3ad99ca07e3f60f7ee3665509b8b1bb95b1469e16"
+  },
+  "android/backend-litert-sr/src/test/kotlin/io/ondeviceai/litertsr/SrOutputCleanupTest.kt": {
+    "bytes": 3830,
+    "sha256": "f3b76e815724b7b2745eb6ce763e027d0fa29bf6b0d73e4f865d1aec746dc086"
+  },
+  "android/backend-litert-sr/src/test/kotlin/io/ondeviceai/litertsr/VideoColorTest.kt": {
+    "bytes": 507,
+    "sha256": "8c4a7beb5579c90ebc03aedb2975a53267421973991c9d671545c55427141bed"
+  },
+  "android/backend-litertlm/build.gradle.kts": {
+    "bytes": 1209,
+    "sha256": "5cdbf6851fc057fd6ed80f9fe2527dd3be6032b2f5c89dc18750b0b1c2c4e8f4"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmModelInfoInstrumentation.kt": {
+    "bytes": 4746,
+    "sha256": "3b4845d408feea7a46d300477d456c47c804bcabad25a8d78847b6e72cb1bab6"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessClientInstrumentation.kt": {
+    "bytes": 11468,
+    "sha256": "2823fab40b31736c9eb430bf9be9ce3bbcca2ca433a93fdaa998c3f77df4d38c"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessClientLocalEdgesInstrumentation.kt": {
+    "bytes": 10837,
+    "sha256": "b80d900da734bca1b547bc47bd9adc31fc922e5d6203aa5f863595d3974ecc16"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessClientReleaseThreadInstrumentation.kt": {
+    "bytes": 7810,
+    "sha256": "2993fdd92d2076fbd0db66b1a26bba67d3e6eac591c9a09936e65f540e0f9c66"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessModelStoreInstrumentation.kt": {
+    "bytes": 23198,
+    "sha256": "291e29cb7d90b3e65299cf3fbccac39cc4c9aee9790dd7041d526becf2328ee0"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessNativeInstrumentation.kt": {
+    "bytes": 34538,
+    "sha256": "aecf8cdf23bbce18bc908fb788b8eafbb8d25f44ce3f9849f9b7fce643dc1143"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessServiceInstrumentation.kt": {
+    "bytes": 26430,
+    "sha256": "7545b986ac658986755d8f079cf612b6b7bf01aa12130ed44b508d78f0ae1515"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessSessionInstrumentation.kt": {
+    "bytes": 36388,
+    "sha256": "074785f28db77dff6a88563350bd2e13f39d37162f653fb65fa59615bd2f2ffc"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessTransportInstrumentation.kt": {
+    "bytes": 12430,
+    "sha256": "887c5a0ee7bfad0fb9a0edd3c7d198969996b053b54c97606225d8d3f2912523"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/LiteRtLmUnavailableInstrumentation.kt": {
+    "bytes": 9539,
+    "sha256": "f85835411277a59ce74ee5b1d0e5b07c15e9dd2b32a09f7c21a0b97e4754a459"
+  },
+  "android/backend-litertlm/src/androidTest/kotlin/io/ondeviceai/litertlm/consumer/LiteRtLmPublicProcessFactoryInstrumentation.kt": {
+    "bytes": 8234,
+    "sha256": "aa707c9f017249df7f558ad89cc024b0037afb494c11ce7c877b2caae5dc01ca"
+  },
+  "android/backend-litertlm/src/main/AndroidManifest.xml": {
+    "bytes": 335,
+    "sha256": "5716e82c050dfe3e0e79fe216556e4a181872ff1f60b6361a735e3528299e9d4"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLm.kt": {
+    "bytes": 4570,
+    "sha256": "66b9018ac11648af102eeaf3bbb57f2c41d209599c7c2d17ab0fe1433bac0862"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmAvailability.kt": {
+    "bytes": 2835,
+    "sha256": "8a32a98042e99abfd80ac3b200bc9b22ce105868e70d8ce700f53529959f55ac"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmBackend.kt": {
+    "bytes": 5929,
+    "sha256": "4ffb2ca4faf410e1d51776dfed812de1241e3a2f5e7700cf979960a41b910b17"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmEngineFactory.kt": {
+    "bytes": 909,
+    "sha256": "ad167d3b1d18b2f06a3739d120200fd5445dc251df7c409af37c10adcdab4849"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmErrors.kt": {
+    "bytes": 463,
+    "sha256": "b2c7c96b82456a19ebbf04efe4c863c708b813518c975a78eb62ad9145e41aaf"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmGenerationSession.kt": {
+    "bytes": 11054,
+    "sha256": "10e199002a2469d67f566c1e7027f7ad04db9ee456091b85324256b8c3424371"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmModelSpec.kt": {
+    "bytes": 4687,
+    "sha256": "eeb4552630509ba0dfb4cb1457df9e0c93d144a798460539d6dbb5c7449ec99c"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmPreOwnershipCancellation.kt": {
+    "bytes": 519,
+    "sha256": "de14760ed7d3561cde37f97813b7b95e7a3f3157f2ea0962397f9d46b251a442"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmPreOwnershipRejection.kt": {
+    "bytes": 598,
+    "sha256": "62cead8019b5cae6862906bf242ca10505902186eccd3290a2ea13b90be38c67"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessClient.kt": {
+    "bytes": 16446,
+    "sha256": "c79d6e82146ad1f0d056c0182d62949d3c4ea8eef8e2f40241efd7a6d6638b77"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessCoordinator.kt": {
+    "bytes": 6207,
+    "sha256": "3d4f94a40fc6865fe811b72a5b58a3cb9c75bb44479d5839372fda1fc6f97fe1"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessEngineFactory.kt": {
+    "bytes": 2443,
+    "sha256": "02e3b891b00449b01750b02e8aa6d0b98a82fa920a41e6ebe04665236c9a7e8c"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessService.kt": {
+    "bytes": 14463,
+    "sha256": "b662166f895d65f245d16776bdf5ae2b31ce6aff5596e5d908621ec8f3daa813"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessServiceState.kt": {
+    "bytes": 7840,
+    "sha256": "a2e07413b6e7b421a812f231c32821f471d9bfa77dbc6f50eabfdae1a4389de2"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessSession.kt": {
+    "bytes": 17883,
+    "sha256": "7258728e54ac0b5e2ba25527ade44a184100a1b0b3bf0101cfaaf58e80ab455c"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessStatusCodec.kt": {
+    "bytes": 6231,
+    "sha256": "8bf4e2b744ca4e880f9317521df4975e439789aa3bd5e037816c6f650ed26fa3"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessTransport.kt": {
+    "bytes": 4483,
+    "sha256": "4c153c815197a0b7d0466bc758d481da8eeea941789ad5690571b26820c3d418"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmProductionEngineFactory.kt": {
+    "bytes": 3149,
+    "sha256": "7343840d010751cc81b84e63d1afa390401570c5bf822b4065aa634227ee6893"
+  },
+  "android/backend-litertlm/src/main/kotlin/io/ondeviceai/litertlm/LiteRtLmSynchronousSession.kt": {
+    "bytes": 2145,
+    "sha256": "9773930dabcc8809a7740d7757b6418c72ac2f85a792956092ace90068b98348"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmAvailabilityTest.kt": {
+    "bytes": 6163,
+    "sha256": "0709a65ef3028d2133aeb2594ef8c6e8b5047a4a6871a4a0971934885219434a"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmBackendTest.kt": {
+    "bytes": 6268,
+    "sha256": "b93004179873d59098bad9e525b23002e284f163c25d0e966f70aabc4d692bd2"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmGenerationSessionTest.kt": {
+    "bytes": 34478,
+    "sha256": "33b833f3f8a8aaabb74c3adfa161af81c48f4a9c655a763029a340e53c23aaf9"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmModelSpecTest.kt": {
+    "bytes": 4055,
+    "sha256": "654e09093df50dbeb1c67a7f91e916f5b8d7dd44047488b68ac3e94bfdabf6df"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmModelSupportTest.kt": {
+    "bytes": 1546,
+    "sha256": "a493364638f7d968e2e6977b3bdda1754dc05161b4018bc21bd9a39aa9ccdb53"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmPoisonedTerminalTest.kt": {
+    "bytes": 6435,
+    "sha256": "ee28980bf0009dfce2fadb1a5701bb49683206c5b312a5f1e801bf39fb4cfb9d"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmPreOwnershipRejectionTest.kt": {
+    "bytes": 7048,
+    "sha256": "c396b2ba7d9c4dede54d82e011b65e374f9cb8ef40391c8232cc2fdd9b78d56e"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessCoordinatorTest.kt": {
+    "bytes": 10994,
+    "sha256": "9a31d35838205f7358fbacd998102db98c6d82f9288405a534ed5d48b55b6ac3"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessServiceStateTest.kt": {
+    "bytes": 15923,
+    "sha256": "d37a85e97b26a0a0163604b86cc1d9d6e9a9a141b23fc4e5fb4544076bd6af4e"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmProcessStatusCodecTest.kt": {
+    "bytes": 10390,
+    "sha256": "624805b333658074fa05f495871048b5d21ec5879617d40f3463e94747d0c05d"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmSynchronousSessionTest.kt": {
+    "bytes": 3759,
+    "sha256": "89c2b97b558c04ca9fd75f8cf74939563e73499d6b8ddb1e8b0840c08f6f2e8d"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/LiteRtLmTrustedCancellationTest.kt": {
+    "bytes": 8495,
+    "sha256": "c490a11b9a71abb05cc1c99dac9b9b02a92507fbb40695b27fb061550f7d958f"
+  },
+  "android/backend-litertlm/src/test/kotlin/io/ondeviceai/litertlm/consumer/LiteRtLmPublicAvailabilityTest.kt": {
+    "bytes": 3660,
+    "sha256": "6d983428be287cd5b7844fbb8cd2a01f55d55b2b5c73126ba2b44788e519c388"
+  },
+  "android/backend-mlkit/build.gradle.kts": {
+    "bytes": 893,
+    "sha256": "e78043b51ec3a2aeab852d651902c8dcf10e93b9ec75624634a708de10d56e06"
+  },
+  "android/backend-mlkit/src/main/kotlin/io/ondeviceai/mlkit/DetectorSession.kt": {
+    "bytes": 1874,
+    "sha256": "f968a8fd83929581630aecdd1b78fe1553b499a611f6bea72fee9a891e594083"
+  },
+  "android/backend-mlkit/src/main/kotlin/io/ondeviceai/mlkit/MLKitFaceDetector.kt": {
+    "bytes": 3257,
+    "sha256": "8e91d32ccaa57266be308c3a6883738bbdb18aba623c62582c9724da39cfceaf"
+  },
+  "android/backend-mlkit/src/test/kotlin/io/ondeviceai/mlkit/DetectorSessionTest.kt": {
+    "bytes": 1350,
+    "sha256": "a0859a89248beaaa139f05cded6d7ddc67788d39599301d28959980c3ce3c7ba"
+  },
+  "android/backend-mlkit/src/test/kotlin/io/ondeviceai/mlkit/MLKitLifecycleTest.kt": {
+    "bytes": 471,
+    "sha256": "021f16cb6bcb52ccce3cf9feaf31ce4efb6a80652c97bd18782bd27864f80935"
+  },
+  "android/backend-opencv-identity/README.md": {
+    "bytes": 1297,
+    "sha256": "f3adda07eaac07642933ea74c27169a0b62b1a09d8ea292a5af07cc1dfda6f08"
+  },
+  "android/backend-opencv-identity/build.gradle.kts": {
+    "bytes": 853,
+    "sha256": "ebed4a6c6e93176b347fa686b2a82f609c10168455485ff205b8647ad247791b"
+  },
+  "android/backend-opencv-identity/src/main/AndroidManifest.xml": {
+    "bytes": 13,
+    "sha256": "571f2735faf5e857752ee057ac8ef63425576a721616c60b86ee5d4c0a2d682f"
+  },
+  "android/backend-opencv-identity/src/main/kotlin/io/ondeviceai/opencvidentity/OpenCvIdentityBackend.kt": {
+    "bytes": 8774,
+    "sha256": "4e20b86a616bbc133d2a5eb6295e310195f7a3c1afce374abe15026ac9705de9"
+  },
+  "android/backend-opencv-identity/src/main/kotlin/io/ondeviceai/opencvidentity/OpenCvIdentityDiagnostic.kt": {
+    "bytes": 1461,
+    "sha256": "3bb422cbed4ee1efa91a700d37011c0e8ae01b278744b0a0232daea6b28a421a"
+  },
+  "android/backend-opencv-identity/src/main/kotlin/io/ondeviceai/opencvidentity/OpenCvIdentityModel.kt": {
+    "bytes": 3914,
+    "sha256": "0bc9a1726a6a52cf497c798533944e73e7f289d8e9832d1f38e6486b4a671f39"
+  },
+  "android/backend-opencv-identity/src/test/kotlin/io/ondeviceai/opencvidentity/OpenCvIdentityModelTest.kt": {
+    "bytes": 3568,
+    "sha256": "150065d3087077a580c4bb30b1a8dc284a74a4daedb171791ca04138b5b9764b"
+  },
+  "android/backend-sherpa-asr/README.md": {
+    "bytes": 5372,
+    "sha256": "ff96e9e3d810c8069d524c188375ab4e0b60f11a279a71ec796c0e4b189dd7d6"
+  },
+  "android/backend-sherpa-asr/build.gradle.kts": {
+    "bytes": 817,
+    "sha256": "94ba9e8e43a90023529e740469c3f5511f7dd73cb4d5e801a6378a453afd840b"
+  },
+  "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaAsrBackend.kt": {
+    "bytes": 6160,
+    "sha256": "25194741342ec24f8bdea1076954a6c585e6833ce99cad54c3654eb31f4c33b9"
+  },
+  "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaSession.kt": {
+    "bytes": 2791,
+    "sha256": "a0882a5adbafd685127e67dfc091e53c113bec95d8330bafb596511e687165f0"
+  },
+  "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaWhisperModel.kt": {
+    "bytes": 1884,
+    "sha256": "d16d21c1ce52e5101898cd48e39bfdedee06bf6a52dabaa33f8fd413a0161337"
+  },
+  "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/UtteranceBuffer.kt": {
+    "bytes": 1775,
+    "sha256": "668af68a844e02a4f4a454966b435569ba5dbd6214a742b5002ac6913a7226bc"
+  },
+  "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/WhisperSpeechGate.kt": {
+    "bytes": 1676,
+    "sha256": "71515486387c0324df7ddea0e6959d41a939318e7772df7539e9a427c8e85181"
+  },
+  "android/backend-sherpa-asr/src/test/kotlin/io/ondeviceai/sherpaasr/SherpaModelTest.kt": {
+    "bytes": 2765,
+    "sha256": "db9dcd2cbf384018e121178c086c93d65e1036a6f2c27fbe6927c2f8056d29ea"
+  },
+  "android/backend-sherpa-asr/src/test/kotlin/io/ondeviceai/sherpaasr/SherpaSessionTest.kt": {
+    "bytes": 6353,
+    "sha256": "9831364045076b50255789b59e491dcc32d95d1d252cd6578866d723db9fde7e"
+  },
+  "android/backend-system-asr/README.md": {
+    "bytes": 2108,
+    "sha256": "7a9f316e8cdd6bda6dfd90f4c345a6fbd04a2a68d3c6aac5f7574c00286e2a06"
+  },
+  "android/backend-system-asr/build.gradle.kts": {
+    "bytes": 756,
+    "sha256": "24df4a02ffa3b53235b34cf449172ef62883911a5364d8245ca634fdbc27da44"
+  },
+  "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/AndroidAsrResources.kt": {
+    "bytes": 3420,
+    "sha256": "1d29644df31a3cc2d98822cb595772a38fd1f8b9e4087e7c7d1e7f8e9c4851df"
+  },
+  "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/AndroidSpeechRecognizerBackend.kt": {
+    "bytes": 5702,
+    "sha256": "4ea95fffff05c540f36205a5d7f56110c814a2e29efc1cdc4e4b869318691e50"
+  },
+  "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/AsrResources.kt": {
+    "bytes": 4934,
+    "sha256": "a270dc027d4ce6c0d20b40539062be65ced73cefadbcb048e3bd40c66fbb13dc"
+  },
+  "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/RecognitionSession.kt": {
+    "bytes": 6137,
+    "sha256": "ce65210fc5628e0497aa08a07c55201a91c01530927b726018b6c7382dc3e4fc"
+  },
+  "android/backend-system-asr/src/test/kotlin/io/ondeviceai/systemasr/AsrResourcesTest.kt": {
+    "bytes": 5374,
+    "sha256": "9cdf7ece08a40978d58c561dc3423ffbd72e87edfe56d590c6ac51e717998ce1"
+  },
+  "android/backend-system-asr/src/test/kotlin/io/ondeviceai/systemasr/RecognitionSessionTest.kt": {
+    "bytes": 6842,
+    "sha256": "3d46e8a5d1cfdc61bad4f84f0643f264a1ddd5a6af9f1ce1eb56be2b2b7e1448"
+  },
+  "android/backend-system-tts/build.gradle.kts": {
+    "bytes": 754,
+    "sha256": "6b814a7e4c98653e1e29e803c563f1c0a01baff8b516c57efbd8cb06b1c3a421"
+  },
+  "android/backend-system-tts/src/main/kotlin/io/ondeviceai/systemtts/AndroidTextToSpeechBackend.kt": {
+    "bytes": 7303,
+    "sha256": "8e281fd2bdd36aece07e70a09ceb27e9ce6b6193e991fc1d8a33cb7c036b3540"
+  },
+  "android/backend-system-tts/src/test/kotlin/io/ondeviceai/systemtts/TtsTaskGateTest.kt": {
+    "bytes": 1444,
+    "sha256": "86072114cc2364226fd38aea22bb36d0b50629f3bc64013961fb15fc940ac8ca"
+  },
+  "android/face/build.gradle.kts": {
+    "bytes": 797,
+    "sha256": "8f69d057e125da67c7e38fda9ced928fd2fbb62a1b06defa5dbc4f2385ee1a09"
+  },
+  "android/face/src/main/kotlin/io/ondeviceai/face/FaceDetector.kt": {
+    "bytes": 6445,
+    "sha256": "62889670e12c1286915dba65715e16ea647cb69ccf82fa5fda347eb59aa4f2c3"
+  },
+  "android/face/src/test/kotlin/io/ondeviceai/face/FaceDetectionClientTest.kt": {
+    "bytes": 3245,
+    "sha256": "9e6cbb3fb0ca6642f42eb18c8724b9c5161dfec6963452263fb7756402d111ab"
+  },
+  "android/face/src/test/kotlin/io/ondeviceai/face/ImageGeometryTest.kt": {
+    "bytes": 784,
+    "sha256": "ac158008be83d123a435fe742e456814b4f91e30effeb20e5f956dbc0c854e4f"
+  },
+  "android/identity/build.gradle.kts": {
+    "bytes": 962,
+    "sha256": "9f03d62703a56ea9dc27ac299883244b8135abbc94944aa94d0900e8f99beb68"
+  },
+  "android/identity/src/androidTest/kotlin/io/ondeviceai/identity/AndroidIdentityRestartProbe.kt": {
+    "bytes": 11189,
+    "sha256": "e7dbb57061f84113ecaf26b3696a3533fcd379175a0a4f5c9677d96e321b8a3b"
+  },
+  "android/identity/src/androidTest/kotlin/io/ondeviceai/identity/AndroidIdentityStoreProbe.kt": {
+    "bytes": 8285,
+    "sha256": "1a9b85dbb7980a91cc3fd88d4f4e78703fb345d33a128b09e31eb5e6cae817ad"
+  },
+  "android/identity/src/androidTest/kotlin/io/ondeviceai/identity/AndroidKeystoreProbeInstrumentation.kt": {
+    "bytes": 4709,
+    "sha256": "20c9915ce29c809463c2919644ab29c71b054e8aba1e76838efe6d84204dcddf"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/AndroidKeystoreIdentityKeyProvider.kt": {
+    "bytes": 2084,
+    "sha256": "9a0db8777d397c306b51a9b80ad7d4150b1aadad051febd6d6bc9d0b83fe1f2a"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/ExactCosineIdentityIndex.kt": {
+    "bytes": 4201,
+    "sha256": "9df37ccd6ae35e16e06d168ab54c71d3154d0d36d51268a318b4f03afa2adc22"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/FaceIdentification.kt": {
+    "bytes": 18682,
+    "sha256": "c47e9fafdbcb56bc5d74c525bed85847ab3b35e4796de5f31b503a36355d69dd"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/FaceLiveness.kt": {
+    "bytes": 23955,
+    "sha256": "adad46b426696c672fa86a761587a0d515a948dee918f7109d6fbe1a232ebd55"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/FaceVerification.kt": {
+    "bytes": 14579,
+    "sha256": "1fa9b9e5de2a359ce251f3eb6ace1428e0aec567fefe00f5a5798374793d0ff1"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/GalleryCatalog.kt": {
+    "bytes": 14011,
+    "sha256": "b511aada6a4861035d3788f9afc1135cf077a8b311d7110ca85ad373762bc51e"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/GallerySnapshot.kt": {
+    "bytes": 10200,
+    "sha256": "8f051952b6af60630ae5e6942a89cff52581844664e943355c1583713764633c"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityAuthorization.kt": {
+    "bytes": 5369,
+    "sha256": "3f7f30fb9772adfea3c3178a77d75dea2c0d24a1add9532f5d3e7eb4a96542b8"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityBackend.kt": {
+    "bytes": 8151,
+    "sha256": "aaa7559e0c968bfc3de8377b61b9a24f91ae682a52d9fb45a983a76cf436d18c"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityBindingContracts.kt": {
+    "bytes": 9609,
+    "sha256": "f1f48ef27022b9f710f1a44bbea016848f51b5dc09248445b9a66d972c7737f4"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityContractJSON.kt": {
+    "bytes": 6091,
+    "sha256": "c9d11ce5597ef4f6978dca1eb24ca8c2bdf5e5153b6e13c872e72c6af54bf147"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityContracts.kt": {
+    "bytes": 7361,
+    "sha256": "500837b482b98480b8785a207d0e3a1e6d9a6ef1d230c3260221959f7d5381ec"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityCrypto.kt": {
+    "bytes": 3330,
+    "sha256": "dde1b9d425bbdb54420e36a7e5042348b542d2cf30838d83a7f22dc435728c91"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityDeletion.kt": {
+    "bytes": 3516,
+    "sha256": "ec6d1f883cac3a8f7eef737ff0d9c98f182a113933599dd70eb0244e349e6550"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityEnrollment.kt": {
+    "bytes": 2996,
+    "sha256": "b1bbd3ca4b0f999743ad315e8932198c77cf8b7433833dcb9f72dce1b773855e"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityErrors.kt": {
+    "bytes": 2432,
+    "sha256": "c66e1a2adac5b906dc0328e4de16943a66ee080815e8243ba954e8f63c98e074"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityGalleryOperation.kt": {
+    "bytes": 1026,
+    "sha256": "4fa5c9bf413af5fd1559d10cff20740853280a0dbcd6a91c9f0a3a61b469d026"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityJournal.kt": {
+    "bytes": 7728,
+    "sha256": "7fefc05aca8d3e7451a7cfe140ab691a418385edea878d0d660cefcf62a30494"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityLivenessOperation.kt": {
+    "bytes": 310,
+    "sha256": "04c6caba1e0f1b5f0799a9610ff1c5c542d538a715b20a9d6a88cd9a98dc92f9"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityOperationTicket.kt": {
+    "bytes": 526,
+    "sha256": "af2b5985fec6d2c723ddbb0d078cd10f8a57676a763f2cb33722d28d6df8bea4"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityPolicyCodecs.kt": {
+    "bytes": 5546,
+    "sha256": "a4db002c3ac21364c5ab5cf3f75d4405a440f9a35e9f55bf216f3095ea4e6afb"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityRevocation.kt": {
+    "bytes": 626,
+    "sha256": "11180ca5f087a54af322130dfc528e1fc351d69783675478f7cc9977b99068d3"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityStopSignal.kt": {
+    "bytes": 3171,
+    "sha256": "816cc749abfb905d81e8adeb6817bbce18261deb14c464a58125bcc8e36b4122"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityStore.kt": {
+    "bytes": 65186,
+    "sha256": "1ecde28cca5aa37b8d5da6730e8a41ecf0973a490c4028db73e10532742dd0f3"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityTemplateLease.kt": {
+    "bytes": 685,
+    "sha256": "ada3f0540108e5dee571b45333fa0df0eef5bfca0a59097deb1b52ba9939f26b"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IdentityTemplatePayload.kt": {
+    "bytes": 8239,
+    "sha256": "9d4dd675cb0864035eebabd3fadeef85e10226e0de02eceef806f2c171a98fb1"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/IndexStore.kt": {
+    "bytes": 21538,
+    "sha256": "ebce56358b05233d0be9c415e7deaeeff6b925f3532af404fd74e273bcd07d02"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/LocalIdentityBackend.kt": {
+    "bytes": 6821,
+    "sha256": "ecef8d03522a56215c7d8420d60b3c9d0600da599bef9d84f1cd0fbfb03e7477"
+  },
+  "android/identity/src/main/kotlin/io/ondeviceai/identity/TestIdentityBackend.kt": {
+    "bytes": 2200,
+    "sha256": "70d249fc61c88d51508e7e39e07c55ccb345fd8e1d2679c14d66f59a3f5c8a96"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/AndroidIdentityBridgeTest.kt": {
+    "bytes": 21162,
+    "sha256": "939912a923555f1a045e0d12b7bbf70e4fe70cb80191b037f3796905e811049c"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/BackendPolicyTest.kt": {
+    "bytes": 7048,
+    "sha256": "f700755e24dc0d6843bf8e88d0d3471fb9ba400e4a4e446714acfdc1ca4baf93"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/ExactCosineIdentityIndexTest.kt": {
+    "bytes": 3531,
+    "sha256": "f5b8a8107e42ba47b46a085b0b2e14da1e2a1f6c54dd9f1429dcb1e771b4ba08"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/FaceIdentificationTest.kt": {
+    "bytes": 24293,
+    "sha256": "63e866b842b87f35f9774090312f127b945f159a72e99c6fb48af9fdbb5610e9"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/FaceLivenessTest.kt": {
+    "bytes": 20761,
+    "sha256": "a61a1ef875001b6225f18ddddb6a74a11a96e239e1f59c3bea8ad273f04e6610"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/FaceVerificationTest.kt": {
+    "bytes": 26517,
+    "sha256": "d3fb86bdb89f263d082ddd2aa638417dcde3dd2605504b40f8496f0a42ec3460"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/GalleryCatalogTest.kt": {
+    "bytes": 27939,
+    "sha256": "8d44241292eec9cd3fd6037569353991ad402fe92588ac07fe2928758e0d9047"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/GallerySnapshotTest.kt": {
+    "bytes": 7863,
+    "sha256": "80f84be5177085087812c7ecbc1033d0cbd0e124378f95056d333d3eb45b09ce"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityAuthorizationTest.kt": {
+    "bytes": 8570,
+    "sha256": "ec8e4ae342045458ebf318cd9487efaf027795a16610546df686cc1f02d28426"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityContractsTest.kt": {
+    "bytes": 10999,
+    "sha256": "14edddfdc8d32651fc0cc990b30e7547c51882c0d212c4bb7b1339b7c8f6a8a6"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityCryptoTest.kt": {
+    "bytes": 4247,
+    "sha256": "9bd066402eac9a71790bffe82d1e76ddcce1936d3937001fabcf4b2b11ba4c07"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityGalleryOperationTest.kt": {
+    "bytes": 13585,
+    "sha256": "5d2e7a6ee3ca414cf4755567c27b7d44aba4badd111b60e2d59af43fe5d8a8cd"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityJournalTest.kt": {
+    "bytes": 10121,
+    "sha256": "d6d82788ee4f162895ee11020aa99bad280236e6904d3e61251973983813496e"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityLivenessOperationTest.kt": {
+    "bytes": 9465,
+    "sha256": "c4a8f517c37aa379c341cb09cb538c7a94aac2740f4d4307fdbb7ca29dd7836e"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityPolicyCodecTest.kt": {
+    "bytes": 5526,
+    "sha256": "c02fcd12125cf59bab421c432a4b60e6b412845d27f7d225e7dda009b46744f3"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityStopSignalTest.kt": {
+    "bytes": 8500,
+    "sha256": "f217d8aea56c290c29a3f7a5ebf26004b3687725f245e0eab56b0396873b8dec"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityStoreTest.kt": {
+    "bytes": 116396,
+    "sha256": "36cb76eb72360eb23ee8f433f728e81b37e4ed7bb5f2213ba10d65521c19c803"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IdentityTemplatePayloadTest.kt": {
+    "bytes": 7256,
+    "sha256": "154ff67838a728968c35df9345ab6a0248ac71fe8a274fd19c36dba5df06408a"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/IndexStoreTest.kt": {
+    "bytes": 45259,
+    "sha256": "f3ef94172e129849a30462f06cfe6c6927c191e587904a9f4afbc358ddde9c7f"
+  },
+  "android/identity/src/test/kotlin/io/ondeviceai/identity/LocalIdentityBackendTest.kt": {
+    "bytes": 9204,
+    "sha256": "cc7cd15e2a15b7274d882116c176e77265e1000990b631ce28c2398b67e81119"
+  },
+  "android/model-store/build.gradle.kts": {
+    "bytes": 803,
+    "sha256": "df8d4440166e16ca152de3d834918baa9820ebf3e6495347fb9ebd0ea7d1350c"
+  },
+  "android/model-store/src/main/kotlin/io/ondeviceai/modelstore/InstallCoordinator.kt": {
+    "bytes": 5143,
+    "sha256": "30a8ee93bbe733c121da1f48d79e2ed88dc9be3cb04ab29a8acde8e58ca968bb"
+  },
+  "android/model-store/src/main/kotlin/io/ondeviceai/modelstore/ModelDownloader.kt": {
+    "bytes": 2294,
+    "sha256": "19d3e286bd24fd9d275b3e76bed637dc1033c2bb259bdca2846c227edc4fae90"
+  },
+  "android/model-store/src/main/kotlin/io/ondeviceai/modelstore/ModelManifest.kt": {
+    "bytes": 4815,
+    "sha256": "b2cc1ea697716b832fbf082f66caf72987a2e6e3fb45cb8693c0e5d35b662dd3"
+  },
+  "android/model-store/src/main/kotlin/io/ondeviceai/modelstore/ModelStore.kt": {
+    "bytes": 7784,
+    "sha256": "9bf58ee5af9d708975122eeb370d6d99e613ec8ee182aa5abbc7aad091f17120"
+  },
+  "android/model-store/src/test/kotlin/io/ondeviceai/modelstore/InstallCoordinatorTest.kt": {
+    "bytes": 8278,
+    "sha256": "7bdcb6a4f9cd8774f99ed70a32ca25bd32d84646f315b9a91633b14a6c379bcb"
+  },
+  "android/model-store/src/test/kotlin/io/ondeviceai/modelstore/ModelLeaseCancellationTest.kt": {
+    "bytes": 3048,
+    "sha256": "372b1665e6cbe683e6a831c2798b98094ea4c78b437c53944830d378649c025e"
+  },
+  "android/model-store/src/test/kotlin/io/ondeviceai/modelstore/ModelStoreTest.kt": {
+    "bytes": 4443,
+    "sha256": "358ac2ea87e217c36868ddef268186b08307f9467d5fe572dbc2a83833beb393"
+  },
+  "android/multimodal/build.gradle.kts": {
+    "bytes": 809,
+    "sha256": "30a5755acc9c922780c441b8dcc93b4ccf24ce1f6b1dafb6004310314e27b170"
+  },
+  "android/multimodal/src/main/AndroidManifest.xml": {
+    "bytes": 13,
+    "sha256": "571f2735faf5e857752ee057ac8ef63425576a721616c60b86ee5d4c0a2d682f"
+  },
+  "android/multimodal/src/main/kotlin/io/ondeviceai/multimodal/MultimodalContracts.kt": {
+    "bytes": 3775,
+    "sha256": "7da47ef55dc71bb15343571b71ff1bcce757b0375dc6e9f9edaf98308f8a5ea2"
+  },
+  "android/multimodal/src/main/kotlin/io/ondeviceai/multimodal/MultimodalGenerationClient.kt": {
+    "bytes": 8283,
+    "sha256": "13da6e05373802d4131707421acdbc1bd846f9d14f10dd3db19f647867b4bfe0"
+  },
+  "android/multimodal/src/test/kotlin/io/ondeviceai/multimodal/AndroidMultimodalBridgeTest.kt": {
+    "bytes": 15642,
+    "sha256": "1cbd9903bfcac29ddf97eb6a0260826be7ae2228f5f94369dcf5d3b1e08c4b08"
+  },
+  "android/multimodal/src/test/kotlin/io/ondeviceai/multimodal/AndroidMultimodalVideoBridgeTest.kt": {
+    "bytes": 20474,
+    "sha256": "c32b2217c23696d6624147628b90df1d9555f053ce7bfe3de8c78f6301aac9c4"
+  },
+  "android/multimodal/src/test/kotlin/io/ondeviceai/multimodal/MultimodalGenerationClientTest.kt": {
+    "bytes": 14814,
+    "sha256": "20990002338ab94e0d4c678e02794dfc1d8794c58cace912646f8ffd1eeee738"
+  },
+  "android/multimodal/src/test/kotlin/io/ondeviceai/multimodal/MultimodalVideoClientTest.kt": {
+    "bytes": 17255,
+    "sha256": "5bbec4701f660dbe7ea401df5f694e3071d78c79517930e3ddd82855de602db0"
+  },
+  "android/sdk-core/build.gradle.kts": {
+    "bytes": 707,
+    "sha256": "f5e03acedbe87684a09fa6cce5610ad63d40cd76aa1e0c33d35efe1f6f5ba607"
+  },
+  "android/sdk-core/src/main/kotlin/io/ondeviceai/core/Availability.kt": {
+    "bytes": 582,
+    "sha256": "d845d6710da720823dbf86b669716ce6950f972b087a071359a6c0500dfea907"
+  },
+  "android/sdk-core/src/main/kotlin/io/ondeviceai/core/LatestFrameQueue.kt": {
+    "bytes": 1177,
+    "sha256": "3b9cf9918efbe5eae4c2d86dcc007b1cff96631db4ff55652152716e8a2974ed"
+  },
+  "android/sdk-core/src/main/kotlin/io/ondeviceai/core/TaskGate.kt": {
+    "bytes": 1036,
+    "sha256": "b20fb9ac5c9604ad49a21f06c73f50d386b294c9f1e5ba8aebc42aca5642192a"
+  },
+  "android/sdk-core/src/test/kotlin/io/ondeviceai/core/TaskGateTest.kt": {
+    "bytes": 2158,
+    "sha256": "c52bdb12e09e8d0c46d943789b119c3e68100639bc4d311c291b78450c0f5c87"
+  },
+  "android/speech/build.gradle.kts": {
+    "bytes": 780,
+    "sha256": "70d72aee40eeb4a48c02cc1648b37096598790218325e5b9bfea5249e1f636e3"
+  },
+  "android/speech/src/main/kotlin/io/ondeviceai/speech/SpeechClient.kt": {
+    "bytes": 7935,
+    "sha256": "48fc19674c5c9e53414f76d449227031239249962754a3101cd2d7064ceaf7e9"
+  },
+  "android/speech/src/test/kotlin/io/ondeviceai/speech/AndroidSpeechBridgeIntegrationTest.kt": {
+    "bytes": 26868,
+    "sha256": "540ce87513ff6b5f8f38021bc0e6bed374bc41c0a235b8b5d243cfd3c384499c"
+  },
+  "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechBackendQueryTest.kt": {
+    "bytes": 5051,
+    "sha256": "1c9d0f65b731434ad545f6e88fe4181b00ed3c4738dc2e9c410b6de9a80aa75f"
+  },
+  "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechClientTest.kt": {
+    "bytes": 2215,
+    "sha256": "353a48fed6655e5844d235c377976a250bca0258c89d95df72ff680a856b0887"
+  },
+  "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechCloseFailureTest.kt": {
+    "bytes": 4557,
+    "sha256": "fb021fcf076e4448778dd94fd19bcc78195915c73ef83f822a8a596f62ec73ce"
+  },
+  "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechCloseRaceTest.kt": {
+    "bytes": 4470,
+    "sha256": "8d8f02ec44f0ecc66ad793464dd31e73d4874a48a7dd88f707a7f5d9d2da4d2f"
+  },
+  "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechRecognitionClientTest.kt": {
+    "bytes": 3989,
+    "sha256": "caad7b916237245df71af7ad131936bd5dfbab597839e200a5b037a1c945a53b"
+  },
+  "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechSynthesisClientTest.kt": {
+    "bytes": 2257,
+    "sha256": "4fc811446a499529c63843109bdda9d1a6a87c0a4e41992968cf199114044bed"
+  },
+  "android/video/build.gradle.kts": {
+    "bytes": 804,
+    "sha256": "4b055ba70c088afa88cc3920007a18bc389b554416f0802ae27d265be9dcd4f1"
+  },
+  "android/video/src/main/kotlin/io/ondeviceai/video/VideoContracts.kt": {
+    "bytes": 2750,
+    "sha256": "4cedcbf270b367a74482f00bc9fec501cc61f3572ab9c4225546e4dffb4ccca0"
+  },
+  "android/video/src/main/kotlin/io/ondeviceai/video/VideoProcessingClient.kt": {
+    "bytes": 7271,
+    "sha256": "fb33714cdc81ae3de12d04c04b779f557a3e2e863955c38acebbe44720bf7759"
+  },
+  "android/video/src/test/kotlin/io/ondeviceai/video/AndroidVideoBridgeTest.kt": {
+    "bytes": 16938,
+    "sha256": "aafeb05202444d700060a61258b061c4429dc3fd94f8801e498135a263912b60"
+  },
+  "android/video/src/test/kotlin/io/ondeviceai/video/VideoProcessingClientTest.kt": {
+    "bytes": 10843,
+    "sha256": "b4ca62dbc10e06f1eecf6cece618b840458f480a69b428a5e57bd65080bfd505"
+  },
+  "build.gradle.kts": {
+    "bytes": 342,
+    "sha256": "824ab4b1e98146493f4598ff226f72d36e63ac1032b648e5028d4d9f6f2a7d0a"
+  },
+  "demo/androidApp/build.gradle.kts": {
+    "bytes": 4558,
+    "sha256": "20b80cb64027eb6f3cceb498194e0fe8b119a927c278c1b571618c6489c78a6e"
+  },
+  "demo/androidApp/src/androidTest/AndroidManifest.xml": {
+    "bytes": 853,
+    "sha256": "9d5b0075a6ef573eaa332539e71a40000aa46729c486c433b0e639a44c69224f"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/AsrAssetStatusInstrumentation.kt": {
+    "bytes": 5568,
+    "sha256": "777c2d2f33b014cfbf7e0a0edf388f530735231283e1fb416cd61ed0ce63e966"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/AsrProbeInstrumentation.kt": {
+    "bytes": 5749,
+    "sha256": "6a9eb32edb21dd3d27a03d0ffb4e8985b9c9341833e89240fd39bc8a87c4c19a"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/AsrSingleAttemptInstrumentation.kt": {
+    "bytes": 7286,
+    "sha256": "34b73c8cbc2000592a6c398375b5433b992ba23637636b3463ddf86db9c21cbd"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/DemoLayoutInstrumentation.kt": {
+    "bytes": 4004,
+    "sha256": "e70900f669f26d2f89105dea88dc124db34a8f053146d57f130a3a79b2dce471"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/MultimodalFixtureDocumentsProvider.kt": {
+    "bytes": 4643,
+    "sha256": "99288a04905f45b694675646d0a06e15a901d249ed9d39c7ae51c95e44182c97"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/MultimodalFixtureProvider.kt": {
+    "bytes": 2741,
+    "sha256": "ad41df3cfeec1658517f5ab8b56cde103454699a0c5582e7f8049e620296ddb7"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/MultimodalPickerInstrumentation.kt": {
+    "bytes": 13826,
+    "sha256": "f3264ef3dd18439f20a4fb1cb32854b1cbe84a80ade6446101349c210918727b"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/MultimodalScreenInstrumentation.kt": {
+    "bytes": 18559,
+    "sha256": "f88eaffd9a0de176950daebbd206bae797c16b6ae7cde0dce449e4afcd3e8ec1"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/SpeechDemoInstrumentation.kt": {
+    "bytes": 10849,
+    "sha256": "0f0dec66d9b08d39808ad6e4cef56d376332df70af0c54a3fd93f97e0b923fea"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/TtsProbeInstrumentation.kt": {
+    "bytes": 6605,
+    "sha256": "c81edb656aa138cd9fd140ecd8ca460e25f8510be6dcaf469eee6eba70d560c4"
+  },
+  "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/VideoDemoInstrumentation.kt": {
+    "bytes": 4028,
+    "sha256": "950f41f1bb3d3ddef5fc2f75fc889069d13bd1d576d22aff9419400489d1b7f0"
+  },
+  "demo/androidApp/src/debug/AndroidManifest.xml": {
+    "bytes": 245,
+    "sha256": "44eb117af00646b9a91f803e35af36bd5bf53f1dc78f68d3705fbbfad205e06e"
+  },
+  "demo/androidApp/src/litertlm/README.md": {
+    "bytes": 3880,
+    "sha256": "a1661f4284c990af12db7ef72c493cedcda2a92da8d110c430be7b1c4d0469a0"
+  },
+  "demo/androidApp/src/litertlm/kotlin/io/ondeviceai/demo/DemoMultimodalBackendFactory.kt": {
+    "bytes": 1664,
+    "sha256": "e61b4fe49030253abbe5cc51b03988df1a43249c84fc2ea3b9762edfbfe057bb"
+  },
+  "demo/androidApp/src/litertlm/kotlin/io/ondeviceai/demo/LiteRtLmDemoBackend.kt": {
+    "bytes": 5470,
+    "sha256": "12666398ea627045c2434efb76effdd1aa33a9262300879f2ea51066b5bb286d"
+  },
+  "demo/androidApp/src/litertlm/kotlin/io/ondeviceai/demo/LiteRtLmDemoModelImport.kt": {
+    "bytes": 2819,
+    "sha256": "11d9492c0126378b7b463a981652d128559ff08083f68015519c01169d4a8da2"
+  },
+  "demo/androidApp/src/litertlm/kotlin/io/ondeviceai/demo/LiteRtLmModelBundle.kt": {
+    "bytes": 3932,
+    "sha256": "c4aa36dd8d813cd0b4844cadbac77aef46881770105a958267152aa00d7ae326"
+  },
+  "demo/androidApp/src/litertlmAndroidTest/kotlin/io/ondeviceai/demo/LiteRtLmDemoInstrumentation.kt": {
+    "bytes": 3549,
+    "sha256": "9b1261b2501467f09aee072fecc4004411cc78596cb7d37869d56803d59100c7"
+  },
+  "demo/androidApp/src/litertlmAndroidTest/kotlin/io/ondeviceai/demo/LiteRtLmProcessBridgeInstrumentation.kt": {
+    "bytes": 26726,
+    "sha256": "68ece9a4b5aa78e6c84af3b6a808608f1c9d67e211e4ec552c01d1f057351644"
+  },
+  "demo/androidApp/src/litertlmAndroidTest/kotlin/io/ondeviceai/demo/LiteRtLmRealModelProbe.kt": {
+    "bytes": 8278,
+    "sha256": "7f3731b4b605305db3a4179a60a8b1a6f893c5018c8ba64ffc414e5480a9e666"
+  },
+  "demo/androidApp/src/litertlmTest/kotlin/io/ondeviceai/demo/LiteRtLmDemoBackendTest.kt": {
+    "bytes": 7346,
+    "sha256": "2a4d4c739f721ef0e1bef038829b6883ab40c24181c9d219cbb6b0d53f851914"
+  },
+  "demo/androidApp/src/litertlmTest/kotlin/io/ondeviceai/demo/LiteRtLmModelBundleTest.kt": {
+    "bytes": 2254,
+    "sha256": "71f163bb26cabb78f7aa6f298ce91bdf3d4b706d97448cfcd274e5d05d974413"
+  },
+  "demo/androidApp/src/litertsr/README.md": {
+    "bytes": 3564,
+    "sha256": "8d10a196c654f5e11ad3664fb7cc14c816cbf774969e087820247d54fc1b4974"
+  },
+  "demo/androidApp/src/litertsr/kotlin/io/ondeviceai/demo/DemoVideoBackendFactory.kt": {
+    "bytes": 581,
+    "sha256": "6a1650dca50576c3e0884a0c877d9cc75b652f7ccc794863f254edfa0621a8f5"
+  },
+  "demo/androidApp/src/litertsrAndroidTest/kotlin/io/ondeviceai/demo/VideoSrInstrumentation.kt": {
+    "bytes": 7984,
+    "sha256": "910d4724c7806aff2c2995da05f40e3c452b6b0e73ec4603c0c6504df9f8343d"
+  },
+  "demo/androidApp/src/main/AndroidManifest.xml": {
+    "bytes": 967,
+    "sha256": "8c4fa9b8ddfda409eee54c79342aecf7522475655d4c9a8f661de4d4fe568f98"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/AsrResourceHost.kt": {
+    "bytes": 2934,
+    "sha256": "b5c10f1788a347e66d08d4af04068933b9b9479bf80d6a15754372776ffc5684"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/DemoIdentityRuntime.kt": {
+    "bytes": 334,
+    "sha256": "8dea06fe80d12a12d1c94c196e12c711ac7e39bb529e38411f75f87d4b738318"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/DemoMultimodalRuntime.kt": {
+    "bytes": 215,
+    "sha256": "e665d389af6c527df259c7f1d70b31175783cd94cb448d207ebf81aa1c961c08"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/IdentityModelBundle.kt": {
+    "bytes": 1425,
+    "sha256": "4c0c83464e7cbf450ebf32db9206ef03791bc428f21100a441acc7cee4e383fa"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/ImageSampling.kt": {
+    "bytes": 226,
+    "sha256": "7477eb9975cf0add03b0f9d7eeba7ea9f250de1587539791443b2236387bc1bb"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/MainActivity.kt": {
+    "bytes": 25791,
+    "sha256": "3a5cd2118108361a1f0b58b66f2f27dc8d54b953091b262aa682bebbf62169f5"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/MultimodalHost.kt": {
+    "bytes": 6544,
+    "sha256": "81d6fd0c207c5de046e2b1f19f995e98cafa167cc5a09d0fb62fc3c11af5eb83"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/MultimodalInputStore.kt": {
+    "bytes": 5373,
+    "sha256": "d846bc487b35f99742fbc25abfbdc3201b80ff0c544981f6316f8b901ecef181"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/MultimodalPickerCopy.kt": {
+    "bytes": 2454,
+    "sha256": "0035259684a1c0f45156982f1f355ccb557eae594dcf0d0eb4444e1d66493018"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/PrototypeIdentityConsent.kt": {
+    "bytes": 1774,
+    "sha256": "c8a041c1c76911f423b3b1687daeb8d387d0e3cb37cf563e3be6f0d3aeeea416"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/SpeechHost.kt": {
+    "bytes": 8438,
+    "sha256": "0cc1467730b5f0d479d0d68de3ad4aa3f9c6f8924e6efbfd81b81d85e4b9d6f0"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/VideoHost.kt": {
+    "bytes": 2544,
+    "sha256": "bad19500fb4d2ec319c453aa86abbdd9919317b08be5130335673444f384d0b9"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/VideoInputStore.kt": {
+    "bytes": 3691,
+    "sha256": "0de5b788c4c57c202fc191f499a359eb0643ce30f4cbcdd35466397c2d71d0d8"
+  },
+  "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/VideoOutputExport.kt": {
+    "bytes": 954,
+    "sha256": "0f6ade2ada332617b1bba9b62dd9d7d5f243ce9384fc5e4c40d6b856c5eb17df"
+  },
+  "demo/androidApp/src/main/res/xml/video_output_paths.xml": {
+    "bytes": 138,
+    "sha256": "697244a6734675b4bcf47a6d46fbc92874ba7aa7f6c2bbb11a0089c2bdfb5c63"
+  },
+  "demo/androidApp/src/noLitertlm/kotlin/io/ondeviceai/demo/DemoMultimodalBackendFactory.kt": {
+    "bytes": 521,
+    "sha256": "ef74332fd892d3fe28960443b39317f6c92d8d8b77ad765950c6882fb0347117"
+  },
+  "demo/androidApp/src/noLitertsr/kotlin/io/ondeviceai/demo/DemoVideoBackendFactory.kt": {
+    "bytes": 328,
+    "sha256": "38e7517f301a798f1a27eed5f573e785d2fb42a478de97740278de2b40538fd8"
+  },
+  "demo/androidApp/src/noOpencvidentity/kotlin/io/ondeviceai/demo/DemoIdentityBackendFactory.kt": {
+    "bytes": 322,
+    "sha256": "062d030497a3de8b6d48ff1c6f08ac82d53fe5a445480334aad8d75f68b4658a"
+  },
+  "demo/androidApp/src/noSherpaasr/kotlin/io/ondeviceai/demo/DemoOfflineAsrFactory.kt": {
+    "bytes": 283,
+    "sha256": "4437a18ad32862dfb8d42d2ba4f6f73a0adf5a02f1044e8199118eacc8eca541"
+  },
+  "demo/androidApp/src/opencvidentity/README.md": {
+    "bytes": 3515,
+    "sha256": "9913955d1b86467e263fc67590a7bfbf2ffe519561e513cda47e47a366b4ce4e"
+  },
+  "demo/androidApp/src/opencvidentity/assets/third-party/opencv-identity/OpenCV-LICENSE.txt": {
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "demo/androidApp/src/opencvidentity/assets/third-party/opencv-identity/SFace-LICENSE.txt": {
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "demo/androidApp/src/opencvidentity/assets/third-party/opencv-identity/YuNet-LICENSE.txt": {
+    "bytes": 1085,
+    "sha256": "c83b8120c50ccbd4c4f96edf53141bdd566ebb8f8e9227e415326aa1b1aba958"
+  },
+  "demo/androidApp/src/opencvidentity/kotlin/io/ondeviceai/demo/DemoIdentityBackendFactory.kt": {
+    "bytes": 7883,
+    "sha256": "243d7a7db8c0c77d66c03f7316d3b0b200db1fc61a2bbcfa57dce10a2ecf9991"
+  },
+  "demo/androidApp/src/opencvidentity/kotlin/io/ondeviceai/demo/OpenCvPrototypeSession.kt": {
+    "bytes": 6491,
+    "sha256": "e6e778568a6bbcf38906459846fe2f3f5bc344c3dcb181552ffc3ad1e10b0911"
+  },
+  "demo/androidApp/src/opencvidentityAndroidTest/kotlin/io/ondeviceai/demo/IdentityModelInstrumentation.kt": {
+    "bytes": 12802,
+    "sha256": "f34503d88cbfeb4d0c5e7ac80c415460c90feebccaed89e693d62cb8ad7660ac"
+  },
+  "demo/androidApp/src/opencvidentityTest/kotlin/io/ondeviceai/demo/IdentityDiagnosticPresenterTest.kt": {
+    "bytes": 1000,
+    "sha256": "5b2dfcf01d34dc35aaa035295a4afca28caa274810112e40bbed8c1037ed056e"
+  },
+  "demo/androidApp/src/sherpaasr/kotlin/io/ondeviceai/demo/DemoOfflineAsrFactory.kt": {
+    "bytes": 1555,
+    "sha256": "6e10d9375f52a288e543359d7bf5cc698b26052f6d2978a0d49bcb93d3a50a9b"
+  },
+  "demo/androidApp/src/sherpaasrAndroidTest/kotlin/io/ondeviceai/demo/SherpaAsrInstrumentation.kt": {
+    "bytes": 4637,
+    "sha256": "e79ca153600173fb77a8013dcac90e544763c56948849a06928b4a87beb630fe"
+  },
+  "demo/androidApp/src/sherpaasrAndroidTest/kotlin/io/ondeviceai/demo/SherpaAsrLifecycleInstrumentation.kt": {
+    "bytes": 7311,
+    "sha256": "5e056e07af1f3c3d5b180b3df51b937557390db80692e98287a164de0a3997de"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/AsrResourceHostTest.kt": {
+    "bytes": 4595,
+    "sha256": "955d3ee1b9654845ee100214c86f476c36f7bd4391c6bf0862e9148ee8eaa215"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/IdentityModelBundleTest.kt": {
+    "bytes": 1732,
+    "sha256": "4613031d45084d849ed845fe49da683571286a6931dbd231c52ef18b554b947a"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/ImageSamplingTest.kt": {
+    "bytes": 385,
+    "sha256": "b80304817645afd001ec19d94f01a41804b4c064dd1958d0d87a4c7145424d65"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/MultimodalHostTest.kt": {
+    "bytes": 19471,
+    "sha256": "f95712a9b87ee56d2fe2c96c4e5dba5551c59d3025514d8116165c62c895f48b"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/MultimodalInputStoreTest.kt": {
+    "bytes": 7464,
+    "sha256": "4722acf45adc32555178ab6154d3dc17303d9d45ce02a06cb6f520454e8f24fc"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/MultimodalPickerCopyTest.kt": {
+    "bytes": 2935,
+    "sha256": "4a1a3049350392b997ca152376d41a578952f8b625e8f2fac574a30c3cb3ca9f"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/PrototypeIdentityConsentTest.kt": {
+    "bytes": 1459,
+    "sha256": "d6d798613cb75903506596431c4d1f48ac3110f701336e6a5b14578888f18e53"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/SpeechHostTest.kt": {
+    "bytes": 7872,
+    "sha256": "4d2db90100be20df1be3ce4890093ae1d656a7442d285b1899eed5c722d351ac"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/VideoHostTest.kt": {
+    "bytes": 2411,
+    "sha256": "0175e84b38ec806d8e01d2fe7adf7a7da22dc6ccd09e2764c3c6ee3091ef4829"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/VideoInputStoreCleanupFailureTest.kt": {
+    "bytes": 4123,
+    "sha256": "85d16a0dec77a5d7f48bfbdb81576c5313b815e33a97c94f63b685756aaec5fe"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/VideoInputStoreFailedImportCleanupTest.kt": {
+    "bytes": 5010,
+    "sha256": "962bbfc5e31d3a6604d7d25dd168fb27a52b7b5631f0b06de9953690060b1cd7"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/VideoInputStoreTest.kt": {
+    "bytes": 1664,
+    "sha256": "3360cf6f19d9966edd82eee20ecf47f439c2b5d40a057ba48392570babcd5e04"
+  },
+  "demo/androidApp/src/test/kotlin/io/ondeviceai/demo/VideoOutputExportTest.kt": {
+    "bytes": 1034,
+    "sha256": "f4fe80a12ee0a07dd5d84b4bae9edbf5b4350da20e26a83308bf1c71a48c05e2"
+  },
+  "demo/shared/build.gradle.kts": {
+    "bytes": 1387,
+    "sha256": "920fff9f9407b11c961f12e6d84790dd2514ec764a94d5980c13e3d5735e6191"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/FaceScreen.kt": {
+    "bytes": 13509,
+    "sha256": "2d7f43a3cb166b716a19078b4bf7f82b0fd2680ff91f78525bdfee874011aaf3"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/FaceViewModel.kt": {
+    "bytes": 2259,
+    "sha256": "eaa7723ad74b4d07865fef0ee87fd6acebedddf6250ce63df85ff932202131cf"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/IdentityGalleryPublication.kt": {
+    "bytes": 5695,
+    "sha256": "1b16e8b6be04ec8474c9a8b567ce3c664c5c8488aed11b9558d3f98227d342f0"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/IdentityViewModel.kt": {
+    "bytes": 21971,
+    "sha256": "a1d33fbce9f3f02e19242e48b5d976e50e8f9c9db1f393f0063e8cbf2cd40cee"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/MultimodalDemoActions.kt": {
+    "bytes": 821,
+    "sha256": "a9133213de627aa90c0bbb69db58d5ccdb202b6eb499cb393557647b0fd91cf5"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/MultimodalScreen.kt": {
+    "bytes": 6939,
+    "sha256": "e18e1cb28970ca2a92e0b0fc2b62dc54d45684f4bba6b0b8695b3d326d74edfd"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/MultimodalViewModel.kt": {
+    "bytes": 8640,
+    "sha256": "ab7acc2829fb4b5c69b533a3ea3e1e56a0c165e828be22806b2f27cf1389a1ed"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/SpeechAsrResources.kt": {
+    "bytes": 3711,
+    "sha256": "f7a4946020ac689ca0e5b1126a37e37b6161703ba23722a22817a124864c7303"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/SpeechScreen.kt": {
+    "bytes": 7917,
+    "sha256": "b98a0ae3efd207b1ba5d4085808a2465960aa2cb414b3d497fca1ba2fdb6a4e1"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/SpeechViewModel.kt": {
+    "bytes": 10413,
+    "sha256": "984004f0b69392deff295174e104fab371ea68fdfb41ba133b6074b945f7100f"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/VideoScreen.kt": {
+    "bytes": 5068,
+    "sha256": "db0a2ae7c317fc21e83df91b90e0407ad20034691b496a3d9d641ca8459498cd"
+  },
+  "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/VideoViewModel.kt": {
+    "bytes": 8206,
+    "sha256": "51f4e3ab67dea3385c3d50ee2beaebdb0451d423956f4cfaba41b2e3de36065c"
+  },
+  "demo/shared/src/commonTest/kotlin/io/ondeviceai/demo/FaceViewModelTest.kt": {
+    "bytes": 2781,
+    "sha256": "e564d16367b93a2ec07ca04671b55a11981ff2d713a6c4a820efa89015c2576a"
+  },
+  "demo/shared/src/commonTest/kotlin/io/ondeviceai/demo/IdentityGalleryPublicationTest.kt": {
+    "bytes": 6886,
+    "sha256": "8e05b359c0610ee3dc7029ba035303a179264c0dae17c0a652c30ac12dcb808d"
+  },
+  "demo/shared/src/commonTest/kotlin/io/ondeviceai/demo/IdentityViewModelTest.kt": {
+    "bytes": 31603,
+    "sha256": "fb2d7ae921802b4e695313b1e5ef5676ecf2f52ce441d0ef8bed0a56fd3e6a17"
+  },
+  "demo/shared/src/commonTest/kotlin/io/ondeviceai/demo/MultimodalViewModelTest.kt": {
+    "bytes": 16023,
+    "sha256": "64d53023e724a44e39b39d650a7c62c6931a1fdfcb3a1e35c4edc67060cefd52"
+  },
+  "demo/shared/src/commonTest/kotlin/io/ondeviceai/demo/SpeechViewModelTest.kt": {
+    "bytes": 12094,
+    "sha256": "e829a0f1bc5048d78378079a4694bd8d06e0bc9a7fff634060895eed3396d420"
+  },
+  "demo/shared/src/commonTest/kotlin/io/ondeviceai/demo/VideoViewModelTest.kt": {
+    "bytes": 6966,
+    "sha256": "c8cf9b5b35173b1929ee98323af41cb00021166a684032d8de837723ef3bcf95"
+  },
+  "demo/shared/src/iosMain/kotlin/io/ondeviceai/demo/MainViewController.kt": {
+    "bytes": 2085,
+    "sha256": "a6a2b4ded5afa07c671140f90dbeeb5bd4bf0800d7b3eb69a8e8a71cbc95b402"
+  },
+  "gradle.properties": {
+    "bytes": 141,
+    "sha256": "6ed9813b8b32e43aad8928a3316db4ebb5b98c2e472ab91a5d56549a35b4e932"
+  },
+  "gradle/libs.versions.toml": {
+    "bytes": 594,
+    "sha256": "38e04cbd97c25b878cbaa4a3aa57bc2b16930c1dcc968f98e51253eb8397dda7"
+  },
+  "gradle/wrapper/gradle-wrapper.jar": {
+    "bytes": 48966,
+    "sha256": "55243ef57851f12b070ad14f7f5bb8302daceeebc5bce5ece5fa6edb23e1145c"
+  },
+  "gradle/wrapper/gradle-wrapper.properties": {
+    "bytes": 339,
+    "sha256": "032a71c92fc7f3c1cadf8880f0554b71aa6beb411f97ac253aa93932cb3784d5"
+  },
+  "gradlew": {
+    "bytes": 8654,
+    "sha256": "aed171fb114f82e6eaea4970a245a200e0582a7dcc8ec0891ca41b6e4a62b754"
+  },
+  "kmp-binding/apple/IOSIdentityBridge.swift": {
+    "bytes": 31457,
+    "sha256": "96f4564b73f270a6f77f3d2b17c43ec4b8de54dd4c0c776feffc32988890682f"
+  },
+  "kmp-binding/apple/IOSMultimodalBridge.swift": {
+    "bytes": 10427,
+    "sha256": "a024fbdf5e243de156d02ce18521e844923bbc81f899846739d40c2e5a4fa554"
+  },
+  "kmp-binding/apple/IOSMultimodalInput.swift": {
+    "bytes": 415,
+    "sha256": "56ed37a4ddbb308b7a1588b155121b15e8cfb5e758c95cf8ef72267e26aa9a5e"
+  },
+  "kmp-binding/apple/IOSSpeechAudioInput.swift": {
+    "bytes": 367,
+    "sha256": "b198af1d7f118ce5cd7627bb9129c885962abf2c986e016277043326c15194a9"
+  },
+  "kmp-binding/apple/IOSSpeechBridge.swift": {
+    "bytes": 13640,
+    "sha256": "7e9abab8e121a618f84b96d9940f5e3785f65f081e0bfe112b34a616a520e7c2"
+  },
+  "kmp-binding/apple/IOSVideoBridge.swift": {
+    "bytes": 12246,
+    "sha256": "3b08c23217c488eb2252a5aa81357b02d0fe3b3242065e0a15bdf07936cdfac4"
+  },
+  "kmp-binding/apple/IOSVideoInput.swift": {
+    "bytes": 341,
+    "sha256": "fcac6214578ae452756ee1f20c55ecb817e7df12403daa92dce4b99b4860ce81"
+  },
+  "kmp-binding/build.gradle.kts": {
+    "bytes": 872,
+    "sha256": "e1cd6cd618f1c94e569c4c7055ac0069d4584df0f50e9433a43479c30aee068f"
+  },
+  "kmp-binding/src/androidMain/kotlin/io/ondeviceai/binding/AndroidFaceBridge.kt": {
+    "bytes": 2886,
+    "sha256": "c955c5bf621569a7757163ab71a9421814f27afd04cec3aa412a9568dfa49e6b"
+  },
+  "kmp-binding/src/androidMain/kotlin/io/ondeviceai/binding/AndroidIdentityBridge.kt": {
+    "bytes": 18746,
+    "sha256": "8e895d73e76f6330f886d7cc9ff39a595a4dee2821e69141fa45e55541477f59"
+  },
+  "kmp-binding/src/androidMain/kotlin/io/ondeviceai/binding/AndroidMultimodalBridge.kt": {
+    "bytes": 9316,
+    "sha256": "a8aad9ee2d335871f8a63b57260eb97662067410f5815a2cdb5afad4a59234cb"
+  },
+  "kmp-binding/src/androidMain/kotlin/io/ondeviceai/binding/AndroidSpeechBridge.kt": {
+    "bytes": 13967,
+    "sha256": "8e8146ff3997952df543b9ede8448fc18431923768e863935ee59629eb49a982"
+  },
+  "kmp-binding/src/androidMain/kotlin/io/ondeviceai/binding/AndroidVideoBridge.kt": {
+    "bytes": 11303,
+    "sha256": "6de34f23f86439c7911aa74bae8d75e135d0bc20973f7e00ef2b5f8631a05ca5"
+  },
+  "kmp-binding/src/commonMain/kotlin/io/ondeviceai/binding/FaceBridge.kt": {
+    "bytes": 1515,
+    "sha256": "5891aed0984f3d779596a6e5e6aadea6dfa8b610ddb3365aad6682f46c340346"
+  },
+  "kmp-binding/src/commonMain/kotlin/io/ondeviceai/binding/IdentityBridge.kt": {
+    "bytes": 16810,
+    "sha256": "f86c37a2399f308e1fcf3c25c49ed4f9635bc4b83524d1b69eb4f6a2976998fc"
+  },
+  "kmp-binding/src/commonMain/kotlin/io/ondeviceai/binding/MultimodalBridge.kt": {
+    "bytes": 5012,
+    "sha256": "d63ca7cada63574e7d6fee37ee35e6d650763b7cecf1ea6d4523a8c35336939a"
+  },
+  "kmp-binding/src/commonMain/kotlin/io/ondeviceai/binding/SpeechBridge.kt": {
+    "bytes": 5786,
+    "sha256": "52f79d542e22eab8616fdf870e579dfc540f64101a8dcec550fdf9fbd33550ef"
+  },
+  "kmp-binding/src/commonMain/kotlin/io/ondeviceai/binding/VideoBridge.kt": {
+    "bytes": 4724,
+    "sha256": "a3c48fa61111e49f410ad441490810714618af55711ebf4424485313ca217004"
+  },
+  "kmp-binding/src/commonTest/kotlin/io/ondeviceai/binding/BridgeProbeTest.kt": {
+    "bytes": 478,
+    "sha256": "ab7d9886da03117df5c5e20c6407d4f5b6bf537c706942effe2209455614065b"
+  },
+  "kmp-binding/src/commonTest/kotlin/io/ondeviceai/binding/IdentityBridgeContractTest.kt": {
+    "bytes": 2166,
+    "sha256": "9b1303536b59753af5652a876922823b352b801dd57500f85903a8659c9bf556"
+  },
+  "kmp-binding/src/commonTest/kotlin/io/ondeviceai/binding/MultimodalBridgeContractTest.kt": {
+    "bytes": 4079,
+    "sha256": "f17c886595e578a21c42ca05ac2f48530fecc42e007b32709732b0299546aa80"
+  },
+  "kmp-binding/src/commonTest/kotlin/io/ondeviceai/binding/MultimodalVideoBridgeContractTest.kt": {
+    "bytes": 3109,
+    "sha256": "1a7c2fb0b45bf5f0ecf3ba0fbf8e1d64be878261625b081da62fced1145e853a"
+  },
+  "kmp-binding/src/commonTest/kotlin/io/ondeviceai/binding/SpeechBridgeContractTest.kt": {
+    "bytes": 7207,
+    "sha256": "8ca924bc1bd576bc57ae81f5ecc5ea0c906f02cf2f3251ad52195412bd1f0832"
+  },
+  "kmp-binding/src/commonTest/kotlin/io/ondeviceai/binding/VideoBridgeContractTest.kt": {
+    "bytes": 4576,
+    "sha256": "7de8a119321a39a7a7fe764d356f88f40545707a3e1edd305efd6a908f0787ad"
+  },
+  "settings.gradle.kts": {
+    "bytes": 2147,
+    "sha256": "4518940184c31edfb0c4d778fa64996f06f0c1a0a02398dccc409d1c57af0cf4"
+  },
+  "tools/prepare_sherpa_asr.py": {
+    "bytes": 4456,
+    "sha256": "76b04703882e4c4cee9c9f0ca3a82645fef10635ce0c5aeddfdf22b50714bc62"
+  }
+}
