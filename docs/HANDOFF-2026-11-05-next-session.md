@@ -1,3 +1,7 @@
+## 2026-11-16 W3 R5方案已交付并完成限定验收
+
+[方案](validation/w3-r5-resource-options-20261116.md)/[收据](validation/w3-r5-resource-options-20261116.json)：三个免费hy354.701/40.502/38.524s完整终态、零观察工具调用；首稿绝对延迟/选择子集统计不接受，修正版只保留未来固定Qwen顺序FILE的p95两阶段RTF≤1、App采样RSS≤1GiB产品草案，未批准。独立复核一MEDIUM纠正p95非每请求保证，精确old/new机械集成；父原数据210check含161freeze通过，Apple小数初抄错被拦并改用原收据值，原失败保留。原65质量范围和未消费one-file terminal合同/1.5GiB守卫不改，176原工作在共享更新前保持、没有新设备/下载/生产实现；零删除，45小文件均为应保留证据，无新缓存。R4/R5/P1–P4/W3/W8全open、goal active，源码不push；当前待精确提交/双端记录，后续需产品预算裁定及实体通道恢复才能补相应真机证据，不重试旧quota/源站429/USB或旧FILE。
+
 ## 2026-11-16 W3 native版本字段对应已提交并双端同步
 
 92c5943精确34文件；GH#15 comment6897809741/GL#15 note44872/GH Wiki773962e逐字回读，双Wiki SHA2fd706e2c16a7e955b8a60a057faad2153fd0a527a6d292208de7394448913c5一致，[收据](validation/w3-native-version-binding-sync-20261116.json)。marker已用，源码未push，四hy3/三发布均终态，无待poll。四AAR C-API成员/12静态字面量、12测试/8仅内存负例及限定复核通过，25材料hash/161freeze/176原工作内容保持；首候选与夹具错误、原stderr两处尾空格保留，未格式化证据。精确清15406B单pyc，原ELF/AAR/全部prompt/raw保留；无新构建或设备动作。P1–P4/R4/R5/W3仍open、goal active。下一核R5现有预算建议与可靠测量缺口，提出具体可审方案；实体连接有新变化后再fresh固定未消费合同，不重试旧quota/源站429/USB/旧FILE。

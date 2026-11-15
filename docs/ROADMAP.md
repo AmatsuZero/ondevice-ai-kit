@@ -1,3 +1,7 @@
+## 2026-11-16 W3：R5预算形成具体草案
+
+[方案与缺测边界](validation/w3-r5-resource-options-20261116.md)由免费hy3交付/限定复核，父原始证据复算210项含161freeze通过；未来Qwen各语音组p95两阶段RTF≤1/App采样RSS≤1GiB仅待产品批准草案，不追认旧结果、不缩原65质量或1.5GiB诊断守卫。R4/R5/P1–P4/W3/W8仍open；零新真机调用、模型下载或生产实现变更。
+
 ## 2026-11-16 W3：native版本字段静态对应增量
 
 四ABI固定C-API库三函数/12字面量与既有version.cc/CI修改一致，hy3原始字节解码、12测试/8同长内存负例及限定独立复核通过；[验证](validation/w3-native-version-binding-20261116.md)。只补P1版本字段对应，完整native源码/组成、生产采用与发布接受及R4/R5仍缺，W3保持open；无新构建或设备调用，不重试旧FILE/USB/429。

@@ -1,3 +1,7 @@
+## W3 R5：统计目标、原值精度与完整批次边界（2026-11-16）
+
+预算文稿首稿固定毫秒未约束文件时长、以completed复杂片段建档，容易把部分成功统计当全批通过；修正版改为未来固定候选/设备/PCM时长档案的各语音组两阶段RTF与App采样RSS草案，失败/缺测先报、完整终态缺失不能预算通过，原65质量范围和1.5GiB实验守卫不变。限定hy3复核另指出p95≤1只约束第95百分位，不保证每请求；精确old/new已集成。父离线checker手抄过精Apple时长常量触发断言，保留初稿/失败后直接与原raw acceptance的median/p95比较，210项含161freeze通过；未改原报告或重跑设备。记录草案、独立供应上下文审阅、父复算与产品预算批准分开，不以文稿/模型success关闭R5/W3。见[方案及收据](validation/w3-r5-resource-options-20261116.md)、.omx/artifacts/w3-r5-options-20261116T005018/。
+
 ## W3 native版本检查：Thumb模式、指令位域与ELF夹具偏移（2026-11-16）
 
 四ABI原C-API库版本函数已导出，但普通符号表空不代表无动态符号；nm显示会清Thumb低位，raw dynsym为odd。默认objdump按ARM误解Thumb成strbt/svc/unknown，强制thumbv7后恢复；POP后的fn+12是literal pool，不是执行异常。hy3首稿ADD位条件自相矛盾/寄存器移位错、i386 CALL偏移9而实际6、三返回值解包成二导致7tests/6errors及真实仅1/4通过，保留拒收原件；七精确修正后12指令引用/8损坏控制通过。新增signed-ADRP夹具又误写ELF64 p_paddr+24，须分别扩filesz+32/memsz+40；ADD shift位为22，独立两处测试修正后12方法全过。parent只接受原字节helper解码实现和限定复核，版本字符串可伪造、不证明全native源码/组成或执行；检查参考NDK beta3不冒充历史工具链。见[验证](validation/w3-native-version-binding-20261116.md)及.omx/artifacts/w3-native-version-20261116T002000/；原quota/源站429未重试。

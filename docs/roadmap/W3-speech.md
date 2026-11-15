@@ -1,3 +1,7 @@
+## 2026-11-16：R5实测口径复算与预算草案
+
+免费hy3三项请求均完整终态；首稿口径修正、限定复核一处p95措辞按原old/new集成。[方案](../validation/w3-r5-resource-options-20261116.md)及[机器收据](../validation/w3-r5-resource-options-20261116.json)：父端复算Apple/Whisper/Qwen原报告210项通过（含161freeze），176原工作文件在共享更新前保持。建议未来固定TECNO Qwen顺序FILE按各语音组p95两阶段RTF≤1及App采样RSS≤1GiB作产品讨论草案，未批准、不按既有值追认；完整批次失败不能靠完成子集百分位掩盖，原65质量范围及1.5GiB实验守卫不变。零新设备/下载/生产代码改变，不重跑已验持续批次或旧USB/FILE；R4/R5、P1–P4与W3/W8仍open。
+
 ## 2026-11-16：native版本字段对应已双端归档
 
 92c5943（34文件）及[同步收据](../validation/w3-native-version-binding-sync-20261116.json)：GH#15 comment6897809741/GL#15 note44872/GH Wiki773962e逐字回读，双Wiki SHA2fd706e2c16a7e955b8a60a057faad2153fd0a527a6d292208de7394448913c5一致。25材料/161freeze/176既有工作内容保持，四hy3及三发布均终态；12静态字面量对应不等于全部native源码/组成或发布接受。P1–P4/R4/R5/W3保持open，源码未push；下一R5可靠测量/预算方案，实体连接变化后续固定未消费run，不回放旧FILE或USB恢复循环。
