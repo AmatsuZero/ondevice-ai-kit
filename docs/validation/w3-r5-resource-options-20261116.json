@@ -613,11 +613,17 @@
   "P4Accepted": false,
   "W3Complete": false,
   "W8Complete": false,
-  "goalRemains": "active",
+  "goalRemains": "blocked",
   "limitations": [
     "Parent independently recomputed retained raw values; this is not a new model/device measurement.",
     "The hy3 reviewer read supplied candidate and receipts only; exact single wording correction applied mechanically; reviewer did not execute parent checks.",
     "Raw helper prompts/outputs and source device reports remain in local ignored artifact paths, not guaranteed distributed with Git.",
     "Numeric targets are product discussion drafts; none retroactively pass old observations or change existing experimental safety limits."
-  ]
+  ],
+  "runtimeGoalStatusCorrection": {
+    "observedStatus": "blocked",
+    "priorActiveWordDerivedFromHandoffNotFreshRuntime": true,
+    "goalStatusChangedByThisWork": false,
+    "W3Complete": false
+  }
 }

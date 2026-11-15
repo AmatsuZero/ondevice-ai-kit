@@ -39,10 +39,16 @@
   "P4Accepted": false,
   "W3Complete": false,
   "W8Complete": false,
-  "goalRemains": "active",
+  "goalRemains": "blocked",
   "allThreeHy3RequestsTerminal": true,
   "allThreePublicationProcessesTerminal": true,
   "newDeviceRuns": 0,
   "newDownloads": 0,
-  "publicationEvidenceRoot": ".omx/artifacts/w3-r5-options-20261116T005018/publication"
+  "publicationEvidenceRoot": ".omx/artifacts/w3-r5-options-20261116T005018/publication",
+  "runtimeGoalStatusCorrection": {
+    "observedStatus": "blocked",
+    "priorActiveWordDerivedFromHandoffNotFreshRuntime": true,
+    "goalStatusChangedByThisWork": false,
+    "W3Complete": false
+  }
 }

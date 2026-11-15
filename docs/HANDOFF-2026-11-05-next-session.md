@@ -1,10 +1,10 @@
 ## 2026-11-16 W3 R5草案已提交及双端同步
 
-bf4d1e0精确6文件；GH#15 comment6902769542/GL#15 note44873与双Wiki逐字回读，GH Wiki dc0e197、双Wiki SHA4744821434328170f41e7eb2dbf99e762621fa51e587eabdf48388fc6d1b99ee；[同步收据](validation/w3-r5-resource-options-sync-20261116.json)。marker已用勿重发，三hy3/三发布均终态，无待poll；源码未push。R5可靠测量/预算建议子项已形成具体可审方案，不等于预算批准或整包验收，210check含161freeze、176原工作保持；小数首错误和文稿修正保留，零新构建/设备/下载。R4/R5/P1–P4/W3/W8仍open、goal active。下一推进未决完整生产组成/发布证据；真机有实体连接新变化后才能fresh既有未消费单文件诊断，不重放65/旧FILE或USB恢复循环，不自动重试旧quota/源站429。
+bf4d1e0精确6文件；GH#15 comment6902769542/GL#15 note44873与双Wiki逐字回读，GH Wiki dc0e197、双Wiki SHA4744821434328170f41e7eb2dbf99e762621fa51e587eabdf48388fc6d1b99ee；[同步收据](validation/w3-r5-resource-options-sync-20261116.json)。marker已用勿重发，三hy3/三发布均终态，无待poll；源码未push。R5可靠测量/预算建议子项已形成具体可审方案，不等于预算批准或整包验收，210check含161freeze、176原工作保持；小数首错误和文稿修正保留，零新构建/设备/下载。R4/R5/P1–P4/W3/W8仍open、goal运行时最终回读blocked（W3未完成）。下一推进未决完整生产组成/发布证据；真机有实体连接新变化后才能fresh既有未消费单文件诊断，不重放65/旧FILE或USB恢复循环，不自动重试旧quota/源站429。
 
 ## 2026-11-16 W3 R5方案已交付并完成限定验收
 
-[方案](validation/w3-r5-resource-options-20261116.md)/[收据](validation/w3-r5-resource-options-20261116.json)：三个免费hy354.701/40.502/38.524s完整终态、零观察工具调用；首稿绝对延迟/选择子集统计不接受，修正版只保留未来固定Qwen顺序FILE的p95两阶段RTF≤1、App采样RSS≤1GiB产品草案，未批准。独立复核一MEDIUM纠正p95非每请求保证，精确old/new机械集成；父原数据210check含161freeze通过，Apple小数初抄错被拦并改用原收据值，原失败保留。原65质量范围和未消费one-file terminal合同/1.5GiB守卫不改，176原工作在共享更新前保持、没有新设备/下载/生产实现；零删除，45小文件均为应保留证据，无新缓存。R4/R5/P1–P4/W3/W8全open、goal active，源码不push；当前待精确提交/双端记录，后续需产品预算裁定及实体通道恢复才能补相应真机证据，不重试旧quota/源站429/USB或旧FILE。
+[方案](validation/w3-r5-resource-options-20261116.md)/[收据](validation/w3-r5-resource-options-20261116.json)：三个免费hy354.701/40.502/38.524s完整终态、零观察工具调用；首稿绝对延迟/选择子集统计不接受，修正版只保留未来固定Qwen顺序FILE的p95两阶段RTF≤1、App采样RSS≤1GiB产品草案，未批准。独立复核一MEDIUM纠正p95非每请求保证，精确old/new机械集成；父原数据210check含161freeze通过，Apple小数初抄错被拦并改用原收据值，原失败保留。原65质量范围和未消费one-file terminal合同/1.5GiB守卫不改，176原工作在共享更新前保持、没有新设备/下载/生产实现；零删除，45小文件均为应保留证据，无新缓存。R4/R5/P1–P4/W3/W8全open、goal运行时最终回读blocked（W3未完成），源码不push；当前待精确提交/双端记录，后续需产品预算裁定及实体通道恢复才能补相应真机证据，不重试旧quota/源站429/USB或旧FILE。
 
 ## 2026-11-16 W3 native版本字段对应已提交并双端同步
 
