@@ -1,0 +1,425 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "candidate": "declarative index plus selected raw native notice copies and one module README append only",
+    "assetIndexPath": "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/index.json",
+    "rawCopyRoot": "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native",
+    "readmeAppendTarget": "android/backend-sherpa-asr/README.md",
+    "preserveOtherEdits": true,
+    "scopeChanges": [],
+    "excluded": [
+      "existing JVM assets",
+      "Kotlin",
+      "Gradle",
+      "dependencies",
+      "coordinates",
+      "locks",
+      "versions",
+      "models",
+      "upstream runtime AAR",
+      "native429/hy4free429 retries",
+      "paid/model fallback",
+      "global config/signing/device/model changes"
+    ],
+    "binding": "IDs bind mechanically to supplied source path, bytes, SHA, revision and manifest; raw bytes are not regenerated here."
+  },
+  "incomplete": true,
+  "groups": [
+    {
+      "groupId": "onnxruntime-v1.28.2",
+      "component": "onnxruntime",
+      "rationale": "Selected current known direct notice materials from the fixed Sherpa runtime source set: ORT LICENSE and the whole ORT ThirdPartyNotices.txt.",
+      "applicabilityBoundary": "ThirdPartyNotices.txt is preserved unchanged as upstream notice scope only; it is not evidence that every listed component is linked. ORT nested source/reference notices are deferred to final recursive composition review."
+    },
+    {
+      "groupId": "kaldi-native-fbank-v1.22.4",
+      "component": "kaldi-native-fbank",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no inference about final linked code beyond this bounded native subset."
+    },
+    {
+      "groupId": "utf8proc-v2.12.0",
+      "component": "utf8proc",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no inference about final linked code beyond this bounded native subset."
+    },
+    {
+      "groupId": "kaldi-decoder-v0.3.0",
+      "component": "kaldi-decoder",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials; the Apache-2.0 full text is retained separately.",
+      "applicabilityBoundary": "No rewrite or substitution of the original file; applicability is bounded to the selected known native source subset."
+    },
+    {
+      "groupId": "openfst-v1.8.5-2026-07-09",
+      "component": "openfst",
+      "rationale": "Selected original OpenFst COPYING attribution, which references Apache-2.0.",
+      "applicabilityBoundary": "Preserved as the original attribution; selected Sherpa/kaldi Apache-2.0 full texts are retained separately and the original is not rewritten."
+    },
+    {
+      "groupId": "simple-sentencepiece-v0.7",
+      "component": "simple-sentencepiece",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no broader sentencepiece deployment claim is implied."
+    },
+    {
+      "groupId": "json-v3.12.0",
+      "component": "json",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no ORT nested nlohmann_json scope is inferred from this copy."
+    },
+    {
+      "groupId": "kissfft-source-revision-bound",
+      "component": "kissfft",
+      "rationale": "Selected KissFFT COPYING because it explicitly names BSD-3-Clause and the LICENSES/BSD-3-Clause file, preserving that hierarchy.",
+      "applicabilityBoundary": "The Unlicense text remains a retained reference only; do not imply it is legally inapplicable or that it covers a deployed path."
+    },
+    {
+      "groupId": "kaldifst-v1.8.0",
+      "component": "kaldifst",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no inference about final linked code beyond this bounded native subset."
+    },
+    {
+      "groupId": "hclust-cpp-2026-02-25",
+      "component": "hclust-cpp",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no inference about final linked code beyond this bounded native subset."
+    },
+    {
+      "groupId": "sherpa-onnx-v2.0.1",
+      "component": "sherpa-onnx",
+      "rationale": "Selected current known direct Sherpa source notice from the fixed runtime materials; the Apache-2.0 full text is retained separately.",
+      "applicabilityBoundary": "No rewrite or substitution of the original file; applicability is bounded to the selected known native source subset."
+    },
+    {
+      "groupId": "eigen-5.0.1-observed-build",
+      "component": "eigen",
+      "rationale": "Observed Sherpa build materials identify Eigen 5.0.1, so the observed 5.0.1 notice set is selected.",
+      "applicabilityBoundary": "Historical Eigen 3.4 files are not selected here; ORT nested Eigen notices remain a separate deferred chain; no claim that every license body applies to a retained code path."
+    },
+    {
+      "groupId": "websocketpp-observed-build-revision-bound",
+      "component": "websocketpp",
+      "rationale": "Selected observed build download/enablement notice material for websocketpp under the bounded native subset.",
+      "applicabilityBoundary": "Observed enabled/download on ARM only with x86 and x86_64 OFF; not proof of exact retained code or all ABI coverage."
+    },
+    {
+      "groupId": "asio-asio-1-24-0-observed-build",
+      "component": "asio",
+      "rationale": "Selected observed build download/enablement notice material for asio under the bounded native subset.",
+      "applicabilityBoundary": "Observed enabled/download on ARM only with x86 and x86_64 OFF; not proof of exact retained code or all ABI coverage."
+    },
+    {
+      "groupId": "darts-clone-simple-sentencepiece-v0.7",
+      "component": "darts-clone",
+      "rationale": "Selected the Darts BSD-2 notice retained unchanged from the exact simple-sentencepiece source tree.",
+      "applicabilityBoundary": "Preserved as the original notice from that source tree; no broader Darts deployment or legal conclusion is asserted."
+    }
+  ],
+  "entries": [
+    {
+      "id": 1,
+      "destination": "onnxruntime-v1.28.2/LICENSE",
+      "groupId": "onnxruntime-v1.28.2",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/onnxruntime/LICENSE",
+      "sourceRevision": "v1.28.2",
+      "bytes": 1073,
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 2,
+      "destination": "onnxruntime-v1.28.2/ThirdPartyNotices.txt",
+      "groupId": "onnxruntime-v1.28.2",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/onnxruntime/ThirdPartyNotices.txt",
+      "sourceRevision": "v1.28.2",
+      "bytes": 325054,
+      "sha256": "0e07b95f3a8d6230037707c5c4a2b554d12c4cb67369669ac255635528ffcee2",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 3,
+      "destination": "kaldi-native-fbank-v1.22.4/LICENSE",
+      "groupId": "kaldi-native-fbank-v1.22.4",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kaldi-native-fbank/LICENSE",
+      "sourceRevision": "v1.22.4",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 4,
+      "destination": "utf8proc-v2.12.0/LICENSE.md",
+      "groupId": "utf8proc-v2.12.0",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/utf8proc/LICENSE.md",
+      "sourceRevision": "v2.12.0",
+      "bytes": 5125,
+      "sha256": "3b510150d34f248a221bb88e1d811238d6c6c18b51231822c42974c39bb07256",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 5,
+      "destination": "kaldi-decoder-v0.3.0/LICENSE",
+      "groupId": "kaldi-decoder-v0.3.0",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kaldi-decoder/LICENSE",
+      "sourceRevision": "v0.3.0",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 6,
+      "destination": "openfst-v1.8.5-2026-07-09/COPYING",
+      "groupId": "openfst-v1.8.5-2026-07-09",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/openfst/COPYING",
+      "sourceRevision": "v1.8.5-2026-07-09",
+      "bytes": 559,
+      "sha256": "4300529197035fd3452350718a0b8cee984e9412c9932d7f35fcde849fc97a4b",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 7,
+      "destination": "simple-sentencepiece-v0.7/LICENSE",
+      "groupId": "simple-sentencepiece-v0.7",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/simple-sentencepiece/LICENSE",
+      "sourceRevision": "v0.7",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 8,
+      "destination": "json-v3.12.0/LICENSE.MIT",
+      "groupId": "json-v3.12.0",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/json/LICENSE.MIT",
+      "sourceRevision": "v3.12.0",
+      "bytes": 1076,
+      "sha256": "46a65cffd1ea955132d95a8dd921640714a8d6b537d2e4e482d31145ae95b603",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 9,
+      "destination": "kissfft-source-revision-bound/COPYING",
+      "groupId": "kissfft-source-revision-bound",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kissfft/COPYING",
+      "sourceRevision": "febd4caeed32e33ad8b2e0bb5ea77542c40f18ec",
+      "bytes": 246,
+      "sha256": "a2840585f8411be8e6826a31ef15ae65c950bd74a2437a73b013398a934ad0c6",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 10,
+      "destination": "kissfft-source-revision-bound/LICENSES/BSD-3-Clause",
+      "groupId": "kissfft-source-revision-bound",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kissfft/LICENSES/BSD-3-Clause",
+      "sourceRevision": "febd4caeed32e33ad8b2e0bb5ea77542c40f18ec",
+      "bytes": 1830,
+      "sha256": "4d6bcab46f27d6d0c878e8305d4bdcfe040d52bf6656b9771f04c9fb9902c0ed",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 12,
+      "destination": "kaldifst-v1.8.0/LICENSE",
+      "groupId": "kaldifst-v1.8.0",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kaldifst/LICENSE",
+      "sourceRevision": "v1.8.0",
+      "bytes": 11728,
+      "sha256": "a682d6efd1ee5dee08a8e405c233c2c198ea70ae0718129daa83ab58cfe31c5d",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 13,
+      "destination": "hclust-cpp-2026-02-25/LICENSE",
+      "groupId": "hclust-cpp-2026-02-25",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/hclust-cpp/LICENSE",
+      "sourceRevision": "2026-02-25",
+      "bytes": 1483,
+      "sha256": "e361d842da1d290351860ad6dcce2673a1e42e4f873a3ae1ff4eb92c6adaa882",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 20,
+      "destination": "sherpa-onnx-v2.0.1/LICENSE",
+      "groupId": "sherpa-onnx-v2.0.1",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/sherpa-onnx/LICENSE",
+      "sourceRevision": "v2.0.1",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json"
+    },
+    {
+      "id": 21,
+      "destination": "eigen-5.0.1-observed-build/COPYING.APACHE",
+      "groupId": "eigen-5.0.1-observed-build",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.APACHE",
+      "sourceRevision": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "bytes": 11362,
+      "sha256": "03379001a7b12a2ec997a25554247d985270b353c10d5bafee9ac8d6519820b7",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json"
+    },
+    {
+      "id": 22,
+      "destination": "eigen-5.0.1-observed-build/COPYING.BSD",
+      "groupId": "eigen-5.0.1-observed-build",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.BSD",
+      "sourceRevision": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "bytes": 1517,
+      "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json"
+    },
+    {
+      "id": 23,
+      "destination": "eigen-5.0.1-observed-build/COPYING.MINPACK",
+      "groupId": "eigen-5.0.1-observed-build",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.MINPACK",
+      "sourceRevision": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "bytes": 2193,
+      "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json"
+    },
+    {
+      "id": 24,
+      "destination": "eigen-5.0.1-observed-build/COPYING.MPL2",
+      "groupId": "eigen-5.0.1-observed-build",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.MPL2",
+      "sourceRevision": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "bytes": 16727,
+      "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json"
+    },
+    {
+      "id": 25,
+      "destination": "eigen-5.0.1-observed-build/COPYING.README",
+      "groupId": "eigen-5.0.1-observed-build",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.README",
+      "sourceRevision": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "bytes": 264,
+      "sha256": "db640ff2bd90c6abd6a4d3fbb351e0ee4d555417cf840492054d1cbb2ea85644",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json"
+    },
+    {
+      "id": 26,
+      "destination": "eigen-5.0.1-observed-build/LICENSE",
+      "groupId": "eigen-5.0.1-observed-build",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/LICENSE",
+      "sourceRevision": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "bytes": 16725,
+      "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json"
+    },
+    {
+      "id": 27,
+      "destination": "websocketpp-observed-build-revision-bound/COPYING",
+      "groupId": "websocketpp-observed-build-revision-bound",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/websocketpp/COPYING",
+      "sourceRevision": "b9aeec6eaf3d5610503439b4fae3581d9aff08e8",
+      "bytes": 7494,
+      "sha256": "5ba81a1ed402517dce2581fa2d4042baf6a9c8ca0fe94fa6a7043ce6ab23064f",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json"
+    },
+    {
+      "id": 28,
+      "destination": "asio-asio-1-24-0-observed-build/COPYING",
+      "groupId": "asio-asio-1-24-0-observed-build",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/asio/COPYING",
+      "sourceRevision": "asio-1-24-0",
+      "bytes": 224,
+      "sha256": "2d312781ba7ca3f5b494aec3bcca5cfbb69b7302838b2a7595d1537fc494457f",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json"
+    },
+    {
+      "id": 29,
+      "destination": "asio-asio-1-24-0-observed-build/LICENSE_1_0.txt",
+      "groupId": "asio-asio-1-24-0-observed-build",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/asio/LICENSE_1_0.txt",
+      "sourceRevision": "asio-1-24-0",
+      "bytes": 1338,
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json"
+    },
+    {
+      "id": 57,
+      "destination": "darts-clone-simple-sentencepiece-v0.7/NOTICE.txt",
+      "groupId": "darts-clone-simple-sentencepiece-v0.7",
+      "sourcePath": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/notices/darts-clone/NOTICE.txt",
+      "sourceRevision": "simple-sentencepiece v0.7 tree 62dd423df1d51da5ea06f1c3a046fc04f01b4f39",
+      "bytes": 1320,
+      "sha256": "da10583073e582390115d4d4abdc12ca395776ab2a9e11b10d440b115ad9c6b9",
+      "sourceManifest": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/material-manifest.json"
+    }
+  ],
+  "unselectedGroups": [
+    {
+      "ids": [
+        11
+      ],
+      "disposition": "retained_reference_unselected",
+      "reason": "KissFFT Unlicense is a retained reference but no deployed path is proven; do not imply it is NOT legally applicable."
+    },
+    {
+      "ids": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "disposition": "historical_superseded_reference",
+      "reason": "These Eigen 3.4 notices are historical source-reference files; actual Sherpa logs identify Eigen 5.0.1, so ids 21 through 26 are selected instead."
+    },
+    {
+      "ids": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "disposition": "deferred_recursive_final_composition",
+      "reason": "ORT nested source/reference notices belong to a separate nested version chain and are deferred to recursive final-composition selection, not declared irrelevant; the retained root ORT ThirdPartyNotices does not replace that review."
+    },
+    {
+      "ids": [
+        58
+      ],
+      "disposition": "reference_only_replaced_implementation",
+      "reason": "The original zlib-style ThreadPool implementation was replaced by an empty Android stub; preserve in repo reference only and do not assert embedded code or MIT."
+    }
+  ],
+  "blockers": [
+    "ORT nested source/reference notices (ids 30 through 56) remain deferred to recursive final-composition selection; root ORT ThirdPartyNotices does not replace that review.",
+    "websocketpp/asio notices are bounded by ARM-only observed enablement/download with x86 and x86_64 OFF; exact retained code and final ABI composition are not proven.",
+    "Known upstream modifications remain separate in UPSTREAM-MODIFICATIONS.md; this candidate does not assert compliance approval.",
+    "Parent must verify mechanically bound source bytes and run builds/negative checks; no execution or test result is claimed in this candidate."
+  ],
+  "upstreamModifications": {
+    "path": "UPSTREAM-MODIFICATIONS.md",
+    "bytes": 4317,
+    "sha256": "4a0f32dcc4b6308b61ad3ade00af3fd1c8c915f45126abc77e500c2bb58551b4",
+    "helperCandidateSHA256": "c8eab80c0eba4b527b56c2158834566bc3c43b1bbc0b518b14ed534c9e1765c7",
+    "scope": "recorded known upstream changes; incomplete patch/input/composition coverage"
+  }
+}

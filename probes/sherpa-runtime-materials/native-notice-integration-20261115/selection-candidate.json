@@ -1,0 +1,265 @@
+{
+  "schemaVersion": 1,
+  "scope": {
+    "candidate": "declarative index plus selected raw native notice copies and one module README append only",
+    "assetIndexPath": "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/index.json",
+    "rawCopyRoot": "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native",
+    "readmeAppendTarget": "android/backend-sherpa-asr/README.md",
+    "preserveOtherEdits": true,
+    "scopeChanges": [],
+    "excluded": [
+      "existing JVM assets",
+      "Kotlin",
+      "Gradle",
+      "dependencies",
+      "coordinates",
+      "locks",
+      "versions",
+      "models",
+      "upstream runtime AAR",
+      "native429/hy4free429 retries",
+      "paid/model fallback",
+      "global config/signing/device/model changes"
+    ],
+    "binding": "IDs bind mechanically to supplied source path, bytes, SHA, revision and manifest; raw bytes are not regenerated here."
+  },
+  "incomplete": true,
+  "groups": [
+    {
+      "groupId": "onnxruntime-v1.28.2",
+      "component": "onnxruntime",
+      "rationale": "Selected current known direct notice materials from the fixed Sherpa runtime source set: ORT LICENSE and the whole ORT ThirdPartyNotices.txt.",
+      "applicabilityBoundary": "ThirdPartyNotices.txt is preserved unchanged as upstream notice scope only; it is not evidence that every listed component is linked. ORT nested source/reference notices are deferred to final recursive composition review."
+    },
+    {
+      "groupId": "kaldi-native-fbank-v1.22.4",
+      "component": "kaldi-native-fbank",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no inference about final linked code beyond this bounded native subset."
+    },
+    {
+      "groupId": "utf8proc-v2.12.0",
+      "component": "utf8proc",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no inference about final linked code beyond this bounded native subset."
+    },
+    {
+      "groupId": "kaldi-decoder-v0.3.0",
+      "component": "kaldi-decoder",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials; the Apache-2.0 full text is retained separately.",
+      "applicabilityBoundary": "No rewrite or substitution of the original file; applicability is bounded to the selected known native source subset."
+    },
+    {
+      "groupId": "openfst-v1.8.5-2026-07-09",
+      "component": "openfst",
+      "rationale": "Selected original OpenFst COPYING attribution, which references Apache-2.0.",
+      "applicabilityBoundary": "Preserved as the original attribution; selected Sherpa/kaldi Apache-2.0 full texts are retained separately and the original is not rewritten."
+    },
+    {
+      "groupId": "simple-sentencepiece-v0.7",
+      "component": "simple-sentencepiece",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no broader sentencepiece deployment claim is implied."
+    },
+    {
+      "groupId": "json-v3.12.0",
+      "component": "json",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no ORT nested nlohmann_json scope is inferred from this copy."
+    },
+    {
+      "groupId": "kissfft-source-revision-bound",
+      "component": "kissfft",
+      "rationale": "Selected KissFFT COPYING because it explicitly names BSD-3-Clause and the LICENSES/BSD-3-Clause file, preserving that hierarchy.",
+      "applicabilityBoundary": "The Unlicense text remains a retained reference only; do not imply it is legally inapplicable or that it covers a deployed path."
+    },
+    {
+      "groupId": "kaldifst-v1.8.0",
+      "component": "kaldifst",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no inference about final linked code beyond this bounded native subset."
+    },
+    {
+      "groupId": "hclust-cpp-2026-02-25",
+      "component": "hclust-cpp",
+      "rationale": "Selected current known direct native source notice from the fixed Sherpa runtime materials.",
+      "applicabilityBoundary": "Single original file copy only; no inference about final linked code beyond this bounded native subset."
+    },
+    {
+      "groupId": "sherpa-onnx-v2.0.1",
+      "component": "sherpa-onnx",
+      "rationale": "Selected current known direct Sherpa source notice from the fixed runtime materials; the Apache-2.0 full text is retained separately.",
+      "applicabilityBoundary": "No rewrite or substitution of the original file; applicability is bounded to the selected known native source subset."
+    },
+    {
+      "groupId": "eigen-5.0.1-observed-build",
+      "component": "eigen",
+      "rationale": "Observed Sherpa build materials identify Eigen 5.0.1, so the observed 5.0.1 notice set is selected.",
+      "applicabilityBoundary": "Historical Eigen 3.4 files are not selected here; ORT nested Eigen notices remain a separate deferred chain; no claim that every license body applies to a retained code path."
+    },
+    {
+      "groupId": "websocketpp-observed-build-revision-bound",
+      "component": "websocketpp",
+      "rationale": "Selected observed build download/enablement notice material for websocketpp under the bounded native subset.",
+      "applicabilityBoundary": "Observed enabled/download on ARM only with x86 and x86_64 OFF; not proof of exact retained code or all ABI coverage."
+    },
+    {
+      "groupId": "asio-asio-1-24-0-observed-build",
+      "component": "asio",
+      "rationale": "Selected observed build download/enablement notice material for asio under the bounded native subset.",
+      "applicabilityBoundary": "Observed enabled/download on ARM only with x86 and x86_64 OFF; not proof of exact retained code or all ABI coverage."
+    },
+    {
+      "groupId": "darts-clone-simple-sentencepiece-v0.7",
+      "component": "darts-clone",
+      "rationale": "Selected the Darts BSD-2 notice retained unchanged from the exact simple-sentencepiece source tree.",
+      "applicabilityBoundary": "Preserved as the original notice from that source tree; no broader Darts deployment or legal conclusion is asserted."
+    }
+  ],
+  "copies": [
+    {
+      "id": 1,
+      "destination": "onnxruntime-v1.28.2/LICENSE",
+      "groupId": "onnxruntime-v1.28.2"
+    },
+    {
+      "id": 2,
+      "destination": "onnxruntime-v1.28.2/ThirdPartyNotices.txt",
+      "groupId": "onnxruntime-v1.28.2"
+    },
+    {
+      "id": 3,
+      "destination": "kaldi-native-fbank-v1.22.4/LICENSE",
+      "groupId": "kaldi-native-fbank-v1.22.4"
+    },
+    {
+      "id": 4,
+      "destination": "utf8proc-v2.12.0/LICENSE.md",
+      "groupId": "utf8proc-v2.12.0"
+    },
+    {
+      "id": 5,
+      "destination": "kaldi-decoder-v0.3.0/LICENSE",
+      "groupId": "kaldi-decoder-v0.3.0"
+    },
+    {
+      "id": 6,
+      "destination": "openfst-v1.8.5-2026-07-09/COPYING",
+      "groupId": "openfst-v1.8.5-2026-07-09"
+    },
+    {
+      "id": 7,
+      "destination": "simple-sentencepiece-v0.7/LICENSE",
+      "groupId": "simple-sentencepiece-v0.7"
+    },
+    {
+      "id": 8,
+      "destination": "json-v3.12.0/LICENSE.MIT",
+      "groupId": "json-v3.12.0"
+    },
+    {
+      "id": 9,
+      "destination": "kissfft-source-revision-bound/COPYING",
+      "groupId": "kissfft-source-revision-bound"
+    },
+    {
+      "id": 10,
+      "destination": "kissfft-source-revision-bound/LICENSES/BSD-3-Clause",
+      "groupId": "kissfft-source-revision-bound"
+    },
+    {
+      "id": 12,
+      "destination": "kaldifst-v1.8.0/LICENSE",
+      "groupId": "kaldifst-v1.8.0"
+    },
+    {
+      "id": 13,
+      "destination": "hclust-cpp-2026-02-25/LICENSE",
+      "groupId": "hclust-cpp-2026-02-25"
+    },
+    {
+      "id": 20,
+      "destination": "sherpa-onnx-v2.0.1/LICENSE",
+      "groupId": "sherpa-onnx-v2.0.1"
+    },
+    {
+      "id": 21,
+      "destination": "eigen-5.0.1-observed-build/COPYING.APACHE",
+      "groupId": "eigen-5.0.1-observed-build"
+    },
+    {
+      "id": 22,
+      "destination": "eigen-5.0.1-observed-build/COPYING.BSD",
+      "groupId": "eigen-5.0.1-observed-build"
+    },
+    {
+      "id": 23,
+      "destination": "eigen-5.0.1-observed-build/COPYING.MINPACK",
+      "groupId": "eigen-5.0.1-observed-build"
+    },
+    {
+      "id": 24,
+      "destination": "eigen-5.0.1-observed-build/COPYING.MPL2",
+      "groupId": "eigen-5.0.1-observed-build"
+    },
+    {
+      "id": 25,
+      "destination": "eigen-5.0.1-observed-build/COPYING.README",
+      "groupId": "eigen-5.0.1-observed-build"
+    },
+    {
+      "id": 26,
+      "destination": "eigen-5.0.1-observed-build/LICENSE",
+      "groupId": "eigen-5.0.1-observed-build"
+    },
+    {
+      "id": 27,
+      "destination": "websocketpp-observed-build-revision-bound/COPYING",
+      "groupId": "websocketpp-observed-build-revision-bound"
+    },
+    {
+      "id": 28,
+      "destination": "asio-asio-1-24-0-observed-build/COPYING",
+      "groupId": "asio-asio-1-24-0-observed-build"
+    },
+    {
+      "id": 29,
+      "destination": "asio-asio-1-24-0-observed-build/LICENSE_1_0.txt",
+      "groupId": "asio-asio-1-24-0-observed-build"
+    },
+    {
+      "id": 57,
+      "destination": "darts-clone-simple-sentencepiece-v0.7/NOTICE.txt",
+      "groupId": "darts-clone-simple-sentencepiece-v0.7"
+    }
+  ],
+  "unselectedGroups": [
+    {
+      "ids": [11],
+      "disposition": "retained_reference_unselected",
+      "reason": "KissFFT Unlicense is a retained reference but no deployed path is proven; do not imply it is NOT legally applicable."
+    },
+    {
+      "ids": [14, 15, 16, 17, 18, 19],
+      "disposition": "historical_superseded_reference",
+      "reason": "These Eigen 3.4 notices are historical source-reference files; actual Sherpa logs identify Eigen 5.0.1, so ids 21 through 26 are selected instead."
+    },
+    {
+      "ids": [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56],
+      "disposition": "deferred_recursive_final_composition",
+      "reason": "ORT nested source/reference notices belong to a separate nested version chain and are deferred to recursive final-composition selection, not declared irrelevant; the retained root ORT ThirdPartyNotices does not replace that review."
+    },
+    {
+      "ids": [58],
+      "disposition": "reference_only_replaced_implementation",
+      "reason": "The original zlib-style ThreadPool implementation was replaced by an empty Android stub; preserve in repo reference only and do not assert embedded code or MIT."
+    }
+  ],
+  "README_APPEND": "Native notices for this module are declared in android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/index.json, with selected raw notice files' raw bytes preserved unchanged under that native/ directory for the bounded known native subset only; this is not a complete final-composition notice set. Known upstream modifications are tracked separately in UPSTREAM-MODIFICATIONS.md. Status remains incomplete: full P2/P3/P4/W3 open (fullP2/P3/P4/W3open); no complete legal approval is implied.",
+  "blockers": [
+    "ORT nested source/reference notices (ids 30 through 56) remain deferred to recursive final-composition selection; root ORT ThirdPartyNotices does not replace that review.",
+    "websocketpp/asio notices are bounded by ARM-only observed enablement/download with x86 and x86_64 OFF; exact retained code and final ABI composition are not proven.",
+    "Known upstream modifications remain separate in UPSTREAM-MODIFICATIONS.md; this candidate does not assert compliance approval.",
+    "Parent must verify mechanically bound source bytes and run builds/negative checks; no execution or test result is claimed in this candidate."
+  ]
+}

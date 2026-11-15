@@ -1,0 +1,203 @@
+{
+  "original": {
+    "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/apk-consumer/build/outputs/apk/debug/w3-sherpa-notice-consumer-debug.apk",
+    "sha256": "20be0aa3e9c8a3a3ef40952ca7029c2f5a171761187ef98cfffa68329debef2a",
+    "noticeCount": 36,
+    "noticeBytes": 550583
+  },
+  "negativeCases": [
+    {
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/darts-clone-simple-sentencepiece-v0.7/NOTICE.txt",
+      "mutation": "delete",
+      "rejected": true,
+      "error": "notice member set differs",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/negatives/0-delete.apk",
+      "sha256": "135e705490b93019b62433c147d62c4e277663feb240b4794b0dc2e239fe3cd0"
+    },
+    {
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/darts-clone-simple-sentencepiece-v0.7/NOTICE.txt",
+      "mutation": "change-byte",
+      "rejected": true,
+      "error": "notice byte mismatch: assets/ondeviceai/sherpa-asr/notices/native/darts-clone-simple-sentencepiece-v0.7/NOTICE.txt",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/negatives/0-change-byte.apk",
+      "sha256": "8dd8ae62cbd49df55794ac9860b2f2d44f8c476fcbbbbe27b7c1331f744d227c"
+    },
+    {
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/UPSTREAM-MODIFICATIONS.md",
+      "mutation": "delete",
+      "rejected": true,
+      "error": "notice member set differs",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/negatives/1-delete.apk",
+      "sha256": "80c753e21364114a8dbd80baf4c615d6812228d43b66b46e58655c407e4390b8"
+    },
+    {
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/UPSTREAM-MODIFICATIONS.md",
+      "mutation": "change-byte",
+      "rejected": true,
+      "error": "notice byte mismatch: assets/ondeviceai/sherpa-asr/notices/native/UPSTREAM-MODIFICATIONS.md",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/negatives/1-change-byte.apk",
+      "sha256": "00cd9dcbb12e1d4173643603773c72aa3d1a2b3c5aeb510ddc8108bb8d3b9f46"
+    },
+    {
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/index.json",
+      "mutation": "delete",
+      "rejected": true,
+      "error": "notice member set differs",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/negatives/2-delete.apk",
+      "sha256": "de4ad681650f92aa4c6f292f39d99c7674ea953e99fac901827e98d847ebf303"
+    },
+    {
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/index.json",
+      "mutation": "change-byte",
+      "rejected": true,
+      "error": "notice byte mismatch: assets/ondeviceai/sherpa-asr/notices/native/index.json",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/negatives/2-change-byte.apk",
+      "sha256": "2c65916cfc437fb1ee020052dd7fec69c83cea01a8c10d5067a20a97dc992c1b"
+    }
+  ],
+  "originalAPKUnchanged": true,
+  "scope": "known JVM/native notice subsets retention only; no runtime, complete composition or release acceptance",
+  "apkBytes": 128014927,
+  "nonDirectoryMembers": 71,
+  "selectedSdkMatchesNewLocalPublication": true,
+  "resolvedArtifacts": [
+    {
+      "component": "com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar",
+      "bytes": 49441341,
+      "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7"
+    },
+    {
+      "component": "io.ondeviceai:backend-sherpa-asr:0.1.0-SNAPSHOT",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/m2-complete/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+      "bytes": 161636,
+      "sha256": "5ae065d23647898eed3cbc258395f1c9c98804b002e4f9b4934546ae55bb7dd5"
+    },
+    {
+      "component": "io.ondeviceai:sdk-core:0.1.0-SNAPSHOT",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/m2-complete/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT.aar",
+      "bytes": 16220,
+      "sha256": "5eba342740cc766e9f7f226b055257ee68071a5cadc86dd9cdaff8d7f1c6a444"
+    },
+    {
+      "component": "io.ondeviceai:speech:0.1.0-SNAPSHOT",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/m2-complete/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT.aar",
+      "bytes": 47127,
+      "sha256": "af39a696fd5ac750b7dcf2f8c08e407956dcab51bd66ebe2e54dcf8cfd99c0e6"
+    },
+    {
+      "component": "org.jetbrains.kotlin:kotlin-stdlib:2.4.0",
+      "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar",
+      "bytes": 1841929,
+      "sha256": "ccb14ff83fabcb11458b798dbc9824748ccdffeec79c9aba789e6ed1cda86b1c"
+    },
+    {
+      "component": "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2",
+      "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.10.2/c8705d275d81f19e8afaf3ff9b5bf7a4b6b6c19b/kotlinx-coroutines-android-1.10.2.jar",
+      "bytes": 17826,
+      "sha256": "e713f1f874244115a07571065cffa0f24f5e78300e9720fea16de3af1d75fd41"
+    },
+    {
+      "component": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2",
+      "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.10.2/4a9f78ef49483748e2c129f3d124b8fa249dafbf/kotlinx-coroutines-core-jvm-1.10.2.jar",
+      "bytes": 1479317,
+      "sha256": "5ca175b38df331fd64155b35cd8cae1251fa9ee369709b36d42e0a288ccce3fd"
+    },
+    {
+      "component": "org.jetbrains:annotations:23.0.0",
+      "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar",
+      "bytes": 29371,
+      "sha256": "7b0f19724082cbfcbc66e5abea2b9bc92cf08a1ea11e191933ed43801eb3cd05"
+    }
+  ],
+  "noProjectDependencies": true,
+  "pythonAndInfozipAll36NoticeBytesEqual": true,
+  "nativeMembers": [
+    {
+      "member": "lib/arm64-v8a/libonnxruntime.so",
+      "bytes": 22249560,
+      "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1"
+    },
+    {
+      "member": "lib/arm64-v8a/libsherpa-onnx-c-api.so",
+      "bytes": 4303136,
+      "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10"
+    },
+    {
+      "member": "lib/arm64-v8a/libsherpa-onnx-cxx-api.so",
+      "bytes": 272848,
+      "sha256": "de94e0952a124eb22e86d754e11aa0489a065affc837911a8ed5e7fd843baad6"
+    },
+    {
+      "member": "lib/arm64-v8a/libsherpa-onnx-jni.so",
+      "bytes": 4609320,
+      "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575"
+    },
+    {
+      "member": "lib/armeabi-v7a/libonnxruntime.so",
+      "bytes": 15359592,
+      "sha256": "7a8f17a707e52e0ac3a026be319272876d9eae61f4bb19585292772d785f7744"
+    },
+    {
+      "member": "lib/armeabi-v7a/libsherpa-onnx-c-api.so",
+      "bytes": 3157748,
+      "sha256": "cb5d912ec19b4f76582047d082db63f304f3e584cc89130e393337f4cea6ebe7"
+    },
+    {
+      "member": "lib/armeabi-v7a/libsherpa-onnx-cxx-api.so",
+      "bytes": 183600,
+      "sha256": "aa5f7bc8031baf5f0ba2e6c892e1cf70d17e1fe839db375424ebda175f0dc5e9"
+    },
+    {
+      "member": "lib/armeabi-v7a/libsherpa-onnx-jni.so",
+      "bytes": 3381796,
+      "sha256": "d45f377249d5c3191b91de6ba6edffcd83e4cf7e109bc523b212db341581c2a8"
+    },
+    {
+      "member": "lib/x86/libonnxruntime.so",
+      "bytes": 26491148,
+      "sha256": "fcb6cd80415f7951e58fdd8158a238946dce3710d5fee492b67174d5131f9eee"
+    },
+    {
+      "member": "lib/x86/libsherpa-onnx-c-api.so",
+      "bytes": 4954780,
+      "sha256": "e1e483cc4a09aaadf7f72c1d406c010bba05e3a05fc763a4536117508ab3f390"
+    },
+    {
+      "member": "lib/x86/libsherpa-onnx-cxx-api.so",
+      "bytes": 250072,
+      "sha256": "eb0e2a2b32ea48237582f5d5f31c1bf65e7911cbcb6ee3af08bb491e55fed027"
+    },
+    {
+      "member": "lib/x86/libsherpa-onnx-jni.so",
+      "bytes": 5261876,
+      "sha256": "1eb37aaa10e377f6635086bec09685859ca8c7465460fdf9346a21eba90a4ee4"
+    },
+    {
+      "member": "lib/x86_64/libonnxruntime.so",
+      "bytes": 25581120,
+      "sha256": "087e84297cad64acb823c3d901d6e0cc934e91add7cdb20da802cd1c0bea5c3e"
+    },
+    {
+      "member": "lib/x86_64/libsherpa-onnx-c-api.so",
+      "bytes": 4782648,
+      "sha256": "8285ecf2e6275374d4c8c5b46020cbb1de82db9bd6b6baad011fdc480cf10ba2"
+    },
+    {
+      "member": "lib/x86_64/libsherpa-onnx-cxx-api.so",
+      "bytes": 267552,
+      "sha256": "edcd50a1608458867d78213385f5e3013a39db7b7af43d4f87d72e4d84e5e3dc"
+    },
+    {
+      "member": "lib/x86_64/libsherpa-onnx-jni.so",
+      "bytes": 5053592,
+      "sha256": "878d61116f244131263eec24297ef05bf508d02bccdede2a4e3ad3202bbdaa48"
+    }
+  ],
+  "fourABIRuntimeUnchanged": true,
+  "installedOrDeviceRuntime": false,
+  "microphoneRuns": 0,
+  "AiAiRequests": 0,
+  "modelDownloads": 0,
+  "completeP1P2P3P4": false
+}

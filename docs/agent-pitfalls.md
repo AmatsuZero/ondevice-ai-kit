@@ -1,3 +1,11 @@
+## W3 native通知：可选字段及完整候选构建门（2026-11-15）
+
+父集成假定58项参照都有sourceManifest，Darts id57无此可选字段，触发KeyError；23原文本已复制而索引/修改说明未完成时又误启构建。该12.285s/exit0仅证明不完整状态可构建，明确拒作验收。有效恢复是保留失败/首AAR/旧m2，依据真实Darts material-manifest核绑定，确认25新资产完整后在新m2-complete重建；原文不改。完整AAR/独立Maven APK保留36资产、六负例拒收才构成本轮技术接受，仍不证明完整组成/发布。证据`probes/sherpa-runtime-materials/native-notice-integration-20261115/`及`.omx/artifacts/w3-native-notice-integration-20261115T115026Z/`。
+
+## W3 ORT：sed模式与实际diff不能混写（2026-11-15）
+
+旧patchSummary概括为删除SOVERSION和target VERSION；实际workflow确实执行两条sed，但四ABI保留diff只显示SOVERSION/相关注释删除，多行VERSION ${ORT_VERSION}仍在。命令意图不能代替实际修改范围。有效恢复是逐一关联四diff与固定executed-android-shared.yaml，新修改说明及ort-patch-interpretation.json记录该差异，旧历史材料保持原字节；所示diff不是所有输入/补丁已穷尽的证明。见同轮native通知材料与[验证](validation/w3-native-notice-integration-20261115.md)。
+
 ## W3 hy3候选：伪工具正文与空tools的观测边界（2026-11-15）
 
 hy4free实际429不证明hy3不可用。用户新选hy3后首调用5.676s/exit0/result success，但正文仅伪Bash工具文字，无候选JSON/真实工具事件，已拒收。空tools参数下init仍列69工具名称；列表本身不证明实际权限或执行，不能声称工具禁用已被验证。独立小清单任务同时缩小提示、调用级deny/空setting-sources/纯文本system prompt后28.537s完整交付；另独立APK候选68.832s完整交付，均零已观察真实工具事件。多项同时改变，不能把成功归因于某单一选项。父端核id/唯一目标/原字节并实构建，11资产在AAR/独立Maven APK保留、缺失/改单字节负例拒收；这是JVM子集技术证据，不代替P2完整组成/P4发布接受。保留首失败及三份raw收据，不付费/自动fallback/重试原quota；见`probes/sherpa-runtime-materials/jvm-notice-integration-20261115/`和`.omx/artifacts/w3-p3-jvm-hy3-selection-20261115T111916Z/`。

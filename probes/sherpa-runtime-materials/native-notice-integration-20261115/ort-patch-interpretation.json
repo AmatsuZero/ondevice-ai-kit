@@ -1,0 +1,210 @@
+{
+  "scope": "corrective interpretation over existing immutable P1 input summaries; no new upstream mutation/build/download",
+  "originalInputGroups": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/build-input-groups.json",
+    "sha256": "ccb67810e01d0f7c6c9f12eec7f0c09dbe34510236349b3219c8dce650b0f669"
+  },
+  "workflow": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-ort-observed-20261111/executed-android-shared.yaml",
+    "sha256": "b8440e0ac250c83efa4f79152b6379cdf022565e21ed94a34fdd80f52d67bea9",
+    "commit": "bb069649de9edc4689b2c5f9609e5499ae0bee9d",
+    "commands": [
+      {
+        "line": 57,
+        "text": "          sed -i.bak '/SOVERSION/d' ./cmake/onnxruntime.cmake"
+      },
+      {
+        "line": 58,
+        "text": "          sed -i.bak '/onnxruntime PROPERTIES VERSION/d' ./cmake/onnxruntime.cmake"
+      }
+    ]
+  },
+  "fourAbiObservedPatches": [
+    {
+      "abi": "arm64-v8a",
+      "jobId": 101086389995,
+      "rawLogPath": ".omx/artifacts/w3-runtime-materials-20261111/ort-provenance-followup/ort-arm64.log",
+      "rawLogSHA256": "d2f7a0facac749ab6c165535a3fce3295b137d904048255c5e700203e8a1f274",
+      "observedDiff": [
+        {
+          "line": 382,
+          "text": "diff --git a/cmake/onnxruntime.cmake b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 383,
+          "text": "index e3130fc..1353c1b 100644"
+        },
+        {
+          "line": 384,
+          "text": "--- a/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 385,
+          "text": "+++ b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 386,
+          "text": "@@ -295,16 +295,13 @@ if(WIN32 AND onnxruntime_BUILD_SHARED_LIB)"
+        },
+        {
+          "line": 390,
+          "text": "-#See: https://cmake.org/cmake/help/latest/prop_tgt/SOVERSION.html"
+        },
+        {
+          "line": 395,
+          "text": "     VERSION ${ORT_VERSION}"
+        },
+        {
+          "line": 396,
+          "text": "-    SOVERSION 1"
+        },
+        {
+          "line": 399,
+          "text": "-  # Omit the SOVERSION setting in Windows build"
+        }
+      ],
+      "originalPatchSummary": "Remove SOVERSION and target VERSION statements in cmake/onnxruntime.cmake",
+      "originalPatchSummaryTooBroad": true
+    },
+    {
+      "abi": "armeabi-v7a",
+      "jobId": 101086389604,
+      "rawLogPath": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/armeabi-v7a.log",
+      "rawLogSHA256": "d9b140c42f76a75311d433b686e6e34269ace02a9c5850ec290949c496afa0cc",
+      "observedDiff": [
+        {
+          "line": 382,
+          "text": "diff --git a/cmake/onnxruntime.cmake b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 383,
+          "text": "index e3130fc..1353c1b 100644"
+        },
+        {
+          "line": 384,
+          "text": "--- a/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 385,
+          "text": "+++ b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 386,
+          "text": "@@ -295,16 +295,13 @@ if(WIN32 AND onnxruntime_BUILD_SHARED_LIB)"
+        },
+        {
+          "line": 390,
+          "text": "-#See: https://cmake.org/cmake/help/latest/prop_tgt/SOVERSION.html"
+        },
+        {
+          "line": 395,
+          "text": "     VERSION ${ORT_VERSION}"
+        },
+        {
+          "line": 396,
+          "text": "-    SOVERSION 1"
+        },
+        {
+          "line": 399,
+          "text": "-  # Omit the SOVERSION setting in Windows build"
+        }
+      ],
+      "originalPatchSummary": "Remove SOVERSION and target VERSION statements in cmake/onnxruntime.cmake",
+      "originalPatchSummaryTooBroad": true
+    },
+    {
+      "abi": "x86",
+      "jobId": 101086389863,
+      "rawLogPath": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/x86.log",
+      "rawLogSHA256": "15bb74c3a6c3dd6f5cc22440e7da55342d74e5fac19197493ca9e297fad618fc",
+      "observedDiff": [
+        {
+          "line": 382,
+          "text": "diff --git a/cmake/onnxruntime.cmake b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 383,
+          "text": "index e3130fc..1353c1b 100644"
+        },
+        {
+          "line": 384,
+          "text": "--- a/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 385,
+          "text": "+++ b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 386,
+          "text": "@@ -295,16 +295,13 @@ if(WIN32 AND onnxruntime_BUILD_SHARED_LIB)"
+        },
+        {
+          "line": 390,
+          "text": "-#See: https://cmake.org/cmake/help/latest/prop_tgt/SOVERSION.html"
+        },
+        {
+          "line": 395,
+          "text": "     VERSION ${ORT_VERSION}"
+        },
+        {
+          "line": 396,
+          "text": "-    SOVERSION 1"
+        },
+        {
+          "line": 399,
+          "text": "-  # Omit the SOVERSION setting in Windows build"
+        }
+      ],
+      "originalPatchSummary": "Remove SOVERSION and target VERSION statements in cmake/onnxruntime.cmake",
+      "originalPatchSummaryTooBroad": true
+    },
+    {
+      "abi": "x86_64",
+      "jobId": 101086389779,
+      "rawLogPath": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/x86_64.log",
+      "rawLogSHA256": "fa15439c8f6bb1343939933b304288a04d1964e87fea993b163053787353f1b6",
+      "observedDiff": [
+        {
+          "line": 382,
+          "text": "diff --git a/cmake/onnxruntime.cmake b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 383,
+          "text": "index e3130fc..1353c1b 100644"
+        },
+        {
+          "line": 384,
+          "text": "--- a/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 385,
+          "text": "+++ b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 386,
+          "text": "@@ -295,16 +295,13 @@ if(WIN32 AND onnxruntime_BUILD_SHARED_LIB)"
+        },
+        {
+          "line": 390,
+          "text": "-#See: https://cmake.org/cmake/help/latest/prop_tgt/SOVERSION.html"
+        },
+        {
+          "line": 395,
+          "text": "     VERSION ${ORT_VERSION}"
+        },
+        {
+          "line": 396,
+          "text": "-    SOVERSION 1"
+        },
+        {
+          "line": 399,
+          "text": "-  # Omit the SOVERSION setting in Windows build"
+        }
+      ],
+      "originalPatchSummary": "Remove SOVERSION and target VERSION statements in cmake/onnxruntime.cmake",
+      "originalPatchSummaryTooBroad": true
+    }
+  ],
+  "correctedInterpretation": "The workflow deletes lines matching SOVERSION and onnxruntime PROPERTIES VERSION. All four retained diff excerpts remove SOVERSION-related lines/comments and retain the displayed multiline VERSION ${ORT_VERSION}. The command is not proof that every target VERSION statement was removed. Other or generated input changes remain outside this bounded observation.",
+  "oldEvidenceRewritten": false
+}

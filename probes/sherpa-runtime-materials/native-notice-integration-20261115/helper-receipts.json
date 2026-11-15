@@ -1,0 +1,89 @@
+[
+  {
+    "task": "selection",
+    "artifactDir": ".omx/artifacts/w3-native-notice-integration-20261115T115026Z/selection",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 49.151,
+      "endedAtUTC": "2026-11-15T11:51:45.552477+00:00",
+      "stdoutBytes": 68451,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultSubtype": "success",
+    "isError": false,
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 14863,
+        "outputTokens": 11456,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 192000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "actualToolEvents": 0,
+    "rawBytes": 68451,
+    "rawSHA256": "7bf489612736c24569abef98442cb760e441bb1454d2cf0244b5d7e3ef1339e0",
+    "promptSHA256": "900c2e3c096114ca7d2c4c93554da0ceadbdcf219bd82a65c7961ce9d51c9ed5"
+  },
+  {
+    "task": "modifications",
+    "artifactDir": ".omx/artifacts/w3-native-notice-integration-20261115T115026Z/modifications",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 34.18,
+      "endedAtUTC": "2026-11-15T11:51:30.581848+00:00",
+      "stdoutBytes": 45148,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultSubtype": "success",
+    "isError": false,
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 9301,
+        "outputTokens": 7341,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 192000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "actualToolEvents": 0,
+    "rawBytes": 45148,
+    "rawSHA256": "4e39d6bda9c4ecfc14857c7c37c30652ccd808279624b5acae65b1f2fa8085ff",
+    "promptSHA256": "ad837d270ba3b920649bcaa6bd7e8c13fa77f9ce1c5d0269948167cc43ab905b"
+  },
+  {
+    "task": "review",
+    "artifactDir": ".omx/artifacts/w3-native-notice-integration-20261115T115026Z/review",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 49.827,
+      "endedAtUTC": "2026-11-15T11:58:23.694025+00:00",
+      "stdoutBytes": 48156,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultSubtype": "success",
+    "isError": false,
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 14305,
+        "outputTokens": 7965,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 192000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "actualToolEvents": 0,
+    "rawBytes": 48156,
+    "rawSHA256": "8a1fbcd81bbdef31ef146f85a56e3fec998813b1586b279c15d651c28c978cd2",
+    "promptSHA256": "27d7e1f01eebac7fc850d9137325a19f1ffa675ed370f676e33820ad1d680b7c"
+  }
+]

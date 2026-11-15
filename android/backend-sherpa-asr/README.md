@@ -57,3 +57,5 @@ notices in the APK assets and pins the AAR and four model artifacts. Model sourc
 `65176e2deb88badc814a94058666cadccc29b61c`.
 
 JVM notice assets under android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/ cover a known subset for the JVM slice only. Original upstream texts and attribution excerpts are preserved byte-for-byte without edits. They do not prove final DEX content or complete composition, and P2/P3/P4/W3 applicability reviews remain open.
+
+Native notices for this module are declared in android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/index.json, with selected raw notice files' raw bytes preserved unchanged under that native/ directory for the bounded known native subset only. This is not a complete final-composition notice set. Known upstream modifications are tracked separately in UPSTREAM-MODIFICATIONS.md, and broader verification remains open. No complete legal approval is implied.

@@ -1,3 +1,7 @@
+## 2026-11-15：hy3完成已知native通知与上游修改说明交付
+
+23原文本452769B及索引/修改说明共25新资产已进Sherpa SDK，合并既有JVM共36项550583B。完整候选AAR/lint/本地隔离发布通过；独立Maven最终APK36通知原字节保留、四ABI16SO同固定runtime，六负例拒收，[验证](../validation/w3-native-notice-integration-20261115.md)。hy3三请求均完整，无quota；限定文本复核不冒充P4。首Darts绑定错误及不完整提前构建拒作通过，原件保留；ORT命令与实际diff范围解释已修正。原JVM资产/173保护/161freeze保持，零设备/模型/识别逻辑改变；完整ORT嵌套27项/递归组成及适用通知仍缺，P1–P4/R4/R5/W3保持open。
+
 ## 2026-11-15：hy3完成JVM通知集成与独立Maven最终APK保留
 
 用户指定hy3实际交付小清单/独立APK夹具；首伪工具输出原样拒收，无配额错误或自动换模型。10原许可/归属及索引进模块assets，Debug/Release AAR/lint/隔离本地发布通过；独立application消费新坐标，11资产72718B与原文相同、四ABI16SO同固定runtime，删除/同长改单字节均拒收，[验证](../validation/w3-jvm-notice-integration-20261115.md)。原Release成员/173保护/161freeze保持，零设备/模型或识别逻辑变更。已知JVM子集技术保留通过，不代表native通知、完整P2/P3/P4或W3完成；原hy4/native429停线，后续可按用户新选择用hy3小切片推进。

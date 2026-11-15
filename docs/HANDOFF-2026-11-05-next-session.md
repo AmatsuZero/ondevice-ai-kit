@@ -1,3 +1,7 @@
+## 2026-11-15 W3 native通知与修改说明已集成并验收
+
+免费hy3三请求均完整交付且无quota；23原文本452769B及index/修改说明共25新资产，加原JVM合计36项550583B。完整候选离线AAR/lint/隔离发布11.135s通过，独立Maven APK7.709s通过，36资产原字节保留、四ABI16SO同固定runtime，六删除/改单字节负例拒收。[验证](validation/w3-native-notice-integration-20261115.md)。首父绑定漏Darts可选sourceManifest及不完整提前构建原件保留且不计通过；新m2-complete才是已验候选。ORT两sed命令不等于所有VERSION被删，四ABI所示多行VERSION仍在，新解释已记录、旧材料不改。173原保护/161freeze收尾通过，零设备/下载/模型变更。P1–P4/R4/R5/W3仍open，下一完整递归组成/ORT嵌套27项与独立发布复核；不重复原429、旧文件批次或USB恢复，无实体连接变化不重探。当前代码待精确提交及新marker双端同步，源码未push。
+
 ## 2026-11-15 W3 JVM通知代码已提交并双端同步
 
 本地75ed042精确34文件；GH#15comment6893680368/GL#15note44860/GHWikidcf1f432逐字回读，双Wiki SHA bdf3bde77677b6543bb6197c149001b3a5d971ddf99b9bce3b8a92e6ff00f1e5一致，[同步收据](validation/w3-jvm-notice-integration-sync-20261115.json)。marker已用勿重发，源码分支未push；三个hy3/两构建/发布均终态，零设备/下载，173原字节或共享余字节/161freeze保持，34文件diff-check0。已知JVM通知技术保留通过；P1–P4/R4/R5/W3仍open，下一native通知与修改说明/完整组成/P4复审。当前hy3有实际交付证据，未来新quota仍停线；不按hy4专属失败误停hy3，也不重试原hy4/native429。
