@@ -1,0 +1,128 @@
+from pathlib import Path, PurePosixPath
+from datetime import datetime, timezone
+import hashlib
+import json
+import subprocess
+import zipfile
+
+ROOT = Path(__file__).resolve().parents[3]
+OUT = Path(__file__).resolve().parent
+AAR = ROOT / 'artifacts/verification/sherpa-asr-20261105/inputs/downloads/sherpa-onnx-2.0.1.aar'
+SOURCE = 'af2d8d81dbfa61c4cea4c568da78f3982edca005'
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def checked_zip(path):
+    archive = zipfile.ZipFile(path)
+    names = archive.namelist()
+    assert len(names) == len(set(names)), ('duplicate ZIP member', path)
+    for name in names:
+        assert not name.startswith('/') and '..' not in PurePosixPath(name).parts
+    assert archive.testzip() is None, ('CRC mismatch', path)
+    return archive
+
+
+metadata_bytes = (OUT / 'artifacts-api.stdout').read_bytes()
+metadata = json.loads(metadata_bytes)
+assert metadata['total_count'] == 2 and len(metadata['artifacts']) == 2
+artifact_rows = {r['name']: r for r in metadata['artifacts']}
+archives = {}
+artifact_receipts = []
+prior = json.loads((ROOT / 'docs/validation/w3-runtime-official-provenance-20261111.json').read_text())
+expected_log_digests = {
+    'sherpa-onnx-android-libs': prior['officialWorkflowLogEvidence']['libsArtifactZipDigestMatchesDownstreamLog'],
+    'sherpa-onnx-android-aar': prior['officialWorkflowLogEvidence']['aarArtifactZipDigest'],
+}
+for name, filename, artifact_id in [
+    ('sherpa-onnx-android-libs', 'android-libs.zip', 12664761894),
+    ('sherpa-onnx-android-aar', 'android-aar.zip', 12667432824),
+]:
+    row = artifact_rows[name]
+    assert row['id'] == artifact_id and row['expired'] is False
+    assert row['workflow_run']['id'] == 40348432396
+    assert row['workflow_run']['head_sha'] == SOURCE
+    data = (OUT / filename).read_bytes()
+    digest = sha(data)
+    assert len(data) == {'android-libs.zip': 50566279, 'android-aar.zip': 49199032}[filename]
+    assert digest == {'android-libs.zip': '9718873918fad3a9f7a1156420e5e8f46810970c5fb07383e467cf841265fe68', 'android-aar.zip': 'fd4f1e0ef080de31957df23069624215b69858fbc364637399f4cd983f6bd594'}[filename]
+    assert len(data) == row['size_in_bytes']
+    assert row['digest'] == 'sha256:' + digest
+    assert digest == expected_log_digests[name]
+    archives[name] = checked_zip(OUT / filename)
+    artifact_receipts.append({
+        'artifactId': artifact_id, 'name': name, 'bytes': len(data),
+        'sha256': digest, 'apiDigestMatched': True,
+        'previousJobLogDigestMatched': True,
+        'runId': 40348432396, 'runHeadSHA': SOURCE,
+        'zipMemberCount': len(archives[name].namelist()),
+    })
+
+local = AAR.read_bytes()
+assert len(local) == prior['localAar']['bytes']
+assert sha(local) == prior['localAar']['sha256']
+assert len(local) == 49441341
+assert sha(local) == 'a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7'
+_unzip_version_process = subprocess.run(['/usr/bin/unzip', '-v'], capture_output=True, text=True, check=True)
+assert 'Info-ZIP' in _unzip_version_process.stdout, ('unzip not Info-ZIP', _unzip_version_process.stdout)
+unzip_version = _unzip_version_process.stdout.strip().splitlines()[0]
+aar_zip = checked_zip(AAR)
+ci_aar = archives['sherpa-onnx-android-aar']
+aar_names = [name for name in ci_aar.namelist() if name.endswith('.aar')]
+assert len(aar_names) == 1, aar_names
+published_aar_name = aar_names[0]
+assert PurePosixPath(published_aar_name).name == 'sherpa-onnx-2.0.1.aar'
+assert ci_aar.read(published_aar_name) == local
+
+composition = json.loads((ROOT / 'probes/sherpa-runtime-materials/2.0.1-a8d09d1d/aar-composition.json').read_text())
+assert composition['aarSHA256'] == sha(local)
+expected = {row['path']: row for row in composition['nativeLibraries']}
+assert len(expected) == 16
+assert set(expected) == {name for name in aar_zip.namelist() if name.endswith('.so')}
+libs = archives['sherpa-onnx-android-libs']
+members = []
+for name, row in expected.items():
+    parts = PurePosixPath(name).parts
+    assert len(parts) == 3 and parts[0] == 'jni'
+    abi, basename = parts[1:]
+    matches = [candidate for candidate in libs.namelist()
+               if len(PurePosixPath(candidate).parts) >= 2
+               and PurePosixPath(candidate).parts[-2:] == (abi, basename)]
+    assert len(matches) == 1, (name, matches)
+    ci_name = matches[0]
+    actual = aar_zip.read(name)
+    ci_actual = libs.read(ci_name)
+    assert len(actual) == row['bytes'] and sha(actual) == row['sha256']
+    assert actual == ci_actual, name
+    independent = subprocess.run(['/usr/bin/unzip', '-p', str(OUT / 'android-libs.zip'), ci_name], capture_output=True, check=True)
+    assert independent.stdout == actual
+    members.append({'aarPath': name, 'ciPath': ci_name, 'bytes': len(actual),
+                    'sha256': sha(actual), 'bytesEqual': True,
+                    'independentInfoZipBytesEqual': True})
+assert set(row['ciPath'] for row in members) == {name for name in libs.namelist() if name.endswith('.so')}
+independent_aar = subprocess.run(['/usr/bin/unzip', '-p', str(OUT / 'android-aar.zip'), published_aar_name], capture_output=True, check=True)
+assert independent_aar.stdout == local
+result = {
+    'observedAt': datetime.now(timezone.utc).isoformat(),
+    'unzipVersion': unzip_version,
+    'scope': 'Exact CI-artifact / existing release-AAR byte correspondence; not full recursive composition or release acceptance',
+    'metadataSHA256': sha(metadata_bytes),
+    'runId': 40348432396, 'runHeadSHA': SOURCE,
+    'artifacts': artifact_receipts,
+    'aarArtifactMember': published_aar_name,
+    'aarBytes': len(local), 'aarSHA256': sha(local),
+    'ciAarEqualsExistingReleaseAar': True,
+    'independentInfoZipAarEqual': True,
+    'nativeMemberCount': len(members), 'nativeMembers': members,
+    'allNativeMembersEqualObservedCiLibsArtifact': True,
+    'fullSourceBuildInputCoverageVerified': False,
+    'recursiveFinalCompositionVerified': False,
+    'productionNoticeRetentionVerified': False,
+    'independentReleaseAcceptanceVerified': False,
+    'W3Complete': False, 'R4R5Accepted': False,
+    'deviceOperations': 0, 'modelDownloads': 0,
+}
+(OUT / 'member-verification.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n')
+print(json.dumps({k: result[k] for k in ['aarSHA256', 'ciAarEqualsExistingReleaseAar', 'nativeMemberCount', 'allNativeMembersEqualObservedCiLibsArtifact', 'W3Complete']}))

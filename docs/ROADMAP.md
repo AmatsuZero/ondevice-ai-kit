@@ -1,3 +1,7 @@
+## 2026-11-15 W3：CI输出与发布AAR字节对应
+
+官方CI整AAR及四ABI全部16库已与固定发布AAR逐字节对应，双解压工具/完整ZIP摘要与原日志核验通过；[验证](validation/w3-sherpa-ci-members-20261115.md)。独立复核接受P1增量，实际消费者/生产绑定与逐成员输入覆盖仍缺；W3/R4/R5及P1–P4保持open，零设备/模型/生产变更。
+
 ## 2026-11-15 W3：分类同步回读
 
 本地1af1c5e精确8文件，文档finding限定复核接受；双端#15/Wiki逐字回读及Wiki SHA一致，[收据](validation/w3-closure-scope-sync-20261115.json)。GL调用级路由恢复、原EOF保留，源码未push；W3/R4/R5与P1–P4仍open，ADB未恢复且新run未消费。

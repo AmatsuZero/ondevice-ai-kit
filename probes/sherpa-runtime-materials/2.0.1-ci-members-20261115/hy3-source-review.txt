@@ -1,0 +1,37 @@
+```json
+{
+  "verdict": "revise",
+  "findings": [
+    {
+      "id": 1,
+      "severity": "correctness",
+      "title": "Fixed canonical digests are never asserted; verifier only checks self-consistency with trusted `prior`",
+      "detail": "The task fixes three digests (release AAR a8d09d1d…, libs ZIP 97188739…, AAR ZIP fd4f1e0e…). The code asserts sha(local)==prior['localAar']['sha256'] and digest==expected_log_digests[name] — both derived solely from the prior provenance file. It never compares against the task-given fixed values. So it proves the CI artifacts equal 'whatever prior recorded', not the specific fixed release. A consistent-but-wrong or prior-swapped set passes.",
+      "action": "Add hard pin assertions: sha(local)=='a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7', and the two artifact ZIP sha256 equal 9718873918fad3a9f7a1156420e5e8f46810970c5fb07383e467cf841265fe68 and fd4f1e0ef080de31957df23069624215b69858fbc364637399f4cd983f6bd594, independent of prior."
+    },
+    {
+      "id": 2,
+      "severity": "independence",
+      "title": "'Independent Info-ZIP' is an opaque `rtk proxy unzip` of unverified identity",
+      "detail": "The second-implementation cross-check invokes `rtk proxy unzip`, whose backing implementation/version is never verified. It may be a passthrough to the same engine as Python's zipfile, defeating the independence goal. Independence is assumed, not established in code.",
+      "action": "Invoke the genuine Info-ZIP binary by absolute path (e.g. /usr/bin/unzip) and assert its identity (--version) before trusting output, or document the proxy's implementation."
+    },
+    {
+      "id": 3,
+      "severity": "assurance",
+      "title": "libs equality pinned to an indirect 'MatchesDownstreamLog' digest, not the artifact's own ZIP digest",
+      "detail": "expected_log_digests['sherpa-onnx-android-libs'] = prior['officialWorkflowLogEvidence']['libsArtifactZipDigestMatchesDownstreamLog'] is a derived/secondary value, not the primary artifact ZIP digest. This adds an extra unverified hop; the whole digest chain is circular through prior.",
+      "action": "Pin the libs ZIP digest to the task-given primary 97188739… (and verify prior's derivation independently) rather than the indirect downstream-log key."
+    }
+  ],
+  "limitations": [
+    "Source-only review: code not executed; downloads still running per task.",
+    "Cannot authenticate prior provenance file or the local artifacts-api.stdout snapshot; both are trusted inputs.",
+    "Cannot confirm `rtk proxy unzip` is genuine Info-ZIP, nor that the local AAR file at ROOT/.../sherpa-onnx-2.0.1.aar is the canonical release.",
+    "Not full recursive composition / license / product acceptance; W3Complete and R4R5Accepted are correctly false.",
+    "Correctly avoids the ZIP-vs-member digest trap (compares member bytes, not ZIP digests) — that part is sound.",
+    "No claim of archive equality or W3 acceptance is made; parent performs execution/acceptance."
+  ],
+  "correctness_assessment": "If it runs successfully, the verifier does establish byte equality between the CI AAR member and the local release AAR, and between all 16 native .so AAR members and the CI libs artifact, with a second-implementation cross-check. However it establishes this relative to the unverified `prior` provenance and an unverified 'independent' proxy, and never pins the fixed canonical digests — so it does NOT, on its own, prove equality to the specific fixed release AAR / artifacts identified in the task."
+}
+```

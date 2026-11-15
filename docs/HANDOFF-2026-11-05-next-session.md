@@ -1,3 +1,7 @@
+## 2026-11-15 W3 CI完整AAR与16库字节对应已验
+
+新取官方同run40348432396两artifact，ZIP摘要匹配API/旧job日志；CI整AAR与现存release AAR相同，四ABI全部16SO与CI libs相同，Python/实测Info-ZIP6双读通过，[验证](validation/w3-sherpa-ci-members-20261115.md)。hy3审阅及五块固定摘要/工具身份候选已原样集成；首提取器被前导文字挡住，唯一JSON block恢复，第三条重复API意见未采纳。180s与900s包装器超时原件/partial/range摘要保留，确认旧文件无打开进程后只补最后2.64/9.94MB，未重传完整文件。独立复核接受P1增量；下一补消费者/生产候选绑定、逐成员源码/补丁/配置及嵌套ORT来源矩阵，不要求唯一crypto构造。P1/P2/P3/P4、R4/R5、W3仍open；161freeze保持、零设备/模型/生产变更，源码未push，goal active。所有本轮helper/下载/验收均终态；同步随后单独记录。
+
 ## 2026-11-15 W3分类已提交并双端同步
 
 本地1af1c5e精确8文件，原MEDIUM经限定只读复核接受修正；GH#15comment6889158935/GL#15note44850/GHWiki20d85a9逐字回读，双Wiki SHAe72cc54bc85a5f7bda286996489bd900dad08d76940a07a3fa7cc42dddf1917b一致，[收据](validation/w3-closure-scope-sync-20261115.json)。GL两次GET EOF原件保留，仅调用级清除代理后同20行GET及完整分页/发布成功；GH唯一marker未重发，不改全局代理/凭据。共享文档F08并发变化未暂存或回退，原报告/失败保留。当前所有本轮发布/helper终态，勿poll旧句柄；新run仍零prepare/消费，ADB空，不重复server/backend试验。R4质量/R5资源/P1–P4生产发布分别open，goal active；源码未push，实体连接恢复后按现161冻结合同fresh前置继续。

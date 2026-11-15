@@ -1,0 +1,16 @@
+{
+  "firstJSONExtractionFailed": true,
+  "cause": "Complete result has prose followed by one valid fenced JSON block; original raw/result retained",
+  "candidateBlocks": 5,
+  "exactReplacementCountsAllOne": true,
+  "candidateIntegratedExact": true,
+  "beforeSHA256": "e26067acd94ea46c6225b7574e8c4e57706088a070e7db4f0c6f9e7d52e4643c",
+  "afterSHA256": "591fbc9052f83f822ed931a7bb7850b535390b2097c04b72863966faa8c2b692",
+  "astParsed": true,
+  "reviewFindings": {
+    "1": "Adopt fixed digest and size pins as additional replay boundary",
+    "2": "Adopt absolute Info-ZIP path after parent verified actual binary/version",
+    "3": "Not confirmed as separate defect: original code already checks raw API digest directly; prior log digest is an additional comparison. Fixed pins additionally adopted under finding1"
+  },
+  "noArchiveOrW3AcceptanceClaimFromHelper": true
+}
