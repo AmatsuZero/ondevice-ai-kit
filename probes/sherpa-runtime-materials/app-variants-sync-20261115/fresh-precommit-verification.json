@@ -1,0 +1,19 @@
+{
+  "stagedFiles": 45,
+  "materialFiles": 40,
+  "sourceInputsPreserved": 304,
+  "noticeAssetsPreserved": 68,
+  "modelLicenseInputsPreserved": 7,
+  "protectedBaselinesPreserved": 175,
+  "concurrentChangesPreserved": [
+    "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md",
+    "docs/agent-pitfalls.md",
+    "docs/roadmap/W6-video-understanding.md"
+  ],
+  "APKIdentitiesVerified": 4,
+  "frozenFiles": 161,
+  "rawLogWhitespaceDiagnostics": 4,
+  "allOtherTextPassed": true,
+  "deviceCalls": 0,
+  "W3Complete": false
+}

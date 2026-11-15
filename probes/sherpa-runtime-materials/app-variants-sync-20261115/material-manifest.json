@@ -1,0 +1,77 @@
+{
+  "files": [
+    {
+      "path": "body.md",
+      "bytes": 5215,
+      "sha256": "015ce45e76c5e848eb055d4e0f469a039f44bf349013d3c91840b0271ee85d28"
+    },
+    {
+      "path": "cleanup-inventory.json",
+      "bytes": 737,
+      "sha256": "a1fc801771d15c6463eb2c21e62769e8461229a53de9d5eba5c14c0eeb0aea86"
+    },
+    {
+      "path": "cleanup-preflight.json",
+      "bytes": 730,
+      "sha256": "86cf6f115120598bc78f316fcbbce1586f290539892d70e6ad1594fffab32b51"
+    },
+    {
+      "path": "cleanup-receipt.json",
+      "bytes": 785,
+      "sha256": "22b56d7dcdde47e8de9bbd03673a8cf0fd6376fae5003e1850009178ec1494c4"
+    },
+    {
+      "path": "commit-receipt.json",
+      "bytes": 156,
+      "sha256": "b0588c71067f50e672ffaf301e7c59cf71c6461485dd560d2001ad3cdda3c4f5"
+    },
+    {
+      "path": "fresh-precommit-initial-failure.json",
+      "bytes": 290,
+      "sha256": "30d9a28444126899407c6e9b8ccf01295e3d067129a25ea77280fe247d9dae8d"
+    },
+    {
+      "path": "fresh-precommit-verification.json",
+      "bytes": 510,
+      "sha256": "41a3a8af2e1ea6cf6024e2146e040a3c4796dd6c3a0a2ef74ceb7284be3d1c4e"
+    },
+    {
+      "path": "fresh-protection-insertion-diagnosis.json",
+      "bytes": 937,
+      "sha256": "9fb8b1678c8ab313c745c8a58d6c433f076fc675a1a4dbb15794525dc5139391"
+    },
+    {
+      "path": "github-wiki-receipt.json",
+      "bytes": 164,
+      "sha256": "6477f031854557a215041822a10b40a428ef1d26874107431af4d3f6481ca8b5"
+    },
+    {
+      "path": "gitlab-wiki-receipt.json",
+      "bytes": 178,
+      "sha256": "c8d6838fc100174968cbee5a887be3684d6c4ad19878e49d67930f404a0356ee"
+    },
+    {
+      "path": "hy3-publication-parent-acceptance.json",
+      "bytes": 961,
+      "sha256": "a0c2b2ccbaeb89975c16d508acf10acbb007f653995281d62c304bacd38aedfa"
+    },
+    {
+      "path": "hy3-publication-process.json",
+      "bytes": 201,
+      "sha256": "63dd0e26cfd7edd9560a1c7f09bfbcaa0f9b200d770aeecd9d7beba7092b6611"
+    },
+    {
+      "path": "hy3-raw-evidence-identities.json",
+      "bytes": 1011,
+      "sha256": "c6a0480ea1d808fb195b50dfd8c0d70a0c980877963c361005099070bf3d33a5"
+    },
+    {
+      "path": "issue-receipts.json",
+      "bytes": 401,
+      "sha256": "8da369a48e71b704b8b64bc394c652eaa702cdcc6ff6499c13cfd2c531aac04a"
+    }
+  ],
+  "fileCount": 14,
+  "binaryAPKsIncluded": false,
+  "W3Complete": false
+}

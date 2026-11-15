@@ -1,3 +1,7 @@
+## W3共享文档保护：并发新增段不一定是前缀（2026-11-15）
+
+四APK提交前fresh检查移除自己的前缀/反向状态替换后，仍在docs/agent-pitfalls.md触发AssertionError：范围外F08 GPU预检929B段插在既有两段之间。保留首失败；核其精确边界/摘要后仅在内存移除，恢复原268388B及SHA2568d06e26d76ef4eaf5c7ff5f0ffb26880b9fc34f163907929c1a129c69f42f0a6，实际工作文件不回滚。两其他F08文件为前缀保留，175保护不能统称全部字节或suffix相等；精确暂存仍为新W3内容加HEAD，排除并发变化。该诊断只说明原文有序字节仍在，不授权忽略任意diff或扩大提交；无重建/产品/设备改变。见probes/sherpa-runtime-materials/app-variants-sync-20261115/fresh-protection-insertion-diagnosis.json及原失败收据。新hy3发布稿4046字超4000限制，原候选保留，仅精确删冗余/整理空行后接受，不将exit0当文稿自动验收。
+
 ## W3真实Demo原生库全集不等于ASR运行时集合（2026-11-15）
 
 当前父checker首断言把真实Demo所有SO当固定Sherpa/ORT16库，实际Demo有32：16ASR和16既有graphics.path/face_detector/image_processing/surface_util（各四ABI）。历史原Demo已含后16，两个新Demo Debug/Release extras与历史逐字节相同；最小独立消费者才恰有16ASR。有效恢复是保留原checker/失败，显式核16ASR精确子集及16历史extras边界，不删库、不改产品/依赖、不放宽ASR字节门或重建。真实Demo的project依赖、独立Maven消费及Release未签名状态分别报告；ASR通知保留不能覆盖全Demo许可/组成。证据`.omx/artifacts/w3-app-variants-20261115T145000Z/`及`probes/sherpa-runtime-materials/app-variants-delivery-20261115/`。helper README误称小材料目录含APK、状态修正漏最终native保留缺口和无关词已拒收，由新小修正文稿精确修正；APK仅留本地ignored artifacts，不能由文稿位置误述把二进制纳Git或缩减P2门。

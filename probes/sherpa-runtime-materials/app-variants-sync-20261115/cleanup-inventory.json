@@ -1,0 +1,23 @@
+{
+  "disk": {
+    "total": 994610155520,
+    "used": 956337750016,
+    "free": 38272405504
+  },
+  "candidateCaches": [
+    {
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-app-variants-20261115/apk-consumer/build",
+      "bytes": 775002237,
+      "files": 559,
+      "symlinks": []
+    },
+    {
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-app-variants-20261115/apk-consumer/.gradle",
+      "bytes": 745432,
+      "files": 15,
+      "symlinks": []
+    }
+  ],
+  "acceptedAPKsRetainedAt": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-app-variants-20261115",
+  "deletionStarted": false
+}

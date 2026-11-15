@@ -1,3 +1,7 @@
+## 2026-11-15：四APK证据已提交并双端同步
+
+本地05a0432（45文件），GH#15comment6896719826/GL#15note44867/GHWiki84f0446逐字回读，双Wiki摘要ba29ea677e6c7c311168e66d1ed4adb3b6aef2e9cb91bb44552e4992203957d3一致；[收据](../validation/w3-app-variants-delivery-sync-20261115.json)，新marker已用勿重发、源码未push。新增hy3文稿41.105s完整终态，本轮四hy3与发布均完成；四APK/161freeze复核通过。175原保护字节保持，补充精确边界：pitfalls的范围外929B段为中间插入，不是suffix相等；只在内存移除后恢复原摘要，工作内容与两F08前缀保留、排除提交，初失败留档。隔离consumer缓存精确清775747669B，验收APK/夹具/原始证据保留。零新构建/设备/下载，P1–P4/R4/R5/W3保持open，完整目标与未消费真机合同不变；不重跑已验构建/旧FILE或USB恢复。
+
 ## 2026-11-15：当前Demo与独立Maven消费者Debug/Release实包已核
 
 [验证](../validation/w3-app-variants-delivery-20261115.md)：真实Demo及独立Maven消费者四APK均保留68通知770479B/四ABI16ASR库；Demo额外七原模型许可资产和16历史非ASR库均原字节保持。Demo37.920s成功，独立Release真实releaseRuntimeClasspath八制品对应固定ca0065f2 AAR，默认Debug及非法variant拒收已验。两Release未签名，未安装/推理/分发；Whisper-tiny路径不冒充Qwen质量修复。三免费hy3完整终态，175保护余字节/304选定源/161freeze通过；checker全库集合误判及文稿纠正原件保留。P1–P4/R4/R5/W3完整范围均open，源码/旧quota停线，不重放旧FILE/USB循环。当前P1历史hy3复核已接受、P2四根许可已集成的旧状态措辞同步纠正，门槛与历史证据不变。

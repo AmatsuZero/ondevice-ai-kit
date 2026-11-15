@@ -1,0 +1,23 @@
+{
+  "removed": [
+    {
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-app-variants-20261115/apk-consumer/build",
+      "bytes": 775002237,
+      "files": 559,
+      "symlinks": []
+    },
+    {
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-app-variants-20261115/apk-consumer/.gradle",
+      "bytes": 745432,
+      "files": 15,
+      "symlinks": []
+    }
+  ],
+  "nominalBytesRemoved": 775747669,
+  "freeBytesBefore": 38267740160,
+  "freeBytesAfter": 38791303168,
+  "sourceFixtureFilesPreserved": 3,
+  "acceptedBinaryCopiesAndEvidencePreserved": true,
+  "scope": "exact inactive isolated consumer build and .gradle caches only",
+  "noGlobalCachesOrOtherWorktreesTouched": true
+}
