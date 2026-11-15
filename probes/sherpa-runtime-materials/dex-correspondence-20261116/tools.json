@@ -1,0 +1,8 @@
+{
+  "java": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home/bin/java",
+  "builderJar": "/Users/daubert/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/9.1.0/da004d252ed93ae054aa62542baf696a730643e8/builder-9.1.0.jar",
+  "builderJarSHA256": "0670034adae63a4fabc25d42c1173d11b4e083021ff95c4bcee6f9e3945f9ae9",
+  "Context7ToolsAvailable": false,
+  "officialD8Reference": "https://developer.android.com/tools/d8",
+  "officialDEXFormat": "https://source.android.com/docs/core/runtime/dex-format"
+}

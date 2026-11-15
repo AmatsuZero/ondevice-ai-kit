@@ -1,3 +1,7 @@
+## W3 DEX 证据状态（2026-11-16，本地已接受 DEX 子项）
+
+新增 P1 JVM→DEX 子项：D8 9.1.31/min-api26 实际 6 次执行；Debug direct 124/124；带 Android bootclasspath 的 intermediate 后接同一 merge 为 49/124，no-lib intermediate 后接同一无 `--lib` 的 no-desugaring merge 为 124/124。零新 Kotlin 编译/APK 构建/下载/设备/推理/生产编辑。只证明 124 运行时类完整 baksmali 原文本一致；P1/P2/P3/P4/R4/R5/W3 仍未完成，其中 P1 仅该 DEX 子项被父端接受，详见 [报告](validation/w3-dex-correspondence-20261116.md)。
+
 ## 2026-11-16 W3：三条NDK正文恢复已提交同步
 
 本地eae61a4及[双端收据](validation/w3-ndk-offline-body-recovery-sync-20261116.json)确认GH/GL Issue#15及两Wiki逐字回读。新overlay79有正文/55缺失声明行，原134/76/58历史不变；523检查/161freeze及保护通过，零新下载/构建/设备。W3/R4/R5/P1–P4仍open、goal active，完整目标与未消费真机合同不缩减；不重试旧quota/源码站或USB/旧FILE，源码未push。

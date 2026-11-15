@@ -1,0 +1,22 @@
+{
+  "verifiedAtUTC": "2026-11-15T23:34:09.986621+00:00",
+  "kind": "same-length DEX opcode immediate change in OfflineRecognizer.finalize const-wide/16 zero->one; signature/adler32 recomputed",
+  "instructionOffset": 101504,
+  "expectedOriginalInstructionHex": "16020000",
+  "mutatedInstructionHex": "16020100",
+  "originalBytes": 310224,
+  "mutatedBytes": 310224,
+  "originalSHA256": "59d8159a4f6c1610b13dc5d057960d3cc28a38d56e7055b345464a22df8a1c17",
+  "mutatedSHA256": "538ab0a9eacb6d011133dfb67d3d7786463d7ed9c9dad4de95458487c341b7bc",
+  "AndroidDexdumpChecksumExit": 0,
+  "baksmaliExit": 0,
+  "classCountUnchanged": 124,
+  "unequalClassCount": 1,
+  "unequalClasses": [
+    "com/k2fsa/sherpa/onnx/OfflineRecognizer.smali"
+  ],
+  "rawDisassemblyEqualityRejected": true,
+  "originalFilesUnchanged": true,
+  "noExecutionInstallationOrSourceChanges": true,
+  "scope": "detects this specific behavioral bytecode mutation despite valid DEX header; not exhaustive semantic proof"
+}

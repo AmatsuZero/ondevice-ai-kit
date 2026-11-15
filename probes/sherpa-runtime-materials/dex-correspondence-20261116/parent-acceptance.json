@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUTC": "2026-11-15T23:37:48.902839+00:00",
+  "acceptedByParent": true,
+  "scope": "raw complete baksmali text correspondence for124runtimeclasses in four existing APKs; not full DEX binary or formal semantic equivalence",
+  "APKs": 4,
+  "classComparisons": 496,
+  "classesPerAPK": 124,
+  "methodsPerAPK": 1967,
+  "methodComparisons": 7868,
+  "perAPK": [
+    {
+      "kind": "demo",
+      "variant": "debug",
+      "classes": 124,
+      "methods": 1967,
+      "totalSmaliBytes": 2250095,
+      "normalizationOrStripping": false
+    },
+    {
+      "kind": "independent-consumer",
+      "variant": "debug",
+      "classes": 124,
+      "methods": 1967,
+      "totalSmaliBytes": 2250095,
+      "normalizationOrStripping": false
+    },
+    {
+      "kind": "demo",
+      "variant": "release",
+      "classes": 124,
+      "methods": 1967,
+      "totalSmaliBytes": 1927149,
+      "normalizationOrStripping": false
+    },
+    {
+      "kind": "independent-consumer",
+      "variant": "release",
+      "classes": 124,
+      "methods": 1967,
+      "totalSmaliBytes": 1927149,
+      "normalizationOrStripping": false
+    }
+  ],
+  "sourceFilesFreshVerified": 22,
+  "sourceJVMClassPayloadsFromPriorSingleKotlinCompile": 124,
+  "JVMOriginalPayloadMembersVerified": 125,
+  "D8InvocationsThisTask": 6,
+  "newKotlinCompilerInvocations": 0,
+  "newAPKBuilds": 0,
+  "newDownloads": 0,
+  "newDeviceCalls": 0,
+  "newASRInference": 0,
+  "frozenFilesVerified": 161,
+  "initialProtectedPaths": 176,
+  "initialProtectedContentUnchanged": 172,
+  "concurrentChangesObservedAndPreserved": [
+    {
+      "path": "docs/agent-pitfalls.md",
+      "before": {
+        "bytes": 275901,
+        "sha256": "c6576b15b149e4b4ebb26f94cb4361c033473652eff0fb1637b759fd8180555a"
+      },
+      "after": {
+        "bytes": 276640,
+        "sha256": "9d5df0eef92f6d61c9656306c0cc6c90b02cbd99a70143b832cf8be562705bc0"
+      },
+      "oldSuffixPreserved": false,
+      "oldPrefixPreserved": false,
+      "taskOwnership": "outside W3 DEX slice"
+    },
+    {
+      "path": "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md",
+      "before": {
+        "bytes": 137322,
+        "sha256": "73723905238b136f2f804661de0d14a79577ad63094a8bc0085fd027efba2777"
+      },
+      "after": {
+        "bytes": 137160,
+        "sha256": "9c228d9bbe6c9f0f81d76a03594f024da390d3d6f320ca565f9bba7a501b2647"
+      },
+      "oldSuffixPreserved": false,
+      "oldPrefixPreserved": false,
+      "taskOwnership": "outside W3 DEX slice"
+    },
+    {
+      "path": "docs/roadmap/W6-video-understanding.md",
+      "before": {
+        "bytes": 34295,
+        "sha256": "f4d2c6e6ba254380e71f02de09c7af17665616376c69cbdc8e41714de151fe59"
+      },
+      "after": {
+        "bytes": 34369,
+        "sha256": "d52e3304eb793c040a91c2b2dd2950088d4b9941993cf3b08852643a14c9fc13"
+      },
+      "oldSuffixPreserved": false,
+      "oldPrefixPreserved": false,
+      "taskOwnership": "outside W3 DEX slice"
+    },
+    {
+      "path": "docs/validation/f08-qwen35-video-sft-train36-valid18-plan-20261115.md",
+      "before": {
+        "bytes": 4473,
+        "sha256": "cdcfc6f8433e71032accd52567baa151276b02bad1ce1e0011ee6598cf4b1b3e"
+      },
+      "after": {
+        "bytes": 5219,
+        "sha256": "155e7de074e353d484ddbffeec9e07f56bca58706c597d06871bb1e864f7d4f9"
+      },
+      "oldSuffixPreserved": false,
+      "oldPrefixPreserved": false,
+      "taskOwnership": "outside W3 DEX slice"
+    }
+  ],
+  "nativeChecksumChecks": [
+    {
+      "path": ".omx/artifacts/w3-dex-correspondence-20261116T0730/rebuilt-debug/classes.dex",
+      "bytes": 310224,
+      "sha256": "59d8159a4f6c1610b13dc5d057960d3cc28a38d56e7055b345464a22df8a1c17",
+      "exitCode": 0,
+      "exitObservedBeforeLaterSourceMapShapeError": true,
+      "stdoutBytes": 171,
+      "stdoutSHA256": "c2c4aa46d0274c64dff67333edcc515854e5fa1a72190fa3b5fb28581fe440a6",
+      "stderrBytes": 0,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Android dexdump checksum validation only; not independent semantic comparison"
+    },
+    {
+      "path": ".omx/artifacts/w3-dex-correspondence-20261116T0730/rebuilt-release-no-bootclasspath-merged/classes.dex",
+      "bytes": 310152,
+      "sha256": "b08a2e257bd3155d00293b2db19a891948d72e890c47034c2aff2583f92d75ec",
+      "exitCode": 0,
+      "exitObservedBeforeLaterSourceMapShapeError": true,
+      "stdoutBytes": 197,
+      "stdoutSHA256": "d5bf0c840783538a33d26e75039aea528d140f8f0c22f234e80de11fd5c7c5cf",
+      "stderrBytes": 0,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "scope": "Android dexdump checksum validation only; not independent semantic comparison"
+    }
+  ],
+  "initialReleaseDifferencesPerAPK": 75,
+  "initialReleaseFailureRetained": true,
+  "releaseIntermediateOnlyEqualPerAPK": 14,
+  "releaseIntermediateThenMergeWithBootclasspathEqualPerAPK": 49,
+  "releaseNoBootclasspathPipelineEqualPerAPK": 124,
+  "historicalAGPBootclasspathProved": false,
+  "formalEquivalenceProved": false,
+  "wholeDEXByteEqualityProved": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "W3Complete": false,
+  "methodCountKind": ".method declarations including native/abstract; not all instruction-bearing methods",
+  "negativeControl": {
+    "verifiedAtUTC": "2026-11-15T23:34:09.986621+00:00",
+    "kind": "same-length DEX opcode immediate change in OfflineRecognizer.finalize const-wide/16 zero->one; signature/adler32 recomputed",
+    "instructionOffset": 101504,
+    "expectedOriginalInstructionHex": "16020000",
+    "mutatedInstructionHex": "16020100",
+    "originalBytes": 310224,
+    "mutatedBytes": 310224,
+    "originalSHA256": "59d8159a4f6c1610b13dc5d057960d3cc28a38d56e7055b345464a22df8a1c17",
+    "mutatedSHA256": "538ab0a9eacb6d011133dfb67d3d7786463d7ed9c9dad4de95458487c341b7bc",
+    "AndroidDexdumpChecksumExit": 0,
+    "baksmaliExit": 0,
+    "classCountUnchanged": 124,
+    "unequalClassCount": 1,
+    "unequalClasses": [
+      "com/k2fsa/sherpa/onnx/OfflineRecognizer.smali"
+    ],
+    "rawDisassemblyEqualityRejected": true,
+    "originalFilesUnchanged": true,
+    "noExecutionInstallationOrSourceChanges": true,
+    "scope": "detects this specific behavioral bytecode mutation despite valid DEX header; not exhaustive semantic proof"
+  }
+}

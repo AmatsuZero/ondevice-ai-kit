@@ -1,3 +1,7 @@
+## 2026-11-16 W3 DEX 本地已接受子项交接
+
+仅新增 P1 JVM→DEX 运行时类对应性子项，父端已接受；报告在 [validation/w3-dex-correspondence-20261116.md](validation/w3-dex-correspondence-20261116.md)。父端已接受该 DEX 子项报告；commit/dual-publication 未完成前仅作 handoff，本稿不声称整体集成或已发布，源分支未推送。P1/P2/P3/P4/R4/R5/W3 仍未完成（P1 仅该 DEX 子项已接受）；R4 Android 24/65 在 1.5GiB 停止，R5 预算草案待定，55 NDK body 声明受 source-host 429 阻塞。无 USB/ADB/mic/AiAi/下载，不重试已知配额失败或 429。
+
 ## 2026-11-16 W3 NDK三条正文已提交及双端同步
 
 本地eae61a4精确11文件；GH#15 comment6902992453/GL#15 note44874、GH Wiki74ba5d9与双Wiki内容SHA53902b76e4637bf56482e92388721dfeef26266684d08869972c4f0a9740b9f5逐字回读；[收据](validation/w3-ndk-offline-body-recovery-sync-20261116.json)。marker已用勿重发；两hy3及三发布均终态，无待poll。523检查含6内存负例/161freeze/176原保护，原历史134/76/58不改，新overlay79有正文/55缺失声明行。零下载/源站请求/构建/设备；无新缓存、零删除，全部原始候选/错误保留，源码分支未push。W3/R4/R5/P1–P4仍open、goal active、完整目标不缩减；剩余55正文、完整组成/可信度/生产及发布接受、真机质量和预算继续缺失。不自动重试源站/旧quota或USB/旧FILE；实体连接变化后才fresh未消费固定单文件合同。

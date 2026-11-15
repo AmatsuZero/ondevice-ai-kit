@@ -1,0 +1,21 @@
+{
+  "kind": "documented reproduction recipe from fixed class selection and observed outputs, not a new execution or full historical argv receipt",
+  "entrypoint": "com.android.tools.smali.baksmali.Main",
+  "classpath": "/Users/daubert/Library/Android/sdk/cmdline-tools/latest/lib/apkanalyzer-classpath.jar",
+  "options": [
+    "disassemble",
+    "--api",
+    "26",
+    "--jobs",
+    "2",
+    "--classes",
+    "comma-separated contents of class-selection.txt",
+    "--output",
+    "unique-output-directory",
+    "fixed APK classesN.dex or rebuilt classes.dex"
+  ],
+  "normalizationOrDebugStripping": false,
+  "all124SelectedClassesRequired": true,
+  "allAPKDEXEntriesEnumerated": true,
+  "rawDEXAndSmaliLocalOnly": true
+}

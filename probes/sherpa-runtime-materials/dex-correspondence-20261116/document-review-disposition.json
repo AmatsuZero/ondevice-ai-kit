@@ -1,0 +1,185 @@
+{
+  "reviewVerdict": "changes_required",
+  "helperFindings": [
+    {
+      "key": "reportMarkdown",
+      "oldSHA256": "269309a3c85408db95e65149e490002c20edc0a095e0763f546bcab3a8b66a99",
+      "newSHA256": "3fe0aa33d2e571e186ab3e671a5c82ab4574dc154a78132a373fda89e5caf5ae",
+      "accepted": true,
+      "reason": "Supplied correction requires replacing candidate/draft stage wording with locally accepted DEX subitem stage, without claiming full W3 acceptance."
+    },
+    {
+      "key": "reportMarkdown",
+      "oldSHA256": "f544786cb3e7e6d9f1e40b70950d4d86dadcbca6fdc3d9d152515ffec4a032e3",
+      "newSHA256": "b81e75f1d092bd35d843b0d69dd015b8c92d2396e6ecc92348363c257abe2c9e",
+      "accepted": true,
+      "reason": "The final report must distinguish helper draft source from parent acceptance and keep commit/dual-publication pending rather than claiming integration or full W3 acceptance."
+    },
+    {
+      "key": "reportMarkdown",
+      "oldSHA256": "335be92a33dd43b3d83db40a187b5dc595e1e0e87f50c2a13006049e276c0e53",
+      "newSHA256": "183cfc58129e3ce0c6ec3a7ba5231969cb8860d8f435c54453965613212c2ef9",
+      "accepted": true,
+      "reason": "Supplied correction states 18 is only the SDK backend class count; App/native classes are additionally excluded."
+    },
+    {
+      "key": "reportMarkdown",
+      "oldSHA256": "8b5adcc5b271a9a1917c7f74f49c483a8dca175a487de19c2d475fa682314499",
+      "newSHA256": "d1eef8882ae48feb1bef7b9126c445f319a351fd2e1ce2a8783520910758469e",
+      "accepted": true,
+      "reason": "The --lib argument belongs to release intermediate conversion; the final no-desugaring merge has no --lib at all, and the 49/124 versus 124/124 comparison must be attributed to the intermediate stage."
+    },
+    {
+      "key": "reportMarkdown",
+      "oldSHA256": "5ba752988c666a21a9cba46c802f9d7183b40ece4ce61422d98e8b727520594c",
+      "newSHA256": "810b0a77504bb24d0f5aea289f3179d307e93670ea90897a3e5a5e835523be4f",
+      "accepted": true,
+      "reason": "Supplied correction requires removing the instruction about prefix output and reporting final artifact facts instead."
+    },
+    {
+      "key": "reportMarkdown",
+      "oldSHA256": "38a9b3be5484c1dd999a55577b4632ab240de3a5db0c4b0b8a6e6526b1f43802",
+      "newSHA256": "a4dd1a6c42c75e3fee3b4feb81d9d72c1eeaed35b07b094ec007f5a77839715f",
+      "accepted": true,
+      "reason": "Supplied corrections require readable Chinese blocker labels, exact remaining-open status with P1 subitem nuance, no extra goal claim, and removal of the cryptographic proof aside."
+    },
+    {
+      "key": "roadmapPrefix",
+      "oldSHA256": "236081a52b615a18aa654609c6ce2ef3907cd2ca8ad3d88ba034f336f27bad22",
+      "newSHA256": "c18760c4c81cabb7b887c9b08d8d5b04e904932a7edd97f7f9c10d83e4605dd4",
+      "accepted": true,
+      "reason": "Replace candidate-stage wording with locally accepted DEX subitem stage without claiming full W3 acceptance."
+    },
+    {
+      "key": "roadmapPrefix",
+      "oldSHA256": "42f187e89f9ba568a9a7e13dc6dda1441893a58e1eb7e2f8ad38e70adbec82d1",
+      "newSHA256": "c03761afd6697989bea07de52b37a441fb9264f25eea3baa6fc666aedd9fb9b7",
+      "accepted": true,
+      "reason": "Supplied correction states 18 is only the SDK backend class count; App/native classes are additionally excluded."
+    },
+    {
+      "key": "roadmapPrefix",
+      "oldSHA256": "c7576430f5ff5efbb7cd2463ecccd72b1759c06855af675ddb07a3414786d668",
+      "newSHA256": "0885f0f9076e81afc9c03c6a95e1ecdbd850ac31f7ea694c4f3f5eea34f4a03c",
+      "accepted": true,
+      "reason": "Supplied correction gives the roadmap-relative report path as ../validation/w3-dex-correspondence-20261116.md and requires replacing draft-stage link text."
+    },
+    {
+      "key": "globalRoadmapPrefix",
+      "oldSHA256": "73f5a15a99b0b833b5ac5d26681fc1ee36c6726fca9f66d833dc482b52126414",
+      "newSHA256": "5351cbd3138011b54f1d33e41a239653694711e9716411a0ff2f6cd163db8665",
+      "accepted": true,
+      "reason": "Replace candidate-stage wording with locally accepted DEX subitem stage without claiming full W3 acceptance."
+    },
+    {
+      "key": "globalRoadmapPrefix",
+      "oldSHA256": "02f72b07da4ae26eab876d35a56078a2940e160f0644ab24573d8cec2eeed53d",
+      "newSHA256": "a15fb7f94b2ffbac8d90586bf73ef7a40f3dc50a5b756640035c4c97b21bfb0c",
+      "accepted": true,
+      "reason": "Supplied correction requires distinguishing bootclasspath intermediate plus same merge 49/124 from no-lib intermediate plus same no-lib final merge 124/124."
+    },
+    {
+      "key": "globalRoadmapPrefix",
+      "oldSHA256": "9a09d270d75eb4eb299af4d403a54b275c5b18b7385ee38106d950d4d02dd03c",
+      "newSHA256": "53068f7dd90e002ee52254cd37e66e6c908def8deb8ecd47b2b5cd59312f3176",
+      "accepted": true,
+      "reason": "Supplied correction gives validation/w3-dex-correspondence-20261116.md for docs-resident prefixes and requires exact remaining-open status with P1 subitem nuance."
+    },
+    {
+      "key": "handoffPrefix",
+      "oldSHA256": "e9800a0aa281962c8ed6edae4bbbb5867a885ed5b3dacbe3e2fb12a24d65b657",
+      "newSHA256": "e1adf5e06f5e47132be93d23d0de348d4adf84edc9ce33b41ae6fd3bb9863133",
+      "accepted": true,
+      "reason": "Handoff stage should be locally accepted subitem handoff, not candidate handoff, while avoiding full W3 acceptance."
+    },
+    {
+      "key": "handoffPrefix",
+      "oldSHA256": "c72156ff76d1ba192b77add323e5d390fd62bd030a24e428de4c05738783db2b",
+      "newSHA256": "ae25cd89f2435d1561d7b3853120d746f2b6c9052c03dc25e996cb1a8b7c8627",
+      "accepted": true,
+      "reason": "Supplied correction gives validation/w3-dex-correspondence-20261116.md for docs-resident handoff and allows pending commit/dual-publication for handoff without claiming publication."
+    },
+    {
+      "key": "handoffPrefix",
+      "oldSHA256": "7ea87df53acd248429139789fe3585b331364f94795291a480bf33715e1e995b",
+      "newSHA256": "b9c262d0a6acbcdadf153d9b9c36f392636a20978819cff0f3aad5f8edb49e55",
+      "accepted": true,
+      "reason": "Remaining-open wording must preserve the accepted P1 DEX subitem while keeping P1 and all listed milestones incomplete."
+    },
+    {
+      "key": "handoffPrefix",
+      "oldSHA256": "1f57d354395a2beda00c7f51d3b655f9dc219b7882a433891bc0945698404403",
+      "newSHA256": "454d45b3a4d9674ee90c9efd993d16006d745298fd21ec90f0ed08700547fb2d",
+      "accepted": true,
+      "reason": "Replace vague English blocker wording with readable Chinese while preserving the no-retry limit."
+    },
+    {
+      "key": "pitfallsPrefix",
+      "oldSHA256": "302bb0bb96eb6c44e8408ad9ae47cc769d5ea7e9251c50452196b175b209e084",
+      "newSHA256": "a1dfd9e7fc2e6cbb77b1fb8df50c2211be118fbe0c1c03500e11afbae76610f5",
+      "accepted": true,
+      "reason": "Supplied correction requires BOOTCLASSPATH CONTROL and NEGATIVE MUTANT to remain separate, and requires precise intermediate--lib versus final-merge-no-lib wording."
+    },
+    {
+      "key": "publicationBody",
+      "oldSHA256": "e01296168201c7e47b0656ee10a1a25b4de141d61a5947eb129a4a9ac0368d36",
+      "newSHA256": "1c8d381c1bea53dd34a034fed5580fc8b3bdecc4ecf268b6b12ab2c76180b848",
+      "accepted": true,
+      "reason": "Replace candidate-stage wording with locally accepted DEX subitem stage; this does not touch the unique publication marker."
+    },
+    {
+      "key": "publicationBody",
+      "oldSHA256": "42f187e89f9ba568a9a7e13dc6dda1441893a58e1eb7e2f8ad38e70adbec82d1",
+      "newSHA256": "c03761afd6697989bea07de52b37a441fb9264f25eea3baa6fc666aedd9fb9b7",
+      "accepted": true,
+      "reason": "Supplied correction states 18 is only the SDK backend class count; App/native classes are additionally excluded."
+    },
+    {
+      "key": "publicationBody",
+      "oldSHA256": "06cb4fdbb3e24f776281982d00ae1c64671775929e31ec0ce631b6cd270f92cf",
+      "newSHA256": "84224e7319132f1d80833bff932accf212d096422287d2bd0a6f5cd2d840df07",
+      "accepted": true,
+      "reason": "Supplied correction requires precise intermediate --lib behavior and final merge with no --lib, with 49/124 and 124/124 tied to the correct intermediate pipelines."
+    },
+    {
+      "key": "publicationBody",
+      "oldSHA256": "481bce65d4a47fe2212a1225ba286db9874ab876fa3aae2aae8d6dd472a1b5ad",
+      "newSHA256": "78c0986f0b58a1072d42bec5b7d18c22300072ae15604e1da009f31143bc9fcc",
+      "accepted": true,
+      "reason": "Supplied correction allows the final operational summary to state parent acceptance and separately recorded local submission/dual-publication, with no commit ID or already-published claim."
+    },
+    {
+      "key": "publicationBody",
+      "oldSHA256": "b5604de0be5402baa21efe6b9376bd6d741c40e356c51cfea8d1694b13211d30",
+      "newSHA256": "7e94389704b66b1c0616fc458143d71a529d063827d44f9060e90688b9e87a6c",
+      "accepted": true,
+      "reason": "Supplied corrections require exact remaining-open status with P1 subitem nuance, no extra goal claim, readable Chinese blocker wording, and removal of the cryptographic proof aside."
+    }
+  ],
+  "allExactReplacementsApplied": true,
+  "parentMinimalEditorialCorrections": [
+    {
+      "key": "reportMarkdown",
+      "old": "> 状态：本地已接受的 DEX 子项报告。内容来源为 helper 草稿，父端 fresh verification 后接受该子项；本稿不声称读取原始文件、复核仓库状态、执行工具或完成 W3 整体集成，commit/dual-publication 尚未记录，源分支未推送。",
+      "new": "> 状态：本地 DEX 对应子项已验收。hy3 依据供应上下文起草并限定复核文稿，主代理另对实际材料逐字节验收；本报告不表示 W3 整体验收。提交与双端同步另留收据，源码分支未推送。"
+    },
+    {
+      "key": "reportMarkdown",
+      "old": "7868 次方法声明维度比较",
+      "new": "类级原文本比较中包含 7868 条方法声明"
+    },
+    {
+      "key": "reportMarkdown",
+      "old": "intermediate/merge 机制这一解释路径",
+      "new": "intermediate/merge 机制"
+    },
+    {
+      "key": "reportMarkdown",
+      "old": "作为具体阻断和范围变更向上报告",
+      "new": "作为尚未解决的阻断记录"
+    }
+  ],
+  "acceptedByParent": true,
+  "reviewScope": "Bounded review of only the six supplied candidate strings against the supplied facts and applicable pitfall excerpts; no tools, execution, network, repository reads, raw smali/DEX review, implementation, or full document rewrites.",
+  "notFullP4Review": true
+}

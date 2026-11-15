@@ -1,0 +1,309 @@
+Compiled from "D8DexArchiveMerger.java"
+final class com.android.builder.dexing.D8DexArchiveMerger implements com.android.builder.dexing.DexArchiveMerger {
+  private static final java.util.logging.Logger LOGGER;
+
+  private static final java.lang.String ERROR_MULTIDEX;
+
+  private final com.android.builder.dexing.DexingType dexingType;
+
+  private final int minSdkVersion;
+
+  private final com.android.tools.r8.CompilationMode compilationMode;
+
+  private final com.android.ide.common.blame.MessageReceiver messageReceiver;
+
+  private final java.util.concurrent.ExecutorService d8ExecutorService;
+
+  private static final java.lang.String DEX_LIMIT_EXCEEDED_ERROR;
+
+  public com.android.builder.dexing.D8DexArchiveMerger(com.android.ide.common.blame.MessageReceiver, com.android.builder.dexing.DexingType, int, com.android.tools.r8.CompilationMode, java.util.concurrent.ExecutorService);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_2
+       6: putfield      #7                  // Field dexingType:Lcom/android/builder/dexing/DexingType;
+       9: aload_0
+      10: iload_3
+      11: putfield      #13                 // Field minSdkVersion:I
+      14: aload_0
+      15: aload         4
+      17: putfield      #17                 // Field compilationMode:Lcom/android/tools/r8/CompilationMode;
+      20: aload_0
+      21: aload_1
+      22: putfield      #21                 // Field messageReceiver:Lcom/android/ide/common/blame/MessageReceiver;
+      25: aload_0
+      26: aload         5
+      28: putfield      #25                 // Field d8ExecutorService:Ljava/util/concurrent/ExecutorService;
+      31: return
+
+  public void mergeDexArchives(java.util.List<com.android.builder.dexing.DexArchiveEntry>, java.util.List<java.nio.file.Path>, java.nio.file.Path, java.util.List<java.nio.file.Path>, java.util.List<java.lang.String>, java.nio.file.Path, java.util.Collection<java.nio.file.Path>, java.nio.file.Path, java.nio.file.Path, java.nio.file.Path) throws com.android.builder.dexing.DexArchiveMergerException;
+    Code:
+       0: getstatic     #29                 // Field LOGGER:Ljava/util/logging/Logger;
+       3: getstatic     #33                 // Field java/util/logging/Level.INFO:Ljava/util/logging/Level;
+       6: invokevirtual #39                 // Method java/util/logging/Logger.isLoggable:(Ljava/util/logging/Level;)Z
+       9: ifeq          95
+      12: getstatic     #29                 // Field LOGGER:Ljava/util/logging/Logger;
+      15: getstatic     #33                 // Field java/util/logging/Level.INFO:Ljava/util/logging/Level;
+      18: aload_3
+      19: invokeinterface #45,  1           // InterfaceMethod java/nio/file/Path.toAbsolutePath:()Ljava/nio/file/Path;
+      24: invokeinterface #51,  1           // InterfaceMethod java/nio/file/Path.toString:()Ljava/lang/String;
+      29: aload_1
+      30: invokeinterface #55,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      35: invokedynamic #61,  0             // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+      40: invokeinterface #65,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      45: ldc           #71                 // String ,
+      47: invokestatic  #73                 // Method java/util/stream/Collectors.joining:(Ljava/lang/CharSequence;)Ljava/util/stream/Collector;
+      50: invokeinterface #79,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      55: checkcast     #83                 // class java/lang/String
+      58: aload_2
+      59: invokeinterface #55,  1           // InterfaceMethod java/util/List.stream:()Ljava/util/stream/Stream;
+      64: invokedynamic #85,  0             // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+      69: invokeinterface #65,  2           // InterfaceMethod java/util/stream/Stream.map:(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+      74: ldc           #71                 // String ,
+      76: invokestatic  #73                 // Method java/util/stream/Collectors.joining:(Ljava/lang/CharSequence;)Ljava/util/stream/Collector;
+      79: invokeinterface #79,  2           // InterfaceMethod java/util/stream/Stream.collect:(Ljava/util/stream/Collector;)Ljava/lang/Object;
+      84: checkcast     #83                 // class java/lang/String
+      87: invokedynamic #86,  0             // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      92: invokevirtual #90                 // Method java/util/logging/Logger.log:(Ljava/util/logging/Level;Ljava/lang/String;)V
+      95: aload_1
+      96: invokeinterface #94,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+     101: ifeq          114
+     104: aload_2
+     105: invokeinterface #94,  1           // InterfaceMethod java/util/List.isEmpty:()Z
+     110: ifeq          114
+     113: return
+     114: new           #98                 // class com/android/builder/dexing/D8DexArchiveMerger$InterceptingDiagnosticsHandler
+     117: dup
+     118: aload_0
+     119: invokespecial #100                // Method com/android/builder/dexing/D8DexArchiveMerger$InterceptingDiagnosticsHandler."<init>":(Lcom/android/builder/dexing/D8DexArchiveMerger;)V
+     122: astore        11
+     124: aload         11
+     126: invokestatic  #103                // Method com/android/tools/r8/D8Command.builder:(Lcom/android/tools/r8/DiagnosticsHandler;)Lcom/android/tools/r8/D8Command$Builder;
+     129: astore        12
+     131: aload         12
+     133: iconst_1
+     134: invokevirtual #109                // Method com/android/tools/r8/D8Command$Builder.setDisableDesugaring:(Z)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     137: pop
+     138: aload         12
+     140: iconst_1
+     141: invokevirtual #115                // Method com/android/tools/r8/D8Command$Builder.setEnableVerboseSyntheticNames:(Z)Lcom/android/tools/r8/D8Command$Builder;
+     144: pop
+     145: aload         12
+     147: aload_0
+     148: getfield      #17                 // Field compilationMode:Lcom/android/tools/r8/CompilationMode;
+     151: getstatic     #119                // Field com/android/tools/r8/CompilationMode.DEBUG:Lcom/android/tools/r8/CompilationMode;
+     154: if_acmpne     161
+     157: iconst_1
+     158: goto          162
+     161: iconst_0
+     162: invokevirtual #124                // Method com/android/tools/r8/D8Command$Builder.setIncludeClassesChecksum:(Z)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     165: pop
+     166: aload         10
+     168: ifnull        184
+     171: aload         12
+     173: aload         10
+     175: invokedynamic #127,  0            // InvokeDynamic #3:accept:(Ljava/nio/file/Path;)Ljava/util/function/Consumer;
+     180: invokevirtual #131                // Method com/android/tools/r8/D8Command$Builder.setBuildMetadataConsumer:(Ljava/util/function/Consumer;)Lcom/android/tools/r8/D8Command$Builder;
+     183: pop
+     184: aload_1
+     185: invokeinterface #135,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     190: astore        13
+     192: aload         13
+     194: invokeinterface #139,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     199: ifeq          233
+     202: aload         13
+     204: invokeinterface #144,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     209: checkcast     #148                // class com/android/builder/dexing/DexArchiveEntry
+     212: astore        14
+     214: aload         12
+     216: aload         14
+     218: invokevirtual #150                // Method com/android/builder/dexing/DexArchiveEntry.getDexFileContent:()[B
+     221: aload         14
+     223: invokestatic  #154                // Method com/android/builder/dexing/D8DiagnosticsHandler.getOrigin:(Lcom/android/builder/dexing/DexArchiveEntry;)Lcom/android/tools/r8/origin/Origin;
+     226: invokevirtual #160                // Method com/android/tools/r8/D8Command$Builder.addDexProgramData:([BLcom/android/tools/r8/origin/Origin;)Lcom/android/tools/r8/D8Command$Builder;
+     229: pop
+     230: goto          192
+     233: aload         12
+     235: aload_2
+     236: invokevirtual #164                // Method com/android/tools/r8/D8Command$Builder.addGlobalSyntheticsFiles:(Ljava/util/Collection;)Lcom/android/tools/r8/D8Command$Builder;
+     239: pop
+     240: aload         5
+     242: ifnull        256
+     245: aload         12
+     247: aload         5
+     249: invokestatic  #168                // Method com/android/tools/r8/origin/Origin.unknown:()Lcom/android/tools/r8/origin/Origin;
+     252: invokevirtual #174                // Method com/android/tools/r8/D8Command$Builder.addMainDexRules:(Ljava/util/List;Lcom/android/tools/r8/origin/Origin;)Lcom/android/tools/r8/D8Command$Builder;
+     255: pop
+     256: aload         4
+     258: ifnull        269
+     261: aload         12
+     263: aload         4
+     265: invokevirtual #178                // Method com/android/tools/r8/D8Command$Builder.addMainDexRulesFiles:(Ljava/util/Collection;)Lcom/android/tools/r8/D8Command$Builder;
+     268: pop
+     269: aload         6
+     271: ifnull        289
+     274: aload         12
+     276: iconst_1
+     277: anewarray     #46                 // class java/nio/file/Path
+     280: dup
+     281: iconst_0
+     282: aload         6
+     284: aastore
+     285: invokevirtual #181                // Method com/android/tools/r8/D8Command$Builder.addMainDexListFiles:([Ljava/nio/file/Path;)Lcom/android/tools/r8/BaseCommand$Builder;
+     288: pop
+     289: aload         7
+     291: ifnull        302
+     294: aload         12
+     296: aload         7
+     298: invokevirtual #185                // Method com/android/tools/r8/D8Command$Builder.addLibraryFiles:(Ljava/util/Collection;)Lcom/android/tools/r8/BaseCommand$Builder;
+     301: pop
+     302: aload         9
+     304: ifnull        315
+     307: aload         12
+     309: aload         9
+     311: invokevirtual #189                // Method com/android/tools/r8/D8Command$Builder.setMainDexListOutputPath:(Ljava/nio/file/Path;)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     314: pop
+     315: aload_0
+     316: getfield      #7                  // Field dexingType:Lcom/android/builder/dexing/DexingType;
+     319: getstatic     #193                // Field com/android/builder/dexing/DexingType.NATIVE_MULTIDEX:Lcom/android/builder/dexing/DexingType;
+     322: if_acmpne     345
+     325: aload_0
+     326: getfield      #13                 // Field minSdkVersion:I
+     329: bipush        21
+     331: if_icmpge     345
+     334: aload         12
+     336: bipush        21
+     338: invokevirtual #198                // Method com/android/tools/r8/D8Command$Builder.setMinApiLevel:(I)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     341: pop
+     342: goto          355
+     345: aload         12
+     347: aload_0
+     348: getfield      #13                 // Field minSdkVersion:I
+     351: invokevirtual #198                // Method com/android/tools/r8/D8Command$Builder.setMinApiLevel:(I)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     354: pop
+     355: aload         8
+     357: ifnull        396
+     360: aload         8
+     362: invokeinterface #202,  1          // InterfaceMethod java/nio/file/Path.toFile:()Ljava/io/File;
+     367: invokevirtual #206                // Method java/io/File.exists:()Z
+     370: ifeq          396
+     373: aload         12
+     375: iconst_1
+     376: anewarray     #211                // class com/android/tools/r8/startup/StartupProfileProvider
+     379: dup
+     380: iconst_0
+     381: new           #213                // class com/android/builder/dexing/D8DexArchiveMerger$1
+     384: dup
+     385: aload_0
+     386: aload         8
+     388: invokespecial #215                // Method com/android/builder/dexing/D8DexArchiveMerger$1."<init>":(Lcom/android/builder/dexing/D8DexArchiveMerger;Ljava/nio/file/Path;)V
+     391: aastore
+     392: invokevirtual #218                // Method com/android/tools/r8/D8Command$Builder.addStartupProfileProviders:([Lcom/android/tools/r8/startup/StartupProfileProvider;)Lcom/android/tools/r8/D8Command$Builder;
+     395: pop
+     396: aload         12
+     398: aload_0
+     399: getfield      #17                 // Field compilationMode:Lcom/android/tools/r8/CompilationMode;
+     402: invokevirtual #222                // Method com/android/tools/r8/D8Command$Builder.setMode:(Lcom/android/tools/r8/CompilationMode;)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     405: checkcast     #110                // class com/android/tools/r8/D8Command$Builder
+     408: aload_3
+     409: getstatic     #226                // Field com/android/tools/r8/OutputMode.DexIndexed:Lcom/android/tools/r8/OutputMode;
+     412: invokevirtual #232                // Method com/android/tools/r8/D8Command$Builder.setOutput:(Ljava/nio/file/Path;Lcom/android/tools/r8/OutputMode;)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     415: checkcast     #110                // class com/android/tools/r8/D8Command$Builder
+     418: iconst_1
+     419: invokevirtual #109                // Method com/android/tools/r8/D8Command$Builder.setDisableDesugaring:(Z)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     422: checkcast     #110                // class com/android/tools/r8/D8Command$Builder
+     425: iconst_0
+     426: invokevirtual #236                // Method com/android/tools/r8/D8Command$Builder.setIntermediate:(Z)Lcom/android/tools/r8/D8Command$Builder;
+     429: pop
+     430: aload         12
+     432: invokevirtual #239                // Method com/android/tools/r8/D8Command$Builder.build:()Lcom/android/tools/r8/BaseCommand;
+     435: checkcast     #104                // class com/android/tools/r8/D8Command
+     438: aload_0
+     439: getfield      #25                 // Field d8ExecutorService:Ljava/util/concurrent/ExecutorService;
+     442: invokestatic  #243                // Method com/android/tools/r8/D8.run:(Lcom/android/tools/r8/D8Command;Ljava/util/concurrent/ExecutorService;)V
+     445: goto          459
+     448: astore        13
+     450: aload_0
+     451: aload         13
+     453: aload         11
+     455: invokevirtual #251                // Method getMergingExceptionToRethrow:(Lcom/android/tools/r8/CompilationFailedException;Lcom/android/builder/dexing/D8DiagnosticsHandler;)Lcom/android/builder/dexing/DexArchiveMergerException;
+     458: athrow
+     459: return
+    Exception table:
+       from    to  target type
+         240   445   448   Class com/android/tools/r8/CompilationFailedException
+
+  private com.android.builder.dexing.DexArchiveMergerException getMergingExceptionToRethrow(com.android.tools.r8.CompilationFailedException, com.android.builder.dexing.D8DiagnosticsHandler);
+    Code:
+       0: new           #255                // class java/lang/StringBuilder
+       3: dup
+       4: ldc_w         #257                // String Error while merging dex archives:
+       7: invokespecial #259                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+      10: astore_3
+      11: aload_2
+      12: invokevirtual #262                // Method com/android/builder/dexing/D8DiagnosticsHandler.getPendingHints:()Ljava/util/Set;
+      15: invokeinterface #266,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+      20: astore        4
+      22: aload         4
+      24: invokeinterface #139,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+      29: ifeq          62
+      32: aload         4
+      34: invokeinterface #144,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+      39: checkcast     #83                 // class java/lang/String
+      42: astore        5
+      44: aload_3
+      45: invokestatic  #269                // Method java/lang/System.lineSeparator:()Ljava/lang/String;
+      48: invokevirtual #274                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      51: pop
+      52: aload_3
+      53: aload         5
+      55: invokevirtual #274                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      58: pop
+      59: goto          22
+      62: new           #278                // class com/android/builder/dexing/DexArchiveMergerException
+      65: dup
+      66: aload_3
+      67: invokevirtual #280                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      70: aload_1
+      71: invokespecial #281                // Method com/android/builder/dexing/DexArchiveMergerException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+      74: areturn
+
+  private static void lambda$mergeDexArchives$1(java.nio.file.Path, com.android.tools.r8.metadata.D8BuildMetadata);
+    Code:
+       0: aload_0
+       1: aload_1
+       2: invokeinterface #284,  1          // InterfaceMethod com/android/tools/r8/metadata/D8BuildMetadata.toJson:()Ljava/lang/String;
+       7: iconst_0
+       8: anewarray     #289                // class java/nio/file/OpenOption
+      11: invokestatic  #291                // Method java/nio/file/Files.writeString:(Ljava/nio/file/Path;Ljava/lang/CharSequence;[Ljava/nio/file/OpenOption;)Ljava/nio/file/Path;
+      14: pop
+      15: goto          28
+      18: astore_2
+      19: new           #299                // class java/io/UncheckedIOException
+      22: dup
+      23: aload_2
+      24: invokespecial #301                // Method java/io/UncheckedIOException."<init>":(Ljava/io/IOException;)V
+      27: athrow
+      28: return
+    Exception table:
+       from    to  target type
+           0    15    18   Class java/io/IOException
+
+  private static java.lang.String lambda$mergeDexArchives$0(com.android.builder.dexing.DexArchiveEntry);
+    Code:
+       0: aload_0
+       1: invokevirtual #304                // Method com/android/builder/dexing/DexArchiveEntry.getDexArchive:()Lcom/android/builder/dexing/DexArchive;
+       4: invokeinterface #308,  1          // InterfaceMethod com/android/builder/dexing/DexArchive.getRootPath:()Ljava/nio/file/Path;
+       9: invokeinterface #45,  1           // InterfaceMethod java/nio/file/Path.toAbsolutePath:()Ljava/nio/file/Path;
+      14: invokeinterface #51,  1           // InterfaceMethod java/nio/file/Path.toString:()Ljava/lang/String;
+      19: areturn
+
+  static {};
+    Code:
+       0: ldc           #8                  // class com/android/builder/dexing/D8DexArchiveMerger
+       2: invokevirtual #313                // Method java/lang/Class.getName:()Ljava/lang/String;
+       5: invokestatic  #318                // Method java/util/logging/Logger.getLogger:(Ljava/lang/String;)Ljava/util/logging/Logger;
+       8: putstatic     #29                 // Field LOGGER:Ljava/util/logging/Logger;
+      11: return
+}

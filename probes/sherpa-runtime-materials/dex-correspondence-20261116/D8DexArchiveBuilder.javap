@@ -1,0 +1,336 @@
+Compiled from "D8DexArchiveBuilder.java"
+final class com.android.builder.dexing.D8DexArchiveBuilder extends com.android.builder.dexing.DexArchiveBuilder {
+  private static final java.lang.String INVOKE_CUSTOM;
+
+  private static final java.lang.String DEFAULT_INTERFACE_METHOD;
+
+  private static final java.lang.String STATIC_INTERFACE_METHOD;
+
+  private com.android.builder.dexing.DexParameters dexParams;
+
+  public com.android.builder.dexing.D8DexArchiveBuilder(com.android.builder.dexing.DexParameters);
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method com/android/builder/dexing/DexArchiveBuilder."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+       9: return
+
+  public void convert(java.util.stream.Stream<com.android.builder.dexing.ClassFileEntry>, java.nio.file.Path, java.nio.file.Path, com.android.builder.dexing.DependencyGraphUpdater<java.io.File>) throws com.android.builder.dexing.DexArchiveBuilderException;
+    Code:
+       0: new           #13                 // class com/android/builder/dexing/D8DexArchiveBuilder$InterceptingDiagnosticsHandler
+       3: dup
+       4: aload_0
+       5: invokespecial #15                 // Method com/android/builder/dexing/D8DexArchiveBuilder$InterceptingDiagnosticsHandler."<init>":(Lcom/android/builder/dexing/D8DexArchiveBuilder;)V
+       8: astore        5
+      10: aload         5
+      12: invokestatic  #18                 // Method com/android/tools/r8/D8Command.builder:(Lcom/android/tools/r8/DiagnosticsHandler;)Lcom/android/tools/r8/D8Command$Builder;
+      15: astore        6
+      17: new           #24                 // class java/util/concurrent/atomic/AtomicInteger
+      20: dup
+      21: invokespecial #26                 // Method java/util/concurrent/atomic/AtomicInteger."<init>":()V
+      24: astore        7
+      26: aload_1
+      27: aload         6
+      29: aload         7
+      31: invokedynamic #27,  0             // InvokeDynamic #0:accept:(Lcom/android/tools/r8/D8Command$Builder;Ljava/util/concurrent/atomic/AtomicInteger;)Ljava/util/function/Consumer;
+      36: invokeinterface #31,  2           // InterfaceMethod java/util/stream/Stream.forEach:(Ljava/util/function/Consumer;)V
+      41: aload         7
+      43: invokevirtual #37                 // Method java/util/concurrent/atomic/AtomicInteger.get:()I
+      46: ifne          50
+      49: return
+      50: aload         6
+      52: aload_0
+      53: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+      56: invokevirtual #41                 // Method com/android/builder/dexing/DexParameters.getDebuggable:()Z
+      59: ifeq          68
+      62: getstatic     #47                 // Field com/android/tools/r8/CompilationMode.DEBUG:Lcom/android/tools/r8/CompilationMode;
+      65: goto          71
+      68: getstatic     #53                 // Field com/android/tools/r8/CompilationMode.RELEASE:Lcom/android/tools/r8/CompilationMode;
+      71: invokevirtual #56                 // Method com/android/tools/r8/D8Command$Builder.setMode:(Lcom/android/tools/r8/CompilationMode;)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+      74: checkcast     #57                 // class com/android/tools/r8/D8Command$Builder
+      77: aload_0
+      78: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+      81: invokevirtual #62                 // Method com/android/builder/dexing/DexParameters.getMinSdkVersion:()I
+      84: invokevirtual #65                 // Method com/android/tools/r8/D8Command$Builder.setMinApiLevel:(I)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+      87: checkcast     #57                 // class com/android/tools/r8/D8Command$Builder
+      90: iconst_1
+      91: invokevirtual #69                 // Method com/android/tools/r8/D8Command$Builder.setIntermediate:(Z)Lcom/android/tools/r8/D8Command$Builder;
+      94: aload_2
+      95: aload_0
+      96: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+      99: invokevirtual #73                 // Method com/android/builder/dexing/DexParameters.getDexPerClass:()Z
+     102: ifeq          111
+     105: getstatic     #76                 // Field com/android/builder/dexing/DexFilePerClassFile.INSTANCE:Lcom/android/builder/dexing/DexFilePerClassFile;
+     108: goto          114
+     111: getstatic     #82                 // Field com/android/builder/dexing/DexIndexed.INSTANCE:Lcom/android/builder/dexing/DexIndexed;
+     114: invokeinterface #87,  1           // InterfaceMethod com/android/builder/dexing/DexOutputMode.getOutputMode:()Lcom/android/tools/r8/OutputMode;
+     119: invokevirtual #93                 // Method com/android/tools/r8/D8Command$Builder.setOutput:(Ljava/nio/file/Path;Lcom/android/tools/r8/OutputMode;)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     122: checkcast     #57                 // class com/android/tools/r8/D8Command$Builder
+     125: aload_0
+     126: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+     129: invokevirtual #41                 // Method com/android/builder/dexing/DexParameters.getDebuggable:()Z
+     132: invokevirtual #97                 // Method com/android/tools/r8/D8Command$Builder.setIncludeClassesChecksum:(Z)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     135: checkcast     #57                 // class com/android/tools/r8/D8Command$Builder
+     138: iconst_1
+     139: invokevirtual #101                // Method com/android/tools/r8/D8Command$Builder.setEnableVerboseSyntheticNames:(Z)Lcom/android/tools/r8/D8Command$Builder;
+     142: pop
+     143: aload_0
+     144: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+     147: invokevirtual #41                 // Method com/android/builder/dexing/DexParameters.getDebuggable:()Z
+     150: ifeq          164
+     153: aload         6
+     155: invokedynamic #104,  0            // InvokeDynamic #1:apply:()Ljava/util/function/Function;
+     160: invokevirtual #108                // Method com/android/tools/r8/D8Command$Builder.addAssertionsConfiguration:(Ljava/util/function/Function;)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     163: pop
+     164: aload_3
+     165: ifnull        182
+     168: aload         6
+     170: new           #112                // class com/android/builder/dexing/D8GlobalSyntheticsConsumer
+     173: dup
+     174: aload_3
+     175: invokespecial #114                // Method com/android/builder/dexing/D8GlobalSyntheticsConsumer."<init>":(Ljava/nio/file/Path;)V
+     178: invokevirtual #117                // Method com/android/tools/r8/D8Command$Builder.setGlobalSyntheticsConsumer:(Lcom/android/tools/r8/GlobalSyntheticsConsumer;)Lcom/android/tools/r8/D8Command$Builder;
+     181: pop
+     182: aload_0
+     183: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+     186: invokevirtual #121                // Method com/android/builder/dexing/DexParameters.getEnableApiModeling:()Z
+     189: ifeq          199
+     192: aload         6
+     194: iconst_1
+     195: invokevirtual #124                // Method com/android/tools/r8/D8Command$Builder.setEnableExperimentalMissingLibraryApiModeling:(Z)Lcom/android/tools/r8/D8Command$Builder;
+     198: pop
+     199: aload_0
+     200: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+     203: invokevirtual #127                // Method com/android/builder/dexing/DexParameters.getWithDesugaring:()Z
+     206: ifeq          287
+     209: aload         6
+     211: aload_0
+     212: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+     215: invokevirtual #130                // Method com/android/builder/dexing/DexParameters.getDesugarBootclasspath:()Lcom/android/builder/dexing/r8/ClassFileProviderFactory;
+     218: invokevirtual #134                // Method com/android/builder/dexing/r8/ClassFileProviderFactory.getOrderedProvider:()Lcom/android/tools/r8/ClassFileResourceProvider;
+     221: invokevirtual #140                // Method com/android/tools/r8/D8Command$Builder.addLibraryResourceProvider:(Lcom/android/tools/r8/ClassFileResourceProvider;)Lcom/android/tools/r8/BaseCommand$Builder;
+     224: pop
+     225: aload         6
+     227: aload_0
+     228: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+     231: invokevirtual #144                // Method com/android/builder/dexing/DexParameters.getDesugarClasspath:()Lcom/android/builder/dexing/r8/ClassFileProviderFactory;
+     234: invokevirtual #134                // Method com/android/builder/dexing/r8/ClassFileProviderFactory.getOrderedProvider:()Lcom/android/tools/r8/ClassFileResourceProvider;
+     237: invokevirtual #147                // Method com/android/tools/r8/D8Command$Builder.addClasspathResourceProvider:(Lcom/android/tools/r8/ClassFileResourceProvider;)Lcom/android/tools/r8/D8Command$Builder;
+     240: pop
+     241: aload_0
+     242: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+     245: invokevirtual #151                // Method com/android/builder/dexing/DexParameters.getCoreLibDesugarConfig:()Ljava/lang/String;
+     248: ifnull        264
+     251: aload         6
+     253: aload_0
+     254: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+     257: invokevirtual #151                // Method com/android/builder/dexing/DexParameters.getCoreLibDesugarConfig:()Ljava/lang/String;
+     260: invokevirtual #155                // Method com/android/tools/r8/D8Command$Builder.addSpecialLibraryConfiguration:(Ljava/lang/String;)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     263: pop
+     264: aload         4
+     266: ifnull        294
+     269: aload         6
+     271: new           #159                // class com/android/builder/dexing/D8DesugarGraphConsumerAdapter
+     274: dup
+     275: aload         4
+     277: invokespecial #161                // Method com/android/builder/dexing/D8DesugarGraphConsumerAdapter."<init>":(Lcom/android/builder/dexing/DependencyGraphUpdater;)V
+     280: invokevirtual #164                // Method com/android/tools/r8/D8Command$Builder.setDesugarGraphConsumer:(Lcom/android/tools/r8/DesugarGraphConsumer;)Lcom/android/tools/r8/D8Command$Builder;
+     283: pop
+     284: goto          294
+     287: aload         6
+     289: iconst_1
+     290: invokevirtual #168                // Method com/android/tools/r8/D8Command$Builder.setDisableDesugaring:(Z)Lcom/android/tools/r8/BaseCompilerCommand$Builder;
+     293: pop
+     294: aload         6
+     296: invokevirtual #171                // Method com/android/tools/r8/D8Command$Builder.build:()Lcom/android/tools/r8/BaseCommand;
+     299: checkcast     #19                 // class com/android/tools/r8/D8Command
+     302: invokestatic  #175                // Method com/google/common/util/concurrent/MoreExecutors.newDirectExecutorService:()Lcom/google/common/util/concurrent/ListeningExecutorService;
+     305: invokestatic  #181                // Method com/android/tools/r8/D8.run:(Lcom/android/tools/r8/D8Command;Ljava/util/concurrent/ExecutorService;)V
+     308: goto          328
+     311: astore        6
+     313: aload         6
+     315: aload         5
+     317: aload_0
+     318: getfield      #7                  // Field dexParams:Lcom/android/builder/dexing/DexParameters;
+     321: invokevirtual #127                // Method com/android/builder/dexing/DexParameters.getWithDesugaring:()Z
+     324: invokestatic  #189                // Method getExceptionToRethrow:(Ljava/lang/Throwable;Lcom/android/builder/dexing/D8DexArchiveBuilder$InterceptingDiagnosticsHandler;Z)Lcom/android/builder/dexing/DexArchiveBuilderException;
+     327: athrow
+     328: return
+    Exception table:
+       from    to  target type
+          10    49   311   Class java/lang/Throwable
+          50   308   311   Class java/lang/Throwable
+
+  private static byte[] readAllBytes(com.android.builder.dexing.ClassFileEntry);
+    Code:
+       0: aload_0
+       1: invokeinterface #193,  1          // InterfaceMethod com/android/builder/dexing/ClassFileEntry.readAllBytes:()[B
+       6: areturn
+       7: astore_1
+       8: new           #201                // class com/android/builder/dexing/DexArchiveBuilderException
+      11: dup
+      12: aload_1
+      13: invokespecial #203                // Method com/android/builder/dexing/DexArchiveBuilderException."<init>":(Ljava/lang/Throwable;)V
+      16: athrow
+    Exception table:
+       from    to  target type
+           0     6     7   Class java/io/IOException
+
+  private static com.android.builder.dexing.DexArchiveBuilderException getExceptionToRethrow(java.lang.Throwable, com.android.builder.dexing.D8DexArchiveBuilder$InterceptingDiagnosticsHandler, boolean);
+    Code:
+       0: new           #206                // class java/lang/StringBuilder
+       3: dup
+       4: invokespecial #208                // Method java/lang/StringBuilder."<init>":()V
+       7: astore_3
+       8: aload_3
+       9: ldc           #209                // String Error while dexing.
+      11: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      14: pop
+      15: aload_1
+      16: invokevirtual #215                // Method com/android/builder/dexing/D8DexArchiveBuilder$InterceptingDiagnosticsHandler.getUnsupportedFeatures:()Ljava/util/Set;
+      19: astore        4
+      21: aload         4
+      23: invokeinterface #219,  1          // InterfaceMethod java/util/Set.isEmpty:()Z
+      28: ifne          263
+      31: aload_1
+      32: invokevirtual #224                // Method com/android/builder/dexing/D8DexArchiveBuilder$InterceptingDiagnosticsHandler.getRequiredSdkVersion:()I
+      35: istore        5
+      37: iload_2
+      38: ifne          53
+      41: aload_1
+      42: iload         5
+      44: invokestatic  #227                // Method getEnableDesugaringHint:(I)Ljava/lang/String;
+      47: invokevirtual #231                // Method com/android/builder/dexing/D8DexArchiveBuilder$InterceptingDiagnosticsHandler.addHint:(Ljava/lang/String;)V
+      50: goto          70
+      53: iload         5
+      55: iconst_m1
+      56: if_icmpeq     70
+      59: aload_1
+      60: iload         5
+      62: invokedynamic #235,  0            // InvokeDynamic #2:makeConcatWithConstants:(I)Ljava/lang/String;
+      67: invokevirtual #231                // Method com/android/builder/dexing/D8DexArchiveBuilder$InterceptingDiagnosticsHandler.addHint:(Ljava/lang/String;)V
+      70: new           #206                // class java/lang/StringBuilder
+      73: dup
+      74: invokespecial #208                // Method java/lang/StringBuilder."<init>":()V
+      77: astore        6
+      79: aload         4
+      81: ldc           #238                // String invoke-custom
+      83: invokeinterface #240,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+      88: ifeq          107
+      91: aload         6
+      93: ldc           #244                // String Error:
+      95: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      98: ldc           #246                // String Invoke-customs are only supported starting with Android O (--min-api 26)
+     100: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     103: pop
+     104: goto          240
+     107: aload         4
+     109: ldc           #248                // String default-interface-method
+     111: invokeinterface #240,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     116: ifeq          135
+     119: aload         6
+     121: ldc           #244                // String Error:
+     123: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     126: ldc           #250                // String Default interface methods are only supported starting with Android N (--min-api 24)
+     128: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     131: pop
+     132: goto          240
+     135: aload         4
+     137: ldc           #252                // String static-interface-method
+     139: invokeinterface #240,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     144: ifeq          163
+     147: aload         6
+     149: ldc           #244                // String Error:
+     151: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     154: ldc           #254                // String Static interface methods are only supported starting with Android N (--min-api 24)
+     156: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     159: pop
+     160: goto          240
+     163: new           #256                // class java/util/ArrayList
+     166: dup
+     167: aload         4
+     169: invokespecial #258                // Method java/util/ArrayList."<init>":(Ljava/util/Collection;)V
+     172: astore        7
+     174: aload         7
+     176: invokedynamic #261,  0            // InvokeDynamic #3:compare:()Ljava/util/Comparator;
+     181: invokeinterface #265,  2          // InterfaceMethod java/util/List.sort:(Ljava/util/Comparator;)V
+     186: aload         7
+     188: invokeinterface #271,  1          // InterfaceMethod java/util/List.iterator:()Ljava/util/Iterator;
+     193: astore        8
+     195: aload         8
+     197: invokeinterface #275,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     202: ifeq          240
+     205: aload         8
+     207: invokeinterface #280,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     212: checkcast     #284                // class java/lang/String
+     215: astore        9
+     217: aload         6
+     219: ldc_w         #286                // String Error: UnsupportedFeature(
+     222: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     225: aload         9
+     227: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     230: ldc_w         #288                // String )\n
+     233: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     236: pop
+     237: goto          195
+     240: new           #290                // class java/lang/RuntimeException
+     243: dup
+     244: aload         6
+     246: invokevirtual #292                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     249: invokespecial #295                // Method java/lang/RuntimeException."<init>":(Ljava/lang/String;)V
+     252: astore        7
+     254: aload         7
+     256: aload_0
+     257: invokevirtual #297                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+     260: aload         7
+     262: astore_0
+     263: aload_1
+     264: invokevirtual #300                // Method com/android/builder/dexing/D8DexArchiveBuilder$InterceptingDiagnosticsHandler.getPendingHints:()Ljava/util/Set;
+     267: invokeinterface #303,  1          // InterfaceMethod java/util/Set.iterator:()Ljava/util/Iterator;
+     272: astore        5
+     274: aload         5
+     276: invokeinterface #275,  1          // InterfaceMethod java/util/Iterator.hasNext:()Z
+     281: ifeq          314
+     284: aload         5
+     286: invokeinterface #280,  1          // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+     291: checkcast     #284                // class java/lang/String
+     294: astore        6
+     296: aload_3
+     297: invokestatic  #304                // Method java/lang/System.lineSeparator:()Ljava/lang/String;
+     300: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     303: pop
+     304: aload_3
+     305: aload         6
+     307: invokevirtual #211                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     310: pop
+     311: goto          274
+     314: new           #201                // class com/android/builder/dexing/DexArchiveBuilderException
+     317: dup
+     318: aload_3
+     319: invokevirtual #292                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+     322: aload_0
+     323: invokespecial #309                // Method com/android/builder/dexing/DexArchiveBuilderException."<init>":(Ljava/lang/String;Ljava/lang/Throwable;)V
+     326: areturn
+
+  private static java.lang.String getEnableDesugaringHint(int);
+    Code:
+       0: iload_0
+       1: invokedynamic #312,  0            // InvokeDynamic #4:makeConcatWithConstants:(I)Ljava/lang/String;
+       6: areturn
+
+  private static void lambda$convert$0(com.android.tools.r8.D8Command$Builder, java.util.concurrent.atomic.AtomicInteger, com.android.builder.dexing.ClassFileEntry);
+    Code:
+       0: aload_0
+       1: aload_2
+       2: invokestatic  #313                // Method readAllBytes:(Lcom/android/builder/dexing/ClassFileEntry;)[B
+       5: aload_2
+       6: invokestatic  #316                // Method com/android/builder/dexing/D8DiagnosticsHandler.getOrigin:(Lcom/android/builder/dexing/ClassFileEntry;)Lcom/android/tools/r8/origin/Origin;
+       9: invokevirtual #322                // Method com/android/tools/r8/D8Command$Builder.addClassProgramData:([BLcom/android/tools/r8/origin/Origin;)Lcom/android/tools/r8/BaseCommand$Builder;
+      12: pop
+      13: aload_1
+      14: invokevirtual #326                // Method java/util/concurrent/atomic/AtomicInteger.incrementAndGet:()I
+      17: pop
+      18: return
+}

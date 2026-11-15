@@ -1,0 +1,44 @@
+[
+  {
+    "role": "java",
+    "path": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home/bin/java",
+    "bytes": 70432,
+    "sha256": "1069d726eae63d510d2983a2a4c7869f14db200605685c98117d9a27aaa5270f"
+  },
+  {
+    "role": "D8BuilderJar",
+    "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/9.1.0/da004d252ed93ae054aa62542baf696a730643e8/builder-9.1.0.jar",
+    "bytes": 15839059,
+    "sha256": "0670034adae63a4fabc25d42c1173d11b4e083021ff95c4bcee6f9e3945f9ae9"
+  },
+  {
+    "role": "baksmaliClasspathJar",
+    "path": "/Users/daubert/Library/Android/sdk/cmdline-tools/latest/lib/apkanalyzer-classpath.jar",
+    "bytes": 4341,
+    "sha256": "88fda19963fc360efb5a44d79e6de1dd9b06e8acd64e8c1c700ccdd8ff06bf0c"
+  },
+  {
+    "role": "androidBootclasspath",
+    "path": "/Users/daubert/Library/Android/sdk/platforms/android-36/android.jar",
+    "bytes": 27768026,
+    "sha256": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a"
+  },
+  {
+    "role": "kotlinClasspath",
+    "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar",
+    "bytes": 1841929,
+    "sha256": "ccb14ff83fabcb11458b798dbc9824748ccdffeec79c9aba789e6ed1cda86b1c"
+  },
+  {
+    "role": "originalClassesJar",
+    "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-dex-correspondence-20261116T0730/probe-inputs/original-classes.jar",
+    "bytes": 245045,
+    "sha256": "0ee4991c56c19ef5a8a573b01891193d7298ffe7ebcc68f42b944361d8869d93"
+  },
+  {
+    "role": "rebuiltPayloadsJar",
+    "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-dex-correspondence-20261116T0730/probe-inputs/rebuilt-payloads.jar",
+    "bytes": 244541,
+    "sha256": "d921bf03c9c5a5a508a80e5d5297cdffd61e2224a860634883d0aa8de60c0e59"
+  }
+]

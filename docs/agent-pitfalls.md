@@ -1,3 +1,9 @@
+## W3 DEX 对应性边界（2026-11-16）
+
+不要把完整 baksmali 原文本相等写成 whole DEX 字节或形式语义等价；相等包含 metadata/registers/instructions/labels/debug，未做 normalization/stripping。D8 Release 的 75 类差异、intermediate/merge 控件、BOOTCLASSPATH 单一变量对照与 NEGATIVE MUTANT 负控须分别保留；带 Android bootclasspath 的 intermediate 后接同一 merge 为 49/124，no-lib intermediate 后接同一无 `--lib` 的 no-desugaring merge 为 124/124，只说明本实验管线，不证明历史 AGP bootclasspath。不得再做参数扫描或用负控替代穷尽语义证明。
+
+证据与有效范围见 [DEX 对应报告](validation/w3-dex-correspondence-20261116.md)；首轮差异、单变量对照和真实 DEX 损坏负例均留存，不能靠剥注解、debug 信息或修改输出求通过。
+
 ## W3终检：Git status比较须固定untracked参数（2026-11-16）
 
 原保护快照按--untracked-files=all逐文件保存；终检漏该参数，Git默认把三个原untracked文件归并成两个目录，触发状态原字节比较失败。原失败/两份输出保留；相同--porcelain=v1 -z --untracked-files=all后9698B完全相同，176原内容摘要另独立通过。只修检查调用，不改文件/配置/忽略规则，不能把目录汇总当文件丢失。证据.omx/artifacts/w3-ndk-offline-recovery-20261116T0710/terminal-status-{initial-rejection,corrected}.json。

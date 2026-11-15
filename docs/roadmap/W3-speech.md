@@ -1,3 +1,7 @@
+## W3 P1 JVM→DEX 对应性子项（2026-11-16，本地已接受 DEX 子项）
+
+新增父端已接受的具体子项：四个既有 APK 的 124 个运行时类，完整 baksmali 原文本相等（496 类比较、7868 `.method` 声明；每 APK 124/1967，声明含 native/abstract）。仅限原文本，不含 whole DEX/语义等价，排除 18 个 SDK backend 类以及任何其它 App/native 类。详见 [报告](../validation/w3-dex-correspondence-20261116.md)。P1/W3 仍开放，生产采纳未完成。
+
 ## 2026-11-16：NDK离线正文恢复已双端记录
 
 本地eae61a4（11文件）；[同步收据](../validation/w3-ndk-offline-body-recovery-sync-20261116.json)记录GH#15 comment6902992453/GL#15 note44874、GH Wiki74ba5d9及双Wiki相同SHA53902b76…b9f5，逐字回读。两hy3及三发布均终态、无待poll；原134/76/58历史保持，新overlay79/55声明行，523检查/161freeze/176原保护通过、零新设备/下载/构建。仍缺55正文及完整来源/组成/生产采用和发布接受，R4/R5/P1–P4/W3保持open、goal active。完整目标/未消费真机合同不变；源码分支未push，不回放旧quota/源站/USB/FILE。

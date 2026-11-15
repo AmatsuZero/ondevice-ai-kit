@@ -1,0 +1,58 @@
+[
+  {
+    "task": "hy3-candidate",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 48.876,
+      "endedAtUTC": "2026-11-15T23:40:21.902767+00:00",
+      "stdoutBytes": 59067,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 22466,
+        "outputTokens": 10174,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 960000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "subtype": "success",
+    "is_error": false,
+    "observedToolUse": 0,
+    "promptSHA256": "8ead69de2dfb8ef98fe5a0515215cca3ca2f161dd2ee94111fd3c9c05a46e474",
+    "resultSHA256": "c8b01683a623ea0b1d7b001d7c8d24ead6aaa2b3f442e32f4b5cca8861ae8ccf",
+    "scope": "supplied-context document candidate/review only; not all raw DEX/smali review or P4"
+  },
+  {
+    "task": "hy3-review",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 87.631,
+      "endedAtUTC": "2026-11-15T23:43:01.398281+00:00",
+      "stdoutBytes": 107206,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 24709,
+        "outputTokens": 20732,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 960000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "subtype": "success",
+    "is_error": false,
+    "observedToolUse": 0,
+    "promptSHA256": "d6d79c2f3259601df9b0e7bef675e4c7e82e9d03adb1302e86ae18df436de665",
+    "resultSHA256": "5c144bfd8306eb851341f75ddf5bf1f9064740cd82236590d58d9d89d52ee98b",
+    "scope": "supplied-context document candidate/review only; not all raw DEX/smali review or P4"
+  }
+]
