@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "scope": "isolated Apple65 input-validation core only",
+  "baseCommit": "8537933d2340a2bf1e3c1f3aa97780bca5973780",
+  "dateUTC": "2026-11-16T05:56:10.575320+00:00",
+  "files": [
+    {
+      "path": "probes/ios-apple65-file/Apple65Core.swift",
+      "bytes": 14577,
+      "sha256": "31ced81915caae508192db4d93145dc741fcd711f1e5aba4b9a52b0183f6dd9d"
+    },
+    {
+      "path": "probes/ios-apple65-file/Apple65CoreChecks.swift",
+      "bytes": 35230,
+      "sha256": "4a2d7584e3a386df993838bfdbcafd7e9ebf1e2e95656c5410a2b3c298ea69a4"
+    }
+  ],
+  "testFirst": {
+    "compileExitCode": 0,
+    "stubRunExitCode": 1,
+    "expectedMissingImplementationFailures": 70,
+    "otherStubAssertionsPassed": 435,
+    "stubNegativeRejectionsDoNotProveValidation": true
+  },
+  "green": {
+    "exitCode": 0,
+    "elapsedSeconds": 0.338000874966383,
+    "PASSCount": 506,
+    "FAILCount": 0,
+    "sourceSHA256": "31ced81915caae508192db4d93145dc741fcd711f1e5aba4b9a52b0183f6dd9d"
+  },
+  "independentFullWAVAndPCMDigests": 65,
+  "protectedFilesUnchanged": 176,
+  "implementationDelivery": {
+    "exitCode": 0,
+    "elapsedSeconds": 144.735,
+    "endedAtUTC": "2026-11-16T05:53:18.830502+00:00",
+    "stdoutBytes": 138155,
+    "stderrBytes": 0,
+    "automaticRetry": false,
+    "automaticFallback": false
+  },
+  "observedHelperToolUse": 0,
+  "artifactRoot": ".omx/artifacts/w3-apple65-probe-preparation-20261116",
+  "noDeviceOrSpeechExecution": true,
+  "productionAdoption": false,
+  "gates": {
+    "R4": "open",
+    "R5": "open",
+    "P1": "open",
+    "P2": "open",
+    "P3": "open",
+    "P4": "open",
+    "W3": "open"
+  }
+}
