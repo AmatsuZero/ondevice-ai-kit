@@ -1,0 +1,22 @@
+{
+  "verdict": "accept-bounded-evidence",
+  "findings": [],
+  "checkedClaims": [
+    "No substantive contradiction found in the bounded Apple65 FILE result; acceptance is limited to run w3-apple65-file-20261116-01 and does not imply P4/W3/product-quality/budget approval.",
+    "Raw report, manifest, and source identity agree on runId and identity strings: manifest 99584dec071c0e8a3b47f510443e002d80058482cb48d580122a0af88c86a1fb, input binding b3838b23136aa1be8c760915b565a2f192976ae3299631fcd3470f8df5334e88, source identity fe1c00efb4cb5d0157ec2e690c515b6dee184ed867cfca16cbe60296e306c0e6, scorer d398bb35438b9f4eb399fc404e02c0c2a7184a7cea7c7a6d32e4a321f8e2b39e, report 9942aac31ea59a91684bc29e722f59945bd25f91196faab0f38fa296371d53b3/168754B.",
+    "All 65 raw rows show recognitionAttempted=true, terminal=true, inputPostcheckOK=true, and cleanupCompleted=true; manifest rows were not treated as requests.",
+    "Counts align: 52 recognized-nonempty, 13 typed 1110 errors, 50 speech-cohort nonempty of 52 expected; 20/20 Mandarin, 20/20 near-English, 10/12 far-English, 1/9 noise, 1/4 silence.",
+    "Typed 1110 rows are retained as errors and excluded from scorer; the far-English score is explicitly conditional 10/12 and is not presented as full-quality coverage.",
+    "Metrics/timing/RSS in the proposed MD match parent-acceptance: CER 95/590, WER 75/375 and 103/197, 15.138s report window, request/recognition sums and p95s, RTF p95, 231 App PID RSS samples, max 117669888B, max gap 112.569416ms, 0 gaps over 200ms.",
+    "Signed receipt and restoration claims are represented with boundaries: signed copy is not called an unsigned installed binary, 3 Mach-O sections and 69 resources are claimed unchanged, 45 original App records/paths identical, only probe+runner removed, ordinary launch accepted without rendered foreground proof.",
+    "Prior UI failure before Run, r3 authorized single Run, CLI/profile repairs, no quota retry, and parent all3-to-owned-subset restoration are preserved rather than erased in the proposed MD."
+  ],
+  "limits": [
+    "SHA-256 recomputation, report/confirm byte equality, source-file hashing, Mach-O section/resource equality, and 45-record restoration were not independently executed; they were reviewed as supplied fixed PUBLIC artifacts and asserted claims.",
+    "Execution HEAD 38306591fe1b3478b6d6761bf278af98d7f92ab3 and probe label 69a8d9c are stated in the MD but not present in the supplied source-identity manifest; that manifest only exposes sourceBaseCommit 8537933d2340a2bf1e3c1f3aa97780bca5973780.",
+    "test-summary-redacted.json confirms Passed/1 test, but its timestamps imply 22.475s wall time; the MD's 20.569s duration and process exit 0 are not derivable from the supplied summary because test-r3-process.json content was not included.",
+    "Authorization was already authorized at r3 start with no setup/allow tap, but the actual confirmation source remains un-attributed in supplied material; driver code was read only and not used to override runtime evidence.",
+    "Rendered foreground verification, manual listening of noise negatives, systemSpeech/true-peak/GPU/energy/thermal/sustained-load metrics, model hashes, screenshots/AX retention, protected176 status, remote availability, and historical Android/Qwen details are not independently checkable here.",
+    "No replay, new device work, release action, P4/product approval, W3 completion, threshold approval, resource-budget approval, or new authority is granted by this verdict."
+  ]
+}

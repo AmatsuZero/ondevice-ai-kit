@@ -1,3 +1,5 @@
+- [Apple65设备端文件批次结果](validation/w3-apple65-device-20261116.md)：物理iOS27.2.1的apple.speech单批运行完成；实际副本已签名而frozen边界保持历史值。13条typed1110仍为错误，资源/RTF仅采样描述，禁止重放或新增识别重试；后续仅离线分析与待审工作。
+
 ## 2026-11-16 Apple65独立FILE探针准备交接
 
 [准备报告](validation/w3-apple65-probe-preparation-20261116.md)：Core506项检查及实际generic iOS无签名构建通过，65WAV/14selected inputs/72bundlefiles/4真实FileLists核对；新run w3-apple65-file-20261116-01未消费，零新真机识别/授权/下载。独立hy3仅accept-preparation，不是P4/生产接受，176原工作内容保留；原稿、6精确修正、初build65与所有原始证据保留。完整W3/R4/R5/P1–P4仍open，Android24/65和未消费单片合同不变；不重跑旧Apple40请求或旧quota/USB循环。

@@ -1,3 +1,5 @@
+- iOS27文件批次UI陷阱：嵌套TCC allow按钮重复标识会先于Run失败；必须保留零Run/空Documents证据，修正firstMatch/owned实际子集，并把重复标识、profile选择、host缺失等失败控制作为历史错误留存。禁止据此泛化授权、重放批次或重试识别。
+
 ## W3 Apple65：XcodeGen显式资源与输出目录（2026-11-16）
 
 症状：初次--project指向尚未创建的输出目录，生成时CocoaCode4；预建确切目录后恢复。同一相对配置若生成到artifact目录，PBX的../../apple解析位置会改变，不能假定相对package路径自动重定位；本轮最终在probe目录生成。target-level resources在实际PBX中静默缺失，改为sources下AudioFixtures的type:folder/buildPhase:resources及identity显式资源项后，真实App65WAV/manifest均保留。边界：CLI生成成功不证明资源打包，须查PBX及实际App；Debug入口只是trampoline，代码另在.debug.dylib，留全72文件摘要。4份本轮SwiftFileList已留原字节，不混同历史缺失FileLists或将Package.swift写成编译源码。证据.omx/artifacts/w3-apple65-probe-preparation-20261116/：首错误、generated-r1、project.pbxproj.accepted、build初65/修0及app-package-acceptance-with-images.json。不是quota、签名或设备错误；零新真机识别。

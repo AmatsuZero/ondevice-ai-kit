@@ -1,3 +1,5 @@
+> 2026-11-16 execution: the one authorized `w3-apple65-file-20261116-01` batch is consumed. Do not replay. See [device result](../../docs/validation/w3-apple65-device-20261116.md). The preparation-stage specification below is retained as history.
+
 # W3 Apple 65 FILE probe candidate
 
 This is an isolated, manually triggered SwiftUI iOS FILE-only evaluation alias for fixed run `w3-apple65-file-20261116-01`. It is preparation only: no device recognition, no physical 65 batch, no production acceptance, no scoring, and no budget or W3 completion claim is authorized or reported by this candidate.

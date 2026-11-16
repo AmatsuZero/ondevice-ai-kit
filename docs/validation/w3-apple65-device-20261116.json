@@ -1,0 +1,290 @@
+{
+  "runId": "w3-apple65-file-20261116-01",
+  "reportSHA256": "9942aac31ea59a91684bc29e722f59945bd25f91196faab0f38fa296371d53b3",
+  "reportBytes": 168754,
+  "terminalDoubleReadIdentical": true,
+  "runStatus": "completed",
+  "requested": 65,
+  "terminalRows": 65,
+  "cleanupCompleted": 65,
+  "inputPostchecksPassed": 65,
+  "recognizedNonempty": 52,
+  "typedError1110": 13,
+  "speechSuccessfulNonempty": 50,
+  "expectedSpeechRows": 52,
+  "scorerSHA256": "d398bb35438b9f4eb399fc404e02c0c2a7184a7cea7c7a6d32e4a321f8e2b39e",
+  "cohorts": {
+    "mandarin": {
+      "expected": 20,
+      "statuses": {
+        "recognized-nonempty": 20
+      },
+      "recognizedNonempty": 20,
+      "typedErrors": [],
+      "scored": 20,
+      "fullScoreCoverage": true,
+      "scoreIsConditionalOnSuccessfulRows": false,
+      "metric": "character",
+      "aggregate": {
+        "referenceUnits": 590,
+        "hypothesisUnits": 532,
+        "substitutions": 29,
+        "deletions": 62,
+        "insertions": 4,
+        "errors": 95,
+        "rate": 0.16101694915254236,
+        "defined": true
+      }
+    },
+    "english-near": {
+      "expected": 20,
+      "statuses": {
+        "recognized-nonempty": 20
+      },
+      "recognizedNonempty": 20,
+      "typedErrors": [],
+      "scored": 20,
+      "fullScoreCoverage": true,
+      "scoreIsConditionalOnSuccessfulRows": false,
+      "metric": "word",
+      "aggregate": {
+        "referenceUnits": 375,
+        "hypothesisUnits": 372,
+        "substitutions": 68,
+        "deletions": 5,
+        "insertions": 2,
+        "errors": 75,
+        "rate": 0.2,
+        "defined": true
+      }
+    },
+    "english-far": {
+      "expected": 12,
+      "statuses": {
+        "recognized-nonempty": 10,
+        "typed-error": 2
+      },
+      "recognizedNonempty": 10,
+      "typedErrors": [
+        {
+          "id": "ami-ES2003a.sync.131-B",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "ami-ES2004a.sync.131-B",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        }
+      ],
+      "scored": 10,
+      "fullScoreCoverage": false,
+      "scoreIsConditionalOnSuccessfulRows": true,
+      "metric": "word",
+      "aggregate": {
+        "referenceUnits": 197,
+        "hypothesisUnits": 129,
+        "substitutions": 35,
+        "deletions": 68,
+        "insertions": 0,
+        "errors": 103,
+        "rate": 0.5228426395939086,
+        "defined": true
+      }
+    },
+    "nonspeech-noise": {
+      "expected": 9,
+      "statuses": {
+        "typed-error": 8,
+        "recognized-nonempty": 1
+      },
+      "recognizedNonempty": 1,
+      "typedErrors": [
+        {
+          "id": "ami-negative-ES2003a-0",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "ami-negative-ES2003a-1",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "ami-negative-ES2003a-2",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "ami-negative-ES2004a-0",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "ami-negative-ES2004a-2",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "ami-negative-ES2006a-0",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "ami-negative-ES2006a-1",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "ami-negative-ES2006a-2",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        }
+      ],
+      "nonemptyObservations": [
+        {
+          "id": "ami-negative-ES2004a-1",
+          "transcript": "No"
+        }
+      ],
+      "negativeAuditLimit": "annotation-negative not manually listened"
+    },
+    "silence": {
+      "expected": 4,
+      "statuses": {
+        "typed-error": 3,
+        "recognized-nonempty": 1
+      },
+      "recognizedNonempty": 1,
+      "typedErrors": [
+        {
+          "id": "independent-silence-3s-zh-CN",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "independent-silence-10s-zh-CN",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        },
+        {
+          "id": "independent-silence-10s-en-US",
+          "error": {
+            "nsErrorCode": 0,
+            "nsErrorDomain": "ODAIKitSpeech.SpeechRecognitionError",
+            "stage": "recognize",
+            "typedCategory": "SpeechRecognitionError.platform",
+            "typedCode": 1110,
+            "typedDomain": "kAFAssistantErrorDomain"
+          }
+        }
+      ],
+      "nonemptyObservations": [
+        {
+          "id": "independent-silence-3s-en-US",
+          "transcript": "No"
+        }
+      ],
+      "negativeAuditLimit": "fixed synthetic silence; locale variants share PCM for paired duration"
+    }
+  },
+  "measurement": {
+    "reportWallWindowSeconds": 15.138,
+    "firstAdmissionToFinalRSSSeconds": 15.037104,
+    "requestWallSumSeconds": 14.745126917,
+    "requestWallP95Seconds": 0.540385958,
+    "recognitionSumSeconds": 14.633831755,
+    "recognitionP95Seconds": 0.490243125,
+    "requestRTFP95": 0.073491703265903,
+    "drainSumSeconds": 0.001390414,
+    "closeSumSeconds": 0.001821793,
+    "rssSampleCount": 231,
+    "rssMissingSamples": 0,
+    "sampledRSSMaxBytes": 117669888,
+    "maxSamplingGapMs": 112.56941600000002,
+    "gapsOver200ms": 0,
+    "quantileMethod": "nearest-rank ceil(n*p), all 65 rows including typed errors",
+    "scope": "App PID sampled RSS only; no system Speech/true peak/GPU/energy/thermal or sustained-load claim"
+  },
+  "qualityThresholdApproved": false,
+  "resourceBudgetApproved": false,
+  "productionAdopted": false,
+  "P4Accepted": false,
+  "W3Complete": false,
+  "newRecognitionBatches": 1,
+  "microphoneCapture": false,
+  "downloadRequested": false,
+  "old40Replayed": false
+}

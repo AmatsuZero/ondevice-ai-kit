@@ -1,3 +1,5 @@
+- [Apple65 设备端文件批处理验证（2026-11-16）](../validation/w3-apple65-device-20261116.md)：单次文件批次已执行并消费，65条终态/清理完整但仅50/52 speech非空；52-speech成功条件未达，条件性CER/WER不得作验收。限定独立证据复核接受本批记录（非P4）；commit/IssueWiki同步另记，R4/R5/P1-P4/W3仍open。
+
 ## 2026-11-16 Apple65隔离探针已无签名构建
 
 新file-only探针Core通过506项host检查；实际generic iOS Debug/arm64无签名App已构建，65份WAV及14项selected inputs核对、72文件全量摘要和4份真实SwiftFileList保留。免费hy3限定独立复核accept-preparation/无finding，不等于P4；新65批次尚未运行、零新设备/识别/下载，最终生产候选仍null。见[验证与执行交接](../validation/w3-apple65-probe-preparation-20261116.md)。R4/R5/P1–P4/W3仍open，旧Apple40请求不重跑，Android原单片诊断合同不加前置。
