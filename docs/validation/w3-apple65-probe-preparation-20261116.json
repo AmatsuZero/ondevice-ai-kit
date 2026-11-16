@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "dateUTC": "2026-11-16T06:24:13.488994+00:00",
+  "scope": "Prepared isolated Apple fixed65 FILE probe; no new physical recognition",
+  "sourceBaseCommit": "8537933d2340a2bf1e3c1f3aa97780bca5973780",
+  "coreCommit": "8d12062e691bf8c1e54f2e11051754fb4f9bda04",
+  "runId": "w3-apple65-file-20261116-01",
+  "package": {
+    "scope": "unsigned generic iOS App packaging only; no physical run",
+    "appPath": ".omx/artifacts/w3-apple65-probe-preparation-20261116/DerivedData-final/Build/Products/Debug-iphoneos/W3Apple65File.app",
+    "bundleId": "io.ondeviceai.probe.w3apple65file20261116",
+    "version": "1.0",
+    "build": "1",
+    "minimumOS": "15.0",
+    "arm64": true,
+    "binarySHA256": "3c5b186ce3980b3bde1987948223ba6615bbb85504045e255634c2ceddaca20e",
+    "binaryBytes": 72472,
+    "signing": {
+      "exitCode": 1,
+      "unsignedConfirmed": true
+    },
+    "bundleFileCount": 72,
+    "bundleFileManifestSHA256": "35000f9f5d3a24fa2bb67a53c57aa62388f3dbc2a8849bf11bb87b8648fbadb0",
+    "manifestSHA256": "99584dec071c0e8a3b47f510443e002d80058482cb48d580122a0af88c86a1fb",
+    "sourceIdentitySHA256": "fe1c00efb4cb5d0157ec2e690c515b6dee184ed867cfca16cbe60296e306c0e6",
+    "selectedSourceCount": 14,
+    "WAVCount": 65,
+    "fullAndPayloadDigestsMatch": true,
+    "microphoneUsageKeyAbsent": true,
+    "speechUsageKeyPresent": true,
+    "hostChecksExcludedFromApp": true,
+    "compilerFileListsRetained": 4,
+    "protectedOriginalFilesUnchanged": 176,
+    "warnings": [
+      "AppIntents metadata extraction skipped (no dependency)",
+      "interface orientations not fully declared",
+      "launch configuration/storyboard not provided"
+    ],
+    "physicalAcceptance": "not-run",
+    "gates": {
+      "R4": "open",
+      "R5": "open",
+      "P1": "open",
+      "P2": "open",
+      "P3": "open",
+      "P4": "open",
+      "W3": "open"
+    },
+    "machOImages": [
+      {
+        "path": "W3Apple65File",
+        "bytes": 72472,
+        "sha256": "3c5b186ce3980b3bde1987948223ba6615bbb85504045e255634c2ceddaca20e",
+        "role": "entry-executable"
+      },
+      {
+        "path": "W3Apple65File.debug.dylib",
+        "bytes": 1835232,
+        "sha256": "a0de212d4dd7aa88e9a3762653310e2109f95dc7f343f1f2a46b18d979612156",
+        "role": "debug-code-image"
+      },
+      {
+        "path": "__preview.dylib",
+        "bytes": 16456,
+        "sha256": "b38fca3e78c2daf2aca2922d19225eabe35ffa85b4aa66a1bca7ad3707c069ee",
+        "role": "preview-image"
+      }
+    ],
+    "entryExecutableDigestIsNotWholeAppCodeIdentity": true
+  },
+  "coreHostTests": {
+    "exitCode": 0,
+    "elapsedSeconds": 0.338000874966383,
+    "PASSCount": 506,
+    "FAILCount": 0,
+    "sourceSHA256": "31ced81915caae508192db4d93145dc741fcd711f1e5aba4b9a52b0183f6dd9d"
+  },
+  "realBuilds": {
+    "initial": {
+      "argv": [
+        "rtk",
+        "proxy",
+        "xcodebuild",
+        "-project",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/ios-apple65-file/W3Apple65File.xcodeproj",
+        "-scheme",
+        "W3Apple65File",
+        "-configuration",
+        "Debug",
+        "-destination",
+        "generic/platform=iOS",
+        "-derivedDataPath",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple65-probe-preparation-20261116/DerivedData-initial",
+        "-disableAutomaticPackageResolution",
+        "-skipPackageUpdates",
+        "CODE_SIGNING_ALLOWED=NO",
+        "build"
+      ],
+      "exitCode": 65,
+      "elapsedSeconds": 9.084743584040552
+    },
+    "accepted": {
+      "argv": [
+        "rtk",
+        "proxy",
+        "xcodebuild",
+        "-project",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/ios-apple65-file/W3Apple65File.xcodeproj",
+        "-scheme",
+        "W3Apple65File",
+        "-configuration",
+        "Debug",
+        "-destination",
+        "generic/platform=iOS",
+        "-derivedDataPath",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple65-probe-preparation-20261116/DerivedData-final",
+        "-disableAutomaticPackageResolution",
+        "-skipPackageUpdates",
+        "CODE_SIGNING_ALLOWED=NO",
+        "build"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 8.284698333009146
+    }
+  },
+  "candidateCorrections": {
+    "helperSuppliedExactReplacements": 6,
+    "originalCandidatesAndErrorsRetained": true,
+    "appSourceChangesByParentBeyondSupplierReplacements": 0,
+    "hostTestStandardABCSHA256LiteralCorrection": {
+      "edit": "standard abc digest literal corrected before RED using Python hashlib",
+      "old": "ba7816ae5d6b4ab26263214b5e5b2e51be0b92b0ce6ef8e0a5e0ab3a85f0c073",
+      "new": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "rawCandidateRetained": true
+    }
+  },
+  "helpers": {
+    "core-tests": {
+      "exitCode": 0,
+      "elapsedSeconds": 196.117,
+      "endedAtUTC": "2026-11-16T05:43:52.702581+00:00",
+      "stdoutBytes": 208122,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "core-implementation": {
+      "exitCode": 0,
+      "elapsedSeconds": 144.735,
+      "endedAtUTC": "2026-11-16T05:53:18.830502+00:00",
+      "stdoutBytes": 138155,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "app-adapter": {
+      "exitCode": 0,
+      "elapsedSeconds": 255.229,
+      "endedAtUTC": "2026-11-16T06:02:32.717276+00:00",
+      "stdoutBytes": 268918,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "app-corrections": {
+      "exitCode": 0,
+      "elapsedSeconds": 48.116,
+      "endedAtUTC": "2026-11-16T06:10:42.834181+00:00",
+      "stdoutBytes": 56212,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "final-review": {
+      "exitCode": 0,
+      "elapsedSeconds": 61.206,
+      "endedAtUTC": "2026-11-16T06:18:21.894359+00:00",
+      "stdoutBytes": 58943,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    }
+  },
+  "review": {
+    "scope": "local isolated unsigned probe preparation only",
+    "supplierVerdict": "accept-preparation",
+    "blockingFindings": 0,
+    "observedHelperToolUse": 0,
+    "codeChangedSinceReview": false,
+    "independentReleaseOrP4Acceptance": false,
+    "rulings": [
+      {
+        "behavior": "Physical 65-case lifecycle, terminal outcomes, device operations, authorization prompts, Speech calls, microphone, downloads, CER/WER, and resource-budget pass/fail.",
+        "decision": "Not established by this preparation; keep applicable physical/production gates open. No preparation completion claim extends to it.",
+        "costIfWrong": "False device or release acceptance if scope is broadened."
+      },
+      {
+        "behavior": "Release, merge-to-production, final production candidate adoption, P4/R4/R5/W3 acceptance, production SDK finalization, and Android NDK/production prerequisites.",
+        "decision": "Not established by this preparation; keep applicable physical/production gates open. No preparation completion claim extends to it.",
+        "costIfWrong": "False device or release acceptance if scope is broadened."
+      },
+      {
+        "behavior": "Treating host GREEN tests plus unsigned compile as proof of runtime Speech behavior.",
+        "decision": "Not established by this preparation; keep applicable physical/production gates open. No preparation completion claim extends to it.",
+        "costIfWrong": "False device or release acceptance if scope is broadened."
+      },
+      {
+        "behavior": "Retrying known quota failures, recursively delegating review, or mutating shared state.",
+        "decision": "Not established by this preparation; keep applicable physical/production gates open. No preparation completion claim extends to it.",
+        "costIfWrong": "False device or release acceptance if scope is broadened."
+      }
+    ],
+    "buildWarningsDisposition": "non-blocking for unsigned preparation; device UX/launch/orientation behavior unverified",
+    "pitfallDraftCorrections": [
+      "missing output directory, not default output directory",
+      "generate-in-probe is required only by current relative package configuration, not all XcodeGen projects",
+      "new four FileLists retained; do not confuse with historical absent FileLists"
+    ]
+  },
+  "artifactRoot": ".omx/artifacts/w3-apple65-probe-preparation-20261116",
+  "newDeviceRuns": 0,
+  "newSpeechRequests": 0,
+  "newMicrophoneStarts": 0,
+  "newAuthorizationPrompts": 0,
+  "newAudioModelRuntimeDownloads": 0,
+  "resourceRequests": 0,
+  "finalProductionCandidate": null,
+  "sourceBranchPushed": false,
+  "goalStatus": "active",
+  "gates": {
+    "R4": "open",
+    "R5": "open",
+    "P1": "open",
+    "P2": "open",
+    "P3": "open",
+    "P4": "open",
+    "W3": "open"
+  }
+}

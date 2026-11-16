@@ -1,3 +1,7 @@
+## W3 Apple65：XcodeGen显式资源与输出目录（2026-11-16）
+
+症状：初次--project指向尚未创建的输出目录，生成时CocoaCode4；预建确切目录后恢复。同一相对配置若生成到artifact目录，PBX的../../apple解析位置会改变，不能假定相对package路径自动重定位；本轮最终在probe目录生成。target-level resources在实际PBX中静默缺失，改为sources下AudioFixtures的type:folder/buildPhase:resources及identity显式资源项后，真实App65WAV/manifest均保留。边界：CLI生成成功不证明资源打包，须查PBX及实际App；Debug入口只是trampoline，代码另在.debug.dylib，留全72文件摘要。4份本轮SwiftFileList已留原字节，不混同历史缺失FileLists或将Package.swift写成编译源码。证据.omx/artifacts/w3-apple65-probe-preparation-20261116/：首错误、generated-r1、project.pbxproj.accepted、build初65/修0及app-package-acceptance-with-images.json。不是quota、签名或设备错误；零新真机识别。
+
 ## 2026-11-16 部分 AMI 整源 WAV 的切片检查边界
 症状：初始 inspector 把有意保留为 partial 的 ES2004a/ES2006a 整源 WAV 当完整 WAV 切片，出现 6 次 hash 比较 false 和 1 次 unpack 长度错误。已核实原因：21 个 range payload byte-exact，download-stop 收据显示 21 ranges complete 后停止冗余 whole-file 下载；这两个整源 WAV 虽保留原 RIFF full frames，但文件名或 RIFF header 不能证明 full body。恢复：按保留的 21 range payloads + receipts 检查，ES2003a 的 12 片与 ES2004a 的 3 个负例，仅在已有整源/前缀的可用区间内逐字节匹配，不建立全源声明。边界：不要标记为实际 clip corruption、remote outage 或 float rounding；证据见 `.omx/artifacts/w3-ios-contracts-acceptance-20261116/ami-slice-inspection.json`、`.omx/artifacts/w3-ios-contracts-acceptance-20261116/input-checks.json`、`.omx/artifacts/w3-ios-contracts-acceptance-20261116/inspection-errors.json` 与原始 `whole-ami-download-stop.json`。
 

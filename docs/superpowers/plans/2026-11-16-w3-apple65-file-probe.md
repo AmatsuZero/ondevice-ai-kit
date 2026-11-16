@@ -41,12 +41,12 @@ Wrong/corrupt manifest or WAV must prevent Speech calls; mixed locales never use
 
 **Files:** probes/ios-apple65-file/W3Apple65App.swift, project.yml, README.md, source-identity-manifest.json.
 
-- [ ] Request bounded helper App/config/docs candidate after Task1 interfaces are accepted, supplying exact production APIs and existing sampler. No invented SDK API.
-- [ ] Review fatal/ordinary errors, replay/scene/authorization guards, all await cleanup and sampler join; preserve typed platform codes. Host test only deterministic core, do not claim it proves physical lifecycle.
-- [ ] XcodeGen then generic iOS unsigned build using existing local package, no model/runtime downloads, no signing or installation.
-- [ ] Inspect actual App Info.plist/resources/manifests/65 WAV payloads and source hashes. New identity required; old probe identity is not reused.
-- [ ] Commit only this isolated probe, plan and evidence receipt; preserve unrelated dirty files via exact staging. Raw prompts/errors/candidates and accepted App retained; remove only exact dispensable task-owned build intermediates after checking writers/references.
+- [x] Request bounded helper App/config/docs candidate after Task1 interfaces are accepted, supplying exact production APIs and existing sampler. No invented SDK API.
+- [x] Review fatal/ordinary errors, replay/scene/authorization guards, all await cleanup and sampler join; preserve typed platform codes. Host test only deterministic core, do not claim it proves physical lifecycle.
+- [x] XcodeGen then generic iOS unsigned build using existing local package, no model/runtime downloads, no signing or installation.
+- [x] Inspect actual App Info.plist/resources/manifests/65 WAV payloads and source hashes. New identity required; old probe identity is not reused.
+- [x] Commit only this isolated probe, plan and evidence receipt; preserve unrelated dirty files via exact staging. Raw prompts/errors/candidates and accepted App retained; remove only exact dispensable task-owned build intermediates after checking writers/references.
 
 ### Task 3: Execution handoff
 
-- [ ] Publish a concrete prepared batch/candidate identity and unresolved product/physical gates. No new Apple batch, authorization prompt or device operation is started by this plan. A genuinely new 65 FILE run is a separate execution decision under the current iOS handoff; existing Android single-file authorization is unchanged.
+- [x] Publish a concrete prepared batch/candidate identity and unresolved product/physical gates. No new Apple batch, authorization prompt or device operation is started by this plan. A genuinely new 65 FILE run is a separate execution decision under the current iOS handoff; existing Android single-file authorization is unchanged.

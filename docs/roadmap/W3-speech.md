@@ -1,3 +1,7 @@
+## 2026-11-16 Apple65隔离探针已无签名构建
+
+新file-only探针Core通过506项host检查；实际generic iOS Debug/arm64无签名App已构建，65份WAV及14项selected inputs核对、72文件全量摘要和4份真实SwiftFileList保留。免费hy3限定独立复核accept-preparation/无finding，不等于P4；新65批次尚未运行、零新设备/识别/下载，最终生产候选仍null。见[验证与执行交接](../validation/w3-apple65-probe-preparation-20261116.md)。R4/R5/P1–P4/W3仍open，旧Apple40请求不重跑，Android原单片诊断合同不加前置。
+
 ## 2026-11-16 Apple 65 输入绑定与后续验收合同
 
 固定 65 份公开 PCM 与原协议/Android 清单的顺序、摘要、reference、locale 已离线核对（816 项检查，441.102 秒）；既有采用记录仍仅是历史参考。Apple 运行合同为草案，零新识别/构建/下载；不把已揭示的 Qwen 数据改称盲测，不改写 typed 1110。见[合同与边界](../validation/w3-ios-closure-contracts-20261116.md)。R4/R5/P1–P4/W3 保持 open，已授权 Android 单片诊断不增加前置。

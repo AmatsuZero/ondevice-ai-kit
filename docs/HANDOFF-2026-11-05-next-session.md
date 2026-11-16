@@ -1,3 +1,7 @@
+## 2026-11-16 Apple65独立FILE探针准备交接
+
+[准备报告](validation/w3-apple65-probe-preparation-20261116.md)：Core506项检查及实际generic iOS无签名构建通过，65WAV/14selected inputs/72bundlefiles/4真实FileLists核对；新run w3-apple65-file-20261116-01未消费，零新真机识别/授权/下载。独立hy3仅accept-preparation，不是P4/生产接受，176原工作内容保留；原稿、6精确修正、初build65与所有原始证据保留。完整W3/R4/R5/P1–P4仍open，Android24/65和未消费单片合同不变；不重跑旧Apple40请求或旧quota/USB循环。
+
 ## 2026-11-16 Apple 65 输入离线绑定与合同
 
 固定 65 份公开 PCM 与原协议/Android 清单的顺序、摘要、reference、locale 已离线核对（816 项检查，441.102 秒）；既有采用记录仍仅是历史参考。Apple 运行合同为草案，零新识别/构建/下载；不把已揭示的 Qwen 数据改称盲测，不改写 typed 1110。见[合同](validation/w3-ios-closure-contracts-20261116.md)及[收据](validation/w3-ios-closure-contracts-20261116.json)。本轮不重跑设备；下一实际缺口是固定 Apple 新运行合同/最终候选、质量/预算和同候选独立接受。Android 仍按已有实体变化后 fresh guard/preflight 的单片合同，未批准产品预算不挡诊断；完整门继续 open。
