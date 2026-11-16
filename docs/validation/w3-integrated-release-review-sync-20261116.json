@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUTC": "2026-11-16T00:32:50.189914+00:00",
+  "marker": "<!-- w3-integrated-release-review-20261116 -->",
+  "evidenceCommit": "5676fabfa1e7380ada59e62e9e81de1cd27d662a",
+  "githubIssue": {
+    "id": 6903955738,
+    "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6903955738",
+    "sha256": "457d8df5a55210ebaf837a169ba04f5eb0695524ce15bfaf0a7d9463e166fe9c",
+    "readbackExact": true
+  },
+  "gitlabIssue": {
+    "id": 44877,
+    "url": null,
+    "sha256": "ba48c6b1c75fde1dad1071fa1a8405dc215471d03e0429db7c6b6305a7629674",
+    "readbackExact": true
+  },
+  "githubWiki": {
+    "commit": "0c9220c87b6696b8477c5eaf15fba22ec2288b2c",
+    "sha256": "6a7d94323fa52cbb92471c201fbd193c5eed7be0d4e72d8d371492c81c90fab7",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "6a7d94323fa52cbb92471c201fbd193c5eed7be0d4e72d8d371492c81c90fab7",
+    "readbackExact": true
+  },
+  "wikiContentSHA256Matches": true,
+  "sourceBranchPushed": false,
+  "overallDisposition": "hold_release",
+  "independentP4ReleaseAccepted": false,
+  "W3Complete": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "goalStatus": "active",
+  "helpersTerminal": 2,
+  "helperActualToolUseEvents": 0,
+  "contextFilesVerified": 25,
+  "candidateArtifactIdentitiesFreshVerified": 12,
+  "currentBackendSourceObservationsVerified": 4,
+  "frozenFilesVerified": 161,
+  "protectedPathsVerified": 176,
+  "newBuildDeviceDownload": false,
+  "wikiWorkingCopyRecovery": {
+    "sharedCheckout": "/private/tmp/odai-w3-wiki-sync-20261115",
+    "initialSharedStatusBytes": 36,
+    "initialSharedTargetSHA256": "61ffab66ec1532c30f9a01a29ffb3355591983d4bf4768bf731da86d2f1531ca",
+    "laterSharedStatusBytes": 0,
+    "laterSharedTargetSHA256": "fa58a5b91e287d11813b9ad9adc35933cd57df48289e5b8d68a8a9bb9a68c703",
+    "observedSharedStateChangedBetweenReads": true,
+    "changeCauseNotAttributed": true,
+    "initialPublicationStoppedBeforeMutation": true,
+    "sharedCheckoutMutationCommandsIssued": 0,
+    "initialDirtyTargetSnapshotRetained": true,
+    "isolatedCheckout": "/private/tmp/odai-w3-integrated-review-wiki-20261116",
+    "scope": "fresh independent clone for exact existing wiki page only; no source branch push"
+  },
+  "initialWikiFailures": {
+    "action": "github-wiki",
+    "processExitCode": 1,
+    "failure": "AssertionError at clean working-copy guard",
+    "firstSessionId": null,
+    "wikiWriteOrCommitOrPushReached": false,
+    "initialDirtyFileSnapshot": "shared-wiki-file-blocked.md",
+    "initialStatusSnapshot": "shared-wiki-status-blocked.z",
+    "recoveryInitialPreconditionFailure": "expected shared working copy still dirty; it became clean between observations, AssertionError before mutation",
+    "recoveryAdjusted": "independent exact wiki clone regardless of shared status; shared checkout not mutated",
+    "stateChangeCauseNotAttributed": true,
+    "notProviderQuotaFailure": true,
+    "sourceBranchPushed": false
+  },
+  "initialProtectedContentUnchanged": 172,
+  "concurrentOriginalAdditionsPreserved": 4,
+  "concurrentNewUntrackedPreserved": {
+    "path": "docs/HANDOFF-W3-IOS-STATUS-2026-11-16.md",
+    "bytes": 5567,
+    "sha256": "ffea38be21f57741133c702b7caa927d28ee8b90bcfb9e70177c108c113375e3"
+  },
+  "originalProtectedContentVerifiedAfterExactInMemoryRemoval": 176,
+  "concurrentAdditionIdentities": {
+    "docs/HANDOFF-2026-11-05-next-session.md": {
+      "bytes": 731,
+      "sha256": "82f476b1c44760e065e66b0dc60bbdc7f6d821419babbbf90e82ed2ae3fdbc18",
+      "originalBytesRecoveredInMemory": true,
+      "workingFileReverted": false
+    },
+    "docs/ROADMAP.md": {
+      "bytes": 501,
+      "sha256": "be347669b4d285c00f678263a3bedb4b5a42ea32dc8a2eb812079cf88177a362",
+      "originalBytesRecoveredInMemory": true,
+      "workingFileReverted": false
+    },
+    "docs/roadmap/W3-speech.md": {
+      "bytes": 590,
+      "sha256": "dd71d6cacaf223d57db2ccc1894967c650abf1d0da3a63b98f171c3f9ad56114",
+      "originalBytesRecoveredInMemory": true,
+      "workingFileReverted": false
+    },
+    "docs/validation/foundation-followups.md": {
+      "bytes": 450,
+      "sha256": "a04fb6bbe4083c771811dc09e73b6cf79a506d67946f19297e9a01cea8150dc9",
+      "originalBytesRecoveredInMemory": true,
+      "workingFileReverted": false
+    }
+  },
+  "currentIOSHandoffNewEvidenceNotPartOfOriginalSuppliedReview": true
+}

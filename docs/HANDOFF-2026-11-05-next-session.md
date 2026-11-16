@@ -1,3 +1,7 @@
+## 2026-11-16 W3整体复审已提交及双端同步
+
+本地5676fab精确15文件；GH#15 comment6903955738/GL#15 note44877/GH Wiki0c9220c及双Wiki SHA6a7d94323fa52cbb92471c201fbd193c5eed7be0d4e72d8d371492c81c90fab7逐字回读。[收据](validation/w3-integrated-release-review-sync-20261116.json)。两免费hy3均终态；初稿错误串行前置（产品先选/预算批准挡诊断）拒收，修正稿及6处父编辑保留，P4自我前置与签名链额外门已从接受正文删除。当前SDK/Demo源仍Whisper，Qwen为独立24/65实验；本轮hold_release不是P4接受。未识别非重复本地闭环方法，不把泛化准备建议当新任务。GitHub共享Wiki首见dirty而guard停写，后续状态自行变clean，原因不归因；原快照/两失败保留，改独立/private/tmp/odai-w3-integrated-review-wiki-20261116成功，零共享checkout写入。两端Issue、三次成功发布均终态、无待poll，marker已用勿重发、源码未push。25供应文档/12制品身份/4当前源/161freeze通过；终检172原内容不变、4处并发iOS新增及新IOS交接保留，176原文仅内存去精确新增恢复原摘要，未回滚或纳本批提交。零构建/下载/设备、新缓存0/删除0。P1–P4/R4/R5/W3完整目标保持open、goal active；无新实体连接变化，不能ADB/USB/旧FILE重放。实体变化后原单片合同fresh guard/preflight无需重批预算或先选最终路线；仍不保证根因或替代原65与完整资源。
+
 ## 2026-11-16 W3 整体证据复审
 
 交接提示：文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。原始review.json保留不覆盖，本条不表示已提交、已同步或发布接受。保持R1–R5与P1–P4完整范围、质量失败和预算未批准；实体连接改变后先按已授权诊断合同执行，不重批产品预算等前段，也不把诊断当全量。不要重试已知429/配额、ADB/USB旧循环，不递归委派，不碰签名资产，不把报告生成本身当关闭动作。 详见[复审报告](validation/w3-integrated-release-review-20261116.md)。

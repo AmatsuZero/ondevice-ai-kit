@@ -1,3 +1,9 @@
+## W3整体复审：后段预算不阻挡已授权诊断，共享Wiki需独立副本（2026-11-16）
+
+hy3整体复审首稿将产品先选轨道/预算批准放在既有单片诊断前，还把普通可逆候选准备升级为额外审批；这些前置不在原合同，原稿拒收、修正稿明确连接变化后原合同fresh guard/preflight即可执行。父端另删P4自我前置和额外签名链措辞，单片只提供终态/阶段成本证据，不保证根因；泛化本地准备建议没有具体新交付物，不当成已找到闭环方法。源站/旧quota不重试，1.5GiB守卫与未批准产品预算独立。
+
+GitHub Wiki clean guard首见15行未提交新增，在写入前停；随后共享副本变clean，恢复首稿“仍dirty”假设又触发断言。两次观察只证明状态变化，不推断操作者/原因。保留初始status/全文，零共享checkout写入；从固定远端新clone独立Wiki后只追加目标页，推送并回读，两Wiki SHA一致。不得reset/stash/清理他人dirty或依赖其持续不变。原件/修正/父处置和两失败见.omx/artifacts/w3-integrated-release-review-20261116/；[复审](validation/w3-integrated-release-review-20261116.md)及[同步](validation/w3-integrated-release-review-sync-20261116.json)。 终检另见4处并发iOS状态段/1新交接；各自精确新增块只在内存移除后176原内容恢复摘要，实际工作内容保留、排除暂存。不得把172原字节保持加4范围外变化写成176全部未变。
+
 ## 2026-11-16 JNI 对应 Pitfalls
 
 别把导出名存在、定义存在、显式类型类别匹配当成 C++ 正文等价或 loader binding 证明。6 处 Companion 接收者 jclass/jobject 差异须原样记录。详见 [验证](validation/w3-jni-surface-correspondence-20261116.md)。
