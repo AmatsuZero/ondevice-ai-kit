@@ -1,3 +1,7 @@
+## W3 2026-11-16：Apple 标点配置已集成本地 SDK 候选
+
+[集成验收](../validation/w3-apple-punctuation-sdk-candidate-20261116.md)：精确应用既有外部候选，Apple FILE 仅增加 guarded addsPunctuation=true；四份AppleSpeech源与实测B臂相同。完整Apple484测试/零跳过失败及iOS15 Release模块构建通过，10真实Swift输入/3对象与3模块已绑定；1条既有Identity警告两处渲染、首Xcode缺scheme失败保留。无新设备识别/发布，shippingApp仍null，R4/R5/P4/W3未关闭。另TECNO注册对象变化后一次只读ADB仍为空，零prepare/解码、合同未消费；不重复恢复。旧准备/批次身份保持，不改hash重放。
+
 ## W3 2026-11-16：标点配对真机批次完成
 
 [设备结果](../validation/w3-punctuation-paired6-device-20261116.md)：用户明确批准的一次六输入12请求已完成，12非空/12清理/输入后检通过，终态双读同字节；中文CER18/86→16/86、近英WER13/54→10/54，格式编辑7→5及5→2，内容类保持11及8，符合冻结探索条件。首UI授权predicate在零Run/空报告时修正，修正后仅一次Run，无识别重试；45普通App元数据保持、alias卸载、普通App launch accepted。未开麦/下载/AiAi、未改生产代码或重放旧65，未宣布生产采用/P4/R4/R5/W3完成。旧准备授权false为历史快照，本批新授权已消费，不重放。

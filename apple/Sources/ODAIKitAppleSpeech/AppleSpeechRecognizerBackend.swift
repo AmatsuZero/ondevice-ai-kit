@@ -128,6 +128,9 @@ internal final class AppleSpeechPlatformBridgeImpl: AppleSpeechPlatformBridge {
         let request = SFSpeechURLRecognitionRequest(url: fileURL)
         request.requiresOnDeviceRecognition = requiresOnDeviceRecognition
         request.shouldReportPartialResults = true
+        if #available(iOS 16.0, macOS 13.0, *) {
+            request.addsPunctuation = true
+        }
         let delegate = Delegate(callback: callback)
         let task = recognizer.recognitionTask(with: request, delegate: delegate)
         let handle = AppleSpeechTaskHandle()

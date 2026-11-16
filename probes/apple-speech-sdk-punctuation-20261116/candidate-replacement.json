@@ -1,0 +1,5 @@
+{
+  "sourcePath": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+  "old": "        let request = SFSpeechURLRecognitionRequest(url: fileURL)\n        request.requiresOnDeviceRecognition = requiresOnDeviceRecognition\n        request.shouldReportPartialResults = true",
+  "new": "        let request = SFSpeechURLRecognitionRequest(url: fileURL)\n        request.requiresOnDeviceRecognition = requiresOnDeviceRecognition\n        request.shouldReportPartialResults = true\n        if #available(iOS 16.0, macOS 13.0, *) {\n            request.addsPunctuation = true\n        }"
+}

@@ -1,3 +1,7 @@
+## Apple SDK 构建入口与警告计数 — 2026-11-16
+
+apple目录同时存在Package.swift和OnDeviceAIKit.xcodeproj，直接xcodebuild -scheme ODAIKitAppleSpeech选到现有工程并exit65/缺scheme，尚未编译；保留原失败，实际swift build --target/--triple/--sdk Release通过，不能记为源码编译失败。当前SwiftPM为SwiftBuild后端，实际out/Intermediates.noindex含SwiftFileList，别假设description.json存在或把Package.swift当编译源。测试stderr同一Identity async-wait警告渲染两处，按带文件/行列诊断计1条独立警告，484测试通过不称warning-free。证据 `.omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/`，见[验收](validation/w3-apple-punctuation-sdk-candidate-20261116.md)。
+
 ## W3 配对 FILE：授权 predicate 与 FAT 启动器 — 2026-11-16
 
 - 真机首UI在Run前报NSUnknownKeyException：要求label属性的NSPredicate收到NSString `alert.label`。Documents空/0 Run、进程自然exit65后，仅改为 `["label": alert.label]`，六host文本检查及新driver构建/签名通过，fresh守卫后同一未消费批次完成12请求；实际仅1 Run。保留两次UI invocation，不称自动识别重试或以build-only覆盖TCC分支；不泛化点击其它权限。

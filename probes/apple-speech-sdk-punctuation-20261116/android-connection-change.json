@@ -1,0 +1,8 @@
+{
+  "observedAtUTC": "2026-11-16T11:03:40.946604+00:00",
+  "priorRegistry": "0x1007539b2",
+  "currentRegistry": "0x10097ec5f",
+  "priorEvidence": ".omx/artifacts/w3-ort-all-abi-20261114/usb-registration-stability.json",
+  "condition": "new physical USB registration since recorded failed backend recovery; fresh checks allowed under existing unconsumed single-file contract",
+  "noServerRestart": true
+}
