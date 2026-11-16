@@ -26,3 +26,7 @@ App只允许手动触发；Speech授权设置独立，授权完成不自动识�
 Android仍为Qwen24/65，第25片触及1.5GiB实验守卫；SDK/Demo打包Whisper，Qwen仍独立实验。既有未消费Android单片诊断合同与fresh guards保持，不增加产品预算或Apple步骤作为其前置。旧quota/源站429及GL Wiki EOF路线不自动重试。
 
 证据：[机器收据](w3-apple65-probe-preparation-20261116.json)、[Core收据](w3-apple65-core-preparation-20261116.json)、[运行合同草案](w3-ios-closure-contracts-20261116.md)。本地完整原始材料：`.omx/artifacts/w3-apple65-probe-preparation-20261116/`，含接受App、编译FileLists、全部候选/错误和限定复核。
+
+## 记录同步
+
+源码准备提交`69a8d9c`；GH#15 comment6909209865、GL#15 note45084及GH Wiki73737bb逐字回读（GL仅移除一个末LF）。GL Wiki旧EOF路线保持停线，新/旧两节正文均保留待同步，不声称双Wiki一致。见[同步收据](w3-apple65-probe-preparation-sync-20261116.json)。源码分支未push；W3和适用验收门仍open。

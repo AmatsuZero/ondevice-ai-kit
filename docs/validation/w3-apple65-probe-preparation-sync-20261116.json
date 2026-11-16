@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "dateUTC": "2026-11-16T06:34:19.320311+00:00",
+  "sourceCommit": "69a8d9c86b811fee7ac91afc9fa80f9e76114533",
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-apple65-probe-preparation-20261116 -->",
+  "bodySHA256": "c1ec5d80be26c640e7945201a2af56806adb96c5a8e8cea2810e144a4b1bd62c",
+  "status": "issues-and-github-wiki-synced-gitlab-wiki-pending",
+  "issues": {
+    "github": {
+      "id": 6909209865,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6909209865",
+      "exactReadback": true
+    },
+    "gitlab": {
+      "id": 45084,
+      "readbackExactExceptKnownFinalLF": true,
+      "removedExactlyOneFinalLF": true
+    },
+    "duplicatePosts": false
+  },
+  "githubWiki": {
+    "commit": "73737bb406f2412369405be70fb77547171be783",
+    "remoteReadbackExact": true,
+    "pageSHA256": "8688a3361ad50d894cc60039ec0133da32761dddac616ebb952efd815c54a4b9",
+    "uniqueMarker": true,
+    "isolatedClone": "/private/tmp/odai-w3-apple65-probe-wiki-20261116",
+    "gitlabWiki": "pending known EOF, no GET/PUT attempted this task"
+  },
+  "gitlabWiki": {
+    "status": "pending known EOF; no automatic GET/PUT retry",
+    "newSectionPendingBody": ".omx/artifacts/w3-apple65-probe-preparation-20261116/publication/body.md",
+    "priorSectionPendingBody": ".omx/artifacts/w3-ios-contracts-acceptance-20261116/publication/body.md",
+    "twoWikisEqual": null
+  },
+  "localVerification": "Core506 hostchecks, unsignedgenericbuild0,65WAV/14selectedinputs/72files/4FileLists; no new physical ASR",
+  "review": "accept-preparation only, no findings; supplied context, no tool execution, not P4 acceptance",
+  "helpersAllTerminal": true,
+  "pendingProcesses": [],
+  "original176ContentsPreserved": true,
+  "newDeviceRuns": 0,
+  "newRecognitionCalls": 0,
+  "goalStatus": "active",
+  "W3Complete": false,
+  "gates": {
+    "R4": "open",
+    "R5": "open",
+    "P1": "open",
+    "P2": "open",
+    "P3": "open",
+    "P4": "open"
+  },
+  "rawEvidenceAndAcceptedAppRetained": true,
+  "deletedPaths": []
+}
