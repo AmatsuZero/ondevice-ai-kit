@@ -51,4 +51,6 @@ rtk proxy python3 -B probes/w3-paired-error-analysis-20261116/verify-analysis.py
 
 最终源码SHA-256 `b801dfdf4f79311e6b943c159531817725de6db1ab65ecf86322e35bd7f103f3`，由主代理机械集成后实际通过10,879项核验，含独立原评分复算、全部对齐操作重放、S/D/I及汇总对账、确定性重跑与13项拒收负例。完整输出SHA-256 `340c6b6878ee8769fa4ca07b201c5f9f24835efefeb3256f7a9b0aa72116a175`。见[机器记录](w3-paired-error-analysis-20261116.json)；限定源码/证据复核没有独立执行父端检查，不等于P4，元数据修正后的最终实跑由父端负责。
 
-本地证据：`.omx/artifacts/w3-paired-error-analysis-20261116/`。保护检查、精确提交及双端Issue/Wiki同步收据随后记录；源码分支不自动推送。
+本地证据：`.omx/artifacts/w3-paired-error-analysis-20261116/`。179份原工作内容在仅移除本次5份明确前缀后摘要全部保持，普通App/模型未操作。源码/证据已按精确10文件提交 `83b3658`，不含其他dirty/untracked改动；源码分支未推送。
+
+GitHub Issue#15 comment `6911184049`、GitLab project461/Issue15 note `45183` 均回读确认，GL仅移除一个末尾LF；GitHub Wiki commit `9e42f76ff38f7d514bb5e0737921a2d61b31ee41` 页面逐字回读、marker唯一。GL notes首次EOF保留，按既有文档仅对该子进程移除代理并设NO_PROXY=*后恢复；不改变全局配置。Wiki首次中文路径检查因Git转义显示失败，保留原错误，按既有pitfall改NUL输出后仅目标页提交/推送；没有重发Issue。GitLab Wiki已知EOF通道零新GET/PUT尝试，本增量仍待同步。[同步收据](w3-paired-error-analysis-sync-20261116.json)。
