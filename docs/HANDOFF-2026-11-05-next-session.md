@@ -1,3 +1,7 @@
+## 2026-11-16 Apple 65 输入离线绑定与合同
+
+固定 65 份公开 PCM 与原协议/Android 清单的顺序、摘要、reference、locale 已离线核对（816 项检查，441.102 秒）；既有采用记录仍仅是历史参考。Apple 运行合同为草案，零新识别/构建/下载；不把已揭示的 Qwen 数据改称盲测，不改写 typed 1110。见[合同](validation/w3-ios-closure-contracts-20261116.md)及[收据](validation/w3-ios-closure-contracts-20261116.json)。本轮不重跑设备；下一实际缺口是固定 Apple 新运行合同/最终候选、质量/预算和同候选独立接受。Android 仍按已有实体变化后 fresh guard/preflight 的单片合同，未批准产品预算不挡诊断；完整门继续 open。
+
 ## 2026-11-16 W3 Apple Speech 有界源绑定结果摘要
 
 新接受 10 个 Core/Speech/AppleSpeech production Swift sources、16 个 selected inputs、14 个 compiler Swift source bindings；保留 18-file 历史 unsigned App。实际 264 checks passed，含 177 protection checks；no fresh build/device/download，不重试已知 quota failure。报告：[Apple 绑定报告](validation/w3-apple-source-binding-20261116.md)。保留其他编辑与旧失败；W3 完整范围不变，R4/R5/final adoption/P4/W3 均 open。

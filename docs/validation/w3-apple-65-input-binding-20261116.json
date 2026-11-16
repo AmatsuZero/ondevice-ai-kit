@@ -1,0 +1,1753 @@
+{
+  "schemaVersion": 1,
+  "atUTC": "2026-11-16T03:31:15.043612+00:00",
+  "status": "offline-input-binding-only",
+  "sources": [
+    {
+      "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/full-input-manifest.json",
+      "bytes": 41159,
+      "sha256": "e5144d7901d4e5f7729b13e11ac7a92e3586efe2d6f1591352b3aae4cccce1e6"
+    },
+    {
+      "path": ".omx/artifacts/w3-model-reselection-20261110/independent-protocol.json",
+      "bytes": 45016,
+      "sha256": "dd4d8bc7273ac44277e56b881029194e5a1970b82b38918e96ac0716609ec31e"
+    },
+    {
+      "path": ".omx/artifacts/w3-model-reselection-20261110/independent-freeze.json",
+      "bytes": 1435,
+      "sha256": "b930e743b19639006dcc36b219748aad6bdcc6795673819d726de7d14bcd6199"
+    },
+    {
+      "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/selected-metadata.json",
+      "bytes": 20961,
+      "sha256": "ab3c54e0fa28834469b103b44a1dca22a511e4c779109e0a14994fd05f2c204d"
+    },
+    {
+      "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/conversion-receipt.json",
+      "bytes": 57338,
+      "sha256": "7dafa1747aa11d73de583f235f970d1bb3ae3f82788047548d111cd3225f025e"
+    },
+    {
+      "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/headers.json",
+      "bytes": 1257,
+      "sha256": "0dec896c08d4b1053e7627e3c363adf3d5b8ff74741c1f8662758d2fe65b00af"
+    },
+    {
+      "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+      "bytes": 10605,
+      "sha256": "a1f2e0241047c1b4c6c38eaf43583c1551c20798b1810e7d7ae7341c24821b42"
+    },
+    {
+      "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/negative-selected.json",
+      "bytes": 3059,
+      "sha256": "1c9cc93f77db8aed64e22da6573f4888c3a752ff6ad266035c915f9d2fc55033"
+    },
+    {
+      "path": "probes/android-qwen-file/cases.json",
+      "bytes": 23858,
+      "sha256": "8d1cfd7465e70f413b741701250d61c31170b25a6978a256a4df0349efa0910f"
+    },
+    {
+      "path": "docs/validation/w3-quality-evidence-20261110.json",
+      "bytes": 24015,
+      "sha256": "a1efebe87b912ef4db5207405e40622eb10ed8510e92b22c4e8c5a815ef8cc38"
+    },
+    {
+      "path": "tools/speech_error_metrics.py",
+      "bytes": 7659,
+      "sha256": "d398bb35438b9f4eb399fc404e02c0c2a7184a7cea7c7a6d32e4a321f8e2b39e"
+    }
+  ],
+  "format": {
+    "sampleRate": 16000,
+    "channels": 1,
+    "encoding": "signed-int16-little-endian"
+  },
+  "caseCount": 65,
+  "uniquePcmDigests": 63,
+  "cohorts": [
+    {
+      "name": "mandarin",
+      "cases": 20,
+      "durationSeconds": "151.08"
+    },
+    {
+      "name": "english-near",
+      "cases": 20,
+      "durationSeconds": "147.70"
+    },
+    {
+      "name": "english-far",
+      "cases": 12,
+      "durationSeconds": "71.322"
+    },
+    {
+      "name": "nonspeech-noise",
+      "cases": 9,
+      "durationSeconds": "45"
+    },
+    {
+      "name": "silence",
+      "cases": 4,
+      "durationSeconds": "26"
+    }
+  ],
+  "totalDurationSeconds": "441.102",
+  "sameOrderedFieldsAcrossOriginalAndAndroid": [
+    "id",
+    "samples",
+    "locale",
+    "cohort",
+    "sha256",
+    "reference"
+  ],
+  "wholeManifestBytesEqual": false,
+  "knownOldAppleOverlap": {
+    "scope": "only the three Mandarin and three AMI cases in w3-quality-evidence-20261110.json; not an exhaustive Apple history search",
+    "oldMandarinIDs": [
+      "1883",
+      "1906",
+      "2006"
+    ],
+    "overlapMandarinIDs": [],
+    "oldAmiMeetings": [
+      "ES2002a"
+    ],
+    "overlapAmiMeetings": []
+  },
+  "limits": [
+    "Qwen outputs for this dataset were already observed; this is not a new globally blind heldout.",
+    "Nine annotation-negative cases have not been human-audited to establish absence of speech.",
+    "Four all-zero cases contain two distinct PCM digests reused across the two locales.",
+    "ES2004a and ES2006a original-audio WAVs are partial retained downloads; complete range payloads and receipts provide the binding for their clips.",
+    "Forty FLEURS original WAVs and conversion receipts were checked; float32-to-int16 conversion was not recomputed.",
+    "No new network provenance or license adjudication; fixed historical source/notice records remain applicable.",
+    "Prepared Apple comparison only; this work executed zero Apple recognition calls."
+  ],
+  "cases": [
+    {
+      "order": 1,
+      "id": "fleurs-cmn_hans_cn-1805",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 121920,
+      "durationSeconds": "7.62",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1805.pcm",
+        "bytes": 243840,
+        "sha256": "ddee0d951c5ecfa143134ae3b1f126ea70e76b9e87870d012f6830ed09b6e29f"
+      },
+      "referenceSHA256": "b2d3760db370e8d162fc1bc59ee31f60d9e3b2746300a69ee380163eaaf05792",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1805",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10112798408996336578.wav",
+          "bytes": 487738,
+          "sha256": "714a1785c636060d6a8f284abcf786c876f70b07e0a8ea966c476abf1e890fe7"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 2,
+      "id": "fleurs-cmn_hans_cn-1965",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 109440,
+      "durationSeconds": "6.84",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1965.pcm",
+        "bytes": 218880,
+        "sha256": "012e2eb91001d8a4966dd3e1fb65e706ab6d823cd96dddcf0f6de4896815bbe4"
+      },
+      "referenceSHA256": "11aa3503283ebe9e53823411bd8e625b6774627b4052767a2025fae1e44d6149",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1965",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10134195680525011353.wav",
+          "bytes": 437818,
+          "sha256": "52cd9b630b984ed486d69f8ee8dd841a57f875c752e1af411e0a39dabd3e00cb"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 3,
+      "id": "fleurs-cmn_hans_cn-1903",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 116160,
+      "durationSeconds": "7.26",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1903.pcm",
+        "bytes": 232320,
+        "sha256": "3aeedf27352039c125341d0b66c586a438f64e973a9cef7bcc4f9433a9c88835"
+      },
+      "referenceSHA256": "d5088b9aaf6aff99a243bd4866ca8f6103b21f26875617613e22b10599370bda",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1903",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10142207404499844309.wav",
+          "bytes": 464698,
+          "sha256": "cd570cba752dd4214a9c6ec050759172932e4bc4df18ed2a2bb0d8a9e30172db"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 4,
+      "id": "fleurs-cmn_hans_cn-1953",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 80640,
+      "durationSeconds": "5.04",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1953.pcm",
+        "bytes": 161280,
+        "sha256": "77b7b11210844e85a4027757fd1cdcf725e76a71ced1e23a332dc2d7becc0afa"
+      },
+      "referenceSHA256": "7edd2c2a02a69b6fb12f28adc55829a1ca80bf45687aed0f8559a2b25699df17",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1953",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10144930991730701959.wav",
+          "bytes": 322618,
+          "sha256": "9f1ab1af9c909d2710aa3e1b0af70d490e2104b5992a47e4c59469e3068b939f"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 5,
+      "id": "fleurs-cmn_hans_cn-1830",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 101760,
+      "durationSeconds": "6.36",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1830.pcm",
+        "bytes": 203520,
+        "sha256": "32201ea0511a0285c0da43ca492357524fc3af05e0682fddedb6663b1f4c8082"
+      },
+      "referenceSHA256": "2bd10a5a05006a8c2db021a7007c40a185e54564eed365544cfac4f31658b3b4",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1830",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10147383166642115307.wav",
+          "bytes": 407098,
+          "sha256": "3f4b1c4d04301904d8f33fad773e71ba13cc5adb69d96d241c3867ba6c13495e"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 6,
+      "id": "fleurs-cmn_hans_cn-1910",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 81600,
+      "durationSeconds": "5.1",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1910.pcm",
+        "bytes": 163200,
+        "sha256": "a0f4a823683fd54f0d9d18517245f9bc202fa2e9eb9c30f496d1f2eb7518f39d"
+      },
+      "referenceSHA256": "e47b85da46fe9b951271c1abf110feff89d4a77d38d96766b09185d246ae5379",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1910",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10154699825088384418.wav",
+          "bytes": 326458,
+          "sha256": "49a1d118b44c83e35ce60df9ea90f54a89740551be65730728ea3175894f1ed1"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 7,
+      "id": "fleurs-cmn_hans_cn-1902",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 111360,
+      "durationSeconds": "6.96",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1902.pcm",
+        "bytes": 222720,
+        "sha256": "2da6818a6ded59c8a48abb110442f47544cc76f5a4f7e2ff8a7d0c9d10010363"
+      },
+      "referenceSHA256": "2b3eab9f85173263980bef390d730429903ac49e296a9db28530425cd72686ae",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1902",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-1015891181557233386.wav",
+          "bytes": 445498,
+          "sha256": "34dff751ff55dbd0c49fd83481ea2e3fe4d3d6d4e4e484fa8cb2bd7f325c5950"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 8,
+      "id": "fleurs-cmn_hans_cn-1905",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 120960,
+      "durationSeconds": "7.56",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1905.pcm",
+        "bytes": 241920,
+        "sha256": "c3df5181a3e4db9ae99f2149704e8ccd1fd35e4076d0f668a8b2f3bdd08cce7e"
+      },
+      "referenceSHA256": "2fb176791286d0040d14b1420b1e5c7cba3ca824c7494778ac2f2706de19e59d",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1905",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10279011772105822622.wav",
+          "bytes": 483898,
+          "sha256": "aa3163b32efca0893a63d3e706738380e8de8d1e8a521445ad06456658c9edc3"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 9,
+      "id": "fleurs-cmn_hans_cn-1772",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 146880,
+      "durationSeconds": "9.18",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1772.pcm",
+        "bytes": 293760,
+        "sha256": "e98e44d3ff0aa23cd9e63d58136cbf1850fd070f75f46e4ed38347a353759344"
+      },
+      "referenceSHA256": "85681c9b521c1d41d4ea19dc1af28e1148237ab7ed655291b04d720a2ff9c57b",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1772",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10325486695909573217.wav",
+          "bytes": 587578,
+          "sha256": "ac5538ad679226aac725cf75dc42646a47f97fe607eeed444261a7757ce782dd"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 10,
+      "id": "fleurs-cmn_hans_cn-1792",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 140160,
+      "durationSeconds": "8.76",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1792.pcm",
+        "bytes": 280320,
+        "sha256": "1158f7d461c64a47e37818104ce46240b36d111ed067ca19360f9b51cc8a0c30"
+      },
+      "referenceSHA256": "1c47954875f5909a06f70127c2805becc986a79cb0e1c780f0d48661ef7e74b0",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1792",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10343405611041314630.wav",
+          "bytes": 560698,
+          "sha256": "c399b78e60770324e7f630e67063bbe090ad89510708ff1f9bd98533601eca9c"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 11,
+      "id": "fleurs-cmn_hans_cn-1962",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 135360,
+      "durationSeconds": "8.46",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1962.pcm",
+        "bytes": 270720,
+        "sha256": "c3d7a02f86783fe14fd7e34e4714e1686bf137c671f6fb0b1512b7ddaa1fda25"
+      },
+      "referenceSHA256": "0bd1d6d1dbfc33da1241914bc7e882643958ddb751f8cee582725de9a2403414",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1962",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10388181945260949729.wav",
+          "bytes": 541498,
+          "sha256": "ae22ba9aae5bbaa3cbf6357c3c77c28fc287dd19972694273264397497fb7c07"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 12,
+      "id": "fleurs-cmn_hans_cn-1884",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 110400,
+      "durationSeconds": "6.9",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1884.pcm",
+        "bytes": 220800,
+        "sha256": "c268c789b772bd302ffd4f217f227cf4cd4dcf85be9b0c93ef6f797dae8fa99a"
+      },
+      "referenceSHA256": "d1801d9070d24517bbfcdb690acb13902aa6b2f8918b4e2b8278aba2dd7f780b",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1884",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10400579561005332584.wav",
+          "bytes": 441658,
+          "sha256": "4944fffae7a34611d6ddbfb4b20bdca9f853216867c4f4b56be23a1b45d21495"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 13,
+      "id": "fleurs-cmn_hans_cn-1958",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 154560,
+      "durationSeconds": "9.66",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1958.pcm",
+        "bytes": 309120,
+        "sha256": "74369c2be16ac04f36e00da1d0db5fe39d3aed45276693046f365c638fc2c130"
+      },
+      "referenceSHA256": "1fe7d33acf94bc4b45cc7eb021e1821d8f6e144b12779eda0f2091d6d31171e4",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1958",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10480388653191520950.wav",
+          "bytes": 618298,
+          "sha256": "f2df2f22ebb505f9f1af8411ed0da69d7a496df66cf9a0d849c229ed28ac7936"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 14,
+      "id": "fleurs-cmn_hans_cn-1871",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 111360,
+      "durationSeconds": "6.96",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1871.pcm",
+        "bytes": 222720,
+        "sha256": "03a066eba992c84246696180810c01b61d5b7d050bc41e5b8b3b8cc6c7e5fd62"
+      },
+      "referenceSHA256": "05c5be363356ac0d747eb8604127ed156c301890b3d056567266d335634082ac",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1871",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10481669967989866997.wav",
+          "bytes": 445498,
+          "sha256": "d83eb2739552b233229af2df27a5b882a790a8af6281ef7a323e72bd38b59618"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 15,
+      "id": "fleurs-cmn_hans_cn-1698",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 155520,
+      "durationSeconds": "9.72",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1698.pcm",
+        "bytes": 311040,
+        "sha256": "c0cf0ea82e08a6e7f364626fdecf3c4f7d8dedbf3d3b24f96ff029fc1ca312a4"
+      },
+      "referenceSHA256": "1313189fa8863bdde86a89eff5f19bbf42356268a191783b90d4c6cb17639c02",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1698",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10544065594858743613.wav",
+          "bytes": 622138,
+          "sha256": "2009e6b155ac2b1dfe8aef5e585a46b313387be1f3868ac422331cc685419e61"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 16,
+      "id": "fleurs-cmn_hans_cn-2002",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 108480,
+      "durationSeconds": "6.78",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-2002.pcm",
+        "bytes": 216960,
+        "sha256": "bee96356b12cce5f98776905b7cff01e92fca56e052e0997e977ee19a9bf8999"
+      },
+      "referenceSHA256": "e85771b9d04b3f625e70f399da26709220860674f603a778bb74296eb9171023",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "2002",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10571681330551714048.wav",
+          "bytes": 433978,
+          "sha256": "1a2ee4403d2a88e6f8b382da0ac60b2a787de3f93e5f2f6883203e6a7fec5532"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 17,
+      "id": "fleurs-cmn_hans_cn-1661",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 123840,
+      "durationSeconds": "7.74",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1661.pcm",
+        "bytes": 247680,
+        "sha256": "e9394e90b72ecde7d22f242b32dcf2c20fbf7bed68cafa6a89e341e933279744"
+      },
+      "referenceSHA256": "bf1a762276bb64ee1b7f8588da08525eb2465db1596cb3c4fb325ea0cab1f231",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1661",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-1061358881165519725.wav",
+          "bytes": 495418,
+          "sha256": "35bda8450990ea1636e5bfbaea0a1c302042caaa87475919c8288ac1ebb0a05c"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 18,
+      "id": "fleurs-cmn_hans_cn-1697",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 156480,
+      "durationSeconds": "9.78",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1697.pcm",
+        "bytes": 312960,
+        "sha256": "bc45683ef6eff1f4a58502edfa5bd7e90e4f5cb2b79bdcf7e1879cf9abc5f988"
+      },
+      "referenceSHA256": "44e77369befda958c742c267ac77522077961fa6509b3ec1a33562390b837d08",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1697",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10674527227632117693.wav",
+          "bytes": 625978,
+          "sha256": "7dd080907920c8e2fbf95961244720bf63d57097d55b0bc6bc3c886c610f4f65"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 19,
+      "id": "fleurs-cmn_hans_cn-1821",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 126720,
+      "durationSeconds": "7.92",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1821.pcm",
+        "bytes": 253440,
+        "sha256": "f4bd7a624646121f15f41d3e3f538c0f07d18bb3eff57ec4c8838e0a78490f7d"
+      },
+      "referenceSHA256": "bd428886024618f20a8d03bc51723a2b64adf00c8b8c43794fbf3fbc76c8bab2",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1821",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10694001904489787463.wav",
+          "bytes": 506938,
+          "sha256": "3099b69f60d5b8624b66b25bc740a10fd6bfab4202fec7a4f9eaaf07c0a9f0c5"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 20,
+      "id": "fleurs-cmn_hans_cn-1808",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 103680,
+      "durationSeconds": "6.48",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1808.pcm",
+        "bytes": 207360,
+        "sha256": "fdb29e3346a08dec51ca79f5ddca66a2fd73906aa53cd978c92c57017849d584"
+      },
+      "referenceSHA256": "55e27b92e1349cefddf0ea8779386182b1fd707cad12a4111f97f70844b3b67a",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "cmn_hans_cn",
+        "datasetID": "1808",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/cmn_hans_cn-10700749092778973179.wav",
+          "bytes": 414778,
+          "sha256": "0ef43439120f6e482ad8e496822f4934dc53d8a171303021d60a10b1028abce2"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 21,
+      "id": "fleurs-en_us-1675",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 140160,
+      "durationSeconds": "8.76",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1675.pcm",
+        "bytes": 280320,
+        "sha256": "05586359c8c54a5fcd24761af9ae0e21b636c4cc2f696b56ef2f8ee6cc5a4ac5"
+      },
+      "referenceSHA256": "63d31e54c66a437f7f103d1ea1438dbb719573f49df77c53ed2c250698821520",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1675",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10052240106321793346.wav",
+          "bytes": 560698,
+          "sha256": "7603cae3294309ef70d234180cefccc3b13865ee525262228a636069b9b62841"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 22,
+      "id": "fleurs-en_us-1728",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 92160,
+      "durationSeconds": "5.76",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1728.pcm",
+        "bytes": 184320,
+        "sha256": "1cf1221ee097d042ef3cd020809bea09394626a31ac989b945c22c46ecf6fc1f"
+      },
+      "referenceSHA256": "1f710e30f3b84790f6e7b04e3813a08afcaf251b625010272d033c61ba72d4a3",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1728",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10197164397713068203.wav",
+          "bytes": 368698,
+          "sha256": "b174be7730f0aab6a26762130b66f2125392b50550645727bd057d8479fb6219"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 23,
+      "id": "fleurs-en_us-1972",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 69120,
+      "durationSeconds": "4.32",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1972.pcm",
+        "bytes": 138240,
+        "sha256": "0ff9f8ba6e913bcab4c77c2883c11e3a63d554eb341ce99d683f5d8c921accd4"
+      },
+      "referenceSHA256": "51bace5258329daee5b9071344ce0e5669d4d5071602bcf4e9fd0a2fc6086c89",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1972",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10233995782544396174.wav",
+          "bytes": 276538,
+          "sha256": "bfa2f3fb72a05cbcb7c0000a460435f2d0eedca7c5cc90f01aacc89127df7f63"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 24,
+      "id": "fleurs-en_us-1914",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 111360,
+      "durationSeconds": "6.96",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1914.pcm",
+        "bytes": 222720,
+        "sha256": "e13d4263bc8bd3442c788d0696df0344beb66eb7bcec68e0b67083d44d530581"
+      },
+      "referenceSHA256": "4c2ed6b3f083afe8cf22baef2ee0ec56364a40531ebe7b700c0ea574b82ac9df",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1914",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10335587906469246566.wav",
+          "bytes": 445498,
+          "sha256": "14c9f40d7087ed487823917a9bc1838a037d78d315a694f7ace632651c612a61"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 25,
+      "id": "fleurs-en_us-1806",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 158400,
+      "durationSeconds": "9.9",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1806.pcm",
+        "bytes": 316800,
+        "sha256": "b991029a13b6e97fb547937e9ad82f941b57f0b60b01c5d1d89d19237a36bd0d"
+      },
+      "referenceSHA256": "833a9475d46748f8b8a309fe4cc203745e5118a5b48a479c3031f0c7cc3bf6a8",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1806",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-1036771894648013441.wav",
+          "bytes": 633658,
+          "sha256": "9514bffb9e0bd3397f2cf90041eff51b87e68293335f7ff904515a19f8d416e3"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 26,
+      "id": "fleurs-en_us-1776",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 76800,
+      "durationSeconds": "4.8",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1776.pcm",
+        "bytes": 153600,
+        "sha256": "2821c39358fc8049953945d8042d1833d86cb2245ca468cf5afc31ee1fe1a438"
+      },
+      "referenceSHA256": "a52b95aa4e386cc14d0c7898f342cfdcfe04b9c6a8d67cf621a68882236f6fa9",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1776",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-1038214857203833067.wav",
+          "bytes": 307258,
+          "sha256": "0471eb4c8306e143524c09a45c2b4137204ac2a19fc7ed896ed8391ac864347c"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 27,
+      "id": "fleurs-en_us-1802",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 91520,
+      "durationSeconds": "5.72",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1802.pcm",
+        "bytes": 183040,
+        "sha256": "24fe577bb7fdeabe18ca0c86da8cc1933f270331cb6567893c6be4c06f978760"
+      },
+      "referenceSHA256": "1b680a318dcd072e14ad3de07ff8b29f85eb2fdc4fc3daebd6f74467d9a6bb16",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1802",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-1042003289011443756.wav",
+          "bytes": 366138,
+          "sha256": "80c74220cd80f918367c517e5ddff1ea9b2d366b7711b83a276a828564cfcc49"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 28,
+      "id": "fleurs-en_us-1992",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 138240,
+      "durationSeconds": "8.64",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1992.pcm",
+        "bytes": 276480,
+        "sha256": "9c9a81e00df5617314c141a676eb01447539b46697e6607e7cf11fc389ce7f75"
+      },
+      "referenceSHA256": "2b39b4054bdb0b7b5ff9dd4564d92d84cbdde1c7ae2d58127bd918477e5bf921",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1992",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-1046653381869710616.wav",
+          "bytes": 553018,
+          "sha256": "32bafaf58802bef28cbde443d173e51c0afe7c58c8260cb0f5776e2c60a2a3a5"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 29,
+      "id": "fleurs-en_us-2005",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 85760,
+      "durationSeconds": "5.36",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-2005.pcm",
+        "bytes": 171520,
+        "sha256": "13e249d77ff99fa7d255acf98216b31f11d1bdb59e286d56fec5cfb888ce5c75"
+      },
+      "referenceSHA256": "907fa3894bc5b64e078c28f49a2fd024e7cf3fceea48da04f06a1685178ff4e3",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "2005",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10471564175308895403.wav",
+          "bytes": 343098,
+          "sha256": "5a56cbc0ec373f9873b762d79e8b6874c889ba07e2bd195c40098e84bd170f5e"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 30,
+      "id": "fleurs-en_us-1674",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 90240,
+      "durationSeconds": "5.64",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1674.pcm",
+        "bytes": 180480,
+        "sha256": "1243ac24a74d6cdeee5162cb6967dbeb0ddbebe00ce03c809db7fb872de5e66b"
+      },
+      "referenceSHA256": "5860a3b0c690df5284c8a1a54a18ff64d52633c4ed464de668b600e3b620a98a",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1674",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10492135991603561867.wav",
+          "bytes": 361018,
+          "sha256": "ed78d88661c8f76d7b8951665a3c2e9adea23828fe3e70fd9df95465cb8f8ede"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 31,
+      "id": "fleurs-en_us-1952",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 137280,
+      "durationSeconds": "8.58",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1952.pcm",
+        "bytes": 274560,
+        "sha256": "b3ad159ace71890d6c1e1c0c54506fe32cb3c3c1f797e625b4d561a3651f2e19"
+      },
+      "referenceSHA256": "16741b104de57508fd118e3740c4a061b840c1dedfdf1890c2707e53d91b74b4",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1952",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10492761258488775721.wav",
+          "bytes": 549178,
+          "sha256": "3f498f6216c60544714c9b334c4cfe4811b60b2dadbc710e68d127371a5ffdfd"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 32,
+      "id": "fleurs-en_us-1749",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 153600,
+      "durationSeconds": "9.6",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1749.pcm",
+        "bytes": 307200,
+        "sha256": "96b712b1b2470b668739a530bcf3da185ea64828967a53c8c9f2859bbbeec027"
+      },
+      "referenceSHA256": "48961908e3941421a643e1209480c0a31d1b672072f0d604b24ea926b3828b41",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1749",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-1054805305879816018.wav",
+          "bytes": 614458,
+          "sha256": "62a8881cf2a0aaec9fa70155b452ce23e5a46738490fe764011b927b24842ef1"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 33,
+      "id": "fleurs-en_us-1662",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 134080,
+      "durationSeconds": "8.38",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1662.pcm",
+        "bytes": 268160,
+        "sha256": "b6e506b249cb0b44e643e8a32475a53e56513c8f34622c49448c3752a17b0e77"
+      },
+      "referenceSHA256": "5f02d8c4cc7fccc8b1dab61bb6b9ccb6ad5c5d3ddd681063390f098d848d5fc2",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1662",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10614481583312370701.wav",
+          "bytes": 536378,
+          "sha256": "0f92f2bed63210286148e6947faf7ca90bb635ec7525bcb7f48bdedfe79b425d"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 34,
+      "id": "fleurs-en_us-1858",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 100800,
+      "durationSeconds": "6.3",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1858.pcm",
+        "bytes": 201600,
+        "sha256": "e8138f2c1b81addf0479f2abf0edbe38be2e2e5a2eb0a29fd12efdb602e53ff4"
+      },
+      "referenceSHA256": "6ca6e59d1b7d20521c1e36ef100f2bce15677b64383066bd6c654c1fd7617a16",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1858",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10751756685109361684.wav",
+          "bytes": 403258,
+          "sha256": "07cce1e9fe871d0d584490855fcb02a029eb6a0cc6e37b316e39990c4164a1a2"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 35,
+      "id": "fleurs-en_us-1909",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 90240,
+      "durationSeconds": "5.64",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1909.pcm",
+        "bytes": 180480,
+        "sha256": "743a920543850ab40540466a1b7b896ce5281c7887390c5adb136d874c78f300"
+      },
+      "referenceSHA256": "79394b66eef8b7e5188acf5b6e54cd6abdfbec78df97aecd633341af6fe03467",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1909",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10849792007407044602.wav",
+          "bytes": 361018,
+          "sha256": "48040b2408179454e0299ee86e69c7f1e59c66003a8967aa3ae0b06e53eb654e"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 36,
+      "id": "fleurs-en_us-1897",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 153280,
+      "durationSeconds": "9.58",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1897.pcm",
+        "bytes": 306560,
+        "sha256": "d15856e4a4d0a6e14da769ae7f5606c275e9f413800661c47bb48e7f853a6cc7"
+      },
+      "referenceSHA256": "043cb98b6e8b992cde74959b4b8feea33a5ca2cf18795a3e51416aad16de4137",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1897",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10861831846737909528.wav",
+          "bytes": 613178,
+          "sha256": "6684928f432514e69a5fb8157b817981e63f2c2697ce09c4dbe8a946e1a30062"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 37,
+      "id": "fleurs-en_us-1953",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 109440,
+      "durationSeconds": "6.84",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1953.pcm",
+        "bytes": 218880,
+        "sha256": "c18f050d51601807dd1417cabbfddeb16bbe116c7cca16590ae543e0e0eac596"
+      },
+      "referenceSHA256": "0a1d05c6a73cccf0e4bf452a55e7c6130dccdf31f7fb3207ea188eeb39c0e4bb",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1953",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10899527843662463911.wav",
+          "bytes": 437818,
+          "sha256": "6fb8634b7820a56c76d53120be3accf3c63059a338fdef4b0fe2ca09665ee0a8"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 38,
+      "id": "fleurs-en_us-1740",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 133440,
+      "durationSeconds": "8.34",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1740.pcm",
+        "bytes": 266880,
+        "sha256": "3c68cf7df9bbcea81639f6d3b0c78ece387538ce913907c2a98113e0a7ec52d0"
+      },
+      "referenceSHA256": "6ff2d6657f774bacfc89d96d1610ca2e632447d52623efa2a0766d3412053d32",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1740",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10903101168349732260.wav",
+          "bytes": 533818,
+          "sha256": "6450b7622ccab79fd14d3d317c9d88e6e54bbad391004e12e0aa981bd77fb764"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 39,
+      "id": "fleurs-en_us-1987",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 157120,
+      "durationSeconds": "9.82",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1987.pcm",
+        "bytes": 314240,
+        "sha256": "e6f9b4c2ba1cfb2fdbd33b63879e52b83f0e9e065897a471f3e744aa3541a3c7"
+      },
+      "referenceSHA256": "7cd7112437901e37126f4d9a6da9bef8445aeed3f924de54e40b215328e6ba8b",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1987",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10937407360976471523.wav",
+          "bytes": 628538,
+          "sha256": "5c67e2a8371caa74a5445a30dedd91dc43e4b6a8a7ffadbf67e06d7acc1349eb"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 40,
+      "id": "fleurs-en_us-1990",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 140160,
+      "durationSeconds": "8.76",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1990.pcm",
+        "bytes": 280320,
+        "sha256": "f0eedcd572d0907bbf9c0463d3921ff3dbd3989e05ed5faa2e63a91412da69e2"
+      },
+      "referenceSHA256": "ef358e3417150f6ade90eb2191223e7ca9420cf61ca0876b3f973d0ca886248a",
+      "source": {
+        "dataset": "google/fleurs",
+        "revision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd",
+        "config": "en_us",
+        "datasetID": "1990",
+        "original": {
+          "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/original-audio/en_us-10938576782105608041.wav",
+          "bytes": 560698,
+          "sha256": "34eef6d3531779f297c25d5f695baf92a37ef32149e293d79b9afac4ff36654c"
+        },
+        "conversionRecomputed": false
+      }
+    },
+    {
+      "order": 41,
+      "id": "ami-ES2003a.sync.171-C",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 124416,
+      "durationSeconds": "7.776",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2003a.sync.171-C.pcm",
+        "bytes": 248832,
+        "sha256": "3657e2bec908c402df6523cb86abef3cb7c3865afd86b96b2cc2b4e9161bcef8"
+      },
+      "referenceSHA256": "478667c4aeb0d262cd3545647c6bc3f16ecf6438fef5be34617002093e387d63",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 3748992,
+        "endSample": 3873408,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 42,
+      "id": "ami-ES2003a.sync.93-B",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 131296,
+      "durationSeconds": "8.206",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2003a.sync.93-B.pcm",
+        "bytes": 262592,
+        "sha256": "2c8fa6ea84f3d1544be8b3d6f95da02032c6c947f96ccfdb1a104beafb8e8ad1"
+      },
+      "referenceSHA256": "a54ba301f95537e1d1e8c89e8eef5a1e127325bef4fc44094b909b1973e0b9ec",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 11534464,
+        "endSample": 11665760,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 43,
+      "id": "ami-ES2003a.sync.95-B",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 80160,
+      "durationSeconds": "5.01",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2003a.sync.95-B.pcm",
+        "bytes": 160320,
+        "sha256": "275c708e6e7865ca625449872c08b9807267801b4440c72bcade20b18b97b827"
+      },
+      "referenceSHA256": "3b2e72a7aa398424c7b1e3ce92b22016f42a9df623118a1891c7033da4a880b6",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 11686240,
+        "endSample": 11766400,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 44,
+      "id": "ami-ES2003a.sync.209-C",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 137216,
+      "durationSeconds": "8.576",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2003a.sync.209-C.pcm",
+        "bytes": 274432,
+        "sha256": "b262eb47f6f6e6890c76c9f3b95e113d3e0177af2c7f5b5f6da8f1f64b5c9f21"
+      },
+      "referenceSHA256": "9308936a6edb154402659094f133b7e671af50a38b4901b8fab2daf54eb1fd7f",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 15105920,
+        "endSample": 15243136,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 45,
+      "id": "ami-ES2003a.sync.267-D",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 66560,
+      "durationSeconds": "4.16",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2003a.sync.267-D.pcm",
+        "bytes": 133120,
+        "sha256": "085ec99a8aee157763182ec855ecb77fada8b4e55c53a33b9664955e6ef8be13"
+      },
+      "referenceSHA256": "250fe0d8bb722d259a667fa76f1389596451e138e41572e202ecb7da558fa606",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 16033408,
+        "endSample": 16099968,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 46,
+      "id": "ami-ES2003a.sync.29-A",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 50688,
+      "durationSeconds": "3.168",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2003a.sync.29-A.pcm",
+        "bytes": 101376,
+        "sha256": "420fca6eb65876435937e44ab3e2e91c68437cc242fd1f1d19664aee78f8a9f9"
+      },
+      "referenceSHA256": "3eec3ea19bab9cc8d8057c249858a0f077afd0e4f632a625272786c69d637ab9",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 17084544,
+        "endSample": 17135232,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 47,
+      "id": "ami-ES2003a.sync.129-B",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 70352,
+      "durationSeconds": "4.397",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2003a.sync.129-B.pcm",
+        "bytes": 140704,
+        "sha256": "92372954467727dc91a9d9d54390854b596a731b88c4a5d338e18430260d1da5"
+      },
+      "referenceSHA256": "69e4d46dffb0cda428b643ef6ad9aa21e66d5b94c8171db48175c8f0e2e6fb09",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 17411456,
+        "endSample": 17481808,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 48,
+      "id": "ami-ES2003a.sync.131-B",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 68128,
+      "durationSeconds": "4.258",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2003a.sync.131-B.pcm",
+        "bytes": 136256,
+        "sha256": "9f10fcc5c571a3a081aeb770cb3ace9fff8189fb44a893c1b6580e0fe76ecaa3"
+      },
+      "referenceSHA256": "0ba6f8b85da7c9cd96615bee3c740526e8965bdd8b02f12cea64c149034fe6ac",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 17486944,
+        "endSample": 17555072,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 49,
+      "id": "ami-ES2003a.sync.133-B",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 151472,
+      "durationSeconds": "9.467",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2003a.sync.133-B.pcm",
+        "bytes": 302944,
+        "sha256": "0bee300259333260a5ee83134ebfd0a10e457c14470f8094fa7fc5c0ae4f5fe2"
+      },
+      "referenceSHA256": "ced3d9027bc9f94f4e315e5ee5553716e3e44b793c722e67fed43071b5e75b9b",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 17600464,
+        "endSample": 17751936,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 50,
+      "id": "ami-ES2004a.sync.121-B",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 96256,
+      "durationSeconds": "6.016",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2004a.sync.121-B.pcm",
+        "bytes": 192512,
+        "sha256": "ec3815294a798571695d9bc7647711971e7eaaafa964f38eb482d30ce0639b7d"
+      },
+      "referenceSHA256": "3138dd98273eeb52be1923500db2c8f643284bf298747760d129b90bbcb8c0e8",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2004a",
+        "channel": "Array1-01",
+        "startSample": 2593408,
+        "endSample": 2689664,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": false,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 51,
+      "id": "ami-ES2004a.sync.131-B",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 66048,
+      "durationSeconds": "4.128",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2004a.sync.131-B.pcm",
+        "bytes": 132096,
+        "sha256": "863640d5522fe1a48adc1900136604344d22b7c433c5c6a119f6d7d9f2bac0c4"
+      },
+      "referenceSHA256": "93e4a04fda19535f5a22da861be728ca387a7bee6ffbfe992a377f511accdcd7",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2004a",
+        "channel": "Array1-01",
+        "startSample": 3947392,
+        "endSample": 4013440,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": false,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 52,
+      "id": "ami-ES2006a.sync.277-C",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 98560,
+      "durationSeconds": "6.16",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-ES2006a.sync.277-C.pcm",
+        "bytes": 197120,
+        "sha256": "fe3d531be0dbaeff783266f1abd46834b4f76ae35951e53e57b1d94987e8ae45"
+      },
+      "referenceSHA256": "beeb16f7c548535c3e78b334a5a1a6b6a9e4df316c385557926f1ec650cdd12c",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2006a",
+        "channel": "Array1-01",
+        "startSample": 1226624,
+        "endSample": 1325184,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": false,
+        "groundTruthHumanAuditedNonspeech": null
+      }
+    },
+    {
+      "order": 53,
+      "id": "ami-negative-ES2003a-0",
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "samples": 80000,
+      "durationSeconds": "5",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-negative-ES2003a-0.pcm",
+        "bytes": 160000,
+        "sha256": "52d2b4c183809730b18e7f48a268b2d9c592736966a54c2f9ddd66faa20d583e"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 2610560,
+        "endSample": 2690560,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": false
+      }
+    },
+    {
+      "order": 54,
+      "id": "ami-negative-ES2003a-1",
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "samples": 80000,
+      "durationSeconds": "5",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-negative-ES2003a-1.pcm",
+        "bytes": 160000,
+        "sha256": "5413d23ae7475c3e3ddd03289bfbe8b991095e12c7f1b94265b963197131767b"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 3124048,
+        "endSample": 3204048,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": false
+      }
+    },
+    {
+      "order": 55,
+      "id": "ami-negative-ES2003a-2",
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "samples": 80000,
+      "durationSeconds": "5",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-negative-ES2003a-2.pcm",
+        "bytes": 160000,
+        "sha256": "08423e78d572548365c9ac0ca063744936ac9ffc5af3dfa7469e07c22f9d27d9"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2003a",
+        "channel": "Array1-01",
+        "startSample": 4426048,
+        "endSample": 4506048,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": true,
+        "groundTruthHumanAuditedNonspeech": false
+      }
+    },
+    {
+      "order": 56,
+      "id": "ami-negative-ES2004a-0",
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "samples": 80000,
+      "durationSeconds": "5",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-negative-ES2004a-0.pcm",
+        "bytes": 160000,
+        "sha256": "0ab694a5a8a760585e76faa014808019aa56a1ede71844094e20f597d573d83c"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2004a",
+        "channel": "Array1-01",
+        "startSample": 36160,
+        "endSample": 116160,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": false,
+        "groundTruthHumanAuditedNonspeech": false
+      }
+    },
+    {
+      "order": 57,
+      "id": "ami-negative-ES2004a-1",
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "samples": 80000,
+      "durationSeconds": "5",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-negative-ES2004a-1.pcm",
+        "bytes": 160000,
+        "sha256": "441a5409fba63e68618379dd5b976564b7c27a3b45cdbc7aabf1803ef70afb1f"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2004a",
+        "channel": "Array1-01",
+        "startSample": 563520,
+        "endSample": 643520,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": false,
+        "groundTruthHumanAuditedNonspeech": false
+      }
+    },
+    {
+      "order": 58,
+      "id": "ami-negative-ES2004a-2",
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "samples": 80000,
+      "durationSeconds": "5",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-negative-ES2004a-2.pcm",
+        "bytes": 160000,
+        "sha256": "60263b27f630d7f1e071c6082f58a7717bde4f3fa5c7a927f6d44d34f893d2a9"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2004a",
+        "channel": "Array1-01",
+        "startSample": 858880,
+        "endSample": 938880,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": false,
+        "groundTruthHumanAuditedNonspeech": false
+      }
+    },
+    {
+      "order": 59,
+      "id": "ami-negative-ES2006a-0",
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "samples": 80000,
+      "durationSeconds": "5",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-negative-ES2006a-0.pcm",
+        "bytes": 160000,
+        "sha256": "6979c986fab34a8e12da0db5db6c6dee39c1cf5401600375635910f647b1bb6c"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2006a",
+        "channel": "Array1-01",
+        "startSample": 1909440,
+        "endSample": 1989440,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": false,
+        "groundTruthHumanAuditedNonspeech": false
+      }
+    },
+    {
+      "order": 60,
+      "id": "ami-negative-ES2006a-1",
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "samples": 80000,
+      "durationSeconds": "5",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-negative-ES2006a-1.pcm",
+        "bytes": 160000,
+        "sha256": "4b47c204b26f19162f10c61a2b03546ff84ab55f3f09c170eb34724deff5b47e"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2006a",
+        "channel": "Array1-01",
+        "startSample": 4038400,
+        "endSample": 4118400,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": false,
+        "groundTruthHumanAuditedNonspeech": false
+      }
+    },
+    {
+      "order": 61,
+      "id": "ami-negative-ES2006a-2",
+      "cohort": "nonspeech-noise",
+      "locale": "en-US",
+      "samples": 80000,
+      "durationSeconds": "5",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/ami-negative-ES2006a-2.pcm",
+        "bytes": 160000,
+        "sha256": "12917449786723b550065296bdfdb690868bd960f533cfeb04e358da78d2aeac"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "AMI",
+        "meeting": "ES2006a",
+        "channel": "Array1-01",
+        "startSample": 5488704,
+        "endSample": 5568704,
+        "rangeReceiptPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/ami-ranges/range-receipts.json",
+        "retainedWholeWavComplete": false,
+        "groundTruthHumanAuditedNonspeech": false
+      }
+    },
+    {
+      "order": 62,
+      "id": "independent-silence-3s-zh-CN",
+      "cohort": "silence",
+      "locale": "zh-CN",
+      "samples": 48000,
+      "durationSeconds": "3",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/silence-3s-zh-CN.pcm",
+        "bytes": 96000,
+        "sha256": "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "synthetic-all-zero",
+        "durationSeconds": "3"
+      }
+    },
+    {
+      "order": 63,
+      "id": "independent-silence-10s-zh-CN",
+      "cohort": "silence",
+      "locale": "zh-CN",
+      "samples": 160000,
+      "durationSeconds": "10",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/silence-10s-zh-CN.pcm",
+        "bytes": 320000,
+        "sha256": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "synthetic-all-zero",
+        "durationSeconds": "10"
+      }
+    },
+    {
+      "order": 64,
+      "id": "independent-silence-3s-en-US",
+      "cohort": "silence",
+      "locale": "en-US",
+      "samples": 48000,
+      "durationSeconds": "3",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/silence-3s-en-US.pcm",
+        "bytes": 96000,
+        "sha256": "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "synthetic-all-zero",
+        "durationSeconds": "3"
+      }
+    },
+    {
+      "order": 65,
+      "id": "independent-silence-10s-en-US",
+      "cohort": "silence",
+      "locale": "en-US",
+      "samples": 160000,
+      "durationSeconds": "10",
+      "pcm": {
+        "path": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/silence-10s-en-US.pcm",
+        "bytes": 320000,
+        "sha256": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b"
+      },
+      "referenceSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": {
+        "dataset": "synthetic-all-zero",
+        "durationSeconds": "10"
+      }
+    }
+  ],
+  "newRecognitionRequests": 0,
+  "newBuilds": 0,
+  "newDownloads": 0,
+  "R4": "open",
+  "R5": "open",
+  "P4": "open",
+  "W3Complete": false
+}

@@ -1,3 +1,6 @@
+## 2026-11-16 部分 AMI 整源 WAV 的切片检查边界
+症状：初始 inspector 把有意保留为 partial 的 ES2004a/ES2006a 整源 WAV 当完整 WAV 切片，出现 6 次 hash 比较 false 和 1 次 unpack 长度错误。已核实原因：21 个 range payload byte-exact，download-stop 收据显示 21 ranges complete 后停止冗余 whole-file 下载；这两个整源 WAV 虽保留原 RIFF full frames，但文件名或 RIFF header 不能证明 full body。恢复：按保留的 21 range payloads + receipts 检查，ES2003a 的 12 片与 ES2004a 的 3 个负例，仅在已有整源/前缀的可用区间内逐字节匹配，不建立全源声明。边界：不要标记为实际 clip corruption、remote outage 或 float rounding；证据见 `.omx/artifacts/w3-ios-contracts-acceptance-20261116/ami-slice-inspection.json`、`.omx/artifacts/w3-ios-contracts-acceptance-20261116/input-checks.json`、`.omx/artifacts/w3-ios-contracts-acceptance-20261116/inspection-errors.json` 与原始 `whole-ami-download-stop.json`。
+
 ## 2026-11-16 检查器假设纠偏与 FileList 边界
 
 按 docs/agent-pitfalls.md，三项被拒 checker assumptions：Package.swift 被当作 compiled-input、raw intermediates 被当作仍保留、SwiftCompile 被写成 swift-frontend full commands。实际 Xcode 日志使用 SwiftCompile records；四份原始 SwiftFileList raw 文件当前不保留，不重建、不推断缺失原因、不称 freshly checked。保留被拒脚本与失败记录，不推测缺失原因、不重建以修补观察。

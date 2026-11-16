@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-11-16T00:59:47.770724+00:00",
+  "status": "prepared-review-reference-final-adoption-open",
+  "inspectionSourceHead": "2fa129b16ddc8da902898d1e61e69c0a49bd5583",
+  "inspectionHeadIsNotFinalAppIdentity": true,
+  "historicalReviewReference": {
+    "path": "artifacts/verification/apple-current-candidate-20261107/derived-device/Build/Products/Debug-iphoneos/SpeechDemo.app",
+    "fileCount": 18,
+    "files": {
+      "Frameworks/libswiftCompatibilitySpan.dylib": {
+        "bytes": 172096,
+        "sha256": "d8a3dfa8ee9099c3cf302ae555fdb0c630be719f190758280eb8345efce2d624"
+      },
+      "Info.plist": {
+        "bytes": 1244,
+        "sha256": "ea534317bb7f72c8010cf1656a293d9f6158680a8c238209daf0afbfa522c03d"
+      },
+      "OnDeviceAIKitAppleMLX_ODAIKitAppleMLXVLM.bundle/Info.plist": {
+        "bytes": 714,
+        "sha256": "1eb975d6e694a05c6625c27291a46857c20a2e336c43e9973fa2d732d6669148"
+      },
+      "OnDeviceAIKitAppleMLX_ODAIKitAppleMLXVLM.bundle/smolvlm2-model.json": {
+        "bytes": 5575,
+        "sha256": "c074e693cc0fb9cfb19d6e7a393ffb113108e88d1489a387e8cb06d309602d54"
+      },
+      "OpenCVIdentityNotices/OpenCV-LICENSE.txt": {
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "OpenCVIdentityNotices/SFace-LICENSE.txt": {
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "OpenCVIdentityNotices/YuNet-LICENSE.txt": {
+        "bytes": 1085,
+        "sha256": "c83b8120c50ccbd4c4f96edf53141bdd566ebb8f8e9227e415326aa1b1aba958"
+      },
+      "PkgInfo": {
+        "bytes": 8,
+        "sha256": "82502191c9484b04d685374f9879a0066069c49b8acae7a04b01d38d07e8eca0"
+      },
+      "SpeechDemo": {
+        "bytes": 72472,
+        "sha256": "05d4fd715edf6652c6d523fef39e13001c4f9569d8af6420b4e7e7f3701ad6ab"
+      },
+      "SpeechDemo.debug.dylib": {
+        "bytes": 157457496,
+        "sha256": "566d52831e574f1775877d17665e7c1385a24d73b3c48bf67be08ecf6130669d"
+      },
+      "__preview.dylib": {
+        "bytes": 16456,
+        "sha256": "d941e5f96b267d7b24317318ce50662d6b013f168d02093c7921f4327d1e277e"
+      },
+      "mlx-swift_Cmlx.bundle/Info.plist": {
+        "bytes": 672,
+        "sha256": "edeed615e12b40b68da82c821a26f7c899edaa4881c869c91fe34747aebcb9e6"
+      },
+      "mlx-swift_Cmlx.bundle/default.metallib": {
+        "bytes": 2399192,
+        "sha256": "9661f090f215179bb3ba647a4a1cd347f8d8bebed8cbd7e2fdaf6f71fa7ea886"
+      },
+      "swift-crypto_Crypto.bundle/Info.plist": {
+        "bytes": 684,
+        "sha256": "11a758dbc27f56a0cb48127b54bae7a31f5f950a6a4420a93031f72055f686cd"
+      },
+      "swift-crypto_Crypto.bundle/PrivacyInfo.xcprivacy": {
+        "bytes": 398,
+        "sha256": "42fb8a30dd8d7ba0900e1bf17fe64ed8c12cfdb8a9c791ab6b4e1eceb0f299c0"
+      },
+      "swift-transformers_Hub.bundle/Info.plist": {
+        "bytes": 690,
+        "sha256": "8dbe33674a521d47ea4b45c22c6eb2a3fed01209a5859ccf4fb883d0eb24386f"
+      },
+      "swift-transformers_Hub.bundle/gpt2_tokenizer_config.json": {
+        "bytes": 234,
+        "sha256": "551e26ec611d8d0c8edc3ef72e518a38418cb71f40de1347dd486a595e1557d7"
+      },
+      "swift-transformers_Hub.bundle/t5_tokenizer_config.json": {
+        "bytes": 20746,
+        "sha256": "e0aff0b1de9071e30d9a60a199303b6abe916a64a19932bd1c46992279b41a1f"
+      }
+    },
+    "bundleId": "io.ondeviceai.combined.demo",
+    "sdkCommit": "636a6eb8854db5dff74244c42c3ce0e82bd2be9f",
+    "configuration": "Debug/generic iOS/arm64",
+    "minimumOSVersion": "18.0",
+    "debugDylibSHA256": "566d52831e574f1775877d17665e7c1385a24d73b3c48bf67be08ecf6130669d",
+    "signingKind": "unsigned-device",
+    "symbolListingCounts": {
+      "AppleSpeechRecognizerBackend": 12,
+      "SpeechClient": 3,
+      "SpeechHost": 15
+    }
+  },
+  "historicalBuildSourceCommit": "636a6eb8854db5dff74244c42c3ce0e82bd2be9f",
+  "selectedSourceBindingReceipt": "docs/validation/w3-apple-source-binding-20261116.json",
+  "selectedSourceBindingReceiptSHA256": "2e47145037bef8ad4d62c639d5fbe14a902f7efe4d740479290e9a4d7102cdf9",
+  "historicalReferenceAdoptedAsFinalProductionCandidate": false,
+  "finalProductionCandidate": null,
+  "finalAdoptionRecord": {
+    "sourceRevision": null,
+    "workingTreeOverlayManifest": null,
+    "buildConfiguration": null,
+    "bundleId": null,
+    "appFileManifestSHA256": null,
+    "frameworkManifests": null,
+    "speechBackendAndLocales": null,
+    "shippingCapabilities": null,
+    "distributionBoundary": null,
+    "adoptionDecision": null,
+    "adoptedAt": null,
+    "adoptedBy": null
+  },
+  "separateSustainedProbe": {
+    "sourceIdentity": "sha256:4bcf5c6764ed9ffd9ebf21d6d2898fe2a72a47dd28bf48368519c776c434cc35",
+    "rawReportSHA256": "1d6f4185cee55521f0f87d4a4d9077a4a3a245af552774ccfebf63dfd02b5862",
+    "measuredRequests": 40,
+    "isProductionCandidate": false
+  },
+  "requiredApplicableInputs": {
+    "P1": "Actual adopted source/configuration and App/Framework outputs; selected historical binding does not prove whole-App equivalence.",
+    "P2": "Actual delivered direct/static/transitive composition; Apple system Speech is separate from Android Sherpa; whole combined App includes its MLX/OpenCV/shared scope.",
+    "P3": "Applicable notices retained in the actual chosen SDK/App distribution.",
+    "P4": "Independent acceptance over the same chosen final identity and applicable materials; open findings and R4/R5 dispositions retained."
+  },
+  "R4": {
+    "status": "open",
+    "qualityThresholds": null,
+    "newEvaluationDataset": null,
+    "productScopeDisposition": null
+  },
+  "R5": {
+    "status": "open",
+    "appleProductionBudgets": null,
+    "unmeasuredMetricDispositions": null
+  },
+  "P4": {
+    "status": "open",
+    "reviewer": null,
+    "reviewedCandidateIdentity": null,
+    "materialManifestSHA256": null,
+    "reviewedAt": null,
+    "acceptanceDecision": null,
+    "unresolvedFindings": null
+  },
+  "W3Complete": false,
+  "newBuilds": 0,
+  "newDeviceRuns": 0,
+  "newDownloads": 0,
+  "newRecording": 0,
+  "productionCodeChanged": false,
+  "nextArtifact": "docs/validation/w3-ios-closure-contracts-20261116.md"
+}
