@@ -32,3 +32,7 @@ manifest SHA-256 `7e2133c9292e978ac45050349d03d4b1432f247da6dceda6facd328bb7a624
 可携带原报告、逐请求诊断、UI 故障/零识别恢复及恢复摘要位于 `probes/ios-punctuation-paired6/device-evidence-20261116/`。全部私有设备清单、签名选择、原始构建/测试日志、两份 xcresult、双读报告及只读核验脚本保留在 `.omx/artifacts/w3-punctuation-paired6-device-20261116/`。无新的独立最终源码或发布复核；旧 native/CBC 429 不重试，本次不冒充 CBC 交付或 P4。
 
 这项结果支持后续准备显式标点的生产候选，但本轮没有改生产代码或宣布采用。远场漏词、历史两次 speech typed1110、负例非空、Android 41 个未完成槽位、生产候选身份、完整供应链/发布接受和 R5 预算均保持未决；不能以新六输入分数替换旧 65 全量结果。当前批次已消费，不重放。
+
+## 提交与同步
+
+本地证据/UI修正提交 `8e293a4`（18 文件）；GitHub #15 comment `6914478597`、GitLab #15 note `45419` 均以 GET 回读同 POST 响应。GitLab 只移除一个末尾 LF，首次准备文稿的严格相等失败也保留并核实相同差异。GitHub Wiki commit `386b32bb3747ca042e670235a1fcde43b3a81e21` 已推送并 fetch/show 回读，页面 SHA-256 `0bb8067bf746b765df4611a0676864986de6fdfb29e64dc0af5296999a483eef`，原页面内容完整保留。GitLab Wiki 旧 EOF 通道无新 GET/PUT，仍 pending；源码分支未推送。见[发布收据](w3-punctuation-paired6-device-sync-20261116.json)。
