@@ -32,10 +32,6 @@
 
 新接受 10 个 Core/Speech/AppleSpeech production Swift sources、16 个 selected inputs、14 个 compiler Swift source bindings；保留 18-file 历史 unsigned App。实际 264 checks passed，含 177 protection checks；no fresh build/device/download，不重试已知 quota failure。报告：[Apple 绑定报告](../validation/w3-apple-source-binding-20261116.md)。保留其他编辑与旧失败；W3 完整范围不变，R4/R5/final adoption/P4/W3 均 open。
 
-## 2026-11-16：iOS 状态分层及下一会话入口
-
-[新交接](../HANDOFF-W3-IOS-STATUS-2026-11-16.md)明确：Apple FILE ASR、显式 locale、既有 iPhone 生命周期及 20 周期/40 请求持续观测均已有真机证据，当前无等待解锁、签名修复或无法运行的 iOS 硬阻塞；这些子项不重跑。iOS 仍缺 R4 产品质量裁定、R5/W8 Apple 专属生产预算，以及固定最终生产候选与 P4 独立发布接受。近期 AAR/JNI/DEX/NDK/P1–P3 大量缺口主要属于 Android Sherpa 交付链，不再写成 iOS 功能阻塞。W3 继续 `open`。
-
 ## 2026-11-16 整体证据复审已提交及双端同步
 
 本地5676fab精确15文件；GH#15 comment6903955738/GL#15 note44877/GH Wiki0c9220c及双Wiki SHA6a7d94323fa52cbb92471c201fbd193c5eed7be0d4e72d8d371492c81c90fab7逐字回读。[收据](../validation/w3-integrated-release-review-sync-20261116.json)。hold_release保留；打包Whisper与实验Qwen两轨未接合，六门未过，不用泛化“继续准备”冒充新闭环办法。实体连接变化后原已授权单文件诊断可直接fresh守卫/preflight，不受产品预算或采用选择额外阻挡；单片不保证根因/全量通过。W3完整目标不缩减。

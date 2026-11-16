@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUTC": "2026-11-16T23:01:16.946591+00:00",
+  "sourceHeadBeforeCorrection": "fbd7590bd85fcaf71c86148d4aed031feffa5824",
+  "sourceBranch": "feat/sdk-foundation",
+  "sourceBranchPushed": false,
+  "handoff": {
+    "path": "docs/HANDOFF-W6-F08-NEXT-2026-11-17.md",
+    "bytes": 6512,
+    "sha256": "2760ffad581d8d2ea3da277d3ec3014b98656c65ef52f292717e3ab3be27a6e3"
+  },
+  "removedWrongW3Marker": "<!-- w3-ios-platform-status-20261116 -->",
+  "w6Marker": "<!-- w6-f08-next-session-20261117 -->",
+  "w3Page": "W3语音验收与后续改进",
+  "w6Page": "短视频内容理解",
+  "githubWiki": {
+    "commit": "50c2a701cfdb1b9b6724d5ddef1c8fcfe033fef2",
+    "w3Bytes": 191606,
+    "w3SHA256": "bfdef92220e53d1e4f2b0d9562b304a4c067b4806d39e968c48052f9e77e97e2",
+    "w3OldMarkerCount": 0,
+    "w6Bytes": 6557,
+    "w6SHA256": "0fc98354d1bbc05c696f284638531dc5fcfe65294a2e9df3083713a6fe37f86d",
+    "w6MarkerCount": 1
+  },
+  "gitlabWiki": {
+    "commit": "9aa09d22e6024919ad9ff782f01df1f7716b8c84",
+    "w3Bytes": 174087,
+    "w3SHA256": "8f57fae2a4128dc2c2a76cd107ed8db3f63860557a7546e6c0c8b9c806afaa77",
+    "w3OldMarkerCount": 0,
+    "w6Bytes": 6557,
+    "w6SHA256": "0fc98354d1bbc05c696f284638531dc5fcfe65294a2e9df3083713a6fe37f86d",
+    "w6MarkerCount": 1
+  },
+  "w3WrongMarkerRemovedBoth": true,
+  "w6MarkerUniqueBoth": true,
+  "w6FullPageBytesEqual": true,
+  "w6FullPageSHA256Equal": true,
+  "w6FullPageSHA256": "0fc98354d1bbc05c696f284638531dc5fcfe65294a2e9df3083713a6fe37f86d",
+  "W6Complete": false,
+  "W6Status": "open/not-ready",
+  "qwen35Valid36": "17/36 invalid0",
+  "qwen3Baseline": "16/36 invalid0",
+  "sftValid18": "9/18 -> 8/18",
+  "adapterSaved": false
+}

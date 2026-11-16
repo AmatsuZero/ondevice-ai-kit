@@ -1,10 +1,10 @@
+## 2026-11-17：W6/F08 下一会话边界
+
+[新会话交接](../HANDOFF-W6-F08-NEXT-2026-11-17.md)确认当前主线为短视频理解质量决策：Qwen3.5 valid36 `17/36`、36/18 SFT valid `9→8`；Smol `14/36`、冻结路由最好 `19/36`，均未过门。停止 valid18 调参、旧 valid36 重复扫描、Qwen2 BF16 手机路线和旧 parity 主线。下一工作必须是收窄产品合同、具备独立质量/移动资源依据的新模型，或使用全新独立验证集的训练/蒸馏；Mac Metal 独立质量门先于 iPhone。W6 继续 `open/not-ready`。
+
 ## 2026-11-16 W3 Apple Speech 有界源绑定结果摘要
 
 新接受 10 个 Core/Speech/AppleSpeech production Swift sources、16 个 selected inputs、14 个 compiler Swift source bindings；保留 18-file 历史 unsigned App。实际 264 checks passed，含 177 protection checks；no fresh build/device/download，不重试已知 quota failure。报告：[Apple 绑定报告](w3-apple-source-binding-20261116.md)。保留其他编辑与旧失败；W3 完整范围不变，R4/R5/final adoption/P4/W3 均 open。
-
-## 2026-11-16：W3 平台缺口重新分类
-
-[新会话交接](../HANDOFF-W3-IOS-STATUS-2026-11-16.md)确认 iOS 当前没有功能执行硬阻塞：Apple FILE ASR、显式 locale、既有生命周期及持续观测均保留真机证据。iOS 仍未关闭 R4质量、R5/W8 Apple预算、固定生产候选和P4发布接受；近期 AAR/JNI/DEX/NDK及P1–P3大量余项主要属于Android Sherpa。W3整包继续open，不重跑已验Apple批次。
 
 2026-11-07：[Speech六文件最终限定复核](android-speech-final-review-20261107.md)两条cbc hy4free咨询复审均完成，未新增确认缺陷；沿用102项及Sherpa70项实际执行证据，本批不重跑。原错误解释另存父更正；不代替native双审/整分支或发布批准。[F06官方取证](f06-transfer-evidence-20261107.md)保留3份官方文档GET200及3份SDK头，在本范围未见明确RGB传递函数合同，experimental sRGB/质量门槛保持。助手文档已原样集成，旧冻结exit1及原件保留；10/12/P4/P11/not-ready不变。
 

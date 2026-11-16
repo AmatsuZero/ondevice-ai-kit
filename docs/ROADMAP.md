@@ -1,12 +1,12 @@
+## 2026-11-17 W6/F08：下一会话继续短视频理解质量决策
+
+[W6/F08 下一会话交接](HANDOFF-W6-F08-NEXT-2026-11-17.md)：Qwen3.5 运行阻塞已修，但 valid36 `17/36` 未达 `20/36` 且净增 `+4` 门；36/18 SFT 的 valid 正确数 `9→8`，质量门失败且 adapter 未保存。Smol `14/36`、冻结路由最好 `19/36`，Qwen2 BF16 与旧 parity 路线均停止。后续只评估收窄产品合同、有独立质量与移动资源依据的新模型，或使用全新独立验证集的训练/蒸馏方案；新候选先过 Mac Metal 独立质量门，再考虑 iPhone。W6 保持 `open/not-ready`。
+
 W3 2026-11-16：[Apple/Qwen逐项误差对照](validation/w3-paired-error-analysis-20261116.md)已通过10,879核验/13负例；格式编辑不能解释远场内容遗漏，零新设备/识别，R4/R5/P1–P4/W3仍open。
 
 ## 2026-11-16 W3 Apple Speech 有界源绑定结果摘要
 
 新接受 10 个 Core/Speech/AppleSpeech production Swift sources、16 个 selected inputs、14 个 compiler Swift source bindings；保留 18-file 历史 unsigned App。实际 264 checks passed，含 177 protection checks；no fresh build/device/download，不重试已知 quota failure。报告：[Apple 绑定报告](validation/w3-apple-source-binding-20261116.md)。保留其他编辑与旧失败；W3 完整范围不变，R4/R5/final adoption/P4/W3 均 open。
-
-## 2026-11-16 W3：iOS 功能链已打通，验收门仍分开开放
-
-[W3 平台状态与下一会话交接](HANDOFF-W3-IOS-STATUS-2026-11-16.md)：Apple FILE ASR、显式 locale、既有 iPhone 生命周期及 20-cycle/40-call 持续观测已验收，当前无活跃 iOS 执行硬阻塞且不重跑。iOS 仍有 R4 质量裁定、R5/W8 Apple 专属预算和固定生产候选/P4 接受；AAR/JNI/DEX/NDK/P1–P3 的近期大部分缺口主要是 Android Sherpa 交付链。W3 整包保持 `open`。
 
 ## 2026-11-16 W3整体复审已提交及双端同步
 

@@ -1,3 +1,7 @@
+## 2026-11-17：当前新会话主线是 W6/F08 短视频理解
+
+先读 [W6/F08 下一会话交接](HANDOFF-W6-F08-NEXT-2026-11-17.md)。Qwen3.5 崩溃已修，但 valid36 只有 `17/36`；36/18 SFT 的 valid 正确数从 `9/18` 降到 `8/18`，证据通过而质量门失败。Smol 为 `14/36`，冻结双模型路由最好 `19/36`；Qwen2 BF16 和旧 parity 路线停止。不要在 valid18 继续调参或重复旧 valid36。下一步只从收窄产品合同、引入有独立质量与移动资源依据的新模型、或使用全新独立验证集的训练/蒸馏方案中选择；新候选先过 Mac Metal 独立质量门，再考虑 iPhone 16 Pro Max。保留全部模型、App、证据及 dirty/untracked 文件，W6 仍为 `open/not-ready`。
+
 ## W3 2026-11-16：当前标点SDK的完整组合App构建通过
 
 [实际App验收](validation/w3-apple-sdk-app-candidate-20261116.md)：当前标点SDK已进入完整Speech/Video/MLX/OpenCV组合App：固定c8038cc的203选定输入、复用已核F02 .6 shared与OpenCV，实际unsigned arm64/minOS18构建76.984s通过；92App文件/30实际SwiftFileList/643唯一Swift输入/74+3通知已核，206原内容保持。首checker仅误拒SwiftPM本地OpenCV artifact，原失败保留、同App检查恢复，无重建。零签名/安装/设备识别/模型下载；当前为本地候选，R4/R5/P1–P4/W3仍open。
@@ -31,10 +35,6 @@
 ## 2026-11-16 W3 Apple Speech 有界源绑定结果摘要
 
 新接受 10 个 Core/Speech/AppleSpeech production Swift sources、16 个 selected inputs、14 个 compiler Swift source bindings；保留 18-file 历史 unsigned App。实际 264 checks passed，含 177 protection checks；no fresh build/device/download，不重试已知 quota failure。报告：[Apple 绑定报告](validation/w3-apple-source-binding-20261116.md)。保留其他编辑与旧失败；W3 完整范围不变，R4/R5/final adoption/P4/W3 均 open。
-
-## 2026-11-16：W3 iOS 状态已重新分层，下一会话从独立交接继续
-
-先读 [W3 平台状态与下一会话交接](HANDOFF-W3-IOS-STATUS-2026-11-16.md)。Apple FILE ASR、显式 locale、既有 iPhone 生命周期及 20周期/40请求持续观测已有真机证据；当前无等待解锁、签名修复或无法运行的iOS硬阻塞，不重跑同批、录音、授权或既有生命周期。iOS仍缺R4质量裁定、R5/W8 Apple专属预算及固定生产候选/P4发布接受。AAR/JNI/DEX/NDK和近期P1–P3大部分缺口主要属于Android Sherpa交付链，不能继续概括为iOS阻塞。W3保持open；下次先做iOS lane独立关闭清单，再分别推进Android质量/组成和跨平台发布复审。
 
 ## 2026-11-16 W3整体复审已提交及双端同步
 
