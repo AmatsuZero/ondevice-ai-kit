@@ -1,0 +1,68 @@
+{
+  "verifiedAtUTC": "2026-11-16T00:17:38.483963+00:00",
+  "sourceHEAD": "f2bcbbb33ef3470281fd41a70df2652f34922cbd",
+  "files": [
+    {
+      "path": "artifacts/verification/w3-app-variants-20261115/androidApp-debug.apk",
+      "bytes": 244934281,
+      "sha256": "85aff749d85257b4e9368b618b4fa22ab0b0d47ff2d429a5aa7e2aa087ba6688"
+    },
+    {
+      "path": "artifacts/verification/w3-app-variants-20261115/androidApp-release-unsigned.apk",
+      "bytes": 236322599,
+      "sha256": "43b2c5b9e4beebe1712747bf0943dbbcdcfb742f34d18800ea413b265f9010e1"
+    },
+    {
+      "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-debug.apk",
+      "bytes": 128102798,
+      "sha256": "33c3fdab3ac862f7b7645c5ff7c1820c7a5da806718a4317ff7b25ff43145edc"
+    },
+    {
+      "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-release-unsigned.apk",
+      "bytes": 127673445,
+      "sha256": "affc7579eec2d2e61b7b4b7ec8e798f91f5183aed8549dabf0d7c4f09582608e"
+    },
+    {
+      "path": "artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar",
+      "bytes": 49441341,
+      "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7"
+    },
+    {
+      "path": "artifacts/verification/w3-ndk-notice-integration-20261115/m2-complete/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+      "bytes": 245158,
+      "sha256": "ca0065f23e7c65fe0d30fc0d2035d97543a0b8f8470f5c6e194723fdf535478c"
+    },
+    {
+      "path": "artifacts/verification/w3-ndk-notice-integration-20261115/m2-complete/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT.aar",
+      "bytes": 16220,
+      "sha256": "5eba342740cc766e9f7f226b055257ee68071a5cadc86dd9cdaff8d7f1c6a444"
+    },
+    {
+      "path": "artifacts/verification/w3-ndk-notice-integration-20261115/m2-complete/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT.aar",
+      "bytes": 47127,
+      "sha256": "af39a696fd5ac750b7dcf2f8c08e407956dcab51bd66ebe2e54dcf8cfd99c0e6"
+    },
+    {
+      "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar",
+      "bytes": 1841929,
+      "sha256": "ccb14ff83fabcb11458b798dbc9824748ccdffeec79c9aba789e6ed1cda86b1c"
+    },
+    {
+      "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.10.2/c8705d275d81f19e8afaf3ff9b5bf7a4b6b6c19b/kotlinx-coroutines-android-1.10.2.jar",
+      "bytes": 17826,
+      "sha256": "e713f1f874244115a07571065cffa0f24f5e78300e9720fea16de3af1d75fd41"
+    },
+    {
+      "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.10.2/4a9f78ef49483748e2c129f3d124b8fa249dafbf/kotlinx-coroutines-core-jvm-1.10.2.jar",
+      "bytes": 1479317,
+      "sha256": "5ca175b38df331fd64155b35cd8cae1251fa9ee369709b36d42e0a288ccce3fd"
+    },
+    {
+      "path": "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar",
+      "bytes": 29371,
+      "sha256": "7b0f19724082cbfcbc66e5abea2b9bc92cf08a1ea11e191933ed43801eb3cd05"
+    }
+  ],
+  "newBuildOrDevice": false,
+  "candidateProductionAdoptionNotInferred": true
+}

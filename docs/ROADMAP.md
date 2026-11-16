@@ -1,3 +1,7 @@
+## 2026-11-16 W3 整体证据复审
+
+2026-11-16 W3整体状态更新：supplied-context复审确认Whisper-tiny打包候选轨道与Qwen实验质量轨道分离，已接受增量不等于门闭合；68通知打包保留、24/65后内存停止和1.5GiB实验守卫不变。下一路径为已授权诊断、另立全量合同、P1–P3可逆准备与差异核验、产品预算/采用结果、同一候选P4。文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。 详见[复审报告](validation/w3-integrated-release-review-20261116.md)。
+
 ## 2026-11-16 W3 JNI对应已提交及双端同步
 
 本地ad0f2a6精确68文件；GH#15 comment6903719738/GL#15 note44876/GH Wiki044d152及双Wiki SHAfa58a5b91e287d11813b9ad9adc35933cd57df48289e5b8d68a8a9bb9a68c703逐字回读。[收据](validation/w3-jni-surface-correspondence-sync-20261116.json)。JNI仅名称/显式类型类别子项，6处接收者名义差异仍在；P1–P4/R4/R5/W3仍open、完整目标未缩减。

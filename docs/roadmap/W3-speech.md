@@ -1,3 +1,7 @@
+## 2026-11-16 W3 整体证据复审
+
+2026-11-16已形成W3集成发布证据覆盖与充分性复审修正文稿：结论hold_release，P1–P4、R4、R5仍开放，最终生产候选与同一候选材料仍缺。文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。本条只记录证据边界与下一路径，不表示发布接受。 详见[复审报告](../validation/w3-integrated-release-review-20261116.md)。
+
 ## 2026-11-16 JNI对应已提交及双端同步
 
 本地ad0f2a6精确68文件；GH#15 comment6903719738/GL#15 note44876/GH Wiki044d152及双Wiki SHAfa58a5b91e287d11813b9ad9adc35933cd57df48289e5b8d68a8a9bb9a68c703逐字回读。[同步收据](../validation/w3-jni-surface-correspondence-sync-20261116.json)。120声明名×四ABI覆盖、134源码定义、6处接收者名义差异与8个内存输入负例均保留；P1–P4/R4/R5/W3仍open，goal active。

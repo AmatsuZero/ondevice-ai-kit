@@ -1,0 +1,130 @@
+{
+  "sourceHEAD": "f2bcbbb33ef3470281fd41a70df2652f34922cbd",
+  "files": [
+    {
+      "path": "docs/validation/w3-closure-scope-20261115.md",
+      "bytes": 10581,
+      "sha256": "e898c6427f4068e94e95d62d096cfbb6fd81df7ecd1a80d183554dd59a091706"
+    },
+    {
+      "path": "docs/validation/w3-p1-member-matrix-20261115.md",
+      "bytes": 6156,
+      "sha256": "7a89e9c63fa926c585db4c8378554098a08a83e19f61db8b713512d5b27f67f2"
+    },
+    {
+      "path": "docs/validation/w3-sdk-consumer-binding-20261115.md",
+      "bytes": 4564,
+      "sha256": "34a189d5752ddba0d17c46ad74c0ea7373185c1db08937a203ebbf87153cb1f2"
+    },
+    {
+      "path": "docs/validation/w3-sdk-binding-hy3-review-20261115.md",
+      "bytes": 2328,
+      "sha256": "b6a9dd0a19a50ff99c8d907996c8073f7ddcf3988e038f3c37ad9074a2a264e9"
+    },
+    {
+      "path": "docs/validation/w3-app-variants-delivery-20261115.md",
+      "bytes": 3987,
+      "sha256": "1a6e567d031bb0579169a1910f1e0a12b4230aa8e3718a9bceda621c1a6cace8"
+    },
+    {
+      "path": "docs/validation/w3-jvm-raw-reconstruction-20261115.md",
+      "bytes": 7758,
+      "sha256": "a45c4fbbafb00844bbedecf208adecc759c68141da0c0449a4645acd5cd7acb4"
+    },
+    {
+      "path": "docs/validation/w3-dex-correspondence-20261116.md",
+      "bytes": 5218,
+      "sha256": "ea3d3b0872a478ca44b23640797278b0d4dec4f4ffcef8b7304176aaf9f2296a"
+    },
+    {
+      "path": "docs/validation/w3-jni-surface-correspondence-20261116.md",
+      "bytes": 4618,
+      "sha256": "2f5ab1d6b547aa16aab56c4fa424f954896399ceee6524e27efeceaad8193a35"
+    },
+    {
+      "path": "docs/validation/w3-native-version-binding-20261116.md",
+      "bytes": 5458,
+      "sha256": "e1dfc0eeb80bce0d180cef6954aacd2da7a0f0bf29eea161ebbf475648aeff3b"
+    },
+    {
+      "path": "docs/validation/w3-native-linkage-20261115.md",
+      "bytes": 2718,
+      "sha256": "8d9e649d6afc8bf9d543c88ffa33776cf5318b47fbdd55f27015c243147e40d2"
+    },
+    {
+      "path": "docs/validation/w3-cxx-linkage-rules-20261115.md",
+      "bytes": 3766,
+      "sha256": "e6bac85c4c2cf900affa0ab3fed563cc77e351a9ad04c57dd8ac6fc99b4ada5d"
+    },
+    {
+      "path": "docs/validation/w3-ndk-runtime-provenance-20261115.md",
+      "bytes": 3394,
+      "sha256": "b29bb270c313cae4f2b5dd5358c30eb80d84538f180931151bf419f73f9f3554"
+    },
+    {
+      "path": "docs/validation/w3-ndk-runtime-patch-selection-20261115.md",
+      "bytes": 4788,
+      "sha256": "3d381d4b427396c8d3372d7cb6bec6d142517b0df8b22a0184a66ea0e2484e7d"
+    },
+    {
+      "path": "docs/validation/w3-ndk-offline-body-recovery-20261116.md",
+      "bytes": 3664,
+      "sha256": "1664ec52de7c1976997ca9684cc822068bb5619ece29b8ca7c6023a7cc9c56a9"
+    },
+    {
+      "path": "docs/validation/w3-ndk-notice-integration-20261115.md",
+      "bytes": 3104,
+      "sha256": "9de9133769373ead215d28c4d713271a74a9baa87a56912ddfa5ed2b6002b587"
+    },
+    {
+      "path": "docs/validation/w3-ort-nested-notice-integration-20261115.md",
+      "bytes": 8294,
+      "sha256": "530fe55c1ff782fd5e4d94fff0ce8677441996da31171261eb9dd3804453082a"
+    },
+    {
+      "path": "docs/validation/w3-qwen-model-materials-20261110.md",
+      "bytes": 3121,
+      "sha256": "41141cd5c61c53c9beacd0bf27795249cfa8961d400fb9c23f59f5495a56dde6"
+    },
+    {
+      "path": "docs/validation/w3-qwen-supply-chain-observed-20261110.md",
+      "bytes": 2240,
+      "sha256": "cb1a34f08b29680620adeede3c63eb5ca68ee430c77995e91d699e6610af244a"
+    },
+    {
+      "path": "docs/validation/w3-qwen-arena-observed-20261111.md",
+      "bytes": 4774,
+      "sha256": "5358575620e214a92017263b40bab7375fcc733f217595c69609282a0b5ca17b"
+    },
+    {
+      "path": "docs/validation/w3-r5-resource-options-20261116.md",
+      "bytes": 9137,
+      "sha256": "3544e6ca7c1b89e4362850077a079835bf3ac3dfdf296e4d413bcbbf16563f86"
+    },
+    {
+      "path": "docs/validation/w3-terminal-portability-20261114.md",
+      "bytes": 5511,
+      "sha256": "b2ec8804becb86e0851b8def3aa8cbfb1e207fc17c1b327ec75e582bb2e11abd"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/app-variants-delivery-20261115/app-variants-verification.json",
+      "bytes": 6785,
+      "sha256": "9c9c63f39a497b4558f50f16d88eef30dc6d773cc01892b04ec44645b1c4f674"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/app-variants-delivery-20261115/consumer-runtime-graphs-verified.json",
+      "bytes": 6678,
+      "sha256": "25b88918a29ac5a505314306248321bc4753d26971f5501f4f534a1affa3550a"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/parent-acceptance.json",
+      "bytes": 1472,
+      "sha256": "e292fb86cc19e9ae9aa0d50d4bab658dbe162dc154b2c75c4202bfd2ae501ae4"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/manifest.json",
+      "bytes": 5680,
+      "sha256": "2cadc6fc38fd5234e32c2ed873bf1da3964fa236f15a78a6247be9f541a95776"
+    }
+  ]
+}

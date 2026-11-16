@@ -1,0 +1,202 @@
+{
+  "reviewKind": "supplied-context-integrated-release-evidence-review",
+  "reviewedSourceHEAD": "f2bcbbb33ef3470281fd41a70df2652f34922cbd",
+  "overallDisposition": "hold_release",
+  "overallDispositionReason": "供应文本足以判定不可发布接受但不足以证明P1–P4、R4、R5任一门闭合：两轨未接合到同一固定实际候选，完整适用组成/通知与生产采用/预算仍未验收；R4原65范围和失败/24/65内存停止保留，R5预算草案未批准。保留既有通过局部证据，不虚称全量通过。父端已fresh核12个已有制品与161freeze，无新构建/设备/下载；父端在dispatch后直接读取当前SDK/Demo源，观察BACKEND_ID/defaultBackendId=sherpa.onnx.whisper、NativeWhisper、tiny资产目录，且QwenProductionIntegrationProved=false、sourceChanges=0；这是父端新增观察，不是原复审已读源或Qwen生产集成证明。本supplied-context审阅未独立访问原件、未执行构建/设备/下载、未读取二进制；不把父端或历史收据转述成自身核验，也不形成P4正式接受或法律结论。",
+  "candidateTracks": [
+    {
+      "trackId": "packaging-candidate-track-20261115",
+      "identity": "固定打包候选轨道；SDK后端AAR ca0065f23e7c65fe0d30fc0d2035d97543a0b8f8470f5c6e194723fdf535478c，runtime AAR a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7；四APK：Demo debug 85aff749d85257b4e9368b618b4fa22ab0b0d47ff2d429a5aa7e2aa087ba6688，Demo release-unsigned 43b2c5b9e4beebe1712747bf0943dbbcdcfb742f34d18800ea413b265f9010e1，consumer debug 33c3fdab3ac862f7b7645c5ff7c1820c7a5da806718a4317ff7b25ff43145edc，consumer release-unsigned affc7579eec2d2e61b7b4b7ec8e798f91f5183aed8549dabf0d7c4f09582608e。",
+      "purpose": "Demo与独立Maven consumer的Debug/unsigned Release实际打包候选证据；仍为Whisper-tiny路线，不是Qwen生产集成，不是最终生产采纳证明。父端新增源观察只说明当前SDK/Demo源仍指向sherpa.onnx.whisper/NativeWhisper/tiny资产，未供应给原复审。",
+      "knownAdoptionEvidence": [
+        "父端fresh读取12个既有APK/解析制品身份并核size/SHA，newBuildOrDevice=false；源HEAD不是原构建HEAD，不是fresh rebuild。",
+        "四APK均保留68项通知770479B；Demo含16 ASR SO及16历史extras，consumer恰含16 ASR SO；124运行时类完整baksmali原文本对应已作父端有界接受。",
+        "独立consumer debug/release解析固定backend AAR与runtime AAR，无SDK project component；release为unsigned，仅记录身份和验证范围，不据此发明必须触碰生产签名证书的门禁，本轮不碰签名资产。",
+        "父端dispatch后直接读当前SDK/Demo源：BACKEND_ID/defaultBackendId=sherpa.onnx.whisper、NativeWhisper、tiny资产目录，QwenProductionIntegrationProved=false、sourceChanges=0；此为父端新增观察，不是原复审供应证据，也不是最终生产采用证明。"
+      ],
+      "missingAdoptionEvidence": [
+        "没有最终生产App采用该轨道的批准记录或同一固定候选身份冻结。",
+        "没有完整历史构建输入闭包、native归档保留、递归最终组成和完整适用通知清单。",
+        "没有签名生产交付物、P4独立发布接受，且不能把当前源HEAD等同原构建HEAD；当前两轨尚未接合为同一固定实际候选。"
+      ]
+    },
+    {
+      "trackId": "qwen-experimental-quality-track-20261110",
+      "identity": "实验质量轨道；Qwen六文件987015347B；ModelScope供应仓库zengshuishui/Qwen3-ASR-onnx，Release资产390698077，包SHA 393f8a14e2f5fb96746aaab342997a40641001fbd5bf9592a080a8329178ee96；conversionWeightRevision=null。",
+      "purpose": "Qwen模型许可/归属材料与实验质量探针；与Whisper-tiny打包候选轨道分离，仅用于质量/成本探索，不能自动成为最终生产路线。",
+      "knownAdoptionEvidence": [
+        "六文件size/SHA与供应清单对应，Apache-2.0全文与材料包已本地准备；这不是最终交付物通知保留。",
+        "TECNO Qwen arena-off探针完成24/65，中文20/20 CER 6.78%，第25项因实验1.5GiB样本RSS守卫停止；失败和未执行项保留。"
+      ],
+      "missingAdoptionEvidence": [
+        "精确转换权重revision未知，最终生产模型/runtime包的通知保留、归属和变更材料未验收。",
+        "完整R4原65质量覆盖未完成，近场英文仅4/20，AMI/挑战/静音未执行；R5预算未批准。",
+        "未证明Qwen已进入最终生产候选、签名分发包或独立发布复审；新terminal合同未prepare/消费。父端新增源观察记录QwenProductionIntegrationProved=false，不能把Qwen实验质量当作已采用路线。"
+      ]
+    }
+  ],
+  "gateAssessments": {
+    "P1": {
+      "evidenceRecognized": [
+        "docs/validation/w3-p1-member-matrix-20261115.md",
+        "docs/validation/w3-jvm-raw-reconstruction-20261115.md",
+        "docs/validation/w3-dex-correspondence-20261116.md",
+        "docs/validation/w3-jni-surface-correspondence-20261116.md",
+        "docs/validation/w3-native-version-binding-20261116.md",
+        "docs/validation/w3-sdk-consumer-binding-20261115.md",
+        "docs/validation/w3-sdk-binding-hy3-review-20261115.md",
+        "父端当前SDK/Demo源观察（SherpaAsrBackend.kt、SherpaSession.kt、SherpaWhisperModel.kt、DemoOfflineAsrFactory.kt；父端dispatch后直接读取，未供应给原复审）"
+      ],
+      "closureProved": false,
+      "materialGaps": [
+        "已接受21成员输入矩阵、125 JVM payload逐字节重建、124运行时类完整baksmali对应、120声明名×四ABI共480覆盖、134定义位于20/23翻译单元、显式参数和返回类别各120匹配；这些只是有界子项，不虚称全量通过。",
+        "完整历史AGP/18SDKbackend/native源码与构建输入闭包未证；这不是要求唯一全历史重放，但现有局部证据尚未形成足够覆盖与可信度。",
+        "JNI 6处Companion接收者jclass/jobject名义差异按pitfalls原样记录；无名未用不等于完全相等，也不是loader binding或函数体证明。",
+        "native版本字段12项对应可以作为交叉证据，但字面量可伪造，不证明全native源码、补丁历史apply或最终归档保留。"
+      ],
+      "sufficientNextEvidence": "本地可逆的候选清单、已有输入绑定和差异核验属于现有任务授权；闭合可组合上游构建记录、成员/源码revision/补丁/配置映射、可接受的同输入重建或覆盖-可信度说明及既有JVM/DEX/JNI子项，逐成员说明覆盖和差异；不强制完整历史AGP重放或唯一加密证明，不能留下未解释运行时成员。supplied context未给出一条非重复的已授权本地闭环方法，闭合路径记为未识别；最终P1–P4须绑定到同一固定实际候选，但最终生产采用选择不先于本地可逆准备。",
+      "canAdvanceLocallyWithoutNewAuthority": true
+    },
+    "P2": {
+      "evidenceRecognized": [
+        "docs/validation/w3-ort-nested-notice-integration-20261115.md",
+        "docs/validation/w3-ndk-runtime-provenance-20261115.md",
+        "docs/validation/w3-cxx-linkage-rules-20261115.md",
+        "docs/validation/w3-ndk-runtime-patch-selection-20261115.md",
+        "docs/validation/w3-ndk-offline-body-recovery-20261116.md",
+        "docs/validation/w3-native-linkage-20261115.md"
+      ],
+      "closureProved": false,
+      "materialGaps": [
+        "已知嵌套通知选材、补丁本地apply、NDK两条输入路线、CMake条件化STL规则和ELF声明依赖均已补证，但不是递归最终组成清单。",
+        "134声明中offline recovery后79有正文、55缺失正文；旧76/58为历史。55条是否material取决于最终native是否保留和适用，不能假定全部必须补丁，也不能假定无风险。",
+        "历史cache/link.txt/response、完整链接命令、archive抽取与最终机器码保留是资料缺口；是否material要对应实际保留/输入判断，不能自行升级成唯一充分条件、全机器码形式证明或必须取得所有NDK测试patch。source-host 429后的正文缺口仍在，不重试或换镜像。",
+        "Demo额外16个graphics/face/image/surface SO是历史extras，不能扩展到无关payload，也不能用ASR子集替代完整Demo组成。"
+      ],
+      "sufficientNextEvidence": "现有授权内可对候选清单、已有输入绑定和差异做本地可逆核验；闭合需从最终二进制成员反推直接、静态嵌入和传递组件，结合link/archive/构建材料、适用补丁和通知归属逐层核对；55缺失正文按最终保留和适用性分类，允许组合证据但需覆盖与可信度复审；不要求全机器码形式证明或所有NDK测试patch。supplied context未识别一条非重复的已授权本地闭环方法。",
+      "canAdvanceLocallyWithoutNewAuthority": true
+    },
+    "P3": {
+      "evidenceRecognized": [
+        "docs/validation/w3-ndk-notice-integration-20261115.md",
+        "docs/validation/w3-ort-nested-notice-integration-20261115.md",
+        "docs/validation/w3-app-variants-delivery-20261115.md",
+        "probes/sherpa-runtime-materials/app-variants-delivery-20261115/app-variants-verification.json"
+      ],
+      "closureProved": false,
+      "materialGaps": [
+        "四APK和隔离consumer已证68项通知770479B原字节保留；这反驳完全没有通知交付的说法，但不等于完整适用清单。",
+        "完整适用通知、所需修改说明和归属受P2未决项限制；原141文件材料ZIP和notice-only ZIP负例不是最终通知交付。",
+        "尚未在最终生产候选、签名分发链和消费链上完成逐项适用保留核对；若选Qwen轨道还需模型/runtime传递性通知单独验收。"
+      ],
+      "sufficientNextEvidence": "现有授权内可准备候选通知清单、已有输入绑定和差异核验；闭合从实际候选交付物提取通知并与P2清单逐项核对，保留原文、路径、摘要、修改说明和归属；用真实打包/消费链而非材料ZIP验证保留，并保留删除/改字节负例；若选Qwen再纳入模型/runtime通知，但不要求用户现在先选唯一轨道才能做可逆准备。supplied context未识别一条非重复的已授权本地闭环方法。",
+      "canAdvanceLocallyWithoutNewAuthority": true
+    },
+    "P4": {
+      "evidenceRecognized": [
+        "docs/validation/w3-closure-scope-20261115.md",
+        "docs/validation/w3-sdk-binding-hy3-review-20261115.md",
+        "docs/validation/w3-app-variants-delivery-20261115.md"
+      ],
+      "closureProved": false,
+      "materialGaps": [
+        "没有同一固定生产候选、P1–P3完整证据及适用再分发条件的独立发布接受记录。",
+        "hy3供应文本复核、实现者自报、局部技术复核和本复审均不能替代P4；本轮文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。"
+      ],
+      "sufficientNextEvidence": "在P1–P3齐备并冻结同一候选后，由独立复审明确候选身份、材料范围、覆盖限制、问题处置和接受/不接受结论；本轮只提供最终可集成文稿，不冒称本审阅就是P4接受。",
+      "canAdvanceLocallyWithoutNewAuthority": false
+    },
+    "R4": {
+      "evidenceRecognized": [
+        "docs/validation/w3-closure-scope-20261115.md",
+        "docs/validation/w3-qwen-arena-observed-20261111.md"
+      ],
+      "closureProved": false,
+      "materialGaps": [
+        "原tiny/Apple中文、噪声失败保留；Qwen Android仅24/65完成，第25项在1.5GiB实验守卫后内存停止。1.5GiB实验守卫与未批准的1GiB产品草案独立，不能互换。",
+        "近场英文4/20，AMI 0/12、annotation-negative 0/9、静音0/4未执行；Mac结果、中文子集和来源材料不能填充真机覆盖。",
+        "失败/未执行不得写成成功，也不请求接受失败来关闭R4；模拟器不得替代真机。最近保留证据记录ADB设备清单为空，本轮无ADB/USB检查，不作当前ADB状态fresh断言。",
+        "新合同w3-qwen-terminal-20261114-01已获授权、代码/161freeze已准备、未prepare/消费；实体连接条件改变后按fresh守卫/preflight执行，但不自动补齐原65。"
+      ],
+      "sufficientNextEvidence": "实体连接条件改变后，主代理先按已批准合同w3-qwen-terminal-20261114-01做fresh守卫/preflight并执行单次文件诊断；无需重新批准产品RTF/RSS预算或最终生产采用。诊断用于内存根因/修复，不自动填充原65、不关闭R4/R5。完成根因/修复后，另立固定合同，在授权runner固定候选/设备/输入/协议完成原65全覆盖，逐项保留终态、reference/hypothesis、资源与清理记录；按批准质量口径分cohort裁定并显式保留原失败；旧65/heap不重放。",
+      "canAdvanceLocallyWithoutNewAuthority": false
+    },
+    "R5": {
+      "evidenceRecognized": [
+        "docs/validation/w3-r5-resource-options-20261116.md",
+        "docs/validation/w3-qwen-arena-observed-20261111.md",
+        "docs/validation/w8-resource-dispositions-20261109.md"
+      ],
+      "closureProved": false,
+      "materialGaps": [
+        "RTF≤1与sampledRSS≤1GiB是待批准草案；1.5GiB是既有实验守卫，二者不可互换。诊断合同不需要等待产品RTF/RSS预算批准，但诊断结果不是生产预算验收。",
+        "sampled RSS不是true peak，paced idle不是持续高负载；缺完整Qwen p50/p95、service RSS、GPU/能耗/thermal、release/teardown和批准预算。",
+        "Apple/Sherpa持续观测已验收但边界固定，不能倒推生产通过值或替代Qwen资源结论。"
+      ],
+      "sufficientNextEvidence": "诊断合同可用于定位成本和内存，不要求产品预算，也不得被后续预算草案阻挡；完整生产资源验收仍须产品批准适用预算和复用/warmup策略；同设备、同输入/运行时取得完整run资源证据，区分cold/warm、duration与case wall、采样RSS与true peak，再按批准口径裁定。不得用1.5GiB实验守卫充当1GiB产品草案。",
+      "canAdvanceLocallyWithoutNewAuthority": false
+    }
+  },
+  "rankedNextActions": [
+    {
+      "action": "第一优先：实体连接条件改变后，主代理按已授权单文件诊断合同w3-qwen-terminal-20261114-01重新通过fresh守卫/preflight并执行诊断，定位终态与内存根因；不重批产品RTF/RSS预算，不等待最终生产采用选择。",
+      "prerequisite": "可执行前需要实体连接条件改变和父端fresh preflight通过；本supplied-context轮无新构建/设备/下载、合同仍未prepare/消费，因此feasibleNow=false；不重试新原生/源站429或已知429/配额失败。",
+      "requiredEvidence": "冻结守卫/preflight收据、合同prepare/消费记录、单次文件诊断终态、资源与清理记录、内存根因/修复结论；诊断不自动填充原65或形成R4/R5关闭。",
+      "whyNotDuplicate": "不是重试429，也不是旧65/heap重放；68通知打包、12制品fresh核和161freeze已保留，不重复等价静态证明。",
+      "executorScope": "main_agent_physical_preflight_then_authorized_contract",
+      "feasibleNow": false
+    },
+    {
+      "action": "在现有任务授权内对P1–P3做可逆的候选准备、清单/已有输入绑定与差异核验；若supplied context未给出非重复的已授权本地闭环方法，明确记“未识别”，不把普通候选准备升级为新审批。",
+      "prerequisite": "无需用户现在选Whisper旧失败或Qwen未通过；最终生产采用/预算仍待产品结果，但不得作为本地可逆准备的前置；最终P1–P4须绑定同一固定实际候选，当前两轨未接合仍是缺口。",
+      "requiredEvidence": "候选清单、已有输入绑定、差异表和未解释项；对55缺失body、cache/link/archive缺项按最终相关性分类；允许组合证据，不强制唯一加密证明、全历史AGP重放、全机器码形式证明或所有NDK patch。",
+      "whyNotDuplicate": "不是再核12制品哈希或累积等价静态报告；只绑定已有局部证据与真实差异。",
+      "executorScope": "local_reversible_prep",
+      "feasibleNow": true
+    },
+    {
+      "action": "诊断得出内存根因/修复后，为完整质量/资源验收另立固定合同；同一固定实际候选、设备和输入协议下完成R4原65与R5资源联合裁定。",
+      "prerequisite": "全量run需新固定合同和授权runner；R5生产预算仍需产品批准；1.5GiB实验守卫与1GiB产品草案独立；旧65/heap不重放、模拟器不替代真机。",
+      "requiredEvidence": "原65完整终态、planned inputs accounted、质量cohort裁定、同run RTF/RSS原始数据和资源方法边界、release/teardown、失败/未执行明细；按批准预算与质量口径裁定。",
+      "whyNotDuplicate": "不是用24/65内存停止或诊断片段冒充全量；范围不缩减，失败不抹除。",
+      "executorScope": "physical_device_and_product_budget_for_product_acceptance",
+      "feasibleNow": false
+    },
+    {
+      "action": "P1–P3和R4/R5材料齐备且同一候选固定后，进行正式P4独立发布复审。",
+      "prerequisite": "需要同一固定生产候选、完整上游材料、质量/资源结论和适用再分发条件；本轮supplied-context复审不是P4接受。",
+      "requiredEvidence": "候选身份、审阅材料、覆盖限制、问题处置、再分发条件、接受或不接受记录。",
+      "whyNotDuplicate": "hy3供应文本复审与父端局部核验都不等于完整发布复审。",
+      "executorScope": "final_review",
+      "feasibleNow": false
+    }
+  ],
+  "avoidRepeating": [
+    "不重复12个既有制品身份、四APK哈希和大小fresh核验；父端已做且本审阅未独立执行。",
+    "不在当前源HEAD上重建后称fresh rebuild，也不把fbf059f历史构建或ca0065f2/a8d09d1身份自动等同最终生产候选。",
+    "不重试source-host 429、原native/hy4free429、新原生/源站429或配额失败，不切镜像/凭据，不重搜55条同名NDK正文。",
+    "不把JNI导出名、定义存在、显式类型类别或版本字面量当函数体、loader binding、全native源码或最终归档保留证明；6处接收者差异原样保留。",
+    "不重复ADB/USB恢复、旧FILE/heap、新terminal合同预消费或模拟器冒充真机；不把最近ADB为空证据说成本轮fresh断言，无已确认活跃任务可等待。",
+    "不再生成等价静态报告并称关闭；不选择最终路线、不接受已知失败、不把1.5GiB实验守卫当1GiB产品草案或批准预算。",
+    "不要求用户现在选择Whisper旧失败或Qwen未通过作为P1–P3本地可逆准备或已授权诊断的前置；不把普通候选准备包装成新审批门。",
+    "不强制完整历史AGP重放、唯一加密证明、全机器码形式证明或取得所有NDK测试patch；55缺失body按最终保留和适用性分类。",
+    "不触碰生产签名资产，不从unsigned Release候选身份发明签名证书门禁；不新增事实、审批门或范围变化，保留其他编辑，不递归委派。",
+    "不把supplied-context限制说成仓库穷尽调查或权限不足；不虚构报告路径，不声称已提交/已同步；原始review.json保留不覆盖。"
+  ],
+  "reportMarkdown": "# W3 集成发布证据覆盖与充分性复审修正文稿（2026-11-16）\n\n文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。原始review.json保留不覆盖。本稿不是发布接受、不是法律结论、不是fresh rebuild。审阅者未独立访问原件、未执行构建/设备/下载、未读取二进制；父端此前fresh核12个已有APK/解析制品与161freeze，newBuildOrDevice=false。父端dispatch后另直接读当前SDK/Demo源，观察BACKEND_ID/defaultBackendId=sherpa.onnx.whisper、NativeWhisper、tiny资产目录，QwenProductionIntegrationProved=false、sourceChanges=0；这是父端新增观察，未供应给原复审，不能说原复审已读源，也不能证明Qwen生产集成。\n\n## 结论\n\nhold_release。P1–P4、R4、R5六门仍未通过，P1–P4完整范围不缩减。Whisper-tiny打包候选轨道是实际打包证据：固定AAR/四APK身份、68项通知770479B打包保留、16 ASR SO和consumer绑定等局部证据有效但有限。Qwen实验质量轨道只有模型/归属材料与24/65探针，中文20/20 CER 6.78%，第25项因1.5GiB实验守卫内存停止；失败和未执行项保留。两轨不同，当前尚未接合为同一固定实际候选。24/65后内存停止和1.5GiB守卫不变；R5的sampledRSS≤1GiB是未批准产品草案，与实验守卫独立。\n\n## 证据边界与门状态\n\n| 门 | 结论 | 实质缺口 | 下一充分证据方向 |\n|---|---|---|---|\n| P1 | 未闭合 | 21成员、JVM 125 payload、124运行时类、JNI 480覆盖和native版本字段均为有界子项；完整输入闭包与同一候选绑定未足；JNI 6处Companion接收者差异原样保留 | 本地可逆清单/已有输入绑定/差异核验在现有授权内；闭合可组合上游记录、revision/补丁/配置映射、同输入重建或覆盖-可信度说明；不要求唯一加密证明或全历史AGP重放 |\n| P2 | 未闭合 | 递归最终组成、archive/链接/机器码保留为资料缺口；55缺失body按最终保留与适用性判断，不能要求所有NDK测试patch；source-host 429不重试 | 从最终成员反推直接、静态嵌入和传递组件，结合构建/链接材料、适用补丁和通知归属逐层核对，允许组合证据并接受覆盖与可信度复审 |\n| P3 | 未闭合 | 68通知770479B已证实际打包保留，但不是完整适用清单；签名交付链和Qwen若入选的通知仍未验 | 从实际候选交付物提取通知并与P2逐项核对，保留原文、路径、摘要、修改说明与归属；真实打包/消费链优先于材料ZIP |\n| P4 | 未闭合 | 无同一固定候选的独立完整发布接受；本稿和父端局部核验都不能替代 | P1–P3齐备后由独立复审明确候选身份、材料范围、覆盖限制、问题处置和接受/不接受结论 |\n| R4 | 未闭合 | 原65范围不缩减；tiny/Apple失败、Qwen 24/65内存停止、英文4/20及未执行项保留；最近ADB为空证据不等于本轮fresh状态 | 先按已授权诊断合同定位内存根因/修复，再另立固定合同做原65完整覆盖；旧65/heap不重放，模拟器不替代真机 |\n| R5 | 未闭合 | RTF≤1与sampledRSS≤1GiB是待批草案；1.5GiB是实验守卫；采样RSS非true peak，paced idle非持续高负载 | 产品批准预算和复用策略后，同设备/输入/运行时取得完整资源证据，区分cold/warm、duration与case wall、采样RSS与true peak |\n\n## 已授权诊断与闭环顺序\n\n单文件诊断合同w3-qwen-terminal-20261114-01已获授权，代码/161freeze已准备，未prepare/消费。实体连接条件改变后，主代理先重新通过fresh守卫/preflight，再按固定合同执行诊断；这不需要重新批准产品RTF/RSS预算，也不需要最终生产采用选择。诊断用于终态和内存根因/修复，不自动填充原65，不关闭R4/R5。\n\n可继续条件按“诊断→内存根因/修复→完整质量/资源验收→最终候选/发布”分段成立：第一段在实体连接与preflight后可按已授权合同执行；第二段依诊断结果决定修复；第三段需另立固定全量合同、授权runner、原65与可靠资源证据，并按产品预算裁定；第四段需P1–P4与R4/R5在同一固定实际候选上齐备后再做P4。后续预算或采用结果不能倒过来阻挡已授权的前段诊断。\n\n## 下一路径、阻断与范围变化\n\n第一优先是上述诊断；执行前feasibleNow=false，原因是实体连接/preflight条件未在本supplied-context轮满足，不是因为需要新审批。P1–P3的本地可逆候选准备、清单/已有输入绑定与差异核验在现有任务授权内；supplied context未给出一条非重复的已授权本地闭环方法时，明确写“未识别”。不得要求用户现在选择Whisper旧失败或Qwen未通过作为推进前提，也不得把产品先选唯一轨道强加为所有P1–P3补证和已授权设备诊断的串行前置。最终P1–P4必须同一固定实际候选，当前两轨未接合仍是真缺口。\n\n可以停止无依据地继续累积等价静态证明，但不能把supplied-context限制说成仓库穷尽调查或权限不足。阻断为：实体连接条件未改变、固定全量合同未立、P1–P3闭合方法未识别、产品预算/采用结果未形成、同一候选材料未齐。范围变化无：不新增事实、审批门或范围；保留其他编辑，不递归委派；本轮不碰签名资产。R1–R3按TECNO已知限制保留，不重开AiAi、麦克风或下载。\n\n## 审阅与父端分工\n\nhy3供应文本复审只提供可集成文稿和证据边界判断，不冒称直接执行、不替代父端验收。父端负责实际字节核验、fresh preflight、构建/设备收据和最终接受裁定；提交/同步另留收据。",
+  "publicationBody": "<!-- w3-integrated-release-review-20261116 -->\n文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。原始review.json保留不覆盖。W3本轮结论为hold_release，不是发布接受。源HEAD为f2bcbbb33ef3470281fd41a70df2652f34922cbd；审阅者未独立访问原件、未执行构建/设备/下载或读取二进制。父端此前fresh核12个已有制品与161freeze，另在dispatch后直接读当前SDK/Demo源，观察sherpa.onnx.whisper、NativeWhisper、tiny资产目录；这是父端新增观察，未供应给原复审，也不是Qwen生产集成证明。\nWhisper-tiny打包候选轨道与Qwen实验质量轨道必须分开：前者有固定AAR/四APK、68通知770479B及部分JVM/DEX/JNI对应；后者有六文件987015347B材料和24/65探针，24/65后因1.5GiB实验守卫内存停止。两者都不是P4接受，且尚未接合为同一固定实际候选。P1完整输入/采用、P2递归组成、P3完整通知、P4独立接受、R4原65质量、R5批准预算仍开放，范围不缩减。\n已授权单文件诊断合同w3-qwen-terminal-20261114-01在实体连接改变并经fresh守卫/preflight后可执行，不需重批产品RTF/RSS预算或最终采用；诊断不填充原65。全量质量/资源验收需另立固定合同，最终发布还需同一候选齐备和P4。P1–P3的本地可逆准备在现有授权内，闭合方法未识别时如实写出，不要求用户现在选轨道。source-host 429、新原生/源站429、旧配额失败、ADB/USB旧循环和模拟器替代均不重试；不提供法律结论，也不虚构提交或同步收据。",
+  "roadmapPrefix": "2026-11-16已形成W3集成发布证据覆盖与充分性复审修正文稿：结论hold_release，P1–P4、R4、R5仍开放，最终生产候选与同一候选材料仍缺。文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。本条只记录证据边界与下一路径，不表示发布接受。",
+  "globalRoadmapPrefix": "2026-11-16 W3整体状态更新：supplied-context复审确认Whisper-tiny打包候选轨道与Qwen实验质量轨道分离，已接受增量不等于门闭合；68通知打包保留、24/65后内存停止和1.5GiB实验守卫不变。下一路径为已授权诊断、另立全量合同、P1–P3可逆准备与差异核验、产品预算/采用结果、同一候选P4。文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。",
+  "handoffPrefix": "交接提示：文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。原始review.json保留不覆盖，本条不表示已提交、已同步或发布接受。保持R1–R5与P1–P4完整范围、质量失败和预算未批准；实体连接改变后先按已授权诊断合同执行，不重批产品预算等前段，也不把诊断当全量。不要重试已知429/配额、ADB/USB旧循环，不递归委派，不碰签名资产，不把报告生成本身当关闭动作。",
+  "missingContext": [
+    "本审阅未直接读取AAR/APK/ZIP/ELF/DEX原始字节或二进制成员，只消费供应文档、收据和父端fresh身份转述；supplied-context限制不是仓库穷尽调查或权限不足声明。",
+    "原复审供应文本未包含父端dispatch后直接读取的当前SDK/Demo源观察；该观察只作为父端新增上下文，不能追溯为原复审已读源或Qwen生产集成证明。",
+    "缺最终生产候选的产品批准、签名交付物、变体范围和发布/再分发条件；unsigned Release仅用于身份和验证范围记录。",
+    "缺历史CMakeCache、link.txt/response、完整link命令、archive抽取与最终机器码保留证据；这些是否为material须对应最终输入和保留判断。",
+    "缺55条NDK缺失正文之外的最终相关性判定；不能由供应文本推断其是否进入最终native或是否必须补丁。",
+    "缺完整P2递归组成清单、完整适用通知清单、修改说明及最终包内保留核对。",
+    "缺R4原65完整真机终态、原始报告和设备可用性；最近保留证据记录ADB设备清单为空，本轮无ADB/USB检查，不推断当前ADB状态；诊断合同仍未prepare/消费。",
+    "缺R5批准预算、复用/warmup策略、完整RTF/RSS原始数据和true peak/service/GPU/能耗等方法边界；1.5GiB实验守卫不能替代1GiB产品草案。",
+    "缺P4同一固定候选的独立发布接受记录；本稿不提供法律结论。"
+  ]
+}
