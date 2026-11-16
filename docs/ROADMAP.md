@@ -1,3 +1,7 @@
+## 2026-11-16 W3 JNI对应已提交及双端同步
+
+本地ad0f2a6精确68文件；GH#15 comment6903719738/GL#15 note44876/GH Wiki044d152及双Wiki SHAfa58a5b91e287d11813b9ad9adc35933cd57df48289e5b8d68a8a9bb9a68c703逐字回读。[收据](validation/w3-jni-surface-correspondence-sync-20261116.json)。JNI仅名称/显式类型类别子项，6处接收者名义差异仍在；P1–P4/R4/R5/W3仍open、完整目标未缩减。
+
 ## 2026-11-16 有界证据更新
 
 W3 新增 JNI surface/type-category 对应子项，主代理实际材料检查已接受：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；目标未缩减，P1/P2/P3/P4/R4/R5/W3 仍未关闭。详见 [验证](validation/w3-jni-surface-correspondence-20261116.md)。

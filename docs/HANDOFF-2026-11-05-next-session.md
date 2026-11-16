@@ -1,3 +1,7 @@
+## 2026-11-16 W3 JNI对应已提交及双端同步
+
+本地ad0f2a6精确68文件；GH#15 comment6903719738/GL#15 note44876/GH Wiki044d152及双Wiki SHAfa58a5b91e287d11813b9ad9adc35933cd57df48289e5b8d68a8a9bb9a68c703逐字回读。[收据](validation/w3-jni-surface-correspondence-sync-20261116.json)。marker已用勿重发、源码未push；两hy3及三发布均终态、无待poll。120声明名/四ABI480覆盖、134定义位于20/23单元，显式参数/返回类别各120匹配；114接收者名义匹配/6差异，不静默归一化。8内存验收输入负例不称真实ELF修改。实际3次新LLVM、23源码文本+1官方规范下载、2源码复用；零新构建/模型runtime二进制下载/设备。161freeze与176本轮原保护不变；无新缓存、零删除，所有原始材料保留。P1–P4/R4/R5/W3仍open、goal active；下一核心缺口仍为真机24/65后的内存定位与完整质量、预算以及完整native来源/组成/生产发布接受；不重放旧quota/源站429/USB/FILE，不以更多同类局部静态证据冒充完成。实体连接变化后才fresh未消费单文件合同，1.5GiB守卫保持。
+
 ## 2026-11-16 交接
 
 新增子项：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；P1/P2/P3/P4/R4/R5/W3 仍未关闭。证据与负例边界见 [验证](validation/w3-jni-surface-correspondence-20261116.md)；提交、Issue、Wiki 另行记录。

@@ -1,3 +1,7 @@
+## 2026-11-16 JNI对应已提交及双端同步
+
+本地ad0f2a6精确68文件；GH#15 comment6903719738/GL#15 note44876/GH Wiki044d152及双Wiki SHAfa58a5b91e287d11813b9ad9adc35933cd57df48289e5b8d68a8a9bb9a68c703逐字回读。[同步收据](../validation/w3-jni-surface-correspondence-sync-20261116.json)。120声明名×四ABI覆盖、134源码定义、6处接收者名义差异与8个内存输入负例均保留；P1–P4/R4/R5/W3仍open，goal active。
+
 ## 2026-11-16 W3 JNI 表面对应
 
 新增跨层 JNI 导出名与显式类型类别对应子项：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；P1/P2/P3/P4/R4/R5/W3 仍未关闭。仅名称/类型类别证据，详见 [验证](../validation/w3-jni-surface-correspondence-20261116.md)。
