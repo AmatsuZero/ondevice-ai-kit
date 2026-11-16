@@ -1,0 +1,35 @@
+{
+  "sourceEvidenceCommit": "1fa949a27f5c26dc1ff15748916f9c78c93127f2",
+  "executedAtHEAD": "38306591fe1b3478b6d6761bf278af98d7f92ab3",
+  "runId": "w3-apple65-file-20261116-01",
+  "marker": "<!-- w3-apple65-device-20261116 -->",
+  "issues": {
+    "github": {
+      "id": 6910441325,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6910441325",
+      "exactReadback": true
+    },
+    "gitlab": {
+      "id": 45138,
+      "readbackExactExceptKnownFinalLF": true,
+      "removedExactlyOneFinalLF": true
+    },
+    "duplicatePosts": false,
+    "bodySHA256": "671b3b1b8d711f6041d6c1e074d58295c1276250460c5f809fdf33e6ef8b2247"
+  },
+  "githubWiki": {
+    "commit": "5576d2198b7e6c31e95a745921cda2477951f836",
+    "remoteReadbackExact": true,
+    "pageSHA256": "8c1700f96b0674ef40fdebb8554d8ebf7e6a2df6553a46c29b2661e8af915c47",
+    "uniqueMarker": true
+  },
+  "gitlabWiki": {
+    "status": "pending-known-EOF",
+    "newGETOrPUTAttempts": 0,
+    "twoWikisEqual": null,
+    "pendingBody": ".omx/artifacts/w3-apple65-device-20261116/publication/body.md"
+  },
+  "sourceBranchPushed": false,
+  "P4Accepted": false,
+  "W3Complete": false
+}
