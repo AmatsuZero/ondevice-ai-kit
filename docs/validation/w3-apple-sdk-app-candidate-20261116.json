@@ -3931,5 +3931,14 @@
     "appFileTreeStillMatches": true,
     "preserved": "Full App, source archive/snapshot, actual compiler FileLists, objects, dependency inputs, xcresult, logs and all receipts",
     "remainingCandidates": "Other compilation intermediates retained as build evidence; global caches untouched"
+  },
+  "compilationScope": {
+    "buildFileLists": 30,
+    "buildUniqueSwiftInputs": 643,
+    "uiTestFileLists": 1,
+    "uiTestUniqueSwiftInputs": 1,
+    "otherFileLists": 29,
+    "otherUniqueSwiftInputs": 642,
+    "uiTestsExecuted": 0
   }
 }

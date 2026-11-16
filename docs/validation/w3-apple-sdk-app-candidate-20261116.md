@@ -10,7 +10,7 @@
 | 依赖 | 12 个原固定 SwiftPM checkout、2 个 C 子模块，构建后逐文件/模式/Git blob 和 revision 核对；两份 Package.resolved 相同，未更新依赖 |
 | shared framework | 两个平台均复用已有 F02 `.6` 产品，二进制分别匹配原生产接入收据；构建配置仍为 `0.144.6-ondevice-f02.6`。没有误用旧组合包的未打补丁 `0.144.6`，也没有声称重新构建 Kotlin |
 | OpenCV | 已有 static XCFramework 完整文件树匹配后隔离复制，没有新下载或 native 重建；实际 App 未动态 embed opencv2.framework |
-| 实际编译 | 30 份真实 SwiftFileList、643 个唯一 Swift 源输入均保留。包含当前 SpeechHost 与 AppleSpeechRecognizerBackend；后者 SHA-256 为 `e202d3d0d0efa80410f22d3e9d475ea51cdeb810acba2930a86d23afd626d952` |
+| 实际编译 | 整次构建 30 份真实 SwiftFileList、643 个唯一 Swift 源输入均保留；其中 UI test target 1 份清单/1 个输入仅编译、零执行，其他目标 29 份清单/642 个输入。包含当前 SpeechHost 与 AppleSpeechRecognizerBackend；后者 SHA-256 为 `e202d3d0d0efa80410f22d3e9d475ea51cdeb810acba2930a86d23afd626d952` |
 | App | `io.ondeviceai.combined.demo`、arm64、MinimumOSVersion 18.0、ODAISDKCommit 为上述提交；92 个实际文件逐一固定摘要 |
 | 通知 | 74 份 F02 通知与 3 份 OpenCV/YuNet/SFace 通知在实际 App 中逐字节保留；不是全部组件许可适用性或完整生产通知接受 |
 | 签名 | codesign 回读为未签名，没有 embedded.mobileprovision 或资源签名目录；没有创建/使用签名身份，未开启 Documents 共享 |
@@ -26,3 +26,7 @@
 App、真实 FileLists、对象/中间产物、xcresult、源归档、固定依赖及所有日志保留在 `.omx/artifacts/w3-apple-sdk-app-candidate-20261116/`。可携带记录位于 `probes/apple-speech-combined-candidate-20261116/`；[机器收据](w3-apple-sdk-app-candidate-20261116.json)记录 App/编译输入与通知身份。清理仅限本任务闲置、可再生的模块/编译缓存与源码索引，精确清单另存，不删除产品或唯一证据。
 
 这是当前源码的本地未签名 App 候选，尚未固定为最终 shipping App。Apple 远场/负例质量、Android 41 项缺失及内存诊断、适用预算、同候选完整来源/组成与独立发布接受仍未完成；R4/R5/P1–P4/W3 继续 open。没有新增设备、麦克风、AiAi、模型下载或识别请求；已消费批次不重放，旧准备/实验收据保持历史身份。
+
+## 提交与记录同步
+
+构建与实包证据提交 `2e2dd84`；源码分支未推送。GitHub Issue 15 评论 `6917189222`、GitLab 项目 461 Issue 15 备注 `45484` 各 POST 一次并 GET 回读，GitLab 只移除一个末尾 LF。GitHub Wiki 提交 `1b160bc5eb5fd073bde28369a67795904b7be510` 已推送，远端引用与完整页面回读一致，原页面内容保留；页面 SHA-256 为 `43e388674cf1f0ebb4bb05b64954b66f9da59531fc2502a78aacbc3cd01c3009`。GitLab Wiki 旧 EOF 通道继续 pending，本轮零新 GET/PUT。见[同步收据](w3-apple-sdk-app-candidate-sync-20261116.json)；记录同步不是软件发布。
