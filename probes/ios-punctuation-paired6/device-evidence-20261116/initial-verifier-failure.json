@@ -1,0 +1,8 @@
+{
+  "status": "failed-after-signing-before-installation",
+  "failure": "AssertionError: W3PunctuationPaired6UITests-Runner",
+  "cause": "The verifier recognized only thin Mach-O; the Xcode test runner is a one-architecture FAT container and was mistaken for a resource.",
+  "recovery": "read-only verification of all thin and FAT executable sections and all non-signature resources; no re-sign or rebuild",
+  "recognitionStarted": false,
+  "installationStarted": false
+}

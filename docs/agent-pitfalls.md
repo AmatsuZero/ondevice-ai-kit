@@ -1,3 +1,8 @@
+## W3 配对 FILE：授权 predicate 与 FAT 启动器 — 2026-11-16
+
+- 真机首UI在Run前报NSUnknownKeyException：要求label属性的NSPredicate收到NSString `alert.label`。Documents空/0 Run、进程自然exit65后，仅改为 `["label": alert.label]`，六host文本检查及新driver构建/签名通过，fresh守卫后同一未消费批次完成12请求；实际仅1 Run。保留两次UI invocation，不称自动识别重试或以build-only覆盖TCC分支；不泛化点击其它权限。
+- 签名比较器只认薄Mach-O，误把Xcode单架构FAT runner当资源，签后hash断言失败。保留原失败，仅只读解析FAT切片后比较代码section和非签名资源，13映像/80资源通过；不重新签名/构建求通过。证据 `.omx/artifacts/w3-punctuation-paired6-device-20261116/`，边界见 [结果](validation/w3-punctuation-paired6-device-20261116.md)。
+
 ## W3配对runner供应：exit0/空输出仍可能是stderr429（2026-11-16）
 
 新hy3请求3.028秒终态exit0、stdout0，stderr明确429并报告2026-11-17 13:40:39 UTC+8重置；无候选、无modelUsage。不能称仍在生成、成功交付、构建失败或已恢复额度。保留原提示/两输出/进程及父裁定，停线无自动重试/换模/付费fallback。用户随后仅对本次隔离配对runner明确准许主代理本地实现；实现来源记主代理例外，不冒充CBC交付，不扩为生产改动或新识别授权。另首Core检查调用把manifest路径误传给fixture根目录参数，保留失败仅修调用，506检查随后通过。证据.omx/artifacts/w3-punctuation-paired6-preparation-20261116/；[边界](validation/w3-punctuation-control-progress-20261116.md)。

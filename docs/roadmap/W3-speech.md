@@ -1,3 +1,7 @@
+## W3 2026-11-16：标点配对真机批次完成
+
+[设备结果](../validation/w3-punctuation-paired6-device-20261116.md)：用户明确批准的一次六输入12请求已完成，12非空/12清理/输入后检通过，终态双读同字节；中文CER18/86→16/86、近英WER13/54→10/54，格式编辑7→5及5→2，内容类保持11及8，符合冻结探索条件。首UI授权predicate在零Run/空报告时修正，修正后仅一次Run，无识别重试；45普通App元数据保持、alias卸载、普通App launch accepted。未开麦/下载/AiAi、未改生产代码或重放旧65，未宣布生产采用/P4/R4/R5/W3完成。旧准备授权false为历史快照，本批新授权已消费，不重放。
+
 ## 2026-11-16：同期标点配对runner本地准备通过
 
 [本次进展](../validation/w3-punctuation-control-progress-20261116.md)：用户明确允许主代理本地完成本次隔离runner后，六输入12请求AB/BA计划37检查、继承Core506、unsigned App/driver构建及实包330检查通过；17真实Swift输入、两独立arm动态framework/同Core与Speech、65WAV身份均固定。仅A unset/B guarded true，不推断默认或效果；旧65单臂包保留不执行，原Apple65授权已消费。新hy3 stderr429/exit0/零候选保留并停线（重置观察2026-11-17 13:40:39 UTC+8）；本次实现来自主代理例外。零新设备/识别/下载，待新12请求执行授权；没有独立最终源码或P4接受，R4/R5、P1–P4/W3仍open。

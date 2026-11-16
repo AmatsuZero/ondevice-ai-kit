@@ -1,5 +1,11 @@
 [
   {
+    "file": "Apple65UITests.swift",
+    "old": "speechTextPredicate.evaluate(with: alert.label)",
+    "new": "speechTextPredicate.evaluate(with: [\"label\": alert.label])",
+    "count": 1
+  },
+  {
     "file": "DriverHost.swift",
     "old": "W3Apple65DriverHost",
     "new": "W3PunctuationPaired6DriverHost",

@@ -1,0 +1,1023 @@
+{
+  "app" : {
+    "build" : "1",
+    "bundleId" : "io.ondeviceai.probe.w3punctpair20261116",
+    "os" : "Version 27.2.1 (Build 24B156)",
+    "version" : "1.0"
+  },
+  "backendId" : "apple.speech.recognizer",
+  "finishedAt" : "2026-11-16T10:48:45.494Z",
+  "gateConclusion" : "open-no-quality-or-budget-pass",
+  "inputBindingSHA256" : "b3838b23136aa1be8c760915b565a2f192976ae3299631fcd3470f8df5334e88",
+  "manifestSHA256" : "7e2133c9292e978ac45050349d03d4b1432f247da6dceda6facd328bb7a62453",
+  "measurementScope" : "app-pid-rss-only-no-systemSpeech-truepeak-gpu-energy-thermal-claim",
+  "rows" : [
+    {
+      "addsPunctuationConfiguration" : "unset",
+      "admissionUptimeNanos" : 554299122631875,
+      "arm" : "A",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 4.0709e-05,
+        "drainSeconds" : 8.225e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "mandarin",
+        "id" : "fleurs-cmn_hans_cn-1698",
+        "locale" : "zh-CN",
+        "pcmSHA256" : "c0cf0ea82e08a6e7f364626fdecf3c4f7d8dedbf3d3b24f96ff029fc1ca312a4",
+        "reference" : "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小粒子组成。",
+        "samples" : 155520,
+        "wavBytes" : 311084,
+        "wavPath" : "audio\/fleurs-cmn_hans_cn-1698.wav",
+        "wavSHA256" : "6d2924e2a9c30ae62c18f020222dbd35cc71e9f0e54ac0427cc68f87afe468a1"
+      },
+      "confidence" : 0.8995,
+      "index" : 1,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 1,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.435807625,
+      "recognitionEndUptimeNanos" : 554299600443416,
+      "recognitionStartUptimeNanos" : 554299164635791,
+      "requestLocale" : "zh_CN",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.47796825,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.097666,
+          108.090042,
+          101.373833,
+          107.314625,
+          107.41724999999997,
+          53.67483400000003
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.097666,
+        "maxBytes" : 118521856,
+        "maxGapMs" : 108.090042,
+        "minBytes" : 115326976,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 6,
+        "samples" : [
+          {
+            "bytes" : 115326976,
+            "offsetMs" : 0.097666
+          },
+          {
+            "bytes" : 118210560,
+            "offsetMs" : 108.187708
+          },
+          {
+            "bytes" : 118439936,
+            "offsetMs" : 209.561541
+          },
+          {
+            "bytes" : 118439936,
+            "offsetMs" : 316.876166
+          },
+          {
+            "bytes" : 118407168,
+            "offsetMs" : 424.293416
+          },
+          {
+            "bytes" : 118521856,
+            "offsetMs" : 477.96825
+          }
+        ],
+        "samplingWindowEndNanos" : 554299600600125,
+        "samplingWindowStartNanos" : 554299122631875,
+        "totalAttempts" : 6,
+        "trailingGapMs" : 53.67483400000003
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "宇宙中的一切都有物质构成而所有的物质都有被称为原子的微小颗粒组成",
+      "wholeRequestWallSeconds" : 0.477811541
+    },
+    {
+      "addsPunctuationConfiguration" : "true",
+      "admissionUptimeNanos" : 554299603445666,
+      "arm" : "B",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 3.275e-05,
+        "drainSeconds" : 2.1709e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "mandarin",
+        "id" : "fleurs-cmn_hans_cn-1698",
+        "locale" : "zh-CN",
+        "pcmSHA256" : "c0cf0ea82e08a6e7f364626fdecf3c4f7d8dedbf3d3b24f96ff029fc1ca312a4",
+        "reference" : "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小粒子组成。",
+        "samples" : 155520,
+        "wavBytes" : 311084,
+        "wavPath" : "audio\/fleurs-cmn_hans_cn-1698.wav",
+        "wavSHA256" : "6d2924e2a9c30ae62c18f020222dbd35cc71e9f0e54ac0427cc68f87afe468a1"
+      },
+      "confidence" : 0.8969281,
+      "index" : 2,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 1,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.266218541,
+      "recognitionEndUptimeNanos" : 554299871470541,
+      "recognitionStartUptimeNanos" : 554299605252000,
+      "requestLocale" : "zh_CN",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.268115167,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.095875,
+          109.930792,
+          100.480333,
+          57.60816699999998
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.095875,
+        "maxBytes" : 118751232,
+        "maxGapMs" : 109.930792,
+        "minBytes" : 118521856,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 4,
+        "samples" : [
+          {
+            "bytes" : 118521856,
+            "offsetMs" : 0.095875
+          },
+          {
+            "bytes" : 118702080,
+            "offsetMs" : 110.026667
+          },
+          {
+            "bytes" : 118702080,
+            "offsetMs" : 210.507
+          },
+          {
+            "bytes" : 118751232,
+            "offsetMs" : 268.115167
+          }
+        ],
+        "samplingWindowEndNanos" : 554299871560833,
+        "samplingWindowStartNanos" : 554299603445666,
+        "totalAttempts" : 4,
+        "trailingGapMs" : 57.60816699999998
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "宇宙中的一切都有物质构成，而所有的物质都有被称为原子的微小颗粒组成",
+      "wholeRequestWallSeconds" : 0.268024875
+    },
+    {
+      "addsPunctuationConfiguration" : "true",
+      "admissionUptimeNanos" : 554299874313625,
+      "arm" : "B",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 3.5292e-05,
+        "drainSeconds" : 2.9208e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "mandarin",
+        "id" : "fleurs-cmn_hans_cn-1871",
+        "locale" : "zh-CN",
+        "pcmSHA256" : "03a066eba992c84246696180810c01b61d5b7d050bc41e5b8b3b8cc6c7e5fd62",
+        "reference" : "在中东温暖的气候中，房子并不是多重要。",
+        "samples" : 111360,
+        "wavBytes" : 222764,
+        "wavPath" : "audio\/fleurs-cmn_hans_cn-1871.wav",
+        "wavSHA256" : "1db5f865950e86db6b0b1c35c1f9ec17dcd43a32e82648cd0da41e7c0c9f17b8"
+      },
+      "confidence" : 0.97732246,
+      "index" : 3,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 2,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.181648041,
+      "recognitionEndUptimeNanos" : 554300056840666,
+      "recognitionStartUptimeNanos" : 554299875192625,
+      "requestLocale" : "zh_CN",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.182638875,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.035583,
+          109.184208,
+          73.41908400000001
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.035583,
+        "maxBytes" : 118816768,
+        "maxGapMs" : 109.184208,
+        "minBytes" : 118751232,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 3,
+        "samples" : [
+          {
+            "bytes" : 118751232,
+            "offsetMs" : 0.035583
+          },
+          {
+            "bytes" : 118800384,
+            "offsetMs" : 109.219791
+          },
+          {
+            "bytes" : 118816768,
+            "offsetMs" : 182.638875
+          }
+        ],
+        "samplingWindowEndNanos" : 554300056952500,
+        "samplingWindowStartNanos" : 554299874313625,
+        "totalAttempts" : 3,
+        "trailingGapMs" : 73.41908400000001
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "在中东温暖的气候中，房子并不是多重要",
+      "wholeRequestWallSeconds" : 0.182527041
+    },
+    {
+      "addsPunctuationConfiguration" : "unset",
+      "admissionUptimeNanos" : 554300059743250,
+      "arm" : "A",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 2.1875e-05,
+        "drainSeconds" : 2.1291e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "mandarin",
+        "id" : "fleurs-cmn_hans_cn-1871",
+        "locale" : "zh-CN",
+        "pcmSHA256" : "03a066eba992c84246696180810c01b61d5b7d050bc41e5b8b3b8cc6c7e5fd62",
+        "reference" : "在中东温暖的气候中，房子并不是多重要。",
+        "samples" : 111360,
+        "wavBytes" : 222764,
+        "wavPath" : "audio\/fleurs-cmn_hans_cn-1871.wav",
+        "wavSHA256" : "1db5f865950e86db6b0b1c35c1f9ec17dcd43a32e82648cd0da41e7c0c9f17b8"
+      },
+      "confidence" : 0.9788,
+      "index" : 4,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 2,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.144965375,
+      "recognitionEndUptimeNanos" : 554300205600458,
+      "recognitionStartUptimeNanos" : 554300060635083,
+      "requestLocale" : "zh_CN",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.14595025,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.026916,
+          104.326417,
+          41.596917000000005
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.026916,
+        "maxBytes" : 118849536,
+        "maxGapMs" : 104.326417,
+        "minBytes" : 118833152,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 3,
+        "samples" : [
+          {
+            "bytes" : 118833152,
+            "offsetMs" : 0.026916
+          },
+          {
+            "bytes" : 118833152,
+            "offsetMs" : 104.353333
+          },
+          {
+            "bytes" : 118849536,
+            "offsetMs" : 145.95025
+          }
+        ],
+        "samplingWindowEndNanos" : 554300205693500,
+        "samplingWindowStartNanos" : 554300059743250,
+        "totalAttempts" : 3,
+        "trailingGapMs" : 41.596917000000005
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "在中东温暖的气候中房子并不是多重要",
+      "wholeRequestWallSeconds" : 0.145857208
+    },
+    {
+      "addsPunctuationConfiguration" : "unset",
+      "admissionUptimeNanos" : 554300208883875,
+      "arm" : "A",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 2.1291e-05,
+        "drainSeconds" : 1.75e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "mandarin",
+        "id" : "fleurs-cmn_hans_cn-1830",
+        "locale" : "zh-CN",
+        "pcmSHA256" : "32201ea0511a0285c0da43ca492357524fc3af05e0682fddedb6663b1f4c8082",
+        "reference" : "执政党西南非洲人民组织 (SWAPO) 也在议会选举中保持了多数席位。",
+        "samples" : 101760,
+        "wavBytes" : 203564,
+        "wavPath" : "audio\/fleurs-cmn_hans_cn-1830.wav",
+        "wavSHA256" : "7b798c53bcb5b664467fba9860f1f17dd31c37fabecb120fb104897fc43514fd"
+      },
+      "confidence" : 0.78020483,
+      "index" : 5,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 3,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.250886958,
+      "recognitionEndUptimeNanos" : 554300461485583,
+      "recognitionStartUptimeNanos" : 554300210598625,
+      "requestLocale" : "zh_CN",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.252676291,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.098875,
+          100.390125,
+          110.297708,
+          41.88958299999999
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.098875,
+        "maxBytes" : 118947840,
+        "maxGapMs" : 110.297708,
+        "minBytes" : 118865920,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 4,
+        "samples" : [
+          {
+            "bytes" : 118865920,
+            "offsetMs" : 0.098875
+          },
+          {
+            "bytes" : 118915072,
+            "offsetMs" : 100.489
+          },
+          {
+            "bytes" : 118915072,
+            "offsetMs" : 210.786708
+          },
+          {
+            "bytes" : 118947840,
+            "offsetMs" : 252.676291
+          }
+        ],
+        "samplingWindowEndNanos" : 554300461560166,
+        "samplingWindowStartNanos" : 554300208883875,
+        "totalAttempts" : 4,
+        "trailingGapMs" : 41.88958299999999
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "执政党西南非洲人民组织也在议会选举中表述了多数席位",
+      "wholeRequestWallSeconds" : 0.252601708
+    },
+    {
+      "addsPunctuationConfiguration" : "true",
+      "admissionUptimeNanos" : 554300464223208,
+      "arm" : "B",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 2.4916e-05,
+        "drainSeconds" : 2.25e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "mandarin",
+        "id" : "fleurs-cmn_hans_cn-1830",
+        "locale" : "zh-CN",
+        "pcmSHA256" : "32201ea0511a0285c0da43ca492357524fc3af05e0682fddedb6663b1f4c8082",
+        "reference" : "执政党西南非洲人民组织 (SWAPO) 也在议会选举中保持了多数席位。",
+        "samples" : 101760,
+        "wavBytes" : 203564,
+        "wavPath" : "audio\/fleurs-cmn_hans_cn-1830.wav",
+        "wavSHA256" : "7b798c53bcb5b664467fba9860f1f17dd31c37fabecb120fb104897fc43514fd"
+      },
+      "confidence" : 0.78020483,
+      "index" : 6,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 3,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.228184916,
+      "recognitionEndUptimeNanos" : 554300693275916,
+      "recognitionStartUptimeNanos" : 554300465091000,
+      "requestLocale" : "zh_CN",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.229142042,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.045083,
+          108.50412499999999,
+          106.16220900000002,
+          14.430624999999992
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.045083,
+        "maxBytes" : 118947840,
+        "maxGapMs" : 108.50412499999999,
+        "minBytes" : 118947840,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 4,
+        "samples" : [
+          {
+            "bytes" : 118947840,
+            "offsetMs" : 0.045083
+          },
+          {
+            "bytes" : 118947840,
+            "offsetMs" : 108.549208
+          },
+          {
+            "bytes" : 118947840,
+            "offsetMs" : 214.711417
+          },
+          {
+            "bytes" : 118947840,
+            "offsetMs" : 229.142042
+          }
+        ],
+        "samplingWindowEndNanos" : 554300693365250,
+        "samplingWindowStartNanos" : 554300464223208,
+        "totalAttempts" : 4,
+        "trailingGapMs" : 14.430624999999992
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "执政党西南非洲人民组织也在议会选举中表述了多数席位",
+      "wholeRequestWallSeconds" : 0.229052708
+    },
+    {
+      "addsPunctuationConfiguration" : "true",
+      "admissionUptimeNanos" : 554300696689833,
+      "arm" : "B",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 2.3417e-05,
+        "drainSeconds" : 1.7833e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "english-near",
+        "id" : "fleurs-en_us-1858",
+        "locale" : "en-US",
+        "pcmSHA256" : "e8138f2c1b81addf0479f2abf0edbe38be2e2e5a2eb0a29fd12efdb602e53ff4",
+        "reference" : "Danielle Lantagne, a UN expert on the disease, stated the outbreak was likely caused by the peacekeepers.",
+        "samples" : 100800,
+        "wavBytes" : 201644,
+        "wavPath" : "audio\/fleurs-en_us-1858.wav",
+        "wavSHA256" : "ae4504f3f13ddb0a67802d8ce3e269690dfde5bdc0c09a91fbc05aac045bc1fc"
+      },
+      "confidence" : 0.6963443,
+      "index" : 7,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 4,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.642670833,
+      "recognitionEndUptimeNanos" : 554301344595958,
+      "recognitionStartUptimeNanos" : 554300701925125,
+      "requestLocale" : "en_US",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.64800725,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.038958,
+          110.11404200000001,
+          104.426708,
+          110.19470900000002,
+          108.57437499999997,
+          104.76125000000002,
+          107.37462499999992,
+          2.522583000000054
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.038958,
+        "maxBytes" : 118980608,
+        "maxGapMs" : 110.19470900000002,
+        "minBytes" : 118931456,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 8,
+        "samples" : [
+          {
+            "bytes" : 118947840,
+            "offsetMs" : 0.038958
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 110.153
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 214.579708
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 324.774417
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 433.348792
+          },
+          {
+            "bytes" : 118931456,
+            "offsetMs" : 538.110042
+          },
+          {
+            "bytes" : 118931456,
+            "offsetMs" : 645.484667
+          },
+          {
+            "bytes" : 118931456,
+            "offsetMs" : 648.00725
+          }
+        ],
+        "samplingWindowEndNanos" : 554301344697083,
+        "samplingWindowStartNanos" : 554300696689833,
+        "totalAttempts" : 8,
+        "trailingGapMs" : 2.522583000000054
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "Daniel Latigue, a UN expert on the disease, stated the outbreak was likely caused by the peacekeepers",
+      "wholeRequestWallSeconds" : 0.647906125
+    },
+    {
+      "addsPunctuationConfiguration" : "unset",
+      "admissionUptimeNanos" : 554301347787083,
+      "arm" : "A",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 2.3584e-05,
+        "drainSeconds" : 1.9958e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "english-near",
+        "id" : "fleurs-en_us-1858",
+        "locale" : "en-US",
+        "pcmSHA256" : "e8138f2c1b81addf0479f2abf0edbe38be2e2e5a2eb0a29fd12efdb602e53ff4",
+        "reference" : "Danielle Lantagne, a UN expert on the disease, stated the outbreak was likely caused by the peacekeepers.",
+        "samples" : 100800,
+        "wavBytes" : 201644,
+        "wavPath" : "audio\/fleurs-en_us-1858.wav",
+        "wavSHA256" : "ae4504f3f13ddb0a67802d8ce3e269690dfde5bdc0c09a91fbc05aac045bc1fc"
+      },
+      "confidence" : 0.72052944,
+      "index" : 8,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 4,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.289957125,
+      "recognitionEndUptimeNanos" : 554301638588916,
+      "recognitionStartUptimeNanos" : 554301348631791,
+      "requestLocale" : "en_US",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.290878208,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.070875,
+          104.44125,
+          110.156667,
+          76.20941599999998
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.070875,
+        "maxBytes" : 118931456,
+        "maxGapMs" : 110.156667,
+        "minBytes" : 118931456,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 4,
+        "samples" : [
+          {
+            "bytes" : 118931456,
+            "offsetMs" : 0.070875
+          },
+          {
+            "bytes" : 118931456,
+            "offsetMs" : 104.512125
+          },
+          {
+            "bytes" : 118931456,
+            "offsetMs" : 214.668792
+          },
+          {
+            "bytes" : 118931456,
+            "offsetMs" : 290.878208
+          }
+        ],
+        "samplingWindowEndNanos" : 554301638665291,
+        "samplingWindowStartNanos" : 554301347787083,
+        "totalAttempts" : 4,
+        "trailingGapMs" : 76.20941599999998
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "Daniel Latigue a UN expert on the disease stated the outbreak was likely caused by the peacekeepers",
+      "wholeRequestWallSeconds" : 0.290801833
+    },
+    {
+      "addsPunctuationConfiguration" : "unset",
+      "admissionUptimeNanos" : 554301641811250,
+      "arm" : "A",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 2.1833e-05,
+        "drainSeconds" : 1.6958e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "english-near",
+        "id" : "fleurs-en_us-1992",
+        "locale" : "en-US",
+        "pcmSHA256" : "9c9a81e00df5617314c141a676eb01447539b46697e6607e7cf11fc389ce7f75",
+        "reference" : "The term safari in popular use refers to overland travel to view the stunning African wildlife, particularly on savanna.",
+        "samples" : 138240,
+        "wavBytes" : 276524,
+        "wavPath" : "audio\/fleurs-en_us-1992.wav",
+        "wavSHA256" : "7607b0afda348bb9f9d98e157a2ae5b7c9824cb39e05ad8611aa4b311bea424e"
+      },
+      "confidence" : 0.8893567,
+      "index" : 9,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 5,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.204197667,
+      "recognitionEndUptimeNanos" : 554301846908625,
+      "recognitionStartUptimeNanos" : 554301642710958,
+      "requestLocale" : "en_US",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.205181791,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.091833,
+          109.152375,
+          95.937583
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.091833,
+        "maxBytes" : 118980608,
+        "maxGapMs" : 109.152375,
+        "minBytes" : 118964224,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 3,
+        "samples" : [
+          {
+            "bytes" : 118964224,
+            "offsetMs" : 0.091833
+          },
+          {
+            "bytes" : 118964224,
+            "offsetMs" : 109.244208
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 205.181791
+          }
+        ],
+        "samplingWindowEndNanos" : 554301846993041,
+        "samplingWindowStartNanos" : 554301641811250,
+        "totalAttempts" : 3,
+        "trailingGapMs" : 95.937583
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "The term Safari and popular lose refers to Overland travel to view the stunning African wildlife particularly on Savannah",
+      "wholeRequestWallSeconds" : 0.205097375
+    },
+    {
+      "addsPunctuationConfiguration" : "true",
+      "admissionUptimeNanos" : 554301849863125,
+      "arm" : "B",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 2.3958e-05,
+        "drainSeconds" : 1.875e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "english-near",
+        "id" : "fleurs-en_us-1992",
+        "locale" : "en-US",
+        "pcmSHA256" : "9c9a81e00df5617314c141a676eb01447539b46697e6607e7cf11fc389ce7f75",
+        "reference" : "The term safari in popular use refers to overland travel to view the stunning African wildlife, particularly on savanna.",
+        "samples" : 138240,
+        "wavBytes" : 276524,
+        "wavPath" : "audio\/fleurs-en_us-1992.wav",
+        "wavSHA256" : "7607b0afda348bb9f9d98e157a2ae5b7c9824cb39e05ad8611aa4b311bea424e"
+      },
+      "confidence" : 0.8844908,
+      "index" : 10,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 5,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.280400625,
+      "recognitionEndUptimeNanos" : 554302131131916,
+      "recognitionStartUptimeNanos" : 554301850731291,
+      "requestLocale" : "en_US",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.281354458,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.075416,
+          109.23370899999999,
+          107.244833,
+          64.80050000000003
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.075416,
+        "maxBytes" : 118980608,
+        "maxGapMs" : 109.23370899999999,
+        "minBytes" : 118980608,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 4,
+        "samples" : [
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 0.075416
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 109.309125
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 216.553958
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 281.354458
+          }
+        ],
+        "samplingWindowEndNanos" : 554302131217583,
+        "samplingWindowStartNanos" : 554301849863125,
+        "totalAttempts" : 4,
+        "trailingGapMs" : 64.80050000000003
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "The term Safari and popular lose refers to Overland travel to view the stunning African wildlife, particularly on Savannah",
+      "wholeRequestWallSeconds" : 0.281268791
+    },
+    {
+      "addsPunctuationConfiguration" : "true",
+      "admissionUptimeNanos" : 554302134184291,
+      "arm" : "B",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 2.1416e-05,
+        "drainSeconds" : 1.8042e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "english-near",
+        "id" : "fleurs-en_us-1909",
+        "locale" : "en-US",
+        "pcmSHA256" : "743a920543850ab40540466a1b7b896ce5281c7887390c5adb136d874c78f300",
+        "reference" : "Virtual teams are held to the same standards of excellence as conventional teams, but there are subtle differences.",
+        "samples" : 90240,
+        "wavBytes" : 180524,
+        "wavPath" : "audio\/fleurs-en_us-1909.wav",
+        "wavSHA256" : "604e06961b27904100bd6d3de7f67bfb7effccf62bfda6e26e1dd137de9f6ec1"
+      },
+      "confidence" : 0.7051211,
+      "index" : 11,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 6,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.20085325,
+      "recognitionEndUptimeNanos" : 554302335884208,
+      "recognitionStartUptimeNanos" : 554302135030958,
+      "requestLocale" : "en_US",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.20178475,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.095125,
+          109.215584,
+          92.474041
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.095125,
+        "maxBytes" : 118980608,
+        "maxGapMs" : 109.215584,
+        "minBytes" : 118980608,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 3,
+        "samples" : [
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 0.095125
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 109.310709
+          },
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 201.78475
+          }
+        ],
+        "samplingWindowEndNanos" : 554302335969041,
+        "samplingWindowStartNanos" : 554302134184291,
+        "totalAttempts" : 3,
+        "trailingGapMs" : 92.474041
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "Virtual teams are held to the same standard of excellence conventional teams, but there are several differences",
+      "wholeRequestWallSeconds" : 0.201699917
+    },
+    {
+      "addsPunctuationConfiguration" : "unset",
+      "admissionUptimeNanos" : 554302339003916,
+      "arm" : "A",
+      "availability" : {
+        "backendId" : "apple.speech.recognizer",
+        "minOS" : "15.0",
+        "offline" : true,
+        "status" : "available"
+      },
+      "cleanup" : {
+        "cleanupCompleted" : true,
+        "closeSeconds" : 2.475e-05,
+        "drainSeconds" : 2.2041e-05,
+        "target" : "client"
+      },
+      "clip" : {
+        "cohort" : "english-near",
+        "id" : "fleurs-en_us-1909",
+        "locale" : "en-US",
+        "pcmSHA256" : "743a920543850ab40540466a1b7b896ce5281c7887390c5adb136d874c78f300",
+        "reference" : "Virtual teams are held to the same standards of excellence as conventional teams, but there are subtle differences.",
+        "samples" : 90240,
+        "wavBytes" : 180524,
+        "wavPath" : "audio\/fleurs-en_us-1909.wav",
+        "wavSHA256" : "604e06961b27904100bd6d3de7f67bfb7effccf62bfda6e26e1dd137de9f6ec1"
+      },
+      "confidence" : 0.7188321,
+      "index" : 12,
+      "inputPostcheckOK" : true,
+      "pairOrdinal" : 6,
+      "recognitionAttempted" : true,
+      "recognitionDurationSeconds" : 0.150377375,
+      "recognitionEndUptimeNanos" : 554302490232208,
+      "recognitionStartUptimeNanos" : 554302339854833,
+      "requestLocale" : "en_US",
+      "resultBackendId" : "apple.speech.recognizer",
+      "rss" : {
+        "durationSeconds" : 0.151315709,
+        "gapThresholdMs" : 200,
+        "gapsMs" : [
+          0.035125,
+          104.271709,
+          47.008875
+        ],
+        "intervalMs" : 100,
+        "leadingGapMs" : 0.035125,
+        "maxBytes" : 119029760,
+        "maxGapMs" : 104.271709,
+        "minBytes" : 118980608,
+        "missingCount" : 0,
+        "overThresholdGapCount" : 0,
+        "sampleCount" : 3,
+        "samples" : [
+          {
+            "bytes" : 118980608,
+            "offsetMs" : 0.035125
+          },
+          {
+            "bytes" : 119029760,
+            "offsetMs" : 104.306834
+          },
+          {
+            "bytes" : 119029760,
+            "offsetMs" : 151.315709
+          }
+        ],
+        "samplingWindowEndNanos" : 554302490319625,
+        "samplingWindowStartNanos" : 554302339003916,
+        "totalAttempts" : 3,
+        "trailingGapMs" : 47.008875
+      },
+      "status" : "recognized-nonempty",
+      "terminal" : true,
+      "transcript" : "Virtual teams are held to the same standard of excellence conventional teams but there are several differences",
+      "wholeRequestWallSeconds" : 0.151228292
+    }
+  ],
+  "runId" : "w3-apple-punctuation-paired6-20261116-01",
+  "runStatus" : "completed",
+  "schemaVersion" : 2,
+  "sourceBaseCommit" : "8c4751508050ec56b37a1bd4309f90a08eaa0d4c",
+  "sourceIdentity" : {
+    "backendId" : "apple.speech.recognizer",
+    "distributionBoundary" : "isolated-punctuation-paired6-not-production",
+    "inputBindingSHA256" : "b3838b23136aa1be8c760915b565a2f192976ae3299631fcd3470f8df5334e88",
+    "manifestSHA256" : "7e2133c9292e978ac45050349d03d4b1432f247da6dceda6facd328bb7a62453",
+    "rawJSON" : "{\n  \"schemaVersion\": 1,\n  \"runId\": \"w3-apple-punctuation-paired6-20261116-01\",\n  \"backendId\": \"apple.speech.recognizer\",\n  \"manifestSHA256\": \"7e2133c9292e978ac45050349d03d4b1432f247da6dceda6facd328bb7a62453\",\n  \"inputBindingSHA256\": \"b3838b23136aa1be8c760915b565a2f192976ae3299631fcd3470f8df5334e88\",\n  \"sourceBaseCommit\": \"8c4751508050ec56b37a1bd4309f90a08eaa0d4c\",\n  \"selectedSources\": [\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/ODAIKitCore\/Availability.swift\",\n      \"sha256\": \"87f24120073f9c62ce6e3089e656356851a5732340e176e166fbc0d4130324a2\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/ODAIKitCore\/LatestFrameQueue.swift\",\n      \"sha256\": \"2c8c7529fef0d34728fd7f14cd59322cb35952e2eaf9b2d92d7a4e2366cbf7ac\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/ODAIKitCore\/TaskGate.swift\",\n      \"sha256\": \"0c62b522c82e0916d9f1330d3eda1a5bf9992de8c30e9689ad61e0aeba08d37d\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/ODAIKitSpeech\/SpeechClient.swift\",\n      \"sha256\": \"59fcf256ed49ba8175d320dec03da149c9fc83f19d319d53eeb85f237be88990\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/ODAIKitSpeech\/SpeechMicrophone.swift\",\n      \"sha256\": \"9c77a4179a83329f66ea25df6f148c024eb8a0be36d9d3c28663a397fd8d6500\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/ODAIKitSpeech\/SpeechMicrophoneClientTask.swift\",\n      \"sha256\": \"868941155d991dec17be86906ac18d4a1388e5a6b8a4172324657cbaa37bf811\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/PunctuationArmA\/AppleAVSpeechBackend.swift\",\n      \"sha256\": \"f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/PunctuationArmA\/AppleSpeechAudioSession.swift\",\n      \"sha256\": \"452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/PunctuationArmA\/AppleSpeechMicrophone.swift\",\n      \"sha256\": \"0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/PunctuationArmA\/AppleSpeechRecognizerBackend.swift\",\n      \"sha256\": \"46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/PunctuationArmB\/AppleAVSpeechBackend.swift\",\n      \"sha256\": \"f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/PunctuationArmB\/AppleSpeechAudioSession.swift\",\n      \"sha256\": \"452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/PunctuationArmB\/AppleSpeechMicrophone.swift\",\n      \"sha256\": \"0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9\"\n    },\n    {\n      \"path\": \".omx\/artifacts\/w3-punctuation-paired6-preparation-20261116\/RuntimeSources\/PunctuationArmB\/AppleSpeechRecognizerBackend.swift\",\n      \"sha256\": \"e202d3d0d0efa80410f22d3e9d475ea51cdeb810acba2930a86d23afd626d952\"\n    },\n    {\n      \"path\": \"probes\/ios-punctuation-paired6\/Apple65Core.swift\",\n      \"sha256\": \"bee853415a299332493157b22c001377ce114670edba06d994529e75a50d5d81\"\n    },\n    {\n      \"path\": \"probes\/ios-punctuation-paired6\/PunctuationPlan.swift\",\n      \"sha256\": \"6e25a135fa9ae4d67434d3b0f30d4376589d2b6981d42a1b6fdf7312ef909bfd\"\n    },\n    {\n      \"path\": \"probes\/ios-punctuation-paired6\/W3Apple65App.swift\",\n      \"sha256\": \"95da12fda3480be1ef5de9391b914a3df13b0f7ecb7e731e8373c0ceba46b232\"\n    },\n    {\n      \"path\": \"probes\/ios-punctuation-paired6\/project.yml\",\n      \"sha256\": \"ce69ee18283e0503a843346e0405bafbaf9c739cf667c07d195b58457973d6fe\"\n    }\n  ],\n  \"distributionBoundary\": \"isolated-punctuation-paired6-not-production\"\n}\n",
+    "runId" : "w3-apple-punctuation-paired6-20261116-01",
+    "selectedSourceCount" : 18,
+    "sha256" : "feb8981eba97cd017353aee32bcc23ecbef1c05ee3cbb89350476cbde3d52c74",
+    "sourceBaseCommit" : "8c4751508050ec56b37a1bd4309f90a08eaa0d4c"
+  },
+  "startedAt" : "2026-11-16T10:48:42.031Z",
+  "topology" : "selected6-counterbalanced12-AB-BA-AB-BA-AB-BA;A=unset;B=explicit-true;fresh-backend-and-client-per-request;sequential-no-warmup-no-paced-idle",
+  "updatedAt" : "2026-11-16T10:48:45.494Z"
+}

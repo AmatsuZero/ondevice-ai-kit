@@ -1,3 +1,7 @@
+## W3 2026-11-16：标点配对真机批次完成
+
+[设备结果](validation/w3-punctuation-paired6-device-20261116.md)：用户明确批准的一次六输入12请求已完成，12非空/12清理/输入后检通过，终态双读同字节；中文CER18/86→16/86、近英WER13/54→10/54，格式编辑7→5及5→2，内容类保持11及8，符合冻结探索条件。首UI授权predicate在零Run/空报告时修正，修正后仅一次Run，无识别重试；45普通App元数据保持、alias卸载、普通App launch accepted。未开麦/下载/AiAi、未改生产代码或重放旧65，未宣布生产采用/P4/R4/R5/W3完成。旧准备授权false为历史快照，本批新授权已消费，不重放。
+
 - [同期标点配对runner准备](validation/w3-punctuation-control-progress-20261116.md)：用户明确一次本地实现例外后，六输入12请求固定AB/BA runner37/506/330检查及unsigned App/driver构建通过，尚未签名/安装/运行，新执行授权未获得。原Apple65不重放，旧单臂65包保留不执行；hy3新429停线、无自动重试。没有独立最终源码/P4或R4/R5/W3通过声明。
 
 - [Apple/Qwen逐项误差分析](validation/w3-paired-error-analysis-20261116.md)：中文45/95和近英36/75为确定编辑路径中的标点格式差异，远英仅11/103，另有68词删除/两typed1110；没有替代评分或新识别。显式addsPunctuation仅为待验证线索，10,879项核验与限定复核不等于R4/P4通过。

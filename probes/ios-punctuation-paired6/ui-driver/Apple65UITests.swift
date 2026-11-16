@@ -45,7 +45,7 @@ final class Apple65UITests: XCTestCase {
             ]
             for alert in alertCandidates {
                 guard alert.exists else { continue }
-                if speechTextPredicate.evaluate(with: alert.label) || alert.staticTexts.matching(speechTextPredicate).firstMatch.exists {
+                if speechTextPredicate.evaluate(with: ["label": alert.label]) || alert.staticTexts.matching(speechTextPredicate).firstMatch.exists {
                     return alert
                 }
             }
