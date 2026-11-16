@@ -1,0 +1,561 @@
+{
+  "status": "built-verified-not-authorized-not-executed",
+  "parentChecks": 330,
+  "runId": "w3-apple-punctuation-paired6-20261116-01",
+  "selectedInputs": 6,
+  "proposedRequests": 12,
+  "fixtureIntegrityInputs": 65,
+  "sourceIdentitySHA256": "feb8981eba97cd017353aee32bcc23ecbef1c05ee3cbb89350476cbde3d52c74",
+  "manifestSHA256": "7e2133c9292e978ac45050349d03d4b1432f247da6dceda6facd328bb7a62453",
+  "compiledSwiftInputs": 17,
+  "frameworkBinaryIdentities": {
+    "ODAIKitCore": {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Products/Debug-iphoneos/W3PunctuationPaired6.app/Frameworks/ODAIKitCore.framework/ODAIKitCore",
+      "bytes": 190416,
+      "sha256": "86af4d3cae6e028e1a4690f775127a903c85438e1fb0aca136198cd30c3f0f77",
+      "uuid": "UUID: AB5D72E7-94AF-3510-959B-BFC2A048AACC (arm64) /Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Products/Debug-iphoneos/W3PunctuationPaired6.app/Frameworks/ODAIKitCore.framework/ODAIKitCore"
+    },
+    "ODAIKitSpeech": {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Products/Debug-iphoneos/W3PunctuationPaired6.app/Frameworks/ODAIKitSpeech.framework/ODAIKitSpeech",
+      "bytes": 368504,
+      "sha256": "c759d13f9da4bd9cf3cb534601805de275f3b12567de606786cbe35d4b65c058",
+      "uuid": "UUID: E5832EBE-A223-359E-9F75-34C70556E6E8 (arm64) /Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Products/Debug-iphoneos/W3PunctuationPaired6.app/Frameworks/ODAIKitSpeech.framework/ODAIKitSpeech"
+    },
+    "PunctuationArmA": {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Products/Debug-iphoneos/W3PunctuationPaired6.app/Frameworks/PunctuationArmA.framework/PunctuationArmA",
+      "bytes": 632680,
+      "sha256": "6e4723b5f643db6ea6a93757e7b3c53b81815f40ab086fca6a26794daa95e007",
+      "uuid": "UUID: D25E77EE-9635-3D0C-AABF-4CA9E4525A82 (arm64) /Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Products/Debug-iphoneos/W3PunctuationPaired6.app/Frameworks/PunctuationArmA.framework/PunctuationArmA"
+    },
+    "PunctuationArmB": {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Products/Debug-iphoneos/W3PunctuationPaired6.app/Frameworks/PunctuationArmB.framework/PunctuationArmB",
+      "bytes": 632704,
+      "sha256": "34051d2bd929cffe89caacdd63e65bb824a3be732a767e4283b12aa46797202b",
+      "uuid": "UUID: 73E2FE4F-AA61-3CF6-BE80-CDA00D7CFA43 (arm64) /Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Products/Debug-iphoneos/W3PunctuationPaired6.app/Frameworks/PunctuationArmB.framework/PunctuationArmB"
+    }
+  },
+  "swiftFileLists": [
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Intermediates.noindex/W3PunctuationPaired6.build/Debug-iphoneos/ODAIKitCore.build/Objects-normal/arm64/ODAIKitCore.SwiftFileList",
+      "sha256": "5b9737b82433edb354d5d8dbf302f3791ceea124a51c1c3c331c2ad46a8322e1",
+      "sources": [
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitCore/Availability.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitCore/LatestFrameQueue.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitCore/TaskGate.swift"
+      ]
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Intermediates.noindex/W3PunctuationPaired6.build/Debug-iphoneos/ODAIKitSpeech.build/Objects-normal/arm64/ODAIKitSpeech.SwiftFileList",
+      "sha256": "e8a89eb72791d97c1bba3a7382a616bd122f143930a9fec8c4fb74fdbaae88e3",
+      "sources": [
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitSpeech/SpeechClient.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitSpeech/SpeechMicrophone.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift"
+      ]
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Intermediates.noindex/W3PunctuationPaired6.build/Debug-iphoneos/PunctuationArmA.build/Objects-normal/arm64/PunctuationArmA.SwiftFileList",
+      "sha256": "adf828c737a86bebe5c6b81bbbd300c24d397ee5b51f74d4658990c59c0f572f",
+      "sources": [
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmA/AppleAVSpeechBackend.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmA/AppleSpeechAudioSession.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmA/AppleSpeechMicrophone.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmA/AppleSpeechRecognizerBackend.swift"
+      ]
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Intermediates.noindex/W3PunctuationPaired6.build/Debug-iphoneos/PunctuationArmB.build/Objects-normal/arm64/PunctuationArmB.SwiftFileList",
+      "sha256": "a95f80f8ee06477004bc0a99e187c8f96a409be932897f421b0bc0072e8e21df",
+      "sources": [
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmB/AppleAVSpeechBackend.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmB/AppleSpeechAudioSession.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmB/AppleSpeechMicrophone.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmB/AppleSpeechRecognizerBackend.swift"
+      ]
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Build/Intermediates.noindex/W3PunctuationPaired6.build/Debug-iphoneos/W3PunctuationPaired6.build/Objects-normal/arm64/W3PunctuationPaired6.SwiftFileList",
+      "sha256": "484d6b2dd9bb5751fa27fed26ee377d82da9bf5d86f5b5d89e046ecec5cbf101",
+      "sources": [
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/ios-punctuation-paired6/Apple65Core.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/ios-punctuation-paired6/PunctuationPlan.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/ios-punctuation-paired6/W3Apple65App.swift"
+      ]
+    }
+  ],
+  "actualAppFiles": [
+    {
+      "path": "AudioFixtures/audio/ami-ES2003a.sync.129-B.wav",
+      "bytes": 140748,
+      "sha256": "60465174dbde22762087f5a7e957178cc67627131a08c18ba18642081354e14e"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2003a.sync.131-B.wav",
+      "bytes": 136300,
+      "sha256": "471a9c9018348f3675c1473816140f0863145e13bb798f56090f71125b8ebab2"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2003a.sync.133-B.wav",
+      "bytes": 302988,
+      "sha256": "d7f7d4ce6143b27e85253fa87e08744a86e93cd8e9f079908598710cdc78f214"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2003a.sync.171-C.wav",
+      "bytes": 248876,
+      "sha256": "c77a3f84b463c0fe9f4ee0a7e95fd327997c9744dad6149d341b5a72c8ff695e"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2003a.sync.209-C.wav",
+      "bytes": 274476,
+      "sha256": "44517ee29f19654eb9e74ce89e58352fe3fd8bb4562cb3c3b909432ac836ea60"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2003a.sync.267-D.wav",
+      "bytes": 133164,
+      "sha256": "2d696075529fb700a0e3f4289e7d3f0ee1a9cab77d08a27cd0062eb13d5ba9c8"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2003a.sync.29-A.wav",
+      "bytes": 101420,
+      "sha256": "f2993b66a4c9b6f94f990f231799867297946308ae43aeef340905049b8b7d64"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2003a.sync.93-B.wav",
+      "bytes": 262636,
+      "sha256": "d1e70c6de1e79cd594c558558f792f222ca14d96c6829e394b849fa81b6bb160"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2003a.sync.95-B.wav",
+      "bytes": 160364,
+      "sha256": "42c41eb9f05f725286bcee9cfe3018ad8bdca53e1d1f0f93097e1c552a25cb3f"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2004a.sync.121-B.wav",
+      "bytes": 192556,
+      "sha256": "8bf4b892c3342b92d19937381b34b1adbb8eac70206ce0dfdabf66093fff4e41"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2004a.sync.131-B.wav",
+      "bytes": 132140,
+      "sha256": "85f3d8cb13d534255cca41bc0ae2a779180cbe1a5a08cb4d58beab26e5847f1c"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-ES2006a.sync.277-C.wav",
+      "bytes": 197164,
+      "sha256": "81231d010bc84ad5ad5005bcdf83ed438e080a741df9ff5c7c93b3bfa7f0691e"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-negative-ES2003a-0.wav",
+      "bytes": 160044,
+      "sha256": "f43e393a80377d0f43f7afeb36c92aebb84e2437cb5ac8697eefb073186594d9"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-negative-ES2003a-1.wav",
+      "bytes": 160044,
+      "sha256": "ffc4978354abca546f61fe5dae7088cf5102765b0ac216b7e11b35df3284b729"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-negative-ES2003a-2.wav",
+      "bytes": 160044,
+      "sha256": "37037700eeae9bb625323579790644d259114490bf272024605c81e52eee32f5"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-negative-ES2004a-0.wav",
+      "bytes": 160044,
+      "sha256": "af15fe616fbbd6ec9ddf8960d7c92a75c9b2240c723f0f615f5c223ba3063434"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-negative-ES2004a-1.wav",
+      "bytes": 160044,
+      "sha256": "93fa6ba8b416a7b7f9d2f1374362faf708597a492b9c84f51e350e0996cd0c40"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-negative-ES2004a-2.wav",
+      "bytes": 160044,
+      "sha256": "31d6103ad7b0752af56ac6a6775ea9ce881b72fa8fc37a87d49d3da4d6fb3640"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-negative-ES2006a-0.wav",
+      "bytes": 160044,
+      "sha256": "60712c5674b70985a2f7680084bcc0b30e8c1d3971fb6baf298b327bf8c8a087"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-negative-ES2006a-1.wav",
+      "bytes": 160044,
+      "sha256": "6666b26b8653513f65a48fdd9b2e025878d66c9a5d27d4b3cd4888b6b8c56ed7"
+    },
+    {
+      "path": "AudioFixtures/audio/ami-negative-ES2006a-2.wav",
+      "bytes": 160044,
+      "sha256": "ebdcc7ed69cfaa94c2e0f03a388cdf2f34fc8bfd237fba1f973432c7ea57d9bb"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1661.wav",
+      "bytes": 247724,
+      "sha256": "400d2b9d1e8260583a40cea370e25dcf81c211a92a9ca74acdae002c20208f5d"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1697.wav",
+      "bytes": 313004,
+      "sha256": "5b3fd4337f29e9f6ffcb6816baeb5867195fce13322aa2d2232d5ce7956d9695"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1698.wav",
+      "bytes": 311084,
+      "sha256": "6d2924e2a9c30ae62c18f020222dbd35cc71e9f0e54ac0427cc68f87afe468a1"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1772.wav",
+      "bytes": 293804,
+      "sha256": "68d2186ee1b88dc29f93fc88f7deb59e928bac85e7115631cae474c5049dfc7f"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1792.wav",
+      "bytes": 280364,
+      "sha256": "54643663b266fe293eb2bbeae4e8f4d6665581f3e6d8c8b60739f991339267ce"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1805.wav",
+      "bytes": 243884,
+      "sha256": "6bebed03ad26c837702464d1bd0ce71ce6bf96610151613f25c11cd195537a06"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1808.wav",
+      "bytes": 207404,
+      "sha256": "b16d974b36aca4c77e97e898c72e1c341c272e9b8a715d279e629a16de3cfbbe"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1821.wav",
+      "bytes": 253484,
+      "sha256": "425a5a3ebede88db3ba1e0bfc86af8994888240242fbb6d7c504c3363d9d9bc3"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1830.wav",
+      "bytes": 203564,
+      "sha256": "7b798c53bcb5b664467fba9860f1f17dd31c37fabecb120fb104897fc43514fd"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1871.wav",
+      "bytes": 222764,
+      "sha256": "1db5f865950e86db6b0b1c35c1f9ec17dcd43a32e82648cd0da41e7c0c9f17b8"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1884.wav",
+      "bytes": 220844,
+      "sha256": "20c27491d5acf3c9c35bbb8f4d588374fd4598ea7489a08a0ec641a38cf79ce7"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1902.wav",
+      "bytes": 222764,
+      "sha256": "7acdaa113d055291296a1229e6f69eed6dcdafbf770a96f7ba01ca89bc264a82"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1903.wav",
+      "bytes": 232364,
+      "sha256": "dd32fa9966255eb8026bfb85c7a5502e3c413bad3fe8aa9fef1e210c54520a31"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1905.wav",
+      "bytes": 241964,
+      "sha256": "af0123f6610b330762f884606353cafc6a20ddd001409627a73efdca704f9f6c"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1910.wav",
+      "bytes": 163244,
+      "sha256": "0185392e2c417db17410f7d2a16346c59dfb40d054c2df0acb6875d1e10325a2"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1953.wav",
+      "bytes": 161324,
+      "sha256": "558595b3e930a9023b7b4a22b10f4849aa9d2d5efd0f88a3c666d9afec5b2ac7"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1958.wav",
+      "bytes": 309164,
+      "sha256": "66759753c4e7b7a0d309ae7906b80d4e30e8bfa6d95209caa3aa8d87d69be1f5"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1962.wav",
+      "bytes": 270764,
+      "sha256": "f7a1c86468f7141d910a4a15b11b959050d19cf6cb3de91f3ebc44c9238787b5"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-1965.wav",
+      "bytes": 218924,
+      "sha256": "8111166bf5e19f01d7efa4d251492e1ea95ea4c2ae9290e104b3ed0c152f9f1b"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-cmn_hans_cn-2002.wav",
+      "bytes": 217004,
+      "sha256": "db38a2c4bd821868f34ef4f757161bf4c25fd3d21660645b9cbb822330abc2f3"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1662.wav",
+      "bytes": 268204,
+      "sha256": "4176c526815569b50eaa8070ec222937cf69ca60f2fc6f1bb8b22d49a6102b24"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1674.wav",
+      "bytes": 180524,
+      "sha256": "decf48014ad458e01f12e7a8b2863cfe08d1073b4ff94f471780dfe7104e9384"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1675.wav",
+      "bytes": 280364,
+      "sha256": "d903ba75c0509b98e53f5b376be08a77888363e98073d0155b364fda5354fd98"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1728.wav",
+      "bytes": 184364,
+      "sha256": "a5e87c825f74bc1cc3b5d5a15bb770539d6247579279ba326ede4d133a6d6ae7"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1740.wav",
+      "bytes": 266924,
+      "sha256": "555c80c8a8bd277b2e313f05f5926b53c689381eec84a941cc0dc0ee82b00b8a"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1749.wav",
+      "bytes": 307244,
+      "sha256": "885344371b93dfeb1874362b05d2bbf227bceb37b122e7d5d1d674d95d5b9e8d"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1776.wav",
+      "bytes": 153644,
+      "sha256": "9f982793b48f4d486ff86a1f06a86b3e3ef0c1e2c8e7a1166d88b241a52f2dc2"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1802.wav",
+      "bytes": 183084,
+      "sha256": "1b6d84c1a22e57d9d7106f542388faf52305eda8b970b8cd717b545a95e8592c"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1806.wav",
+      "bytes": 316844,
+      "sha256": "f620dd3f25e6e3d41ea2fc0c625768d3f2676ba8386dadc63f19a62bbf1b0427"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1858.wav",
+      "bytes": 201644,
+      "sha256": "ae4504f3f13ddb0a67802d8ce3e269690dfde5bdc0c09a91fbc05aac045bc1fc"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1897.wav",
+      "bytes": 306604,
+      "sha256": "c90561d5d34e1a65e56b0543bdd1abe310d7a5af4eceab490aa2ea8c8aa4e211"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1909.wav",
+      "bytes": 180524,
+      "sha256": "604e06961b27904100bd6d3de7f67bfb7effccf62bfda6e26e1dd137de9f6ec1"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1914.wav",
+      "bytes": 222764,
+      "sha256": "c0a251b181d46e45ca32968d191da1ae017c9889f4be3e289d73626774c1b4dd"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1952.wav",
+      "bytes": 274604,
+      "sha256": "4dafb75797feb1e3d0c3d0a15809f14ddbfc30cd9d2152a084b5d6061a9806a2"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1953.wav",
+      "bytes": 218924,
+      "sha256": "e7983f4a7b258f6d2acc08918458568db83174aeaaec34b12b8c99a2aff18974"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1972.wav",
+      "bytes": 138284,
+      "sha256": "eae0e47a17addfaa92e59b4bee58759de7f71278cebc495b8fbbb55c22b1ab3f"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1987.wav",
+      "bytes": 314284,
+      "sha256": "0fc00d9ae3c0b627c7eaefbf02087fa4ccd95718470298490a08fcdf74441fbb"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1990.wav",
+      "bytes": 280364,
+      "sha256": "d3d33eb5fb7e6dc1257debdae2ec9a1d0ac0c21a1e570a777bab7c44d3cd98e9"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-1992.wav",
+      "bytes": 276524,
+      "sha256": "7607b0afda348bb9f9d98e157a2ae5b7c9824cb39e05ad8611aa4b311bea424e"
+    },
+    {
+      "path": "AudioFixtures/audio/fleurs-en_us-2005.wav",
+      "bytes": 171564,
+      "sha256": "8d62d7036cd8d0a2ef85e290ffd91ecbf285b02665eb78b78916da3bb27fd845"
+    },
+    {
+      "path": "AudioFixtures/audio/independent-silence-10s-en-US.wav",
+      "bytes": 320044,
+      "sha256": "ee7bea4232762775f8fce9b3e27e4d3948c8ac6a45a87ca769f703d6eed0b448"
+    },
+    {
+      "path": "AudioFixtures/audio/independent-silence-10s-zh-CN.wav",
+      "bytes": 320044,
+      "sha256": "ee7bea4232762775f8fce9b3e27e4d3948c8ac6a45a87ca769f703d6eed0b448"
+    },
+    {
+      "path": "AudioFixtures/audio/independent-silence-3s-en-US.wav",
+      "bytes": 96044,
+      "sha256": "d303811b8c84619667cd0501342f84ec6cbe69f7aa3856dcf52fabda374c92b8"
+    },
+    {
+      "path": "AudioFixtures/audio/independent-silence-3s-zh-CN.wav",
+      "bytes": 96044,
+      "sha256": "d303811b8c84619667cd0501342f84ec6cbe69f7aa3856dcf52fabda374c92b8"
+    },
+    {
+      "path": "AudioFixtures/manifest.json",
+      "bytes": 31710,
+      "sha256": "7e2133c9292e978ac45050349d03d4b1432f247da6dceda6facd328bb7a62453"
+    },
+    {
+      "path": "Frameworks/ODAIKitCore.framework/Info.plist",
+      "bytes": 732,
+      "sha256": "8954f0cac8c56847d85f22f396c671241b8dde97e382fa75d96857da473521fe"
+    },
+    {
+      "path": "Frameworks/ODAIKitCore.framework/ODAIKitCore",
+      "bytes": 190416,
+      "sha256": "86af4d3cae6e028e1a4690f775127a903c85438e1fb0aca136198cd30c3f0f77"
+    },
+    {
+      "path": "Frameworks/ODAIKitSpeech.framework/Info.plist",
+      "bytes": 736,
+      "sha256": "884c79cfd3390ef6c03d5c3bf3b184440b3c51da365fcbd114ffa3468dd9a6db"
+    },
+    {
+      "path": "Frameworks/ODAIKitSpeech.framework/ODAIKitSpeech",
+      "bytes": 368504,
+      "sha256": "c759d13f9da4bd9cf3cb534601805de275f3b12567de606786cbe35d4b65c058"
+    },
+    {
+      "path": "Frameworks/PunctuationArmA.framework/Info.plist",
+      "bytes": 738,
+      "sha256": "43284da188417dc483053488cf060c071280aa0603efc9ab5cc35536b4b5a237"
+    },
+    {
+      "path": "Frameworks/PunctuationArmA.framework/PunctuationArmA",
+      "bytes": 632680,
+      "sha256": "6e4723b5f643db6ea6a93757e7b3c53b81815f40ab086fca6a26794daa95e007"
+    },
+    {
+      "path": "Frameworks/PunctuationArmB.framework/Info.plist",
+      "bytes": 738,
+      "sha256": "08f1da1f5d0bb8337354adfc279aedc005773627483ec58b0e174e4390a841b7"
+    },
+    {
+      "path": "Frameworks/PunctuationArmB.framework/PunctuationArmB",
+      "bytes": 632704,
+      "sha256": "34051d2bd929cffe89caacdd63e65bb824a3be732a767e4283b12aa46797202b"
+    },
+    {
+      "path": "Info.plist",
+      "bytes": 956,
+      "sha256": "437130c73727c6622948e4a1d0e611c11a8aa30c65b19afee205bb4c01e633bc"
+    },
+    {
+      "path": "PkgInfo",
+      "bytes": 8,
+      "sha256": "82502191c9484b04d685374f9879a0066069c49b8acae7a04b01d38d07e8eca0"
+    },
+    {
+      "path": "W3PunctuationPaired6",
+      "bytes": 72472,
+      "sha256": "f2ce26e620eb5ad267a883219dd9437ca1bb78579fb9ef0b7027fafe73b09c56"
+    },
+    {
+      "path": "W3PunctuationPaired6.debug.dylib",
+      "bytes": 938408,
+      "sha256": "87f76d8df94238857670af2a63b26bbba971c84f36a2384d1b390c3ac015b701"
+    },
+    {
+      "path": "__preview.dylib",
+      "bytes": 16456,
+      "sha256": "c2bb759219d33f0e25d5ca913befb5c0194e3c55f884c7d4d4b647835e95994c"
+    },
+    {
+      "path": "source-identity-manifest.json",
+      "bytes": 4311,
+      "sha256": "feb8981eba97cd017353aee32bcc23ecbef1c05ee3cbb89350476cbde3d52c74"
+    }
+  ],
+  "coreChecks": 506,
+  "planChecks": 37,
+  "appUnsigned": true,
+  "executionAuthorized": false,
+  "newRecognitionRequests": 0,
+  "newDeviceRuns": 0,
+  "independentFinalReview": false,
+  "R4Accepted": false,
+  "R5Accepted": false,
+  "P4Accepted": false,
+  "W3Complete": false,
+  "protection": {
+    "protectedSnapshotCount": 205,
+    "byteIdentical": 201,
+    "ownExactChangesRetainOriginalContent": [
+      {
+        "path": "docs/HANDOFF-2026-11-05-next-session.md",
+        "originalRestoredInMemory": true,
+        "actualSHA256": "c57b598ab541ca03fc61a9889ad6da96482b4ee385c8ef6de2fe46a54a0a9496"
+      },
+      {
+        "path": "docs/agent-pitfalls.md",
+        "originalRestoredInMemory": true,
+        "actualSHA256": "e8320c3a5cc9e1aca46a18f36e705c4b0fd58437d219e6a751fa544f03fcc870"
+      },
+      {
+        "path": "docs/roadmap/W3-speech.md",
+        "originalRestoredInMemory": true,
+        "actualSHA256": "db7d86cc14b140a4a3e62912ff39f853428bd3598c798dc02eb15b585190f1a2"
+      },
+      {
+        "path": "probes/ios-apple65-punctuation/README.md",
+        "originalRestoredInMemory": true,
+        "actualSHA256": "ad1d55763f8655c82a91abb000257f2c7b76b40ada016492b466f8049e41c962"
+      }
+    ],
+    "historicalSourcesAndReportsByteIdentical": 131,
+    "allFourOwnedPrefixesRetainOriginalBytes": true,
+    "unrelatedIndexUnchanged": true,
+    "unexpectedOutsideChanges": []
+  },
+  "cleanup": {
+    "deletedExactPaths": [
+      ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/ModuleCache.noindex",
+      ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DerivedData/Index.noindex",
+      ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DriverDerivedData/ModuleCache.noindex",
+      ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/DriverDerivedData/Index.noindex"
+    ],
+    "logicalBytes": 69418312,
+    "diskFreeBeforeBytes": 20018118656,
+    "diskFreeAfterBytes": 20101419008,
+    "exclusiveDiskAttribution": false,
+    "atUTC": "2026-11-16T10:32:59.247711+00:00"
+  },
+  "implementationSupplier": "primary-under-explicit-one-task-user-exception",
+  "sourceBaseCommit": "8c4751508050ec56b37a1bd4309f90a08eaa0d4c",
+  "appBuild": {
+    "exitCode": 0,
+    "elapsedSeconds": 6.7621092919725925,
+    "stdoutBytes": 388184,
+    "stderrBytes": 242
+  },
+  "driverBuildForTesting": {
+    "exitCode": 0,
+    "elapsedSeconds": 4.481433375040069,
+    "stdoutBytes": 163901,
+    "stderrBytes": 240
+  },
+  "warnings": {
+    "appIntentsMetadataSkipped": 5,
+    "orientationAndLaunch": 2
+  },
+  "rawFailedInvocationPreserved": true
+}

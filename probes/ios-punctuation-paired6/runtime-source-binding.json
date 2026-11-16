@@ -1,0 +1,89 @@
+{
+  "sourceBaseCommit": "8c4751508050ec56b37a1bd4309f90a08eaa0d4c",
+  "inputs": [
+    {
+      "source": "apple/Sources/ODAIKitCore/Availability.swift",
+      "destination": "RuntimeSources/ODAIKitCore/Availability.swift",
+      "sourceSHA256": "87f24120073f9c62ce6e3089e656356851a5732340e176e166fbc0d4130324a2",
+      "preparedSHA256": "87f24120073f9c62ce6e3089e656356851a5732340e176e166fbc0d4130324a2"
+    },
+    {
+      "source": "apple/Sources/ODAIKitCore/LatestFrameQueue.swift",
+      "destination": "RuntimeSources/ODAIKitCore/LatestFrameQueue.swift",
+      "sourceSHA256": "2c8c7529fef0d34728fd7f14cd59322cb35952e2eaf9b2d92d7a4e2366cbf7ac",
+      "preparedSHA256": "2c8c7529fef0d34728fd7f14cd59322cb35952e2eaf9b2d92d7a4e2366cbf7ac"
+    },
+    {
+      "source": "apple/Sources/ODAIKitCore/TaskGate.swift",
+      "destination": "RuntimeSources/ODAIKitCore/TaskGate.swift",
+      "sourceSHA256": "0c62b522c82e0916d9f1330d3eda1a5bf9992de8c30e9689ad61e0aeba08d37d",
+      "preparedSHA256": "0c62b522c82e0916d9f1330d3eda1a5bf9992de8c30e9689ad61e0aeba08d37d"
+    },
+    {
+      "source": "apple/Sources/ODAIKitSpeech/SpeechClient.swift",
+      "destination": "RuntimeSources/ODAIKitSpeech/SpeechClient.swift",
+      "sourceSHA256": "59fcf256ed49ba8175d320dec03da149c9fc83f19d319d53eeb85f237be88990",
+      "preparedSHA256": "59fcf256ed49ba8175d320dec03da149c9fc83f19d319d53eeb85f237be88990"
+    },
+    {
+      "source": "apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift",
+      "destination": "RuntimeSources/ODAIKitSpeech/SpeechMicrophone.swift",
+      "sourceSHA256": "9c77a4179a83329f66ea25df6f148c024eb8a0be36d9d3c28663a397fd8d6500",
+      "preparedSHA256": "9c77a4179a83329f66ea25df6f148c024eb8a0be36d9d3c28663a397fd8d6500"
+    },
+    {
+      "source": "apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift",
+      "destination": "RuntimeSources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift",
+      "sourceSHA256": "868941155d991dec17be86906ac18d4a1388e5a6b8a4172324657cbaa37bf811",
+      "preparedSHA256": "868941155d991dec17be86906ac18d4a1388e5a6b8a4172324657cbaa37bf811"
+    },
+    {
+      "source": "apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift",
+      "destination": "RuntimeSources/PunctuationArmA/AppleAVSpeechBackend.swift",
+      "sourceSHA256": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab",
+      "preparedSHA256": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab"
+    },
+    {
+      "source": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift",
+      "destination": "RuntimeSources/PunctuationArmA/AppleSpeechAudioSession.swift",
+      "sourceSHA256": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466",
+      "preparedSHA256": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466"
+    },
+    {
+      "source": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift",
+      "destination": "RuntimeSources/PunctuationArmA/AppleSpeechMicrophone.swift",
+      "sourceSHA256": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9",
+      "preparedSHA256": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9"
+    },
+    {
+      "source": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+      "destination": "RuntimeSources/PunctuationArmA/AppleSpeechRecognizerBackend.swift",
+      "sourceSHA256": "46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db",
+      "preparedSHA256": "46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db"
+    },
+    {
+      "source": "apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift",
+      "destination": "RuntimeSources/PunctuationArmB/AppleAVSpeechBackend.swift",
+      "sourceSHA256": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab",
+      "preparedSHA256": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab"
+    },
+    {
+      "source": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift",
+      "destination": "RuntimeSources/PunctuationArmB/AppleSpeechAudioSession.swift",
+      "sourceSHA256": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466",
+      "preparedSHA256": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466"
+    },
+    {
+      "source": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift",
+      "destination": "RuntimeSources/PunctuationArmB/AppleSpeechMicrophone.swift",
+      "sourceSHA256": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9",
+      "preparedSHA256": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9"
+    },
+    {
+      "source": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+      "destination": "RuntimeSources/PunctuationArmB/AppleSpeechRecognizerBackend.swift",
+      "sourceSHA256": "46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db",
+      "preparedSHA256": "e202d3d0d0efa80410f22d3e9d475ea51cdeb810acba2930a86d23afd626d952"
+    }
+  ]
+}

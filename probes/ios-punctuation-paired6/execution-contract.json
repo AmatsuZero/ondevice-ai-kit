@@ -1,0 +1,47 @@
+{
+  "status": "unsigned-build-and-package-verified-awaiting-new-execution-authorization",
+  "runId": "w3-apple-punctuation-paired6-20261116-01",
+  "executionAuthorized": false,
+  "manifestSHA256": "7e2133c9292e978ac45050349d03d4b1432f247da6dceda6facd328bb7a62453",
+  "inputSelectionPath": "probes/ios-punctuation-paired6/input-selection.json",
+  "inputSelectionSHA256": "97e70bf9f22c8d0d09465dc52952f88d6d3d00f50cf0b6d06badabbfebcb97cc",
+  "selectedInputs": 6,
+  "proposedRequests": 12,
+  "pairOrder": [
+    "AB",
+    "BA",
+    "AB",
+    "BA",
+    "AB",
+    "BA"
+  ],
+  "armA": "unset; do not infer default false",
+  "armB": "guarded true only",
+  "armBinaryPlan": "separate PunctuationArmA/PunctuationArmB embedded dynamic frameworks sharing common Core/Speech frameworks",
+  "fullW3ScopeUnchanged": true,
+  "historical65CannotServeAsContemporaneousA": true,
+  "newExecutionAuthorizationRequiredAfterReviewedPreparation": true,
+  "localImplementationAuthorized": true,
+  "implementationSupplier": "primary-under-explicit-one-task-user-exception",
+  "originalProtocolPath": "probes/ios-file-asr-punctuation-control/protocol.json",
+  "originalProtocolSHA256": "2f39d461ac580f26921e4075b21b8d6e24ffa2d25ac776b349925b696912c1d9",
+  "interpretation": {
+    "perCohort": [
+      "mandarin",
+      "english-near"
+    ],
+    "scorerPath": "tools/speech_error_metrics.py",
+    "scorerSHA256": "d398bb35438b9f4eb399fc404e02c0c2a7184a7cea7c7a6d32e4a321f8e2b39e",
+    "classificationPath": "tools/w3_paired_error_analysis.py",
+    "classificationSHA256": "b801dfdf4f79311e6b943c159531817725de6db1ab65ecf86322e35bd7f103f3",
+    "casefold": true,
+    "punctuationAndDigitsRetained": true,
+    "formattingEditsStrictlyReduceEachCohort": true,
+    "contentOrMixedMustNotIncreaseEachCohort": true,
+    "bothArmsCompleteNonemptyRequired": true,
+    "noNewTypedErrorOrCleanupFailure": true,
+    "notProductThreshold": true,
+    "notBlindOrHeldout": true,
+    "notStatisticalCausalProof": true
+  }
+}

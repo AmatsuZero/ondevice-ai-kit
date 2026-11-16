@@ -1,0 +1,94 @@
+name: W3PunctuationPaired6
+options:
+  deploymentTarget:
+    iOS: "15.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    CODE_SIGNING_ALLOWED: NO
+    GENERATE_INFOPLIST_FILE: YES
+    TARGETED_DEVICE_FAMILY: "1,2"
+targets:
+  ODAIKitCore:
+    type: framework
+    platform: iOS
+    sources:
+      - path: ../../.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w3punctpair.core
+        DEFINES_MODULE: YES
+        SKIP_INSTALL: YES
+  ODAIKitSpeech:
+    type: framework
+    platform: iOS
+    sources:
+      - path: ../../.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitSpeech
+    dependencies:
+      - target: ODAIKitCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w3punctpair.speech
+        DEFINES_MODULE: YES
+        SKIP_INSTALL: YES
+  PunctuationArmA:
+    type: framework
+    platform: iOS
+    sources:
+      - path: ../../.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmA
+    dependencies:
+      - target: ODAIKitCore
+      - target: ODAIKitSpeech
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w3punctpair.armA
+        DEFINES_MODULE: YES
+        SKIP_INSTALL: YES
+  PunctuationArmB:
+    type: framework
+    platform: iOS
+    sources:
+      - path: ../../.omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmB
+    dependencies:
+      - target: ODAIKitCore
+      - target: ODAIKitSpeech
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w3punctpair.armB
+        DEFINES_MODULE: YES
+        SKIP_INSTALL: YES
+  W3PunctuationPaired6:
+    type: application
+    platform: iOS
+    sources:
+      - path: Apple65Core.swift
+      - path: PunctuationPlan.swift
+      - path: W3Apple65App.swift
+      - path: ../../.omx/artifacts/w3-punctuation-paired6-preparation-20261116/AudioFixtures
+        type: folder
+        buildPhase: resources
+      - path: source-identity-manifest.json
+        buildPhase: resources
+    dependencies:
+      - target: ODAIKitCore
+        embed: true
+      - target: ODAIKitSpeech
+        embed: true
+      - target: PunctuationArmA
+        embed: true
+      - target: PunctuationArmB
+        embed: true
+    settings:
+      base:
+        PRODUCT_NAME: W3PunctuationPaired6
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w3punctpair20261116
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Used only by an explicit manual paired FILE evaluation to transcribe bundled public audio files."
+schemes:
+  W3PunctuationPaired6:
+    build:
+      targets:
+        W3PunctuationPaired6: all
+    run:
+      config: Debug

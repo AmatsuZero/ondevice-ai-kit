@@ -1,3 +1,7 @@
+## W3 2026-11-16：同期六输入标点runner已构建核验
+
+[进展](validation/w3-punctuation-control-progress-20261116.md)：主代理获本次隔离实现例外后完成probes/ios-punctuation-paired6，37计划/506Core/330实包检查与unsigned App/driver构建通过。17真实Swift输入、4动态framework、65完整性WAV及固定12行AB/BA合同已固定；无设备/识别/签名/安装，新执行授权未获得。旧65单臂准备保留不作为下一次运行；hy3新429终态已停，重置2026-11-17 13:40:39 UTC+8不是恢复证明，无重试/自动换模。原65授权已消费，独立最终审核/P4、R4/R5及完整W3仍open。
+
 ## W3 2026-11-16：逐项误差分析可复算
 
 [Apple/Qwen分析](validation/w3-paired-error-analysis-20261116.md)及工具已新增：格式差异不能解释Apple远场68词删除/两1110；原评分不变，13项挑战不评分，TECNO41缺失槽位显式保留。最终源码10,879核验/13负例通过、限定复核非P4。零新设备/识别/下载，已消费Apple65不重跑；未消费Android单片仍待实体连接变化后原合同fresh守卫。R4/R5/P1–P4/W3仍open，后续可准备显式标点独立控制，不能宣称已修复。

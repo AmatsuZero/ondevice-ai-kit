@@ -1,3 +1,7 @@
+## 2026-11-16：同期标点配对runner本地准备通过
+
+[本次进展](../validation/w3-punctuation-control-progress-20261116.md)：用户明确允许主代理本地完成本次隔离runner后，六输入12请求AB/BA计划37检查、继承Core506、unsigned App/driver构建及实包330检查通过；17真实Swift输入、两独立arm动态framework/同Core与Speech、65WAV身份均固定。仅A unset/B guarded true，不推断默认或效果；旧65单臂包保留不执行，原Apple65授权已消费。新hy3 stderr429/exit0/零候选保留并停线（重置观察2026-11-17 13:40:39 UTC+8）；本次实现来自主代理例外。零新设备/识别/下载，待新12请求执行授权；没有独立最终源码或P4接受，R4/R5、P1–P4/W3仍open。
+
 ## 2026-11-16：Apple/Qwen逐项误差已离线分解
 
 [新对照](../validation/w3-paired-error-analysis-20261116.md)保持原scorer，Apple中文95错误中45为标点格式、近英36/75、远英仅11/103且含68词删除；TECNO仅24完成，41缺失槽位不以Mac补齐。免费hy3候选经精确修正，10,879核验/13负例及限定复核通过，非P4；自动标点只是待验证控制线索，零新设备/识别/下载/生产变更。R4/R5/P1–P4/W3仍open。

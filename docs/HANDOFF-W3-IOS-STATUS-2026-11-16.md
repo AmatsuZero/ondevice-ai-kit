@@ -1,3 +1,5 @@
+- [同期标点配对runner准备](validation/w3-punctuation-control-progress-20261116.md)：用户明确一次本地实现例外后，六输入12请求固定AB/BA runner37/506/330检查及unsigned App/driver构建通过，尚未签名/安装/运行，新执行授权未获得。原Apple65不重放，旧单臂65包保留不执行；hy3新429停线、无自动重试。没有独立最终源码/P4或R4/R5/W3通过声明。
+
 - [Apple/Qwen逐项误差分析](validation/w3-paired-error-analysis-20261116.md)：中文45/95和近英36/75为确定编辑路径中的标点格式差异，远英仅11/103，另有68词删除/两typed1110；没有替代评分或新识别。显式addsPunctuation仅为待验证线索，10,879项核验与限定复核不等于R4/P4通过。
 
 - [Apple65设备端文件批次结果](validation/w3-apple65-device-20261116.md)：iPhone17,2单批文件验证已消费，启动授权来源不归因，UI故障与首轮零Run证据保留；r3仅1次Run。无渲染前台、系统Speech真峰值或产品通过证据；限定独立证据复核接受本批记录（非P4），R4/R5和最终生产接受仍open。

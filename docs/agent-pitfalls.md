@@ -1,3 +1,7 @@
+## W3配对runner供应：exit0/空输出仍可能是stderr429（2026-11-16）
+
+新hy3请求3.028秒终态exit0、stdout0，stderr明确429并报告2026-11-17 13:40:39 UTC+8重置；无候选、无modelUsage。不能称仍在生成、成功交付、构建失败或已恢复额度。保留原提示/两输出/进程及父裁定，停线无自动重试/换模/付费fallback。用户随后仅对本次隔离配对runner明确准许主代理本地实现；实现来源记主代理例外，不冒充CBC交付，不扩为生产改动或新识别授权。另首Core检查调用把manifest路径误传给fixture根目录参数，保留失败仅修调用，506检查随后通过。证据.omx/artifacts/w3-punctuation-paired6-preparation-20261116/；[边界](validation/w3-punctuation-control-progress-20261116.md)。
+
 ## W3逐项评分：casefold、挑战与Python元数据（2026-11-16）
 
 新离线工具首稿漏casefold=True，使25行原评分不符，并给2条非空挑战评分；实际执行后拒收，六处精确候选修正，仅speech成功非空参与原CER/WER，typed1110/null和TECNO41缺失槽位原样保留。复核附带元数据补丁把Python键写成JavaScript式未加引号标识，实跑NameError，另一次单行候选改dict关键字参数后恢复；不能因源码复核接受而跳过实际执行。最终10,879核验/13负例及确定性重跑通过。formattingOnly只是固定对齐路径移除Unicode标点后的机械相等，不等于语义等价，也不产生去标点后的通过分数。四helper原件、两封装提取错误及NameError均留.omx/artifacts/w3-paired-error-analysis-20261116/；无重跑识别/设备/生产变更，[报告](validation/w3-paired-error-analysis-20261116.md)。
