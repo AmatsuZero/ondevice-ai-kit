@@ -1,3 +1,7 @@
+## W3 组合 App：SwiftPM 的本地 artifact 记录 — 2026-11-16
+
+隔离准备时artifacts为空，但完整组合App构建后SwiftPM将本地OpenCV XCFramework登记到workspace-state.json的artifacts；不能要求构建后仍为空并据此推断下载。实际唯一记录source.type=local、packageRef=fileSystem/apple-opencv、targetName=opencv2，path精确指向已核完整文件树的本地输入，prebuilts仍空。首核验原失败/初版checker保留；只修为精确核对这一条记录，读取同一App通过，没有重建/移除记录或放宽为任意artifact。证据`.omx/artifacts/w3-apple-sdk-app-candidate-20261116/`，见[组合App结果](validation/w3-apple-sdk-app-candidate-20261116.md)。
+
 ## W3 续接核验：多产品测试汇总与中文 Git 路径 — 2026-11-16
 
 SwiftPM 八个 XCTest 产品分别输出通过与计数，没有单条跨产品的484汇总；要求该字面行的检查失败不等于测试失败。按产品passed段及紧接的Executed行去重核对原收据，八组共484、零失败，无需重跑。Git默认将中文路径输出为带引号的八进制转义，直接与Unicode文件名比较会误拒；本次Wiki路径守卫在写入后、暂存/提交/推送前停止，改用`--name-only -z`读取原始路径，校验正文/原页保留后才唯一提交推送。不修改全局quotePath，不把guard失败当远端发布失败或重发Issue。原失败及修正见`.omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/continuation-checker-assumptions.json`。

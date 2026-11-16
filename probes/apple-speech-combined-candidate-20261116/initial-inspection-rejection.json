@@ -1,0 +1,23 @@
+{
+  "failure": "assert workspace artifacts/prebuilts both empty failed after successful build",
+  "buildNotRerun": true,
+  "artifacts": [
+    {
+      "kind": {
+        "xcframework": {}
+      },
+      "packageRef": {
+        "identity": "apple-opencv",
+        "kind": "fileSystem",
+        "location": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/source/apple-opencv",
+        "name": "apple-opencv"
+      },
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/source/apple-opencv/Vendor/opencv2.xcframework",
+      "source": {
+        "type": "local"
+      },
+      "targetName": "opencv2"
+    }
+  ],
+  "prebuilts": []
+}

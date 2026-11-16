@@ -1,3 +1,7 @@
+## W3 2026-11-16：当前标点SDK的完整组合App构建通过
+
+[实际App验收](validation/w3-apple-sdk-app-candidate-20261116.md)：当前标点SDK已进入完整Speech/Video/MLX/OpenCV组合App：固定c8038cc的203选定输入、复用已核F02 .6 shared与OpenCV，实际unsigned arm64/minOS18构建76.984s通过；92App文件/30实际SwiftFileList/643唯一Swift输入/74+3通知已核，206原内容保持。首checker仅误拒SwiftPM本地OpenCV artifact，原失败保留、同App检查恢复，无重建。零签名/安装/设备识别/模型下载；当前为本地候选，R4/R5/P1–P4/W3仍open。
+
 ## W3 2026-11-16：Apple 标点配置已集成本地 SDK 候选
 
 [集成验收](validation/w3-apple-punctuation-sdk-candidate-20261116.md)：精确应用既有外部候选，Apple FILE 仅增加 guarded addsPunctuation=true；四份AppleSpeech源与实测B臂相同。完整Apple484测试/零跳过失败及iOS15 Release模块构建通过，10真实Swift输入/3对象与3模块已绑定；1条既有Identity警告两处渲染、首Xcode缺scheme失败保留。无新设备识别/发布，shippingApp仍null，R4/R5/P4/W3未关闭。另TECNO注册对象变化后一次只读ADB仍为空，零prepare/解码、合同未消费；不重复恢复。旧准备/批次身份保持，不改hash重放。

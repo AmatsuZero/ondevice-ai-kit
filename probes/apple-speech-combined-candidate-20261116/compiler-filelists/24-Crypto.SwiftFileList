@@ -1,0 +1,95 @@
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/DerivedData/Build/Intermediates.noindex/swift-crypto.build/Debug-iphoneos/Crypto-t.build/DerivedSources/resource_bundle_accessor.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/AEADs/AES/GCM/AES-GCM.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/AEADs/AES/GCM/BoringSSL/AES-GCM_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/AEADs/ChachaPoly/BoringSSL/ChaChaPoly_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/AEADs/ChachaPoly/ChaChaPoly.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/AEADs/Cipher.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/AEADs/Nonces.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/ASN1.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ASN1Any.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ASN1BitString.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ASN1Boolean.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ASN1Identifier.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ASN1Integer.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ASN1Null.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ASN1OctetString.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ASN1Strings.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ArraySliceBigint.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/GeneralizedTime.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/Basic\ ASN1\ Types/ObjectIdentifier.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/ECDSASignature.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/PEMDocument.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/PKCS8PrivateKey.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/SEC1PrivateKey.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/ASN1/SubjectPublicKeyInfo.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/CryptoError_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/CryptoKitErrors.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Digests/BoringSSL/Digest_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Digests/Digest.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Digests/Digests.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Digests/HashFunctions.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Digests/HashFunctions_SHA2.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Digests/HashFunctions_SHA3.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Digests/XKCP/Digest_xkcp.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/HPKE-AEAD.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/HPKE-Ciphersuite.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/HPKE-KDF.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/HPKE-KexKeyDerivation.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/HPKE-LabeledExtract.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/HPKE-Utils.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/KEM/Conformances/DHKEM.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/KEM/Conformances/HPKE-KEM-Curve25519.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/KEM/Conformances/HPKE-NIST-EC-KEMs.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Ciphersuite/KEM/HPKE-KEM.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/HPKE-Errors.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/HPKE.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Key\ Schedule/HPKE-Context.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Key\ Schedule/HPKE-KeySchedule.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/HPKE/Modes/HPKE-Modes.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Insecure/Insecure.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Insecure/Insecure_HashFunctions.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/KEM/BoringSSL/MLKEM_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/KEM/BoringSSL/MLKEM_wrapper.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/KEM/BoringSSL/XWing_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/KEM/KEM-Errors.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/KEM/KEM.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/KEM/MLKEM.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/KEM/XWing.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Key\ Agreement/BoringSSL/ECDH_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Key\ Agreement/DH.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Key\ Agreement/ECDH.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Key\ Derivation/ANSIx963.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Key\ Derivation/HKDF.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Key\ Wrapping/AESWrap.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Key\ Wrapping/BoringSSL/AESWrap_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Keys/EC/BoringSSL/Ed25519_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Keys/EC/BoringSSL/NISTCurvesKeys_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Keys/EC/BoringSSL/X25519Keys_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Keys/EC/Curve25519.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Keys/EC/Ed25519Keys.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Keys/EC/NISTCurvesKeys.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Keys/EC/X25519Keys.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Keys/Symmetric/SymmetricKeys.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Message\ Authentication\ Codes/HMAC/HMAC.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Message\ Authentication\ Codes/MACFunctions.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Message\ Authentication\ Codes/MessageAuthenticationCode.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/PRF/AES.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Signatures/BoringSSL/ECDSASignature_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Signatures/BoringSSL/ECDSA_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Signatures/BoringSSL/EdDSA_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Signatures/BoringSSL/MLDSA_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Signatures/BoringSSL/MLDSA_wrapper.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Signatures/ECDSA.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Signatures/Ed25519.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Signatures/MLDSA.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Signatures/Signature.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/BoringSSL/CryptoKitErrors_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/BoringSSL/Optional+withUnsafeBytes_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/BoringSSL/RNG_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/BoringSSL/SafeCompare_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/BoringSSL/Zeroization_boring.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/BoringSSL/_CryptoModuleAnchor.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/PrettyBytes.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/SafeCompare.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/SecureBytes.swift
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/SourcePackages/checkouts/swift-crypto/Sources/Crypto/Util/Zeroization.swift

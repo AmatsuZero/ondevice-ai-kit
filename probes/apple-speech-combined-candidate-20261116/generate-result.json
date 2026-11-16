@@ -1,0 +1,13 @@
+{
+  "exitCode": 0,
+  "elapsedSeconds": 0.1234452499775216,
+  "atUTC": "2026-11-16T12:48:09.620326+00:00",
+  "command": [
+    "rtk",
+    "proxy",
+    "/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/source/scripts/generate-speech-demo.rb"
+  ],
+  "stdoutSHA256": "3782d2c233363953261cf4fb58b692c23b32e9c6e2e0faf5b8be3cd2fd2b245d",
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
