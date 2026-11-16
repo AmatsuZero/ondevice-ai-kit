@@ -1,3 +1,7 @@
+## W3逐项评分：casefold、挑战与Python元数据（2026-11-16）
+
+新离线工具首稿漏casefold=True，使25行原评分不符，并给2条非空挑战评分；实际执行后拒收，六处精确候选修正，仅speech成功非空参与原CER/WER，typed1110/null和TECNO41缺失槽位原样保留。复核附带元数据补丁把Python键写成JavaScript式未加引号标识，实跑NameError，另一次单行候选改dict关键字参数后恢复；不能因源码复核接受而跳过实际执行。最终10,879核验/13负例及确定性重跑通过。formattingOnly只是固定对齐路径移除Unicode标点后的机械相等，不等于语义等价，也不产生去标点后的通过分数。四helper原件、两封装提取错误及NameError均留.omx/artifacts/w3-paired-error-analysis-20261116/；无重跑识别/设备/生产变更，[报告](validation/w3-paired-error-analysis-20261116.md)。
+
 - iOS27文件批次UI陷阱：嵌套TCC allow按钮重复标识会先于Run失败；必须保留零Run/空Documents证据，修正firstMatch/owned实际子集，并把重复标识、profile选择、host缺失等失败控制作为历史错误留存。禁止据此泛化授权、重放批次或重试识别。
 
 ## W3 Apple65：XcodeGen显式资源与输出目录（2026-11-16）

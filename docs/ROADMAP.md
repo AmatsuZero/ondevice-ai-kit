@@ -1,3 +1,5 @@
+W3 2026-11-16：[Apple/Qwen逐项误差对照](validation/w3-paired-error-analysis-20261116.md)已通过10,879核验/13负例；格式编辑不能解释远场内容遗漏，零新设备/识别，R4/R5/P1–P4/W3仍open。
+
 ## 2026-11-16 W3 Apple Speech 有界源绑定结果摘要
 
 新接受 10 个 Core/Speech/AppleSpeech production Swift sources、16 个 selected inputs、14 个 compiler Swift source bindings；保留 18-file 历史 unsigned App。实际 264 checks passed，含 177 protection checks；no fresh build/device/download，不重试已知 quota failure。报告：[Apple 绑定报告](validation/w3-apple-source-binding-20261116.md)。保留其他编辑与旧失败；W3 完整范围不变，R4/R5/final adoption/P4/W3 均 open。
