@@ -1,0 +1,674 @@
+{
+  "status": "accepted-bounded-apple-speech-source-and-historical-build-binding",
+  "checkedAtUTC": "2026-11-16T00:48:20.080968+00:00",
+  "currentSourceHeadAtInspection": "88643d26a8221684d7af4d7fe0dd949521760e7f",
+  "historicalBuildSourceCommit": "636a6eb8854db5dff74244c42c3ce0e82bd2be9f",
+  "historicalArchiveSha256": "5d147a918ccfdd99c193400de401eb0abbebe3d3e132f3f33ed2eaddbc5bb7a7",
+  "productionSourceCount": 10,
+  "selectedCurrentSourceCount": 16,
+  "selectedCompiledSwiftInputs": 14,
+  "selectedDeviceSwiftFileLists": {
+    "derived-device/Build/Intermediates.noindex/OnDeviceAIKit.build/Debug-iphoneos/ODAIKitAppleSpeech-t.build/Objects-normal/arm64/ODAIKitAppleSpeech.SwiftFileList": {
+      "recordedSHA256": "14612fbc57088354e3479aab4672f0c877fb8805816dbacf834f012d32cdd9cc",
+      "rawFileCurrentlyRetained": false,
+      "selectedInputs": [
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift"
+      ]
+    },
+    "derived-device/Build/Intermediates.noindex/OnDeviceAIKit.build/Debug-iphoneos/ODAIKitCore-t.build/Objects-normal/arm64/ODAIKitCore.SwiftFileList": {
+      "recordedSHA256": "639b5f6e7c0f7d6a90757db40ae2379a5394a8619c2efcffa46a9e5143f5a5ef",
+      "rawFileCurrentlyRetained": false,
+      "selectedInputs": [
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitCore/Availability.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitCore/LatestFrameQueue.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitCore/TaskGate.swift"
+      ]
+    },
+    "derived-device/Build/Intermediates.noindex/OnDeviceAIKit.build/Debug-iphoneos/ODAIKitSpeech-t.build/Objects-normal/arm64/ODAIKitSpeech.SwiftFileList": {
+      "recordedSHA256": "2738c6465ec0989f30ccf9d3ff6046b92b6c3c4fd572cb76c7ec247c0d168aca",
+      "rawFileCurrentlyRetained": false,
+      "selectedInputs": [
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitSpeech/SpeechClient.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift"
+      ]
+    },
+    "derived-device/Build/Intermediates.noindex/SpeechDemo.build/Debug-iphoneos/SpeechDemo.build/Objects-normal/arm64/SpeechDemo.SwiftFileList": {
+      "recordedSHA256": "49ecf865f6fc7d10f8d6d4e84c6e93bd825d923845347a8c96f1a7c17dffb148",
+      "rawFileCurrentlyRetained": false,
+      "selectedInputs": [
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/demo/iosApp/SpeechAudioSession.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/demo/iosApp/SpeechFilePicker.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/demo/iosApp/SpeechHost.swift",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/apple-current-candidate-20261107/source/demo/iosApp/SpeechInputStore.swift"
+      ]
+    }
+  },
+  "currentSelectedSources": {
+    "apple/Package.swift": {
+      "bytes": 2335,
+      "sha256": "6d556d858eb4fe8a9d7abf8c30799b3b4e66cc5cfde27620f6c16d076961fcfb"
+    },
+    "apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift": {
+      "bytes": 3968,
+      "sha256": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab"
+    },
+    "apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift": {
+      "bytes": 453,
+      "sha256": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466"
+    },
+    "apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift": {
+      "bytes": 14149,
+      "sha256": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9"
+    },
+    "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift": {
+      "bytes": 34513,
+      "sha256": "46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db"
+    },
+    "apple/Sources/ODAIKitCore/Availability.swift": {
+      "bytes": 1014,
+      "sha256": "87f24120073f9c62ce6e3089e656356851a5732340e176e166fbc0d4130324a2"
+    },
+    "apple/Sources/ODAIKitCore/LatestFrameQueue.swift": {
+      "bytes": 1361,
+      "sha256": "2c8c7529fef0d34728fd7f14cd59322cb35952e2eaf9b2d92d7a4e2366cbf7ac"
+    },
+    "apple/Sources/ODAIKitCore/TaskGate.swift": {
+      "bytes": 1065,
+      "sha256": "0c62b522c82e0916d9f1330d3eda1a5bf9992de8c30e9689ad61e0aeba08d37d"
+    },
+    "apple/Sources/ODAIKitSpeech/SpeechClient.swift": {
+      "bytes": 15810,
+      "sha256": "59fcf256ed49ba8175d320dec03da149c9fc83f19d319d53eeb85f237be88990"
+    },
+    "apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift": {
+      "bytes": 1731,
+      "sha256": "9c77a4179a83329f66ea25df6f148c024eb8a0be36d9d3c28663a397fd8d6500"
+    },
+    "apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift": {
+      "bytes": 3589,
+      "sha256": "868941155d991dec17be86906ac18d4a1388e5a6b8a4172324657cbaa37bf811"
+    },
+    "demo/iosApp/Info.plist": {
+      "bytes": 309,
+      "sha256": "b67d0a6a83a5bfd1b83bde4302050008fa870aad6d4c415264f0e01b4ca9631b"
+    },
+    "demo/iosApp/SpeechAudioSession.swift": {
+      "bytes": 3088,
+      "sha256": "da37eb030c0c0c10a6b59cc377de4a429eec83b0b3e6eacb6c2d57b7716feade"
+    },
+    "demo/iosApp/SpeechFilePicker.swift": {
+      "bytes": 1190,
+      "sha256": "41c742381708035956350d6fbba8243602008222d3eda8fae664ee5b4ddb3481"
+    },
+    "demo/iosApp/SpeechHost.swift": {
+      "bytes": 15675,
+      "sha256": "2c20683ba6cdd6db919307f494ce37866d8eef893756f5033d3c3debd506d5fc"
+    },
+    "demo/iosApp/SpeechInputStore.swift": {
+      "bytes": 3794,
+      "sha256": "bbde66047350ffd8d983b9ce6256f1a3e50527f9fc9b6ff172c182fe7719b4d6"
+    }
+  },
+  "historicalDeviceApp": {
+    "path": "artifacts/verification/apple-current-candidate-20261107/derived-device/Build/Products/Debug-iphoneos/SpeechDemo.app",
+    "fileCount": 18,
+    "files": {
+      "Frameworks/libswiftCompatibilitySpan.dylib": {
+        "bytes": 172096,
+        "sha256": "d8a3dfa8ee9099c3cf302ae555fdb0c630be719f190758280eb8345efce2d624"
+      },
+      "Info.plist": {
+        "bytes": 1244,
+        "sha256": "ea534317bb7f72c8010cf1656a293d9f6158680a8c238209daf0afbfa522c03d"
+      },
+      "OnDeviceAIKitAppleMLX_ODAIKitAppleMLXVLM.bundle/Info.plist": {
+        "bytes": 714,
+        "sha256": "1eb975d6e694a05c6625c27291a46857c20a2e336c43e9973fa2d732d6669148"
+      },
+      "OnDeviceAIKitAppleMLX_ODAIKitAppleMLXVLM.bundle/smolvlm2-model.json": {
+        "bytes": 5575,
+        "sha256": "c074e693cc0fb9cfb19d6e7a393ffb113108e88d1489a387e8cb06d309602d54"
+      },
+      "OpenCVIdentityNotices/OpenCV-LICENSE.txt": {
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "OpenCVIdentityNotices/SFace-LICENSE.txt": {
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "OpenCVIdentityNotices/YuNet-LICENSE.txt": {
+        "bytes": 1085,
+        "sha256": "c83b8120c50ccbd4c4f96edf53141bdd566ebb8f8e9227e415326aa1b1aba958"
+      },
+      "PkgInfo": {
+        "bytes": 8,
+        "sha256": "82502191c9484b04d685374f9879a0066069c49b8acae7a04b01d38d07e8eca0"
+      },
+      "SpeechDemo": {
+        "bytes": 72472,
+        "sha256": "05d4fd715edf6652c6d523fef39e13001c4f9569d8af6420b4e7e7f3701ad6ab"
+      },
+      "SpeechDemo.debug.dylib": {
+        "bytes": 157457496,
+        "sha256": "566d52831e574f1775877d17665e7c1385a24d73b3c48bf67be08ecf6130669d"
+      },
+      "__preview.dylib": {
+        "bytes": 16456,
+        "sha256": "d941e5f96b267d7b24317318ce50662d6b013f168d02093c7921f4327d1e277e"
+      },
+      "mlx-swift_Cmlx.bundle/Info.plist": {
+        "bytes": 672,
+        "sha256": "edeed615e12b40b68da82c821a26f7c899edaa4881c869c91fe34747aebcb9e6"
+      },
+      "mlx-swift_Cmlx.bundle/default.metallib": {
+        "bytes": 2399192,
+        "sha256": "9661f090f215179bb3ba647a4a1cd347f8d8bebed8cbd7e2fdaf6f71fa7ea886"
+      },
+      "swift-crypto_Crypto.bundle/Info.plist": {
+        "bytes": 684,
+        "sha256": "11a758dbc27f56a0cb48127b54bae7a31f5f950a6a4420a93031f72055f686cd"
+      },
+      "swift-crypto_Crypto.bundle/PrivacyInfo.xcprivacy": {
+        "bytes": 398,
+        "sha256": "42fb8a30dd8d7ba0900e1bf17fe64ed8c12cfdb8a9c791ab6b4e1eceb0f299c0"
+      },
+      "swift-transformers_Hub.bundle/Info.plist": {
+        "bytes": 690,
+        "sha256": "8dbe33674a521d47ea4b45c22c6eb2a3fed01209a5859ccf4fb883d0eb24386f"
+      },
+      "swift-transformers_Hub.bundle/gpt2_tokenizer_config.json": {
+        "bytes": 234,
+        "sha256": "551e26ec611d8d0c8edc3ef72e518a38418cb71f40de1347dd486a595e1557d7"
+      },
+      "swift-transformers_Hub.bundle/t5_tokenizer_config.json": {
+        "bytes": 20746,
+        "sha256": "e0aff0b1de9071e30d9a60a199303b6abe916a64a19932bd1c46992279b41a1f"
+      }
+    },
+    "bundleId": "io.ondeviceai.combined.demo",
+    "sdkCommit": "636a6eb8854db5dff74244c42c3ce0e82bd2be9f",
+    "configuration": "Debug/generic iOS/arm64",
+    "minimumOSVersion": "18.0",
+    "debugDylibSHA256": "566d52831e574f1775877d17665e7c1385a24d73b3c48bf67be08ecf6130669d",
+    "signingKind": "unsigned-device",
+    "symbolListingCounts": {
+      "AppleSpeechRecognizerBackend": 12,
+      "SpeechClient": 3,
+      "SpeechHost": 15
+    }
+  },
+  "sustainedProbeSourceIdentity": "sha256:4bcf5c6764ed9ffd9ebf21d6d2898fe2a72a47dd28bf48368519c776c434cc35",
+  "sustainedRawReportSHA256": "1d6f4185cee55521f0f87d4a4d9077a4a3a245af552774ccfebf63dfd02b5862",
+  "originalMeasuredRequests": 40,
+  "checksPassed": 264,
+  "checks": [
+    "historical source commit retained",
+    "historical archive identity retained",
+    "historical bounded build accepted",
+    "historical receipt:inputs.json",
+    "historical receipt:product-inspection.json",
+    "historical receipt:compiled-inputs.json",
+    "historical receipt:device.log",
+    "historical receipt:device-result.json",
+    "historical receipt:device-started.json",
+    "historical receipt:device-symbols.txt",
+    "historical device build log success",
+    "historical device build exit zero",
+    "ten probe-bound production Swift sources",
+    "three current Speech dependency modules exactly cover manifest sources",
+    "selected current/snapshot/historical committed bytes:apple/Package.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift",
+    "sustained source manifest:apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift",
+    "sustained source manifest:apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift",
+    "sustained source manifest:apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+    "sustained source manifest:apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitCore/Availability.swift",
+    "sustained source manifest:apple/Sources/ODAIKitCore/Availability.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitCore/Availability.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitCore/LatestFrameQueue.swift",
+    "sustained source manifest:apple/Sources/ODAIKitCore/LatestFrameQueue.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitCore/LatestFrameQueue.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitCore/TaskGate.swift",
+    "sustained source manifest:apple/Sources/ODAIKitCore/TaskGate.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitCore/TaskGate.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitSpeech/SpeechClient.swift",
+    "sustained source manifest:apple/Sources/ODAIKitSpeech/SpeechClient.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitSpeech/SpeechClient.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift",
+    "sustained source manifest:apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift",
+    "selected current/snapshot/historical committed bytes:apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift",
+    "sustained source manifest:apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift",
+    "historical compiled Swift input:apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift",
+    "selected current/snapshot/historical committed bytes:demo/iosApp/Info.plist",
+    "selected current/snapshot/historical committed bytes:demo/iosApp/SpeechAudioSession.swift",
+    "historical compiled Swift input:demo/iosApp/SpeechAudioSession.swift",
+    "selected current/snapshot/historical committed bytes:demo/iosApp/SpeechFilePicker.swift",
+    "historical compiled Swift input:demo/iosApp/SpeechFilePicker.swift",
+    "selected current/snapshot/historical committed bytes:demo/iosApp/SpeechHost.swift",
+    "historical compiled Swift input:demo/iosApp/SpeechHost.swift",
+    "selected current/snapshot/historical committed bytes:demo/iosApp/SpeechInputStore.swift",
+    "historical compiled Swift input:demo/iosApp/SpeechInputStore.swift",
+    "all fourteen selected Swift sources in retained historical device file-list records",
+    "selected input corroborated by retained SwiftCompile record:AppleAVSpeechBackend.swift",
+    "selected input corroborated by retained SwiftCompile record:AppleSpeechAudioSession.swift",
+    "selected input corroborated by retained SwiftCompile record:AppleSpeechMicrophone.swift",
+    "selected input corroborated by retained SwiftCompile record:AppleSpeechRecognizerBackend.swift",
+    "selected input corroborated by retained SwiftCompile record:Availability.swift",
+    "selected input corroborated by retained SwiftCompile record:LatestFrameQueue.swift",
+    "selected input corroborated by retained SwiftCompile record:TaskGate.swift",
+    "selected input corroborated by retained SwiftCompile record:SpeechClient.swift",
+    "selected input corroborated by retained SwiftCompile record:SpeechMicrophone.swift",
+    "selected input corroborated by retained SwiftCompile record:SpeechMicrophoneClientTask.swift",
+    "selected input corroborated by retained SwiftCompile record:SpeechAudioSession.swift",
+    "selected input corroborated by retained SwiftCompile record:SpeechFilePicker.swift",
+    "selected input corroborated by retained SwiftCompile record:SpeechHost.swift",
+    "selected input corroborated by retained SwiftCompile record:SpeechInputStore.swift",
+    "Core/Speech/AppleSpeech/Demo device file lists",
+    "base Apple package declares no external Swift packages",
+    "retained historical device App complete file inventory unchanged",
+    "historical device bundle retained",
+    "historical App sdkCommit retained",
+    "historical App deployment boundary retained",
+    "retained device debug dylib fixed identity",
+    "historical unsigned identity retained; no signing operation",
+    "retained symbol listing contains AppleSpeechRecognizerBackend",
+    "retained symbol listing contains SpeechClient",
+    "retained symbol listing contains SpeechHost",
+    "archived and retained probe source manifests identical",
+    "original two terminal report reads identical",
+    "original sustained raw report identity retained",
+    "original sustained source identity retained",
+    "original bounded 20 cycles 40 measured calls retained",
+    "original production and budget unverified flags retained",
+    "protected content:benchmark/p11/grouped-report-manifest.json",
+    "protected content:demo/iosApp/OnDeviceAIDemo.xcodeproj/project.pbxproj",
+    "protected content:docs/HANDOFF-2026-11-05-next-session.md",
+    "protected content:docs/ROADMAP.md",
+    "protected content:docs/agent-pitfalls.md",
+    "protected content:docs/roadmap/W3-speech.md",
+    "protected content:docs/validation/accepted-work-commits-20261108.md",
+    "protected content:docs/validation/agent-task-ledger-20261107.md",
+    "protected content:docs/validation/foundation-followups.md",
+    "protected content:docs/validation/multimodal-video-demo.md",
+    "protected content:docs/validation/p11-readiness-reconciliation-20261109.md",
+    "protected content:docs/validation/p11-status-matrix-20261027.md",
+    "protected content:docs/validation/roadmap-status-audit-20261107.md",
+    "protected content:docs/validation/task-cleanup-20261108.md",
+    "protected content:docs/validation/w7-data-dual-end-plan-20261108.md",
+    "protected content:docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md",
+    "protected content:docs/HANDOFF-W3-IOS-STATUS-2026-11-16.md",
+    "protected content:docs/roadmap/W6-video-understanding.md",
+    "protected content:docs/roadmap/W7-identity-pad.md",
+    "protected content:docs/roadmap/W8-resources.md",
+    "protected content:docs/superpowers/plans/2026-11-08-qwen2vl-mobile-evaluation.md",
+    "protected content:docs/superpowers/plans/2026-11-10-qwen2vl-perception-test-evaluation.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-cache256-detail14.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-choice-constraint.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-detail14.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-exact-boundaries.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-graph-detail14.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-guard-exit.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-idle-vmmap.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-idle-wait.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-image-scopes.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-image-weak20.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-iphone-choice.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-iphone-graph36.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-iphone-idle36.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-model-lifetime20.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-model-report-scope.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-online-choice.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-oracle-eight.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-preparation-lifetime.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-render-pool20.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-report-replay.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-stop-telemetry.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-swift-video-parity.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-valid36-remainder13.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-valid36.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-video251-tail8.md",
+    "protected content:docs/superpowers/plans/2026-11-14-qwen3vl-vmmap20.md",
+    "protected content:docs/superpowers/plans/2026-11-15-qwen2vl-bf16-valid36-disposition.md",
+    "protected content:docs/superpowers/plans/2026-11-15-qwen3vl-block0-sub-boundaries.md",
+    "protected content:docs/superpowers/plans/2026-11-15-qwen3vl-explicit-layernorm-causal.md",
+    "protected content:docs/superpowers/plans/2026-11-15-qwen3vl-norm1-localization.md",
+    "protected content:docs/superpowers/plans/2026-11-15-qwen3vl-vision-layer-localization.md",
+    "protected content:docs/superpowers/plans/2026-11-15-smolvlm2-valid36.md",
+    "protected content:docs/superpowers/plans/2026-11-15-valid36-ensemble-disposition.md",
+    "protected content:docs/superpowers/specs/2026-11-10-qwen2vl-perception-test-evaluation-design.md",
+    "protected content:docs/superpowers/specs/2026-11-15-qwen3vl-explicit-layernorm-causal-design.md",
+    "protected content:docs/superpowers/specs/2026-11-15-smolvlm2-valid36-design.md",
+    "protected content:docs/validation/f08-expanded72-20261112.md",
+    "protected content:docs/validation/f08-next-candidate-download-gate-20261115.md",
+    "protected content:docs/validation/f08-qwen2vl-alpha-kernel-control-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-bf16-valid36-disposition-20261115.md",
+    "protected content:docs/validation/f08-qwen2vl-coreimage-boundary-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-cross-runtime-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-dense-kernel-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-memory-coverage-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-object-change-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-official24-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-original-bf16-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-perception-test-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-pixel-stages-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-preprocess-coverage-20261111.md",
+    "protected content:docs/validation/f08-qwen2vl-residual-four-20261111.md",
+    "protected content:docs/validation/f08-qwen35-upstream-patch-20261115.md",
+    "protected content:docs/validation/f08-qwen35-valid36-20261115.md",
+    "protected content:docs/validation/f08-qwen35-video-sft-pilot24-20261115.md",
+    "protected content:docs/validation/f08-qwen35-video-sft-smoke-20261115.md",
+    "protected content:docs/validation/f08-qwen35-video-sft-train36-valid18-plan-20261115.md",
+    "protected content:docs/validation/f08-qwen3vl-block0-boundaries-20261115.md",
+    "protected content:docs/validation/f08-qwen3vl-cache256-detail14-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-candidate-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-choice-constraint-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-detail14-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-error-visibility14-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-explicit-layernorm-20261115.md",
+    "protected content:docs/validation/f08-qwen3vl-graph-detail14-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-guard-exit-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-idle-reclamation-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-image-scopes-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-image-weak20-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-iphone-graph36-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-iphone-idle36-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-iphone-valid18-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-model-lifetime20-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-model-report-scope-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-norm1-boundaries-20261115.md",
+    "protected content:docs/validation/f08-qwen3vl-online-choice-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-oracle-eight-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-preparation-lifetime-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-render-pool20-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-report-replay-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-stop-telemetry-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-swift-parity-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-valid36-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-video251-tail8-20261114.md",
+    "protected content:docs/validation/f08-qwen3vl-vision-layers-20261115.md",
+    "protected content:docs/validation/f08-qwen3vl-vmmap20-20261114.md",
+    "protected content:docs/validation/f08-real-video-pair-audit-20261113.md",
+    "protected content:docs/validation/f08-smolvlm2-dense16-visible3-20261112.md",
+    "protected content:docs/validation/f08-smolvlm2-fixed24-20261111.md",
+    "protected content:docs/validation/f08-smolvlm2-mobile-seqlen81-20261112.md",
+    "protected content:docs/validation/f08-smolvlm2-valid36-20261115.md",
+    "protected content:docs/validation/f08-smolvlm2-visibility-assessment-20261112.md",
+    "protected content:docs/validation/f08-valid18-20261112.md",
+    "protected content:docs/validation/f08-valid18-smol-neutral18-20261113.md",
+    "protected content:docs/validation/f08-valid18-visibility-assessment-20261112.md",
+    "protected content:docs/validation/f08-valid36-ensemble-disposition-20261115.md",
+    "protected content:docs/validation/f10-authorized-photo-data-20261107.md",
+    "protected content:docs/validation/face-identity.md",
+    "protected content:docs/validation/patches/f08-qwen2vl-video-grid-routing.patch",
+    "protected content:docs/validation/patches/f08-qwen35-vision-end-token.patch",
+    "protected content:docs/validation/progress-20261108-0830.md",
+    "protected content:docs/validation/progress-20261108-0928.md",
+    "protected content:docs/validation/progress-20261108-1009.md",
+    "protected content:docs/validation/progress-20261109-0730.md",
+    "protected content:docs/validation/progress-20261109-0830.md",
+    "protected content:docs/validation/progress-20261109-0930.md",
+    "protected content:docs/validation/progress-20261109-1030.md",
+    "protected content:docs/validation/progress-20261109-1130.md",
+    "protected content:docs/validation/progress-20261109-1230.md",
+    "protected content:docs/validation/progress-20261109-1330.md",
+    "protected content:docs/validation/progress-20261109-1800.md",
+    "protected content:docs/validation/progress-20261109-1830.md",
+    "protected content:docs/validation/progress-20261109-1845.md",
+    "protected content:docs/validation/progress-20261109-1856.md",
+    "protected content:docs/validation/progress-20261109-1857.md",
+    "protected content:docs/validation/progress-20261109-1922.md",
+    "protected content:docs/validation/progress-20261109-1935.md",
+    "protected content:docs/validation/progress-20261109-1950.md",
+    "protected content:docs/validation/progress-20261109-2010.md",
+    "protected content:docs/validation/progress-20261109-2013.md",
+    "protected content:docs/validation/progress-20261109-2025.md",
+    "protected content:docs/validation/progress-20261109-2045.md",
+    "protected content:docs/validation/progress-20261109-2100.md",
+    "protected content:docs/validation/progress-20261109-2139.md",
+    "protected content:docs/validation/progress-20261109-2252.md",
+    "protected content:docs/validation/progress-20261109-2347.md",
+    "protected content:docs/validation/progress-20261110-0002.md",
+    "protected content:docs/validation/progress-20261110-0538.md",
+    "protected content:docs/validation/progress-20261110-0548.md",
+    "protected content:docs/validation/progress-20261110-0558.md",
+    "protected content:docs/validation/progress-20261110-0606.md",
+    "protected content:docs/validation/progress-20261110-0611.md",
+    "protected content:docs/validation/progress-20261110-0618.md",
+    "protected content:docs/validation/progress-20261110-0640.md",
+    "protected content:docs/validation/progress-20261110-0649.md",
+    "protected content:docs/validation/progress-20261110-0718.md",
+    "protected content:docs/validation/progress-20261110-0730.md",
+    "protected content:docs/validation/progress-20261110-0740.md",
+    "protected content:docs/validation/progress-20261110-0748.md",
+    "protected content:docs/validation/progress-20261110-0754.md",
+    "protected content:docs/validation/progress-side-refresh-20261108-1110.md",
+    "protected content:docs/validation/progress-side-refresh-20261108-1722.md",
+    "protected content:docs/validation/progress-side-refresh-20261109-0713.md",
+    "protected content:docs/validation/progress-side-refresh-20261109-1346.md",
+    "protected content:docs/validation/progress-side-update-20261107-2014.md",
+    "protected content:docs/validation/remaining-work-dispatch-20261107-2024.md",
+    "protected content:docs/validation/w7-independent-evaluation-core-review-20261108.md",
+    "protected content:docs/validation/w7-paired-probe-source-review-20261108.md",
+    "protected content:probes/ios-camera-lifecycle/CameraPageResourceValidation.swift",
+    "protected content:probes/ios-camera-lifecycle/CameraResourceFailureReportChecks.swift",
+    "protected content:probes/ios-camera-lifecycle/CameraResourceValidation.swift",
+    "protected content:probes/ios-camera-lifecycle/README.md",
+    "protected content:probes/ios-camera-lifecycle/ThreadInventory.swift",
+    "protected content:probes/ios-camera-lifecycle/ThreadInventoryChecks.swift",
+    "protected content:probes/ios-personal-identity-evaluation/PersonalIdentityEvaluationTests.swift",
+    "protected content:scripts/generate-camera-resource-app.rb",
+    "initial protected Git status unchanged before integration"
+  ],
+  "protectedFilesBeforeIntegration": 177,
+  "newBuilds": 0,
+  "newDeviceRuns": 0,
+  "newDownloads": 0,
+  "microphoneStarts": 0,
+  "sourceChanges": 0,
+  "currentWholeAppEquivalenceProved": false,
+  "finalProductionCandidateAccepted": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "P4Accepted": false,
+  "W3Complete": false,
+  "limits": [
+    "Selected Speech subsystem and four Demo Swift sources are source-equivalent to a retained historical build; this is not a fresh current-HEAD App build or whole-App equivalence.",
+    "Original intermediate SwiftFileList files are no longer retained. The frozen product-inspection and compiled-input records and original compiler log remain; those records were checked without recreating original files or claiming fresh raw FileList verification.",
+    "40-call runtime observation remains a separate probe; no production-App ASR execution was added.",
+    "Static compiled-input/symbol/byte binding does not establish all runtime paths, final production adoption, quality or resource budget approval.",
+    "Historical whole-App dependency evidence remains historical and includes unrelated MLX/OpenCV/shared components; it is not an Apple Speech-only release verdict."
+  ],
+  "retainedQualityIdentityCheck": {
+    "status": "retained-apple-quality-report-identities-match",
+    "rawReports": {
+      "artifacts/verification/w3-apple-mandarin-file-20261109-0845/w3-file-report.json": {
+        "bytes": 3520,
+        "sha256": "fe656824d5fa5f75582fb25da3c94c4a80568a0bbc0a9a206698847f7ba167d4"
+      },
+      "artifacts/verification/w3-ami-pilot-20261110/apple/w3-file-report.json": {
+        "bytes": 3666,
+        "sha256": "9aa7afe2d984153535bc25123213a3997639feb6600309a84a44542d92096ceb"
+      },
+      "artifacts/verification/w3-ami-unattempted-20261110/apple/w3-file-report.json": {
+        "bytes": 1953,
+        "sha256": "8d9bf376594bb98ca22238587eb95437b26fb7523d2cf246199de55fd0eb0db2"
+      }
+    },
+    "appleMandarinCharacterMetric": {
+      "referenceUnits": 92,
+      "hypothesisUnits": 80,
+      "substitutions": 4,
+      "deletions": 12,
+      "insertions": 0,
+      "errors": 16,
+      "rate": 0.17391304347826086,
+      "defined": true
+    },
+    "appleAmiRecognized": 2,
+    "appleAmiTypedErrors": 1,
+    "productionReady": false,
+    "qualityThresholds": null,
+    "newRecognitionRequests": 0,
+    "metricsRecomputedThisTurn": false
+  },
+  "helperWriting": {
+    "initial": {
+      "model": "hy3",
+      "events": 7,
+      "observedToolUseEvents": 0,
+      "sessionId": "01a1e1d4-fa97-7103-8408-d8d91f272656",
+      "subtype": "success",
+      "isError": false,
+      "modelUsage": {
+        "hy3": {
+          "inputTokens": 11646,
+          "outputTokens": 10436,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "contextWindow": 960000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "markdownCharacters": 3097,
+      "candidateSHA256": "8e17b37004c88b2d9ccc366716147c8db26b74a69c77b9a50e0e25258e0c648f"
+    },
+    "correction": {
+      "model": "hy3",
+      "events": 7,
+      "observedToolUseEvents": 0,
+      "sessionId": "01a1e1d7-59de-798c-a3ac-fa68f2f62cf3",
+      "subtype": "success",
+      "isError": false,
+      "modelUsage": {
+        "hy3": {
+          "inputTokens": 5466,
+          "outputTokens": 13429,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0,
+          "contextWindow": 960000,
+          "maxOutputTokens": 64000
+        }
+      },
+      "candidateSHA256": "62edf557506cf4f6b91b0aff1f3df10dd1874718f4b13585708224862da18335"
+    },
+    "actualExecutionByHelper": false
+  },
+  "parentDisposition": {
+    "initialCandidateAccepted": false,
+    "issues": [
+      {
+        "code": "APPLE_TWO_STAGE_SCOPE",
+        "finding": "Initial template copied two-stage RTF into Apple; Apple system Speech must separate recorded recognition duration from any future complete request wall duration."
+      },
+      {
+        "code": "UNNECESSARY_BINARY_DECISION",
+        "finding": "Initial final paragraph forced two-way decision; ordinary reversible preparation and existing authorized diagnostic do not gain extra approval gates."
+      },
+      {
+        "code": "SHARED_PREFIX_NOT_RESULT",
+        "finding": "SharedPrefix was process text instead of accepted outcome; request concrete result summary."
+      }
+    ],
+    "initialChecksRejected": [
+      "Package.swift incorrectly treated as an App SwiftCompile input",
+      "Original SwiftFileList raw files assumed currently retained",
+      "Log parser assumed full swift-frontend -c lines rather than actual SwiftCompile records"
+    ],
+    "verificationFailuresRetained": true,
+    "newBuilds": 0,
+    "newDeviceRuns": 0,
+    "correctedCandidateAccepted": true,
+    "exactEditorialCorrections": [
+      [
+        "本稿只覆盖 `docs/validation/w3-apple-source-binding-20261116.md`，保留其他编辑；仅依据主代理离线检查结果写入，不是本稿作者的独立运行、设备验证或发布批准，不重试已知 quota failure。",
+        "本文依据主代理离线核验与 hy3 文稿整理；不代表独立设备验证或发布批准。"
+      ],
+      [
+        "newBuilds、deviceRuns、downloads、microphoneStarts、sourceChanges 均为 0",
+        "本轮构建、设备执行、下载、麦克风启动和生产源码修改均为 0"
+      ],
+      [
+        "保留被拒脚本与失败输出",
+        "保留被拒脚本与失败记录"
+      ],
+      [
+        "；无 production App ASR 执行",
+        "；本轮未新增生产 App ASR 执行"
+      ],
+      [
+        "Full W3 scope unchanged，无范围变化；阻塞仍为 R4、R5/W8、最终生产候选/P4 与 W3 open。",
+        "W3 完整范围不变；R4、R5/W8、最终生产候选/P4 仍未关闭。"
+      ],
+      [
+        "剩余 artifacts 明确为：固定 final Apple candidate adoption/identity 与 applicable review inputs；独立 pre-registered 的 Apple quality acceptance contract 与 Apple-specific resource measurement/budget contract。",
+        "后续交付物为：固定 Apple 最终候选的采用记录、身份与适用复审材料，以及预注册的 Apple 质量验收合同和 Apple 专属资源测量/预算合同。"
+      ],
+      [
+        "这些 pending items 可在 existing authority 内独立推进；本稿不授权新 device runs，也不关闭任何相关 open items。普通本地准备不需要新增 user approval gate；不表示已有或正在运行新 test batch；既有已授权 Android 单文件诊断不新增审批门。",
+        "上述本地准备可按既有授权独立推进；本轮未启动新测试批次、未关闭这些验收项，也未扩大设备执行授权。既有 Android 单文件诊断仍按原授权执行。"
+      ]
+    ],
+    "repeatedFileListSentenceRemoved": "四份原始 SwiftFileList raw 文件当前不保留，不重建 raw filelists，不称 freshly checked，不推断缺失原因，不以重建修补观察。"
+  },
+  "reportSHA256": "c50d2d3b7007222a7488ee1bb2308eff36760dbcf9eedddcf6757755c14031c5",
+  "localEvidenceRoot": ".omx/artifacts/w3-apple-source-binding-20261116",
+  "cleanup": {
+    "bindingStatus": "accepted-bounded-apple-speech-source-and-historical-build-binding",
+    "retainedQualityRawReports": 3,
+    "qualityMetricsRecomputed": false,
+    "newBuilds": 0,
+    "newDeviceRuns": 0,
+    "newDownloads": 0,
+    "deletedFiles": [],
+    "newBuildCaches": [],
+    "preservedEvidence": [
+      "current and historical source identities",
+      "retained original App",
+      "three rejected checker variants",
+      "raw quality and sustained reports",
+      "helper prompt, raw events, outputs and receipts"
+    ],
+    "diskFreeBeforeBytes": 35825369088,
+    "diskFreeObservedBytes": 22798053376,
+    "diskChangeAttribution": "No deletions performed; total disk movement may include other workflows."
+  },
+  "sourceBranchPushed": false,
+  "concurrentIntegrationRecovery": {
+    "indexLockDeleted": false,
+    "lockHolderIdentified": false,
+    "freshHead": "b6512030125369f8628723fae0b6987b531db534",
+    "sharedIndexEntriesAtRecovery": "three exact task prefixes plus fresh HEAD; verified before proceeding",
+    "originalProtectedFiles": 177,
+    "originalContentsAfterRemovingOnlyTaskPrefixes": 176,
+    "concurrentChangedPath": "docs/HANDOFF-W3-IOS-STATUS-2026-11-16.md",
+    "originalBytesVerifiedAsExactPrefix": 5567,
+    "addedSuffixBytes": 273,
+    "addedSuffixSHA256": "45879e01b3a7aab8a7c683663611a628647532dd0e96e56bf7ebc7f5aab9c57b",
+    "preserved": true,
+    "concurrentCommitExcluded": true
+  },
+  "finalLocalAcceptance": {
+    "protectedOriginalContentsUnchanged": 176,
+    "protectedOriginalWithExactConcurrentSuffix": 1,
+    "concurrentSuffixBytes": 273,
+    "protectedFilesTotal": 177,
+    "selectedSourcesRechecked": 16,
+    "retainedAppFilesRechecked": 18,
+    "indexScope": 7,
+    "scope": "documentation and source/historical-build binding only",
+    "W3Complete": false
+  }
+}

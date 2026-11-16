@@ -1,3 +1,9 @@
+## 2026-11-16 检查器假设纠偏与 FileList 边界
+
+按 docs/agent-pitfalls.md，三项被拒 checker assumptions：Package.swift 被当作 compiled-input、raw intermediates 被当作仍保留、SwiftCompile 被写成 swift-frontend full commands。实际 Xcode 日志使用 SwiftCompile records；四份原始 SwiftFileList raw 文件当前不保留，不重建、不推断缺失原因、不称 freshly checked。保留被拒脚本与失败记录，不推测缺失原因、不重建以修补观察。
+
+暂存精确前缀时曾遇 `index.lock` 已存在；未删除锁。随后只读观察到新 HEAD `b651203`，核当前暂存内容恰为本任务前缀加新 HEAD 后继续，保留并发 iOS 交接新增。锁持有者未识别，不把时间相邻的提交当作已证明的锁来源。
+
 ## W3整体复审：后段预算不阻挡已授权诊断，共享Wiki需独立副本（2026-11-16）
 
 hy3整体复审首稿将产品先选轨道/预算批准放在既有单片诊断前，还把普通可逆候选准备升级为额外审批；这些前置不在原合同，原稿拒收、修正稿明确连接变化后原合同fresh guard/preflight即可执行。父端另删P4自我前置和额外签名链措辞，单片只提供终态/阶段成本证据，不保证根因；泛化本地准备建议没有具体新交付物，不当成已找到闭环方法。源站/旧quota不重试，1.5GiB守卫与未批准产品预算独立。

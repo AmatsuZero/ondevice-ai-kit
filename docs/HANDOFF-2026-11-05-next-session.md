@@ -1,3 +1,7 @@
+## 2026-11-16 W3 Apple Speech 有界源绑定结果摘要
+
+新接受 10 个 Core/Speech/AppleSpeech production Swift sources、16 个 selected inputs、14 个 compiler Swift source bindings；保留 18-file 历史 unsigned App。实际 264 checks passed，含 177 protection checks；no fresh build/device/download，不重试已知 quota failure。报告：[Apple 绑定报告](validation/w3-apple-source-binding-20261116.md)。保留其他编辑与旧失败；W3 完整范围不变，R4/R5/final adoption/P4/W3 均 open。
+
 ## 2026-11-16：W3 iOS 状态已重新分层，下一会话从独立交接继续
 
 先读 [W3 平台状态与下一会话交接](HANDOFF-W3-IOS-STATUS-2026-11-16.md)。Apple FILE ASR、显式 locale、既有 iPhone 生命周期及 20周期/40请求持续观测已有真机证据；当前无等待解锁、签名修复或无法运行的iOS硬阻塞，不重跑同批、录音、授权或既有生命周期。iOS仍缺R4质量裁定、R5/W8 Apple专属预算及固定生产候选/P4发布接受。AAR/JNI/DEX/NDK和近期P1–P3大部分缺口主要属于Android Sherpa交付链，不能继续概括为iOS阻塞。W3保持open；下次先做iOS lane独立关闭清单，再分别推进Android质量/组成和跨平台发布复审。
