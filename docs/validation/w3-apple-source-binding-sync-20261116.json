@@ -1,0 +1,75 @@
+{
+  "checkedAtUTC": "2026-11-16T01:01:52.126904+00:00",
+  "sourceCommit": "2fa129b16ddc8da902898d1e61e69c0a49bd5583",
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-apple-source-binding-20261116 -->",
+  "issueReceipts": {
+    "gh": {
+      "id": 6904390894,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6904390894",
+      "sha256": "d30dafe5af347d1a03b6d709ece697e66b960c11f0b812f29e1ddcebe385770e",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44878,
+      "url": null,
+      "sha256": "1eea23464cd71a1e2dfe8c8d223edce185b81e0b153bb7f3e6d6c28e13253a03",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "5ae42675f9a10db3687d672933fb3ec5b937eb99",
+    "sha256": "97547e9095bcc699ae582a517fcfd7121e738d8ac621dacba2be97a968a5b6f0",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "97547e9095bcc699ae582a517fcfd7121e738d8ac621dacba2be97a968a5b6f0",
+    "readbackExact": true
+  },
+  "wikiContentSHA256Equal": true,
+  "sourceBindingReceipt": "docs/validation/w3-apple-source-binding-20261116.json",
+  "sourceBindingReport": "docs/validation/w3-apple-source-binding-20261116.md",
+  "helperProcesses": [
+    {
+      "exitCode": 0,
+      "elapsedSeconds": 55.049,
+      "endedAtUTC": "2026-11-16T00:50:47.539774+00:00",
+      "stdoutBytes": 60001,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    {
+      "exitCode": 0,
+      "elapsedSeconds": 52.804,
+      "endedAtUTC": "2026-11-16T00:53:21.091488+00:00",
+      "stdoutBytes": 75534,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    }
+  ],
+  "helperObservedToolUseEvents": 0,
+  "protectedFiles": 177,
+  "originalContentsUnchangedAfterOnlyTaskPrefixRemoval": 176,
+  "originalPrefixRetainedWithConcurrent273ByteSuffix": 1,
+  "concurrentIOSStatusCommit": "b6512030125369f8628723fae0b6987b531db534",
+  "indexLockDeleted": false,
+  "newBuilds": 0,
+  "newDeviceRuns": 0,
+  "newDownloads": 0,
+  "newMicrophoneStarts": 0,
+  "cacheCleanup": {
+    "removedPaths": [],
+    "newBuildCaches": [],
+    "diskFreeBytes": 22627594240,
+    "rawEvidenceRetained": true
+  },
+  "W3Complete": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "P4Accepted": false,
+  "goalRemains": "active",
+  "remaining": "Apple quality/resource contracts and final production adoption/review remain open; Android fixed single-file diagnostic awaits an actual changed connection/preflight condition. No old device batches or quota failures repeated."
+}
