@@ -1,0 +1,102 @@
+{
+  "sourceEvidenceCommit": "5b582f43b176a2f94dcda4d6b5ed45e0880eaa32",
+  "sourceBranchPushed": false,
+  "sourcePath": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+  "sourceSHA256": "e202d3d0d0efa80410f22d3e9d475ea51cdeb810acba2930a86d23afd626d952",
+  "issues": {
+    "github": {
+      "id": 6914885523,
+      "postExitCode": 0,
+      "getExitCode": 0,
+      "readbackEqualsPostedResponse": true,
+      "terminalLFRemoved": false,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6914885523"
+    },
+    "gitlab": {
+      "id": 45450,
+      "postExitCode": 0,
+      "getExitCode": 0,
+      "readbackEqualsPostedResponse": true,
+      "terminalLFRemoved": true,
+      "url": null
+    }
+  },
+  "githubWiki": {
+    "commit": "9eb77eaf16da28222d3cbb902f31d903f4c6b192",
+    "page": "W3语音验收与后续改进.md",
+    "sha256": "e437062698f2a42455597bb034b914de8fc6a188d029ef8e305735680c116d97",
+    "bytes": 190444,
+    "remoteRefEqualsCommit": true,
+    "remoteReadbackEqualsLocal": true,
+    "priorPageContentPreserved": true,
+    "insertedBodySHA256": "e0f3c860c8fad64a5e7b7bda345b02bef9c50144866d4b75db6cc308f58276c1"
+  },
+  "gitlabWiki": {
+    "status": "pending-existing-EOF-route",
+    "newGETRequests": 0,
+    "newPUTRequests": 0
+  },
+  "publicationMarker": "w3-apple-punctuation-sdk-candidate-20261116",
+  "bodySHA256": "e0f3c860c8fad64a5e7b7bda345b02bef9c50144866d4b75db6cc308f58276c1",
+  "publicationProcessExitCode": 0,
+  "wikiPublicationProcessExitCode": 0,
+  "protection": {
+    "originalFiles": 206,
+    "unchangedOriginalContent": 206,
+    "outsideDrift": [],
+    "ownedSharedPrefixes": [
+      "docs/HANDOFF-2026-11-05-next-session.md",
+      "docs/HANDOFF-W3-IOS-STATUS-2026-11-16.md",
+      "docs/roadmap/W3-speech.md",
+      "docs/agent-pitfalls.md"
+    ],
+    "additionalOwnedPrefix": "docs/agent-pitfalls.md"
+  },
+  "preservedBuildIdentity": {
+    "fileLists": 3,
+    "compiledSwiftInputs": 10,
+    "releaseObjectsAndModules": 6,
+    "allSHA256MatchedAfterCacheCleanup": true
+  },
+  "recordedValidation": {
+    "testsPassed": 484,
+    "testProducts": 8,
+    "skipped": 0,
+    "failures": 0,
+    "iosReleaseExitCode": 0,
+    "rerunOnContinuation": false
+  },
+  "continuationCheckerCorrections": {
+    "multiProductSummaryLiteralRejected": true,
+    "quotedGitPathGuardRejectedBeforeStaging": true,
+    "fixedWithRawNulPathComparison": true,
+    "noDuplicateIssuePostsOrWikiPushes": true,
+    "rawEvidence": "continuation-checker-assumptions.json",
+    "protectedDirtySharedFilePreservedByStagingOnlyNewPrefixPlusHEAD": true
+  },
+  "cleanup": {
+    "removedExactPaths": [
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/SwiftPMTests/out/ModuleCache.noindex",
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/SwiftPMTests/out/CompilationCache.noindex",
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/ModuleCache.noindex",
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/CompilationCache.noindex"
+    ],
+    "removedNominalBytes": 113765609,
+    "removedFiles": 1112,
+    "freeBytesBefore": 15657562112,
+    "freeBytesAfter": 15442919424,
+    "freeSpaceDifferenceNotUniquelyAttributed": true,
+    "preserved": "Products, Intermediates, source/test logs, actual FileLists, release objects/modules, all candidates and receipts",
+    "remainingCandidates": "Other SDK/module intermediates retained as compilation evidence; no global caches or unrelated artifacts touched"
+  },
+  "newDeviceOperations": 0,
+  "newRecognitionRequests": 0,
+  "newHelperInvocations": 0,
+  "softwareReleased": false,
+  "shippingAppCandidate": null,
+  "productionReleaseApproved": false,
+  "R4Accepted": false,
+  "R5Accepted": false,
+  "P4Accepted": false,
+  "W3Complete": false
+}

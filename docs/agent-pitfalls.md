@@ -1,3 +1,7 @@
+## W3 续接核验：多产品测试汇总与中文 Git 路径 — 2026-11-16
+
+SwiftPM 八个 XCTest 产品分别输出通过与计数，没有单条跨产品的484汇总；要求该字面行的检查失败不等于测试失败。按产品passed段及紧接的Executed行去重核对原收据，八组共484、零失败，无需重跑。Git默认将中文路径输出为带引号的八进制转义，直接与Unicode文件名比较会误拒；本次Wiki路径守卫在写入后、暂存/提交/推送前停止，改用`--name-only -z`读取原始路径，校验正文/原页保留后才唯一提交推送。不修改全局quotePath，不把guard失败当远端发布失败或重发Issue。原失败及修正见`.omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/continuation-checker-assumptions.json`。
+
 ## Apple SDK 构建入口与警告计数 — 2026-11-16
 
 apple目录同时存在Package.swift和OnDeviceAIKit.xcodeproj，直接xcodebuild -scheme ODAIKitAppleSpeech选到现有工程并exit65/缺scheme，尚未编译；保留原失败，实际swift build --target/--triple/--sdk Release通过，不能记为源码编译失败。当前SwiftPM为SwiftBuild后端，实际out/Intermediates.noindex含SwiftFileList，别假设description.json存在或把Package.swift当编译源。测试stderr同一Identity async-wait警告渲染两处，按带文件/行列诊断计1条独立警告，484测试通过不称warning-free。证据 `.omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/`，见[验收](validation/w3-apple-punctuation-sdk-candidate-20261116.md)。

@@ -28,3 +28,9 @@ Release 输出是模块对象和 Swift modules，不是 App、签名分发包或
 只读 IORegistry 显示 TECNO USB 注册对象由旧记录 `0x1007539b2` 变为 `0x10097ec5f`，满足旧合同的连接变化后 fresh 检查条件。一次 `adb devices -l` exit0 仍为空；未重启 ADB、切 USB 后端或重复恢复，未 prepare、安装、传模型、instrumentation 或 native decode。`w3-qwen-terminal-20261114-01` 仍未消费，锁屏和资源当前未验证。新注册不等于 ADB 恢复，更不证明物理原因；原始私有观察在 `.omx/artifacts/w3-android-fresh-connection-20261116/`。
 
 旧实验和准备收据保持历史身份，不改写成使用本次 SDK 源码；旧 probe 的 prepare 守卫应继续拒绝不同生产源，不能更新其 hash 来重放。后续任何完整质量/资源设备批次须固定新的 SDK/App 候选和合同。当前缺口仍包括 Apple 远场及负例质量、Android 41 项缺失/单片诊断、生产预算、同候选发布组成与独立接受；此次源码候选集成不缩减完整 W3 目标。
+
+## 提交与同步
+
+源码及验收提交为 `5b582f43b176a2f94dcda4d6b5ed45e0880eaa32`，源码分支未推送。GitHub Issue 15 评论 `6914885523`、GitLab 项目 461 Issue 15 备注 `45450` 均已 POST 一次并 GET 回读；GitHub 正文逐字相等，GitLab 仅由服务器移除一个末尾 LF。GitHub Wiki 提交 `9eb77eaf16da28222d3cbb902f31d903f4c6b192` 已推送，远端引用及完整页面回读一致，原页面内容保留；页面 SHA-256 为 `e437062698f2a42455597bb034b914de8fc6a188d029ef8e305735680c116d97`。本节是 Issue/Wiki 记录同步，不是软件发布；GitLab Wiki 旧 EOF 通道继续 pending，本轮零新 GET/PUT。见[同步收据](w3-apple-punctuation-sdk-candidate-sync-20261116.json)。
+
+续接时两个检查器假设被实际检查拦住：测试日志没有跨八个 XCTest 产品的单行 484 汇总，改按各产品通过段合计；Git 默认将中文路径输出为带引号的转义文本，Wiki 写入后的路径守卫因此停止于暂存前，改用 `--name-only -z` 核对真实路径后才唯一提交和推送。两次原失败及修正检查保留在本地 `continuation-checker-assumptions.json`；没有重跑测试、重复 POST 或新增设备识别。
