@@ -1,0 +1,622 @@
+[
+  {
+    "sourcePath": "sherpa-onnx/jni/CMakeLists.txt",
+    "gitBlobSHA1": "d0ce4e3f2e47ce5ed60e1f1c6effc4cf7970ac2b",
+    "bytes": 1765,
+    "sha256": "cf1e46fb74c820b476fd7c585073389c4e021508fe32a7f007684f6180c7dd31",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/CMakeLists.txt",
+    "origin": {
+      "kind": "reuse-existing-exact-GitBlob",
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/jni/CMakeLists.txt"
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/audio-tagging.cc",
+    "gitBlobSHA1": "f33f279a0059e5ea69bd938410cba3aaf6721fd4",
+    "bytes": 5092,
+    "sha256": "754278ad45354f12704d91b1fe520e90eb5c50c517561d3b5c360874ddaf7895",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/audio-tagging.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/f33f279a0059e5ea69bd938410cba3aaf6721fd4",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/f33f279a0059e5ea69bd938410cba3aaf6721fd4"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.652,
+        "stdoutBytes": 7304,
+        "stdoutSHA256": "83922b4c6d91494f8bc5ed7d7ffd88d79d45db4389b37be46ff259e95fdfb9fa",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/common.cc",
+    "gitBlobSHA1": "c620016ac72e932f9ed3418aa09f49bf35cb535a",
+    "bytes": 1611,
+    "sha256": "bb7ee6ac44bd2a54fa1bacf1edc62e65616d6164fb73d8f1f720a47b9f5cdf88",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/common.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/c620016ac72e932f9ed3418aa09f49bf35cb535a",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/c620016ac72e932f9ed3418aa09f49bf35cb535a"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.671,
+        "stdoutBytes": 2504,
+        "stdoutSHA256": "77b10b6dd77dcad293417ee26d792b995de24aaf8640e8ee0ed551d2686f2d12",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/jni.cc",
+    "gitBlobSHA1": "4b2086a92132f500f62623a3cb7829976d3c863b",
+    "bytes": 979,
+    "sha256": "a98ca2536fca161453aab3d02feac9f9d557f7013b6b94cee7aceb38deb0ac1a",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/jni.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/4b2086a92132f500f62623a3cb7829976d3c863b",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/4b2086a92132f500f62623a3cb7829976d3c863b"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.682,
+        "stdoutBytes": 1635,
+        "stdoutSHA256": "6a4b8911e31e45cc8f313aa820130b24253287399f9b3bd64b9c00e37beed4ac",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/keyword-spotter.cc",
+    "gitBlobSHA1": "e66709d3c9c98f0b18637c1034a5a3c375d88d78",
+    "bytes": 8183,
+    "sha256": "b4994f3a82948ee30b4b9e0a8ee12cf82f6ea4835e0be85a92660fcb3682554a",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/e66709d3c9c98f0b18637c1034a5a3c375d88d78",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/e66709d3c9c98f0b18637c1034a5a3c375d88d78"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 1.056,
+        "stdoutBytes": 11560,
+        "stdoutSHA256": "864746233c6f75cb6b08dd01ddf76c42e3f9e5b27050610bed7a2ac146483f5a",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/offline-diacritization.cc",
+    "gitBlobSHA1": "16cbcaecae58f5fe3169bd4c489f7716a9a5c5b9",
+    "bytes": 3751,
+    "sha256": "9ac69268889e767a8f7995059eea0dda452d309a92828d836edff2caff06a617",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/16cbcaecae58f5fe3169bd4c489f7716a9a5c5b9",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/16cbcaecae58f5fe3169bd4c489f7716a9a5c5b9"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.675,
+        "stdoutBytes": 5456,
+        "stdoutSHA256": "400fad87ec2746592daa00745a7d8913f51a836630e6e05b00613537041fa150",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/offline-punctuation.cc",
+    "gitBlobSHA1": "8517ea00b4656200202cb3b9ecc888cf3cd463b8",
+    "bytes": 4067,
+    "sha256": "9ab05598b60c9cd052c1e0d67da807dc0948397fa700288e2746cd0c83ef70f9",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-punctuation.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/8517ea00b4656200202cb3b9ecc888cf3cd463b8",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/8517ea00b4656200202cb3b9ecc888cf3cd463b8"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 1.046,
+        "stdoutBytes": 5890,
+        "stdoutSHA256": "b7e79042e231eb68363413fb00bf67e2684037a6c811e878530c87918c0885e9",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/offline-recognizer.cc",
+    "gitBlobSHA1": "422f1f427884aff4dd1e9baf08ead3ed61ee2fb3",
+    "bytes": 30762,
+    "sha256": "3d4f81f47ed42aa925eda51b9f80bb446f0d82f17309f163e57077fba68d3457",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "origin": {
+      "kind": "reuse-existing-exact-GitBlob",
+      "path": ".omx/artifacts/w3-qwen-file-20261111/memory-investigation/jni-offline-recognizer.cc"
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/offline-speaker-diarization.cc",
+    "gitBlobSHA1": "7ba38946bf8d9c34677740f88c6d92a54a3ab6e6",
+    "bytes": 9321,
+    "sha256": "3345a55698ea01318e6818e031362d903b4f980d6add7d73059f3da6eeef82f8",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/7ba38946bf8d9c34677740f88c6d92a54a3ab6e6",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/7ba38946bf8d9c34677740f88c6d92a54a3ab6e6"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.673,
+        "stdoutBytes": 13128,
+        "stdoutSHA256": "d61c2ce6b3631c29d9390f5078920a817e3962efc051729104c28d3573a10a23",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/offline-speech-denoiser.cc",
+    "gitBlobSHA1": "f28134ff5ad5e72da49361b7aedba0c8fceeebff",
+    "bytes": 3798,
+    "sha256": "90a2ba871d74028ec532c17f161778abde67cfc597cd354bb6c48ac2a23bb25b",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speech-denoiser.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/f28134ff5ad5e72da49361b7aedba0c8fceeebff",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/f28134ff5ad5e72da49361b7aedba0c8fceeebff"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.676,
+        "stdoutBytes": 5518,
+        "stdoutSHA256": "cdb30a38e037642231496c67fa23453611e3917fdbeeb44985d9216dbdc0054a",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/offline-stream.cc",
+    "gitBlobSHA1": "8167a8b40854230b18c7f73abfd7ab3c4c3e18b8",
+    "bytes": 2160,
+    "sha256": "cc5c3beb14e642842332127092ee5974bb6df7712c3425ea1f33602884895796",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-stream.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/8167a8b40854230b18c7f73abfd7ab3c4c3e18b8",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/8167a8b40854230b18c7f73abfd7ab3c4c3e18b8"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 1.102,
+        "stdoutBytes": 3260,
+        "stdoutSHA256": "d02422634b5bc66375de54beea8a309d5d893a0cc943a382a1e571cc3f383496",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/offline-tts.cc",
+    "gitBlobSHA1": "1e086a0250b313bb2047b48c1174ed4df1c45e71",
+    "bytes": 24313,
+    "sha256": "500453f6593f67c0a773d6f07eb1f550a685a1d1b03ce566863e5bb8cc2c61a1",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/1e086a0250b313bb2047b48c1174ed4df1c45e71",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/1e086a0250b313bb2047b48c1174ed4df1c45e71"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.7,
+        "stdoutBytes": 33787,
+        "stdoutSHA256": "6bd3f4fa20b68beaf37556e47bc3c7bb19792d8f4d992a830dff20ef43be3a28",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/online-punctuation.cc",
+    "gitBlobSHA1": "2cc50d9f5eed7e26402e9eabb54f3a1843160392",
+    "bytes": 4349,
+    "sha256": "944ed9ee6334c1f0ed08fdfb0c32611327c81be56f02790b2e87728e2d4975b4",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-punctuation.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/2cc50d9f5eed7e26402e9eabb54f3a1843160392",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/2cc50d9f5eed7e26402e9eabb54f3a1843160392"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.662,
+        "stdoutBytes": 6278,
+        "stdoutSHA256": "41df86a0df3fbe343c736da6991ffc5d9eabca1383ebec0628e43a33d518de20",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/online-recognizer.cc",
+    "gitBlobSHA1": "7a6af70db3761d7ed8b92bdcd0fe4c2291f0fd8a",
+    "bytes": 17900,
+    "sha256": "b5a6de42140c2d4198f97b4b3baf65a597b8b8381937855e6b216d8d7ba6259b",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/7a6af70db3761d7ed8b92bdcd0fe4c2291f0fd8a",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/7a6af70db3761d7ed8b92bdcd0fe4c2291f0fd8a"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.677,
+        "stdoutBytes": 24949,
+        "stdoutSHA256": "ee13e94f956a49e92b621a062695ef389f0f6afbcb094e9130ce72159a3c60ad",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/online-speech-denoiser.cc",
+    "gitBlobSHA1": "a75fe9bd114e98529d5cfe67a4252064d4bba665",
+    "bytes": 4044,
+    "sha256": "5b0ca624c42f278dc1320c7245002792bc5530c6d2dff5f40276a7e0281caa71",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/a75fe9bd114e98529d5cfe67a4252064d4bba665",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/a75fe9bd114e98529d5cfe67a4252064d4bba665"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.681,
+        "stdoutBytes": 5856,
+        "stdoutSHA256": "c5175779544cf525518e5dd8083d2e7b05fc4f719b3aeaed6a655e6494204d5a",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/online-stream.cc",
+    "gitBlobSHA1": "1ba9fa1a1a55ea97024a45d0256741e2247d5c00",
+    "bytes": 2397,
+    "sha256": "5b3cf661902f34c7878b8c6d1babf8a20a9b737c770da4fc5750941d0dbc03b7",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-stream.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/1ba9fa1a1a55ea97024a45d0256741e2247d5c00",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/1ba9fa1a1a55ea97024a45d0256741e2247d5c00"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.65,
+        "stdoutBytes": 3588,
+        "stdoutSHA256": "a966ba2710056dfe017c28a3fb016c73d5d2e92060f9f91de7eb382e909968c4",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/sherpa-onnx-symbols.lds",
+    "gitBlobSHA1": "4931fa008e5f57c1ce1ce4e97d14bbf80dd0ed81",
+    "bytes": 64,
+    "sha256": "27495d8f4d39559c0f57587bca1b700553c7a8360a69faa90dc0d8f2d571bdef",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/sherpa-onnx-symbols.lds",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/4931fa008e5f57c1ce1ce4e97d14bbf80dd0ed81",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/4931fa008e5f57c1ce1ce4e97d14bbf80dd0ed81"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.674,
+        "stdoutBytes": 374,
+        "stdoutSHA256": "f229f8dca6f63afef0afbdbc18deb79844d4c429ee6c5e298f887a8bc35cc5f2",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/speaker-embedding-extractor.cc",
+    "gitBlobSHA1": "43709fc7160300210f2b3ba40100de0c2a087bf0",
+    "bytes": 4738,
+    "sha256": "11867fdeabb88144540e58a9b76dd2d70d4ff763c95c3c494755b97ea26aee48",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/43709fc7160300210f2b3ba40100de0c2a087bf0",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/43709fc7160300210f2b3ba40100de0c2a087bf0"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.66,
+        "stdoutBytes": 6816,
+        "stdoutSHA256": "a7e6146f18225a2273aff5b131482034a09e3021b45ea9afb7348129f0b6cbd6",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "gitBlobSHA1": "87cd208a267d8985167cdcdf3691b262826705bb",
+    "bytes": 8116,
+    "sha256": "35259235e1f273ae7d9508c70b195cba731851bea77e495f3cf8bf63459efbf8",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/87cd208a267d8985167cdcdf3691b262826705bb",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/87cd208a267d8985167cdcdf3691b262826705bb"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.685,
+        "stdoutBytes": 11470,
+        "stdoutSHA256": "44825e5336b4db8a71cdac9334fbadf15db458777f3a7cef4fd69d377fb2f537",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/speech-denoiser.cc",
+    "gitBlobSHA1": "3c359bbf08dd79cd9e125a850e12855cbd59559b",
+    "bytes": 4047,
+    "sha256": "1c7532e608eea68a7ef2f30a0bb3e381a2c345d6f1d01fe2d6d13a20d847c852",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speech-denoiser.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/3c359bbf08dd79cd9e125a850e12855cbd59559b",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/3c359bbf08dd79cd9e125a850e12855cbd59559b"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.687,
+        "stdoutBytes": 5860,
+        "stdoutSHA256": "7434ea00cd9255df0f2bc9c50740de4c3288a67e04e534dd0597320df9062e7d",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/spoken-language-identification.cc",
+    "gitBlobSHA1": "debf43f5a4e178a4aa2038eba3adc6a3e57d27c3",
+    "bytes": 4528,
+    "sha256": "1d05be2b8c0eda5a410a2069c6a6242f1c77e9343630675010b036ba19bd7bd5",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/spoken-language-identification.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/debf43f5a4e178a4aa2038eba3adc6a3e57d27c3",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/debf43f5a4e178a4aa2038eba3adc6a3e57d27c3"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.7,
+        "stdoutBytes": 6526,
+        "stdoutSHA256": "6e2bd0ad4b42ad253804a26131deb62d0a4b76d39afd47417da788eda8817b88",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/version.cc",
+    "gitBlobSHA1": "9b99a4cff70c8dc5950d1b19d13c5e475d280e63",
+    "bytes": 1797,
+    "sha256": "45593464a189ce7fa39e4586368101bddba9d1a970533d9fea2621b5442a1c71",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/9b99a4cff70c8dc5950d1b19d13c5e475d280e63",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/9b99a4cff70c8dc5950d1b19d13c5e475d280e63"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.665,
+        "stdoutBytes": 2760,
+        "stdoutSHA256": "b7eb2cc2aa27d7c10f1c29b398cb66fbc92763bb48fc8e95a3241eebd11447cc",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/voice-activity-detector.cc",
+    "gitBlobSHA1": "778fe46d030bc5b570e3337a1048afcdec99f35c",
+    "bytes": 9597,
+    "sha256": "aa7b491d956e87c89037f43e444cec1552b3b1e90a28d46d6ab8cdac52879595",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/778fe46d030bc5b570e3337a1048afcdec99f35c",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/778fe46d030bc5b570e3337a1048afcdec99f35c"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 1.377,
+        "stdoutBytes": 13508,
+        "stdoutSHA256": "60636f03c04efc925ade3fd18a33589a233e022bb17a49059848f9b7d33cbbcb",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/wave-reader.cc",
+    "gitBlobSHA1": "3192cb97584fb86d4c9fed0139cc2988f8e1d796",
+    "bytes": 3721,
+    "sha256": "ea2477ea2251213f02285924583e04d5101c9b704437678d91ebaadb97cf340c",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-reader.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/3192cb97584fb86d4c9fed0139cc2988f8e1d796",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/3192cb97584fb86d4c9fed0139cc2988f8e1d796"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.646,
+        "stdoutBytes": 5414,
+        "stdoutSHA256": "199a9d060f2c301a17197ca16eac95ae8b3496354345f18e8a3d172737b23a2c",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  {
+    "sourcePath": "sherpa-onnx/jni/wave-writer.cc",
+    "gitBlobSHA1": "93677f985d912aff048aa6aa8380553a699688f1",
+    "bytes": 722,
+    "sha256": "f7d6e354bb3d014b26489af1c31df19d8f18e2df508d4a753473e4c0e39f79eb",
+    "localPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-writer.cc",
+    "origin": {
+      "kind": "new-fixed-GitHub-GitBlob-response",
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/93677f985d912aff048aa6aa8380553a699688f1",
+      "process": {
+        "argv": [
+          "rtk",
+          "proxy",
+          "gh",
+          "api",
+          "repos/k2-fsa/sherpa-onnx/git/blobs/93677f985d912aff048aa6aa8380553a699688f1"
+        ],
+        "exitCode": 0,
+        "elapsedSeconds": 0.684,
+        "stdoutBytes": 1281,
+        "stdoutSHA256": "393bd55858198089eb61ca1a396c8fea74c2bd8a4b62965651635ff43eb3762c",
+        "stderrBytes": 0,
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  }
+]

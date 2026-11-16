@@ -1,0 +1,211 @@
+{
+  "tree": {
+    "path": ".omx/artifacts/w3-qwen-file-20261111/memory-investigation/sherpa-tree-v2.0.1.json",
+    "bytes": 2377050,
+    "sha256": "c1e7beafad4f8f5d001b3dfbb8709aef6cd610f3f0896c33d91f68b1a04a81b7",
+    "reportedRootSHA": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/trees/af2d8d81dbfa61c4cea4c568da78f3982edca005"
+  },
+  "entries": [
+    {
+      "path": "sherpa-onnx/jni/CMakeLists.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d0ce4e3f2e47ce5ed60e1f1c6effc4cf7970ac2b",
+      "size": 1765,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/d0ce4e3f2e47ce5ed60e1f1c6effc4cf7970ac2b"
+    },
+    {
+      "path": "sherpa-onnx/jni/audio-tagging.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f33f279a0059e5ea69bd938410cba3aaf6721fd4",
+      "size": 5092,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/f33f279a0059e5ea69bd938410cba3aaf6721fd4"
+    },
+    {
+      "path": "sherpa-onnx/jni/common.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c620016ac72e932f9ed3418aa09f49bf35cb535a",
+      "size": 1611,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/c620016ac72e932f9ed3418aa09f49bf35cb535a"
+    },
+    {
+      "path": "sherpa-onnx/jni/jni.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b2086a92132f500f62623a3cb7829976d3c863b",
+      "size": 979,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/4b2086a92132f500f62623a3cb7829976d3c863b"
+    },
+    {
+      "path": "sherpa-onnx/jni/keyword-spotter.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e66709d3c9c98f0b18637c1034a5a3c375d88d78",
+      "size": 8183,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/e66709d3c9c98f0b18637c1034a5a3c375d88d78"
+    },
+    {
+      "path": "sherpa-onnx/jni/offline-diacritization.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "16cbcaecae58f5fe3169bd4c489f7716a9a5c5b9",
+      "size": 3751,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/16cbcaecae58f5fe3169bd4c489f7716a9a5c5b9"
+    },
+    {
+      "path": "sherpa-onnx/jni/offline-punctuation.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8517ea00b4656200202cb3b9ecc888cf3cd463b8",
+      "size": 4067,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/8517ea00b4656200202cb3b9ecc888cf3cd463b8"
+    },
+    {
+      "path": "sherpa-onnx/jni/offline-recognizer.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "422f1f427884aff4dd1e9baf08ead3ed61ee2fb3",
+      "size": 30762,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/422f1f427884aff4dd1e9baf08ead3ed61ee2fb3"
+    },
+    {
+      "path": "sherpa-onnx/jni/offline-speaker-diarization.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7ba38946bf8d9c34677740f88c6d92a54a3ab6e6",
+      "size": 9321,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/7ba38946bf8d9c34677740f88c6d92a54a3ab6e6"
+    },
+    {
+      "path": "sherpa-onnx/jni/offline-speech-denoiser.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f28134ff5ad5e72da49361b7aedba0c8fceeebff",
+      "size": 3798,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/f28134ff5ad5e72da49361b7aedba0c8fceeebff"
+    },
+    {
+      "path": "sherpa-onnx/jni/offline-stream.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8167a8b40854230b18c7f73abfd7ab3c4c3e18b8",
+      "size": 2160,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/8167a8b40854230b18c7f73abfd7ab3c4c3e18b8"
+    },
+    {
+      "path": "sherpa-onnx/jni/offline-tts.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e086a0250b313bb2047b48c1174ed4df1c45e71",
+      "size": 24313,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/1e086a0250b313bb2047b48c1174ed4df1c45e71"
+    },
+    {
+      "path": "sherpa-onnx/jni/online-punctuation.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2cc50d9f5eed7e26402e9eabb54f3a1843160392",
+      "size": 4349,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/2cc50d9f5eed7e26402e9eabb54f3a1843160392"
+    },
+    {
+      "path": "sherpa-onnx/jni/online-recognizer.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a6af70db3761d7ed8b92bdcd0fe4c2291f0fd8a",
+      "size": 17900,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/7a6af70db3761d7ed8b92bdcd0fe4c2291f0fd8a"
+    },
+    {
+      "path": "sherpa-onnx/jni/online-speech-denoiser.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a75fe9bd114e98529d5cfe67a4252064d4bba665",
+      "size": 4044,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/a75fe9bd114e98529d5cfe67a4252064d4bba665"
+    },
+    {
+      "path": "sherpa-onnx/jni/online-stream.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1ba9fa1a1a55ea97024a45d0256741e2247d5c00",
+      "size": 2397,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/1ba9fa1a1a55ea97024a45d0256741e2247d5c00"
+    },
+    {
+      "path": "sherpa-onnx/jni/sherpa-onnx-symbols.lds",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4931fa008e5f57c1ce1ce4e97d14bbf80dd0ed81",
+      "size": 64,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/4931fa008e5f57c1ce1ce4e97d14bbf80dd0ed81"
+    },
+    {
+      "path": "sherpa-onnx/jni/speaker-embedding-extractor.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "43709fc7160300210f2b3ba40100de0c2a087bf0",
+      "size": 4738,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/43709fc7160300210f2b3ba40100de0c2a087bf0"
+    },
+    {
+      "path": "sherpa-onnx/jni/speaker-embedding-manager.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "87cd208a267d8985167cdcdf3691b262826705bb",
+      "size": 8116,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/87cd208a267d8985167cdcdf3691b262826705bb"
+    },
+    {
+      "path": "sherpa-onnx/jni/speech-denoiser.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3c359bbf08dd79cd9e125a850e12855cbd59559b",
+      "size": 4047,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/3c359bbf08dd79cd9e125a850e12855cbd59559b"
+    },
+    {
+      "path": "sherpa-onnx/jni/spoken-language-identification.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "debf43f5a4e178a4aa2038eba3adc6a3e57d27c3",
+      "size": 4528,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/debf43f5a4e178a4aa2038eba3adc6a3e57d27c3"
+    },
+    {
+      "path": "sherpa-onnx/jni/version.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b99a4cff70c8dc5950d1b19d13c5e475d280e63",
+      "size": 1797,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/9b99a4cff70c8dc5950d1b19d13c5e475d280e63"
+    },
+    {
+      "path": "sherpa-onnx/jni/voice-activity-detector.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "778fe46d030bc5b570e3337a1048afcdec99f35c",
+      "size": 9597,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/778fe46d030bc5b570e3337a1048afcdec99f35c"
+    },
+    {
+      "path": "sherpa-onnx/jni/wave-reader.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3192cb97584fb86d4c9fed0139cc2988f8e1d796",
+      "size": 3721,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/3192cb97584fb86d4c9fed0139cc2988f8e1d796"
+    },
+    {
+      "path": "sherpa-onnx/jni/wave-writer.cc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "93677f985d912aff048aa6aa8380553a699688f1",
+      "size": 722,
+      "url": "https://api.github.com/repos/k2-fsa/sherpa-onnx/git/blobs/93677f985d912aff048aa6aa8380553a699688f1"
+    }
+  ]
+}

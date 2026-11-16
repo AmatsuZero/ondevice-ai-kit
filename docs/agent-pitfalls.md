@@ -1,3 +1,7 @@
+## 2026-11-16 JNI 对应 Pitfalls
+
+别把导出名存在、定义存在、显式类型类别匹配当成 C++ 正文等价或 loader binding 证明。6 处 Companion 接收者 jclass/jobject 差异须原样记录。详见 [验证](validation/w3-jni-surface-correspondence-20261116.md)。
+
 ## W3 DEX 对应性边界（2026-11-16）
 
 不要把完整 baksmali 原文本相等写成 whole DEX 字节或形式语义等价；相等包含 metadata/registers/instructions/labels/debug，未做 normalization/stripping。D8 Release 的 75 类差异、intermediate/merge 控件、BOOTCLASSPATH 单一变量对照与 NEGATIVE MUTANT 负控须分别保留；带 Android bootclasspath 的 intermediate 后接同一 merge 为 49/124，no-lib intermediate 后接同一无 `--lib` 的 no-desugaring merge 为 124/124，只说明本实验管线，不证明历史 AGP bootclasspath。不得再做参数扫描或用负控替代穷尽语义证明。

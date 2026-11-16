@@ -1,3 +1,7 @@
+## 2026-11-16 有界证据更新
+
+W3 新增 JNI surface/type-category 对应子项，主代理实际材料检查已接受：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；目标未缩减，P1/P2/P3/P4/R4/R5/W3 仍未关闭。详见 [验证](validation/w3-jni-surface-correspondence-20261116.md)。
+
 ## 2026-11-16 W3 JVM→DEX 对应已双端记录
 
 3cf41c6及[同步收据](validation/w3-dex-correspondence-sync-20261116.json)：四APK各124runtime类完整原反汇编文本一致，真实DEX损坏负例拒收；GH#15 6903390954/GL#15 44875、GH Wiki0917685及双Wiki SHAafd069bb…df26已逐字回读。只接受该P1子项；完整native/输入、最终生产采用与P2–P4/R4/R5/W3仍open，源码未push。

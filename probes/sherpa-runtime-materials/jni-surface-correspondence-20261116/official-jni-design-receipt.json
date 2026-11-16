@@ -1,0 +1,10 @@
+{
+  "url": "https://docs.oracle.com/en/java/javase/21/docs/specs/jni/design.html",
+  "status": 200,
+  "bytes": 33675,
+  "sha256": "1ab3719452c81331ab46c6690c9c379566ef1667b6b62ecca88db2832412ac58",
+  "elapsedSeconds": 0.892,
+  "Context7CallableToolsAvailable": false,
+  "webOpenReturnedUsableBody": false,
+  "scope": "official Java21 JNI design reference; fixed runtime file observations separately verified"
+}

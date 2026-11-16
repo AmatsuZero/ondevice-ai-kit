@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "scope": "curated JNI declared/exported names and explicit JNI type categories; not loader execution, body equivalence or full release acceptance",
+  "canonicalLocalRaw": ".omx/artifacts/w3-jni-surface-20261116T0800",
+  "files": [
+    {
+      "path": "arm64-v8a-symbols.stdout",
+      "bytes": 10051,
+      "sha256": "28fb85382326de8faa067d3b544c858ee9faa7fbc1bf1c364dfc050aeecd1b94"
+    },
+    {
+      "path": "armeabi-v7a-symbols-process.json",
+      "bytes": 539,
+      "sha256": "d51d40a79b5c56428cf12868b4f70572451e0343762fc5cf53fca2e556279248"
+    },
+    {
+      "path": "armeabi-v7a-symbols.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "armeabi-v7a-symbols.stdout",
+      "bytes": 8979,
+      "sha256": "135da5c4d18f3f84c68a87a83b4d4c37ada24f36b88a06bbe874c174673a2253"
+    },
+    {
+      "path": "declaration-source-type-comparison.json",
+      "bytes": 163971,
+      "sha256": "3498d7a6eb5084658be402da459fb6def8a3c14b9ea8c7015e3fcaad47f6c4a3"
+    },
+    {
+      "path": "document-review-disposition.json",
+      "bytes": 7791,
+      "sha256": "b1951f4402daa9026c0cc5503fdd19160fb1f8e693d717c77b215154ce056263"
+    },
+    {
+      "path": "duplicate-source-definition-negative.stderr",
+      "bytes": 355,
+      "sha256": "4a82eb08c1a29ae48ac756173d233e53aab701341e8dfedc16282de0041328c8"
+    },
+    {
+      "path": "explicit-argument-type-negative.stderr",
+      "bytes": 325,
+      "sha256": "56f7822ab4ecbeb42257cb57e85223cd181a967816042ff58437d2ad0847fb83"
+    },
+    {
+      "path": "extra-export-source-explanations.json",
+      "bytes": 13699,
+      "sha256": "c267045241ed0f59ce4b10b1a4845638fcb322cf5ea527429ce6d33e4fb3c5e4"
+    },
+    {
+      "path": "fixed-source-definitions.json",
+      "bytes": 76653,
+      "sha256": "25ec4890be200e57130821966e315404c209d17de3569b9fb204b7ac0c1d327d"
+    },
+    {
+      "path": "four-abi-export-coverage.json",
+      "bytes": 39949,
+      "sha256": "f42fce633f139cce34c2e35fec1f81ccf051615155e021240e42f42e3ada42ad"
+    },
+    {
+      "path": "four-apk-JNI-binding.json",
+      "bytes": 4461,
+      "sha256": "b53aab409947fc7673e87f2bc7adcfe9a49e2b71fc5cc810328659df52e339a6"
+    },
+    {
+      "path": "gather-terminal.json",
+      "bytes": 276,
+      "sha256": "b778e8680183e7eb7c489d1df4e725c90e51796e340dfc51ca99d0bbcd0a8441"
+    },
+    {
+      "path": "helper-receipts.json",
+      "bytes": 1778,
+      "sha256": "346120b6e73541dc566e50b860c1dacf23df49a3814269a445d027fc54193b51"
+    },
+    {
+      "path": "missing-export-negative.stderr",
+      "bytes": 308,
+      "sha256": "cb184d7f4c5facfce020c9a1c8de71a30284ee8fbc52c15bb9b4ec9a9c79b639"
+    },
+    {
+      "path": "native-declarations.json",
+      "bytes": 61496,
+      "sha256": "ed9a45b6cab0a363819760b95562417051acc744fb36916cd5014e42ca159cd2"
+    },
+    {
+      "path": "negative-controls.json",
+      "bytes": 1608,
+      "sha256": "bd524902a3db2ea5ed01594bcffd9d5d9725860afdc8960740ae83f5ff764684"
+    },
+    {
+      "path": "official-jni-design-receipt.json",
+      "bytes": 411,
+      "sha256": "3564209150ecd990330197bddae658aba32156bf1aff82b43b30c514292dad3b"
+    },
+    {
+      "path": "parent-acceptance.json",
+      "bytes": 1472,
+      "sha256": "e292fb86cc19e9ae9aa0d50d4bab658dbe162dc154b2c75c4202bfd2ae501ae4"
+    },
+    {
+      "path": "plan.json",
+      "bytes": 931,
+      "sha256": "ac9465c709c0b91e03cc7e177cc763ad1f8a76457eeff590b38e2a14369cbd86"
+    },
+    {
+      "path": "receiver-difference-no-longer-unused-negative.stderr",
+      "bytes": 430,
+      "sha256": "56557e432ede4a674a340fa6c592eabef2ba21041c779843dc3642b3ba04008d"
+    },
+    {
+      "path": "return-type-negative.stderr",
+      "bytes": 349,
+      "sha256": "376763d9469ed818476c928296538b387073977a634bffb877ebd8ec92f06eef"
+    },
+    {
+      "path": "same-count-renamed-export-negative.stderr",
+      "bytes": 284,
+      "sha256": "c12fc1d73caf5e95f1f7590896e7f92ff11b8357e934f73de9b5f9d471019fcc"
+    },
+    {
+      "path": "same-length-source-byte-change-negative.stderr",
+      "bytes": 340,
+      "sha256": "23c6c0541405b8d39cb26fc5a1a849b49b10fd4771014f337fc4ba0a5c875e54"
+    },
+    {
+      "path": "source/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/CMakeLists.txt",
+      "bytes": 1765,
+      "sha256": "cf1e46fb74c820b476fd7c585073389c4e021508fe32a7f007684f6180c7dd31"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/audio-tagging.cc",
+      "bytes": 5092,
+      "sha256": "754278ad45354f12704d91b1fe520e90eb5c50c517561d3b5c360874ddaf7895"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/common.cc",
+      "bytes": 1611,
+      "sha256": "bb7ee6ac44bd2a54fa1bacf1edc62e65616d6164fb73d8f1f720a47b9f5cdf88"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/jni.cc",
+      "bytes": 979,
+      "sha256": "a98ca2536fca161453aab3d02feac9f9d557f7013b6b94cee7aceb38deb0ac1a"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/keyword-spotter.cc",
+      "bytes": 8183,
+      "sha256": "b4994f3a82948ee30b4b9e0a8ee12cf82f6ea4835e0be85a92660fcb3682554a"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/offline-diacritization.cc",
+      "bytes": 3751,
+      "sha256": "9ac69268889e767a8f7995059eea0dda452d309a92828d836edff2caff06a617"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/offline-punctuation.cc",
+      "bytes": 4067,
+      "sha256": "9ab05598b60c9cd052c1e0d67da807dc0948397fa700288e2746cd0c83ef70f9"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/offline-recognizer.cc",
+      "bytes": 30762,
+      "sha256": "3d4f81f47ed42aa925eda51b9f80bb446f0d82f17309f163e57077fba68d3457"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+      "bytes": 9321,
+      "sha256": "3345a55698ea01318e6818e031362d903b4f980d6add7d73059f3da6eeef82f8"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/offline-speech-denoiser.cc",
+      "bytes": 3798,
+      "sha256": "90a2ba871d74028ec532c17f161778abde67cfc597cd354bb6c48ac2a23bb25b"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/offline-stream.cc",
+      "bytes": 2160,
+      "sha256": "cc5c3beb14e642842332127092ee5974bb6df7712c3425ea1f33602884895796"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/offline-tts.cc",
+      "bytes": 24313,
+      "sha256": "500453f6593f67c0a773d6f07eb1f550a685a1d1b03ce566863e5bb8cc2c61a1"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/online-punctuation.cc",
+      "bytes": 4349,
+      "sha256": "944ed9ee6334c1f0ed08fdfb0c32611327c81be56f02790b2e87728e2d4975b4"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/online-recognizer.cc",
+      "bytes": 17900,
+      "sha256": "b5a6de42140c2d4198f97b4b3baf65a597b8b8381937855e6b216d8d7ba6259b"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/online-speech-denoiser.cc",
+      "bytes": 4044,
+      "sha256": "5b0ca624c42f278dc1320c7245002792bc5530c6d2dff5f40276a7e0281caa71"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/online-stream.cc",
+      "bytes": 2397,
+      "sha256": "5b3cf661902f34c7878b8c6d1babf8a20a9b737c770da4fc5750941d0dbc03b7"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/sherpa-onnx-symbols.lds",
+      "bytes": 64,
+      "sha256": "27495d8f4d39559c0f57587bca1b700553c7a8360a69faa90dc0d8f2d571bdef"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+      "bytes": 4738,
+      "sha256": "11867fdeabb88144540e58a9b76dd2d70d4ff763c95c3c494755b97ea26aee48"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+      "bytes": 8116,
+      "sha256": "35259235e1f273ae7d9508c70b195cba731851bea77e495f3cf8bf63459efbf8"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/speech-denoiser.cc",
+      "bytes": 4047,
+      "sha256": "1c7532e608eea68a7ef2f30a0bb3e381a2c345d6f1d01fe2d6d13a20d847c852"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/spoken-language-identification.cc",
+      "bytes": 4528,
+      "sha256": "1d05be2b8c0eda5a410a2069c6a6242f1c77e9343630675010b036ba19bd7bd5"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/version.cc",
+      "bytes": 1797,
+      "sha256": "45593464a189ce7fa39e4586368101bddba9d1a970533d9fea2621b5442a1c71"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/voice-activity-detector.cc",
+      "bytes": 9597,
+      "sha256": "aa7b491d956e87c89037f43e444cec1552b3b1e90a28d46d6ab8cdac52879595"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/wave-reader.cc",
+      "bytes": 3721,
+      "sha256": "ea2477ea2251213f02285924583e04d5101c9b704437678d91ebaadb97cf340c"
+    },
+    {
+      "path": "source/sherpa-onnx/jni/wave-writer.cc",
+      "bytes": 722,
+      "sha256": "f7d6e354bb3d014b26489af1c31df19d8f18e2df508d4a753473e4c0e39f79eb"
+    },
+    {
+      "path": "source-material-projection.json",
+      "bytes": 12614,
+      "sha256": "02a8c6d9e6700fde11b24f5e0376036be4adeffa74ed1153a3acab68f5a7521f"
+    },
+    {
+      "path": "source-plan.json",
+      "bytes": 8014,
+      "sha256": "f62f1d9d89df90328b386201cdbb7b1cd8c144e61a3cc36e24388894cf8ff38b"
+    },
+    {
+      "path": "source-receipts.json",
+      "bytes": 24811,
+      "sha256": "68341d4ed087b528f8f9c4d4321565003d58c56e2859354c20a0ae71a260e4c6"
+    },
+    {
+      "path": "source-unit-distribution.json",
+      "bytes": 941,
+      "sha256": "b90f95964df53fe8d6aa289d1333ade7295cec6650742cda00efbf9677bc23b4"
+    },
+    {
+      "path": "symbol-input-receipts.json",
+      "bytes": 3700,
+      "sha256": "1e4ac90a69a632337fe27bf9378577b6671766a74ef11bad5c86d8421276357e"
+    },
+    {
+      "path": "undefined-export-negative.stderr",
+      "bytes": 416,
+      "sha256": "93410f9278a3a2246c0de8825218db84dae7dc70cf65b349998700349f6584a4"
+    },
+    {
+      "path": "x86-symbols-process.json",
+      "bytes": 531,
+      "sha256": "b9ae87a7e3dce74223974cd1be0a80719ff5fbb8b5d0b67efeade25874d3f2d3"
+    },
+    {
+      "path": "x86-symbols.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "x86-symbols.stdout",
+      "bytes": 8979,
+      "sha256": "224f35387bbd997fb5c242a27771020d3d887d015231da04e0c5d3f9a3a99103"
+    },
+    {
+      "path": "x86_64-symbols-process.json",
+      "bytes": 535,
+      "sha256": "685ae983f8c095fccd8a4b6648ca4531b739aeaf29336e1ac37361295468bb9e"
+    },
+    {
+      "path": "x86_64-symbols.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "x86_64-symbols.stdout",
+      "bytes": 10051,
+      "sha256": "3924e79347183dc5ab5850c1d01eba5255a95d4b80db5b86c4c51424964fe77e"
+    }
+  ],
+  "totalPayloadBytes": 640228,
+  "sourceFiles": 25,
+  "binaryArtifactsIncluded": false,
+  "officialHTMLIncluded": false
+}

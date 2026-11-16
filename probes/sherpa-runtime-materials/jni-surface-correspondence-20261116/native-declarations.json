@@ -1,0 +1,1635 @@
+[
+  {
+    "owner": "com/k2fsa/sherpa/onnx/AudioTagging",
+    "method": "compute",
+    "signature": "compute(JJI)[Lcom/k2fsa/sherpa/onnx/AudioEvent;",
+    "parameterDescriptors": [
+      "J",
+      "J",
+      "I"
+    ],
+    "returnDescriptor": "[Lcom/k2fsa/sherpa/onnx/AudioEvent;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_compute",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/AudioTagging.smali",
+    "line": 191
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/AudioTagging",
+    "method": "createStream",
+    "signature": "createStream(J)J",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_createStream",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/AudioTagging.smali",
+    "line": 212
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/AudioTagging",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/AudioTagging.smali",
+    "line": 215
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/AudioTagging",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/AudioTaggingConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/AudioTaggingConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/AudioTagging.smali",
+    "line": 218
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/AudioTagging",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/AudioTaggingConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/AudioTaggingConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/AudioTagging.smali",
+    "line": 221
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/DenoisedAudio",
+    "method": "saveImpl",
+    "signature": "saveImpl(Ljava/lang/String;[FI)Z",
+    "parameterDescriptors": [
+      "Ljava/lang/String;",
+      "[F",
+      "I"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_DenoisedAudio_saveImpl",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/DenoisedAudio.smali",
+    "line": 69
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/GeneratedAudio",
+    "method": "saveImpl",
+    "signature": "saveImpl(Ljava/lang/String;[FI)Z",
+    "parameterDescriptors": [
+      "Ljava/lang/String;",
+      "[F",
+      "I"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_GeneratedAudio_saveImpl",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/GeneratedAudio.smali",
+    "line": 69
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/KeywordSpotter",
+    "method": "createStream",
+    "signature": "createStream(JLjava/lang/String;)J",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_createStream",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+    "line": 205
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/KeywordSpotter",
+    "method": "decode",
+    "signature": "decode(JJ)V",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_decode",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+    "line": 226
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/KeywordSpotter",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+    "line": 229
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/KeywordSpotter",
+    "method": "getResult",
+    "signature": "getResult(JJ)Lcom/k2fsa/sherpa/onnx/KeywordSpotterResult;",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/KeywordSpotterResult;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_getResult",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+    "line": 232
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/KeywordSpotter",
+    "method": "isReady",
+    "signature": "isReady(JJ)Z",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_isReady",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+    "line": 235
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/KeywordSpotter",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/KeywordSpotterConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/KeywordSpotterConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+    "line": 238
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/KeywordSpotter",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/KeywordSpotterConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/KeywordSpotterConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+    "line": 241
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/KeywordSpotter",
+    "method": "reset",
+    "signature": "reset(JJ)V",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_reset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+    "line": 244
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflinePunctuation",
+    "method": "addPunctuation",
+    "signature": "addPunctuation(JLjava/lang/String;)Ljava/lang/String;",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflinePunctuation_addPunctuation",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+    "line": 183
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflinePunctuation",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflinePunctuation_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+    "line": 186
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflinePunctuation",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/OfflinePunctuationConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/OfflinePunctuationConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflinePunctuation_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+    "line": 189
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflinePunctuation",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/OfflinePunctuationConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/OfflinePunctuationConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflinePunctuation_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+    "line": 192
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineRecognizer",
+    "method": "createStream",
+    "signature": "createStream(J)J",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_createStream",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+    "line": 204
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineRecognizer",
+    "method": "createStreamWithHotwords",
+    "signature": "createStreamWithHotwords(JLjava/lang/String;)J",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_createStreamWithHotwords",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+    "line": 207
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineRecognizer",
+    "method": "decode",
+    "signature": "decode(JJ)V",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_decode",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+    "line": 210
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineRecognizer",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+    "line": 213
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineRecognizer",
+    "method": "getResult",
+    "signature": "getResult(J)Lcom/k2fsa/sherpa/onnx/OfflineRecognizerResult;",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/OfflineRecognizerResult;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_getResult",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+    "line": 216
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineRecognizer",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/OfflineRecognizerConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/OfflineRecognizerConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+    "line": 219
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineRecognizer",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/OfflineRecognizerConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/OfflineRecognizerConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+    "line": 222
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineRecognizer",
+    "method": "prependAdspLibraryPath",
+    "signature": "prependAdspLibraryPath(Ljava/lang/String;)V",
+    "parameterDescriptors": [
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": true,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_prependAdspLibraryPath",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+    "line": 225
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineRecognizer",
+    "method": "setConfig",
+    "signature": "setConfig(JLcom/k2fsa/sherpa/onnx/OfflineRecognizerConfig;)V",
+    "parameterDescriptors": [
+      "J",
+      "Lcom/k2fsa/sherpa/onnx/OfflineRecognizerConfig;"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_setConfig",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+    "line": 230
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+    "line": 214
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization",
+    "method": "getSampleRate",
+    "signature": "getSampleRate(J)I",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "I",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_getSampleRate",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+    "line": 217
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+    "line": 220
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+    "line": 223
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization",
+    "method": "process",
+    "signature": "process(J[F)[Lcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment;",
+    "parameterDescriptors": [
+      "J",
+      "[F"
+    ],
+    "returnDescriptor": "[Lcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_process",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+    "line": 226
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization",
+    "method": "processWithCallback",
+    "signature": "processWithCallback(J[FLkotlin/jvm/functions/Function3;J)[Lcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment;",
+    "parameterDescriptors": [
+      "J",
+      "[F",
+      "Lkotlin/jvm/functions/Function3;",
+      "J"
+    ],
+    "returnDescriptor": "[Lcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_processWithCallback",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+    "line": 229
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization",
+    "method": "setConfig",
+    "signature": "setConfig(JLcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig;)V",
+    "parameterDescriptors": [
+      "J",
+      "Lcom/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig;"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_setConfig",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+    "line": 267
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+    "line": 188
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser",
+    "method": "getSampleRate",
+    "signature": "getSampleRate(J)I",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "I",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_getSampleRate",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+    "line": 191
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+    "line": 194
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+    "line": 197
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser",
+    "method": "run",
+    "signature": "run(J[FI)Lcom/k2fsa/sherpa/onnx/DenoisedAudio;",
+    "parameterDescriptors": [
+      "J",
+      "[F",
+      "I"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/DenoisedAudio;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_run",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+    "line": 200
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineStream",
+    "method": "acceptWaveform",
+    "signature": "acceptWaveform(J[FI)V",
+    "parameterDescriptors": [
+      "J",
+      "[F",
+      "I"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_acceptWaveform",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineStream.smali",
+    "line": 151
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineStream",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineStream.smali",
+    "line": 154
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineStream",
+    "method": "getOption",
+    "signature": "getOption(JLjava/lang/String;)Ljava/lang/String;",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_getOption",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineStream.smali",
+    "line": 157
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineStream",
+    "method": "setOption",
+    "signature": "setOption(JLjava/lang/String;Ljava/lang/String;)V",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_setOption",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineStream.smali",
+    "line": 160
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineTts",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+    "line": 240
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineTts",
+    "method": "generateImpl",
+    "signature": "generateImpl(JLjava/lang/String;IF)Lcom/k2fsa/sherpa/onnx/GeneratedAudio;",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;",
+      "I",
+      "F"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/GeneratedAudio;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_generateImpl",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+    "line": 272
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineTts",
+    "method": "generateWithCallbackImpl",
+    "signature": "generateWithCallbackImpl(JLjava/lang/String;IFLkotlin/jvm/functions/Function1;)Lcom/k2fsa/sherpa/onnx/GeneratedAudio;",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;",
+      "I",
+      "F",
+      "Lkotlin/jvm/functions/Function1;"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/GeneratedAudio;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_generateWithCallbackImpl",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+    "line": 353
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineTts",
+    "method": "generateWithConfigImpl",
+    "signature": "generateWithConfigImpl(JLjava/lang/String;Lcom/k2fsa/sherpa/onnx/GenerationConfig;Lkotlin/jvm/functions/Function1;)Lcom/k2fsa/sherpa/onnx/GeneratedAudio;",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;",
+      "Lcom/k2fsa/sherpa/onnx/GenerationConfig;",
+      "Lkotlin/jvm/functions/Function1;"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/GeneratedAudio;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_generateWithConfigImpl",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+    "line": 419
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineTts",
+    "method": "getLang",
+    "signature": "getLang(J)Ljava/lang/String;",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_getLang",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+    "line": 434
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineTts",
+    "method": "getNumSpeakers",
+    "signature": "getNumSpeakers(J)I",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "I",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_getNumSpeakers",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+    "line": 437
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineTts",
+    "method": "getSampleRate",
+    "signature": "getSampleRate(J)I",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "I",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_getSampleRate",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+    "line": 440
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineTts",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/OfflineTtsConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/OfflineTtsConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+    "line": 443
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OfflineTts",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/OfflineTtsConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/OfflineTtsConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+    "line": 446
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlinePunctuation",
+    "method": "addPunctuation",
+    "signature": "addPunctuation(JLjava/lang/String;)Ljava/lang/String;",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlinePunctuation_addPunctuation",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+    "line": 183
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlinePunctuation",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlinePunctuation_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+    "line": 186
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlinePunctuation",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/OnlinePunctuationConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/OnlinePunctuationConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlinePunctuation_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+    "line": 189
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlinePunctuation",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/OnlinePunctuationConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/OnlinePunctuationConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlinePunctuation_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+    "line": 192
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "createStream",
+    "signature": "createStream(JLjava/lang/String;)J",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_createStream",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 206
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "decode",
+    "signature": "decode(JJ)V",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_decode",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 227
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 230
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "getResult",
+    "signature": "getResult(JJ)Lcom/k2fsa/sherpa/onnx/OnlineRecognizerResult;",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/OnlineRecognizerResult;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_getResult",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 233
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "isEndpoint",
+    "signature": "isEndpoint(JJ)Z",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_isEndpoint",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 236
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "isReady",
+    "signature": "isReady(JJ)Z",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_isReady",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 239
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/OnlineRecognizerConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/OnlineRecognizerConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 242
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/OnlineRecognizerConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/OnlineRecognizerConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 245
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "prependAdspLibraryPath",
+    "signature": "prependAdspLibraryPath(Ljava/lang/String;)V",
+    "parameterDescriptors": [
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": true,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_prependAdspLibraryPath",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 248
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineRecognizer",
+    "method": "reset",
+    "signature": "reset(JJ)V",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_reset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+    "line": 253
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+    "line": 192
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser",
+    "method": "flush",
+    "signature": "flush(J)Lcom/k2fsa/sherpa/onnx/DenoisedAudio;",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/DenoisedAudio;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_flush",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+    "line": 195
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser",
+    "method": "getFrameShiftInSamples",
+    "signature": "getFrameShiftInSamples(J)I",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "I",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_getFrameShiftInSamples",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+    "line": 198
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser",
+    "method": "getSampleRate",
+    "signature": "getSampleRate(J)I",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "I",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_getSampleRate",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+    "line": 201
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+    "line": 204
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+    "line": 207
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser",
+    "method": "reset",
+    "signature": "reset(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_reset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+    "line": 210
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser",
+    "method": "run",
+    "signature": "run(J[FI)Lcom/k2fsa/sherpa/onnx/DenoisedAudio;",
+    "parameterDescriptors": [
+      "J",
+      "[F",
+      "I"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/DenoisedAudio;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_run",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+    "line": 213
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineStream",
+    "method": "acceptWaveform",
+    "signature": "acceptWaveform(J[FI)V",
+    "parameterDescriptors": [
+      "J",
+      "[F",
+      "I"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_acceptWaveform",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineStream.smali",
+    "line": 183
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineStream",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineStream.smali",
+    "line": 186
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineStream",
+    "method": "getOption",
+    "signature": "getOption(JLjava/lang/String;)Ljava/lang/String;",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_getOption",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineStream.smali",
+    "line": 189
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineStream",
+    "method": "inputFinished",
+    "signature": "inputFinished(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_inputFinished",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineStream.smali",
+    "line": 192
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/OnlineStream",
+    "method": "setOption",
+    "signature": "setOption(JLjava/lang/String;Ljava/lang/String;)V",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_setOption",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OnlineStream.smali",
+    "line": 195
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor",
+    "method": "compute",
+    "signature": "compute(JJ)[F",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "[F",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_compute",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+    "line": 190
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor",
+    "method": "createStream",
+    "signature": "createStream(J)J",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_createStream",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+    "line": 193
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+    "line": 196
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor",
+    "method": "dim",
+    "signature": "dim(J)I",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "I",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_dim",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+    "line": 199
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor",
+    "method": "isReady",
+    "signature": "isReady(JJ)Z",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_isReady",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+    "line": 202
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+    "line": 205
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+    "line": 208
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "add",
+    "signature": "add(JLjava/lang/String;[F)Z",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;",
+      "[F"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_add",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 171
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "addList",
+    "signature": "addList(JLjava/lang/String;[[F)Z",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;",
+      "[[F"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_addList",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 174
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "allSpeakerNames",
+    "signature": "allSpeakerNames(J)[Ljava/lang/String;",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "[Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_allSpeakerNames",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 177
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "contains",
+    "signature": "contains(JLjava/lang/String;)Z",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_contains",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 180
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "create",
+    "signature": "create(I)J",
+    "parameterDescriptors": [
+      "I"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_create",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 183
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 186
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "numSpeakers",
+    "signature": "numSpeakers(J)I",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "I",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_numSpeakers",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 189
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "remove",
+    "signature": "remove(JLjava/lang/String;)Z",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_remove",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 192
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "search",
+    "signature": "search(J[FF)Ljava/lang/String;",
+    "parameterDescriptors": [
+      "J",
+      "[F",
+      "F"
+    ],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_search",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 195
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager",
+    "method": "verify",
+    "signature": "verify(JLjava/lang/String;[FF)Z",
+    "parameterDescriptors": [
+      "J",
+      "Ljava/lang/String;",
+      "[F",
+      "F"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_verify",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+    "line": 198
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentification",
+    "method": "compute",
+    "signature": "compute(JJ)Ljava/lang/String;",
+    "parameterDescriptors": [
+      "J",
+      "J"
+    ],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_compute",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+    "line": 186
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentification",
+    "method": "createStream",
+    "signature": "createStream(J)J",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_createStream",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+    "line": 189
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentification",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+    "line": 192
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentification",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+    "line": 195
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentification",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+    "line": 198
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "acceptWaveform",
+    "signature": "acceptWaveform(J[F)V",
+    "parameterDescriptors": [
+      "J",
+      "[F"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_acceptWaveform",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 210
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "clear",
+    "signature": "clear(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_clear",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 213
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "compute",
+    "signature": "compute(J[F)F",
+    "parameterDescriptors": [
+      "J",
+      "[F"
+    ],
+    "returnDescriptor": "F",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_compute",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 216
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "delete",
+    "signature": "delete(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_delete",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 219
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "empty",
+    "signature": "empty(J)Z",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_empty",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 222
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "flush",
+    "signature": "flush(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_flush",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 225
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "front",
+    "signature": "front(J)Lcom/k2fsa/sherpa/onnx/SpeechSegment;",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/SpeechSegment;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_front",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 228
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "isSpeechDetected",
+    "signature": "isSpeechDetected(J)Z",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "Z",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_isSpeechDetected",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 231
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "newFromAsset",
+    "signature": "newFromAsset(Landroid/content/res/AssetManager;Lcom/k2fsa/sherpa/onnx/VadModelConfig;)J",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Lcom/k2fsa/sherpa/onnx/VadModelConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_newFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 234
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "newFromFile",
+    "signature": "newFromFile(Lcom/k2fsa/sherpa/onnx/VadModelConfig;)J",
+    "parameterDescriptors": [
+      "Lcom/k2fsa/sherpa/onnx/VadModelConfig;"
+    ],
+    "returnDescriptor": "J",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_newFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 237
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "pop",
+    "signature": "pop(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_pop",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 240
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/Vad",
+    "method": "reset",
+    "signature": "reset(J)V",
+    "parameterDescriptors": [
+      "J"
+    ],
+    "returnDescriptor": "V",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_reset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/Vad.smali",
+    "line": 243
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/VersionInfo$Companion",
+    "method": "getGitDate2",
+    "signature": "getGitDate2()Ljava/lang/String;",
+    "parameterDescriptors": [],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getGitDate2",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+    "line": 81
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/VersionInfo$Companion",
+    "method": "getGitSha12",
+    "signature": "getGitSha12()Ljava/lang/String;",
+    "parameterDescriptors": [],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getGitSha12",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+    "line": 95
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/VersionInfo$Companion",
+    "method": "getOnnxruntimeVersionStr2",
+    "signature": "getOnnxruntimeVersionStr2()Ljava/lang/String;",
+    "parameterDescriptors": [],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getOnnxruntimeVersionStr2",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+    "line": 109
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/VersionInfo$Companion",
+    "method": "getVersionStr2",
+    "signature": "getVersionStr2()Ljava/lang/String;",
+    "parameterDescriptors": [],
+    "returnDescriptor": "Ljava/lang/String;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getVersionStr2",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+    "line": 123
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/WaveReader$Companion",
+    "method": "readWaveFromAsset",
+    "signature": "readWaveFromAsset(Landroid/content/res/AssetManager;Ljava/lang/String;)Lcom/k2fsa/sherpa/onnx/WaveData;",
+    "parameterDescriptors": [
+      "Landroid/content/res/AssetManager;",
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/WaveData;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_WaveReader_00024Companion_readWaveFromAsset",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/WaveReader$Companion.smali",
+    "line": 101
+  },
+  {
+    "owner": "com/k2fsa/sherpa/onnx/WaveReader$Companion",
+    "method": "readWaveFromFile",
+    "signature": "readWaveFromFile(Ljava/lang/String;)Lcom/k2fsa/sherpa/onnx/WaveData;",
+    "parameterDescriptors": [
+      "Ljava/lang/String;"
+    ],
+    "returnDescriptor": "Lcom/k2fsa/sherpa/onnx/WaveData;",
+    "isStatic": false,
+    "symbol": "Java_com_k2fsa_sherpa_onnx_WaveReader_00024Companion_readWaveFromFile",
+    "classPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/WaveReader$Companion.smali",
+    "line": 104
+  }
+]

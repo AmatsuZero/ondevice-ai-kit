@@ -1,3 +1,7 @@
+## 2026-11-16 W3 JNI 表面对应
+
+新增跨层 JNI 导出名与显式类型类别对应子项：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；P1/P2/P3/P4/R4/R5/W3 仍未关闭。仅名称/类型类别证据，详见 [验证](../validation/w3-jni-surface-correspondence-20261116.md)。
+
 ## 2026-11-16：四 APK 的 DEX 对应子项已提交及双端记录
 
 本地3cf41c6（64文件）；[同步收据](../validation/w3-dex-correspondence-sync-20261116.json)记录GH#15 comment6903390954/GL#15 note44875及GH Wiki0917685，双Wiki SHAafd069bb…df26逐字回读相同。两免费hy3完整终态；四APK各124runtime类完整baksmali原文本相同（496类比较），真实DEX损坏负例拒收，161freeze保持。172原内容未变，4并发范围外变化保留，非176全部未变；零新Kotlin编译/APK构建/下载/设备，D8实际6次。历史AGP bootclasspath、完整native/组成/生产接受和R4/R5仍缺，P1–P4/W3保持open、goal active；源码未push，marker已用勿重发。

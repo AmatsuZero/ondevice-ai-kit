@@ -1,0 +1,286 @@
+[
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_addDiacritics",
+    "ownerSimpleName": "OfflineDiacritization",
+    "method": "addDiacritics",
+    "ownerPresentIn124RuntimeClasses": false,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_addDiacritics",
+      "returnType": "jstring",
+      "parameterTypes": [
+        "JNIEnv",
+        "jobject",
+        "jlong",
+        "jstring"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc",
+      "sourceLine": 109,
+      "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineDiacritization_addDiacritics(JNIEnv *env,\n                                                               jobject  ,\n                                                               jlong ptr,\n                                                               jstring text)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_delete",
+    "ownerSimpleName": "OfflineDiacritization",
+    "method": "delete",
+    "ownerPresentIn124RuntimeClasses": false,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_delete",
+      "returnType": "void",
+      "parameterTypes": [
+        "JNIEnv",
+        "jobject",
+        "jlong"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc",
+      "sourceLine": 103,
+      "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromAsset",
+    "ownerSimpleName": "OfflineDiacritization",
+    "method": "newFromAsset",
+    "ownerPresentIn124RuntimeClasses": false,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromAsset",
+      "returnType": "jlong",
+      "parameterTypes": [
+        "JNIEnv",
+        "jobject",
+        "jobject",
+        "jobject"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc",
+      "sourceLine": 48,
+      "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromFile",
+    "ownerSimpleName": "OfflineDiacritization",
+    "method": "newFromFile",
+    "ownerPresentIn124RuntimeClasses": false,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromFile",
+      "returnType": "jlong",
+      "parameterTypes": [
+        "JNIEnv",
+        "jobject",
+        "jobject"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc",
+      "sourceLine": 78,
+      "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromFile(JNIEnv *env,\n                                                             jobject  ,\n                                                             jobject _config)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_decodeStreams",
+    "ownerSimpleName": "OfflineRecognizer",
+    "method": "decodeStreams",
+    "ownerPresentIn124RuntimeClasses": true,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_decodeStreams",
+      "returnType": "void",
+      "parameterTypes": [
+        "JNIEnv",
+        "jobject",
+        "jlong",
+        "jlongArray"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+      "sourceLine": 643,
+      "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineRecognizer_decodeStreams(\n    JNIEnv *env, jobject  , jlong ptr, jlongArray stream_ptrs)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_hasOption",
+    "ownerSimpleName": "OfflineStream",
+    "method": "hasOption",
+    "ownerPresentIn124RuntimeClasses": true,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_hasOption",
+      "returnType": "jboolean",
+      "parameterTypes": [
+        "JNIEnv",
+        "jobject",
+        "jlong",
+        "jstring"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-stream.cc",
+      "sourceLine": 49,
+      "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_OfflineStream_hasOption(\n    JNIEnv *env, jobject  , jlong ptr, jstring key)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_decodeStreams",
+    "ownerSimpleName": "OnlineRecognizer",
+    "method": "decodeStreams",
+    "ownerPresentIn124RuntimeClasses": true,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_decodeStreams",
+      "returnType": "void",
+      "parameterTypes": [
+        "JNIEnv",
+        "jobject",
+        "jlong",
+        "jlongArray"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+      "sourceLine": 384,
+      "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineRecognizer_decodeStreams(\n    JNIEnv *env, jobject  , jlong ptr, jlongArray stream_ptrs)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_hasOption",
+    "ownerSimpleName": "OnlineStream",
+    "method": "hasOption",
+    "ownerPresentIn124RuntimeClasses": true,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_hasOption",
+      "returnType": "jboolean",
+      "parameterTypes": [
+        "JNIEnv",
+        "jobject",
+        "jlong",
+        "jstring"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-stream.cc",
+      "sourceLine": 56,
+      "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_OnlineStream_hasOption(\n    JNIEnv *env, jobject  , jlong ptr, jstring key)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitDate2",
+    "ownerSimpleName": "VersionInfo",
+    "method": "getGitDate2",
+    "ownerPresentIn124RuntimeClasses": true,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitDate2",
+      "returnType": "jstring",
+      "parameterTypes": [
+        "JNIEnv",
+        "jclass"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+      "sourceLine": 44,
+      "declarationWithoutComments": "JNIEXPORT jstring JNICALL Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitDate2(\n    JNIEnv *env, jclass  )"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitSha12",
+    "ownerSimpleName": "VersionInfo",
+    "method": "getGitSha12",
+    "ownerPresentIn124RuntimeClasses": true,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitSha12",
+      "returnType": "jstring",
+      "parameterTypes": [
+        "JNIEnv",
+        "jclass"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+      "sourceLine": 38,
+      "declarationWithoutComments": "JNIEXPORT jstring JNICALL Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitSha12(\n    JNIEnv *env, jclass  )"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getOnnxruntimeVersionStr2",
+    "ownerSimpleName": "VersionInfo",
+    "method": "getOnnxruntimeVersionStr2",
+    "ownerPresentIn124RuntimeClasses": true,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getOnnxruntimeVersionStr2",
+      "returnType": "jstring",
+      "parameterTypes": [
+        "JNIEnv",
+        "jclass"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+      "sourceLine": 57,
+      "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_VersionInfo_getOnnxruntimeVersionStr2(\n    JNIEnv *env, jclass  )"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getVersionStr2",
+    "ownerSimpleName": "VersionInfo",
+    "method": "getVersionStr2",
+    "ownerPresentIn124RuntimeClasses": true,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getVersionStr2",
+      "returnType": "jstring",
+      "parameterTypes": [
+        "JNIEnv",
+        "jclass"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+      "sourceLine": 32,
+      "declarationWithoutComments": "JNIEXPORT jstring JNICALL Java_com_k2fsa_sherpa_onnx_VersionInfo_getVersionStr2(\n    JNIEnv *env, jclass  )"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_WaveReader_readWaveFromFile",
+    "ownerSimpleName": "WaveReader",
+    "method": "readWaveFromFile",
+    "ownerPresentIn124RuntimeClasses": true,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_WaveReader_readWaveFromFile",
+      "returnType": "jobject",
+      "parameterTypes": [
+        "JNIEnv",
+        "jclass",
+        "jstring"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-reader.cc",
+      "sourceLine": 85,
+      "declarationWithoutComments": "JNIEXPORT jobject JNICALL\nJava_com_k2fsa_sherpa_onnx_WaveReader_readWaveFromFile(JNIEnv *env,\n                                                       jclass  ,\n                                                       jstring filename)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_WaveWriter_writeWaveToFile",
+    "ownerSimpleName": "WaveWriter",
+    "method": "writeWaveToFile",
+    "ownerPresentIn124RuntimeClasses": false,
+    "sourceDefinition": {
+      "symbol": "Java_com_k2fsa_sherpa_onnx_WaveWriter_writeWaveToFile",
+      "returnType": "bool",
+      "parameterTypes": [
+        "JNIEnv",
+        "jclass",
+        "jstring",
+        "jfloatArray",
+        "jint"
+      ],
+      "receiverUnnamed": true,
+      "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-writer.cc",
+      "sourceLine": 9,
+      "declarationWithoutComments": "JNIEXPORT bool JNICALL Java_com_k2fsa_sherpa_onnx_WaveWriter_writeWaveToFile(\n    JNIEnv *env, jclass  , jstring filename, jfloatArray samples,\n    jint sample_rate)"
+    },
+    "scope": "export has fixed source definition but is not one of this AAR native declarations; no claim of reachability, absence of callers elsewhere or whole-component exclusion"
+  }
+]

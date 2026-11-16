@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "rtk",
+    "proxy",
+    "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-nm",
+    "--dynamic",
+    "--defined-only",
+    ".omx/artifacts/w3-native-linkage-20261115/jni/x86_64/libsherpa-onnx-jni.so"
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 0.014,
+  "stdoutBytes": 10051,
+  "stdoutSHA256": "3924e79347183dc5ab5850c1d01eba5255a95d4b80db5b86c4c51424964fe77e",
+  "stderrBytes": 0,
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

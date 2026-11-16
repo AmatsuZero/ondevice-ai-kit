@@ -1,3 +1,7 @@
+## 2026-11-16 交接
+
+新增子项：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；P1/P2/P3/P4/R4/R5/W3 仍未关闭。证据与负例边界见 [验证](validation/w3-jni-surface-correspondence-20261116.md)；提交、Issue、Wiki 另行记录。
+
 ## 2026-11-16 W3 DEX 对应已提交及双端同步
 
 本地3cf41c6精确64文件；GH#15 comment6903390954/GL#15 note44875/GH Wiki0917685及双Wiki SHAafd069bbafa086a64552c1de6d299bece4900a1c04267e0ceb45c3815656df26逐字回读，[收据](validation/w3-dex-correspondence-sync-20261116.json)。marker已用勿重发，源码未push；两hy3及三发布均终态、无待poll。四APK各124runtime类完整baksmali文本一致，496类比较/每APK1967方法声明（含native/abstract），非wholeDEX字节或形式语义证明；首75类差异/有无bootclasspath控制及真实DEX损坏负例全保留。D8实际6次，零新Kotlin编译/APK构建/下载/设备；161freeze保持，172原内容未变及4并发范围外变化均保留。无新Python缓存，零删除，canonical输入/全部原始证据保留。P1–P4/R4/R5/W3仍open、goal active；下一缺完整native/输入可信度/最终生产采用及发布接受，不缩减完整目标，不重放旧quota/源站429/USB/FILE。实体连接变化后才fresh未消费固定单文件合同，1.5GiB守卫不变。

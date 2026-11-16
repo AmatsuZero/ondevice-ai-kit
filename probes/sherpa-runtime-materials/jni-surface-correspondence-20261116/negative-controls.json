@@ -1,0 +1,50 @@
+[
+  {
+    "case": "missing-export",
+    "exitCode": 1,
+    "rejected": true,
+    "scope": "only in-memory mutation of gathered acceptance inputs; no source/APK/ELF file edits or execution"
+  },
+  {
+    "case": "same-count-renamed-export",
+    "exitCode": 1,
+    "rejected": true,
+    "scope": "only in-memory mutation of gathered acceptance inputs; no source/APK/ELF file edits or execution"
+  },
+  {
+    "case": "undefined-export",
+    "exitCode": 1,
+    "rejected": true,
+    "scope": "only in-memory mutation of gathered acceptance inputs; no source/APK/ELF file edits or execution"
+  },
+  {
+    "case": "duplicate-source-definition",
+    "exitCode": 1,
+    "rejected": true,
+    "scope": "only in-memory mutation of gathered acceptance inputs; no source/APK/ELF file edits or execution"
+  },
+  {
+    "case": "explicit-argument-type",
+    "exitCode": 1,
+    "rejected": true,
+    "scope": "only in-memory mutation of gathered acceptance inputs; no source/APK/ELF file edits or execution"
+  },
+  {
+    "case": "return-type",
+    "exitCode": 1,
+    "rejected": true,
+    "scope": "only in-memory mutation of gathered acceptance inputs; no source/APK/ELF file edits or execution"
+  },
+  {
+    "case": "receiver-difference-no-longer-unused",
+    "exitCode": 1,
+    "rejected": true,
+    "scope": "only in-memory mutation of gathered acceptance inputs; no source/APK/ELF file edits or execution"
+  },
+  {
+    "case": "same-length-source-byte-change",
+    "exitCode": 1,
+    "rejected": true,
+    "scope": "only in-memory mutation of gathered acceptance inputs; no source/APK/ELF file edits or execution"
+  }
+]

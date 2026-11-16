@@ -1,0 +1,58 @@
+[
+  {
+    "task": "hy3-candidate",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 56.297,
+      "endedAtUTC": "2026-11-16T00:02:33.993822+00:00",
+      "stdoutBytes": 65282,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "subtype": "success",
+    "is_error": false,
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 71726,
+        "outputTokens": 12696,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 960000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "observedToolUse": 0,
+    "promptSHA256": "5dd2b4cf5a908d1dea55bf688b4814ea571da32835b17e56dde098c39b816e7b",
+    "resultSHA256": "0cebd2920969acd0ac3d38c82a06aaae90ca0c20fff4573b31ef8950aa366023",
+    "scope": "supplied-context candidate/review only, no raw binary inspection or release approval"
+  },
+  {
+    "task": "hy3-review",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 73.178,
+      "endedAtUTC": "2026-11-16T00:05:37.681557+00:00",
+      "stdoutBytes": 94038,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "subtype": "success",
+    "is_error": false,
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 72715,
+        "outputTokens": 18578,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 960000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "observedToolUse": 0,
+    "promptSHA256": "87ad7888684c05d6c0e8d4edd0bd7297f9d33e3027082e7710033be27856294d",
+    "resultSHA256": "1c0c2dceefe7d176a3ce51f0a5575ab2a3640e858e46747e2fe00fc72de1e758",
+    "scope": "supplied-context candidate/review only, no raw binary inspection or release approval"
+  }
+]

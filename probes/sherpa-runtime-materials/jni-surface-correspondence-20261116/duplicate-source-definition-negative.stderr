@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jni-surface-20261116T0800/verify-surface.py", line 82, in <module>
+    assert len(defs) == 134 and len({row['symbol'] for row in defs}) == 134
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
