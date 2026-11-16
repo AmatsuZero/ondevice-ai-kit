@@ -1,3 +1,7 @@
+## 2026-11-16：W3 iOS 状态已重新分层，下一会话从独立交接继续
+
+先读 [W3 平台状态与下一会话交接](HANDOFF-W3-IOS-STATUS-2026-11-16.md)。Apple FILE ASR、显式 locale、既有 iPhone 生命周期及 20周期/40请求持续观测已有真机证据；当前无等待解锁、签名修复或无法运行的iOS硬阻塞，不重跑同批、录音、授权或既有生命周期。iOS仍缺R4质量裁定、R5/W8 Apple专属预算及固定生产候选/P4发布接受。AAR/JNI/DEX/NDK和近期P1–P3大部分缺口主要属于Android Sherpa交付链，不能继续概括为iOS阻塞。W3保持open；下次先做iOS lane独立关闭清单，再分别推进Android质量/组成和跨平台发布复审。
+
 ## 2026-11-16 W3整体复审已提交及双端同步
 
 本地5676fab精确15文件；GH#15 comment6903955738/GL#15 note44877/GH Wiki0c9220c及双Wiki SHA6a7d94323fa52cbb92471c201fbd193c5eed7be0d4e72d8d371492c81c90fab7逐字回读。[收据](validation/w3-integrated-release-review-sync-20261116.json)。两免费hy3均终态；初稿错误串行前置（产品先选/预算批准挡诊断）拒收，修正稿及6处父编辑保留，P4自我前置与签名链额外门已从接受正文删除。当前SDK/Demo源仍Whisper，Qwen为独立24/65实验；本轮hold_release不是P4接受。未识别非重复本地闭环方法，不把泛化准备建议当新任务。GitHub共享Wiki首见dirty而guard停写，后续状态自行变clean，原因不归因；原快照/两失败保留，改独立/private/tmp/odai-w3-integrated-review-wiki-20261116成功，零共享checkout写入。两端Issue、三次成功发布均终态、无待poll，marker已用勿重发、源码未push。25供应文档/12制品身份/4当前源/161freeze通过；终检172原内容不变、4处并发iOS新增及新IOS交接保留，176原文仅内存去精确新增恢复原摘要，未回滚或纳本批提交。零构建/下载/设备、新缓存0/删除0。P1–P4/R4/R5/W3完整目标保持open、goal active；无新实体连接变化，不能ADB/USB/旧FILE重放。实体变化后原单片合同fresh guard/preflight无需重批预算或先选最终路线；仍不保证根因或替代原65与完整资源。

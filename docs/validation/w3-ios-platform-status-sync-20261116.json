@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUTC": "2026-11-16T00:50:10.247816+00:00",
+  "marker": "<!-- w3-ios-platform-status-20261116 -->",
+  "page": "W3语音验收与后续改进",
+  "localHandoff": "docs/HANDOFF-W3-IOS-STATUS-2026-11-16.md",
+  "githubWiki": {
+    "commit": "fdcdbb706517ef74426eada0c85a3b8a64e4eed3",
+    "sha256": "c0c5538ce31f9956c94c60917016af637823ca0dd875c2acbbdd58808de8fc0d",
+    "readbackExact": true,
+    "written": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "c0c5538ce31f9956c94c60917016af637823ca0dd875c2acbbdd58808de8fc0d",
+    "readbackExact": true,
+    "written": true
+  },
+  "dualWikiSHA256Equal": true,
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "iosFunctionalHardBlockerActive": false,
+  "iosR4Complete": false,
+  "iosR5BudgetComplete": false,
+  "productionCandidateAccepted": false,
+  "P4Accepted": false
+}

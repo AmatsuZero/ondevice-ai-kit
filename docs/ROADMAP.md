@@ -1,3 +1,7 @@
+## 2026-11-16 W3：iOS 功能链已打通，验收门仍分开开放
+
+[W3 平台状态与下一会话交接](HANDOFF-W3-IOS-STATUS-2026-11-16.md)：Apple FILE ASR、显式 locale、既有 iPhone 生命周期及 20-cycle/40-call 持续观测已验收，当前无活跃 iOS 执行硬阻塞且不重跑。iOS 仍有 R4 质量裁定、R5/W8 Apple 专属预算和固定生产候选/P4 接受；AAR/JNI/DEX/NDK/P1–P3 的近期大部分缺口主要是 Android Sherpa 交付链。W3 整包保持 `open`。
+
 ## 2026-11-16 W3整体复审已提交及双端同步
 
 本地5676fab精确15文件；GH#15 comment6903955738/GL#15 note44877/GH Wiki0c9220c及双Wiki SHA6a7d94323fa52cbb92471c201fbd193c5eed7be0d4e72d8d371492c81c90fab7逐字回读。[收据](validation/w3-integrated-release-review-sync-20261116.json)。复审结论hold_release，P1–P4/R4/R5/W3保持open；已有通知/原始JVM/DEX/JNI增量保留，未识别非重复本地闭环任务。下一核心仍为条件恢复后的已授权诊断及实际全量质量/预算与同候选发布材料。

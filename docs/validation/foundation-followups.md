@@ -1,3 +1,7 @@
+## 2026-11-16：W3 平台缺口重新分类
+
+[新会话交接](../HANDOFF-W3-IOS-STATUS-2026-11-16.md)确认 iOS 当前没有功能执行硬阻塞：Apple FILE ASR、显式 locale、既有生命周期及持续观测均保留真机证据。iOS 仍未关闭 R4质量、R5/W8 Apple预算、固定生产候选和P4发布接受；近期 AAR/JNI/DEX/NDK及P1–P3大量余项主要属于Android Sherpa。W3整包继续open，不重跑已验Apple批次。
+
 2026-11-07：[Speech六文件最终限定复核](android-speech-final-review-20261107.md)两条cbc hy4free咨询复审均完成，未新增确认缺陷；沿用102项及Sherpa70项实际执行证据，本批不重跑。原错误解释另存父更正；不代替native双审/整分支或发布批准。[F06官方取证](f06-transfer-evidence-20261107.md)保留3份官方文档GET200及3份SDK头，在本范围未见明确RGB传递函数合同，experimental sRGB/质量门槛保持。助手文档已原样集成，旧冻结exit1及原件保留；10/12/P4/P11/not-ready不变。
 
 2026-11-07 F08文档收尾：[验收记录](f08-system-prompt-diagnostic-20261107.md)/probe README及中央pitfalls已由hy4free直接写并经父核实集成。初稿/订正/一行修正分别462.992/400.276/13.779秒均终态；hy3实际429后按用户要求暂停到16:18:54本地，届时仅可复查。下段“文档待选择”是此前历史；当前无运行助手。四次固定诊断无输出变化、原quality失败及10/12/not-ready保持。
