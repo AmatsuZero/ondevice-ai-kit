@@ -1,3 +1,9 @@
+## W9真机文件验收：实包键、文件可见性与任务栈 — 2026-11-18
+
+结果收尾：iOS测试体107.032s/1项0失败后，xcodebuild停在collectDeviceDiagnostics/devicectl diagnose。只读采样与确切子进程命令确认该阶段；未重跑/kill，诊断600秒自然超时后外层exit0/709.560s、TEST EXECUTE SUCCEEDED且xcresult落盘。诊断附件收集失败原日志保留，不能把总命令时长当转换耗时，也不能称所有诊断齐备。
+
+现象/恢复：任务Xcode工程的UIFileSharingEnabled build setting存在，但built Info.plist没有该Boolean；签名前断言拒绝后，仅在任务专用Info.plist写显式Boolean、重建并核实实包，生产PBX/Info保持。Android所属四个合成WAV磁盘hash正确但Downloads为空，仅扫描这四条路径后可选；不扫描私人媒体。CreateDocument内Back先导航父目录，须观察实际返回App再断言取消。Home/Recents无等待连发可能只留桌面；桌面图标本轮新增MainActivity而原VoiceActivity仍在栈内，不能认定结果丢失。退出新增空页/Main回到原480000帧结果，Home后等待、实际Recents返回4.909s验证播放停止及结果保留，离页cache无所属音频。边界：合成文件/播放按钮通过不是开麦或人声听验；iOS测试体pass与外层设备诊断/结果包收集终态分别记录，不重复测试掩盖收尾问题。证据`.omx/artifacts/w9-physical-20261117T230454Z/`与[报告](validation/w9-physical-acceptance-20261118.md)，首错原件保留。
+
 ## W9 Android：JVM通过不证明App可建硬链接 — 2026-11-17
 
 现象：真实Demo导入成功但三预设均PLATFORM；App PID日志显示untrusted_app_34对app_data_file的{ link } SELinux拒绝，同UID普通读/写/同步通过而Files.createLink为AccessDeniedException。有效恢复：原子createDirectory独占预留共享输出名，再在SDK独占目录内将关闭的临时文件ATOMIC_MOVE为audio.wav；预留碰撞保留竞争者，无放宽策略/非原子回退。释放文件后删所属预留目录，失败保留所有权供重试；清理子路径优先。新增2项回归原版RED→修复GREEN，SDK30＋Demo67、lint/双APK、新AAR独立消费及实际Android模拟器三预设/系统保存回读通过。边界：外部不得写SDK-owned目录；不是OEM/最低系统/人声听感/录音接受，活动取消UI未触发，旧R AAR身份不能覆盖修复。iOS早期XCTest未离页结束留4个合成文件，不能宣称全tmp为空。证据`.omx/artifacts/w9-simulator-20261117T125412Z/`及[报告](validation/w9-simulator-acceptance-20261117.md)。

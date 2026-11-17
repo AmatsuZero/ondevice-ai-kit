@@ -1,5 +1,7 @@
 # 本周阶段交付状态（2026-11-17）
 
+2026-11-18最新：**physical-file-core-validated / release not-ready**。[双端真机报告](w9-physical-acceptance-20261118.md)：隔离App实际导入/三预设/播放/系统保存回读、坏/超限拒绝、picker取消/离页清理通过；Android播放中后台恢复通过，iOS只验后台返回可用。无开麦/人声听验；录音权限/上限、活动转换取消、系统音频中断、资源预算、最低系统与最终组合通知/复审仍open。下述模拟器“未安装真机”仅是历史阶段，按本增量为准。
+
 最新增量：**simulator-core-validated / release not-ready**，详见[双端模拟器验收](w9-simulator-acceptance-20261117.md)。真实文件导入/三预设/播放控制/系统导出回读通过；Android App 硬链接发布故障修复，SDK30＋Demo67共97测试、lint与双APK通过，修复后新隔离AAR独立消费通过。未开麦/人工听验/安装真机。活动取消UI、录音拒权/自动停止、系统音频中断、OEM/最低系统、资源/最终通知/复审仍open；下方历史验证计数不含本增量。
 
 范围来源：[用户调整后的设计](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)。目标：11/20 候选，11/22 完成本周范围验收（Asia/Shanghai）。当前 **A/B/C 已实现并本地验证 / release not-ready**。最新证据：[R增量](w9-r-delivery-20261117.md)、[C集成结果](w9-c-integration-20261117.md)与[A/B集成结果](w9-ab-integration-20261117.md)；以下历史原型信息保留，不再据其“未派发”描述回退当前状态。
@@ -15,7 +17,7 @@
 | W9-C | 主代理（用户要求直接执行） | implemented / integrated-local-validated | 实际A/B绑定；Android67、shared JVM113、Swift WAV3、iOS桥接4、UI1及双端App构建；见C报告，真机与听感待验 |
 | R | 主代理验收＋本地Ollama包装候选 | local-increment-validated / 最终接受open | 清单/限制/设备步骤；隔离Maven→APK、AAR/JVM、AppleSwiftPM运行、12XCFramework及W9双切片独立链接通过；实包完整通知/组合/复审未通过，见R报告 |
 | Q | 唯一 native reviewer | 规划文档ACCEPT；原型/合同最终复核blocked429 | 最终本轮无结论，已停线；不自动重试 |
-| INT/DEVICE | 主代理 | 双端模拟器核心链路通过；物理设备pending | 分支feat/w9-ab-integration-20261117；新AAR独立消费已重验；最终组合/通知/真机/听感/资源/复审待验，不自动开麦 |
+| INT/DEVICE | 主代理 | 双端真机文件核心链路通过；完整设备门open | 基线9219cfe；见真机报告；录音/权限/上限、听感、活动取消/中断、资源/最终组合通知/复审待验，不自动开麦 |
 
 ## 暂停/延期与保持
 
@@ -26,7 +28,7 @@
 | W6 | paused/deferred | 视频理解仍未通过，不重开模型实验 |
 | W7 production/PAD | deferred-from-weekly-scope | 数据/协议/校准/PAD仍未通过，已有功能不宣传生产身份/活体 |
 | W8 / 本周实际候选 | active-planned | 必要资源、预算/缺测裁定、通知与最终复审待完成 |
-| W9 | active / SDK与Demo本地已验 | W9-0/A/B/C工程证据齐；物理设备、听感/资源、独立消费者与最终复核未通过 |
+| W9 | active / SDK与Demo及真机文件核心已验 | W9-0/A/B/C与有界独立消费有证据；真机录音/权限/上限、听感/资源、完整消费者与最终复核未通过 |
 
 ## W9-0实施增量
 
