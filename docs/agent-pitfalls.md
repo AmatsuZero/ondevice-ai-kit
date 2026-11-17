@@ -1,3 +1,11 @@
+## W9原型：订正、WAV封装与工具链边界 — 2026-11-17
+
+症状：本地候选首稿负窗口索引崩溃，整文件订正又改变API/数值类型或仅给占位片段；Apple首稿有API/RIFF长度问题。已核恢复：保留首稿与错误，逐个审查精确小替换，编译并运行实际文件检查后才集成，不能复制模型自报通过。Apple有效输出有附加RIFF chunks，canonical-only入口拒绝再次导入；宿主归一化是后续实现义务，不能改称任意WAV支持。系统Java shim无runtime时使用既有OpenJDK17；D8产DEX/ART通过并不消除Kotlin metadata2.4解析警告或证明release兼容。四环境各74检查只证明原型文件可行性，不证明人声听感/SDK生命周期/App/OEM；最终native复核429无结论且停线。证据`.omx/artifacts/w9-minimal-20261117T071421Z/`与[报告](validation/w9-minimal-chain-20261117.md)。
+
+## 文档前置更新：无锚点补丁可能落到文件尾 — 2026-11-17
+
+现象：本周范围更新的三份文档使用无上下文的 `@@` 插入后，新“当前暂停”段实际在EOF，旧派工仍占顶部。已核原因：本次apply_patch对无锚点更新采用了文件尾位置，三份`startsOld=true/old-position=0`及实际diff保留，不能将工具返回成功当“已前置”。有效处理：以原首行作明确上下文插入，并精确删除本次尾部新增段；重核`endswith(original_bytes)`和顶部标题，三个旧正文完整保持。边界：不重写历史、不覆盖并发变化、不修无关EOF空行；本次修正仅移动本轮新增说明。证据`.omx/artifacts/weekly-rebaseline-20261117/{baseline.json,documentation-check-initial.json,before/}`和最终文档核验收据。
+
 ## W3 组合 App：SwiftPM 的本地 artifact 记录 — 2026-11-16
 
 隔离准备时artifacts为空，但完整组合App构建后SwiftPM将本地OpenCV XCFramework登记到workspace-state.json的artifacts；不能要求构建后仍为空并据此推断下载。实际唯一记录source.type=local、packageRef=fileSystem/apple-opencv、targetName=opencv2，path精确指向已核完整文件树的本地输入，prebuilts仍空。首核验原失败/初版checker保留；只修为精确核对这一条记录，读取同一App通过，没有重建/移除记录或放宽为任意artifact。证据`.omx/artifacts/w3-apple-sdk-app-candidate-20261116/`，见[组合App结果](validation/w3-apple-sdk-app-candidate-20261116.md)。

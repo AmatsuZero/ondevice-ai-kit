@@ -1,3 +1,9 @@
+## 当前交接已暂停：2026-11-17 本周转向变声与交付
+
+用户已要求暂停W3后续推进；iOS已有语音功能与真实质量/资源边界保留，本周不再领取本页旧的ASR识别、标点实验或专属来源扩展。实际交付候选必要通知/消费/回归归发布线，不因暂停而省略。先读[本周新交接](HANDOFF-2026-11-17-weekly-delivery.md)、[计划](superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md)和[状态](validation/weekly-delivery-status-20261117.md)。下方正文是历史证据，暂停不等于W3已完成或所有iOS场景已通过。
+
+---
+
 ## W3 2026-11-16：当前标点SDK的完整组合App构建通过
 
 [实际App验收](validation/w3-apple-sdk-app-candidate-20261116.md)：当前标点SDK已进入完整Speech/Video/MLX/OpenCV组合App：固定c8038cc的203选定输入、复用已核F02 .6 shared与OpenCV，实际unsigned arm64/minOS18构建76.984s通过；92App文件/30实际SwiftFileList/643唯一Swift输入/74+3通知已核，206原内容保持。首checker仅误拒SwiftPM本地OpenCV artifact，原失败保留、同App检查恢复，无重建。零签名/安装/设备识别/模型下载；当前为本地候选，R4/R5/P1–P4/W3仍open。

@@ -1,3 +1,11 @@
+## 当前状态入口（2026-11-17）：阶段范围变更，未新增通过项
+
+W3/W6 paused/deferred；W7生产校准/PAD deferred-from-weekly-scope；W9离线效果变声planned；W8与实际候选必要交付门继续。W1/W2/W4/W5关闭保持。当前release **not-ready**，11/20候选、11/22验收为目标；不是原roadmap全量通过。
+
+新的实际范围/派工见[本周状态](weekly-delivery-status-20261117.md)、[总计划](../superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md)。历史P11九行/11组机器快照和benchmark manifest不改；W9尚未进入实际测量，不伪造覆盖/百分比。下面“单包”“W7未延期”和旧ready/gap是历史上下文，以新范围裁定为当前入口。
+
+---
+
 ## 当前状态指针（2026-11-09 10:00 +08）
 
 **去重八包剩余4包：W3/W6/W7/W8；W1/W2/W4/W5 已关闭。** Skiko`.6`实际Nexus交付/匿名回读/全新缓存双iOS远端消费、Apple交付及远端消费者真机推理均已验收；W2不重开。W4既定适用范围与用户盲选、W5真实native/Service/KMP/Demo生命周期及late-cleanup验收已关闭，资源预算归W8。依据：[最新防重复清单](progress-side-update-20261107-2014.md)、[W4裁定](w4-neutral-playback-20261108.md)、[W5订正复审](w5-late-cleanup-rereview-20261108.md)。

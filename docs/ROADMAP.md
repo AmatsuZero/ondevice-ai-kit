@@ -1,3 +1,24 @@
+## 当前执行基线：2026-11-17 本周交付重排（用户已调整方向）
+
+**暂停 W3/W6 后续研发，新增 W9 离线效果变声，并行推进本周阶段交付。** 目标为 2026-11-20（周五）候选、2026-11-22（周日）本周范围验收；不是原 roadmap 全量通过声明。下方旧“下一步继续W3/W6”“单包串行”“goal active”属于当时记录，不再作为本周派工指令；不据此改写任何旧运行态。
+
+| 包 | 当前安排 | 验收边界 |
+| --- | --- | --- |
+| W1/W2/W4/W5 | 保留已关闭专项，候选必要回归 | 不重开旧专项；新候选仍需实际验证 |
+| W3 语音 | paused/deferred；保留双端已有 ASR/TTS 功能与限制 | 暂停质量提升、Qwen 替换、内存/ACK 专属实验；原质量/资源/发布门不改绿 |
+| W6 视频理解 | paused/deferred；本周不承诺通用视频理解 | 停新模型/训练/parity/验证集与手机实验，保留旧模型/证据 |
+| W7 生产校准/PAD | 阶段外延期，已有功能和未校准拒绝保留 | 原数据/协议/质量门未通过，不宣传生产身份/活体 |
+| W8 / 本周交付 | active-planned | 本次实际候选必要资源、预算/缺测裁定、通知、消费与复审继续，不自动豁免 |
+| W9 变声 | W9-0原型已验 / SDK与Demo待实现 | 录音/文件效果变声、SDK + KMP Demo、试听/导出；非实时/非AI克隆 |
+
+执行入口：[新交接](HANDOFF-2026-11-17-weekly-delivery.md) · [范围设计](superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md) · [并行计划](superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md) · [W9合同](roadmap/W9-voice-effects.md) · [真实状态](validation/weekly-delivery-status-20261117.md) · [Agent任务提示](agent-tasks/weekly-20261117/README.md)。
+
+并行顺序：W9-0 合同/双端可行性 → Apple A / Android B / KMP-Demo C；发布材料 R 可先行，主代理集成/构建/设备验收，唯一 native reviewer 只读审查。旧 CBC429不自动重试、付费逐次确认及新Copilot暂停保持。提示已准备不算已启动；实际仍打包的依赖，必要通知和消费验证归发布线，不因暂停W3/W6而消失。
+
+---
+
+以下为历史快照；当前执行裁定以上述本周基线为准，原始结果/失败/未通过项保持。
+
 ## 2026-11-17 W6/F08：下一会话继续短视频理解质量决策
 
 [W6/F08 下一会话交接](HANDOFF-W6-F08-NEXT-2026-11-17.md)：Qwen3.5 运行阻塞已修，但 valid36 `17/36` 未达 `20/36` 且净增 `+4` 门；36/18 SFT 的 valid 正确数 `9→8`，质量门失败且 adapter 未保存。Smol `14/36`、冻结路由最好 `19/36`，Qwen2 BF16 与旧 parity 路线均停止。后续只评估收窄产品合同、有独立质量与移动资源依据的新模型，或使用全新独立验证集的训练/蒸馏方案；新候选先过 Mac Metal 独立质量门，再考虑 iPhone。W6 保持 `open/not-ready`。

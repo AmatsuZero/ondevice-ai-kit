@@ -1,3 +1,11 @@
+## 当前任务入口：2026-11-17 本周并行交付（旧运行收据保留）
+
+W3/W6后续任务暂停，不轮询/重派历史实验；W7生产校准/PAD阶段外延期。新队列为W9-0合同与双端可行性→A Apple/B Android/C bridge-Demo并行，R发布材料可先行，主代理集成/设备验收，Q唯一native只读代码/验收证据审查。文件所有权和前置见[总计划](../superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md)；实际运行状态只看[本周状态表](weekly-delivery-status-20261117.md)，模板准备不表示已派发。
+
+本轮先更新规划；没有新模型/录音/设备操作或生产实现。native≤1、外部实现候选、CBC429停线、新Copilot暂停、付费逐次确认保持。下文旧hold_release/active/待批准/运行中均按各自日期解读，不作为当前授权或活跃任务证明。
+
+---
+
 ## 2026-11-15 W3 NDK/C++来源任务已终态
 
 主代理完成规划、机械取证/验收与集成；免费hy3 guard46.385s/report48.791s/correction31.939s/editorial56.651s全部完整success、零已观察真实工具事件/配额错，首两文档稿拒收保留、最终稿原字节采用。36b6b48精确100文件，八命令/两note/69源路径/30tree已核；171原保护及两W6更新保留、161freeze/diff-check通过。GH#15comment6895112846/GL#15note44864/GHWikic601a1d与GLWiki逐字回读同SHA，[收据](w3-ndk-runtime-provenance-sync-20261115.json)。全部helper/发布均终态无待poll，三个重复Bun缓存名义18551376B精确清理、canonical/raw证据保持，零新设备/构建。完整W3目标active，P1–P4/R4/R5/W3open；下一cache/link/retention/runtime通知适用性，不重派本任务或重试quota/旧批次/USB循环。

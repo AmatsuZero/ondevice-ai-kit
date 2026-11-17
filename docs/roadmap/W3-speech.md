@@ -1,3 +1,11 @@
+## 当前裁定：2026-11-17 W3 暂停后续推进
+
+用户已选择本周暂停 W3 后续研发、转向变声与项目阶段交付。状态为 **paused/deferred，非完成/质量通过**。保留已具备的双端 TTS、iOS ASR 和 Android Whisper 基础识别及已知限制，不继续 Qwen 替换、全量质量实验、内存/ACK 专属诊断、系统资源下载或旧批次重放。
+
+原 R4/R5/P1–P4 未通过事实保留；本周实际包继续包含的依赖，其必要通知/来源/消费者与最终复审由交付线承担，不自动豁免。当前先读[本周范围](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)、[W9](W9-voice-effects.md)及[新计划](../superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md)。下方各次“下一步/active/open”仅为历史状态，不触发继续W3或改写旧goal。
+
+---
+
 ## W3 2026-11-16：当前标点SDK的完整组合App构建通过
 
 [实际App验收](../validation/w3-apple-sdk-app-candidate-20261116.md)：当前标点SDK已进入完整Speech/Video/MLX/OpenCV组合App：固定c8038cc的203选定输入、复用已核F02 .6 shared与OpenCV，实际unsigned arm64/minOS18构建76.984s通过；92App文件/30实际SwiftFileList/643唯一Swift输入/74+3通知已核，206原内容保持。首checker仅误拒SwiftPM本地OpenCV artifact，原失败保留、同App检查恢复，无重建。零签名/安装/设备识别/模型下载；当前为本地候选，R4/R5/P1–P4/W3仍open。
