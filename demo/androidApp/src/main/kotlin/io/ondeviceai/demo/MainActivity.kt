@@ -243,6 +243,13 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                     multimodalHost?.model,multimodalHost,identitySetup = identityRuntime,
                     modifier = if (facePreviewVisible) Modifier.heightIn(max = 380.dp) else Modifier.weight(1f),
                     onFacePageVisibilityChanged = { facePreviewVisible = it })
+                TextButton(onClick = {
+                    speechHost.onBackground(); videoHost.background(); stopCamera()
+                    lifecycleScope.launch {
+                        while (!speechHost.model.state.controlsEnabled) delay(20)
+                        startActivity(android.content.Intent(this@MainActivity, VoiceEffectsActivity::class.java))
+                    }
+                }) { Text("离线变声") }
                 message?.let{Text(it)}
                 report?.let{json->TextButton(onClick={exportReport(json)}){Text("导出 Benchmark JSON")}}
             }}

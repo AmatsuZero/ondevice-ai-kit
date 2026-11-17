@@ -7,5 +7,6 @@
    <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/video_output_paths"/>
   </provider>
   <activity android:name=".MainActivity" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
+  <activity android:name=".VoiceEffectsActivity" android:exported="false"/>
  </application>
 </manifest>

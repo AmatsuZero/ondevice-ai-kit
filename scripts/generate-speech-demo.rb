@@ -45,6 +45,11 @@ sources = %w[OnDeviceAIDemoApp DemoController IOSFaceBridge CameraSource CameraL
              SpeechHost SpeechFilePicker SpeechInputStore SpeechAudioSession].map { |name| "demo/iosApp/#{name}.swift" }
 sources += ['kmp-binding/apple/IOSSpeechBridge.swift', 'kmp-binding/apple/IOSSpeechAudioInput.swift']
 video_demo = ENV['ODAI_VIDEO_DEMO'] == '1'
+voice_effects_demo = ENV['ODAI_VOICE_EFFECTS_DEMO'] == '1'
+if voice_effects_demo
+  sources += ['demo/iosApp/VoiceEffectsHost.swift', 'demo/iosApp/VoiceEffectsInputStore.swift',
+              'demo/iosApp/VoiceEffectsWave.swift', 'kmp-binding/apple/IOSVoiceEffectsBridge.swift']
+end
 multimodal_demo = ENV['ODAI_MULTIMODAL_DEMO'] == '1'
 mlx_demo = ENV['ODAI_MULTIMODAL_MLX_DEMO'] == '1'
 identity_demo = ENV['ODAI_OPENCV_IDENTITY_DEMO'] == '1'
@@ -79,6 +84,7 @@ inputs = sources.map { |path| File.join(root, path) } + frameworks +
   [File.join(root, 'apple'), File.join(root, 'demo/iosApp/Info.plist'),
    File.join(root, 'demo/iosApp/UITests/SpeechDemoUITests.swift')]
 inputs += [File.join(root, 'apple-mlx'), File.join(root, 'apple-mlx/Package.resolved')] if mlx_demo
+inputs += [File.join(root, 'demo/iosApp/UITests/VoiceEffectsDemoUITests.swift')] if voice_effects_demo
 inputs += [File.join(root, 'apple-opencv/Package.swift'), File.join(root, 'apple-opencv/Vendor/opencv2.xcframework')] if identity_demo
 inputs.each { |path| abort("Missing input: #{path}") unless File.exist?(path) }
 identity_notices = {}
@@ -102,6 +108,7 @@ package.relative_path = File.join(root, 'apple')
 project.root_object.package_references << package
 products = %w[ODAIKitCore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech]
 products += %w[ODAIKitVideo ODAIKitAppleVideo] if video_demo
+products += %w[ODAIKitVoiceEffects ODAIKitAppleVoiceEffects] if voice_effects_demo
 products += ['ODAIKitMultimodal'] if multimodal_demo
 mlx_package = nil
 if mlx_demo
@@ -159,7 +166,7 @@ target.build_configurations.each do |config|
     'INFOPLIST_KEY_UILaunchScreen_Generation' => 'YES', 'INFOPLIST_KEY_UIApplicationSceneManifest_Generation' => 'YES',
     'INFOPLIST_KEY_NSCameraUsageDescription' => '在设备本地检测人脸，不上传图像。',
     'INFOPLIST_KEY_NSSpeechRecognitionUsageDescription' => '在设备本地识别选择的音频文件或主动开始的麦克风语音，不上传音频。',
-    'INFOPLIST_KEY_NSMicrophoneUsageDescription' => '仅在你主动开始语音识别时采集声音，在本机处理，不保存录音。',
+    'INFOPLIST_KEY_NSMicrophoneUsageDescription' => voice_effects_demo ? '仅在你点击录音或语音识别时采集声音，在设备本地处理；变声录音可由你导出。' : '仅在你主动开始语音识别时采集声音，在本机处理，不保存录音。',
     'TARGETED_DEVICE_FAMILY' => '1,2', 'CODE_SIGN_STYLE' => 'Automatic', 'ARCHS' => 'arm64',
     'ODAI_KONAN_TARGET[sdk=iphonesimulator*]' => 'iosSimulatorArm64',
     'ODAI_KONAN_TARGET[sdk=iphoneos*]' => 'iosArm64',
@@ -167,6 +174,7 @@ target.build_configurations.each do |config|
     'OTHER_LDFLAGS' => ['$(inherited)', '-ObjC', '-lsqlite3'],
     'ODAI_SDK_COMMIT' => 'working-tree'
   })
+  config.build_settings['SWIFT_ACTIVE_COMPILATION_CONDITIONS'] += ' ODAI_VOICE_EFFECTS_DEMO' if voice_effects_demo
   # The existing OpenCV binary has no arm64 simulator slice.
   config.build_settings['SUPPORTED_PLATFORMS'] = 'iphoneos' if identity_demo
   team = ENV['ODAI_DEVELOPMENT_TEAM']
@@ -175,6 +183,7 @@ end
 ui = project.new_target(:ui_test_bundle, 'SpeechDemoUITests', :ios, '17.0')
 ui.add_dependency(target)
 ui.source_build_phase.add_file_reference(project.main_group.new_file(File.join(root, 'demo/iosApp/UITests/SpeechDemoUITests.swift')))
+ui.source_build_phase.add_file_reference(project.main_group.new_file(File.join(root, 'demo/iosApp/UITests/VoiceEffectsDemoUITests.swift'))) if voice_effects_demo
 ui.build_configurations.each do |config|
   config.build_settings.merge!({
     'PRODUCT_BUNDLE_IDENTIFIER' => 'io.ondeviceai.ondeviceaidemo.uitests',

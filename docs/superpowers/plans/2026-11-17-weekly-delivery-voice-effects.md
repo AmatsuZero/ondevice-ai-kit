@@ -1,6 +1,7 @@
 # 本周阶段交付与 W9 变声 Implementation Plan
 
-当前增量：A/B候选已集成，真实Apple完整包509测试、Android28测试/lint/Release AAR及iOS15目标构建通过，见[集成结果](../../validation/w9-ab-integration-20261117.md)。C使用[完整Prompt](../../agent-tasks/weekly-20261117/C-kmp-demo-start.md)，基线46c7e4a，等待用户启动。历史条目中的“尚未派发”按当前状态表覆盖；独立审核/真机/消费者/听感/资源仍未接受，不把候选实现过程补称观察到RED。
+当前增量：A/B/C 已集成本地验证，见 [C报告](../../validation/w9-c-integration-20261117.md) 与 [A/B报告](../../validation/w9-ab-integration-20261117.md)。用户要求主代理直接执行 C，覆盖本任务旧外部实现分工；没有新 helper/额度重试。Android67测试/lint/双APK、shared JVM113、Swift WAV3、iOS真实桥接4/UI1与unsigned App通过；独立审核/真机/听感/资源/完整组成和消费仍未接受。C Prompt仅保留作合同参考，不再等启动；下方最初派工条目按本段和状态表覆盖。
+
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development or superpowers:executing-plans within the repository's existing allocation. External helpers supply implementation candidates; the primary integrates and validates; at most one native child reviews code and acceptance evidence read-only. The user's explicit parallel method is already selected; no new execution-method confirmation is required.
 
@@ -91,16 +92,17 @@
 - [ ] 主代理接线后执行 `rtk proxy ./gradlew :android:voice-effects:testDebugUnitTest :android:voice-effects:lintDebug :android:voice-effects:assembleRelease`。
 - [ ] 真实设备音频转换/播放/导出验证另列，JVM 通过不写为设备通过。
 
-## Task W9-C：KMP、录音与 Demo（外部 Agent C）
+## Task W9-C：KMP、录音与 Demo（用户改为主代理直接执行）
 
 **Owned candidate files:** `kmp-binding/src/commonMain/kotlin/io/ondeviceai/binding/VoiceEffectsBridge.kt`、`kmp-binding/src/commonTest/kotlin/io/ondeviceai/binding/VoiceEffectsBridgeContractTest.kt`、`kmp-binding/src/androidMain/kotlin/io/ondeviceai/binding/AndroidVoiceEffectsBridge.kt`、`kmp-binding/apple/IOSVoiceEffectsBridge.swift`、`demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/VoiceEffects*.kt`、`demo/shared/src/commonTest/kotlin/io/ondeviceai/demo/VoiceEffects*.kt`、`demo/iosApp/VoiceEffects*.swift`、`demo/androidApp/src/main/kotlin/io/ondeviceai/demo/VoiceEffects*.kt`。
 
 **Consumes:** 同一合同；初期使用后端 fake 只验状态，最终必须接实际 A/B 产物。**Produces:** 原生适配器、录音/导入/试听/导出动作、共享状态与页面；公共桥接只传稳定 reference。
 
 - [ ] 测试先覆盖拒权、重选/取消保留、处理时离页、迟到回调与导出失败（Review Focus 2/3/4）。
-- [ ] 录音开始需明确 UI 动作；录完走同一文件转换入口，不做实时监听。
-- [ ] 主代理统一修改现有 Host、路由、factory、Gradle/SwiftPM 与 `scripts/generate-speech-demo.rb`；其他 Agent 不直接覆盖这些共享文件。
-- [ ] 主代理执行现有 shared/binding 定向任务及双端组合构建；真实录音需后续用户在场动作，合成夹具不替代录音体验。
+- [x] 录音开始需明确 UI 动作；录完走同一文件转换入口，不做实时监听。源码及UI未开麦烟测已验，实际录音体验待真机。
+- [x] 主代理统一接线 Host、路由、factory、Gradle与生成器；保留普通PBX及生成器原有Release修正。
+- [x] 主代理完成 shared/binding 定向验证、Android和iOS opt-in组合构建；真实录音需后续用户在场动作，合成夹具不替代录音体验。
+- [x] shared状态覆盖同步/迟到回调、取消重试、导入取消/失败保留、close与输出读引用；双端真实桥接验证三预设、活动取消/drain与输出所有权。拒权/录音/导出失败等硬件和系统交互仍待设备证据，不勾选首项完整覆盖。
 
 ## Task R：候选交付与限制材料（外部 Agent R，可先独立进行）
 

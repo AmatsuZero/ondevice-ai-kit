@@ -30,6 +30,9 @@ struct SharedControls: UIViewControllerRepresentable {
 }
 @main struct OnDeviceAIDemoApp: App {
     @StateObject private var controller = DemoController()
+    #if ODAI_VOICE_EFFECTS_DEMO
+    @State private var showingVoiceEffects = false
+    #endif
     var body: some Scene {
         WindowGroup {
             VStack(spacing: 0) {
@@ -67,6 +70,9 @@ struct SharedControls: UIViewControllerRepresentable {
                 #else
                 SharedControls(controller: controller).id(ObjectIdentifier(controller.identityModel)).frame(height: 380)
                 #endif
+                #if ODAI_VOICE_EFFECTS_DEMO
+                Button("离线变声") { showingVoiceEffects = true }.accessibilityIdentifier("voice-open")
+                #endif
                 if let message = controller.message { Text(message).font(.caption) }
                 if controller.cameraPermissionDenied {
                     Button("打开设置") { controller.openCameraSettings() }
@@ -84,7 +90,13 @@ struct SharedControls: UIViewControllerRepresentable {
                     Text(String(controller.cameraFrameCount)).accessibilityIdentifier("camera-frame-count")
                 }
                 #endif
-            }.onDisappear { controller.stopCamera() }
+            }
+            #if ODAI_VOICE_EFFECTS_DEMO
+            .fullScreenCover(isPresented: $showingVoiceEffects) {
+                VoiceEffectsDemoSheet(controller: controller, dismiss: { showingVoiceEffects = false })
+            }
+            #endif
+            .onDisappear { controller.stopCamera() }
             .onAppear {
                 #if ODAI_OPENCV_IDENTITY_VALIDATION
                 IdentityDemoChecks.start(controller: controller)

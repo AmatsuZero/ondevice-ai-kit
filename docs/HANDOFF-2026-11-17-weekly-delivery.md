@@ -1,8 +1,10 @@
 # 本周阶段交付交接（2026-11-17）
 
-## 最新接续：A/B 已集成，C 待启动
+## 最新接续：A/B/C 已集成，本地验证通过，下一步设备验收与 R
 
-用户已授权集成A/B。当前foundation分支 `feat/w9-ab-integration-20261117`：`1d99dfb` Apple、`8f0834c` Android、`46c7e4a` Package/settings接线，源码保持候选原字节。完整Apple509测试/Android28测试、lint、Release AAR、iOS15目标构建通过；见[集成报告](validation/w9-ab-integration-20261117.md)。[C完整Prompt](agent-tasks/weekly-20261117/C-kmp-demo-start.md)已准备，等用户在独立worktree启动，不能写成running。独立复核429、真机/听感/资源/消费者与Demo缺口保持。下文“未派发/未集成”是早前快照。
+用户已明确要求直接执行 C。当前 foundation 分支 `feat/w9-ab-integration-20261117` 在 A/B 基线 `a017cb7` 上完成 KMP bridge、共享 Demo 和双端录音/导入/试听/导出 Host。C 由主代理直接实现；这是本轮用户对旧候选分工的覆盖，没有新 helper 调用或额度重试。见 [C 集成报告](validation/w9-c-integration-20261117.md)。Android 67 测试、lint 与 Debug/Release APK；共享层 JVM 113 测试；iOS 真实桥接 4 测试、WAV 3 测试、页面 UI 冒烟和 unsigned iPhoneOS App 构建通过。A/B 原 [集成报告](validation/w9-ab-integration-20261117.md) 保留。
+
+**当前 engineering-local-validated / release not-ready。** 下一步只推进同一候选的真机核心流程/人声听感/资源测量，以及 R 的实际交付清单、通知差异、独立消费者和最终复审。未录音、未安装物理设备、未签名/上传/发布，不将模拟器或 JVM 验证写成设备接受。旧 C Prompt 仅作任务合同参考，不再派发同一实现。
 
 当前主线：**暂停 W3/W6 后续研发，新增 W9 离线效果变声，11/20 候选、11/22 本周范围验收目标。** 这是用户本轮明确调整，不按旧“先 W3→W6→W8→W7、单包串行”继续。
 
@@ -23,10 +25,10 @@
 
 ## 下一可领取任务
 
-W9-A/B/C：双端SDK及KMP/Demo候选，ready / 尚未派发。W9-0已完成原型，macOS/JVM/Android ART模拟器/iOS模拟器各74项文件检查通过；[合同](voice-effects/contract-v1.md)已冻结，[结果](validation/w9-minimal-chain-20261117.md)保留全部边界。原型不含SDK生命周期/录音/UI，真机、消费者和听感未验。新依赖仍未授权。最终独立复核429无结论，不自动重试。
-
-并行 R：本周候选清单、已知限制与通知差异候选；禁止回到 W3/W6 研究。具体所有权和可复制任务提示见[Agent 提示入口](agent-tasks/weekly-20261117/README.md)。
+- DEVICE：同一候选先在 iOS/Android 目标机验文件导入→三预设转换→原声/结果试听→导出回读，再由用户明确点击测试录音/拒权/30秒停止、取消/离页/前后台与音频恢复。使用新的合成或授权音频，不重放 W3/W6 实验。
+- R：候选能力清单、已知限制、实际组成与通知差异、双端独立消费者验证。可与设备验收分工并行，所有权沿用 [Agent 任务入口](agent-tasks/weekly-20261117/README.md)。提示准备不等于已启动；不自动调用已停用供应商。
+- Q：独立代码/证据复核仍缺；原 429 保留并停线，无本轮 APPROVE。
 
 ## 本轮完成边界
 
-最初规划交付后，已补W9-0原型与四环境文件验收；后续A/B/C仍未启动，本周交付not-ready。没有生产SDK/Demo集成或真机验收。历史 P11 JSON 与 benchmark manifest 保持，不清理缓存、不提交/推送/上传/打 tag。文档检查与审查结果记录在[状态表](validation/weekly-delivery-status-20261117.md)。
+W9-0 与 A/B/C 工程实现及有界本地验证完成；物理设备、人声听感、同候选预算、完整组成/通知/消费者和独立最终接受尚缺，本周范围交付仍 not-ready。11/20 候选与 11/22 验收是目标，不是保证。旧 P11 JSON、benchmark manifest、普通 App/模型及所有无关 dirty/untracked 保留。只精确本地提交 C 与本轮文档，不 push、上传或打 tag。

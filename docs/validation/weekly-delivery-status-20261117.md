@@ -1,6 +1,6 @@
 # 本周阶段交付状态（2026-11-17）
 
-范围来源：[用户调整后的设计](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)。目标：11/20 候选，11/22 完成本周范围验收（Asia/Shanghai）。当前 **A/B SDK 已本地集成验证、C Prompt ready / release not-ready**。最新证据：[A/B集成结果](w9-ab-integration-20261117.md)；以下历史原型信息保留，不再据其“未派发”描述回退当前状态。
+范围来源：[用户调整后的设计](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)。目标：11/20 候选，11/22 完成本周范围验收（Asia/Shanghai）。当前 **A/B/C 已实现并本地验证 / release not-ready**。最新证据：[C集成结果](w9-c-integration-20261117.md)与[A/B集成结果](w9-ab-integration-20261117.md)；以下历史原型信息保留，不再据其“未派发”描述回退当前状态。
 
 ## 实际任务状态
 
@@ -10,10 +10,10 @@
 | W9-0 | 本地Ollama候选＋主代理验收 | prototype accepted / 合同冻结 | 四环境各74文件检查；SDK生命周期/听感未验，最终独立复核429 |
 | W9-A | 外部 Agent A | delivered / integrated-local-validated | 原提交b12cd53→集成1d99dfb；完整Apple509测试含变声25、iOS15 Release目标构建通过；真机/独立复核待验 |
 | W9-B | 外部 Agent B | delivered / integrated-local-validated | 原提交9629e5c→集成8f0834c；真实Gradle28测试/lint/Release AAR通过；App/OEM待验 |
-| W9-C | 外部 Agent C | prompt-ready / 等用户启动 | [完整Prompt](../agent-tasks/weekly-20261117/C-kmp-demo-start.md)；代码基线46c7e4a，真实A/B已可用；未写为running |
+| W9-C | 主代理（用户要求直接执行） | implemented / integrated-local-validated | 实际A/B绑定；Android67、shared JVM113、Swift WAV3、iOS桥接4、UI1及双端App构建；见C报告，真机与听感待验 |
 | R | 外部 Agent R | ready / 未派发 | 候选能力清单、已知限制和通知差异；实际制品未形成 |
 | Q | 唯一 native reviewer | 规划文档ACCEPT；原型/合同最终复核blocked429 | 最终本轮无结论，已停线；不自动重试 |
-| INT/DEVICE | 主代理 | A/B已集成、定向及Apple完整包验证通过；Demo待C | 分支feat/w9-ab-integration-20261117；共享配置46c7e4a；消费者/组合App/物理设备仍待验，不自动开麦 |
+| INT/DEVICE | 主代理 | A/B/C已集成，本地Demo构建与模拟器验证通过；物理设备pending | 分支feat/w9-ab-integration-20261117；iOS为voice opt-in Speech组合App，非所有MLX/OpenCV组合；消费者/完整交付包/设备仍待验，不自动开麦 |
 
 ## 暂停/延期与保持
 
@@ -24,11 +24,11 @@
 | W6 | paused/deferred | 视频理解仍未通过，不重开模型实验 |
 | W7 production/PAD | deferred-from-weekly-scope | 数据/协议/校准/PAD仍未通过，已有功能不宣传生产身份/活体 |
 | W8 / 本周实际候选 | active-planned | 必要资源、预算/缺测裁定、通知与最终复审待完成 |
-| W9 | active / W9-0已验 | 仅原型：四环境296文件检查；生产SDK/Demo/真机/听感与最终复核未通过 |
+| W9 | active / SDK与Demo本地已验 | W9-0/A/B/C工程证据齐；物理设备、听感/资源、独立消费者与最终复核未通过 |
 
 ## W9-0实施增量
 
-[验收报告](w9-minimal-chain-20261117.md)与[冻结合同](../voice-effects/contract-v1.md)记录macOS/JVM/Android ART模拟器/iOS模拟器各74/74、Android27组频率检查、18个人声输出结构与4个首尾控制。候选源自已授权本地qwen3-coder:30b，无新依赖；初稿失败与精确订正均保留。Apple输出重导入需归一化、D8 metadata警告、SDK生命周期/听感/真机及最终复核缺口均不改绿。A/B/C ready而未派发；本地GPU一次一个推理，不能按三条外部线容量直接并发本地模型。
+[验收报告](w9-minimal-chain-20261117.md)与[冻结合同](../voice-effects/contract-v1.md)记录macOS/JVM/Android ART模拟器/iOS模拟器各74/74、Android27组频率检查、18个人声输出结构与4个首尾控制。候选源自已授权本地qwen3-coder:30b，无新依赖；初稿失败与精确订正均保留。Apple输出重导入需归一化、D8 metadata警告、SDK生命周期/听感/真机及最终复核缺口均不改绿。此段为原型阶段历史快照；当前 A/B/C 已完成本地工程实现，按上表为准。本地GPU一次一个推理，不能按三条外部线容量直接并发本地模型。
 
 ## 规划阶段验证与保持的限制
 

@@ -47,6 +47,7 @@ dependencies {
  if (enableOpenCvIdentity) implementation(project(":android:backend-opencv-identity"))
  if (enableOpenCvIdentity) androidTestImplementation("org.opencv:opencv:4.12.0")
  implementation(project(":android:video"))
+ implementation(project(":android:voice-effects"))
  if (enableLiteRtSr) implementation(project(":android:backend-litert-sr"))
  if (enableLiteRtLm) {
   implementation(project(":android:backend-litertlm"))
