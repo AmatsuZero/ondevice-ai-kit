@@ -1,6 +1,6 @@
 # 本周阶段交付状态（2026-11-17）
 
-范围来源：[用户调整后的设计](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)。目标：11/20 候选，11/22 完成本周范围验收（Asia/Shanghai）。当前 **W9-0原型已验、工程合同已冻结 / release not-ready**。
+范围来源：[用户调整后的设计](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)。目标：11/20 候选，11/22 完成本周范围验收（Asia/Shanghai）。当前 **A/B SDK 已本地集成验证、C Prompt ready / release not-ready**。最新证据：[A/B集成结果](w9-ab-integration-20261117.md)；以下历史原型信息保留，不再据其“未派发”描述回退当前状态。
 
 ## 实际任务状态
 
@@ -8,12 +8,12 @@
 | --- | --- | --- | --- |
 | DOC | 主代理 | 文档与计划已完成；本地检查 passed、独立范围复核 ACCEPT | 规划阶段已完成；下述W9-0有新证据，仍不代表完整W9或发布通过 |
 | W9-0 | 本地Ollama候选＋主代理验收 | prototype accepted / 合同冻结 | 四环境各74文件检查；SDK生命周期/听感未验，最终独立复核429 |
-| W9-A | 外部 Agent A | ready / 未派发 | W9-0；Apple SDK 与测试候选 |
-| W9-B | 外部 Agent B | ready / 未派发 | W9-0；Android SDK 与测试候选 |
-| W9-C | 外部 Agent C | ready / 未派发 | W9-0 可先状态/UI fake，A/B 后接实际后端；SDK/Demo录音/播放/导出仍须实现 |
+| W9-A | 外部 Agent A | delivered / integrated-local-validated | 原提交b12cd53→集成1d99dfb；完整Apple509测试含变声25、iOS15 Release目标构建通过；真机/独立复核待验 |
+| W9-B | 外部 Agent B | delivered / integrated-local-validated | 原提交9629e5c→集成8f0834c；真实Gradle28测试/lint/Release AAR通过；App/OEM待验 |
+| W9-C | 外部 Agent C | prompt-ready / 等用户启动 | [完整Prompt](../agent-tasks/weekly-20261117/C-kmp-demo-start.md)；代码基线46c7e4a，真实A/B已可用；未写为running |
 | R | 外部 Agent R | ready / 未派发 | 候选能力清单、已知限制和通知差异；实际制品未形成 |
 | Q | 唯一 native reviewer | 规划文档ACCEPT；原型/合同最终复核blocked429 | 最终本轮无结论，已停线；不自动重试 |
-| INT/DEVICE | 主代理 | 原型已集成/四环境已验；生产集成未开始 | SDK/Demo组合构建/消费者/物理设备仍待验，不自动开麦 |
+| INT/DEVICE | 主代理 | A/B已集成、定向及Apple完整包验证通过；Demo待C | 分支feat/w9-ab-integration-20261117；共享配置46c7e4a；消费者/组合App/物理设备仍待验，不自动开麦 |
 
 ## 暂停/延期与保持
 

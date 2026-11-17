@@ -1,5 +1,7 @@
 # 本周并行 Agent 派工入口
 
+最新：A/B已交付并本地集成验证，主代理分支 `feat/w9-ab-integration-20261117`；C从 `46c7e4a` 启动，使用[本次完整C Prompt](C-kmp-demo-start.md)。这是准备好的派工文本，用户启动后才能登记running。旧ABC模板保留为历史模板，不重复派A/B；[集成证据](../../validation/w9-ab-integration-20261117.md)。
+
 先读[总计划](../../superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md)和[实际状态](../../validation/weekly-delivery-status-20261117.md)。本文是可复制任务模板，**不表示已经启动助手**。
 
 调度：W9-0 原型经主代理接受、合同已冻结（最终独立复核429无结论）；其后 A/B/C 并行，R 可独立先行；Q 是唯一 native 只读代码/验收证据 reviewer。最多三条外部候选线并行，shared Host/配置/设备与集成验证由主代理独占。

@@ -1,5 +1,7 @@
 # 本周阶段交付与 W9 变声 Implementation Plan
 
+当前增量：A/B候选已集成，真实Apple完整包509测试、Android28测试/lint/Release AAR及iOS15目标构建通过，见[集成结果](../../validation/w9-ab-integration-20261117.md)。C使用[完整Prompt](../../agent-tasks/weekly-20261117/C-kmp-demo-start.md)，基线46c7e4a，等待用户启动。历史条目中的“尚未派发”按当前状态表覆盖；独立审核/真机/消费者/听感/资源仍未接受，不把候选实现过程补称观察到RED。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development or superpowers:executing-plans within the repository's existing allocation. External helpers supply implementation candidates; the primary integrates and validates; at most one native child reviews code and acceptance evidence read-only. The user's explicit parallel method is already selected; no new execution-method confirmation is required.
 
 **Goal:** 暂停 W3/W6 后续研发，新增双端离线效果变声，争取 2026-11-20 候选、2026-11-22 完成本周范围验收。

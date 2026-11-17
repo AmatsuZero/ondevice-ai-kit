@@ -1,5 +1,9 @@
 # 本周阶段交付交接（2026-11-17）
 
+## 最新接续：A/B 已集成，C 待启动
+
+用户已授权集成A/B。当前foundation分支 `feat/w9-ab-integration-20261117`：`1d99dfb` Apple、`8f0834c` Android、`46c7e4a` Package/settings接线，源码保持候选原字节。完整Apple509测试/Android28测试、lint、Release AAR、iOS15目标构建通过；见[集成报告](validation/w9-ab-integration-20261117.md)。[C完整Prompt](agent-tasks/weekly-20261117/C-kmp-demo-start.md)已准备，等用户在独立worktree启动，不能写成running。独立复核429、真机/听感/资源/消费者与Demo缺口保持。下文“未派发/未集成”是早前快照。
+
 当前主线：**暂停 W3/W6 后续研发，新增 W9 离线效果变声，11/20 候选、11/22 本周范围验收目标。** 这是用户本轮明确调整，不按旧“先 W3→W6→W8→W7、单包串行”继续。
 
 ## 接手顺序
