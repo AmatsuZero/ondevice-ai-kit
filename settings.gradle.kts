@@ -26,6 +26,7 @@ rootProject.name = "ondevice-ai-kit"
 include(":kmp-binding")
 include(":android:sdk-core", ":android:identity")
 include(":android:video", ":android:multimodal")
+include(":android:voice-effects")
 include(":android:model-store", ":android:face", ":android:backend-mlkit", ":android:speech", ":android:backend-system-tts", ":android:backend-system-asr")
 include(":android:backend-litertlm")
 include(":demo:shared", ":demo:androidApp")
