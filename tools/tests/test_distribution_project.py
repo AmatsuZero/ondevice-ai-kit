@@ -44,7 +44,7 @@ puts JSON.generate(project.targets.to_h { |target|
 """, str(self.project)], capture_output=True, text=True, check=True,
         )
         targets = json.loads(inspected.stdout)
-        self.assertEqual(len(targets), 10)
+        self.assertEqual(len(targets), 12)
         for name, target in targets.items():
             expected = 1 if name == "ODAIKitAppleSpeech" else 0
             self.assertEqual(target["sources"].count(ASR_SOURCE), expected, name)
@@ -135,6 +135,52 @@ puts JSON.generate({
         self.assertTrue(expected)
         self.assertEqual(sorted(target["sources"]), expected)
         self.assertEqual(sorted(target["dependencies"]), ["ODAIKitCore", "ODAIKitVideo"])
+
+
+    def testNewVoiceTargets(self):
+        generated = self.generate()
+        self.assertEqual(generated.returncode, 0, generated.stderr)
+        inspected = subprocess.run([
+            self.ruby, "-rxcodeproj", "-rjson", "-e", """
+project = Xcodeproj::Project.open(ARGV.fetch(0))
+targets = project.targets.to_h { |target|
+  [target.name, {
+    sources: target.source_build_phase.files.map { |file| file.file_ref.path },
+    dependencies: target.dependencies.map { |dependency| dependency.target.name },
+    frameworks: target.frameworks_build_phase.files.map { |file| File.basename(file.file_ref.path) }
+  }]
+}
+puts JSON.generate(targets)
+""", str(self.project)], capture_output=True, text=True, check=True,
+        )
+        targets = json.loads(inspected.stdout)
+        self.assertEqual(len(targets), 12)
+
+        # Check ODAIKitVoiceEffects has correct sources and no dependencies
+        voice_effects = targets['ODAIKitVoiceEffects']
+        self.assertEqual(sorted(voice_effects['sources']), sorted(str(path.relative_to(self.root / 'apple')) for path in (self.root / 'apple/Sources/ODAIKitVoiceEffects').glob('*.swift')))
+        self.assertEqual(voice_effects['dependencies'], [])
+
+        # Check ODAIKitAppleVoiceEffects has correct sources, exactly one dependency on VoiceEffects,
+        # and exactly one AVFoundation.framework link
+        apple_voice_effects = targets['ODAIKitAppleVoiceEffects']
+        self.assertEqual(sorted(apple_voice_effects['sources']), sorted(str(path.relative_to(self.root / 'apple')) for path in (self.root / 'apple/Sources/ODAIKitAppleVoiceEffects').glob('*.swift')))
+        self.assertEqual(apple_voice_effects['dependencies'], ['ODAIKitVoiceEffects'])
+        avfoundation_count = apple_voice_effects['frameworks'].count('AVFoundation.framework')
+        self.assertEqual(avfoundation_count, 1)
+
+        # Ensure core targets don't have AVFoundation
+        core_target = targets['ODAIKitCore']
+        self.assertEqual(core_target['frameworks'].count('AVFoundation.framework'), 0)
+
+        # Verify SDKDistribution scheme includes both new targets
+        import xml.etree.ElementTree as ET
+        scheme_file = self.project / 'xcshareddata/xcschemes/SDKDistribution.xcscheme'
+        root = ET.parse(scheme_file).getroot()
+        buildables = root.findall('.//BuildableReference')
+        buildable_names = [b.attrib['BlueprintName'] for b in buildables]
+        self.assertIn('ODAIKitAppleVoiceEffects', buildable_names)
+        self.assertIn('ODAIKitVoiceEffects', buildable_names)
 
 
 if __name__ == "__main__":

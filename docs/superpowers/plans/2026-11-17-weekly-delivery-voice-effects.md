@@ -104,16 +104,16 @@
 - [x] 主代理完成 shared/binding 定向验证、Android和iOS opt-in组合构建；真实录音需后续用户在场动作，合成夹具不替代录音体验。
 - [x] shared状态覆盖同步/迟到回调、取消重试、导入取消/失败保留、close与输出读引用；双端真实桥接验证三预设、活动取消/drain与输出所有权。拒权/录音/导出失败等硬件和系统交互仍待设备证据，不勾选首项完整覆盖。
 
-## Task R：候选交付与限制材料（外部 Agent R，可先独立进行）
+## Task R：候选交付与限制材料（主代理验收，本地Ollama限域包装候选）
 
 **Owned candidate files:** `docs/release/2026-11-weekly-candidate-checklist.md`、`docs/release/2026-11-weekly-known-limitations.md`、`examples/voice-effects-consumer/*`（后者等合同后）。
 
 **Consumes:** 已有分发/通知/消费者证据、当前暂停范围；**Produces:** 实际仍交付组件的通知/来源差异表、消费者检查候选、能力限制清单。禁止重复做 W3 native 归因、W6 模型评估或已通过的 Nexus 上传消费。
 
-- [ ] 先从本周真实候选要保留的能力列清单；W9 尚未接线的部分写 pending，不捏造制品/指标。
-- [ ] 标注 Android Whisper/系统 ASR、iOS ASR、W6 暂停、Identity 未校准/PAD 延期和最低系统设备缺口。
-- [ ] 明确最终候选若仍携带 Sherpa/MLX 等，须核适用通知与消费链；暂停功能不等于包内依赖消失。
-- [ ] 主代理验证双端独立 SDK 消费和打包后通知；不自动发布、上传、打 tag。
+- [x] 已按本周真实候选列清单、限制与设备步骤；W9源码、二进制与物理运行分开，见[R报告](../../validation/w9-r-delivery-20261117.md)。
+- [x] 已标注Android Whisper/系统ASR、iOS ASR、W6暂停、Identity未校准/PAD延期和最低系统设备缺口。
+- [x] 已记录当前C包成员/通知差异及最终组合适用性待验；不将零notice命中作为无需通知。
+- [ ] 双端有界独立消费和Apple分发归档已通过；最终组合的完整通知与消费者接受仍待验，不自动发布、上传、打tag。
 
 ## Task Q：独立代码/验收证据审查（唯一 native reviewer）
 

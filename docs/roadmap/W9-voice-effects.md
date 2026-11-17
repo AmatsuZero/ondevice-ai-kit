@@ -10,6 +10,8 @@
 
 最新[C集成结果](../validation/w9-c-integration-20261117.md)：KMP真实桥接、共享页面、双端原生录音/导入/试听/导出已接线，Android67/shared JVM113/Swift WAV3/iOS桥接4/UI1及双端构建通过。无真机录音/听感或同候选资源预算接受；无独立最终复审，不据此关闭W9。
 
+R新增：Apple分发补W9、12个XCFramework真实归档，W9双切片独立编译/链接通过；Android隔离Maven→APK/AAR-JVM与AppleSwiftPM实际三预设消费通过。见[R报告](../validation/w9-r-delivery-20261117.md)，物理设备/最终组合通知/预算与复审仍open。
+
 ## 可复用与必须新增
 
 | 范围 | 处理 |

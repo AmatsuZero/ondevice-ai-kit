@@ -9,8 +9,8 @@
 | 任务 | 提示 | 放行条件 |
 | --- | --- | --- |
 | W9-0 合同/可行性 | [W9-0](W9-0-contract-feasibility.md) | 主代理已接受原型，见验收报告；不重复派发 |
-| A/B/C 实现候选 | [平台与Demo任务模板](W9-ABC-implementation.md) | ready / 未派发；使用下述固定合同及SHA |
-| R 交付材料 | [R](R-release-materials.md) | 可先行，只生成候选材料，不上传/发布 |
+| A/B/C 实现候选 | [平台与Demo任务模板](W9-ABC-implementation.md) | 已实现并本地集成验证；不重派同一实现，按当前交接继续设备/交付接受 |
+| R 交付材料 | [R](R-release-materials.md) | 本地清单/限制、消费和Apple分发增量已验；最终实包通知/设备/复审待补，不上传/发布 |
 
 每次派发复制为独立不可变 prompt，注入必需源码/合同摘要和适用 pitfalls 原文；工具可读时要求亲读。输出落隔离目录，记录 prompt/raw/终态/实际文件SHA、工具失败、未测项；实际写沙盒没有证明时使用无工具小候选，不能把 cwd/提示当权限边界。
 

@@ -47,6 +47,8 @@ open artifacts/SpeechDemo-new/SpeechDemo.xcodeproj
 
 ## 本地分发
 
+W9 变声的当前本地验证、交付清单和设备缺口见 [R 报告](docs/validation/w9-r-delivery-20261117.md)。Apple 分发工程需先用 `ruby scripts/generate-distribution-project.rb` 重新生成，再执行打包；生成器会更新 SDK 的 `apple/OnDeviceAIKit.xcodeproj`，有未提交内容时应在新的完整源码副本中执行。W9 已有双切片 XCFramework 与独立链接证据，仍未完成真机和最终发布接受。iOS Demo 使用 `ODAI_VOICE_EFFECTS_DEMO=1` 生成到新目录；Android Demo 已有独立变声入口。
+
 ```sh
 ./gradlew :android:sdk-core:publishToMavenLocal :android:model-store:publishToMavenLocal :android:face:publishToMavenLocal :android:backend-mlkit:publishToMavenLocal
 ./gradlew :examples:android-native:assembleDebug -PusePublishedSdk=true

@@ -1,3 +1,7 @@
+## W9分发验收：同秒pyc与外层xcrun SDK — 2026-11-17
+
+现象：新源断言12却报12!=10；已核timestamp型pyc的mtime整数秒/size与改后源相同，缓存LOAD_SMALL_INT=10而新源为12。有效恢复为本轮独立PYTHONPYCACHEPREFIX，26生成器回归通过；保留首错，不删除未知缓存或修改全局设置。另一首次iOS二进制消费显式swiftc -sdk为iPhoneOS但外层xcrun未指定sdk，clang报macOS sysroot；外层改为xcrun --sdk iphoneos swiftc后无该警告，otool核platform2/minOS15及两个实际framework加载项。模拟器对应iphonesimulator。边界：exit0/arm64不足以证明目标平台，独立编译链接仍非真机运行；两消费示例候选因WAV/async/路径/清理缺陷拒收，没有进入SDK。证据`.omx/artifacts/w9-r-delivery-20261117T121322Z/{python-cache-diagnosis.json,packaging-green-r2.log,apple-binary-consumer-r2-result.json,apple-binary-load-commands.txt}`及[报告](validation/w9-r-delivery-20261117.md)。
+
 ## W9原型：订正、WAV封装与工具链边界 — 2026-11-17
 
 症状：本地候选首稿负窗口索引崩溃，整文件订正又改变API/数值类型或仅给占位片段；Apple首稿有API/RIFF长度问题。已核恢复：保留首稿与错误，逐个审查精确小替换，编译并运行实际文件检查后才集成，不能复制模型自报通过。Apple有效输出有附加RIFF chunks，canonical-only入口拒绝再次导入；宿主归一化是后续实现义务，不能改称任意WAV支持。系统Java shim无runtime时使用既有OpenJDK17；D8产DEX/ART通过并不消除Kotlin metadata2.4解析警告或证明release兼容。四环境各74检查只证明原型文件可行性，不证明人声听感/SDK生命周期/App/OEM；最终native复核429无结论且停线。证据`.omx/artifacts/w9-minimal-20261117T071421Z/`与[报告](validation/w9-minimal-chain-20261117.md)。
