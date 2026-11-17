@@ -1,3 +1,7 @@
+## W9 Android：JVM通过不证明App可建硬链接 — 2026-11-17
+
+现象：真实Demo导入成功但三预设均PLATFORM；App PID日志显示untrusted_app_34对app_data_file的{ link } SELinux拒绝，同UID普通读/写/同步通过而Files.createLink为AccessDeniedException。有效恢复：原子createDirectory独占预留共享输出名，再在SDK独占目录内将关闭的临时文件ATOMIC_MOVE为audio.wav；预留碰撞保留竞争者，无放宽策略/非原子回退。释放文件后删所属预留目录，失败保留所有权供重试；清理子路径优先。新增2项回归原版RED→修复GREEN，SDK30＋Demo67、lint/双APK、新AAR独立消费及实际Android模拟器三预设/系统保存回读通过。边界：外部不得写SDK-owned目录；不是OEM/最低系统/人声听感/录音接受，活动取消UI未触发，旧R AAR身份不能覆盖修复。iOS早期XCTest未离页结束留4个合成文件，不能宣称全tmp为空。证据`.omx/artifacts/w9-simulator-20261117T125412Z/`及[报告](validation/w9-simulator-acceptance-20261117.md)。
+
 ## W9分发验收：同秒pyc与外层xcrun SDK — 2026-11-17
 
 现象：新源断言12却报12!=10；已核timestamp型pyc的mtime整数秒/size与改后源相同，缓存LOAD_SMALL_INT=10而新源为12。有效恢复为本轮独立PYTHONPYCACHEPREFIX，26生成器回归通过；保留首错，不删除未知缓存或修改全局设置。另一首次iOS二进制消费显式swiftc -sdk为iPhoneOS但外层xcrun未指定sdk，clang报macOS sysroot；外层改为xcrun --sdk iphoneos swiftc后无该警告，otool核platform2/minOS15及两个实际framework加载项。模拟器对应iphonesimulator。边界：exit0/arm64不足以证明目标平台，独立编译链接仍非真机运行；两消费示例候选因WAV/async/路径/清理缺陷拒收，没有进入SDK。证据`.omx/artifacts/w9-r-delivery-20261117T121322Z/{python-cache-diagnosis.json,packaging-green-r2.log,apple-binary-consumer-r2-result.json,apple-binary-load-commands.txt}`及[报告](validation/w9-r-delivery-20261117.md)。

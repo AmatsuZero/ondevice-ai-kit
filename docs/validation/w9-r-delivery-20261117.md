@@ -1,5 +1,7 @@
 # W9-R：交付材料、独立消费与Apple二进制接线（2026-11-17）
 
+后续增量：旧R的Android Maven/AAR为修复前快照，不能作为当前安装候选。模拟器发现硬链接发布被App策略拒绝后已修复，并在新的隔离目录重新暂存AAR（SHA-256 `75b8f2829de7ef448ad8189280326c710ea66f458a5c4b11cd95a7c17e0f8138`），独立APK构建及AAR/JVM三预设消费通过。详见[模拟器验收](w9-simulator-acceptance-20261117.md)与其本地 `android-final-artifact-*-result.json`；本页旧工件不覆盖，Apple R证据保持。最终组合/通知、真机/资源/听感与独立复审仍open。
+
 当前 **R材料与有界本地消费已完成 / release not-ready**。本轮从已提交 C 的 `abc67bb1df88baf88090ee140325e6585f8b59ce` 继续，未重复提交C。原 [C报告](w9-c-integration-20261117.md) 的设备/资源/独立复审缺口保持。新增 [候选清单](../release/2026-11-weekly-candidate-checklist.md)、[已知限制](../release/2026-11-weekly-known-limitations.md)、[设备验收步骤](../release/2026-11-w9-device-acceptance.md)。
 
 ## 本轮变更

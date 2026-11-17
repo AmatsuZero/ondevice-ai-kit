@@ -9,12 +9,18 @@ import java.nio.channels.Channels
 import java.nio.channels.FileChannel
 import java.nio.file.Files
 import java.nio.file.LinkOption
+import java.nio.file.StandardCopyOption
 import java.nio.file.StandardOpenOption
 import java.util.UUID
 
 /** Internal fault seams keep lifecycle tests independent of timing/filesystem permissions. */
 internal open class VoiceEffectsFiles {
     open fun nextId(): String = UUID.randomUUID().toString()
+
+    open fun reserveDestination(directory: File, id: String): File {
+        Files.createDirectories(directory.toPath())
+        return Files.createDirectory(File(directory, "$id.wav").toPath()).toFile()
+    }
 
     fun read(input: File, checkCancelled: () -> Unit): WaveData {
         val path = input.toPath()
@@ -53,10 +59,11 @@ internal open class VoiceEffectsFiles {
     }
 
     open fun publish(temporary: File, destination: File) {
-        // Same directory/filesystem. A hard link exposes the already closed bytes
-        // atomically and fails if destination exists (including a symlink).
-        // Unsupported/denied hard links fail closed: never fall back to renameTo.
-        Files.createLink(destination.toPath(), temporary.toPath())
+        // Both paths are inside the SAME exclusively reserved SDK-owned directory;
+        // no other writer may mutate that directory. Final file is named audio.wav,
+        // closed before move; atomically reserved parent prevents competitors
+        // overwriting outputs. No hard link, no shared-namespace check/rename, no fallback.
+        Files.move(temporary.toPath(), destination.toPath(), StandardCopyOption.ATOMIC_MOVE)
     }
 
     open fun delete(file: File) { Files.deleteIfExists(file.toPath()) }

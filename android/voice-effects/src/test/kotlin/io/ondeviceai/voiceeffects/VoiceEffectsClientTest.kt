@@ -108,15 +108,12 @@ class VoiceEffectsClientTest {
         assertFailsWith<VoiceEffectsError.Closed> { client.process(VoiceEffectsRequest(root.inputWave(), VoiceEffectsPreset.HIGH)) }
     }
 
-    @Test fun targetCreatedAtPublicationIsKeptAndNeverDeletedByFailureCleanup(): Unit = runBlocking {
+    @Test fun targetCreatedAtReservationIsKeptAndNeverDeletedByFailureCleanup(): Unit = runBlocking {
         val root = temporary.newFolder()
         val out = File(root, "out")
         val files = object : VoiceEffectsFiles() {
             override fun nextId() = "collision"
-            override fun publish(temporary: File, destination: File) {
-                destination.writeText("competitor")
-                super.publish(temporary, destination)
-            }
+            override fun reserveDestination(directory: File, id: String): File { directory.mkdirs(); File(directory, "$id.wav").writeText("competitor"); return super.reserveDestination(directory, id) }
         }
         val client = VoiceEffectsClient(ControlledBackend(), out, files)
         assertFailsWith<VoiceEffectsError.Platform> {
@@ -171,7 +168,7 @@ class VoiceEffectsClientTest {
         val deletions = AtomicInteger()
         val files = object : VoiceEffectsFiles() {
             override fun delete(file: File) {
-                if (file.extension == "wav") deletions.incrementAndGet()
+                if (file.name == "audio.wav") deletions.incrementAndGet()
                 super.delete(file)
             }
         }

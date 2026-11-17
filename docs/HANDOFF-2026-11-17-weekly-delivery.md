@@ -1,5 +1,11 @@
 # 本周阶段交付交接（2026-11-17）
 
+## 最新接续：双端模拟器核心链路通过
+
+用户离机期间已执行真实系统文件导入→三预设转换→播放控制→系统保存→导出回读；无麦克风采集。Android 实际 App 的硬链接发布被 SELinux 拒绝，已改为独占目录预留＋目录内原子移动，新增回归 RED→GREEN；SDK30＋Demo67共97测试、lint（0错误/9既有警告）、双APK构建通过。修复后重新隔离暂存 AAR，独立APK构建及AAR/JVM三预设消费通过，旧R工件保持。见[模拟器验收](validation/w9-simulator-acceptance-20261117.md)。
+
+当前 **simulator-core-validated / release not-ready**。双端坏/超限输入、picker取消与离页恢复有证据；活动处理取消未成功触发，iOS先前测试进程结束留下的合成文件不冒称已清空。下一步是真机录音/拒权/30秒停止、听感、活动取消/系统音频中断与同候选资源，以及最终组合通知和独立复审。下方C/R段为历史阶段快照，不据旧“ADB为空/未安装”回退本轮模拟器增量。
+
 ## 最新接续：A/B/C 已集成，本地验证通过，下一步设备验收与 R
 
 用户已明确要求直接执行 C。当前 foundation 分支 `feat/w9-ab-integration-20261117` 在 A/B 基线 `a017cb7` 上完成 KMP bridge、共享 Demo 和双端录音/导入/试听/导出 Host。C 由主代理直接实现；这是本轮用户对旧候选分工的覆盖，没有新 helper 调用或额度重试。见 [C 集成报告](validation/w9-c-integration-20261117.md)。Android 67 测试、lint 与 Debug/Release APK；共享层 JVM 113 测试；iOS 真实桥接 4 测试、WAV 3 测试、页面 UI 冒烟和 unsigned iPhoneOS App 构建通过。A/B 原 [集成报告](validation/w9-ab-integration-20261117.md) 保留。

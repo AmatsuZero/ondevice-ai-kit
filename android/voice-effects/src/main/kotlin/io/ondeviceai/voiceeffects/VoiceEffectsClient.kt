@@ -28,6 +28,7 @@ class VoiceEffectsClient internal constructor(
         var cancelled = false // accessed under lock
         var temporary: File? = null // worker writes; coordinator reads only after join
         var published: File? = null
+        var directory: File? = null
     }
 
     private val lock = Any()
@@ -143,13 +144,15 @@ class VoiceEffectsClient internal constructor(
         val wave = checkNotNull(data)
         val id = files.nextId()
         // IDs come only from the SDK; no public input is used as a path component.
-        val destination = File(outputDirectory, "$id.wav")
-        val temporary = files.createTemporary(outputDirectory)
+        val reserve = files.reserveDestination(outputDirectory, id)
+        operation.directory = reserve
+        val destination = File(reserve, "audio.wav")
+        val temporary = files.createTemporary(reserve)
         operation.temporary = temporary
         files.writeClosed(temporary, checkNotNull(bytes), checkCancelled)
         checkCancelled()
-        // createLink is one no-replace directory operation on a CLOSED file.
-        // No rename/check-then-rename fallback is permitted.
+        // Atomic move of closed file into reserved private directory.
+        // No shared name race possible after reservation.
         files.publish(temporary, destination)
         operation.published = destination
         files.delete(temporary)
@@ -205,7 +208,7 @@ class VoiceEffectsClient internal constructor(
             withContext(Dispatchers.IO) {
                 releases.withLock {
                     val file = synchronized(lock) { outputs[id] } ?: return@withLock
-                    try { files.delete(file) } catch (error: Throwable) { throw safeFailure(error) }
+                    try { files.delete(file); files.delete(checkNotNull(file.parentFile)) } catch (error: Throwable) { throw safeFailure(error) }
                     synchronized(lock) { outputs.remove(id) }
                 }
             }
@@ -214,7 +217,7 @@ class VoiceEffectsClient internal constructor(
 
     private fun cleanup(operation: Operation): Throwable? {
         var failure: Throwable? = null
-        for (file in listOfNotNull(operation.temporary, operation.published)) {
+        for (file in listOfNotNull(operation.temporary, operation.published, operation.directory)) {
             try { files.delete(file) } catch (_: Throwable) {
                 synchronized(lock) { pendingCleanup.add(file) }
                 failure = VoiceEffectsError.Platform()
@@ -229,7 +232,7 @@ class VoiceEffectsClient internal constructor(
         synchronized(cleanupLock) {
             val paths = synchronized(lock) { pendingCleanup.toList() }
             var failed = false
-            for (file in paths) {
+            for (file in paths.sortedByDescending { it.toPath().nameCount }) {
                 try {
                     files.delete(file)
                     synchronized(lock) { pendingCleanup.remove(file) }

@@ -1,5 +1,7 @@
 # W9-C：KMP bridge 与双端 Demo 集成（2026-11-17）
 
+后续增量：[双端模拟器验收](w9-simulator-acceptance-20261117.md)已实际完成文件导入/三预设/播放控制/系统保存回读及部分失败恢复；Android App 发布硬链接失败已修复，97个SDK/Demo测试及修复后独立AAR消费通过。本页保留C阶段原快照；后续模拟器证据仍不等于真机录音、听感/资源或最终发布接受。
+
 结论：**implemented / integrated-local-validated；release not-ready**。用户要求在已集成 A/B 上直接执行 C，本轮由主代理实现、接线、验证，没有新 helper 调用、付费请求或已停用额度重试。分支 `feat/w9-ab-integration-20261117`，C 前基线 `a017cb7c4ebd4c9d8453bb73c30731e83ad16ddf`。A/B 源码不改，原验收见 [A/B 报告](w9-ab-integration-20261117.md)。
 
 ## 实现与边界

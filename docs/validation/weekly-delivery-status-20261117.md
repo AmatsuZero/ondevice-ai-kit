@@ -1,5 +1,7 @@
 # 本周阶段交付状态（2026-11-17）
 
+最新增量：**simulator-core-validated / release not-ready**，详见[双端模拟器验收](w9-simulator-acceptance-20261117.md)。真实文件导入/三预设/播放控制/系统导出回读通过；Android App 硬链接发布故障修复，SDK30＋Demo67共97测试、lint与双APK通过，修复后新隔离AAR独立消费通过。未开麦/人工听验/安装真机。活动取消UI、录音拒权/自动停止、系统音频中断、OEM/最低系统、资源/最终通知/复审仍open；下方历史验证计数不含本增量。
+
 范围来源：[用户调整后的设计](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)。目标：11/20 候选，11/22 完成本周范围验收（Asia/Shanghai）。当前 **A/B/C 已实现并本地验证 / release not-ready**。最新证据：[R增量](w9-r-delivery-20261117.md)、[C集成结果](w9-c-integration-20261117.md)与[A/B集成结果](w9-ab-integration-20261117.md)；以下历史原型信息保留，不再据其“未派发”描述回退当前状态。
 
 ## 实际任务状态
@@ -9,11 +11,11 @@
 | DOC | 主代理 | 文档与计划已完成；本地检查 passed、独立范围复核 ACCEPT | 规划阶段已完成；下述W9-0有新证据，仍不代表完整W9或发布通过 |
 | W9-0 | 本地Ollama候选＋主代理验收 | prototype accepted / 合同冻结 | 四环境各74文件检查；SDK生命周期/听感未验，最终独立复核429 |
 | W9-A | 外部 Agent A | delivered / integrated-local-validated | 原提交b12cd53→集成1d99dfb；完整Apple509测试含变声25、iOS15 Release目标构建通过；真机/独立复核待验 |
-| W9-B | 外部 Agent B | delivered / integrated-local-validated | 原提交9629e5c→集成8f0834c；真实Gradle28测试/lint/Release AAR通过；App/OEM待验 |
+| W9-B | 外部 Agent B＋本地候选修复 | integrated / simulator-core-validated | 原提交9629e5c→8f0834c；本轮修复App沙箱发布，SDK30测试＋真实三预设/导出通过；OEM仍待验 |
 | W9-C | 主代理（用户要求直接执行） | implemented / integrated-local-validated | 实际A/B绑定；Android67、shared JVM113、Swift WAV3、iOS桥接4、UI1及双端App构建；见C报告，真机与听感待验 |
 | R | 主代理验收＋本地Ollama包装候选 | local-increment-validated / 最终接受open | 清单/限制/设备步骤；隔离Maven→APK、AAR/JVM、AppleSwiftPM运行、12XCFramework及W9双切片独立链接通过；实包完整通知/组合/复审未通过，见R报告 |
 | Q | 唯一 native reviewer | 规划文档ACCEPT；原型/合同最终复核blocked429 | 最终本轮无结论，已停线；不自动重试 |
-| INT/DEVICE | 主代理 | A/B/C已集成，本地Demo构建与模拟器验证通过；物理设备pending | 分支feat/w9-ab-integration-20261117；iOS为voice opt-in Speech组合App，非所有MLX/OpenCV组合；消费者/完整交付包/设备仍待验，不自动开麦 |
+| INT/DEVICE | 主代理 | 双端模拟器核心链路通过；物理设备pending | 分支feat/w9-ab-integration-20261117；新AAR独立消费已重验；最终组合/通知/真机/听感/资源/复审待验，不自动开麦 |
 
 ## 暂停/延期与保持
 
