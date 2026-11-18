@@ -1,6 +1,6 @@
 # 本周候选交付清单（2026-11-17）
 
-2026-11-18 验收增量：用户双端听感与录音停止/转换/重录通过；[同候选 iOS 已通过活动取消及重试，已取得最大输入资源观测](../validation/w9-engineering-acceptance-20261118.md)。W9 SDK 本地评审 ZIP 已查验；不含 Demo App，通知盘点未闭合正式交付门。Android 取消/资源、双端拒权/中断、预算裁定、最终组合及独立复审仍开放。**release not-ready**。
+2026-11-18 验收增量：用户双端听感与录音停止/转换/重录通过；[同候选 iOS 已通过活动取消及重试，已取得最大输入资源观测](../validation/w9-engineering-acceptance-20261118.md)。W9 SDK 本地评审 ZIP 已查验；不含 Demo App，通知盘点未闭合正式交付门。Android 同候选最大输入资源观测及活动取消、直接重试已通过验证。双端拒权/中断、预算裁定、最终组合及独立复审仍开放。**release not-ready**。
 
 2026-11-18最新：**physical-file-core-validated / release not-ready**。[真机报告](../validation/w9-physical-acceptance-20261118.md)固定源码9219cfe与双端隔离安装配置/摘要；Android15与iOS27.2.1文件导入、三预设、播放控制、导出回读及失败/离页路径通过。未开麦/听验；完整设备门、资源、最低系统与最终组合/通知/复审不勾选。下方旧包hash及“未安装”是历史阶段，不代替本次隔离包或最终发行包。
 
