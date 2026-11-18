@@ -1,5 +1,7 @@
 # W9：离线录音与文件效果变声
 
+2026-11-18用户试用：明确反馈 **“效果 ok”**，主观试用效果接受已记录在[真机报告](../validation/w9-physical-acceptance-20261118.md)。平台/输入方式/预设覆盖未细分，不外推双端完整录音/权限/上限或听验矩阵通过。下一步聚焦剩余设备行为、同候选资源预算与最终交付复审；W9及release尚未完整关闭。以下“未人声听验”描述的是此前自动化阶段。
+
 2026-11-18最新：**双端 physical-file-core-validated / release not-ready**。[真机验收](../validation/w9-physical-acceptance-20261118.md)记录TECNO Android15与iPhone16ProMax/iOS27.2.1的真实系统导入、三预设、播放控制、导出回读、坏/超限拒绝、picker取消与离页清理。Android播放中后台恢复通过；iOS只验后台返回可用。未开麦/人声听验，录音权限/上限停止、活动取消/系统音频中断、资源预算、最低系统/最终通知与复审仍open。以下模拟器与工程阶段说明按历史快照保留，不据其旧“真机待验”回退本增量。
 
 最新：**双端 simulator-core-validated / release not-ready**。[模拟器验收](../validation/w9-simulator-acceptance-20261117.md)记录真实系统导入、三预设、播放控制、系统保存回读、坏/超限拒绝与离页恢复。Android硬链接发布被系统策略拒绝的问题已修复；97个SDK/Demo测试、lint/双APK、新隔离AAR独立消费通过。没有录音或听验；活动取消UI、真机/OEM/资源/通知与复审保持待验，以下组合完成标准不因局部通过全部勾选。
