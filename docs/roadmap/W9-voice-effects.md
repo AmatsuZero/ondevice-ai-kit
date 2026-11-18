@@ -1,5 +1,7 @@
 # W9：离线录音与文件效果变声
 
+2026-11-18 工程验收：[iOS 真机活动取消与重新转换通过](../validation/w9-engineering-acceptance-20261118.md)，同候选 48 kHz / 30 秒资源观测已记录，预算未批准。Android 对应取消和资源、双端拒权/音频中断、最终组合通知及独立复审仍待完成；release not-ready。
+
 2026-11-18用户手动验收：**Android/iOS两台试用效果OK，录音约30秒自动停止、停止后转换、再次录音均正常**，已记录在[真机报告](../validation/w9-physical-acceptance-20261118.md)，不再重复要求这些检查。拒权/活动转换取消/系统音频中断、精确时长帧数、完整听验矩阵、同候选资源预算与最终交付复审仍待完成；W9及release尚未完整关闭。以下“未人声听验/录音上限待验”等描述此前自动化阶段，由本次手动确认补充。
 
 2026-11-18最新：**双端 physical-file-core-validated / release not-ready**。[真机验收](../validation/w9-physical-acceptance-20261118.md)记录TECNO Android15与iPhone16ProMax/iOS27.2.1的真实系统导入、三预设、播放控制、导出回读、坏/超限拒绝、picker取消与离页清理。Android播放中后台恢复通过；iOS只验后台返回可用。未开麦/人声听验，录音权限/上限停止、活动取消/系统音频中断、资源预算、最低系统/最终通知与复审仍open。以下模拟器与工程阶段说明按历史快照保留，不据其旧“真机待验”回退本增量。

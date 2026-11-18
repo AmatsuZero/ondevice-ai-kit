@@ -1,5 +1,7 @@
 # 本周候选交付清单（2026-11-17）
 
+2026-11-18 验收增量：用户双端听感与录音停止/转换/重录通过；[同候选 iOS 已通过活动取消及重试，已取得最大输入资源观测](../validation/w9-engineering-acceptance-20261118.md)。W9 SDK 本地评审 ZIP 已查验；不含 Demo App，通知盘点未闭合正式交付门。Android 取消/资源、双端拒权/中断、预算裁定、最终组合及独立复审仍开放。**release not-ready**。
+
 2026-11-18最新：**physical-file-core-validated / release not-ready**。[真机报告](../validation/w9-physical-acceptance-20261118.md)固定源码9219cfe与双端隔离安装配置/摘要；Android15与iOS27.2.1文件导入、三预设、播放控制、导出回读及失败/离页路径通过。未开麦/听验；完整设备门、资源、最低系统与最终组合/通知/复审不勾选。下方旧包hash及“未安装”是历史阶段，不代替本次隔离包或最终发行包。
 
 最新候选增量：[双端模拟器验收](../validation/w9-simulator-acceptance-20261117.md)已通过真实系统导入/三预设/播放控制/系统保存回读。Android硬链接发布修复后97测试、lint（0错误/9既有警告）、双APK、新隔离AAR与独立消费通过；Debug APK SHA-256 `5b32fee21b23cd2c9d88db700cdff49061df069e7068bc8e3988cc393bfdffa8`，Release unsigned APK `12173c0fe9fc039cf0a23e45155b649174057736014dbc9867b5a3452723e82c`，Release AAR `75b8f2829de7ef448ad8189280326c710ea66f458a5c4b11cd95a7c17e0f8138`。旧R的Android产物为历史快照。当前 **simulator-core-validated / release not-ready**；下面真机/听感/资源/通知/复审门仍待验。
