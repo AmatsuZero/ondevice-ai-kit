@@ -23,7 +23,7 @@
 | W9-C | 主代理（用户要求直接执行） | implemented / integrated-local-validated | 实际A/B绑定；Android67、shared JVM113、Swift WAV3、iOS桥接4、UI1及双端App构建；见C报告，真机与听感待验 |
 | R | 主代理验收＋本地Ollama包装候选 | local-increment-validated / 最终接受open | 清单/限制/设备步骤；隔离Maven→APK、AAR/JVM、AppleSwiftPM运行、12XCFramework及W9双切片独立链接通过；实包完整通知/组合/复审未通过，见R报告 |
 | Q | 唯一 native reviewer | 规划文档ACCEPT；原型/合同最终复核blocked429 | 最终本轮无结论，已停线；不自动重试 |
-| INT/DEVICE | 主代理 | 双端真机文件链路、手动录音试用、活动取消及直接重试通过 | 基线 `9219cfe`；双端 48 kHz / 30 秒资源观测已记录。双端拒权与系统音频中断、预算裁定、最终组合通知及复审仍待完成 |
+| INT/DEVICE | 主代理 | 双端真机文件链路、手动录音试用、活动取消及直接重试通过；Android TECNO 独立包拒权后转换和真实播放焦点抢占通过 | 基线 `9219cfe`；双端 48 kHz / 30 秒资源观测已记录。iOS 真机拒权/真实系统中断、预算裁定、最终组合通知及复审仍待完成 |
 
 ## 暂停/延期与保持
 
