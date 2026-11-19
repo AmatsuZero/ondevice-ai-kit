@@ -1,6 +1,24 @@
 # 本周阶段交付交接（2026-11-17）
 
+2026-11-19 功能收尾：**W9 本周核心功能已验收，可内部演示和交接。** [W9 roadmap](roadmap/W9-voice-effects.md)与[双端真机记录](validation/w9-physical-acceptance-20261118.md)保留范围与证据。已验项目不再重复跑；下方音频中断、通知、预算及同一最终包复审属于[正式发布待办](release/2026-11-weekly-candidate-checklist.md)。停止对未冻结的临时包逐轮复审，待最终候选冻结后统一复审。W3/W6 继续暂停。
+
 [当前接续：拒权、音频中断与打包复审](validation/w9-permission-audio-release-audit-20261118.md)。双端模拟器拒权后仍可转换；Android TECNO 真机已通过隔离包拒权、拒权后转换及真实播放焦点抢占，iOS 真机隔离包系统弹窗拒权已通过，真实系统中断待验。CBC `hy4flash` 审计已完成，独立预审 NO-GO；接下来补 iOS 真实系统中断证据与冻结最终组合、实包通知，最后按候选摘要复审。W3/W6 保持暂停。
+
+2026-11-19 发布补项：[Android 第二份通知增量](validation/w9-android-notice-delta-20261119.md#第二份隔离-release-apk五个发布版本的来源关联)已构建为隔离 unsigned Release APK `0ec07f47…`。前包 `765148e0…` 的 734 个成员字节不变，仅新增 5 份根许可、2 份归属文件和 1 份索引。前序待核 41 项发布材料均已取得，新增 5 个选定版本的入包关联，累计 13/49；剩 36 项（32 个 AndroidX、2 个 Firebase、`listenablefuture`、`javax.inject`）。第一份增量的 Kotlin Reflect 正式版来源已复核关闭；第二份增量的独立复审返回 429，仍开放。iOS 组合未变，实际版本字段仍缺。原设备记录按原摘要保留，最终发布仍 **NO-GO**。
+
+## 双端组合包接续（2026-11-18 至 2026-11-19）
+
+用户指定的一位原生助手已交付 iOS 单图补丁，主代理隔离构建和核验后已集成到 foundation。初始和准备完成后的 Host 都关闭 W6 视频输入；单图 MLX、独立视频超分、Speech、OpenCV 和 W9 保留。生成候选要求有效通知输入。21 项生成器回归通过，完整 unsigned Release App 清单 SHA-256 `c263a82418116e8342529de40ca9325a539937ac9831f8d1eecdc21afa750fab`，Release KMP 1,091 对象、12 项 SwiftPM pin、184 份通知字节均已复核。普通工程未改。详见[组合实包核验](validation/w9-combined-packages-20261118.md)；下节带 W6 入口的旧 iOS 包是历史基线。
+
+当前组合的摘要及验收证据已写入 `candidate-pair-acceptance/paired-candidate-index.json`（路径见组合实包报告）。当前 iOS 单图组合的隔离开发签名副本已在 iPhone 16 Pro Max 真机安装并启动，6 秒后进程仍在，原组合 App 保留；未做本组合的功能流或真实音频中断。Android ADB 在 2026-11-18 曾无设备；2026-11-19 TECNO 重连后，[隔离组合副本](validation/w9-android-combined-smoke-20261119.md)通过启动、导入合成 WAV 与一次升调，普通 Demo 及上轮验收包均保留。APK 71 项既有通知与冻结源码一致，其中 63 项能复核索引原件。54 条未匹配解析记录对应 51 个产物，49 个有 DEX 类证据，4 个已关联选定版本的包内通知；通知适用性仍开放。原生独立复审 429，无意见。
+
+下一步按第二份 APK 的 `review-input.json` 补齐 AndroidX 历史来源和模块例外及另外 4 个依赖的关联，继续核对嵌套通知。双端已通过的变声功能无需重复验收；设备补项限于最终签名组合的冒烟、iOS 真实系统播放中断及尚未覆盖的双端录音中断/Speech/TTS 争用。资源预算仍为 `DRAFT/NOT APPROVED`，最低系统缺测、通知适用性、版本/渠道/签名与独立复审未闭合。发布仍 **NO-GO**，W3/W6 保持暂停。
+
+## 历史组合包基线（2026-11-18）
+
+[双端实包核验](validation/w9-combined-packages-20261118.md)已补：Android 四个可选后端已启用，W6 入口按 LiteRT LM 单图配置关闭，独立视频超分保留；80 份通知和索引已入包，原有 644 个成员内容不变。iOS 第二份 App 确认实际链接 Release KMP（1,091 个对象）、12 项 SwiftPM pin 一致，184 个通知相关文件与原件一致；仍暴露 W6 入口，只作打包基线。两个 SHA-256 及依赖、版本、资源和通知缺项见上述报告。**未冻结最终双端候选，发布仍 NO-GO。**
+
+下一步先补 iOS 单图 Host 与必填通知输入，两项本地合同回归已真实失败。已准备 `cbc-ios-image-only/prompt.txt`；CBC `hy3` 返回 429、无补丁，服务端提示 2026-11-19 14:03:12（UTC+8）重置，补丁路线等待用户指定可用实现 Agent。最终通知适用性、真实系统中断/音频争用、预算/最低系统、签名/渠道和同摘要独立复审仍开放。用户已确认的两台听感、自动停止、停录后转换和重新录音均继续有效。
 
 ## 工程验收接续（2026-11-18）
 

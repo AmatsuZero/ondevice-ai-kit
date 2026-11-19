@@ -1,5 +1,7 @@
 ## W9 当前增量（2026-11-17）
 
+2026-11-19 功能收尾：**W9 本周核心功能已验收，可内部演示和交接。** 证据见[W9 状态](roadmap/W9-voice-effects.md)，[正式发布](release/2026-11-weekly-candidate-checklist.md)仍 NO-GO，W3/W6 保持暂停。
+
 A/B/C 已集成并本地验证，当前 release not-ready；下一步为真机/听感/资源与 R 交付材料及独立复审。见 [C 集成报告](validation/w9-c-integration-20261117.md)。W3/W6 继续暂停。
 
 ## 当前执行基线：2026-11-17 本周交付重排（用户已调整方向）
@@ -13,7 +15,7 @@ A/B/C 已集成并本地验证，当前 release not-ready；下一步为真机/�
 | W6 视频理解 | paused/deferred；本周不承诺通用视频理解 | 停新模型/训练/parity/验证集与手机实验，保留旧模型/证据 |
 | W7 生产校准/PAD | 阶段外延期，已有功能和未校准拒绝保留 | 原数据/协议/质量门未通过，不宣传生产身份/活体 |
 | W8 / 本周交付 | active-planned | 本次实际候选必要资源、预算/缺测裁定、通知、消费与复审继续，不自动豁免 |
-| W9 变声 | W9-0原型已验 / SDK与Demo待实现 | 录音/文件效果变声、SDK + KMP Demo、试听/导出；非实时/非AI克隆 |
+| W9 变声 | 本周核心功能已验收；正式发布待完成 | 双端离线录音/文件变声、试听/导出，可内部演示与交接 |
 
 执行入口：[新交接](HANDOFF-2026-11-17-weekly-delivery.md) · [范围设计](superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md) · [并行计划](superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md) · [W9合同](roadmap/W9-voice-effects.md) · [真实状态](validation/weekly-delivery-status-20261117.md) · [Agent任务提示](agent-tasks/weekly-20261117/README.md)。
 

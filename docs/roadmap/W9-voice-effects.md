@@ -1,5 +1,7 @@
 # W9：离线录音与文件效果变声
 
+2026-11-19 功能收尾：**本周 W9 核心功能已验收，可内部演示和交接。** Android/iOS 的文件导入、三预设、试听及导出回读有[真机证据](../validation/w9-physical-acceptance-20261118.md)；用户确认双端听感、约 30 秒自动停录、停录后转换及再次录音。双端拒权和活动取消已有独立记录。下方较早条目保留各候选的历史状态。正式发布仍未通过，剩余事项统一跟踪于[发布清单](../release/2026-11-weekly-candidate-checklist.md)。W3/W6 继续暂停。
+
 2026-11-18 [拒权、中断与发布复审增量](../validation/w9-permission-audio-release-audit-20261118.md)：双端模拟器拒权后可转换；Android 模拟器实际系统抢占、iOS 注入中断回调分别通过。CBC `hy4flash` 审计和独立预审完成，结果 NO-GO；真机对应门、冻结组合、实包通知与独立最终复审仍开放。
 
 2026-11-18 工程验收：[双端真机活动取消与重新转换通过](../validation/w9-engineering-acceptance-20261118.md)，双端同候选 48 kHz / 30 秒资源观测已记录，预算未批准。双端拒权/音频中断、最终组合通知及独立复审仍待完成；release not-ready。
