@@ -1,17 +1,35 @@
 # Android 播放时超分：覆盖与验证记录
 
-更新至 2026-11-21。独立播放器用与 iOS 相同的 CuNNy 1×8 BOX 做 2× 亮度增强。首台 Android 真机 TECNO KM9 的像素结果通过，但 1080p/30 播放时两场强制增强均没有增强帧确认上屏；自动回退使播放时长接近片长。以下分别列出真机、模拟器和离线导出的证据。
+更新至 2026-11-21。独立播放器用与 iOS 相同的 CuNNy 1×8 BOX 做 2× 亮度增强。首台 Android 真机 TECNO KM9 的 1080p/30 强制增强未确认增强帧上屏；新增的 540p/30 实播也未通过增强门槛，自动模式会回退原画。本页分别列出真机、模拟器和离线导出的证据。
 
 | 环境或方案 | 已验证 | 尚无证据 |
 |---|---|---|
 | API 36，Android Emulator / ANGLE SwiftShader，GLES 3.1 | 有声 30 秒片 A/B/B/A 四场完整解码；原画和 CuNNy 均有 EGL 提交。离屏整帧和四个时刻的有参考重建 | 手机 GPU 性能、真实显示面上的颜色、逐帧上屏及长期表现 |
 | API 37，Android 17 / Google Play 16 KB 系统映像，SwiftShader GLES 3.1 | 同一个普通 APK 的自动模式解码 900 帧，900 次原画提交，首末帧间隔 30.28 s；Google 验证包探测不支持 | 手机 GPU 性能及显示延迟；不能把软件模拟器结果推广到 Android 17 手机 |
-| API 35，TECNO KM9 / MT6835 / Mali-G57 MC2 | GLES 3.2 真机五场播放、逐帧上屏时间、暂停同帧、整帧 CPU 对照；1080p 实时增强未达标。Google SDK 返回 UNSUPPORTED | 30 分钟、运动盲评、其他机型或驱动 |
+| API 35，TECNO KM9 / MT6835 / Mali-G57 MC2 | GLES 3.2 真机两种分辨率各五场播放、逐帧上屏时间、暂停同帧、整帧 CPU 对照；1080p 与 540p 实时增强均未达标。Google SDK 返回 UNSUPPORTED | 30 分钟、运动盲评、其他机型或驱动；Google 540p 未测试 |
 | API 26/27、其他 Adreno/Mali 手机 | API 26 是实验模块的 minSdk | 真机兼容性、GLES 3.1 能力、增强可用率与观感 |
 | LiteRT 1.4.2 / ESRGAN 4× | [既有 Android 文件导出](android-video-sr-demo.md)；实机同编码条件下，[飞鸟](f11-android-sr-controlled-20261106.md)和[瀑布](f11-android-sr-waterfall-20261106.md)的平均 PSNR/SSIM 均低于双线性 | 不据此推断同场景 CuNNy 2× 或实时播放 |
 | Google Play services Media Enhancement | 单独的 API 30+ 实验包在无 GMS 的 API 36 返回 MISSING_SERVICES；在有 GMS 的 API 37 模拟器和 API 35 TECNO 真机均返回 UNSUPPORTED。默认包不含 Media Enhancement SDK | 是否支持这条片源、模型是否可用、实际倍率与耗时 |
 
-## TECNO KM9 真机：2026-11-21
+## TECNO KM9 真机 540p→1080p：2026-11-21
+
+在同一台手机上，960×540、30 fps 片源放大到 1920×1080（内部亮度尺寸）。540p 文件 SHA-256 为 `e698bee8c98c3158eb5e99e26f1cbe13334b52557720b2129a3e31dd2fa67dcb`。它与 1080p 长测片的 900 个视频帧时间戳逐个相同，AAC 压缩音频逐字节相同。五场均完整解码。表中上屏数只计能配对到实际显示时间的帧，包括迟到显示；缺少确认不等于物理丢帧。
+
+| 模式 | 首末取帧间隔（秒） | 确认上屏原画 / 900 帧 | 确认上屏增强（帧） | 有效 GPU P95（ms） | 取帧至上屏 P95（ms） |
+|---|---:|---:|---:|---:|---:|
+| A1 原画 | 29.861 | 899 | 0 | — | 62.50 |
+| B1 强制 CuNNy | 29.859 | 865 | 0 | 44.24 | 73.82 |
+| B2 强制 CuNNy | 29.865 | 883 | 0 | 44.52 | 79.52 |
+| A2 原画 | 29.872 | 899 | 0 | — | 61.59 |
+| 自动 | 29.853 | 894 | 0 | 46.38 | 61.81 |
+
+强制模式的首末取帧间隔从 1080p 的 55.33–55.56 秒缩至约 29.86 秒，有效 GPU 耗时 P95 从约 127 ms 降至约 44 ms。两场各有 899 次成功提交，全部因 `enhancement_not_ready` 提交同帧原画。按源帧配对，取帧开始到计划选择原画或增强的时刻（目标呈现时间前 2 ms），可用时间中位数分别是 20.22 和 19.86 ms。合计 945 个有效 GPU 样本全部超过各自帧的可用时间。两场各缺一个有效计时（471/472、474/475），全作业 GPU 门槛记为未验证；按时增强率两场均为 **0/900**，明确未通过。原画的显示 P95 也超过 33⅓ ms，不能把所有显示延迟归因于增强。
+
+自动模式提交 899 帧原画，其中 13 帧请求增强后回退、886 帧未请求增强。暂停在源帧 65（PTS 2.167 秒）切换原画→CuNNy→原画，62,624 个 RGB 像素发生变化，切回时全部 RGBA 字节与第一次一致。跳转到 15 秒后可续播；退后台前和恢复时均为 17 秒，随后前进到 19 秒。**此机播放 540p/30 仍建议用原画。** 未启动 30 分钟长测，未复测 540p 的 Google 路线，也未做运动画质盲评。
+
+[五场数据、片源与包哈希](android-realtime-sr-km9-540p-20261121.json) · [可复算的逐帧事件 ZIP](android-realtime-sr-km9-540p-20261121-events.zip)。
+
+## TECNO KM9 真机 1080p→4K：2026-11-21
 
 Android 15 / API 35，MT6835，Mali-G57 MC2，GLES 3.2 r38p1，1080×2400 屏幕。用同一普通 APK 播放同一段 30 秒 H.264/AAC、BT.709 视频，五场均解码 900 帧。4K 指内部 2× 亮度输出尺寸。**建议这台手机播放 1080p/30 时使用原画。**
 
@@ -56,7 +74,7 @@ Google Play services 的 [Media Enhancement 接入文档](https://developer.andr
 
 ## 复跑播放器实验
 
-从 foundation 工作树运行，准备 JDK 17、Android SDK/NDK、`ffprobe`，并把 Android build-tools 的 `aapt` 与 platform-tools 的 `adb` 放入 PATH。`SERIAL` 必须是明确选定的测试设备，`FIXTURE` 是下文 SHA-256 对应的固定视频，`OUT` 是新的验收目录。
+从 foundation 工作树运行，准备 JDK 17、Android SDK/NDK、`ffprobe`，并把 Android build-tools 的 `aapt` 与 platform-tools 的 `adb` 放入 PATH。`SERIAL` 必须是明确选定的测试设备，`FIXTURE` 是上文 540p 或 1080p 的固定长测视频，按所选文件的 SHA-256 校验，`OUT` 是新的验收目录。
 
 ```sh
 rtk proxy ./gradlew -PenableRealtimeSrDemo=true :examples:android-realtime-sr:assembleDebug :examples:android-realtime-sr:assembleDebugAndroidTest :examples:android-realtime-sr:testDebugUnitTest :examples:android-realtime-sr:lintDebug
@@ -89,7 +107,7 @@ rtk proxy python3 -m tools.probes.android_realtime_sr_handset \
 
 入口新增后，22 个主机用例通过；用留存的 API 36 报告复核，四场 A/B/B/A 和一场自动模式均完成解码，但因缺少显示计时，短测仍判为 `unverified`。在主机上用错误包名的真实 APK 测试，两个驱动均在首次 ADB 操作前拒绝。
 
-Android Demo 面向 API 26+，用自写的 GLES 3.1 CuNNy 做 2× 增强，来不及时回退同帧原画；Google 是独立的可选能力探测，Vulkan 尚未实现。KM9 短测已完成，未通过 1080p 实时门槛；30 分钟测试未启动。快速对照可参见 [iOS demo 交接说明](ios-realtime-sr-demo-handoff.md)：iOS Demo 的部署目标为 15.1；支持系统 2× 的设备和片源优先用系统，其余按轻量 Metal → 优化 CuNNy → 原画选择；已在 iPhone 16 Pro Max、iOS 27.2.1 验证。
+Android Demo 面向 API 26+，用自写的 GLES 3.1 CuNNy 做 2× 增强，来不及时回退同帧原画；Google 是独立的可选能力探测，Vulkan 尚未实现。KM9 的 1080p 与 540p 实播短测均未通过实时增强门槛；默认建议此机使用原画，30 分钟测试未启动。快速对照可参见 [iOS demo 交接说明](ios-realtime-sr-demo-handoff.md)：iOS Demo 的部署目标为 15.1；支持系统 2× 的设备和片源优先用系统，其余按轻量 Metal → 优化 CuNNy → 原画选择；已在 iPhone 16 Pro Max、iOS 27.2.1 验证。
 
 ## 像素有没有算对
 
