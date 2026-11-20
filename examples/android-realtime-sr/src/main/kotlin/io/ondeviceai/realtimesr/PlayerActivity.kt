@@ -84,6 +84,8 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
     private var lastAcceptedOrdinal = -1L
     private val frameLock = Any()
     private val rendererLock = Any()
+    private val presentationLock = Any()
+    @Volatile private var activityResumed = false
     private val swapLock = Any()
     private data class Swap(
         val eglFrameId: String,
@@ -209,10 +211,31 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
         if (outputSurface?.isValid == true && sourceUri != null) requestOpen()
     }
 
+    override fun onResume() {
+        super.onResume()
+        synchronized(presentationLock) {
+            activityResumed = true
+            val surface = outputSurface
+            if (surface?.isValid == true) renderer?.enablePresentation(surface)
+        }
+    }
+
+    override fun onPause() {
+        synchronized(presentationLock) {
+            activityResumed = false
+            renderer?.disarmPresentation()
+        }
+        super.onPause()
+    }
+
     override fun onStop() {
         started = false
         wasPlaying = isPlaying
         savedMediaUs = mediaPositionUs
+        synchronized(presentationLock) {
+            activityResumed = false
+            renderer?.disarmPresentation()
+        }
         closeSession()
         super.onStop()
     }
@@ -224,7 +247,7 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
-        outputSurface = holder.surface
+        synchronized(presentationLock) { outputSurface = holder.surface }
         if (started && sourceUri != null) requestOpen()
     }
 
@@ -233,7 +256,11 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {
-        outputSurface = null
+        val current = synchronized(presentationLock) {
+            outputSurface = null
+            renderer?.also { it.disarmPresentation() }
+        }
+        current?.drainPresentation()
         wasPlaying = isPlaying
         savedMediaUs = mediaPositionUs
         closeSession()
@@ -260,8 +287,23 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
                 var target: Surface = surface
                 if (wantsRenderer) {
                     try {
-                        val created = SrRenderer(assets, surface) { id, stage, fields -> rendererEvent(id, stage, fields) }
-                        renderer = created
+                        val initiallyPresentable = synchronized(presentationLock) {
+                            activityResumed && outputSurface === surface && surface.isValid
+                        }
+                        val created = SrRenderer(
+                            assets,
+                            surface,
+                            { id, stage, fields -> rendererEvent(id, stage, fields) },
+                            initiallyPresentable
+                        )
+                        synchronized(rendererLock) { renderer = created }
+                        synchronized(presentationLock) {
+                            if (activityResumed && outputSurface === surface && surface.isValid) {
+                                created.enablePresentation(surface)
+                            } else {
+                                created.disarmPresentation()
+                            }
+                        }
                         configuredWidth = 0
                         configuredHeight = 0
                         created.reset(activeGeneration)

@@ -15,8 +15,9 @@ import java.util.concurrent.atomic.AtomicReference
 
 class SrRenderer(
     assets: AssetManager,
-    window: Surface,
-    private val onEvent: (FrameId, String, Map<String, Any?>) -> Unit
+    private val window: Surface,
+    private val onEvent: (FrameId, String, Map<String, Any?>) -> Unit,
+    initiallyPresentable: Boolean = true
 ) : AutoCloseable {
     private data class Offer(val id: FrameId, val ptsUs: Long, val targetNs: Long, val enhance: Boolean)
 
@@ -57,6 +58,7 @@ class SrRenderer(
     private val workerFailure = AtomicReference<Throwable?>()
 
     @Volatile private var closed = false
+    @Volatile private var presentationEnabled = initiallyPresentable
     private var workerBusy = false
     private var generation = 0L
     private var egl: SrEgl? = null
@@ -131,6 +133,40 @@ class SrRenderer(
             cleanupFailedInitialization()
             throw t
         }
+    }
+
+    fun disarmPresentation() {
+        synchronized(lock) { presentationEnabled = false }
+    }
+
+    fun drainPresentation() {
+        val drained = CountDownLatch(1)
+        if (!renderHandler.post { drained.countDown() }) {
+            check(closed) { "render thread is unavailable" }
+            return
+        }
+        check(drained.await(CLOSE_TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
+            "timed out waiting for presentation to stop"
+        }
+    }
+
+    fun enablePresentation(expectedWindow: Surface) {
+        synchronized(lock) {
+            if (!closed && expectedWindow === window && expectedWindow.isValid) {
+                presentationEnabled = true
+            }
+        }
+    }
+
+    private fun canPresent(): Boolean = !closed && presentationEnabled && window.isValid
+
+    private fun skipPresentation(slot: Slot, offer: Offer, reason: String) {
+        synchronized(lock) {
+            slot.invalidated = true
+            slot.presentationComplete = true
+            decidePresentation(slot, null)
+        }
+        onEvent(offer.id, "capture_skipped", mapOf("reason" to reason))
     }
 
     fun configure(width: Int, height: Int) {
@@ -590,6 +626,14 @@ class SrRenderer(
     }
 
     private fun present(slot: Slot, offer: Offer) {
+        if (!canPresent()) {
+            skipPresentation(
+                slot,
+                offer,
+                if (window.isValid) "presentation_disabled" else "surface_invalid"
+            )
+            return
+        }
         val valid = synchronized(lock) {
             !closed && !slot.invalidated && slot.offer === offer &&
                 offer.id.generation == generation && !slot.presentationComplete
@@ -633,8 +677,17 @@ class SrRenderer(
             else -> "enhancement_not_ready"
         }
 
+        if (!canPresent()) {
+            skipPresentation(
+                slot,
+                offer,
+                if (window.isValid) "presentation_disabled" else "surface_invalid"
+            )
+            return
+        }
         renderer.window(slot.source, enhancedTexture, egl!!.width(), egl!!.height())
-        val swapped = egl!!.swap(offer.targetNs)
+        val attemptedSwap = canPresent()
+        val swapped = attemptedSwap && egl!!.swap(offer.targetNs)
         if (swapped) preview.remember(slot.source, offer.id, offer.ptsUs)
 
         slot.renderFence = GLES30.glFenceSync(
@@ -673,16 +726,24 @@ class SrRenderer(
             displayFrames[frameEglId] = PendingDisplay(offer.id, System.nanoTime())
         }
 
-        onEvent(
-            offer.id,
-            "swap",
-            mapOf(
-                "submittedBackend" to submittedBackend,
-                "eglFrameId" to frameEglId,
-                "reason" to if (swapped) reason else "swap_failed",
-                "enhancementRequested" to offer.enhance
+        if (attemptedSwap) {
+            onEvent(
+                offer.id,
+                "swap",
+                mapOf(
+                    "submittedBackend" to submittedBackend,
+                    "eglFrameId" to frameEglId,
+                    "reason" to if (swapped) reason else "swap_failed",
+                    "enhancementRequested" to offer.enhance
+                )
             )
-        )
+        } else {
+            onEvent(
+                offer.id,
+                "capture_skipped",
+                mapOf("reason" to if (window.isValid) "presentation_disabled" else "surface_invalid")
+            )
+        }
     }
 
     fun redrawPaused(generation: Long, enhance: Boolean): Boolean = runOnRenderSync {
@@ -690,6 +751,14 @@ class SrRenderer(
             return@runOnRenderSync false
         }
         val pinned = preview.pinned ?: return@runOnRenderSync false
+        if (!canPresent()) {
+            onEvent(
+                FrameId(generation, pinned.id.loop, pinned.id.sourceOrdinal),
+                "capture_skipped",
+                mapOf("reason" to if (window.isValid) "presentation_disabled" else "surface_invalid")
+            )
+            return@runOnRenderSync false
+        }
         val previewFrameId = FrameId(generation, pinned.id.loop, pinned.id.sourceOrdinal)
         val enhancedTexture = if (enhance) preview.enhancedTexture() else 0
         val renderer = draw!!
@@ -704,7 +773,8 @@ class SrRenderer(
         val renderWidth = egl!!.width()
         val renderHeight = egl!!.height()
         renderer.window(pinned.source, enhancedTexture, renderWidth, renderHeight)
-        val swapped = egl!!.swap(System.nanoTime())
+        val attemptedSwap = canPresent()
+        val swapped = attemptedSwap && egl!!.swap(System.nanoTime())
 
         if (swapped && frameEglId != null && frameEglId >= 0) {
             while (displayFrames.size >= MAX_PENDING_DISPLAYS) {
@@ -719,21 +789,29 @@ class SrRenderer(
             schedulePoll(0L)
         }
 
-        onEvent(
-            previewFrameId,
-            "swap",
-            mapOf(
-                "submittedBackend" to submittedBackend,
-                "eglFrameId" to frameEglId,
-                "reason" to if (swapped) reason else "swap_failed",
-                "enhancementRequested" to enhance,
-                "sourceOrdinal" to previewFrameId.sourceOrdinal,
-                "ptsUs" to pinned.ptsUs,
-                "pausedPreview" to true,
-                "renderWidth" to renderWidth,
-                "renderHeight" to renderHeight
+        if (attemptedSwap) {
+            onEvent(
+                previewFrameId,
+                "swap",
+                mapOf(
+                    "submittedBackend" to submittedBackend,
+                    "eglFrameId" to frameEglId,
+                    "reason" to if (swapped) reason else "swap_failed",
+                    "enhancementRequested" to enhance,
+                    "sourceOrdinal" to previewFrameId.sourceOrdinal,
+                    "ptsUs" to pinned.ptsUs,
+                    "pausedPreview" to true,
+                    "renderWidth" to renderWidth,
+                    "renderHeight" to renderHeight
+                )
             )
-        )
+        } else {
+            onEvent(
+                previewFrameId,
+                "capture_skipped",
+                mapOf("reason" to if (window.isValid) "presentation_disabled" else "surface_invalid")
+            )
+        }
         swapped
     }
 
