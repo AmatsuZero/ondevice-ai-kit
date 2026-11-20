@@ -40,10 +40,11 @@ class SrRunActivity : PlayerActivity() {
         val actualFixtureSha256 = sha256(fixture)
         fixtureSha256 = actualFixtureSha256
         if (actualFixtureSha256 !in FIXTURE_SHA256S) return endRun(false, "fixture missing or SHA-256 mismatch")
-        if (runCase !in setOf("original", "original-egl", "cunny", "auto")) return endRun(false, "invalid srCase", "unsupported")
+        if (runCase !in setOf("original", "original-egl", "cunny", "spatial", "auto")) return endRun(false, "invalid srCase", "unsupported")
         try {
             selectMode(when (runCase) {
                 "cunny" -> PlaybackMode.CUNNY
+                "spatial" -> PlaybackMode.SPATIAL
                 "auto" -> PlaybackMode.AUTO
                 else -> PlaybackMode.ORIGINAL
             })
@@ -124,6 +125,7 @@ class SrRunActivity : PlayerActivity() {
         val run = JSONObject().put("schemaVersion", 1).put("runId", runId).put("fixtureSha256", fixtureSha256 ?: JSONObject.NULL)
             .put("generation", generation).put("loops", 1).put("mode", when (runCase) {
                 "cunny" -> "CUNNY"
+                "spatial" -> "SPATIAL"
                 "auto" -> "AUTO"
                 else -> "ORIGINAL"
             })

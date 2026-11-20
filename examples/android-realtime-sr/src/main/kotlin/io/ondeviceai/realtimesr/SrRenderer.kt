@@ -14,12 +14,12 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicReference
 
 class SrRenderer(
-    assets: AssetManager,
+    private val assets: AssetManager,
     private val window: Surface,
     private val onEvent: (FrameId, String, Map<String, Any?>) -> Unit,
     initiallyPresentable: Boolean = true
 ) : AutoCloseable {
-    private data class Offer(val id: FrameId, val ptsUs: Long, val targetNs: Long, val enhance: Boolean)
+    private data class Offer(val id: FrameId, val ptsUs: Long, val targetNs: Long, val enhance: Boolean, val spatial: Boolean)
 
     private data class PendingDisplay(
         val frameId: FrameId,
@@ -65,6 +65,9 @@ class SrRenderer(
     private var draw: SrDraw? = null
     private var texture: SurfaceTexture? = null
     private var processor: GlesCunny? = null
+    private var spatialProcessor: GlesCunny? = null
+    private var spatialConfiguredWidth = 0
+    private var spatialConfiguredHeight = 0
     private var timingEnabled = false
     private var requestedWidth = 0
     private var requestedHeight = 0
@@ -194,7 +197,7 @@ class SrRenderer(
         }
     }
 
-    fun offer(id: FrameId, ptsUs: Long, targetNs: Long, enhance: Boolean): Boolean {
+    fun offer(id: FrameId, ptsUs: Long, targetNs: Long, enhance: Boolean, spatial: Boolean = false): Boolean {
         synchronized(lock) {
             if (closed || id.generation != generation ||
                 requestedWidth == 0 || requestedHeight == 0
@@ -202,7 +205,7 @@ class SrRenderer(
                 return false
             }
             if (!binding.offer(id, ptsUs)) return false
-            offers[id] = Offer(id, ptsUs, targetNs, enhance)
+            offers[id] = Offer(id, ptsUs, targetNs, enhance, spatial)
             return true
         }
     }
@@ -259,6 +262,12 @@ class SrRenderer(
                     processor?.close()
                 } catch (t: Throwable) {
                     closeFailure = t
+                }
+                try {
+                    spatialProcessor?.close()
+                } catch (t: Throwable) {
+                    val previous = closeFailure
+                    if (previous == null) closeFailure = t else previous.addSuppressed(t)
                 } finally {
                     try {
                         GLES30.glFinish()
@@ -404,7 +413,7 @@ class SrRenderer(
         GLES30.glFlush()
 
         if (matchedOffer.enhance) {
-            val prepared = synchronized(lock) {
+            val prepared = matchedOffer.spatial || synchronized(lock) {
                 workerConfiguredWidth == requestedWidth &&
                     workerConfiguredHeight == requestedHeight
             }
@@ -464,14 +473,42 @@ class SrRenderer(
                 !closed && !slot.invalidated && slot.offer === offer
             }
             if (shouldDispatch) {
-                workerFailure.get()?.let {
-                    throw IllegalStateException("SR preparation failed", it)
+                if (!offer.spatial) {
+                    workerFailure.get()?.let {
+                        throw IllegalStateException("SR preparation failed", it)
+                    }
                 }
 
                 onEvent(offer.id, "srStart", emptyMap())
                 query = EglTiming.startGpu()
                 try {
-                    outputTexture = processor!!.dispatch(slot.source.tex)
+                    outputTexture = if (offer.spatial) {
+                        val spatial = spatialProcessor ?: GlesCunny(assets, spatialOnly = true).also {
+                            spatialProcessor = it
+                        }
+                        if (spatialConfiguredWidth != slot.source.width ||
+                            spatialConfiguredHeight != slot.source.height
+                        ) {
+                            try {
+                                spatial.prepare(slot.source.width, slot.source.height)
+                            } catch (t: Throwable) {
+                                try {
+                                    spatial.close()
+                                } catch (closeError: Throwable) {
+                                    t.addSuppressed(closeError)
+                                }
+                                spatialProcessor = null
+                                spatialConfiguredWidth = 0
+                                spatialConfiguredHeight = 0
+                                throw t
+                            }
+                            spatialConfiguredWidth = slot.source.width
+                            spatialConfiguredHeight = slot.source.height
+                        }
+                        spatial.dispatch(slot.source.tex)
+                    } else {
+                        processor!!.dispatch(slot.source.tex)
+                    }
                     check(outputTexture != 0) { "SR dispatch returned an invalid texture" }
                     dispatched = true
                 } finally {
@@ -533,7 +570,7 @@ class SrRenderer(
             )
         }
         dispatchFailure?.let {
-            workerFailure.set(it)
+            if (!offer.spatial) workerFailure.set(it)
             onEvent(offer.id, "sr_error", mapOf("message" to it.message))
         }
 
@@ -669,7 +706,11 @@ class SrRenderer(
 
         val renderer = draw!!
         val frameEglId = if (timingEnabled) EglTiming.nextId().takeIf { it >= 0 } else null
-        val submittedBackend = if (enhancedTexture != 0) "CUNNY" else "ORIGINAL"
+        val submittedBackend = when {
+            enhancedTexture == 0 -> "ORIGINAL"
+            offer.spatial -> "SPATIAL"
+            else -> "CUNNY"
+        }
         val reason = when {
             enhancedTexture != 0 -> "enhanced"
             !offer.enhance -> "enhancement_not_requested"
@@ -685,9 +726,12 @@ class SrRenderer(
             )
             return
         }
+        val drawBeginNs = System.nanoTime()
         renderer.window(slot.source, enhancedTexture, egl!!.width(), egl!!.height())
         val attemptedSwap = canPresent()
+        val swapBeginNs = System.nanoTime()
         val swapped = attemptedSwap && egl!!.swap(offer.targetNs)
+        val swapEndNs = System.nanoTime()
         if (swapped) preview.remember(slot.source, offer.id, offer.ptsUs)
 
         slot.renderFence = GLES30.glFenceSync(
@@ -734,7 +778,10 @@ class SrRenderer(
                     "submittedBackend" to submittedBackend,
                     "eglFrameId" to frameEglId,
                     "reason" to if (swapped) reason else "swap_failed",
-                    "enhancementRequested" to offer.enhance
+                    "enhancementRequested" to offer.enhance,
+                    "drawBeginNs" to drawBeginNs,
+                    "swapBeginNs" to swapBeginNs,
+                    "swapEndNs" to swapEndNs
                 )
             )
         } else {
@@ -746,7 +793,7 @@ class SrRenderer(
         }
     }
 
-    fun redrawPaused(generation: Long, enhance: Boolean): Boolean = runOnRenderSync {
+    fun redrawPaused(generation: Long, enhance: Boolean, spatial: Boolean = false): Boolean = runOnRenderSync {
         if (closed || generation != this.generation || !preview.frozen) {
             return@runOnRenderSync false
         }
@@ -760,10 +807,14 @@ class SrRenderer(
             return@runOnRenderSync false
         }
         val previewFrameId = FrameId(generation, pinned.id.loop, pinned.id.sourceOrdinal)
-        val enhancedTexture = if (enhance) preview.enhancedTexture() else 0
+        val enhancedTexture = if (enhance) preview.enhancedTexture(spatial) else 0
         val renderer = draw!!
         val frameEglId = if (timingEnabled) EglTiming.nextId().takeIf { it >= 0 } else null
-        val submittedBackend = if (enhancedTexture != 0) "CUNNY" else "ORIGINAL"
+        val submittedBackend = when {
+            enhancedTexture == 0 -> "ORIGINAL"
+            spatial -> "SPATIAL"
+            else -> "CUNNY"
+        }
         val reason = when {
             enhancedTexture != 0 -> "enhanced"
             !enhance -> "enhancement_not_requested"
@@ -772,9 +823,12 @@ class SrRenderer(
 
         val renderWidth = egl!!.width()
         val renderHeight = egl!!.height()
+        val drawBeginNs = System.nanoTime()
         renderer.window(pinned.source, enhancedTexture, renderWidth, renderHeight)
         val attemptedSwap = canPresent()
+        val swapBeginNs = System.nanoTime()
         val swapped = attemptedSwap && egl!!.swap(System.nanoTime())
+        val swapEndNs = System.nanoTime()
 
         if (swapped && frameEglId != null && frameEglId >= 0) {
             while (displayFrames.size >= MAX_PENDING_DISPLAYS) {
@@ -798,6 +852,9 @@ class SrRenderer(
                     "eglFrameId" to frameEglId,
                     "reason" to if (swapped) reason else "swap_failed",
                     "enhancementRequested" to enhance,
+                    "drawBeginNs" to drawBeginNs,
+                    "swapBeginNs" to swapBeginNs,
+                    "swapEndNs" to swapEndNs,
                     "sourceOrdinal" to previewFrameId.sourceOrdinal,
                     "ptsUs" to pinned.ptsUs,
                     "pausedPreview" to true,

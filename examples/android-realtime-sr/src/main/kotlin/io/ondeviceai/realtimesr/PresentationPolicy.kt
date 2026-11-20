@@ -3,7 +3,7 @@ package io.ondeviceai.realtimesr
 import io.ondeviceai.binding.RealtimeSRBackend
 import io.ondeviceai.binding.RealtimeSRStatus
 
-enum class PlaybackMode { AUTO, CUNNY, ORIGINAL }
+enum class PlaybackMode { AUTO, CUNNY, SPATIAL, ORIGINAL }
 
 class PresentationPolicy(initialMode: PlaybackMode = PlaybackMode.ORIGINAL) {
     private val lock = Any()
@@ -33,7 +33,7 @@ class PresentationPolicy(initialMode: PlaybackMode = PlaybackMode.ORIGINAL) {
     fun setEnabled(enabled: Boolean): Long = synchronized(lock) {
         val mode = when {
             !enabled -> PlaybackMode.ORIGINAL
-            currentMode == PlaybackMode.CUNNY || currentMode == PlaybackMode.AUTO -> currentMode
+            currentMode == PlaybackMode.CUNNY || currentMode == PlaybackMode.SPATIAL || currentMode == PlaybackMode.AUTO -> currentMode
             else -> PlaybackMode.AUTO
         }
         select(mode)
@@ -47,10 +47,13 @@ class PresentationPolicy(initialMode: PlaybackMode = PlaybackMode.ORIGINAL) {
     ): Boolean = synchronized(lock) {
         if (generation != currentGeneration) return@synchronized false
         if (ordinal < 0 || ordinal <= lastOrdinal) return@synchronized false
-        if (backend != RealtimeSRBackend.CUNNY && backend != RealtimeSRBackend.ORIGINAL) {
+        if (backend != RealtimeSRBackend.CUNNY && backend != RealtimeSRBackend.SPATIAL && backend != RealtimeSRBackend.ORIGINAL) {
             return@synchronized false
         }
-        if (backend == RealtimeSRBackend.CUNNY && (!enabledState || !enhancementRequested)) return@synchronized false
+        val enhancementBackend = backend == RealtimeSRBackend.CUNNY || backend == RealtimeSRBackend.SPATIAL
+        if (enhancementBackend && (!enabledState || !enhancementRequested)) return@synchronized false
+        if (backend == RealtimeSRBackend.CUNNY && currentMode == PlaybackMode.SPATIAL) return@synchronized false
+        if (backend == RealtimeSRBackend.SPATIAL && currentMode != PlaybackMode.SPATIAL) return@synchronized false
         lastOrdinal = ordinal
         presentedBackend = backend
         fellBack = currentMode != PlaybackMode.ORIGINAL &&
@@ -72,10 +75,10 @@ class PresentationPolicy(initialMode: PlaybackMode = PlaybackMode.ORIGINAL) {
 
     private fun applyDefaults(mode: PlaybackMode) {
         enabledState = mode != PlaybackMode.ORIGINAL
-        preferred = if (mode == PlaybackMode.ORIGINAL) {
-            RealtimeSRBackend.ORIGINAL
-        } else {
-            RealtimeSRBackend.CUNNY
+        preferred = when (mode) {
+            PlaybackMode.ORIGINAL -> RealtimeSRBackend.ORIGINAL
+            PlaybackMode.SPATIAL -> RealtimeSRBackend.SPATIAL
+            PlaybackMode.AUTO, PlaybackMode.CUNNY -> RealtimeSRBackend.CUNNY
         }
     }
 }

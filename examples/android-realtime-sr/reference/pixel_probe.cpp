@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstddef>
+#include <cstring>
 
 #ifndef EGL_OPENGL_ES3_BIT_KHR
 #define EGL_OPENGL_ES3_BIT_KHR 0x00000040
@@ -105,6 +106,16 @@ static bool stage(GLuint prog, GLuint out, int ow, int oh, GLuint in, GLuint bas
     return glOk("dispatch");
 }
 
+static bool stageSpatial(GLuint prog, GLuint out, GLuint in, int w, int h) {
+    glUseProgram(prog);
+    glBindImageTexture(0, out, 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_RGBA16F);
+    glActiveTexture(GL_TEXTURE0); glBindTexture(GL_TEXTURE_2D, in);
+    GLint l = glGetUniformLocation(prog, "uInput"); if (l >= 0) glUniform1i(l, 0);
+    glDispatchCompute((w + 7) / 8, (h + 7) / 8, 1);
+    glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_TEXTURE_FETCH_BARRIER_BIT);
+    return glOk("dispatch");
+}
+
 static const char* kVS =
     "#version 310 es\n"
     "void main(){float x=float((gl_VertexID&1)<<2);float y=float((gl_VertexID&2)<<1);"
@@ -120,14 +131,19 @@ int main(int argc, char** argv) {
     EGLDisplay dpy = EGL_NO_DISPLAY;
     EGLContext ctx = EGL_NO_CONTEXT;
     EGLSurface surf = EGL_NO_SURFACE;
-    char *s0 = nullptr, *s1 = nullptr, *s2 = nullptr, *yRaw = nullptr;
+    char *s0 = nullptr, *s1 = nullptr, *s2 = nullptr, *sSpatial = nullptr, *yRaw = nullptr;
     unsigned char *rgba = nullptr, *rb = nullptr, *yout = nullptr;
-    GLuint p0 = 0, p1 = 0, p2 = 0, rp = 0, srcT = 0, tA = 0, tB = 0, tF = 0, outT = 0, fbo = 0;
+    GLuint p0 = 0, p1 = 0, p2 = 0, pSpatial = 0, rp = 0, srcT = 0, tA = 0, tB = 0, tF = 0, outT = 0, fbo = 0;
     FILE* fo = nullptr;
     int rc = 1, W = 0, H = 0;
     GLint maj = 0, mnr = 0;
+    bool spatial = false;
 
-    if (argc != 6) { fprintf(stderr, "usage: pixel_probe <assetdir> W H <y8in> <y8out>\n"); return 1; }
+    if (argc != 6 && argc != 7) { fprintf(stderr, "usage: pixel_probe <assetdir> W H <y8in> <y8out> [spatial]\n"); return 1; }
+    if (argc == 7) {
+        if (strcmp(argv[6], "spatial") != 0) { fprintf(stderr, "invalid mode: %s\n", argv[6]); return 1; }
+        spatial = true;
+    }
     W = atoi(argv[2]); H = atoi(argv[3]);
     if (W <= 0 || H <= 0 || W > 4096 || H > 4096) {
         fprintf(stderr, "W/H out of range (1..4096)\n"); return 1;
@@ -166,12 +182,22 @@ int main(int argc, char** argv) {
 
     {
         char pa[4096];
-        snprintf(pa, sizeof(pa), "%s/cunny0.comp", argv[1]); if (!readFile(pa, &s0, nullptr)) { fprintf(stderr, "missing cunny0.comp\n"); goto done; }
-        snprintf(pa, sizeof(pa), "%s/cunny1.comp", argv[1]); if (!readFile(pa, &s1, nullptr)) { fprintf(stderr, "missing cunny1.comp\n"); goto done; }
-        snprintf(pa, sizeof(pa), "%s/cunny2.comp", argv[1]); if (!readFile(pa, &s2, nullptr)) { fprintf(stderr, "missing cunny2.comp\n"); goto done; }
+        if (spatial) {
+            snprintf(pa, sizeof(pa), "%s/spatial.comp", argv[1]);
+            if (!readFile(pa, &sSpatial, nullptr)) { fprintf(stderr, "missing spatial.comp\n"); goto done; }
+        } else {
+            snprintf(pa, sizeof(pa), "%s/cunny0.comp", argv[1]); if (!readFile(pa, &s0, nullptr)) { fprintf(stderr, "missing cunny0.comp\n"); goto done; }
+            snprintf(pa, sizeof(pa), "%s/cunny1.comp", argv[1]); if (!readFile(pa, &s1, nullptr)) { fprintf(stderr, "missing cunny1.comp\n"); goto done; }
+            snprintf(pa, sizeof(pa), "%s/cunny2.comp", argv[1]); if (!readFile(pa, &s2, nullptr)) { fprintf(stderr, "missing cunny2.comp\n"); goto done; }
+        }
     }
-    p0 = computeProgram(s0, "cunny0"); p1 = computeProgram(s1, "cunny1"); p2 = computeProgram(s2, "cunny2");
-    if (!p0 || !p1 || !p2) goto done;
+    if (spatial) {
+        pSpatial = computeProgram(sSpatial, "spatial");
+        if (!pSpatial) goto done;
+    } else {
+        p0 = computeProgram(s0, "cunny0"); p1 = computeProgram(s1, "cunny1"); p2 = computeProgram(s2, "cunny2");
+        if (!p0 || !p1 || !p2) goto done;
+    }
     rp = link(compile(GL_VERTEX_SHADER, kVS, "vs"), compile(GL_FRAGMENT_SHADER, kFS, "fs"), "readback");
     if (!rp || !glOk("programs")) goto done;
 
@@ -182,14 +208,20 @@ int main(int argc, char** argv) {
         rgba[i * 4] = b; rgba[i * 4 + 1] = b; rgba[i * 4 + 2] = b; rgba[i * 4 + 3] = 255;
     }
     srcT = makeTex(GL_RGBA8, W, H, rgba, GL_RGBA, GL_UNSIGNED_BYTE, true);
-    tA = makeTex(GL_RGBA16F, 2 * W, H, nullptr, GL_RGBA, GL_HALF_FLOAT, true);
-    tB = makeTex(GL_RGBA16F, 2 * W, H, nullptr, GL_RGBA, GL_HALF_FLOAT, true);
+    if (!spatial) {
+        tA = makeTex(GL_RGBA16F, 2 * W, H, nullptr, GL_RGBA, GL_HALF_FLOAT, true);
+        tB = makeTex(GL_RGBA16F, 2 * W, H, nullptr, GL_RGBA, GL_HALF_FLOAT, true);
+    }
     tF = makeTex(GL_RGBA16F, 2 * W, 2 * H, nullptr, GL_RGBA, GL_HALF_FLOAT, true);
     if (!glOk("textures")) goto done;
 
-    if (!stage(p0, tA, W, H, srcT, srcT)) goto done;
-    if (!stage(p1, tB, W, H, tA, srcT)) goto done;
-    if (!stage(p2, tF, W, H, tB, srcT)) goto done;
+    if (spatial) {
+        if (!stageSpatial(pSpatial, tF, srcT, W, H)) goto done;
+    } else {
+        if (!stage(p0, tA, W, H, srcT, srcT)) goto done;
+        if (!stage(p1, tB, W, H, tA, srcT)) goto done;
+        if (!stage(p2, tF, W, H, tB, srcT)) goto done;
+    }
 
     outT = makeTex(GL_RGBA8, 2 * W, 2 * H, nullptr, GL_RGBA, GL_UNSIGNED_BYTE, false);
     glGenFramebuffers(1, &fbo); glBindFramebuffer(GL_FRAMEBUFFER, fbo);
@@ -228,12 +260,12 @@ int main(int argc, char** argv) {
 done:
     if (fo) fclose(fo);
     free(yout); free(rb); free(rgba);
-    free(s0); free(s1); free(s2); free(yRaw);
+    free(s0); free(s1); free(s2); free(sSpatial); free(yRaw);
     if (dpy != EGL_NO_DISPLAY) {
         glDeleteFramebuffers(1, &fbo);
         glDeleteTextures(1, &outT); glDeleteTextures(1, &tF);
         glDeleteTextures(1, &tB); glDeleteTextures(1, &tA); glDeleteTextures(1, &srcT);
-        glDeleteProgram(rp); glDeleteProgram(p2); glDeleteProgram(p1); glDeleteProgram(p0);
+        glDeleteProgram(rp); glDeleteProgram(pSpatial); glDeleteProgram(p2); glDeleteProgram(p1); glDeleteProgram(p0);
         eglMakeCurrent(dpy, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         if (surf != EGL_NO_SURFACE) eglDestroySurface(dpy, surf);
         if (ctx != EGL_NO_CONTEXT) eglDestroyContext(dpy, ctx);

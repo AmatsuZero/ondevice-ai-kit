@@ -27,6 +27,7 @@ class PlaybackUiProbe : Instrumentation() {
     private val timeoutMs = 20_000L
     private val positionPattern = Pattern.compile("\\b(\\d{2}):(\\d{2})\\s*/\\s*\\d{2}:\\d{2}\\b")
     private lateinit var runId: String
+    private var compareSpatial = false
     private lateinit var outputDir: File
     private val records = JSONArray()
     private val swaps = JSONArray()
@@ -36,6 +37,7 @@ class PlaybackUiProbe : Instrumentation() {
     override fun onCreate(arguments: Bundle?) {
         super.onCreate(arguments)
         runId = arguments?.getString("runId") ?: ""
+        compareSpatial = arguments?.getString("compareSpatial") == "true"
         start()
     }
 
@@ -62,7 +64,11 @@ class PlaybackUiProbe : Instrumentation() {
             var lastLine = eventFile.takeIf { it.isFile }?.readLines()?.size ?: 0
             var generation = -1L
             var identity: Pair<Long, Long>? = null
-            val stages = listOf("Original" to "ORIGINAL", "CuNNy" to "CUNNY", "Original" to "ORIGINAL")
+            val stages = if (compareSpatial) {
+                listOf("Original" to "ORIGINAL", "Spatial" to "SPATIAL", "CuNNy" to "CUNNY", "Original" to "ORIGINAL")
+            } else {
+                listOf("Original" to "ORIGINAL", "CuNNy" to "CUNNY", "Original" to "ORIGINAL")
+            }
             var renderSize: Pair<Long, Long>? = null
             for ((index, stage) in stages.withIndex()) {
                 val button = awaitButton(activity, stage.first)
@@ -92,11 +98,13 @@ class PlaybackUiProbe : Instrumentation() {
                 captures.add(bitmap)
                 val name = "stage-${index + 1}.png"
                 FileOutputStream(File(outputDir, name)).use { check(bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)) { "PNG encoding failed" } }
-                records.put(JSONObject().put("button", stage.first).put("position", position.first)
-                    .put("status", status).put("capture", name))
+                records.put(JSONObject().put("button", stage.first).put("backend", stage.second)
+                    .put("position", position.first).put("status", status).put("capture", name))
             }
-            check(equal(captures[0], captures[2])) { "First and third full-frame captures differ" }
-            check(!equal(captures[0], captures[1])) { "Original and CuNNy full-frame captures are identical" }
+            check(equal(captures.first(), captures.last())) { "First and last full-frame original captures differ" }
+            check(captures.drop(1).dropLast(1).none { equal(captures[0], it) }) {
+                "An enhanced full-frame capture is identical to the original"
+            }
             check(captures.all { it.width.toLong() == renderSize!!.first && it.height.toLong() == renderSize!!.second }) {
                 "Paused preview capture dimensions differ from submitted render size"
             }

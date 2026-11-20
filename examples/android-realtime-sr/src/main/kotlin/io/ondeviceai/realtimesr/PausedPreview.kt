@@ -13,6 +13,7 @@ class PausedPreview(private val assets: AssetManager) : AutoCloseable {
 
     private var processor: GlesCunny? = null
     private var cachedTexture: Int? = null
+    private var cachedSpatial: Boolean? = null
 
     fun remember(source: SrDraw.Source, id: FrameId, ptsUs: Long) {
         if (frozen) return
@@ -39,14 +40,22 @@ class PausedPreview(private val assets: AssetManager) : AutoCloseable {
         releasePreview()
     }
 
-    fun enhancedTexture(): Int {
+    fun enhancedTexture(spatial: Boolean = false): Int {
         val sample = pinned ?: return 0
+        if (cachedSpatial != null && cachedSpatial != spatial) releasePreview()
         cachedTexture?.let { return it }
 
         return try {
-            val previewProcessor = processor ?: GlesCunny(assets).also { processor = it }
+            val previewProcessor = processor ?: (if (spatial) {
+                GlesCunny(assets, spatialOnly = true)
+            } else {
+                GlesCunny(assets)
+            }).also { processor = it }
             previewProcessor.prepare(sample.source.width, sample.source.height)
-            previewProcessor.dispatch(sample.source.tex).also { cachedTexture = it }
+            previewProcessor.dispatch(sample.source.tex).also {
+                cachedTexture = it
+                cachedSpatial = spatial
+            }
         } catch (_: Exception) {
             releasePreview()
             0
@@ -59,6 +68,7 @@ class PausedPreview(private val assets: AssetManager) : AutoCloseable {
 
     private fun releasePreview() {
         cachedTexture = null
+        cachedSpatial = null
         val previewProcessor = processor
         processor = null
         previewProcessor?.close()

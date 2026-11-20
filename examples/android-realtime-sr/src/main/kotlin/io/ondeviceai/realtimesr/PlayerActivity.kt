@@ -113,7 +113,11 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
                     if (keepPreview && current != null) {
                         val enhance = mode != PlaybackMode.ORIGINAL &&
                             inputEligibility.eligible
-                        current.redrawPaused(generation, enhance)
+                        current.redrawPaused(
+                            generation,
+                            enhance,
+                            spatial = mode == PlaybackMode.SPATIAL && enhance
+                        )
                     }
                 }
             }
@@ -175,11 +179,22 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
             controls.addView(button)
         }
         root.addView(controls)
-        val modes = LinearLayout(this).apply { gravity = Gravity.CENTER }
-        listOf("Original" to PlaybackMode.ORIGINAL, "Auto" to PlaybackMode.AUTO, "CuNNy" to PlaybackMode.CUNNY)
-            .forEach { (label, mode) ->
-                Button(this).also { it.text = label; it.setOnClickListener { selectMode(mode) }; modes.addView(it) }
+        val modes = LinearLayout(this).apply {
+            gravity = Gravity.CENTER
+            orientation = LinearLayout.HORIZONTAL
+        }
+        listOf(
+            "Original" to PlaybackMode.ORIGINAL,
+            "Auto" to PlaybackMode.AUTO,
+            "CuNNy" to PlaybackMode.CUNNY,
+            "Spatial" to PlaybackMode.SPATIAL
+        ).forEach { (label, mode) ->
+            Button(this).also {
+                it.text = label
+                it.setOnClickListener { selectMode(mode) }
+                modes.addView(it, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
             }
+        }
         root.addView(modes)
         setContentView(root)
     }
@@ -398,13 +413,20 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
                 val ordinal = maxOf(nominal, lastAcceptedOrdinal + 1L).coerceAtMost(Int.MAX_VALUE.toLong())
                 val id = FrameId(generation, 0, ordinal.toInt())
                 val current = renderer
-                val requestedEnhancement = policy.mode != PlaybackMode.ORIGINAL && inputEligibility.eligible
-                val autoAllowed = policy.mode != PlaybackMode.AUTO ||
+                val mode = policy.mode
+                val requestedEnhancement = mode != PlaybackMode.ORIGINAL && inputEligibility.eligible
+                val autoAllowed = mode != PlaybackMode.AUTO ||
                     autoCadence.shouldTry(generation, System.nanoTime())
                 updateAutoCooldown(generation, !autoAllowed)
                 val enhancement = requestedEnhancement && autoAllowed
                 val accepted = if (current == null) true else synchronized(rendererLock) {
-                    renderer === current && current.offer(id, ptsUs, targetNs, enhancement)
+                    renderer === current && current.offer(
+                        id,
+                        ptsUs,
+                        targetNs,
+                        enhancement,
+                        spatial = mode == PlaybackMode.SPATIAL && enhancement
+                    )
                 }
                 if (!accepted) return false
                 lastAcceptedOrdinal = ordinal
@@ -479,7 +501,9 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
                     swaps[id] = Swap(
                         eglId,
                         backend,
-                        fields["enhancementRequested"] as? Boolean ?: backend == RealtimeSRBackend.CUNNY,
+                        fields["enhancementRequested"] as? Boolean ?: (
+                            backend == RealtimeSRBackend.CUNNY || backend == RealtimeSRBackend.SPATIAL
+                        ),
                         nowNs
                     )
                 }
@@ -504,7 +528,8 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
                         matchedSwap.second.enhancement
                     )
                 ) {
-                    srRendererUsed = matchedSwap.second.backend == RealtimeSRBackend.CUNNY
+                    srRendererUsed = matchedSwap.second.backend == RealtimeSRBackend.CUNNY ||
+                        matchedSwap.second.backend == RealtimeSRBackend.SPATIAL
                     main.post {
                         if (matchedSwap.first == id && id.generation == activeGeneration) refreshStatus()
                     }

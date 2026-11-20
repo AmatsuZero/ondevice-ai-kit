@@ -64,4 +64,30 @@ class PresentationPolicyTest {
         assertTrue(host.onPresented(disabledGeneration, 0, RealtimeSRBackend.ORIGINAL, true))
         assertFalse(host.readStatus().fellBackToOriginal)
     }
+
+    @Test
+    fun spatialModeTracksOnlyRequestedBackendAndIgnoresStalePresentations() {
+        val policy = PresentationPolicy()
+        val spatial = PlaybackMode.valueOf("SPATIAL")
+        val originalGeneration = policy.select(PlaybackMode.ORIGINAL)
+        policy.presented(originalGeneration, 0L, RealtimeSRBackend.SPATIAL, true)
+        assertNull(policy.readStatus().presentedBackend)
+
+        val generation = policy.select(spatial)
+        assertEquals(RealtimeSRBackend.SPATIAL, policy.readStatus().preferredBackend)
+        policy.presented(generation, 1L, RealtimeSRBackend.CUNNY, true)
+        assertNull(policy.readStatus().presentedBackend)
+
+        policy.presented(generation, 2L, RealtimeSRBackend.ORIGINAL, true)
+        assertEquals(RealtimeSRBackend.ORIGINAL, policy.readStatus().presentedBackend)
+        assertTrue(policy.readStatus().fellBackToOriginal)
+
+        policy.presented(generation, 3L, RealtimeSRBackend.SPATIAL, true)
+        assertEquals(RealtimeSRBackend.SPATIAL, policy.readStatus().presentedBackend)
+        assertFalse(policy.readStatus().fellBackToOriginal)
+
+        policy.select(PlaybackMode.ORIGINAL)
+        policy.presented(generation, 4L, RealtimeSRBackend.SPATIAL, true)
+        assertNull(policy.readStatus().presentedBackend)
+    }
 }

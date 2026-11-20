@@ -122,6 +122,57 @@ def dropped_stage(events, stage, ordinals=None):
     return out
 
 
+class SpatialAssessContractTests(unittest.TestCase):
+
+    def test_spatial_frame_with_matching_display_counts_as_on_time_sr(self):
+        events = [
+            latch(0),
+            gpu(0, "srStart"),
+            gpu(0, "srEnd"),
+            swap(0, "SPATIAL", "sr"),
+            display(0),
+        ]
+        result = assess(make_index(1), make_run(mode="SPATIAL"), events)
+        self.assertEqual(result["counts"]["onTimeSR"], 1)
+        self.assertEqual(result["counts"]["unconfirmed"], 0)
+
+    def test_spatial_frame_without_display_is_unconfirmed(self):
+        events = [
+            latch(0),
+            gpu(0, "srStart"),
+            gpu(0, "srEnd"),
+            swap(0, "SPATIAL", "sr"),
+        ]
+        result = assess(make_index(1), make_run(mode="SPATIAL"), events)
+        self.assertEqual(result["counts"]["onTimeSR"], 0)
+        self.assertEqual(result["counts"]["unconfirmed"], 1)
+
+    def test_successful_original_fallback_counts_as_on_time_original(self):
+        events = [
+            latch(0),
+            gpu(0, "srStart"),
+            gpu(0, "srEnd"),
+            swap(0, "ORIGINAL", "fallback"),
+            display(0),
+        ]
+        result = assess(make_index(1), make_run(mode="SPATIAL"), events)
+        self.assertEqual(result["counts"]["onTimeOriginal"], 1)
+
+    def test_rejects_backend_that_does_not_match_run_mode(self):
+        with self.assertRaises(ValueError):
+            assess(
+                make_index(1),
+                make_run(mode="CUNNY"),
+                [latch(0), swap(0, "SPATIAL", "sr"), display(0)],
+            )
+        with self.assertRaises(ValueError):
+            assess(
+                make_index(1),
+                make_run(mode="SPATIAL"),
+                [latch(0), swap(0, "CUNNY", "sr"), display(0)],
+            )
+
+
 class AssessContractTests(unittest.TestCase):
 
     def test_result_exposes_counts_and_gates(self):

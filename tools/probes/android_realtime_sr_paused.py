@@ -34,28 +34,34 @@ def pull(adb, remote, destination):
     return data
 
 
-def check_events(data):
+def check_events(data, compare_spatial=False):
     events = [json.loads(line) for line in data.decode().splitlines() if line.strip()]
     selected = [row for row in events if row.get("stage") == "swap" and row.get("pausedPreview") is True]
-    if len(selected) != 3:
-        raise RuntimeError(f"Expected three pausedPreview swaps, found {len(selected)}")
+    expected = ["ORIGINAL", "SPATIAL", "CUNNY", "ORIGINAL"] if compare_spatial else ["ORIGINAL", "CUNNY", "ORIGINAL"]
+    if len(selected) != len(expected):
+        raise RuntimeError(f"Expected {len(expected)} pausedPreview swaps, found {len(selected)}")
     labels = [row["submittedBackend"] for row in selected]
-    if labels != ["ORIGINAL", "CUNNY", "ORIGINAL"]:
+    if labels != expected:
         raise RuntimeError(f"Unexpected pausedPreview source order: {labels}")
     def field(row, name):
         return next((v for k, v in row.items() if k.lower() == name.lower()), None)
     pts = [field(row, "ptsUs") for row in selected]
     ordinals = [field(row, "sourceOrdinal") for row in selected]
     generations = [field(row, "generation") for row in selected]
-    if any(v is None for v in pts + ordinals + generations) or len(set(pts)) != 1 or len(set(ordinals)) != 1:
+    widths = [field(row, "renderWidth") for row in selected]
+    heights = [field(row, "renderHeight") for row in selected]
+    if any(v is None for v in pts + ordinals + generations + widths + heights) or len(set(pts)) != 1 or len(set(ordinals)) != 1:
         raise RuntimeError("PausedPreview swaps do not share exact ptsUs/sourceOrdinal")
+    if len(set(zip(widths, heights))) != 1:
+        raise RuntimeError("PausedPreview swaps do not share Surface geometry")
     if any(not isinstance(v, int) for v in generations) or not all(a < b for a, b in zip(generations, generations[1:])):
         raise RuntimeError("PausedPreview generations are not strictly ascending")
     for row in selected:
         reason = field(row, "reason")
         if not isinstance(reason, str) or reason not in {"enhanced", "enhancement_not_requested"}:
             raise RuntimeError(f"Swap did not report a successful reason: {reason!r}")
-    return {"sources": labels, "ptsUs": pts[0], "sourceOrdinal": ordinals[0], "generations": generations}
+    return {"sources": labels, "ptsUs": pts[0], "sourceOrdinal": ordinals[0], "generations": generations,
+            "surfaceGeometry": [widths[0], heights[0]]}
 
 
 def main():
@@ -66,6 +72,7 @@ def main():
     parser.add_argument("--project", type=Path, default=Path.cwd())
     parser.add_argument("--apk", type=Path)
     parser.add_argument("--test-apk", type=Path)
+    parser.add_argument("--compare-spatial", action="store_true")
     args = parser.parse_args()
     if args.out.exists():
         parser.error("--out must be a new directory")
@@ -111,8 +118,10 @@ def main():
         host["device_fixture_sha256"] = device_fixture_sha
         if device_fixture_sha != fixture_sha:
             raise RuntimeError("Device fixture SHA mismatch")
-        command = ["adb", "-s", args.serial, "shell", "am", "instrument", "-w", "-e", "runId", run_id,
-                   f"{PKG}.test/io.ondeviceai.realtimesr.PlaybackUiProbe"]
+        command = ["adb", "-s", args.serial, "shell", "am", "instrument", "-w", "-e", "runId", run_id]
+        if args.compare_spatial:
+            command.extend(["-e", "compareSpatial", "true"])
+        command.append(f"{PKG}.test/io.ondeviceai.realtimesr.PlaybackUiProbe")
         try:
             instrument = subprocess.run(command, capture_output=True, text=True, timeout=140, check=False)
             host["instrumentation"] = {"returncode": instrument.returncode, "stdout": instrument.stdout, "stderr": instrument.stderr}
@@ -121,7 +130,10 @@ def main():
         evidence = args.out / run_id
         evidence.mkdir(parents=True, exist_ok=True)
         base = f"files/sr-ui/{run_id}"
-        for name in ("result.json", "stage-1.png", "stage-2.png", "stage-3.png"):
+        capture_names = ["result.json", "stage-1.png", "stage-2.png", "stage-3.png"]
+        if args.compare_spatial:
+            capture_names.append("stage-4.png")
+        for name in capture_names:
             try:
                 pull(adb, f"{base}/{name}", evidence / name)
             except Exception as exc:
@@ -132,7 +144,7 @@ def main():
             if isinstance(events, str):
                 events = events.encode()
             (evidence / "events.jsonl").write_bytes(events)
-            host["swaps"] = check_events(events)
+            host["swaps"] = check_events(events, args.compare_spatial)
         except Exception as exc:
             host["swapError"] = str(exc)
         result_path = evidence / "result.json"
@@ -146,7 +158,8 @@ def main():
                     raise RuntimeError("Instrumentation result reports failure")
             except Exception as exc:
                 host["resultError"] = str(exc)
-        pngs = [evidence / f"stage-{n}.png" for n in (1, 2, 3)]
+        capture_count = 4 if args.compare_spatial else 3
+        pngs = [evidence / f"stage-{n}.png" for n in range(1, capture_count + 1)]
         if not all(p.is_file() for p in pngs):
             raise RuntimeError("One or more instrumentation PNGs are missing")
         inst = host.get("instrumentation", {})
@@ -165,10 +178,17 @@ def main():
             if len(set(map(len, frames))) != 1:
                 raise RuntimeError("Stage PNG dimensions differ")
             pixels = len(frames[0]) // 4
-            differing = [sum(frames[a][i:i+3] != frames[b][i:i+3] for i in range(0, len(frames[a]), 4)) for a, b in ((0, 1), (1, 2), (0, 2))]
-            if differing[0] == 0 or differing[1] == 0 or differing[2] != 0:
-                raise RuntimeError("Expected stages 1 and 3 identical, with stage 2 changed")
-            host["pixels"] = {"sha256": [hashlib.sha256(frame).hexdigest() for frame in frames], "differingRgbPixels": differing, "pixelCount": pixels}
+            pairs = [(0, 1), (0, 2), (1, 2), (0, 3)] if args.compare_spatial else [(0, 1), (1, 2), (0, 2)]
+            differing = [sum(frames[a][i:i+3] != frames[b][i:i+3] for i in range(0, len(frames[a]), 4)) for a, b in pairs]
+            checksums = [hashlib.sha256(frame).hexdigest() for frame in frames]
+            if args.compare_spatial:
+                if checksums[0] != checksums[3] or differing[0] == 0 or differing[1] == 0:
+                    raise RuntimeError("Expected byte-identical first/last originals and changed Spatial and CuNNy captures")
+            elif differing[0] == 0 or differing[1] == 0 or checksums[0] != checksums[2]:
+                raise RuntimeError("Expected byte-identical first/last originals and a changed CuNNy capture")
+            host["pixels"] = {"sha256": checksums, "differingRgbPixels": differing, "comparisonPairs": pairs, "pixelCount": pixels}
+            if args.compare_spatial:
+                host["stages"] = ["Original", "Spatial", "CuNNy", "Original"]
         host["success"] = True
     except Exception as exc:
         host["error"] = str(exc)

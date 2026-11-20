@@ -55,8 +55,8 @@ def _validate_run(run, fixture_sha):
         raise ValueError("run fixtureSha256 does not match index")
     generation = _integer(run.get("generation"), "generation", 0)
     loops = _integer(run.get("loops"), "loops", 1)
-    if run.get("mode") not in ("CUNNY", "ORIGINAL", "AUTO"):
-        raise ValueError("mode must be CUNNY, ORIGINAL, or AUTO")
+    if run.get("mode") not in ("CUNNY", "ORIGINAL", "AUTO", "SPATIAL"):
+        raise ValueError("mode must be CUNNY, ORIGINAL, AUTO, or SPATIAL")
     if not isinstance(run.get("displayTimingSupported"), bool):
         raise ValueError("displayTimingSupported must be boolean")
     if not isinstance(run.get("completed"), bool):
@@ -128,8 +128,13 @@ def assess(index, run, events):
             if not isinstance(event.get("gpuTimingValid"), bool):
                 raise ValueError("gpuTimingValid must be boolean")
         elif stage == "swap":
-            if event.get("submittedBackend") not in ("ORIGINAL", "CUNNY"):
+            backend = event.get("submittedBackend")
+            if backend not in ("ORIGINAL", "CUNNY", "SPATIAL"):
                 raise ValueError("invalid submittedBackend")
+            if backend == "SPATIAL" and run["mode"] != "SPATIAL":
+                raise ValueError("SPATIAL backend requires SPATIAL mode")
+            if run["mode"] == "SPATIAL" and backend == "CUNNY":
+                raise ValueError("SPATIAL mode cannot use CUNNY backend")
             if not isinstance(event.get("reason"), str):
                 raise ValueError("swap reason must be a string")
         elif stage == "display":
@@ -197,7 +202,7 @@ def assess(index, run, events):
             classification = "unconfirmed"
         elif 30 * elapsed_ns > _NS_PER_SECOND or not in_window:
             classification = "late"
-        elif backend == "CUNNY":
+        elif backend == "CUNNY" or (run["mode"] == "SPATIAL" and backend == "SPATIAL"):
             classification = "onTimeSR"
         elif backend == "ORIGINAL":
             classification = "onTimeOriginal"
