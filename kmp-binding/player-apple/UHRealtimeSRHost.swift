@@ -18,7 +18,7 @@ public final class UHRealtimeSRHost: NSObject, @preconcurrency RealtimeSRHost {
     }
     public func readStatus() -> RealtimeSRStatus {
         func mapped(_ value: UHRealtimeSRBackend) -> RealtimeSRBackend {
-            switch value { case .system: return .system; case .cunny: return .cunny; case .original: return .original; @unknown default: return .original }
+            switch value { case .spatial: return .spatial; case .system: return .system; case .cunny: return .cunny; case .original: return .original; @unknown default: return .original }
         }
         let presented = view?.lastPresentedBackend
         return RealtimeSRStatus(enabled:requested, preferredBackend:mapped(requested ? engine?.preferredBackend ?? .original : .original),

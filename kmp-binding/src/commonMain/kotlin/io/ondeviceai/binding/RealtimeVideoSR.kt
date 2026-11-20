@@ -1,7 +1,7 @@
 package io.ondeviceai.binding
 
 /** Controls one native player view. All calls are on the host UI thread; no frames cross KMP. */
-enum class RealtimeSRBackend { ORIGINAL, SYSTEM, CUNNY }
+enum class RealtimeSRBackend { ORIGINAL, SYSTEM, CUNNY, SPATIAL }
 data class RealtimeSRStatus(
     val enabled: Boolean,
     val preferredBackend: RealtimeSRBackend,
