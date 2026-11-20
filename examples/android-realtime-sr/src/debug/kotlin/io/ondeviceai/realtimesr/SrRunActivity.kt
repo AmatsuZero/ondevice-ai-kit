@@ -24,6 +24,7 @@ class SrRunActivity : PlayerActivity() {
     private var displayCount = 0
     private var displayTimingSupported = false
     private var ended = false
+    private var fixtureSha256: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,10 @@ class SrRunActivity : PlayerActivity() {
         if (listOf("run.json", "events.jsonl", "terminal.json").any { File(dir, it).exists() }) return finish()
         writer = File(dir, "events.jsonl").bufferedWriter()
         val fixture = File(dir, "fixture.mp4")
-        if (!fixture.isFile || sha256(fixture) != FIXTURE_SHA256) return endRun(false, "fixture missing or SHA-256 mismatch")
+        if (!fixture.isFile) return endRun(false, "fixture missing or SHA-256 mismatch")
+        val actualFixtureSha256 = sha256(fixture)
+        fixtureSha256 = actualFixtureSha256
+        if (actualFixtureSha256 !in FIXTURE_SHA256S) return endRun(false, "fixture missing or SHA-256 mismatch")
         if (runCase !in setOf("original", "original-egl", "cunny", "auto")) return endRun(false, "invalid srCase", "unsupported")
         try {
             selectMode(when (runCase) {
@@ -117,7 +121,7 @@ class SrRunActivity : PlayerActivity() {
         ended = true
         writer?.flush()
         writer?.close()
-        val run = JSONObject().put("schemaVersion", 1).put("runId", runId).put("fixtureSha256", FIXTURE_SHA256)
+        val run = JSONObject().put("schemaVersion", 1).put("runId", runId).put("fixtureSha256", fixtureSha256 ?: JSONObject.NULL)
             .put("generation", generation).put("loops", 1).put("mode", when (runCase) {
                 "cunny" -> "CUNNY"
                 "auto" -> "AUTO"
@@ -145,5 +149,10 @@ class SrRunActivity : PlayerActivity() {
         return digest.digest().joinToString("") { "%02x".format(it.toInt() and 255) }
     }
 
-    companion object { private const val FIXTURE_SHA256 = "df677798a8604a7a6289fcf50a0fef3844a047631e0041ae7d5563c55f3746ec" }
+    companion object {
+        private val FIXTURE_SHA256S = setOf(
+            "df677798a8604a7a6289fcf50a0fef3844a047631e0041ae7d5563c55f3746ec",
+            "e698bee8c98c3158eb5e99e26f1cbe13334b52557720b2129a3e31dd2fa67dcb"
+        )
+    }
 }

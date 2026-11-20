@@ -23,6 +23,10 @@ from pathlib import Path
 PKG = "io.ondeviceai.realtimesr.demo"
 COMP = PKG + "/io.ondeviceai.realtimesr.SrRunActivity"  # debug-only exported run activity
 KNOWN_SHA = "df677798a8604a7a6289fcf50a0fef3844a047631e0041ae7d5563c55f3746ec"
+FIXTURE_PROFILES = {
+    KNOWN_SHA: "1920x1080",
+    "e698bee8c98c3158eb5e99e26f1cbe13334b52557720b2129a3e31dd2fa67dcb": "960x540",
+}
 CASES = ("original", "original-egl", "cunny", "auto", "short-abba")
 JAVA17 = "/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 SHORT_T, POLL = 240, 2
@@ -140,10 +144,12 @@ def required_for(case):
     return {"terminal.json", "run.json", "events.jsonl"}
 
 
-def validate_decode(term, run, events_b, rid, launch_case):
+def validate_decode(term, run, events_b, rid, launch_case, expected_sha=KNOWN_SHA):
     def fail(message):
         return message
 
+    if expected_sha not in FIXTURE_PROFILES:
+        return fail('unknown expected fixtureSha256')
     if not isinstance(term, dict) or not isinstance(run, dict):
         return fail('terminal and run.json must be JSON objects')
     if term.get('runId') != rid or run.get('runId') != rid:
@@ -159,7 +165,7 @@ def validate_decode(term, run, events_b, rid, launch_case):
         return fail('mode does not match launch case')
     if type(run.get('completed')) is not bool or not run['completed']:
         return fail('run is not complete')
-    if run.get('fixtureSha256') != KNOWN_SHA:
+    if run.get('fixtureSha256') != expected_sha:
         return fail('invalid fixtureSha256')
 
     if not isinstance(term.get('case'), str) or term['case'] != launch_case:
@@ -236,8 +242,9 @@ def collect_device(adb):
     return d
 
 
-def one_run(adb, outroot, rid, case, launch_case, timeout, fx):
-    rec = {"id": rid, "case": case, "launch_case": launch_case, "artifacts": {},
+def one_run(adb, outroot, rid, case, launch_case, timeout, fx, expected_sha):
+    rec = {"id": rid, "case": case, "launch_case": launch_case,
+           "fixture_sha256": expected_sha, "fixture_profile": FIXTURE_PROFILES[expected_sha], "artifacts": {},
            "decode_completion": False, "display_gate": "not_assessed"}
     remote = "files/sr-runs/" + rid
     rc, _ = adb.sh("run-as", PKG, "mkdir", "-p", remote, check=False)
@@ -247,7 +254,7 @@ def one_run(adb, outroot, rid, case, launch_case, timeout, fx):
     push_fixture(adb, remote + "/fixture.mp4", fx)
     dsha = device_sha(adb, remote + "/fixture.mp4")
     rec["device_fixture_sha"] = dsha
-    if dsha != KNOWN_SHA:
+    if dsha != expected_sha:
         rec.update(status="failed", detail="device fixture sha mismatch")
         return rec
     started = time.monotonic()
@@ -282,7 +289,7 @@ def one_run(adb, outroot, rid, case, launch_case, timeout, fx):
         rec.update(status="failed", detail="required device artifacts missing or unreadable")
         return rec
     run = json.loads(blobs['run.json'])
-    problem = validate_decode(term, run, blobs['events.jsonl'], rid, launch_case)
+    problem = validate_decode(term, run, blobs['events.jsonl'], rid, launch_case, expected_sha=expected_sha)
     if problem:
         rec['decodeError'] = problem
     try:
@@ -349,9 +356,10 @@ def main():
         fx = fx_path.read_bytes()
         hs = sha_bytes(fx)
         man["host"] = {"fixture": str(fx_path), "sha256": hs,
-                       "known_sha256": KNOWN_SHA, "match": hs == KNOWN_SHA,
+                       "known_sha256s": list(FIXTURE_PROFILES), "match": hs in FIXTURE_PROFILES,
+                       "fixture_profile": FIXTURE_PROFILES.get(hs),
                        "python": platform.python_version(), "os": platform.platform()}
-        if hs != KNOWN_SHA:
+        if hs not in FIXTURE_PROFILES:
             raise RuntimeError("fixture sha mismatch; refusing to touch device")
 
         env = os.environ.copy()
@@ -399,7 +407,7 @@ def main():
         per_leg_timeout = SHORT_T if a.case == "short-abba" else timeout_for(a.case)
         for label, launch in legs_for(a.case):
             rid = uuid.uuid4().hex
-            rec = one_run(adb, outroot, rid, label, launch, per_leg_timeout, fx)
+            rec = one_run(adb, outroot, rid, label, launch, per_leg_timeout, fx, hs)
             man["runs"].append(rec)
             atomic(outroot / "manifest.json", json.dumps(man, indent=2))
         man["status"] = ("success" if man["runs"] and

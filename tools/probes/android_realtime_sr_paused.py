@@ -9,7 +9,7 @@ import sys
 import uuid
 from pathlib import Path
 
-from tools.probes.android_realtime_sr_device import Adb, KNOWN_SHA, PKG, device_sha, push_fixture
+from tools.probes.android_realtime_sr_device import Adb, FIXTURE_PROFILES, PKG, device_sha, push_fixture
 
 
 def text(value):
@@ -74,8 +74,12 @@ def main():
     adb = Adb(args.serial)
     try:
         fixture = args.fixture.read_bytes()
-        if hashlib.sha256(fixture).hexdigest() != KNOWN_SHA:
-            raise RuntimeError("Fixture SHA does not match KNOWN_SHA")
+        fixture_sha = hashlib.sha256(fixture).hexdigest()
+        if fixture_sha not in FIXTURE_PROFILES:
+            raise RuntimeError("Fixture SHA is not in FIXTURE_PROFILES")
+        fixture_profile = FIXTURE_PROFILES[fixture_sha]
+        host["fixture_sha256"] = fixture_sha
+        host["fixture_profile"] = fixture_profile
         project = args.project.resolve()
         target = args.apk.resolve() if args.apk is not None else project / "examples/android-realtime-sr/build/outputs/apk/debug/android-realtime-sr-debug.apk"
         tests = list((project / "examples/android-realtime-sr/build/outputs/apk/androidTest/debug").glob("*.apk"))
@@ -103,7 +107,9 @@ def main():
         if made[0]:
             raise RuntimeError(f"Could not create private run directory: {text(made)}")
         push_fixture(adb, fixture_remote, fixture)
-        if device_sha(adb, fixture_remote) != KNOWN_SHA:
+        device_fixture_sha = device_sha(adb, fixture_remote)
+        host["device_fixture_sha256"] = device_fixture_sha
+        if device_fixture_sha != fixture_sha:
             raise RuntimeError("Device fixture SHA mismatch")
         command = ["adb", "-s", args.serial, "shell", "am", "instrument", "-w", "-e", "runId", run_id,
                    f"{PKG}.test/io.ondeviceai.realtimesr.PlaybackUiProbe"]

@@ -52,6 +52,30 @@ class ValidateDecodeTests(unittest.TestCase):
         term, run, events = realistic_raw()
         self.assertIsNone(probe.validate_decode(term, run, events, RUN_ID, 'original-egl'))
 
+    def test_explicit_expected_sha_accepts_only_verified_fixture_profiles(self):
+        term, run, events = realistic_raw()
+        sha_540p = 'e698bee8c98c3158eb5e99e26f1cbe13334b52557720b2129a3e31dd2fa67dcb'
+        run['fixtureSha256'] = sha_540p
+        self.assertIsNone(
+            probe.validate_decode(term, run, events, RUN_ID, 'original-egl', expected_sha=sha_540p)
+        )
+
+        run['fixtureSha256'] = probe.KNOWN_SHA
+        self.assertIsNotNone(
+            probe.validate_decode(term, run, events, RUN_ID, 'original-egl', expected_sha=sha_540p)
+        )
+
+        run['fixtureSha256'] = sha_540p
+        self.assertIsNotNone(
+            probe.validate_decode(term, run, events, RUN_ID, 'original-egl', expected_sha=probe.KNOWN_SHA)
+        )
+
+        unknown_sha = '0000000000000000000000000000000000000000000000000000000000000000'
+        run['fixtureSha256'] = unknown_sha
+        self.assertIsNotNone(
+            probe.validate_decode(term, run, events, RUN_ID, 'original-egl', expected_sha=unknown_sha)
+        )
+
     def test_rejects_wrong_pts(self):
         term, run, events = realistic_raw()
         rows = [json.loads(line) for line in events.splitlines()]

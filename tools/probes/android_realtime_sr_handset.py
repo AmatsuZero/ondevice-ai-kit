@@ -6,7 +6,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from tools.probes.android_realtime_sr_device import KNOWN_SHA, PKG, sha_file
+from tools.probes.android_realtime_sr_device import FIXTURE_PROFILES, PKG, sha_file
 from tools.probes.android_google_sr_device import PROBE_OK
 
 
@@ -92,8 +92,9 @@ def main():
                 raise RuntimeError(f"required tool unavailable: {tool}")
 
         fixture_hash = sha_file(paths["fixture"])
-        if fixture_hash.lower() != KNOWN_SHA.lower():
-            raise RuntimeError("fixture hash does not match KNOWN_SHA")
+        if fixture_hash.lower() not in FIXTURE_PROFILES:
+            raise RuntimeError("fixture hash is not in FIXTURE_PROFILES")
+        fixture_profile = FIXTURE_PROFILES[fixture_hash.lower()]
 
         expected = {
             "apk": PKG,
@@ -112,7 +113,8 @@ def main():
             if not match or match.group(1) != expected[name]:
                 raise RuntimeError(f"unexpected APK package for {name}")
 
-        summary["preflight"] = {"status": "running", "serial": args.serial, "sha256": hashes}
+        summary["preflight"] = {"status": "running", "serial": args.serial, "sha256": hashes,
+                                "fixture_profile": fixture_profile}
 
         def adb(*argv):
             result = run(["adb", "-s", args.serial, *argv])
@@ -173,6 +175,7 @@ def main():
             },
             "surfaceflinger_gles": gles, "gpu_evidence_available": bool(gles),
             "wm_size": size, "gms_present": gms, "sha256": hashes,
+            "fixture_profile": fixture_profile,
         }
         if args.preflight_only:
             summary["status"] = "preflight-success"
