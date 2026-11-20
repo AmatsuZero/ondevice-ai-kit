@@ -1,17 +1,37 @@
 # Android 播放时超分：覆盖与验证记录
 
-2026-11-20。首轮用与 iOS 相同的 CuNNy 1×8 BOX 做 2× 增强。在 Android API 36 模拟器上，独立 Demo 已能边解码 H.264/AAC 边做 GLES 增强；原画达到片长附近，强制 CuNNy 在软件 GPU 上明显跟不上。另以独立参考验证了整帧 1080p → 4K 亮度。真机覆盖、动态盲评和持续实时性分别验收。
+更新至 2026-11-21。独立播放器用与 iOS 相同的 CuNNy 1×8 BOX 做 2× 亮度增强。首台 Android 真机 TECNO KM9 的像素结果通过，但 1080p/30 播放时两场强制增强均没有增强帧确认上屏；自动回退使播放时长接近片长。以下分别列出真机、模拟器和离线导出的证据。
 
 | 环境或方案 | 已验证 | 尚无证据 |
 |---|---|---|
 | API 36，Android Emulator / ANGLE SwiftShader，GLES 3.1 | 有声 30 秒片 A/B/B/A 四场完整解码；原画和 CuNNy 均有 EGL 提交。离屏整帧和四个时刻的有参考重建 | 手机 GPU 性能、真实显示面上的颜色、逐帧上屏及长期表现 |
 | API 37，Android 17 / Google Play 16 KB 系统映像，SwiftShader GLES 3.1 | 同一个普通 APK 的自动模式解码 900 帧，900 次原画提交，首末帧间隔 30.28 s；Google 验证包探测不支持 | 手机 GPU 性能及显示延迟；不能把软件模拟器结果推广到 Android 17 手机 |
-| API 35，TECNO KM9 / MT6835 / Mali-G57 MC2 | 现场曾读到 GLES 3.2、1080×2400、有 GMS。已有独立的 LiteRT 离线结果 | 本次播放测试时未连接；CuNNy 和 Google Upscale 均未跑 |
+| API 35，TECNO KM9 / MT6835 / Mali-G57 MC2 | GLES 3.2 真机五场播放、逐帧上屏时间、暂停同帧、整帧 CPU 对照；1080p 实时增强未达标。Google SDK 返回 UNSUPPORTED | 30 分钟、运动盲评、其他机型或驱动 |
 | API 26/27、其他 Adreno/Mali 手机 | API 26 是实验模块的 minSdk | 真机兼容性、GLES 3.1 能力、增强可用率与观感 |
 | LiteRT 1.4.2 / ESRGAN 4× | [既有 Android 文件导出](android-video-sr-demo.md)；实机同编码条件下，[飞鸟](f11-android-sr-controlled-20261106.md)和[瀑布](f11-android-sr-waterfall-20261106.md)的平均 PSNR/SSIM 均低于双线性 | 不据此推断同场景 CuNNy 2× 或实时播放 |
-| Google Play services Media Enhancement | 单独的 API 30+ 实验包在无 GMS 的 API 36 返回 MISSING_SERVICES；在有 GMS 的 API 37 返回 UNSUPPORTED。默认包不含 Media Enhancement SDK | 是否支持这条片源、模型是否可用、实际倍率与耗时 |
+| Google Play services Media Enhancement | 单独的 API 30+ 实验包在无 GMS 的 API 36 返回 MISSING_SERVICES；在有 GMS 的 API 37 模拟器和 API 35 TECNO 真机均返回 UNSUPPORTED。默认包不含 Media Enhancement SDK | 是否支持这条片源、模型是否可用、实际倍率与耗时 |
 
-## 30 秒的视频实际怎样播放
+## TECNO KM9 真机：2026-11-21
+
+Android 15 / API 35，MT6835，Mali-G57 MC2，GLES 3.2 r38p1，1080×2400 屏幕。用同一普通 APK 播放同一段 30 秒 H.264/AAC、BT.709 视频，五场均解码 900 帧。4K 指内部 2× 亮度输出尺寸。**建议这台手机播放 1080p/30 时使用原画。**
+
+| 运行 | 首末帧取帧间隔（秒） | 确认上屏原画 / 900 帧 | 确认上屏增强（帧） | 取帧至上屏 P95（ms） |
+|---|---:|---:|---:|---:|
+| A1 原画 | 29.883 | 892 | 0 | 61.84 |
+| B1 强制 CuNNy | 55.563 | 573 | 0 | 147.07 |
+| B2 强制 CuNNy | 55.327 | 575 | 0 | 146.27 |
+| A2 原画 | 29.882 | 898 | 0 | 62.20 |
+| 自动 | 29.898 | 882 | 0 | 62.82 |
+
+每个确认的显示时间均通过 EGL frame ID 与源帧配对；未确认不等于物理丢帧。原画两场也超过取帧至上屏 P95 ≤33⅓ ms 的标准，不能把全部延迟归因于 CuNNy。两场强制增强的有效 GPU 计时分别为 426/427、423/424 个作业，样本 P95 为 **127.32、127.11 ms**（目标 ≤25 ms）；各缺一次计时，全作业 GPU 门槛记为未验证。实际上屏的按时增强率均为 0/900，短测不通过，不启动 30 分钟长测。
+
+自动模式启动 7 个增强作业，成功提交 899 帧原画：15 帧尝试后回退、884 帧未请求增强，882 帧能确认上屏。暂停到源帧 66（2.200 秒），原画→CuNNy 有 47,454 个 RGB 像素变化，切回原画的 RGBA 字节完全一致。跳转至 15 秒后续播，退后台前为 17 秒、恢复时仍为 17 秒，随后前进到 19 秒。
+
+**画质单独验证：** 在手机上解码固定片第 8 秒完整亮度帧并放大到 4K，同一输入的独立 CPU 参考中，8,276,885/8,294,400 个像素完全一致，其余 17,515 个仅差一个灰阶。另将四个固定参考帧的 540p 输入交给手机 GPU，重建至 1080p：CuNNy 平均亮度 PSNR/SSIM 为 **39.5447 dB / 0.991465**，双线性为 **36.6491 dB / 0.982712**。这是暂停或离屏的结果，未做运动盲评。
+
+Google 实验包装在同一台手机上，GMS 为 25.10.36，官方 SDK 返回 `UNSUPPORTED`，因此没有 Google 增强输出可比较。此结果只覆盖这台 KM9。[逐场读数、画质和 SHA-256](android-realtime-sr-km9-20261121.json) · [五场原始时间记录（ZIP，不含视频或截图）](android-realtime-sr-km9-20261121-events.zip)。解压后可用 `python3 -m tools.probes.android_realtime_sr_report assess --index index.json --run b1 --out b1-result.json` 复算强制增强首场（从仓库根运行，按解压位置填写路径）。
+
+## 模拟器：30 秒的视频实际怎样播放
 
 固定片 1920×1080、30 fps、BT.709 SDR、有声 H.264/AAC，900 帧。两种模式使用相同解码、音频时钟、窗口和显示大小（模拟屏幕 1080×2340）。CuNNy 的 4K 是内部亮度计算尺寸。下表为原画／强制增强／强制增强／原画四个独立运行，均解码序号 0–899，音频末位置 30.009–30.016 秒。[逐场记录、APK/片源摘要和计时证据](android-realtime-sr-playback-emulator-20261120.json)。
 
@@ -51,7 +71,7 @@ rtk proxy python3 tools/probes/android_google_sr_device.py --serial "$SERIAL" --
 
 ## 真机复测
 
-11 月 20 日复查：Mac 的 USB 清单可见 TECNO，针对该机的 `adb get-state` 返回 `device not found`。本轮未在手机安装或播放。选择已开启 USB 调试的测试手机 `SERIAL`，沿用上节固定片和 APK 执行：
+11 月 20 日复查：Mac 的 USB 清单可见 TECNO，针对该机的 `adb get-state` 返回 `device not found`。11 月 21 日重连后已完成上述真机短测。选择已开启 USB 调试的测试手机 `SERIAL`，沿用上节固定片和 APK 执行：
 
 ```sh
 rtk proxy python3 -m tools.probes.android_realtime_sr_handset \
@@ -69,7 +89,7 @@ rtk proxy python3 -m tools.probes.android_realtime_sr_handset \
 
 入口新增后，22 个主机用例通过；用留存的 API 36 报告复核，四场 A/B/B/A 和一场自动模式均完成解码，但因缺少显示计时，短测仍判为 `unverified`。在主机上用错误包名的真实 APK 测试，两个驱动均在首次 ADB 操作前拒绝。
 
-Android Demo 面向 API 26+，用自写的 GLES 3.1 CuNNy 做 2× 增强，来不及时回退同帧原画；Google 是独立的可选能力探测，Vulkan 尚未实现。Android 真机耗时和 30 分钟测试仍未验证。快速对照可参见 [iOS demo 交接说明](ios-realtime-sr-demo-handoff.md)：iOS Demo 的部署目标为 15.1；支持系统 2× 的设备和片源优先用系统，其余按轻量 Metal → 优化 CuNNy → 原画选择；已在 iPhone 16 Pro Max、iOS 27.2.1 验证。
+Android Demo 面向 API 26+，用自写的 GLES 3.1 CuNNy 做 2× 增强，来不及时回退同帧原画；Google 是独立的可选能力探测，Vulkan 尚未实现。KM9 短测已完成，未通过 1080p 实时门槛；30 分钟测试未启动。快速对照可参见 [iOS demo 交接说明](ios-realtime-sr-demo-handoff.md)：iOS Demo 的部署目标为 15.1；支持系统 2× 的设备和片源优先用系统，其余按轻量 Metal → 优化 CuNNy → 原画选择；已在 iPhone 16 Pro Max、iOS 27.2.1 验证。
 
 ## 像素有没有算对
 
@@ -101,11 +121,12 @@ JAR="$ANDROID_HOME/platforms/android-36/android.jar"
 rtk proxy mkdir -p "$TMP/classes"
 rtk proxy "$JAVA_HOME/bin/javac" --release 8 -cp "$JAR" -d "$TMP/classes" "$D/reference/SrFixtureCrop.java"
 rtk proxy "$ANDROID_HOME/build-tools/36.0.0/d8" --min-api 26 --lib "$JAR" --output "$TMP/crop.jar" "$TMP/classes/io/ondeviceai/realtimesr/validation/SrFixtureCrop.class"
-rtk proxy "$NDK/toolchains/llvm/prebuilt/$HOST/bin/aarch64-linux-android26-clang++" -std=c++17 -O2 "$D/reference/pixel_probe.cpp" -lEGL -lGLESv3 -o "$TMP/pixel-probe"
+rtk proxy "$NDK/toolchains/llvm/prebuilt/$HOST/bin/aarch64-linux-android26-clang++" -std=c++17 -static-libstdc++ -O2 "$D/reference/pixel_probe.cpp" -lEGL -lGLESv3 -o "$TMP/pixel-probe"
 rtk proxy adb -s "$SERIAL" shell mkdir "$R"
 rtk proxy adb -s "$SERIAL" push "$D"/src/main/assets/sr/*.comp "$TMP/crop.jar" "$TMP/pixel-probe" "$R/"
 rtk proxy adb -s "$SERIAL" push "$FIXTURE" "$R/fixture.mp4"
 rtk proxy adb -s "$SERIAL" shell chmod 700 "$R/pixel-probe"
+rtk proxy adb -s "$SERIAL" shell chmod 444 "$R/crop.jar"
 rtk proxy adb -s "$SERIAL" shell "CLASSPATH=$R/crop.jar app_process /system/bin io.ondeviceai.realtimesr.validation.SrFixtureCrop $R/fixture.mp4 8000000 0 0 1920 1080 $R/input.y"
 rtk proxy adb -s "$SERIAL" shell "$R/pixel-probe" "$R" 1920 1080 "$R/input.y" "$R/output.y"
 rtk proxy adb -s "$SERIAL" pull "$R/input.y" "$TMP/input.y"

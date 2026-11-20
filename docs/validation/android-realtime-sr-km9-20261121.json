@@ -1,0 +1,489 @@
+{
+  "dateLocal": "2026-11-21",
+  "testedSource": "319be7b0b1bbd08a16b94126704120abf3e5ac7d",
+  "device": {
+    "api": 35,
+    "manufacturer": "TECNO",
+    "model": "TECNO KM9",
+    "hardware": "mt6835",
+    "gles_properties": {
+      "ro.opengles.version": "196610",
+      "ro.hardware.egl": "meow"
+    },
+    "surfaceflinger_gles": "GLES: ARM, Mali-G57 MC2, OpenGL ES 3.2 v1.r38p1",
+    "gpu_evidence_available": true,
+    "wm_size": "Physical size: 1080x2400",
+    "gms_present": true
+  },
+  "hashes": {
+    "fixture": "df677798a8604a7a6289fcf50a0fef3844a047631e0041ae7d5563c55f3746ec",
+    "apk": "ca320115ac64fbc7e446d7cb8a32dc09c82c0c8ba69e8382a5b353b3900c879c",
+    "test_apk": "e637111239f3eafbfcfed3d8c6b6da9794eeac5a21c1505d5a32e4b767acc5e1",
+    "google_apk": "432764e54901b2ebe7278a6538db1847bb59ea8fe349815b0ff869df08fb7292"
+  },
+  "fixture": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "frames": 900,
+    "encoding": "H.264/AAC, BT.709 SDR",
+    "internalLumaOutput": [
+      3840,
+      2160
+    ]
+  },
+  "runs": [
+    {
+      "runId": "60be44db3e854327bc08b8f2e3e97e6a",
+      "case": "original-egl",
+      "completed": true,
+      "sourceFrames": 900,
+      "lastAudioUs": 29994666,
+      "firstToLastLatchSeconds": 29.883,
+      "stages": {
+        "decodeRelease": 900,
+        "latch": 900,
+        "swap": 900,
+        "display": 892
+      },
+      "submitted": {
+        "ORIGINAL": 900
+      },
+      "actualDisplayByBackend": {
+        "ORIGINAL": 892
+      },
+      "submitReasons": {
+        "enhancement_not_requested": 900
+      },
+      "noSuccessfulSwap": 0,
+      "frameCounts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 24,
+        "late": 868,
+        "unconfirmed": 8,
+        "missed": 876
+      },
+      "gpuElapsedNs": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "latchToDisplayNs": {
+        "count": 892,
+        "minNs": 21871692,
+        "maxNs": 72450461,
+        "p95Ns": 61843692
+      },
+      "gates": {
+        "gpu": "notApplicable",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "notApplicable"
+      },
+      "sha256": {
+        "terminal.json": "e48fec45ca8a9a89886d94d60371bd07d26c4e7553c2de48795670a3494366ff",
+        "run.json": "34716620b9345ccb6eae60764d53d77a43ed114ce6c7b915cda2a4ce1e7df7e4",
+        "events.jsonl": "4b144d10b66b0183066d7606895f2ec17a6d3b9a9787bb3ad675e0e5f1bf80ed"
+      }
+    },
+    {
+      "runId": "4092f7189eee449cb474cdfe275eb6cd",
+      "case": "cunny",
+      "completed": true,
+      "sourceFrames": 900,
+      "lastAudioUs": 30015999,
+      "firstToLastLatchSeconds": 55.563,
+      "stages": {
+        "decodeRelease": 900,
+        "latch": 900,
+        "srStart": 427,
+        "swap": 880,
+        "display": 573,
+        "srEnd": 427
+      },
+      "submitted": {
+        "ORIGINAL": 880
+      },
+      "actualDisplayByBackend": {
+        "ORIGINAL": 573
+      },
+      "submitReasons": {
+        "enhancement_not_ready": 880
+      },
+      "noSuccessfulSwap": 20,
+      "frameCounts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 0,
+        "late": 573,
+        "unconfirmed": 327,
+        "missed": 900
+      },
+      "gpuElapsedNs": {
+        "count": 426,
+        "minNs": 118039080,
+        "maxNs": 157894784,
+        "p95Ns": 127319544
+      },
+      "latchToDisplayNs": {
+        "count": 573,
+        "minNs": 21654770,
+        "maxNs": 182679385,
+        "p95Ns": 147072616
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "fail"
+      },
+      "sha256": {
+        "terminal.json": "cd4914392ed6e02e2b871602476799c28e6b8cbc3183d30c867b4ed684ea422f",
+        "run.json": "891ee4a9dbbbc838841a147c96b013a16b6b306d8b8c14b3897f017d185d7ae5",
+        "events.jsonl": "fe008e0d1a46dd5a75839dc428ec7362e6dd686a9d472c2f3eb25543733a746b"
+      }
+    },
+    {
+      "runId": "e41a77c5d498493b9009db07f57799b7",
+      "case": "cunny",
+      "completed": true,
+      "sourceFrames": 900,
+      "lastAudioUs": 30015999,
+      "firstToLastLatchSeconds": 55.327,
+      "stages": {
+        "decodeRelease": 900,
+        "latch": 900,
+        "srStart": 424,
+        "swap": 875,
+        "display": 575,
+        "srEnd": 424
+      },
+      "submitted": {
+        "ORIGINAL": 875
+      },
+      "actualDisplayByBackend": {
+        "ORIGINAL": 575
+      },
+      "submitReasons": {
+        "enhancement_not_ready": 875
+      },
+      "noSuccessfulSwap": 25,
+      "frameCounts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 0,
+        "late": 575,
+        "unconfirmed": 325,
+        "missed": 900
+      },
+      "gpuElapsedNs": {
+        "count": 423,
+        "minNs": 118414776,
+        "maxNs": 144610544,
+        "p95Ns": 127114848
+      },
+      "latchToDisplayNs": {
+        "count": 575,
+        "minNs": 18813462,
+        "maxNs": 159879385,
+        "p95Ns": 146271692
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "fail"
+      },
+      "sha256": {
+        "terminal.json": "3043a8ad754275105845ae0c6eda868994237d5a2241aa61b8463d344b44b833",
+        "run.json": "0fa2e0face60380dd40969c8210375c6af0b8f37a173d69cfd999d06d9f9a0a3",
+        "events.jsonl": "c7bb23502b7aa64e55231bb716ba59f07f6e3fa9a4de64cc039f743a2fe9b9e5"
+      }
+    },
+    {
+      "runId": "94366035e62c4ac1bbf9ce4d1175ee86",
+      "case": "original-egl",
+      "completed": true,
+      "sourceFrames": 900,
+      "lastAudioUs": 29994666,
+      "firstToLastLatchSeconds": 29.882,
+      "stages": {
+        "decodeRelease": 900,
+        "latch": 900,
+        "swap": 900,
+        "display": 898
+      },
+      "submitted": {
+        "ORIGINAL": 900
+      },
+      "actualDisplayByBackend": {
+        "ORIGINAL": 898
+      },
+      "submitReasons": {
+        "enhancement_not_requested": 900
+      },
+      "noSuccessfulSwap": 0,
+      "frameCounts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 10,
+        "late": 888,
+        "unconfirmed": 2,
+        "missed": 890
+      },
+      "gpuElapsedNs": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "latchToDisplayNs": {
+        "count": 898,
+        "minNs": 26043077,
+        "maxNs": 80849231,
+        "p95Ns": 62196692
+      },
+      "gates": {
+        "gpu": "notApplicable",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "notApplicable"
+      },
+      "sha256": {
+        "terminal.json": "ecf7283b1b3f9737c2db23cf2d77484aa4f6903eaa512f4d5d19b30b96d54b8c",
+        "run.json": "150c428a9049d6256b03b766504f31e5ce36e263a4a1d32207a4b9f768aad5b3",
+        "events.jsonl": "5d8da5a850abf5defe23d61648053338a4b68ec380b22831e1131b7f252b801a"
+      }
+    },
+    {
+      "runId": "77a586ea1d254a9c88288e18224ca807",
+      "case": "auto",
+      "completed": true,
+      "sourceFrames": 900,
+      "lastAudioUs": 29994666,
+      "firstToLastLatchSeconds": 29.898,
+      "stages": {
+        "decodeRelease": 900,
+        "latch": 900,
+        "srStart": 7,
+        "swap": 899,
+        "display": 882,
+        "srEnd": 7
+      },
+      "submitted": {
+        "ORIGINAL": 899
+      },
+      "actualDisplayByBackend": {
+        "ORIGINAL": 882
+      },
+      "submitReasons": {
+        "enhancement_not_ready": 15,
+        "enhancement_not_requested": 884
+      },
+      "noSuccessfulSwap": 1,
+      "frameCounts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 22,
+        "late": 860,
+        "unconfirmed": 18,
+        "missed": 878
+      },
+      "gpuElapsedNs": {
+        "count": 6,
+        "minNs": 130502776,
+        "maxNs": 140528544,
+        "p95Ns": 140528544
+      },
+      "latchToDisplayNs": {
+        "count": 882,
+        "minNs": 20352077,
+        "maxNs": 203647615,
+        "p95Ns": 62818231
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "fail"
+      },
+      "sha256": {
+        "terminal.json": "75ce84ebbf29244198aea2ef688a3851594b60aaaafcca96689af9aa50dc0b03",
+        "run.json": "8a6d1bfc7c4b738b508c9d3792dc2becfac81cf561d53d72722bc2955522df56",
+        "events.jsonl": "d2c7349138e94883cd4a57808014bbd27074e7ebcd94d566a3141d110700d596"
+      }
+    }
+  ],
+  "shortGate": "fail",
+  "longRun": "not run",
+  "timingNotes": "Display counts match frame-id EGL timestamps. Source classification requires both the target time slot and latch-to-display <= 1/30s. Unconfirmed is not proven physically dropped. Each enhanced/auto run has one GPU job without a valid sample; reported P95 covers valid samples only.",
+  "eventsArchive": {
+    "path": "android-realtime-sr-km9-20261121-events.zip",
+    "sha256": "99b4916e874a4abb4f519ab7bd3f8fb47196e38dab902a862a8287237e21ec1f",
+    "order": [
+      "a1",
+      "b1",
+      "b2",
+      "a2",
+      "auto"
+    ]
+  },
+  "paused": {
+    "runId": "2af97442895a4eec89eaec526bd1e01b",
+    "swaps": {
+      "sources": [
+        "ORIGINAL",
+        "CUNNY",
+        "ORIGINAL"
+      ],
+      "ptsUs": 2200000,
+      "sourceOrdinal": 66,
+      "generations": [
+        4,
+        5,
+        6
+      ]
+    },
+    "pixels": {
+      "sha256": [
+        "efc166e9b4ec4d0547b32c4ac194f2ddd9ac1fd4f9681d92e0a1d3712d0038d1",
+        "f50536f6a8bd140cb5484a657a7c752b49fd2d5768c46ff2a1227ccf0caa8fb4",
+        "efc166e9b4ec4d0547b32c4ac194f2ddd9ac1fd4f9681d92e0a1d3712d0038d1"
+      ],
+      "differingRgbPixels": [
+        47454,
+        47454,
+        0
+      ],
+      "pixelCount": 2072520
+    },
+    "dimensions": [
+      1080,
+      1919
+    ],
+    "seek": {
+      "type": "seek",
+      "displayedAtSeek": "00:15 / 00:30",
+      "displayedAfterAdvance": "00:17 / 00:30",
+      "decodedGeneration": 8,
+      "decodedPtsUs": 15000000
+    },
+    "lifecycle": {
+      "attempted": true,
+      "success": true,
+      "positionBeforeBackground": 17,
+      "positionAfterResume": 17,
+      "positionAfterResumeAdvance": 19,
+      "decodedGeneration": 9,
+      "decodedPtsUs": 17800000
+    }
+  },
+  "google": {
+    "status": "UNSUPPORTED",
+    "apiLevel": 35,
+    "apkSha256": "432764e54901b2ebe7278a6538db1847bb59ea8fe349815b0ff869df08fb7292",
+    "gmsVersion": "25.10.36 (260400-739992411)",
+    "detail": "This device is not supported.",
+    "upscaleObserved": false
+  },
+  "fullFrameParity": {
+    "ptsUs": 8000000,
+    "inputSha256": "2efd0f8020309bbf36cc3fb0bf92aef409d1bb12abd8ba008ba2731b477398f8",
+    "cpuSha256": "c01724529a63d5f2851042ff3a1e7fa020070bed912e0a65639dde8afa81c69b",
+    "gpuSha256": "5e4385b8ff110de0db1d59e077a9b51e3520d8190cbe5e730e7767cf48b6b2d5",
+    "outputPixels": 8294400,
+    "maxAbs8": 1,
+    "absErrorHistogram": {
+      "0": 8276885,
+      "1": 17515
+    }
+  },
+  "staticQuality": {
+    "method": "Four frozen luma inputs, box-downsampled from the same reference frames to 960x540, processed on the handset GLES GPU, scored at 1920x1080 (coded Y, peak 255, FFmpeg gray SSIM). Equal-weight mean across frames; offline quality, not display performance.",
+    "frames": [
+      {
+        "ptsUs": 2000000,
+        "refSha256": "053e390686a7f56263e4ac11cb7315039e832d843ce3520b9bb1d2ebe00f328f",
+        "lowSha256": "2231cdccdb37eb3dc28c9f4202f6ee7d62f777565496a4ef5b53b9451d05289d",
+        "cunny": {
+          "sha256": "6abb11b14c129558d46a86c66df18c01fc6014fbc7a8bae415b631cbcf038017",
+          "codedYpsnrDb": 39.508133,
+          "ssim": 0.991466,
+          "sumSquaredError": 15100526
+        },
+        "bilinear": {
+          "codedYpsnrDb": 36.624168,
+          "ssim": 0.982709,
+          "sha256": "0557a4a348d31d987bc2674ecbd61644faf2b6ef09821c8de192fee5370f38b4",
+          "sumSquaredError": 29335169
+        }
+      },
+      {
+        "ptsUs": 8000000,
+        "refSha256": "2efd0f8020309bbf36cc3fb0bf92aef409d1bb12abd8ba008ba2731b477398f8",
+        "lowSha256": "02ddb1f0c24e8f1cebc06c933c1624e4f080be5eaa245d419aae244ecf09a391",
+        "cunny": {
+          "sha256": "8bf6529086d670593b820719622b01e824e84f5a4881bf45a39fd59a92fb3cce",
+          "codedYpsnrDb": 39.532809,
+          "ssim": 0.991514,
+          "sumSquaredError": 15014969
+        },
+        "bilinear": {
+          "codedYpsnrDb": 36.633581,
+          "ssim": 0.982736,
+          "sha256": "994b83dd86be8bac584fe980c217864212aed4a325852605d4fa033209ba1cc9",
+          "sumSquaredError": 29271653
+        }
+      },
+      {
+        "ptsUs": 17000000,
+        "refSha256": "dae912d0784be7a7fb9a0b2b1179752e67fb904b2d6250d9d7441ee87331f127",
+        "lowSha256": "51daa66e99c10b8d5a1098bf6412eb18f8f699970fb8ebdc6a01fcfbf65d5037",
+        "cunny": {
+          "sha256": "becabdee559abac3f9df7bc274cec871456db51bd117c81eded191af409146f8",
+          "codedYpsnrDb": 39.489434,
+          "ssim": 0.991323,
+          "sumSquaredError": 15165681
+        },
+        "bilinear": {
+          "codedYpsnrDb": 36.624725,
+          "ssim": 0.982622,
+          "sha256": "2523c235406973275edeffd952a5efb84f9bc8e610863513d9f3da7995cba976",
+          "sumSquaredError": 29331404
+        }
+      },
+      {
+        "ptsUs": 25000000,
+        "refSha256": "d8a67d3d73dd045c162c751608911d558e5470750c66102d5eff0fe79c12ee44",
+        "lowSha256": "2b607afca02c32ad579cc2d165943b0a29ca52d12a90bc17cce07609604f9e30",
+        "cunny": {
+          "sha256": "33ed948f77c2d11765870185abf30d1c8247af557f3d7be20590ef53068f51b9",
+          "codedYpsnrDb": 39.648558,
+          "ssim": 0.991556,
+          "sumSquaredError": 14620072
+        },
+        "bilinear": {
+          "codedYpsnrDb": 36.713809,
+          "ssim": 0.98278,
+          "sha256": "0434812bd0bc948debafce44544daecbdb353fde7ed2219b6f3292267a107ec6",
+          "sumSquaredError": 28735879
+        }
+      }
+    ],
+    "mean": {
+      "cunny": {
+        "codedYpsnrDb": 39.544733,
+        "ssim": 0.991465
+      },
+      "bilinear": {
+        "codedYpsnrDb": 36.649071,
+        "ssim": 0.982712
+      }
+    }
+  },
+  "limits": [
+    "Single phone/build/driver and fixed source. Physical A/V synchronization and subjective moving-image preference not measured. No Adreno, API 26/27 phone or 30-minute run."
+  ]
+}
