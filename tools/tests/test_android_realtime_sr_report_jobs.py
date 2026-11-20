@@ -1,5 +1,5 @@
 import unittest
-from test_android_realtime_sr_report import (assess, make_index, make_run, base_events, dropped_stage, ORIGINAL_ORD, LATE_ORD, UNCONFIRMED_ORD)
+from tools.tests.test_android_realtime_sr_report import (assess, make_index, make_run, base_events, dropped_stage, ORIGINAL_ORD, LATE_ORD, UNCONFIRMED_ORD)
 
 
 class ReportJobCoverageTests(unittest.TestCase):

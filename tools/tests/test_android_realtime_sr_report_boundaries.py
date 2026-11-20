@@ -1,5 +1,5 @@
 import unittest
-from test_android_realtime_sr_report import assess, make_index, make_run, dropped_stage, base_events
+from tools.tests.test_android_realtime_sr_report import assess, make_index, make_run, dropped_stage, base_events
 
 
 class TestAndroidRealtimeSrStrictThreshold(unittest.TestCase):
