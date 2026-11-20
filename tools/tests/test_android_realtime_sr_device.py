@@ -1,0 +1,81 @@
+import json
+import unittest
+
+from tools.probes import android_realtime_sr_device as probe
+from tools.probes.android_realtime_sr_report import assess
+from tools.tests.test_android_realtime_sr_report import make_index, make_run, latch
+
+
+RUN_ID = '0123456789abcdef0123456789abcdef'
+GENERATION = 7
+
+
+def realistic_raw():
+    run = {
+        'schemaVersion': 1,
+        'runId': RUN_ID,
+        'fixtureSha256': probe.KNOWN_SHA,
+        'generation': GENERATION,
+        'loops': 1,
+        'mode': 'ORIGINAL',
+        'displayTimingSupported': False,
+        'completed': True,
+    }
+    term = {
+        'runId': RUN_ID,
+        'case': 'original-egl',
+        'status': 'completed',
+        'detail': 'decode/audio complete',
+        'frameCallbacks': 900,
+        'lastAudioUs': 30_000_000,
+        'presentationSupported': False,
+        'swapBackends': {},
+        'displayCount': 0,
+    }
+    rows = [
+        {
+            'runId': RUN_ID,
+            'generation': GENERATION,
+            'loop': 0,
+            'sourceOrdinal': ordinal,
+            'stage': 'decodeRelease',
+            'ptsUs': ordinal * 1_000_000 // 30,
+            'targetNs': ordinal * 1_000_000_000 // 30,
+        }
+        for ordinal in range(900)
+    ]
+    return term, run, ('\n'.join(json.dumps(row) for row in rows) + '\n').encode()
+
+
+class ValidateDecodeTests(unittest.TestCase):
+    def test_valid_realistic_raw(self):
+        term, run, events = realistic_raw()
+        self.assertIsNone(probe.validate_decode(term, run, events, RUN_ID, 'original-egl'))
+
+    def test_rejects_wrong_pts(self):
+        term, run, events = realistic_raw()
+        rows = [json.loads(line) for line in events.splitlines()]
+        rows[37]['ptsUs'] += 10
+        events = ('\n'.join(json.dumps(row) for row in rows) + '\n').encode()
+        self.assertIn('ptsUs', probe.validate_decode(term, run, events, RUN_ID, 'original-egl'))
+
+    def test_rejects_bad_audio(self):
+        term, run, events = realistic_raw()
+        term['lastAudioUs'] = 28_000_000
+        self.assertEqual(
+            probe.validate_decode(term, run, events, RUN_ID, 'original-egl'),
+            'invalid lastAudioUs',
+        )
+
+    def test_late_latch_remains_valid_with_forward_target_window(self):
+        event = latch(0)
+        event['latchBeginNs'] = event['targetNs'] + 1
+        result = assess(make_index(1), make_run(), [event])
+        self.assertEqual(result['counts']['unconfirmed'], 1)
+        event['nextTargetNs'] = event['targetNs']
+        with self.assertRaises(ValueError):
+            assess(make_index(1), make_run(), [event])
+
+
+if __name__ == '__main__':
+    unittest.main()

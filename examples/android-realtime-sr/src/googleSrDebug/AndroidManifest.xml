@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <queries>
+        <package android:name="com.google.android.gms" />
+    </queries>
+    <application>
+        <uses-native-library android:name="libOpenCL.so" android:required="false" />
+        <uses-native-library android:name="libOpenCL-car.so" android:required="false" />
+        <uses-native-library android:name="libOpenCL-pixel.so" android:required="false" />
+        <uses-native-library android:name="libGLESv2.so" android:required="false" />
+        <uses-native-library android:name="libGLESv3.so" android:required="false" />
+        <activity
+            android:name="io.ondeviceai.realtimesr.SrRunActivity"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+        <activity
+            android:name="io.ondeviceai.realtimesr.GoogleProbeActivity"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+    </application>
+</manifest>

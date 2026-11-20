@@ -43,3 +43,7 @@ include(":android:backend-litert-sr")
 include(":android:backend-sherpa-asr")
 include(":android:backend-opencv-identity")
 if (providers.gradleProperty("enableSrQualityProbe").orNull == "true") include(":probes:android-sr-quality")
+
+if (providers.gradleProperty("enableRealtimeSrDemo").orNull == "true") {
+    include(":examples:android-realtime-sr")
+}
