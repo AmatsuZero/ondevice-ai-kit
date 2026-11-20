@@ -1,0 +1,225 @@
+{
+  "environment": "isolated Android emulator API36 / ANGLE SwiftShader GLES3.1",
+  "method": "three compute passes, RGBA8 Y8 readback, CPU scalar independent reference",
+  "perCase": {
+    "black": {
+      "width": 7,
+      "height": 5,
+      "outputPixels": 140,
+      "maxAbs8": 0,
+      "differentFromBilinear": 0,
+      "inputSHA256": "0d5535e13cc9708d0ff0289af2fae27e564b6bcbcd9242f5140d96957744a517",
+      "outputSHA256": "24045c10c12a89f4c11e3b88ea34558fcdf926a8c1008cd08cc33bc71407c774",
+      "cpuSHA256": "24045c10c12a89f4c11e3b88ea34558fcdf926a8c1008cd08cc33bc71407c774",
+      "firstMaxErrorXY": [
+        0,
+        0
+      ],
+      "readbackAlphaIs255": true
+    },
+    "corner": {
+      "width": 13,
+      "height": 7,
+      "outputPixels": 364,
+      "maxAbs8": 0,
+      "differentFromBilinear": 12,
+      "inputSHA256": "be2a92f8d66f541b6df15eeb33ac682f1e7da09c30dd5f3a611847a1fd5fccf4",
+      "outputSHA256": "9df92685b10e309a63d3582ea53e88f3f5f20f7dc07532e7a5c006f75195a60a",
+      "cpuSHA256": "9df92685b10e309a63d3582ea53e88f3f5f20f7dc07532e7a5c006f75195a60a",
+      "firstMaxErrorXY": [
+        0,
+        0
+      ],
+      "readbackAlphaIs255": true
+    },
+    "edge": {
+      "width": 9,
+      "height": 10,
+      "outputPixels": 360,
+      "maxAbs8": 1,
+      "differentFromBilinear": 188,
+      "inputSHA256": "eb4947f080864afa001b14e917071b7e0456a71fb2d7e63eb00a722e3024eecc",
+      "outputSHA256": "e1239b963840b7527e00b97889bbc453855ab3d69c83d546dfd50975913c6712",
+      "cpuSHA256": "5614e82e8f93b68e61f5eb03a5e9d5498f68031b8d428674ec22d1761094bb68",
+      "firstMaxErrorXY": [
+        5,
+        0
+      ],
+      "readbackAlphaIs255": true
+    },
+    "fixture-crop-8s": {
+      "width": 24,
+      "height": 16,
+      "outputPixels": 1536,
+      "maxAbs8": 0,
+      "differentFromBilinear": 0,
+      "inputSHA256": "0a84f19d6141e33f99d62511d1d54819ac1a1df9cca0fbbb423cc36a12b2cab1",
+      "outputSHA256": "f1653a27b9aaf9225ddc34b3b1e0ad0db1c00ad72a3b7a4d2fe1e591bf6aa961",
+      "cpuSHA256": "f1653a27b9aaf9225ddc34b3b1e0ad0db1c00ad72a3b7a4d2fe1e591bf6aa961",
+      "firstMaxErrorXY": [
+        0,
+        0
+      ],
+      "readbackAlphaIs255": true
+    },
+    "fixture-texture-8s": {
+      "width": 24,
+      "height": 16,
+      "origin": [
+        24,
+        0
+      ],
+      "selection": "highest summed horizontal Y8 gradient on a fixed nonoverlapping 24x16 grid at 8s; diagnostic, not a representative quality sample",
+      "outputPixels": 1536,
+      "maxAbs8": 1,
+      "differentFromBilinear": 1132,
+      "inputSHA256": "3535b3529739c6222be694eb246e570638d0316606479675b390a5d6e32ec64d",
+      "outputSHA256": "2cc214705e7ddd2581b29a626703f1ce8dda7af5abb58522214a04ecc17ecf18",
+      "cpuSHA256": "5b18d4cbf5997d396b48c34cba00b36e478611e77a8a7fa34b974811a9a4206f",
+      "firstMaxErrorXY": [
+        39,
+        0
+      ],
+      "readbackAlphaIs255": true
+    },
+    "fixture-android-mediacodec-8s": {
+      "decoder": "Android MediaExtractor + MediaCodec.getOutputImage, raw coded Y",
+      "ptsUs": 8000000,
+      "width": 24,
+      "height": 16,
+      "origin": [
+        24,
+        0
+      ],
+      "sourceWidth": 1920,
+      "sourceHeight": 1080,
+      "lumaRowStride": 1920,
+      "lumaPixelStride": 1,
+      "colorRange": 2,
+      "outputPixels": 1536,
+      "maxAbs8": 1,
+      "firstMaxErrorXY": [
+        4,
+        0
+      ],
+      "differentFromBilinear": 1124,
+      "inputSHA256": "439239a416049e62a3492b5bafc56d10e3a42bb19e2eb72e8c90529df8a79f20",
+      "outputSHA256": "f9ca6c1e2ed5a636cd8f5ae80ed567be974bd91a71dba5da195252b43dc57a2a",
+      "cpuSHA256": "433d380cf28e0b8f6789db87fb82d2b5b66e7a755d4ce88d5e3dc085918593e7",
+      "readbackAlphaIs255": true,
+      "inputMinMax": [
+        11,
+        144
+      ]
+    }
+  },
+  "videoInputSHA256": "df677798a8604a7a6289fcf50a0fef3844a047631e0041ae7d5563c55f3746ec",
+  "limitations": "Offscreen coded luma only; the Android MediaCodec case and the two host-decoded cases are explicitly separate. Opaque alpha was checked on the grayscale readback draw, not on a player composition. No physical device, display timing, end-to-end playback or visual preference measured.",
+  "renderer": "Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0))",
+  "shaderSHA256": {
+    "cunny0.comp": "c9cf4526cdfa0456ae7076bbb58db196a64f8f34cde8205446ff5403df7bd251",
+    "cunny1.comp": "ca19b577ccc6cb63ff633a867dc1fa474d92af005b182589c69f13d69b560c86",
+    "cunny2.comp": "50faada877a81bb26c5f1225b75bca0e225cd808aa70e9369cd1f0e06646bd0a"
+  },
+  "fullFrameSamplingControls": {
+    "initialShaderSHA256": {
+      "cunny0.comp": "0b349504804c11c1b3d4ce2c66d8b33ae0515276b71b01fb3e2759ca45b378e7",
+      "cunny1.comp": "ca19b577ccc6cb63ff633a867dc1fa474d92af005b182589c69f13d69b560c86",
+      "cunny2.comp": "7a1ac57abc4ef2a0ed10ffd09f97377c1db0a190d53a8841311efc3c54935959"
+    },
+    "results": {
+      "normalized": {
+        "maxAbs8": 14,
+        "firstMaxErrorXY": [
+          86,
+          28
+        ],
+        "errorHistogram": {
+          "0": 8165632,
+          "1": 111415,
+          "2": 12921,
+          "3": 4235,
+          "4": 182,
+          "5": 11,
+          "7": 1,
+          "9": 1,
+          "11": 1,
+          "14": 1
+        },
+        "outputSHA256": "3bc008f38b4980e71a46c52a7b6d954a2cce06324946c0f02f0e4d81b9cc959e"
+      },
+      "integerFirst": {
+        "maxAbs8": 4,
+        "firstMaxErrorXY": [
+          1911,
+          1607
+        ],
+        "errorHistogram": {
+          "0": 8197601,
+          "1": 84959,
+          "2": 10211,
+          "3": 1626,
+          "4": 3
+        },
+        "outputSHA256": "f4ca5288e62942e66fb5971066301fcc2895c07c0a57f6b451f0cb16807ce15c"
+      },
+      "explicitBase": {
+        "maxAbs8": 13,
+        "firstMaxErrorXY": [
+          86,
+          28
+        ],
+        "errorHistogram": {
+          "0": 8219364,
+          "1": 74374,
+          "2": 603,
+          "3": 47,
+          "4": 8,
+          "7": 1,
+          "9": 1,
+          "11": 1,
+          "13": 1
+        },
+        "outputSHA256": "d1454e28158c5a76a6c44c0e98f8105592465099dbd316b3a409b1fca39a50e3"
+      },
+      "integerBoth": {
+        "maxAbs8": 1,
+        "firstMaxErrorXY": [
+          42,
+          0
+        ],
+        "errorHistogram": {
+          "0": 8276882,
+          "1": 17518
+        },
+        "outputSHA256": "12543b5278a6e118868b1122091740eff6bb72074cc014f3ba5be416a3ee6f39"
+      }
+    },
+    "singleVariable": "Same decoded 8s full-size source, same command, stages and comparator; changed integer texel loads in layer 0 and explicit four-tap bilinear residual base in layer 2 independently."
+  },
+  "fullFrame": {
+    "sourceWidth": 1920,
+    "sourceHeight": 1080,
+    "outputWidth": 3840,
+    "outputHeight": 2160,
+    "decoder": "Android MediaCodec raw coded Y",
+    "ptsUs": 8000000,
+    "outputPixels": 8294400,
+    "inputSHA256": "2efd0f8020309bbf36cc3fb0bf92aef409d1bb12abd8ba008ba2731b477398f8",
+    "cpuSHA256": "c01724529a63d5f2851042ff3a1e7fa020070bed912e0a65639dde8afa81c69b",
+    "readbackAlphaIs255": true,
+    "referenceMethod": "Scalar reference on 192x64 input tiles with a four-source-pixel halo (three 3x3 stages); crop back to each interior and compare every GPU output sample. GPU result is a single full-size dispatch per stage.",
+    "maxAbs8": 1,
+    "firstMaxErrorXY": [
+      42,
+      0
+    ],
+    "errorHistogram": {
+      "0": 8276882,
+      "1": 17518
+    },
+    "outputSHA256": "12543b5278a6e118868b1122091740eff6bb72074cc014f3ba5be416a3ee6f39",
+    "differentFromCPU": 17518,
+    "differentFromBilinear": 505633
+  }
+}
