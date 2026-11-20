@@ -64,6 +64,8 @@ def main():
     parser.add_argument("--fixture", type=Path, required=True)
     parser.add_argument("--out", type=Path, default=Path("android-realtime-sr-paused"))
     parser.add_argument("--project", type=Path, default=Path.cwd())
+    parser.add_argument("--apk", type=Path)
+    parser.add_argument("--test-apk", type=Path)
     args = parser.parse_args()
     if args.out.exists():
         parser.error("--out must be a new directory")
@@ -75,16 +77,22 @@ def main():
         if hashlib.sha256(fixture).hexdigest() != KNOWN_SHA:
             raise RuntimeError("Fixture SHA does not match KNOWN_SHA")
         project = args.project.resolve()
-        target = project / "examples/android-realtime-sr/build/outputs/apk/debug/android-realtime-sr-debug.apk"
+        target = args.apk.resolve() if args.apk is not None else project / "examples/android-realtime-sr/build/outputs/apk/debug/android-realtime-sr-debug.apk"
         tests = list((project / "examples/android-realtime-sr/build/outputs/apk/androidTest/debug").glob("*.apk"))
-        if not target.is_file() or len(tests) != 1:
+        if args.test_apk is not None:
+            test_apk = args.test_apk.resolve()
+        else:
+            if len(tests) != 1:
+                raise RuntimeError("Expected target APK and exactly one androidTest/debug APK")
+            test_apk = tests[0]
+        if not target.is_file():
             raise RuntimeError("Expected target APK and exactly one androidTest/debug APK")
-        test_apk = tests[0]
         for apk, expected in ((target, PKG), (test_apk, PKG + ".test")):
             result = subprocess.run(["aapt", "dump", "badging", str(apk)], capture_output=True, text=True, check=False)
             match = re.search(r"^package: name='([^']+)'", result.stdout, re.M)
             if result.returncode or not match or match.group(1) != expected:
                 raise RuntimeError(f"Unexpected package ID for {apk}: {match.group(1) if match else 'unavailable'}")
+        for apk in (target, test_apk):
             installed = adb.raw("install", "-r", "-t", str(apk))
             if rc(installed) or "success" not in text(installed).lower().splitlines():
                 raise RuntimeError(f"Install failed for {apk}: {text(installed)}")

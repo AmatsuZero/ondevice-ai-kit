@@ -26,7 +26,7 @@
 
 **自动模式。** 连续三次尝试仍未取得增强输出时，暂用原画 4 秒；再次失败时退避增至 8 秒、最多 16 秒。这个判断只用于调度。独立自动模式场次启动了 14 个增强作业，900 帧有成功提交：1 帧增强、17 帧尝试后回退、882 帧未请求增强；首末帧进入渲染的时间差为 30.27 秒。该机上的收益是避免强制超分拖慢整片，不能称为持续按时增强。
 
-**暂停同帧。** 实际点击原画→CuNNy→原画，三次使用源帧序号 64、PTS 2.133 秒，播放位置保持 00:02。用 PixelCopy 读取整个 1080×1828 视频 Surface，再由主机逐像素比较：两次原画 RGBA 字节完全相同，CuNNy 与原画有 46,060 个 RGB 像素不同。恢复后时钟继续前进；拖动到 00:15 后，新代次的首个验收解码 PTS 为 15.000 秒，随后播放到 00:17。应用退到后台再恢复（同一 Activity 的 stop/resume）后，播放位置保持在 17 秒，并继续到 19 秒；新代次解码 PTS 为 17.733 秒。[实际播放器同帧切换页面（本地证据）](../../artifacts/verification/android-realtime-sr-20261120/playback/paused-final/compare.html)。这项验证包含窗口的彩色合成，既不是物理屏测量，也不是动态主观盲评。
+**暂停同帧。** 实际点击原画→CuNNy→原画，三次使用源帧序号 64、PTS 2.133 秒，播放位置保持 00:02。用 PixelCopy 读取整个 1080×1828 视频 Surface，再由主机逐像素比较：两次原画 RGBA 字节完全相同，CuNNy 与原画有 46,060 个 RGB 像素不同。恢复后时钟继续前进；拖动到 00:15 后，新代次的首个验收解码 PTS 为 15.000 秒，随后播放到 00:17。应用退到后台再恢复（同一 Activity 的 stop/resume）后，播放位置保持在 17 秒，并继续到 19 秒；新代次解码 PTS 为 17.733 秒。[同帧统计随源码保存](android-realtime-sr-playback-emulator-20261120.json)；带图页面仅在验收机的 `artifacts/verification/android-realtime-sr-20261120/playback/paused-final/compare.html`。这项验证包含窗口的彩色合成，既不是物理屏测量，也不是动态主观盲评。
 
 在 API 37 的测试中，退后台时上一代窗口最初仍有两次失败的 EGL 提交。播放器改为在 Activity 暂停和 Surface 销毁时先停交新帧，再释放窗口。复测保留原有严格判定：没有失败的提交，暂停对照的两次原画完全相同；切到 CuNNy 的 45,782 个像素有变化。拖动后可续播，实际退后台和恢复后，解码在新的代次继续。修正后的同一 APK 也播放了完整固定片：自动模式 30.33 秒，0 帧增强／900 帧原画提交；强制模式 136.24 秒，36 帧增强／859 帧原画提交。两种模式都没有有效呈现时间。API 36 的完整四场与 API 37 窗口修正后的实测 APK 摘要分别保存在 JSON，未把前一版的成绩记到后一版。
 
@@ -49,6 +49,28 @@ rtk proxy python3 tools/probes/android_google_sr_device.py --serial "$SERIAL" --
 
 不带 Google 属性时生成 `io.ondeviceai.realtimesr.demo`（minSdk 26）；带属性的实验 APK 是另一个包 `io.ondeviceai.realtimesr.demo.google`（minSdk 30）。这两个属性构建在本机使用相同 APK 输出路径；切回普通包前应重新构建。测试驱动校验包名；手机上两包互不覆盖。手动观看普通 Demo 时用 **Pick** 选择片源，播放中可选择 **Original / Auto / CuNNy**。本地验收：35 个 Android JVM 用例、16 个播放报告/驱动用例通过，Debug 构建及 lint 通过（0 errors，9 warnings）。这次未向远端 Wiki、制品仓库或正式 App 发布。
 
+## 真机复测
+
+11 月 20 日复查：Mac 的 USB 清单可见 TECNO，针对该机的 `adb get-state` 返回 `device not found`。本轮未在手机安装或播放。选择已开启 USB 调试的测试手机 `SERIAL`，沿用上节固定片和 APK 执行：
+
+```sh
+rtk proxy python3 -m tools.probes.android_realtime_sr_handset \
+  --serial "$SERIAL" \
+  --fixture "$FIXTURE" \
+  --apk "$APK" \
+  --test-apk "$TEST_APK" \
+  --google-apk "$GOOGLE_APK" \
+  --out "$OUT"
+```
+
+普通 debug 构建后，APK 示例路径为 `examples/android-realtime-sr/build/outputs/apk/debug/android-realtime-sr-debug.apk` 和 `examples/android-realtime-sr/build/outputs/apk/androidTest/debug/android-realtime-sr-debug-androidTest.apk`。先复制这两个 APK，再构建 Google 版本，因为构建路径会重叠。确保 `ffmpeg`、`ffprobe`、`adb`、`aapt` 在 `PATH` 中。`--google-apk` 是可选的，仅用于 API 30+；`--preflight-only` 可只做预检，但须使用不同的全新 `--out` 目录。
+
+脚本成功退出不等于验证通过：各门槛须分别有证据。`$OUT` 应包含 `summary.json`、`abba`、`auto`、`paused`，以及可选的 `google.json`；30 分钟测试不会自动运行。先测 Mali TECNO KM9（API 35），再测 Adreno；若有设备，也测 API 26/27。
+
+入口新增后，22 个主机用例通过；用留存的 API 36 报告复核，四场 A/B/B/A 和一场自动模式均完成解码，但因缺少显示计时，短测仍判为 `unverified`。在主机上用错误包名的真实 APK 测试，两个驱动均在首次 ADB 操作前拒绝。
+
+Android Demo 面向 API 26+，用自写的 GLES 3.1 CuNNy 做 2× 增强，来不及时回退同帧原画；Google 是独立的可选能力探测，Vulkan 尚未实现。Android 真机耗时和 30 分钟测试仍未验证。快速对照可参见 [iOS demo 交接说明](ios-realtime-sr-demo-handoff.md)：iOS Demo 的部署目标为 15.1；支持系统 2× 的设备和片源优先用系统，其余按轻量 Metal → 优化 CuNNy → 原画选择；已在 iPhone 16 Pro Max、iOS 27.2.1 验证。
+
 ## 像素有没有算对
 
 同一固定 30 秒 H.264/AAC 片，SHA-256 `df677798a8604a7a6289fcf50a0fef3844a047631e0041ae7d5563c55f3746ec`。MediaCodec 在 PTS 8,000,000 µs 输出 1920×1080；探针直接读解码器 Y 平面，将同一组字节交给 GLES 和独立标量参考。整帧中 **8,276,882/8,294,400** 个 8 位亮度输出完全相同，余下 **17,518** 个相差 1。和双线性不同的有 505,633 个；差异个数不等于质量收益。另有六个小样本，涵盖黑场、脉冲、斜边及不同解码方式的裁剪，最大差不超过 1。
@@ -64,7 +86,7 @@ rtk proxy python3 tools/probes/android_google_sr_device.py --serial "$SERIAL" --
 | 双线性 | 36.6491 | 0.982712 |
 | GLES CuNNy 2× | 39.5447 | 0.991465 |
 
-这说明在该片的四个合成降采样帧上，CuNNy 重建更接近原始亮度。没有原生 4K 真值，不据此评估新增细节；也未测运动闪烁、人眼偏好、屏幕颜色或实时性。灰度读回的 alpha 固定为 255，不代表播放器完成了色度合成。本站工作树本地留有四个时刻的[同帧观看页](../../artifacts/verification/android-realtime-sr-20261120/still-comparison.html)，不随 Git 分发片源。
+这说明在该片的四个合成降采样帧上，CuNNy 重建更接近原始亮度。没有原生 4K 真值，不据此评估新增细节；也未测运动闪烁、人眼偏好、屏幕颜色或实时性。灰度读回的 alpha 固定为 255，不代表播放器完成了色度合成。四个时刻的带图观看页仅在验收机的 `artifacts/verification/android-realtime-sr-20261120/still-comparison.html`；Git 中保留上表对应的逐帧指标。
 
 ## 在独立设备上复算
 

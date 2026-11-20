@@ -327,8 +327,11 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--case", required=True)
     ap.add_argument("--build", action="store_true", help="opt in to assembling the debug APK")
+    ap.add_argument("--apk", type=Path, help="use this APK instead of the project debug APK")
     ap.add_argument("--project", default=".", help="gradle project root")
     a = ap.parse_args()
+    if a.apk is not None and a.build:
+        ap.error("--apk cannot be used with --build")
     if a.case not in CASES:
         print("case %r is unimplemented; supported cases: %s" %
               (a.case, ", ".join(CASES)), file=sys.stderr)
@@ -361,11 +364,14 @@ def main():
             cmd([gw, "-PenableRealtimeSrDemo=true",
                  ":examples:android-realtime-sr:assembleDebug"],
                 cwd=str(root), env=env)
-        apk_dir = root / "examples/android-realtime-sr/build/outputs/apk/debug"
-        apks = sorted(apk_dir.glob("*.apk"))
-        if len(apks) != 1:
-            raise RuntimeError("expected exactly one debug apk, found %d" % len(apks))
-        apk = apks[0]
+        if a.apk is not None:
+            apk = a.apk.resolve()
+        else:
+            apk_dir = root / "examples/android-realtime-sr/build/outputs/apk/debug"
+            apks = sorted(apk_dir.glob("*.apk"))
+            if len(apks) != 1:
+                raise RuntimeError("expected exactly one debug apk, found %d" % len(apks))
+            apk = apks[0]
         badging = cmd(["aapt", "dump", "badging", str(apk)])
         expected_badging = "package: name='%s'" % PKG
         if expected_badging not in badging.stdout.decode("utf-8", "replace"):
