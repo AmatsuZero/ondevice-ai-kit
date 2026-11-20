@@ -1,0 +1,1186 @@
+{
+  "testedSource": {
+    "playback": "fd78a627bb89afcb5e1d8e94ae64ae6a3f83245a",
+    "ready": "0f5fb89606c532268d48c17e93cf7c258d9743df"
+  },
+  "device": "TECNO KM9, API 35, Mali-G57 MC2 (GLES 3.2 r38p1)",
+  "fixtureSha256": "e698bee8c98c3158eb5e99e26f1cbe13334b52557720b2129a3e31dd2fa67dcb",
+  "framesPerLeg": 900,
+  "apkSha256": {
+    "demo.apk": "6baf6a9de761d0094f30b433cf3185d580074f0cf044d9c36f3e8a408d12494f",
+    "ready.apk": "961ebacd4818a58f97798a88c98e688c391af3f26daebe6ac377b19d1a840a74",
+    "test.apk": "0d30c88ce220c2e2f03b6b1b44900f3246ceae1655253b141f9a20afe577b6dd"
+  },
+  "archiveSha256": "fd9d38554859eca3bfa4c47e204bf195577e3d8329920e9f9c258525955e593e",
+  "spatialShaderSha256": "5d9264ea2ffcf17a0ea641d3a32143f9b7913510933493e35b6fb674b3dfa378",
+  "runs": [
+    {
+      "tag": "playback-1",
+      "id": "b41ce52075cb42a9ba719614b7d40798",
+      "case": "original-egl",
+      "firstLastLatchSeconds": 29.837,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 9,
+        "late": 885,
+        "unconfirmed": 6,
+        "missed": 891
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 894
+      },
+      "onTimeConfirmed": {
+        "ORIGINAL": 9
+      },
+      "submitted": {
+        "ORIGINAL": 900
+      },
+      "submitReasons": {
+        "enhancement_not_requested": 900
+      },
+      "startedGpuJobs": 0,
+      "gpu": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 894,
+          "medianMs": 23.028,
+          "p95Ms": 30.96
+        },
+        "latchToDraw": {
+          "n": 894,
+          "medianMs": 22.033,
+          "p95Ms": 30.095
+        },
+        "drawToSwap": {
+          "n": 894,
+          "medianMs": 1.728,
+          "p95Ms": 3.408
+        },
+        "swapToReturned": {
+          "n": 894,
+          "medianMs": 2.518,
+          "p95Ms": 4.389
+        },
+        "returnedToDisplay": {
+          "n": 894,
+          "medianMs": 22.809,
+          "p95Ms": 30.531
+        },
+        "targetToDisplay": {
+          "n": 894,
+          "medianMs": 26.969,
+          "p95Ms": 33.694
+        },
+        "latchToDisplay": {
+          "n": 894,
+          "medianMs": 49.383,
+          "p95Ms": 62.557
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 57,
+        "latchToDisplayOver33ms": 884
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 893,
+          "medianMs": 33.326,
+          "p95Ms": 50.006
+        },
+        "gapsOver50ms": 54
+      },
+      "gates": {
+        "gpu": "notApplicable",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "notApplicable"
+      },
+      "hashes": {
+        "terminal.json": "c2efccdccb655e788c23a7d64428ff5e155913151d22f2b3ebc9b427d52042bc",
+        "run.json": "8cef1e0c8be287c0761eab4bf4f96a712f40d6b63621bf0a323108cd7aba81e8",
+        "events.jsonl": "88c1258b8acbe5ddee5dfbae0f8035e1f2e39d07786ef389b08a7765c02969ad"
+      }
+    },
+    {
+      "tag": "playback-2",
+      "id": "d7a0bf409222453b8218de901f5e9df2",
+      "case": "spatial",
+      "firstLastLatchSeconds": 29.869,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 2,
+        "onTimeOriginal": 13,
+        "late": 870,
+        "unconfirmed": 15,
+        "missed": 885
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 156,
+        "SPATIAL": 729
+      },
+      "onTimeConfirmed": {
+        "ORIGINAL": 13,
+        "SPATIAL": 2
+      },
+      "submitted": {
+        "ORIGINAL": 157,
+        "SPATIAL": 743
+      },
+      "submitReasons": {
+        "enhancement_not_ready": 157,
+        "enhanced": 743
+      },
+      "startedGpuJobs": 785,
+      "gpu": {
+        "count": 784,
+        "minNs": 4091077,
+        "maxNs": 7607769,
+        "p95Ns": 6618231
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 885,
+          "medianMs": 23.194,
+          "p95Ms": 31.015
+        },
+        "latchToDraw": {
+          "n": 885,
+          "medianMs": 22.457,
+          "p95Ms": 30.337
+        },
+        "drawToSwap": {
+          "n": 885,
+          "medianMs": 1.669,
+          "p95Ms": 2.888
+        },
+        "swapToReturned": {
+          "n": 885,
+          "medianMs": 2.878,
+          "p95Ms": 4.716
+        },
+        "returnedToDisplay": {
+          "n": 885,
+          "medianMs": 23.242,
+          "p95Ms": 30.598
+        },
+        "targetToDisplay": {
+          "n": 885,
+          "medianMs": 27.962,
+          "p95Ms": 34.747
+        },
+        "latchToDisplay": {
+          "n": 885,
+          "medianMs": 50.941,
+          "p95Ms": 62.013
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 113,
+        "latchToDisplayOver33ms": 867
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 884,
+          "medianMs": 33.328,
+          "p95Ms": 50.011
+        },
+        "gapsOver50ms": 58
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "fail"
+      },
+      "hashes": {
+        "terminal.json": "c02c0ca289686233af8c128cd83c06ad520cfbbf8e2ffc06cb3945056feb7004",
+        "run.json": "0490d786dfa5b7b72434318bc248d2931892cda520454bf004c8e9ae735fcbf9",
+        "events.jsonl": "c47e1e81bffd46fd71f07a84f4822c896fc6b67d09cd930b36a2c37d13085f7f"
+      }
+    },
+    {
+      "tag": "playback-3",
+      "id": "1b1f5e2f87be4d2cafc41d62ffe35d36",
+      "case": "cunny",
+      "firstLastLatchSeconds": 29.867,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 2,
+        "late": 888,
+        "unconfirmed": 10,
+        "missed": 898
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 890
+      },
+      "onTimeConfirmed": {
+        "ORIGINAL": 2
+      },
+      "submitted": {
+        "ORIGINAL": 898
+      },
+      "submitReasons": {
+        "enhancement_not_ready": 898
+      },
+      "startedGpuJobs": 527,
+      "gpu": {
+        "count": 526,
+        "minNs": 34245232,
+        "maxNs": 41707388,
+        "p95Ns": 37875848
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 890,
+          "medianMs": 22.603,
+          "p95Ms": 30.896
+        },
+        "latchToDraw": {
+          "n": 890,
+          "medianMs": 21.476,
+          "p95Ms": 29.973
+        },
+        "drawToSwap": {
+          "n": 890,
+          "medianMs": 1.834,
+          "p95Ms": 3.232
+        },
+        "swapToReturned": {
+          "n": 890,
+          "medianMs": 2.629,
+          "p95Ms": 11.07
+        },
+        "returnedToDisplay": {
+          "n": 890,
+          "medianMs": 26.671,
+          "p95Ms": 40.487
+        },
+        "targetToDisplay": {
+          "n": 890,
+          "medianMs": 31.474,
+          "p95Ms": 45.354
+        },
+        "latchToDisplay": {
+          "n": 890,
+          "medianMs": 53.947,
+          "p95Ms": 71.237
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 391,
+        "latchToDisplayOver33ms": 888
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 889,
+          "medianMs": 33.326,
+          "p95Ms": 50.069
+        },
+        "gapsOver50ms": 89
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "fail"
+      },
+      "hashes": {
+        "terminal.json": "0cb4733b49a70ec792fbcc9b91e8ec3259f729dae10ef0064824d341484ca24f",
+        "run.json": "41b5b031c3f6aec82f48670f75e567b73979dd1413fb3eff4e900934a8e1201e",
+        "events.jsonl": "2a520081934b8ab9a396eafdf1c8773fe2ae6846fd9bfd312541af2d777bec52"
+      }
+    },
+    {
+      "tag": "playback-4",
+      "id": "dbbb89ee0d0d4f48ae9058922a7eaf49",
+      "case": "spatial",
+      "firstLastLatchSeconds": 29.855,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 5,
+        "onTimeOriginal": 9,
+        "late": 878,
+        "unconfirmed": 8,
+        "missed": 886
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 150,
+        "SPATIAL": 742
+      },
+      "onTimeConfirmed": {
+        "SPATIAL": 5,
+        "ORIGINAL": 9
+      },
+      "submitted": {
+        "ORIGINAL": 151,
+        "SPATIAL": 749
+      },
+      "submitReasons": {
+        "enhancement_not_ready": 151,
+        "enhanced": 749
+      },
+      "startedGpuJobs": 780,
+      "gpu": {
+        "count": 779,
+        "minNs": 3292077,
+        "maxNs": 7584615,
+        "p95Ns": 6630385
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 892,
+          "medianMs": 23.334,
+          "p95Ms": 31.025
+        },
+        "latchToDraw": {
+          "n": 892,
+          "medianMs": 22.231,
+          "p95Ms": 30.31
+        },
+        "drawToSwap": {
+          "n": 892,
+          "medianMs": 1.747,
+          "p95Ms": 3.108
+        },
+        "swapToReturned": {
+          "n": 892,
+          "medianMs": 2.721,
+          "p95Ms": 4.611
+        },
+        "returnedToDisplay": {
+          "n": 892,
+          "medianMs": 22.96,
+          "p95Ms": 30.585
+        },
+        "targetToDisplay": {
+          "n": 892,
+          "medianMs": 27.454,
+          "p95Ms": 34.292
+        },
+        "latchToDisplay": {
+          "n": 892,
+          "medianMs": 50.36,
+          "p95Ms": 63.062
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 84,
+        "latchToDisplayOver33ms": 872
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 891,
+          "medianMs": 33.327,
+          "p95Ms": 50.014
+        },
+        "gapsOver50ms": 64
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "fail"
+      },
+      "hashes": {
+        "terminal.json": "991d49a09d73ee572cacde75342de0e87144949b153427c9f5fd73309dc8fb49",
+        "run.json": "b390451cf27d62e45f7fea49a12a1e7f3712cf7810ce01d6e3343e4e34da133f",
+        "events.jsonl": "8b3c97d3a85f6089fa465cd94639265eed9e7c0a8db7db82a6cae6a874584f5c"
+      }
+    },
+    {
+      "tag": "playback-5",
+      "id": "62237fde013343838ca2dad60cb95a57",
+      "case": "original-egl",
+      "firstLastLatchSeconds": 29.862,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 10,
+        "late": 887,
+        "unconfirmed": 3,
+        "missed": 890
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 897
+      },
+      "onTimeConfirmed": {
+        "ORIGINAL": 10
+      },
+      "submitted": {
+        "ORIGINAL": 900
+      },
+      "submitReasons": {
+        "enhancement_not_requested": 900
+      },
+      "startedGpuJobs": 0,
+      "gpu": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 897,
+          "medianMs": 23.194,
+          "p95Ms": 30.857
+        },
+        "latchToDraw": {
+          "n": 897,
+          "medianMs": 21.971,
+          "p95Ms": 29.801
+        },
+        "drawToSwap": {
+          "n": 897,
+          "medianMs": 1.849,
+          "p95Ms": 3.308
+        },
+        "swapToReturned": {
+          "n": 897,
+          "medianMs": 2.676,
+          "p95Ms": 4.287
+        },
+        "returnedToDisplay": {
+          "n": 897,
+          "medianMs": 21.512,
+          "p95Ms": 30.412
+        },
+        "targetToDisplay": {
+          "n": 897,
+          "medianMs": 25.306,
+          "p95Ms": 34.163
+        },
+        "latchToDisplay": {
+          "n": 897,
+          "medianMs": 48.614,
+          "p95Ms": 62.156
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 73,
+        "latchToDisplayOver33ms": 885
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 896,
+          "medianMs": 33.327,
+          "p95Ms": 50.017
+        },
+        "gapsOver50ms": 79
+      },
+      "gates": {
+        "gpu": "notApplicable",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "notApplicable"
+      },
+      "hashes": {
+        "terminal.json": "a19379a483511cba9ddb3ec35ca968423abfada52d7af54070b58ea97b712c54",
+        "run.json": "825c688010bf2d43481e47bf75eccee1bff9b599f652bcdbc5aa7af8cc390d58",
+        "events.jsonl": "9b192adda7b0b44d9e8cb4f14c63a823a0b8562f832537f0232e13393a43587f"
+      }
+    },
+    {
+      "tag": "ready-1",
+      "id": "5bf5ad9b63504221bc1984773ebef221",
+      "case": "original-ready",
+      "firstLastLatchSeconds": 29.862,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 473,
+        "late": 424,
+        "unconfirmed": 3,
+        "missed": 427
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 897
+      },
+      "onTimeConfirmed": {
+        "ORIGINAL": 473
+      },
+      "submitted": {
+        "ORIGINAL": 900
+      },
+      "submitReasons": {
+        "enhancement_not_requested": 900
+      },
+      "startedGpuJobs": 0,
+      "gpu": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 897,
+          "medianMs": 24.07,
+          "p95Ms": 31.287
+        },
+        "latchToDraw": {
+          "n": 897,
+          "medianMs": 2.77,
+          "p95Ms": 4.706
+        },
+        "drawToSwap": {
+          "n": 897,
+          "medianMs": 1.606,
+          "p95Ms": 2.905
+        },
+        "swapToReturned": {
+          "n": 897,
+          "medianMs": 2.3,
+          "p95Ms": 3.976
+        },
+        "returnedToDisplay": {
+          "n": 897,
+          "medianMs": 25.342,
+          "p95Ms": 37.329
+        },
+        "targetToDisplay": {
+          "n": 897,
+          "medianMs": 8.595,
+          "p95Ms": 21.23
+        },
+        "latchToDisplay": {
+          "n": 897,
+          "medianMs": 32.684,
+          "p95Ms": 43.876
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 5,
+        "latchToDisplayOver33ms": 421
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 896,
+          "medianMs": 33.327,
+          "p95Ms": 50.034
+        },
+        "gapsOver50ms": 75
+      },
+      "gates": {
+        "gpu": "notApplicable",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "notApplicable"
+      },
+      "hashes": {
+        "terminal.json": "8196c3a3570ec44e08121cdd2562b7c563e4ff50e4131f9c9f184caeb21e0f6e",
+        "run.json": "4a901d37342521ba1d162f2ea899bd1181700e655822f1c206b98a4bc252430d",
+        "events.jsonl": "d5a6ebe78ca0dcae6abaf59cb652f49ab274441cd69887a9dcdbd6addf90ce39"
+      }
+    },
+    {
+      "tag": "ready-2",
+      "id": "febe76d946944443b67ce25bfad88012",
+      "case": "spatial-ready",
+      "firstLastLatchSeconds": 29.86,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 107,
+        "onTimeOriginal": 5,
+        "late": 783,
+        "unconfirmed": 5,
+        "missed": 788
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 33,
+        "SPATIAL": 862
+      },
+      "onTimeConfirmed": {
+        "SPATIAL": 107,
+        "ORIGINAL": 5
+      },
+      "submitted": {
+        "ORIGINAL": 36,
+        "SPATIAL": 864
+      },
+      "submitReasons": {
+        "enhancement_not_ready": 36,
+        "enhanced": 864
+      },
+      "startedGpuJobs": 897,
+      "gpu": {
+        "count": 896,
+        "minNs": 3717923,
+        "maxNs": 7387154,
+        "p95Ns": 6415769
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 895,
+          "medianMs": 23.84,
+          "p95Ms": 31.359
+        },
+        "latchToDraw": {
+          "n": 895,
+          "medianMs": 11.844,
+          "p95Ms": 15.523
+        },
+        "drawToSwap": {
+          "n": 895,
+          "medianMs": 1.631,
+          "p95Ms": 2.824
+        },
+        "swapToReturned": {
+          "n": 895,
+          "medianMs": 2.826,
+          "p95Ms": 4.364
+        },
+        "returnedToDisplay": {
+          "n": 895,
+          "medianMs": 23.852,
+          "p95Ms": 30.737
+        },
+        "targetToDisplay": {
+          "n": 895,
+          "medianMs": 15.5,
+          "p95Ms": 29.401
+        },
+        "latchToDisplay": {
+          "n": 895,
+          "medianMs": 40.397,
+          "p95Ms": 47.985
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 13,
+        "latchToDisplayOver33ms": 780
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 894,
+          "medianMs": 33.325,
+          "p95Ms": 50.074
+        },
+        "gapsOver50ms": 108
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "fail"
+      },
+      "hashes": {
+        "terminal.json": "6de069529a43f7f2e1bcd44c4cce5f6963035abd9ff4762d654cd17efc94c6ca",
+        "run.json": "c871b0226ae40f679e978301479ae33c65ff01cc3cc4677269e0b8351e0330dd",
+        "events.jsonl": "80061e38077cb3f12ae4adf3bd7f7e76a52a4fa29c3cce4c2794c39364b0a204"
+      }
+    },
+    {
+      "tag": "ready-3",
+      "id": "1b0c37066f06465cac1388600dbb1333",
+      "case": "spatial",
+      "firstLastLatchSeconds": 29.845,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 14,
+        "late": 885,
+        "unconfirmed": 1,
+        "missed": 886
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 160,
+        "SPATIAL": 739
+      },
+      "onTimeConfirmed": {
+        "ORIGINAL": 14
+      },
+      "submitted": {
+        "ORIGINAL": 161,
+        "SPATIAL": 739
+      },
+      "submitReasons": {
+        "enhancement_not_ready": 161,
+        "enhanced": 739
+      },
+      "startedGpuJobs": 781,
+      "gpu": {
+        "count": 780,
+        "minNs": 3391154,
+        "maxNs": 7209231,
+        "p95Ns": 6632308
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 899,
+          "medianMs": 23.421,
+          "p95Ms": 31.131
+        },
+        "latchToDraw": {
+          "n": 899,
+          "medianMs": 22.394,
+          "p95Ms": 30.363
+        },
+        "drawToSwap": {
+          "n": 899,
+          "medianMs": 1.825,
+          "p95Ms": 3.045
+        },
+        "swapToReturned": {
+          "n": 899,
+          "medianMs": 2.861,
+          "p95Ms": 4.631
+        },
+        "returnedToDisplay": {
+          "n": 899,
+          "medianMs": 21.801,
+          "p95Ms": 30.719
+        },
+        "targetToDisplay": {
+          "n": 899,
+          "medianMs": 25.759,
+          "p95Ms": 34.856
+        },
+        "latchToDisplay": {
+          "n": 899,
+          "medianMs": 51.18,
+          "p95Ms": 61.956
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 146,
+        "latchToDisplayOver33ms": 881
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 898,
+          "medianMs": 33.326,
+          "p95Ms": 50.027
+        },
+        "gapsOver50ms": 72
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "fail"
+      },
+      "hashes": {
+        "terminal.json": "18f1e7714010735a040e3b4164f9e4662029ea6e5cc072cae4ea1cb1dc3b7989",
+        "run.json": "2f8b34ccb537ac7bb2ff6d4ed76d94619d0a3faf9fbe4f364fd173f58d240ca5",
+        "events.jsonl": "a8175e9e2b28d61dc4e0ca7cc77e441b6316efc73ca6485da9ad7c1a0155804d"
+      }
+    },
+    {
+      "tag": "ready-4",
+      "id": "1b137282e7c946408a8585495360fc1e",
+      "case": "spatial-ready",
+      "firstLastLatchSeconds": 29.876,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 114,
+        "onTimeOriginal": 15,
+        "late": 761,
+        "unconfirmed": 10,
+        "missed": 771
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 42,
+        "SPATIAL": 848
+      },
+      "onTimeConfirmed": {
+        "ORIGINAL": 15,
+        "SPATIAL": 114
+      },
+      "submitted": {
+        "ORIGINAL": 46,
+        "SPATIAL": 854
+      },
+      "submitReasons": {
+        "enhancement_not_ready": 46,
+        "enhanced": 854
+      },
+      "startedGpuJobs": 895,
+      "gpu": {
+        "count": 894,
+        "minNs": 3757923,
+        "maxNs": 7241308,
+        "p95Ns": 6398539
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 890,
+          "medianMs": 24.263,
+          "p95Ms": 31.364
+        },
+        "latchToDraw": {
+          "n": 890,
+          "medianMs": 11.689,
+          "p95Ms": 15.112
+        },
+        "drawToSwap": {
+          "n": 890,
+          "medianMs": 1.676,
+          "p95Ms": 2.762
+        },
+        "swapToReturned": {
+          "n": 890,
+          "medianMs": 2.789,
+          "p95Ms": 4.209
+        },
+        "returnedToDisplay": {
+          "n": 890,
+          "medianMs": 24.171,
+          "p95Ms": 31.002
+        },
+        "targetToDisplay": {
+          "n": 890,
+          "medianMs": 15.554,
+          "p95Ms": 29.997
+        },
+        "latchToDisplay": {
+          "n": 890,
+          "medianMs": 39.969,
+          "p95Ms": 48.355
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 12,
+        "latchToDisplayOver33ms": 760
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 889,
+          "medianMs": 33.326,
+          "p95Ms": 50.062
+        },
+        "gapsOver50ms": 110
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "fail"
+      },
+      "hashes": {
+        "terminal.json": "7a7e416a113fc67de75538fba68211ba998b18e8481dfc1ade515721ba6fe0fe",
+        "run.json": "66d9b4977f1930f4dbe03f75a373d0f255eb69ae59951c098e590e9dfc257604",
+        "events.jsonl": "cf9e3efe5af9ac53157ab503a2bcb02f60d3dfd4e0a70dcbc47cafd9fa4eeabb"
+      }
+    },
+    {
+      "tag": "ready-5",
+      "id": "26e88db9f3ed4787821c0e94e63fa3d2",
+      "case": "original-ready",
+      "firstLastLatchSeconds": 29.858,
+      "audioEndUs": 29994666,
+      "counts": {
+        "planned": 900,
+        "onTimeSR": 0,
+        "onTimeOriginal": 471,
+        "late": 424,
+        "unconfirmed": 5,
+        "missed": 429
+      },
+      "confirmedDisplays": {
+        "ORIGINAL": 895
+      },
+      "onTimeConfirmed": {
+        "ORIGINAL": 471
+      },
+      "submitted": {
+        "ORIGINAL": 900
+      },
+      "submitReasons": {
+        "enhancement_not_requested": 900
+      },
+      "startedGpuJobs": 0,
+      "gpu": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "pairedTimings": {
+        "latchToTarget": {
+          "n": 895,
+          "medianMs": 24.359,
+          "p95Ms": 31.226
+        },
+        "latchToDraw": {
+          "n": 895,
+          "medianMs": 2.646,
+          "p95Ms": 4.176
+        },
+        "drawToSwap": {
+          "n": 895,
+          "medianMs": 1.657,
+          "p95Ms": 2.589
+        },
+        "swapToReturned": {
+          "n": 895,
+          "medianMs": 2.44,
+          "p95Ms": 4.069
+        },
+        "returnedToDisplay": {
+          "n": 895,
+          "medianMs": 25.697,
+          "p95Ms": 37.348
+        },
+        "targetToDisplay": {
+          "n": 895,
+          "medianMs": 8.203,
+          "p95Ms": 20.722
+        },
+        "latchToDisplay": {
+          "n": 895,
+          "medianMs": 32.717,
+          "p95Ms": 43.931
+        }
+      },
+      "confirmedFrameDeadlineViolations": {
+        "beforeTarget": 0,
+        "afterTargetWindow": 3,
+        "latchToDisplayOver33ms": 421
+      },
+      "cadence": {
+        "confirmedDisplayGap": {
+          "n": 894,
+          "medianMs": 33.326,
+          "p95Ms": 50.045
+        },
+        "gapsOver50ms": 69
+      },
+      "gates": {
+        "gpu": "notApplicable",
+        "endToEnd": "fail",
+        "missed": "fail",
+        "srDelivery": "notApplicable"
+      },
+      "hashes": {
+        "terminal.json": "6a9d63cf2aba457c3f7e1a3b3283724b480c50f71f137962dc4b6490b2a72097",
+        "run.json": "83872c65c7732c427edc7549f652de2ddf0cf378916028dacbe7cc34ec165a62",
+        "events.jsonl": "77b033eefc8f7e8022d668cc5a7ee8bc3365889d63f92ff71a254934865688d0"
+      }
+    }
+  ],
+  "paused": {
+    "swaps": {
+      "sources": [
+        "ORIGINAL",
+        "SPATIAL",
+        "CUNNY",
+        "ORIGINAL"
+      ],
+      "ptsUs": 2200000,
+      "sourceOrdinal": 66,
+      "generations": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "surfaceGeometry": [
+        1080,
+        1919
+      ]
+    },
+    "pixels": {
+      "sha256": [
+        "9396c90c013e9016493171843718b5e2fcc5bebd90b74ff5cb2e9e6d33f69dd6",
+        "ba072972923dc7999899eff583b3a86b8a5a3e57ca8f31afb44b0bb1faf8a96c",
+        "e5fd30cffd510a683d1be1c1a984ad8132f7e6fa9f067bb7fe5ce0e5e0b0d7fc",
+        "9396c90c013e9016493171843718b5e2fcc5bebd90b74ff5cb2e9e6d33f69dd6"
+      ],
+      "differingRgbPixels": [
+        56410,
+        62932,
+        62911,
+        0
+      ],
+      "comparisonPairs": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "pixelCount": 2072520
+    },
+    "stages": [
+      "Original",
+      "Spatial",
+      "CuNNy",
+      "Original"
+    ],
+    "lifecycle": {
+      "attempted": true,
+      "success": true,
+      "positionBeforeBackground": 17,
+      "positionAfterResume": 17,
+      "positionAfterResumeAdvance": 19,
+      "decodedGeneration": 10,
+      "decodedPtsUs": 17900000
+    },
+    "seek": {
+      "type": "seek",
+      "displayedAtSeek": "00:15 / 00:30",
+      "displayedAfterAdvance": "00:17 / 00:30",
+      "decodedGeneration": 9,
+      "decodedPtsUs": 15000000
+    }
+  },
+  "staticQuality": {
+    "source": "Decoded coded Y from the paired 540p and 1080p H.264 fixtures; no synthetic low-resolution inputs. Bilinear: FFmpeg bilinear+accurate_rnd, spatial and CuNNy: physical GLES/gray readback.",
+    "rows": [
+      {
+        "ptsUs": 2000000,
+        "referenceSha256": "053e390686a7f56263e4ac11cb7315039e832d843ce3520b9bb1d2ebe00f328f",
+        "inputSha256": "26eec53bf820b69e5943c0f0f3c66ec8596b62c424140821bf1ef9674b20f1ae",
+        "methods": {
+          "linear": {
+            "sha256": "8990c9af3e43cc7984beb2ff646ad856a2e03e4a129860430a7a087531eb69f3",
+            "sumSquaredError": 33549820,
+            "psnrDb": 36.041152,
+            "ssim": 0.980206
+          },
+          "spatial": {
+            "sha256": "f07002cf5380aad3e8f51c48785a9a662d60b7ba642f5b091f2dfa0dd2f36a17",
+            "sumSquaredError": 25577647,
+            "psnrDb": 37.219448,
+            "ssim": 0.984415
+          },
+          "cunny": {
+            "sha256": "e11a6f6134456e6fb59e7a397c1660a313018001e5d1769fa5c38b583c2b9bea",
+            "sumSquaredError": 19415320,
+            "psnrDb": 38.416608,
+            "ssim": 0.988193
+          }
+        }
+      },
+      {
+        "ptsUs": 8000000,
+        "referenceSha256": "2efd0f8020309bbf36cc3fb0bf92aef409d1bb12abd8ba008ba2731b477398f8",
+        "inputSha256": "2e140864afa20895f1238d67b247aea138624b4728436bb5e70d3216c637be16",
+        "methods": {
+          "linear": {
+            "sha256": "55a684495d0608d13d416896951345266dece4cf2a0332158b721d121d5ab3aa",
+            "sumSquaredError": 34438680,
+            "psnrDb": 35.927588,
+            "ssim": 0.979929
+          },
+          "spatial": {
+            "sha256": "c98f7a680564cac56de66fb7cc8c8e91a16a8ba6aceaea1cc03908804d364d08",
+            "sumSquaredError": 26440741,
+            "psnrDb": 37.075317,
+            "ssim": 0.984149
+          },
+          "cunny": {
+            "sha256": "5940379c69f59d185685b89e534dec91026ea13383408a13a7857c56caac03b2",
+            "sumSquaredError": 20396832,
+            "psnrDb": 38.202426,
+            "ssim": 0.987988
+          }
+        }
+      },
+      {
+        "ptsUs": 17000000,
+        "referenceSha256": "dae912d0784be7a7fb9a0b2b1179752e67fb904b2d6250d9d7441ee87331f127",
+        "inputSha256": "9f1da5a220b1696e552b9c998830587596082c0f1b88abed29aa24f0550ece5a",
+        "methods": {
+          "linear": {
+            "sha256": "fdc1fa4ebb8abf2e666a16542de781e7882202061d2ae3382d33ce006b027cac",
+            "sumSquaredError": 34492010,
+            "psnrDb": 35.920868,
+            "ssim": 0.979774
+          },
+          "spatial": {
+            "sha256": "3e459515fb2d5791e94f6c3b4a2ea116a57ca800b384b9c7bea7b9dd86587dd0",
+            "sumSquaredError": 26593110,
+            "psnrDb": 37.050362,
+            "ssim": 0.983961
+          },
+          "cunny": {
+            "sha256": "f4eefc6063c6a43e58fecc225e9b3136bcfad6a4773b3cc7d68c6fbeff66e024",
+            "sumSquaredError": 20552456,
+            "psnrDb": 38.169416,
+            "ssim": 0.987784
+          }
+        }
+      },
+      {
+        "ptsUs": 25000000,
+        "referenceSha256": "d8a67d3d73dd045c162c751608911d558e5470750c66102d5eff0fe79c12ee44",
+        "inputSha256": "24611ecc8b8bfe1437e60a3069730f4c4ad832ecd16fbab20b0fb401840745c6",
+        "methods": {
+          "linear": {
+            "sha256": "3f0ae1193565e6b30e2dd5077b006b419f14ea641a446c46250587656b1067ad",
+            "sumSquaredError": 32047208,
+            "psnrDb": 36.240151,
+            "ssim": 0.980973
+          },
+          "spatial": {
+            "sha256": "8424d74a19d1e2097b3589237ca2e4d99bb47b681f0de168cacb61a57e61a7eb",
+            "sumSquaredError": 23874885,
+            "psnrDb": 37.518641,
+            "ssim": 0.985321
+          },
+          "cunny": {
+            "sha256": "9a6edd054dc7752af9cdf4e05f8693ce18ce79d96a5d32b7b8bb0e98fcf5b7c0",
+            "sumSquaredError": 17258281,
+            "psnrDb": 38.928078,
+            "ssim": 0.989259
+          }
+        }
+      }
+    ],
+    "mean": {
+      "linear": {
+        "psnrDb": 36.03244,
+        "ssim": 0.980221
+      },
+      "spatial": {
+        "psnrDb": 37.215942,
+        "ssim": 0.984461
+      },
+      "cunny": {
+        "psnrDb": 38.429132,
+        "ssim": 0.988306
+      }
+    }
+  },
+  "limits": [
+    "Single handset and clip. All end-to-end and delivery deadlines unchanged. Draw/swap boundaries use CPU monotonic timestamps; swap-return to actual display is not solely GPU or compositor time. Phase percentiles are not additive. Four stills are not a moving-image preference test."
+  ]
+}

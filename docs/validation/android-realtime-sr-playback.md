@@ -1,12 +1,14 @@
 # Android 播放时超分：覆盖与验证记录
 
-更新至 2026-11-21。独立播放器用与 iOS 相同的 CuNNy 1×8 BOX 做 2× 亮度增强。首台 Android 真机 TECNO KM9 的 1080p/30 强制增强未确认增强帧上屏；新增的 540p/30 实播也未通过增强门槛，自动模式会回退原画。本页分别列出真机、模拟器和离线导出的证据。
+更新至 2026-11-21。独立播放器可手动选择轻量 Spatial 或与 iOS 相同的 CuNNy 1×8 BOX，做 2× 亮度增强。首台 Android 真机 TECNO KM9 的 1080p/30 强制增强未确认增强帧上屏；新增的 540p/30 实播也未通过增强门槛，自动模式会回退原画。本页分别列出真机、模拟器和离线导出的证据。
+
+[KM9 540p：Spatial、CuNNy 与原画的十场对照](android-spatial-playback-km9-20261121.md)。轻量 Spatial 已在播放中确认增强上屏；调试对照缩短了原画显示延迟，但严格的按时增强门槛仍未通过。
 
 | 环境或方案 | 已验证 | 尚无证据 |
 |---|---|---|
 | API 36，Android Emulator / ANGLE SwiftShader，GLES 3.1 | 有声 30 秒片 A/B/B/A 四场完整解码；原画和 CuNNy 均有 EGL 提交。离屏整帧和四个时刻的有参考重建 | 手机 GPU 性能、真实显示面上的颜色、逐帧上屏及长期表现 |
 | API 37，Android 17 / Google Play 16 KB 系统映像，SwiftShader GLES 3.1 | 同一个普通 APK 的自动模式解码 900 帧，900 次原画提交，首末帧间隔 30.28 s；Google 验证包探测不支持 | 手机 GPU 性能及显示延迟；不能把软件模拟器结果推广到 Android 17 手机 |
-| API 35，TECNO KM9 / MT6835 / Mali-G57 MC2 | GLES 3.2 真机两种分辨率各五场播放、逐帧上屏时间、暂停同帧、整帧 CPU 对照；1080p 与 540p 实时增强均未达标。Google SDK 返回 UNSUPPORTED | 30 分钟、运动盲评、其他机型或驱动；Google 540p 未测试 |
+| API 35，TECNO KM9 / MT6835 / Mali-G57 MC2 | GLES 3.2 真机 1080p 与 540p 播放、540p 轻量 Spatial 及提前提交对照、逐帧上屏时间、暂停同帧、整帧 CPU 对照；1080p 与 540p 实时增强均未达标。Google SDK 返回 UNSUPPORTED | 30 分钟、运动盲评、其他机型或驱动；Google 540p 未测试 |
 | API 26/27、其他 Adreno/Mali 手机 | API 26 是实验模块的 minSdk | 真机兼容性、GLES 3.1 能力、增强可用率与观感 |
 | LiteRT 1.4.2 / ESRGAN 4× | [既有 Android 文件导出](android-video-sr-demo.md)；实机同编码条件下，[飞鸟](f11-android-sr-controlled-20261106.md)和[瀑布](f11-android-sr-waterfall-20261106.md)的平均 PSNR/SSIM 均低于双线性 | 不据此推断同场景 CuNNy 2× 或实时播放 |
 | Google Play services Media Enhancement | 单独的 API 30+ 实验包在无 GMS 的 API 36 返回 MISSING_SERVICES；在有 GMS 的 API 37 模拟器和 API 35 TECNO 真机均返回 UNSUPPORTED。默认包不含 Media Enhancement SDK | 是否支持这条片源、模型是否可用、实际倍率与耗时 |
@@ -85,7 +87,7 @@ rtk proxy ./gradlew -PenableRealtimeSrDemo=true -PenableGoogleSr=true :examples:
 rtk proxy python3 tools/probes/android_google_sr_device.py --serial "$SERIAL" --out "$OUT/google.json"
 ```
 
-不带 Google 属性时生成 `io.ondeviceai.realtimesr.demo`（minSdk 26）；带属性的实验 APK 是另一个包 `io.ondeviceai.realtimesr.demo.google`（minSdk 30）。这两个属性构建在本机使用相同 APK 输出路径；切回普通包前应重新构建。测试驱动校验包名；手机上两包互不覆盖。手动观看普通 Demo 时用 **Pick** 选择片源，播放中可选择 **Original / Auto / CuNNy**。本地验收：35 个 Android JVM 用例、16 个播放报告/驱动用例通过，Debug 构建及 lint 通过（0 errors，9 warnings）。这次未向远端 Wiki、制品仓库或正式 App 发布。
+不带 Google 属性时生成 `io.ondeviceai.realtimesr.demo`（minSdk 26）；带属性的实验 APK 是另一个包 `io.ondeviceai.realtimesr.demo.google`（minSdk 30）。这两个属性构建在本机使用相同 APK 输出路径；切回普通包前应重新构建。测试驱动校验包名；手机上两包互不覆盖。手动观看普通 Demo 时用 **Pick** 选择片源，播放中可选择 **Original / Auto / CuNNy / Spatial**。本地验收：35 个 Android JVM 用例、16 个播放报告/驱动用例通过，Debug 构建及 lint 通过（0 errors，9 warnings）。这次未向远端 Wiki、制品仓库或正式 App 发布。
 
 ## 真机复测
 
