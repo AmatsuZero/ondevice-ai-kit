@@ -22,6 +22,7 @@ import java.util.concurrent.atomic.AtomicLong
 
 open class PlayerActivity : Activity(), SurfaceHolder.Callback {
     protected open fun useDirectOutput(): Boolean = false
+    protected open fun useEarlySubmit(): Boolean = false
     protected open fun onFrameOffered(ptsUs: Long, targetNs: Long, id: FrameId) {}
     protected open fun onMediaPosition(mediaUs: Long) {}
     protected open fun onRunEnded() {}
@@ -309,7 +310,8 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
                             assets,
                             surface,
                             { id, stage, fields -> rendererEvent(id, stage, fields) },
-                            initiallyPresentable
+                            initiallyPresentable,
+                            earlySubmitReady = useEarlySubmit()
                         )
                         synchronized(rendererLock) { renderer = created }
                         synchronized(presentationLock) {

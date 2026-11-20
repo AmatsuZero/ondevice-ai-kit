@@ -40,11 +40,11 @@ class SrRunActivity : PlayerActivity() {
         val actualFixtureSha256 = sha256(fixture)
         fixtureSha256 = actualFixtureSha256
         if (actualFixtureSha256 !in FIXTURE_SHA256S) return endRun(false, "fixture missing or SHA-256 mismatch")
-        if (runCase !in setOf("original", "original-egl", "cunny", "spatial", "auto")) return endRun(false, "invalid srCase", "unsupported")
+        if (runCase !in setOf("original", "original-egl", "original-ready", "cunny", "spatial", "spatial-ready", "auto")) return endRun(false, "invalid srCase", "unsupported")
         try {
             selectMode(when (runCase) {
                 "cunny" -> PlaybackMode.CUNNY
-                "spatial" -> PlaybackMode.SPATIAL
+                "spatial", "spatial-ready" -> PlaybackMode.SPATIAL
                 "auto" -> PlaybackMode.AUTO
                 else -> PlaybackMode.ORIGINAL
             })
@@ -55,6 +55,9 @@ class SrRunActivity : PlayerActivity() {
     }
 
     override fun useDirectOutput(): Boolean = runCase == "original"
+
+    override fun useEarlySubmit(): Boolean =
+        ::runCase.isInitialized && runCase in setOf("original-ready", "spatial-ready")
 
     override fun onFrameOffered(ptsUs: Long, targetNs: Long, id: FrameId) {
         generation = id.generation
@@ -125,10 +128,11 @@ class SrRunActivity : PlayerActivity() {
         val run = JSONObject().put("schemaVersion", 1).put("runId", runId).put("fixtureSha256", fixtureSha256 ?: JSONObject.NULL)
             .put("generation", generation).put("loops", 1).put("mode", when (runCase) {
                 "cunny" -> "CUNNY"
-                "spatial" -> "SPATIAL"
+                "spatial", "spatial-ready" -> "SPATIAL"
                 "auto" -> "AUTO"
                 else -> "ORIGINAL"
             })
+            .put("earlySubmitReady", runCase in setOf("original-ready", "spatial-ready"))
             .put("displayTimingSupported", displayTimingSupported).put("completed", completed)
         val terminal = JSONObject().put("runId", runId).put("case", runCase).put("status", requestedStatus)
             .put("detail", detail).put("frameCallbacks", frames.size).put("lastAudioUs", lastAudioUs)

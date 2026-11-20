@@ -27,7 +27,7 @@ FIXTURE_PROFILES = {
     KNOWN_SHA: "1920x1080",
     "e698bee8c98c3158eb5e99e26f1cbe13334b52557720b2129a3e31dd2fa67dcb": "960x540",
 }
-CASES = ("original", "original-egl", "cunny", "auto", "short-abba", "short-spatial")
+CASES = ("original", "original-egl", "original-ready", "cunny", "auto", "spatial", "spatial-ready", "short-abba", "short-spatial", "short-ready")
 JAVA17 = "/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 SHORT_T, POLL = 240, 2
 
@@ -160,9 +160,13 @@ def validate_decode(term, run, events_b, rid, launch_case, expected_sha=KNOWN_SH
         return fail('invalid generation')
     if type(run.get('loops')) is not int or run['loops'] != 1:
         return fail('invalid loops')
-    expected_mode = 'AUTO' if launch_case == 'auto' else ('SPATIAL' if launch_case == 'spatial' else ('CUNNY' if launch_case == 'cunny' else 'ORIGINAL'))
-    if launch_case not in ('original', 'original-egl', 'cunny', 'auto', 'spatial') or run.get('mode') != expected_mode:
+    expected_mode = 'AUTO' if launch_case == 'auto' else ('SPATIAL' if launch_case in ('spatial', 'spatial-ready') else ('CUNNY' if launch_case == 'cunny' else 'ORIGINAL'))
+    if launch_case not in ('original', 'original-egl', 'original-ready', 'cunny', 'auto', 'spatial', 'spatial-ready') or run.get('mode') != expected_mode:
         return fail('mode does not match launch case')
+    ready_case = launch_case in ('original-ready', 'spatial-ready')
+    early_submit_ready = run.get('earlySubmitReady', False)
+    if type(early_submit_ready) is not bool or early_submit_ready != ready_case:
+        return fail('earlySubmitReady does not match launch case')
     if type(run.get('completed')) is not bool or not run['completed']:
         return fail('run is not complete')
     if run.get('fixtureSha256') != expected_sha:
@@ -321,6 +325,10 @@ def one_run(adb, outroot, rid, case, launch_case, timeout, fx, expected_sha):
 
 
 def legs_for(case):
+    if case == "short-ready":
+        return [("original-ready", "original-ready"), ("spatial-ready", "spatial-ready"),
+                ("spatial", "spatial"), ("spatial-ready", "spatial-ready"),
+                ("original-ready", "original-ready")]
     if case == "short-spatial":
         return [("original-egl", "original-egl"), ("spatial", "spatial"),
                 ("cunny", "cunny"), ("spatial", "spatial"),

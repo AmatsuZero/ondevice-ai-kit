@@ -17,7 +17,8 @@ class SrRenderer(
     private val assets: AssetManager,
     private val window: Surface,
     private val onEvent: (FrameId, String, Map<String, Any?>) -> Unit,
-    initiallyPresentable: Boolean = true
+    initiallyPresentable: Boolean = true,
+    private val earlySubmitReady: Boolean = false
 ) : AutoCloseable {
     private data class Offer(val id: FrameId, val ptsUs: Long, val targetNs: Long, val enhance: Boolean, val spatial: Boolean)
 
@@ -557,6 +558,7 @@ class SrRenderer(
             slot.jobFinished = true
             slot.dispatchFailed = dispatchFailure != null
         }
+        if (earlySubmitReady) renderHandler.post { schedulePoll(0L) }
 
         if (dispatched) {
             val gpuTimingValid = dispatchFailure == null && query >= 0 && timingElapsedNs > 0L
@@ -620,7 +622,15 @@ class SrRenderer(
                             decidePresentation(slot, null)
                         }
                     }
-                } else if (nowNs >= offer.targetNs - PRESENT_LEAD_NS) {
+                } else if ((earlySubmitReady && !offer.enhance) ||
+                    (earlySubmitReady && offer.enhance && run {
+                        val workerState = synchronized(lock) {
+                            Triple(slot.jobFinished, slot.workerFence, slot.resultTexture)
+                        }
+                        workerState.first && workerState.second != 0L &&
+                            workerState.third != 0 && isSignaled(workerState.second)
+                    }) || nowNs >= offer.targetNs - PRESENT_LEAD_NS
+                ) {
                     present(slot, offer)
                 }
             }
