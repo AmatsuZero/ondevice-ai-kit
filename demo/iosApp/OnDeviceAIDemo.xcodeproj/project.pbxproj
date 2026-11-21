@@ -7,19 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C8612D0D060CB568A4149B3 /* ODAIKitAppleVoiceEffects in Frameworks */ = {isa = PBXBuildFile; productRef = B3482F67671E53325F97D0FC /* ODAIKitAppleVoiceEffects */; };
 		0FC0060F5B417443F140023B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C400C8A95494A2E3B6E3B066 /* Foundation.framework */; };
 		10C3546279CE1C5B46AE5C98 /* IOSFaceBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EAB2DDD12BDD54DF63E16CE /* IOSFaceBridge.swift */; };
 		1951F9EBE5ECCB6715306A15 /* CameraLifecycleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DA0A16610DA12DD4F9F83C /* CameraLifecycleUITests.swift */; };
 		19E2BB64BBD2D312A33B750E /* DemoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 127952E61497904681E3FFCC /* DemoController.swift */; };
 		1D4C2E4739C642009CC0C91B /* ODAIKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3961FE9E3EFF024172ED4FB9 /* ODAIKitCore */; };
+		29A9ECDD9C30E0EFC7E478F9 /* VoiceEffectsHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00276AB6B3804949823DD47E /* VoiceEffectsHost.swift */; };
+		3393C57274CF27C4A832B727 /* VoiceEffectsWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE570128B87D6C4196428D4 /* VoiceEffectsWave.swift */; };
+		39CD99246A0D8F2B0CF636D1 /* IOSVoiceEffectsBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4A493A99872B3492649B9E /* IOSVoiceEffectsBridge.swift */; };
+		6C6584DC7CCDDBC1434335CF /* SpeechHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4072CDE4B92B5418D08AF267 /* SpeechHost.swift */; };
 		72AC698A6CCC15C0AF0A0E43 /* ODAIKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA48C129CED625C9A7C154F3 /* ODAIKitDemo.framework */; };
 		7C468B946E26A8580611D22D /* ODAIKitAppleVision in Frameworks */ = {isa = PBXBuildFile; productRef = F9C3F3E98D731968E4E16789 /* ODAIKitAppleVision */; };
+		8E9982442D2986DE64C8E25A /* ODAIKitSpeech in Frameworks */ = {isa = PBXBuildFile; productRef = 0DF65401AD6106A217AA1BB9 /* ODAIKitSpeech */; };
+		941D24A64AEA718C0653BFD8 /* IOSSpeechAudioInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8954D92A35462E7132EB8D /* IOSSpeechAudioInput.swift */; };
+		A09D2C719B10850327425622 /* VoiceEffectsDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD12CCAE2B8A589150DE33D8 /* VoiceEffectsDemoUITests.swift */; };
 		A119FD29C8CFE752D8D56CC4 /* CameraLifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AA788318EF571CB8808CC /* CameraLifecycle.swift */; };
+		A4D7E73B323D4437B450265D /* SpeechInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4CDB80A5905F52E496D085 /* SpeechInputStore.swift */; };
 		A50CE56483A0B360D9A0BE38 /* CameraSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF72EE06B623224FAB2A2780 /* CameraSource.swift */; };
+		A7F590171132D02CAE084EE8 /* SpeechAudioSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0787E6DEFB4B00F1CC3F1A /* SpeechAudioSession.swift */; };
 		ACBE4DFE38D99EEE0050C759 /* ODAIKitFace in Frameworks */ = {isa = PBXBuildFile; productRef = 6E5E31E10A3093F10E4453D0 /* ODAIKitFace */; };
+		ADC0CFA38FCE834105EFA4D6 /* VoiceEffectsInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3734AB85F4AD05AFD554B5 /* VoiceEffectsInputStore.swift */; };
+		BCD2975C56BD7D84B7027E72 /* SpeechFilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC877F173857102EC6502876 /* SpeechFilePicker.swift */; };
+		C0FE208C4C49EA1474ED2DAF /* ODAIKitVoiceEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C5120EB9EC6A980140FB560D /* ODAIKitVoiceEffects */; };
 		C97C9FD3F5B34B459AF57CCD /* OnDeviceAIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86B07B08BD419D7805814EB /* OnDeviceAIDemoApp.swift */; };
+		D3D07E8A3CBF908342B657D3 /* IOSSpeechBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D8CE7A2A03FD45631DDABB /* IOSSpeechBridge.swift */; };
 		D766B6221010C3CB4849338C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C400C8A95494A2E3B6E3B066 /* Foundation.framework */; };
 		EAE1DFD11F31551C8EAE8DF9 /* PhotoSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA01B99A417119D971081869 /* PhotoSubmission.swift */; };
+		EEA1C2850214A56989269E95 /* ODAIKitAppleSpeech in Frameworks */ = {isa = PBXBuildFile; productRef = 54CC95A1287A51E680759842 /* ODAIKitAppleSpeech */; };
 		EFD08C8D0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD08C8C0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,15 +49,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00276AB6B3804949823DD47E /* VoiceEffectsHost.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VoiceEffectsHost.swift; sourceTree = "<group>"; };
 		127952E61497904681E3FFCC /* DemoController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DemoController.swift; sourceTree = "<group>"; };
 		1EAB2DDD12BDD54DF63E16CE /* IOSFaceBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IOSFaceBridge.swift; sourceTree = "<group>"; };
+		27D8CE7A2A03FD45631DDABB /* IOSSpeechBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOSSpeechBridge.swift; path = "../../kmp-binding/apple/IOSSpeechBridge.swift"; sourceTree = "<group>"; };
+		2F0787E6DEFB4B00F1CC3F1A /* SpeechAudioSession.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SpeechAudioSession.swift; sourceTree = "<group>"; };
+		4072CDE4B92B5418D08AF267 /* SpeechHost.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SpeechHost.swift; sourceTree = "<group>"; };
 		4CF19473DF0850004A0CD79A /* OnDeviceAIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnDeviceAIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BE570128B87D6C4196428D4 /* VoiceEffectsWave.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VoiceEffectsWave.swift; sourceTree = "<group>"; };
+		5C3734AB85F4AD05AFD554B5 /* VoiceEffectsInputStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VoiceEffectsInputStore.swift; sourceTree = "<group>"; };
 		5E2AA788318EF571CB8808CC /* CameraLifecycle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CameraLifecycle.swift; sourceTree = "<group>"; };
+		7E4CDB80A5905F52E496D085 /* SpeechInputStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SpeechInputStore.swift; sourceTree = "<group>"; };
 		A3DA0A16610DA12DD4F9F83C /* CameraLifecycleUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CameraLifecycleUITests.swift; path = UITests/CameraLifecycleUITests.swift; sourceTree = "<group>"; };
+		AD12CCAE2B8A589150DE33D8 /* VoiceEffectsDemoUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VoiceEffectsDemoUITests.swift; path = UITests/VoiceEffectsDemoUITests.swift; sourceTree = "<group>"; };
+		BC877F173857102EC6502876 /* SpeechFilePicker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SpeechFilePicker.swift; sourceTree = "<group>"; };
 		C400C8A95494A2E3B6E3B066 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		C86B07B08BD419D7805814EB /* OnDeviceAIDemoApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OnDeviceAIDemoApp.swift; sourceTree = "<group>"; };
 		CA01B99A417119D971081869 /* PhotoSubmission.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoSubmission.swift; sourceTree = "<group>"; };
+		CF8954D92A35462E7132EB8D /* IOSSpeechAudioInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOSSpeechAudioInput.swift; path = "../../kmp-binding/apple/IOSSpeechAudioInput.swift"; sourceTree = "<group>"; };
 		DA48C129CED625C9A7C154F3 /* ODAIKitDemo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ODAIKitDemo.framework; path = "../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework/ODAIKitDemo.framework"; sourceTree = "<group>"; };
+		DA4A493A99872B3492649B9E /* IOSVoiceEffectsBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOSVoiceEffectsBridge.swift; path = "../../kmp-binding/apple/IOSVoiceEffectsBridge.swift"; sourceTree = "<group>"; };
 		EF72EE06B623224FAB2A2780 /* CameraSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CameraSource.swift; sourceTree = "<group>"; };
 		EFD08C8C0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlaybackEnhancementHost.swift; sourceTree = "<group>"; };
 		FA3FAC9270A8B0373708CABC /* OnDeviceAIDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnDeviceAIDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +84,10 @@
 				ACBE4DFE38D99EEE0050C759 /* ODAIKitFace in Frameworks */,
 				7C468B946E26A8580611D22D /* ODAIKitAppleVision in Frameworks */,
 				72AC698A6CCC15C0AF0A0E43 /* ODAIKitDemo.framework in Frameworks */,
+				8E9982442D2986DE64C8E25A /* ODAIKitSpeech in Frameworks */,
+				EEA1C2850214A56989269E95 /* ODAIKitAppleSpeech in Frameworks */,
+				C0FE208C4C49EA1474ED2DAF /* ODAIKitVoiceEffects in Frameworks */,
+				0C8612D0D060CB568A4149B3 /* ODAIKitAppleVoiceEffects in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +141,17 @@
 				5E2AA788318EF571CB8808CC /* CameraLifecycle.swift */,
 				CA01B99A417119D971081869 /* PhotoSubmission.swift */,
 				EFD08C8C0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift */,
+				4072CDE4B92B5418D08AF267 /* SpeechHost.swift */,
+				BC877F173857102EC6502876 /* SpeechFilePicker.swift */,
+				7E4CDB80A5905F52E496D085 /* SpeechInputStore.swift */,
+				2F0787E6DEFB4B00F1CC3F1A /* SpeechAudioSession.swift */,
+				00276AB6B3804949823DD47E /* VoiceEffectsHost.swift */,
+				5C3734AB85F4AD05AFD554B5 /* VoiceEffectsInputStore.swift */,
+				5BE570128B87D6C4196428D4 /* VoiceEffectsWave.swift */,
+				27D8CE7A2A03FD45631DDABB /* IOSSpeechBridge.swift */,
+				CF8954D92A35462E7132EB8D /* IOSSpeechAudioInput.swift */,
+				DA4A493A99872B3492649B9E /* IOSVoiceEffectsBridge.swift */,
+				AD12CCAE2B8A589150DE33D8 /* VoiceEffectsDemoUITests.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -152,6 +193,10 @@
 				3961FE9E3EFF024172ED4FB9 /* ODAIKitCore */,
 				6E5E31E10A3093F10E4453D0 /* ODAIKitFace */,
 				F9C3F3E98D731968E4E16789 /* ODAIKitAppleVision */,
+				0DF65401AD6106A217AA1BB9 /* ODAIKitSpeech */,
+				54CC95A1287A51E680759842 /* ODAIKitAppleSpeech */,
+				C5120EB9EC6A980140FB560D /* ODAIKitVoiceEffects */,
+				B3482F67671E53325F97D0FC /* ODAIKitAppleVoiceEffects */,
 			);
 			productName = OnDeviceAIDemo;
 			productReference = 4CF19473DF0850004A0CD79A /* OnDeviceAIDemo.app */;
@@ -213,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1951F9EBE5ECCB6715306A15 /* CameraLifecycleUITests.swift in Sources */,
+				A09D2C719B10850327425622 /* VoiceEffectsDemoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +273,16 @@
 				A119FD29C8CFE752D8D56CC4 /* CameraLifecycle.swift in Sources */,
 				EAE1DFD11F31551C8EAE8DF9 /* PhotoSubmission.swift in Sources */,
 				EFD08C8D0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift in Sources */,
+				6C6584DC7CCDDBC1434335CF /* SpeechHost.swift in Sources */,
+				BCD2975C56BD7D84B7027E72 /* SpeechFilePicker.swift in Sources */,
+				A4D7E73B323D4437B450265D /* SpeechInputStore.swift in Sources */,
+				A7F590171132D02CAE084EE8 /* SpeechAudioSession.swift in Sources */,
+				29A9ECDD9C30E0EFC7E478F9 /* VoiceEffectsHost.swift in Sources */,
+				ADC0CFA38FCE834105EFA4D6 /* VoiceEffectsInputStore.swift in Sources */,
+				3393C57274CF27C4A832B727 /* VoiceEffectsWave.swift in Sources */,
+				D3D07E8A3CBF908342B657D3 /* IOSSpeechBridge.swift in Sources */,
+				941D24A64AEA718C0653BFD8 /* IOSSpeechAudioInput.swift in Sources */,
+				39CD99246A0D8F2B0CF636D1 /* IOSVoiceEffectsBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +313,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "在设备本地检测人脸，不上传图像。";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "仅在你点击录音或语音识别时采集声音，在设备本地处理；变声录音可由你导出。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "在设备本地识别选择的音频文件或主动开始的麦克风语音，不上传音频。";
 				INFOPLIST_KEY_ODAISDKCommit = "$(ODAI_SDK_COMMIT)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -273,6 +331,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ODAI_APP_BUNDLE_ID)";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO ODAI_VOICE_EFFECTS_DEMO";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -293,6 +352,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "在设备本地检测人脸，不上传图像。";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "仅在你点击录音或语音识别时采集声音，在设备本地处理；变声录音可由你导出。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "在设备本地识别选择的音频文件或主动开始的麦克风语音，不上传音频。";
 				INFOPLIST_KEY_ODAISDKCommit = "$(ODAI_SDK_COMMIT)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -309,6 +370,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ODAI_APP_BUNDLE_ID)";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO ODAI_VOICE_EFFECTS_DEMO";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -503,15 +565,35 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0DF65401AD6106A217AA1BB9 /* ODAIKitSpeech */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E957E30DFEA5119CB542789 /* XCLocalSwiftPackageReference "apple" */;
+			productName = ODAIKitSpeech;
+		};
 		3961FE9E3EFF024172ED4FB9 /* ODAIKitCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5E957E30DFEA5119CB542789 /* XCLocalSwiftPackageReference "apple" */;
 			productName = ODAIKitCore;
 		};
+		54CC95A1287A51E680759842 /* ODAIKitAppleSpeech */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E957E30DFEA5119CB542789 /* XCLocalSwiftPackageReference "apple" */;
+			productName = ODAIKitAppleSpeech;
+		};
 		6E5E31E10A3093F10E4453D0 /* ODAIKitFace */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5E957E30DFEA5119CB542789 /* XCLocalSwiftPackageReference "apple" */;
 			productName = ODAIKitFace;
+		};
+		B3482F67671E53325F97D0FC /* ODAIKitAppleVoiceEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E957E30DFEA5119CB542789 /* XCLocalSwiftPackageReference "apple" */;
+			productName = ODAIKitAppleVoiceEffects;
+		};
+		C5120EB9EC6A980140FB560D /* ODAIKitVoiceEffects */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E957E30DFEA5119CB542789 /* XCLocalSwiftPackageReference "apple" */;
+			productName = ODAIKitVoiceEffects;
 		};
 		F9C3F3E98D731968E4E16789 /* ODAIKitAppleVision */ = {
 			isa = XCSwiftPackageProductDependency;

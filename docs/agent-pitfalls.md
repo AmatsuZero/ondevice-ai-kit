@@ -1,3 +1,7 @@
+## 统一 iOS Demo：独立体验工程不能替代默认工程验收（2026-11-21）
+
+离线变声在独立生成工程中已完成，但默认 `OnDeviceAIDemo.xcodeproj` 缺产品、Host / bridge 源与编译条件，统一首页因此显示未接入。需同时修生成器和默认 PBX，并从根 workspace 的真实 App 验证统一入口、导入及转换；不能拿旧 SpeechDemo 成功替代。默认 UI test bundle 的 CameraLifecycle 用例另有重复 `let card`，即使 `-only-testing` 只选变声，也会因同 bundle 的其他源编译失败；删除重复两行后入口和合成 WAV 升调均通过。工具测试最初还遇 Swift 缓存写入被拒，隔离缓存后只余 SwiftPM 嵌套 `sandbox_apply` 被拒，该项在宿主单独通过，不改生产依赖。边界及首错见[默认 Demo 接入验收](validation/unified-ios-voice-demo-20261121.md)。
+
 ## KM9 播放超分：退出调试页后的迟到回调（2026-11-21）
 
 在 `SrRunActivity` 边播边切后端，按返回退出时，主线程上已排队的显示事件仍可能到达。KM9 堆栈为 `IOException: Stream closed → SrRunActivity.append → onSrEvent`：旧代码关闭了日志 writer，却仍保留其引用。结束或销毁时先标记结束、摘除 writer 再关闭；后续回调不再修改场次。该问题在调试数据记录页，不应吞掉真实渲染或 I/O 错误来恢复。验收见[播放后端切换](validation/realtime-sr-selection-20261121.md)。
