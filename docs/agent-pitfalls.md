@@ -830,3 +830,7 @@ ORT依赖材料逐归档重核时，mp11的boost-1.82.0归档没有任何独立l
 - 有效处理：改用原始官方 GET，三份 `.md` 均 200，精确字节/SHA 记于 `.omx/artifacts/f06-transfer-parent-evidence-20261107/retrieval.json`；结论仅为"所检视文档/头文件未见明确 RGB 传递函数契约"。
 - 边界：不据"无明确契约"推断 sRGB/线性必需或正确，不把未验证 gate 当通过。
 - 证据：`.omx/artifacts/f06-transfer-parent-evidence-20261107/`、`.omx/artifacts/native-f06-transfer-evidence-20261107/`、`.omx/artifacts/f06-transfer-parent-evidence-20261107/retrieval.json`、`.omx/artifacts/f06-transfer-parent-evidence-20261107/header-inventory.json`。
+
+## GitLab 主干推送：调用级代理路径恢复（2026-11-21）
+
+默认代理路径对公司远端返回 `Recv failure: Connection reset by peer`，不是未登录或拒绝推送的证据。只读确认本机代理后，同一远端以调用级 `git -c http.proxy= -c https.proxy=` 直连，`ls-remote`、普通 push、最终 SHA 回读均成功。不要因此修改全局代理或凭据，也不要 force push；该恢复只证明本次直连可用，不推断所有网络失败都由代理引起。见[统一 Demo 合入与清理](validation/unified-demo-main-merge-cleanup-20261121.md)。
