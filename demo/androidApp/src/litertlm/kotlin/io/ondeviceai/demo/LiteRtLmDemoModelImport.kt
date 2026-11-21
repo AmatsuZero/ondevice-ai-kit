@@ -23,8 +23,10 @@ internal class LiteRtLmDemoModelImport(
         private set
     private var closed = false
     private var job: Job? = null
+    private var pickerPending = false
     private val launcher = activity.registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-        if (closed) return@registerForActivityResult
+        if (closed || !pickerPending) return@registerForActivityResult
+        pickerPending = false
         if (uri == null) {
             modelSetupBusy = false
             return@registerForActivityResult
@@ -45,6 +47,7 @@ internal class LiteRtLmDemoModelImport(
                 modelSetupStatus = "模型已安装，可以选择图片并生成"
                 onImported()
             } catch (cancelled: CancellationException) {
+                modelSetupStatus = "模型准备已取消，可重新导入"
                 throw cancelled
             } catch (_: Exception) {
                 modelSetupStatus = "导入失败，请检查模型包格式、文件校验和设备兼容性"
@@ -58,9 +61,15 @@ internal class LiteRtLmDemoModelImport(
     override fun selectModelBundle() {
         if (closed || modelSetupBusy || !canImport()) return
         modelSetupBusy = true
+        pickerPending = true
         try { launcher.launch(arrayOf("application/zip", "application/x-zip-compressed", "application/octet-stream")) }
         catch (_: Exception) { modelSetupBusy = false; modelSetupStatus = "无法打开模型文件选择器" }
     }
 
-    override fun closeModelSetup() { closed = true; job?.cancel() }
+    override fun cancelModelSetup() {
+        pickerPending = false
+        job?.cancel()
+        if (job?.isActive != true) modelSetupBusy = false
+    }
+    override fun closeModelSetup() { closed = true; cancelModelSetup() }
 }

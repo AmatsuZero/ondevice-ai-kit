@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import io.ondeviceai.binding.*
 
 @Composable
-fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
+fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?, capability: SpeechBridgeCapability? = null) {
     val state = model.state
     val resources = (actions as? SpeechAsrResourceProvider)?.asrResources
     val controlsEnabled = state.controlsEnabled && resources?.state?.busy != true
@@ -26,20 +26,23 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
         model.refreshBackends(SpeechBridgeCapability.ASR)
     }
     Text("语音 · 本机处理", style = MaterialTheme.typography.titleMedium)
-    OutlinedTextField(locale, { model.cancel(); locale = it }, label = { Text("语言 / locale") },
+    OutlinedTextField(locale, { model.invalidateRequest(); locale = it }, label = { Text("语言 / locale") },
         modifier = Modifier.fillMaxWidth().testTag("speech-locale"), singleLine = true,
         enabled = controlsEnabled)
+    if (capability != SpeechBridgeCapability.ASR) {
     BackendControls("TTS", state.tts, state.ttsSelection, controlsEnabled,
         { model.selectBackend(SpeechBridgeCapability.TTS, it) }, { model.refreshBackends(SpeechBridgeCapability.TTS) })
-    OutlinedTextField(text, { model.cancel(); text = it }, label = { Text("朗读文本") },
+    OutlinedTextField(text, { model.invalidateRequest(); text = it }, label = { Text("朗读文本") },
         modifier = Modifier.fillMaxWidth().testTag("speech-tts-text"), enabled = controlsEnabled,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
         keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }))
-    OutlinedTextField(voice, { model.cancel(); voice = it }, label = { Text("voice ID（可选）") },
+    OutlinedTextField(voice, { model.invalidateRequest(); voice = it }, label = { Text("voice ID（可选）") },
         modifier = Modifier.fillMaxWidth(), singleLine = true, enabled = controlsEnabled)
     Button(onClick = { model.speak(SpeechBridgeTtsRequest(text, locale, voice.takeIf { it.isNotBlank() })) },
         enabled = controlsEnabled && text.isNotBlank() && locale.isNotBlank(),
         modifier = Modifier.testTag("speech-speak")) { Text("播放 TTS") }
+    }
+    if (capability != SpeechBridgeCapability.TTS) {
     HorizontalDivider()
     BackendControls("ASR", state.asr, state.asrSelection, controlsEnabled,
         { model.selectBackend(SpeechBridgeCapability.ASR, it) }, { model.refreshBackends(SpeechBridgeCapability.ASR) })
@@ -67,6 +70,7 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?) {
             enabled = controlsEnabled && locale.isNotBlank(), modifier = Modifier.testTag("speech-recognize-mic")) { Text("开始麦克风 ASR") }
     }
     if (inputs.isEmpty()) Text("ASR 输入尚不可用；刷新后端查看原因")
+    }
     if (state.canFinishInput) {
         Button(onClick = { model.finishInput() }, modifier = Modifier.testTag("speech-finish-input")) { Text("结束录音并识别") }
     }

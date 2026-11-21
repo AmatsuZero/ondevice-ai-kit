@@ -34,6 +34,7 @@ data class MultimodalState(
 
 /** UI-serialized shared state only; the bridge owns all native input leases and cleanup. */
 class MultimodalViewModel(private val bridge: MultimodalBridge = UnavailableMultimodalBridge()) {
+    var onTerminal: DemoTerminalObserver? = null
     var state by mutableStateOf(MultimodalState()); private set
     private var generation = 0L
     private var pending = false
@@ -158,6 +159,11 @@ class MultimodalViewModel(private val bridge: MultimodalBridge = UnavailableMult
         pending = false; active = null
         state = state.copy(phase = if (cancelled) MultimodalPhase.CANCELLED else phase,
             output = if (cancelled) null else output, failure = if (cancelled) null else failure)
+        onTerminal?.invoke(DemoCapabilityId.IMAGE_UNDERSTANDING, when (state.phase) {
+            MultimodalPhase.SUCCEEDED -> DemoRecordOutcome.COMPLETED
+            MultimodalPhase.CANCELLED -> DemoRecordOutcome.CANCELLED
+            else -> DemoRecordOutcome.FAILED
+        }, "图像推理 · ${state.phase}")
     }
     private fun invalidateRequest() {
         cancel()

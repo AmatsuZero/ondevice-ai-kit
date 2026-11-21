@@ -1,18 +1,43 @@
 import XCTest
 import Vision
 
+final class UnifiedDemoUITests: XCTestCase {
+    func testExploreModelsRecordsAndFrozenPreview() {
+        continueAfterFailure = false
+        let app = XCUIApplication(); app.launch()
+        let asr = app.descendants(matching: .any)["capability-asr"]
+        XCTAssertTrue(asr.waitForExistence(timeout: 15), app.debugDescription)
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "unified-explore"; screenshot.lifetime = .keepAlways; add(screenshot)
+        let models = app.descendants(matching: .any)["nav-模型"]
+        XCTAssertTrue(models.exists); models.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["models-list"].waitForExistence(timeout: 5))
+        app.descendants(matching: .any)["nav-记录"].tap()
+        XCTAssertTrue(app.staticTexts["记录"].waitForExistence(timeout: 5))
+        app.descendants(matching: .any)["nav-探索"].tap()
+        app.buttons["实验室"].tap()
+        let frozen = app.descendants(matching: .any)["capability-identity_liveness"]
+        XCTAssertTrue(frozen.waitForExistence(timeout: 5)); frozen.tap()
+        XCTAssertTrue(app.descendants(matching: .any)["frozen-preview"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.buttons["注册"].exists)
+        XCTAssertFalse(app.buttons["验证"].exists)
+        app.buttons["unified-back"].tap()
+        XCTAssertTrue(frozen.waitForExistence(timeout: 5))
+    }
+}
+
 final class SpeechDemoUITests: XCTestCase {
     override func setUp() { super.setUp(); continueAfterFailure = false }
     func testTtsInputOpensKeyboard() {
         let app = XCUIApplication(); app.launch()
-        let tab = app.buttons["speech-tab"]
+        let tab = app.descendants(matching: .any)["capability-tts"]
         XCTAssertTrue(tab.waitForExistence(timeout: 15)); tab.tap()
         tapRenderedControl("朗读文本", in: app)
         XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5))
     }
     func testLocaleInputOpensKeyboard() {
         let app = XCUIApplication(); app.launch()
-        let tab = app.buttons["speech-tab"]
+        let tab = app.descendants(matching: .any)["capability-tts"]
         XCTAssertTrue(tab.waitForExistence(timeout: 15)); tab.tap()
         let locale = app.descendants(matching: .any)["speech-locale"]
         locale.tap()
@@ -21,7 +46,7 @@ final class SpeechDemoUITests: XCTestCase {
     func testSpeechEntryTtsCompletesCancelsAndReenters() throws {
         let app = XCUIApplication()
         app.launch()
-        let tab = app.buttons["speech-tab"]
+        let tab = app.descendants(matching: .any)["capability-tts"]
         XCTAssertTrue(tab.waitForExistence(timeout: 15)); tab.tap()
         tapRenderedControl("朗读文本", in: app)
         guard app.keyboards.firstMatch.waitForExistence(timeout: 5) else {
@@ -52,7 +77,7 @@ final class SpeechDemoUITests: XCTestCase {
 
     func testFilePickerCancellationReturnsWithoutSelectingInput() {
         let app = XCUIApplication(); app.launch()
-        let tab = app.buttons["speech-tab"]
+        let tab = app.descendants(matching: .any)["capability-tts"]
         XCTAssertTrue(tab.waitForExistence(timeout: 15)); tab.tap()
         tapRenderedControl("选择音频文件", in: app)
         let cancel = app.descendants(matching: .any).matching(
@@ -66,7 +91,7 @@ final class SpeechDemoUITests: XCTestCase {
         try XCTSkipUnless(ProcessInfo.processInfo.environment["ODAI_MULTIMODAL_FILE_UI_TEST"] == "1",
             "Requires the fixed public PNG in this Demo's Files folder")
         let app = XCUIApplication(); app.launch()
-        let tab = app.buttons["multimodal-tab"]
+        let tab = app.descendants(matching: .any)["capability-image_understanding"]
         XCTAssertTrue(tab.waitForExistence(timeout: 15), "Multimodal tab must be present")
         tab.tap()
         selectMultimodalFixture(in: app)
@@ -95,7 +120,7 @@ final class SpeechDemoUITests: XCTestCase {
         try XCTSkipUnless(ProcessInfo.processInfo.environment["ODAI_SPEECH_FILE_UI_TEST"] == "1",
             "Requires the fixed synthetic CAF in this Demo's Files folder; see speech-demo-bridge.md")
         let app = XCUIApplication(); app.launch()
-        let tab = app.buttons["speech-tab"]
+        let tab = app.descendants(matching: .any)["capability-tts"]
         XCTAssertTrue(tab.waitForExistence(timeout: 15)); tab.tap()
         selectFixture(in: app)
         let selected = app.staticTexts["speech-audio-name"]

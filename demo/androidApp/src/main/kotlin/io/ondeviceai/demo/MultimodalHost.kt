@@ -22,6 +22,7 @@ class MultimodalHost(
     override val modelSetupStatus get() = modelSetup?.modelSetupStatus
     override fun selectModelBundle() { if (!closed && model.state.controlsEnabled) modelSetup?.selectModelBundle() }
     override fun closeModelSetup() { modelSetup?.closeModelSetup() }
+    override fun cancelModelSetup() { modelSetup?.cancelModelSetup() }
     override val supportsVideoInput: Boolean get() = videoStore != null && selectVideo != null
     val model = MultimodalViewModel(bridge)
     private var selected: String? = null

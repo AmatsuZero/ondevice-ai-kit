@@ -20,5 +20,6 @@ interface MultimodalModelSetupDemoActions {
     val modelSetupBusy: Boolean
     val modelSetupStatus: String?
     fun selectModelBundle()
+    fun cancelModelSetup() {}
     fun closeModelSetup()
 }

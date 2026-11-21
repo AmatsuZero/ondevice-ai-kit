@@ -38,6 +38,14 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
     var state by mutableStateOf(IdentityViewState()); private set
     private var generation = 0L
     private var active: IdentityBridgeTask? = null
+    private var managementTasks by mutableStateOf(0)
+    private var leavingManagement = false
+    val navigationIdle: Boolean get() = managementTasks == 0 && !state.busy
+
+    /** Keep deletion receipts/recovery callbacks alive until the admitted task ends. */
+    fun leavePage() {
+        if (managementTasks > 0) leavingManagement = true else cancel()
+    }
     private var session: IdentityLivenessSession? = null
     private var closed = false
     private var configuration: IdentityDemoConfiguration? = null
@@ -290,16 +298,25 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
         if (closed) return
         val current = beginOperation()
         state = IdentityViewState(busy = true)
+        managementTasks++
         var delivered = false
+        fun terminal(apply: () -> Unit) {
+            if (delivered) return
+            delivered = true
+            try { if (current == generation) apply() }
+            finally {
+                if (current == generation) {
+                    managementTasks--
+                    if (managementTasks == 0 && leavingManagement) { leavingManagement = false; cancel() }
+                }
+            }
+        }
         val task = start(object : IdentityCallback<T> {
             override fun onSuccess(value: T) {
-                if (current != generation || delivered) return
-                delivered = true; active = null; state = IdentityViewState()
-                success(value)
+                terminal { active = null; state = IdentityViewState(); success(value) }
             }
             override fun onFailure(error: IdentityBridgeFailure) {
-                if (current != generation || delivered) return
-                delivered = true; active = null; state = IdentityViewState(error = error)
+                terminal { active = null; state = IdentityViewState(error = error) }
             }
         })
         if (current == generation && state.busy && !delivered) active = task
@@ -353,14 +370,20 @@ class IdentityViewModel(private val bridge: IdentityBridge) {
     }
     fun finishLiveness() { session?.finish() }
     fun cancel() {
-        generation++; active?.cancel(); active = null
+        generation++; active?.cancel(); active = null; managementTasks = 0; leavingManagement = false
         val previous = session; session = null; previous?.cancel(); previous?.close()
         livenessChallenge = null
         state = state.copy(busy = false, error = if (closed) state.error else IdentityBridgeFailure.Cancelled)
     }
     fun close() { if (!closed) { closed = true; cancel(); bridge.close() } }
 
-    private fun beginOperation(): Long { generation++; active?.cancel(); active = null; session?.close(); session = null; livenessChallenge = null; return generation }
+    private fun beginOperation(): Long {
+        generation++
+        active?.cancel(); active = null
+        managementTasks = 0; leavingManagement = false
+        session?.close(); session = null; livenessChallenge = null
+        return generation
+    }
     private fun requireConfiguration(): IdentityDemoConfiguration? {
         if (closed) return null
         val value = configuration

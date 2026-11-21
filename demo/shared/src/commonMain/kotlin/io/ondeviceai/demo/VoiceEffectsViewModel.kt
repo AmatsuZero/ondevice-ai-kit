@@ -29,6 +29,7 @@ interface VoiceEffectsDemoActions {
 
 /** UI-thread state. Host holds outputs while any player/exporter can read them. */
 class VoiceEffectsViewModel(private val bridge: VoiceEffectsBridge) {
+    var onTerminal: DemoTerminalObserver? = null
     var state by mutableStateOf(VoiceEffectsState()); private set
     private var generation = 0L
     private var pending = false
@@ -43,7 +44,7 @@ class VoiceEffectsViewModel(private val bridge: VoiceEffectsBridge) {
         state = state.copy(inputReference = reference, inputName = name, failure = null)
     }
     fun selectPreset(preset: VoiceEffectsBridgePreset) {
-        if (state.controlsEnabled) state = state.copy(preset = preset)
+        if (state.controlsEnabled && preset != state.preset) { clearOutput(); state = state.copy(preset = preset) }
     }
     fun setImporting(value: Boolean) { if (!state.closed) state = state.copy(importing = value) }
     fun setRecording(value: Boolean) { if (!state.closed) state = state.copy(recording = value) }
@@ -104,6 +105,11 @@ class VoiceEffectsViewModel(private val bridge: VoiceEffectsBridge) {
         pending = false; active = null
         state = state.copy(phase = if (cancelled) VoiceEffectsPhase.CANCELLED else phase,
             output = if (cancelled) null else output, failure = failure)
+        onTerminal?.invoke(DemoCapabilityId.VOICE_EFFECTS, when (state.phase) {
+            VoiceEffectsPhase.SUCCEEDED -> DemoRecordOutcome.COMPLETED
+            VoiceEffectsPhase.CANCELLED -> DemoRecordOutcome.CANCELLED
+            else -> DemoRecordOutcome.FAILED
+        }, "音频转换 · ${state.phase}")
     }
     private fun retire(reference: String) { retired += reference; release(reference) }
     private fun release(reference: String) {

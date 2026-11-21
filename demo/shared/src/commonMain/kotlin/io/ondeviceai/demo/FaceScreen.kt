@@ -30,7 +30,8 @@ fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityVie
     multimodalActions: MultimodalDemoActions? = null,
     identitySetup: IdentityModelSetupDemoActions? = null,
     modifier: Modifier = Modifier.heightIn(max = 380.dp),
-    onFacePageVisibilityChanged: (Boolean) -> Unit = {}) {
+    onFacePageVisibilityChanged: (Boolean) -> Unit = {},
+    showSectionTabs: Boolean = true) {
     val state = model.state
     val availability = model.bridge.availability()
     var identityVisible by remember { mutableStateOf(false) }
@@ -52,7 +53,7 @@ fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityVie
     MaterialTheme {
         Column(modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text("OnDevice AI Kit", style = MaterialTheme.typography.headlineSmall)
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            if (showSectionTabs) Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 TextButton(onClick = { leaveSpeech(); leaveVideo(); leaveMultimodal(); identityVisible = false },
                     modifier = Modifier.testTag("face-tab")) { Text("人脸检测") }
                 if (identity != null) TextButton(onClick = { leaveSpeech(); leaveVideo(); leaveMultimodal(); identityVisible = true }) { Text("身份与活体") }
@@ -63,7 +64,7 @@ fun FaceScreen(model: FaceViewModel, actions: DemoActions, identity: IdentityVie
                     leaveSpeech(); leaveMultimodal(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; videoVisible = true
                 }, modifier = Modifier.testTag("video-tab")) { Text("视频") }
             }
-            if (multimodal != null) TextButton(onClick = {
+            if (showSectionTabs && multimodal != null) TextButton(onClick = {
                 leaveSpeech(); leaveVideo(); actions.stopCamera(); model.cancel(); identity?.cancel(); identityVisible = false; multimodalVisible = true
             }, modifier = Modifier.testTag("multimodal-tab")) { Text("图像理解") }
             if (multimodalVisible && multimodal != null) {

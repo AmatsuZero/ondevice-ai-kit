@@ -40,6 +40,7 @@ interface VideoDemoActions {
 
 /** Serialized on the host UI thread, including synchronous bridge callbacks. */
 class VideoViewModel(private val bridge: VideoBridge) {
+    var onTerminal: DemoTerminalObserver? = null
     var state by mutableStateOf(VideoState()); private set
     private var generation = 0L
     private var pending = false
@@ -70,11 +71,11 @@ class VideoViewModel(private val bridge: VideoBridge) {
 
     fun selectBackend(selection: VideoBridgeSelection) {
         if (state.closed || selection == state.selection) return
-        cancel(); state = state.copy(selection = selection)
+        cancel(); clearOutput(); state = state.copy(selection = selection)
     }
     fun selectAudioPolicy(policy: VideoBridgeAudioPolicy) {
         if (state.closed || policy == state.audioPolicy) return
-        cancel(); state = state.copy(audioPolicy = policy)
+        cancel(); clearOutput(); state = state.copy(audioPolicy = policy)
     }
     fun selectVideo(reference: String?, displayName: String?) {
         if (state.closed) return
@@ -150,6 +151,11 @@ class VideoViewModel(private val bridge: VideoBridge) {
         pending = false; active = null
         state = state.copy(phase = if (cancelled) VideoPhase.CANCELLED else phase,
             output = if (cancelled) null else output, failure = if (cancelled) null else failure)
+        onTerminal?.invoke(DemoCapabilityId.FILE_SUPER_RESOLUTION, when (state.phase) {
+            VideoPhase.SUCCEEDED -> DemoRecordOutcome.COMPLETED
+            VideoPhase.CANCELLED -> DemoRecordOutcome.CANCELLED
+            else -> DemoRecordOutcome.FAILED
+        }, "视频处理 · ${state.phase}")
     }
     private fun cancelQuery() {
         queryGeneration++; query?.cancel(); query = null; state = state.copy(refreshing = false)

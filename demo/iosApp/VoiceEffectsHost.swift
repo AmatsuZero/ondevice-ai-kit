@@ -40,7 +40,13 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIDocumentPickerDelegate {
     private let inputs = VoiceEffectsInputStore()
     private var bridge: IOSVoiceEffectsBridge?
-    private var model: VoiceEffectsViewModel?
+    private(set) var model: VoiceEffectsViewModel?
+    private(set) var preparationState = DemoHostState.preparing
+    var recordSink: ((DemoCapabilityId, DemoRecordOutcome, String) -> Void)? {
+        didSet { model?.onTerminal = recordSink }
+    }
+    private let embedded: Bool
+    private var preparingEmbedded = false
     private var prepare: Task<Void, Never>?
     private var preparation: () async throws -> Void
     private let done: () -> Void
@@ -58,7 +64,8 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     private var exportReference: String?
     private var pickerIsExport = false
     private var sessionOriginal: (AVAudioSession.Category, AVAudioSession.Mode, AVAudioSession.CategoryOptions)?
-    init(prepareAudio: @escaping () async throws -> Void, done: @escaping () -> Void) {
+    init(embedded: Bool = false, prepareAudio: @escaping () async throws -> Void, done: @escaping () -> Void) {
+        self.embedded = embedded
         self.preparation = prepareAudio; self.done = done
         super.init(nibName: nil, bundle: nil)
     }
@@ -69,7 +76,9 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
         label.frame = view.bounds; label.autoresizingMask = [.flexibleWidth,.flexibleHeight]; view.addSubview(label)
         NotificationCenter.default.addObserver(self, selector: #selector(background), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(interrupted(_:)), name: AVAudioSession.interruptionNotification, object: nil)
+        preparingEmbedded = true
         prepare = Task { @MainActor in
+            defer { preparingEmbedded = false }
             do {
                 try await preparation()
                 let directory = root.appendingPathComponent("outputs", isDirectory: true)
@@ -78,10 +87,14 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
                 let client = try VoiceEffectsClient(backend: AppleVoiceEffectsBackend(), outputDirectory: directory)
                 let bridge = IOSVoiceEffectsBridge(client: client, inputs: inputs); self.bridge = bridge
                 let model = VoiceEffectsViewModel(bridge: bridge); self.model = model
-                let child = VoiceEffectsViewControllerKt.voiceEffectsMainViewController(model: model, actions: self)
+                model.onTerminal = recordSink
+                preparationState = .ready
+                let child = embedded
+                    ? VoiceEffectsViewControllerKt.voiceEffectsEmbeddedViewController(model: model, actions: self)
+                    : VoiceEffectsViewControllerKt.voiceEffectsMainViewController(model: model, actions: self)
                 label.removeFromSuperview(); addChild(child); view.addSubview(child.view)
                 child.view.frame = view.bounds; child.view.autoresizingMask = [.flexibleWidth,.flexibleHeight]; child.didMove(toParent: self)
-            } catch { if !closed { label.text = "音频准备失败，请返回重试" } }
+            } catch { if !closed { preparationState = .failed; label.text = "音频准备失败，请返回重试" } }
         }
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(exitPage))
     }
@@ -284,7 +297,16 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
         try? session.setActive(false, options: .notifyOthersOnDeactivation)
         try? session.setCategory(original.0, mode: original.1, options: original.2); sessionOriginal = nil
     }
+    var idle: Bool {
+        !preparingEmbedded && recorder == nil && preparingPlayback.isEmpty &&
+            (model == nil || (model!.state.controlsEnabled && model!.state.pendingReleases == 0))
+    }
+    func leaveEmbeddedPage() {
+        generation += 1
+        stopPlayback(); stopCapture(discard: true); model?.leavePage()
+    }
     func leavePage() {
+        if embedded { leaveEmbeddedPage(); return }
         guard !closed else { return }
         shutdown()
         Task { @MainActor in

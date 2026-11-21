@@ -10,6 +10,25 @@ class FakeBridge:FaceBridge {
     override fun close(){closed=true}
 }
 class FaceViewModelTest {
+    @Test fun photoTerminalsEmitOneSanitizedSummaryButCameraFramesDoNot() {
+        val bridge = FakeBridge(); val vm = FaceViewModel(bridge)
+        val outcomes = mutableListOf<DemoRecordOutcome>()
+        vm.onTerminal = { id, outcome, summary ->
+            assertEquals(DemoCapabilityId.FACE_DETECTION, id)
+            assertFalse(summary.contains("private-input")); outcomes += outcome
+        }
+        val result = BridgeFaceResult("private-input", 64, 64, "fake", emptyList(), 1.0, null)
+        vm.detect("private-input"); bridge.callbacks.last().onResult(result)
+        bridge.callbacks.last().onResult(result)
+        vm.detect("private-input"); bridge.callbacks.last().onError("private-input error")
+        vm.detect("private-input"); vm.cancel(); bridge.callbacks.last().onCancelled()
+        assertEquals(listOf(DemoRecordOutcome.COMPLETED, DemoRecordOutcome.FAILED, DemoRecordOutcome.CANCELLED), outcomes)
+        vm.detectFrame("private-input"); bridge.callbacks.last().onResult(result)
+        vm.detectFrame("private-input"); bridge.callbacks.last().onError("camera error")
+        vm.detectFrame("private-input"); vm.cancel()
+        assertEquals(3, outcomes.size)
+    }
+
     @Test fun backendSelectionReachesBridgeWithoutFallback() {
         val bridge=FakeBridge();val vm=FaceViewModel(bridge)
         vm.detect("default")

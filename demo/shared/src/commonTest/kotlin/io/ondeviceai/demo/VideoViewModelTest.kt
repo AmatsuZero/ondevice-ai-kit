@@ -8,6 +8,29 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class VideoViewModelTest {
+    @Test fun changingOutputConfigurationRetiresPreviousResult() {
+        val bridge = FakeVideoBridge().apply { synchronous = true }
+        val model = VideoViewModel(bridge)
+        model.selectVideo("input", null); model.process()
+        assertTrue(model.state.output != null)
+        model.selectAudioPolicy(VideoBridgeAudioPolicy.DISCARD)
+        assertNull(model.state.output)
+        assertEquals(listOf("out-1"), bridge.releases)
+    }
+    @Test fun recordsUseRealTerminalOnceAndNeverKeepMedia() {
+        val bridge = FakeVideoBridge()
+        val model = VideoViewModel(bridge)
+        val outcomes = mutableListOf<DemoRecordOutcome>()
+        model.onTerminal = { _, outcome, _ -> outcomes += outcome }
+        model.selectVideo("input", "private-file-name.mov")
+        model.process(); model.cancel()
+        assertTrue(outcomes.isEmpty())
+        bridge.callbacks[0].onResult(output("late"))
+        bridge.callbacks[0].onCancelled()
+        assertEquals(listOf(DemoRecordOutcome.CANCELLED), outcomes)
+        assertNull(model.state.output)
+    }
+
     @Test fun importDisablesProcessingUntilPublished() {
         val bridge = FakeVideoBridge()
         val model = VideoViewModel(bridge)

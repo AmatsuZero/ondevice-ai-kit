@@ -37,6 +37,8 @@ private class FakeIdentityBridge : IdentityBridge by UnavailableIdentityBridge()
     val deletionEvents = mutableListOf<String>()
     var candidateCallback: IdentityCallback<IdentityCandidateReference>? = null
     var delayCandidate = false
+    var delayDeletion = false
+    val deletionCallbacks = mutableListOf<IdentityCallback<IdentityDeletionStatus>>()
     override fun availability() = advertisedAvailability
     override fun createCandidate(grant: IdentityAuthorizationGrant, callback: IdentityCallback<IdentityCandidateReference>): IdentityBridgeTask {
         candidateCallback = callback
@@ -53,6 +55,7 @@ private class FakeIdentityBridge : IdentityBridge by UnavailableIdentityBridge()
     override fun awaitDeletion(receipt: IdentityDeletionReceipt, options: IdentityDeletionWaitOptions,
         callback: IdentityCallback<IdentityDeletionStatus>): IdentityBridgeTask {
         deletionEvents += "await-${receipt.store}"
+        if (delayDeletion) { deletionCallbacks += callback; return IdentityTask() }
         callback.onSuccess(if (receipt.store == IdentityDeletionStore.INDEX) indexDeletionStatus ?: deletionStatus else deletionStatus)
         return IdentityTask()
     }
@@ -124,6 +127,54 @@ private class FakeSession(override val sessionId: String = "session") : Identity
 }
 
 class IdentityViewModelTest {
+    @Test fun cancellingManagementWithNoCallbackClosesRetiredSlotAndRejectsLateCallbacks() {
+        val bridge = FakeIdentityBridge().apply { delayDeletion = true }
+        val identity = IdentityViewModel(bridge)
+        identity.configure(galleryConfiguration())
+        identity.deleteCandidateConfigured()
+        identity.cancel()
+        assertTrue(identity.navigationIdle)
+        bridge.deletionCallbacks.single().onSuccess(IdentityDeletionStatus.PURGED)
+        assertTrue(identity.navigationIdle)
+        assertNull(identity.state.deletion)
+    }
+
+    @Test fun replacingManagementBeforeOldCallbackDoesNotLeakNavigationCount() {
+        val bridge = FakeIdentityBridge().apply { delayDeletion = true }
+        val identity = IdentityViewModel(bridge)
+        identity.configure(galleryConfiguration())
+        identity.deleteCandidateConfigured()
+        identity.refreshDeletion()
+        assertFalse(identity.navigationIdle)
+        bridge.deletionCallbacks.last().onSuccess(IdentityDeletionStatus.PURGED)
+        assertTrue(identity.navigationIdle)
+        bridge.deletionCallbacks.first().onSuccess(IdentityDeletionStatus.PURGE_PENDING)
+        assertTrue(identity.navigationIdle)
+    }
+
+    @Test fun leavingDeletionOrRecoveryWaitsForTerminalAndRejectsDuplicateCallbacks() {
+        val bridge = FakeIdentityBridge().apply { delayDeletion = true }
+        val identity = IdentityViewModel(bridge)
+        identity.configure(galleryConfiguration())
+        val model = UnifiedDemoModel(onLeave = { identity.leavePage() }, isIdle = { identity.navigationIdle })
+        model.openCapability(DemoCapabilityId.IDENTITY_LIVENESS)
+        identity.deleteCandidateConfigured()
+        model.navigateTopLevel(DemoTab.MODELS)
+        assertTrue(model.leaving); assertFalse(identity.navigationIdle)
+        model.finishNavigation(); assertTrue(model.leaving)
+        bridge.deletionCallbacks.last().onSuccess(IdentityDeletionStatus.PURGE_PENDING)
+        model.finishNavigation(); assertEquals(UnifiedDemoRoute.Models, model.route)
+        val terminal = identity.state
+        bridge.deletionCallbacks.last().onSuccess(IdentityDeletionStatus.PURGED)
+        assertEquals(terminal, identity.state)
+        model.openCapability(DemoCapabilityId.IDENTITY_LIVENESS)
+        identity.refreshDeletion()
+        model.navigateTopLevel(DemoTab.RECORDS)
+        assertTrue(model.leaving)
+        bridge.deletionCallbacks.last().onFailure(IdentityBridgeFailure.Cancelled)
+        model.finishNavigation(); assertEquals(UnifiedDemoRoute.Records, model.route)
+    }
+
     private val probe = IdentityProbeReference("probe")
     private val template = IdentityTemplateReference("template")
     private val grant = IdentityAuthorizationGrant("grant")

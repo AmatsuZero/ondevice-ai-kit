@@ -8,6 +8,19 @@ import ODAIKitDemo
 import ODAIKitCore
 import ODAIKitFace
 
+#if ODAI_MULTIMODAL_MLX_DEMO
+extension DemoController {
+    /// Cancels only the current unified-page preparation; installed models are retained.
+    func cancelUnifiedMultimodalPreparation() {
+        guard multimodalPreparing else { return }
+        multimodalPreparation = nil
+        multimodalPreparation = MultimodalHostPreparation()
+        multimodalPreparing = false
+        multimodalSetupStatus = "模型准备已取消，可重新导入"
+    }
+}
+#endif
+
 @MainActor
 final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, @MainActor IdentityDemoActions, PHPickerViewControllerDelegate {
     let bridge = IOSFaceBridge()

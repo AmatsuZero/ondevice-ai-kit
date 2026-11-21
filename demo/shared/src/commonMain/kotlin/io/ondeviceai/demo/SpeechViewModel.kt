@@ -35,6 +35,8 @@ interface SpeechDemoActions {
 
 /** Admission, state changes and bridge callbacks are serialized on the platform UI thread. */
 class SpeechViewModel(private val bridge: SpeechBridge) {
+    var onTerminal: DemoTerminalObserver? = null
+    private var currentCapability = DemoCapabilityId.TTS
     var state by mutableStateOf(SpeechState()); private set
     private var audioGeneration = 0L
     private var audioPending = false
@@ -68,14 +70,14 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
         if (state.closed) return
         val previous = if (capability == SpeechBridgeCapability.TTS) state.ttsSelection else state.asrSelection
         if (previous == selection) return
-        cancel()
+        invalidateRequest()
         state = if (capability == SpeechBridgeCapability.TTS) state.copy(ttsSelection = selection)
                 else state.copy(asrSelection = selection)
     }
 
     fun selectAudio(reference: String?, displayName: String?) {
         if (state.closed) return
-        if (reference != state.audioReference) cancel()
+        if (reference != state.audioReference) invalidateRequest()
         state = state.copy(audioReference = reference, audioDisplayName = if (reference == null) null else displayName)
     }
 
@@ -87,6 +89,7 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
 
     fun speak(request: SpeechBridgeTtsRequest, selection: SpeechBridgeSelection = state.ttsSelection) {
         val generation = begin() ?: return
+        currentCapability = DemoCapabilityId.TTS
         val task = bridge.speak(request, selection, object : SpeechBridgeTtsCallback {
             override fun onResult(synthesis: SpeechBridgeTtsResult) = terminal(generation, SpeechPhase.SUCCEEDED, tts = synthesis)
             override fun onFailure(failure: SpeechBridgeFailure) = terminal(generation, SpeechPhase.FAILED, failure = failure)
@@ -114,6 +117,7 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
             return
         }
         val generation = begin(microphone = request.input == SpeechBridgeInput.Microphone) ?: return
+        currentCapability = DemoCapabilityId.ASR
         val task = bridge.recognize(request, selection, object : SpeechBridgeAsrCallback {
             override fun onResult(output: SpeechBridgeAsrResult) = terminal(generation, SpeechPhase.SUCCEEDED, asr = output)
             override fun onFailure(failure: SpeechBridgeFailure) = terminal(generation, SpeechPhase.FAILED, failure = failure)
@@ -135,6 +139,8 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
         state = state.copy(phase = SpeechPhase.CANCELLING, canFinishInput = false)
         active?.cancel()
     }
+
+    fun invalidateRequest() { cancel(); state = state.copy(ttsResult = null, asrResult = null) }
 
     fun leavePage() { cancel(); cancelQueries(); state = state.copy(asrResult = null, ttsResult = null) }
     fun background() = leavePage()
@@ -185,6 +191,11 @@ class SpeechViewModel(private val bridge: SpeechBridge) {
         state = state.copy(phase = if (cancelled) SpeechPhase.CANCELLED else phase,
             ttsResult = if (cancelled) null else tts, asrResult = if (cancelled) null else asr,
             failure = if (cancelled) null else failure, canFinishInput = false)
+        onTerminal?.invoke(currentCapability, when (state.phase) {
+            SpeechPhase.SUCCEEDED -> DemoRecordOutcome.COMPLETED
+            SpeechPhase.CANCELLED -> DemoRecordOutcome.CANCELLED
+            else -> DemoRecordOutcome.FAILED
+        }, "语音任务 · ${state.phase}")
     }
 
     private fun cancelQueries() {

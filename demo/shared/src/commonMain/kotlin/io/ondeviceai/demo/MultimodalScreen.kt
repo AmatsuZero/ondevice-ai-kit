@@ -16,7 +16,7 @@ import io.ondeviceai.binding.*
 
 /** Display and user actions only. Input acquisition and model ownership belong to the host. */
 @Composable
-fun MultimodalScreen(model: MultimodalViewModel, actions: MultimodalDemoActions? = null) {
+fun MultimodalScreen(model: MultimodalViewModel, actions: MultimodalDemoActions? = null, allowVideoInput: Boolean = true) {
     val state = model.state
     val explicit = state.selection as? MultimodalBridgeSelection.Explicit
     var backendId by remember(model, state.selection) { mutableStateOf(explicit?.backendId ?: "") }
@@ -55,7 +55,7 @@ fun MultimodalScreen(model: MultimodalViewModel, actions: MultimodalDemoActions?
     if (actions != null) Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         TextButton(onClick = actions::selectImageFile, enabled = state.controlsEnabled && !setupBusy,
             modifier = Modifier.testTag("multimodal-select-input")) { Text("选择图片") }
-        if (actions is MultimodalVideoDemoActions && actions.supportsVideoInput) TextButton(onClick = actions::selectVideoFile,
+        if (allowVideoInput && actions is MultimodalVideoDemoActions && actions.supportsVideoInput) TextButton(onClick = actions::selectVideoFile,
             enabled = state.controlsEnabled, modifier = Modifier.testTag("multimodal-select-video")) { Text("选择视频") }
         TextButton(onClick = actions::clearImageFile, enabled = !state.closed && state.inputReference != null,
             modifier = Modifier.testTag("multimodal-clear-input")) { Text("清除输入") }

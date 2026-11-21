@@ -3,6 +3,10 @@ import XCTest
 final class CameraLifecycleUITests: XCTestCase {
     func testPhotoPickerCancellationReturnsToDemo() {
         let app = XCUIApplication(); app.launch()
+        let card = app.descendants(matching: .any)["capability-face_detection"]
+        XCTAssertTrue(card.waitForExistence(timeout: 15)); card.tap()
+        let card = app.descendants(matching: .any)["capability-face_detection"]
+        XCTAssertTrue(card.waitForExistence(timeout: 15)); card.tap()
         let select = app.buttons["选择图片"]
         XCTAssertTrue(select.waitForExistence(timeout: 15)); select.tap()
         let cancel = app.buttons["取消"]

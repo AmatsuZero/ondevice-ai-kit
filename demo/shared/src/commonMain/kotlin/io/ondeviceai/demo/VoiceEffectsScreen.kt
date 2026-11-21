@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import io.ondeviceai.binding.VoiceEffectsBridgePreset
 
 @Composable
-fun VoiceEffectsScreen(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoActions) {
+fun VoiceEffectsScreen(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoActions, showBack: Boolean = true) {
     val state = model.state
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -63,6 +63,6 @@ fun VoiceEffectsScreen(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoAc
             Text("输出清理失败，可重试", color = MaterialTheme.colorScheme.error)
             TextButton(onClick = model::retryReleases) { Text("重试清理") }
         }
-        TextButton(onClick = actions::leavePage) { Text("返回") }
+        if (showBack) TextButton(onClick = actions::leavePage) { Text("返回") }
     }
 }
