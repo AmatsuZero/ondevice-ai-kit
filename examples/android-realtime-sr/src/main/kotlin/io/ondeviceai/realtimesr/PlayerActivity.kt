@@ -17,6 +17,8 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import io.ondeviceai.binding.RealtimeSRBackend
+import io.ondeviceai.binding.RealtimeSRMode
+import io.ondeviceai.binding.RealtimeVideoSR
 import java.util.Locale
 import java.util.concurrent.atomic.AtomicLong
 
@@ -42,9 +44,19 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
     }
 
     protected open fun selectMode(mode: PlaybackMode) {
-        keepPreviewOnModeChange = !isPlaying
+        val sameMode = policy.mode == mode
+        val keepPreview = !isPlaying
+        keepPreviewOnModeChange = keepPreview
         try {
-            host.select(mode)
+            val accepted = playbackControl.selectMode(
+                when (mode) {
+                    PlaybackMode.ORIGINAL -> RealtimeSRMode.ORIGINAL
+                    PlaybackMode.AUTO -> RealtimeSRMode.AUTO
+                    PlaybackMode.CUNNY -> RealtimeSRMode.CUNNY
+                    PlaybackMode.SPATIAL -> RealtimeSRMode.SPATIAL
+                }
+            )
+            if (accepted && sameMode && keepPreview) host.select(mode)
         } finally {
             keepPreviewOnModeChange = false
         }
@@ -58,6 +70,7 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
     private lateinit var worker: Handler
     private lateinit var workerThread: HandlerThread
     private lateinit var host: AndroidRealtimeSRHost
+    private val playbackControl by lazy { RealtimeVideoSR(host) }
     private lateinit var surfaceView: SurfaceView
     private lateinit var status: TextView
     private lateinit var positionLabel: TextView
@@ -564,7 +577,7 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
 
     private fun refreshStatus() {
         if (!::host.isInitialized || !::status.isInitialized) return
-        val state = host.readStatus()
+        val state = playbackControl.status()
         val preferred = state.preferredBackend.name
         val actual = state.presentedBackend?.name ?: "no confirmed present"
         val note = unsupportedReason?.let { " — $it" }.orEmpty() +

@@ -60,6 +60,7 @@ class SrRunActivity : PlayerActivity() {
         ::runCase.isInitialized && runCase in setOf("original-ready", "spatial-ready")
 
     override fun onFrameOffered(ptsUs: Long, targetNs: Long, id: FrameId) {
+        if (ended) return
         generation = id.generation
         if (frameGeneration == null) frameGeneration = id.generation
         else if (frameGeneration != id.generation) frameSequenceConsistent = false
@@ -76,7 +77,7 @@ class SrRunActivity : PlayerActivity() {
     override fun onMediaPosition(mediaUs: Long) { lastAudioUs = mediaUs }
 
     override fun onSrEvent(id: FrameId, stage: String, fields: Map<String, Any?>) {
-        if (stage !in setOf("latch", "srStart", "srEnd", "swap", "display")) return
+        if (ended || stage !in setOf("latch", "srStart", "srEnd", "swap", "display")) return
         generation = id.generation
         if (stage == "swap") {
             val backend = fields["submittedBackend"]?.toString() ?: "unknown"
@@ -111,7 +112,8 @@ class SrRunActivity : PlayerActivity() {
     }
 
     override fun onDestroy() {
-        writer?.close()
+        ended = true
+        closeWriter()
         super.onDestroy()
     }
 
@@ -119,12 +121,17 @@ class SrRunActivity : PlayerActivity() {
         writer?.apply { write(json.toString()); newLine() }
     }
 
+    private fun closeWriter() {
+        val currentWriter = writer ?: return
+        writer = null
+        currentWriter.close()
+    }
+
     private fun endRun(completed: Boolean, detail: String, requestedStatus: String = "failed") {
         if (!::runId.isInitialized || !::dir.isInitialized) { finish(); return }
         if (ended) return
         ended = true
-        writer?.flush()
-        writer?.close()
+        closeWriter()
         val run = JSONObject().put("schemaVersion", 1).put("runId", runId).put("fixtureSha256", fixtureSha256 ?: JSONObject.NULL)
             .put("generation", generation).put("loops", 1).put("mode", when (runCase) {
                 "cunny" -> "CUNNY"

@@ -1,3 +1,7 @@
+## KM9 播放超分：退出调试页后的迟到回调（2026-11-21）
+
+在 `SrRunActivity` 边播边切后端，按返回退出时，主线程上已排队的显示事件仍可能到达。KM9 堆栈为 `IOException: Stream closed → SrRunActivity.append → onSrEvent`：旧代码关闭了日志 writer，却仍保留其引用。结束或销毁时先标记结束、摘除 writer 再关闭；后续回调不再修改场次。该问题在调试数据记录页，不应吞掉真实渲染或 I/O 错误来恢复。验收见[播放后端切换](validation/realtime-sr-selection-20261121.md)。
+
 ## Android 视频基线：SurfaceFlinger 图层名、刷新率和实际呈现（2026-11-21）
 
 KM9 的 `dumpsys SurfaceFlinger --list` 会输出 `RequestedLayerState{… parentId=…}`。整行传给 `--latency` 只得到周期，没有视频帧。截取本次 Activity 对应的完整 `SurfaceView[…](BLAST)#编号`（保留编号），用单个正确引用的远端参数轮询；按应用每帧请求时间精确匹配，去掉零、待定和重复历史，再与 EGL 的正显示时间交叉验证。窗口 UI 的 FrameTimeline 记录不能替代视频子图层。动态刷新率在一次播放边界可能出现 60/90 Hz 两种样本；比较时记录并恢复原策略，按图层实测周期复核。不同代次、多回调或迟开始采样须保留为探索样本。详见[KM9 固定刷新率播放对照](validation/android-motion-cadence-km9-20261121.md)。
