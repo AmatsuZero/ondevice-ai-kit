@@ -55,6 +55,7 @@ interface UnifiedDemoBindings {
     val voiceEffectsModel: VoiceEffectsViewModel?
     val voiceEffectsActions: VoiceEffectsDemoActions?
     val realtimeSr: RealtimeSRDemoActions?
+    val playbackEnhancement: PlaybackEnhancementDemoActions? get() = null
     fun modelSetup(id: DemoCapabilityId): UnifiedDemoModelActions? = null
     val nowMillis: Long get() = 0L
     fun setRecordSink(sink: DemoTerminalObserver?) {}
@@ -82,6 +83,13 @@ interface RealtimeSRDemoActions {
     fun selectMode(mode: RealtimeSRMode): Boolean
 }
 
+/** Opens the platform player that owns decoded frames and realtime SR presentation. */
+interface PlaybackEnhancementDemoActions {
+    val playerAvailable: Boolean
+    val playerDescription: String
+    fun openPlayer()
+}
+
 @Composable
 fun UnifiedDemoScreen(
     model: UnifiedDemoModel,
@@ -89,6 +97,7 @@ fun UnifiedDemoScreen(
     modifier: Modifier = Modifier,
     facePreview: (@Composable () -> Unit)? = null,
     voiceContent: (@Composable () -> Unit)? = null,
+    playbackContent: (@Composable () -> Unit)? = null,
 ) {
     LaunchedEffect(bindings) {
         bindings.speechModel?.refreshBackends(io.ondeviceai.binding.SpeechBridgeCapability.TTS)
@@ -132,7 +141,7 @@ fun UnifiedDemoScreen(
                     UnifiedDemoRoute.Explore -> ExplorePage(model)
                     UnifiedDemoRoute.Models -> ModelsPage(model)
                     UnifiedDemoRoute.Records -> RecordsPage(model)
-                    is UnifiedDemoRoute.Capability -> key(route.id) { CapabilityPage(model, bindings, route.id, facePreview, voiceContent) }
+                    is UnifiedDemoRoute.Capability -> key(route.id) { CapabilityPage(model, bindings, route.id, facePreview, voiceContent, playbackContent) }
                     is UnifiedDemoRoute.ModelDetail -> ModelDetailPage(model, bindings, route.id)
                     is UnifiedDemoRoute.RecordDetail -> RecordDetailPage(model, route.index)
                 }
@@ -290,6 +299,7 @@ private fun CapabilityPage(
     id: DemoCapabilityId,
     facePreview: (@Composable () -> Unit)?,
     voiceContent: (@Composable () -> Unit)?,
+    playbackContent: (@Composable () -> Unit)?,
 ) {
     val descriptor = model.descriptor(id)
     PageHeader(title = descriptor.title, onBack = model::back)
@@ -323,7 +333,14 @@ private fun CapabilityPage(
             ?: UnavailablePage(bindings.status(id))
         DemoCapabilityId.FILE_SUPER_RESOLUTION -> bindings.videoModel?.let { ScrollableDetail { VideoScreen(it, bindings.videoActions) } }
             ?: UnavailablePage(bindings.status(id))
-        DemoCapabilityId.PLAYBACK_ENHANCEMENT -> PlaybackEnhancementPage(bindings.realtimeSr, bindings.status(id))
+        DemoCapabilityId.PLAYBACK_ENHANCEMENT -> ScrollableDetail {
+            PlaybackEnhancementPage(
+                bindings.realtimeSr,
+                bindings.status(id),
+                bindings.playbackEnhancement,
+                playbackContent,
+            )
+        }
         DemoCapabilityId.VIDEO_UNDERSTANDING, DemoCapabilityId.IDENTITY_LIVENESS -> Unit
     }
     }
@@ -335,19 +352,42 @@ private fun ScrollableDetail(content: @Composable () -> Unit) {
 }
 
 @Composable
-private fun PlaybackEnhancementPage(actions: RealtimeSRDemoActions?, status: DemoCapabilityStatus) {
-    if (actions == null) {
-        UnavailablePage(status)
-        return
-    }
-    Text("支持模式：${actions.supportedModes.joinToString()}")
-    Text("已选择：${actions.selectedMode}")
-    Text("实际呈现：${actions.presentedMode ?: "尚未呈现"}")
-    if (actions.fallbackToOriginal) Text("当前帧已回退到原画。", color = MaterialTheme.colorScheme.tertiary)
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        actions.supportedModes.forEach { mode ->
-            OutlinedButton(onClick = { actions.selectMode(mode) }, enabled = mode != actions.selectedMode) { Text(mode.name) }
+private fun PlaybackEnhancementPage(
+    actions: RealtimeSRDemoActions?,
+    status: DemoCapabilityStatus,
+    player: PlaybackEnhancementDemoActions?,
+    playbackContent: (@Composable () -> Unit)?,
+) {
+    Text("播放时增强", style = MaterialTheme.typography.titleLarge)
+    Text(
+        "选择本地视频后，在同一播放器里对比原画、自动和设备可用的实时超分后端。播放器负责解码、音频时钟、逐帧增强与最终上屏。",
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    playbackContent?.invoke()
+    player?.let {
+        Card(Modifier.fillMaxWidth().testTag("playback-player-entry")) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(if (it.playerAvailable) "实时播放器已接入" else "实时播放器未接入", style = MaterialTheme.typography.titleMedium)
+                Text(it.playerDescription, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Button(onClick = it::openPlayer, enabled = it.playerAvailable,
+                    modifier = Modifier.testTag("open-realtime-player")) { Text("打开实时播放器") }
+            }
         }
+    }
+    actions?.let {
+        HorizontalDivider(Modifier.padding(vertical = 12.dp))
+        Text("播放器状态", style = MaterialTheme.typography.titleMedium)
+        Text("支持模式：${it.supportedModes.joinToString()}")
+        Text("用户选择：${it.selectedMode}")
+        Text("实际呈现：${it.presentedMode ?: "等待播放器确认上屏"}")
+        if (it.fallbackToOriginal) Text("当前帧已回退到原画。", color = MaterialTheme.colorScheme.tertiary)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            it.supportedModes.forEach { mode ->
+                OutlinedButton(onClick = { it.selectMode(mode) }, enabled = mode != it.selectedMode) { Text(mode.name) }
+            }
+        }
+    } ?: if (player == null) UnavailablePage(status) else {
+        Text("模式选择和实际呈现状态会在播放器页内更新；当前页面不伪造帧状态。", color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 

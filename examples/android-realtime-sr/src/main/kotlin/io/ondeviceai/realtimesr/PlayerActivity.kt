@@ -143,6 +143,11 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
 
     private fun buildUi() {
         val root = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        root.addView(TextView(this).apply {
+            text = "实时视频超分"
+            textSize = 20f
+            setPadding(24, 18, 24, 8)
+        })
         surfaceView = SurfaceView(this).also { it.holder.addCallback(this) }
         root.addView(surfaceView, LinearLayout.LayoutParams(-1, 0, 1f))
         status = TextView(this).apply {
@@ -172,14 +177,14 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
         }
         root.addView(seekBar)
         val controls = LinearLayout(this).apply { gravity = Gravity.CENTER }
-        Button(this).also { it.text = "Pick"; it.setOnClickListener { pickDocument() }; controls.addView(it) }
+        Button(this).also { it.text = "选择视频"; it.setOnClickListener { pickDocument() }; controls.addView(it) }
         playButton = Button(this).also { button ->
-            button.text = "Play"
+            button.text = "播放"
             button.setOnClickListener {
                 val shouldPlay = !isPlaying
                 if (shouldPlay) pausedPreviewPtsUs = null
                 isPlaying = shouldPlay
-                button.text = if (shouldPlay) "Pause" else "Play"
+                button.text = if (shouldPlay) "暂停" else "播放"
                 worker.post {
                     if (shouldPlay) {
                         renderer?.setPreviewPaused(false)
@@ -198,8 +203,8 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
             orientation = LinearLayout.HORIZONTAL
         }
         listOf(
-            "Original" to PlaybackMode.ORIGINAL,
-            "Auto" to PlaybackMode.AUTO,
+            "原画" to PlaybackMode.ORIGINAL,
+            "自动" to PlaybackMode.AUTO,
             "CuNNy" to PlaybackMode.CUNNY,
             "Spatial" to PlaybackMode.SPATIAL
         ).forEach { (label, mode) ->
@@ -363,7 +368,7 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
                 }
                 if (savedMediaUs > 0L) player.seekTo(savedMediaUs)
                 if (wasPlaying) { player.play(); isPlaying = true } else { player.pause(); isPlaying = false }
-                main.post { playButton.text = if (isPlaying) "Pause" else "Play"; refreshStatus() }
+            main.post { playButton.text = if (isPlaying) "暂停" else "播放"; refreshStatus() }
             } catch (e: Exception) {
                 if (codecPlayer === player) closeCodec()
                 main.post { onRunError(e.message ?: e.javaClass.simpleName) }
@@ -466,7 +471,7 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
         }
 
         override fun ended() {
-            if (token == codecEpoch) main.post { if (token == codecEpoch) { isPlaying = false; playButton.text = "Play"; onRunEnded() } }
+            if (token == codecEpoch) main.post { if (token == codecEpoch) { isPlaying = false; playButton.text = "播放"; onRunEnded() } }
         }
 
         override fun error(message: String) {
@@ -579,12 +584,12 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
         if (!::host.isInitialized || !::status.isInitialized) return
         val state = playbackControl.status()
         val preferred = state.preferredBackend.name
-        val actual = state.presentedBackend?.name ?: "no confirmed present"
-        val note = unsupportedReason?.let { " — $it" }.orEmpty() +
-            (if (policy.mode == PlaybackMode.AUTO && autoCoolingDown) " — Auto: temporarily using original" else "") +
-            if (!isPlaying) " — paused" else ""
-        val previewNote = pausedPreviewPtsUs?.let { " — paused preview submitted at ${formatTime(it)}" }.orEmpty()
-        status.text = "Preferred: $preferred; actual: $actual$note$previewNote"
+        val actual = state.presentedBackend?.name ?: "等待确认上屏"
+        val note = unsupportedReason?.let { " · $it" }.orEmpty() +
+            (if (policy.mode == PlaybackMode.AUTO && autoCoolingDown) " · 自动模式暂时使用原画" else "") +
+            if (!isPlaying) " · 已暂停" else ""
+        val previewNote = pausedPreviewPtsUs?.let { " · 暂停预览 ${formatTime(it)}" }.orEmpty()
+        status.text = "尝试后端：$preferred；实际呈现：$actual$note$previewNote"
     }
 
     private fun updateMetadata(uri: Uri) {
@@ -597,10 +602,10 @@ open class PlayerActivity : Activity(), SurfaceHolder.Callback {
                 main.post {
                     seekBar.isEnabled = duration > 0L
                     seekBar.progress = 0
-                    positionLabel.text = if (duration > 0L) "00:00 / ${formatTime(duration)}" else "Duration unavailable; seeking disabled"
+                    positionLabel.text = if (duration > 0L) "00:00 / ${formatTime(duration)}" else "无法读取时长，暂不可拖动"
                 }
             } catch (e: Exception) {
-                main.post { onRunError("Unable to read media duration: ${e.message ?: e.javaClass.simpleName}") }
+                main.post { onRunError("读取视频时长失败：${e.message ?: e.javaClass.simpleName}") }
             } finally {
                 retriever.release()
             }

@@ -19,6 +19,11 @@ android {
  }
  compileOptions {sourceCompatibility=JavaVersion.VERSION_17;targetCompatibility=JavaVersion.VERSION_17}
  sourceSets.getByName("main").kotlin.srcDir(if (enableOpenCvIdentity) "src/opencvidentity/kotlin" else "src/noOpencvidentity/kotlin")
+ // The realtime player is an in-app native host. Keep the shared CMP page
+ // responsible for navigation while reusing the independently validated
+ // decoder/renderer implementation from the Android realtime SR example.
+ sourceSets.getByName("main").kotlin.srcDir("../../examples/android-realtime-sr/src/main/kotlin")
+ sourceSets.getByName("main").assets.srcDir("../../examples/android-realtime-sr/src/main/assets")
  if (enableOpenCvIdentity) {
   sourceSets.getByName("main").assets.srcDir("src/opencvidentity/assets")
   sourceSets.getByName("test").kotlin.srcDir("src/opencvidentityTest/kotlin")

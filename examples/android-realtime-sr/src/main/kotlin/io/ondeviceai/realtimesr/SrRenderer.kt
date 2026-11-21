@@ -109,7 +109,7 @@ class SrRenderer(
                         { onFrameAvailable() },
                         renderHandler
                     )
-                    timingEnabled = EglTiming.enable()
+                    timingEnabled = EglTiming.safeEnable()
                 } catch (t: Throwable) {
                     initFailure.set(t)
                 } finally {
@@ -481,7 +481,7 @@ class SrRenderer(
                 }
 
                 onEvent(offer.id, "srStart", emptyMap())
-                query = EglTiming.startGpu()
+                query = EglTiming.safeStartGpu()
                 try {
                     outputTexture = if (offer.spatial) {
                         val spatial = spatialProcessor ?: GlesCunny(assets, spatialOnly = true).also {
@@ -513,7 +513,7 @@ class SrRenderer(
                     check(outputTexture != 0) { "SR dispatch returned an invalid texture" }
                     dispatched = true
                 } finally {
-                    if (query >= 0) EglTiming.endGpu(query)
+                    if (query >= 0) EglTiming.safeEndGpu(query)
                 }
 
                 workerFence = GLES30.glFenceSync(
@@ -536,13 +536,13 @@ class SrRenderer(
 
         if (query >= 0) {
             try {
-                timingElapsedNs = EglTiming.elapsedGpuNs(query).coerceAtLeast(0L)
+                timingElapsedNs = EglTiming.safeElapsedGpuNs(query).coerceAtLeast(0L)
             } catch (t: Throwable) {
                 val previous = dispatchFailure
                 if (previous == null) dispatchFailure = t else previous.addSuppressed(t)
                 timingElapsedNs = 0L
             } finally {
-                EglTiming.deleteGpu(query)
+                EglTiming.safeDeleteGpu(query)
             }
         }
 
@@ -715,7 +715,7 @@ class SrRenderer(
         }
 
         val renderer = draw!!
-        val frameEglId = if (timingEnabled) EglTiming.nextId().takeIf { it >= 0 } else null
+        val frameEglId = if (timingEnabled) EglTiming.safeNextId().takeIf { it >= 0 } else null
         val submittedBackend = when {
             enhancedTexture == 0 -> "ORIGINAL"
             offer.spatial -> "SPATIAL"
@@ -819,7 +819,7 @@ class SrRenderer(
         val previewFrameId = FrameId(generation, pinned.id.loop, pinned.id.sourceOrdinal)
         val enhancedTexture = if (enhance) preview.enhancedTexture(spatial) else 0
         val renderer = draw!!
-        val frameEglId = if (timingEnabled) EglTiming.nextId().takeIf { it >= 0 } else null
+        val frameEglId = if (timingEnabled) EglTiming.safeNextId().takeIf { it >= 0 } else null
         val submittedBackend = when {
             enhancedTexture == 0 -> "ORIGINAL"
             spatial -> "SPATIAL"
@@ -894,7 +894,7 @@ class SrRenderer(
                 continue
             }
 
-            val displayedNs = EglTiming.displayNs(id)
+            val displayedNs = EglTiming.safeDisplayNs(id)
             if (displayedNs > 0L) {
                 onEvent(
                     pending.frameId,

@@ -134,6 +134,7 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
         return nil
         #endif
     }
+    var playbackEnhancement: (any PlaybackEnhancementDemoActions)? { nil }
     var realtimeSr: (any RealtimeSRDemoActions)? { nil }
     func modelSetup(id: DemoCapabilityId) -> (any UnifiedDemoModelActions)? {
         #if ODAI_MULTIMODAL_MLX_DEMO

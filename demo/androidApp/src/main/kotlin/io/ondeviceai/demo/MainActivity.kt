@@ -43,6 +43,7 @@ import io.ondeviceai.face.*
 import io.ondeviceai.mlkit.MLKitFaceDetector
 import io.ondeviceai.systemtts.AndroidTextToSpeechBackend
 import io.ondeviceai.systemasr.AndroidSpeechRecognizerBackend
+import io.ondeviceai.realtimesr.PlayerActivity
 import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -60,6 +61,14 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private lateinit var voiceHost: VoiceEffectsHost
     private var unifiedModel: UnifiedDemoModel? = null
     private var unifiedCleaning by mutableStateOf(false)
+    private val playbackEnhancementActions = object : PlaybackEnhancementDemoActions {
+        override val playerAvailable: Boolean = true
+        override val playerDescription: String =
+            "Android 原生播放器已接入：支持本地 H.264/AAC、原画/自动/CuNNy/Spatial 切换；逐帧回退和实际呈现后端在播放器页内更新。"
+        override fun openPlayer() {
+            startActivity(Intent(this@MainActivity, PlayerActivity::class.java))
+        }
+    }
     private var multimodalHost: MultimodalHost? = null
     private var multimodalPickerReply: ((File?) -> Unit)? = null
     private var multimodalPickerFailure: (() -> Unit)? = null
@@ -249,6 +258,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                     override val voiceEffectsModel get() = voiceHost.model
                     override val voiceEffectsActions get() = voiceHost
                     override val realtimeSr: RealtimeSRDemoActions? get() = null
+                    override val playbackEnhancement get() = playbackEnhancementActions
                     override val nowMillis get() = System.currentTimeMillis()
                     override fun setRecordSink(sink: DemoTerminalObserver?) {
                         model.onTerminal = sink
@@ -340,7 +350,10 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         }
         DemoCapabilityId.IMAGE_UNDERSTANDING -> multimodalStatus()
         DemoCapabilityId.FILE_SUPER_RESOLUTION -> videoStatus()
-        DemoCapabilityId.PLAYBACK_ENHANCEMENT -> DemoCapabilityStatus(DemoCapabilityAvailabilityKind.MISSING_HOST, "播放器 Host 尚未挂入统一入口")
+        DemoCapabilityId.PLAYBACK_ENHANCEMENT -> DemoCapabilityStatus(
+            DemoCapabilityAvailabilityKind.READY,
+            "Android 原生实时播放器已接入；实际呈现后端在播放器页确认",
+        )
         DemoCapabilityId.VIDEO_UNDERSTANDING, DemoCapabilityId.IDENTITY_LIVENESS -> DemoCapabilityStatus(DemoCapabilityAvailabilityKind.FROZEN_PREVIEW, "研发暂停")
     }
 
