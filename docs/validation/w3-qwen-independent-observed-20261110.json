@@ -1,0 +1,3057 @@
+{
+  "assessment": {
+    "independentEngineeringConfirmationPassed": true,
+    "gates": {
+      "zhCER": true,
+      "enNearWER": true,
+      "enFarWER": true,
+      "all52SuccessfulAndNonempty": true,
+      "all13ChallengesEmpty": true
+    },
+    "actualDecodeCalls": 117,
+    "annotationNegativeLabelLimit": "No speech annotation does not prove human-audited speech absence",
+    "rawReportSHA256": "8bc5f6b2d65d02e3c51cd43cf4ef6940dade13d24d4dc54b36feab088fee6024",
+    "protocolSHA256": "dd4d8bc7273ac44277e56b881029194e5a1970b82b38918e96ac0716609ec31e",
+    "runnerSHA256": "809fe34fbed820e2e77a78249adba5866a6011826054932ecb72c84a6dad1f07",
+    "androidAcceptance": false,
+    "productionPromoted": false
+  },
+  "scores": {
+    "mandarin": {
+      "schemaVersion": 1,
+      "kind": "speech-error-metrics",
+      "normalization": {
+        "unicodeNormalization": "NFC, optional casefold, then NFC",
+        "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+        "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+        "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+        "preserved": "Punctuation, accents, and digits are not stripped",
+        "casefold": true,
+        "distance": "Minimum unit Levenshtein edit distance",
+        "tracebackTieOrder": [
+          "exact match",
+          "substitution (diagonal)",
+          "deletion",
+          "insertion"
+        ]
+      },
+      "rows": [
+        {
+          "id": "fleurs-cmn_hans_cn-1805",
+          "word": {
+            "referenceUnits": 4,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 41,
+            "hypothesisUnits": 35,
+            "substitutions": 5,
+            "deletions": 8,
+            "insertions": 2,
+            "errors": 15,
+            "rate": 0.36585365853658536,
+            "defined": true
+          },
+          "referenceSHA256": "b2d3760db370e8d162fc1bc59ee31f60d9e3b2746300a69ee380163eaaf05792",
+          "hypothesisSHA256": "f31ba34ceac243614d56a1386420aca1175df62a079bd433b2efd5323c2d0585"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1965",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 32,
+            "hypothesisUnits": 32,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.03125,
+            "defined": true
+          },
+          "referenceSHA256": "11aa3503283ebe9e53823411bd8e625b6774627b4052767a2025fae1e44d6149",
+          "hypothesisSHA256": "58e9321fc0767f276a99ad2fb204413012aea6457eee499a62bfe36873bea6f7"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1903",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 40,
+            "hypothesisUnits": 40,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "d5088b9aaf6aff99a243bd4866ca8f6103b21f26875617613e22b10599370bda",
+          "hypothesisSHA256": "d5088b9aaf6aff99a243bd4866ca8f6103b21f26875617613e22b10599370bda"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1953",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 18,
+            "hypothesisUnits": 19,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 1,
+            "rate": 0.05555555555555555,
+            "defined": true
+          },
+          "referenceSHA256": "7edd2c2a02a69b6fb12f28adc55829a1ca80bf45687aed0f8559a2b25699df17",
+          "hypothesisSHA256": "a71d98330567066f16590c3896b56cb1bcf55eb433dc43c2d833e124eb6c946a"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1830",
+          "word": {
+            "referenceUnits": 3,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 3,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 33,
+            "hypothesisUnits": 26,
+            "substitutions": 1,
+            "deletions": 7,
+            "insertions": 0,
+            "errors": 8,
+            "rate": 0.24242424242424243,
+            "defined": true
+          },
+          "referenceSHA256": "2bd10a5a05006a8c2db021a7007c40a185e54564eed365544cfac4f31658b3b4",
+          "hypothesisSHA256": "9c4ded3533c36238c7ac739faf6b6892ff40ac0abb60ef2df81e4918ff06afc2"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1910",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 20,
+            "hypothesisUnits": 22,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 2,
+            "errors": 2,
+            "rate": 0.1,
+            "defined": true
+          },
+          "referenceSHA256": "e47b85da46fe9b951271c1abf110feff89d4a77d38d96766b09185d246ae5379",
+          "hypothesisSHA256": "fc4764895106d58e8c98eb9bac9c9ca2096e13ab8cb7636775f03e541dd8b47a"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1902",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 28,
+            "hypothesisUnits": 28,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "2b3eab9f85173263980bef390d730429903ac49e296a9db28530425cd72686ae",
+          "hypothesisSHA256": "2b3eab9f85173263980bef390d730429903ac49e296a9db28530425cd72686ae"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1905",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 34,
+            "hypothesisUnits": 35,
+            "substitutions": 5,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 6,
+            "rate": 0.17647058823529413,
+            "defined": true
+          },
+          "referenceSHA256": "2fb176791286d0040d14b1420b1e5c7cba3ca824c7494778ac2f2706de19e59d",
+          "hypothesisSHA256": "c115a37babe76f618333497d49dde9dc758fd94fb1911ad7faf4e29fdc7b4024"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1772",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 22,
+            "hypothesisUnits": 22,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "85681c9b521c1d41d4ea19dc1af28e1148237ab7ed655291b04d720a2ff9c57b",
+          "hypothesisSHA256": "85681c9b521c1d41d4ea19dc1af28e1148237ab7ed655291b04d720a2ff9c57b"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1792",
+          "word": {
+            "referenceUnits": 3,
+            "hypothesisUnits": 4,
+            "substitutions": 2,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 3,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 28,
+            "hypothesisUnits": 27,
+            "substitutions": 1,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 2,
+            "rate": 0.07142857142857142,
+            "defined": true
+          },
+          "referenceSHA256": "1c47954875f5909a06f70127c2805becc986a79cb0e1c780f0d48661ef7e74b0",
+          "hypothesisSHA256": "afd236359bfa8b2de58c70db4547b861066b95c7f1d8412ec180f76922c2fd49"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1962",
+          "word": {
+            "referenceUnits": 4,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 26,
+            "hypothesisUnits": 25,
+            "substitutions": 0,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.038461538461538464,
+            "defined": true
+          },
+          "referenceSHA256": "0bd1d6d1dbfc33da1241914bc7e882643958ddb751f8cee582725de9a2403414",
+          "hypothesisSHA256": "21016658019346539d3232ba3d4711578917a8b91a1f3704b9f6d31013247c45"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1884",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 30,
+            "hypothesisUnits": 30,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "d1801d9070d24517bbfcdb690acb13902aa6b2f8918b4e2b8278aba2dd7f780b",
+          "hypothesisSHA256": "d1801d9070d24517bbfcdb690acb13902aa6b2f8918b4e2b8278aba2dd7f780b"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1958",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 40,
+            "hypothesisUnits": 41,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 1,
+            "rate": 0.025,
+            "defined": true
+          },
+          "referenceSHA256": "1fe7d33acf94bc4b45cc7eb021e1821d8f6e144b12779eda0f2091d6d31171e4",
+          "hypothesisSHA256": "805667133cd7fc2a1f346d2184c7d5ed253b56e12e501fe0f3506b45a8f3b497"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1871",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 19,
+            "hypothesisUnits": 19,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "05c5be363356ac0d747eb8604127ed156c301890b3d056567266d335634082ac",
+          "hypothesisSHA256": "05c5be363356ac0d747eb8604127ed156c301890b3d056567266d335634082ac"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1698",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 34,
+            "hypothesisUnits": 34,
+            "substitutions": 2,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 2,
+            "rate": 0.058823529411764705,
+            "defined": true
+          },
+          "referenceSHA256": "1313189fa8863bdde86a89eff5f19bbf42356268a191783b90d4c6cb17639c02",
+          "hypothesisSHA256": "c113caa3081fef9f4bacdeb92226402e790d73d62f24b1061bca19163980a87b"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-2002",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 30,
+            "hypothesisUnits": 30,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "e85771b9d04b3f625e70f399da26709220860674f603a778bb74296eb9171023",
+          "hypothesisSHA256": "e85771b9d04b3f625e70f399da26709220860674f603a778bb74296eb9171023"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1661",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 30,
+            "hypothesisUnits": 30,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "bf1a762276bb64ee1b7f8588da08525eb2465db1596cb3c4fb325ea0cab1f231",
+          "hypothesisSHA256": "bf1a762276bb64ee1b7f8588da08525eb2465db1596cb3c4fb325ea0cab1f231"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1697",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 30,
+            "hypothesisUnits": 30,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "44e77369befda958c742c267ac77522077961fa6509b3ec1a33562390b837d08",
+          "hypothesisSHA256": "44e77369befda958c742c267ac77522077961fa6509b3ec1a33562390b837d08"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1821",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 28,
+            "hypothesisUnits": 28,
+            "substitutions": 2,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 2,
+            "rate": 0.07142857142857142,
+            "defined": true
+          },
+          "referenceSHA256": "bd428886024618f20a8d03bc51723a2b64adf00c8b8c43794fbf3fbc76c8bab2",
+          "hypothesisSHA256": "b851dbed6b1dcdfb5f1efb082aa667fd1e6054dd3078bf3e9eceb67b1b3ec6c2"
+        },
+        {
+          "id": "fleurs-cmn_hans_cn-1808",
+          "word": {
+            "referenceUnits": 1,
+            "hypothesisUnits": 1,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 1.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 27,
+            "hypothesisUnits": 27,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.037037037037037035,
+            "defined": true
+          },
+          "referenceSHA256": "55e27b92e1349cefddf0ea8779386182b1fd707cad12a4111f97f70844b3b67a",
+          "hypothesisSHA256": "32316c766132e46027c45f12f45075e4acee75f9c6b4df01a04b507f9f9e2ff1"
+        }
+      ],
+      "aggregate": {
+        "word": {
+          "referenceUnits": 30,
+          "hypothesisUnits": 23,
+          "substitutions": 13,
+          "deletions": 8,
+          "insertions": 1,
+          "errors": 22,
+          "rate": 0.7333333333333333,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 590,
+          "hypothesisUnits": 580,
+          "substitutions": 18,
+          "deletions": 17,
+          "insertions": 7,
+          "errors": 42,
+          "rate": 0.0711864406779661,
+          "defined": true
+        }
+      },
+      "qualityVerdict": "unverified",
+      "productionReady": false
+    },
+    "english-near": {
+      "schemaVersion": 1,
+      "kind": "speech-error-metrics",
+      "normalization": {
+        "unicodeNormalization": "NFC, optional casefold, then NFC",
+        "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+        "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+        "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+        "preserved": "Punctuation, accents, and digits are not stripped",
+        "casefold": true,
+        "distance": "Minimum unit Levenshtein edit distance",
+        "tracebackTieOrder": [
+          "exact match",
+          "substitution (diagonal)",
+          "deletion",
+          "insertion"
+        ]
+      },
+      "rows": [
+        {
+          "id": "fleurs-en_us-1675",
+          "word": {
+            "referenceUnits": 21,
+            "hypothesisUnits": 21,
+            "substitutions": 4,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 0.19047619047619047,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 92,
+            "hypothesisUnits": 91,
+            "substitutions": 2,
+            "deletions": 2,
+            "insertions": 1,
+            "errors": 5,
+            "rate": 0.05434782608695652,
+            "defined": true
+          },
+          "referenceSHA256": "63d31e54c66a437f7f103d1ea1438dbb719573f49df77c53ed2c250698821520",
+          "hypothesisSHA256": "87657b7663590a8a726eeb2f7c3bc671fefd2b13a09bb96ee87c46f025ca269a"
+        },
+        {
+          "id": "fleurs-en_us-1728",
+          "word": {
+            "referenceUnits": 15,
+            "hypothesisUnits": 14,
+            "substitutions": 3,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 0.26666666666666666,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 78,
+            "hypothesisUnits": 76,
+            "substitutions": 2,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 0.05128205128205128,
+            "defined": true
+          },
+          "referenceSHA256": "1f710e30f3b84790f6e7b04e3813a08afcaf251b625010272d033c61ba72d4a3",
+          "hypothesisSHA256": "fcfa0d05e13e7a660508cefd36924e395b91107215fa090df42659940075e3a3"
+        },
+        {
+          "id": "fleurs-en_us-1972",
+          "word": {
+            "referenceUnits": 15,
+            "hypothesisUnits": 15,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 73,
+            "hypothesisUnits": 73,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "51bace5258329daee5b9071344ce0e5669d4d5071602bcf4e9fd0a2fc6086c89",
+          "hypothesisSHA256": "51bace5258329daee5b9071344ce0e5669d4d5071602bcf4e9fd0a2fc6086c89"
+        },
+        {
+          "id": "fleurs-en_us-1914",
+          "word": {
+            "referenceUnits": 16,
+            "hypothesisUnits": 15,
+            "substitutions": 2,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 3,
+            "rate": 0.1875,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 90,
+            "hypothesisUnits": 91,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 2,
+            "rate": 0.022222222222222223,
+            "defined": true
+          },
+          "referenceSHA256": "4c2ed6b3f083afe8cf22baef2ee0ec56364a40531ebe7b700c0ea574b82ac9df",
+          "hypothesisSHA256": "029a624ddfe23113b60af01555f869cb1d25a740a52b386fe0fa5009d8e0e07b"
+        },
+        {
+          "id": "fleurs-en_us-1806",
+          "word": {
+            "referenceUnits": 33,
+            "hypothesisUnits": 33,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 144,
+            "hypothesisUnits": 144,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "833a9475d46748f8b8a309fe4cc203745e5118a5b48a479c3031f0c7cc3bf6a8",
+          "hypothesisSHA256": "833a9475d46748f8b8a309fe4cc203745e5118a5b48a479c3031f0c7cc3bf6a8"
+        },
+        {
+          "id": "fleurs-en_us-1776",
+          "word": {
+            "referenceUnits": 15,
+            "hypothesisUnits": 15,
+            "substitutions": 4,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 0.26666666666666666,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 75,
+            "hypothesisUnits": 70,
+            "substitutions": 2,
+            "deletions": 6,
+            "insertions": 1,
+            "errors": 9,
+            "rate": 0.12,
+            "defined": true
+          },
+          "referenceSHA256": "a52b95aa4e386cc14d0c7898f342cfdcfe04b9c6a8d67cf621a68882236f6fa9",
+          "hypothesisSHA256": "cad5eb2e269fc5f68bd04921a8cd607f6753ac0178eac7bd82978362394c626a"
+        },
+        {
+          "id": "fleurs-en_us-1802",
+          "word": {
+            "referenceUnits": 10,
+            "hypothesisUnits": 10,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 67,
+            "hypothesisUnits": 67,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "1b680a318dcd072e14ad3de07ff8b29f85eb2fdc4fc3daebd6f74467d9a6bb16",
+          "hypothesisSHA256": "e56f9fab7d4bdcb823e9b349640dc1a10042d1386fd8c3f29edbe8727ea6c418"
+        },
+        {
+          "id": "fleurs-en_us-1992",
+          "word": {
+            "referenceUnits": 19,
+            "hypothesisUnits": 19,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.05263157894736842,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 102,
+            "hypothesisUnits": 103,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 1,
+            "rate": 0.00980392156862745,
+            "defined": true
+          },
+          "referenceSHA256": "2b39b4054bdb0b7b5ff9dd4564d92d84cbdde1c7ae2d58127bd918477e5bf921",
+          "hypothesisSHA256": "c1e16b16160c2437710a3747284a31b1233168a983e01ecb8653cbcfca1cbcfb"
+        },
+        {
+          "id": "fleurs-en_us-2005",
+          "word": {
+            "referenceUnits": 15,
+            "hypothesisUnits": 15,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.06666666666666667,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 60,
+            "hypothesisUnits": 60,
+            "substitutions": 5,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 5,
+            "rate": 0.08333333333333333,
+            "defined": true
+          },
+          "referenceSHA256": "907fa3894bc5b64e078c28f49a2fd024e7cf3fceea48da04f06a1685178ff4e3",
+          "hypothesisSHA256": "690fd384f9a690cfe6304fa2489150159e8dc9220bd0d781413b6c49a7bb728e"
+        },
+        {
+          "id": "fleurs-en_us-1674",
+          "word": {
+            "referenceUnits": 16,
+            "hypothesisUnits": 16,
+            "substitutions": 3,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 3,
+            "rate": 0.1875,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 74,
+            "hypothesisUnits": 75,
+            "substitutions": 1,
+            "deletions": 1,
+            "insertions": 2,
+            "errors": 4,
+            "rate": 0.05405405405405406,
+            "defined": true
+          },
+          "referenceSHA256": "5860a3b0c690df5284c8a1a54a18ff64d52633c4ed464de668b600e3b620a98a",
+          "hypothesisSHA256": "55497f5a4c493e17cbd29c5fbb7c2ff3f30b62baff207a679a2ba0e87e046709"
+        },
+        {
+          "id": "fleurs-en_us-1952",
+          "word": {
+            "referenceUnits": 22,
+            "hypothesisUnits": 23,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 2,
+            "rate": 0.09090909090909091,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 120,
+            "hypothesisUnits": 120,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.008333333333333333,
+            "defined": true
+          },
+          "referenceSHA256": "16741b104de57508fd118e3740c4a061b840c1dedfdf1890c2707e53d91b74b4",
+          "hypothesisSHA256": "fe51fe9bbb8aa3af910369eab8b8b67e6b611ce09225affbe1366392a1751ca9"
+        },
+        {
+          "id": "fleurs-en_us-1749",
+          "word": {
+            "referenceUnits": 29,
+            "hypothesisUnits": 29,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.034482758620689655,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 131,
+            "hypothesisUnits": 129,
+            "substitutions": 1,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 3,
+            "rate": 0.022900763358778626,
+            "defined": true
+          },
+          "referenceSHA256": "48961908e3941421a643e1209480c0a31d1b672072f0d604b24ea926b3828b41",
+          "hypothesisSHA256": "acd9037f535fa9f8dc0f02fbc183cb660ad59fbca7cbade39b44cae9a66bf438"
+        },
+        {
+          "id": "fleurs-en_us-1662",
+          "word": {
+            "referenceUnits": 21,
+            "hypothesisUnits": 20,
+            "substitutions": 0,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.047619047619047616,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 98,
+            "hypothesisUnits": 94,
+            "substitutions": 0,
+            "deletions": 4,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 0.04081632653061224,
+            "defined": true
+          },
+          "referenceSHA256": "5f02d8c4cc7fccc8b1dab61bb6b9ccb6ad5c5d3ddd681063390f098d848d5fc2",
+          "hypothesisSHA256": "6dee7202fd1e9fb2b74f685342f6587b330d14bd00cb059bb074dcc84550cc62"
+        },
+        {
+          "id": "fleurs-en_us-1858",
+          "word": {
+            "referenceUnits": 17,
+            "hypothesisUnits": 18,
+            "substitutions": 3,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 4,
+            "rate": 0.23529411764705882,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 89,
+            "hypothesisUnits": 93,
+            "substitutions": 3,
+            "deletions": 2,
+            "insertions": 6,
+            "errors": 11,
+            "rate": 0.12359550561797752,
+            "defined": true
+          },
+          "referenceSHA256": "6ca6e59d1b7d20521c1e36ef100f2bce15677b64383066bd6c654c1fd7617a16",
+          "hypothesisSHA256": "8e57b23c50fa890b54711cad7a00e3c73b5c4268fb9812cb66368eecdefa7e79"
+        },
+        {
+          "id": "fleurs-en_us-1909",
+          "word": {
+            "referenceUnits": 18,
+            "hypothesisUnits": 18,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.05555555555555555,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 98,
+            "hypothesisUnits": 97,
+            "substitutions": 0,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.01020408163265306,
+            "defined": true
+          },
+          "referenceSHA256": "79394b66eef8b7e5188acf5b6e54cd6abdfbec78df97aecd633341af6fe03467",
+          "hypothesisSHA256": "57b14b47f0f154d1d957ba20e2ca43829114a8d14aec9cb0d12feae0b11f00f3"
+        },
+        {
+          "id": "fleurs-en_us-1897",
+          "word": {
+            "referenceUnits": 20,
+            "hypothesisUnits": 20,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.05,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 78,
+            "hypothesisUnits": 79,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 1,
+            "errors": 1,
+            "rate": 0.01282051282051282,
+            "defined": true
+          },
+          "referenceSHA256": "043cb98b6e8b992cde74959b4b8feea33a5ca2cf18795a3e51416aad16de4137",
+          "hypothesisSHA256": "40b02b60f8558172d7b497a32ff803e9fc44bf9e71dbf6858070e5f6a06aa763"
+        },
+        {
+          "id": "fleurs-en_us-1953",
+          "word": {
+            "referenceUnits": 9,
+            "hypothesisUnits": 9,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.1111111111111111,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 61,
+            "hypothesisUnits": 60,
+            "substitutions": 0,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.01639344262295082,
+            "defined": true
+          },
+          "referenceSHA256": "0a1d05c6a73cccf0e4bf452a55e7c6130dccdf31f7fb3207ea188eeb39c0e4bb",
+          "hypothesisSHA256": "84654687864f6ffed672deec1ea6faefbbdee24388cb46abc82f642d9787b3cc"
+        },
+        {
+          "id": "fleurs-en_us-1740",
+          "word": {
+            "referenceUnits": 18,
+            "hypothesisUnits": 18,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 75,
+            "hypothesisUnits": 75,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "6ff2d6657f774bacfc89d96d1610ca2e632447d52623efa2a0766d3412053d32",
+          "hypothesisSHA256": "988c6dc4b9892a5e71f35e38df9982363ef787ac189d9b64ef064d9b4591cb47"
+        },
+        {
+          "id": "fleurs-en_us-1987",
+          "word": {
+            "referenceUnits": 19,
+            "hypothesisUnits": 19,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 89,
+            "hypothesisUnits": 89,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 0,
+            "rate": 0.0,
+            "defined": true
+          },
+          "referenceSHA256": "7cd7112437901e37126f4d9a6da9bef8445aeed3f924de54e40b215328e6ba8b",
+          "hypothesisSHA256": "7cd7112437901e37126f4d9a6da9bef8445aeed3f924de54e40b215328e6ba8b"
+        },
+        {
+          "id": "fleurs-en_us-1990",
+          "word": {
+            "referenceUnits": 27,
+            "hypothesisUnits": 27,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.037037037037037035,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 153,
+            "hypothesisUnits": 152,
+            "substitutions": 0,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.006535947712418301,
+            "defined": true
+          },
+          "referenceSHA256": "ef358e3417150f6ade90eb2191223e7ca9420cf61ca0876b3f973d0ca886248a",
+          "hypothesisSHA256": "ba032f85535552ffa4f37997aaa4854b23f33386505b777a62553e3090d6edd4"
+        }
+      ],
+      "aggregate": {
+        "word": {
+          "referenceUnits": 375,
+          "hypothesisUnits": 374,
+          "substitutions": 27,
+          "deletions": 3,
+          "insertions": 2,
+          "errors": 32,
+          "rate": 0.08533333333333333,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 1847,
+          "hypothesisUnits": 1838,
+          "substitutions": 18,
+          "deletions": 22,
+          "insertions": 13,
+          "errors": 53,
+          "rate": 0.028695181375203032,
+          "defined": true
+        }
+      },
+      "qualityVerdict": "unverified",
+      "productionReady": false
+    },
+    "english-far": {
+      "schemaVersion": 1,
+      "kind": "speech-error-metrics",
+      "normalization": {
+        "unicodeNormalization": "NFC, optional casefold, then NFC",
+        "whitespace": "Unicode whitespace runs collapse to one space; leading and trailing whitespace are trimmed",
+        "wordUnits": "Unicode whitespace-delimited str.split() tokens; no language-aware segmentation",
+        "characterUnits": "Unicode codepoints excluding whitespace; not grapheme clusters",
+        "preserved": "Punctuation, accents, and digits are not stripped",
+        "casefold": true,
+        "distance": "Minimum unit Levenshtein edit distance",
+        "tracebackTieOrder": [
+          "exact match",
+          "substitution (diagonal)",
+          "deletion",
+          "insertion"
+        ]
+      },
+      "rows": [
+        {
+          "id": "ami-ES2003a.sync.171-C",
+          "word": {
+            "referenceUnits": 22,
+            "hypothesisUnits": 22,
+            "substitutions": 7,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 7,
+            "rate": 0.3181818181818182,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 104,
+            "hypothesisUnits": 98,
+            "substitutions": 11,
+            "deletions": 10,
+            "insertions": 4,
+            "errors": 25,
+            "rate": 0.2403846153846154,
+            "defined": true
+          },
+          "referenceSHA256": "478667c4aeb0d262cd3545647c6bc3f16ecf6438fef5be34617002093e387d63",
+          "hypothesisSHA256": "15ca59fcfe3a653bd9afbe742bb37db360e1d30b952a5a4b966dedbaebbf4193"
+        },
+        {
+          "id": "ami-ES2003a.sync.93-B",
+          "word": {
+            "referenceUnits": 26,
+            "hypothesisUnits": 25,
+            "substitutions": 10,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 11,
+            "rate": 0.4230769230769231,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 108,
+            "hypothesisUnits": 100,
+            "substitutions": 19,
+            "deletions": 10,
+            "insertions": 2,
+            "errors": 31,
+            "rate": 0.28703703703703703,
+            "defined": true
+          },
+          "referenceSHA256": "a54ba301f95537e1d1e8c89e8eef5a1e127325bef4fc44094b909b1973e0b9ec",
+          "hypothesisSHA256": "521d1164ad0e4e21b7403d422d780147b9973d9036dc1ace660a4ec3c43a141e"
+        },
+        {
+          "id": "ami-ES2003a.sync.95-B",
+          "word": {
+            "referenceUnits": 15,
+            "hypothesisUnits": 15,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.06666666666666667,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 62,
+            "hypothesisUnits": 62,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.016129032258064516,
+            "defined": true
+          },
+          "referenceSHA256": "3b2e72a7aa398424c7b1e3ce92b22016f42a9df623118a1891c7033da4a880b6",
+          "hypothesisSHA256": "806d4df4b25d19f11a0158b6b4e4f820f063dbb22a5cb23a0e08a163ef35d74d"
+        },
+        {
+          "id": "ami-ES2003a.sync.209-C",
+          "word": {
+            "referenceUnits": 27,
+            "hypothesisUnits": 27,
+            "substitutions": 4,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 0.14814814814814814,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 130,
+            "hypothesisUnits": 128,
+            "substitutions": 3,
+            "deletions": 3,
+            "insertions": 1,
+            "errors": 7,
+            "rate": 0.05384615384615385,
+            "defined": true
+          },
+          "referenceSHA256": "9308936a6edb154402659094f133b7e671af50a38b4901b8fab2daf54eb1fd7f",
+          "hypothesisSHA256": "620cda980bb96ea0822125b0c04783d56308d270846b3a373aa6ff1b47c5883a"
+        },
+        {
+          "id": "ami-ES2003a.sync.267-D",
+          "word": {
+            "referenceUnits": 17,
+            "hypothesisUnits": 17,
+            "substitutions": 3,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 3,
+            "rate": 0.17647058823529413,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 75,
+            "hypothesisUnits": 76,
+            "substitutions": 2,
+            "deletions": 1,
+            "insertions": 2,
+            "errors": 5,
+            "rate": 0.06666666666666667,
+            "defined": true
+          },
+          "referenceSHA256": "250fe0d8bb722d259a667fa76f1389596451e138e41572e202ecb7da558fa606",
+          "hypothesisSHA256": "a0206d056890f1040bfd721e7dd49e61487b11a69aeb8d58112851fc228021be"
+        },
+        {
+          "id": "ami-ES2003a.sync.29-A",
+          "word": {
+            "referenceUnits": 5,
+            "hypothesisUnits": 3,
+            "substitutions": 2,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 0.8,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 36,
+            "hypothesisUnits": 34,
+            "substitutions": 2,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 4,
+            "rate": 0.1111111111111111,
+            "defined": true
+          },
+          "referenceSHA256": "3eec3ea19bab9cc8d8057c249858a0f077afd0e4f632a625272786c69d637ab9",
+          "hypothesisSHA256": "c01e960a853630d56ffec685d84917b1a74258ed682d06214a37ed540c401cc4"
+        },
+        {
+          "id": "ami-ES2003a.sync.129-B",
+          "word": {
+            "referenceUnits": 13,
+            "hypothesisUnits": 13,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.07692307692307693,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 64,
+            "hypothesisUnits": 64,
+            "substitutions": 1,
+            "deletions": 0,
+            "insertions": 0,
+            "errors": 1,
+            "rate": 0.015625,
+            "defined": true
+          },
+          "referenceSHA256": "69e4d46dffb0cda428b643ef6ad9aa21e66d5b94c8171db48175c8f0e2e6fb09",
+          "hypothesisSHA256": "88a958eaffdf983ae4770ac50e271443ca7d7e1d5887797fbbeade8aafcdebfa"
+        },
+        {
+          "id": "ami-ES2003a.sync.131-B",
+          "word": {
+            "referenceUnits": 10,
+            "hypothesisUnits": 8,
+            "substitutions": 0,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 2,
+            "rate": 0.2,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 39,
+            "hypothesisUnits": 33,
+            "substitutions": 0,
+            "deletions": 6,
+            "insertions": 0,
+            "errors": 6,
+            "rate": 0.15384615384615385,
+            "defined": true
+          },
+          "referenceSHA256": "0ba6f8b85da7c9cd96615bee3c740526e8965bdd8b02f12cea64c149034fe6ac",
+          "hypothesisSHA256": "a87d50d054a15cf10b8e2dcca418994b33f17d23812c67ea2951feb2148b9c11"
+        },
+        {
+          "id": "ami-ES2003a.sync.133-B",
+          "word": {
+            "referenceUnits": 30,
+            "hypothesisUnits": 26,
+            "substitutions": 3,
+            "deletions": 4,
+            "insertions": 0,
+            "errors": 7,
+            "rate": 0.23333333333333334,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 116,
+            "hypothesisUnits": 104,
+            "substitutions": 3,
+            "deletions": 12,
+            "insertions": 0,
+            "errors": 15,
+            "rate": 0.12931034482758622,
+            "defined": true
+          },
+          "referenceSHA256": "ced3d9027bc9f94f4e315e5ee5553716e3e44b793c722e67fed43071b5e75b9b",
+          "hypothesisSHA256": "fb465b738e0bd0dcdd14ef6037e291e8275d771ab535b3e24156407898b1b6ed"
+        },
+        {
+          "id": "ami-ES2004a.sync.121-B",
+          "word": {
+            "referenceUnits": 24,
+            "hypothesisUnits": 25,
+            "substitutions": 4,
+            "deletions": 1,
+            "insertions": 2,
+            "errors": 7,
+            "rate": 0.2916666666666667,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 109,
+            "hypothesisUnits": 114,
+            "substitutions": 5,
+            "deletions": 0,
+            "insertions": 5,
+            "errors": 10,
+            "rate": 0.09174311926605505,
+            "defined": true
+          },
+          "referenceSHA256": "3138dd98273eeb52be1923500db2c8f643284bf298747760d129b90bbcb8c0e8",
+          "hypothesisSHA256": "a90b5e36dd0fe3179a82b55e018c2860b4911f9545d3fb74b0f764839914d245"
+        },
+        {
+          "id": "ami-ES2004a.sync.131-B",
+          "word": {
+            "referenceUnits": 19,
+            "hypothesisUnits": 18,
+            "substitutions": 6,
+            "deletions": 2,
+            "insertions": 1,
+            "errors": 9,
+            "rate": 0.47368421052631576,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 72,
+            "hypothesisUnits": 67,
+            "substitutions": 12,
+            "deletions": 8,
+            "insertions": 3,
+            "errors": 23,
+            "rate": 0.3194444444444444,
+            "defined": true
+          },
+          "referenceSHA256": "93e4a04fda19535f5a22da861be728ca387a7bee6ffbfe992a377f511accdcd7",
+          "hypothesisSHA256": "fa16291bd2d60eb77b56590dda9833c56fb27e88e12a5894fb9e13d7730d3bfb"
+        },
+        {
+          "id": "ami-ES2006a.sync.277-C",
+          "word": {
+            "referenceUnits": 18,
+            "hypothesisUnits": 15,
+            "substitutions": 3,
+            "deletions": 3,
+            "insertions": 0,
+            "errors": 6,
+            "rate": 0.3333333333333333,
+            "defined": true
+          },
+          "character": {
+            "referenceUnits": 80,
+            "hypothesisUnits": 75,
+            "substitutions": 0,
+            "deletions": 7,
+            "insertions": 2,
+            "errors": 9,
+            "rate": 0.1125,
+            "defined": true
+          },
+          "referenceSHA256": "beeb16f7c548535c3e78b334a5a1a6b6a9e4df316c385557926f1ec650cdd12c",
+          "hypothesisSHA256": "7ce5f047304036ed571033d6b0aad2638bd19c09aaf5b281cd57d3536f0d0f47"
+        }
+      ],
+      "aggregate": {
+        "word": {
+          "referenceUnits": 226,
+          "hypothesisUnits": 214,
+          "substitutions": 44,
+          "deletions": 15,
+          "insertions": 3,
+          "errors": 62,
+          "rate": 0.2743362831858407,
+          "defined": true
+        },
+        "character": {
+          "referenceUnits": 995,
+          "hypothesisUnits": 955,
+          "substitutions": 59,
+          "deletions": 59,
+          "insertions": 19,
+          "errors": 137,
+          "rate": 0.13768844221105528,
+          "defined": true
+        }
+      },
+      "qualityVerdict": "unverified",
+      "productionReady": false
+    }
+  },
+  "process": {
+    "exitCode": 0,
+    "elapsedSeconds": 82.89900070800286,
+    "pid": 67475,
+    "guard": null,
+    "rssSampleCount": 163,
+    "sampledMaxRssBytes": 2828926976,
+    "samplingBoundary": "Mac runner process ps rss at approximately 0.5s; not true peak, Android budget, GPU or energy",
+    "runnerUnchanged": true,
+    "protocolUnchanged": true,
+    "reportSHA256": "8bc5f6b2d65d02e3c51cd43cf4ef6940dade13d24d4dc54b36feab088fee6024",
+    "terminalReadIdentical": true,
+    "reportStatus": "completed",
+    "recognizedRows": 65
+  },
+  "report": {
+    "status": "completed",
+    "runId": "w3-qwen-two-pass-independent-20261110-01",
+    "protocolSHA256": "dd4d8bc7273ac44277e56b881029194e5a1970b82b38918e96ac0716609ec31e",
+    "runnerSHA256": "809fe34fbed820e2e77a78249adba5866a6011826054932ecb72c84a6dad1f07",
+    "runtimeVersion": "2.0.1",
+    "config": {
+      "num_threads": 2,
+      "sample_rate": 16000,
+      "feature_dim": 128,
+      "decoding_method": "greedy_search",
+      "provider": "cpu",
+      "max_total_len": 512,
+      "max_new_tokens": 128,
+      "temperature": 1e-06,
+      "top_p": 0.8,
+      "seed": 42,
+      "hotwords": "",
+      "languageMode": "admit-auto-then-forced"
+    },
+    "rows": [
+      {
+        "id": "fleurs-cmn_hans_cn-1805",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 121920,
+        "pcmSha256": "ddee0d951c5ecfa143134ae3b1f126ea70e76b9e87870d012f6830ed09b6e29f",
+        "reference": "Scotturb 403 路公共汽车定期发车前往辛特拉 (Sintra)，在罗卡角停靠。",
+        "status": "recognized",
+        "text": "Scotturb四零三路，公交汽车定期发车，前往新特拉，在罗卡角停靠。",
+        "elapsed": 1.652347582999937,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "Scotturb四零三路，公交汽车定期发车前往新特拉，在罗卡角停靠。",
+          "elapsed": 0.9198841249999532,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1965",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 109440,
+        "pcmSha256": "012e2eb91001d8a4966dd3e1fb65e706ab6d823cd96dddcf0f6de4896815bbe4",
+        "reference": "这里几乎都是沙滩，游泳很安全，大部分地方都有新西兰圣诞树的树荫。",
+        "status": "recognized",
+        "text": "这里几乎都是沙滩，游泳很安全。大部分地方都有新西兰圣诞树的树荫。",
+        "elapsed": 1.3074909999995725,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "这里几乎都是沙滩，游泳很安全。大部分地方都有新西兰圣诞树的树荫。",
+          "elapsed": 0.6546109999981127,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1903",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 116160,
+        "pcmSha256": "3aeedf27352039c125341d0b66c586a438f64e973a9cef7bcc4f9433a9c88835",
+        "reference": "当所有可用的资源在一个组织的职能部门之间得到有效利用时，创造力和独创性就会发生。",
+        "status": "recognized",
+        "text": "当所有可用的资源在一个组织的职能部门之间得到有效利用时，创造力和独创性就会发生。",
+        "elapsed": 1.5030042919970583,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "当所有可用的资源在一个组织的职能部门之间得到有效利用时，创造力和独创性就会发生。",
+          "elapsed": 0.7281207919986628,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1953",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 80640,
+        "pcmSha256": "77b7b11210844e85a4027757fd1cdcf725e76a71ced1e23a332dc2d7becc0afa",
+        "reference": "他随后被转送到剑桥的阿登布鲁克医院。",
+        "status": "recognized",
+        "text": "他随后被转转送到剑桥的阿登布鲁克医院。",
+        "elapsed": 1.0064327500003856,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "他随后被转转送到剑桥的阿登布鲁克医院。",
+          "elapsed": 0.5195750829989265,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1830",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 101760,
+        "pcmSha256": "32201ea0511a0285c0da43ca492357524fc3af05e0682fddedb6663b1f4c8082",
+        "reference": "执政党西南非洲人民组织 (SWAPO) 也在议会选举中保持了多数席位。",
+        "status": "recognized",
+        "text": "执政党西南非洲人民组织也在议会选举中保住了多数席位。",
+        "elapsed": 1.2084089160016447,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "执政党西南非洲人民组织也在议会选举中保住了多数席位。",
+          "elapsed": 0.60191183400093,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1910",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 81600,
+        "pcmSha256": "a0f4a823683fd54f0d9d18517245f9bc202fa2e9eb9c30f496d1f2eb7518f39d",
+        "reference": "巴黎人是出了名的以自我中心、粗鲁和傲慢。",
+        "status": "recognized",
+        "text": "巴黎人是出了名的，以自我为中心、粗鲁和傲慢。",
+        "elapsed": 1.1908038330002455,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "巴黎人是出了名的以自我为中心、粗鲁和傲慢。",
+          "elapsed": 0.6360337500009337,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1902",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 111360,
+        "pcmSha256": "2da6818a6ded59c8a48abb110442f47544cc76f5a4f7e2ff8a7d0c9d10010363",
+        "reference": "起初，他被送往位于大雅茅斯的詹姆斯·佩吉特医院进行救治。",
+        "status": "recognized",
+        "text": "起初，他被送往位于大雅茅斯的詹姆斯·佩吉特医院进行救治。",
+        "elapsed": 1.397219208000024,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "起初，他被送往位于大雅茅斯的詹姆斯·佩吉特医院进行救治。",
+          "elapsed": 0.7117531250005413,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1905",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 120960,
+        "pcmSha256": "c3df5181a3e4db9ae99f2149704e8ccd1fd35e4076d0f668a8b2f3bdd08cce7e",
+        "reference": "摩尔多瓦的首都是基希讷乌。当地语言是罗马尼亚语，但俄语也被广泛使用。",
+        "status": "recognized",
+        "text": "摩尔多瓦的首都是新基纳维,当地的语言是罗马尼亚语，但俄语也被广泛使用。",
+        "elapsed": 1.7091119590004382,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "摩尔多瓦的首都是辛基纳乌，当地的语言是罗马尼亚语，但俄语也被广泛使用。",
+          "elapsed": 0.8437586659965746,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1772",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 146880,
+        "pcmSha256": "e98e44d3ff0aa23cd9e63d58136cbf1850fd070f75f46e4ed38347a353759344",
+        "reference": "因此，很可能这个符号只是作为一个标签添加的。",
+        "status": "recognized",
+        "text": "因此，很可能这个符号只是作为一个标签添加的。",
+        "elapsed": 1.4938652499986347,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "因此，很可能这个符号只是作为一个标签添加的。",
+          "elapsed": 0.7653988749989367,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1792",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 140160,
+        "pcmSha256": "1158f7d461c64a47e37818104ce46240b36d111ed067ca19360f9b51cc8a0c30",
+        "reference": "这被称为化学物质的 pH 值。你可以使用红甘蓝汁制作指示剂。",
+        "status": "recognized",
+        "text": "这被称为化学物质的 T H 值。你可以用红甘蓝汁制作指示剂。",
+        "elapsed": 1.7312781670007098,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "这被称为化学物质的 T H 值。你可以用红甘蓝汁制作指示剂。",
+          "elapsed": 0.8744047079999291,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1962",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 135360,
+        "pcmSha256": "c3d7a02f86783fe14fd7e34e4714e1686bf137c671f6fb0b1512b7ddaa1fda25",
+        "reference": "pH 值以被测化学品中的氢（pH 中的 H）离子数量表示。",
+        "status": "recognized",
+        "text": "pH值被测化学品中的氢（pH中的H）离子数量表示。",
+        "elapsed": 1.580557500001305,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "pH值被测化学品中的氢（pH中的H）离子数量表示。",
+          "elapsed": 0.8182950000009441,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1884",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 110400,
+        "pcmSha256": "c268c789b772bd302ffd4f217f227cf4cd4dcf85be9b0c93ef6f797dae8fa99a",
+        "reference": "具体说来，据说可以通过正确解读微表情来判断一个人是否在撒谎。",
+        "status": "recognized",
+        "text": "具体说来，据说可以通过正确解读微表情来判断一个人是否在撒谎。",
+        "elapsed": 1.4052587500009395,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "具体说来，据说可以通过正确解读微表情来判断一个人是否在撒谎。",
+          "elapsed": 0.6781439160004084,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1958",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 154560,
+        "pcmSha256": "74369c2be16ac04f36e00da1d0db5fe39d3aed45276693046f365c638fc2c130",
+        "reference": "这座城市与该国其他城市形成了鲜明对比，因为它更多的是阿拉伯风格，而不是非洲风格。",
+        "status": "recognized",
+        "text": "这座城市与该国其他城市形成了鲜明的对比，因为它更多的是阿拉伯风格，而不是非洲风格。",
+        "elapsed": 1.6854138749986305,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "这座城市与该国其他城市形成了鲜明的对比，因为它更多的是阿拉伯风格，而不是非洲风格。",
+          "elapsed": 0.8389085000017076,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1871",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 111360,
+        "pcmSha256": "03a066eba992c84246696180810c01b61d5b7d050bc41e5b8b3b8cc6c7e5fd62",
+        "reference": "在中东温暖的气候中，房子并不是多重要。",
+        "status": "recognized",
+        "text": "在中东温暖的气候中，房子并不是多重要。",
+        "elapsed": 1.121183208997536,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "在中东温暖的气候中，房子并不是多重要。",
+          "elapsed": 0.5860179590017651,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1698",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 155520,
+        "pcmSha256": "c0cf0ea82e08a6e7f364626fdecf3c4f7d8dedbf3d3b24f96ff029fc1ca312a4",
+        "reference": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小粒子组成。",
+        "status": "recognized",
+        "text": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小颗粒组成。",
+        "elapsed": 1.650842584000202,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小颗粒组成。",
+          "elapsed": 0.843986624997342,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-2002",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 108480,
+        "pcmSha256": "bee96356b12cce5f98776905b7cff01e92fca56e052e0997e977ee19a9bf8999",
+        "reference": "它让玩家可以通过在空中移动设备来控制电子游戏中的运动和操作。",
+        "status": "recognized",
+        "text": "它让玩家可以通过在空中移动设备来控制电子游戏中的运动和操作。",
+        "elapsed": 1.2188920420012437,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "它让玩家可以通过在空中移动设备来控制电子游戏中的运动和操作。",
+          "elapsed": 0.6329124590010906,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1661",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 123840,
+        "pcmSha256": "e9394e90b72ecde7d22f242b32dcf2c20fbf7bed68cafa6a89e341e933279744",
+        "reference": "他没有设定削减数额，只是表示将根据中国的经济产出来决定数额。",
+        "status": "recognized",
+        "text": "他没有设定削减数额，只是表示将根据中国的经济产出来决定数额。",
+        "elapsed": 1.2857660000008764,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "他没有设定削减数额，只是表示将根据中国的经济产出来决定数额。",
+          "elapsed": 0.6488854579984036,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1697",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 156480,
+        "pcmSha256": "bc45683ef6eff1f4a58502edfa5bd7e90e4f5cb2b79bdcf7e1879cf9abc5f988",
+        "reference": "他一直无法用药物来缓解疼痛，因为比赛禁止参赛者服用这些药物。",
+        "status": "recognized",
+        "text": "他一直无法用药物来缓解疼痛，因为比赛禁止参赛者服用这些药物。",
+        "elapsed": 1.6271971250025672,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "他一直无法用药物来缓解疼痛，因为比赛禁止参赛者服用这些药物。",
+          "elapsed": 0.8042970409987902,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1821",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 126720,
+        "pcmSha256": "f4bd7a624646121f15f41d3e3f538c0f07d18bb3eff57ec4c8838e0a78490f7d",
+        "reference": "大脑病理和行为之间的相关性可以为科学家们的研究提供支持。",
+        "status": "recognized",
+        "text": "大脑病理和行为之间的相关性，可为科学家们的研究提供支持。",
+        "elapsed": 1.3008041670000239,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "大脑病理和行为之间的相关性，可为科学家们的研究提供支持。",
+          "elapsed": 0.6498303340013081,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-cmn_hans_cn-1808",
+        "cohort": "mandarin",
+        "locale": "zh-CN",
+        "samples": 103680,
+        "pcmSha256": "fdb29e3346a08dec51ca79f5ddca66a2fd73906aa53cd978c92c57017849d584",
+        "reference": "战争结束两年后，曾经的盟友如今成了敌人，冷战随即开始。",
+        "status": "recognized",
+        "text": "战争结束两年后，曾经的盟友如今成了敌人。冷战随即开始。",
+        "elapsed": 1.2432922080006392,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "Chinese",
+        "admission": {
+          "rawText": "战争结束两年后，曾经的盟友如今成了敌人。冷战随即开始。",
+          "elapsed": 0.6485981670011824,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1675",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 140160,
+        "pcmSha256": "05586359c8c54a5fcd24761af9ae0e21b636c4cc2f696b56ef2f8ee6cc5a4ac5",
+        "reference": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+        "status": "recognized",
+        "text": "All nouns alongside the world say for you always begin with a capital letter, even in the middle of a sentence.",
+        "elapsed": 1.672059459000593,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "All nouns alongside the world say for you always begin with a capital letter, even in the middle of a sentence.",
+          "elapsed": 0.8673027500008175,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1728",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 92160,
+        "pcmSha256": "1cf1221ee097d042ef3cd020809bea09394626a31ac989b945c22c46ecf6fc1f",
+        "reference": "The cabbage juice changes color depending on how acidic or basic (alkaline) the chemical is.",
+        "status": "recognized",
+        "text": "The cabbage juice changes color depending on how acidic, basic, alkaline the chemical is.",
+        "elapsed": 1.3075265000006766,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "The cabbage juice changes color depending on how acidic, basic, alkaline the chemical is.",
+          "elapsed": 0.661349166999571,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1972",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 69120,
+        "pcmSha256": "0ff9f8ba6e913bcab4c77c2883c11e3a63d554eb341ce99d683f5d8c921accd4",
+        "reference": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+        "status": "recognized",
+        "text": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+        "elapsed": 1.054748708000261,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+          "elapsed": 0.543847500000993,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1914",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 111360,
+        "pcmSha256": "e13d4263bc8bd3442c788d0696df0344beb66eb7bcec68e0b67083d44d530581",
+        "reference": "Twentieth century research has shown that there are two pools of genetic variation: hidden and expressed.",
+        "status": "recognized",
+        "text": "Twentieth-century research has shown that there are two pools of genetic variation, hidden and expressed.",
+        "elapsed": 1.305251458001294,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Twentieth-century research has shown that there are two pools of genetic variation, hidden and expressed.",
+          "elapsed": 0.6501053329993738,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1806",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 158400,
+        "pcmSha256": "b991029a13b6e97fb547937e9ad82f941b57f0b60b01c5d1d89d19237a36bd0d",
+        "reference": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses, easier to reach than those built in modern times.",
+        "status": "recognized",
+        "text": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses, easier to reach than those built in modern times.",
+        "elapsed": 2.133265874999779,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "As light pollution in their heyday was not the kind of problem it is today, they are usually located in cities or at campuses, easier to reach than those built in modern times.",
+          "elapsed": 1.0730171670002164,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1776",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 76800,
+        "pcmSha256": "2821c39358fc8049953945d8042d1833d86cb2245ca468cf5afc31ee1fe1a438",
+        "reference": "Through the night between 150 and 200 copies were made, now known as \"Dunlap broadsides\".",
+        "status": "recognized",
+        "text": "For the night, between 150 and 200 copies were made, now known as Dunlap broadsides.",
+        "elapsed": 1.2682584169997426,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "For the night, between 150 and 200 copies were made, now known as Dunlap broadsides.",
+          "elapsed": 0.6483893750009884,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1802",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 91520,
+        "pcmSha256": "24fe577bb7fdeabe18ca0c86da8cc1933f270331cb6567893c6be4c06f978760",
+        "reference": "The Internet combines elements of both mass and interpersonal communication.",
+        "status": "recognized",
+        "text": "The internet combines elements of both mass and interpersonal communication.",
+        "elapsed": 0.9765284170025552,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "The internet combines elements of both mass and interpersonal communication.",
+          "elapsed": 0.4939926250008284,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1992",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 138240,
+        "pcmSha256": "9c9a81e00df5617314c141a676eb01447539b46697e6607e7cf11fc389ce7f75",
+        "reference": "The term safari in popular use refers to overland travel to view the stunning African wildlife, particularly on savanna.",
+        "status": "recognized",
+        "text": "The term safari in popular use refers to overland travel to view the stunning African wildlife, particularly on Savannah.",
+        "elapsed": 1.6570749170023191,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "The term safari in popular use refers to overland travel to view the stunning African wildlife, particularly on Savannah.",
+          "elapsed": 0.8478673749996233,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-2005",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 85760,
+        "pcmSha256": "13e249d77ff99fa7d255acf98216b31f11d1bdb59e286d56fec5cfb888ce5c75",
+        "reference": "But there are a lot of things about birds that still look like a dinosaur.",
+        "status": "recognized",
+        "text": "But there are a lot of things about those that still look like a dinosaur.",
+        "elapsed": 1.0489472919980471,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "But there are a lot of things about those that still look like a dinosaur.",
+          "elapsed": 0.5525932499986084,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1674",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 90240,
+        "pcmSha256": "1243ac24a74d6cdeee5162cb6967dbeb0ddbebe00ce03c809db7fb872de5e66b",
+        "reference": "In some areas boiling water for a minute is enough, in others several minutes are needed.",
+        "status": "recognized",
+        "text": "In some areas, boiling water for a minute is enough, and other several minutes are needed.",
+        "elapsed": 1.1324338749982417,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "In some areas, boiling water for a minute is enough, and other several minutes are needed.",
+          "elapsed": 0.5755416249994596,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1952",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 137280,
+        "pcmSha256": "b3ad159ace71890d6c1e1c0c54506fe32cb3c3c1f797e625b4d561a3651f2e19",
+        "reference": "Anyone who's going to drive at high latitudes or over mountain passes should consider the possibility of snow, ice, or freezing temperatures.",
+        "status": "recognized",
+        "text": "Anyone who is going to drive at high latitudes or over mountain passes should consider the possibility of snow, ice, or freezing temperatures.",
+        "elapsed": 1.7425420839972503,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Anyone who is going to drive at high latitudes or over mountain passes should consider the possibility of snow, ice, or freezing temperatures.",
+          "elapsed": 0.8836403749992314,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1749",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 153600,
+        "pcmSha256": "96b712b1b2470b668739a530bcf3da185ea64828967a53c8c9f2859bbbeec027",
+        "reference": "It was ruled by the \"Vichy\" French. These were French people who had made peace with the Germans in 1940 and worked with the invaders instead of fighting them.",
+        "status": "recognized",
+        "text": "It was ruled by the Vicky French. These were French people who had made peace with the Germans in 1940 and worked with the invaders instead of fighting them.",
+        "elapsed": 2.134224584002368,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "It was ruled by the Vicky French. These were French people who had made peace with the Germans in 1940 and worked with the invaders instead of fighting them.",
+          "elapsed": 1.0830812079984753,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1662",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 134080,
+        "pcmSha256": "b6e506b249cb0b44e643e8a32475a53e56513c8f34622c49448c3752a17b0e77",
+        "reference": "Alloys are basically a mixture of two or more metals. Don't forget that there are many elements on the periodic table.",
+        "status": "recognized",
+        "text": "Alloys are basically a mixture of two or more metals. Don't forget there are many elements on the periodic table.",
+        "elapsed": 1.6891522089972568,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Alloys are basically a mixture of two or more metals. Don't forget there are many elements on the periodic table.",
+          "elapsed": 0.8403815829988162,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1858",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 100800,
+        "pcmSha256": "e8138f2c1b81addf0479f2abf0edbe38be2e2e5a2eb0a29fd12efdb602e53ff4",
+        "reference": "Danielle Lantagne, a UN expert on the disease, stated the outbreak was likely caused by the peacekeepers.",
+        "status": "recognized",
+        "text": "Daniel Lantigua, a U.N. expert on the disease, stated that the outbreak was likely caused by the peacekeepers.",
+        "elapsed": 1.4154967080030474,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Daniel Lantigua, a U.N. expert on the disease, stated the outbreak was likely caused by the peacekeepers.",
+          "elapsed": 0.7193782909998845,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1909",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 90240,
+        "pcmSha256": "743a920543850ab40540466a1b7b896ce5281c7887390c5adb136d874c78f300",
+        "reference": "Virtual teams are held to the same standards of excellence as conventional teams, but there are subtle differences.",
+        "status": "recognized",
+        "text": "Virtual teams are held to the same standard of excellence as conventional teams, but there are subtle differences.",
+        "elapsed": 1.2678280840009393,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Virtual teams are held to the same standard of excellence as conventional teams, but there are subtle differences.",
+          "elapsed": 0.6552059169989661,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1897",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 153280,
+        "pcmSha256": "d15856e4a4d0a6e14da769ae7f5606c275e9f413800661c47bb48e7f853a6cc7",
+        "reference": "In the north the region is bounded by the Sahel, and in the south and west by the Atlantic Ocean.",
+        "status": "recognized",
+        "text": "In the north, the region is bounded by the Sahel, and in the south and west by the Atlantic Ocean.",
+        "elapsed": 1.7494093339992105,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "In the north, the region is bounded by the Sahel, and in the south and west by the Atlantic Ocean.",
+          "elapsed": 0.8745320420021017,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1953",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 109440,
+        "pcmSha256": "c18f050d51601807dd1417cabbfddeb16bbe116c7cca16590ae543e0e0eac596",
+        "reference": "He was subsequently relocated to Addenbrooke's Hospital in Cambridge.",
+        "status": "recognized",
+        "text": "He was subsequently relocated to Adenbrooke's Hospital in Cambridge.",
+        "elapsed": 1.1846987919998355,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "He was subsequently relocated to Adenbrooke's Hospital in Cambridge.",
+          "elapsed": 0.5986406249976426,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1740",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 133440,
+        "pcmSha256": "3c68cf7df9bbcea81639f6d3b0c78ece387538ce913907c2a98113e0a7ec52d0",
+        "reference": "The pyramid sound and light show is one of the most interesting things in the area for kids.",
+        "status": "recognized",
+        "text": "The Pyramid Sound and Light Show is one of the most interesting things in the area for kids.",
+        "elapsed": 1.6094180000000051,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "The Pyramid Sound and Light Show is one of the most interesting things in the area for kids.",
+          "elapsed": 0.8200918750007986,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1987",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 157120,
+        "pcmSha256": "e6f9b4c2ba1cfb2fdbd33b63879e52b83f0e9e065897a471f3e744aa3541a3c7",
+        "reference": "The crash occurred high up in mountainous terrain, and is believed to have been the result of hostile fire.",
+        "status": "recognized",
+        "text": "The crash occurred high up in mountainous terrain, and is believed to have been the result of hostile fire.",
+        "elapsed": 1.8180556250008522,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "The crash occurred high up in mountainous terrain, and is believed to have been the result of hostile fire.",
+          "elapsed": 0.9478432500000054,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "fleurs-en_us-1990",
+        "cohort": "english-near",
+        "locale": "en-US",
+        "samples": 140160,
+        "pcmSha256": "f0eedcd572d0907bbf9c0463d3921ff3dbd3989e05ed5faa2e63a91412da69e2",
+        "reference": "Blogs can also help improve student writing. While students often begin their blog experience with sloppy grammar and spelling, the presence of an audience generally changes that.",
+        "status": "recognized",
+        "text": "Blog can also help improve student writing. While students often begin their blog experience with sloppy grammar and spelling, the presence of an audience generally changes that.",
+        "elapsed": 1.87497308300226,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Vlogs can also help improve student writing. While students often begin their blog experience with sloppy grammar and spelling, the presence of an audience generally changes that.",
+          "elapsed": 0.9647632499982137,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2003a.sync.171-C",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 124416,
+        "pcmSha256": "3657e2bec908c402df6523cb86abef3cb7c3865afd86b96b2cc2b4e9161bcef8",
+        "reference": "So elephants are big, strong and gentle, and they have great memories, and they begin with the letter E_, just like Ebenezer.",
+        "status": "recognized",
+        "text": "So it's a big, strong, and gentle, and they have great memories, and it begins with the letter E, just like everything.",
+        "elapsed": 1.5889085409980908,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "So it's a big, strong, and gentle, and they have great memories, and it begins with the letter E, just like everything.",
+          "elapsed": 0.8036694580005133,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2003a.sync.93-B",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 131296,
+        "pcmSha256": "2c8fa6ea84f3d1544be8b3d6f95da02032c6c947f96ccfdb1a104beafb8e8ad1",
+        "reference": "Okay. Now we better actually just get on with the uh the meat of the project. So I'm gonna guess that we've all used remote controls.",
+        "status": "recognized",
+        "text": "Okay, now we can actually just get on with the the meat of the project. So, I'm going to get some volumes from all controls.",
+        "elapsed": 1.7762511250002717,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Okay, now we can actually just get on with the the meat of the project. So, I'm gonna get some volumes from all controls.",
+          "elapsed": 0.9025805830024183,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2003a.sync.95-B",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 80160,
+        "pcmSha256": "275c708e6e7865ca625449872c08b9807267801b4440c72bcade20b18b97b827",
+        "reference": "Any ideas of where you think a new remote control could go into this market?",
+        "status": "recognized",
+        "text": "Any ideas of where you think a new remote control could go into this market.",
+        "elapsed": 1.0740806670000893,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Any ideas of where you think a new remote control could go into this market.",
+          "elapsed": 0.5286260410030081,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2003a.sync.209-C",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 137216,
+        "pcmSha256": "b262eb47f6f6e6890c76c9f3b95e113d3e0177af2c7f5b5f6da8f1f64b5c9f21",
+        "reference": "Uh, you wanna be able to change angles in interactive television, so you need buttons to change the television angle, the camera angles and stuff like that.",
+        "status": "recognized",
+        "text": "You want to be able to change angles in interactive television, so you need buttons to change the television angle, the camera angle, and stuff like that.",
+        "elapsed": 1.9357635420019506,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "You want to be able to change angles in interactive television. So you need buttons to change the television angle, the camera angle, and stuff like that.",
+          "elapsed": 0.9600772500016319,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2003a.sync.267-D",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 66560,
+        "pcmSha256": "085ec99a8aee157763182ec855ecb77fada8b4e55c53a33b9664955e6ef8be13",
+        "reference": "Well when you're talking about gaming and stuff, do you think they should have some sort of",
+        "status": "recognized",
+        "text": "Well, when you're talking about games and stuff, do you think they should have some sort of.",
+        "elapsed": 1.0493848750011239,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "When you're talking about games and stuff, do you think they should have some sort of?",
+          "elapsed": 0.5329429589983192,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2003a.sync.29-A",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 50688,
+        "pcmSha256": "420fca6eb65876435937e44ab3e2e91c68437cc242fd1f1d19664aee78f8a9f9",
+        "reference": "slightly unconventional or attractive uh",
+        "status": "recognized",
+        "text": "Slightly unconventional, attractive.",
+        "elapsed": 0.6199599160026992,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Slightly unconventional, attractive.",
+          "elapsed": 0.3176741659990512,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2003a.sync.129-B",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 70352,
+        "pcmSha256": "92372954467727dc91a9d9d54390854b596a731b88c4a5d338e18430260d1da5",
+        "reference": "Okay. That's definitely something that we should be able to do quite easily.",
+        "status": "recognized",
+        "text": "Okay, that's definitely something that we should be able to do quite easily.",
+        "elapsed": 1.0080116249991988,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Okay, that's definitely something that we should be able to do quite easily.",
+          "elapsed": 0.5180138329997135,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2003a.sync.131-B",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 68128,
+        "pcmSha256": "9f10fcc5c571a3a081aeb770cb3ace9fff8189fb44a893c1b6580e0fe76ecaa3",
+        "reference": "I would I would have hoped so anyway. Um, right.",
+        "status": "recognized",
+        "text": "I would have hoped so anyway. Um, right.",
+        "elapsed": 0.9011203749978449,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "I would have hoped so anyway. Um, right.",
+          "elapsed": 0.4692756250005914,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2003a.sync.133-B",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 151472,
+        "pcmSha256": "0bee300259333260a5ee83134ebfd0a10e457c14470f8094fa7fc5c0ae4f5fe2",
+        "reference": "I'd say we finish this one up, we get started, I'll get in, I'll write up what we've um kind of quickly done, and I'll get that out to everybody.",
+        "status": "recognized",
+        "text": "I'd say we finish this one up. We get started. I'll get I'll write up what we've kind of quickly done. I'll get out to everybody.",
+        "elapsed": 2.1303000419975433,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "I'd say we finish this one up. We get started. I'll get. I'll write up what we've kind of quickly done. I'll get out to everybody.",
+          "elapsed": 1.0704572499998903,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2004a.sync.121-B",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 96256,
+        "pcmSha256": "ec3815294a798571695d9bc7647711971e7eaaafa964f38eb482d30ce0639b7d",
+        "reference": "what we're thinking, how it's gonna go and then the detailed design, how we're actually gonna put it into practice and make it work.",
+        "status": "recognized",
+        "text": "What we're thinking, how it's going to go, and then the detailed design—how we're actually going to put it into practice and make it work.",
+        "elapsed": 1.8001759159997164,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "What we're thinking, how it's going to go, and then the detail design—how we're actually going to put it into practice and make it work.",
+          "elapsed": 0.9186631250013306,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2004a.sync.131-B",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 66048,
+        "pcmSha256": "863640d5522fe1a48adc1900136604344d22b7c433c5c6a119f6d7d9f2bac0c4",
+        "reference": "Okay. I'm not gonna ask you to guess, I'm going to tell you that's supposed to be a tiger.",
+        "status": "recognized",
+        "text": "Okay, and I'm going to ask you to guess. I'm going to tell you that's a sweet tiger.",
+        "elapsed": 1.2894070829970588,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "Okay, and I'm going to ask you to guess. I'm going to tell you that's a sweet tiger.",
+          "elapsed": 0.6885858749992622,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-ES2006a.sync.277-C",
+        "cohort": "english-far",
+        "locale": "en-US",
+        "samples": 98560,
+        "pcmSha256": "fe3d531be0dbaeff783266f1abd46834b4f76ae35951e53e57b1d94987e8ae45",
+        "reference": "And then that's it. So we've got twenty five minutes to do that, that's until eleven twenty five.",
+        "status": "recognized",
+        "text": "And then that's it. So we've got twenty-five minutes to do that until eleven twenty-five.",
+        "elapsed": 1.5899465830007102,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "English",
+        "admission": {
+          "rawText": "And then that's it. So we've got twenty five minutes to do that until eleven twenty five.",
+          "elapsed": 0.8097425830019347,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 2,
+        "admissionRejected": false
+      },
+      {
+        "id": "ami-negative-ES2003a-0",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "52d2b4c183809730b18e7f48a268b2d9c592736966a54c2f9ddd66faa20d583e",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.3778383749995555,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.37736245800260804,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "ami-negative-ES2003a-1",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "5413d23ae7475c3e3ddd03289bfbe8b991095e12c7f1b94265b963197131767b",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.36221049999949173,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.3617123330004688,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "ami-negative-ES2003a-2",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "08423e78d572548365c9ac0ca063744936ac9ffc5af3dfa7469e07c22f9d27d9",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.34813854100138997,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.34764283299955423,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "ami-negative-ES2004a-0",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "0ab694a5a8a760585e76faa014808019aa56a1ede71844094e20f597d573d83c",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.3810774160010624,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.38063750000219443,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "ami-negative-ES2004a-1",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "441a5409fba63e68618379dd5b976564b7c27a3b45cdbc7aabf1803ef70afb1f",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.3698767499990936,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.36918120799964527,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "ami-negative-ES2004a-2",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "60263b27f630d7f1e071c6082f58a7717bde4f3fa5c7a927f6d44d34f893d2a9",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.4164503749998403,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.41600054199807346,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "ami-negative-ES2006a-0",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "6979c986fab34a8e12da0db5db6c6dee39c1cf5401600375635910f647b1bb6c",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.38242991600054665,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.38200237499768264,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "ami-negative-ES2006a-1",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "4b47c204b26f19162f10c61a2b03546ff84ab55f3f09c170eb34724deff5b47e",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.3587294999997539,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.35830454099777853,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "ami-negative-ES2006a-2",
+        "cohort": "nonspeech-noise",
+        "locale": "en-US",
+        "samples": 80000,
+        "pcmSha256": "12917449786723b550065296bdfdb690868bd960f533cfeb04e358da78d2aeac",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.3555394159993739,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.3550013339990983,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "independent-silence-3s-zh-CN",
+        "cohort": "silence",
+        "locale": "zh-CN",
+        "samples": 48000,
+        "pcmSha256": "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.26484816700030933,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.2643816659983713,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "independent-silence-10s-zh-CN",
+        "cohort": "silence",
+        "locale": "zh-CN",
+        "samples": 160000,
+        "pcmSha256": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.656554999997752,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.655890416001057,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "independent-silence-3s-en-US",
+        "cohort": "silence",
+        "locale": "en-US",
+        "samples": 48000,
+        "pcmSha256": "55873fecc61a79e87ca550c7072e38ccdd7ecb600ace286fe4717952a97c42b0",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.27768912499959697,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.2772129579971079,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      },
+      {
+        "id": "independent-silence-10s-en-US",
+        "cohort": "silence",
+        "locale": "en-US",
+        "samples": 160000,
+        "pcmSha256": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b",
+        "reference": "",
+        "status": "recognized",
+        "text": "",
+        "elapsed": 0.6509722080008942,
+        "error_type": null,
+        "error_message": null,
+        "languageOption": "",
+        "admission": {
+          "rawText": "",
+          "elapsed": 0.6505153750003956,
+          "languageOption": "",
+          "status": "recognized"
+        },
+        "nativeDecodeCalls": 1,
+        "admissionRejected": true
+      }
+    ],
+    "modelFiles": {
+      "README.md": {
+        "bytes": 328,
+        "sha256": "bbc6dbeb9dce5b4ed0e839057137e9cba4bf05c5797277d36a80e22594414e14",
+        "verified": true
+      },
+      "conv_frontend.onnx": {
+        "bytes": 44148281,
+        "sha256": "d22dc4423e0940e49884e903d2ea2f7e5567c14fc1aed97e4e26d6b8f208ef9e",
+        "verified": true
+      },
+      "decoder.int8.onnx": {
+        "bytes": 755914231,
+        "sha256": "4f6885be5959ae26af3089d38ee7972c5fafbeeb1cf8d5e76eab6d8b61ca5771",
+        "verified": true
+      },
+      "encoder.int8.onnx": {
+        "bytes": 182491662,
+        "sha256": "60748d3e6744a57c9c91e1b17424a6c2990567e8adceb0783940c03ed98fa9d9",
+        "verified": true
+      },
+      "test_wavs/README.md": {
+        "bytes": 76,
+        "sha256": "3c088a32079cfc8ed0239735295fbf7ffe657bf5ac21696f294f6a19e8e30fad",
+        "verified": true
+      },
+      "test_wavs/ar1.wav": {
+        "bytes": 168044,
+        "sha256": "700b3c274f2fedffbb6016f03c574adaad7aa0291acc1a1ba72f07112051073f",
+        "verified": true
+      },
+      "test_wavs/cantonese.wav": {
+        "bytes": 526444,
+        "sha256": "ec832e035c13c670e0cf68dee0ca5dfae38bf2c583aab31e587441cb3eba3f3f",
+        "verified": true
+      },
+      "test_wavs/codeswitch.wav": {
+        "bytes": 549550,
+        "sha256": "2def7fa41004d0a7d148d4afbf4c467c9d112d8b373996123e9a4c43d94957c7",
+        "verified": true
+      },
+      "test_wavs/de.wav": {
+        "bytes": 215084,
+        "sha256": "80bb10c44085a7ce01a17abaf6a2095ed37e1695fca41cc0ea9733f1f24a749c",
+        "verified": true
+      },
+      "test_wavs/es1.wav": {
+        "bytes": 164844,
+        "sha256": "4543f94738445a38306fb80bb0329ef5ca6d81ab1b6c3f15af1de1c3382f4b31",
+        "verified": true
+      },
+      "test_wavs/f1_noise.wav": {
+        "bytes": 1677606,
+        "sha256": "7ae35f5d8f038e518f3abdeda5f78d71cb2f67c9ca29cb9a49a0b4d0702909bd",
+        "verified": true
+      },
+      "test_wavs/fast1.wav": {
+        "bytes": 1003794,
+        "sha256": "b43bbd0bd982c3cc88081f64389bf29fe9e9a01287d44f0b15887bc49c2b352a",
+        "verified": true
+      },
+      "test_wavs/fr1.wav": {
+        "bytes": 191916,
+        "sha256": "c6421b34feccbe7fdfaa8b641b8ecb7bcd7b9f2c237c7b82712c860be524db4e",
+        "verified": true
+      },
+      "test_wavs/ja1.wav": {
+        "bytes": 448100,
+        "sha256": "d926ed0159a2d750d1ae7835e60a5cb5f8737629f7bb3de6cd111a3614d5dc67",
+        "verified": true
+      },
+      "test_wavs/noise1-en.wav": {
+        "bytes": 2831516,
+        "sha256": "3664ef02fa664da93d94a1afc271bda31c0f8d07a9f3c74ac6cd1e5aabe8572c",
+        "verified": true
+      },
+      "test_wavs/noise2.wav": {
+        "bytes": 741186,
+        "sha256": "33f85268f7fbad6b3152b9ab051edab1a85082fde66bccff61d7f5ef7b437e58",
+        "verified": true
+      },
+      "test_wavs/qiqiu1.wav": {
+        "bytes": 1631150,
+        "sha256": "1b69a0fce35936979824c1751a11c285559a635aeb91160d1da3b00118321495",
+        "verified": true
+      },
+      "test_wavs/raokouling.wav": {
+        "bytes": 1831074,
+        "sha256": "3cc59ec494f71135ff5761717e20597f0559b43f793dd72ae4924b86c5e038d8",
+        "verified": true
+      },
+      "test_wavs/rap1.wav": {
+        "bytes": 935868,
+        "sha256": "ac6186d732b59c664776f84238f586d3e6c97adbc8b9f66e939ddcab5773cf3c",
+        "verified": true
+      },
+      "test_wavs/ru1.wav": {
+        "bytes": 152364,
+        "sha256": "e48b22f32d4d1c38f0a94a58acfc43bb8f5b7fc3b0ac01ea49372040ca831acf",
+        "verified": true
+      },
+      "test_wavs/transcript.txt": {
+        "bytes": 5386,
+        "sha256": "9cab82a507e1e5a7743336f2e40fabdaa1eb6181818d7a3768925abc03effd24",
+        "verified": true
+      },
+      "tokenizer/merges.txt": {
+        "bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "verified": true
+      },
+      "tokenizer/tokenizer_config.json": {
+        "bytes": 12487,
+        "sha256": "4942d005604266809309cabc9f4e9cb89ce855d59b14681fdc0e1cc62ea26c4c",
+        "verified": true
+      },
+      "tokenizer/vocab.json": {
+        "bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+        "verified": true
+      }
+    },
+    "cleanup": {
+      "python_refs_dropped": true,
+      "note": "Python references dropped/GC requested; native release not proven by Python API"
+    },
+    "error": null,
+    "resource": {
+      "ru_maxrss": 2828959744,
+      "platform": "darwin"
+    },
+    "pid": 67475,
+    "model_load_elapsed": 1.431219958998554
+  }
+}

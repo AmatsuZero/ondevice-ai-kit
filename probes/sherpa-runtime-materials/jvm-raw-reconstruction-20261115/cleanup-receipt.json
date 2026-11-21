@@ -1,0 +1,22 @@
+{
+  "removed": [
+    {
+      "path": ".omx/artifacts/w3-jvm-rebuild-20261115T153000Z/candidate/__pycache__",
+      "bytes": 28341,
+      "scope": "inactive reproducible Python bytecode cache only"
+    },
+    {
+      "path": "probes/sherpa-jvm-reconstruction/__pycache__",
+      "bytes": 28293,
+      "scope": "inactive reproducible Python bytecode cache only"
+    }
+  ],
+  "nominalBytesRemoved": 56634,
+  "diskFreeBytesBefore": 38673088512,
+  "diskFreeBytesAfter": 38673059840,
+  "allSourceCandidatesPromptsRawFailuresPreserved": true,
+  "compiledClassFilesAndOriginalJarPreserved": true,
+  "completeCompilerToolchainAndFailedPartialPreserved": true,
+  "globalCachesTouched": false,
+  "remainingDiscardableTaskCaches": 0
+}

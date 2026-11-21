@@ -1,0 +1,44 @@
+[
+  {
+    "id": 101,
+    "component": "json",
+    "sourcePath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/notices/json-v3.11.3/UPSTREAM-LICENSE.md",
+    "kind": "whole upstream embedded-attributions documentation",
+    "bytes": 1984,
+    "sha256": "08c345dca1019879171c2c465410f7bee984bbfbdb177afd2d95bf9ff6267602",
+    "archiveMember": "json-3.11.3/docs/mkdocs/docs/home/license.md"
+  },
+  {
+    "id": 102,
+    "component": "kleidiai",
+    "sourcePath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/notices/kleidiai-v1.20.0/COPYRIGHT-102.txt",
+    "kind": "contiguous raw compiled-source copyright and SPDX comment",
+    "bytes": 153,
+    "sha256": "8680f229fa3c82c384502e63f379a90bd8ae717f5c5834157508b3b9427aa404",
+    "archiveMember": "kleidiai-1.20.0/kai/ukernels/matmul/pack/kai_rhs_pack_kxn_qsi4cxp_qs4cxs1s0.c",
+    "sourceFilePrefixByteStart": 0,
+    "text": "//\n// SPDX-FileCopyrightText: Copyright 2024 Arm Limited and/or its affiliates <open-source-office@arm.com>\n//\n// SPDX-License-Identifier: Apache-2.0\n//\n"
+  },
+  {
+    "id": 103,
+    "component": "kleidiai",
+    "sourcePath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/notices/kleidiai-v1.20.0/COPYRIGHT-103.txt",
+    "kind": "contiguous raw compiled-source copyright and SPDX comment",
+    "bytes": 158,
+    "sha256": "0b7f57890fc72850bd8a095724a03e4162223a86d6c21d365e2700d96733b4e4",
+    "archiveMember": "kleidiai-1.20.0/kai/ukernels/matmul/matmul_clamp_f32_qsi8d32p_qsi4c32p/kai_matmul_clamp_f32_qsi8d32p1x8_qsi4c32p4x8_1x4x32_neon_dotprod.c",
+    "sourceFilePrefixByteStart": 1,
+    "text": "//\n// SPDX-FileCopyrightText: Copyright 2024-2025 Arm Limited and/or its affiliates <open-source-office@arm.com>\n//\n// SPDX-License-Identifier: Apache-2.0\n//\n"
+  },
+  {
+    "id": 104,
+    "component": "kleidiai",
+    "sourcePath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/notices/kleidiai-v1.20.0/COPYRIGHT-104.txt",
+    "kind": "contiguous raw compiled-source copyright and SPDX comment",
+    "bytes": 153,
+    "sha256": "ce1bce432346c273656ce8eaceb91835710c459b972b162a75e783a45204d711",
+    "archiveMember": "kleidiai-1.20.0/kai/ukernels/matmul/pack/kai_lhs_quant_pack_qai8dxp_bf16_neon.c",
+    "sourceFilePrefixByteStart": 0,
+    "text": "//\n// SPDX-FileCopyrightText: Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>\n//\n// SPDX-License-Identifier: Apache-2.0\n//\n"
+  }
+]

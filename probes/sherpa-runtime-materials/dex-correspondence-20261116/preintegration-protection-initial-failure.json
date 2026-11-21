@@ -1,0 +1,67 @@
+{
+  "error": "verify-final.py:71 AssertionError protected original exact bytes",
+  "changes": [
+    {
+      "path": "docs/agent-pitfalls.md",
+      "before": {
+        "bytes": 275901,
+        "sha256": "c6576b15b149e4b4ebb26f94cb4361c033473652eff0fb1637b759fd8180555a"
+      },
+      "after": {
+        "bytes": 276640,
+        "sha256": "9d5df0eef92f6d61c9656306c0cc6c90b02cbd99a70143b832cf8be562705bc0"
+      },
+      "oldSuffixPreserved": false,
+      "oldPrefixPreserved": false,
+      "taskOwnership": "outside W3 DEX slice"
+    },
+    {
+      "path": "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md",
+      "before": {
+        "bytes": 137322,
+        "sha256": "73723905238b136f2f804661de0d14a79577ad63094a8bc0085fd027efba2777"
+      },
+      "after": {
+        "bytes": 137160,
+        "sha256": "9c228d9bbe6c9f0f81d76a03594f024da390d3d6f320ca565f9bba7a501b2647"
+      },
+      "oldSuffixPreserved": false,
+      "oldPrefixPreserved": false,
+      "taskOwnership": "outside W3 DEX slice"
+    },
+    {
+      "path": "docs/roadmap/W6-video-understanding.md",
+      "before": {
+        "bytes": 34295,
+        "sha256": "f4d2c6e6ba254380e71f02de09c7af17665616376c69cbdc8e41714de151fe59"
+      },
+      "after": {
+        "bytes": 34369,
+        "sha256": "d52e3304eb793c040a91c2b2dd2950088d4b9941993cf3b08852643a14c9fc13"
+      },
+      "oldSuffixPreserved": false,
+      "oldPrefixPreserved": false,
+      "taskOwnership": "outside W3 DEX slice"
+    },
+    {
+      "path": "docs/validation/f08-qwen35-video-sft-train36-valid18-plan-20261115.md",
+      "before": {
+        "bytes": 4473,
+        "sha256": "cdcfc6f8433e71032accd52567baa151276b02bad1ce1e0011ee6598cf4b1b3e"
+      },
+      "after": {
+        "bytes": 5219,
+        "sha256": "155e7de074e353d484ddbffeec9e07f56bca58706c597d06871bb1e864f7d4f9"
+      },
+      "oldSuffixPreserved": false,
+      "oldPrefixPreserved": false,
+      "taskOwnership": "outside W3 DEX slice"
+    }
+  ],
+  "sourceBuildDeviceOrHelperError": false,
+  "sourceMapEarlierError": {
+    "error": "TypeError: string indices must be integers, not str",
+    "cause": "projection container has sourceCommit and links; parent guessed files/list container",
+    "recovery": "read exact links array22; original projection unchanged"
+  }
+}

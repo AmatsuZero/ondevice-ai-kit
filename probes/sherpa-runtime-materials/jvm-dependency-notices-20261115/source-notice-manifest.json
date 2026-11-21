@@ -1,0 +1,158 @@
+{
+  "sources": [
+    {
+      "repository": "Kotlin/kotlinx.coroutines",
+      "releaseTag": "1.10.2",
+      "refObjectSHA": "5f8900478a8e20c073145b1608fbc71fe3d7378b",
+      "refObjectType": "commit",
+      "resolvedCommit": "5f8900478a8e20c073145b1608fbc71fe3d7378b",
+      "rootTreeSHA": "0493f42ba178205bdff5351291f69c2291bfae07",
+      "tagObjectIsSourceCommit": true
+    },
+    {
+      "repository": "JetBrains/kotlin",
+      "releaseTag": "v2.4.0",
+      "refObjectSHA": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "refObjectType": "commit",
+      "resolvedCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "rootTreeSHA": "e94052d76d53e57f3dc6592f89a245657d0906e4",
+      "tagObjectIsSourceCommit": true
+    },
+    {
+      "repository": "JetBrains/java-annotations",
+      "releaseTag": "23.0.0",
+      "refObjectSHA": "9a67a73e9da8de4321c97ba0cf9071839a5abf8e",
+      "refObjectType": "tag",
+      "resolvedCommit": "5d06c0c48e0a4fe44b2bc0d5d3e8b113c7a57de2",
+      "rootTreeSHA": "409e01e2a372f76692a4737c007b5ad8719ffb82",
+      "tagObjectIsSourceCommit": false
+    }
+  ],
+  "textFiles": [
+    {
+      "upstreamPath": "LICENSE.txt",
+      "gitBlobSHA1": "9c308d958bf91eafe83f66106ca692ff414a4965",
+      "bytes": 11398,
+      "sha256": "b1febe6399dffb10d19d35e7663ab16300c93cb0476a94115df1cc0097a8ffd8",
+      "repository": "Kotlin/kotlinx.coroutines",
+      "materialPath": "notices/kotlinx.coroutines/LICENSE.txt",
+      "sourceCommit": "5f8900478a8e20c073145b1608fbc71fe3d7378b",
+      "purpose": "upstream license or attribution text for the declared component; final applicability review remains"
+    },
+    {
+      "repository": "Kotlin/kotlinx.coroutines",
+      "upstreamPath": "license/NOTICE.txt",
+      "gitBlobSHA1": "fbb2395ad6cc826c73525a1284e26cb40852269f",
+      "bytes": 452,
+      "sha256": "1ab6de67ef738bffae63f9aa6a8798a35e87341c83ea28d09c8dc8ca6993232a",
+      "materialPath": "notices/kotlinx.coroutines/license/NOTICE.txt",
+      "sourceCommit": "5f8900478a8e20c073145b1608fbc71fe3d7378b",
+      "purpose": "upstream license or attribution text for the declared component; final applicability review remains"
+    },
+    {
+      "repository": "JetBrains/kotlin",
+      "upstreamPath": "license/COPYRIGHT.txt",
+      "gitBlobSHA1": "8dc8226f64f07dc5134d3674371cbfe109465cd9",
+      "bytes": 647,
+      "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d",
+      "materialPath": "notices/kotlin/license/COPYRIGHT.txt",
+      "sourceCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "purpose": "upstream license or attribution text for the declared component; final applicability review remains"
+    },
+    {
+      "repository": "JetBrains/kotlin",
+      "upstreamPath": "license/COPYRIGHT_HEADER.txt",
+      "gitBlobSHA1": "3e86cd52df236ddc8c8bbdf2814d2a79d885d4d5",
+      "bytes": 208,
+      "sha256": "e2047ed7177b71a0e09d4bfbd8f812a2d1567a36d8c5778d8d31ddda9a440dda",
+      "materialPath": "notices/kotlin/license/COPYRIGHT_HEADER.txt",
+      "sourceCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "purpose": "scope or template source evidence; not automatically a required delivered notice"
+    },
+    {
+      "repository": "JetBrains/kotlin",
+      "upstreamPath": "license/LICENSE.txt",
+      "gitBlobSHA1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "materialPath": "notices/kotlin/license/LICENSE.txt",
+      "sourceCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "purpose": "upstream license or attribution text for the declared component; final applicability review remains"
+    },
+    {
+      "repository": "JetBrains/kotlin",
+      "upstreamPath": "license/NOTICE.txt",
+      "gitBlobSHA1": "80dbbefa483f605b7e69a1458f9f66b277b61988",
+      "bytes": 482,
+      "sha256": "0b09a83d3ef7795c7dec65e815866597c066c53898f2852a76599b8f5552941a",
+      "materialPath": "notices/kotlin/license/NOTICE.txt",
+      "sourceCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "purpose": "compiler-distribution NOTICE retained as source evidence; not automatically a stdlib required notice"
+    },
+    {
+      "repository": "JetBrains/kotlin",
+      "upstreamPath": "license/README.md",
+      "gitBlobSHA1": "94c18fef50b5ae485924bc28e1c756b34094ee67",
+      "bytes": 20285,
+      "sha256": "fae7d348841a6af205dcc5a99ab4e466e1537c839e423501d469df0c4e85f23e",
+      "materialPath": "notices/kotlin/license/README.md",
+      "sourceCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "purpose": "scope or template source evidence; not automatically a required delivered notice"
+    },
+    {
+      "upstreamPath": "LICENSE.txt",
+      "gitBlobSHA1": "4c4a741bfd6103cc173315b0c699ea93bfe71383",
+      "bytes": 11352,
+      "sha256": "8c1e966c7855fb54027bcaf6ebe7a43abe4785791e8cf9148c363761d493d097",
+      "repository": "JetBrains/java-annotations",
+      "materialPath": "notices/java-annotations/LICENSE.txt",
+      "sourceCommit": "5d06c0c48e0a4fe44b2bc0d5d3e8b113c7a57de2",
+      "purpose": "upstream license or attribution text for the declared component; final applicability review remains"
+    },
+    {
+      "upstreamPath": "license/third_party/boost_LICENSE.txt",
+      "gitBlobSHA1": "127a5bc39ba030c7cb99cc0aedc4f280ffe27310",
+      "bytes": 1337,
+      "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b",
+      "repository": "JetBrains/kotlin",
+      "materialPath": "notices/kotlin/license/third_party/boost_LICENSE.txt",
+      "sourceCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "purpose": "known stdlib derivation text; four matching source examples/runtime classes observed; final shrink/DEX scope unresolved"
+    },
+    {
+      "upstreamPath": "license/third_party/guava_license.txt",
+      "gitBlobSHA1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "repository": "JetBrains/kotlin",
+      "materialPath": "notices/kotlin/license/third_party/guava_license.txt",
+      "sourceCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "purpose": "known stdlib derivation text; four matching source examples/runtime classes observed; final shrink/DEX scope unresolved"
+    },
+    {
+      "upstreamPath": "license/third_party/gwt_license.txt",
+      "gitBlobSHA1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "repository": "JetBrains/kotlin",
+      "materialPath": "notices/kotlin/license/third_party/gwt_license.txt",
+      "sourceCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "purpose": "known stdlib derivation text; four matching source examples/runtime classes observed; final shrink/DEX scope unresolved"
+    },
+    {
+      "upstreamPath": "license/third_party/threetenbp_license.txt",
+      "gitBlobSHA1": "bbed3563e938dd26bdc2daeb5f5cccdd0f03eb61",
+      "bytes": 1520,
+      "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331",
+      "repository": "JetBrains/kotlin",
+      "materialPath": "notices/kotlin/license/third_party/threetenbp_license.txt",
+      "sourceCommit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+      "purpose": "known stdlib derivation text; four matching source examples/runtime classes observed; final shrink/DEX scope unresolved"
+    }
+  ],
+  "textCount": 12,
+  "textBytes": 81755,
+  "recursiveArtifactNoticeSetComplete": false,
+  "sourceToAllJarMembersProven": false,
+  "productionNoticeRetentionVerified": false
+}

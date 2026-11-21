@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "runId": "w3-qwen-host-screen-20261110-01",
+  "status": "screen-failed-silence-hallucination",
+  "promoted": false,
+  "runtime": "sherpa-onnx2.0.1 CPU2threads Mac",
+  "model": {
+    "assetId": 390698077,
+    "archiveBytes": 878702423,
+    "archiveSHA256": "393f8a14e2f5fb96746aaab342997a40641001fbd5bf9592a080a8329178ee96",
+    "runtimeFileBytes": 987015347,
+    "upstreamRevision": "5eb144179a02acc5e5ba31e748d22b0cf3e303b0",
+    "upstreamModelCardLicense": "Apache-2.0",
+    "exportNotice": "official Sherpa package README points to zengshuishui/Qwen3-ASR-onnx and Wasser1462/Qwen3-ASR-onnx; distribution notice chain not accepted for production yet"
+  },
+  "protocolSHA256": "10037e342126da95c5350397bca37010538da557af9ed5487398a4364be2a1c1",
+  "runnerSHA256": "9eb3ebee4c118b30a34fc9e033c5f66cb0a1724b767af343d1b8667c7e9545a1",
+  "reportSHA256": "96aeb6b731d574a661602db7edab2fe49f4f332c8bb9b3166da74800f61cd85a",
+  "criteria": {
+    "all9SpeechNonempty": true,
+    "mandarinCERAtMost25pct": true,
+    "englishNearWERAtMost25pct": true,
+    "englishFarWERAtMost50pct": true,
+    "eachFarWERBelow100pct": true,
+    "bothSilencesEmpty": false,
+    "guardNotTriggered": true
+  },
+  "quality": {
+    "mandarin": {
+      "character": {
+        "referenceUnits": 92,
+        "hypothesisUnits": 90,
+        "substitutions": 1,
+        "deletions": 2,
+        "insertions": 0,
+        "errors": 3,
+        "rate": 0.03260869565217391,
+        "defined": true
+      },
+      "word": {
+        "referenceUnits": 13,
+        "hypothesisUnits": 3,
+        "substitutions": 2,
+        "deletions": 10,
+        "insertions": 0,
+        "errors": 12,
+        "rate": 0.9230769230769231,
+        "defined": true
+      }
+    },
+    "english-near": {
+      "character": {
+        "referenceUnits": 268,
+        "hypothesisUnits": 275,
+        "substitutions": 0,
+        "deletions": 0,
+        "insertions": 7,
+        "errors": 7,
+        "rate": 0.026119402985074626,
+        "defined": true
+      },
+      "word": {
+        "referenceUnits": 59,
+        "hypothesisUnits": 59,
+        "substitutions": 7,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 7,
+        "rate": 0.11864406779661017,
+        "defined": true
+      }
+    },
+    "english-far": {
+      "character": {
+        "referenceUnits": 114,
+        "hypothesisUnits": 96,
+        "substitutions": 8,
+        "deletions": 23,
+        "insertions": 5,
+        "errors": 36,
+        "rate": 0.3157894736842105,
+        "defined": true
+      },
+      "word": {
+        "referenceUnits": 27,
+        "hypothesisUnits": 21,
+        "substitutions": 7,
+        "deletions": 6,
+        "insertions": 0,
+        "errors": 13,
+        "rate": 0.48148148148148145,
+        "defined": true
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "fleurs-cmn-test-1906",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 166080,
+      "pcmSha256": "8c8996345c5ffbf90f802ed67d9d3a8257ef12a0768453492ce351e03754912a",
+      "reference": "“这并不是告别。这是一个篇章的结束，也是新篇章的开始。”",
+      "status": "recognized",
+      "text": "这并不是告别，这是一个篇章的结束，也是新篇章的开始。",
+      "elapsed": 0.9733618749996822,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "fleurs-cmn-test-2006",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 132480,
+      "pcmSha256": "333699e4542733689279698f52497c652dd23ed063f81a2ab861f6ab533f02b9",
+      "reference": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "status": "recognized",
+      "text": "钙、钾等元素属于金属，银和金等元素当然也是金属。",
+      "elapsed": 0.8727640830002201,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "fleurs-cmn-test-1883",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 221760,
+      "pcmSha256": "b5176ee748e64389a64d0eb56d7114020290e676a90fa48cf49e2db5b53ae33c",
+      "reference": "桥下垂直净空 15 米。该项目于 2011 年 8 月完工，但直到 2017 年 3 月才开始通车。",
+      "status": "recognized",
+      "text": "桥下垂直净空15米。该项目于2011年8月完工，但直到2017年3月才开始通车。",
+      "elapsed": 1.4364435420029622,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "1272-128104-0000",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 93680,
+      "pcmSha256": "156e1e1821700d4c4ad31a63e6d901a5088d5ee155fafd02a9d0d2de37f771e6",
+      "reference": "MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL",
+      "status": "recognized",
+      "text": "Mister. Quilter is the apostle of the middle classes, and we are glad to welcome his gospel.",
+      "elapsed": 0.8336658340012946,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "1272-128104-0001",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 77040,
+      "pcmSha256": "bca0b38f0be340f804ab1d522f4d2a1b339f3cb237913347d1af0847ae48160e",
+      "reference": "NOR IS MISTER QUILTER'S MANNER LESS INTERESTING THAN HIS MATTER",
+      "status": "recognized",
+      "text": "Nor is Mister Quilter's manner less interesting than his matter.",
+      "elapsed": 0.7140949579988956,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "1272-128104-0002",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 199760,
+      "pcmSha256": "f683cb79705da5840f7e920921f2f5b61d396b3bb8b24db57703745785f5ec55",
+      "reference": "HE TELLS US THAT AT THIS FESTIVE SEASON OF THE YEAR WITH CHRISTMAS AND ROAST BEEF LOOMING BEFORE US SIMILES DRAWN FROM EATING AND ITS RESULTS OCCUR MOST READILY TO THE MIND",
+      "status": "recognized",
+      "text": "He tells us that at this festive season of the year, with Christmas and roast beef looming before us, similes drawn from eating and its results occur most readily to the mind.",
+      "elapsed": 1.749915291002253,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "ami-ES2002a-D-330",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 56016,
+      "pcmSha256": "6f9370f42ec71311823ff5820cb97b88beb9c04db838685c2100a82830dbaf61",
+      "reference": "And I'm Andrew and I'm uh our marketing",
+      "status": "recognized",
+      "text": "Hello, I'm Andrew, and I'm a marketing.",
+      "elapsed": 0.40744612500202493,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "ami-ES2002a-C-294",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 57072,
+      "pcmSha256": "0d65b45518193214e1be06a2bbffd5cafa03696727a0c5addea7e61c72e4ff0d",
+      "reference": "Well, my favourite animal would be a monkey.",
+      "status": "recognized",
+      "text": "That animal would be a monkey.",
+      "elapsed": 0.3551970829976199,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "ami-ES2002a-B-146",
+      "cohort": "english-far",
+      "locale": "en-US",
+      "samples": 91712,
+      "pcmSha256": "3e884a0ffe26fc41bc9c499102471231ac2c11479581ed3a85fad0cbebc6a0f0",
+      "reference": "Okay, uh we now need to discuss the project finance. Um",
+      "status": "recognized",
+      "text": "Okay, when I need to discuss project finance.",
+      "elapsed": 0.493004291998659,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "silence-5s-zh-CN",
+      "cohort": "silence",
+      "locale": "zh-CN",
+      "samples": 80000,
+      "pcmSha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+      "reference": "",
+      "status": "recognized",
+      "text": "嗯，对。",
+      "elapsed": 0.4001455830002669,
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "id": "silence-5s-en-US",
+      "cohort": "silence",
+      "locale": "en-US",
+      "samples": 80000,
+      "pcmSha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+      "reference": "",
+      "status": "recognized",
+      "text": "The most important thing is to be able to do it.",
+      "elapsed": 0.49016275000030873,
+      "error_type": null,
+      "error_message": null
+    }
+  ],
+  "modelLoadSeconds": 1.8658014580032614,
+  "process": {
+    "exitCode": 0,
+    "elapsedSeconds": 11.692684958001337,
+    "pid": 30192,
+    "guard": null,
+    "rssSampleCount": 23,
+    "sampledMaxRssBytes": 2570289152,
+    "samplingBoundary": "Mac runner process ps rss at approximately 0.5s; not true peak, Android budget, GPU or energy",
+    "runnerUnchanged": true,
+    "protocolUnchanged": true,
+    "reportSHA256": "96aeb6b731d574a661602db7edab2fe49f4f332c8bb9b3166da74800f61cd85a",
+    "terminalReadIdentical": true,
+    "reportStatus": "completed",
+    "recognizedRows": 11
+  },
+  "cleanup": {
+    "python_refs_dropped": true,
+    "note": "Python references dropped/GC requested; native release not proven by Python API"
+  },
+  "sourceManifestSHA256": [
+    "87610e63a23f9f0510cd1c35c70ea108e1928da3889f02f4b88d6161a81be9b8",
+    "dcd7e630464a0c1f6aa486ce8b066139c8f3b6cc41eb8ae60eb0a96eb132769a",
+    "498bed3b1ce1315f18d54871e7b8a3c8452ed43d014edbe56392964f12e64b85"
+  ],
+  "normalization": "unchanged tools/speech_error_metrics.py NFC/casefold; punctuation/numbers/scripts preserved",
+  "scope": "new whole-file Mac pipeline, not causal model-only comparison; phone quality/resource acceptance unexecuted",
+  "evidenceDirectory": ".omx/artifacts/w3-model-reselection-20261110",
+  "evidenceLocalOnly": true
+}

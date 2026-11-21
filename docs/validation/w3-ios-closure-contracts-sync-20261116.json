@@ -1,0 +1,87 @@
+{
+  "checkedAtUTC": "2026-11-16T03:48:17.731139+00:00",
+  "status": "issues-and-github-wiki-synced-gitlab-wiki-pending",
+  "sourceCommit": "e0be423a6c7366713edeca54aad5da97f404af6a",
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-ios-closure-contracts-20261116 -->",
+  "issueReceipts": {
+    "github": {
+      "id": 6906651443,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6906651443",
+      "readbackExact": true,
+      "bodySHA256": "2f2ab3de652ecc87242d2e0f626db176dec36a87246b6141bb46e6f5eb008a80"
+    },
+    "gitlab": {
+      "id": 45038,
+      "readbackExactAfterKnownSingleFinalLfRemoval": true,
+      "submittedSHA256": "2f2ab3de652ecc87242d2e0f626db176dec36a87246b6141bb46e6f5eb008a80",
+      "readbackSHA256": "1135a8c39dd3fdfd04999a615965101271e6b084299a5ea9275dec3e42f49e6f",
+      "observedTransform": "removes exactly the final LF; all other characters exact",
+      "duplicatePost": false
+    }
+  },
+  "githubWiki": {
+    "commit": "c76072ef1313594c4a1901b2fb270e458af6755f",
+    "sha256": "149c9adc839db2d396dd9746d30c12735df4791fe8b8555fa56350b5492a96a7",
+    "remoteReadbackExact": true,
+    "isolatedClone": "/private/tmp/odai-w3-ios-contracts-wiki-20261116"
+  },
+  "gitlabWiki": {
+    "status": "pending-read-failed-before-put",
+    "putAttempted": false,
+    "lastSuccessfulReadBeforePublicationSHA256": "97547e9095bcc699ae582a517fcfd7121e738d8ac621dacba2be97a968a5b6f0",
+    "subsequentGetErrors": [
+      "inherited route: EOF",
+      "invocation-only direct route: EOF"
+    ],
+    "currentContentUnverified": true,
+    "automaticFurtherRetries": false,
+    "pendingPayload": ".omx/artifacts/w3-ios-contracts-acceptance-20261116/publication/body.md",
+    "resumeRequirement": "Read actual current page, preserve concurrent edits, check unique marker, then append once and read back; do not resend existing Issue posts or GitHub wiki section."
+  },
+  "wikiContentSHA256Equal": null,
+  "protectedOriginalContentsAfterRemovingOnlyOwnPrefixes": 177,
+  "adoptionRecordByteChanges": 0,
+  "supplierReviewVerdict": "revise; two documentation clarifications handled by parent; not P4 acceptance",
+  "helpers": [
+    {
+      "exitCode": 0,
+      "elapsedSeconds": 54.702,
+      "endedAtUTC": "2026-11-16T03:33:40.780597+00:00",
+      "stdoutBytes": 63498,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    {
+      "exitCode": 0,
+      "elapsedSeconds": 47.552,
+      "endedAtUTC": "2026-11-16T03:36:16.788085+00:00",
+      "stdoutBytes": 50399,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    }
+  ],
+  "newBuilds": 0,
+  "newDeviceRuns": 0,
+  "newRecognitionRequests": 0,
+  "newMicrophoneStarts": 0,
+  "newAudioModelRuntimeDownloads": 0,
+  "resourceProvisioningRequests": 0,
+  "W3Complete": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "goalRemains": "active",
+  "localEvidenceRoot": ".omx/artifacts/w3-ios-contracts-acceptance-20261116",
+  "cleanup": {
+    "newBuildCaches": [],
+    "removedPaths": [],
+    "rawEvidenceRetained": true,
+    "diskFreeBytes": 22297583616
+  }
+}

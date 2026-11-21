@@ -1,0 +1,22 @@
+{
+  "baseCommit": "de4aabe08b100d1c5375746f9bc4755e9150c97d",
+  "sourcePath": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+  "beforeSHA256": "46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db",
+  "candidateSHA256": "e202d3d0d0efa80410f22d3e9d475ea51cdeb810acba2930a86d23afd626d952",
+  "supplierRequestedModel": "hy3",
+  "supplierReportedModelUsage": [
+    "hy4flash-free"
+  ],
+  "candidateRecordSHA256": "1e8d60d7cd42e192c453fb0717e9c6fc6b48b9d1dc30f1957fa70fa74a4aadd4",
+  "helperRawCandidateSHA256": "193ca9867ba19d735a6f8d7e0e83082cab04ceadcf984bb61e331379af064892",
+  "helperEvidence": ".omx/artifacts/w3-apple-punctuation-preparation-20261116T162709",
+  "integration": "exact preexisting external candidate; no new implementation authored",
+  "sameBytesAsExecutedB": true,
+  "deviceReportSHA256": "a415ada1068abe5fbf302bf8ad45673a36e1f232a02f9e4bc09efc734081c95b",
+  "recordedAtUTC": "2026-11-16T11:06:13.179987+00:00",
+  "releaseApproved": false,
+  "finalProductionCandidate": null,
+  "microphoneChanges": false,
+  "dependenciesChanged": false,
+  "deviceOperations": 0
+}

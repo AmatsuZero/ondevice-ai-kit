@@ -1,0 +1,135 @@
+{
+  "sourceProperties": "Pkg.Desc = Android NDK\nPkg.Revision = 30.0.16138531-beta3\nPkg.BaseRevision = 30.0.16138531\nPkg.ReleaseName = r30-beta3\n",
+  "systemLibrariesMetadata": {
+    "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/meta/system_libs.json",
+    "bytes": 615,
+    "sha256": "48de76ef2a7ed0a2b284d8904991a0de741e015c4c08c1a1ce63f64a3d1420e2"
+  },
+  "systemLibrariesMetadataValues": {
+    "libandroid.so": "21",
+    "libc.so": "21",
+    "libdl.so": "21",
+    "liblog.so": "21",
+    "libm.so": "21"
+  },
+  "referenceStubs": [
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21/libdl.so",
+      "bytes": 12384,
+      "sha256": "562ce991d75c257048eb8a0471dbd8ab4649487df72edaa6bdc5868a02e4dd4d"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21/liblog.so",
+      "bytes": 12408,
+      "sha256": "a51a8dab86c86bc43e2fcb21cd29414854cad57d11d5ed205deb044235d5a3a5"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21/libm.so",
+      "bytes": 44360,
+      "sha256": "e615e5819096c0ecf18f95f2c8d3aee2c9f72dc4c0d5fb4d559c463168bb6a27"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21/libc.so",
+      "bytes": 176208,
+      "sha256": "264381fc72e4bb58d6d824483f20fb2fdaad48a55be5548db48b50d8b6ab3a68"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/aarch64-linux-android/21/libandroid.so",
+      "bytes": 41200,
+      "sha256": "c58f5da904f310a67eeaa92569f2708e3911a1a099d7ec18b10fe9cceefbc8ca"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libdl.so",
+      "bytes": 3936,
+      "sha256": "14ad46efce67975aa47a4ef21881af44f4a0ec77e0153b84cff75e55fbf3d0e6"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/liblog.so",
+      "bytes": 3932,
+      "sha256": "11025671b51aadbeca228ff39f9b550dcdd695ebed7e73fc13f03042c6d31a0e"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libm.so",
+      "bytes": 24132,
+      "sha256": "3e4fd597fda0b6758afd922b0ec2602c81e5baa2aa96c58b3e083b2a7eafcb40"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libc.so",
+      "bytes": 118592,
+      "sha256": "5b67a15dd9b022e71533164f091f3143d2cc6372bf1bb9e9e32b582b57baf79f"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/arm-linux-androideabi/21/libandroid.so",
+      "bytes": 26852,
+      "sha256": "fc94dd28e63b906b853965a00ca81ec2e23afa459208ff15dbef78c36351bb6e"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/i686-linux-android/21/libdl.so",
+      "bytes": 3868,
+      "sha256": "ad9bcc2ddc95e238e7918677d1ee93537fd0be50980acef0b3fb42f80e624501"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/i686-linux-android/21/liblog.so",
+      "bytes": 4016,
+      "sha256": "ea93bce70189127359f98421302a157dae8dc881906e532e7edee0a96e7f04cc"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/i686-linux-android/21/libm.so",
+      "bytes": 31560,
+      "sha256": "2f1e7f91410ff628b2297339450992762c519daba26767429fdf235a5e02c1f1"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/i686-linux-android/21/libc.so",
+      "bytes": 154804,
+      "sha256": "2de8a3b9efa82bac33b8b177831742409a15e7e6bd8ec51bf1a617a56820867e"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/i686-linux-android/21/libandroid.so",
+      "bytes": 32808,
+      "sha256": "f43a265c0c1e5f7afccb013ceaaea8b4151ab019557d62c97ec6e3cdfe4736e2"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/libdl.so",
+      "bytes": 11728,
+      "sha256": "5fd4968196a7c90589a54e4d3db7a6de885570c0c33087196ccaca6862fd2f13"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/liblog.so",
+      "bytes": 11720,
+      "sha256": "a5f7a23e21f9f15bb3988619dc32b8c03206543742b9b3f595394af882fb0222"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/libm.so",
+      "bytes": 37968,
+      "sha256": "f5e204e450a4aeab02dbd4fc869d7d5fcd994c472db3c247e1563a9ff21bcdb3"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/libc.so",
+      "bytes": 156040,
+      "sha256": "4ae2550f503e5559e9be7e222b2672cd400eb03d08066826b788b5a89e843c03"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/lib/x86_64-linux-android/21/libandroid.so",
+      "bytes": 35928,
+      "sha256": "4a41aef0c009aded5b62b16a1ed454ae94b45cbc1e32d6ee9b29a570cdda9ee7"
+    }
+  ],
+  "tools": [
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-readelf",
+      "bytes": 11968000,
+      "sha256": "ea1b605da6171cc9ef0dd0be1d2a13d394d43d6a998cbe6c9e3d6d5e7f27c606"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-readobj",
+      "bytes": 11968000,
+      "sha256": "ea1b605da6171cc9ef0dd0be1d2a13d394d43d6a998cbe6c9e3d6d5e7f27c606"
+    },
+    {
+      "path": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-nm",
+      "bytes": 32816480,
+      "sha256": "b663e7fb9ea91284b2f42ae8229a151402429f5ba4a3aabd887ed0e0c2960f69"
+    }
+  ],
+  "historicalBuildToolchainClaimedEqual": false
+}

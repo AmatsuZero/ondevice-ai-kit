@@ -1,0 +1,498 @@
+{
+  "date": "2026-11-20",
+  "environment": "API 36 Android Emulator, arm64, ANGLE/SwiftShader (software GLES 3.1), no GMS",
+  "fixtureSha256": "df677798a8604a7a6289fcf50a0fef3844a047631e0041ae7d5563c55f3746ec",
+  "displaySize": "Physical size: 1080x2340",
+  "playbackApkSha256": "a54e26919b79644191b1227716fa76b2c454b1f6a89bd0153e9bfea16089418c",
+  "method": "A/B/B/A = original-egl, forced CuNNy, forced CuNNy, original-egl. Observation interval includes activity startup, end grace and host polling. Swap is a submission. No real display timestamps or valid GPU elapsed samples.",
+  "fixedSource": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "video": "H.264",
+    "audio": "AAC",
+    "frames": 900
+  },
+  "runs": [
+    {
+      "runId": "d6183d92371a4be899780bfd44cf31d8",
+      "mode": "original-egl",
+      "completed": true,
+      "ptsUsFirstLast": [
+        0,
+        29966666
+      ],
+      "finalAudioUs": 30009333,
+      "launchToTerminalObservationSeconds": 32.906,
+      "firstToLastLatchSeconds": 29.997,
+      "events": {
+        "decodeRelease": 900,
+        "latch": 900,
+        "swap": 900
+      },
+      "successfulSwaps": {
+        "ORIGINAL": 900
+      },
+      "swapReasons": {
+        "enhancement_not_requested": 900
+      },
+      "enhancementRequestedSwaps": 0,
+      "missingSwap": 0,
+      "displayCount": 0,
+      "gpuTimer": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "gates": {
+        "gpu": "notApplicable",
+        "endToEnd": "unverified",
+        "missed": "unverified",
+        "srDelivery": "notApplicable"
+      },
+      "eventsJsonlSha256": "630be1a4fea2c499415386c879e61ece7cdf77b7e06782fb133c5146ce570578"
+    },
+    {
+      "runId": "166aa27294a3439d97d15e82e680d8fe",
+      "mode": "cunny",
+      "completed": true,
+      "ptsUsFirstLast": [
+        0,
+        29966666
+      ],
+      "finalAudioUs": 30015999,
+      "launchToTerminalObservationSeconds": 119.176,
+      "firstToLastLatchSeconds": 116.655,
+      "events": {
+        "decodeRelease": 900,
+        "latch": 900,
+        "swap": 894,
+        "srStart": 790,
+        "srEnd": 790
+      },
+      "successfulSwaps": {
+        "ORIGINAL": 827,
+        "CUNNY": 67
+      },
+      "swapReasons": {
+        "enhancement_not_ready": 827,
+        "enhanced": 67
+      },
+      "enhancementRequestedSwaps": 894,
+      "missingSwap": 6,
+      "displayCount": 0,
+      "gpuTimer": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "unverified",
+        "missed": "unverified",
+        "srDelivery": "unverified"
+      },
+      "eventsJsonlSha256": "136f7a819770e7f1465eebbba87afc7c29c657bf7c38c7a7af38b3fd1b3f9142"
+    },
+    {
+      "runId": "83f3b4d6786e4691a35a681c2a9535e5",
+      "mode": "cunny",
+      "completed": true,
+      "ptsUsFirstLast": [
+        0,
+        29966666
+      ],
+      "finalAudioUs": 30015999,
+      "launchToTerminalObservationSeconds": 123.972,
+      "firstToLastLatchSeconds": 121.114,
+      "events": {
+        "decodeRelease": 900,
+        "latch": 900,
+        "srStart": 796,
+        "srEnd": 796,
+        "swap": 892
+      },
+      "successfulSwaps": {
+        "ORIGINAL": 831,
+        "CUNNY": 61
+      },
+      "swapReasons": {
+        "enhancement_not_ready": 831,
+        "enhanced": 61
+      },
+      "enhancementRequestedSwaps": 892,
+      "missingSwap": 8,
+      "displayCount": 0,
+      "gpuTimer": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "gates": {
+        "gpu": "unverified",
+        "endToEnd": "unverified",
+        "missed": "unverified",
+        "srDelivery": "unverified"
+      },
+      "eventsJsonlSha256": "4cad31925f772947313373a44f301d55762739e4dca9e7cf10ea651947ece5e3"
+    },
+    {
+      "runId": "f7e16b381cef44b4ac2b0bad8cb43273",
+      "mode": "original-egl",
+      "completed": true,
+      "ptsUsFirstLast": [
+        0,
+        29966666
+      ],
+      "finalAudioUs": 30009333,
+      "launchToTerminalObservationSeconds": 32.981,
+      "firstToLastLatchSeconds": 29.92,
+      "events": {
+        "decodeRelease": 900,
+        "latch": 900,
+        "swap": 900
+      },
+      "successfulSwaps": {
+        "ORIGINAL": 900
+      },
+      "swapReasons": {
+        "enhancement_not_requested": 900
+      },
+      "enhancementRequestedSwaps": 0,
+      "missingSwap": 0,
+      "displayCount": 0,
+      "gpuTimer": {
+        "count": 0,
+        "minNs": null,
+        "maxNs": null,
+        "p95Ns": null
+      },
+      "gates": {
+        "gpu": "notApplicable",
+        "endToEnd": "unverified",
+        "missed": "unverified",
+        "srDelivery": "notApplicable"
+      },
+      "eventsJsonlSha256": "bc9778980f0229ff315b9230f546a31676320fc6ae8b999ab91c6e0dd84695b9"
+    }
+  ],
+  "google": {
+    "serial": "emulator-5584",
+    "status": "MISSING_SERVICES",
+    "apkSha256": "432764e54901b2ebe7278a6538db1847bb59ea8fe349815b0ff869df08fb7292",
+    "apiLevel": 36,
+    "runId": "bdb4fd24be864515b1373e2130d72d7c",
+    "snapshot": {
+      "runId": "bdb4fd24be864515b1373e2130d72d7c",
+      "width": 1920,
+      "height": 1080,
+      "state": "MISSING_SERVICES",
+      "detail": "Google Play services is unavailable.",
+      "sdkInt": 36
+    },
+    "gmsVersion": null,
+    "sdkCoordinates": "com.google.android.gms:play-services-media-effect-enhancement:16.0.0-beta09",
+    "aarSha256": "78455b3dfe5b9a7f30c5c15b97690da7742c4c9491745a16b91dbbda60728071",
+    "publicApiObservation": "EnhancementOptions.isUpscaleVideoEnabled describes requested effect. EnhancementClient tests general device/module; EnhancementCallback.onSurfaceProcessed(long) has no effect-applied flag or output scale."
+  },
+  "auto": {
+    "runId": "45c4d032815940b9ac32c83c5d90aa24",
+    "mode": "auto",
+    "completed": true,
+    "ptsUsFirstLast": [
+      0,
+      29966666
+    ],
+    "finalAudioUs": 30009333,
+    "launchToTerminalObservationSeconds": 32.969,
+    "firstToLastLatchSeconds": 30.275,
+    "events": {
+      "decodeRelease": 900,
+      "latch": 900,
+      "swap": 900,
+      "srStart": 14,
+      "srEnd": 14
+    },
+    "successfulSwaps": {
+      "ORIGINAL": 899,
+      "CUNNY": 1
+    },
+    "swapReasons": {
+      "enhancement_not_ready": 17,
+      "enhancement_not_requested": 882,
+      "enhanced": 1
+    },
+    "enhancementRequestedSwaps": 18,
+    "missingSwap": 0,
+    "displayCount": 0,
+    "gpuTimer": {
+      "count": 0,
+      "minNs": null,
+      "maxNs": null,
+      "p95Ns": null
+    },
+    "gates": {
+      "gpu": "unverified",
+      "endToEnd": "unverified",
+      "missed": "unverified",
+      "srDelivery": "unverified"
+    },
+    "eventsJsonlSha256": "bae0e06441dc04c53ec8085cf219ef7f9f08749f82d5048ae13de23aefb96eda"
+  },
+  "pausedComparison": {
+    "runId": "59400e7c132d45779ea3949014fd4896",
+    "apkSha256": "a54e26919b79644191b1227716fa76b2c454b1f6a89bd0153e9bfea16089418c",
+    "readback": "PixelCopy from demo video Surface, entire buffer, no resampling on host",
+    "presentationConfirmed": false,
+    "renderSize": [
+      1080,
+      1828
+    ],
+    "identity": {
+      "sources": [
+        "ORIGINAL",
+        "CUNNY",
+        "ORIGINAL"
+      ],
+      "ptsUs": 2133333,
+      "sourceOrdinal": 64,
+      "generations": [
+        4,
+        5,
+        6
+      ]
+    },
+    "pixels": {
+      "sha256": [
+        "eb711885e4d78b6203bfc02932135cc474c8fca64e9eb2ddedf576fc79f5bcf6",
+        "1f56f227d9f4927e081c5ba413e9dd212e00195a31d585d069fc8ee2820e0ca7",
+        "eb711885e4d78b6203bfc02932135cc474c8fca64e9eb2ddedf576fc79f5bcf6"
+      ],
+      "differingRgbPixels": [
+        46060,
+        46060,
+        0
+      ],
+      "pixelCount": 1974240
+    },
+    "seek": {
+      "type": "seek",
+      "displayedAtSeek": "00:15 / 00:30",
+      "displayedAfterAdvance": "00:17 / 00:30",
+      "decodedGeneration": 8,
+      "decodedPtsUs": 15000000
+    },
+    "geometryControl": {
+      "beforeFixedLayout": "At the same source PTS the before/after original pictures had differently sized letterboxes.",
+      "fixedLayoutAndAnimationWait": "Window and all PixelCopy pictures 1080x1828. Original A1/A2 still differed by at most 2 in 5394 RGB channels in that run.",
+      "samplersUnbound": "After explicitly restoring the window and OES texture sampler bindings, original A1/A2 match byte-for-byte; separate real playback runs use their own PTS."
+    },
+    "lifecycle": {
+      "attempted": true,
+      "success": true,
+      "positionBeforeBackground": 17,
+      "positionAfterResume": 17,
+      "positionAfterResumeAdvance": 19,
+      "decodedGeneration": 9,
+      "decodedPtsUs": 17733333
+    }
+  },
+  "implementationCommit": "52a5f44",
+  "googleWithGms": {
+    "serial": "emulator-5586",
+    "status": "UNSUPPORTED",
+    "apkSha256": "432764e54901b2ebe7278a6538db1847bb59ea8fe349815b0ff869df08fb7292",
+    "apiLevel": 37,
+    "runId": "39f45644982047b993fc091cbb8b6486",
+    "snapshot": {
+      "runId": "39f45644982047b993fc091cbb8b6486",
+      "width": 1920,
+      "height": 1080,
+      "state": "UNSUPPORTED",
+      "detail": "This device is not supported.",
+      "sdkInt": 37,
+      "gmsVersion": "26.32.37 (260400-975129007)"
+    },
+    "gmsVersion": "26.32.37 (260400-975129007)",
+    "environment": {
+      "avd": "OdaiPlaybackGoogle37",
+      "ro.build.version.sdk": "37",
+      "ro.build.version.sdk_minor": "",
+      "ro.product.model": "sdk_gphone16k_arm64",
+      "ro.build.version.release": "17",
+      "gmsPackage": [
+        "package:/apex/com.google.android.gmssystem/priv-app/PrebuiltGmsCoreVic@CP41.260831.015/PrebuiltGmsCoreVic.apk"
+      ],
+      "gles": "GLES: Google (Google Inc. (Google)), Android Emulator OpenGL ES Translator (ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0)), OpenGL ES 3.1 (OpenGL ES 3.1.0 (ANGLE 2.1.1 git hash: fbf66f49c7cc))"
+    }
+  },
+  "api37Auto": {
+    "runId": "ebbaa645eb424c26a91c8eea2954f495",
+    "apkSha256": "a54e26919b79644191b1227716fa76b2c454b1f6a89bd0153e9bfea16089418c",
+    "elapsedBetweenLatchesSeconds": 30.277,
+    "events": {
+      "decodeRelease": 900,
+      "latch": 900,
+      "srStart": 16,
+      "swap": 900,
+      "srEnd": 16
+    },
+    "terminal": {
+      "runId": "ebbaa645eb424c26a91c8eea2954f495",
+      "case": "auto",
+      "status": "completed",
+      "detail": "decode/audio complete",
+      "frameCallbacks": 900,
+      "lastAudioUs": 30015999,
+      "presentationSupported": false,
+      "swapBackends": {
+        "ORIGINAL": 900
+      },
+      "displayCount": 0
+    },
+    "gates": {
+      "gpu": "unverified",
+      "endToEnd": "unverified",
+      "missed": "unverified",
+      "srDelivery": "unverified"
+    },
+    "rawSha256": "71e7b2e620831db30c4e9e9587043a8acc2015217366e849dc1f58c9520f3d22"
+  },
+  "api37WindowFix": {
+    "commit": "49390dd",
+    "apkSha256": "ca320115ac64fbc7e446d7cb8a32dc09c82c0c8ba69e8382a5b353b3900c879c",
+    "regression": {
+      "beforeRunId": "730c77ab6d8045a3911d08644e6bfdd2",
+      "oldGeneration": 8,
+      "failedSwapsAtOrdinal": [
+        504,
+        505
+      ]
+    },
+    "runId": "25ac321a7f5546499ef30abe2732f1ef",
+    "identity": {
+      "sources": [
+        "ORIGINAL",
+        "CUNNY",
+        "ORIGINAL"
+      ],
+      "ptsUs": 2133333,
+      "sourceOrdinal": 64,
+      "generations": [
+        4,
+        5,
+        6
+      ]
+    },
+    "pixels": {
+      "sha256": [
+        "9ae34d0e8d27a58cdc0888d7d8429f51fe7bb122242fabf4057c39d2b6011792",
+        "ecaadd9a4d4900efaab02639e4e8fdea56255b35b15d83e6d065b2a20110dbcf",
+        "9ae34d0e8d27a58cdc0888d7d8429f51fe7bb122242fabf4057c39d2b6011792"
+      ],
+      "differingRgbPixels": [
+        45782,
+        45782,
+        0
+      ],
+      "pixelCount": 2066040
+    },
+    "lifecycle": {
+      "attempted": true,
+      "success": true,
+      "positionBeforeBackground": 17,
+      "positionAfterResume": 19,
+      "positionAfterResumeAdvance": 21,
+      "decodedGeneration": 9,
+      "decodedPtsUs": 19166666
+    },
+    "seek": {
+      "type": "seek",
+      "displayedAtSeek": "00:15 / 00:30",
+      "displayedAfterAdvance": "00:17 / 00:30",
+      "decodedGeneration": 8,
+      "decodedPtsUs": 15000000
+    },
+    "swapFailures": 0,
+    "rawSha256": "4dc462eb9acf8c9ec2f7a36e0344f2beeda53f866832600e0894579c84d25a41",
+    "playbackRuns": [
+      {
+        "mode": "auto",
+        "runId": "f34a17f9fdf8403cabf319fff1a34a9f",
+        "firstToLastLatchSeconds": 30.327,
+        "successfulSwaps": {
+          "ORIGINAL": 900
+        },
+        "unsubmitted": 0,
+        "events": {
+          "decodeRelease": 900,
+          "latch": 900,
+          "swap": 900,
+          "srStart": 14,
+          "srEnd": 14
+        },
+        "rawSha256": "c85204a592b091da1a060f130b9f8bce12eb4e7a2f6475f2e14914abf438babc",
+        "gates": {
+          "gpu": "unverified",
+          "endToEnd": "unverified",
+          "missed": "unverified",
+          "srDelivery": "unverified"
+        },
+        "terminal": {
+          "runId": "f34a17f9fdf8403cabf319fff1a34a9f",
+          "case": "auto",
+          "status": "completed",
+          "detail": "decode/audio complete",
+          "frameCallbacks": 900,
+          "lastAudioUs": 30015999,
+          "presentationSupported": false,
+          "swapBackends": {
+            "ORIGINAL": 900
+          },
+          "displayCount": 0
+        }
+      },
+      {
+        "mode": "cunny",
+        "runId": "2af01a191efb47bdb491a669a1bc80b6",
+        "firstToLastLatchSeconds": 136.241,
+        "successfulSwaps": {
+          "ORIGINAL": 859,
+          "CUNNY": 36
+        },
+        "unsubmitted": 5,
+        "events": {
+          "decodeRelease": 900,
+          "latch": 900,
+          "swap": 895,
+          "srStart": 850,
+          "srEnd": 850
+        },
+        "rawSha256": "cc9243b5f403437aec96235903bc16d7daa90bd1b58d3980326716f9895bd62a",
+        "gates": {
+          "gpu": "unverified",
+          "endToEnd": "unverified",
+          "missed": "unverified",
+          "srDelivery": "unverified"
+        },
+        "terminal": {
+          "runId": "2af01a191efb47bdb491a669a1bc80b6",
+          "case": "cunny",
+          "status": "completed",
+          "detail": "decode/audio complete",
+          "frameCallbacks": 900,
+          "lastAudioUs": 30015999,
+          "presentationSupported": false,
+          "swapBackends": {
+            "ORIGINAL": 859,
+            "CUNNY": 36
+          },
+          "displayCount": 0
+        }
+      }
+    ]
+  }
+}

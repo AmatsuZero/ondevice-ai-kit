@@ -1,0 +1,629 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUTC": "2026-11-15T22:54:30.243554+00:00",
+  "scope": "Accept source-specific resource evidence reconciliation and a prospective draft proposal only; no product budget or W3 acceptance",
+  "sourceBaseCommit": "96c2d7f75e92b0876d510e39c17e82fcdf24e51d",
+  "proposal": {
+    "path": "docs/validation/w3-r5-resource-options-20261116.md",
+    "sha256": "3544e6ca7c1b89e4362850077a079835bf3ac3dfdf296e4d413bcbbf16563f86",
+    "draftBudgetApproved": false,
+    "recommendation": {
+      "status": "DRAFT_NOT_APPROVED",
+      "target": "future fixed Qwen two-stage sequential FILE candidate on TECNO KM9/API35; actual RAM/UX and protocol still require validation",
+      "latencyEnvelopeAudioSeconds": [
+        1,
+        15
+      ],
+      "speechCohortP95RTFLimit": 1.0,
+      "appSampledMaxRSSLimitBytes": 1073741824,
+      "originalR4Full65ScopePreserved": true,
+      "fullRunFailuresBlockBudgetAcceptance": true
+    },
+    "existingExperimentalSafetyLimitBytes": 1610612736,
+    "existingUnconsumedTerminalContract": "w3-qwen-terminal-20261114-01",
+    "existingTerminalContractExpanded": false
+  },
+  "rawReconciliation": {
+    "schemaVersion": 1,
+    "verifiedAtUTC": "2026-11-15T22:52:02.371052+00:00",
+    "scope": "Parent offline recomputation of existing raw evidence; no new device run, model call or budget acceptance",
+    "apple": {
+      "runId": "4EEA3B34-370C-4830-98B3-A892EE2F8C6B",
+      "sourceIdentity": "sha256:4bcf5c6764ed9ffd9ebf21d6d2898fe2a72a47dd28bf48368519c776c434cc35",
+      "pid": 942,
+      "reportSHA256": "1d6f4185cee55521f0f87d4a4d9077a4a3a245af552774ccfebf63dfd02b5862",
+      "measuredRequests": 40,
+      "excludedWarmups": 1,
+      "durationScope": "original recognition duration; not user end-to-end or a newly classified warm stratum",
+      "recognitionMedianMs": 189.32085416599875,
+      "recognitionP95MsNearestRank": 434.79770833255316,
+      "measuredRSSSamples": 898,
+      "measuredSampledMaxRSSBytes": 113082368,
+      "pacedSeconds": 626.2115895833341,
+      "pacedIdleSeconds": 593.928,
+      "memoryScope": "same App PID including UI, calls sampled; excludes system Speech service and continuous idle RSS",
+      "fullSystemMemoryBytes": null,
+      "truePeakBytes": null,
+      "energy": null,
+      "gpuBytes": null,
+      "budgetAccepted": false
+    },
+    "sherpa": {
+      "runId": "w8-sherpa-20261109-1113-6fdcbfe6-1470-4b8d-a341",
+      "sourceFingerprint": "97f54b58dd1ad5e89a45fc5ac00e8ef1e81e2de58ae4cafcef539a6aa510f1a1",
+      "pid": 11299,
+      "backendId": "sherpa.onnx.whisper",
+      "inputSHA256": "fc0f3f5bb9b06a4c21e12321d5fb0bc7d3e3151dca855e5ed9693907ce39df46",
+      "inputSamples": 33040,
+      "reportSHA256": "7f4854fc0d05176fda1421602a5fd02ebfc4577e8c0d5ca9a8c55002cbda31d5",
+      "measuredRequests": 40,
+      "excludedWarmups": 1,
+      "timingScope": "transcribe wall includes model verification/VAD/native decode/release and postconditions",
+      "p50MsNearestRank": 1782.006154,
+      "p95MsNearestRank": 1818.381154,
+      "rssSamples": 26222,
+      "sampledMaxRSSBytes": 457220096,
+      "pacedSeconds": 600.503048575,
+      "pacedIdleSeconds": 506.507659184,
+      "truePeakBytes": null,
+      "energy": null,
+      "gpuBytes": null,
+      "budgetAccepted": false
+    },
+    "qwen": {
+      "runId": "w3-qwen-arena-20261111-01",
+      "sourceFingerprint": "d3d1a844ebd7e0c9cfe1347c194770e04bc60e11b7300bbee254cd9eb51ec9c1",
+      "pid": 9381,
+      "reportSHA256": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d",
+      "completed": 24,
+      "interrupted": 1,
+      "unattempted": 40,
+      "rssSamples": 413,
+      "sampledMaxRSSBytes": 1637896192,
+      "experimentalSafetyLimitBytes": 1610612736,
+      "completedSubsetRTFRange": [
+        1.0408059410675383,
+        1.6786597402777776
+      ],
+      "timingScope": "Full two-stage wall time including persistence and gates; completed subset only, not warm/sustained/native-only latency.",
+      "representativeFullRunPercentiles": null,
+      "actualFinalDecodeCalls": null,
+      "explicitRecognizerReleaseAcknowledged": false,
+      "budgetAccepted": false
+    },
+    "inputs": [
+      {
+        "path": "artifacts/verification/w3-apple-asr-sustained-20261110/report-terminal.json",
+        "bytes": 55508,
+        "sha256": "1d6f4185cee55521f0f87d4a4d9077a4a3a245af552774ccfebf63dfd02b5862"
+      },
+      {
+        "path": "artifacts/verification/w3-apple-asr-sustained-20261110/parent-acceptance.json",
+        "bytes": 20446,
+        "sha256": "4bc4979cb4b1783e1f3954a3e9f12a3f252ed978b47408f2954f123a87ffab66"
+      },
+      {
+        "path": "artifacts/verification/w3-apple-asr-sustained-20261110/report-terminal-confirm.json",
+        "bytes": 55508,
+        "sha256": "1d6f4185cee55521f0f87d4a4d9077a4a3a245af552774ccfebf63dfd02b5862"
+      },
+      {
+        "path": "artifacts/verification/w8-sherpa-sustained-20261109-1113/device-report.json",
+        "bytes": 1993788,
+        "sha256": "7f4854fc0d05176fda1421602a5fd02ebfc4577e8c0d5ca9a8c55002cbda31d5"
+      },
+      {
+        "path": "artifacts/verification/w8-sherpa-sustained-20261109-1113/parent-acceptance.json",
+        "bytes": 10210,
+        "sha256": "67e89dde3c4920110db5f168505ae6c35c591f73611b775fd89ad100c9d4c00d"
+      },
+      {
+        "path": "artifacts/verification/w3-qwen-arena-wrapper-20261111/device-report.json",
+        "bytes": 47203,
+        "sha256": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d"
+      },
+      {
+        "path": "docs/validation/w3-qwen-arena-observed-20261111.json",
+        "bytes": 16768,
+        "sha256": "49569f998dee6790a8ef8dd1867a80bf90f398452a9c34ab0edefffb25aca7cd"
+      },
+      {
+        "path": "artifacts/verification/w3-qwen-arena-wrapper-20261111/host-result.json",
+        "bytes": 285,
+        "sha256": "4356d176d967082181767c066703928771725f029725d120bba0c3a0e95fd3ea"
+      },
+      {
+        "path": "artifacts/verification/w3-qwen-arena-wrapper-20261111/rss-samples.jsonl",
+        "bytes": 82848,
+        "sha256": "8ad3ccac02bf1f3a0da3975c6378b8705d5eb8741a1f12430ab9bdc497908464"
+      },
+      {
+        "path": "artifacts/verification/w3-qwen-arena-wrapper-20261111/device-report-confirm.json",
+        "bytes": 47203,
+        "sha256": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d"
+      },
+      {
+        "path": ".omx/artifacts/w3-native-version-20261116T002000/fresh-frozen-contract.json",
+        "bytes": 25790,
+        "sha256": "6387847c79904c7f67d03dfec7c92c79e69467b408064f5a7fb96bbe3494d7fa"
+      }
+    ],
+    "checksPassed": 210,
+    "checks": [
+      "Apple two original terminal reads identical",
+      "Apple raw SHA matches original acceptance",
+      "Apple bounded accepted terminal",
+      "Apple original run/PID",
+      "Apple original source identity",
+      "Apple 20 complete cycles",
+      "Apple 40 measured and one warmup",
+      "Apple measured request scope",
+      "Apple measured RSS count",
+      "Apple warmup RSS count",
+      "Apple measured-only sampled RSS max",
+      "Apple original non-production/no-mic status",
+      "Apple GPU/energy unmeasured flags",
+      "Apple raw median duration",
+      "Apple raw nearest-rank p95 duration",
+      "Apple original paced wall",
+      "Apple actual paced idle",
+      "Sherpa raw SHA matches original acceptance",
+      "Sherpa original bounded acceptance",
+      "Sherpa complete terminal",
+      "Sherpa exact run/PID",
+      "Sherpa Whisper source not experimental Qwen",
+      "Sherpa 20 complete cycles",
+      "Sherpa 40 measured and one warmup",
+      "Sherpa only fixed synthetic phrase predicate",
+      "Sherpa raw nearest-rank p50",
+      "Sherpa raw nearest-rank p95",
+      "Sherpa raw RSS samples",
+      "Sherpa raw sampled max",
+      "Sherpa paced wall from raw",
+      "Sherpa paced idle from raw",
+      "Sherpa original budget/no-mic status",
+      "Qwen raw SHA matches accepted partial-evidence receipt",
+      "Qwen two original reads identical",
+      "Qwen exact source/run",
+      "Qwen interrupted nonterminal remains nonterminal",
+      "Qwen raw RSS sample count",
+      "Qwen stable PID/startTicks",
+      "Qwen monotonic sample order",
+      "Qwen raw sampled max",
+      "Qwen raw minimum available",
+      "Qwen original 1.5GiB stop unchanged",
+      "Qwen 24/65 completed",
+      "Qwen interrupted/unattempted distinct",
+      "Qwen original subset minimum RTF",
+      "Qwen original subset maximum RTF",
+      "Qwen exact final counts/release not invented",
+      "Qwen full acceptance remains false",
+      "Separate unconsumed lower-scope terminal contract identity and guard unchanged",
+      "freeze:.omx/artifacts/w3-model-reselection-20261110/android-target-local.json",
+      "freeze:.omx/artifacts/w3-model-reselection-20261110/model-manifest.json",
+      "freeze:.omx/artifacts/w3-terminal-observation-20261112/wrapper-integrated-host/base-hashes.json",
+      "freeze:.omx/artifacts/w3-terminal-observation-20261112/wrapper-integrated-host/result.json",
+      "freeze:.omx/artifacts/w3-terminal-observation-20261112/wrapper-integrated-host/terminal-adapter-hashes.json",
+      "freeze:.omx/artifacts/w3-terminal-portability-20261114/final-acceptance.json",
+      "freeze:.omx/artifacts/w3-terminal-portability-20261114/freeze_current.py",
+      "freeze:.omx/artifacts/w3-terminal-portability-20261114/integration.json",
+      "freeze:.omx/artifacts/w3-terminal-portability-20261114/native-review.json",
+      "freeze:.omx/artifacts/w3-terminal-portability-20261114/new-local-inputs.json",
+      "freeze:.omx/artifacts/w3-terminal-portability-20261114/profile-plan.json",
+      "freeze:android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaAsrBackend.kt",
+      "freeze:android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaSession.kt",
+      "freeze:android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaWhisperModel.kt",
+      "freeze:android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/UtteranceBuffer.kt",
+      "freeze:android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/WhisperSpeechGate.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/candidate-accepted.json",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/main.apk",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/package-verified.json",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/production-before.json",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/run-plan.json",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/AndroidManifest.xml",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/build.gradle.kts",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/gradle/wrapper/gradle-wrapper.jar",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/gradle/wrapper/gradle-wrapper.properties",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/gradlew",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/main-src/QwenArenaPolicy.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/main-src/QwenFileActivity.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/main-src/QwenFileInputs.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/main-src/QwenFileReport.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/main-src/QwenLoadCore.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/main-src/QwenTwoStageCore.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/settings.gradle.kts",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/cases.json",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2003a.sync.129-B.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2003a.sync.131-B.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2003a.sync.133-B.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2003a.sync.171-C.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2003a.sync.209-C.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2003a.sync.267-D.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2003a.sync.29-A.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2003a.sync.93-B.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2003a.sync.95-B.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2004a.sync.121-B.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2004a.sync.131-B.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-ES2006a.sync.277-C.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-negative-ES2003a-0.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-negative-ES2003a-1.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-negative-ES2003a-2.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-negative-ES2004a-0.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-negative-ES2004a-1.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-negative-ES2004a-2.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-negative-ES2006a-0.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-negative-ES2006a-1.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/ami-negative-ES2006a-2.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1661.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1697.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1698.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1772.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1792.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1805.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1808.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1821.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1830.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1871.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1884.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1902.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1903.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1905.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1910.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1953.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1958.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1962.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-1965.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-cmn_hans_cn-2002.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1662.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1674.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1675.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1728.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1740.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1749.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1776.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1802.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1806.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1858.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1897.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1909.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1914.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1952.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1953.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1972.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1987.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1990.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-1992.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/fleurs-en_us-2005.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/independent-silence-10s-en-US.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/independent-silence-10s-zh-CN.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/independent-silence-3s-en-US.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-assets/inputs/independent-silence-3s-zh-CN.pcm",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-src/QwenTerminalInstrumentation.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-src/TerminalAckFile.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/source/test-src/TerminalObservationBarrier.kt",
+      "freeze:artifacts/verification/w3-qwen-terminal-20261114/test.apk",
+      "freeze:demo/iosApp/OnDeviceAIDemo.xcodeproj/project.pbxproj",
+      "freeze:docs/superpowers/plans/2026-11-12-w3-terminal-observation.md",
+      "freeze:docs/superpowers/specs/2026-11-12-w3-terminal-observation-design.md",
+      "freeze:docs/validation/w3-qwen-terminal-driver-parent-review-20261114.json",
+      "freeze:docs/validation/w3-qwen-terminal-driver-source-review-20261114.json",
+      "freeze:probes/android-qwen-arena/QwenArenaPolicy.kt",
+      "freeze:probes/android-qwen-file/QwenFileActivity.kt",
+      "freeze:probes/android-qwen-file/QwenFileInputs.kt",
+      "freeze:probes/android-qwen-file/QwenFileReport.kt",
+      "freeze:probes/android-qwen-file/QwenTwoStageCore.kt",
+      "freeze:probes/android-qwen-file/cases.json",
+      "freeze:probes/android-qwen-file/device_acceptance.py",
+      "freeze:probes/android-qwen-load/QwenLoadCore.kt",
+      "freeze:probes/android-qwen-terminal/QwenTerminalInstrumentation.kt",
+      "freeze:probes/android-qwen-terminal/TerminalWrapperChecks.kt",
+      "freeze:probes/android-qwen-terminal/build_acceptance.py",
+      "freeze:probes/android-qwen-terminal/check_device_contract.py",
+      "freeze:probes/android-qwen-terminal/check_preparation.py",
+      "freeze:probes/android-qwen-terminal/check_wrapper.py",
+      "freeze:probes/android-qwen-terminal/device_acceptance.py",
+      "freeze:probes/android-qwen-terminal/prepare_build.py",
+      "freeze:probes/android-qwen-terminal/terminal_device_collect.py",
+      "freeze:probes/android-qwen-terminal/terminal_device_contract.py",
+      "freeze:probes/android-qwen-terminal/terminal_device_lifecycle.py",
+      "freeze:probes/android-qwen-terminal/terminal_device_policy.py",
+      "freeze:probes/android-qwen-terminal/terminal_device_prepare.py",
+      "freeze:probes/android-qwen-terminal/terminal_device_restore.py",
+      "freeze:probes/android-qwen-terminal/terminal_prepare_fixture.py",
+      "freeze:probes/android-qwen-terminal/terminal_source_adapter.py",
+      "freeze:probes/android-qwen-terminal/test_adapter_six_actions_parent.py",
+      "freeze:probes/android-qwen-terminal/test_instrumentation_finish_parent.py",
+      "freeze:probes/android-qwen-terminal/test_policy_read_order_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_collect_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_device_routing_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_dispatch_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_full_chain_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_launch_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_oem_chain_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_oem_shell_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_policy_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_prepare_boundaries.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_prepare_faults.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_prepare_final_hashes.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_prepare_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_restore_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_run_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_source_adapter_parent.py",
+      "freeze:probes/android-qwen-terminal/test_terminal_startup_parent.py",
+      "freeze:probes/android-terminal-observation/TerminalAckFile.kt",
+      "freeze:probes/android-terminal-observation/TerminalObservationBarrier.kt",
+      "freeze:probes/android-terminal-observation/adb_process_sampler.py",
+      "freeze:probes/android-terminal-observation/adb_terminal_ack_publisher.py",
+      "freeze:probes/android-terminal-observation/adb_terminal_observation.py",
+      "freeze:probes/android-terminal-observation/adb_terminal_report_reader.py",
+      "freeze:probes/android-terminal-observation/terminal_file_io.py",
+      "freeze:probes/android-terminal-observation/terminal_observation_coordinator.py",
+      "freeze:probes/android-terminal-observation/terminal_observer.py",
+      "freeze:probes/android-terminal-observation/terminal_polling.py"
+    ],
+    "frozenFilesVerified": 161,
+    "newDeviceRuns": 0,
+    "newModelCalls": 0,
+    "newDownloads": 0,
+    "R4Complete": false,
+    "R5Complete": false,
+    "W3Complete": false,
+    "W8Complete": false
+  },
+  "helperRuns": [
+    {
+      "role": "initial",
+      "model": "hy3",
+      "process": {
+        "exitCode": 0,
+        "elapsedSeconds": 54.701,
+        "endedAtUTC": "2026-11-15T16:52:47.434838+00:00",
+        "stdoutBytes": 65420,
+        "stderrBytes": 0,
+        "automaticRetry": false,
+        "automaticFallback": false
+      },
+      "result": {
+        "events": 7,
+        "observedToolUseEvents": 0,
+        "sessionId": "01a1e01f-59a9-7eb8-a223-25b02fa61a56",
+        "resultSubtype": "success",
+        "isError": false,
+        "candidateBytes": 8019,
+        "candidateSHA256": "18e9d310368baf8e9e2bc203b7176790f8d5eac734b5167b0e40ccc2af0eef8c",
+        "usage": {
+          "input_tokens": 15925,
+          "output_tokens": 11025,
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "cache_creation": null,
+          "server_tool_use": null,
+          "service_tier": null
+        },
+        "modelUsage": {
+          "hy3": {
+            "inputTokens": 15925,
+            "outputTokens": 11025,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "contextWindow": 960000,
+            "maxOutputTokens": 64000
+          }
+        }
+      },
+      "retainedLocalFiles": [
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/prompt.txt",
+          "bytes": 51337,
+          "sha256": "e53f90070cee21848eefceefecf698767498d3f8d2547c9b7e1ffaaeea1732c5"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/events.jsonl",
+          "bytes": 65420,
+          "sha256": "d929f331eeeca18dac9bbd3019ddd295ed13682f35a9612227aa726cf2557096"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/invocation.json",
+          "bytes": 1621,
+          "sha256": "ff0ac861acdb25e8c29a1bfc74e933bf3ba2b2e463e40dbb752d70ec01d9ab31"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/process.json",
+          "bytes": 201,
+          "sha256": "d6f321ef9e9cd0526996bb9eb4bddb89e3439f8338e77b7115209ba86b12a566"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/result.json",
+          "bytes": 11453,
+          "sha256": "798fbb04834853637425d549572ea056b4b4b23b4ed6d2055819730908b64b6d"
+        }
+      ]
+    },
+    {
+      "role": "revision",
+      "model": "hy3",
+      "process": {
+        "exitCode": 0,
+        "elapsedSeconds": 40.502,
+        "endedAtUTC": "2026-11-15T16:56:34.878829+00:00",
+        "stdoutBytes": 63868,
+        "stderrBytes": 0,
+        "automaticRetry": false,
+        "automaticFallback": false
+      },
+      "result": {
+        "sessionId": "01a1e023-0981-7d74-9f64-194cc0970df8",
+        "events": 7,
+        "observedToolUseEvents": 0,
+        "resultSubtype": "success",
+        "candidateBytes": 9097,
+        "candidateSHA256": "c5698947f6efa4197b4128ecc09bee15d8029afd86282b462f52d86e71b79880",
+        "modelUsage": {
+          "hy3": {
+            "inputTokens": 6791,
+            "outputTokens": 10285,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "contextWindow": 960000,
+            "maxOutputTokens": 64000
+          }
+        }
+      },
+      "retainedLocalFiles": [
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-revision/prompt.txt",
+          "bytes": 13868,
+          "sha256": "b6c58534e2cd4262ccb72215269709e2dd0fd7d7799d26cc471c10d3a42ff01f"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-revision/events.jsonl",
+          "bytes": 63868,
+          "sha256": "75f19a69d08f5629e272be1c87de322035603b347acc1b17902e21ba7012ed7b"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-revision/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-revision/invocation.json",
+          "bytes": 1625,
+          "sha256": "e785096169fe72289eedb2d275bf4c3a961ae07d762cb35f9fb8cf6c59811d3d"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-revision/process.json",
+          "bytes": 201,
+          "sha256": "accb5ba5f3659e33d6c001281ead0c1564b882c8b07869a23445459d6f0aae48"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-revision/result.json",
+          "bytes": 12332,
+          "sha256": "de1d738b53718fea3e2c31f079486b4a0061dd4120cadb984346e7ffced0051c"
+        }
+      ]
+    },
+    {
+      "role": "review",
+      "model": "hy3",
+      "process": {
+        "exitCode": 0,
+        "elapsedSeconds": 38.524,
+        "endedAtUTC": "2026-11-15T22:53:22.372152+00:00",
+        "stdoutBytes": 40839,
+        "stderrBytes": 0,
+        "automaticRetry": false,
+        "automaticFallback": false
+      },
+      "result": {
+        "sessionId": "01a1e169-c464-70fd-b557-6135b2a84121",
+        "resultSubtype": "success",
+        "modelUsage": {
+          "hy3": {
+            "inputTokens": 14587,
+            "outputTokens": 6945,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0,
+            "contextWindow": 960000,
+            "maxOutputTokens": 64000
+          }
+        },
+        "observedToolUseEvents": 0
+      },
+      "retainedLocalFiles": [
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-review/prompt.txt",
+          "bytes": 39508,
+          "sha256": "10ec954dc55e027c85334a155c7b04c3db8a8751e709cf575e8c4b996829b518"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-review/events.jsonl",
+          "bytes": 40839,
+          "sha256": "f4bfca820c75337d6ed396c0c78e30480719f15287f6296d3361502b546ff69f"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-review/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-review/invocation.json",
+          "bytes": 1616,
+          "sha256": "e3d399523119126271c23c2c2d5a1376ee7ab5416ac66232e6c817aff80b4823"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-review/process.json",
+          "bytes": 201,
+          "sha256": "9b46874c4fa60fe655a8f5bd006d2fac537afa4de7dab8899bb657e3ea81735f"
+        },
+        {
+          "path": ".omx/artifacts/w3-r5-options-20261116T005018/hy3-review/result.json",
+          "bytes": 2726,
+          "sha256": "b80b745168e204c4574fcfc9bac9b7d2d444fe8c887541e64a634dd7c8e590c4"
+        }
+      ]
+    }
+  ],
+  "parentDisposition": {
+    "initialCandidateAccepted": false,
+    "initialReason": "Ambiguous absolute latency and selected-subset percentiles; duration/RTF scope and draft-vs-existing safety guard required revision",
+    "revisedCandidateReceived": true,
+    "independentReviewVerdict": "needs_correction",
+    "reviewFindings": [
+      {
+        "severity": "MEDIUM",
+        "issue": "The rationale's p95 sentence can be read as a per-request guarantee; it should state that only the cohort p95 is bounded.",
+        "old": "p95 RTF≤1 表示处理不慢于音频时长。",
+        "new": "p95 RTF≤1 表示第 95 百分位处理不慢于音频时长，不保证每个请求。"
+      }
+    ],
+    "exactReviewCorrectionIntegrated": [
+      {
+        "old": "p95 RTF≤1 表示处理不慢于音频时长。",
+        "new": "p95 RTF≤1 表示第 95 百分位处理不慢于音频时长，不保证每个请求。",
+        "occurrences": 1
+      }
+    ],
+    "independentReviewScope": "supplied exact candidate and receipts only; no execution",
+    "finalCandidateMatchesHelperPlusExactReviewCorrection": true,
+    "parentRawChecksNotAttributedToHelper": true,
+    "initialParentPrecisionFailurePreserved": ".omx/artifacts/w3-r5-options-20261116T005018/reconcile-initial-rejection.json"
+  },
+  "protectedBeforeSharedUpdates": {
+    "protectedFiles": 176,
+    "unchangedFiles": 176,
+    "changes": [],
+    "diskFreeBytes": 39535038464
+  },
+  "newDeviceRuns": 0,
+  "newModelCalls": 0,
+  "newDownloads": 0,
+  "sourceBranchPushed": false,
+  "productionCodeChanged": false,
+  "budgetApproved": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "W3Complete": false,
+  "W8Complete": false,
+  "goalRemains": "blocked",
+  "limitations": [
+    "Parent independently recomputed retained raw values; this is not a new model/device measurement.",
+    "The hy3 reviewer read supplied candidate and receipts only; exact single wording correction applied mechanically; reviewer did not execute parent checks.",
+    "Raw helper prompts/outputs and source device reports remain in local ignored artifact paths, not guaranteed distributed with Git.",
+    "Numeric targets are product discussion drafts; none retroactively pass old observations or change existing experimental safety limits."
+  ],
+  "runtimeGoalStatusCorrection": {
+    "observedStatus": "blocked",
+    "priorActiveWordDerivedFromHandoffNotFreshRuntime": true,
+    "goalStatusChangedByThisWork": false,
+    "W3Complete": false
+  }
+}

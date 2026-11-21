@@ -1,0 +1,72 @@
+{
+  "scope": "pure-components-only",
+  "kotlinWerror": true,
+  "kotlinChecks": 45,
+  "crossIterationRegression": true,
+  "pythonUnittestMethods": 22,
+  "crossLanguageACK": [
+    {
+      "status": "completed",
+      "extreme": false,
+      "sha256": "82c8c211ba1b2b8d092166d443ba00ea87cf3c8d31ff96056624b693925b0859",
+      "bytes": 172
+    },
+    {
+      "status": "completed",
+      "extreme": true,
+      "sha256": "0772f0cab4ba44ee71340e2a17097968902e5961942c964bb706562e175d2844",
+      "bytes": 263
+    },
+    {
+      "status": "failed",
+      "extreme": false,
+      "sha256": "1c03c994c23b92d71d3883c2e0b3764a486ce9db5a5cd26e07e29f112e8ab7ab",
+      "bytes": 172
+    },
+    {
+      "status": "failed",
+      "extreme": true,
+      "sha256": "ad66726488f8b0fc17df88dae2a8e4e0e96def2a2e10c45f84cf03fcd279397a",
+      "bytes": 263
+    }
+  ],
+  "pythonSyntaxChecks": true,
+  "oldFrozenFilesUnchanged": 120,
+  "oldVerdictUnchangedAndFalse": true,
+  "sourceSHA256": {
+    "terminal_observer.py": "b86c9dda1a3ea45bcbd55cd207ce40bc74a2c3e37af83741938027c6971ce9ac",
+    "CrossIterationClockCheck.kt": "09adc783f4e62aef0c2e821d919f570002a8c6597b0165e353d39f94ae2737c3",
+    "AckFixture.kt": "91dbcc5cc16907a44dc754beb4e6203d482b2f172b397e1e4e3224be4ce635e0",
+    "test_host_boundaries.py": "1be9c5ab114d0c717074112435fbfec8e794fd20398b43dd7aeeb18364ce8dc9",
+    "test_terminal_observer.py": "73d520a33cf5efba38b5b48f406b57ded2a1cbe55c41bec1fa816afb41d9f906",
+    "TerminalObservationChecks.kt": "9ebeae83e2310b210d5f4375e210188b092c22ec834e6f7d574d6345184f3f6e",
+    "check_barrier.py": "10c4320f33b7ddd2674e36f6b3b3b023194d4c7fe999a4c6395dc57060322a60",
+    "TerminalObservationBarrier.kt": "d4a21ea1c66ea77baf60f88cdd27815a5075d2193662604e74f5d0da60bbe21c"
+  },
+  "review": {
+    "method": "supplied-context hy3 read-only",
+    "durationMs": 193938,
+    "findings": 2,
+    "severity": "low",
+    "factualReproductionCorrected": true,
+    "startTicksPredicateExplicitlyASCII": true,
+    "missingBoundaryTestsAdded": true,
+    "finalSourceDelta": "single predicate and newline reviewed by parent; not a separate full final-source review"
+  },
+  "inferenceCalls": 0,
+  "deviceAcceptance": false,
+  "IOIntegration": false,
+  "W3Complete": false,
+  "evidenceRoot": ".omx/artifacts/w3-terminal-observation-20261112",
+  "androidTransportRecovery": {
+    "adb": "device",
+    "model": "TECNO KM9",
+    "API": 35,
+    "ABI": "arm64-v8a",
+    "awake": true,
+    "keyguardShowing": false,
+    "MemAvailableKB": 3023384,
+    "evidence": "artifacts/verification/w3-android-recovered-20261112-0936/preflight.json",
+    "scope": "read-only preflight at observation time"
+  }
+}

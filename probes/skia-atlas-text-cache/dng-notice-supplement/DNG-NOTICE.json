@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "component": "dng_sdk",
+  "revision": "dbe0a676450d9b8c71bf00688bb306409b779e90",
+  "sourcePath": "third_party/externals/dng_sdk/source/dng_safe_arithmetic.h",
+  "sourceUrl": "https://android.googlesource.com/platform/external/dng_sdk/+/dbe0a676450d9b8c71bf00688bb306409b779e90/source/dng_safe_arithmetic.h",
+  "sourceSha256": "f986ab7208e31c42e523cd7c39720ed277e91789def8f2902149f2463003935b",
+  "noticeFile": "dng_safe_arithmetic.h.notice",
+  "noticeSha256": "0b85d443cfbd60b749a265ed466a2ca2a6e16afea7c07d2fe5b4039ce4655115",
+  "noticeBytes": 623,
+  "extraction": "Original first C comment through */ followed by exactly one newline; no paraphrase.",
+  "licenseIdentifier": "Apache-2.0",
+  "scope": "Original file-specific notice only; does not extend this header grant to matching .cpp or decide package-wide licensing."
+}

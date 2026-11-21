@@ -1,0 +1,2086 @@
+[
+  {
+    "id": "ndk-r27d:1",
+    "tag": "ndk-r27d",
+    "label": "79a32609759af317a62184c2c7b1300263a336c8-v0.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/79a32609759af317a62184c2c7b1300263a336c8-v0.patch?format=TEXT",
+    "relativePatchPath": "79a32609759af317a62184c2c7b1300263a336c8-v0.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "ndk-r27d:2",
+    "tag": "ndk-r27d",
+    "label": "9a2fd97d391caf1060e303f636d7113501788d2f-r522817.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/9a2fd97d391caf1060e303f636d7113501788d2f-r522817.patch?format=TEXT",
+    "relativePatchPath": "9a2fd97d391caf1060e303f636d7113501788d2f-r522817.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "id": "ndk-r27d:3",
+    "tag": "ndk-r27d",
+    "label": "Add-cmake-c-cxx-asm-linker-flags.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Add-cmake-c-cxx-asm-linker-flags.patch?format=TEXT",
+    "relativePatchPath": "Add-cmake-c-cxx-asm-linker-flags.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1689,
+    "sha256": "82db3a79b15b628560e212a5097183333e2efab41a94a2dae70d7ccd81e8084a",
+    "gitBlobSHA1": "ae4689b0f41d1498d4025ec63e0cf105a7471feb",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Add-cmake-c-cxx-asm-linker-flags.patch",
+    "diffHeaders": [
+      "diff --git a/bolt/CMakeLists.txt b/bolt/CMakeLists.txt"
+    ]
+  },
+  {
+    "id": "ndk-r27d:4",
+    "tag": "ndk-r27d",
+    "label": "Add-stubs-and-headers-for-nl_types-APIs.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Add-stubs-and-headers-for-nl_types-APIs.patch?format=TEXT",
+    "relativePatchPath": "Add-stubs-and-headers-for-nl_types-APIs.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 6261,
+    "sha256": "bba2c01db66c2e29d29b600c342a258b6bb0cb5a0428d22870385bb1065263fe",
+    "gitBlobSHA1": "b947a2c906f97c08bd9c75fae5c20b5f5664b54f",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Add-stubs-and-headers-for-nl_types-APIs.patch",
+    "diffHeaders": [
+      "diff --git a/openmp/runtime/src/CMakeLists.txt b/openmp/runtime/src/CMakeLists.txt",
+      "diff --git a/openmp/runtime/src/android/nl_types.h b/openmp/runtime/src/android/nl_types.h",
+      "diff --git a/openmp/runtime/src/android/nltypes_stubs.cpp b/openmp/runtime/src/android/nltypes_stubs.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:5",
+    "tag": "ndk-r27d",
+    "label": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch?format=TEXT",
+    "relativePatchPath": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 801,
+    "sha256": "f296dee815f856aefb4eefb736588cb9441940742c2d03d197a7f5c9e675695f",
+    "gitBlobSHA1": "b5536f2236fa15c64d8eef9ba7d9acb43ada1e1f",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "diffHeaders": [
+      "diff --git a/bolt/runtime/instr.cpp b/bolt/runtime/instr.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:6",
+    "tag": "ndk-r27d",
+    "label": "Bail out jump threading on indirect branches (#103688)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/3c9022c965b85951f30af140da591f819acef8a0.patch?format=TEXT",
+    "relativePatchPath": "cherry/3c9022c965b85951f30af140da591f819acef8a0.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 6819,
+    "sha256": "eb5fcd1c8740efc8b4096b8ed41b8b0ce5aa4075d85f14f54f0d8b6323b7c2d7",
+    "gitBlobSHA1": "9e61cd3c6902cf2f9a6f486df01740858ff14eb4",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/3c9022c965b85951f30af140da591f819acef8a0.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Transforms/Utils/Local.cpp b/llvm/lib/Transforms/Utils/Local.cpp",
+      "diff --git a/llvm/test/Transforms/SimplifyCFG/switch-branch-fold-indirectbr-102351.ll b/llvm/test/Transforms/SimplifyCFG/switch-branch-fold-indirectbr-102351.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:7",
+    "tag": "ndk-r27d",
+    "label": "Carving out -Wformat warning about scoped enums into a",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/73ed2153beb529973741344874c0084d24c2f268.patch?format=TEXT",
+    "relativePatchPath": "cherry/73ed2153beb529973741344874c0084d24c2f268.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 4072,
+    "sha256": "d79d0ac1bba0f1b5aea0c4500f0e7034f7d78680367cd67b6f0c7f361dd6db34",
+    "gitBlobSHA1": "9571e0badc79fea2da81a5c192f21ded318f274a",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/73ed2153beb529973741344874c0084d24c2f268.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Sema/SemaChecking.cpp b/clang/lib/Sema/SemaChecking.cpp",
+      "diff --git a/clang/test/FixIt/format-darwin-enum-class.cpp b/clang/test/FixIt/format-darwin-enum-class.cpp",
+      "diff --git a/clang/test/FixIt/format.cpp b/clang/test/FixIt/format.cpp",
+      "diff --git a/clang/test/SemaCXX/format-strings.cpp b/clang/test/SemaCXX/format-strings.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:8",
+    "tag": "ndk-r27d",
+    "label": "Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch?format=TEXT",
+    "relativePatchPath": "Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1021,
+    "sha256": "a09f2241e469a1e609b094ffcaeb68f496c82905e1caaa82ce9de9b81e01df82",
+    "gitBlobSHA1": "39dc7e5d996b81771a05ff0b0b0dd752113a8055",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/test/Transforms/PhaseOrdering/ARM/arm_mult_q15.ll b/llvm/test/Transforms/PhaseOrdering/ARM/arm_mult_q15.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:9",
+    "tag": "ndk-r27d",
+    "label": "Disable-vfork-fork-events.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Disable-vfork-fork-events.patch?format=TEXT",
+    "relativePatchPath": "Disable-vfork-fork-events.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1334,
+    "sha256": "a6e4d97d059894bae82a6af7c26b2af4c97a0a3c3c1255c98e8a1fa475ef65e9",
+    "gitBlobSHA1": "3de530c71c327a4d15297e1dc377eb65bac0d36f",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Disable-vfork-fork-events.patch",
+    "diffHeaders": [
+      "diff --git a/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunicationClient.cpp b/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunicationClient.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:10",
+    "tag": "ndk-r27d",
+    "label": "Do not require external uses for roots and single use for",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/18473eb108e29c7c9d9fcb5d0d8c271948aca330.patch?format=TEXT",
+    "relativePatchPath": "cherry/18473eb108e29c7c9d9fcb5d0d8c271948aca330.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 5052,
+    "sha256": "e6b6fcd609d815fd041bf33cdcef5ec8f3e2e7fa50cf93b4d6dde3c0ed057074",
+    "gitBlobSHA1": "4d341ae8ba80fbc9b92f3175a8de9e31e9c7e818",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/18473eb108e29c7c9d9fcb5d0d8c271948aca330.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Transforms/Vectorize/SLPVectorizer.cpp b/llvm/lib/Transforms/Vectorize/SLPVectorizer.cpp",
+      "diff --git a/llvm/test/Transforms/SLPVectorizer/X86/int-bitcast-minbitwidth.ll b/llvm/test/Transforms/SLPVectorizer/X86/int-bitcast-minbitwidth.ll",
+      "diff --git a/llvm/test/Transforms/SLPVectorizer/X86/minbitwidth-transformed-operand.ll b/llvm/test/Transforms/SLPVectorizer/X86/minbitwidth-transformed-operand.ll",
+      "diff --git a/llvm/test/Transforms/SLPVectorizer/X86/root-trunc-extract-reuse.ll b/llvm/test/Transforms/SLPVectorizer/X86/root-trunc-extract-reuse.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:11",
+    "tag": "ndk-r27d",
+    "label": "Don't perform ODR checks in GMF",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/a0b6747804e46665ecfd00295b60432bfe1775b6.patch?format=TEXT",
+    "relativePatchPath": "cherry/a0b6747804e46665ecfd00295b60432bfe1775b6.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 13827,
+    "sha256": "7fbc8acb87359ea470402256ac1b2fb34baac6dc966818216985a105a2fec7a1",
+    "gitBlobSHA1": "1e7ff958c2cd1cb06c5bea317280d4a887cd8d1a",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/a0b6747804e46665ecfd00295b60432bfe1775b6.patch",
+    "diffHeaders": [
+      "diff --git a/clang/docs/ReleaseNotes.rst b/clang/docs/ReleaseNotes.rst",
+      "diff --git a/clang/include/clang/Serialization/ASTReader.h b/clang/include/clang/Serialization/ASTReader.h",
+      "diff --git a/clang/lib/Serialization/ASTReader.cpp b/clang/lib/Serialization/ASTReader.cpp",
+      "diff --git a/clang/lib/Serialization/ASTReaderDecl.cpp b/clang/lib/Serialization/ASTReaderDecl.cpp",
+      "diff --git a/clang/lib/Serialization/ASTWriter.cpp b/clang/lib/Serialization/ASTWriter.cpp",
+      "diff --git a/clang/lib/Serialization/ASTWriterDecl.cpp b/clang/lib/Serialization/ASTWriterDecl.cpp",
+      "diff --git a/clang/test/Modules/concept.cppm b/clang/test/Modules/concept.cppm",
+      "diff --git a/clang/test/Modules/no-eager-load.cppm b/clang/test/Modules/no-eager-load.cppm",
+      "diff --git a/clang/test/Modules/polluted-operator.cppm b/clang/test/Modules/polluted-operator.cppm"
+    ]
+  },
+  {
+    "id": "ndk-r27d:12",
+    "tag": "ndk-r27d",
+    "label": "Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch?format=TEXT",
+    "relativePatchPath": "Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 3851,
+    "sha256": "be814908517462677660c8aff7485e5867c1cd1e6e91bc6aeaa57a7c22f7497b",
+    "gitBlobSHA1": "5d753656aee4b85b787537c3a74d7bfd57285971",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "diffHeaders": [
+      "diff --git a/clang/CMakeLists.txt b/clang/CMakeLists.txt",
+      "diff --git a/clang/runtime/CMakeLists.txt b/clang/runtime/CMakeLists.txt",
+      "diff --git a/compiler-rt/cmake/Modules/AddCompilerRT.cmake b/compiler-rt/cmake/Modules/AddCompilerRT.cmake",
+      "diff --git a/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake b/compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake",
+      "diff --git a/llvm/cmake/modules/LLVMExternalProjectUtils.cmake b/llvm/cmake/modules/LLVMExternalProjectUtils.cmake"
+    ]
+  },
+  {
+    "id": "ndk-r27d:13",
+    "tag": "ndk-r27d",
+    "label": "Fix MFS warning format",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/3ea92ea2f9d236569f82825cdba6d59bcc22495c.patch?format=TEXT",
+    "relativePatchPath": "cherry/3ea92ea2f9d236569f82825cdba6d59bcc22495c.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 965,
+    "sha256": "b2d4db333949d3686f095a96bf96efc850f1af6c32c313c6abe4567e9ed4b67c",
+    "gitBlobSHA1": "3071ebd3a6b5d57bd13233b98c5e7d84dcf7ec2a",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/3ea92ea2f9d236569f82825cdba6d59bcc22495c.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/CodeGen/TargetPassConfig.cpp b/llvm/lib/CodeGen/TargetPassConfig.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:14",
+    "tag": "ndk-r27d",
+    "label": "Fix __isOSVersionAtLeast for Android (#80496)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch?format=TEXT",
+    "relativePatchPath": "cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1741,
+    "sha256": "5cddb2be6d78db60acb8c04405df535cc13dcf801e9250b6a842154ff1b0fe54",
+    "gitBlobSHA1": "716ce1bec783e61f2ae8bb353d9228539dd97b70",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch",
+    "diffHeaders": [
+      "diff --git a/compiler-rt/lib/builtins/os_version_check.c b/compiler-rt/lib/builtins/os_version_check.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:15",
+    "tag": "ndk-r27d",
+    "label": "Fix test failure if CLANG_VENDOR contains spaces (#81017)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/d6c2cbbc6513bd412b34f3bf70e21b5a363b2fd9.patch?format=TEXT",
+    "relativePatchPath": "cherry/d6c2cbbc6513bd412b34f3bf70e21b5a363b2fd9.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 975,
+    "sha256": "0e22e2a2e521e1f2b4cfaf48200b3aab297db78b9c295ba93eafa1276d6ec3c3",
+    "gitBlobSHA1": "eed4d9b4c427722525f862882ff1255607088c56",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/d6c2cbbc6513bd412b34f3bf70e21b5a363b2fd9.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/utils/UpdateTestChecks/common.py b/llvm/utils/UpdateTestChecks/common.py"
+    ]
+  },
+  {
+    "id": "ndk-r27d:16",
+    "tag": "ndk-r27d",
+    "label": "Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch?format=TEXT",
+    "relativePatchPath": "Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1622,
+    "sha256": "6dc9e769fe4e635690364c46ef70a49664f9fd2c6a47f795851a40e4bddc1281",
+    "gitBlobSHA1": "56b349a06a06b20412b16095152ce49fb2d57bf1",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Driver/ToolChains/Clang.cpp b/clang/lib/Driver/ToolChains/Clang.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:17",
+    "tag": "ndk-r27d",
+    "label": "Move raw_string_ostream back to raw_ostream.cpp (#79224)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/bb65f5a5d95736cf08b282c1ded7f5cceed5fd7e.patch?format=TEXT",
+    "relativePatchPath": "cherry/bb65f5a5d95736cf08b282c1ded7f5cceed5fd7e.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 2102,
+    "sha256": "cad5f57b24bff096ed4eb68eb0352139a4535859668224ae525f3f117235edc5",
+    "gitBlobSHA1": "a297c7a03c4a76282ef511b9e3bbcdcc8d3607f5",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/bb65f5a5d95736cf08b282c1ded7f5cceed5fd7e.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Support/raw_ostream.cpp b/llvm/lib/Support/raw_ostream.cpp",
+      "diff --git a/llvm/lib/Support/raw_socket_stream.cpp b/llvm/lib/Support/raw_socket_stream.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:18",
+    "tag": "ndk-r27d",
+    "label": "Reapply \"[Sema] Fix crash on invalid code with parenthesized",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch?format=TEXT",
+    "relativePatchPath": "cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 10656,
+    "sha256": "6f396d7ca5cb7c6c6a7dbd24c7490f6697a8962cf90853574cdcc72ba47a03b9",
+    "gitBlobSHA1": "07cf4232b763cb0f2b61d95ead7cc58b66193b61",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Sema/SemaInit.cpp b/clang/lib/Sema/SemaInit.cpp",
+      "diff --git a/clang/test/SemaCXX/crash-GH76228.cpp b/clang/test/SemaCXX/crash-GH76228.cpp",
+      "diff --git a/clang/test/SemaCXX/paren-list-agg-init.cpp b/clang/test/SemaCXX/paren-list-agg-init.cpp",
+      "diff --git a/libcxx/test/libcxx/utilities/expected/expected.expected/transform_error.mandates.verify.cpp b/libcxx/test/libcxx/utilities/expected/expected.expected/transform_error.mandates.verify.cpp",
+      "diff --git a/libcxx/test/libcxx/utilities/expected/expected.void/transform_error.mandates.verify.cpp b/libcxx/test/libcxx/utilities/expected/expected.void/transform_error.mandates.verify.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:19",
+    "tag": "ndk-r27d",
+    "label": "Remove-inline_asm-tests-for-now.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Remove-inline_asm-tests-for-now.patch?format=TEXT",
+    "relativePatchPath": "Remove-inline_asm-tests-for-now.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 982,
+    "sha256": "6351e1e58adf250c1244287cd1378b2b710c19cd3e5754092efd334545159bfb",
+    "gitBlobSHA1": "ac90dea7eb018e92024c8c93d0de65b93cc94c49",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Remove-inline_asm-tests-for-now.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/test/CodeGen/BPF/store_imm.ll b/llvm/test/CodeGen/BPF/store_imm.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:20",
+    "tag": "ndk-r27d",
+    "label": "Revert \"Reapply \"RegisterCoalescer: Add implicit-def of super",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/c4146121e940b6b853148c780568dee38b97382f.patch?format=TEXT",
+    "relativePatchPath": "cherry/c4146121e940b6b853148c780568dee38b97382f.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 62504,
+    "sha256": "6a1887d2300ae58499b55660f8308fc2aa7c5d57b3e4277b1c80b9a8453729d7",
+    "gitBlobSHA1": "282bb39ff5d66d345d315f26c413bd38f4131583",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/c4146121e940b6b853148c780568dee38b97382f.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/CodeGen/RegisterCoalescer.cpp b/llvm/lib/CodeGen/RegisterCoalescer.cpp",
+      "diff --git a/llvm/test/CodeGen/AArch64/GlobalISel/arm64-pcsections.ll b/llvm/test/CodeGen/AArch64/GlobalISel/arm64-pcsections.ll",
+      "diff --git a/llvm/test/CodeGen/X86/coalescer-breaks-subreg-to-reg-liveness.ll b/llvm/test/CodeGen/X86/coalescer-breaks-subreg-to-reg-liveness.ll",
+      "diff --git a/llvm/test/CodeGen/X86/coalescer-implicit-def-regression-imp-operand-assert.mir b/llvm/test/CodeGen/X86/coalescer-implicit-def-regression-imp-operand-assert.mir",
+      "diff --git a/llvm/test/CodeGen/X86/coalescing-subreg-to-reg-requires-subrange-update.mir b/llvm/test/CodeGen/X86/coalescing-subreg-to-reg-requires-subrange-update.mir",
+      "diff --git a/llvm/test/CodeGen/X86/subreg-to-reg-coalescing.mir b/llvm/test/CodeGen/X86/subreg-to-reg-coalescing.mir"
+    ]
+  },
+  {
+    "id": "ndk-r27d:21",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[AArch64] merge index address with large offset into",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/915c3d9e5a2d1314afe64cd6116a3b6c9809ec90.patch?format=TEXT",
+    "relativePatchPath": "cherry/915c3d9e5a2d1314afe64cd6116a3b6c9809ec90.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 17550,
+    "sha256": "1aec727afef7dfd494fdc63f16ca573c603e6923fe26af401d3ca20aa6b95786",
+    "gitBlobSHA1": "35f9284a9c827c53c787066b89b2ef30aef68ccf",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/915c3d9e5a2d1314afe64cd6116a3b6c9809ec90.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/AArch64/AArch64InstrInfo.cpp b/llvm/lib/Target/AArch64/AArch64InstrInfo.cpp",
+      "diff --git a/llvm/lib/Target/AArch64/AArch64InstrInfo.h b/llvm/lib/Target/AArch64/AArch64InstrInfo.h",
+      "diff --git a/llvm/lib/Target/AArch64/AArch64LoadStoreOptimizer.cpp b/llvm/lib/Target/AArch64/AArch64LoadStoreOptimizer.cpp",
+      "diff --git a/llvm/test/CodeGen/AArch64/arm64-addrmode.ll b/llvm/test/CodeGen/AArch64/arm64-addrmode.ll",
+      "diff --git a/llvm/test/CodeGen/AArch64/large-offset-ldr-merge.mir b/llvm/test/CodeGen/AArch64/large-offset-ldr-merge.mir"
+    ]
+  },
+  {
+    "id": "ndk-r27d:22",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[LSR][TTI][RISCV] Disable terminator folding for",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/5ce067d592b78fd3142364e06bae4da2a3a1e944.patch?format=TEXT",
+    "relativePatchPath": "cherry/5ce067d592b78fd3142364e06bae4da2a3a1e944.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 137447,
+    "sha256": "20afd203ebcbb99d1bd5d1d69d90994c07a87b9873b8349a8bfd258898f851f4",
+    "gitBlobSHA1": "ce44c678a5fecea5ab50ae9d98e2141d1d1fb398",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/5ce067d592b78fd3142364e06bae4da2a3a1e944.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/RISCVTargetTransformInfo.h b/llvm/lib/Target/RISCV/RISCVTargetTransformInfo.h",
+      "diff --git a/llvm/test/CodeGen/RISCV/branch-on-zero.ll b/llvm/test/CodeGen/RISCV/branch-on-zero.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/riscv-codegenprepare-asm.ll b/llvm/test/CodeGen/RISCV/riscv-codegenprepare-asm.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/fixed-vectors-fp-buildvec.ll b/llvm/test/CodeGen/RISCV/rvv/fixed-vectors-fp-buildvec.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/fixed-vectors-strided-load-store-asm.ll b/llvm/test/CodeGen/RISCV/rvv/fixed-vectors-strided-load-store-asm.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/sink-splat-operands-i1.ll b/llvm/test/CodeGen/RISCV/rvv/sink-splat-operands-i1.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/sink-splat-operands.ll b/llvm/test/CodeGen/RISCV/rvv/sink-splat-operands.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/vsetvli-insert-crossbb.ll b/llvm/test/CodeGen/RISCV/rvv/vsetvli-insert-crossbb.ll",
+      "diff --git a/llvm/test/Transforms/LoopStrengthReduce/RISCV/lsr-cost-compare.ll b/llvm/test/Transforms/LoopStrengthReduce/RISCV/lsr-cost-compare.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:23",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[PowerPC] Add test after #75271 on PPC. NFC.",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/ece1359857c547a156ed743643bccbfd0f09bf2a.patch?format=TEXT",
+    "relativePatchPath": "cherry/ece1359857c547a156ed743643bccbfd0f09bf2a.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1804,
+    "sha256": "1b14f1b230fcf50702e62c6eeacf693546e125ed14d0349a636571eaec7c26fb",
+    "gitBlobSHA1": "527006a843641f4ad48c75e7a96a2126c47e7cef",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/ece1359857c547a156ed743643bccbfd0f09bf2a.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/test/CodeGen/PowerPC/coalescer-remat-with-undef-implicit-def-operand.mir b/llvm/test/CodeGen/PowerPC/coalescer-remat-with-undef-implicit-def-operand.mir"
+    ]
+  },
+  {
+    "id": "ndk-r27d:24",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[RISCV][ISel] Combine scalable vector add/sub/mul",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/4e347b4e38b95bc455d0e620e11ac58fc0172a94.patch?format=TEXT",
+    "relativePatchPath": "cherry/4e347b4e38b95bc455d0e620e11ac58fc0172a94.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 34036,
+    "sha256": "bd896c4a2c469613fe996499e601c8d53699f2c0bb561a44f4624c9b627d3e13",
+    "gitBlobSHA1": "a58af1ade6d10bd5a1e93db346281d627a36204d",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/4e347b4e38b95bc455d0e620e11ac58fc0172a94.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/RISCVISelLowering.cpp b/llvm/lib/Target/RISCV/RISCVISelLowering.cpp",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/ctlz-sdnode.ll b/llvm/test/CodeGen/RISCV/rvv/ctlz-sdnode.ll",
+      "diff --git a/llvm/test/CodeGen/RISCV/rvv/vscale-vw-web-simplification.ll b/llvm/test/CodeGen/RISCV/rvv/vscale-vw-web-simplification.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:25",
+    "tag": "ndk-r27d",
+    "label": "Revert \"[hwasan] Add fixed_shadow_base flag\" (#95435)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch?format=TEXT",
+    "relativePatchPath": "cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 5507,
+    "sha256": "700c2cf3602782248f7dfeb2385afb059634156af0626732c5014d7858c76d70",
+    "gitBlobSHA1": "50d646206254e8c797e82bafef57b45c975e90e5",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch",
+    "diffHeaders": [
+      "diff --git a/compiler-rt/lib/hwasan/hwasan_flags.inc b/compiler-rt/lib/hwasan/hwasan_flags.inc",
+      "diff --git a/compiler-rt/lib/hwasan/hwasan_linux.cpp b/compiler-rt/lib/hwasan/hwasan_linux.cpp",
+      "diff --git a/compiler-rt/test/hwasan/TestCases/Linux/fixed-shadow.c b/compiler-rt/test/hwasan/TestCases/Linux/fixed-shadow.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:26",
+    "tag": "ndk-r27d",
+    "label": "Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch?format=TEXT",
+    "relativePatchPath": "Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 2752,
+    "sha256": "0aa4e90dff039eec1c942f8704d63377eb50bb3c70379b25868f95fd5dcfc883",
+    "gitBlobSHA1": "f38b9346a2a64a83b88b2b0c30f66a101cb9b5b3",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Driver/ToolChain.cpp b/clang/lib/Driver/ToolChain.cpp",
+      "diff --git a/clang/test/Driver/target-override.c b/clang/test/Driver/target-override.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:27",
+    "tag": "ndk-r27d",
+    "label": "Revert-Enable-IAS-In-Backend-v2.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Revert-Enable-IAS-In-Backend-v2.patch?format=TEXT",
+    "relativePatchPath": "Revert-Enable-IAS-In-Backend-v2.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 2060,
+    "sha256": "e8b7656917b56a30244d6e3dc9c5e6eaf64ff3783e215fbb228335ee281a5e80",
+    "gitBlobSHA1": "9179fe573d01f2ea1457b9adb384851a1ee0f282",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Revert-Enable-IAS-In-Backend-v2.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/BPF/MCTargetDesc/BPFMCAsmInfo.h b/llvm/lib/Target/BPF/MCTargetDesc/BPFMCAsmInfo.h",
+      "diff --git a/llvm/test/CodeGen/BPF/inline_asm.ll b/llvm/test/CodeGen/BPF/inline_asm.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:28",
+    "tag": "ndk-r27d",
+    "label": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch?format=TEXT",
+    "relativePatchPath": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1523,
+    "sha256": "fef9c036716421b14ea34759659d2d71f5007ea7ebf57848b817320ab28c4e80",
+    "gitBlobSHA1": "e639f6a027c37b7bb3c7cd9bd662b075aea24d3d",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/CodeGen/SelectionDAG/DAGCombiner.cpp b/llvm/lib/CodeGen/SelectionDAG/DAGCombiner.cpp",
+      "diff --git a/llvm/test/CodeGen/X86/cmp-shiftX-maskX.ll b/llvm/test/CodeGen/X86/cmp-shiftX-maskX.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:29",
+    "tag": "ndk-r27d",
+    "label": "Support-for-WASM-as-native-IR.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/Support-for-WASM-as-native-IR.patch?format=TEXT",
+    "relativePatchPath": "Support-for-WASM-as-native-IR.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 12180,
+    "sha256": "5df3f02faed412eefd160b643f2ec5a81b58467798612377d163b92a5f88ed89",
+    "gitBlobSHA1": "d0cc383077d74c2ff822c88f4ac7547f69eaf390",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Support-for-WASM-as-native-IR.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Basic/Targets/WebAssembly.h b/clang/lib/Basic/Targets/WebAssembly.h",
+      "diff --git a/llvm/include/llvm/TargetParser/Triple.h b/llvm/include/llvm/TargetParser/Triple.h",
+      "diff --git a/llvm/lib/Target/WebAssembly/WebAssemblyISelLowering.cpp b/llvm/lib/Target/WebAssembly/WebAssemblyISelLowering.cpp",
+      "diff --git a/llvm/lib/Target/WebAssembly/WebAssemblyTargetMachine.cpp b/llvm/lib/Target/WebAssembly/WebAssemblyTargetMachine.cpp",
+      "diff --git a/llvm/lib/TargetParser/Triple.cpp b/llvm/lib/TargetParser/Triple.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:30",
+    "tag": "ndk-r27d",
+    "label": "[AArch64][Clang] Fix linker error for function",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/1be0d9d7d88a9bdabe6ef4d81720ddf4cf6f71c1.patch?format=TEXT",
+    "relativePatchPath": "cherry/1be0d9d7d88a9bdabe6ef4d81720ddf4cf6f71c1.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 69030,
+    "sha256": "a6e0a1329e6dd8c7ff69a90371e462c226f50e9529d91bc41bdc4c86c32b1bff",
+    "gitBlobSHA1": "aa7567a2579c0c6d417cfad3fabae0d553996fb3",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/1be0d9d7d88a9bdabe6ef4d81720ddf4cf6f71c1.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/CodeGen/CodeGenModule.cpp b/clang/lib/CodeGen/CodeGenModule.cpp",
+      "diff --git a/clang/test/CodeGen/attr-target-clones-aarch64.c b/clang/test/CodeGen/attr-target-clones-aarch64.c",
+      "diff --git a/clang/test/CodeGen/attr-target-version.c b/clang/test/CodeGen/attr-target-version.c",
+      "diff --git a/clang/test/CodeGenCXX/attr-target-clones-aarch64.cpp b/clang/test/CodeGenCXX/attr-target-clones-aarch64.cpp",
+      "diff --git a/clang/test/CodeGenCXX/attr-target-version.cpp b/clang/test/CodeGenCXX/attr-target-version.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:31",
+    "tag": "ndk-r27d",
+    "label": "[AArch64][FMV] Support feature MOPS in Function Multi",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch?format=TEXT",
+    "relativePatchPath": "cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 10762,
+    "sha256": "7e7865989d89adbe02bd031c2407e7d3b8dd79c2861efb6c20fbc0f57d273d91",
+    "gitBlobSHA1": "66915475c75cf697284fc07ba9ed2707362e6249",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch",
+    "diffHeaders": [
+      "diff --git a/clang/test/CodeGen/attr-target-version.c b/clang/test/CodeGen/attr-target-version.c",
+      "diff --git a/clang/test/Sema/attr-target-clones-aarch64.c b/clang/test/Sema/attr-target-clones-aarch64.c",
+      "diff --git a/clang/test/SemaCXX/attr-target-version.cpp b/clang/test/SemaCXX/attr-target-version.cpp",
+      "diff --git a/compiler-rt/lib/builtins/cpu_model/aarch64.c b/compiler-rt/lib/builtins/cpu_model/aarch64.c",
+      "diff --git a/compiler-rt/lib/builtins/cpu_model/aarch64/fmv/mrs.inc b/compiler-rt/lib/builtins/cpu_model/aarch64/fmv/mrs.inc",
+      "diff --git a/compiler-rt/lib/builtins/cpu_model/aarch64/hwcap.inc b/compiler-rt/lib/builtins/cpu_model/aarch64/hwcap.inc",
+      "diff --git a/llvm/include/llvm/TargetParser/AArch64TargetParser.h b/llvm/include/llvm/TargetParser/AArch64TargetParser.h"
+    ]
+  },
+  {
+    "id": "ndk-r27d:32",
+    "tag": "ndk-r27d",
+    "label": "[AArch64][GISel] Don't pointlessly lower G_TRUNC (#81479)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/070848c17c2944afa494d42d3ad42929f3379842.patch?format=TEXT",
+    "relativePatchPath": "cherry/070848c17c2944afa494d42d3ad42929f3379842.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 3408,
+    "sha256": "f383d02c8ca7fa150d32649e80a527da59cb45b4dc109b59939e7ca3f49624af",
+    "gitBlobSHA1": "c84b8866c8558e3ac51e6dd6b84b08745c24bff2",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/070848c17c2944afa494d42d3ad42929f3379842.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.cpp b/llvm/lib/Target/AArch64/GISel/AArch64LegalizerInfo.cpp",
+      "diff --git a/llvm/test/CodeGen/AArch64/GlobalISel/legalize-xtn.mir b/llvm/test/CodeGen/AArch64/GlobalISel/legalize-xtn.mir"
+    ]
+  },
+  {
+    "id": "ndk-r27d:33",
+    "tag": "ndk-r27d",
+    "label": "[Clang] Fix IsOverload for function templates (#77323)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/69066ab31959968ebcbca71f3872bdedef8fb8cd.patch?format=TEXT",
+    "relativePatchPath": "cherry/69066ab31959968ebcbca71f3872bdedef8fb8cd.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 6034,
+    "sha256": "d58f2fe207461aabde53ef9855d4960ed83e792c5bc882aa2c6627fb26fe418a",
+    "gitBlobSHA1": "84396917642618265c39d6b409a6bde409be7e31",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/69066ab31959968ebcbca71f3872bdedef8fb8cd.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Sema/SemaOverload.cpp b/clang/lib/Sema/SemaOverload.cpp",
+      "diff --git a/clang/test/CXX/over/over.load/p2-0x.cpp b/clang/test/CXX/over/over.load/p2-0x.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:34",
+    "tag": "ndk-r27d",
+    "label": "[Clang][AST] Fix a crash on attaching doc comments (#78716)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/5f4ee5a2dfa97fe32ee62d1d67aa1413d5a059e6.patch?format=TEXT",
+    "relativePatchPath": "cherry/5f4ee5a2dfa97fe32ee62d1d67aa1413d5a059e6.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 2685,
+    "sha256": "8427cfcee703674b7907f66ac0cc0a2c9732c1ae17d103f84c40bd4693945b65",
+    "gitBlobSHA1": "f21b6576d5bf4611743f26117db54283817b9b19",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/5f4ee5a2dfa97fe32ee62d1d67aa1413d5a059e6.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/AST/ASTContext.cpp b/clang/lib/AST/ASTContext.cpp",
+      "diff --git a/clang/test/AST/ast-crash-doc-function-template.cpp b/clang/test/AST/ast-crash-doc-function-template.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:35",
+    "tag": "ndk-r27d",
+    "label": "[Clang][Sema] Tweak tryCaptureVariable for unevaluated",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/3d361b225fe89ce1d8c93639f27d689082bd8dad.patch?format=TEXT",
+    "relativePatchPath": "cherry/3d361b225fe89ce1d8c93639f27d689082bd8dad.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 8964,
+    "sha256": "76304dc1d4e2cda6fa998f2ae5fef6b0c17765e3736189617c432c7158ca6aca",
+    "gitBlobSHA1": "3c4c1f74ae76d01abb25fbab2b58ec45c912fed8",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/3d361b225fe89ce1d8c93639f27d689082bd8dad.patch",
+    "diffHeaders": [
+      "diff --git a/clang/include/clang/AST/DeclBase.h b/clang/include/clang/AST/DeclBase.h",
+      "diff --git a/clang/lib/Parse/ParseExprCXX.cpp b/clang/lib/Parse/ParseExprCXX.cpp",
+      "diff --git a/clang/lib/Sema/SemaExpr.cpp b/clang/lib/Sema/SemaExpr.cpp",
+      "diff --git a/clang/lib/Sema/SemaLambda.cpp b/clang/lib/Sema/SemaLambda.cpp",
+      "diff --git a/clang/lib/Sema/TreeTransform.h b/clang/lib/Sema/TreeTransform.h",
+      "diff --git a/clang/test/SemaCXX/lambda-unevaluated.cpp b/clang/test/SemaCXX/lambda-unevaluated.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:36",
+    "tag": "ndk-r27d",
+    "label": "[Driver,CodeGen] Support -mtls-dialect= (#79256)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/36b4a9ccd9f7e04010476e6b2a311f2052a4ac20.patch?format=TEXT",
+    "relativePatchPath": "cherry/36b4a9ccd9f7e04010476e6b2a311f2052a4ac20.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 11393,
+    "sha256": "b3b8ae99ca3362f2159d9d0a3fb151f60e6e4e296445b4be594cbdde4eabb97e",
+    "gitBlobSHA1": "3f85749fe847c9e4e4341463b4b4ee2030a9d88b",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/36b4a9ccd9f7e04010476e6b2a311f2052a4ac20.patch",
+    "diffHeaders": [
+      "diff --git a/clang/include/clang/Basic/CodeGenOptions.def b/clang/include/clang/Basic/CodeGenOptions.def",
+      "diff --git a/clang/include/clang/Driver/Options.td b/clang/include/clang/Driver/Options.td",
+      "diff --git a/clang/lib/CodeGen/BackendUtil.cpp b/clang/lib/CodeGen/BackendUtil.cpp",
+      "diff --git a/clang/lib/Driver/ToolChains/Clang.cpp b/clang/lib/Driver/ToolChains/Clang.cpp",
+      "diff --git a/clang/lib/Driver/ToolChains/CommonArgs.cpp b/clang/lib/Driver/ToolChains/CommonArgs.cpp",
+      "diff --git a/clang/lib/Driver/ToolChains/CommonArgs.h b/clang/lib/Driver/ToolChains/CommonArgs.h",
+      "diff --git a/clang/test/CodeGen/RISCV/tls-dialect.c b/clang/test/CodeGen/RISCV/tls-dialect.c",
+      "diff --git a/clang/test/Driver/tls-dialect.c b/clang/test/Driver/tls-dialect.c",
+      "diff --git a/llvm/include/llvm/TargetParser/Triple.h b/llvm/include/llvm/TargetParser/Triple.h"
+    ]
+  },
+  {
+    "id": "ndk-r27d:37",
+    "tag": "ndk-r27d",
+    "label": "[Driver] Add -fandroid-pad-segment/-fno-android-pad-segment",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/5133a8f5590d74d9d15631742a3d84f978394dbd.patch?format=TEXT",
+    "relativePatchPath": "cherry/5133a8f5590d74d9d15631742a3d84f978394dbd.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 4984,
+    "sha256": "352b8f54f5c19fe91c33158c7cd4a00681fbecd443a92645df7b1a5931f0c515",
+    "gitBlobSHA1": "2fa50eb2b49d9d5345513a74a2b68552fe9dfe57",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/5133a8f5590d74d9d15631742a3d84f978394dbd.patch",
+    "diffHeaders": [
+      "diff --git a/clang/include/clang/Driver/Options.td b/clang/include/clang/Driver/Options.td",
+      "diff --git a/clang/lib/Driver/ToolChains/Gnu.cpp b/clang/lib/Driver/ToolChains/Gnu.cpp",
+      "diff --git a/clang/test/Driver/Inputs/basic_android_tree/sysroot/usr/lib/crt_pad_segment.o b/clang/test/Driver/Inputs/basic_android_tree/sysroot/usr/lib/crt_pad_segment.o",
+      "diff --git a/clang/test/Driver/linux-ld.c b/clang/test/Driver/linux-ld.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:38",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Clean up R_RISCV_RELAX code. NFC",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/ccb99f221422b8de5e1ae04d3427f15878f7cd93.patch?format=TEXT",
+    "relativePatchPath": "cherry/ccb99f221422b8de5e1ae04d3427f15878f7cd93.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 5286,
+    "sha256": "9f9411aaf7e49bbeed7e961ca7f02b0f13183b34a82164b6347d0cbd5e5336cc",
+    "gitBlobSHA1": "f62be69932164cafee048ccd36c1e97605d17c8c",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/ccb99f221422b8de5e1ae04d3427f15878f7cd93.patch",
+    "diffHeaders": [
+      "diff --git a/lld/ELF/Arch/RISCV.cpp b/lld/ELF/Arch/RISCV.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:39",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Fix terminology: TLS optimizations instead of TLS",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/849951f8759171cb6c74d3ccbcf154506fc1f0ae.patch?format=TEXT",
+    "relativePatchPath": "cherry/849951f8759171cb6c74d3ccbcf154506fc1f0ae.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 5165,
+    "sha256": "0c288979f038a21586fb6cfd12dfdf6aa2ac7c0937ab4aea287f88894c8e044c",
+    "gitBlobSHA1": "4f3996ee26a6bc0ebcb639622b66c86e3af1d14a",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/849951f8759171cb6c74d3ccbcf154506fc1f0ae.patch",
+    "diffHeaders": [
+      "diff --git a/lld/ELF/Relocations.cpp b/lld/ELF/Relocations.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:40",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Implement R_RISCV_TLSDESC for RISC-V",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/1117fdd7c16873eb389e988c6a39ad922bae0fd0.patch?format=TEXT",
+    "relativePatchPath": "cherry/1117fdd7c16873eb389e988c6a39ad922bae0fd0.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 29113,
+    "sha256": "a558bdce9777e0fe0c2a123335d603a8bfe0821513c8048adb816a0cf1756520",
+    "gitBlobSHA1": "95939915dca91e47bfc2d9c99e3dfe16552c1477",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/1117fdd7c16873eb389e988c6a39ad922bae0fd0.patch",
+    "diffHeaders": [
+      "diff --git a/lld/ELF/Arch/RISCV.cpp b/lld/ELF/Arch/RISCV.cpp",
+      "diff --git a/lld/ELF/Relocations.cpp b/lld/ELF/Relocations.cpp",
+      "diff --git a/lld/test/ELF/riscv-tlsdesc-gd-mixed.s b/lld/test/ELF/riscv-tlsdesc-gd-mixed.s",
+      "diff --git a/lld/test/ELF/riscv-tlsdesc-relax.s b/lld/test/ELF/riscv-tlsdesc-relax.s",
+      "diff --git a/lld/test/ELF/riscv-tlsdesc.s b/lld/test/ELF/riscv-tlsdesc.s"
+    ]
+  },
+  {
+    "id": "ndk-r27d:41",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Support R_RISCV_SET_ULEB128/R_RISCV_SUB_ULEB128 in",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/3fa17954dedd59bfad9cef1778719fb6312a5949.patch?format=TEXT",
+    "relativePatchPath": "cherry/3fa17954dedd59bfad9cef1778719fb6312a5949.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 12300,
+    "sha256": "dea751af2677a9e9de5a9850412cd31544781b44460c8143572c29cecc082b9b",
+    "gitBlobSHA1": "74f0f50bfdb8165a89472757ad33e680d6592748",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/3fa17954dedd59bfad9cef1778719fb6312a5949.patch",
+    "diffHeaders": [
+      "diff --git a/lld/ELF/Arch/RISCV.cpp b/lld/ELF/Arch/RISCV.cpp",
+      "diff --git a/lld/ELF/InputSection.cpp b/lld/ELF/InputSection.cpp",
+      "diff --git a/lld/ELF/Relocations.cpp b/lld/ELF/Relocations.cpp",
+      "diff --git a/lld/ELF/Target.h b/lld/ELF/Target.h",
+      "diff --git a/lld/test/ELF/riscv-reloc-leb128.s b/lld/test/ELF/riscv-reloc-leb128.s"
+    ]
+  },
+  {
+    "id": "ndk-r27d:42",
+    "tag": "ndk-r27d",
+    "label": "[ELF] Suppress --no-allow-shlib-undefined diagnostic when a",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/e390bda9782b461f10433aa6728acf87521e22a5.patch?format=TEXT",
+    "relativePatchPath": "cherry/e390bda9782b461f10433aa6728acf87521e22a5.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 5354,
+    "sha256": "7969019e9960f00043525c578e8e77bf2524ae075451c6c7e262150371d3650a",
+    "gitBlobSHA1": "2899302555ab6c848d90b039a9fecc11bb3e598e",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/e390bda9782b461f10433aa6728acf87521e22a5.patch",
+    "diffHeaders": [
+      "diff --git a/lld/ELF/InputFiles.cpp b/lld/ELF/InputFiles.cpp",
+      "diff --git a/lld/ELF/Symbols.h b/lld/ELF/Symbols.h",
+      "diff --git a/lld/ELF/Writer.cpp b/lld/ELF/Writer.cpp",
+      "diff --git a/lld/test/ELF/allow-shlib-undefined.s b/lld/test/ELF/allow-shlib-undefined.s"
+    ]
+  },
+  {
+    "id": "ndk-r27d:43",
+    "tag": "ndk-r27d",
+    "label": "[FMV] Change feature priorities according to ACLE. (#79316)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/f214933bc538c719403804069941de301487c39b.patch?format=TEXT",
+    "relativePatchPath": "cherry/f214933bc538c719403804069941de301487c39b.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:44",
+    "tag": "ndk-r27d",
+    "label": "[FMV] Use lexicographic order of feature names when mangling.",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/e81ef463f10851bfbcd56a4f3450821f1e7c862f.patch?format=TEXT",
+    "relativePatchPath": "cherry/e81ef463f10851bfbcd56a4f3450821f1e7c862f.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 27241,
+    "sha256": "ff47b65e69bea9873ee59cedcf39d2396cdb19ae134a9048b0fee23edc295103",
+    "gitBlobSHA1": "d50d41f070d9276e6ab6d1930c7806aa1401ced3",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/e81ef463f10851bfbcd56a4f3450821f1e7c862f.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/CodeGen/Targets/AArch64.cpp b/clang/lib/CodeGen/Targets/AArch64.cpp",
+      "diff --git a/clang/test/CodeGen/attr-target-clones-aarch64.c b/clang/test/CodeGen/attr-target-clones-aarch64.c",
+      "diff --git a/clang/test/CodeGen/attr-target-version.c b/clang/test/CodeGen/attr-target-version.c",
+      "diff --git a/clang/test/CodeGenCXX/attr-target-clones-aarch64.cpp b/clang/test/CodeGenCXX/attr-target-clones-aarch64.cpp",
+      "diff --git a/clang/test/CodeGenCXX/attr-target-version.cpp b/clang/test/CodeGenCXX/attr-target-version.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:45",
+    "tag": "ndk-r27d",
+    "label": "[MTE] Disable all MTE protection of globals in sections",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/c9f5b5c935bd12d76d4bafff61d8116cb3229972.patch?format=TEXT",
+    "relativePatchPath": "cherry/c9f5b5c935bd12d76d4bafff61d8116cb3229972.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 4293,
+    "sha256": "6b8e111c7fe523970c5bb7cf0eebf786fa64fede287cc07390a220dece631e71",
+    "gitBlobSHA1": "5e563acd7175554dac13b198534818f17ac50ea1",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/c9f5b5c935bd12d76d4bafff61d8116cb3229972.patch",
+    "diffHeaders": [
+      "diff --git a/clang/test/CodeGen/memtag-globals-asm.cpp b/clang/test/CodeGen/memtag-globals-asm.cpp",
+      "diff --git a/llvm/lib/Target/AArch64/AArch64GlobalsTagging.cpp b/llvm/lib/Target/AArch64/AArch64GlobalsTagging.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:46",
+    "tag": "ndk-r27d",
+    "label": "[Modules] Don't replace local declarations with external",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/487967af82053cd08022635a2ff768385d936c80.patch?format=TEXT",
+    "relativePatchPath": "cherry/487967af82053cd08022635a2ff768385d936c80.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:47",
+    "tag": "ndk-r27d",
+    "label": "[NFC][FMV] Add tests to demonstrate feature priorities.",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/f6290e0daf5aff7132cab097fb13aad8a20ad070.patch?format=TEXT",
+    "relativePatchPath": "cherry/f6290e0daf5aff7132cab097fb13aad8a20ad070.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 6771,
+    "sha256": "a91e2764a26bb7c18e1aa95a49645b5df26e50f22e501e5fadcb062b7ad5082b",
+    "gitBlobSHA1": "d46459b1cf5bc022e34affd83196084a2fcaa1e8",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/f6290e0daf5aff7132cab097fb13aad8a20ad070.patch",
+    "diffHeaders": [
+      "diff --git a/clang/test/CodeGen/attr-target-version.c b/clang/test/CodeGen/attr-target-version.c"
+    ]
+  },
+  {
+    "id": "ndk-r27d:48",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Check type is legal before combining mgather to vlse",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/06c89bd59ca2279f76a41e851b7b2df634a6191e.patch?format=TEXT",
+    "relativePatchPath": "cherry/06c89bd59ca2279f76a41e851b7b2df634a6191e.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1393,
+    "sha256": "c5c15d61def5c88b454fc35b7278c2a1e6a6df8bae8a72c50e14f523e08e8620",
+    "gitBlobSHA1": "a8ce9d5a10401b71bb7a8233d0ce9d9554d0cb43",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/06c89bd59ca2279f76a41e851b7b2df634a6191e.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/RISCVISelLowering.cpp b/llvm/lib/Target/RISCV/RISCVISelLowering.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:49",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Fix TLSDESC comment. NFC (#79403)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/1f454ede4660477c3782595975def90c26c19881.patch?format=TEXT",
+    "relativePatchPath": "cherry/1f454ede4660477c3782595975def90c26c19881.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1535,
+    "sha256": "01910fc6eff53a9d476b33dacfaa59e3db6f92e6abfaac2ab55a70e58c34ed53",
+    "gitBlobSHA1": "1df049456f4e9df7c82b617b01087f0239f5cf02",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/1f454ede4660477c3782595975def90c26c19881.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/RISCVISelLowering.cpp b/llvm/lib/Target/RISCV/RISCVISelLowering.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:50",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Force relocations if initial MCSubtargetInfo contains",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/6c207ee5d20d2b054509123e6d0507df1332b376.patch?format=TEXT",
+    "relativePatchPath": "cherry/6c207ee5d20d2b054509123e6d0507df1332b376.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 4059,
+    "sha256": "d58918fde2202f0a514be45bd423cf90d626e0bc42372ad83b070737ac11a631",
+    "gitBlobSHA1": "99491a30ab90cb379ce4c2cd7a12e97bef7fa1b9",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/6c207ee5d20d2b054509123e6d0507df1332b376.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/RISCV/MCTargetDesc/RISCVELFStreamer.cpp b/llvm/lib/Target/RISCV/MCTargetDesc/RISCVELFStreamer.cpp",
+      "diff --git a/llvm/test/CodeGen/RISCV/option-relax-relocation.ll b/llvm/test/CodeGen/RISCV/option-relax-relocation.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:51",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Store RVC and TSO ELF flags explicitly in",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/6afda56faa6260cff4e6e9264226737d96d952c1.patch?format=TEXT",
+    "relativePatchPath": "cherry/6afda56faa6260cff4e6e9264226737d96d952c1.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:52",
+    "tag": "ndk-r27d",
+    "label": "[RISCV] Support TLSDESC in the RISC-V backend (#66915)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/03a61d34ebf4f8eeaa6861bec3ab39c75bb41778.patch?format=TEXT",
+    "relativePatchPath": "cherry/03a61d34ebf4f8eeaa6861bec3ab39c75bb41778.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:53",
+    "tag": "ndk-r27d",
+    "label": "[SCCP] Check whether the default case is reachable (#76295)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/d218092543b3f9ba2204d7c8fe5ac70befa3d772.patch?format=TEXT",
+    "relativePatchPath": "cherry/d218092543b3f9ba2204d7c8fe5ac70befa3d772.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 7330,
+    "sha256": "6c38d11babfa87d476d090445b57d428673b0824facd43e76d7391cd451b6c54",
+    "gitBlobSHA1": "b45164d87a4706bcecbd6b355ebb2912c269d170",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/d218092543b3f9ba2204d7c8fe5ac70befa3d772.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Transforms/Utils/SCCPSolver.cpp b/llvm/lib/Transforms/Utils/SCCPSolver.cpp",
+      "diff --git a/llvm/test/Transforms/SCCP/switch.ll b/llvm/test/Transforms/SCCP/switch.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:54",
+    "tag": "ndk-r27d",
+    "label": "[SLP]Fix a crash for reduced values with minbitwidth, which",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/39b2104b4a4e0990eddc763eab99b28e8deab953.patch?format=TEXT",
+    "relativePatchPath": "cherry/39b2104b4a4e0990eddc763eab99b28e8deab953.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:55",
+    "tag": "ndk-r27d",
+    "label": "[X86][AVX512BF16] Add a few missing insert/extract patterns",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/55c466da2f2f0baa509eb709b8de8926bd498b9b.patch?format=TEXT",
+    "relativePatchPath": "cherry/55c466da2f2f0baa509eb709b8de8926bd498b9b.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 5992,
+    "sha256": "c3b2563469be895ac7046dbece324eab3b3707644bb4cdda8e3799fe348e92be",
+    "gitBlobSHA1": "0ada3d8d80b10ea54c27bed813f762b2bf466ef3",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/55c466da2f2f0baa509eb709b8de8926bd498b9b.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/X86/X86InstrAVX512.td b/llvm/lib/Target/X86/X86InstrAVX512.td",
+      "diff --git a/llvm/test/CodeGen/X86/bfloat.ll b/llvm/test/CodeGen/X86/bfloat.ll"
+    ]
+  },
+  {
+    "id": "ndk-r27d:56",
+    "tag": "ndk-r27d",
+    "label": "[clang] Refactor target attribute mangling. (#81893)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/b42b7c8a123863d86db9abc8b6a1340b920f6573.patch?format=TEXT",
+    "relativePatchPath": "cherry/b42b7c8a123863d86db9abc8b6a1340b920f6573.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 12080,
+    "sha256": "e9dd1c84671526ce1eb7660e7419f7b1215d89184e1a9bf1caa7ec05cd653bf0",
+    "gitBlobSHA1": "bfda73efcf15f9aae0356ac5b66322e32d9de5a8",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/b42b7c8a123863d86db9abc8b6a1340b920f6573.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/CodeGen/ABIInfo.cpp b/clang/lib/CodeGen/ABIInfo.cpp",
+      "diff --git a/clang/lib/CodeGen/ABIInfo.h b/clang/lib/CodeGen/ABIInfo.h",
+      "diff --git a/clang/lib/CodeGen/CodeGenModule.cpp b/clang/lib/CodeGen/CodeGenModule.cpp",
+      "diff --git a/clang/lib/CodeGen/Targets/AArch64.cpp b/clang/lib/CodeGen/Targets/AArch64.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:57",
+    "tag": "ndk-r27d",
+    "label": "[clang][CodeGen] Allow `memcpy` replace with trivial auto var",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/b433076fcbacba8a3b91446390bbea5843322bcd.patch?format=TEXT",
+    "relativePatchPath": "cherry/b433076fcbacba8a3b91446390bbea5843322bcd.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:58",
+    "tag": "ndk-r27d",
+    "label": "[clang][Sema] Fix a CTAD regression after 42239d2e9 (#86914)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/0f6ed4c394fd8f843029f6919230bf8df8618529.patch?format=TEXT",
+    "relativePatchPath": "cherry/0f6ed4c394fd8f843029f6919230bf8df8618529.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:59",
+    "tag": "ndk-r27d",
+    "label": "[clang][Sema] Skip the RequiresExprBodyDecls for lambda",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/9fe5aa31eccff49632e40bcdad6e64fc00190889.patch?format=TEXT",
+    "relativePatchPath": "cherry/9fe5aa31eccff49632e40bcdad6e64fc00190889.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 3890,
+    "sha256": "c0a7d203855a59e513fc7801a9e3ce3b301114d9c4ef7e059885f32be1007ceb",
+    "gitBlobSHA1": "c00cc15f52437654be2a44e6fe004c55c0fa5ccd",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/9fe5aa31eccff49632e40bcdad6e64fc00190889.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Sema/TreeTransform.h b/clang/lib/Sema/TreeTransform.h",
+      "diff --git a/clang/test/SemaTemplate/concepts-lambda.cpp b/clang/test/SemaTemplate/concepts-lambda.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:60",
+    "tag": "ndk-r27d",
+    "label": "[clang][fmv] Drop .ifunc from target_version's entrypoint's",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/99d743320c5dddb780f1fb2f49414b10e6a52a05.patch?format=TEXT",
+    "relativePatchPath": "cherry/99d743320c5dddb780f1fb2f49414b10e6a52a05.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:61",
+    "tag": "ndk-r27d",
+    "label": "[libc++] Fix incorrect macro push/pop in unwrap_iter.h",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/7b4622514d232ce5f7110dd8b20d90e81127c467.patch?format=TEXT",
+    "relativePatchPath": "cherry/7b4622514d232ce5f7110dd8b20d90e81127c467.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:62",
+    "tag": "ndk-r27d",
+    "label": "[libc++][regex] Correctly adjust match prefix for zero-length",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/e9adcc488f96a9f2b8c4344f5e3c7ca6639b9562.patch?format=TEXT",
+    "relativePatchPath": "cherry/e9adcc488f96a9f2b8c4344f5e3c7ca6639b9562.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:63",
+    "tag": "ndk-r27d",
+    "label": "[libunwind][WebAssembly] Fix libunwind.cpp guard (#78230)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/4967d98eda48bed4a6f382d240f5a33177bc654c.patch?format=TEXT",
+    "relativePatchPath": "cherry/4967d98eda48bed4a6f382d240f5a33177bc654c.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:64",
+    "tag": "ndk-r27d",
+    "label": "[lld] [MTE] Allow android note for static executables.",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/a831a21e4d8d41b044edaf61a90debb2ad756bda.patch?format=TEXT",
+    "relativePatchPath": "cherry/a831a21e4d8d41b044edaf61a90debb2ad756bda.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:65",
+    "tag": "ndk-r27d",
+    "label": "[lld][ELF] Allow Arm PC-relative relocations in PIC links",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/d21fb06a6e36048e6729c51c351ff8c4055e8381.patch?format=TEXT",
+    "relativePatchPath": "cherry/d21fb06a6e36048e6729c51c351ff8c4055e8381.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 2264,
+    "sha256": "e0bd90f9b63da392795993ea315549159edfc00c8af8a8a0f90347f6f8f58f76",
+    "gitBlobSHA1": "576628b077c046c70dd7179f2e2903edc92ab1f1",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/d21fb06a6e36048e6729c51c351ff8c4055e8381.patch",
+    "diffHeaders": [
+      "diff --git a/lld/ELF/Relocations.cpp b/lld/ELF/Relocations.cpp",
+      "diff --git a/lld/test/ELF/arm-adr.s b/lld/test/ELF/arm-adr.s"
+    ]
+  },
+  {
+    "id": "ndk-r27d:66",
+    "tag": "ndk-r27d",
+    "label": "[lldb][NFC] Fix compilation issue on windows (#76453)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/f3f4387e02b0ed637b5d843e8937116334329a65.patch?format=TEXT",
+    "relativePatchPath": "cherry/f3f4387e02b0ed637b5d843e8937116334329a65.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1800,
+    "sha256": "0be4ac17c9972aed69bc89983b064efccaed7909dc7d64d16aaf7336863982d1",
+    "gitBlobSHA1": "6f068b01602f973a224e153b0ba9731de699d98b",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/f3f4387e02b0ed637b5d843e8937116334329a65.patch",
+    "diffHeaders": [
+      "diff --git a/lldb/source/Plugins/Process/Windows/Common/TargetThreadWindows.cpp b/lldb/source/Plugins/Process/Windows/Common/TargetThreadWindows.cpp",
+      "diff --git a/lldb/unittests/Thread/ThreadTest.cpp b/lldb/unittests/Thread/ThreadTest.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:67",
+    "tag": "ndk-r27d",
+    "label": "[llvm-objcopy] Add --remove-symbol-prefix (#79415)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/1b87ebce924e507cbc27c2e0dc623941d16388c9.patch?format=TEXT",
+    "relativePatchPath": "cherry/1b87ebce924e507cbc27c2e0dc623941d16388c9.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 8686,
+    "sha256": "7f452ddf26a78cb66ee06d0efa0de389f77b03a88fc8f04efbb0451a8a0bdb41",
+    "gitBlobSHA1": "11fe5adfd0c4ef37c23d03affcb48cf7fcc82a2d",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/1b87ebce924e507cbc27c2e0dc623941d16388c9.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/docs/CommandGuide/llvm-objcopy.rst b/llvm/docs/CommandGuide/llvm-objcopy.rst",
+      "diff --git a/llvm/include/llvm/ObjCopy/CommonConfig.h b/llvm/include/llvm/ObjCopy/CommonConfig.h",
+      "diff --git a/llvm/lib/ObjCopy/ConfigManager.cpp b/llvm/lib/ObjCopy/ConfigManager.cpp",
+      "diff --git a/llvm/lib/ObjCopy/ELF/ELFObjcopy.cpp b/llvm/lib/ObjCopy/ELF/ELFObjcopy.cpp",
+      "diff --git a/llvm/test/tools/llvm-objcopy/ELF/prefix-symbols-remove.test b/llvm/test/tools/llvm-objcopy/ELF/prefix-symbols-remove.test",
+      "diff --git a/llvm/tools/llvm-objcopy/ObjcopyOptions.cpp b/llvm/tools/llvm-objcopy/ObjcopyOptions.cpp",
+      "diff --git a/llvm/tools/llvm-objcopy/ObjcopyOpts.td b/llvm/tools/llvm-objcopy/ObjcopyOpts.td"
+    ]
+  },
+  {
+    "id": "ndk-r27d:68",
+    "tag": "ndk-r27d",
+    "label": "avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/avoid-fifo-socket-hardlink-in-libcxx-tests.patch?format=TEXT",
+    "relativePatchPath": "avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 14167,
+    "sha256": "a2ef134dd468076fe3a18a97ca42dce8a17919e66491182b0f470c1bf5299769",
+    "gitBlobSHA1": "33ba528832124c580830144438b95c58a9d3fae8",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "diffHeaders": [
+      "diff --git a/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_size.pass.cpp b/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_size.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_type_obs.pass.cpp b/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_type_obs.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/hard_link_count.pass.cpp b/libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/hard_link_count.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy/copy.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy/copy.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy_file/copy_file.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy_file/copy_file.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.create_hard_link/create_hard_link.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.create_hard_link/create_hard_link.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.equivalent/equivalent.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.equivalent/equivalent.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.hard_lk_ct/hard_link_count.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.hard_lk_ct/hard_link_count.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.is_empty/is_empty.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.is_empty/is_empty.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.status/status.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.status/status.pass.cpp",
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.symlink_status/symlink_status.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.symlink_status/symlink_status.pass.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:69",
+    "tag": "ndk-r27d",
+    "label": "avoid-triggering-fdsan-in-filebuf-test.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/avoid-triggering-fdsan-in-filebuf-test.patch?format=TEXT",
+    "relativePatchPath": "avoid-triggering-fdsan-in-filebuf-test.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:70",
+    "tag": "ndk-r27d",
+    "label": "bionic-includes-plus-sign-for-nan-v2.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/bionic-includes-plus-sign-for-nan-v2.patch?format=TEXT",
+    "relativePatchPath": "bionic-includes-plus-sign-for-nan-v2.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 3035,
+    "sha256": "c14fe8535d167cb1c619e2890109a862c5289c457500b16854c56a8b15fab8bb",
+    "gitBlobSHA1": "3085382ec385904ce9f4b08e70bd33c020f43ccf",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/bionic-includes-plus-sign-for-nan-v2.patch",
+    "diffHeaders": [
+      "diff --git a/libcxx/test/std/localization/locale.categories/category.numeric/locale.nm.put/facet.num.put.members/put_long_double.pass.cpp b/libcxx/test/std/localization/locale.categories/category.numeric/locale.nm.put/facet.num.put.members/put_long_double.pass.cpp",
+      "diff --git a/libcxx/utils/libcxx/test/features.py b/libcxx/utils/libcxx/test/features.py"
+    ]
+  },
+  {
+    "id": "ndk-r27d:71",
+    "tag": "ndk-r27d",
+    "label": "clang driver: enable fast unaligned access for Android on",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/cherry/b20360abeb3a80281dc082f1e093abd13cb1ee4c.patch?format=TEXT",
+    "relativePatchPath": "cherry/b20360abeb3a80281dc082f1e093abd13cb1ee4c.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r27d:72",
+    "tag": "ndk-r27d",
+    "label": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch?format=TEXT",
+    "relativePatchPath": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1362,
+    "sha256": "3e1e2a5cec77206efb39c0c90d5ab692abbfb26d9f169fed8025ae7a76e1491c",
+    "gitBlobSHA1": "002b51a2ac695e9acb1a377adaa0532807f6275c",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "diffHeaders": [
+      "diff --git a/compiler-rt/cmake/Modules/CompilerRTUtils.cmake b/compiler-rt/cmake/Modules/CompilerRTUtils.cmake"
+    ]
+  },
+  {
+    "id": "ndk-r27d:73",
+    "tag": "ndk-r27d",
+    "label": "disable-symlink-resolve-test-on-android.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/disable-symlink-resolve-test-on-android.patch?format=TEXT",
+    "relativePatchPath": "disable-symlink-resolve-test-on-android.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 2736,
+    "sha256": "43da3d11f2b648967ddc12a72a88bee2506be3c81629245faacccbb138b61b53",
+    "gitBlobSHA1": "d570988238d44e5f91b36fc65458f0a82384f131",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/disable-symlink-resolve-test-on-android.patch",
+    "diffHeaders": [
+      "diff --git a/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.permissions/permissions.pass.cpp b/libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.permissions/permissions.pass.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r27d:74",
+    "tag": "ndk-r27d",
+    "label": "hide-locale-lit-features-for-bionic-v2.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/hide-locale-lit-features-for-bionic-v2.patch?format=TEXT",
+    "relativePatchPath": "hide-locale-lit-features-for-bionic-v2.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 1606,
+    "sha256": "8a2631e1b4eefd87f5f580f65bb901e509fbafef7f84cd723bfea14ecc0df29e",
+    "gitBlobSHA1": "326a9c5c62cb0d822ad530f69c7b98b0f28a5bf6",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/hide-locale-lit-features-for-bionic-v2.patch",
+    "diffHeaders": [
+      "diff --git a/libcxx/utils/libcxx/test/dsl.py b/libcxx/utils/libcxx/test/dsl.py"
+    ]
+  },
+  {
+    "id": "ndk-r27d:75",
+    "tag": "ndk-r27d",
+    "label": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/patches/move-cxa-demangle-into-libcxxdemangle.patch?format=TEXT",
+    "relativePatchPath": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "status": 200,
+    "bytes": 3857,
+    "sha256": "6a8879953b2133491d4bc6be97332d4d031b837e0175227969f4ef7f7d6ef8b9",
+    "gitBlobSHA1": "21533ee8f77a251f9143f16c9043f8a68e419dae",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/move-cxa-demangle-into-libcxxdemangle.patch",
+    "diffHeaders": [
+      "diff --git a/libcxxabi/CMakeLists.txt b/libcxxabi/CMakeLists.txt",
+      "diff --git a/libcxxabi/src/CMakeLists.txt b/libcxxabi/src/CMakeLists.txt"
+    ]
+  },
+  {
+    "id": "ndk-r30:1",
+    "tag": "ndk-r30",
+    "label": "Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/Add-cmake-c-cxx-asm-linker-flags-v2.patch?format=TEXT",
+    "relativePatchPath": "Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 1712,
+    "sha256": "e30dd1381197034099f6b84bf1a47f5ff2cf4c33948fe84cd55b1004f819fb91",
+    "gitBlobSHA1": "aed151755249fe8f9fe814449727dcdf247fdb46",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+    "diffHeaders": [
+      "diff --git a/bolt/CMakeLists.txt b/bolt/CMakeLists.txt"
+    ]
+  },
+  {
+    "id": "ndk-r30:2",
+    "tag": "ndk-r30",
+    "label": "Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/Add-stubs-and-headers-for-nl_types-APIs-v2.patch?format=TEXT",
+    "relativePatchPath": "Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 6195,
+    "sha256": "8d348f8c2fb63952d587d3d46fd2cda6abfe5a2a9bc82a52ab4d2e5fc711e460",
+    "gitBlobSHA1": "04ceae749fe70ddacd1a03fe7549dee456e858b4",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+    "diffHeaders": [
+      "diff --git a/openmp/runtime/src/CMakeLists.txt b/openmp/runtime/src/CMakeLists.txt",
+      "diff --git a/openmp/runtime/src/android/nl_types.h b/openmp/runtime/src/android/nl_types.h",
+      "diff --git a/openmp/runtime/src/android/nltypes_stubs.cpp b/openmp/runtime/src/android/nltypes_stubs.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:3",
+    "tag": "ndk-r30",
+    "label": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch?format=TEXT",
+    "relativePatchPath": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 801,
+    "sha256": "f296dee815f856aefb4eefb736588cb9441940742c2d03d197a7f5c9e675695f",
+    "gitBlobSHA1": "b5536f2236fa15c64d8eef9ba7d9acb43ada1e1f",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "diffHeaders": [
+      "diff --git a/bolt/runtime/instr.cpp b/bolt/runtime/instr.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:4",
+    "tag": "ndk-r30",
+    "label": "Cap IntRange::Width to MaxWidth (#145356)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/5bbe1536dfa6f1dce8737e466c209c553d614e50.patch?format=TEXT",
+    "relativePatchPath": "cherry/5bbe1536dfa6f1dce8737e466c209c553d614e50.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 2689,
+    "sha256": "61eb9fcd59022b15a30d8d7bb45254a27b968a966c7e0502b0091db0eb1a4783",
+    "gitBlobSHA1": "2c434b5391d2de9ba5affeb76daaaeeee0d83dbf",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/5bbe1536dfa6f1dce8737e466c209c553d614e50.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Sema/SemaChecking.cpp b/clang/lib/Sema/SemaChecking.cpp",
+      "diff --git a/clang/test/Sema/implicit-int-conversion-on-int.c b/clang/test/Sema/implicit-int-conversion-on-int.c"
+    ]
+  },
+  {
+    "id": "ndk-r30:5",
+    "tag": "ndk-r30",
+    "label": "Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/Disable-integer-sanitizer-for-__libcpp_blsr.patch?format=TEXT",
+    "relativePatchPath": "Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 1146,
+    "sha256": "83c392d2d95339b7988fb29d041aa9493c65ebd4a2ebf50a77102eaccd739d99",
+    "gitBlobSHA1": "3c51f17d513a6d2f583574773c3d795a80d52fe9",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "diffHeaders": [
+      "diff --git a/libcxx/include/__bit/blsr.h b/libcxx/include/__bit/blsr.h"
+    ]
+  },
+  {
+    "id": "ndk-r30:6",
+    "tag": "ndk-r30",
+    "label": "Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/Disable-std-utilities-charconv-charconv.msvc-test.pa.patch?format=TEXT",
+    "relativePatchPath": "Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 1005,
+    "sha256": "a9883b3ca03633dd8fa375d53a163a60e1f79e3f4b9502a04cd069a7d3d0f0fd",
+    "gitBlobSHA1": "8b60dd8c931413e788c4908c530e6cb37f6fa22c",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "diffHeaders": [
+      "diff --git a/libcxx/test/std/utilities/charconv/charconv.msvc/test.pass.cpp b/libcxx/test/std/utilities/charconv/charconv.msvc/test.pass.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:7",
+    "tag": "ndk-r30",
+    "label": "Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/Disable-unsigned-integer-overflow-checks-for-s.patch?format=TEXT",
+    "relativePatchPath": "Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 1136,
+    "sha256": "6ac890d3e831093171068315214038ddd27ea974006bff2bccb314ccd5976977",
+    "gitBlobSHA1": "e13a088834336e02091a3914e4c643f1aa7c2ba7",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "diffHeaders": [
+      "diff --git a/libcxx/include/__algorithm/sort.h b/libcxx/include/__algorithm/sort.h"
+    ]
+  },
+  {
+    "id": "ndk-r30:8",
+    "tag": "ndk-r30",
+    "label": "Disable-vfork-fork-events-v2.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/Disable-vfork-fork-events-v2.patch?format=TEXT",
+    "relativePatchPath": "Disable-vfork-fork-events-v2.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 1310,
+    "sha256": "af5a23bc75c5f59927341750139b639815abf882817cda492780384b26812d7f",
+    "gitBlobSHA1": "c11ad4a54243b47bc23aee826bb7cb33bcce2696",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-vfork-fork-events-v2.patch",
+    "diffHeaders": [
+      "diff --git a/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunicationClient.cpp b/lldb/source/Plugins/Process/gdb-remote/GDBRemoteCommunicationClient.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:9",
+    "tag": "ndk-r30",
+    "label": "Fix an error introduced in #138518 (#142988)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/f53216793e15588d65601196b7a0625f73c12cea.patch?format=TEXT",
+    "relativePatchPath": "cherry/f53216793e15588d65601196b7a0625f73c12cea.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:10",
+    "tag": "ndk-r30",
+    "label": "Fix restoring callee-saves from FP with hazard padding (#143371)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/d8e8ab79773f739c602c5869f80c6c5b5962c558.patch?format=TEXT",
+    "relativePatchPath": "cherry/d8e8ab79773f739c602c5869f80c6c5b5962c558.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 75418,
+    "sha256": "ba3ef7b95149a39d9a8b92826e33d1516e8b307b2cd2a0debb041821067a5178",
+    "gitBlobSHA1": "1e6b4391831c0f178eab6f385987644c0f66a703",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/d8e8ab79773f739c602c5869f80c6c5b5962c558.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/AArch64/AArch64FrameLowering.cpp b/llvm/lib/Target/AArch64/AArch64FrameLowering.cpp",
+      "diff --git a/llvm/test/CodeGen/AArch64/stack-hazard.ll b/llvm/test/CodeGen/AArch64/stack-hazard.ll"
+    ]
+  },
+  {
+    "id": "ndk-r30:11",
+    "tag": "ndk-r30",
+    "label": "Fix-for-x86-ndk-sysroot-define.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/Fix-for-x86-ndk-sysroot-define.patch?format=TEXT",
+    "relativePatchPath": "Fix-for-x86-ndk-sysroot-define.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:12",
+    "tag": "ndk-r30",
+    "label": "Reapply \"IR: Remove uselist for constantdata (#137313)\"",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/9383fb23e18bb983d0024fb956a0a724ef9eb03d.patch?format=TEXT",
+    "relativePatchPath": "cherry/9383fb23e18bb983d0024fb956a0a724ef9eb03d.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:13",
+    "tag": "ndk-r30",
+    "label": "Remove delayed typo expressions (#143423)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/9eef4d1c5fa6b1bcbbe675c14ca8301d5d346f7b.patch?format=TEXT",
+    "relativePatchPath": "cherry/9eef4d1c5fa6b1bcbbe675c14ca8301d5d346f7b.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:14",
+    "tag": "ndk-r30",
+    "label": "Revert \"[HIP] use offload wrapper for non-device-only non-rdc",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/f5e499a3383c1e3b9f60e60151075e8d9c1c3166.patch?format=TEXT",
+    "relativePatchPath": "cherry/f5e499a3383c1e3b9f60e60151075e8d9c1c3166.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:15",
+    "tag": "ndk-r30",
+    "label": "Revert \"[clang][Dependency Scanning] Report What a Module",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/8f4fd864033601aad99a10c2b878769b84df7537.patch?format=TEXT",
+    "relativePatchPath": "cherry/8f4fd864033601aad99a10c2b878769b84df7537.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:16",
+    "tag": "ndk-r30",
+    "label": "Revert \"[lld] Merge equivalent symbols found during ICF",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/fd3fecfc0936703f2715fe6fea890e81b0b3c2ac.patch?format=TEXT",
+    "relativePatchPath": "cherry/fd3fecfc0936703f2715fe6fea890e81b0b3c2ac.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 9663,
+    "sha256": "e095bef60479b0c5b3c778fc9d0b6b850047991a6a9451c2db01c12270040592",
+    "gitBlobSHA1": "36b95e1742b525015c3b10ba8be02d4b8c2fa1f1",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/fd3fecfc0936703f2715fe6fea890e81b0b3c2ac.patch",
+    "diffHeaders": [
+      "diff --git a/lld/ELF/ICF.cpp b/lld/ELF/ICF.cpp",
+      "diff --git a/lld/ELF/SymbolTable.cpp b/lld/ELF/SymbolTable.cpp",
+      "diff --git a/lld/ELF/SymbolTable.h b/lld/ELF/SymbolTable.h",
+      "diff --git a/lld/test/ELF/aarch64-got-merging-icf.s b/lld/test/ELF/aarch64-got-merging-icf.s",
+      "diff --git a/lld/test/ELF/icf-preemptible.s b/lld/test/ELF/icf-preemptible.s"
+    ]
+  },
+  {
+    "id": "ndk-r30:17",
+    "tag": "ndk-r30",
+    "label": "Revert global widening transform (#144652)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/183acdd27985afd332463e3d9fd4a2ca46d85cf1-v2.patch?format=TEXT",
+    "relativePatchPath": "cherry/183acdd27985afd332463e3d9fd4a2ca46d85cf1-v2.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:18",
+    "tag": "ndk-r30",
+    "label": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch?format=TEXT",
+    "relativePatchPath": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:19",
+    "tag": "ndk-r30",
+    "label": "Revert-libc-Don-t-implement-stdatomic.h-before-C-23-v3.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/Revert-libc-Don-t-implement-stdatomic.h-before-C-23-v3.patch?format=TEXT",
+    "relativePatchPath": "Revert-libc-Don-t-implement-stdatomic.h-before-C-23-v3.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:20",
+    "tag": "ndk-r30",
+    "label": "ThinLTOBitcodeWriter: Emit __cfi_check to full LTO part of",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/ff85dbdf6b399eac7bffa13e579f0f5e6edac3c0.patch?format=TEXT",
+    "relativePatchPath": "cherry/ff85dbdf6b399eac7bffa13e579f0f5e6edac3c0.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 3767,
+    "sha256": "14d2fa0fd9dfb5e1f567e94da2508f5eb8c751532922ab6a1aa5661462cd28d8",
+    "gitBlobSHA1": "7a6f4a3b77f7c4e90545396a959384c7ef995af0",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/ff85dbdf6b399eac7bffa13e579f0f5e6edac3c0.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp b/llvm/lib/Transforms/IPO/ThinLTOBitcodeWriter.cpp",
+      "diff --git a/llvm/test/Transforms/ThinLTOBitcodeWriter/cfi-check.ll b/llvm/test/Transforms/ThinLTOBitcodeWriter/cfi-check.ll"
+    ]
+  },
+  {
+    "id": "ndk-r30:21",
+    "tag": "ndk-r30",
+    "label": "ThinLTOBitcodeWriter: Split modules with __cfi_check and no",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/43c85afce9c25141de79da6731b1d5f8bb2491b1.patch?format=TEXT",
+    "relativePatchPath": "cherry/43c85afce9c25141de79da6731b1d5f8bb2491b1.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:22",
+    "tag": "ndk-r30",
+    "label": "ValueMapper: Delete unused initializers of replaced appending",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/1f38d49ebe96417e368a567efa4d650b8a9ac30f.patch?format=TEXT",
+    "relativePatchPath": "cherry/1f38d49ebe96417e368a567efa4d650b8a9ac30f.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:23",
+    "tag": "ndk-r30",
+    "label": "[AArch64] Ensure the LR is preserved if we must call",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/af7166a3f126ce4e4d2a05eccc1358bd0427cf0f.patch?format=TEXT",
+    "relativePatchPath": "cherry/af7166a3f126ce4e4d2a05eccc1358bd0427cf0f.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:24",
+    "tag": "ndk-r30",
+    "label": "[AArch64] Restrict .variant_pcs directive to ELF targets",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/3aaf44f95de24339d73c0093576a4a3cc42404ad.patch?format=TEXT",
+    "relativePatchPath": "cherry/3aaf44f95de24339d73c0093576a4a3cc42404ad.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:25",
+    "tag": "ndk-r30",
+    "label": "[AArch64][SME] Disable tail calls for callees that require",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/bfb54e8ba6262a509343985c018f9a8d52963734.patch?format=TEXT",
+    "relativePatchPath": "cherry/bfb54e8ba6262a509343985c018f9a8d52963734.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:26",
+    "tag": "ndk-r30",
+    "label": "[AArch64][SME] Fix accessing the emergency spill slot with",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/b5cf03033251a642b184b2e0ea6bdac171c17702.patch?format=TEXT",
+    "relativePatchPath": "cherry/b5cf03033251a642b184b2e0ea6bdac171c17702.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:27",
+    "tag": "ndk-r30",
+    "label": "[AArch64][SME] Precommit tests for LUT4I `Chain` issues (NFC)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/cd0f560cc7e88bffedc4c34e3eb3efbf00dcb3ef.patch?format=TEXT",
+    "relativePatchPath": "cherry/cd0f560cc7e88bffedc4c34e3eb3efbf00dcb3ef.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:28",
+    "tag": "ndk-r30",
+    "label": "[AArch64][SME] Preserve `Chain` when selecting multi-vector",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/031fb7414fd6edf20e0cd7f7783666313169a0d2.patch?format=TEXT",
+    "relativePatchPath": "cherry/031fb7414fd6edf20e0cd7f7783666313169a0d2.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:29",
+    "tag": "ndk-r30",
+    "label": "[ARM] Add tablegen patterns for vsdot and vudot high index.",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/2f43659011be6287bb57f2c43f988727c100ccc2.patch?format=TEXT",
+    "relativePatchPath": "cherry/2f43659011be6287bb57f2c43f988727c100ccc2.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 3956,
+    "sha256": "18d3d2ab86c0ccd99401a183b3098fb95299e8cf4211f8b99bcea5789c8092b2",
+    "gitBlobSHA1": "c096424d138701f95596d93f1a1fc39e56141de6",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/2f43659011be6287bb57f2c43f988727c100ccc2.patch",
+    "diffHeaders": [
+      "diff --git a/llvm/lib/Target/ARM/ARMInstrNEON.td b/llvm/lib/Target/ARM/ARMInstrNEON.td",
+      "diff --git a/llvm/test/CodeGen/ARM/neon-dot-product.ll b/llvm/test/CodeGen/ARM/neon-dot-product.ll"
+    ]
+  },
+  {
+    "id": "ndk-r30:30",
+    "tag": "ndk-r30",
+    "label": "[ARM] Update and extend neon-dot-product.ll. NFC",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/7635474d26f82e7fd109746f754564ade78d1a51.patch?format=TEXT",
+    "relativePatchPath": "cherry/7635474d26f82e7fd109746f754564ade78d1a51.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:31",
+    "tag": "ndk-r30",
+    "label": "[BACKPORT] [lldb][lldb-server] Fix zip file lookup ignoring last entry",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/5ed875a06cb0a6d543f719ad72df2a1660e42cb9.patch?format=TEXT",
+    "relativePatchPath": "cherry/5ed875a06cb0a6d543f719ad72df2a1660e42cb9.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:32",
+    "tag": "ndk-r30",
+    "label": "[C] Fix a false-positive with tentative defn compat (#139738)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/e3f87e15910a5f1c5552fc3ef57e7dda3f68901a.patch?format=TEXT",
+    "relativePatchPath": "cherry/e3f87e15910a5f1c5552fc3ef57e7dda3f68901a.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:33",
+    "tag": "ndk-r30",
+    "label": "[C] Handle comma operator for implicit int->enum conversions",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/b59ab701e94cce455a53358cbe5082a3efb58fbf.patch?format=TEXT",
+    "relativePatchPath": "cherry/b59ab701e94cce455a53358cbe5082a3efb58fbf.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:34",
+    "tag": "ndk-r30",
+    "label": "[Clang] Fix a regression introduced by #140073 (#140288)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/efa28338d858e1ea2bf705d50a0404bc602c8fe1.patch?format=TEXT",
+    "relativePatchPath": "cherry/efa28338d858e1ea2bf705d50a0404bc602c8fe1.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:35",
+    "tag": "ndk-r30",
+    "label": "[Clang] Fix an assertion in the resolution of perfect matches",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/090f46d8d246762401c41c5486dde299382d6c90.patch?format=TEXT",
+    "relativePatchPath": "cherry/090f46d8d246762401c41c5486dde299382d6c90.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:36",
+    "tag": "ndk-r30",
+    "label": "[Clang] Preserve CXXParenListInitExpr in TreeTransform.",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/13926e149081ca2771bdea7c08c07d92d87f7818.patch?format=TEXT",
+    "relativePatchPath": "cherry/13926e149081ca2771bdea7c08c07d92d87f7818.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:37",
+    "tag": "ndk-r30",
+    "label": "[Clang] Separate implicit int conversion on negation sign to",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/0ada5c7b1a52afb668bc42dd2d5573e5805433d1.patch?format=TEXT",
+    "relativePatchPath": "cherry/0ada5c7b1a52afb668bc42dd2d5573e5805433d1.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:38",
+    "tag": "ndk-r30",
+    "label": "[CodeGenPrepare] Make sure instruction get from SunkAddrs is",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/59c6d70ed8120b8864e5f796e2bf3de5518a0ef0.patch?format=TEXT",
+    "relativePatchPath": "cherry/59c6d70ed8120b8864e5f796e2bf3de5518a0ef0.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:39",
+    "tag": "ndk-r30",
+    "label": "[ELF,RISCV] Fix oscillation due to call relaxation",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/8957e64a20fc7f4277565c6cfe3e555c119783ce.patch?format=TEXT",
+    "relativePatchPath": "cherry/8957e64a20fc7f4277565c6cfe3e555c119783ce.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:40",
+    "tag": "ndk-r30",
+    "label": "[ELF] Postpone ASSERT error",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/5859863bab7fb1cd98b6028293cba6ba25f7d514.patch?format=TEXT",
+    "relativePatchPath": "cherry/5859863bab7fb1cd98b6028293cba6ba25f7d514.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:41",
+    "tag": "ndk-r30",
+    "label": "[HWASan] fix missing BTI attribute on personality function",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/a76cf062a57097ad7971325551854bd5f3d38d94.patch?format=TEXT",
+    "relativePatchPath": "cherry/a76cf062a57097ad7971325551854bd5f3d38d94.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:42",
+    "tag": "ndk-r30",
+    "label": "[InstSimplify] Fix Compilation Hang in",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/4a6adf42d80a91f79c9c7c8d0c7801f9575d40dd.patch?format=TEXT",
+    "relativePatchPath": "cherry/4a6adf42d80a91f79c9c7c8d0c7801f9575d40dd.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:43",
+    "tag": "ndk-r30",
+    "label": "[LoopIdiomVectorize] Fix FindFirstByte successors (#156945)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/2873d9fac550a248a1c62cfc106ac31fef84fa7d.patch?format=TEXT",
+    "relativePatchPath": "cherry/2873d9fac550a248a1c62cfc106ac31fef84fa7d.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:44",
+    "tag": "ndk-r30",
+    "label": "[analyzer] Harden RegionStoreManager::bindArray (#153177)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/8dd2846fcf7b0ad254f3768149d28fe87af9b15d.patch?format=TEXT",
+    "relativePatchPath": "cherry/8dd2846fcf7b0ad254f3768149d28fe87af9b15d.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:45",
+    "tag": "ndk-r30",
+    "label": "[clang] Don't evaluate the initializer of constexpr-unknown",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/97885213bd4507b204b050c3cd570e365d21cc7d.patch?format=TEXT",
+    "relativePatchPath": "cherry/97885213bd4507b204b050c3cd570e365d21cc7d.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:46",
+    "tag": "ndk-r30",
+    "label": "[clang] Fix nondeterminism in MemberPointerType (#137910)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/0764f65a7fb06703610b33a86ca79025fa4050a4.patch?format=TEXT",
+    "relativePatchPath": "cherry/0764f65a7fb06703610b33a86ca79025fa4050a4.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:47",
+    "tag": "ndk-r30",
+    "label": "[clang] Remove hasValue() check in",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/8b3d4bdf8bade1d1faa8ff3fcbdda7060f8b46d8-v2.patch?format=TEXT",
+    "relativePatchPath": "cherry/8b3d4bdf8bade1d1faa8ff3fcbdda7060f8b46d8-v2.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:48",
+    "tag": "ndk-r30",
+    "label": "[clang][ARM] Fix setting of MaxAtomicInlineWidth. (#151404)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/558277ae4db665bea93686db4b4538c1c2c0cf4d.patch?format=TEXT",
+    "relativePatchPath": "cherry/558277ae4db665bea93686db4b4538c1c2c0cf4d.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 5495,
+    "sha256": "d72598f4e8c4d26a905ab6ddb3065c0105aa0f6ff128d4fe332abaeba3558260",
+    "gitBlobSHA1": "64a042188fcb037acae5c07aadab1d4eeb60aebf",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/558277ae4db665bea93686db4b4538c1c2c0cf4d.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Basic/Targets/ARM.cpp b/clang/lib/Basic/Targets/ARM.cpp",
+      "diff --git a/clang/test/CodeGen/atomic-arm.c b/clang/test/CodeGen/atomic-arm.c",
+      "diff --git a/clang/test/CodeGen/pr45476.cpp b/clang/test/CodeGen/pr45476.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:49",
+    "tag": "ndk-r30",
+    "label": "[clang][Modules] Keep current-TU global-module-fragment",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/564b027db16dc14c2027cd5a2fbb8bf1d3877b85.patch?format=TEXT",
+    "relativePatchPath": "cherry/564b027db16dc14c2027cd5a2fbb8bf1d3877b85.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 4602,
+    "sha256": "4509bed41774da72d8654d3aaf0dd0c6970a042bc6847da265d7626c750ee477",
+    "gitBlobSHA1": "f516b614d9fbd2c880635d3abb07149e2593f221",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/564b027db16dc14c2027cd5a2fbb8bf1d3877b85.patch",
+    "diffHeaders": [
+      "diff --git a/clang/lib/Sema/SemaOverload.cpp b/clang/lib/Sema/SemaOverload.cpp",
+      "diff --git a/clang/test/Modules/gmf-internal-linkage-in-template.cppm b/clang/test/Modules/gmf-internal-linkage-in-template.cppm"
+    ]
+  },
+  {
+    "id": "ndk-r30:50",
+    "tag": "ndk-r30",
+    "label": "[compiler-rt][AArch64] Don't use x18 in __arm_sme_save",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch?format=TEXT",
+    "relativePatchPath": "cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 1365,
+    "sha256": "4eec14da6800f8f29669d996cc7ef9ddfe620980d17bd0d4753595e7167731b9",
+    "gitBlobSHA1": "8873c62b54b4613c540f92d2698566874d2e7a6e",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch",
+    "diffHeaders": [
+      "diff --git a/compiler-rt/lib/builtins/aarch64/sme-abi.S b/compiler-rt/lib/builtins/aarch64/sme-abi.S"
+    ]
+  },
+  {
+    "id": "ndk-r30:51",
+    "tag": "ndk-r30",
+    "label": "[libc++] Add tests for the ABI break introduced by switching",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/2a83cf5d0e592890f74c5d5ff4a30ae4cf54b61b.patch?format=TEXT",
+    "relativePatchPath": "cherry/2a83cf5d0e592890f74c5d5ff4a30ae4cf54b61b.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:52",
+    "tag": "ndk-r30",
+    "label": "[libc++] Expand Android libc++ test config files (#142846)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch?format=TEXT",
+    "relativePatchPath": "cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 5224,
+    "sha256": "5836dbd95212aa195eb0f86398b94196c9dcb324cb70cd0cb624ae57f8de50a9",
+    "gitBlobSHA1": "d4476f02f14944ab79ae775e08197b1cc503eadc",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch",
+    "diffHeaders": [
+      "diff --git a/libcxx/cmake/caches/AndroidNDK.cmake b/libcxx/cmake/caches/AndroidNDK.cmake",
+      "diff --git a/libcxx/test/configs/llvm-libc++-android-ndk.cfg.in b/libcxx/test/configs/llvm-libc++-android.cfg.in",
+      "diff --git a/libcxxabi/test/configs/llvm-libc++abi-android-ndk.cfg.in b/libcxxabi/test/configs/llvm-libc++abi-android.cfg.in"
+    ]
+  },
+  {
+    "id": "ndk-r30:53",
+    "tag": "ndk-r30",
+    "label": "[libc++] Fix ABI break introduced by switching to",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch?format=TEXT",
+    "relativePatchPath": "cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "status": 200,
+    "bytes": 32868,
+    "sha256": "5d72ce3c080ab4553d6ef992a32d98ab1794c310a37c1714dc16414a93409910",
+    "gitBlobSHA1": "5a2862d9d1764e04e235b28cf546a7498d29cd08",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch",
+    "diffHeaders": [
+      "diff --git a/libcxx/docs/ReleaseNotes/21.rst b/libcxx/docs/ReleaseNotes/21.rst",
+      "diff --git a/libcxx/include/__memory/compressed_pair.h b/libcxx/include/__memory/compressed_pair.h",
+      "diff --git a/libcxx/include/string b/libcxx/include/string",
+      "diff --git a/libcxx/test/libcxx/containers/associative/map/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/associative/map/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/associative/set/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/associative/set/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/associative/unord.map/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/associative/unord.map/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/associative/unord.set/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/associative/unord.set/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/sequences/deque/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/sequences/deque/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/sequences/list/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/sequences/list/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/sequences/vector.bool/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/sequences/vector.bool/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/libcxx/containers/sequences/vector/abi.compile.pass.cpp b/libcxx/test/libcxx/containers/sequences/vector/abi.compile.pass.cpp",
+      "diff --git a/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/default.pass.cpp b/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/default.pass.cpp",
+      "diff --git a/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/nullptr.pass.cpp b/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/nullptr.pass.cpp",
+      "diff --git a/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/pointer.pass.cpp b/libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/pointer.pass.cpp"
+    ]
+  },
+  {
+    "id": "ndk-r30:54",
+    "tag": "ndk-r30",
+    "label": "[libc++] Fix padding calculation for function reference types",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/769c42f4a552a75c8c38870ddc1b50d2ea874e4e.patch?format=TEXT",
+    "relativePatchPath": "cherry/769c42f4a552a75c8c38870ddc1b50d2ea874e4e.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:55",
+    "tag": "ndk-r30",
+    "label": "[libc++] Move std::abs into __math/abs.h (#139586)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/584cc376870505821b5ff0b0e80be85ee563ff0c.patch?format=TEXT",
+    "relativePatchPath": "cherry/584cc376870505821b5ff0b0e80be85ee563ff0c.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:56",
+    "tag": "ndk-r30",
+    "label": "[libc++] Update `__mbstate_t.h` to include path to Android's",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/5320cc50b6b4e3684ff4ba93a5c2c2429c09386b.patch?format=TEXT",
+    "relativePatchPath": "cherry/5320cc50b6b4e3684ff4ba93a5c2c2429c09386b.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:57",
+    "tag": "ndk-r30",
+    "label": "[libc][bazel] Re-enable memcpy prefetching on x86. (#138945)",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/cherry/98d26b8f67e6abdac24591138f07dc34e7f0e36e.patch?format=TEXT",
+    "relativePatchPath": "cherry/98d26b8f67e6abdac24591138f07dc34e7f0e36e.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:58",
+    "tag": "ndk-r30",
+    "label": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch?format=TEXT",
+    "relativePatchPath": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "id": "ndk-r30:59",
+    "tag": "ndk-r30",
+    "label": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "sourceInfoPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/patches/move-cxa-demangle-into-libcxxdemangle.patch?format=TEXT",
+    "relativePatchPath": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  }
+]

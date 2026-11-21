@@ -1,0 +1,256 @@
+{
+  "archives": [
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT.aar",
+      "prefix": "classes.jar!/",
+      "fileMembers": 13,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "9e2a074481ce128f56369cf389d8114cbc04dab06b435dd30ef70d79c4993466",
+      "uncompressedPayloadBytes": 31651,
+      "uncompressedPayloadSHA256": "774755e52e3fd156c1ab6eeae29ef136944576374dd862385ec9f40a362ef9f4",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT.aar",
+      "prefix": "",
+      "fileMembers": 4,
+      "directoryMembers": 0,
+      "orderedMemberListSHA256": "c3f932c8b4b4aba7e080418c2ef3bf4275eadd41233845c63ee1be736e796f92",
+      "uncompressedPayloadBytes": 17490,
+      "uncompressedPayloadSHA256": "2761ed13b79008f9ff8968be21255b0e06697b63e268e40c077bf910ecc44483",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/sdk-core/0.1.0-SNAPSHOT/sdk-core-0.1.0-SNAPSHOT-sources.jar",
+      "prefix": "",
+      "fileMembers": 4,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "bb91075b9d0c4340abb20689f439c9ad2274eac4a714f9243b5a4acec865e028",
+      "uncompressedPayloadBytes": 2820,
+      "uncompressedPayloadSHA256": "1a3def05f73dba964927e38df37166e24316fcb3d07ea7d3179a499d73d8c4c3",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT.aar",
+      "prefix": "classes.jar!/",
+      "fileMembers": 32,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "a797fd3809cec55f38a3d734dc3ad9a09e1ab8ffd910155254f1e20be6725fdb",
+      "uncompressedPayloadBytes": 101894,
+      "uncompressedPayloadSHA256": "6843f4fad1b60d58acc2324c27f34d89cd254517a56d041960841ecf27949329",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT.aar",
+      "prefix": "",
+      "fileMembers": 4,
+      "directoryMembers": 0,
+      "orderedMemberListSHA256": "c3f932c8b4b4aba7e080418c2ef3bf4275eadd41233845c63ee1be736e796f92",
+      "uncompressedPayloadBytes": 51077,
+      "uncompressedPayloadSHA256": "45ff59aeeb4713b268f3f3c09c93416e7870fc44b5bb04ef5dd34828b0b6da4b",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/speech/0.1.0-SNAPSHOT/speech-0.1.0-SNAPSHOT-sources.jar",
+      "prefix": "",
+      "fileMembers": 2,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "87e35630b8198628e0b6385bdc15b6cf97e06579aa10a4b87ba5a4b629f7a3a3",
+      "uncompressedPayloadBytes": 7960,
+      "uncompressedPayloadSHA256": "7a468ea61ccf4add22ccb7aaba7e61f95acd3f30dea6b7f3678b7fea938676a8",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+      "prefix": "classes.jar!/",
+      "fileMembers": 19,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "150a75f6062ff1d50b3afcac6589970f5d55ee62e0f77e50612a654c014a6ed0",
+      "uncompressedPayloadBytes": 88225,
+      "uncompressedPayloadSHA256": "3ac89a7f2b504c300c6825d1563e4607a3abacb34d3bac5c108330a3fa62a016",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+      "prefix": "",
+      "fileMembers": 4,
+      "directoryMembers": 0,
+      "orderedMemberListSHA256": "c3f932c8b4b4aba7e080418c2ef3bf4275eadd41233845c63ee1be736e796f92",
+      "uncompressedPayloadBytes": 41026,
+      "uncompressedPayloadSHA256": "45e16e14769f52242331cb3e939b679617af3bcacc127621f65dfb1b7e1c0dbf",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT-sources.jar",
+      "prefix": "",
+      "fileMembers": 6,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "81898248fb8ab0d1b381fffa4912c1c8646e46e9aaed7d44d942431009cb445f",
+      "uncompressedPayloadBytes": 14311,
+      "uncompressedPayloadSHA256": "d2b75fc36d75b7df97b0b7dfa95dddc61fc38752391729726221f5b0084309a4",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-asr/0.1.0-SNAPSHOT/backend-system-asr-0.1.0-SNAPSHOT.aar",
+      "prefix": "classes.jar!/",
+      "fileMembers": 39,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "041bbb1afc8d5267c2c3c5ef8a1985814cbd5fd8e5f83c9c67b97947ae4bf4ea",
+      "uncompressedPayloadBytes": 129878,
+      "uncompressedPayloadSHA256": "85dd307d12ab06213fb53d076a6a22a9ac4776dc3efa5a95c0de4440eb38bca7",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-asr/0.1.0-SNAPSHOT/backend-system-asr-0.1.0-SNAPSHOT.aar",
+      "prefix": "",
+      "fileMembers": 4,
+      "directoryMembers": 0,
+      "orderedMemberListSHA256": "c3f932c8b4b4aba7e080418c2ef3bf4275eadd41233845c63ee1be736e796f92",
+      "uncompressedPayloadBytes": 63030,
+      "uncompressedPayloadSHA256": "6a567cf568d0553d49d600cbed453991effefcc9cd859aa7d8018bbd630cd673",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-asr/0.1.0-SNAPSHOT/backend-system-asr-0.1.0-SNAPSHOT-sources.jar",
+      "prefix": "",
+      "fileMembers": 5,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "1252df926d56ee6fcbc3f78da115acfce998be3eb7ac151d42a6ff37c0d70d28",
+      "uncompressedPayloadBytes": 20218,
+      "uncompressedPayloadSHA256": "3ba92fd62888e314ae779bae5492dc24e7ad487fa66cc87995f59f4c2e3b6f4b",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-tts/0.1.0-SNAPSHOT/backend-system-tts-0.1.0-SNAPSHOT.aar",
+      "prefix": "classes.jar!/",
+      "fileMembers": 17,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "c105c6ed7829f7710a6d0fca1c6be806191296fe353c182489d67a1dc6489c3e",
+      "uncompressedPayloadBytes": 68518,
+      "uncompressedPayloadSHA256": "d733880321235547bd260d9455ead73486fc4ee9a8a99fe2884bb15a1f057fa2",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-tts/0.1.0-SNAPSHOT/backend-system-tts-0.1.0-SNAPSHOT.aar",
+      "prefix": "",
+      "fileMembers": 4,
+      "directoryMembers": 0,
+      "orderedMemberListSHA256": "c3f932c8b4b4aba7e080418c2ef3bf4275eadd41233845c63ee1be736e796f92",
+      "uncompressedPayloadBytes": 31911,
+      "uncompressedPayloadSHA256": "1aa6ecd54d960398c0dd2808915575228982a5fc8073232af6756f90b3adc968",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/m2/io/ondeviceai/backend-system-tts/0.1.0-SNAPSHOT/backend-system-tts-0.1.0-SNAPSHOT-sources.jar",
+      "prefix": "",
+      "fileMembers": 2,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "0b26ef181933e688b2b0f70b58584cbf61e0f7288f8854a0e424bb76d095cd31",
+      "uncompressedPayloadBytes": 7328,
+      "uncompressedPayloadSHA256": "6f99d5960f6c885110b465a61d0d82726a495f1f3b1423650c139fba8f20b014",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/android-speech-consumer-sherpaAsr-debug.aar",
+      "prefix": "classes.jar!/",
+      "fileMembers": 6,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "3b74e2b4533e4ae5c08c3f817ea30c07c7e2e24b00f6e2456e004ceee56d6463",
+      "uncompressedPayloadBytes": 17257,
+      "uncompressedPayloadSHA256": "4a08cde9ab482129b40ce1fbed460b26f7017d3c1500ccccbda65599dccbdf85",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/android-speech-consumer-sherpaAsr-debug.aar",
+      "prefix": "",
+      "fileMembers": 4,
+      "directoryMembers": 0,
+      "orderedMemberListSHA256": "c3f932c8b4b4aba7e080418c2ef3bf4275eadd41233845c63ee1be736e796f92",
+      "uncompressedPayloadBytes": 9461,
+      "uncompressedPayloadSHA256": "8823c6edb59224b4a9062555729b91509d490c5a42ffd35c1a880e8cc6a70ddf",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/android-speech-consumer-sherpaAsr-release.aar",
+      "prefix": "classes.jar!/",
+      "fileMembers": 6,
+      "directoryMembers": 4,
+      "orderedMemberListSHA256": "3b74e2b4533e4ae5c08c3f817ea30c07c7e2e24b00f6e2456e004ceee56d6463",
+      "uncompressedPayloadBytes": 17257,
+      "uncompressedPayloadSHA256": "4a08cde9ab482129b40ce1fbed460b26f7017d3c1500ccccbda65599dccbdf85",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/w3-sdk-consumer-binding-20261115/android-speech-consumer-sherpaAsr-release.aar",
+      "prefix": "",
+      "fileMembers": 4,
+      "directoryMembers": 0,
+      "orderedMemberListSHA256": "c3f932c8b4b4aba7e080418c2ef3bf4275eadd41233845c63ee1be736e796f92",
+      "uncompressedPayloadBytes": 9087,
+      "uncompressedPayloadSHA256": "6a2e9fb7538af9347d0c5dcc10545f2abc92960127540e293daad873b44ad9ed",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.10.2/4a9f78ef49483748e2c129f3d124b8fa249dafbf/kotlinx-coroutines-core-jvm-1.10.2.jar",
+      "prefix": "",
+      "fileMembers": 841,
+      "directoryMembers": 23,
+      "orderedMemberListSHA256": "cc7a6f2ccc2ef6503bf406e374b9d4ad59a1872b9d7a32ce09e111b1818ca8cf",
+      "uncompressedPayloadBytes": 3249023,
+      "uncompressedPayloadSHA256": "ab6ae0a949228927a34ed46ef034db2c5df96bb99df871d99d98efa1ee459e92",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.10.2/c8705d275d81f19e8afaf3ff9b5bf7a4b6b6c19b/kotlinx-coroutines-android-1.10.2.jar",
+      "prefix": "",
+      "fileMembers": 16,
+      "directoryMembers": 12,
+      "orderedMemberListSHA256": "31d1e0f8a1e2808a655af5ae7726b0adb249fac7e4d69fefb64c77b922c61bea",
+      "uncompressedPayloadBytes": 30254,
+      "uncompressedPayloadSHA256": "6650fa122a4924f92ab36b849009de9a337cc56f7ac2fdf038391ff0c0a6b498",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar",
+      "prefix": "",
+      "fileMembers": 1002,
+      "directoryMembers": 51,
+      "orderedMemberListSHA256": "f46c11f3ed751c0b454034d1a207ac73c0f4964dea3ad13f1d330aa8cc693c69",
+      "uncompressedPayloadBytes": 4624994,
+      "uncompressedPayloadSHA256": "4f60b514ebeaadf7c4698602ab6a548e6e9dc54cd68a1ded05bd5324cdcef181",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar",
+      "prefix": "",
+      "fileMembers": 59,
+      "directoryMembers": 9,
+      "orderedMemberListSHA256": "c46a17ec7b6511032b21acd2abbe95e6745fd937f8cba21a1adcc6c8ccc26708",
+      "uncompressedPayloadBytes": 32075,
+      "uncompressedPayloadSHA256": "fe50521268c5ac14a5cca58696234c48a2b29dc3f775cee37676b1178d64fe52",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar",
+      "prefix": "classes.jar!/",
+      "fileMembers": 125,
+      "directoryMembers": 5,
+      "orderedMemberListSHA256": "2fd0526c4238c7c829c12bc691127289d993e68ba82eb31b83f82345ea4be975",
+      "uncompressedPayloadBytes": 553965,
+      "uncompressedPayloadSHA256": "35a981284cebc44fbffa2f7bc183c73c0d3d8b5f074aa3717ef2dcae6270e8e0",
+      "infoZipComparisonPassed": true
+    },
+    {
+      "artifact": "artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar",
+      "prefix": "",
+      "fileMembers": 21,
+      "directoryMembers": 5,
+      "orderedMemberListSHA256": "6810450de22c91ac0854885171f13c2fb8dbdb09f52f078d7080028442920939",
+      "uncompressedPayloadBytes": 126405792,
+      "uncompressedPayloadSHA256": "2e3b4bbb2ba7c88d38ae79ddaf8446034608a1b5ec943d457c77c6998dd16de2",
+      "infoZipComparisonPassed": true
+    }
+  ],
+  "infoZipVersion": "UnZip 6.00 of 20 April 2009, by Info-ZIP, with modifications by Apple Inc.",
+  "infoZipVersionOutputSHA256": "3479ee573dd6ff4c670f2f0ea28813283e4cbf84518c836202cf15358ab12521"
+}

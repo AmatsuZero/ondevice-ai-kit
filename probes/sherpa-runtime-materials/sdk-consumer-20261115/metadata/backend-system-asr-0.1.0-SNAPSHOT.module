@@ -1,0 +1,117 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.ondeviceai",
+    "module": "backend-system-asr",
+    "version": "0.1.0-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.4.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.ondeviceai",
+          "module": "speech",
+          "version": {
+            "requires": "0.1.0-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "backend-system-asr-0.1.0-SNAPSHOT.aar",
+          "url": "backend-system-asr-0.1.0-SNAPSHOT.aar",
+          "size": 57807,
+          "sha512": "c1247c48025bc369e2d577fe6029e4747bead6fbd1149ebdd89a2e440586a11a879229876051209960739313e7d69dc59fc6d624c05b90c5856ffa52b0f7a623",
+          "sha256": "532761a217f5d348ab04312803232dcea8939d8953ca22ac171354c9c5334d60",
+          "sha1": "7848a2dec86134dbcb296cebd6f11ab121a232be",
+          "md5": "ed5bfb0a7a4b8d977cdf4bc47e9d1f1e"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "io.ondeviceai",
+          "module": "speech",
+          "version": {
+            "requires": "0.1.0-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "backend-system-asr-0.1.0-SNAPSHOT.aar",
+          "url": "backend-system-asr-0.1.0-SNAPSHOT.aar",
+          "size": 57807,
+          "sha512": "c1247c48025bc369e2d577fe6029e4747bead6fbd1149ebdd89a2e440586a11a879229876051209960739313e7d69dc59fc6d624c05b90c5856ffa52b0f7a623",
+          "sha256": "532761a217f5d348ab04312803232dcea8939d8953ca22ac171354c9c5334d60",
+          "sha1": "7848a2dec86134dbcb296cebd6f11ab121a232be",
+          "md5": "ed5bfb0a7a4b8d977cdf4bc47e9d1f1e"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "backend-system-asr-0.1.0-SNAPSHOT-sources.jar",
+          "url": "backend-system-asr-0.1.0-SNAPSHOT-sources.jar",
+          "size": 7004,
+          "sha512": "42285813ccec2170eae189bde2a4d1fcd4dfe8899bbda7695003e5366b1b4c6ac9a971e89f3830b2aacd4bd8e162eeae45309e4835bd562b83f7aebf6f10f469",
+          "sha256": "6826f45172a05642058275e7ed36899aae38d9af94a12f5ac882546a7fc12e9a",
+          "sha1": "4112eee1ba216357235fb5b6d31409f27bd9f259",
+          "md5": "7d2df1745c189c7f565077eba3a36384"
+        }
+      ]
+    }
+  ]
+}

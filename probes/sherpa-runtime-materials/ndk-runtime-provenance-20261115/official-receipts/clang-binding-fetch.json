@@ -1,0 +1,122 @@
+[
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/ndk",
+    "revision": "99de7583356a3ae1af2686e0659b646bdacb88c7",
+    "path": "ndk/checkbuild.py",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/ndk/ndk/checkbuild.py",
+    "url": "https://android.googlesource.com/platform/ndk/+/99de7583356a3ae1af2686e0659b646bdacb88c7/ndk/checkbuild.py?format=TEXT",
+    "status": 200,
+    "bytes": 91780,
+    "sha256": "a36e1d66d48d6052eebc1c17527724c81ff3fd015df0dc8ecba1ba2d3e088f68",
+    "elapsedSeconds": 0.985
+  },
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/ndk",
+    "revision": "99de7583356a3ae1af2686e0659b646bdacb88c7",
+    "path": "sources/cxx-stl/",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/ndk/sources/cxx-stl-tree.json",
+    "url": "https://android.googlesource.com/platform/ndk/+/99de7583356a3ae1af2686e0659b646bdacb88c7/sources/cxx-stl/?format=JSON",
+    "status": 200,
+    "bytes": 214,
+    "sha256": "9c7e56038f46bffcc17b808e8253837300a75f69cb955625131ae3b8420bdd3e",
+    "elapsedSeconds": 0.554
+  },
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/ndk",
+    "revision": "99de7583356a3ae1af2686e0659b646bdacb88c7",
+    "path": "NOTICE",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/ndk/NOTICE",
+    "url": "https://android.googlesource.com/platform/ndk/+/99de7583356a3ae1af2686e0659b646bdacb88c7/NOTICE?format=TEXT",
+    "status": 200,
+    "bytes": 577,
+    "sha256": "c870d52f42a8f93023b99a85fe68d02637d6b04e5f35bbcd7f98759adb4e4d49",
+    "elapsedSeconds": 0.692
+  },
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r27d",
+    "path": "",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/root.json",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r27d/?format=JSON",
+    "status": 200,
+    "bytes": 4033,
+    "sha256": "c8ba44097943d8850251bcda178682236b431be0b6658063bfad572be345f8bc",
+    "elapsedSeconds": 0.634
+  },
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/manifest",
+    "revision": "refs/tags/ndk-r27d",
+    "path": "",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/manifest/root.json",
+    "url": "https://android.googlesource.com/platform/manifest/+/refs/tags/ndk-r27d/?format=JSON",
+    "status": 200,
+    "bytes": 219,
+    "sha256": "dd5ff7e8f2942175df7bb332cc23c814ba425a0d912960cb6bbba2169fc7b4fe",
+    "elapsedSeconds": 0.795
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/ndk",
+    "revision": "c0a0a3e6712eeb645090766058cda091da0fdf70",
+    "path": "ndk/checkbuild.py",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/ndk/checkbuild.py",
+    "url": "https://android.googlesource.com/platform/ndk/+/c0a0a3e6712eeb645090766058cda091da0fdf70/ndk/checkbuild.py?format=TEXT",
+    "status": 200,
+    "bytes": 91451,
+    "sha256": "aaf08dbbd9e9c84f7cad94600de5993011f1cac8982ead4fdc77a00e1e49dc1a",
+    "elapsedSeconds": 1.418
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/ndk",
+    "revision": "c0a0a3e6712eeb645090766058cda091da0fdf70",
+    "path": "sources/cxx-stl/",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/sources/cxx-stl-tree.json",
+    "url": "https://android.googlesource.com/platform/ndk/+/c0a0a3e6712eeb645090766058cda091da0fdf70/sources/cxx-stl/?format=JSON",
+    "status": 200,
+    "bytes": 214,
+    "sha256": "9c7e56038f46bffcc17b808e8253837300a75f69cb955625131ae3b8420bdd3e",
+    "elapsedSeconds": 0.234
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/ndk",
+    "revision": "c0a0a3e6712eeb645090766058cda091da0fdf70",
+    "path": "NOTICE",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/NOTICE",
+    "url": "https://android.googlesource.com/platform/ndk/+/c0a0a3e6712eeb645090766058cda091da0fdf70/NOTICE?format=TEXT",
+    "status": 200,
+    "bytes": 577,
+    "sha256": "c870d52f42a8f93023b99a85fe68d02637d6b04e5f35bbcd7f98759adb4e4d49",
+    "elapsedSeconds": 0.198
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "revision": "refs/tags/ndk-r30",
+    "path": "",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/root.json",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r30/?format=JSON",
+    "status": 200,
+    "bytes": 3609,
+    "sha256": "e98887e765d675fce02967db069e3a978eb9aa23bea532a02398d4987599fe9b",
+    "elapsedSeconds": 0.27
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/manifest",
+    "revision": "refs/tags/ndk-r30",
+    "path": "",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/manifest/root.json",
+    "url": "https://android.googlesource.com/platform/manifest/+/refs/tags/ndk-r30/?format=JSON",
+    "status": 200,
+    "bytes": 219,
+    "sha256": "f692d85052d945f22fc86c0871e5144b22c43db049a27c332b465b40f74c9ef6",
+    "elapsedSeconds": 0.293
+  }
+]

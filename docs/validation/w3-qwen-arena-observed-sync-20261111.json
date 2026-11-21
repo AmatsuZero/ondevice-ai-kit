@@ -1,0 +1,36 @@
+{
+  "marker": "w3-qwen-arena-device-observed-20261111",
+  "sourceHeadAtPublication": "713f2113068bd7ec80c7ee9774383308275aaf49",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6786642535,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6786642535",
+      "sha256": "fe06735a5551cd76a9471f2f545ef35776ca08822258a2908997ce7a19235eb5",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 42843,
+      "url": null,
+      "sha256": "c12bb55f1e1d766e9b3791c38b7f77eb50a7fb4393994ac0e8d1452646b98958",
+      "readbackExact": true
+    }
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "a3d6f46a7465e1a9604505f069622ab44afcae45f0695d7f978a12bc818dd1e8",
+    "readbackExact": true
+  },
+  "githubWiki": {
+    "commit": "394efcf30127b385b16074c426c19bf789901a0f",
+    "sha256": "a3d6f46a7465e1a9604505f069622ab44afcae45f0695d7f978a12bc818dd1e8",
+    "readbackExact": true
+  },
+  "bodySHA256": "fe06735a5551cd76a9471f2f545ef35776ca08822258a2908997ce7a19235eb5",
+  "originalGitlabReadFailure": "EOF on first read-only notes page; retained original streams, subsequent GL-only scan/write/readback succeeded; GH comment not resent",
+  "newModelCalls": 0,
+  "w3Status": "open",
+  "deviceRunConsumed": true,
+  "nativePolicyEffectVerified": false,
+  "resultReportSHA256": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d"
+}

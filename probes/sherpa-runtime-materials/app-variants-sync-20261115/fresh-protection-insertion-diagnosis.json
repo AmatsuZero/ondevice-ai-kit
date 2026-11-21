@@ -1,0 +1,22 @@
+{
+  "path": "docs/agent-pitfalls.md",
+  "originalBaseline": {
+    "bytes": 268388,
+    "sha256": "8d06e26d76ef4eaf5c7ff5f0ffb26880b9fc34f163907929c1a129c69f42f0a6"
+  },
+  "sharedStagingWorkingBaseSHA256": "b6cdfe8d2dabacd51a09ba4b4c3a123a80462d647783aa687dbc210160ae0b53",
+  "currentBaseSHA256": "b6cdfe8d2dabacd51a09ba4b4c3a123a80462d647783aa687dbc210160ae0b53",
+  "concurrentInsertions": [
+    {
+      "heading": "## F08 GPU预检：排除自身祖先进程，并检查服务负载而非服务PID（2026-11-15）",
+      "startByte": 801,
+      "endByte": 1730,
+      "insertedBytes": 929,
+      "insertedSHA256": "23b55ff8c55cd39ff080313a45c0a12442958d7e91120b4eb3de52d938514ff5",
+      "baselineReconstructedExactly": true
+    }
+  ],
+  "scope": "old protected bytes preserved in original order with one out-of-scope section insertion; not suffix equality",
+  "stagedBlobExcludesConcurrentChanges": true,
+  "noProductChanges": true
+}

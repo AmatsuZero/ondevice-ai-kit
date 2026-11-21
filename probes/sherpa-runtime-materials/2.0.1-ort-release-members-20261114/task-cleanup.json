@@ -1,0 +1,36 @@
+{
+  "observedAt": "2026-11-14T01:38:59.684417+00:00",
+  "removedReconstructibleFragments": [
+    {
+      "path": "artifacts/verification/w3-ort-release-members-20261114/download-initial-partial.bin",
+      "bytes": 23739891,
+      "sha256": "da6948f7dcd07f5e8dbe4f583912f402e26798d1ba8e1552d26a33a7ccd4fbc7",
+      "canonicalReplacement": "artifacts/verification/w3-ort-release-members-20261114/onnxruntime-android-1.28.2.zip",
+      "canonicalByteRange": [
+        0,
+        23739891
+      ],
+      "byteRangeVerifiedEqual": true,
+      "noOpenWriters": true
+    },
+    {
+      "path": "artifacts/verification/w3-ort-release-members-20261114/download-tail.bin",
+      "bytes": 10025824,
+      "sha256": "107a3012e8930ea2dcee28041159ad55a652ad4ba7070318238698211998dd6e",
+      "canonicalReplacement": "artifacts/verification/w3-ort-release-members-20261114/onnxruntime-android-1.28.2.zip",
+      "canonicalByteRange": [
+        23739891,
+        33765715
+      ],
+      "byteRangeVerifiedEqual": true,
+      "noOpenWriters": true
+    }
+  ],
+  "nominalBytesRemoved": 33765715,
+  "freeBytesBefore": 79050588160,
+  "freeBytesAfter": 79085334528,
+  "canonicalArchivePreserved": true,
+  "failureReportsAndHashesPreserved": true,
+  "globalCachesTouched": false,
+  "noExclusiveFreeSpaceAttribution": true
+}

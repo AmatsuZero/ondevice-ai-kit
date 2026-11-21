@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-11T09:12:30.951599+00:00",
+  "marker": "w3-build-dependency-reconciliation-20261111",
+  "sourceCommit": "893cc5bee5d319ac3e2e6d22fabfc2b225466378",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6791839114,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6791839114",
+      "sha256": "aad7548d7a5bb41315a88938dc736ca8fe07c2da2ff93202ca87bff34ab36fc5",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43063,
+      "url": null,
+      "sha256": "7ece709829141cfad6f956c584e518238f7075f3b21e79e59412368bf532803b",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "cf007a39b11c93e20cc10d52e5f87c6176a17357",
+    "sha256": "126ddebf6cae34116c1cd07f1e7e0bd6921e4a70a48ed66477dd52a7f3303f2c",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "126ddebf6cae34116c1cd07f1e7e0bd6921e4a70a48ed66477dd52a7f3303f2c",
+    "readbackExact": true
+  },
+  "wikiContentHashEqual": true,
+  "w3Status": "open",
+  "goalStatus": "active",
+  "scope": "Build-log component version and per-ABI reconciliation, with source/license supplement; no real device/model run or exhaustive static composition acceptance",
+  "localEvidenceRoot": ".omx/artifacts/w3-runtime-materials-20261111/build-dependency-reconciliation/publication"
+}

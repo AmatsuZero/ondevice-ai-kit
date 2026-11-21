@@ -1,0 +1,48 @@
+{
+  "scope": "Fixed published ORT ZIP to exact Sherpa AAR member equality only",
+  "fourMembersByteEqual": true,
+  "independentParsers": [
+    "Python zipfile",
+    "Info-ZIP unzip -p"
+  ],
+  "materialFiles": {
+    "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/download-range-recovery.json": {
+      "bytes": 685,
+      "sha256": "94dd8d201722de8ac689610414ddc39ae89cdea7676563f45db38e5e2d15b6a1"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/independent-unzip-verification.json": {
+      "bytes": 1063,
+      "sha256": "430f0d6163a93a0d3b91e9d0f4eab8588a469a63e39b246ce69a1642942efd99"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/member-verification.json": {
+      "bytes": 2315,
+      "sha256": "2578f3d79521268a97dc7546d65686e766b487b85e680bba3c717a7c7e1bcdd9"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/parent-review-disposition.json": {
+      "bytes": 925,
+      "sha256": "093438569b60e706b626e7bf1d75493d7beb9eb458b5b808e3bd0f02ed461b09"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/release-asset.json": {
+      "bytes": 1683,
+      "sha256": "bfb4d4bbcbb4edf64749bc6b0ef56cabb9e081d8a4e7ea7dec5c7716677e3b73"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/task-cleanup.json": {
+      "bytes": 1302,
+      "sha256": "a919413d057139e0d1e1f51824c3a0afa0060ed8c6f21548979146d690e5fcce"
+    }
+  },
+  "helperOriginalVerdict": "revise",
+  "parentDisposition": "accept bounded actual-byte observation; preserve review",
+  "newDevicePreflightError": "error: closed",
+  "newPrepareStarted": false,
+  "newRunConsumed": false,
+  "protectedFilesVerified": 103,
+  "terminalFrozenFilesVerified": 161,
+  "fullSourceToAarProvenanceVerified": false,
+  "recursiveStaticCompositionVerified": false,
+  "productionNoticeRetentionVerified": false,
+  "independentReleaseAcceptanceVerified": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false
+}

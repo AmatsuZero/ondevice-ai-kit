@@ -1,0 +1,21 @@
+)]}'
+{
+  "commit": "b726ba7eb54b490467464bd4a02427b7b956f9ff",
+  "tree": "a606f666f16a56a326182ec019baf231ced3bd17",
+  "parents": [
+    "29bfb7f9d203f6c8dc015a4015446e2ea067362f",
+    "047032818c50b1d84e024bebe2ff48e088d409f5"
+  ],
+  "author": {
+    "name": "Android Build Coastguard Worker",
+    "email": "android-build-coastguard-worker@google.com",
+    "time": "Thu Aug 20 22:11:21 2026 -0700"
+  },
+  "committer": {
+    "name": "Android Build Coastguard Worker",
+    "email": "android-build-coastguard-worker@google.com",
+    "time": "Thu Aug 20 22:11:21 2026 -0700"
+  },
+  "message": "Merge cherrypicks of [\u0027googleplex-android-review.googlesource.com/41654283\u0027] into ndk-r30-release.\n\nChange-Id: I164daca5e355285240cbf9932b6b27c53d120afe\n",
+  "tree_diff": []
+}

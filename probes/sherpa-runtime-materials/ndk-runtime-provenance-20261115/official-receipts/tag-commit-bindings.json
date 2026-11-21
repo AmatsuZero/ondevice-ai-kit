@@ -1,0 +1,34 @@
+[
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r27d?format=JSON",
+    "commit": "2b678cf8a4be7421f7fe6206cc7f29219cf817c6",
+    "tree": "51504e5248c8ff1f28d1a8579bb1411cbaf6a35b",
+    "sha256": "f37d5ef978279dd9369f752ce7a6041294da5873b160078a7ecb34bd849afc83"
+  },
+  {
+    "tag": "ndk-r27d",
+    "repo": "platform/manifest",
+    "url": "https://android.googlesource.com/platform/manifest/+/refs/tags/ndk-r27d?format=JSON",
+    "commit": "8b218522e3157f660b0558d0c90a667e48083dd3",
+    "tree": "79b64ac53364e65a5f94365b659692bc043376da",
+    "sha256": "7818c5c974b9ecedd67910437c177108d3fb6a6b21b0cc6995b6f7f1de131f8f"
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/prebuilts/clang/host/linux-x86",
+    "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/ndk-r30?format=JSON",
+    "commit": "b726ba7eb54b490467464bd4a02427b7b956f9ff",
+    "tree": "a606f666f16a56a326182ec019baf231ced3bd17",
+    "sha256": "8cb2baeaaa755752db620ccca51f03e009cfc1d22924d04860f82defc8779955"
+  },
+  {
+    "tag": "ndk-r30",
+    "repo": "platform/manifest",
+    "url": "https://android.googlesource.com/platform/manifest/+/refs/tags/ndk-r30?format=JSON",
+    "commit": "7ffdb791d72810a49e610459736c68a09fc94789",
+    "tree": "2c96ff1407fb4cf029b11414231f1912bcdd4418",
+    "sha256": "c29a1133a49c47d886efac2261b7a41a6a111845cc9fcdcbc429c1a44b09bc5f"
+  }
+]

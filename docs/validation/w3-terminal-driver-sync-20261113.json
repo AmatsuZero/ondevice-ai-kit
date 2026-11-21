@@ -1,0 +1,35 @@
+{
+  "sourceCommit": "7e607efb2d06cd3ec37838ee6749cca5ce4f98fb",
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-terminal-driver-20261113 -->",
+  "issues": {
+    "gh": {
+      "id": 6849755902,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6849755902",
+      "sha256": "c091f2cfb836ea26808f98904979b6d3ee45b5526ac45ed15334ef254df2b441",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44580,
+      "url": null,
+      "sha256": "c3d7ec90e2a7afb03b319951d3eb5bc07ffb490221aebf3fed932ec260afdaea",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "ac69cc7b100a82b0684879ee497abd771c61131e",
+    "sha256": "1cffa443fdf654a2cd522712a5d7636fc246281effb4c095cfd3d36606fb0525",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3\u8bed\u97f3\u9a8c\u6536\u4e0e\u540e\u7eed\u6539\u8fdb",
+    "sha256": "1cffa443fdf654a2cd522712a5d7636fc246281effb4c095cfd3d36606fb0525",
+    "readbackExact": true
+  },
+  "wikiSHA256Equal": true,
+  "readbacksExact": true,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "runConsumed": false,
+  "evidence": ".omx/artifacts/w3-terminal-observation-20261112/driver-publication"
+}

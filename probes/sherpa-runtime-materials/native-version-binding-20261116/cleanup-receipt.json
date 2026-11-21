@@ -1,0 +1,15 @@
+{
+  "removed": [
+    {
+      "path": ".omx/artifacts/w3-native-version-20261116T002000/hy3-verifier/candidate/__pycache__/inspect_native_version.cpython-315.pyc",
+      "bytes": 15406,
+      "sha256": "79c4e4d310b1ba79f4ce4e4107b04a6799a32a9bf7909f49eef7382ee3298250"
+    }
+  ],
+  "nominalBytesRemoved": 15406,
+  "diskFreeBytesBefore": 39566565376,
+  "diskFreeBytesAfter": 39566553088,
+  "allSourceCandidatesRawErrorsAcceptedBinariesAndReceiptsPreserved": true,
+  "unrelatedDirectoriesTouched": false,
+  "activeTaskProcesses": 0
+}

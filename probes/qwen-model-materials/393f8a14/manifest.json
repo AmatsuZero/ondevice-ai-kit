@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "kind": "Qwen model redistribution-materials bundle; no binaries",
+  "createdAt": "2026-11-10T13:46:38.749610+00:00",
+  "sourceCommit": "d815bb2dcf74231198964826f348c6c6d249a4e6",
+  "archiveSHA256": "393f8a14e2f5fb96746aaab342997a40641001fbd5bf9592a080a8329178ee96",
+  "archiveAssetId": 390698077,
+  "baseModel": "Qwen/Qwen3-ASR-0.6B",
+  "supplier": "zengshuishui/Qwen3-ASR-onnx",
+  "declaredLicense": "apache-2.0",
+  "supplierRelation": "quantized",
+  "runtimeFiles": {
+    "conv_frontend.onnx": {
+      "bytes": 44148281,
+      "sha256": "d22dc4423e0940e49884e903d2ea2f7e5567c14fc1aed97e4e26d6b8f208ef9e",
+      "supplierPath": "model_0.6B/conv_frontend.onnx",
+      "supplierFileRevision": "c69fb1666ccb59a82c09840c511a6c894e6a2482"
+    },
+    "decoder.int8.onnx": {
+      "bytes": 755914231,
+      "sha256": "4f6885be5959ae26af3089d38ee7972c5fafbeeb1cf8d5e76eab6d8b61ca5771",
+      "supplierPath": "model_0.6B/decoder.int8.onnx",
+      "supplierFileRevision": "de9e449eb376dcb472c1ce8141fbae8d524fabbd"
+    },
+    "encoder.int8.onnx": {
+      "bytes": 182491662,
+      "sha256": "60748d3e6744a57c9c91e1b17424a6c2990567e8adceb0783940c03ed98fa9d9",
+      "supplierPath": "model_0.6B/encoder.int8.onnx",
+      "supplierFileRevision": "c69fb1666ccb59a82c09840c511a6c894e6a2482"
+    },
+    "tokenizer/merges.txt": {
+      "bytes": 1671853,
+      "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "supplierPath": "tokenizer/merges.txt",
+      "supplierFileRevision": "c69fb1666ccb59a82c09840c511a6c894e6a2482"
+    },
+    "tokenizer/tokenizer_config.json": {
+      "bytes": 12487,
+      "sha256": "4942d005604266809309cabc9f4e9cb89ce855d59b14681fdc0e1cc62ea26c4c",
+      "supplierPath": "tokenizer/tokenizer_config.json",
+      "supplierFileRevision": "c69fb1666ccb59a82c09840c511a6c894e6a2482"
+    },
+    "tokenizer/vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "supplierPath": "tokenizer/vocab.json",
+      "supplierFileRevision": "c69fb1666ccb59a82c09840c511a6c894e6a2482"
+    }
+  },
+  "runtimeFilesTotalBytes": 987015347,
+  "upstreamLicenseText": {
+    "path": "licenses/Apache-2.0.txt",
+    "url": "https://raw.githubusercontent.com/QwenLM/Qwen3-ASR/7c6daf77a2421100f5fb066495372c00129d39ff/LICENSE",
+    "repositoryCommit": "7c6daf77a2421100f5fb066495372c00129d39ff",
+    "bytes": 11343,
+    "sha256": "a44a6081c73ad75f0255bb2bb5cab74ef1829565a895a24e53a4f11290ab7655",
+    "modelLicenseDeclaration": "Apache-2.0 in original HF card; this is upstream repository license, not additional evidence of model artifact contents"
+  },
+  "conversionWeightRevision": null,
+  "modelBinariesIncluded": false,
+  "runtimeLibrariesIncluded": false,
+  "testAudioIncluded": false,
+  "productionRedistributionAccepted": false,
+  "remaining": [
+    "Final distributed model/runtime package must retain applicable license, attribution and change materials.",
+    "Exact original conversion weight revision is unverified; keep scope explicit.",
+    "Runtime transitive notices and independent release review remain separate gates.",
+    "Android load and two-stage quality/cost are not accepted by this bundle."
+  ],
+  "additionalOriginalPublicEvidence": {
+    "provenance/license-chain/modelscope-metadata.json": {
+      "bytes": 4180,
+      "sha256": "93ae70f208f65d0a03903b4d67b7e103fef56f44cb8b698ce293375d112ce9d7"
+    },
+    "provenance/license-chain/modelscope-metadata.json.receipt.json": {
+      "bytes": 197,
+      "sha256": "e0115089d07a2b5f8a6e0f412a2c02d3b05dbf000166aeb398d821372c865246"
+    },
+    "provenance/license-chain/modelscope-files.json": {
+      "bytes": 10739,
+      "sha256": "78a116bb6dd53ee5eb3f2f2f8320717b22f8ff760083dc997b50ba96d9a89258"
+    },
+    "provenance/license-chain/modelscope-files.json.receipt.json": {
+      "bytes": 240,
+      "sha256": "d01f490335083e5e380a4480e8485b82e5906cc49ebf9703c780dda661b2f0b0"
+    },
+    "provenance/license-chain/export-repository.json": {
+      "bytes": 5415,
+      "sha256": "ccff840000b0b11df7a17f23b809c53a78fd42657acc11bc85ce6c44ca721429"
+    },
+    "provenance/license-chain/export-repository.json.receipt.json": {
+      "bytes": 228,
+      "sha256": "e72372077d8114a3abc44b86c93f866956906bd34a440d1d227afeb24387f6c7"
+    },
+    "provenance/license-chain/export-commit.json": {
+      "bytes": 5353,
+      "sha256": "b24f0b14fd5eb2e795980edcc5b31cd7a21a18b3e5869e93270ff1427bf73e4a"
+    },
+    "provenance/license-chain/export-commit.json.receipt.json": {
+      "bytes": 241,
+      "sha256": "e2aef1beaf93c6c4f49c8d8b1766a0d07c00e3801df0e8a5df7823429b9d397d"
+    },
+    "provenance/license-chain/export-tree.json": {
+      "bytes": 10215,
+      "sha256": "9caecf90aaec7f611d3590d9efc1f911702719dd961b222749e965f765544e2a"
+    },
+    "provenance/license-chain/export-tree.json.receipt.json": {
+      "bytes": 292,
+      "sha256": "6354c31eb723f2e94bbe0ca2c9c9d8a9426013d6df3c1d575e19882f74b7be94"
+    },
+    "provenance/license-chain/hf-model-pinned-tree.json": {
+      "bytes": 1233,
+      "sha256": "9e850d84b0880de5806e7bbd1a01cc3f7374b6208a15e739e00fed8cbd3d7bec"
+    },
+    "provenance/license-chain/hf-model-pinned-tree.json.receipt.json": {
+      "bytes": 248,
+      "sha256": "70305d87864f0f2bc47d9bb9ad5bb18fea1e5b2fb8314522a109fef6dc5e155b"
+    },
+    "provenance/license-chain/scope-summary.json": {
+      "bytes": 788,
+      "sha256": "4cb5901ad59bb6334f92cc0aea0c3492bb45c3b3c450a74e7593984d69bd2e78"
+    },
+    "provenance/model-card-full.md": {
+      "bytes": 57456,
+      "sha256": "5058416891bc47a2051557765997e8c42f8eb78a0e33c3e775bd17d4b0ba4d50"
+    }
+  }
+}

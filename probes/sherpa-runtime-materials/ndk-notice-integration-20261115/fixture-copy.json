@@ -1,0 +1,21 @@
+{
+  "source": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ort-nested-composition-20261115/apk-consumer",
+  "files": [
+    {
+      "path": "build.gradle.kts",
+      "bytes": 4487,
+      "sha256": "5d4dbce01b4d4f2de7c31dacb47e7f66fa598733bf93f5427164ed2794d99c8d"
+    },
+    {
+      "path": "settings.gradle.kts",
+      "bytes": 1564,
+      "sha256": "a5d640c16c8c9a0ee27f8487aa5bfc31b158f4b5e3e02c11abc0b3c47efd0f12"
+    },
+    {
+      "path": "src/main/AndroidManifest.xml",
+      "bytes": 220,
+      "sha256": "7d3661814175e00d4cd389edb7f8e189a1cc34764c4895459c71d991a16b94ec"
+    }
+  ],
+  "changedBytes": false
+}

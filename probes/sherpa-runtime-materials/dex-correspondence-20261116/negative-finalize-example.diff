@@ -1,0 +1,11 @@
+--- .omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-debug/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali
++++ .omx/artifacts/w3-dex-correspondence-20261116T0730/negative-control/smali/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali
+@@ -301,7 +301,7 @@
+     .line 208
+     iget-wide v0, p0, Lcom/k2fsa/sherpa/onnx/OfflineRecognizer;->ptr:J
+ 
+-    const-wide/16 v2, 0x0
++    const-wide/16 v2, 0x1
+ 
+     cmp-long v0, v0, v2
+ 

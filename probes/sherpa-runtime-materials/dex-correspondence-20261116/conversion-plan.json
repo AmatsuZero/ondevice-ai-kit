@@ -1,0 +1,20 @@
+{
+  "sourceHEAD": "befd6afcaff4f1c54c3a981648dc9f1124d2e032",
+  "minAPI": 26,
+  "D8Version": "9.1.31",
+  "modes": [
+    "debug",
+    "release"
+  ],
+  "fixedInputPayloads": 125,
+  "classCount": 124,
+  "classPayloadsByteEqualOriginalAAR": true,
+  "rebuiltJarEnvelopeEqualsOriginalClaimed": false,
+  "parameterSweep": false,
+  "newProductionEdits": false,
+  "newDeviceOperations": 0,
+  "newDownloads": 0,
+  "allowNormalization": false,
+  "goalScopeUnchanged": true,
+  "plannedScope": "all124 Sherpa runtime classes; not SDK/backend/native completeness"
+}

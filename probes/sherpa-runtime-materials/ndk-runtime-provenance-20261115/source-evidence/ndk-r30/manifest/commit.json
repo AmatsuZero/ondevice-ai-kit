@@ -1,0 +1,30 @@
+)]}'
+{
+  "commit": "7ffdb791d72810a49e610459736c68a09fc94789",
+  "tree": "2c96ff1407fb4cf029b11414231f1912bcdd4418",
+  "parents": [
+    "d71671f94305a6b72887d285617bd64f99d45cb6"
+  ],
+  "author": {
+    "name": "The Android Open Source Project",
+    "email": "initial-contribution@android.com",
+    "time": "Thu Sep 10 11:35:44 2026 -0700"
+  },
+  "committer": {
+    "name": "The Android Open Source Project",
+    "email": "initial-contribution@android.com",
+    "time": "Thu Sep 10 11:35:44 2026 -0700"
+  },
+  "message": "Manifest for Android NDK r30 (16248506)\n\nChange-Id: I99eb9f9fa72113ce1ac363f89db6b98275338f55\n",
+  "tree_diff": [
+    {
+      "type": "modify",
+      "old_id": "f74f02db981702d0da7a1066e4d69006a327588a",
+      "old_mode": 33188,
+      "old_path": "default.xml",
+      "new_id": "4ebd61baab1e3352cd3bbb924ab24357f6d13407",
+      "new_mode": 33188,
+      "new_path": "default.xml"
+    }
+  ]
+}

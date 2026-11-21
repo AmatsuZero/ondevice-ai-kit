@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "reviewType": "read-only P1 evidence-increment review",
+  "verdict": "ACCEPT_INCREMENTAL_P1_EVIDENCE__P1_REMAINS_OPEN",
+  "scope": "Acceptance of the CI-artifact to fixed release-AAR and 16 native-member byte correspondence only. This is not P2 composition, P3 notice retention, P4 release review, R4 quality, R5/W8 resources, or W3 completion.",
+  "filesRead": [
+    ".omx/artifacts/w3-sherpa-ci-members-20261115/verify-members.py",
+    ".omx/artifacts/w3-sherpa-ci-members-20261115/member-verification.json",
+    ".omx/artifacts/w3-sherpa-ci-members-20261115/release-and-log-check.json",
+    ".omx/artifacts/w3-sherpa-ci-members-20261115/hy3-parent-disposition.json",
+    ".omx/artifacts/w3-sherpa-ci-members-20261115/artifacts-api.stdout",
+    "docs/validation/w3-runtime-official-provenance-20261111.json",
+    "docs/validation/w3-closure-scope-20261115.md",
+    "docs/agent-pitfalls.md"
+  ],
+  "acceptedClaims": [
+    {
+      "claim": "Both downloaded artifact ZIPs are pinned to the two non-expired artifact IDs, exact byte sizes and SHA-256 values, the official workflow run 40348432396, and its head commit af2d8d81dbfa61c4cea4c568da78f3982edca005.",
+      "evidence": "verify-members.py:28-61; artifacts-api.stdout; member-verification.json:5-35"
+    },
+    {
+      "claim": "Each artifact ZIP digest also matches the corresponding previously retained official job-log digest; the prior raw-job evidence records the source checkout, CI jobs, libs-artifact upload, AAR-job input download, AAR-artifact upload, and release upload step.",
+      "evidence": "verify-members.py:34-53; docs/validation/w3-runtime-official-provenance-20261111.json:57-80,98-103,339-367; release-and-log-check.json"
+    },
+    {
+      "claim": "The one AAR member in the observed CI AAR artifact equals the fixed local release AAR byte-for-byte, with an independent absolute-path Info-ZIP read. This is full AAR-container equality, not merely an equality of selected native members.",
+      "evidence": "verify-members.py:63-78,105-106; member-verification.json:36-41"
+    },
+    {
+      "claim": "All 16 .so members of the fixed AAR, across arm64-v8a, armeabi-v7a, x86, and x86_64, each equal the observed CI libs-artifact member; the code rejects duplicate/traversal/CRC-invalid containers, requires exactly one match per member, checks complete-set equality, and performs a second Info-ZIP read.",
+      "evidence": "verify-members.py:18-25,79-104; member-verification.json:42-203"
+    }
+  ],
+  "p1Progress": {
+    "advancedBoundaries": [
+      "Fixed runtime output identity: the existing release AAR digest is connected to the complete AAR body produced in the CI AAR artifact.",
+      "Build-output to runtime-member identity: every native member delivered by the fixed AAR is directly connected to the same CI run's libs artifact, including all four ABI variants.",
+      "Source/build-context anchor: both artifacts are tied to the official workflow head SHA, and the retained official logs provide the associated checkout and selected Android build configuration/output-digest facts."
+    ],
+    "whyThisIsNotOnlyTimelineEvidence": "The earlier evidence stated that successful jobs on the same commit established timing only. This receipt adds equality of the actual two artifact ZIP bodies to their API/log digests, equality of the CI AAR payload to the fixed release AAR, and equality of all 16 AAR native payloads to the CI libs artifact."
+  },
+  "p1StillOpen": [
+    {
+      "boundary": "Actual consumer/adoption binding",
+      "missing": "The receipt fixes the AAR at artifacts/verification/sherpa-asr-20261105/inputs/downloads/sherpa-onnx-2.0.1.aar, but does not itself bind that fixed AAR to the current SDK/App consumer coordinate, lock, package, or production candidate. P1 requires the runtime/AAR actually adopted by the delivery under review.",
+      "evidence": "verify-members.py:10,63-67; docs/validation/w3-closure-scope-20261115.md:20"
+    },
+    {
+      "boundary": "Per-runtime-member source/build-input coverage",
+      "missing": "The receipt supplies a complete byte link for 16 native members, but it has no coverage matrix that assigns every delivered runtime member—including non-.so runtime AAR content—to its precise source revision, patches or asserted absence of patches, packaging inputs, and relevant build configuration. Full AAR equality establishes that the CI AAR payload is the fixed release AAR; it does not by itself provide this member-level input attribution.",
+      "evidence": "verify-members.py:79-104; docs/validation/w3-closure-scope-20261115.md:20"
+    },
+    {
+      "boundary": "Prebuilt dependency attribution within the P1 matrix",
+      "missing": "The CI logs show an ORT prebuilt download and the receipt carries libonnxruntime bytes through CI to the AAR, but the new receipt does not integrate the particular ORT source revision, its applicable patch/build-input evidence, and its four delivered members into a single per-member P1 coverage record. Existing ORT receipts may be usable supporting evidence, but their coverage must be explicitly joined rather than inferred from shared byte equality.",
+      "evidence": "docs/validation/w3-runtime-official-provenance-20261111.json:111-141; verify-members.py:86-103; docs/validation/w3-closure-scope-20261115.md:20"
+    }
+  ],
+  "explicitNonFindings": [
+    "P2 recursive-final-composition remains a separate boundary and is not used as a reason to reject this P1 evidence increment.",
+    "No unique cryptographic attestation, local reproducible rebuild, or one mandated proof format is required for P1; the current P1 contract allows reviewed combinations of source, build, artifact, and member evidence.",
+    "The accepted helper disposition is not used as the acceptance basis; the report relies on the primary evidence files and the verifier's concrete checks."
+  ],
+  "integrityAndScopeChecks": {
+    "zipContainerAndMemberBoundary": "pass",
+    "fixedInputBinding": "pass",
+    "claimScopeConservative": "pass",
+    "rootCauseFallbackGuard": "pass",
+    "p2P3P4R4R5Separated": "pass"
+  },
+  "issues": [],
+  "recommendation": "ACCEPT_THE_NEW_CI_ARTIFACT_TO_RELEASE_AAR_AND_16_MEMBER_CORRESPONDENCE_AS_PARTIAL_P1_EVIDENCE; RETAIN_P1_OPEN_PENDING_THE_THREE_SPECIFIC_BOUNDARIES_LISTED_ABOVE."
+}

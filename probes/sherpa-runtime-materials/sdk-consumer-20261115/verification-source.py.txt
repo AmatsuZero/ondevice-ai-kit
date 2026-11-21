@@ -1,0 +1,192 @@
+"""Parent operational evidence capture for existing SDK publication tasks; no device work."""
+from pathlib import Path
+import hashlib
+import json
+import re
+import shutil
+import subprocess
+import sys
+import zipfile
+import xml.etree.ElementTree as ET
+
+ROOT = Path(__file__).resolve().parents[3]
+OUT = Path(__file__).resolve().parent
+DELIVERY = ROOT / 'artifacts/verification/w3-sdk-consumer-binding-20261115'
+M2 = DELIVERY / 'm2'
+MATERIAL = ROOT / 'probes/sherpa-runtime-materials/sdk-consumer-20261115'
+SOURCE_HEAD = 'a18292ac56e7c694fd2e7efb2550864a0b3ef21e'
+MODULES = ('sdk-core', 'speech', 'backend-sherpa-asr', 'backend-system-asr', 'backend-system-tts')
+
+
+def sha(data, name='sha256'):
+    return hashlib.new(name, data).hexdigest()
+
+
+def identity(path):
+    path = Path(path)
+    data = path.read_bytes()
+    try:
+        name = str(path.relative_to(ROOT))
+    except ValueError:
+        name = str(path).replace(str(Path.home() / '.gradle'), '$GRADLE_USER_HOME')
+    return {'path': name, 'bytes': len(data), 'sha256': sha(data)}
+
+
+def emit(name, value):
+    encoded = (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode()
+    (OUT / name).write_bytes(encoded)
+    (MATERIAL / name).write_bytes(encoded)
+
+
+assert subprocess.check_output(['rtk', 'proxy', 'git', 'rev-parse', 'HEAD'], cwd=ROOT).decode().strip() == SOURCE_HEAD
+MATERIAL.mkdir(exist_ok=True)
+sources = json.loads((OUT / 'source-inputs-before.json').read_text())
+for name, expected in sources.items():
+    actual = identity(ROOT / name)
+    assert actual['bytes'] == expected['bytes'] and actual['sha256'] == expected['sha256'], name
+
+processes = {}
+task_counts = {}
+for prefix, stream in [('sdk-publish', 'sdk-publish'), ('consumer', 'consumer-build'),
+                       ('consumer-debug', 'consumer-debug-build')]:
+    process = json.loads((OUT / (prefix + '-process.json')).read_text())
+    assert process['exitCode'] == 0
+    log = (OUT / (stream + '.stdout')).read_text()
+    assert 'BUILD SUCCESSFUL' in log
+    counts = re.search(r'(\d+) actionable tasks: (\d+) executed, (\d+) up-to-date', log)
+    assert counts
+    task_counts[prefix] = dict(zip(('total', 'executed', 'upToDate'), map(int, counts.groups())))
+    processes[prefix] = dict(process, stdout=identity(OUT / (stream + '.stdout')),
+                             stderr=identity(OUT / (stream + '.stderr')))
+assert '> Task :android:backend-sherpa-asr:compileReleaseKotlin\n' in (OUT / 'sdk-publish.stdout').read_text()
+assert '> Task :compileSherpaAsrReleaseKotlin\n' in (OUT / 'consumer-build.stdout').read_text()
+assert '> Task :compileSherpaAsrDebugKotlin\n' in (OUT / 'consumer-debug-build.stdout').read_text()
+
+published = []
+source_bindings = []
+metadata_bindings = []
+for name in MODULES:
+    directory = M2 / 'io/ondeviceai' / name / '0.1.0-SNAPSHOT'
+    stem = name + '-0.1.0-SNAPSHOT'
+    aar = directory / (stem + '.aar')
+    source_jar = directory / (stem + '-sources.jar')
+    pom = directory / (stem + '.pom')
+    module = directory / (stem + '.module')
+    output_aar = ROOT / 'android' / name / 'build/outputs/aar' / (name + '-release.aar')
+    assert aar.read_bytes() == output_aar.read_bytes()
+    with zipfile.ZipFile(aar) as archive:
+        native = [p for p in archive.namelist() if p.endswith('.so')]
+        assert not native
+    published.append({'coordinate': 'io.ondeviceai:' + name + ':0.1.0-SNAPSHOT',
+                      'aar': identity(aar), 'sourceJar': identity(source_jar), 'pom': identity(pom),
+                      'moduleMetadata': identity(module), 'localOutputByteEqual': True,
+                      'nativeMembers': native})
+    source_root = ROOT / 'android' / name / 'src/main/kotlin'
+    expected_sources = {str(p.relative_to(source_root)): p for p in source_root.rglob('*.kt')}
+    with zipfile.ZipFile(source_jar) as archive:
+        actual_sources = {p for p in archive.namelist() if p.endswith('.kt')}
+        assert actual_sources == set(expected_sources), name
+        for member, path in sorted(expected_sources.items()):
+            data = archive.read(member)
+            assert data == path.read_bytes()
+            source_bindings.append({'module': name, 'jarMember': member,
+                                    'sourcePath': str(path.relative_to(ROOT)),
+                                    'bytes': len(data), 'sha256': sha(data), 'byteEqual': True})
+    metadata = json.loads(module.read_text())
+    assert metadata['component']['group'] == 'io.ondeviceai'
+    assert metadata['component']['module'] == name
+    for variant in metadata['variants']:
+        for item in variant.get('files', []):
+            assert item['name'] == Path(item['name']).name
+            path = directory / item['name']
+            data = path.read_bytes()
+            assert len(data) == item['size']
+            algorithms = [algorithm for algorithm in ('sha512', 'sha256', 'sha1', 'md5') if algorithm in item]
+            for algorithm in algorithms:
+                assert sha(data, algorithm) == item[algorithm]
+            metadata_bindings.append({'module': name, 'variant': variant['name'],
+                                      'file': item['name'], 'hashAlgorithmsVerified': algorithms,
+                                      'sha256': sha(data)})
+
+backend = next(row for row in published if row['coordinate'].split(':')[1] == 'backend-sherpa-asr')
+pom_xml = ET.fromstring((ROOT / backend['pom']['path']).read_bytes())
+ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
+dependencies = [{node.tag.rsplit('}', 1)[-1]: node.text for node in item}
+                for item in pom_xml.findall('m:dependencies/m:dependency', ns)]
+sherpa_dependency = [row for row in dependencies if row['groupId'] == 'com.k2fsa.sherpa.onnx']
+assert sherpa_dependency == [{'groupId': 'com.k2fsa.sherpa.onnx', 'artifactId': 'sherpa-onnx',
+                              'version': '2.0.1', 'scope': 'runtime'}]
+
+raw_resolution = json.loads((DELIVERY / 'resolved-artifacts.json').read_text())
+assert set(raw_resolution) == {'contractDebugRuntimeClasspath', 'systemAsrDebugRuntimeClasspath',
+                               'sherpaAsrDebugRuntimeClasspath'}
+resolved = {}
+for configuration, entries in raw_resolution.items():
+    assert all(not entry['component'].startswith('project ') for entry in entries)
+    runtime_entries = [entry for entry in entries if entry['component'].startswith('com.k2fsa.sherpa.onnx:')]
+    is_sherpa = configuration.startswith('sherpaAsr')
+    assert len(runtime_entries) == int(is_sherpa)
+    assert not any('backend-sherpa-asr' in entry['component'] for entry in entries) or is_sherpa
+    resolved[configuration] = []
+    for entry in entries:
+        path = Path(entry['path'])
+        if entry['component'].startswith('io.ondeviceai:'):
+            assert path.resolve().is_relative_to(M2.resolve())
+            published_row = next(row for row in published if row['coordinate'] == entry['component'])
+            assert path.read_bytes() == (ROOT / published_row['aar']['path']).read_bytes()
+        resolved[configuration].append({'component': entry['component'], 'artifact': identity(path)})
+
+runtime_entry, = [row for row in resolved['sherpaAsrDebugRuntimeClasspath']
+                  if row['component'] == 'com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1']
+assert runtime_entry['artifact']['sha256'] == 'a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7'
+fixed_runtime = ROOT / 'artifacts/verification/sherpa-asr-20261105/inputs/downloads/sherpa-onnx-2.0.1.aar'
+resolved_runtime = ROOT / runtime_entry['artifact']['path']
+assert resolved_runtime.read_bytes() == fixed_runtime.read_bytes()
+
+consumer_outputs = []
+for variant in ('debug', 'release'):
+    path = ROOT / 'examples/android-speech/build/outputs/aar' / ('android-speech-consumer-sherpaAsr-' + variant + '.aar')
+    retained = DELIVERY / path.name
+    if retained.exists():
+        assert retained.read_bytes() == path.read_bytes()
+    else:
+        shutil.copyfile(path, retained)
+    with zipfile.ZipFile(retained) as archive:
+        assert not any(member.endswith('.so') for member in archive.namelist())
+    consumer_outputs.append(dict(variant=variant, **identity(retained)))
+
+sys.path.insert(0, str(ROOT / 'probes/android-qwen-terminal'))
+import device_acceptance
+assert len(device_acceptance.verify_frozen_contract()['files']) == 161
+protected = json.loads((OUT / 'protected-before.json').read_text())
+for name, expected in protected.items():
+    actual = identity(ROOT / name)
+    assert actual['bytes'] == expected['bytes'] and actual['sha256'] == expected['sha256'], name
+
+fingerprint = sha((json.dumps(sources, sort_keys=True, separators=(',', ':')) + '\n').encode())
+emit('published-sdk-artifacts.json', {'sourceHead': SOURCE_HEAD, 'artifacts': published,
+                                     'metadataFileChecks': metadata_bindings,
+                                     'runtimePomDependency': sherpa_dependency})
+emit('source-jar-bindings.json', {'sourceHead': SOURCE_HEAD, 'sourceFileCount': len(source_bindings),
+                                 'bindings': source_bindings, 'compiledSemanticEquivalenceClaimed': False})
+emit('resolved-artifact-binding.json', {'configurations': resolved, 'runtimeByteEqualToFixedAar': True,
+                                       'reportConfigurations': 'Debug runtime only; Release compilation separately observed',
+                                       'allSdkArtifactsFromTaskLocalRepository': True,
+                                       'projectDependencyComponents': False,
+                                       'consumerOutputs': consumer_outputs})
+emit('candidate-receipt.json', {'candidateKind': 'current local SDK release publication and standalone library consumers',
+                                'sourceHead': SOURCE_HEAD, 'sourceInputFingerprint': fingerprint,
+                                'sourceInputs': sources, 'processes': processes, 'taskCounts': task_counts,
+                                'publishedSdkModules': 5, 'sourceJarFilesByteEqual': len(source_bindings),
+                                'actualResolvedRuntime': runtime_entry, 'consumerVariantsBuilt': ['debug', 'release'],
+                                'protectedPathsUnchanged': len(protected), 'freezeFiles': 161,
+                                'sdkCandidateAndActualConsumerBindingVerified': True,
+                                'finalAppPackageOrInstalledAdoptionVerified': False,
+                                'sourceBuildInputCompletenessVerified': False,
+                                'productionReleaseApproved': False, 'externalPublicationPerformed': False,
+                                'deviceExecuted': False, 'qualityOrResourceAccepted': False,
+                                'P1Complete': False, 'P2P3P4Accepted': False, 'W3Complete': False})
+print(json.dumps({'publishedModules': 5, 'sourceJarFileBytesVerified': len(source_bindings),
+                  'metadataVariantFileChecks': len(metadata_bindings), 'actualRuntimeByteEqual': True,
+                  'consumerDebugAndReleaseBuilt': True, 'protectedPathsUnchanged': len(protected),
+                  'freezeFiles': 161, 'P1Complete': False}))

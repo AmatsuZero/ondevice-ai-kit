@@ -1,0 +1,117 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.ondeviceai",
+    "module": "speech",
+    "version": "0.1.0-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.4.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseVariantReleaseApiPublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "io.ondeviceai",
+          "module": "sdk-core",
+          "version": {
+            "requires": "0.1.0-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "speech-0.1.0-SNAPSHOT.aar",
+          "url": "speech-0.1.0-SNAPSHOT.aar",
+          "size": 47127,
+          "sha512": "8ad7b26250b116d4ee80bdde4919bc5bd77c25b5a8282d91ff57aa4d97de4c929e374cb719bf77e68d4096b68c8192cc7eeec7613ab0fcb99b52763348c78ad7",
+          "sha256": "af39a696fd5ac750b7dcf2f8c08e407956dcab51bd66ebe2e54dcf8cfd99c0e6",
+          "sha1": "bacd394f9f93f6e862508618286e8ffbfbcc3a41",
+          "md5": "61f59678d756e6f70607becc90d58524"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseRuntimePublication",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "io.ondeviceai",
+          "module": "sdk-core",
+          "version": {
+            "requires": "0.1.0-SNAPSHOT"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "speech-0.1.0-SNAPSHOT.aar",
+          "url": "speech-0.1.0-SNAPSHOT.aar",
+          "size": 47127,
+          "sha512": "8ad7b26250b116d4ee80bdde4919bc5bd77c25b5a8282d91ff57aa4d97de4c929e374cb719bf77e68d4096b68c8192cc7eeec7613ab0fcb99b52763348c78ad7",
+          "sha256": "af39a696fd5ac750b7dcf2f8c08e407956dcab51bd66ebe2e54dcf8cfd99c0e6",
+          "sha1": "bacd394f9f93f6e862508618286e8ffbfbcc3a41",
+          "md5": "61f59678d756e6f70607becc90d58524"
+        }
+      ]
+    },
+    {
+      "name": "releaseVariantReleaseSourcePublication",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "speech-0.1.0-SNAPSHOT-sources.jar",
+          "url": "speech-0.1.0-SNAPSHOT-sources.jar",
+          "size": 2595,
+          "sha512": "a0377f4faa9d6224b252b2e88d8a9dea73a71a8d9709007196bef9c922715a14da0f4e57e2e0dbbb028d214228588aacd5dcea9b5f51fa01fd5fc13cb93609b1",
+          "sha256": "96a5087d5c186c6a2fd085b0bd917c88ee8597f2828f0214c51767ff442cb09a",
+          "sha1": "85d98336f01becabd02ae40b6423ea3d413470a0",
+          "md5": "fab9d5610b017968acf85eec92e0c4ea"
+        }
+      ]
+    }
+  ]
+}

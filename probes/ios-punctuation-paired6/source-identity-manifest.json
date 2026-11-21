@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "runId": "w3-apple-punctuation-paired6-20261116-01",
+  "backendId": "apple.speech.recognizer",
+  "manifestSHA256": "7e2133c9292e978ac45050349d03d4b1432f247da6dceda6facd328bb7a62453",
+  "inputBindingSHA256": "b3838b23136aa1be8c760915b565a2f192976ae3299631fcd3470f8df5334e88",
+  "sourceBaseCommit": "8c4751508050ec56b37a1bd4309f90a08eaa0d4c",
+  "selectedSources": [
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitCore/Availability.swift",
+      "sha256": "87f24120073f9c62ce6e3089e656356851a5732340e176e166fbc0d4130324a2"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitCore/LatestFrameQueue.swift",
+      "sha256": "2c8c7529fef0d34728fd7f14cd59322cb35952e2eaf9b2d92d7a4e2366cbf7ac"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitCore/TaskGate.swift",
+      "sha256": "0c62b522c82e0916d9f1330d3eda1a5bf9992de8c30e9689ad61e0aeba08d37d"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitSpeech/SpeechClient.swift",
+      "sha256": "59fcf256ed49ba8175d320dec03da149c9fc83f19d319d53eeb85f237be88990"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitSpeech/SpeechMicrophone.swift",
+      "sha256": "9c77a4179a83329f66ea25df6f148c024eb8a0be36d9d3c28663a397fd8d6500"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift",
+      "sha256": "868941155d991dec17be86906ac18d4a1388e5a6b8a4172324657cbaa37bf811"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmA/AppleAVSpeechBackend.swift",
+      "sha256": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmA/AppleSpeechAudioSession.swift",
+      "sha256": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmA/AppleSpeechMicrophone.swift",
+      "sha256": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmA/AppleSpeechRecognizerBackend.swift",
+      "sha256": "46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmB/AppleAVSpeechBackend.swift",
+      "sha256": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmB/AppleSpeechAudioSession.swift",
+      "sha256": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmB/AppleSpeechMicrophone.swift",
+      "sha256": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9"
+    },
+    {
+      "path": ".omx/artifacts/w3-punctuation-paired6-preparation-20261116/RuntimeSources/PunctuationArmB/AppleSpeechRecognizerBackend.swift",
+      "sha256": "e202d3d0d0efa80410f22d3e9d475ea51cdeb810acba2930a86d23afd626d952"
+    },
+    {
+      "path": "probes/ios-punctuation-paired6/Apple65Core.swift",
+      "sha256": "bee853415a299332493157b22c001377ce114670edba06d994529e75a50d5d81"
+    },
+    {
+      "path": "probes/ios-punctuation-paired6/PunctuationPlan.swift",
+      "sha256": "6e25a135fa9ae4d67434d3b0f30d4376589d2b6981d42a1b6fdf7312ef909bfd"
+    },
+    {
+      "path": "probes/ios-punctuation-paired6/W3Apple65App.swift",
+      "sha256": "95da12fda3480be1ef5de9391b914a3df13b0f7ecb7e731e8373c0ceba46b232"
+    },
+    {
+      "path": "probes/ios-punctuation-paired6/project.yml",
+      "sha256": "ce69ee18283e0503a843346e0405bafbaf9c739cf667c07d195b58457973d6fe"
+    }
+  ],
+  "distributionBoundary": "isolated-punctuation-paired6-not-production"
+}

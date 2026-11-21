@@ -1,0 +1,162 @@
+)]}'
+{
+  "id": "1634697380e52c55cb31729207f6332092c078d8",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "ae4689b0f41d1498d4025ec63e0cf105a7471feb",
+      "name": "Add-cmake-c-cxx-asm-linker-flags.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "b947a2c906f97c08bd9c75fae5c20b5f5664b54f",
+      "name": "Add-stubs-and-headers-for-nl_types-APIs.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "b5536f2236fa15c64d8eef9ba7d9acb43ada1e1f",
+      "name": "BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "39dc7e5d996b81771a05ff0b0b0dd752113a8055",
+      "name": "Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "3de530c71c327a4d15297e1dc377eb65bac0d36f",
+      "name": "Disable-vfork-fork-events.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "5d753656aee4b85b787537c3a74d7bfd57285971",
+      "name": "Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "56b349a06a06b20412b16095152ce49fb2d57bf1",
+      "name": "Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "aa7030d710c498976607ac26fe0f7736dee31b30",
+      "name": "PATCHES.json"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "ac90dea7eb018e92024c8c93d0de65b93cc94c49",
+      "name": "Remove-inline_asm-tests-for-now.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "f38b9346a2a64a83b88b2b0c30f66a101cb9b5b3",
+      "name": "Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "1dca1d7a0896a2593395fd03ed58917357037a02",
+      "name": "Revert-Driver-Allow-target-override-containing-.-in-executable-name.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "9179fe573d01f2ea1457b9adb384851a1ee0f282",
+      "name": "Revert-Enable-IAS-In-Backend-v2.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "0bd8281203608543072b8b05f6410b1e274fcf0e",
+      "name": "Revert-Fix-diagnostic-for-stdatomic.h-before-C++23.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e639f6a027c37b7bb3c7cd9bd662b075aea24d3d",
+      "name": "Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "09d117f4f359bc8d25bba8a8094e9f5ade1bf461",
+      "name": "Revert-clang-Headers-Do-not-define-varargs-macros-for-__need___va_list.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "d0cc383077d74c2ff822c88f4ac7547f69eaf390",
+      "name": "Support-for-WASM-as-native-IR.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "9ad2e05943e0cce104a5acc18b5049f2ee3d8bdf",
+      "name": "Wasm-omit-64-bit-function-pointer-cast.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "33ba528832124c580830144438b95c58a9d3fae8",
+      "name": "avoid-fifo-socket-hardlink-in-libcxx-tests.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "19bdf7feb0166481e4c2a02fe49c33f289be2634",
+      "name": "avoid-triggering-fdsan-in-filebuf-test.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "3085382ec385904ce9f4b08e70bd33c020f43ccf",
+      "name": "bionic-includes-plus-sign-for-nan-v2.patch"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "4f2189090f4e74de7f5ed4b03c3a87d80c69c7bb",
+      "name": "cherry"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "002b51a2ac695e9acb1a377adaa0532807f6275c",
+      "name": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "d570988238d44e5f91b36fc65458f0a82384f131",
+      "name": "disable-symlink-resolve-test-on-android.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "3426c34acb757978831b45f7e4c53382c5ec3021",
+      "name": "enable-libcxx-testing-using-adb.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "326a9c5c62cb0d822ad530f69c7b98b0f28a5bf6",
+      "name": "hide-locale-lit-features-for-bionic-v2.patch"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "21533ee8f77a251f9143f16c9043f8a68e419dae",
+      "name": "move-cxa-demangle-into-libcxxdemangle.patch"
+    }
+  ]
+}

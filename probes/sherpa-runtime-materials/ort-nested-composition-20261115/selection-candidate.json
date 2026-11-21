@@ -1,0 +1,290 @@
+{
+  "index": {
+    "schemaVersion": 1,
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "scope": "Bounded child-only technical supplement for fixed-ORT nested notice evidence covering supplied root ids 30-56 plus child-only ids 101-104; selected known subset and explicit unselections only, not full composition, retained-code proof, or legal approval.",
+    "incomplete": true,
+    "entries": [
+      {
+        "id": 30,
+        "groupId": "ort-archive-root-notice",
+        "destination": "abseil_cpp/AUTHORS",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/abseil_cpp/AUTHORS",
+        "kind": "author list evidence",
+        "rationale": "Retained author/copyright evidence paired with Abseil Apache notice and observed compiled Abseil units; not a complete license text."
+      },
+      {
+        "id": 31,
+        "groupId": "ort-archive-root-notice",
+        "destination": "abseil_cpp/LICENSE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/abseil_cpp/LICENSE",
+        "kind": "full license text",
+        "rationale": "Apache-2.0 archive-root notice for Abseil with observed compiled units across all supplied ABIs."
+      },
+      {
+        "id": 32,
+        "groupId": "ort-archive-root-notice",
+        "destination": "re2/LICENSE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/re2/LICENSE",
+        "kind": "full license text",
+        "rationale": "Archive-root notice for re2, which has observed compiled units and an external target declaration."
+      },
+      {
+        "id": 33,
+        "groupId": "ort-archive-root-notice",
+        "destination": "protobuf/LICENSE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/protobuf/LICENSE",
+        "kind": "full license text",
+        "rationale": "Archive-root notice for Protobuf with observed compiled units and external target declaration."
+      },
+      {
+        "id": 34,
+        "groupId": "ort-archive-root-notice",
+        "destination": "date/LICENSE.txt",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/date/LICENSE.txt",
+        "kind": "full license text",
+        "rationale": "Archive-root notice for the declared date external target; no final retained-code conclusion is implied."
+      },
+      {
+        "id": 35,
+        "groupId": "ort-mp11-source-declaration",
+        "destination": "mp11/README.md",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/mp11-source-evidence/README.md",
+        "kind": "source excerpt",
+        "rationale": "Retained source README declaration evidence for mp11; not a complete BSL text, which is cross-referenced separately."
+      },
+      {
+        "id": 36,
+        "groupId": "ort-mp11-source-declaration",
+        "destination": "mp11/mp11.hpp",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/mp11-source-evidence/mp11.hpp",
+        "kind": "source excerpt",
+        "rationale": "Retained header copyright/license declaration evidence for Boost::mp11; not a complete BSL text."
+      },
+      {
+        "id": 37,
+        "groupId": "ort-mp11-source-declaration",
+        "destination": "mp11/version.hpp",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/mp11-source-evidence/version.hpp",
+        "kind": "source excerpt",
+        "rationale": "Retained header copyright/license declaration evidence for Boost::mp11; not a complete BSL text."
+      },
+      {
+        "id": 38,
+        "groupId": "ort-archive-root-notice",
+        "destination": "nlohmann_json/LICENSE.MIT",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/LICENSE.MIT",
+        "kind": "full license text",
+        "rationale": "Component-specific MIT notice for nlohmann_json, which is named in the external targets declaration."
+      },
+      {
+        "id": 43,
+        "groupId": "ort-archive-root-notice",
+        "destination": "microsoft_gsl/LICENSE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/microsoft_gsl/LICENSE",
+        "kind": "full license text",
+        "rationale": "Archive-root MIT notice for the declared GSL external target; selected as source notice evidence only."
+      },
+      {
+        "id": 44,
+        "groupId": "ort-archive-root-notice",
+        "destination": "safeint/LICENSE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/safeint/LICENSE",
+        "kind": "full license text",
+        "rationale": "Archive-root MIT notice for safeint_interface named in the external targets declaration."
+      },
+      {
+        "id": 45,
+        "groupId": "ort-archive-root-notice",
+        "destination": "flatbuffers/LICENSE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/flatbuffers/LICENSE",
+        "kind": "full license text",
+        "rationale": "Apache-2.0 archive-root notice for flatbuffers with observed compiled units."
+      },
+      {
+        "id": 46,
+        "groupId": "ort-archive-root-notice",
+        "destination": "eigen/COPYING.APACHE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.APACHE",
+        "kind": "full license text",
+        "rationale": "Nested Eigen archive-root notice retained with the nested-commit caveat; the exact nested Eigen commit differs from Sherpa 5.0.1 and is not merged with historical Sherpa Eigen notices."
+      },
+      {
+        "id": 47,
+        "groupId": "ort-archive-root-notice",
+        "destination": "eigen/COPYING.BSD",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.BSD",
+        "kind": "full license text",
+        "rationale": "Nested Eigen third-party notice retained as archive-root evidence only; no claim that every referenced third-party code path was retained."
+      },
+      {
+        "id": 48,
+        "groupId": "ort-archive-root-notice",
+        "destination": "eigen/COPYING.MINPACK",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.MINPACK",
+        "kind": "full license text",
+        "rationale": "Nested Eigen Minpack notice retained as archive-root evidence only; exact nested commit caveat applies."
+      },
+      {
+        "id": 49,
+        "groupId": "ort-archive-root-notice",
+        "destination": "eigen/COPYING.MPL2",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.MPL2",
+        "kind": "full license text",
+        "rationale": "Nested Eigen MPL2 notice retained as supplied archive-root text; selection is notice evidence, not final composition proof."
+      },
+      {
+        "id": 50,
+        "groupId": "ort-archive-root-notice",
+        "destination": "eigen/COPYING.README",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.README",
+        "kind": "source notice overview excerpt",
+        "rationale": "Nested Eigen license overview preserved as retained source evidence; it is not a substitute for a complete license text."
+      },
+      {
+        "id": 51,
+        "groupId": "ort-archive-root-notice",
+        "destination": "eigen/LICENSE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/LICENSE",
+        "kind": "full license text",
+        "rationale": "Nested Eigen LICENSE text retained alongside the supplied MPL2 archive-root text; exact nested commit differs from Sherpa 5.0.1."
+      },
+      {
+        "id": 52,
+        "groupId": "ort-archive-root-notice",
+        "destination": "kleidiai/Apache-2.0.txt",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/kleidiai/Apache-2.0.txt",
+        "kind": "full license text",
+        "rationale": "Apache-2.0 notice for KleidiAI, whose compiled source heads were byte-bound and observed as Apache across the supplied evidence."
+      },
+      {
+        "id": 54,
+        "groupId": "ort-archive-root-notice",
+        "destination": "pytorch_cpuinfo/LICENSE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/pytorch_cpuinfo/LICENSE",
+        "kind": "full license text",
+        "rationale": "Archive-root notice for pytorch_cpuinfo with observed compiled units and a described CPUINFO_SUPPORTED link branch."
+      },
+      {
+        "id": 55,
+        "groupId": "ort-archive-root-notice",
+        "destination": "onnx/LICENSE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/onnx/LICENSE",
+        "kind": "full license text",
+        "rationale": "Apache-2.0 notice for ONNX with observed compiled units and external target declarations."
+      },
+      {
+        "id": 56,
+        "groupId": "ort-archive-root-notice",
+        "destination": "onnx/NOTICE",
+        "sourcePath": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/onnx/NOTICE",
+        "kind": "third-party notice",
+        "rationale": "ONNX NOTICE retained as the supplied archive-root notice; no conclusion is drawn beyond the selected technical evidence."
+      },
+      {
+        "id": 101,
+        "groupId": "ort-nested-json-upstream-attributions",
+        "destination": "nlohmann_json/UPSTREAM-LICENSE.md",
+        "sourcePath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/notices/json-v3.11.3/UPSTREAM-LICENSE.md",
+        "kind": "whole upstream embedded-attributions documentation",
+        "rationale": "Preserves the whole upstream JSON embedded-attributions document, including the Hedley CC0 declaration, as source evidence; no full legal applicability conclusion is asserted."
+      },
+      {
+        "id": 102,
+        "groupId": "ort-nested-kleidiai-compiled-source-evidence",
+        "destination": "kleidiai/COPYRIGHT-102.txt",
+        "sourcePath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/notices/kleidiai-v1.20.0/COPYRIGHT-102.txt",
+        "kind": "contiguous raw compiled-source copyright and SPDX comment",
+        "rationale": "Raw copyright-year and Apache SPDX declaration byte-bound to a compiled KleidiAI source head; declaration evidence only, not a full license text."
+      },
+      {
+        "id": 103,
+        "groupId": "ort-nested-kleidiai-compiled-source-evidence",
+        "destination": "kleidiai/COPYRIGHT-103.txt",
+        "sourcePath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/notices/kleidiai-v1.20.0/COPYRIGHT-103.txt",
+        "kind": "contiguous raw compiled-source copyright and SPDX comment",
+        "rationale": "Raw copyright-year and Apache SPDX declaration byte-bound to a compiled KleidiAI source head; declaration evidence only, not a full license text."
+      },
+      {
+        "id": 104,
+        "groupId": "ort-nested-kleidiai-compiled-source-evidence",
+        "destination": "kleidiai/COPYRIGHT-104.txt",
+        "sourcePath": "probes/sherpa-runtime-materials/ort-nested-composition-20261115/notices/kleidiai-v1.20.0/COPYRIGHT-104.txt",
+        "kind": "contiguous raw compiled-source copyright and SPDX comment",
+        "rationale": "Raw copyright-year and Apache SPDX declaration byte-bound to a compiled KleidiAI source head; declaration evidence only, not a full license text."
+      }
+    ],
+    "unselected": [
+      {
+        "ids": [
+          39,
+          40,
+          41,
+          42
+        ],
+        "disposition": "unselected_json_test_tool_or_generic_text",
+        "reason": "JSON .reuse/dep5 maps Apache to tests/Fuzzer, GPL to tests/thirdparty/imapdl, and BSD to tools/amalgamate; fixed ORT source has JSON tests OFF. These archive texts are not copied as retained-code license evidence merely because they are present. The component-specific MIT notice and upstream embedded-attributions document are selected instead. This is not a legal applicability conclusion."
+      },
+      {
+        "ids": [
+          53
+        ],
+        "disposition": "unselected_not_bound_to_compiled_kleidiai_evidence",
+        "reason": "The generic KleidiAI BSD-3-Clause root text is not bound to the byte-compiled KleidiAI source heads, which were observed as Apache. BSD code retention is neither inferred from this generic text nor universally denied."
+      }
+    ],
+    "existingLicenseReferences": [
+      {
+        "component": "mp11 / Boost Software License (BSL-1.0)",
+        "assetPath": "asio-asio-1-24-0-observed-build/LICENSE_1_0.txt",
+        "rationale": "Existing root-native full BSL text supplied as id29; used as the cross-reference for BSL statements in the mp11 source excerpts, not as a newly invented mp11 LICENSE file or a complete-applicability conclusion."
+      }
+    ],
+    "blockers": [
+      "Full ORT nested composition remains open; the supplied compile/link observations are source declarations and observed units, not final retained-code or LTO retention proof.",
+      "JSON GPL/Apache/BSD texts mapped by .reuse/dep5 to tests/thirdparty/imapdl, tests/Fuzzer, and tools/amalgamate are not selected; fixed ORT source has JSON tests OFF; final applicability is not determined.",
+      "KleidiAI generic BSD root text is not bound to the compiled source heads; BSD code retention is neither inferred nor universally denied.",
+      "The exact nested Eigen commit differs from Sherpa 5.0.1; historical Sherpa Eigen notices remain separate from this nested supplement.",
+      "Source-only clog/utf8_range evidence remains limited to bundled archive/header install lists with no direct compile target established; this candidate neither declares final presence from archive paths nor universal absence from grep.",
+      "Parent must mechanically verify bound source bytes, SHA values and provenance and run builds/negative checks; no execution or test result is claimed in this candidate."
+    ]
+  },
+  "rootIndexUpdate": {
+    "replaceUnselectedGroupIds30to56": {
+      "ids": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "disposition": "supplemented_by_child_ort_nested_index",
+      "reason": "The blanket deferral is replaced because a bounded child supplement now records selected and explicitly unselected dispositions for the fixed ORT nested subset; root group ids remain 30-56 and all extra status lives only in the child index.",
+      "detailsIndex": "native/ort-nested/index.json"
+    },
+    "replaceORTBlocker": "ORT nested source/reference notices (ids 30 through 56) now have a bounded supplemental disposition in native/ort-nested/index.json; full nested composition and final retained-code applicability remain open, and the root ORT ThirdPartyNotices does not replace that review."
+  },
+  "readmeAppend": "## ORT nested notices supplement\n\n`native/ort-nested/index.json` records a bounded, incomplete supplement for fixed ORT nested notice evidence (root ids 30-56 plus child-only ids 101-104). It selects original notice text copies for the recorded known subset and records explicit unselections where the supplied mapping is test/tool/generic or not bound to retained code. This is technical notice delivery only; it does not assert full final composition, retained-code applicability, or W3/P4/legal approval.\n\nThe mp11 README/header excerpts are retained as copyright/license declaration evidence only; the complete BSL text remains the existing root asset at `asio-asio-1-24-0-observed-build/LICENSE_1_0.txt`. The upstream JSON embedded-attributions document is preserved with its CC0 declaration. GPL/Apache/BSD texts mapped by `.reuse/dep5` to JSON tests/tools are not copied merely because they appear in the archive, and fixed ORT source has JSON tests OFF. KleidiAI evidence uses the Apache notice plus byte-bound raw Apache SPDX copyright declarations; the generic BSD root text is not treated as proof of retained BSD code. Eigen entries are fixed-ORT nested evidence and are not merged with historical Sherpa Eigen notices. Source-only clog/utf8_range paths are not declared finally present from archive/header install lists alone, nor universally absent from grep. Parent mechanical byte/SHA/provenance binding, builds and negative checks remain required; no execution result is claimed here.\n"
+}

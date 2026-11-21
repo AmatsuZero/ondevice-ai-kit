@@ -1,0 +1,93 @@
+{
+  "scope": "Fixed source and actual tokenizer, static capacity preflight only; no ASR/ORT session",
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "caseManifestSHA256": "8d1cfd7465e70f413b741701250d61c31170b25a6978a256a4df0349efa0910f",
+  "caseCount": 65,
+  "hotwords": "",
+  "sampleRate": 16000,
+  "maxSamples": 160000,
+  "maxSeconds": 10,
+  "maxNewTokens": 128,
+  "maximumFeatureFrames": 1000,
+  "maximumAudioTokens": 130,
+  "promptTokenCounts": {
+    "auto": 15,
+    "requestedChinese": 18,
+    "requestedEnglish": 18
+  },
+  "maximumContextTokens": 148,
+  "minimumNoExtraTruncationCapacity": 275,
+  "proposedCapacity": 288,
+  "roundingPolicy": "smallest multiple of32 >=275; determined before inference",
+  "rejectedCapacity": 256,
+  "maxGeneratedAtRejectedCapacityInWorstCase": 109,
+  "baseKVBytes": {
+    "512": 117440512,
+    "288": 66060288,
+    "difference": 51380224
+  },
+  "all65StaticBoundsPassed": true,
+  "constructorConfigChangeRequired": true,
+  "streamOptionAloneResizesKV": false,
+  "constructorVersusStreamEvidence": "CreateEmptyKVCache runs before stream max_total_len; model max_total_len is determined at construction from dynamic shape fallback config",
+  "qualityParityVerified": false,
+  "measuredMemorySavingsVerified": false,
+  "physicalBudgetVerified": false,
+  "sourceToExactAARVerified": false,
+  "existingAPKAndContractsChanged": false,
+  "newInferenceCalls": 0,
+  "scopeLimit": "Only empty hotwords, <=10s16k mono files, this exact tokenizer/source and maxNewTokens128; not general product capacity or a guarantee of identical floating-point results.",
+  "schemaVersion": 1,
+  "date": "2026-11-11",
+  "status": "static-preflight-accepted-only",
+  "resultSHA256": "1e9fb717d4016dbf5ecf7f4e8ca0ee7ccdd7d5f92728a0c4cf905c80c4a95aa5",
+  "evidenceDirectory": "artifacts/verification/w3-qwen-kv-capacity-preflight-20261111",
+  "tokenizerSourceReceipts": [
+    {
+      "file": "qwen-asr-tokenizer.cc",
+      "path": "sherpa-onnx/csrc/qwen-asr-tokenizer.cc",
+      "bytes": 31724,
+      "sha256": "70100308eaa1e7378cd73912472f304c9d0388092c8182f24691854f76830b6f",
+      "blobSHA1": "d6cc43ca9b6d4af209b9222ea3c033c3d62238ac",
+      "sourceURL": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/qwen-asr-tokenizer.cc"
+    },
+    {
+      "file": "qwen-asr-tokenizer.h",
+      "path": "sherpa-onnx/csrc/qwen-asr-tokenizer.h",
+      "bytes": 1982,
+      "sha256": "7ad9db278f04b918ed45f2da6e9ab29805b7c7d5b808b640d18267acdfb19d4c",
+      "blobSHA1": "eae42c505901a8071ba0d12bdbcec50a2acaf8c2",
+      "sourceURL": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/sherpa-onnx/csrc/qwen-asr-tokenizer.h"
+    }
+  ],
+  "freshVerification": {
+    "sourceReceiptsVerified": 2,
+    "officialTokenizerRecompiled": true,
+    "actualTokenizerOutputsMatched": true,
+    "frameResultsMatched": 1001,
+    "allCaseBoundsPassed": 65,
+    "arithmeticResultMatched": true,
+    "newOrtSessions": 0,
+    "newAsrInferenceCalls": 0,
+    "kotlinOrFrozenContractChanged": false,
+    "verificationScriptSHA256": "c70dac4d2d0c262b85c35ac6f22785b6ff21f3d8611ebbe1c10d9a9c3aaeb1d5",
+    "capacityPreflightSHA256": "1e9fb717d4016dbf5ecf7f4e8ca0ee7ccdd7d5f92728a0c4cf905c80c4a95aa5"
+  },
+  "independentReview": {
+    "model": "cbc hy3",
+    "verdict": "accept",
+    "findings": [],
+    "elapsedSeconds": 66.93535733298631,
+    "toolRequests": 0,
+    "reviewSHA256": "0465d8f08f8fdc0ce29df4f53401c13295e8f68e187d2e1e4a767aacc0eb2e70",
+    "scope": "supplied context only; no direct device/runtime observation"
+  },
+  "physicalArenaFrozenFileCount": 108,
+  "physicalHeapFrozenFileCount": 120,
+  "physicalHeapRunConsumed": false,
+  "newKotlinChanges": false,
+  "newApkBuilds": 0,
+  "w3Complete": false,
+  "r4Complete": false,
+  "r5Complete": false
+}

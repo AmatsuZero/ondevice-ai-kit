@@ -1,0 +1,111 @@
+{
+  "recordedAt": "2026-11-10T14:04:10.275590+08:00",
+  "issues": [
+    {
+      "iid": 4,
+      "commentId": 41911
+    },
+    {
+      "iid": 5,
+      "commentId": 41913
+    },
+    {
+      "iid": 11,
+      "commentId": 41915
+    },
+    {
+      "provider": "github",
+      "iid": 15,
+      "contentSha256": "953ed49594990d28b819242a4bff7dfdef7fecf3b004c24936322fd79d528e90",
+      "terminalNewlineTrimmed": false
+    },
+    {
+      "provider": "gitlab",
+      "iid": 15,
+      "contentSha256": "8f6f7232aa0a97402e2ab52a7629926ee47b929f169836bce17d963f284827bb",
+      "terminalNewlineTrimmed": true
+    },
+    {
+      "provider": "github",
+      "iid": 4,
+      "commentId": 6760219415,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/4#issuecomment-6760219415"
+    },
+    {
+      "provider": "github",
+      "iid": 5,
+      "commentId": 6760220254,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/5#issuecomment-6760220254"
+    },
+    {
+      "provider": "github",
+      "iid": 11,
+      "commentId": 6760221582,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/11#issuecomment-6760221582"
+    }
+  ],
+  "githubWiki": {
+    "remoteCommit": "94b19255c3e585e9654f814ae7cc2be502ea9fc9",
+    "files": [
+      {
+        "name": "Home.md",
+        "sha256": "66fa85751d7a650477b81d07da76155b84deb109b3ebbde8b0e91c49e8cf9d58"
+      },
+      {
+        "name": "W3语音验收与后续改进.md",
+        "sha256": "7d9ddc01c952a5c518873b593409e5d34218594ac9f92ecf94ef7cec309b2269"
+      },
+      {
+        "name": "交付与验收状态.md",
+        "sha256": "932af7cccd547fe18db9e8bab94ab51db0c454898890867b869b02f5fe0ac2ce"
+      },
+      {
+        "name": "音频文件转写-ASR.md",
+        "sha256": "cf4b65aa44f97aabbf6398c7f934cc36db9204307564de23906ae4f0cfe6052e"
+      },
+      {
+        "name": "麦克风语音识别.md",
+        "sha256": "d67f12c2550ad583aee8b95abbc72578bbde092a6f78b598fa15c9166db28e1e"
+      }
+    ]
+  },
+  "gitlabWiki": [
+    {
+      "slug": "W3语音验收与后续改进",
+      "method": "POST",
+      "contentSha256": "7d9ddc01c952a5c518873b593409e5d34218594ac9f92ecf94ef7cec309b2269"
+    },
+    {
+      "slug": "交付与验收状态",
+      "method": "PUT",
+      "contentSha256": "d5726189a5ea4465e4741da6bc5513f4af516493e6fef08822611a4a594750a9"
+    },
+    {
+      "slug": "音频文件转写-ASR",
+      "method": "PUT",
+      "contentSha256": "cf4b65aa44f97aabbf6398c7f934cc36db9204307564de23906ae4f0cfe6052e"
+    },
+    {
+      "slug": "麦克风语音识别",
+      "method": "PUT",
+      "contentSha256": "793b695db35117e9ca1da49db190c5dc2a0e439b2ac7579ddb435c4d0db045ba"
+    }
+  ],
+  "sourceBranches": [
+    {
+      "provider": "github",
+      "before": "11134567e9cf21f86a3ca5a16cb7d93b696347a1",
+      "after": "11134567e9cf21f86a3ca5a16cb7d93b696347a1",
+      "unchanged": true
+    },
+    {
+      "provider": "gitlab",
+      "before": "4ee9b72d859f37ac64cd77cbf514ac6f9ae788c3",
+      "after": "37f1e25c4f273e56ee6d3f63bf03116744312927",
+      "unchanged": false
+    }
+  ],
+  "sourceBranchPushByThisTask": false,
+  "sourceDriftNote": "GitLab source branch independently advanced to37f1e25 during publication. Retained observed drift; this task pushed only the GitHub wiki repo. No source link was fabricated.",
+  "scope": "W3 remains open; continue improvement; no new inference in this publication"
+}

@@ -1,0 +1,48 @@
+name: W3Apple65File
+options:
+  deploymentTarget:
+    iOS: "15.0"
+packages:
+  apple:
+    path: ../../apple
+targets:
+  W3Apple65File:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: Apple65Core.swift
+      - path: W3Apple65App.swift
+      - path: ../../.omx/artifacts/w3-apple65-probe-preparation-20261116/AudioFixtures
+        type: folder
+        buildPhase: resources
+      - path: source-identity-manifest.json
+        buildPhase: resources
+    dependencies:
+      - package: apple
+        product: ODAIKitCore
+      - package: apple
+        product: ODAIKitSpeech
+      - package: apple
+        product: ODAIKitAppleSpeech
+    settings:
+      base:
+        PRODUCT_NAME: W3Apple65File
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w3apple65file20261116
+        MARKETING_VERSION: 1.0
+        CURRENT_PROJECT_VERSION: 1
+        SWIFT_VERSION: 5.0
+        IPHONEOS_DEPLOYMENT_TARGET: 15.0
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGNING_ALLOWED: NO
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Used only by an explicit manual FILE evaluation to transcribe bundled audio files."
+        TARGETED_DEVICE_FAMILY: "1,2"
+schemes:
+  W3Apple65File:
+    build:
+      targets:
+        W3Apple65File: all
+    run:
+      config: Debug
+    archive:
+      config: Release

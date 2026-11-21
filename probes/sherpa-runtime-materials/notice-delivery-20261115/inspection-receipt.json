@@ -1,0 +1,31 @@
+{
+  "sdkSourceHead": "a18292ac56e7c694fd2e7efb2550864a0b3ef21e",
+  "inspectionSourceHead": "e375bad52b86163fea5525ca979c551f83f827f6",
+  "verifiedSourceInputsUnchanged": 47,
+  "archives": 17,
+  "containersIncludingNested": 25,
+  "nonDirectoryMembersIncludingNested": 2243,
+  "referenceTexts": 58,
+  "noticeLikeNames": 0,
+  "exactOrContainedKnownRuntimeTexts": 0,
+  "utf8NoticeSignals": 0,
+  "sherpaAndConsumerMembersRetained": 189,
+  "pythonAndInfoZipListsAndConcatenatedPayloadsEqual": true,
+  "fullLocalMemberEvidence": {
+    "path": ".omx/artifacts/w3-notice-delivery-20261115/archive-members.json",
+    "bytes": 1211630,
+    "sha256": "7745fb6b64c3301ad791baeee67d336e3f1339d234cdb5d0f8cc8e58296146a1"
+  },
+  "noStandaloneNoticeAssetsObserved": true,
+  "thinLibraryConsumerIsFinalApp": false,
+  "consumerAbsenceProvesPackagingDroppedNotices": false,
+  "finalAppRetentionTested": false,
+  "legalComplianceDetermination": false,
+  "P3Complete": false,
+  "P1P2P4Accepted": false,
+  "W3Complete": false,
+  "deviceOperations": 0,
+  "helperInvocations": 0,
+  "newBuilds": 0,
+  "productionSourceChanges": false
+}

@@ -1,0 +1,1061 @@
+{
+  "schemaVersion": 1,
+  "sameOrderedInputs": 65,
+  "identicalFinalStrings": 65,
+  "identicalStagesExceptDuration": 117,
+  "rows": [
+    {
+      "id": "fleurs-cmn_hans_cn-1805",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1965",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1903",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1953",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1830",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1910",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1902",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1905",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1772",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1792",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1962",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1884",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1958",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1871",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1698",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-2002",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1661",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1697",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1821",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1808",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1675",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1728",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1972",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1914",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1806",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1776",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1802",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1992",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-2005",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1674",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1952",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1749",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1662",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1858",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1909",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1897",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1953",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1740",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1987",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "fleurs-en_us-1990",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2003a.sync.171-C",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2003a.sync.93-B",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2003a.sync.95-B",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2003a.sync.209-C",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2003a.sync.267-D",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2003a.sync.29-A",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2003a.sync.129-B",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2003a.sync.131-B",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2003a.sync.133-B",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2004a.sync.121-B",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2004a.sync.131-B",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-ES2006a.sync.277-C",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 2
+    },
+    {
+      "id": "ami-negative-ES2003a-0",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "ami-negative-ES2003a-1",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "ami-negative-ES2003a-2",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "ami-negative-ES2004a-0",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "ami-negative-ES2004a-1",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "ami-negative-ES2004a-2",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "ami-negative-ES2006a-0",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "ami-negative-ES2006a-1",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "ami-negative-ES2006a-2",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "independent-silence-3s-zh-CN",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "independent-silence-10s-zh-CN",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "independent-silence-3s-en-US",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    },
+    {
+      "id": "independent-silence-10s-en-US",
+      "inputBindings": {
+        "id": true,
+        "locale": true,
+        "cohort": true,
+        "samples": true,
+        "reference": true,
+        "pcmSha256": true
+      },
+      "finalTextIdentical": true,
+      "admissionAndLifecycleIdentical": true,
+      "stagesIdenticalExceptDuration": 1
+    }
+  ],
+  "observations": {
+    "512": {
+      "runId": "w3-qwen-arena-emulator-20261111-01",
+      "reportSHA256": "696ee418d3de9c6fa7b51b8854ff163788e248495bb8d1d8728a826b1d5266b2",
+      "constructors": 1,
+      "streams": 117,
+      "decodeCalls": 117,
+      "rows": 65,
+      "strictEmpty": 13,
+      "nonempty": 52,
+      "hostSeconds": 145.46351729199523,
+      "loadSeconds": 1.917291501,
+      "releaseSeconds": 0.065306042,
+      "rssSamples": 574,
+      "sampledMaxRssBytes": 1539006464,
+      "minimumAvailableBytes": 1466806272,
+      "caseRtfRange": [
+        0.1061303042,
+        0.5106159261143411
+      ],
+      "truePeakMeasured": false
+    },
+    "288": {
+      "runId": "w3-qwen-kv288-emulator-20261111-01",
+      "reportSHA256": "c0dea0ab799229b952d6d089be986b77f9be3d9bd366da27db271a69834a8132",
+      "constructors": 1,
+      "streams": 117,
+      "decodeCalls": 117,
+      "rows": 65,
+      "strictEmpty": 13,
+      "nonempty": 52,
+      "hostSeconds": 113.48630329198204,
+      "loadSeconds": 1.456497417,
+      "releaseSeconds": 0.046487958,
+      "rssSamples": 440,
+      "sampledMaxRssBytes": 1542725632,
+      "minimumAvailableBytes": 1547964416,
+      "caseRtfRange": [
+        0.0847159167,
+        0.4017066984011628
+      ],
+      "truePeakMeasured": false
+    }
+  },
+  "sameScorerSHA256": "d398bb35438b9f4eb399fc404e02c0c2a7184a7cea7c7a6d32e4a321f8e2b39e",
+  "freshlyRecomputedScores": {
+    "512": {
+      "mandarin": {
+        "referenceUnits": 590,
+        "hypothesisUnits": 578,
+        "substitutions": 18,
+        "deletions": 17,
+        "insertions": 5,
+        "errors": 40,
+        "rate": 0.06779661016949153,
+        "defined": true
+      },
+      "english-near": {
+        "referenceUnits": 375,
+        "hypothesisUnits": 376,
+        "substitutions": 32,
+        "deletions": 2,
+        "insertions": 3,
+        "errors": 37,
+        "rate": 0.09866666666666667,
+        "defined": true
+      },
+      "english-far": {
+        "referenceUnits": 226,
+        "hypothesisUnits": 216,
+        "substitutions": 48,
+        "deletions": 13,
+        "insertions": 3,
+        "errors": 64,
+        "rate": 0.2831858407079646,
+        "defined": true
+      }
+    },
+    "288": {
+      "mandarin": {
+        "referenceUnits": 590,
+        "hypothesisUnits": 578,
+        "substitutions": 18,
+        "deletions": 17,
+        "insertions": 5,
+        "errors": 40,
+        "rate": 0.06779661016949153,
+        "defined": true
+      },
+      "english-near": {
+        "referenceUnits": 375,
+        "hypothesisUnits": 376,
+        "substitutions": 32,
+        "deletions": 2,
+        "insertions": 3,
+        "errors": 37,
+        "rate": 0.09866666666666667,
+        "defined": true
+      },
+      "english-far": {
+        "referenceUnits": 226,
+        "hypothesisUnits": 216,
+        "substitutions": 48,
+        "deletions": 13,
+        "insertions": 3,
+        "errors": 64,
+        "rate": 0.2831858407079646,
+        "defined": true
+      }
+    }
+  },
+  "sampledMaxRssDifference288Minus512Bytes": 3719168,
+  "sampledMemoryReductionObserved": false,
+  "controlledSpeedupEstablished": false,
+  "contractSHA256": "a844a4bf8146af9aaf36c4dae51d7677445a8a2d28706a1d6c78c4a18ba3e20f",
+  "frozenFileCount": 448,
+  "priorGuards": {
+    "arena108": 108,
+    "heap120": 120,
+    "emulator327": 327
+  },
+  "protectedBeforeCount": 87,
+  "protectedMatching": 85,
+  "protectedDrift": [
+    {
+      "path": "docs/agent-pitfalls.md",
+      "beforeSHA256": "30e7c083e0c4141a42bf5202db48d83f5088ed7f7911fd0a981bba28a08441fe",
+      "currentSHA256": "1c8f56de9274d3e03a3c9b3e4bdbd02564a3e79e395242341ac128923edfb38b"
+    },
+    {
+      "path": "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md",
+      "beforeSHA256": "59de429c1a2ade921723ab35f58d8fa8d8bab79143f5ba621a3eb35a22612fc8",
+      "currentSHA256": "4c3194aad596f08affed81e098a23254337f870421e268731a4de2e23a804d26"
+    }
+  ],
+  "policyCollectedExactly": true,
+  "nativePolicyEffectVerified": false,
+  "restoredAndStopped": true,
+  "physicalHeapRunConsumed": false,
+  "newInferenceCalls": 0,
+  "supplementalEmulatorEvidenceOnly": true,
+  "productionReady": false,
+  "w3Complete": false
+}

@@ -1,0 +1,63 @@
+{
+  "at": "2026-11-12T09:28:32.380820+00:00",
+  "scope": "JVM-real-files-and-cached-Android-API33-classpath-only",
+  "externalChecks": 13,
+  "parentBarrierFileChecks": 6,
+  "parentBoundaryChecks": 4,
+  "totalChecks": 23,
+  "cachedKotlinCompiler": "2.2.20",
+  "warningsAsErrors": true,
+  "androidAPI33NoJdkCompile": true,
+  "androidJarSHA256": "fd628aa21321859a9035c6aae4b084b7d3fdb3f230be5cd5ec76541e32f7c963",
+  "sourceSHA256": {
+    "TerminalAckFile.kt": "95ebb10092e25f5359941ab8d2e47f2f16050f0c785ca28a52771d927829f018",
+    "TerminalAckFileChecks.kt": "ce725e9702469a690f523f413d616f1dcf13f1829602abe01e997b76bfea0fcd",
+    "AckBarrierFileIntegrationChecks.kt": "8182b81256a068131dcb08cfeaaabf16e94fb3523b0c55784421e20472940d91",
+    "TerminalAckFileBoundaryChecks.kt": "048f2ed8d3ee613edb814e1763af0df6cf5b8be1c4ebb45689b4281a9052bf18",
+    "check_ack_file.py": "5ecd0ad29dbc5f4a4f5c120c9456d2e2e21930a49be7e97c7425f4668ea33ea8"
+  },
+  "missingTypeREDBeforeImplementation": true,
+  "initialSourceCompileFailure": "missing return statement",
+  "firstCorrectionBoundaryFailure": "normalized input accepted forbidden dot/parent alias",
+  "sourceAndCorrectionsFromExternalHelper": true,
+  "originalReviewVerdict": "revise",
+  "reviewAdjudication": {
+    "verdict": "accept",
+    "findings": [],
+    "withdrawnFindings": [
+      {
+        "finding": "important: privateRoot.toPath() normalizes double slash, so File(\"/<existing_root>//child\") violates literal canonical-root requirement; suggested comparing privateRoot.path/absolutePath instead",
+        "reason": "Contradicted by primary reproduction (JDK21, compiled TerminalAckFile SHA 95ebb10092e25f5359941ab8d2e47f2f16050f0c785ca28a52771d927829f018). Public constructor accepts File, not raw String; duplicate separators already disappear in File construction BEFORE the adapter receives the object (supplied.getPath() == child.getCanonicalPath(), stdout confirms normalization). Neither privateRoot.path nor absolutePath can recover the original String. The canonical-root contract is observable supplied-File canonical absolute spelling, not an unavailable historical String. Actual 23 GREEN checks reject dot-retaining File(root,\".\")/File(child,\"..\"), ancestor/cancelled symlinks. Finding is unreproducible."
+      },
+      {
+        "finding": "minor: current code uses non-local `return out` within use; suggested `return@readOrNull` for hypothetical future refactor",
+        "reason": "Contradicted by exact current source: syntax is `return channel.use { ch -> ... val out = ByteArray(total); buf.get(out); out }`, NOT non-local `return out`. Parent verified `return channel.use { ch ->` present and literal `return out` absent. Kotlin -Werror compilation and 23 actual checks pass; API33 android.jar -no-jdk also compiles. The old missing-return candidate is separate/rejected and not current source. Hypothetical refactor compilation errors are not current runtime defects."
+      }
+    ],
+    "limitations": [
+      "static no-tools review; evidence is supplied-only, not live re-execution",
+      "host fixtures/API33 classpath are not phone runtime or API26 minSDK proof",
+      "no injected zero-progress/syscall-mutation coverage",
+      "no malicious same-UID atomic race or preemptive IO-deadline guarantee",
+      "wrapper/remote-ACK/host-loop/new frozen real-device run unfinished"
+    ]
+  },
+  "reviewFalsePositiveRealJavaReproduction": true,
+  "injectedZeroProgressAndSizeMutationTested": false,
+  "scopeExcludesMaliciousSameUidAtomicRaceAndPreemptiveDiskDeadline": true,
+  "frozenFilesVerified": 120,
+  "oldReportSHA256": "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e",
+  "oldFalseVerdictPath": "artifacts/verification/w3-qwen-heap-20261111/parent-heap-acceptance.json",
+  "oldFalseVerdictSHA256": "3575b70f0531560aeecc94935cf41f4415c15e1a5bef7e494b8f57c2cb31681d",
+  "actualAndroidIO": false,
+  "readOnlyAdbEnumerations": 1,
+  "androidDeviceListEmpty": true,
+  "deviceInstallations": 0,
+  "inferenceCalls": 0,
+  "mediaCapture": 0,
+  "systemAsrRequests": 0,
+  "modelOrRuntimeDownloads": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false
+}

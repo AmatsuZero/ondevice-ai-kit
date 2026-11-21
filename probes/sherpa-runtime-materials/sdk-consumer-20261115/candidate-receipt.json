@@ -1,0 +1,286 @@
+{
+  "candidateKind": "current local SDK release publication and standalone library consumers",
+  "sourceHead": "a18292ac56e7c694fd2e7efb2550864a0b3ef21e",
+  "sourceInputFingerprint": "f3c1e493049a91713852ec81849b7f880aa5e0627717fe91d6a8b13d399de3e7",
+  "sourceInputs": {
+    "android/backend-sherpa-asr/README.md": {
+      "bytes": 3028,
+      "sha256": "1431931945b0c68f24e30ef988f41ceb2c036e6f65d8d779ab7870ad24e44689"
+    },
+    "android/backend-sherpa-asr/build.gradle.kts": {
+      "bytes": 817,
+      "sha256": "94ba9e8e43a90023529e740469c3f5511f7dd73cb4d5e801a6378a453afd840b"
+    },
+    "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaAsrBackend.kt": {
+      "bytes": 6160,
+      "sha256": "25194741342ec24f8bdea1076954a6c585e6833ce99cad54c3654eb31f4c33b9"
+    },
+    "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaSession.kt": {
+      "bytes": 2791,
+      "sha256": "a0882a5adbafd685127e67dfc091e53c113bec95d8330bafb596511e687165f0"
+    },
+    "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaWhisperModel.kt": {
+      "bytes": 1884,
+      "sha256": "d16d21c1ce52e5101898cd48e39bfdedee06bf6a52dabaa33f8fd413a0161337"
+    },
+    "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/UtteranceBuffer.kt": {
+      "bytes": 1775,
+      "sha256": "668af68a844e02a4f4a454966b435569ba5dbd6214a742b5002ac6913a7226bc"
+    },
+    "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/WhisperSpeechGate.kt": {
+      "bytes": 1676,
+      "sha256": "71515486387c0324df7ddea0e6959d41a939318e7772df7539e9a427c8e85181"
+    },
+    "android/backend-sherpa-asr/src/test/kotlin/io/ondeviceai/sherpaasr/SherpaModelTest.kt": {
+      "bytes": 2765,
+      "sha256": "db9dcd2cbf384018e121178c086c93d65e1036a6f2c27fbe6927c2f8056d29ea"
+    },
+    "android/backend-sherpa-asr/src/test/kotlin/io/ondeviceai/sherpaasr/SherpaSessionTest.kt": {
+      "bytes": 6353,
+      "sha256": "9831364045076b50255789b59e491dcc32d95d1d252cd6578866d723db9fde7e"
+    },
+    "android/backend-system-asr/README.md": {
+      "bytes": 2108,
+      "sha256": "7a9f316e8cdd6bda6dfd90f4c345a6fbd04a2a68d3c6aac5f7574c00286e2a06"
+    },
+    "android/backend-system-asr/build.gradle.kts": {
+      "bytes": 756,
+      "sha256": "24df4a02ffa3b53235b34cf449172ef62883911a5364d8245ca634fdbc27da44"
+    },
+    "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/AndroidAsrResources.kt": {
+      "bytes": 3420,
+      "sha256": "1d29644df31a3cc2d98822cb595772a38fd1f8b9e4087e7c7d1e7f8e9c4851df"
+    },
+    "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/AndroidSpeechRecognizerBackend.kt": {
+      "bytes": 5702,
+      "sha256": "4ea95fffff05c540f36205a5d7f56110c814a2e29efc1cdc4e4b869318691e50"
+    },
+    "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/AsrResources.kt": {
+      "bytes": 4934,
+      "sha256": "a270dc027d4ce6c0d20b40539062be65ced73cefadbcb048e3bd40c66fbb13dc"
+    },
+    "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/RecognitionSession.kt": {
+      "bytes": 6137,
+      "sha256": "ce65210fc5628e0497aa08a07c55201a91c01530927b726018b6c7382dc3e4fc"
+    },
+    "android/backend-system-asr/src/test/kotlin/io/ondeviceai/systemasr/AsrResourcesTest.kt": {
+      "bytes": 5374,
+      "sha256": "9cdf7ece08a40978d58c561dc3423ffbd72e87edfe56d590c6ac51e717998ce1"
+    },
+    "android/backend-system-asr/src/test/kotlin/io/ondeviceai/systemasr/RecognitionSessionTest.kt": {
+      "bytes": 6842,
+      "sha256": "3d46e8a5d1cfdc61bad4f84f0643f264a1ddd5a6af9f1ce1eb56be2b2b7e1448"
+    },
+    "android/backend-system-tts/build.gradle.kts": {
+      "bytes": 754,
+      "sha256": "6b814a7e4c98653e1e29e803c563f1c0a01baff8b516c57efbd8cb06b1c3a421"
+    },
+    "android/backend-system-tts/src/main/kotlin/io/ondeviceai/systemtts/AndroidTextToSpeechBackend.kt": {
+      "bytes": 7303,
+      "sha256": "8e281fd2bdd36aece07e70a09ceb27e9ce6b6193e991fc1d8a33cb7c036b3540"
+    },
+    "android/backend-system-tts/src/test/kotlin/io/ondeviceai/systemtts/TtsTaskGateTest.kt": {
+      "bytes": 1444,
+      "sha256": "86072114cc2364226fd38aea22bb36d0b50629f3bc64013961fb15fc940ac8ca"
+    },
+    "android/sdk-core/build.gradle.kts": {
+      "bytes": 707,
+      "sha256": "f5e03acedbe87684a09fa6cce5610ad63d40cd76aa1e0c33d35efe1f6f5ba607"
+    },
+    "android/sdk-core/src/main/kotlin/io/ondeviceai/core/Availability.kt": {
+      "bytes": 582,
+      "sha256": "d845d6710da720823dbf86b669716ce6950f972b087a071359a6c0500dfea907"
+    },
+    "android/sdk-core/src/main/kotlin/io/ondeviceai/core/LatestFrameQueue.kt": {
+      "bytes": 1177,
+      "sha256": "3b9cf9918efbe5eae4c2d86dcc007b1cff96631db4ff55652152716e8a2974ed"
+    },
+    "android/sdk-core/src/main/kotlin/io/ondeviceai/core/TaskGate.kt": {
+      "bytes": 1036,
+      "sha256": "b20fb9ac5c9604ad49a21f06c73f50d386b294c9f1e5ba8aebc42aca5642192a"
+    },
+    "android/sdk-core/src/test/kotlin/io/ondeviceai/core/TaskGateTest.kt": {
+      "bytes": 2158,
+      "sha256": "c52bdb12e09e8d0c46d943789b119c3e68100639bc4d311c291b78450c0f5c87"
+    },
+    "android/speech/build.gradle.kts": {
+      "bytes": 780,
+      "sha256": "70d72aee40eeb4a48c02cc1648b37096598790218325e5b9bfea5249e1f636e3"
+    },
+    "android/speech/src/main/kotlin/io/ondeviceai/speech/SpeechClient.kt": {
+      "bytes": 7935,
+      "sha256": "48fc19674c5c9e53414f76d449227031239249962754a3101cd2d7064ceaf7e9"
+    },
+    "android/speech/src/test/kotlin/io/ondeviceai/speech/AndroidSpeechBridgeIntegrationTest.kt": {
+      "bytes": 26868,
+      "sha256": "540ce87513ff6b5f8f38021bc0e6bed374bc41c0a235b8b5d243cfd3c384499c"
+    },
+    "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechBackendQueryTest.kt": {
+      "bytes": 5051,
+      "sha256": "1c9d0f65b731434ad545f6e88fe4181b00ed3c4738dc2e9c410b6de9a80aa75f"
+    },
+    "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechClientTest.kt": {
+      "bytes": 2215,
+      "sha256": "353a48fed6655e5844d235c377976a250bca0258c89d95df72ff680a856b0887"
+    },
+    "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechCloseFailureTest.kt": {
+      "bytes": 4557,
+      "sha256": "fb021fcf076e4448778dd94fd19bcc78195915c73ef83f822a8a596f62ec73ce"
+    },
+    "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechCloseRaceTest.kt": {
+      "bytes": 4470,
+      "sha256": "8d8f02ec44f0ecc66ad793464dd31e73d4874a48a7dd88f707a7f5d9d2da4d2f"
+    },
+    "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechRecognitionClientTest.kt": {
+      "bytes": 3989,
+      "sha256": "caad7b916237245df71af7ad131936bd5dfbab597839e200a5b037a1c945a53b"
+    },
+    "android/speech/src/test/kotlin/io/ondeviceai/speech/SpeechSynthesisClientTest.kt": {
+      "bytes": 2257,
+      "sha256": "4fc811446a499529c63843109bdda9d1a6a87c0a4e41992968cf199114044bed"
+    },
+    "build.gradle.kts": {
+      "bytes": 342,
+      "sha256": "824ab4b1e98146493f4598ff226f72d36e63ac1032b648e5028d4d9f6f2a7d0a"
+    },
+    "examples/android-speech/README.md": {
+      "bytes": 2170,
+      "sha256": "044d1ef9c495cf4071a2b5f0a2ac08b8a4e5c4a61d6a8f29b20864ec84211c1d"
+    },
+    "examples/android-speech/build.gradle.kts": {
+      "bytes": 2341,
+      "sha256": "1657c6907d1ade07529e287e49ec8cc37c6164cd1ef2a9c307f0d13daad76af6"
+    },
+    "examples/android-speech/settings.gradle.kts": {
+      "bytes": 851,
+      "sha256": "d884ad10028c6c5a68756b40da3d815d0bc024e21c6d6907f5e984922b827904"
+    },
+    "examples/android-speech/src/main/kotlin/io/ondeviceai/speechconsumer/SpeechContractConsumer.kt": {
+      "bytes": 567,
+      "sha256": "22ebb414540edb68ffa107f2380e948dcb2332f08b5dc2533186f3b215e7ca31"
+    },
+    "examples/android-speech/src/sherpaAsr/kotlin/io/ondeviceai/speechconsumer/SherpaAsrConsumer.kt": {
+      "bytes": 1205,
+      "sha256": "bf1d5ca360d4731b2937558f27f448cca36fa7d88b970287a0ab94bec012d777"
+    },
+    "examples/android-speech/src/systemAsr/kotlin/io/ondeviceai/speechconsumer/SystemAsrConsumer.kt": {
+      "bytes": 1813,
+      "sha256": "17b78cb0ffe71ba01c46da2d0121be52f1dae56193039c6f134fd9e915ff768b"
+    },
+    "examples/android-speech/src/systemTts/kotlin/io/ondeviceai/speechconsumer/SystemTtsConsumer.kt": {
+      "bytes": 1118,
+      "sha256": "65cfc68cd98e70c87fa6b1c5c9dd42b3d447d33bed4fe702e12fa72b7c29a27c"
+    },
+    "gradle.properties": {
+      "bytes": 141,
+      "sha256": "6ed9813b8b32e43aad8928a3316db4ebb5b98c2e472ab91a5d56549a35b4e932"
+    },
+    "gradle/libs.versions.toml": {
+      "bytes": 594,
+      "sha256": "38e04cbd97c25b878cbaa4a3aa57bc2b16930c1dcc968f98e51253eb8397dda7"
+    },
+    "gradle/wrapper/gradle-wrapper.properties": {
+      "bytes": 339,
+      "sha256": "032a71c92fc7f3c1cadf8880f0554b71aa6beb411f97ac253aa93932cb3784d5"
+    },
+    "gradlew": {
+      "bytes": 8654,
+      "sha256": "aed171fb114f82e6eaea4970a245a200e0582a7dcc8ec0891ca41b6e4a62b754"
+    },
+    "settings.gradle.kts": {
+      "bytes": 2147,
+      "sha256": "4518940184c31edfb0c4d778fa64996f06f0c1a0a02398dccc409d1c57af0cf4"
+    }
+  },
+  "processes": {
+    "sdk-publish": {
+      "exitCode": 0,
+      "seconds": 8.365067625010852,
+      "localOnly": true,
+      "stdout": {
+        "path": ".omx/artifacts/w3-sdk-consumer-binding-20261115/sdk-publish.stdout",
+        "bytes": 11718,
+        "sha256": "a32e73fd91dca944bde6f654fa72ad4e492968190636acd6a2218288da373e3f"
+      },
+      "stderr": {
+        "path": ".omx/artifacts/w3-sdk-consumer-binding-20261115/sdk-publish.stderr",
+        "bytes": 250,
+        "sha256": "8da39de6cb923047d35236ed262a74965faf488cbc82be3b1db8ee3adc1d36b3"
+      }
+    },
+    "consumer": {
+      "exitCode": 0,
+      "seconds": 9.643291625019629,
+      "scope": "Standalone published AAR compile and actual artifact resolution, no device execution",
+      "stdout": {
+        "path": ".omx/artifacts/w3-sdk-consumer-binding-20261115/consumer-build.stdout",
+        "bytes": 2568,
+        "sha256": "8b1faa9710c644503a050d981d86a125874aff193409be10f1868698ccd8c7a9"
+      },
+      "stderr": {
+        "path": ".omx/artifacts/w3-sdk-consumer-binding-20261115/consumer-build.stderr",
+        "bytes": 250,
+        "sha256": "8da39de6cb923047d35236ed262a74965faf488cbc82be3b1db8ee3adc1d36b3"
+      }
+    },
+    "consumer-debug": {
+      "exitCode": 0,
+      "seconds": 5.175144459004514,
+      "stdout": {
+        "path": ".omx/artifacts/w3-sdk-consumer-binding-20261115/consumer-debug-build.stdout",
+        "bytes": 2319,
+        "sha256": "afdeb3cb8c4e038e443289d991e784532bc51d6b10f9a254fe1d7be8c88101f0"
+      },
+      "stderr": {
+        "path": ".omx/artifacts/w3-sdk-consumer-binding-20261115/consumer-debug-build.stderr",
+        "bytes": 250,
+        "sha256": "8da39de6cb923047d35236ed262a74965faf488cbc82be3b1db8ee3adc1d36b3"
+      }
+    }
+  },
+  "taskCounts": {
+    "sdk-publish": {
+      "total": 137,
+      "executed": 30,
+      "upToDate": 107
+    },
+    "consumer": {
+      "total": 27,
+      "executed": 3,
+      "upToDate": 24
+    },
+    "consumer-debug": {
+      "total": 23,
+      "executed": 2,
+      "upToDate": 21
+    }
+  },
+  "publishedSdkModules": 5,
+  "sourceJarFilesByteEqual": 14,
+  "actualResolvedRuntime": {
+    "component": "com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1",
+    "artifact": {
+      "path": "artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar",
+      "bytes": 49441341,
+      "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7"
+    }
+  },
+  "consumerVariantsBuilt": [
+    "debug",
+    "release"
+  ],
+  "protectedPathsUnchanged": 170,
+  "freezeFiles": 161,
+  "sdkCandidateAndActualConsumerBindingVerified": true,
+  "finalAppPackageOrInstalledAdoptionVerified": false,
+  "sourceBuildInputCompletenessVerified": false,
+  "productionReleaseApproved": false,
+  "externalPublicationPerformed": false,
+  "deviceExecuted": false,
+  "qualityOrResourceAccepted": false,
+  "P1Complete": false,
+  "P2P3P4Accepted": false,
+  "W3Complete": false,
+  "independentReviewAccepted": false,
+  "independentReviewStatus": "hy4free quota429; no report; awaiting user-selected route"
+}

@@ -1,0 +1,12 @@
+{
+  "preparedAtUTC": "2026-11-15T23:27:22.254180+00:00",
+  "intermediateOnlyRawMatches": 14,
+  "reason": "AGP has separate final DEX merge; intermediate still contains build annotations, standalonefinal lowered StringBuilder differently",
+  "evidence": [
+    "D8DexArchiveBuilder.javap",
+    "D8DexArchiveMerger.javap"
+  ],
+  "nextOperation": "complete observed two-stage D8 pipeline: release intermediate -> release DEX merge with --no-desugaring; no output text edits",
+  "singleObservedPipeline": true,
+  "flagSweep": false
+}

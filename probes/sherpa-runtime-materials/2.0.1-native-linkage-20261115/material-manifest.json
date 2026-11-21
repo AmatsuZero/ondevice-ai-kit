@@ -1,0 +1,118 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 2613,
+      "sha256": "c6704aac365c2542afadf0a0dd1381b13d97e5ccdf04e658a55c8bf40f09732f"
+    },
+    "inspection-receipt.json": {
+      "bytes": 259,
+      "sha256": "b22f259b32b79e6aaf68af08c3a5f305822de530b73a7384f6b330c6c65347b1"
+    },
+    "local-evidence-references.json": {
+      "bytes": 1990,
+      "sha256": "3904fabe648d65814543be2d74da5c342576d73dd28f9984c8bc67bed6bede42"
+    },
+    "native-dependency-graph.json": {
+      "bytes": 38986,
+      "sha256": "e794a2ab18c275b53d749c18bba587fe20065b8e1f9a138ad399cdf29ba44fae"
+    },
+    "readelf/jni/arm64-v8a/libonnxruntime.so.stdout": {
+      "bytes": 3102,
+      "sha256": "a0055cb2cb7b1fec02282378f3d239cbfecc1d0dba061f24a0b47913b4594321"
+    },
+    "readelf/jni/arm64-v8a/libsherpa-onnx-c-api.so.stdout": {
+      "bytes": 3363,
+      "sha256": "3a8f587c4bb878a702985c805cfde2a5ed49437fa57058875a8e7c7af39b8a80"
+    },
+    "readelf/jni/arm64-v8a/libsherpa-onnx-cxx-api.so.stdout": {
+      "bytes": 3438,
+      "sha256": "ee34d810f9917b9cf2904690cdc8821e6d38eda17310b9aa20092faee1085055"
+    },
+    "readelf/jni/arm64-v8a/libsherpa-onnx-jni.so.stdout": {
+      "bytes": 3361,
+      "sha256": "6001b173aff28d4e4888d6839d67b93f74e349034cb29093a95fe296fb40223b"
+    },
+    "readelf/jni/armeabi-v7a/libonnxruntime.so.stdout": {
+      "bytes": 2838,
+      "sha256": "81ba2fdd86d2d30df3f1be468f3e4450ccdf451811db5d4583785e8fd738c2f3"
+    },
+    "readelf/jni/armeabi-v7a/libsherpa-onnx-c-api.so.stdout": {
+      "bytes": 3105,
+      "sha256": "d89378e1ce0054d409994992d59e787ccbe106bd6e24d70c3a9585709ca765f0"
+    },
+    "readelf/jni/armeabi-v7a/libsherpa-onnx-cxx-api.so.stdout": {
+      "bytes": 3097,
+      "sha256": "caea8759d66964a2eb213996de189ede0b6def4fa05a3f0e5f3ec145e09ac40b"
+    },
+    "readelf/jni/armeabi-v7a/libsherpa-onnx-jni.so.stdout": {
+      "bytes": 3103,
+      "sha256": "d5bd6ccb7f3dceb8d6a412a764212cc1b8d7b890005329786d749e363bf75c0e"
+    },
+    "readelf/jni/x86/libonnxruntime.so.stdout": {
+      "bytes": 2844,
+      "sha256": "c3a5d8c64500c69bd66c700770ebb4f84c0cf1c3a027964ee340d1434f779ac4"
+    },
+    "readelf/jni/x86/libsherpa-onnx-c-api.so.stdout": {
+      "bytes": 3106,
+      "sha256": "c9964e917e6bd21c90ac230393d15ffdd90368e16c6b9801ee2818fcc2ce8c6e"
+    },
+    "readelf/jni/x86/libsherpa-onnx-cxx-api.so.stdout": {
+      "bytes": 3099,
+      "sha256": "e2e4103afdb09f027f74c3b50f13249d5f79f384399c45bde2ae7ef6b501815d"
+    },
+    "readelf/jni/x86/libsherpa-onnx-jni.so.stdout": {
+      "bytes": 3104,
+      "sha256": "cce563f8e6672a8e0997e962febd464eb2e729f6d03e03be3bc58d175802b571"
+    },
+    "readelf/jni/x86_64/libonnxruntime.so.stdout": {
+      "bytes": 3124,
+      "sha256": "2c6bcb388349b189ef69030b9cf1a41cb123ce78d263ad4d54be3c80f923c0d0"
+    },
+    "readelf/jni/x86_64/libsherpa-onnx-c-api.so.stdout": {
+      "bytes": 3385,
+      "sha256": "328df571d8c0465b42d786ba09cae8924048a0229215714749a78397e5735b83"
+    },
+    "readelf/jni/x86_64/libsherpa-onnx-cxx-api.so.stdout": {
+      "bytes": 3369,
+      "sha256": "dc2474753ff9a892d3e3d520ce202c0bcdc298aa3738fb8a4b525098d5c485d1"
+    },
+    "readelf/jni/x86_64/libsherpa-onnx-jni.so.stdout": {
+      "bytes": 3383,
+      "sha256": "4037427ed92e704909ef94e17132e95722ca659b2aec351842b9344292741cce"
+    },
+    "readelf-version.stdout": {
+      "bytes": 66,
+      "sha256": "6df074f483580b41fa82775c25bd9fdc616114eec0cefdd50572eea4fc896cf4"
+    },
+    "readobj-process.json": {
+      "bytes": 1604,
+      "sha256": "03cf60a6f39556f7af35b5cb03c2dc049d1a45a40b0513404c53d4769d0e7fbb"
+    },
+    "readobj.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "readobj.stdout": {
+      "bytes": 24801,
+      "sha256": "001bdeffd734edf9c7ae5574cb52462aba07aa69c186c1788eb05089f9eedc7e"
+    },
+    "reference-toolchain.json": {
+      "bytes": 6896,
+      "sha256": "fa05734dd49fa02a91d5b1bfc17660386dc9a03e9d9365fcddb4f666504eaef3"
+    },
+    "sections.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "sections.stdout": {
+      "bytes": 129760,
+      "sha256": "5117d259ae549b554bd98cecad3bda6852309f31bb9a3111dcfc08039bc24e6f"
+    },
+    "symbol-observation-boundaries.json": {
+      "bytes": 2681,
+      "sha256": "ffdd869ec89973557131e114c0efeb75a237d0b51c07404ab59de9f3796b7e97"
+    }
+  },
+  "scope": "Declared dynamic ELF edges and local reference stubs; not full static composition, loader/API compatibility, notices or release acceptance",
+  "binariesIncluded": false
+}

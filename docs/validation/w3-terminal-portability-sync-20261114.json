@@ -1,0 +1,43 @@
+{
+  "sourceCommit": "c1af0301380c3d02c2bd81b61c13570edf79d40c",
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-terminal-portability-20261114 -->",
+  "issues": {
+    "gh": {
+      "id": 6869202111,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6869202111",
+      "sha256": "545162dda5e020dc71bf18b3b19457ed41d680e3d730492fc8b734093c30d251",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44784,
+      "url": null,
+      "sha256": "fbff7eae648315a3a7e150bdf1d3e353be04aee721a1b7094f69a565e5f6d48d",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "38f11b7f723ed7c29abd21c183fc8e689f29fcc4",
+    "sha256": "94efd66ac142ee27b915f3f765880bd460306102abbfd67e2ae7cd6db62e724f",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "94efd66ac142ee27b915f3f765880bd460306102abbfd67e2ae7cd6db62e724f",
+    "readbackExact": true
+  },
+  "wikiSHA256Equal": true,
+  "readbacksExact": true,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "newRunId": "w3-qwen-terminal-20261114-01",
+  "newPrepareStarted": false,
+  "newRunConsumed": false,
+  "hostMethods": 384,
+  "ASTFiles": 64,
+  "currentFrozenFiles": 161,
+  "oldFailurePreserved": true,
+  "manualSupplementRecoveryComplete": true,
+  "deviceConnection": "USB enumerated TECNO; ADB empty after one server restart; e00002ed",
+  "evidence": ".omx/artifacts/w3-terminal-portability-20261114/publication"
+}

@@ -1,0 +1,3 @@
+*.xcodeproj/
+ui-driver/Generated/
+__pycache__/

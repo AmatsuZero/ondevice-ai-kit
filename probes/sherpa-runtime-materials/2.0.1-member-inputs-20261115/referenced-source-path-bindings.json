@@ -1,0 +1,65 @@
+{
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "scope": "Parent supplementary verification of explicitly referenced packaging/source-target paths only; does not enumerate all compilation or generated inputs",
+  "paths": [
+    {
+      "sourcePath": "android/SherpaOnnxAar/gradle/libs.versions.toml",
+      "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/gradle/libs.versions.toml",
+      "bytes": 998,
+      "sha256": "198ab638cc32b137e1eaf0879b414622546f2cd91b50a32177825269db6e053f",
+      "gitBlobSHA1": "56172d293302b51b9288e0ef37bcfa115cf19555",
+      "fixedTreeMatched": true
+    },
+    {
+      "sourcePath": "android/SherpaOnnxAar/gradle/wrapper/gradle-wrapper.properties",
+      "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/gradle/wrapper/gradle-wrapper.properties",
+      "bytes": 230,
+      "sha256": "9f014b10e840a2409d5133dba7affc8db60b2b3e24309e8263b990f51da1b697",
+      "gitBlobSHA1": "a8b35635811a7681f76edda971edcd8a14dcbf54",
+      "fixedTreeMatched": true
+    },
+    {
+      "sourcePath": "android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts",
+      "materialPath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts",
+      "bytes": 1062,
+      "sha256": "3adfa152822feaf28348275a471925ac052dd66e24d2a2a8c968f69b2070bfbd",
+      "gitBlobSHA1": "4803cb83787c973d0287bec8ef9e6275afe314df",
+      "fixedTreeMatched": true
+    },
+    {
+      "sourcePath": "android/SherpaOnnxAar/sherpa_onnx/src/main/AndroidManifest.xml",
+      "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/sherpa_onnx/src/main/AndroidManifest.xml",
+      "bytes": 121,
+      "sha256": "f0f4b47043b24ea2136dabe1cd4309c3b71d84d779889989dbe6d6e5126bfd56",
+      "gitBlobSHA1": "a5918e68abcdde7f61ccae4f0ad4885b764573fd",
+      "fixedTreeMatched": true
+    },
+    {
+      "sourcePath": "sherpa-onnx/c-api/CMakeLists.txt",
+      "materialPath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/c-api/CMakeLists.txt",
+      "bytes": 1144,
+      "sha256": "da0eac0a143ee0c80df5a696b0bd2c338eeaa29bc94e1c8696bfd1bcf246de1d",
+      "gitBlobSHA1": "cbb81dfbaf86e58c2a7df57f67db93e76480b5f4",
+      "fixedTreeMatched": true
+    },
+    {
+      "sourcePath": "sherpa-onnx/csrc/CMakeLists.txt",
+      "materialPath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/csrc/CMakeLists.txt",
+      "bytes": 27609,
+      "sha256": "8bf18641b0543333bc9f5cafb10b3be56c51444b8afa43c83361b52cdb63b2eb",
+      "gitBlobSHA1": "23d5692422eb008f77b16bc2f3f8b9d5123d962a",
+      "fixedTreeMatched": true
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/CMakeLists.txt",
+      "materialPath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/jni/CMakeLists.txt",
+      "bytes": 1765,
+      "sha256": "cf1e46fb74c820b476fd7c585073389c4e021508fe32a7f007684f6180c7dd31",
+      "gitBlobSHA1": "d0ce4e3f2e47ce5ed60e1f1c6effc4cf7970ac2b",
+      "fixedTreeMatched": true
+    }
+  ],
+  "independentCompactReviewIncluded": false,
+  "newSourceDownloads": 0,
+  "inputCompletenessVerified": false
+}

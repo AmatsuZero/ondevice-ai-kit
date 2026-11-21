@@ -1,0 +1,90 @@
+[
+  {
+    "lane": "selection",
+    "model": "hy3",
+    "observedModelIds": [
+      "hy3"
+    ],
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 66.897,
+      "endedAtUTC": "2026-11-15T12:40:56.458382+00:00",
+      "stdoutBytes": 90261,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultStatus": "success",
+    "observedToolBlocks": 0,
+    "resultTextSHA256": "0aaf83eee030275be56edca11592b75b62c0983fbcbede64c65f64f0d93a52fd",
+    "rawPath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/selection/events.jsonl",
+    "rawSHA256": "be21a02c60bf48c3183c1ff72039c5cb1d7844f95515fb336ca55d3dea9d9364",
+    "promptSHA256": "c7afc90ce0c030505939afd8c5ae833772b734bce3b05c64f75b8f86dc510f81"
+  },
+  {
+    "lane": "modifications",
+    "model": "hy3",
+    "observedModelIds": [
+      "hy3"
+    ],
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 54.7,
+      "endedAtUTC": "2026-11-15T12:40:44.260731+00:00",
+      "stdoutBytes": 70663,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultStatus": "success",
+    "observedToolBlocks": 0,
+    "resultTextSHA256": "c01c80e5b687aaf9440628603d3a91bb87ad88b3cd9baf57631870500eb283fa",
+    "rawPath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/modifications/events.jsonl",
+    "rawSHA256": "3130501423ef46345b327d8ad603e929120b73f53f042a90c6de2ee07d0d6493",
+    "promptSHA256": "752e9a3f467a9a63bd5a99f31df19b54fd83b9dd945086734f520d334fd521bf"
+  },
+  {
+    "lane": "wording",
+    "model": "hy3",
+    "observedModelIds": [
+      "hy3"
+    ],
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 24.628,
+      "endedAtUTC": "2026-11-15T12:42:57.614757+00:00",
+      "stdoutBytes": 30186,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultStatus": "success",
+    "observedToolBlocks": 0,
+    "resultTextSHA256": "9963f22fe9eddac4f27ab3e9daf6932e0ba56bed449c3a2e22a6283f9a032437",
+    "rawPath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/wording/events.jsonl",
+    "rawSHA256": "234bc724369d0fd0c66ac06b73793a824ecfa6521687f1ae2a42611154f7250c",
+    "promptSHA256": "4b63b10d0a55956b9f18fcdf7b4c0519a5c1f02115c05de8e58a0cbfb1ba682c"
+  },
+  {
+    "lane": "review",
+    "model": "hy3",
+    "observedModelIds": [
+      "hy3"
+    ],
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 54.255,
+      "endedAtUTC": "2026-11-15T12:51:23.932495+00:00",
+      "stdoutBytes": 61633,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultStatus": "success",
+    "observedToolBlocks": 0,
+    "resultTextSHA256": "29aeb05123931d326e87295942397207b617d54c0b158c423e0b5e57c85be24c",
+    "rawPath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/review/events.jsonl",
+    "rawSHA256": "d17604b28444f92dbc754e78f66789320a0d9e3412ce62bb7b5936ca615be8ed",
+    "promptSHA256": "829b553a65b0d197da91aa3cb7fdd1f0c8c2adca3b1a18b73eb5548d6d1394cb"
+  }
+]

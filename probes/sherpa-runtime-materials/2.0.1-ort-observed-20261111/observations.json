@@ -1,0 +1,333 @@
+{
+  "scope": "Observed upstream nested ORT Android build and collection only. No archive or binary downloaded.",
+  "sherpaAARSHA256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+  "ortAsset": {
+    "name": "onnxruntime-android-1.28.2.zip",
+    "id": 544593317,
+    "size": 33765715,
+    "digest": "sha256:01518867f78241138b6aa25925802e843a4fa9085af8d303d49e35bbb52aff4d",
+    "created_at": "2026-09-04T16:24:05Z",
+    "updated_at": "2026-09-04T16:24:07Z",
+    "browser_download_url": "https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-android-1.28.2.zip"
+  },
+  "releaseTagCommit": "5cc3d2e84d9eade2562cf29a93fa3a520a75ca57",
+  "executedWorkflowCommit": "bb069649de9edc4689b2c5f9609e5499ae0bee9d",
+  "run": {
+    "id": 33892225094,
+    "url": "https://github.com/csukuangfj/onnxruntime-libs/actions/runs/33892225094",
+    "arm64Job": 101086389995,
+    "collectJob": 101094996702
+  },
+  "arm64ObservedSourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+  "arm64ArtifactZIPDigest": "4a63146d05fe87c3a6f9df6a03ee6a86a90e59da146ff9c98dd5559dc562a30a",
+  "matchingSOFileSizes": {
+    "jni/arm64-v8a/libonnxruntime.so": 22249560,
+    "jni/armeabi-v7a/libonnxruntime.so": 15359592,
+    "jni/x86/libonnxruntime.so": 26491148,
+    "jni/x86_64/libonnxruntime.so": 25581120
+  },
+  "sizeMatchIsNotDigestEquality": true,
+  "workflowSources": {
+    "android-shared-workflow": {
+      "bytes": 7470,
+      "sha256": "6d62d67c90d582dccef81b5b963c38eac02926e91e9bbecbb10fc873dd74399b",
+      "gitBlob": "7919f6b338f7e8991684d2bb45056475fd77acb3"
+    },
+    "executed-android-workflow": {
+      "bytes": 7459,
+      "sha256": "b8440e0ac250c83efa4f79152b6379cdf022565e21ed94a34fdd80f52d67bea9",
+      "gitBlob": "5a5b7595e53d1aaac298498b829d91d7b98de8fa"
+    }
+  },
+  "logs": {
+    "ort-arm64": {
+      "bytes": 938628,
+      "sha256": "d2f7a0facac749ab6c165535a3fce3295b137d904048255c5e700203e8a1f274",
+      "lines": 7431
+    },
+    "ort-collect": {
+      "bytes": 53494,
+      "sha256": "6e4adeb3b6eff9354c032e824bdaea37889b75c0cf8a0b4bbcef887288d5b5e2",
+      "lines": 656
+    }
+  },
+  "verifiedExcerpts": [
+    {
+      "log": "ort-arm64.log",
+      "line": 193,
+      "text": "2026-09-04T15:55:27.2386797Z Cache not found for input keys: android-arm64-v8a-1.28.2-cache"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 370,
+      "text": "2026-09-04T15:55:50.4618496Z 33ca9628233dc8f002435e868d4c2e9f82766ca1"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 451,
+      "text": "2026-09-04T15:55:51.4638542Z 2026-09-04 15:55:51,463 build [DEBUG] - Command line arguments:"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 452,
+      "text": "2026-09-04T15:55:51.4641284Z   --build_java --build_dir ./build-shared/arm64-v8a --android --use_nnapi --android_abi arm64-v8a --android_api 27 --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_generator Ninja --config Release --update --build --parallel --skip_tests --compile_no_warning_as_error --build_shared_lib --skip_submodule_sync --enable_lto --cmake_extra_defines CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 --cmake_extra_defines CMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 455,
+      "text": "2026-09-04T15:55:51.4689130Z 2026-09-04 15:55:51,467 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=arm64-v8a -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 868,
+      "text": "2026-09-04T15:56:23.4490462Z -- Fetch abseil_cpp from https://github.com/abseil/abseil-cpp/archive/refs/tags/20250814.0.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 926,
+      "text": "2026-09-04T15:56:25.8656456Z -- Fetch re2 from https://github.com/google/re2/archive/refs/tags/2024-07-02.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 928,
+      "text": "2026-09-04T15:56:26.7428542Z -- Fetch protoc_binary from https://github.com/protocolbuffers/protobuf/releases/download/v21.12/protoc-21.12-linux-x86_64.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 941,
+      "text": "2026-09-04T15:56:27.2842191Z -- Fetch Protobuf from https://github.com/protocolbuffers/protobuf/archive/refs/tags/v21.12.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1009,
+      "text": "2026-09-04T15:56:29.1904642Z -- Fetch date from https://github.com/HowardHinnant/date/archive/refs/tags/v3.0.1.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1025,
+      "text": "2026-09-04T15:56:30.1834148Z -- Fetch mp11 from https://github.com/boostorg/mp11/archive/refs/tags/boost-1.82.0.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1037,
+      "text": "2026-09-04T15:56:30.9473370Z -- Fetch nlohmann_json from https://github.com/nlohmann/json/archive/refs/tags/v3.11.3.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1039,
+      "text": "2026-09-04T15:56:32.7080319Z -- Fetch pytorch_cpuinfo from https://github.com/pytorch/cpuinfo/archive/4628dc060ce4e82345dc166bbac875609db4ff69.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1040,
+      "text": "2026-09-04T15:56:34.1881599Z -- Fetch GSL from https://github.com/microsoft/GSL/archive/refs/tags/v4.2.1.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1041,
+      "text": "2026-09-04T15:56:34.7875526Z -- Fetch safeint from https://github.com/dcleblanc/SafeInt/archive/refs/tags/3.0.28.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1053,
+      "text": "2026-09-04T15:56:35.6344610Z -- Fetch flatbuffers from https://github.com/google/flatbuffers/archive/refs/tags/v23.5.26.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1140,
+      "text": "2026-09-04T15:56:37.2868359Z -- Fetch onnx from https://github.com/onnx/onnx/archive/refs/tags/v1.22.0.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1180,
+      "text": "2026-09-04T15:56:39.6642274Z -- Fetch Eigen3 from https://github.com/eigen-mirror/eigen/archive/1d8b82b0740839c0de7f1242a3585e3390ff5f33/eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33.zip"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 1184,
+      "text": "2026-09-04T15:56:41.1685655Z -- Fetch kleidiai from https://github.com/ARM-software/kleidiai/archive/refs/tags/v1.20.0.tar.gz"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 2258,
+      "text": "2026-09-04T15:56:52.2496615Z 2026-09-04 15:56:52,249 build [INFO] - /usr/local/bin/cmake --build ./build-shared/arm64-v8a/Release --config Release -- -j4"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 7348,
+      "text": "2026-09-04T16:23:20.0685679Z SHA256 digest of uploaded artifact zip is 4a63146d05fe87c3a6f9df6a03ee6a86a90e59da146ff9c98dd5559dc562a30a"
+    },
+    {
+      "log": "ort-arm64.log",
+      "line": 7350,
+      "text": "2026-09-04T16:23:20.3097007Z Artifact android-1.28.2-arm64-v8a.zip successfully finalized. Artifact ID 9945299009"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 194,
+      "text": "2026-09-04T16:23:42.8522803Z SHA256 digest of downloaded artifact is 4a63146d05fe87c3a6f9df6a03ee6a86a90e59da146ff9c98dd5559dc562a30a"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 217,
+      "text": "2026-09-04T16:23:45.3841726Z SHA256 digest of downloaded artifact is 3bfd9d59018f4cdc43affe1205db5698a678c4111163293ead1ca6b2282fc199"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 240,
+      "text": "2026-09-04T16:23:47.9606219Z SHA256 digest of downloaded artifact is ea012b742a5c2029fa08bdd8a7a2c488af89171711af5cc97739d286c808ee59"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 263,
+      "text": "2026-09-04T16:23:50.6487128Z SHA256 digest of downloaded artifact is a184e6e97a86905df25a7e2f896f9251bfa1826755738f3bcbabf26a708fe1b4"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 306,
+      "text": "2026-09-04T16:23:51.5095578Z renamed 'onnxruntime-android-1.26.0.aar' -> 'onnxruntime-android-1.28.2.aar'"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 359,
+      "text": "2026-09-04T16:23:54.3494391Z '/tmp/arm64-v8a/libonnxruntime.so' -> './jni/arm64-v8a/libonnxruntime.so'"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 365,
+      "text": "2026-09-04T16:23:54.3528154Z -rw-r--r-- 1 runner runner 22249560 Sep  4 16:23 libonnxruntime.so"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 373,
+      "text": "2026-09-04T16:23:56.3669854Z '/tmp/armeabi-v7a/libonnxruntime.so' -> './jni/armeabi-v7a/libonnxruntime.so'"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 379,
+      "text": "2026-09-04T16:23:56.3702130Z -rw-r--r-- 1 runner runner 15359592 Sep  4 16:23 libonnxruntime.so"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 387,
+      "text": "2026-09-04T16:23:58.3907434Z '/tmp/x86/libonnxruntime.so' -> './jni/x86/libonnxruntime.so'"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 393,
+      "text": "2026-09-04T16:23:58.3943208Z -rw-r--r-- 1 runner runner 26491148 Sep  4 16:23 libonnxruntime.so"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 401,
+      "text": "2026-09-04T16:24:00.4150833Z '/tmp/x86_64/libonnxruntime.so' -> './jni/x86_64/libonnxruntime.so'"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 407,
+      "text": "2026-09-04T16:24:00.4190654Z -rw-r--r-- 1 runner runner 25581120 Sep  4 16:24 libonnxruntime.so"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 477,
+      "text": "2026-09-04T16:24:04.0446862Z  22249560  2026-09-04 16:23   jni/arm64-v8a/libonnxruntime.so"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 480,
+      "text": "2026-09-04T16:24:04.0448528Z  25581120  2026-09-04 16:24   jni/x86_64/libonnxruntime.so"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 483,
+      "text": "2026-09-04T16:24:04.0449670Z  15359592  2026-09-04 16:23   jni/armeabi-v7a/libonnxruntime.so"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 486,
+      "text": "2026-09-04T16:24:04.0450765Z  26491148  2026-09-04 16:23   jni/x86/libonnxruntime.so"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 501,
+      "text": "2026-09-04T16:24:04.0519277Z   overwrite: true"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 508,
+      "text": "2026-09-04T16:24:05.0493325Z Uploading onnxruntime-android-1.28.2.zip to onnxruntime-android-1.28.2.zip in release v1.28.2."
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 609,
+      "text": "2026-09-04T16:24:18.7785136Z  ! [remote rejected] main -> main (pre-receive hook declined)"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 625,
+      "text": "2026-09-04T16:24:30.2972161Z mv: cannot stat '../onnxruntime-android-1.28.2/headers': No such file or directory"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 626,
+      "text": "2026-09-04T16:24:30.2985062Z mv: cannot stat '../headers': No such file or directory"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 627,
+      "text": "2026-09-04T16:24:30.2998668Z mv: cannot stat '../onnxruntime-android-1.28.2/jni': No such file or directory"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 628,
+      "text": "2026-09-04T16:24:30.3011210Z mv: cannot stat '../jni': No such file or directory"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 632,
+      "text": "2026-09-04T16:24:30.3033573Z nothing to commit, working tree clean"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 636,
+      "text": "2026-09-04T16:24:30.3074429Z nothing to commit, working tree clean"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 637,
+      "text": "2026-09-04T16:24:30.5276772Z Everything up-to-date"
+    },
+    {
+      "log": "ort-collect.log",
+      "line": 638,
+      "text": "2026-09-04T16:24:30.6463180Z Command completed after 2 attempt(s)."
+    }
+  ],
+  "attestationObservation": {
+    "endpoint": "repos/k2-fsa/sherpa-onnx/attestations/sha256:a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+    "responseStatus": 404,
+    "noAttestationExistenceConclusion": true
+  },
+  "hfObservation": {
+    "repository": "csukuangfj2/android-onnxruntime-libs",
+    "currentRevision": "66a75f607848c2643147860dd1dbd6a91f482a5f",
+    "currentSiblings": [
+      {
+        "rfilename": ".gitattributes"
+      }
+    ],
+    "noMirrorDigestAvailable": true
+  },
+  "limitations": [
+    "Tag workflow differs from executed workflow. Use actual run head, not current tag for parameters.",
+    "Archive current release metadata is not proof of Sherpa historical downloaded ZIP bytes.",
+    "Member sizes and binary version strings are corroboration, not member SHA equality.",
+    "Fetched/build source components are not necessarily all retained final static members.",
+    "Successful collect job does not prove HF mirror upload: first push rejected, retry moved-source failures then empty up-to-date.",
+    "No full source-to-AAR equality, recursive final SBOM, production notices or independent release approval."
+  ],
+  "deviceOperations": 0,
+  "runtimeBinaryDownloads": 0,
+  "productionChanges": false,
+  "w3Status": "open"
+}

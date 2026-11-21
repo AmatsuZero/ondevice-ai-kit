@@ -1,0 +1,17 @@
+{
+  "at": "2026-11-12T05:53:08.802017+00:00",
+  "scope": "local-postpublication-error-signal",
+  "pythonTests": 67,
+  "redErrors": 2,
+  "regressions": "missing typed publication-error signal RED -> GREEN for directory fsync and staging unlink",
+  "sourceSHA256": "2c9e885c85a0b0d6623b5285cd88075abd93ee8111c04088eb30ed82fc9304e4",
+  "testSHA256": "b6377124353e1c9ef3988331ba744644890687717c813a8d2da754cbf185e2b9",
+  "originalExceptionPreservedAsCause": true,
+  "mediumReviewFindingResolvedInCode": true,
+  "independentReReviewAfterNarrowFix": false,
+  "actualDeviceIO": false,
+  "W3Complete": false,
+  "syntaxChecks": true,
+  "oldFrozenFilesUnchanged": 120,
+  "oldFalseVerdictUnchanged": true
+}

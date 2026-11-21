@@ -1,0 +1,161 @@
+[
+  {
+    "id": "ndk-r27d:12",
+    "category": "runtime-build-config",
+    "components": [
+      "compiler-rt",
+      "clang",
+      "llvm"
+    ],
+    "rationale": "实际触及 compiler-rt 与 clang/llvm 的 CMake 构建配置，传播 toolchain lipo 设置；不是最终归档成员或 Android STL 选择证据。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:14",
+    "category": "other-runtime-family",
+    "components": [
+      "compiler-rt"
+    ],
+    "rationale": "实际触及 compiler-rt/lib/builtins 的 Android 版本检查实现；属于 compiler-rt 运行时家族源码，不证明最终链接或 API 包含。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:18",
+    "category": "compiler-with-runtime-tests",
+    "components": [
+      "clang",
+      "libcxx"
+    ],
+    "rationale": "实际触及 clang Sema 源码与测试，并更新 libcxx expected verify 测试；libcxx 部分是测试路径，不是生产运行时源码。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:25",
+    "category": "other-runtime-family",
+    "components": [
+      "compiler-rt"
+    ],
+    "rationale": "实际触及 compiler-rt hwasan 源码与 hwasan 测试；属于 sanitizer 运行时家族，不推出 NDK app 净化器包含。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:31",
+    "category": "other-runtime-family",
+    "components": [
+      "compiler-rt",
+      "clang",
+      "llvm"
+    ],
+    "rationale": "实际触及 compiler-rt builtins cpu model、clang 测试和 llvm TargetParser 头；混合 compiler/rt 目标，但不证明 AArch64 或该 code 进入最终产物。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:68",
+    "category": "runtime-tests",
+    "components": [
+      "libcxx"
+    ],
+    "rationale": "实际仅触及 libcxx/test 文件系统 pass 测试，调整 Android 下 fifo/socket/hardlink 用例；测试路径不是生产运行时代码。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:70",
+    "category": "runtime-tests",
+    "components": [
+      "libcxx"
+    ],
+    "rationale": "实际触及 libcxx pass 测试与 libcxx/utils test features.py；属于 lit 测试支持，不证明 NaN 格式行为进入最终库。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:72",
+    "category": "runtime-build-config",
+    "components": [
+      "compiler-rt"
+    ],
+    "rationale": "实际触及 compiler-rt/cmake/Modules/CompilerRTUtils.cmake 的 LLVMConfig 查找配置；是构建配置变化，不是最终归档证据。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:73",
+    "category": "runtime-tests",
+    "components": [
+      "libcxx"
+    ],
+    "rationale": "实际仅触及 libcxx/test filesystem permissions pass 测试；按 Android 行为差异禁用用例，不是生产运行时源码。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:74",
+    "category": "runtime-tests",
+    "components": [
+      "libcxx"
+    ],
+    "rationale": "实际触及 libcxx/utils/libcxx/test/dsl.py 的 locale lit feature；属于测试 DSL，不证明 locale 功能或库成员存在。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r27d:75",
+    "category": "runtime-build-config",
+    "components": [
+      "libcxxabi"
+    ],
+    "rationale": "实际触及 libcxxabi 顶层与 src CMake，加入可选 libc++demangle 静态目标；CMake target 移动不能证明 NDK app 获得独立 demangle archive。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r30:5",
+    "category": "runtime-source",
+    "components": [
+      "libcxx"
+    ],
+    "rationale": "实际触及 libcxx/include/__bit/blsr.h，为 __libcpp_blsr 加 no_sanitize integer；是运行时头文件源码，不推出 sanitizer 配置或最终 ABI。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r30:6",
+    "category": "runtime-tests",
+    "components": [
+      "libcxx"
+    ],
+    "rationale": "实际仅触及 libcxx/test charconv.msvc test.pass.cpp，增加 UNSUPPORTED 行；测试路径不是生产运行时代码。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r30:7",
+    "category": "runtime-source",
+    "components": [
+      "libcxx"
+    ],
+    "rationale": "实际触及 libcxx/include/__algorithm/sort.h，为 __sort_dispatch 加 no_sanitize 属性；是运行时头文件源码，不证明最终 consumed archive。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r30:50",
+    "category": "other-runtime-family",
+    "components": [
+      "compiler-rt"
+    ],
+    "rationale": "实际触及 compiler-rt/lib/builtins/aarch64/sme-abi.S 汇编实现，避免 x18；属于 compiler-rt 运行时家族源码，不推出架构包含或最终产物。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r30:52",
+    "category": "runtime-build-config",
+    "components": [
+      "libcxx",
+      "libcxxabi"
+    ],
+    "rationale": "实际触及 libcxx/cmake/caches/AndroidNDK.cmake 与 libcxx/libcxxabi test config 模板；是 Android 测试配置和 CMake cache 参数化，不是生产运行时源码。",
+    "finalPresenceVerified": false
+  },
+  {
+    "id": "ndk-r30:53",
+    "category": "runtime-source",
+    "components": [
+      "libcxx"
+    ],
+    "rationale": "实际触及 libcxx/include/__memory/compressed_pair.h 与 libcxx/include/string 等生产头文件，并伴随 release notes 与 ABI compile pass 测试；按 source-path scope only 归 runtime-source，仅描述该 ABI 修复源码本身，不验证最终 NDK ABI、链接包含或 final archive retention。",
+    "finalPresenceVerified": false
+  }
+]

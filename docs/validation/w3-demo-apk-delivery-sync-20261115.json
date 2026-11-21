@@ -1,0 +1,26 @@
+{
+  "evidenceCommit": "a1bb1a66333ff3f46e166a8a89cf9747df623dc4",
+  "marker": "<!-- w3-demo-apk-delivery-20261115 -->",
+  "githubIssue": {
+    "number": 15,
+    "commentId": 6891675681,
+    "readbackExact": true
+  },
+  "gitlabIssue": {
+    "project": 461,
+    "number": 15,
+    "noteId": 44858,
+    "readbackExactIgnoringTrailingNewlinesOnly": true
+  },
+  "githubWikiCommit": "d063ae2d4b79f173b3e20b20a5afc14f48d34e03",
+  "bothWikisSHA256": "26a08769db655f0afd1b6ffe8d74582085e243414ae1ccc2c983db90db6a2d83",
+  "bothWikisReadbackExact": true,
+  "publicationEvidence": ".omx/artifacts/w3-demo-apk-delivery-20261115/publication",
+  "sourceBranchPushed": false,
+  "newHelperInvocations": 0,
+  "deviceOperations": 0,
+  "newImplementation": false,
+  "P1P2P3P4Accepted": false,
+  "W3Complete": false,
+  "goalRemainsActive": true
+}

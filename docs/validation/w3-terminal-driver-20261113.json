@@ -1,0 +1,66 @@
+{
+  "status": "host-driver-and-new-local-freeze-accepted",
+  "sourceSHA256": {
+    "probes/android-qwen-terminal/device_acceptance.py": "7b0511326856ec0680853ba9a34a2dda55cfda4282e7407b3f953edcf231aee5",
+    "probes/android-qwen-terminal/test_terminal_launch_parent.py": "f4f9868a090ba1f475cda74775af745db291b5db46674cc14b7bcbac8049ef07",
+    "probes/android-qwen-terminal/test_terminal_dispatch_parent.py": "aace345908c739567cf49ca0cb58071061b5a64ef12348ecbc115b6e24f6e8df",
+    "probes/android-qwen-terminal/test_terminal_full_chain_parent.py": "c22cfbf1b2174b6c4f0f1d8201f12487a808f0be53b9e8d29487a30ab89ddac5",
+    "probes/android-qwen-terminal/test_terminal_device_routing_parent.py": "087a027bcce7ea278dda877672fc42f61ea8ecae9fbd5ef692cdfc0861043f5e"
+  },
+  "methods": 376,
+  "ASTFiles": 62,
+  "allCurrentSuitesPassed": true,
+  "excludedHistoricalFixtureCheck": {
+    "suite": "contract",
+    "command": ".omx/artifacts/w3-terminal-observation-20261112/outer-freeze-parent/test_terminal_device_contract_parent.py",
+    "methods": 13,
+    "errors": 2,
+    "raw": "contract.stderr",
+    "reason": "parent selected obsolete fixture missing mandatory current modules; current check_device_contract.py18 independently passed; no source change"
+  },
+  "protection": {
+    "frozen": 120,
+    "protected": 95,
+    "prepared": 81,
+    "APKs": 2,
+    "drift": [],
+    "deviceOperations": 0
+  },
+  "independentReviews": {
+    "source": "docs/validation/w3-qwen-terminal-driver-source-review-20261112.json",
+    "parent": "docs/validation/w3-qwen-terminal-driver-parent-review-20261112.json",
+    "verdicts": [
+      "accept",
+      "accept"
+    ],
+    "reviewedCurrentModules": 16,
+    "sourceSHAReceiptTranscriptionCorrection": "driver-review-sha-correction/cbc-raw.json",
+    "sourceChangedForReviewFindings": false
+  },
+  "freeze": {
+    "files": 140,
+    "preparedSourceFiles": 81,
+    "reviewedSourceFiles": 16,
+    "diagnosticFrozenSHA256": "f778ea664bd407007845e4035428e06262fe0531033735d9fefe961fd4afc4c0",
+    "sourceFingerprint": "ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5",
+    "runId": "w3-qwen-terminal-20261112-01",
+    "ordinaryProductionHashesUnchanged": true,
+    "deviceOperations": 0,
+    "qualityAccepted": false,
+    "truePeakMeasured": false,
+    "nativePolicyEffectVerified": false
+  },
+  "runConsumed": false,
+  "ADBDevices": 0,
+  "newDeviceOperations": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false,
+  "goalStatus": "active",
+  "evidence": ".omx/artifacts/w3-terminal-observation-20261112",
+  "remaining": [
+    "fresh physical TECNO same-run terminal observation",
+    "complete Android quality and resource acceptance",
+    "production redistribution notices and release review"
+  ]
+}

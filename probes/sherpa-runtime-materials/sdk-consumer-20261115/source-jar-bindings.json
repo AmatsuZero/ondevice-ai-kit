@@ -1,0 +1,119 @@
+{
+  "sourceHead": "a18292ac56e7c694fd2e7efb2550864a0b3ef21e",
+  "sourceFileCount": 14,
+  "bindings": [
+    {
+      "module": "sdk-core",
+      "jarMember": "io/ondeviceai/core/Availability.kt",
+      "sourcePath": "android/sdk-core/src/main/kotlin/io/ondeviceai/core/Availability.kt",
+      "bytes": 582,
+      "sha256": "d845d6710da720823dbf86b669716ce6950f972b087a071359a6c0500dfea907",
+      "byteEqual": true
+    },
+    {
+      "module": "sdk-core",
+      "jarMember": "io/ondeviceai/core/LatestFrameQueue.kt",
+      "sourcePath": "android/sdk-core/src/main/kotlin/io/ondeviceai/core/LatestFrameQueue.kt",
+      "bytes": 1177,
+      "sha256": "3b9cf9918efbe5eae4c2d86dcc007b1cff96631db4ff55652152716e8a2974ed",
+      "byteEqual": true
+    },
+    {
+      "module": "sdk-core",
+      "jarMember": "io/ondeviceai/core/TaskGate.kt",
+      "sourcePath": "android/sdk-core/src/main/kotlin/io/ondeviceai/core/TaskGate.kt",
+      "bytes": 1036,
+      "sha256": "b20fb9ac5c9604ad49a21f06c73f50d386b294c9f1e5ba8aebc42aca5642192a",
+      "byteEqual": true
+    },
+    {
+      "module": "speech",
+      "jarMember": "io/ondeviceai/speech/SpeechClient.kt",
+      "sourcePath": "android/speech/src/main/kotlin/io/ondeviceai/speech/SpeechClient.kt",
+      "bytes": 7935,
+      "sha256": "48fc19674c5c9e53414f76d449227031239249962754a3101cd2d7064ceaf7e9",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-sherpa-asr",
+      "jarMember": "io/ondeviceai/sherpaasr/SherpaAsrBackend.kt",
+      "sourcePath": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaAsrBackend.kt",
+      "bytes": 6160,
+      "sha256": "25194741342ec24f8bdea1076954a6c585e6833ce99cad54c3654eb31f4c33b9",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-sherpa-asr",
+      "jarMember": "io/ondeviceai/sherpaasr/SherpaSession.kt",
+      "sourcePath": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaSession.kt",
+      "bytes": 2791,
+      "sha256": "a0882a5adbafd685127e67dfc091e53c113bec95d8330bafb596511e687165f0",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-sherpa-asr",
+      "jarMember": "io/ondeviceai/sherpaasr/SherpaWhisperModel.kt",
+      "sourcePath": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaWhisperModel.kt",
+      "bytes": 1884,
+      "sha256": "d16d21c1ce52e5101898cd48e39bfdedee06bf6a52dabaa33f8fd413a0161337",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-sherpa-asr",
+      "jarMember": "io/ondeviceai/sherpaasr/UtteranceBuffer.kt",
+      "sourcePath": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/UtteranceBuffer.kt",
+      "bytes": 1775,
+      "sha256": "668af68a844e02a4f4a454966b435569ba5dbd6214a742b5002ac6913a7226bc",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-sherpa-asr",
+      "jarMember": "io/ondeviceai/sherpaasr/WhisperSpeechGate.kt",
+      "sourcePath": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/WhisperSpeechGate.kt",
+      "bytes": 1676,
+      "sha256": "71515486387c0324df7ddea0e6959d41a939318e7772df7539e9a427c8e85181",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-system-asr",
+      "jarMember": "io/ondeviceai/systemasr/AndroidAsrResources.kt",
+      "sourcePath": "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/AndroidAsrResources.kt",
+      "bytes": 3420,
+      "sha256": "1d29644df31a3cc2d98822cb595772a38fd1f8b9e4087e7c7d1e7f8e9c4851df",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-system-asr",
+      "jarMember": "io/ondeviceai/systemasr/AndroidSpeechRecognizerBackend.kt",
+      "sourcePath": "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/AndroidSpeechRecognizerBackend.kt",
+      "bytes": 5702,
+      "sha256": "4ea95fffff05c540f36205a5d7f56110c814a2e29efc1cdc4e4b869318691e50",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-system-asr",
+      "jarMember": "io/ondeviceai/systemasr/AsrResources.kt",
+      "sourcePath": "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/AsrResources.kt",
+      "bytes": 4934,
+      "sha256": "a270dc027d4ce6c0d20b40539062be65ced73cefadbcb048e3bd40c66fbb13dc",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-system-asr",
+      "jarMember": "io/ondeviceai/systemasr/RecognitionSession.kt",
+      "sourcePath": "android/backend-system-asr/src/main/kotlin/io/ondeviceai/systemasr/RecognitionSession.kt",
+      "bytes": 6137,
+      "sha256": "ce65210fc5628e0497aa08a07c55201a91c01530927b726018b6c7382dc3e4fc",
+      "byteEqual": true
+    },
+    {
+      "module": "backend-system-tts",
+      "jarMember": "io/ondeviceai/systemtts/AndroidTextToSpeechBackend.kt",
+      "sourcePath": "android/backend-system-tts/src/main/kotlin/io/ondeviceai/systemtts/AndroidTextToSpeechBackend.kt",
+      "bytes": 7303,
+      "sha256": "8e281fd2bdd36aece07e70a09ceb27e9ce6b6193e991fc1d8a33cb7c036b3540",
+      "byteEqual": true
+    }
+  ],
+  "compiledSemanticEquivalenceClaimed": false
+}

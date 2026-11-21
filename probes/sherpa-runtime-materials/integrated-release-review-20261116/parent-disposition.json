@@ -1,0 +1,50 @@
+{
+  "suppliedInitialVerdict": "hold_release",
+  "initialAcceptedWithoutCorrection": false,
+  "correctedSuppliedVerdict": "hold_release",
+  "acceptedConclusion": "hold_release; recognized increments retained; no P1-P4/R4/R5 closure",
+  "originalAndCorrectedRawPreserved": true,
+  "parentEditorialCorrections": [
+    {
+      "field": "reportMarkdown",
+      "old": "# W3 集成发布证据覆盖与充分性复审修正文稿（2026-11-16）",
+      "new": "# W3 集成发布证据覆盖与充分性复审（2026-11-16）"
+    },
+    {
+      "field": "reportMarkdown",
+      "old": "第四段需P1–P4与R4/R5在同一固定实际候选上齐备后再做P4。",
+      "new": "第四段需同一固定实际候选的P1–P3完整材料及适用再分发条件齐备后进行P4；W3整包仍须R4/R5通过，不能以发布复审替代。"
+    },
+    {
+      "field": "reportMarkdown",
+      "old": "签名交付链和Qwen若入选的通知仍未验",
+      "new": "实际交付/消费链的完整适用性和Qwen若入选的通知仍未验"
+    },
+    {
+      "field": "reportMarkdown",
+      "old": "诊断用于终态和内存根因/修复，不自动填充原65，不关闭R4/R5。",
+      "new": "诊断用于观察终态与阶段成本，为内存根因分析及后续修复提供证据；单片不保证独立定位完整根因，不自动填充原65，不关闭R4/R5。"
+    },
+    {
+      "field": "reportMarkdown",
+      "old": "第二段依诊断结果决定修复；",
+      "new": "第二段依诊断结果决定后续根因分析或修复；"
+    },
+    {
+      "field": "reportMarkdown",
+      "old": "hy3供应文本复审只提供可集成文稿和证据边界判断，不冒称直接执行、不替代父端验收。",
+      "new": "hy3供应文本复审只提供可集成文稿和证据边界判断，不冒称直接执行、不替代父端验收。原始rankedNextActions中的本地准备项是泛化建议，没有给出非重复具体交付物，父端不把它当成已找到可关闭缺口的新执行任务。"
+    }
+  ],
+  "parentLinkAdditionsDeclared": true,
+  "parentAvoidRepeatingDisplayLimit": 6,
+  "genericLocalPreparationRecommendationAcceptedAsConcreteNewExecutionTask": false,
+  "reason": "no specific nonduplicate closure artifact or acceptance method identified by supplied-context review",
+  "noNewApprovalGateForAuthorizedDiagnosticOrReversibleCandidatePreparation": true,
+  "singleFileDiagnosticGuaranteedRootCause": false,
+  "independentP4ReleaseAccepted": false,
+  "candidateTracksMerged": false,
+  "W3Complete": false,
+  "newDeviceOrBuildOrDownload": false,
+  "exactScopeOfAcceptedReview": "supplied-text coverage/sufficiency review and parent material-identity checks; not independent binary/code execution"
+}

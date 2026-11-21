@@ -1,0 +1,11 @@
+{
+  "acceptedTechnicalResult": true,
+  "documentationAcceptedAsIs": false,
+  "issues": [
+    "whole-increment zero-download/run wording",
+    "pending-parent/staging metadata stale",
+    "original175baseline vs literalcurrentbytes distinction",
+    "driverdoesnotreadsymlinkblobs; priorauditdoes",
+    "uncommittedoldhandoffprefixmeta"
+  ]
+}

@@ -1,0 +1,244 @@
+[
+  {
+    "component": "onnxruntime",
+    "abi": "arm64-v8a",
+    "logPath": ".omx/artifacts/w3-runtime-materials-20261111/ort-provenance-followup/ort-arm64.log",
+    "logSHA256": "d2f7a0facac749ab6c165535a3fce3295b137d904048255c5e700203e8a1f274",
+    "observations": [
+      {
+        "line": 455,
+        "text": "2026-09-04T15:55:51.4689130Z 2026-09-04 15:55:51,467 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=arm64-v8a -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+      },
+      {
+        "line": 493,
+        "text": "2026-09-04T15:56:11.4852692Z -- The C compiler identification is Clang 18.0.4"
+      },
+      {
+        "line": 494,
+        "text": "2026-09-04T15:56:12.1219669Z -- The CXX compiler identification is Clang 18.0.4"
+      },
+      {
+        "line": 1139,
+        "text": "2026-09-04T15:56:37.2831487Z -- CMAKE_CXX_FLAGS: -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -ffunction-sections -fdata-sections"
+      }
+    ]
+  },
+  {
+    "component": "onnxruntime",
+    "abi": "armeabi-v7a",
+    "logPath": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/armeabi-v7a.log",
+    "logSHA256": "d9b140c42f76a75311d433b686e6e34269ace02a9c5850ec290949c496afa0cc",
+    "observations": [
+      {
+        "line": 455,
+        "text": "2026-09-04T15:55:48.0739053Z 2026-09-04 15:55:48,072 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=armeabi-v7a -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+      },
+      {
+        "line": 493,
+        "text": "2026-09-04T15:55:53.7407554Z -- The C compiler identification is Clang 18.0.4"
+      },
+      {
+        "line": 494,
+        "text": "2026-09-04T15:55:53.9062279Z -- The CXX compiler identification is Clang 18.0.4"
+      },
+      {
+        "line": 1150,
+        "text": "2026-09-04T15:56:06.2662108Z -- CMAKE_CXX_FLAGS: -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -ffunction-sections -fdata-sections"
+      }
+    ]
+  },
+  {
+    "component": "onnxruntime",
+    "abi": "x86",
+    "logPath": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/x86.log",
+    "logSHA256": "15bb74c3a6c3dd6f5cc22440e7da55342d74e5fac19197493ca9e297fad618fc",
+    "observations": [
+      {
+        "line": 455,
+        "text": "2026-09-04T15:55:50.5745568Z 2026-09-04 15:55:50,573 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=x86 -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+      },
+      {
+        "line": 493,
+        "text": "2026-09-04T15:56:01.7120091Z -- The C compiler identification is Clang 18.0.4"
+      },
+      {
+        "line": 494,
+        "text": "2026-09-04T15:56:02.3273549Z -- The CXX compiler identification is Clang 18.0.4"
+      },
+      {
+        "line": 1146,
+        "text": "2026-09-04T15:56:20.6540004Z -- CMAKE_CXX_FLAGS: -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -ffunction-sections -fdata-sections"
+      }
+    ]
+  },
+  {
+    "component": "onnxruntime",
+    "abi": "x86_64",
+    "logPath": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/x86_64.log",
+    "logSHA256": "fa15439c8f6bb1343939933b304288a04d1964e87fea993b163053787353f1b6",
+    "observations": [
+      {
+        "line": 455,
+        "text": "2026-09-04T15:55:59.6353086Z 2026-09-04 15:55:59,634 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=x86_64 -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+      },
+      {
+        "line": 493,
+        "text": "2026-09-04T15:56:15.7292755Z -- The C compiler identification is Clang 18.0.4"
+      },
+      {
+        "line": 494,
+        "text": "2026-09-04T15:56:16.7344371Z -- The CXX compiler identification is Clang 18.0.4"
+      },
+      {
+        "line": 1146,
+        "text": "2026-09-04T15:56:41.7759927Z -- CMAKE_CXX_FLAGS: -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -frtti -stdlib=libc++ -ffunction-sections -fdata-sections"
+      }
+    ]
+  },
+  {
+    "component": "sherpa-onnx",
+    "logPath": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+    "logSHA256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6",
+    "observations": [
+      {
+        "line": 649,
+        "text": "2026-10-26T15:37:25.2120151Z ##[group]Run echo \"ANDROID_NDK_LATEST_HOME: ${ANDROID_NDK_LATEST_HOME}\""
+      },
+      {
+        "line": 650,
+        "text": "2026-10-26T15:37:25.2120460Z \u001b[36;1mecho \"ANDROID_NDK_LATEST_HOME: ${ANDROID_NDK_LATEST_HOME}\"\u001b[0m"
+      },
+      {
+        "line": 654,
+        "text": "2026-10-26T15:37:25.2232974Z ANDROID_NDK_LATEST_HOME: /usr/local/lib/android/sdk/ndk/30.0.16248370"
+      },
+      {
+        "line": 778,
+        "text": "2026-10-26T15:37:28.0125372Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DSHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF -DSHERPA_ONNX_ENABLE_C_API=ON -DCMAKE_INSTALL_PREFIX=./install -DSHERPA_ONNX_ENABLE_RKNN=OFF -DSHERPA_ONNX_ENABLE_QNN=OFF -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-21 .."
+      },
+      {
+        "line": 781,
+        "text": "2026-10-26T15:37:42.7542541Z -- The CXX compiler identification is Clang 21.0.0"
+      },
+      {
+        "line": 1577,
+        "text": "2026-10-26T15:40:55.9726832Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DSHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF -DSHERPA_ONNX_ENABLE_C_API=ON -DCMAKE_INSTALL_PREFIX=./install -DSHERPA_ONNX_ENABLE_RKNN=OFF -DANDROID_ABI=armeabi-v7a -DANDROID_ARM_NEON=ON -DANDROID_PLATFORM=android-21 .."
+      },
+      {
+        "line": 1583,
+        "text": "2026-10-26T15:40:56.0254548Z -- The CXX compiler identification is Clang 21.0.0"
+      },
+      {
+        "line": 2338,
+        "text": "2026-10-26T15:43:42.2256063Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DSHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF -DCMAKE_INSTALL_PREFIX=./install -DANDROID_ABI=x86_64 -DSHERPA_ONNX_ENABLE_C_API=ON -DSHERPA_ONNX_ENABLE_WEBSOCKET=OFF -DANDROID_PLATFORM=android-21 .."
+      },
+      {
+        "line": 2341,
+        "text": "2026-10-26T15:43:42.2909042Z -- The CXX compiler identification is Clang 21.0.0"
+      },
+      {
+        "line": 3133,
+        "text": "2026-10-26T15:46:29.6125852Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DCMAKE_INSTALL_PREFIX=./install -DANDROID_ABI=x86 -DSHERPA_ONNX_ENABLE_C_API=ON -DSHERPA_ONNX_ENABLE_WEBSOCKET=OFF -DANDROID_PLATFORM=android-21 .."
+      },
+      {
+        "line": 3136,
+        "text": "2026-10-26T15:46:29.6645252Z -- The CXX compiler identification is Clang 21.0.0"
+      }
+    ]
+  },
+  {
+    "component": "sherpa-cmake-option-guard",
+    "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/CMakeLists.txt",
+    "sha256": "dc6b997fb9e65bb1df70554c87ec3a6a4c95af6126c4b401a3c52b6380ed8f86",
+    "observations": [
+      {
+        "line": 70,
+        "text": "option(SHERPA_ONNX_ENABLE_BINARY \"Whether to build binaries\" ${SUGGEST_BUILD_BINARIES})"
+      },
+      {
+        "line": 71,
+        "text": "option(SHERPA_ONNX_ENABLE_TTS \"Whether to build TTS related code\" ON)"
+      },
+      {
+        "line": 72,
+        "text": "option(SHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION \"Whether to build speaker diarization related code\" ON)"
+      },
+      {
+        "line": 73,
+        "text": "option(SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY \"True to link libstdc++ statically. Used only when BUILD_SHARED_LIBS is OFF on Linux\" ON)"
+      },
+      {
+        "line": 74,
+        "text": "option(SHERPA_ONNX_USE_PRE_INSTALLED_ONNXRUNTIME_IF_AVAILABLE \"True to use pre-installed onnxruntime if available\" ON)"
+      },
+      {
+        "line": 75,
+        "text": "option(SHERPA_ONNX_ENABLE_SANITIZER \"Whether to enable ubsan and asan\" OFF)"
+      },
+      {
+        "line": 76,
+        "text": "option(SHERPA_ONNX_BUILD_C_API_EXAMPLES \"Whether to enable C API examples\" ${SUGGEST_BUILD_BINARIES})"
+      },
+      {
+        "line": 527,
+        "text": "  # Enable it for debugging in case there is something wrong."
+      },
+      {
+        "line": 528,
+        "text": "  # string(APPEND CMAKE_CXX_FLAGS \" -g4 -s ASSERTIONS=2 -s SAFE_HEAP=1 -s STACK_OVERFLOW_CHECK=1 \")"
+      },
+      {
+        "line": 529,
+        "text": "endif()"
+      },
+      {
+        "line": 530,
+        "text": ""
+      },
+      {
+        "line": 531,
+        "text": "if(NOT BUILD_SHARED_LIBS AND CMAKE_SYSTEM_NAME STREQUAL Linux)"
+      },
+      {
+        "line": 532,
+        "text": "  if(SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY)"
+      },
+      {
+        "line": 533,
+        "text": "    message(STATUS \"Link libstdc++ statically\")"
+      },
+      {
+        "line": 534,
+        "text": "    set(CMAKE_CXX_FLAGS \" ${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc \")"
+      },
+      {
+        "line": 535,
+        "text": "  else()"
+      },
+      {
+        "line": 536,
+        "text": "    message(STATUS \"Link libstdc++ dynamically\")"
+      },
+      {
+        "line": 537,
+        "text": "  endif()"
+      },
+      {
+        "line": 538,
+        "text": "endif()"
+      },
+      {
+        "line": 539,
+        "text": ""
+      },
+      {
+        "line": 540,
+        "text": "if(SHERPA_ONNX_ENABLE_PYTHON)"
+      },
+      {
+        "line": 541,
+        "text": "  include(pybind11)"
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "observedAt": "2026-11-14T02:06:14.649997+00:00",
+  "sourceCommit": "da36cb0",
+  "sourceCommitFiles": 8,
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-ort-all-abi-20261114 -->",
+  "issues": {
+    "gh": {
+      "id": 6869759662,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6869759662",
+      "sha256": "ae7e233a6cf41063423c2f64a7128b941be4b007eab167983187783f41ebd7f0",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44786,
+      "url": null,
+      "sha256": "9d089aa8624f57c9a3425170cb019f78f79d3aba02d2cfca4bb9a6a990bbe6ea",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "77eea1ec877d39e6ae76b3bbc9da5b43cbc577d2",
+    "sha256": "84c1cae1a309a33a6b08bbbcecaf8ef90d980f4834cd6a9324bc863bc5cf4eb2",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "84c1cae1a309a33a6b08bbbcecaf8ef90d980f4834cd6a9324bc863bc5cf4eb2",
+    "readbackExact": true
+  },
+  "dualWikiSHA256Equal": true,
+  "initialGitLabReadFailure": "EOF on notes GET; GH comment already readback; resumed marker query without duplicate GH write",
+  "W3Complete": false,
+  "R4R5Accepted": false
+}

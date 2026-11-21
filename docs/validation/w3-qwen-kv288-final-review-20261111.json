@@ -1,0 +1,102 @@
+{
+  "model": "hy3",
+  "process": {
+    "exitCode": 0,
+    "seconds": 62.739323042012984,
+    "model": "hy3",
+    "automaticRetry": false
+  },
+  "toolsObserved": 0,
+  "scope": "supplied source, parent checks and execution/comparison/restoration/cleanup receipts only",
+  "result": {
+    "verdict": "accept",
+    "findings": [
+      {
+        "severity": "info",
+        "file": "probes/android-qwen-kv288/check_parent.py",
+        "detail": "Bounded adapter verified: policy_collector_source asserts exactly 2 report-path literals, 1 verify_report path, and 1 normalized=report replacement (capacity/identity checks NOT relaxed); verify_report.py uses once() with count==1 for maxTotalLen 512->288, OUT path, and probeVariant cpu-arena-off-v1->cpu-arena-off-kv288-v1. Negative tests reject TECNO model/sdk/abi, wrong serial/qemu/user/console, non-288 capacity, and arena-off-v1 variant (pitfalls #2/#3 honored)."
+      },
+      {
+        "severity": "info",
+        "file": "probes/android-qwen-kv288/device_acceptance.py#verify_frozen_contract + COMPARISON SUMMARY",
+        "detail": "Final assertions follow supplied reports: 65/65 completed final strings, 117/117 stages identical except duration, 18/18 parent checks, 448 frozen files, prior guards arena108/heap120/emulator327 retained, physical heap run unconsumed (physicalHeapRunConsumed=false)."
+      },
+      {
+        "severity": "info",
+        "file": "host-result.json / cleanup-receipt.json / COMPARISON SUMMARY",
+        "detail": "Original gates respected and untripped: sampledMaxRss 1542725632 B <= 1610612736 (1.5GiB); minAvailable 1547964416 B >= 536870912 (512MiB); batch 113.49s <= 7920s; per-case RTF <= 0.4017s <= 120s. microphoneStarts 0, systemAsrRequests 0, productionChanges false. Cleanup removed only generated AVD disk images; reports/source/APKs/config/logs retained."
+      },
+      {
+        "severity": "low",
+        "file": "COMPARISON SUMMARY",
+        "detail": "Absence of demonstrated RSS benefit confirmed: sampledMaxRssDifference288Minus512Bytes = +3719168 B (KV288 HIGHER than KV512); sampledMemoryReductionObserved=false. Static KV capacity 112->63 MiB is arithmetic only, not RSS. Consistent with pitfall #5."
+      },
+      {
+        "severity": "info",
+        "file": "COMPARISON SUMMARY / tools/speech_error_metrics.py",
+        "detail": "Quality/scorer/raw-text comparison verified: freshlyRecomputedScores 512==288 (mandarin 6.78%, english-near 9.87%, english-far 28.32%), sameScorerSHA256 d398bb35..., 65/65 identical final strings, 117/117 identical stages. Parent reran scorer matching both originals. This is a same-batch config comparison, not a new held-out quality confirmation."
+      },
+      {
+        "severity": "low",
+        "file": "allocator-policy-collected.json / check_parent.py",
+        "detail": "Policy collection exact and bounded: same inode (UID 10150, dev 65076, inodes 557309/557324), bounded 21B read -> exact 20B (boundedReadBytes 20, readLimitBytes 21, twoReadsIdentical true); nativePolicyEffectVerified=false retained (pitfall #4); framework /data/data vs shell /data/user/0 treated as aliases."
+      },
+      {
+        "severity": "low",
+        "file": "restoration.json / emulator-stopped-confirmed.json / protected-before-run.json",
+        "detail": "Restoration/cleanup receipts consistent and unrelated edits preserved: only exact new aliases + exact staging removed, launcher returned, AVD pid exited/serial absent, ordinary Medium_Phone config unchanged; protected 85/87 match, 2 doc drift (docs/agent-pitfalls.md, docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md) recorded with before/current SHA and preserved (not overwritten)."
+      },
+      {
+        "severity": "medium",
+        "file": "docs/validation/w3-qwen-kv288-emulator-observed-20261111.md / COMPARISON SUMMARY",
+        "detail": "Fake-completion risk mitigated but must be restated: w3Complete=false, productionReady=false, supplementalEmulatorEvidenceOnly=true. Emulator success does NOT substitute TECNO physical-device acceptance; W3/R4/R5 remain open. Proceeding while away is acceptable ONLY for supplemental emulator file tests."
+      },
+      {
+        "severity": "low",
+        "file": "source-review.json",
+        "detail": "Reviewer-scope caveat inherited: source-review performed no build/runtime/device/emulator; host-green checks used synthetic stubs (realNativeCalls 0, deviceOperations 0). Capacity arithmetic accepted elsewhere, not re-reviewed. This review likewise used supplied material only."
+      }
+    ],
+    "confirmedProperties": [
+      "Source/parent adapter edits are bounded (six candidate edits; collector 2-path/1-verify/1-normalized; verify_report 3 once-replacements) with no relaxation of capacity/identity checks",
+      "Final assertions match supplied reports: 65/65 completed, 1 constructor, 117 streams, 117 decode; 18/18 parent validation checks pass",
+      "All65/117 comparison: 65/65 identical final strings, 117/117 stages identical except measured duration; same scorer SHA; identical recomputed scores",
+      "Original gates respected and untripped: 1.5GiB RSS, 512MiB available, 120s/case, 7920s batch",
+      "Prior frozen guards retained: arena108, heap120, emulator327; new frozen file count 448; contract SHA a844a4bf...",
+      "Physical heap run remains unconsumed (physicalHeapRunConsumed=false)",
+      "No microphone/AI-AI/downloads/production changes (microphoneStarts 0, systemAsrRequests 0, productionChanges false)",
+      "W3/R4/R5 remain open (w3Complete=false, productionReady=false); emulator evidence is supplemental only",
+      "Restoration/cleanup receipts present and consistent; exact aliases/staging removed, AVD stopped, only generated disk removed, reports/source/APKs retained",
+      "Policy collection exact/bounded; nativePolicyEffectVerified=false; constructor DEX v50=0x120=288, v56=0x200 synthetic mask (no 512 residue)",
+      "Unrelated edits preserved: 85/87 match, 2 doc drift recorded and retained; this review made no edits"
+    ],
+    "limitations": [
+      "Emulator evidence is supplemental only (supplementalEmulatorEvidenceOnly=true); does NOT substitute TECNO physical-device acceptance. Verdict=accept applies ONLY to proceeding with supplemental emulator file tests while away.",
+      "No demonstrated RSS benefit: sampledMaxRss KV288 is +3.72 MiB HIGHER than KV512; sampledMemoryReductionObserved=false. Static KV capacity arithmetic (112->63 MiB) is not RSS savings (pitfall #5).",
+      "No controlled speedup, true peak, energy, or phone acceptance established (controlledSpeedupEstablished=false, truePeakMeasured=false). Two independent emulator runs do not prove controlled speedup or true peak.",
+      "Exact-run consumed state must not be replayed (already consumed; replay prohibited).",
+      "Review used supplied material only; no tools/shell/network/device/filesystem operations; did not independently read raw files omitted from this context (e.g., full diagnostic-frozen.json, raw APK bytes, full run-plan beyond asserted fields).",
+      "Source-review limitations inherited: no direct build/runtime/device; host checks synthetic (realNativeCalls 0); capacity arithmetic accepted elsewhere and not re-reviewed here.",
+      "Quality comparison is a same-batch config comparison, not a new independent held-out quality confirmation.",
+      "Internal hash/identity values (manifestSHA256 8d1cfd..., sourceFingerprint ed42cdce..., contractSHA a844a4bf..., original report SHA 696ee418...) are cross-consistent across receipts but were not independently recomputed by this reviewer from omitted raw files.",
+      "Proceeding while away is acceptable for supplemental emulator file tests; it must not be interpreted as release acceptance, TECNO acceptance, or closure of W3/R4/R5."
+    ]
+  },
+  "parentDisposition": {
+    "blockingCodeFindings": 0,
+    "findingsRegraded": "All nine entries are confirmations, limitations or communication reminders; no implementation defect identified. The medium fake-completion reminder is already explicit in result/roadmap/issue draft.",
+    "corrections": [
+      "RTF is dimensionless; 0.4017067 is not 0.4017 seconds. With <=10 second files, max case elapsed is separately below120s.",
+      "Difference is3719168 bytes=3.546875MiB (3.719168 decimalMB), not +3.72MiB. Use exact bytes and3.55MiB in delivery."
+    ],
+    "unverifiedBoundariesRetained": [
+      "physical TECNO acceptance",
+      "native allocator policy effect",
+      "controlled speedup",
+      "true peak/GPU/energy",
+      "production resource budget",
+      "exact recursive runtime source/binary mapping",
+      "production notices and independent release review"
+    ]
+  }
+}

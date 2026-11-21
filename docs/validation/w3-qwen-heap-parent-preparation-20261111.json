@@ -1,0 +1,28 @@
+{
+  "pythonSyntaxPassed": true,
+  "heapTests": 21,
+  "regressionTests": 61,
+  "frozenFilesUnchanged": 108,
+  "protectedNormalizedMatched": 77,
+  "otherTaskDriftPreserved": [
+    "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md"
+  ],
+  "otherWorkingFilesUnchanged": true,
+  "newDeviceOperations": 0,
+  "newInferenceCalls": 0,
+  "newHelperCalls": 0,
+  "independentReviewPassed": false,
+  "reviewStatus": "parent self-review only; external/native quota routes remain stopped",
+  "sourceHashes": {
+    "probes/android-qwen-heap/check_parent.py": "0f5fdf5031ffbfd364cc94f39c2bf37322e5758fb3c1ffc59e99d206579509e8",
+    "probes/android-qwen-heap/verify_report.py": "981c94f28552053aba382aeadcdbb5b66112d047f05698285cd4cbd20814060a"
+  },
+  "deviceReadiness": false,
+  "preciseClockAlignmentImplemented": false,
+  "schemaVersion": 1,
+  "scope": "Parent report validator only; no externally owned Android wrapper implementation",
+  "w3Status": "open",
+  "goalStatus": "active",
+  "sourceBranchPushed": false,
+  "localEvidenceRoot": ".omx/artifacts/w3-qwen-ort-lifecycle-20261111/heap-parent-preparation"
+}

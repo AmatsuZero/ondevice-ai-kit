@@ -1,0 +1,198 @@
+[
+  {
+    "id": "ndk-r27d:12",
+    "label": "Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "paths": [
+      "clang/CMakeLists.txt",
+      "clang/runtime/CMakeLists.txt",
+      "compiler-rt/cmake/Modules/AddCompilerRT.cmake",
+      "compiler-rt/cmake/Modules/CompilerRTDarwinUtils.cmake",
+      "llvm/cmake/modules/LLVMExternalProjectUtils.cmake"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "sha256": "be814908517462677660c8aff7485e5867c1cd1e6e91bc6aeaa57a7c22f7497b"
+  },
+  {
+    "id": "ndk-r27d:14",
+    "label": "Fix __isOSVersionAtLeast for Android (#80496)",
+    "paths": [
+      "compiler-rt/lib/builtins/os_version_check.c"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch",
+    "sha256": "5cddb2be6d78db60acb8c04405df535cc13dcf801e9250b6a842154ff1b0fe54"
+  },
+  {
+    "id": "ndk-r27d:18",
+    "label": "Reapply \"[Sema] Fix crash on invalid code with parenthesized",
+    "paths": [
+      "clang/lib/Sema/SemaInit.cpp",
+      "clang/test/SemaCXX/crash-GH76228.cpp",
+      "clang/test/SemaCXX/paren-list-agg-init.cpp",
+      "libcxx/test/libcxx/utilities/expected/expected.expected/transform_error.mandates.verify.cpp",
+      "libcxx/test/libcxx/utilities/expected/expected.void/transform_error.mandates.verify.cpp"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch",
+    "sha256": "6f396d7ca5cb7c6c6a7dbd24c7490f6697a8962cf90853574cdcc72ba47a03b9"
+  },
+  {
+    "id": "ndk-r27d:25",
+    "label": "Revert \"[hwasan] Add fixed_shadow_base flag\" (#95435)",
+    "paths": [
+      "compiler-rt/lib/hwasan/hwasan_flags.inc",
+      "compiler-rt/lib/hwasan/hwasan_linux.cpp",
+      "compiler-rt/test/hwasan/TestCases/Linux/fixed-shadow.c"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch",
+    "sha256": "700c2cf3602782248f7dfeb2385afb059634156af0626732c5014d7858c76d70"
+  },
+  {
+    "id": "ndk-r27d:31",
+    "label": "[AArch64][FMV] Support feature MOPS in Function Multi",
+    "paths": [
+      "clang/test/CodeGen/attr-target-version.c",
+      "clang/test/Sema/attr-target-clones-aarch64.c",
+      "clang/test/SemaCXX/attr-target-version.cpp",
+      "compiler-rt/lib/builtins/cpu_model/aarch64.c",
+      "compiler-rt/lib/builtins/cpu_model/aarch64/fmv/mrs.inc",
+      "compiler-rt/lib/builtins/cpu_model/aarch64/hwcap.inc",
+      "llvm/include/llvm/TargetParser/AArch64TargetParser.h"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch",
+    "sha256": "7e7865989d89adbe02bd031c2407e7d3b8dd79c2861efb6c20fbc0f57d273d91"
+  },
+  {
+    "id": "ndk-r27d:68",
+    "label": "avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "paths": [
+      "libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_size.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/file_type_obs.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/class.directory_entry/directory_entry.obs/hard_link_count.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy/copy.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.copy_file/copy_file.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.create_hard_link/create_hard_link.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.equivalent/equivalent.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.hard_lk_ct/hard_link_count.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.is_empty/is_empty.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.status/status.pass.cpp",
+      "libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.symlink_status/symlink_status.pass.cpp"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "sha256": "a2ef134dd468076fe3a18a97ca42dce8a17919e66491182b0f470c1bf5299769"
+  },
+  {
+    "id": "ndk-r27d:70",
+    "label": "bionic-includes-plus-sign-for-nan-v2.patch",
+    "paths": [
+      "libcxx/test/std/localization/locale.categories/category.numeric/locale.nm.put/facet.num.put.members/put_long_double.pass.cpp",
+      "libcxx/utils/libcxx/test/features.py"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/bionic-includes-plus-sign-for-nan-v2.patch",
+    "sha256": "c14fe8535d167cb1c619e2890109a862c5289c457500b16854c56a8b15fab8bb"
+  },
+  {
+    "id": "ndk-r27d:72",
+    "label": "compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "paths": [
+      "compiler-rt/cmake/Modules/CompilerRTUtils.cmake"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "sha256": "3e1e2a5cec77206efb39c0c90d5ab692abbfb26d9f169fed8025ae7a76e1491c"
+  },
+  {
+    "id": "ndk-r27d:73",
+    "label": "disable-symlink-resolve-test-on-android.patch",
+    "paths": [
+      "libcxx/test/std/input.output/filesystems/fs.op.funcs/fs.op.permissions/permissions.pass.cpp"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/disable-symlink-resolve-test-on-android.patch",
+    "sha256": "43da3d11f2b648967ddc12a72a88bee2506be3c81629245faacccbb138b61b53"
+  },
+  {
+    "id": "ndk-r27d:74",
+    "label": "hide-locale-lit-features-for-bionic-v2.patch",
+    "paths": [
+      "libcxx/utils/libcxx/test/dsl.py"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/hide-locale-lit-features-for-bionic-v2.patch",
+    "sha256": "8a2631e1b4eefd87f5f580f65bb901e509fbafef7f84cd723bfea14ecc0df29e"
+  },
+  {
+    "id": "ndk-r27d:75",
+    "label": "move-cxa-demangle-into-libcxxdemangle.patch",
+    "paths": [
+      "libcxxabi/CMakeLists.txt",
+      "libcxxabi/src/CMakeLists.txt"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/move-cxa-demangle-into-libcxxdemangle.patch",
+    "sha256": "6a8879953b2133491d4bc6be97332d4d031b837e0175227969f4ef7f7d6ef8b9"
+  },
+  {
+    "id": "ndk-r30:5",
+    "label": "Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "paths": [
+      "libcxx/include/__bit/blsr.h"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "sha256": "83c392d2d95339b7988fb29d041aa9493c65ebd4a2ebf50a77102eaccd739d99"
+  },
+  {
+    "id": "ndk-r30:6",
+    "label": "Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "paths": [
+      "libcxx/test/std/utilities/charconv/charconv.msvc/test.pass.cpp"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "sha256": "a9883b3ca03633dd8fa375d53a163a60e1f79e3f4b9502a04cd069a7d3d0f0fd"
+  },
+  {
+    "id": "ndk-r30:7",
+    "label": "Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "paths": [
+      "libcxx/include/__algorithm/sort.h"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "sha256": "6ac890d3e831093171068315214038ddd27ea974006bff2bccb314ccd5976977"
+  },
+  {
+    "id": "ndk-r30:50",
+    "label": "[compiler-rt][AArch64] Don't use x18 in __arm_sme_save",
+    "paths": [
+      "compiler-rt/lib/builtins/aarch64/sme-abi.S"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch",
+    "sha256": "4eec14da6800f8f29669d996cc7ef9ddfe620980d17bd0d4753595e7167731b9"
+  },
+  {
+    "id": "ndk-r30:52",
+    "label": "[libc++] Expand Android libc++ test config files (#142846)",
+    "paths": [
+      "libcxx/cmake/caches/AndroidNDK.cmake",
+      "libcxx/test/configs/llvm-libc++-android.cfg.in",
+      "libcxxabi/test/configs/llvm-libc++abi-android.cfg.in"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch",
+    "sha256": "5836dbd95212aa195eb0f86398b94196c9dcb324cb70cd0cb624ae57f8de50a9"
+  },
+  {
+    "id": "ndk-r30:53",
+    "label": "[libc++] Fix ABI break introduced by switching to",
+    "paths": [
+      "libcxx/docs/ReleaseNotes/21.rst",
+      "libcxx/include/__memory/compressed_pair.h",
+      "libcxx/include/string",
+      "libcxx/test/libcxx/containers/associative/map/abi.compile.pass.cpp",
+      "libcxx/test/libcxx/containers/associative/set/abi.compile.pass.cpp",
+      "libcxx/test/libcxx/containers/associative/unord.map/abi.compile.pass.cpp",
+      "libcxx/test/libcxx/containers/associative/unord.set/abi.compile.pass.cpp",
+      "libcxx/test/libcxx/containers/sequences/deque/abi.compile.pass.cpp",
+      "libcxx/test/libcxx/containers/sequences/list/abi.compile.pass.cpp",
+      "libcxx/test/libcxx/containers/sequences/vector.bool/abi.compile.pass.cpp",
+      "libcxx/test/libcxx/containers/sequences/vector/abi.compile.pass.cpp",
+      "libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/default.pass.cpp",
+      "libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/nullptr.pass.cpp",
+      "libcxx/test/std/utilities/smartptr/unique.ptr/unique.ptr.class/unique.ptr.ctor/pointer.pass.cpp"
+    ],
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch",
+    "sha256": "5d72ce3c080ab4553d6ef992a32d98ab1794c310a37c1714dc16414a93409910"
+  }
+]

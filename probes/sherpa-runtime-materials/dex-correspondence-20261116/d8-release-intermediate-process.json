@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "rtk",
+    "proxy",
+    "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home/bin/java",
+    "-cp",
+    "/Users/daubert/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/9.1.0/da004d252ed93ae054aa62542baf696a730643e8/builder-9.1.0.jar",
+    "com.android.tools.r8.D8",
+    "--release",
+    "--intermediate",
+    "--min-api",
+    "26",
+    "--thread-count",
+    "2",
+    "--lib",
+    "/Users/daubert/Library/Android/sdk/platforms/android-36/android.jar",
+    "--classpath",
+    "/Users/daubert/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar",
+    "--output",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-dex-correspondence-20261116T0730/rebuilt-release-intermediate",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-dex-correspondence-20261116T0730/probe-inputs/rebuilt-payloads.jar"
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 0.886,
+  "outputSHA256": "977520f1a4fd15210743a06baa86e55270dbdebad3c1ecc32dcf8ebcd26e0b4b"
+}

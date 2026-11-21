@@ -1,0 +1,105 @@
+{
+  "sourceHead": "de5e7bc2cbbda23bc8d3a1a87783ea9d8f9d8987",
+  "build": {
+    "argv": [
+      "rtk",
+      "proxy",
+      "./gradlew",
+      ":android:backend-sherpa-asr:assembleDebug",
+      ":demo:androidApp:assembleDebug",
+      "--offline",
+      "--console=plain",
+      "-PenableSherpaAsr=true",
+      "-PenableLiteRtLm=false",
+      "-PenableLiteRtSr=false",
+      "-PenableOpenCvIdentity=false",
+      "-PsherpaMavenRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2",
+      "-PsherpaAsrAssetsDir=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/assets",
+      "-PsdkCommit=de5e7bc2cbbda23bc8d3a1a87783ea9d8f9d8987"
+    ],
+    "JAVA_HOME": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+    "sourceHead": "de5e7bc2cbbda23bc8d3a1a87783ea9d8f9d8987",
+    "offline": true,
+    "deviceOperations": 0,
+    "newImplementation": false,
+    "recoveryOf": "build-process.json",
+    "exitCode": 0,
+    "seconds": 8.834386917005759
+  },
+  "taskCounts": {
+    "total": 335,
+    "executed": 25,
+    "upToDate": 310
+  },
+  "backendKotlinCompileWasUpToDate": true,
+  "archives": [
+    {
+      "path": "artifacts/verification/w3-demo-apk-delivery-20261115/androidApp-debug.apk",
+      "bytes": 244926013,
+      "sha256": "b4036696717aff8ecbd45dc5372f3ec7d96a330fda4cff5cc68d05a0aa9d0f20",
+      "nonDirectoryMembers": 563,
+      "orderedInfoZipListEqual": true,
+      "concatenatedPayloadByteEqual": true,
+      "payloadBytes": 305751214,
+      "payloadSHA256": "35600c646a5541ffb130159977767347c9d9701b109906625418f388368154bc"
+    },
+    {
+      "path": "artifacts/verification/w3-demo-apk-delivery-20261115/backend-sherpa-asr-debug.aar",
+      "bytes": 40726,
+      "sha256": "a39766683cab79bcbf8476aafe40b1e6fdc3030f44550159b6c796146e5ddfff",
+      "nonDirectoryMembers": 4,
+      "orderedInfoZipListEqual": true,
+      "concatenatedPayloadByteEqual": true,
+      "payloadBytes": 42886,
+      "payloadSHA256": "8ddd94b8cfd4cf44883f16a2a459ad35f3141977aed3a381c79f377c9b049baa"
+    }
+  ],
+  "runtime": {
+    "path": "artifacts/verification/sherpa-asr-20261105/inputs/downloads/sherpa-onnx-2.0.1.aar",
+    "bytes": 49441341,
+    "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7"
+  },
+  "runtimeSOByteEqualCount": 16,
+  "assetByteEqualCount": 7,
+  "rootModelLicenseByteEqualCount": 3,
+  "snapshots": {
+    "selectedBuildInputs": {
+      "count": 304,
+      "changed": [],
+      "unchanged": 304
+    },
+    "sdkSourceInputs": {
+      "count": 47,
+      "changed": [],
+      "unchanged": 47
+    },
+    "assets": {
+      "count": 7,
+      "changed": [],
+      "unchanged": 7
+    },
+    "protected": {
+      "count": 173,
+      "changed": [],
+      "unchanged": 173
+    }
+  },
+  "frozenGuard": {
+    "verified": true,
+    "files": 161,
+    "runId": "w3-qwen-terminal-20261114-01",
+    "sourceFingerprint": "ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5",
+    "guardSource": {
+      "path": "probes/android-qwen-terminal/device_acceptance.py",
+      "bytes": 15393,
+      "sha256": "cd96d13d5caff9a1a7c255006b0100c352cca38917880c4f503327dc542773f7"
+    }
+  },
+  "deviceOperations": 0,
+  "newImplementation": false,
+  "publishedMavenSdkConsumer": false,
+  "existingDemoUsesProjectDependency": true,
+  "productionNoticesComplete": false,
+  "P1P2P3P4Accepted": false,
+  "W3Complete": false
+}

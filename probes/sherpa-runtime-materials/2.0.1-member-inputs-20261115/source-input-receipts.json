@@ -1,0 +1,119 @@
+[
+  {
+    "path": "new-release.sh",
+    "gitBlobSHA1": "3721e305298988e5246596abfa00029385f492ff",
+    "bytes": 4852,
+    "sha256": "b708dbf8e0e8b79040250f0e4473ed5de9d3a77050a9f8ab46cc5267b4b3bf35",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/new-release.sh",
+    "origin": "official GitBlob response via invocation-only direct route"
+  },
+  {
+    "path": "sherpa-onnx/csrc/version.cc",
+    "gitBlobSHA1": "fad4f4608123d9fe30c9e2543f79952dd403a5fd",
+    "bytes": 579,
+    "sha256": "5715a42c4f392f4fb5941cb73f58e9bbf250cb514f8f7fb7d067393aec034471",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/sherpa-onnx/csrc/version.cc",
+    "origin": "first-attempt delivered source"
+  },
+  {
+    "path": "build-android-arm64-v8a.sh",
+    "gitBlobSHA1": "abef747a48b26f1f816896f1d7c8192db68555b9",
+    "bytes": 9750,
+    "sha256": "3dc0e938694ba3d570aca1e629c8ddad4adb3cdc3f669c14b3295eefba79954a",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/build-android-arm64-v8a.sh",
+    "origin": "first-attempt delivered source"
+  },
+  {
+    "path": "build-android-armv7-eabi.sh",
+    "gitBlobSHA1": "ee3b327e7ac205938b6226cf4f3ce983fe0a1aaf",
+    "bytes": 7880,
+    "sha256": "5c8cddeb1b0ed32f94ab5e0e64e88dca2ffec02fdb65d05c77587f43643a87a8",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/build-android-armv7-eabi.sh",
+    "origin": "official GitBlob response via invocation-only direct route"
+  },
+  {
+    "path": "build-android-x86-64.sh",
+    "gitBlobSHA1": "1d6f57e5928653a53580b87b3362e8c5c13a7b8d",
+    "bytes": 7089,
+    "sha256": "3b7e5bc482c8472dc1ffa161d6f334bf4475c74769afe3ef9253bb734e1741f9",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/build-android-x86-64.sh",
+    "origin": "official GitBlob response via invocation-only direct route"
+  },
+  {
+    "path": "build-android-x86.sh",
+    "gitBlobSHA1": "f5f951ab158953e9526e621f098f69fd2e88c2af",
+    "bytes": 6011,
+    "sha256": "9ec0f29ef9e24bbced43cdb009664316a99b5d75c9c9020f1cbff01382278bd9",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/build-android-x86.sh",
+    "origin": "first-attempt delivered source"
+  },
+  {
+    "path": "android/SherpaOnnxAar/gradle/libs.versions.toml",
+    "gitBlobSHA1": "56172d293302b51b9288e0ef37bcfa115cf19555",
+    "bytes": 998,
+    "sha256": "198ab638cc32b137e1eaf0879b414622546f2cd91b50a32177825269db6e053f",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/gradle/libs.versions.toml",
+    "origin": "official GitBlob response via invocation-only direct route"
+  },
+  {
+    "path": "android/SherpaOnnxAar/gradle/wrapper/gradle-wrapper.properties",
+    "gitBlobSHA1": "a8b35635811a7681f76edda971edcd8a14dcbf54",
+    "bytes": 230,
+    "sha256": "9f014b10e840a2409d5133dba7affc8db60b2b3e24309e8263b990f51da1b697",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/gradle/wrapper/gradle-wrapper.properties",
+    "origin": "official GitBlob response via invocation-only direct route"
+  },
+  {
+    "path": "android/SherpaOnnxAar/build.gradle.kts",
+    "gitBlobSHA1": "e3f8a074116497d8bc12be69ea351394bc0c5771",
+    "bytes": 280,
+    "sha256": "14c99ea468fcd09dd491e659882dc6694f172f20569d9f32d4596230967069f5",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/build.gradle.kts",
+    "origin": "official GitBlob response via invocation-only direct route"
+  },
+  {
+    "path": "android/SherpaOnnxAar/settings.gradle.kts",
+    "gitBlobSHA1": "53ee52b5474b00a6fc5ed4b740247261f211ff7e",
+    "bytes": 545,
+    "sha256": "59b218d977e6cd9c6f404949bba808b3891729ff8b29265d44905f188fc48f2c",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/settings.gradle.kts",
+    "origin": "official GitBlob response via invocation-only direct route"
+  },
+  {
+    "path": "android/SherpaOnnxAar/sherpa_onnx/src/main/AndroidManifest.xml",
+    "gitBlobSHA1": "a5918e68abcdde7f61ccae4f0ad4885b764573fd",
+    "bytes": 121,
+    "sha256": "f0f4b47043b24ea2136dabe1cd4309c3b71d84d779889989dbe6d6e5126bfd56",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/sherpa_onnx/src/main/AndroidManifest.xml",
+    "origin": "official GitBlob response via invocation-only direct route"
+  },
+  {
+    "path": "android/SherpaOnnxAar/sherpa_onnx/consumer-rules.pro",
+    "gitBlobSHA1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/sherpa_onnx/consumer-rules.pro",
+    "origin": "official GitBlob response via invocation-only direct route"
+  },
+  {
+    "path": "android/SherpaOnnxAar/sherpa_onnx/proguard-rules.pro",
+    "gitBlobSHA1": "481bb434814107eb79d7a30b676d344b0df2f8ce",
+    "bytes": 750,
+    "sha256": "56fd960cf225f6ca40f982b13a5dbb0d8bc3dfde13ff76422825c6070d0a1890",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "materialPath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/android/SherpaOnnxAar/sherpa_onnx/proguard-rules.pro",
+    "origin": "official GitBlob response via invocation-only direct route"
+  }
+]

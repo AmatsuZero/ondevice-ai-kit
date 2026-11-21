@@ -1,0 +1,33 @@
+{
+  "accepted": true,
+  "unresolvedBlockers": [],
+  "provider": "cbc",
+  "model": "hy3",
+  "scope": "supplied evidence and parent code; no direct device observation",
+  "response": {
+    "verdict": "accepted",
+    "findings": [],
+    "limitations": [
+      "Supplied-evidence limitation: this was a no-tools static review; I cannot claim direct device observation. All runtime artifacts (device-report.json, collection.json, allocator-policy-collected.json, observed-summary.json, policy-continuation-frozen.json) were collected and verified by the parent process, not by me. The evidence chain is parent-asserted and I treat it as such.",
+      "The read-only continuation (collect_policy_report_path.py) only re-runs adapter.main('preflight') + collect_policy against the already-collected emulator report. It does NOT re-dispatch models or re-run inference. All speech quality metrics (WER/CER, 117 decode calls, 65 completed rows, 52 non-empty / 13 strict-empty) originate from the single original emulator run whose frozen adapter input hashes passed before+after and were not altered.",
+      "nativePolicyEffectVerified remains false. The policy collection only confirms receiptMatches/fileBytesMatch and a bounded 20-byte read (limit 21) with matching UID/device/inode; it does not establish that the native allocator policy had any behavioral effect on recognition (causalAttributionVerified=false).",
+      "Cross-environment agreement is non-causal. TECNO 24/24 identical raw outputs and Mac WER/CER proximity are correlation signals; they do not prove a single runtime cause and must not be read as causal attribution.",
+      "TECNO comparison coverage is only 24/65 files (20 mandarin + 4 english-near); it has zero english-far (AMI) and zero challenge (silence/noise) coverage. Results cannot be generalized to the full 65-input corpus.",
+      "Emulator evidence cannot substitute for phone acceptance, sustained/warm-run behavior, power draw, or true-peak memory. truePeakMeasured=false; only sampled RSS (max 1.433GiB) was measured. W3/R4/R5 remain open per the docs, and this item is explicitly a supplemental fixed-corpus quality passage only.",
+      "The prior free hy3 pre-run static review accepted with no findings but missed the adapter literal-count defect (count==2, not the asserted 1). This confirms the documented limitation of pre-run review; the defect was preserved (collect.stderr retained, no original frozen artifacts modified) and correctly recovered by the read-only continuation with three passing offline regression checks plus one same-run bound collection.",
+      "No concrete blockers or scope changes identified. Documented boundaries (not W3 completion, not R4/R5, not phone acceptance, not independent held-out, not native-policy-effectiveness) are consistently and honestly stated across reportMarkdown, roadmapPrepend, handoffPrepend, pitfallsPrepend, and publicationBody; internal numeric claims (hashes, counts, cohort error rates, RTF range, cleanup bytes) match observed-summary.json and the frozen/continued artifacts."
+    ]
+  },
+  "contextHashes": {
+    "collect_policy_report_path.py": "d6220e0d486ad1cf7a347fee09af02e4bea4e467ac7fc0c37c864d950d6ab6a7",
+    "check_policy_continuation.py": "25df86f95b8e55504c8265e9f13293acce31d7948bc6fc59665391ec475b53f3",
+    "compare_evidence.py": "417bf4984a5a1a8993cc0dd7e83f127ab243276bd4e0e80a3aef1983c76b1f55",
+    "observed-summary.json": "8088be43b1848c41e43390dfa0e6ed5b09fb7ef10a25b7ddc9340e379e3c60c8",
+    "docs-candidate-accepted.json": "951e85d9c4a0bb027f5a478037922c282b83eefd7644ab10f3c595e023e2de2c",
+    "tools-suite-ruby-aligned-result.json": "7983c3e8434db4e1f31e4162d56ef4bf8ae2a373928f080ce2b9441c1a35d8a0",
+    "targeted-checks-result.json": "f8da85dcd1dab1fc33e62138a39da91875e48540c0ff3b7c8bbff925c64c941d",
+    "policy-continuation-frozen.json": "ca764498a193e5f27c7bf68fad5f975545eba6c5b00306bba478a558866d74c6"
+  },
+  "artifactRoot": "artifacts/verification/w3-qwen-arena-emulator-20261111/final-review",
+  "resultSHA256": "be81af2e436bc874aa8380234260f3276190145fe7fcb238976a4a30758bc47b"
+}

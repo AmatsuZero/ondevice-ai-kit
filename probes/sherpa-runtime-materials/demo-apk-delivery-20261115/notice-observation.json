@@ -1,0 +1,22 @@
+{
+  "apkLicenseOrNoticeNamedMembers": [
+    "META-INF/androidx/annotation/annotation/LICENSE.txt",
+    "META-INF/androidx/collection/collection-ktx/LICENSE.txt",
+    "META-INF/androidx/collection/collection/LICENSE.txt",
+    "META-INF/androidx/lifecycle/lifecycle-common-java8/LICENSE.txt",
+    "META-INF/androidx/lifecycle/lifecycle-common/LICENSE.txt",
+    "assets/sherpa-whisper-tiny/SHERPA-LICENSE.txt",
+    "assets/sherpa-whisper-tiny/SILERO-LICENSE.txt",
+    "assets/sherpa-whisper-tiny/WHISPER-LICENSE.txt"
+  ],
+  "sherpaModelRootLicenseByteEqualCount": 3,
+  "dedicatedNamespaceObserved": false,
+  "namespaceChecked": "assets/ondeviceai/sherpa-asr/notices/",
+  "backendAARNonDirectoryMembers": [
+    "R.txt",
+    "AndroidManifest.xml",
+    "classes.jar",
+    "META-INF/com/android/build/gradle/aar-metadata.properties"
+  ],
+  "limitations": "Name and three exact-text observations only. Not a complete applicable-notice set, legal approval, or newly integrated notices."
+}

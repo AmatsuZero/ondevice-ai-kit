@@ -1,0 +1,135 @@
+## 当前任务入口：2026-11-17 本周并行交付（旧运行收据保留）
+
+W3/W6后续任务暂停，不轮询/重派历史实验；W7生产校准/PAD阶段外延期。新队列为W9-0合同与双端可行性→A Apple/B Android/C bridge-Demo并行，R发布材料可先行，主代理集成/设备验收，Q唯一native只读代码/验收证据审查。文件所有权和前置见[总计划](../superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md)；实际运行状态只看[本周状态表](weekly-delivery-status-20261117.md)，模板准备不表示已派发。
+
+本轮先更新规划；没有新模型/录音/设备操作或生产实现。native≤1、外部实现候选、CBC429停线、新Copilot暂停、付费逐次确认保持。下文旧hold_release/active/待批准/运行中均按各自日期解读，不作为当前授权或活跃任务证明。
+
+---
+
+## 2026-11-15 W3 NDK/C++来源任务已终态
+
+主代理完成规划、机械取证/验收与集成；免费hy3 guard46.385s/report48.791s/correction31.939s/editorial56.651s全部完整success、零已观察真实工具事件/配额错，首两文档稿拒收保留、最终稿原字节采用。36b6b48精确100文件，八命令/两note/69源路径/30tree已核；171原保护及两W6更新保留、161freeze/diff-check通过。GH#15comment6895112846/GL#15note44864/GHWikic601a1d与GLWiki逐字回读同SHA，[收据](w3-ndk-runtime-provenance-sync-20261115.json)。全部helper/发布均终态无待poll，三个重复Bun缓存名义18551376B精确清理、canonical/raw证据保持，零新设备/构建。完整W3目标active，P1–P4/R4/R5/W3open；下一cache/link/retention/runtime通知适用性，不重派本任务或重试quota/旧批次/USB循环。
+
+## 2026-11-11：W3构建依赖对应补核
+
+父核既有官方job和固定源，Eigen实际5.0.1与原递归候选3.4.0分开；ARM WebSocket ON/x86 OFF。原样收录4固定构建源/9许可，共15补充文件，13GitBlob/20日志/四ABI/17链接/15tar成员核过；原50材料/108冻结保持。无新助手/设备/模型/二进制，非最终so静态成员或生产通知/独立复审通过；W3open，免费接续问题仍未答。见w3-runtime-build-dependency-reconciliation-20261111.md。
+
+## 2026-11-11：W3 heap父端路由准备
+
+主代理仅完成父验收prepare/build/device及报告增量，未代写外部wrapper。路由19/报告22/原回归61共102，完整tools691通过；stale-host真实RED→GREEN、原误通过保留。构建前重核host测试和副本绑定，设备前完整冻结/双复核；uptime读取区间有容差，精确时钟映射未证。原108冻结/77保护保持，已有F08漂移保留；0新助手/构建/设备/native，只自审。外部hy4free429待原接续线路选择，无自动重试/换线；W3open。见w3-qwen-heap-routing-preparation-20261111.md。
+
+## 2026-11-11：W3 heap父端独立准备
+
+主代理只写父验收verify_report/check_parent，未代写外部wrapper；21合成+22arena/8FILE/31metrics共82项通过，原RED/自审裁定保留。单片、heap/原始RSS/进程/政策报告/冻结绑定已检查，实际标签/时钟对齐、设备工具、实包和独立复核仍缺；外部hy4free429待原线路答复、无自动重试。0新助手/设备/模型调用/下载/生产，W3open。详见w3-qwen-heap-parent-preparation-20261111.md。
+
+## 2026-11-11：W3 heap外部实现429终态，证据已双端回读
+
+f9b4ad0官方出处/内存边界/诊断准备已本地提交；最新GH#15comment6787469165、GL#15note42870及两Wiki相同SHA5bd975f9…8df8cc已回读。hy4free实现5.395s真实429/code6004、0工具/0文件；15:12:49+08重置仅提示，停线无自动重试/换线，待用户恢复路径答复。父缺候选RED和fault tests已准备，尚无Kotlin/实包/新设备合同；无新推理/采集/下载/生产变更，active helper0，W3open/goalactive。见w3-qwen-heap-preparation-20261111.md及最新queue；生成中条目为历史。
+
+## 2026-11-11：W3运行时材料提交/双端同步与内存诊断准备
+
+本地fd95f8c精确57路径；材料/成本已同步GH#15comment6787028706、GL#15note42860及两Wiki相同SHA6119da70…8e8de。固定AAR官方asset摘要/大小与tag已核、实际构建日志取得；精确递归组成/发布仍未过。固定ORT生命周期与实际decoder动态KV图已核，基础KV112MiB非RSS峰值，外部研究不实fixed512/缓存小等措辞经父订正。免费hy3研究已终态138.804s；唯一新hy4free只写独立heap wrapper，原planned index25单文件、原算法/政策/预算保持，父缺候选RED，无新设备/模型调用。W3open；旧native429/付费/新Copilot不重试。当前队列.omx/artifacts/current-helper-queue-20261111-w3-file.json。
+
+## 2026-11-07 Speech/F06本批验收完成
+
+| 任务 | 助手 | 实际结果 | 记录/下一步 |
+| --- | --- | --- | --- |
+| Speech生命周期六文件复审 | cbc hy4free免费 | 611.550秒/50事件/15工具/0工具错，0新确认finding | cbc-speech-final-review-20261107原件与父更正保留；非整分支批准 |
+| Speech缺陷六文件复审 | 用户选定cbc hy4free免费 | 680.198秒/48事件/13工具/0工具错，0新确认finding | cbc-speech-defects-review-20261107；agy429原错保留，不重试 |
+| 两份验收文档/踩坑补录 | cbc hy4free免费 | 初稿及订正均终态；订正247.216秒/77事件/23工具/0工具错；两文档及补录原样集成 | cbc-speech-f06-docs{,-fix}-20261107；不再poll79461/91161 |
+
+当前无运行助手。父仅核验/集成及更新证据指针；无新测试/推理/设备/付费/上传，九保护/lock保持。10/12和原生产门槛未关闭。hy3暂停到16:18:54本地；旧running段落仅历史。
+
+## 2026-11-07 14:30 当前：两份复审终态，文档交付运行中
+
+cbc生命周期53882已终态611.550s/50完整事件/15工具，缺陷29890已终态680.198s/48事件/13工具；均3文件实际交付、0工具错误、0新确认finding，精确context/源码/候选hash匹配。原件不改，父处置纠正Exception继承、无条件活性保证、JVM替身冒称真实JNI及未证二次resume；不为这些说明错误改生产源码或重复测试。见两任务parent-assessment.json和ask索引。
+
+新cbc hy4free文档79461/PID98567实际运行，只写两份验收说明/pitfalls补充/DELIVERY候选；OS正/负/私有读边界再次通过，尚无文档验收。F06父已读三份Apple官方Markdown（GET200）及三份iPhoneOS27.2SDK头；本检查范围未见显式模型传递函数要求，不等于穷尽证明/质量通过。新native researcher启动429无结果已停，不重试。10/12/not-ready与hy3暂停保持；下方两cbc运行中是此前状态。
+
+## 2026-11-07 14:12 线路更新：agy额度终态，用户选择hy4free接手
+
+agy97116已终态exit3/28.847s、RESOURCE_EXHAUSTED HTTP429、0文件，服务端提示162h18m12s；约2026-11-14 08:25:21本地仅为估计复查时间，不是恢复保证。原raw/错误/父处置保留，不重试该线路。用户已选cbc hy4free，新独立缺陷审查unified29890实际启动，见`.omx/artifacts/cbc-speech-defects-review-20261107/`；原生命周期审查53882继续。两份相同固定源码、不同审查职责/候选目录，不给彼此结论。hy3暂停、无任务超时/付费fallback保持。下方agy运行中是启动时历史，以实际result.json为准。
+
+## 2026-11-07 14:06 当前：Speech修复后六文件限定复审
+
+当前HEAD `71df0fb`。agy免费flash-medium（PID58850/session97116）与cbc hy4free（PID58974/session53882）已实际启动，分别检查缺陷/回归及生命周期/所有权边界；各自只写隔离REVIEW.md/findings.json/DELIVERY.md，不改源码、不运行测试或设备。证据`.omx/artifacts/{agy,cbc}-speech-final-review-20261107/`。两路任务目录写入成功，目录外与context副本写入、Downloads读取拒绝已由真实OS检查确认；无任务超时/付费fallback。hy3在16:18:54本地前禁用保持。仅已派发/读材料，尚无结论，不替代缺失的native双路或整分支批准。
+
+两份旧Speech/Sherpa freeze各56hash中53保持，变化仅交接/pitfalls/followups三份后续协调文档；六份实际源码/测试及原始运行证据一致。原verify exit1保留，未改旧summary/脚本、未重跑测试；只读收据`.omx/artifacts/speech-final-review-20261107/bounded-refreeze-check.json`。14:03第4小时汇报已记录，下次15:03:29本地到期。F08原四次诊断无质量修复、10/12/not-ready保持。
+
+## F08最终文档已验收（先前运行中条目为历史）
+
+hy4free文档462.992s/订正400.276s/README一行13.779s均已实际终态。最终README/验收文档原样复制，pitfalls助手文本原样追加；主代理另记录派发时漏精确三文件路径导致16次Read缺文件/误读目录。源码33183B/SHA0d5a4089…与实际构建逐字节一致，配置/README/validation/pitfalls摘要可在F08 summary追溯。所有助手/命令已结束；hy3暂停到16:18:54本地仍生效，无自动重试/付费fallback。四次生成/5负向/清理通过仅关闭诊断子项，不改变正式quality0of3、benchmark或roadmap10of12/not-ready。
+
+## 文档线路已更新（用户刚确认）
+
+cbc hy3暂停到2026-11-07 16:18:54 Asia/Shanghai／08:18:54UTC，此前禁用，时间到仅可复查非额度保证。精确记录`.omx/artifacts/cbc-hy3-quota-pause-20261107/status.json`及根AGENTS。F08文档改交hy4free，任务`cbc-f08-system-prompt-docs-hy4free-20261107`/unified65312运行；只写三份候选，不递归委派，无超时/付费fallback。上一原hy3任务终态429/0文件保持，不poll50400。
+
+## 最新增量：F08 system-message诊断（2026-11-07 13:30）
+
+| 线路 | 实际交付与父验收 | 当前状态 |
+| --- | --- | --- |
+| agy flash-medium | 初稿496.999s/219events/2次未建文件Read错误；修正305.681s/0tool error，33183B源码原样集成；父Release12.373s/5负向/恰4生成与清理通过 | 终态；只限诊断，原质量失败保持 |
+| cbc hy3配置 | 52.591/34.241/14.025s三份真实终态；资源断言和父指定目标类型经实际核验订正，最终project.yml原样集成 | 终态，无付费 |
+| cbc hy3文档 | 5.03s/process0，但provider429/quota6004/error_during_execution，无候选；服务端重置16:18:54本地 | 线路停止；已发fallback问题，等用户选择 |
+
+唯一runId system-message-birds-pair0-20261107-a1/PID89329，Mac原/中性system×motion/frozen全部原始` MOVING.`；不追加同类推理、不改正式rubric、0benchmark/0roadmap关闭。证据`artifacts/verification/f08-system-prompt-diagnostic-20261107/summary.json`。前置XcodeGen错误/嵌套sandbox EPERM/首轮真实Swift编译失败均保存；最终1类弃用warning保留。无当前助手/命令运行；旧句柄不poll。完整goal active/10of12/P4/P11及release not-ready保持。
+
+# AI助手任务台账 — 2026-11-07
+
+本台账由主代理维护。状态取自真实进程/完整结果/验收收据，历史任务不因本表刷新而重发。
+所有助手先看`docs/agent-pitfalls.md`；禁工具任务由父提供适用摘录。供应商输出不等于验收通过。
+
+| 任务 | 助手及能力匹配 | 当前状态 | 范围/句柄/证据 | 下一步 |
+| --- | --- | --- | --- | --- |
+| F10经验曲线旧正文请求 | cbc hy4free，复杂统计纯函数候选 | terminal-unusable；1647.306秒自然结束，344064B JSON截断 | unified session52594 / PID19468；`.omx/artifacts/cbc-f10-empirical-curves-20261107/`；无工具/数据下载/阈值选择 | 旧请求不修JSON/不重发/不再轮询；用户后续明确改为直接文件交付，见下行，主代理不代写实现 |
+| F10经验曲线直接文件交付 | cbc hy4free，用户新指定由Agent写文件 | completed；467.413秒自然终态，模块/测试原样集成；18定向、3110穷举核对及完整563tools通过 | `.omx/artifacts/cbc-f10-file-delivery-trace-fix-20261107/`；56完整JSONL事件/最终success，原RED/GREEN与父验收保留 | 不再轮询session98174；原DELIVERY“无权限失败”与实际一条Bash拒绝/缺文件Read不符，已另存父更正；文档与限定静态复核见下行 |
+| F10 PAD接入梳理初稿 | cbc hy3，独立源码/接口关系梳理并直接写文档 | terminal-needs-corrections；106.841秒写出6675B文档，源快照未变 | `.omx/artifacts/cbc-pad-integration-map-20261107/`；初稿与父处置保留 | 已有复制/缺配置测试不能再当新缺口；raw score不能凭空包装成必选outcome的LivenessDecision；修正任务见下行，不轮询session2004 |
+| F10文档定稿与限定静态复核 | cbc hy3，模块使用文档/PAD图修正/源码测试限定意见 | terminal-rejected；420.615秒，实际API/并列阈值/PAD路径有误，三文档未集成 | `.omx/artifacts/cbc-f10-docs-final-20261107/parent-assessment.json`；原文件另存rejected-candidate，进程成功不等于内容正确 | 不再轮询10691，不重复广泛文档任务；保留可用实现及563测试事实 |
+| Android持续重开探针 | cbc hy4free，复杂有界Kotlin实现 | terminal-provider-error；931.375秒自然终态、empty_model_response，无文件 | `.omx/artifacts/cbc-identity-reopen-probe-20261107/`；独立新探针；20周期/至少10分钟，无自动任务超时 | 原始上游finish_reason=error保留，无父超时/已观察quota；不再轮询44550；用户选定agy免费接手，见下行 |
+| Android持续重开探针接手 | agy gemini-3.8-flash-medium，用户明确选择免费路线 | terminal-needs-corrections；410.031秒实际写出19690B Kotlin，父已完整读审，两处需修正，未集成/编译 | `.omx/artifacts/agy-identity-reopen-probe-20261107/`；原文件SHA497b47c1…；保持全局会话写入拒绝日志 | 不轮询66400；交回助手修正KEEP_SCREEN_ON清理失败吞错与测量结束时间改写，见下行 |
+| Android持续重开探针两处修正 | agy免费，同一已选线路的最小修正 | terminal-no-edit；22.852秒，read_file缺headless读取规则，空response/文件未变 | `.omx/artifacts/agy-identity-reopen-probe-fix-20261107/parent-assessment.json`；result外层SUCCESS不能当交付 | 不轮询32085；不是quota/auth或任务超时。修正精确session-only读取规则后新任务见下行 |
+| Android持续重开探针读取范围修正 | agy免费，实际文件修改由助手完成 | terminal-delivered；136.692秒，19928B Kotlin两处diff原样集成；父397构建任务/43秒及签名/DEX/1046源码检查过 | `.omx/artifacts/agy-identity-reopen-probe-fix-readscope-20261107/`；SHA22179df7…；普通App25私有文件/四SR/runner/权限/TTS预检过，未安装 | 父随后从Android SDK证实main runnable抛错无法被外层catch可靠接住；不称最终验收，进一步修正见下行 |
+| Android持续重开主线程清理修正 | agy免费，最小失败路径修正 | terminal-delivered；74.402秒实际20243B Kotlin，唯一mainthread清理diff原样集成 | `.omx/artifacts/agy-identity-reopen-mainthread-fix-20261107/`；SHAd60781e7…；34编排边界检查过 | 最终397构建任务/49秒通过；唯一20周期/600.9秒真机及全部恢复/清理通过，见文末当前结果；63373/77249均终态，不再轮询 |
+| Android持续重开汇总 | cbc hy3，严格纯函数与负向测试 | terminal-needs-corrections；351.851秒交付，父独立复现两个缺陷，未集成 | `.omx/artifacts/cbc-identity-reopen-reducer-20261107/parent-red.json`；后段1秒周期误接受，warmup峰值遗漏/输出schema错 | 原件保持，不再轮询47486；定向修正交回助手，见下行 |
+| Android持续重开汇总定向修正 | cbc hy3，已复现两处错误的最小修正/回归 | completed；161.615秒原样集成；父15测试/221变异、完整578tools通过 | `.omx/artifacts/cbc-identity-reopen-reducer-fix-20261107/`；共享协议保持，不允许为迎合错误修改协议 | 新回归对原候选真实4fail，修正15GREEN；助手自行加cd使测试命令被拒已保留，实际测试由父执行；完整578/53.677秒、源码/九保护/lock保持 |
+| F09远端消费者 | 主代理，既有工具的实际网络/构建/运行验收 | bounded-pass；新GET/344文件→全新双平台consumer编译→模拟器资源运行→精确卸载 | `artifacts/verification/f09-remote-consumer-20261107/summary.json`；787文件摘要、两App各24材料、九保护保持 | 实际iPhone资源及另建新消费者图片/视频推理已通过，新增别名清理；其他生产门槛保持，同一Mac不称另一机器通过 |
+| F10经验曲线绑定到真实score报告 | cbc hy4free，现有纯模块有界集成 | completed；1959.539秒，模块/16新测试原样集成 | `.omx/artifacts/cbc-f10-bound-curves-20261107/`；父78聚焦/1024报告/2048曲线/512识别差分与594tools通过 | 不再轮询95982；无阈值/生产校准，限定复核见下行 |
+| F10绑定曲线限定复核 | Copilot个人免费额度auto，实际gpt-6-luna | completed；30.26秒，五文件无finding/0工具/0session错误 | `.omx/artifacts/copilot-f10-bound-curves-review-20261107/`；父核对源hash一致 | 不再轮询35383；非整分支/生产批准 |
+| F10内部知情同意清单 | cbc hy3，用户选定渠道的直接文档交付 | completed；初稿101.253秒/schema拒绝，98.49秒修正仍需两处纠错，最终123.550秒文档原样集成 | `.omx/artifacts/cbc-f10-consent-collection{,-fix,-final}-20261107/`；最终13816B/SHA8be1b7fe…，父按真实validator/statistics核验 | 98161/70209/78215均终态，不再轮询；未采集/签署，身份与PAD用途分开准备 |
+| F09运行时字节绑定说明 | cbc hy3，短证据文档直接文件交付 | completed；119.291秒初稿、88.631秒计数/语义修正、44.304秒引用修正；最终7049B原样集成 | `.omx/artifacts/cbc-f09-runtime-equivalence{,-fix,-final}-20261107/`；父核对339→341/338相同、135045627B、仅许可材料差异；最新状态另见新推理记录 | 不再轮询58439/42312/41131；byte绑定不伪造新consumer执行，本次已另跑新consumer真实推理 |
+| F09远端制品新消费者推理 | 主代理，现有探针与真实制品验收 | completed；全新consumer Release11.037秒/24App材料，iPhone图片3067.592ms/视频2281.231ms，两项passed | `artifacts/verification/f09-remote-inference-20261107/summary.json`；14模型摘要、close/租约释放、无新快照/输入保持及新别名清理过，原44App保持 | 不再轮询18730/35688；同一Mac、来源许可与完整复审/质量预算仍缺，不重建SDK |
+| 员工照功能探针首次请求 | agy免费，通用Kotlin探针直接文件交付 | terminal-no-delivery；25.417秒，未供应README被headless规则拒绝，无文件 | `.omx/artifacts/agy-identity-functional-probe-20261107/`；无quota/耗时超时，私有数据读取拒绝边界实测通过 | 28829终态，不再轮询；明确13个源码路径后新任务见下行 |
+| 员工照功能探针明确上下文 | agy免费，中等复杂实现 | terminal-compile-failed；600.547秒实际26129B Kotlin，父编译两处Android JSONObject.keySet unresolved | `.omx/artifacts/agy-identity-functional-probe-contextfix-20261107/`；独立构建原失败保留；未安装/未传图；DELIVERY字节数与实际不符不采信 | 3550/53924均终态；不改生产边界，交回实际编译/文件保持/路径/清理修正 |
+| 员工照探针编译与父审修正 | agy免费，边界明确的小范围纠错 | terminal-delivered；243.732秒，26551B源码，父按diff确认JSON keys/实际输入hash/父目录/清理状态修正 | `.omx/artifacts/agy-identity-functional-probe-compilefix-20261107/`；源码尚待独立审查问题修正/最终编译，不计设备通过 | 3402终态，不再轮询；保留候选/实际工具失败，主代理未替写实现 |
+| 员工照通用探针独立复核 | Copilot个人免费auto，实际gpt-6-luna | completed；78.96秒，0工具/0session错误；3条finding | `.omx/artifacts/copilot-identity-functional-probe-review-20261107/`；终态persist失败/KEEP_SCREEN_ON原状态捕获/精确错误码记录；父确认getter为defensive clone | 66405终态；是限定旧候选复核，不是最终源码或发布批准 |
+| 员工照探针独立复核最小修正 | cbc hy3，三处快速实现纠错 | terminal-delivered；187.206秒三项修正已核对；实际编译暴露局部val重复赋值 | `.omx/artifacts/cbc-identity-functional-reviewfix-20261107/`；93460终态，无父超时，照片/原名/私有清单未供应 | 不再轮询；失败编译原件保留，下一行仅改声明关键字 |
+| 员工照探针最终编译修正 | cbc hy3，单关键字实际文件交付 | completed；18.405秒，val→var，最终27643B Kotlin原样集成，397任务18.562秒构建通过 | `.omx/artifacts/cbc-identity-functional-compileval-20261107/`；9951/60684终态；实际源码SHA917134df… | 唯一功能run与负向/清理均已过，不再轮询或重跑 |
+| 功能探针用法与验收文档 | cbc hy3，两个有界文档直接交付 | completed；初稿102.878秒，四项文档事实修正70.607秒，最终两文档原样集成 | `.omx/artifacts/cbc-identity-functional-docs-20261107/`；仅通用源码/aggregate facts，无照片/原名/私有清单 | 93643/40973均终态，不再轮询；实际norm绝对值/空host输出/相册措辞/Markdown链接修正通过；不是生产校准批准 |
+| F08时序质量定位 | cbc hy4free，较复杂的固定源码/真实证据比较 | terminal-partially-accepted；347.304秒、58完整事件/0工具错误，三文件实际交付 | `.omx/artifacts/cbc-f08-temporal-rootcause-20261107/`；11份明确上下文，旧native/tensor/logit/margin/两场景失败及当前adapter摘要保持 | 44815终态不再轮询；无具体bug证据，保留源码差异；拒绝logits后因果/全面排除缺陷和“全新token等价性检查”表述，已有真实tokenizer parity2/2/无skip；原文及父处置保持，不集成误导文档/不重复设备测试 |
+| cbc长输出诊断与后续交付规则 | 主代理，本地原字节/启动器核查，不调用模型 | completed；原启动器已重定向文件且无超时；2MiB合成链路逐字节通过，内部根因未确定 | `.omx/artifacts/cbc-output-diagnosis-20261107/diagnosis.json`；更新根AGENTS和踩坑记录 | 后续新复杂任务使用真实沙盒限制的候选文件交付/短收据；本轮直接交付已验收，但不证明旧截断根因，不重发旧请求 |
+| Nexus74材料核对器 | Copilot auto，个人额度的小工具 | candidate已由父修正并集成，32聚焦及545全tools通过 | `.omx/artifacts/copilot-nexus-notice-materials-20261107/`；40.77秒完整响应；实际`.6`73索引材料+index通过，保留父schema错误RED与修正 | 最终源码独立复核待下行任务；远端消费/许可仍未通过 |
+| Roadmap当前表交叉审计 | cbc hy3，短一致性审查 | completed，父已处置 | `.omx/artifacts/cbc-roadmap-status-crosscheck-host-20261107/`；119.69秒/0工具；原受限启动失败在不带host的同名目录，未计模型失败 | 2条采纳、1条部分采纳；父额外发现已改当前表，不再运行此任务 |
+| Nexus材料核对器最终审查 | Copilot auto，独立限定源码复核 | completed，25.75秒/0工具/0finding；父核对源码摘要保持 | `.omx/artifacts/copilot-nexus-notice-final-review-20261107/`；供应4份最终源码/测试及真实schema边界，只读结果 | 最终限定审查已记录，不再轮询session27684；不是整分支批准 |
+| .6真实variant/消费者核查 | cbc hy3，短metadata/config审计 | completed，84.803秒/0工具；父逐项处置 | `.omx/artifacts/cbc-dot6-variant-audit-20261107/`；3份实际module原字节已对冻结计划摘要，含当前未运行消费者配置 | 12个variant逐字段对原metadata、3notices路径及既有property核实；期望清单已存，否决新缺失推断；不再轮询session37246 |
+
+已知停止线路：原生审查429、Qoder403、dsh429、OpenCode401/free429不自动重试。
+agy本轮已按用户选择实际调用，状态见表；旧终态不得反复轮询。
+Ollama已有本机模型可承担小型候选，但本轮未新发任务。免费优先；用户最新覆盖：每次付费cbc调用前先确认具体任务/模型/范围，不因耗时自动切换。
+
+唯一获准延期项为低系统版本设备实机验证（当前F03，旧对话编号不一致）；F10授权校准/攻击数据、Nexus精确出口/本次上传范围属于本周待解决输入，不是新增豁免。完整拆分见 `.omx/plans/roadmap-critical-path-20261107.md`。持续执行期间每小时汇报真实增量；未配置跨会话后台推送。已完成的GitLab上传、本地SDK链接、普通导入/注册/清除不重复。
+
+最终持续重开probe SHAd60781e7…、test APK0f1564cc…（215574B）已构建397任务/49秒；签名/DEX/1046源码检查过，fresh原App/25私有文件/四SR/runner/权限/TTS预检过，分块staging/安装过。pipeline unified77249已终态，唯一`identity-reopen-20261107-20cycles-a1`已在下段记录验收通过。编排在`artifacts/verification/android-identity-sustained-reopen-final-20261107/pipeline.py`，任一步失败停止，不重放。
+
+F09远端消费者补充：`artifacts/verification/f09-remote-physical-20261107/summary.json`实际iPhone modelBundleLookup/metalLibraryLoad通过；源consumer未重编，Mach-O有效section/UUID及24材料保持，新别名已卸载，既有App安装URL/保护文件/lock/profile保持。无模型推理/新上传。
+
+Android持续重开已真实验收并恢复：final/summary.json，20周期/200调用（160测量）/600908.639ms/462前台检查，p50/p95=128.708/139.669ms；峰值570290176B，close-wait末−首=-5492736B。首次collector非终态因host提前返回，原失败保持；回读同PID11557/同runId至terminal，未重发推理。原App/test/runner/25私有/四SR/权限/TTS及精确临时清理全部过。仅有界10min，非零泄漏/预算/生产通过；见android-identity-reopen-20261107.md。
+
+最新员工照边界：用户明确“仅可用于功能试验”。本地226JPEG中选12个匿名缩小副本，去元数据/原图保持；不推断人数/会话，不作生产校准、准确率统计、阈值选择或PAD数据。派发助手只获通用源代码/契约，私有输入目录在OS沙盒中拒读。设备同次功能试验已在下段实际验收；该句所述未传入阶段是历史。
+
+2026-11-07 最终功能验收：唯一`functional-photo-20261107-a1`，12processed/usable/128维归一化提取/隔离加密注册/实际`THRESHOLD_UNVERIFIED`/PURGED。主机255，保留同次持久completed/terminal报告，不重发；raw SHA017d3dbe…。缺输入负向durable failed/0图/无误报成功。最终397任务18.562秒test-only构建通过；collector对实际正例及12个错误码/计数/隐私行字段/清理变异检查过。
+
+66846清理已exit0；额外主机只读复核84866已exit0：原App/test/runner/25私有摘要/四SR/权限/TTS恢复，精确APK暂存与两个probe工作目录缺席。受限首次ADB因本机smartsocket EPERM失败不算设备断开，原错误摘要另存；未要求用户重连。设备12图/manifest及本地12派生图/原名映射/私有清单已精确清除；226原JPEG全部重hash不变。keysCleared仅provider backing arrays/maps，不承诺所有内部SecretKeySpec副本擦除。`artifacts/verification/android-identity-functional-final-20261107/summary.json`绑定127文件，功能-only；生产校准/PAD/准确率/阈值/benchmark均未晋级。
+
+功能文档最终：`.omx/artifacts/cbc-identity-functional-docs-final-20261107/`，README2982B/SHA413b5685…、验收2739B/SHA3db71c7d…已按源码和实际报告验收并逐字节集成；初稿及四项修正diff保留。当前无运行助手；44815已终态，父部分采纳/否决见上表。
+
+当前本地检查点`e8b97518626e9cf3f78bff832b6e55e225ed5167`（12精确owned路径，无push）；功能与远端推理证据已写入readiness，初步4894引用/5101摘要及11组保持，49工具测试通过。hy4free诊断无法证明新代码bug，其下一诊断混用飞鸟fixture/瀑布prompt且与既有真实tokenizer对照覆盖重叠；不直接执行该建议。缺上下文是助手包边界，不是项目新增缺陷。

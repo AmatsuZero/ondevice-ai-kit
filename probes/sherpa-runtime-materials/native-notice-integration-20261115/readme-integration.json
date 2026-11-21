@@ -1,0 +1,7 @@
+{
+  "candidate": "review/review-report.json",
+  "priorBytesPreserved": true,
+  "appendSource": "CBC hy3 fresh supplied-context review response",
+  "onlyJSONApostropheNormalization": false,
+  "upstreamLicenseBytesChanged": false
+}

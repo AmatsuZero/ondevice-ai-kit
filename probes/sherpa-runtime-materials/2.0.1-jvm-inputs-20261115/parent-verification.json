@@ -1,0 +1,30 @@
+{
+  "disposition": "PASS_bounded_source_resolution",
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "verifiedLinkCount": 22,
+  "verifiedSourceCount": 22,
+  "linkBytes": 1568,
+  "sourceBytes": 141269,
+  "actualClassCount": 124,
+  "sourceFileCount": 22,
+  "sharedKotlinApiFiles": 23,
+  "excludedFiles": 1,
+  "apiFetchCount": 43,
+  "reusedSourceCount": 1,
+  "pythonAndInfozipJarBytesEqual": true,
+  "freshJavapSourceFileMappingsEqual": true,
+  "mainReleaseDeclaredSourceSetEqual": true,
+  "oldRecordPreserved": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/class-source-map.json",
+    "bytes": 38122,
+    "sha256": "4dde5dd98f0239cc88501931dbe077a9edb62829c0c95c6786e9a9ec1b9b726f"
+  },
+  "semanticClassEqualityVerified": false,
+  "completeBuildInputsVerified": false,
+  "independentReview": "unavailable; native429 and CBC hy4free quota429 are not approval",
+  "productionCandidateBindingVerified": false,
+  "P1Complete": false,
+  "P2P3P4Accepted": false,
+  "R4R5Accepted": false,
+  "W3Complete": false
+}

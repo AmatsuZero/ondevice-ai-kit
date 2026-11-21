@@ -1,0 +1,27 @@
+{
+  "acceptedCandidate": true,
+  "candidateTextSHA256": "2ee40f06a70b4afeb145e9d1283ca9527f82dfc212f22cf869c9481ad198890d",
+  "candidateSource": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-p3-jvm-hy3-selection-20261115T111916Z/result.json",
+  "copyCount": 10,
+  "copiedOriginalBytes": 63392,
+  "indexSHA256": "7b8a8f8490108afb1b01a4ed9199e413818b571c7cf00ad771960df6f0b11296",
+  "integration": "candidate destinations/rationales used exactly; parent mechanically bound supplied ids to source paths/revisions/sizes/hashes, copied original bytes; appended exact candidate README paragraph",
+  "newFiles": [
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/kotlinx-coroutines-1.10.2/LICENSE.txt",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/kotlinx-coroutines-1.10.2/NOTICE.txt",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/COPYRIGHT.txt",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/LICENSE.txt",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/java-annotations-23.0.0/LICENSE.txt",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/third_party/boost_LICENSE.txt",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/third_party/guava_license.txt",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/third_party/gwt_license.txt",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/third_party/threetenbp_license.txt",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/source-attribution-excerpts.json",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/jvm/index.json"
+  ],
+  "modifiedFiles": [
+    "android/backend-sherpa-asr/README.md"
+  ],
+  "finalCompositionComplete": false,
+  "productionNoticeRetentionVerified": false
+}

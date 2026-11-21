@@ -1,0 +1,71 @@
+{
+  "observedAt": "2026-11-14T01:54:17.787373+00:00",
+  "allFourSelectedConfigObserved": true,
+  "allFourArtifactDigestTransfersMatch": true,
+  "parentExactLineVerification": [
+    {
+      "abi": "arm64-v8a",
+      "fiveExcerptsExact": true,
+      "sourceGitLogContextVerified": true,
+      "logSHA256": "d2f7a0facac749ab6c165535a3fce3295b137d904048255c5e700203e8a1f274"
+    },
+    {
+      "abi": "armeabi-v7a",
+      "fiveExcerptsExact": true,
+      "sourceGitLogContextVerified": true,
+      "logSHA256": "d9b140c42f76a75311d433b686e6e34269ace02a9c5850ec290949c496afa0cc"
+    },
+    {
+      "abi": "x86",
+      "fiveExcerptsExact": true,
+      "sourceGitLogContextVerified": true,
+      "logSHA256": "15bb74c3a6c3dd6f5cc22440e7da55342d74e5fac19197493ca9e297fad618fc"
+    },
+    {
+      "abi": "x86_64",
+      "fiveExcerptsExact": true,
+      "sourceGitLogContextVerified": true,
+      "logSHA256": "fa15439c8f6bb1343939933b304288a04d1964e87fea993b163053787353f1b6"
+    }
+  ],
+  "reviewVerdict": "accept",
+  "reviewScope": "supplied exact log excerpts; no execution by helper",
+  "protectedRemaindersVerified": 103,
+  "terminalFrozenFilesVerified": 161,
+  "newDevicePrepareOrRun": false,
+  "binaryDownloads": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "fullSourceToAarProvenanceVerified": false,
+  "finalRecursiveStaticCompositionVerified": false,
+  "productionNoticeRetentionOrReleaseAccepted": false,
+  "evidenceRoot": ".omx/artifacts/w3-ort-all-abi-20261114",
+  "taskCleanup": {
+    "removedExactArchivedCopies": [
+      {
+        "path": "/private/tmp/odai-w3-ort-allabi-review-20261114/prompt.txt",
+        "bytes": 24547,
+        "sha256": "09959360f20eedda3d9fa08aa1988eab7e6e9c74db5b6827f73164395de1a499",
+        "preservedCanonical": ".omx/artifacts/w3-ort-all-abi-20261114/hy3-review-prompt.txt"
+      },
+      {
+        "path": "/private/tmp/odai-w3-ort-allabi-review-20261114/raw.txt",
+        "bytes": 2717,
+        "sha256": "4677df8724b4ab0c579957ff8b3f954a2cb2dc62ec6ad631ad1d44c5c0391b55",
+        "preservedCanonical": ".omx/artifacts/w3-ort-all-abi-20261114/hy3-review-raw.txt"
+      },
+      {
+        "path": "/private/tmp/odai-w3-ort-allabi-review-20261114/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "preservedCanonical": ".omx/artifacts/w3-ort-all-abi-20261114/hy3-review-stderr.txt"
+      }
+    ],
+    "nominalBytesRemoved": 27264,
+    "freeBytesBefore": 78366367744,
+    "freeBytesAfter": 78366339072,
+    "rawBuildLogsPreserved": true,
+    "noGlobalCacheCleanup": true,
+    "noExclusiveFreeSpaceAttribution": true
+  }
+}

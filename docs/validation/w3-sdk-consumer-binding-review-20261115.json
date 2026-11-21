@@ -1,0 +1,28 @@
+{
+  "disposition": "no_review_report",
+  "model": "hy4free",
+  "processExitCode": 0,
+  "resultSubtype": "error_during_execution",
+  "isError": true,
+  "errorsInfo": [
+    {
+      "status": 429,
+      "code": 6004,
+      "category": "quota",
+      "details": "429 您的使用量已超出频率限制，将在 2026-11-16 10:15:32 UTC+8 重置，您也可以切换其他模型继续使用。 (01a1dde833547311869ea23d4fb63087/01a1dde8-2c98-76c6-9ab1-8776691f9a95)"
+    }
+  ],
+  "sessionId": "01a1dde8-2c98-76c6-9ab1-8776691f9a95",
+  "tokens": 0,
+  "permissionDenials": [],
+  "serverReportedReset": "2026-11-16T10:15:32+08:00",
+  "laneStopped": true,
+  "automaticRetry": false,
+  "automaticModelFallback": false,
+  "userChoiceRequested": true,
+  "priorIndependentAcceptancesUnaffected": true,
+  "scope": "Current SDK local release publication and standalone consumer binding only",
+  "parentBuildAndConsumerVerificationPassed": true,
+  "P1Complete": false,
+  "W3Complete": false
+}

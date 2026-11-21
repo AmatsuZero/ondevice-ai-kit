@@ -1,0 +1,92 @@
+{
+  "initialIncompleteInvocation": {
+    "argv": [
+      "rtk",
+      "proxy",
+      "./gradlew",
+      ":android:sdk-core:publishReleasePublicationToMavenLocal",
+      ":android:speech:publishReleasePublicationToMavenLocal",
+      ":android:backend-sherpa-asr:publishReleasePublicationToMavenLocal",
+      ":android:backend-system-asr:publishReleasePublicationToMavenLocal",
+      ":android:backend-system-tts:publishReleasePublicationToMavenLocal",
+      "--offline",
+      "--no-daemon",
+      "--max-workers=2",
+      "--console=plain",
+      "-PsherpaMavenRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2",
+      "-Dmaven.repo.local=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/m2",
+      ":android:backend-sherpa-asr:assembleDebug",
+      ":android:backend-sherpa-asr:assembleRelease",
+      ":android:backend-sherpa-asr:lintDebug"
+    ],
+    "JAVA_HOME": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+    "ANDROID_HOME": "/Users/daubert/Library/Android/sdk",
+    "offline": true,
+    "localRepo": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/m2"
+  },
+  "initialIncompleteProcess": {
+    "exitCode": 0,
+    "elapsedSeconds": 12.285,
+    "endedAtUTC": "2026-11-15T11:54:48.978515+00:00"
+  },
+  "completeSdkInvocation": {
+    "argv": [
+      "rtk",
+      "proxy",
+      "./gradlew",
+      ":android:sdk-core:publishReleasePublicationToMavenLocal",
+      ":android:speech:publishReleasePublicationToMavenLocal",
+      ":android:backend-sherpa-asr:publishReleasePublicationToMavenLocal",
+      ":android:backend-system-asr:publishReleasePublicationToMavenLocal",
+      ":android:backend-system-tts:publishReleasePublicationToMavenLocal",
+      "--offline",
+      "--no-daemon",
+      "--max-workers=2",
+      "--console=plain",
+      "-PsherpaMavenRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2",
+      "-Dmaven.repo.local=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/m2-complete",
+      ":android:backend-sherpa-asr:assembleDebug",
+      ":android:backend-sherpa-asr:assembleRelease",
+      ":android:backend-sherpa-asr:lintDebug"
+    ],
+    "JAVA_HOME": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+    "ANDROID_HOME": "/Users/daubert/Library/Android/sdk",
+    "localRepo": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/m2-complete",
+    "offline": true
+  },
+  "completeSdkProcess": {
+    "exitCode": 0,
+    "elapsedSeconds": 11.135,
+    "endedAtUTC": "2026-11-15T11:56:30.532927+00:00"
+  },
+  "apkInvocation": {
+    "argv": [
+      "rtk",
+      "proxy",
+      "./gradlew",
+      "-p",
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/apk-consumer",
+      "assembleDebug",
+      "verifyNoticeConsumer",
+      "--offline",
+      "--no-daemon",
+      "--max-workers=2",
+      "--console=plain",
+      "-Dorg.gradle.jvmargs=-Xmx2g",
+      "-Pandroid.useAndroidX=true",
+      "-PsdkRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/m2-complete",
+      "-PsherpaRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2",
+      "-PartifactReport=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-notice-integration-20261115T115026Z/resolved-artifacts.json"
+    ],
+    "JAVA_HOME": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+    "ANDROID_HOME": "/Users/daubert/Library/Android/sdk",
+    "offline": true,
+    "fixtureSource": "probes/sherpa-runtime-materials/jvm-notice-integration-20261115/apk-fixture"
+  },
+  "apkProcess": {
+    "exitCode": 0,
+    "elapsedSeconds": 7.709,
+    "endedAtUTC": "2026-11-15T11:58:51.085022+00:00"
+  },
+  "initialIncompleteBuildAccepted": false
+}

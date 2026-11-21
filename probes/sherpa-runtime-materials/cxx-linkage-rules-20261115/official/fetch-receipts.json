@@ -1,0 +1,68 @@
+[
+  {
+    "repo": "Kitware/CMake",
+    "revision": "859ca5c4d7396a011a462878179bc173e1283731",
+    "path": "Modules/Platform/Android-Common.cmake",
+    "url": "https://api.github.com/repos/Kitware/CMake/contents/Modules/Platform/Android-Common.cmake?ref=859ca5c4d7396a011a462878179bc173e1283731",
+    "status": 200,
+    "bytes": 8228,
+    "sha256": "4c92f92b74d8934829409f73f7debf552fb04b45ed3ac28405f36ab5560c7fd2",
+    "gitBlobSHA1": "f1deaca63e04d44dc8feff0740ded20f40812543",
+    "savedPath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Modules/Platform/Android-Common.cmake"
+  },
+  {
+    "repo": "Kitware/CMake",
+    "revision": "859ca5c4d7396a011a462878179bc173e1283731",
+    "path": "Modules/Platform/Android-Clang.cmake",
+    "url": "https://api.github.com/repos/Kitware/CMake/contents/Modules/Platform/Android-Clang.cmake?ref=859ca5c4d7396a011a462878179bc173e1283731",
+    "status": 200,
+    "bytes": 3279,
+    "sha256": "d17bd45f7cbf418df844b5d81b050b5e6cf7904eb548379739b851a0014ebda6",
+    "gitBlobSHA1": "aaaae9b21f66bd2a8f11880c4f4fc74a2ddf5e37",
+    "savedPath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Modules/Platform/Android-Clang.cmake"
+  },
+  {
+    "repo": "Kitware/CMake",
+    "revision": "859ca5c4d7396a011a462878179bc173e1283731",
+    "path": "Modules/Platform/Android-Determine.cmake",
+    "url": "https://api.github.com/repos/Kitware/CMake/contents/Modules/Platform/Android-Determine.cmake?ref=859ca5c4d7396a011a462878179bc173e1283731",
+    "status": 200,
+    "bytes": 25062,
+    "sha256": "a2d98e6a2ce645dda4492fecc663e40f61eb28b23f04071dfad8b1e9765a4f1b",
+    "gitBlobSHA1": "bab604298df73fecfc88a40232f6b9d01902cb17",
+    "savedPath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Modules/Platform/Android-Determine.cmake"
+  },
+  {
+    "repo": "Kitware/CMake",
+    "revision": "859ca5c4d7396a011a462878179bc173e1283731",
+    "path": "Help/variable/CMAKE_ANDROID_STL_TYPE.rst",
+    "url": "https://api.github.com/repos/Kitware/CMake/contents/Help/variable/CMAKE_ANDROID_STL_TYPE.rst?ref=859ca5c4d7396a011a462878179bc173e1283731",
+    "status": 200,
+    "bytes": 1121,
+    "sha256": "9bd403f450136cd44eff0a2c60525ab3f22e7ba2fcb44f71419eacb90a76ea51",
+    "gitBlobSHA1": "3778181af4858ca89034f39c631ee6ab73eb0d20",
+    "savedPath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Help/variable/CMAKE_ANDROID_STL_TYPE.rst"
+  },
+  {
+    "repo": "Kitware/CMake",
+    "revision": "859ca5c4d7396a011a462878179bc173e1283731",
+    "path": "Copyright.txt",
+    "url": "https://api.github.com/repos/Kitware/CMake/contents/Copyright.txt?ref=859ca5c4d7396a011a462878179bc173e1283731",
+    "status": 200,
+    "bytes": 5477,
+    "sha256": "0676e30827684487aa0ea8f72f01e9460a6320fa34a2888df0ad1dd3e8a06eb8",
+    "gitBlobSHA1": "2074109b019445458a65e6cd3935aa24a0878c7c",
+    "savedPath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Copyright.txt"
+  },
+  {
+    "repo": "Kitware/CMake",
+    "revision": "859ca5c4d7396a011a462878179bc173e1283731",
+    "path": "Modules/Platform/Android-Clang-CXX.cmake",
+    "url": "https://api.github.com/repos/Kitware/CMake/contents/Modules/Platform/Android-Clang-CXX.cmake?ref=859ca5c4d7396a011a462878179bc173e1283731",
+    "status": 200,
+    "bytes": 322,
+    "sha256": "f5a58e160d3e1f2c7667d1e123124a96f0d899db0d9071d1947f3d14e1816dbf",
+    "gitBlobSHA1": "85d5088800cd640b3f42628ac310cb20160f4647",
+    "savedPath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/official/cmake-3.31.6/Modules/Platform/Android-Clang-CXX.cmake"
+  }
+]

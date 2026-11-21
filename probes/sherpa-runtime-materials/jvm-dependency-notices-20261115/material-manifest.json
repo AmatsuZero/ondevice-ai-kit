@@ -1,0 +1,123 @@
+{
+  "files": {
+    "README.md": {
+      "bytes": 2119,
+      "sha256": "054d96556afa7a1679e94ae50f07998842c41dacfcbe789813ecca6ea7cd7e5b"
+    },
+    "dependency-metadata.json": {
+      "bytes": 5331,
+      "sha256": "9de36de329c00d5e412a9e950fc7b514eccbc4e4c2973b4830a9ebdd3012ad57"
+    },
+    "first-failures-and-recovery.json": {
+      "bytes": 1504,
+      "sha256": "9610407635bf0f0195a136a81c64a67c07a69643dc1aa7d78f14fc140da2dbfc"
+    },
+    "inspection-receipt.json": {
+      "bytes": 733,
+      "sha256": "6d3c5683f2873a58dc04c1a4b51dca92de0a323aec2f85e80d4b74f4b864e59e"
+    },
+    "metadata/annotations-23.0.0.pom": {
+      "bytes": 1354,
+      "sha256": "c9490f655132328df2cfbcfdf743f53fc3916d6c1d10437175a6ca6e3a67771c"
+    },
+    "metadata/annotations-23.0.0.pom.sha1": {
+      "bytes": 40,
+      "sha256": "a2c197292ee1d0fd8193ac1677197e9d6965d8e8def3c6a7abb1023f489c4beb"
+    },
+    "metadata/kotlin-stdlib-2.4.0-sources.jar.sha1": {
+      "bytes": 40,
+      "sha256": "c188c56237b198587dbaa5085f875fe28dccc9c131f39d8df61b04565cad6914"
+    },
+    "metadata/kotlin-stdlib-2.4.0.pom": {
+      "bytes": 2299,
+      "sha256": "8194ff79a9ee24a7fa3f74a6b179c04a1859de8b987a4f0983056e59451721de"
+    },
+    "metadata/kotlin-stdlib-2.4.0.pom.sha1": {
+      "bytes": 40,
+      "sha256": "2eb406d96806705203885c5a4336b7a206c9d66c3fc83c52d5f263179fbca4d0"
+    },
+    "metadata/kotlinx-coroutines-android-1.10.2.pom": {
+      "bytes": 2193,
+      "sha256": "b92d3672e7f9e8f4c4e2ab187c3e31fecc506496396f4a5f27ee1c957a42b319"
+    },
+    "metadata/kotlinx-coroutines-android-1.10.2.pom.sha512": {
+      "bytes": 128,
+      "sha256": "4b2047af0bf17dc1f859fc53116a3c16f747b2e6f9855f2c739cec41c33e760a"
+    },
+    "metadata/kotlinx-coroutines-core-jvm-1.10.2.pom": {
+      "bytes": 2167,
+      "sha256": "658f576b96c832e7382406adb197d64d8e2e97de10e96dfa3700decfa2a60def"
+    },
+    "metadata/kotlinx-coroutines-core-jvm-1.10.2.pom.sha512": {
+      "bytes": 128,
+      "sha256": "361cf1aa543def80cd1476ce821828d5393ab4940eb0bdef2fad35942ef4a96a"
+    },
+    "notices/java-annotations/LICENSE.txt": {
+      "bytes": 11352,
+      "sha256": "8c1e966c7855fb54027bcaf6ebe7a43abe4785791e8cf9148c363761d493d097"
+    },
+    "notices/kotlin/license/COPYRIGHT.txt": {
+      "bytes": 647,
+      "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d"
+    },
+    "notices/kotlin/license/COPYRIGHT_HEADER.txt": {
+      "bytes": 208,
+      "sha256": "e2047ed7177b71a0e09d4bfbd8f812a2d1567a36d8c5778d8d31ddda9a440dda"
+    },
+    "notices/kotlin/license/LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "notices/kotlin/license/NOTICE.txt": {
+      "bytes": 482,
+      "sha256": "0b09a83d3ef7795c7dec65e815866597c066c53898f2852a76599b8f5552941a"
+    },
+    "notices/kotlin/license/README.md": {
+      "bytes": 20285,
+      "sha256": "fae7d348841a6af205dcc5a99ab4e466e1537c839e423501d469df0c4e85f23e"
+    },
+    "notices/kotlin/license/third_party/boost_LICENSE.txt": {
+      "bytes": 1337,
+      "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b"
+    },
+    "notices/kotlin/license/third_party/guava_license.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "notices/kotlin/license/third_party/gwt_license.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "notices/kotlin/license/third_party/threetenbp_license.txt": {
+      "bytes": 1520,
+      "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331"
+    },
+    "notices/kotlinx.coroutines/LICENSE.txt": {
+      "bytes": 11398,
+      "sha256": "b1febe6399dffb10d19d35e7663ab16300c93cb0476a94115df1cc0097a8ffd8"
+    },
+    "notices/kotlinx.coroutines/license/NOTICE.txt": {
+      "bytes": 452,
+      "sha256": "1ab6de67ef738bffae63f9aa6a8798a35e87341c83ea28d09c8dc8ca6993232a"
+    },
+    "source-attribution-excerpts.json": {
+      "bytes": 2612,
+      "sha256": "eb1cb2d9e83973ad2b594b8570e3fcbbfaab6da4e2d8d0cdd5e339663b0ac546"
+    },
+    "source-notice-manifest.json": {
+      "bytes": 7688,
+      "sha256": "f454956eb76ac248fd3db86d7902fa6693888109895f0cae88a5b1a3b56b37c1"
+    },
+    "stdlib-source-binding.json": {
+      "bytes": 3714,
+      "sha256": "4d44c362d8b9fdfca9e38b04cbb238a68130cf1f9c5fd22152fc0e4dd04ddae3"
+    },
+    "stdlib-source-declarations.json": {
+      "bytes": 3085,
+      "sha256": "84d76b2c1fa99c51c2aa38c188f4fd1b320ff1b8cb4b28991356707a3caa0fe0"
+    }
+  },
+  "fileCountExcludingThisManifest": 29,
+  "upstreamTextWhitespacePreserved": true,
+  "scope": "fixed declared JVM dependency metadata and known stdlib source derivation examples; no complete composition or production notice acceptance"
+}

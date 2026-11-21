@@ -1,0 +1,97 @@
+{
+  "status": "accepted-for-source-and-supplied-package-binding-scope",
+  "independentSourceReviewAccepted": true,
+  "model": "hy3",
+  "wrapperSHA256": "b3df42e7cbde1992d4f91b6b1bc7143ec6073386bab0a6cb5afbf13d90e743cb",
+  "sourceFingerprint": "a79adaa583e3707be20055e2fc6dd01f6ca58a4da5da686cf21196666d0ce7e1",
+  "review": {
+    "reviewScope": "Read-only source binding review of the fixed Qwen heap wrapper (QwenHeapInstrumentation.kt + HeapWrapperChecks.kt) and its bound modules (QwenTwoStageCore, QwenFileReport, QwenFileInputs, QwenFileActivity, QwenArenaPolicy) plus supplied package/host receipts. Covers only SOURCE BINDINGS and boundary/error-path correctness, NOT production quality, runtime effects, device evidence, or full-W3 closure. I did not run/build/test/device anything; package-verified.json and host-result.json are parent-supplied and treated as unexecuted-by-me.",
+    "examinedFiles": [
+      "../context/QwenHeapInstrumentation.kt",
+      "../context/HeapWrapperChecks.kt",
+      "../context/QwenTwoStageCore.kt",
+      "../context/QwenFileReport.kt",
+      "../context/QwenFileInputs.kt",
+      "../context/QwenFileActivity.kt",
+      "../context/QwenArenaPolicy.kt",
+      "../context/spec.md",
+      "../context/manifest.json",
+      "../context/candidate-accepted.json",
+      "../context/package-verified.json",
+      "../context/host-result.json",
+      "../context/agent-pitfalls.md"
+    ],
+    "findings": [],
+    "heapBoundaryLabels": {
+      "initial": "initial-before-report",
+      "constructor-before": "constructor-before",
+      "constructor-returned": "constructor-returned",
+      "core-persist": "core-persist",
+      "case-returned": "case-returned",
+      "recognizer-released": "recognizer-released",
+      "teardown": "activity-torn-down"
+    },
+    "verifications": {
+      "sevenLabelsPresentAndOrdered": "Happy-path order: initial-before-report -> constructor-before -> constructor-returned -> core-persist (repeats per sub-step of the single case) -> case-returned -> recognizer-released -> activity-torn-down. Exactly 7 distinct label strings; total events expected ~21 (within 8..128).",
+      "samplingFailureBlocksNative": "HeapBoundaryRecorder.capture throws on the first non-cleanup sampling fault (firstFault set, re-thrown unless cleanup); initial-before-report (QwenHeapInstrumentation.kt:219) is non-cleanup, so a fault there aborts before any native dispatch; core-persist faults likewise break the case loop and stop further decode.",
+      "cleanupNeverFalsifiesRelease": "recognizer-released (QwenHeapInstrumentation.kt:443) and activity-torn-down (QwenHeapInstrumentation.kt:477) use cleanup=true. state.recognizerReleaseSucceeded/teardownAck are written BEFORE the cleanup capture, and cleanup captures never throw, so a telemetry fault cannot overwrite a real successful release nor skip the final report.",
+      "acquiredResourcesAlwaysReleased": "Streams released by core finally releaseAll (QwenTwoStageCore.kt:256-258); recognizer released once in wrapper finally when acquired!=null (QwenHeapInstrumentation.kt:422-444); Activity finish+destroy-wait in wrapper finally when act!=null (QwenHeapInstrumentation.kt:447-473). Constructor failure leaves recognizer null so no release attempt (matches 'constructor failure counts attempt without release').",
+      "separateErrorChannels": "Primary core/decode error -> state.errorClass (set before any heap capture, never overwritten by err()/telemetry). Persistence write fault -> state.wrapperPersistErrorClass. Telemetry fault -> heapRecorder.errorClass. Three channels preserved independently on simultaneous decode+heap failure.",
+      "snapshotNoCallbacksExplicitNulls": "arenaSnapshot wraps pure QwenFileReport.snapshot (no IO/native/callbacks); heapEvents come only from HeapBoundaryRecorder.eventsSnapshot() which deep-copies existing events and performs no new capture. Missing bytes/elapsed emitted as JSONObject.NULL.",
+      "limit128AndMonotonic": "events.size>=128 treated as fault and no further event added (QwenHeapInstrumentation.kt:527-532). elapsedRealtimeNanos require non-negative and non-decreasing (lastElapsed tracked); seq=events.size is monotonic 0..127.",
+      "fixed65OnlyIndex25": "QwenFileInputs.verifyAll requires 65 cases (QwenFileInputs.kt:145); wrapper requires inputs.size==65 and inputs[25].id=='fleurs-en_us-1776' (QwenHeapInstrumentation.kt:247-248); selectedInputs=listOf(inputs[25]) only (QwenHeapInstrumentation.kt:249) -> single row, no other input replayed.",
+      "exactTwoStageConfigPolicy": "TwoStageCaseRunner runs exactly auto then forced-English stage (QwenTwoStageCore.kt:201-252); buildConfig featureDim=128, maxTotalLen=512, maxNewTokens=128, temperature=1e-6, topP=0.8, seed=42, numThreads=2 (QwenFileReport.kt:204-226). cfg.provider bound to arenaReceipt.provider; report microphoneStarts=0, networkRequests=0; no microphone/network/extra-native calls in wrapper.",
+      "policyBindingTruthful": "QwenArenaPolicy.prepare/verify writes+reverifies 'EnableCpuMemArena=0' under private root with symlink-ancestry rejection and bounded read; receipt re-bound by computed canonical path; report sets nativePolicyEffectVerified=false and allocatorPolicy only as requested metadata (no claimed native effect).",
+      "sourceIdentity": "Reviewed .kt SHA256 values equal those in candidate-accepted.json and manifest.json (QwenHeapInstrumentation b3df42e7, QwenTwoStageCore 2d14b1a3, QwenFileReport 74cb2ab4, QwenFileInputs 02567c13, QwenFileActivity dd859f76, QwenArenaPolicy c86b96b68, HeapWrapperChecks 892342a6), confirming the reviewed files match the accepted/frozen source."
+    },
+    "limitations": [
+      "Cannot independently rerun package-verified.json tools: the claims of compiled Kotlin, zero permissions, 65 test assets, and four unchanged native libraries are parent-supplied receipts, not re-executed here.",
+      "host-result.json (parent 33 groups / 274 assertions, plus pure collector 13 groups / 100 passed) is supplied evidence, not rerun; it is not device/RSS proof. deviceOperations=0 and nativePolicyEffectVerified=false confirm no device evidence was produced.",
+      "Decline all runtime-effect, device-RSS, allocator-consumption, and full-W3 closure judgments; this lane only certifies source bindings against spec.md.",
+      "verifiedInputCount is 0 in pre-verification running snapshots (set to 65 only after inputs verify at QwenHeapInstrumentation.kt:250); final/terminal report carries 65. Not a defect since contract freeze targets the terminal report, but noted as a source-observable intermediate value.",
+      "HeapWrapperChecks.kt is the parent's test harness (bound to a synthetic Runtime), not production code; its 8..128 event bound is consistent with 7 distinct labels + repeated core-persist."
+    ],
+    "verdict": "no-blocking-findings"
+  },
+  "reviewFileSHA256": "3bcf1714a4c0ad7079da3aa6771ff3836071b858f65d2308ece5adbe0dd7714c",
+  "reviewTask": "/private/tmp/odai-hy3-w3-heap-source-review-20261111",
+  "seconds": 260.56671041699883,
+  "actualToolErrors": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "chatcmpl-tool-d0e4eef05dd7443391fac519c1a49b58",
+      "content": [
+        {
+          "type": "text",
+          "text": "<tool_use_error>File does not exist.</tool_use_error>"
+        }
+      ],
+      "is_error": true,
+      "_meta": {
+        "rawResponse": {
+          "is_error": true,
+          "tool_error_code": "1001"
+        }
+      }
+    }
+  ],
+  "toolErrorDisposition": "precreation read of the owned review output failed; actual review write succeeded; original retained",
+  "contextAndCurrentSourceHashesMatched": true,
+  "heapBoundaryLabels": {
+    "initial": "initial-before-report",
+    "constructor-before": "constructor-before",
+    "constructor-returned": "constructor-returned",
+    "core-persist": "core-persist",
+    "case-returned": "case-returned",
+    "recognizer-released": "recognizer-released",
+    "teardown": "activity-torn-down"
+  },
+  "parentCorrections": [
+    "No new device contract is frozen yet; accepted source does not imply already-frozen device source.",
+    "Two-stage dispatch is conditional on nonempty auto admission, with at most2 streams/decodes; empty auto remains1stage.",
+    "Package/host checks were actually run by primary; reviewer did not rerun them."
+  ],
+  "deviceOperations": 0,
+  "newNativeRunFrozen": false,
+  "nativePolicyEffectVerified": false
+}

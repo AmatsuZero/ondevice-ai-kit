@@ -1,0 +1,255 @@
+[
+  {
+    "component": "abseil_cpp",
+    "patches": [
+      "cmake/vcpkg-ports/abseil/absl_cuda_warnings.patch",
+      "cmake/vcpkg-ports/abseil/absl_cuda13_member_template.patch"
+    ],
+    "changedFiles": [
+      {
+        "path": "absl/container/internal/btree_container.h",
+        "beforeBytes": 37086,
+        "beforeSHA256": "c642eb0a0888708a4265853421d639bdf062197f2566f16f2abc61baece4f78d",
+        "afterBytes": 37078,
+        "afterSHA256": "42b6fa9c2c974dc6ff32879ccfe5981183cb1ef5945ed8dbf05444020767d4a1"
+      },
+      {
+        "path": "absl/container/internal/common.h",
+        "beforeBytes": 7223,
+        "beforeSHA256": "a2c818cbe6d139e844734b6bcabe5eb34337f71c87e17de9769657c4bf857b81",
+        "afterBytes": 7856,
+        "afterSHA256": "1fde0aebba3d65672fb7f3edd10a6a702d6728e23cfb7c06f3b0cedde8e439d5"
+      },
+      {
+        "path": "absl/container/internal/raw_hash_map.h",
+        "beforeBytes": 17405,
+        "beforeSHA256": "5fd8221e4a3336156435a5135308429b552f559d98000ff963ea6f2b6c36a634",
+        "afterBytes": 17401,
+        "afterSHA256": "cbb505803b0d4da09cade70de934fe6e8241d97eeba3c4ca5174dcc7e6a035eb"
+      },
+      {
+        "path": "absl/container/internal/raw_hash_set.h",
+        "beforeBytes": 150867,
+        "beforeSHA256": "664a2991e24a3b879d7ba75a36039a01a1a31739807904576d6dcd2a90cad2e2",
+        "afterBytes": 150877,
+        "afterSHA256": "755ca56ea6476fc9539a75e6ac3d97932cd1423d4f7ae597ea6549fffe97296f"
+      },
+      {
+        "path": "absl/hash/hash.h",
+        "beforeBytes": 18428,
+        "beforeSHA256": "32e9baa333c51bc677105849f26e34fbe4e99ac882ebe8f759fc75251d969125",
+        "afterBytes": 18461,
+        "afterSHA256": "aa21a7c953fd6d93d0338ecd2e555aee647b6409d5e7db87b5a7ae74e1a4584e"
+      },
+      {
+        "path": "absl/hash/internal/hash.h",
+        "beforeBytes": 58053,
+        "beforeSHA256": "4caf885c90c977da17d65775bdbd8ca8bbc4581987685f1ead0589df24861376",
+        "afterBytes": 58061,
+        "afterSHA256": "8c0bc2a3ad7e501285965d80c36b9fa5ad03f30fb4974408cabf7a170b356da1"
+      }
+    ],
+    "checkAndApplyExitCodes": [
+      0,
+      0
+    ],
+    "method": "local git apply --check then apply exact upstream patches to new files extracted from hash-verified retained source archives",
+    "historicalPostPatchTreeDirectlyRetrieved": false,
+    "compiledMachineCodeEffectVerified": false
+  },
+  {
+    "component": "protobuf",
+    "patches": [
+      "cmake/patches/protobuf/protobuf_cmake.patch",
+      "cmake/patches/protobuf/protobuf_android_log.patch",
+      "cmake/patches/protobuf/protobuf_s390x.patch"
+    ],
+    "changedFiles": [
+      {
+        "path": "CMakeLists.txt",
+        "beforeBytes": 13371,
+        "beforeSHA256": "ceca9c9757f279109ba37c5e88e7c1f69e124e1ca2bd424405ea8d93b4fc931f",
+        "afterBytes": 13194,
+        "afterSHA256": "55df1826401ea4f33c2c3af41d8cd530bdfa94b45cb7fc76c6199b3170e9a19a"
+      },
+      {
+        "path": "cmake/libprotobuf-lite.cmake",
+        "beforeBytes": 6677,
+        "beforeSHA256": "3b6125134c3795d8e720edbce31ed818fee772480e64bde4fc6b6b62489fa4fb",
+        "afterBytes": 6679,
+        "afterSHA256": "f9747c543625c46f5c9675b4064e24b487e4c85d7c97a8c380d16adb1c301256"
+      },
+      {
+        "path": "cmake/libprotobuf.cmake",
+        "beforeBytes": 7690,
+        "beforeSHA256": "ae13831c72a7bff5e047cfa8542860a6cdd73f05f94cef9e5558abd0b55bd3be",
+        "afterBytes": 7692,
+        "afterSHA256": "5f827e98f5128801e3ff8bcfc6abcdad3cb92d8d3526b858a2741e5ab6c97adb"
+      },
+      {
+        "path": "src/google/protobuf/map.h",
+        "beforeBytes": 52443,
+        "beforeSHA256": "0dfeeb750e8bbf96d3d95e9535e5dfd909dedf7650c42b2c3802aea646e4ccbb",
+        "afterBytes": 52612,
+        "afterSHA256": "8b7f70ff6725e2c79f42d4970cc84911ac47ccb42f0acbdf2b7780e6ba1a016b"
+      },
+      {
+        "path": "src/google/protobuf/port_def.inc",
+        "beforeBytes": 34030,
+        "beforeSHA256": "05ec2493d14fc2799ea91c55fe5f3956b85729903ee5935fb9997a15ead6a828",
+        "afterBytes": 34097,
+        "afterSHA256": "12fc59243eb77985c9ad95b9f9d7b1dcbb5a57241c14b6b8d894f8766b1916ad"
+      }
+    ],
+    "checkAndApplyExitCodes": [
+      0,
+      0,
+      0
+    ],
+    "method": "local git apply --check then apply exact upstream patches to new files extracted from hash-verified retained source archives",
+    "historicalPostPatchTreeDirectlyRetrieved": false,
+    "compiledMachineCodeEffectVerified": false
+  },
+  {
+    "component": "date",
+    "patches": [
+      "cmake/patches/date/date.patch"
+    ],
+    "changedFiles": [
+      {
+        "path": "CMakeLists.txt",
+        "beforeBytes": 10773,
+        "beforeSHA256": "db478097b8ec1446df8b271f422de2c1f764f373d173474471111f5c54fe1a98",
+        "afterBytes": 10787,
+        "afterSHA256": "3df635cd90fc46a726ad5db0a73d4d350af40599af3d858f683ef733654ee090"
+      }
+    ],
+    "checkAndApplyExitCodes": [
+      0
+    ],
+    "method": "local git apply --check then apply exact upstream patches to new files extracted from hash-verified retained source archives",
+    "historicalPostPatchTreeDirectlyRetrieved": false,
+    "compiledMachineCodeEffectVerified": false
+  },
+  {
+    "component": "microsoft_gsl",
+    "patches": [
+      "cmake/patches/gsl/1213.patch"
+    ],
+    "changedFiles": [
+      {
+        "path": "include/gsl/assert",
+        "beforeBytes": 3988,
+        "beforeSHA256": "4a94024812aae787c01f69de4908b82cd80155af1791130ed2d053f7555f013f",
+        "afterBytes": 3989,
+        "afterSHA256": "2742125b3ba62f844c60bb2053374a063663cfe4ceec55a82c2c57bd3244e580"
+      }
+    ],
+    "checkAndApplyExitCodes": [
+      0
+    ],
+    "method": "local git apply --check then apply exact upstream patches to new files extracted from hash-verified retained source archives",
+    "historicalPostPatchTreeDirectlyRetrieved": false,
+    "compiledMachineCodeEffectVerified": false
+  },
+  {
+    "component": "flatbuffers",
+    "patches": [
+      "cmake/patches/flatbuffers/flatbuffers.patch"
+    ],
+    "changedFiles": [
+      {
+        "path": "CMakeLists.txt",
+        "beforeBytes": 23660,
+        "beforeSHA256": "8b29bd0b59edbe62aa20b8a9818d8acb879a79a0c82562dfa1f887f4d09d245f",
+        "afterBytes": 23689,
+        "afterSHA256": "2bca31a7370e907250fa6e4af661d4b3d7f09970e781541366c130ad154977e6"
+      },
+      {
+        "path": "include/flatbuffers/flatbuffers.h",
+        "beforeBytes": 10774,
+        "beforeSHA256": "a00ce9610586dac436efe0b6d27b3aa12eaaf397c04c17c7c7452d5afabd0144",
+        "afterBytes": 10846,
+        "afterSHA256": "b0116eca530026e2d235f909143b171b3d5788c7232aaacf26ea3e83292845db"
+      }
+    ],
+    "checkAndApplyExitCodes": [
+      0
+    ],
+    "method": "local git apply --check then apply exact upstream patches to new files extracted from hash-verified retained source archives",
+    "historicalPostPatchTreeDirectlyRetrieved": false,
+    "compiledMachineCodeEffectVerified": false
+  },
+  {
+    "component": "onnx",
+    "patches": [
+      "cmake/patches/onnx/onnx.patch"
+    ],
+    "changedFiles": [
+      {
+        "path": "CMakeLists.txt",
+        "beforeBytes": 24465,
+        "beforeSHA256": "d2bb3f7350b96532abb767b156a68d5945cb14a54b25bf33131facc3faa988e7",
+        "afterBytes": 25292,
+        "afterSHA256": "95bcf7616b631613213cabc322700f5d9fe5e907f3d4edcf93a3f6fcacad0b30"
+      },
+      {
+        "path": "onnx/defs/nn/old.cc",
+        "beforeBytes": 197226,
+        "beforeSHA256": "2dc04a892f3a4013299904f52a8b61c16d341aa922a4949c960a79771d89cbb8",
+        "afterBytes": 197205,
+        "afterSHA256": "f9c4cc09b39a589251560e4ab6ec83795a63de91362ad46d3e1abcf59e48ad62"
+      }
+    ],
+    "checkAndApplyExitCodes": [
+      0
+    ],
+    "method": "local git apply --check then apply exact upstream patches to new files extracted from hash-verified retained source archives",
+    "historicalPostPatchTreeDirectlyRetrieved": false,
+    "compiledMachineCodeEffectVerified": false
+  },
+  {
+    "component": "eigen",
+    "patches": [
+      "cmake/patches/eigen/s390x-build.patch",
+      "cmake/patches/eigen/s390x-build-werror.patch"
+    ],
+    "changedFiles": [
+      {
+        "path": "Eigen/src/Core/RandomImpl.h",
+        "beforeBytes": 10781,
+        "beforeSHA256": "b9756b1033c5f535ea551572220f0e4ef03de1b38d9167388c88d6cb4dd116b1",
+        "afterBytes": 11048,
+        "afterSHA256": "4457a9ace6ff2ac291b8d3986fc33f44df0625bd75f515fe7acf21cddf18e537"
+      },
+      {
+        "path": "Eigen/src/Core/arch/ZVector/Complex.h",
+        "beforeBytes": 17352,
+        "beforeSHA256": "e5a226601e6eb2e87f4cdd821f14ff24fff8a8ca6aec6ae33afda2608c4ccd50",
+        "afterBytes": 17560,
+        "afterSHA256": "8e9921cf76e23ba38975cf9c88e1396f81270ec063eb58326cb1f6b20204f804"
+      },
+      {
+        "path": "Eigen/src/Core/arch/ZVector/MathFunctions.h",
+        "beforeBytes": 7894,
+        "beforeSHA256": "7ccfdd9cbdfe8f1feccf70ac1e5a8aca2d537d1ee5d9d8ff0f04b22fe9e2b2ba",
+        "afterBytes": 8391,
+        "afterSHA256": "4a2f9b0763cbac50962399e9c2293ddb73c7a4090276b72bb3e46010cedd7882"
+      },
+      {
+        "path": "Eigen/src/Core/arch/ZVector/PacketMath.h",
+        "beforeBytes": 37093,
+        "beforeSHA256": "491c984ffe93ebc10291477f0f16d1f8c25ad94a12cd4182a5293ea70cb6a4c9",
+        "afterBytes": 41407,
+        "afterSHA256": "71d988350401dbff8cf3f7d0d39ed11f793c7279b41696bdf4401f4a26bdad5c"
+      }
+    ],
+    "checkAndApplyExitCodes": [
+      0,
+      0
+    ],
+    "method": "local git apply --check then apply exact upstream patches to new files extracted from hash-verified retained source archives",
+    "historicalPostPatchTreeDirectlyRetrieved": false,
+    "compiledMachineCodeEffectVerified": false
+  }
+]

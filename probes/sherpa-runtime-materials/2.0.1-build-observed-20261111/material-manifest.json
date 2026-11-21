@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "scope": "Supplement to the unchanged 50-file candidate catalog, reconciled to public Android build logs. Source and license texts only; not exhaustive static membership or build attestation.",
+  "aarSHA256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+  "sherpaSourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "sourceTextCount": 4,
+  "licenseTextCount": 9,
+  "materials": [
+    {
+      "name": "sherpa-eigen",
+      "api": "repos/k2-fsa/sherpa-onnx/contents/cmake/eigen.cmake?ref=af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "path": "cmake/eigen.cmake",
+      "gitBlobSHA1": "ef02511bdd345c6787324415caf2b618682fb75a",
+      "bytes": 1409,
+      "sha256": "8239d74b44e37e1bb05be2e1c86f6b1e931f0daca93b325fb2e0b6d6e996b2ed",
+      "sourceURL": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/cmake/eigen.cmake",
+      "component": "sherpa-onnx",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "kind": "build-source",
+      "materialPath": "source-evidence/sherpa-onnx/cmake/eigen.cmake"
+    },
+    {
+      "name": "sherpa-kaldi-decoder",
+      "api": "repos/k2-fsa/sherpa-onnx/contents/cmake/kaldi-decoder.cmake?ref=af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "path": "cmake/kaldi-decoder.cmake",
+      "gitBlobSHA1": "d2860b377bbc03752244d5cfb5ad5fd93920cf04",
+      "bytes": 2667,
+      "sha256": "af34b17974474a70b12978d49ac0831276839082924e5ac93bd9bb194a7fd310",
+      "sourceURL": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/cmake/kaldi-decoder.cmake",
+      "component": "sherpa-onnx",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "kind": "build-source",
+      "materialPath": "source-evidence/sherpa-onnx/cmake/kaldi-decoder.cmake"
+    },
+    {
+      "name": "sherpa-websocketpp",
+      "api": "repos/k2-fsa/sherpa-onnx/contents/cmake/websocketpp.cmake?ref=af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "path": "cmake/websocketpp.cmake",
+      "gitBlobSHA1": "79b0585be4f4539e76110206f78c5c54e0c8a8e2",
+      "bytes": 1908,
+      "sha256": "b0d077245bf523723d5280bed1ebd1585ef8c625c5964952f3819c857f851101",
+      "sourceURL": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/cmake/websocketpp.cmake",
+      "component": "sherpa-onnx",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "kind": "build-source",
+      "materialPath": "source-evidence/sherpa-onnx/cmake/websocketpp.cmake"
+    },
+    {
+      "name": "sherpa-asio",
+      "api": "repos/k2-fsa/sherpa-onnx/contents/cmake/asio.cmake?ref=af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "path": "cmake/asio.cmake",
+      "gitBlobSHA1": "9e3ce8d23537315d5ff28a8dd9bb4eb7b02f42ba",
+      "bytes": 1458,
+      "sha256": "4261f9681bd5cb05570d276440d4658c62f752e8dc3c0ed7bf5b658eaea02dfa",
+      "sourceURL": "https://github.com/k2-fsa/sherpa-onnx/blob/af2d8d81dbfa61c4cea4c568da78f3982edca005/cmake/asio.cmake",
+      "component": "sherpa-onnx",
+      "commit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "kind": "build-source",
+      "materialPath": "source-evidence/sherpa-onnx/cmake/asio.cmake"
+    },
+    {
+      "component": "eigen",
+      "sourceRef": "5.0.1",
+      "repository": "libeigen/eigen",
+      "commit": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "path": "COPYING.APACHE",
+      "gitBlobSHA1": "61e948d2aaa3f7cd1db246b874d3b8ad1e8204fb",
+      "bytes": 11362,
+      "sha256": "03379001a7b12a2ec997a25554247d985270b353c10d5bafee9ac8d6519820b7",
+      "sourceURL": "https://gitlab.com/libeigen/eigen/-/blob/bc3b39870ecb690a623a3f49149a358b95c5781d/COPYING.APACHE",
+      "kind": "license-text",
+      "materialPath": "licenses/eigen-5.0.1/COPYING.APACHE"
+    },
+    {
+      "component": "eigen",
+      "sourceRef": "5.0.1",
+      "repository": "libeigen/eigen",
+      "commit": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "path": "COPYING.BSD",
+      "gitBlobSHA1": "8964ddfdd0effc65e8dd90ea1d8c411efb30e5fd",
+      "bytes": 1517,
+      "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb",
+      "sourceURL": "https://gitlab.com/libeigen/eigen/-/blob/bc3b39870ecb690a623a3f49149a358b95c5781d/COPYING.BSD",
+      "kind": "license-text",
+      "materialPath": "licenses/eigen-5.0.1/COPYING.BSD"
+    },
+    {
+      "component": "eigen",
+      "sourceRef": "5.0.1",
+      "repository": "libeigen/eigen",
+      "commit": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "path": "COPYING.MINPACK",
+      "gitBlobSHA1": "132cc3f33fa7fd4169a92b05241db59c8428a7ab",
+      "bytes": 2193,
+      "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0",
+      "sourceURL": "https://gitlab.com/libeigen/eigen/-/blob/bc3b39870ecb690a623a3f49149a358b95c5781d/COPYING.MINPACK",
+      "kind": "license-text",
+      "materialPath": "licenses/eigen-5.0.1/COPYING.MINPACK"
+    },
+    {
+      "component": "eigen",
+      "sourceRef": "5.0.1",
+      "repository": "libeigen/eigen",
+      "commit": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "path": "COPYING.MPL2",
+      "gitBlobSHA1": "ee6256cdb62a765749a71aae3abea32884301cd1",
+      "bytes": 16727,
+      "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172",
+      "sourceURL": "https://gitlab.com/libeigen/eigen/-/blob/bc3b39870ecb690a623a3f49149a358b95c5781d/COPYING.MPL2",
+      "kind": "license-text",
+      "materialPath": "licenses/eigen-5.0.1/COPYING.MPL2"
+    },
+    {
+      "component": "eigen",
+      "sourceRef": "5.0.1",
+      "repository": "libeigen/eigen",
+      "commit": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "path": "COPYING.README",
+      "gitBlobSHA1": "11af93ca790a55f1a2acdc71bb36acd80874d378",
+      "bytes": 264,
+      "sha256": "db640ff2bd90c6abd6a4d3fbb351e0ee4d555417cf840492054d1cbb2ea85644",
+      "sourceURL": "https://gitlab.com/libeigen/eigen/-/blob/bc3b39870ecb690a623a3f49149a358b95c5781d/COPYING.README",
+      "kind": "license-text",
+      "materialPath": "licenses/eigen-5.0.1/COPYING.README"
+    },
+    {
+      "component": "eigen",
+      "sourceRef": "5.0.1",
+      "repository": "libeigen/eigen",
+      "commit": "bc3b39870ecb690a623a3f49149a358b95c5781d",
+      "path": "LICENSE",
+      "gitBlobSHA1": "a612ad9813b006ce81d1ee438dd784da99a54007",
+      "bytes": 16725,
+      "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+      "sourceURL": "https://gitlab.com/libeigen/eigen/-/blob/bc3b39870ecb690a623a3f49149a358b95c5781d/LICENSE",
+      "kind": "license-text",
+      "materialPath": "licenses/eigen-5.0.1/LICENSE"
+    },
+    {
+      "component": "websocketpp",
+      "repository": "zaphoyd/websocketpp",
+      "sourceRef": "b9aeec6eaf3d5610503439b4fae3581d9aff08e8",
+      "path": "COPYING",
+      "gitBlobSHA1": "14fb71561aaf24f8dbb94d3b4a4b3ddeb6829c46",
+      "bytes": 7494,
+      "sha256": "5ba81a1ed402517dce2581fa2d4042baf6a9c8ca0fe94fa6a7043ce6ab23064f",
+      "sourceURL": "https://github.com/zaphoyd/websocketpp/blob/b9aeec6eaf3d5610503439b4fae3581d9aff08e8/COPYING",
+      "kind": "license-text",
+      "materialPath": "licenses/websocketpp/COPYING"
+    },
+    {
+      "component": "asio",
+      "repository": "chriskohlhoff/asio",
+      "sourceRef": "asio-1-24-0",
+      "path": "asio/COPYING",
+      "gitBlobSHA1": "1b01af9856f3db92104e35433e482e1cb8c517cb",
+      "bytes": 224,
+      "sha256": "2d312781ba7ca3f5b494aec3bcca5cfbb69b7302838b2a7595d1537fc494457f",
+      "sourceURL": "https://github.com/chriskohlhoff/asio/blob/asio-1-24-0/asio/COPYING",
+      "kind": "license-text",
+      "materialPath": "licenses/asio/COPYING"
+    },
+    {
+      "component": "asio",
+      "repository": "chriskohlhoff/asio",
+      "sourceRef": "asio-1-24-0",
+      "path": "asio/LICENSE_1_0.txt",
+      "gitBlobSHA1": "36b7cd93cdfbac762f5be4c6ce276df2ea6305c2",
+      "bytes": 1338,
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566",
+      "sourceURL": "https://github.com/chriskohlhoff/asio/blob/asio-1-24-0/asio/LICENSE_1_0.txt",
+      "kind": "license-text",
+      "materialPath": "licenses/asio/LICENSE_1_0.txt"
+    }
+  ],
+  "observedBuildLog": {
+    "jobId": 121661567095,
+    "sourceURL": "https://github.com/k2-fsa/sherpa-onnx/actions/runs/40348432396/job/121661567095",
+    "bytes": 414518,
+    "sha256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6",
+    "excerpts": [
+      {
+        "line": 801,
+        "text": "2026-10-26T15:37:51.9625629Z -- SHERPA_ONNX_ENABLE_WEBSOCKET ON"
+      },
+      {
+        "line": 911,
+        "text": "2026-10-26T15:38:03.6670558Z -- Downloading eigen from https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz"
+      },
+      {
+        "line": 915,
+        "text": "2026-10-26T15:38:04.0563329Z -- Configured Eigen 5.0.1-dev+af2d8d81"
+      },
+      {
+        "line": 929,
+        "text": "2026-10-26T15:38:05.0475464Z -- Downloading websocketpp from https://github.com/zaphoyd/websocketpp/archive/b9aeec6eaf3d5610503439b4fae3581d9aff08e8.zip"
+      },
+      {
+        "line": 930,
+        "text": "2026-10-26T15:38:05.9510144Z -- websocketpp is downloaded to /home/runner/work/sherpa-onnx/sherpa-onnx/build-android-arm64-v8a/_deps/websocketpp-src"
+      },
+      {
+        "line": 931,
+        "text": "2026-10-26T15:38:05.9545277Z -- Downloading asio https://github.com/chriskohlhoff/asio/archive/refs/tags/asio-1-24-0.tar.gz"
+      },
+      {
+        "line": 932,
+        "text": "2026-10-26T15:38:07.1518872Z -- asio is downloaded to /home/runner/work/sherpa-onnx/sherpa-onnx/build-android-arm64-v8a/_deps/asio-src"
+      },
+      {
+        "line": 1603,
+        "text": "2026-10-26T15:40:56.1816645Z -- SHERPA_ONNX_ENABLE_WEBSOCKET ON"
+      },
+      {
+        "line": 1713,
+        "text": "2026-10-26T15:41:00.7339601Z -- Downloading eigen from https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz"
+      },
+      {
+        "line": 1717,
+        "text": "2026-10-26T15:41:01.1246997Z -- Configured Eigen 5.0.1-dev+af2d8d81"
+      },
+      {
+        "line": 1731,
+        "text": "2026-10-26T15:41:01.9079094Z -- Downloading websocketpp from https://github.com/zaphoyd/websocketpp/archive/b9aeec6eaf3d5610503439b4fae3581d9aff08e8.zip"
+      },
+      {
+        "line": 1732,
+        "text": "2026-10-26T15:41:02.7310539Z -- websocketpp is downloaded to /home/runner/work/sherpa-onnx/sherpa-onnx/build-android-armv7-eabi/_deps/websocketpp-src"
+      },
+      {
+        "line": 1733,
+        "text": "2026-10-26T15:41:02.7346505Z -- Downloading asio https://github.com/chriskohlhoff/asio/archive/refs/tags/asio-1-24-0.tar.gz"
+      },
+      {
+        "line": 1734,
+        "text": "2026-10-26T15:41:03.9008392Z -- asio is downloaded to /home/runner/work/sherpa-onnx/sherpa-onnx/build-android-armv7-eabi/_deps/asio-src"
+      },
+      {
+        "line": 2361,
+        "text": "2026-10-26T15:43:43.9611613Z -- SHERPA_ONNX_ENABLE_WEBSOCKET OFF"
+      },
+      {
+        "line": 2471,
+        "text": "2026-10-26T15:43:48.6692666Z -- Downloading eigen from https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz"
+      },
+      {
+        "line": 2475,
+        "text": "2026-10-26T15:43:49.0893272Z -- Configured Eigen 5.0.1-dev+af2d8d81"
+      },
+      {
+        "line": 3156,
+        "text": "2026-10-26T15:46:31.5765778Z -- SHERPA_ONNX_ENABLE_WEBSOCKET OFF"
+      },
+      {
+        "line": 3266,
+        "text": "2026-10-26T15:46:36.3556673Z -- Downloading eigen from https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz"
+      },
+      {
+        "line": 3270,
+        "text": "2026-10-26T15:46:36.7538084Z -- Configured Eigen 5.0.1-dev+af2d8d81"
+      }
+    ],
+    "perAbi": [
+      {
+        "abi": "arm64-v8a",
+        "cmakeCommandLine": 778,
+        "websocket": "ON",
+        "websocketLine": 801,
+        "eigenArchiveURL": "https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz",
+        "eigenLine": 911
+      },
+      {
+        "abi": "armeabi-v7a",
+        "cmakeCommandLine": 1577,
+        "websocket": "ON",
+        "websocketLine": 1603,
+        "eigenArchiveURL": "https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz",
+        "eigenLine": 1713
+      },
+      {
+        "abi": "x86_64",
+        "cmakeCommandLine": 2338,
+        "websocket": "OFF",
+        "websocketLine": 2361,
+        "eigenArchiveURL": "https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz",
+        "eigenLine": 2471
+      },
+      {
+        "abi": "x86",
+        "cmakeCommandLine": 3133,
+        "websocket": "OFF",
+        "websocketLine": 3156,
+        "eigenArchiveURL": "https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz",
+        "eigenLine": 3266
+      }
+    ]
+  },
+  "reconciliation": {
+    "eigenVersionObserved": "5.0.1",
+    "eigen34CatalogIsCandidateOnly": true,
+    "arm64AndArmv7WebsocketEnabled": true,
+    "x86AndX8664WebsocketEnabled": false,
+    "dependencyDownloadDoesNotProveFinalBinaryMembership": true
+  },
+  "sourceToPrebuiltAttestationVerified": false,
+  "exhaustiveStaticCompositionVerified": false,
+  "productionNoticeRetentionVerified": false,
+  "independentReleaseReviewAccepted": false,
+  "productionReady": false
+}

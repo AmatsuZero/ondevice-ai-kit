@@ -1,0 +1,19 @@
+{
+  "model": "hy3",
+  "process": {
+    "exitCode": 0,
+    "elapsedSeconds": 46.385,
+    "endedAtUTC": "2026-11-15T13:12:36.374013+00:00",
+    "stdoutBytes": 54856,
+    "stderrBytes": 0,
+    "automaticRetry": false,
+    "automaticFallback": false
+  },
+  "resultSubtype": "success",
+  "resultIsError": false,
+  "sessionId": "01a1df55-e5a1-7208-9865-a380bdb02533",
+  "observedToolEvents": 0,
+  "rawArtifacts": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/guard-review",
+  "boundedSuppliedContextOnly": true,
+  "wholeReleaseAcceptance": false
+}

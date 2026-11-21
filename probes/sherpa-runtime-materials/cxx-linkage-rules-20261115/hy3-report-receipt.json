@@ -1,0 +1,24 @@
+{
+  "model": "hy3",
+  "firstReportAccepted": false,
+  "firstDispositionPath": ".omx/artifacts/w3-cxx-linkage-20261115T134154Z/hy3-report/parent-disposition.json",
+  "finalReportAcceptedByParent": true,
+  "finalProcess": {
+    "exitCode": 0,
+    "elapsedSeconds": 40.075,
+    "endedAtUTC": "2026-11-15T13:55:35.216787+00:00",
+    "stdoutBytes": 49851,
+    "stderrBytes": 0,
+    "automaticRetry": false,
+    "automaticFallback": false
+  },
+  "observedToolUseOrResultEvents": 0,
+  "toolInitListDoesNotProveOSIsolation": true,
+  "promptSHA256": "149830a4dc56d54a887b633b997c9394eca9bf39d7620acf83b561677e8d21bb",
+  "rawSHA256": "d593a9d8be424884aa77b27131df5ca317756eb1ee5bd3cc83d44bea0abb2228",
+  "candidateSHA256": "e9ef03ea5e49223f091b997f6d74c4523827d3131228f0b3e590c3d435c495cb",
+  "reportByteForByteCandidateMatch": true,
+  "readmeByteForByteCandidateMatch": true,
+  "acceptanceScope": "fixed-source conditional C++ default rules; not actual historical archive extraction/retention or P4",
+  "unresolvedTermClarification": "ELF/archive extraction in report refers to final link-time static archive membership/retention, not existing AAR ZIP or ELF container extraction."
+}

@@ -1,0 +1,290 @@
+{
+  "scope": "Public footage re-encoded for a real-time playback blind comparison on TECNO KM9. Host decode, device MediaExtractor and automated end-to-end display observations only. No human ballots or notes.",
+  "ffmpeg": "ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers",
+  "scenes": [
+    {
+      "scene": 1,
+      "title": "Tears of Steel",
+      "sourcePage": "https://mango.blender.org/sharing/",
+      "license": "CC BY 3.0",
+      "credit": "(CC) Blender Foundation | mango.blender.org",
+      "sourceSHA256": null,
+      "sourceRanges": {
+        "url": "https://download.blender.org/demo/movies/ToS/tears_of_steel_720p.mov",
+        "remoteSize": 372178639,
+        "ranges": [
+          {
+            "offset": 0,
+            "bytes": 4096,
+            "sha256": "6180a66a369798cba5d26ca758433319d11929762cefadd8ae0af3aa8fc97b79"
+          },
+          {
+            "offset": 21639649,
+            "bytes": 6185747,
+            "sha256": "0c647852d354e03dbcc96775fe06c622ef6e6aa445b50a2db31bfb947e6eb7b9"
+          },
+          {
+            "offset": 371579659,
+            "bytes": 598980,
+            "sha256": "60e65dd23b049cd87eb58dea9024113d59f0356d40e3e5204ee111f615be0bf3"
+          }
+        ]
+      },
+      "sourceNotes": "24 to 30 fps; original matrix unspecified, assumed BT.709; centre-crop",
+      "startSeconds": 51,
+      "dimensions": [
+        640,
+        360
+      ],
+      "duration": 6,
+      "frames": 180,
+      "fps": 30,
+      "decodedDistinctMiniatures": 180,
+      "sha256": "3364fa8c9d9b39c891a6cc31370b3e93ea6c33ca5138fe79f11cf25e3b851c21",
+      "bytes": 386814,
+      "ffmpegArgv": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-xerror",
+        "-n",
+        "-ss",
+        "51",
+        "-i",
+        "<source>",
+        "-f",
+        "lavfi",
+        "-i",
+        "anullsrc=r=48000:cl=mono",
+        "-map",
+        "0:v:0",
+        "-map",
+        "1:a:0",
+        "-map_metadata",
+        "-1",
+        "-t",
+        "6",
+        "-vf",
+        "fps=30,crop=948:534:(iw-948)/2:0,scale=640:360:flags=area:in_color_matrix=bt709:out_color_matrix=bt709:out_range=tv,setsar=1,format=yuv420p,setparams=range=limited:color_primaries=bt709:color_trc=bt709:colorspace=bt709",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "medium",
+        "-crf",
+        "27",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "48k",
+        "-metadata",
+        "comment=(CC) Blender Foundation | mango.blender.org; CC BY 3.0; https://mango.blender.org/sharing/; modified: 6s low-resolution silent excerpt",
+        "-bsf:v",
+        "h264_metadata=colour_primaries=1:transfer_characteristics=1:matrix_coefficients=1",
+        "-color_range",
+        "tv",
+        "-color_primaries",
+        "bt709",
+        "-color_trc",
+        "bt709",
+        "-colorspace",
+        "bt709",
+        "-movflags",
+        "+faststart+write_colr",
+        "1.mp4"
+      ],
+      "deviceMediaExtractor": "width=640 height=360 frame-rate=30 color-standard=1 color-range=2 color-transfer=3",
+      "licenseLink": "https://creativecommons.org/licenses/by/3.0/",
+      "automatedPlaybackCheck": {
+        "inputFramesPerSide": 180,
+        "confirmedDisplayByRequestedMode": {
+          "ORIGINAL": {
+            "ORIGINAL": 179
+          },
+          "SPATIAL": {
+            "ORIGINAL": 9,
+            "SPATIAL": 169
+          }
+        }
+      }
+    },
+    {
+      "scene": 2,
+      "title": "Kawaida Waterfall",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Front_view_video_of_Kawaida_Waterfall,_Cianda,_Kiambu_County.webm",
+      "license": "CC BY 4.0",
+      "credit": "Lebu Ayiga — Kawaida Waterfall video (CC BY 4.0), via Wikimedia Commons.",
+      "sourceSHA256": "8a0702df71ce6b8712b2b5d7c24db8261720198922e663c8bbe0a933524e79f9",
+      "sourceRanges": null,
+      "sourceNotes": "central landscape crop of portrait recording, native BT.709",
+      "startSeconds": 2,
+      "dimensions": [
+        480,
+        270
+      ],
+      "duration": 6,
+      "frames": 180,
+      "fps": 30,
+      "decodedDistinctMiniatures": 180,
+      "sha256": "7f9059d8b2c68cab3d4535c29699e510a4b4e86b27705be88702c2abcb8308bd",
+      "bytes": 452546,
+      "ffmpegArgv": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-xerror",
+        "-n",
+        "-ss",
+        "2",
+        "-i",
+        "<source>",
+        "-f",
+        "lavfi",
+        "-i",
+        "anullsrc=r=48000:cl=mono",
+        "-map",
+        "0:v:0",
+        "-map",
+        "1:a:0",
+        "-map_metadata",
+        "-1",
+        "-t",
+        "6",
+        "-vf",
+        "fps=30,crop=480:270:0:288,scale=480:270:flags=area:in_color_matrix=bt709:out_color_matrix=bt709:out_range=tv,setsar=1,format=yuv420p,setparams=range=limited:color_primaries=bt709:color_trc=bt709:colorspace=bt709",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "medium",
+        "-crf",
+        "27",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "48k",
+        "-metadata",
+        "comment=Lebu Ayiga — Kawaida Waterfall video (CC BY 4.0), via Wikimedia Commons.; CC BY 4.0; https://commons.wikimedia.org/wiki/File:Front_view_video_of_Kawaida_Waterfall,_Cianda,_Kiambu_County.webm; modified: 6s low-resolution silent excerpt",
+        "-bsf:v",
+        "h264_metadata=colour_primaries=1:transfer_characteristics=1:matrix_coefficients=1",
+        "-color_range",
+        "tv",
+        "-color_primaries",
+        "bt709",
+        "-color_trc",
+        "bt709",
+        "-colorspace",
+        "bt709",
+        "-movflags",
+        "+faststart+write_colr",
+        "2.mp4"
+      ],
+      "deviceMediaExtractor": "width=480 height=270 frame-rate=30 color-standard=1 color-range=2 color-transfer=3",
+      "licenseLink": "https://creativecommons.org/licenses/by/4.0/",
+      "automatedPlaybackCheck": {
+        "inputFramesPerSide": 180,
+        "confirmedDisplayByRequestedMode": {
+          "ORIGINAL": {
+            "ORIGINAL": 179
+          },
+          "SPATIAL": {
+            "ORIGINAL": 7,
+            "SPATIAL": 172
+          }
+        }
+      }
+    },
+    {
+      "scene": 3,
+      "title": "Common swifts",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Common_swifts._Hubala_residetials_in_Tomaszow_Mazowiecki,_Lodz_Voivodeship,_Poland,_CC0.ogv",
+      "license": "Public domain dedication (PD-self)",
+      "credit": "WrS.tm.pl (Commons User:WrS.tm.pl)",
+      "sourceSHA256": "29cd840505e5b4e4a981888b3752c15f47e3801481a7eba7be4b46d7339f9f0b",
+      "sourceRanges": null,
+      "sourceNotes": "full image; original matrix unspecified, assumed BT.709",
+      "startSeconds": 0,
+      "dimensions": [
+        640,
+        360
+      ],
+      "duration": 6,
+      "frames": 180,
+      "fps": 30,
+      "decodedDistinctMiniatures": 180,
+      "sha256": "27e05512ae151eca4b5992ccaa9598a899f98310a688a4c16f550e1f72db97f5",
+      "bytes": 85854,
+      "ffmpegArgv": [
+        "ffmpeg",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-xerror",
+        "-n",
+        "-ss",
+        "0",
+        "-i",
+        "<source>",
+        "-f",
+        "lavfi",
+        "-i",
+        "anullsrc=r=48000:cl=mono",
+        "-map",
+        "0:v:0",
+        "-map",
+        "1:a:0",
+        "-map_metadata",
+        "-1",
+        "-t",
+        "6",
+        "-vf",
+        "fps=30,scale=640:360:flags=area:in_color_matrix=bt709:out_color_matrix=bt709:out_range=tv,setsar=1,format=yuv420p,setparams=range=limited:color_primaries=bt709:color_trc=bt709:colorspace=bt709",
+        "-c:v",
+        "libx264",
+        "-preset",
+        "medium",
+        "-crf",
+        "27",
+        "-pix_fmt",
+        "yuv420p",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "48k",
+        "-metadata",
+        "comment=WrS.tm.pl (Commons User:WrS.tm.pl); Public domain dedication (PD-self); https://commons.wikimedia.org/wiki/File:Common_swifts._Hubala_residetials_in_Tomaszow_Mazowiecki,_Lodz_Voivodeship,_Poland,_CC0.ogv; modified: 6s low-resolution silent excerpt",
+        "-bsf:v",
+        "h264_metadata=colour_primaries=1:transfer_characteristics=1:matrix_coefficients=1",
+        "-color_range",
+        "tv",
+        "-color_primaries",
+        "bt709",
+        "-color_trc",
+        "bt709",
+        "-colorspace",
+        "bt709",
+        "-movflags",
+        "+faststart+write_colr",
+        "3.mp4"
+      ],
+      "deviceMediaExtractor": "width=640 height=360 frame-rate=30 color-standard=1 color-range=2 color-transfer=3",
+      "licenseLink": "https://commons.wikimedia.org/wiki/File:Common_swifts._Hubala_residetials_in_Tomaszow_Mazowiecki,_Lodz_Voivodeship,_Poland,_CC0.ogv",
+      "automatedPlaybackCheck": {
+        "inputFramesPerSide": 180,
+        "confirmedDisplayByRequestedMode": {
+          "ORIGINAL": {
+            "ORIGINAL": 179
+          },
+          "SPATIAL": {
+            "ORIGINAL": 11,
+            "SPATIAL": 168
+          }
+        }
+      }
+    }
+  ]
+}

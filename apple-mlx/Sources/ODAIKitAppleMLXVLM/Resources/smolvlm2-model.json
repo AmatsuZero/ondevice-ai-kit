@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "modelId": "smolvlm2-500m-video-instruct-mlx",
+  "revision": "fa57db46815177fbdfd65cc85a2b3416a8332268",
+  "upstreamURL": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx",
+  "upstreamRevision": "fa57db46815177fbdfd65cc85a2b3416a8332268",
+  "capability": "multimodal",
+  "backendId": "mlx.smolvlm2-500m",
+  "backendVersion": {
+    "minimum": "1.0.0",
+    "maximumExclusive": "2.0.0"
+  },
+  "minimumOS": "18.0",
+  "architectures": [
+    "arm64"
+  ],
+  "formatVersion": "mlx-safetensors-v1",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/.gitattributes",
+      "bytes": 1519,
+      "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361"
+    },
+    {
+      "path": "README.md",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/README.md",
+      "bytes": 898,
+      "sha256": "12d6cb437b591abd3cdd9142a4f1c2a8627d2abb37691c483fcfdcad1a95930e"
+    },
+    {
+      "path": "added_tokens.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/added_tokens.json",
+      "bytes": 4739,
+      "sha256": "74135b8664b56088c0006f1c8e848d79a8eba003411f72ebf1dc2ee96227be3a"
+    },
+    {
+      "path": "chat_template.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/chat_template.json",
+      "bytes": 430,
+      "sha256": "b585e3598909a5687f9f9d738d35223724dedef256b9b274e1cbfb32b13c74bf"
+    },
+    {
+      "path": "config.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/config.json",
+      "bytes": 10200,
+      "sha256": "36159a671d8834df337219b588c03a1dde01e4b472f1e305746e837aaf75ec5d"
+    },
+    {
+      "path": "merges.txt",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/merges.txt",
+      "bytes": 466391,
+      "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+    },
+    {
+      "path": "model.safetensors",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/model.safetensors",
+      "bytes": 1015023993,
+      "sha256": "a9839c8f79ecc93e54a00dc73cc0e68ba477debcd065d50c1c289fbb1075f981"
+    },
+    {
+      "path": "model.safetensors.index.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/model.safetensors.index.json",
+      "bytes": 39556,
+      "sha256": "87dd860d59f2e9818f09bc6a844c22d5aa65d2a226656d89749952b12df4db38"
+    },
+    {
+      "path": "preprocessor_config.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/preprocessor_config.json",
+      "bytes": 599,
+      "sha256": "149e315d9410368e5491455bb06e0f763426e9e56cca731c13b24404a29b6374"
+    },
+    {
+      "path": "processor_config.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/processor_config.json",
+      "bytes": 67,
+      "sha256": "f3ad45028447b3562b4752be0d5916d6806c1ef589091a469608dcf0faa1737c"
+    },
+    {
+      "path": "special_tokens_map.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/special_tokens_map.json",
+      "bytes": 868,
+      "sha256": "2dfea2a426162316ff1567c82bc6d36d9690cd9f90455f075c77daca78b45c60"
+    },
+    {
+      "path": "tokenizer.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/tokenizer.json",
+      "bytes": 3548256,
+      "sha256": "5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/tokenizer_config.json",
+      "bytes": 28626,
+      "sha256": "dd9ce2ab89a3dd881bd9378f1a79b943a064b9275a7e1706d5b7b47b68977913"
+    },
+    {
+      "path": "vocab.json",
+      "url": "https://huggingface.co/mlx-community/SmolVLM2-500M-Video-Instruct-mlx/resolve/fa57db46815177fbdfd65cc85a2b3416a8332268/vocab.json",
+      "bytes": 800662,
+      "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+    }
+  ],
+  "processing": {
+    "inputSignature": "image-file+prompt",
+    "outputSignature": "utf8-text",
+    "preprocessRevision": "6e338e5df49424fc0db7c6d58184d622f92ed18a",
+    "tokenizerRevision": "fa57db46815177fbdfd65cc85a2b3416a8332268",
+    "promptRevision": "fa57db46815177fbdfd65cc85a2b3416a8332268",
+    "maxInputElements": 1
+  },
+  "resources": {
+    "downloadBytes": 1019926804,
+    "temporaryBytes": 1019926804,
+    "installedBytesLimit": 1019926804
+  },
+  "licenseIdentifier": "Apache-2.0",
+  "licenseURL": "https://www.apache.org/licenses/LICENSE-2.0",
+  "attribution": "mlx-community/SmolVLM2-500M-Video-Instruct-mlx",
+  "redistribution": "Retain Apache-2.0 license and model attribution; model weights are distributed separately."
+}

@@ -1,0 +1,49 @@
+pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }
+dependencyResolutionManagement { repositories {
+    exclusiveContent {
+        forRepository {
+            maven { url = uri("https://nexus.ugaiot.com/repository/maven-ugreenhome-release/") }
+        }
+        filter {
+            includeVersion("org.jetbrains.skiko", "skiko", "0.144.6-ondevice-f02.6")
+            includeVersion("org.jetbrains.skiko", "skiko-iosarm64", "0.144.6-ondevice-f02.6")
+            includeVersion("org.jetbrains.skiko", "skiko-iossimulatorarm64", "0.144.6-ondevice-f02.6")
+        }
+    }
+    providers.gradleProperty("sherpaMavenRepo").orNull?.let { localRepo ->
+        maven { url = uri(localRepo); content { includeGroup("com.k2fsa.sherpa.onnx") } }
+    }
+    if (providers.gradleProperty("usePublishedSdk").orNull == "true") mavenLocal { content { includeGroup("io.ondeviceai") } }
+    providers.gradleProperty("litertlmMavenRepo").orNull?.let { localRepo ->
+        maven { url = uri(localRepo); content { includeGroup("com.google.ai.edge.litertlm") } }
+    }
+    providers.gradleProperty("opencvMavenRepo").orNull?.let { localRepo ->
+        maven { url = uri(localRepo); content { includeGroup("org.opencv") } }
+    }
+    google(); mavenCentral()
+} }
+rootProject.name = "ondevice-ai-kit"
+include(":kmp-binding")
+include(":android:sdk-core", ":android:identity")
+include(":android:video", ":android:multimodal")
+include(":android:voice-effects")
+include(":android:model-store", ":android:face", ":android:backend-mlkit", ":android:speech", ":android:backend-system-tts", ":android:backend-system-asr")
+include(":android:backend-litertlm")
+include(":demo:shared", ":demo:androidApp")
+include(":examples:android-native")
+include(":examples:android-speech")
+
+include(":examples:android-identity-native")
+
+include(":examples:android-multimodal-native")
+include(":examples:android-litertlm-native")
+include(":probes:android-litertlm")
+
+include(":android:backend-litert-sr")
+include(":android:backend-sherpa-asr")
+include(":android:backend-opencv-identity")
+if (providers.gradleProperty("enableSrQualityProbe").orNull == "true") include(":probes:android-sr-quality")
+
+if (providers.gradleProperty("enableRealtimeSrDemo").orNull == "true") {
+    include(":examples:android-realtime-sr")
+}

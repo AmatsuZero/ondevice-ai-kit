@@ -1,0 +1,42 @@
+{
+  "observedAt": "2026-11-15T04:31:39.274968+00:00",
+  "sourceCommit": "1af1c5efe885729df0c53f929d78fb68da9a214f",
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-closure-scope-20261115 -->",
+  "issues": {
+    "gh": {
+      "id": 6889158935,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6889158935",
+      "sha256": "e611789d432825dc3e8c31dbdf0c3e6739ff60c8d131091abadc680f4bfb51cb",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44850,
+      "url": null,
+      "sha256": "41a53a0ec584653d4a05af3f82a4cd7908e5ab4043eef576de1f50be4d5de2e9",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "20d85a93c1078bfeada7aa5009cdffa78cc041c8",
+    "sha256": "e72cc54bc85a5f7bda286996489bd900dad08d76940a07a3fa7cc42dddf1917b",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "e72cc54bc85a5f7bda286996489bd900dad08d76940a07a3fa7cc42dddf1917b",
+    "readbackExact": true
+  },
+  "dualWikiSHA256Equal": true,
+  "githubCommentWrittenOnce": true,
+  "initialGitlabReadEOFsRetained": true,
+  "invocationOnlyProxyRecovery": true,
+  "globalProxyOrCredentialsChanged": false,
+  "scopeReviewAcceptedOnly": true,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "P1P2P3P4Accepted": false,
+  "newPrepareStarted": false,
+  "newRunConsumed": false,
+  "evidenceRoot": ".omx/artifacts/w3-closure-scope-20261115"
+}

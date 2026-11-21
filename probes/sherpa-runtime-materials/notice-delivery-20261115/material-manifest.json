@@ -1,0 +1,38 @@
+{
+  "files": {
+    "P3-INTEGRATION-BRIEF.md": {
+      "bytes": 4508,
+      "sha256": "cdceefab96fe80e2842340cb278bcee188fbbb59276f374f99129bd648af72ec"
+    },
+    "README.md": {
+      "bytes": 2061,
+      "sha256": "dfb7180d73340a62695b49416f6bc89f5b310c8aa9c0b032c919c1ba6baf87a4"
+    },
+    "archive-comparison.json": {
+      "bytes": 13471,
+      "sha256": "50dd2633cd44733ac6f90562d505904c1b0abed8bc984752db9b0f31ebd461ce"
+    },
+    "artifact-notice-observations.json": {
+      "bytes": 11018,
+      "sha256": "d9fb404bd703429ad0b1d00afd83411344e26f85e05fef8cf54e334a14601f20"
+    },
+    "inspection-receipt.json": {
+      "bytes": 1110,
+      "sha256": "9921b990bac382c4bbb52e9a2185a55363fc4e1e139ee5db19d28d5ff5d97d70"
+    },
+    "inspection-source.py.txt": {
+      "bytes": 8963,
+      "sha256": "ae0b5e1f6801887806114f91d65be8f1113b0f0485e191700cbb3963969a9e93"
+    },
+    "reference-texts.json": {
+      "bytes": 23652,
+      "sha256": "48384f3785613341f490c02c65ac37ccbc052ca8c135bb28a647b4bc18c2cd7a"
+    },
+    "sherpa-and-consumer-members.json": {
+      "bytes": 94595,
+      "sha256": "b07a4ab3a825032113a1983f7d335219dbcbdec4ea0a7ade22d6b905ade6b1d9"
+    }
+  },
+  "fileCountExcludingThisManifest": 8,
+  "scope": "bounded inspection of retained local SDK/runtime/library artifacts; no production integration or complete compliance acceptance"
+}

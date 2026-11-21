@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "fileCount": 5,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 873,
+      "sha256": "1d72fef5df09f2d58ccebf74bd7d6165247acd67dcc07727b93f972b851629a4"
+    },
+    {
+      "path": "hy3-delivery-receipts.json",
+      "bytes": 6070,
+      "sha256": "2b8a8c4be3fcf2ecf26d0653841ed06f98889c6fb8320ac5dcc5138464ecbea4"
+    },
+    {
+      "path": "parent-acceptance.json",
+      "bytes": 47434,
+      "sha256": "6016a737843127dd07f1353a5f684dcfae35b731544981ed8c5746d716d6b88b"
+    },
+    {
+      "path": "recovery-overlay.json",
+      "bytes": 21375,
+      "sha256": "7a435b1bb592f13d7a53210e3d1a980a258e2dfe09cff8e30260ef3e40d47201"
+    },
+    {
+      "path": "runtime-patch-classification.json",
+      "bytes": 3207,
+      "sha256": "7cc46ed62e53835d0bff163646410679b3f74a1beb31b71c17b4251ec7216afd"
+    }
+  ],
+  "manifestExcludesItself": true
+}

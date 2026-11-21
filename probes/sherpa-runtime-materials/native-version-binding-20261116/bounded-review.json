@@ -1,0 +1,11 @@
+{
+  "verdict": "accept_bounded_increment",
+  "findings": [],
+  "acceptedScope": "Accept only the supplied stdlib-only static decoder increment for the exact three SherpaOnnxGetVersionStr/SherpaOnnxGetGitSha1/SherpaOnnxGetGitDate dynamic C-API symbols on the four fixed little-endian ET_DYN ABI members (AArch64, ARM Thumb, i386, x86-64), using exact narrow return-sequence decoding and file-backed PT_LOAD VA mapping.",
+  "limitations": [
+    "Review is based only on supplied source and receipts; no tools, execution, builds, device actions, or independent binary re-verification were performed.",
+    "Scope excludes generic ELF validation, full disassembly/emulation, runtime/signing checks, APK/JNI/CXX/ORT completeness, and arbitrary instruction support; unsupported encodings must reject.",
+    "Version/date/SHA strings can be forged and only support the separately fixed version.cc and CI log comparison; they do not prove complete source/build identity or production/distribution properties.",
+    "Unit status remains partial as supplied: the signed ADRP fixture filesz/memsz repair and ADD-shift test-label repair are tracked test-only items; final suite pass is not claimed here."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "sourceCommit": "f084bd0",
+  "marker": "<!-- w3-terminal-source-adapter-20261113 -->",
+  "issues": {
+    "gh": {
+      "id": 6839306309,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6839306309",
+      "sha256": "16ee0aa608433767cc4944c0f3d7c21125b3d6d04dd6a5e6be6735f9c0082fb2",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44038,
+      "url": null,
+      "sha256": "d8147961a0847dbb440eeeed21fa912c4b0c8ab8233ad55326670cc4b53152b4",
+      "readbackExact": true
+    }
+  },
+  "gitlabWiki": {
+    "slug": "W3\u8bed\u97f3\u9a8c\u6536\u4e0e\u540e\u7eed\u6539\u8fdb",
+    "sha256": "63dc95235a11c3af661b3e527ccd5c764a8847f400f02b2ad2578daed0bbd8dd",
+    "readbackExact": true
+  },
+  "githubWiki": {
+    "commit": "0056ffbcc88872d2c6e37a877bac4cc1e5a54e35",
+    "sha256": "63dc95235a11c3af661b3e527ccd5c764a8847f400f02b2ad2578daed0bbd8dd",
+    "readbackExact": true
+  },
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "R4R5Accepted": false
+}

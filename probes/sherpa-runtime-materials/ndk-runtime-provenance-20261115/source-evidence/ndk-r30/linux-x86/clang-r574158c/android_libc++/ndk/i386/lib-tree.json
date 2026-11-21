@@ -1,0 +1,30 @@
+)]}'
+{
+  "id": "29e063c8005298c925f6e3160bdac298fb8fb193",
+  "entries": [
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "6baeeb7d13ba3b7728778145fb8c40f949630d55",
+      "name": "libc++_shared.so"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "69397676c1754cbdf944582aad774e381431c313",
+      "name": "libc++_static.a"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "404cb8fd4c785811f58f939f1c16159b0150c9a8",
+      "name": "libc++abi.a"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "d90b828d70b9e8a224e9c30a5a80cebd62739d5a",
+      "name": "libc++experimental.a"
+    }
+  ]
+}

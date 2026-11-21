@@ -1,0 +1,26 @@
+{
+  "arm64-v8a": [
+    {
+      "line": 857,
+      "text": "2026-09-04T15:56:23.3300358Z -- Found Patch: /usr/bin/patch"
+    }
+  ],
+  "armeabi-v7a": [
+    {
+      "line": 857,
+      "text": "2026-09-04T15:55:58.5117128Z -- Found Patch: /usr/bin/patch"
+    }
+  ],
+  "x86": [
+    {
+      "line": 853,
+      "text": "2026-09-04T15:56:10.1159252Z -- Found Patch: /usr/bin/patch"
+    }
+  ],
+  "x86_64": [
+    {
+      "line": 853,
+      "text": "2026-09-04T15:56:27.1177407Z -- Found Patch: /usr/bin/patch"
+    }
+  ]
+}

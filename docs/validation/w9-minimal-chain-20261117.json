@@ -1,0 +1,78 @@
+{
+  "task": "W9-0 minimal file voice effects",
+  "status": "prototype-feasibility-accepted-by-primary",
+  "releaseReady": false,
+  "contractSha256": "87f890278a07a457d656970a16ca3001ef034cd05e9001b655eb2b84779b86d2",
+  "originalFourSurfaceFileChecks": [
+    {
+      "file": "apple-file-acceptance.json",
+      "sha256": "c970879851fa050c4c334e5d8b6b1ae7113adf9a51aa3141050be1ac2d9f2d5a",
+      "executionSurface": "macOS AVAudioEngine",
+      "passed": 74
+    },
+    {
+      "file": "android-file-acceptance.json",
+      "sha256": "f350320a27402aebd09096275f8126cc3343a8534659b2754634d9aa26c59fe4",
+      "executionSurface": "JVM",
+      "passed": 74
+    },
+    {
+      "file": "android-emulator-file-acceptance.json",
+      "sha256": "40bb84cfc93059b3d1830c7770274023b6760c04787d80138923d7ebbd8a52c0",
+      "executionSurface": "Android API37 arm64 ART shell",
+      "passed": 74
+    },
+    {
+      "file": "ios-simulator-file-acceptance.json",
+      "sha256": "70a0297bdf6b2b144edfc91d5e2088cfff34bec8f0100b6904de7381079aa9ea",
+      "executionSurface": "iOS27.2 simulator",
+      "passed": 74
+    }
+  ],
+  "originalFileChecksTotal": 296,
+  "preCommitHostRecheck": [
+    {
+      "receipt": "apple-formatted-file-acceptance.json",
+      "passed": 74,
+      "sha256": "d2d55235f778db2dccebc441ed51a977bd7c3575246227d488f5f4b2b5457459"
+    },
+    {
+      "receipt": "android-corrected-file-acceptance.json",
+      "passed": 74,
+      "sha256": "c3353921648ef4b9119ed6b1c378086d2bda01d545d8dadac7adbcfb4054c63d"
+    }
+  ],
+  "preCommitHostChecksTotal": 148,
+  "sourceSha256": {
+    "probes/voice-effects-feasibility/README.md": "a54e11174c68b559bd5128cc2013ac8dca7564b54232d7627b37beb75ae4bf83",
+    "probes/voice-effects-feasibility/apple/AppleProbe.swift": "23ba6772a9ca287d8cc01295e498e8813a1ebb9bd7300f620863522ad629d447",
+    "probes/voice-effects-feasibility/verification/check_files.py": "a6a4333040d5a41ce72952db6125926f53d51ecbd6ffbc60621fc8660f5ccfbc",
+    "probes/voice-effects-feasibility/verification/ProbeChecks.kt": "8208b79f74ba89acab1ba727da583490b13278f5d7dc8199d5dc734216845c83",
+    "probes/voice-effects-feasibility/verification/check_signals.py": "135f9271916b2e3238149e9bd72307ecaa37cf6ea85fc7deefe7e9e01b568fa2",
+    "probes/voice-effects-feasibility/android/WaveProbe.kt": "d515eec4b56bdd0eea28a886a693c8588b0f228fb94bc25416441740d94889ae",
+    "probes/voice-effects-feasibility/android/PitchCore.kt": "31e74b2b536b8108a99e98c6166e826c5edb3ace8c95bf9a02c0cc74a8c55c90"
+  },
+  "normalization": {
+    "file": "probes/voice-effects-feasibility/apple/AppleProbe.swift",
+    "onlyTrailingHorizontalWhitespace": true,
+    "tokensUnchanged": true,
+    "beforeBytes": 5935,
+    "afterBytes": 5823,
+    "beforeSha256": "d2bd542ead8a287e3966bdb0ba0d4dc93cd0b4a7e942d2aa2c74d0025e2a6b02",
+    "afterSha256": "23ba6772a9ca287d8cc01295e498e8813a1ebb9bd7300f620863522ad629d447"
+  },
+  "launchCommandCorrection": {
+    "initial": "WaveProbeKt",
+    "actual": "WaveProbe",
+    "verifiedBy": "source object WaveProbe @JvmStatic main and compiled WaveProbe.class",
+    "sourceChanged": false,
+    "firstFailureRetained": "android-file-acceptance.json"
+  },
+  "limits": [
+    "SDK lifecycle and Demo integration pending",
+    "physical devices and subjective quality pending",
+    "final independent review failed 429; no conclusion or retry",
+    "D8 Kotlin metadata compatibility warnings retained; release tooling unverified"
+  ],
+  "rawEvidence": ".omx/artifacts/w9-submit-20261117T080139Z"
+}

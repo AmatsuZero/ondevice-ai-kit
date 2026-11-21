@@ -1,0 +1,23 @@
+{
+  "verdict": "accept",
+  "findings": [
+    "All four ABI blocks (arm64-v8a, armeabi-v7a, x86, x86_64) report sourceCommit '33ca9628233dc8f002435e868d4c2e9f82766ca1', and each sourceCheckout excerpt (line 370) prints that identical hash; differing checkout timestamps do not alter commit identity.",
+    "Per-ABI cmakeFlags plus both the --build_java command and the cmake invocation confirm, for every ABI: ANDROID_PLATFORM=android-27, onnxruntime_USE_NNAPI_BUILTIN=ON, onnxruntime_ENABLE_LTO=ON, onnxruntime_USE_MIMALLOC=OFF.",
+    "Each ABI's 'SHA256 digest of uploaded artifact zip is ...' equals its 'SHA256 digest of downloaded artifact is ...' in collectDownload, and uploadDownloadDigestEqual is true for all four; top-level allFourArtifactUploadDownloadDigestEqual=true corroborates.",
+    "The workflow's own executedWorkflowCommit (bb069649de9edc4689b2c5f9609e5499ae0bee9d) differs from the ORT build source commit (33ca962...). Per guidance we use actual execution/log values; the bounded claim concerns the ORT build source, which is consistent across all four ABIs.",
+    "cmakeCommand also shows onnxruntime_USE_KLEIDIAI=ON and onnxruntime_USE_SVE=ON. Per guidance a CMake option alone does not prove CPU execution; these are outside the bounded claims and are not asserted here."
+  ],
+  "acceptedClaims": [
+    "All four ABI logs explicitly show the same ORT source commit (33ca9628233dc8f002435e868d4c2e9f82766ca1).",
+    "All four ABI logs explicitly show API27 / NNAPI ON / LTO ON / mimalloc OFF.",
+    "For each ABI, the uploaded artifact ZIP digest equals collect's corresponding download digest."
+  ],
+  "limits": [
+    "Verified only the per-ABI build-artifact ZIP digest; the published combined ZIP is a different container (artifactZIPDigestIsNotPublishedZIPDigest=true) and was not assessed.",
+    "No full build-configuration review performed (fullBuildConfigurationReviewed=false); only the four selected flags, source commit, and ZIP digests were checked.",
+    "No source-to-AAR provenance or final recursive static composition verified (sourceToAarProvenanceVerified=false, finalRecursiveStaticCompositionVerified=false); logs show configuration and digests, not binary content attestation.",
+    "SVE/KleidiAI appear only as CMake options; actual on-CPU execution is neither claimed nor evidenced by these excerpts.",
+    "No production/release notices accepted and W3 closure not complete (productionNoticesOrReleaseAccepted=false, W3Complete=false); scope is limited to the three bounded claims.",
+    "Initial gh log retrieval exited 1 due to blocked terminal escapes, not remote failure; raw corrected logs were used and this review relied solely on the supplied excerpts."
+  ]
+}

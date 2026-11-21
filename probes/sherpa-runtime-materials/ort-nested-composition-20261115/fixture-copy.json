@@ -1,0 +1,17 @@
+[
+  {
+    "source": "probes/sherpa-runtime-materials/jvm-notice-integration-20261115/apk-fixture/build.gradle.kts",
+    "destination": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ort-nested-composition-20261115/apk-consumer/build.gradle.kts",
+    "sha256": "5d4dbce01b4d4f2de7c31dacb47e7f66fa598733bf93f5427164ed2794d99c8d"
+  },
+  {
+    "source": "probes/sherpa-runtime-materials/jvm-notice-integration-20261115/apk-fixture/settings.gradle.kts",
+    "destination": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ort-nested-composition-20261115/apk-consumer/settings.gradle.kts",
+    "sha256": "a5d640c16c8c9a0ee27f8487aa5bfc31b158f4b5e3e02c11abc0b3c47efd0f12"
+  },
+  {
+    "source": "probes/sherpa-runtime-materials/jvm-notice-integration-20261115/apk-fixture/src/main/AndroidManifest.xml",
+    "destination": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ort-nested-composition-20261115/apk-consumer/src/main/AndroidManifest.xml",
+    "sha256": "7d3661814175e00d4cd389edb7f8e189a1cc34764c4895459c71d991a16b94ec"
+  }
+]

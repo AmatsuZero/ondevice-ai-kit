@@ -1,0 +1,286 @@
+# P6 语音后端调研与探针
+
+更新时间：2026-10-17。本文记录后端边界、探针与逐步接入的 SDK 模块；各节分别标明代码、分发和真机证据，不把第三方服务凭据、网络可用性或商业许可假设成 SDK 已交付。
+
+## 2026-11-04 TECNO 授权资源请求与独立 AAR 消费
+
+用户已明确允许请求系统下载 en-US 资源；本次不录音。operator-only
+`asr-download` 分支移到 Activity 启动前，避免仅下载时打开 Demo 页面。
+组合 test APK 构建与 `lintDebug` 通过，668 tasks 中18项执行；冻结 test APK
+SHA256 `a679958ad7a35ddfe8ccd6d2cc217b888dd8b708a664bd717d043f2beda3ee84`。
+
+TECNO KM9/API35 的服务无法监听下载事件；既有 operator-only fallback 调用
+void `triggerModelDownload` 后返回 `download=requested-without-events-not-ready`、
+`status=unverified`。这只证明发起请求，不能证明实际排队、下载或安装。
+生产 SDK 继续只用 API34 可观察下载，不采用该 fallback。后置独立查询仍是
+installed/pending/supported 三份列表均空、**NOT_REPORTED**，recognizer 已销毁；
+未调用识别、未请求录音权限、未启动 Activity。不能据此补造新的识别失败。
+
+系统 overlay 配置的 on-device service 为
+`com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSpeechRecognitionService`。
+当时 `dumpsys connectivity` 返回 **`Active default network: none`**，Wi-Fi 原已开启。
+标准语音设置中另一个包 `com.google.android.googlequicksearchbox` 显示 English (US)
+“预装”，不能用它证明上述 on-device service 的资源可用。未点击该页面下载、
+接受条款或更改网络/默认服务设置，已返回 HOME。已询问可用的已保存 Wi-Fi 名称或
+网络恢复信息，等待输入；未将无回执请求当活跃任务轮询。
+
+普通 APK SHA256 `405d64e1bf67d1879ff96db386282066e7cda612a2b77134377e070feec082c0`
+全程不变；原 test APK `7b9e47ce…a621d` 和 `IdentityModelInstrumentation` runner 已恢复。
+相机/麦克风权限原已 granted，前后不变；最后回读 Awake。首次恢复后 SHA 采集 exit1
+原因未明，后续仅重试只读采集成功，未重复安装/下载。ignored
+`artifacts/verification/android-asr-download-20261104/verify.py` **34/34**，
+含实际请求、恢复、网络状态、九项保护及生产 MLX lock；资源就绪仍 **unverified**。
+
+另将资源查询/显式下载入口加入 `examples/android-speech` 原生消费者。仅发布到新的
+ignored worktree-local Maven 目录 `artifacts/verification/android-asr-published-resources-20261104/m2`，
+没有写全局 Maven 仓库或远端。`usePublishedSdk=true` 的 systemAsr/contract
+Debug/Release 四个 AAR 与两项 Debug lint 通过，**120/120 tasks 实际执行**。
+实际依赖解析证明 systemAsr 只消费该仓库的 sdk-core/speech/backend-system-asr，
+contract 只消费 sdk-core/speech；没有 project dependency 或第三方模型 runtime。
+两个 ASR AAR 字节码均包含新资源方法及 `AndroidAsrResources` 引用。
+同目录 `verify.py` **72/72**，绑定28份源输入、9份发布文件、4个消费者 AAR及保护文件。
+这只验证本地发布产物消费；未运行消费者下载/录音，未重跑 SDK 单测。
+
+F05 仍缺联网后资源安装证明与真实转写。旧287项源码绑定属于 f946970 的历史候选，
+本次 runner 改动后不再宣称旧255份快照与当前工作树全部相同。独立复审429无结论，
+未视为批准；基础10/12、P4/P11/发布 open/not-ready 保持。
+
+## 2026-11-04 Android SDK/Demo 语言资源恢复入口
+
+F05 新增生产 `AndroidAsrResources.check(locale)` 与显式
+`download(locale, onProgress)`，保留现有系统 on-device 技术路线及 minSdk26。
+查询 API33+；下载采用 API34+ 可观察回调，不使用无终态回执的 API33 void
+overload。精确语言列表匹配区分 INSTALLED/PENDING/DOWNLOADABLE/NOT_REPORTED；
+系统错误保留 code，不把空列表、排队或下载进度当安装完成。每次操作在 Main
+拥有/销毁自己的 recognizer；取消是停止监控，不保证取消系统下载。
+详见[SDK 使用](../../android/backend-system-asr/README.md)与
+[设计](../superpowers/specs/2026-11-04-android-asr-resources-design.md)。
+
+Demo 增加当前 locale 的检查、匹配 DOWNLOADABLE 后的显式下载确认及状态显示。
+页面进入/查询不下载、不申请录音权限；资源操作与麦克风 admission 互斥，后台、
+退出取消监控，关闭等待释放。可选 common provider 保持 Apple 原 host 协议不变。
+
+本轮实际执行 ASR **13/13**（新增6）、组合 Demo **62/62**、默认 Demo **54/54**
+（新增6）、shared iOS simulator **80/80**；共享 iOS arm64 compile、组合
+APK/test APK、ASR Release AAR、双模块 lint 通过。最终 combined build 中 SDK/Demo
+测试实际执行，shared 测试/compile 是本轮前次执行后的 up-to-date；不称再次执行。
+ASR lint **0 errors/5 warnings**，保留版本/注解建议。最初缺失API的编译RED、
+locale异常类型失败、快速关闭 busy 未释放的 assertion RED、动态版本条件 lint
+失败均保留，修复后通过，不以成功日志覆盖失败。
+
+ignored `artifacts/verification/android-asr-resources-20261104/` 冻结255份源输入、
+APK、JUnit、构建日志与 UI/设备回执。组合 APK SHA256
+`644bbde40d9904fe8632ffea7e0781df00683c257b4489e53abbb8fcea36df30`，
+基于 e6e7880 的本轮精确源码快照（BuildConfig 为 working-tree），仅 install-r
+更新已有 MainFlow/API36，旧 bd89…16bd7 APK保留可回退，未清数据或更换真机包。
+普通语音页面首次显示“尚未检查”，实际点击后显示“此设备没有可用的本机识别服务”，
+不提供下载按钮；PID6469，新包设备SHA匹配。相机/录音权限前后均denied，
+未点击麦克风/下载、未操作真机或LM专用模拟器；新包的LM/SR/Identity真实任务未重跑。
+`verify.py` fresh **287/287**，含255源码/9保护/生产MLX lock/包/测试/UI状态。
+
+**开放边界**：有服务设备的下载确认/回调/UI实际安装及后续真实转写未验；
+本轮模拟器只有 unsupported-service 路径，不能替代此前 TECNO 的 NOT_REPORTED
+结果，也不关闭资源输入缺口、F05/P11/发布。PAD校准数据与F09维护路线问题保持待答复。
+独立有界代码复审请求返回429、无结论；作者另行核对本轮diff/回调生命周期与
+SDK AAR class目录，未发现须立即修正的问题，不冒充独立批准或完整分支审查。
+
+## 2026-11-04 Android 离线资源只读复核
+
+新增独立 `AsrAssetStatusInstrumentation`，仅调用 API33 的
+`checkRecognitionSupport(en-US)`；不启动 Activity、不申请权限、不调用
+`startListening` 或下载接口。构建和 `lintDebug` 通过，550 tasks 中9项执行，
+其余 up-to-date；不是重新执行全部语音测试。
+
+TECNO KM9/API35 实际回调 `status=observed`，installed/pending/supported
+on-device language 列表均空，英语三个标志均 false，状态为 **NOT_REPORTED**。
+这说明本次服务元数据**不能确认资源就绪**，不能据此断言新的转写失败，或将
+历史错误13冒充本轮结果。`recognition=not-run`；没有录音、登录或下载。
+
+证据在 ignored `artifacts/verification/android-asr-assets-20261104/`：
+test APK SHA-256 `8a34a3c49ba73030137261ab86eb38ccbdc9674462bee30ad5c00668d70e9263`，
+与实际安装 hash 相符；源码、回调 Bundle、构建/lint 和恢复证据已绑定。
+普通 Demo APK hash 不变，原 test APK 与 runner 已恢复，设备回读 Asleep，
+未解锁；九项保护文件不变。F05 真实转写、取消/重入与离线质量仍未验。
+
+复跑仅需离线构建 `:demo:androidApp:assembleDebugAndroidTest`
+并指定 `-PodaiTestRunner=io.ondeviceai.demo.AsrAssetStatusInstrumentation`，
+安装 **test APK** 后执行
+`adb -s <serial> shell am instrument -w io.ondeviceai.demo.test/io.ondeviceai.demo.AsrAssetStatusInstrumentation`。
+先备份并核验原 test APK，终态后恢复；不需要覆盖普通 App 或解锁。
+资源查询返回 installed 也只代表元数据，仍须另外获准后执行真实音频验证。
+
+## 统一接口边界
+
+上层使用能力级选择值：`Default` 或 `Explicit(backendId)`。短任务在调用时选择；流式/长任务在会话创建时固定。显式选择不可用时返回结构化错误，不静默回退到另一个后端。结果和 benchmark 必须记录实际 `backendId`、网络/离线属性和音频格式。
+
+建议的最小能力面：
+
+- `SpeechRecognizer.start(request, backend: BackendSelection)`：事件包含 partial/final、错误、取消和实际后端。
+- `SpeechSynthesizer.speak(request, backend: BackendSelection)`：返回可取消的任务句柄；音频输出通过平台音频会话/播放器，不让 SDK 偷改宿主全局音频路由。
+- `SpeechCapabilities.list()`：报告 `backendId`、语言、是否联网、是否需要凭据、最低系统和安装模块。
+
+## 候选后端
+
+| 能力 | 后端 | 平台/提供形式 | 离线与凭据 | 选择结论 |
+| --- | --- | --- | --- | --- |
+| iOS ASR | `apple.speech.recognizer` | Speech framework `SFSpeechRecognizer` | 是否支持本机识别按 locale/设备查询；权限和语音资源不可预设 | 基础后端候选，需 iOS 真机权限与离线探针 |
+| iOS 26+ ASR | `apple.speech.transcriber` | Speech framework `SpeechAnalyzer`/`SpeechTranscriber`，仅在新系统条件满足时启用 | 资源可用性、locale 与设备须运行时核验 | 增强模块候选，不抬高基础宿主最低系统 |
+| Android ASR | `android.speech.recognizer` | Android framework `SpeechRecognizer`，服务实现由设备提供 | on-device 可用性需按设备/系统查询；不承诺所有机型离线 | 基础候选，需真机权限与取消探针 |
+| iOS TTS | `apple.avspeech` | Apple AVFAudio `AVSpeechSynthesizer`，系统 API | 依赖系统语音资源；不需要服务凭据，是否可用由设备 voice 列表决定 | 默认后端；放入 core 能力接口，平台实现放在 Apple 模块 |
+| Android TTS | `android.text-to-speech` | Android framework `TextToSpeech`；具体引擎由设备提供 | 语言包和网络行为由引擎决定；不把某个厂商引擎当 SDK 依赖 | 默认后端；初始化、语言检查和 shutdown 必须受任务生命周期管理 |
+| Azure Speech TTS/ASR | `microsoft.azure.speech` | Microsoft Speech SDK：iOS/Android 原生包，也可通过 REST；包名/版本在实现任务中锁定 | 云端通常需要订阅 key/endpoint 或 token；网络失败、限流、区域和隐私必须显式暴露 | 可选插件；不进入默认依赖图，安装时单独启用 |
+| Web/自有 HTTP | `custom.http` | 宿主提供实现或适配器 | 由宿主负责凭据、网络和数据处理 | 仅保留扩展点，不在 P6 接入 |
+
+Microsoft 官方文档说明 Speech SDK 支持 Android、iOS 和 REST 路线；本项目暂不假设“微软 SDK”一定是离线包。实现前必须分别记录原生包的许可证、包体积、最低系统、初始化线程、音频格式、token 生命周期和网络错误映射：
+
+- <https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-sdk>
+- <https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-to-text>
+- <https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech>
+
+系统 API 的基线资料（具体可用性必须由目标设备验证）：
+
+- <https://developer.apple.com/documentation/avfaudio/avspeechsynthesizer>
+- <https://developer.apple.com/documentation/speech/sfspeechrecognizer>
+- <https://developer.apple.com/documentation/speech/speechanalyzer>
+- <https://developer.android.com/reference/android/speech/tts/TextToSpeech>
+- <https://developer.android.com/reference/android/speech/SpeechRecognizer>
+
+## ASR 可用性证据与状态
+
+官方 API 要求把“支持、已安装、当前可用”分开：
+
+- iOS 13+ `SFSpeechRecognizer.supportsOnDeviceRecognition` 只表示该识别器具备离线能力；只有确认它为 true 后，才设置 `SFSpeechRecognitionRequest.requiresOnDeviceRecognition = true`。同时需要语音权限，麦克风输入还需要麦克风权限。
+- iOS 26+ `SpeechTranscriber` 需要运行时检查 `isAvailable`、locale 支持和 `AssetInventory` 状态；必要时通过 `AssetInstallationRequest.downloadAndInstall()` 安装语言资产。已支持 locale 不等于资产已安装。
+- Android API 31+ 先调用 `SpeechRecognizer.isOnDeviceRecognitionAvailable(context)`，再创建 `createOnDeviceSpeechRecognizer(context)`；创建失败、模型下载和 `RECORD_AUDIO` 权限都必须变成结构化状态。实例结束必须 `destroy()`；普通 `SpeechRecognizer` 可能把音频发送到远端，不能当作离线后端。
+
+后端能力状态建议至少区分：`unavailable`、`requiresPermission`、`requiresAsset`、`ready`。官方资料：
+
+- <https://developer.apple.com/documentation/speech/sfspeechrecognizer/supportsondevicerecognition>
+- <https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest/requiresondevicerecognition>
+- <https://developer.apple.com/documentation/speech/assetinventory>
+- <https://developer.apple.com/documentation/speech/assetinstallationrequest>
+- <https://developer.android.com/reference/android/speech/SpeechRecognizer#isOnDeviceRecognitionAvailable(android.content.Context)>
+- <https://developer.android.com/reference/android/speech/SpeechRecognizer#createOnDeviceSpeechRecognizer(android.content.Context)>
+
+## 探针结果
+
+### 2026-10-30 F11 生产 SDK 文件 ASR 资源测量
+
+隔离 consumer 使用当前 `ODAIKitSpeech.SpeechRecognitionClient.recognize` → `ODAIKitAppleSpeech.AppleSpeechRecognizerBackend.recognize`，复用同一份固定合成 CAF（SHA-256=`ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`）。iPhone 16 Pro Max / iOS 27.0.1、PID=`32487`；预热和随后 5/5 次识别成功，实际 backend 均为 `apple.speech.recognizer`，归一化全文匹配，`client.close()` 返回。未使用麦克风或 Photos。
+
+原始报告 `artifacts/verification/f11-speech-asr-sdk-resources-20261030/device-report-final.json` SHA-256=`40d65c13c9ec7065ff639d51063e4508d186a004d38884689f1325074ecf6578`；五次耗时 p50/p95=`76.484/93.436 ms`，约 10 ms 间隔进程 RSS 采样峰值范围=`36,782,080–36,929,536 B`。bounded summary SHA-256=`2b436735c860cc278f28232b1eb2d0e40492c16b8ec4c8c9ca797e0f4a9b4e04`，来源清单 SHA-256=`8ae79f1efcc8f150fc58934739d2004054c86df29ecb3ecd8448b820278b469a`。
+
+这是生产 SDK 路径的固定文件单设备测量；与下方直连 Speech framework probe 是独立运行，不能将 p50 差值解释为 SDK 固有开销。自然语音 CER/WER、断网行为、真实内存峰值、GPU/energy 和最低系统仍未验证；采样 RSS 不能充当发布预算。
+
+### 2026-10-30 F11 文件 ASR 资源原始测量
+
+在 ignored 隔离 probe `io.ondeviceai.probe.f11speech` 中复用固定合成 CAF，先 warm-up，再连续五次 `SFSpeechURLRecognitionRequest` 本机识别。iPhone 16 Pro Max / iOS 27.0.1 的启动 PID=`32472` 与原始报告一致；输入 SHA-256=`ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`，`requiresOnDeviceRecognition=true`，未使用麦克风。warm-up 和五次测量都为 `taskCompleted=true`、全文归一化匹配。
+
+原始报告 `artifacts/verification/f11-speech-asr-resources-20261030/device-report-final.json` SHA-256=`81e5312e678bce19cf441933ef430db670f7e5df483a60cf291bec92dad632f2`；五次耗时 p50/p95=`75.010/76.434 ms`，约 10 ms 间隔 `mach_task_basic_info.resident_size` 采样 RSS 峰值范围=`36,831,232–36,945,920 B`。bounded summary SHA-256=`71e163cec6634e595c338025d2070a8c0baa63271e936b585c2ddb15ddcca6f3`。
+
+这是 Speech framework 固定文件探针数据，不是生产 SDK client 性能、自然语音 CER/WER、网络行为、真实峰值/GPU/energy 或最低系统验收。首轮和正式复跑的 RSS 基线不同，不能用作发布资源预算；取消/重入仍沿用 P6 独立真机证据。
+
+`tools/probes/native_tts_probe.sh` 是宿主机探针：使用 macOS 内置 `say` 生成临时 AIFF，再用 `afinfo` 读取音频格式，退出时删除文件。`tools/probes/apple_avspeech_probe.swift` 进一步直接编译 AVFoundation，枚举 180 个系统 voice 并完成 `AVSpeechSynthesizer` 短句合成。两者只验证 host/API 可探测性。`demo/androidApp/src/androidTest/.../TtsProbeInstrumentation.kt` 在 TECNO KM9 / Android 15 上作为 1 个可发现的 instrumentation test 初始化 `com.google.android.tts`，`en-US` 返回 `LANG_AVAILABLE`，467 voices，生成 129404 字节 WAV 后成功关闭并删除缓存文件；同次查询 `SpeechRecognizer.isOnDeviceRecognitionAvailable` 返回 `true`，只证明设备具备 on-device ASR 服务，不代表已授权或已完成转写；`connectedDebugAndroidTest` 报告 1/1 通过。
+
+2026-10-17 初版独立 `probes/ios-speech` 探针的历史结果如下（后续 ASR 文件实测见本文末节）。iPhone 16 Pro Max / iOS 27.0.1 已签名构建、安装和启动；原始 JSON 保存在忽略目录 `artifacts/P6IOSSpeech/device-runs/`。设备报告显示 `AVSpeechSynthesizer` 共 193 个 voice，选择 `en-US` 的 Samantha，短句回调 `didFinish`，TTS 状态 `success`。原始 JSON 的 `offline=true` 是旧版探针未经断网验证的推断，不能作为离线证据；当前源码已改为 `networkBehavior=unmeasured`，此版本已通过模拟器构建但尚未重跑真机。探针也未录制或审听音频，因此网络行为和主观质量仍未测。`SFSpeechRecognizer(en-US)` 报告 `supportsOnDeviceRecognition=true`、`isAvailable=true`，但授权状态是 `notDetermined`，`transcription=not-run`；这些字段只证明可用性查询，不证明 ASR 推理通过。
+
+执行：
+
+```sh
+sh tools/probes/native_tts_probe.sh Samantha "OnDevice AI Kit native speech probe"
+swiftc tools/probes/apple_avspeech_probe.swift -o /tmp/odai-apple-avspeech-probe && /tmp/odai-apple-avspeech-probe
+```
+
+P6 仍待完成：iOS 麦克风输入与音频 session，iOS 26+ SpeechTranscriber 资源实际状态，以及两端 TTS 的离线/质量验收。Android 与 iOS 系统 TTS 最小探针已通过；统一选择值和错误语义进入后续实现计划。Azure 作为可裁剪插件，待凭据、网络和包分发策略确定后单独实现与 benchmark。
+
+## 2026-10-17 统一 SDK 语音选择契约
+
+P6 增加了可裁剪的语音能力契约，但尚未接入具体系统/云端实现：
+
+- Apple：`ODAIKitSpeech.SpeechClient`，通过 `SpeechCapability.tts` 或 `.asr` 创建能力注册表；注册 `SpeechBackend` 后可用默认后端或 `SpeechBackendSelection.explicit(id)` 查询所选描述符。显式 ID 不存在或不可用时返回结构化错误，不会静默切换。
+- Android：`io.ondeviceai.speech.SpeechClient`，对应 `SpeechCapability.TTS` / `ASR` 与 `SpeechBackendSelection.Explicit(id)`，目前仅查询所选描述符；模块 `android:speech` 可独立依赖，未加入 Demo 默认依赖。
+- 描述符公开现有 `CapabilityAvailability` 的可用性、`offline` 与最低系统字段；尚未定义凭据/网络错误或音频任务接口。SDK 不修改宿主音频会话或路由。
+- Apple 契约测试 2/2 通过；Android `:android:speech:testDebugUnitTest --tests io.ondeviceai.speech.SpeechClientTest` 通过。当前 Fake 后端只验证选择和生命周期，不能替代系统 TTS/ASR 真机行为。
+
+后续系统后端应分别放入可选模块：`apple.avspeech`、`apple.speech.recognizer`、`android.text-to-speech` 和 `android.speech.recognizer`；Azure/Microsoft 适配器保持独立插件，不进入默认依赖图。
+
+## 2026-10-17 Apple 系统 TTS SDK 后端
+
+- 新增可选 SwiftPM 产品 `ODAIKitAppleSpeech`，实现 `AppleAVSpeechBackend`；默认依赖仍不链接 AVFoundation 语音实现。`SpeechSynthesisClient` 通过 `.default` / `.explicit(id)` 选择后端，显式选择不回退。
+- `AppleAVSpeechBackend` 查询已安装 voice、按 locale/voiceId 选择语音；单任务执行期间拒绝并发，取消调用 `stopSpeaking(.immediate)`，`close` 停止当前 utterance 并拒绝后续选择。
+- 主机与 iOS 通用设备构建通过。iPhone 16 Pro Max / iOS 27.0.1 实机通过 SDK 探针：`apple.avspeech`、193 voices、`en-US` Samantha、`status=success`；长文本取消报告 `cancellationStatus=cancelled`，关闭后调用报告 `afterCloseStatus=closed`。
+- 真实设备报告保存在被忽略的 `artifacts/verification/ios-speech-device-cancel-report.json`，不提交音频或设备用户数据。`networkBehavior=unmeasured`，因此不能据此宣称系统 voice 的离线网络行为。
+
+## 2026-10-17 Apple 文件 ASR SDK 后端
+
+- `ODAIKitSpeech` 公开 `SpeechRecognitionRequest`、最终结果、错误和严格的 `SpeechRecognitionClient`；调用方可用 `.default` 或 `.explicit(backendId)` 选择已安装后端，显式后端不可用时不会静默回退。
+- `ODAIKitAppleSpeech` 提供可选的 `apple.speech.recognizer` 后端。它只接受宿主持有的本地文件，绑定一个 canonical locale，在平台启动前检查文件存在、可读且不是目录；SDK 不请求语音/麦克风权限、不配置 audio session、不删除宿主文件。
+- 后端始终要求 `SFSpeechURLRecognitionRequest.requiresOnDeviceRecognition = true`，并在授权、recognizer availability、on-device 支持任一不满足时返回结构化不可用状态。取消/超时会先结束调用方任务，但平台 task/delegate lease 直到观察到 `.completed` 才释放；宿主用 `drain()` 后再替换或删除输入文件，`close()` 仍是永久关闭。
+- 注入式 fake bridge 覆盖授权与设备状态、强制 on-device、locale 绑定、文件校验、超时/取消/关闭、晚到回调、完成状态与 final 回调竞态、置信度聚合和 drain 后复用。Apple 语音测试 31/31、Swift 全套 58/58 通过；生成器临时工程回归 3/3 通过。
+- 分发工程已把 `AppleSpeechRecognizerBackend.swift` 和 `Speech.framework` 只加入 `ODAIKitAppleSpeech`，并提供 Core+Speech 与 Speech+AppleSpeech 的独立消费者类型探针。上述结果是本地编译/生命周期契约证据，不代表真机授权 UX、系统语音资源、真实转写质量或网络行为已验收。
+- 本轮 unsigned `SDKDistribution` iOS Simulator build 实际编译了新 ASR 文件；全新目录 `artifacts/P6/apple-file-asr/` 完成 device/simulator archive、六个 XCFramework 和 speech binary consumer 构建。只提供新 Core/Speech 搜索路径的契约消费者 typecheck 通过，12 个 device/simulator 框架的 `otool -L` 确认仅 AppleSpeech 直接依赖 `Speech.framework`。工具测试总计 44/44 通过。验证日志保存在该目录的 `verification/`；Xcode 仅报告无 AppIntents 依赖而跳过元数据提取的 warning，没有编译错误。
+- 实际 SDK 后端已在 iPhone 16 Pro Max / iOS 27.0.1 通过固定合成文件验证，源码绑定 `5fd0b2d9e5941c3df97f7953d47d1e491e0dca5a`：首次转写和同进程重入均与预期句子归一化匹配；取消前并发调用返回 busy，确认已进入活动任务，随后调用方取消、`drain()` 返回、输入 hash 不变，关闭后新请求被拒绝。宿主在 close 后删除自己的输入，SDK 不删除文件。单次 drain 约 16 ms，只是本次观测，不作为性能或完整内存释放结论。
+- 本轮 SDK 报告为忽略目录 `artifacts/P6/apple-file-asr-device-20261017/Reports/sdk-asr-file-B4E889D3-359B-4D93-B3D5-FB61C9C305DE.json`，SHA256 `67a541459c4ed9914e95e53e4cfbb260c43789238a1c6630acd6568bb42c5667`；固定输入 SHA256 `ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`。临时宿主仅放在忽略目录，测试后已恢复原探针 App，未修改 Demo 签名文件。
+- 最终独立架构审查为 `CLEAR`，无 Critical/Important 阻断；保留一个 LOW：极少见文件 stat/metadata 错误目前可能透出 CocoaError/NSError，后续补齐 `KitError.invalidInput` 映射。两次 code-reviewer 服务 429 未计为审查通过；最终结论来自可用的独立 architect 审查。
+- 本轮复用了既有语音授权，未测试授权弹窗 UX；麦克风、audio session、iOS26 SpeechTranscriber、iOS15 硬件、系统资源安装、自然语音 CER/WER 及网络抓包仍未测。`requiresOnDeviceRecognition=true` 是实现约束，报告 `networkBehavior=unmeasured`，不据此宣称断网或无网络流量验收。
+
+## 2026-10-17 Android 系统 TTS SDK 后端
+
+- 新增可选 Android 模块 `android:backend-system-tts`，实现 `AndroidTextToSpeechBackend`；模块不进入 Demo 默认运行依赖，Demo instrumentation 仅为验证显式加入。
+- 后端初始化 `TextToSpeech`，只选择已安装且 `isNetworkConnectionRequired=false` 的 voice；按 `locale`/可选 `voiceId` 选择，超过系统输入长度或缺少 voice 时返回结构化错误。`close` 调用 `stop()` + `shutdown()`，注册表关闭后拒绝新任务。
+- TECNO KM9 / Android 15(API 35) instrumentation **1/1 通过**：系统引擎 `com.google.android.tts`，`en-US` 可用，467 voices，原始文件 129404 bytes；通过 SDK 后端的 `sdkBackend=android.text-to-speech`、`sdkVoice=en-US-language`、`sdkStatus=success`，关闭后 `sdkAfterCloseStatus=closed`。
+- 后端新增主线程约束的 `TtsTaskGate`：取消在 `speak` 的 `finally` 中同步执行 `stop()` 并释放 admission，迟到的 `onDone/onStop/onError` 只能匹配原 utterance ID；`close` 对活动 utterance 只调用一次 `stop()`。JVM `TtsTaskGateTest` 覆盖取消后重新进入、迟到回调隔离、并发拒绝、重复取消、正常完成不调用 `stop()` 以及平台 `stop()` 异常时仍执行清理。
+- 取消设备验收已通过：TECNO KM9 / Android 15(API 35) 在取消长句后立即发起短句，阶段日志确认取消协程完成、后续请求成功，instrumentation **1/1 通过**；根因为取消后重复读取 `TextToSpeech.voices` 会阻塞，后端现于初始化时缓存 voice 列表。原先长句尝试的崩溃记录仍不计为通过。
+- Android typed facade 单元测试和 `android:backend-system-tts:assembleRelease` 通过。该模块没有引入 Azure/Microsoft SDK。
+
+## Android on-device ASR 可选后端
+
+本包沿用同一注册表，新增 `SpeechRecognitionRequest(locale)`、`SpeechRecognitionResult(backendId, transcript, confidence?)`、`SpeechRecognitionBackend` 与 `SpeechRecognitionClient`，与 TTS 请求/结果分别定义。首版为一次短句的麦克风输入，不承诺持续听写、partial 流、音频文件注入或语音模型安装。`android:backend-system-asr` 使用 `android.speech.recognizer` ID，保持 minSdk26，API31 以下只报告不可用；已注册但不可用或显式选择未知 ID 均不回退到其他引擎。最初探针阶段只在 androidTest 依赖后端；2026-10-20 Demo bridge 包已将系统 TTS/ASR 和 RECORD_AUDIO 加入实际 Demo host，原生 contract-only 消费者仍可裁剪。
+
+官方边界已按本机 Android API34 `api-versions.xml`、API37 public sources 及 [AOSP Android 13 固定源码](https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-13.0.0_r1/core/java/android/speech/SpeechRecognizer.java) 核对：
+
+- `createOnDeviceSpeechRecognizer` 与 `isOnDeviceRecognitionAvailable` 自 API31 提供。仅调用 on-device factory；不将普通 `createSpeechRecognizer` 加 `EXTRA_PREFER_OFFLINE` 的 hint 当作同等保证。
+- 全部 framework 方法在应用主线程调用，listener 先于 start 设置，取消/结束后必须 destroy。一个实例对应一次短句，晚到的旧 callback 不能完成下一次请求。
+- `RECORD_AUDIO` 由宿主声明并授权；查询不弹权限、不下载资源。服务存在不等于某语言模型已安装或真实转写成功。
+- API33 的 [EXTRA_AUDIO_SOURCE](https://android.googlesource.com/platform/frameworks/base/+/refs/tags/android-13.0.0_r1/core/java/android/speech/RecognizerIntent.java) 可提供 PFD/PCM，调用方负责关闭，但不支持的服务可改用麦克风。`checkRecognitionSupport` 的语言列表不证明音频注入支持，因此本包不把该路径加入 SDK 公共 DTO。
+
+2026-10-17 本地验证：`android:speech` 8 项 JVM 测试、ASR session 7 项测试通过，ASR Release AAR、`lintDebug`、Demo debug/androidTest APK 编译通过；现有 Android 验证脚本所列 JVM/lint/APK 任务及语音模块测试通过。lint 无 error，保留项目固定 coroutines 版本更新提示和私有 API31 实现类 `TargetApi` 建议两条 warning。独立审查修正了外部 deadline 被误转为 ASR 超时、选择后运行时不可用的错误分类，以及清理异常静默丢失；外部超时和 destroy 失败回归均已观察 RED→GREEN，busy 请求不会销毁当前任务。
+
+TECNO KM9 / Android 15（API35），debug 宿主已授权 `RECORD_AUDIO`。服务查询 `AVAILABLE`，实际 `en-US` 短句启动返回错误码 13（`ERROR_LANGUAGE_UNAVAILABLE`：语言支持但资源当前不可用）。Client 返回 `BackendUnavailable(reason=MISSING_ASSETS)`，探针报告 `probeStatus=unavailable`、`transcription=not-run`，取消/重入/活跃关闭未完成设备验收，不能报告 1/1 ASR 推理或生命周期通过。未触发下载、未调用网络 recognizer。网络行为未独立测量。
+
+Gradle connected 测试会卸载测试宿主；第二轮曾因麦克风授权丢失而跳过。最终以重新安装后 `pm grant` + `am instrument -w` 的直接探针为准，原始证据位于忽略目录 `artifacts/P6AndroidSpeech/asr-20261017/`。探针只将明确的运行时不可用分类标为 unavailable；其他异常仍为 fail。待语言资源可用后重跑取消、重入、close 和真实转写；API26–30 实机门禁与离线/质量验收仍待补。
+
+## 2026-10-17 P6 可裁剪分发验证
+
+- Apple 分发生成器现在幂等地产生六个 XCFramework：`ODAIKitCore`、`ODAIKitModelStore`、`ODAIKitFace`、`ODAIKitAppleVision`、`ODAIKitSpeech`、`ODAIKitAppleSpeech`。`artifacts/verification/p6-apple-package.log` 记录新目录 `artifacts/P6/current/apple` 的 archive 与 XCFramework 构建；重复运行生成器的 project/scheme SHA 未变化，已有输出目录再次打包会拒绝覆盖。
+- Apple speech consumer 只嵌入 Core/Speech/AppleSpeech，face consumer 只嵌入 Core/Face/AppleVision；`artifacts/verification/p6-apple-dependency-isolation.log` 的 `otool -L` 与 `ODAIKitSpeech.swiftinterface` imports 检查没有 KMP、Face 或 AppleSpeech 串入契约。两者均以 unsigned iOS Simulator application 构建成功。`examples/ios-speech-native/ContractConsumer.swift` 另外只使用 Core/Speech 二进制搜索路径完成 typecheck。
+- Android 发布坐标为 `io.ondeviceai:speech:0.1.0-SNAPSHOT`、`io.ondeviceai:backend-system-tts:0.1.0-SNAPSHOT`、`io.ondeviceai:backend-system-asr:0.1.0-SNAPSHOT`。`examples/android-speech` 的 `contract`、`systemTts`、`systemAsr` flavors 均以 `-PusePublishedSdk=true` 完成 debug/release 编译；依赖图分别只到 `speech/core`、`speech/core+backend-system-tts`、`speech/core+backend-system-asr`。日志副本在 `artifacts/verification/p6-android-speech-published-*.log`。
+- P6 回归：Apple speech tests 6 项（全部 Swift XCTest 共 33 项）、Android speech 8 项、system TTS 3 项、system ASR 7 项均为 0 failures；Android 测试任务复核命中 up-to-date 结果，不声称全部重新执行。三个 Android 模块及三个消费者 flavor lint 无 error。验证只覆盖本地编译/依赖裁剪，不声称新增设备运行时行为。
+
+SDK 源码基线为 `a97df90cdd49e7e567e4259d17d745da885f6225`；本包仅补分发工程/消费者/文档，未改语音算法或 API。二进制、日志、音频均留在忽略目录，没有进入 Git/LFS 或远端制品仓库。
+
+本包独立审查结论为 APPROVE，0 findings；复核了生成器幂等、目标依赖图、消费者清理与文档证据边界。实现提交 `58cc5a61ce1d4507efaf0ac3dcc4e2a9566eb8e3` 已同步 GitHub/极狐，脚本再次读取两端 ref 确认 SHA 相等。
+
+P6 仍保留这些边界：Android API35 ASR 的 `en-US` 资源缺失导致 `MISSING_ASSETS`，未完成真实转写/取消生命周期；iOS 麦克风 ASR 与 iOS 26 资源仍待补；两端 TTS 的断网行为与主观质量未测；Azure/Microsoft SDK 尚未加入；KMP 语音 Demo 仍待后续工作包。
+
+## 2026-10-19 Client 关闭并发回归
+
+已复现并修复两个公共生命周期缺陷：后端 availability 挂起期间关闭 Client，旧实现仍可返回选择结果并分发 TTS（Android ASR 也受影响）；第二个并发 close 在第一个底层 close 尚未释放时提前返回。修复后，挂起的选择恢复时重新检查关闭状态；Swift TTS 与文件 ASR 一样在 facade 层关闭 admission；双端所有 close 调用共享底层释放结果。Android 关闭状态具备跨线程可见性，清理不因发起者取消而中断。
+
+- 行为 RED：`/tmp/odai-speech-close-swift-red.log`，3 个用例失败；`/tmp/odai-speech-close-android-red.log`，4 个用例失败。Android 首次 JUnit 因方法非 void 未执行行为测试，修正测试签名后的四项失败才计作 RED。
+- GREEN：同名 `*-green.log`，Swift3/3、Android4/4；控制后端只用于挂起可用性/释放回调，断言实际 Client 返回错误、拒绝调用以及等待释放。
+- 完整 Apple 原生包：`swift test --disable-sandbox --package-path apple`，**374/374**（Identity313、Speech34、ModelStore13、Face9、Core5），日志 `/tmp/odai-speech-close-apple-all.log`。
+- Android：speech **12/12**、系统 TTS **3/3**、系统 ASR **7/7**，XML 失败/错误/跳过均为0；speech lintDebug 与三个语音 consumer flavor 构建通过。日志 `/tmp/odai-speech-close-android-full.log`、`/tmp/odai-speech-close-providers-consumer.log`。
+- 本次未改变后端选择/音频输入接口，没有新依赖或新真机结论；KMP 语音 Demo、麦克风/文件输入的双端差异、离线/质量与原有设备缺口继续保留。P10 最终独立审查仍待工具容量恢复，未以作者检查替代批准。
+
+## iOS ASR 文件探针工作包
+
+P6 继续补充固定合成音频的文件识别探针，操作与证据见 [iOS ASR 固定文件探针](ios-asr-file-probe.md)。它沿用 `apple.speech.recognizer` 的强制 on-device 边界，文件输入不采集麦克风，通过探针按钮或显式 `--run-asr` 启动参数运行。iPhone 16 Pro Max / iOS 27.0.1 首轮的 150ms 延迟取消未生效，保留为 incomplete；第二轮任务创建后立即取消，确认 `platformCancelled=true`、平台 task completed，以及同一进程后续转写成功，整体 `status=success`。输入 SHA 与冻结基线一致。文件探针不覆盖麦克风、音频 session 或 iOS 26 SpeechTranscriber。
+
+## 2026-10-20 KMP Speech Demo bridge
+
+Tasks 1–6 已实现：能力级 metadata 查询、严格 Default/Explicit 选择、双端 drain/close adapter、iOS opaque file token/lease、共享状态机和真实 host。Android Demo实际链接系统TTS/ASR并申请麦克风权限；iOS通过fresh独立工程链接AppleSpeech，不改旧项目。Swift Host使用弱转发防止Kotlin引用环；Android权限重试复用原系统prompt，factory失败保留稳定PLATFORM而非误报未链接。
+
+最新本地验证为Swift378项、iOS adapter/Host20项、Android Host5项、工具76项零失败，Android验证569tasks成功；七个XCFramework及原生Face/Speech/Identity/Maven消费者通过。真实Android Demo TTS完成、活动取消、重入、后台取消/前台不自动运行通过。ASR仍返回MISSING_ASSETS；用户批准的英语资源下载尝试未确认资源就绪，没有转向网络recognizer或采集真人音频。iOS语音入口/滚动通过；修正仅以 `isHittable` 判断部分可见 Compose accessibility 元素的假阳性后，真实 clean App 的文件 picker 打开/取消在 `speech-ui-fully-visible.xcresult` 中通过。后续画面定位与慢速稳定滚动证明旧焦点失败为自动化误判；原多行输入、Done、TTS完成/取消/重入/后台完整用例已通过（73.656秒）。文件ASR实际picker导入、取消保留、完成/活动取消/同输入重入/后台门禁均已通过；最终完整UI5/5、零跳过，141.919秒（asr-file-ui-full-suite.xcresult）。普通无分享包已恢复；新UI/Done追加独立审查仍因容量不足待恢复。
+
+Task7仍进行中，完整命令、失败证据、用户授权边界与下一入口见[语音Demo验证](speech-demo-bridge.md)。P6最低系统、iOS麦克风、Android真实转写、断网/自然质量及第三方后端不因此关闭。

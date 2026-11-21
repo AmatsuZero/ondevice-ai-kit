@@ -1,0 +1,52 @@
+--- .omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release/com/k2fsa/sherpa/onnx/AudioEvent.smali
++++ .omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/AudioEvent.smali
+@@ -278,29 +278,41 @@
+ 
+     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
++    move-result-object v0
++
+     const-string v1, ", index="
+ 
+     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
++    move-result-object v0
++
+     iget v1, p0, Lcom/k2fsa/sherpa/onnx/AudioEvent;->index:I
+ 
+     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+ 
++    move-result-object v0
++
+     const-string v1, ", prob="
+ 
+     invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+ 
++    move-result-object v0
++
+     iget p0, p0, Lcom/k2fsa/sherpa/onnx/AudioEvent;->prob:F
+ 
+     invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(F)Ljava/lang/StringBuilder;
+ 
+-    const/16 p0, 0x29
+-
+-    invoke-virtual {v0, p0}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+-
+-    invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+-
+     move-result-object p0
+ 
+-    return-object p0
+-.end method
++    const/16 v0, 0x29
++
++    invoke-virtual {p0, v0}, Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
++
++    move-result-object p0
++
++    invoke-virtual {p0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
++
++    move-result-object p0
++
++    return-object p0
++.end method

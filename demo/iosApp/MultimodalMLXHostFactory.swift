@@ -1,0 +1,32 @@
+import Foundation
+import ODAIKitAppleMLXVLM
+import ODAIKitModelStore
+
+@MainActor
+enum MultimodalMLXHostFactory {
+  static func make(documents: URL, source: URL? = nil, picker: MultimodalFilePicker) async throws
+    -> MultimodalHost
+  {
+    let modelSource = source ?? documents.appendingPathComponent("model")
+    guard modelSource.isFileURL else { throw ModelStoreError.invalidSource }
+    let accessed = modelSource.startAccessingSecurityScopedResource()
+    defer { if accessed { modelSource.stopAccessingSecurityScopedResource() } }
+    let os = ProcessInfo.processInfo.operatingSystemVersion
+    let manifest = try SmolVLM2Model.manifest()
+    let store = try ModelStore(
+      root: documents.appendingPathComponent("multimodal-model-store"),
+      compatibility: .init(
+        backendId: SmolVLM2Model.backendId, backendVersion: "1.0.0",
+        osVersion: "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)", architecture: "arm64"
+      ))
+    return try await MultimodalModelHostFactory.make(
+      modelStore: store, manifest: manifest,
+      source: modelSource,
+      inputDirectory: FileManager.default.temporaryDirectory.appendingPathComponent(
+        "odai-multimodal-input-" + UUID().uuidString),
+      videoInputDirectory: FileManager.default.temporaryDirectory.appendingPathComponent(
+        "odai-multimodal-video-" + UUID().uuidString),
+      videoPicker: { picker.presentVideo(reply: $0) },
+      picker: { picker.present(reply: $0) }, backend: { try MLXVLMBackend(lease: $0) })
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "verifiedAtUTC": "2026-11-15T16:34:06.341921+00:00",
+  "sourceBaseCommit": "5f9fb91e9ae5fe2dba373ba34f6af96554a47e75",
+  "codeAndTestsIntegratedExact": true,
+  "candidateCorrections": {
+    "firstCandidateRejected": true,
+    "firstUnitMethods": 7,
+    "firstErrors": 6,
+    "firstRealAbiPasses": 1,
+    "helperMainReplacements": 7,
+    "helperTestOnlyReplacements": 2,
+    "finalUnitMethods": 12,
+    "finalUnitFailures": 0,
+    "reviewSourceBytesUnchangedByTestOnlyFix": true
+  },
+  "realLibraries": [
+    {
+      "abi": "arm64-v8a",
+      "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+      "allThreeBindingsSame": true
+    },
+    {
+      "abi": "armeabi-v7a",
+      "sha256": "cb5d912ec19b4f76582047d082db63f304f3e584cc89130e393337f4cea6ebe7",
+      "allThreeBindingsSame": true
+    },
+    {
+      "abi": "x86",
+      "sha256": "e1e483cc4a09aaadf7f72c1d406c010bba05e3a05fc763a4536117508ab3f390",
+      "allThreeBindingsSame": true
+    },
+    {
+      "abi": "x86_64",
+      "sha256": "8285ecf2e6275374d4c8c5b46020cbb1de82db9bd6b6baad011fdc480cf10ba2",
+      "allThreeBindingsSame": true
+    }
+  ],
+  "literalBindingsMatched": 12,
+  "sameLengthInMemoryNegativeControls": 8,
+  "negativeBoundary": "four changed literal bytes decoded correctly then rejected by parent expected-source comparison; four altered RET opcodes rejected by decoder; no signed file/device mutations",
+  "reviewVerdict": "accept_bounded_increment",
+  "reviewFindings": [],
+  "reviewCoverage": "supplied exact source plus pre-testfix tests and receipts; two final test-only repairs independently executed by parent, not falsely attributed to reviewer",
+  "allFourHy3RequestsTerminal": true,
+  "allObservedToolUseEvents": 0,
+  "originalRetainedCILogLinesRechecked": 38,
+  "frozenFilesVerified": 161,
+  "protectedWorkingFilesPreservedBeforeSharedUpdates": 176,
+  "newBuilds": 0,
+  "newDeviceCalls": 0,
+  "modelOrRuntimeDownloads": 0,
+  "productionCodeOrNoticesChanged": false,
+  "wholeNativeSourceEquivalent": false,
+  "genericELFValidationClaimed": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "W3Complete": false,
+  "goalRemains": "active",
+  "diffCheck": {
+    "initialWholeDiffCheckExitCode": 2,
+    "rawEvidenceWarnings": 2,
+    "exactRawPath": "probes/sherpa-runtime-materials/native-version-binding-20261116/candidate-unit-tests.stderr",
+    "trailingWhitespaceLines": [
+      1,
+      10
+    ],
+    "rawBytes": 10565,
+    "rawSHA256": "3ee16055b0162bee0595675088f66aad04a7e1acecb0abc81da84c724beb9afd",
+    "sameAsOriginalFailedTestStderr": true,
+    "rawEvidenceFormatted": false,
+    "sourceDocsAndOtherEvidenceDiffCheckExitCode": 0,
+    "exclusionBoundary": "one original failed-unittest progress stderr file only; exact two trailing spaces retained",
+    "initialOutputPath": ".omx/artifacts/w3-native-version-20261116T002000/initial-diff-check.stdout"
+  }
+}

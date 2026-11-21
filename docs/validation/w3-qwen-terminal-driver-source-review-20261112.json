@@ -1,0 +1,90 @@
+{
+  "verdict": "accept",
+  "sourceSHA256": {
+    "probes/android-qwen-terminal/device_acceptance.py": "7b0511326856ec0680853ba9a34a2dda55cfda4282e7407b3f953edcf231aee5",
+    "probes/android-qwen-terminal/terminal_device_collect.py": "65e46aefeb9817c7cd1ef68aa6843d7525271ab440a115ac79c09cc5d16b8f72",
+    "probes/android-qwen-terminal/terminal_device_contract.py": "eb6cceb9ecfea5606e4054908a004d71f9d3aad801fa664a30712ddc3a7551dc",
+    "probes/android-qwen-terminal/terminal_device_lifecycle.py": "5b6bd1a91321a155898ce0b5414ea5395ed831d65da0357b2b0706251d20b89e",
+    "probes/android-qwen-terminal/terminal_device_policy.py": "9643bc2f50a30c9d531d4b208bd8b2f86de700d3c82a2741322f4ef6acb9650a",
+    "probes/android-qwen-terminal/terminal_device_prepare.py": "128a58746228961a3b89bab9ab8978c0df8939c59cee615f1c2ec58acf592072",
+    "probes/android-qwen-terminal/terminal_device_restore.py": "52ecffd03cc298a2394a481a06fd59139eeb411aed2be7e8e82977a6fb3cce9a",
+    "probes/android-qwen-terminal/terminal_source_adapter.py": "99e5a878f0099760460d4493e6cc9cd0c72b5b1e6fb77c1601285cfe77ee4fb5",
+    "probes/android-terminal-observation/adb_process_sampler.py": "d77d0068d00cffe904c9d42b29c5f186733c1682c74814242175d633064b932b",
+    "probes/android-terminal-observation/adb_terminal_ack_publisher.py": "027bb285d567edcf1784c407a369324e0c3d235ea041dd1b73b92cfc45283e57",
+    "probes/android-terminal-observation/adb_terminal_observation.py": "4dca5a93ce500bf9c81514fabca73939b54b5c829bb483f08de8edf504aea85a",
+    "probes/android-terminal-observation/adb_terminal_report_reader.py": "e184eaed9285e81be1a90e4505da0e280ca794dead66afaaa55ed3351bfa11e8",
+    "probes/android-terminal-observation/terminal_file_io.py": "2c9e885c85a0b0d6623b5285cd88075abd93ee8111c04088eb30ed82fc9304e4",
+    "probes/android-terminal-observation/terminal_observation_coordinator.py": "5fcb411735e2774b6078328e74bbc9cdf67c3aee9e6d2a1769182877d2a943dc",
+    "probes/android-terminal-observation/terminal_observer.py": "b86c9dda1a3ea45bcbd55cd207ce40bc74a2c3e37af83741938027c6971ce9ac",
+    "probes/android-terminal-observation/terminal_polling.py": "19df5a6a4a5f7a09926ba31af5d2862b2cd011f1b280945ee69a694e47cff8c9"
+  },
+  "findings": [
+    {
+      "severity": "low",
+      "file": "probes/android-qwen-terminal/terminal_device_lifecycle.py",
+      "line": 1,
+      "evidence": "run_diagnostic nests `import json as _json`, `import hashlib as _hashlib`, `import terminal_polling as _tp`, `import terminal_file_io as _tf` and parse_instrumentation_finish nests `import re`, even though json/hashlib/re and the modules are already imported at module top. Harmless (Python caches imports) but inconsistent with the module-level imports used elsewhere; not a correctness or contract defect.",
+      "recommendation": "Non-blocking: leave as-is or hoist redundant imports to module scope for clarity; no behavior change required."
+    },
+    {
+      "severity": "low",
+      "file": "probes/android-qwen-terminal/terminal_device_restore.py",
+      "line": 1,
+      "evidence": "_read_locals calls _expected_stage_children(ctx) which reads ctx['package']['files'] and ctx['models'], but _validate_bindings only asserts presence of call/text/identity/gate/ordinary/ordinary_models/installed_sha/verify_installed (not 'package'/'models'). In the current driver ctx always carries package/models, so no failure occurs; a missing key would surface as KeyError rather than the contract's ValueError style. Defensive robustness only.",
+      "recommendation": "Non-blocking: optionally assert 'package' and 'models' in _validate_bindings for clearer failure messaging; current dispatch path is safe."
+    }
+  ],
+  "limitations": [
+    "no real Android execution or new freeze verified; review is static read-only against the 16 supplied CURRENT modules",
+    "ctx confirmed as dict; _terminal_dispatch builds ctx from actual FILE-source locals and injects ns['digest']/ns['parse_kb'] (both defined in the pinned immutable FILE driver) and ctx['adb'] as the 5-element ['rtk','proxy',path,'-s',serial] list required by collect._load_local; default AdbTerminalAckPublisher runner is stdin-capable (input=stdin_bytes)",
+    "freeze guard: main() invokes verify_frozen_contract() at the start of every action process (each action is a separate invocation), and the 'run' path additionally wires before_transport=verify_frozen_contract into run_diagnostic before every transport/Popen; matches 'freeze before every transport' for the lifecycle",
+    "verified invariants present: durable prepare claims (device-before, ownership-stage-claimed/created, ownership-install-main/test-claimed, prepared with nativeCalls=0); identity/ordinary-model protection and ordinaryAPKHashes capture in restore; 240s total / 120s phase / 20s startup / 15s postACK bounds in _PollClock/observe_until_terminal/wait_for_startup/run_diagnostic proc.wait(timeout=15); no postACK poll/sample after publication; double-read + raw-byte sha256 in collect._read_reports and terminal_observer.acknowledgement; exact stop ownership in _stop_owned_alias (claim sha256 + installed hash check before force-stop); bounded collection/policy reads (head -c 21 / ctx['call'] 21-byte cap); independent single-use restore with unknown-children retention; BaseException primary retained with secondary notes in lifecycle/collect/policy/restore",
+    "old FILE/heap consumed runs are immutable and not replayed; Kotlin wrapper compilation, APK packaging, device transport and same-run device acceptance remain separate gates; host tests do not close W3/R4/R5"
+  ],
+  "reviewerOriginallyReportedSHA256": {
+    "probes/android-qwen-terminal/device_acceptance.py": "7b0511326856ec0680853ba9a34a2dda55cfda4282e7407b3f953edcf231aee5",
+    "probes/android-qwen-terminal/terminal_device_collect.py": "65e46aefeb9817c7cd1ef68aa6843d7525271ab440a115ac79c09cc5d16b8f72",
+    "probes/android-qwen-terminal/terminal_device_contract.py": "eb6cceb9ecfea5606e4054908a004d71f9d3aad801fa664a30712ddc3a7551dc",
+    "probes/android-qwen-terminal/terminal_device_lifecycle.py": "5b6bd1a91321a155898ce0b5414ea5395ed831d65da0357b2b0706251d20b89e",
+    "probes/android-qwen-terminal/terminal_device_policy.py": "9643bc2f50a30c9d531d4b208bd8b2f86de700d3c82a2741322f4ef6acb9650a",
+    "probes/android-qwen-terminal/terminal_device_prepare.py": "128a58746228961a3b89bab9ab8978c0df8939c59cee615f1c2ec58acf592072",
+    "probes/android-qwen-terminal/terminal_device_restore.py": "52ecffd03cc298a2394a481a06fd59139eeb411aed2be7e8e82977a6fb3cce9a",
+    "probes/android-qwen-terminal/terminal_source_adapter.py": "99e5a878f0099760460d4493e6cc9cd0c72b5b1e6fb77c1601285cfe77ee4fb5",
+    "probes/android-terminal-observation/adb_process_sampler.py": "d77d0068d00cffe904c9d42b29c5f186733c1682c74814242175d633064b932b",
+    "probes/android-terminal-observation/adb_terminal_ack_publisher.py": "027bb285d567edcf1784c407a369324e0c3d235ea041dd1b73b92cfc45283e57",
+    "probes/android-terminal-observation/adb_terminal_observation.py": "4dca5a93ce500bf9c81514fabca73939b54b5c829bb483f08de8edf504aea85a",
+    "probes/android-terminal-observation/adb_terminal_report_reader.py": "184eaed9285e81be1a90e4505da0e280ca794dead66afaaa55ed3351bfa11e8",
+    "probes/android-terminal-observation/terminal_file_io.py": "2c9e885c85a0b0d6623b5285cd88075abd93ee8111c04088eb30ed82fc9304e4",
+    "probes/android-terminal-observation/terminal_observation_coordinator.py": "5fcb411735e2774b6078328e74bbc9cdf67c3aee9e6d2a1769182877d2a943dc",
+    "probes/android-terminal-observation/terminal_observer.py": "b86c9dda1a3ea45bcbd55cd207ce40bc74a2c3e37af83741938027c6971ce9ac",
+    "probes/android-terminal-observation/terminal_polling.py": "19df5a6a4a5f7a09926ba31af5d2862b2cd011f1b280945ee69a694e47cff8c9"
+  },
+  "receiptCorrection": {
+    "verdict": "accept",
+    "correction": {
+      "file": "probes/android-terminal-observation/adb_terminal_report_reader.py",
+      "reportedSHA256": "184eaed9285e81be1a90e4505da0e280ca794dead66afaaa55ed3351bfa11e8",
+      "correctSHA256": "e184eaed9285e81be1a90e4505da0e280ca794dead66afaaa55ed3351bfa11e8",
+      "reason": "Receipt transcription error only: the reader source SHA256 in the completed 16-module review was copied from the reader hash but dropped the leading 'e', yielding a 63-char value. The original supplied map, the actual unchanged reader source bytes, and the independent parent review all bind the correct hash as 'e184eaed9285e81be1a90e4505da0e280ca794dead66afaaa55ed3351bfa11e8' (64 hex chars). No source bytes changed; this is a correction of the review receipt, not a re-review."
+    },
+    "previousFullReviewRemainsAccepted": true,
+    "findings": [],
+    "limitations": [
+      "receipt transcription correction only; other15 source modules not re-reviewed in this narrow task; no device/freeze verification"
+    ]
+  },
+  "receiptCorrectionRawPath": ".omx/artifacts/w3-terminal-observation-20261112/driver-review-sha-correction/cbc-raw.json",
+  "receiptCorrectionRawSHA256": "317f545e1177c3a3d5d848e9ec3f4acca9fc4532eced53ae8882635deae5d6c4",
+  "reviewer": "CBC hy3",
+  "reviewMode": "independent supplied-context full16 Python source review",
+  "originalRawPath": ".omx/artifacts/w3-terminal-observation-20261112/driver-full-source-review/cbc-raw.json",
+  "originalRawSHA256": "b6389867c869fe31addf8f2c009f90c68323915dc304e1575478bdf8dede3e1a",
+  "deviceAcceptance": false,
+  "qualityAccepted": false,
+  "truePeakMeasured": false,
+  "parentAdjudication": {
+    "blockingFindings": 0,
+    "sourceChangedForLowFindings": false,
+    "decision": "Retain nonblocking observations. Keep shared outer clock enforcing original240s; no raw callback substitution. Demo foreground readback remains part of allRestored. No behavior changes."
+  }
+}

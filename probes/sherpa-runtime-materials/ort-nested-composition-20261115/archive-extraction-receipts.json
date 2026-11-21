@@ -1,0 +1,218 @@
+[
+  {
+    "component": "json",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/json.zip",
+    "archiveSHA256": "04022b05d806eb5ff73023c280b68697d12b93e1b7267a0b22a1a39ec7578069",
+    "archiveMember": "json-3.11.3/.reuse/dep5",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/json/.reuse/dep5",
+    "bytes": 830,
+    "sha256": "31134b925e554bafca51a1d51bd739bfca0e7184a9b12183b776254655c2a979"
+  },
+  {
+    "component": "json",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/json.zip",
+    "archiveSHA256": "04022b05d806eb5ff73023c280b68697d12b93e1b7267a0b22a1a39ec7578069",
+    "archiveMember": "json-3.11.3/LICENSES/Apache-2.0.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/json/LICENSES/Apache-2.0.txt",
+    "bytes": 10280,
+    "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+  },
+  {
+    "component": "json",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/json.zip",
+    "archiveSHA256": "04022b05d806eb5ff73023c280b68697d12b93e1b7267a0b22a1a39ec7578069",
+    "archiveMember": "json-3.11.3/LICENSES/BSD-3-Clause.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/json/LICENSES/BSD-3-Clause.txt",
+    "bytes": 1460,
+    "sha256": "5a93d5831e1297ab10fe643e1a631e83be392896da14ee2951285a79012df69d"
+  },
+  {
+    "component": "json",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/json.zip",
+    "archiveSHA256": "04022b05d806eb5ff73023c280b68697d12b93e1b7267a0b22a1a39ec7578069",
+    "archiveMember": "json-3.11.3/LICENSES/GPL-3.0-only.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/json/LICENSES/GPL-3.0-only.txt",
+    "bytes": 34670,
+    "sha256": "b6a8bf63ae2c95b0aa256ee774680d7bd18f21f457da75466f7610b3b16acc4e"
+  },
+  {
+    "component": "json",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/json.zip",
+    "archiveSHA256": "04022b05d806eb5ff73023c280b68697d12b93e1b7267a0b22a1a39ec7578069",
+    "archiveMember": "json-3.11.3/LICENSES/MIT.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/json/LICENSES/MIT.txt",
+    "bytes": 1078,
+    "sha256": "b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0"
+  },
+  {
+    "component": "json",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/json.zip",
+    "archiveSHA256": "04022b05d806eb5ff73023c280b68697d12b93e1b7267a0b22a1a39ec7578069",
+    "archiveMember": "json-3.11.3/docs/mkdocs/docs/home/license.md",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/json/docs/mkdocs/docs/home/license.md",
+    "bytes": 1984,
+    "sha256": "08c345dca1019879171c2c465410f7bee984bbfbdb177afd2d95bf9ff6267602"
+  },
+  {
+    "component": "mp11",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/mp11.zip",
+    "archiveSHA256": "81431bdc44c439a324e02c07ed067f8f556419fd86f2d8b486ff568df6aac899",
+    "archiveMember": "mp11-boost-1.82.0/README.md",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/mp11/README.md",
+    "bytes": 1017,
+    "sha256": "3308ce47301af513c12f048cc773e38788b274e312bea7634011113a729a561e"
+  },
+  {
+    "component": "mp11",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/mp11.zip",
+    "archiveSHA256": "81431bdc44c439a324e02c07ed067f8f556419fd86f2d8b486ff568df6aac899",
+    "archiveMember": "mp11-boost-1.82.0/include/boost/mp11.hpp",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/mp11/include/boost/mp11.hpp",
+    "bytes": 641,
+    "sha256": "0833ec323b3026fedf48af005792b5b61a1ec941e08a972cd2226f8f447d6079"
+  },
+  {
+    "component": "mp11",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/mp11.zip",
+    "archiveSHA256": "81431bdc44c439a324e02c07ed067f8f556419fd86f2d8b486ff568df6aac899",
+    "archiveMember": "mp11-boost-1.82.0/include/boost/mp11/version.hpp",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/mp11/include/boost/mp11/version.hpp",
+    "bytes": 437,
+    "sha256": "dd748ea2e612e47f8dd573fa1808df95115a60581099343aa159bc7b80b1483f"
+  },
+  {
+    "component": "kleidiai",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/final-unattempted/downloads/kleidiai.tar.gz",
+    "archiveSHA256": "e4b84c369f0f39af1660ac71c30f74038d4b89e1f20dde070bb96398382a111f",
+    "archiveMember": "kleidiai-1.20.0/CMakeLists.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/kleidiai/CMakeLists.txt",
+    "bytes": 47254,
+    "sha256": "9160334dc1fa3d4406b2019048c8a789b36d09a81b6058db463078190d4c15bd"
+  },
+  {
+    "component": "kleidiai",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/final-unattempted/downloads/kleidiai.tar.gz",
+    "archiveSHA256": "e4b84c369f0f39af1660ac71c30f74038d4b89e1f20dde070bb96398382a111f",
+    "archiveMember": "kleidiai-1.20.0/LICENSES/Apache-2.0.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/kleidiai/LICENSES/Apache-2.0.txt",
+    "bytes": 10280,
+    "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+  },
+  {
+    "component": "kleidiai",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/final-unattempted/downloads/kleidiai.tar.gz",
+    "archiveSHA256": "e4b84c369f0f39af1660ac71c30f74038d4b89e1f20dde070bb96398382a111f",
+    "archiveMember": "kleidiai-1.20.0/LICENSES/BSD-3-Clause.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/kleidiai/LICENSES/BSD-3-Clause.txt",
+    "bytes": 1460,
+    "sha256": "5a93d5831e1297ab10fe643e1a631e83be392896da14ee2951285a79012df69d"
+  },
+  {
+    "component": "kleidiai",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/final-unattempted/downloads/kleidiai.tar.gz",
+    "archiveSHA256": "e4b84c369f0f39af1660ac71c30f74038d4b89e1f20dde070bb96398382a111f",
+    "archiveMember": "kleidiai-1.20.0/README.md",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/kleidiai/README.md",
+    "bytes": 10740,
+    "sha256": "16380a88e1930777256a1abc7420735a85bbaaa7a5e3314e7e3b65744bd4a443"
+  },
+  {
+    "component": "eigen",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/final-unattempted/downloads/eigen.zip",
+    "archiveSHA256": "6a60d76351f97132669daeeb721d6bf14b008101883ad2d687a3201c5c461eb0",
+    "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/CMakeLists.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/eigen/CMakeLists.txt",
+    "bytes": 33309,
+    "sha256": "c1c76de3873793d6fa640fd9e6c7d6f5c1a466a7430742067cabbe28cb52f2cb"
+  },
+  {
+    "component": "eigen",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/final-unattempted/downloads/eigen.zip",
+    "archiveSHA256": "6a60d76351f97132669daeeb721d6bf14b008101883ad2d687a3201c5c461eb0",
+    "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.MPL2",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/eigen/COPYING.MPL2",
+    "bytes": 16727,
+    "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172"
+  },
+  {
+    "component": "eigen",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/final-unattempted/downloads/eigen.zip",
+    "archiveSHA256": "6a60d76351f97132669daeeb721d6bf14b008101883ad2d687a3201c5c461eb0",
+    "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/COPYING.README",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/eigen/COPYING.README",
+    "bytes": 264,
+    "sha256": "db640ff2bd90c6abd6a4d3fbb351e0ee4d555417cf840492054d1cbb2ea85644"
+  },
+  {
+    "component": "eigen",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/final-unattempted/downloads/eigen.zip",
+    "archiveSHA256": "6a60d76351f97132669daeeb721d6bf14b008101883ad2d687a3201c5c461eb0",
+    "archiveMember": "eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/LICENSE",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/eigen/LICENSE",
+    "bytes": 16725,
+    "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+  },
+  {
+    "component": "flatbuffers",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/unattempted/downloads/flatbuffers.zip",
+    "archiveSHA256": "57bd580c0772fd1a726c34ab8bf05325293bc5f9c165060a898afa1feeeb95e1",
+    "archiveMember": "flatbuffers-23.5.26/CMakeLists.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/flatbuffers/CMakeLists.txt",
+    "bytes": 23660,
+    "sha256": "8b29bd0b59edbe62aa20b8a9818d8acb879a79a0c82562dfa1f887f4d09d245f"
+  },
+  {
+    "component": "pytorch_cpuinfo",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives-recovery-20261112/downloads/pytorch_cpuinfo.zip",
+    "archiveSHA256": "2ed3ebc6c2656cc0aafc7af319e5cb0f97cc9b415eae180f566def84f1ca6a29",
+    "archiveMember": "cpuinfo-4628dc060ce4e82345dc166bbac875609db4ff69/CMakeLists.txt",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/pytorch_cpuinfo/CMakeLists.txt",
+    "bytes": 45089,
+    "sha256": "f2d8a764f8750f500c02f5bf14a729b2b36822905331182d04d06017bcbf27a9"
+  },
+  {
+    "component": "pytorch_cpuinfo",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives-recovery-20261112/downloads/pytorch_cpuinfo.zip",
+    "archiveSHA256": "2ed3ebc6c2656cc0aafc7af319e5cb0f97cc9b415eae180f566def84f1ca6a29",
+    "archiveMember": "cpuinfo-4628dc060ce4e82345dc166bbac875609db4ff69/deps/clog/LICENSE",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/pytorch_cpuinfo/deps/clog/LICENSE",
+    "bytes": 1384,
+    "sha256": "68a14c3e79add023eecd83d611e73f05b8bf1d16852efeb7eb4033a96736da9e"
+  },
+  {
+    "component": "pytorch_cpuinfo",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives-recovery-20261112/downloads/pytorch_cpuinfo.zip",
+    "archiveSHA256": "2ed3ebc6c2656cc0aafc7af319e5cb0f97cc9b415eae180f566def84f1ca6a29",
+    "archiveMember": "cpuinfo-4628dc060ce4e82345dc166bbac875609db4ff69/src/cpuinfo/log.h",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/pytorch_cpuinfo/src/cpuinfo/log.h",
+    "bytes": 2415,
+    "sha256": "cdbc1feebcdf4c7e36cf70181767336648966de8386f37c0c7b956ba5532adf8"
+  },
+  {
+    "component": "pytorch_cpuinfo",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives-recovery-20261112/downloads/pytorch_cpuinfo.zip",
+    "archiveSHA256": "2ed3ebc6c2656cc0aafc7af319e5cb0f97cc9b415eae180f566def84f1ca6a29",
+    "archiveMember": "cpuinfo-4628dc060ce4e82345dc166bbac875609db4ff69/src/log.c",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/pytorch_cpuinfo/src/log.c",
+    "bytes": 6101,
+    "sha256": "3ec56da70717b2fd013f03f97a02db9500f2b9137751e622eb3d68de37c9ad33"
+  },
+  {
+    "component": "protobuf",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/protobuf.zip",
+    "archiveSHA256": "6a31b662deaeb0ac35e6287bda2f3369b19836e6c9f8828d4da444346f420298",
+    "archiveMember": "protobuf-21.12/cmake/libprotobuf-lite.cmake",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/protobuf/cmake/libprotobuf-lite.cmake",
+    "bytes": 6677,
+    "sha256": "3b6125134c3795d8e720edbce31ed818fee772480e64bde4fc6b6b62489fa4fb"
+  },
+  {
+    "component": "protobuf",
+    "archivePath": ".omx/artifacts/w3-runtime-materials-20261111/ort-source-archives/downloads/protobuf.zip",
+    "archiveSHA256": "6a31b662deaeb0ac35e6287bda2f3369b19836e6c9f8828d4da444346f420298",
+    "archiveMember": "protobuf-21.12/third_party/utf8_range/LICENSE",
+    "evidencePath": ".omx/artifacts/w3-ort-nested-composition-20261115T122051Z/archive-evidence/protobuf/third_party/utf8_range/LICENSE",
+    "bytes": 1065,
+    "sha256": "5a629d2b868081d8af08bbce5d038116f3a0e2e0d4ce9adf4d53f14e76b6b2e0"
+  }
+]

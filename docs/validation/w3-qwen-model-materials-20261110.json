@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "acceptedAt": "2026-11-10T13:52:24.834015+00:00",
+  "status": "local materials bundle verified; production redistribution not accepted",
+  "sixModelFilesRehashed": 6,
+  "runtimeFileBytes": 987015347,
+  "modelNoticesExternalCandidateSHA256": "7730dbfbfe9c726c759b2fbfad9a23951752aa74eda0e6576453a736c6c13935",
+  "correctionOnlyRequestedEdits": true,
+  "relativeLinksResolved": 8,
+  "sourceEvidenceSHARechecked": 21,
+  "payloadFiles": {
+    "MODEL-NOTICES.md": {
+      "bytes": 6823,
+      "sha256": "7730dbfbfe9c726c759b2fbfad9a23951752aa74eda0e6576453a736c6c13935"
+    },
+    "licenses/Apache-2.0.txt": {
+      "bytes": 11343,
+      "sha256": "a44a6081c73ad75f0255bb2bb5cab74ef1829565a895a24e53a4f11290ab7655"
+    },
+    "manifest.json": {
+      "bytes": 5680,
+      "sha256": "2cadc6fc38fd5234e32c2ed873bf1da3964fa236f15a78a6247be9f541a95776"
+    },
+    "provenance/archive-README.md": {
+      "bytes": 328,
+      "sha256": "bbc6dbeb9dce5b4ed0e839057137e9cba4bf05c5797277d36a80e22594414e14"
+    },
+    "provenance/export-README.md": {
+      "bytes": 271,
+      "sha256": "cecbd22d0a62b6bbb0333ff5db24bccdb79193c66c9af2db1da05423c67a5d77"
+    },
+    "provenance/license-chain/export-commit.json": {
+      "bytes": 5353,
+      "sha256": "b24f0b14fd5eb2e795980edcc5b31cd7a21a18b3e5869e93270ff1427bf73e4a"
+    },
+    "provenance/license-chain/export-commit.json.receipt.json": {
+      "bytes": 241,
+      "sha256": "e2aef1beaf93c6c4f49c8d8b1766a0d07c00e3801df0e8a5df7823429b9d397d"
+    },
+    "provenance/license-chain/export-repository.json": {
+      "bytes": 5415,
+      "sha256": "ccff840000b0b11df7a17f23b809c53a78fd42657acc11bc85ce6c44ca721429"
+    },
+    "provenance/license-chain/export-repository.json.receipt.json": {
+      "bytes": 228,
+      "sha256": "e72372077d8114a3abc44b86c93f866956906bd34a440d1d227afeb24387f6c7"
+    },
+    "provenance/license-chain/export-tree.json": {
+      "bytes": 10215,
+      "sha256": "9caecf90aaec7f611d3590d9efc1f911702719dd961b222749e965f765544e2a"
+    },
+    "provenance/license-chain/export-tree.json.receipt.json": {
+      "bytes": 292,
+      "sha256": "6354c31eb723f2e94bbe0ca2c9c9d8a9426013d6df3c1d575e19882f74b7be94"
+    },
+    "provenance/license-chain/hf-model-pinned-tree.json": {
+      "bytes": 1233,
+      "sha256": "9e850d84b0880de5806e7bbd1a01cc3f7374b6208a15e739e00fed8cbd3d7bec"
+    },
+    "provenance/license-chain/hf-model-pinned-tree.json.receipt.json": {
+      "bytes": 248,
+      "sha256": "70305d87864f0f2bc47d9bb9ad5bb18fea1e5b2fb8314522a109fef6dc5e155b"
+    },
+    "provenance/license-chain/modelscope-files.json": {
+      "bytes": 10739,
+      "sha256": "78a116bb6dd53ee5eb3f2f2f8320717b22f8ff760083dc997b50ba96d9a89258"
+    },
+    "provenance/license-chain/modelscope-files.json.receipt.json": {
+      "bytes": 240,
+      "sha256": "d01f490335083e5e380a4480e8485b82e5906cc49ebf9703c780dda661b2f0b0"
+    },
+    "provenance/license-chain/modelscope-metadata.json": {
+      "bytes": 4180,
+      "sha256": "93ae70f208f65d0a03903b4d67b7e103fef56f44cb8b698ce293375d112ce9d7"
+    },
+    "provenance/license-chain/modelscope-metadata.json.receipt.json": {
+      "bytes": 197,
+      "sha256": "e0115089d07a2b5f8a6e0f412a2c02d3b05dbf000166aeb398d821372c865246"
+    },
+    "provenance/license-chain/scope-summary.json": {
+      "bytes": 788,
+      "sha256": "4cb5901ad59bb6334f92cc0aea0c3492bb45c3b3c450a74e7593984d69bd2e78"
+    },
+    "provenance/model-card-full.md": {
+      "bytes": 57456,
+      "sha256": "5058416891bc47a2051557765997e8c42f8eb78a0e33c3e775bd17d4b0ba4d50"
+    },
+    "provenance/model-card-header.txt": {
+      "bytes": 3774,
+      "sha256": "bfaf00b53aa30d3d4dac9af5d2503c8b82e0e9179bceef8d94a555aac7b9dffd"
+    },
+    "provenance/model-card-receipt.json": {
+      "bytes": 280,
+      "sha256": "ef72b9ca66d94893f37658fdfb79e488d8c60b24cb20c1a450e40762308f3448"
+    },
+    "provenance/supply-observed.json": {
+      "bytes": 5755,
+      "sha256": "f5cbe2b3a690c2aeed2d97f0e50782c900437767e06b7e4c53ea0326fa9349a4"
+    },
+    "provenance/supply-observed.md": {
+      "bytes": 2240,
+      "sha256": "cb1a34f08b29680620adeede3c63eb5ca68ee430c77995e91d699e6610af244a"
+    },
+    "provenance/upstream-license-receipt.json": {
+      "bytes": 431,
+      "sha256": "150218b34e7ff95587edd7e631f0dcd213d313eb8898c224822db5198b7262f7"
+    }
+  },
+  "archive": {
+    "name": "qwen-model-materials-393f8a14.tar.gz",
+    "bytes": 36696,
+    "sha256": "571e7b16c5b566e67da23ebb10223f3c00f62d332be5e920ba285f71000eb515",
+    "allMemberBytesRechecked": true,
+    "fileCount": 24
+  },
+  "modelBinariesIncluded": false,
+  "runtimeLibrariesIncluded": false,
+  "deviceOperations": 0,
+  "productionRedistributionAccepted": false,
+  "exactOriginalConversionWeightsRevision": null,
+  "independentReleaseReviewCompleted": false,
+  "sourceBundleDirectory": "probes/qwen-model-materials/393f8a14",
+  "localArchivePath": ".omx/artifacts/w3-model-reselection-20261110/redistribution-materials/qwen-model-materials-393f8a14.tar.gz",
+  "archiveLocalOnly": true,
+  "helperDelivery": [
+    {
+      "task": "initial",
+      "seconds": 67.53010337500018,
+      "status": "complete; wording correction required"
+    },
+    {
+      "task": "wording correction",
+      "seconds": 76.06415962499887,
+      "status": "complete; exact requested edits verified"
+    }
+  ],
+  "helperToolErrors": "Large pitfalls initial Read exceeded limit; corrected task attempted absent pre-write candidate Read. Errors preserved; supplied excerpts and final files available. No permission denial; no claim of error-free tools.",
+  "preservedSourceWhitespace": {
+    "file": "provenance/export-README.md",
+    "lines": [
+      3
+    ],
+    "additional": {
+      "file": "provenance/model-card-full.md",
+      "lines": [
+        248,
+        410
+      ]
+    },
+    "reason": "Exact original public evidence bytes must retain verified SHA; authored files checked separately."
+  }
+}

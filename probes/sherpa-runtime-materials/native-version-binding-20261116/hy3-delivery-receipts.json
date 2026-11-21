@@ -1,0 +1,74 @@
+[
+  {
+    "lane": "hy3-verifier",
+    "model": "hy3",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 196.174,
+      "endedAtUTC": "2026-11-15T16:22:45.689050+00:00",
+      "stdoutBytes": 171894,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultSubtype": "success",
+    "sessionId": "01a1e001-b4e7-7e2e-a470-1ccc44764cf0",
+    "observedToolUseEvents": 0,
+    "promptSHA256": "cd5e0ff165e28b2487a33bdf50c42a9cb657b93f3cb09775c059e4705a8cf6d9",
+    "eventsSHA256": "47773fc7644c05b1dbc8180b57ac72af373fb77c25a355f5ab179016d22d9e0d"
+  },
+  {
+    "lane": "hy3-verifier-fix",
+    "model": "hy3",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 84.088,
+      "endedAtUTC": "2026-11-15T16:26:35.404111+00:00",
+      "stdoutBytes": 85195,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultSubtype": "success",
+    "sessionId": "01a1e006-ea8e-7f93-9af1-bc4b01795bda",
+    "observedToolUseEvents": 0,
+    "promptSHA256": "cef106b864aa3867488a241fb2e39ec5053548dcb5e55486e7712223bd850420",
+    "eventsSHA256": "dd2b592e4f3f067f76ab76f314759c5a06889676638dfbf4ed873dd07df62080"
+  },
+  {
+    "lane": "hy3-test-fix",
+    "model": "hy3",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 7.087,
+      "endedAtUTC": "2026-11-15T16:28:20.595462+00:00",
+      "stdoutBytes": 12265,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultSubtype": "success",
+    "sessionId": "01a1e009-b25a-790d-8e6c-8226292fd449",
+    "observedToolUseEvents": 0,
+    "promptSHA256": "d36962ffbd34b436a3a38a23b2cd2d7823cd7a5070ff427cc274c7a8b29e8b04",
+    "eventsSHA256": "8d7d94a48b45bbd60703467127712c5a680297cf93465454ada9e57b6a1fd915"
+  },
+  {
+    "lane": "hy3-review",
+    "model": "hy3",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 56.3,
+      "endedAtUTC": "2026-11-15T16:30:01.432487+00:00",
+      "stdoutBytes": 51769,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultSubtype": "success",
+    "sessionId": "01a1e00a-7b39-79fc-b626-e31b1b773a3a",
+    "observedToolUseEvents": 0,
+    "promptSHA256": "006542c7a70105f9a665ff2944058508628017118df3079c5bb7df10a0e0914e",
+    "eventsSHA256": "5e4b42d77b9f649df2c2387438b51ea049b56c9b579e24df01d33be65b2df393"
+  }
+]

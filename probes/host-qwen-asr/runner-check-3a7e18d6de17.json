@@ -1,0 +1,43 @@
+{
+  "candidate": "/private/tmp/odai-hy3-w3-qwen-auto-language-20261110/candidate/host_qwen_asr.py",
+  "sha256": "3a7e18d6de17a8b4a887795e9d18c6b57be2d844a8f844da09db87ba63695db3",
+  "realNativeCalls": 0,
+  "results": [
+    {
+      "name": "valid-protocol",
+      "passed": true
+    },
+    {
+      "name": "reject-internal-symlink",
+      "passed": true
+    },
+    {
+      "name": "reject-model-ancestor-symlink",
+      "passed": true
+    },
+    {
+      "name": "nominal-finalization",
+      "passed": true
+    },
+    {
+      "name": "original-language-error-preserved",
+      "passed": true
+    },
+    {
+      "name": "planned-cases-present-on-constructor-failure",
+      "passed": true
+    },
+    {
+      "name": "changed-model-blocks-native",
+      "passed": true
+    },
+    {
+      "name": "changed-pcm-blocks-native",
+      "passed": true
+    },
+    {
+      "name": "existing-output-preserved-zero-native",
+      "passed": true
+    }
+  ]
+}

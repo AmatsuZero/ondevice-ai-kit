@@ -1,0 +1,22 @@
+{
+  "preparedAtUTC": "2026-11-15T23:54:18.235761+00:00",
+  "sourceHEAD": "5d9f2ad03771e655c65b64f072974ea1d7d569a2",
+  "scope": "cross-layer JVM/DEX native declarations to four ABI JNI exported names and fixed JNI source definitions; not body semantics/static composition/loader test",
+  "runtimeAARSHA256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "expectedNativeDeclarations": 120,
+  "priorArm64JNIExportsObserved": 134,
+  "reuseArm64DynamicSymbolOutput": true,
+  "newLLVMInvocationsPlanned": 3,
+  "noWholeLibraryStaticSymbolRescan": true,
+  "publicSourceTextOnlyPermittedFetch": true,
+  "sourceHostAOSPQuotaNotRetried": true,
+  "newDeviceOrInference": 0,
+  "newAPKOrNativeBuild": 0,
+  "newModelRuntimeBinaryDownload": 0,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "W3Complete": false
+}

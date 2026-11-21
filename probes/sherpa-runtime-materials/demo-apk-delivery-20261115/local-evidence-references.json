@@ -1,0 +1,22 @@
+{
+  ".omx/artifacts/w3-demo-apk-delivery-20261115/verify-demo-delivery.py": {
+    "bytes": 8904,
+    "sha256": "892a5e7f6ee124fcb2c5ef6f1e20ca7aab6d23cbb079c608d6d2ea1bbf90c87d"
+  },
+  ".omx/artifacts/w3-demo-apk-delivery-20261115/apk-dex.stdout": {
+    "bytes": 26585214,
+    "sha256": "63a48f54ba6b7f448229ac19050e13acc391fcab784f90b4f496928bcb81f45a"
+  },
+  ".omx/artifacts/w3-demo-apk-delivery-20261115/source-inputs-before.json": {
+    "bytes": 57656,
+    "sha256": "84eea9b6c99c2dcb6859d770b922e08b57434b3cea25eeea445eb921b538fc6e"
+  },
+  ".omx/artifacts/w3-demo-apk-delivery-20261115/assets-before.json": {
+    "bytes": 1475,
+    "sha256": "5260ee0014d435ac71c6bfbd43bc269146fbb7ca6b5cbb3f91a816fec7f70ce3"
+  },
+  ".omx/artifacts/w3-demo-apk-delivery-20261115/protected-before.json": {
+    "bytes": 28396,
+    "sha256": "5f41e42915fd93bdc08396177bd02d819cda6d758c11582a47f75e595ee19c2b"
+  }
+}

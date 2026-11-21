@@ -1,0 +1,2500 @@
+[
+  {
+    "kind": "demo",
+    "variant": "release",
+    "rawDisassemblyEqualClasses": 124,
+    "differentClasses": [],
+    "classComparisons": [
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioEvent.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/AudioEvent.smali",
+        "actualSHA256": "e8f246fb686bd009cf0d7399864051f3d13ef8d4fb30eebd75ab8a2dd54a5c3f",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioEvent.smali",
+        "rebuiltSHA256": "e8f246fb686bd009cf0d7399864051f3d13ef8d4fb30eebd75ab8a2dd54a5c3f",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8178,
+        "rebuiltBytes": 8178
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTagging$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/AudioTagging$Companion.smali",
+        "actualSHA256": "2cc8164e85cfb5eb2b323de2a99f9bd0a903bac0ad529cff35b0c6a9847d9ac2",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTagging$Companion.smali",
+        "rebuiltSHA256": "2cc8164e85cfb5eb2b323de2a99f9bd0a903bac0ad529cff35b0c6a9847d9ac2",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1240,
+        "rebuiltBytes": 1240
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTagging.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/AudioTagging.smali",
+        "actualSHA256": "c018154fd6770c8a5cd419ffdd1ffec4b2232895fef31354de3facddc9562464",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTagging.smali",
+        "rebuiltSHA256": "c018154fd6770c8a5cd419ffdd1ffec4b2232895fef31354de3facddc9562464",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8014,
+        "rebuiltBytes": 8014
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTaggingConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/AudioTaggingConfig.smali",
+        "actualSHA256": "232ea96680288d9c2720db03eb3e60bf3cce0c29b42389a5b32d37ccb83a2f9a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTaggingConfig.smali",
+        "rebuiltSHA256": "232ea96680288d9c2720db03eb3e60bf3cce0c29b42389a5b32d37ccb83a2f9a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12667,
+        "rebuiltBytes": 12667
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTaggingKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/AudioTaggingKt.smali",
+        "actualSHA256": "01127f913ade9f229f2f8ecbd8d86edfd212552d027e5aca41dc69de9efcda77",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTaggingKt.smali",
+        "rebuiltSHA256": "01127f913ade9f229f2f8ecbd8d86edfd212552d027e5aca41dc69de9efcda77",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7701,
+        "rebuiltBytes": 7701
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTaggingModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/AudioTaggingModelConfig.smali",
+        "actualSHA256": "f5f220c67a49499c33039ed6c05e065352089a7a15a8ed678068eaa2d924e2b1",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTaggingModelConfig.smali",
+        "rebuiltSHA256": "f5f220c67a49499c33039ed6c05e065352089a7a15a8ed678068eaa2d924e2b1",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 18787,
+        "rebuiltBytes": 18787
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/DenoisedAudio.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/DenoisedAudio.smali",
+        "actualSHA256": "fecdea4bd27b6447dbf120209fa92c0c60071ff43ed19cdedfb453b3d633e887",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/DenoisedAudio.smali",
+        "rebuiltSHA256": "fecdea4bd27b6447dbf120209fa92c0c60071ff43ed19cdedfb453b3d633e887",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 2965,
+        "rebuiltBytes": 2965
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/EndpointConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/EndpointConfig.smali",
+        "actualSHA256": "7777ab48f1e37ad7545b9c81ccb84654bd8fdb56a3caf00af4865064849fd311",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/EndpointConfig.smali",
+        "rebuiltSHA256": "7777ab48f1e37ad7545b9c81ccb84654bd8fdb56a3caf00af4865064849fd311",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 14099,
+        "rebuiltBytes": 14099
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/EndpointRule.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/EndpointRule.smali",
+        "actualSHA256": "3c8efc432db9b993156e4991c7db9d95deaf521d71d393d846f747552cd1fd7b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/EndpointRule.smali",
+        "rebuiltSHA256": "3c8efc432db9b993156e4991c7db9d95deaf521d71d393d846f747552cd1fd7b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8894,
+        "rebuiltBytes": 8894
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/FastClusteringConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/FastClusteringConfig.smali",
+        "actualSHA256": "35b1e085ada604678d69fd25bde60572802d25fac8d088657c9bdc21cd5a5fbb",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/FastClusteringConfig.smali",
+        "rebuiltSHA256": "35b1e085ada604678d69fd25bde60572802d25fac8d088657c9bdc21cd5a5fbb",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9792,
+        "rebuiltBytes": 9792
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/FeatureConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/FeatureConfig.smali",
+        "actualSHA256": "318dcf49fb6b72455b0ba175a5863b292c8f115a596e2bfe5354220a9bafa279",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/FeatureConfig.smali",
+        "rebuiltSHA256": "318dcf49fb6b72455b0ba175a5863b292c8f115a596e2bfe5354220a9bafa279",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9226,
+        "rebuiltBytes": 9226
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/FeatureConfigKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/FeatureConfigKt.smali",
+        "actualSHA256": "cc5a315ca38a67ee95c0fe87c85ae8fcc79da910099b24f64621ce8dcb980d8c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/FeatureConfigKt.smali",
+        "rebuiltSHA256": "cc5a315ca38a67ee95c0fe87c85ae8fcc79da910099b24f64621ce8dcb980d8c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1159,
+        "rebuiltBytes": 1159
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/GeneratedAudio.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/GeneratedAudio.smali",
+        "actualSHA256": "21c57d26f79c604413df828ab396f938d8ca0bb2d4a0830885961503cac762f8",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/GeneratedAudio.smali",
+        "rebuiltSHA256": "21c57d26f79c604413df828ab396f938d8ca0bb2d4a0830885961503cac762f8",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 2976,
+        "rebuiltBytes": 2976
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/GenerationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/GenerationConfig.smali",
+        "actualSHA256": "852d11352258789e55b2ea4842521e8d11bf54b1d6102e7dcedc77333a56c8c9",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/GenerationConfig.smali",
+        "rebuiltSHA256": "852d11352258789e55b2ea4842521e8d11bf54b1d6102e7dcedc77333a56c8c9",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 30775,
+        "rebuiltBytes": 30775
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/HomophoneReplacerConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/HomophoneReplacerConfig.smali",
+        "actualSHA256": "24e189eb9ca6b7099f53ffdc2ab11a117b0bf332899918671f22a1c666826836",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/HomophoneReplacerConfig.smali",
+        "rebuiltSHA256": "24e189eb9ca6b7099f53ffdc2ab11a117b0bf332899918671f22a1c666826836",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12685,
+        "rebuiltBytes": 12685
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotter$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/KeywordSpotter$Companion.smali",
+        "actualSHA256": "7ec601b51b54d55d0b02af07bd7d351e9ab33c7f679600068dc84a7c884b9441",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotter$Companion.smali",
+        "rebuiltSHA256": "7ec601b51b54d55d0b02af07bd7d351e9ab33c7f679600068dc84a7c884b9441",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1250,
+        "rebuiltBytes": 1250
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+        "actualSHA256": "91117891fe1b2e3fffb9b84beb0e8c5a00664dc50c7f89226ecc813c6db00d69",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+        "rebuiltSHA256": "91117891fe1b2e3fffb9b84beb0e8c5a00664dc50c7f89226ecc813c6db00d69",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 11064,
+        "rebuiltBytes": 11064
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotterConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/KeywordSpotterConfig.smali",
+        "actualSHA256": "01a9098d22f52b5d0730c0dd0f75f02a9d23d3830767d5cb037754f9cd71b364",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotterConfig.smali",
+        "rebuiltSHA256": "01a9098d22f52b5d0730c0dd0f75f02a9d23d3830767d5cb037754f9cd71b364",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 24945,
+        "rebuiltBytes": 24945
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotterKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/KeywordSpotterKt.smali",
+        "actualSHA256": "edd21cb0b8d0fffdb8eb417fa2e71f1a3476599163b951d5d9f5517e9abc1003",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotterKt.smali",
+        "rebuiltSHA256": "edd21cb0b8d0fffdb8eb417fa2e71f1a3476599163b951d5d9f5517e9abc1003",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 4979,
+        "rebuiltBytes": 4979
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotterResult$toString$timestampsStr$1.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/KeywordSpotterResult$toString$timestampsStr$1.smali",
+        "actualSHA256": "cdeaa66b945152905a7d1f3881f2be506c6ecd75df08a5439a0544845eef75ee",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotterResult$toString$timestampsStr$1.smali",
+        "rebuiltSHA256": "cdeaa66b945152905a7d1f3881f2be506c6ecd75df08a5439a0544845eef75ee",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 3201,
+        "rebuiltBytes": 3201
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotterResult.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/KeywordSpotterResult.smali",
+        "actualSHA256": "2bc67a910de1f52c3a54e94c839909a87607c9d8d68b7d227f07f1e8d63feacb",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotterResult.smali",
+        "rebuiltSHA256": "2bc67a910de1f52c3a54e94c839909a87607c9d8d68b7d227f07f1e8d63feacb",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 11745,
+        "rebuiltBytes": 11745
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineCanaryModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineCanaryModelConfig.smali",
+        "actualSHA256": "c007d000e2b451945e4feb08e5092a0ff78f3c913ebf532c19dd7b2301582996",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineCanaryModelConfig.smali",
+        "rebuiltSHA256": "c007d000e2b451945e4feb08e5092a0ff78f3c913ebf532c19dd7b2301582996",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 18243,
+        "rebuiltBytes": 18243
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineCohereTranscribeModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineCohereTranscribeModelConfig.smali",
+        "actualSHA256": "6b9606445c90ddb8f08a18320aa8b5b0ea5f3cf73bc9a98897f6dbd080dad718",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineCohereTranscribeModelConfig.smali",
+        "rebuiltSHA256": "6b9606445c90ddb8f08a18320aa8b5b0ea5f3cf73bc9a98897f6dbd080dad718",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 17874,
+        "rebuiltBytes": 17874
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineCtcFstDecoderConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineCtcFstDecoderConfig.smali",
+        "actualSHA256": "4f5d7313a9b2a831037de9108b07ac5d8cf69896afc9aa6bf1e220ec9ae8fee7",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineCtcFstDecoderConfig.smali",
+        "rebuiltSHA256": "4f5d7313a9b2a831037de9108b07ac5d8cf69896afc9aa6bf1e220ec9ae8fee7",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8559,
+        "rebuiltBytes": 8559
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineDolphinModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineDolphinModelConfig.smali",
+        "actualSHA256": "9ab831292dd080c75ee5cc89e660012813e7af413524a2b078a435a6f469483d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineDolphinModelConfig.smali",
+        "rebuiltSHA256": "9ab831292dd080c75ee5cc89e660012813e7af413524a2b078a435a6f469483d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6354,
+        "rebuiltBytes": 6354
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineFireRedAsrCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineFireRedAsrCtcModelConfig.smali",
+        "actualSHA256": "1d96abaa77091f25a578dd789a3a0506ba019bccffb7155d3a46547dedb8a174",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineFireRedAsrCtcModelConfig.smali",
+        "rebuiltSHA256": "1d96abaa77091f25a578dd789a3a0506ba019bccffb7155d3a46547dedb8a174",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6492,
+        "rebuiltBytes": 6492
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineFireRedAsrModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineFireRedAsrModelConfig.smali",
+        "actualSHA256": "e3a5cc227e7ae3e6b3c2ec77173969faca247d03c13742b18de7b904e4ce553f",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineFireRedAsrModelConfig.smali",
+        "rebuiltSHA256": "e3a5cc227e7ae3e6b3c2ec77173969faca247d03c13742b18de7b904e4ce553f",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9661,
+        "rebuiltBytes": 9661
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineFunAsrNanoModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineFunAsrNanoModelConfig.smali",
+        "actualSHA256": "db48d51c4582fa02c628f59580d9ec5a5a8e850ab89e9a5107aa018a7cb4aace",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineFunAsrNanoModelConfig.smali",
+        "rebuiltSHA256": "db48d51c4582fa02c628f59580d9ec5a5a8e850ab89e9a5107aa018a7cb4aace",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 42356,
+        "rebuiltBytes": 42356
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineMedAsrCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineMedAsrCtcModelConfig.smali",
+        "actualSHA256": "c807774664a45ec321b3a274aa5c473a8dd5867016cf9d5dbfc3e3959a9664c7",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineMedAsrCtcModelConfig.smali",
+        "rebuiltSHA256": "c807774664a45ec321b3a274aa5c473a8dd5867016cf9d5dbfc3e3959a9664c7",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6400,
+        "rebuiltBytes": 6400
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineModelConfig.smali",
+        "actualSHA256": "8e933471f483d8bf1a3ab46916fa12671f9616d9eb5be143abc59e756794ce0a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineModelConfig.smali",
+        "rebuiltSHA256": "8e933471f483d8bf1a3ab46916fa12671f9616d9eb5be143abc59e756794ce0a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 111186,
+        "rebuiltBytes": 111186
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineMoonshineModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineMoonshineModelConfig.smali",
+        "actualSHA256": "568f287f54481da9b7f8ec300ee4d7a18c9aece760e48b6c02a5ecd629b8d122",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineMoonshineModelConfig.smali",
+        "rebuiltSHA256": "568f287f54481da9b7f8ec300ee4d7a18c9aece760e48b6c02a5ecd629b8d122",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 19861,
+        "rebuiltBytes": 19861
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineNemoEncDecCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineNemoEncDecCtcModelConfig.smali",
+        "actualSHA256": "4cfab5707f41d97fa6e259a3695e933496bd39ca57dce60968439d41d24694c8",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineNemoEncDecCtcModelConfig.smali",
+        "rebuiltSHA256": "4cfab5707f41d97fa6e259a3695e933496bd39ca57dce60968439d41d24694c8",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6492,
+        "rebuiltBytes": 6492
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineOmnilingualAsrCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineOmnilingualAsrCtcModelConfig.smali",
+        "actualSHA256": "fd5e8fa41e97dbc815a8db6d5dcbf7a6597733c8dc11e52104640c7ef9f4f44d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineOmnilingualAsrCtcModelConfig.smali",
+        "rebuiltSHA256": "fd5e8fa41e97dbc815a8db6d5dcbf7a6597733c8dc11e52104640c7ef9f4f44d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6584,
+        "rebuiltBytes": 6584
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineParaformerModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineParaformerModelConfig.smali",
+        "actualSHA256": "de3a8daa2ed44482fe79ceb3272fced8a331ef56b04b3f772dfefeefdd041fa7",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineParaformerModelConfig.smali",
+        "rebuiltSHA256": "de3a8daa2ed44482fe79ceb3272fced8a331ef56b04b3f772dfefeefdd041fa7",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10514,
+        "rebuiltBytes": 10514
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflinePunctuation$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflinePunctuation$Companion.smali",
+        "actualSHA256": "3ce2868c79bfe72c9c472d613249c8d93dd5310d6482db4dac535b41594d4ca6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflinePunctuation$Companion.smali",
+        "rebuiltSHA256": "3ce2868c79bfe72c9c472d613249c8d93dd5310d6482db4dac535b41594d4ca6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1270,
+        "rebuiltBytes": 1270
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+        "actualSHA256": "da109305d1ed8aa288a5ac3bf05141d4289b70667fa8877503a7852724a0b04e",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+        "rebuiltSHA256": "da109305d1ed8aa288a5ac3bf05141d4289b70667fa8877503a7852724a0b04e",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6274,
+        "rebuiltBytes": 6274
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflinePunctuationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflinePunctuationConfig.smali",
+        "actualSHA256": "e0e427fa51098929abbf0cd1124e06bf7067a3dfdc6e8bef29a14ae761fba418",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflinePunctuationConfig.smali",
+        "rebuiltSHA256": "e0e427fa51098929abbf0cd1124e06bf7067a3dfdc6e8bef29a14ae761fba418",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6460,
+        "rebuiltBytes": 6460
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflinePunctuationModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflinePunctuationModelConfig.smali",
+        "actualSHA256": "f27c44f4f559493e7a1ca7a3e73b47c2038bda8b2205190249cb287d891810e3",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflinePunctuationModelConfig.smali",
+        "rebuiltSHA256": "f27c44f4f559493e7a1ca7a3e73b47c2038bda8b2205190249cb287d891810e3",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 14191,
+        "rebuiltBytes": 14191
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineQwen3AsrModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineQwen3AsrModelConfig.smali",
+        "actualSHA256": "4a108d11fb07b481022cc3e158839a231efaf395b73cc2b43bf4fbbae43ce8c3",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineQwen3AsrModelConfig.smali",
+        "rebuiltSHA256": "4a108d11fb07b481022cc3e158839a231efaf395b73cc2b43bf4fbbae43ce8c3",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 30471,
+        "rebuiltBytes": 30471
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizer$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineRecognizer$Companion.smali",
+        "actualSHA256": "9583ce7a8df1b7329c42125d4c662ffa6eef9bd0087b0a9baaedd997add16aa0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizer$Companion.smali",
+        "rebuiltSHA256": "9583ce7a8df1b7329c42125d4c662ffa6eef9bd0087b0a9baaedd997add16aa0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1793,
+        "rebuiltBytes": 1793
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+        "actualSHA256": "f8527481b7c79195d5978e30af689f6751b96b1898cfc222b6821d3b27ad4dd0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+        "rebuiltSHA256": "f8527481b7c79195d5978e30af689f6751b96b1898cfc222b6821d3b27ad4dd0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10658,
+        "rebuiltBytes": 10658
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizerConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineRecognizerConfig.smali",
+        "actualSHA256": "4eb07a702fb7df415a7ededecec7093cecd2d149f96b63405eb282e960255520",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizerConfig.smali",
+        "rebuiltSHA256": "4eb07a702fb7df415a7ededecec7093cecd2d149f96b63405eb282e960255520",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 42895,
+        "rebuiltBytes": 42895
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizerKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineRecognizerKt.smali",
+        "actualSHA256": "4de0ddb54da73ceae68aa4151da8eb4bf0c6b0115d65e2e1c267902a3c1751fc",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizerKt.smali",
+        "rebuiltSHA256": "4de0ddb54da73ceae68aa4151da8eb4bf0c6b0115d65e2e1c267902a3c1751fc",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 237414,
+        "rebuiltBytes": 237414
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizerResult.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineRecognizerResult.smali",
+        "actualSHA256": "8d126f4a37906cf8d58aec9dda609b2959b1f03b45a04775bc03789beddbee47",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizerResult.smali",
+        "rebuiltSHA256": "8d126f4a37906cf8d58aec9dda609b2959b1f03b45a04775bc03789beddbee47",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 24179,
+        "rebuiltBytes": 24179
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSenseVoiceModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSenseVoiceModelConfig.smali",
+        "actualSHA256": "d122159cd492721bf2c18c73da35b2fab54769e4dd3e4b3afe59969b7d641d09",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSenseVoiceModelConfig.smali",
+        "rebuiltSHA256": "d122159cd492721bf2c18c73da35b2fab54769e4dd3e4b3afe59969b7d641d09",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16296,
+        "rebuiltBytes": 16296
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization$Companion.smali",
+        "actualSHA256": "b81b2ebebca32c0590939819695fa61d57ddbe0a655e1cabb2882336e2406020",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization$Companion.smali",
+        "rebuiltSHA256": "b81b2ebebca32c0590939819695fa61d57ddbe0a655e1cabb2882336e2406020",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1306,
+        "rebuiltBytes": 1306
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+        "actualSHA256": "fd33df6cbd413498cc26740e2b6f3b1b6de5c359dfce28f12e443610f20ad7e3",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+        "rebuiltSHA256": "fd33df6cbd413498cc26740e2b6f3b1b6de5c359dfce28f12e443610f20ad7e3",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 13262,
+        "rebuiltBytes": 13262
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig.smali",
+        "actualSHA256": "450fd96753c0df50a25424734ed10165d1fc1d59bdfb950103459ca3c1371c0b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig.smali",
+        "rebuiltSHA256": "450fd96753c0df50a25424734ed10165d1fc1d59bdfb950103459ca3c1371c0b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 22290,
+        "rebuiltBytes": 22290
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment.smali",
+        "actualSHA256": "98056222613c7d3aa4bfdeb5edf4d3c8645592836e6b2945a32a4fe96d689a52",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment.smali",
+        "rebuiltSHA256": "98056222613c7d3aa4bfdeb5edf4d3c8645592836e6b2945a32a4fe96d689a52",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10130,
+        "rebuiltBytes": 10130
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationModelConfig.smali",
+        "actualSHA256": "7bb7bcfa92de0f51a15b61a97b666c59f9fcd4c9933cf3f4c31211e17e428a94",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationModelConfig.smali",
+        "rebuiltSHA256": "7bb7bcfa92de0f51a15b61a97b666c59f9fcd4c9933cf3f4c31211e17e428a94",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16262,
+        "rebuiltBytes": 16262
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationPyannoteModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationPyannoteModelConfig.smali",
+        "actualSHA256": "697e7b70d3c533620d44374b637d54fc956030b4b16a6bc8539b84e4d6303c76",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationPyannoteModelConfig.smali",
+        "rebuiltSHA256": "697e7b70d3c533620d44374b637d54fc956030b4b16a6bc8539b84e4d6303c76",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9409,
+        "rebuiltBytes": 9409
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser$Companion.smali",
+        "actualSHA256": "62268ba485e92ddc24a5359c6c6235286bfc0e92e9504944af759634474aca2f",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser$Companion.smali",
+        "rebuiltSHA256": "62268ba485e92ddc24a5359c6c6235286bfc0e92e9504944af759634474aca2f",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1285,
+        "rebuiltBytes": 1285
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+        "actualSHA256": "68ef008e2cca9be3a1e3222fa9797df43118a404d9ec0d8b71097165a9a39ceb",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+        "rebuiltSHA256": "68ef008e2cca9be3a1e3222fa9797df43118a404d9ec0d8b71097165a9a39ceb",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7136,
+        "rebuiltBytes": 7136
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig.smali",
+        "actualSHA256": "447753cfd5791aa606e7f42ba74b4af3e1103911542b23beda5c64e1be15a2e9",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig.smali",
+        "rebuiltSHA256": "447753cfd5791aa606e7f42ba74b4af3e1103911542b23beda5c64e1be15a2e9",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8009,
+        "rebuiltBytes": 8009
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserDpdfNetModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserDpdfNetModelConfig.smali",
+        "actualSHA256": "0a96f542f28bf4cf27d41fc7402c07be5e14d84db2a031218590d88aab4f1cdc",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserDpdfNetModelConfig.smali",
+        "rebuiltSHA256": "0a96f542f28bf4cf27d41fc7402c07be5e14d84db2a031218590d88aab4f1cdc",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9237,
+        "rebuiltBytes": 9237
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserGtcrnModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserGtcrnModelConfig.smali",
+        "actualSHA256": "7502b4e9f845bc277935192b94a28c3278d92fe07ea05681242b97955b1c9cd6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserGtcrnModelConfig.smali",
+        "rebuiltSHA256": "7502b4e9f845bc277935192b94a28c3278d92fe07ea05681242b97955b1c9cd6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6628,
+        "rebuiltBytes": 6628
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserModelConfig.smali",
+        "actualSHA256": "895826116a087d0e1f2596c5112bf00774d10e4e7b952506c6a81d619db63959",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserModelConfig.smali",
+        "rebuiltSHA256": "895826116a087d0e1f2596c5112bf00774d10e4e7b952506c6a81d619db63959",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 25950,
+        "rebuiltBytes": 25950
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserVoxLockModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserVoxLockModelConfig.smali",
+        "actualSHA256": "81962441d93f034e5f5d16bfbea5f4b0d7af74ef26dc89daeff411912f77b138",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserVoxLockModelConfig.smali",
+        "rebuiltSHA256": "81962441d93f034e5f5d16bfbea5f4b0d7af74ef26dc89daeff411912f77b138",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 13530,
+        "rebuiltBytes": 13530
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineStream$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineStream$Companion.smali",
+        "actualSHA256": "a03c083ce3e44dbe1063107a333659e5c6a94d950ef8c81f090f09910f50d688",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineStream$Companion.smali",
+        "rebuiltSHA256": "a03c083ce3e44dbe1063107a333659e5c6a94d950ef8c81f090f09910f50d688",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1245,
+        "rebuiltBytes": 1245
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineStream.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineStream.smali",
+        "actualSHA256": "da7801770831ebfc25e895d6e712e4b1c28320fe84f95cae48fef58e24da2563",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineStream.smali",
+        "rebuiltSHA256": "da7801770831ebfc25e895d6e712e4b1c28320fe84f95cae48fef58e24da2563",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7925,
+        "rebuiltBytes": 7925
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTransducerModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTransducerModelConfig.smali",
+        "actualSHA256": "0afe87c28b8cd29fd30e1680e803d00405fdaf0230ff389fdfa02cd87cb9dfa8",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTransducerModelConfig.smali",
+        "rebuiltSHA256": "0afe87c28b8cd29fd30e1680e803d00405fdaf0230ff389fdfa02cd87cb9dfa8",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16960,
+        "rebuiltBytes": 16960
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTts$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTts$Companion.smali",
+        "actualSHA256": "2e564c75adee85c4abda9542ff458221f623f986594da4937d824b64925c323c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTts$Companion.smali",
+        "rebuiltSHA256": "2e564c75adee85c4abda9542ff458221f623f986594da4937d824b64925c323c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1224,
+        "rebuiltBytes": 1224
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTts.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+        "actualSHA256": "9e59f8901bb768d04a03ab79ef664330d11ca11c786378a97fd0719ab312ef95",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+        "rebuiltSHA256": "9e59f8901bb768d04a03ab79ef664330d11ca11c786378a97fd0719ab312ef95",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 21013,
+        "rebuiltBytes": 21013
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTtsConfig.smali",
+        "actualSHA256": "cce819a1acd92219705a657fb8bfb172227c0aa69041a6c90112408589db2da7",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsConfig.smali",
+        "rebuiltSHA256": "cce819a1acd92219705a657fb8bfb172227c0aa69041a6c90112408589db2da7",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 19019,
+        "rebuiltBytes": 19019
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsKittenModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTtsKittenModelConfig.smali",
+        "actualSHA256": "31314f6af5bf6fa74ecf4ab8a70f081bca6dc94a77b426dbd5791c7e3c61878d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsKittenModelConfig.smali",
+        "rebuiltSHA256": "31314f6af5bf6fa74ecf4ab8a70f081bca6dc94a77b426dbd5791c7e3c61878d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 21653,
+        "rebuiltBytes": 21653
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsKokoroModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTtsKokoroModelConfig.smali",
+        "actualSHA256": "e74488fac03efcc7a7546a3fcf6a6186e2b6efafa085c18bf4077a45a2bb455a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsKokoroModelConfig.smali",
+        "rebuiltSHA256": "e74488fac03efcc7a7546a3fcf6a6186e2b6efafa085c18bf4077a45a2bb455a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 28009,
+        "rebuiltBytes": 28009
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsMatchaModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTtsMatchaModelConfig.smali",
+        "actualSHA256": "26efb740a3a6e39dd49de341e291720bc53e397919abcdd5618b8a0a80923a36",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsMatchaModelConfig.smali",
+        "rebuiltSHA256": "26efb740a3a6e39dd49de341e291720bc53e397919abcdd5618b8a0a80923a36",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 27257,
+        "rebuiltBytes": 27257
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTtsModelConfig.smali",
+        "actualSHA256": "2c0771e72e6e2a1c60261997883095cd40cd0a653f6576a53db37ebf9b312581",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsModelConfig.smali",
+        "rebuiltSHA256": "2c0771e72e6e2a1c60261997883095cd40cd0a653f6576a53db37ebf9b312581",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 44287,
+        "rebuiltBytes": 44287
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsPocketModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTtsPocketModelConfig.smali",
+        "actualSHA256": "d00107d782fc245b06f046d095b839954f7602069b14ac45a1c9194cec4091b0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsPocketModelConfig.smali",
+        "rebuiltSHA256": "d00107d782fc245b06f046d095b839954f7602069b14ac45a1c9194cec4091b0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 28537,
+        "rebuiltBytes": 28537
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsSupertonicModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTtsSupertonicModelConfig.smali",
+        "actualSHA256": "24d1f13c520e75dd16134b28f800340de3e9e03a9bc114b0c9a3bfe74a2b2488",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsSupertonicModelConfig.smali",
+        "rebuiltSHA256": "24d1f13c520e75dd16134b28f800340de3e9e03a9bc114b0c9a3bfe74a2b2488",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 26640,
+        "rebuiltBytes": 26640
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsVitsModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTtsVitsModelConfig.smali",
+        "actualSHA256": "29da6b0ae799d00f4a1a8539c8e5c9277cb0d4013808c4ef8806a7f8c0282cb0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsVitsModelConfig.smali",
+        "rebuiltSHA256": "29da6b0ae799d00f4a1a8539c8e5c9277cb0d4013808c4ef8806a7f8c0282cb0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 25993,
+        "rebuiltBytes": 25993
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsZipVoiceModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineTtsZipVoiceModelConfig.smali",
+        "actualSHA256": "aae4664b7e7f763f7ef99f2c2c5f533992076ee8f0b25ba690fcafe8737b623f",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsZipVoiceModelConfig.smali",
+        "rebuiltSHA256": "aae4664b7e7f763f7ef99f2c2c5f533992076ee8f0b25ba690fcafe8737b623f",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 31829,
+        "rebuiltBytes": 31829
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineWenetCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineWenetCtcModelConfig.smali",
+        "actualSHA256": "b1be3436a75c6399219d4d5d28c766483d5eceec92891c6eeeb1e1a44f9f501a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineWenetCtcModelConfig.smali",
+        "rebuiltSHA256": "b1be3436a75c6399219d4d5d28c766483d5eceec92891c6eeeb1e1a44f9f501a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6377,
+        "rebuiltBytes": 6377
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineWhisperModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineWhisperModelConfig.smali",
+        "actualSHA256": "ba48042aa7b31fcbd74b0e50055ab82f5271b0c0d57703ca2955a4568385cb90",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineWhisperModelConfig.smali",
+        "rebuiltSHA256": "ba48042aa7b31fcbd74b0e50055ab82f5271b0c0d57703ca2955a4568385cb90",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 23115,
+        "rebuiltBytes": 23115
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineZipformerAudioTaggingModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineZipformerAudioTaggingModelConfig.smali",
+        "actualSHA256": "4a972da60836afcc3b64474f49e2dcb43d5b4881b69f504ad0c69c285d43b432",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineZipformerAudioTaggingModelConfig.smali",
+        "rebuiltSHA256": "4a972da60836afcc3b64474f49e2dcb43d5b4881b69f504ad0c69c285d43b432",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6665,
+        "rebuiltBytes": 6665
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineZipformerCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OfflineZipformerCtcModelConfig.smali",
+        "actualSHA256": "6d9f28377e2d1c1773f374c650176040fd90513f5570419cedaa6a11fad94486",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineZipformerCtcModelConfig.smali",
+        "rebuiltSHA256": "6d9f28377e2d1c1773f374c650176040fd90513f5570419cedaa6a11fad94486",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10578,
+        "rebuiltBytes": 10578
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineCtcFstDecoderConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineCtcFstDecoderConfig.smali",
+        "actualSHA256": "c99bb417266d7053b1f0681c1ee34abfed7fc09e59cc6bf4ea655b95b5cd771b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineCtcFstDecoderConfig.smali",
+        "rebuiltSHA256": "c99bb417266d7053b1f0681c1ee34abfed7fc09e59cc6bf4ea655b95b5cd771b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8517,
+        "rebuiltBytes": 8517
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineLMConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineLMConfig.smali",
+        "actualSHA256": "61ddd6bd635e33d30ba58ffe0cbc4f967bcaffc6ce5f00a901d8b0d439eae8a1",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineLMConfig.smali",
+        "rebuiltSHA256": "61ddd6bd635e33d30ba58ffe0cbc4f967bcaffc6ce5f00a901d8b0d439eae8a1",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8248,
+        "rebuiltBytes": 8248
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineModelConfig.smali",
+        "actualSHA256": "6e9a613aae642ff6ce5d3abd62431a4d0ad05181732477e3bebcccea0135d7c4",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineModelConfig.smali",
+        "rebuiltSHA256": "6e9a613aae642ff6ce5d3abd62431a4d0ad05181732477e3bebcccea0135d7c4",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 45967,
+        "rebuiltBytes": 45967
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineNeMoCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineNeMoCtcModelConfig.smali",
+        "actualSHA256": "47f64607a224ca8fd2a263c1dd330725c683706a17e460683593099654ff46b4",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineNeMoCtcModelConfig.smali",
+        "rebuiltSHA256": "47f64607a224ca8fd2a263c1dd330725c683706a17e460683593099654ff46b4",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6330,
+        "rebuiltBytes": 6330
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineParaformerModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineParaformerModelConfig.smali",
+        "actualSHA256": "1c50a84b6a0348c14cb10eccf704a6636aa46286da584fd9a44ab58eac828dea",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineParaformerModelConfig.smali",
+        "rebuiltSHA256": "1c50a84b6a0348c14cb10eccf704a6636aa46286da584fd9a44ab58eac828dea",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9620,
+        "rebuiltBytes": 9620
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlinePunctuation$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlinePunctuation$Companion.smali",
+        "actualSHA256": "33456257192d75966ef85fd96a45cc4973fb86f590aac53bb28f28645c42999c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlinePunctuation$Companion.smali",
+        "rebuiltSHA256": "33456257192d75966ef85fd96a45cc4973fb86f590aac53bb28f28645c42999c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1265,
+        "rebuiltBytes": 1265
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+        "actualSHA256": "4843fba9ccd1d78ae37d6ffe46eb8f5458be4c9b0f2db6679c708b329213a8eb",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+        "rebuiltSHA256": "4843fba9ccd1d78ae37d6ffe46eb8f5458be4c9b0f2db6679c708b329213a8eb",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6244,
+        "rebuiltBytes": 6244
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlinePunctuationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlinePunctuationConfig.smali",
+        "actualSHA256": "c1d8b20376147e34b1a55a238061212ad50822c69229762005ed2d2245fde658",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlinePunctuationConfig.smali",
+        "rebuiltSHA256": "c1d8b20376147e34b1a55a238061212ad50822c69229762005ed2d2245fde658",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6416,
+        "rebuiltBytes": 6416
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlinePunctuationModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlinePunctuationModelConfig.smali",
+        "actualSHA256": "710d6325f238f2e8f4969abc2b7dbf2dfac94417b81ef9e2ffc60089068fb5f5",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlinePunctuationModelConfig.smali",
+        "rebuiltSHA256": "710d6325f238f2e8f4969abc2b7dbf2dfac94417b81ef9e2ffc60089068fb5f5",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 17486,
+        "rebuiltBytes": 17486
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizer$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineRecognizer$Companion.smali",
+        "actualSHA256": "0327b9e19e37010390a4973654add3b50d431237a7c588d2f4fea497db732238",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizer$Companion.smali",
+        "rebuiltSHA256": "0327b9e19e37010390a4973654add3b50d431237a7c588d2f4fea497db732238",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1787,
+        "rebuiltBytes": 1787
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+        "actualSHA256": "323b731a8181a3521fb0ed8fe37da537b3516adc5f5986c6c310c494259a9e9d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+        "rebuiltSHA256": "323b731a8181a3521fb0ed8fe37da537b3516adc5f5986c6c310c494259a9e9d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12179,
+        "rebuiltBytes": 12179
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizerConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineRecognizerConfig.smali",
+        "actualSHA256": "d5546cc8de7fc2c9b66e495a423f5c0b4bc385120bc9a7d9e9494115566f76ad",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizerConfig.smali",
+        "rebuiltSHA256": "d5546cc8de7fc2c9b66e495a423f5c0b4bc385120bc9a7d9e9494115566f76ad",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 53775,
+        "rebuiltBytes": 53775
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizerKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineRecognizerKt.smali",
+        "actualSHA256": "5cfccc27cf1d8336e6d3d26af03c1ac8cc10499a89ed450aa2edb02edfef6199",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizerKt.smali",
+        "rebuiltSHA256": "5cfccc27cf1d8336e6d3d26af03c1ac8cc10499a89ed450aa2edb02edfef6199",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 74405,
+        "rebuiltBytes": 74405
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizerResult.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineRecognizerResult.smali",
+        "actualSHA256": "513b4fce01eb19d8e5dbe813ee8a742a5461a6fdb5e2d4724987b8cdd7bb6d32",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizerResult.smali",
+        "rebuiltSHA256": "513b4fce01eb19d8e5dbe813ee8a742a5461a6fdb5e2d4724987b8cdd7bb6d32",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12979,
+        "rebuiltBytes": 12979
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser$Companion.smali",
+        "actualSHA256": "43ae580528620ceeeb1e58276e46682587eec0255b2ff17c8ed01f5fbbe1e426",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser$Companion.smali",
+        "rebuiltSHA256": "43ae580528620ceeeb1e58276e46682587eec0255b2ff17c8ed01f5fbbe1e426",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1280,
+        "rebuiltBytes": 1280
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+        "actualSHA256": "25822b4594daa4e70bdd949e3a087ce1b64ee2bd91ca413f645ff4dab05fcf78",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+        "rebuiltSHA256": "25822b4594daa4e70bdd949e3a087ce1b64ee2bd91ca413f645ff4dab05fcf78",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8778,
+        "rebuiltBytes": 8778
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig.smali",
+        "actualSHA256": "672a3d2cbd5b55b98f9910c9df9c907b3e31bf23574a643e3936bc82da98ce0b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig.smali",
+        "rebuiltSHA256": "672a3d2cbd5b55b98f9910c9df9c907b3e31bf23574a643e3936bc82da98ce0b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7979,
+        "rebuiltBytes": 7979
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineStream$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineStream$Companion.smali",
+        "actualSHA256": "90bb837939b9a7874e3c6c69775a93b1d9187025e41dba583d84aa93433d24d6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineStream$Companion.smali",
+        "rebuiltSHA256": "90bb837939b9a7874e3c6c69775a93b1d9187025e41dba583d84aa93433d24d6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1240,
+        "rebuiltBytes": 1240
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineStream.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineStream.smali",
+        "actualSHA256": "cf23b184cb116a4decb3b3c3c58451f6214ce003a151312efcb4f8a2ce018190",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineStream.smali",
+        "rebuiltSHA256": "cf23b184cb116a4decb3b3c3c58451f6214ce003a151312efcb4f8a2ce018190",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8984,
+        "rebuiltBytes": 8984
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineToneCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineToneCtcModelConfig.smali",
+        "actualSHA256": "4c6830ac03245d6d53aaecac36f7a02f6159e0f7ce24b78a101bc58a53ef98c0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineToneCtcModelConfig.smali",
+        "rebuiltSHA256": "4c6830ac03245d6d53aaecac36f7a02f6159e0f7ce24b78a101bc58a53ef98c0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6330,
+        "rebuiltBytes": 6330
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineTransducerModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineTransducerModelConfig.smali",
+        "actualSHA256": "99356262ebc6275c6ebe4055b393a6f17131eb8475452f2bb88bd824970cc7c6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineTransducerModelConfig.smali",
+        "rebuiltSHA256": "99356262ebc6275c6ebe4055b393a6f17131eb8475452f2bb88bd824970cc7c6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16909,
+        "rebuiltBytes": 16909
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineZipformer2CtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/OnlineZipformer2CtcModelConfig.smali",
+        "actualSHA256": "ad8af11713b535c0d00a606b5ac6ab8e9d9ebd89ce6e0197683e9017d36e5f62",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineZipformer2CtcModelConfig.smali",
+        "rebuiltSHA256": "ad8af11713b535c0d00a606b5ac6ab8e9d9ebd89ce6e0197683e9017d36e5f62",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6468,
+        "rebuiltBytes": 6468
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/QnnConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/QnnConfig.smali",
+        "actualSHA256": "0a014573e41d2ba534128d08d4e4ec064bdd75639256cd2f5d3cc11cb08415e1",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/QnnConfig.smali",
+        "rebuiltSHA256": "0a014573e41d2ba534128d08d4e4ec064bdd75639256cd2f5d3cc11cb08415e1",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12277,
+        "rebuiltBytes": 12277
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SileroVadModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SileroVadModelConfig.smali",
+        "actualSHA256": "25d844b7f98bb4683d95b560f99fd0a29decce2d4c2229fce61510777895279d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SileroVadModelConfig.smali",
+        "rebuiltSHA256": "25d844b7f98bb4683d95b560f99fd0a29decce2d4c2229fce61510777895279d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 17785,
+        "rebuiltBytes": 17785
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor$Companion.smali",
+        "actualSHA256": "4d81a17638a421893cfcb5fa198b8d7cbb5a356e252d664a647282654d6cf48b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor$Companion.smali",
+        "rebuiltSHA256": "4d81a17638a421893cfcb5fa198b8d7cbb5a356e252d664a647282654d6cf48b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1287,
+        "rebuiltBytes": 1287
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+        "actualSHA256": "a6c3f88f3e1ebd43e1d4b53af80f0be27fe113e7c24c89250b023a3b130876f4",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+        "rebuiltSHA256": "a6c3f88f3e1ebd43e1d4b53af80f0be27fe113e7c24c89250b023a3b130876f4",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8704,
+        "rebuiltBytes": 8704
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig.smali",
+        "actualSHA256": "96411ec31847e604bde434a09cc8aafe241fa595d730a18b9c41eb3c913d1f92",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig.smali",
+        "rebuiltSHA256": "96411ec31847e604bde434a09cc8aafe241fa595d730a18b9c41eb3c913d1f92",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 13737,
+        "rebuiltBytes": 13737
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager$Companion.smali",
+        "actualSHA256": "cb76a2e173a800ce273df1019876b2697c7388cb98945916dd74fb1bd85c4424",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager$Companion.smali",
+        "rebuiltSHA256": "cb76a2e173a800ce273df1019876b2697c7388cb98945916dd74fb1bd85c4424",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1280,
+        "rebuiltBytes": 1280
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+        "actualSHA256": "5ff02994c1c4deb2a025fb077a0ed7d9aa2e8947c5374c1e41771f616b15ed12",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+        "rebuiltSHA256": "5ff02994c1c4deb2a025fb077a0ed7d9aa2e8947c5374c1e41771f616b15ed12",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 11506,
+        "rebuiltBytes": 11506
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpeakerKt.smali",
+        "actualSHA256": "b07d4f7ce593f9224c1b4bbe9c8e01df595f1191ba547a1096f6b4a384ee9bff",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerKt.smali",
+        "rebuiltSHA256": "b07d4f7ce593f9224c1b4bbe9c8e01df595f1191ba547a1096f6b4a384ee9bff",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 970,
+        "rebuiltBytes": 970
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerRecognition.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpeakerRecognition.smali",
+        "actualSHA256": "9f0b56567cb52ac1040ffd6b2fca2ffca49a4e83dbce360897a1f39ae6793b87",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerRecognition.smali",
+        "rebuiltSHA256": "9f0b56567cb52ac1040ffd6b2fca2ffca49a4e83dbce360897a1f39ae6793b87",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7589,
+        "rebuiltBytes": 7589
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeechSegment.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpeechSegment.smali",
+        "actualSHA256": "dc8f22d090694b99b48527ce4cf262c2db27890e3c4caf7051961f1a3cfb4039",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeechSegment.smali",
+        "rebuiltSHA256": "dc8f22d090694b99b48527ce4cf262c2db27890e3c4caf7051961f1a3cfb4039",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1939,
+        "rebuiltBytes": 1939
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentification$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification$Companion.smali",
+        "actualSHA256": "902269baae58b9e5200d39e2fc9649c898ec089d7a8f9537797958e69b2717bc",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification$Companion.smali",
+        "rebuiltSHA256": "902269baae58b9e5200d39e2fc9649c898ec089d7a8f9537797958e69b2717bc",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1320,
+        "rebuiltBytes": 1320
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+        "actualSHA256": "280a8bec8747c3a7c0a5b140d5ecca39f8774225d54c7a51ebaa6570a48e08a2",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+        "rebuiltSHA256": "280a8bec8747c3a7c0a5b140d5ecca39f8774225d54c7a51ebaa6570a48e08a2",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7464,
+        "rebuiltBytes": 7464
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig.smali",
+        "actualSHA256": "0bf02d836cb656eb9ba2864b88a9cd708688affa75f8099415bb47fdbc8e2b8d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig.smali",
+        "rebuiltSHA256": "0bf02d836cb656eb9ba2864b88a9cd708688affa75f8099415bb47fdbc8e2b8d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16066,
+        "rebuiltBytes": 16066
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationKt.smali",
+        "actualSHA256": "4fa85395d3172512e16ae1f83085677cc098bf21956398173c5b71040732c9c4",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationKt.smali",
+        "rebuiltSHA256": "4fa85395d3172512e16ae1f83085677cc098bf21956398173c5b71040732c9c4",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 3542,
+        "rebuiltBytes": 3542
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationWhisperConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationWhisperConfig.smali",
+        "actualSHA256": "2535bd3beb23b1a086a927dcb5401383f217673e7a41a2b10074d34f26a27e44",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationWhisperConfig.smali",
+        "rebuiltSHA256": "2535bd3beb23b1a086a927dcb5401383f217673e7a41a2b10074d34f26a27e44",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12460,
+        "rebuiltBytes": 12460
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/TenVadModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/TenVadModelConfig.smali",
+        "actualSHA256": "5bee5182bba1189ebd5454e990dd0b5ff49c1c4671c98554145571022625fcd6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/TenVadModelConfig.smali",
+        "rebuiltSHA256": "5bee5182bba1189ebd5454e990dd0b5ff49c1c4671c98554145571022625fcd6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 17593,
+        "rebuiltBytes": 17593
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/TtsKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/TtsKt.smali",
+        "actualSHA256": "7bfed146b0b0358380fcc1e308011d298328d5ec2e3501af59dc63da47a10f2b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/TtsKt.smali",
+        "rebuiltSHA256": "7bfed146b0b0358380fcc1e308011d298328d5ec2e3501af59dc63da47a10f2b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 53331,
+        "rebuiltBytes": 53331
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/Vad$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/Vad$Companion.smali",
+        "actualSHA256": "75372eab805fc0141570682fb27b7ffa4e71834c8b8bb187d549dd8991f6464c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/Vad$Companion.smali",
+        "rebuiltSHA256": "75372eab805fc0141570682fb27b7ffa4e71834c8b8bb187d549dd8991f6464c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1196,
+        "rebuiltBytes": 1196
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/Vad.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/Vad.smali",
+        "actualSHA256": "a589038e0ef119643eeacab869b69167a2f0c1209d98d8046e983d185f7fb71d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/Vad.smali",
+        "rebuiltSHA256": "a589038e0ef119643eeacab869b69167a2f0c1209d98d8046e983d185f7fb71d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10886,
+        "rebuiltBytes": 10886
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/VadKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/VadKt.smali",
+        "actualSHA256": "a98d2a46816deceb964226432e476f3af59d3f2218434df64031c259ee2380da",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/VadKt.smali",
+        "rebuiltSHA256": "a98d2a46816deceb964226432e476f3af59d3f2218434df64031c259ee2380da",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 2937,
+        "rebuiltBytes": 2937
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/VadModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/VadModelConfig.smali",
+        "actualSHA256": "1b63d936ec3fb3fa9db89b0b7745402ef25b19c8dc90e406d86b194c4e886efe",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/VadModelConfig.smali",
+        "rebuiltSHA256": "1b63d936ec3fb3fa9db89b0b7745402ef25b19c8dc90e406d86b194c4e886efe",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 21591,
+        "rebuiltBytes": 21591
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+        "actualSHA256": "85ba6e4206e08d6c493a7e45ffa58ed34d6b2a595605a334c9d09a4d14d44f6a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+        "rebuiltSHA256": "85ba6e4206e08d6c493a7e45ffa58ed34d6b2a595605a334c9d09a4d14d44f6a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 3493,
+        "rebuiltBytes": 3493
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/VersionInfo.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/VersionInfo.smali",
+        "actualSHA256": "96ca437edeb5393b5cd4af2144ee81c51e3eb16a2586a2b5cae5f5828670459c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/VersionInfo.smali",
+        "rebuiltSHA256": "96ca437edeb5393b5cd4af2144ee81c51e3eb16a2586a2b5cae5f5828670459c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1566,
+        "rebuiltBytes": 1566
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/WaveData.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/WaveData.smali",
+        "actualSHA256": "5f8659c30175f147879e4b628b7a816b6eca6f4b02d4e68671338d2898ae98d6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/WaveData.smali",
+        "rebuiltSHA256": "5f8659c30175f147879e4b628b7a816b6eca6f4b02d4e68671338d2898ae98d6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6914,
+        "rebuiltBytes": 6914
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/WaveReader$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/WaveReader$Companion.smali",
+        "actualSHA256": "6a5a6aaff0a0a3efaf7f46c81ec10054372f86513587d4a65d54b4bd12519a4c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/WaveReader$Companion.smali",
+        "rebuiltSHA256": "6a5a6aaff0a0a3efaf7f46c81ec10054372f86513587d4a65d54b4bd12519a4c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 3392,
+        "rebuiltBytes": 3392
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/WaveReader.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-demo-release/classes3.dex/com/k2fsa/sherpa/onnx/WaveReader.smali",
+        "actualSHA256": "8d05125c259c352ba188ef51eba3a7ef13f7a92eeab6f3f3bb6ed51a0bfd8cd3",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/WaveReader.smali",
+        "rebuiltSHA256": "8d05125c259c352ba188ef51eba3a7ef13f7a92eeab6f3f3bb6ed51a0bfd8cd3",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1559,
+        "rebuiltBytes": 1559
+      }
+    ],
+    "normalizationOrStripping": false
+  },
+  {
+    "kind": "independent-consumer",
+    "variant": "release",
+    "rawDisassemblyEqualClasses": 124,
+    "differentClasses": [],
+    "classComparisons": [
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioEvent.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/AudioEvent.smali",
+        "actualSHA256": "e8f246fb686bd009cf0d7399864051f3d13ef8d4fb30eebd75ab8a2dd54a5c3f",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioEvent.smali",
+        "rebuiltSHA256": "e8f246fb686bd009cf0d7399864051f3d13ef8d4fb30eebd75ab8a2dd54a5c3f",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8178,
+        "rebuiltBytes": 8178
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTagging$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/AudioTagging$Companion.smali",
+        "actualSHA256": "2cc8164e85cfb5eb2b323de2a99f9bd0a903bac0ad529cff35b0c6a9847d9ac2",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTagging$Companion.smali",
+        "rebuiltSHA256": "2cc8164e85cfb5eb2b323de2a99f9bd0a903bac0ad529cff35b0c6a9847d9ac2",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1240,
+        "rebuiltBytes": 1240
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTagging.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/AudioTagging.smali",
+        "actualSHA256": "c018154fd6770c8a5cd419ffdd1ffec4b2232895fef31354de3facddc9562464",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTagging.smali",
+        "rebuiltSHA256": "c018154fd6770c8a5cd419ffdd1ffec4b2232895fef31354de3facddc9562464",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8014,
+        "rebuiltBytes": 8014
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTaggingConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/AudioTaggingConfig.smali",
+        "actualSHA256": "232ea96680288d9c2720db03eb3e60bf3cce0c29b42389a5b32d37ccb83a2f9a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTaggingConfig.smali",
+        "rebuiltSHA256": "232ea96680288d9c2720db03eb3e60bf3cce0c29b42389a5b32d37ccb83a2f9a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12667,
+        "rebuiltBytes": 12667
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTaggingKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/AudioTaggingKt.smali",
+        "actualSHA256": "01127f913ade9f229f2f8ecbd8d86edfd212552d027e5aca41dc69de9efcda77",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTaggingKt.smali",
+        "rebuiltSHA256": "01127f913ade9f229f2f8ecbd8d86edfd212552d027e5aca41dc69de9efcda77",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7701,
+        "rebuiltBytes": 7701
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/AudioTaggingModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/AudioTaggingModelConfig.smali",
+        "actualSHA256": "f5f220c67a49499c33039ed6c05e065352089a7a15a8ed678068eaa2d924e2b1",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/AudioTaggingModelConfig.smali",
+        "rebuiltSHA256": "f5f220c67a49499c33039ed6c05e065352089a7a15a8ed678068eaa2d924e2b1",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 18787,
+        "rebuiltBytes": 18787
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/DenoisedAudio.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/DenoisedAudio.smali",
+        "actualSHA256": "fecdea4bd27b6447dbf120209fa92c0c60071ff43ed19cdedfb453b3d633e887",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/DenoisedAudio.smali",
+        "rebuiltSHA256": "fecdea4bd27b6447dbf120209fa92c0c60071ff43ed19cdedfb453b3d633e887",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 2965,
+        "rebuiltBytes": 2965
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/EndpointConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/EndpointConfig.smali",
+        "actualSHA256": "7777ab48f1e37ad7545b9c81ccb84654bd8fdb56a3caf00af4865064849fd311",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/EndpointConfig.smali",
+        "rebuiltSHA256": "7777ab48f1e37ad7545b9c81ccb84654bd8fdb56a3caf00af4865064849fd311",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 14099,
+        "rebuiltBytes": 14099
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/EndpointRule.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/EndpointRule.smali",
+        "actualSHA256": "3c8efc432db9b993156e4991c7db9d95deaf521d71d393d846f747552cd1fd7b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/EndpointRule.smali",
+        "rebuiltSHA256": "3c8efc432db9b993156e4991c7db9d95deaf521d71d393d846f747552cd1fd7b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8894,
+        "rebuiltBytes": 8894
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/FastClusteringConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/FastClusteringConfig.smali",
+        "actualSHA256": "35b1e085ada604678d69fd25bde60572802d25fac8d088657c9bdc21cd5a5fbb",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/FastClusteringConfig.smali",
+        "rebuiltSHA256": "35b1e085ada604678d69fd25bde60572802d25fac8d088657c9bdc21cd5a5fbb",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9792,
+        "rebuiltBytes": 9792
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/FeatureConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/FeatureConfig.smali",
+        "actualSHA256": "318dcf49fb6b72455b0ba175a5863b292c8f115a596e2bfe5354220a9bafa279",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/FeatureConfig.smali",
+        "rebuiltSHA256": "318dcf49fb6b72455b0ba175a5863b292c8f115a596e2bfe5354220a9bafa279",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9226,
+        "rebuiltBytes": 9226
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/FeatureConfigKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/FeatureConfigKt.smali",
+        "actualSHA256": "cc5a315ca38a67ee95c0fe87c85ae8fcc79da910099b24f64621ce8dcb980d8c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/FeatureConfigKt.smali",
+        "rebuiltSHA256": "cc5a315ca38a67ee95c0fe87c85ae8fcc79da910099b24f64621ce8dcb980d8c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1159,
+        "rebuiltBytes": 1159
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/GeneratedAudio.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/GeneratedAudio.smali",
+        "actualSHA256": "21c57d26f79c604413df828ab396f938d8ca0bb2d4a0830885961503cac762f8",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/GeneratedAudio.smali",
+        "rebuiltSHA256": "21c57d26f79c604413df828ab396f938d8ca0bb2d4a0830885961503cac762f8",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 2976,
+        "rebuiltBytes": 2976
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/GenerationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/GenerationConfig.smali",
+        "actualSHA256": "852d11352258789e55b2ea4842521e8d11bf54b1d6102e7dcedc77333a56c8c9",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/GenerationConfig.smali",
+        "rebuiltSHA256": "852d11352258789e55b2ea4842521e8d11bf54b1d6102e7dcedc77333a56c8c9",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 30775,
+        "rebuiltBytes": 30775
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/HomophoneReplacerConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/HomophoneReplacerConfig.smali",
+        "actualSHA256": "24e189eb9ca6b7099f53ffdc2ab11a117b0bf332899918671f22a1c666826836",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/HomophoneReplacerConfig.smali",
+        "rebuiltSHA256": "24e189eb9ca6b7099f53ffdc2ab11a117b0bf332899918671f22a1c666826836",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12685,
+        "rebuiltBytes": 12685
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotter$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/KeywordSpotter$Companion.smali",
+        "actualSHA256": "7ec601b51b54d55d0b02af07bd7d351e9ab33c7f679600068dc84a7c884b9441",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotter$Companion.smali",
+        "rebuiltSHA256": "7ec601b51b54d55d0b02af07bd7d351e9ab33c7f679600068dc84a7c884b9441",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1250,
+        "rebuiltBytes": 1250
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+        "actualSHA256": "91117891fe1b2e3fffb9b84beb0e8c5a00664dc50c7f89226ecc813c6db00d69",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotter.smali",
+        "rebuiltSHA256": "91117891fe1b2e3fffb9b84beb0e8c5a00664dc50c7f89226ecc813c6db00d69",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 11064,
+        "rebuiltBytes": 11064
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotterConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/KeywordSpotterConfig.smali",
+        "actualSHA256": "01a9098d22f52b5d0730c0dd0f75f02a9d23d3830767d5cb037754f9cd71b364",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotterConfig.smali",
+        "rebuiltSHA256": "01a9098d22f52b5d0730c0dd0f75f02a9d23d3830767d5cb037754f9cd71b364",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 24945,
+        "rebuiltBytes": 24945
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotterKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/KeywordSpotterKt.smali",
+        "actualSHA256": "edd21cb0b8d0fffdb8eb417fa2e71f1a3476599163b951d5d9f5517e9abc1003",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotterKt.smali",
+        "rebuiltSHA256": "edd21cb0b8d0fffdb8eb417fa2e71f1a3476599163b951d5d9f5517e9abc1003",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 4979,
+        "rebuiltBytes": 4979
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotterResult$toString$timestampsStr$1.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/KeywordSpotterResult$toString$timestampsStr$1.smali",
+        "actualSHA256": "cdeaa66b945152905a7d1f3881f2be506c6ecd75df08a5439a0544845eef75ee",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotterResult$toString$timestampsStr$1.smali",
+        "rebuiltSHA256": "cdeaa66b945152905a7d1f3881f2be506c6ecd75df08a5439a0544845eef75ee",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 3201,
+        "rebuiltBytes": 3201
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/KeywordSpotterResult.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/KeywordSpotterResult.smali",
+        "actualSHA256": "2bc67a910de1f52c3a54e94c839909a87607c9d8d68b7d227f07f1e8d63feacb",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/KeywordSpotterResult.smali",
+        "rebuiltSHA256": "2bc67a910de1f52c3a54e94c839909a87607c9d8d68b7d227f07f1e8d63feacb",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 11745,
+        "rebuiltBytes": 11745
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineCanaryModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineCanaryModelConfig.smali",
+        "actualSHA256": "c007d000e2b451945e4feb08e5092a0ff78f3c913ebf532c19dd7b2301582996",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineCanaryModelConfig.smali",
+        "rebuiltSHA256": "c007d000e2b451945e4feb08e5092a0ff78f3c913ebf532c19dd7b2301582996",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 18243,
+        "rebuiltBytes": 18243
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineCohereTranscribeModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineCohereTranscribeModelConfig.smali",
+        "actualSHA256": "6b9606445c90ddb8f08a18320aa8b5b0ea5f3cf73bc9a98897f6dbd080dad718",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineCohereTranscribeModelConfig.smali",
+        "rebuiltSHA256": "6b9606445c90ddb8f08a18320aa8b5b0ea5f3cf73bc9a98897f6dbd080dad718",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 17874,
+        "rebuiltBytes": 17874
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineCtcFstDecoderConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineCtcFstDecoderConfig.smali",
+        "actualSHA256": "4f5d7313a9b2a831037de9108b07ac5d8cf69896afc9aa6bf1e220ec9ae8fee7",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineCtcFstDecoderConfig.smali",
+        "rebuiltSHA256": "4f5d7313a9b2a831037de9108b07ac5d8cf69896afc9aa6bf1e220ec9ae8fee7",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8559,
+        "rebuiltBytes": 8559
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineDolphinModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineDolphinModelConfig.smali",
+        "actualSHA256": "9ab831292dd080c75ee5cc89e660012813e7af413524a2b078a435a6f469483d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineDolphinModelConfig.smali",
+        "rebuiltSHA256": "9ab831292dd080c75ee5cc89e660012813e7af413524a2b078a435a6f469483d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6354,
+        "rebuiltBytes": 6354
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineFireRedAsrCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineFireRedAsrCtcModelConfig.smali",
+        "actualSHA256": "1d96abaa77091f25a578dd789a3a0506ba019bccffb7155d3a46547dedb8a174",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineFireRedAsrCtcModelConfig.smali",
+        "rebuiltSHA256": "1d96abaa77091f25a578dd789a3a0506ba019bccffb7155d3a46547dedb8a174",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6492,
+        "rebuiltBytes": 6492
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineFireRedAsrModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineFireRedAsrModelConfig.smali",
+        "actualSHA256": "e3a5cc227e7ae3e6b3c2ec77173969faca247d03c13742b18de7b904e4ce553f",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineFireRedAsrModelConfig.smali",
+        "rebuiltSHA256": "e3a5cc227e7ae3e6b3c2ec77173969faca247d03c13742b18de7b904e4ce553f",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9661,
+        "rebuiltBytes": 9661
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineFunAsrNanoModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineFunAsrNanoModelConfig.smali",
+        "actualSHA256": "db48d51c4582fa02c628f59580d9ec5a5a8e850ab89e9a5107aa018a7cb4aace",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineFunAsrNanoModelConfig.smali",
+        "rebuiltSHA256": "db48d51c4582fa02c628f59580d9ec5a5a8e850ab89e9a5107aa018a7cb4aace",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 42356,
+        "rebuiltBytes": 42356
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineMedAsrCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineMedAsrCtcModelConfig.smali",
+        "actualSHA256": "c807774664a45ec321b3a274aa5c473a8dd5867016cf9d5dbfc3e3959a9664c7",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineMedAsrCtcModelConfig.smali",
+        "rebuiltSHA256": "c807774664a45ec321b3a274aa5c473a8dd5867016cf9d5dbfc3e3959a9664c7",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6400,
+        "rebuiltBytes": 6400
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineModelConfig.smali",
+        "actualSHA256": "8e933471f483d8bf1a3ab46916fa12671f9616d9eb5be143abc59e756794ce0a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineModelConfig.smali",
+        "rebuiltSHA256": "8e933471f483d8bf1a3ab46916fa12671f9616d9eb5be143abc59e756794ce0a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 111186,
+        "rebuiltBytes": 111186
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineMoonshineModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineMoonshineModelConfig.smali",
+        "actualSHA256": "568f287f54481da9b7f8ec300ee4d7a18c9aece760e48b6c02a5ecd629b8d122",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineMoonshineModelConfig.smali",
+        "rebuiltSHA256": "568f287f54481da9b7f8ec300ee4d7a18c9aece760e48b6c02a5ecd629b8d122",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 19861,
+        "rebuiltBytes": 19861
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineNemoEncDecCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineNemoEncDecCtcModelConfig.smali",
+        "actualSHA256": "4cfab5707f41d97fa6e259a3695e933496bd39ca57dce60968439d41d24694c8",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineNemoEncDecCtcModelConfig.smali",
+        "rebuiltSHA256": "4cfab5707f41d97fa6e259a3695e933496bd39ca57dce60968439d41d24694c8",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6492,
+        "rebuiltBytes": 6492
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineOmnilingualAsrCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineOmnilingualAsrCtcModelConfig.smali",
+        "actualSHA256": "fd5e8fa41e97dbc815a8db6d5dcbf7a6597733c8dc11e52104640c7ef9f4f44d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineOmnilingualAsrCtcModelConfig.smali",
+        "rebuiltSHA256": "fd5e8fa41e97dbc815a8db6d5dcbf7a6597733c8dc11e52104640c7ef9f4f44d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6584,
+        "rebuiltBytes": 6584
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineParaformerModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineParaformerModelConfig.smali",
+        "actualSHA256": "de3a8daa2ed44482fe79ceb3272fced8a331ef56b04b3f772dfefeefdd041fa7",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineParaformerModelConfig.smali",
+        "rebuiltSHA256": "de3a8daa2ed44482fe79ceb3272fced8a331ef56b04b3f772dfefeefdd041fa7",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10514,
+        "rebuiltBytes": 10514
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflinePunctuation$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflinePunctuation$Companion.smali",
+        "actualSHA256": "3ce2868c79bfe72c9c472d613249c8d93dd5310d6482db4dac535b41594d4ca6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflinePunctuation$Companion.smali",
+        "rebuiltSHA256": "3ce2868c79bfe72c9c472d613249c8d93dd5310d6482db4dac535b41594d4ca6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1270,
+        "rebuiltBytes": 1270
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+        "actualSHA256": "da109305d1ed8aa288a5ac3bf05141d4289b70667fa8877503a7852724a0b04e",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflinePunctuation.smali",
+        "rebuiltSHA256": "da109305d1ed8aa288a5ac3bf05141d4289b70667fa8877503a7852724a0b04e",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6274,
+        "rebuiltBytes": 6274
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflinePunctuationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflinePunctuationConfig.smali",
+        "actualSHA256": "e0e427fa51098929abbf0cd1124e06bf7067a3dfdc6e8bef29a14ae761fba418",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflinePunctuationConfig.smali",
+        "rebuiltSHA256": "e0e427fa51098929abbf0cd1124e06bf7067a3dfdc6e8bef29a14ae761fba418",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6460,
+        "rebuiltBytes": 6460
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflinePunctuationModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflinePunctuationModelConfig.smali",
+        "actualSHA256": "f27c44f4f559493e7a1ca7a3e73b47c2038bda8b2205190249cb287d891810e3",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflinePunctuationModelConfig.smali",
+        "rebuiltSHA256": "f27c44f4f559493e7a1ca7a3e73b47c2038bda8b2205190249cb287d891810e3",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 14191,
+        "rebuiltBytes": 14191
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineQwen3AsrModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineQwen3AsrModelConfig.smali",
+        "actualSHA256": "4a108d11fb07b481022cc3e158839a231efaf395b73cc2b43bf4fbbae43ce8c3",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineQwen3AsrModelConfig.smali",
+        "rebuiltSHA256": "4a108d11fb07b481022cc3e158839a231efaf395b73cc2b43bf4fbbae43ce8c3",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 30471,
+        "rebuiltBytes": 30471
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizer$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineRecognizer$Companion.smali",
+        "actualSHA256": "9583ce7a8df1b7329c42125d4c662ffa6eef9bd0087b0a9baaedd997add16aa0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizer$Companion.smali",
+        "rebuiltSHA256": "9583ce7a8df1b7329c42125d4c662ffa6eef9bd0087b0a9baaedd997add16aa0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1793,
+        "rebuiltBytes": 1793
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+        "actualSHA256": "f8527481b7c79195d5978e30af689f6751b96b1898cfc222b6821d3b27ad4dd0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizer.smali",
+        "rebuiltSHA256": "f8527481b7c79195d5978e30af689f6751b96b1898cfc222b6821d3b27ad4dd0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10658,
+        "rebuiltBytes": 10658
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizerConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineRecognizerConfig.smali",
+        "actualSHA256": "4eb07a702fb7df415a7ededecec7093cecd2d149f96b63405eb282e960255520",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizerConfig.smali",
+        "rebuiltSHA256": "4eb07a702fb7df415a7ededecec7093cecd2d149f96b63405eb282e960255520",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 42895,
+        "rebuiltBytes": 42895
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizerKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineRecognizerKt.smali",
+        "actualSHA256": "4de0ddb54da73ceae68aa4151da8eb4bf0c6b0115d65e2e1c267902a3c1751fc",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizerKt.smali",
+        "rebuiltSHA256": "4de0ddb54da73ceae68aa4151da8eb4bf0c6b0115d65e2e1c267902a3c1751fc",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 237414,
+        "rebuiltBytes": 237414
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineRecognizerResult.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineRecognizerResult.smali",
+        "actualSHA256": "8d126f4a37906cf8d58aec9dda609b2959b1f03b45a04775bc03789beddbee47",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineRecognizerResult.smali",
+        "rebuiltSHA256": "8d126f4a37906cf8d58aec9dda609b2959b1f03b45a04775bc03789beddbee47",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 24179,
+        "rebuiltBytes": 24179
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSenseVoiceModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSenseVoiceModelConfig.smali",
+        "actualSHA256": "d122159cd492721bf2c18c73da35b2fab54769e4dd3e4b3afe59969b7d641d09",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSenseVoiceModelConfig.smali",
+        "rebuiltSHA256": "d122159cd492721bf2c18c73da35b2fab54769e4dd3e4b3afe59969b7d641d09",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16296,
+        "rebuiltBytes": 16296
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization$Companion.smali",
+        "actualSHA256": "b81b2ebebca32c0590939819695fa61d57ddbe0a655e1cabb2882336e2406020",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization$Companion.smali",
+        "rebuiltSHA256": "b81b2ebebca32c0590939819695fa61d57ddbe0a655e1cabb2882336e2406020",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1306,
+        "rebuiltBytes": 1306
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+        "actualSHA256": "fd33df6cbd413498cc26740e2b6f3b1b6de5c359dfce28f12e443610f20ad7e3",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarization.smali",
+        "rebuiltSHA256": "fd33df6cbd413498cc26740e2b6f3b1b6de5c359dfce28f12e443610f20ad7e3",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 13262,
+        "rebuiltBytes": 13262
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig.smali",
+        "actualSHA256": "450fd96753c0df50a25424734ed10165d1fc1d59bdfb950103459ca3c1371c0b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationConfig.smali",
+        "rebuiltSHA256": "450fd96753c0df50a25424734ed10165d1fc1d59bdfb950103459ca3c1371c0b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 22290,
+        "rebuiltBytes": 22290
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment.smali",
+        "actualSHA256": "98056222613c7d3aa4bfdeb5edf4d3c8645592836e6b2945a32a4fe96d689a52",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerDiarizationSegment.smali",
+        "rebuiltSHA256": "98056222613c7d3aa4bfdeb5edf4d3c8645592836e6b2945a32a4fe96d689a52",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10130,
+        "rebuiltBytes": 10130
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationModelConfig.smali",
+        "actualSHA256": "7bb7bcfa92de0f51a15b61a97b666c59f9fcd4c9933cf3f4c31211e17e428a94",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationModelConfig.smali",
+        "rebuiltSHA256": "7bb7bcfa92de0f51a15b61a97b666c59f9fcd4c9933cf3f4c31211e17e428a94",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16262,
+        "rebuiltBytes": 16262
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationPyannoteModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationPyannoteModelConfig.smali",
+        "actualSHA256": "697e7b70d3c533620d44374b637d54fc956030b4b16a6bc8539b84e4d6303c76",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeakerSegmentationPyannoteModelConfig.smali",
+        "rebuiltSHA256": "697e7b70d3c533620d44374b637d54fc956030b4b16a6bc8539b84e4d6303c76",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9409,
+        "rebuiltBytes": 9409
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser$Companion.smali",
+        "actualSHA256": "62268ba485e92ddc24a5359c6c6235286bfc0e92e9504944af759634474aca2f",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser$Companion.smali",
+        "rebuiltSHA256": "62268ba485e92ddc24a5359c6c6235286bfc0e92e9504944af759634474aca2f",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1285,
+        "rebuiltBytes": 1285
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+        "actualSHA256": "68ef008e2cca9be3a1e3222fa9797df43118a404d9ec0d8b71097165a9a39ceb",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiser.smali",
+        "rebuiltSHA256": "68ef008e2cca9be3a1e3222fa9797df43118a404d9ec0d8b71097165a9a39ceb",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7136,
+        "rebuiltBytes": 7136
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig.smali",
+        "actualSHA256": "447753cfd5791aa606e7f42ba74b4af3e1103911542b23beda5c64e1be15a2e9",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserConfig.smali",
+        "rebuiltSHA256": "447753cfd5791aa606e7f42ba74b4af3e1103911542b23beda5c64e1be15a2e9",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8009,
+        "rebuiltBytes": 8009
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserDpdfNetModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserDpdfNetModelConfig.smali",
+        "actualSHA256": "0a96f542f28bf4cf27d41fc7402c07be5e14d84db2a031218590d88aab4f1cdc",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserDpdfNetModelConfig.smali",
+        "rebuiltSHA256": "0a96f542f28bf4cf27d41fc7402c07be5e14d84db2a031218590d88aab4f1cdc",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9237,
+        "rebuiltBytes": 9237
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserGtcrnModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserGtcrnModelConfig.smali",
+        "actualSHA256": "7502b4e9f845bc277935192b94a28c3278d92fe07ea05681242b97955b1c9cd6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserGtcrnModelConfig.smali",
+        "rebuiltSHA256": "7502b4e9f845bc277935192b94a28c3278d92fe07ea05681242b97955b1c9cd6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6628,
+        "rebuiltBytes": 6628
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserModelConfig.smali",
+        "actualSHA256": "895826116a087d0e1f2596c5112bf00774d10e4e7b952506c6a81d619db63959",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserModelConfig.smali",
+        "rebuiltSHA256": "895826116a087d0e1f2596c5112bf00774d10e4e7b952506c6a81d619db63959",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 25950,
+        "rebuiltBytes": 25950
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserVoxLockModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserVoxLockModelConfig.smali",
+        "actualSHA256": "81962441d93f034e5f5d16bfbea5f4b0d7af74ef26dc89daeff411912f77b138",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineSpeechDenoiserVoxLockModelConfig.smali",
+        "rebuiltSHA256": "81962441d93f034e5f5d16bfbea5f4b0d7af74ef26dc89daeff411912f77b138",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 13530,
+        "rebuiltBytes": 13530
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineStream$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineStream$Companion.smali",
+        "actualSHA256": "a03c083ce3e44dbe1063107a333659e5c6a94d950ef8c81f090f09910f50d688",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineStream$Companion.smali",
+        "rebuiltSHA256": "a03c083ce3e44dbe1063107a333659e5c6a94d950ef8c81f090f09910f50d688",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1245,
+        "rebuiltBytes": 1245
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineStream.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineStream.smali",
+        "actualSHA256": "da7801770831ebfc25e895d6e712e4b1c28320fe84f95cae48fef58e24da2563",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineStream.smali",
+        "rebuiltSHA256": "da7801770831ebfc25e895d6e712e4b1c28320fe84f95cae48fef58e24da2563",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7925,
+        "rebuiltBytes": 7925
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTransducerModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTransducerModelConfig.smali",
+        "actualSHA256": "0afe87c28b8cd29fd30e1680e803d00405fdaf0230ff389fdfa02cd87cb9dfa8",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTransducerModelConfig.smali",
+        "rebuiltSHA256": "0afe87c28b8cd29fd30e1680e803d00405fdaf0230ff389fdfa02cd87cb9dfa8",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16960,
+        "rebuiltBytes": 16960
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTts$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTts$Companion.smali",
+        "actualSHA256": "2e564c75adee85c4abda9542ff458221f623f986594da4937d824b64925c323c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTts$Companion.smali",
+        "rebuiltSHA256": "2e564c75adee85c4abda9542ff458221f623f986594da4937d824b64925c323c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1224,
+        "rebuiltBytes": 1224
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTts.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+        "actualSHA256": "9e59f8901bb768d04a03ab79ef664330d11ca11c786378a97fd0719ab312ef95",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTts.smali",
+        "rebuiltSHA256": "9e59f8901bb768d04a03ab79ef664330d11ca11c786378a97fd0719ab312ef95",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 21013,
+        "rebuiltBytes": 21013
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTtsConfig.smali",
+        "actualSHA256": "cce819a1acd92219705a657fb8bfb172227c0aa69041a6c90112408589db2da7",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsConfig.smali",
+        "rebuiltSHA256": "cce819a1acd92219705a657fb8bfb172227c0aa69041a6c90112408589db2da7",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 19019,
+        "rebuiltBytes": 19019
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsKittenModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTtsKittenModelConfig.smali",
+        "actualSHA256": "31314f6af5bf6fa74ecf4ab8a70f081bca6dc94a77b426dbd5791c7e3c61878d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsKittenModelConfig.smali",
+        "rebuiltSHA256": "31314f6af5bf6fa74ecf4ab8a70f081bca6dc94a77b426dbd5791c7e3c61878d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 21653,
+        "rebuiltBytes": 21653
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsKokoroModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTtsKokoroModelConfig.smali",
+        "actualSHA256": "e74488fac03efcc7a7546a3fcf6a6186e2b6efafa085c18bf4077a45a2bb455a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsKokoroModelConfig.smali",
+        "rebuiltSHA256": "e74488fac03efcc7a7546a3fcf6a6186e2b6efafa085c18bf4077a45a2bb455a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 28009,
+        "rebuiltBytes": 28009
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsMatchaModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTtsMatchaModelConfig.smali",
+        "actualSHA256": "26efb740a3a6e39dd49de341e291720bc53e397919abcdd5618b8a0a80923a36",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsMatchaModelConfig.smali",
+        "rebuiltSHA256": "26efb740a3a6e39dd49de341e291720bc53e397919abcdd5618b8a0a80923a36",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 27257,
+        "rebuiltBytes": 27257
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTtsModelConfig.smali",
+        "actualSHA256": "2c0771e72e6e2a1c60261997883095cd40cd0a653f6576a53db37ebf9b312581",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsModelConfig.smali",
+        "rebuiltSHA256": "2c0771e72e6e2a1c60261997883095cd40cd0a653f6576a53db37ebf9b312581",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 44287,
+        "rebuiltBytes": 44287
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsPocketModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTtsPocketModelConfig.smali",
+        "actualSHA256": "d00107d782fc245b06f046d095b839954f7602069b14ac45a1c9194cec4091b0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsPocketModelConfig.smali",
+        "rebuiltSHA256": "d00107d782fc245b06f046d095b839954f7602069b14ac45a1c9194cec4091b0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 28537,
+        "rebuiltBytes": 28537
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsSupertonicModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTtsSupertonicModelConfig.smali",
+        "actualSHA256": "24d1f13c520e75dd16134b28f800340de3e9e03a9bc114b0c9a3bfe74a2b2488",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsSupertonicModelConfig.smali",
+        "rebuiltSHA256": "24d1f13c520e75dd16134b28f800340de3e9e03a9bc114b0c9a3bfe74a2b2488",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 26640,
+        "rebuiltBytes": 26640
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsVitsModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTtsVitsModelConfig.smali",
+        "actualSHA256": "29da6b0ae799d00f4a1a8539c8e5c9277cb0d4013808c4ef8806a7f8c0282cb0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsVitsModelConfig.smali",
+        "rebuiltSHA256": "29da6b0ae799d00f4a1a8539c8e5c9277cb0d4013808c4ef8806a7f8c0282cb0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 25993,
+        "rebuiltBytes": 25993
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineTtsZipVoiceModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineTtsZipVoiceModelConfig.smali",
+        "actualSHA256": "aae4664b7e7f763f7ef99f2c2c5f533992076ee8f0b25ba690fcafe8737b623f",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineTtsZipVoiceModelConfig.smali",
+        "rebuiltSHA256": "aae4664b7e7f763f7ef99f2c2c5f533992076ee8f0b25ba690fcafe8737b623f",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 31829,
+        "rebuiltBytes": 31829
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineWenetCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineWenetCtcModelConfig.smali",
+        "actualSHA256": "b1be3436a75c6399219d4d5d28c766483d5eceec92891c6eeeb1e1a44f9f501a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineWenetCtcModelConfig.smali",
+        "rebuiltSHA256": "b1be3436a75c6399219d4d5d28c766483d5eceec92891c6eeeb1e1a44f9f501a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6377,
+        "rebuiltBytes": 6377
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineWhisperModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineWhisperModelConfig.smali",
+        "actualSHA256": "ba48042aa7b31fcbd74b0e50055ab82f5271b0c0d57703ca2955a4568385cb90",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineWhisperModelConfig.smali",
+        "rebuiltSHA256": "ba48042aa7b31fcbd74b0e50055ab82f5271b0c0d57703ca2955a4568385cb90",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 23115,
+        "rebuiltBytes": 23115
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineZipformerAudioTaggingModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineZipformerAudioTaggingModelConfig.smali",
+        "actualSHA256": "4a972da60836afcc3b64474f49e2dcb43d5b4881b69f504ad0c69c285d43b432",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineZipformerAudioTaggingModelConfig.smali",
+        "rebuiltSHA256": "4a972da60836afcc3b64474f49e2dcb43d5b4881b69f504ad0c69c285d43b432",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6665,
+        "rebuiltBytes": 6665
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OfflineZipformerCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OfflineZipformerCtcModelConfig.smali",
+        "actualSHA256": "6d9f28377e2d1c1773f374c650176040fd90513f5570419cedaa6a11fad94486",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OfflineZipformerCtcModelConfig.smali",
+        "rebuiltSHA256": "6d9f28377e2d1c1773f374c650176040fd90513f5570419cedaa6a11fad94486",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10578,
+        "rebuiltBytes": 10578
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineCtcFstDecoderConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineCtcFstDecoderConfig.smali",
+        "actualSHA256": "c99bb417266d7053b1f0681c1ee34abfed7fc09e59cc6bf4ea655b95b5cd771b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineCtcFstDecoderConfig.smali",
+        "rebuiltSHA256": "c99bb417266d7053b1f0681c1ee34abfed7fc09e59cc6bf4ea655b95b5cd771b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8517,
+        "rebuiltBytes": 8517
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineLMConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineLMConfig.smali",
+        "actualSHA256": "61ddd6bd635e33d30ba58ffe0cbc4f967bcaffc6ce5f00a901d8b0d439eae8a1",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineLMConfig.smali",
+        "rebuiltSHA256": "61ddd6bd635e33d30ba58ffe0cbc4f967bcaffc6ce5f00a901d8b0d439eae8a1",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8248,
+        "rebuiltBytes": 8248
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineModelConfig.smali",
+        "actualSHA256": "6e9a613aae642ff6ce5d3abd62431a4d0ad05181732477e3bebcccea0135d7c4",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineModelConfig.smali",
+        "rebuiltSHA256": "6e9a613aae642ff6ce5d3abd62431a4d0ad05181732477e3bebcccea0135d7c4",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 45967,
+        "rebuiltBytes": 45967
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineNeMoCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineNeMoCtcModelConfig.smali",
+        "actualSHA256": "47f64607a224ca8fd2a263c1dd330725c683706a17e460683593099654ff46b4",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineNeMoCtcModelConfig.smali",
+        "rebuiltSHA256": "47f64607a224ca8fd2a263c1dd330725c683706a17e460683593099654ff46b4",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6330,
+        "rebuiltBytes": 6330
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineParaformerModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineParaformerModelConfig.smali",
+        "actualSHA256": "1c50a84b6a0348c14cb10eccf704a6636aa46286da584fd9a44ab58eac828dea",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineParaformerModelConfig.smali",
+        "rebuiltSHA256": "1c50a84b6a0348c14cb10eccf704a6636aa46286da584fd9a44ab58eac828dea",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 9620,
+        "rebuiltBytes": 9620
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlinePunctuation$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlinePunctuation$Companion.smali",
+        "actualSHA256": "33456257192d75966ef85fd96a45cc4973fb86f590aac53bb28f28645c42999c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlinePunctuation$Companion.smali",
+        "rebuiltSHA256": "33456257192d75966ef85fd96a45cc4973fb86f590aac53bb28f28645c42999c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1265,
+        "rebuiltBytes": 1265
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+        "actualSHA256": "4843fba9ccd1d78ae37d6ffe46eb8f5458be4c9b0f2db6679c708b329213a8eb",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlinePunctuation.smali",
+        "rebuiltSHA256": "4843fba9ccd1d78ae37d6ffe46eb8f5458be4c9b0f2db6679c708b329213a8eb",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6244,
+        "rebuiltBytes": 6244
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlinePunctuationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlinePunctuationConfig.smali",
+        "actualSHA256": "c1d8b20376147e34b1a55a238061212ad50822c69229762005ed2d2245fde658",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlinePunctuationConfig.smali",
+        "rebuiltSHA256": "c1d8b20376147e34b1a55a238061212ad50822c69229762005ed2d2245fde658",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6416,
+        "rebuiltBytes": 6416
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlinePunctuationModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlinePunctuationModelConfig.smali",
+        "actualSHA256": "710d6325f238f2e8f4969abc2b7dbf2dfac94417b81ef9e2ffc60089068fb5f5",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlinePunctuationModelConfig.smali",
+        "rebuiltSHA256": "710d6325f238f2e8f4969abc2b7dbf2dfac94417b81ef9e2ffc60089068fb5f5",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 17486,
+        "rebuiltBytes": 17486
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizer$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineRecognizer$Companion.smali",
+        "actualSHA256": "0327b9e19e37010390a4973654add3b50d431237a7c588d2f4fea497db732238",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizer$Companion.smali",
+        "rebuiltSHA256": "0327b9e19e37010390a4973654add3b50d431237a7c588d2f4fea497db732238",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1787,
+        "rebuiltBytes": 1787
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+        "actualSHA256": "323b731a8181a3521fb0ed8fe37da537b3516adc5f5986c6c310c494259a9e9d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizer.smali",
+        "rebuiltSHA256": "323b731a8181a3521fb0ed8fe37da537b3516adc5f5986c6c310c494259a9e9d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12179,
+        "rebuiltBytes": 12179
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizerConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineRecognizerConfig.smali",
+        "actualSHA256": "d5546cc8de7fc2c9b66e495a423f5c0b4bc385120bc9a7d9e9494115566f76ad",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizerConfig.smali",
+        "rebuiltSHA256": "d5546cc8de7fc2c9b66e495a423f5c0b4bc385120bc9a7d9e9494115566f76ad",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 53775,
+        "rebuiltBytes": 53775
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizerKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineRecognizerKt.smali",
+        "actualSHA256": "5cfccc27cf1d8336e6d3d26af03c1ac8cc10499a89ed450aa2edb02edfef6199",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizerKt.smali",
+        "rebuiltSHA256": "5cfccc27cf1d8336e6d3d26af03c1ac8cc10499a89ed450aa2edb02edfef6199",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 74405,
+        "rebuiltBytes": 74405
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineRecognizerResult.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineRecognizerResult.smali",
+        "actualSHA256": "513b4fce01eb19d8e5dbe813ee8a742a5461a6fdb5e2d4724987b8cdd7bb6d32",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineRecognizerResult.smali",
+        "rebuiltSHA256": "513b4fce01eb19d8e5dbe813ee8a742a5461a6fdb5e2d4724987b8cdd7bb6d32",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12979,
+        "rebuiltBytes": 12979
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser$Companion.smali",
+        "actualSHA256": "43ae580528620ceeeb1e58276e46682587eec0255b2ff17c8ed01f5fbbe1e426",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser$Companion.smali",
+        "rebuiltSHA256": "43ae580528620ceeeb1e58276e46682587eec0255b2ff17c8ed01f5fbbe1e426",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1280,
+        "rebuiltBytes": 1280
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+        "actualSHA256": "25822b4594daa4e70bdd949e3a087ce1b64ee2bd91ca413f645ff4dab05fcf78",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiser.smali",
+        "rebuiltSHA256": "25822b4594daa4e70bdd949e3a087ce1b64ee2bd91ca413f645ff4dab05fcf78",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8778,
+        "rebuiltBytes": 8778
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig.smali",
+        "actualSHA256": "672a3d2cbd5b55b98f9910c9df9c907b3e31bf23574a643e3936bc82da98ce0b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineSpeechDenoiserConfig.smali",
+        "rebuiltSHA256": "672a3d2cbd5b55b98f9910c9df9c907b3e31bf23574a643e3936bc82da98ce0b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7979,
+        "rebuiltBytes": 7979
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineStream$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineStream$Companion.smali",
+        "actualSHA256": "90bb837939b9a7874e3c6c69775a93b1d9187025e41dba583d84aa93433d24d6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineStream$Companion.smali",
+        "rebuiltSHA256": "90bb837939b9a7874e3c6c69775a93b1d9187025e41dba583d84aa93433d24d6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1240,
+        "rebuiltBytes": 1240
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineStream.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineStream.smali",
+        "actualSHA256": "cf23b184cb116a4decb3b3c3c58451f6214ce003a151312efcb4f8a2ce018190",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineStream.smali",
+        "rebuiltSHA256": "cf23b184cb116a4decb3b3c3c58451f6214ce003a151312efcb4f8a2ce018190",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8984,
+        "rebuiltBytes": 8984
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineToneCtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineToneCtcModelConfig.smali",
+        "actualSHA256": "4c6830ac03245d6d53aaecac36f7a02f6159e0f7ce24b78a101bc58a53ef98c0",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineToneCtcModelConfig.smali",
+        "rebuiltSHA256": "4c6830ac03245d6d53aaecac36f7a02f6159e0f7ce24b78a101bc58a53ef98c0",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6330,
+        "rebuiltBytes": 6330
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineTransducerModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineTransducerModelConfig.smali",
+        "actualSHA256": "99356262ebc6275c6ebe4055b393a6f17131eb8475452f2bb88bd824970cc7c6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineTransducerModelConfig.smali",
+        "rebuiltSHA256": "99356262ebc6275c6ebe4055b393a6f17131eb8475452f2bb88bd824970cc7c6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16909,
+        "rebuiltBytes": 16909
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/OnlineZipformer2CtcModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/OnlineZipformer2CtcModelConfig.smali",
+        "actualSHA256": "ad8af11713b535c0d00a606b5ac6ab8e9d9ebd89ce6e0197683e9017d36e5f62",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/OnlineZipformer2CtcModelConfig.smali",
+        "rebuiltSHA256": "ad8af11713b535c0d00a606b5ac6ab8e9d9ebd89ce6e0197683e9017d36e5f62",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6468,
+        "rebuiltBytes": 6468
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/QnnConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/QnnConfig.smali",
+        "actualSHA256": "0a014573e41d2ba534128d08d4e4ec064bdd75639256cd2f5d3cc11cb08415e1",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/QnnConfig.smali",
+        "rebuiltSHA256": "0a014573e41d2ba534128d08d4e4ec064bdd75639256cd2f5d3cc11cb08415e1",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12277,
+        "rebuiltBytes": 12277
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SileroVadModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SileroVadModelConfig.smali",
+        "actualSHA256": "25d844b7f98bb4683d95b560f99fd0a29decce2d4c2229fce61510777895279d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SileroVadModelConfig.smali",
+        "rebuiltSHA256": "25d844b7f98bb4683d95b560f99fd0a29decce2d4c2229fce61510777895279d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 17785,
+        "rebuiltBytes": 17785
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor$Companion.smali",
+        "actualSHA256": "4d81a17638a421893cfcb5fa198b8d7cbb5a356e252d664a647282654d6cf48b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor$Companion.smali",
+        "rebuiltSHA256": "4d81a17638a421893cfcb5fa198b8d7cbb5a356e252d664a647282654d6cf48b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1287,
+        "rebuiltBytes": 1287
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+        "actualSHA256": "a6c3f88f3e1ebd43e1d4b53af80f0be27fe113e7c24c89250b023a3b130876f4",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractor.smali",
+        "rebuiltSHA256": "a6c3f88f3e1ebd43e1d4b53af80f0be27fe113e7c24c89250b023a3b130876f4",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 8704,
+        "rebuiltBytes": 8704
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig.smali",
+        "actualSHA256": "96411ec31847e604bde434a09cc8aafe241fa595d730a18b9c41eb3c913d1f92",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingExtractorConfig.smali",
+        "rebuiltSHA256": "96411ec31847e604bde434a09cc8aafe241fa595d730a18b9c41eb3c913d1f92",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 13737,
+        "rebuiltBytes": 13737
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager$Companion.smali",
+        "actualSHA256": "cb76a2e173a800ce273df1019876b2697c7388cb98945916dd74fb1bd85c4424",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager$Companion.smali",
+        "rebuiltSHA256": "cb76a2e173a800ce273df1019876b2697c7388cb98945916dd74fb1bd85c4424",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1280,
+        "rebuiltBytes": 1280
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+        "actualSHA256": "5ff02994c1c4deb2a025fb077a0ed7d9aa2e8947c5374c1e41771f616b15ed12",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerEmbeddingManager.smali",
+        "rebuiltSHA256": "5ff02994c1c4deb2a025fb077a0ed7d9aa2e8947c5374c1e41771f616b15ed12",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 11506,
+        "rebuiltBytes": 11506
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpeakerKt.smali",
+        "actualSHA256": "b07d4f7ce593f9224c1b4bbe9c8e01df595f1191ba547a1096f6b4a384ee9bff",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerKt.smali",
+        "rebuiltSHA256": "b07d4f7ce593f9224c1b4bbe9c8e01df595f1191ba547a1096f6b4a384ee9bff",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 970,
+        "rebuiltBytes": 970
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeakerRecognition.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpeakerRecognition.smali",
+        "actualSHA256": "9f0b56567cb52ac1040ffd6b2fca2ffca49a4e83dbce360897a1f39ae6793b87",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeakerRecognition.smali",
+        "rebuiltSHA256": "9f0b56567cb52ac1040ffd6b2fca2ffca49a4e83dbce360897a1f39ae6793b87",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7589,
+        "rebuiltBytes": 7589
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpeechSegment.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpeechSegment.smali",
+        "actualSHA256": "dc8f22d090694b99b48527ce4cf262c2db27890e3c4caf7051961f1a3cfb4039",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpeechSegment.smali",
+        "rebuiltSHA256": "dc8f22d090694b99b48527ce4cf262c2db27890e3c4caf7051961f1a3cfb4039",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1939,
+        "rebuiltBytes": 1939
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentification$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification$Companion.smali",
+        "actualSHA256": "902269baae58b9e5200d39e2fc9649c898ec089d7a8f9537797958e69b2717bc",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification$Companion.smali",
+        "rebuiltSHA256": "902269baae58b9e5200d39e2fc9649c898ec089d7a8f9537797958e69b2717bc",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1320,
+        "rebuiltBytes": 1320
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+        "actualSHA256": "280a8bec8747c3a7c0a5b140d5ecca39f8774225d54c7a51ebaa6570a48e08a2",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentification.smali",
+        "rebuiltSHA256": "280a8bec8747c3a7c0a5b140d5ecca39f8774225d54c7a51ebaa6570a48e08a2",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 7464,
+        "rebuiltBytes": 7464
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig.smali",
+        "actualSHA256": "0bf02d836cb656eb9ba2864b88a9cd708688affa75f8099415bb47fdbc8e2b8d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationConfig.smali",
+        "rebuiltSHA256": "0bf02d836cb656eb9ba2864b88a9cd708688affa75f8099415bb47fdbc8e2b8d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 16066,
+        "rebuiltBytes": 16066
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationKt.smali",
+        "actualSHA256": "4fa85395d3172512e16ae1f83085677cc098bf21956398173c5b71040732c9c4",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationKt.smali",
+        "rebuiltSHA256": "4fa85395d3172512e16ae1f83085677cc098bf21956398173c5b71040732c9c4",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 3542,
+        "rebuiltBytes": 3542
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationWhisperConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationWhisperConfig.smali",
+        "actualSHA256": "2535bd3beb23b1a086a927dcb5401383f217673e7a41a2b10074d34f26a27e44",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/SpokenLanguageIdentificationWhisperConfig.smali",
+        "rebuiltSHA256": "2535bd3beb23b1a086a927dcb5401383f217673e7a41a2b10074d34f26a27e44",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 12460,
+        "rebuiltBytes": 12460
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/TenVadModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/TenVadModelConfig.smali",
+        "actualSHA256": "5bee5182bba1189ebd5454e990dd0b5ff49c1c4671c98554145571022625fcd6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/TenVadModelConfig.smali",
+        "rebuiltSHA256": "5bee5182bba1189ebd5454e990dd0b5ff49c1c4671c98554145571022625fcd6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 17593,
+        "rebuiltBytes": 17593
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/TtsKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/TtsKt.smali",
+        "actualSHA256": "7bfed146b0b0358380fcc1e308011d298328d5ec2e3501af59dc63da47a10f2b",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/TtsKt.smali",
+        "rebuiltSHA256": "7bfed146b0b0358380fcc1e308011d298328d5ec2e3501af59dc63da47a10f2b",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 53331,
+        "rebuiltBytes": 53331
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/Vad$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/Vad$Companion.smali",
+        "actualSHA256": "75372eab805fc0141570682fb27b7ffa4e71834c8b8bb187d549dd8991f6464c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/Vad$Companion.smali",
+        "rebuiltSHA256": "75372eab805fc0141570682fb27b7ffa4e71834c8b8bb187d549dd8991f6464c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1196,
+        "rebuiltBytes": 1196
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/Vad.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/Vad.smali",
+        "actualSHA256": "a589038e0ef119643eeacab869b69167a2f0c1209d98d8046e983d185f7fb71d",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/Vad.smali",
+        "rebuiltSHA256": "a589038e0ef119643eeacab869b69167a2f0c1209d98d8046e983d185f7fb71d",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 10886,
+        "rebuiltBytes": 10886
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/VadKt.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/VadKt.smali",
+        "actualSHA256": "a98d2a46816deceb964226432e476f3af59d3f2218434df64031c259ee2380da",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/VadKt.smali",
+        "rebuiltSHA256": "a98d2a46816deceb964226432e476f3af59d3f2218434df64031c259ee2380da",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 2937,
+        "rebuiltBytes": 2937
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/VadModelConfig.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/VadModelConfig.smali",
+        "actualSHA256": "1b63d936ec3fb3fa9db89b0b7745402ef25b19c8dc90e406d86b194c4e886efe",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/VadModelConfig.smali",
+        "rebuiltSHA256": "1b63d936ec3fb3fa9db89b0b7745402ef25b19c8dc90e406d86b194c4e886efe",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 21591,
+        "rebuiltBytes": 21591
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+        "actualSHA256": "85ba6e4206e08d6c493a7e45ffa58ed34d6b2a595605a334c9d09a4d14d44f6a",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/VersionInfo$Companion.smali",
+        "rebuiltSHA256": "85ba6e4206e08d6c493a7e45ffa58ed34d6b2a595605a334c9d09a4d14d44f6a",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 3493,
+        "rebuiltBytes": 3493
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/VersionInfo.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/VersionInfo.smali",
+        "actualSHA256": "96ca437edeb5393b5cd4af2144ee81c51e3eb16a2586a2b5cae5f5828670459c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/VersionInfo.smali",
+        "rebuiltSHA256": "96ca437edeb5393b5cd4af2144ee81c51e3eb16a2586a2b5cae5f5828670459c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1566,
+        "rebuiltBytes": 1566
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/WaveData.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/WaveData.smali",
+        "actualSHA256": "5f8659c30175f147879e4b628b7a816b6eca6f4b02d4e68671338d2898ae98d6",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/WaveData.smali",
+        "rebuiltSHA256": "5f8659c30175f147879e4b628b7a816b6eca6f4b02d4e68671338d2898ae98d6",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 6914,
+        "rebuiltBytes": 6914
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/WaveReader$Companion.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/WaveReader$Companion.smali",
+        "actualSHA256": "6a5a6aaff0a0a3efaf7f46c81ec10054372f86513587d4a65d54b4bd12519a4c",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/WaveReader$Companion.smali",
+        "rebuiltSHA256": "6a5a6aaff0a0a3efaf7f46c81ec10054372f86513587d4a65d54b4bd12519a4c",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 3392,
+        "rebuiltBytes": 3392
+      },
+      {
+        "path": "com/k2fsa/sherpa/onnx/WaveReader.smali",
+        "actualPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-independent-consumer-release/classes.dex/com/k2fsa/sherpa/onnx/WaveReader.smali",
+        "actualSHA256": "8d05125c259c352ba188ef51eba3a7ef13f7a92eeab6f3f3bb6ed51a0bfd8cd3",
+        "rebuiltPath": ".omx/artifacts/w3-dex-correspondence-20261116T0730/smali-rebuilt-release-no-bootclasspath-merged/com/k2fsa/sherpa/onnx/WaveReader.smali",
+        "rebuiltSHA256": "8d05125c259c352ba188ef51eba3a7ef13f7a92eeab6f3f3bb6ed51a0bfd8cd3",
+        "rawDisassemblyByteEqual": true,
+        "actualBytes": 1559,
+        "rebuiltBytes": 1559
+      }
+    ],
+    "normalizationOrStripping": false
+  }
+]

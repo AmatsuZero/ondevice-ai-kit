@@ -1,0 +1,231 @@
+{
+  "runId": "w3-qwen-terminal-20261114-01",
+  "sourceFingerprint": "ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5",
+  "oldAttempt": {
+    "action": "prepare",
+    "exitCode": 1,
+    "seconds": 18.92465825000545,
+    "terminal": true
+  },
+  "oldOriginalRestorationAllRestored": false,
+  "manualRecovery": {
+    "manualRecoveryComplete": true,
+    "originalRestorationReportRemainsFalse": true,
+    "stageRemoved": true,
+    "bothNewAliasesAbsent": true,
+    "ordinaryPackagesUnchanged": true,
+    "ordinaryAPKHashesUnchanged": true,
+    "ordinaryModelsUnchanged": true,
+    "demoForegroundVerified": true,
+    "runConsumed": false,
+    "nativeDecodeCalls": 0,
+    "operations": [
+      {
+        "op": "remove-owned-marker",
+        "path": "/data/local/tmp/w3-qwen-terminal-20261112-01/.odai-owner"
+      },
+      {
+        "op": "rmdir-empty-owned-stage",
+        "path": "/data/local/tmp/w3-qwen-terminal-20261112-01"
+      }
+    ]
+  },
+  "historicalFreeze": {
+    "historicalFilesVerified": 140,
+    "frozenSHA256": "f778ea664bd407007845e4035428e06262fe0531033735d9fefe961fd4afc4c0",
+    "snapshotGuardVerified": true,
+    "originalFailureOutputsUnchanged": true
+  },
+  "hostVerification": {
+    "suites": [
+      {
+        "suite": "observation",
+        "exitCode": 0,
+        "methods": 201,
+        "elapsedSeconds": 34.43521479197079
+      },
+      {
+        "suite": "contract-current",
+        "exitCode": 0,
+        "methods": 18,
+        "elapsedSeconds": null,
+        "proof": "contract-inputs-populated.stderr"
+      },
+      {
+        "suite": "test_adapter_six_actions_parent",
+        "exitCode": 0,
+        "methods": 1,
+        "elapsedSeconds": 1.2586593749583699
+      },
+      {
+        "suite": "test_instrumentation_finish_parent",
+        "exitCode": 0,
+        "methods": 7,
+        "elapsedSeconds": 0.07510158402146772
+      },
+      {
+        "suite": "test_policy_read_order_parent",
+        "exitCode": 0,
+        "methods": 1,
+        "elapsedSeconds": 0.08628291700733826
+      },
+      {
+        "suite": "test_terminal_collect_parent",
+        "exitCode": 0,
+        "methods": 12,
+        "elapsedSeconds": 214.33947929099668
+      },
+      {
+        "suite": "test_terminal_device_routing_parent",
+        "exitCode": 0,
+        "methods": 4,
+        "elapsedSeconds": 0.10088216699659824
+      },
+      {
+        "suite": "test_terminal_dispatch_parent",
+        "exitCode": 0,
+        "methods": 13,
+        "elapsedSeconds": 69.07439299998805
+      },
+      {
+        "suite": "test_terminal_full_chain_parent",
+        "exitCode": 0,
+        "methods": 2,
+        "elapsedSeconds": 41.11019908299204
+      },
+      {
+        "suite": "test_terminal_launch_parent",
+        "exitCode": 0,
+        "methods": 8,
+        "elapsedSeconds": 117.95792508299928
+      },
+      {
+        "suite": "test_terminal_oem_shell_parent",
+        "exitCode": 0,
+        "methods": 6,
+        "elapsedSeconds": 166.08536254201317
+      },
+      {
+        "suite": "test_terminal_policy_parent",
+        "exitCode": 0,
+        "methods": 8,
+        "elapsedSeconds": 193.21632254199358
+      },
+      {
+        "suite": "test_terminal_prepare_boundaries",
+        "exitCode": 0,
+        "methods": 12,
+        "elapsedSeconds": 20.880270541994832
+      },
+      {
+        "suite": "test_terminal_prepare_faults",
+        "exitCode": 0,
+        "methods": 4,
+        "elapsedSeconds": 17.742470084049273
+      },
+      {
+        "suite": "test_terminal_prepare_final_hashes",
+        "exitCode": 0,
+        "methods": 2,
+        "elapsedSeconds": 9.855454540986102
+      },
+      {
+        "suite": "test_terminal_prepare_parent",
+        "exitCode": 0,
+        "methods": 11,
+        "elapsedSeconds": 18.80323458299972
+      },
+      {
+        "suite": "test_terminal_restore_parent",
+        "exitCode": 0,
+        "methods": 20,
+        "elapsedSeconds": 254.43606762494892
+      },
+      {
+        "suite": "test_terminal_run_parent",
+        "exitCode": 0,
+        "methods": 22,
+        "elapsedSeconds": 21.284751707979012
+      },
+      {
+        "suite": "test_terminal_source_adapter_parent",
+        "exitCode": 0,
+        "methods": 8,
+        "elapsedSeconds": 0.25450449995696545
+      },
+      {
+        "suite": "test_terminal_startup_parent",
+        "exitCode": 0,
+        "methods": 22,
+        "elapsedSeconds": 6.484648625017144
+      },
+      {
+        "suite": "test_terminal_oem_chain_parent",
+        "methods": 2,
+        "exitCode": 0,
+        "elapsedSeconds": 38.68828125001164
+      }
+    ],
+    "methods": 384,
+    "ASTFiles": 64,
+    "allPassed": true,
+    "protectedFiles": 103,
+    "protectedDrift": [],
+    "initialFailedAggregateRetained": "acceptance/result.json",
+    "initialFailureExplanation": "contract-current18ERROR: new output not populated yet; identical81 prepared source+2APKs populated, independent18GREEN; no source changed for this recovery",
+    "additionalOemChain": "2 original sixaction cases with actual remote argv rejoining and TECNO absent exit1",
+    "deviceOperations": 0
+  },
+  "currentFreeze": {
+    "files": 161,
+    "preparedSourceFiles": 81,
+    "reviewedSourceFiles": 16,
+    "diagnosticFrozenSHA256": "6387847c79904c7f67d03dfec7c92c79e69467b408064f5a7fb96bbe3494d7fa",
+    "sourceFingerprint": "ff5b57b0b1ff08d8d8c984efd04dfbb86f62a5cc4cab02700c5804a0c7c0c3c5",
+    "runId": "w3-qwen-terminal-20261114-01",
+    "ordinaryProductionHashesUnchanged": true,
+    "deviceOperations": 0,
+    "qualityAccepted": false,
+    "truePeakMeasured": false,
+    "nativePolicyEffectVerified": false
+  },
+  "reviewReceipts": [
+    "docs/validation/w3-qwen-terminal-driver-source-review-20261114.json",
+    "docs/validation/w3-qwen-terminal-driver-parent-review-20261114.json"
+  ],
+  "newPreflight": {
+    "exitCode": 1,
+    "elapsedSeconds": 3.8061521670315415
+  },
+  "newPrepareStarted": false,
+  "newRunConsumed": false,
+  "newNativeDecodeCalls": 0,
+  "currentConnection": {
+    "adbDevices": [],
+    "usbEnumeratesTecno": true,
+    "adbServerRestartOnce": true,
+    "adbOsxError": "usb_read failed with status: e00002ed",
+    "lockState": "unverified-after-disconnect",
+    "usbDiagnosis": "IOKit not responding; no proven physical cause"
+  },
+  "protectedFiles": 103,
+  "originalDirtyRemaindersPreserved": true,
+  "originalFailureOutputFilesPreserved": 20,
+  "sameApksAndPreparedSources": {
+    "samePreparedSources": 81,
+    "sameApks": true,
+    "newOutput": "artifacts/verification/w3-qwen-terminal-20261114",
+    "oldOutputUnchanged": true,
+    "noDeviceOperation": true,
+    "notNewBuild": true,
+    "notFrozenYet": true,
+    "contractFirstFailure": "acceptance/contract-current.stderr: new output input not populated before parent fixture"
+  },
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "qualityAccepted": false,
+  "truePeakMeasured": false,
+  "productionReady": false,
+  "sourceBranchPushed": false,
+  "evidence": ".omx/artifacts/w3-terminal-portability-20261114"
+}

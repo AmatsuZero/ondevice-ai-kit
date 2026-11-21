@@ -1,0 +1,288 @@
+)]}'
+{
+  "id": "d4d4abbba127382022eec9f6b67ef07f39394b3c",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "8335b067ea4e1894fc34d1c48f3c5ddc4b2b55dc",
+      "name": ".gitignore"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "45418cda72ea6c8d6d97cff1e270366d3eb8935e",
+      "name": "BUILD.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "MODULE_LICENSE_APACHE2"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "MODULE_LICENSE_BSD_LIKE"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "MODULE_LICENSE_MIT"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4359a443532636a39f3ed2ab65caac748befb951",
+      "name": "OWNERS"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "3171342bb0ffe95f67029373a0a7a25fee73a554",
+      "name": "PREUPLOAD.cfg"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "9339dcef80d18e7cf517ea5876a34f5ec22536de",
+      "name": "README.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "__init__.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "68a4fa99783a30603825b63cd262fb1184926b76",
+      "name": "android_llvm_next_flags.go"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "e63f17e9dab7c34a50a2852acc0124201bfba4c7",
+      "name": "bisect_build.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "b01184a50f1b435e4876a260a027363a86dd5834",
+      "name": "bisect_driver.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "6c47f25eee76a5202c0be584d9b2a1cbc3a2010a",
+      "name": "build.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "dbdcabec23b7f4298dbecc45c522b8772d0a5f3f",
+      "name": "cherrypick_cl.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "90ff4d3030360274c46ea7ced4c6511c5190e3d8",
+      "name": "cherrypick_cl_hook.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "1b6ecdc4aef7970ace21b6773a4d4f11f15cc65b",
+      "name": "clang-tidy.sh"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "fe776e3491f6290d05cc7ef3bb8db881f74b74f7",
+      "name": "compare_android_build_trace.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "f8871a0bd36ba1f9317486fe14768179446dd091",
+      "name": "context.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "a63e2cecae151cf2e43477b7a3806931b59856ec",
+      "name": "dispatch.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "821d6d63c70b9be9c1c9eb7618c8924b096147db",
+      "name": "do_build.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "5a1c349bc22ff639bc6ab08499de7957d6c917fd",
+      "name": "do_dispatch.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "beb50588486f0c043a9eeba81238e9c4d13afd79",
+      "name": "do_kythe_xref.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "1b50a0335ed39264162704593d77473498ef8ef1",
+      "name": "do_test_compiler.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "f5c8961650cfcfd6f36fb2cd050f5122e922287b",
+      "name": "do_test_libcxx_on_device.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "b7396cc6464c71d410d9678a3509d6a4dfc8040e",
+      "name": "docker"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "8f4cd57b87a22d297bd1b2ce4aa88e4f3b29b88f",
+      "name": "docs"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "b6c712200f012185d75de58dd11e282bc2b99645",
+      "name": "fetch_kokoro_prebuilts.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "c1ffccfa40756e27d220ca6948fc77e3f934abbb",
+      "name": "kernel-boot-tests"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "ae3aea19da72310a86f31dc6524618c6072304df",
+      "name": "kokoro"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "a29cf2b636ad8ab1fe300bf0e63e902fb628d25f",
+      "name": "kythe_vnames.json"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "f2cc1251acb901bf8c0371e4a4bc387e2b9dcd78",
+      "name": "kythe_xref.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "b30ba9470b62588720eddad67b1dc97b4a62adc7",
+      "name": "merge_from_upstream.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "46733623c2850d27c537dbb5605e2815c5ea788e",
+      "name": "orderfiles"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "549605a0af536671af98427c9e15e47f28faf167",
+      "name": "patches"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "0f0e9c093339ebe9b633a1ad2b292003bfcb1dca",
+      "name": "py3_utils.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "ef6aabc15c586f93fe5ee6c99ea8937b9218bbd6",
+      "name": "pylintrc"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "65f044b0f402e23182cd95e6548eff271dc747d2",
+      "name": "remove-prebuilts.py"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "2e722a52ed56e45c23c7df009357185668a84dc5",
+      "name": "src"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "75a4c5d4aee97f9eba8328090b486b808c859ded",
+      "name": "test"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "5ce14d916a05ac3b986a28c60069154e79933285",
+      "name": "test_compiler.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "b8c71c348605f0bc37d355a9ad55f1ba56374c90",
+      "name": "test_libcxx_on_device.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "e749631ad55e7efce7e16632879de638b7cfb172",
+      "name": "trim_patch_data.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "3ff19c903f2f47104bae04d49e5931869b8daa10",
+      "name": "update-binutils.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "762ea7dd719c274da02feefc292022ac4072cf6f",
+      "name": "update-clang-stable.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "0ad67b3c5a156ba00c398ee482d0aeacedb6fa6e",
+      "name": "update-kernel-toolchain.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "f8424f5a8f821fa6d4f52b0506b3eb3d9d46424e",
+      "name": "update-patches.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "aa8b9776b8806e5cc4f1798962b1c74284250d69",
+      "name": "update-prebuilts.py"
+    }
+  ]
+}

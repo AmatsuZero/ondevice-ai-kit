@@ -1,0 +1,223 @@
+{
+  "command": [
+    "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home/bin/java",
+    "-cp",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-compiler-embeddable-1.7.20.jar:/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-stdlib-1.7.20.jar:/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-script-runtime-1.7.20.jar:/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-reflect-1.7.20.jar:/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-daemon-embeddable-1.7.20.jar:/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/trove4j-1.0.20200330.jar:/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/jna-5.6.0.jar:/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/annotations-13.0.jar",
+    "org.jetbrains.kotlin.cli.jvm.K2JVMCompiler",
+    "-no-stdlib",
+    "-no-reflect",
+    "-jvm-target",
+    "1.8",
+    "-module-name",
+    "sherpa_onnx_release",
+    "-classpath",
+    "/Users/daubert/Library/Android/sdk/platforms/android-34/android.jar:/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-stdlib-1.7.20.jar:/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/annotations-13.0.jar",
+    "-d",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/run-01/classes",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/AudioTagging.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/DenoisedAudio.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/FeatureConfig.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/HomophoneReplacerConfig.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/KeywordSpotter.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflinePunctuation.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineRecognizer.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineSpeakerDiarization.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineSpeechDenoiser.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineStream.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlinePunctuation.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlineRecognizer.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlineSpeechDenoiser.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlineStream.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/QnnConfig.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Speaker.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/SpeakerEmbeddingExtractorConfig.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/SpokenLanguageIdentification.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Tts.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Vad.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/VersionInfo.kt",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/WaveReader.kt"
+  ],
+  "compileClasspath": [
+    {
+      "bytes": 26361808,
+      "path": "/Users/daubert/Library/Android/sdk/platforms/android-34/android.jar",
+      "sha256": "6cea1df3efb77103ac3e2beb9bf4718964b0e0869ab16d39d29d5cbae1c147ad"
+    },
+    {
+      "bytes": 1537347,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-stdlib-1.7.20.jar",
+      "sha256": "7779ec96b9acbf92ca023858ac04543f9d2c3bdf1722425fff42f25ff3acfc9b"
+    },
+    {
+      "bytes": 17536,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/annotations-13.0.jar",
+      "sha256": "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478"
+    }
+  ],
+  "compilerClasspath": [
+    {
+      "bytes": 53395419,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-compiler-embeddable-1.7.20.jar",
+      "sha256": "5ec2be1872dc47b9dcb466f1781eded6c59d9eee18657d4b0f1148e619caea36"
+    },
+    {
+      "bytes": 1537347,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-stdlib-1.7.20.jar",
+      "sha256": "7779ec96b9acbf92ca023858ac04543f9d2c3bdf1722425fff42f25ff3acfc9b"
+    },
+    {
+      "bytes": 42178,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-script-runtime-1.7.20.jar",
+      "sha256": "696f56daac19b75a20fdffa899f0a40750ba7cdf910dd198af7f05692d31e015"
+    },
+    {
+      "bytes": 3135706,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-reflect-1.7.20.jar",
+      "sha256": "afe70b6faf6c23f6fedcb0cf88b07cb1778139f4b744ae13b23eb8bbc4ee09f8"
+    },
+    {
+      "bytes": 729190,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/kotlin-daemon-embeddable-1.7.20.jar",
+      "sha256": "e669ab8d2677d00f799fc86018551fbd9bd6b3c1d09fdb3f0eec8c4f44f62e63"
+    },
+    {
+      "bytes": 572985,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/trove4j-1.0.20200330.jar",
+      "sha256": "c5fd725bffab51846bf3c77db1383c60aaaebfe1b7fe2f00d23fe1b7df0a439d"
+    },
+    {
+      "bytes": 1509440,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/jna-5.6.0.jar",
+      "sha256": "5557e235a8aa2f9766d5dc609d67948f2a8832c2d796cea9ef1d6cbe0b3b7eaf"
+    },
+    {
+      "bytes": 17536,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jvm-rebuild-20261115T153000Z/direct-recovery-01/toolchain/annotations-13.0.jar",
+      "sha256": "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478"
+    }
+  ],
+  "java": {
+    "bytes": 70432,
+    "path": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home/bin/java",
+    "sha256": "1069d726eae63d510d2983a2a4c7869f14db200605685c98117d9a27aaa5270f"
+  },
+  "process": {
+    "elapsedSeconds": 2.9584245829610154,
+    "exitCode": 0,
+    "stderr": "probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Tts.kt:299:5: warning: parameter 'dictDir' is never used\n    dictDir: String = \"\", // unused\n    ^\n",
+    "stdout": ""
+  },
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "sources": [
+    {
+      "bytes": 5105,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/AudioTagging.kt",
+      "sha256": "ca873e716e7ccb3e86443e38f7b5f840bb4ccd067532b6c26454fab3956d3f88"
+    },
+    {
+      "bytes": 357,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/DenoisedAudio.kt",
+      "sha256": "0a426f3f12edb5c2dff486ddc7accb6675a666bf6c852f48d28ce37f49afc69f"
+    },
+    {
+      "bytes": 301,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/FeatureConfig.kt",
+      "sha256": "829c7adc4db1324f21b9a9cbf5bf10eacf759714fe50956f48317c1ffef044f6"
+    },
+    {
+      "bytes": 170,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/HomophoneReplacerConfig.kt",
+      "sha256": "fe926b6413f4d87e67c41feb21b8363923a67cbd3a5eb687b76390a5f1f7db60"
+    },
+    {
+      "bytes": 5062,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/KeywordSpotter.kt",
+      "sha256": "6d8387534b942a979424a1d6721fd285f85df8bfca0ea392860f11fe06f31d06"
+    },
+    {
+      "bytes": 1428,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflinePunctuation.kt",
+      "sha256": "b7e52364dfd00d6057e355e03ba965826491bd78b3df2a1cf6c77e1ee2e55b4e"
+    },
+    {
+      "bytes": 56760,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineRecognizer.kt",
+      "sha256": "8103b67ec65910a71e6b8d4bca7934f77c1af47b68a5c18cdca0ce3f956247a7"
+    },
+    {
+      "bytes": 3258,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineSpeakerDiarization.kt",
+      "sha256": "4017f3b1359f6c3f35a0c46ed4e939d2578fe7773c8686c786bd6a591e4b8921"
+    },
+    {
+      "bytes": 2973,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineSpeechDenoiser.kt",
+      "sha256": "02cc81b23f7a09741e9eb32405d4cbc350779fa591c0fc2634488c0386e2fa36"
+    },
+    {
+      "bytes": 1080,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OfflineStream.kt",
+      "sha256": "5c90b7c060cdd0a2222cc935b54f69465a4a7544de29240bafe4d3a8d86dbb6e"
+    },
+    {
+      "bytes": 1446,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlinePunctuation.kt",
+      "sha256": "5622b11cdf848470e4733247bb73a2ac5cedb6b9d1f79dc922df416ed9cb21f7"
+    },
+    {
+      "bytes": 30509,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlineRecognizer.kt",
+      "sha256": "3204ff816361d99d94dda1e8c26681f6d4a5ad749a68d8fee93b4e8bb2b21d17"
+    },
+    {
+      "bytes": 1748,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlineSpeechDenoiser.kt",
+      "sha256": "c270d1b192cd9c380f0cd14befd4b9f13ef6abd90fe009ec428f2c303ad0ab5e"
+    },
+    {
+      "bytes": 1178,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/OnlineStream.kt",
+      "sha256": "6b9f8de317e6a0bb51f0f29d940617b781cb31b190e1c725dd438231836c06ab"
+    },
+    {
+      "bytes": 156,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/QnnConfig.kt",
+      "sha256": "86c963f27677f690eb0d6639735052eba5e60d9f81ccd4c1df0aa831fd680d6f"
+    },
+    {
+      "bytes": 4712,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Speaker.kt",
+      "sha256": "4dcc84f4cf0682e0e4da837ba00130d66ad7aec4f803af4c021de3434246e871"
+    },
+    {
+      "bytes": 200,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/SpeakerEmbeddingExtractorConfig.kt",
+      "sha256": "d90c0ce88dce309813e720ff46abba737401e7e562f9635ee13fd5b32ce106c6"
+    },
+    {
+      "bytes": 2976,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/SpokenLanguageIdentification.kt",
+      "sha256": "a4633a327730508ae03b767c5931be006e2c2123f7687faa32bf992aee5de6cc"
+    },
+    {
+      "bytes": 15694,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Tts.kt",
+      "sha256": "291d30c045ae1cb88a87cce8d6794189e5e63f6ecefd012259694932a5594f38"
+    },
+    {
+      "bytes": 4113,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/Vad.kt",
+      "sha256": "eaae2b8748b3ed1f44d7da83179a815494edced7dc3ce38376d573c4a1c50d9b"
+    },
+    {
+      "bytes": 627,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/VersionInfo.kt",
+      "sha256": "8a9ada883d8cb802b4e70cc6770af20f4b7d85935a16b0b71974d22d55d0c90a"
+    },
+    {
+      "bytes": 1416,
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/sherpa-runtime-materials/2.0.1-jvm-inputs-20261115/source-evidence/sherpa-onnx/kotlin-api/WaveReader.kt",
+      "sha256": "1b4abcf6c7afdb6e8cc4cd4a71098eec4b45c473b470c71671fd20b641aee8e7"
+    }
+  ]
+}

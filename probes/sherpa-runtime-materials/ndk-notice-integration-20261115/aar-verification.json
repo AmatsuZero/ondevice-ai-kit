@@ -1,0 +1,30 @@
+{
+  "aars": [
+    {
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/backend-sherpa-asr-debug.aar",
+      "bytes": 247022,
+      "sha256": "1d8e42e9e5fb9a17faeba4de53c4a54ddac6d2beb02325e264b27f7bd1d64d10",
+      "noticeCount": 68,
+      "noticeBytes": 770479,
+      "variant": "debug",
+      "pythonAndInfozipAgree": true,
+      "priorNonNoticeMembersUnchanged": true
+    },
+    {
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/backend-sherpa-asr-release.aar",
+      "bytes": 245158,
+      "sha256": "ca0065f23e7c65fe0d30fc0d2035d97543a0b8f8470f5c6e194723fdf535478c",
+      "noticeCount": 68,
+      "noticeBytes": 770479,
+      "variant": "release",
+      "pythonAndInfozipAgree": true,
+      "priorNonNoticeMembersUnchanged": true
+    }
+  ],
+  "isolatedLocalPublicationMatchesRelease": true,
+  "runtimeAAR": {
+    "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2/com/k2fsa/sherpa/onnx/sherpa-onnx/2.0.1/sherpa-onnx-2.0.1.aar",
+    "bytes": 49441341,
+    "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7"
+  }
+}

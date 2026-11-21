@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 1,
+  "acceptedAt": "2026-11-10T14:08:35.388214+00:00",
+  "status": "load-only passed on isolated Android36 ARM64 emulator; physical TECNO unverified",
+  "checks": {
+    "terminalCompleted": true,
+    "exactConstructorReturn": true,
+    "exactReleaseSuccess": true,
+    "noCoreErrors": true,
+    "noWrapperErrors": true,
+    "zeroNonLoadActions": true,
+    "teardownAck": true,
+    "sameRun": true,
+    "sameFingerprint": true,
+    "sameReportBytes": true,
+    "reportSHA": true,
+    "actualResourceObservations": true,
+    "exactPidStartTicks": true,
+    "noBudgetStop": true,
+    "sampledRSSWithin1_5GiB": true,
+    "availableWithin512MiB": true,
+    "loadWindowWithin120s": true,
+    "noAutomaticRetry": true,
+    "truePeakNotClaimed": true,
+    "sixModelHashes": true,
+    "restoreOnlyAliases": true,
+    "emulatorScope": true,
+    "newAliasesRemoved": true,
+    "exactStageRemoved": true,
+    "qemuIdentity": true,
+    "exactAVD": true,
+    "launcherForeground": true,
+    "physicalRunUnsubmitted": true
+  },
+  "checkCount": 28,
+  "host": {
+    "exitCode": 0,
+    "seconds": 4.711034625004686,
+    "stopReason": null,
+    "samples": 17,
+    "sampledMaxRssBytes": 1293668352,
+    "pid": 3397,
+    "startTicks": "51740",
+    "terminalObservationGap": "RuntimeError:(('shell', 'run-as', 'io.ondeviceai.acceptance.qwenload', 'cat', '/proc/3397/status'), 1, '', 'cat: /proc/3397/status: No such file or directory\\n')",
+    "truePeakMeasured": false,
+    "automaticRetry": false
+  },
+  "deviceReport": {
+    "schemaVersion": 1,
+    "runId": "w3-qwen-load-emulator-20261110-01",
+    "sourceFingerprint": "605181e50ea9357c292be93e2bf634742c40566a13984a0ff0b83fdb8b9c0ecd",
+    "pid": 3397,
+    "terminal": true,
+    "status": "completed",
+    "phase": "terminal",
+    "foreground": {
+      "resumed": true,
+      "paused": true,
+      "destroyed": true,
+      "teardownAck": true
+    },
+    "plannedConstructors": 1,
+    "actualConstructors": 1,
+    "streamsCreated": 0,
+    "nativeDecodeCalls": 0,
+    "microphoneStarts": 0,
+    "networkRequests": 0,
+    "config": {
+      "featureSampleRate": 16000,
+      "featureDim": 128,
+      "decodingMethod": "greedy_search",
+      "provider": "cpu",
+      "numThreads": 2,
+      "debug": false,
+      "maxTotalLen": 512,
+      "maxNewTokens": 128,
+      "temperature": 1e-06,
+      "topP": 0.8,
+      "seed": 42,
+      "hotwords": "",
+      "modelType": "",
+      "tokens": "",
+      "convFrontend": "conv_frontend.onnx",
+      "encoder": "encoder.int8.onnx",
+      "decoder": "decoder.int8.onnx",
+      "tokenizer": "modelRoot/tokenizer directory"
+    },
+    "modelsVerified": [
+      {
+        "relativePath": "conv_frontend.onnx",
+        "bytes": 44148281,
+        "sha256": "d22dc4423e0940e49884e903d2ea2f7e5567c14fc1aed97e4e26d6b8f208ef9e"
+      },
+      {
+        "relativePath": "decoder.int8.onnx",
+        "bytes": 755914231,
+        "sha256": "4f6885be5959ae26af3089d38ee7972c5fafbeeb1cf8d5e76eab6d8b61ca5771"
+      },
+      {
+        "relativePath": "encoder.int8.onnx",
+        "bytes": 182491662,
+        "sha256": "60748d3e6744a57c9c91e1b17424a6c2990567e8adceb0783940c03ed98fa9d9"
+      },
+      {
+        "relativePath": "tokenizer/merges.txt",
+        "bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+      },
+      {
+        "relativePath": "tokenizer/tokenizer_config.json",
+        "bytes": 12487,
+        "sha256": "4942d005604266809309cabc9f4e9cb89ce855d59b14681fdc0e1cc62ea26c4c"
+      },
+      {
+        "relativePath": "tokenizer/vocab.json",
+        "bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    ],
+    "core": {
+      "status": "completed",
+      "phase": "done",
+      "constructorAttempts": 1,
+      "constructorReturned": true,
+      "releaseAttempts": 1,
+      "releaseSucceeded": true,
+      "loadNanos": 2419058418,
+      "releaseNanos": 80721376,
+      "errorClass": null,
+      "errorMessage": null,
+      "releaseErrorClass": null,
+      "persistErrorClass": null
+    },
+    "errorClass": null,
+    "errorMessage": null,
+    "teardownErrorClass": null,
+    "wrapperPersistErrorClass": null
+  },
+  "reportSHA256": "7585e920dcac279914a6b689b446d907455daff3ee1e159a10ee691ea48024e2",
+  "observedMinAvailableBytes": 1784631296,
+  "samplingIntervalsSeconds": {
+    "min": 0.17319950000091922,
+    "max": 0.3281267919956008,
+    "median": 0.25705616650157026
+  },
+  "sampledRSSGiB": 1.2048225402832031,
+  "endProcessObservationGap": "Recorded missing /proc status after instrumentation had already exited; terminal dual-read and release ack are present. Not true peak or continuous end-of-process coverage.",
+  "hardwareAcceptance": false,
+  "qualityAcceptance": false,
+  "completeTwoPassCostAcceptance": false,
+  "productionIntegration": false,
+  "physicalRunStillUnsubmitted": true,
+  "sourceBranchPushed": false,
+  "evidenceFiles": {
+    "host-result.json": "d6e765118648142ef765dce2d3d98bf77be5295bb3197940cfc496e93a007e86",
+    "candidate-accepted.json": "56b745e37b81989a285bae18fcfd492f38b2c6d65003c2c4c8fc5973c73ad027",
+    "install-test.apk.json": "7fa7aaa3c2439feb480503199ab109aa452e86ddd7618b1082adfa64a193a8e4",
+    "prepared.json": "91948842e61eba1d3067405e884f3e7d15de3306ecb5c1e4c7aa4aac63cdedf0",
+    "emulator-started.json": "e1dcc6f94156843fa3783a0ca353f880481ecfa53f6f2e632d0adaad41aa4711",
+    "review-parent-assessment.json": "548d0593c343db9e35997edbfdc0897032e36fb871c09d9d79c4d0b8f2a95e2c",
+    "rss-samples.jsonl": "c715a80032b042f4b83dd2a83cd39389bea37ce8ed5f8d961afe29d6cf52dcee",
+    "emulator-avd-name.raw": "707a1ee6f3637a60205d0c346539507bcb304037142940c4d31af6c0229f4625",
+    "transfer-main.apk.json": "c1cb3ae521c3d3acc4d7ef46c066534301e5a59d41d416727986c89895591d1a",
+    "device-before.json": "d7145d6824ac7f9acba4215b272e306ffc77c387eb04d7302012350f9e028623",
+    "restoration.json": "ad0fcaa39eb0504e3b6c1626e7ab77a0df3301c5a8169c6a6bc84fd1c4108a1d",
+    "device-report.json": "7585e920dcac279914a6b689b446d907455daff3ee1e159a10ee691ea48024e2",
+    "instrumentation.log": "8ff85831cc40d638c460e5e80c434f888aed18e3d5a91ee85d131133b9a5e726",
+    "run-started.json": "9735321b17d15d51e546285e65a5f59cd3a6011f5d64befe3631f3b5131e1a42",
+    "device_acceptance_emulator.py": "9f16d923901c3ae02e5be840f84e82ce48a7d55ec683dc40d928855d7f49e56c",
+    "transfer-tokenizer-merges.txt.json": "d5810cb46f96723fdaa04a570fee39e9647929ef0053f7013a8a60810def0c92",
+    "install-main.apk.json": "7fa7aaa3c2439feb480503199ab109aa452e86ddd7618b1082adfa64a193a8e4",
+    "transfer-encoder.int8.onnx.json": "15d4554cb47ad417977641557219e95e4b75bac79a56f843a2838b5ec31fd74a",
+    "transfer-tokenizer-vocab.json.json": "5ff4652f47976ac90ea8d6a552adbf7c92854f513de2d1a55769307cc78c3f2c",
+    "transfer-decoder.int8.onnx.json": "512041404622ffacd7edda6dc7f2f310c46255fd70ca70533b1661909c7e21a5",
+    "package-verified.json": "831a88ebd3bd53ebb3169f4336eb86596cdc236276de78a862857040717cc8ab",
+    "preflight-first-failure.json": "3d4a3393edf89c5567f5801a74f206412ea1efb898b18fb8adadb38093961af0",
+    "collection.json": "3a84c123cd69730e430996f863626362de2a20d274a88bc975990d716a32dce3",
+    "parent-adaptation.json": "430c25b004cb1dc540fc27b0589dab802478782d529eb3fec0f00d275bc19500",
+    "preflight-before-run.json": "a69484efcb0bf6f3f535f11b7c3113794c05d01884696ea3c5525f68b2b232c5",
+    "transfer-conv_frontend.onnx.json": "9487bbd554b883849b9b1f2ec587beb783f73861b8a532cfa63657bae3407cd9",
+    "restored-window.txt": "be7ac081d55549ecf3f7b82eb8d03842b1f04e1263d1e561995f42c085bb40d2",
+    "transfer-tokenizer-tokenizer_config.json.json": "6a7f90e1468c2781f506844d9a00161363daf4482e7f6aedc34e7cf905ce47cc",
+    "device_acceptance_emulator-before-crlf.py": "4dc9fbd41b63463657a7fc070d6b300e1aee44466fb8127bf7c755e9a048669f",
+    "device-report-confirm.json": "7585e920dcac279914a6b689b446d907455daff3ee1e159a10ee691ea48024e2",
+    "transfer-test.apk.json": "5b507916ff82dc52359658b823927a180928f6f08202f1d4faaeb36c20c5516c"
+  },
+  "cleanup": {
+    "removed": [
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/avd-home/W3_Qwen_Load_20261110.avd/userdata-qemu.img.qcow2",
+        "bytes": 3705667584,
+        "sha256": "a18c9edccdf9dfe9660fba2c18ff256debe09f9a0d1140f4277ce1aa2c6c73bd",
+        "reason": "Inactive task-only virtual disk/initrd; model originals, report dual reads, APK/source/config and all logs retained."
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/avd-home/W3_Qwen_Load_20261110.avd/userdata-qemu.img",
+        "bytes": 8323072,
+        "sha256": "61cadb9a3253b707ee1a6deeaa919c9f64a34f41d2de8d3044b40fa58fce288c",
+        "reason": "Inactive task-only virtual disk/initrd; model originals, report dual reads, APK/source/config and all logs retained."
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/avd-home/W3_Qwen_Load_20261110.avd/cache.img.qcow2",
+        "bytes": 196616,
+        "sha256": "653a5ddde6cc210b3492dc4690c696b758892d81d6a9b2d073ee85480637248f",
+        "reason": "Inactive task-only virtual disk/initrd; model originals, report dual reads, APK/source/config and all logs retained."
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/avd-home/W3_Qwen_Load_20261110.avd/cache.img",
+        "bytes": 69206016,
+        "sha256": "c39628d11159632d1d5b20a1bde5a0c96cc105ea2b4701dd80985fa6bc34d343",
+        "reason": "Inactive task-only virtual disk/initrd; model originals, report dual reads, APK/source/config and all logs retained."
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/avd-home/W3_Qwen_Load_20261110.avd/encryptionkey.img.qcow2",
+        "bytes": 7012352,
+        "sha256": "50ea3f7dc39189ec74395accc5f8269f00564553c2434652255093d833495656",
+        "reason": "Inactive task-only virtual disk/initrd; model originals, report dual reads, APK/source/config and all logs retained."
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/avd-home/W3_Qwen_Load_20261110.avd/encryptionkey.img",
+        "bytes": 18874368,
+        "sha256": "522bd0b6a2c92e37de465059bb9487bb9597a9aae032b469a8ebe0b38146d8c3",
+        "reason": "Inactive task-only virtual disk/initrd; model originals, report dual reads, APK/source/config and all logs retained."
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/avd-home/W3_Qwen_Load_20261110.avd/initrd",
+        "bytes": 2092304,
+        "sha256": "e0f06cc1ef47b193d73422f73e9b0ce6876f981b3087c31443056fa07fb017b5",
+        "reason": "Inactive task-only virtual disk/initrd; model originals, report dual reads, APK/source/config and all logs retained."
+      }
+    ],
+    "nominalBytes": 3811372312,
+    "preservedFilesRechecked": 522,
+    "freeBefore": 87299727360,
+    "freeAfter": 91050110976,
+    "observedFreeDelta": 3750383616,
+    "exclusiveReclamationAttribution": false,
+    "existingUserAVDNotTargeted": true,
+    "remainingCleanupCandidates": []
+  },
+  "emulatorStopped": {
+    "serialDisconnected": true,
+    "exactHostPidExited": true,
+    "pid": 60250,
+    "inactiveAVDCacheRemoved": false,
+    "existingUserAVDConfigSHA256": "857d6b432c04879211eae34dbdba541adef72fc2893180a7fb5b823c63787fd9",
+    "existingUserAVDConfigComparison": "No pre-run byte hash was saved; this AVD was never targeted. Current hash is recorded, not claimed as before/after proof."
+  },
+  "parentAdaptation": {
+    "baseScriptSHA256": "9819a7a178b35c65373f1c14657b2847b4d4fba0b8a91856c5f9c8a53c89c251",
+    "emulatorScriptSHA256": "9f16d923901c3ae02e5be840f84e82ce48a7d55ec683dc40d928855d7f49e56c",
+    "exactChanges": [
+      {
+        "before": "ROOT = Path(__file__).resolve().parents[2]",
+        "after": "ROOT = Path('/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation')"
+      },
+      {
+        "before": "OUT = ROOT / 'artifacts/verification/w3-qwen-load-20261110'",
+        "after": "OUT = ROOT / 'artifacts/verification/w3-qwen-load-emulator-20261110'"
+      },
+      {
+        "before": "RUN = 'w3-qwen-load-20261110-01'",
+        "after": "RUN = 'w3-qwen-load-emulator-20261110-01'"
+      },
+      {
+        "before": "serial = json.loads((EVIDENCE / 'android-target-local.json').read_text())['serial']",
+        "after": "serial = 'emulator-5576'"
+      },
+      {
+        "before": "{'ro.product.model': 'TECNO KM9', 'ro.build.version.sdk': '35', 'ro.product.cpu.abi': 'arm64-v8a'}",
+        "after": "{'ro.product.model': 'Android SDK built for arm64', 'ro.build.version.sdk': '36', 'ro.product.cpu.abi': 'arm64-v8a'}"
+      },
+      {
+        "before": "current = identity()",
+        "after": "current = identity()\n    assert text('shell', 'getprop', 'ro.kernel.qemu') == '1'\n    assert text('emu', 'avd', 'name') == 'W3_Qwen_Load_20261110\\nOK'"
+      },
+      {
+        "before": "result = text('shell', 'am', 'start', '-n', 'io.ondeviceai.demo/io.ondeviceai.demo.MainActivity')",
+        "after": "result = text('shell', 'am', 'start', '-a', 'android.intent.action.MAIN', '-c', 'android.intent.category.HOME')"
+      },
+      {
+        "before": "'ordinaryAppReturned': True",
+        "after": "'emulatorLauncherReturned': True, 'supplementalEmulatorEvidenceOnly': True"
+      }
+    ],
+    "guardBoundaryChecks": 5,
+    "sameAPKAndSource": true,
+    "physicalRunReservationChanged": false,
+    "initialEmulatorScriptSHA256": "4dc9fbd41b63463657a7fc070d6b300e1aee44466fb8127bf7c755e9a048669f",
+    "consoleCRLFCorrection": {
+      "observedRaw": "W3_Qwen_Load_20261110\\r\\nOK\\r\\n",
+      "exactNameStillRequired": true,
+      "negativeResponsesRejected": 3,
+      "before": "assert text('emu', 'avd', 'name') == 'W3_Qwen_Load_20261110\\nOK'",
+      "after": "assert text('emu', 'avd', 'name').splitlines() == ['W3_Qwen_Load_20261110', 'OK']",
+      "modelOperationsBeforeCorrection": 0
+    }
+  },
+  "emulatorConfiguration": {
+    "createdAt": "2026-11-10T13:57:53.076333+00:00",
+    "avdName": "W3_Qwen_Load_20261110",
+    "pid": 60250,
+    "serial": "emulator-5576",
+    "port": 5576,
+    "sourceImage": "system-images;android-36;default;arm64-v8a",
+    "imageRevision": 2,
+    "allocatedRamMiB": 4096,
+    "audioEnabled": false,
+    "camerasEnabled": false,
+    "noSnapshot": true,
+    "temporaryRoot": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110",
+    "noExistingAVDModified": true,
+    "modelConstructorAttempts": 0
+  },
+  "localEvidenceOnly": "artifacts/verification/w3-qwen-load-emulator-20261110",
+  "localOnlySourcesBoundBySHA": true,
+  "portableParentScript": {
+    "executedScriptSHA256": "9f16d923901c3ae02e5be840f84e82ce48a7d55ec683dc40d928855d7f49e56c",
+    "portableScriptSHA256": "475c9e0c907c5eac0904fffcd348a517354a1f4a746201af5da32f7ff209b0d0",
+    "onlyRootLocatorChanged": true,
+    "resolvedRootMatches": true,
+    "astOtherwiseIdentical": true,
+    "modelRunRepeated": false
+  },
+  "additionalDuplicateCacheCleanup": {
+    "removedExactCacheDirectories": [
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/source/build",
+        "canonical": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-20261110/source/build",
+        "fileCount": 434,
+        "bytes": 290257479
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/source/.gradle",
+        "canonical": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-20261110/source/.gradle",
+        "fileCount": 15,
+        "bytes": 540998
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-emulator-20261110/source/.kotlin",
+        "canonical": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-qwen-load-20261110/source/.kotlin",
+        "fileCount": 0,
+        "bytes": 0
+      }
+    ],
+    "nominalBytes": 290798477,
+    "canonicalSHAComparisons": 449,
+    "keepFileSHARechecks": 77,
+    "freeBefore": 91040980992,
+    "freeAfter": 91333386240,
+    "exclusiveReclamationAttribution": false
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-10T22:59:07.017702+00:00",
+  "marker": "<!-- w3-qwen-physical-load-20261111 -->",
+  "issues": [
+    {
+      "provider": "github",
+      "id": 6781599971,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6781599971",
+      "bodySHA256": "a94b4813ba8efa8d7c2bac4eb2b1f2203a2e86a8ea785be4a0d520b53d17a7c1",
+      "readbackIdenticalExceptKnownTerminalNewline": true
+    },
+    {
+      "provider": "gitlab",
+      "id": 42550,
+      "url": "https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit/-/issues/15#note_42550",
+      "bodySHA256": "f7de8876b71f764fe51ffff3b76f0e55dbf3e7556208572ba44fbb9e1bb26e38",
+      "readbackIdenticalExceptKnownTerminalNewline": true
+    }
+  ],
+  "githubWiki": {
+    "remoteCommit": "8fab5ec911898f5d773db7feb0dda83f0766bbdc",
+    "contentSHA256": "185c9b519a0c42c561c6bb900b903aa9d987c4298f86f318180d1b6d7586d56f",
+    "readbackIdentical": true,
+    "sourceBranchPushed": false
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "contentSHA256": "185c9b519a0c42c561c6bb900b903aa9d987c4298f86f318180d1b6d7586d56f",
+    "readbackIdentical": true
+  },
+  "issuesRemainOpen": true,
+  "sourceCommit": "cb3ff40ebcfb821b4baf2b61a074c2c7364c0bf9",
+  "sourceBranchPushed": false,
+  "scope": "Physical TECNO one-shot Qwen load/release and sampled-resource subgate passed; complete two-pass file decoding/quality/cost and final release remain unverified;W3open"
+}

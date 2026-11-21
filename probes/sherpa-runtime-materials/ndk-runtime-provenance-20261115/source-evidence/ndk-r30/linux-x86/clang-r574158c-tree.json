@@ -1,0 +1,126 @@
+)]}'
+{
+  "id": "a0b313a7b3a5ebc6355b4087be775bc3242d8218",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "03c6f5967e2f86a556c5bb29176e59d1ff8c4585",
+      "name": "AndroidVersion.txt"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "1055914f24d62de8b6b00f9522a173c20046a4ae",
+      "name": "BUILD.bazel"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "15439d21cdb9ebcfb21f736e5671b1e5ab5e3756",
+      "name": "BUILD_INFO"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "MODULE_LICENSE_APACHE2"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "MODULE_LICENSE_BSD_LIKE"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "MODULE_LICENSE_MIT"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "b051002f8a69f553700ee907ccd3c56d9a2c6c8e",
+      "name": "NOTICE"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "4769c6af90e2ddd1460a7950037937864407dd8c",
+      "name": "android_libc++"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "33d359519d5eb35dcb94f301b3b75cd5e88ee9c9",
+      "name": "aosp_manifest_16134705.xml"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "7e41149266266a582852b9e46ce9aac5d2fdf607",
+      "name": "bin"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4cb6b4629cd1fca714c2a3e0206ffcc5f0e00afc",
+      "name": "clang_source_info.md"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "b14ea972954ca488b6bcf663631f8caa72996c42",
+      "name": "include"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "604b276d3768eccba853deb4af2e87f18775887a",
+      "name": "lib"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "fb17287484c3a7a0919a028f2b8ddfef5b6f37d2",
+      "name": "libexec"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "50866ad4dd4fbc75ee12e1f8c5468f7685128edf",
+      "name": "manifest_16134705.xml"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "5eeb3bab7a92b516cdde8f992df014588691f816",
+      "name": "musl"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "9b92fdea035a88159d14fa4b4bbe13c7cc56686c",
+      "name": "prebuilt_include"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "cf22c973b5692b3d04e6f2c1a587a9dc7b3a00a0",
+      "name": "python3"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "75081a56ebda979afbb8ea17c89dd748b3ad78b8",
+      "name": "runtimes_ndk_cxx"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "4568a87c4491299b393888302e56de08d9500f53",
+      "name": "share"
+    }
+  ]
+}

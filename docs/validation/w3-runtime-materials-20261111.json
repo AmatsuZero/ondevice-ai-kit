@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "runtime": "sherpa-onnx2.0.1",
+  "materialRoot": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d",
+  "materialFiles": 50,
+  "licenseTexts": 20,
+  "buildSourceTexts": 26,
+  "fixedSherpaSourceTexts": 19,
+  "allSourceTextChecks": 46,
+  "relativeLinksVerified": 39,
+  "catalogSHA256": "81392f744786a33b396175d49657b503695e3fe3bb0049c061b4183387b56ab9",
+  "aarSHA256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+  "actualAarZipEntries": 26,
+  "actualAarFiles": 21,
+  "actualNativeLibraries": 16,
+  "nativeAbis": 4,
+  "fileHashes": {
+    "aar-members.json": {
+      "bytes": 4684,
+      "sha256": "4dea0806683521b06fdcb473a27d3d58a8269c6dff49a41364be65f6eccff524"
+    },
+    "material-manifest.json": {
+      "bytes": 25891,
+      "sha256": "913a5f1a4737ba7a5ef26236764b36a387d89558d22fb0176f0a5552b8b0e59f"
+    },
+    "aar-composition.json": {
+      "bytes": 7427,
+      "sha256": "c581a74a13a85d42f0dc9b019a75b2320d2d9f43f62ee88527b5f5e7a9392964"
+    },
+    "RUNTIME-NOTICES.md": {
+      "bytes": 6240,
+      "sha256": "81392f744786a33b396175d49657b503695e3fe3bb0049c061b4183387b56ab9"
+    },
+    "licenses/kaldifst/LICENSE": {
+      "bytes": 11728,
+      "sha256": "a682d6efd1ee5dee08a8e405c233c2c198ea70ae0718129daa83ab58cfe31c5d"
+    },
+    "licenses/kaldi-native-fbank/LICENSE": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "licenses/openfst/COPYING": {
+      "bytes": 559,
+      "sha256": "4300529197035fd3452350718a0b8cee984e9412c9932d7f35fcde849fc97a4b"
+    },
+    "licenses/onnxruntime/ThirdPartyNotices.txt": {
+      "bytes": 325054,
+      "sha256": "0e07b95f3a8d6230037707c5c4a2b554d12c4cb67369669ac255635528ffcee2"
+    },
+    "licenses/onnxruntime/LICENSE": {
+      "bytes": 1073,
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+    },
+    "licenses/sherpa-onnx/LICENSE": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "licenses/utf8proc/LICENSE.md": {
+      "bytes": 5125,
+      "sha256": "3b510150d34f248a221bb88e1d811238d6c6c18b51231822c42974c39bb07256"
+    },
+    "licenses/simple-sentencepiece/LICENSE": {
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    "licenses/eigen/COPYING.LGPL": {
+      "bytes": 26530,
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    },
+    "licenses/eigen/COPYING.BSD": {
+      "bytes": 1517,
+      "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb"
+    },
+    "licenses/eigen/COPYING.MPL2": {
+      "bytes": 16726,
+      "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+    },
+    "licenses/eigen/COPYING.GPL": {
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    "licenses/eigen/COPYING.README": {
+      "bytes": 779,
+      "sha256": "c83230b770f17ef1386ea1fd3681271dd98aa93646bdbfb5bff3a1b7050fff9d"
+    },
+    "licenses/eigen/COPYING.MINPACK": {
+      "bytes": 2193,
+      "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0"
+    },
+    "licenses/kissfft/COPYING": {
+      "bytes": 246,
+      "sha256": "a2840585f8411be8e6826a31ef15ae65c950bd74a2437a73b013398a934ad0c6"
+    },
+    "licenses/json/LICENSE.MIT": {
+      "bytes": 1076,
+      "sha256": "46a65cffd1ea955132d95a8dd921640714a8d6b537d2e4e482d31145ae95b603"
+    },
+    "licenses/hclust-cpp/LICENSE": {
+      "bytes": 1483,
+      "sha256": "e361d842da1d290351860ad6dcce2673a1e42e4f873a3ae1ff4eb92c6adaa882"
+    },
+    "licenses/kaldi-decoder/LICENSE": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "licenses/kissfft/LICENSES/Unlicense": {
+      "bytes": 1521,
+      "sha256": "c543dab3c100d8741a83b02f397746b1e10fc0046f30b942f308191a68e99407"
+    },
+    "licenses/kissfft/LICENSES/BSD-3-Clause": {
+      "bytes": 1830,
+      "sha256": "4d6bcab46f27d6d0c878e8305d4bdcfe040d52bf6656b9771f04c9fb9902c0ed"
+    },
+    "source-evidence/kaldi-native-fbank/CMakeLists.txt": {
+      "bytes": 3962,
+      "sha256": "47cbc405f559189b4d9eec8cedb1383afd4d29f850e764614609c86df49033e8"
+    },
+    "source-evidence/sherpa-onnx/CMakeLists.txt": {
+      "bytes": 23573,
+      "sha256": "dc6b997fb9e65bb1df70554c87ec3a6a4c95af6126c4b401a3c52b6380ed8f86"
+    },
+    "source-evidence/sherpa-onnx/LICENSE": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "source-evidence/sherpa-onnx/build-android-arm64-v8a.sh": {
+      "bytes": 9750,
+      "sha256": "3dc0e938694ba3d570aca1e629c8ddad4adb3cdc3f669c14b3295eefba79954a"
+    },
+    "source-evidence/simple-sentencepiece/CMakeLists.txt": {
+      "bytes": 2315,
+      "sha256": "926695f5eb4692023960083d811428bd1486c4e7609666ee07e2b40a9102ac39"
+    },
+    "source-evidence/kaldi-decoder/CMakeLists.txt": {
+      "bytes": 1695,
+      "sha256": "ef3b3d11ff29e21a23781d0569d33fa59e19dd11d63535caff2492384dd9a48f"
+    },
+    "source-evidence/kaldi-decoder/cmake/eigen.cmake": {
+      "bytes": 1471,
+      "sha256": "679d4c5f617ba736c05d512ef26212cf699fe15eaac9a6375c9c624727a555a0"
+    },
+    "source-evidence/kaldi-decoder/cmake/kaldifst.cmake": {
+      "bytes": 2113,
+      "sha256": "3fc84cb97584d944ad23cccacfcb958f163873ffae62a0764d8e75930f9a8bb3"
+    },
+    "source-evidence/sherpa-onnx/cmake/utf8proc.cmake": {
+      "bytes": 2429,
+      "sha256": "aff3eabe8ee9bdcbc253a0a387820575b53620a25856818e0d47dc524563c073"
+    },
+    "source-evidence/sherpa-onnx/cmake/kaldi-native-fbank.cmake": {
+      "bytes": 2812,
+      "sha256": "1cdf41df7fc3bf3d3ba69ce16c6bc7c0e631a8a81eb9a6a21838215322e1ee56"
+    },
+    "source-evidence/sherpa-onnx/cmake/kaldi-decoder.cmake": {
+      "bytes": 2667,
+      "sha256": "af34b17974474a70b12978d49ac0831276839082924e5ac93bd9bb194a7fd310"
+    },
+    "source-evidence/sherpa-onnx/cmake/hclust-cpp.cmake": {
+      "bytes": 2139,
+      "sha256": "093ae7b3712119d140df2629b5d20b71bafb3d49ba0124dd7a391f278f4db357"
+    },
+    "source-evidence/sherpa-onnx/cmake/simple-sentencepiece.cmake": {
+      "bytes": 8298,
+      "sha256": "57b0c922f28ee7ddee4d284f9b9b2e223067979a78651bea3e70f6f46da01f48"
+    },
+    "source-evidence/sherpa-onnx/cmake/onnxruntime-android-aarch64.cmake": {
+      "bytes": 2454,
+      "sha256": "593cd72a365fb13f60858756fdb78925a20f6dcfa5343e1d4ed549f632cedeee"
+    },
+    "source-evidence/sherpa-onnx/cmake/openfst.cmake": {
+      "bytes": 2487,
+      "sha256": "1658b8ba6bc449daef239cece7ebf6d0bef09665dd4a078ccf6cb66ec01e5d1f"
+    },
+    "source-evidence/sherpa-onnx/cmake/onnxruntime.cmake": {
+      "bytes": 9704,
+      "sha256": "00f4d52e6583022aae06f509243f9a02ee7a5a31f4f62fc4cce12047dfac7860"
+    },
+    "source-evidence/sherpa-onnx/cmake/json.cmake": {
+      "bytes": 1480,
+      "sha256": "e318b4065954cb479318d191c91e32d5a0cae94a53fff70987791b6f9828b1de"
+    },
+    "source-evidence/sherpa-onnx/sherpa-onnx/CMakeLists.txt": {
+      "bytes": 212,
+      "sha256": "b47e88294320f3177d90842d188f8f679a76eb3990278bb4155f3327eec6248a"
+    },
+    "source-evidence/sherpa-onnx/.github/workflows/android.yaml": {
+      "bytes": 10493,
+      "sha256": "c6bbf8e700f944903301bf36f3627fd24f65e072df2c0904226ed153491b31ba"
+    },
+    "source-evidence/sherpa-onnx/.github/workflows/android-fdroid-reproducible-aar.yaml": {
+      "bytes": 5724,
+      "sha256": "cf58f1afc9195d5a91d0d5fff46713782385dd938693f38a88afcecf6feb391b"
+    },
+    "source-evidence/sherpa-onnx/android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts": {
+      "bytes": 1062,
+      "sha256": "3adfa152822feaf28348275a471925ac052dd66e24d2a2a8c968f69b2070bfbd"
+    },
+    "source-evidence/sherpa-onnx/sherpa-onnx/csrc/CMakeLists.txt": {
+      "bytes": 27609,
+      "sha256": "8bf18641b0543333bc9f5cafb10b3be56c51444b8afa43c83361b52cdb63b2eb"
+    },
+    "source-evidence/sherpa-onnx/sherpa-onnx/jni/CMakeLists.txt": {
+      "bytes": 1765,
+      "sha256": "cf1e46fb74c820b476fd7c585073389c4e021508fe32a7f007684f6180c7dd31"
+    },
+    "source-evidence/sherpa-onnx/sherpa-onnx/c-api/CMakeLists.txt": {
+      "bytes": 1144,
+      "sha256": "da0eac0a143ee0c80df5a696b0bd2c338eeaa29bc94e1c8696bfd1bcf246de1d"
+    },
+    "source-evidence/kaldi-native-fbank/cmake/kissfft.cmake": {
+      "bytes": 2377,
+      "sha256": "f6038500a227a48df0e309b9490bd9c8cec8ee376008d7211e3fc96f0c689580"
+    },
+    "source-evidence/kaldifst/cmake/openfst.cmake": {
+      "bytes": 2531,
+      "sha256": "06e4638e2f056cd53e3178fce83e73f68978b9c1f77a60d518067970c03f4211"
+    }
+  },
+  "bundle": {
+    "bytes": 110665,
+    "sha256": "88ae03534be86fb278f1d7ff7ad647321e7f63bbe04dde1324226517f4fc7126",
+    "allMembersByteVerified": true,
+    "uploaded": false
+  },
+  "helperAssessments": [
+    {
+      "label": "catalog-original",
+      "process": {
+        "exitCode": 0,
+        "seconds": 122.3066148749931,
+        "files": {
+          "RUNTIME-NOTICES.md": {
+            "bytes": 5808,
+            "sha256": "b2c2fb7dfa44567984469b5d290a353a795bdfde66db430e66df2744df2d5043"
+          }
+        }
+      },
+      "toolUseCounts": {
+        "Read": 14,
+        "Write": 1
+      },
+      "contextHashesUnchanged": true,
+      "acceptedForIntegration": false,
+      "toolErrorCount": 1
+    },
+    {
+      "label": "catalog-corrected",
+      "process": {
+        "exitCode": 0,
+        "seconds": 101.31933191700955,
+        "files": {
+          "RUNTIME-NOTICES.md": {
+            "bytes": 6240,
+            "sha256": "81392f744786a33b396175d49657b503695e3fe3bb0049c061b4183387b56ab9"
+          }
+        }
+      },
+      "toolUseCounts": {
+        "Read": 6,
+        "Write": 1
+      },
+      "contextHashesUnchanged": true,
+      "acceptedForIntegration": true,
+      "toolErrorCount": 1
+    }
+  ],
+  "originalScopeReportAcceptedAsFinal": false,
+  "frozenProbeChanges": false,
+  "newDeviceOperations": 0,
+  "newModelCalls": 0,
+  "newModelOrBinaryDownloads": 0,
+  "prebuiltStaticCompositionVerified": false,
+  "sourceToPrebuiltProvenanceVerified": false,
+  "productionNoticeRetentionVerified": false,
+  "independentReleaseReviewAccepted": false,
+  "productionReady": false,
+  "scope": "Portable source-license candidate catalog and actual AAR member/dynamic inventory. All retained full texts are source-linked, not a claim that all apply to this exact prebuilt or that recursive binary composition is complete."
+}

@@ -1,0 +1,42 @@
+{
+  "status": "source-host-package-and-dual-review-accepted-device-not-yet-run",
+  "wrapperSHA256": "b3df42e7cbde1992d4f91b6b1bc7143ec6073386bab0a6cb5afbf13d90e743cb",
+  "wrapperBytes": 30513,
+  "sourceFingerprint": "a79adaa583e3707be20055e2fc6dd01f6ca58a4da5da686cf21196666d0ce7e1",
+  "hostGroups": 33,
+  "hostAssertions": 274,
+  "recorderGroups": 13,
+  "recorderAssertions": 100,
+  "parentChecks": 103,
+  "fullToolsChecks": 691,
+  "androidTasksExecuted": 75,
+  "androidBuildSeconds": 20.243705415996374,
+  "lintErrors": 0,
+  "lintWarnings": 7,
+  "actualPCMAssetsVerified": 65,
+  "baseSpecifiedClassesVerifiedAcrossBothAPKs": 16,
+  "extraTestRecorderClassVerified": true,
+  "runtimeLibrariesUnchanged": 4,
+  "apkSHA256": {
+    "main.apk": "1d65b2fabb237871dc498ba7fa93807444a6fde6b3292cca5656dc142a7db80a",
+    "test.apk": "808f9dbdeff4fb538e16457b695db20bf45d76eb9eba76e0cc9c5c509d884182"
+  },
+  "independentSourceReviewAccepted": true,
+  "independentParentReviewAccepted": true,
+  "sourceReview": "docs/validation/w3-qwen-heap-wrapper-review-20261111.json",
+  "parentReview": "docs/validation/w3-qwen-heap-parent-review-20261111.json",
+  "newNativeRunFrozen": false,
+  "deviceOperations": 0,
+  "nativePolicyEffectVerified": false,
+  "engineeringQualityAccepted": false,
+  "productionReady": false,
+  "w3Status": "open",
+  "knownFailuresPreserved": [
+    "null-key12RED",
+    "primary-error-overwrite1RED",
+    "real-layout9errorsRED",
+    "parent-manifest-before-adb1RED",
+    "systemRuby-mixed-gems19failures8errors"
+  ],
+  "evidence": ".omx/artifacts/w3-qwen-ort-lifecycle-20261111/heap-hy3-resume1"
+}

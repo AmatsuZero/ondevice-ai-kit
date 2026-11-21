@@ -1,0 +1,34 @@
+{
+  "externalReviewSHA256": "ac8ab34cbd7435c19892f6ac77de77c939343fa1e85d60180ab900c173a342df",
+  "seconds": 160.1607549590044,
+  "sameScriptAsSupplied": true,
+  "criticalImportantFindings": 0,
+  "suppliedContextOnly": true,
+  "independentDeviceBuildOrRawFileVerification": false,
+  "toolErrorsPreserved": [
+    {
+      "type": "tool_result",
+      "tool_use_id": "chatcmpl-tool-9fe3eee8612c4f90",
+      "content": [
+        {
+          "type": "text",
+          "text": "<tool_use_error>File does not exist.</tool_use_error>"
+        }
+      ],
+      "is_error": true,
+      "_meta": {
+        "rawResponse": {
+          "is_error": true,
+          "tool_error_code": "1001"
+        }
+      }
+    }
+  ],
+  "parentCorrections": [
+    "Emulator script actual bytes were supplied as device-parent.py; reviewer did not independently hash them, and original physical script was not supplied.",
+    "Exclusive saves prevent repeated run reservation, not necessarily every read-only preflight action.",
+    "Same-UID /proc/self preparation proves only self readability; actual target PID observation is still a runtime gate.",
+    "All eight substitutions, CRLF correction and budget constants independently checked by parent."
+  ],
+  "go": "one emulator constructor only; physical test unchanged"
+}

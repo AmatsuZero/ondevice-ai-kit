@@ -1,0 +1,8 @@
+--- a/Package.swift
++++ b/Package.swift
+@@ -310,3 +310,4 @@
+     dependencies: ["InternalCollectionsUtilities"],
+-    exclude: ["CMakeLists.txt"]),
++    exclude: ["CMakeLists.txt"],
++    settings: _settings + [.unsafeFlags(["-Xfrontend", "-disable-module-selectors-in-module-interface"])]),
+   .target(

@@ -1,0 +1,77 @@
+[
+  {
+    "lane": "hy3-candidate",
+    "exitCode": 0,
+    "elapsedSeconds": 66.26,
+    "endedAtUTC": "2026-11-15T14:21:03.470269+00:00",
+    "stdoutBytes": 88945,
+    "stderrBytes": 0,
+    "automaticRetry": false,
+    "automaticFallback": false,
+    "model": "hy3",
+    "resultSubtype": "success",
+    "observedToolUseOrResultEvents": 0,
+    "prompt": {
+      "bytes": 147868,
+      "sha256": "33dc3661f547c37dc7294ee1acb2007c06b569db9d9103c13eb63bed1b34b1af"
+    },
+    "events": {
+      "bytes": 88945,
+      "sha256": "9b96bc72e79203e6cf38f4718379c19d60d4a25387bec8c42c2cf6adf3af9acc"
+    },
+    "candidate": {
+      "bytes": 19727,
+      "sha256": "8873661d7a26b0a9ceb35c2476a2e8770369313993fb7094d9782a8d9fbf346b"
+    }
+  },
+  {
+    "lane": "hy3-editorial",
+    "exitCode": 0,
+    "elapsedSeconds": 61.647,
+    "endedAtUTC": "2026-11-15T14:23:53.697732+00:00",
+    "stdoutBytes": 78678,
+    "stderrBytes": 0,
+    "automaticRetry": false,
+    "automaticFallback": false,
+    "model": "hy3",
+    "resultSubtype": "success",
+    "observedToolUseOrResultEvents": 0,
+    "prompt": {
+      "bytes": 14288,
+      "sha256": "960ed38ec7a3a942b83891114635f4af4e6307adec3c7701ab5a0dc5ef2cbdd7"
+    },
+    "events": {
+      "bytes": 78678,
+      "sha256": "3594f8c077b666c5fba5112597f59bcf3633f316810924f9897da83595d21650"
+    },
+    "candidate": {
+      "bytes": 7040,
+      "sha256": "049eda91ff14693ada5f98ba3454ed22784560ef98eac6243823edf697ec4c13"
+    }
+  },
+  {
+    "lane": "hy3-guard",
+    "exitCode": 0,
+    "elapsedSeconds": 40.757,
+    "endedAtUTC": "2026-11-15T14:26:30.124166+00:00",
+    "stdoutBytes": 50903,
+    "stderrBytes": 0,
+    "automaticRetry": false,
+    "automaticFallback": false,
+    "model": "hy3",
+    "resultSubtype": "success",
+    "observedToolUseOrResultEvents": 0,
+    "prompt": {
+      "bytes": 34474,
+      "sha256": "225c323fdc55deff96c2ce050b588a2f75e400c9f9e5215281bb769dea511351"
+    },
+    "events": {
+      "bytes": 50903,
+      "sha256": "7cd2e799b93f3b5e9ab8545826db53efd9a4c25d23967a77ddc395e8f847de19"
+    },
+    "candidate": {
+      "bytes": 3407,
+      "sha256": "fe41f7fc78cb8bc7a644fbee7b2d57942bc18090c73c13d79068003a81340107"
+    }
+  }
+]

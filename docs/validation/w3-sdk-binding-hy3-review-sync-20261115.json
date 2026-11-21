@@ -1,0 +1,32 @@
+{
+  "marker": "<!-- w3-sdk-binding-hy3-review-20261115 -->",
+  "reviewCommit": "2d2c65977e92547cf23c58a4123fed5727400e22",
+  "issues": {
+    "gh": {
+      "id": 6894183734,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6894183734",
+      "sha256": "a13ac381931afaf38dcdd85282c986a5a60a336f5bce031e5a9cb0b579883a6e",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44862,
+      "url": null,
+      "sha256": "6c8a254d2875feed149dafd333670bad31969ab8233fd505868dba9edca4d8aa",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "6272bf98709338e78ad3db6565d157df3f559849",
+    "sha256": "37dd1d7ccd9812e240760e78f27a85effd5330100474dd40bbd365fc782d3ef8",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "37dd1d7ccd9812e240760e78f27a85effd5330100474dd40bbd365fc782d3ef8",
+    "readbackExact": true
+  },
+  "wikiBytesEqual": true,
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "rawPublicationDir": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-sdk-binding-hy3-review-20261115T121231Z/publication"
+}

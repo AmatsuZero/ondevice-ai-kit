@@ -1,0 +1,3 @@
+# Final author review — real OS background
+
+Range76b6807..d50eff1 plus records. Author self-review; independent reviewer unavailable by explicit solo/no-subagent constraint, no APPROVE. Validator requires exact provenance/PID/ready update/ordered OS notifications/application states/CANCELLED no output and exact reentry identity. Observer preserves duplicates and stops own tokens; companion has no packages/media/permissions. Default/Android/KMP ABI unchanged. Physical touch/system picker remain unverified; OS background evidence is real UIKit lifecycle via project-owned companion and devicectl, not touch evidence.

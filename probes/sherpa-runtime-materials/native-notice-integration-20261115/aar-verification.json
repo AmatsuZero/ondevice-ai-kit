@@ -1,0 +1,30 @@
+{
+  "aars": [
+    {
+      "kind": "debug",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/android/backend-sherpa-asr/build/outputs/aar/backend-sherpa-asr-debug.aar",
+      "bytes": 163500,
+      "sha256": "291d74a98aef7b27be1669e2abc43472967519f6b260b02ca2bae643799227e1",
+      "nonDirectoryMembers": 40,
+      "verifiedAssets": 36,
+      "originalJVMAndOtherReleaseMembersUnchanged": false,
+      "pythonAndInfozipAssetsEqual": true
+    },
+    {
+      "kind": "release",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-native-notice-integration-20261115/m2-complete/io/ondeviceai/backend-sherpa-asr/0.1.0-SNAPSHOT/backend-sherpa-asr-0.1.0-SNAPSHOT.aar",
+      "bytes": 161636,
+      "sha256": "5ae065d23647898eed3cbc258395f1c9c98804b002e4f9b4934546ae55bb7dd5",
+      "nonDirectoryMembers": 40,
+      "verifiedAssets": 36,
+      "originalJVMAndOtherReleaseMembersUnchanged": true,
+      "pythonAndInfozipAssetsEqual": true
+    }
+  ],
+  "noticeAssetCount": 36,
+  "noticeAssetBytes": 550583,
+  "newNativeAssetCount": 25,
+  "knownNativeOriginalCopies": 23,
+  "nativeOriginalSourceBytes": 452769,
+  "completeCompositionOrRelease": false
+}

@@ -1,0 +1,215 @@
+{
+  "observedAt": "2026-11-14T01:51:43.509633+00:00",
+  "runId": 33892225094,
+  "executedWorkflowCommit": "bb069649de9edc4689b2c5f9609e5499ae0bee9d",
+  "collectJobId": 101094996702,
+  "collectLogSHA256": "6e4adeb3b6eff9354c032e824bdaea37889b75c0cf8a0b4bbcef887288d5b5e2",
+  "abis": [
+    {
+      "abi": "arm64-v8a",
+      "jobId": 101086389995,
+      "logBytes": 938628,
+      "logSHA256": "d2f7a0facac749ab6c165535a3fce3295b137d904048255c5e700203e8a1f274",
+      "lineCount": 7431,
+      "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+      "cmakeFlags": {
+        "onnxruntime_USE_MIMALLOC": [
+          "OFF"
+        ],
+        "onnxruntime_USE_NNAPI_BUILTIN": [
+          "ON"
+        ],
+        "onnxruntime_ENABLE_LTO": [
+          "ON"
+        ],
+        "ANDROID_PLATFORM": [
+          "android-27"
+        ],
+        "ANDROID_ABI": [
+          "arm64-v8a"
+        ]
+      },
+      "artifactZIPDigest": "4a63146d05fe87c3a6f9df6a03ee6a86a90e59da146ff9c98dd5559dc562a30a",
+      "uploadDownloadDigestEqual": true,
+      "excerpts": {
+        "sourceCheckout": {
+          "line": 370,
+          "text": "2026-09-04T15:55:50.4618496Z 33ca9628233dc8f002435e868d4c2e9f82766ca1"
+        },
+        "buildCommand": {
+          "line": 452,
+          "text": "2026-09-04T15:55:51.4641284Z   --build_java --build_dir ./build-shared/arm64-v8a --android --use_nnapi --android_abi arm64-v8a --android_api 27 --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_generator Ninja --config Release --update --build --parallel --skip_tests --compile_no_warning_as_error --build_shared_lib --skip_submodule_sync --enable_lto --cmake_extra_defines CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 --cmake_extra_defines CMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+        },
+        "cmakeCommand": {
+          "line": 455,
+          "text": "2026-09-04T15:55:51.4689130Z 2026-09-04 15:55:51,467 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=arm64-v8a -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+        },
+        "upload": {
+          "line": 7348,
+          "text": "2026-09-04T16:23:20.0685679Z SHA256 digest of uploaded artifact zip is 4a63146d05fe87c3a6f9df6a03ee6a86a90e59da146ff9c98dd5559dc562a30a"
+        },
+        "collectDownload": {
+          "line": 194,
+          "text": "2026-09-04T16:23:42.8522803Z SHA256 digest of downloaded artifact is 4a63146d05fe87c3a6f9df6a03ee6a86a90e59da146ff9c98dd5559dc562a30a"
+        }
+      }
+    },
+    {
+      "abi": "armeabi-v7a",
+      "jobId": 101086389604,
+      "logBytes": 841169,
+      "logSHA256": "d9b140c42f76a75311d433b686e6e34269ace02a9c5850ec290949c496afa0cc",
+      "lineCount": 6847,
+      "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+      "cmakeFlags": {
+        "onnxruntime_USE_MIMALLOC": [
+          "OFF"
+        ],
+        "onnxruntime_USE_NNAPI_BUILTIN": [
+          "ON"
+        ],
+        "onnxruntime_ENABLE_LTO": [
+          "ON"
+        ],
+        "ANDROID_PLATFORM": [
+          "android-27"
+        ],
+        "ANDROID_ABI": [
+          "armeabi-v7a"
+        ]
+      },
+      "artifactZIPDigest": "3bfd9d59018f4cdc43affe1205db5698a678c4111163293ead1ca6b2282fc199",
+      "uploadDownloadDigestEqual": true,
+      "excerpts": {
+        "sourceCheckout": {
+          "line": 370,
+          "text": "2026-09-04T15:55:47.0626838Z 33ca9628233dc8f002435e868d4c2e9f82766ca1"
+        },
+        "buildCommand": {
+          "line": 452,
+          "text": "2026-09-04T15:55:48.0700391Z   --build_java --build_dir ./build-shared/armeabi-v7a --android --use_nnapi --android_abi armeabi-v7a --android_api 27 --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_generator Ninja --config Release --update --build --parallel --skip_tests --compile_no_warning_as_error --build_shared_lib --skip_submodule_sync --enable_lto --cmake_extra_defines CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 --cmake_extra_defines CMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+        },
+        "cmakeCommand": {
+          "line": 455,
+          "text": "2026-09-04T15:55:48.0739053Z 2026-09-04 15:55:48,072 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=armeabi-v7a -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+        },
+        "upload": {
+          "line": 6765,
+          "text": "2026-09-04T16:16:42.8014926Z SHA256 digest of uploaded artifact zip is 3bfd9d59018f4cdc43affe1205db5698a678c4111163293ead1ca6b2282fc199"
+        },
+        "collectDownload": {
+          "line": 217,
+          "text": "2026-09-04T16:23:45.3841726Z SHA256 digest of downloaded artifact is 3bfd9d59018f4cdc43affe1205db5698a678c4111163293ead1ca6b2282fc199"
+        }
+      }
+    },
+    {
+      "abi": "x86",
+      "jobId": 101086389863,
+      "logBytes": 818038,
+      "logSHA256": "15bb74c3a6c3dd6f5cc22440e7da55342d74e5fac19197493ca9e297fad618fc",
+      "lineCount": 6847,
+      "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+      "cmakeFlags": {
+        "onnxruntime_USE_MIMALLOC": [
+          "OFF"
+        ],
+        "onnxruntime_USE_NNAPI_BUILTIN": [
+          "ON"
+        ],
+        "onnxruntime_ENABLE_LTO": [
+          "ON"
+        ],
+        "ANDROID_PLATFORM": [
+          "android-27"
+        ],
+        "ANDROID_ABI": [
+          "x86"
+        ]
+      },
+      "artifactZIPDigest": "ea012b742a5c2029fa08bdd8a7a2c488af89171711af5cc97739d286c808ee59",
+      "uploadDownloadDigestEqual": true,
+      "excerpts": {
+        "sourceCheckout": {
+          "line": 370,
+          "text": "2026-09-04T15:55:49.7113168Z 33ca9628233dc8f002435e868d4c2e9f82766ca1"
+        },
+        "buildCommand": {
+          "line": 452,
+          "text": "2026-09-04T15:55:50.5693375Z   --build_java --build_dir ./build-shared/x86 --android --use_nnapi --android_abi x86 --android_api 27 --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_generator Ninja --config Release --update --build --parallel --skip_tests --compile_no_warning_as_error --build_shared_lib --skip_submodule_sync --enable_lto --cmake_extra_defines CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 --cmake_extra_defines CMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+        },
+        "cmakeCommand": {
+          "line": 455,
+          "text": "2026-09-04T15:55:50.5745568Z 2026-09-04 15:55:50,573 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=x86 -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+        },
+        "upload": {
+          "line": 6765,
+          "text": "2026-09-04T16:21:58.5690920Z SHA256 digest of uploaded artifact zip is ea012b742a5c2029fa08bdd8a7a2c488af89171711af5cc97739d286c808ee59"
+        },
+        "collectDownload": {
+          "line": 240,
+          "text": "2026-09-04T16:23:47.9606219Z SHA256 digest of downloaded artifact is ea012b742a5c2029fa08bdd8a7a2c488af89171711af5cc97739d286c808ee59"
+        }
+      }
+    },
+    {
+      "abi": "x86_64",
+      "jobId": 101086389779,
+      "logBytes": 841069,
+      "logSHA256": "fa15439c8f6bb1343939933b304288a04d1964e87fea993b163053787353f1b6",
+      "lineCount": 6921,
+      "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+      "cmakeFlags": {
+        "onnxruntime_USE_MIMALLOC": [
+          "OFF"
+        ],
+        "onnxruntime_USE_NNAPI_BUILTIN": [
+          "ON"
+        ],
+        "onnxruntime_ENABLE_LTO": [
+          "ON"
+        ],
+        "ANDROID_PLATFORM": [
+          "android-27"
+        ],
+        "ANDROID_ABI": [
+          "x86_64"
+        ]
+      },
+      "artifactZIPDigest": "a184e6e97a86905df25a7e2f896f9251bfa1826755738f3bcbabf26a708fe1b4",
+      "uploadDownloadDigestEqual": true,
+      "excerpts": {
+        "sourceCheckout": {
+          "line": 370,
+          "text": "2026-09-04T15:55:58.3201705Z 33ca9628233dc8f002435e868d4c2e9f82766ca1"
+        },
+        "buildCommand": {
+          "line": 452,
+          "text": "2026-09-04T15:55:59.6318570Z   --build_java --build_dir ./build-shared/x86_64 --android --use_nnapi --android_abi x86_64 --android_api 27 --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_generator Ninja --config Release --update --build --parallel --skip_tests --compile_no_warning_as_error --build_shared_lib --skip_submodule_sync --enable_lto --cmake_extra_defines CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 --cmake_extra_defines CMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+        },
+        "cmakeCommand": {
+          "line": 455,
+          "text": "2026-09-04T15:55:59.6353086Z 2026-09-04 15:55:59,634 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=x86_64 -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+        },
+        "upload": {
+          "line": 6839,
+          "text": "2026-09-04T16:15:29.4727171Z SHA256 digest of uploaded artifact zip is a184e6e97a86905df25a7e2f896f9251bfa1826755738f3bcbabf26a708fe1b4"
+        },
+        "collectDownload": {
+          "line": 263,
+          "text": "2026-09-04T16:23:50.6487128Z SHA256 digest of downloaded artifact is a184e6e97a86905df25a7e2f896f9251bfa1826755738f3bcbabf26a708fe1b4"
+        }
+      }
+    }
+  ],
+  "allFourSourceAndSelectedFlagsObserved": true,
+  "allFourArtifactUploadDownloadDigestEqual": true,
+  "artifactZIPDigestIsNotPublishedZIPDigest": true,
+  "fullBuildConfigurationReviewed": false,
+  "sourceToAarProvenanceVerified": false,
+  "finalRecursiveStaticCompositionVerified": false,
+  "productionNoticesOrReleaseAccepted": false,
+  "deviceOperations": 0,
+  "binaryDownloads": 0,
+  "W3Complete": false
+}

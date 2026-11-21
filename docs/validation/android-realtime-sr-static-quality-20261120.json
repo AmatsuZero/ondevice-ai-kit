@@ -1,0 +1,90 @@
+{
+  "method": "Four fixed PTS from the same local fixture. Android MediaCodec raw coded Y 1920x1080; round-half-up 2x2 box to 960x540, recover 1920x1080 by GPU CuNNy vs integer pixel-centre host bilinear (ties-to-even). Unweighted frame mean PSNR, peak 255, and FFmpeg gray-plane SSIM. No encode or range expansion. Still samples only, no motion, temporal/color or viewing verdict.",
+  "sourceVideoSHA256": "df677798a8604a7a6289fcf50a0fef3844a047631e0041ae7d5563c55f3746ec",
+  "shaderSHA256": {
+    "cunny0.comp": "c9cf4526cdfa0456ae7076bbb58db196a64f8f34cde8205446ff5403df7bd251",
+    "cunny1.comp": "ca19b577ccc6cb63ff633a867dc1fa474d92af005b182589c69f13d69b560c86",
+    "cunny2.comp": "50faada877a81bb26c5f1225b75bca0e225cd808aa70e9369cd1f0e06646bd0a"
+  },
+  "environment": "isolated Android emulator API36 / ANGLE SwiftShader GLES3.1",
+  "rows": [
+    {
+      "ptsUs": 2000000,
+      "referenceSHA256": "053e390686a7f56263e4ac11cb7315039e832d843ce3520b9bb1d2ebe00f328f",
+      "lowSHA256": "2231cdccdb37eb3dc28c9f4202f6ee7d62f777565496a4ef5b53b9451d05289d",
+      "bilinear": {
+        "codedYpsnrDb": 36.624168,
+        "ssim": 0.982709,
+        "sha256": "0557a4a348d31d987bc2674ecbd61644faf2b6ef09821c8de192fee5370f38b4",
+        "sumSquaredError": 29335169
+      },
+      "cunny": {
+        "codedYpsnrDb": 39.508161,
+        "ssim": 0.991466,
+        "sha256": "ba366e9f788127ee83d357eef499dfda35fe95d2607b6b4532b69fc3a0904cab",
+        "sumSquaredError": 15100428
+      }
+    },
+    {
+      "ptsUs": 8000000,
+      "referenceSHA256": "2efd0f8020309bbf36cc3fb0bf92aef409d1bb12abd8ba008ba2731b477398f8",
+      "lowSHA256": "02ddb1f0c24e8f1cebc06c933c1624e4f080be5eaa245d419aae244ecf09a391",
+      "bilinear": {
+        "codedYpsnrDb": 36.633581,
+        "ssim": 0.982736,
+        "sha256": "994b83dd86be8bac584fe980c217864212aed4a325852605d4fa033209ba1cc9",
+        "sumSquaredError": 29271653
+      },
+      "cunny": {
+        "codedYpsnrDb": 39.532802,
+        "ssim": 0.991514,
+        "sha256": "41aa5d8d135e0f7f895e3fe9dac46130e84628db750e7f42c2b6faa07fd08427",
+        "sumSquaredError": 15014994
+      }
+    },
+    {
+      "ptsUs": 17000000,
+      "referenceSHA256": "dae912d0784be7a7fb9a0b2b1179752e67fb904b2d6250d9d7441ee87331f127",
+      "lowSHA256": "51daa66e99c10b8d5a1098bf6412eb18f8f699970fb8ebdc6a01fcfbf65d5037",
+      "bilinear": {
+        "codedYpsnrDb": 36.624725,
+        "ssim": 0.982622,
+        "sha256": "2523c235406973275edeffd952a5efb84f9bc8e610863513d9f3da7995cba976",
+        "sumSquaredError": 29331404
+      },
+      "cunny": {
+        "codedYpsnrDb": 39.489459,
+        "ssim": 0.991323,
+        "sha256": "67d12ee7b194c06b193120ff1df8dbcfb44cd5954fd1f00daff101bbe72cb4d2",
+        "sumSquaredError": 15165596
+      }
+    },
+    {
+      "ptsUs": 25000000,
+      "referenceSHA256": "d8a67d3d73dd045c162c751608911d558e5470750c66102d5eff0fe79c12ee44",
+      "lowSHA256": "2b607afca02c32ad579cc2d165943b0a29ca52d12a90bc17cce07609604f9e30",
+      "bilinear": {
+        "codedYpsnrDb": 36.713809,
+        "ssim": 0.98278,
+        "sha256": "0434812bd0bc948debafce44544daecbdb353fde7ed2219b6f3292267a107ec6",
+        "sumSquaredError": 28735879
+      },
+      "cunny": {
+        "codedYpsnrDb": 39.648573,
+        "ssim": 0.991556,
+        "sha256": "df01fd58fc6ba7d6d35b07505bb7d1278d7280982097998f8e8e2122bef3b634",
+        "sumSquaredError": 14620021
+      }
+    }
+  ],
+  "mean": {
+    "bilinear": {
+      "codedYpsnrDb": 36.649071,
+      "ssim": 0.982712
+    },
+    "cunny": {
+      "codedYpsnrDb": 39.544749,
+      "ssim": 0.991465
+    }
+  }
+}

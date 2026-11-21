@@ -1,0 +1,14 @@
+{
+  "attemptedLibusbServerStarts": 1,
+  "actualLibusbBackendVerified": true,
+  "threeModelReadsFailed": true,
+  "nativeBackendRestored": true,
+  "wirelessServiceInventoryEmpty": true,
+  "globalConfigurationOrCredentialsEdited": false,
+  "phoneAppModelChanges": false,
+  "newPrepareStarted": false,
+  "newRunConsumed": false,
+  "terminalFreezeVerified": true,
+  "exactPhysicalCauseEstablished": false,
+  "W3Complete": false
+}

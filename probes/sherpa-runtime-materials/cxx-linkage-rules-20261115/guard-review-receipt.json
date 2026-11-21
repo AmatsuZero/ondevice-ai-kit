@@ -1,0 +1,17 @@
+{
+  "model": "hy3",
+  "process": {
+    "exitCode": 0,
+    "elapsedSeconds": 33.229,
+    "endedAtUTC": "2026-11-15T13:57:22.214370+00:00",
+    "stdoutBytes": 38817,
+    "stderrBytes": 0,
+    "automaticRetry": false,
+    "automaticFallback": false
+  },
+  "promptSHA256": "0ff9e641c87eacf61f2aeef0b1aee1da4f69d775607856766a2bbb2d5050a477",
+  "rawSHA256": "1f1750a7e1a7f871e117ad4b415d196eaa8f8a80dcf58dd6cc4a117b28af8c99",
+  "observedToolUseOrResultEvents": 0,
+  "scope": "independent supplied-context bounded technical review, not P4",
+  "acceptedByParent": true
+}

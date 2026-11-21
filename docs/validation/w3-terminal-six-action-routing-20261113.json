@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "scope": "pure six-action routing extension",
+  "methods": {
+    "existingAdapter": 8,
+    "newSixActionMethod": 1,
+    "prepareIntegration": 11,
+    "freshTargetedTotal": 20
+  },
+  "fullSuiteRerun": false,
+  "priorFullSuite": 348,
+  "red": {
+    "methods": 1,
+    "failures": 1,
+    "errors": 1
+  },
+  "sourceSHA256": {
+    "probes/android-qwen-terminal/terminal_source_adapter.py": "99e5a878f0099760460d4493e6cc9cd0c72b5b1e6fb77c1601285cfe77ee4fb5",
+    "probes/android-qwen-terminal/test_adapter_six_actions_parent.py": "6a5ce5d51f85234c1270542940f5f2c5e36ea90597ec0454a266c3561fed5e38",
+    "probes/android-qwen-terminal/README.md": "75da409d12a180da6239d0ea9612c298f38d9d37d35d5d111a82509d313008eb"
+  },
+  "integration": {
+    "sourceSHA256": "99e5a878f0099760460d4493e6cc9cd0c72b5b1e6fb77c1601285cfe77ee4fb5",
+    "sourceExactReturnedBytes": true,
+    "testIntegration": "parents[4] -> parents[2] only",
+    "testSHA256": "6a5ce5d51f85234c1270542940f5f2c5e36ea90597ec0454a266c3561fed5e38"
+  },
+  "parentReview": "accept; exact three functional changes, immutable-source pin/helper AST/frozen hooks retained; complete dual review remains pending",
+  "cleanup": {
+    "removed": [
+      {
+        "path": ".omx/artifacts/w3-terminal-observation-20261112/adapter-routing-parent/__pycache__/terminal_source_adapter.cpython-315.pyc",
+        "bytes": 3693,
+        "sha256": "04fc6915aff699573b8a9c045dcb933d3a6704fbbf1f717eee6ffe69568d4952"
+      }
+    ],
+    "removedBytes": 3693,
+    "freeBytesBefore": 77531160576,
+    "freeBytesAfter": 77531140096,
+    "preserved": "source/candidate/test/prompt/raw/RED/receipt; no other cache cleanup"
+  },
+  "deviceOperations": 0,
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "newSourceFreeze": false,
+  "validationMarkdownSHA256": "28b5f4ae5bb862094325a59dbd4723c8ed756f78148fd170fc4469a244262078"
+}

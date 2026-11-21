@@ -1,0 +1,62 @@
+{
+  "candidateSHA256": "809fe34fbed820e2e77a78249adba5866a6011826054932ecb72c84a6dad1f07",
+  "realNativeCalls": 0,
+  "results": [
+    {
+      "name": "zh-CN-''",
+      "passed": true
+    },
+    {
+      "name": "zh-CN-'speech'",
+      "passed": true
+    },
+    {
+      "name": "zh-CN-' '",
+      "passed": true
+    },
+    {
+      "name": "en-US-''",
+      "passed": true
+    },
+    {
+      "name": "en-US-'speech'",
+      "passed": true
+    },
+    {
+      "name": "en-US-' '",
+      "passed": true
+    },
+    {
+      "name": "create-1",
+      "passed": true
+    },
+    {
+      "name": "setter-1",
+      "passed": true
+    },
+    {
+      "name": "accept-1",
+      "passed": true
+    },
+    {
+      "name": "decode-1",
+      "passed": true
+    },
+    {
+      "name": "create-2",
+      "passed": true
+    },
+    {
+      "name": "setter-2",
+      "passed": true
+    },
+    {
+      "name": "accept-2",
+      "passed": true
+    },
+    {
+      "name": "decode-2",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,710 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "w3-20261113-review",
+  "productionReady": false,
+  "productionNoticeRetentionVerified": false,
+  "independentReleaseReviewAccepted": false,
+  "W3Complete": false,
+  "files": [
+    {
+      "path": "REVIEW-INDEX.md",
+      "bytes": 5033,
+      "sha256": "a33bc25d43a83106d1600c4164c86829bbac2f35c912dfec54d9caaebdd38d86"
+    },
+    {
+      "path": "TEXT-SELECTION.json",
+      "bytes": 51921,
+      "sha256": "b5990ea5cf420ac13a5b06e6810a32c806879fbf1dc64faa3328c7efece1d676"
+    },
+    {
+      "path": "docs/validation/w3-runtime-build-dependency-reconciliation-20261111.json",
+      "bytes": 3919,
+      "sha256": "103b41e683a950bf8789bf69eb84bc48d0f736141ee9809d068237a63f682ef3"
+    },
+    {
+      "path": "docs/validation/w3-runtime-build-dependency-reconciliation-20261111.md",
+      "bytes": 2360,
+      "sha256": "3d02a5dba777bd76086de4e466b1873da2c37d20d8f92132b99f9f6f000e570d"
+    },
+    {
+      "path": "docs/validation/w3-runtime-official-provenance-20261111.json",
+      "bytes": 20859,
+      "sha256": "35b1cd8112681606bdfea58e6c310698a0417f728c6b7f6c303f158b123e441f"
+    },
+    {
+      "path": "docs/validation/w3-runtime-official-provenance-20261111.md",
+      "bytes": 3296,
+      "sha256": "90adee9a2ffcb5a36d761f110b90a94e6d22e9032b97102564c439c59d0117c4"
+    },
+    {
+      "path": "docs/validation/w3-runtime-ort-parent-assessment-20261111.md",
+      "bytes": 3446,
+      "sha256": "92324b48c53b91d1be28311a34286674c2b8543e5862e74a9c774e69c49ff922"
+    },
+    {
+      "path": "docs/validation/w3-runtime-source-archives-complete-20261112.json",
+      "bytes": 1583,
+      "sha256": "48d3dab927c60a7301e6810c0b584170d8bebd1c7c53d981ec576af720fe557a"
+    },
+    {
+      "path": "docs/validation/w3-runtime-source-archives-complete-20261112.md",
+      "bytes": 2515,
+      "sha256": "372db4a6be90c55e717d92e6a107329934aff3d9f0e4b90d5e27cd7f224f6429"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/MODEL-NOTICES.md",
+      "bytes": 6823,
+      "sha256": "7730dbfbfe9c726c759b2fbfad9a23951752aa74eda0e6576453a736c6c13935"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/licenses/Apache-2.0.txt",
+      "bytes": 11343,
+      "sha256": "a44a6081c73ad75f0255bb2bb5cab74ef1829565a895a24e53a4f11290ab7655"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/manifest.json",
+      "bytes": 5680,
+      "sha256": "2cadc6fc38fd5234e32c2ed873bf1da3964fa236f15a78a6247be9f541a95776"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/archive-README.md",
+      "bytes": 328,
+      "sha256": "bbc6dbeb9dce5b4ed0e839057137e9cba4bf05c5797277d36a80e22594414e14"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/export-README.md",
+      "bytes": 271,
+      "sha256": "cecbd22d0a62b6bbb0333ff5db24bccdb79193c66c9af2db1da05423c67a5d77"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/export-commit.json",
+      "bytes": 5353,
+      "sha256": "b24f0b14fd5eb2e795980edcc5b31cd7a21a18b3e5869e93270ff1427bf73e4a"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/export-commit.json.receipt.json",
+      "bytes": 241,
+      "sha256": "e2aef1beaf93c6c4f49c8d8b1766a0d07c00e3801df0e8a5df7823429b9d397d"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/export-repository.json",
+      "bytes": 5415,
+      "sha256": "ccff840000b0b11df7a17f23b809c53a78fd42657acc11bc85ce6c44ca721429"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/export-repository.json.receipt.json",
+      "bytes": 228,
+      "sha256": "e72372077d8114a3abc44b86c93f866956906bd34a440d1d227afeb24387f6c7"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/export-tree.json",
+      "bytes": 10215,
+      "sha256": "9caecf90aaec7f611d3590d9efc1f911702719dd961b222749e965f765544e2a"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/export-tree.json.receipt.json",
+      "bytes": 292,
+      "sha256": "6354c31eb723f2e94bbe0ca2c9c9d8a9426013d6df3c1d575e19882f74b7be94"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/hf-model-pinned-tree.json",
+      "bytes": 1233,
+      "sha256": "9e850d84b0880de5806e7bbd1a01cc3f7374b6208a15e739e00fed8cbd3d7bec"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/hf-model-pinned-tree.json.receipt.json",
+      "bytes": 248,
+      "sha256": "70305d87864f0f2bc47d9bb9ad5bb18fea1e5b2fb8314522a109fef6dc5e155b"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/modelscope-files.json",
+      "bytes": 10739,
+      "sha256": "78a116bb6dd53ee5eb3f2f2f8320717b22f8ff760083dc997b50ba96d9a89258"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/modelscope-files.json.receipt.json",
+      "bytes": 240,
+      "sha256": "d01f490335083e5e380a4480e8485b82e5906cc49ebf9703c780dda661b2f0b0"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/modelscope-metadata.json",
+      "bytes": 4180,
+      "sha256": "93ae70f208f65d0a03903b4d67b7e103fef56f44cb8b698ce293375d112ce9d7"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/modelscope-metadata.json.receipt.json",
+      "bytes": 197,
+      "sha256": "e0115089d07a2b5f8a6e0f412a2c02d3b05dbf000166aeb398d821372c865246"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/license-chain/scope-summary.json",
+      "bytes": 788,
+      "sha256": "4cb5901ad59bb6334f92cc0aea0c3492bb45c3b3c450a74e7593984d69bd2e78"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/model-card-full.md",
+      "bytes": 57456,
+      "sha256": "5058416891bc47a2051557765997e8c42f8eb78a0e33c3e775bd17d4b0ba4d50"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/model-card-header.txt",
+      "bytes": 3774,
+      "sha256": "bfaf00b53aa30d3d4dac9af5d2503c8b82e0e9179bceef8d94a555aac7b9dffd"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/model-card-receipt.json",
+      "bytes": 280,
+      "sha256": "ef72b9ca66d94893f37658fdfb79e488d8c60b24cb20c1a450e40762308f3448"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/supply-observed.json",
+      "bytes": 5755,
+      "sha256": "f5cbe2b3a690c2aeed2d97f0e50782c900437767e06b7e4c53ea0326fa9349a4"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/supply-observed.md",
+      "bytes": 2240,
+      "sha256": "cb1a34f08b29680620adeede3c63eb5ca68ee430c77995e91d699e6610af244a"
+    },
+    {
+      "path": "probes/qwen-model-materials/393f8a14/provenance/upstream-license-receipt.json",
+      "bytes": 431,
+      "sha256": "150218b34e7ff95587edd7e631f0dcd213d313eb8898c224822db5198b7262f7"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/RUNTIME-NOTICES.md",
+      "bytes": 6240,
+      "sha256": "81392f744786a33b396175d49657b503695e3fe3bb0049c061b4183387b56ab9"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/aar-composition.json",
+      "bytes": 7427,
+      "sha256": "c581a74a13a85d42f0dc9b019a75b2320d2d9f43f62ee88527b5f5e7a9392964"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/aar-members.json",
+      "bytes": 4684,
+      "sha256": "4dea0806683521b06fdcb473a27d3d58a8269c6dff49a41364be65f6eccff524"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/eigen/COPYING.BSD",
+      "bytes": 1517,
+      "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/eigen/COPYING.GPL",
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/eigen/COPYING.LGPL",
+      "bytes": 26530,
+      "sha256": "dc626520dcd53a22f727af3ee42c770e56c97a64fe3adb063799d8ab032fe551"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/eigen/COPYING.MINPACK",
+      "bytes": 2193,
+      "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/eigen/COPYING.MPL2",
+      "bytes": 16726,
+      "sha256": "fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/eigen/COPYING.README",
+      "bytes": 779,
+      "sha256": "c83230b770f17ef1386ea1fd3681271dd98aa93646bdbfb5bff3a1b7050fff9d"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/hclust-cpp/LICENSE",
+      "bytes": 1483,
+      "sha256": "e361d842da1d290351860ad6dcce2673a1e42e4f873a3ae1ff4eb92c6adaa882"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/json/LICENSE.MIT",
+      "bytes": 1076,
+      "sha256": "46a65cffd1ea955132d95a8dd921640714a8d6b537d2e4e482d31145ae95b603"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kaldi-decoder/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kaldi-native-fbank/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kaldifst/LICENSE",
+      "bytes": 11728,
+      "sha256": "a682d6efd1ee5dee08a8e405c233c2c198ea70ae0718129daa83ab58cfe31c5d"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kissfft/COPYING",
+      "bytes": 246,
+      "sha256": "a2840585f8411be8e6826a31ef15ae65c950bd74a2437a73b013398a934ad0c6"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kissfft/LICENSES/BSD-3-Clause",
+      "bytes": 1830,
+      "sha256": "4d6bcab46f27d6d0c878e8305d4bdcfe040d52bf6656b9771f04c9fb9902c0ed"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/kissfft/LICENSES/Unlicense",
+      "bytes": 1521,
+      "sha256": "c543dab3c100d8741a83b02f397746b1e10fc0046f30b942f308191a68e99407"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/onnxruntime/LICENSE",
+      "bytes": 1073,
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/onnxruntime/ThirdPartyNotices.txt",
+      "bytes": 325054,
+      "sha256": "0e07b95f3a8d6230037707c5c4a2b554d12c4cb67369669ac255635528ffcee2"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/openfst/COPYING",
+      "bytes": 559,
+      "sha256": "4300529197035fd3452350718a0b8cee984e9412c9932d7f35fcde849fc97a4b"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/sherpa-onnx/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/simple-sentencepiece/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/utf8proc/LICENSE.md",
+      "bytes": 5125,
+      "sha256": "3b510150d34f248a221bb88e1d811238d6c6c18b51231822c42974c39bb07256"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/material-manifest.json",
+      "bytes": 25891,
+      "sha256": "913a5f1a4737ba7a5ef26236764b36a387d89558d22fb0176f0a5552b8b0e59f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/kaldi-decoder/CMakeLists.txt",
+      "bytes": 1695,
+      "sha256": "ef3b3d11ff29e21a23781d0569d33fa59e19dd11d63535caff2492384dd9a48f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/kaldi-decoder/cmake/eigen.cmake",
+      "bytes": 1471,
+      "sha256": "679d4c5f617ba736c05d512ef26212cf699fe15eaac9a6375c9c624727a555a0"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/kaldi-decoder/cmake/kaldifst.cmake",
+      "bytes": 2113,
+      "sha256": "3fc84cb97584d944ad23cccacfcb958f163873ffae62a0764d8e75930f9a8bb3"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/kaldi-native-fbank/CMakeLists.txt",
+      "bytes": 3962,
+      "sha256": "47cbc405f559189b4d9eec8cedb1383afd4d29f850e764614609c86df49033e8"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/kaldi-native-fbank/cmake/kissfft.cmake",
+      "bytes": 2377,
+      "sha256": "f6038500a227a48df0e309b9490bd9c8cec8ee376008d7211e3fc96f0c689580"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/kaldifst/cmake/openfst.cmake",
+      "bytes": 2531,
+      "sha256": "06e4638e2f056cd53e3178fce83e73f68978b9c1f77a60d518067970c03f4211"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/CMakeLists.txt",
+      "bytes": 23573,
+      "sha256": "dc6b997fb9e65bb1df70554c87ec3a6a4c95af6126c4b401a3c52b6380ed8f86"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts",
+      "bytes": 1062,
+      "sha256": "3adfa152822feaf28348275a471925ac052dd66e24d2a2a8c968f69b2070bfbd"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/build-android-arm64-v8a.sh",
+      "bytes": 9750,
+      "sha256": "3dc0e938694ba3d570aca1e629c8ddad4adb3cdc3f669c14b3295eefba79954a"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/hclust-cpp.cmake",
+      "bytes": 2139,
+      "sha256": "093ae7b3712119d140df2629b5d20b71bafb3d49ba0124dd7a391f278f4db357"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/json.cmake",
+      "bytes": 1480,
+      "sha256": "e318b4065954cb479318d191c91e32d5a0cae94a53fff70987791b6f9828b1de"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/kaldi-decoder.cmake",
+      "bytes": 2667,
+      "sha256": "af34b17974474a70b12978d49ac0831276839082924e5ac93bd9bb194a7fd310"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/kaldi-native-fbank.cmake",
+      "bytes": 2812,
+      "sha256": "1cdf41df7fc3bf3d3ba69ce16c6bc7c0e631a8a81eb9a6a21838215322e1ee56"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/onnxruntime-android-aarch64.cmake",
+      "bytes": 2454,
+      "sha256": "593cd72a365fb13f60858756fdb78925a20f6dcfa5343e1d4ed549f632cedeee"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/onnxruntime.cmake",
+      "bytes": 9704,
+      "sha256": "00f4d52e6583022aae06f509243f9a02ee7a5a31f4f62fc4cce12047dfac7860"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/openfst.cmake",
+      "bytes": 2487,
+      "sha256": "1658b8ba6bc449daef239cece7ebf6d0bef09665dd4a078ccf6cb66ec01e5d1f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/simple-sentencepiece.cmake",
+      "bytes": 8298,
+      "sha256": "57b0c922f28ee7ddee4d284f9b9b2e223067979a78651bea3e70f6f46da01f48"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/utf8proc.cmake",
+      "bytes": 2429,
+      "sha256": "aff3eabe8ee9bdcbc253a0a387820575b53620a25856818e0d47dc524563c073"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/github-source/workflows/android-fdroid-reproducible-aar.yaml",
+      "bytes": 5724,
+      "sha256": "cf58f1afc9195d5a91d0d5fff46713782385dd938693f38a88afcecf6feb391b"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/github-source/workflows/android.yaml",
+      "bytes": 10493,
+      "sha256": "c6bbf8e700f944903301bf36f3627fd24f65e072df2c0904226ed153491b31ba"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/CMakeLists.txt",
+      "bytes": 212,
+      "sha256": "b47e88294320f3177d90842d188f8f679a76eb3990278bb4155f3327eec6248a"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/c-api/CMakeLists.txt",
+      "bytes": 1144,
+      "sha256": "da0eac0a143ee0c80df5a696b0bd2c338eeaa29bc94e1c8696bfd1bcf246de1d"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/csrc/CMakeLists.txt",
+      "bytes": 27609,
+      "sha256": "8bf18641b0543333bc9f5cafb10b3be56c51444b8afa43c83361b52cdb63b2eb"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/jni/CMakeLists.txt",
+      "bytes": 1765,
+      "sha256": "cf1e46fb74c820b476fd7c585073389c4e021508fe32a7f007684f6180c7dd31"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/simple-sentencepiece/CMakeLists.txt",
+      "bytes": 2315,
+      "sha256": "926695f5eb4692023960083d811428bd1486c4e7609666ee07e2b40a9102ac39"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/README.md",
+      "bytes": 2711,
+      "sha256": "7e68402fb899c49b465910c7933827dd3ae129750b3360bcc0efb78982cfe11d"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/asio/COPYING",
+      "bytes": 224,
+      "sha256": "2d312781ba7ca3f5b494aec3bcca5cfbb69b7302838b2a7595d1537fc494457f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/asio/LICENSE_1_0.txt",
+      "bytes": 1338,
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.APACHE",
+      "bytes": 11362,
+      "sha256": "03379001a7b12a2ec997a25554247d985270b353c10d5bafee9ac8d6519820b7"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.BSD",
+      "bytes": 1517,
+      "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.MINPACK",
+      "bytes": 2193,
+      "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.MPL2",
+      "bytes": 16727,
+      "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/COPYING.README",
+      "bytes": 264,
+      "sha256": "db640ff2bd90c6abd6a4d3fbb351e0ee4d555417cf840492054d1cbb2ea85644"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/eigen-5.0.1/LICENSE",
+      "bytes": 16725,
+      "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/licenses/websocketpp/COPYING",
+      "bytes": 7494,
+      "sha256": "5ba81a1ed402517dce2581fa2d4042baf6a9c8ca0fe94fa6a7043ce6ab23064f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/material-manifest.json",
+      "bytes": 13291,
+      "sha256": "d1872adb5137f9ea9a75691b00dd6958da248294f05e3c1f190a6544ce96fa32"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/source-evidence/sherpa-onnx/cmake/asio.cmake",
+      "bytes": 1458,
+      "sha256": "4261f9681bd5cb05570d276440d4658c62f752e8dc3c0ed7bf5b658eaea02dfa"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/source-evidence/sherpa-onnx/cmake/eigen.cmake",
+      "bytes": 1409,
+      "sha256": "8239d74b44e37e1bb05be2e1c86f6b1e931f0daca93b325fb2e0b6d6e996b2ed"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/source-evidence/sherpa-onnx/cmake/kaldi-decoder.cmake",
+      "bytes": 2667,
+      "sha256": "af34b17974474a70b12978d49ac0831276839082924e5ac93bd9bb194a7fd310"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-build-observed-20261111/source-evidence/sherpa-onnx/cmake/websocketpp.cmake",
+      "bytes": 1908,
+      "sha256": "b0d077245bf523723d5280bed1ebd1585ef8c625c5964952f3819c857f851101"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/dependency-notice-map.json",
+      "bytes": 11220,
+      "sha256": "cd3c6d17f3a004f0f31af8775657e8dd2a098bdf4e2e31ec4eb5f0f903e61e5f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/source-evidence/cmake/deps.txt",
+      "bytes": 7279,
+      "sha256": "894bd3f342b9fa570301f1a62830751e50657ec98a22b210d176b7dbb354ccc2"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/source-evidence/cmake/external/onnxruntime_external_deps.cmake",
+      "bytes": 38973,
+      "sha256": "317a82dfa35c3b74abb9163047d3962dd32a53514029de6949bf56484ae614d8"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-observed-20261111/executed-android-shared.yaml",
+      "bytes": 7459,
+      "sha256": "b8440e0ac250c83efa4f79152b6379cdf022565e21ed94a34fdd80f52d67bea9"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-observed-20261111/observations.json",
+      "bytes": 16572,
+      "sha256": "d831189bdd563c27ef9b19051659bba13eaf60690cab0c50c191103ec88eb0b7"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-observed-20261111/tag-android-shared.yaml",
+      "bytes": 7470,
+      "sha256": "6d62d67c90d582dccef81b5b963c38eac02926e91e9bbecbb10fc873dd74399b"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/README.md",
+      "bytes": 2015,
+      "sha256": "824f3761ae20bf84c3f206a55e92e90d8efb6726a426f064ef90bb4badac83f3"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/check_complete.py",
+      "bytes": 5402,
+      "sha256": "16e3453709c1b0f6df23b30257ee03d8aa022558d9ff9bfef2e4b758f932d670"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/complete-manifest.json",
+      "bytes": 25415,
+      "sha256": "71ad38bad9168f379296d10d3413dca6bcac1f3b4db4e02db00a7955cc1b3ba5"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/onnx/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/onnx/NOTICE",
+      "bytes": 2133,
+      "sha256": "4d680fb1f48f07f134c9f7a8d715303b8f5160b5757bc9eec4cac783703ea592"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/notices/pytorch_cpuinfo/LICENSE",
+      "bytes": 1424,
+      "sha256": "8e7e60636c3aa0cb03571a1a841ce5697f9551ff92b3c426c2561613d15ade70"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/test_check_complete.py",
+      "bytes": 2476,
+      "sha256": "a53ddfcb09b7b8a5c2a00a4900a1ab9382b26f788c297a1e2eb44f432383d4a1"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/README.md",
+      "bytes": 1973,
+      "sha256": "fa58a7a3bf13211e76a4fe81838374208ed5a3b5829c729eb726f8a8856ddfff"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/check_materials.py",
+      "bytes": 7028,
+      "sha256": "363e18226692e9fda0c83fffa42e6cf6f2020fdacd826e51d0f01754231e7314"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/abseil_cpp/AUTHORS",
+      "bytes": 295,
+      "sha256": "1fd39030c119b4c97014f59e0ad0ed65f23475bbdf55a52740f31eb82b34b4ee"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/abseil_cpp/LICENSE",
+      "bytes": 11361,
+      "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/date/LICENSE.txt",
+      "bytes": 1637,
+      "sha256": "c90f6c00fb961170560299cbda28ca2d45804913aa8b2a9f36dbb8e0028d6930"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.APACHE",
+      "bytes": 11362,
+      "sha256": "03379001a7b12a2ec997a25554247d985270b353c10d5bafee9ac8d6519820b7"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.BSD",
+      "bytes": 1517,
+      "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.MINPACK",
+      "bytes": 2193,
+      "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.MPL2",
+      "bytes": 16727,
+      "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/COPYING.README",
+      "bytes": 264,
+      "sha256": "db640ff2bd90c6abd6a4d3fbb351e0ee4d555417cf840492054d1cbb2ea85644"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/eigen/LICENSE",
+      "bytes": 16725,
+      "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/flatbuffers/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/Apache-2.0.txt",
+      "bytes": 10280,
+      "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/BSD-3-Clause.txt",
+      "bytes": 1460,
+      "sha256": "5a93d5831e1297ab10fe643e1a631e83be392896da14ee2951285a79012df69d"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/GPL-3.0-only.txt",
+      "bytes": 34670,
+      "sha256": "b6a8bf63ae2c95b0aa256ee774680d7bd18f21f457da75466f7610b3b16acc4e"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/LICENSE.MIT",
+      "bytes": 1076,
+      "sha256": "86b998c792894ccb911a1cb7994f7a9652894e7a094c0b5e45be2f553f45cf14"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/json/MIT.txt",
+      "bytes": 1078,
+      "sha256": "b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/kleidiai/Apache-2.0.txt",
+      "bytes": 10280,
+      "sha256": "074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/kleidiai/BSD-3-Clause.txt",
+      "bytes": 1460,
+      "sha256": "5a93d5831e1297ab10fe643e1a631e83be392896da14ee2951285a79012df69d"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/microsoft_gsl/LICENSE",
+      "bytes": 1157,
+      "sha256": "4c21dc82a1c7186ea754fd59d504c00947953a3401fe8e24eaa44109ef8e2555"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/mp11-source-evidence/README.md",
+      "bytes": 1017,
+      "sha256": "3308ce47301af513c12f048cc773e38788b274e312bea7634011113a729a561e"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/mp11-source-evidence/mp11.hpp",
+      "bytes": 641,
+      "sha256": "0833ec323b3026fedf48af005792b5b61a1ec941e08a972cd2226f8f447d6079"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/mp11-source-evidence/version.hpp",
+      "bytes": 437,
+      "sha256": "dd748ea2e612e47f8dd573fa1808df95115a60581099343aa159bc7b80b1483f"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/onnx/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/protobuf/LICENSE",
+      "bytes": 1732,
+      "sha256": "6e5e117324afd944dcf67f36cf329843bc1a92229a8cd9bb573d7a83130fea7d"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/pytorch_cpuinfo/LICENSE",
+      "bytes": 1424,
+      "sha256": "8e7e60636c3aa0cb03571a1a841ce5697f9551ff92b3c426c2561613d15ade70"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/re2/LICENSE",
+      "bytes": 1558,
+      "sha256": "6040cda75d90b1738292a631d89934c411ef7ffd543c4d6a1b7edfc8edf29449"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/notices/safeint/LICENSE",
+      "bytes": 1066,
+      "sha256": "a46919cc8f01eb73f6e4b84af0d41b46b2a33b87c74e864279ef585079f82da4"
+    },
+    {
+      "path": "probes/sherpa-runtime-materials/2.0.1-ort-source-notices-20261111/source-notice-manifest.json",
+      "bytes": 20134,
+      "sha256": "679cae84ea146460162434c6d3fa8d3bd44fc3a6c9e2e17b2b7a1b048035f254"
+    }
+  ]
+}

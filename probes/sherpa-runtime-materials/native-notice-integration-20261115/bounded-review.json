@@ -1,0 +1,17 @@
+{
+  "disposition": "accept_bounded_candidate",
+  "findings": [],
+  "coverage": [
+    "Reviewed the supplied-index ledger only: it binds exactly 23 selected ids (1-10, 12, 13, 20-29, 57), explicitly leaves ids 11, 14-19, 30-56 and 58 unselected or deferred, and uses unique relative destinations.",
+    "Reviewed the bounded applicability boundaries for ORT root license and whole ThirdPartyNotices.txt retention, direct Sherpa native notices, observed Eigen 5.0.1, ARM-only websocketpp/asio observation, KissFFT BSD-3 hierarchy, Darts BSD-2 notice, and the stated exclusions for JVM assets, Kotlin, Gradle, dependencies, models, runtime AAR, retries, fallback and global/device settings.",
+    "Reviewed the supplied modification statements for Sherpa version.cc date and SHA changes, the three-file simple-sentencepiece stub/sequential patch, Darts notice retention, original ThreadPool reference treatment, and the ORT two sed patterns versus the observed diff retaining VERSION ${ORT_VERSION}.",
+    "Reviewed the README replacement language for plain scope wording, removal of the internal status token and parenthesis, and no alteration of upstream notice text."
+  ],
+  "notProven": [
+    "No source byte, whitespace, SHA, path, or destination verification was executed here; mechanical binding was assessed only from the supplied index.",
+    "No thin-AAR-to-final-APK composition, retained machine-code membership, ABI coverage, dynamic-symbol implication, or independent Maven/build/negative-check conclusion is claimed.",
+    "ORT nested source/reference notices, historical Eigen 3.4 notices, KissFFT Unlicense applicability, original ThreadPool embedding, websocketpp/asio x86 and x86_64 coverage, and complete patch/input inventory remain deferred or reference-only in this bounded review.",
+    "No legal sufficiency approval, full closure, or global completion claim is made."
+  ],
+  "README_APPEND": "Native notices for this module are declared in android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/index.json, with selected raw notice files' raw bytes preserved unchanged under that native/ directory for the bounded known native subset only. This is not a complete final-composition notice set. Known upstream modifications are tracked separately in UPSTREAM-MODIFICATIONS.md, and broader verification remains open. No complete legal approval is implied."
+}

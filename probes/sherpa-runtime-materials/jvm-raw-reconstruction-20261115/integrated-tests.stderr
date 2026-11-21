@@ -1,0 +1,13 @@
+test_empty_and_wrong_counts (test_rebuild_jvm.CompareTests.test_empty_and_wrong_counts) ... ok
+test_exact (test_rebuild_jvm.CompareTests.test_exact) ... ok
+test_missing_and_extra (test_rebuild_jvm.CompareTests.test_missing_and_extra) ... ok
+test_module_mismatch (test_rebuild_jvm.CompareTests.test_module_mismatch) ... ok
+test_same_length_mutation (test_rebuild_jvm.CompareTests.test_same_length_mutation) ... ok
+test_accepts_one (test_rebuild_jvm.SourceTests.test_accepts_one) ... ok
+test_rejects_duplicate (test_rebuild_jvm.SourceTests.test_rejects_duplicate) ... ok
+test_rejects_tamper (test_rebuild_jvm.SourceTests.test_rejects_tamper) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+OK

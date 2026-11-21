@@ -1,0 +1,36 @@
+)]}'
+{
+  "id": "952a87ed9b1b2004eb158d8f3c6a7d9af4089243",
+  "entries": [
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "bb653eb2149226787fc331dba5a8f5d799b8c1f3",
+      "name": "aarch64"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "60194fd1495d173256295ef6262ccbf6dab8979d",
+      "name": "arm"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "0f4709957c3babd20e77ad48ed1ed94cfe102cf8",
+      "name": "i386"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "20efc49c2173c7e233437c440c942f71e714aa95",
+      "name": "riscv64"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "166009ccd8707c7a6d75c112d081237c2058bd5d",
+      "name": "x86_64"
+    }
+  ]
+}

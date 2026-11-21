@@ -1,0 +1,22 @@
+{
+  "fullDiffCheckExit": 2,
+  "upstreamOrEvidenceWhitespaceDiagnostics": 96,
+  "paths": [
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ort-nested/abseil_cpp/LICENSE",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ort-nested/eigen/COPYING.MPL2",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ort-nested/microsoft_gsl/LICENSE",
+    "android/backend-sherpa-asr/src/main/assets/ondeviceai/sherpa-asr/notices/native/ort-nested/nlohmann_json/LICENSE.MIT",
+    "probes/sherpa-runtime-materials/ort-nested-composition-20261115/patch-diffs/abseil_cpp.diff",
+    "probes/sherpa-runtime-materials/ort-nested-composition-20261115/patch-diffs/date.diff",
+    "probes/sherpa-runtime-materials/ort-nested-composition-20261115/patch-diffs/eigen.diff",
+    "probes/sherpa-runtime-materials/ort-nested-composition-20261115/patch-diffs/flatbuffers.diff",
+    "probes/sherpa-runtime-materials/ort-nested-composition-20261115/patch-diffs/protobuf.diff",
+    "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/eigen/s390x-build-werror.patch",
+    "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/eigen/s390x-build.patch",
+    "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/patches/protobuf/protobuf_cmake.patch",
+    "probes/sherpa-runtime-materials/ort-nested-composition-20261115/source-evidence/cmake/vcpkg-ports/abseil/absl_cuda13_member_template.patch"
+  ],
+  "allDiagnosticPathsByteBoundToRetainedOriginalsOrReconstruction": true,
+  "otherStagedFilesDiffCheckExit": 0,
+  "originalBytesReformatted": false
+}

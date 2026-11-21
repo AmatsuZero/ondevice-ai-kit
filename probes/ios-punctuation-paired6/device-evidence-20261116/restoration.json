@@ -1,0 +1,14 @@
+{
+  "terminalReadbackSHA256": "a415ada1068abe5fbf302bf8ad45673a36e1f232a02f9e4bc09efc734081c95b",
+  "terminalReadbacksEqual": true,
+  "ownedAliasesUninstalled": [
+    "io.ondeviceai.probe.w3punctpair20261116",
+    "io.ondeviceai.probe.w3punctpairuitests20261116.xctrunner"
+  ],
+  "ordinaryAppLaunchExitCode": 0,
+  "originalApps": 45,
+  "missingOriginalApps": [],
+  "changedOriginalApps": [],
+  "newNonownedApps": [],
+  "modelOperations": 0
+}

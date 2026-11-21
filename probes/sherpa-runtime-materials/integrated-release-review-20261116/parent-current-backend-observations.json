@@ -1,0 +1,29 @@
+{
+  "scope": "parent direct source observations after dispatch, not supplied to current no-tools review",
+  "files": [
+    {
+      "path": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaAsrBackend.kt",
+      "bytes": 6160,
+      "sha256": "25194741342ec24f8bdea1076954a6c585e6833ce99cad54c3654eb31f4c33b9"
+    },
+    {
+      "path": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaSession.kt",
+      "bytes": 2791,
+      "sha256": "a0882a5adbafd685127e67dfc091e53c113bec95d8330bafb596511e687165f0"
+    },
+    {
+      "path": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/SherpaWhisperModel.kt",
+      "bytes": 1884,
+      "sha256": "d16d21c1ce52e5101898cd48e39bfdedee06bf6a52dabaa33f8fd413a0161337"
+    },
+    {
+      "path": "demo/androidApp/src/sherpaasr/kotlin/io/ondeviceai/demo/DemoOfflineAsrFactory.kt",
+      "bytes": 1555,
+      "sha256": "6e10d9375f52a288e543359d7bf5cc698b26052f6d2978a0d49bcb93d3a50a9b"
+    }
+  ],
+  "observedCurrentSDKBackend": "sherpa.onnx.whisper",
+  "observedCurrentDemoModel": "sherpa-whisper-tiny-65176e2d-vad9e2449e1",
+  "QwenProductionIntegrationProved": false,
+  "sourceChanges": 0
+}

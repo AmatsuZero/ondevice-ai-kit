@@ -1,0 +1,74 @@
+{
+  "ordinaryArm64SymbolAttempts": [
+    {
+      "stderr": {
+        "path": ".omx/artifacts/w3-native-linkage-20261115/symbols/arm64-v8a/libonnxruntime.so.stderr",
+        "bytes": 86,
+        "sha256": "ba6796617c1da4193b5486dc33c85603af5be0c14e499f083fd0c309f365827b"
+      },
+      "text": ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libonnxruntime.so: no symbols\n",
+      "stdoutBytes": 0,
+      "exitCode": 0,
+      "acceptedAsCompleteComposition": false
+    },
+    {
+      "stderr": {
+        "path": ".omx/artifacts/w3-native-linkage-20261115/symbols/arm64-v8a/libsherpa-onnx-c-api.so.stderr",
+        "bytes": 92,
+        "sha256": "c649664b6d997ad26a390f216dccababf266726564b274a58cb88b65306216dc"
+      },
+      "text": ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-c-api.so: no symbols\n",
+      "stdoutBytes": 0,
+      "exitCode": 0,
+      "acceptedAsCompleteComposition": false
+    },
+    {
+      "stderr": {
+        "path": ".omx/artifacts/w3-native-linkage-20261115/symbols/arm64-v8a/libsherpa-onnx-cxx-api.so.stderr",
+        "bytes": 94,
+        "sha256": "7a1417c6cd032ec518fcee0c956962affd8ec9737c970deda84365fb4510304a"
+      },
+      "text": ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-cxx-api.so: no symbols\n",
+      "stdoutBytes": 0,
+      "exitCode": 0,
+      "acceptedAsCompleteComposition": false
+    },
+    {
+      "stderr": {
+        "path": ".omx/artifacts/w3-native-linkage-20261115/symbols/arm64-v8a/libsherpa-onnx-jni.so.stderr",
+        "bytes": 90,
+        "sha256": "691c7752781cd7a0b51973d3fd4027cd2afa7953737464547be5c4eb783a8285"
+      },
+      "text": ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-jni.so: no symbols\n",
+      "stdoutBytes": 0,
+      "exitCode": 0,
+      "acceptedAsCompleteComposition": false
+    }
+  ],
+  "all16MembersLackSHTSymtab": true,
+  "all16HaveSHTDynsym": true,
+  "arm64DynamicSymbolObservation": [
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-c-api.so",
+      "markers": {}
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-cxx-api.so",
+      "markers": {
+        "std::__ndk1::": {
+          "count": 206,
+          "first": "0000000000039628 T sherpa_onnx::cxx::FileExists(std::__ndk1::basic_string<char, std::__ndk1::char_traits<char>, std::__ndk1::allocator<char>> const&)"
+        }
+      }
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-jni.so",
+      "markers": {}
+    },
+    {
+      "member": "jni/arm64-v8a/libonnxruntime.so",
+      "markers": {}
+    }
+  ],
+  "conclusion": "Dynamic exports can be inspected; unexported or inlined components cannot be excluded by absent names."
+}

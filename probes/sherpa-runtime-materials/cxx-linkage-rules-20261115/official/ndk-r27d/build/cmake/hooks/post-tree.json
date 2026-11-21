@@ -1,0 +1,36 @@
+)]}'
+{
+  "id": "145d57632502b7885b4af7da3e3179df9a11793a",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "5a3acbf7bef5ad5208fefa792f1271b67cb364c5",
+      "name": "Android-Clang.cmake"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "8e7852f13c02ea2a6614d6ccc2cd48671eceb242",
+      "name": "Android-Determine.cmake"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "6e7aafbf4bfe5f8b200e2cc5c0e6c5c800a0a88e",
+      "name": "Android-Initialize.cmake"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "523f4e84c24ee15b4c9d1dd63680b7e66c3a6368",
+      "name": "Android.cmake"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4bab2d40a0e77c324f4228d4232475fe0d5d74ce",
+      "name": "Determine-Compiler.cmake"
+    }
+  ]
+}

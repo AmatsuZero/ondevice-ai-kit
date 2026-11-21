@@ -1,0 +1,525 @@
+{
+  "sherpaSourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "module": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/cmake/simple-sentencepiece.cmake",
+    "bytes": 8298,
+    "sha256": "57b0c922f28ee7ddee4d284f9b9b2e223067979a78651bea3e70f6f46da01f48",
+    "gitBlobSHA1": "49bdf574c9705a23847cc250de3e50eaafcf5fb0"
+  },
+  "component": "simple-sentencepiece",
+  "declaredSourceRef": "v0.7",
+  "componentTreeSHA1": "62dd423df1d51da5ea06f1c3a046fc04f01b4f39",
+  "archive": {
+    "path": ".omx/artifacts/w3-sentencepiece-patch-20261115/simple-sentencepiece-v0.7.tar.gz",
+    "bytes": 355335,
+    "sha256": "1748a822060a35baa9f6609f84efc8eb54dc0e74b9ece3d82367b7119fdc75af",
+    "url": "https://codeload.github.com/pkufool/simple-sentencepiece/tar.gz/refs/tags/v0.7",
+    "expectedSHA256": "1748a822060a35baa9f6609f84efc8eb54dc0e74b9ece3d82367b7119fdc75af",
+    "allRegularArchiveMembersMatchFixedTree": true,
+    "regularFileCount": 35
+  },
+  "patchSelection": {
+    "helperLines": [
+      5,
+      15
+    ],
+    "helperSHA256": "7f9941492dbc72adb1754f44182dcdafa6d556c5e4644e3eb399146bd37301f0",
+    "androidBodyLines": [
+      96,
+      183
+    ],
+    "androidBodySHA256": "73c121f4e7cc22705228f20a9fbe2969133c23c6186c00ea781b00cad7ffcaa3",
+    "wrapper": {
+      "path": ".omx/artifacts/w3-sentencepiece-patch-20261115/apply-android-patch.cmake",
+      "bytes": 4135,
+      "sha256": "59932e4f60c262db7ac175967965ed411c505a01f4680a164fdea8866fb59125"
+    },
+    "cmakeExecutable": "/Users/daubert/Library/Android/sdk/cmake/3.22.1/bin/cmake",
+    "cmakeVersion": "cmake version 3.22.1-g37088a8",
+    "onlyExactSelectedPatchLogicExecuted": true,
+    "fullConfigureBuildOrCIReplay": false
+  },
+  "changedFiles": [
+    {
+      "path": "ssentencepiece/csrc/threadpool.h",
+      "sourceTreeGitBlobSHA1": "264ff492ab778096fe89cfec4cdeaafea1b60a5b",
+      "before": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/original/ssentencepiece/csrc/threadpool.h",
+        "bytes": 3255,
+        "sha256": "a0737647480c4fbab218b3540b4be0cb35edf9b4e869e275f56f79f0d25d2830",
+        "gitBlobSHA1": "264ff492ab778096fe89cfec4cdeaafea1b60a5b"
+      },
+      "reconstructedAfter": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/patched/ssentencepiece/csrc/threadpool.h",
+        "bytes": 125,
+        "sha256": "b18b622ed3b8642aaa8ca38f99a85e8aefb3e1efad01d11b0f04b02b02232f46",
+        "gitBlobSHA1": "f799a3d83a01131d1f869e393e1e2148cc87f26b"
+      }
+    },
+    {
+      "path": "ssentencepiece/csrc/ssentencepiece.h",
+      "sourceTreeGitBlobSHA1": "8835c31b48fbbb341b04b0cbab302d601f7b8bdd",
+      "before": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/original/ssentencepiece/csrc/ssentencepiece.h",
+        "bytes": 3238,
+        "sha256": "16478b55035aee9d345636596997e9fa8c7c01a916d732b1d70a4b13cc32f8e3",
+        "gitBlobSHA1": "8835c31b48fbbb341b04b0cbab302d601f7b8bdd"
+      },
+      "reconstructedAfter": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/patched/ssentencepiece/csrc/ssentencepiece.h",
+        "bytes": 2898,
+        "sha256": "667ba718d0c1dfa94d217ad9569d1ca9a25d0265dd8859e07d5cdfad849b7c92",
+        "gitBlobSHA1": "b8b2a8258a96262fdedb40ee22f725ed4cc03d6c"
+      }
+    },
+    {
+      "path": "ssentencepiece/csrc/ssentencepiece.cc",
+      "sourceTreeGitBlobSHA1": "c20da005c50987043b9d841328a800da2906eff2",
+      "before": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/original/ssentencepiece/csrc/ssentencepiece.cc",
+        "bytes": 8088,
+        "sha256": "57a65cc7620f7fc8973e5c57d59459a1a6c1ad3b4c8321d931e9afaf3421e9b7",
+        "gitBlobSHA1": "c20da005c50987043b9d841328a800da2906eff2"
+      },
+      "reconstructedAfter": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/patched/ssentencepiece/csrc/ssentencepiece.cc",
+        "bytes": 7547,
+        "sha256": "ec8f6afbadd6b046a551dbb0f347a02eb2f598bdbf8051ed2e4a3154c3193d83",
+        "gitBlobSHA1": "ea6ce4fb1cc0ce856675e16c7dbd72460fb73547"
+      }
+    }
+  ],
+  "diff": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/android-threading-removal.diff",
+    "bytes": 6373,
+    "sha256": "3cbcc4df51bd9fedf17023ce1b8bb74d7bb0331a10659d2a2eb7819dff7a1b7b"
+  },
+  "license": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/LICENSE",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "licenseMatchesExistingMaterial": true,
+  "fourAbiObservedPatches": [
+    {
+      "abi": "arm64-v8a",
+      "inputGroup": "sherpa-native-arm64-v8a",
+      "logEvidence": [
+        {
+          "line": 922,
+          "text": "2026-10-26T15:38:04.0609836Z -- Downloading simple-sentencepiece https://github.com/pkufool/simple-sentencepiece/archive/refs/tags/v0.7.tar.gz"
+        },
+        {
+          "line": 924,
+          "text": "2026-10-26T15:38:04.8681614Z -- Patched ssentencepiece for Android: all threading removed"
+        },
+        {
+          "line": 945,
+          "text": "2026-10-26T15:38:09.3566626Z [  1%] Building CXX object _deps/simple-sentencepiece-build/ssentencepiece/csrc/CMakeFiles/ssentencepiece_core.dir/ssentencepiece.cc.o"
+        },
+        {
+          "line": 964,
+          "text": "2026-10-26T15:38:13.7004616Z [  5%] Linking CXX static library ../../../../lib/libssentencepiece_core.a"
+        },
+        {
+          "line": 965,
+          "text": "2026-10-26T15:38:13.7165333Z [  5%] Built target ssentencepiece_core"
+        },
+        {
+          "line": 1281,
+          "text": "2026-10-26T15:40:50.4057158Z [  1%] Built target ssentencepiece_core"
+        }
+      ],
+      "correspondingSherpaMembers": [
+        {
+          "path": "jni/arm64-v8a/libsherpa-onnx-c-api.so",
+          "bytes": 4303136,
+          "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10"
+        },
+        {
+          "path": "jni/arm64-v8a/libsherpa-onnx-cxx-api.so",
+          "bytes": 272848,
+          "sha256": "de94e0952a124eb22e86d754e11aa0489a065affc837911a8ed5e7fd843baad6"
+        },
+        {
+          "path": "jni/arm64-v8a/libsherpa-onnx-jni.so",
+          "bytes": 4609320,
+          "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575"
+        }
+      ],
+      "declaredLinkChain": [
+        "ssentencepiece_core -> sherpa-onnx-core",
+        "sherpa-onnx-core -> sherpa-onnx-jni / sherpa-onnx-c-api",
+        "sherpa-onnx-c-api -> sherpa-onnx-cxx-api"
+      ],
+      "exactRetainedMachineCodeVerified": false
+    },
+    {
+      "abi": "armeabi-v7a",
+      "inputGroup": "sherpa-native-armeabi-v7a",
+      "logEvidence": [
+        {
+          "line": 1724,
+          "text": "2026-10-26T15:41:01.1292796Z -- Downloading simple-sentencepiece https://github.com/pkufool/simple-sentencepiece/archive/refs/tags/v0.7.tar.gz"
+        },
+        {
+          "line": 1726,
+          "text": "2026-10-26T15:41:01.8375856Z -- Patched ssentencepiece for Android: all threading removed"
+        },
+        {
+          "line": 1747,
+          "text": "2026-10-26T15:41:05.8406803Z [  1%] Building CXX object _deps/simple-sentencepiece-build/ssentencepiece/csrc/CMakeFiles/ssentencepiece_core.dir/ssentencepiece.cc.o"
+        },
+        {
+          "line": 1765,
+          "text": "2026-10-26T15:41:07.3188013Z [  5%] Linking CXX static library ../../../../lib/libssentencepiece_core.a"
+        },
+        {
+          "line": 1766,
+          "text": "2026-10-26T15:41:07.3365594Z [  5%] Built target ssentencepiece_core"
+        },
+        {
+          "line": 2083,
+          "text": "2026-10-26T15:43:37.8156401Z [  1%] Built target ssentencepiece_core"
+        }
+      ],
+      "correspondingSherpaMembers": [
+        {
+          "path": "jni/armeabi-v7a/libsherpa-onnx-c-api.so",
+          "bytes": 3157748,
+          "sha256": "cb5d912ec19b4f76582047d082db63f304f3e584cc89130e393337f4cea6ebe7"
+        },
+        {
+          "path": "jni/armeabi-v7a/libsherpa-onnx-cxx-api.so",
+          "bytes": 183600,
+          "sha256": "aa5f7bc8031baf5f0ba2e6c892e1cf70d17e1fe839db375424ebda175f0dc5e9"
+        },
+        {
+          "path": "jni/armeabi-v7a/libsherpa-onnx-jni.so",
+          "bytes": 3381796,
+          "sha256": "d45f377249d5c3191b91de6ba6edffcd83e4cf7e109bc523b212db341581c2a8"
+        }
+      ],
+      "declaredLinkChain": [
+        "ssentencepiece_core -> sherpa-onnx-core",
+        "sherpa-onnx-core -> sherpa-onnx-jni / sherpa-onnx-c-api",
+        "sherpa-onnx-c-api -> sherpa-onnx-cxx-api"
+      ],
+      "exactRetainedMachineCodeVerified": false
+    },
+    {
+      "abi": "x86_64",
+      "inputGroup": "sherpa-native-x86_64",
+      "logEvidence": [
+        {
+          "line": 2482,
+          "text": "2026-10-26T15:43:49.0938842Z -- Downloading simple-sentencepiece https://github.com/pkufool/simple-sentencepiece/archive/refs/tags/v0.7.tar.gz"
+        },
+        {
+          "line": 2484,
+          "text": "2026-10-26T15:43:49.9010191Z -- Patched ssentencepiece for Android: all threading removed"
+        },
+        {
+          "line": 2501,
+          "text": "2026-10-26T15:43:51.9133969Z [  1%] Building CXX object _deps/simple-sentencepiece-build/ssentencepiece/csrc/CMakeFiles/ssentencepiece_core.dir/ssentencepiece.cc.o"
+        },
+        {
+          "line": 2519,
+          "text": "2026-10-26T15:43:53.4159747Z [  6%] Linking CXX static library ../../../../lib/libssentencepiece_core.a"
+        },
+        {
+          "line": 2520,
+          "text": "2026-10-26T15:43:53.4294040Z [  6%] Built target ssentencepiece_core"
+        },
+        {
+          "line": 2837,
+          "text": "2026-10-26T15:46:25.1832444Z [  1%] Built target ssentencepiece_core"
+        }
+      ],
+      "correspondingSherpaMembers": [
+        {
+          "path": "jni/x86_64/libsherpa-onnx-c-api.so",
+          "bytes": 4782648,
+          "sha256": "8285ecf2e6275374d4c8c5b46020cbb1de82db9bd6b6baad011fdc480cf10ba2"
+        },
+        {
+          "path": "jni/x86_64/libsherpa-onnx-cxx-api.so",
+          "bytes": 267552,
+          "sha256": "edcd50a1608458867d78213385f5e3013a39db7b7af43d4f87d72e4d84e5e3dc"
+        },
+        {
+          "path": "jni/x86_64/libsherpa-onnx-jni.so",
+          "bytes": 5053592,
+          "sha256": "878d61116f244131263eec24297ef05bf508d02bccdede2a4e3ad3202bbdaa48"
+        }
+      ],
+      "declaredLinkChain": [
+        "ssentencepiece_core -> sherpa-onnx-core",
+        "sherpa-onnx-core -> sherpa-onnx-jni / sherpa-onnx-c-api",
+        "sherpa-onnx-c-api -> sherpa-onnx-cxx-api"
+      ],
+      "exactRetainedMachineCodeVerified": false
+    },
+    {
+      "abi": "x86",
+      "inputGroup": "sherpa-native-x86",
+      "logEvidence": [
+        {
+          "line": 3277,
+          "text": "2026-10-26T15:46:36.7583489Z -- Downloading simple-sentencepiece https://github.com/pkufool/simple-sentencepiece/archive/refs/tags/v0.7.tar.gz"
+        },
+        {
+          "line": 3279,
+          "text": "2026-10-26T15:46:37.4914688Z -- Patched ssentencepiece for Android: all threading removed"
+        },
+        {
+          "line": 3296,
+          "text": "2026-10-26T15:46:39.7668881Z [  1%] Building CXX object _deps/simple-sentencepiece-build/ssentencepiece/csrc/CMakeFiles/ssentencepiece_core.dir/ssentencepiece.cc.o"
+        },
+        {
+          "line": 3314,
+          "text": "2026-10-26T15:46:41.3300664Z [  6%] Linking CXX static library ../../../../lib/libssentencepiece_core.a"
+        },
+        {
+          "line": 3315,
+          "text": "2026-10-26T15:46:41.3445722Z [  6%] Built target ssentencepiece_core"
+        },
+        {
+          "line": 3632,
+          "text": "2026-10-26T15:49:12.2533409Z [  1%] Built target ssentencepiece_core"
+        }
+      ],
+      "correspondingSherpaMembers": [
+        {
+          "path": "jni/x86/libsherpa-onnx-c-api.so",
+          "bytes": 4954780,
+          "sha256": "e1e483cc4a09aaadf7f72c1d406c010bba05e3a05fc763a4536117508ab3f390"
+        },
+        {
+          "path": "jni/x86/libsherpa-onnx-cxx-api.so",
+          "bytes": 250072,
+          "sha256": "eb0e2a2b32ea48237582f5d5f31c1bf65e7911cbcb6ee3af08bb491e55fed027"
+        },
+        {
+          "path": "jni/x86/libsherpa-onnx-jni.so",
+          "bytes": 5261876,
+          "sha256": "1eb37aaa10e377f6635086bec09685859ca8c7465460fdf9346a21eba90a4ee4"
+        }
+      ],
+      "declaredLinkChain": [
+        "ssentencepiece_core -> sherpa-onnx-core",
+        "sherpa-onnx-core -> sherpa-onnx-jni / sherpa-onnx-c-api",
+        "sherpa-onnx-c-api -> sherpa-onnx-cxx-api"
+      ],
+      "exactRetainedMachineCodeVerified": false
+    }
+  ],
+  "officialJobLog": {
+    "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+    "bytes": 414518,
+    "sha256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6"
+  },
+  "declaredLinkEvidence": [
+    {
+      "source": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/csrc/CMakeLists.txt",
+        "bytes": 27609,
+        "sha256": "8bf18641b0543333bc9f5cafb10b3be56c51444b8afa43c83361b52cdb63b2eb"
+      },
+      "gitBlobSHA1": "23d5692422eb008f77b16bc2f3f8b9d5123d962a",
+      "lines": [
+        {
+          "line": 366,
+          "text": "    target_link_libraries(sherpa-onnx-core dxguid.lib d3d12.lib dxgi.lib dxcore.lib)"
+        },
+        {
+          "line": 371,
+          "text": "    target_link_libraries(sherpa-onnx-core directml)"
+        },
+        {
+          "line": 389,
+          "text": "  target_link_libraries(sherpa-onnx-core android log)"
+        },
+        {
+          "line": 392,
+          "text": "target_link_libraries(sherpa-onnx-core"
+        },
+        {
+          "line": 396,
+          "text": "  ssentencepiece_core"
+        },
+        {
+          "line": 399,
+          "text": "  target_link_libraries(sherpa-onnx-core"
+        },
+        {
+          "line": 407,
+          "text": "    target_link_libraries(sherpa-onnx-core -L$ENV{SHERPA_ONNX_RKNN_TOOLKIT2_LIB_DIR} -lrknnrt)"
+        },
+        {
+          "line": 409,
+          "text": "    target_link_libraries(sherpa-onnx-core rknnrt)"
+        },
+        {
+          "line": 415,
+          "text": "    target_link_libraries(sherpa-onnx-core"
+        },
+        {
+          "line": 423,
+          "text": "    target_link_libraries(sherpa-onnx-core"
+        },
+        {
+          "line": 434,
+          "text": "    target_link_libraries(sherpa-onnx-core"
+        },
+        {
+          "line": 439,
+          "text": "    target_link_libraries(sherpa-onnx-core"
+        },
+        {
+          "line": 447,
+          "text": "    target_link_libraries(sherpa-onnx-core"
+        },
+        {
+          "line": 459,
+          "text": "    target_link_libraries(sherpa-onnx-core spacemit_ep)"
+        },
+        {
+          "line": 461,
+          "text": "    target_link_libraries(sherpa-onnx-core ${spacemit_ep_lib_files})"
+        },
+        {
+          "line": 466,
+          "text": "  target_link_libraries(sherpa-onnx-core onnxruntime)"
+        },
+        {
+          "line": 468,
+          "text": "  target_link_libraries(sherpa-onnx-core ${onnxruntime_lib_files})"
+        },
+        {
+          "line": 472,
+          "text": "  target_link_libraries(sherpa-onnx-core -lm)"
+        },
+        {
+          "line": 476,
+          "text": "  target_link_libraries(sherpa-onnx-core \"-framework Foundation\")"
+        },
+        {
+          "line": 479,
+          "text": "target_link_libraries(sherpa-onnx-core fstfar fst)"
+        },
+        {
+          "line": 495,
+          "text": "  target_link_libraries(sherpa-onnx-core -ldl)"
+        },
+        {
+          "line": 499,
+          "text": "  target_link_libraries(sherpa-onnx-core -pthread)"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/jni/CMakeLists.txt",
+        "bytes": 1765,
+        "sha256": "cf1e46fb74c820b476fd7c585073389c4e021508fe32a7f007684f6180c7dd31"
+      },
+      "gitBlobSHA1": "d0ce4e3f2e47ce5ed60e1f1c6effc4cf7970ac2b",
+      "lines": [
+        {
+          "line": 64,
+          "text": "target_link_libraries(sherpa-onnx-jni sherpa-onnx-core)"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/c-api/CMakeLists.txt",
+        "bytes": 1144,
+        "sha256": "da0eac0a143ee0c80df5a696b0bd2c338eeaa29bc94e1c8696bfd1bcf246de1d"
+      },
+      "gitBlobSHA1": "cbb81dfbaf86e58c2a7df57f67db93e76480b5f4",
+      "lines": [
+        {
+          "line": 3,
+          "text": "target_link_libraries(sherpa-onnx-c-api sherpa-onnx-core)"
+        },
+        {
+          "line": 12,
+          "text": "target_link_libraries(sherpa-onnx-cxx-api sherpa-onnx-c-api)"
+        }
+      ]
+    }
+  ],
+  "baseBuildInputGroups": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/build-input-groups.json",
+    "bytes": 55282,
+    "sha256": "ccb67810e01d0f7c6c9f12eec7f0c09dbe34510236349b3219c8dce650b0f669"
+  },
+  "baseMemberMatrix": {
+    "path": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/member-matrix.json",
+    "bytes": 11191,
+    "sha256": "a0a90d31eb2dffa00b02b3a078ece07d57fd587f8904b98bde75125c0712ba7e"
+  },
+  "ciPatchedSourceBytesDirectlyArchived": false,
+  "exactFinalRetainedMachineCodeVerified": false,
+  "recursiveFinalCompositionComplete": false,
+  "productionNoticeRetentionVerified": false,
+  "independentReleaseReviewAccepted": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3P4Accepted": false,
+  "R4R5Accepted": false,
+  "W3Complete": false,
+  "bundledSourceNotices": [
+    {
+      "component": "darts-clone",
+      "licenseTextLabel": "BSD-2-Clause",
+      "role": "unchanged header included by patched ssentencepiece.h",
+      "source": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/original/ssentencepiece/csrc/darts.h",
+        "bytes": 53998,
+        "sha256": "a0ff15abf69e2651dedef5acacf474b7b8d20ace8cd5dd79dd201e99ccfee91d",
+        "gitBlobSHA1": "8c3194eec42a6e4964eb1fd633c926a85272fc7b"
+      },
+      "notice": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/notices/darts-clone/NOTICE.txt",
+        "bytes": 1320,
+        "sha256": "da10583073e582390115d4d4abdc12ca395776ab2a9e11b10d440b115ad9c6b9"
+      },
+      "sourceByteRange": [
+        96,
+        1416
+      ],
+      "noticeIsExactOriginalCommentBytes": true,
+      "independentComponentRevisionOutsideFixedArchiveVerified": false,
+      "exactFinalRetainedMachineCodeVerified": false,
+      "productionNoticeRetentionVerified": false
+    },
+    {
+      "component": "ThreadPool",
+      "licenseTextLabel": "original zlib-style notice",
+      "role": "original implementation replaced with empty Android stub; historical source notice retained",
+      "source": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/original/ssentencepiece/csrc/threadpool.h",
+        "bytes": 3255,
+        "sha256": "a0737647480c4fbab218b3540b4be0cb35edf9b4e869e275f56f79f0d25d2830",
+        "gitBlobSHA1": "264ff492ab778096fe89cfec4cdeaafea1b60a5b"
+      },
+      "notice": {
+        "path": "probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115/notices/ThreadPool/NOTICE.txt",
+        "bytes": 888,
+        "sha256": "9482aedd90951aacfb826f2eb41d47afcd502628576c4906755f2efa4be97daa"
+      },
+      "sourceByteRange": [
+        94,
+        982
+      ],
+      "noticeIsExactOriginalCommentBytes": true,
+      "independentComponentRevisionOutsideFixedArchiveVerified": false,
+      "exactFinalRetainedMachineCodeVerified": false,
+      "productionNoticeRetentionVerified": false
+    }
+  ],
+  "nestedNoticeDiscovery": "Existing bounded W3 material text search had no darts-clone/Susumu Yata or ThreadPool/Jakob Progsch notices before this task. This is not a claim about every repository, final App or binary text."
+}

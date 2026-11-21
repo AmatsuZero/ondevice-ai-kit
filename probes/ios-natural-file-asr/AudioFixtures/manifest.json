@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "dataset": "hf-internal-testing/librispeech_asr_dummy",
+    "datasetUrl": "https://huggingface.co/datasets/hf-internal-testing/librispeech_asr_dummy",
+    "revision": "5be91486e11a2d616f4ec5db8d3fd248585ac07a",
+    "config": "clean",
+    "split": "validation",
+    "attribution": "LibriSpeech ASR corpus, as distributed by hf-internal-testing/librispeech_asr_dummy.",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "clips": [
+    {
+      "id": "1272-128104-0000",
+      "reference": "MISTER QUILTER IS THE APOSTLE OF THE MIDDLE CLASSES AND WE ARE GLAD TO WELCOME HIS GOSPEL",
+      "speakerId": 1272,
+      "chapterId": 128104,
+      "flacPath": "audio/1272-128104-0000.flac",
+      "wavPath": "audio/1272-128104-0000.wav",
+      "originalFlac": {
+        "sha256": "4e25e22555cd16e90edb0a3b49fdcf1fe652b2a1250ab643634db33895c75b41",
+        "bytes": 120041
+      },
+      "pcmWav": {
+        "sha256": "6ba71ddda339c469a52fa48a375e17e2487a336f4434ae24ef5118637bbcb925",
+        "bytes": 187438,
+        "sampleRate": 16000,
+        "channels": 1,
+        "sampleWidth": 2,
+        "frames": 93680,
+        "durationSeconds": 5.855
+      }
+    },
+    {
+      "id": "1272-128104-0001",
+      "reference": "NOR IS MISTER QUILTER'S MANNER LESS INTERESTING THAN HIS MATTER",
+      "speakerId": 1272,
+      "chapterId": 128104,
+      "flacPath": "audio/1272-128104-0001.flac",
+      "wavPath": "audio/1272-128104-0001.wav",
+      "originalFlac": {
+        "sha256": "46a9d58622b4675b29564da2d9ba73e702241c5fa969f12c387cad4aa984276a",
+        "bytes": 101672
+      },
+      "pcmWav": {
+        "sha256": "86f4d398b91c99d38568efa94a0f9604a0edaa15bd675d90e556852ec598c914",
+        "bytes": 154158,
+        "sampleRate": 16000,
+        "channels": 1,
+        "sampleWidth": 2,
+        "frames": 77040,
+        "durationSeconds": 4.815
+      }
+    },
+    {
+      "id": "1272-128104-0002",
+      "reference": "HE TELLS US THAT AT THIS FESTIVE SEASON OF THE YEAR WITH CHRISTMAS AND ROAST BEEF LOOMING BEFORE US SIMILES DRAWN FROM EATING AND ITS RESULTS OCCUR MOST READILY TO THE MIND",
+      "speakerId": 1272,
+      "chapterId": 128104,
+      "flacPath": "audio/1272-128104-0002.flac",
+      "wavPath": "audio/1272-128104-0002.wav",
+      "originalFlac": {
+        "sha256": "59bf7bb1129c11734a8dd362ad52b4e10ae31c03f0879fc92f7107ecd513513f",
+        "bytes": 255853
+      },
+      "pcmWav": {
+        "sha256": "3165bb4372ed834ddf2dd440e83b8e523b474d3c0eb54951cda81f0ed332505d",
+        "bytes": 399598,
+        "sampleRate": 16000,
+        "channels": 1,
+        "sampleWidth": 2,
+        "frames": 199760,
+        "durationSeconds": 12.485
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-app-variants-20261115/apk-consumer/build",
+    "gitTrackedFiles": 0,
+    "openFiles": 0,
+    "lsofExitCode": 1,
+    "childDirectories": [
+      "generated",
+      "intermediates",
+      "outputs",
+      "reports"
+    ]
+  },
+  {
+    "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-app-variants-20261115/apk-consumer/.gradle",
+    "gitTrackedFiles": 0,
+    "openFiles": 0,
+    "lsofExitCode": 1,
+    "childDirectories": [
+      "vcs-1",
+      "buildOutputCleanup",
+      "9.4.1"
+    ]
+  },
+  {
+    "acceptedAPKDuplicatesByteEqual": true,
+    "canonicalCopiesRetained": true
+  }
+]

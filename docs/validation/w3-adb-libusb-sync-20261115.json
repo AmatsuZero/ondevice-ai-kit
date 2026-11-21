@@ -1,0 +1,40 @@
+{
+  "observedAt": "2026-11-15T04:09:40.745911+00:00",
+  "sourceCommit": "f09f41992ceeed0fbdf86de9d96ba966ae8c3d5d",
+  "sourceBranchPushed": false,
+  "marker": "<!-- w3-adb-libusb-20261114 -->",
+  "issues": {
+    "gh": {
+      "id": 6869943486,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6869943486",
+      "sha256": "ac6fdc0afc53c7d1ba53f0906da3e277028eb49b51ecc42b57d8970a66269f72",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44849,
+      "url": null,
+      "sha256": "6a54b7f967c96d281f6cd35a1dd7de1b3f3ace4308f7a6c0d05d1c41a41af7de",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "8662a9cc4a2f3f8383fe79eaa9a4ec342d0f1d7c",
+    "sha256": "a53aca3bd82b5cd3d778185dc7dcd78d4a6e0dcd81c9aebc94af17b7f06af1c3",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "a53aca3bd82b5cd3d778185dc7dcd78d4a6e0dcd81c9aebc94af17b7f06af1c3",
+    "readbackExact": true
+  },
+  "dualWikiSHA256Equal": true,
+  "previousReadErrorsRetained": true,
+  "paginationRecovery": "20 rows per page with complete traversal; no duplicate existing GH marker",
+  "wikiRecovery": "Preserved old temporary checkout with missing HEAD/config; fresh distinct clone from remote",
+  "hostBackendNativeRestored": true,
+  "newPrepareStarted": false,
+  "newRunConsumed": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "evidenceRoot": ".omx/artifacts/w3-adb-libusb-20261114/publication"
+}

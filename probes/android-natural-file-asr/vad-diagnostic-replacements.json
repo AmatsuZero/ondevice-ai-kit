@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "purpose": "isolated durable measurement only; follow-up repairs missing volatile observation, not ASR behavior",
+  "replacements": [
+    {
+      "path": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/UtteranceBuffer.kt",
+      "old": "    fun clear() {\n",
+      "new": "    /** Isolated W3 diagnostic only; reads counters without running the classifier. */\n    fun diagnosticSnapshot(): Map<String, Int> {\n        val hasSpeech = speechSamples >= 4096\n        val start = if (hasSpeech) maxOf(0, firstSpeech - 3200) else -1\n        val end = if (hasSpeech) minOf(size, lastSpeech + 3200) else -1\n        return linkedMapOf(\n            \"consumedSamples\" to size,\n            \"firstSpeechSample\" to firstSpeech,\n            \"lastSpeechEndSample\" to lastSpeech,\n            \"speechSamples\" to speechSamples,\n            \"preparedStartSample\" to start,\n            \"preparedEndSample\" to end,\n            \"preparedSamples\" to if (hasSpeech) end - start else 0\n        )\n    }\n\n    fun clear() {\n"
+    },
+    {
+      "path": "android/backend-sherpa-asr/src/main/kotlin/io/ondeviceai/sherpaasr/WhisperSpeechGate.kt",
+      "old": "                gate.buffer.samples()\n",
+      "new": "                val prepared = gate.buffer.samples()\n                val snapshot = gate.buffer.diagnosticSnapshot()\n                val observation = org.json.JSONObject(snapshot)\n                    .put(\"inputSamples\", samples.size)\n                    .put(\"stoppedBeforeInputEnd\", snapshot.getValue(\"consumedSamples\") < samples.size)\n                val diagnosticBytes = (observation.toString() + \"\\n\").toByteArray(Charsets.UTF_8)\n                java.io.FileOutputStream(model.directory.resolve(\"w3-vad-observations.jsonl\"), true).use { output ->\n                    output.write(diagnosticBytes)\n                    output.fd.sync()\n                }\n                android.util.Log.i(\"ODAI_W3_VAD\", observation.toString())\n                prepared\n"
+    }
+  ]
+}

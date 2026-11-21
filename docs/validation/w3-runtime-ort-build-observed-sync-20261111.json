@@ -1,0 +1,44 @@
+{
+  "marker": "w3-ort-build-provenance-followup-20261111",
+  "status": "both-issues-and-wikis-readback-verified",
+  "sourceCommit": "19ef6308fce2a98a547fdb4dedb96da773a3dbc6",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6795218620,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6795218620",
+      "sha256": "d7d6c65097d1ea235d8671273487b43272d21c5bd57d692a2b82d343ed663d29",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43195,
+      "url": null,
+      "sha256": "0ddda3558d88d03eb7b80950011e56a073181cfbd4730e408a1eb338c0a8746e",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "2e6bc5b20c5cac1471d4f1f3fe5dc87b4d5f4883",
+    "sha256": "b377f4f75bcae4eb28de298d0bbba6d9935c20cc73b4388446862234dba52e3f",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "b377f4f75bcae4eb28de298d0bbba6d9935c20cc73b4388446862234dba52e3f",
+    "readbackExact": true
+  },
+  "wikiBytesMatch": true,
+  "bodySHA256": "d7d6c65097d1ea235d8671273487b43272d21c5bd57d692a2b82d343ed663d29",
+  "arenaFrozenFilesUnchanged": 108,
+  "heapFrozenFilesUnchanged": 120,
+  "heapRunConsumed": false,
+  "deviceInventory": "empty",
+  "deviceLockState": "unobserved-transport-unavailable",
+  "newInstallations": 0,
+  "nativeDecodeCalls": 0,
+  "newBinaryDownloads": 0,
+  "w3Status": "open",
+  "r4Status": "open",
+  "r5Status": "open",
+  "evidence": ".omx/artifacts/w3-runtime-materials-20261111/ort-provenance-publication"
+}

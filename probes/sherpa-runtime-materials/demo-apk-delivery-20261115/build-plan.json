@@ -1,0 +1,55 @@
+{
+  "sourceHead": "de5e7bc2cbbda23bc8d3a1a87783ea9d8f9d8987",
+  "args": [
+    "./gradlew",
+    ":android:backend-sherpa-asr:assembleDebug",
+    ":demo:androidApp:assembleDebug",
+    "--offline",
+    "--console=plain",
+    "-PenableSherpaAsr=true",
+    "-PenableLiteRtLm=false",
+    "-PenableLiteRtSr=false",
+    "-PenableOpenCvIdentity=false",
+    "-PsherpaMavenRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2",
+    "-PsherpaAsrAssetsDir=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/assets",
+    "-PsdkCommit=de5e7bc2cbbda23bc8d3a1a87783ea9d8f9d8987"
+  ],
+  "sourceSnapshotCount": 304,
+  "sourceSnapshotScope": "tracked and untracked nonignored files under selected Android/Demo/KMP/Gradle inputs; not all build inputs",
+  "assets": {
+    "artifacts/verification/sherpa-asr-20261105/inputs/assets/sherpa-whisper-tiny/SHERPA-LICENSE.txt": {
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "artifacts/verification/sherpa-asr-20261105/inputs/assets/sherpa-whisper-tiny/SILERO-LICENSE.txt": {
+      "bytes": 1075,
+      "sha256": "2e63e9a38b6e8fc0c7bc37ce174caca1862870856c6daf5697cfb785e925520b"
+    },
+    "artifacts/verification/sherpa-asr-20261105/inputs/assets/sherpa-whisper-tiny/WHISPER-LICENSE.txt": {
+      "bytes": 1063,
+      "sha256": "b5d65a59060e68c4ff940e1eddfa6f94b2d68fdf58ed7f4dd57721c997e35e9d"
+    },
+    "artifacts/verification/sherpa-asr-20261105/inputs/assets/sherpa-whisper-tiny/silero_vad.onnx": {
+      "bytes": 643854,
+      "sha256": "9e2449e1087496d8d4caba907f23e0bd3f78d91fa552479bb9c23ac09cbb1fd6"
+    },
+    "artifacts/verification/sherpa-asr-20261105/inputs/assets/sherpa-whisper-tiny/tiny-decoder.int8.onnx": {
+      "bytes": 89855401,
+      "sha256": "d2fece8dd42771f1df975c6c0445770d0c292bf7547c2cae04a6c0cc57540925"
+    },
+    "artifacts/verification/sherpa-asr-20261105/inputs/assets/sherpa-whisper-tiny/tiny-encoder.int8.onnx": {
+      "bytes": 12937772,
+      "sha256": "d24fb083ae3b1041fc24e97971d60e280c9342201fbb67b0ab428a8b4a51a434"
+    },
+    "artifacts/verification/sherpa-asr-20261105/inputs/assets/sherpa-whisper-tiny/tiny-tokens.txt": {
+      "bytes": 816730,
+      "sha256": "b34b360dbb493e781e479794586d661700670d65564001f23024971d1f2fa126"
+    }
+  },
+  "runtimeAARSHA256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+  "outputsDirectory": "artifacts/verification/w3-demo-apk-delivery-20261115",
+  "installOrDeviceRun": false,
+  "publishedSdkDependencyUsed": false,
+  "existingDemoProjectTaskOnly": true,
+  "newImplementation": false
+}

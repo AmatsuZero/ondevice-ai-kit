@@ -1,0 +1,42 @@
+{
+  "marker": "w3-terminal-observation-components-20261112",
+  "sourceCommit": "a9cc09e",
+  "sourceFilesCommitted": 16,
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6812703119,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6812703119",
+      "sha256": "87f577afa20ce0f7f2cd1c0d494a6a315626352a572a623ac687a08e59dcb7fd",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43284,
+      "url": null,
+      "sha256": "d1ef761cedaa6dbd7b72b990d38270257486c1b380833734173dc7e7199603b3",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "550adb7c8e448ff01292a14f646fe00d46aebb7d",
+    "sha256": "4e92eed215ea252bdb0bf91e43daff60c90c172e245144923505630c28a5628c",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3\u8bed\u97f3\u9a8c\u6536\u4e0e\u540e\u7eed\u6539\u8fdb",
+    "sha256": "4e92eed215ea252bdb0bf91e43daff60c90c172e245144923505630c28a5628c",
+    "readbackExact": true
+  },
+  "wikiBytesIdentical": true,
+  "scope": "Pure components and read-only Android transport recovery; not W3/R4/R5 completion",
+  "postWrites": {
+    "githubIssue": 1,
+    "gitlabIssue": 1,
+    "githubWikiPush": 1,
+    "gitlabWikiPut": 1
+  },
+  "originalRunsReplayed": false,
+  "inferenceCalls": 0,
+  "oldFrozenFilesUnchanged": 120,
+  "oldDiagnosticAccepted": false
+}

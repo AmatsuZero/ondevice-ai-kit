@@ -1,0 +1,1021 @@
+{
+  "sherpaSourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "sherpaVersionPatch": {
+    "path": "sherpa-onnx/csrc/version.cc",
+    "sourceGitBlobSHA1": "fad4f4608123d9fe30c9e2543f79952dd403a5fd",
+    "reconstructedObservedPatchGitBlobSHA1": "149297a10a8ba54619e57615d844bbf5c7b21b1b",
+    "reconstructedObservedPatchSHA256": "c4addca669aa59aa7aef9d8862acc761d94d3a36eb26ab0d0ea60eb5a41e106d",
+    "bothOfficialJobDiffPrefixesMatched": true,
+    "evidence": {
+      "android-libs.log": {
+        "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "excerpts": [
+          {
+            "line": 480,
+            "text": "2026-10-26T15:37:04.9867589Z diff --git a/sherpa-onnx/csrc/version.cc b/sherpa-onnx/csrc/version.cc"
+          },
+          {
+            "line": 481,
+            "text": "2026-10-26T15:37:04.9867881Z index fad4f460..149297a1 100644"
+          },
+          {
+            "line": 482,
+            "text": "2026-10-26T15:37:04.9868038Z --- a/sherpa-onnx/csrc/version.cc"
+          },
+          {
+            "line": 483,
+            "text": "2026-10-26T15:37:04.9868210Z +++ b/sherpa-onnx/csrc/version.cc"
+          },
+          {
+            "line": 484,
+            "text": "2026-10-26T15:37:04.9868385Z @@ -9,12 +9,12 @@"
+          },
+          {
+            "line": 485,
+            "text": "2026-10-26T15:37:04.9868924Z  namespace sherpa_onnx {"
+          },
+          {
+            "line": 486,
+            "text": "2026-10-26T15:37:04.9869057Z  "
+          },
+          {
+            "line": 487,
+            "text": "2026-10-26T15:37:04.9869280Z  const char *GetGitDate() {"
+          },
+          {
+            "line": 488,
+            "text": "2026-10-26T15:37:04.9869448Z -  static const char *date = \"Mon Oct 26 21:50:15 2026\";"
+          },
+          {
+            "line": 489,
+            "text": "2026-10-26T15:37:04.9869651Z +  static const char *date = \"Mon Oct 26 14:57:12 2026\";"
+          },
+          {
+            "line": 490,
+            "text": "2026-10-26T15:37:04.9869816Z    return date;"
+          },
+          {
+            "line": 491,
+            "text": "2026-10-26T15:37:04.9869924Z  }"
+          },
+          {
+            "line": 492,
+            "text": "2026-10-26T15:37:04.9870021Z  "
+          },
+          {
+            "line": 493,
+            "text": "2026-10-26T15:37:04.9870130Z  const char *GetGitSha1() {"
+          },
+          {
+            "line": 494,
+            "text": "2026-10-26T15:37:04.9870276Z -  static const char *sha1 = \"96255a1b\";"
+          },
+          {
+            "line": 495,
+            "text": "2026-10-26T15:37:04.9870432Z +  static const char *sha1 = \"af2d8d81\";"
+          },
+          {
+            "line": 496,
+            "text": "2026-10-26T15:37:04.9870574Z    return sha1;"
+          },
+          {
+            "line": 497,
+            "text": "2026-10-26T15:37:04.9870680Z  }"
+          },
+          {
+            "line": 498,
+            "text": "2026-10-26T15:37:04.9870772Z  "
+          }
+        ]
+      },
+      "android-aar.log": {
+        "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-aar.log",
+        "excerpts": [
+          {
+            "line": 481,
+            "text": "2026-10-26T16:23:13.3458316Z diff --git a/sherpa-onnx/csrc/version.cc b/sherpa-onnx/csrc/version.cc"
+          },
+          {
+            "line": 482,
+            "text": "2026-10-26T16:23:13.3459099Z index fad4f460..149297a1 100644"
+          },
+          {
+            "line": 483,
+            "text": "2026-10-26T16:23:13.3459558Z --- a/sherpa-onnx/csrc/version.cc"
+          },
+          {
+            "line": 484,
+            "text": "2026-10-26T16:23:13.3460078Z +++ b/sherpa-onnx/csrc/version.cc"
+          },
+          {
+            "line": 485,
+            "text": "2026-10-26T16:23:13.3461075Z @@ -9,12 +9,12 @@"
+          },
+          {
+            "line": 486,
+            "text": "2026-10-26T16:23:13.3461642Z  namespace sherpa_onnx {"
+          },
+          {
+            "line": 487,
+            "text": "2026-10-26T16:23:13.3462044Z  "
+          },
+          {
+            "line": 488,
+            "text": "2026-10-26T16:23:13.3462372Z  const char *GetGitDate() {"
+          },
+          {
+            "line": 489,
+            "text": "2026-10-26T16:23:13.3463134Z -  static const char *date = \"Mon Oct 26 21:50:15 2026\";"
+          },
+          {
+            "line": 490,
+            "text": "2026-10-26T16:23:13.3463772Z +  static const char *date = \"Mon Oct 26 14:57:12 2026\";"
+          },
+          {
+            "line": 491,
+            "text": "2026-10-26T16:23:13.3464286Z    return date;"
+          },
+          {
+            "line": 492,
+            "text": "2026-10-26T16:23:13.3464610Z  }"
+          },
+          {
+            "line": 493,
+            "text": "2026-10-26T16:23:13.3464903Z  "
+          },
+          {
+            "line": 494,
+            "text": "2026-10-26T16:23:13.3465222Z  const char *GetGitSha1() {"
+          },
+          {
+            "line": 495,
+            "text": "2026-10-26T16:23:13.3465656Z -  static const char *sha1 = \"96255a1b\";"
+          },
+          {
+            "line": 496,
+            "text": "2026-10-26T16:23:13.3466133Z +  static const char *sha1 = \"af2d8d81\";"
+          },
+          {
+            "line": 497,
+            "text": "2026-10-26T16:23:13.3466576Z    return sha1;"
+          },
+          {
+            "line": 498,
+            "text": "2026-10-26T16:23:13.3466899Z  }"
+          },
+          {
+            "line": 499,
+            "text": "2026-10-26T16:23:13.3467182Z  "
+          }
+        ]
+      }
+    },
+    "scope": "Recorded tracked version/date changes; does not assert absence of all other or generated input changes"
+  },
+  "sherpaNative": [
+    {
+      "id": "sherpa-native-arm64-v8a",
+      "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "actualCmake": {
+        "abi": "arm64-v8a",
+        "line": 778,
+        "text": "2026-10-26T15:37:28.0125372Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DSHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF -DSHERPA_ONNX_ENABLE_C_API=ON -DCMAKE_INSTALL_PREFIX=./install -DSHERPA_ONNX_ENABLE_RKNN=OFF -DSHERPA_ONNX_ENABLE_QNN=OFF -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-21 ..",
+        "flags": {
+          "CMAKE_TOOLCHAIN_FILE": "/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake",
+          "SHERPA_ONNX_ENABLE_TTS": "ON",
+          "SHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION": "ON",
+          "SHERPA_ONNX_ENABLE_BINARY": "OFF",
+          "CMAKE_BUILD_TYPE": "Release",
+          "BUILD_SHARED_LIBS": "ON",
+          "SHERPA_ONNX_ENABLE_PYTHON": "OFF",
+          "SHERPA_ONNX_ENABLE_TESTS": "OFF",
+          "SHERPA_ONNX_ENABLE_CHECK": "OFF",
+          "SHERPA_ONNX_ENABLE_PORTAUDIO": "OFF",
+          "SHERPA_ONNX_ENABLE_JNI": "ON",
+          "SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY": "OFF",
+          "SHERPA_ONNX_ENABLE_C_API": "ON",
+          "CMAKE_INSTALL_PREFIX": "./install",
+          "SHERPA_ONNX_ENABLE_RKNN": "OFF",
+          "SHERPA_ONNX_ENABLE_QNN": "OFF",
+          "ANDROID_ABI": "arm64-v8a",
+          "ANDROID_PLATFORM": "android-21"
+        }
+      },
+      "jobLog": {
+        "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "bytes": 414518,
+        "sha256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6"
+      },
+      "sourceTargets": [
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/csrc/CMakeLists.txt",
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/c-api/CMakeLists.txt",
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/jni/CMakeLists.txt"
+      ],
+      "patchGroup": "sherpaVersionPatch"
+    },
+    {
+      "id": "sherpa-native-armeabi-v7a",
+      "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "actualCmake": {
+        "abi": "armeabi-v7a",
+        "line": 1577,
+        "text": "2026-10-26T15:40:55.9726832Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DSHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF -DSHERPA_ONNX_ENABLE_C_API=ON -DCMAKE_INSTALL_PREFIX=./install -DSHERPA_ONNX_ENABLE_RKNN=OFF -DANDROID_ABI=armeabi-v7a -DANDROID_ARM_NEON=ON -DANDROID_PLATFORM=android-21 ..",
+        "flags": {
+          "CMAKE_TOOLCHAIN_FILE": "/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake",
+          "SHERPA_ONNX_ENABLE_TTS": "ON",
+          "SHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION": "ON",
+          "SHERPA_ONNX_ENABLE_BINARY": "OFF",
+          "CMAKE_BUILD_TYPE": "Release",
+          "BUILD_SHARED_LIBS": "ON",
+          "SHERPA_ONNX_ENABLE_PYTHON": "OFF",
+          "SHERPA_ONNX_ENABLE_TESTS": "OFF",
+          "SHERPA_ONNX_ENABLE_CHECK": "OFF",
+          "SHERPA_ONNX_ENABLE_PORTAUDIO": "OFF",
+          "SHERPA_ONNX_ENABLE_JNI": "ON",
+          "SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY": "OFF",
+          "SHERPA_ONNX_ENABLE_C_API": "ON",
+          "CMAKE_INSTALL_PREFIX": "./install",
+          "SHERPA_ONNX_ENABLE_RKNN": "OFF",
+          "ANDROID_ABI": "armeabi-v7a",
+          "ANDROID_ARM_NEON": "ON",
+          "ANDROID_PLATFORM": "android-21"
+        }
+      },
+      "jobLog": {
+        "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "bytes": 414518,
+        "sha256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6"
+      },
+      "sourceTargets": [
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/csrc/CMakeLists.txt",
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/c-api/CMakeLists.txt",
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/jni/CMakeLists.txt"
+      ],
+      "patchGroup": "sherpaVersionPatch"
+    },
+    {
+      "id": "sherpa-native-x86_64",
+      "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "actualCmake": {
+        "abi": "x86_64",
+        "line": 2338,
+        "text": "2026-10-26T15:43:42.2256063Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DSHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY=OFF -DCMAKE_INSTALL_PREFIX=./install -DANDROID_ABI=x86_64 -DSHERPA_ONNX_ENABLE_C_API=ON -DSHERPA_ONNX_ENABLE_WEBSOCKET=OFF -DANDROID_PLATFORM=android-21 ..",
+        "flags": {
+          "CMAKE_TOOLCHAIN_FILE": "/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake",
+          "SHERPA_ONNX_ENABLE_TTS": "ON",
+          "SHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION": "ON",
+          "SHERPA_ONNX_ENABLE_BINARY": "OFF",
+          "CMAKE_BUILD_TYPE": "Release",
+          "BUILD_SHARED_LIBS": "ON",
+          "SHERPA_ONNX_ENABLE_PYTHON": "OFF",
+          "SHERPA_ONNX_ENABLE_TESTS": "OFF",
+          "SHERPA_ONNX_ENABLE_CHECK": "OFF",
+          "SHERPA_ONNX_ENABLE_PORTAUDIO": "OFF",
+          "SHERPA_ONNX_ENABLE_JNI": "ON",
+          "SHERPA_ONNX_LINK_LIBSTDCPP_STATICALLY": "OFF",
+          "CMAKE_INSTALL_PREFIX": "./install",
+          "ANDROID_ABI": "x86_64",
+          "SHERPA_ONNX_ENABLE_C_API": "ON",
+          "SHERPA_ONNX_ENABLE_WEBSOCKET": "OFF",
+          "ANDROID_PLATFORM": "android-21"
+        }
+      },
+      "jobLog": {
+        "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "bytes": 414518,
+        "sha256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6"
+      },
+      "sourceTargets": [
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/csrc/CMakeLists.txt",
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/c-api/CMakeLists.txt",
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/jni/CMakeLists.txt"
+      ],
+      "patchGroup": "sherpaVersionPatch"
+    },
+    {
+      "id": "sherpa-native-x86",
+      "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+      "actualCmake": {
+        "abi": "x86",
+        "line": 3133,
+        "text": "2026-10-26T15:46:29.6125852Z + cmake -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake -DSHERPA_ONNX_ENABLE_TTS=ON -DSHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION=ON -DSHERPA_ONNX_ENABLE_BINARY=OFF -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DSHERPA_ONNX_ENABLE_PYTHON=OFF -DSHERPA_ONNX_ENABLE_TESTS=OFF -DSHERPA_ONNX_ENABLE_CHECK=OFF -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF -DSHERPA_ONNX_ENABLE_JNI=ON -DCMAKE_INSTALL_PREFIX=./install -DANDROID_ABI=x86 -DSHERPA_ONNX_ENABLE_C_API=ON -DSHERPA_ONNX_ENABLE_WEBSOCKET=OFF -DANDROID_PLATFORM=android-21 ..",
+        "flags": {
+          "CMAKE_TOOLCHAIN_FILE": "/usr/local/lib/android/sdk/ndk/30.0.16248370/build/cmake/android.toolchain.cmake",
+          "SHERPA_ONNX_ENABLE_TTS": "ON",
+          "SHERPA_ONNX_ENABLE_SPEAKER_DIARIZATION": "ON",
+          "SHERPA_ONNX_ENABLE_BINARY": "OFF",
+          "CMAKE_BUILD_TYPE": "Release",
+          "BUILD_SHARED_LIBS": "ON",
+          "SHERPA_ONNX_ENABLE_PYTHON": "OFF",
+          "SHERPA_ONNX_ENABLE_TESTS": "OFF",
+          "SHERPA_ONNX_ENABLE_CHECK": "OFF",
+          "SHERPA_ONNX_ENABLE_PORTAUDIO": "OFF",
+          "SHERPA_ONNX_ENABLE_JNI": "ON",
+          "CMAKE_INSTALL_PREFIX": "./install",
+          "ANDROID_ABI": "x86",
+          "SHERPA_ONNX_ENABLE_C_API": "ON",
+          "SHERPA_ONNX_ENABLE_WEBSOCKET": "OFF",
+          "ANDROID_PLATFORM": "android-21"
+        }
+      },
+      "jobLog": {
+        "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+        "bytes": 414518,
+        "sha256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6"
+      },
+      "sourceTargets": [
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/csrc/CMakeLists.txt",
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/c-api/CMakeLists.txt",
+        "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/sherpa-onnx/jni/CMakeLists.txt"
+      ],
+      "patchGroup": "sherpaVersionPatch"
+    }
+  ],
+  "packaging": {
+    "id": "sherpa-aar-packaging",
+    "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+    "sourcePaths": [
+      "android/SherpaOnnxAar/sherpa_onnx/build.gradle.kts",
+      "android/SherpaOnnxAar/gradle/libs.versions.toml",
+      "android/SherpaOnnxAar/gradle/wrapper/gradle-wrapper.properties",
+      "android/SherpaOnnxAar/sherpa_onnx/src/main/AndroidManifest.xml"
+    ],
+    "declaredTools": {
+      "gradle": "8.6",
+      "agp": "8.4.0",
+      "kotlin": "1.7.20"
+    },
+    "observedJobTools": {
+      "gradle": "8.6",
+      "setupJava": "temurin 21"
+    },
+    "settings": {
+      "compileSdk": 34,
+      "minSdk": 21,
+      "jvmTarget": "1.8",
+      "releaseMinify": false
+    },
+    "command": "./gradlew :sherpa_onnx:assembleRelease",
+    "workflow": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/source-evidence/sherpa-onnx/.github/workflows/android.yaml",
+    "jobLog": {
+      "path": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-aar.log",
+      "bytes": 117868,
+      "sha256": "ab83e33122f92e915d11e07e4829fdfc17e020fd4cfe803f81cb528c710ecc28"
+    }
+  },
+  "ortNative": [
+    {
+      "id": "ort-native-arm64-v8a",
+      "abi": "arm64-v8a",
+      "jobId": 101086389995,
+      "logPath": ".omx/artifacts/w3-runtime-materials-20261111/ort-provenance-followup/ort-arm64.log",
+      "logSHA256": "d2f7a0facac749ab6c165535a3fce3295b137d904048255c5e700203e8a1f274",
+      "patchEvidence": [
+        {
+          "line": 382,
+          "text": "2026-09-04T15:55:50.9075512Z diff --git a/cmake/onnxruntime.cmake b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 383,
+          "text": "2026-09-04T15:55:50.9076207Z index e3130fc..1353c1b 100644"
+        },
+        {
+          "line": 384,
+          "text": "2026-09-04T15:55:50.9076641Z --- a/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 385,
+          "text": "2026-09-04T15:55:50.9077092Z +++ b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 386,
+          "text": "2026-09-04T15:55:50.9077716Z @@ -295,16 +295,13 @@ if(WIN32 AND onnxruntime_BUILD_SHARED_LIB)"
+        },
+        {
+          "line": 387,
+          "text": "2026-09-04T15:55:50.9078434Z      target_link_libraries(onnxruntime PRIVATE delayimp.lib)"
+        },
+        {
+          "line": 388,
+          "text": "2026-09-04T15:55:50.9078995Z    endif()"
+        },
+        {
+          "line": 389,
+          "text": "2026-09-04T15:55:50.9079657Z  endif()"
+        },
+        {
+          "line": 390,
+          "text": "2026-09-04T15:55:50.9080150Z -#See: https://cmake.org/cmake/help/latest/prop_tgt/SOVERSION.html"
+        },
+        {
+          "line": 391,
+          "text": "2026-09-04T15:55:50.9080741Z  if(NOT WIN32)"
+        },
+        {
+          "line": 392,
+          "text": "2026-09-04T15:55:50.9081138Z    set_target_properties(onnxruntime PROPERTIES"
+        },
+        {
+          "line": 393,
+          "text": "2026-09-04T15:55:50.9081569Z      PUBLIC_HEADER \"${ONNXRUNTIME_PUBLIC_HEADERS}\""
+        },
+        {
+          "line": 394,
+          "text": "2026-09-04T15:55:50.9081910Z      LINK_DEPENDS ${SYMBOL_FILE}"
+        },
+        {
+          "line": 395,
+          "text": "2026-09-04T15:55:50.9082175Z      VERSION ${ORT_VERSION}"
+        },
+        {
+          "line": 396,
+          "text": "2026-09-04T15:55:50.9082409Z -    SOVERSION 1"
+        },
+        {
+          "line": 397,
+          "text": "2026-09-04T15:55:50.9082633Z      FOLDER \"ONNXRuntime\")"
+        },
+        {
+          "line": 398,
+          "text": "2026-09-04T15:55:50.9082861Z  else()"
+        },
+        {
+          "line": 399,
+          "text": "2026-09-04T15:55:50.9083081Z -  # Omit the SOVERSION setting in Windows build"
+        },
+        {
+          "line": 400,
+          "text": "2026-09-04T15:55:50.9083836Z    set_target_properties(onnxruntime PROPERTIES"
+        },
+        {
+          "line": 401,
+          "text": "2026-09-04T15:55:50.9084276Z      PUBLIC_HEADER \"${ONNXRUNTIME_PUBLIC_HEADERS}\""
+        },
+        {
+          "line": 402,
+          "text": "2026-09-04T15:55:50.9084678Z      LINK_DEPENDS ${SYMBOL_FILE}"
+        },
+        {
+          "line": 403,
+          "text": "2026-09-04T15:55:50.9282577Z Reading package lists..."
+        },
+        {
+          "line": 404,
+          "text": "2026-09-04T15:55:51.1403239Z Building dependency tree..."
+        },
+        {
+          "line": 405,
+          "text": "2026-09-04T15:55:51.1432613Z Reading state information..."
+        },
+        {
+          "line": 406,
+          "text": "2026-09-04T15:55:51.3578348Z patchelf is already the newest version (0.18.0-1.1build1)."
+        },
+        {
+          "line": 407,
+          "text": "2026-09-04T15:55:51.3579126Z 0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded."
+        },
+        {
+          "line": 408,
+          "text": "2026-09-04T15:55:51.3639010Z ##[group]Run export CMAKE_CXX_COMPILER_LAUNCHER=ccache"
+        },
+        {
+          "line": 409,
+          "text": "2026-09-04T15:55:51.3639460Z \u001b[36;1mexport CMAKE_CXX_COMPILER_LAUNCHER=ccache\u001b[0m"
+        },
+        {
+          "line": 410,
+          "text": "2026-09-04T15:55:51.3639877Z \u001b[36;1mexport PATH=\"/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH\"\u001b[0m"
+        },
+        {
+          "line": 411,
+          "text": "2026-09-04T15:55:51.3640270Z \u001b[36;1m\u001b[0m"
+        }
+      ],
+      "cmakeFlags": {
+        "onnxruntime_USE_MIMALLOC": [
+          "OFF"
+        ],
+        "onnxruntime_USE_NNAPI_BUILTIN": [
+          "ON"
+        ],
+        "onnxruntime_ENABLE_LTO": [
+          "ON"
+        ],
+        "ANDROID_PLATFORM": [
+          "android-27"
+        ],
+        "ANDROID_ABI": [
+          "arm64-v8a"
+        ]
+      },
+      "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+      "actualBuildCommand": {
+        "line": 452,
+        "text": "2026-09-04T15:55:51.4641284Z   --build_java --build_dir ./build-shared/arm64-v8a --android --use_nnapi --android_abi arm64-v8a --android_api 27 --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_generator Ninja --config Release --update --build --parallel --skip_tests --compile_no_warning_as_error --build_shared_lib --skip_submodule_sync --enable_lto --cmake_extra_defines CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 --cmake_extra_defines CMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+      },
+      "actualCmakeCommand": {
+        "line": 455,
+        "text": "2026-09-04T15:55:51.4689130Z 2026-09-04 15:55:51,467 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=arm64-v8a -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+      },
+      "executedWorkflowCommit": "bb069649de9edc4689b2c5f9609e5499ae0bee9d",
+      "patchSummary": "Remove SOVERSION and target VERSION statements in cmake/onnxruntime.cmake",
+      "releaseMemberEvidence": "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/member-verification.json",
+      "dependencyInputEvidence": [
+        "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/dependency-notice-map.json",
+        "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/complete-manifest.json"
+      ],
+      "limitations": "Selected flags and tracked patch observed; not certification of exhaustive inputs or raw CI per-ABI member reread"
+    },
+    {
+      "id": "ort-native-armeabi-v7a",
+      "abi": "armeabi-v7a",
+      "jobId": 101086389604,
+      "logPath": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/armeabi-v7a.log",
+      "logSHA256": "d9b140c42f76a75311d433b686e6e34269ace02a9c5850ec290949c496afa0cc",
+      "patchEvidence": [
+        {
+          "line": 382,
+          "text": "2026-09-04T15:55:47.6166131Z diff --git a/cmake/onnxruntime.cmake b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 383,
+          "text": "2026-09-04T15:55:47.6166802Z index e3130fc..1353c1b 100644"
+        },
+        {
+          "line": 384,
+          "text": "2026-09-04T15:55:47.6167188Z --- a/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 385,
+          "text": "2026-09-04T15:55:47.6167680Z +++ b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 386,
+          "text": "2026-09-04T15:55:47.6168295Z @@ -295,16 +295,13 @@ if(WIN32 AND onnxruntime_BUILD_SHARED_LIB)"
+        },
+        {
+          "line": 387,
+          "text": "2026-09-04T15:55:47.6169216Z      target_link_libraries(onnxruntime PRIVATE delayimp.lib)"
+        },
+        {
+          "line": 388,
+          "text": "2026-09-04T15:55:47.6169699Z    endif()"
+        },
+        {
+          "line": 389,
+          "text": "2026-09-04T15:55:47.6170338Z  endif()"
+        },
+        {
+          "line": 390,
+          "text": "2026-09-04T15:55:47.6170790Z -#See: https://cmake.org/cmake/help/latest/prop_tgt/SOVERSION.html"
+        },
+        {
+          "line": 391,
+          "text": "2026-09-04T15:55:47.6171282Z  if(NOT WIN32)"
+        },
+        {
+          "line": 392,
+          "text": "2026-09-04T15:55:47.6171715Z    set_target_properties(onnxruntime PROPERTIES"
+        },
+        {
+          "line": 393,
+          "text": "2026-09-04T15:55:47.6172515Z      PUBLIC_HEADER \"${ONNXRUNTIME_PUBLIC_HEADERS}\""
+        },
+        {
+          "line": 394,
+          "text": "2026-09-04T15:55:47.6172937Z      LINK_DEPENDS ${SYMBOL_FILE}"
+        },
+        {
+          "line": 395,
+          "text": "2026-09-04T15:55:47.6173285Z      VERSION ${ORT_VERSION}"
+        },
+        {
+          "line": 396,
+          "text": "2026-09-04T15:55:47.6173609Z -    SOVERSION 1"
+        },
+        {
+          "line": 397,
+          "text": "2026-09-04T15:55:47.6173932Z      FOLDER \"ONNXRuntime\")"
+        },
+        {
+          "line": 398,
+          "text": "2026-09-04T15:55:47.6174246Z  else()"
+        },
+        {
+          "line": 399,
+          "text": "2026-09-04T15:55:47.6174557Z -  # Omit the SOVERSION setting in Windows build"
+        },
+        {
+          "line": 400,
+          "text": "2026-09-04T15:55:47.6174979Z    set_target_properties(onnxruntime PROPERTIES"
+        },
+        {
+          "line": 401,
+          "text": "2026-09-04T15:55:47.6175375Z      PUBLIC_HEADER \"${ONNXRUNTIME_PUBLIC_HEADERS}\""
+        },
+        {
+          "line": 402,
+          "text": "2026-09-04T15:55:47.6175802Z      LINK_DEPENDS ${SYMBOL_FILE}"
+        },
+        {
+          "line": 403,
+          "text": "2026-09-04T15:55:47.6371997Z Reading package lists..."
+        },
+        {
+          "line": 404,
+          "text": "2026-09-04T15:55:47.7943450Z Building dependency tree..."
+        },
+        {
+          "line": 405,
+          "text": "2026-09-04T15:55:47.7950437Z Reading state information..."
+        },
+        {
+          "line": 406,
+          "text": "2026-09-04T15:55:47.9723505Z patchelf is already the newest version (0.18.0-1.1build1)."
+        },
+        {
+          "line": 407,
+          "text": "2026-09-04T15:55:47.9724871Z 0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded."
+        },
+        {
+          "line": 408,
+          "text": "2026-09-04T15:55:47.9780107Z ##[group]Run export CMAKE_CXX_COMPILER_LAUNCHER=ccache"
+        },
+        {
+          "line": 409,
+          "text": "2026-09-04T15:55:47.9780675Z \u001b[36;1mexport CMAKE_CXX_COMPILER_LAUNCHER=ccache\u001b[0m"
+        },
+        {
+          "line": 410,
+          "text": "2026-09-04T15:55:47.9781145Z \u001b[36;1mexport PATH=\"/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH\"\u001b[0m"
+        },
+        {
+          "line": 411,
+          "text": "2026-09-04T15:55:47.9781612Z \u001b[36;1m\u001b[0m"
+        }
+      ],
+      "cmakeFlags": {
+        "onnxruntime_USE_MIMALLOC": [
+          "OFF"
+        ],
+        "onnxruntime_USE_NNAPI_BUILTIN": [
+          "ON"
+        ],
+        "onnxruntime_ENABLE_LTO": [
+          "ON"
+        ],
+        "ANDROID_PLATFORM": [
+          "android-27"
+        ],
+        "ANDROID_ABI": [
+          "armeabi-v7a"
+        ]
+      },
+      "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+      "actualBuildCommand": {
+        "line": 452,
+        "text": "2026-09-04T15:55:48.0700391Z   --build_java --build_dir ./build-shared/armeabi-v7a --android --use_nnapi --android_abi armeabi-v7a --android_api 27 --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_generator Ninja --config Release --update --build --parallel --skip_tests --compile_no_warning_as_error --build_shared_lib --skip_submodule_sync --enable_lto --cmake_extra_defines CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 --cmake_extra_defines CMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+      },
+      "actualCmakeCommand": {
+        "line": 455,
+        "text": "2026-09-04T15:55:48.0739053Z 2026-09-04 15:55:48,072 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=armeabi-v7a -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+      },
+      "executedWorkflowCommit": "bb069649de9edc4689b2c5f9609e5499ae0bee9d",
+      "patchSummary": "Remove SOVERSION and target VERSION statements in cmake/onnxruntime.cmake",
+      "releaseMemberEvidence": "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/member-verification.json",
+      "dependencyInputEvidence": [
+        "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/dependency-notice-map.json",
+        "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/complete-manifest.json"
+      ],
+      "limitations": "Selected flags and tracked patch observed; not certification of exhaustive inputs or raw CI per-ABI member reread"
+    },
+    {
+      "id": "ort-native-x86",
+      "abi": "x86",
+      "jobId": 101086389863,
+      "logPath": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/x86.log",
+      "logSHA256": "15bb74c3a6c3dd6f5cc22440e7da55342d74e5fac19197493ca9e297fad618fc",
+      "patchEvidence": [
+        {
+          "line": 382,
+          "text": "2026-09-04T15:55:50.1269912Z diff --git a/cmake/onnxruntime.cmake b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 383,
+          "text": "2026-09-04T15:55:50.1270719Z index e3130fc..1353c1b 100644"
+        },
+        {
+          "line": 384,
+          "text": "2026-09-04T15:55:50.1271181Z --- a/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 385,
+          "text": "2026-09-04T15:55:50.1271639Z +++ b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 386,
+          "text": "2026-09-04T15:55:50.1272270Z @@ -295,16 +295,13 @@ if(WIN32 AND onnxruntime_BUILD_SHARED_LIB)"
+        },
+        {
+          "line": 387,
+          "text": "2026-09-04T15:55:50.1273033Z      target_link_libraries(onnxruntime PRIVATE delayimp.lib)"
+        },
+        {
+          "line": 388,
+          "text": "2026-09-04T15:55:50.1273611Z    endif()"
+        },
+        {
+          "line": 389,
+          "text": "2026-09-04T15:55:50.1273922Z  endif()"
+        },
+        {
+          "line": 390,
+          "text": "2026-09-04T15:55:50.1274733Z -#See: https://cmake.org/cmake/help/latest/prop_tgt/SOVERSION.html"
+        },
+        {
+          "line": 391,
+          "text": "2026-09-04T15:55:50.1275389Z  if(NOT WIN32)"
+        },
+        {
+          "line": 392,
+          "text": "2026-09-04T15:55:50.1275813Z    set_target_properties(onnxruntime PROPERTIES"
+        },
+        {
+          "line": 393,
+          "text": "2026-09-04T15:55:50.1276414Z      PUBLIC_HEADER \"${ONNXRUNTIME_PUBLIC_HEADERS}\""
+        },
+        {
+          "line": 394,
+          "text": "2026-09-04T15:55:50.1276963Z      LINK_DEPENDS ${SYMBOL_FILE}"
+        },
+        {
+          "line": 395,
+          "text": "2026-09-04T15:55:50.1277399Z      VERSION ${ORT_VERSION}"
+        },
+        {
+          "line": 396,
+          "text": "2026-09-04T15:55:50.1277791Z -    SOVERSION 1"
+        },
+        {
+          "line": 397,
+          "text": "2026-09-04T15:55:50.1278148Z      FOLDER \"ONNXRuntime\")"
+        },
+        {
+          "line": 398,
+          "text": "2026-09-04T15:55:50.1278533Z  else()"
+        },
+        {
+          "line": 399,
+          "text": "2026-09-04T15:55:50.1278904Z -  # Omit the SOVERSION setting in Windows build"
+        },
+        {
+          "line": 400,
+          "text": "2026-09-04T15:55:50.1279744Z    set_target_properties(onnxruntime PROPERTIES"
+        },
+        {
+          "line": 401,
+          "text": "2026-09-04T15:55:50.1280340Z      PUBLIC_HEADER \"${ONNXRUNTIME_PUBLIC_HEADERS}\""
+        },
+        {
+          "line": 402,
+          "text": "2026-09-04T15:55:50.1280893Z      LINK_DEPENDS ${SYMBOL_FILE}"
+        },
+        {
+          "line": 403,
+          "text": "2026-09-04T15:55:50.1480212Z Reading package lists..."
+        },
+        {
+          "line": 404,
+          "text": "2026-09-04T15:55:50.3140218Z Building dependency tree..."
+        },
+        {
+          "line": 405,
+          "text": "2026-09-04T15:55:50.3147372Z Reading state information..."
+        },
+        {
+          "line": 406,
+          "text": "2026-09-04T15:55:50.4642811Z patchelf is already the newest version (0.18.0-1.1build1)."
+        },
+        {
+          "line": 407,
+          "text": "2026-09-04T15:55:50.4643493Z 0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded."
+        },
+        {
+          "line": 408,
+          "text": "2026-09-04T15:55:50.4718572Z ##[group]Run export CMAKE_CXX_COMPILER_LAUNCHER=ccache"
+        },
+        {
+          "line": 409,
+          "text": "2026-09-04T15:55:50.4719300Z \u001b[36;1mexport CMAKE_CXX_COMPILER_LAUNCHER=ccache\u001b[0m"
+        },
+        {
+          "line": 410,
+          "text": "2026-09-04T15:55:50.4719754Z \u001b[36;1mexport PATH=\"/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH\"\u001b[0m"
+        },
+        {
+          "line": 411,
+          "text": "2026-09-04T15:55:50.4720136Z \u001b[36;1m\u001b[0m"
+        }
+      ],
+      "cmakeFlags": {
+        "onnxruntime_USE_MIMALLOC": [
+          "OFF"
+        ],
+        "onnxruntime_USE_NNAPI_BUILTIN": [
+          "ON"
+        ],
+        "onnxruntime_ENABLE_LTO": [
+          "ON"
+        ],
+        "ANDROID_PLATFORM": [
+          "android-27"
+        ],
+        "ANDROID_ABI": [
+          "x86"
+        ]
+      },
+      "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+      "actualBuildCommand": {
+        "line": 452,
+        "text": "2026-09-04T15:55:50.5693375Z   --build_java --build_dir ./build-shared/x86 --android --use_nnapi --android_abi x86 --android_api 27 --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_generator Ninja --config Release --update --build --parallel --skip_tests --compile_no_warning_as_error --build_shared_lib --skip_submodule_sync --enable_lto --cmake_extra_defines CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 --cmake_extra_defines CMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+      },
+      "actualCmakeCommand": {
+        "line": 455,
+        "text": "2026-09-04T15:55:50.5745568Z 2026-09-04 15:55:50,573 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=x86 -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+      },
+      "executedWorkflowCommit": "bb069649de9edc4689b2c5f9609e5499ae0bee9d",
+      "patchSummary": "Remove SOVERSION and target VERSION statements in cmake/onnxruntime.cmake",
+      "releaseMemberEvidence": "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/member-verification.json",
+      "dependencyInputEvidence": [
+        "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/dependency-notice-map.json",
+        "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/complete-manifest.json"
+      ],
+      "limitations": "Selected flags and tracked patch observed; not certification of exhaustive inputs or raw CI per-ABI member reread"
+    },
+    {
+      "id": "ort-native-x86_64",
+      "abi": "x86_64",
+      "jobId": 101086389779,
+      "logPath": ".omx/artifacts/w3-ort-all-abi-20261114/raw-corrected/x86_64.log",
+      "logSHA256": "fa15439c8f6bb1343939933b304288a04d1964e87fea993b163053787353f1b6",
+      "patchEvidence": [
+        {
+          "line": 382,
+          "text": "2026-09-04T15:55:59.2429315Z diff --git a/cmake/onnxruntime.cmake b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 383,
+          "text": "2026-09-04T15:55:59.2430034Z index e3130fc..1353c1b 100644"
+        },
+        {
+          "line": 384,
+          "text": "2026-09-04T15:55:59.2430452Z --- a/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 385,
+          "text": "2026-09-04T15:55:59.2431014Z +++ b/cmake/onnxruntime.cmake"
+        },
+        {
+          "line": 386,
+          "text": "2026-09-04T15:55:59.2431758Z @@ -295,16 +295,13 @@ if(WIN32 AND onnxruntime_BUILD_SHARED_LIB)"
+        },
+        {
+          "line": 387,
+          "text": "2026-09-04T15:55:59.2432396Z      target_link_libraries(onnxruntime PRIVATE delayimp.lib)"
+        },
+        {
+          "line": 388,
+          "text": "2026-09-04T15:55:59.2432816Z    endif()"
+        },
+        {
+          "line": 389,
+          "text": "2026-09-04T15:55:59.2433348Z  endif()"
+        },
+        {
+          "line": 390,
+          "text": "2026-09-04T15:55:59.2433706Z -#See: https://cmake.org/cmake/help/latest/prop_tgt/SOVERSION.html"
+        },
+        {
+          "line": 391,
+          "text": "2026-09-04T15:55:59.2434142Z  if(NOT WIN32)"
+        },
+        {
+          "line": 392,
+          "text": "2026-09-04T15:55:59.2434688Z    set_target_properties(onnxruntime PROPERTIES"
+        },
+        {
+          "line": 393,
+          "text": "2026-09-04T15:55:59.2435319Z      PUBLIC_HEADER \"${ONNXRUNTIME_PUBLIC_HEADERS}\""
+        },
+        {
+          "line": 394,
+          "text": "2026-09-04T15:55:59.2435815Z      LINK_DEPENDS ${SYMBOL_FILE}"
+        },
+        {
+          "line": 395,
+          "text": "2026-09-04T15:55:59.2436230Z      VERSION ${ORT_VERSION}"
+        },
+        {
+          "line": 396,
+          "text": "2026-09-04T15:55:59.2436554Z -    SOVERSION 1"
+        },
+        {
+          "line": 397,
+          "text": "2026-09-04T15:55:59.2436849Z      FOLDER \"ONNXRuntime\")"
+        },
+        {
+          "line": 398,
+          "text": "2026-09-04T15:55:59.2437109Z  else()"
+        },
+        {
+          "line": 399,
+          "text": "2026-09-04T15:55:59.2437361Z -  # Omit the SOVERSION setting in Windows build"
+        },
+        {
+          "line": 400,
+          "text": "2026-09-04T15:55:59.2437735Z    set_target_properties(onnxruntime PROPERTIES"
+        },
+        {
+          "line": 401,
+          "text": "2026-09-04T15:55:59.2438226Z      PUBLIC_HEADER \"${ONNXRUNTIME_PUBLIC_HEADERS}\""
+        },
+        {
+          "line": 402,
+          "text": "2026-09-04T15:55:59.2438578Z      LINK_DEPENDS ${SYMBOL_FILE}"
+        },
+        {
+          "line": 403,
+          "text": "2026-09-04T15:55:59.2618026Z Reading package lists..."
+        },
+        {
+          "line": 404,
+          "text": "2026-09-04T15:55:59.3851545Z Building dependency tree..."
+        },
+        {
+          "line": 405,
+          "text": "2026-09-04T15:55:59.3856537Z Reading state information..."
+        },
+        {
+          "line": 406,
+          "text": "2026-09-04T15:55:59.5382684Z patchelf is already the newest version (0.18.0-1.1build1)."
+        },
+        {
+          "line": 407,
+          "text": "2026-09-04T15:55:59.5383217Z 0 upgraded, 0 newly installed, 0 to remove and 1 not upgraded."
+        },
+        {
+          "line": 408,
+          "text": "2026-09-04T15:55:59.5440818Z ##[group]Run export CMAKE_CXX_COMPILER_LAUNCHER=ccache"
+        },
+        {
+          "line": 409,
+          "text": "2026-09-04T15:55:59.5441383Z \u001b[36;1mexport CMAKE_CXX_COMPILER_LAUNCHER=ccache\u001b[0m"
+        },
+        {
+          "line": 410,
+          "text": "2026-09-04T15:55:59.5441842Z \u001b[36;1mexport PATH=\"/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH\"\u001b[0m"
+        },
+        {
+          "line": 411,
+          "text": "2026-09-04T15:55:59.5442277Z \u001b[36;1m\u001b[0m"
+        }
+      ],
+      "cmakeFlags": {
+        "onnxruntime_USE_MIMALLOC": [
+          "OFF"
+        ],
+        "onnxruntime_USE_NNAPI_BUILTIN": [
+          "ON"
+        ],
+        "onnxruntime_ENABLE_LTO": [
+          "ON"
+        ],
+        "ANDROID_PLATFORM": [
+          "android-27"
+        ],
+        "ANDROID_ABI": [
+          "x86_64"
+        ]
+      },
+      "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+      "actualBuildCommand": {
+        "line": 452,
+        "text": "2026-09-04T15:55:59.6318570Z   --build_java --build_dir ./build-shared/x86_64 --android --use_nnapi --android_abi x86_64 --android_api 27 --cmake_extra_defines onnxruntime_BUILD_UNIT_TESTS=OFF --cmake_generator Ninja --config Release --update --build --parallel --skip_tests --compile_no_warning_as_error --build_shared_lib --skip_submodule_sync --enable_lto --cmake_extra_defines CMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 --cmake_extra_defines CMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384"
+      },
+      "actualCmakeCommand": {
+        "line": 455,
+        "text": "2026-09-04T15:55:59.6353086Z 2026-09-04 15:55:59,634 build [INFO] - /usr/local/bin/cmake /home/runner/work/onnxruntime-libs/onnxruntime-libs/cmake --compile-no-warning-as-error -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF -Donnxruntime_RUN_ONNX_TESTS=OFF -Donnxruntime_GENERATE_TEST_REPORTS=ON -DPython_EXECUTABLE=/usr/bin/python3 -Donnxruntime_USE_VCPKG=OFF -Donnxruntime_USE_MIMALLOC=OFF -Donnxruntime_ENABLE_PYTHON=OFF -Donnxruntime_BUILD_CSHARP=OFF -Donnxruntime_BUILD_JAVA=ON -Donnxruntime_BUILD_NODEJS=OFF -Donnxruntime_BUILD_OBJC=OFF -Donnxruntime_BUILD_SHARED_LIB=ON -Donnxruntime_BUILD_APPLE_FRAMEWORK=OFF -Donnxruntime_USE_DNNL=OFF -Donnxruntime_USE_NNAPI_BUILTIN=ON -Donnxruntime_USE_VSINPU=OFF -Donnxruntime_USE_RKNPU=OFF -Donnxruntime_ENABLE_MICROSOFT_INTERNAL=OFF -Donnxruntime_USE_VITISAI=OFF -Donnxruntime_USE_TENSORRT=OFF -Donnxruntime_USE_NV=OFF -Donnxruntime_USE_TENSORRT_BUILTIN_PARSER=ON -Donnxruntime_USE_TENSORRT_INTERFACE=OFF -Donnxruntime_USE_CUDA_INTERFACE=OFF -Donnxruntime_USE_NV_INTERFACE=OFF -Donnxruntime_USE_OPENVINO_INTERFACE=OFF -Donnxruntime_USE_VITISAI_INTERFACE=OFF -Donnxruntime_USE_QNN_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX_INTERFACE=OFF -Donnxruntime_USE_MIGRAPHX=OFF -Donnxruntime_DISABLE_CONTRIB_OPS=OFF -Donnxruntime_DISABLE_ML_OPS=OFF -Donnxruntime_DISABLE_GENERATION_OPS=OFF -Donnxruntime_DISABLE_RTTI=OFF -Donnxruntime_DISABLE_EXCEPTIONS=OFF -Donnxruntime_MINIMAL_BUILD=OFF -Donnxruntime_EXTENDED_MINIMAL_BUILD=OFF -Donnxruntime_MINIMAL_BUILD_CUSTOM_OPS=OFF -Donnxruntime_REDUCED_OPS_BUILD=OFF -Donnxruntime_CLIENT_PACKAGE_BUILD=OFF -Donnxruntime_ENABLE_SESSION_THREADPOOL_CALLBACKS=OFF -Donnxruntime_BUILD_MS_EXPERIMENTAL_OPS=OFF -Donnxruntime_ENABLE_LTO=ON -Donnxruntime_USE_ACL=OFF -Donnxruntime_USE_JSEP=OFF -Donnxruntime_USE_WEBGPU=OFF -Donnxruntime_USE_EXTERNAL_DAWN=OFF -Donnxruntime_ENABLE_NVTX_PROFILE=OFF -Donnxruntime_ENABLE_TRAINING=OFF -Donnxruntime_ENABLE_TRAINING_OPS=OFF -Donnxruntime_ENABLE_TRAINING_APIS=OFF -Donnxruntime_ENABLE_CPU_FP16_OPS=OFF -Donnxruntime_USE_NCCL=OFF -Donnxruntime_BUILD_BENCHMARKS=OFF -Donnxruntime_GCOV_COVERAGE=OFF -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF -Donnxruntime_USE_CUDA_NHWC_OPS=OFF -Donnxruntime_BUILD_WEBASSEMBLY_STATIC_LIB=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_CATCHING=ON -Donnxruntime_ENABLE_WEBASSEMBLY_API_EXCEPTION_CATCHING=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_EXCEPTION_THROWING=ON -Donnxruntime_WEBASSEMBLY_RUN_TESTS_IN_BROWSER=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_JSPI=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_THREADS=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_DEBUG_INFO=OFF -Donnxruntime_ENABLE_WEBASSEMBLY_PROFILING=OFF -Donnxruntime_ENABLE_LAZY_TENSOR=OFF -Donnxruntime_ENABLE_CUDA_PROFILING=OFF -Donnxruntime_USE_XNNPACK=OFF -Donnxruntime_USE_WEBNN=OFF -Donnxruntime_USE_CANN=OFF -Donnxruntime_DISABLE_FLOAT8_TYPES=ON -Donnxruntime_DISABLE_FLOAT4_TYPES=ON -Donnxruntime_DISABLE_SPARSE_TENSORS=OFF -Donnxruntime_DISABLE_OPTIONAL_TYPE=OFF -Donnxruntime_DISABLE_STRING_TYPE=OFF -Donnxruntime_CUDA_MINIMAL=OFF -DANDROID_PLATFORM=android-27 -DANDROID_ABI=x86_64 -DANDROID_MIN_SDK=27 -DANDROID_USE_LEGACY_TOOLCHAIN_FILE=false -DCMAKE_TOOLCHAIN_FILE=/usr/local/lib/android/sdk/ndk/27.3.13750724/build/cmake/android.toolchain.cmake -Donnxruntime_USE_KLEIDIAI=ON -Donnxruntime_USE_SVE=ON -Donnxruntime_BUILD_UNIT_TESTS=OFF -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -DCMAKE_EXE_LINKER_FLAGS=-Wl,-z,max-page-size=16384 -G Ninja -DCMAKE_BUILD_TYPE=Release"
+      },
+      "executedWorkflowCommit": "bb069649de9edc4689b2c5f9609e5499ae0bee9d",
+      "patchSummary": "Remove SOVERSION and target VERSION statements in cmake/onnxruntime.cmake",
+      "releaseMemberEvidence": "probes/sherpa-runtime-materials/2.0.1-ort-release-members-20261114/member-verification.json",
+      "dependencyInputEvidence": [
+        "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/dependency-notice-map.json",
+        "probes/sherpa-runtime-materials/2.0.1-ort-source-archives-complete-20261112/complete-manifest.json"
+      ],
+      "limitations": "Selected flags and tracked patch observed; not certification of exhaustive inputs or raw CI per-ABI member reread"
+    }
+  ],
+  "inputCompletenessVerified": false
+}

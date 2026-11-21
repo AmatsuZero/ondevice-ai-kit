@@ -1,0 +1,69 @@
+{
+  "files": {
+    "bound-index.json": {
+      "bytes": 9326,
+      "sha256": "7b8a8f8490108afb1b01a4ed9199e413818b571c7cf00ad771960df6f0b11296"
+    },
+    "expected-assets.json": {
+      "bytes": 2084,
+      "sha256": "b2054649fef481a411e2d1b0907e35ba85676ef64698384b03a9af6e693b320e"
+    },
+    "helper-receipts.json": {
+      "bytes": 2675,
+      "sha256": "a217c98b7a808c26ffeaabf4d8d485f30866e38e4b9407867b1b0e6b4e616feb"
+    },
+    "build-invocations.json": {
+      "bytes": 3151,
+      "sha256": "cdd80a244d430214bc523c869a4e23a52b3efcc43f549266d91fd8062eeacd21"
+    },
+    "verify-delivery.py": {
+      "bytes": 2903,
+      "sha256": "6d8547450d09c2b19e376139f9eb9c4c1ac43c7fda1052da89ae52691aef4178"
+    },
+    "jvm-input-rows.json": {
+      "bytes": 5615,
+      "sha256": "e5f482da36ac411ceb155f1596e7954fb75f99592c8f40f436c5dc2dd5942512"
+    },
+    "README.md": {
+      "bytes": 3041,
+      "sha256": "45dd8b24ef6d1c2ffd5ac006ea5b3b20b1cec705f289bf6d06818276388e5b3c"
+    },
+    "jvm-candidate.json": {
+      "bytes": 5651,
+      "sha256": "8b7fd85362f39490c097e531f1a3167ade58cf92fb1a99d4cad183bb93660573"
+    },
+    "apk-verification.json": {
+      "bytes": 7472,
+      "sha256": "67f90abc5b2b39a6a312f80c366da69275a19d8965d0d88c0fb8f47e18b80cc1"
+    },
+    "acceptance-summary.json": {
+      "bytes": 314,
+      "sha256": "337c05f9caa0d63af50f4d2003a5bd291175714561466eacadaa2b27d30e7723"
+    },
+    "aar-verification.json": {
+      "bytes": 1234,
+      "sha256": "9d64cf625cfc9ebf92635a3760078780d22a91b54df1d548a5c1c730c5d82e62"
+    },
+    "integration-receipt.json": {
+      "bytes": 2116,
+      "sha256": "d0f928caa0a393acc208ffec02238b9ba3c3fe4b82b8b79d44b08df02d114a2f"
+    },
+    "initial-rejected-hy3-output.txt": {
+      "bytes": 296,
+      "sha256": "5fa853e7c4b78cf3b8a9e99b8e9f56d8c97bd532ed646d26461199d128f12621"
+    },
+    "apk-fixture/build.gradle.kts": {
+      "bytes": 4487,
+      "sha256": "5d4dbce01b4d4f2de7c31dacb47e7f66fa598733bf93f5427164ed2794d99c8d"
+    },
+    "apk-fixture/settings.gradle.kts": {
+      "bytes": 1564,
+      "sha256": "a5d640c16c8c9a0ee27f8487aa5bfc31b158f4b5e3e02c11abc0b3c47efd0f12"
+    },
+    "apk-fixture/src/main/AndroidManifest.xml": {
+      "bytes": 220,
+      "sha256": "7d3661814175e00d4cd389edb7f8e189a1cc34764c4895459c71d991a16b94ec"
+    }
+  },
+  "scope": "known JVM subset production assets and independent local Maven APK retention; P1-P4/R4/R5/W3 remain open"
+}

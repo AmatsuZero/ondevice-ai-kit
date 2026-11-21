@@ -1,0 +1,31 @@
+{
+  "issues": {
+    "gh": {
+      "id": 6826101329,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6826101329",
+      "sha256": "894b4a2ce507c41fa08df5e48a27baa0bf14d134448d8976418d5fd5fd8e6240",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 44016,
+      "url": null,
+      "sha256": "1af5aa4254fb840b40e2ae058d55538f2f25a50314b4db437c7adf665cb20b59",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "4503d449afca2c1987487395def820c73d27fdd6",
+    "sha256": "d0ff0b3b0d1347a166d52b4ba8235011a251d8ee78bcb3ad42c2d3eef2e3f4f5",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "d0ff0b3b0d1347a166d52b4ba8235011a251d8ee78bcb3ad42c2d3eef2e3f4f5",
+    "readbackExact": true
+  },
+  "sourceCommit": "426ecf4",
+  "marker": "<!-- w3-terminal-device-contract-20261112 -->",
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "R4R5Accepted": false
+}

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "marker": "w3-qwen-heap-physical-observed-20261112",
+  "sourceCommit": "4ab293a",
+  "sourceBranchPushed": false,
+  "observedAt": "2026-11-11T23:07:03.878742+00:00",
+  "issues": {
+    "gh": {
+      "id": 6809240255,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6809240255",
+      "sha256": "29c525ba483cf246c5fef63b4a40740de2d8cff36c1083f45bd1608b5d427e62",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43216,
+      "url": null,
+      "sha256": "542d3d056970e218fbe17b6427f2e8df70fb0fbf5982e1279a26d390fe11602c",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "2a0fe736991070f53c9ba221d4937e575b768cfa",
+    "sha256": "4ed945d222cf460d7fb5ac084372d0f041f58d6038c7a23b9765a821cddb2c9a",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "4ed945d222cf460d7fb5ac084372d0f041f58d6038c7a23b9765a821cddb2c9a",
+    "readbackExact": true
+  },
+  "bothWikisSameSHA256": true,
+  "firstGitlabReadFailure": {
+    "source": "tool-result observation; not retained original stderr file",
+    "error": "Get https://clients-gitlab.ugreeniot.com/api/v4/projects/461/issues/15/notes?per_page=100&page=1: EOF",
+    "failedBeforeGitlabWrite": true,
+    "githubCommentAlreadyWrittenAndReadback": 6809240255,
+    "subsequentIndependentReadExitCode": 0,
+    "initialGlabStderrOverwrittenByExplicitResume": true,
+    "recoveryReadStdoutPath": ".omx/artifacts/w3-qwen-heap-resumed-20261112-064631/publication/glab-recovery-read.stdout",
+    "duplicateGithubWrite": false
+  },
+  "bodySHA256": "29c525ba483cf246c5fef63b4a40740de2d8cff36c1083f45bd1608b5d427e62",
+  "evidenceRoot": ".omx/artifacts/w3-qwen-heap-resumed-20261112-064631/publication",
+  "w3Status": "open",
+  "r4Status": "open",
+  "r5Status": "open",
+  "runConsumed": true,
+  "diagnosticAccepted": false,
+  "existingReplayProhibited": true,
+  "modelAndMicrophoneDownloads": false,
+  "localValidation": {
+    "parentRegressionTests": 22,
+    "frozenFiles": 120,
+    "failedDiagnosticGate": "typedResourceObservations",
+    "passedDiagnosticChecks": 19,
+    "diagnosticChecks": 20
+  }
+}

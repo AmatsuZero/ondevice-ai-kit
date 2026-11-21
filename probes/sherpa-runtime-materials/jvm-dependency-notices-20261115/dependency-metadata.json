@@ -1,0 +1,127 @@
+[
+  {
+    "component": "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.10.2",
+    "resolvedJar": {
+      "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-jvm/1.10.2/4a9f78ef49483748e2c129f3d124b8fa249dafbf/kotlinx-coroutines-core-jvm-1.10.2.jar",
+      "bytes": 1479317,
+      "sha256": "5ca175b38df331fd64155b35cd8cae1251fa9ee369709b36d42e0a288ccce3fd"
+    },
+    "pom": {
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.10.2/kotlinx-coroutines-core-jvm-1.10.2.pom",
+      "path": "probes/sherpa-runtime-materials/jvm-dependency-notices-20261115/metadata/kotlinx-coroutines-core-jvm-1.10.2.pom",
+      "bytes": 2167,
+      "sha256": "658f576b96c832e7382406adb197d64d8e2e97de10e96dfa3700decfa2a60def",
+      "sha512Verified": true,
+      "headers": {
+        "ETag": "\"051c4245467601aaa2eb26f61afabc2a\"",
+        "Last-Modified": "Tue, 08 Apr 2025 07:07:18 GMT",
+        "Content-Length": "2167"
+      },
+      "cachedPomPresent": false,
+      "cachedPomByteEqual": null
+    },
+    "declaredLicenses": [
+      {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+        "distribution": "repo"
+      }
+    ],
+    "scm": {
+      "url": "https://github.com/Kotlin/kotlinx.coroutines"
+    },
+    "sourceToJarBytecodeEquivalenceProven": false
+  },
+  {
+    "component": "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2",
+    "resolvedJar": {
+      "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-android/1.10.2/c8705d275d81f19e8afaf3ff9b5bf7a4b6b6c19b/kotlinx-coroutines-android-1.10.2.jar",
+      "bytes": 17826,
+      "sha256": "e713f1f874244115a07571065cffa0f24f5e78300e9720fea16de3af1d75fd41"
+    },
+    "pom": {
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-android/1.10.2/kotlinx-coroutines-android-1.10.2.pom",
+      "path": "probes/sherpa-runtime-materials/jvm-dependency-notices-20261115/metadata/kotlinx-coroutines-android-1.10.2.pom",
+      "bytes": 2193,
+      "sha256": "b92d3672e7f9e8f4c4e2ab187c3e31fecc506496396f4a5f27ee1c957a42b319",
+      "sha512Verified": true,
+      "headers": {
+        "ETag": "\"48f4631e198597277be95b748731164d\"",
+        "Last-Modified": "Tue, 08 Apr 2025 07:03:39 GMT",
+        "Content-Length": "2193"
+      },
+      "cachedPomPresent": false,
+      "cachedPomByteEqual": null
+    },
+    "declaredLicenses": [
+      {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+        "distribution": "repo"
+      }
+    ],
+    "scm": {
+      "url": "https://github.com/Kotlin/kotlinx.coroutines"
+    },
+    "sourceToJarBytecodeEquivalenceProven": false
+  },
+  {
+    "component": "org.jetbrains.kotlin:kotlin-stdlib:2.4.0",
+    "resolvedJar": {
+      "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/4e9f4b531dce5c7dee58ed2de9a8b9a763c8dc6c/kotlin-stdlib-2.4.0.jar",
+      "bytes": 1841929,
+      "sha256": "ccb14ff83fabcb11458b798dbc9824748ccdffeec79c9aba789e6ed1cda86b1c"
+    },
+    "pom": {
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.4.0/kotlin-stdlib-2.4.0.pom",
+      "path": "probes/sherpa-runtime-materials/jvm-dependency-notices-20261115/metadata/kotlin-stdlib-2.4.0.pom",
+      "bytes": 2299,
+      "sha256": "8194ff79a9ee24a7fa3f74a6b179c04a1859de8b987a4f0983056e59451721de",
+      "sha1Verified": true,
+      "cachedPomPresent": true,
+      "cachedPomByteEqual": true
+    },
+    "declaredLicenses": [
+      {
+        "name": "Apache-2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.txt"
+      }
+    ],
+    "scm": {
+      "connection": "scm:git:https://github.com/JetBrains/kotlin.git",
+      "developerConnection": "scm:git:https://github.com/JetBrains/kotlin.git",
+      "url": "https://github.com/JetBrains/kotlin"
+    },
+    "sourceToJarBytecodeEquivalenceProven": false
+  },
+  {
+    "component": "org.jetbrains:annotations:23.0.0",
+    "resolvedJar": {
+      "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains/annotations/23.0.0/8cc20c07506ec18e0834947b84a864bfc094484e/annotations-23.0.0.jar",
+      "bytes": 29371,
+      "sha256": "7b0f19724082cbfcbc66e5abea2b9bc92cf08a1ea11e191933ed43801eb3cd05"
+    },
+    "pom": {
+      "url": "https://repo.maven.apache.org/maven2/org/jetbrains/annotations/23.0.0/annotations-23.0.0.pom",
+      "path": "probes/sherpa-runtime-materials/jvm-dependency-notices-20261115/metadata/annotations-23.0.0.pom",
+      "bytes": 1354,
+      "sha256": "c9490f655132328df2cfbcfdf743f53fc3916d6c1d10437175a6ca6e3a67771c",
+      "sha1Verified": true,
+      "cachedPomPresent": true,
+      "cachedPomByteEqual": true
+    },
+    "declaredLicenses": [
+      {
+        "name": "The Apache Software License, Version 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+        "distribution": "repo"
+      }
+    ],
+    "scm": {
+      "url": "https://github.com/JetBrains/java-annotations",
+      "connection": "scm:git:git://github.com/JetBrains/java-annotations.git",
+      "developerConnection": "scm:git:ssh://github.com:JetBrains/java-annotations.git"
+    },
+    "sourceToJarBytecodeEquivalenceProven": false
+  }
+]

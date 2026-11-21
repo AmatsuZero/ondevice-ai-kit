@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "rtk",
+    "proxy",
+    "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home/bin/java",
+    "-cp",
+    "/Users/daubert/.gradle/caches/modules-2/files-2.1/com.android.tools.build/builder/9.1.0/da004d252ed93ae054aa62542baf696a730643e8/builder-9.1.0.jar",
+    "com.android.tools.r8.D8",
+    "--release",
+    "--no-desugaring",
+    "--min-api",
+    "26",
+    "--thread-count",
+    "2",
+    "--output",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-dex-correspondence-20261116T0730/rebuilt-release-merged",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-dex-correspondence-20261116T0730/rebuilt-release-intermediate/classes.dex"
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 0.294,
+  "outputSHA256": "6dfc39ae323d20b628432fb358ba90074cd387c81163c748e97d5723059081e1"
+}

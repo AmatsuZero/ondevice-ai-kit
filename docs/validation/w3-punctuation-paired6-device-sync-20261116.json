@@ -1,0 +1,68 @@
+{
+  "sourceEvidenceCommit": "8e293a479c794d0a2fe2b2644a9268ad8f32adcc",
+  "sourceBranchPushed": false,
+  "issues": {
+    "github": {
+      "id": 6914478597,
+      "postExitCode": 0,
+      "getExitCode": 0,
+      "readbackEqualsPostedResponse": true,
+      "terminalLFRemoved": false,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6914478597"
+    },
+    "gitlab": {
+      "id": 45419,
+      "postExitCode": 0,
+      "getExitCode": 0,
+      "readbackEqualsPostedResponse": true,
+      "terminalLFRemoved": true,
+      "url": null
+    }
+  },
+  "githubWiki": {
+    "commit": "386b32bb3747ca042e670235a1fcde43b3a81e21",
+    "page": "W3语音验收与后续改进.md",
+    "sha256": "0bb8067bf746b765df4611a0676864986de6fdfb29e64dc0af5296999a483eef",
+    "bytes": 187925,
+    "remoteRefEqualsCommit": true,
+    "remoteReadbackEqualsLocal": true,
+    "priorPageContentPreserved": true,
+    "gitlabWiki": "pending; old EOF route not retried; zero new GET/PUT"
+  },
+  "gitlabWiki": {
+    "status": "pending-existing-EOF-route",
+    "newGETRequests": 0,
+    "newPUTRequests": 0
+  },
+  "preparationPublicationReadback": {
+    "githubExact": true,
+    "githubComment": 6914038136,
+    "gitlabNote": 45373,
+    "gitlabDifference": "exactly one terminal LF removed by server",
+    "initialStrictEqualityFailurePreserved": true
+  },
+  "publicationMarker": "w3-punctuation-paired6-device-20261116",
+  "bodySHA256": "4465084d0564847b671e7da38823a7355195b1a62e5dca61774d9830cfe65fc4",
+  "runId": "w3-apple-punctuation-paired6-20261116-01",
+  "authorizationConsumed": true,
+  "newRecognitionBatches": 1,
+  "actualRunTaps": 1,
+  "reportSHA256": "a415ada1068abe5fbf302bf8ad45673a36e1f232a02f9e4bc09efc734081c95b",
+  "protection": {
+    "originalFiles": 206,
+    "unchangedOriginalContent": 206,
+    "outsideDrift": [],
+    "ownedSharedPrefixes": [
+      "docs/HANDOFF-2026-11-05-next-session.md",
+      "docs/HANDOFF-W3-IOS-STATUS-2026-11-16.md",
+      "docs/roadmap/W3-speech.md",
+      "docs/agent-pitfalls.md"
+    ],
+    "scoringDeterministic": true
+  },
+  "productionAdopted": false,
+  "R4Accepted": false,
+  "R5Accepted": false,
+  "P4Accepted": false,
+  "W3Complete": false
+}

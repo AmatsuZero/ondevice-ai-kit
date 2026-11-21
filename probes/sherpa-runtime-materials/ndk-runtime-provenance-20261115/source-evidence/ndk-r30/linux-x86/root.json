@@ -1,0 +1,156 @@
+)]}'
+{
+  "id": "a606f666f16a56a326182ec019baf231ced3bd17",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "23f6953a9f8bc091fc4921f7c0c8927c82ded321",
+      "name": ".gitignore"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "0bd900cf398732b03f4007e34419336306c68b56",
+      "name": "Android.bp"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "01b0356626f8f9ab1ec1293f52e790c5e739df30",
+      "name": "BINUTILS_KERNEL_DEPRECATION.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "5cb815c7dcde4d85a25888ba2c176acfbcdde658",
+      "name": "CleanSpec.mk"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "21d64b158a02486014c865720b02b7aa6adede0f",
+      "name": "GCC_4_9_DEPRECATION.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4685cd00d35cca912491919b160ea89193fdf9be",
+      "name": "METADATA"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "70924d184c2e75f4242256963f8f83b11661ee70",
+      "name": "OWNERS"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "3bc2e38332f1edc79bdbb04434e7b7cdbd4c28d2",
+      "name": "README.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "84ce545a178c493500d3f69b0057df0c2a722940",
+      "name": "RELEASE_NOTES.md"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "2d125aa832334fee54887625e7ff27553ca4ac3b",
+      "name": "clang-3289846"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "8fc10c72c94237018d8a70763b7a7ce6da3ce40e",
+      "name": "clang-r547379"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "ece0975d8ed6992eb2ea9aa3991442fa9c9c009f",
+      "name": "clang-r563880"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "b0ea60534980a7220c58e33c732400dc3f309c41",
+      "name": "clang-r563880c"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "f7c1356ed900f83bfdc98d8de6b05aa0d6c90cef",
+      "name": "clang-r574158"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "06917c57787b3acca111d43c9eb15bf1ab68361a",
+      "name": "clang-r574158b"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "a0b313a7b3a5ebc6355b4087be775bc3242d8218",
+      "name": "clang-r574158c"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "537a4cda7932173e940686ba12c5252464ccc236",
+      "name": "clang-stable"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "f456020bb3584938af0c275206b3227ed230e9de",
+      "name": "docs"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "df75ac5345a01c6c9d938d4035842f8ecb17eb0a",
+      "name": "embedded-sysroots"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "8bf771e8d043ce311a8ff3a7c5e3d283e27f8033",
+      "name": "go.mod"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "39eb46bf949cf759a1cabcad73396e9be9edfed3",
+      "name": "kleaf"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "d8c4f5af70f23c3e071c3a2d52425b46389acba0",
+      "name": "llvm-binutils-stable"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "6f71543000424ee5969833bbbcd51340119bc7b6",
+      "name": "mlgo-models"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "a347c3f252836199aefb8b2890f484c90856633c",
+      "name": "profiles"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "b8a82b375260569635399e8482624c6556da1e24",
+      "name": "soong"
+    }
+  ]
+}

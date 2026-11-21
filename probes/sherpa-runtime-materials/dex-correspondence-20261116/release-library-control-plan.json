@@ -1,0 +1,23 @@
+{
+  "preparedAtUTC": "2026-11-15T23:28:38.701353+00:00",
+  "priorEvidence": [
+    "D8DexArchiveBuilder.javap:209-221 only adds library provider inside withDesugaring branch",
+    "standalone release removes StringBuilder append result moves; real two APK release code retains them",
+    "intermediate plus final merge alone did not resolve75classdiffs"
+  ],
+  "hypothesis": "supplied Android bootclasspath enables D8 release rewrites absent from the observed output",
+  "singleChangedVariable": "omit --lib android36/android.jar in release intermediate conversion",
+  "unchangedVariables": [
+    "D8 9.1.31",
+    "release",
+    "intermediate",
+    "min-api26",
+    "two threads",
+    "Kotlin2.4classpath",
+    "fixed125payloadjar",
+    "same release no-desugaring merge"
+  ],
+  "actualHistoricalBootclasspathVerified": false,
+  "noOutputTextChanges": true,
+  "stopIfUnresolved": true
+}

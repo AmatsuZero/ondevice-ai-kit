@@ -1,0 +1,56 @@
+name: W3Apple65DriverHost
+options:
+  deploymentTarget:
+    iOS: "15.0"
+  defaultConfig: Debug
+configs:
+  Debug: debug
+  Release: release
+settings:
+  SWIFT_VERSION: "5.0"
+  IPHONEOS_DEPLOYMENT_TARGET: "15.0"
+  TARGETED_DEVICE_FAMILY: "1"
+  CODE_SIGN_STYLE: Manual
+  SDKROOT: iphoneos
+targets:
+  W3Apple65DriverHost:
+    type: application
+    platform: iOS
+    sources:
+      - path: DriverHost.swift
+    info:
+      path: Generated/W3Apple65DriverHost-Info.plist
+      properties:
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: true
+          UISceneConfigurations: {}
+    settings:
+      PRODUCT_NAME: W3Apple65DriverHost
+      PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w3apple65driver20261116
+      CODE_SIGN_STYLE: Manual
+  W3Apple65UITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: Apple65UITests.swift
+    dependencies:
+      - target: W3Apple65DriverHost
+    info:
+      path: Generated/W3Apple65UITests-Info.plist
+      properties: {}
+    settings:
+      PRODUCT_NAME: W3Apple65UITests
+      TEST_TARGET_NAME: W3Apple65DriverHost
+      PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w3apple65uitests20261116
+      CODE_SIGN_STYLE: Manual
+schemes:
+  W3Apple65UITests:
+    build:
+      targets:
+        W3Apple65DriverHost: build
+        W3Apple65UITests: build
+    test:
+      config: Debug
+      targets:
+        - W3Apple65UITests

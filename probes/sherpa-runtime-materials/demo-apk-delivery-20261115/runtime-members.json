@@ -1,0 +1,114 @@
+[
+  {
+    "runtimeMember": "jni/arm64-v8a/libonnxruntime.so",
+    "apkMember": "lib/arm64-v8a/libonnxruntime.so",
+    "bytes": 22249560,
+    "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/arm64-v8a/libsherpa-onnx-c-api.so",
+    "apkMember": "lib/arm64-v8a/libsherpa-onnx-c-api.so",
+    "bytes": 4303136,
+    "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/arm64-v8a/libsherpa-onnx-cxx-api.so",
+    "apkMember": "lib/arm64-v8a/libsherpa-onnx-cxx-api.so",
+    "bytes": 272848,
+    "sha256": "de94e0952a124eb22e86d754e11aa0489a065affc837911a8ed5e7fd843baad6",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/arm64-v8a/libsherpa-onnx-jni.so",
+    "apkMember": "lib/arm64-v8a/libsherpa-onnx-jni.so",
+    "bytes": 4609320,
+    "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/armeabi-v7a/libonnxruntime.so",
+    "apkMember": "lib/armeabi-v7a/libonnxruntime.so",
+    "bytes": 15359592,
+    "sha256": "7a8f17a707e52e0ac3a026be319272876d9eae61f4bb19585292772d785f7744",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/armeabi-v7a/libsherpa-onnx-c-api.so",
+    "apkMember": "lib/armeabi-v7a/libsherpa-onnx-c-api.so",
+    "bytes": 3157748,
+    "sha256": "cb5d912ec19b4f76582047d082db63f304f3e584cc89130e393337f4cea6ebe7",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/armeabi-v7a/libsherpa-onnx-cxx-api.so",
+    "apkMember": "lib/armeabi-v7a/libsherpa-onnx-cxx-api.so",
+    "bytes": 183600,
+    "sha256": "aa5f7bc8031baf5f0ba2e6c892e1cf70d17e1fe839db375424ebda175f0dc5e9",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/armeabi-v7a/libsherpa-onnx-jni.so",
+    "apkMember": "lib/armeabi-v7a/libsherpa-onnx-jni.so",
+    "bytes": 3381796,
+    "sha256": "d45f377249d5c3191b91de6ba6edffcd83e4cf7e109bc523b212db341581c2a8",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/x86/libonnxruntime.so",
+    "apkMember": "lib/x86/libonnxruntime.so",
+    "bytes": 26491148,
+    "sha256": "fcb6cd80415f7951e58fdd8158a238946dce3710d5fee492b67174d5131f9eee",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/x86/libsherpa-onnx-c-api.so",
+    "apkMember": "lib/x86/libsherpa-onnx-c-api.so",
+    "bytes": 4954780,
+    "sha256": "e1e483cc4a09aaadf7f72c1d406c010bba05e3a05fc763a4536117508ab3f390",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/x86/libsherpa-onnx-cxx-api.so",
+    "apkMember": "lib/x86/libsherpa-onnx-cxx-api.so",
+    "bytes": 250072,
+    "sha256": "eb0e2a2b32ea48237582f5d5f31c1bf65e7911cbcb6ee3af08bb491e55fed027",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/x86/libsherpa-onnx-jni.so",
+    "apkMember": "lib/x86/libsherpa-onnx-jni.so",
+    "bytes": 5261876,
+    "sha256": "1eb37aaa10e377f6635086bec09685859ca8c7465460fdf9346a21eba90a4ee4",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/x86_64/libonnxruntime.so",
+    "apkMember": "lib/x86_64/libonnxruntime.so",
+    "bytes": 25581120,
+    "sha256": "087e84297cad64acb823c3d901d6e0cc934e91add7cdb20da802cd1c0bea5c3e",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/x86_64/libsherpa-onnx-c-api.so",
+    "apkMember": "lib/x86_64/libsherpa-onnx-c-api.so",
+    "bytes": 4782648,
+    "sha256": "8285ecf2e6275374d4c8c5b46020cbb1de82db9bd6b6baad011fdc480cf10ba2",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/x86_64/libsherpa-onnx-cxx-api.so",
+    "apkMember": "lib/x86_64/libsherpa-onnx-cxx-api.so",
+    "bytes": 267552,
+    "sha256": "edcd50a1608458867d78213385f5e3013a39db7b7af43d4f87d72e4d84e5e3dc",
+    "byteEqual": true
+  },
+  {
+    "runtimeMember": "jni/x86_64/libsherpa-onnx-jni.so",
+    "apkMember": "lib/x86_64/libsherpa-onnx-jni.so",
+    "bytes": 5053592,
+    "sha256": "878d61116f244131263eec24297ef05bf508d02bccdede2a4e3ad3202bbdaa48",
+    "byteEqual": true
+  }
+]

@@ -1,0 +1,555 @@
+{
+  "schemaVersion": 1,
+  "scope": "Existing report/resource evidence re-evaluation only; no new inference or independent confirmation.",
+  "uniformAutoReplacementAccepted": false,
+  "reason": "Known development Mandarin and far-field regressions; do not select only the later independent subset to justify a shortcut.",
+  "independentAndCompletedSubset": {
+    "scope": "Existing reports only; no new model/device runs. Post-observation feasibility, not a prospectively frozen independent confirmation. No detected-language field was recorded; no adaptive selector or conditional output is claimed.",
+    "hostReportSHA256": "8bc5f6b2d65d02e3c51cd43cf4ef6940dade13d24d4dc54b36feab088fee6024",
+    "androidReportSHA256": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d",
+    "results": {
+      "MacIndependent": {
+        "mandarin": {
+          "cases": 20,
+          "metric": "character",
+          "threshold": 0.2,
+          "autoAggregate": {
+            "referenceUnits": 590,
+            "hypothesisUnits": 578,
+            "substitutions": 17,
+            "deletions": 17,
+            "insertions": 5,
+            "errors": 39,
+            "rate": 0.06610169491525424,
+            "defined": true
+          },
+          "forcedAggregate": {
+            "referenceUnits": 590,
+            "hypothesisUnits": 580,
+            "substitutions": 18,
+            "deletions": 17,
+            "insertions": 7,
+            "errors": 42,
+            "rate": 0.0711864406779661,
+            "defined": true
+          },
+          "autoWithinMetricThreshold": true,
+          "missingDetectedLanguageEvidence": true
+        },
+        "english-near": {
+          "cases": 20,
+          "metric": "word",
+          "threshold": 0.2,
+          "autoAggregate": {
+            "referenceUnits": 375,
+            "hypothesisUnits": 373,
+            "substitutions": 27,
+            "deletions": 3,
+            "insertions": 1,
+            "errors": 31,
+            "rate": 0.08266666666666667,
+            "defined": true
+          },
+          "forcedAggregate": {
+            "referenceUnits": 375,
+            "hypothesisUnits": 374,
+            "substitutions": 27,
+            "deletions": 3,
+            "insertions": 2,
+            "errors": 32,
+            "rate": 0.08533333333333333,
+            "defined": true
+          },
+          "autoWithinMetricThreshold": true,
+          "missingDetectedLanguageEvidence": true
+        },
+        "english-far": {
+          "cases": 12,
+          "metric": "word",
+          "threshold": 0.35,
+          "autoAggregate": {
+            "referenceUnits": 226,
+            "hypothesisUnits": 214,
+            "substitutions": 42,
+            "deletions": 15,
+            "insertions": 3,
+            "errors": 60,
+            "rate": 0.26548672566371684,
+            "defined": true
+          },
+          "forcedAggregate": {
+            "referenceUnits": 226,
+            "hypothesisUnits": 214,
+            "substitutions": 44,
+            "deletions": 15,
+            "insertions": 3,
+            "errors": 62,
+            "rate": 0.2743362831858407,
+            "defined": true
+          },
+          "autoWithinMetricThreshold": true,
+          "missingDetectedLanguageEvidence": true
+        }
+      },
+      "TECNOCompleted": {
+        "mandarin": {
+          "cases": 20,
+          "metric": "character",
+          "threshold": 0.2,
+          "autoAggregate": {
+            "referenceUnits": 590,
+            "hypothesisUnits": 579,
+            "substitutions": 17,
+            "deletions": 17,
+            "insertions": 6,
+            "errors": 40,
+            "rate": 0.06779661016949153,
+            "defined": true
+          },
+          "forcedAggregate": {
+            "referenceUnits": 590,
+            "hypothesisUnits": 578,
+            "substitutions": 18,
+            "deletions": 17,
+            "insertions": 5,
+            "errors": 40,
+            "rate": 0.06779661016949153,
+            "defined": true
+          },
+          "autoWithinMetricThreshold": true,
+          "missingDetectedLanguageEvidence": true
+        },
+        "english-near": {
+          "cases": 4,
+          "metric": "word",
+          "threshold": 0.2,
+          "autoAggregate": {
+            "referenceUnits": 67,
+            "hypothesisUnits": 65,
+            "substitutions": 9,
+            "deletions": 2,
+            "insertions": 0,
+            "errors": 11,
+            "rate": 0.16417910447761194,
+            "defined": true
+          },
+          "forcedAggregate": {
+            "referenceUnits": 67,
+            "hypothesisUnits": 66,
+            "substitutions": 8,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 9,
+            "rate": 0.13432835820895522,
+            "defined": true
+          },
+          "autoWithinMetricThreshold": true,
+          "missingDetectedLanguageEvidence": true
+        }
+      }
+    },
+    "newModelCalls": 0,
+    "productionChanges": false
+  },
+  "knownDevelopment": {
+    "sourceSHA256": "b4a60c09952c1a4142e832290e0fc9a79ce4879371e3f9352b4c9ece1776aa8f",
+    "results": {
+      "mandarin": {
+        "cases": 3,
+        "metric": "character",
+        "auto": {
+          "referenceUnits": 92,
+          "hypothesisUnits": 90,
+          "substitutions": 13,
+          "deletions": 2,
+          "insertions": 0,
+          "errors": 15,
+          "rate": 0.16304347826086957,
+          "defined": true
+        },
+        "forced": {
+          "referenceUnits": 92,
+          "hypothesisUnits": 90,
+          "substitutions": 1,
+          "deletions": 2,
+          "insertions": 0,
+          "errors": 3,
+          "rate": 0.03260869565217391,
+          "defined": true
+        }
+      },
+      "english-near": {
+        "cases": 3,
+        "metric": "word",
+        "auto": {
+          "referenceUnits": 59,
+          "hypothesisUnits": 59,
+          "substitutions": 7,
+          "deletions": 0,
+          "insertions": 0,
+          "errors": 7,
+          "rate": 0.11864406779661017,
+          "defined": true
+        },
+        "forced": {
+          "referenceUnits": 59,
+          "hypothesisUnits": 59,
+          "substitutions": 7,
+          "deletions": 0,
+          "insertions": 0,
+          "errors": 7,
+          "rate": 0.11864406779661017,
+          "defined": true
+        }
+      },
+      "english-far": {
+        "cases": 3,
+        "metric": "word",
+        "auto": {
+          "referenceUnits": 27,
+          "hypothesisUnits": 15,
+          "substitutions": 5,
+          "deletions": 12,
+          "insertions": 0,
+          "errors": 17,
+          "rate": 0.6296296296296297,
+          "defined": true
+        },
+        "forced": {
+          "referenceUnits": 27,
+          "hypothesisUnits": 21,
+          "substitutions": 7,
+          "deletions": 6,
+          "insertions": 0,
+          "errors": 13,
+          "rate": 0.48148148148148145,
+          "defined": true
+        }
+      }
+    },
+    "newModelCalls": 0,
+    "scope": "Same existing development13 outcomes; rejects uniform auto shortcut if known far-field quality regresses. No candidate selector or new independent confirmation."
+  },
+  "perCaseResourceWindows": {
+    "runId": "w3-qwen-arena-20261111-01",
+    "reportSHA256": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d",
+    "rssSamplesSHA256": "8ad3ccac02bf1f3a0da3975c6378b8705d5eb8741a1f12430ab9bdc497908464",
+    "rows": [
+      {
+        "index": 0,
+        "id": "fleurs-cmn_hans_cn-1805",
+        "status": "completed",
+        "audioSeconds": 7.62,
+        "caseSecondsLastPersisted": 10.795568308,
+        "sampleCount": 16,
+        "sampledMinRssBytes": 1302261760,
+        "sampledMaxRssBytes": 1487585280,
+        "firstRssBytes": 1302261760,
+        "lastRssBytes": 1468239872
+      },
+      {
+        "index": 1,
+        "id": "fleurs-cmn_hans_cn-1965",
+        "status": "completed",
+        "audioSeconds": 6.84,
+        "caseSecondsLastPersisted": 9.197457231,
+        "sampleCount": 14,
+        "sampledMinRssBytes": 1309687808,
+        "sampledMaxRssBytes": 1520058368,
+        "firstRssBytes": 1469517824,
+        "lastRssBytes": 1460252672
+      },
+      {
+        "index": 2,
+        "id": "fleurs-cmn_hans_cn-1903",
+        "status": "completed",
+        "audioSeconds": 7.26,
+        "caseSecondsLastPersisted": 10.473693,
+        "sampleCount": 16,
+        "sampledMinRssBytes": 1328041984,
+        "sampledMaxRssBytes": 1500672000,
+        "firstRssBytes": 1457819648,
+        "lastRssBytes": 1458057216
+      },
+      {
+        "index": 3,
+        "id": "fleurs-cmn_hans_cn-1953",
+        "status": "completed",
+        "audioSeconds": 5.04,
+        "caseSecondsLastPersisted": 7.373814155,
+        "sampleCount": 12,
+        "sampledMinRssBytes": 1318944768,
+        "sampledMaxRssBytes": 1478352896,
+        "firstRssBytes": 1478352896,
+        "lastRssBytes": 1454751744
+      },
+      {
+        "index": 4,
+        "id": "fleurs-cmn_hans_cn-1830",
+        "status": "completed",
+        "audioSeconds": 6.36,
+        "caseSecondsLastPersisted": 8.33155777,
+        "sampleCount": 13,
+        "sampledMinRssBytes": 1320284160,
+        "sampledMaxRssBytes": 1513926656,
+        "firstRssBytes": 1320284160,
+        "lastRssBytes": 1448464384
+      },
+      {
+        "index": 5,
+        "id": "fleurs-cmn_hans_cn-1910",
+        "status": "completed",
+        "audioSeconds": 5.1,
+        "caseSecondsLastPersisted": 7.387374462,
+        "sampleCount": 11,
+        "sampledMinRssBytes": 1305931776,
+        "sampledMaxRssBytes": 1467293696,
+        "firstRssBytes": 1320738816,
+        "lastRssBytes": 1448566784
+      },
+      {
+        "index": 6,
+        "id": "fleurs-cmn_hans_cn-1902",
+        "status": "completed",
+        "audioSeconds": 6.96,
+        "caseSecondsLastPersisted": 9.492732539,
+        "sampleCount": 14,
+        "sampledMinRssBytes": 1311047680,
+        "sampledMaxRssBytes": 1531518976,
+        "firstRssBytes": 1311047680,
+        "lastRssBytes": 1467092992
+      },
+      {
+        "index": 7,
+        "id": "fleurs-cmn_hans_cn-1905",
+        "status": "completed",
+        "audioSeconds": 7.56,
+        "caseSecondsLastPersisted": 11.476050539,
+        "sampleCount": 18,
+        "sampledMinRssBytes": 1333981184,
+        "sampledMaxRssBytes": 1489125376,
+        "firstRssBytes": 1464856576,
+        "lastRssBytes": 1477206016
+      },
+      {
+        "index": 8,
+        "id": "fleurs-cmn_hans_cn-1772",
+        "status": "completed",
+        "audioSeconds": 9.18,
+        "caseSecondsLastPersisted": 9.554598539,
+        "sampleCount": 15,
+        "sampledMinRssBytes": 1314779136,
+        "sampledMaxRssBytes": 1573511168,
+        "firstRssBytes": 1314779136,
+        "lastRssBytes": 1489711104
+      },
+      {
+        "index": 9,
+        "id": "fleurs-cmn_hans_cn-1792",
+        "status": "completed",
+        "audioSeconds": 8.76,
+        "caseSecondsLastPersisted": 11.422260308,
+        "sampleCount": 17,
+        "sampledMinRssBytes": 1304186880,
+        "sampledMaxRssBytes": 1531207680,
+        "firstRssBytes": 1314181120,
+        "lastRssBytes": 1477021696
+      },
+      {
+        "index": 10,
+        "id": "fleurs-cmn_hans_cn-1962",
+        "status": "completed",
+        "audioSeconds": 8.46,
+        "caseSecondsLastPersisted": 11.014097924,
+        "sampleCount": 17,
+        "sampledMinRssBytes": 1316028416,
+        "sampledMaxRssBytes": 1532866560,
+        "firstRssBytes": 1471459328,
+        "lastRssBytes": 1481400320
+      },
+      {
+        "index": 11,
+        "id": "fleurs-cmn_hans_cn-1884",
+        "status": "completed",
+        "audioSeconds": 6.9,
+        "caseSecondsLastPersisted": 9.115268693,
+        "sampleCount": 15,
+        "sampledMinRssBytes": 1374113792,
+        "sampledMaxRssBytes": 1505443840,
+        "firstRssBytes": 1388187648,
+        "lastRssBytes": 1476808704
+      },
+      {
+        "index": 12,
+        "id": "fleurs-cmn_hans_cn-1958",
+        "status": "completed",
+        "audioSeconds": 9.66,
+        "caseSecondsLastPersisted": 11.98924677,
+        "sampleCount": 19,
+        "sampledMinRssBytes": 1325989888,
+        "sampledMaxRssBytes": 1559695360,
+        "firstRssBytes": 1333223424,
+        "lastRssBytes": 1499893760
+      },
+      {
+        "index": 13,
+        "id": "fleurs-cmn_hans_cn-1871",
+        "status": "completed",
+        "audioSeconds": 6.96,
+        "caseSecondsLastPersisted": 7.560012385,
+        "sampleCount": 12,
+        "sampledMinRssBytes": 1298554880,
+        "sampledMaxRssBytes": 1466392576,
+        "firstRssBytes": 1298554880,
+        "lastRssBytes": 1466392576
+      },
+      {
+        "index": 14,
+        "id": "fleurs-cmn_hans_cn-1698",
+        "status": "completed",
+        "audioSeconds": 9.72,
+        "caseSecondsLastPersisted": 12.209642847,
+        "sampleCount": 19,
+        "sampledMinRssBytes": 1306537984,
+        "sampledMaxRssBytes": 1604710400,
+        "firstRssBytes": 1306537984,
+        "lastRssBytes": 1474285568
+      },
+      {
+        "index": 15,
+        "id": "fleurs-cmn_hans_cn-2002",
+        "status": "completed",
+        "audioSeconds": 6.78,
+        "caseSecondsLastPersisted": 8.721457539,
+        "sampleCount": 14,
+        "sampledMinRssBytes": 1314754560,
+        "sampledMaxRssBytes": 1480912896,
+        "firstRssBytes": 1314754560,
+        "lastRssBytes": 1480912896
+      },
+      {
+        "index": 16,
+        "id": "fleurs-cmn_hans_cn-1661",
+        "status": "completed",
+        "audioSeconds": 7.74,
+        "caseSecondsLastPersisted": 9.286863924,
+        "sampleCount": 15,
+        "sampledMinRssBytes": 1381027840,
+        "sampledMaxRssBytes": 1491116032,
+        "firstRssBytes": 1381027840,
+        "lastRssBytes": 1489121280
+      },
+      {
+        "index": 17,
+        "id": "fleurs-cmn_hans_cn-1697",
+        "status": "completed",
+        "audioSeconds": 9.78,
+        "caseSecondsLastPersisted": 11.535120308,
+        "sampleCount": 18,
+        "sampledMinRssBytes": 1304625152,
+        "sampledMaxRssBytes": 1564491776,
+        "firstRssBytes": 1315860480,
+        "lastRssBytes": 1477361664
+      },
+      {
+        "index": 18,
+        "id": "fleurs-cmn_hans_cn-1821",
+        "status": "completed",
+        "audioSeconds": 7.92,
+        "caseSecondsLastPersisted": 9.224584001,
+        "sampleCount": 14,
+        "sampledMinRssBytes": 1317724160,
+        "sampledMaxRssBytes": 1481949184,
+        "firstRssBytes": 1317724160,
+        "lastRssBytes": 1481949184
+      },
+      {
+        "index": 19,
+        "id": "fleurs-cmn_hans_cn-1808",
+        "status": "completed",
+        "audioSeconds": 6.48,
+        "caseSecondsLastPersisted": 8.845504001,
+        "sampleCount": 14,
+        "sampledMinRssBytes": 1341784064,
+        "sampledMaxRssBytes": 1537130496,
+        "firstRssBytes": 1478823936,
+        "lastRssBytes": 1476505600
+      },
+      {
+        "index": 20,
+        "id": "fleurs-en_us-1675",
+        "status": "completed",
+        "audioSeconds": 8.76,
+        "caseSecondsLastPersisted": 12.171362847,
+        "sampleCount": 20,
+        "sampledMinRssBytes": 1310658560,
+        "sampledMaxRssBytes": 1502638080,
+        "firstRssBytes": 1471569920,
+        "lastRssBytes": 1464635392
+      },
+      {
+        "index": 21,
+        "id": "fleurs-en_us-1728",
+        "status": "completed",
+        "audioSeconds": 5.76,
+        "caseSecondsLastPersisted": 8.252908,
+        "sampleCount": 13,
+        "sampledMinRssBytes": 1317486592,
+        "sampledMaxRssBytes": 1504923648,
+        "firstRssBytes": 1338605568,
+        "lastRssBytes": 1465561088
+      },
+      {
+        "index": 22,
+        "id": "fleurs-en_us-1972",
+        "status": "completed",
+        "audioSeconds": 4.32,
+        "caseSecondsLastPersisted": 7.251810078,
+        "sampleCount": 11,
+        "sampledMinRssBytes": 1323429888,
+        "sampledMaxRssBytes": 1465774080,
+        "firstRssBytes": 1383096320,
+        "lastRssBytes": 1460400128
+      },
+      {
+        "index": 23,
+        "id": "fleurs-en_us-1914",
+        "status": "completed",
+        "audioSeconds": 6.96,
+        "caseSecondsLastPersisted": 9.073221231,
+        "sampleCount": 14,
+        "sampledMinRssBytes": 1306771456,
+        "sampledMaxRssBytes": 1511632896,
+        "firstRssBytes": 1328259072,
+        "lastRssBytes": 1455214592
+      },
+      {
+        "index": 24,
+        "id": "fleurs-en_us-1806",
+        "status": "running",
+        "audioSeconds": 9.9,
+        "caseSecondsLastPersisted": 8.641687924,
+        "sampleCount": 19,
+        "sampledMinRssBytes": 1316093952,
+        "sampledMaxRssBytes": 1637896192,
+        "firstRssBytes": 1325035520,
+        "lastRssBytes": 1637896192
+      }
+    ],
+    "scope": "Sampling windows use most recently persisted activeCaseIndex; samples can lag real phase and cannot prove retention/leak/allocator cause. No true peak. Completed cost subset only.",
+    "newModelCalls": 0,
+    "newDeviceOperations": 0,
+    "hypothesesNotYetVerified": [
+      "memory lifetime/caching across varying input shapes",
+      "two-pass cost; uniform auto shortcut rejected on known development far-field regression"
+    ]
+  },
+  "nativeDetectedLanguageFieldAvailableInRetainedReports": false,
+  "fixedQwenSourceAssignsResultLang": false,
+  "requestedMemPatternSettingSourceSupported": true,
+  "memPatternNativeEffectOrBenefitVerified": false,
+  "newDeviceRuns": 0,
+  "newModelCalls": 0,
+  "productionChanges": false,
+  "recommendation": "Keep two-stage contract while investigating allocation/lifetime from exact ORT source; no new run or toggle from source-key existence alone."
+}

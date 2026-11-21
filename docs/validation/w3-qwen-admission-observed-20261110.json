@@ -1,0 +1,397 @@
+{
+  "assessment": {
+    "result": "reject current v5 admission candidate by prospective9/9speech rule",
+    "speechAdmitted": 8,
+    "speechTotal": 9,
+    "nonspeechRejected": 4,
+    "nonspeechTotal": 4,
+    "missed": [
+      "ami-ES2002a-C-294"
+    ],
+    "rawReportSHA256": "53afe63714f7d931cd7acd3e315042c768ad92a4c01cce45180dc77d467e737d",
+    "terminalReadIdentical": true,
+    "asrCalls": 0,
+    "protocolSHA256": "e4fbb162bc82cfc0bdaa2920596dce62dd9124d2c0f7ba8241e85cd9a57622b5",
+    "runnerSHA256": "8c8d1aa49ad7347cadc22dfc9e81ef4652363823ee80f2cb8a99dac79a694904",
+    "all13OriginalFloatWaveformsUnchanged": true
+  },
+  "report": {
+    "tool": "host_admission_vad",
+    "runtimeVersion": "2.0.1",
+    "protocolSha256": "e4fbb162bc82cfc0bdaa2920596dce62dd9124d2c0f7ba8241e85cd9a57622b5",
+    "runnerSha256": "8c8d1aa49ad7347cadc22dfc9e81ef4652363823ee80f2cb8a99dac79a694904",
+    "config": {
+      "threshold": 0.5,
+      "min_silence_duration": 0.5,
+      "min_speech_duration": 0.25,
+      "max_speech_duration": 30,
+      "window_size": 512,
+      "sample_rate": 16000,
+      "num_threads": 1,
+      "provider": "cpu"
+    },
+    "plannedIds": [
+      "fleurs-cmn-test-1906",
+      "fleurs-cmn-test-2006",
+      "fleurs-cmn-test-1883",
+      "1272-128104-0000",
+      "1272-128104-0001",
+      "1272-128104-0002",
+      "ami-ES2002a-D-330",
+      "ami-ES2002a-C-294",
+      "ami-ES2002a-B-146",
+      "silence-5s-zh-CN",
+      "silence-5s-en-US",
+      "synthetic-noise-40dBFS",
+      "synthetic-noise-20dBFS"
+    ],
+    "cases": [
+      {
+        "id": "fleurs-cmn-test-1906",
+        "status": "recognized",
+        "cohort": "mandarin",
+        "admitted": true,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "8c8996345c5ffbf90f802ed67d9d3a8257ef12a0768453492ce351e03754912a",
+          "bytes": 332160
+        },
+        "floatHashBefore": "b183b7585be5f3b3fb66a4e690c0c45d1b03a35277302dbf8460fb861863bae0",
+        "floatHashAfter": "b183b7585be5f3b3fb66a4e690c0c45d1b03a35277302dbf8460fb861863bae0",
+        "rawSamples": 166080,
+        "floatSamples": 166080,
+        "paddedSamples": 320,
+        "segments": [
+          {
+            "start": 31200,
+            "length": 23776
+          },
+          {
+            "start": 63456,
+            "length": 55008
+          }
+        ],
+        "elapsed": 0.08516929199686274,
+        "error": null
+      },
+      {
+        "id": "fleurs-cmn-test-2006",
+        "status": "recognized",
+        "cohort": "mandarin",
+        "admitted": true,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "333699e4542733689279698f52497c652dd23ed063f81a2ab861f6ab533f02b9",
+          "bytes": 264960
+        },
+        "floatHashBefore": "be78e5808c79b5e65462df858d8e362e2b1329d71d5f5c288c28163f4ae89a1d",
+        "floatHashAfter": "be78e5808c79b5e65462df858d8e362e2b1329d71d5f5c288c28163f4ae89a1d",
+        "rawSamples": 132480,
+        "floatSamples": 132480,
+        "paddedSamples": 128,
+        "segments": [
+          {
+            "start": 18400,
+            "length": 88800
+          }
+        ],
+        "elapsed": 0.04522116699808976,
+        "error": null
+      },
+      {
+        "id": "fleurs-cmn-test-1883",
+        "status": "recognized",
+        "cohort": "mandarin",
+        "admitted": true,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "b5176ee748e64389a64d0eb56d7114020290e676a90fa48cf49e2db5b53ae33c",
+          "bytes": 443520
+        },
+        "floatHashBefore": "12cb0a8ae7484d7f7b1449498f15e600e574a573f0a808180600f5acba248885",
+        "floatHashAfter": "12cb0a8ae7484d7f7b1449498f15e600e574a573f0a808180600f5acba248885",
+        "rawSamples": 221760,
+        "floatSamples": 221760,
+        "paddedSamples": 448,
+        "segments": [
+          {
+            "start": 45024,
+            "length": 80608
+          },
+          {
+            "start": 134624,
+            "length": 47840
+          }
+        ],
+        "elapsed": 0.06397745900176233,
+        "error": null
+      },
+      {
+        "id": "1272-128104-0000",
+        "status": "recognized",
+        "cohort": "english-near",
+        "admitted": true,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "156e1e1821700d4c4ad31a63e6d901a5088d5ee155fafd02a9d0d2de37f771e6",
+          "bytes": 187360
+        },
+        "floatHashBefore": "22d472b40f913206b6917115d136306be88df3b278e77f68be5910423250fa4d",
+        "floatHashAfter": "22d472b40f913206b6917115d136306be88df3b278e77f68be5910423250fa4d",
+        "rawSamples": 93680,
+        "floatSamples": 93680,
+        "paddedSamples": 16,
+        "segments": [
+          {
+            "start": 8672,
+            "length": 84512
+          }
+        ],
+        "elapsed": 0.04926487500051735,
+        "error": null
+      },
+      {
+        "id": "1272-128104-0001",
+        "status": "recognized",
+        "cohort": "english-near",
+        "admitted": true,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "bca0b38f0be340f804ab1d522f4d2a1b339f3cb237913347d1af0847ae48160e",
+          "bytes": 154080
+        },
+        "floatHashBefore": "82fa5b3de8c517a1a7605f5a648bf22ffd91fa4d181567f1404724a50d0bfbe2",
+        "floatHashAfter": "82fa5b3de8c517a1a7605f5a648bf22ffd91fa4d181567f1404724a50d0bfbe2",
+        "rawSamples": 77040,
+        "floatSamples": 77040,
+        "paddedSamples": 272,
+        "segments": [
+          {
+            "start": 8160,
+            "length": 68640
+          }
+        ],
+        "elapsed": 0.036885417001030874,
+        "error": null
+      },
+      {
+        "id": "1272-128104-0002",
+        "status": "recognized",
+        "cohort": "english-near",
+        "admitted": true,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "f683cb79705da5840f7e920921f2f5b61d396b3bb8b24db57703745785f5ec55",
+          "bytes": 399520
+        },
+        "floatHashBefore": "a787ca3ad598fa0f51156c7f2ddbb72d422014c9eb0e2b310ddca541f1191be2",
+        "floatHashAfter": "a787ca3ad598fa0f51156c7f2ddbb72d422014c9eb0e2b310ddca541f1191be2",
+        "rawSamples": 199760,
+        "floatSamples": 199760,
+        "paddedSamples": 432,
+        "segments": [
+          {
+            "start": 9184,
+            "length": 103648
+          },
+          {
+            "start": 121824,
+            "length": 77856
+          }
+        ],
+        "elapsed": 0.05538104199877125,
+        "error": null
+      },
+      {
+        "id": "ami-ES2002a-D-330",
+        "status": "recognized",
+        "cohort": "english-far",
+        "admitted": true,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "6f9370f42ec71311823ff5820cb97b88beb9c04db838685c2100a82830dbaf61",
+          "bytes": 112032
+        },
+        "floatHashBefore": "bab323e37b69982a045332b615042625fc542e42cef780e0da45c043357be4fd",
+        "floatHashAfter": "bab323e37b69982a045332b615042625fc542e42cef780e0da45c043357be4fd",
+        "rawSamples": 56016,
+        "floatSamples": 56016,
+        "paddedSamples": 304,
+        "segments": [
+          {
+            "start": 20448,
+            "length": 35360
+          }
+        ],
+        "elapsed": 0.029606875003082678,
+        "error": null
+      },
+      {
+        "id": "ami-ES2002a-C-294",
+        "status": "recognized",
+        "cohort": "english-far",
+        "admitted": false,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "0d65b45518193214e1be06a2bbffd5cafa03696727a0c5addea7e61c72e4ff0d",
+          "bytes": 114144
+        },
+        "floatHashBefore": "cead89df793baeb17a43dcda3d88553f13c5c52ea4780d0349b41eb9d233f48a",
+        "floatHashAfter": "cead89df793baeb17a43dcda3d88553f13c5c52ea4780d0349b41eb9d233f48a",
+        "rawSamples": 57072,
+        "floatSamples": 57072,
+        "paddedSamples": 272,
+        "segments": [],
+        "elapsed": 0.028302292001171736,
+        "error": null
+      },
+      {
+        "id": "ami-ES2002a-B-146",
+        "status": "recognized",
+        "cohort": "english-far",
+        "admitted": true,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "3e884a0ffe26fc41bc9c499102471231ac2c11479581ed3a85fad0cbebc6a0f0",
+          "bytes": 183424
+        },
+        "floatHashBefore": "cf1ab32cfa50a44f9032e8b0b682589f289f3d62e38f465cab74bf2198935f5a",
+        "floatHashAfter": "cf1ab32cfa50a44f9032e8b0b682589f289f3d62e38f465cab74bf2198935f5a",
+        "rawSamples": 91712,
+        "floatSamples": 91712,
+        "paddedSamples": 448,
+        "segments": [
+          {
+            "start": 4576,
+            "length": 48352
+          },
+          {
+            "start": 76256,
+            "length": 15392
+          }
+        ],
+        "elapsed": 0.03625024999928428,
+        "error": null
+      },
+      {
+        "id": "silence-5s-zh-CN",
+        "status": "recognized",
+        "cohort": "silence",
+        "admitted": false,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+          "bytes": 160000
+        },
+        "floatHashBefore": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b",
+        "floatHashAfter": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b",
+        "rawSamples": 80000,
+        "floatSamples": 80000,
+        "paddedSamples": 384,
+        "segments": [],
+        "elapsed": 0.03206758400119725,
+        "error": null
+      },
+      {
+        "id": "silence-5s-en-US",
+        "status": "recognized",
+        "cohort": "silence",
+        "admitted": false,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+          "bytes": 160000
+        },
+        "floatHashBefore": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b",
+        "floatHashAfter": "ac2878215ad33205d1732578c89f25ededaad1b676911c540825bcf4baa42d9b",
+        "rawSamples": 80000,
+        "floatSamples": 80000,
+        "paddedSamples": 384,
+        "segments": [],
+        "elapsed": 0.03163074999974924,
+        "error": null
+      },
+      {
+        "id": "synthetic-noise-40dBFS",
+        "status": "recognized",
+        "cohort": "nonspeech-noise",
+        "admitted": false,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "2c7053af133d5679bbf6317a1845acc9ee3b83ef2baa7b8e6b89181490f42107",
+          "bytes": 160000
+        },
+        "floatHashBefore": "26803edf34ffdfad34270455f3ba93f69d3e98744e415b4e715cfe60e2669a08",
+        "floatHashAfter": "26803edf34ffdfad34270455f3ba93f69d3e98744e415b4e715cfe60e2669a08",
+        "rawSamples": 80000,
+        "floatSamples": 80000,
+        "paddedSamples": 384,
+        "segments": [],
+        "elapsed": 0.029523790999519406,
+        "error": null
+      },
+      {
+        "id": "synthetic-noise-20dBFS",
+        "status": "recognized",
+        "cohort": "nonspeech-noise",
+        "admitted": false,
+        "model": {
+          "sha256": "6b99cbfd39246b6706f98ec13c7c50c6b299181f2474fa05cbc8046acc274396",
+          "bytes": 2313101
+        },
+        "pcm": {
+          "sha256": "21a64a5c827d64ab49d0e856fcea1b5af269ca4b950ecdaed894df2dbfc24c99",
+          "bytes": 160000
+        },
+        "floatHashBefore": "589818f6620b64bdc0cccbc9e072c5d30be9b3ad49f3b689fd6f25a8f21ca2de",
+        "floatHashAfter": "589818f6620b64bdc0cccbc9e072c5d30be9b3ad49f3b689fd6f25a8f21ca2de",
+        "rawSamples": 80000,
+        "floatSamples": 80000,
+        "paddedSamples": 384,
+        "segments": [],
+        "elapsed": 0.02992245799759985,
+        "error": null
+      }
+    ],
+    "status": "completed",
+    "exitCode": 0,
+    "nativeRelease": "unproven",
+    "asrCalls": 0
+  }
+}

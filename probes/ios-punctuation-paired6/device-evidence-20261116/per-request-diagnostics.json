@@ -1,0 +1,5750 @@
+[
+  {
+    "id": "fleurs-cmn_hans_cn-1698",
+    "cohort": "mandarin",
+    "arm": "A",
+    "index": 1,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "substitution",
+            "reference": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小粒子组成。",
+            "hypothesis": "宇宙中的一切都有物质构成而所有的物质都有被称为原子的微小颗粒组成",
+            "formattingOnly": false
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "contentOrMixed": {
+          "substitutions": 1,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 1
+        },
+        "editTotal": 1
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "宇",
+            "hypothesis": "宇",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "宙",
+            "hypothesis": "宙",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "中",
+            "hypothesis": "中",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "的",
+            "hypothesis": "的",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "一",
+            "hypothesis": "一",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "切",
+            "hypothesis": "切",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "都",
+            "hypothesis": "都",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "由",
+            "hypothesis": "有",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "物",
+            "hypothesis": "物",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "质",
+            "hypothesis": "质",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "构",
+            "hypothesis": "构",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "成",
+            "hypothesis": "成",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "，",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "而",
+            "hypothesis": "而",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "所",
+            "hypothesis": "所",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "有",
+            "hypothesis": "有",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "的",
+            "hypothesis": "的",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "物",
+            "hypothesis": "物",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "质",
+            "hypothesis": "质",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "都",
+            "hypothesis": "都",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "由",
+            "hypothesis": "有",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "被",
+            "hypothesis": "被",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "称",
+            "hypothesis": "称",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "为",
+            "hypothesis": "为",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "原",
+            "hypothesis": "原",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "子",
+            "hypothesis": "子",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "的",
+            "hypothesis": "的",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "微",
+            "hypothesis": "微",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "小",
+            "hypothesis": "小",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "粒",
+            "hypothesis": "颗",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "子",
+            "hypothesis": "粒",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "组",
+            "hypothesis": "组",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "成",
+            "hypothesis": "成",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "。",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 2,
+          "insertions": 0,
+          "total": 2
+        },
+        "contentOrMixed": {
+          "substitutions": 4,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 4
+        },
+        "editTotal": 6
+      }
+    }
+  },
+  {
+    "id": "fleurs-cmn_hans_cn-1871",
+    "cohort": "mandarin",
+    "arm": "A",
+    "index": 4,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "substitution",
+            "reference": "在中东温暖的气候中，房子并不是多重要。",
+            "hypothesis": "在中东温暖的气候中房子并不是多重要",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 1,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "editTotal": 1
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "在",
+            "hypothesis": "在",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "中",
+            "hypothesis": "中",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "东",
+            "hypothesis": "东",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "温",
+            "hypothesis": "温",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "暖",
+            "hypothesis": "暖",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "的",
+            "hypothesis": "的",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "气",
+            "hypothesis": "气",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "候",
+            "hypothesis": "候",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "中",
+            "hypothesis": "中",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "，",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "房",
+            "hypothesis": "房",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "子",
+            "hypothesis": "子",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "并",
+            "hypothesis": "并",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "不",
+            "hypothesis": "不",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "是",
+            "hypothesis": "是",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "多",
+            "hypothesis": "多",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "重",
+            "hypothesis": "重",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "要",
+            "hypothesis": "要",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "。",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 2,
+          "insertions": 0,
+          "total": 2
+        },
+        "contentOrMixed": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "editTotal": 2
+      }
+    }
+  },
+  {
+    "id": "fleurs-cmn_hans_cn-1830",
+    "cohort": "mandarin",
+    "arm": "A",
+    "index": 5,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "deletion",
+            "reference": "执政党西南非洲人民组织",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "(swapo)",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "也在议会选举中保持了多数席位。",
+            "hypothesis": "执政党西南非洲人民组织也在议会选举中表述了多数席位",
+            "formattingOnly": false
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "contentOrMixed": {
+          "substitutions": 1,
+          "deletions": 2,
+          "insertions": 0,
+          "total": 3
+        },
+        "editTotal": 3
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "执",
+            "hypothesis": "执",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "政",
+            "hypothesis": "政",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "党",
+            "hypothesis": "党",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "西",
+            "hypothesis": "西",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "南",
+            "hypothesis": "南",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "非",
+            "hypothesis": "非",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "洲",
+            "hypothesis": "洲",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "人",
+            "hypothesis": "人",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "民",
+            "hypothesis": "民",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "组",
+            "hypothesis": "组",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "织",
+            "hypothesis": "织",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "(",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "deletion",
+            "reference": "s",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "w",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "a",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "p",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "o",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ")",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "也",
+            "hypothesis": "也",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "在",
+            "hypothesis": "在",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "议",
+            "hypothesis": "议",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "会",
+            "hypothesis": "会",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "选",
+            "hypothesis": "选",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "举",
+            "hypothesis": "举",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "中",
+            "hypothesis": "中",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "保",
+            "hypothesis": "表",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "持",
+            "hypothesis": "述",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "了",
+            "hypothesis": "了",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "多",
+            "hypothesis": "多",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "数",
+            "hypothesis": "数",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "席",
+            "hypothesis": "席",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "位",
+            "hypothesis": "位",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "。",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 3,
+          "insertions": 0,
+          "total": 3
+        },
+        "contentOrMixed": {
+          "substitutions": 2,
+          "deletions": 5,
+          "insertions": 0,
+          "total": 7
+        },
+        "editTotal": 10
+      }
+    }
+  },
+  {
+    "id": "fleurs-cmn_hans_cn-1698",
+    "cohort": "mandarin",
+    "arm": "B",
+    "index": 2,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "substitution",
+            "reference": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小粒子组成。",
+            "hypothesis": "宇宙中的一切都有物质构成，而所有的物质都有被称为原子的微小颗粒组成",
+            "formattingOnly": false
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "contentOrMixed": {
+          "substitutions": 1,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 1
+        },
+        "editTotal": 1
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "宇",
+            "hypothesis": "宇",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "宙",
+            "hypothesis": "宙",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "中",
+            "hypothesis": "中",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "的",
+            "hypothesis": "的",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "一",
+            "hypothesis": "一",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "切",
+            "hypothesis": "切",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "都",
+            "hypothesis": "都",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "由",
+            "hypothesis": "有",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "物",
+            "hypothesis": "物",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "质",
+            "hypothesis": "质",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "构",
+            "hypothesis": "构",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "成",
+            "hypothesis": "成",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "，",
+            "hypothesis": "，",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "而",
+            "hypothesis": "而",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "所",
+            "hypothesis": "所",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "有",
+            "hypothesis": "有",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "的",
+            "hypothesis": "的",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "物",
+            "hypothesis": "物",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "质",
+            "hypothesis": "质",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "都",
+            "hypothesis": "都",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "由",
+            "hypothesis": "有",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "被",
+            "hypothesis": "被",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "称",
+            "hypothesis": "称",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "为",
+            "hypothesis": "为",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "原",
+            "hypothesis": "原",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "子",
+            "hypothesis": "子",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "的",
+            "hypothesis": "的",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "微",
+            "hypothesis": "微",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "小",
+            "hypothesis": "小",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "粒",
+            "hypothesis": "颗",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "子",
+            "hypothesis": "粒",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "组",
+            "hypothesis": "组",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "成",
+            "hypothesis": "成",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "。",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 1,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 4,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 4
+        },
+        "editTotal": 5
+      }
+    }
+  },
+  {
+    "id": "fleurs-cmn_hans_cn-1871",
+    "cohort": "mandarin",
+    "arm": "B",
+    "index": 3,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "substitution",
+            "reference": "在中东温暖的气候中，房子并不是多重要。",
+            "hypothesis": "在中东温暖的气候中，房子并不是多重要",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 1,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "editTotal": 1
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "在",
+            "hypothesis": "在",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "中",
+            "hypothesis": "中",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "东",
+            "hypothesis": "东",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "温",
+            "hypothesis": "温",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "暖",
+            "hypothesis": "暖",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "的",
+            "hypothesis": "的",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "气",
+            "hypothesis": "气",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "候",
+            "hypothesis": "候",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "中",
+            "hypothesis": "中",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "，",
+            "hypothesis": "，",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "房",
+            "hypothesis": "房",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "子",
+            "hypothesis": "子",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "并",
+            "hypothesis": "并",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "不",
+            "hypothesis": "不",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "是",
+            "hypothesis": "是",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "多",
+            "hypothesis": "多",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "重",
+            "hypothesis": "重",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "要",
+            "hypothesis": "要",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "。",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 1,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "editTotal": 1
+      }
+    }
+  },
+  {
+    "id": "fleurs-cmn_hans_cn-1830",
+    "cohort": "mandarin",
+    "arm": "B",
+    "index": 6,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "deletion",
+            "reference": "执政党西南非洲人民组织",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "(swapo)",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "也在议会选举中保持了多数席位。",
+            "hypothesis": "执政党西南非洲人民组织也在议会选举中表述了多数席位",
+            "formattingOnly": false
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "contentOrMixed": {
+          "substitutions": 1,
+          "deletions": 2,
+          "insertions": 0,
+          "total": 3
+        },
+        "editTotal": 3
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "执",
+            "hypothesis": "执",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "政",
+            "hypothesis": "政",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "党",
+            "hypothesis": "党",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "西",
+            "hypothesis": "西",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "南",
+            "hypothesis": "南",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "非",
+            "hypothesis": "非",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "洲",
+            "hypothesis": "洲",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "人",
+            "hypothesis": "人",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "民",
+            "hypothesis": "民",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "组",
+            "hypothesis": "组",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "织",
+            "hypothesis": "织",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "(",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "deletion",
+            "reference": "s",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "w",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "a",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "p",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "o",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ")",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "也",
+            "hypothesis": "也",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "在",
+            "hypothesis": "在",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "议",
+            "hypothesis": "议",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "会",
+            "hypothesis": "会",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "选",
+            "hypothesis": "选",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "举",
+            "hypothesis": "举",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "中",
+            "hypothesis": "中",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "保",
+            "hypothesis": "表",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "持",
+            "hypothesis": "述",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "了",
+            "hypothesis": "了",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "多",
+            "hypothesis": "多",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "数",
+            "hypothesis": "数",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "席",
+            "hypothesis": "席",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "位",
+            "hypothesis": "位",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "。",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 3,
+          "insertions": 0,
+          "total": 3
+        },
+        "contentOrMixed": {
+          "substitutions": 2,
+          "deletions": 5,
+          "insertions": 0,
+          "total": 7
+        },
+        "editTotal": 10
+      }
+    }
+  },
+  {
+    "id": "fleurs-en_us-1858",
+    "cohort": "english-near",
+    "arm": "A",
+    "index": 8,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "substitution",
+            "reference": "danielle",
+            "hypothesis": "daniel",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "lantagne,",
+            "hypothesis": "latigue",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "un",
+            "hypothesis": "un",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "expert",
+            "hypothesis": "expert",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "on",
+            "hypothesis": "on",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "disease,",
+            "hypothesis": "disease",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "stated",
+            "hypothesis": "stated",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "outbreak",
+            "hypothesis": "outbreak",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "was",
+            "hypothesis": "was",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "likely",
+            "hypothesis": "likely",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "caused",
+            "hypothesis": "caused",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "by",
+            "hypothesis": "by",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "peacekeepers.",
+            "hypothesis": "peacekeepers",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 2,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 2
+        },
+        "contentOrMixed": {
+          "substitutions": 2,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 2
+        },
+        "editTotal": 4
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "l",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "e",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "n",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "a",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "g",
+            "hypothesis": "g",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "n",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ",",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "x",
+            "hypothesis": "x",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ",",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "b",
+            "hypothesis": "b",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "k",
+            "hypothesis": "k",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "w",
+            "hypothesis": "w",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "k",
+            "hypothesis": "k",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "y",
+            "hypothesis": "y",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "b",
+            "hypothesis": "b",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "y",
+            "hypothesis": "y",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "k",
+            "hypothesis": "k",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ".",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 3,
+          "insertions": 0,
+          "total": 3
+        },
+        "contentOrMixed": {
+          "substitutions": 2,
+          "deletions": 3,
+          "insertions": 0,
+          "total": 5
+        },
+        "editTotal": 8
+      }
+    }
+  },
+  {
+    "id": "fleurs-en_us-1992",
+    "cohort": "english-near",
+    "arm": "A",
+    "index": 9,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "term",
+            "hypothesis": "term",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "safari",
+            "hypothesis": "safari",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "in",
+            "hypothesis": "and",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "popular",
+            "hypothesis": "popular",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "use",
+            "hypothesis": "lose",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "refers",
+            "hypothesis": "refers",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "to",
+            "hypothesis": "to",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "overland",
+            "hypothesis": "overland",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "travel",
+            "hypothesis": "travel",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "to",
+            "hypothesis": "to",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "view",
+            "hypothesis": "view",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "stunning",
+            "hypothesis": "stunning",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "african",
+            "hypothesis": "african",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "wildlife,",
+            "hypothesis": "wildlife",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "particularly",
+            "hypothesis": "particularly",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "on",
+            "hypothesis": "on",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "savanna.",
+            "hypothesis": "savannah",
+            "formattingOnly": false
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 1,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 3,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 3
+        },
+        "editTotal": 4
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "m",
+            "hypothesis": "m",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "i",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "insertion",
+            "reference": "",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "insertion",
+            "reference": "",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "u",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "w",
+            "hypothesis": "w",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "g",
+            "hypothesis": "g",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "w",
+            "hypothesis": "w",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ",",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "y",
+            "hypothesis": "y",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": ".",
+            "hypothesis": "h",
+            "formattingOnly": false
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 1,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 3,
+          "deletions": 0,
+          "insertions": 2,
+          "total": 5
+        },
+        "editTotal": 6
+      }
+    }
+  },
+  {
+    "id": "fleurs-en_us-1909",
+    "cohort": "english-near",
+    "arm": "A",
+    "index": 12,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "virtual",
+            "hypothesis": "virtual",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "teams",
+            "hypothesis": "teams",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "are",
+            "hypothesis": "are",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "held",
+            "hypothesis": "held",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "to",
+            "hypothesis": "to",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "same",
+            "hypothesis": "same",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "standards",
+            "hypothesis": "standard",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "of",
+            "hypothesis": "of",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "excellence",
+            "hypothesis": "excellence",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "as",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "conventional",
+            "hypothesis": "conventional",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "teams,",
+            "hypothesis": "teams",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "but",
+            "hypothesis": "but",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "there",
+            "hypothesis": "there",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "are",
+            "hypothesis": "are",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "subtle",
+            "hypothesis": "several",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "differences.",
+            "hypothesis": "differences",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 2,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 2
+        },
+        "contentOrMixed": {
+          "substitutions": 2,
+          "deletions": 1,
+          "insertions": 0,
+          "total": 3
+        },
+        "editTotal": 5
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "m",
+            "hypothesis": "m",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "m",
+            "hypothesis": "m",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "s",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "x",
+            "hypothesis": "x",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "a",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "s",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "m",
+            "hypothesis": "m",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ",",
+            "hypothesis": "",
+            "formattingOnly": true
+          },
+          {
+            "op": "equal",
+            "reference": "b",
+            "hypothesis": "b",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "insertion",
+            "reference": "",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "u",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "b",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "t",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "l",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "e",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ".",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 2,
+          "insertions": 0,
+          "total": 2
+        },
+        "contentOrMixed": {
+          "substitutions": 5,
+          "deletions": 3,
+          "insertions": 1,
+          "total": 9
+        },
+        "editTotal": 11
+      }
+    }
+  },
+  {
+    "id": "fleurs-en_us-1858",
+    "cohort": "english-near",
+    "arm": "B",
+    "index": 7,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "substitution",
+            "reference": "danielle",
+            "hypothesis": "daniel",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "lantagne,",
+            "hypothesis": "latigue,",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "un",
+            "hypothesis": "un",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "expert",
+            "hypothesis": "expert",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "on",
+            "hypothesis": "on",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "disease,",
+            "hypothesis": "disease,",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "stated",
+            "hypothesis": "stated",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "outbreak",
+            "hypothesis": "outbreak",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "was",
+            "hypothesis": "was",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "likely",
+            "hypothesis": "likely",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "caused",
+            "hypothesis": "caused",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "by",
+            "hypothesis": "by",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "peacekeepers.",
+            "hypothesis": "peacekeepers",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 1,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 2,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 2
+        },
+        "editTotal": 3
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "l",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "e",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "n",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "a",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "g",
+            "hypothesis": "g",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "n",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": ",",
+            "hypothesis": ",",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "x",
+            "hypothesis": "x",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": ",",
+            "hypothesis": ",",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "b",
+            "hypothesis": "b",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "k",
+            "hypothesis": "k",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "w",
+            "hypothesis": "w",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "k",
+            "hypothesis": "k",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "y",
+            "hypothesis": "y",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "b",
+            "hypothesis": "b",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "y",
+            "hypothesis": "y",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "k",
+            "hypothesis": "k",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ".",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 1,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 2,
+          "deletions": 3,
+          "insertions": 0,
+          "total": 5
+        },
+        "editTotal": 6
+      }
+    }
+  },
+  {
+    "id": "fleurs-en_us-1992",
+    "cohort": "english-near",
+    "arm": "B",
+    "index": 10,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "term",
+            "hypothesis": "term",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "safari",
+            "hypothesis": "safari",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "in",
+            "hypothesis": "and",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "popular",
+            "hypothesis": "popular",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "use",
+            "hypothesis": "lose",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "refers",
+            "hypothesis": "refers",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "to",
+            "hypothesis": "to",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "overland",
+            "hypothesis": "overland",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "travel",
+            "hypothesis": "travel",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "to",
+            "hypothesis": "to",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "view",
+            "hypothesis": "view",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "stunning",
+            "hypothesis": "stunning",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "african",
+            "hypothesis": "african",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "wildlife,",
+            "hypothesis": "wildlife,",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "particularly",
+            "hypothesis": "particularly",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "on",
+            "hypothesis": "on",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "savanna.",
+            "hypothesis": "savannah",
+            "formattingOnly": false
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "contentOrMixed": {
+          "substitutions": 3,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 3
+        },
+        "editTotal": 3
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "m",
+            "hypothesis": "m",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "i",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "insertion",
+            "reference": "",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "insertion",
+            "reference": "",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "u",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "w",
+            "hypothesis": "w",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "g",
+            "hypothesis": "g",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "w",
+            "hypothesis": "w",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": ",",
+            "hypothesis": ",",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "p",
+            "hypothesis": "p",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "y",
+            "hypothesis": "y",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": ".",
+            "hypothesis": "h",
+            "formattingOnly": false
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 0
+        },
+        "contentOrMixed": {
+          "substitutions": 3,
+          "deletions": 0,
+          "insertions": 2,
+          "total": 5
+        },
+        "editTotal": 5
+      }
+    }
+  },
+  {
+    "id": "fleurs-en_us-1909",
+    "cohort": "english-near",
+    "arm": "B",
+    "index": 11,
+    "diagnostics": {
+      "word": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "virtual",
+            "hypothesis": "virtual",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "teams",
+            "hypothesis": "teams",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "are",
+            "hypothesis": "are",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "held",
+            "hypothesis": "held",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "to",
+            "hypothesis": "to",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "the",
+            "hypothesis": "the",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "same",
+            "hypothesis": "same",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "standards",
+            "hypothesis": "standard",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "of",
+            "hypothesis": "of",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "excellence",
+            "hypothesis": "excellence",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "as",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "conventional",
+            "hypothesis": "conventional",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "teams,",
+            "hypothesis": "teams,",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "but",
+            "hypothesis": "but",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "there",
+            "hypothesis": "there",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "are",
+            "hypothesis": "are",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "subtle",
+            "hypothesis": "several",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "differences.",
+            "hypothesis": "differences",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 1,
+          "deletions": 0,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 2,
+          "deletions": 1,
+          "insertions": 0,
+          "total": 3
+        },
+        "editTotal": 4
+      },
+      "character": {
+        "edits": [
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "m",
+            "hypothesis": "m",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "m",
+            "hypothesis": "m",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "s",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "x",
+            "hypothesis": "x",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "a",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": "s",
+            "hypothesis": "",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "v",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "o",
+            "hypothesis": "o",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "l",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "m",
+            "hypothesis": "m",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": ",",
+            "hypothesis": ",",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "b",
+            "hypothesis": "b",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "u",
+            "hypothesis": "u",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "t",
+            "hypothesis": "t",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "h",
+            "hypothesis": "h",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "a",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "insertion",
+            "reference": "",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "u",
+            "hypothesis": "v",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "b",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "t",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "l",
+            "hypothesis": "a",
+            "formattingOnly": false
+          },
+          {
+            "op": "substitution",
+            "reference": "e",
+            "hypothesis": "l",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "d",
+            "hypothesis": "d",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "i",
+            "hypothesis": "i",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "f",
+            "hypothesis": "f",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "r",
+            "hypothesis": "r",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "n",
+            "hypothesis": "n",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "c",
+            "hypothesis": "c",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "e",
+            "hypothesis": "e",
+            "formattingOnly": false
+          },
+          {
+            "op": "equal",
+            "reference": "s",
+            "hypothesis": "s",
+            "formattingOnly": false
+          },
+          {
+            "op": "deletion",
+            "reference": ".",
+            "hypothesis": "",
+            "formattingOnly": true
+          }
+        ],
+        "formattingOnly": {
+          "substitutions": 0,
+          "deletions": 1,
+          "insertions": 0,
+          "total": 1
+        },
+        "contentOrMixed": {
+          "substitutions": 5,
+          "deletions": 3,
+          "insertions": 1,
+          "total": 9
+        },
+        "editTotal": 10
+      }
+    }
+  }
+]

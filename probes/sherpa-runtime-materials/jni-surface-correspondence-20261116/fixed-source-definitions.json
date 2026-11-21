@@ -1,0 +1,1825 @@
+[
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/audio-tagging.cc",
+    "sourceLine": 54,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_AudioTagging_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/audio-tagging.cc",
+    "sourceLine": 85,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_AudioTagging_newFromFile(\n    JNIEnv *env, jobject  , jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/audio-tagging.cc",
+    "sourceLine": 110,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_AudioTagging_delete(\n    JNIEnv *env, jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_createStream",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/audio-tagging.cc",
+    "sourceLine": 116,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_AudioTagging_createStream(\n    JNIEnv *env, jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_AudioTagging_compute",
+    "returnType": "jobjectArray",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong",
+      "jint"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/audio-tagging.cc",
+    "sourceLine": 130,
+    "declarationWithoutComments": "JNIEXPORT jobjectArray JNICALL Java_com_k2fsa_sherpa_onnx_AudioTagging_compute(\n    JNIEnv *env, jobject  , jlong ptr, jlong streamPtr, jint top_k)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc",
+    "sourceLine": 76,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_KeywordSpotter_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc",
+    "sourceLine": 105,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_KeywordSpotter_newFromFile(\n    JNIEnv *env, jobject  , jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc",
+    "sourceLine": 128,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_KeywordSpotter_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_decode",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc",
+    "sourceLine": 134,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_KeywordSpotter_decode(\n    JNIEnv *  , jobject  , jlong ptr, jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_reset",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc",
+    "sourceLine": 143,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_KeywordSpotter_reset(\n    JNIEnv *  , jobject  , jlong ptr, jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_createStream",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc",
+    "sourceLine": 152,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_KeywordSpotter_createStream(\n    JNIEnv *env, jobject  , jlong ptr, jstring keywords)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_isReady",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc",
+    "sourceLine": 176,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_KeywordSpotter_isReady(\n    JNIEnv *  , jobject  , jlong ptr, jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_KeywordSpotter_getResult",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc",
+    "sourceLine": 185,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL Java_com_k2fsa_sherpa_onnx_KeywordSpotter_getResult(\n    JNIEnv *env, jobject  , jlong ptr, jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc",
+    "sourceLine": 48,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc",
+    "sourceLine": 78,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineDiacritization_newFromFile(JNIEnv *env,\n                                                             jobject  ,\n                                                             jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc",
+    "sourceLine": 103,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineDiacritization_addDiacritics",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc",
+    "sourceLine": 109,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineDiacritization_addDiacritics(JNIEnv *env,\n                                                               jobject  ,\n                                                               jlong ptr,\n                                                               jstring text)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflinePunctuation_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-punctuation.cc",
+    "sourceLine": 46,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflinePunctuation_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflinePunctuation_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-punctuation.cc",
+    "sourceLine": 82,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflinePunctuation_newFromFile(JNIEnv *env,\n                                                          jobject  ,\n                                                          jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflinePunctuation_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-punctuation.cc",
+    "sourceLine": 113,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflinePunctuation_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflinePunctuation_addPunctuation",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-punctuation.cc",
+    "sourceLine": 119,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflinePunctuation_addPunctuation(JNIEnv *env,\n                                                             jobject  ,\n                                                             jlong ptr,\n                                                             jstring text)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 479,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineRecognizer_newFromAsset(JNIEnv *env,\n                                                          jobject  ,\n                                                          jobject asset_manager,\n                                                          jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 521,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineRecognizer_newFromFile(JNIEnv *env,\n                                                         jobject  ,\n                                                         jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_setConfig",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 561,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_setConfig(\n    JNIEnv *env, jobject  , jlong ptr, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 580,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_createStream",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 586,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineRecognizer_createStream(JNIEnv *  ,\n                                                          jobject  ,\n                                                          jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_createStreamWithHotwords",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 602,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineRecognizer_createStreamWithHotwords(\n    JNIEnv *env, jobject  , jlong ptr, jstring j_hotwords)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_decode",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 626,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_decode(\n    JNIEnv *env, jobject  , jlong ptr, jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_decodeStreams",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlongArray"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 643,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineRecognizer_decodeStreams(\n    JNIEnv *env, jobject  , jlong ptr, jlongArray stream_ptrs)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_getResult",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 665,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineRecognizer_getResult(JNIEnv *env,\n                                                       jobject  ,\n                                                       jlong streamPtr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineRecognizer_prependAdspLibraryPath",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc",
+    "sourceLine": 730,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineRecognizer_prependAdspLibraryPath(\n    JNIEnv *env, jclass  , jstring new_path)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+    "sourceLine": 93,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+    "sourceLine": 125,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_newFromFile(\n    JNIEnv *env, jobject  , jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_setConfig",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+    "sourceLine": 150,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_setConfig(\n    JNIEnv *env, jobject  , jlong ptr, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+    "sourceLine": 169,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_delete(JNIEnv *  ,\n                                                            jobject  ,\n                                                            jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_process",
+    "returnType": "jobjectArray",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jfloatArray"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+    "sourceLine": 212,
+    "declarationWithoutComments": "JNIEXPORT jobjectArray JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_process(\n    JNIEnv *env, jobject  , jlong ptr, jfloatArray samples)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_processWithCallback",
+    "returnType": "jobjectArray",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jfloatArray",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+    "sourceLine": 226,
+    "declarationWithoutComments": "JNIEXPORT jobjectArray JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_processWithCallback(\n    JNIEnv *env, jobject  , jlong ptr, jfloatArray samples,\n    jobject callback, jlong arg)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_getSampleRate",
+    "returnType": "jint",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+    "sourceLine": 270,
+    "declarationWithoutComments": "JNIEXPORT jint JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeakerDiarization_getSampleRate(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speech-denoiser.cc",
+    "sourceLine": 12,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speech-denoiser.cc",
+    "sourceLine": 42,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_newFromFile(JNIEnv *env,\n                                                             jobject  ,\n                                                             jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speech-denoiser.cc",
+    "sourceLine": 72,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_getSampleRate",
+    "returnType": "jint",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speech-denoiser.cc",
+    "sourceLine": 78,
+    "declarationWithoutComments": "JNIEXPORT jint JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_getSampleRate(JNIEnv *  ,\n                                                               jobject  ,\n                                                               jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_run",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jfloatArray",
+      "jint"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speech-denoiser.cc",
+    "sourceLine": 87,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL Java_com_k2fsa_sherpa_onnx_OfflineSpeechDenoiser_run(\n    JNIEnv *env, jobject  , jlong ptr, jfloatArray samples,\n    jint sample_rate)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_DenoisedAudio_saveImpl",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jstring",
+      "jfloatArray",
+      "jint"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speech-denoiser.cc",
+    "sourceLine": 102,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_DenoisedAudio_saveImpl(\n    JNIEnv *env, jobject  , jstring filename, jfloatArray samples,\n    jint sample_rate)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-stream.cc",
+    "sourceLine": 10,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineStream_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_acceptWaveform",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jfloatArray",
+      "jint"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-stream.cc",
+    "sourceLine": 16,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineStream_acceptWaveform(\n    JNIEnv *env, jobject  , jlong ptr, jfloatArray samples,\n    jint sample_rate)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_setOption",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-stream.cc",
+    "sourceLine": 28,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineStream_setOption(\n    JNIEnv *env, jobject  , jlong ptr, jstring key, jstring value)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_getOption",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-stream.cc",
+    "sourceLine": 39,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL Java_com_k2fsa_sherpa_onnx_OfflineStream_getOption(\n    JNIEnv *env, jobject  , jlong ptr, jstring key)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineStream_hasOption",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-stream.cc",
+    "sourceLine": 49,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_OfflineStream_hasOption(\n    JNIEnv *env, jobject  , jlong ptr, jstring key)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 498,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_OfflineTts_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 537,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_OfflineTts_newFromFile(\n    JNIEnv *env, jobject  , jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 564,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OfflineTts_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_getSampleRate",
+    "returnType": "jint",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 570,
+    "declarationWithoutComments": "JNIEXPORT jint JNICALL Java_com_k2fsa_sherpa_onnx_OfflineTts_getSampleRate(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_getNumSpeakers",
+    "returnType": "jint",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 576,
+    "declarationWithoutComments": "JNIEXPORT jint JNICALL Java_com_k2fsa_sherpa_onnx_OfflineTts_getNumSpeakers(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_getLang",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 582,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL Java_com_k2fsa_sherpa_onnx_OfflineTts_getLang(\n    JNIEnv *env, jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_generateImpl",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring",
+      "jint",
+      "jfloat"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 589,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL Java_com_k2fsa_sherpa_onnx_OfflineTts_generateImpl(\n    JNIEnv *env, jobject  , jlong ptr, jstring text, jint sid,\n    jfloat speed)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_generateWithCallbackImpl",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring",
+      "jint",
+      "jfloat",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 607,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineTts_generateWithCallbackImpl(\n    JNIEnv *env, jobject  , jlong ptr, jstring text, jint sid,\n    jfloat speed, jobject callback)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OfflineTts_generateWithConfigImpl",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 642,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL\nJava_com_k2fsa_sherpa_onnx_OfflineTts_generateWithConfigImpl(\n    JNIEnv *env, jobject  , jlong ptr, jstring text, jobject _gen_config,\n    jobject callback)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_GeneratedAudio_saveImpl",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jstring",
+      "jfloatArray",
+      "jint"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc",
+    "sourceLine": 673,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_GeneratedAudio_saveImpl(\n    JNIEnv *env, jobject  , jstring filename, jfloatArray samples,\n    jint sample_rate)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlinePunctuation_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-punctuation.cc",
+    "sourceLine": 49,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlinePunctuation_newFromAsset(JNIEnv *env,\n                                                          jobject  ,\n                                                          jobject asset_manager,\n                                                          jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlinePunctuation_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-punctuation.cc",
+    "sourceLine": 87,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlinePunctuation_newFromFile(JNIEnv *env,\n                                                         jobject  ,\n                                                         jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlinePunctuation_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-punctuation.cc",
+    "sourceLine": 118,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlinePunctuation_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlinePunctuation_addPunctuation",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-punctuation.cc",
+    "sourceLine": 124,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlinePunctuation_addPunctuation(JNIEnv *env,\n                                                            jobject  ,\n                                                            jlong ptr,\n                                                            jstring text)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 245,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineRecognizer_newFromAsset(JNIEnv *env,\n                                                         jobject  ,\n                                                         jobject asset_manager,\n                                                         jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 292,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_newFromFile(\n    JNIEnv *env, jobject  , jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_prependAdspLibraryPath",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 330,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineRecognizer_prependAdspLibraryPath(\n    JNIEnv *env, jclass  , jstring new_path)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 340,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_reset",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 346,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_reset(\n    JNIEnv *  , jobject  , jlong ptr, jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_isReady",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 354,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_isReady(\n    JNIEnv *  , jobject  , jlong ptr, jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_isEndpoint",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 363,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineRecognizer_isEndpoint(JNIEnv *  ,\n                                                       jobject  ,\n                                                       jlong ptr,\n                                                       jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_decode",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 375,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_decode(\n    JNIEnv *  , jobject  , jlong ptr, jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_decodeStreams",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlongArray"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 384,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineRecognizer_decodeStreams(\n    JNIEnv *env, jobject  , jlong ptr, jlongArray stream_ptrs)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_createStream",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 400,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineRecognizer_createStream(JNIEnv *env,\n                                                         jobject  ,\n                                                         jlong ptr,\n                                                         jstring hotwords)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_getResult",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc",
+    "sourceLine": 427,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL Java_com_k2fsa_sherpa_onnx_OnlineRecognizer_getResult(\n    JNIEnv *env, jobject  , jlong ptr, jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+    "sourceLine": 11,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+    "sourceLine": 41,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_newFromFile(JNIEnv *env,\n                                                            jobject  ,\n                                                            jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+    "sourceLine": 71,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_getSampleRate",
+    "returnType": "jint",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+    "sourceLine": 77,
+    "declarationWithoutComments": "JNIEXPORT jint JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_getSampleRate(JNIEnv *  ,\n                                                              jobject  ,\n                                                              jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_getFrameShiftInSamples",
+    "returnType": "jint",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+    "sourceLine": 86,
+    "declarationWithoutComments": "JNIEXPORT jint JNICALL\nJava_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_getFrameShiftInSamples(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_run",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jfloatArray",
+      "jint"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+    "sourceLine": 94,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_run(\n    JNIEnv *env, jobject  , jlong ptr, jfloatArray samples,\n    jint sample_rate)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_flush",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+    "sourceLine": 109,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_flush(\n    JNIEnv *env, jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_reset",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+    "sourceLine": 118,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlineSpeechDenoiser_reset(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-stream.cc",
+    "sourceLine": 10,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlineStream_delete(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_acceptWaveform",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jfloatArray",
+      "jint"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-stream.cc",
+    "sourceLine": 16,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlineStream_acceptWaveform(\n    JNIEnv *env, jobject  , jlong ptr, jfloatArray samples,\n    jint sample_rate)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_inputFinished",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-stream.cc",
+    "sourceLine": 28,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlineStream_inputFinished(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_setOption",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-stream.cc",
+    "sourceLine": 35,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_OnlineStream_setOption(\n    JNIEnv *env, jobject  , jlong ptr, jstring key, jstring value)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_getOption",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-stream.cc",
+    "sourceLine": 46,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL Java_com_k2fsa_sherpa_onnx_OnlineStream_getOption(\n    JNIEnv *env, jobject  , jlong ptr, jstring key)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_OnlineStream_hasOption",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-stream.cc",
+    "sourceLine": 56,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_OnlineStream_hasOption(\n    JNIEnv *env, jobject  , jlong ptr, jstring key)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+    "sourceLine": 35,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+    "sourceLine": 66,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_newFromFile(\n    JNIEnv *env, jobject  , jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+    "sourceLine": 91,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_delete(JNIEnv *  ,\n                                                            jobject  ,\n                                                            jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_createStream",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+    "sourceLine": 99,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_createStream(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_isReady",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+    "sourceLine": 115,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_isReady(JNIEnv *  ,\n                                                             jobject  ,\n                                                             jlong ptr,\n                                                             jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_compute",
+    "returnType": "jfloatArray",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+    "sourceLine": 127,
+    "declarationWithoutComments": "JNIEXPORT jfloatArray JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_compute(JNIEnv *env,\n                                                             jobject  ,\n                                                             jlong ptr,\n                                                             jlong stream_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_dim",
+    "returnType": "jint",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+    "sourceLine": 144,
+    "declarationWithoutComments": "JNIEXPORT jint JNICALL Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingExtractor_dim(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_create",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jint"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 13,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_create(JNIEnv *env,\n                                                          jobject  ,\n                                                          jint dim)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 22,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_delete(JNIEnv *  ,\n                                                          jobject  ,\n                                                          jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_add",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring",
+      "jfloatArray"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 31,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_add(JNIEnv *env,\n                                                       jobject  ,\n                                                       jlong ptr, jstring name,\n                                                       jfloatArray embedding)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_addList",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring",
+      "jobjectArray"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 61,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_addList(\n    JNIEnv *env, jobject  , jlong ptr, jstring name,\n    jobjectArray embedding_arr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_remove",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 107,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_remove(JNIEnv *env,\n                                                          jobject  ,\n                                                          jlong ptr,\n                                                          jstring name)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_search",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jfloatArray",
+      "jfloat"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 124,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_search(JNIEnv *env,\n                                                          jobject  ,\n                                                          jlong ptr,\n                                                          jfloatArray embedding,\n                                                          jfloat threshold)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_verify",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring",
+      "jfloatArray",
+      "jfloat"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 153,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_verify(\n    JNIEnv *env, jobject  , jlong ptr, jstring name,\n    jfloatArray embedding, jfloat threshold)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_contains",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 184,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_contains(JNIEnv *env,\n                                                            jobject  ,\n                                                            jlong ptr,\n                                                            jstring name)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_numSpeakers",
+    "returnType": "jint",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 201,
+    "declarationWithoutComments": "JNIEXPORT jint JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_numSpeakers(JNIEnv *  ,\n                                                               jobject  ,\n                                                               jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_allSpeakerNames",
+    "returnType": "jobjectArray",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+    "sourceLine": 210,
+    "declarationWithoutComments": "JNIEXPORT jobjectArray JNICALL\nJava_com_k2fsa_sherpa_onnx_SpeakerEmbeddingManager_allSpeakerNames(\n    JNIEnv *env, jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/spoken-language-identification.cc",
+    "sourceLine": 49,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/spoken-language-identification.cc",
+    "sourceLine": 83,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_newFromFile(\n    JNIEnv *env, jobject  , jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/spoken-language-identification.cc",
+    "sourceLine": 109,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL\nJava_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_delete(JNIEnv *  ,\n                                                               jobject  ,\n                                                               jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_createStream",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/spoken-language-identification.cc",
+    "sourceLine": 117,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL\nJava_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_createStream(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_compute",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/spoken-language-identification.cc",
+    "sourceLine": 133,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_SpokenLanguageIdentification_compute(JNIEnv *env,\n                                                                jobject  ,\n                                                                jlong ptr,\n                                                                jlong s_ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getVersionStr2",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+    "sourceLine": 11,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getVersionStr2(\n    JNIEnv *env, jclass  )"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getGitSha12",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+    "sourceLine": 18,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getGitSha12(\n    JNIEnv *env, jclass  )"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getGitDate2",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+    "sourceLine": 25,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getGitDate2(\n    JNIEnv *env, jclass  )"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getVersionStr2",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+    "sourceLine": 32,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL Java_com_k2fsa_sherpa_onnx_VersionInfo_getVersionStr2(\n    JNIEnv *env, jclass  )"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitSha12",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+    "sourceLine": 38,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitSha12(\n    JNIEnv *env, jclass  )"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitDate2",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+    "sourceLine": 44,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL Java_com_k2fsa_sherpa_onnx_VersionInfo_getGitDate2(\n    JNIEnv *env, jclass  )"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getOnnxruntimeVersionStr2",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+    "sourceLine": 50,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_VersionInfo_00024Companion_getOnnxruntimeVersionStr2(\n    JNIEnv *env, jclass  )"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_VersionInfo_getOnnxruntimeVersionStr2",
+    "returnType": "jstring",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc",
+    "sourceLine": 57,
+    "declarationWithoutComments": "JNIEXPORT jstring JNICALL\nJava_com_k2fsa_sherpa_onnx_VersionInfo_getOnnxruntimeVersionStr2(\n    JNIEnv *env, jclass  )"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_newFromAsset",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 83,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_Vad_newFromAsset(\n    JNIEnv *env, jobject  , jobject asset_manager, jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_newFromFile",
+    "returnType": "jlong",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jobject"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 113,
+    "declarationWithoutComments": "JNIEXPORT jlong JNICALL Java_com_k2fsa_sherpa_onnx_Vad_newFromFile(\n    JNIEnv *env, jobject  , jobject _config)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_delete",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 136,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_Vad_delete(JNIEnv *  ,\n                                                             jobject  ,\n                                                             jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_acceptWaveform",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jfloatArray"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 143,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_Vad_acceptWaveform(\n    JNIEnv *env, jobject  , jlong ptr, jfloatArray samples)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_empty",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 162,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_Vad_empty(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_pop",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 169,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_Vad_pop(JNIEnv *  ,\n                                                          jobject  ,\n                                                          jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_clear",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 177,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_Vad_clear(JNIEnv *  ,\n                                                            jobject  ,\n                                                            jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_front",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 185,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL Java_com_k2fsa_sherpa_onnx_Vad_front(JNIEnv *env,\n                                                               jobject  ,\n                                                               jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_isSpeechDetected",
+    "returnType": "jboolean",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 234,
+    "declarationWithoutComments": "JNIEXPORT jboolean JNICALL Java_com_k2fsa_sherpa_onnx_Vad_isSpeechDetected(\n    JNIEnv *  , jobject  , jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_reset",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 241,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_Vad_reset(JNIEnv *env,\n                                                            jobject  ,\n                                                            jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_flush",
+    "returnType": "void",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 256,
+    "declarationWithoutComments": "JNIEXPORT void JNICALL Java_com_k2fsa_sherpa_onnx_Vad_flush(JNIEnv *  ,\n                                                            jobject  ,\n                                                            jlong ptr)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_Vad_compute",
+    "returnType": "jfloat",
+    "parameterTypes": [
+      "JNIEnv",
+      "jobject",
+      "jlong",
+      "jfloatArray"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc",
+    "sourceLine": 264,
+    "declarationWithoutComments": "JNIEXPORT jfloat JNICALL Java_com_k2fsa_sherpa_onnx_Vad_compute(\n    JNIEnv *env, jobject  , jlong ptr, jfloatArray samples)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_WaveReader_00024Companion_readWaveFromFile",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-reader.cc",
+    "sourceLine": 71,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL\nJava_com_k2fsa_sherpa_onnx_WaveReader_00024Companion_readWaveFromFile(\n    JNIEnv *env, jclass  , jstring filename)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_WaveReader_readWaveFromFile",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-reader.cc",
+    "sourceLine": 85,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL\nJava_com_k2fsa_sherpa_onnx_WaveReader_readWaveFromFile(JNIEnv *env,\n                                                       jclass  ,\n                                                       jstring filename)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_WaveReader_00024Companion_readWaveFromAsset",
+    "returnType": "jobject",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass",
+      "jobject",
+      "jstring"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-reader.cc",
+    "sourceLine": 94,
+    "declarationWithoutComments": "JNIEXPORT jobject JNICALL\nJava_com_k2fsa_sherpa_onnx_WaveReader_00024Companion_readWaveFromAsset(\n    JNIEnv *env, jclass  , jobject asset_manager, jstring filename)"
+  },
+  {
+    "symbol": "Java_com_k2fsa_sherpa_onnx_WaveWriter_writeWaveToFile",
+    "returnType": "bool",
+    "parameterTypes": [
+      "JNIEnv",
+      "jclass",
+      "jstring",
+      "jfloatArray",
+      "jint"
+    ],
+    "receiverUnnamed": true,
+    "sourcePath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-writer.cc",
+    "sourceLine": 9,
+    "declarationWithoutComments": "JNIEXPORT bool JNICALL Java_com_k2fsa_sherpa_onnx_WaveWriter_writeWaveToFile(\n    JNIEnv *env, jclass  , jstring filename, jfloatArray samples,\n    jint sample_rate)"
+  }
+]

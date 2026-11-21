@@ -1,0 +1,132 @@
+)]}'
+{
+  "id": "a75affa5e910fcc4812990cbbfa6050dfba520d1",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "name": "__init__.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "5075134703965d669367bd6009c7c6939ac1e3d0",
+      "name": "android_version.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "44f0e798f12a4373106057867806eab81fe9b3a3",
+      "name": "base_builders.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "926089e8ac71becc483d532883acfea5321d9fa1",
+      "name": "build_info.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "e054426d0436e8a2ed1d876dafef08708eed193f",
+      "name": "builder_registry.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "32320a3681db0311e94f43488521a29b2ed4ef09",
+      "name": "builders.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "bf99dd2c7b097f8528f2dba4bd871c34b392be53",
+      "name": "configs.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "56f52cb48b5e927b4c239bd74a8972b85a554796",
+      "name": "constants.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "13fb1a9100ae75f3383301dfe86bad08ee373b4c",
+      "name": "hosts.py"
+    },
+    {
+      "mode": 33261,
+      "type": "blob",
+      "id": "38061acccebb28f6484f5ef75e82f04e18eb29f2",
+      "name": "mapfile.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4b50682827b9bce6a48133b3ceb94a2ae36c27eb",
+      "name": "mapfile_test.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "eb65b907d0e3358429bc1709d6911c4e8962e2ee",
+      "name": "patch_utils.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "167962f420fbd016876fd278f4c781e7b3858184",
+      "name": "paths.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "23a3e6d6adf0750768eef9be207c426b2e7117da",
+      "name": "source_manager.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "3f6b8a70301cc4d51348ba815ceed4005472019b",
+      "name": "target_definitions.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "ed220fe80e08891740cbfb18ac9ceaf13d9edca3",
+      "name": "timer.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "2700a0f7dd12535db77c2a136ccbda29bd329834",
+      "name": "toolchain_errors.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "5792de5d333fc4bcf0092d54f85c42744bb9045a",
+      "name": "toolchains.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "aa92d531be4e2f319a40061bc74b224ceec5511e",
+      "name": "utils.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "d2bd133f28b4f02c069486c8158397bac55fd167",
+      "name": "version.py"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "0064e8b58f3a227c0e19cc731f8e728b343cf674",
+      "name": "win_sdk.py"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "lane": "implementation",
+    "model": "hy3",
+    "resultSubtype": "success",
+    "observedToolEvents": 0,
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 57.934,
+      "endedAtUTC": "2026-11-15T14:34:21.952416+00:00",
+      "stdoutBytes": 75857,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "prompt": {
+      "bytes": 8007,
+      "sha256": "76a82500c02d35b32c5715707ba18968983eca64e401337907698bcaaee24f12"
+    },
+    "events": {
+      "bytes": 75857,
+      "sha256": "eb91d61a2eeebe041cda9c1d6c734d93a28c51829969339accbb73b6182f75cc"
+    },
+    "candidate": {
+      "bytes": 7484,
+      "sha256": "7f03a62f27947f3594557fceb3febc7b5d2343f6df48bf8fa91a04589cca3ca0"
+    }
+  },
+  {
+    "lane": "bounded-review",
+    "model": "hy3",
+    "resultSubtype": "success",
+    "observedToolEvents": 0,
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 41.905,
+      "endedAtUTC": "2026-11-15T14:41:53.509954+00:00",
+      "stdoutBytes": 53506,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "prompt": {
+      "bytes": 30781,
+      "sha256": "98c2e9da24dea0980c4e5c8824740699dcec46c31559b69e449c6e9bd88e3382"
+    },
+    "events": {
+      "bytes": 53506,
+      "sha256": "89b36ca554c5e540d569e8b180a4ecd578a14acb5e93779deddb4a842c336249"
+    },
+    "candidate": {
+      "bytes": 5694,
+      "sha256": "0acc6579afea76bc42fe064c5f9fadc98bbb5ec6ddb7c22351889cecaff258ed"
+    }
+  }
+]

@@ -1,0 +1,72 @@
+{
+  "status": "accepted-bounded-physical-file-ASR-observation",
+  "checkedAt": "2026-11-10T11:50:55.616888+08:00",
+  "checksPassed": 428,
+  "runId": "4EEA3B34-370C-4830-98B3-A892EE2F8C6B",
+  "PID": 942,
+  "rawReportSha256": "1d6f4185cee55521f0f87d4a4d9077a4a3a245af552774ccfebf63dfd02b5862",
+  "sourceIdentity": "sha256:4bcf5c6764ed9ffd9ebf21d6d2898fe2a72a47dd28bf48368519c776c434cc35",
+  "cycles": 20,
+  "measuredRequests": 40,
+  "excludedWarmups": 1,
+  "elapsed": {
+    "activeWorkMsTotal": 10036,
+    "actualCycleIdleMsTotal": 593928,
+    "globalWallWindowMs": 626211.589583334,
+    "idleMsTotal": 593928,
+    "requestedCycleIdleMsTotal": 569105,
+    "startUptime": 10160.828249916667,
+    "totalMonotonicMs": 626211.589583334
+  },
+  "recognitionDurationMs": {
+    "min": 115.36012500073412,
+    "median": 189.32085416599875,
+    "p95NearestRank": 434.79770833255316,
+    "max": 533.3107916667359,
+    "sum": 9549.14225000175
+  },
+  "measuredRSSSampleCount": 898,
+  "warmupRSSSampleCount": 37,
+  "sampledRSSMaxBytes": 113082368,
+  "perCycleCloseRSSImmediateRangeBytes": [
+    112623616,
+    113098752
+  ],
+  "finalProcessRSS": {
+    "after1sBytes": 112869376,
+    "immediateBytes": 112869376,
+    "offsetMs": 625145
+  },
+  "microphoneStarts": 0,
+  "newBatches": 1,
+  "truePeak": false,
+  "energy": false,
+  "gpu": false,
+  "budgetVerdict": "unverified",
+  "productionReady": false,
+  "limits": [
+    "RSS belongs to the probe App PID including its UI; system Speech-service memory is not measured",
+    "RSS sampled during recognition calls, not continuously throughout paced idle",
+    "backend/client freshness, drain/close and post-close hash checks are source-bound completion paths, not independent runtime tracing",
+    "approximate bounded-reservoir quantiles; not true peak",
+    "on-device API requirement is configured; network isolation not measured",
+    "no quality or resource budget approved"
+  ],
+  "restoration": {
+    "checkedAt": "2026-11-10T11:51:53.588267+08:00",
+    "aliasRemoved": "io.ondeviceai.probe.w8appleasrsustained20261109",
+    "all44OriginalAppRecordsAndPathsIdentical": true,
+    "ordinaryAppForeground": "io.ondeviceai.combined.demo",
+    "protectedSourceHashesUnchanged": true,
+    "ordinaryModelDirectoriesOperatedOn": false,
+    "ordinaryModelContentHashesRechecked": false,
+    "sessionDefaultsRestored": "(default)",
+    "actualRecognitionBatches": 1,
+    "newMicrophoneStarts": 0,
+    "resourceProvisioningRequests": 0
+  },
+  "rawReportPath": "artifacts/verification/w3-apple-asr-sustained-20261110/report-terminal.json",
+  "rawConfirmPath": "artifacts/verification/w3-apple-asr-sustained-20261110/report-terminal-confirm.json",
+  "actualDevice": "iPhone17,2 / iOS27.2.1",
+  "sourceIdentityManifest": "source-identity-manifest.json"
+}

@@ -1,0 +1,32 @@
+{
+  "JNITranslationUnitsSelectedByCMake": 23,
+  "translationUnitsContaining134ExportDefinitions": 20,
+  "translationUnitNamesWithExports": [
+    "audio-tagging.cc",
+    "keyword-spotter.cc",
+    "offline-diacritization.cc",
+    "offline-punctuation.cc",
+    "offline-recognizer.cc",
+    "offline-speaker-diarization.cc",
+    "offline-speech-denoiser.cc",
+    "offline-stream.cc",
+    "offline-tts.cc",
+    "online-punctuation.cc",
+    "online-recognizer.cc",
+    "online-speech-denoiser.cc",
+    "online-stream.cc",
+    "speaker-embedding-extractor.cc",
+    "speaker-embedding-manager.cc",
+    "spoken-language-identification.cc",
+    "version.cc",
+    "voice-activity-detector.cc",
+    "wave-reader.cc",
+    "wave-writer.cc"
+  ],
+  "helperOnlyUnitsWithNoJavaExportDefinition": [
+    "common.cc",
+    "jni.cc",
+    "speech-denoiser.cc"
+  ],
+  "scope": "exact function-definition inventory in25fixed source files; not code-retention proof"
+}

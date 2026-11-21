@@ -1,0 +1,30 @@
+)]}'
+{
+  "commit": "8b218522e3157f660b0558d0c90a667e48083dd3",
+  "tree": "79b64ac53364e65a5f94365b659692bc043376da",
+  "parents": [
+    "e0ae597a82f2c3c5f8bdd9aa37049f6325622f17"
+  ],
+  "author": {
+    "name": "The Android Open Source Project",
+    "email": "initial-contribution@android.com",
+    "time": "Tue Jul 15 16:23:22 2025 -0700"
+  },
+  "committer": {
+    "name": "The Android Open Source Project",
+    "email": "initial-contribution@android.com",
+    "time": "Tue Jul 15 16:23:22 2025 -0700"
+  },
+  "message": "Manifest for Android NDK r27d (13750724)\n\nChange-Id: I1e312177bd90efae47caeb381ec3f2ab0f31807c\n",
+  "tree_diff": [
+    {
+      "type": "modify",
+      "old_id": "e5390ddc403d7e33b7ef5aeb6b373f225ae7dc31",
+      "old_mode": 33188,
+      "old_path": "default.xml",
+      "new_id": "8d8e17bf078032b282f0a09a58ea70b37ecd1b0b",
+      "new_mode": 33188,
+      "new_path": "default.xml"
+    }
+  ]
+}

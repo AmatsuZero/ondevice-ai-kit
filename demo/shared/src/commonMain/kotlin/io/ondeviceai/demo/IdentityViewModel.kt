@@ -1,0 +1,440 @@
+package io.ondeviceai.demo
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import io.ondeviceai.binding.*
+
+/** Supplied by the host; optional capability policies never gain synthetic defaults. */
+data class IdentityDemoConfiguration(
+    val grant: IdentityAuthorizationGrant,
+    val candidate: IdentityCandidateReference? = null,
+    val template: IdentityTemplateReference? = null,
+    val gallery: IdentityGalleryReference? = null,
+    val enrollmentOptions: IdentityEnrollmentOptions? = null,
+    val verificationOptions: IdentityVerificationOptions? = null,
+    val identificationOptions: IdentityIdentificationOptions? = null,
+    val livenessOptions: IdentityLivenessOptions? = null,
+    val ownership: IdentityOwnershipAuthorization? = null,
+    val galleryOptions: IdentityGalleryOptions? = null
+)
+
+/** Session-local labels only; business identities and biometric bytes are never UI state. */
+data class IdentityDemoCandidate(val reference: IdentityCandidateReference, val number: Int,
+    val templates: List<IdentityTemplateReference> = emptyList())
+
+data class IdentityViewState(
+    val busy: Boolean = false,
+    val enrollment: IdentityEnrollmentResult? = null,
+    val verification: IdentityVerificationResult? = null,
+    val identification: IdentityIdentificationResult? = null,
+    val liveness: IdentityLivenessEvent? = null,
+    val error: IdentityBridgeFailure? = null,
+    val deletion: IdentityDeletionStatus? = null
+)
+
+/** Demo state keeps identity operations separate from detection and never exposes subject IDs. */
+class IdentityViewModel(private val bridge: IdentityBridge) {
+    var state by mutableStateOf(IdentityViewState()); private set
+    private var generation = 0L
+    private var active: IdentityBridgeTask? = null
+    private var managementTasks by mutableStateOf(0)
+    private var leavingManagement = false
+    val navigationIdle: Boolean get() = managementTasks == 0 && !state.busy
+
+    /** Keep deletion receipts/recovery callbacks alive until the admitted task ends. */
+    fun leavePage() {
+        if (managementTasks > 0) leavingManagement = true else cancel()
+    }
+    private var session: IdentityLivenessSession? = null
+    private var closed = false
+    private var configuration: IdentityDemoConfiguration? = null
+    private var selectedProbe: IdentityProbeReference? = null
+    private var nextCandidateNumber = 1
+    private var lastDeletion: IdentityDeletionReceipt? = null
+    private var afterDeletion: (() -> Unit)? = null
+    var candidateDeletionPending by mutableStateOf(false); private set
+    var deletionRecoveryRequired by mutableStateOf(false); private set
+    var candidates by mutableStateOf<List<IdentityDemoCandidate>>(emptyList()); private set
+    var selectedCandidate by mutableStateOf<IdentityCandidateReference?>(null); private set
+    var publishedGallery by mutableStateOf<IdentityGalleryReference?>(null); private set
+    var galleryTemplateCount by mutableStateOf(0); private set
+    var managementEnabled by mutableStateOf(false); private set
+    var enrolledTemplate by mutableStateOf<IdentityTemplateReference?>(null)
+        private set
+    var configured by mutableStateOf(false)
+        private set
+    var inputReady by mutableStateOf(false)
+        private set
+    var livenessChallenge by mutableStateOf<IdentityLivenessChallenge?>(null)
+        private set
+    private var livenessTerminalDelivered = false
+    private class EventPump(val generation: Long, val session: IdentityLivenessSession) {
+        var running = false
+        var again = false
+    }
+
+    fun availability(): IdentityBridgeAvailability = bridge.availability()
+
+    fun verify(probe: IdentityProbeReference, template: IdentityTemplateReference,
+        grant: IdentityAuthorizationGrant, options: IdentityVerificationOptions,
+        backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        if (closed) return
+        val current = beginOperation()
+        state = IdentityViewState(busy = true)
+        var terminalDelivered = false
+        val task = bridge.verify(probe, template, grant, options, backend, object : IdentityCallback<IdentityVerificationResult> {
+            override fun onSuccess(value: IdentityVerificationResult) {
+                if (current != generation || terminalDelivered) return
+                terminalDelivered = true; active = null; state = IdentityViewState(verification = value)
+            }
+            override fun onFailure(error: IdentityBridgeFailure) {
+                if (current != generation || terminalDelivered) return
+                terminalDelivered = true; active = null; state = IdentityViewState(error = error)
+            }
+        })
+        if (current == generation && state.busy && !terminalDelivered) active = task
+    }
+
+    fun enroll(probe: IdentityProbeReference, candidate: IdentityCandidateReference,
+        grant: IdentityAuthorizationGrant, options: IdentityEnrollmentOptions,
+        backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        if (closed) return
+        val current = beginOperation()
+        state = IdentityViewState(busy = true)
+        var terminalDelivered = false
+        val task = bridge.enroll(probe, candidate, grant, options, backend, object : IdentityCallback<IdentityEnrollmentResult> {
+            override fun onSuccess(value: IdentityEnrollmentResult) {
+                if (current != generation || terminalDelivered) return
+                terminalDelivered = true; active = null
+                value.template?.let { template ->
+                    enrolledTemplate = template
+                    candidates = candidates.map { row ->
+                        if (row.reference == candidate && template !in row.templates) row.copy(templates = row.templates + template) else row
+                    }
+                    if (configuration?.candidate == candidate) configuration = configuration?.copy(template = template)
+                }
+                state = IdentityViewState(enrollment = value)
+            }
+            override fun onFailure(error: IdentityBridgeFailure) {
+                if (current != generation || terminalDelivered) return
+                terminalDelivered = true; active = null; state = IdentityViewState(error = error)
+            }
+        })
+        if (current == generation && state.busy && !terminalDelivered) active = task
+    }
+
+    fun identify(probe: IdentityProbeReference, gallery: IdentityGalleryReference,
+        grant: IdentityAuthorizationGrant, options: IdentityIdentificationOptions,
+        backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        if (closed) return
+        val current = beginOperation()
+        state = IdentityViewState(busy = true)
+        var terminalDelivered = false
+        val task = bridge.identify(probe, gallery, grant, options, backend, object : IdentityCallback<IdentityIdentificationResult> {
+            override fun onSuccess(value: IdentityIdentificationResult) {
+                if (current != generation || terminalDelivered) return
+                terminalDelivered = true; active = null; state = IdentityViewState(identification = value)
+            }
+            override fun onFailure(error: IdentityBridgeFailure) {
+                if (current != generation || terminalDelivered) return
+                terminalDelivered = true; active = null; state = IdentityViewState(error = error)
+            }
+        })
+        if (current == generation && state.busy && !terminalDelivered) active = task
+    }
+
+    fun openLiveness(grant: IdentityAuthorizationGrant, options: IdentityLivenessOptions,
+        backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        if (closed) return
+        val current = beginOperation(); livenessTerminalDelivered = false
+        state = IdentityViewState(busy = true)
+        var terminalDelivered = false
+        val task = bridge.openLivenessSession(grant, options, backend, object : IdentityCallback<IdentityLivenessSession> {
+            override fun onSuccess(value: IdentityLivenessSession) {
+                if (current != generation || terminalDelivered) { if (value !== session) value.close(); return }
+                terminalDelivered = true; session = value
+                val openedSession = value
+                var startDelivered = false
+                val startTask = value.start(object : IdentityCallback<Unit> {
+                    override fun onSuccess(value: Unit) {
+                        if (current != generation || startDelivered) return
+                        startDelivered = true
+                        state = state.copy(busy = true, liveness = IdentityLivenessEvent.Started)
+                        requestEvent(EventPump(current, openedSession))
+                    }
+                    override fun onFailure(error: IdentityBridgeFailure) {
+                        if (current != generation || startDelivered) return
+                        startDelivered = true
+                        acceptLivenessTerminal(current, IdentityLivenessEvent.Failed((error as? IdentityBridgeFailure.Rejected)?.code ?: IdentityErrorCode.BACKEND_UNAVAILABLE))
+                    }
+                })
+                if (current == generation && !startDelivered) active = startTask
+            }
+            override fun onFailure(error: IdentityBridgeFailure) {
+                if (current != generation || terminalDelivered) return
+                terminalDelivered = true; active = null; state = IdentityViewState(error = error)
+            }
+        })
+        if (current == generation && state.busy && !terminalDelivered) active = task
+    }
+
+    fun configure(value: IdentityDemoConfiguration?) {
+        if (closed) return
+        beginOperation()
+        configuration = value
+        configured = value != null
+        selectedProbe = null
+        inputReady = false
+        enrolledTemplate = null
+        nextCandidateNumber = 1
+        candidates = value?.candidate?.let { ref ->
+            listOf(IdentityDemoCandidate(ref, nextCandidateNumber++, listOfNotNull(value.template)))
+        } ?: emptyList()
+        selectedCandidate = value?.candidate
+        publishedGallery = value?.gallery
+        galleryTemplateCount = 0
+        managementEnabled = value?.ownership != null && value.galleryOptions != null
+        lastDeletion = null
+        afterDeletion = null; candidateDeletionPending = false
+        deletionRecoveryRequired = false
+        livenessChallenge = null
+        state = IdentityViewState()
+    }
+
+    fun createCandidateConfigured() {
+        val value = requireConfiguration() ?: return
+        if (value.ownership == null) { reject(IdentityErrorCode.AUTHORIZATION_REQUIRED); return }
+        manage({ callback -> bridge.createCandidate(value.grant, callback) }) { ref ->
+            candidates = candidates + IdentityDemoCandidate(ref, nextCandidateNumber++)
+            selectCandidateState(ref)
+        }
+    }
+
+    fun selectCandidateConfigured(ref: IdentityCandidateReference) {
+        if (requireConfiguration() == null) return
+        if (candidates.none { it.reference == ref }) { reject(IdentityErrorCode.CANDIDATE_NOT_FOUND); return }
+        beginOperation()
+        selectCandidateState(ref)
+        state = IdentityViewState()
+    }
+
+    private fun selectCandidateState(ref: IdentityCandidateReference?) {
+        selectedCandidate = ref
+        enrolledTemplate = candidates.firstOrNull { it.reference == ref }?.templates?.lastOrNull()
+        configuration = configuration?.copy(candidate = ref, template = enrolledTemplate)
+        selectedProbe = null
+        inputReady = false
+    }
+
+    fun deleteCandidateConfigured() {
+        val value = requireConfiguration() ?: return
+        val owner = value.ownership ?: run { reject(IdentityErrorCode.AUTHORIZATION_REQUIRED); return }
+        val candidate = selectedCandidate ?: run { reject(IdentityErrorCode.CANDIDATE_NOT_FOUND); return }
+        if (candidateDeletionPending || deletionRecoveryRequired) { reject(IdentityErrorCode.BUSY); return }
+        val removeCandidate = {
+            manage({ callback -> bridge.deleteCandidate(candidate, owner, callback) }) { receipt ->
+                candidates = candidates.filterNot { it.reference == candidate }
+                if (selectedCandidate == candidate) selectCandidateState(candidates.firstOrNull()?.reference)
+                observeDeletion(receipt)
+            }
+        }
+        val gallery = publishedGallery
+        if (gallery == null) removeCandidate() else removeGallery(gallery, owner, removeCandidate)
+    }
+
+    fun publishGalleryConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val options = value.galleryOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        if (candidateDeletionPending || deletionRecoveryRequired) { reject(IdentityErrorCode.BUSY); return }
+        if (publishedGallery != null) { reject(IdentityErrorCode.GALLERY_REVISION_CONFLICT); return }
+        val members = candidates.flatMap { it.templates }.distinct()
+        if (members.isEmpty()) { reject(IdentityErrorCode.TEMPLATE_NOT_FOUND); return }
+        manage({ callback -> publishIdentityGallery(bridge, value.grant, options, backend, members, callback) }) { ref ->
+            publishedGallery = ref
+            galleryTemplateCount = members.size
+            configuration = configuration?.copy(gallery = ref)
+        }
+    }
+
+    fun deleteGalleryConfigured() {
+        val value = requireConfiguration() ?: return
+        val owner = value.ownership ?: run { reject(IdentityErrorCode.AUTHORIZATION_REQUIRED); return }
+        val gallery = publishedGallery ?: run { reject(IdentityErrorCode.GALLERY_NOT_FOUND); return }
+        removeGallery(gallery, owner)
+    }
+
+    private fun removeGallery(gallery: IdentityGalleryReference, owner: IdentityOwnershipAuthorization,
+        afterPurge: (() -> Unit)? = null) {
+        manage({ callback -> bridge.deleteGallery(gallery, owner, callback) }) { receipt ->
+            publishedGallery = null; galleryTemplateCount = 0
+            configuration = configuration?.copy(gallery = null)
+            observeDeletion(receipt, afterPurge)
+        }
+    }
+
+    private fun observeDeletion(receipt: IdentityDeletionReceipt, afterPurge: (() -> Unit)? = null) {
+        lastDeletion = receipt
+        afterDeletion = afterPurge
+        candidateDeletionPending = afterPurge != null
+        manage({ callback -> bridge.awaitDeletion(receipt, IdentityDeletionWaitOptions(30_000_000_000), callback) }) { status ->
+            state = state.copy(deletion = status)
+            deletionRecoveryRequired = status == IdentityDeletionStatus.PURGE_FAILED
+            if (status == IdentityDeletionStatus.PURGED) {
+                val continuation = afterDeletion
+                afterDeletion = null; candidateDeletionPending = false
+                continuation?.invoke()
+            }
+        }
+    }
+
+    fun refreshDeletion() {
+        if (closed || deletionRecoveryRequired) return
+        val receipt = lastDeletion ?: return
+        observeDeletion(receipt, afterDeletion)
+    }
+
+    private fun <T> manage(start: (IdentityCallback<T>) -> IdentityBridgeTask, success: (T) -> Unit) {
+        if (closed) return
+        val current = beginOperation()
+        state = IdentityViewState(busy = true)
+        managementTasks++
+        var delivered = false
+        fun terminal(apply: () -> Unit) {
+            if (delivered) return
+            delivered = true
+            try { if (current == generation) apply() }
+            finally {
+                if (current == generation) {
+                    managementTasks--
+                    if (managementTasks == 0 && leavingManagement) { leavingManagement = false; cancel() }
+                }
+            }
+        }
+        val task = start(object : IdentityCallback<T> {
+            override fun onSuccess(value: T) {
+                terminal { active = null; state = IdentityViewState(); success(value) }
+            }
+            override fun onFailure(error: IdentityBridgeFailure) {
+                terminal { active = null; state = IdentityViewState(error = error) }
+            }
+        })
+        if (current == generation && state.busy && !delivered) active = task
+    }
+
+    fun selectProbe(value: IdentityProbeReference?) {
+        if (closed) return
+        beginOperation()
+        selectedProbe = value
+        inputReady = value != null
+        state = IdentityViewState()
+    }
+
+    fun enrollConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val probe = requireProbe() ?: return
+        val candidate = value.candidate ?: run { reject(IdentityErrorCode.CANDIDATE_NOT_FOUND); return }
+        val options = value.enrollmentOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        enroll(probe, candidate, value.grant, options, backend)
+    }
+
+    fun verifyConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val probe = requireProbe() ?: return
+        val template = value.template ?: enrolledTemplate
+        if (template == null) { reject(IdentityErrorCode.TEMPLATE_NOT_FOUND); return }
+        val options = value.verificationOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        verify(probe, template, value.grant, options, backend)
+    }
+
+    fun identifyConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val probe = requireProbe() ?: return
+        val gallery = value.gallery
+        if (gallery == null) { reject(IdentityErrorCode.GALLERY_NOT_FOUND); return }
+        val options = value.identificationOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        identify(probe, gallery, value.grant, options, backend)
+    }
+
+    fun openLivenessConfigured(backend: IdentityBackendSelection = IdentityBackendSelection.Default) {
+        val value = requireConfiguration() ?: return
+        val options = value.livenessOptions ?: run { reject(IdentityErrorCode.UNSUPPORTED_OPTION); return }
+        openLiveness(value.grant, options, backend)
+    }
+
+    val livenessSessionId: String? get() = session?.sessionId
+    fun submitLivenessFrame(frame: IdentityLivenessFrame): Boolean = session?.submitFrame(frame) ?: false
+    fun submitLivenessFrame(frame: IdentityLivenessFrame, sessionId: String): Boolean {
+        val current = session ?: return false
+        return if (current.sessionId == sessionId) current.submitFrame(frame) else false
+    }
+    fun finishLiveness() { session?.finish() }
+    fun cancel() {
+        generation++; active?.cancel(); active = null; managementTasks = 0; leavingManagement = false
+        val previous = session; session = null; previous?.cancel(); previous?.close()
+        livenessChallenge = null
+        state = state.copy(busy = false, error = if (closed) state.error else IdentityBridgeFailure.Cancelled)
+    }
+    fun close() { if (!closed) { closed = true; cancel(); bridge.close() } }
+
+    private fun beginOperation(): Long {
+        generation++
+        active?.cancel(); active = null
+        managementTasks = 0; leavingManagement = false
+        session?.close(); session = null; livenessChallenge = null
+        return generation
+    }
+    private fun requireConfiguration(): IdentityDemoConfiguration? {
+        if (closed) return null
+        val value = configuration
+        if (value == null) { beginOperation(); state = IdentityViewState(error = IdentityBridgeFailure.Unavailable(IdentityAvailabilityReason.AUTHORIZATION_REQUIRED)); return null }
+        return value
+    }
+    private fun requireProbe(): IdentityProbeReference? {
+        val value = selectedProbe
+        if (value == null) { reject(IdentityErrorCode.INVALID_INPUT); return null }
+        return value
+    }
+    private fun reject(code: IdentityErrorCode) { beginOperation(); state = IdentityViewState(error = IdentityBridgeFailure.Rejected(code)) }
+    private fun acceptLivenessTerminal(current: Long, event: IdentityLivenessEvent) {
+        if (current != generation || livenessTerminalDelivered) return
+        if (event is IdentityLivenessEvent.Completed || event is IdentityLivenessEvent.Failed || event === IdentityLivenessEvent.Cancelled || event === IdentityLivenessEvent.Closed) {
+            livenessTerminalDelivered = true; active = null
+            val previous = session; session = null
+            livenessChallenge = null
+            state = state.copy(busy = false, liveness = event)
+            previous?.close()
+        } else {
+            if (event is IdentityLivenessEvent.ChallengeIssued) livenessChallenge = event.challenge
+            state = state.copy(liveness = event)
+        }
+    }
+
+    // A native bridge may deliver immediately. Trampoline queued events instead of recursing.
+    private fun requestEvent(pump: EventPump) {
+        if (pump.running) { pump.again = true; return }
+        pump.running = true
+        try {
+            do {
+                pump.again = false
+                if (pump.generation != generation || livenessTerminalDelivered || session !== pump.session) return
+                var delivered = false
+                val task = pump.session.nextEvent(object : IdentityCallback<IdentityLivenessEvent?> {
+                    override fun onSuccess(value: IdentityLivenessEvent?) {
+                        if (delivered || pump.generation != generation || livenessTerminalDelivered) return
+                        delivered = true; active = null
+                        acceptLivenessTerminal(pump.generation, value ?: IdentityLivenessEvent.Closed)
+                        if (!livenessTerminalDelivered) requestEvent(pump)
+                    }
+                    override fun onFailure(error: IdentityBridgeFailure) {
+                        if (delivered || pump.generation != generation || livenessTerminalDelivered) return
+                        delivered = true; active = null
+                        acceptLivenessTerminal(pump.generation, IdentityLivenessEvent.Failed((error as? IdentityBridgeFailure.Rejected)?.code ?: IdentityErrorCode.BACKEND_UNAVAILABLE))
+                        state = state.copy(error = error)
+                    }
+                })
+                if (!delivered && pump.generation == generation && !livenessTerminalDelivered) active = task
+            } while (pump.again)
+        } finally { pump.running = false }
+    }
+}

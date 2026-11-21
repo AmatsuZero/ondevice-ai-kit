@@ -1,0 +1,71 @@
+{
+  "status": "intermediate-recorder-host-passed",
+  "w3Status": "open",
+  "sourceIntegrated": false,
+  "newRunFrozen": false,
+  "deviceOperations": 0,
+  "realNativeCalls": 0,
+  "hostGroups": 13,
+  "hostAssertions": 100,
+  "host": {
+    "realNativeCalls": 0,
+    "deviceOperations": 0,
+    "compileExitCode": 0,
+    "sourceSHA256": {
+      "/private/tmp/odai-hy3-w3-heap-recorder-null-fix-20261111/candidate/HeapBoundaryRecorder.kt": "267e8049709b4d948ba83b3fce39d016b32d564733705706ef4beb1898b4996e",
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/android-qwen-file/QwenTwoStageCore.kt": "2d14b1a3ed7c1f1c8a7ba9bb38379d7a25459e326cf2458e38140d365b57eaba",
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/android-qwen-heap/RecorderChecks.kt": "099d4e9463227e974b7d4929f79f937ad5e444415c32e9f82d5e491fa5120845"
+    },
+    "runtimeExitCode": 0,
+    "output": "PASS normal boundaries preserve stage counters at capture time and detached snapshots\nPASS zero heap and absent case are valid\nPASS callback failure 0 retains real exception and readable prefix\nPASS callback failure 1 retains real exception and readable prefix\nPASS callback failure 2 retains real exception and readable prefix\nPASS callback failure 3 retains real exception and readable prefix\nPASS negative measurement 0 never becomes false zero\nPASS negative measurement 1 never becomes false zero\nPASS negative measurement 2 never becomes false zero\nPASS negative measurement 3 never becomes false zero\nPASS backward monotonic clock fails closed\nPASS cleanup captures later failure without replacing first error and can later record success\nPASS 128 event boundary fails rather than truncating healthy and cleanup remains bounded\nASSERTIONS=100 FAILURES=0\n"
+  },
+  "oldFrozenFilesVerified": 108,
+  "limitsUnchanged": true,
+  "fullWrapperTerminal": {
+    "directory": "/private/tmp/odai-hy3-w3-qwen-heap-wrapper-20261111-resume1",
+    "cliExitCode": 0,
+    "actualResult": "empty_model_response",
+    "seconds": 939.5475208749995,
+    "reads": 15,
+    "writes": 0,
+    "candidateFiles": 0
+  },
+  "recorderCalls": [
+    {
+      "path": "/private/tmp/odai-hy3-w3-heap-recorder-20261111",
+      "launcher": {
+        "exitCode": 0,
+        "seconds": 198.5360610409989,
+        "files": {
+          "HeapBoundaryRecorder.kt": {
+            "bytes": 3982,
+            "sha256": "d59347c63c706ea5540ee1d010b5fc00f6ad9701eed0b266e627eb64bc72ae68"
+          }
+        }
+      },
+      "toolErrors": 0
+    },
+    {
+      "path": "/private/tmp/odai-hy3-w3-heap-recorder-null-fix-20261111",
+      "launcher": {
+        "exitCode": 0,
+        "seconds": 67.66729020900675,
+        "files": {
+          "HeapBoundaryRecorder.kt": {
+            "bytes": 4349,
+            "sha256": "267e8049709b4d948ba83b3fce39d016b32d564733705706ef4beb1898b4996e"
+          }
+        }
+      },
+      "toolErrors": 0
+    }
+  ],
+  "pending": [
+    "wrapper wiring and host acceptance",
+    "actual Android build/package",
+    "independent source/parent reviews",
+    "new frozen single-file device diagnostic",
+    "full W3 quality and cost acceptance",
+    "runtime recursive composition and publication review"
+  ]
+}

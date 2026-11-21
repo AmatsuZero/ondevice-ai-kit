@@ -1,0 +1,99 @@
+{
+  "suppliedTextReviewVerdict": "changes_required",
+  "helperExactReplacements": [
+    {
+      "severity": "blocker",
+      "key": "reportMarkdown",
+      "old": "本候选仅据提供上下文整理，待父端审阅集成；不改变 W3 目标。",
+      "new": "最终状态：hy3 supplied-context draft 经 independent supplied-text review 核对，并与 parent actual-material checks 对齐；尚未提交或发布，不改变 W3 目标。",
+      "reason": "Mandatory final-state wording; removes pending-integration/future-stage phrasing and does not claim commit or publication."
+    },
+    {
+      "severity": "blocker",
+      "key": "reportMarkdown",
+      "old": "材料目录 probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/ 将存 25 个源码文本、Root Sherpa LICENSE Apache 2.0 现有文本、收据、映射与 raw targeted exports；LICENSE 随源码原样复制，无新增生产资产。原始提示、完整官方 HTML、探索性快照仍在 .omx/artifacts/w3-jni-surface-20261116T0800/。",
+      "new": "材料目录 probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/ 现有 25 个源码文本、Root Sherpa LICENSE Apache 2.0 现有文本、收据、映射与 raw targeted exports；LICENSE 随源码原样复制，无新增生产资产。原始提示、完整官方 HTML、探索性快照仍在 .omx/artifacts/w3-jni-surface-20261116T0800/；完整 HTML normativereference 仅 localignoredNOTcommitted（本地忽略且未提交）。",
+      "reason": "Removes the prohibited future-stage wording and states the supplied local-ignored, not-committed normative HTML boundary."
+    },
+    {
+      "severity": "major",
+      "key": "reportMarkdown",
+      "old": "prior 3cf41c6 DEX proof 的 4 个 APK 哈希与 496 个 raw class 哈希已重查；每 APK 有 120 个 native 声明、4 个 JNI lib 成员，与固定 AAR 形成 16 个打包 JNI 字节比较。",
+      "new": "prior 3cf41c6 DEX proof 的 4 个 APK 哈希与 496 个 class disassembly 哈希已按父端 fresh verification 重查；每 APK 有 120 个 native 声明、4 个 JNI lib 成员，与固定 AAR 形成 16 个 JNI 条目的打包字节比较。",
+      "reason": "Mandatory fresh material-check wording: 4 APK hashes, 496 class disassembly hashes, and 16 packaged JNI byte comparisons."
+    },
+    {
+      "severity": "blocker",
+      "key": "reportMarkdown",
+      "old": "AOSP 429/非 native 配额未变，未重试。",
+      "new": "原 AOSP 来源站429与旧 native/hy4free 配额失败停线未重试。",
+      "reason": "Mandatory exact correction of the quota-failure history."
+    },
+    {
+      "severity": "blocker",
+      "key": "reportMarkdown",
+      "old": "固定源码文件 25 个：23 个 .cc、CMakeLists.txt、symbol.lds；23 个新增 GitHub 文本下载、2 个复用现有来源。",
+      "new": "固定源码文件 25 个：23 个 .cc、CMakeLists.txt、sherpa-onnx-symbols.lds；23 个新增 GitHub 文本下载、2 个复用现有来源。",
+      "reason": "Uses the actual supplied 25-source filename list instead of the literal incorrect symbol.lds name."
+    },
+    {
+      "severity": "major",
+      "key": "reportMarkdown",
+      "old": "Oracle Java 21 JNI design HTML 下载 200，仅作规范参考；Context7 工具不可用，未声称 Context7 或 web tool 返回可用正文。",
+      "new": "公开源码文本下载 23 份，另 Oracle Java 21 JNI design HTML 下载 1 份（status 200），2 份来源复用，不是零下载；官方规范仅作 normative reference，不是 runtime proof。Context7 工具不可用，未声称 Context7 或 web tool 返回可用正文。",
+      "reason": "Supplied counts require 23 public source text downloads plus 1 Oracle document download and 2 reused files; the official spec is normative only and Context7 was unavailable."
+    },
+    {
+      "severity": "major",
+      "key": "roadmapPrefix",
+      "old": "## 2026-11-16 W3 JNI 表面对应\n\n新增跨层 JNI 导出名与显式类型类别对应子项；仅名称/类型类别证据，详见 [验证](../validation/w3-jni-surface-correspondence-20261116.md)。",
+      "new": "## 2026-11-16 W3 JNI 表面对应\n\n新增跨层 JNI 导出名与显式类型类别对应子项：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；P1/P2/P3/P4/R4/R5/W3 仍未关闭。仅名称/类型类别证据，详见 [验证](../validation/w3-jni-surface-correspondence-20261116.md)。",
+      "reason": "Terse prefix was missing the load-bearing 120-by-4 name coverage, six receiver nominal differences, and open status."
+    },
+    {
+      "severity": "minor",
+      "key": "globalRoadmapPrefix",
+      "old": "## 2026-11-16 有界证据更新\n\nW3 新增 JNI surface/type-category 对应子项，父端已接受；目标未缩减，P1/P2/P3/P4/R4/R5/W3 仍未关闭。详见 [验证](validation/w3-jni-surface-correspondence-20261116.md)。",
+      "new": "## 2026-11-16 有界证据更新\n\nW3 新增 JNI surface/type-category 对应子项，父端 actual-material checks 已接受：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；目标未缩减，P1/P2/P3/P4/R4/R5/W3 仍未关闭。详见 [验证](validation/w3-jni-surface-correspondence-20261116.md)。",
+      "reason": "Global prefix omitted the same load-bearing result counts and receiver-difference boundary."
+    },
+    {
+      "severity": "major",
+      "key": "handoffPrefix",
+      "old": "## 2026-11-16 交接\n\n新增子项证据与负例边界见 [验证](validation/w3-jni-surface-correspondence-20261116.md)。交接时保留 6 处 Companion 接收者名义差异；提交、Issue、Wiki 另行记录。",
+      "new": "## 2026-11-16 交接\n\n新增子项：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；P1/P2/P3/P4/R4/R5/W3 仍未关闭。证据与负例边界见 [验证](validation/w3-jni-surface-correspondence-20261116.md)；提交、Issue、Wiki 另行记录。",
+      "reason": "Handoff prefix was missing the 120-by-4 name coverage and open status required for load-bearing continuity."
+    }
+  ],
+  "parentEditorialCorrections": [
+    {
+      "key": "reportMarkdown",
+      "old": "最终状态：hy3 supplied-context draft 经 independent supplied-text review 核对，并与 parent actual-material checks 对齐；尚未提交或发布，不改变 W3 目标。",
+      "new": "文稿由 hy3 依据供应上下文起草并做独立文本复核，主代理另对实际材料验收；提交与双端同步另留收据，W3 目标不变。"
+    },
+    {
+      "key": "reportMarkdown",
+      "old": "；完整 HTML normativereference 仅 localignoredNOTcommitted（本地忽略且未提交）。",
+      "new": "；完整 HTML 只留在本地忽略目录，不纳入 Git。"
+    },
+    {
+      "key": "reportMarkdown",
+      "old": "分布于 23 个 C++ 翻译单元。",
+      "new": "位于 CMake 所列 23 个 C++ 翻译单元中的 20 个；common.cc、jni.cc、speech-denoiser.cc 没有这些 Java_ 导出定义。"
+    },
+    {
+      "key": "reportMarkdown",
+      "old": "官方规范仅作 normative reference，不是 runtime proof。",
+      "new": "官方规范仅作规则参照，不是实际 JNI 执行证明。"
+    },
+    {
+      "key": "globalRoadmapPrefix",
+      "old": "父端 actual-material checks 已接受",
+      "new": "主代理实际材料检查已接受"
+    }
+  ],
+  "parentAdditionalVerifiedCorrection": "134 fixed export definitions occur in20of23translationunits, not all23; source-unit-distribution.json records exact files",
+  "allReplacementsAppliedExactly": true,
+  "acceptedDocumentationWithinStatedScope": true,
+  "notFullP4ReleaseReview": true
+}

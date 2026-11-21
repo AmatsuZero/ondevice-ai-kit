@@ -1,0 +1,32 @@
+name: W8TTSPower
+options:
+  bundleIdPrefix: io.ondeviceai.probe
+  deploymentTarget:
+    iOS: "15.0"
+  generateEmptyDirectories: true
+packages:
+  ODAIKitLocal:
+    path: ../../apple
+targets:
+  W8TTSPower:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources:
+      - path: W8TTSSustainedApp.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.ondeviceai.probe.w8ttspower20261109
+        PRODUCT_NAME: W8TTSPower
+        DISPLAY_NAME: ODAI W8 TTS Power
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGNING_ALLOWED: NO
+        TARGETED_DEVICE_FAMILY: "1,2"
+    dependencies:
+      - package: ODAIKitLocal
+        product: ODAIKitCore
+      - package: ODAIKitLocal
+        product: ODAIKitSpeech
+      - package: ODAIKitLocal
+        product: ODAIKitAppleSpeech

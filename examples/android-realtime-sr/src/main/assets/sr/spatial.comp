@@ -1,0 +1,47 @@
+#version 310 es
+
+layout(local_size_x = 8, local_size_y = 8) in;
+layout(binding = 0, rgba16f) writeonly uniform highp image2D uOutput;
+
+uniform highp sampler2D uInput;
+
+const vec3 bt709 = vec3(0.2126, 0.7152, 0.0722);
+
+float luma(vec3 rgb) {
+    return dot(rgb, bt709);
+}
+
+void writeSpatialPixel(ivec2 outPos, vec2 texelSize) {
+    ivec2 outSize = imageSize(uOutput);
+    vec2 uv = (vec2(outPos) + vec2(0.5)) / vec2(outSize);
+
+    float center = luma(texture(uInput, uv).rgb);
+
+    float left = luma(texture(uInput, clamp(uv + vec2(-texelSize.x, 0.0), vec2(0.0), vec2(1.0))).rgb);
+    float right = luma(texture(uInput, clamp(uv + vec2(texelSize.x, 0.0), vec2(0.0), vec2(1.0))).rgb);
+    float up = luma(texture(uInput, clamp(uv + vec2(0.0, -texelSize.y), vec2(0.0), vec2(1.0))).rgb);
+    float down = luma(texture(uInput, clamp(uv + vec2(0.0, texelSize.y), vec2(0.0), vec2(1.0))).rgb);
+
+    float average = (left + right + up + down) * 0.25;
+    float localMin = min(center, min(min(left, right), min(up, down)));
+    float localMax = max(center, max(max(left, right), max(up, down)));
+    float enhanced = center + 0.5 * (center - average);
+    float clamped = clamp(enhanced, localMin, localMax);
+
+    imageStore(uOutput, outPos, vec4(clamped, 0.0, 0.0, 1.0));
+}
+
+void main() {
+    ivec2 inPos = ivec2(gl_GlobalInvocationID.xy);
+    ivec2 inSize = textureSize(uInput, 0);
+    if (inPos.x >= inSize.x || inPos.y >= inSize.y) {
+        return;
+    }
+
+    vec2 texelSize = 1.0 / vec2(inSize);
+    ivec2 base = inPos * 2;
+    writeSpatialPixel(base + ivec2(0, 0), texelSize);
+    writeSpatialPixel(base + ivec2(1, 0), texelSize);
+    writeSpatialPixel(base + ivec2(0, 1), texelSize);
+    writeSpatialPixel(base + ivec2(1, 1), texelSize);
+}

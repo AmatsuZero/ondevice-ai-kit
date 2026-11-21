@@ -1,0 +1,14 @@
+[
+  {
+    "variant": "debug",
+    "path": "artifacts/verification/w3-app-variants-20261115/androidApp-debug.apk",
+    "bytes": 244934281,
+    "sha256": "85aff749d85257b4e9368b618b4fa22ab0b0d47ff2d429a5aa7e2aa087ba6688"
+  },
+  {
+    "variant": "release",
+    "path": "artifacts/verification/w3-app-variants-20261115/androidApp-release-unsigned.apk",
+    "bytes": 236322599,
+    "sha256": "43b2c5b9e4beebe1712747bf0943dbbcdcfb742f34d18800ea413b265f9010e1"
+  }
+]

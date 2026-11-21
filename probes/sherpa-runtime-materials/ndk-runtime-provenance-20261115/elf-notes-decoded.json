@@ -1,0 +1,43 @@
+{
+  "sourceDecoderVerifiedAgainstOfficialTreeBlob": true,
+  "sectionLocatorUsesSameReferenceLLVM": true,
+  "members": [
+    {
+      "member": "jni/arm64-v8a/libonnxruntime.so",
+      "expectedApi": 27,
+      "expectedNDKRelease": "r27d",
+      "expectedNDKBuild": "13750724",
+      "exitCode": 0,
+      "decoderSourceSHA256": "f4a364bf88095aee4434d9df757cffbc9f117ea58e6603b28c8ef97891c4922d",
+      "decoderGitBlobSHA1": "6be45c05a603cce208a76b953a0709f141827aad",
+      "argv": [
+        "python3",
+        ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/parse_elfnote.py",
+        ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libonnxruntime.so",
+        "--ndk",
+        "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531"
+      ],
+      "stdoutSHA256": "0c89662cd7f091dea3deed77a73dd591e1f36252ad3e7b672d05f6edd58790b3",
+      "stderrBytes": 0
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-jni.so",
+      "expectedApi": 21,
+      "expectedNDKRelease": "r30",
+      "expectedNDKBuild": "16248370",
+      "exitCode": 0,
+      "decoderSourceSHA256": "f4a364bf88095aee4434d9df757cffbc9f117ea58e6603b28c8ef97891c4922d",
+      "decoderGitBlobSHA1": "6be45c05a603cce208a76b953a0709f141827aad",
+      "argv": [
+        "python3",
+        ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/parse_elfnote.py",
+        ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-jni.so",
+        "--ndk",
+        "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531"
+      ],
+      "stdoutSHA256": "17bc7d5b59befa3f80621c1f3a1d27c6bb48489adc4963f341f57777064f48a0",
+      "stderrBytes": 0
+    }
+  ],
+  "scope": "Two arm64 members only; note identity and one retained compiler comment are metadata, not complete object lineage, final runtime retention or trustworthy-build attestation."
+}

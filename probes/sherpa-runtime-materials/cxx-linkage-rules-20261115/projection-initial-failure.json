@@ -1,0 +1,6 @@
+{
+  "error": "KeyError: logPath",
+  "stage": "log projection after source/tree verification",
+  "mutationsBeforeFailure": "official read-only source retention and ndk-tree-binding.json only; no production/helper/build/device",
+  "recovery": "select rows that actually carry logPath; keep aggregate command row separately"
+}

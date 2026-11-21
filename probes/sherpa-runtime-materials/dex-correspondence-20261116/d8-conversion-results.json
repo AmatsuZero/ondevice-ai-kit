@@ -1,0 +1,30 @@
+[
+  {
+    "mode": "debug",
+    "exitCode": 0,
+    "elapsedSeconds": 0.898,
+    "outputDEX": [
+      {
+        "path": ".omx/artifacts/w3-dex-correspondence-20261116T0730/rebuilt-debug/classes.dex",
+        "bytes": 310224,
+        "sha256": "59d8159a4f6c1610b13dc5d057960d3cc28a38d56e7055b345464a22df8a1c17"
+      }
+    ],
+    "stdoutBytes": 0,
+    "stderrBytes": 0
+  },
+  {
+    "mode": "release",
+    "exitCode": 0,
+    "elapsedSeconds": 0.88,
+    "outputDEX": [
+      {
+        "path": ".omx/artifacts/w3-dex-correspondence-20261116T0730/rebuilt-release/classes.dex",
+        "bytes": 308624,
+        "sha256": "6064ec4d279456902266b9b318e6dab2f3ee2318234f41535d5e000f09f49481"
+      }
+    ],
+    "stdoutBytes": 0,
+    "stderrBytes": 0
+  }
+]

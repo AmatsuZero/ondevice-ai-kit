@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "runId": "w3-qwen-arena-20261111-01",
+  "sourceFingerprint": "d3d1a844ebd7e0c9cfe1347c194770e04bc60e11b7300bbee254cd9eb51ec9c1",
+  "frozenContractSHA256": "a78b3661558223eeb083c56935ef89e8a88040755b1327ae7567ec0f09cc736d",
+  "frozenFiles": 108,
+  "reportSHA256": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d",
+  "executionAccepted": false,
+  "engineeringQualityAccepted": false,
+  "reason": "sampled_rss_above_1_5_gib",
+  "hostSeconds": 258.9370746249915,
+  "rssSamples": 413,
+  "sampledMaxRssBytes": 1637896192,
+  "sampledMaxRssGiB": 1.5254096984863281,
+  "rssLimitBytes": 1610612736,
+  "overLimitBytes": 27283456,
+  "minDeviceAvailableBytes": 1864785920,
+  "truePeakMeasured": false,
+  "constructorReturned": true,
+  "actualConstructors": 1,
+  "loadNanos": 9075710385,
+  "completedConsistentRows": 24,
+  "runningInterruptedRows": 1,
+  "plannedUnattemptedRows": 40,
+  "interruptedCaseId": "fleurs-en_us-1806",
+  "lastPersistedDecodeCalls": 49,
+  "lastPersistedCreatedStreams": 50,
+  "actualDecodeCallsExact": null,
+  "actualCreatedStreamsExact": null,
+  "countsAreExactTerminalEvidence": false,
+  "recognizerReleaseAttemptsLastPersisted": 0,
+  "explicitRecognizerReleaseAcknowledged": false,
+  "explicitActivityDestroyAcknowledged": false,
+  "cohorts": {
+    "mandarin": {
+      "expected": 20,
+      "scored": 20,
+      "fullCoverage": true,
+      "scoresAreSubsetOnly": false,
+      "metric": "character",
+      "threshold": 0.2,
+      "engineeringGatePassed": true,
+      "aggregate": {
+        "referenceUnits": 590,
+        "hypothesisUnits": 578,
+        "substitutions": 18,
+        "deletions": 17,
+        "insertions": 5,
+        "errors": 40,
+        "rate": 0.06779661016949153,
+        "defined": true
+      }
+    },
+    "english-near": {
+      "expected": 20,
+      "scored": 4,
+      "fullCoverage": false,
+      "scoresAreSubsetOnly": true,
+      "metric": "word",
+      "threshold": 0.2,
+      "engineeringGatePassed": false,
+      "aggregate": {
+        "referenceUnits": 67,
+        "hypothesisUnits": 66,
+        "substitutions": 8,
+        "deletions": 1,
+        "insertions": 0,
+        "errors": 9,
+        "rate": 0.13432835820895522,
+        "defined": true
+      }
+    },
+    "english-far": {
+      "expected": 12,
+      "scored": 0,
+      "fullCoverage": false,
+      "scoresAreSubsetOnly": true,
+      "metric": "word",
+      "threshold": 0.35,
+      "engineeringGatePassed": false,
+      "aggregate": null
+    }
+  },
+  "challenges": {
+    "silence": {
+      "expected": 4,
+      "completed": 0,
+      "strictEmpty": 0,
+      "engineeringGatePassed": false,
+      "humanListeningAudit": null
+    },
+    "nonspeech-noise": {
+      "expected": 9,
+      "completed": 0,
+      "strictEmpty": 0,
+      "engineeringGatePassed": false,
+      "humanListeningAudit": false
+    }
+  },
+  "completedCaseSecondsRange": [
+    7.251810078,
+    12.209642847
+  ],
+  "completedCaseRtfRange": [
+    1.0408059410675383,
+    1.6786597402777776
+  ],
+  "rtfScope": "Full two-stage wall time including persistence and gates; completed subset only, not warm/sustained/native-only latency.",
+  "requestedPolicyFileBytes": 20,
+  "requestedPolicySHA256": "df3e015e389b92d6c5b60d02bef3023485693ee0186c872cf3ce2c5b5dc7470b",
+  "requestedPolicyVerifiedBySameUidDeviceInode": true,
+  "nativePolicyEffectVerified": false,
+  "originalParentPolicyFailurePreserved": true,
+  "supplementalPolicyReceipt": "allocator-policy-framework-collected.json",
+  "negativeIdentityChecks": 5,
+  "twoReadsIdentical": true,
+  "modelHashesAfterMatch": true,
+  "ordinaryAppsModelsUnchanged": true,
+  "restorationChecked": {
+    "aliasPackages": "",
+    "activeInstrumentation": false,
+    "stageAbsent": true,
+    "originalPidAbsent": true,
+    "resumedLines": [
+      "topResumedActivity=ActivityRecord{997e4e1 u0 io.ondeviceai.demo/.MainActivity t308}"
+    ],
+    "ordinaryAppForeground": true
+  },
+  "automaticRetry": false,
+  "microphoneStarts": 0,
+  "networkRequests": 0,
+  "aiaiRequests": 0,
+  "productionReady": false,
+  "completedPublicPairs": [
+    {
+      "id": "fleurs-cmn_hans_cn-1805",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 121920,
+      "pcmSha256": "ddee0d951c5ecfa143134ae3b1f126ea70e76b9e87870d012f6830ed09b6e29f",
+      "reference": "Scotturb 403 路公共汽车定期发车前往辛特拉 (Sintra)，在罗卡角停靠。",
+      "caseNanos": 10795568308,
+      "hypothesis": "Scotturb四零三路，公交汽车定期发车前往新特拉，在罗卡角停靠。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1965",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 109440,
+      "pcmSha256": "012e2eb91001d8a4966dd3e1fb65e706ab6d823cd96dddcf0f6de4896815bbe4",
+      "reference": "这里几乎都是沙滩，游泳很安全，大部分地方都有新西兰圣诞树的树荫。",
+      "caseNanos": 9197457231,
+      "hypothesis": "这里几乎都是沙滩，游泳很安全。大部分地方都有新西兰圣诞树的树荫。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1903",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 116160,
+      "pcmSha256": "3aeedf27352039c125341d0b66c586a438f64e973a9cef7bcc4f9433a9c88835",
+      "reference": "当所有可用的资源在一个组织的职能部门之间得到有效利用时，创造力和独创性就会发生。",
+      "caseNanos": 10473693000,
+      "hypothesis": "当所有可用的资源在一个组织的职能部门之间得到有效利用时，创造力和独创性就会发生。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1953",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 80640,
+      "pcmSha256": "77b7b11210844e85a4027757fd1cdcf725e76a71ced1e23a332dc2d7becc0afa",
+      "reference": "他随后被转送到剑桥的阿登布鲁克医院。",
+      "caseNanos": 7373814155,
+      "hypothesis": "他随后被转转送到剑桥的阿登布鲁克医院。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1830",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 101760,
+      "pcmSha256": "32201ea0511a0285c0da43ca492357524fc3af05e0682fddedb6663b1f4c8082",
+      "reference": "执政党西南非洲人民组织 (SWAPO) 也在议会选举中保持了多数席位。",
+      "caseNanos": 8331557770,
+      "hypothesis": "执政党西南非洲人民组织也在议会选举中保住了多数席位。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1910",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 81600,
+      "pcmSha256": "a0f4a823683fd54f0d9d18517245f9bc202fa2e9eb9c30f496d1f2eb7518f39d",
+      "reference": "巴黎人是出了名的以自我中心、粗鲁和傲慢。",
+      "caseNanos": 7387374462,
+      "hypothesis": "巴黎人是出了名的以自我为中心、粗鲁和傲慢。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1902",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 111360,
+      "pcmSha256": "2da6818a6ded59c8a48abb110442f47544cc76f5a4f7e2ff8a7d0c9d10010363",
+      "reference": "起初，他被送往位于大雅茅斯的詹姆斯·佩吉特医院进行救治。",
+      "caseNanos": 9492732539,
+      "hypothesis": "起初，他被送往位于大雅茅斯的詹姆斯·佩吉特医院进行救治。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1905",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 120960,
+      "pcmSha256": "c3df5181a3e4db9ae99f2149704e8ccd1fd35e4076d0f668a8b2f3bdd08cce7e",
+      "reference": "摩尔多瓦的首都是基希讷乌。当地语言是罗马尼亚语，但俄语也被广泛使用。",
+      "caseNanos": 11476050539,
+      "hypothesis": "莫尔多瓦的首都是新基纳乌，当地的语言是罗马尼亚语，但俄语也被广泛使用。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1772",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 146880,
+      "pcmSha256": "e98e44d3ff0aa23cd9e63d58136cbf1850fd070f75f46e4ed38347a353759344",
+      "reference": "因此，很可能这个符号只是作为一个标签添加的。",
+      "caseNanos": 9554598539,
+      "hypothesis": "因此，很可能这个符号只是作为一个标签添加的。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1792",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 140160,
+      "pcmSha256": "1158f7d461c64a47e37818104ce46240b36d111ed067ca19360f9b51cc8a0c30",
+      "reference": "这被称为化学物质的 pH 值。你可以使用红甘蓝汁制作指示剂。",
+      "caseNanos": 11422260308,
+      "hypothesis": "这被称为化学物质的T H值。你可以用红甘蓝汁制作指示剂。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1962",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 135360,
+      "pcmSha256": "c3d7a02f86783fe14fd7e34e4714e1686bf137c671f6fb0b1512b7ddaa1fda25",
+      "reference": "pH 值以被测化学品中的氢（pH 中的 H）离子数量表示。",
+      "caseNanos": 11014097924,
+      "hypothesis": "pH值被测化学品中的氢（pH中的H）离子数量表示。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1884",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 110400,
+      "pcmSha256": "c268c789b772bd302ffd4f217f227cf4cd4dcf85be9b0c93ef6f797dae8fa99a",
+      "reference": "具体说来，据说可以通过正确解读微表情来判断一个人是否在撒谎。",
+      "caseNanos": 9115268693,
+      "hypothesis": "具体说来，据说可以通过正确解读微表情来判断一个人是否在撒谎。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1958",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 154560,
+      "pcmSha256": "74369c2be16ac04f36e00da1d0db5fe39d3aed45276693046f365c638fc2c130",
+      "reference": "这座城市与该国其他城市形成了鲜明对比，因为它更多的是阿拉伯风格，而不是非洲风格。",
+      "caseNanos": 11989246770,
+      "hypothesis": "这座城市与该国其他城市形成了鲜明的对比，因为它更多的是阿拉伯风格，而不是非洲风格。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1871",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 111360,
+      "pcmSha256": "03a066eba992c84246696180810c01b61d5b7d050bc41e5b8b3b8cc6c7e5fd62",
+      "reference": "在中东温暖的气候中，房子并不是多重要。",
+      "caseNanos": 7560012385,
+      "hypothesis": "在中东温暖的气候中，房子并不是多重要。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1698",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 155520,
+      "pcmSha256": "c0cf0ea82e08a6e7f364626fdecf3c4f7d8dedbf3d3b24f96ff029fc1ca312a4",
+      "reference": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小粒子组成。",
+      "caseNanos": 12209642847,
+      "hypothesis": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小颗粒组成。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-2002",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 108480,
+      "pcmSha256": "bee96356b12cce5f98776905b7cff01e92fca56e052e0997e977ee19a9bf8999",
+      "reference": "它让玩家可以通过在空中移动设备来控制电子游戏中的运动和操作。",
+      "caseNanos": 8721457539,
+      "hypothesis": "它让玩家可以通过在空中移动设备来控制电子游戏中的运动和操作。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1661",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 123840,
+      "pcmSha256": "e9394e90b72ecde7d22f242b32dcf2c20fbf7bed68cafa6a89e341e933279744",
+      "reference": "他没有设定削减数额，只是表示将根据中国的经济产出来决定数额。",
+      "caseNanos": 9286863924,
+      "hypothesis": "他没有设定削减数额，只是表示将根据中国的经济产出来决定数额。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1697",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 156480,
+      "pcmSha256": "bc45683ef6eff1f4a58502edfa5bd7e90e4f5cb2b79bdcf7e1879cf9abc5f988",
+      "reference": "他一直无法用药物来缓解疼痛，因为比赛禁止参赛者服用这些药物。",
+      "caseNanos": 11535120308,
+      "hypothesis": "他一直无法用药物来缓解疼痛，因为比赛禁止参赛者服用这些药物。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1821",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 126720,
+      "pcmSha256": "f4bd7a624646121f15f41d3e3f538c0f07d18bb3eff57ec4c8838e0a78490f7d",
+      "reference": "大脑病理和行为之间的相关性可以为科学家们的研究提供支持。",
+      "caseNanos": 9224584001,
+      "hypothesis": "大脑病理和行为之间的相关性，可为科学家们的研究提供支持。"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1808",
+      "locale": "zh-CN",
+      "cohort": "mandarin",
+      "samples": 103680,
+      "pcmSha256": "fdb29e3346a08dec51ca79f5ddca66a2fd73906aa53cd978c92c57017849d584",
+      "reference": "战争结束两年后，曾经的盟友如今成了敌人，冷战随即开始。",
+      "caseNanos": 8845504001,
+      "hypothesis": "战争结束两年后，曾经的盟友如今成了敌人。冷战随即开始。"
+    },
+    {
+      "id": "fleurs-en_us-1675",
+      "locale": "en-US",
+      "cohort": "english-near",
+      "samples": 140160,
+      "pcmSha256": "05586359c8c54a5fcd24761af9ae0e21b636c4cc2f696b56ef2f8ee6cc5a4ac5",
+      "reference": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+      "caseNanos": 12171362847,
+      "hypothesis": "All nouns alongside the world say for you always begin with a capital letter, even in the middle of a sentence."
+    },
+    {
+      "id": "fleurs-en_us-1728",
+      "locale": "en-US",
+      "cohort": "english-near",
+      "samples": 92160,
+      "pcmSha256": "1cf1221ee097d042ef3cd020809bea09394626a31ac989b945c22c46ecf6fc1f",
+      "reference": "The cabbage juice changes color depending on how acidic or basic (alkaline) the chemical is.",
+      "caseNanos": 8252908000,
+      "hypothesis": "The cabbage juice changes color depending on how acidic, basic, alkaline the chemical is."
+    },
+    {
+      "id": "fleurs-en_us-1972",
+      "locale": "en-US",
+      "cohort": "english-near",
+      "samples": 69120,
+      "pcmSha256": "0ff9f8ba6e913bcab4c77c2883c11e3a63d554eb341ce99d683f5d8c921accd4",
+      "reference": "Many people don't think about them as dinosaurs because they have feathers and can fly.",
+      "caseNanos": 7251810078,
+      "hypothesis": "Many people don't think about them as dinosaurs because they have feathers and can fly."
+    },
+    {
+      "id": "fleurs-en_us-1914",
+      "locale": "en-US",
+      "cohort": "english-near",
+      "samples": 111360,
+      "pcmSha256": "e13d4263bc8bd3442c788d0696df0344beb66eb7bcec68e0b67083d44d530581",
+      "reference": "Twentieth century research has shown that there are two pools of genetic variation: hidden and expressed.",
+      "caseNanos": 9073221231,
+      "hypothesis": "Twentieth century research has shown that there are two pools of genetic variation hidden and expressed."
+    }
+  ],
+  "evidenceHashes": {
+    "diagnostic-frozen.json": "a78b3661558223eeb083c56935ef89e8a88040755b1327ae7567ec0f09cc736d",
+    "run-started.json": "31a16a523385c8df4d54124e90bee3cf458b43115bb0fd29501e86199924d05c",
+    "host-result.json": "4356d176d967082181767c066703928771725f029725d120bba0c3a0e95fd3ea",
+    "collection.json": "406861b5c02794055e4e561c8559bb5e3baa5712cf4108f72313b8d6f194ab86",
+    "device-report.json": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d",
+    "device-report-confirm.json": "3a5d9c4c13f91768b073fc98591b4bc88ecd5df7ab82c22bc1aa188d89d7140d",
+    "allocator-policy-collected.json": "3a859f9e1f41547aefbea10baa8a904bcaf87290913b1ce58ac1a268154093b2",
+    "framework-path-diagnostic.json": "b8363a944e8b2d4fab1626cbb583ee5c657b67425e794a053d9b56cbfd8e9750",
+    "allocator-policy-framework-collected.json": "30da95a875b4bf229016e989906a0a9dc783beb785aeabadccd73e7491b0ccae",
+    "parent-arena-acceptance.json": "e8890bfb0ed37f41ccf86c1d3f1a251b84115ea6c06b0bd3e6398a9d19dc0fdd",
+    "parent-arena-acceptance-framework.json": "e37ce0605d32fa77d85ea4b0b7b67c4584793e46b701446ab053c78a0650bb27",
+    "rss-samples.jsonl": "8ad3ccac02bf1f3a0da3975c6378b8705d5eb8741a1f12430ab9bdc497908464",
+    "restoration.json": "92340ed7ae77007c72bf5a6c1d36ccfacc12618c607532c34f18e6bf277cebbc",
+    "restoration-checked.json": "81dc3a891a582e63e93e6d5f208449b170af67ee9ca53f47fe769f1f19eda6af"
+  }
+}

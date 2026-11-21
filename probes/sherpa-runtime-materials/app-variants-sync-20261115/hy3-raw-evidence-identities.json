@@ -1,0 +1,27 @@
+[
+  {
+    "path": ".omx/artifacts/w3-app-variants-20261115T145000Z/hy3-publication/prompt.txt",
+    "bytes": 8548,
+    "sha256": "d3f619f18eb8d754fa4c1c0e9ec7692f0d0ab424e9ac5e15acce25804c416ac0"
+  },
+  {
+    "path": ".omx/artifacts/w3-app-variants-20261115T145000Z/hy3-publication/events.jsonl",
+    "bytes": 54044,
+    "sha256": "0266b09e914bd2412bbda944b51f11f0f9ac8bd20dcba523ef53230a2075781d"
+  },
+  {
+    "path": ".omx/artifacts/w3-app-variants-20261115T145000Z/hy3-publication/stderr.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": ".omx/artifacts/w3-app-variants-20261115T145000Z/hy3-publication/invocation.json",
+    "bytes": 1615,
+    "sha256": "a83fd454f337c21103e39ea3cb52ec3e3950e82eb372db759fd50a7a14344220"
+  },
+  {
+    "path": ".omx/artifacts/w3-app-variants-20261115T145000Z/hy3-publication/candidate-raw.json",
+    "bytes": 6883,
+    "sha256": "c4be72b6caf1239ba59f39ae29ce02f75679b29626bb0f13e166537069597e31"
+  }
+]

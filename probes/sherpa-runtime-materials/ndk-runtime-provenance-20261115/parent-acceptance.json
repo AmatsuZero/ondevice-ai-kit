@@ -1,0 +1,33 @@
+{
+  "commandMatrix": [
+    {
+      "component": "onnxruntime",
+      "commandCount": 4,
+      "expectedNDK": "27.3.13750724",
+      "expectedAPI": "android-27",
+      "commandProjectionsMatched": true
+    },
+    {
+      "component": "sherpa-onnx",
+      "commandCount": 4,
+      "expectedNDK": "30.0.16248370",
+      "expectedAPI": "android-21",
+      "commandProjectionsMatched": true
+    }
+  ],
+  "retainedSourcePaths": 69,
+  "retainedDistinctSourceBytes": 61,
+  "fixedLogsRehashed": 5,
+  "officialRuntimeLibraryTrees": 8,
+  "runtimeBlobIdentifiers": 32,
+  "runtimeBinaryDownloads": 0,
+  "fourBaseLicensePairsByteEqual": true,
+  "sourceClangSelectorsAndConditionalGuardsMatched": true,
+  "twoArm64NotesMatched": true,
+  "newBuilds": 0,
+  "deviceOperations": 0,
+  "productionAssetChanges": 0,
+  "completeFinalCompositionVerified": false,
+  "fullApplicableNoticeSetVerified": false,
+  "W3Complete": false
+}

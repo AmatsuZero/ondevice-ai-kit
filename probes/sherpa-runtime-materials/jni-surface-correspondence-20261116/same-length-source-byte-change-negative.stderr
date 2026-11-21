@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-jni-surface-20261116T0800/verify-surface.py", line 143, in <module>
+    assert len(data) == row['bytes'] and sha(data) == row['sha256']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

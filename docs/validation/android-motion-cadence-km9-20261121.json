@@ -1,0 +1,418 @@
+{
+  "device": "TECNO KM9 / API 35 / Mali-G57 MC2",
+  "timingApkSha256": "961ebacd4818a58f97798a88c98e688c391af3f26daebe6ac377b19d1a840a74",
+  "blindApkSha256": "4f2b1d159479766b041ca87b93cc7ad91da2beec19c3ddef705954bd278e42a0",
+  "fixtureSha256": "e698bee8c98c3158eb5e99e26f1cbe13334b52557720b2129a3e31dd2fa67dcb",
+  "archiveSha256": "4bc4868678e810b7d3b8f2d2c776f80aa6dec280b19a412124d9a459d2aece37",
+  "refresh": {
+    "beforePeak": "120.0",
+    "beforeMin": "60.0",
+    "duringPeak": "60.0",
+    "afterPeak": "120.0",
+    "afterMin": "60.0"
+  },
+  "runs": {
+    "leg-12": {
+      "case": "original",
+      "periodNs": 16666667,
+      "baseDenominator": 900,
+      "confirmed": 896,
+      "inWindow": 890,
+      "early": 1,
+      "late": 5,
+      "targetToPresentMs": {
+        "p50": 10.398692,
+        "p95": 16.440154
+      },
+      "intervalsAllConfirmed": {
+        "n": 895,
+        "p50Ms": 33.326077,
+        "p95Ms": 50.039307,
+        "greaterThan50ms": 60,
+        "refreshTicks": {
+          "1": 145,
+          "2": 607,
+          "3": 138,
+          "4": 5
+        }
+      },
+      "intervalsAdjacentOrdinal": {
+        "n": 891,
+        "p50Ms": 33.325846,
+        "p95Ms": 50.026692,
+        "greaterThan50ms": 58,
+        "refreshTicks": {
+          "1": 144,
+          "2": 607,
+          "3": 137,
+          "4": 3
+        }
+      },
+      "consecutiveTargetIntervalMs": {
+        "n": 899,
+        "p50": 33.617385,
+        "p95": 44.602769
+      },
+      "egl": null,
+      "eglDisplayRecords": null,
+      "eglMatchedSf": null,
+      "lastAudioUs": 29994666,
+      "audioTargetIntervalP05Ms": 19.023231,
+      "frameCallbacks": 900
+    },
+    "leg-13": {
+      "case": "original-ready",
+      "periodNs": 16666667,
+      "baseDenominator": 900,
+      "confirmed": 893,
+      "inWindow": 886,
+      "early": 1,
+      "late": 6,
+      "targetToPresentMs": {
+        "p50": 11.503847,
+        "p95": 18.307769
+      },
+      "intervalsAllConfirmed": {
+        "n": 892,
+        "p50Ms": 33.328,
+        "p95Ms": 50.012539,
+        "greaterThan50ms": 68,
+        "refreshTicks": {
+          "1": 169,
+          "2": 551,
+          "3": 166,
+          "4": 6
+        }
+      },
+      "intervalsAdjacentOrdinal": {
+        "n": 885,
+        "p50Ms": 33.327923,
+        "p95Ms": 50.010692,
+        "greaterThan50ms": 66,
+        "refreshTicks": {
+          "1": 168,
+          "2": 551,
+          "3": 162,
+          "4": 4
+        }
+      },
+      "consecutiveTargetIntervalMs": {
+        "n": 899,
+        "p50": 33.509461,
+        "p95": 44.236538
+      },
+      "egl": {
+        "confirmedByBackend": {
+          "ORIGINAL": 893,
+          "SPATIAL": 0
+        },
+        "strictOnTimeSinceLatchByBackend": {
+          "ORIGINAL": 401,
+          "SPATIAL": 0
+        }
+      },
+      "eglDisplayRecords": 893,
+      "eglMatchedSf": 893,
+      "lastAudioUs": 29994666,
+      "audioTargetIntervalP05Ms": 20.473384,
+      "frameCallbacks": 900
+    },
+    "leg-14": {
+      "case": "spatial-ready",
+      "periodNs": 16666667,
+      "baseDenominator": 900,
+      "confirmed": 898,
+      "inWindow": 882,
+      "early": 1,
+      "late": 15,
+      "targetToPresentMs": {
+        "p50": 15.326769,
+        "p95": 29.804769
+      },
+      "intervalsAllConfirmed": {
+        "n": 897,
+        "p50Ms": 33.32623,
+        "p95Ms": 50.013231,
+        "greaterThan50ms": 77,
+        "refreshTicks": {
+          "1": 200,
+          "2": 508,
+          "3": 179,
+          "4": 10
+        }
+      },
+      "intervalsAdjacentOrdinal": {
+        "n": 895,
+        "p50Ms": 33.32623,
+        "p95Ms": 50.012923,
+        "greaterThan50ms": 76,
+        "refreshTicks": {
+          "1": 199,
+          "2": 508,
+          "3": 179,
+          "4": 9
+        }
+      },
+      "consecutiveTargetIntervalMs": {
+        "n": 899,
+        "p50": 33.062924,
+        "p95": 45.686461
+      },
+      "egl": {
+        "confirmedByBackend": {
+          "ORIGINAL": 38,
+          "SPATIAL": 860
+        },
+        "strictOnTimeSinceLatchByBackend": {
+          "ORIGINAL": 12,
+          "SPATIAL": 138
+        }
+      },
+      "eglDisplayRecords": 898,
+      "eglMatchedSf": 898,
+      "lastAudioUs": 29994666,
+      "audioTargetIntervalP05Ms": 19.753847,
+      "frameCallbacks": 900
+    },
+    "leg-15": {
+      "case": "spatial-ready",
+      "periodNs": 16666667,
+      "baseDenominator": 900,
+      "confirmed": 897,
+      "inWindow": 890,
+      "early": 0,
+      "late": 7,
+      "targetToPresentMs": {
+        "p50": 15.037,
+        "p95": 27.571539
+      },
+      "intervalsAllConfirmed": {
+        "n": 896,
+        "p50Ms": 33.323077,
+        "p95Ms": 50.091384,
+        "greaterThan50ms": 102,
+        "refreshTicks": {
+          "1": 253,
+          "2": 400,
+          "3": 232,
+          "4": 11
+        }
+      },
+      "intervalsAdjacentOrdinal": {
+        "n": 893,
+        "p50Ms": 33.323077,
+        "p95Ms": 50.079692,
+        "greaterThan50ms": 100,
+        "refreshTicks": {
+          "1": 252,
+          "2": 400,
+          "3": 232,
+          "4": 9
+        }
+      },
+      "consecutiveTargetIntervalMs": {
+        "n": 899,
+        "p50": 33.067308,
+        "p95": 44.328923
+      },
+      "egl": {
+        "confirmedByBackend": {
+          "ORIGINAL": 25,
+          "SPATIAL": 872
+        },
+        "strictOnTimeSinceLatchByBackend": {
+          "ORIGINAL": 4,
+          "SPATIAL": 151
+        }
+      },
+      "eglDisplayRecords": 897,
+      "eglMatchedSf": 897,
+      "lastAudioUs": 29994666,
+      "audioTargetIntervalP05Ms": 20.521462,
+      "frameCallbacks": 900
+    },
+    "leg-16": {
+      "case": "original-ready",
+      "periodNs": 16666667,
+      "baseDenominator": 900,
+      "confirmed": 881,
+      "inWindow": 877,
+      "early": 0,
+      "late": 4,
+      "targetToPresentMs": {
+        "p50": 11.425615,
+        "p95": 17.713077
+      },
+      "intervalsAllConfirmed": {
+        "n": 880,
+        "p50Ms": 33.326692,
+        "p95Ms": 50.011461,
+        "greaterThan50ms": 61,
+        "refreshTicks": {
+          "1": 156,
+          "2": 569,
+          "3": 151,
+          "4": 4
+        }
+      },
+      "intervalsAdjacentOrdinal": {
+        "n": 877,
+        "p50Ms": 33.326692,
+        "p95Ms": 50.011308,
+        "greaterThan50ms": 59,
+        "refreshTicks": {
+          "1": 155,
+          "2": 569,
+          "3": 149,
+          "4": 4
+        }
+      },
+      "consecutiveTargetIntervalMs": {
+        "n": 899,
+        "p50": 33.469924,
+        "p95": 44.773154
+      },
+      "egl": {
+        "confirmedByBackend": {
+          "ORIGINAL": 881,
+          "SPATIAL": 0
+        },
+        "strictOnTimeSinceLatchByBackend": {
+          "ORIGINAL": 429,
+          "SPATIAL": 0
+        }
+      },
+      "eglDisplayRecords": 896,
+      "eglMatchedSf": 881,
+      "lastAudioUs": 29994666,
+      "audioTargetIntervalP05Ms": 20.393153,
+      "frameCallbacks": 900
+    },
+    "leg-17": {
+      "case": "original",
+      "periodNs": 16666667,
+      "baseDenominator": 900,
+      "confirmed": 896,
+      "inWindow": 892,
+      "early": 1,
+      "late": 3,
+      "targetToPresentMs": {
+        "p50": 7.558692,
+        "p95": 16.099154
+      },
+      "intervalsAllConfirmed": {
+        "n": 895,
+        "p50Ms": 33.326154,
+        "p95Ms": 50.065538,
+        "greaterThan50ms": 78,
+        "refreshTicks": {
+          "1": 190,
+          "2": 514,
+          "3": 189,
+          "4": 2
+        }
+      },
+      "intervalsAdjacentOrdinal": {
+        "n": 892,
+        "p50Ms": 33.326076,
+        "p95Ms": 50.044384,
+        "greaterThan50ms": 76,
+        "refreshTicks": {
+          "1": 189,
+          "2": 514,
+          "3": 188,
+          "4": 1
+        }
+      },
+      "consecutiveTargetIntervalMs": {
+        "n": 899,
+        "p50": 33.559923,
+        "p95": 46.079077
+      },
+      "egl": null,
+      "eglDisplayRecords": null,
+      "eglMatchedSf": null,
+      "lastAudioUs": 29994666,
+      "audioTargetIntervalP05Ms": 18.142077,
+      "frameCallbacks": 900
+    }
+  },
+  "stimuli": [
+    {
+      "scene": 1,
+      "sha256": "580be17a159819cfbff0114867cbae4845a8e926c6d739a87552c08321f29752",
+      "frames": 180,
+      "durationSeconds": 6,
+      "distinctMiniatures": 180,
+      "audio": "AAC mono 48 kHz, six pulse windows verified",
+      "color": "MP4 nclx BT.709 primaries/transfer/matrix, limited range",
+      "androidExtractor": "width=960 height=540 frame-rate=30 color-standard=1 color-range=2 color-transfer=3"
+    },
+    {
+      "scene": 2,
+      "sha256": "d0606e672afc9f89fffe598db2992b36fd793586df648c321c232d06027a6389",
+      "frames": 180,
+      "durationSeconds": 6,
+      "distinctMiniatures": 180,
+      "audio": "AAC mono 48 kHz, six pulse windows verified",
+      "color": "MP4 nclx BT.709 primaries/transfer/matrix, limited range",
+      "androidExtractor": "width=960 height=540 frame-rate=30 color-standard=1 color-range=2 color-transfer=3"
+    },
+    {
+      "scene": 3,
+      "sha256": "ffdb74e61d8cee26a1dce0c62848fbf6dc6a62ade4510d0940fa20dbdaebac7d",
+      "frames": 180,
+      "durationSeconds": 6,
+      "distinctMiniatures": 180,
+      "audio": "AAC mono 48 kHz, six pulse windows verified",
+      "color": "MP4 nclx BT.709 primaries/transfer/matrix, limited range",
+      "androidExtractor": "width=960 height=540 frame-rate=30 color-standard=1 color-range=2 color-transfer=3"
+    }
+  ],
+  "motionPairValidation": {
+    "testOnly": true,
+    "scenes": [
+      {
+        "scene": 1,
+        "testOnly": true,
+        "displayedByRequestedBackend": {
+          "SPATIAL": {
+            "ORIGINAL": 12,
+            "SPATIAL": 167
+          },
+          "ORIGINAL": {
+            "ORIGINAL": 180
+          }
+        }
+      },
+      {
+        "scene": 2,
+        "testOnly": true,
+        "displayedByRequestedBackend": {
+          "SPATIAL": {
+            "ORIGINAL": 16,
+            "SPATIAL": 164
+          },
+          "ORIGINAL": {
+            "ORIGINAL": 179
+          }
+        }
+      },
+      {
+        "scene": 3,
+        "testOnly": true,
+        "displayedByRequestedBackend": {
+          "SPATIAL": {
+            "ORIGINAL": 12,
+            "SPATIAL": 168
+          },
+          "ORIGINAL": {
+            "ORIGINAL": 179
+          }
+        }
+      }
+    ],
+    "automatedBallotsRemoved": true,
+    "humanPreferencesAssessed": false
+  }
+}

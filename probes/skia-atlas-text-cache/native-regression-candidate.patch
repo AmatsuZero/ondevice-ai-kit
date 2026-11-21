@@ -1,0 +1,243 @@
+diff --git a/skiko_tests/skiko_tests.gni b/skiko_tests/skiko_tests.gni
+index dc0cd19a67..932f42aa2f 100644
+--- a/skiko_tests/skiko_tests.gni
++++ b/skiko_tests/skiko_tests.gni
+@@ -1,6 +1,7 @@
+ _tests = get_path_info("../skiko_tests", "abspath")
+ 
+ skiko_tests_sources = [
++  "$_tests/AtlasTextOpCacheTest.cpp",
+   "$_tests/SkikoTestExample.cpp",
+   "$_tests/SupportTopRatioBasedVerticalAlignmentTest.cpp",
+-]
+\ No newline at end of file
++]
+diff --git a/src/gpu/ganesh/ops/AtlasTextOp.cpp b/src/gpu/ganesh/ops/AtlasTextOp.cpp
+index f3aebd9398..6a9a50e1e1 100644
+--- a/src/gpu/ganesh/ops/AtlasTextOp.cpp
++++ b/src/gpu/ganesh/ops/AtlasTextOp.cpp
+@@ -58,6 +58,9 @@
+ 
+ struct GrShaderCaps;
+ 
++// Isolated native-regression checkout only. Not part of the distributable patch.
++extern "C" void AtlasTextOpNativeTestEvent(void* bytes, bool freed);
++
+ using MaskFormat = skgpu::MaskFormat;
+ 
+ namespace skgpu::ganesh {
+@@ -66,26 +69,42 @@ inline static constexpr int kVerticesPerGlyph = 4;
+ inline static constexpr int kIndicesPerGlyph = 6;
+ 
+ // If we have thread local, then cache memory for a single AtlasTextOp.
+-static thread_local void* gCache = nullptr;
++struct CacheOwner {
++    void* bytes = nullptr;
++    ~CacheOwner() {
++        void* cached = bytes;
++        ::operator delete(cached);
++        if (cached != nullptr) {
++            AtlasTextOpNativeTestEvent(cached, true);
++        }
++    }
++};
++static thread_local CacheOwner gCache;
+ void* AtlasTextOp::operator new(size_t s) {
+-    if (gCache != nullptr) {
+-        return std::exchange(gCache, nullptr);
++    if (gCache.bytes != nullptr) {
++        return std::exchange(gCache.bytes, nullptr);
+     }
+ 
+     return ::operator new(s);
+ }
+ 
+ void AtlasTextOp::operator delete(void* bytes) noexcept {
+-    if (gCache == nullptr) {
+-        gCache = bytes;
++    if (gCache.bytes == nullptr) {
++        gCache.bytes = bytes;
++        AtlasTextOpNativeTestEvent(bytes, false);
+         return;
+     }
+     ::operator delete(bytes);
++    AtlasTextOpNativeTestEvent(bytes, true);
+ }
+ 
+ void AtlasTextOp::ClearCache() {
+-    ::operator delete(gCache);
+-    gCache = nullptr;
++    void* bytes = gCache.bytes;
++    ::operator delete(bytes);
++    gCache.bytes = nullptr;
++    if (bytes != nullptr) {
++        AtlasTextOpNativeTestEvent(bytes, true);
++    }
+ }
+ 
+ namespace {
+diff --git a/skiko_tests/AtlasTextOpCacheTest.cpp b/skiko_tests/AtlasTextOpCacheTest.cpp
+new file mode 100644
+index 0000000000..800c92cba7
+--- /dev/null
++++ b/skiko_tests/AtlasTextOpCacheTest.cpp
+@@ -0,0 +1,159 @@
++/*
++ * Copyright 2026 Google LLC
++ *
++ * Use of this source code is governed by a BSD-style license that can be
++ * found in the LICENSE file.
++ */
++
++#include "skiko_tests/SkikoTest.h"
++
++#include "include/core/SkFont.h"
++#include "include/core/SkMatrix.h"
++#include "include/core/SkPaint.h"
++#include "include/core/SkSurfaceProps.h"
++#include "include/gpu/ganesh/GrDirectContext.h"
++#include "src/gpu/SkBackingFit.h"
++#include "src/gpu/ganesh/SurfaceDrawContext.h"
++#include "src/gpu/ganesh/ops/AtlasTextOp.h"
++#include "tools/fonts/FontToolUtils.h"
++#include "tools/ganesh/AtlasTextOpTools.h"
++
++#include <atomic>
++#include <condition_variable>
++#include <mutex>
++#include <thread>
++#include <utility>
++
++namespace {
++std::mutex gTestMutex;
++std::atomic<void*> gTarget{nullptr};
++std::atomic<int> gCached{0};
++std::atomic<int> gFreed{0};
++}  // namespace
++
++// Test-only instrumentation in AtlasTextOp.cpp calls this after caching or freeing storage.
++extern "C" void AtlasTextOpNativeTestEvent(void* bytes, bool freed) {
++    if (bytes == gTarget.load(std::memory_order_relaxed)) {
++        (freed ? gFreed : gCached).fetch_add(1, std::memory_order_relaxed);
++    }
++}
++
++DEF_TEST_SKIKO(AtlasTextOpWorkerCacheExit, reporter) {
++    std::lock_guard<std::mutex> testLock(gTestMutex);
++    skgpu::ganesh::AtlasTextOp::ClearCache();
++    // The context belongs to the main thread. Its destructor clears only this thread's cache.
++    sk_sp<GrDirectContext> context = GrDirectContext::MakeMock(nullptr);
++    REPORTER_ASSERT(reporter, context);
++    if (!context) {
++        return;
++    }
++    auto sdc = skgpu::ganesh::SurfaceDrawContext::Make(context.get(),
++                                                       GrColorType::kRGBA_8888,
++                                                       nullptr,
++                                                       SkBackingFit::kApprox,
++                                                       {32, 32},
++                                                       SkSurfaceProps(),
++                                                       "AtlasTextOpWorkerCacheExit");
++    REPORTER_ASSERT(reporter, sdc);
++    if (!sdc) {
++        return;
++    }
++
++    SkPaint paint;
++    SkFont font = ToolUtils::DefaultFont();
++    font.setEdging(SkFont::Edging::kAlias);
++    auto op = skgpu::ganesh::AtlasTextOpTools::CreateOp(
++            sdc.get(), paint, font, SkMatrix::I(), "a", 16, 16);
++    REPORTER_ASSERT(reporter, op);
++    if (!op) {
++        return;
++    }
++
++    gTarget.store(op.get(), std::memory_order_relaxed);
++    gCached.store(0, std::memory_order_relaxed);
++    gFreed.store(0, std::memory_order_relaxed);
++
++    std::mutex mutex;
++    std::condition_variable cv;
++    bool cached = false;
++    bool exitWorker = false;
++    std::thread worker([op = std::move(op), &mutex, &cv, &cached, &exitWorker]() mutable {
++        op.reset();
++        {
++            std::lock_guard<std::mutex> lock(mutex);
++            cached = true;
++        }
++        cv.notify_one();
++        std::unique_lock<std::mutex> lock(mutex);
++        cv.wait(lock, [&exitWorker] { return exitWorker; });
++    });
++
++    {
++        std::unique_lock<std::mutex> lock(mutex);
++        cv.wait(lock, [&cached] { return cached; });
++    }
++    REPORTER_ASSERT(reporter, gCached.load(std::memory_order_relaxed) == 1);
++    sdc.reset();
++    context.reset();
++    REPORTER_ASSERT(reporter, gFreed.load(std::memory_order_relaxed) == 0);
++
++    {
++        std::lock_guard<std::mutex> lock(mutex);
++        exitWorker = true;
++    }
++    cv.notify_one();
++    worker.join();
++    REPORTER_ASSERT(reporter, gFreed.load(std::memory_order_relaxed) == 1);
++    gTarget.store(nullptr, std::memory_order_relaxed);
++}
++
++DEF_TEST_SKIKO(AtlasTextOpContextClearsLocalCache, reporter) {
++    std::lock_guard<std::mutex> testLock(gTestMutex);
++    skgpu::ganesh::AtlasTextOp::ClearCache();
++    sk_sp<GrDirectContext> context = GrDirectContext::MakeMock(nullptr);
++    REPORTER_ASSERT(reporter, context);
++    if (!context) {
++        return;
++    }
++    auto sdc = skgpu::ganesh::SurfaceDrawContext::Make(context.get(),
++                                                       GrColorType::kRGBA_8888,
++                                                       nullptr,
++                                                       SkBackingFit::kApprox,
++                                                       {32, 32},
++                                                       SkSurfaceProps(),
++                                                       "AtlasTextOpContextClearsLocalCache");
++    REPORTER_ASSERT(reporter, sdc);
++    if (!sdc) {
++        return;
++    }
++
++    SkPaint paint;
++    SkFont font = ToolUtils::DefaultFont();
++    font.setEdging(SkFont::Edging::kAlias);
++    auto createOp = [&]() {
++        return skgpu::ganesh::AtlasTextOpTools::CreateOp(
++                sdc.get(), paint, font, SkMatrix::I(), "a", 16, 16);
++    };
++    auto first = createOp();
++    REPORTER_ASSERT(reporter, first);
++    if (!first) {
++        return;
++    }
++    void* storage = first.get();
++    gTarget.store(storage, std::memory_order_relaxed);
++    gCached.store(0, std::memory_order_relaxed);
++    gFreed.store(0, std::memory_order_relaxed);
++    first.reset();
++    REPORTER_ASSERT(reporter, gCached.load(std::memory_order_relaxed) == 1);
++
++    auto second = createOp();
++    REPORTER_ASSERT(reporter, second && second.get() == storage);
++    second.reset();
++    REPORTER_ASSERT(reporter, gCached.load(std::memory_order_relaxed) == 2);
++    REPORTER_ASSERT(reporter, gFreed.load(std::memory_order_relaxed) == 0);
++
++    sdc.reset();
++    context.reset();
++    REPORTER_ASSERT(reporter, gFreed.load(std::memory_order_relaxed) == 1);
++    gTarget.store(nullptr, std::memory_order_relaxed);
++}

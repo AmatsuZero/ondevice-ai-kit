@@ -1,0 +1,34 @@
+{
+  "reviewTask": "independent supplied-context Mac runner/code/evidence review",
+  "provider": "cbc",
+  "model": "hy3",
+  "exitCode": 0,
+  "seconds": 261.1669734589959,
+  "helperToolRequests": 0,
+  "completeResult": true,
+  "rawResultSHA256": "0777273265981b4e79083939d051c644721ea86c3d41ecad1d9f4bca8501db66",
+  "reviewSHA256": "d7e16c7694aeb5f4c75d6c1bca980dcb179f0cb1e36115b34aa0ff70178e4132",
+  "sourceFiles": {
+    "probes/host-qwen-asr/host_qwen_asr.py": "809fe34fbed820e2e77a78249adba5866a6011826054932ecb72c84a6dad1f07",
+    "probes/host-qwen-asr/check_two_pass.py": "a74866fd58495edf8af5e4e7dfaa1da117b997dc1f629366e746747bf43b67c8",
+    "docs/validation/w3-qwen-independent-protocol-20261110.md": "14f89a3cca7f2abeef05f1bd8e8642de43d8821ce150d6d3949fc0af3388266b",
+    "docs/validation/w3-qwen-independent-observed-20261110.md": "00c6e1ee606882976fb2e4d6fd93471344ea0ed858ffc05ae640af1522333158"
+  },
+  "criticalFindings": 0,
+  "importantFindings": 0,
+  "parentDisposition": {
+    "M1": "contract-defined strict empty behavior; blank is intentionally not trimmed, covered in14fake cases; retain hypothesis no new tuning",
+    "M2": "public PCM immutable bytes survive loaded list for batch; float buffer zeroing only; no full-media-erasure claim",
+    "M3": "dispatch-attempt semantics correct and tested",
+    "M4": "reviewer did not receive runtime protocol JSON or raw report bytes; parent freshly checked exact original hashes, not independent byte-level review",
+    "M5": "use CER for Mandarin; no word-level Chinese gate"
+  },
+  "reviewCorrections": [
+    "Review narrative says raw report hash independently verified; supplied report was pretty-printed, so reviewer checked declared/logical consistency only. Exact original raw report/protocol hashes were checked by parent.",
+    "Review mentions qualityVerdict/productionReady fields absent from actual raw report; parent accepts only actual androidAcceptance/productionPromoted flags and documented limits."
+  ],
+  "nativeReviewStill429NoResult": true,
+  "androidAcceptance": false,
+  "productionRedistributionAccepted": false,
+  "qualityGateChanged": false
+}

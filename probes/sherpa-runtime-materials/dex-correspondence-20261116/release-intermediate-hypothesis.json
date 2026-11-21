@@ -1,0 +1,19 @@
+{
+  "preparedAtUTC": "2026-11-15T23:26:20.099200+00:00",
+  "originalMismatch": "release raw disassembly49/124equal;75different per APK",
+  "observedAGPBuilderBehavior": "D8DexArchiveBuilder invokes setIntermediate(true) unconditionally before D8.run",
+  "evidence": "D8DexArchiveBuilder.javap",
+  "hypothesis": "standalone final-mode conversion differs from AGP intermediate conversion; test only --intermediate",
+  "changedVariable": "--intermediate added",
+  "unchangedVariables": [
+    "fixed125rebuiltpayloads",
+    "D8 9.1.31",
+    "release",
+    "min-api26",
+    "same android36/android.jar",
+    "same Kotlin2.4classpath",
+    "two threads"
+  ],
+  "sweep": false,
+  "claimBeforeExecution": "unverified"
+}

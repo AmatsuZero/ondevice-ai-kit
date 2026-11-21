@@ -1,0 +1,162 @@
+from pathlib import Path
+import hashlib
+import io
+import json
+import re
+import subprocess
+import zipfile
+
+ROOT = Path('/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation')
+OPS = ROOT / '.omx/artifacts/w3-notice-delivery-20261115'
+MATERIAL = ROOT / 'probes/sherpa-runtime-materials/sdk-consumer-20261115'
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def emit(name, data):
+    (OPS / name).write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
+
+
+published = json.loads((MATERIAL / 'published-sdk-artifacts.json').read_bytes())
+binding = json.loads((MATERIAL / 'resolved-artifact-binding.json').read_bytes())
+raw_binding = json.loads((ROOT / 'artifacts/verification/w3-sdk-consumer-binding-20261115/resolved-artifacts.json').read_bytes())
+assert set(raw_binding) == set(binding['configurations'])
+artifacts = {}
+
+
+def add(row, label, kind, actual_path=None):
+    key = row['path']
+    if key in artifacts:
+        assert artifacts[key]['sha256'] == row['sha256']
+        artifacts[key]['roles'].append(label)
+        return
+    path = actual_path or ROOT / key
+    raw = path.read_bytes()
+    assert len(raw) == row['bytes'] and sha(raw) == row['sha256'], key
+    artifacts[key] = {**row, 'roles': [label], 'kind': kind, '_path': path}
+
+
+for row in published['artifacts']:
+    add(row['aar'], row['coordinate'], 'sdk-aar')
+    add(row['sourceJar'], row['coordinate'] + ':sources', 'source-jar-diagnostic-only')
+for row in binding['consumerOutputs']:
+    add({k: row[k] for k in ('path', 'bytes', 'sha256')}, 'library-consumer:' + row['variant'], 'consumer-aar')
+for configuration, rows in binding['configurations'].items():
+    for row in rows:
+        actual = next(x for x in raw_binding[configuration]
+                      if x['component'] == row['component'])
+        add(row['artifact'], configuration + ':' + row['component'], 'resolved-dependency', Path(actual['path']))
+
+selection = json.loads((ROOT / 'probes/speech-release-materials/20261113/text-selection.json').read_bytes())
+reference_rows = [r for r in selection['files'] if r['group'] != 'model-upstream-code-license']
+patch_root = Path('probes/sherpa-runtime-materials/2.0.1-sentencepiece-patch-20261115')
+patch_manifest = json.loads((ROOT / patch_root / 'material-manifest.json').read_bytes())
+for name in ('notices/darts-clone/NOTICE.txt', 'notices/ThreadPool/NOTICE.txt'):
+    reference_rows.append({'path': str(patch_root / name), **patch_manifest['files'][name],
+                           'group': 'newly-retained-nested-source-notice'})
+assert len(reference_rows) == 58
+references = {}
+for row in reference_rows:
+    raw = (ROOT / row['path']).read_bytes()
+    assert len(raw) == row['bytes'] and sha(raw) == row['sha256']
+    references[row['path']] = raw
+emit('reference-texts.json', {'scope': '58 known runtime-source materials; includes historical and unconfirmed composition; not a required or complete final notice set',
+                              'files': reference_rows})
+
+name_pattern = re.compile(r'(?:license|licence|notice|copying|copyright|attribution|third.?party)', re.I)
+text_pattern = re.compile(r'Apache License|Redistribution and use in source|Permission is hereby granted|copyright', re.I)
+archives = []
+members = []
+
+
+def inspect(raw, outer, prefix=''):
+    with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+        infos = archive.infolist()
+        assert len({r.filename for r in infos}) == len(infos), (outer, prefix, 'duplicate names')
+        data = {}
+        for info in infos:
+            if info.is_dir():
+                continue
+            name = prefix + info.filename
+            b = archive.read(info)
+            assert len(b) == info.file_size
+            data[info.filename] = b
+            row = {'artifact': outer, 'member': name, 'bytes': len(b), 'sha256': sha(b),
+                   'noticeLikeName': bool(name_pattern.search(info.filename)),
+                   'exactKnownTextMatches': [p for p, v in references.items() if v == b],
+                   'containedKnownTextMatches': [p for p, v in references.items() if v in b]}
+            try:
+                t = b.decode('utf-8')
+                row['utf8Decodable'] = True
+                row['textSignalMatches'] = sorted({m.group(0) for m in text_pattern.finditer(t)})
+            except UnicodeDecodeError:
+                row['utf8Decodable'] = False
+                row['textSignalMatches'] = []
+            members.append(row)
+            if info.filename.endswith(('.jar', '.zip')):
+                inspect(b, outer, name + '!/')
+        archives.append({'artifact': outer, 'prefix': prefix, 'fileMembers': len(data),
+                         'directoryMembers': sum(i.is_dir() for i in infos)})
+        return data
+
+
+for index, (key, row) in enumerate(artifacts.items()):
+    path = row.pop('_path')
+    raw = path.read_bytes()
+    data = inspect(raw, key)
+    listed = subprocess.run(['rtk', 'proxy', 'unzip', '-Z1', str(path)], capture_output=True, check=True)
+    names = listed.stdout.decode().splitlines()
+    assert len(names) == len(set(names))
+    with zipfile.ZipFile(path) as archive:
+        assert names == archive.namelist(), key
+    payload = subprocess.run(['rtk', 'proxy', 'unzip', '-p', str(path)], capture_output=True, check=True)
+    assert payload.stdout == b''.join(data.values()), key
+    outer_observation = next(x for x in archives if x['artifact'] == key and x['prefix'] == '')
+    outer_observation.update({'orderedMemberListSHA256': sha(listed.stdout),
+                              'uncompressedPayloadBytes': len(payload.stdout),
+                              'uncompressedPayloadSHA256': sha(payload.stdout),
+                              'infoZipComparisonPassed': True})
+    for name, b in data.items():
+        if name.endswith('.jar'):
+            tmp = OPS / ('nested-' + str(index) + '.jar')
+            tmp.write_bytes(b)
+            with zipfile.ZipFile(tmp) as nested:
+                nested_list = subprocess.run(['rtk', 'proxy', 'unzip', '-Z1', str(tmp)], capture_output=True, check=True)
+                assert nested_list.stdout.decode().splitlines() == nested.namelist()
+                second_nested = subprocess.run(['rtk', 'proxy', 'unzip', '-p', str(tmp)], capture_output=True, check=True)
+                assert second_nested.stdout == b''.join(nested.read(n) for n in nested.infolist() if not n.is_dir()), (key, name)
+                nested_observation = next(x for x in archives if x['artifact'] == key and x['prefix'] == name + '!/')
+                nested_observation.update({'orderedMemberListSHA256': sha(nested_list.stdout),
+                                            'uncompressedPayloadBytes': len(second_nested.stdout),
+                                            'uncompressedPayloadSHA256': sha(second_nested.stdout),
+                                            'infoZipComparisonPassed': True})
+    own = [m for m in members if m['artifact'] == key]
+    row['membersIncludingNested'] = len(own)
+    row['noticeLikeMembers'] = [m['member'] for m in own if m['noticeLikeName']]
+    row['knownTextMatches'] = [m['member'] for m in own if m['containedKnownTextMatches']]
+    row['utf8TextSignals'] = [{'member': m['member'], 'signals': m['textSignalMatches']}
+                             for m in own if m['textSignalMatches']]
+
+emit('archive-members.json', {'archives': archives, 'members': members})
+version = subprocess.run(['rtk', 'proxy', 'unzip', '-v'], capture_output=True, check=True)
+(OPS / 'infozip-version.txt').write_bytes(version.stdout)
+emit('archive-comparison.json', {'archives': archives,
+                                 'infoZipVersion': version.stdout.decode().splitlines()[0],
+                                 'infoZipVersionOutputSHA256': sha(version.stdout)})
+emit('artifact-notice-observations.json', {
+    'sourceHead': published['sourceHead'], 'artifacts': list(artifacts.values()),
+    'archiveCount': len(artifacts), 'containersIncludingNested': len(archives),
+    'membersIncludingNested': len(members), 'referenceTextCount': len(references),
+    'verification': 'Python zipfile and Info-ZIP ordered member lists and concatenated uncompressed payloads equal, including one-level nested JAR contents',
+    'runtimeResolutionScope': 'three existing Debug runtime configurations only; Release compilation separately observed',
+    'nameAndExactTextScansAreComplianceDetermination': False,
+    'finalCompositionComplete': False, 'finalAppInspected': False,
+    'productionNoticeRetentionVerified': False, 'P3Complete': False,
+    'deviceOperations': 0, 'helperInvocations': 0, 'builds': 0,
+})
+print(json.dumps({'archives': len(artifacts), 'containersIncludingNested': len(archives),
+                  'membersIncludingNested': len(members), 'referenceTexts': len(references),
+                  'noticeNames': {r['path']: r['noticeLikeMembers'] for r in artifacts.values() if r['noticeLikeMembers']},
+                  'P3Complete': False}, ensure_ascii=False))

@@ -1,0 +1,778 @@
+[
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/builder-fetch-receipts.json",
+    "retainedPath": "official/builder-fetch-receipts.json",
+    "bytes": 8544,
+    "sha256": "033c8cdca30b98040c8736dc00b21c5875856bcd9eda30cf2fb89e1260dd247f",
+    "sourceRelativePath": "builder-fetch-receipts.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/android_version.py",
+    "retainedPath": "official/ndk-r27d/android_version.py",
+    "bytes": 1913,
+    "sha256": "9748192dad6f97e46e5d2f1eac9208fb1a31f038ab4c2536ec87ac93668c419c",
+    "sourceRelativePath": "ndk-r27d/android_version.py",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/base_builders.py",
+    "retainedPath": "official/ndk-r27d/base_builders.py",
+    "bytes": 36400,
+    "sha256": "6f6c5e785d6636bb643d2edead1c4e3c33972f08f36de255e839c4fc5b3de9d0",
+    "sourceRelativePath": "ndk-r27d/base_builders.py",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/builders.py",
+    "retainedPath": "official/ndk-r27d/builders.py",
+    "bytes": 67174,
+    "sha256": "22b701469b7df2b4043278c473fddc1b92ea9ba69f66181436c5e8a9b9c9f486",
+    "sourceRelativePath": "ndk-r27d/builders.py",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/configs.py",
+    "retainedPath": "official/ndk-r27d/configs.py",
+    "bytes": 23651,
+    "sha256": "41895ef1f9f8c96e8849bd4cb5674b44ef069cfc86b03c077d3b38fe517a7502",
+    "sourceRelativePath": "ndk-r27d/configs.py",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/do_build.py",
+    "retainedPath": "official/ndk-r27d/do_build.py",
+    "bytes": 46107,
+    "sha256": "7fb259fd207877fa2e8eda90ad62198bfa20ab642241c6e97bdac2f7bee08fb8",
+    "sourceRelativePath": "ndk-r27d/do_build.py",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/llvm-android-root-tree.json",
+    "retainedPath": "official/ndk-r27d/llvm-android-root-tree.json",
+    "bytes": 7804,
+    "sha256": "28aad6edeebc31a6cef6a662f81740cf9f30c6055ff853260dad0adc00d85ac3",
+    "sourceRelativePath": "ndk-r27d/llvm-android-root-tree.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Add-cmake-c-cxx-asm-linker-flags.patch",
+    "retainedPath": "official/ndk-r27d/patches/Add-cmake-c-cxx-asm-linker-flags.patch",
+    "bytes": 1689,
+    "sha256": "82db3a79b15b628560e212a5097183333e2efab41a94a2dae70d7ccd81e8084a",
+    "sourceRelativePath": "ndk-r27d/patches/Add-cmake-c-cxx-asm-linker-flags.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Add-stubs-and-headers-for-nl_types-APIs.patch",
+    "retainedPath": "official/ndk-r27d/patches/Add-stubs-and-headers-for-nl_types-APIs.patch",
+    "bytes": 6261,
+    "sha256": "bba2c01db66c2e29d29b600c342a258b6bb0cb5a0428d22870385bb1065263fe",
+    "sourceRelativePath": "ndk-r27d/patches/Add-stubs-and-headers-for-nl_types-APIs.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "retainedPath": "official/ndk-r27d/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "bytes": 801,
+    "sha256": "f296dee815f856aefb4eefb736588cb9441940742c2d03d197a7f5c9e675695f",
+    "sourceRelativePath": "ndk-r27d/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+    "retainedPath": "official/ndk-r27d/patches/Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+    "bytes": 1021,
+    "sha256": "a09f2241e469a1e609b094ffcaeb68f496c82905e1caaa82ce9de9b81e01df82",
+    "sourceRelativePath": "ndk-r27d/patches/Disable-PhaseOrdering-ARM-arm_mult_q15.ll-test.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Disable-vfork-fork-events.patch",
+    "retainedPath": "official/ndk-r27d/patches/Disable-vfork-fork-events.patch",
+    "bytes": 1334,
+    "sha256": "a6e4d97d059894bae82a6af7c26b2af4c97a0a3c3c1255c98e8a1fa475ef65e9",
+    "sourceRelativePath": "ndk-r27d/patches/Disable-vfork-fork-events.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "retainedPath": "official/ndk-r27d/patches/Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "bytes": 3851,
+    "sha256": "be814908517462677660c8aff7485e5867c1cd1e6e91bc6aeaa57a7c22f7497b",
+    "sourceRelativePath": "ndk-r27d/patches/Ensure-that-we-use-our-toolchain-s-lipo-and-not-the-.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+    "retainedPath": "official/ndk-r27d/patches/Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+    "bytes": 1622,
+    "sha256": "6dc9e769fe4e635690364c46ef70a49664f9fd2c6a47f795851a40e4bddc1281",
+    "sourceRelativePath": "ndk-r27d/patches/Ignore-flags-that-typically-get-used-with-bpf-but-ar.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/PATCHES.json",
+    "retainedPath": "official/ndk-r27d/patches/PATCHES.json",
+    "bytes": 52792,
+    "sha256": "056d17cfc6e00b8bce184788f031b0b27e0169b16f55dce467962590b0f0b108",
+    "sourceRelativePath": "ndk-r27d/patches/PATCHES.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Remove-inline_asm-tests-for-now.patch",
+    "retainedPath": "official/ndk-r27d/patches/Remove-inline_asm-tests-for-now.patch",
+    "bytes": 982,
+    "sha256": "6351e1e58adf250c1244287cd1378b2b710c19cd3e5754092efd334545159bfb",
+    "sourceRelativePath": "ndk-r27d/patches/Remove-inline_asm-tests-for-now.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+    "retainedPath": "official/ndk-r27d/patches/Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+    "bytes": 2752,
+    "sha256": "0aa4e90dff039eec1c942f8704d63377eb50bb3c70379b25868f95fd5dcfc883",
+    "sourceRelativePath": "ndk-r27d/patches/Revert-Driver-Allow-target-override-containing-.-in-executable-name-v2.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Revert-Enable-IAS-In-Backend-v2.patch",
+    "retainedPath": "official/ndk-r27d/patches/Revert-Enable-IAS-In-Backend-v2.patch",
+    "bytes": 2060,
+    "sha256": "e8b7656917b56a30244d6e3dc9c5e6eaf64ff3783e215fbb228335ee281a5e80",
+    "sourceRelativePath": "ndk-r27d/patches/Revert-Enable-IAS-In-Backend-v2.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "retainedPath": "official/ndk-r27d/patches/Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "bytes": 1523,
+    "sha256": "fef9c036716421b14ea34759659d2d71f5007ea7ebf57848b817320ab28c4e80",
+    "sourceRelativePath": "ndk-r27d/patches/Revert-Recommit-DAGCombiner-Transform-icmp-eq-ne-and.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/Support-for-WASM-as-native-IR.patch",
+    "retainedPath": "official/ndk-r27d/patches/Support-for-WASM-as-native-IR.patch",
+    "bytes": 12180,
+    "sha256": "5df3f02faed412eefd160b643f2ec5a81b58467798612377d163b92a5f88ed89",
+    "sourceRelativePath": "ndk-r27d/patches/Support-for-WASM-as-native-IR.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "retainedPath": "official/ndk-r27d/patches/avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "bytes": 14167,
+    "sha256": "a2ef134dd468076fe3a18a97ca42dce8a17919e66491182b0f470c1bf5299769",
+    "sourceRelativePath": "ndk-r27d/patches/avoid-fifo-socket-hardlink-in-libcxx-tests.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/bionic-includes-plus-sign-for-nan-v2.patch",
+    "retainedPath": "official/ndk-r27d/patches/bionic-includes-plus-sign-for-nan-v2.patch",
+    "bytes": 3035,
+    "sha256": "c14fe8535d167cb1c619e2890109a862c5289c457500b16854c56a8b15fab8bb",
+    "sourceRelativePath": "ndk-r27d/patches/bionic-includes-plus-sign-for-nan-v2.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch",
+    "bytes": 10656,
+    "sha256": "6f396d7ca5cb7c6c6a7dbd24c7490f6697a8962cf90853574cdcc72ba47a03b9",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/02347fc7191ff4d073f439dde6523add3f5496de.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/06c89bd59ca2279f76a41e851b7b2df634a6191e.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/06c89bd59ca2279f76a41e851b7b2df634a6191e.patch",
+    "bytes": 1393,
+    "sha256": "c5c15d61def5c88b454fc35b7278c2a1e6a6df8bae8a72c50e14f523e08e8620",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/06c89bd59ca2279f76a41e851b7b2df634a6191e.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/070848c17c2944afa494d42d3ad42929f3379842.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/070848c17c2944afa494d42d3ad42929f3379842.patch",
+    "bytes": 3408,
+    "sha256": "f383d02c8ca7fa150d32649e80a527da59cb45b4dc109b59939e7ca3f49624af",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/070848c17c2944afa494d42d3ad42929f3379842.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/1117fdd7c16873eb389e988c6a39ad922bae0fd0.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/1117fdd7c16873eb389e988c6a39ad922bae0fd0.patch",
+    "bytes": 29113,
+    "sha256": "a558bdce9777e0fe0c2a123335d603a8bfe0821513c8048adb816a0cf1756520",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/1117fdd7c16873eb389e988c6a39ad922bae0fd0.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch",
+    "bytes": 5507,
+    "sha256": "700c2cf3602782248f7dfeb2385afb059634156af0626732c5014d7858c76d70",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/12f77e811b49b48df2c37f5036b05b5801a0535f.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch",
+    "bytes": 10762,
+    "sha256": "7e7865989d89adbe02bd031c2407e7d3b8dd79c2861efb6c20fbc0f57d273d91",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/179ba129f50aefe6e670800aec7091d958aa6f90.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/18473eb108e29c7c9d9fcb5d0d8c271948aca330.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/18473eb108e29c7c9d9fcb5d0d8c271948aca330.patch",
+    "bytes": 5052,
+    "sha256": "e6b6fcd609d815fd041bf33cdcef5ec8f3e2e7fa50cf93b4d6dde3c0ed057074",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/18473eb108e29c7c9d9fcb5d0d8c271948aca330.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/1b87ebce924e507cbc27c2e0dc623941d16388c9.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/1b87ebce924e507cbc27c2e0dc623941d16388c9.patch",
+    "bytes": 8686,
+    "sha256": "7f452ddf26a78cb66ee06d0efa0de389f77b03a88fc8f04efbb0451a8a0bdb41",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/1b87ebce924e507cbc27c2e0dc623941d16388c9.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/1be0d9d7d88a9bdabe6ef4d81720ddf4cf6f71c1.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/1be0d9d7d88a9bdabe6ef4d81720ddf4cf6f71c1.patch",
+    "bytes": 69030,
+    "sha256": "a6e0a1329e6dd8c7ff69a90371e462c226f50e9529d91bc41bdc4c86c32b1bff",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/1be0d9d7d88a9bdabe6ef4d81720ddf4cf6f71c1.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/1f454ede4660477c3782595975def90c26c19881.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/1f454ede4660477c3782595975def90c26c19881.patch",
+    "bytes": 1535,
+    "sha256": "01910fc6eff53a9d476b33dacfaa59e3db6f92e6abfaac2ab55a70e58c34ed53",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/1f454ede4660477c3782595975def90c26c19881.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/36b4a9ccd9f7e04010476e6b2a311f2052a4ac20.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/36b4a9ccd9f7e04010476e6b2a311f2052a4ac20.patch",
+    "bytes": 11393,
+    "sha256": "b3b8ae99ca3362f2159d9d0a3fb151f60e6e4e296445b4be594cbdde4eabb97e",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/36b4a9ccd9f7e04010476e6b2a311f2052a4ac20.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/3c9022c965b85951f30af140da591f819acef8a0.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/3c9022c965b85951f30af140da591f819acef8a0.patch",
+    "bytes": 6819,
+    "sha256": "eb5fcd1c8740efc8b4096b8ed41b8b0ce5aa4075d85f14f54f0d8b6323b7c2d7",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/3c9022c965b85951f30af140da591f819acef8a0.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/3d361b225fe89ce1d8c93639f27d689082bd8dad.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/3d361b225fe89ce1d8c93639f27d689082bd8dad.patch",
+    "bytes": 8964,
+    "sha256": "76304dc1d4e2cda6fa998f2ae5fef6b0c17765e3736189617c432c7158ca6aca",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/3d361b225fe89ce1d8c93639f27d689082bd8dad.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/3ea92ea2f9d236569f82825cdba6d59bcc22495c.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/3ea92ea2f9d236569f82825cdba6d59bcc22495c.patch",
+    "bytes": 965,
+    "sha256": "b2d4db333949d3686f095a96bf96efc850f1af6c32c313c6abe4567e9ed4b67c",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/3ea92ea2f9d236569f82825cdba6d59bcc22495c.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/3fa17954dedd59bfad9cef1778719fb6312a5949.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/3fa17954dedd59bfad9cef1778719fb6312a5949.patch",
+    "bytes": 12300,
+    "sha256": "dea751af2677a9e9de5a9850412cd31544781b44460c8143572c29cecc082b9b",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/3fa17954dedd59bfad9cef1778719fb6312a5949.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/4e347b4e38b95bc455d0e620e11ac58fc0172a94.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/4e347b4e38b95bc455d0e620e11ac58fc0172a94.patch",
+    "bytes": 34036,
+    "sha256": "bd896c4a2c469613fe996499e601c8d53699f2c0bb561a44f4624c9b627d3e13",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/4e347b4e38b95bc455d0e620e11ac58fc0172a94.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/5133a8f5590d74d9d15631742a3d84f978394dbd.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/5133a8f5590d74d9d15631742a3d84f978394dbd.patch",
+    "bytes": 4984,
+    "sha256": "352b8f54f5c19fe91c33158c7cd4a00681fbecd443a92645df7b1a5931f0c515",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/5133a8f5590d74d9d15631742a3d84f978394dbd.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/55c466da2f2f0baa509eb709b8de8926bd498b9b.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/55c466da2f2f0baa509eb709b8de8926bd498b9b.patch",
+    "bytes": 5992,
+    "sha256": "c3b2563469be895ac7046dbece324eab3b3707644bb4cdda8e3799fe348e92be",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/55c466da2f2f0baa509eb709b8de8926bd498b9b.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/5ce067d592b78fd3142364e06bae4da2a3a1e944.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/5ce067d592b78fd3142364e06bae4da2a3a1e944.patch",
+    "bytes": 137447,
+    "sha256": "20afd203ebcbb99d1bd5d1d69d90994c07a87b9873b8349a8bfd258898f851f4",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/5ce067d592b78fd3142364e06bae4da2a3a1e944.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/5f4ee5a2dfa97fe32ee62d1d67aa1413d5a059e6.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/5f4ee5a2dfa97fe32ee62d1d67aa1413d5a059e6.patch",
+    "bytes": 2685,
+    "sha256": "8427cfcee703674b7907f66ac0cc0a2c9732c1ae17d103f84c40bd4693945b65",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/5f4ee5a2dfa97fe32ee62d1d67aa1413d5a059e6.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/69066ab31959968ebcbca71f3872bdedef8fb8cd.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/69066ab31959968ebcbca71f3872bdedef8fb8cd.patch",
+    "bytes": 6034,
+    "sha256": "d58f2fe207461aabde53ef9855d4960ed83e792c5bc882aa2c6627fb26fe418a",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/69066ab31959968ebcbca71f3872bdedef8fb8cd.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/6c207ee5d20d2b054509123e6d0507df1332b376.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/6c207ee5d20d2b054509123e6d0507df1332b376.patch",
+    "bytes": 4059,
+    "sha256": "d58918fde2202f0a514be45bd423cf90d626e0bc42372ad83b070737ac11a631",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/6c207ee5d20d2b054509123e6d0507df1332b376.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/73ed2153beb529973741344874c0084d24c2f268.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/73ed2153beb529973741344874c0084d24c2f268.patch",
+    "bytes": 4072,
+    "sha256": "d79d0ac1bba0f1b5aea0c4500f0e7034f7d78680367cd67b6f0c7f361dd6db34",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/73ed2153beb529973741344874c0084d24c2f268.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/849951f8759171cb6c74d3ccbcf154506fc1f0ae.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/849951f8759171cb6c74d3ccbcf154506fc1f0ae.patch",
+    "bytes": 5165,
+    "sha256": "0c288979f038a21586fb6cfd12dfdf6aa2ac7c0937ab4aea287f88894c8e044c",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/849951f8759171cb6c74d3ccbcf154506fc1f0ae.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/915c3d9e5a2d1314afe64cd6116a3b6c9809ec90.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/915c3d9e5a2d1314afe64cd6116a3b6c9809ec90.patch",
+    "bytes": 17550,
+    "sha256": "1aec727afef7dfd494fdc63f16ca573c603e6923fe26af401d3ca20aa6b95786",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/915c3d9e5a2d1314afe64cd6116a3b6c9809ec90.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/9fe5aa31eccff49632e40bcdad6e64fc00190889.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/9fe5aa31eccff49632e40bcdad6e64fc00190889.patch",
+    "bytes": 3890,
+    "sha256": "c0a7d203855a59e513fc7801a9e3ce3b301114d9c4ef7e059885f32be1007ceb",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/9fe5aa31eccff49632e40bcdad6e64fc00190889.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/a0b6747804e46665ecfd00295b60432bfe1775b6.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/a0b6747804e46665ecfd00295b60432bfe1775b6.patch",
+    "bytes": 13827,
+    "sha256": "7fbc8acb87359ea470402256ac1b2fb34baac6dc966818216985a105a2fec7a1",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/a0b6747804e46665ecfd00295b60432bfe1775b6.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/b42b7c8a123863d86db9abc8b6a1340b920f6573.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/b42b7c8a123863d86db9abc8b6a1340b920f6573.patch",
+    "bytes": 12080,
+    "sha256": "e9dd1c84671526ce1eb7660e7419f7b1215d89184e1a9bf1caa7ec05cd653bf0",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/b42b7c8a123863d86db9abc8b6a1340b920f6573.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/bb65f5a5d95736cf08b282c1ded7f5cceed5fd7e.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/bb65f5a5d95736cf08b282c1ded7f5cceed5fd7e.patch",
+    "bytes": 2102,
+    "sha256": "cad5f57b24bff096ed4eb68eb0352139a4535859668224ae525f3f117235edc5",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/bb65f5a5d95736cf08b282c1ded7f5cceed5fd7e.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/c4146121e940b6b853148c780568dee38b97382f.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/c4146121e940b6b853148c780568dee38b97382f.patch",
+    "bytes": 62504,
+    "sha256": "6a1887d2300ae58499b55660f8308fc2aa7c5d57b3e4277b1c80b9a8453729d7",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/c4146121e940b6b853148c780568dee38b97382f.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/c9f5b5c935bd12d76d4bafff61d8116cb3229972.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/c9f5b5c935bd12d76d4bafff61d8116cb3229972.patch",
+    "bytes": 4293,
+    "sha256": "6b8e111c7fe523970c5bb7cf0eebf786fa64fede287cc07390a220dece631e71",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/c9f5b5c935bd12d76d4bafff61d8116cb3229972.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/ccb99f221422b8de5e1ae04d3427f15878f7cd93.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/ccb99f221422b8de5e1ae04d3427f15878f7cd93.patch",
+    "bytes": 5286,
+    "sha256": "9f9411aaf7e49bbeed7e961ca7f02b0f13183b34a82164b6347d0cbd5e5336cc",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/ccb99f221422b8de5e1ae04d3427f15878f7cd93.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/d218092543b3f9ba2204d7c8fe5ac70befa3d772.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/d218092543b3f9ba2204d7c8fe5ac70befa3d772.patch",
+    "bytes": 7330,
+    "sha256": "6c38d11babfa87d476d090445b57d428673b0824facd43e76d7391cd451b6c54",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/d218092543b3f9ba2204d7c8fe5ac70befa3d772.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/d21fb06a6e36048e6729c51c351ff8c4055e8381.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/d21fb06a6e36048e6729c51c351ff8c4055e8381.patch",
+    "bytes": 2264,
+    "sha256": "e0bd90f9b63da392795993ea315549159edfc00c8af8a8a0f90347f6f8f58f76",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/d21fb06a6e36048e6729c51c351ff8c4055e8381.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/d6c2cbbc6513bd412b34f3bf70e21b5a363b2fd9.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/d6c2cbbc6513bd412b34f3bf70e21b5a363b2fd9.patch",
+    "bytes": 975,
+    "sha256": "0e22e2a2e521e1f2b4cfaf48200b3aab297db78b9c295ba93eafa1276d6ec3c3",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/d6c2cbbc6513bd412b34f3bf70e21b5a363b2fd9.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/e390bda9782b461f10433aa6728acf87521e22a5.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/e390bda9782b461f10433aa6728acf87521e22a5.patch",
+    "bytes": 5354,
+    "sha256": "7969019e9960f00043525c578e8e77bf2524ae075451c6c7e262150371d3650a",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/e390bda9782b461f10433aa6728acf87521e22a5.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/e81ef463f10851bfbcd56a4f3450821f1e7c862f.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/e81ef463f10851bfbcd56a4f3450821f1e7c862f.patch",
+    "bytes": 27241,
+    "sha256": "ff47b65e69bea9873ee59cedcf39d2396cdb19ae134a9048b0fee23edc295103",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/e81ef463f10851bfbcd56a4f3450821f1e7c862f.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch",
+    "bytes": 1741,
+    "sha256": "5cddb2be6d78db60acb8c04405df535cc13dcf801e9250b6a842154ff1b0fe54",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/ec516ff3e6122069b36f32a6db8bb3dc672133fc.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/ece1359857c547a156ed743643bccbfd0f09bf2a.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/ece1359857c547a156ed743643bccbfd0f09bf2a.patch",
+    "bytes": 1804,
+    "sha256": "1b14f1b230fcf50702e62c6eeacf693546e125ed14d0349a636571eaec7c26fb",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/ece1359857c547a156ed743643bccbfd0f09bf2a.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/f3f4387e02b0ed637b5d843e8937116334329a65.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/f3f4387e02b0ed637b5d843e8937116334329a65.patch",
+    "bytes": 1800,
+    "sha256": "0be4ac17c9972aed69bc89983b064efccaed7909dc7d64d16aaf7336863982d1",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/f3f4387e02b0ed637b5d843e8937116334329a65.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/cherry/f6290e0daf5aff7132cab097fb13aad8a20ad070.patch",
+    "retainedPath": "official/ndk-r27d/patches/cherry/f6290e0daf5aff7132cab097fb13aad8a20ad070.patch",
+    "bytes": 6771,
+    "sha256": "a91e2764a26bb7c18e1aa95a49645b5df26e50f22e501e5fadcb062b7ad5082b",
+    "sourceRelativePath": "ndk-r27d/patches/cherry/f6290e0daf5aff7132cab097fb13aad8a20ad070.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "retainedPath": "official/ndk-r27d/patches/compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "bytes": 1362,
+    "sha256": "3e1e2a5cec77206efb39c0c90d5ab692abbfb26d9f169fed8025ae7a76e1491c",
+    "sourceRelativePath": "ndk-r27d/patches/compiler-rt-Allow-finding-LLVMConfig-if-CMAKE_FIND_ROOT_PATH_MODE_PACKAGE-is-set-to-ONLY.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/disable-symlink-resolve-test-on-android.patch",
+    "retainedPath": "official/ndk-r27d/patches/disable-symlink-resolve-test-on-android.patch",
+    "bytes": 2736,
+    "sha256": "43da3d11f2b648967ddc12a72a88bee2506be3c81629245faacccbb138b61b53",
+    "sourceRelativePath": "ndk-r27d/patches/disable-symlink-resolve-test-on-android.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/hide-locale-lit-features-for-bionic-v2.patch",
+    "retainedPath": "official/ndk-r27d/patches/hide-locale-lit-features-for-bionic-v2.patch",
+    "bytes": 1606,
+    "sha256": "8a2631e1b4eefd87f5f580f65bb901e509fbafef7f84cd723bfea14ecc0df29e",
+    "sourceRelativePath": "ndk-r27d/patches/hide-locale-lit-features-for-bionic-v2.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches/move-cxa-demangle-into-libcxxdemangle.patch",
+    "retainedPath": "official/ndk-r27d/patches/move-cxa-demangle-into-libcxxdemangle.patch",
+    "bytes": 3857,
+    "sha256": "6a8879953b2133491d4bc6be97332d4d031b837e0175227969f4ef7f7d6ef8b9",
+    "sourceRelativePath": "ndk-r27d/patches/move-cxa-demangle-into-libcxxdemangle.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/patches-tree.json",
+    "retainedPath": "official/ndk-r27d/patches-tree.json",
+    "bytes": 4694,
+    "sha256": "ebb89e16306dad514f82a26f5edd508d8a00a8448e7bd3aa778fdbfe8449ce88",
+    "sourceRelativePath": "ndk-r27d/patches-tree.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/paths.py",
+    "retainedPath": "official/ndk-r27d/paths.py",
+    "bytes": 7959,
+    "sha256": "087657dc115ee534811b44d998001020432837712e17514d74acd2c7148e9005",
+    "sourceRelativePath": "ndk-r27d/paths.py",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/source_manager.py",
+    "retainedPath": "official/ndk-r27d/source_manager.py",
+    "bytes": 11667,
+    "sha256": "31154e7c10bca3e0bd4fb496711d5b2566ce42b1889f3bb471f502de9801155b",
+    "sourceRelativePath": "ndk-r27d/source_manager.py",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/BUILD.md",
+    "retainedPath": "official/ndk-r30/BUILD.md",
+    "bytes": 8821,
+    "sha256": "b9c61438f39521b3087bab214fed21caf2ea0f973a2c1f254c807c87431aa6e1",
+    "sourceRelativePath": "ndk-r30/BUILD.md",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/do_build.py",
+    "retainedPath": "official/ndk-r30/do_build.py",
+    "bytes": 50166,
+    "sha256": "1aac51438a8d07e6029befae880d7c7f3beee5983df8ffa9854f4372ccfe8edf",
+    "sourceRelativePath": "ndk-r30/do_build.py",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/llvm-android-root-tree.json",
+    "retainedPath": "official/ndk-r30/llvm-android-root-tree.json",
+    "bytes": 6848,
+    "sha256": "67f3395d0258d40e4c1ecb4ddb82a4e6bc18d5dfce172b2485f2cbf2c1615619",
+    "sourceRelativePath": "ndk-r30/llvm-android-root-tree.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+    "retainedPath": "official/ndk-r30/patches/Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+    "bytes": 1712,
+    "sha256": "e30dd1381197034099f6b84bf1a47f5ff2cf4c33948fe84cd55b1004f819fb91",
+    "sourceRelativePath": "ndk-r30/patches/Add-cmake-c-cxx-asm-linker-flags-v2.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+    "retainedPath": "official/ndk-r30/patches/Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+    "bytes": 6195,
+    "sha256": "8d348f8c2fb63952d587d3d46fd2cda6abfe5a2a9bc82a52ab4d2e5fc711e460",
+    "sourceRelativePath": "ndk-r30/patches/Add-stubs-and-headers-for-nl_types-APIs-v2.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "retainedPath": "official/ndk-r27d/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "bytes": 801,
+    "sha256": "f296dee815f856aefb4eefb736588cb9441940742c2d03d197a7f5c9e675695f",
+    "sourceRelativePath": "ndk-r30/patches/BOLT-Increase-max-allocation-size-to-allow-BOLTing-clang-and-rustc.patch",
+    "duplicateBytes": true
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "retainedPath": "official/ndk-r30/patches/Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "bytes": 1146,
+    "sha256": "83c392d2d95339b7988fb29d041aa9493c65ebd4a2ebf50a77102eaccd739d99",
+    "sourceRelativePath": "ndk-r30/patches/Disable-integer-sanitizer-for-__libcpp_blsr.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "retainedPath": "official/ndk-r30/patches/Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "bytes": 1005,
+    "sha256": "a9883b3ca03633dd8fa375d53a163a60e1f79e3f4b9502a04cd069a7d3d0f0fd",
+    "sourceRelativePath": "ndk-r30/patches/Disable-std-utilities-charconv-charconv.msvc-test.pa.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "retainedPath": "official/ndk-r30/patches/Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "bytes": 1136,
+    "sha256": "6ac890d3e831093171068315214038ddd27ea974006bff2bccb314ccd5976977",
+    "sourceRelativePath": "ndk-r30/patches/Disable-unsigned-integer-overflow-checks-for-s.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/Disable-vfork-fork-events-v2.patch",
+    "retainedPath": "official/ndk-r30/patches/Disable-vfork-fork-events-v2.patch",
+    "bytes": 1310,
+    "sha256": "af5a23bc75c5f59927341750139b639815abf882817cda492780384b26812d7f",
+    "sourceRelativePath": "ndk-r30/patches/Disable-vfork-fork-events-v2.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/PATCHES.json",
+    "retainedPath": "official/ndk-r30/patches/PATCHES.json",
+    "bytes": 46128,
+    "sha256": "434225eb857bd9f8a74a642d65d70eac4225202b4f4fa830352d21687dda4ebf",
+    "sourceRelativePath": "ndk-r30/patches/PATCHES.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch",
+    "bytes": 5224,
+    "sha256": "5836dbd95212aa195eb0f86398b94196c9dcb324cb70cd0cb624ae57f8de50a9",
+    "sourceRelativePath": "ndk-r30/patches/cherry/13fe07d670e8a115929c9e595c4490ef5c75f583.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch",
+    "bytes": 1365,
+    "sha256": "4eec14da6800f8f29669d996cc7ef9ddfe620980d17bd0d4753595e7167731b9",
+    "sourceRelativePath": "ndk-r30/patches/cherry/149f91bad66972ad8bf0add5c79bf74055f6905a.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/2f43659011be6287bb57f2c43f988727c100ccc2.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/2f43659011be6287bb57f2c43f988727c100ccc2.patch",
+    "bytes": 3956,
+    "sha256": "18d3d2ab86c0ccd99401a183b3098fb95299e8cf4211f8b99bcea5789c8092b2",
+    "sourceRelativePath": "ndk-r30/patches/cherry/2f43659011be6287bb57f2c43f988727c100ccc2.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/558277ae4db665bea93686db4b4538c1c2c0cf4d.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/558277ae4db665bea93686db4b4538c1c2c0cf4d.patch",
+    "bytes": 5495,
+    "sha256": "d72598f4e8c4d26a905ab6ddb3065c0105aa0f6ff128d4fe332abaeba3558260",
+    "sourceRelativePath": "ndk-r30/patches/cherry/558277ae4db665bea93686db4b4538c1c2c0cf4d.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/564b027db16dc14c2027cd5a2fbb8bf1d3877b85.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/564b027db16dc14c2027cd5a2fbb8bf1d3877b85.patch",
+    "bytes": 4602,
+    "sha256": "4509bed41774da72d8654d3aaf0dd0c6970a042bc6847da265d7626c750ee477",
+    "sourceRelativePath": "ndk-r30/patches/cherry/564b027db16dc14c2027cd5a2fbb8bf1d3877b85.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/5bbe1536dfa6f1dce8737e466c209c553d614e50.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/5bbe1536dfa6f1dce8737e466c209c553d614e50.patch",
+    "bytes": 2689,
+    "sha256": "61eb9fcd59022b15a30d8d7bb45254a27b968a966c7e0502b0091db0eb1a4783",
+    "sourceRelativePath": "ndk-r30/patches/cherry/5bbe1536dfa6f1dce8737e466c209c553d614e50.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/d8e8ab79773f739c602c5869f80c6c5b5962c558.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/d8e8ab79773f739c602c5869f80c6c5b5962c558.patch",
+    "bytes": 75418,
+    "sha256": "ba3ef7b95149a39d9a8b92826e33d1516e8b307b2cd2a0debb041821067a5178",
+    "sourceRelativePath": "ndk-r30/patches/cherry/d8e8ab79773f739c602c5869f80c6c5b5962c558.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch",
+    "bytes": 32868,
+    "sha256": "5d72ce3c080ab4553d6ef992a32d98ab1794c310a37c1714dc16414a93409910",
+    "sourceRelativePath": "ndk-r30/patches/cherry/f5e687d7bf49cd9fe38ba7acdeb52d4f30468dee.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/fd3fecfc0936703f2715fe6fea890e81b0b3c2ac.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/fd3fecfc0936703f2715fe6fea890e81b0b3c2ac.patch",
+    "bytes": 9663,
+    "sha256": "e095bef60479b0c5b3c778fc9d0b6b850047991a6a9451c2db01c12270040592",
+    "sourceRelativePath": "ndk-r30/patches/cherry/fd3fecfc0936703f2715fe6fea890e81b0b3c2ac.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches/cherry/ff85dbdf6b399eac7bffa13e579f0f5e6edac3c0.patch",
+    "retainedPath": "official/ndk-r30/patches/cherry/ff85dbdf6b399eac7bffa13e579f0f5e6edac3c0.patch",
+    "bytes": 3767,
+    "sha256": "14d2fa0fd9dfb5e1f567e94da2508f5eb8c751532922ab6a1aa5661462cd28d8",
+    "sourceRelativePath": "ndk-r30/patches/cherry/ff85dbdf6b399eac7bffa13e579f0f5e6edac3c0.patch",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/patches-tree.json",
+    "retainedPath": "official/ndk-r30/patches-tree.json",
+    "bytes": 3675,
+    "sha256": "bc24d4bffaf79d663a4a9ac7bad2deb4f4eb47a9352fdd1186d91908e7002f77",
+    "sourceRelativePath": "ndk-r30/patches-tree.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/src/llvm_android-tree.json",
+    "retainedPath": "official/ndk-r30/src/llvm_android-tree.json",
+    "bytes": 3059,
+    "sha256": "e1271983d5fd65e94fdf54d59e36bc9ba90364b5cd02e613549e4f37be408fdd",
+    "sourceRelativePath": "ndk-r30/src/llvm_android-tree.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/src-tree.json",
+    "retainedPath": "official/ndk-r30/src-tree.json",
+    "bytes": 220,
+    "sha256": "f57250c19123442961d3f3f2c1821dd510987b2198074bb0e53a41f227db3c2e",
+    "sourceRelativePath": "ndk-r30/src-tree.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/patch-fetch-receipts.json",
+    "retainedPath": "official/patch-fetch-receipts.json",
+    "bytes": 141485,
+    "sha256": "f0a9d1c958e03fa685eb6e1f05f5d7541b6b8981e4a5243260127560c1c7bb04",
+    "sourceRelativePath": "patch-fetch-receipts.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/r30-builder-fetch-receipts.json",
+    "retainedPath": "official/r30-builder-fetch-receipts.json",
+    "bytes": 1665,
+    "sha256": "33fe62451acedd8cb8f86079be66b6418e5efe7b87f4950aa48b85485ef6d47c",
+    "sourceRelativePath": "r30-builder-fetch-receipts.json",
+    "duplicateBytes": false
+  },
+  {
+    "sourcePath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/root-fetch-receipts.json",
+    "retainedPath": "official/root-fetch-receipts.json",
+    "bytes": 1025,
+    "sha256": "8ba31e4d1a7c25bb5ca64b47ad862e67c5a26faacd581dee471b60964b9063f0",
+    "sourceRelativePath": "root-fetch-receipts.json",
+    "duplicateBytes": false
+  }
+]

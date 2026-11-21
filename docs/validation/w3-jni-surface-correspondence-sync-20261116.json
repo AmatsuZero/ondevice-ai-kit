@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "verifiedAtUTC": "2026-11-16T00:12:52.076966+00:00",
+  "marker": "<!-- w3-jni-surface-correspondence-20261116 -->",
+  "evidenceCommit": "ad0f2a633eff6700fd81a77d4118212d9d792950",
+  "githubIssue": {
+    "id": 6903719738,
+    "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6903719738",
+    "sha256": "74caf6d12e77f2cf901a9bec7c669e782bbf56fe882b26231109f11202d5b50f",
+    "readbackExact": true
+  },
+  "gitlabIssue": {
+    "id": 44876,
+    "url": null,
+    "sha256": "c42f955f311bb46a1fd5153c1a2297f78207f5ab3cd190c407a71b6eae046274",
+    "readbackExact": true
+  },
+  "githubWiki": {
+    "commit": "044d1521ad9a45a963dd352de48cacfff919f94e",
+    "sha256": "fa58a5b91e287d11813b9ad9adc35933cd57df48289e5b8d68a8a9bb9a68c703",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "fa58a5b91e287d11813b9ad9adc35933cd57df48289e5b8d68a8a9bb9a68c703",
+    "readbackExact": true
+  },
+  "wikiContentSHA256Matches": true,
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "goalSnapshotStatus": "active",
+  "nativeDeclarations": 120,
+  "declaredNameToABICoverageComparisons": 480,
+  "exportedNamesPerABI": 134,
+  "fixedSourceDefinitions": 134,
+  "JNITranslationUnitsWithJavaExports": 20,
+  "JNITranslationUnitsTotal": 23,
+  "explicitParameterTypeCategoryMatches": 120,
+  "returnTypeCategoryMatches": 120,
+  "nominalReceiverTypeMatches": 114,
+  "nominalReceiverTypeDifferences": 6,
+  "inMemoryInputNegativeCasesRejected": 8,
+  "newLLVMInvocations": 3,
+  "newSourceTextDownloads": 23,
+  "newOfficialDocumentDownloads": 1,
+  "reusedSourceFiles": 2,
+  "newBuilds": 0,
+  "newDeviceOrInference": 0,
+  "newRuntimeModelBinaryDownloads": 0,
+  "frozenFilesVerified": 161,
+  "initialProtectedContentUnchanged": 176
+}

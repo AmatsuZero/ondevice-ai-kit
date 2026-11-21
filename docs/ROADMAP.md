@@ -1,0 +1,522 @@
+## W9 当前增量（2026-11-17）
+
+2026-11-19 功能收尾：**W9 本周核心功能已验收，可内部演示和交接。** 证据见[W9 状态](roadmap/W9-voice-effects.md)，[正式发布](release/2026-11-weekly-candidate-checklist.md)仍 NO-GO，W3/W6 保持暂停。
+
+A/B/C 已集成并本地验证，当前 release not-ready；下一步为真机/听感/资源与 R 交付材料及独立复审。见 [C 集成报告](validation/w9-c-integration-20261117.md)。W3/W6 继续暂停。
+
+## 当前执行基线：2026-11-17 本周交付重排（用户已调整方向）
+
+**暂停 W3/W6 后续研发，新增 W9 离线效果变声，并行推进本周阶段交付。** 目标为 2026-11-20（周五）候选、2026-11-22（周日）本周范围验收；不是原 roadmap 全量通过声明。下方旧“下一步继续W3/W6”“单包串行”“goal active”属于当时记录，不再作为本周派工指令；不据此改写任何旧运行态。
+
+| 包 | 当前安排 | 验收边界 |
+| --- | --- | --- |
+| W1/W2/W4/W5 | 保留已关闭专项，候选必要回归 | 不重开旧专项；新候选仍需实际验证 |
+| W3 语音 | paused/deferred；保留双端已有 ASR/TTS 功能与限制 | 暂停质量提升、Qwen 替换、内存/ACK 专属实验；原质量/资源/发布门不改绿 |
+| W6 视频理解 | paused/deferred；本周不承诺通用视频理解 | 停新模型/训练/parity/验证集与手机实验，保留旧模型/证据 |
+| W7 生产校准/PAD | 阶段外延期，已有功能和未校准拒绝保留 | 原数据/协议/质量门未通过，不宣传生产身份/活体 |
+| W8 / 本周交付 | active-planned | 本次实际候选必要资源、预算/缺测裁定、通知、消费与复审继续，不自动豁免 |
+| W9 变声 | 本周核心功能已验收；正式发布待完成 | 双端离线录音/文件变声、试听/导出，可内部演示与交接 |
+
+执行入口：[新交接](HANDOFF-2026-11-17-weekly-delivery.md) · [范围设计](superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md) · [并行计划](superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md) · [W9合同](roadmap/W9-voice-effects.md) · [真实状态](validation/weekly-delivery-status-20261117.md) · [Agent任务提示](agent-tasks/weekly-20261117/README.md)。
+
+并行顺序：W9-0 合同/双端可行性 → Apple A / Android B / KMP-Demo C；发布材料 R 可先行，主代理集成/构建/设备验收，唯一 native reviewer 只读审查。旧 CBC429不自动重试、付费逐次确认及新Copilot暂停保持。提示已准备不算已启动；实际仍打包的依赖，必要通知和消费验证归发布线，不因暂停W3/W6而消失。
+
+---
+
+以下为历史快照；当前执行裁定以上述本周基线为准，原始结果/失败/未通过项保持。
+
+## 2026-11-17 W6/F08：下一会话继续短视频理解质量决策
+
+[W6/F08 下一会话交接](HANDOFF-W6-F08-NEXT-2026-11-17.md)：Qwen3.5 运行阻塞已修，但 valid36 `17/36` 未达 `20/36` 且净增 `+4` 门；36/18 SFT 的 valid 正确数 `9→8`，质量门失败且 adapter 未保存。Smol `14/36`、冻结路由最好 `19/36`，Qwen2 BF16 与旧 parity 路线均停止。后续只评估收窄产品合同、有独立质量与移动资源依据的新模型，或使用全新独立验证集的训练/蒸馏方案；新候选先过 Mac Metal 独立质量门，再考虑 iPhone。W6 保持 `open/not-ready`。
+
+W3 2026-11-16：[Apple/Qwen逐项误差对照](validation/w3-paired-error-analysis-20261116.md)已通过10,879核验/13负例；格式编辑不能解释远场内容遗漏，零新设备/识别，R4/R5/P1–P4/W3仍open。
+
+## 2026-11-16 W3 Apple Speech 有界源绑定结果摘要
+
+新接受 10 个 Core/Speech/AppleSpeech production Swift sources、16 个 selected inputs、14 个 compiler Swift source bindings；保留 18-file 历史 unsigned App。实际 264 checks passed，含 177 protection checks；no fresh build/device/download，不重试已知 quota failure。报告：[Apple 绑定报告](validation/w3-apple-source-binding-20261116.md)。保留其他编辑与旧失败；W3 完整范围不变，R4/R5/final adoption/P4/W3 均 open。
+
+## 2026-11-16 W3整体复审已提交及双端同步
+
+本地5676fab精确15文件；GH#15 comment6903955738/GL#15 note44877/GH Wiki0c9220c及双Wiki SHA6a7d94323fa52cbb92471c201fbd193c5eed7be0d4e72d8d371492c81c90fab7逐字回读。[收据](validation/w3-integrated-release-review-sync-20261116.json)。复审结论hold_release，P1–P4/R4/R5/W3保持open；已有通知/原始JVM/DEX/JNI增量保留，未识别非重复本地闭环任务。下一核心仍为条件恢复后的已授权诊断及实际全量质量/预算与同候选发布材料。
+
+## 2026-11-16 W3 整体证据复审
+
+2026-11-16 W3整体状态更新：supplied-context复审确认Whisper-tiny打包候选轨道与Qwen实验质量轨道分离，已接受增量不等于门闭合；68通知打包保留、24/65后内存停止和1.5GiB实验守卫不变。下一路径为已授权诊断、另立全量合同、P1–P3可逆准备与差异核验、产品预算/采用结果、同一候选P4。文稿由hy3供应文本复审，主代理另行验收；提交/同步另留收据。 详见[复审报告](validation/w3-integrated-release-review-20261116.md)。
+
+## 2026-11-16 W3 JNI对应已提交及双端同步
+
+本地ad0f2a6精确68文件；GH#15 comment6903719738/GL#15 note44876/GH Wiki044d152及双Wiki SHAfa58a5b91e287d11813b9ad9adc35933cd57df48289e5b8d68a8a9bb9a68c703逐字回读。[收据](validation/w3-jni-surface-correspondence-sync-20261116.json)。JNI仅名称/显式类型类别子项，6处接收者名义差异仍在；P1–P4/R4/R5/W3仍open、完整目标未缩减。
+
+## 2026-11-16 有界证据更新
+
+W3 新增 JNI surface/type-category 对应子项，主代理实际材料检查已接受：120 个声明名在四 ABI 全覆盖（480/480），保留 6 处 Companion 接收者名义差异；目标未缩减，P1/P2/P3/P4/R4/R5/W3 仍未关闭。详见 [验证](validation/w3-jni-surface-correspondence-20261116.md)。
+
+## 2026-11-16 W3 JVM→DEX 对应已双端记录
+
+3cf41c6及[同步收据](validation/w3-dex-correspondence-sync-20261116.json)：四APK各124runtime类完整原反汇编文本一致，真实DEX损坏负例拒收；GH#15 6903390954/GL#15 44875、GH Wiki0917685及双Wiki SHAafd069bb…df26已逐字回读。只接受该P1子项；完整native/输入、最终生产采用与P2–P4/R4/R5/W3仍open，源码未push。
+
+## W3 DEX 证据状态（2026-11-16，本地已接受 DEX 子项）
+
+新增 P1 JVM→DEX 子项：D8 9.1.31/min-api26 实际 6 次执行；Debug direct 124/124；带 Android bootclasspath 的 intermediate 后接同一 merge 为 49/124，no-lib intermediate 后接同一无 `--lib` 的 no-desugaring merge 为 124/124。零新 Kotlin 编译/APK 构建/下载/设备/推理/生产编辑。只证明 124 运行时类完整 baksmali 原文本一致；P1/P2/P3/P4/R4/R5/W3 仍未完成，其中 P1 仅该 DEX 子项被父端接受，详见 [报告](validation/w3-dex-correspondence-20261116.md)。
+
+## 2026-11-16 W3：三条NDK正文恢复已提交同步
+
+本地eae61a4及[双端收据](validation/w3-ndk-offline-body-recovery-sync-20261116.json)确认GH/GL Issue#15及两Wiki逐字回读。新overlay79有正文/55缺失声明行，原134/76/58历史不变；523检查/161freeze及保护通过，零新下载/构建/设备。W3/R4/R5/P1–P4仍open、goal active，完整目标与未消费真机合同不缩减；不重试旧quota/源码站或USB/旧FILE，源码未push。
+
+## 2026-11-16 W3：离线补齐三条NDK正文
+
+[验收](validation/w3-ndk-offline-body-recovery-20261116.md)：原134声明/76正文/58缺失不变，新overlay79正文/55缺失（声明行计数）；精确root→patches→blob/原收据及523检查通过，两hy3终态，零源站请求/下载/构建/设备。不能由正文恢复推历史apply、最终组成或发布接受；W3/R4/R5/P1–P4保持open、goal active，完整目标不缩减。当前待本次精确提交/双端同步，原quota/源站停线和未消费真机合同不变。
+
+## 2026-11-16 W3：R5预算形成具体草案
+
+[方案与缺测边界](validation/w3-r5-resource-options-20261116.md)由免费hy3交付/限定复核，父原始证据复算210项含161freeze通过；未来Qwen各语音组p95两阶段RTF≤1/App采样RSS≤1GiB仅待产品批准草案，不追认旧结果、不缩原65质量或1.5GiB诊断守卫。R4/R5/P1–P4/W3/W8仍open；零新真机调用、模型下载或生产实现变更。
+
+## 2026-11-16 W3：native版本字段静态对应增量
+
+四ABI固定C-API库三函数/12字面量与既有version.cc/CI修改一致，hy3原始字节解码、12测试/8同长内存负例及限定独立复核通过；[验证](validation/w3-native-version-binding-20261116.md)。只补P1版本字段对应，完整native源码/组成、生产采用与发布接受及R4/R5仍缺，W3保持open；无新构建或设备调用，不重试旧FILE/USB/429。
+
+## 2026-11-15 W3 ORT嵌套通知同步完成
+
+本地910ac8c精确99文件；GH#15comment6894671804/GL#15note44863/GHWikia7fa188均逐字回读，双Wiki SHA 139f3cf32a6849d52d17a6dfed7653e8e3926c94caf4f9c24653563f7e9fc8e1一致，[同步收据](validation/w3-ort-nested-notice-integration-sync-20261115.json)。marker已用勿重发，源码未push；四hy3/两构建/三个发布均终态、无待poll。173原字节或共享余字节及161freeze保持；96条空白诊断仅限13个已绑定原文/上游patch/重建diff路径，其他文字通过，不格式化证据。26原文/63合并通知的子集技术保留通过；P1–P4/R4/R5/W3均open、goal active；下一完整递归组成与最终生产采用/发布接受，或实体连接变化后固定未消费run的真机验收。不重试旧quota、不重取归档/重跑已验构建/旧FILE或USB恢复循环，零新设备/麦克风/AiAi/下载。
+
+## 2026-11-15 W3 ORT嵌套通知技术增量
+
+免费hy3四请求均完整success，限定复核accept_bounded_increment；26原文109766B/子索引及补丁说明已集成，合并63项697877B，离线AAR/lint/隔离Maven发布和独立最终APK通过，十负例拒收、四ABI16SO同固定runtime。[验证](validation/w3-ort-nested-notice-integration-20261115.md)。7组件11patch/21文件本地重建及四ABI编译观察已核，但Found Patch不证明历史apply/LTO保留；JSON测试工具/泛型许可与KleidiAI泛型BSD未盲选，mp11声明不冒充完整BSL。通知改变包字节，非通知成员/固定runtime未变；P1–P4/R4/R5/W3均open，零设备/麦克风/AiAi/模型下载。完整组成及同一候选的发布接受仍缺，不把本次保留通过当W3完成。
+
+## 2026-11-15 W3第三方源码补丁与嵌套声明
+
+simple-sentencepiece固定归档35源核对，Android三文件上游补丁已重建并对应四ABI实际编译；补收darts-clone BSD2及原ThreadPool声明，[验证](validation/w3-sentencepiece-patch-20261115.md)。本项补强P2特定组件来源/修改，不代表完整最终机器码组成或生产通知集成；P1–P4/R4/R5/W3仍open，原429线路停线，无新设备/模型或生产实现变更。
+
+## 2026-11-15 W3 JVM真实源码归属修正
+
+22个120000链接1568B已解析到22普通Kotlin源141269B，实际124class SourceFile与固定声明集合通过；旧链接blob保留，新记录增resolved源码摘要，[验证](validation/w3-jvm-source-resolution-20261115.md)。不证明重建class/DEX等价或完整构建输入；独立复核受原429停线，P1–P4/R4/R5/W3仍open。161freeze通过、fresh ADB空、新run未prepare/消费，无模型/生产实现变更，源码未push。
+
+## 2026-11-15 W3当前SDK消费链已父验，独立复核待恢复
+
+[当前SDK消费链](validation/w3-sdk-consumer-binding-20261115.md)：五SDK实际本地发布、当前Sherpa AAR6de95f56…，独立消费者Debug/Release编译与Debug实际制品解析通过；14源JAR文件、15metadata条目及固定runtime字节对应通过。原生库由runtime传递提供，尚无最终App打包/安装/通知证明。hy4复核429/code6004无报告已停线，等待用户线路选择；父验不写独立接受。P1完整输入/可信度及P2–P4、R4/R5/W3仍open，170保护/161freeze保持，无新设备/模型/远端SDK发布。
+
+## 2026-11-15 W3已核成员输入与既有冻结消费者
+
+[成员矩阵](validation/w3-p1-member-matrix-20261115.md)覆盖21非目录成员/9输入组，124class映射22Kotlin源路径、APK四arm64 SO逐字节对应；实际version.cc日期/SHA补丁和嵌套ORT四ABI输入已关联。类名/SourceFile不是字节码语义等价；输入完整性及实际生产采用绑定仍缺。hy4free完整限定复核accept增量，两LOW边界已保留；170保护/161freeze保持、零设备/模型/生产变更，质量资源及P1–P4/W3仍open、源码未push。
+
+## 2026-11-15 W3：CI输出与发布AAR字节对应
+
+官方CI整AAR及四ABI全部16库已与固定发布AAR逐字节对应，双解压工具/完整ZIP摘要与原日志核验通过；[验证](validation/w3-sherpa-ci-members-20261115.md)。独立复核接受P1增量，实际消费者/生产绑定与逐成员输入覆盖仍缺；W3/R4/R5及P1–P4保持open，零设备/模型/生产变更。
+
+## 2026-11-15 W3：分类同步回读
+
+本地1af1c5e精确8文件，文档finding限定复核接受；双端#15/Wiki逐字回读及Wiki SHA一致，[收据](validation/w3-closure-scope-sync-20261115.json)。GL调用级路由恢复、原EOF保留，源码未push；W3/R4/R5与P1–P4仍open，ADB未恢复且新run未消费。
+
+## 2026-11-15 W3：验收分类与证据边界
+
+W3仍open：R1–R3是TECNO限制裁定，R4质量、R5/W8资源及P1–P4源码对应/递归组成/生产通知/独立发布复审分别未过；[现行清单](validation/w3-closure-scope-20261115.md)。USB恢复结果已双端回读，[同步收据](validation/w3-adb-libusb-sync-20261115.json)；冻结守卫通过但ADB仍空，新run未prepare/消费。
+
+## 2026-11-14 W3：出处补证同步与ADB恢复边界
+
+四ABI日志补核已双端同步回读，[收据](validation/w3-ort-all-abi-sync-20261114.json)。一次libusb主机后端恢复未成功、NATIVE已恢复，无新prepare/解码；[证据](validation/w3-adb-libusb-20261114.md)。W3/R4/R5质量资源和生产余门保持，待设备连接恢复。
+
+## 2026-11-14 W3：四ABI构建出处补核
+
+新补三ABI实际日志，四ABI源码/选定参数及artifact上传下载摘要逐行一致，hy3限定复核accept；[验证](validation/w3-ort-all-abi-20261114.md)。原失败、103保护与161freeze保持；未执行真机，W3/R4/R5质量资源和生产余门open。
+
+## 2026-11-14 W3：四ABI补证同步收据
+
+本地6610d76精确11文件；双端Issue/Wiki已逐字回读、Wiki摘要一致，[收据](validation/w3-ort-release-members-sync-20261114.json)。源码未push；W3/R4/R5及完整质量资源/生产余门保持open。
+
+## 2026-11-14 W3：ORT四ABI成员对应补证
+
+固定上游发布ZIP与Sherpa AAR四个ORT SO逐字节匹配，完整SHA/Python及Info-ZIP核验通过；[验证](validation/w3-ort-release-members-20261114.md)。仅补发布成员对应，不是完整source-to-AAR、组成/生产发布或W3接受。TECNO短读成功后fresh前置仍error:closed，零新prepare/消费；W3/R4/R5质量资源门保持。
+
+## 2026-11-14 W3主机修正同步回读
+
+本地c1af030；GH#15comment6869202111/GL#15note44784/GHWiki38f11b7及双Wiki摘要一致，见[收据](validation/w3-terminal-portability-sync-20261114.json)。源码未push、marker已用；新合同384host/161freeze已验，USB见TECNO但ADB空/e00002ed，新prepare/run尚未开始，W3/R4/R5和真机/生产余门仍open。
+
+## 2026-11-14 W3隔离主机修正
+
+TECNO原prepare因远端stat参数/恢复pm path语义失败且零解码，原失败保留、手动恢复补充已验。hy3候选修正经384方法64AST/103保护/16模块双复审，新161freeze读回通过；旧140快照历史guard及相同两APK/81源保持。新20261114-01合同fresh前置遇ADB device not found，USB仍可见、ADB空，零新prepare/消费。[验证](validation/w3-terminal-portability-20261114.md)。W3/R4/R5和完整真机质量/资源/生产余门仍open。
+
+## 2026-11-13 W3复审材料同步完成
+
+fb8b038已记录GH#15comment6852524086/GL#15note44721/GHWikiffbebdd0，两Wiki逐字回读同SHA；[收据](validation/w3-release-review-materials-sync-20261113.json)。材料141文件已验、源码未push，真机与生产余门保持open。
+
+## 2026-11-13 W3复审材料归集
+
+57份许可/声明与81份支撑文本已组成141文件本地复审包，字节保留、8链接、ZIP成员及两负例通过；[验证](validation/w3-release-review-materials-20261113.md)。只推进发布准备，最终二进制组成/生产通知/发布接受和TECNO完整质量资源仍缺，W3/R4/R5open；原140freeze与未消费terminalrun保持。
+
+W3完整终态driver本地`7e607ef`：376方法/62AST、16模块双复核accept、新140文件freeze已验；双端#15/Wiki已逐字同步且摘要一致，源码未push。ADB为空、run未消费；真机质量/资源及生产发布余门保持，W3/R4/R5open。[验证](validation/w3-terminal-driver-20261113.md)／[同步收据](validation/w3-terminal-driver-sync-20261113.json)。
+
+W3终态wrapper`7688972`已同步两端#15/Wiki并逐字回读，双Wiki摘要一致、源码未push；[同步收据](validation/w3-qwen-terminal-wrapper-sync-20261112.json)。58组783断言/实包证据不关闭W3/R4/R5，完整驱动与真机生产余门继续。
+
+W3（2026-11-12）：独立终态wrapper已通过58组/783断言、构建工具10项、Python171及缓存离线75任务build/lint，实包19类/65资源/4runtime匹配，源码diff复核accept；完整轮询/启动/恢复驱动与新合同、真机生产余门仍待验，W3/R4/R5open、源码未push。见[验证](validation/w3-qwen-terminal-wrapper-20261112.md)。
+
+W3三适配器协调器`407b5ce`已同步两端#15/Wiki并逐字回读，双Wiki摘要一致、源码未push；[同步收据](validation/w3-adb-terminal-observation-sync-20261112.json)。171检查只验host组合，独立wrapper/build工具候选继续，W3/R4/R5open。
+
+W3（2026-11-12）：三适配器终态协调器完整Python171/25AST、原120冻结/失败摘要及源码复核裁定accept；实际本地主机组合验证第三采样与journal先于ACK link，仅一次handshake，非Android/完整driver。独立wrapper候选生成中，真机/生产余门继续，W3/R4/R5open、源码未push。见[验证](validation/w3-adb-terminal-observation-20261112.md)。
+
+W3远端ACK发布器`9a6ed92`已同步两端#15/Wiki并逐字回读，源码未push；见[同步收据](validation/w3-adb-terminal-ack-publisher-sync-20261112.json)。157检查不关闭W3/R4/R5，实际协调器/新实包合同及真机生产余门继续。
+
+W3（2026-11-12）：远端ACK发布适配器完整Python157/源码复核通过，仅host stand-in证据；远端协调器组合测试与实现候选各在原请求生成，完整host-loop/实包/新合同及真机生产余门继续，W3/R4/R5open。见[验证](validation/w3-adb-terminal-ack-publisher-20261112.md)。
+
+W3新鲜报告读取器`4a3d914`已同步两端#15/Wiki并逐字回读，源码未push；见[同步收据](validation/w3-adb-terminal-report-reader-sync-20261112.json)。139检查不关闭W3/R4/R5，远端ACK及实际设备链路继续。
+
+W3（2026-11-12）：新鲜报告读取器完整Python139/源码复核通过，仅本地fake-ADB/shell证据；实际host-loop/远端ACK/新实包与真机生产余门继续，W3/R4/R5 open。见[验证](validation/w3-adb-terminal-report-reader-20261112.md)。
+
+W3 ACK文件读取器`eca410d`已同步两端#15/Wiki并逐字回读，源码未push；见[同步收据](validation/w3-terminal-ack-file-sync-20261112.json)。23检查/API33编译不关闭W3/R4/R5；实际设备链路及生产余门继续。
+
+W3（2026-11-12）：ACK文件读取器23真实文件检查/API33编译及复核裁定通过，仅组件证据；真实报告传输/远端ACK/新实包与真机余门仍待验，W3/R4/R5 open。见[验证](validation/w3-terminal-ack-file-20261112.md)。
+
+W3（2026-11-12）：ADB采样适配器整套Python128/128、源码复核通过，仅本地stand-in证据；Android ACK IO/新鲜报告传输/实包/新合同与真机质量资源仍待验，W3/R4/R5 open。见[验证](validation/w3-adb-process-sampler-20261112.md)。
+
+W3发布后错误信号（2026-11-12）：首文件层03059a8已双端同步，medium已以显式异常/cause解决、2RED→完整67GREEN；实际协调器/Android实包/新真机合同未验，W3/R4/R5open。[窄修](validation/w3-terminal-publication-error-signal-20261112.md)。
+
+W3本地文件原语（2026-11-12）：Python67/67（文件45+纯校验22）/语法/旧120冻结与false verdict保持；实际协调器、Android实包与新真机合同未验，W3/R4/R5open。[验证](validation/w3-terminal-file-primitives-20261112.md)。
+
+W3模拟器同步（2026-11-11）：本地39794cb、双端#15/Wiki已逐字回读，Wiki摘要一致；单片20父诊断/tools691通过，原真机120冻结/run未消耗，W3/R4/R5仍open。[收据](validation/w3-qwen-heap-emulator-observed-sync-20261111.json)。
+
+W3模拟器（2026-11-11）：独立heap单片完成1构造/2stream/2decode、18heap事件/23RSS，20父诊断和tools691通过，采样最高1.353703GiB；同run只读政策续取/恢复/关闭通过，原真机120冻结/run未消耗，W3/R4/R5仍open。[实测](validation/w3-qwen-heap-emulator-observed-20261111.md)。
+
+W3同步（2026-11-11）：嵌套ORT依赖通知映射本地c2177b7，双端#15/Wiki逐字回读且Wiki摘要一致；ADB清单仍空、原heap120冻结保持/run未消耗，W3/R4/R5仍open。[同步收据](validation/w3-runtime-ort-dependency-map-sync-20261111.json)。
+
+W3新增（2026-11-11）：嵌套ORT的14条Fetch逐行关联固定源码/通知（13源码依赖+1hostprotoc，2GitBlob/13通知段）；archive摘要仍是声明，mp11仅通用Boost，最终递归组成/出处与生产门仍缺。ADB/MobileMCP均无Android，heaprun未消耗、W3/R4/R5open。[映射与收据](validation/w3-runtime-ort-dependency-map-20261111.md)。
+
+W3同步（2026-11-11）：嵌套ORT补核本地19ef630，双端#15/Wiki逐字回读且Wiki摘要一致；ADB清单仍空、原heap120冻结保持/run未消耗，W3/R4/R5仍open。[同步收据](validation/w3-runtime-ort-build-observed-sync-20261111.json)。
+
+W3最新（2026-11-11）：嵌套ORT官方arm64构建/collect文本补核通过，2GitBlob/50日志摘录、原50+15材料和108/120冻结保持；executed/tag差异、Maven1.26.0回退及HF空重试已记录。精确二进制对应/递归静态组成/生产通知/发布复审仍缺；ADB清单空、heaprun未消耗，W3/R4/R5open。[父裁定](validation/w3-runtime-ort-parent-assessment-20261111.md)。
+
+## 2026-11-11 W3构建依赖补核
+
+官方job实际Eigen5.0.1/四ABI，ARM WebSocket ON/x86 OFF已核；原3.4.0保持候选范围。补15文件、13来源GitBlob/20日志摘录/四ABI/17链接/15tar成员通过，原50材料及108冻结保持，无新设备/推理/二进制下载。最终so成员、递归组成和生产/独立复审仍缺，W3open。[补核证据](validation/w3-runtime-build-dependency-reconciliation-20261111.md)。
+
+## 2026-11-11 W3父端路由增量
+
+heap准备/构建/设备入口和报告校验通过102定向检查，完整tools691通过；构建前重核host测试/源码，任何ADB前完整冻结/双复核，RSS保留uptime读取区间，不宣称精确映射或峰值。原108冻结不变，0新助手/构建/设备/native，外部wrapper429零交付仍待接续线路；W3open。[当前证据](validation/w3-qwen-heap-routing-preparation-20261111.md)，源码未push。
+
+## 2026-11-11 W3父验收增量
+
+heap父端21项合成拒收+原工具61项回归通过；外部wrapper429零交付仍待线路选择。原资源门/未执行单片保持，无设备/推理/构建；实际标签、时钟对齐、实包和独立复核仍缺，W3open。详见docs/validation/w3-qwen-heap-parent-preparation-20261111.md，源码未push。
+
+W3当前（2026-11-11）：官方运行时出处/内存边界证据已提交f9b4ad0并同步双端#15/Wiki；新heap实现免费hy4free真实429/code6004、零候选，提示15:12:49+08重置，停线待接续选择。[当前准备与阻塞](validation/w3-qwen-heap-preparation-20261111.md)。父缺候选RED，无新构建/装机/推理；W3仍open，下方生成中为历史。
+
+W3新增（2026-11-11）：运行时材料fd95f8c已同步双端#15/Wiki并回读；[官方AAR身份](validation/w3-runtime-official-provenance-20261111.md)的公布digest/size/tag已核实，实际上游日志确认TTS/diarization启用，递归/发布门仍缺。[固定内存生命周期](validation/w3-qwen-memory-lifetimes-20261111.md)已核实际动态KV512基础112MiB，非峰值/根因；只选原未执行index25的heap诊断外部候选生成中，无新设备推理，W3open。
+
+W3新增（2026-11-11）：固定Sherpa运行时来源材料50文件（20许可/26构建源），46GitBlob/hash、39链接和50tar成员核对通过，AAR16so/四ABI已枚举；递归静态组成、source-to-prebuilt及生产通知/发布复审仍缺。[材料](validation/w3-runtime-materials-20261111.md)。原报告复算拒绝统一auto捷径（已知远场退步），无新模型/设备调用，W3open。[成本依据](validation/w3-qwen-cost-options-20261111.md)。
+
+W3最新（2026-11-11）：arena-off真机唯一run完成24/65，中文20/20 CER6.78%；第25项期间RSS1.525410GiB越固定1.5GiB门停止，英文仅4项、AMI/挑战未执行，完整质量成本未过。413样本/258.937s、同run政策补核/双读/模型后核及普通App恢复通过；原批已消耗不重放，W3open。[真机结果](validation/w3-qwen-arena-observed-20261111.md)。下方待解锁为历史。
+
+W3最新（2026-11-11）：arena父工具复核修正后22检查+原8父/31评分通过，108摘要新诊断合同冻结；TECNO当前安全锁屏、零新安装/模型调用，已请求这次解锁。外壳/APK不变，原失败不重放、资源门不放宽，W3open。[最新准备](validation/w3-qwen-arena-ready-20261111.md)。下方未冻结/复核中为历史。
+
+W3最新（2026-11-11）：CPU arena-off独立外壳/实包已通过30组4113/政策13组41、离线构建27.24s/lint0e7w及16类65PCM核验，独立源码复核无Critical/Important代码缺陷；父诊断17检查通过、复核进行中，尚无新冻结run/安装/native。原FILE内存失败保留、预算不放宽，W3open。[实包](validation/w3-qwen-arena-wrapper-20261111.md)／[拟定诊断](validation/w3-qwen-arena-diagnostic-protocol-20261111.md)。下方生成中是历史。
+
+W3最新（2026-11-11）：CPU arena单变量政策模块已原样集成，13组41/AndroidAPI34classpath通过；17固定源/18片段/4实际AAR DTO准备通过，未证明native消费/省内存。双端#15/Wiki已回读，本地523ea07/6a9618e；独立外壳仍生成中，无新APK/模型调用，原FILE内存失败批已消耗不重放，W3保持open。[政策模块](validation/w3-qwen-arena-policy-20261111.md)／[外壳计划](superpowers/plans/2026-11-11-w3-qwen-arena-wrapper.md)。
+
+W3最新（2026-11-11）：唯一65文件真机run在首片处理时采样RSS1.586578GiB超过固定1.5GiB门停止，0完成/可评分、实际最终decode数未知；同run双读/六模型后核/普通App恢复通过。本地7593b25，原批已消耗不重跑；下一项核既有runtime内存控制，Android质量/成本未过，W3保持open。[真机结果](validation/w3-qwen-android-file-observed-20261111.md)。下方待复核/未运行均为历史。
+
+W3新增（2026-11-11）：外部Android FILE外壳24组/364断言及三支持模块通过，离线构建/实包13类65PCM零权限核验通过；本地2b64ba4/3a6fc1d。独立外壳复核运行中，实体新FILE仍零安装/解码，待fresh解锁门后唯一run；W3保持open。[实包](validation/w3-qwen-android-file-package-20261111.md)。下方生成中状态为历史。
+
+W3新增（2026-11-11）：Android两阶段core42组/264断言及父验收7测试通过；65固定输入与1.5GiB保护保持。本地f124ab2/8b0a969，双端#15/Wiki已发布逐字回读；外壳候选仍生成中，尚无新FILE APK/设备decode，W3保持open。[核心](validation/w3-qwen-android-file-core-20261111.md)／[父验收复核](validation/w3-qwen-android-file-parent-review-20261111.md)。
+
+# 分阶段交付与恢复入口
+
+W3最新（2026-11-11）：Qwen同冻结APK在TECNO完成唯一load-only：构造1/成功9.382s、释放1/成功；49采样maxRSS1.310589GiB，未触发1.5GiB停止门。33父检查/终态双读/模型与普通App恢复通过，零stream/decode/麦克风/AiAi。模拟器结果和Mac独立质量保留；Android完整两阶段FILE质量/成本、生产通知/运行时许可/发布复审仍另验，W3保持open。[真机结果](validation/w3-qwen-physical-load-accepted-20261111.md)。下方较早W3状态均为历史。
+
+## 当前验收状态（2026-11-09 11:42 +08）
+
+去重八包中 **W1/W2/W4/W5 已关闭；W3/W6/W7/W8 四包仍开放**。基础阶段10/12是原P0–P11停止点计数，不能当作当前八包或生产发布比例；P11/release仍为 `open/not-ready`。
+
+**Skiko `.6` 已完成 Nexus 实际交付、匿名回读，以及全新依赖缓存的双 iOS 远端消费；Apple 已完成实际交付与远端消费者真机图片/视频推理。W2 已关闭，不再派发上传或消费验证。** 依据：[W2范围裁定](validation/w2-source-delivery-decision-20261108.md)、[Nexus实际交付](validation/f02-nexus-delivery.md)、[Apple远端推理](validation/f09-remote-inference-20261107.md)。
+
+W3优先质量归因：英文/受控噪声及中文Android文件链路已有实测，中文CER44/92保留原规则；Apple同输入3/3、32父检查与恢复通过，CER16/92；免费hy4free诊断已完成限定复核，VAD持久化实测25checks/5范围已提交36d0583（3次earlystop）；同输入no-VAD对照CER53/92，比baseline44/92更差，未分片第二clip输出不变，不采纳直接绕过VAD作生产修复，不以功能通过替代质量。W8按稳定能力逐项裁定：本次iPhoneTTS20cycle/40speak/620.145s与78检查已通过并恢复；GPU/能耗/生产预算仍缺，不重复此批测量。W7已有工具/单人双端试验不重做；近期仅本人可供样本，多人生产校准和单独授权的PAD数据仍是原目标阻塞项，不自动延期或关闭。W6由用户专家独占，主线只接收结论。
+
+Sherpa持续测量子项已验收：同次真机20轮创建/关闭、40次调用全成功，600.503秒含506.508秒pacing idle，265父检查与两次原始报告回读一致，临时别名/暂存已清、普通App路径保持；不重派等价测量，不代表GPU/能耗/资源预算通过。
+
+当前依据：[Apple中文同输入](validation/w3-apple-mandarin-observed-20261109.md)、[Sherpa持续验收](validation/w8-sherpa-sustained-20261109.md)、[W8逐项资源判定](validation/w8-resource-dispositions-20261109.md)、[最新验收清单](validation/progress-side-update-20261107-2014.md)、[本轮进度](validation/progress-20261109-1130.md)、[P11状态页](validation/p11-status-matrix-20261027.md)。以下按日期保留历史，旧“未交付/剩余六包”不作当前派发依据。
+
+2026-11-07：[Android Identity资源](validation/android-identity-resources-20261107.md)在当前636/dfcc主包
+完成一次受控5预热+30测量，72个RESUMED检查点/close/lease/清理通过；p50/p95=133.174/148.906ms，
+采样进程RSS峰值约473MB（含首页）。原先需前台恢复的中断运行单列且排除，不重发同一请求。
+原App/test/25私有摘要/设置/SR恢复，精确清理并返回普通App；531tools过。P11新增30样本至8能力/11组，
+旧10组保持，Identity校准/PAD和持续资源等门槛不变；10/12、P4/P11 open及release not-ready保持。
+
+2026-11-07：[当前Android TTS](validation/android-current-tts-20261107.md)复用636a6eb/dfccaa95主包，
+仅新建203KB测试包；真机一次正常播放/活动取消等待/重入/close/关闭拒绝的持久终态通过。
+ADB255后只观察同次运行；34离线协议检查通过，原App/test/runner、25私有摘要/4SR文件及设置恢复，
+暂存和报告精确清理并返回普通App。关闭当前TTS运行子项，无新P11样本，10/12及原发布门槛保持。
+
+2026-11-07：[当前Apple真机链路](validation/apple-current-runtime-20261107.md)复用现有636a6eb组合包，
+hosted非UI XCTest两方法通过，86内部检查覆盖真实factory/KMP/MLX图片和视频生成、OpenCV128维特征与释放。
+原代码UUID/18输入摘要保持，唯一临时候选已卸载、原44安装URL保持并返回普通App。
+关闭当前原生链路子项；普通交互/其他能力/质量资源和交付仍缺，无新P11样本，10/12及原发布门槛保持。
+
+2026-11-07：[当前Apple候选](validation/apple-current-candidate-20261107.md)使用Android同一636a6eb归档，
+组合MLX＋OpenCV device和MLX arm64 simulator构建及82项当前bridge通过；shared framework按源码等价
+复用且保留旧构建身份，OpenCV无arm64 simulator保持。新包真机/其他能力、质量资源与交付仍缺，
+P11没有新增样本，基础10/12、P4/P11 open、release not-ready保持。
+
+2026-11-07：[Android LiteRT-LM资源](validation/android-litertlm-resources-20261107.md)新增普通afed APK
+在TECNO/API35的1预热+5测量，6次固定红图/模型身份/输入保持/缓存清理均通过；整SDK调用
+p50/p95=56477.465/57068.401ms，采样进程RSS峰值3,905,445,888–3,978,801,152B。
+P11现7项能力/10组，旧9组不变；原App/test/Identity runner和私有文件已恢复/保持，普通App已返回。
+完整tools440通过；cbc候选经父固定prompt身份、Ollama限定意见无finding。ADB255由同run持久终态
+核实，不重发推理；临时掉线只恢复原test。基础10/12、P4/P11 open及release not-ready保持。
+
+2026-11-07：新增[Android离线ASR逐轮资源](validation/android-asr-resources-20261107.md)，
+普通afed APK真实TECNO/API35的5预热+30测量及原状态恢复已完成；P11 grouped覆盖由5项/8组
+增至6项/9组，旧组不变。固定输入不替代自然质量，采样进程RSS不替代真实峰值/能耗/长期预算，
+当前新SDK清理代码未装机。基础仍10/12，P4/P11 open、release not-ready；最新指针见manifest。
+
+2026-11-06 当前补充：精确 `e0438c0`／`b90e7830` Android 候选在 TECNO/API35 完成固定输入 ASR 的13项原生生命周期断言和 SR 的6项断言，普通 App/test、25份私有摘要及原SR文件已恢复。SR尺寸夹具错误已按原报告/媒体重验修正，没有重跑推理；[验收记录](validation/android-persistent-candidate-20261106.md)与[P11索引更新](validation/p11-candidate-lifecycle-20261106.md)区分两项有界真机验收和性能样本。F09 consumer 的manifest冻结及独占发布修复已验证。基础仍10/12，P4/P11 open，发布not-ready；下方10月记录保留各次历史状态。
+
+2026-10-28 路线图执行收尾：用户要求将当前可复核结果冻结，并把模型资产、P4 原生资源、统一质量/资源和最低系统设备列为后续专项。收尾记录见[路线图收尾记录](validation/roadmap-closure-20261028.md)。基础里程碑仍为 **10/12**，P4/P11 仍未完成；P11 发布结论继续为 `open/not-ready`。
+
+## 当前进度口径（2026-10-26 复核）
+
+**基础里程碑 10/12 已完成：P0–P3、P5–P10；P4 和 P11 未完成。** 依据加入 P11 时的原始 12 阶段基线 `cda5ba8`，按各工作包自己的停止点计数。此前反复报告的 5/12 混入了后续 SDK/Demo、第二平台、生产模型和最终验收要求，无法准确反映阶段性成果；详见[计数复核与逐阶段证据](validation/roadmap-progress-audit-20261026.md)。这不是完整项目的完成比例或发布许可。
+
+**2026-10-28那一轮已收尾；当前已按用户要求恢复推进完整roadmap。** 剩余问题继续由 [F01–F12 后续专项](validation/foundation-followups.md)跟踪。原阶段停止点、功能子项、真机和生产交付分开计数，当前审计见[逐项状态复核](validation/roadmap-status-audit-20261107.md)；不重试已失败额度线路。
+
+2026-10-28 用户调整执行优先级：最低系统设备暂缺，iOS15/Android API26 的设备运行验收暂缓，保持 `deferred/unverified`，待设备具备后恢复；当前继续推进其余实现与验收，编译下限保持不变。
+
+2026-10-28 P4 全范围审查：fresh reviewer 覆盖camera isolation、synthetic PHPicker harness和当前resource/page/thread probe，结果0 Critical、2 Important、0 Minor。默认resource probe的静默报告失败已RED→GREEN修复并通过generic iOS15 build；受保护signing工程明确排除。官方上游核验没有找到处理当前AtlasTextOp TLS/18×GrOp残留的受支持升级路径，故完整review子门槛关闭，但native residual、真机EXIF和最低系统仍阻断P4；见[审查记录](validation/p4-full-review-20261028.md)。基础10/12、P4/P11开放状态不变。
+
+2026-10-27 分批交付：用户已授权将验证通过的benchmark、多模态Kotlin/iOS picker、相机隔离、可选LiteRT-LM基础门禁与合成EXIF验证分别提交，并同步现有foundation分支到origin+jihu。提交与最新复验见[handoff顶部](HANDOFF-2026-10-23-next-session.md)；签名工程、身份草稿和未完成资源取证工具保留本地。提交/同步不关闭P4/P11，也不表示生产后端或发布验收。
+
+2026-10-27 Android ModelStore：修复IO已登记但尚未交付的lease在返回调度前取消时遗失的问题；确定性回归RED→GREEN，ModelStore12/12、LiteRT-LM25/25、lint/consumer/release AAR和仓库Android门禁通过。只回收本次未交付lease，其他owner仍pin；独立review429未取得结论。见[P2补充](validation/p2-model-store-review.md)。未增加设备/模型/native drain验收，基础10/12、P4/P11仍开放。
+
+2026-10-27 P11 一页状态矩阵：新增[状态矩阵](validation/p11-status-matrix-20261027.md)，覆盖9项能力和统一 `open/not-ready` 发布阻断；矩阵来源哈希纳入 readiness 校验，16项来源哈希通过。它不提升局部 pass-bounded 结果，也不关闭P4/P11。
+
+2026-10-27 P9/P11资源补证：固定公开单图的独立VLMProbe单目标Metal trace成功（20.776271秒、PID28389），501条GPU activity、3,227条Metal分配记录，观察峰值1,723,596,800B。Power Profiler因工具SIGTRAP无有效导出，能耗仍未验证；本轮不关闭可比较GPU peak、统一资源预算或P11。详见[移动端VLM](validation/mobile-vlm.md)。
+
+2026-10-27 P11 SDK候选冻结：从双远端已同步的 `7b9f7fc` committed tree 生成干净源码归档，内嵌commit/tree与SHA-256均已固定；受保护的1项tracked dirty和7项untracked继续留在foundation工作树且未进入归档。SDK commit冻结门槛已就绪，模型、最低系统、质量/资源/能耗等P11阻断仍保留，整体仍 `not-ready`。
+
+2026-10-27 Android LiteRT-LM consumer：公开只读availability与独立Kotlin app已完成project/Maven Local消费及TECNO缺资产UI验证；backend JVM25/25、consumer2/2、multimodal48/48，设备backend4/4、UI1/1。默认Demo/base multimodal无vendor runtime，opt-in精确0.18.1；lint无error、warning保留。生产factory/generation/close消费、模型、真实drain/推理、API26及独立review仍开放，Task5仅分段交付；详见[移动端VLM](validation/mobile-vlm.md)。基础10/12、P4/P11未完成不变。
+
+2026-10-27 P4当前源码Compose相机UI：真机控件/前后台/用户停止2/2，两分钟持续UI1/1，合计3/3、0失败/跳过；四窗口新增748/750/749/750，120.457944秒后计数3047，停止5秒不增加。普通Demo已无参数恢复；未访问相册，无图像/视频附件。补齐当前源码三项UI验证，原生GrOp、PHPicker EXIF、最低系统/全范围审查及P11仍开放，基础10/12不变。见[P4记录](validation/p4-camera-stability.md)。
+2026-10-27 P4线程标签校准：修正 own-task 快照在 pthread 映射缺失时误报 complete 的缺陷；100轮宿主 send-right 2→2、iOS15 Swift6严格 typecheck和当前 Swift5/Swift6 相机门禁通过。当前源码真机三轮页面退出/重入窗口新增687/661/660，最后页面对象/bridge约32.643秒首次全释放；同PID 301.202178秒 trace 为18×GrOp/2304B live。4097B marker校准导出低32 thread label；8个GrOp标签中7个完整pthread指针对应多个kernel TID，不能据同标签推导同一线程或TLS根因。P4原生残留、完整审查和P11仍开放，见[专项调查](validation/p4-atlas-text-cache.md)。
+2026-10-27 P11准备矩阵：已建立只读 `artifacts/verification/p11-readiness-20261027/summary.json`，覆盖9项能力并保留逐项未验证原因；所有9行仍有 gaps，`p11Gate.status=open`，发布结论 `not-ready`。该矩阵仅用于统一验收前的证据盘点，不改变10/12计数。
+2026-10-27 P4 ThreadInventory 主机门禁刷新：Swift6 主机100轮快照为 complete、send-right 2→2，缺失 pthread 映射为 partial；iOS15 arm64 typecheck 与资源生成器 Ruby 语法检查通过。证据 `artifacts/verification/p4-thread-inventory-local-20261027/summary.json` 仅覆盖 host ownership/snapshot release，不关闭真机线程/TLS/GrOp/零泄漏门禁。
+2026-10-27 P11 candidate freeze 预检：`artifacts/verification/p11-candidate-freeze-20261027/summary.json` 为 `not-ready`；工作树1项 tracked dirty/7项 untracked，只有既有 Apple MLXVLM 合成图观察值可冻结，LiteRT-LM授权模型、Face Identity生产模型与校准、iOS15/API26设备、GPU/energy/峰值资源和统一fixture仍缺失。仅作候选盘点，不冻结发布候选，不改变10/12或P11开放状态。
+2026-10-27 P11 readiness 校验门禁：只读 `tools/validate_p11_readiness.py` 强制 `p11Stop`/`requiredBeforeP11` 停止契约，检查证据路径、来源哈希、行计数及非terminal行不得关闭门禁；补齐所有证据必须纳入哈希的门禁。当前快照校验为9行/9 gaps/16证据路径/15哈希，完整工具套件 **156/156**。这只证明快照完整性，P11仍 `open/not-ready`，不增加设备、模型或发布证据。
+
+2026-10-27 Android 合同修正：固定 LiteRT-LM 0.18.1 AAR 否定原 terminal + isAlive=false 的 drain 判据；probe schema 2 不再认证该证明。两项回归 RED→GREEN，JVM9/9、lint/APK/test APK 构建通过；生产 factory/consumer 及真实 native drain 仍未完成，没有模型或设备运行。见[专项证据](validation/android-litertlm-drain-contract.md)。基础10/12不变。
+
+2026-10-27 P4并发包补验：最终Task10限定独立审查APPROVE、0 findings；MLX增强Demo以全部可选开关和固定pins完成generic iOS unsigned构建。补齐下条当时的审查/增强构建缺口，不替代UI/EXIF、原生GrOp或最低系统验收；基础10/12不变。
+
+2026-10-27 P4当前源码并发隔离：capture actor/串行executor、Sendable回调和MainActor controller已实现；Swift5/6严格检查无诊断，simulator8/8、TSan7/7、host470/470及默认/可选Demo构建通过。iPhone16ProMax当前源码11/11、0 skips；两分钟2992次Vision成功，停止/释放及暂停/恢复/FIFO通过，普通Demo已恢复。独立审查服务429，无结论；原生GrOp、真机PHPicker/完整UI与最低系统仍开放，详见[P4记录](validation/p4-camera-stability.md)。基础10/12不变。
+
+2026-10-27 P11报告准备：修复现有benchmark工具重复run将30样本膨胀至60的问题，并拒绝输出别名覆盖原始输入。聚焦9/9、完整Python工具148/148、限定独立审查APPROVE；历史双端30样本及p50/p95重算不变，raw hash保留。见[报告完整性验证](validation/benchmark.md)。P11统一候选/任务/设备/质量与发布结论仍未完成，基础10/12不变。
+
+2026-10-27 P4并发改造前的行为回归：新增真实相机暂停/恢复与连续stop/start通知/回调验证，iPhone16ProMax/iOS27.0.1完整生命周期套件**9/9、0 skips**；暂停保留输入输出，恢复继续出帧，关闭后无新帧且inputs/outputs0。普通Demo已恢复。生产源码未改，Swift6严格检查的4处捕获warnings仍未解决，不据此关闭P4；详见[P4验证](validation/p4-camera-stability.md)。
+
+2026-10-27最新P4尾部复验：当前probe真机三轮新增672/694/694次成功，页面退出后bridge已closed/无inputs/jobs，在不重入、不强制GC时末次32.086秒采样释放，持续空闲至62.351秒。18×GrOp/2304B仍最终live，trace/binary UUID已匹配；宿主复现支持线程退出导致TLS原始存储残留的机制，但设备线程/TLS归属尚未证明。普通Demo恢复，详见[专项调查](validation/p4-atlas-text-cache.md)；基础10/12、P4/P11仍未完成。
+
+2026-10-27最新P4页面退出/重入：同PID真机三轮真实渲染/相机窗口新增667/690/694次成功，停止与页面移除均执行；每轮30秒后owner/Compose controller/Metal layer释放，最后bridge仍待后续采样。301.107秒Leaks录制留下19×GrOp/2432B，18项33帧AtlasTextOp栈按三周期分配7/6/5，均最终live；不能认定稳定缓存或零泄漏。普通Demo已恢复，完整证据见[专项调查](validation/p4-atlas-text-cache.md)。基础10/12及P4/P11未完成状态不变。
+
+2026-10-26 当前 P4 进展：Android 模型资产待答期间，完成 iPhone 16 Pro Max/iOS27.0.1 的 camera terminal-close 合同 **5/5、0 skips**，默认 simulator 生成模式回归 **4/4**。真实 capture input/output 从1/1变为0/0，关闭后无新增 callback且拒绝重启；普通 Demo 已恢复。两分钟 UI 用例仍因 runner automation 初始化超时未执行；另取当前 Compose 空闲 **91.471143s** Leaks，观察到 **4×GrOp/512B**，责任栈达到限制，完整释放仍未完成。详见 [P4 当前证据](validation/p4-camera-stability.md) 与 handoff 顶部；基础计数仍10/12。
+
+同日后续只读复核：Instruments Inspector 中四个对象的 Allocation Backtrace 也全部达到栈限制，本机公开 recording options 没有 stack-depth 设置；现有 trace 无法继续归因，不据此升级依赖或宣称泄漏已解决。P4 其余交互、资源释放与审查门槛继续推进。
+
+同日 P4 新修复：关闭后重新注册callback会持有新owner的运行时RED已修复；回调读写/terminal门禁同步，旧capture在锁外释放。新simulator生命周期7/7、TSan相机专项6/6、Apple host470/470与默认consumer/Demo构建通过。严格并发capture warnings、独立review429及本次改动的硬件复验仍保留；不升级P4完成状态。
+
+同日后续硬件复验：同步修复的当前源码在iPhone16ProMax/iOS27.0.1 **8/8、0 skips**；input/output1/1→0/0、关闭后无新增callback、拒绝restart。普通Demo已恢复安装/无参数启动。当前源码硬件复验项已关闭，其余P4资源、PHPicker EXIF、最低系统与审查缺口不变，基础计数仍10/12。
+
+同日P4照片方向验证：独立iOS27.1模拟器通过真实PHPicker→生产DemoController，合成EXIF2/6/7共**3/3、0 skips**，尺寸与四角镜像/旋转像素均匹配；未改生产源码。新模拟器自带示例图引起的初始网格count失败已留档，最终按核验过的精确fixture标签唯一匹配。真机PHPicker→Vision、完整Compose交互与其余P4门槛仍未完成。
+
+同日P4持续管线验证：iPhone16ProMax/iOS27.0.1使用真实DemoController→bridge→Vision的device-only用例及既有回归共**9/9、0 skips**；四个30秒窗口新增720/721/720/720次成功，活动120.069秒后累计2885次。停止后5秒计数不变、jobs/inputs清空，owner释放及bridge/detector关闭通过。普通Demo已恢复。该结果不覆盖Compose控件或Leaks/渲染释放，P4/P11仍未完成；原始报告见`artifacts/verification/p4-sustained-controller-20261026/summary.json`。
+
+2026-10-27 P4实际Demo渲染资源验证：独立验证包复用生产SwiftUI/Compose/controller，真机活动121.118秒取得2628次Vision成功，停止30.086秒计数不变且inputs/jobs清空。210.750秒Leaks trace已按runID/PID/安装URL/时间关联，覆盖基线及持续/停止窗口；7×GrOp/896B中5项获得`AtlasTextOp::Make`分配符号，2项仍无完整栈，完整渲染释放与根因未解决。普通Demo已恢复；物理控件/真机PHPicker/最低系统/审查等缺口继续保留，基础10/12不变。详见[P4最新证据](validation/p4-camera-stability.md)。
+
+同日P4分配调查：原7个GrOp地址全部在Allocations List匹配，5个取得33帧文字绘制分配栈、来自5个不同线程。固定源码/当前本地二进制确认AtlasTextOp每线程单槽缓存及GrRecordingContext析构清理路径；缓存解释得到支持，但仍缺运行时TLS/析构、完整页面退出与增长判定。保持7×GrOp/896B资源项开放，后续进行正常页面退出/重入验证，见[专项调查](validation/p4-atlas-text-cache.md)。基础10/12不变。
+
+## 历史检查点
+
+以下保留各次验证与当时的计数；进度口径以上方最新复核为准。
+
+2026-10-26 P9 LiteRT-LM 复审修复与 release package：2 MEDIUM 经 RED→GREEN 处理，lease 覆盖 cache 成功清理，非返回 drain 在 30 秒后 poisoned 并保留资源；完整模块 JVM **23/23**。lint、debug/release AAR、POM/Gradle metadata、probe 与默认 Demo 构建通过（567 tasks），默认 Demo 不解析 LiteRT-LM，生成包仅在 runtime 依赖固定 `0.18.1`，未发布。固定授权模型、真实 callback/native drain、生产 adapter/consumer 与设备推理仍未完成，维持 **5/12、P9 active**；详见 [移动端 VLM](validation/mobile-vlm.md) 和 handoff 顶部。
+
+2026-10-26 P9 LiteRT-LM Task 3 最终本地门禁：cache 删除失败、预算、空结果、availability/close join 的新增回归进入聚焦 Gradle 构建，**BUILD SUCCESSFUL**（548 tasks；模块 JVM **22/22**、probe host **9/9**、Python AAR 工具 **7/7**）。真实 AAR 只读检查通过；新增 cleanup/query 改动的独立复审因 `429` 尚无结论。模型资产、真实 callback/drain、生产 adapter/consumer 与设备推理仍 **unverified**；继续 **5/12、P9 active**。详见 [移动端 VLM](validation/mobile-vlm.md) 与 handoff 顶部。
+
+2026-10-26 P9 LiteRT-LM Task 3 续接：可选 Kotlin backend 新增 cache 删除失败后禁止重入的 RED→GREEN 回归，补齐 512 token / 16 MiB 预算与空输出测试，并用可控 availability 查询验证 close join。当前只证明 host fake 生命周期，真实模型 callback/drain、生产 adapter/consumer 和 Android 设备推理仍未验证；继续 **5/12、P9 active**。最新验证范围见 [移动端 VLM](validation/mobile-vlm.md) 与 handoff 顶部。
+
+2026-10-26 P9 LiteRT-LM fake 生命周期续接：可选 Kotlin 模块补上 image-only 内部 session/backend seam；本地 fake 的正常 cleanup、取消、reentry、poisoned terminal 资源保留回归已通过。TECNO 真机显式无模型 probe 仅返回 `unverified-missing-app-private-assets`；临时 Maven 仓库使用已核验 AAR/POM 后，可选库 AAR 打包、lint、聚焦 JVM/probe build 通过，默认 Demo 依赖图仍无 LiteRT-LM。真实模型 callback/native drain、生产 adapter/consumer、设备生成和视频均未验证，仍 **5/12、P9 active**；详见 [移动端 VLM](validation/mobile-vlm.md) 与 handoff 顶部。
+
+2026-10-26 P9 LiteRT-LM 实施部分检查点：真实 0.18.1 AAR 静态门禁已通过；新增 Kotlin probe 和可选 `android/backend-litertlm` 模块骨架。TECNO KM9/API35 上真实 AAR content mapping instrumentation **1/1 passed**；模块固定 model spec、manifest/路径/版本校验、ModelStore 短 lease availability helper、JVM tests 与 lint 通过。原始日志见 `artifacts/verification/android-litertlm-probe-20261026/`，设计/计划/边界见 [移动端 VLM](validation/mobile-vlm.md)。模型资产未冻结，generation、callback 语义、cancel→native drain、生产 adapter、consumer 与 Android VLM/video 设备推理均 **unverified**；仍 **5/12、P9 active**。
+
+2026-10-26 P9 Android 生产后端路线复核（历史）：依据 LiteRT-LM 官方 Android 文档，下一适配候选固定为 `com.google.ai.edge.litertlm:litertlm-android`；Google Maven 元数据只读查询得到最新 **0.18.1**，POM 为 Apache-2.0 并声明 Gson 2.14.0、Kotlin reflect 2.4.0、coroutines-android 1.11.0。该轮代理无法拉取 AAR 本体，因此当时 `minSdk`/ABI/native library 未验证；后续真实 AAR 门禁与本轮 Kotlin probe 证据见上方及 [移动端 VLM](validation/mobile-vlm.md)。LiteRT-LM 的 Android/Kotlin 流式图像 API 不承诺视频语义，项目暂保持 `supportsVideo=false`。Android 生产 VLM/video backend 与真实设备推理仍 **unverified**，Roadmap 保持 **5/12、P9 active**。
+
+2026-10-26 P9 Android 导入中后台/回前台回归：TECNO KM9 / Android 15 / API35（`<Android-serial>`）上的 Kotlin-only `MultimodalPickerInstrumentation` 新增 slow fixture 生命周期场景；在 Activity-owned import active 且输入尚未发布时执行 `moveTaskToBack(true)`，回前台后 `backgroundMidCopy=passed-import-retained-after-background-return`，同次 bundle `status=passed`、exit 0。原始证据见 `artifacts/verification/multimodal-android-lifecycle-20261026/device-picker.log` / `.exit`；本地 unit/APK/test APK/lint `BUILD SUCCESSFUL`，见 `build-rerun.log` / `.exit`。该证据只验证导入生命周期，不代表 Android 生产 VLM/video backend、自然质量或资源验收。Roadmap 保持 **5/12、P9 active**。
+
+2026-10-26 P9 Android DocumentsUI 真机选择收口：当前 dirty source 的 Kotlin-only test APK 以 `OpenDocument` 打开真实 DocumentsUI，TECNO KM9 / Android 15 / API35（`<Android-serial>`）通过 test APK 自有 `MultimodalFixtureDocumentsProvider` 选择公开固定 `real-system.png`，随后回到 Demo 完成异步导入与清除；instrumentation `status=passed`，`actualSelectedSystemFile=passed-documents-provider-real-picker`，证据为 `artifacts/verification/multimodal-android-cleanup-20261026/device-picker-real-documentsui-rerun2.log` / `.exit`。该证据不读取私人媒体，也不代表 Android 生产 VLM/video backend、自然质量或资源验收；`inference=unverified-no-android-backend`。Roadmap 保持 **5/12、P9 active**。
+
+2026-10-26 P9 双真机 picker 收口与临时诊断清理：当前 dirty source 已移除 iOS 真实 picker 诊断专用 fixture seed、Documents logger 和 UI debug print；fixture 改由验证 artifact 外部复制。物理 iPhone `<iPhone-UDID>` 直接执行当前 source 的 Files picker 测试 **1/0/0**，Android TECNO KM9/API35 的 Kotlin-only instrumentation 最终 `status=passed`，本地 Android unit/APK/testAPK/lint 也 **BUILD SUCCESSFUL**。Android 首次真机崩溃已定位为 test APK 独立进程缺 Kotlin `Intrinsics`，补 `androidTest` `-Xno-param-assertions` 后复跑通过；真实 DocumentsUI/test-provider 选择的后续证据见上方最新条目、[Demo 验证](validation/multimodal-video-demo.md) 和 handoff。以上只收口 picker/UI 与生命周期门禁，Android 生产 backend、自然质量/GPU/energy、minimum OS、binary archive、独立全范围 review 及其他 roadmap 缺口仍未完成。Roadmap 保持 **5/12、P9 active**。
+
+2026-10-26 CoreDevice 外部门槛复核：物理 iPhone `<iPhone-UDID>` 未进行解锁、镜像或 UI 操作；`xcrun devicectl list devices` 当前直接返回 `Timed out waiting for CoreDeviceService to fully initialize`。不启动真机 XCTest，也不把该外部失败归因于源码；用户本人解锁且 CoreDevice 恢复后继续真实 picker `1/0/0`。Roadmap 保持 **5/12、P9 active**。
+
+2026-10-25 P9 Android 模拟器 Kotlin picker/in-flight 回归：API 37 `Medium_Phone`（`emulator-5554`）上，当前 dirty source 的 app/test APK 与 Kotlin-only `MultimodalPickerInstrumentation` 直接运行退出码 `0`、bundle `status=passed`；系统 picker 取消、Activity-owned mid-copy、busy reselection、合成回调/clear、前后台及目录清理均通过。原始证据见 [Demo 验证](validation/multimodal-video-demo.md) 与 `artifacts/verification/multimodal-android-emulator-20261025/`。`actualSelectedSystemFile` 仍为 `unverified-synthetic-result-only`，`inference` 仍为 `unverified-no-android-backend`，不改变 P9 Android 生产 backend/真实文件选择/质量缺口；Roadmap 保持 **5/12、P9 active**。
+
+2026-10-25 P9 fixture seed 诊断收口：`MultimodalHost` 的 UI-test fixture 写入改为显式 `do/catch`，失败只写受控 DEBUG 诊断；当前 dirty source 重新生成的 iOS bridge/store/factory 工程在 iOS 27.1 模拟器全套 **75/75 passed、0 failures、0 skips**。普通沙箱首轮仅受 CoreSimulator/SwiftPM 缓存权限阻断，固定缓存 escalated 重跑通过。物理 iPhone picker 仍需用户本人解锁取得 `1/0/0`，Roadmap 保持 **5/12、P9 active**。
+
+2026-10-25 P9 模拟器 Files picker 回归：当前 dirty source 的生成 Demo 在 iOS 27.1 `iPhone Duo` 上，使用 artifact-only 文件共享 plist 和公开 `fixture.png`，真实系统 picker/UI 流程 **1/1 passed、0 failures、0 skips**；覆盖进入“我的 iPhone”、点击真实 fixture Cell、异步导入、二次取消保留输入和清除。证据见 [Demo 验证](validation/multimodal-video-demo.md) 与 handoff。该结果只覆盖模拟器，不替代物理触摸/真机系统文件选择；真机 `1/0/0` 仍未验，Roadmap 仍 **5/12、P9 active**。
+
+2026-10-25 P9 picker退场竞态续接：当前 dirty source 的 `MultimodalFilePicker.finish`/host 后台竞态已完成 RED→GREEN 回归；从修复后源码重新签名 `build-for-testing` 成功。物理 iPhone `<iPhone-UDID>` 恢复到 `available (paired)` 后，新包 `test-without-building` 仍 exit70；lock-state 直接返回 `CoreDeviceError 10003` / `RemotePairingError 1016`（设备近期未解锁）。全程未使用镜像。新包与原始阻断证据见 [视频 Demo 验证](validation/multimodal-video-demo.md) 和 handoff；设备解锁后继续真实 picker `1/0/0` 验收，P9 状态暂不升级。
+
+2026-10-25 P9 自然图真机 smoke evidence 续接：固定 `mlx.smolvlm2-500m` 在已授权物理 iPhone 16 Pro Max / iOS27.0.1 上对公开自然视频的 `frame-0`、`frame-1`、`frame-18` 三帧均 `status=success`；原始报告、输入 hash、3 样本首 token/total/RSS 汇总见 [移动端 VLM](validation/mobile-vlm.md)。这补齐自然输入的真机样本与输出证据，但没有 ground truth/独立人工质量裁定，`naturalImageQuality` 继续 `unverified`，P9/P11 不收口。
+
+2026-10-25 P9/P5 资源观测续接：授权 iPhone 16 Pro Max / iOS27.0.1 上，固定公开 fixture 的 MLXVLM probe 成功（`status=success`、首 token 490.557542ms、总计 997.558208ms、进程常驻峰值 1,170,046,976B）。同步录制 15.747300s `Metal System Trace`，筛得 VLMProbe PID23718 的 405 条 GPU interval（399 Compute、6 CoreImage），设备 A18 Pro；原始 trace 和筛选副本见 [mobile-vlm](validation/mobile-vlm.md)。这只证明真实 GPU 执行活动被捕获，不填 Metal GPU peak/energy，也不升级自然质量或完整 P9/P5 通过；导出有 dylib-overlap timeline warning，需保留原始 trace并按部分证据处理。
+
+2026-10-24 P10 scoped review checkpoint：冻结范围 `ecdfd528..bb895161` 已完成独立 code-reviewer 的 98 文件只读审查和 architect scoped architecture review，CRITICAL/HIGH/MEDIUM/LOW 功能或安全 finding 均为 0；Apple/Android identity tests（313/313、319/319）及 distribution/tool tests（14/14）均通过。Android review 仍因 `429 Too Many Requests` 不可用，结论为 `SCOPED_CODE_AND_ARCHITECTURE_REVIEW_COMPLETE_PRODUCT_GATES_WATCH`，不能计为最终全 roadmap APPROVE。Task 9/10 生产模型/PAD、授权数据/校准和 P9/P11 缺口仍未完成。
+
+2026-10-24 10:10 P9 Demo最新检查点：shared typed video输入/分派/UI、双端独立store/host/picker及32MiB复制已本地实现、未提交。shared64/64、Android Demo29/29、Swift DemoABI59/59；基础iOS simulator与已有签名真机build通过，iosArm64框架已刷新，iPhone16ProMax/iOS27.0.1安装启动成功（仅启动，不是视频推理）。TECNO KM9/Android15 API35实际shared UI instrumentation通过，新增视频选择/错provider隔离/unavailable/清除/清理；初次旧文案断言失败保留。详见[Demo验证](validation/multimodal-video-demo.md)。下一优先异步host staging及导入取消、增强MLX编译，再固定视频KMP权重真机链路；仍5/12/P9active，iOS15/API26/生产Androidbackend/独立review等缺口不变。
+
+2026-10-24 P9 KMP视频bridge完成：optional typed video DTO/interface与双平台adapter，独立videoInputs默认拒绝、共用native client/lease清理。common24/24，Android模块48/48、完整Android725tasks/465JUnit，SwiftBinding23/23、Demo55/55及旧VideoABI6/6均0fail/skip，tools133/133。仅契约/注入client生命周期，不是KMP视频权重设备验收，Demo视频host/state/UI另包；详见[视频bridge验证](validation/multimodal-video-bridge.md)。原同步05c67d2现已非强推同步两远端、fresh SHA相等；新Android/KMP提交仍本地。仍5/12/P9active、独立reviewpending及全部旧缺口保留。下一独立sharedvideo state/UI与hoststager设计。
+
+2026-10-24 P9 Androidvideo契约对等完成：typed request/可选video backend/client共享Operation已实现，新增13+原22项=35/35；offline模块lint/KMPAndroidcompile通过，完整Android725tasks/452JUnit及tools133/133。新local Maven AAR/sourceJar与独立Kotlin2.4 consumer实际编译/assemble/lint45tasks通过；初次2.2metadata失败与callback测试修正均留档。Android仍无生产推理backend，KMP/Demo视频接线另包；仍5/12/P9active、独立reviewpending及旧验收缺口保留，见[Android视频契约验证](validation/android-multimodal-video-contract.md)。用户请求的旧HEAD05c67d2双远端同步因jihu TLS/reset预检未完成、未push，后续新包仅本地。下一独立KMPtypedvideo设计。
+
+2026-10-23 P9固定合成短视频native链路通过：`c9ea298/eebc670/30e5e8e` typed API/shared runtime/opt-in consumer后，首次设备因ModelStore大文件校验临时缓冲保留被per-process-limit终止；独立实际RED→GREEN修复`5e39cb8`保持全hash校验。真实iPhone17,2/iOS27.0.1/PID22072固定29FPS8帧权重success、首update取消/drain、同PID重入、close/lease清理及严格validator通过；clip2s与span25600/14848分列。完整Apple470/470、增强host41/41无skip、tools133/133。仅合成集成生命周期，不证明自然视频质量/Metal/energy/minOS；短实际样本仍拒绝、上游8→7失败/binary archive exit65/旧验收与独立reviewpending保留，仍5/12/P9active。下一独立Androidvideo契约对等，再另包KMP/Demo；详见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。以下为历史检查点。
+
+2026-10-23 P9 runtime库续接：MLXVLMBackend已显式支持video入口，沿同session/lease直接使用adapter LMInput并join后清理。新增session6/metadata1项RED→GREEN，增强host41/41无skip、tools126/126、fresh generic iOS build通过；仅库host/build，视频权重设备运行尚未执行，原Task3仍未完成。下一opt-in consumer/严格validator及固定合成device生命周期；仍5/12/P9active、独立reviewpending及旧缺口保留，见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。
+
+2026-10-23 P9 Task2续接：纯Swift typed video request/可选backend协议/client共享生命周期已实现，API RED后Multimodal22/22、完整Apple469/469、增强host34/34无skip、tools126/126、Swift6严格typecheck与新独立generic iOS公共API compile probe通过。MLXVLMBackend仍image-only，Task3 runtime未开始；下一先细化adapter直入LMInput的runtime计划。Task1短样本仍拒绝，上游8→7失败/二进制/自然质量/资源/Android真实后端/最低系统/独立review缺口保留，仍5/12/P9active。见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部；以下是历史检查点。
+
+更新时间：2026-10-23（P9真实 OS background lifecycle 14 gates通过；Demo/bridge42/42、tools123/123；物理触摸/systempicker与独立review仍待补）。GitHub为主仓，feat/sdk-foundation未合入main；本次按用户显式授权同步GitHub/GitLab功能分支，未合入main；后续恢复默认本地提交。
+
+## 执行规则
+
+2026-10-23 P9 profile/设备续接：`81ea4df`真实PQ/offset/2frame/reference负向4/4，HDRguard mutation RED后原源码恢复，完整host34/34、tools126/126。空App unit-test host沿用既有签名，物理iPhone16ProMax/iOS27.0.1执行snapshot/profile12/12和adapter6/6；ByteTokenizer输入准备，不是视频权重/质量/资源验收。原Package tool-hosted exit70及中间host链接/约束失败均保留；固定lock/checkout不改。短于8实际样本仍拒绝、不泛化profile。下一可独立推进纯Swift typed video contract/client，runtime视频推理仍未开始；见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。独立reviewpending、仍5/12/P9active。
+
+2026-10-23 P9短视频内部适配续接：`5be1b57`逐帧保留29FPS全部8帧真实pixels/顺序/CMTime，不调用上游二次采样；`c9ef8ce`真实固定tokenizer2/2，无权重加载。clip2s与sample span约1.724138s分别记录；24FPS完整tokens/pixels/mask对照上游一致。最新host30/30、tools126/126、fresh generic iOS编译通过。上游`.frames`仍8→7，原失败保留；公共API/runtime/设备视频推理未开始，snapshot额外profile/iOSdecode与旧验收门槛仍待补。下一入口补snapshot profile及iOSdecode/cancel，见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部和独立适配设计/计划。只本地提交、独立reviewpending，仍5/12、P9active。
+
+2026-10-23 P9短视频Task1：内部有界snapshot及实际pinned processor characterization已实施，host22/22、tools126/126、独立consumer generic iOS编译通过。24FPS的8帧保留并完成真实prepare；29FPS的8帧在固定上游二次采样后变7帧，原始8帧门槛实际失败。因此Task2/3暂停，不接公共video API、不改上游/伪造时间戳。下一入口先设计保留真实帧/时间语义的项目侧适配，见[短视频验证](validation/apple-mlxvlm-short-video.md)；设备推理/质量/资源与旧缺口不变，仍5/12、P9active。
+
+2026-10-23 P9短视频续接：固定模型14文件 hash/size 与12个缓存 checkout HEAD/clean 重新离线复核通过。上游有单视频 processor；`fps=1/max_frames=64` 是配置值，短片默认采样率会动态变化。项目仍无视频 API/推理证据，已完成[可行性与设计](validation/apple-mlxvlm-short-video.md)。下一 Task 先执行有界 snapshot 与固定 processor 帧/时间语义 characterization；通过后才接 typed API、Apple backend 与独立consumer。仍5/12、P9 active，binary与旧验收缺口保留。
+
+2026-10-23 P9分发续接：`b8acaa3` 新增可搬移source consumer（122个tracked package文件、相对引用、固定lock/资源hash）；搬移后generic iOS离线编译通过，tools126/126。增强Release/library-evolution archive 在本机Swift6.4验证固定swift-collections1.7.3的OrderedCollections.swiftinterface失败（exit65），binary未通过，不复用基础十XCFramework证据。见[分发验证](validation/apple-mlxvlm-distribution.md)。独立review及既有缺口保留，仍5/12、P9active；本包仅本地提交。
+
+历史执行指令为持续推进至 roadmap 完成；2026-10-28 用户已调整为本轮尽快收尾、遗留问题后续专项推进。下表保留原交付范围和验收要求，未达门槛项不转为通过；新执行入口见 [收尾记录](validation/roadmap-closure-20261028.md)与[F01–F12](validation/foundation-followups.md)。
+
+2026-10-21 接手更新：P6 Demo 语言路由补齐请求级 admission，避免默认英语不可用阻断已就绪的中文。真实 client 回归先失败再通过，Host/bridge/session39/39、native iOS fixture43/43及普通真机包构建/装机通过；完整恢复门禁Swift414/414、工具77/77和Android569tasks通过。尚无中文实录终态与真实取消/重入完成证据，独立复审仍因模型容量不足不可用，P6/roadmap保持未完成，未同步远端。恢复入口见[交接检查点](HANDOFF-2026-10-20-speech-demo-bridge.md)。
+
+2026-10-21 P7 续接：已提交 Swift 视频契约/client（`17a330e`、`fd2e537`）和 Android 对等模块（`112634d`），本地分发已验证，独立审查因服务容量失败保留pending。Apple VideoToolbox 后端现已完成本地实施、九XCFramework及固定fixture设备验证，有界AAC音轨preserve已完成并通过设备验证，KMP Video bridge/Demo Task1–5 已提交、本地门禁通过，Task6 iOS UI 因自动化初始化超时待补；Android unavailable/picker取消/空闲前后台 smoke通过。当前验收入口为[视频 Demo 验证](validation/video-bridge-demo.md)；Video SDK Foundation/AppleVideo/bridge 独立审查待恢复；P6 受控录音等待真实终态期间继续可独立推进的 P7。基础契约本身不代表实际超分，新增固定profile后端也不代表 P7 完成，见[音轨验证](validation/apple-video-audio.md)、[AppleVideo验证](validation/apple-video-backend.md)、[基础验证](validation/video-sdk-foundation.md)与[实施计划](superpowers/plans/2026-10-21-video-sdk-foundation.md)。
+
+2026-10-23 P9当前入口：增强Demo真实 OS background lifecycle 14 gates通过，source d50eff1、PID21398；项目-owned companion 触发真实四通知，RUNNING update→CANCELLED无output，恢复后不自动重启，同PID重入成功。见[OS后台验证](validation/multimodal-demo-os-background.md)。物理touch/真实systempicker/独立review仍未验，不关闭P9或提升5/12。
+
+2026-10-22 P9程序化host历史入口：独立consumer中程序化KMP host/VM→真实MLXVLM设备生命周期已通过，source2868bee，iPhone16ProMax/iOS27.0.1同PID20852，10 gates/5真实请求；成功/首update取消/drain/重入/host后台不重启/close/input与modellease/关闭拒绝。工具112/112，signeddevicebuild与严格rawvalidator通过。见[真机host/VM验证](validation/multimodal-demo-device.md)。下一独立包为共享Compose页面与增强Demo集成验收；实际UI/OS后台/systempicker仍未验，不提升5/12或关闭P9。
+
+2026-10-22 P9可选host历史入口：Apple固定模型/ModelStore可选Demo host包本地完成（design30e691b、factory5afb045及后续Task2）；Demo33/33、工具104/104、默认simulator与增强iOS18 generic device unsigned构建通过，default/Android仍unavailable。见[可选MLX host验证](validation/multimodal-demo-mlx-host.md)。下一独立包为KMP页面→真实MLXVLM设备成功/update取消/drain/重入/后台/close/lease闭环，iOS实际触摸与system picker仍未验；不关闭P9或提升5/12计数。
+
+2026-10-22 P9 host历史入口：双端native MultimodalHost生命周期包本地完成；设计cc99556、Android854d256、Apple与本检查点同次提交。新host各7/7、Android全Demo21/21、Apple Demo21/21/Binding10/10、工具101/101及APK/lint通过。见[host验证](validation/multimodal-demo-host.md)。下一独立包为system picker/shared action控件/平台opt-in及session接线；Apple固定模型与真实KMP设备闭环继续另包，Android默认unavailable。iOS实际UI/minimumOS/独立review仍待补，P9不关闭。
+
+2026-10-22 P9输入历史入口：双端opaque input/lease输入所有权本地包已完成，设计0b0f851、Apple caab202、Android与验证本检查点同次提交。私有副本、opaque UUID、remove/close封闭admission、独立幂等lease及foreign-file保护通过实际文件测试；新测试暴露并修复旧SpeechInputStore递归删除目录缺陷，Speech39/Video9回归通过。见[输入验证](validation/multimodal-demo-input.md)。下一独立包为两端host/picker与页面生命周期；Apple固定模型/ModelStore与KMP真实设备闭环随后另包，Android保持明确unavailable。不关闭P9，不提升5/12计数。
+
+2026-10-22 P9 UI历史入口：shared单图Screen/UI与opt-in入口本地实现98a3891；默认App不自动出现新页，提供model才可见。Android实际shared页面全部具名场景通过（含unavailable、原始字段、取消/update/身份及旧Speech/Video切页），shared60/60、Swift旧/新入口typecheck、含原host的独立iOS Demo build、更新Demo ABI10/10、工具101/101及Android lint通过。见[UI验证](validation/multimodal-demo-ui.md)。下一独立包为双端host/picker与opaque input/lease生命周期，Apple固定模型/ModelStore与KMP设备闭环随后分包。iOS UI、真实推理和独立review仍未验；不关闭P9或提升5/12阶段计数。
+
+2026-10-22 P9状态机历史续接：bridge三Task（2e96a26/b1e6873/1291bd2）之后，单图Demo共享状态机已提交5db0083，默认UnavailableBridge，UI/导航/host未接入。新VM12/12、全shared60/60、更新后Demo ABI bridge10/10、Android Demo APK/lint（0 error/9条既有warning）、工具101/101通过；[状态机验证](validation/multimodal-demo-state.md)、[设计](superpowers/specs/2026-10-22-multimodal-demo-state-design.md)、[计划](superpowers/plans/2026-10-22-multimodal-demo-state.md)。下一独立包为shared单图Screen/UI与opt-in入口，host/固定模型/picker/设备随后另包；短视频、Android真实推理仍分包。独立审查pending，整个P9未关闭。
+
+2026-10-22 bridge历史证据：common21/21、Android bridge10/native12、Video17/Speech25回归、Apple Binding/Demo各10/10、工具101/101；真实native client+注入fixture，不是KMP→MLXVLM真机推理。专属入口前缀避免旧ABI selector重编号，旧Video6/6通过。见[bridge验证](validation/multimodal-bridge.md)。
+
+2026-10-22 P9 benchmark历史证据：源提交f9512a0，iPhone16ProMax/iOS27 Debug、1预热+5测量：加载p50/p95=311.09/323.69ms、首交付update=763.80/774.15ms、总耗时=924.39/934.32ms；process RSS采样peak=2,437,054,464B（非Metal/GPU）。合成red+square rubric5/5，额外“flag”语义保留，不能算自然质量通过。原始证据见[后端验证](validation/apple-mlxvlm-backend.md)。本bridge包不重跑或提升这些旧证据等级。
+
+2026-10-22 P9 Foundation历史续接：Multimodal SDK Foundation本地四Task完成：cf3a0e6 Swift、8476dd8 Android、e1ff006分发。双端纯契约/client、十XCFramework、Core+Multimodal-only iOS15 device/simulator编译链接及Android Maven真实消费通过；[验证](validation/multimodal-sdk-foundation.md)、[设计](superpowers/specs/2026-10-22-multimodal-sdk-foundation-design.md)、[计划](superpowers/plans/2026-10-22-multimodal-sdk-foundation.md)。下一独立入口为可选Apple MLXVLM后端，先复核固定revision、已有资产与加载/lease/取消边界，不下载、不将probe直接当SDK。P9/roadmap未关闭，Video UI/独立审查及P6实录缺口保留。
+
+- 继续时先读本文件、验收记录和 git 状态，选择当前未完成工作包；不重复已验证工作。
+- 工作包发现跨范围缺陷时，记录为后续项；本包无法成立的阻塞才在包内修复。
+- 已授权直接使用本地真机做 device-only 验证；仅操作本项目 App，保留设备其他 App/资料。使用已有签名配置，不自行创建或变更证书、描述文件等账户资产。
+- 测试/模拟器/真机/最低系统验证分别记录；构建通过不代表真机已通过。
+- 专项恢复后不逐项重新请求继续许可；每包记录可复核提交、验证和剩余项。本轮已收尾，后续按 F01–F12 的专项边界恢复。
+
+## 当前范围与后续功能
+
+当前 KMP Demo 已有**人脸检测与关键点**入口，以及独立的身份/活体控件与宿主配置入口；原生 SDK 已接入系统 TTS、文件 ASR 与 iOS 麦克风 ASR；新麦克风路径已实现并通过本地 fixture，实际录音未验。语音工作包已完成公共契约、能力级后端查询、双端 adapter、iOS 文件 lease、共享状态机/语音页面，以及两端宿主接线、权限与独立 iOS 工程；Task 7 的现代真机闭环已通过，追加 UI/Done 独立审查已 APPROVE；不能视为 P6 已完整收口。VLM 与视频超分的独立探针状态见下表。当前尚不提供生产身份识别、1:1 比对、1:N 搜索或活体认证。已实现的 Core、任务生命周期、最新帧队列、ModelStore 和分发工程是后续能力共用的基础设施；P10 已实现独立身份存储、授权生命周期、类型化 bridge 与可裁剪分发；生产算法门槛仍待通过。
+
+| 后续能力 | SDK 与 Demo 预计交付 | 对应阶段 |
+| --- | --- | --- |
+| ASR / TTS | 原生识别/合成接口、取消与音频生命周期；KMP Demo 的语音输入/播放与能力状态 | P6 调研和单后端探针，随后按独立工作包完成 SDK/Demo 接入 |
+| 视频超分 | 视频处理接口、进度/取消、输出文件；Demo 输入/输出与质量/性能对比 | P7 调研和单链路探针，随后完成选定后端的 SDK/Demo 接入 |
+| 图像理解 / 图生文 / 多模态 | 模型会话、生成/取消、结果展示；按模型支持范围增加输入类型 | P8 比较 SmolVLM2、Florence-2、MiniCPM-V 等，P9 先验证单模型/单平台，再分包接入 SDK/Demo 及另一平台 |
+| 模型管理与按需加载 | 模型下载/校验/安装/删除、运行时加载/卸载、版本与资源状态；Demo 提供相应流程 | 现有 ModelStore 基础上，随首个自有模型接入补齐真实链路 |
+| 后端与性能比较 | 按能力查询可用性、明确实际后端；模型/后端选择和 benchmark 展示 | P5 建立验收基线，各能力接入时补充样本与指标，P11 统一验收 |
+| 人脸身份与活体 | 1:1、1:N、活体分别设计接口和数据生命周期，再增加 Demo 流程 | P10 已完成原生契约/存储/引擎、bridge/Demo 与独立本地分发；冻结范围 code/architecture scoped review 已完成且无 finding，Android 专项 review 待恢复；生产模型/PAD/校准待定 |
+
+这些仍是项目后续目标。P6/P7/P8/P9 的“调研/探针”不是完整功能交付；通过许可证、转换/运行及设备资源验证后，再为选定方案创建具体实现包。Core ML、MLX、LiteRT/TensorFlow Lite、ONNX、llama.cpp 是待按能力选择的后端，不要求所有模型在所有框架/平台重复实现。iOS15 保持基础下限，高版本能力按 availability 或独立增强模块接入。
+
+## 等待设备的 TODO
+
+2026-10-16 用户确认暂时没有 iOS15 真机；随后提供 TECNO KM9（Android 15/API 35）用于现代 Android 验证。以下最低系统验收显式挂起，等对应设备可用后恢复；期间不重复要求设备，也不将这些缺口作为其他可独立工作包的阻塞。
+
+- [ ] **DEVICE-IOS15**：取得 iOS15 真机后，验证基础宿主启动、权限、照片/相机、旋转/镜像、取消、前后台和离线推理；验证可选高版本后端不会破坏基础宿主启动。
+- [ ] **DEVICE-ANDROID-API26**：取得 API26 真机后，验证最低系统启动及 ML Kit 推理。当前 API35 设备已完成相机冒烟与流式 UI 修复验证；照片、权限、旋转/镜像、取消、前后台和离线完整行为仍在 P4 范围内。
+
+状态继续记为未验证，不以模拟器/编译结果代替真机证据。验收行见 [设备矩阵](validation/device-matrix.md)。
+
+## 原阶段与独立工作包（历史停止点）
+
+下表保留各原工作包停止时的范围与结论，不是2026-11-07所有扩展功能的当前状态。
+后续已完成的模型、普通UI和当前真机等增量以[全任务审计](validation/roadmap-status-audit-20261107.md)
+及[当前F01–F12队列](validation/foundation-followups.md)为准。
+
+按原始停止点，12 个基础里程碑中 **10 个已完成（P0–P3、P5–P10），2 个尚未完成（P4、P11）**。本轮执行以遗留项转专项收尾，P4/P11 继续保留原验收缺口；下表是阶段证据索引，后续执行状态以 [F01–F12](validation/foundation-followups.md) 为准。完成调研、探针或设计不等于对应生产能力已交付。
+
+| 包 | 交付与边界 | 验证/停止点 | 当前状态 |
+| --- | --- | --- | --- |
+| P0 当前快照收口 | 阶段表、验收证据、同步现有代码；不新增算法 | 当前检查结果落盘，两端分支 SHA 相等 | 已收口，随本次提交同步 |
+| P1 SDK 生命周期审查 | 仅 TaskGate、LatestFrameQueue、Vision/MLKit 取消与 close 的资源所有权；不改 Demo UI/安装器 | 独立审查、必要问题 RED→GREEN、对应测试通过；提交后停止 | 已完成，见 P1 审查记录 |
+| P2 模型存储审查 | 仅 manifest、原子安装、下载取消/合并、lease；不接新模型 | 路径/损坏/中断/并发用例和两端测试；提交后停止 | 已完成，见 [P2 审查](validation/p2-model-store-review.md) |
+| P3 iOS 真机最小闭环 | 发现设备/已有签名，安装本项目 Demo，合成空白输入→Vision，导出结果；不加入 VLM | 记录设备 OS、后端、成功空集合或真实错误；无可用签名则记录精确阻塞；停止 | 已完成，见 [P3 真机结果](validation/p3-ios-device.md) |
+| P4 Demo 交互闭环 | 照片、相机、旋转/镜像、取消、前后台；原生桥接资源释放 | 每项可复现结果；无相应设备时保持缺口；提交后停止 | 部分完成：iOS 相机/前后台、照片选择/取消、两分钟持续相机 UI 与 Activity Monitor/thermal 抽样、Settings 恢复入口及用户手动权限往返（恢复后相机/Vision 自动化 1/1），以及 Android API35 相机、选图取消、Orientation 6、权限拒绝/重新授权和两分钟相机 PSS/热状态抽样已验；新增 iOS Debug Orientation 6 合成图共用 ImageIO 解码→Vision，真机结果 80×160，见 [P4 记录](validation/p4-camera-stability.md)。完整 PHPicker EXIF 2/6/7、资源释放及最低系统仍待验收；Leaks detail 已导出：相机路径复现3个GrOp/384B，静态Compose对照1个/128B，纯原生consumer采样0行；渲染责任边界与完整释放仍未验 |
+| P5 benchmark 与分发验收 | 固定输入 5 次预热+30 次采样、JSON→报告；Maven/XCFramework 独立消费者 | 真机样本与分组报告可复核；未测项为 null；停止 | 原始 benchmark/分发里程碑已完成；扩展资源与最低系统验收未完成：冻结提交 `927b7749` 后，iOS27 和 Android API35 均重新完成 5+30 样本；四个 Apple XCFramework（补全现有 Client 的 target 源文件）、四个 Android 人脸 Maven artifact 和显式后端独立消费者均通过；最低系统和峰值内存/能耗测量仍待补。语音 artifact 分发已在 P6 独立验证 |
+| P6 语音调研与小探针 | 独立对比系统 ASR/TTS、离线资源、iOS26 可选能力；已有后端按独立工作包接入 SDK/Demo | 原生探针与 Demo 验收分别记录；未测项继续保留 | 原始调研/最小探针里程碑已完成；扩展 SDK/Demo 验收仍在进行：两端系统 TTS SDK 已完成现代真机成功/取消/关闭验证；Android on-device ASR 模块与严格选择已实现，TECNO KM9 的 en-US 返回 MISSING_ASSETS，真实转写和设备生命周期仍未通过。Apple 文件 ASR SDK `5fd0b2d` 已通过强制 on-device 固定文件转写、活动取消、drain、输入保持、重入及关闭后拒绝，独立架构审查 CLEAR（一个 LOW 延后）；Apple/Android 原生语音分发及消费者依赖裁剪已有通过证据。2026-10-20 语音 bridge/Demo 工作包 Task 1–6 已完成，Task 6 提交 `b272b76`：公共契约、能力级查询、Android/iOS adapter、文件 lease、共享 VM/UI、双端 host/权限与独立 iOS 工程均已实现；Task 7 的 Demo 真机/裁剪门禁已通过；追加 UI/Done 独立审查已于2026-10-21 APPROVE。iOS 两种 ABI 各 14/14、最新 iOS Host20/20、Android Host5/5、工具76/76，Android APK 与独立生成工程构建通过；Task7本地验收/独立审查现已收口；P6其他缺口保留。iOS 麦克风契约/client/capture/bridge/host/session 已于 `5be8a76..d60867c` 本地提交；Swift412项、生成桥接/host/session35项、工具77项、Apple/Android门禁、fresh七XCFramework和Speech裁剪通过。2026-10-28 以当前源码重新生成 **10 个 XCFramework**，每个含 device/simulator arm64 slice；Speech consumer 仅嵌入 Core/Speech/AppleSpeech，只有 AppleSpeech 直接链接 Speech.framework。受控真机录音仍待验；iOS26资源、Android ASR真实转写、两端断网/自然语音质量及最低系统继续保留，见[麦克风记录](validation/ios-microphone-asr.md) |
+| P7 视频超分调研与小探针 | iOS26 系统能力、CoreML、Android ONNX/LiteRT；移动端约束 | 先完成 video-sr-backends.md，再做一条固定视频链路；独立停止 | 原始调研/固定链路里程碑已完成；扩展 SDK/Demo/Android/质量验收仍在进行：iOS 27 真机确认 VideoToolbox 系统 SR 支持 4×并完成 48 帧固定视频链路；已记录内存采样、统一色彩/HEVC 编码的 SR/双三次对照和自然视频真机质量配对（两路均 48/48 帧、BT.709 元数据一致，质量仍为 unverified）；双路流程在 SR 阶段和基线阶段均验证取消无残留输出，重启后两路再处理成功，随后两次取消后同进程重入也已通过（PID 不变、两路各 48 帧）。双端 Video SDK Foundation 已实现纯契约、严格后端选择、取消/drain、输出 lease 与 close/query join，Swift12项、Android7项及本地八XCFramework/Core+Video消费者验证通过，独立审查因服务容量失败待恢复；可选 Apple VideoToolbox SDK 后端已接入（`e996d5d`，取消竞态修复 `51d98bf`），九XCFramework、Core+Video独立消费者和设备48帧成功/取消无残留/同进程重入通过，仍只支持固定SDR profile，现支持默认preserve（无音轨或单条零起点等长AAC）与discard，设备音频payload相同、无音轨默认请求、取消/重入通过；KMP bridge、共享 VM/UI 和双端 host 已实现（`9bad71d..3b0560c`），本地 Apple/Android 门禁通过；Android unavailable/选择器取消/空闲前后台 smoke通过；iOS Video Demo UI 已在物理 iPhone 上通过 XCTest 成功/取消两条 opt-in 用例（`video-success7.xcresult`、`video-cancel1.xcresult`，均 1/1 passed），覆盖真实 Files picker、48 帧带单音轨输出、分享/播放/清理和取消/重入/回前台不自动重启。人工物理触摸、独立审查、Android模型、SR模型传递函数、主观质量与最低系统仍待补，见[视频 Demo 验证](validation/video-bridge-demo.md)、[音轨验证](validation/apple-video-audio.md)、[AppleVideo验证](validation/apple-video-backend.md)、[基础验证](validation/video-sdk-foundation.md)和 [P7 记录](validation/video-sr-backends.md) |
+| P8 VLM 调研 | SmolVLM2/huggingsnap、Florence-2、MiniCPM-V及其他指定 checkpoint | mobile-vlm.md 记录许可、平台、体积、内存、证据等级；不同时接入多个模型 | 已完成候选调研与 P9 单路线选择，见 [P8 记录](validation/mobile-vlm.md)；移动端实测归 P9 |
+| P9 VLM 单模型试验 | 根据 P8 选择一个 checkpoint、一个平台、一个 runtime | 固定图像→输出→资源/耗时原始证据；随后另包推进第二平台 | 原始单模型/单平台试验里程碑已完成；以下 SDK/Demo/第二平台及产品验收继续跟踪。单平台探针、双端Multimodal契约/client及十XCFramework/Maven裁剪分发已有证据。独立Apple MLXVLM SDK后端、ModelStore lease及固定单图设备生成/取消/重入/close已通过；固定单图新增真实 iPhone 1 warm-up + 30 samples（load/首update/total p50/p95、进程RSS、30/30合成rubric）并保留旧1+5兼容入口，原始 JSON/汇总见 `mobile-vlm.md`；单图KMP common/双端adapter通过注入native client测试、两种Apple ABI各10/10；shared Demo状态机新12/12、全shared60/60已通过，shared单图UI/opt-in及Android fixture页面交互已验证，双端opaque input/lease基础已完成并验证（Apple Demo14/14、Android新4/4），native host所有者与注入选择生命周期通过双端各7/7；shared选择/清除/离页动作及Android opt-in系统picker/IO staging与独立生成iOS picker/host接线已完成：Android API35系统取消及合成content回调/清理通过，全Demo26/26，Apple Demo24/24、工具102/102、完整生成App编译通过；iOS物理触摸仍未验；iOS 真机 XCTest Files picker 已取得 1/0/0，Android API35 真实 DocumentsUI/test-provider 选择也已通过；程序化host/VM10gates与增强Demo bootstrap/共享AX真实生成9gates现均通过（source2868bee/51d3b72），Android Activity-owned 导入中后台/回前台已验，共享活动取消及其他 OS/后台场景仍待补。仅合成rubric5/5，不证明自然质量；Apple固定模型host可选接线已完成（Demo33/33、tools104/104、增强离线编译），短视频、共享页面活动取消/真实系统交互、Metal/GPU资源、Android真推理、最低系统与独立审查待补，见[增强Demo集成验证](validation/multimodal-demo-integration.md)、[真机host/VM验证](validation/multimodal-demo-device.md)、[可选MLX host验证](validation/multimodal-demo-mlx-host.md)、[picker验证](validation/multimodal-demo-picker.md)、[状态机验证](validation/multimodal-demo-state.md)、[bridge验证](validation/multimodal-bridge.md)、[后端验证](validation/apple-mlxvlm-backend.md) |
+| P10 人脸身份/活体设计 | 1:1、1:N、活体分别设计数据与指标 | [身份与活体规格](superpowers/specs/2026-10-17-face-identity-liveness-design.md)；阈值、授权删除与特征生命周期；独立停止 | 原始设计里程碑已完成；后续实施与产品验收仍在进行。书面规格已获用户认可；含 12 个工作包的[实施计划](superpowers/plans/2026-10-17-face-identity-liveness.md)已确认实施。实施前核对已修正 selection 命名冲突、Task 4 backend/policy 先于存储的依赖顺序和 codec/授权边界；[模型许可预研](validation/p10-identity-model-selection.md)已有固定上游 revision 的证据，未选模型、未下载权重。Task 1–8 契约、加密存储/删除、gallery、1:1/1:N、活体会话和模型 lease 已实现；Task 11 双端 native bridge、独立 Demo 控件与宿主配置已完成，含 Android API35 UI 冒烟及两种 iOS KMP ABI 测试；Task 12 已提交 bb89516，七个 Apple XCFramework、Identity 独立二进制 consumer 与 Maven consumer 已通过本地验收；冻结范围 code/architecture scoped review 已完成且无功能/安全 finding，Android 专项 review 因容量限制待恢复。最新 Apple371/371、Android Identity319/319、分发与工具测试见[P10 进展](validation/p10-face-identity.md)。Task 9/10 生产模型/PAD、授权数据、校准和最低系统设备仍是未通过门槛 |
+| P11 SDK/Demo 最终 benchmark 验收 | 冻结候选 SDK commit、模型 revision、测试输入和设备矩阵；对届时实际交付的每项能力与已接入后端统一运行正确性、质量、延迟、资源、取消和持续运行验证 | 保留逐 run 原始 JSON；生成按设备/OS/能力/后端分组的 p50/p95 与质量报告及一页状态矩阵；逐项标记 pass/fail/unverified/unavailable，列出未达标项和发布结论；停止 | 待各能力实现与分阶段 benchmark 完成后执行 |
+
+P1/P2 是此前未完成独立审查的拆分；二者已完成，但基础 SDK 仍需后续 P3/P4/P5 验收，不能据此声称完整工程可发布。P3 不要求先解决模拟器 Vision Code9；真机结果另行记录。iOS15 保持基础下限，高版本能力通过 availability/独立 backend 接入。
+
+P11 是最终统一验收包，不替代 P5 或各能力接入时的基准测试。执行前为每项能力预先固定样本、质量指标和合格阈值：人脸检查检测结果与坐标；ASR 使用 CER/WER、TTS 检查语言/输出与可复核质量；视频超分检查帧数、时间戳、音轨、解码和适用画质指标；多模态使用固定任务集和可复核输出。各项记录冷启动、加载、预热、推理、峰值内存和测量方法；不能可靠测量的资源指标记为未测，不填代理值。系统与第三方后端、离线与联网路径分组展示，不合并成跨能力总分。
+
+2026-10-17：已完成现有人脸检测 Client 的 Default/Explicit 后端注册与错误契约验证，见 [后端选择验证](validation/backend-selection.md)。这只验证统一选择入口，不代表 TTS、ASR、身份、超分或 VLM 的后端已全部实现。
+同日已将选择值传递到 KMP Bridge 与两端 Demo 的人脸检测调用；目前各平台只注册一个基础后端，显式选择第二个生产后端、UI 选择器和真机验证仍待后续能力包。
+
+设备矩阵至少区分 iOS 15 基线、较新 iOS、Android API 26 基线和较新 Android；同一能力/后端仅在实际支持的设备上执行。缺设备、权限、凭据或模型资产时标记 unverified/unavailable 并写明原因，不能以构建或模拟器结果替代真机。未实现的研究候选不进入通过率分母；已计划交付但尚未实现的能力不得标记 pass。汇总页使用可读的状态矩阵和指标摘要支持 SDK/Demo 评估，发布结论需列明阻断项及证据链接。
+
+## 已有实现与证据
+
+截至代码快照 `c03003f`：原生 Core、ModelStore、Face、Vision/MLKit，KMP Demo，benchmark 报告工具和本地分发工程已提交。这是开发快照，**不是完整工程验收完成或可发布版本**。
+
+- Apple 验证脚本已通过：19 个 Swift XCTest、3 个 KMP 测试的已有报告、桥接 typecheck、原生消费者与 Demo 构建。两平台 archive 和四个 XCFramework 已生成；二进制消费者构建通过。
+- Android 已有 11 个 JVM 测试报告通过；Demo/原生消费者 APK 离线构建通过。后续重试完成四模块 Maven 本地发布和 lint；当前统一检查与 Maven 消费者复核结果见 acceptance.md。
+- Python benchmark/sync 测试 7/7 通过。
+- iOS27 模拟器 Demo 启动成功，但 Vision 实际推理报 Code9，未生成有效 benchmark；不算成功空脸。iPhone 16 Pro Max / iOS27.0.1 的合成空白 Vision 真机闭环已通过，见 P3；iOS15 和 Android 设备仍未验证。
+- 原整分支 reviewer 未返回审查结果：工具报告用量限制，不能视为审查通过。后续分 P1/P2/P4/P5 各包完成必要审查。
+
+## 恢复时的第一步
+
+2026-10-22 **单图UI/input/host/picker及Apple固定模型可选接线本地包已完成**：[可选MLX host验证](validation/multimodal-demo-mlx-host.md)。程序化KMP host/VM→MLXVLM设备生命周期现已通过，见[真机host/VM验证](validation/multimodal-demo-device.md)。增强Demo bootstrap与共享AX真实生成已通过，见[集成验证](validation/multimodal-demo-integration.md)。下一本地入口为共享AX首update取消/活动离页/重入，先独立设计/逐Task计划；保留default/Android unavailable。短视频/Android真backend/自然质量/Metal GPU/energy另包。旧Video自动化初始化超时、P6实录/ASR资源、最低系统与独立review缺口保留，不下载、不自动录音。
+
+[iOS 麦克风设计](superpowers/specs/2026-10-20-ios-microphone-asr-design.md)的文件兼容、optional finish、session lease、按输入权限和drain边界均已落地。Task1–3核心、Task4桥接、Task5及回滚修复均独立APPROVE，0问题；最新native simulator39/39。旧语音包 Task7 UI/Done 独立审查已恢复APPROVE；旧包本地门禁收口。当前新麦克风Task6未验，远端最终同步门禁维持。
+
+| 语音工作包任务 | 当前状态与证据 |
+| --- | --- |
+| Task 1 公共 Speech Bridge 契约 | 已完成，`6788b1b`；类型化选择、输入、结果、失败与回调，Swift ABI typecheck 通过 |
+| Task 2 能力级后端查询 | 已完成，`331de92`；独立 TTS/ASR 查询、严格选择与 close 竞态测试通过 |
+| Task 3 Android adapter | 已完成，`8719a17`；单音频槽、取消/drain、并发 close、输入与隐私测试，Speech 单元测试/lint/binding 编译通过 |
+| Task 4 iOS adapter 与输入 lease | 已完成，`7605511`；Binding/Demo 两种 ABI XCTest 各 14/14，生成器 5/5；受保护文件 hash 未变化 |
+| Task 5 共享状态机与语音页面 | 已完成，`233873e`；Speech VM 10/10、Face 5/5、Identity 20/20，binding tests、Android APK 与共享模拟器 framework 构建通过；Android 真实 tags/滚动已在 Task 7 验证 |
+| Task 6 两端 host/权限/独立工程 | 已完成，`b272b76`；iOS picker/Speech 授权、Android 麦克风权限/TTS 初始化、双端生命周期与独立工程构建；Task 7 补引用环、权限重试与 factory 分类回归 |
+| Task 7 真机与裁剪验收 | 已完成本包本地验收；Android TTS 完成/取消/重入/后台门禁通过，ASR 仍 MISSING_ASSETS；Apple/Android 本地验证、76 项工具测试、七个 XCFramework、三个 Apple consumer 与 Maven 消费者通过；iOS TTS与文件ASR完整生命周期通过，全套UI5/5、零跳过（141.919秒）；普通无分享配置已恢复；历史焦点失败为陈旧AX坐标/滚动惯性。新UI/Done追加独立审查已APPROVE/0issues |
+
+旧包七个任务的实现、本地验收和独立审查均已收口；三项Host问题修复后定向CLEAR，最终UI/Done追加审查也已独立APPROVE。Android MISSING_ASSETS明确不计转写通过。P6的麦克风真机录音、Android真实转写、离线/质量和最低系统缺口仍不能标通过，路线图继续active。
+
+2026-10-19 P10 验收补充：iPhone16ProMax/iOS27 已完成注册持久化后 SIGKILL→新进程实际解密，以及持有 lease 的删除提交后 SIGKILL→新进程 tombstone/稳定回执/payload/key 清理；最终精确 cleanup=true，原语音探针已恢复。见 [进程恢复证据](validation/p10-ios-store-device-probe.md#两次-sigkill-后的持久恢复2026-10-19)。
+
+2026-10-20 P10 验收补充：TECNO KM9/API35 已完成 Android create→SIGKILL、delete→SIGKILL、recover、cleanup 四阶段跨进程链；runner 在每个 stage 前对精确测试包 force-stop 并确认无旧 PID，controller 与校验器确认四个不同 PID/launch nonce、报告绑定、双 kill -9、tombstone/稳定回执、payload/key purge 与 run-scoped cleanup，runner 检测到的失败路径也会 best-effort 清理并留下 cleanup outcome。见 [Android 进程恢复证据](validation/p10-android-store-device-probe.md#两次-sigkill-后的跨进程持久恢复2026-10-20)。两端证据仍不证明 API26/iOS15、提交中断或文件系统故障；P10/roadmap 继续未完成。最终分支独立审查仍待取得结论。
+
+2026-10-19 P6 历史背景（当前进度以上述 2026-10-21 入口为准）：语音 Client 的 availability/close 竞态与并发 close 等待已修复并提交 `c13ed4c`，Apple 全包374/374、Android Speech12/12、TTS3/3、ASR7/7及消费者构建通过，见[语音记录](validation/speech-backends.md)。用户已选择“先将现有后端接 Demo，再独立补齐 iOS 麦克风 ASR”；[书面规格](superpowers/specs/2026-10-19-speech-demo-bridge-design.md)已认可，[七任务计划](superpowers/plans/2026-10-19-speech-demo-bridge.md)现已执行至 Task 5 完成。麦克风、Android ASR 实际转写、离线/质量和最低系统验证继续保留。P10 当时的独立审查重试因容量问题退出；后续10月24日代码与架构限定审查已完成，Android专项仍有429，现状见[P10审查记录](validation/p10-face-identity.md#2026-10-24-scoped-final-review-checkpoint)。固定 revision 的 SFace LFS 元数据与运行时可行性研究已补入[模型预研](validation/p10-identity-model-selection.md)，本历史检查点未下载模型或选定运行时。
+
+2026-10-19 历史入口：P10 Task 1–8、11、12 已实现并提交，Task12 为 `bb89516`；当日对 `ecdfd52..bb89516` 的三次审查尝试没有取得结论。保存记录没有具体供应商/模型名，不能把该历史容量错误套用到当前助手。后续10月24日98文件代码审查和架构审查均完成，Android专项在10月24日及26日返回429；现状见[P10限定审查](validation/p10-face-identity.md#2026-10-24-scoped-final-review-checkpoint)，不是三条线路至今全部未启动。Task9/10 生产模型/PAD、数据授权与校准继续保留。iOS Demo 真机 KMP framework 已刷新，新增身份 UI 后照片取消、方向探针、相机前后台回归3/3通过，详见[P4补充](validation/p4-camera-stability.md#身份-ui-集成后的-ios-回归2026-10-19)。下文10月17日段落为历史入口，P10当前状态以上表和[P10记录](validation/p10-face-identity.md)为准。
+
+2026-10-17 P6 后续包：用户已批准的[Apple 文件 ASR 实施计划](superpowers/plans/2026-10-17-apple-system-asr-file.md)已实现公共契约、Apple backend 生命周期与可裁剪分发三个 Task。Swift 58/58、工具测试 44/44、Xcode 模拟器构建、全新六模块 XCFramework、binary consumer 和 Core+Speech 独立 typecheck 均通过。公共请求不绑定离线策略，Apple 系统后端单独强制 on-device；取消/超时后先 drain 再更改输入，lease 释放以平台 task completed 为边界。实际 SDK `5fd0b2d` 已在 iPhone 16 Pro Max / iOS 27.0.1 通过固定合成文件转写、busy 证明的活动任务取消、drain、输入保持、同进程重入和 close 后拒绝。最终独立架构审查 CLEAR，一个 LOW 文件 metadata 错误映射延后处理。报告/hash 见[语音后端记录](validation/speech-backends.md#2026-10-17-apple-文件-asr-sdk-后端)；既有授权被复用，麦克风、音频 session、资源安装、自然语音质量与网络行为仍未测。
+
+恢复时以阶段表、2026-10-21 当前入口和最新 Git 为准。P1–P3 证据分别见[生命周期审查](validation/p1-lifecycle-review.md)、[模型存储审查](validation/p2-model-store-review.md)与[真机结果](validation/p3-ios-device.md)；P4 的完整 PHPicker EXIF 2/6/7、资源释放和最低系统缺口见[P4 记录](validation/p4-camera-stability.md)。P6 已有原生文件探针与 SDK 真机证据，尚不能代替本次 Demo 验收。P10 Task 1–8、11、12 和两端 SIGKILL 后存储恢复已有证据，生产模型/PAD、授权数据、校准、提交中断/文件系统故障、最低系统及最终独立审查仍未通过；本地原始草稿保持未追踪。P7 取消/重入探针结果见[P7 记录](validation/video-sr-backends.md)，Video SDK/KMP/Demo 实现已有本地证据，新的 iOS Demo UI/独立审查、Android 真实后端和质量验收仍待完成。按已批准计划推进，缺设备项独立保留。
+
+详细设计：[SDK 设计](superpowers/specs/2026-10-15-ondevice-ai-sdk-design.md)。历史计划：[foundation](superpowers/plans/2026-10-15-ondevice-ai-kit-foundation.md)。证据与缺口：[验收](validation/acceptance.md)、[设备矩阵](validation/device-matrix.md)。

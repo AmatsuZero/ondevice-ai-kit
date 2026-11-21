@@ -1,0 +1,16 @@
+
+FAILURE: Build failed with an exception.
+
+* Where:
+Build file '/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-app-variants-20261115/apk-consumer/build.gradle.kts' line: 32
+
+* What went wrong:
+-PconsumerVariant must be either debug or release, found: unexpected
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 5s

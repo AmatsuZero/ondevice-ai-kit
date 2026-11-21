@@ -1,0 +1,7 @@
+# Author final review — optional fixed Apple MLXVLM Demo host
+
+Range1ece99d..Task2; spec/plan and both task diffs reviewed in a separate pass. Author self-review only; independent review pending, no APPROVE.
+
+Ownership reviewed across install/acquire/build/client/bridge/host; failed branches release their current owner. Successful close uses existing drain before backend/lease release. Verified installed model persists by design. Preparation task captures no owner, ready closure captures controller weakly; cancellation closes late host and does not publish failure. Once-only preparation, loading gate, unavailable failure retention and inactive completion are consistent. Default source/products/target/bundle remain separate; enhanced exact lock validated after cached compile. No KMP source/header edits or generation coordinator rewrite.
+
+RED/GREEN and fresh results: factory6+owner3, full Demo33/33; generator11/11, fulltools104/104, strict newSwift0, default simulator and enhanced generic physical-iOS unsigned builds successful. Existing compiler/link warnings remain. Evidence in task-1/2 logs and validation record. No unresolved important finding in this author pass. Actual device/page/picker, minimumOS, natural quality/resources and independent review remain explicit gaps, along with older Video/P6/ASR gates. No push/merge/publish/download/private media/signing change; both protected hashes/state/index preserved. Roadmap5/12/P9active unchanged.

@@ -1,0 +1,93 @@
+diff --git a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/CMakeLists.txt b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/CMakeLists.txt
+index 04cb330..cfea571 100644
+--- a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/CMakeLists.txt
++++ b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/CMakeLists.txt
+@@ -249,9 +249,7 @@ if (MSVC)
+   # MSVC warning suppressions
+   add_definitions(
+     /wd4065 # switch statement contains 'default' but no 'case' labels
+-    /wd4244 # 'conversion' conversion from 'type1' to 'type2', possible loss of data
+     /wd4251 # 'identifier' : class 'type' needs to have dll-interface to be used by clients of class 'type2'
+-    /wd4267 # 'var' : conversion from 'size_t' to 'type', possible loss of data
+     /wd4305 # 'identifier' : truncation from 'type1' to 'type2'
+     /wd4307 # 'operator' : integral constant overflow
+     /wd4309 # 'conversion' : truncation of constant value
+@@ -259,7 +257,7 @@ if (MSVC)
+     /wd4355 # 'this' : used in base member initializer list
+     /wd4506 # no definition for inline function 'function'
+     /wd4800 # 'type' : forcing value to bool 'true' or 'false' (performance warning)
+-    /wd4996 # The compiler encountered a deprecated declaration.
++    ${onnxruntime_PROTOBUF_EXTRA_WARNING_DISABLEMENT}
+   )
+   # Allow big object
+   add_definitions(/bigobj)
+@@ -289,7 +287,6 @@ if (MSVC)
+ else (MSVC)
+   # No version.rc file.
+   set(protobuf_version_rc_file)
+-
+   # When building with "make", "lib" prefix will be added automatically by
+   # the build tool.
+   set(LIB_PREFIX)
+diff --git a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/cmake/libprotobuf-lite.cmake b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/cmake/libprotobuf-lite.cmake
+index 83e9703..9690899 100644
+--- a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/cmake/libprotobuf-lite.cmake
++++ b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/cmake/libprotobuf-lite.cmake
+@@ -102,7 +102,7 @@ if(protobuf_LINK_LIBATOMIC)
+   target_link_libraries(libprotobuf-lite PRIVATE atomic)
+ endif()
+ if(${CMAKE_SYSTEM_NAME} STREQUAL "Android")
+-  target_link_libraries(libprotobuf-lite PRIVATE log)
++  target_link_libraries(libprotobuf-lite PRIVATE -llog)
+ endif()
+ target_include_directories(libprotobuf-lite PUBLIC ${protobuf_SOURCE_DIR}/src)
+ if(protobuf_BUILD_SHARED_LIBS)
+diff --git a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/cmake/libprotobuf.cmake b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/cmake/libprotobuf.cmake
+index 07e4bcf..0cf27ca 100644
+--- a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/cmake/libprotobuf.cmake
++++ b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/cmake/libprotobuf.cmake
+@@ -118,7 +118,7 @@ if(protobuf_LINK_LIBATOMIC)
+   target_link_libraries(libprotobuf PRIVATE atomic)
+ endif()
+ if(${CMAKE_SYSTEM_NAME} STREQUAL "Android")
+-  target_link_libraries(libprotobuf PRIVATE log)
++  target_link_libraries(libprotobuf PRIVATE -llog)
+ endif()
+ target_include_directories(libprotobuf PUBLIC ${protobuf_SOURCE_DIR}/src)
+ if(protobuf_BUILD_SHARED_LIBS)
+diff --git a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/src/google/protobuf/map.h b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/src/google/protobuf/map.h
+index 008c192..cbab108 100644
+--- a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/src/google/protobuf/map.h
++++ b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/src/google/protobuf/map.h
+@@ -52,7 +52,8 @@
+ #endif  // defined(__cpp_lib_string_view)
+ 
+ #if !defined(GOOGLE_PROTOBUF_NO_RDTSC) && defined(__APPLE__)
+-#include <mach/mach_time.h>
++// apply update from https://github.com/protocolbuffers/protobuf/pull/15662/
++#include <time.h>
+ #endif
+ 
+ #include <google/protobuf/stubs/common.h>
+@@ -1154,7 +1155,8 @@ class Map {
+ #if defined(__APPLE__)
+       // Use a commpage-based fast time function on Apple environments (MacOS,
+       // iOS, tvOS, watchOS, etc).
+-      s += mach_absolute_time();
++      // apply update from https://github.com/protocolbuffers/protobuf/pull/15662/
++      s += clock_gettime_nsec_np(CLOCK_UPTIME_RAW);
+ #elif defined(__x86_64__) && defined(__GNUC__)
+       uint32_t hi, lo;
+       asm volatile("rdtsc" : "=a"(lo), "=d"(hi));
+diff --git a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/src/google/protobuf/port_def.inc b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/src/google/protobuf/port_def.inc
+index 6c6aa18..98b910a 100644
+--- a/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/before/src/google/protobuf/port_def.inc
++++ b/.omx/artifacts/w3-ort-nested-composition-20261115T122051Z/patch-reconstruction/protobuf/after/src/google/protobuf/port_def.inc
+@@ -255,6 +255,7 @@
+ #error PROTOBUF_TAILCALL was previously defined
+ #endif
+ #if __has_cpp_attribute(clang::musttail) && !defined(__arm__) && \
++    !defined(__s390x__) &&                                       \
+     !defined(_ARCH_PPC) && !defined(__wasm__) &&                 \
+     !(defined(_MSC_VER) && defined(_M_IX86)) &&                  \
+     !(defined(__NDK_MAJOR__) && __NDK_MAJOR <= 24)

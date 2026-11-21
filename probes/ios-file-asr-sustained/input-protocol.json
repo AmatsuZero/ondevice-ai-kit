@@ -1,0 +1,51 @@
+{
+  "scope": "prospectiveboundedresourceprotocol only, no device/build yet",
+  "alias": "io.ondeviceai.probe.w8appleasrsustained20261109",
+  "cycles": 20,
+  "measuredPerCycle": 2,
+  "excludedWarmup": 1,
+  "perCycleMinimumSeconds": 30,
+  "totalMinimumSeconds": 600,
+  "fixedInputs": [
+    {
+      "id": "1272-128104-0000",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-apple-locale-20261109-0814/AudioFixtures/audio/1272-128104-0000.wav",
+      "bytes": 187438,
+      "sha256": "6ba71ddda339c469a52fa48a375e17e2487a336f4434ae24ef5118637bbcb925"
+    },
+    {
+      "id": "1272-128104-0001",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-apple-locale-20261109-0814/AudioFixtures/audio/1272-128104-0001.wav",
+      "bytes": 154158,
+      "sha256": "86f4d398b91c99d38568efa94a0f9604a0edaa15bd675d90e556852ec598c914"
+    },
+    {
+      "id": "1272-128104-0002",
+      "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-apple-locale-20261109-0814/AudioFixtures/audio/1272-128104-0002.wav",
+      "bytes": 399598,
+      "sha256": "3165bb4372ed834ddf2dd440e83b8e523b474d3c0eb54951cda81f0ed332505d"
+    }
+  ],
+  "sourceHashes": {
+    "apple/Sources/ODAIKitCore/LatestFrameQueue.swift": "2c8c7529fef0d34728fd7f14cd59322cb35952e2eaf9b2d92d7a4e2366cbf7ac",
+    "apple/Sources/ODAIKitCore/TaskGate.swift": "0c62b522c82e0916d9f1330d3eda1a5bf9992de8c30e9689ad61e0aeba08d37d",
+    "apple/Sources/ODAIKitCore/Availability.swift": "87f24120073f9c62ce6e3089e656356851a5732340e176e166fbc0d4130324a2",
+    "apple/Sources/ODAIKitSpeech/SpeechClient.swift": "59fcf256ed49ba8175d320dec03da149c9fc83f19d319d53eeb85f237be88990",
+    "apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift": "868941155d991dec17be86906ac18d4a1388e5a6b8a4172324657cbaa37bf811",
+    "apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift": "9c77a4179a83329f66ea25df6f148c024eb8a0be36d9d3c28663a397fd8d6500",
+    "apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9",
+    "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift": "46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db",
+    "apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466",
+    "apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab"
+  },
+  "microphone": false,
+  "freshCapture": false,
+  "qualityEvaluation": false,
+  "requiresOnDeviceRecognition": true,
+  "budgetThresholds": null,
+  "energyGPUPass": false,
+  "maximumBatches": 1,
+  "stopOnFailure": true,
+  "noAutomaticReplay": true,
+  "deviceSlot": "not yet acquired; W6expert respected; buildpreparation only"
+}

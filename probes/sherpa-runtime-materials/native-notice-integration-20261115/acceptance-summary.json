@@ -1,0 +1,17 @@
+{
+  "knownNativeOriginalTexts": 23,
+  "knownNativeOriginalBytes": 452769,
+  "newNativeAssets": 25,
+  "combinedKnownNoticeAssets": 36,
+  "combinedNoticeBytes": 550583,
+  "boundedTechnicalReviewAccepted": true,
+  "oldJVMAssetsAndOldReleaseMembersUnchanged": true,
+  "nativeRuntimeAarChanged": false,
+  "negativeMutationsRejected": 6,
+  "protectedPathsBeforeNewDocsUnchanged": 173,
+  "freezeFilesVerified": 161,
+  "deviceListEmpty": true,
+  "prepareDecodeMicrophoneAiAiDownloads": 0,
+  "firstIncompleteBuildRejected": true,
+  "completeP1P2P3P4R4R5W3": false
+}

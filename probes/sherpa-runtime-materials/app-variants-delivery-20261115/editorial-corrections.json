@@ -1,0 +1,17 @@
+{
+  "readmeReplacements": [
+    {
+      "old": "本目录放置 bounded increment 的四个 APK 与相关 artifact 证据。对应报告：[W3 App Variants Delivery 证据报告](../../../docs/validation/w3-app-variants-delivery-20261115.md)。",
+      "new": "本目录将仅放置 bounded increment 的小型证据（JSON/日志/fixture 源码）；四个二进制 APK 仅位于本地忽略 artifact 目录 `artifacts/verification/w3-app-variants-20261115/`，不在 probes 中且未提交。对应报告：[W3 App Variants Delivery 证据报告](../../../docs/validation/w3-app-variants-delivery-20261115.md)。"
+    },
+    {
+      "old": "## 内容\n- `androidApp-debug.apk`：真实仓库 Demo debug。\n- `androidApp-release-unsigned.apk`：真实仓库 Demo release-unsigned。\n- `consumer-w3-sherpa-notice-consumer-debug.apk`：隔离 Maven 独立消费者 debug。\n- `consumer-w3-sherpa-notice-consumer-release-unsigned.apk`：隔离 Maven 独立消费者 release-unsigned。",
+      "new": "## 内容\n- `app-variants-verification.json`\n- `consumer-runtime-graphs-verified.json`\n- `apk-signature-observations.json`\n- `fixture/`"
+    }
+  ],
+  "firstStatusReplacementNew": "r30生成器/缺失正文/历史apply仍缺；四组件根许可已实际集成，68项通知字节保留已验证；最终 native-code 归档成员纳入/保留及完整组成仍未验证。",
+  "limitationReplacement": {
+    "old": "Django/DEX 之外的语义未验证：类名/SourceFile/commit literal 只证明存在或文本绑定，不等于字节码等价、完整源真实性或运行行为。",
+    "new": "DEX 之外的语义未验证：类名/SourceFile/commit literal 只证明存在或文本绑定，不等于字节码等价、完整源真实性或运行行为。"
+  }
+}

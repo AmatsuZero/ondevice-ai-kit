@@ -1,0 +1,12 @@
+{
+  "toolArtifactsVerified": 8,
+  "compilerVersionExitCode": 0,
+  "versionConfirmed": "1.7.20",
+  "toolBytes": 60939801,
+  "compilerVersionElapsedSeconds": 0.498,
+  "frozenFiles": 161,
+  "compileStarted": false,
+  "configSHA256": "20b343277856f9e1f61b92855c777572873df078eb37e782baccaabe50b5c23a",
+  "globalConfigOrProductionDependenciesChanged": false,
+  "newASRRuntimeOrModelDownloads": 0
+}

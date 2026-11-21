@@ -1,0 +1,24 @@
+[
+  {
+    "tag": "ndk-r27d",
+    "revision": "3503453cd6ccac933b4a1ec5255b7fc29851ea6b",
+    "repo": "toolchain/llvm_android",
+    "path": "",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/3503453cd6ccac933b4a1ec5255b7fc29851ea6b/?format=JSON",
+    "status": 200,
+    "bytes": 7804,
+    "sha256": "28aad6edeebc31a6cef6a662f81740cf9f30c6055ff853260dad0adc00d85ac3",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r27d/llvm-android-root-tree.json"
+  },
+  {
+    "tag": "ndk-r30",
+    "revision": "9e20ac0b949feedcfe3da791189310f6ebcbc7a8",
+    "repo": "toolchain/llvm_android",
+    "path": "",
+    "url": "https://android.googlesource.com/toolchain/llvm_android/+/9e20ac0b949feedcfe3da791189310f6ebcbc7a8/?format=JSON",
+    "status": 200,
+    "bytes": 6848,
+    "sha256": "67f3395d0258d40e4c1ecb4ddb82a4e6bc18d5dfce172b2485f2cbf2c1615619",
+    "savedPath": ".omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/llvm-android-root-tree.json"
+  }
+]

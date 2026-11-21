@@ -1,0 +1,32 @@
+{
+  "marker": "w3-terminal-file-primitives-20261112",
+  "sourceCommit": "03059a8",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6815684553,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6815684553",
+      "sha256": "e493f324d7190887b4d12ac173a946b608e0c73f3b23120b26e6711c8ee40a05",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43363,
+      "url": null,
+      "sha256": "29598becbb1190da74871c9c2fdc4c2a91abb0f52ecc7994e2732fc794fc640c",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "53f9e8759909556799f331b3e625cc64a9876d9c",
+    "sha256": "7bc68d2f2643b8e147ddcca7131a783abf6bd99b3f8652fa526a2d933695ad66",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3\u8bed\u97f3\u9a8c\u6536\u4e0e\u540e\u7eed\u6539\u8fdb",
+    "sha256": "7bc68d2f2643b8e147ddcca7131a783abf6bd99b3f8652fa526a2d933695ad66",
+    "readbackExact": true
+  },
+  "wikiBytesEqual": true,
+  "scope": "local-file-primitives checkpoint before explicit postpublication-error subclass",
+  "W3Complete": false
+}

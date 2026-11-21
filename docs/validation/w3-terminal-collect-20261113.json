@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "scope": "bounded terminal report collection, host only",
+  "sourceSHA256": {
+    "probes/android-qwen-terminal/terminal_device_collect.py": "0c401a9d2ffe2899050b871f7a696f2deb3f05905e03d9ada5087f3f167ca8a4",
+    "probes/android-qwen-terminal/test_terminal_collect_parent.py": "2aa4e392d7b14950ec5e28b5b354912514e8365f4d86a7695cd33ae969f6a34b",
+    "probes/android-qwen-terminal/terminal_device_contract.py": "e163039377a4e78620c27097f5e99761beb52e3412d48a3712519570a2068cae",
+    "probes/android-qwen-terminal/check_device_contract.py": "6aee98f908a1306c58eb5893f5f4fa437c6ee3912584f27b3d63ddf4a28ece36",
+    "probes/android-qwen-terminal/README.md": "ae7c3317ad9a323108c394fdc2589fd9bd3749bab88a3a7cb33ab1d01b45d15d"
+  },
+  "methods": {
+    "OBS": 201,
+    "GUARD": 17,
+    "TERMINAL": 120,
+    "AST": 53,
+    "TOTAL": 338
+  },
+  "candidateMethods": 12,
+  "fragmentMethods": 3,
+  "localProofSmokeMethods": 1,
+  "typesTargetedMethods": 1,
+  "review": "accept",
+  "reviewMinorDeferred": "Optional uniform diagnostic exception types for malformed internal models/adb ctx keys; all reject before transport/writes.",
+  "reviewPaths": [
+    "collect-parent/source-review/review.json",
+    "collect-parent/source-review-clarification/review.json",
+    "collect-parent/source-review/parent-adjudication.json"
+  ],
+  "protection": {
+    "frozen": 120,
+    "protected": 95,
+    "prepared": 81,
+    "APKs": 2,
+    "drift": [],
+    "deviceOperations": 0
+  },
+  "failedWholeDelivery": {
+    "seconds": 603.058,
+    "rawBytes": 262144,
+    "sourceRecovered": false
+  },
+  "remoteInitialPseudoToolOnly": true,
+  "firstRemoteFragmentRed": {
+    "methods": 3,
+    "failures": 1,
+    "errors": 2
+  },
+  "nestedFinishTypeRed": {
+    "methods": 12,
+    "failures": 3,
+    "errors": 0
+  },
+  "validationMarkdownSHA256": "045db3fc27279aababbb2a18ceb8fd484ba19c8d5b900165dd5fb4b7cdbda544",
+  "deviceOperations": 0,
+  "ADBEmpty": true,
+  "newSourceFreeze": false,
+  "currentFullDriverDualReviews": false,
+  "sourceBranchPushed": false,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "remaining": [
+    "allocator policy collection",
+    "complete dispatcher/launch/cleanup closure",
+    "current full dual source reviews",
+    "new complete freeze",
+    "same-run TECNO evidence"
+  ]
+}

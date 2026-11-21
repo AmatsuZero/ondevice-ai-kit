@@ -1,0 +1,24 @@
+{
+  "exportCommit": "0829a577ee741e408e65763dfe01ff4fe75408e9",
+  "repositoryDeclaredLicense": null,
+  "treeTruncated": false,
+  "noticeLicenseReadmeEntries": [
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f97be31c0954eee317bd8cf126e6b3baafba4d19",
+      "size": 271,
+      "url": "https://api.github.com/repos/Wasser1462/Qwen3-ASR-onnx/git/blobs/f97be31c0954eee317bd8cf126e6b3baafba4d19"
+    },
+    {
+      "path": "test_wavs/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c95f0ba911c89b198148ce9d8a71ad6b65490a5f",
+      "size": 6549,
+      "url": "https://api.github.com/repos/Wasser1462/Qwen3-ASR-onnx/git/blobs/c95f0ba911c89b198148ce9d8a71ad6b65490a5f"
+    }
+  ],
+  "productionRedistributionAccepted": false
+}

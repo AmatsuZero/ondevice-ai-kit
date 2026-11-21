@@ -1,0 +1,34 @@
+[
+  {
+    "path": "artifacts/verification/w3-app-variants-20261115/androidApp-debug.apk",
+    "tool": "/Users/daubert/Library/Android/sdk/build-tools/36.0.0/apksigner",
+    "exitCode": 0,
+    "expectedUnsigned": false,
+    "verificationMatchesExpected": true,
+    "signingAssetsModified": false
+  },
+  {
+    "path": "artifacts/verification/w3-app-variants-20261115/androidApp-release-unsigned.apk",
+    "tool": "/Users/daubert/Library/Android/sdk/build-tools/36.0.0/apksigner",
+    "exitCode": 1,
+    "expectedUnsigned": true,
+    "verificationMatchesExpected": true,
+    "signingAssetsModified": false
+  },
+  {
+    "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-debug.apk",
+    "tool": "/Users/daubert/Library/Android/sdk/build-tools/36.0.0/apksigner",
+    "exitCode": 0,
+    "expectedUnsigned": false,
+    "verificationMatchesExpected": true,
+    "signingAssetsModified": false
+  },
+  {
+    "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-release-unsigned.apk",
+    "tool": "/Users/daubert/Library/Android/sdk/build-tools/36.0.0/apksigner",
+    "exitCode": 1,
+    "expectedUnsigned": true,
+    "verificationMatchesExpected": true,
+    "signingAssetsModified": false
+  }
+]

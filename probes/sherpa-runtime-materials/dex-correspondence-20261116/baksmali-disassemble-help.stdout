@@ -1,0 +1,65 @@
+usage: baksmali disassemble [<options>] <file>
+Disassembles a dex file.
+
+Options:
+  -a,--api <api> - The numeric api level of the file being disassembled. 
+      (default: -1)
+  --accessor-comments,--ac <boolean> - Generate helper comments for synthetic 
+      accessors. True by default, use --accessor-comments=false to disable. 
+      (default: True)
+  --allow-odex-opcodes - Allows odex opcodes to be disassembled, even if the 
+      result won't be able to be reassembled.
+  -b,--bootclasspath,--bcp <classpath> - A colon separated list of the files to 
+      include in the bootclasspath when analyzing the dex file. If not 
+      specified, baksmali will attempt to choose an appropriate default. When 
+      analyzing oat files, this can simply be the path to the device's boot.oat 
+      file. A single empty string can be used to specify that an empty 
+      bootclasspath should be used. (e.g. --bootclasspath "") See baksmali help 
+      classpath for more information.
+  -c,--classpath,--cp <classpath> - A colon separated list of additional files 
+      to include in the classpath when analyzing the dex file. These will be 
+      added to the classpath after any bootclasspath entries.
+  --classes <classes> - A comma separated list of classes. Only disassemble 
+      these classes
+  --code-offsets,--offsets,--off - Add a comment before each instruction with 
+      it's code offset within the method.
+  -d,--classpath-dir,--cpd,--dir <dir> - A directory to search for classpath 
+      files. This option can be used multiple times to specify multiple 
+      directories to search. They will be searched in the order they are 
+      provided.
+  --debug-info,--di <boolean> - Whether to include debug information in the 
+      output (.local, .param, .line, etc.). True by default, use --debug-
+      info=false to disable. (default: True)
+  -h,-?,--help - Show usage information for this command.
+  --implicit-references,--implicit,--ir - Use implicit method and field 
+      references (without the class name) for methods and fields from the 
+      current class.
+  -j,--jobs <n> - The number of threads to use. Defaults to the number of cores 
+      available. (default: 18)
+  -l,--use-locals - When disassembling, output the .locals directive with the 
+      number of non-parameter registers instead of the .registers directive 
+      with the total number of registers.
+  --normalize-virtual-methods,--norm,--nvm - Normalize virtual method 
+      references to use the base class where the method is originally declared.
+  -o,--output <dir> - The directory to write the disassembled files to. 
+      (default: out)
+  --parameter-registers,--preg,--pr <boolean> - Use the pNN syntax for 
+      registers that refer to a method parameter on method entry. True by 
+      default, use --parameter-registers=false to disable. (default: True)
+  -r,--register-info <register info specifier> - Add comments before/after each 
+      instruction with information about register types. The value is a comma-
+      separated list of any of ALL, ALLPRE, ALLPOST, ARGS, DEST, MERGE and 
+      FULLMERGE. See "baksmali help register-info" for more information.
+  --resolve-resources,--rr <resource prefix> <public.xml file> - This will 
+      attempt to find any resource id references within the bytecode and add a 
+      comment with the name of the resource being referenced. The parameter 
+      accepts 2 values:an arbitrary resource prefix and the path to a public.
+      xml file. For example: --resolve-resources android.R 
+      framework/res/values/public.xml. This option can be specified multiple 
+      times to provide resources from multiple packages.
+  --sequential-labels,--seq,--sl - Create label names using a sequential 
+      numbering scheme per label type, rather than using the bytecode address.
+  <file> - A dex/apk/oat/odex file. For apk or oat files that contain multiple 
+      dex files, you can specify the specific entry to use as if the apk/oat 
+      file was a directory. e.g. "app.apk/classes2.dex". For more information, 
+      see "baksmali help input".

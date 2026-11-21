@@ -1,0 +1,554 @@
+[
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/build/cmake/android-legacy.toolchain.cmake",
+    "sourceRelativePath": "ndk-r27d/build/cmake/android-legacy.toolchain.cmake",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/build/cmake/android-legacy.toolchain.cmake",
+    "bytes": 29775,
+    "sha256": "517fefa5c8f0d12075d771df4c84d42e3a9ee62141859443d932214cfe9b6403",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/build/cmake/android.toolchain.cmake",
+    "sourceRelativePath": "ndk-r27d/build/cmake/android.toolchain.cmake",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/build/cmake/android.toolchain.cmake",
+    "bytes": 10343,
+    "sha256": "22c1f80acd4a272be56b108b97320197046f407412757d3651c098327ea59a60",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/checkbuild.py",
+    "sourceRelativePath": "ndk-r27d/checkbuild.py",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/checkbuild.py",
+    "bytes": 841,
+    "sha256": "e3fee98294b8969a6e1a0d1cab15d85462476c55f161f5ea26b6856cb314f34c",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/AndroidVersion.txt",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/AndroidVersion.txt",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/AndroidVersion.txt",
+    "bytes": 112,
+    "sha256": "9413ab74d395501e360c484b4d34efd790eef54bcaee85884f3687446898593f",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/BUILD_INFO",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/BUILD_INFO",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/BUILD_INFO",
+    "bytes": 23826,
+    "sha256": "0812d2ee49a0d5ca553588a44a0eeeef9601e54847b3b229ecf72c008070ca29",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/NOTICE",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/NOTICE",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/NOTICE",
+    "bytes": 130424,
+    "sha256": "f96f763beb66a7ba7a667647fc64c0226ace875e590c831fdd9579ec1c1d91e1",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64/lib-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64/lib-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64/lib-tree.json",
+    "bytes": 657,
+    "sha256": "966538f143b96c91993a9c772eebe0313fb4bdb886413e4683eec7761be71529",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/aarch64-tree.json",
+    "bytes": 347,
+    "sha256": "303582630b10a668a3497daa4bed1730dfa573212fcae6d3ba19d20d40d181d7",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm/lib-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm/lib-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm/lib-tree.json",
+    "bytes": 657,
+    "sha256": "cc08f3081e0579ec50cd9b8c09bcd9c5f370feaff72dc30c5e9f979f7810a137",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/arm-tree.json",
+    "bytes": 347,
+    "sha256": "debae6c531466acff975c0ffffafc1839c4cd67b0f03dfbc93ac6e7ca99c562c",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386/lib-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386/lib-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386/lib-tree.json",
+    "bytes": 657,
+    "sha256": "b7ea70045fe0bc622ae5ee929debd02ee54b00ed96c42b87cc5b0a3f796b947b",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/i386-tree.json",
+    "bytes": 347,
+    "sha256": "68a828be91ae1039b4e12ccb6c9e3214452fdcfd14dad8e1ef468d866edbf8f5",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64/lib-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64/lib-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64/lib-tree.json",
+    "bytes": 657,
+    "sha256": "f97b9c2bc9fc88771b9b56479e6659f8ed9e1004f4fd1ee4fca818fbcffb742b",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk/x86_64-tree.json",
+    "bytes": 347,
+    "sha256": "d307d71412bd41294b5838abceb4cb6c5474e83b8bfb79816f8d88bf49af4f14",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++/ndk-tree.json",
+    "bytes": 751,
+    "sha256": "3a236d62f7a971405c18480a03715ae5634e7fad8e591609c5929cc91f76e3ac",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/android_libc++-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/android_libc++-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/android_libc++-tree.json",
+    "bytes": 930,
+    "sha256": "fa26cf634285f0151657f03bf748338a94df1e0ee397d26df8704939c7cc0417",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/clang_source_info.md",
+    "bytes": 16590,
+    "sha256": "5c8a07e442b511e7749ccedc3005e3006bd9b688a0d396c4216307ec4c8c7ca4",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d/manifest_13691557.xml",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d/manifest_13691557.xml",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/manifest_13691557.xml",
+    "bytes": 4813,
+    "sha256": "3400d26f172e935472bcc524223d5b08953f706cf55b8440811ca910a1baef66",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/clang-r522817d-tree.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/clang-r522817d-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d-tree.json",
+    "bytes": 2761,
+    "sha256": "ddac3f965d7f19675062b6f72ab741ea80e91ab9afd591b04a28bc4684db13b3",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/commit.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/commit.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/commit.json",
+    "bytes": 766,
+    "sha256": "f37d5ef978279dd9369f752ce7a6041294da5873b160078a7ecb34bd849afc83",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/linux-x86/root.json",
+    "sourceRelativePath": "ndk-r27d/linux-x86/root.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/root.json",
+    "bytes": 4033,
+    "sha256": "c8ba44097943d8850251bcda178682236b431be0b6658063bfad572be345f8bc",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/llvm-base/compiler-rt/LICENSE.TXT",
+    "sourceRelativePath": "ndk-r27d/llvm-base/compiler-rt/LICENSE.TXT",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/compiler-rt/LICENSE.TXT",
+    "bytes": 16708,
+    "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/llvm-base/libcxx/LICENSE.TXT",
+    "sourceRelativePath": "ndk-r27d/llvm-base/libcxx/LICENSE.TXT",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libcxx/LICENSE.TXT",
+    "bytes": 16703,
+    "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/llvm-base/libcxxabi/LICENSE.TXT",
+    "sourceRelativePath": "ndk-r27d/llvm-base/libcxxabi/LICENSE.TXT",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libcxxabi/LICENSE.TXT",
+    "bytes": 16706,
+    "sha256": "e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/llvm-base/libunwind/LICENSE.TXT",
+    "sourceRelativePath": "ndk-r27d/llvm-base/libunwind/LICENSE.TXT",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libunwind/LICENSE.TXT",
+    "bytes": 16706,
+    "sha256": "b5efebcaca80879234098e52d1725e6d9eb8fb96a19fce625d39184b705f7b6d",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/manifest/commit.json",
+    "sourceRelativePath": "ndk-r27d/manifest/commit.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/manifest/commit.json",
+    "bytes": 916,
+    "sha256": "7818c5c974b9ecedd67910437c177108d3fb6a6b21b0cc6995b6f7f1de131f8f",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/manifest/default.xml",
+    "sourceRelativePath": "ndk-r27d/manifest/default.xml",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/manifest/default.xml",
+    "bytes": 3442,
+    "sha256": "d26372ec1164c3ae1634353296546f43645e3afb0018ca53bb254313f2c2dfae",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/manifest/root.json",
+    "sourceRelativePath": "ndk-r27d/manifest/root.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/manifest/root.json",
+    "bytes": 219,
+    "sha256": "dd5ff7e8f2942175df7bb332cc23c814ba425a0d912960cb6bbba2169fc7b4fe",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/ndk/NOTICE",
+    "sourceRelativePath": "ndk-r27d/ndk/NOTICE",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/ndk/NOTICE",
+    "bytes": 577,
+    "sha256": "c870d52f42a8f93023b99a85fe68d02637d6b04e5f35bbcd7f98759adb4e4d49",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/ndk/ndk/checkbuild.py",
+    "sourceRelativePath": "ndk-r27d/ndk/ndk/checkbuild.py",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/ndk/ndk/checkbuild.py",
+    "bytes": 91780,
+    "sha256": "a36e1d66d48d6052eebc1c17527724c81ff3fd015df0dc8ecba1ba2d3e088f68",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/ndk/ndk/toolchains.py",
+    "sourceRelativePath": "ndk-r27d/ndk/ndk/toolchains.py",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/ndk/ndk/toolchains.py",
+    "bytes": 11545,
+    "sha256": "f439a67155b04e50e7326c0976946a4ea9aaae98861c920c9b240efb743baff9",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/ndk/parse_elfnote.py",
+    "sourceRelativePath": "ndk-r27d/ndk/parse_elfnote.py",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/ndk/parse_elfnote.py",
+    "bytes": 7705,
+    "sha256": "f4a364bf88095aee4434d9df757cffbc9f117ea58e6603b28c8ef97891c4922d",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/ndk/sources/cxx-stl-tree.json",
+    "sourceRelativePath": "ndk-r27d/ndk/sources/cxx-stl-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/ndk/sources/cxx-stl-tree.json",
+    "bytes": 214,
+    "sha256": "9c7e56038f46bffcc17b808e8253837300a75f69cb955625131ae3b8420bdd3e",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r27d/root.json",
+    "sourceRelativePath": "ndk-r27d/root.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/root.json",
+    "bytes": 5196,
+    "sha256": "4b65a68a78a800024fe1b766f7f076b159e58277c2a8708ed932f1f80c26dd70",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/build/cmake/android-legacy.toolchain.cmake",
+    "sourceRelativePath": "ndk-r30/build/cmake/android-legacy.toolchain.cmake",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/build/cmake/android-legacy.toolchain.cmake",
+    "bytes": 30389,
+    "sha256": "be4ed442df676e42f3477b922fe9e13652f54c3aabefa584181cdc065d607b87",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/build/cmake/android.toolchain.cmake",
+    "sourceRelativePath": "ndk-r30/build/cmake/android.toolchain.cmake",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/build/cmake/android.toolchain.cmake",
+    "bytes": 10358,
+    "sha256": "98f1804e1a06e1d20a50933d2ea437fe43017fc6d1e4f6bc2d2838f6bbd44b4c",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/checkbuild.py",
+    "sourceRelativePath": "ndk-r30/checkbuild.py",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/checkbuild.py",
+    "bytes": 770,
+    "sha256": "90a6d0da02ea6c14b095a252ebc197db25f31c618c83a559f2e5ee36cf1f651c",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/AndroidVersion.txt",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/AndroidVersion.txt",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/AndroidVersion.txt",
+    "bytes": 112,
+    "sha256": "50f8283fa70fe63736cf031db7ebba878de94c8c43f02a40fea0d87ba1f6c4f5",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/BUILD_INFO",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/BUILD_INFO",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/BUILD_INFO",
+    "bytes": 24257,
+    "sha256": "b7d7021e452c01068e938ea18bbec1d2ee77ae8544d3bc3c7038255c07460326",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/NOTICE",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/NOTICE",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/linux-x86/clang-r522817d/NOTICE",
+    "bytes": 130424,
+    "sha256": "f96f763beb66a7ba7a667647fc64c0226ace875e590c831fdd9579ec1c1d91e1",
+    "sameBytesAsCanonical": true
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64/lib-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64/lib-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64/lib-tree.json",
+    "bytes": 657,
+    "sha256": "f2ec9115ab83d6f97b1b71411b53520b5302344232c1adc5ce1e8a3373fe7643",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/aarch64-tree.json",
+    "bytes": 347,
+    "sha256": "e6958cae4cdfaa4c2fa6f916418a1bc90a0288b18e47dcaed2b8db0123ad7fb2",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm/lib-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm/lib-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm/lib-tree.json",
+    "bytes": 657,
+    "sha256": "d5219cc719dad229106f0aa6be55bcfd2d6ed9cfb0e0555ae6f87814ec2a8ac4",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/arm-tree.json",
+    "bytes": 347,
+    "sha256": "57b072c6c213c3ea1a2cdd900548e34f33b9fce7ad17fa08dd16a4b6aecb5fa7",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386/lib-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386/lib-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386/lib-tree.json",
+    "bytes": 657,
+    "sha256": "52688eb6089c157d83b15a050d4cf487778a5ce5140208a843607c436843f74e",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/i386-tree.json",
+    "bytes": 347,
+    "sha256": "270f0c24abae90bdd1277fae3d5203c53edb3559eebdfa000ee1ba247d5d85c0",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64/lib-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64/lib-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64/lib-tree.json",
+    "bytes": 657,
+    "sha256": "093c2dc27f2f96cf34dde657db49ba7f4c9ecdc75abe33b715683a5e07c584c9",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk/x86_64-tree.json",
+    "bytes": 347,
+    "sha256": "00d02555ebb898ac30c5f0d099bbea4874b6dd328428396be9cade976062f5fd",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++/ndk-tree.json",
+    "bytes": 751,
+    "sha256": "c760e1719275b0dcc28775d811b2dbaed669d38944342c7d8f2db319249548fa",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/android_libc++-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/android_libc++-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/android_libc++-tree.json",
+    "bytes": 930,
+    "sha256": "e2413c0a19220953de9ce805ac004f26301f029f7503e9c487a1ae362d6f831f",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/aosp_manifest_16134705.xml",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/aosp_manifest_16134705.xml",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/aosp_manifest_16134705.xml",
+    "bytes": 5566,
+    "sha256": "3101de9d6af821ad2fc47a811f272573fe829f939f8229179f1d96f3c9111b82",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/clang_source_info.md",
+    "bytes": 13235,
+    "sha256": "22a60039318372c44c09b6bbb5aa5acb770a006ed3a2efaa372434e5ba4be0b2",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c/manifest_16134705.xml",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c/manifest_16134705.xml",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c/manifest_16134705.xml",
+    "bytes": 4956,
+    "sha256": "b9311b6363728fefa936407d3d3070a9bb51a4a8b8535326ed326cd1cd42f092",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/clang-r574158c-tree.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/clang-r574158c-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/clang-r574158c-tree.json",
+    "bytes": 2916,
+    "sha256": "685fc1c702a32b163cc983b93c758d40773a57a0a37ec0140edcd2e69944e6de",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/commit.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/commit.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/commit.json",
+    "bytes": 778,
+    "sha256": "8cb2baeaaa755752db620ccca51f03e009cfc1d22924d04860f82defc8779955",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/linux-x86/root.json",
+    "sourceRelativePath": "ndk-r30/linux-x86/root.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/linux-x86/root.json",
+    "bytes": 3609,
+    "sha256": "e98887e765d675fce02967db069e3a978eb9aa23bea532a02398d4987599fe9b",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/llvm-base/compiler-rt/LICENSE.TXT",
+    "sourceRelativePath": "ndk-r30/llvm-base/compiler-rt/LICENSE.TXT",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/compiler-rt/LICENSE.TXT",
+    "bytes": 16708,
+    "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d",
+    "sameBytesAsCanonical": true
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/llvm-base/libcxx/LICENSE.TXT",
+    "sourceRelativePath": "ndk-r30/llvm-base/libcxx/LICENSE.TXT",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libcxx/LICENSE.TXT",
+    "bytes": 16703,
+    "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b",
+    "sameBytesAsCanonical": true
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/llvm-base/libcxxabi/LICENSE.TXT",
+    "sourceRelativePath": "ndk-r30/llvm-base/libcxxabi/LICENSE.TXT",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libcxxabi/LICENSE.TXT",
+    "bytes": 16706,
+    "sha256": "e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c",
+    "sameBytesAsCanonical": true
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/llvm-base/libunwind/LICENSE.TXT",
+    "sourceRelativePath": "ndk-r30/llvm-base/libunwind/LICENSE.TXT",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/llvm-base/libunwind/LICENSE.TXT",
+    "bytes": 16706,
+    "sha256": "b5efebcaca80879234098e52d1725e6d9eb8fb96a19fce625d39184b705f7b6d",
+    "sameBytesAsCanonical": true
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/manifest/commit.json",
+    "sourceRelativePath": "ndk-r30/manifest/commit.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/manifest/commit.json",
+    "bytes": 915,
+    "sha256": "c29a1133a49c47d886efac2261b7a41a6a111845cc9fcdcbc429c1a44b09bc5f",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/manifest/default.xml",
+    "sourceRelativePath": "ndk-r30/manifest/default.xml",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/manifest/default.xml",
+    "bytes": 2929,
+    "sha256": "6a9f2f96580f676b8eb0de4bc4a25c331713c3d891c97165df6cd39b7125cc3c",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/manifest/root.json",
+    "sourceRelativePath": "ndk-r30/manifest/root.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/manifest/root.json",
+    "bytes": 219,
+    "sha256": "f692d85052d945f22fc86c0871e5144b22c43db049a27c332b465b40f74c9ef6",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/NOTICE",
+    "sourceRelativePath": "ndk-r30/ndk/NOTICE",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/ndk/NOTICE",
+    "bytes": 577,
+    "sha256": "c870d52f42a8f93023b99a85fe68d02637d6b04e5f35bbcd7f98759adb4e4d49",
+    "sameBytesAsCanonical": true
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/ndk/checkbuild.py",
+    "sourceRelativePath": "ndk-r30/ndk/ndk/checkbuild.py",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/ndk/ndk/checkbuild.py",
+    "bytes": 91451,
+    "sha256": "aaf08dbbd9e9c84f7cad94600de5993011f1cac8982ead4fdc77a00e1e49dc1a",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/ndk/toolchains.py",
+    "sourceRelativePath": "ndk-r30/ndk/ndk/toolchains.py",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/ndk/ndk/toolchains.py",
+    "bytes": 12003,
+    "sha256": "36e2a44aaaac420e49a1cbd306249e50a0878601ed66a37e8c8c843d3781a329",
+    "sameBytesAsCanonical": false
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/parse_elfnote.py",
+    "sourceRelativePath": "ndk-r30/ndk/parse_elfnote.py",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/ndk/parse_elfnote.py",
+    "bytes": 7705,
+    "sha256": "f4a364bf88095aee4434d9df757cffbc9f117ea58e6603b28c8ef97891c4922d",
+    "sameBytesAsCanonical": true
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/ndk/sources/cxx-stl-tree.json",
+    "sourceRelativePath": "ndk-r30/ndk/sources/cxx-stl-tree.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r27d/ndk/sources/cxx-stl-tree.json",
+    "bytes": 214,
+    "sha256": "9c7e56038f46bffcc17b808e8253837300a75f69cb955625131ae3b8420bdd3e",
+    "sameBytesAsCanonical": true
+  },
+  {
+    "sourceArtifactPath": ".omx/artifacts/w3-ndk-runtime-20261115T130823Z/official/source/ndk-r30/root.json",
+    "sourceRelativePath": "ndk-r30/root.json",
+    "retainedPath": "probes/sherpa-runtime-materials/ndk-runtime-provenance-20261115/source-evidence/ndk-r30/root.json",
+    "bytes": 5603,
+    "sha256": "cd1e5cb2793015bc30055c309fb1e500e6a12f6ad65123be3b2fac446da04e35",
+    "sameBytesAsCanonical": false
+  }
+]

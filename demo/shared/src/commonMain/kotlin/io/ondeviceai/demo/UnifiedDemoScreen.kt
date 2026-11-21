@@ -1,0 +1,400 @@
+package io.ondeviceai.demo
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.mutableStateOf
+import io.ondeviceai.binding.RealtimeSRMode
+
+interface UnifiedDemoBindings {
+    val platformLabel: String
+    val faceModel: FaceViewModel
+    val faceActions: io.ondeviceai.binding.DemoActions
+    val identityModel: IdentityViewModel?
+    val identityActions: IdentityDemoActions?
+    val identitySetup: IdentityModelSetupDemoActions?
+    val speechModel: SpeechViewModel?
+    val speechActions: SpeechDemoActions?
+    val videoModel: VideoViewModel?
+    val videoActions: VideoDemoActions?
+    val multimodalModel: MultimodalViewModel?
+    val multimodalActions: MultimodalDemoActions?
+    val voiceEffectsModel: VoiceEffectsViewModel?
+    val voiceEffectsActions: VoiceEffectsDemoActions?
+    val realtimeSr: RealtimeSRDemoActions?
+    fun modelSetup(id: DemoCapabilityId): UnifiedDemoModelActions? = null
+    val nowMillis: Long get() = 0L
+    fun setRecordSink(sink: DemoTerminalObserver?) {}
+    fun enterCapability(id: DemoCapabilityId) {}
+    fun retryCleanup() {}
+    fun isIdle(): Boolean = true
+    fun status(id: DemoCapabilityId): DemoCapabilityStatus
+    fun openVoiceEffects()
+    fun leaveCapability(id: DemoCapabilityId)
+}
+
+interface UnifiedDemoModelActions {
+    val status: String
+    val busy: Boolean
+    val canPrepare: Boolean
+    fun prepare()
+    fun cancel()
+}
+
+interface RealtimeSRDemoActions {
+    val supportedModes: List<RealtimeSRMode>
+    val selectedMode: RealtimeSRMode
+    val presentedMode: RealtimeSRMode?
+    val fallbackToOriginal: Boolean
+    fun selectMode(mode: RealtimeSRMode): Boolean
+}
+
+@Composable
+fun UnifiedDemoScreen(
+    model: UnifiedDemoModel,
+    bindings: UnifiedDemoBindings,
+    modifier: Modifier = Modifier,
+    facePreview: (@Composable () -> Unit)? = null,
+    voiceContent: (@Composable () -> Unit)? = null,
+) {
+    LaunchedEffect(bindings) {
+        bindings.speechModel?.refreshBackends(io.ondeviceai.binding.SpeechBridgeCapability.TTS)
+        bindings.speechModel?.refreshBackends(io.ondeviceai.binding.SpeechBridgeCapability.ASR)
+        bindings.videoModel?.refreshBackends()
+        bindings.multimodalModel?.refreshBackends()
+        while (true) {
+            defaultDemoCatalog.forEach { descriptor -> model.updateStatus(descriptor.id, bindings.status(descriptor.id)) }
+            kotlinx.coroutines.delay(300)
+        }
+    }
+    DisposableEffect(bindings, model, bindings.faceModel, bindings.speechModel, bindings.videoModel, bindings.multimodalModel, bindings.voiceEffectsModel) {
+        bindings.setRecordSink { id, outcome, summary ->
+            model.recordTerminal(id, bindings.platformLabel, bindings.nowMillis, outcome, summary)
+        }
+        onDispose { bindings.setRecordSink(null) }
+    }
+    LaunchedEffect(model.route) {
+        (model.route as? UnifiedDemoRoute.Capability)?.let { bindings.enterCapability(it.id) }
+    }
+    LaunchedEffect(model.leaving) {
+        while (model.leaving) {
+            model.finishNavigation()
+            if (model.leaving) kotlinx.coroutines.delay(16)
+        }
+    }
+    UnifiedDemoTheme {
+        Scaffold(
+            modifier = modifier.fillMaxSize().testTag("unified-demo"),
+            bottomBar = {
+                if (model.route.topLevel() == model.route) UnifiedNavigationBar(model)
+            },
+        ) { padding ->
+            Column(Modifier.fillMaxSize().padding(padding).padding(horizontal = 16.dp)) {
+                if (model.leaving) {
+                    LinearProgressIndicator(Modifier.fillMaxWidth())
+                    Text("正在停止任务并释放资源…", Modifier.testTag("unified-leaving"))
+                    TextButton(onClick = bindings::retryCleanup) { Text("重试资源清理") }
+                }
+                when (val route = model.route) {
+                    UnifiedDemoRoute.Explore -> ExplorePage(model)
+                    UnifiedDemoRoute.Models -> ModelsPage(model)
+                    UnifiedDemoRoute.Records -> RecordsPage(model)
+                    is UnifiedDemoRoute.Capability -> key(route.id) { CapabilityPage(model, bindings, route.id, facePreview, voiceContent) }
+                    is UnifiedDemoRoute.ModelDetail -> ModelDetailPage(model, bindings, route.id)
+                    is UnifiedDemoRoute.RecordDetail -> RecordDetailPage(model, route.index)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun UnifiedNavigationBar(model: UnifiedDemoModel) {
+    NavigationBar {
+        listOf(
+            DemoTab.EXPLORE to "探索",
+            DemoTab.MODELS to "模型",
+            DemoTab.RECORDS to "记录",
+        ).forEach { (tab, label) ->
+            NavigationBarItem(
+                selected = model.route.topLevel() == when (tab) {
+                    DemoTab.EXPLORE -> UnifiedDemoRoute.Explore
+                    DemoTab.MODELS -> UnifiedDemoRoute.Models
+                    DemoTab.RECORDS -> UnifiedDemoRoute.Records
+                },
+                onClick = { model.navigateTopLevel(tab) },
+                icon = { Text(label.take(1)) },
+                label = { Text(label) },
+                modifier = Modifier.testTag("nav-${label}"),
+            )
+        }
+    }
+}
+
+@Composable
+private fun ExplorePage(model: UnifiedDemoModel) {
+    Text("端侧智能体验", style = MaterialTheme.typography.headlineMedium, modifier = Modifier.padding(top = 20.dp))
+    Text("选择一项能力，体验本机处理。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+    Spacer(Modifier.height(12.dp))
+    val categories = remember { listOf("全部", "语音", "视觉", "视频", "实验室") }
+    OutlinedTextField(
+        value = model.search,
+        onValueChange = { model.search = it },
+        label = { Text("搜索能力") },
+        singleLine = true,
+        modifier = Modifier.fillMaxWidth().testTag("explore-search"),
+    )
+    Row(Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        categories.forEach { category ->
+            FilterChip(selected = model.category == category, onClick = { model.category = category }, label = { Text(category) })
+        }
+    }
+    Spacer(Modifier.height(12.dp))
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.testTag("explore-list")) {
+        items(model.filteredCatalog) { descriptor ->
+            CapabilityCard(descriptor) { model.openCapability(descriptor.id) }
+        }
+    }
+}
+
+@Composable
+private fun CapabilityCard(descriptor: DemoCapabilityDescriptor, onClick: () -> Unit) {
+    Card(onClick = onClick, modifier = Modifier.fillMaxWidth().testTag("capability-${descriptor.id.name.lowercase()}")) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text(descriptor.title, style = MaterialTheme.typography.titleMedium)
+                Text(descriptor.status.label, color = MaterialTheme.colorScheme.primary)
+            }
+            Text(descriptor.purpose, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (descriptor.previewOnly) Text(descriptor.previewCopy, color = MaterialTheme.colorScheme.tertiary)
+        }
+    }
+}
+
+@Composable
+private fun ModelsPage(model: UnifiedDemoModel) {
+    Text("模型", style = MaterialTheme.typography.headlineMedium, modifier = Modifier.padding(top = 20.dp))
+    Text("查看资源状态，准备当前设备需要的模型。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+    Spacer(Modifier.height(12.dp))
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.testTag("models-list")) {
+        items(model.catalog) { descriptor ->
+            Card(onClick = { model.navigate(UnifiedDemoRoute.ModelDetail(descriptor.id)) }, modifier = Modifier.fillMaxWidth().testTag("model-${descriptor.id.name.lowercase()}")) {
+                Row(Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text(descriptor.title)
+                    Text(descriptor.status.label, color = MaterialTheme.colorScheme.primary)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ModelDetailPage(model: UnifiedDemoModel, bindings: UnifiedDemoBindings, id: DemoCapabilityId) {
+    PageHeader(title = "模型 · ${model.descriptor(id).title}", onBack = { model.navigateTopLevel(DemoTab.MODELS) })
+    val descriptor = model.descriptor(id)
+    Text(descriptor.status.explanation)
+    if (descriptor.frozen) Text(descriptor.previewCopy, color = MaterialTheme.colorScheme.tertiary)
+    else Text("导入与校验由本机完成，准备好后即可返回能力页体验。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+    bindings.modelSetup(id)?.takeUnless { descriptor.frozen }?.let { setup ->
+        Spacer(Modifier.height(12.dp))
+        Text(setup.status, Modifier.testTag("model-status-${id.name.lowercase()}"))
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(onClick = setup::prepare, enabled = setup.canPrepare && !setup.busy,
+                modifier = Modifier.testTag("model-prepare-${id.name.lowercase()}")) { Text("准备模型") }
+            if (setup.busy) TextButton(onClick = setup::cancel) { Text("取消") }
+        }
+    }
+    if (bindings.status(id).kind == DemoCapabilityAvailabilityKind.MISSING_HOST) {
+        Text("当前构建未接入模型设置 Host。", color = MaterialTheme.colorScheme.error)
+    }
+    if (id == DemoCapabilityId.ASR) {
+        val resources = (bindings.speechActions as? SpeechAsrResourceProvider)?.asrResources
+        var locale by remember { mutableStateOf("zh-CN") }
+        if (resources != null) {
+            OutlinedTextField(locale, { locale = it }, label = { Text("语言 / locale") }, enabled = !resources.state.busy)
+            AsrResourceControls(resources, locale, bindings.speechModel?.state?.controlsEnabled == true)
+        }
+    }
+    if (!descriptor.frozen) TextButton(onClick = { model.openCapability(id) }) { Text("进入能力页") }
+}
+
+@Composable
+private fun RecordsPage(model: UnifiedDemoModel) {
+    Text("记录", style = MaterialTheme.typography.headlineMedium, modifier = Modifier.padding(top = 20.dp))
+    Text("任务结束后点击“保存记录”才会加入历史，取消不会自动保存。仅保留当前进程的摘要，最多 30 条，不保留媒体或身份模板。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+    Text("相机连续帧、播放状态和冻结预览不生成任务记录。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+    TextButton(onClick = model.records::clear, enabled = model.records.snapshot().isNotEmpty()) { Text("清空记录") }
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.testTag("records-list")) {
+        items(model.records.snapshot().withIndex().toList().asReversed()) { (index, record) ->
+            Card(onClick = { model.navigate(UnifiedDemoRoute.RecordDetail(index)) }, modifier = Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp)) {
+                    Text(defaultDemoCatalog.first { it.id == record.capability }.title)
+                    Text("${record.platform} · ${record.outcome}")
+                    Text(record.summary, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun RecordDetailPage(model: UnifiedDemoModel, index: Int) {
+    PageHeader(title = "记录", onBack = { model.navigateTopLevel(DemoTab.RECORDS) })
+    val record = model.records.snapshot().getOrNull(index)
+    if (record == null) Text("记录已清空，请重新选择输入。")
+    else {
+        Text("${record.platform} · ${record.outcome}")
+        Text(record.summary)
+        Text("重新进入后需要重新选择输入；不会复用历史媒体或身份模板。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Button(onClick = { model.openCapability(record.capability) }) { Text("重新体验") }
+    }
+}
+
+@Composable
+private fun CapabilityPage(
+    model: UnifiedDemoModel,
+    bindings: UnifiedDemoBindings,
+    id: DemoCapabilityId,
+    facePreview: (@Composable () -> Unit)?,
+    voiceContent: (@Composable () -> Unit)?,
+) {
+    val descriptor = model.descriptor(id)
+    PageHeader(title = descriptor.title, onBack = model::back)
+    Text(descriptor.purpose, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    if (descriptor.previewOnly) {
+        ScrollableDetail { FrozenPreviewPage(descriptor, bindings.identitySetup.takeIf { id == DemoCapabilityId.IDENTITY_LIVENESS },
+            bindings.identityModel.takeIf { id == DemoCapabilityId.IDENTITY_LIVENESS }) }
+        return
+    }
+    if (model.leaving) return
+    TextButton(onClick = { model.saveRecord(id) }, enabled = model.canSaveRecord(id),
+        modifier = Modifier.testTag("save-record")) { Text("保存记录") }
+    Box(Modifier.fillMaxSize()) {
+    when (id) {
+        DemoCapabilityId.ASR, DemoCapabilityId.TTS -> bindings.speechModel?.let { ScrollableDetail { SpeechScreen(it, bindings.speechActions,
+            if (id == DemoCapabilityId.ASR) io.ondeviceai.binding.SpeechBridgeCapability.ASR else io.ondeviceai.binding.SpeechBridgeCapability.TTS) } }
+            ?: UnavailablePage(bindings.status(id))
+        DemoCapabilityId.VOICE_EFFECTS -> {
+            val voiceModel = bindings.voiceEffectsModel
+            val voiceActions = bindings.voiceEffectsActions
+            if (voiceContent != null) voiceContent()
+            else if (voiceModel != null && voiceActions != null) VoiceEffectsScreen(voiceModel, voiceActions, showBack = false)
+            else UnavailablePage(bindings.status(id))
+        }
+        DemoCapabilityId.FACE_DETECTION -> Column(Modifier.fillMaxSize()) {
+            facePreview?.invoke()
+            FaceScreen(bindings.faceModel, bindings.faceActions,
+                modifier = Modifier.fillMaxWidth().weight(1f), showSectionTabs = false)
+        }
+        DemoCapabilityId.IMAGE_UNDERSTANDING -> bindings.multimodalModel?.let { ScrollableDetail { MultimodalScreen(it, bindings.multimodalActions, allowVideoInput = false) } }
+            ?: UnavailablePage(bindings.status(id))
+        DemoCapabilityId.FILE_SUPER_RESOLUTION -> bindings.videoModel?.let { ScrollableDetail { VideoScreen(it, bindings.videoActions) } }
+            ?: UnavailablePage(bindings.status(id))
+        DemoCapabilityId.PLAYBACK_ENHANCEMENT -> PlaybackEnhancementPage(bindings.realtimeSr, bindings.status(id))
+        DemoCapabilityId.VIDEO_UNDERSTANDING, DemoCapabilityId.IDENTITY_LIVENESS -> Unit
+    }
+    }
+}
+
+@Composable
+private fun ScrollableDetail(content: @Composable () -> Unit) {
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) { content() }
+}
+
+@Composable
+private fun PlaybackEnhancementPage(actions: RealtimeSRDemoActions?, status: DemoCapabilityStatus) {
+    if (actions == null) {
+        UnavailablePage(status)
+        return
+    }
+    Text("支持模式：${actions.supportedModes.joinToString()}")
+    Text("已选择：${actions.selectedMode}")
+    Text("实际呈现：${actions.presentedMode ?: "尚未呈现"}")
+    if (actions.fallbackToOriginal) Text("当前帧已回退到原画。", color = MaterialTheme.colorScheme.tertiary)
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        actions.supportedModes.forEach { mode ->
+            OutlinedButton(onClick = { actions.selectMode(mode) }, enabled = mode != actions.selectedMode) { Text(mode.name) }
+        }
+    }
+}
+
+@Composable
+private fun FrozenPreviewPage(descriptor: DemoCapabilityDescriptor, identitySetup: IdentityModelSetupDemoActions?, identity: IdentityViewModel?) {
+    Text(descriptor.previewCopy, color = MaterialTheme.colorScheme.tertiary, modifier = Modifier.testTag("frozen-preview"))
+    HorizontalDivider(Modifier.padding(vertical = 12.dp))
+    Text("这里只展示输入、授权、限制和结果布局，不调用冻结模型，也不输出验证或认证结论。")
+    Button(onClick = {}, enabled = false) { Text("仅预览") }
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Text(if (descriptor.id == DemoCapabilityId.IDENTITY_LIVENESS) "授权 → 本机数据 → 待校准结果" else "视频输入 → 采样 → 待验证输出")
+            Text("合成流程示意 · 未采集输入 · 未运行模型")
+            Text("结果区将在能力恢复后展示真实输出。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+    identitySetup?.let {
+        HorizontalDivider(Modifier.padding(vertical = 12.dp))
+        Text(it.status, Modifier.testTag("identity-setup-status"))
+        if (it.sessionReady) TextButton(onClick = it::deleteLocalEnrollment, enabled = !it.busy) { Text("删除注册并停用") }
+    }
+    identity?.let {
+        if (it.candidates.isNotEmpty() || it.publishedGallery != null || it.candidateDeletionPending || it.deletionRecoveryRequired) {
+            Text("已有本机数据管理（仅删除）")
+            it.candidates.forEach { candidate ->
+                TextButton(onClick = { it.selectCandidateConfigured(candidate.reference) }, enabled = !it.state.busy) { Text("用户 ${candidate.number}") }
+            }
+            TextButton(onClick = it::deleteCandidateConfigured, enabled = !it.state.busy && it.selectedCandidate != null && !it.candidateDeletionPending) { Text("删除当前用户") }
+            TextButton(onClick = it::deleteGalleryConfigured, enabled = !it.state.busy && it.publishedGallery != null) { Text("删除当前图库") }
+            TextButton(onClick = it::refreshDeletion, enabled = !it.state.busy) { Text("刷新删除进度") }
+            it.state.deletion?.let { deletion -> Text("删除状态：$deletion") }
+            if (it.deletionRecoveryRequired) Text("物理清理未完成，请通过已有停用入口处理。", color = MaterialTheme.colorScheme.error)
+        }
+    }
+}
+
+@Composable
+private fun UnavailablePage(status: DemoCapabilityStatus) = Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+    Text(status.explanation, color = MaterialTheme.colorScheme.error, modifier = Modifier.testTag("unavailable"))
+    Text("可前往模型页检查资源，或在系统设置中查看权限。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+}
+
+@Composable
+private fun PageHeader(title: String, onBack: () -> Unit) {
+    Row(Modifier.fillMaxWidth().padding(top = 12.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+        TextButton(onClick = onBack, modifier = Modifier.testTag("unified-back")) { Text("‹ 返回") }
+        Text(title, style = MaterialTheme.typography.titleLarge)
+        Spacer(Modifier.padding(32.dp))
+    }
+}

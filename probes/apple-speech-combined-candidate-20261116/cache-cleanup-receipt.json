@@ -1,0 +1,15 @@
+{
+  "removedExactPaths": [
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/DerivedData/ModuleCache.noindex",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/DerivedData/CompilationCache.noindex",
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/DerivedData/Index.noindex"
+  ],
+  "removedFiles": 7056,
+  "removedNominalBytes": 164929881,
+  "freeBytesBefore": 33414434816,
+  "freeBytesAfter": 33594601472,
+  "freeSpaceDifferenceNotUniquelyAttributed": true,
+  "appFileTreeStillMatches": true,
+  "preserved": "Full App, source archive/snapshot, actual compiler FileLists, objects, dependency inputs, xcresult, logs and all receipts",
+  "remainingCandidates": "Other compilation intermediates retained as build evidence; global caches untouched"
+}

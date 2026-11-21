@@ -1,0 +1,210 @@
+{
+  "original": {
+    "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/apk-consumer/build/outputs/apk/debug/w3-sherpa-notice-consumer-debug.apk",
+    "bytes": 128102798,
+    "sha256": "33c3fdab3ac862f7b7645c5ff7c1820c7a5da806718a4317ff7b25ff43145edc",
+    "noticeCount": 68,
+    "noticeBytes": 770479,
+    "pythonAndInfozipAgree": true
+  },
+  "nativeLibraries": [
+    {
+      "member": "jni/arm64-v8a/libonnxruntime.so",
+      "apkMember": "lib/arm64-v8a/libonnxruntime.so",
+      "bytes": 22249560,
+      "sha256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1"
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-c-api.so",
+      "apkMember": "lib/arm64-v8a/libsherpa-onnx-c-api.so",
+      "bytes": 4303136,
+      "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10"
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-cxx-api.so",
+      "apkMember": "lib/arm64-v8a/libsherpa-onnx-cxx-api.so",
+      "bytes": 272848,
+      "sha256": "de94e0952a124eb22e86d754e11aa0489a065affc837911a8ed5e7fd843baad6"
+    },
+    {
+      "member": "jni/arm64-v8a/libsherpa-onnx-jni.so",
+      "apkMember": "lib/arm64-v8a/libsherpa-onnx-jni.so",
+      "bytes": 4609320,
+      "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575"
+    },
+    {
+      "member": "jni/armeabi-v7a/libonnxruntime.so",
+      "apkMember": "lib/armeabi-v7a/libonnxruntime.so",
+      "bytes": 15359592,
+      "sha256": "7a8f17a707e52e0ac3a026be319272876d9eae61f4bb19585292772d785f7744"
+    },
+    {
+      "member": "jni/armeabi-v7a/libsherpa-onnx-c-api.so",
+      "apkMember": "lib/armeabi-v7a/libsherpa-onnx-c-api.so",
+      "bytes": 3157748,
+      "sha256": "cb5d912ec19b4f76582047d082db63f304f3e584cc89130e393337f4cea6ebe7"
+    },
+    {
+      "member": "jni/armeabi-v7a/libsherpa-onnx-cxx-api.so",
+      "apkMember": "lib/armeabi-v7a/libsherpa-onnx-cxx-api.so",
+      "bytes": 183600,
+      "sha256": "aa5f7bc8031baf5f0ba2e6c892e1cf70d17e1fe839db375424ebda175f0dc5e9"
+    },
+    {
+      "member": "jni/armeabi-v7a/libsherpa-onnx-jni.so",
+      "apkMember": "lib/armeabi-v7a/libsherpa-onnx-jni.so",
+      "bytes": 3381796,
+      "sha256": "d45f377249d5c3191b91de6ba6edffcd83e4cf7e109bc523b212db341581c2a8"
+    },
+    {
+      "member": "jni/x86/libonnxruntime.so",
+      "apkMember": "lib/x86/libonnxruntime.so",
+      "bytes": 26491148,
+      "sha256": "fcb6cd80415f7951e58fdd8158a238946dce3710d5fee492b67174d5131f9eee"
+    },
+    {
+      "member": "jni/x86/libsherpa-onnx-c-api.so",
+      "apkMember": "lib/x86/libsherpa-onnx-c-api.so",
+      "bytes": 4954780,
+      "sha256": "e1e483cc4a09aaadf7f72c1d406c010bba05e3a05fc763a4536117508ab3f390"
+    },
+    {
+      "member": "jni/x86/libsherpa-onnx-cxx-api.so",
+      "apkMember": "lib/x86/libsherpa-onnx-cxx-api.so",
+      "bytes": 250072,
+      "sha256": "eb0e2a2b32ea48237582f5d5f31c1bf65e7911cbcb6ee3af08bb491e55fed027"
+    },
+    {
+      "member": "jni/x86/libsherpa-onnx-jni.so",
+      "apkMember": "lib/x86/libsherpa-onnx-jni.so",
+      "bytes": 5261876,
+      "sha256": "1eb37aaa10e377f6635086bec09685859ca8c7465460fdf9346a21eba90a4ee4"
+    },
+    {
+      "member": "jni/x86_64/libonnxruntime.so",
+      "apkMember": "lib/x86_64/libonnxruntime.so",
+      "bytes": 25581120,
+      "sha256": "087e84297cad64acb823c3d901d6e0cc934e91add7cdb20da802cd1c0bea5c3e"
+    },
+    {
+      "member": "jni/x86_64/libsherpa-onnx-c-api.so",
+      "apkMember": "lib/x86_64/libsherpa-onnx-c-api.so",
+      "bytes": 4782648,
+      "sha256": "8285ecf2e6275374d4c8c5b46020cbb1de82db9bd6b6baad011fdc480cf10ba2"
+    },
+    {
+      "member": "jni/x86_64/libsherpa-onnx-cxx-api.so",
+      "apkMember": "lib/x86_64/libsherpa-onnx-cxx-api.so",
+      "bytes": 267552,
+      "sha256": "edcd50a1608458867d78213385f5e3013a39db7b7af43d4f87d72e4d84e5e3dc"
+    },
+    {
+      "member": "jni/x86_64/libsherpa-onnx-jni.so",
+      "apkMember": "lib/x86_64/libsherpa-onnx-jni.so",
+      "bytes": 5053592,
+      "sha256": "878d61116f244131263eec24297ef05bf508d02bccdede2a4e3ad3202bbdaa48"
+    }
+  ],
+  "fourABIs": [
+    "arm64-v8a",
+    "armeabi-v7a",
+    "x86",
+    "x86_64"
+  ],
+  "negativeCases": [
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/0-delete.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/compiler-rt/LICENSE.TXT",
+      "mutation": "delete",
+      "rejected": true,
+      "reason": "notice member set differs",
+      "bytes": 191670,
+      "sha256": "a7547841fa580a025b068da6e84e36015f8f4abf921a030c16f7a204710baf25"
+    },
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/0-same-length-change-byte.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/compiler-rt/LICENSE.TXT",
+      "mutation": "same-length-change-byte",
+      "rejected": true,
+      "reason": "notice byte mismatch: assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/compiler-rt/LICENSE.TXT",
+      "bytes": 197341,
+      "sha256": "85bccd00fc72bbf6bbf5ec632aee73eebf6c0ee559d533bb65f87a9ff09234bd"
+    },
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/1-delete.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/index.json",
+      "mutation": "delete",
+      "rejected": true,
+      "reason": "notice member set differs",
+      "bytes": 195644,
+      "sha256": "9f3ff23023f2892a0ae45aa4d5c4bf68ce7c57c88c201ed27d87d6e63301fb6b"
+    },
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/1-same-length-change-byte.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/index.json",
+      "mutation": "same-length-change-byte",
+      "rejected": true,
+      "reason": "notice byte mismatch: assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/index.json",
+      "bytes": 197340,
+      "sha256": "efe840affa20017ed07a3ad1155c2d1b63b704eb874da77ac66216d983ea8b91"
+    },
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/2-delete.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libcxx/LICENSE.TXT",
+      "mutation": "delete",
+      "rejected": true,
+      "reason": "notice member set differs",
+      "bytes": 191680,
+      "sha256": "b86dc04129a2afdd8a1bb324108119c97583d7a1c1034ffea033a98dccdd63c3"
+    },
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/2-same-length-change-byte.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libcxx/LICENSE.TXT",
+      "mutation": "same-length-change-byte",
+      "rejected": true,
+      "reason": "notice byte mismatch: assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libcxx/LICENSE.TXT",
+      "bytes": 197340,
+      "sha256": "242e882fa02783a043776215caf66162c44b2ef43c6725be5082219760f47d5d"
+    },
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/3-delete.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libcxxabi/LICENSE.TXT",
+      "mutation": "delete",
+      "rejected": true,
+      "reason": "notice member set differs",
+      "bytes": 191672,
+      "sha256": "b8f82e21047744b55a684ecf3c39c02c134738ae175a91310d1853c0dba9713e"
+    },
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/3-same-length-change-byte.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libcxxabi/LICENSE.TXT",
+      "mutation": "same-length-change-byte",
+      "rejected": true,
+      "reason": "notice byte mismatch: assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libcxxabi/LICENSE.TXT",
+      "bytes": 197340,
+      "sha256": "45dab2fcb27fef6a14e8d2658f1341e296802244e9af5602527bca5fca7e602c"
+    },
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/4-delete.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libunwind/LICENSE.TXT",
+      "mutation": "delete",
+      "rejected": true,
+      "reason": "notice member set differs",
+      "bytes": 191673,
+      "sha256": "4f7aa3f87b00dfdd82d6bbb077e272f87a03afbfb45577806083f47b3773842d"
+    },
+    {
+      "fixture": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-ndk-notice-integration-20261115/negative-notice-fixtures/4-same-length-change-byte.zip",
+      "member": "assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libunwind/LICENSE.TXT",
+      "mutation": "same-length-change-byte",
+      "rejected": true,
+      "reason": "notice byte mismatch: assets/ondeviceai/sherpa-asr/notices/native/ndk-cxx/libunwind/LICENSE.TXT",
+      "bytes": 197340,
+      "sha256": "f2aab6f771fa5a9d4c289da830278d3c4843aef236039d6ba07bdf430b7dc958"
+    }
+  ],
+  "negativeScope": "notice-only ZIP fixtures using same member/byte verifier as actual AAR/APK; not modified signed APKs",
+  "deviceInstalled": false,
+  "releaseAcceptance": false,
+  "W3Complete": false
+}

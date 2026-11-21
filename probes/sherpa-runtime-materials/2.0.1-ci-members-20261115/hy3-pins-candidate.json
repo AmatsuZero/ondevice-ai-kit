@@ -1,0 +1,24 @@
+{
+  "replacements": [
+    {
+      "old": "    data = (OUT / filename).read_bytes()\n    digest = sha(data)",
+      "new": "    data = (OUT / filename).read_bytes()\n    digest = sha(data)\n    assert len(data) == {'android-libs.zip': 50566279, 'android-aar.zip': 49199032}[filename]\n    assert digest == {'android-libs.zip': '9718873918fad3a9f7a1156420e5e8f46810970c5fb07383e467cf841265fe68', 'android-aar.zip': 'fd4f1e0ef080de31957df23069624215b69858fbc364637399f4cd983f6bd594'}[filename]"
+    },
+    {
+      "old": "assert sha(local) == prior['localAar']['sha256']",
+      "new": "assert sha(local) == prior['localAar']['sha256']\nassert len(local) == 49441341\nassert sha(local) == 'a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7'\n_unzip_version_process = subprocess.run(['/usr/bin/unzip', '-v'], capture_output=True, text=True, check=True)\nassert 'Info-ZIP' in _unzip_version_process.stdout, ('unzip not Info-ZIP', _unzip_version_process.stdout)\nunzip_version = _unzip_version_process.stdout.strip().splitlines()[0]"
+    },
+    {
+      "old": "    independent = subprocess.run(['rtk', 'proxy', 'unzip', '-p', str(OUT / 'android-libs.zip'), ci_name], capture_output=True, check=True)",
+      "new": "    independent = subprocess.run(['/usr/bin/unzip', '-p', str(OUT / 'android-libs.zip'), ci_name], capture_output=True, check=True)"
+    },
+    {
+      "old": "independent_aar = subprocess.run(['rtk', 'proxy', 'unzip', '-p', str(OUT / 'android-aar.zip'), published_aar_name], capture_output=True, check=True)",
+      "new": "independent_aar = subprocess.run(['/usr/bin/unzip', '-p', str(OUT / 'android-aar.zip'), published_aar_name], capture_output=True, check=True)"
+    },
+    {
+      "old": "    'observedAt': datetime.now(timezone.utc).isoformat(),",
+      "new": "    'observedAt': datetime.now(timezone.utc).isoformat(),\n    'unzipVersion': unzip_version,"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "at": "2026-11-12T11:49:30.452459+00:00",
+  "marker": "w3-adb-terminal-observation-20261112",
+  "sourceCommit": "407b5ce297bca7c5afe4ac270d8c604f07934974",
+  "sourceBranchPushed": false,
+  "issueReceipts": {
+    "gh": {
+      "id": 6822648826,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6822648826",
+      "sha256": "607dc384ae1ee2cba9c3ef1a009f38612279c923eaeaac396912305f163b698d",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43975,
+      "url": null,
+      "sha256": "780b58538ae9b51de71edf4d728c6ddb3ed359eae47538b6772b7fdc6efd3815",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "482f2863250a88160485ff58e0c7211f24c2d748",
+    "sha256": "9b6b1bab3024db48bc8175ad0eecf8b158254330d3b73a3d4d45ef28f9e41c89",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "9b6b1bab3024db48bc8175ad0eecf8b158254330d3b73a3d4d45ef28f9e41c89",
+    "readbackExact": true
+  },
+  "wikiContentSHA256Equal": true,
+  "newIssueWritesPerTarget": 1,
+  "newWikiWritesPerTarget": 1,
+  "transportFailuresRetained": [
+    "EOF",
+    "read: connection reset by peer"
+  ],
+  "invocationOnlyRecovery": "Added exact GitLab host to NO_PROXY/no_proxy for this subprocess; global settings unchanged. One successful recovery does not prove a unique cause.",
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "goalActive": true
+}

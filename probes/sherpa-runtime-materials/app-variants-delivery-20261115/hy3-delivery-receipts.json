@@ -1,0 +1,83 @@
+[
+  {
+    "lane": "hy3-fixture",
+    "model": "hy3",
+    "result": "success",
+    "observedToolEvents": 0,
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 19.671,
+      "endedAtUTC": "2026-11-15T14:53:28.038576+00:00",
+      "stdoutBytes": 28328,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "prompt": {
+      "bytes": 6288,
+      "sha256": "e13ce9541bd5947a2d49d1aa719e803a491e0d38e3d267038786151f8a465a4b"
+    },
+    "events": {
+      "bytes": 28328,
+      "sha256": "c7291945a1b136b30109917cf05c4cecfe1a58cd112f94dda8f0303381712bfd"
+    },
+    "candidate": {
+      "bytes": 1629,
+      "sha256": "a50d6b2a0b2d1428ee47aabd83e34ffb51c74d3de3990f2a6cc0380b010df920"
+    }
+  },
+  {
+    "lane": "hy3-review",
+    "model": "hy3",
+    "result": "success",
+    "observedToolEvents": 0,
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 65.42,
+      "endedAtUTC": "2026-11-15T15:01:15.888489+00:00",
+      "stdoutBytes": 83332,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "prompt": {
+      "bytes": 35221,
+      "sha256": "bf8be52ce4bc91d52f0aa289ae04025454561deb445e88ac68a1435f45434880"
+    },
+    "events": {
+      "bytes": 83332,
+      "sha256": "4eaa676aa934cd8bcc21f5224f5fa44bd32d87533204546dd11ae745bde07e81"
+    },
+    "candidate": {
+      "bytes": 11729,
+      "sha256": "e118f66e3f37acd086eb43181c517792ea3ec0cc0e49a1741ecb117d7b1a389d"
+    }
+  },
+  {
+    "lane": "hy3-correction",
+    "model": "hy3",
+    "result": "success",
+    "observedToolEvents": 0,
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 25.844,
+      "endedAtUTC": "2026-11-15T15:03:14.953544+00:00",
+      "stdoutBytes": 35752,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "prompt": {
+      "bytes": 4189,
+      "sha256": "5fdb63764ece5373a46c1bf933895c22d8edc616aa5607225fd0e62edcd03bf1"
+    },
+    "events": {
+      "bytes": 35752,
+      "sha256": "8449e703281a35494cd81ecbabd1f08c59e28af97cc7abb6026cd7d32cc163d8"
+    },
+    "candidate": {
+      "bytes": 1772,
+      "sha256": "7195a05615996be0a459608c041a93792b8f9d5278338d58f9d66fab2bab028b"
+    }
+  }
+]

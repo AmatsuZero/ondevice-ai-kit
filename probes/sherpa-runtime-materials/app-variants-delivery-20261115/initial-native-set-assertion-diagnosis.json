@@ -1,0 +1,87 @@
+{
+  "failure": "verifier incorrectly equated full Demo native set to ASR runtime set",
+  "observed": [
+    {
+      "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-release-unsigned.apk",
+      "nativeMemberCount": 16,
+      "missingASR": [],
+      "nonASRNativeMembers": []
+    },
+    {
+      "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-debug.apk",
+      "nativeMemberCount": 16,
+      "missingASR": [],
+      "nonASRNativeMembers": []
+    },
+    {
+      "path": "artifacts/verification/w3-app-variants-20261115/androidApp-debug.apk",
+      "nativeMemberCount": 32,
+      "missingASR": [],
+      "nonASRNativeMembers": [
+        "lib/arm64-v8a/libandroidx.graphics.path.so",
+        "lib/arm64-v8a/libface_detector_v2_jni.so",
+        "lib/arm64-v8a/libimage_processing_util_jni.so",
+        "lib/arm64-v8a/libsurface_util_jni.so",
+        "lib/armeabi-v7a/libandroidx.graphics.path.so",
+        "lib/armeabi-v7a/libface_detector_v2_jni.so",
+        "lib/armeabi-v7a/libimage_processing_util_jni.so",
+        "lib/armeabi-v7a/libsurface_util_jni.so",
+        "lib/x86/libandroidx.graphics.path.so",
+        "lib/x86/libface_detector_v2_jni.so",
+        "lib/x86/libimage_processing_util_jni.so",
+        "lib/x86/libsurface_util_jni.so",
+        "lib/x86_64/libandroidx.graphics.path.so",
+        "lib/x86_64/libface_detector_v2_jni.so",
+        "lib/x86_64/libimage_processing_util_jni.so",
+        "lib/x86_64/libsurface_util_jni.so"
+      ]
+    },
+    {
+      "path": "artifacts/verification/w3-app-variants-20261115/androidApp-release-unsigned.apk",
+      "nativeMemberCount": 32,
+      "missingASR": [],
+      "nonASRNativeMembers": [
+        "lib/arm64-v8a/libandroidx.graphics.path.so",
+        "lib/arm64-v8a/libface_detector_v2_jni.so",
+        "lib/arm64-v8a/libimage_processing_util_jni.so",
+        "lib/arm64-v8a/libsurface_util_jni.so",
+        "lib/armeabi-v7a/libandroidx.graphics.path.so",
+        "lib/armeabi-v7a/libface_detector_v2_jni.so",
+        "lib/armeabi-v7a/libimage_processing_util_jni.so",
+        "lib/armeabi-v7a/libsurface_util_jni.so",
+        "lib/x86/libandroidx.graphics.path.so",
+        "lib/x86/libface_detector_v2_jni.so",
+        "lib/x86/libimage_processing_util_jni.so",
+        "lib/x86/libsurface_util_jni.so",
+        "lib/x86_64/libandroidx.graphics.path.so",
+        "lib/x86_64/libface_detector_v2_jni.so",
+        "lib/x86_64/libimage_processing_util_jni.so",
+        "lib/x86_64/libsurface_util_jni.so"
+      ]
+    },
+    {
+      "path": "artifacts/verification/w3-demo-apk-delivery-20261115/androidApp-debug.apk",
+      "nativeMemberCount": 32,
+      "missingASR": [],
+      "nonASRNativeMembers": [
+        "lib/arm64-v8a/libandroidx.graphics.path.so",
+        "lib/arm64-v8a/libface_detector_v2_jni.so",
+        "lib/arm64-v8a/libimage_processing_util_jni.so",
+        "lib/arm64-v8a/libsurface_util_jni.so",
+        "lib/armeabi-v7a/libandroidx.graphics.path.so",
+        "lib/armeabi-v7a/libface_detector_v2_jni.so",
+        "lib/armeabi-v7a/libimage_processing_util_jni.so",
+        "lib/armeabi-v7a/libsurface_util_jni.so",
+        "lib/x86/libandroidx.graphics.path.so",
+        "lib/x86/libface_detector_v2_jni.so",
+        "lib/x86/libimage_processing_util_jni.so",
+        "lib/x86/libsurface_util_jni.so",
+        "lib/x86_64/libandroidx.graphics.path.so",
+        "lib/x86_64/libface_detector_v2_jni.so",
+        "lib/x86_64/libimage_processing_util_jni.so",
+        "lib/x86_64/libsurface_util_jni.so"
+      ]
+    }
+  ],
+  "runtimeRebuildsOrDeviceCalls": 0
+}

@@ -1,0 +1,77 @@
+{
+  "files": {
+    "bound-index.json": {
+      "bytes": 20779,
+      "sha256": "b7bc3702af3b5e8d41a5a42503e55cbdbc87165a57b5f4588c6c846c0d7e6f61"
+    },
+    "expected-assets.json": {
+      "bytes": 6882,
+      "sha256": "122226661558e9953e3c7ee6f14897dfab6f8381e2fca40772cf4de1ac1b9a7c"
+    },
+    "ort-patch-interpretation.json": {
+      "bytes": 6885,
+      "sha256": "dce8ef6f546bdbf5e42d3d32a4474c76ca6eb74277ea2dbbadaee926889e5254"
+    },
+    "helper-receipts.json": {
+      "bytes": 2710,
+      "sha256": "6a9c39e384f0d9983b7ddfdd63a3a9add8825a9fbb470aa47cb90eb52b64975c"
+    },
+    "review-disposition.json": {
+      "bytes": 177,
+      "sha256": "f5c2c4e8ee9b9c53e221d7c1713b0ef54c632eeafd7ae377d43f08ab58dc9ff2"
+    },
+    "build-invocations.json": {
+      "bytes": 4314,
+      "sha256": "78afda2e8a09424691c717a98eb19f7d25032f7a56975f41f4775e55682de16d"
+    },
+    "verify-delivery.py": {
+      "bytes": 3324,
+      "sha256": "a075ee320edfc8435b933618dcd70c9d051def24e885b1dda9d2f365b5c89a04"
+    },
+    "README.md": {
+      "bytes": 3516,
+      "sha256": "e51dd716ebcc1f276660f53011e9867d03e838ccc6f39ce6b56837e09a2299df"
+    },
+    "apk-verification.json": {
+      "bytes": 9705,
+      "sha256": "2fe860068e44e34ec26c47fb100bab5893ca276d5abc2500df9f856c8263e91a"
+    },
+    "readme-integration.json": {
+      "bytes": 230,
+      "sha256": "b37f46b1f5d8c8f7c39073dcb862d7a3a9af47b686967b4a9f23197d1f49bb1d"
+    },
+    "bounded-review.json": {
+      "bytes": 2404,
+      "sha256": "ccb111465380566da35cb216cf2fbdc9373a497d1bd1aa7f9829018d1901e58e"
+    },
+    "acceptance-summary.json": {
+      "bytes": 557,
+      "sha256": "b09aff21e757f1cd27495c0f8101b115f76035b83c3d8559a5e0344d072d3c14"
+    },
+    "selection-candidate.json": {
+      "bytes": 12167,
+      "sha256": "5f4ca30f00a3722085ded9a0c81a00e74ad8a8f129f3a11e15e181af6d574606"
+    },
+    "aar-verification.json": {
+      "bytes": 1217,
+      "sha256": "f5be5c10c26be71654315ca552adfaf99c05afa67954060c94d35d348723709d"
+    },
+    "initial-integration-failure.txt": {
+      "bytes": 501,
+      "sha256": "c1b1e44a2e02161b7e4ad799b8d3b96578fd673cc059f8d6defeafe9843ea768"
+    },
+    "modifications-candidate.json": {
+      "bytes": 4970,
+      "sha256": "c8eab80c0eba4b527b56c2158834566bc3c43b1bbc0b518b14ed534c9e1765c7"
+    },
+    "input-rows.json": {
+      "bytes": 28204,
+      "sha256": "7de986257e9a17efb7f2d1e2a02a27fb0f9185035d9a4cade8da8efe76ab8061"
+    },
+    "integration-receipt.json": {
+      "bytes": 628,
+      "sha256": "ed877fcabd38e9857ed248bea258c8dbcf10b87d86bff054c408240888930951"
+    }
+  },
+  "scope": "known native notice production assets, upstream modification interpretation and combined known-subset independent Maven APK retention; full P1-P4/R4/R5/W3 remain open"
+}

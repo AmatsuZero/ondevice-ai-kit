@@ -1,0 +1,206 @@
+{
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "scope": "portable paths to copied exact source blobs; canonical receipts remain unchanged",
+  "files": [
+    {
+      "sourcePath": "sherpa-onnx/jni/CMakeLists.txt",
+      "gitBlobSHA1": "d0ce4e3f2e47ce5ed60e1f1c6effc4cf7970ac2b",
+      "bytes": 1765,
+      "sha256": "cf1e46fb74c820b476fd7c585073389c4e021508fe32a7f007684f6180c7dd31",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/CMakeLists.txt",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/CMakeLists.txt"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/audio-tagging.cc",
+      "gitBlobSHA1": "f33f279a0059e5ea69bd938410cba3aaf6721fd4",
+      "bytes": 5092,
+      "sha256": "754278ad45354f12704d91b1fe520e90eb5c50c517561d3b5c360874ddaf7895",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/audio-tagging.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/audio-tagging.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/common.cc",
+      "gitBlobSHA1": "c620016ac72e932f9ed3418aa09f49bf35cb535a",
+      "bytes": 1611,
+      "sha256": "bb7ee6ac44bd2a54fa1bacf1edc62e65616d6164fb73d8f1f720a47b9f5cdf88",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/common.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/common.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/jni.cc",
+      "gitBlobSHA1": "4b2086a92132f500f62623a3cb7829976d3c863b",
+      "bytes": 979,
+      "sha256": "a98ca2536fca161453aab3d02feac9f9d557f7013b6b94cee7aceb38deb0ac1a",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/jni.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/jni.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/keyword-spotter.cc",
+      "gitBlobSHA1": "e66709d3c9c98f0b18637c1034a5a3c375d88d78",
+      "bytes": 8183,
+      "sha256": "b4994f3a82948ee30b4b9e0a8ee12cf82f6ea4835e0be85a92660fcb3682554a",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/keyword-spotter.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/keyword-spotter.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/offline-diacritization.cc",
+      "gitBlobSHA1": "16cbcaecae58f5fe3169bd4c489f7716a9a5c5b9",
+      "bytes": 3751,
+      "sha256": "9ac69268889e767a8f7995059eea0dda452d309a92828d836edff2caff06a617",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/offline-diacritization.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-diacritization.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/offline-punctuation.cc",
+      "gitBlobSHA1": "8517ea00b4656200202cb3b9ecc888cf3cd463b8",
+      "bytes": 4067,
+      "sha256": "9ab05598b60c9cd052c1e0d67da807dc0948397fa700288e2746cd0c83ef70f9",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/offline-punctuation.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-punctuation.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/offline-recognizer.cc",
+      "gitBlobSHA1": "422f1f427884aff4dd1e9baf08ead3ed61ee2fb3",
+      "bytes": 30762,
+      "sha256": "3d4f81f47ed42aa925eda51b9f80bb446f0d82f17309f163e57077fba68d3457",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/offline-recognizer.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-recognizer.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/offline-speaker-diarization.cc",
+      "gitBlobSHA1": "7ba38946bf8d9c34677740f88c6d92a54a3ab6e6",
+      "bytes": 9321,
+      "sha256": "3345a55698ea01318e6818e031362d903b4f980d6add7d73059f3da6eeef82f8",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/offline-speaker-diarization.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speaker-diarization.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/offline-speech-denoiser.cc",
+      "gitBlobSHA1": "f28134ff5ad5e72da49361b7aedba0c8fceeebff",
+      "bytes": 3798,
+      "sha256": "90a2ba871d74028ec532c17f161778abde67cfc597cd354bb6c48ac2a23bb25b",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/offline-speech-denoiser.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-speech-denoiser.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/offline-stream.cc",
+      "gitBlobSHA1": "8167a8b40854230b18c7f73abfd7ab3c4c3e18b8",
+      "bytes": 2160,
+      "sha256": "cc5c3beb14e642842332127092ee5974bb6df7712c3425ea1f33602884895796",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/offline-stream.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-stream.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/offline-tts.cc",
+      "gitBlobSHA1": "1e086a0250b313bb2047b48c1174ed4df1c45e71",
+      "bytes": 24313,
+      "sha256": "500453f6593f67c0a773d6f07eb1f550a685a1d1b03ce566863e5bb8cc2c61a1",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/offline-tts.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/offline-tts.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/online-punctuation.cc",
+      "gitBlobSHA1": "2cc50d9f5eed7e26402e9eabb54f3a1843160392",
+      "bytes": 4349,
+      "sha256": "944ed9ee6334c1f0ed08fdfb0c32611327c81be56f02790b2e87728e2d4975b4",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/online-punctuation.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-punctuation.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/online-recognizer.cc",
+      "gitBlobSHA1": "7a6af70db3761d7ed8b92bdcd0fe4c2291f0fd8a",
+      "bytes": 17900,
+      "sha256": "b5a6de42140c2d4198f97b4b3baf65a597b8b8381937855e6b216d8d7ba6259b",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/online-recognizer.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-recognizer.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/online-speech-denoiser.cc",
+      "gitBlobSHA1": "a75fe9bd114e98529d5cfe67a4252064d4bba665",
+      "bytes": 4044,
+      "sha256": "5b0ca624c42f278dc1320c7245002792bc5530c6d2dff5f40276a7e0281caa71",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/online-speech-denoiser.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-speech-denoiser.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/online-stream.cc",
+      "gitBlobSHA1": "1ba9fa1a1a55ea97024a45d0256741e2247d5c00",
+      "bytes": 2397,
+      "sha256": "5b3cf661902f34c7878b8c6d1babf8a20a9b737c770da4fc5750941d0dbc03b7",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/online-stream.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/online-stream.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/sherpa-onnx-symbols.lds",
+      "gitBlobSHA1": "4931fa008e5f57c1ce1ce4e97d14bbf80dd0ed81",
+      "bytes": 64,
+      "sha256": "27495d8f4d39559c0f57587bca1b700553c7a8360a69faa90dc0d8f2d571bdef",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/sherpa-onnx-symbols.lds",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/sherpa-onnx-symbols.lds"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/speaker-embedding-extractor.cc",
+      "gitBlobSHA1": "43709fc7160300210f2b3ba40100de0c2a087bf0",
+      "bytes": 4738,
+      "sha256": "11867fdeabb88144540e58a9b76dd2d70d4ff763c95c3c494755b97ea26aee48",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/speaker-embedding-extractor.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-extractor.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/speaker-embedding-manager.cc",
+      "gitBlobSHA1": "87cd208a267d8985167cdcdf3691b262826705bb",
+      "bytes": 8116,
+      "sha256": "35259235e1f273ae7d9508c70b195cba731851bea77e495f3cf8bf63459efbf8",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/speaker-embedding-manager.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speaker-embedding-manager.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/speech-denoiser.cc",
+      "gitBlobSHA1": "3c359bbf08dd79cd9e125a850e12855cbd59559b",
+      "bytes": 4047,
+      "sha256": "1c7532e608eea68a7ef2f30a0bb3e381a2c345d6f1d01fe2d6d13a20d847c852",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/speech-denoiser.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/speech-denoiser.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/spoken-language-identification.cc",
+      "gitBlobSHA1": "debf43f5a4e178a4aa2038eba3adc6a3e57d27c3",
+      "bytes": 4528,
+      "sha256": "1d05be2b8c0eda5a410a2069c6a6242f1c77e9343630675010b036ba19bd7bd5",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/spoken-language-identification.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/spoken-language-identification.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/version.cc",
+      "gitBlobSHA1": "9b99a4cff70c8dc5950d1b19d13c5e475d280e63",
+      "bytes": 1797,
+      "sha256": "45593464a189ce7fa39e4586368101bddba9d1a970533d9fea2621b5442a1c71",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/version.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/version.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/voice-activity-detector.cc",
+      "gitBlobSHA1": "778fe46d030bc5b570e3337a1048afcdec99f35c",
+      "bytes": 9597,
+      "sha256": "aa7b491d956e87c89037f43e444cec1552b3b1e90a28d46d6ab8cdac52879595",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/voice-activity-detector.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/voice-activity-detector.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/wave-reader.cc",
+      "gitBlobSHA1": "3192cb97584fb86d4c9fed0139cc2988f8e1d796",
+      "bytes": 3721,
+      "sha256": "ea2477ea2251213f02285924583e04d5101c9b704437678d91ebaadb97cf340c",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/wave-reader.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-reader.cc"
+    },
+    {
+      "sourcePath": "sherpa-onnx/jni/wave-writer.cc",
+      "gitBlobSHA1": "93677f985d912aff048aa6aa8380553a699688f1",
+      "bytes": 722,
+      "sha256": "f7d6e354bb3d014b26489af1c31df19d8f18e2df508d4a753473e4c0e39f79eb",
+      "materialPath": "probes/sherpa-runtime-materials/jni-surface-correspondence-20261116/source/sherpa-onnx/jni/wave-writer.cc",
+      "canonicalLocalPath": ".omx/artifacts/w3-jni-surface-20261116T0800/source/sherpa-onnx/jni/wave-writer.cc"
+    }
+  ]
+}

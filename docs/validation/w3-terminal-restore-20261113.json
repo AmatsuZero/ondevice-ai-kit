@@ -1,0 +1,159 @@
+{
+  "suites": [
+    {
+      "name": "observation",
+      "exitCode": 0,
+      "methods": 201,
+      "elapsedSeconds": 29.478386709000915
+    },
+    {
+      "name": "contract",
+      "exitCode": 0,
+      "methods": 16,
+      "elapsedSeconds": 2.3867619170050602
+    },
+    {
+      "name": "terminal",
+      "exitCode": 0,
+      "methods": 108,
+      "elapsedSeconds": 331.7721236659854
+    }
+  ],
+  "ASTFiles": 51,
+  "totalMethods": 325,
+  "at": "2026-11-13T01:09:49.722453+00:00",
+  "protection": {
+    "frozen": 120,
+    "protected": 95,
+    "prepared": 81,
+    "APKs": 2,
+    "drift": [],
+    "deviceOperations": 0
+  },
+  "integration": [
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/restore-parent/final-candidate/terminal_device_restore.py",
+      "target": "probes/android-qwen-terminal/terminal_device_restore.py",
+      "sourceExact": true,
+      "sourceSHA256": "52ecffd03cc298a2394a481a06fd59139eeb411aed2be7e8e82977a6fb3cce9a",
+      "targetSHA256": "52ecffd03cc298a2394a481a06fd59139eeb411aed2be7e8e82977a6fb3cce9a",
+      "harnessPathEdits": 0
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/restore-parent/guard-candidate/terminal_device_contract.py",
+      "target": "probes/android-qwen-terminal/terminal_device_contract.py",
+      "sourceExact": true,
+      "sourceSHA256": "cb8aa4d999aa20704401d1bb67a197763cf915f30e14adc916767236fd732b21",
+      "targetSHA256": "cb8aa4d999aa20704401d1bb67a197763cf915f30e14adc916767236fd732b21",
+      "harnessPathEdits": 0
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/restore-parent/test_terminal_restore_parent.py",
+      "target": "probes/android-qwen-terminal/test_terminal_restore_parent.py",
+      "sourceExact": false,
+      "sourceSHA256": "74bcf2cc2e3b27ba2eafb36df69ef5968a74fa118ad503a8b42e6a6b86790a72",
+      "targetSHA256": "06856aaef8692db1e06af898cb338141eed855a5acc2ee73dc964e7aefcde893",
+      "harnessPathEdits": 1
+    },
+    {
+      "source": ".omx/artifacts/w3-terminal-observation-20261112/restore-parent/test_restore_mandatory_contract.py",
+      "target": "probes/android-qwen-terminal/check_device_contract.py",
+      "sourceExact": false,
+      "sourceSHA256": "8cd2d5d212a8fa855d49df1d863b6edce64d77e2cd0efd80e7ce6d3f44033763",
+      "targetSHA256": "b1a41879de4e287ef28c1078597817c510530c6f70870110c07de1e799d1fe61",
+      "harnessPathEdits": 1
+    }
+  ],
+  "independentSourceReview": {
+    "verdict": "accept",
+    "findings": [],
+    "scope": "Review of proposed probes/android-qwen-terminal/terminal_device_restore.py (restore(root,ctx,*,serial) and all private helpers) and one mandatory DRIVERS tuple addition (terminal_device_restore.py appended to DRIVERS in terminal_device_contract.py). Contracts are taken from the supplied terminal_device_prepare.py, terminal_file_io.py, terminal_source_adapter.py, device_acceptance.py (FILE driver) and the guard-candidate terminal_device_contract.py. No edits performed; other supplied files define actual contracts only and are out of edit scope.",
+    "limitations": [
+      "_preflight_outputs is referenced (from adb_terminal_observation) but its definition is not supplied in full. Prepare's usage implies it rejects existing outputs. If so, a restore that writes ownership-stage-recovered.json (only when ownership-stage-created.json is absent) but then fails to delete the stage would be blocked from re-run by its own preflight (ownership-stage-recovered.json already present). Full cleanup is explicitly a future closure per spec ('Cleanup is still future closure; no overall W3 completion from this module'), so this is out of the bounded module's scope, not a defect.",
+      "The recovered-identity journal persisted when ownership-stage-created.json is absent is never read back by this module on a subsequent run; its consumption is a future closure per the same spec note. Not a claim that this bounded module lacks such handling.",
+      "Pre-mutation local invalid claims / preflight raise (propagate) rather than returning a durable allRestored=false receipt. Spec explicitly permits this: 'Local invalid claims/preflight may throw before ANY device mutation'.",
+      "Source-only review; no device execution was performed. Parent RED/GREEN evidence is treated as observation only, not an automatic correctness proof, per instructions."
+    ]
+  },
+  "parentReviewDisposition": {
+    "verdict": "accept",
+    "findings": [],
+    "originalReviewPreserved": true,
+    "originalReviewSHA256": "6d951b02b7b6c12626e8272970b8fcc055bcad3a33eeedcfa42990736ae72ac1",
+    "limitationDisposition": "Existing-output preflight indeed rejects existing recovered journal/outcome. Restore is intentionally single-use, no automatic retry/resume promised. Future cleanup closure must inspect allRestored and propagate uncertainty; not silently rerun restore. Source-only acceptance, not integrated driver or Android."
+  },
+  "cleanup": {
+    "removed": [
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-terminal-observation-20261112/restore-parent/__pycache__/test_restore_mandatory_contract.cpython-315.pyc",
+        "bytes": 39354,
+        "sha256": "a1ebb82d2ea8182624697b1680401044e30c1b2197f367ac377379c5044cf2a7",
+        "tracked": false,
+        "open": false
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-terminal-observation-20261112/restore-parent/__pycache__/test_terminal_restore_parent.cpython-315.pyc",
+        "bytes": 22646,
+        "sha256": "ae662224198000fc72eba385621da536b0d1e3afd76f142f9d8da01fbf36cd5b",
+        "tracked": false,
+        "open": false
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-terminal-observation-20261112/restore-parent/candidate/__pycache__/terminal_device_restore.cpython-315.pyc",
+        "bytes": 28162,
+        "sha256": "c7fd8ec4849643ee0622d89542256d5fe6dd244cab86d23764cafdb4756eff9e",
+        "tracked": false,
+        "open": false
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-terminal-observation-20261112/restore-parent/combined-candidate/__pycache__/terminal_device_restore.cpython-315.pyc",
+        "bytes": 42100,
+        "sha256": "0b220ab1db910e17d0c908d14ef5be38de3a049cd2abc3e8dc7a8b199cbcb580",
+        "tracked": false,
+        "open": false
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-terminal-observation-20261112/restore-parent/localproof-candidate/__pycache__/terminal_device_restore.cpython-315.pyc",
+        "bytes": 37860,
+        "sha256": "3bd4146d680745af74ea2a85c9bde46b67557584ce5573dd52281aac67f950c7",
+        "tracked": false,
+        "open": false
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-terminal-observation-20261112/restore-parent/null-fixed-candidate/__pycache__/terminal_device_restore.cpython-315.pyc",
+        "bytes": 42263,
+        "sha256": "8c7c9b9fbccf7a6a3d613a5b0b3756bff63b5901b5cd6b986b5c8808a066cb6c",
+        "tracked": false,
+        "open": false
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-terminal-observation-20261112/restore-parent/final-candidate/__pycache__/terminal_device_restore.cpython-315.pyc",
+        "bytes": 43888,
+        "sha256": "ab1b17bd3b2bc89d3eddfe58a91c00eae1144570ac2ad0e26bcd42651f583a40",
+        "tracked": false,
+        "open": false
+      },
+      {
+        "path": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-terminal-observation-20261112/restore-parent/guard-candidate/__pycache__/terminal_device_contract.cpython-315.pyc",
+        "bytes": 29669,
+        "sha256": "ba77beed5f028ddb5ee8e767bc0cbbb693a4434144000db02a5ddbb6016b5b6b",
+        "tracked": false,
+        "open": false
+      }
+    ],
+    "removedBytes": 285942,
+    "freeBytesBefore": 45105283072,
+    "freeBytesAfter": 45103591424,
+    "measuredFreeDelta": -1691648,
+    "retained": "all unique sources/tests/prompts/raw/errors/reviews/receipts/model originals/APKs, active repository tests/ordinary apps/models",
+    "newLargeBuildsOrDownloads": false
+  },
+  "restoreParentMethods": 20,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "newSourceFreeze": false,
+  "sourceBranchPushed": false,
+  "deviceOperations": 0,
+  "ADBEmpty": true,
+  "goalStatus": "active"
+}

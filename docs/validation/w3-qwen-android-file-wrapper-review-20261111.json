@@ -1,0 +1,15 @@
+{
+  "status": "accepted-for-one-fixed-physical-file-run",
+  "seconds": 329.02278229199874,
+  "reviewSHA256": "46b0c6b748c67103f7e344445d1883545668dbe595544bb5093192344906fd4e",
+  "criticalImportantFindings": 0,
+  "suppliedContext24FilesUnchanged": true,
+  "parentRulings": {
+    "M1": "deferred minor: same-UID concurrent writer outside exact one-run scope; atomic base create plus exclusive parent reservation and no other active instrumentation",
+    "M2": "5-second resume/destroy wait is fail-closed operational boundary; do not extend/retry on actual failure",
+    "threading": "Reviewer source claim is incorrect: start() starts InstrumentationThread and onStart on separate thread; official Android reference fetched via Context7 and local SDK source confirm. runOnMainSync does not run inline on app main; local SDK validates not main. Same load pattern already passed physical load-only. No extra smoke/replay justified.",
+    "caseManifest": "Reviewer did not receive actual cases.json; it checked sourceFiles digest transitively. Parent actual packaged65 PCM hash verification retained."
+  },
+  "physicalFileNativeCalls": 0,
+  "productionReady": false
+}

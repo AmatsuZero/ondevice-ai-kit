@@ -1,0 +1,43 @@
+{
+  "marker": "w3-heap-probe-ready-20261111",
+  "status": "both-issues-and-wikis-readback-verified",
+  "sourceCommit": "7f1d2f9980ed7279e9602ba481298e52e6d82a22",
+  "sourceBranchPushed": false,
+  "issues": {
+    "gh": {
+      "id": 6794749094,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6794749094",
+      "sha256": "5a2c7c0653cef77efe0ee8600305cf74546befa9db95887452d01038d846a9c2",
+      "readbackExact": true
+    },
+    "glab": {
+      "id": 43194,
+      "url": null,
+      "sha256": "e0ba8bef065c42b07814bf27303ed756feb8f1f204985cf44fb7f6639f0365f4",
+      "readbackExact": true
+    }
+  },
+  "githubWiki": {
+    "commit": "92af270990b0d0bbead6950a79ebc231a5eec1b0",
+    "sha256": "28522627c314094f5013bc1fec8a552eb67da1b3a427190597c0ed99216de4f5",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "28522627c314094f5013bc1fec8a552eb67da1b3a427190597c0ed99216de4f5",
+    "readbackExact": true
+  },
+  "wikiBytesMatch": true,
+  "bodySHA256": "5a2c7c0653cef77efe0ee8600305cf74546befa9db95887452d01038d846a9c2",
+  "preservedPublicationFailure": {
+    "operation": "initial GitLab notes read",
+    "error": "EOF",
+    "writeAttemptedOnGitLabAtFailure": false,
+    "recovery": "Fresh project read succeeded; resumed GitLab marker lookup and wrote/read exact note once. GitHub was not re-posted."
+  },
+  "deviceRunConsumed": false,
+  "newInstallations": 0,
+  "nativeDecodeCalls": 0,
+  "w3Status": "open",
+  "evidence": ".omx/artifacts/w3-qwen-ort-lifecycle-20261111/heap-ready-publication"
+}

@@ -1,0 +1,14 @@
+{
+  "sourceCopies": 23,
+  "sourceCopyBytes": 452769,
+  "newNativeAssets": 25,
+  "nativeAssetBytes": 477865,
+  "nativeIndexSHA256": "b7bc3702af3b5e8d41a5a42503e55cbdbc87165a57b5f4588c6c846c0d7e6f61",
+  "initialParentFailure": "Darts sourceManifest field optional; missing handled by binding and verifying its actual retained material-manifest, not fabricating source or changing candidate raw bytes",
+  "initialIncompleteBuildAccepted": false,
+  "completeIntegrationBeforeNextBuild": true,
+  "originalJVMAssetsUnchanged": true,
+  "productionLogicChanged": false,
+  "originalNoticeBytesEqual": true,
+  "P1P2P3P4Complete": false
+}

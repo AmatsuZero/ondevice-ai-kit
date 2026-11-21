@@ -1,0 +1,13 @@
+{
+  "verdict": "accept_for_single_execution",
+  "findings": [],
+  "acceptedScope": "Bounded accept for one primary-controlled direct K2 JVM compiler diagnostic run only. The driver enforces exact sourceMap field shape/commit and per-source byte/SHA/git-blob checks for the 22 projected sources, verifies pinned AAR/classes.jar hashes and 124-class plus one-module membership, then requires raw byte equality for all 124 class members and META-INF/sherpa_onnx_release.kotlin_module, rejecting missing/extra/different members. No blockers or scope expansion found. Raw compiler stdout/stderr are embedded in invocation.json/report.json, not separate files.",
+  "limitations": [
+    "Review is supplied-context only; no tools/commands were used and no compilation or result is claimed. Supplied parent preflight/test notes are context, not independently executed.",
+    "Single fixed direct CLI run with exact Java/Kotlin 1.7.20 tooling, android34, stdlib/annotations classpath; not an AGP reproduction and not a complete original classpath claim.",
+    "Additional original AndroidX dependencies not imported by the 22 sources are not supplied; any byte-match remains under that classpath limitation.",
+    "Source/AAR provenance rests on primary-controlled config/hash manifest and exact-field projection; candidate validates configured hashes and fields but does not independently prove upstream provenance or original sourceMap dictionary equivalence.",
+    "Scope is raw class/module payload comparison only; no ZIP-JAR equality, DEX semantics, native source build, signing, model/ASR download, device/mic/AiAi execution, global changes, P1complete/P4/W3, or 429-retry authority.",
+    "Supplied unit tests directly cover source projection and member comparison helpers; AAR verification and CLI invocation were reviewed statically only, and output/config safety relies on the stated controlled absolute paths."
+  ]
+}

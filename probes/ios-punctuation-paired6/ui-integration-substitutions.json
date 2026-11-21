@@ -1,0 +1,62 @@
+[
+  {
+    "file": "Apple65UITests.swift",
+    "old": "speechTextPredicate.evaluate(with: alert.label)",
+    "new": "speechTextPredicate.evaluate(with: [\"label\": alert.label])",
+    "count": 1
+  },
+  {
+    "file": "DriverHost.swift",
+    "old": "W3Apple65DriverHost",
+    "new": "W3PunctuationPaired6DriverHost",
+    "count": 1
+  },
+  {
+    "file": "Apple65UITests.swift",
+    "old": "w3-apple65-file-20261116-01",
+    "new": "w3-apple-punctuation-paired6-20261116-01",
+    "count": 2
+  },
+  {
+    "file": "Apple65UITests.swift",
+    "old": "io.ondeviceai.probe.w3apple65file20261116",
+    "new": "io.ondeviceai.probe.w3punctpair20261116",
+    "count": 1
+  },
+  {
+    "file": "Apple65UITests.swift",
+    "old": "W3 Apple 65 FILE probe",
+    "new": "W3 punctuation paired6",
+    "count": 1
+  },
+  {
+    "file": "Apple65UITests.swift",
+    "old": "Run fixed FILE alias",
+    "new": "Run paired6 FILE control",
+    "count": 1
+  },
+  {
+    "file": "project.yml",
+    "old": "W3Apple65DriverHost",
+    "new": "W3PunctuationPaired6DriverHost",
+    "count": 7
+  },
+  {
+    "file": "project.yml",
+    "old": "W3Apple65UITests",
+    "new": "W3PunctuationPaired6UITests",
+    "count": 6
+  },
+  {
+    "file": "project.yml",
+    "old": "io.ondeviceai.probe.w3apple65driver20261116",
+    "new": "io.ondeviceai.probe.w3punctpairdriver20261116",
+    "count": 1
+  },
+  {
+    "file": "project.yml",
+    "old": "io.ondeviceai.probe.w3apple65uitests20261116",
+    "new": "io.ondeviceai.probe.w3punctpairuitests20261116",
+    "count": 1
+  }
+]

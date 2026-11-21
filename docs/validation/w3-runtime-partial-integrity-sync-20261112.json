@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "marker": "w3-runtime-partial-integrity-20261112",
+  "localCommit": "c93709724b2b0aeceb5300dddea432b76f4a9c5a",
+  "issues": {
+    "gh": {
+      "id": 6808565871,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6808565871",
+      "sha256": "99d476edc129dd582243d8404f65a0f610bca077f1955c71c91481506cab06ba",
+      "readbackExact": true,
+      "writeCountForMarker": 1
+    },
+    "glab": {
+      "id": 43215,
+      "url": null,
+      "sha256": "fadf297fa33865740aa218e339a525981a1a89e2cabb563d442491effff7a87d",
+      "readbackExact": true,
+      "writeCountForMarker": 1
+    }
+  },
+  "githubWiki": {
+    "commit": "366e489587fb865e72feeb180197a3be7707e15c",
+    "sha256": "41c4e8a42d1688c4cfa55cdeb1c823c9f69a3c575b50bb413edca04f9371a7c1",
+    "readbackExact": true
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "sha256": "41c4e8a42d1688c4cfa55cdeb1c823c9f69a3c575b50bb413edca04f9371a7c1",
+    "readbackExact": true
+  },
+  "wikiContentsIdentical": true,
+  "firstGitLabReadTransientEOF": true,
+  "githubDuplicateWrite": false,
+  "sourceBranchPushed": false,
+  "physicalHeapRunConsumed": false,
+  "w3Complete": false,
+  "goalStatus": "active",
+  "newDeviceCalls": 0,
+  "newInferenceCalls": 0,
+  "newModelOrRuntimeDownloads": 0,
+  "gitlabWriteAttemptedBeforeFirstReadFailure": false,
+  "firstReadErrorRetention": "Exact observed tool result retained in first-glab-read-failure-observation.json; initial stderr path overwritten by reuse, not retained as original"
+}

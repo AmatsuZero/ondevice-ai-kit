@@ -1,0 +1,21 @@
+{
+  "verdict": "accept_bounded_increment",
+  "findings": [
+    "未发现阻断项；本评审给出有界接受候选，primary 接收前不宣称评审完成。",
+    "范围变化：由编译前准备快照升级为单次实际编译后的 JVM class/module 原始载荷逐字节证据闭环；仅接受 P1 子组，不代表 P1/P4/W3 完成。",
+    "历史 preparation-receipt.json 与 integrated-verification.json 为编译前快照，保留不改；新文档明确其不覆盖 parent-raw-byte-verification.json 的后续结果。"
+  ],
+  "acceptedScope": "接受一个有界增量：以 commit af2d8d81dbfa61c4cea4c568da78f3982edca005 的 22 个真实普通源文件为输入，按 5 个源身份字段精确投影，单次直接 Kotlin 1.7.20 CLI 编译后，对固定 AAR 内 classes.jar 的 124 个 class 与 1 个 kotlin_module，共 125 个载荷成员完成 553965B 原始字节逐字节对应证明；缺失/额外/差异均为空。该结论仅限 JVM class+module 载荷子组，不含 JAR ZIP envelope、DEX、native、签名分发、完整历史 classpath 或 P1/P4/W3 closure。",
+  "limitations": [
+    "原始 Gradle/AGP/AndroidX 完整 classpath 未重放；本次仅使用 android34 android.jar、Kotlin stdlib 1.7.20、annotations 13.0 的隔离编译 classpath，不能推断完整历史环境输入闭包。",
+    "未声称 rebuilt JAR ZIP envelope 相等；仅证明 classes.jar 内 125 个成员载荷原始字节相等。",
+    "无 normalization、SMAP、annotation stripping、flag sweep；但仍不覆盖 DEX 语义、native source build、signed distribution、consumer APK rebuild、P4。",
+    "无设备、AiAi、mic、inference、ASR runtime 或 model/product binary 下载；android.googlesource.com 429 与 native/hy4 free 429 保持停止，无请求、重试、镜像或付费通道。",
+    "工具链恢复确有二进制下载；不能说总体零 binary download。默认代理传输的 partial/error 与 invocation-only direct same official Maven host recovery 均保留；网络路径和参数不同，不能唯一归因于代理、分块或参数变化。",
+    "production JVM dependency versions、global config 与 cache 写改均为 false；编译 stdlib 1.7.20 仅用于隔离编译。",
+    "source/AAR 溯源依赖已提供的 pinned hash、commit、exact-field projection 与 sourceAndMapUnmodified；不独立证明上游 provenance 或原始 sourceMap dictionary 全量等价。",
+    "supplied-context hy3 review 与 driver candidate 为上下文结果，不代替 primary 对本次 evidence review 的最终接收。",
+    "未产生提交身份；新工作未提交，待工具侧 7 文件 stage 扩展，不做 source branch push。",
+    "原始用户目标未缩小；R4/R5/P1-P4/W3 仍为 open；本增量不作为唯一密码学证明要求。"
+  ]
+}

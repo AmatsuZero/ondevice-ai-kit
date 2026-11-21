@@ -1,0 +1,22 @@
+{
+  "verdict": "accept_bounded_increment",
+  "findings": [
+    "阻断：无。范围变更仅限原生库边界诊断：原 checker 误把 Demo 全部 32 个 SO 当作 16 个 Sherpa/ORT SO；修正保留原失败记录，只显式验证历史已有 16 个非 ASR extras，不放宽 16 ASR gate，也无产品重建。",
+    "当前 sourceHEAD fbf059f41527769129ba635e9511d297d3e5ede7；真实仓库 Demo debug+release 构建 exit 0，37.920s，739 tasks（261 executed，478 up-to-date），无生产源码编辑；source flags 为 enableSherpaAsr=true、其他可选后端 false，tiny model 资产沿用既有输入。该路线是 Whisper-tiny，不是 Qwen 生产集成或质量修复。",
+    "4 个 APK 均有 68 notices / 770479B；两个 Demo APK 另有 7 个原始 model/root-license 资产且字节保留。source 侧 304 selected inputs / 68 notices / 7 model-license inputs 未改，但不是完整 build-input closure。SDK commit literal 匹配生成 BuildConfig 且实际出现在 DEX，但不是完整源真实性证明。",
+    "归档证据按 InfoZIP archive order 比较；父侧比较完整有序成员列表及相关 ASR native/notice/model payload 字节，不按排序参数顺序，不扩展到全部无关 Demo payload。每 APK 4 ABI 固定 16 个 ASR SO；Demo 总 32 个为 16 ASR + 16 historical extras（graphics.path、face_detector、image_processing、surface_util 各 4 ABI），历史原始 Demo 已含相同 extras，两个新 Demo extras 字节一致；独立最小消费者正好 16 ASR。",
+    "DEX 覆盖在 4 APK 均为 124 runtime + 18 backend 类名；DemoFactory 仅在 Demo。方法仅为 defined class-name presence，不代表语义或字节码等价。",
+    "独立消费者：fixture 复制到新隔离 artifact root；hy3 仅创作 4 处精确 variant option 替换，父侧机械集成。默认 debug 保留 8 artifact graph；release 显式解析 releaseRuntimeClasspath，同样 8 个精确 SDK/runtime/JVM artifact path 与 bytes；固定 backend AAR ca0065f23e7c65fe0d30fc0d2035d97543a0b8f8470f5c6e194723fdf535478c 来自隔离 Maven publication；无 SDK project components。非法 variant configure-time exit 1，消息为 -PconsumerVariant must be either debug or release, found: unexpected，且无报告；debug/release exit 0。",
+    "apksigner 只读观察：debug verify 0、release-unsigned verify 1，均符合预期；签名资产未改，无生产发布/分发。旧 Demo APK 哈希保留；protectedFiles 175 receipts 保留，两个范围外前缀（F08 handoff、W6 roadmap）before/after 哈希保留；frozen 161 guard 通过，new terminal run 未准备/未消费。",
+    "既有 source-host429 与 native/hy4free429 仍停止；本增量无请求/重试/模型 fallback，无 device/AiAi/mic/model/runtime 二进制下载；模型为既有受保护输入。仅提交三处精确状态文档替换，其他旧快照与编辑不变。"
+  ],
+  "acceptedScope": "接受本增量作为当前 Demo debug/release 与独立 Maven 消费者 debug/release 的打包、归档顺序、notice/native payload 与变体解析证据组合；仅限 supplied receipts 所示事实。不接受为设备推理、最终生产采用、签名分发、完整源输入/递归组成闭包、P4 release acceptance、质量修复或预算关闭提供证明，也不施加唯一密码学来源证明要求。",
+  "limitations": [
+    "Demo APK/project dependencies 与独立 Maven final APK 是不同对象；构建/打包成功不证明设备 inference、最终生产 adoption、signing/distribution、完整 source inputs/recursive composition 或 P4 release acceptance。",
+    "P1 complete input trust/final production adoption、P2 composition/full applicable notices、P3 complete coverage、P4、R4 quality、R5/W8 budget 与 W3 均未关闭。",
+    "DEX 之外的语义未验证：类名/SourceFile/commit literal 只证明存在或文本绑定，不等于字节码等价、完整源真实性或运行行为。",
+    "归档比较聚焦 ASR members 与相关 payload；Demo 额外 16 个 native members 仅按历史基线字节相等验证，不构成全部无关 Demo payload 的完整性结论。",
+    "未安装、未运行推理、未触碰签名资产、未下载模型或运行时；429 失败未被重试，若未来恢复需另起增量。",
+    "构建输入仅验证 304 selected inputs、68 notices、7 model-license inputs 未变，不能推出完整构建输入闭包。"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "error": "prepare-delivery.py:53 assert text",
+  "cause": "parent chose OfflineRecognizer as initial-release example but it is one of equal classes",
+  "effect": "curated receipt copy partially complete, zero helper calls",
+  "recovery": "select actual first differing class from preserved comparison; reuse copied files only if identical"
+}

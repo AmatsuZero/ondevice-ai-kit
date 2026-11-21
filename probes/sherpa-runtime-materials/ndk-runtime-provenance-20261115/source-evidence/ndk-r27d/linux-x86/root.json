@@ -1,0 +1,174 @@
+)]}'
+{
+  "id": "51504e5248c8ff1f28d1a8579bb1411cbaf6a35b",
+  "entries": [
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "23f6953a9f8bc091fc4921f7c0c8927c82ded321",
+      "name": ".gitignore"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "24b3b5b23a00bef592683aebb159a6b9405d506a",
+      "name": "Android.bp"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "01b0356626f8f9ab1ec1293f52e790c5e739df30",
+      "name": "BINUTILS_KERNEL_DEPRECATION.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "701c175aa44440306b5d4471aae41ca12933543c",
+      "name": "BUILD.bazel"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "5cb815c7dcde4d85a25888ba2c176acfbcdde658",
+      "name": "CleanSpec.mk"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "21d64b158a02486014c865720b02b7aa6adede0f",
+      "name": "GCC_4_9_DEPRECATION.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4685cd00d35cca912491919b160ea89193fdf9be",
+      "name": "METADATA"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "342990b3a34670cebab5967a7adcb0457d55b860",
+      "name": "OWNERS"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "4482086e4917db7d4ce58619b6b83cb5ca80d8b2",
+      "name": "README.md"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "84ce545a178c493500d3f69b0057df0c2a722940",
+      "name": "RELEASE_NOTES.md"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "2d125aa832334fee54887625e7ff27553ca4ac3b",
+      "name": "clang-3289846"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "c35c846e00ac9a19731292396721e7fc6abd06de",
+      "name": "clang-r450784e"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "b50942e776d54c83f89e2b363d9acab54f5ad04f",
+      "name": "clang-r475365b"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "8eb8e3afb00a52d48b29381d73daf352362231ad",
+      "name": "clang-r487747c"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "70e2bc4b033b3229922a08b8c062e1371738e8ae",
+      "name": "clang-r498229b"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "5c8ecb6fa0e54db3b116ac04e4689e46c3f6eb19",
+      "name": "clang-r510928"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "9206713d73640d2ab877e4d4393eb2a2360c68db",
+      "name": "clang-r522817"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "db78384acda3c47fbbe931e3bd32d687aedba111",
+      "name": "clang-r522817b"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "075fc0ddba9358e5f24aacbcef31b5474aae5501",
+      "name": "clang-r522817c"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "18a9b3db729eba55ccf0daba0e23d7e335e39627",
+      "name": "clang-r522817d"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "c20b829b9ca8e14e55f1ffa4a722943bc21468e2",
+      "name": "clang-stable"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "c4bdd0961e41f02c5f79b4e46a701267b1cd4bc4",
+      "name": "docs"
+    },
+    {
+      "mode": 33188,
+      "type": "blob",
+      "id": "8bf771e8d043ce311a8ff3a7c5e3d283e27f8033",
+      "name": "go.mod"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "71fdb4cf839d5a7cb8d4d53b32e05bb239be90e4",
+      "name": "kleaf"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "69c7bdcedb0919b4b03a6ae9317549be14c9b495",
+      "name": "llvm-binutils-stable"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "e160861857034d167186f96579962fb163e30f5f",
+      "name": "mlgo-models"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "0424b61efd23fb556314452bf207bb1a12b972b1",
+      "name": "profiles"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "b0fa3f0f4ea54d0dedff1cc09de8f3db92c544e4",
+      "name": "soong"
+    }
+  ]
+}

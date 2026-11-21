@@ -1,0 +1,72 @@
+{
+  "repository": "JetBrains/kotlin",
+  "commit": "add726ca8c82922b6ab4cb2a27ae738d6a780817",
+  "sourceJar": {
+    "path": "$GRADLE_USER_HOME/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.4.0/8425dbb0afc60557c0fe28e19700b758bc8822cc/kotlin-stdlib-2.4.0-sources.jar",
+    "bytes": 757669,
+    "sha256": "bca27f834e278d08c1b85a40e636450867e8251c284fd4c24e9879bb99e301c5",
+    "publishedSHA1URL": "https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.4.0/kotlin-stdlib-2.4.0-sources.jar.sha1",
+    "publishedSHA1Verified": true,
+    "publishedSHA1": "8425dbb0afc60557c0fe28e19700b758bc8822cc",
+    "checksumMaterialPath": "metadata/kotlin-stdlib-2.4.0-sources.jar.sha1"
+  },
+  "bindings": [
+    {
+      "nestedComponent": "GWT",
+      "sourceJarMember": "commonMain/kotlin/collections/AbstractList.kt",
+      "upstreamPath": "libraries/stdlib/src/kotlin/collections/AbstractList.kt",
+      "gitBlobSHA1": "91ef01c7755c07f9cee2e29a4fe6e2a6e51422b1",
+      "sourceBytes": 6440,
+      "sourceSHA256": "f81916c3a94808ab1df9d853c1c63ef9fc9f7ca4b7d382509cc6e4b74b953a10",
+      "sourceJarMemberByteEqualToFixedCommit": true,
+      "runtimeClassMember": "kotlin/collections/AbstractList.class",
+      "runtimeClassBytes": 5942,
+      "runtimeClassSHA256": "b169e5b988594b80820432af2dc07b3d02c0025b726c47c66b81dcfcb44baa06",
+      "classMemberPresent": true,
+      "bytecodeEquivalenceOrFinalDexRetentionProven": false
+    },
+    {
+      "nestedComponent": "ThreeTenBp",
+      "sourceJarMember": "commonMain/kotlin/time/Instant.kt",
+      "upstreamPath": "libraries/stdlib/src/kotlin/time/Instant.kt",
+      "gitBlobSHA1": "526133d61eef1d9e89e65a08fad2de7f5a264ca6",
+      "sourceBytes": 38177,
+      "sourceSHA256": "25b71947b2763a1885dd40157ad76dcfc480c7bee8f559dc95be9b648c1d551b",
+      "sourceJarMemberByteEqualToFixedCommit": true,
+      "runtimeClassMember": "kotlin/time/Instant.class",
+      "runtimeClassBytes": 7985,
+      "runtimeClassSHA256": "bf5cf99dd781117b2dca4c71212e50b52e283092b8701c41e6bd8c26e996e37a",
+      "classMemberPresent": true,
+      "bytecodeEquivalenceOrFinalDexRetentionProven": false
+    },
+    {
+      "nestedComponent": "Boost",
+      "sourceJarMember": "jvmMain/kotlin/util/MathJVM.kt",
+      "upstreamPath": "libraries/stdlib/jvm/src/kotlin/util/MathJVM.kt",
+      "gitBlobSHA1": "a9cfe97940cc4ad24c2db5e887faccd09c32df9f",
+      "sourceBytes": 43709,
+      "sourceSHA256": "6d7e734fc889f6eefd52be265a159f6309bbd558d1594390b01fc9ec56594db7",
+      "sourceJarMemberByteEqualToFixedCommit": true,
+      "runtimeClassMember": "kotlin/math/MathKt__MathJVMKt.class",
+      "runtimeClassBytes": 16695,
+      "runtimeClassSHA256": "20129dc3f32ff4ce98c7b310b939c20f72568e71a18393f824fec7f037a3b03a",
+      "classMemberPresent": true,
+      "bytecodeEquivalenceOrFinalDexRetentionProven": false
+    },
+    {
+      "nestedComponent": "Guava",
+      "sourceJarMember": "jvmMain/kotlin/util/UnsignedJVM.kt",
+      "upstreamPath": "libraries/stdlib/jvm/src/kotlin/util/UnsignedJVM.kt",
+      "gitBlobSHA1": "585d420f572daa232ce2814a0f5526398c9e4402",
+      "sourceBytes": 4959,
+      "sourceSHA256": "8606bfcdb979b9a87da2da017b3c12b5fc5aa952e1ea36222d9f1edb0d14e80d",
+      "sourceJarMemberByteEqualToFixedCommit": true,
+      "runtimeClassMember": "kotlin/UnsignedKt.class",
+      "runtimeClassBytes": 5323,
+      "runtimeClassSHA256": "4d4f18c537858c5aa53cb24dc02c4df87e017b149713af1343faa3eaa3d90281",
+      "classMemberPresent": true,
+      "bytecodeEquivalenceOrFinalDexRetentionProven": false
+    }
+  ],
+  "scope": "four declared stdlib derivation examples, source byte equality and runtime class membership; no rebuilt bytecode or final APK/DEX proof"
+}

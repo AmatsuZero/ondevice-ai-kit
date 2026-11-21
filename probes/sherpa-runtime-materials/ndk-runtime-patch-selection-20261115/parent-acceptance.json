@@ -1,0 +1,74 @@
+{
+  "acceptedByParent": true,
+  "scope": "official source text and metadata selection, path-based patch classification and future-only notice index",
+  "sourcePaths": 97,
+  "uniqueSourceFiles": 96,
+  "patchDeclarations": 134,
+  "retainedBodies": 76,
+  "missingBodies": 58,
+  "classificationCount": 17,
+  "hy3RequestsTerminal": 3,
+  "guardVerdict": "accept_bounded_increment",
+  "guardAuthoredExactReplacementsApplied": 2,
+  "protectedOriginalFilesOrSuffixesPreserved": 173,
+  "outOfScopeConcurrentFilesPreserved": [
+    {
+      "path": "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md",
+      "before": {
+        "bytes": 134669,
+        "sha256": "c68aba62267a66dcab953ee710d1bd7f91e9f33e57598283aab8666c86a76e99"
+      },
+      "after": {
+        "bytes": 135934,
+        "sha256": "8b7d369ae89ac7d763e9478ae994027d10bacd247c0559f9e27da6b67fcd73ec"
+      },
+      "originalSuffixPreserved": true
+    },
+    {
+      "path": "docs/agent-pitfalls.md",
+      "before": {
+        "bytes": 263688,
+        "sha256": "5c1a1d524ebdb47c9a36962fad5d6924a9fc750134380eee1145891ac9bcd62d"
+      },
+      "after": {
+        "bytes": 265592,
+        "sha256": "247d2936163145e7e7cd9c652ec655fc7e32150792e365928f0f510c11d5d7b5"
+      },
+      "originalSuffixPreserved": true
+    },
+    {
+      "path": "docs/roadmap/W6-video-understanding.md",
+      "before": {
+        "bytes": 32659,
+        "sha256": "6fa80badff678d280c90e8819ec9d94207a5b6846df5ac8364650866422841ac"
+      },
+      "after": {
+        "bytes": 33469,
+        "sha256": "a610fc041a26b83d750d0aa1600c3c97d980d57d643fa81bc6ff63bde615ed1b"
+      },
+      "originalSuffixPreserved": true
+    },
+    {
+      "path": "docs/validation/f08-qwen35-video-sft-smoke-20261115.md",
+      "before": {
+        "bytes": 9480,
+        "sha256": "682943a03186efe312b9262d2a2397303b1e577785977ced65153b183ca7a682"
+      },
+      "after": {
+        "bytes": 9513,
+        "sha256": "f50b75727ee984ba2dad98bc793caed65f6d7bc990690ba66825ebcb003d67a8"
+      },
+      "originalSuffixPreserved": false
+    }
+  ],
+  "productionNoticeEdits": 0,
+  "newBuilds": 0,
+  "newDeviceCalls": 0,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "W3Complete": false
+}

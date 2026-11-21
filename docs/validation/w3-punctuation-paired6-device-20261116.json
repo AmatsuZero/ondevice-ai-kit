@@ -1,0 +1,152 @@
+{
+  "runId": "w3-apple-punctuation-paired6-20261116-01",
+  "sourceCommit": "0afb436",
+  "reportSHA256": "a415ada1068abe5fbf302bf8ad45673a36e1f232a02f9e4bc09efc734081c95b",
+  "reportBytes": 38538,
+  "terminalDoubleReadIdentical": true,
+  "runStatus": "completed",
+  "inputSelectionSHA256": "97e70bf9f22c8d0d09465dc52952f88d6d3d00f50cf0b6d06badabbfebcb97cc",
+  "sourceIdentitySHA256": "feb8981eba97cd017353aee32bcc23ecbef1c05ee3cbb89350476cbde3d52c74",
+  "manifestSHA256": "7e2133c9292e978ac45050349d03d4b1432f247da6dceda6facd328bb7a62453",
+  "selectedInputs": 6,
+  "requests": 12,
+  "recognizedNonempty": 12,
+  "cleanupCompleted": 12,
+  "inputPostchecksPassed": 12,
+  "typedErrors": 0,
+  "actualRunTaps": 1,
+  "initialUIFailureRecognitionRequests": 0,
+  "cohorts": {
+    "mandarin": {
+      "metric": "CER",
+      "arms": {
+        "A": {
+          "aggregate": {
+            "referenceUnits": 86,
+            "hypothesisUnits": 74,
+            "substitutions": 6,
+            "deletions": 12,
+            "insertions": 0,
+            "errors": 18,
+            "rate": 0.20930232558139536,
+            "defined": true
+          },
+          "formattingOnly": 7,
+          "contentOrMixed": 11
+        },
+        "B": {
+          "aggregate": {
+            "referenceUnits": 86,
+            "hypothesisUnits": 76,
+            "substitutions": 6,
+            "deletions": 10,
+            "insertions": 0,
+            "errors": 16,
+            "rate": 0.18604651162790697,
+            "defined": true
+          },
+          "formattingOnly": 5,
+          "contentOrMixed": 11
+        }
+      },
+      "conditions": {
+        "formattingStrictlyDecreased": true,
+        "contentOrMixedDidNotIncrease": true,
+        "bothArmsCompleteNonempty": true,
+        "noNewTypedErrorOrCleanupFailure": true
+      },
+      "positiveExploratorySignal": true
+    },
+    "english-near": {
+      "metric": "WER",
+      "arms": {
+        "A": {
+          "aggregate": {
+            "referenceUnits": 54,
+            "hypothesisUnits": 53,
+            "substitutions": 12,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 13,
+            "rate": 0.24074074074074073,
+            "defined": true
+          },
+          "formattingOnly": 5,
+          "contentOrMixed": 8
+        },
+        "B": {
+          "aggregate": {
+            "referenceUnits": 54,
+            "hypothesisUnits": 53,
+            "substitutions": 9,
+            "deletions": 1,
+            "insertions": 0,
+            "errors": 10,
+            "rate": 0.18518518518518517,
+            "defined": true
+          },
+          "formattingOnly": 2,
+          "contentOrMixed": 8
+        }
+      },
+      "conditions": {
+        "formattingStrictlyDecreased": true,
+        "contentOrMixedDidNotIncrease": true,
+        "bothArmsCompleteNonempty": true,
+        "noNewTypedErrorOrCleanupFailure": true
+      },
+      "positiveExploratorySignal": true
+    }
+  },
+  "positiveExploratorySignal": true,
+  "measurement": {
+    "reportWallWindowSeconds": 3.463,
+    "requestWallSumSeconds": 3.333877414,
+    "recognitionSumSeconds": 3.276168331,
+    "rssSampleCount": 49,
+    "missingSamples": 0,
+    "sampledRSSMaxBytes": 119029760,
+    "maxSamplingGapMs": 110.297708,
+    "gapsOver200ms": 0,
+    "scope": "App PID samples only; no system Speech memory, true peak, GPU, energy, thermal or sustained-load claim"
+  },
+  "scoring": {
+    "casefold": true,
+    "punctuationAndDigitsRetained": true,
+    "tools": {
+      "perCohort": [
+        "mandarin",
+        "english-near"
+      ],
+      "scorerPath": "tools/speech_error_metrics.py",
+      "scorerSHA256": "d398bb35438b9f4eb399fc404e02c0c2a7184a7cea7c7a6d32e4a321f8e2b39e",
+      "classificationPath": "tools/w3_paired_error_analysis.py",
+      "classificationSHA256": "b801dfdf4f79311e6b943c159531817725de6db1ab65ecf86322e35bd7f103f3",
+      "casefold": true,
+      "punctuationAndDigitsRetained": true,
+      "formattingEditsStrictlyReduceEachCohort": true,
+      "contentOrMixedMustNotIncreaseEachCohort": true,
+      "bothArmsCompleteNonemptyRequired": true,
+      "noNewTypedErrorOrCleanupFailure": true,
+      "notProductThreshold": true,
+      "notBlindOrHeldout": true,
+      "notStatisticalCausalProof": true
+    }
+  },
+  "limits": [
+    "exploratory nonblind six-input sample",
+    "A unset does not prove default false",
+    "does not repair content errors, far-field omissions, historical typed1110 or negative nonempty outputs",
+    "does not fill Android 41 missing slots",
+    "not a product threshold or statistical causal proof"
+  ],
+  "productionAdopted": false,
+  "R4Accepted": false,
+  "R5Accepted": false,
+  "P4Accepted": false,
+  "W3Complete": false,
+  "microphoneCapture": false,
+  "downloads": false,
+  "AiAi": false,
+  "old65Replay": false
+}

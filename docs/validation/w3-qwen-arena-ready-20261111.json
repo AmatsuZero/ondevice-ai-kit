@@ -1,0 +1,68 @@
+{
+  "runId": "w3-qwen-arena-20261111-01",
+  "sourceFingerprint": "d3d1a844ebd7e0c9cfe1347c194770e04bc60e11b7300bbee254cd9eb51ec9c1",
+  "contractSHA256": "a78b3661558223eeb083c56935ef89e8a88040755b1327ae7567ec0f09cc736d",
+  "frozenArtifactHashes": 108,
+  "parentReviewAcceptedAfterFixes": true,
+  "parentTests": 22,
+  "baselineParentTests": 8,
+  "metricsTests": 31,
+  "preflight": {
+    "identity": {
+      "model": "TECNO KM9",
+      "sdk": "35",
+      "abi": "arm64-v8a",
+      "currentUser": "0"
+    },
+    "awake": false,
+    "unlocked": false,
+    "availableBytes": 2955546624,
+    "newAliasPackages": [],
+    "sourceAndPackageVerified": true,
+    "readOnly": true
+  },
+  "newInstalls": 0,
+  "constructors": 0,
+  "streams": 0,
+  "decodeCalls": 0,
+  "nativePolicyEffectVerified": false,
+  "oldFileRunConsumed": true,
+  "rssStopAboveBytes": 1610612736,
+  "sourceBranchPushed": false,
+  "w3Status": "open",
+  "pending": "fresh user unlock for this diagnostic; then prepare, single run, same-run collect/evaluate/restore",
+  "preparedPublication": {
+    "marker": "w3-qwen-arena-package-ready-20261111",
+    "sourceHeadAtPublication": "d42a6f584699614de862027d291416179ce50766",
+    "sourceBranchPushed": false,
+    "issues": {
+      "gh": {
+        "id": 6784999365,
+        "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6784999365",
+        "sha256": "2501a2635188c4daaab24c73c67413f9dce6d66bca191d2e82f44455b42ea076",
+        "readbackExact": true
+      },
+      "glab": {
+        "id": 42672,
+        "url": null,
+        "sha256": "af56550cb9c1730fd1778ac94413e95a7dd2dc6d3ef4b8eabf5c84f2295a335b",
+        "readbackExact": true
+      }
+    },
+    "gitlabWiki": {
+      "slug": "W3\u8bed\u97f3\u9a8c\u6536\u4e0e\u540e\u7eed\u6539\u8fdb",
+      "sha256": "d6af3c22821d1ab0f9ed6dd73a264397ea72d72ffe27386c069ef5b4a2d380c0",
+      "readbackExact": true
+    },
+    "githubWiki": {
+      "commit": "686434d4f1fe24e20a861251a12a507327a93281",
+      "sha256": "d6af3c22821d1ab0f9ed6dd73a264397ea72d72ffe27386c069ef5b4a2d380c0",
+      "readbackExact": true
+    },
+    "bodySHA256": "2501a2635188c4daaab24c73c67413f9dce6d66bca191d2e82f44455b42ea076",
+    "newModelCalls": 0,
+    "newDeviceInstalls": 0,
+    "w3Status": "open",
+    "nativePolicyEffectVerified": false
+  }
+}

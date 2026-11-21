@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "checkedAtUTC": "2026-11-16T03:37:57.155883+00:00",
+  "status": "accepted-offline-input-binding-and-draft-contract-only",
+  "inspectionHead": "b262aebd13339f2f871c3ef7525ce5f244273b77",
+  "report": "docs/validation/w3-ios-closure-contracts-20261116.md",
+  "reportSHA256": "23087070a62c4a0c8ebd884f598987f82548023c7485709d74d9af6ae126b35c",
+  "inputBinding": "docs/validation/w3-apple-65-input-binding-20261116.json",
+  "inputBindingSHA256": "b3838b23136aa1be8c760915b565a2f192976ae3299631fcd3470f8df5334e88",
+  "inputChecksPassed": 816,
+  "inputChecksAreNotRecognitionTests": true,
+  "historicalAdoptionChecksPassed": 20,
+  "historicalAppFileCount": 18,
+  "adoptionRecord": "docs/validation/w3-ios-candidate-adoption-20261116.json",
+  "adoptionRecordSHA256": "e13091b369ca4ec89fc5cf11a89c650615fd592f074479ad4ec148d9b42cd8fa",
+  "adoptionRecordByteChanges": 0,
+  "historicalReferenceAdoptedAsFinalProductionCandidate": false,
+  "finalProductionCandidate": null,
+  "caseCount": 65,
+  "speechCases": 52,
+  "annotationNegativeCases": 9,
+  "syntheticZeroCases": 4,
+  "totalPcmDurationSeconds": "441.102",
+  "uniquePcmDigests": 63,
+  "knownOldAppleOverlapScope": "Only 3 Mandarin +3 AMI from w3-quality-evidence-20261110.json; Mandarin IDs/AMI meetings disjoint; not exhaustive history.",
+  "globallyBlindHeldout": false,
+  "parentDisposition": {
+    "supplierReviewVerdict": "revise",
+    "parentDisposition": "accepted-after-two-documentation-edits",
+    "note": "The review could not verify a commit; version-management wording was removed. Read-only reviewer scope does not restrict the parent authorized integration. All P1-P4 statuses explicitly retained open.",
+    "edits": [
+      {
+        "old": "本轮将该记录原字节纳入版本管理；这不构成最终生产候选采用。",
+        "new": "该记录原字节保留，继续仅作为未采用的历史 review reference；`finalProductionCandidate = null`、`historicalReferenceAdoptedAsFinalProductionCandidate = false`。"
+      },
+      {
+        "old": "W3、R4、R5、P4 均保持 `open`。",
+        "new": "W3、R4、R5、P1–P4 均保持 `open`。"
+      }
+    ],
+    "pitfallClarification": {
+      "old": "15 个 ES2003a/ES2004a negative slices 仅在 available whole-WAV prefix 内匹配",
+      "new": "ES2003a 的 12 片与 ES2004a 的 3 个负例，仅在已有整源/前缀的可用区间内逐字节匹配"
+    },
+    "independentReviewIsNotP4Acceptance": true
+  },
+  "helperWriting": {
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 54.702,
+      "endedAtUTC": "2026-11-16T03:33:40.780597+00:00",
+      "stdoutBytes": 63498,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "sessionId": "01a1e26a-1ba2-7208-aff0-e211b4e85b35",
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 10175,
+        "outputTokens": 10890,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 960000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "events": 7,
+    "observedToolUseEvents": [],
+    "candidateSHA256": "8227b7db75b61df7191ff9b4138f64cff05c57841d15c01138af042f61113706",
+    "blockers": [
+      "无工具访问，未能直接核验仓库并发编辑或 adoption JSON 原字节；按约束仅返回候选文本，并要求保留相关文件字节不动。"
+    ]
+  },
+  "supplierReview": {
+    "sessionId": "01a1e26c-9870-7af6-ad67-7de66b1443e4",
+    "modelUsage": {
+      "hy3": {
+        "inputTokens": 7010,
+        "outputTokens": 8722,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 0,
+        "contextWindow": 960000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "events": 7,
+    "observedToolUseEvents": [],
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 47.552,
+      "endedAtUTC": "2026-11-16T03:36:16.788085+00:00",
+      "stdoutBytes": 50399,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    }
+  },
+  "protectedFilesBeforeIntegration": 177,
+  "localEvidenceRoot": ".omx/artifacts/w3-ios-contracts-acceptance-20261116",
+  "newBuilds": 0,
+  "newDeviceRuns": 0,
+  "newRecognitionRequests": 0,
+  "newDownloads": 0,
+  "newMicrophoneStarts": 0,
+  "resourceProvisioningRequests": 0,
+  "productionSourceChanges": 0,
+  "sourceBranchPushed": false,
+  "R4Complete": false,
+  "R5Complete": false,
+  "P1Complete": false,
+  "P2Complete": false,
+  "P3Complete": false,
+  "P4Accepted": false,
+  "W3Complete": false,
+  "approvedAppleQualityThresholds": null,
+  "approvedAppleResourceBudgets": null,
+  "inputCaveats": [
+    "Qwen outputs for this dataset were already observed; this is not a new globally blind heldout.",
+    "Nine annotation-negative cases have not been human-audited to establish absence of speech.",
+    "Four all-zero cases contain two distinct PCM digests reused across the two locales.",
+    "ES2004a and ES2006a original-audio WAVs are partial retained downloads; complete range payloads and receipts provide the binding for their clips.",
+    "Forty FLEURS original WAVs and conversion receipts were checked; float32-to-int16 conversion was not recomputed.",
+    "No new network provenance or license adjudication; fixed historical source/notice records remain applicable.",
+    "Prepared Apple comparison only; this work executed zero Apple recognition calls."
+  ],
+  "cleanup": {
+    "newBuildCaches": [],
+    "removedPaths": [],
+    "rawEvidenceRetained": true
+  },
+  "goalRemains": "active"
+}

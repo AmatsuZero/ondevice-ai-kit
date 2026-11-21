@@ -1,0 +1,43 @@
+{
+  "candidate": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/probes/host-qwen-asr/host_qwen_asr.py",
+  "sha256": "9eb3ebee4c118b30a34fc9e033c5f66cb0a1724b767af343d1b8667c7e9545a1",
+  "realNativeCalls": 0,
+  "results": [
+    {
+      "name": "valid-protocol",
+      "passed": true
+    },
+    {
+      "name": "reject-internal-symlink",
+      "passed": true
+    },
+    {
+      "name": "reject-model-ancestor-symlink",
+      "passed": true
+    },
+    {
+      "name": "nominal-finalization",
+      "passed": true
+    },
+    {
+      "name": "original-language-error-preserved",
+      "passed": true
+    },
+    {
+      "name": "planned-cases-present-on-constructor-failure",
+      "passed": true
+    },
+    {
+      "name": "changed-model-blocks-native",
+      "passed": true
+    },
+    {
+      "name": "changed-pcm-blocks-native",
+      "passed": true
+    },
+    {
+      "name": "existing-output-preserved-zero-native",
+      "passed": true
+    }
+  ]
+}

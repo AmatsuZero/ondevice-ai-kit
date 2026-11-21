@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "scope": "integrated supplied-context release evidence review with corrected authorization and candidate-track boundaries; not P4 acceptance",
+  "files": [
+    {
+      "path": "context-manifest.json",
+      "bytes": 4880,
+      "sha256": "fd28880dd62af08f498103406a4b729b5298522f2f08bca663d1943b74fccc01"
+    },
+    {
+      "path": "context-stability-pre-integration.json",
+      "bytes": 220,
+      "sha256": "ca83150277a8752857d874e757e7ecab9f749d42c494bead386cd25f31a53c3b"
+    },
+    {
+      "path": "corrected-review.json",
+      "bytes": 29972,
+      "sha256": "eb3d2a22464a239e443c2ee1a06df31b58b9ccf057d2943b9cc140fe47add3e3"
+    },
+    {
+      "path": "fresh-candidate-identities.json",
+      "bytes": 3418,
+      "sha256": "a8302055bf63cf3a63bfde501953bcf7d71c41830a1ceb016d3c58c02d7688d1"
+    },
+    {
+      "path": "helper-receipts.json",
+      "bytes": 1462,
+      "sha256": "59c68077093881dffd64f9276a2353a31fe550b010f7c58ed49021c0f5f8e230"
+    },
+    {
+      "path": "initial-review-parent-findings.json",
+      "bytes": 656,
+      "sha256": "a91172db72e14d827cd84c61041785d5a69e2972a482fe1015d861abc2b48877"
+    },
+    {
+      "path": "initial-review.json",
+      "bytes": 21888,
+      "sha256": "685b5628314358c38b84f42f3f14089ca47b4ed5944db0a4df27d331c48c41af"
+    },
+    {
+      "path": "parent-acceptance.json",
+      "bytes": 565,
+      "sha256": "371bc65d4b13fb237c7fa17099a93230f364e9551257d48106c8b4e3a866f09a"
+    },
+    {
+      "path": "parent-current-backend-observations.json",
+      "bytes": 1195,
+      "sha256": "2db916de4dfce34642dd6e1d1e2709e8378649db349cc3920f1e83e845785aa9"
+    },
+    {
+      "path": "parent-disposition.json",
+      "bytes": 2751,
+      "sha256": "4b480b2b6376057010b71a8ccb09d53cfebc08ad8336a18acdb02bcc6cf8549b"
+    }
+  ],
+  "canonicalLocalRaw": ".omx/artifacts/w3-integrated-release-review-20261116"
+}

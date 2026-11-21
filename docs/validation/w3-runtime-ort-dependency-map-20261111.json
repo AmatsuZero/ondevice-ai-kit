@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-11-11T12:14:49.837975+00:00",
+  "status": "accepted-bounded-source-notice-map",
+  "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+  "sourceFilesGitBlobVerified": 2,
+  "observedFetchRowsVerified": 14,
+  "sourceDependencyCount": 13,
+  "hostBuildToolCount": 1,
+  "noticeSectionsVerified": 13,
+  "archiveDigestStringsAreDeclarationsOnly": true,
+  "archiveDownloads": 0,
+  "declaredArchiveDigestsRehashed": 0,
+  "finalBinaryMembershipVerified": false,
+  "exhaustiveRecursiveCompositionVerified": false,
+  "sourceToAARVerified": false,
+  "productionReady": false,
+  "sourceReceipts": [
+    {
+      "path": "cmake/deps.txt",
+      "localName": "cmake__deps.txt",
+      "bytes": 7279,
+      "sha256": "894bd3f342b9fa570301f1a62830751e50657ec98a22b210d176b7dbb354ccc2",
+      "gitBlob": "d6a5b71221dc8eff011b6d56205aa0ec591a711a",
+      "sourceURL": "https://github.com/microsoft/onnxruntime/blob/33ca9628233dc8f002435e868d4c2e9f82766ca1/cmake/deps.txt",
+      "apiEndpoint": "repos/microsoft/onnxruntime/contents/cmake/deps.txt?ref=33ca9628233dc8f002435e868d4c2e9f82766ca1"
+    },
+    {
+      "path": "cmake/external/onnxruntime_external_deps.cmake",
+      "localName": "cmake__external__onnxruntime_external_deps.cmake",
+      "bytes": 38973,
+      "sha256": "317a82dfa35c3b74abb9163047d3962dd32a53514029de6949bf56484ae614d8",
+      "gitBlob": "9edea3042dbfbef0e957dfe0ac0c33d4ec8335f3",
+      "sourceURL": "https://github.com/microsoft/onnxruntime/blob/33ca9628233dc8f002435e868d4c2e9f82766ca1/cmake/external/onnxruntime_external_deps.cmake",
+      "apiEndpoint": "repos/microsoft/onnxruntime/contents/cmake/external/onnxruntime_external_deps.cmake?ref=33ca9628233dc8f002435e868d4c2e9f82766ca1"
+    }
+  ],
+  "noticeReceipt": {
+    "repositoryPath": "probes/sherpa-runtime-materials/2.0.1-a8d09d1d/licenses/onnxruntime/ThirdPartyNotices.txt",
+    "bytes": 325054,
+    "sha256": "0e07b95f3a8d6230037707c5c4a2b554d12c4cb67369669ac255635528ffcee2",
+    "gitBlob": "fbd9f9a95f6013d8ecaef81e02b0033e5882a675",
+    "sourceURL": "https://github.com/microsoft/onnxruntime/blob/33ca9628233dc8f002435e868d4c2e9f82766ca1/ThirdPartyNotices.txt"
+  },
+  "helper": {
+    "model": "hy3",
+    "process": {
+      "exitCode": 0,
+      "seconds": 166.1193851249991,
+      "files": {
+        "ORT-DEPENDENCY-MAP.md": {
+          "bytes": 6131,
+          "sha256": "cc585cb12272cb34392b8ca33cc4f14676c53c5e1c46f83017b2d73ad922774b"
+        },
+        "ORT-DEPENDENCY-MAP.json": {
+          "bytes": 11220,
+          "sha256": "cd3c6d17f3a004f0f31af8775657e8dd2a098bdf4e2e31ec4eb5f0f903e61e5f"
+        }
+      }
+    },
+    "terminalSuccess": true,
+    "contextHashesUnchanged": 7,
+    "scopePreflightPassed": true,
+    "toolUseCounts": {
+      "Read": 8,
+      "Write": 2
+    },
+    "toolErrors": [
+      {
+        "invocation": {
+          "type": "tool_use",
+          "id": "chatcmpl-tool-a066ff76be3295d6",
+          "name": "Read",
+          "input": {
+            "file_path": "/private/tmp/odai-hy3-w3-ort-dependency-map-correction-20261111/candidate/ORT-DEPENDENCY-MAP.json"
+          }
+        },
+        "result": {
+          "type": "tool_result",
+          "tool_use_id": "chatcmpl-tool-a066ff76be3295d6",
+          "content": [
+            {
+              "type": "text",
+              "text": "<tool_use_error>File does not exist.</tool_use_error>"
+            }
+          ],
+          "is_error": true,
+          "_meta": {
+            "rawResponse": {
+              "is_error": true,
+              "tool_error_code": "1001"
+            }
+          }
+        }
+      },
+      {
+        "invocation": {
+          "type": "tool_use",
+          "id": "chatcmpl-tool-9fc172635f831112",
+          "name": "Read",
+          "input": {
+            "file_path": "/private/tmp/odai-hy3-w3-ort-dependency-map-correction-20261111/candidate/ORT-DEPENDENCY-MAP.md"
+          }
+        },
+        "result": {
+          "type": "tool_result",
+          "tool_use_id": "chatcmpl-tool-9fc172635f831112",
+          "content": [
+            {
+              "type": "text",
+              "text": "<tool_use_error>File does not exist.</tool_use_error>"
+            }
+          ],
+          "is_error": true,
+          "_meta": {
+            "rawResponse": {
+              "is_error": true,
+              "tool_error_code": "1001"
+            }
+          }
+        }
+      }
+    ],
+    "candidateFilesIntegratedByteForByte": true,
+    "correctedJSONAccepted": true,
+    "markdownLinkPathFollowupRequired": false
+  },
+  "materialRoot": "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111",
+  "fileHashes": {
+    "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/source-evidence/cmake/deps.txt": {
+      "bytes": 7279,
+      "sha256": "894bd3f342b9fa570301f1a62830751e50657ec98a22b210d176b7dbb354ccc2"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/source-evidence/cmake/external/onnxruntime_external_deps.cmake": {
+      "bytes": 38973,
+      "sha256": "317a82dfa35c3b74abb9163047d3962dd32a53514029de6949bf56484ae614d8"
+    },
+    "probes/sherpa-runtime-materials/2.0.1-ort-dependency-map-20261111/dependency-notice-map.json": {
+      "bytes": 11220,
+      "sha256": "cd3c6d17f3a004f0f31af8775657e8dd2a098bdf4e2e31ec4eb5f0f903e61e5f"
+    },
+    "docs/validation/w3-runtime-ort-dependency-map-20261111.md": {
+      "bytes": 5859,
+      "sha256": "080a096e8bccd87796d31e46358735fea7ffec5a1aa7996b9d33da6fa8501306"
+    }
+  },
+  "priorMaterialCountsUnchanged": {
+    "docs/validation/w3-runtime-materials-20261111.json": 50,
+    "docs/validation/w3-runtime-build-dependency-reconciliation-20261111.json": 15
+  },
+  "priorORTObservationFilesUnchanged": 4,
+  "arenaFrozenFilesUnchanged": 108,
+  "heapFrozenFilesUnchanged": 120,
+  "heapRunConsumed": false,
+  "newDeviceMutations": 0,
+  "newModelCalls": 0,
+  "productionChanges": false,
+  "dirtyFilesPreserved": 86,
+  "localEvidenceRoot": ".omx/artifacts/w3-runtime-materials-20261111/ort-dependency-notice-map",
+  "w3Status": "open",
+  "r4Status": "open",
+  "r5Status": "open",
+  "sourceBranchPushed": false,
+  "limitations": [
+    "13 source dependencies plus 1 host build tool, not 14 runtime libraries.",
+    "Archive SHA1 strings in deps.txt are declarations; no archive was downloaded or rehashed here.",
+    "mp11 has no explicit URL_HASH argument in reviewed declaration; do not generalize this to no verification anywhere.",
+    "Generic Boost notice is not specific mp11 attribution/completeness proof.",
+    "The source lists conditional patches (protobuf/date/GSL/flatbuffers); this map does not prove which patches applied successfully in the historical job.",
+    "Exact Eigen commit must remain exact, no guessed 3.4.0/5.0.1 version; Sherpa Eigen5.0.1 and ORT nested Eigen are distinct edges.",
+    "Mimalloc OFF in actual arm64 config, no fetch line in these14; presence of mimalloc in universal notice text is not runtime inclusion proof.",
+    "Top-level observed Fetch mapping is not an exhaustive recursive dependency graph, final static SBOM, legal approval, source-to-AAR equality or W3 closure."
+  ],
+  "markdownLinkCorrection": {
+    "process": {
+      "exitCode": 0,
+      "seconds": 50.51478691700322,
+      "files": {
+        "ORT-DEPENDENCY-MAP.md": {
+          "bytes": 5859,
+          "sha256": "080a096e8bccd87796d31e46358735fea7ffec5a1aa7996b9d33da6fa8501306"
+        }
+      }
+    },
+    "contextHashesUnchanged": 2,
+    "scopePreflightPassed": true,
+    "actualToolCounts": {
+      "Read": 4,
+      "Edit": 5
+    },
+    "actualToolErrors": [],
+    "previousIntegratedDraftSHA256": "cc585cb12272cb34392b8ca33cc4f14676c53c5e1c46f83017b2d73ad922774b",
+    "accepted": true,
+    "candidateIntegratedByteForByte": true,
+    "fourteenTableRowsVerified": true,
+    "relativeLinksVerified": 1
+  },
+  "parentIntegrationCorrection": "MachineJSON row validation passed before Markdown path review finished. Draft integration was local/uncommitted; initial MD-only rewrite regressed scope/facts and was rejected. A new Read/Edit-only task applied exactly five replacements to the prepopulated reviewed original, matching precomputed expected bytes; JSON remained unchanged.",
+  "initialCandidateAccepted": false,
+  "originalCandidateAssessment": ".omx/artifacts/w3-runtime-materials-20261111/ort-dependency-notice-map/initial-parent-assessment.json",
+  "parentPatchGuardReview": "protobuf and flatbuffers declarations branch on Patch_FOUND; date and GSL reviewed PATCH_COMMAND declarations do not have that same guard. No historical patch-application proof is inferred.",
+  "alternativeDeviceObservation": "Mobile MCP local inventory exposes zero Android devices (one iOS); ADB inventory also empty. No device substitution."
+}

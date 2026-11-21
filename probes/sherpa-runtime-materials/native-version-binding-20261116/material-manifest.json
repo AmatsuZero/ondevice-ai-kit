@@ -1,0 +1,128 @@
+{
+  "fileCount": 24,
+  "totalBytes": 59706,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1798,
+      "sha256": "cf185911700879382bdc79af45f668bb542e02a44070a19c1f3933a09676c82a"
+    },
+    {
+      "path": "arm64-v8a-c-api-version.objdump.stdout",
+      "bytes": 669,
+      "sha256": "652bd1bc948b8ef61d318b5c26f157a902b005ebd20618b76e9c49b5f47ede6d"
+    },
+    {
+      "path": "armeabi-v7a-c-api-version.objdump.stdout",
+      "bytes": 839,
+      "sha256": "bcdb3008253ce138181b0912f88be03cf8cf6c3621ccf7ce3f1d82cb99377fe4"
+    },
+    {
+      "path": "armeabi-v7a-thumb-c-api-version.objdump.stdout",
+      "bytes": 1347,
+      "sha256": "01afb08ee78c813d56f438b860942b7a9145348d639d6bd128d93fa61eaf7012"
+    },
+    {
+      "path": "bounded-review.json",
+      "bytes": 1199,
+      "sha256": "68d7f47f39d5d412e5a731d7da6e9deffbf03cd19fbd24380d7cc286b8a27d48"
+    },
+    {
+      "path": "candidate-initial-rejection.json",
+      "bytes": 130,
+      "sha256": "0108903d29f86c35c4db79f20b929b729536419e92a86be660fa0256f2004086"
+    },
+    {
+      "path": "candidate-real-four-abi-red.json",
+      "bytes": 3552,
+      "sha256": "c8f144f865eadc79231b2b81824b19fb53b5a3725a3a8765e76464ee3ff754a9"
+    },
+    {
+      "path": "candidate-unit-tests.stderr",
+      "bytes": 10565,
+      "sha256": "3ee16055b0162bee0595675088f66aad04a7e1acecb0abc81da84c724beb9afd"
+    },
+    {
+      "path": "cleanup-receipt.json",
+      "bytes": 531,
+      "sha256": "fa7bdfe064f45c86b4a8558007b48572819779edda64df9ed8cc330d3439191f"
+    },
+    {
+      "path": "corrected-real-four-abi-green.json",
+      "bytes": 6491,
+      "sha256": "727529c465d7e2b17d9b6aa05eef19d671effb8aa7fd0cdbc1d22b4c97283990"
+    },
+    {
+      "path": "corrected-unit-tests.stderr",
+      "bytes": 3101,
+      "sha256": "97ad13e8a1b2f9f298fd88ec59008571db468c520cf7ea681181195455be8502"
+    },
+    {
+      "path": "diff-check-disposition.json",
+      "bytes": 681,
+      "sha256": "3e488c49ac59294f6943ecd08e9f00fe814b90ec86440dd9659f900a3d74ab07"
+    },
+    {
+      "path": "final-unit-tests.stderr",
+      "bytes": 1911,
+      "sha256": "abfac8172200c722c55ec52436441639cd2db97763459fa9e5f5a96d805f6c65"
+    },
+    {
+      "path": "four-abi-disassembly-receipt.json",
+      "bytes": 3865,
+      "sha256": "8b243ddc2d6addcc9e01c97833082a1c1ebcb8592f035fe2e856f1a0d8640474"
+    },
+    {
+      "path": "hy3-delivery-receipts.json",
+      "bytes": 2412,
+      "sha256": "5b701bdf082581ab0728a3609025b11826a4e86a97827f700e4d8ba76e0edd28"
+    },
+    {
+      "path": "integrated-unit-tests.stderr",
+      "bytes": 1911,
+      "sha256": "abfac8172200c722c55ec52436441639cd2db97763459fa9e5f5a96d805f6c65"
+    },
+    {
+      "path": "parent-acceptance.json",
+      "bytes": 2980,
+      "sha256": "b123b3d96ca101e62a8de38f7c6ec24670dcea3abd0d7ab77d5994425271c0b3"
+    },
+    {
+      "path": "parent-manual-reference-check.json",
+      "bytes": 3591,
+      "sha256": "589b27f895aa4f2a767d24fc433886803d5a8bc30c511c661d676ea20fe6ad90"
+    },
+    {
+      "path": "reconstructed-version.cc",
+      "bytes": 579,
+      "sha256": "c4addca669aa59aa7aef9d8862acc761d94d3a36eb26ab0d0ea60eb5a41e106d"
+    },
+    {
+      "path": "source-log-binding.json",
+      "bytes": 6079,
+      "sha256": "00bc6f4f2da7a40b414c4f73449fe7a6f52c7286067dd0ae83dc43157f0dd5fc"
+    },
+    {
+      "path": "thumb-bit-observation.json",
+      "bytes": 555,
+      "sha256": "1be130ed71ca9f3aaacea24aa742058eb381a009d376580d26cc2bdd54c9e2a8"
+    },
+    {
+      "path": "thumb-disassembly-process.json",
+      "bytes": 506,
+      "sha256": "784788cf2c89a79547ef334d779a27876d19f065bffcd58b902531917afffe6a"
+    },
+    {
+      "path": "x86-c-api-version.objdump.stdout",
+      "bytes": 2638,
+      "sha256": "b080ae78963340444d0f365c74d2de0713f78e64596183383a89bcd4c07527c8"
+    },
+    {
+      "path": "x86_64-c-api-version.objdump.stdout",
+      "bytes": 1776,
+      "sha256": "cf1743ed7bed94865207ef043587fa9c405882fe57ce5ca34f3990d39ca9f005"
+    }
+  ],
+  "binaryFilesIncluded": false,
+  "W3Complete": false
+}

@@ -1,0 +1,68 @@
+{
+  "candidateSHA256": "17f3100b6da339691d313eb0dabf93f12e0ed146d3fd6b30f68d2be70d8cfe53",
+  "realNativeCalls": 0,
+  "results": [
+    {
+      "name": "zh-CN-''",
+      "passed": true
+    },
+    {
+      "name": "zh-CN-'speech'",
+      "passed": true
+    },
+    {
+      "name": "zh-CN-' '",
+      "passed": true
+    },
+    {
+      "name": "en-US-''",
+      "passed": true
+    },
+    {
+      "name": "en-US-'speech'",
+      "passed": true
+    },
+    {
+      "name": "en-US-' '",
+      "passed": true
+    },
+    {
+      "name": "create-1",
+      "passed": false,
+      "error": "AssertionError: (1, 0)"
+    },
+    {
+      "name": "setter-1",
+      "passed": false,
+      "error": "AssertionError: (1, 0)"
+    },
+    {
+      "name": "accept-1",
+      "passed": false,
+      "error": "AssertionError: (1, 0)"
+    },
+    {
+      "name": "decode-1",
+      "passed": true
+    },
+    {
+      "name": "create-2",
+      "passed": false,
+      "error": "AssertionError: (2, 1)"
+    },
+    {
+      "name": "setter-2",
+      "passed": false,
+      "error": "AssertionError: (2, 1)"
+    },
+    {
+      "name": "accept-2",
+      "passed": false,
+      "error": "AssertionError: (2, 1)"
+    },
+    {
+      "name": "decode-2",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "kind": "demo",
+    "variant": "debug",
+    "path": "artifacts/verification/w3-app-variants-20261115/androidApp-debug.apk",
+    "sha256": "85aff749d85257b4e9368b618b4fa22ab0b0d47ff2d429a5aa7e2aa087ba6688",
+    "nativeDeclarationsInPriorVerifiedRawDisassembly": 120,
+    "runtimeClassDisassemblyHashesRechecked": 124,
+    "jniMembers": [
+      {
+        "member": "lib/arm64-v8a/libsherpa-onnx-jni.so",
+        "bytes": 4609320,
+        "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575"
+      },
+      {
+        "member": "lib/armeabi-v7a/libsherpa-onnx-jni.so",
+        "bytes": 3381796,
+        "sha256": "d45f377249d5c3191b91de6ba6edffcd83e4cf7e109bc523b212db341581c2a8"
+      },
+      {
+        "member": "lib/x86/libsherpa-onnx-jni.so",
+        "bytes": 5261876,
+        "sha256": "1eb37aaa10e377f6635086bec09685859ca8c7465460fdf9346a21eba90a4ee4"
+      },
+      {
+        "member": "lib/x86_64/libsherpa-onnx-jni.so",
+        "bytes": 5053592,
+        "sha256": "878d61116f244131263eec24297ef05bf508d02bccdede2a4e3ad3202bbdaa48"
+      }
+    ]
+  },
+  {
+    "kind": "demo",
+    "variant": "release",
+    "path": "artifacts/verification/w3-app-variants-20261115/androidApp-release-unsigned.apk",
+    "sha256": "43b2c5b9e4beebe1712747bf0943dbbcdcfb742f34d18800ea413b265f9010e1",
+    "nativeDeclarationsInPriorVerifiedRawDisassembly": 120,
+    "runtimeClassDisassemblyHashesRechecked": 124,
+    "jniMembers": [
+      {
+        "member": "lib/arm64-v8a/libsherpa-onnx-jni.so",
+        "bytes": 4609320,
+        "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575"
+      },
+      {
+        "member": "lib/armeabi-v7a/libsherpa-onnx-jni.so",
+        "bytes": 3381796,
+        "sha256": "d45f377249d5c3191b91de6ba6edffcd83e4cf7e109bc523b212db341581c2a8"
+      },
+      {
+        "member": "lib/x86/libsherpa-onnx-jni.so",
+        "bytes": 5261876,
+        "sha256": "1eb37aaa10e377f6635086bec09685859ca8c7465460fdf9346a21eba90a4ee4"
+      },
+      {
+        "member": "lib/x86_64/libsherpa-onnx-jni.so",
+        "bytes": 5053592,
+        "sha256": "878d61116f244131263eec24297ef05bf508d02bccdede2a4e3ad3202bbdaa48"
+      }
+    ]
+  },
+  {
+    "kind": "independent-consumer",
+    "variant": "debug",
+    "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-debug.apk",
+    "sha256": "33c3fdab3ac862f7b7645c5ff7c1820c7a5da806718a4317ff7b25ff43145edc",
+    "nativeDeclarationsInPriorVerifiedRawDisassembly": 120,
+    "runtimeClassDisassemblyHashesRechecked": 124,
+    "jniMembers": [
+      {
+        "member": "lib/arm64-v8a/libsherpa-onnx-jni.so",
+        "bytes": 4609320,
+        "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575"
+      },
+      {
+        "member": "lib/armeabi-v7a/libsherpa-onnx-jni.so",
+        "bytes": 3381796,
+        "sha256": "d45f377249d5c3191b91de6ba6edffcd83e4cf7e109bc523b212db341581c2a8"
+      },
+      {
+        "member": "lib/x86/libsherpa-onnx-jni.so",
+        "bytes": 5261876,
+        "sha256": "1eb37aaa10e377f6635086bec09685859ca8c7465460fdf9346a21eba90a4ee4"
+      },
+      {
+        "member": "lib/x86_64/libsherpa-onnx-jni.so",
+        "bytes": 5053592,
+        "sha256": "878d61116f244131263eec24297ef05bf508d02bccdede2a4e3ad3202bbdaa48"
+      }
+    ]
+  },
+  {
+    "kind": "independent-consumer",
+    "variant": "release",
+    "path": "artifacts/verification/w3-app-variants-20261115/consumer-w3-sherpa-notice-consumer-release-unsigned.apk",
+    "sha256": "affc7579eec2d2e61b7b4b7ec8e798f91f5183aed8549dabf0d7c4f09582608e",
+    "nativeDeclarationsInPriorVerifiedRawDisassembly": 120,
+    "runtimeClassDisassemblyHashesRechecked": 124,
+    "jniMembers": [
+      {
+        "member": "lib/arm64-v8a/libsherpa-onnx-jni.so",
+        "bytes": 4609320,
+        "sha256": "5db8f89f12b2c900a98c9e01e00c475c59db35e9437a62e36e27839ec48b5575"
+      },
+      {
+        "member": "lib/armeabi-v7a/libsherpa-onnx-jni.so",
+        "bytes": 3381796,
+        "sha256": "d45f377249d5c3191b91de6ba6edffcd83e4cf7e109bc523b212db341581c2a8"
+      },
+      {
+        "member": "lib/x86/libsherpa-onnx-jni.so",
+        "bytes": 5261876,
+        "sha256": "1eb37aaa10e377f6635086bec09685859ca8c7465460fdf9346a21eba90a4ee4"
+      },
+      {
+        "member": "lib/x86_64/libsherpa-onnx-jni.so",
+        "bytes": 5053592,
+        "sha256": "878d61116f244131263eec24297ef05bf508d02bccdede2a4e3ad3202bbdaa48"
+      }
+    ]
+  }
+]

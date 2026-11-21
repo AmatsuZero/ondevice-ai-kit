@@ -1,0 +1,16 @@
+{
+  "initialWholeDiffCheckExitCode": 2,
+  "rawEvidenceWarnings": 2,
+  "exactRawPath": "probes/sherpa-runtime-materials/native-version-binding-20261116/candidate-unit-tests.stderr",
+  "trailingWhitespaceLines": [
+    1,
+    10
+  ],
+  "rawBytes": 10565,
+  "rawSHA256": "3ee16055b0162bee0595675088f66aad04a7e1acecb0abc81da84c724beb9afd",
+  "sameAsOriginalFailedTestStderr": true,
+  "rawEvidenceFormatted": false,
+  "sourceDocsAndOtherEvidenceDiffCheckExitCode": 0,
+  "exclusionBoundary": "one original failed-unittest progress stderr file only; exact two trailing spaces retained",
+  "initialOutputPath": ".omx/artifacts/w3-native-version-20261116T002000/initial-diff-check.stdout"
+}

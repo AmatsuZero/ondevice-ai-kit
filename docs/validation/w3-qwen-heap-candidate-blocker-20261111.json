@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "model": "hy4free",
+  "status": "terminal-quota-no-delivery",
+  "process": {
+    "exitCode": 0,
+    "seconds": 5.3946097919979366,
+    "files": {}
+  },
+  "providerStatus": 429,
+  "providerCode": 6004,
+  "providerCategory": "quota",
+  "providerError": "429 您的使用量已超出频率限制，将在 2026-11-11 15:12:49 UTC+8 重置，您也可以切换其他模型继续使用。 (01a1c8f5cca273c3b7c82f84a4cefb32/01a1c8f5-be9b-7eb0-becc-ddcb0b1ede38)",
+  "serverReportedReset": "2026-11-11T15:12:49+08:00",
+  "resetIsNotQuotaRecoveryProof": true,
+  "actualToolCalls": 0,
+  "candidateFiles": 0,
+  "contextHashesUnchanged": true,
+  "scopePreflightPassed": true,
+  "automaticRetry": false,
+  "automaticModelSwitch": false,
+  "paidFallback": false,
+  "newDeviceOrInferenceCalls": 0,
+  "questionPending": "User route selection: eligible deliberate hy4free call after reset or explicit free hy3 switch",
+  "w3Status": "open",
+  "localEvidence": ".omx/artifacts/w3-qwen-ort-lifecycle-20261111/heap-candidate-quota"
+}

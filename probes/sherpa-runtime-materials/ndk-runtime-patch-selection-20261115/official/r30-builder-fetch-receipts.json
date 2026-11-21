@@ -1,0 +1,42 @@
+[
+  {
+    "path": "src/llvm_android/source_manager.py",
+    "errorType": "FileNotFoundError",
+    "error": "[Errno 2] No such file or directory: '.omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/src/llvm_android/source_manager.py'"
+  },
+  {
+    "path": "src/llvm_android/patch_utils.py",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "path": "src/llvm_android/builders.py",
+    "errorType": "FileNotFoundError",
+    "error": "[Errno 2] No such file or directory: '.omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/src/llvm_android/builders.py'"
+  },
+  {
+    "path": "src/llvm_android/base_builders.py",
+    "errorType": "FileNotFoundError",
+    "error": "[Errno 2] No such file or directory: '.omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/src/llvm_android/base_builders.py'"
+  },
+  {
+    "path": "src/llvm_android/configs.py",
+    "errorType": "FileNotFoundError",
+    "error": "[Errno 2] No such file or directory: '.omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/src/llvm_android/configs.py'"
+  },
+  {
+    "path": "src/llvm_android/paths.py",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  {
+    "path": "src/llvm_android/android_version.py",
+    "errorType": "FileNotFoundError",
+    "error": "[Errno 2] No such file or directory: '.omx/artifacts/w3-ndk-runtime-patches-20261115T140704Z/official/ndk-r30/src/llvm_android/android_version.py'"
+  },
+  {
+    "path": "src/llvm_android/build_info.py",
+    "errorType": "HTTPError",
+    "error": "HTTP Error 429: Too Many Requests"
+  }
+]

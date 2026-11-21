@@ -1,0 +1,10 @@
+{
+  "error": "NSUnknownKeyException: NSString is not key value coding-compliant for label",
+  "phase": "Speech permission inspection before Run",
+  "documentsFiles": 0,
+  "runTapLogCount": 0,
+  "recognitionRequests": 0,
+  "originalAliasAppUnchanged": true,
+  "decision": "Fix only UI predicate input to dictionary with label; continue the same unconsumed fixed FILE batch after prior process is terminal and fresh guards pass. No recognition retry.",
+  "recordedAtUTC": "2026-11-16T10:46:48.578074+00:00"
+}

@@ -1,0 +1,79 @@
+{
+  "sdk": {
+    "argv": [
+      "rtk",
+      "proxy",
+      "./gradlew",
+      ":android:sdk-core:publishReleasePublicationToMavenLocal",
+      ":android:speech:publishReleasePublicationToMavenLocal",
+      ":android:backend-sherpa-asr:publishReleasePublicationToMavenLocal",
+      ":android:backend-system-asr:publishReleasePublicationToMavenLocal",
+      ":android:backend-system-tts:publishReleasePublicationToMavenLocal",
+      "--offline",
+      "--no-daemon",
+      "--max-workers=2",
+      "--console=plain",
+      "-PsherpaMavenRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2",
+      "-Dmaven.repo.local=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-p3-jvm-hy3-20261115/m2",
+      ":android:backend-sherpa-asr:assembleDebug",
+      ":android:backend-sherpa-asr:assembleRelease",
+      ":android:backend-sherpa-asr:lintDebug"
+    ],
+    "JAVA_HOME": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+    "ANDROID_HOME": "/Users/daubert/Library/Android/sdk",
+    "localRepo": "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-p3-jvm-hy3-20261115/m2",
+    "offline": true,
+    "deviceOperations": false
+  },
+  "apk": {
+    "argv": [
+      "rtk",
+      "proxy",
+      "./gradlew",
+      "-p",
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-p3-jvm-hy3-20261115/apk-consumer",
+      "assembleDebug",
+      "verifyNoticeConsumer",
+      "--offline",
+      "--no-daemon",
+      "--max-workers=2",
+      "--console=plain",
+      "-Dorg.gradle.jvmargs=-Xmx2g",
+      "-Pandroid.useAndroidX=true",
+      "-PsdkRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/w3-p3-jvm-hy3-20261115/m2",
+      "-PsherpaRepo=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/artifacts/verification/sherpa-asr-20261105/inputs/m2",
+      "-PartifactReport=/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-p3-apk-hy3-20261115T112302Z/resolved-artifacts.json"
+    ],
+    "JAVA_HOME": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+    "ANDROID_HOME": "/Users/daubert/Library/Android/sdk",
+    "candidateFiles": [
+      {
+        "path": "settings.gradle.kts",
+        "bytes": 1564,
+        "sha256": "a5d640c16c8c9a0ee27f8487aa5bfc31b158f4b5e3e02c11abc0b3c47efd0f12"
+      },
+      {
+        "path": "build.gradle.kts",
+        "bytes": 4487,
+        "sha256": "5d4dbce01b4d4f2de7c31dacb47e7f66fa598733bf93f5427164ed2794d99c8d"
+      },
+      {
+        "path": "src/main/AndroidManifest.xml",
+        "bytes": 220,
+        "sha256": "7d3661814175e00d4cd389edb7f8e189a1cc34764c4895459c71d991a16b94ec"
+      }
+    ],
+    "offline": true,
+    "installed": false
+  },
+  "sdkProcess": {
+    "exitCode": 0,
+    "elapsedSeconds": 12.29,
+    "endedAtUTC": "2026-11-15T11:21:44.008983+00:00"
+  },
+  "apkProcess": {
+    "exitCode": 0,
+    "elapsedSeconds": 10.904,
+    "endedAtUTC": "2026-11-15T11:26:21.179885+00:00"
+  }
+}

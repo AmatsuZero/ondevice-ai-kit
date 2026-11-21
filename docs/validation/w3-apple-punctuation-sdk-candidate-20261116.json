@@ -1,0 +1,204 @@
+{
+  "status": "local-sdk-source-candidate-integrated-tested-not-released",
+  "integration": {
+    "baseCommit": "de4aabe08b100d1c5375746f9bc4755e9150c97d",
+    "sourcePath": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+    "beforeSHA256": "46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db",
+    "candidateSHA256": "e202d3d0d0efa80410f22d3e9d475ea51cdeb810acba2930a86d23afd626d952",
+    "supplierRequestedModel": "hy3",
+    "supplierReportedModelUsage": [
+      "hy4flash-free"
+    ],
+    "candidateRecordSHA256": "1e8d60d7cd42e192c453fb0717e9c6fc6b48b9d1dc30f1957fa70fa74a4aadd4",
+    "helperRawCandidateSHA256": "193ca9867ba19d735a6f8d7e0e83082cab04ceadcf984bb61e331379af064892",
+    "helperEvidence": ".omx/artifacts/w3-apple-punctuation-preparation-20261116T162709",
+    "integration": "exact preexisting external candidate; no new implementation authored",
+    "sameBytesAsExecutedB": true,
+    "deviceReportSHA256": "a415ada1068abe5fbf302bf8ad45673a36e1f232a02f9e4bc09efc734081c95b",
+    "recordedAtUTC": "2026-11-16T11:06:13.179987+00:00",
+    "releaseApproved": false,
+    "finalProductionCandidate": null,
+    "microphoneChanges": false,
+    "dependenciesChanged": false,
+    "deviceOperations": 0
+  },
+  "testSuites": {
+    "ODAIKitVideoTests.xctest": 12,
+    "ODAIKitSpeechTests.xctest": 76,
+    "ODAIKitMultimodalTests.xctest": 22,
+    "ODAIKitModelStoreTests.xctest": 14,
+    "ODAIKitIdentityTests.xctest": 322,
+    "ODAIKitFaceTests.xctest": 10,
+    "ODAIKitCoreTests.xctest": 5,
+    "ODAIKitAppleVideoTests.xctest": 23
+  },
+  "testsPassed": 484,
+  "testsSkipped": 0,
+  "failures": 0,
+  "distinctWarnings": [
+    "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/apple/Tests/ODAIKitIdentityTests/IdentityTemplateLeaseTests.swift:906:38: warning: instance method 'wait' is unavailable from asynchronous contexts; Await a Task handle instead; this is an error in the Swift 6 language mode"
+  ],
+  "warningRenderLines": 2,
+  "swiftTests": {
+    "exitCode": 0,
+    "elapsedSeconds": 19.35073729197029,
+    "endedAtUTC": "2026-11-16T11:07:11.846395+00:00",
+    "deviceOperations": 0
+  },
+  "initialXcodeBuild": {
+    "exitCode": 65,
+    "elapsedSeconds": 0.7768154999939725,
+    "endedAtUTC": "2026-11-16T11:06:53.272406+00:00",
+    "deviceOperations": 0
+  },
+  "initialFailure": "existing OnDeviceAIKit.xcodeproj has no ODAIKitAppleSpeech scheme",
+  "iosRelease": {
+    "exitCode": 0,
+    "elapsedSeconds": 5.699942500097677,
+    "endedAtUTC": "2026-11-16T11:08:20.467930+00:00",
+    "initialXcodeSchemeFailureRetained": true,
+    "deviceOperations": 0
+  },
+  "compilerFileLists": [
+    {
+      "path": ".omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/Intermediates.noindex/OnDeviceAIKit.build/Release-iphoneos/ODAIKitAppleSpeech-t.build/Objects-normal/arm64/ODAIKitAppleSpeech.SwiftFileList",
+      "sha256": "bfe8b74d993233225d51ec05b8a6eafd5d6ab975f90f10ddda632bcbe255ce71",
+      "sources": [
+        "apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift",
+        "apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift",
+        "apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift",
+        "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift"
+      ]
+    },
+    {
+      "path": ".omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/Intermediates.noindex/OnDeviceAIKit.build/Release-iphoneos/ODAIKitCore-t.build/Objects-normal/arm64/ODAIKitCore.SwiftFileList",
+      "sha256": "32b0487ce554a783ebba77af21e687ce58a10e7d81cc5f286d673ffeb9a21048",
+      "sources": [
+        "apple/Sources/ODAIKitCore/Availability.swift",
+        "apple/Sources/ODAIKitCore/LatestFrameQueue.swift",
+        "apple/Sources/ODAIKitCore/TaskGate.swift"
+      ]
+    },
+    {
+      "path": ".omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/Intermediates.noindex/OnDeviceAIKit.build/Release-iphoneos/ODAIKitSpeech-t.build/Objects-normal/arm64/ODAIKitSpeech.SwiftFileList",
+      "sha256": "f4ab99049215929e30bfbb451221cfec0bff49bdf3a5cb864fdd6167f1d63a7a",
+      "sources": [
+        "apple/Sources/ODAIKitSpeech/SpeechClient.swift",
+        "apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift",
+        "apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift"
+      ]
+    }
+  ],
+  "compiledSwiftInputs": [
+    {
+      "path": "apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift",
+      "bytes": 3968,
+      "sha256": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab"
+    },
+    {
+      "path": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift",
+      "bytes": 453,
+      "sha256": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466"
+    },
+    {
+      "path": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift",
+      "bytes": 14149,
+      "sha256": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9"
+    },
+    {
+      "path": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+      "bytes": 34615,
+      "sha256": "e202d3d0d0efa80410f22d3e9d475ea51cdeb810acba2930a86d23afd626d952"
+    },
+    {
+      "path": "apple/Sources/ODAIKitCore/Availability.swift",
+      "bytes": 1014,
+      "sha256": "87f24120073f9c62ce6e3089e656356851a5732340e176e166fbc0d4130324a2"
+    },
+    {
+      "path": "apple/Sources/ODAIKitCore/LatestFrameQueue.swift",
+      "bytes": 1361,
+      "sha256": "2c8c7529fef0d34728fd7f14cd59322cb35952e2eaf9b2d92d7a4e2366cbf7ac"
+    },
+    {
+      "path": "apple/Sources/ODAIKitCore/TaskGate.swift",
+      "bytes": 1065,
+      "sha256": "0c62b522c82e0916d9f1330d3eda1a5bf9992de8c30e9689ad61e0aeba08d37d"
+    },
+    {
+      "path": "apple/Sources/ODAIKitSpeech/SpeechClient.swift",
+      "bytes": 15810,
+      "sha256": "59fcf256ed49ba8175d320dec03da149c9fc83f19d319d53eeb85f237be88990"
+    },
+    {
+      "path": "apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift",
+      "bytes": 1731,
+      "sha256": "9c77a4179a83329f66ea25df6f148c024eb8a0be36d9d3c28663a397fd8d6500"
+    },
+    {
+      "path": "apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift",
+      "bytes": 3589,
+      "sha256": "868941155d991dec17be86906ac18d4a1388e5a6b8a4172324657cbaa37bf811"
+    }
+  ],
+  "configInput": {
+    "path": "apple/Package.swift",
+    "sha256": "6d556d858eb4fe8a9d7abf8c30799b3b4e66cc5cfde27620f6c16d076961fcfb",
+    "notACompiledSwiftInput": true
+  },
+  "releaseObjectsAndModules": [
+    {
+      "path": ".omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/Products/Release-iphoneos/ODAIKitCore.o",
+      "bytes": 109880,
+      "sha256": "45726c6f961b8059106afd945a9e30ce5183b64064ea95cc645bc498280c5575",
+      "platform": "IOS",
+      "minOS": "15.0"
+    },
+    {
+      "path": ".omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/Products/Release-iphoneos/ODAIKitCore.swiftmodule/arm64-apple-ios.swiftmodule",
+      "bytes": 100704,
+      "sha256": "147c690b6b1797ccd25816b040bcb852fd2f18cb69961d7655796c3efe807311"
+    },
+    {
+      "path": ".omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/Products/Release-iphoneos/ODAIKitSpeech.o",
+      "bytes": 294880,
+      "sha256": "b355c7ce508de333c7be42102fccdc1b209e0b3c51f5dcb73614ce87e431c24e",
+      "platform": "IOS",
+      "minOS": "15.0"
+    },
+    {
+      "path": ".omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/Products/Release-iphoneos/ODAIKitSpeech.swiftmodule/arm64-apple-ios.swiftmodule",
+      "bytes": 126428,
+      "sha256": "7b007c8e15cebb426c87c52b7e8292b9ead46db6496a357a57b9ec4fe3bf6c52"
+    },
+    {
+      "path": ".omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/Products/Release-iphoneos/ODAIKitAppleSpeech.o",
+      "bytes": 480728,
+      "sha256": "133732e8077fb80e297c0929979ad3630137f71cd248f6b8af9c732051fff562",
+      "platform": "IOS",
+      "minOS": "15.0"
+    },
+    {
+      "path": ".omx/artifacts/w3-apple-punctuation-sdk-candidate-20261116/IOSReleaseSPM/out/Products/Release-iphoneos/ODAIKitAppleSpeech.swiftmodule/arm64-apple-ios.swiftmodule",
+      "bytes": 177864,
+      "sha256": "ee980ee194965d8d873d8fb4a65daff92d007c50342f8e25e8fd7fa1e0dc2aa1"
+    }
+  ],
+  "embeddedArmBSourceBytesMatch": true,
+  "shippingAppCandidate": null,
+  "productionReleaseApproved": false,
+  "independentFinalReview": false,
+  "P4Accepted": false,
+  "R4Accepted": false,
+  "R5Accepted": false,
+  "W3Complete": false,
+  "androidConnection": {
+    "newPhysicalRegistrationObserved": true,
+    "adbDeviceCount": 0,
+    "serverRestarted": false,
+    "prepareStarted": false,
+    "instrumentationStarted": false,
+    "nativeDecodeCalls": 0,
+    "runConsumed": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "candidateSHA256": "809fe34fbed820e2e77a78249adba5866a6011826054932ecb72c84a6dad1f07",
+  "realNativeCalls": 0,
+  "results": [
+    {
+      "name": "default-actual-options-and-raw-text",
+      "passed": true
+    },
+    {
+      "name": "forced-actual-options-and-raw-text",
+      "passed": true
+    },
+    {
+      "name": "auto-actual-options-and-raw-text",
+      "passed": true
+    },
+    {
+      "name": "seven-invalid-mode-values-zero-native",
+      "passed": true
+    },
+    {
+      "name": "noise-empty-reference-accepted",
+      "passed": true
+    },
+    {
+      "name": "noise-nonempty-reference-zero-native",
+      "passed": true
+    }
+  ]
+}

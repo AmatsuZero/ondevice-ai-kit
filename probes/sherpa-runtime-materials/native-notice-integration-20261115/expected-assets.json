@@ -1,0 +1,146 @@
+{
+  "assets/ondeviceai/sherpa-asr/notices/native/UPSTREAM-MODIFICATIONS.md": {
+    "bytes": 4317,
+    "sha256": "4a0f32dcc4b6308b61ad3ade00af3fd1c8c915f45126abc77e500c2bb58551b4"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/index.json": {
+    "bytes": 20779,
+    "sha256": "b7bc3702af3b5e8d41a5a42503e55cbdbc87165a57b5f4588c6c846c0d7e6f61"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/index.json": {
+    "bytes": 9326,
+    "sha256": "7b8a8f8490108afb1b01a4ed9199e413818b571c7cf00ad771960df6f0b11296"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/source-attribution-excerpts.json": {
+    "bytes": 2612,
+    "sha256": "eb1cb2d9e83973ad2b594b8570e3fcbbfaab6da4e2d8d0cdd5e339663b0ac546"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/COPYRIGHT.txt": {
+    "bytes": 647,
+    "sha256": "8f1a1700adb5490604c6094fb137bf73f6c28d3ee554b58f3ff8ef975a79672d"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/LICENSE.txt": {
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/java-annotations-23.0.0/LICENSE.txt": {
+    "bytes": 11352,
+    "sha256": "8c1e966c7855fb54027bcaf6ebe7a43abe4785791e8cf9148c363761d493d097"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/kotlinx-coroutines-1.10.2/NOTICE.txt": {
+    "bytes": 452,
+    "sha256": "1ab6de67ef738bffae63f9aa6a8798a35e87341c83ea28d09c8dc8ca6993232a"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/kotlinx-coroutines-1.10.2/LICENSE.txt": {
+    "bytes": 11398,
+    "sha256": "b1febe6399dffb10d19d35e7663ab16300c93cb0476a94115df1cc0097a8ffd8"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/third_party/gwt_license.txt": {
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/third_party/guava_license.txt": {
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/third_party/boost_LICENSE.txt": {
+    "bytes": 1337,
+    "sha256": "8d8291caf1cee26d23acf3eb67c9f9a2d58f1c681b16a4fbe8cbfb9e3c0b5a9b"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/jvm/kotlin-2.4.0/third_party/threetenbp_license.txt": {
+    "bytes": 1520,
+    "sha256": "d1bc53b493a3ab387b42717ed5c4b1976a5048996f81154278100bff86d39331"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/kaldifst-v1.8.0/LICENSE": {
+    "bytes": 11728,
+    "sha256": "a682d6efd1ee5dee08a8e405c233c2c198ea70ae0718129daa83ab58cfe31c5d"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/websocketpp-observed-build-revision-bound/COPYING": {
+    "bytes": 7494,
+    "sha256": "5ba81a1ed402517dce2581fa2d4042baf6a9c8ca0fe94fa6a7043ce6ab23064f"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/darts-clone-simple-sentencepiece-v0.7/NOTICE.txt": {
+    "bytes": 1320,
+    "sha256": "da10583073e582390115d4d4abdc12ca395776ab2a9e11b10d440b115ad9c6b9"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/openfst-v1.8.5-2026-07-09/COPYING": {
+    "bytes": 559,
+    "sha256": "4300529197035fd3452350718a0b8cee984e9412c9932d7f35fcde849fc97a4b"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/sherpa-onnx-v2.0.1/LICENSE": {
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/json-v3.12.0/LICENSE.MIT": {
+    "bytes": 1076,
+    "sha256": "46a65cffd1ea955132d95a8dd921640714a8d6b537d2e4e482d31145ae95b603"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/hclust-cpp-2026-02-25/LICENSE": {
+    "bytes": 1483,
+    "sha256": "e361d842da1d290351860ad6dcce2673a1e42e4f873a3ae1ff4eb92c6adaa882"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/eigen-5.0.1-observed-build/LICENSE": {
+    "bytes": 16725,
+    "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/eigen-5.0.1-observed-build/COPYING.BSD": {
+    "bytes": 1517,
+    "sha256": "51928dce36213c5333ba3172e847d735d4c6e9b7ff2722a326c49067155b82eb"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/eigen-5.0.1-observed-build/COPYING.APACHE": {
+    "bytes": 11362,
+    "sha256": "03379001a7b12a2ec997a25554247d985270b353c10d5bafee9ac8d6519820b7"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/eigen-5.0.1-observed-build/COPYING.MPL2": {
+    "bytes": 16727,
+    "sha256": "66a3107d5ad6a058aab753eaac2047ccb2ed0e39465dd0fe5844da3e300d5172"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/eigen-5.0.1-observed-build/COPYING.README": {
+    "bytes": 264,
+    "sha256": "db640ff2bd90c6abd6a4d3fbb351e0ee4d555417cf840492054d1cbb2ea85644"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/eigen-5.0.1-observed-build/COPYING.MINPACK": {
+    "bytes": 2193,
+    "sha256": "c87b7f8ee88f6195e91743820c00354833583aef091b72e2d4a49c8e28e798a0"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/utf8proc-v2.12.0/LICENSE.md": {
+    "bytes": 5125,
+    "sha256": "3b510150d34f248a221bb88e1d811238d6c6c18b51231822c42974c39bb07256"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/kaldi-native-fbank-v1.22.4/LICENSE": {
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/onnxruntime-v1.28.2/ThirdPartyNotices.txt": {
+    "bytes": 325054,
+    "sha256": "0e07b95f3a8d6230037707c5c4a2b554d12c4cb67369669ac255635528ffcee2"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/onnxruntime-v1.28.2/LICENSE": {
+    "bytes": 1073,
+    "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/simple-sentencepiece-v0.7/LICENSE": {
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/kaldi-decoder-v0.3.0/LICENSE": {
+    "bytes": 11358,
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/kissfft-source-revision-bound/COPYING": {
+    "bytes": 246,
+    "sha256": "a2840585f8411be8e6826a31ef15ae65c950bd74a2437a73b013398a934ad0c6"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/asio-asio-1-24-0-observed-build/LICENSE_1_0.txt": {
+    "bytes": 1338,
+    "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/asio-asio-1-24-0-observed-build/COPYING": {
+    "bytes": 224,
+    "sha256": "2d312781ba7ca3f5b494aec3bcca5cfbb69b7302838b2a7595d1537fc494457f"
+  },
+  "assets/ondeviceai/sherpa-asr/notices/native/kissfft-source-revision-bound/LICENSES/BSD-3-Clause": {
+    "bytes": 1830,
+    "sha256": "4d6bcab46f27d6d0c878e8305d4bdcfe040d52bf6656b9771f04c9fb9902c0ed"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "verdict": "accept",
+  "sourceSHA256": {
+    "probes/android-qwen-terminal/device_acceptance.py": "cd96d13d5caff9a1a7c255006b0100c352cca38917880c4f503327dc542773f7",
+    "probes/android-qwen-terminal/terminal_device_collect.py": "f87bb4b254404cfa7c05d33d6acaab41905e2c3b963c37ab3f672701cc572f2b",
+    "probes/android-qwen-terminal/terminal_device_contract.py": "4b2700e97aab8aa8ace27e89c687238a2389cabbcc766ba1dad2f9f44321cc96",
+    "probes/android-qwen-terminal/terminal_device_lifecycle.py": "d587e59e5ca5720402e03e97be75b0c88c8b3fbb47fd7ff9f26a6d0250f75ec3",
+    "probes/android-qwen-terminal/terminal_device_policy.py": "9643bc2f50a30c9d531d4b208bd8b2f86de700d3c82a2741322f4ef6acb9650a",
+    "probes/android-qwen-terminal/terminal_device_prepare.py": "52fe402a550970d68353dca90648fbb271f809e8e900ac5344f4534e6cd05fbe",
+    "probes/android-qwen-terminal/terminal_device_restore.py": "64371cfcc207e4ddf21046fb3aca25fbb0a43e8c0c1f242fbad2fbd7958a6878",
+    "probes/android-qwen-terminal/terminal_source_adapter.py": "1a9ab1681f8dd585c9063783c0d38a8568b2cf296930e096310f882d48ed92e9",
+    "probes/android-terminal-observation/adb_process_sampler.py": "d77d0068d00cffe904c9d42b29c5f186733c1682c74814242175d633064b932b",
+    "probes/android-terminal-observation/adb_terminal_ack_publisher.py": "027bb285d567edcf1784c407a369324e0c3d235ea041dd1b73b92cfc45283e57",
+    "probes/android-terminal-observation/adb_terminal_observation.py": "4dca5a93ce500bf9c81514fabca73939b54b5c829bb483f08de8edf504aea85a",
+    "probes/android-terminal-observation/adb_terminal_report_reader.py": "e184eaed9285e81be1a90e4505da0e280ca794dead66afaaa55ed3351bfa11e8",
+    "probes/android-terminal-observation/terminal_file_io.py": "2c9e885c85a0b0d6623b5285cd88075abd93ee8111c04088eb30ed82fc9304e4",
+    "probes/android-terminal-observation/terminal_observation_coordinator.py": "5fcb411735e2774b6078328e74bbc9cdf67c3aee9e6d2a1769182877d2a943dc",
+    "probes/android-terminal-observation/terminal_observer.py": "b86c9dda1a3ea45bcbd55cd207ce40bc74a2c3e37af83741938027c6971ce9ac",
+    "probes/android-terminal-observation/terminal_polling.py": "19df5a6a4a5f7a09926ba31af5d2862b2cd011f1b280945ee69a694e47cff8c9"
+  },
+  "findings": [],
+  "withdrawnFindings": [
+    {
+      "originalSeverity": "medium",
+      "file": "probes/android-qwen-terminal/terminal_device_policy.py",
+      "reason": "Actual immutable binding shows ctx['text'] delegates to call() with default accepted=(0,) and raises RuntimeError on nonzero BEFORE returning; _shell_text does not pass an accepted override, so _require_dir/_require_file test failures propagate as RuntimeError. A missing symlink/missing owned policy path IS detected fail-closed. The hypothesis 'text discards nonzero return' is refuted by exact source (reproduction: policy missing dir and missing file both raise RuntimeError). No redundant returncode assertion is required because the actual call already raises."
+    },
+    {
+      "originalSeverity": "low",
+      "file": "probes/android-qwen-terminal/terminal_device_restore.py",
+      "reason": "Actual immutable call() raises RuntimeError on nonzero returncode (default accepted=(0,)) before any return value can be ignored; simulated rm exit 23 raises. rm failures in _recover_stage therefore propagate rather than being silently swallowed. The hypothesis 'rm return value ignored / removals logged that did not occur' is refuted by exact source binding evidence (reproduction: call rm denied raises)."
+    }
+  ],
+  "limitations": [
+    "Actual immutable BASE FILE bindings (probes/android-qwen-file/device_acceptance.py, SHA256 b7a8a7084b92d86382fa096656c09339b5267ac8bb972968610a9fffacb11435) now supplied and resolve the prior 'text/call nonzero behavior unverified' limitation: text() delegates to call() with default accepted=(0,) and raises before returning; _shell_text passes no accepted override.",
+    "Reproduction executed the real adapted FILE bindings in a local simulator (deviceOperations=0, fakeMutationCount=0); it proves missing -d/-f paths raise at the exact predicates and simulated rm exit 23 raises with zero fake mutations, but it is not a live TECNO KM9 device run. Host/source evidence never proves Android device acceptance.",
+    "First parent fixture lacked 'test ! -L' support; that evidence is retained separately. The corrected v2 fixture supplied here reaches the intended predicates (missing dir/file raise), so the ! -L gap does not affect the verdict.",
+    "terminal_source_adapter.py's exec()-based adaptation of the FILE driver to the terminal contract is validated behaviorally by the parent run (initial contract18ERROR were input-before-copy ordering only; subsequent18GREEN and OEM sixaction2GREEN with no source change after the reviewed hashes), but a full line-by-line static re-derivation of adapted-equivalence was not independently performed."
+  ],
+  "reviewer": "CBC hy3",
+  "reviewMode": "full16 source review with exact immutable binding supplement",
+  "deviceAcceptance": false,
+  "qualityAccepted": false,
+  "truePeakMeasured": false,
+  "originalRawPath": ".omx/artifacts/w3-terminal-portability-20261114/cbc-binding-supplement/cbc-raw.txt",
+  "originalRawSHA256": "e6781b6461817d82b8d830c8e646603a209acaa3a7bb5c5c0d2b19e0b54c38a8",
+  "initialReviewRawPath": ".omx/artifacts/w3-terminal-portability-20261114/cbc-source-review/cbc-raw.txt"
+}

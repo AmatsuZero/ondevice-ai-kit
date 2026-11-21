@@ -1,0 +1,56 @@
+{
+  "acceptedAsBoundedSuppliedContextReview": true,
+  "historicalSourceHead": "a18292ac56e7c694fd2e7efb2550864a0b3ef21e",
+  "latestNoticeCodeCommit": "51b705c65e049526a188cb19d781ced7c01ed025",
+  "findingDisposition": "LOW historical current-label ambiguity addressed by historical document prefix and closure rollup; immutable receipts unchanged",
+  "independentReleaseReviewAccepted": false,
+  "reviewerExecutedSourceHashesBuildOrDevice": false,
+  "process": {
+    "exitCode": 0,
+    "elapsedSeconds": 68.813,
+    "endedAtUTC": "2026-11-15T12:13:58.121386+00:00",
+    "stdoutBytes": 66727,
+    "stderrBytes": 0,
+    "automaticRetry": false,
+    "automaticFallback": false
+  },
+  "rawOutputSHA256": "f51f41263554c3fda50517f9ade1e48df2b720283a540c9b03df4889d67f3cb2",
+  "review": {
+    "verdict": "accept_bounded_increment",
+    "scope": "Read-only supplied-context review of the historical sdk-consumer-20261115 SDK binding increment at sourceHead a18292ac56e7c694fd2e7efb2550864a0b3ef21e and backend-sherpa AAR SHA-256 6de95f567932747fb98ffc7b15ee66e0cca75a6674f63c87e40e8bc9b2852028, plus the later native-notice context. This is a new user-selected free hy3/no-tools request after the hy4free quota429 failure, not a retry of that invocation. No tools, builds, device work, browsing, recursive delegation, or evidence/code mutation are asserted.",
+    "findings": [
+      {
+        "severity": "low",
+        "target": "Current-HEAD labeling in derived claims and rollups",
+        "evidence": "The historical receipt says candidateKind 'current local SDK release publication and standalone library consumers', and the validation doc uses '当前' for the a18292ac/6de95 SDK backend. The supplied newer context identifies the newer current native-notice release AAR as SHA-256 5ae065d23647898eed3cbc258395f1c9c98804b002e4f9b4934546ae55bb7dd5 at commit51b705c. Reusing the older wording today would confuse the bounded historical increment with current HEAD.",
+        "requiredCorrection": "Keep the immutable historical receipt bytes unchanged. In any review output or rollup, label this acceptance as historical a18292ac/6de95 only; route current-HEAD claims to the 5ae065d2 notice evidence and do not promote P1-P4/R4/R5/W3 or release acceptance."
+      }
+    ],
+    "acceptedClaims": [
+      "Five-module publish correspondence is internally consistent in the supplied evidence: published-sdk-artifacts lists sdk-core, speech, backend-sherpa-asr, backend-system-asr, and backend-system-tts with AAR, sourceJar, POM, moduleMetadata, and localOutputByteEqual true; the receipt reports publishedSdkModules 5.",
+      "Source JAR correspondence is bounded and consistent: source-jar-bindings lists 14 Kotlin files across those five modules with byteEqual true, the receipt reports sourceJarFilesByteEqual 14, compiledSemanticEquivalenceClaimed is false, and metadataFileChecks lists 15 declared AAR/source-JAR entries whose stated SHA-256 values match the published artifact records.",
+      "Debug runtime resolution evidence is internally consistent: contractDebugRuntimeClasspath, systemAsrDebugRuntimeClasspath, and sherpaAsrDebugRuntimeClasspath are reported; only the sherpa configuration includes backend-sherpa-asr plus com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1; SDK artifacts are reported as task-local Maven outputs; projectDependencyComponents is false.",
+      "Fixed Sherpa runtime binding is bounded: the resolved sherpa-onnx AAR SHA-256 a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7 matches actualResolvedRuntime, and runtimeByteEqualToFixedAar is true. The claim is limited to the supplied fixed-AAR/CI linkage, not to new reviewer verification.",
+      "Release versus Debug boundaries are stated consistently: debug and release consumer library AAR outputs are listed and the docs report both Kotlin compilations, while reportConfigurations and the docs limit dependency resolution reports to Debug runtime and explicitly do not claim a Release runtime graph.",
+      "Library versus application/production limits are preserved: consumer outputs are AARs, and the receipt states finalAppPackageOrInstalledAdoptionVerified false, productionReleaseApproved false, externalPublicationPerformed false, deviceExecuted false, qualityOrResourceAccepted false, P1Complete false, P2P3P4Accepted false, W3Complete false, and independentReviewAccepted false.",
+      "The hy4free quota429 receipt and its historical status are preserved; this review does not retry that route, does not rewrite that receipt, and does not create full independent release acceptance."
+    ],
+    "remainingGaps": [
+      "Complete build-input/source closure is not established: only 47 selected inputs are fingerprinted and sourceBuildInputCompletenessVerified is false.",
+      "Release runtime resolution/dependency graph is not supplied; only Debug runtime configurations are reported.",
+      "Final application packaging, installed adoption, device execution, production release approval, and external publication are not established by the SDK binding increment.",
+      "Full P1-P4 and R4/R5/W3 closure remain open; independent release acceptance is not granted.",
+      "Complete composition, full upstream/patch completeness, and legal/resource acceptance remain outside this bounded review."
+    ],
+    "newerCandidateBoundary": "The newer native-notice context changes current candidate identity only: the release AAR SHA-256 5ae065d23647898eed3cbc258395f1c9c98804b002e4f9b4934546ae55bb7dd5 at commit51b705c is the newer native-notice candidate, with 36 notice assets including 25 new assets and 23 original copies; the listed debug AAR SHA-256 291d74a98aef7b27be1669e2abc43472967519f6b260b02ca2bae643799227e1 is a debug build output. That newer evidence supports only the stated native/JVM notice-retention subset and negative-test boundary. It does not retroactively rewrite a18292ac source-JAR/AAR binding evidence, does not make 6de95 current HEAD, does not expand selected-input completeness to full composition, does not prove production App adoption, and does not approve P4/R4/R5/W3 or full release acceptance.",
+    "checksNotExecuted": [
+      "Reviewer did not recompute source, source-JAR, AAR, POM, module metadata, runtime AAR, or APK hashes, and did not inspect archive members or byte equality.",
+      "Reviewer did not run Gradle publish, consumer builds, dependency resolution, negative tests, or APK builds, and did not replay task counts.",
+      "Reviewer did not perform device install/run, application adoption checks, or native-library packaging checks.",
+      "Reviewer did not perform legal/license compliance, complete composition analysis, source-build input closure verification, or full P1-P4/R4/R5/W3 verification.",
+      "Reviewer did not retry the hy4free quota failure, use paid fallback, or execute any autonomous route change."
+    ]
+  },
+  "oldQuotaReceiptUnchanged": true,
+  "W3Complete": false
+}

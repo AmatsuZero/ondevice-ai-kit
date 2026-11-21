@@ -1,0 +1,40 @@
+[
+  {
+    "task": "initial",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 71.359,
+      "endedAtUTC": "2026-11-16T00:20:09.059095+00:00",
+      "stdoutBytes": 92431,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultSubtype": "success",
+    "resultIsError": false,
+    "toolUseEventsObserved": 0,
+    "promptSHA256": "789c854ca876024a50272486f03ad40015b8b5951b4050b89071b81674dd299f",
+    "eventsSHA256": "d27c18085a41a0cc9917d38c8f8dfc55e60242e69113689e42c800e5a5be0cd4",
+    "responseSHA256": "c6a1450312d1ce039586bef94322c79e51a2f28e41539e45c812981b8c6a90c1",
+    "rawArtifactDirectory": ".omx/artifacts/w3-integrated-release-review-20261116"
+  },
+  {
+    "task": "correction",
+    "process": {
+      "exitCode": 0,
+      "elapsedSeconds": 80.558,
+      "endedAtUTC": "2026-11-16T00:24:00.109539+00:00",
+      "stdoutBytes": 117158,
+      "stderrBytes": 0,
+      "automaticRetry": false,
+      "automaticFallback": false
+    },
+    "resultSubtype": "success",
+    "resultIsError": false,
+    "toolUseEventsObserved": 0,
+    "promptSHA256": "8a76e818b7031736f65055760f6bcc4fe95327d89b91459db818ee7237194137",
+    "eventsSHA256": "a2d09c02d2ea6d3222fd39b5469d8d8c5ddcbaf055e5a79c258fea47369d19e7",
+    "responseSHA256": "74424e09b6cfbcde3ee60476e69234eb7ce751f13749c1f1c6a12d528075f2a4",
+    "rawArtifactDirectory": ".omx/artifacts/w3-integrated-release-review-20261116/correction"
+  }
+]

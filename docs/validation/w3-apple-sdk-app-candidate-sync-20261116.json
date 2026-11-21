@@ -1,0 +1,91 @@
+{
+  "sourceSnapshotCommit": "c8038cc29980b5acf7169a48c074af75a53e2335",
+  "sourceEvidenceCommit": "2e2dd841300ef84d0daee43684b5e375f05d822a",
+  "sourceBranchPushed": false,
+  "publicationMarker": "w3-apple-sdk-app-candidate-20261116",
+  "bodySHA256": "f2719dd29596296493ff4bf909d6ddd51cb06657af5e40e54f1f466daf210485",
+  "issues": {
+    "github": {
+      "id": 6917189222,
+      "postExitCode": 0,
+      "getExitCode": 0,
+      "readbackEqualsPostedResponse": true,
+      "terminalLFRemoved": false,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6917189222"
+    },
+    "gitlab": {
+      "id": 45484,
+      "postExitCode": 0,
+      "getExitCode": 0,
+      "readbackEqualsPostedResponse": true,
+      "terminalLFRemoved": true,
+      "url": null
+    }
+  },
+  "githubWiki": {
+    "baseCommit": "9eb77eaf16da28222d3cbb902f31d903f4c6b192",
+    "commit": "1b160bc5eb5fd073bde28369a67795904b7be510",
+    "page": "W3语音验收与后续改进.md",
+    "sha256": "43e388674cf1f0ebb4bb05b64954b66f9da59531fc2502a78aacbc3cd01c3009",
+    "bytes": 193391,
+    "remoteRefEqualsCommit": true,
+    "remoteReadbackEqualsLocal": true,
+    "priorPageContentPreserved": true,
+    "insertedBodySHA256": "f2719dd29596296493ff4bf909d6ddd51cb06657af5e40e54f1f466daf210485"
+  },
+  "gitlabWiki": {
+    "status": "pending-existing-EOF-route",
+    "newGETRequests": 0,
+    "newPUTRequests": 0
+  },
+  "publicationProcessExitCode": 0,
+  "wikiPublicationProcessExitCode": 0,
+  "build": {
+    "exitCode": 0,
+    "elapsedSeconds": 76.98360799998045,
+    "appFiles": 92,
+    "debugDylibSHA256": "aa5b3faa72eb3b697939e20e1359c228aa1ca45be3208198693204458cd93a9d",
+    "compilationScope": {
+      "buildFileLists": 30,
+      "buildUniqueSwiftInputs": 643,
+      "uiTestFileLists": 1,
+      "uiTestUniqueSwiftInputs": 1,
+      "otherFileLists": 29,
+      "otherUniqueSwiftInputs": 642,
+      "uiTestsExecuted": 0
+    },
+    "deviceExecuted": false
+  },
+  "protection": {
+    "originalFiles": 206,
+    "originalContentsPreserved": 206,
+    "outsideDrift": [],
+    "ownedSharedPrefixes": [
+      "docs/HANDOFF-2026-11-05-next-session.md",
+      "docs/HANDOFF-W3-IOS-STATUS-2026-11-16.md",
+      "docs/roadmap/W3-speech.md",
+      "docs/agent-pitfalls.md"
+    ]
+  },
+  "cleanup": {
+    "removedExactPaths": [
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/DerivedData/ModuleCache.noindex",
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/DerivedData/CompilationCache.noindex",
+      "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-apple-sdk-app-candidate-20261116/DerivedData/Index.noindex"
+    ],
+    "removedFiles": 7056,
+    "removedNominalBytes": 164929881,
+    "freeBytesBefore": 33414434816,
+    "freeBytesAfter": 33594601472,
+    "freeSpaceDifferenceNotUniquelyAttributed": true,
+    "appFileTreeStillMatches": true,
+    "preserved": "Full App, source archive/snapshot, actual compiler FileLists, objects, dependency inputs, xcresult, logs and all receipts",
+    "remainingCandidates": "Other compilation intermediates retained as build evidence; global caches untouched"
+  },
+  "recordPublicationIsSoftwareRelease": false,
+  "finalShippingCandidateAccepted": false,
+  "R4Accepted": false,
+  "R5Accepted": false,
+  "P4Accepted": false,
+  "W3Complete": false
+}

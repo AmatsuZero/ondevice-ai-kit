@@ -1,0 +1,1857 @@
+# Next session — foundation continuation
+
+恢复入口；以最上方最新检查点为准，下方各节保留历史，不是整个项目完成结论。
+
+当前状态：**原路线图执行 closed-with-followups；用户已恢复推进并调整为功能优先，corner case 与长期资源专项后置；基础里程碑10/12，P4/P11原验收未完成；发布 open/not-ready**。下方5/12为历史口径。已批准范围保留为[F01–F12后续专项](validation/foundation-followups.md)，不把延期视为通过。
+
+## 最新 F12 续接 — 2026-11-05 Android 精确候选真机 TTS 已观察
+
+- TECNO ADB授权恢复，已有Google TTS服务。先核对原afed普通包/Identity测试runner/12模型附属摘要和权限，再临时装既有b90e精确候选＋b6d7固定TTS测试包；无重建/清数据/下载请求/采集。PID23421/23591/23879均观察normal-done、活动取消join与followup-done，见[真机范围](validation/android-committed-candidate.md#当前候选真机-tts生命周期已观察最终结果仍缺)。
+- 三轮观察host255，文本与官方-f protobuf仅开始状态；系统finished-inst/目标PID与活动instrumentation缺席证明终结，没有并发重启。最终pass/close断言与voice/outputBytes未证，0项最终通过可证明，不继续循环重试。原始证据 `android-exact-physical-tts-20261105/` 的只读verify核对三轮日志/退出、恢复及保护状态，不把记录一致性当功能全通过。
+- 原afed普通App/test/Identity runner已恢复，12模型附属摘要/权限/TTS设置保持，普通Demo启动；首次流式恢复USB短断保留，改完整复制/SHA后本地安装成功，临时APK/文本/protobuf精确清理。readiness为 `artifacts/verification/p11-readiness-20261105-exact-android-tts/summary.json`；9行gap/8组统计/基础10/12/P4/P11/发布open-not-ready保持，目标未完成。
+
+## 上一 F12 续接 — 2026-11-05 两种 Apple 隔离变体首屏已显示
+
+- 复用既有OpenCV Identity编译产物，只改隔离副本bundle ID/显示名并沿用签名；3份Mach-O UUID/section未变。官方devicectl截图显示稳定普通首屏、YuNet/SFace导入提示、原型/未校准声明及灰色注册按钮。既有MLX alias稳定首屏与五能力页签也已截图；切换动画截图保留但不计稳定显示。详见[限定证据](validation/apple-committed-candidate.md#两种隔离变体的真机首屏渲染)。
+- 只有显示证据，没有点击、picker、模型导入、注册或生成。CUA native pipe启动失败，一次reset后仍失败、未发送输入；此前XCTest/移动代理超时不重试。ignored `apple-identity-candidate-runtime-20261105/summary.json` SHA3c65545c…654b6，只读verify通过，21阶段terminal/0pending；两候选停止、原Demo恢复、41既有安装URL/9保护/生产lock保持，无采集/下载/新benchmark。
+- readiness索引为 `artifacts/verification/p11-readiness-20261105-exact-apple-rendering/summary.json`，原9行gap/8组统计保持。当前安全分支收尾后不自动循环启动/模型重播或重试失败reviewer；下一需UI工具入口恢复、授权Android设备/TTS引擎、PAD校准协议/数据或独立审查及许可/生产交付条件变化。基础10/12，P4/P11/发布open/not-ready，目标未完成。
+
+## 上一 F12 续接 — 2026-11-05 精确编译 Apple 隔离变体真机 smoke
+
+- 复用e0438c0既有MLX device产物，只在隔离副本改App/runner bundle ID并沿用既有签名；7份Mach-O含通用架构/UUID/section与原始编译一致，未重建。iPhone17,2/iOS27.2/24B119上64×64白图Swift/KMP→Apple Vision回调成功、0人脸；ModelStore设备manifest与14实际安装模型回读哈希全部匹配。没有多模态生成或新benchmark。
+- 普通UI/TTS四用例在系统automation mode初始化超时，实际0执行/0通过；触摸工具同样代理超时。不重复同一失败门槛。失败后Xcode诊断收集卡住，经精确PID/命令核对SIGINT→SIGTERM收尾/exit143；不是产品用例失败或通过。首轮无对应私钥的证书选择失败和fresh唯一匹配重试保留，未创建/更改签名资产。
+- [限定证据](validation/apple-committed-candidate.md#隔离签名变体真机-smoke-与系统-ui-门槛)，ignored `apple-candidate-runtime-20261105/summary.json` SHA79896e19…d68fa；23阶段全terminal，候选已停、独立UI runner卸载、原OpenCV Demo恢复，全部既有安装URL未变。新隔离候选/模型留手机，不重复安装/复制。9保护/生产lock保持，无采集/私人媒体/下载。TECNO当前ADB unauthorized，未操作。
+- 下一推进系统入口条件变化后的当前候选普通UI/模型生成，或独立OpenCV候选运行/当前Android真机TTS与完整审查、许可/生产交付。不要将alias变体或历史F09证据改标为原bundle全能力通过；不重跑已完成构建/模型下载。基础10/12，P4/P11/发布open/not-ready，goal active。
+
+## 上一 F12 续接 — 2026-11-05 同源码增强 Apple 整 App 已构建
+
+- 接e0438c0/953固定源码及既有KMP framework，不重跑718基础测试/F09打包。12依赖/2C子模块从完整本地Git对象自包含clone，6878源文件逐一核对原始blob；没有overlay、下载或生产依赖切换。旧SourcePackages alternate失效保留，未修改旧缓存。
+- MLX完整Demo unsigned generic iOS+simulator均构建成功；OpenCV Identity独立Demo unsigned generic iOS构建成功，host契约6/6。三App完整sdkCommit/arm64、MLXVLMBackend/Metal/描述资源及OpenCV native/Swift符号检查通过；3产品树/664实际Swift输入哈希固定。两个独立变体，不称组合App；OpenCV无arm64 simulator，不算通过。
+- [构建与边界](validation/apple-committed-candidate.md)，ignored `apple-enhanced-candidate-20261105/summary.json` SHA67802fd9…6591d8；只读verify可复核，8阶段全terminal、无pending。初次private Swift符号收集错误已改为反解，只读重收集，无重建。9保护/生产lock/原手机Demo保持，无采集/签名/新benchmark或设备操作。
+- 下一为这些精确候选在适当设备上的运行，以及Android当前候选TTS/真机、完整复审/许可/生产交付；旧模型验证/F09不重做，不能把历史设备证据改标到新包。P4/P11/发布仍open/not-ready，基础10/12，goal active。
+
+## 上一 F12 续接 — 2026-11-05 同源码 Apple/shared host 与基础构建已验
+
+- 复用e0438c0既有归档，fresh提取953文件/执行位并在各阶段回读；Apple host481、KMP24、shared80及Swift→Demo四组桥接133项全部通过，无失败/跳过。Gradle offline/no-build-cache/rerun-tasks 35/35执行；Binding simulator/shared双平台framework、基础speech/video/multimodal UI Demo unsigned双平台、NativeConsumer simulator构建成功，完整sdkCommit匹配。
+- 六组iOS编译/测试配置120条外部artifact引用/80实际文件及6产品树固定；生产Skiko仍0.144.6，F02生产分发未切换。桥接使用注入后端，不是增强MLX/OpenCV整App、真机或普通UI/权重推理验收。Kotlin cache路径与既有XCTest QoS警告保留；无新增benchmark/下载/采集/签名或手机操作。
+- [验证](validation/apple-committed-candidate.md)，ignored `apple-committed-candidate-20261105/summary.json` SHA79c0bca1…d3f5ff；只读verify可回读，全部构建/测试已terminal，无pending。9保护/生产lock保持。两个现有Android AVD均无TTS服务/default null，不重复测试或安装资源。
+- 下一推进同源码增强Apple整App与适当设备、当前Android候选TTS/真机、完整审查/许可和生产交付。旧F09二进制构建与已通过Android模型验证不重做；P4/P11/发布仍open/not-ready，基础10/12，goal active。
+
+## 上一 F12 续接 — 2026-11-05 同一候选其他能力运行已验
+
+- 复用e0438c0精确源码/普通APK b90e7830，不重建普通App；6份仅测试APK各绑定953source与既有英文PCM，专用API36 AVD顺序执行。固定ASR全文匹配/13项JNI生命周期、布局、ESRGAN双帧AAC音轨/取消重入/lease与独立完整解码PTS/packet、Identity两候选/未校准拒绝/purge撤销/lease均通过；普通Browse→DocumentsUI NASA选图后MLKit显示1人脸/512×512与框。
+- **TTS实际失败**：本AVD无TTS服务且默认引擎null，初始化-1；未安装/下载，不算通过。其余基本功能通过不替代真实采集、自然质量/资源/minOS/完整provider或全能力验收。
+- 本轮新测试目录/公共NASA副本精确清理、临时test包卸载；普通App重开，原LM/ASR/no_backup完整哈希集合和拒绝采集权限保持，手机可用Demo未操作。不宣称删除App管理的测试AndroidKeyStore密钥，无项目签名资产变化。
+- [验证](validation/android-committed-candidate.md#同一-apk-补充运行asrsridentity人脸与-tts)，ignored `android-candidate-runtime-20261105/summary.json` SHAde593ced…edc1e1，68项证据检查通过，包含TTS失败记录一致性。所有运行/构建已terminal，无pending请求；普通候选/模型留AVD，不重复模型测试或下载。下一为同候选TTS合适隔离设备、真实设备/Apple候选与完整审查/交付；P4/P11和发布open/not-ready、goal active。
+
+## 上一 F12 续接 — 2026-11-05 精确提交 Android 候选构建与 LM 运行通过
+
+- 从 e0438c0 committed archive 独立提取953文件并逐一核对Git对象/模式；14份既有固定输入隔离复制，四后端同时启用，offline/no-build-cache/rerun-tasks **997任务全执行**。全17模块586项JVM通过，20模块lint无error/52既有warning；外部运行/测试artifact126/131及包内native/7资源/完整sdkCommit已核验。不含shared/KMP其他host测试重跑。
+- 新普通APK b90e7830…a64d8d在专用API36 AVD经系统红图选择、native初始化后普通取消/CANCELLING禁用/CANCELLED、同图同PID10705重入SUCCEEDED与普通清除通过；44项运行复核。既有4模型/拒绝权限/无test APK/空cache保持，旧afed回退保留。**手机上可用Demo未操作**，新候选仍无真机与ASR/SR/Identity等全能力验收。
+- [验证及复核入口](validation/android-committed-candidate.md)；ignored `android-committed-candidate-20261105/summary.json` SHA73f2adce…5728c。构建/运行已terminal，未留pending请求；新包与模型留专用AVD，不重复构建或下载。审批服务429/超时未执行及host收集错误保留，正常审批后恢复，无绕过。
+- 下一推进同一精确APK其他能力运行与Apple候选/完整复审；不能把旧afed真机证据重标到新包。原9保护路径/生产lock保持，未新增benchmark/采音/拍照。全能力、P4/P11与发布仍open/not-ready，goal active。
+
+## 上一 F07 续接 — 2026-11-05 最终组合包真机LM已可用
+
+- TECNO/API35已装最终普通APK afed156b…926c461保持，无重装/test变更；原LM为空后通过USB既有授权ZIP＋普通DocumentsUI导入，七模型/附属摘要前后匹配，五ASR/SR模型/权限不变。**授权LM现留手机可用**，临时公共ZIP已精确删除，不重复下载或导入。
+- 普通系统红图/default prompt/32token，PID19257在Mali-G57 MC2/Vulkan Integrated GPU初始化后普通取消：CANCELLING禁用→CANCELLED可重入；同图同PID重入SUCCEEDED，输出描述红矩形，后端/model/revision/runtime正确。两轮1448/1448及CPU/GPU销毁对，前轮销毁先于重入GPU初始化；普通清除本轮输入/native cache，原历史fixture摘要/cache文件名清单保持。
+- [真机验证](validation/android-litertlm-ui.md#2026-11-05-最终组合包真机导入取消与重入)，ignored `android-final-physical-lm-20261105/` 52项只读复核通过；264分层source匹配/2历史测试差异，不是全量重建。USB短断、UI dump255、审批服务429/超时、host helper import失败均保留；恢复只观察原请求，无重复生成/重启/绕过。上一模型复核会话75378已terminal/pass，暂停恢复后已读取结果；没有pending推理。
+- 无采音/相机/私人媒体/新benchmark；真机最终APK固定图链路已证，人工触摸/其他provider、异步drain、质量资源/minOS、独立审查/许可及P4/P11仍open/not-ready，goal active。
+
+## 上一 F07 续接 — 2026-11-05 最终组合包普通LM取消/重入通过
+
+- 专用6GiB/API36 AVD更新既有最终普通APK afed156b…926c461，原c098回退保留，已装授权Gemma四文件/拒绝相机麦克风权限保持；未下载、改test runner或操作真机。分层来源264hash匹配、2旧测试差异明确，LM arm64 native库不变，不称全量重新构建。
+- 普通系统选原红图→PID9200 native adapter初始化后取消→CANCELLING/生成禁用→CANCELLED→同输入同PID重入SUCCEEDED。实际backend/model/revision/runtime正确，输入SHA991b…d3aa；普通清除后cache/input为空，模型/权限/PID不变。两轮软件SwiftShader WebGPU1448/1448及各自CPU/GPU销毁已记录。
+- [验证](validation/android-litertlm-ui.md#2026-11-05-最终组合包普通-ui-取消与重入)与原始ignored `android-final-combined-lm-20261105/`，只读verify38项通过。首UI命令审批服务429未执行，后续正常审批恢复；picker辅助脚本先拒绝后按focusable属性修正，产品无修改。没有绕过、并发重启或新benchmark。最终APK与模型留专用AVD，物理最终候选/人工触摸/其他provider/异步drain/质量资源/minOS仍缺；goal active，P4/P11/发布open/not-ready。
+
+## 上一 F05 续接 — 2026-11-05 真机固定样本native生命周期通过
+
+- 新增仅androidTest的生命周期runner，普通App afed156b…926c461不重建/不替换，53相关旧源hash匹配；TECNO/API35使用既有英文PCM，实际观察本进程JNI decode后执行取消与活动close。13项检查全部通过：decode/drain期间busy、取消不交付、同backend重入全文匹配、close等待/期间和之后拒绝/idempotent、caller输入不变；不保存转写/音频/线程栈，不打开麦克风。
+- offline测试APK build与lint0error/1既有warning，后端12项JVM以rerun-tasks fresh执行通过（35任务全执行）。原test APK/Identity runner恢复，普通App/5模型/权限全部匹配，普通Demo已激活。首次恢复后PID观察竞争失败保留，修正观察后只复核、不重装；不是产品失败。
+- 证据及只读verify在 `artifacts/verification/sherpa-lifecycle-20261105/`，见[验证](validation/android-sherpa-asr.md#fixed-input-native-lifecycle--2026-11-05)。仅关闭固定输入native取消/重入/close子项；真实采音/前后台生命周期、准确性/持续资源/API26与系统Google资源仍缺，新采音授权均已用完。无新benchmark/下载，P4/P11/发布仍open/not-ready、goal active。
+
+## 上一 F12 续接 — 2026-11-05 本地输入冻结与只读复核
+
+- 已冻结5a65f51 committed archive（951文件逐一匹配Git对象/模式、内嵌commit，SHA79835bba…e7a2）；6组外部模型及附属文件27份、14媒体样本、1固定TTS请求和9能力历史证据统一登记。现有9保护路径与生产lock保持。详见[输入冻结](validation/p11-input-freeze.md)，原始清单及只读verify在 `artifacts/verification/p11-input-freeze-20261105/`。
+- 316项历史readiness来源核对通过；历史跟踪文档/benchmark入口按归档版本校验，ignored原始报告/媒体继续校验当前字节。发布提升/fixture hash篡改的内存副本被拒绝。初版清单与首个脚本Git子命令错误均保留，未重建模型或重复F09构建。
+- 状态仍partial-input-freeze：旧人脸benchmark原输入图未定位、系统模型/voice未byte-frozen；归档不等于同一候选9能力全部重建/当前设备重测。新packager reviewer再次429无结论，不重试失败代理。下一为完整分支审查/生产交付与许可裁定，以及原P4/P11验收；无新benchmark、下载、录音或设备操作。goal仍active，不标完整目标完成。
+
+## 上一 F09 续接 — 2026-11-05 binary 模型推理与 MLX 专项测试通过
+
+- 复用最终manifest bd41785d…097efc，fresh无源码消费者signed Release通过，graph仅一份probe Swift源/无checkout，20XCFramework树与产物一致。iPhone17,2实际系统报告**iOS27.2/24B119**；PID2184/runId E68987B2-0AFA-4073-8539-D26F227DA31B完成固定公开图片及29FPS合成短视频真实生成，backend/model身份匹配、非空/10及22updates，14模型文件host+device核验；drain/close/lease删除/关闭后拒绝/帧快照清理/fixture不变通过。PID已终止确认无，普通Demo PID1433恢复。无采音/私人媒体/下载。
+- 原样复制8个固定上游测试文件到隔离macOS宿主，KVCache/config/TurboQuant/attention/SmolVLM/Gemma4 chunked-prefill等**230逻辑测试/295case执行、0fail/skip**（XCTest39+SwiftTesting191）通过；明确排除性能microbenchmark。首轮漏MatmulPrecision helper编译失败，补原文件后通过，未改实现/断言/阈值。不是上游全套测试或未知枚举支持证明。
+- 两份新证据在 `artifacts/verification/f09-binary-inference-20261105/`、`f09-mlx-dependency-tests-20261105/`；冻结summary与只读verify脚本保留，原打包receipt不改。**当前下一缺口是独立packager审查、SDK源码再分发许可/生产交付策略及P4/P11等原验收**；新v2 reviewer此前429无结论，不重试失败代理、不冒称批准。无需重做完整打包/下载/录音，goal保持active。
+
+## 最新 F09 续接 — 2026-11-05 可复用打包入口端到端已通过
+
+- 本地已提交dfa6c85（20静态产物/v2清单/无源码消费者）。继续实现 `scripts/package-apple-mlxvlm.sh SNAPSHOT SOURCE_PACKAGES FRESH_OUTPUT` 与tools/package_mlxvlm_binary.py：固定输入/补丁/原生revision验证→device/sim Release/library-evolution→20XCFramework/4C/18resource/22notice→清单+ZIP/checksum；无下载/patch输入/签名/发布。
+- 首轮双平台build过但组装漏cLogSupport隐式modulemap；真实header用例RED→GREEN，保留旧失败输出。**最终fresh整条命令已过**，新产物的direct+第二ZIP consumer两平台均过，20ZIP完整本地SwiftPM解析通过，graph无checkout/仅probe Swift源。全tools297/297、host OrderedCollectionsTests262/262、input/modulemap5/5、Python/shell/diff/九保护/生产lock通过。
+- 新产物真机resource报告绑定manifest bd41785d…097efc通过；PID2151已终止并确认无，普通Demo恢复，无采音/模型推理/私人媒体。证据 `artifacts/verification/f09-reusable-package-final-20261105/summary.json` 和verification.json；旧first-failure与assembly replay另保留。
+- 当前下一缺口是**MLX依赖专项测试与binary模型推理**，另有独立packager审查缺席（新v2 reviewer429）、源码再分发许可/发布和P4/P11等原验收；不称全目标或release完成。不要重做完整clone/模型下载或重新请求既有策略授权。goal保持active。
+
+## 最新 F09 续接 — 2026-11-05 正式清单/ZIP第二消费者已通过
+
+- 已继续执行用户批准的隔离兼容方案，无需再次申请。schema2覆盖20静态双slice/4C模块/18逐平台resource/22notice；schema1旧Metal硬pin保持，schema2按真实工具链/平台/source/overlay/output来源绑定。生产lock和九保护未变，未发布。
+- 正式generator的device/simulator consumer均通过，静态不embed、C头文件相对include、按平台copy bundles。20真实ZIP的完整字节/checksum/SwiftPM本地解析通过；第二ZIP binaryTarget consumer两平台编译链接通过，均仅一份probe SwiftFileList、20解压XCFramework、无checkout。
+- 正式manifest consumer真机资源报告通过且绑定manifest SHA b6648f76…0a8091，PID2134已终止并确认无，普通Demo恢复；先前reviewed staging PID2122额外通过MLX小算术。无模型推理/采音/私人媒体。driver初轮参数位置错误未启动App，修复后完成，不冒称首轮通过。
+- 独立staging审查两项finding均已RED→GREEN修复：写入失败UI不再passed，混合部署目标取最高floor且拒绝低报；正式报告带manifest hash。新v2审查429无结论、不计批准，最终全tools292/292；见 `artifacts/verification/f09-binary-build-20261105/summary-reviewed.json`，用verify-reviewed.py复核；旧summary/verify仅历史源码口径。
+- **下一项：正式可复用package入口/依赖测试**。保留的finalize.py/local-package.py/zip-consumer和完整输出可复用，勿重做模型下载或完整clone。仓库根未声明SDK源码redistribution license，notice标local-validation-only；远程发布仍无授权。模型binary推理和更广release/roadmap门槛未完成，goal保持active。
+
+## 最新 F09 续接 — 2026-11-05 真正20模块双slice与binary consumer已跑通
+
+- 用户明确选择隔离补丁方案继续本地构建，含已披露的未知 attention-mask fatalError 策略；无需重复询问。候选manifest/patch字节不改，单独decision receipt绑定；生产依赖/lock、原cache和九保护保持。
+- fresh12依赖/两C子模块本地clone＋f3899bb committed SDK snapshot＋固定overlay：device/simulator Release/library-evolution均通过。实际target .o按20模块组静态framework，四native对象各归属一次；真实20个双sliceXCFramework结构检查通过，只带文本接口。独立搬移binary consumer无package/checkout输入，两平台编译链接均过。
+- 新消费者在iPhone17,2/iOS27.0.1/PID2073真实Bundle.module模型查找、Metal加载和MLX小算术通过；不是模型推理/质量/性能。首次错误身份比较真实RED保留，生成器改upstreamURL/revision/backend后GREEN。PID已终止并确认无，普通Demo回前台，无采音/相机/私人媒体。
+- helper/layout13/13、全tools278/278通过；Xcode27.2/Swift6.4.2，device Metal新hash ffb91309…4f2a04不同旧规范pin，JSON canonical不变。**旧validator未放宽，新staging没有冒充final artifact manifest**。尚需正式package入口、C/static/逐平台资源来源schema、notices/依赖测试、ZIP+第二SwiftPM consumer与独立审查；F09/P4/P11/发布仍open/not-ready、goal active。
+- 原始证据/可续跑脚本与20产物在ignored `artifacts/verification/f09-binary-build-20261105/`，summary.json/static-stage-report.json/package.py；两个source builds与binary builds均terminal无后台进程。下一直接把已跑通实验接正式manifest/consumer路径，勿重做clone/编译或重新申请策略批准。新research agent429无结果，不重试。
+
+## 最新交付续接 — 2026-11-05 离线 ASR 独立消费者
+
+- 用户确认修复后麦克风基本正确、仅少量漏错词；ASR 基本功能已可用，三次新采音授权均已消耗。当前工作无采音/设备操作。
+- `examples/android-speech` 新增可选 sherpa flavor、显式选择/取消安全关闭示例及独立 settings。隔离本地 Maven 制品的 Debug/Release 构建、原有 flavors 和 lint 通过；依赖解析无 SDK project，contract/system 不含 sherpa。首次 standalone Kotlin2.2/SDK2.4 metadata 不兼容已通过加载既有固定插件修复，不跳过检查。原工程模式首跑漏 Demo 资产配置，修正后构建通过（72 tasks/28 executed）。
+- P11 Android ASR 行按新证据改为 `pass-bounded-offline-basic`，系统 Google 资源仍未解决，强噪声/中文精度与真实生命周期/资源/API26 保留。无新增benchmark样本；基础10/12、P4/P11/发布仍open/not-ready，完整目标仍active。独立消费者审查429无结论，不重试失败代理。
+- 证据位于 ignored `artifacts/verification/sherpa-asr-consumer-20261105/`；命令见示例 README。保护九路径及生产lock继续保留。接续roadmap功能缺口，勿再自动录音或重复系统资源下载。
+
+## 最新续接 — 2026-11-05 sherpa 离线 ASR 基本可用，精度待优化
+
+- 最终候选 afed156b…926c461 已安装，七组合成重放与12/26/64项回归通过既定门槛，静音/纯噪声拒绝，SNR0/中文精确匹配仍未过；TECNO支持NS，但不据availability认定实际降噪效果。原test/Identity runner/权限、四新模型及原SR摘要已回读。用户又单独授权修复版一次麦克风：SUCCEEDED/实际sherpa/非空，精确匹配仍失败，字符差异5（前次19），用户确认基本正确、少量漏错词，按基本功能可用记录；不是受控效果提升或精度验收结论。累计三次新授权均已消耗，不再自动录音。详见validation顶部。
+
+- 噪声修复：原包合成静音/纯噪声均真实生成假文字，SNR0也错；已用同runtime新增固定MIT Silero VAD、至少256ms语音门禁/200ms前后context、NO_SPEECH错误与提示，并接入可用时的系统session降噪。VAD冷目录真机重放：静音/纯噪声拒绝、干净/SNR10/padded英文匹配，SNR0仍错；不是现场效果通过。新包还修复并发模型复制和默认后端缺席的启动崩溃；最终候选/恢复状态见[验证](validation/android-sherpa-asr.md)顶部及ignored final-candidate.json。后续不得重用早期b67包当修复包，也不得自动开始第三次采音。
+
+- 最新用户反馈：两次分别授权的普通麦克风尝试均识别内容错误，第二次用户完整读完且现场噪音较多；不能按SUCCEEDED判验收。正在用合成静音/噪声排查，不再采音，两次授权均已消耗。下述流程返回结果只代表执行完成。
+
+- 用户批准新增可选 sherpa 后端，Mac 下载固定 runtime/model→可选 APK→USB 安装已完成；默认 `sherpa.onnx.whisper`，显式系统后端不回退。TECNO 固定英文 SDK/JNI 样本精确匹配，中文返回汉字但未精确匹配；约 1.7–2.1 秒。用户随后在场重新授权单次麦克风，普通 Demo 一次点击后 `SUCCEEDED`/实际 sherpa/非空文本，提示句精确匹配未过；不保存原音频/转写文本。见[离线 ASR 证据](validation/android-sherpa-asr.md)。
+- 组合测试 sherpa9/9、speech25/25、Demo63/63；默认Demo55/55、启用/默认构建/lint、ReleaseAAR和共享 iOS arm64 编译通过。后台纯测试进程遭 TECNO freezer 的首次超时保留，改为前台 Activity 后真实推理成功；未改系统省电策略。原测试包/Identity runner/权限恢复，新离线 Demo 保留且原 App 可回退；新模型和原 SR 模型摘要已回读。
+- 9保护路径/生产lock保持。独立review仍无结论；中文质量、取消重入/资源和最低系统等后置，单次麦克风新授权已消耗。系统ASR资源仍未修复；PAD/校准、F09、P4/P11与发布open/not-ready、基础10/12保持。下一先按此新包续接，不再重复下载或系统语言资源请求。
+
+## 上一检查点 — 2026-11-05 TECNO 单次 ASR 实测
+
+- 用户提前回到手机旁并明确“立即开始”；新鲜核验TECNO KM9/API35、原405普通App/7b9测试包/Identity runner与权限后，仅临时安装冻结db759cca探针。单次结果为platform-error/13（ERROR_LANGUAGE_UNAVAILABLE），startCount1、startToDestroyMillis120、withinAuthorizedLimit/cancelReturned/recognizerDestroyed均true；无readyForSpeech或文本结果。en-US资源仍不可用，不能算转写或SDK/普通UI通过；开始提示后有host审批延迟，不把提示当同步采音证据。
+- 未保存音频/识别文本、未第二次采音/重发下载。原测试包/Identity runner、App/test哈希与权限已回读恢复，普通MainActivity重新启动成功。见[本次实测](validation/android-asr-next-device-session.md#single-physical-device-attempt--2026-11-05)，ignored android-asr-single-20261105/保留前后快照/脱敏bundle/单次标记及driver；此前“采音0次/明天执行”均为历史。没有新生产代码/build/SDK测试或独立复审。
+- 本轮有真实设备新证据，单次采音授权已消耗；后续资源修复与新增采音需遵守原授权边界。ASR SDK/UI、PAD协议/校准及F09维护策略/真实双slice消费仍开放，基础10/12、P4/P11/发布open/not-ready；不将用户配合完成等同全任务完成。
+
+## 上一检查点 — 2026-11-04 F09 现存完整依赖对象恢复
+
+- 新鲜盘点发现自然视频保留cache可读取生产lock全部12依赖的固定Git对象，以及MLX两项C子模块（943/136entry）；旧f09-target-scoped对象失效仍属实。无需下载/修复原cache；Gitlink在自身repo核验，不误称parent缺blob。见[源码恢复](validation/f09-compatibility-candidate/README.md#latest-source-recovery--2026-11-04)。
+- 真实applicator首跑拒绝上游CLAUDE.md→AGENTS.md；新增仅manifest显式声明且target/hash固定、指向包内committed普通文件的link支持，原未声明/越界/chain/目录/缺目标及submodule拒绝保持。RED→GREEN、定向15/15、全tools273/273（50.746s）、compile/diff及保护核验通过；无新独立复审。实际两包copy成功，886+723普通文件及1link，四patched SHA一致；receipt仍draft-not-adopted/build-not-run，不采用维护策略。
+- ignored `f09-existing-source-recovery-20261104/`保存对象清单、真实首失败/成功、copy及测试。缺完整依赖来源的旧阻塞已对该cache解除，但两包copy不是12包build cache，后续仍缺显式兼容维护策略与真实20模块双slice/消费/资源runtime。read-only explore未发现绕开已知阻塞和延期专项的其他已授权用户界面实现缺口；不据此声称全功能完成。
+- 无手机操作/采音；2026-11-05北京时间09:00仍需用户在场提示后执行单次ASR。基础10/12、P4/P11/发布open/not-ready、goal active。本轮有真实源码恢复、实现修复和完整回归进展。
+
+## 上一检查点 — 2026-11-04 F09 本地 ZIP 校验准备
+
+- 新增`tools/validate_mlxvlm_binary_package.py`及8项回归：现有manifest/Mach-O→逐XCFramework根目录ZIP完整字节/清单比对→SwiftPM checksum→真实local binaryTarget ZIP解析→第二consumer本地依赖图与解压产物比对。所有校验/消费绑定同一临时ZIP快照，原产物/锁/缓存不改；不创建真实增强发布ZIP。见[本地包校验准备](validation/apple-mlxvlm-distribution.md#2026-11-04-local-zip-package-validator-preparation)。
+- 定向8/8、完整tools270/270（61.506s）、Python compileall/diff/CLI及252冻结/九保护/生产lock通过，证据ignored `f09-local-package-gate-20261104/`。官方research确认local path可ZIP、remote仅HTTPS、binary target不直接声明资源；实际SwiftPM解析是真实的，模型hash/Mach-O仅夹具替身，不称20模块binary/编译/资源runtime通过。独立review429无结论；作者发现并修复checksum与消费副本绑定问题，纠正首个mutation测试的macOS路径别名后，旧顺序内存重现失败/当前通过，失败与修正均保留。
+- Task5仅准备工具/in progress，Task3/4仍缺维护策略、完整依赖来源、真实双slice与消费/资源runtime；F09/基础10/12/P4/P11/发布open/not-ready、goal active。无手机操作或采音；2026-11-05北京时间09:00仍需用户在场提示后才开始单次ASR。上一轮有LM真实取消重入进展，本轮有实现/完整回归进展；不以工具替代最终交付。
+
+## 上一检查点 — 2026-11-04 页面候选 LM 取消重入
+
+- 仅既有LM模拟器普通UI，精确a27a079/c098fc41布局APK实际原生视觉初始化后取消，观测RUNNING→CANCELLING/等待原生任务释放→CANCELLED，生成重新可用；保留同一picker输入再生成SUCCEEDED，实际backend/model/revision/runtime正确。续接时上一请求已成功，单独保留warmup UI，不混入两请求日志窗口。见[取消重入证据](validation/android-mainflow-emulator.md#frozen-layout-candidate-lm-cancellation-and-reentry)。
+- 同PID6085/四模型摘要/精确APK/相机麦克风denied保持；普通清除后cache/input为空。日志绑定PID与epoch1793801793，两次1448/1448软件视觉及CPU delegate、两对CPU/GPU销毁，第一次销毁早于第二次初始化。SwiftShader不称硬件GPU；同步路线不扩大为异步drain/质量/性能通过。
+- ignored `android-layout-lm-reentry-20261104/verify.py` fresh PASS：25份证据摘要及252源码冻结/布局/APK/九保护/生产lock。初版verifier误计进程一次性XNNPACK日志，改为逐请求delegate绑定后通过，初始失败保留；未改runtime/原始证据。无新生产代码/build/SDK测试/独立复审/手机操作或采音。
+- 用户配合仍为2026-11-05北京时间09:00，在场提示后才消耗已授权单次ASR，手机采音仍0次。ASR真实转写、PAD/识别校准、F09策略与完整依赖及实际增强binary仍开放；基础10/12、P4/P11/发布open/not-ready、goal active。本轮普通UI取消重入与清理有实际进展。
+
+## 上一检查点 — 2026-11-04 ASR 无采音拒绝预检
+
+- 仅在既有MainFlow模拟器临时安装冻结db759cca单次探针test APK，不带授权参数运行；实际bundle为precondition-rejected/startCount0/无activityStarted，capture权限denied与RECORD_AUDIO ignore前后不变。探针source与prepared摘要匹配、普通App仍c098fc41；不是授权分支/超时watchdog/资源就绪/转写验证，手机采音仍0次。
+- 测试结束目标进程按instrumentation行为退出；移除test包恢复原缺席状态，普通App重新启动PID9996并返回语音页。固定模型/App/权限/appops/缓存文件名清单保持，不将文件名核对称内容摘要核验。前两次runner查询误把test包当target filter而空，后置正确target查询识别runner；回执保留原状。ignored `android-asr-single-no-capture-20261104/verify.py` fresh PASS，7份证据摘要及252源码冻结/九保护/生产lock通过；见[次日验证准备](validation/android-asr-next-device-session.md#no-capture-emulator-preflight)。无新生产代码/build/SDK测试/独立复审/手机操作。
+- 明天2026-11-05北京时间09:00用户在场后再提示并进行单次ASR，本次不消耗已授权采音次数。主要剩余阻塞仍为ASR用户在场、PAD/识别校准协议数据、F09维护策略及完整依赖来源；基础10/12、P4/P11/发布open/not-ready、goal active。本轮有真实拒绝分支与恢复验证进展。
+
+## 上一检查点 — 2026-11-04 F09 固定兼容复制工具
+
+- 继续无需用户配合工作，补齐候选审查提出的fail-closed applicator：只从lock绑定的精确Git提交对象复制两项声明依赖到新目录，校验runtime/patch/input/output及完整文件清单，拒绝越界/symlink/submodule/已有输出，失败不发布复制结果；原缓存/生产lock不写。读取raw blob避免git archive的export-ignore/export-subst改变构建输入；receipt保留draft-not-adopted/build-not-run，不采纳待决策略。
+- 定向12/12、完整tools262/262、Python compile/diff及九保护/生产lock通过；初始RED和两项边界RED→GREEN保留，追加legacy patch检查初次仅错误文字断言不匹配、已有拒绝行为始终正确，修正断言后通过，不称新增安全修复。历史缓存缺Git objects时真实CLI按预期拒绝且无输出；已有四份原始源码独立重放两补丁、输出摘要匹配，不冒充完整依赖复制/构建。见[工具及边界](validation/f09-compatibility-candidate/README.md#2026-11-04-guarded-preparation-tooling)。独立tool reviewer429无结论；未新下载/构建二进制/操作手机/采音。
+- ignored `f09-overlay-applicator-20261104/`保存日志与验证。Task3仍缺维护策略决定、完整依赖来源和真实20模块双slice；Task4实际消费/资源runtime、Task5仍未完成。不按工具测试关闭任务。明天2026-11-05北京时间09:00用户在场后再开始单次ASR，功能优先/corner后置保持；基础10/12、P4/P11/发布open/not-ready、goal active。本轮有实现与完整工具回归进展。
+
+## 上一检查点 — 2026-11-04 页面修复候选实际 Identity 主流程
+
+- 既有MainFlow模拟器普通UI重新启用本次本机原型授权，只选择原已授权NASA测试图；固定a27a079/c098fc41布局候选真实注册ENROLLED/1模板，验证与图库发布均THRESHOLD_UNVERIFIED、图库保持未发布。普通删除当前用户后0用户/0模板/物理清理已完成，再全会话删除停用，返回语音页。未提取模板、特征、密钥或收集新样本，未运行已校准识别/PAD。
+- 同PID8481、固定YuNet/SFace/manifest摘要、APK与相机麦克风denied前后保持；公开测试图SHA匹配，未单独捕获内存解码输入摘要。ignored `android-layout-identity-mainflow-20261104/verify.py` fresh PASS，15份证据摘要绑定UI/回执/截图，连同252源码冻结、九保护及生产MLX lock。见[Identity普通主流程](validation/android-mainflow-emulator.md#frozen-layout-candidate-identity-main-flow)。未重建/运行新增SDK测试/独立复审/操作手机或采音。
+- 该精确布局候选已分别有SR、LM、Identity上述有限主流程证据；仍不能称完整识别/PAD/ASR或发布通过。明天2026-11-05北京时间09:00用户在场后再提示并进行单次ASR诊断，不自动按时采音。功能优先、corner/长期资源后置；基础10/12、P4/P11/发布open/not-ready、goal active。本轮有真实模型普通UI执行进展。
+
+## 上一检查点 — 2026-11-04 页面修复候选实际 LM 主流程
+
+- 已核验旧644APK可回退后，只在既有6GiB LM专用模拟器更新固定a27a079/c098fc41页面候选，保留原授权Gemma四文件。普通DocumentsUI选原合成红图→默认后端/原prompt/32tokens RUNNING→SUCCEEDED，实际文本solid vibrant red rectangle，UI实际backend/model/revision/runtime正确；32token尾句截断，不称完整自然质量。
+- 同PID6085/模型四摘要/相机麦克风denied保持，普通清除后cache/input为空；1448/1448视觉WebGPU与CPU文本执行、单对accelerator销毁记录，SwiftShader为软件视觉而非硬件GPU。新包/模型留原LM AVD，旧包可回退；未重建/SDK测试/新独立复审/操作手机/下载/采音。
+- ignored `android-layout-lm-mainflow-20261104/verify.py` fresh PASS，绑定精确APK与模型/输入、系统picker/运行/输出/清理及252源码冻结、九保护和MLX lock；一次日志自动审核超时未执行，单次重试成功。见[普通LM验证](validation/android-mainflow-emulator.md#frozen-layout-candidate-lm-main-flow)。该精确包SR与LM主流程已证，Identity尚未重跑；ASR仍明天2026-11-05北京时间09:00用户在场后启动。基础10/12、P4/P11/发布open/not-ready，goal active。
+
+## 上一检查点 — 2026-11-04 页面修复候选实际 SR 主流程
+
+- 固定a27a079/c098fc41页面候选在既有MainFlow隔离模拟器普通系统Photo Picker→Browse→DocumentsUI选原双帧AAC素材，默认ESRGAN真实4×后SUCCEEDED/128×96/2帧/1音轨；输入公开与私有SHA一致，实际输出SHA56600ced…1af4。完整解码/全PTS一致/BT709/四个AAC包hash与PTS通过；首个点击后观测已成功，不称捕获RUNNING或处理耗时。见[主流程证据](validation/android-mainflow-emulator.md#frozen-layout-candidate-sr-main-flow)。
+- 普通清理结果/移除输入后本轮input/output均释放，原两份export摘要保持；PID8481/模型/精确APK和相机麦克风denied保持，返回普通语音页。ignored `android-layout-sr-mainflow-20261104/verify.py` fresh PASS，连同252源码冻结/布局/测试/九保护与MLX lock。未重建/新增SDK测试/操作手机/采音，不提升自然质量、播放或持续资源；该精确包LM/Identity尚未重跑。
+- 用户配合仍约2026-11-05北京时间09:00，先提示再单次ASR诊断；基础10/12、P4/P11/发布open/not-ready，goal active。本轮有普通UI真实推理与独立媒体检查进展。
+
+## 上一检查点 — 2026-11-04 F09 consumer 生成器准备
+
+- 在既有F09计划范围补齐binary-only consumer生成器：声明artifact/实际Mach-O校验、原子生成、可搬移相对引用、framework链接/嵌入和bundle资源阶段；生成源码含图像/视频API及实际model Bundle.module/Metal资源smoke，receipt固定not-run。见[分发验证](validation/apple-mlxvlm-distribution.md#2026-11-04-binary-only-consumer-generator)。
+- 定向10/10、完整tools250/250及Python/Ruby语法/diff检查通过；初始Ruby版本混用和Swift缓存权限失败均保留，最终用已有Ruby3.4与可写缓存通过。fixture的hash/Mach-O为测试替身，不是增强binary build；Task3真实20模块产物及Task4双平台消费/资源runtime仍未验，不采用待决兼容overlay。独立review429无结论，作者作有界检查；九保护及生产MLX lock保持。
+- 用户明天2026-11-05北京时间09:00配合设备验证；本轮未操作手机或采音，明天先提示再执行。Android普通页候选仍固定a27a079/c098fc41，不把本轮工具提交称为新APK。基础10/12、P4/P11/发布open/not-ready，goal active；本轮有实现与测试进展。
+
+## 上一检查点 — 2026-11-04 Android 页面空间修复
+
+- 在当前提交三后端组合候选普通UI实际发现非人脸页仍保留大块黑色预览、控件限高380dp；已修复Android宿主按页面隐藏预览、非人脸控件占满可用空间及系统insets，既有iOS调用保持默认限高。可见性在composition读取再SideEffect通知；只在effect读取导致返回不恢复的中间失败已保留并修正。
+- 相同最终无采音/相机/推理回归在旧冻结App失败（speech titleTop1444/2400），新App通过（语音/视频/图像理解178，返回人脸1476）；组合62/62、默认54/54、共享iOS80/80与APK/testAPK/lint/iOS arm64 compile通过。见[页面空间验证](validation/android-demo-layout.md)。只更新既有MainFlow隔离模拟器，未更新真机/LM专用AVD；九保护/生产lock保持，ASR采音仍0次。
+- 用户设备配合改约2026-11-05北京时间09:00；先给开始提示再做单次最长10秒本机诊断，不能自动按时采音。继续无需用户协助的本地验证/冻结；不扩大为新三后端推理或全分支/发布通过。基础10/12、P4/P11/发布open/not-ready，goal active。
+- 最终候选固定源码a27a079/252文件匹配，BuildConfig带commit，APK c098fc41…cf1a6；该精确包layout回归通过、原test包缺席状态已恢复、普通语音页已启动并留AX/截图。ignored `android-demo-layout-20261104/verify.py`新鲜通过，TECNO原405APK/7b9test/Identity runner/权限只读复核不变。候选源码固定为a27a079，不因随后文档提交改称新HEAD build。
+
+## 上一检查点 — 2026-11-04 ASR 联网复核与次日设备验证准备
+
+- 用户连网后，TECNO默认网络159/Wi-Fi VALIDATED；一次已有授权en-US请求返回requested-without-events-not-ready，独立前后查询仍NOT_REPORTED，资源安装/转写未证，无可跟踪下载句柄。原405普通APK、原test APK/Identity runner及权限已恢复，新鲜restored回读通过；见[次日设备验证](validation/android-asr-next-device-session.md)。
+- 用户曾授权单次最长10秒本机麦克风诊断，随后明确不在设备旁，改约2026-11-05北京时间09:00；本次没有执行采音，也没有安装新探针到真机。独立operator-only单次探针已离线build/AndroidTest lint通过；9.5秒主线程清理＋9.8秒独立进程看门狗、实际销毁耗时与脱敏错误类别，限定独立复审APPROVE。该探针只验framework资源可用，不替代SDK/普通UI转写验收，不保存音频/文本；明天先提示用户再执行，不能仅因时间到/自动续接就采音。
+- 用户要求继续无需其协助的工作；推进当前源码Android三后端组合候选构建与隔离模拟器启动/页面检查。原设备包与保护文件保持；基础10/12、P4/P11/发布open/not-ready，goal active。下方无网络/未授权采音为历史口径。
+
+## 上一检查点 — 2026-11-04 最新组合候选 LM 取消与同进程重入
+
+- 已在既有6GiB LM专用AVD补齐冻结644bbde4…df30候选普通系统红图选择→native初始化后取消→CANCELLING/等待释放→CANCELLED→同输入/同PID5174重入SUCCEEDED→普通清除。254份当前源码匹配，唯一后续差异为ASR test runner顺序；不是HEAD重建。固定授权Gemma四文件摘要/权限保持，清除后cache文件为空；更新后的候选和模型留专用AVD，旧APK可回退，未操作真机包。
+- 两轮SwiftShader软件视觉1448/1448 WebGPU及CPU执行、两对销毁与先销毁后重初始化已记录；不提升硬件GPU/异步drain/自然质量/资源结论。新鲜320/320证据检查通过，含254源码/九保护/MLX lock；独立限定verifier重跑320/320并PASS本轮644模拟器UI范围，不是全分支/发布批准。先误用较旧bd89包的有界运行另留315/315与四份ASR源码差异，不代替644候选。
+- 见[本轮验证](validation/android-litertlm-reentry-20261104.md)，ignored `artifacts/verification/android-lm-latest-reentry-20261104/`。无生产改动/新build/SDK单测/下载；实际UI任务和采集均终结。基础10/12、P4/P11/发布open/not-ready、goal active；本轮有真实执行进展。TECNO只读网络仍none，ASR授权下载此前已请求但无可跟踪句柄，PAD协议/数据和F09路线仍待既有输入。
+
+## 上一检查点 — 2026-11-04 P11 当前功能证据索引
+
+- 继续只读复核TECNO默认网络仍none，未重复无回执下载、录音或改网络。ASR真实转写仍待资源/网络输入。
+- 修复P11矩阵与readiness的过时状态：Android SR后端/完整请求/动态重播、LiteRT-LM固定授权模型/同步factory/真机ZIP与生成、双端真实Identity注册删除/精确index均有证据，不再列为未实现。PAD仅独立raw-score smoke，ASR仅入口/授权请求；新状态保留资源就绪、异步drain、校准/PAD、质量/持续资源等缺口，不提升为完整能力或发布通过。
+- 旧readiness已因两份后续文档变更而hash失败；审阅并仅刷新五份文档hash（含本轮矩阵/分组说明/验收记录），原有raw benchmark hash不变。新 `artifacts/verification/p11-readiness-20261104-mainflows/summary.json`校验226 evidence引用/241 source hashes/9行gap，跟踪manifest已指向新快照。新增真机证据作为索引，不合入benchmark；重算grouped的8组数据与旧快照JSON完全相同、reportStatus覆盖不变，状态/剩余gap随新矩阵更新。
+- 相关工具36/36、LM317/317、ASR34/34、SR重播及旧60/60、AppleIdentity24项设备/6项host既有证据重验、PAD9项设备既有证据重验通过；均为已有产物校验，不是重新运行真机任务/build/SDK单测。无新独立review。九保护及MLX lock保持；仅本地记录/manifest提交，无push/merge/release，基础10/12、P4/P11/发布open/not-ready、goal active。
+
+## 上一检查点 — 2026-11-04 TECNO 视频结果完整动态重播
+
+- 复用上一轮已保留的 a21c0fcf…6e47ea 输出，不重复推理。原 content URI 的 run-as/am 重开被系统以 calling-package/UID 不匹配拒绝，未改权限；改将精确输出复制到唯一临时 Downloads 路径，由既有 Visha 打开。因此本轮是同字节结果重播，不是再次普通按钮/FileProvider 接线验收。
+- 设备端独立执行10秒无音频录屏及重播，终态 exit0，录得120个屏幕帧、媒体时长3.327067秒；稳定画面的52个屏幕帧按序覆盖全部48个输出帧。逐帧显示对应 SSIM 均值0.989209，仅用于内容绑定；固定2秒静音片段动态重播已证，不代表帧节奏预算、主观画质、音频或长期流畅度。此前255/单帧录屏失败保持历史，不改写为成功。
+- 中途多次短暂ADB断连；一次重复拉取exit0却仅32256字节，清理校验在删除前停止。原完整录屏与设备SHA一致，随后按设备端hash匹配逐项删除六个精确临时文件。验证还发现远程glob未展开，改四个精确路径逐一hash；原四份export与前检查点一致。BACK回普通Demo、PID1551/原405APK/权限保持，input/output为空，保护文件及MLX lock通过。
+- 见[完整动态重播](validation/android-video-sr-demo.md#2026-11-04-tecno-complete-dynamic-replay-of-retained-output)，ignored `artifacts/verification/android-sr-replay-20261104/verify.py`通过，连同既有60/60；采集和清理均终态。无生产代码/build/SDK单测/新复审/推送或发布。ASR网络、PAD协议/数据、F09策略仍待既有答复；基础10/12、P4/P11/发布open/not-ready、goal active。
+
+## 上一检查点 — 2026-11-04 TECNO 视频结果末帧显示与普通清理
+
+- 固定405APK/ESRGAN不变，原48帧High/CRF18素材再次经普通系统picker进入请求；实际完整48帧SUCCEEDED，1280×720/2秒/no-audio，输出1,833,519bytes/SHA a21c0fcf…6e47ea。输入SHA22b3…026d8；完整解码/全48PTS≤1µs/BT709通过，非无损质量参考。PID1551从开始、外部播放器返回到清理保持。
+- 普通“播放结果”直接进入Visha，未再出现resolver；精确URI basename f617dd4c-aa6c-4c3c-a020-84c8c510c232.mp4、export/original摘要及playPosition2000匹配。直接设备截图实际显示蓝天/白云/飞鸟，作者已目检输出参考对照；1080×608显示区域与48帧比较最佳为第48帧，SSIM0.99815，仅绑定显示内容，不称SR质量或连续流畅播放通过。
+- 首次screenrecord退出255，仅留下零时长单帧文件；mobile截图亦255，直接screencap随后成功，原因未知。没有第二次录制或重跑推理；连续播放仍未证。BACK正常返回同PID，output随后台释放；普通“移除输入”释放本轮input并显示未选择。原3export摘要不变，新第4份按原1天策略保留；录像临时文件经SHA核对精确删除。包/权限不变，未录音/改网络/签名/生产代码，历史remove-task孤留corner未修复。
+- [验证](validation/android-video-sr-demo.md#2026-11-04-tecno-visible-output-frame-and-ordinary-cleanup)与 ignored `artifacts/verification/android-sr-visible-playback-20261104/verify.py` fresh60/60，含12SR源码/9保护/MLX lock；live-run.json已记终态，全部相关命令terminal。无新build/SDK单测/独立复审；只本地文档提交，无push/merge/release。ASR网络、PAD协议/数据及F09策略仍待既有答复；基础10/12、P4/P11/发布open/not-ready、goal active保持。
+
+## 上一检查点 — 2026-11-04 TECNO 系统 ZIP 导入到真实生成
+
+- 不依赖ASR网络/PAD数据/F09策略，补齐F07真机系统ZIP导入。新鲜Awake/unlocked的TECNO/API35核对并保留原405APK/空LM目录后，临时安装冻结644bbd…df30组合候选；255源输入中254匹配，唯一差异是后续ASR测试runner顺序，不称HEAD重建。已授权3.66GB ZIP设备SHA匹配，经普通Demo系统DocumentsUI真实选择，安装busy/按钮disabled→模型已安装/后端可用；未预置App私有模型。导入与ModelStore权重/model card及导入manifest/descriptor摘要匹配，incoming暂存清理。
+- 同普通Activity系统选红图→32tokens SUCCEEDED，输出solid red rectangle；实际backend/model/revision/runtime正确，picker/native输入SHA991b…d3aa，PID32723保持。Mali-G57/Vulkan硬件视觉1448/1448 WebGPU、CPU XNNPACK及单对accelerator销毁已记录；普通UI清除后本轮输入/cache无文件，原三字节fixture保持。不是自然质量/性能/当前包取消重入验收。
+- 原APK/空LM存储/权限已恢复，普通Demo无参数启动；本轮新增模型副本、公开ZIP与恢复临时APK精确删除，其他数据保留。恢复先遇短暂device-not-found，后流式恢复安装120s未返；确认原安装进程已结束且无活跃安装，历史session2051014383 destroyed/finalStatus=-100不完整APK解析失败。候选包仍在，未误认恢复完成；专用路径完整传输/校验原APK后pm install-r Success，最终原包SHA一致。断连根因未知，失败证据保留，无ADB/设备重启或系统网络修改。
+- 见[真机ZIP到生成](validation/android-litertlm-ui.md#2026-11-04-tecno-系统-zip-导入与真实生成)，ignored `artifacts/verification/android-litertlm-physical-zip-20261104/verify.py` fresh317/317，含254源码/9保护/生产MLX lock；全部命令terminal。无新构建/SDK单测/独立复审，旧429不作批准。仅本地文档提交，无push/merge/release。ASR等待已保存Wi-Fi或网络恢复信息，PAD校准协议/数据与F09策略仍待既有答复；基础10/12、P4/P11/发布open/not-ready，goal active。
+
+## 上一检查点 — 2026-11-04 ASR 授权请求与发布产物消费
+
+- 用户已明确允许 TECNO 系统下载 en-US，本次不录音。operator-only 下载分支移到 Activity 启动前，组合 test APK 构建/lint通过（668 tasks/18 executed）；仅临时替换 test APK，普通405d64e1…082c0包不变。实际请求返回 requested-without-events-not-ready/unverified：服务不支持事件监听，既有operator fallback仅发起void请求；生产SDK未采用fallback。后置独立查询三语言列表仍空、NOT_REPORTED，不是安装或真实识别结果。
+- 当时 Wi-Fi 已开启但 `Active default network: none`；实际on-device service来自com.google.android.as。系统设置另一个Google Search包显示English(US)预装，不能证明on-device资源可用。未改网络/默认服务/接受条款，返回HOME；已异步询问可用已保存Wi-Fi名称或联网恢复信息，等待输入，不重复询问、不轮询无回执下载。后续拿到网络输入再核验后继续，下载授权仍有效，录音未授权。
+- 原test APK7b9e47ce…a621d与IdentityModelInstrumentation runner已恢复；相机/麦克风原granted前后不变，最后Awake。第一次恢复后SHA采集exit1原因未明，仅重试只读采集成功，未重复安装/下载。`artifacts/verification/android-asr-download-20261104/verify.py` fresh34/34含恢复/网络/9保护/MLX lock；resourceReadiness仍unverified。旧287检查属于f946970历史候选，本次runner已变化，不称旧255源码快照仍与工作树全等。
+- 原生speech consumer补资源查询/显式下载示例。隔离worktree-local Maven发布sdk-core/speech/backend-system-asr，`usePublishedSdk=true`四个Debug/Release消费者AAR及两项lint通过，120/120 tasks实际执行；实际解析均指向隔离m2，无project依赖/模型runtime，两个ASR AAR字节码含新入口。`artifacts/verification/android-asr-published-resources-20261104/verify.py` fresh72/72，绑定28源码/9发布文件/4消费者AAR及保护。未写全局Maven或远端、未运行消费者录音/下载、未重跑SDK单测。
+- 详见[验证与恢复边界](validation/speech-backends.md#2026-11-04-tecno-授权资源请求与独立-aar-消费)。独立review429无结论；PAD数据/校准协议和F09维护策略继续待既有答复。当前分支有真实授权请求、诊断与消费者编译进展，无未终结命令；仅本地提交，无push/merge/release。功能优先、corner后置，基础10/12、P4/P11/发布open/not-ready、goal active保持；真实转写不冒充完成。
+
+## 上一检查点 — 2026-11-04 Android ASR 资源恢复功能
+
+- 生产新增 `AndroidAsrResources`：API33精确locale资源查询、API34可观察显式下载；installed/pending/downloadable/not-reported和平台错误分开，onScheduled/进度不计安装。Main拥有/销毁每个recognizer，取消只停止监控。Demo加检查/匹配资源下载确认、状态/进度、麦克风互斥及后台/退出取消/close等待；采用独立optional common provider，不改Apple host协议/生产依赖。见[SDK说明](../android/backend-system-asr/README.md)与[验证](validation/speech-backends.md#2026-11-04-android-sdkdemo-语言资源恢复入口)。
+- 本轮实际执行SDK13/13、组合Demo62/62、默认54/54、共享iOS simulator80/80；iOS arm64 compile、组合APK/testAPK、ASR release AAR和双模块lint通过（ASR0errors/5warnings）。初始未实现编译RED、locale异常类型、快速关闭busy assertion、动态version guard lint失败保留且已修复。独立代码review429无结论，作者另作限定检查，无独立批准。
+- 冻结候选APK644bbde4…df30来自e6e7880+本轮精确255份源输入，BuildConfig working-tree。既有MainFlow/API36 install-r更新，旧bd89 APK已核对并保留可回退，数据未清；PID6469普通语音页面点击资源检查显示UNSUPPORTED_DEVICE，前后相机/录音权限denied，未下载/录音。`artifacts/verification/android-asr-resources-20261104/verify.py` fresh287/287含9保护与MLX lock；无未终结build/instrumentation命令。本轮未操作物理设备/LM专用AVD，新候选三模型实际任务未重跑，前轮bd89三后端证据仍属旧包。
+- 有服务设备的下载确认/回调/实际安装与真实转写仍未验；TECNO此前NOT_REPORTED不能被本轮无服务AVD覆盖。后续先检查已授权系统资源条件，勿把本轮SDK/UI入口完成当作ASR识别完成。PAD捕获/授权校准与F09维护路线仍待既有问题答复，不扩授权或自动采纳。功能优先/corner后置保持；基础10/12，P4/P11/发布open/not-ready，goal active；本轮有实现/构建/真实UI进展，无push/merge/release。
+
+## 上一检查点 — 2026-11-04 最新组合包三后端主流程
+
+- 复用冻结组合APK bd89bdbf…16bd7/源码7132208，无重建。既有MainFlow AVD仅2.4GiB且无LM，不扩容/新建；专用6GiB ODAI_LM_UI_20261104原APK4e8a…15e868核对可回退后install-r，保留既有已授权模型。普通系统picker红图→32token RUNNING→SUCCEEDED，输出solid vibrant red rectangle且显示精确backend/model/revision/runtime；私有input SHA991b…d3aa、固定Gemma四文件前后摘要匹配。
+- 新包LM PID3723保持，实际CPU文本XNNPACK＋SwiftShader/Vulkan软件视觉1448/1448 WebGPU，日志含单对CPU/GPU销毁。普通UI清除输入后cache文件空、模型保持、相机/麦克风未授权；当前包/模型留专用AVD继续，旧包可回退。32tokens仍截断，当前包取消重入/ZIP导入未重验，不沿用旧包覆盖。
+- 同一APK在MainFlow PID5514普通系统Browse→Downloads选原获批NASA图片，公开设备文件/host SHA88431…6cb5相同，未另留解码后内存probe摘要。固定YuNet/SFace注册ENROLLED/1模板；验证与图库发布均THRESHOLD_UNVERIFIED且图库未发布。删当前用户显示0用户/0模板及物理清理已完成；整会话删除并停用后需新授权。只盘点模型目录3文件，不把它当独立数据库全清；未提取模板/向量/密钥。
+- 新证据 `artifacts/verification/android-combined-lm-current-20261104/verify.py` fresh297/297，含249源码/9保护/MLX lock；Identity UI与绑定在`android-combined-current-20261104/identity/`。独立限定复审429无结论，不循环重试或冒充批准。见[组合主流程](validation/android-mainflow-emulator.md#current-candidate-lm-and-identity-execution)。前轮同APK实际SR已通过；真机仍旧405APK，未更换或操作真机。
+- 功能优先/Corner后置保持；主要实现缺口仍为PAD完整SDK/Demo与裁剪/授权校准、AndroidASR系统资源、Apple增强binary/F09维护路线，既有问题待答复，不重复询问或把续接视为批准。基础10/12、P4/P11/发布open/not-ready，goal active；本轮有最新包LM/Identity实际终态进展，不满足blocked门槛。无生产代码改动，无push/merge/release。
+
+## 上一检查点 — 2026-11-04 真机完整48帧与最新三opt-in候选
+
+- TECNO旧APK405d64e1…082c0/固定ESRGAN不变，系统picker实际选择原48帧High/CRF18自然派生片，PID26205处理至SUCCEEDED：1280×720/48帧/2秒/no-audio。提前提取原output，1,833,519bytes/SHA5ea2bb2b…053264；完整解码/全PTS≤1µs/BT709通过。不是原无损质量参考，历史CONFIG_UI_MODE中断保留。见[完整48帧](validation/android-video-sr-demo.md#2026-11-04-tecno-complete-48-frame-natural-request)。
+- Visha推荐点击后直接进入player；后续误用了旧resolver ref，下一观察为非预期集数选择页，BACK退出。日志证明精确URI→第三export→原output hash及playPosition2000，但未捕获实际视频画面。系统14:06:00以remove task结束旧PID，行为来源未定；重启PID31417，私有输入孤留，经SHA复核后精确手动删除。不能称普通UI清理/同PID播放返回；3export保留1天策略。真机verify.py fresh49/49含明确恢复边界，未改生产代码处理corner。
+- 另从HEAD7132208冻结249份Android/Demo/KMP输入，三opt-in最新组合APK构建/lint通过，SHA bd89bdbf…16bd7，含最新CPU_TEXT_GPU_VISION/固定LM0.18.1、SR1.4.2、OpenCV4.12.0。Demo56/56实际执行，backend33/4/6均Gradle缓存结果，未称重跑。仅install-r更新既有隔离ODAI_MainFlow_20261104，旧APK可回退，未覆盖真机包。
+- 最新组合APK在模拟器PID5514普通picker双帧AAC处理成功128×96/2帧/1音轨，精确私有input/output核对；完整解码/PTS/BT709/AAC4包hash与PTS、普通UI移除输入及input/output释放通过。media-verify.py fresh301/301含249源码/9保护/MLX lock。此包LM实际生成/Identity注册未验。见[组合候选](validation/android-mainflow-emulator.md#current-three-opt-in-candidate)。构建前失效JAVA_HOME/offline缺OpenCV及过宽package gate失败均保留，恢复固定依赖/现有Temurin21，未升级生产声明。
+- 基础10/12，P4/P11/发布open/not-ready，goal active；PAD评估协议/指标与F09维护路线仍待既有答复，Android ASR资源未证。九项保护与MLX lock不变；本轮无生产代码改动，无push/merge/release。独立限定复审服务429未取得结论，保留review缺口；本轮有完整真机终态及当前包实际SR进展，不满足blocked条件。
+
+## 上一检查点 — 2026-11-04 TECNO 视频 SR 普通 UI 有界验证
+
+- 固定旧三opt-in APK405d64e1…082c0/SR模型不变，TECNO KM9/API35/arm64/PID26205。普通系统模型与视频picker取消/重入/实际选择、非零进度取消→CANCELLED及部分输出删除通过；未捕获中间CANCELLING。
+- 原48帧自然请求同输入重入后已有非零进度（shutdown日志22encoded frames），13:13:10充电到75%触发OEM退出省电/CONFIG_UI_MODE，Activity同PID重建、codec停止、私有输入/output清理；不是48帧成功/模型崩溃。配置恢复按corner后置，无生产修复。
+- 为完成功能有界序列，明确stream-copy同一High/CRF18派生片前4帧，系统picker选择后成功1280×720/4帧/no-audio；既有32×24/2帧AAC同选中输入连续两次成功128×96/2帧/1音轨。三输出完整FFmpeg解码/PTS≤1µs/BT709，两次AAC4包hash/PTS均匹配。自然输出SHA21b0c5f0…a54c45/191636bytes；不是原无损质量参考或真机48帧验收。
+- 分享第二AAC打开OEM chooser后BACK，未发送；播放自然片经resolver“仅此一次”到Files TosActivity，未接受首次服务条款，实际播放器画面未验。两export与各自原始output一致；移除输入后本轮私有input/output释放，2export按1天策略保留，公开fixture保留。原LM3字节fixture未操作。
+- ignored `artifacts/verification/android-sr-physical-ui-20261104/verify.py` fresh108/108；设备/API/ABI/model/APK、12SR源码/补充当前源码快照、9保护及MLX lock核对。旧APK不验证最新LM策略，完整当前源码与APK等价未宣称。独立证据复审确认有界核心流程；URI→export hash已补自动gate，未留存21帧UI的说法改用shutdown22encoded frames。AAC旧采样未留私有input SHA，保留为证据缺口，不重跑或补造历史。详见[范围与失败记录](validation/android-video-sr-demo.md#2026-11-04-tecno-ordinary-ui-bounded-natural-and-aac-sequence)。F09候选复审另已同步本地commit eed885f，仍draft-not-adopted。
+- 基础10/12、P4/P11/发布open/not-ready，goal active；PAD评估集/协议与F09路线仍待既有问题答复，Android ASR资源未证。无push/merge/release。当前有实际UI/媒体/清理进展，不满足blocked门槛。
+
+## 上一检查点 — 2026-11-04 TECNO 普通 LM UI 与自然图像重入通过
+
+- 设备新鲜预检Awake/unlocked；复用固定optional LM APK及设备已授权模型，无生产改动/重建/下载。先备份原APK与rename保留旧空LM目录，debug私有目录预置后正常ModelStore安装校验。设备完整APK/模型SHA匹配。
+- 普通Activity系统图片picker取消重入→红图生成成功；第二轮实际Mali初始化后点取消，CANCELLING禁生成→CANCELLED；同PID9562选既有公开Common swifts第0帧，64tokens生成成功，输出含蓝天/白云/飞鸟。两轮均显示真实backend/model/revision/runtime，64tokens仍截断，不称完整自然质量。
+- 三轮native日志为Mali-G57 MC2/Vulkan Integrated GPU、vision1448/1448 WebGPU、CPU文本XNNPACK，均有CPU/GPU销毁。清除输入后本轮私有输入/native cache无文件；旧3字节provider fixture保持。原APK `405d64e1…082c0` 与空LM目录已恢复、普通Demo无验证参数重新启动；本轮新增模型/导入副本已删除，公开输入保留复现。
+- `artifacts/verification/android-litertlm-physical-ui-20261104/verify.py` fresh **67/67**，含source/model/APK/输入与原文件恢复、9项保护及MLX lock；独立限定证据/文档复核PASS。首次目录guard和verifier计数失败保留后修正；不是runtime失败。有界PID日志reader已terminal。见[真机UI边界](validation/android-litertlm-ui.md#2026-11-04-tecno-普通-ui-与自然图像重入)。真机ZIP选择、人工触摸/任意provider、自然质量/性能及异步drain未验。
+- 只读代码盘点确认剩余主要实现依赖PAD捕获/授权校准输入、Android ASR资源及F09兼容维护路线；不凭延续消息采纳待答复路线，不猜阈值/扩下载。基础10/12、P4/P11/发布open/not-ready，goal active；本轮实际真机UI进展，不满足blocked门槛。仅本地文档提交，无push/merge/release。
+
+## 上一检查点 — 2026-11-04 Android 自然视频 SR 普通 UI 主流程通过
+
+- 复用 `ODAI_MainFlow_20261104` / emulator-5580、原 immutable 组合 APK 和 ESRGAN；本轮未改生产代码或重建。原自然素材 High444 profile 返回FAILED/PLATFORM，独立平台probe为0个exact decoder；保留失败。明确派生同内容H264 High/CRF18副本后，平台probe为3候选，系统picker实际选择并完成48帧CPU ESRGAN。
+- 普通UI终态 `SUCCEEDED / 1280×720 · 48 帧 · 2.0 秒 · 音轨 0`；输出2,240,688字节、SHA `ddce5b1dd8eeb3dbc9532efe2beb4a5334845bfa163301ff8ca9bc790e517ca5`。独立全解码/48帧/PTS≤1µs/BT709/no-audio通过；抽帧仅作内容检查，不称自然/时域质量通过。
+- 提取输出后点移除输入，本轮私有输入/输出文件释放，旧2份export保留；PID2523保持。有界logcat reader已终止。证据脚本 `artifacts/verification/android-sr-natural-20261104/verify.py` fresh通过，含8份源码/9项保护/生产MLX lock；见[验证与边界](validation/android-mainflow-emulator.md#natural-video-main-flow)。AVD与原公开输入保留复现，不操作物理设备。
+- 下一功能仍为PAD正式接入/授权校准、Android ASR资源及Apple增强binary；F09固定补丁路线与PAD评估集异步问题尚待答复，不自动采纳。基础10/12、P4/P11/发布open/not-ready，goal active；仅本地文档提交，无push/merge/release。本轮有实际自然输入终态与外部验证进展。
+
+## 上一检查点 — 2026-11-04 F09 固定兼容候选已具体化，未采纳
+
+- 官方API fresh：Swift issue91540 open、PR91672 open/unmerged、swift-collections latest1.7.5；相关PR92814已合入main，不证明当前编译器包含。只有Swift6.4.2，本机arm64 iOS18最小interface复现default exit1；仅失败target加selector flag exit0，未重跑完整archive。
+- [候选](validation/f09-compatibility-candidate/README.md)包含4文件/2patch的精确diff、前后SHA和runtime绑定。fresh临时patch replay复现全部4个已记录diagnostic hash；5个unknown分支fatalError风险明确披露。旧diagnostic Git alternate对象库已缺失，4原始源码按固定官方revision只读恢复作比对；未下载完整依赖或改生产lock/缓存。
+- 候选仍为draft-not-adopted。后续独立只读复审已完成，取代此前429无结论：锁/revision/runtime、两patch及4文件前后SHA匹配，临时独立重放复现全部patched hash；未发现阻断候选可评审性的语义缺陷。临时副本已删除，原始回显仅在会话，ignored目录保留independent-review-summary.json。采纳门槛仍缺fail-closed applicator，以及完整依赖测试/20模块双slice/C/Metal资源/搬移binary consumer；下一需显式兼容维护策略决定，不能把候选复审或旧wrapper当F09通过。PAD授权评估集问题仍待答复，Android ASR资源仍未证。基础10/12、P4/P11/发布open/not-ready，goal active；九项保护与MLX lock不变，无push/merge/release。上一轮有UI证据/提交进展；本轮有新鲜compiler复现和具体候选，不计重复无进展。
+
+## 上一检查点 — 2026-11-04 Android LM 普通模拟器 UI 通过
+
+- 不改生产源码，复用 `c5be267` immutable APK（安装摘要匹配），新隔离 API36 arm64 `ODAI_LM_UI_20261104` / emulator-5582、6GiB RAM/32GiB data；真实系统 ZIP 导入与图片选择均含取消重入，完整授权3.66GB模型安装后，两轮普通 UI 生成 `SUCCEEDED`，32-token输出描述固定红矩形。
+- 中间一轮实际 native 初始化后取消，`CANCELLING → CANCELLED` 等待释放且禁生成；同 PID2552 再生成成功。补录原生日志覆盖第三轮初始化与11:44:42.921 accelerator destroy，后置两次PID回读一致；清除输入后cache无文件、picker/incoming无残留，仅空父目录。`verify.py` fresh **57 checks passed**，独立补审 **PASS（限定模拟器普通UI）**。见[新验证](validation/android-litertlm-ui.md)及 ignored `artifacts/verification/android-litertlm-ui-20261104/`。
+- 实际 vision delegate 为 SwiftShader Vulkan/WebGPU、CPU/Software adapter，不是硬件GPU性能。物理设备后置只读观察已Awake/unlocked，不能延用历史Asleep；本轮没有给真机UI输入。真机UI、自然质量、异步drain/streaming与长期资源仍开放。
+- F07不再缺下载/权重或真实图像生成；下一功能缺口是PAD正式SDK/Demo接入与裁剪/校准协议、1:1/1:N阈值、Android ASR系统资源、Apple增强binary。九项保护及MLX lock保持，基础10/12、P4/P11/发布仍open/not-ready；无push/merge/release。
+- PAD官方裁剪调查已完成：原作者直接bbox与OMZ方框1.2×路径不同，无唯一模型强制协议，详见[接入依据](validation/pad-model-candidate.md#2026-11-04-detectorcrop-protocol-lookup)。已异步询问现有授权评估集/采集协议/指标，等待输入；不新增样本/猜测阈值。F09受支持依赖修复刷新代理429，无新结论，勿把历史版本调查称当前上游证明，也不重复诊断archive。上一goalturn有实际UI终态/原生日志/PID/清理新证据，本轮收尾为progress，未满足blocked门槛。
+
+## 上一检查点 — 2026-11-04 Android LM 真机红图生成通过
+
+- 已批准CPU文本＋GPU视觉可选策略完成，默认CPU_ONLY及runtime0.18.1保留。模型下载/USB传输已解决；TECNO/API35设备完整SHA与实际ModelInfo检查通过，真实Demo→ModelStore→client→Android bridge→生产factory输出 `Red`。runId `849795aa-2418-4be0-bd8a-7777acc1acba`，模型revision及runtime匹配，close/lease/input/cache清理均true，严格validator fresh passed。generationMs83332含校验/初始化/生成，非纯decode基线。
+- ignored `artifacts/verification/android-gemma-vision-20261104/` 保留 `mixed-generation-report.json`、完整stdout/stderr、exit、运行APK/hash/源码快照及 `verify-mixed-result.py`。精确PID25760已退出，设备仍Asleep，普通Demo未覆盖、无Activity/相机/麦克风/私人媒体访问。shell功能证据不替代UI/取消重入/自然质量/长期资源。
+- 独立有界review REQUEST CHANGES：instrumentation补显式backendPolicy参数；手工预置畸形descriptor的泛化availability诊断按corner后置，ZIP未知策略导入零安装/零构造回归已补。无复审APPROVE，不扩大为全分支批准；最终本地后端33/33、Demo55/55、APK/testAPK/lint通过，既有模拟器默认admission4pass＋1opt-in skip。
+- 继续优先剩余功能：Android LM系统ZIP/图片选择与生成UI（真机锁屏尚未操作）、PAD正式接入/裁剪协议与授权校准、1:1/1:N阈值、Android ASR真实转写资源、Apple增强binary。基础里程碑10/12，P4/P11/发布仍open/not-ready。九项保护和MLX lock保持；无push/merge/release。
+
+## 上一检查点 — 2026-11-04 显式 CPU 文本＋GPU 视觉实现
+
+- 用户已明确批准 `CPU_TEXT_GPU_VISION` 可选路线并继续；不要重复询问路线/许可。默认CPU_ONLY、固定runtime0.18.1保留，public model/descriptor→spec→session→engine策略已贯通，无自动回退。ModelInfo `-1` 按固定官方源码表示未定义；仍校验模态、所选后端、有效budget和最低runtime。
+- 后端33/33、opt-in Demo54/54、APK/testAPK与lint离线通过，证据 `artifacts/verification/android-gemma-vision-20261104/mixed-local-build.*`。新APK实际模拟器完整模型元数据：CPU vision=false、mixed=true、engineCreated=false，不称GPU初始化/推理完成。真实manifest/descriptor/红图已准备于 ignored `mixed-run/`；真机push-Z与有界独立review进行中。模型下载不再阻塞，当前要验证传输和实际delegate/生成。
+- 九项保护已核对，未修改；当前更改未提交/推送/合并/发布。详细见[Android LM验证](validation/android-litertlm-sync-demo.md)。继续物理设备无Activity推理，不解锁、不碰相机/麦克风/私人媒体；若设备传输阻塞保留准确证据并尝试有界替代路径。P4/P11/发布仍open/not-ready。
+
+## 上一检查点 — 2026-11-04 Gemma 已授权并完整下载
+
+- 用户已明确选择官方 `google/gemma-3n-E2B-it-litert-lm`，并回复“已完成官方许可确认”。固定 revision `c03b6f60b8da6c5400b6838a2cf26420f80c0a01` 访问预检成功；无需再次询问许可或文件输入。代理没有接受条款或读取/输出 token。
+- 用户提供本机 aria2 RPC 和映射目录后，专用任务 `4b692dd317152eaf` 已 `complete/errorCode=0`；3,655,827,456 B 的完整 SHA-256 为 `2ed7bc3a0026c93d5b8a4544b352d9d00cd66ff0bac3ef6a20ac3d2cba4010d6`，与官方 LFS 一致。模型位于 ignored `artifacts/verification/android-gemma-vision-20261104/model/`，另保留用户下载目录专用副本。凭据/签名 URL 不写入文档或证据；没有模型分发。
+- 新增显式 ModelInfo/真实 Demo bridge shell 探针及固定合成红 PNG；后端29/29、opt-in Demo52/52、APK/test APK/lint通过。错误摘要的同大小文件在ModelInfo前被拒绝；生产CPU/vision/runtime gate不改。真机测试App冻结，USB大文件push又无回执；已只结束本轮push并按serial恢复，未解锁、未创建引擎或覆盖普通Demo。当前转到既有专用API36/arm64模拟器先验证ModelInfo，真实推理尚未通过。
+- 详细新鲜证据见[Android LM验证](validation/android-litertlm-sync-demo.md)。下一步先读 actual ModelInfo 报告；兼容后才准备真实manifest/运行图像请求。CPU+vision未证时不静默换GPU/runtime，不把下载或host测试当生成完成。九项保护保持；仅本地工作，未push/merge/release，P4/P11/发布仍open/not-ready。
+
+## 上一检查点 — 2026-11-04 Android ASR 资源状态复核
+
+- 新增只查询 `checkRecognitionSupport(en-US)` 的独立 instrumentation；无 Activity、录音、权限申请或下载。离线 test APK 构建及 lintDebug 通过。TECNO KM9/API35 真实回调三份语言列表仍空，`NOT_REPORTED`，资源就绪未确认；不能把历史错误13当新转写结论。
+- ignored `artifacts/verification/android-asr-assets-20261104/` 绑定源码/immutable test APK/实际安装hash/原始Bundle。普通 Demo hash 不变；备份的原 test APK与runner已恢复，设备Asleep，九项保护不变。见[证据边界](validation/speech-backends.md#2026-11-04-android-离线资源只读复核)。F05仍缺真实转写/取消重入/离线质量；PAD可用判定仍需裁剪协议与授权校准数据，不扩成绕过policy的整图判定。
+- F07权重调查中间回报列出官方Gemma3n-E2B int4候选，最终代理429，HF元数据未刷新、CPU+vision组合仍未证，不下载/接受许可。[固定候选与输入门槛](validation/android-litertlm-sync-demo.md#2026-11-04-权重输入门槛复核)供后续取得已授权本机文件时复核；无当前权重哈希，不生成假manifest。上轮和本轮均有实际进展，不满足blocked的三轮连续无可执行工作门槛，goal保持active。
+- 已通过结构化异步问题请求“已有获授权CPU+vision .litertlm 的本机路径或精确模型ID”，待用户答复；明确Gemma条款需要使用者接受，现有PAD/SR授权不覆盖该权重。不要重复提问，也不要把自动goal续接当作答复或许可。
+
+## 上一检查点 — 2026-11-04 PAD 官方模型真实 iPhone 原始分数
+
+- 用户最新明确“允许”承接此前待答复的固定官方 PAD 模型/既有 NASA 图本机试验。已下载原定 12,270,179-byte ONNX，固定96位校验值实际为 **SHA-384**，已更正文档误标 SHA-512，未换模型；SHA-256 `c4c99af04603b62d7e44f6f4daeb33e0daeccc696008c0b1d62f6f5cebbb3262`。许可 MIT/Apache-2.0 差异仍保留，无分发授权。
+- 新增隔离 `probes/ios-opencv-pad/` 和生成器，复用既有 OpenCV4.12 static arm64；RGB/NCHW 与报告持久化 host RED→GREEN，独立设备 App 构建通过。最终 iPhone **9/9**，runId `0C5B5BD9-F924-4486-BD82-90A64B79C689`，含设备 SHA384 和缺席模型脱敏诊断 RED→GREEN；两次实际 `1x2` 输出一致且有限。明确实验性整图 CUBIC128 预处理，无校准 face crop、判定或 proof。见[证据与边界](validation/pad-raw-score-smoke.md)。
+- ignored `artifacts/verification/pad-raw-score-20261104/` 绑定 immutable App/源码/模型/图片与设备 install/launch/report；最终 PID37633 终止并回读 absent，普通 Demo 无参数恢复。`verify.py` fresh passed，九项保护及生产 MLX lock 不变。独立 review REQUEST CHANGES 的三项 Medium 已按证据修复/裁定：异常保留类别/数值码，不采用会泄漏路径的原始文本建议；无复审 APPROVE。附加 model.yml 取证因自动审批429未执行，研究代理429无结论；不绕过或循环重试。
+- 本切片仅关闭固定 PAD 模型在目标 runtime 能否推理；完整 PAD SDK/Demo 接入、明确人脸预处理/捕获协议、授权攻击/校准数据和策略仍缺。1:1/1:N 校准、Android LM/ASR 资产和 Apple增强二进制分发继续开放。corner/长期资源后置；goal active，P4/P11/发布 open/not-ready，未 push/merge/release。下方“PAD授权未答复”属于此前状态，已被本检查点取代。
+
+## 上一检查点 — 2026-11-04 Apple Identity 独立复审与诊断合同修复
+
+- 两条独立原生审查发现 Swift 丢弃原生阶段诊断；已补可选 `OpenCvIdentity.open(modelStore:diagnostic:)`，仅传允许列表 stage/category，验证 NSError domain，不保留原始错误/路径/文本，不修改 core IdentityError。回调在 native gate 解锁后同步执行，回调内关闭/取消继续优先。普通调用保持源码兼容，默认 Apple 包无新依赖。
+- RED 缺席类型→optional host **6/6**；最终不可变 probe 在 iPhone **24/24**，runId `51F4C9E6-01DC-4A01-9952-82F497543AB2`，包含真实检测/embedding/注册/purge、原生诊断回传、回调内同步 close 无死锁/单次发出与模型 lease 释放。探针和普通 Demo 构建通过，普通 App 已在安装结束后无验证参数恢复。九项保护与生产 MLX lock 不变。ignored `artifacts/verification/apple-identity-review-20261104/verify.py` fresh passed，见[证据与复审](validation/apple-opencv-identity.md#2026-11-04-independent-review-and-native-diagnostic-delivery)。
+- 复审 code-reviewer **COMMENT**、architect **CLEAR**，仅有1个 Medium 大图 PNG 重编码超10MiB边界按用户指示后置，未假称已修。进程全局 OpenCV logger/重建整个 shared controller 为既有非阻断关注；不扩大成长资源专项，不声明完整分支 APPROVE。PAD/识别校准/Android LM与ASR资源仍缺；PAD 问题之后未见明确答复。F09 映射确认仍需生产编译器/依赖门槛，新上游研究代理因429未取得状态，不按旧快照断言最新上游。roadmap goal active，发布 open/not-ready，未 push/merge/release。
+
+## 上一检查点 — 2026-11-04 Android 隔离模拟器主流程 UI
+
+- 新建的 `ODAI_MainFlow_20261104` / API36 arm64 复用既有本机系统镜像和 immutable 三 opt-in APK；安装 SHA-256 `dd610a4cfb7ad40a53b8320cd174e2d54b3bc0048108217c1b18b1f127eb6e7f` 与历史快照相同，7份绑定源码匹配，Android/shared 源码自 `cadfea8` 无差异。无新增下载/生产修改；9项保护文件不变。
+- 普通 UI 系统 picker/既有模型导入与授权会话、获批 NASA 图片→真实 OpenCV 注册1模板、未校准验证/图库拒绝、候选物理删除至0模板、整次停用通过。视频系统模型/媒体 picker→实际 ESRGAN 4×（32×24→128×96、2帧/AAC）→播放 Activity→重入→分享 chooser 通过；未选择接收人/发送文件。两份导出独立 FFmpeg 完整解码，帧 PTS 与4个 AAC packet/hash/PTS 匹配。
+- ignored `artifacts/verification/android-mainflow-emulator-20261104/verify.py` fresh `status=passed`，含11份 UI 观察、Activity events、APK/源码/保护校验与两份输出。详见[验证边界](validation/android-mainflow-emulator.md)。Android 真机未解锁；短片播放器仅有启动/返回证据，持续视听、真机触控/任意provider、自然质量/校准/PAD仍缺；不提升 P4/P11/发布，也不重做已通过的后端。
+- 下一主要功能仍为独立 PAD、识别校准及 Android LM/ASR 资源；恢复这些分支时先核对已发出授权问题及用户答复。当前 roadmap goal 保持 active，本切片只补 UI 证据，不回到 corner/长期资源专项。模拟器与隔离 AVD 保留复现，不触碰其他设备/AVD。
+
+## 上一检查点 — 2026-11-04 Apple Identity 真机系统 Files/UI
+
+- 普通 `0e215bb` Demo、无 validation 参数，经真机 UI 自动化完成系统图片 picker 取消/重入、本地 Files 选择获批图片、共享输入 ready、点击注册得到 `ENROLLED · opencv.identity.apple` 与1模板、验证拒绝 `THRESHOLD_UNVERIFIED`、全 grant 删除停用，以及系统文件夹 picker 导入两份固定模型。重启普通 App 为 model-ready、无活动会话/输入；**9/9 观察检查**。见[完整边界](validation/apple-opencv-identity.md#2026-11-04-ordinary-demo-system-files-ui)及[复现](../probes/ios-opencv-identity/FILES-UI.md)。
+- 隔离来源 `io.ondeviceai.fixture.identityfiles` 仅把既有获批图片/models 放在本机 Documents，系统 Files 的 IdentityInput 可见；来源 App 保留作复现，真实 Demo 没有增加 file-sharing 标志。读取回传图哈希与已批准 NASA 图相同，无 Photos 写入、新样本/模型、相机/麦克风或解锁。普通 App binary 与上轮 inventory 相符；9项保护不变。ignored 证据 `artifacts/verification/identity-files-ui-20261104/`；未重试429复审。
+- 这关闭的是本地 Files provider/自动化点击主流程，人工触摸、任意外部 provider、准确率/校准与 PAD 仍未验；不提升为 P4/P11/发布完成。下一主功能仍依赖下方列明的 PAD 新模型授权、校准数据/策略、Android LM/ASR 资源；已发出的 PAD 授权问题仍待答复，不视自动续接为授权。
+
+## 上一检查点 — 2026-11-04 Apple Identity Files 输入
+
+- 可选 Apple Identity host 新增“从文件选择图片”，复用现有 ImageIO 方向变换与 controller/opaque probe/注册流程；读取在主线程外，10 MiB 上限，security scope 覆盖解码。失败清除旧身份输入，可重试；未写入 Photos。
+- 新版真实 iPhone host→bridge→ViewModel **18/18**，runId `0A1A9BEA-3721-4EB6-A21E-D7994245FC28`，包含文件输入/错误文件后重试与真实 SFace 注册；验证/普通/flag-disabled Demo 均构建通过，普通 App 已无参数恢复。证据 `artifacts/verification/identity-files-input-20261104/`，见[Files 验证](validation/apple-opencv-identity.md#2026-11-04-files-image-input)。系统 Files provider/触控仍未验，不能把程序化 handler 当 UI 验收。独立 review 再次 429，无结论；九项保护不变，仅本地工作。
+- 下一实质缺口仍为独立 PAD、授权校准策略/数据、Android LM/ASR 资源。[PAD 官方候选](validation/pad-model-candidate.md)已固定 ONNX 来源、哈希、输入与许可标注差异；单独请求其本机下载/复用既有图片的原始分数试验授权，**未获答复前不下载、不推进依赖该许可的工作**。不新增样本、不分发、不接受门控许可、不输出 LIVE/SPOOF/proof。继续保持总目标 active、P4/P11 open/not-ready，不重做下方 Apple 后端。
+
+## 上一检查点 — 2026-11-04 Apple 真实 OpenCV Identity 与 Demo
+
+- 新增独立可选 `apple-opencv/`：已批准 OpenCV 4.12.0 + 固定 YuNet/SFace，真实 CPU 检测/对齐/128维 embedding，通过现有 LocalIdentityBackend 持有/释放模型租约。默认 Apple 包无 OpenCV。官方旧 framework 是静态 archive，已按原二进制转换成 static-library XCFramework；支持 arm64 真机/x86_64 模拟器，无 arm64 模拟器 slice。使用与固定哈希见[包说明](../apple-opencv/README.md)及[验证](validation/apple-opencv-identity.md)。
+- iPhone16 Pro Max 真实 native/session **21/21**，runId `7FF35B5B-D64B-4D95-88D2-D8FB879882AC`；实际 Demo host → IOSIdentityBridge → shared ViewModel **15/15**，runId `90CAC894-C3E4-4BE9-A163-EA041255590C`：模型导入、显式同意后会话、两候选录入、未校准验证/图库拒绝、整次 grant purge/reset 与未完成清理重开禁用。复用同一获批 NASA 图，不代表两个人或准确率；图片通过沙盒传入，未打包。无相机/麦克风、未解锁设备，触控/picker 未验。
+- 完整默认 Apple **481/481**、可选 host contracts **3/3**；可选 device/test 与 x86_64 simulator test build、KMP device framework、普通/验证/flag-disabled Demo build 通过。设备清理全 grant 并保留 durable marker 至成功；失败或中断后明确禁用，自动恢复按 corner case 约定后置。独立 reviewer 的两个具体意见已修，但服务随后 **429**，无最终独立 APPROVE。九项保护哈希不变；仅本地提交，无 push/merge/release。ignored 证据 `artifacts/verification/apple-opencv-identity-20261104/`。
+- **下一主要功能/输入**：独立 PAD、真实 1:1/1:N 的授权数据与校准策略，Android LM 授权权重及 ASR 离线资源；Apple 真实 embedding/注册与双端 exact index/query 已实现，不从头重做。阈值仍 UNVERIFIED，不伪造 match/识别结果；自然质量、minOS、触控/系统 picker、长期资源与发布仍各自开放。原 roadmap goal 保持 active。
+
+## 最新续接 — 2026-11-04 Apple 精确 Identity index/query
+
+- Gallery Demo 已本地提交 `cadfea8`。继续补齐 Apple 公开 encoded-image probe 的精确 cosine 1:N index/query；公开 builder 接现有 IndexStore，完整 embedding space/count/dimension/有序 Float32 LE 与当前授权模板 lease 逐位绑定，保留 fixture provenance、subject-max/topK、quality/VERIFIED policy 和最终授权 gate。同步登记 Apple SDK 分发工程源文件。详见[验证](validation/apple-exact-identity-index.md)。
+- RED 先证明 builder 缺席，再证明 codec 已通过而旧 engine 仍拒绝 encoded probe；完成后完整 Apple **481/481**，其中 Identity **322/322**；Swift Release Identity target 和 unsigned iphoneos Release framework build 均通过。仅合成向量/encoded bytes，没有新增人脸数据、模型或 runtime。独立 review 因服务端 **429** 无结论，不能称独立 APPROVE。九项保护文件哈希不变，未 push/merge/release。
+- 下一主要功能输入仍是 **Apple 真实 embedding adapter/runtime**、独立 PAD、真实 1:1/1:N 所需授权数据/校准策略，以及 Android LM 授权权重/ASR 离线资源。Apple exact query 是已实现机制，不冒充 Apple 真实识别；corner/长期资源仍后置。原 roadmap goal 保持 active。
+
+## 最新续接 — 2026-11-04 Identity 多候选与图库 Demo
+
+- 共享 Identity 页面已接同一 bridge 内新增/选择/删除候选、多模板计数、发布/删除图库。切换候选清空 probe，验证仅取该候选最后模板；编号仅本会话有效，不保存业务名或原图/向量。OpenCV config 提供 ownership 与 UNVERIFIED gallery policy，因此实际图库发布仍 `THRESHOLD_UNVERIFIED`，不伪造校准结果。详见[验证](validation/identity-gallery-demo.md)。
+- 删除候选先删除当前图库并等待 purge，再删除候选；pending 可刷新继续，`PURGE_FAILED` 为终态，明确显示本会话无法恢复并暂停候选删除，不提供无效刷新。真实 failed-purge 恢复按用户 corner case 指令延期。当前图库需显式删除后才能重新发布。会话停用按整个 local grant 撤销/模板 purge，返回 native revocation receipt。审查的图库未删除 Medium 已补 3 个 RED→GREEN；复审 COMMENT 的终态恢复问题明确延期，并补状态/文案回归。
+- 共享 simulator **80/80**、Identity **327/327**、默认/三 opt-in Demo **48/53**；默认/组合 APK/test APK/lint 与 iOS arm64 compile 通过。TECNO KM9/API35 两候选记录真实注册、单独删除、grant-wide purge、重开存储候选撤销与 receipt PURGED、模型 lease 释放通过，最终源码 run/APK 身份见验证记录；同一获批 NASA 图不代表两个不同人或准确率。ignored 证据 `artifacts/verification/identity-gallery-demo-20261103/`（开始于11月3日）。
+- 设备当前仍 `Asleep`/keyguard showing，未解锁、无 Activity/相机启动，实际触控/picker 未验。九项保护文件保持原样；未 push/merge/release。剩余主要功能/输入：Apple 真实 Identity、独立 PAD、实际 1:1/1:N 所需授权数据/校准策略、Android LM 授权权重和 ASR 离线资源；corner/长期资源后置。下方缺少多用户 UI 的说法为此前状态。
+
+## 最新续接 — 2026-11-03 Android 精确 1:N index/query
+
+- 补齐 Android `ExactCosineIdentityIndex` 与 encoded-image 真实查询路由，按当前授权 template leases 验证完整 embedding-space/顺序/向量，使用现有 subject-max/topK/策略/撤销/删除机制。OpenCV session 已换为实际 builder；不再是 fixture-only。详见[验证](validation/android-exact-identity-index.md)。
+- Identity **327/327**、默认 Demo **48/48**、三 opt-in Demo **53/53**、OpenCV backend **6/6**；默认/组合 APK、test APK、双模块 lint 和 Identity release AAR/POM 通过。有界独立复审最终零 finding、APPROVE；不代表完整分支通过。
+- TECNO KM9/API35 最终源码 runId=`329669f2-2921-4bd6-abdc-2f0cf130bd40`，真实检测/对齐/embedding/注册/删除与验证/图库未校准拒绝通过；已核对安装 APK 哈希。一次 USB 流式安装卡住后，只结束本次 client、按 serial reconnect，非流式重装成功。ignored 证据 `artifacts/verification/android-exact-identity-index-20261103/`。九项保护文件哈希未变，未 push/merge/release。
+- **仍缺的核心功能/输入**：实际模型 1:1/1:N 识别结果需要授权数据与校准策略，当前仍 `THRESHOLD_UNVERIFIED`；可用多用户图库 UI、Apple 真实 Identity、独立 PAD 尚未交付。Android LM 仍缺授权权重、ASR 缺离线资源。真实 picker/同意/注册 UI、自然质量和发布验收未验；长期 corner/resource 继续后置。下面“1:N index/query 尚未实现”为本切片之前的历史状态。
+
+## 最新续接 — 2026-11-03 Android 真实 Identity 主流程
+
+- 用户批准可选 OpenCV 4.12.0 与官方 YuNet/SFace 权重，并单独批准 NASA public-domain astronaut 仅作本地流程验证。新增 `android:backend-opencv-identity`，真实 CPU 检测→五点对齐→128维归一化 embedding；Demo `-PenableOpenCvIdentity=true` 接模型 ZIP 导入、显式本机授权、AndroidIdentityBridge/Keystore 加密注册及删除。默认无 vendor runtime，SR+LM+Identity 三者组合通过。详见[验证](validation/android-opencv-identity-demo.md)与[使用](../demo/androidApp/src/opencvidentity/README.md)。
+- 最终源码 TECNO KM9/API35 runId=`b542f467-4f2a-4a09-920a-15bd06fc89bb`：授权正例检测/对齐/embedding/bridge 注册、blank 拒绝、未校准策略拒绝、候选删除/幂等 close/模型 lease 释放通过。安装后 APK SHA 与 immutable final 快照一致；无相机、无 Activity、未解锁；不代表准确率/PAD 或 picker/UI 实操。
+- backend **6/6**、默认 Demo **48/48**、三 opt-in **53/53**、共享 simulator **65/65**；APK/test APK/lint、iOS arm64 compile、release AAR/POM 通过。独立有界审查两项 Medium 已修，诊断 UI RED→GREEN，最终 re-review 零 finding、`COMMENT`，不是完整分支 APPROVE。ignored 证据 `artifacts/verification/android-opencv-identity-20261103/`，九项受保护修改保留，未 push/merge/release。
+- **下一功能缺口**：生产 **1:N index/query 尚未实现**（当前 `INDEX_UNAVAILABLE`），不能只归为校准缺口；1:1 未校准仍 `THRESHOLD_UNVERIFIED`。Apple 真实 Identity、独立 PAD、Android LM 授权权重及 Android ASR 离线资源继续开放。真实 picker/同意/注册 UI、自然质量、minOS/长期 native GC 资源、发布门槛不变；先补可本地执行的功能，corner/resource 后置。
+
+## 最新续接 — 2026-11-03 Android 视频真实超分主流程
+
+- 用户明确授权新增可选官方推理 runtime 与公开许可的官方 SR 示例权重用于本地验证；采用 `com.google.ai.edge.litert:litert:1.4.2` + TensorFlow 官方 MIT ESRGAN 4×，固定模型 SHA-256。新增 `android:backend-litert-sr`，实际解码→RGB/tiled model inference→H.264 编码/AAC passthrough，保留帧 PTS、取消/drain 与输出 lease。Demo `-PenableLiteRtSr=true` 接模型导入、真实私有视频复制、处理和 FileProvider 播放/分享副本；默认无 vendor runtime，可与 LM opt-in 组合。详见[验证](validation/android-video-sr-demo.md)与[使用/profile](../demo/androidApp/src/litertsr/README.md)。
+- 真机 TECNO KM9/API35、公开合成 64×48 两帧 AAC clip→256×192：实际权重处理、音轨保留/丢弃、首帧进度取消/drain/同 client 重入、close 后输出可读、release 后删除均通过。最终 runId=`55ae0b40-3d07-483f-a62f-d8a0dfd2b5cd`，runner `status=passed`。独立 ffprobe/FFmpeg 复核两帧 PTS、4 AAC packet hash/PTS、无音轨输出与全文件解码通过。不是自然/时域质量验收。
+- 新 backend 4/4、video/bridge 17/17、默认 Demo 43/43、双 opt-in Demo 47/47、共享 simulator 65/65；APK/test APK/lint、共享 iOS arm64 compile、backend release AAR/POM 通过。独立 review 一个 medium 输出复核缺口已补 runner 重开文件断言及 fresh device/external validator；无第二次独立 APPROVE。ignored证据 `artifacts/verification/android-video-sr-20261103/`。
+- 原设备仍锁屏/息屏；headless 测试不解锁/不打开 Activity，真实 picker/playback/share UI 仍未验。AAC 负 priming/edit-list、未知色彩、超过短片 profile 均明确拒绝；自然质量/时域/tile seams/更广 profile/长期资源/minOS/发布仍开放。九项保护修改未动，未 push/merge/release。
+- **下一功能优先切片**：继续真实身份/PAD 的可用生产模型与 Demo 路由。Android 多模态仍缺授权 `.litertlm` 权重（不代为接受 gated 条款）；Android ASR 仍缺支持且授权的离线资源。有设备解锁条件再做当前视频模型/媒体 picker、播放分享实操；不回到长期 corner/resource 专项。F06/P11/发布保持 open/not-ready。
+
+## 最新续接 — 2026-11-03 Android 多模态功能优先
+
+- 用户明确先完成功能、后置 corner case；本轮不继续扩展 F04 竞态/资源测试。执行顺序调整为 Android 多模态、Android 超分、真实身份/PAD；Android ASR 仍缺设备离线资源。
+- F07 已增加固定 LiteRT-LM 0.18.1 的同步生产 adapter、公开 `LiteRtLm.createBackend` 与 Android Demo 可选 image bridge。正常 `sendMessage` 返回才作为本轮 completion；异常仍保留资源并 poison。取消暂为丢弃结果并等 sender 返回，快速 native cancel/streaming 后置。默认 Demo 不引入 vendor runtime；`-PenableLiteRtLm=true` 自动显示图像理解、隐藏不支持的视频选择。详见[本轮验证](validation/android-litertlm-sync-demo.md)和[模型包格式](../demo/androidApp/src/litertlm/README.md)。
+- 后端 JVM **29/29**、opt-in Demo **40/40**、默认 Demo **38/38**；两种 APK、固定真实 AAR 编译和 lint 通过，warning 保留。默认依赖图无 LiteRT-LM，opt-in 精确 `0.18.1`。TECNO App/test APK 安装成功，但锁屏/息屏阻断 UI；已精确结束本次测试 PID，未解锁。独立审查服务 429，无结论。ignored 原始日志/APK 位于 `artifacts/verification/android-litertlm-sync-20261103/`。
+- 同日继续补齐 **ZIP 模型包选择/导入 UI**：Android 系统 DocumentsUI → staging 解包/字节数/SHA-256 验证 → ModelStore 安装/切换 → 共享页面刷新后端；导入期间禁止生成。opt-in Demo **42/42**、APK/test APK/lint、默认 **38/38** 和共享 `compileKotlinIosArm64` 均通过。原有 iOS host 和默认 Android 包不显示模型导入入口，详见同一验证记录。系统 picker 的实际交互仍受当前锁屏/息屏阻断。
+- **下一步功能切片**：有真实授权模型后跑通图片生成，并验证 ZIP picker 实际交互；当前没有可用权重，不代为接受 gated 模型许可，不能将 host fake 或成功编译当真实推理完成。没有资产输入时继续 Android 超分的真实后端与双端身份/PAD，实现工作不回到 F04 corner case。原暂停交接与 F01–F12 表中的 factory 缺席描述是此前检查点，以本节为新状态；所有产品/发布门槛仍开放。
+
+## 新会话入口 — 2026-11-03 暂停与交接
+
+- 工作树 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation`，分支 `feat/sdk-foundation`。暂停前最新功能提交 `d664f5fd8ba740376111f624ab041d5710e53f05` 包含 F04 finish/close 确定性交错测试及上一检查点；上一轮推送后 `git ls-remote` 回读 GitHub `origin` 与 GitLab `jihu` 的同名分支头均为该 SHA。新会话先复核本地/双端状态，不以此历史回读代替当前网络状态。
+- 本轮暂停前 `git status --short` 仍只有九项原有受保护未提交修改：`demo/iosApp/OnDeviceAIDemo.xcodeproj/project.pbxproj`、`docs/validation/face-identity.md`、`probes/ios-camera-lifecycle/` 下六个 Swift/README 文件、`scripts/generate-camera-resource-app.rb`。不要覆盖、清理或随其他提交一并 stage；新会话先重读实际状态。ignored `artifacts/verification/` 含本地证据与诊断副本，不属于远端提交。
+- **优先下一步**：按[专项清单](validation/foundation-followups.md)继续 F04 的可比较长期资源预算和剩余并发竞态，先确定测量口径、基线与现有覆盖，再在隔离副本执行；真实麦克风测试只在受控窗口进行，不保存音频或自然转写。`unsupportedDevice` 的有日志复现为 `she-CN` 误输入，`zh-CN` 真机成功已验证，不再要求用户重复朗读。单轮 close/drain 真机探针与新增假平台 finish/close 测试不能冒充长期预算。
+- 另一条可继续路径是 F02 固定 Skiko Android+iOS 发布：metadata/编译通过，真实发布缺 `intellij-core:31.2.2` JAR；官方 POM 已取到，本地 JAR 请求 HTTP 429，校验文件请求曾受自动审批复核 429，勿把传输失败算作源码失败或绕过审批重试。F09 生产 XCFramework 仍受 `OrderedCollections` Swift interface 校验阻断；P4/P11/发布和其他专项以各自验收证据判断，保持 `open/not-ready`。最低系统真机目前缺设备，按用户要求后置。
+
+## 最新续接 — 2026-11-03 F04 finish/close 资源边界回归
+
+- 用户指出 `unsupportedDevice` 已定位；有日志的失败请求为误输入 `she-CN`，`zh-CN` 真机已成功，勿再按设备不支持中文追查或要求重复朗读。无日志的更早失败不能反推输入值；精确边界见[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)。
+- 新增 `AppleSpeechMicrophoneTests.testCloseDuringSuspendedFinishWaitsForCaptureAndSessionRelease`：假平台 `stopCapture` 暂停时并发 backend `close()`，确认 close 已开始但未返回、lease 和原生 handle 未释放；放行 stop 后取消、native completed、release 各一次，最终 `CancellationError`。只使用可控桥接，不启动麦克风，不改生产 SDK。定向 Speech 测试 **76/76**，0 failures，ignored `artifacts/verification/f04-finish-close-20261103/speech-tests.log` SHA-256=`c4c1b72c3035daaaa55c5fe6135a666a96e56832c2e81b45388c39165582bd9a`；`git diff --check` 通过。这只补一个确定性交错，长期真机资源预算、自然质量、离线矩阵和 TTS 仍未验；F04/P11/发布保持 `open/not-ready`。九项受保护 dirty/untracked 文件未改。
+
+## 最新续接 — 2026-11-03 F02 Android + 双 iOS publication 路径缩小
+
+- 固定 Skiko ignored 副本关闭 AWT/Web、启用 Android release 与双 iOS arm64 后，KGP 2.2.20 common metadata 离线强制重编及正常 root `.module` 生成通过；后者只声明 Android+iOS，保存于 ignored `artifacts/verification/f02-ios-only-publication-20261103/android-ios-root.module.json`，SHA-256=`0d39419464d6806e90516b419954cc3c78265f7f6a8e7cb47dd9793737df3ee7`，重生字节相同。Android Kotlin release 编译通过，log SHA-256=`d733d40d23ab1cb2672456bc46e8e197feee103329219b7526ddc2ba3ee29977`。
+- 已在本机 SDK 补装 Android API 33 与 Build Tools 34.0.0，不改固定源码；完整本地发布 dry-run 通过（131 个跳过执行任务，含上游无条件创建的 AWT runtime publication），log SHA-256=`71371ed77a7d56ce360078c919108337cb82a710a83680045a1ae8b54daba21f`。真实 Android release 本地发布停在 `extractReleaseAnnotations` 获取 `intellij-core:31.2.2` JAR：在线 HTTPS 传输长时间无输出后主动停止，离线复查明确缺该 JAR；尚无 AAR、JNI runtime、二进制消费者或扩展许可结论。Web 的 JS/Wasm Kotlin 编译也通过，但 `emcc` 不在 PATH，未执行 runtime 发布；两个配置的 root metadata 已分别定哈希保存。详见[分发审查](validation/f02-distribution-review.md)。F02/P4/P11/发布仍 `open/not-ready`，九项受保护未提交修改保留。
+
+## 最新续接 — 2026-11-03 F02 Unicode 候选材料与非 AWT metadata 对照
+
+- 固定 HarfBuzz 的生成源码引用 Unicode 16.0.0 数据；官方 UCD ReadMe 与当前 Unicode License v3 已下载、定哈希。ignored 本地 v3 审查包在 v2 基础上加入这两份材料及生成输入/输出来源表：32 文件、157,138 B、SHA-256=`dfb89b662477a93fe0511f4acfc626b9238eae820735aa728b815c722dc69d2b`，未上传；生成 C++ 的条款适用性与历史通知文字待审，不视为许可批准。
+- 固定 Skiko ignored 副本中，关闭 AWT/Android、开启双 iOS arm64 与上游 Web（JS+Wasm）目标后，KGP 2.2.20 metadata 离线强制重编通过（log SHA-256=`aead34e5f6f58561f24670ea5f2ec2be72e70b5562fb7fd5ff56de39c6a641e0`）；根 `.module` 正常生成，SHA-256=`310fbc0cbbb21033c9e779fabfc49875f0190a427b4691a5488a4df6b954c278`，声明 iOS/JS/WasmJs 而无 AWT。这是跨目标编译对照，不是 iOS-only 或已闭合的 Web 分发；Web 构建、runtime、消费者和附加许可均未验。详见[分发审查](validation/f02-distribution-review.md)。F02/P4/P11/发布保持 `open/not-ready`，九项受保护修改保留。
+
+## 最新续接 — 2026-11-03 F02 文件级许可线索与本地 v2 审查包
+
+- 固定 Skia revision 与已验证对象映射下，ignored 文件头审计复核 1,245 个实际链接编译源文件：1,224 个有许可文字或引用线索、16 个有内联授权文字、5 个没有文件头线索；`summary.json` SHA-256=`64c1d6ac094c38cc283446003a6e7d90594ab83465e78ec48a4445c3d9ed400b`，重跑一致。HarfBuzz 的生成源码引用 `src/ms-use` 输入，原 20 份候选材料缺该子目录 `COPYING`；已加入仅供本地审查的 v2 材料包（21 份候选许可文件、27 个总文件、154,160 B、SHA-256=`39ce3868d66afb22529356189cc587a8074d1134d66186cbf3a67371ccb2cef6`），v1 与 Maven 归档均未覆盖或上传。DNG/HarfBuzz 无头文件、Unicode 生成输入、libjpeg-turbo 内联许可及头文件仍待逐项裁定；详见[分发审查](validation/f02-distribution-review.md#编译源文件的文件头线索复核)。此审计不构成许可批准；F02/P4/P11 和发布仍 `open/not-ready`。九项受保护未提交修改保留。
+
+## 最新续接 — 2026-11-03 P11 F04 文档哈希修复与干净复现
+
+- F04 原 `unsupportedDevice` 的有日志复现已定位为请求输入 `she-CN`；`zh-CN` 真机可用且完成识别。本轮没有改错误枚举、Demo 或生产 SDK。发现上一轮追加[麦克风验证](validation/ios-microphone-asr.md)后，旧 readiness 对该文档的固定哈希失效，`validate_p11_readiness.py` 明确报 `source hash mismatch`。保留旧快照不覆盖；新 ignored `artifacts/verification/p11-readiness-20261103-f04-doc-refresh/summary.json` 仅刷新麦克风与[分组报告](validation/p11-grouped-benchmark.md)两份文档哈希，SHA-256=`61fe84e57ed5477fe7ad10ee20b2a0c6309925b936473ba7562498c1b0b36249`。校验 **164 evidence paths / 179 source hashes / 9 行有 gap**。
+- 跟踪的 `benchmark/p11/grouped-report-manifest.json` 已改指新快照；重算 ignored `artifacts/verification/p11-grouped-20261103-f04-doc-refresh/summary.json` SHA-256=`85ef6ccaa745a3c3398114fe62e8df7e9ede8baf255611d293525737e384a12d`，8 组 `groups` 与 9 行 `coverage` 均与上一版逐值相同。修正分组报告中的旧 155/163 计数及“真实麦克风未验”文字。相关 36 项工具测试、Python 编译与 `git diff --check` 通过；manifest/报告提交 `6b1c33fa50f00c3d03d818cf65ff0641c9f66a30`。
+- 从该提交的干净 `git archive` 加 ignored v5 证据包复跑四个 F04 状态校验器、readiness 与 grouped 均通过：`artifacts/verification/p11-portable-evidence-20261103-v5/p11-evidence.tar.gz` 含 178 个文件、69,466,635 B，SHA-256=`e631054bf97e5a23cb6cbbd5942f193abcfc4234eec9809d57e750daa3677790`，索引 SHA-256=`e390ce0f0bde661c386205d9d1ff2e300742f4de20e213c17729c76db46f4e3e`，回执 `clean-replay.json` 在同目录。包未上传，对外分发前仍需内容/许可复核。原有九项受保护 dirty/untracked 文件保留；F04/P11/发布保持 `open/not-ready`。
+
+## 最新续接 — 2026-11-03 F04 finish/cancel 确定性交错
+
+- 新增纯本地 `SpeechMicrophoneClientTests`：假原生 `finishInput()` 已进入且暂停时，公开 task 接收 `cancel()`；放行 finish、注入晚到 native success 后，结果为 `CancellationError`，finish/cancel/drain 各一次。未改生产 SDK、未启动麦克风。定向 **9/9**；正常用户环境完整 Apple Swift 套件复跑 exit 0，其中 Speech **75/75**、Identity **313/313**、Face **9/9**；日志 SHA-256=`021c50dee6e7cbf315f7e0c400ef36023b5f4c114d0ff367995a3980261f99ac`，见[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-finishcancel-交错的本地回归)。此前受限沙盒 Vision Code 9、正常用户环境首轮 Identity `busy` 的失败日志仍保留，不掩盖为通过。
+- 这是一个 SDK 竞态回归，不代表原生音频所有交错、真机长期资源或自然质量完成。原有九项受保护 dirty/untracked 文件保留；F04/P11/发布继续 `open/not-ready`。
+
+## 最新续接 — 2026-11-03 F04 双平台跟踪与 F09 前置门槛复核
+
+- 用户确认 F04MicProbe 在返回前台后的最后一次 `zh-CN` 朗读、结束输入显示“ASR 完成”；该轮的状态日志及校验已在下方 F04 检查点和[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)保留，不重复录音。已把提交 `e5fa877` 的有界结果写入 [GitLab F04 #4](https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit/-/issues/4#note_39518) 和 [GitHub F04 #4](https://github.com/AmatsuZero/ondevice-ai-kit/issues/4#issuecomment-6600663373)；GitHub 回读为 1 条评论、issue 仍 OPEN。两端父专项保持开放，P11/发布仍 `open/not-ready`。
+- 授权 Xcode 用户环境只读回查 `xcodebuild -showComponent metaltoolchain` 为 `installed`、Build Version `27B47`。受限沙盒中的 exit 70 来自缓存/CoreSimulator 权限错误，不能据此判组件缺失。F09 已有的固定生产依赖 framework archive 仍在 `OrderedCollections` Swift interface 校验退出 65；本轮未重复归档或修改生产 lock。官方 Swift issue `#91540` 和修复 PR `#91672` 回查均仍 open，PR 未合并；当前没有已验证的生产修复。F09 计划的 binary-only consumer 依赖真实完整 XCFramework，继续保持待执行，不以诊断 wrapper 代替。
+- 本轮没有变更生产源码或九项受保护 dirty/untracked 文件；F09、P11 均保持 `open/not-ready`。
+
+## 最新续接 — 2026-11-03 F04 证据进入 P11 readiness 与本地干净复跑
+
+- [P11 状态矩阵](validation/p11-status-matrix-20261027.md)已把 iOS ASR 的“麦克风录音未验”收窄为“真实生命周期有界通过、自然 CER/WER/逐 run 资源/完整离线与长期预算未验”；既有 `speech-asr-file` 固定 CAF benchmark 仍是文件输入，不混入麦克风状态日志。新 ignored `artifacts/verification/p11-readiness-20261103-f04-mic/summary.json` SHA-256=`a4d69e08389b6c5f7862110e48a21430c83dfa14c68abecc211d3b1d3788c615`，校验 **164 evidence paths / 179 source hashes / 9 行有 gap**。跟踪的 `benchmark/p11/grouped-report-manifest.json` 已指向该快照，重算 ignored `artifacts/verification/p11-grouped-20261103-f04-mic/summary.json` SHA-256=`450a136aef97ebc28e43c3dc418197034593352e4e665999c9f64691883b9fb8`；仍 **5 项能力/8 组**，所有统计 `groups` 与上一版逐值相同，`coverage` 仅 iOS ASR 未验证文字变化。相关 36 项工具测试、Python 编译与 `git diff --check` 通过；矩阵/manifest 单独提交 `892d2426385bf10233b11640352fe9b85efd964a`。
+- 从该提交的干净 `git archive` 加本地证据包重跑，四个 F04 状态校验器、P11 readiness 与 grouped 报告均通过；ignored `artifacts/verification/p11-portable-evidence-20261103-v4/p11-evidence.tar.gz` 含 177 个文件、69,465,820 B，SHA-256=`822725f9e079cdcda35fd4043325677656ce5d1a08f94826e3a437bb77094e6e`，索引 SHA-256=`a0902ba4b92a480ee991ecd461dc150b0e77c6e3fde0783f7a25adc78c143b50`，回执 `clean-replay.json` 在同目录。包未上传，对外分发前仍需内容/许可复核。**P11/发布仍 `open/not-ready`**；原有九项受保护 dirty/untracked 文件未改。
+
+## 最新续接 — 2026-11-03 F04 显式 close/drain 的单次真机边界
+
+- 在上个 F04 检查点之后，只复制当前 `apple/` 到 ignored `artifacts/verification/f04-close-20261103/apple/` 并为两处 Apple Speech 源码加入状态日志；`diff -qr` 除这两处和未复制的构建缓存外无差异，diff 仅有日志语句。沿用已授权的隔离 `io.ondeviceai.probe.f04mic`，新增 `--f04-close-probe` 自动路径，不改生产 SDK、普通 Demo 或九项受保护 dirty/untracked 文件。签名真机 build 与 `codesign --verify --deep --strict` 通过；App debug dylib SHA-256=`a50783c3db47125b29e3b29fd968ba5deba24f8cfb66ef85dd8724b2e2adac73`。
+- iPhone17,2 / iOS 27.0.1、同 PID `37018`，公开 `SpeechRecognitionClient.startMicrophone(zh-CN)` 返回约 700 ms 后调用 `close()`。状态日志依序验证 engine stop、tap remove、buffer delivery drain/endAudio、原生任务 completed、观察者/handle release、audio session inactive、lease release、operation clear，之后才有 backend/client close return；等待结果为 `CancellationError`，`drain()` 返回，closed client 再 start 被 `.closed` 拒绝。`validate.py` 重算 21 个顺序检查，ignored `summary.json` SHA-256=`88c12afa5c898701d751b0f3d25def820d25f653b90151975d6fc2c7dcfe64e4`，筛选状态日志 SHA-256=`a9258b75492a459e2b9a5a54f34385bf341d9782fb1eaff7eff571120eed9a84`；无音频/转写。仅终止该 PID，普通 SpeechDemo PID `34863` 仍在。详见[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-显式-closedrain-真机探针)。这是单次插桩副本的 close 边界，不是长期泄漏、所有竞态、自然质量或离线验收；F04/P11 与发布仍 `open/not-ready`。
+
+## 最新续接 — 2026-11-03 F04 真机麦克风结束、取消后重入与 locale 误输入诊断
+
+- iPhone17,2 / iOS 27.0.1 上，隔离 `F04MicProbe` 首轮同 PID `36951` 经当前 SDK/Demo Host 实际完成三次 `start → finishInput → success`，每次 audio session 先 active 后 inactive；用户看到橙点与“ASR 完成”。ignored `artifacts/verification/f04-mic-live-20261103/status-summary.json` 由 `validate_status.py` 复算 **3/3 success**，原始状态日志 SHA-256=`57f8e8a3df30b66af6b7b359698912dbfa3310cbedc2e0487a672dde153da789`。此前 XCTest 在进入测试方法前 UI automation mode 超时，不计麦克风结果。首轮研究 PID 已精确终止。
+- 用户随后在未连接日志的新进程报告 `BACKEND_UNAVAILABLE unsupportedDevice`。只在 ignored 隔离副本新增 Speech metadata 状态日志并重新安装同一研究 bundle；新 PID `36974` 启动时 `zh-CN` recognizer 存在、`isAvailable=true`、`supportsOnDeviceRecognition=true`。本次复现的首次错误请求实际为 `she-CN`，recognizer 为 nil，两个支持位 false，终态 `SpeechClientError`；因此这次失败来自输入 locale，**不能倒推**先前无日志进程的具体输入，也不能说设备不支持 `zh-CN`。
+- 改为 `zh-CN` 后同 PID 验到 `cancel → session inactive → terminal cancelled`，用户看到 `CANCELLED`；再开始、朗读固定句、结束输入后 `session inactive → terminal success`，用户看到“ASR 完成”。其间两次较短 `finishInput` 返回 `SpeechRecognitionError`，子类型未记录，不算成功。第二轮 ignored `artifacts/verification/f04-metadata-20261103/summary.json` SHA-256=`617aea490f7446ae0de241515041d4c73df7b1d177c36f59f0130105a47768fa`；筛选状态日志 SHA-256=`faf09f86a2a91be80048812f616b963d1a9fa80f5ee35bdf2d534df23a16b495`，无音频/转写。PID `36974` 精确终止并回读缺席。
+- 下一轮 PID `36985` 在用户上滑回桌面并返回后，记录 `start → cancel → session inactive → terminal cancelled`，用户看到 `CANCELLED`；返回前台再朗读、结束输入，记录 `start → finishInput → session inactive → terminal success`，用户看到“ASR 完成”。`artifacts/verification/f04-metadata-20261103/background-summary.json` SHA-256=`4f21d7f333c240ff6404266e839de5123c1df56bfd4dfb9edac62f58211428b9`，状态日志 SHA-256=`addb5c94afdb234d9092663d9d89425a8ab63d0c5bece236d113c31eabec2eab`；仅终止该 PID，普通 SpeechDemo PID `34863` 保留。日志本身无 UIKit 生命周期时间戳，后台动作由用户操作回报。详见[麦克风验证](validation/ios-microphone-asr.md#2026-11-03-真机-f04-状态与-locale-诊断)。显式 close、完整 drain、准确率、离线和最低系统仍未验；F04/P11 与发布保持 `open/not-ready`。原有九项受保护 dirty/untracked 文件未改。
+
+## 最新续接 — 2026-11-03 F11 第二场景纳入 P11 readiness 与本地可搬移复现
+
+- 第二场景公开 SDK 五次真机证据已独立纳入 ignored `artifacts/verification/p11-readiness-20261103-cross-scene/summary.json`，SHA-256=`be07562ac93dd209b673d60cf13c4cc0eb50956c739d31a00323ad959dc89bdd`；readiness 校验 **155 evidence paths / 163 source hashes / 9 行有 gap**。跟踪的 `benchmark/p11/grouped-report-manifest.json` 已指向该快照，重算 `artifacts/verification/p11-grouped-20261103-cross-scene/summary.json` SHA-256=`c8b646e52716e470ca6dde531ac8b336d90fa84f519a42c3f22d3874320a9c5a`；`groups` 与 `coverage` 均与上一版逐值相同，仍 **5 项能力/8 组**、`open/not-ready`。新场景与首场景五次请求、20 次持续请求各自独立，不合组。
+- 从提交 `fc0796608c398557364f127fd549672c49ebf01d` 的干净 `git archive` 加本地证据包复跑通过；ignored `artifacts/verification/p11-portable-evidence-20261103-v3/p11-evidence.tar.gz` 含 162 个文件、69,459,841 B，SHA-256=`1a6149d563995674994b22c1963888c1e6b609757d28bfeb03b615d137fcaf92`，索引 SHA-256=`1b210f5aa6dc37d2a306d32c97ba48acc0b11bdbd91e72f3468d46323e7cceef`，回执在同目录 `clean-replay.json`。包未上传，对外分发前仍需内容/许可复核。受保护工程、身份与相机探针等原有未提交文件未改。
+
+## 最新续接 — 2026-11-03 F11 公开 SDK 第二自然场景五次真机请求
+
+- 用户再次回复可处理 F02 相机授权；固定 `io.ondeviceai.f02versioned10` 此前已有 `authorized` 回执与同 PID 十轮相机 trace，本轮未重复申请权限或启动相机研究 App。授权设备回读 iPhone17,2 / iOS 27.0.1 `connected`。
+- 使用已有来源与 CC BY 4.0 许可记录的 Kawaida Waterfall `motion-0-2.mp4`（320×180、48 帧、24 fps、2 秒，SHA-256=`b77120a5c64061fa8a92edbe94602ab8b56bbca90dafd27fc4b1351e1ce7c4c4`），新建 ignored 独立 `io.ondeviceai.probe.f11sdkcrossscene` App。签名构建成功，App bundle 内素材哈希一致；可执行文件 UUID=`FA35B854-700A-3497-AC01-06DB739E2474`。同 PID=`36764` 经公开 `VideoProcessingClient → AppleVideoToolboxBackend` 完成 **5/5** 请求，五份独立输出的哈希、48 帧 PTS、HEVC/BT.709/无音轨由 ignored `artifacts/verification/f11-sdk-cross-scene-20261103/validate.py` 重算通过；原始报告 SHA-256=`a46f2ac5583e5f69b351d453ab46883432bdf81e123ef9274764ec4548b627e7`，摘要 SHA-256=`29088ebee47c8cd9bda711d24bc2f0b101d1a63420f90be58804ae8d04e954b9`。整请求 p50/p95=`5122.919791/6435.549208 ms`，约 10 ms 采样 RSS 峰值相对轮前 p50/p95=`123,011,072/258,801,664 B`。研究 PID 精确终止并回读 absent；其他进程未操作。
+- 第二场景与首场景在不同 App/时间/设备负载下测量，不能作严格场景效应比较；五轮不是持续资源或主观质量验收。输出仅在独立 App 沙盒与 ignored 本地证据目录，未写 Photos、未改普通 Demo 或生产依赖。详见[超分复核](validation/video-sr-backends.md#f11-公开-sdk-第二自然场景五次请求2026-11-03)。F11/P11 与发布仍 `open/not-ready`；原有九项受保护 dirty/untracked 文件未改。
+
+## 最新续接 — 2026-11-03 F11 SDK Video SR 20 轮有界持续资源
+
+- 在 iPhone17,2 / iOS 27.0.1 上以独立 `io.ondeviceai.probe.f11sdksustained` App、PID 36727 顺序完成固定公开视频 `VideoProcessingClient → AppleVideoToolboxBackend` 20/20 次请求，窗口 `107153.034041 ms`。20 份独立 MOV 的哈希、48 帧 PTS、HEVC/BT.709/无音轨均由 ignored `artifacts/verification/f11-sdk-sustained-20261103/validate.py` 重算通过；原始报告 SHA-256=`7703eff1de1fd868a910f03e2201444eec81ca601d87c4706a674702bbeb71c9`，摘要 SHA-256=`cb116e12f89fdf53ff9c6cbeeaa313cc4787d2e149c964e9dfa48f48652d02d0`。整请求 p50/p95=`5176.6325/6453.235666 ms`，约 10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`88,768,512/133,595,136 B`；第 1 到第 20 轮结束 RSS 增加 `1,064,960 B`。旧研究进程同时存在，不能称全机隔离；只精确终止本次 PID 并回读 absent，其他进程未动。详见[超分复核](validation/video-sr-backends.md#f11-公开-sdk-路径-20-次有界持续请求2026-11-03)。
+- 新 ignored readiness `artifacts/verification/p11-readiness-20261103-sdk-sustained/summary.json` 校验 **134 evidence paths / 142 source hashes / 9 行有 gap**；跟踪的 `benchmark/p11/grouped-report-manifest.json` 指向该快照，grouped 重算 `artifacts/verification/p11-grouped-20261103-sdk-sustained/summary.json` SHA-256=`164d623b3c57afb6cb4eef1fcfbdb483e26cb08325da1603d959f2e14f38c652`，`groups` 与 `coverage` 均与前版逐值相同，仍 **5 项能力/8 组**、`open/not-ready`。20 轮属于独立补充诊断，未与五次整请求合组；v1 本地可搬移证据包不含这 37 个新增文件，新 clone 复现须补全新快照列出的 ignored 原始证据。原有九项受保护 dirty/untracked 文件未改；未改普通 Demo/生产依赖。
+- 已生成仅本地的 v2 可搬移证据包 `artifacts/verification/p11-portable-evidence-20261103-v2/p11-evidence.tar.gz`：141 个 ignored 文件、57,915,524 B、SHA-256=`9912b366ee878ed7b32d84440c51129bb832a4fb5d799567b23711ef4ec1fb7d`；索引 SHA-256=`46e7c324d673e78e7080d71be680f940f51f2e7657764241e4a61ebac52aad1d`。以提交 `137399d2df6dae14ae06a12f29df7fc4ca7f72ad` 的干净 `git archive` 加证据包复跑，readiness 仍 **134/142/9**，grouped 仍 **8 组**且 SHA-256 与上项相同；回执 `clean-replay.json` 留在同目录。包未上传；对外分发前仍需内容/许可复核。
+
+## 最新续接 — 2026-11-03 F02 iOS-only metadata 配置校正与 AWT 对照
+
+- 复查发现前一检查点的 KGP 2.4.21 首次联网命令误将两个 Native 总开关设为 `true`，实际激活更多 target；该日志不能称为“双 iOS arm64”严格对照。以两个总开关 `false`、仅 device/simulator arm64 子开关 `true` 重跑，`--info` 确认只 commonize `(ios_arm64, ios_simulator_arm64)`；KGP 2.4.21 仍在 metadata 编译因 `@OptionalExpectation` 失败，14 个执行任务，log SHA-256=`ac17af5b366628b59bbc3d895b1f108b96f79770bd7353007a445fe93ff2e25c`。
+- 固定 KGP 2.2.20 与两个 iOS target，只打开 AWT 后 `compileCommonMainKotlinMetadata` **BUILD SUCCESSFUL**，log SHA-256=`39923208477ac222ec062899fbaaf850cf75ff2a80aa5f79a2d0ac31f70a5fbc`。隔离移除 Skiko 自定义 `ExternalSymbolName` 的 `@OptionalExpectation` 后，AWT 关闭时仍有 `commonMain` 的 15 处 `@JvmInline` / `@JvmStatic` 报同类错误，log SHA-256=`1e8a5a51a80a4ca04fdad7a19d0c0249ab307f7cb9d742125f984188d1f63896`。因此不是单一自定义注解或缺少 2.4.21 依赖；仍需受支持的源集/发布结构或完整桌面分发。KGP 2.4.21 打开 AWT 在配置期另因 `awtApiElements` constraints 停止，未得到 metadata 对照。所有 clone 跟踪文件已恢复；详见[分发审查](validation/f02-distribution-review.md)。F02/P4/P11 与发布仍 `open/not-ready`，根工作树原有九项未提交文件未改。
+
+## 最新续接 — 2026-11-03 F02 KGP 2.4.21 在线依赖对照
+
+- 用户回复现在可处理 F02 相机弹窗；已有 `authorized` 回执和同 PID 十轮无 recorder 真机 trace，因此没有重复申请权限。设备 `00008140-0008703436D3001C` 当前回读 `connected`。F04 的真实麦克风/朗读尚未获得单独答复；预检 App 与普通 Demo 共用 bundle ID，未提前覆盖安装。
+- 在 ignored 固定 Skiko 隔离 clone 中，KGP 2.4.21 联网补齐上次缺少的 `kotlin-stdlib-common`，以 JDK 21 和关闭 AWT/只开双 iOS arm64 的同一配置重跑 `compileCommonMainKotlinMetadata`。任务进入编译后仍因 `@OptionalExpectation` 失败；8 个任务执行，`BUILD FAILED`。日志 `artifacts/verification/f02-ios-only-publication-20261103/skiko-spike/kgp-2.4.21-online-awt-disabled.log` SHA-256=`a2e0aedda5ece66e62654d23a809e7bbd25966af8a633423436fd635b3d18124`。隔离 clone 的两处跟踪版本文件已恢复；本结果只排除 2.4.21 离线缺包造成的未知，不是受支持的 iOS-only publication。详见[分发审查](validation/f02-distribution-review.md)。归档未上传、生产依赖未切换，F02/P4/P11 与发布仍 `open/not-ready`；根工作树九项受保护未提交文件未改。
+
+## 最新续接 — 2026-11-03 F02 iOS-only 发布配置隔离对照
+
+- 固定 Skiko commit 新建 ignored `artifacts/verification/f02-ios-only-publication-20261103/skiko-spike/` 本地 clone，原 KGP 2.2.20、关闭 AWT/只开双 iOS arm64 的 metadata 强制编译复现 `@OptionalExpectation` 失败，log SHA-256=`7c42b831048bd9da405875d69c61e50bf244ef21c6adf48c0c70823a882d5426`。隔离改 KGP 2.4.0 同错误（SHA-256=`7ed47d189d6f405386362167397e21324af54ed396b4234684baea836233f370`）；恢复 2.2.20、停用自定义 source hierarchy 同错误（SHA-256=`d8d910c3ed42f0ddfa05b8024d4ccb59be98f225b93253e196ec1ce2dbcb29fb`）。KGP 2.4.21 离线缺 `kotlin-stdlib-common`，未进入目标编译，不能下结论且未下载依赖。
+- AWT 开启时此 macOS 主机的正常 BuildRepo 任务仅含通用 runtime 和两个 macOS runtime，没有 Linux/Windows 同类任务，故不能在当前主机直接补齐 AWT POM 的七个同版本 runtime。已有 KMP root `.module` 与项目结构 metadata 均声明 AWT，事后删条目不算正常发布。隔离 clone 的跟踪文件已恢复，实验日志保留；根工作树九项受保护未提交文件未改。详见[分发审查](validation/f02-distribution-review.md)。F02/P4/P11 与发布仍 `open/not-ready`。
+
+## 最新续接 — 2026-11-03 F02 AWT Maven 分发闭包缺口
+
+- 固定 Maven 归档四个模块的 POM 与 Gradle `.module` 复核：根 metadata 仍列 AWT 变体；`skiko-awt` 的二进制 JAR 有 702 个非目录条目，仅含两个 JetBrains 包的类及两个 META-INF 文件，无 `.so/.dylib/.dll/.a` 条目。其 POM 引用同版本通用 runtime 加 macOS/Linux/Windows 各 x64/arm64 runtime，共 **7 个模块**，归档均未提供。AWT Gradle runtime variant 依赖表不同，不能将 iOS 已验证消费结果提升为桌面 Maven 闭包。
+- ignored `artifacts/verification/f02-versioned-consumer-20261103/maven-scope-summary.json` SHA-256=`83a616b762f694d3fc5e88a2a597b9a7eadf44e3d6892ee48b4e96089177c259`，同目录脚本可重算。详见[分发审查](validation/f02-distribution-review.md)。下一步选定 iOS 范围的受支持 publication 或补齐七个 runtime；另需许可例外、托管和长期资源门槛。归档未上传、生产依赖未改，F02/P4/P11 与发布保持 `open/not-ready`；原有九项受保护 dirty/untracked 文件未改。
+- 同文进展已写入 GitHub F02 issue `#2` 评论 `6595273992` 与 GitLab F02 issue `#2` note `39342`，回读正文与 ignored `f02-issue-progress-20261103-awt.md` 一致；两端 issue 保持 open。
+
+## 最新续接 — 2026-11-03 F02 静态库来源与候选许可材料
+
+- 固定 Skia 两份 `libskia.a` 与版本化 Skiko Klib 内嵌库重新比对，device/simulator 字节各自相同；正常 publication 校验通过。按各自 Ninja 对象规则拆开 arm64/arm64e 四切片：每片 1,288 个对象、0 未映射或歧义，四份对象→源码映射一致，共 1,245 个不同源文件。九个实际编译的外部组件为 dng_sdk、expat、harfbuzz、libjpeg-turbo、libpng、libwebp、piex、wuffs、zlib。
+- ignored `artifacts/verification/f02-versioned-consumer-20261103/linked-source-inventory.json` 固定每个对象来源及 20 份候选许可/NOTICE 哈希，SHA-256=`86ee2e6e9d957788cec2157904c2cf40ffa6a384c7f13a3adbab75aa26d1995b`；本地审查材料包 `f02-distribution-review-materials-v1.tar.gz` 为 38,223 B、SHA-256=`b4d55de0e6de69f8080ebb17f7f25489cfddd0861b421ce6f97f659bec0b37e4`，包含复现脚本但不含 Maven 归档，未上传。详见[分发审查](validation/f02-distribution-review.md)。
+- 还需逐项审查文件级例外、头文件与 AWT 包，确定托管/维护责任、远程消费及长期资源预算。候选材料不构成许可批准；生产依赖未切换，F02/P4/P11 和发布仍 `open/not-ready`。原有九项受保护 dirty/untracked 文件未改。
+
+## 最新续接 — 2026-11-03 F02 归档许可材料预审
+
+- 用户再次回复现在可处理 F02 相机弹窗；已有 `io.ondeviceai.f02versioned10` 的 `authorized` 回执和同 PID 十轮无 recorder 真机 trace，因此没有重复申请权限或启动研究 App。
+- 重新运行固定 Maven 归档校验，125 个常规文件匹配、SHA-256 仍为 `d042a71f6a931320f367387580341f6d05b404196099d51d969308a0a0c2e480`。四份 POM 声明 Apache-2.0，但归档及可读取的 JAR/Klib 条目路径均无 LICENSE/NOTICE；固定 Skia 根许可含二进制分发须附版权声明、条件及免责声明的要求，Skiko 源码另有 Apache-2.0 LICENSE 与 AOSP NOTICE。第三方实际链接清单未审。具体哈希和后续门槛见[分发审查](validation/f02-distribution-review.md)。
+- 这只形成分发前的可复核缺口；归档未上传、生产依赖未切换，F02/P4/P11 与发布仍 `open/not-ready`。原有九项受保护 dirty/untracked 文件未改。
+
+## 最新续接 — 2026-11-03 F11 本地证据包干净快照复现
+
+- 从当前 F11 readiness 的 105 个来源哈希、分组清单及其嵌套来源清单取并集，找到 128 个必需文件，其中 104 个是 ignored 本地文件、原始字节合计 23,425,121 B。固定这 104 个常规文件与索引，生成 ignored `artifacts/verification/p11-portable-evidence-20261103-v1/p11-evidence.tar.gz`：105 个归档成员、21,830,385 B，SHA-256=`29f1ff5058eaf697fcb2e3fef31b152efebd63baf15e17d4972f2383d86acdfc`；索引 SHA-256=`88c7ea7c7de16fffda537ce1fbfc89a360bbe99e4c72a3824bbced67aa159864`。包只包含未跟踪证据和自身索引，不覆盖跟踪路径。
+- 从提交 `c15980823af555cf3d43f8d37dea6b1fb9755ff8` 的 `git archive` 解出干净树，再解包并逐文件核验，readiness 校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**，分组报告重算 SHA-256=`7c8fdd7c33b21376b9f6d24f456886c0b370f215379fc3ad3abbddcfd08128fa`，与原输出逐字节相同。ignored `clean-replay.json` SHA-256=`9a3a6c597fe54044745de8e5d86b5d03e398120b5cecb0e0f6c10ae1844cce9f`。这是本地可搬移复现包，未上传；对外分发前仍需检查内容/许可。F11/P11 的 9 行 gap 和发布 `open/not-ready` 不变。
+
+## 最新续接 — 2026-11-03 F04 真机麦克风预检待受控朗读
+
+- 授权环境 `devicectl list devices` 回读 iPhone 16 Pro Max / UDID `00008140-0008703436D3001C` 为 `connected`；先前受限环境的 CoreDeviceService 超时不是设备离线结论。F04 真实 `zh-CN` 朗读、结束输入、取消/重入、后台与 lease drain 仍缺；已异步询问用户能否在设备旁朗读固定句“今天我们测试手机上的语音识别功能”并处理授权。尚无答复，不将等待视为录音授权，也未安装、启动或录音。
+- 从当前 HEAD `8228ba534c1a27d4ee85e5d0152480b6bd114ff7` 离线强制重链 `:demo:shared:linkDebugFrameworkIosArm64` 与 simulator 框架，**14/14 tasks executed、BUILD SUCCESSFUL**；在 ignored `artifacts/verification/f04-preflight-20261103/` 生成隔离 Speech Demo，签名 iphoneos App **BUILD SUCCEEDED**，授权环境 `codesign --verify --deep --strict` exit 0。最终 `SpeechDemo.debug.dylib` UUID=`A6BB87EC-29E6-3BDE-8977-0968DCC9CBAC`、SHA-256=`0bae58a454eb2ca8fca26c144b0c441d837d53ec1838dd77a7f8e13282e5040c`。Info.plist 含 Speech/Microphone 使用说明；这只完成可运行包预检，不是 F04 真实录音或 P11 验收。两份构建日志在同一 ignored 目录，原有九项受保护 dirty/untracked 文件未改。
+- 旧诊断包的 Apple backend 缺当前 `1110 → noResult` 修复，因此另建 ignored `status-only/` 隔离 App：只将与当前桥接/会话源码同语义的诊断日志副本纳入生成工程，Apple Speech 后端仍指向当前 `apple/`；没有导入旧 `apple-diagnostic` 后端或合成探针。签名 iphoneos 构建与授权环境 `codesign --verify --deep --strict` 均 exit 0；最终 debug dylib UUID=`CB61940F-C0D6-304F-9391-F3585E50875B`、SHA-256=`707cb9264341d90b147b2eaf74daf9c404ba1ce8bae4e0a89dd945d8c2985129`。诊断只输出 `ODAI_MIC_` 控制/终态/错误码/route/session 状态，不输出音频或转写；本地来源与包哈希见 ignored `status-only/preflight-manifest.json`（SHA-256=`9175d2184a7deb0a4a0dc764820c6403f1977776d60dc4b429bbea0a2bd44ffc`）。仍未安装、启动或录音；真实生命周期验收待用户受控朗读答复。
+
+## 最新续接 — 2026-11-03 F11 readiness 来源哈希刷新
+
+- 当前 F11 分组报告复现入口在 readiness 校验处因 `docs/validation/p4-atlas-text-cache.md` 来源哈希过期而中止；逐项重算 105 个来源哈希，只有这一项与 2026-11-02 快照不同，原因是之后新增了 F02 有界证据。保留旧快照，另存 ignored `artifacts/verification/p11-readiness-20261103-f02-refresh/summary.json`，并更新跟踪的 `benchmark/p11/grouped-report-manifest.json` 与复现说明。新快照 SHA-256=`5383ac50053b850bc91b6917989998d6084a59a8cd59ed72d5a3d66cd59e1670`；新 clone 仍需取得本地 ignored 原始证据包才能重算。
+- `validate_p11_readiness.py` 新鲜校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**；`p11_grouped_report.py` 重建 ignored `artifacts/verification/p11-grouped-20261103-f02-refresh/summary.json`，SHA-256=`7c8fdd7c33b21376b9f6d24f456886c0b370f215379fc3ad3abbddcfd08128fa`。与上版相比 8 个分组及 9 行 coverage 完全相同，仍为 **5 项能力/8 组**，`p11Gate=open/not-ready`；本轮没有新增设备 run 或升级质量/资源结论。原有九项受保护 dirty/untracked 文件未改。
+
+## 最新续接 — 2026-11-03 F02 相机授权答复与双端 issue 同步
+
+- 用户回复现在可以处理 F02 研究 App 的系统相机弹窗；核对现有真机回执后确认：`io.ondeviceai.f02versioned10` 已获 `authorized`，无 recorder 正式消费者已在同一 PID `36564` 完成十轮相机页面与自然结束的 Leaks trace（详情见下方固定版本检查点）。因此未重复启动 App 或申请权限。当前受限环境的 `devicectl list devices` 返回 CoreDeviceService 初始化超时；不据此否定已完成的真机证据，也不宣称本轮重新连接成功。
+- 将已验证的固定版本、Android 消费闭包、本地不可变归档和剩余门槛同文写入 GitHub F02 issue `#2` 评论 `6594372514` 与 GitLab F02 issue `#2` note `39325`；已分别回读正文，GitHub 为 `OPEN`、GitLab 为 `opened`。评论草稿保留在 ignored `artifacts/verification/f02-versioned-consumer-20261103/f02-issue-progress-20261103.md`。两端 issue 仍 open，生产依赖和原有九项受保护 dirty/untracked 文件未改；**F02/P4/P11、发布仍 open/not-ready**。
+
+## 最新续接 — 2026-11-03 F02 本地不可变 Maven 归档待审
+
+- 在 ignored `artifacts/verification/f02-versioned-consumer-20261103/` 将固定 `0.144.6-ondevice-f02.1` 的 root/AWT/双 iOS 四个版本目录打成独立 Maven 归档；`COPYFILE_DISABLE=1` 排除 macOS `._` 条目。`verify_versioned_archive.py` 从已验证的正常发布摘要重算，**125/125 文件路径与 SHA-256 匹配，无额外文件或链接**。归档 `109,379,413 B`，SHA-256=`d042a71f6a931320f367387580341f6d05b404196099d51d969308a0a0c2e480`；`versioned-archive-manifest.json` SHA-256=`b05104f0282af5dd0d44b4d3c43168bbdc7f146e904296bcf4ba11886bc5dc76`。
+- 这是**本地待审候选**：未上传 GitHub/GitLab、未进入 CI 或生产依赖。正式分发仍需确定可供消费者取得的托管位置、版本冻结/撤销责任和校验流程。F02 跟踪评论同文草稿已存为 ignored `f02-issue-progress-20261103.md`；GitHub issue `#2` 最后仍停在原生回归，GitLab issue `#2` 为 open，但读取 GitLab 最近 notes 连续遇自动审批 429/超时，命令未执行，暂未向任一端写新评论，避免不同步。foundation 原有九项 dirty/untracked 文件未改；**F02/P4/P11、发布仍 open/not-ready**。
+
+## 最新续接 — 2026-11-03 F02 上游固定源码与 Android 消费闭包
+
+- 官方 JetBrains/skia `skiko` 分支固定提交 `5e54fca0283d12e0ad303d32aa87c7d13f25eef6` 的 `AtlasTextOp.cpp` 仍是 `thread_local void* gCache`，不含 `CacheOwner`；有限关键词的官方 PR 搜索没有匹配，不证明其他 PR 或未来版本不存在。最新 Skiko release 的首次只读查询返回 `v0.156.1`，但保存元数据的追加调用被自动审批 HTTP 429 拒绝、未执行；不将 release 查询当作固定候选证据。
+- 本地 `0.144.6-ondevice-f02.1` root 元数据只有 AWT/双 iOS 可用模块，缺 Android 变体。已提交源码独立消费者在同一全局替换规则下，Android shared 编译与 App debug 运行类路径均无 Skiko；离线强制重建 `:demo:androidApp:assembleDebug` **303/303 executed、BUILD SUCCESSFUL**，APK SHA-256=`f192644381d091434e2596df97fe05954e621310a7d0b7598542307fa0f1ee3a`。这只关闭当前 Android Debug 图的版本替换兼容检查，不代表通用 Skiko Android 分发或真机运行。
+- ignored `artifacts/verification/f02-versioned-consumer-20261103/verify_android_and_upstream.py` 重算上游固定文件、root 变体、Android Gradle 日志与 APK，通过后摘要 `android-and-upstream-summary.json` SHA-256=`1c4a5916cb146ac30a38a89d3a3e4cf57cbe9415263f166c5da05e8959564599`。生产依赖和 foundation 九项既有 dirty/untracked 路径未改。下一步确定可维护、CI/消费者可取得的 iOS 分发地址与所有权，再做生产依赖切换和原 P4/P11 验收；**F02/P4/P11、发布仍 open/not-ready**。
+
+## 最新续接 — 2026-11-03 F02 固定版本分发与无 recorder 真机十轮
+
+- 用户确认可处理新 bundle 的相机授权。独立 `io.ondeviceai.f02versioned10` 权限 helper 在 iPhone 16 Pro Max / iOS 27.0.1 首次请求，App Documents 回读 `authorized`；随后用同 bundle ID 安装正式十轮 App。生产 Demo/Compose/Skiko 依赖未修改，foundation 原有九项 dirty/untracked 文件保留。
+- 固定 Skia `22f58c9...`、Skiko `9a5b398...` 的本地 BuildRepo 以 `0.144.6-ondevice-f02.1` 正常发布，**64/64 executed、BUILD SUCCESSFUL**；`verify_versioned_publication.py` 校验 root/AWT/双 iOS 模块的元数据、哈希、引用闭包和 Klib 内嵌 Skia archive。摘要 `artifacts/verification/f02-remediation-20261101/versioned-publication-summary.json` SHA-256=`ac5df76553e9455b4ef27dee926e4d0d32c7b0c400b43b369c4155c558c0b1a4`。从当前已提交源码导出的独立消费者仅隔离依赖解析规则，两个 iOS framework 强制重链 **14/14 executed、BUILD SUCCESSFUL**。独立源码复审重试对真实 `AtlasTextOp` RED→GREEN 和正式补丁给出 **APPROVE**，范围不涵盖分发或真机。
+- 正式十轮 App 签名校验通过，最终 debug dylib UUID=`6D590307-4220-3180-B4B4-1E04791696CD`、SHA-256=`70755b9c6c1675216cc3f4800083c50f8d08178a19de084f7a229618e3e4586c`，无研究 recorder ABI。首次 run `AA5E0D15...`、PID `36544` 完成 86 样本，但 trace 被提前中断、缺少模板/索引，**不用于 trace 结论**。重录 run `76996882...`、PID `36564` 完成十轮 86 样本，Vision 增量均 ≥662；30 秒 page-absent 时 owner/Compose/Metal 弱引用全为 0，bridge 有延迟释放，最终 60 秒 idle 全为 0。RSS 首末 +`10,731,520 B`，不归因于 Atlas。
+- 重录 Leaks trace 自然结束并可导出，TOC 与同 PID、安装路径、时间窗匹配，**870.750431 秒、109,550 Allocations 行、0 Leaks 明细行**。最终 live 128 B `AtlasTextOp::Make` 栈 2 行：一行 TLS 析构注册，一行 `operator new`；无 recorder 不足以配对线程退出和存储生命周期，空 Leaks 明细不等于零泄漏。可重算脚本、回执、XML 与原始报告在 ignored `artifacts/verification/f02-versioned-consumer-20261103/`，`camera-page-versioned10b-summary.json` SHA-256=`cee088f9b5dece31dd54682eece1c68b3f3a613eec4174a951b0b6b92bb4300a`。下一步裁定生产分发所有权、跨平台 variant 与长期资源预算；**F02/P4/P11、发布仍 open/not-ready**。
+
+## 最新续接 — 2026-11-03 F02 Skia 原生回归 RED→GREEN
+
+- 用户再次回复可处理 F02 相机授权；该授权及同 PID 十轮真机 trace 已完成，无需重新启动研究 App 或申请权限。本轮继续 F02 Skia 源码门槛，生产 Demo/依赖与九项受保护 dirty/untracked 文件未改。
+- 新建 ignored 固定 Skia `22f58c9...` 隔离 worktree，`skiko_tests` 用真实 `AtlasTextOpTools::CreateOp` 与 mock context 验证同线程缓存、context 析构清理和 worker TLS 退出释放。原始 TLS 指针版本 **2 项中 worker 释放断言 RED**，同一测试在固定 `CacheOwner` 候选 **2/2 GREEN**；`Skiko_` 专项 **5/5**、宿主全量 `dm --src tests` **2809/2809 exit 0**，但出现宿主 CGL 初始化提示，非 GPU/真机验收。测试事件 hook 仅在隔离回归 checkout；[可复现双补丁与正式修复补丁](../probes/skia-atlas-text-cache/README.md)已入库，三份均在干净固定 revision 通过 `git apply --check`。正式补丁 SHA-256 仍 `c4ba9412811a6c68df3f3c9e14e53cb684c7eb849f3f16c0f683c10f6b55fc30`。原始日志与哈希见 `artifacts/verification/f02-remediation-20261101/native-regression-summary.json`。
+- 独立源码复审尝试遇 HTTP 429，无结论；仍需对该原生回归及正式补丁复审，形成独立不可变 Skiko 分发物，完成无 recorder 正式消费端与持续资源验收。F02/P4/P11、发布均 `open/not-ready`。
+
+## 最新续接 — 2026-11-02 F11 SDK 文件 ASR 独立分组
+
+- 既有 `SpeechRecognitionClient.recognize → AppleSpeechRecognizerBackend.recognize` 五次固定文件真机报告此前已在 readiness，但 grouped 的 `speech-asr-file` 仍无兼容来源。本轮新增独立 `asr-file-sdk-resource`，以 manifest 哈希固定原始报告、bounded summary、来源清单和合成 CAF；核对五个不同成功 run 的后端、归一化文本、RSS、耗时、输入身份和摘要交叉引用，重算最近秩统计。它不合并独立的直连 Speech framework 探针，也不使用设备/麦克风/相册。
+- 新 ignored readiness `artifacts/verification/p11-readiness-20261102-sdk-asr-grouped/summary.json` SHA-256=`a2b74c6b168efb943a7c863bb39277411ece8e234319d422e747a0dbe52a83b4`，校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**；新 grouped `artifacts/verification/p11-grouped-20261102-sdk-asr/summary.json` SHA-256=`be8796dbab1e3528f18f5bda3c7d09ab1f1b0cf905294e7b975c0692f009fdab`，**5项能力/8组**。ASR duration p50/p95=`76.484458/93.435792 ms`，约10 ms 采样进程 RSS 峰值 p50/p95=`36,913,152/36,929,536 B`。固定合成语音的匹配不是自然 CER/WER、真实麦克风、离线网络、真实/GPU 峰值、能耗或最低系统验收。P11/发布仍 `open/not-ready`。
+- 先见新增测试 RED，再见 reporter/readiness **36/36**、完整 `tools/tests` 在 Ruby 3.4 和允许 SwiftPM 环境 **240/240**、`py_compile` 与 `git diff --check` 通过。独立复审发现只信任原报告的 `normalizedMatch=true`，未重算转写身份；加入错误转写但标记匹配的 RED 用例，按 probe 的小写字母/数字规则重算后 GREEN，完整套件再次 **240/240**。九项受保护 dirty/untracked 路径未改。
+- 工作包提交 `b0194d3` 已快进同步 `origin` 和 `jihu`；GitHub F11 issue `#11` 评论 `6581438676`、GitLab F11 issue `#11` note `39247` 已写同文进展且 issue 保持 open。两次远端只读预检曾被自动审批 HTTP 429 拒绝、命令未执行；从正常审批路径重试成功后完成同步。下一个可执行项仍是 F11 自然质量/持续资源统一方法，或 F02 无 recorder 正式候选；不提升 P11 发布结论。
+
+## 最新续接 — 2026-11-02 F11 SDK Video SR 独立分组
+
+- 用户再次回复可以处理 F02 相机弹窗；该授权与同 PID 十轮 trace 已在下方 F02 检查点完成，本轮无需重新启动研究 App 或使用相机。九项受保护 dirty/untracked 路径继续保留。
+- `tools/p11_grouped_report.py` 新增 `video-sr-sdk-resource`，以 manifest 哈希固定原始报告、摘要、输入/参考、五个独立 MOV 与首末质量 JSON；核对同一会话五个不同 runId、整请求数值/输出身份及质量 `unverified`。分组键新增 `kind`，使同设备同后端的 SDK 整请求与系统逐帧探针保持独立。先见新测试 RED，再见聚焦 **24/24** 及 readiness/report **32/32** 通过。
+- 新 ignored readiness `artifacts/verification/p11-readiness-20261102-sdk-grouped/summary.json` SHA-256=`ec6202427a5b8fbd82ef33076446195b198454c924869908e53059a684aa306c`，校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**；新 grouped `artifacts/verification/p11-grouped-20261102-sdk-request/summary.json` SHA-256=`c46c34f7f87751b1e5b2a2b4c6ff1239b8ce3d9e22c3bd81381365791aaf83e4`，**4项能力/7组**。SDK 整请求 wall p50/p95=`5110.416958/6533.880333 ms`，约10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`77,824,000/259,391,488 B`，首轮含预热。首末质量仍 `unverified`；P11/发布仍 `open/not-ready`。这是单素材、单设备、同 PID 五次顺序请求，不能证明主观质量、持续稳定、真实/GPU 峰值或能耗。
+- 独立复审指出不同输出名仍可能硬链接同一 MOV；先见该场景 RED，再补齐全部 SDK 证据文件的别名拒绝并见 GREEN。聚焦 reporter/readiness **33/33**、完整 `tools/tests` 在 Ruby 3.4 与允许 SwiftPM sandbox 的环境 **237/237**、`py_compile`、`git diff --check` 均通过。受限环境首轮完整套件为 236 tests / 1 error，唯一错误是 SwiftPM `sandbox_apply: Operation not permitted`，不计产品回归。
+- 工作包提交 `be6306a693dcc1332b346c4b7c0df16a6368bbd3` 已快进同步 `origin` 与 `jihu`。GitHub F11 issue `#11` 评论 `6580754322`、GitLab F11 issue `#11` note `39246` 均已写入同文进展，保持 open。GitLab 首次身份/远端预检被自动审批 HTTP 429 拒绝、命令未执行；正常审批路径重试成功后再同步。下一步继续 F02 无 recorder 生产候选或 F11 剩余质量/资源缺口。
+
+## 最新续接 — 2026-11-02 F11 公开 SDK Video SR 五次真机资源报告
+
+- 隔离 `io.ondeviceai.probe.f11sdkresource` 研究 App 使用当前 Apple package 的公开 `VideoProcessingClient → AppleVideoToolboxBackend`，在已连接 iPhone17,2 / iOS 27.0.1、同 PID=`36128`、runId=`663C8FEA-1690-4B6D-A289-A4A2385CDF64` 顺序处理固定公开 48 帧素材五次。App 可执行文件 UUID=`969CD206-A99E-3D7C-9774-A4B2B3626EC9`；输入、bundle 副本和既有 fixture SHA-256 均为 `97682e3f...`。普通 Demo 未替换，不使用 Photos、私人媒体或模型下载。
+- 五次不同请求均成功生成独立 1280×720/48帧/24fps/2秒/无音轨 HEVC/BT.709 MOV，五份哈希及时间戳经 ignored `artifacts/verification/f11-sdk-resource-20261102/validate.py` 重算。原始报告 SHA-256=`ca6e1a4bb5dc8375368b4b1822623ae84186bfcd5caf8f2333532342aacd2aa5`，校验摘要 SHA-256=`a130d3ae406dac3fd521e87d9b3cc88305a68bcda983c7e871be2465f028eec0`。整请求耗时最近秩 p50/p95=`5110.416958/6533.880333 ms`；约10 ms 采样进程 RSS 峰值相对轮前 p50/p95=`77,824,000/259,391,488 B`，首轮含预热。首末轮参考编码保真度 PSNR/SSIM=`36.777730/0.979295` 与 `36.776212/0.979250`，`qualityVerdict=unverified`。采样时另有独立 Video SR probe 进程，未声称全机负载隔离。
+- 新 ignored readiness `artifacts/verification/p11-readiness-20261102-sdk-videosr/summary.json` SHA-256=`846712c901952ca1fc6b6d9db94b4e51a49049a6455a34b5a729ce27cec12660`，校验 **97 evidence paths / 105 source hashes / 9 rows with gaps**；grouped `artifacts/verification/p11-grouped-20261102-sdk-videosr/summary.json` SHA-256=`9b1016c6603b5a642637ea1a4d0b1db759104d9e2ac260828bd4fb2b657c3c35`，仍 **4项能力/6组**。SDK 整请求数据只入 readiness，不与系统探针逐帧耗时合组。P11/发布 `open/not-ready`，长期资源、主观质量、真实/GPU 峰值及能耗仍缺；两项 P11 定向测试 **29/29**。研究 PID 已精确 SIGTERM 并回读 absent，其他设备进程保留。原始证据、源码、构建回执和五份 MOV 均在 ignored 本地目录；受保护九项 dirty/untracked 文件未改。
+
+## 最新续接 — 2026-11-02 F02 生产依赖源码归属
+
+- [AtlasTextOp 调查](validation/p4-atlas-text-cache.md)新增有界归属结论：当前 Demo 的 Compose `1.11.1` 传递解析到 Skiko `0.144.6`；TLS 缓存及候选修复位于 Skia `AtlasTextOp.cpp`。Skia 承载源码修复，Skiko/Compose 是生产分发链，本项目负责选择可追溯分发物并做兼容与真机验收；这不是上游已接受补丁或生产依赖已修复的声明。[F02 跟踪行](validation/foundation-followups.md)已据此明确下一门槛。
+- 本轮只做依赖图、固定 patch 与既有候选证据的本地复核，未启动研究 App、变更生产依赖或接触受保护九项 dirty/untracked 文件。上游 issue 的只读搜索无匹配；进一步 PR/fork 查询被自动审批服务 HTTP 429 拒绝、命令未执行，不据此判断上游状态。F02/P4/P11 仍 `open/not-ready`。
+
+## 最新续接 — 2026-11-02 F02 授权答复与 F11 双端同步
+
+- 用户回复可以处理 F02 系统相机授权；该授权及同 PID 十轮真机 trace 已在下方 F02 检查点完成。本次没有重新启动研究 App、申请权限或采集相机数据；F02 仍待生产依赖归属、无 recorder 正式候选和长期资源门槛。
+- `f4847539e1f4f67953e38229436ac6dcdd46310d` 已快进推送 GitLab `jihu/feat/sdk-foundation`，只读 `ls-remote` 回读 GitHub `origin` 与 GitLab `jihu` 均为该 SHA。GitHub/GitLab F11 issue `#11` 已追加同文 Video SR 进展并回读，均保持 open；明确记录 4 项能力／6 组、76 条证据路径／84 个哈希／9 行有缺口，Video SR 质量与 P11 发布仍 `unverified` / `open/not-ready`。
+- 生产依赖路径的独立子代理重试仍遇 429，没有依赖方案审查结论；不据此改动生产 Compose/Skiko 图。九项受保护 dirty/untracked 文件继续保留。下一步先裁定 F02 修复归属与兼容门槛，再做无 recorder 的正式生产候选；F11 保留自然主观质量及跨能力资源缺口。
+
+## 最新续接 — 2026-11-02 F11 Video SR 同次逐帧真机分组
+
+- 已连接 iPhone 16 Pro Max / iOS 27.0.1 上，隔离 `io.ondeviceai.probe.f11videosr` Swift 探针签名构建、安装并以 PID `36085` 处理固定公开视频输入；成功报告 runId=`DEA07C32-D0F8-4354-BC5A-DE881FE7D3DB`，同一 JSON 新增硬件型号/OS/runId 与 SR、Core Image bicubic 各 48 个逐帧耗时。输入 SHA-256=`97682e3f...`，原始报告 SHA-256=`8ac77be85c3834c78ffdcb8965340d2fd43db581e4781b1a71c4717cf4fb159d`。两路 MOV 仅在 App Documents 和 ignored `artifacts/verification/f11-videosr-grouped-20261102/`；研究 PID 已单独 SIGTERM，普通 Demo 未替换。
+- `video_sr_quality.py` 复核两路 48 帧 HEVC/24 fps/BT.709；PSNR/SSIM=`36.776212/0.979250` 与 `38.872866/0.983506`，两份 `qualityVerdict=unverified`。ignored `source-manifest.json` SHA-256=`3a27bad734166f631a332eddfd3314d4e32ed14b2b6a434eec08f2f3aa89b6f8`，绑定 Swift 源、签名 App dylib、输入/参考、原始报告、两份质量 JSON 和两路 MOV 哈希。
+- `video-sr-resource` 分组新增 manifest 的输入/参考/双输出/双质量哈希绑定，验证同次设备身份、不同输出、同一输入/参考身份和 48 帧原始值。先观察新测试 RED 后，定向 **21/21**；独立 reviewer 初审指出质量报告未绑定和同名输出未拒绝，均补测试修复。复审调用返回 429，**无第二次独立 APPROVE**。最近秩逐帧 p50/p95：SR=`93.619833/95.641250 ms`，bicubic=`1.457208/1.583791 ms`；采样进程 RSS 峰值增量分别 `87,801,856/507,904 B`，两路顺序执行，不是独立冷启动或真实/GPU 峰值。
+- 新 readiness `artifacts/verification/p11-readiness-20261102-f11-videosr/summary.json` SHA-256=`d46cc3ac5e67848c4495cb495988c9aa29dbd2285b315eddc722bb55d6001d41`，校验 **76 evidence paths / 84 source hashes / 9 rows with gaps**。新 grouped `artifacts/verification/f11-videosr-grouped-20261102/summary.json` SHA-256=`d24f6ba482146fbed8767a57d7edca0a552b889c9880cb08fbc9b67939f076fe`，**4项能力/6组**、另5项无兼容分组；所有 Video SR 质量组保持 `unverified`，P11/发布 `open/not-ready`。完整 `tools/tests` 在 Ruby 3.4 和可写 Swift/Clang cache 下 **233/233 OK**，日志 SHA-256=`e4ad6bed49ce172e44143278d4d8f118c3a58f19f1e587ec5a6445f0009e841b`；默认受限环境初跑因系统 Ruby 2.6/RVM gem 混用与 `sandbox-exec` 权限失败，不计产品回归。
+- 九项受保护 dirty/untracked 文件未改。下一步继续 F11 缺口（正式 SDK Video SR 路径、自然主观质量、跨设备/持续资源、GPU/energy）及 F02 生产依赖归属；不把单素材保真度或 isolated probe 指标当发布验收。
+- 本机 `codesign --verify --deep --strict` 对研究 App 返回 `CSSMERR_TP_NOT_TRUSTED`，不把本机证书链验证写为通过；真机安装与启动回执仍成功。GitHub F11 issue `#11` 只读回读为 open；GitLab `glab issue view` 的自动审批检查因 HTTP 429 拒绝、命令未执行，因此本轮未向任一端写 issue 评论，留待双端都可回读时同步。
+
+## 最新续接 — 2026-11-02 F02 授权已完成与 F11 Video SR 报告合同复核
+
+- 用户再次表示可处理 F02 系统相机弹窗；该授权及同 PID 十轮真机 trace 已在下方 `F02 tokenized recorder 同 PID 真机 trace 已配对` 检查点完成，无需重复启动研究 App 或请求授权。F02 生产依赖归属、无 recorder 候选及长期资源门槛仍开放。
+- 复核 `f11-videosr-20261030` 的成功设备报告和两份质量报告，三份 SHA-256 均与[Video SR 验证记录](validation/video-sr-backends.md)一致。成功报告只有汇总 p50/p95，没有逐帧耗时、device、OS、runId；同目录的 device/OS/runId 报告仅为另一次系统模型能力查询，不能拼接。两份质量报告 `qualityVerdict=unverified`。已在[P11 分组报告](validation/p11-grouped-benchmark.md)写明下一次同一成功报告所需身份及逐帧原始数据；当前仍 **3项能力/4组，P11 open/not-ready**，没有把单素材 PSNR/SSIM 升级为主观质量通过。
+- 本轮 `devicectl list devices` 在当前受限环境报 `Timed out waiting for CoreDeviceService to fully initialize`，不据此判断设备断开；未重装或启动 App，未操作相机/相册。九项受保护 dirty/untracked 文件保留。下一步若做 Video SR 新采样，先使 probe 成功报告保留同次 run 身份与逐帧耗时，再运行真机并校验质量输入/输出哈希。
+
+## 最新续接 — 2026-11-02 F11 iOS TTS 纳入分组报告
+
+- F11 工作包提交 `02d3fe5f4443b3fe4786de5d86d0628c76030833` 已同步 `origin` 与 `jihu`；双端 F11 issue `#11` 均已添加同文进展评论，保持 issue 开放。
+- 当前 `benchmark/p11/grouped-report-manifest.json` 增加 `tts-resource`，同时固定真实 iOS TTS 原始报告与既有摘要 SHA-256；`tools/p11_grouped_report.py` 校验两者哈希关系、五个不同成功 run、duration/采样 RSS、固定 voice/locale/SDK 来源，并拒绝输出覆盖嵌套摘要。17 个定向单测通过。此改动只扩展分组报告，未更改运行时、依赖或模型。
+- 从最新 F02 证据刷新 ignored readiness 快照，校验 **70 evidence paths / 78 source hashes / 9 rows with gaps**。新 grouped 输出为 **3项能力/4组**，iOS TTS `apple.avspeech` 五次 duration p50/p95=`2779.726917/2779.791875 ms`，约10 ms 采样 RSS 峰值 p50/p95 均 `44,810,240 B`。这是固定 `en-US` Samantha 的隔离 SDK TTS probe，不是正式 App 整链路或自然音质、断网、真实峰值、GPU/energy、最低系统验收；文件 ASR 直连 Speech framework 的报告仍未映射成 SDK 分组。P11 `open/not-ready`。
+- 证据输出在 ignored `artifacts/verification/p11-readiness-20261102-f11-tts/` 与 `artifacts/verification/p11-grouped-benchmark-20261102-tts/`，生成入口及限制见 [P11 分组报告](validation/p11-grouped-benchmark.md)。受保护九项 dirty/untracked 文件保持原样。F02 生产依赖归属仍需明确；独立 dependency-expert 调用遇 429，无依赖方案审批结论。
+- 四个相关 Python reporter/readiness 套件 **44/44**、`compileall` 和 `git diff --check` 通过。全量 `tools/tests` 初跑 229 项有 13 failures / 8 errors，定位为 Swift/Clang 用户缓存无写权限及系统 Ruby 2.6 加载 RVM Ruby 3.4 gem；在已安装 Ruby 3.4 环境与可写缓存下同一套件重跑 **229/229 OK**，日志 `/private/tmp/f11-tools-tests-corrected-20261102.log`。此结果只覆盖 tools 测试，不提升 P11 发布结论。
+
+## 最新续接 — 2026-11-02 F02 tokenized recorder 真机 trace 已配对
+
+- 三份验证/续接文档已单独提交 `107346b7942f7f378b640c5cdd18feee11ffb769` 并同步 `origin` 与 `jihu`；GitHub/GitLab F02 issue `#2` 均已更新正文及新进展评论。仅清理本轮创建的 ignored `consumer-gradle/` 隔离副本（约 18 GB），保留 trace、事件、ledger、解析器和其他受保护内容。
+- 用户已处理隔离研究 App 相机授权。iPhone 16 Pro Max / iOS 27.0.1、最终 dylib UUID=`8F434AF5-713D-3063-98F1-3B583F1F68A4` 的同 PID `35714`、runID=`792FC36B-ACA8-447E-AD1C-F8DAE7764D48` 完成十轮相机页面协议，30 秒活动窗口原生结果增量为 `698/669/663/665/655/677/661/688/693/663`。86 个报告样本，末轮 31/35/60 秒 idle 已观察页面弱引用均为 0；十轮 page-absent 30 秒 RSS 首末 +`8,716,288 B`，不归因于 Atlas。合成图仍只在 Demo 沙盒，报告 `capturedImagesSaved=false`。
+- `Leaks` trace TOC 记录同 PID、同安装路径及 **901.166218 秒**（08:04:51–08:19:52 +08:00），覆盖十轮及最终 idle。Allocations List 共 **111,141 行**；最终 `live=true`、128 B、含 `AtlasTextOp::Make` 栈的两行分别是 TLS 析构注册存储 `0x137978380` 与真正 `operator new` 缓存存储 `0x136d42680`。Leaks 明细 0 行，**不等于零泄漏证明**。
+- 1,380,716 条 token 事件已持久化，`missed=0`、`integrityFailures=0`、解析错误 0；345,133 个 generation。58 个持缓存线程退出观察全部配有同 generation 的 `CacheOwner` exit 和 free 完成。唯一最终 live 缓存存储 `0x136d42680` 从 sequence `1380382` 的新分配至最终 generation `345065` 为 cached，持有 kernel thread `17026203` 在事件采集结束前**没有退出观察**，不能称线程退出后残留。解析器已修正地址复用造成的历史 generation 假匹配；6 个定向测试通过。原始 trace、导出、完整 ledger、校验脚本、SHA-256 汇总都在 ignored `artifacts/verification/f02-tokenized-recorder-20261101/`。
+- 已只终止研究 PID `35714`，回读普通 Demo PID `35295` 仍在；受保护九项 dirty/untracked 文件与生产依赖未改。本轮新的只读架构复审独立重数 58 个不同线程/generation 的精确 `[thread-exit, cache-owner-exit, cache-owner-freed]` 尾序列，核对唯一 live 缓存的 holder 无退出观察，结论 `WATCH`：支持隔离机制和限定措辞，不批准生产就绪。此前 429 的审查不作通过。**F02/P4/P11 仍 open/not-ready**；下一步裁定生产修复归属、无 recorder 的正式候选和长期资源门槛。
+
+## 最新续接 — 2026-11-02 F02 tokenized recorder 本地发布与相机授权门槛
+
+- `gh auth status` 在授权 keyring 视图新鲜复核为 `AmatsuZero` active、`repo` scope 有效；受限 shell 的 `default token invalid` 是不同凭据视图，未重置认证。主工作树九项受保护 dirty/untracked 文件保持原样、未暂存。
+- ignored `artifacts/verification/f02-tokenized-recorder-20261101/` 中，固定 Skia 副本完成不在全局 recorder 槽或 ring 保存原始指针的 token 化。进程 salt 与非指针标记支持离线逐地址复算；非法地址、map 失败、缺失 generation、递归和 live reset 均转为 integrity 失败。`CacheOwner` 线程退出的观察、exit 和真正 free 完成事件在宿主测试中顺序通过。七段宿主 fixture 全绿，iPhoneOS/simulator `libskia.a` 重建成功。架构复审子代理遇 429，**无审查结论**。
+- 克隆的 Skiko 使用上游正常 BuildRepo publication 四任务构建成功（64/64 executed）；两个发布 Klib 内嵌 `libskia.a` 哈希与新源码构建一致。固定 committed-source consumer 的 device/simulator framework 均强制重链成功并含 token、salt、integrity ABI；签名独立研究 App 最终链接成功。
+- iPhone 16 Pro Max 预检 PID=`35703`，40 条/3520 B 事件序号连续，非零指针派生字段均带 token 标记，`missed=0`、`droppedRing=0`、`integrityFailures=0`；但研究 bundle 的相机授权未给，报告为 `camera-not-authorized`，**没有相机页面周期或本次 Leaks trace**。PID 已终止。修正后研究 App UUID=`CEAA864A-2B27-35CE-8F39-A78EB39B3262` 已安装但未启动；下一次运行会在权限未决定时弹系统相机授权。普通 Demo 未覆盖或操作。
+- 完整哈希、回执、边界在 ignored `artifacts/verification/f02-tokenized-recorder-20261101/summary.json`。下一步需用户在设备旁响应系统相机授权，随后同 PID 完成十轮页面协议与 Leaks/Allocations/token/generation/线程退出配对；任何事件缺口、integrity 失败或地址不匹配仅作诊断。**F02/P4/P11 仍 open/not-ready**，生产依赖未改。
+
+## 最新续接 — 2026-11-01 F02 正常 publication 来源真机十轮
+
+- 双端 `feat/sdk-foundation` 已同步 `3455e2d1b982a06201de801b5d822c42eb87d209`，GitHub/GitLab F02 `#2` 各记入正常 Skiko iOS+AWT+root 本地 BuildRepo publication 进度。`gh` 在授权 keyring 视图为 `AmatsuZero` active；未修改认证配置。GitHub 评论写入返回 URL，但随后一次只读回读被自动审批服务 429 拒绝，命令未执行；GitLab note 已回读。
+- 从 committed-source 正常 BuildRepo consumer 的 device framework（SHA-256=`ecf5901f6ff9e57f0d770ccf8d42ee9d9f1b28f4eee44fb0cb1ac8a094830e45`）生成独立研究 App。原受保护探针只含三轮，第一次真机运行因此仅完成三轮；该次 trace 被显式中断，不计十轮证据。随后只在 ignored consumer 探针副本将 `1...3` 改为 `1...10`，与既有十轮候选探针逐字节一致，重新生成、签名构建，最终 dylib UUID=`9272673D-F19E-3E3A-AE9C-3FCAB7570FE2`、SHA-256=`62e429705dc40232af5c73a8fad33f7faa79cc8d65de6ba03771f52da1ab5356`。
+- iPhone 16 Pro Max / iOS 27.0.1，同 bundle 相机授权研究 App PID=`35285`、runID=`91269411-871E-4D6B-8E24-6FD10B0C7A3F` 完成十轮 30 秒窗口，原生结果增量 `666/668/641/646/641/645/662/663/663/648`，86 个报告样本无失败，最终所有已观察页面弱引用释放。页面缺失 30 秒时，9 轮各仍有 1 个 bridge 弱引用存活、第 9 轮为 0；末轮 31/35/60 秒 idle 全部为 0。十轮 page-absent 30 秒 RSS 首末 +`8,437,760 B`，不能归因于 Atlas 缓存。
+- 同 PID `Leaks` trace 为 **850.878895 秒**，覆盖十轮与最终 idle；TOC 的 PID/安装路径与设备回执一致。完整 Allocations List **104,779 行**中，最终 `live=true`、128 B、分配栈含 `AtlasTextOp::Make` 的行有 **2 条**：一条栈经 `dyld::ThreadLocalVariables::addTermFunc`，属于 TLS 析构注册路径，不能视作 Atlas 缓存存储；另一条经全局 `operator new`。Leaks 明细 0 行。无 recorder C ABI、无同 PID 逐地址析构/free/TLS/线程退出配对，故不把后一条定性为退出后残留，也不把上次研究组装仓库的 6 行与本次 2 行当作严格修复率。原始 trace、导出、源/构建/安装/运行/恢复回执及解析器在 ignored `artifacts/verification/f02-normal-publication-consumer-20261101/`，`camera-page-normal10-summary.json` SHA-256=`bfffa72ef7bb26cafabb6cee17bdb0a5f51cfd7e1f371127f12cfad1b82f36fe`。研究 PID 已终止，普通 Demo UUID=`6CC6F4AF-8726-375E-BB7C-EA22DCDB07A4` 已恢复安装并无研究参数启动 PID=`35295`。生产依赖及受保护 dirty/untracked 文件未改；**F02/P4/P11 仍 open/not-ready**。下一门槛仍是无原始指针保留的同来源缓存 generation/线程退出配对与生产所有权裁定。
+
+## 最新续接 — 2026-11-01 F02 正常 Skiko iOS publication 与独立 consumer
+
+- 固定 Skiko `9a5b398...` 的 metadata 失败找到**受控触发条件**：同源码、Kotlin 2.2.20、双 iOS 目标、离线缓存及 release `0.144.6`，`-Pskiko.awt.enabled=false` 强制重编译 `compileCommonMainKotlinMetadata` 在 `@OptionalExpectation` 失败；只改为 `true` 后 6/6 tasks 成功。`native_targets=` 在成功后仍为空，不能单独当根因。没有修改 Skiko/Skia tracked 源码，也没有压制编译错误。
+- 开启上游默认 AWT 目标，用固定候选 Skia 输出运行 Skiko 自身三个**正常** BuildRepo 任务：`publishIosArm64PublicationToBuildRepoRepository`、`publishIosSimulatorArm64PublicationToBuildRepoRepository`、`publishKotlinMultiplatformPublicationToBuildRepoRepository`，**BUILD SUCCESSFUL / 57 tasks（34 executed、23 up-to-date）**，未排除 metadata 任务。两个正常发布 Klib SHA-256=`340d6912...` / `5d09908f...`，与先前研究组装仓库的双 Klib **逐字节一致**；root `.module` SHA-256=`ed55e44b...`。随后 `publishAwtPublicationToBuildRepoRepository` **BUILD SUCCESSFUL / 12 tasks（8 executed、4 up-to-date）**；根模块列出的 AWT 和双 iOS 三个 `.module` 均已在隔离 BuildRepo 出现。桌面各 OS 的 AWT runtime 与外部分发未验，这不是完整跨平台 release。
+- 从 committed `568aa6d...` 的独立 source archive 创建新 consumer，除 `settings.gradle.kts` 只新增指向**正常 BuildRepo** 的 Skiko 仓库外，762 个 committed 文件哈希全部一致，无研究组装仓库引用。iOS arm64 依赖图成功解析 `skiko:0.144.6 -> skiko-iosarm64:0.144.6`；双 iOS static framework 强制重链 **BUILD SUCCESSFUL / 14/14 tasks executed**，均含 `gpu.AtlasTextOp.o`、`CMPMetalLayer.o`、`CacheOwner` 析构、TLS init 与 `__tlv_atexit` 引用。
+- 独立 bundle `io.ondeviceai.f02normal` 从此 consumer 签名构建 iPhoneOS 最终 App（debug dylib UUID=`EDC85B90-54E2-3A1E-BD2F-67331805410D`）、真机安装并启动 PID=`35239`，随后显式终止；simulator 最终 App unsigned build 成功（debug dylib UUID=`7053A680-5A3E-3B54-ACA4-DADB462705A9`），未再安装。完整命令/日志/哈希/边界见 ignored `artifacts/verification/f02-normal-publication-consumer-20261101/normal-publication-summary.json`，SHA-256=`ab7cd3bc73ce9d46435101981c7caa18a570666b5acee2d5fc40728fe42353df`。
+- 正常 iOS publication 门槛已在**隔离研究范围**越过；生产依赖和分发物未变。之前无 recorder 十轮真机 App 使用的 Klib 字节相同，但不是从本次正常 publication 最终链接，因此不把其真机 trace 自动升级为正式链路验收。下一步是同来源的线程退出/缓存存储独立配对与 P4/P11 原验收；**F02/P4/P11 仍 open/not-ready**。九项受保护 dirty/untracked 文件保持未提交。
+
+## 最新续接 — 2026-11-01 F02 无 recorder 候选真机十轮与普通 Demo 恢复
+
+- `gh auth status` 在授权 keyring 视图重新确认 `AmatsuZero` active、scope 包含 `repo`；受限沙箱的 `default token invalid` 是凭据视图差异，**未修改登录配置**。真机 iPhone 16 Pro Max / iOS 27.0.1、UDID=`00008140-0008703436D3001C` 为 connected。
+- 从固定 Skiko 研究组装仓库链接的独立 `io.ondeviceai.f02candidate` App 已用现有 Apple Development team `4X996UV8LC` 签名构建、真机安装和启动；其 debug dylib UUID=`4E2CD327-B613-3D66-B145-F5140942231F`，启动回执 PID=`35155`，随后显式终止。这是候选的真机加载 smoke，不是 P4 资源验收。
+- 另在 ignored `f02-candidate-consumer-20261101/camera-page-candidate-project/` 建立**无旧 recorder C ABI**的十轮相机实验，沿用同一候选 framework、原页面移除/重入协议和已授权相机的研究 bundle。签名最终 debug dylib UUID=`919386F5-8B81-321D-9901-2F758CAC404D`、SHA-256=`c5cab192afdbfb1a5b75b9d7ee29f204b63d31802573ce0a836d812b37fb736d`；设备 PID=`35178`、runID=`7CC03135-326D-4301-98B5-9F56D6748838` 与安装路径、trace TOC 相符。
+- 同 PID `Leaks` 模板 trace **851.208258 秒**覆盖十轮和最终 idle；十个 30 秒相机活动窗口成功结果增量 `648/637/668/676/664/647/638/642/638/640`。每轮页面移除 30 秒时总有一个 bridge 弱引用仍 live；最后一轮 31/35/60 秒 idle 均为 0，最终 `allObservedPageObjectsReleased=true`。十轮 page-absent 30 秒 RSS 首末 +`8,847,360 B`，不能归因于 Atlas 缓存。
+- 完整 Allocations List **105,170 行**中，6 条 `live=true` 的 128 B 分配栈包含 `AtlasTextOp::Make`；Leaks 明细 0 行。旧 recorder 的同 PID 逐地址证据为 52 个线程退出后仍 live 的缓存地址，但本候选**无 recorder、无逐地址 generation/线程退出配对**，因此 6 条不能定性为退出后残留，也不能把 52→6 当成严格同口径修复率；0 行 Leaks 不是零泄漏证明。原始 trace、导出、解析脚本与报告见 ignored `artifacts/verification/f02-candidate-trace-20261101/summary.json`，SHA-256=`2df5cadd075af557fde9d7d38980a93d29cbeffa083cd7743527160c9d5c3a85`。
+- 研究 PID 已显式终止；普通 Demo（debug dylib UUID=`6CC6F4AF-8726-375E-BB7C-EA22DCDB07A4`）已重新安装并**无研究参数**启动，PID=`35196`。固定 Skiko 的**正常 Maven publication 仍在 metadata 编译失败**；`compileCommonMainKotlinMetadata` 的 input manifest 为 `native_targets=`，这是诊断线索，不是已证明的唯一根因。下一步先取得正常 publication 的受支持构建，再用相同来源的正式候选做线程退出/缓存存储的独立配对与 P4/P11 验收。生产依赖、锁文件及九项受保护 dirty/untracked 文件未改；**F02/P4/P11 仍 open/not-ready**。
+
+## 最新续接 — 2026-11-01 F02 候选进入最终 App 与模拟器 smoke
+
+- 固定 Skiko 重新编译 `compileCommonMainKotlinMetadata` 报 `@OptionalExpectation` 错误；仅加 `-Xmulti-platform` 无效，研究副本改动已撤回。只请求 iOS variant publication 仍触发同一失败；排除该任务又在 `compileNativeJsMainKotlinMetadata` 失败。**正常 Maven publication 仍未通过**，不能把先前 `UP-TO-DATE` 当作重编译成功。
+- 为验证下游，在 ignored `f02-remediation-20261101/maven-candidate-repacked/` 复用同一固定 Skiko revision 的既有本地 Maven 元数据，只替换双 slice 候选 Klib 和各自 `.module` 的 size/hash。严格目录比较为 **23 个文件中仅 4 个变化**；这是研究组装仓库，不是 Gradle 正常发布或可分发 SDK。候选 release Klib SHA-256：device=`340d6912df2f57e1291cd5d8099da414e834ca2fb10a940fd8b5dc994bae6ae6`，simulator=`5d09908f2987a763edc3fe07d752a26baf52dc5f69c6889fe2f093319c7f063c`，内嵌 `libskia.a` 与上方纯补丁构建逐项匹配。
+- 独立克隆的 committed-snapshot consumer 使用该研究仓库：iOS 依赖图成功解析 `skiko:0.144.6 -> skiko-iosarm64:0.144.6`；两个 Demo static framework 强制重链均 **BUILD SUCCESSFUL / 9 tasks executed**，包含 `gpu.AtlasTextOp.o`、`CMPMetalLayer.o` 和 `__tlv_atexit` 引用，无 recorder C ABI。用与 committed `568aa6d...` 哈希一致的普通 App Swift 源码，Xcode unsigned simulator 与 generic iPhoneOS 最终 App 均 **BUILD SUCCEEDED**；debug dylib UUID 分别为 `799AB436-867D-3461-90E8-E9ADC1B43E52` / `EAFEF8F2-EF75-3C7A-8EB9-872239EF0841`，均可回读 `CacheOwner` 析构及 TLS 初始化符号。
+- 独立 bundle `io.ondeviceai.f02candidate` 在 iPhone 18 Pro / iOS 27.2 simulator 安装、启动成功，PID=`25744`；截图回读 Demo 主界面，随后 `simctl terminate` exit 0，未替换普通 Demo。未运行相机十轮或模拟器 Leaks；iPhoneOS 包未签名、未安装真机。读取真机状态与模拟器 PID 日志的自动审批服务返回 HTTP 429，**命令未执行**；这不是设备不可用或运行异常的结论。源、构建、组装、截图与 SHA 见 ignored `f02-remediation-20261101/candidate-consumer-summary.json`。生产依赖和受保护 dirty/untracked 文件未改；**F02/P4/P11 仍 open/not-ready**。下一步先解决受支持的正常 Skiko publication/所有权，再对签名候选执行真机线程退出与十轮相机资源对照。
+
+## 最新续接 — 2026-11-01 F02 TLS 缓存候选进入双 iOS Klib
+
+- `gh auth status` 在受限沙箱报告 `default` token invalid；同一会话经授权凭据视图回读为 `AmatsuZero` keyring active，和用户提供的结果一致。不要修改或清除 GitHub 登录配置。GitHub 认证与本次 iOS 构建/签名是不同门槛。
+- ignored `artifacts/verification/f02-remediation-20261101/` 的固定 Skia `22f58c9...` 宿主复现：原版线程退出后留 1 块，`thread_local CacheOwner` 候选为 0，1000 次同线程操作只分配 1 次；无缓存方案也为 0，但需 1000 次分配。候选补丁 SHA-256=`c4ba9412811a6c68df3f3c9e14e53cb684c7eb849f3f16c0f683c10f6b55fc30`，仅在隔离研究副本中；未修改生产依赖。
+- 集成前发现旧研究 ZIP 未更新，且先前 `skia-patch-compile` checkout 的 header 尚有 recorder 改动。新建 ignored `skia-clean-candidate`，固定 revision 下 `git diff` 仅 `AtlasTextOp.cpp` 的 TLS owner 改动；重编译 iOS arm64/simulator arm64，重新打包，并验证两个 archive 的内嵌 `libskia.a` 与本地静态库相同，均有 `__tlv_atexit` 引用、无研究 recorder ABI 引用。
+- 独立 `skiko-clean-candidate` 用固定 Skiko `9a5b398...` 强制构建 `iosArm64Klib iosSimulatorArm64Klib`：**BUILD SUCCESSFUL，18/18 tasks executed**。正确产物是 `0.144.6-SNAPSHOT`，目录里旧的 `0.144.6` Klib 不可误用。两个 SNAPSHOT Klib 内嵌 `libskia.a` SHA-256 分别为 `c90798bb2ce3fd7aff7f7de0a1ca9e37c19d837749c05b4010b1742dcccc845f` 和 `5f4790af17452aaac834a0b80bd9afa2b503ff9a55ce737a9a93eaf1b9dab1ca`，均与新 ZIP/本地 archive 一致；Kotlin/Native compiler=`2.2.20`、ABI=`2.2.0`、target 分别为 `ios_arm64`/`ios_simulator_arm64`。
+- 完整 Maven publication 在 `compileCommonMainKotlinMetadata` 报大量 `@OptionalExpectation can only be used in common module sources`，增量重试同样失败；没有绕过该发布任务，也没有 source-free consumer link 或真机候选运行。独立诊断代理遇 429，未返回审查结论。确切命令/产物哈希/失败日志见 ignored `klib-integration-summary.json`。下一步诊断该 metadata 构建门槛，再做隔离 publication、最终 App link 与真机十轮对照；**F02/P4/P11 仍 open/not-ready**。受保护工程、身份草稿和 probes 未改。
+
+## 最新续接 — 2026-11-01 F02 十轮 trace 与最终 live 地址
+
+- 同一隔离十轮研究 App 新 run：真机 PID=`34764`、runID=`8425AEE8-5D65-4742-96E1-EBF75BDB4E51`，签名包 debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`。851.217207 秒同 PID Instruments trace 覆盖十次页面退出/重入和最终 idle；十轮活动 Vision 成功增量 `666/658/686/673/683/686/683/684/685/681`，每轮页面移除 30 秒后已观察 owner/Compose/Metal/bridge 弱引用均为 0。trace TOC 的 PID/安装路径与 CoreDevice 回执匹配，但 `dyld-library-load` 无映像行，故没有独立 trace UUID 回读。
+- 原始事件 **1,387,570 条 / 122,106,160 B**，序号连续、capture missed=0。最终 **52 个 cached 地址**均有同 generation 析构、`delete-cached`、持缓存指针线程退出事件；完整 Allocations List **104,727 行**中 52/52 唯一匹配 `live=true` 的 128 B 存储（50 个有 AtlasTextOp 分配责任栈，2 个录制前分配栈受限）。这是研究包的析构后缓存存储残留，不是生产修复或无界增长率。十轮 page-absent 30 秒采样 RSS 首末 +`9,879,552 B`，不能把全部差额归因于这 52 个地址。
+- 研究 recorder 全局表仍保存原始指针，Leaks 明细 0 行**不能判作零泄漏**。源/包/设备/原始 trace/事件/逐地址 ledger 见[AtlasTextOp 记录](validation/p4-atlas-text-cache.md)及 ignored `artifacts/verification/f02-sustained-trace-20261101/summary.json`（SHA-256=`6f1f8f098baedbcfea941a217bfb3139601fda0204b6cf8e5b9824f0b56f01df`）。独立 reviewer 通道返回 429，尚无结论。研究 PID 已终止，普通 Demo 已重新安装并无研究参数启动 PID=`34802`。受保护工程、身份草稿与 probes 未改；下一步应裁定生产依赖的受支持修复/所有权边界，而不是再次做相同 trace。P4/F02/P11 仍 `open/not-ready`。
+
+## 最新续接 — 2026-11-01 F02 十轮持续重入与设备恢复
+
+- ignored research 项目副本将页面协议从 3 轮扩为 10 轮，未改生产 Demo/依赖或原 v4 证据。iPhone 16 Pro Max / iOS 27.0.1，PID=`34735`，runID=`3219BF16-972B-45F9-9E45-5BD6A9C31FB6`，debug dylib UUID=`1D3DD45D-E704-3B2E-A0EC-2A98BE8B0142`。10 个 30 秒活动窗口 Vision 成功增量 `748/754/757/757/757/749/756/751/751/754`；每轮页面移除 30 秒后 owner/Compose/Metal/bridge 弱引用均为 0，最终 60 秒 idle 仍为 0。
+- 原始事件流 **1,508,754 条 / 132,770,352 B**；全流序号、PID/runId、地址/generation 校验通过，capture missed=0。最终事件状态有 **50 个 cached 地址**，其中 **48 个**记录到持缓存指针的线程退出。本轮未运行 Instruments Leaks/Allocations，50 不是经 Allocations 证实的最终 live 数；研究 recorder 持原始地址，仍不能宣称零泄漏。每轮页面退出 30 秒的采样 RSS 首末差 +`7,077,888 B`，不能归因缓存，也不能声称内存稳定。
+- 研究 PID 已显式终止；普通 committed-source Demo 重新安装并无研究参数启动，PID=`34751`，普通 debug dylib UUID=`6CC6F4AF-8726-375E-BB7C-EA22DCDB07A4`，无研究 C ABI。原始报告、事件、源码哈希、构建和设备收据见 ignored `artifacts/verification/f02-sustained-20261101/summary.json`（SHA-256=`9a32100d54dde0cd1e7211596d9ec7ae378da62b248de95a0966f0dc604f5846`）及[AtlasTextOp 记录](validation/p4-atlas-text-cache.md)。十轮有界重入已验证，生产修复/所有权裁定、最终 live 匹配和 P4/P11 原验收仍 `open/not-ready`；受保护未提交文件未改。
+
+## 最新续接 — 2026-11-01 F02 同 PID 逐地址关联与普通 Demo 恢复
+
+- 隔离研究 App PID=`34674`、runID=`E226E0C3-D90A-4805-BF5F-2E4494966DD1`、debug dylib UUID=`D2914E8C-93FA-3E0E-9414-070AE8B24C06` 完成真机三次相机页面退出/重入，Vision 活动成功增量 `660/691/690`，三轮页面移除 30 秒后 owner/Compose/Metal/bridge 弱引用均为 0；301 秒 Instruments trace 覆盖全程。完整研究事件导出 **416,726** 条、184 块、序号无缺口；ring 覆盖 351,190 次，不能说全部历史事件仍在 ring。
+- 最终 Allocations List 的 **18 个唯一 live 128 B 地址**均在同 PID、同 runID 的 ledger 中记录到对应 generation 析构和 `delete-cached`；其中 15 个还记录到持缓存指针的线程退出。3 个未记录该 exit，不推断其状态。原始存储 live 与 C++ 对象已析构并不矛盾；旧 PID 的 18 个地址不能跨进程配对。
+- 研究 recorder 的全局 ring/generation 表也保存原始地址，可能影响 Leaks 可达性；因此本轮 Leaks 明细 0 行**不作为零泄漏或修复证明**。P4/F02 的持续重入边界、生产修复/裁定和 P11 发布验收仍 `open/not-ready`。限定结论、源/包/PID/UUID/事件/trace 哈希见[AtlasTextOp 记录](validation/p4-atlas-text-cache.md)及 ignored `artifacts/verification/f02-consumer-20261101/camera-page-v4-summary.json`（SHA-256=`11115feba01b152145e6676af3c2dc00cedb5cdce1682586a3e2a391e093121d`）。
+- 研究 App 已显式终止；普通 committed-source Demo 已重新构建、安装并无研究参数启动，PID=`34719`，启动回执 SHA-256=`9001d260faf7af7fb359897f9566209038e09df0b1714e0f20258c899a38c1be`。这只是安装/启动恢复，不是新的 UI 验收。`gh auth status` 已在 keyring 环境只读复核为 `AmatsuZero` active；受限沙箱的 `default` token 错误是凭据视图差异。受保护的 `project.pbxproj`、身份草稿、相机 probes 与生产依赖未改。
+
+## 最新续接 — 2026-11-01 F02 真机 C ABI smoke
+
+- 上一节的设备安装阻断已解除：授权环境重试 `devicectl device install app` 成功，安装的研究包 `io.ondeviceai.ondeviceaidemo` URL 为 `file:///private/var/containers/Bundle/Application/E3350029-67CF-45E2-8781-0AAC2A9C56ED/OnDeviceAIDemo.app/`；`device-install-retry.json` SHA-256=`850fb82aa7d81de675d6641118f7c5d22b34654fa7297c8a0d61e061924eb96a`。iPhone 16 Pro Max 真机启动回执 `device-launch.json` SHA-256=`25b8acc8c7819b5aa0e09b5b6dceeb92564980f94de760c7d454776b0e9267e6`，首次 PID=`34518`。为捕获 console，`--terminate-existing --console` 再次启动研究 App，实际观察 PID=`34529`，随后显式 SIGTERM 成功。
+- PID `34529` 的设备 console（`device-console.log` SHA-256=`f45b61a787fb5be8bfa76e5fae3a2f45a2407bb6d033db70ba448eccca5f49f6`）回读初始 `eventCount=0`，2 秒后 `delayedCount=120 copied=120 dropped=0 correctRun=true`；kind 计数为 new-allocated 8、new-reused 22、destructor entry/exit 30/30、delete-cached 24、delete-freed 6。研究源码 runId 固定为 73、88-byte event ABI。签名 App 的最终 debug dylib UUID=`CADD1856-3A9A-31E5-911B-8317551BA3E6`，五个 C ABI 均在最终链接物中；这是同一 source/binary/install/launch 路径的**真机单页 ABI smoke**，不是完整 P4 协议。
+- 没有触发三次相机页面退出/重入、300 秒 Leaks/Allocations、逐地址 generation 对齐或 sustained reentry；不将这 120 个事件对应到旧 PID 的 18 个地址，也不据此称资源问题修复。下一步在 ignored consumer 纳入现有三页页面驱动与有界事件导出，生成新的签名研究 App，先校验 source/build UUID 与事件无丢失，再运行设备三页 trace。P4/F02 仍 **open/not-ready**；生产依赖、Demo 和保护性未提交文件未改。
+
+## 最新续接 — 2026-11-01 F02 iPhoneOS App 链接与签名边界
+
+- 用户提供的 GitHub 登录状态已在授权环境复核：`gh auth status` 显示 `AmatsuZero` active。它只解决 GitHub 访问，不代表 iOS 签名。受限沙箱内 `security find-identity` 显示 0，但授权环境重新读取为 **3 valid identities**；前一结论属于沙箱凭据视图，不能作为本机缺少签名身份的证据。
+- 同一 ignored committed-snapshot consumer `artifacts/verification/f02-consumer-20261101/` 中，`xcode-app-device-unsigned-escalated.log` 的 generic `iphoneos` App **BUILD SUCCEEDED**，最终 debug dylib 含五个研究 C ABI，未签名；日志 SHA-256=`4e8fc871d7b1db8b7a3d696e3261e60430bbf44953ee0248bc36062ff3fd0e8a`。最初受限运行因 SwiftPM/Clang 缓存不可写 exit 74，不是源码编译失败。
+- 使用本机已有 Apple Development 身份、既有 Xcode 通配 profile 与 `DEVELOPMENT_TEAM=4X996UV8LC`，未启用 provisioning 更新，在隔离 consumer 生成签名 device App：`xcode-app-device-signed.log` **BUILD SUCCEEDED**，SHA-256=`8e4f83bd0b228d292b19f9d8127824e54a846d96ba4382574ecf7f6ae847f76d`。最终 debug dylib SHA-256=`d666dfc4078e72d1b0c401c52abc431dc11e1588c0c9eb8242e533c302d7d84c`、UUID=`CADD1856-3A9A-31E5-911B-8317551BA3E6`，`nm -a` 可见五个 C ABI；App stub UUID=`2EEFC256-A5F0-3D06-A279-4D59476AE98A`。研究 probe 源 SHA-256 仍为 `7cc62e1675cbb99e0961b020de395c209ea14e4d308192fee27fa632d2252488`。
+- 设备安装的授权调用因自动审批服务 HTTP 429 **未执行**；受限环境一次调用又因 CoreDeviceService 初始化超时 exit 1，`device-install.json` 为 failed。没有设备安装、启动、PID 或真机 ABI/三页 trace；本机 `codesign --verify --deep --strict` 在受限环境返回 `CSSMERR_TP_NOT_TRUSTED`，不能替代设备签名验收。审批恢复后应先重新验证签名/安装，再做源、包、UUID、PID、runId 绑定及完整三页协议。未修改生产 Demo、依赖、签名资产或受保护 dirty/untracked 文件。P4/F02 保持 **open/not-ready**。
+
+## 最新续接 — 2026-11-01 F02 最终 App 链接与 simulator C ABI 运行时回读
+
+- ignored committed-snapshot consumer 的普通 unsigned generic simulator App `xcode-app-sim.log` **BUILD SUCCEEDED**，但因未引用研究 C ABI，最终 `OnDeviceAIDemo.debug.dylib` 经过 `dead_strip` 后不含五个符号；这证明 static framework archive 符号可见不能代替最终链接证据。仅在 ignored consumer 的 `OnDeviceAIDemoApp.swift` 加入研究 probe，显式调用五个 C ABI 并复制事件；生产 Demo 和受保护 `project.pbxproj` 未改。
+- 最新研究 App `xcode-app-sim-probe6.log` **BUILD SUCCEEDED**，最终 debug dylib SHA-256=`726cd998f11434e43bb5789ff89860440e578ddb838afd1f79472b0a2de3e0a9`、UUID=`A93B4B79-57D6-32DE-B4F0-5DB2B983AF56`，`nm -a` 回读五个 C ABI 符号。App stub executable UUID=`AFD5B670-07B7-3718-8C4E-07035B2018E0`；Xcode Debug 动态库架构下应使用 debug dylib UUID 对齐实际代码。研究 probe 源 SHA-256=`7cc62e1675cbb99e0961b020de395c209ea14e4d308192fee27fa632d2252488`。
+- iPhone 18 Pro simulator / iOS 27.2、UDID=`C8D20AFB-8CDF-4968-92E5-069F732C241E`，安装和启动成功，PID=`70773`；专用 unified log 回读 `eventCount=0`，2 秒后 `delayedCount=120 copied=120 dropped=0 correctRun=true`。事件包含 new-allocated=9、new-reused=21、destructor-entry/exit=30/30、delete-cached=24、delete-freed=6；`copy_events` 的 88-byte event ABI 和 runId=73 在运行时可读。原始 `simulator-abi-events.log` SHA-256=`de9068058116ce740afd047abab7c652f8d3899e5797448e2d77d46201747a34`，汇总 `framework-evidence.json` SHA-256=`c9de48b8376ab1f9797b3adb5ec9415938cadfcac02c1c09e86e28a34240fcae`，`summary.json` SHA-256=`76824e4404e0e86cfc6871c5f988f04fd517a03c815d57ab34a2cb5cd0f742cd`。
+- 该 simulator smoke 证明普通页面可触发 instrumented `AtlasTextOp` 并回读事件；没有验证真机相机三页协议、18 个历史地址对应关系、sustained reentry 或修复。Xcode App 链接有 `libicu.icudtl_dat.o` 构建目标 27.2 高于 app 15.0 的 warning，最低系统仍须实机验证。P4/F02 维持 **open/not-ready**。下一步在同一隔离研究路径生成带三页协议的签名真机 App，保持源/包/UUID/PID/runId 逐项绑定后运行完整 trace；不将 simulator 计数升级为旧 trace 的根因结论。
+
+## 最新续接 — 2026-11-01 F02 双 slice framework link 已通过
+
+- 在 ignored committed-snapshot consumer `artifacts/verification/f02-consumer-20261101/` 中，使用本地 instrumented Skiko `0.144.6` substitution，`:demo:shared:linkDebugFrameworkIosSimulatorArm64` 与 `:demo:shared:linkDebugFrameworkIosArm64` 均 **BUILD SUCCESSFUL**。复核日志分别为 `link-sim-final.log` SHA-256=`abe89203999463f65f7c8a228f6e608c651a469203e17dedd66c07b4902fb5dd`、`link-device-final.log` SHA-256=`e45303be4c388dae2341b67b53b183a3a4cab11afc6bb76c952b11173654fb5c`（3 executed/6 up-to-date 与 3 executed/6 up-to-date）。
+- 两个生成的静态 framework archive 均包含 `gpu.AtlasTextOp.o`、`CMPMetalLayer.o` 和五个 C ABI 符号：`skia_atlas_text_op_event_count`、`copy_events`、`dropped_events`、`set_run_id`、`reset_events`。simulator archive SHA-256=`c85dcb91718af355cd9215517ee349ff0d813eaaf5562b4848a1306b4bda9077`，device archive SHA-256=`5c7b92eaae51b34bdd0ce1aef8f3f1b4237c67ba83b681117c875a4e00e0824e`；完整回读见 `framework-evidence.json` SHA-256=`c9de48b8376ab1f9797b3adb5ec9415938cadfcac02c1c09e86e28a34240fcae`。
+- 这是 **static framework archive**，本身没有 `LC_UUID`；最终 app executable 的 UUID 尚未产生，不能把 archive 符号可见升级为设备运行时已加载。Compose renderer/Metal layer 的运行时身份、实际 C ABI 调用和 device P4 三页协议仍未验证；F02/P4 继续 **open/not-ready**。consumer 摘要已刷新为 `summary.json` SHA-256=`76824e4404e0e86cfc6871c5f988f04fd517a03c815d57ab34a2cb5cd0f742cd`。
+- 下一步：从同一隔离 consumer 生成最小 unsigned app executable 或签名研究 app，回读最终 Mach-O UUID 并调用 `skia_atlas_text_op_reset_events/event_count/copy_events`；确认 Compose/Metal render path 后，才运行三页 P4 设备协议。生产依赖、锁文件、Demo、受保护 dirty/untracked 文件未修改。
+
+## 最新续接 — 2026-11-01 F02 `0.144.6` 内嵌库回读与隔离 consumer
+
+- ignored 研究库 `artifacts/verification/f02-instrumented-skia-20261101/maven-0.144.6/` 已由 iOS-only publication tasks 生成；`publish-ios-0.144.6.log` SHA-256=`f03537f561cc5f5b908962a7c87a648c695353f3939bed4d5a5012078dfc336b`，日志为 **BUILD SUCCESSFUL in 37s**。没有写入用户 Maven 缓存或生产依赖。
+- 两个 `0.144.6` Klib 均逐项回读：`ios_arm64` Klib 内嵌 `libskia.a` SHA-256=`1f5804d9c31d42870b324215b0f495bcca1b4060cefa02492486f8bab75b0cdc`，模拟器 Klib 内嵌 `libskia.a` SHA-256=`7d24eeec9a2ca4ff3dca53162a16e20e78fd293697abe2096d75eb8bb5846a7d`；分别与对应 instrumented archive 内的 `libskia.a` 完全一致。ABI manifest 回读为 Kotlin/Native compiler=`2.2.20`、ABI=`2.2.0`、targets=`ios_arm64` / `ios_simulator_arm64`。`instrumented-artifact-manifest.json` 已补充 `0.144.6` Klib/ABI/内嵌库哈希。
+- ignored committed-snapshot consumer `artifacts/verification/f02-consumer-20261101/` 使用 HEAD=`568aa6d...`、生产 Compose=`1.11.1` / Kotlin=`2.4.0`，通过本地 Maven 仓库和 init-script substitution。任务枚举成功；`iosSimulatorArm64CompileKlibraries` 依赖图成功，并明确回读 `org.jetbrains.skiko:skiko:0.144.6 -> skiko-iossimulatorarm64:0.144.6`。图日志 SHA-256=`998925837ce2049cc2aaec88ec935085535d3908de11791ac896affa28259ebe`，consumer 摘要 SHA-256=`76824e4404e0e86cfc6871c5f988f04fd517a03c815d57ab34a2cb5cd0f742cd`。
+- 该检查点时 framework link 尚未完成：授权执行环境的同一命令未被自动审批执行（429），受限环境重试又因 Gradle native service/socket 限制无法启动。上方最新章节已记录审批恢复后的两个 slice link；Compose renderer/Metal layer 的运行时身份、Mach-O UUID 和设备三页 P4 协议仍未验证，F02/P4 仍 **open/not-ready**。
+- 在 framework link 之前，已对固定源码中的 allocator/recorder block 做 source-extracted macOS stress fixture：同线程复用、跨线程 delete 与 owner/non-owner `ClearCache`、worker exit 占用 TLS、8 线程 sequence/generation stress、65540 事件 ring overflow 共 **5/5 pass**；fixture 输出 `stress-fixture-run.log`，结果已写入 `instrumented-artifact-manifest.json`（SHA-256=`a8b46de5e88aa478ea805f41dda6090fd35ec84f152db191493e227b2da862d3`）。该证据只验证记录器语义，不证明 iOS framework 已加载或 Compose/Metal render path 一致。
+- 下一步：在审批可用时只重跑 ignored consumer 的 `:demo:shared:linkDebugFrameworkIosSimulatorArm64` 与 `linkDebugFrameworkIosArm64`，回读 framework 中 instrumented C ABI 符号和 UUID，复核 iOS linked binary 的观测路径；通过后才考虑签名设备 run。生产 Gradle 图、锁文件、Demo、受保护 dirty/untracked 文件仍未改动。
+
+## 最新续接 — 2026-11-01 F02 固定源码构建预检与 GitHub 认证复核
+
+- 用户确认 `gh` 已以 `AmatsuZero` 登录；授权环境实测 `gh auth status` 为 keyring active。GitHub 只读 API 回读：`swiftlang/swift#91540` 仍 open，`#91672` 仍 open/未合并、head=`0a53ffc501e5d3ac475ad36a9fc485b5623c570d`；`#92814` 已合并，不能据此推断 Xcode 27.2 已包含相关修复。F09 生产 archive 门槛未改变。
+- ignored `artifacts/verification/f02-instrumented-skia-20261101/` 中固定 Skiko `9a5b398...`、Skia `22f58c9...` checkout 均干净。嵌套 `skiko/skiko/gradlew` 的 Gradle 8.14.3、隔离 `GRADLE_USER_HOME` 下，`:prepareLocalSkiaBuild -Pskia.target=ios --dry-run --offline` exit 0；它只证明任务配置通过。首次真实 arm64 build 进入官方 `git-sync-deps`，重跑时依赖目录增长至约 3.8 GB；随后 `unicodetools` shallow fetch 189 秒无返回，人工有界停止，exit 130。完整 Gradle 日志 SHA-256=`7839ecd40e02d9e8de4cbf3016bb744c9580addf0f5eb18dbcef3754d19d3482`，摘要见同目录 `build-route-summary.json`。精确清理本轮中断留下的子进程；无 Skia archive、编译器或 ABI 结果。
+- 生产 Gradle 图、Demo、锁文件和受保护 dirty/untracked 文件未改；未 publish Maven 或运行设备。F02/P4 仍 `open/not-ready`。下一步先完成固定 Skia 的依赖同步和 iOS arm64/simulatorArm64 研究包，再进行隔离 substitution、ABI/render-path 对照和 allocator 事件 instrumentation；不要把 dry-run 或部分依赖拉取当成资源根因证据。
+
+## 最新续接 — 2026-11-01 F02 instrumented Skia 研究路线
+
+- 固定 Skiko `0.144.6` / `9a5b398bb2044fff7e7a84fbfd6f4b803e4427c0` 与 Skia `m144-22f58c9fd4` 的官方代码已核对。Skiko 支持 `:prepareLocalSkiaBuild -Pskia.repo.dir=... -Pskia.target=ios` 后用 `:skiko:publishToMavenLocal` 生成 iOS arm64/simulatorArm64 本地研究库；`NativeTasksConfiguration` 显示 iOS12 floor、Metal/CoreGraphics/CoreText/UIKit 链接及 `-include-binary`。
+- 这只是隔离 research build 路线，没有证据能直接替换 Compose Multiplatform 1.11.1 的传递 Skiko。后续若执行，必须在 ignored checkout 做 dependency substitution，并对 ABI、Compose renderer、Metal layer 和 AtlasTextOp 构造/析构/cache/TLS 事件做对照；不修改生产依赖、不调用私有 `ClearCache()`，F02/P4 仍 `open/not-ready`。设计边界见[研究设计](superpowers/specs/2026-11-01-f02-instrumented-skia-design.md)与[AtlasTextOp 调查](validation/p4-atlas-text-cache.md)。
+
+## 最新续接 — 2026-10-31 F09 Swift 编译器上游门槛
+
+- `tools/tests` 使用 Ruby 3.4 wrapper 新鲜全套 **225/225** 通过；受保护的 `project.pbxproj`、身份草稿及相机 probes 均未编辑/暂存，生产 `Package.resolved` SHA-256 仍为 `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。Metal Toolchain 在授权 Xcode 27.2 环境显示 `installed`，不再是 F09 的当前阻断。
+- 官方 Swift issue [`#91540`](https://github.com/swiftlang/swift/issues/91540) 仍 `open`，明确描述 6.4 interface printer 的跨模块 associated-type selector 错误及 `swift-collections` 触发签名；修复 PR [`#91672`](https://github.com/swiftlang/swift/pull/91672) head=`0a53ffc501e5d3ac475ad36a9fc485b5623c570d` 仍 `open`/`merged=false`。原始 API JSON 保留于 ignored `artifacts/verification/f09-upstream-compiler-20261031/`，哈希见[分发验证](validation/apple-mlxvlm-distribution.md)。没有可用的已发布编译器修复或已验证的 dependency-only 生产配置；不能把 issue workaround 或开放 PR 当成 F09 通过。
+- 因分发验证文档增加上游来源，P11 readiness 新快照 `artifacts/verification/p11-readiness-20261031-f09-upstream/summary.json` SHA-256=`002cdd413f50526c50163bb0c2eb4d7ce9173e043848cd485b37774e98041e61`；校验为 **69 evidence paths / 77 source hashes / 9 rows with gaps**。grouped report 仍 **3 groups / 9 coverage**，`open/not-ready`。下一步只有已发布修复后的生产 archive，或经独立评审的 vendored/target-scoped policy 才能解开 F09 Task 3–5；F02/P4 原生残留仍需析构/free/TLS 观测机制。
+
+## 最新续接 — 2026-10-31 F11 跨场景自然视频质量报告
+
+- 使用两份 immutable 真机原始报告生成六行范围明确的自由描述比较：旧 Common swifts 与新 Kawaida waterfall，各三个 `semantic-motion-*`，相同 prompt `Describe what happens in this video in one brief sentence.`。原始报告 SHA-256 分别为 `620ce4d2d3a90e83e9385ad5fbb92fe7eb60be728d7be5aa2015863735413ace` 与 `bcf785bc9637965378f22ac67204e15d68fa63eb6544d35fa976946cfdd68b7b`；不同视频、fixture 和 source commit，不当作同一 benchmark 样本。
+- 派生报告 `artifacts/verification/f11-cross-scene-video-quality-20261031/summary.json` SHA-256=`530c4676f9e81f9a68a76e27aa806f872a4713bfc793361edd8a84267bebe474`，逐行保留原始输出。两场景窄场景词命中均为 3/3；飞鸟已有完整 rubric 为 1/3，瀑布三行包含抽查画面未支持的人、动物或鸟细节，完整语义质量保持 `unverified`。两组 strict motion/frozen pair 均为 0/3，temporal 结论保持 `observed-failure`。
+- 新 readiness `artifacts/verification/p11-readiness-20261031-f11-cross-scene/summary.json` SHA-256=`7e15eae548cadb93ef959189fe96897459ce70d7ccb429ca1a6fe9b6e4294380`，`validate_p11_readiness.py` 输出 **69 evidence paths / 76 source hashes / 9 rows with gaps**；`benchmark/p11/grouped-report-manifest.json` 已指向新快照，grouped report 仍为 **3 groups / 9 coverage**，P11 `open/not-ready`。该报告不新增 grouped sample。
+- 本轮只修改验证文档、readiness 快照和 grouped manifest；没有启动设备、麦克风或模型生成，也未触碰受保护 dirty/untracked 文件。P11 定向工具测试 **21/21**，`py_compile`/`git diff --check` 通过。提交 `5ed4f7a` 已快进同步 GitHub `origin` 与 GitLab `jihu`，两端回读同 SHA；GitLab 首次连接 reset，重试恢复。GitHub `gh` keyring 凭据已在授权环境复核为 `AmatsuZero` active；受限 shell 的 `default` token 错误是另一凭据视图。
+
+## 最新续接 — 2026-10-31 F08 跨场景自然视频
+
+- 从 Wikimedia Commons 官方 API 获取第二场景 Kawaida Waterfall 视频（作者 Lebu Ayiga，CC BY 4.0，3,520,704 B，SHA-1=`2d071fec07aa778a6f7b44cc34815eb4ed20cc19`，SHA-256=`8a0702df71ce6b8712b2b5d7c24db8261720198922e663c8bbe0a933524e79f9`）。来源、许可、原片和派生 fixture 只在 ignored `artifacts/verification/f08-cross-scene-waterfall-20261031/`；contact sheet 已人工核对为瀑布画面，不使用 Photos、私人媒体或镜像。
+- 现有 `natural_video_temporal_fixture.py` 固定 0–2、2–4、4–6 秒 motion 与 repeated-first-frame control；6 段均为 2 秒、48 帧、320×180 H.264/BT.709、无音轨、无 B-frame，fixture manifest SHA-256=`69ecac7378a1a76e9acbbc135ac3e8bbe2f5c7942e95c0e46f4540b21bd7e92b`，独立 validator 通过。
+- ignored waterfall consumer 以生产 SDK 源、lock 和固定模型构建，签名 device build exit 0；iPhone 16 Pro Max / iOS 27.0.1 上 9/9 请求成功。backend=`mlx.smolvlm2-500m`，model=`fa57db46815177fbdfd65cc85a2b3416a8332268`，runtime=`6e338e5df49424fc0db7c6d58184d622f92ed18a`，source commit=`f0ff4ed72c061394f0c04357da771a50c0fb4d2b`。
+- 原始报告 `device-report.json` SHA-256=`bcf785bc9637965378f22ac67204e15d68fa63eb6544d35fa976946cfdd68b7b`，哈希绑定摘要 `cross-scene-summary.json` SHA-256=`30be9e4895bedb2e547b9fb76fb49b2ce8154ebc2d6c55c8a86fea14da0a7280`。三个自由描述均命中瀑布/水（3/3 窄场景词），但含未由抽查画面支持的人/动物/鸟细节；motion/frozen 严格标签 pair=`0/3`，去句号诊断仍=`0/3`，结论为 `observed-failure`。
+- P11 readiness 已刷新为 67 evidence paths / 74 source hashes / 9 rows with gaps；快照 `artifacts/verification/p11-readiness-20261031-f08-cross-scene/summary.json` SHA-256=`b6fa75bc25dcda363651c58cc03db1759d5b2fe0dd0a68fe0fece468bb938a66`，`tools/validate_p11_readiness.py` 与 grouped report 均通过，3 个既有 grouped benchmark 样本未增加。完整 tools 使用 Ruby 3.4 wrapper 为 **225/225**；首轮无 wrapper 的失败是系统 Ruby 2.6/3.4 gem 混用，日志保留在同一 ignored 目录。
+- F08/P11 仍 `open/not-ready`；本轮只关闭“第二场景来源和真机执行缺失”这一窄缺口，不把自然质量、跨场景泛化、主观质量、GPU/energy、持续资源或 Demo 交互升级为通过。下一步优先继续 F04 生命周期或 F11 报告收口，不重复同一视频生成。
+
+## 最新续接 — 2026-10-31 F09 artifact gate 独立复审修复
+
+- 独立 code-reviewer 对当前 F09 三工具/三组测试复审先给出 `REQUEST CHANGES`：无 Critical/High，4 个 Medium，涉及 manifest provenance、declared module 与真实 XCFramework 绑定、重复 slice/interface、顶层 symlink。作者针对四项补测试和实现；修复后的同一 reviewer 复审给出 `APPROVE`、0 findings，独立定向 24/24。
+- 本轮未启动真实麦克风。现有 `IOSSpeechProbe` 是文件识别探针，重复安装不会关闭 F04 的真实录音缺口；后续需要受控朗读窗口。iPhone 16 Pro Max 在授权环境为 connected。
+- 四项修复已完成：manifest 要求 40 位 source/revision、Xcode/Swift、逐模块 license/source attribution；读取实际 XCFramework `Info.plist`、framework binary 和 public interfaces 绑定声明闭包；拒绝重复 slice/interface；standalone inspector 拒绝顶层 symlink。新增/扩展测试后 F09 定向 **27/27**、`compileall` 和 `git diff --check` 通过。
+- 用可写 Swift/Clang cache 与项目 Ruby 3.4 wrapper 重跑完整 `tools/tests`：**225/225** 通过。受限沙箱此前的 2 个 SwiftPM/cache 错误不计产品失败；没有修改生产 lock 或保护性 dirty/untracked 文件。
+
+## 最新续接 — 2026-10-31 F09 官方 refs 刷新
+
+- 只读官方 Git refs 核对成功：`swift-collections` `main` 和最新 `1.7.5` 同为 `f96b909e1a9e469620bc5037c1e24e00153f376f`；EventSource 最新 tag 仍是 `1.5.1`=`86b5096ac59ab46e66bd1f6377c604bc1dab0bc2`，`main`=`bb4b61273b5a976bb571859c17f903ebc3439df1`；`mlx-swift-lm` `main`=`128f49f1db38ea7b949f2ebb60967def8b76f58e`。
+- 直接检查当前 `mlx-swift-lm` 源码：`KVCache.swift` 两处、`MLXVLM/Models/Gemma4.swift` 两处 `ScaledDotProductAttentionMaskMode` switch 仍无 `@unknown default`。当前 main 也把 MLX 最低版本从 0.32.3 提高到 0.33.0（Swift Syntax 范围未变）；不能把换 main 当作固定 lock 的已验证修复。详见[分发验证](validation/apple-mlxvlm-distribution.md)。没有生产依赖改动或新 archive；F09 仍 `open/not-ready`。
+- 本轮曾有部分 `gh api` 读取被自动审批服务 429 拒绝，但上述 Git refs 与源码读取成功。受限环境的 CoreDeviceService 初始化超时；授权环境复核 iPhone 16 Pro Max 为 `connected`。未安排受控朗读窗口，因此没有启动真实麦克风。保护性 dirty/untracked 文件和 lock 保留。
+
+## 最新续接 — 2026-10-31 F09 生产依赖决策门槛与 GitHub 认证
+
+- 用户提供的 `gh` keyring 登录状态已在授权环境复核为有效（`AmatsuZero`，active）；受限沙箱内 `gh auth status` 仍显示 `default` token 无效，两者是不同凭据视图。`origin` 与 `jihu` 的 `feat/sdk-foundation` 已新鲜回读为本地 HEAD `45f7e966d0102c14b2878fa8537ac3cec2768aa3`；无需补推旧提交。
+- F09 [分发验证](validation/apple-mlxvlm-distribution.md)补充生产依赖决策矩阵：固定 lock 的 Xcode 27.2 framework archive 在 `OrderedCollections` Swift interface 校验 exit 65；此前隔离核对的 `swift-collections` 1.7.4/1.7.5 未解决，global selector workaround 与 EventSource 冲突，target-scoped flag 加五处 MLXLM 改动仅在 ignored 诊断副本成功。已检查版本中没有**已验证**的 dependency-only 生产配置；诊断双 slice wrapper 不能升级为完整二进制产物。
+- 本轮上游只读 API 刷新因自动审批服务 HTTP 429 未执行，因此不声称最新上游绝无修复。下一步先取得可支持的上游/编译器修复，或制定并审查明确的 vendored dependency policy，再执行完整 20 模块 closure、canonical resources、device/simulator XCFramework 和 source-free consumer。F09 `open/not-ready`，保护性 dirty/untracked 文件保持未暂存。
+
+## 最新续接 — 2026-10-31 诊断双 slice XCFramework 布局检查
+
+- 同一 ignored 诊断配置的 generic iOS Simulator wrapper archive 也成功，日志 `archive-diagnostic-sim.log` SHA-256=`b6fd24eb0ca594a9ab99625edd00811446e826e47cd3ebce3d12cfa115887c30`。与 device wrapper slice 合成 ignored `MLXVLMFrameworkProbe-diagnostic.xcframework` 后，`tools/inspect_mlxvlm_xcframework.py` 通过 device/simulator Mach-O、arm64、iOS 18 floor、Swift interfaces、C module maps；layout report SHA-256=`5f3ca99da50d85a7f067a26195e4af2bb85721316cce4f28f0bd6cff54cb459a`。
+- 该结果只证明诊断 wrapper 的双 slice 布局工具链可行：XCFramework 有 0 resource bundles，公开 interface 仍 re-export `ODAIKitAppleMLXVLM`，没有 20-module closure、canonical resources 或 binary-only consumer。不要把它替代 F09 生产 artifact。
+- 完整诊断绑定摘要位于 `artifacts/verification/f09-framework-target-20261031/diagnostic-summary.json`，SHA-256=`cbffcd9dea4260db32fab00790b22f47dcb1a1a4723b2ca29780dbb52ab7ff1c`；明确记录 `fullModuleClosure=false`、`resourceBundles=0`、`binaryOnlyConsumer=false`、`productionDependencyCompatibility=false`。
+- 写入本节前双端远端已新鲜同步到 `1cd1236`；本地保护性 dirty/untracked 文件保持未暂存。F09 下一步仍是生产依赖策略/完整 closure，而不是重复 wrapper archive；后续提交需重新核对远端 SHA。
+
+## 最新续接 — 2026-10-31 F09 诊断 framework archive 与双远端同步
+
+- 用户恢复的 `gh` keyring 凭据在授权环境核对有效；一次性 HTTPS askpass 非强制快进将 `f553b69` 同步到 GitHub `origin/feat/sdk-foundation`，GitLab `jihu/feat/sdk-foundation` 此前已是该提交。没有更改全局 Git 配置、强推、merge、tag 或 release。此后新提交需再按新鲜远端 SHA 快进同步。
+- 使用 ignored `f09-target-scoped-20261030/SourcePackages` 诊断副本和 `f09-framework-target-20261031/snapshot` 的 XcodeGen wrapper target，generic iOS unsigned Release archive **exit 0 / ARCHIVE SUCCEEDED**。原始 `archive-diagnostic.log` SHA-256=`8b768fcba17351e0875da032551d6c2314148b2b05df7615cea1ffc4a85b6681`。这只证明隔离 workaround 下 framework target 可归档：产物仅 `MLXVLMFrameworkProbe.framework`，公开 interface 仍 `@_exported import ODAIKitAppleMLXVLM`；archive 有 24 个 `.o`、2 个 wrapper interfaces、0 资源 bundle，没有 20 模块闭包或 simulator slice。详见[分发验证](validation/apple-mlxvlm-distribution.md)。
+- 生产固定 lock 的同一 target 仍在 `OrderedCollections` Swift 6.4.2 interface 校验失败；ignored selector flag/MLXLM switch 补丁不可作为生产兼容通过。下一步需先确定受支持的依赖配置或明确 vendored policy，再构建完整 device/simulator XCFramework 及独立 binary-only consumer。F09 和发布仍 `open/not-ready`；保护性未提交修改保留。
+
+## 最新续接 — 2026-10-30 F09 binary artifact gates
+
+- F09 计划 Task 1/2 已完成，Task 3 仅完成布局检查器。提交 `73f70c4` 包含 artifact manifest validator、committed-tree snapshot、XCFramework/Mach-O 布局检查器、定向测试和[分发证据](validation/apple-mlxvlm-distribution.md)。独立审查发现的 canonical 资源哈希、真实 Mach-O、畸形 manifest 与 symlink 问题已修复并由测试复核；未取得修复后的新一轮独立 APPROVE。完整 `tools/tests` 在可写 SwiftPM 环境 **221/221**，`compileall`/`git diff --check` 通过。
+- 忽略目录 `artifacts/verification/f09-binary-snapshot-20261030-v2/` 保存 `79536bd715146eb69906c2123d907e2406df47e2` 的 147 个已提交 package 文件；lock SHA-256=`e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`，tree SHA-256=`8d3b9e075e165ca1ce35d71bd1735c9dd7d0c1536aa9fcbf82b0526260eb2a68`，diagnostic patch manifest 明确为 `null`。保护性 dirty/untracked 文件哈希前后未变。
+- Xcode 27.2 拒绝 `xcodebuild -packagePath`，尚无可归档的增强 framework target；当前 App archive 仍只含对象文件。Task 3 下一步需从 committed snapshot 建立真实 device/simulator framework 构建项目，并先证明 OrderedCollections/EventSource 和 MLXLM switch 的**生产可支持**依赖配置。没有增强 XCFramework、binary-only consumer 或资源运行时结果，F09 继续 `open/not-ready`。
+- `73f70c4` 已快进推送并新鲜核对到 GitLab `jihu/feat/sdk-foundation`。GitHub `origin` 使用 SSH 时返回 `Permission denied (publickey)`；本机 `gh auth status` 显示默认 token 无效，本轮无法新鲜读取 GitHub SHA；上次核对为 `79536bd`，可能已变化。没有强推、tag、release 或 merge。保留本地提交，恢复 GitHub 凭据后按 `scripts/sync_remotes.py` 的快进检查补同步。
+
+## 最新续接 — 2026-10-31 F09 framework-target 工具链门槛
+
+- 在 ignored `artifacts/verification/f09-framework-target-20261031/` 从 `79536bd` committed snapshot 生成隔离 XcodeGen framework target；workspace 复制生产 `Package.resolved`、使用固定依赖缓存及 offline 解析 flags。XcodeGen exit 0；Xcode 27.2 generic iOS Release unsigned archive exit **65**，首个可归因失败为 `mlx-swift_Cmlx` 无 Metal Toolchain，尚未产出 archive。原始 log SHA-256=`ca600eb0c8cdd542bc8a43562c36bf17c431c2579392c5206e7868ad0bb363c5`，完整 argv/spec/summary 均在同目录；详见[分发验证](validation/apple-mlxvlm-distribution.md)。
+- 初次临时探针忘记在生成的 workspace 放 lock，虽使用 offline flags 仍尝试 GitHub clone，传输失败 exit 74；此轮不计源码或依赖兼容性失败。之后 pinned rerun 越过解析；既有缓存 checkout 的 tracked 状态为 clean，生产 lock 与保护文件哈希未变。没有安装 Metal Toolchain、下载模型、修改生产依赖、签名或发布。
+- 下一步先取得可用 Metal Toolchain 或另一个已安装的兼容 Xcode，再用同一 pinned project 复核第一真实编译错误；继续验证 device/simulator slices、20 模块闭包、资源和 binary-only consumer。F09 仍 `open/not-ready`，不要把本探针或旧 App archive 计为增强二进制通过。
+
+## 最新续接 — 2026-10-31 Metal Toolchain 安装后真实首个编译门槛
+
+- 用户批准后安装 Xcode Metal Toolchain 27B47（`com.apple.dt.toolchain.Metal.32023.922.4`）。同一 committed snapshot/framework target、固定 lock、固定 cache、offline flags 的第二次 unsigned generic iOS archive 已越过 Metal 编译，随后 exit **65** 在生产锁定 `OrderedCollections` 1.7.3 的 Swift 6.4.2 textual-interface verification；首个错误为 `Element is not imported through module OrderedCollections`，随后为 `remove(at:)` label/type 错误。没有 archive 或 framework 产物。
+- 原始日志 `artifacts/verification/f09-framework-target-20261031/archive-v2.log` SHA-256=`650a143ac9d6a24ca5c404a228d57e0623dfefc4f30210f1b574f6a9e624c330`；同目录保留 pinned project、Package.resolved、argv、derived 诊断和 summary。保护文件、生产 lock、固定 cache checkout tracked 状态未变。
+- 结论：Metal Toolchain 前置条件已排除，F09 当前真实阻断收敛为生产依赖/Swift textual-interface 兼容性；不能把 ignored target-scoped selector workaround 或五处 MLXLM switch 补丁当作生产修复。下一步需获得上游/依赖支持的 selector 配置或明确 vendored policy，再重跑 device/simulator framework 闭包；F09 仍 `open/not-ready`。
+
+## 最新续接 — 2026-10-30 F09 binary distribution 设计与实施顺序
+
+- 在现有 F09 当前图像/视频 source App archive 证据上，新增 [binary distribution design](superpowers/specs/2026-10-30-apple-mlxvlm-binary-distribution-design.md) 与 [implementation plan](superpowers/plans/2026-10-30-apple-mlxvlm-binary-distribution.md)，并在[分发验证](validation/apple-mlxvlm-distribution.md)中加入入口。设计要求完整 20 个本地 Swift interface 模块的闭包、C module maps、模型 JSON/Metal 资源、device/simulator 双 slice，以及不带增强源码 checkout 的独立 binary consumer。
+- 计划从 committed tree/固定 lock 的 artifact manifest 和兼容配置证明开始，再做 XCFramework 与搬移 consumer；当前 App archive 与 isolated target-scoped flag/五处 enum switch 诊断补丁不升级为生产二进制通过。F09 仍 `open/not-ready`，P11 与发布结论不变。
+- 本轮只写文档和验证顺序，未执行新增 binary build、没有下载依赖/模型、没有修改生产 lock 或受保护 dirty/untracked 文件。下一次从计划 Task 1 的 manifest validator RED→GREEN 开始；若兼容配置仍不具生产可支持性，记录具体失败并停止发布包构建。
+
+## 最新续接 — 2026-10-30 双端项目介绍材料与 Wiki 发布
+
+- 新增领导/产品介绍材料 `docs/reports/2026-10-project-introduction.md`，按参考调研报告补齐背景、适用场景、业务数据流、SDK 分层、双端能力矩阵、Demo 说明、性能/资源对比、发布边界和后续计划。正文明确当前 `10/12`、`open/not-ready`，不把阶段性证据写成发布承诺。
+- 新增并裁剪 4 张公开 Demo 截图：`docs/reports/assets/android-demo-home-20261030.png`（TECNO KM9 / Android 15 真机）、`ios-speech-demo-20261020.png`、`ios-asr-cancel-demo-20261020.png`、`ios-video-demo-20261025.png`。图片已视觉检查；ASR 图按实际内容标为运行/取消状态，不误称为权限弹窗。
+- 仓库提交 `f04bfb0a861fc883f3d2d0e09f29f1775740d384` 已推送到 GitHub `origin/feat/sdk-foundation` 与 GitLab `jihu/feat/sdk-foundation`。现有 `project.pbxproj` dirty、身份草稿和相机 probes 等受保护 dirty/untracked 文件未暂存、覆盖或清理。
+- GitHub Wiki 已更新首页与介绍页，Wiki HEAD=`b9d296fa495232cfa1490248394f5406d56b3d00`；介绍页 HTTP `200`，页面引用 4 个图片 URL，Android 图片原始 URL HTTP `200 image/png`。GitLab Wiki 已更新首页与介绍页，Wiki HEAD=`9bf0f8286001fd4936a6ee4ba778fa17123d8053`；Git push 成功，未登录 HTTP 请求会重定向到 `/users/sign_in`，页面读取需已有 GitLab 登录会话。
+- 后续更新约定：先修改仓库中的介绍材料/月报，再复制到 `/tmp/ondevice-ai-kit-wiki-20261030` 与 `/tmp/ondevice-ai-kit-gitlab-wiki-20261030` 的 Wiki Git 仓库，提交并推送；图片优先使用已审核、无私人媒体的验证附件。
+
+## 最新续接 — 2026-10-30 F09 当前图像/视频源码 archive 与示例兼容修复
+
+- 复核发现下节成功 archive 使用 10 月 23 日的 image-only 搬移快照。此次从当前 `a98aa51` 重新生成并搬移 source consumer，147 个 package 文件逐项匹配当前 HEAD；生产 lock 与受保护 dirty/untracked 文件保留。
+- 当前 consumer 的首次 archive 真实 exit 65：`VideoFixtureSuite.swift:191` 对公共 `MLXVLMGenerationEvent` 缺少未知 case。示例源码增加一行 `@unknown default: append("unknownGenerationEvent")`，保留已知五类事件处理；重新生成后同一 unsigned Release generic iOS / library-evolution archive **exit 0 / ARCHIVE SUCCEEDED**。依赖继续使用下节 ignored target-scoped flag 与五处 MLXLM switch 诊断改动，不能视为生产依赖已修复。
+- 当前 archive 原始日志 `artifacts/verification/f09-current-source-20261030/archive-fixed.log` SHA-256=`ed582152bb95e8cd6e4a2122ebdfff1d1d3ff5c2253b0ab187a05cfe3f6851d2`；接口明确包含 `MultimodalVideoGenerationBackend`、视频 metadata 和事件，模型 JSON 与 canonical 相同，Metal bundle 存在。摘要 `summary.json` SHA-256=`3a8a4986fbbc53cb44184f1e42e1c5d25f1b0747514605a1a8c063b79354b590`。接口导入图有 20 个本地 Swift 模块，C modules 与资源还需单独处理；增强 XCFramework/device+simulator slices/binary consumer 未验，F09 仍 `open/not-ready`。
+- 相关 portable-source/consumer 回归在正常缓存环境 6/6；受限沙盒的两项 Swift 测试因用户缓存不可写失败，不计产品失败。独立 code-reviewer 通道返回 429，未取得 APPROVE；作者完成范围/证据自审，未发现 Critical/Important，但审查缺口继续保留。
+
+## 最新续接 — 2026-10-30 F09 隔离 App archive 越过依赖编译门槛
+
+- 同一 active goal 继续。原有受保护的 `project.pbxproj`、身份草稿和相机 probes 未覆盖或暂存；生产 `apple-mlx/Package.resolved` SHA-256 仍为 `e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。仅在 ignored `artifacts/verification/f09-target-scoped-20261030/SourcePackages/checkouts/mlx-swift-lm` 副本给五处 `MLXFast.ScaledDotProductAttentionMaskMode` switch 增加显式 `@unknown default`，未知值立即 `fatalError`；生产依赖没有修补。
+- 用搬移 source consumer 的 `MLXVLMConsumer` App scheme、Release、generic iOS、`BUILD_LIBRARY_FOR_DISTRIBUTION=YES`、unsigned、锁定依赖及 target-scoped OrderedCollections flag，真实 archive **exit 0 / ARCHIVE SUCCEEDED**。`MLXLMCommon`、`MLXVLM`、`ODAIKitAppleMLXVLM` 的编译和 interface 验证越过先前错误，App 包内包含 `smolvlm2-model.json` 与 `default.metallib`。原始日志 `artifacts/verification/f09-target-scoped-20261030/archive-v5-app-escalated.log` SHA-256=`97bece006f118bf9b05d9f70c3653827606f04558680c4c57fef6f3a41e3ae82`。
+- 这只是 **App archive**：SDK 产物在 archive 的 `Products/Users/daubert/Objects/*.o`，尚无可分发的增强 XCFramework、device/simulator slices 或独立 binary consumer。F09 与发布继续 `open/not-ready`。原 SwiftPM package workspace scheme 当前无法从搬移目录直接恢复；前两次错误工作目录/scheme 尝试和一次沙盒 SwiftPM 缓存失败均未进入编译，不能计产品失败。一次自动审批因 429 未执行；随后获准的实际 archive 已完成。
+
+## 最新续接 — 2026-10-30 F09 target-scoped archive 新阻断
+
+- 同一 active goal 继续；原有 `project.pbxproj`、身份草稿和相机 probes 等 protected dirty/untracked 文件未覆盖。使用 ignored `SourcePackages` 副本，只给 `swift-collections` 的 `OrderedCollections` target 注入 `-Xfrontend -disable-module-selectors-in-module-interface`；EventSource 保持默认 selectors。生产 `Package.resolved`、生产 checkout 和签名产物未修改。
+- 真实搬移 source consumer 的 unsigned Release generic iOS archive 已通过 `OrderedCollections` 和 `EventSource` 的 `SwiftVerifyEmittedModuleInterface`，随后 exit=`65` 在 `mlx-swift-lm` 首次失败。诊断为 Swift 6.4 对 `MLXFast.ScaledDotProductAttentionMaskMode` 的未知枚举值检查，位置为 `KVCache.swift:2627/2803`、`TurboQuantKVCache.swift:1345`、`Gemma4.swift:105`。
+- archive log SHA-256=`5a4e6d769b0a92712c0e3764366b964c91552f3557767dfe4cf4f015485937c2`；隔离摘要 `artifacts/verification/f09-target-scoped-20261030/summary.json` SHA-256=`ed5f997486bdecc8fd73301160b9e69a60f8824b5954eb60072a042f5424d9d8`。这证明 target-scoped 方向越过前两个门槛，但 F09 仍 `open/not-ready`，尚未得到 archive 或 binary consumer 通过。
+
+## 最新续接 — 2026-10-30 F09 EventSource textual-interface 依赖设置冲突
+
+- 同一 active goal 继续；现有 `project.pbxproj`、身份草稿和相机 probes 等 protected dirty/untracked 文件未覆盖。未修改生产 `Package.resolved`、上游 checkout、签名或发布产物。
+- 本地 EventSource 1.5.1 checkout（revision=`86b5096ac59ab46e66bd1f6377c604bc1dab0bc2`）在 `arm64-apple-ios15.0` 下用默认 module selectors 生成并独立回读 textual interface 成功；接口 SHA-256=`2992a275dade76028a002c4afcbd305b5fd5b8d7c48347285ca386bad6bfb188`。
+- 为 OrderedCollections 采用的 `-Xfrontend -disable-module-selectors-in-module-interface` 若全局传入 EventSource，编译期验证和独立回读均失败，错误为 `EventSource` 不是 actor `EventSource.EventSource` 的成员类型；接口 SHA-256=`92c827cb0b5dacb047cf7c7fb83ae1668619807b71b217cce7f7ae1f9adcd60a`。当前编译器已将 `-module-interface-preserve-types-as-written` 视为默认 selectors 的淘汰选项。
+- 上游缓存 `main`=`bdaaba6` 相对 1.5.1 只改 Swift 6.4 CI 矩阵，官方 tags 止于 1.5.1；因此没有已验证的 dependency-only 修复。F09 现在精确为 **OrderedCollections 需要关闭 selectors、EventSource 需要 selectors 的依赖级编译设置冲突**。隔离摘要 `artifacts/verification/f09-eventsource-interface-20261030/summary-corrected.json` SHA-256=`913ad55586c86fb28942b9279d6e64655f3e5296470706689ecc628697a90334`；F09 仍 `open/not-ready`。
+
+## 最新续接 — 2026-10-30 F11 生产 SDK 文件 ASR 资源补测
+
+- 同一 active goal 继续，无需替换；工作树 `feat/sdk-foundation`，原有 `project.pbxproj`、身份草稿和相机 probes 等受保护 dirty/untracked 文件未覆盖。隔离 consumer 由当前 `ODAIKitSpeech.SpeechRecognitionClient.recognize` 调用 `ODAIKitAppleSpeech.AppleSpeechRecognizerBackend.recognize`，使用相同固定合成 CAF；未修改生产 SDK/Demo，未使用麦克风或 Photos。
+- iPhone 16 Pro Max / iOS 27.0.1，PID=`32487`；输入 SHA-256=`ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`。unsigned generic 和签名真机构建均 `BUILD SUCCEEDED`，安装、启动、Documents 回收成功。预热及 5/5 次 SDK 识别成功，实际 backend 均为 `apple.speech.recognizer`、归一化全文匹配，`client.close()` 返回。
+- 原始 `artifacts/verification/f11-speech-asr-sdk-resources-20261030/device-report-final.json` SHA-256=`40d65c13c9ec7065ff639d51063e4508d186a004d38884689f1325074ecf6578`；五次耗时 p50/p95=`76.484/93.436 ms`，约 10 ms 采样进程 RSS 峰值=`36,782,080–36,929,536 B`。bounded summary SHA-256=`2b436735c860cc278f28232b1eb2d0e40492c16b8ec4c8c9ca797e0f4a9b4e04`，source manifest SHA-256=`8ae79f1efcc8f150fc58934739d2004054c86df29ecb3ecd8448b820278b469a`。
+- 直连 Speech framework 与 SDK 路径为独立运行，不能把 p50 差值归因为 SDK 固有开销；自然 CER/WER、断网、真实峰值/GPU/能耗及最低系统仍未验证。P11 维持 `open/not-ready`，goal 维持 active。
+- readiness 已刷新为 **61 evidence paths / 68 source hashes / 9 rows with gaps**；快照 `artifacts/verification/p11-readiness-20261030-f11-asr-index/summary.json` SHA-256=`e6ac109c818a1650b2b1df6d129eecff6f2518c9a2abd3be70def604f24bb88c8`。grouped 报告确定性重算为 3 groups / 9 coverage，输出 `artifacts/verification/p11-grouped-benchmark-20261030-f11-sdk-asr/summary.json` SHA-256=`dfbfcb8d9bc6b0e3667e82f630df1388b6a832323f73275087181ac9d586b86f`；SDK ASR 不加入兼容 benchmark sample。
+
+## 最新续接 — 2026-10-30 F11 iOS 文件 ASR 资源补测
+
+- 同一 active goal 继续；在 ignored `artifacts/verification/f11-speech-asr-resources-20261030/` 建立隔离 Speech framework probe，固定合成 CAF、一次 warm-up、五次顺序本机识别、逐 run 单调耗时和约 10 ms 采样进程 RSS。无麦克风、Photos 或私人媒体，生产 SDK/Demo 与受保护 dirty/untracked 文件未改。
+- 泛型 iOS 构建 `BUILD SUCCEEDED`；首次签名构建在受限环境因 CoreSimulator 服务和 profile 读取失败，授权环境复用现有 `io.ondeviceai.probe.f11speech` profile 后真机构建、安装和启动成功。CoreDeviceService 两次 Documents 读取超时后恢复；这不是 ASR 运行失败。
+- 正式原始报告 `device-report-final.json` SHA-256=`81e5312e678bce19cf441933ef430db670f7e5df483a60cf291bec92dad632f2`，PID=`32472` 与 `launch-final.json` 一致，bundle=`io.ondeviceai.probe.f11speech`，固定 CAF SHA-256=`ea1e97d99f859f4bb1eafb75f6090bb9fe98f89ab86bd903f7c325013f3dd98e`。warm-up 与 5/5 run 均 success、task completed、归一化全文匹配；耗时 p50/p95=`75.010/76.434 ms`，采样 RSS 峰值范围=`36,831,232–36,945,920 B`。bounded `summary.json` SHA-256=`71e163cec6634e595c338025d2070a8c0baa63271e936b585c2ddb15ddcca6f3`，来源清单保留源文件、构建/安装/启动/复制回执哈希。
+- 该 probe 直连 Speech framework，仅补固定文件原始延迟/RSS；生产 SDK client 性能、自然 CER/WER、断网、真实峰值/GPU/能耗、最低系统仍未验证。首轮和正式复跑的 RSS 基线明显不同，不能推算发布预算。P11 `open/not-ready`，goal active。
+- readiness 索引已加入 ASR 原始报告、summary、source manifest 和设计边界；最新快照 `artifacts/verification/p11-readiness-20261030-f11-asr-index/summary.json` 为 **57 evidence paths / 64 source hashes / 9 rows with gaps**，SHA-256=`e5497430c8e789ea1035c6adeec17af1673058400d9cd1d85f930162a2d4bf85`。grouped 复算仍为 3 groups / 9 coverage，结果 SHA-256=`f9d9ee46b3128c1c3f41cf5c3e25bf2bfcbff28967ac5426c9764736eb2dddf1`，重复生成逐字节一致；ASR 与 Video SR 均不硬映射为兼容 grouped sample。来源清单 10 项哈希回读无漂移，聚焦 readiness/grouped 回归 **21/21**。
+
+## 最新续接 — 2026-10-30 F11 iOS Video SR 原始质量/资源复核
+
+- 同一 active goal 继续，无需替换；工作树仍为 `feat/sdk-foundation`，现有 `project.pbxproj`、身份草稿和相机 resource/thread probes 等受保护 dirty/untracked 文件未 restore、覆盖、stage 或提交。
+- 隔离 probe `io.ondeviceai.probe.f11videosr` 在 iPhone 16 Pro Max / iOS 27.0.1 上使用已审计的 Common swifts BT.709 实验约定素材处理 48 帧。仓库与设备输入副本 SHA-256 均为 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`；SR 和 Core Image bicubic 两路均 `success`，各输出 1280×720/48 帧/24 fps/无音轨，设备 Documents 列表未出现 Photos 或共享相册路径。
+- 原始报告 `artifacts/verification/f11-videosr-20261030/device-documents/ios-video-sr-probe-2076985E-4089-4826-8893-4E6C4051E3D7.json` SHA-256=`73aacec0f3b5b78b203825304f52dc668761ae3fe504a93dd383a9d476a353b0`。SR 每帧 p50/p95=`93.408/94.587 ms`，采样 RSS 峰值增量=`127,500,288 B`；bicubic 为 `1.467/2.114 ms` 与 `442,368 B`。两路首帧/编码色彩元数据可比，仍只是 probe 进程 `resident_size` 采样，不是全机/GPU/energy 峰值。
+- 独立 `video_sr_validate.py --scale=4` 通过 48 帧/24 fps/无音轨/时序校验；`video_sr_quality.py` 两路均完成 48 帧配对，`colorComparability=matched-metadata`，SR PSNR/SSIM=`36.776212/0.979250`，bicubic=`38.872866/0.983506`。质量 JSON 为 ignored 证据，`qualityVerdict` 保持 `unverified`；不把单一自然素材的编码输出分数升级为模型主观质量或发布通过。
+- 该轮只补齐 F11 的真实 iOS Video SR 原始延迟、采样 RSS、输出完整性与色彩/质量边界；Android 后端、主观/跨场景质量、GPU/energy、持续资源和最低系统仍开放。P11 仍 `open/not-ready`，goal 继续 active。
+- 将本轮真机可用性、原始报告、两份质量 JSON、输入/参考和两份输出视频共 8 项加入 Video SR readiness 来源后，P11 readiness 为 **9 rows / 53 evidence paths / 51 source hashes / 9 rows with gaps**；grouped 报告仍为 **3 groups / 9 coverage**，聚焦 readiness/grouped 回归保持 **21/21**。SR 数据仍不硬映射成兼容 grouped sample。
+- 该快照随后被 ASR 续接快照替代；当前以顶部 `p11-readiness-20261030-f11-asr-index/summary.json` 和 `benchmark/p11/grouped-report-manifest.json` 为准。
+
+## 最新续接 — 2026-10-30 F11 iOS TTS 原始资源测量
+
+- 同一 active goal 继续；设备入口通过 `devicectl` 恢复，物理 `iPhone 16 Pro Max` / iOS 27.0.1（UDID `00008140-0008703436D3001C`，CoreDevice `1D0EA54B-8379-5147-84DF-A86534DADE1C`）已解锁。生产 Demo、SDK 和受保护 dirty/untracked 文件未修改。
+- 隔离 probe `io.ondeviceai.probe.f11speech` 使用当前 Apple Speech backend、固定 `en-US` Samantha 和固定短句；1 次 warm-up 后连续 5 次生成，5/5 `success`，同一 PID=`32416`。原始 `device-report.json` SHA-256=`d3c9d6caf68d5a45fa10bc9c85f8a23de4c469018d6ec0150c8b26b25d22e7c8`；bounded `summary.json` SHA-256=`c8c515d451d9237b3e28120358dc831ef16398f7ed9ab83f37a050fb3a7515e3`。duration p50/p95=`2779.727/2779.792 ms`；采样 RSS 峰值范围=`44,761,088–44,810,240 B`，方法为约 10 ms 间隔的 `mach_task_basic_info.resident_size`，不是真实峰值/physical footprint/GPU/energy。
+- 新 readiness 快照 `artifacts/verification/p11-readiness-20261030-f11-tts/summary.json` 已通过 **45 evidence paths / 43 source hashes / 9 rows with gaps**；grouped 报告确定性重算为 3 groups / 9 coverage，TTS 原始资源数据未硬映射为兼容 grouped sample。TTS 自然质量、断网行为、最低系统仍保持 `unverified/deferred`，P11 仍 `open/not-ready`。
+
+## 最新续接 — 2026-10-30 F09 OrderedCollections workaround 后的 EventSource 门槛
+
+- 同一 active goal 继续，无需替换；工作树 `feat/sdk-foundation`，`project.pbxproj` 和 8 项身份/相机受保护 dirty/untracked 文件未 restore、覆盖、stage 或提交。
+- Swift 上游 issue [#91540](https://github.com/swiftlang/swift/issues/91540) 与 PR [#92814](https://github.com/swiftlang/swift/pull/92814) 对应当前 `OrderedCollections` textual-interface 错误。严格 generic iOS interface 回读中，1.7.5 无 workaround 仍失败；加 `-Xfrontend -disable-module-selectors-in-module-interface` 后 1.7.5 和生产锁定 1.7.3 均退出 0。证据和接口哈希已记录在[分发验证](validation/apple-mlxvlm-distribution.md)的 2026-10-30 节。
+- 在搬移 source consumer 上用同一 workaround 运行 unsigned Release generic iOS archive，`exit=65 / ARCHIVE FAILED`；`OrderedCollections` 不再是首个失败目标，新的首个失败是 `EventSource` 1.5.1 的 `SwiftVerifyEmittedModuleInterface`（`EventSource.EventSource.Event` 与 `AsyncSequence` conform 错误）。原始日志在 ignored `artifacts/verification/f09-interface-workaround-20261030/archive.log`，SHA-256=`0a39797e059c6cb423ec08454d15e291d76199c35ac8051de92cc4653f4800b3`。
+- 结论仍为 F09 `open/not-ready`；没有修改生产 `Package.resolved`、上游 checkout、签名或发布产物。下一步只核对 EventSource 的受支持修复/隔离方案，不重复无参数 archive。
+
+## 最新续接 — 2026-10-30 P11 committed-tree candidate freeze 刷新
+
+- 最终 GitLab 连接恢复，`feat/sdk-foundation` 在 `origin` 与 `jihu` 均回读为 `9f066081bbd425846c9bb0cd2aaf2e258cdf9467`；下面 F08 节保留首次 TLS/connection reset 的历史尝试，不再是当前同步阻断。
+- 从当前 `HEAD=9f066081bbd425846c9bb0cd2aaf2e258cdf9467` 重建 committed-tree archive：tree=`58f27c795a7a5a90a83eab30a95a1dbc801b18e5`，tar=`artifacts/verification/p11-candidate-freeze-20261030/sdk-foundation-9f066081bbd.tar`，SHA-256=`c81cdf13b01abdfd7b2404648f949d1107d3fabd2ccf9e7b3ff77749cb658ae2`；`git get-tar-commit-id`、tree 与重复生成逐字节一致。
+- 归档只取 committed tree，八项受保护 untracked 文件均 absent；一项 tracked dirty 的 `project.pbxproj` 只保留提交中的旧版本，不包含工作树修改。SDK/Demo 源码目录相对上一冻结点没有 committed diff。候选摘要留在 ignored `artifacts/verification/p11-candidate-freeze-20261030/summary.json`，状态仍 `not-ready`。
+- 该刷新只关闭候选 SDK 快照的新鲜性检查，不满足 LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型/PAD、iOS15/API26、统一质量/资源报告等阻断项；P11 仍 `open/not-ready`。
+
+## 最新续接 — 2026-10-30 F08 跨场景素材搜索边界
+
+- 为继续 F08 跨场景 temporal quality，检查了当前仓库和既有验证目录；唯一有明确来源/许可/哈希的自然素材仍是 `tools/probes/natural_video_manifest.json` 中的 Common swifts，不能作为第二个场景重复使用。其他本地视频没有可审计授权，不纳入设备任务。
+- 对 Wikimedia Commons API 的代理路径和 `--noproxy "*"` 直连路径各尝试一次：前者因本机 `127.0.0.1:7897` 代理不可用退出 7，后者因 `commons.wikimedia.org` DNS 失败退出 6。完整尝试、策略和停止点记录在 ignored `artifacts/verification/f08-cross-scene-source-search-20261030/summary.json`；这不是 F08 通过证据。
+- 因此本轮不生成第二场景、不重复已有 temporal run；待有可审计来源和网络后恢复。F08 temporal pair 仍 0/3，P11 仍 `open/not-ready`，F03 最低系统按用户要求暂缓。
+- 本节 handoff 的首次提交 `daf1ff4` 先只推送到 GitHub；GitLab 曾在预检和单独重试中返回 TLS `SSL_ERROR_SYSCALL` 与 connection reset，随后在 F12 提交同步时恢复并已追平到 `5007e3f`。ignored `sync-summary.json` 保留失败尝试，当前不再阻断同步。
+
+## 最新续接 — 2026-10-30 P11 分组报告的 readiness 来源校验
+
+- 沿用同一 active goal，不替换；开始时 `feat/sdk-foundation`、本地 `origin`、`jihu` 均在 `5f8158261d6ca05907481a7b4ab5f0e207c633ca`。现有 1 项 tracked dirty 与 8 项 untracked 受保护文件的哈希保持不变，未覆盖或暂存。
+- 发现分组报告生成器只核对 readiness JSON 本身的 manifest 哈希，没有复核 readiness 内 `sourceHashes` 引用的底层证据。新增回归先观察到预期 RED（底层证据更改后仍生成报告），随后在生成器中调用现有 `validate_p11_readiness.validate_summary`；来源哈希漂移现在会在输出写入前被拒绝。
+- 独立审查又发现输出路径未覆盖 readiness `sourceHashes` 文件；已先观察到直接路径、软链接和硬链接 **3 个 RED**，再补齐 alias 拒绝。当前聚焦 P11 **21/21**、完整 `tools/tests` 在 Ruby 3.4 与可写 clang/Swift cache 的正常授权环境 **198/198**；受限沙箱首次运行因 SwiftPM `sandbox_apply` 失败，不计产品失败。当前 manifest 生成 3 组、9 项覆盖、9 行 gap，P11 仍 `open/not-ready`；新报告留在 ignored 的 `artifacts/verification/p11-grouped-benchmark-20261030-integrity/summary.json`。`py_compile`、`git diff --check` 通过。
+- F08 temporal pair 仍 0/3，F11 跨能力质量/资源原始测量仍缺，F03 最低系统按用户要求暂缓；此修复只防止陈旧证据产生新快照，不提升验收结论。
+
+## 最新续接 — 2026-10-29 P11 committed-tree candidate freeze 重建
+
+- 从当时 `HEAD=6ddc13a23cc8f7052b77a9486a527223b7c2d872` 重新生成 committed-tree archive：tree=`825c54d0af8ff5f1ad08a7d08fed28b434b30b0e`，tar=`artifacts/verification/p11-candidate-freeze-20261029/sdk-foundation-6ddc13a23cc8.tar`，SHA-256=`b6daeec000479665656ab87249ab28d20e7e51d46b37c598470b4df86426685a`；`git get-tar-commit-id` 与源提交一致，重复生成逐字节一致。
+- 归档只取 committed tree，排除当前 1 项 tracked dirty 和 8 项 untracked 的受保护文件；archive 内没有这些 untracked paths。候选摘要 `artifacts/verification/p11-candidate-freeze-20261029/summary.json` 状态仍 `not-ready`：Android LiteRT-LM 授权模型/真实 drain、Face Identity 生产模型/PAD、iOS15/API26、统一跨能力资源/质量报告仍是阻断项。
+- `docs/validation/acceptance.md` 已更新本次 archive 信息，readiness source hash 同步后通过 **9 rows / 42 evidence paths / 40 source hashes / 9 rows with gaps**；`benchmark/p11/grouped-report-manifest.json` 的 readiness SHA-256=`58126552d6fee4af1e58acf649b5281931c80a98df92b22189553524319ed6e4`。该重建只关闭 SDK committed-tree snapshot 的新鲜性，不冻结统一发布候选，也不改变基础里程碑 **10/12** 或 P11 `open/not-ready`。
+
+## 最新续接 — 2026-10-29 F08 静态语义证据校验加固
+
+- 本地审查发现静态语义 validator 原先只要求 launch receipt 的 source commit，未强制核对静态探针入口和 fixture manifest，也可能把输出路径指向 launch/install receipt。已先写出并观察到 **2 个 RED**，随后加固为要求 `--sdk-mlxvlm-static-semantic`、source commit、manifest 参数，并拒绝覆盖 source/launch/install 三类输入证据。
+- 专项 **4/4**、完整 `tools/tests`（Ruby 3.4 + 临时可写 Swift cache）**196/196**；真实设备 raw report SHA-256=`31eb195e375c123c39d5133636609cad835af80d0a80408af7912e53fcf43e01` 重新校验为 **3/3 pass-bounded**。该修复只提高证据完整性，不改变 temporal pair 0/3、F08 `observed-failure` 或 P11 `open/not-ready`。
+- 独立 reviewer 通道本轮仍返回 429，无 APPROVE；保留该审查缺口。下一步继续 F08 跨场景/标签概率诊断或 F11 资源专项，不重复同一 raw generation。
+
+## 最新续接 — 2026-10-29 F08 静止帧语义真机探针
+
+- 同一 active goal 直接 resume，无需替换；工作树 `feat/sdk-foundation`，设备探针源提交 `835221e11e06dae4db2e47d75e08ef64db855c32`。隔离签名 App `io.ondeviceai.staticsemantic` 已安装并在 iPhone 16 Pro Max / iOS 27.0.1 启动，launch receipt 的 PID=`31720`；模型、三个 frozen fixture 只存在 App Documents 沙盒，没有写入 Photos。
+- 原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/static-semantic/device-report.json` SHA-256=`31eb195e375c123c39d5133636609cad835af80d0a80408af7912e53fcf43e01`。三行均绑定 fixture hash、bundle、PID、backend=`mlx.smolvlm2-500m`、model revision=`fa57db46815177fbdfd65cc85a2b3416a8332268`、runtime revision=`6e338e5df49424fc0db7c6d58184d622f92ed18a`；prompt 为 `Describe the visible scene in one brief sentence.`。
+- 静态语义 validator 输出 `artifacts/verification/apple-mlxvlm-natural-video-20261028/static-semantic/summary.json`，`pass-bounded`、subject/scene **3/3**；三个输出都描述飞鸟和天空。该证据只关闭 frozen control 的基础场景语义可读性疑点，不改变原 temporal exact-label pair **0/3**、F08 `observed-failure`、P11 `open/not-ready` 或基础里程碑 **10/12**；temporal quality、GPU/energy、持续资源仍 `unverified`。
+- 本轮专项测试 **4/4**，完整 `tools/tests` 在 Ruby 3.4 与临时可写 Swift 缓存下 **196/196**，`py_compile` 与 `git diff --check` 通过。CoreDeviceService 首次读取报告发生初始化超时，使用授权的 `devicectl device copy from` 重试后成功；不要把此前超时当作 App 失败。提交 `71bb8bb` 已同步 `origin` 与 `jihu`，原始报告、summary、install/launch/copy receipts 均为 ignored 证据；生产 SDK、普通 Demo、九项受保护 dirty/untracked 文件未修改。
+- 下一步：若继续 F08，扩展不同来源/场景或完整标签概率/视觉特征观测；不要重复 Snapshot、adapter 或同一 temporal 生成任务。P11 仍保持 `open/not-ready`。
+
+## 最新续接 — 2026-10-29 P11 readiness 证据索引刷新
+
+- 静态语义 raw report 与 bounded summary 已加入 `multimodal-apple` 的 P11 evidence/source-hash 索引；不加入 grouped benchmark 样本，也不改变任何 unverified gap。`tools/validate_p11_readiness.py` 当前校验 **9 rows / 42 evidence paths / 40 source hashes / 9 rows with gaps**，`p11Gate=open`、release=`not-ready`。
+- `tools.tests.test_p11_readiness` 与 `tools.tests.test_p11_grouped_report` **19/19** 通过；状态矩阵已记录静态语义边界，`benchmark/p11/grouped-report-manifest.json` 已更新 readiness SHA-256=`64c1dfcd4718df968c600d4f0ba6718265dd2f14287505468c62d6a8c8805e42`。受保护 dirty/untracked 文件仍未暂存或修改。
+
+## 最新续接 — 2026-10-29 F08 选定标签前缀 margin 派生诊断
+
+- 同一 active goal 继续，未替换 goal。当前工作树 `feat/sdk-foundation`；本轮开始时本地、`origin` 与 `jihu` 的该分支已通过普通 fast-forward push/回读核对为 `a45b3f718351fa3c018956d0fd131e24df51fdc5`。九项受保护 dirty/untracked 文件哈希仍 **9/9** 匹配，未 restore、覆盖或 stage。
+- 沿用已验证的真实七行首 token logits raw report，不重新运行文字生成或设备 probe。新增 `tools/mlxvlm_label_margin.py` 与 `tools/tests/test_mlxvlm_label_margin.py`，从固定 tokenizer 的 `ĠMO`=`15720`、`ĠST`=`5022` 提取 selected prefix logits、margin 与仅在两 prefix token 上的归一化值；tokenizer hash 拒绝测试先观察到预期失败再修复，专项 **6/6**，拒绝缺失 token、raw/tokenizer hash 变更及覆盖输入。
+- 派生结果 `artifacts/verification/apple-mlxvlm-natural-video-20261028/label-margin/summary.json` SHA-256=`5c801baceb0072f571920c4bd58f05c3a04264f8bc25be07e832dd4019dd4a8b`，raw report SHA-256=`d20d2a4ca2c15480b0ed1d62bf36e00f42443da567fcb49f50b13cc2195f99ec`，tokenizer SHA-256=`5ece781dc8d2b2f3e2f289ca0ae50b17cfc27dd27bfe7971bb8241e0b964331a`。三组 motion/frozen margin 为 `1.625/1.000`、`1.625/1.375`、`1.750/1.250`；motion 均更高，但 frozen 仍偏向 `ĠMO`。这支持首 token 偏置诊断，不证明完整标签概率、视觉语义或 temporal quality；F08/P11 `observed-failure`、gate `open`、release `not-ready` 与基础10/12不变。
+- 下一步优先级不变：若继续 F08，需静止帧语义或真实完整标签分布/视觉特征观测；不要重复已有六次生成、Snapshot、adapter 或同一 raw report。生产 SDK、普通 Demo 与九项受保护修改未改动。
+- 完整 `tools/tests` 首轮受系统 Ruby 2.6/RVM gem 不兼容及 Swift ModuleCache 写权限影响失败；以已安装 Ruby 3.4 和临时可写 cache 在正常授权环境复跑 **192/192**。`python3 -m py_compile` 与 `git diff --check` 通过。
+- 修改验证文档后已刷新只读 P11 快照来源哈希：`tools/validate_p11_readiness.py` 输出 **9 rows / 40 evidence paths / 38 source hashes / 9 rows with gaps**，`open/not-ready`；`benchmark/p11/grouped-report-manifest.json` 已同步该快照哈希，未把 label-margin 派生诊断加入 benchmark sample。
+- 本轮新增提交 `3704c60`（派生诊断工具/测试/文档）、`bcb7818`（grouped manifest readiness hash）均已普通推送，且 `origin`/`jihu` 回读与本地一致；本段 handoff 更新另形成后续提交。当前无额外暂存的生产改动。
+
+## 最新续接 — 2026-10-29 F08 iPhone 首 token logits 边界
+
+- 同一 active goal 直接 resume，不替换；工作树 `feat/sdk-foundation`，HEAD=`608b22ac838432979c6217d374468c47dbe98535`。隔离 `io.ondeviceai.logitdebug` 探针在 iPhone 16 Pro Max / iOS 27.0.1 已解锁设备运行，PID `31609` 与 launch receipt 一致。固定本地模型权重及六段公开 fixture 仅放该 App 沙盒；不使用镜像、Photos、私人媒体或文字生成。unsigned generic 与 signed device build 均 exit0/`BUILD SUCCEEDED`；首次无冻结 package cache 的受限构建卡在 SwiftPM 远程 clone，已终止并用现有 `SourcePackages` 成功重建。
+- 正式原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/logit-boundary/device-report.json` SHA-256=`d20d2a4ca2c15480b0ed1d62bf36e00f42443da567fcb49f50b13cc2195f99ec`。七行含六个固定 motion/frozen 任务及一个 `motion-0-2` 重复 run；同输入两次完整 logits hash 一致，三组 motion/frozen hash 均不同，shape 全为 `[1,1,49280]`。六行 top-5 token ID 排序均为 `15720,5022,26332,372,625`，首位 tokenizer token `ĠMO`；各 pair 数值有差异但排序不变。同目录 `validate.py` 为 `pass-bounded`，含 PID/manifest/source/model hash 与篡改负例。
+- 这关闭固定输入在首 token logits 边界“完全相同”的疑点，但不证明 vision encoder 的正确运动语义或 control 答案。原正式六次 `MOVING.`、pair 0/3、`observed-failure`、F08/P11 `open/not-ready` 和基础10/12不变。下一步可用静止帧语义任务或标签概率/视觉特征区分模型能力与任务设计，不重复同一生成。九项受保护 dirty 文件继续保留；goal active。
+
+## 最新续接 — 2026-10-29 F08 iPhone prepared tensor 边界
+
+- 沿生产调用链 `MLXVLMVideoSnapshot.frames → MLXVLMVideoInputAdapter.prepare → LMInput.image.pixels` 构建独立签名 `io.ondeviceai.tensordebug` App；adapter 与 tokenizer loader 副本分别和生产源 SHA-256 `5f15491e843973f473f04abcd83ced284c64513a4daa232a4f5b849e075c7751`、`2c8f0958d7764b09cba527d123d13744de18b8478cd68fd5812143fcdf520084` 一致。设备只 provision 4.6MB tokenizer/config 和六个固定 fixture，没有复制或加载 968MB 模型权重，也没有执行生成。
+- iPhone 16 Pro Max / iOS 27.0.1，正式复跑 PID `31574` 与 launch receipt 一致。六行 prepared pixel shape 均为 `[8,512,512,3]`：三个 motion 各 8 个唯一 tensor-frame hash，三个 frozen 各 1 个；三对首帧 tensor hash 一致。每行文本输入均为 720 tokens、512 个 `<image>` tokens，token hash 六行相同；实际时间仍为 `0,0.25,…,1.75` 秒。原始报告 `artifacts/verification/temporal-iphone-tensor-20261029/device-report-rerun.json` SHA-256=`fa1244768cfd208fe6c4af0423187798f7677c378df2ab406d267057378a1052`；独立 validator 输出 `pass-bounded`，`verification.json` SHA-256=`2bed03a8286d1f8d4f0ed2bc8e5c5d5f8213d6edd747961f0d00c48074ca8262`；最新签名 build `** BUILD SUCCEEDED **`。
+- 该证据关闭固定 fixture 的 Snapshot 后、模型前预处理边界疑点：motion/frozen 差异仍存在于生产 adapter 交给模型的 pixel tensor 中，且六行文本 prompt/token 一致。它不证明 vision encoder/模型能感知差异，也不把旧 `MOVING.` 六次、temporal pair 0/3 改写为通过；下一处有区分力的边界是 vision encoder/模型内部，不再重复 Snapshot、adapter 或同一生成任务。P11 仍 `open/not-ready`，goal active。
+
+## 最新续接 — 2026-10-29 F08 iPhone 原生视频采样边界
+
+- 在已解锁的物理 iPhone 16 Pro Max / iOS 27.0.1 上构建并运行独立签名 `io.ondeviceai.temporalframes` App；隔离 consumer 引入与生产文件 SHA-256 一致的 `MLXVLMVideoSnapshot.swift`（`33db01c3ce3470b2d78f7ff6b2f7c87a9197dc41198295dd483c053424eb5f01`）。六个固定公开视频 fixture 仅复制到该 App 的 Documents 沙盒；未加载模型、未生成文字、未写 Photos。
+- 设备 PID `31522` 与 `devicectl` launch receipt 一致。六段均成功解码，每段 8 帧、实际时间 `0,0.25,…,1.75` 秒；三个 motion 各 8 个唯一像素哈希，三个 frozen 各 1 个，三对首帧哈希相同；snapshot 副本 SHA 与原始素材一致，close 后目录删除且原文件未变。原始报告 `artifacts/verification/temporal-iphone-native-frames-20261029/device-report.json` SHA-256=`9413fbc62497239d486f4a8cfb39bb470521d41ace3ae17e9b8b09065bb31529`；同目录独立 `validate.py` 输出 `pass-bounded`，校验结果 SHA-256=`b57b8a2919f1f1255fce07809cfabc93726e5c4bd512678d9b3d065168082d8a`。
+- iPhone/macOS 使用同一 RGBA 哈希渲染参数，但 48/48 对应帧的字节哈希不同，因此只认各平台内部 motion/frozen 关系，不声称跨平台像素相等。该结果关闭固定 fixture 的**物理 iPhone 生产 Snapshot 采样边界**疑点；MLX prepared tensors、模型感知和自然 temporal quality 仍未验证。旧正式模型输出 `MOVING.` 六次、temporal pair 0/3、`observed-failure` 与 P11 `open/not-ready` 不变；下一步若继续定位，应观察下游预处理/tensor，勿重复同一生成任务。
+- 首次受限构建因 ModuleCache/SPM 写权限在依赖解析阶段失败；授权环境同一命令 `** BUILD SUCCEEDED **`。受保护 dirty 文件未 stage/恢复/覆盖，goal 仍 active。
+
+## 最新续接 — 2026-10-29 F08 原生视频采样边界
+
+- 用生产 `MLXVLMVideoSnapshot.swift` 原文件构建隔离 macOS 27.2 探针，对六个 temporal fixture 完成 AVFoundation 解码：motion 每段8个唯一采样帧，frozen 每段1个唯一帧；三对首帧 RGBA 哈希一致；实际采样时间均为 `0,0.25,…,1.75` 秒；snapshot 临时目录全部清理且源文件未变。
+- 报告 `artifacts/verification/temporal-native-frames-20261029/report.json` SHA-256=`53fd6203ee5d71e194d99193eb66bace7a7009ddeeb066497785b32d34032f2b`。首次受限沙箱运行返回 `invalidInput`/系统查询拒绝，正常授权环境同一二进制复跑完成6/6；没有修改生产源码或fixture。
+- 只证明本机原生采样保留 motion/frozen 差异，不证明物理 iPhone 解码、MLX tensor 或模型感知；不能据此归因真机0/3。下一步若继续此调查，需要有区分力的下游输入边界证据，不重复相同 raw 输出；正式 temporal `observed-failure`、P11 `open/not-ready` 和 goal active 不变。
+
+## 最新续接 — 2026-10-29 F08 temporal 失败模式分解
+
+- 对固定 raw `device-report-v2.json` 的六个 temporal 输出逐行复核：全部为 `MOVING.`；正式 exact-label 为 0/6。仅为诊断去掉末尾标点后，motion 3/3 为 `MOVING`，frozen control 0/3 为期望 `STILL`；诊断报告位于 `artifacts/verification/apple-mlxvlm-natural-video-20261028/temporal/failure-mode-diagnosis.json`，SHA-256=`370a392590f2ab3e10a5b63cdd01d82e5875cac693d779e4c9256ac703a296ca`。
+- 该结果把输出格式问题与 motion/frozen control 区分失败分开记录，但仍是固定 prompt/同源场景的诊断，不能宣称纯运动感知或自然 temporal quality。正式 summary、P11 gate 和 `observed-failure` 结论不变；不重跑同一真机任务集。
+
+
+## 最新续接 — 2026-10-29 F08 temporal 原始行绑定修复
+
+- 根因复现：保持真实 raw-report 不变，只篡改 copied evidence 的六个输出为期望标签，旧 temporal validator 会从 `observed-failure` 错判为 `pass-bounded`。现在对成功完整 nine-row raw report 逐行核对内容，并禁止输出覆盖任何输入及 symlink/hardlink；严格 MOVING/STILL rubric、模型/生产SDK/Demo 均未改动。
+- 新回归先 RED（12 个子用例失败，无 errors）后 GREEN；聚焦38/38、完整 tools **186/186**。完整套件首次两个 Swift 测试因用户 ModuleCache 写权限失败，正常授权环境复跑后全部通过；不隐瞒首轮环境失败。
+- 真实 temporal evidence 经新工具重建与原 summary 逐字节一致，semantic1/3、temporal pair0/3、`observed-failure` 保持。未重跑相同真机输入，未篡改 raw/summary，不提升 F08 或 P11。独立 code-reviewer 返回 `Selected model is at capacity`，没有审查结论；保留 F12 缺口。
+- 下一步继续区分 exact-label instruction following 与 motion perception，或推进资源预算/缓存所有权设计；现有失败不放宽评分，不新增发布门槛。受保护dirty文件继续保留，goal仍active。
+
+
+## 最新续接 — 2026-10-29 F12 候选范围与证据重建审计
+
+- 同一 goal 继续保持 `active`，无需替换或新建 goal。对冻结 SDK 提交 `7b9f7fc75772b61948d211d72ec2e1e221362591` 到当前 `HEAD=cc438de8e32eec3f01d02d64bf7e6585f44ec2a3` 做只读范围核对：49 个提交路径全部位于文档、工具、探针、脚本或 benchmark；生产 SDK、KMP binding、Demo 和构建配置没有提交差异。既有 committed-tree archive 的 SHA-256=`6a2cb8afd895b13fa281d15f55046b3f263a1882aebd8ce31dff563bc3b2b666`，内嵌 tar commit 与冻结提交一致。
+- 当前 readiness validator 重新读取真实文件通过：9 rows、38 evidence paths、36 source hashes、9 rows with gaps；P11 gate 仍为 `open`，release 仍为 `not-ready`。`tools.tests.test_p11_readiness` 与 `tools.tests.test_p11_grouped_report` 为 **19/19**。
+- 两个最新正式诊断均可确定性重建：MLX cache attribution `summary.json` 与 validator 输出逐字节一致；首 token 前 Home report 与 validator 重建结果一致，报告中 10/10 source/evidence hashes 匹配。受保护 dirty/untracked 文件的 9/9 哈希保持不变。
+- 该审计只关闭候选范围/报告可重建性子项，不关闭统一 release candidate、独立 reviewer、P4/P11、最低系统、Android 授权模型/native drain、Face Identity 生产模型/PAD、自然 temporal quality、GPU/energy 或发布资源预算。独立 reviewer 若无返回仍按未验证处理。
+
+## 最新续接 — 2026-10-29 F08 首 token 前 Home 后台 terminal
+
+- 在 ignored 隔离 Home timing 副本中，以真实 Files provider 固定公开视频，在 `.videoPrepared` 后、首个文本 update 前触发系统 Home；保持生产 `willResignActive` 取消策略，不延迟 native。iPhone 16 Pro Max / iOS 27.0.1 PID `31298`，XCTest **1/1、0 failures、0 skips**。
+- `didEnterBackground` 时 phase=`CANCELLING`；106.301 ms 后 `nativeDrainAndLeaseRelease`，107.359 ms 后 `bridgeCancelled`；取消请求没有首个文本 update，前台 phase 保持 `CANCELLED` 且同输入重入成功。该窄证据关闭固定 fixture/首 token 前阶段的 `inBackgroundTerminalTiming`，不外推跨素材或跨系统。
+- 规范化 report `artifacts/verification/apple-mlxvlm-natural-video-20261028/pretoken-home-xctest/device-report-pretoken.json` SHA-256=`bdf65e038122c9b63fce6801eb9da33538de4212b33ae14ffe051a4a1a534774`；trace=`c727a0843ff58ca44270016e127d536ede339531c7986e9f7e4d3dbeef1935fa`，xcresult summary=`1ae5ea82406b8456743c8b08f19b8933008b701b98281c6de9a4469292add9d7`。validator 真实报告和6个篡改负例通过；生产SDK、普通Demo、受保护dirty文件未修改。
+- readiness 现为 **9 rows / 38 evidence paths / 36 source hashes / 9 rows with gaps**；P11 继续 `open/not-ready`。自然 temporal quality、物理触控、GPU/energy、持续资源、发布预算仍开放；该报告不加入 grouped benchmark。
+
+## 最新续接 — 2026-10-29 F08/F11 MLX cache 归因
+
+- 同一 goal active，工作树 `feat/sdk-foundation`，生产源码和9项保护dirty文件保持不变。正式设备 PID `31212`，固定公开视频/模型 12轮（8 success、4 cancelled）、drain/close/lease/临时清理全部通过。
+- 隔离 consumer 新增 MLX snapshot 和关闭后单次clearCache。close后RSS `1,153,695,744 B`、MLX active `148 B`/cache `1,086,181,704 B`；无干预等待2秒RSS `1,153,712,128 B`，MLX计数不变；clearCache后立即RSS `137,347,072 B`/cache0，再2秒RSS `137,428,992 B`、active108/cache40。相对无干预对照RSS下降 `1,016,283,136 B`，支持本workload约1GB主要残留是可回收cache。第一轮cache已约1.086GB但RSS较低，不把两者等同，也不声称所有泄漏/资源预算通过。
+- 正式 raw `artifacts/verification/mlxvlm-memory-attribution-20261029/device-report.json` SHA-256=`353ab172cba08aaefd4b8a5d9fe968d79e7d4a60089b0e4c4407f69f4fc98e31`；同目录 `summary.json`、`source-manifest.json`、`EXPERIMENT.md`、validator及8项合同测试。初版generic unsigned和signed build通过，加入等待对照后的signed build通过；最终PID与launch receipt匹配。两份pilot独立保留，正式结论只用等待对照版本。raw/source/build仍ignored，不纳入源码提交。
+- 新鲜 readiness 校验为 **9 rows / 35 evidence paths / 33 source hashes / 9 rows with gaps**；P11 focused tests **19/19**，grouped报告重算逐字节一致。研究子代理本轮429无结果，不计独立review；已按实际源码与报告完成作者复核。
+- 不修改生产SDK的全局缓存策略。下一步先确定资源预算和缓存所有权/多client影响，再决定是否提供显式维护策略；不重复相同诊断。其余F08自然temporal quality仍有失败、GPU/energy/跨素材资源开放，F11/P11 `open/not-ready`，基础里程碑仍10/12。F04受控朗读窗口尚无，最低系统设备仍暂缓。
+
+## 最新续接 — 2026-10-29 F08/F11 固定自然视频持续 RSS 观察
+
+- 当前 Codex goal 仍为同一 active 目标，继续 `goal resume`，无需替换；工作树为 `feat/sdk-foundation`。原有 `project.pbxproj`、身份草稿与相机 resource/thread probes 等受保护 dirty 文件未 restore、覆盖、stage 或提交。
+- 在 ignored 隔离 consumer `artifacts/verification/mlxvlm-sustained-video-20261029/consumer` 中新增显式 `--sdk-mlxvlm-sustained-video` 入口。无签名 generic iOS 与使用既有开发团队签名的 physical iOS build 均 `** BUILD SUCCEEDED **`；生产 SDK、普通 Demo、`apple-mlx/Package.resolved` 和 Photos 未改动。
+- iPhone 16 Pro Max / iOS 27.0.1，PID `31130`，固定公开 `common-swifts-24fps.mp4`（SHA-256=`97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`）在同一进程连续执行 12 轮，顺序为四组 `success → 首 update 后 cancelled → reentry`：8 次生成成功、4 次取消成功；每轮 `drain` 后临时 `odai-video-*` 快照均为空，lease/close/remove 与 closed-client gates 全部为 true。
+- 原始设备报告 `artifacts/verification/mlxvlm-sustained-video-20261029/device-report.json` 的 SHA-256=`0408fb19a30a5c4506fa5c92971453955deb5cb8c0360f19f0f2d53183007012`；同目录 `validate.py` 生成的 `summary.json` 记录 RSS 观察：第一轮前 `40,681,472 B`，首轮 drain 后 `136,200,192 B`，第二轮取消并 drain 后阶跃至 `1,141,293,056 B`，第12轮 drain 后 `1,152,892,928 B`，close 后 `1,152,909,312 B`。首轮至末轮增加 `1,016,692,736 B`，但第二轮之后只增加 `11,599,872 B`。采样方法为 `mach_task_basic_info` 进程 RSS，不能证明 GPU 专用内存、能耗、泄漏根因、跨素材资源或发布预算；这个阶跃和后续小幅增长已记录为后续专项问题，不提升 P11 为 ready。
+- F11 readiness 已纳入上述 raw report 和 bounded summary；新鲜校验为 **9 rows / 33 evidence paths / 31 source hashes / 9 rows with gaps**, gate=`open`, release=`not-ready`。分组 benchmark 仍只接受既有兼容 raw sources，不将持续 RSS 报告加入 grouped samples；重算 `artifacts/verification/mlxvlm-sustained-video-20261029/grouped.json` 与 repeat 逐字节一致，SHA-256=`608c5ae640a4744d6318e1569a248720eaa6528fa8d03b09e792b235f98af61e`。
+
+## 最新续接 — 2026-10-29 F09 swift-collections 候选复核
+
+- 当前 Codex goal 仍为同一 active 目标，继续 `goal resume`，无需替换；工作树为 `feat/sdk-foundation`。`project.pbxproj`、身份草稿与相机 resource/thread probes 等 8 项受保护 dirty 文件未 restore、覆盖、stage 或提交。
+- 官方只读 refs：`swift-collections` 1.7.4=`844289ac455816e193f1dbbe014f3c4dbe429410`，1.7.5=`f96b909e1a9e469620bc5037c1e24e00153f376f`。1.7.4 的 `OrderedCollections` 无变更；1.7.5 仅有 `93b0a28` 文件名歧义修复，未触及失败 API/interface。
+- 在 `/tmp/odai-f09-swift-collections.vVEqIL` 隔离副本中，Xcode 27.1 / Swift 6.4 / iPhoneOS27.1 / generic iOS / `BUILD_LIBRARY_FOR_DISTRIBUTION=YES` 的 `OrderedCollections` build：1.7.4 与 1.7.5 均 **exit 65**，同样停在 `SwiftVerifyEmittedModuleInterface`，错误为 `Element is not imported through module OrderedCollections`、`extraneous argument label 'at:'`、`Int` 到 `Key/Element` 类型错配。1.7.5 host `swift build` 成功不构成 iOS interface 或 binary 证据。
+- 证据摘要：`artifacts/verification/f09-swift-collections-20261029/summary.json`；生产 `apple-mlx/Package.resolved` 未变，SHA-256=`e67e985970770991f1eb2384ca9e9b6267fb8a8f1569051be5cfb2175f0ef858`。F09 仍 `open/not-ready`，不重跑完整 archive、不关闭 interface verification、不改上游 checkout；下一次只在出现明确上游/toolchain 修复时恢复。
+
+## 最新续接 — 2026-10-29 F08 temporal motion/control task-set 收尾
+
+- 当前 Codex goal 仍为同一 active 目标，直接继续 `goal resume`，无需替换；工作树仍为 `feat/sdk-foundation`，受保护的 `project.pbxproj`、身份草稿与相机 resource/thread probes 均保留，未 restore、覆盖或 stage。
+- F08 temporal task-set 已完成：复用 pinned CC0 Common swifts source，三个 2 秒 motion window 与三个 repeated-first-frame frozen control 共 6/6 fixture；metadata 为 320×180、24fps、48帧、H.264/yuv420p、无音频、`hasBFrames=0`。fixture manifest SHA-256=`666fbfebdc999aefa5b9db944a090024b9478c13107685af621fb842babe1694`，真实 validate 通过。
+- iPhone 16 Pro Max / iOS 27.0.1 的隔离 consumer 同进程完成 3 semantic + 6 temporal，共 9/9 rows；raw `artifacts/verification/apple-mlxvlm-natural-video-20261028/temporal/device-report-v2.json` SHA-256=`620ce4d2d3a90e83e9385ad5fbb92fe7eb60be728d7be5aa2015863735413ace`。semantic rubric 1/3；六个 exact-label 输出均为 `MOVING.`，motion/frozen pair 0/3，summary `observed-failure`，summary SHA-256=`787bb647a5d25522da17ef099fcbfa0ee3907a5dcc23cb6ca40a45d254ae0310`。这保留模型限制，不改写为通过。
+- P11 readiness 已刷新并通过只读校验：9 rows、31 evidence paths、29 source hashes、9 rows with gaps，gate=`open`、release=`not-ready`；grouped 报告重算为 3 groups/9 coverage，temporal 证据未加入 benchmark sample，重复输出逐字节一致。完整 tools suite **183/183**，专项 focused **29/29**，fixture/summary deterministic、`py_compile`、`git diff --check` 和保护哈希均通过。
+- 独立 code-reviewer 通道本轮 429，未取得 APPROVE；作者按 review focus 完成 self-review，未发现 Critical/Important，但不能将 429 视作独立审查通过。忽略目录 raw/build/summary 不提交；受保护 dirty 文件继续保留。
+- 仍保持未验证/开放：完整 natural temporal quality、跨场景泛化、GPU/energy/持续资源、background 内 terminal timing、真实 physical touch、minimum OS、Android LiteRT-LM production/native drain/模型、Face Identity production model/PAD，以及 P4 native residual root cause。发布继续 `open/not-ready`，基础里程碑仍 10/12。
+
+## 最新续接 — 2026-10-29 F08 固定自然视频五次真机语义质量
+
+- 当前 Codex goal 仍为同一 active 目标，直接继续，无需替换 goal；本工作树仍为 `feat/sdk-foundation`，保护 dirty 文件未 restore、覆盖、stage 或提交。
+- 修正 isolated consumer runner 的素材路径：设备复制步骤提供 `common-swifts-24fps.mp4`（SHA-256=`97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`），runner 已与其对齐；生产 SDK、普通 Demo、签名工程和 Photos 均未改动。
+- iPhone 16 Pro Max / iOS 27.0.1 使用签名 isolated App，在同一进程按固定 prompt 连续生成 5 次；App 沙盒只放公开 fixture/model。原始报告 `artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/device-report-5.json`：`state=success`、5 个 distinct UUID、backend=`mlx.smolvlm2-500m`、model/runtime revision 与冻结身份一致，耗时 2119.134–2362.877 ms；SHA-256=`64a657dcb3c3ada3762fdd746b2a5b4caebbc81174f6bfdd57ec15e4635aefd0`。
+- `quality/raw-runs.json`、`expected-identity.json` 已切换 `expectedRuns=5` 并逐行绑定原始报告/hash；validator 汇总 `summary.json` 为 subject/action/scene/semantic pass **5/5**，重复生成逐字节一致。`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 仍明确 `unverified`，不把五次单素材语义命中写成完整自然质量。
+- P11 readiness 已纳入五次原始报告：`29` evidence paths、`27` source hashes、`9` rows with gaps，validator 通过；新 grouped 快照为 `artifacts/verification/p11-grouped-benchmark-20261029-f08-quality-5/summary.json`，仍 3 groups / 9 coverage、gate=`open`、release=`not-ready`，自然质量报告不加入 benchmark sample。
+- 本轮已通过 build、quality validator、P11 readiness、grouped deterministic regeneration、25/25 focused tests、`git diff --check` 和保护哈希复核；文档/manifest 提交为 `8df9c0c427e6de42a0d428cab716b3cdff439faf`，已按既有授权同步并核对 local/origin/jihu 三端一致。隔离 consumer 源码与原始 5-run JSON 仍为 ignored 证据，不纳入生产 SDK 或普通 Demo。
+
+## 最新续接 — 2026-10-28 F08 自然质量 rubric 首包
+
+- 按用户“继续”从 F08 可执行队列进入自然质量首包；设计与计划为 `docs/superpowers/{specs,plans}/2026-10-28-apple-mlxvlm-natural-quality-*`。当前只改 validator/测试/文档和 ignored 证据，不改生产 SDK、Demo、签名工程或保护 dirty 文件。
+- `tools/mlxvlm_natural_quality.py` 及 6 项 focused unittest 已 RED→GREEN；评分器固定 rubric=`natural-video-semantic-rubric-v1`，要求复数 subject 并检查 action/scene 三类词义覆盖，且绑定原始 device report 路径与 SHA-256。对保留的 iPhone native run，1/1 semantic pass，重复汇总逐字节一致。
+- 证据：`artifacts/verification/apple-mlxvlm-natural-video-20261028/quality/{expected-identity.json,raw-runs.json,summary.json}`。readiness 为 **28 evidence paths / 26 source hashes / 9 rows with gaps**，P11 仍 `open/not-ready`。这是单个既有 run 的 bounded semantic evidence，不是完整自然质量结论；`naturalTemporalQuality`、`gpuEnergy`、`sustainedResources` 和额外 distinct runs 仍未完成。
+
+## 最新续接 — 2026-10-28 F08 Home 转场取消时序与 native provenance
+
+- 当前 goal 保持 active，继续 `goal resume`，不需要替换。工作树为 `feat/sdk-foundation`；受保护工程、身份草稿和相机 probes 保持本地，不 restore、不覆盖、不 stage。
+- iPhone 16 Pro Max / iOS 27.0.1 的独立 ignored 验证副本执行 `testNaturalVideoOSBackgroundCancellationAndReentry`：**1 passed / 0 failed / 0 skipped**，39.377 秒。真实 Files provider 选择公开 fixture；规范化报告为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/home-timing-xctest/home-timing-device-report.json`，trace SHA-256=`07c99f6d13f6d44266bb9a81e8d244db58c9c0a09f92808806020580bbbfd699`。
+- 同一 trace 保留 `nativeRequestAdmitted`、`firstNativeClientUpdate`、`willResignActive`、`nativeDrainAndLeaseRelease`、`bridgeCancelled`、`didEnterBackground` 及前台恢复/重入。取消 drain 在 `willResignActive` 后 41.882 ms，bridge terminal 再晚 1.185 ms；`didEnterBackground` 在 terminal 后 601.106 ms。因此只关闭 Home inactive 转场取消时序和 tagged request/backend/drain provenance；真正 background 内 terminal timing 仍为 `unverified`。
+- P11 readiness 已加入新报告并刷新相关文档/source hashes：validator 为 **27 evidence paths / 25 source hashes / 9 rows with gaps**，仍 `open/not-ready`；新 grouped 快照为 `artifacts/verification/p11-grouped-benchmark-20261028-f08-home-timing/summary.json`，聚焦回归 **19/19**。GitHub/GitLab F08 #8 描述已更新并经 API 复核为 `OPEN` / `opened`，GitLab milestone=`active`；未评论、未关闭，receipts 在同一 ignored 证据目录。本轮文档/manifest 已提交为 `96576a59d7f1ccea851d767974cd67da1a468ccf`，并已同步、核对 `origin` 与 `jihu`。
+
+## 最新续接 — 2026-10-28 F08 后台 observer 时序诊断增量
+
+- 隔离 validation observer 为每条 UIKit notification 新增真实单调时间与 `applicationState`，保留 host phase/update snapshot，并禁止 snapshot 覆盖 observer-owned 字段。新增回归先因字段缺失 RED，再通过完整生成 Demo ABI XCTest **75/75、0 failures、0 skips**；原始日志和 xcresult 在 `artifacts/verification/f08-observation-timing-20261028/`，详见[验证记录](validation/f08-observation-timing.md)。
+- 本包未重新运行真机，也没有关闭后台 terminal timing/native provenance 或其他 F08 gate；P11 readiness/benchmark 样本不变。下一次真实 Home 运行需保留含失败路径的 lifecycle snapshots，事件采样只能界定终态所在区间；native request/backend provenance 仍需独立 trace。独立 reviewer 本轮 429，未计 APPROVE。
+- 当前 goal 仍 active，同一范围继续 `goal resume` 即可；仅在任务目标改变时另设目标。受保护工程、身份草稿与相机 probes 均保留。
+
+## 最新续接 — 2026-10-28 F08 真机 Home 后台取消与前台重入
+
+- 复用隔离 MLX Demo 验证副本和公开 `common-swifts-24fps.mp4`，在 iPhone 16 Pro Max / iOS 27.0.1 执行 `testNaturalVideoOSBackgroundCancellationAndReentry`。真实 Files provider 选择后等待共享页面 `RUNNING` 和非空 update，XCTest 按系统 Home 进入后台；回前台状态为 `CANCELLED`，随后1秒内无自动重启，同一输入再次生成成功，输出 backend=`mlx.smolvlm2-500m`。
+- 真机 XCTest **1/1、0 failures、0 skips**，31.659 秒；build-for-testing 与 test-without-building 均成功。报告为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/os-background-xctest/device-report.json`，原始 xcresult 与两个文本附件同目录。
+- 该证据关闭 F08 的 Home往返取消/1秒不自动重启/前台重入子项；后台中 terminal 时序、自然质量、GPU/能耗、持续资源和完整物理触控仍未验证。项目内 notification 探针本轮仅返回 `OS lifecycle notifications timeout`，缺少足够事件，保留为失败对照且不据此归因。
+- P11 readiness 已纳入新报告：**26 个 evidence paths / 24 个 source hashes**，9行仍有gap；grouped 快照为 `artifacts/verification/p11-grouped-benchmark-20261028-f08-background/summary.json`，仍3组/2项能力、`open/not-ready`。聚焦回归19/19通过。F01–F12 milestone 与 parent issue 已在两端创建，映射见[跟踪索引](validation/foundation-tracking.md)；F08 issue #8 仍应保持 open。前一 checkpoint 的 F08 Files 文档与 tracker 索引已分别提交为 `e5fd746`、`59f99a6` 并同步两端。
+
+## 最新续接 — 2026-10-28 F08 真实 Files provider 共享 Demo 真机验证
+
+- 基于 `c978628a7e3cb4f97f580ae307bb7f3218a9e1e1` 构建独立验证工程；固定公开 `common-swifts-24fps.mp4`（SHA-256 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`）和模型仅放测试 App 沙盒。XCTest 从真实 Files provider 选择视频，未使用 iPhone 镜像、Photos 或私人媒体。
+- iPhone 16 Pro Max / iOS 27.0.1（UDID `00008140-0008703436D3001C`）执行 `testNaturalMultimodalVideoFromRealFiles` 连续两次，均为 **1 test / 0 failures / 0 skips**，分别耗时 21.792、21.798 秒。共享页面显示选中文件；生成结果非空，phase=`SUCCEEDED`，实际 backend=`mlx.smolvlm2-500m`。规范化报告和两份原始 xcresult 路径在 `artifacts/verification/apple-mlxvlm-natural-video-20261028/real-files/device-report.json`。
+- F08 `systemFileSelection` 子项已完成；真实手指触控、OS 后台、自然质量、GPU/能耗和持续资源仍未验证。P11 继续 `open/not-ready`。P11 readiness/grouped 校验见下文；双远端同步需网络恢复后执行。后续优先 OS 后台和自然质量，不重复本次 Files 路径。
+
+### F08 Files 证据纳入 P11 readiness（2026-10-28）
+
+- 新增真实 Files provider 原始摘要到 `multimodal-apple` readiness evidence 与来源哈希；readiness validator 检查 **9 行 / 25 个 evidence paths / 23 个 source hashes**，仍9行有缺口，gate=`open`、结论=`not-ready`。
+- grouped manifest 仅刷新 readiness 摘要哈希，不把 UI acceptance 当作 benchmark 样本；新快照 `artifacts/verification/p11-grouped-benchmark-20261028-f08-files/summary.json` 仍3组、覆盖2项能力。
+- 聚焦 P11 回归 **19/19**、Python `py_compile`、`git diff --check` 通过；保护文件哈希保持 `project.pbxproj=b35bd984…9fd8f5`、`face-identity.md=6f130bd9…70822`。远端连接目前 DNS 解析失败，尚未同步此批。
+
+## 最新续接 — 2026-10-28 F08 自然视频共享 Demo 真机验证
+
+- 在前包公开自然视频 native SDK 输出上，使用 `be75e326673cdcba88a10f3e2809b2c464fc83b9` 的生产 KMP/Swift 实现，生成 ignored 目录的共享 Demo 验证副本。物理 iPhone16ProMax/iOS27.0.1，PID29279、runId `6FEDC19F-01FA-48B8-B6CA-DF4B8E07E2EB`。验证入口只选 `multimodal-select-video` 并回调注入公开沙盒视频，实际共享状态 `inputKind=VIDEO`；没有改生产 SDK、普通 Demo、保护工程或媒体库。
+- 首update后取消 `CANCELLED`、同进程重入 `SUCCEEDED`、首update后离开 `CANCELLED`、返回不自启后再次重入 `SUCCEEDED`。两次输出均为 `A group of birds fly in formation against a clear blue sky.` 且 Compose AX 文本/phase对应，11项gate全true。raw为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/demo/device-report.json`，SHA-256 `7ee24d303635527524a94878859eab59a01858801edc16c0d09137d6ca52b931`；KMP离线构建及iOS签名build-for-testing均成功。自然质量、真实Files provider选择、物理触控、OS后台、GPU/能耗仍unverified。
+- 本包将原始报告加入P11 readiness来源并重算grouped：24条证据路径/22个来源哈希、9行有gap，快照为 `artifacts/verification/p11-grouped-benchmark-20261028-demo-natural/summary.json`，仍3组/2项能力、open/not-ready。完整证据目录为 `artifacts/verification/apple-mlxvlm-natural-video-20261028/demo/`。独立review服务429未恢复，不计APPROVE；F08剩余是有区分力的真实系统选择/后台与自然质量裁定，避免重复本次注入式AX流程。
+
+## 最新续接 — 2026-10-28 F08 公开自然短视频 native 真机证据
+
+- 当前源码基点 `6b6f4a26c29a5c3e1ea1fec083cc040c539cd951`，只在 ignored 目录生成消费者/validator 的固定自然素材诊断副本，没有修改生产 SDK、普通 Demo、原合成门禁或受保护文件。沿用公共领域 Common swifts 的320×180/24fps/2秒H.264副本，hash `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`；素材和14文件固定模型只放独立App沙盒，不写Photos。
+- iPhone16ProMax/iOS27.0.1，PID29258、runId `78F2A44B-8050-4A56-A404-6F882E1690FD`：success与reentry均输出 `A group of birds fly in formation against a clear blue sky.`；cancel在首update后终止。三轮8帧actual times=`[0,3072,6144,9216,12288,15360,18432,21504]/12288`；clip=2秒、sample span=1.75秒，7项lease/close/输入/清理gate全true。自然质量、时序理解和KMP/Demo交互不据此宣称通过。
+- 证据目录 `artifacts/verification/apple-mlxvlm-natural-video-20261028/`，raw `device-report.json` SHA-256 `049550af32129447a0edf622c7758e1d6dbe9a05de539531ba49b0a4dacfdcec`。专用严格validator通过且拒绝6个篡改负例，原合成报告器测试7/7；签名构建exit0，launch/raw PID与source identity一致。独立verifier仍429，无review结论。
+- **缓存路径更新**：旧 `~/Library/Developer/Xcode/DerivedData/VLMProbe-…/SourcePackages` checkout 已缺失。历史 `artifacts/verification/multimodal-mlx-full-app-9288ac5-20261024/SourcePackages` objects完整但alternate引用失效；复制到本包 `SourcePackages` 后仅修复11个副本路径，12个固定revision/clean前后均通过，锁文件不变。下一构建复用本包缓存，不能继续假设旧DerivedData可用；`apple-mlx/.build/checkouts/mlx-swift` 另有既有dirty submodule，未修改或使用。
+- P11矩阵新增自然视频原始来源，readiness校验23条证据路径/21项来源哈希通过，聚焦回归19/19，当前grouped快照为 `artifacts/verification/p11-grouped-benchmark-20261028-f08/summary.json`；仍9行有gap、3组/2项能力benchmark、open/not-ready，本包不是benchmark样本。下一有区分力的F08工作是复用现有素材验证KMP/Demo短视频输入与UI终态；自然质量另建参考/评分依据。F04等待受控真人朗读窗口，最低系统仍暂缓，不重复既有F06或本次native套件。
+
+## 最新续接 — 2026-10-28 F06 Apple 非零导出进度取消
+
+- 独立 `ExportCancellationProbe` 使用当前生产 `AppleVideoAudioMuxer` 的诊断复制，在 host 先以 31,608,443 字节、1280×720、24 fps、2 秒 HEVC fixture 完成 3/3；随后清理独立 DerivedData 重新签名构建。包内 manifest、AAC、视频 SHA-256 与诊断目录逐项一致，未修改生产 mux、普通 Demo 或受保护工程。
+- iPhone 16 Pro Max / iOS 27.0.1 当前报告 `runId=8163CFEA-3940-4272-A5C4-267C858BE2DF`，三轮均观察 `waiting → exporting → cancelled`，在进度 `0.0746666640`、`0.0533333346`、`0.0533333346` 时取消；当时部分输出为 1,347、943、943 字节。调用返回前输出均已删除，调用方均收到 `CancellationError`，source/processed video 哈希不变，三轮同进程 AAC 重入均为 1 轨且 payload 相同。
+- 当前原始报告为 `artifacts/verification/video-export-nonzero-20261028/device-report-current.json`，SHA-256 `a4f323525b592b7a92945a80ecf9821c63b6fe27f94c870ef0d2e22e14cc0b6a`；内嵌 manifest SHA-256 `eb9115eaa0e4e8477d77a24a194d720d82af9e0d79f9e95aef60e81143f7e17c`。此前 7,464 字节 fixture 的 0% 与非零进度先行结果保留为历史对照，不作为当前证据身份。
+- F06 的 Apple 非零进度部分文件清理子项已完成；Android 生产后端、自然质量/传递函数、GPU/能耗、持续资源和最低系统仍开放。P11 Video SR 移除此单项 gap，但该行仍 `pass-bounded`，整体 9 行仍有 gap，发布继续 `open/not-ready`。F11 证据矩阵、readiness 与 grouped manifest 已刷新：校验 21 条证据路径/19 个来源哈希通过，聚焦回归 18/18；新报告为 `artifacts/verification/p11-grouped-benchmark-20261028-f06/summary.json`，重复生成逐字节一致。F04 真实麦克风仍等待受控真人朗读窗口，F08 已有固定合成 fixture，不重复同构运行。
+
+## 最新续接 — 2026-10-28 P11 reporter 映射门禁
+
+- 对 `tools/p11_grouped_report.py` 做了一个有界完整性修复：`face` source 现在只能映射 `face-detection`，`mlxvlm` 只能映射 `multimodal-apple`；此前仅检查“能力名存在”，可能让错误 reporter 覆盖成另一行。新增真实 `write_report` 回归先 RED 后 GREEN，错误映射在任何输出写入前拒绝。
+- 聚焦 P11 readiness/grouped 回归 **19/19** 通过；现有真实 manifest 重算仍成功，F06 新 grouped 快照两次输出逐字节一致。独立 code-reviewer/architect 审查通道本轮均因服务 429 无法返回证据，未把本轮标为 APPROVE；后续如服务恢复再做独立审查。
+
+## 最新续接 — 2026-10-28 F11 矩阵同步
+
+- F01 的真机 sandbox 证据现已写入 [P11 一页矩阵](validation/p11-status-matrix-20261027.md) 的 camera 行，真实 PHPicker provider 路径显式保留为未验证。相应 readiness source hash 与 grouped manifest 已刷新；`validate_p11_readiness.py` 为9行、21 evidence paths、19 source hashes、9行仍有gap，`open/not-ready`；分组报告在 `artifacts/verification/p11-grouped-benchmark-20261028-matrix/summary.json`，仍只有既有3组/2项能力。聚焦18/18测试及 `git diff --check` 通过，两个保护哈希未变。
+- F04现有Task1–5实现/本地门禁已有证据，Task6真实麦克风取消/重入仍缺受控真人朗读与终态；未自动启动录音。F08固定合成视频的真机success/cancel/reentry/close已有证据，重复相同fixture无区分力。CoreDevice `device info apps/processes` 仍因服务初始化超时不可用，普通 Demo 状态未重新确认。下一步优先使用有区分力的新输入或恢复真机受控窗口；不把旧synthetic与静音对照写成自然质量通过。
+
+## 最新续接 — 2026-10-28 F01 真机 sandbox 子项
+
+- 用户要求继续推进 F01，但明确合成图片只放验证 App 沙盒，不写入真机 Photos。新增隔离 `PhotoSandboxDeviceHost`/UI-test 将三张 EXIF2/6/7 fixture 交给生产 `DemoController.useImage`，再观察生产 Vision bridge；没有调用 `selectPhoto()`、请求 Photos 权限或读取/写入照片库。
+- iPhone 16 Pro Max / iOS 27.0.1（UDID `00008140-0008703436D3001C`）的 `build-for-testing` 与 `test-without-building` 成功，XCTest **3/3、0 failures、0 skips**。EXIF2=`80x40:white,black,white,black`，EXIF6=`40x80:black,black,white,white`，EXIF7=`40x80:white,white,black,black`；三例均返回 `apple.vision.face`、`faces=0`。
+- 证据目录为 `artifacts/verification/p4-picker-sandbox-device/`，汇总为 `summary.json`；fixture SHA-256 和保护哈希均记录在汇总中。该包只完成 F01 的 sandbox 方向/镜像归一化与 Vision 子项，**真实 PHPicker→Photos provider→controller 仍未验证**，也不证明 EXIF 标签经 Photos 导出后保留；最低系统设备仍排除。
+- 新增源码/脚本为 `probes/ios-photo-picker/PhotoSandboxDeviceHost.swift`、`PhotoSandboxDeviceUITests.swift` 和 `scripts/generate-photo-sandbox-device-tests.rb`。保留既有 tracked dirty 工程、身份草稿及 camera resource/thread probes；不恢复、不覆盖、不 stage 受保护文件。
+- 验证 host 使用独立 bundle ID，没有替换普通 Demo。当前 CoreDevice 的 `device info apps/processes` 只读查询均因服务初始化超时失败，因此普通 Demo 当前安装/运行状态尚未重新确认；不要把此前历史恢复记录当成本轮确认。
+- `artifacts/verification/p11-readiness-20261027/summary.json` 已按新的 P4 记录刷新来源哈希；readiness 校验为 9 行、21 evidence paths、19 source hashes，9 行仍有 gap，`open/not-ready`。`benchmark/p11/grouped-report-manifest.json` 同步更新哈希，新报告在 `artifacts/verification/p11-grouped-benchmark-20261028-f01/summary.json`；该报告为矩阵更新前的中间快照，以上方 `p11-grouped-benchmark-20261028-matrix` 为当前快照。
+
+## 最新收尾 — 2026-10-28 用户要求结束本轮持续执行
+
+- 用户明确要求“存在的问题记录下来，后续专项推进，尽快结尾”。据此停止新增Photos/native取证/模型实施；最终结果见[收尾记录](validation/roadmap-closure-20261028.md)和[专项清单](validation/foundation-followups.md)。每个专项保留问题、证据、恢复输入和退出标准；P4/P11不改成pass，发布门禁不放宽。
+- 交付源码基点为`90d528c60726b4fd3f3ce23690dbb6125816fc91`。收尾包只选择文档与benchmark来源指纹；protected signing工程、身份草稿、相机resource/thread probe共9项本地文件保留，不stage、不commit。原picker计划Task2仍未执行，新增收尾注记记录延期。
+- 接续中仅确认iPhone connected、passcodeRequired=false；未安装/启动测试App、未请求Photos权限、未写入/读取照片。device harness patch因格式验证失败未产生文件，随收尾决定不再重试。不能把可连接/解锁当成EXIF验收。
+- 最终复核只检查文档链接/问题覆盖、readiness来源哈希与grouped报告重算、受保护文件和选择提交范围；不把这些检查称为新产品/设备/完整分支审查。同步沿用已授权的origin+jihu现有分支，不merge、tag或发布。后续按专项编号恢复，勿重新开始历史循环。
+
+## 最新续接 — 2026-10-28 Video native export cancellation
+
+- 以独立诊断 App 复制当前 `AppleVideoAudioMuxer`，保留 production source/fixtures/Demo/signing 不变；host mux 8/8、Ruby3.4 distribution 16/16，真机 iPhone16 Pro Max/iOS27.0.1 报告 `E5DC6A49-E240-4A04-A6B6-BAC7AAF40DE8`。
+- 3/3 运行观察原生 `AVAssetExportSession` `waiting → exporting → cancelled`，调用方 `CancellationError`，输出在返回时不存在，source/processed video 哈希不变；3/3 同进程 AAC 重入 payload 相同。主机负向对照移除取消调用后以 native completed=3 被拒绝。
+- 取消点进度均为0%，因此关闭“完全未观察到 native export 阶段取消”这一项，但不声称非零进度的部分文件清理已验证；P7/P11其余质量、资源、最低系统与Android门槛不变。证据见 `docs/validation/apple-video-audio.md` 与 `artifacts/verification/video-export-cancellation-20261028/`。
+
+## 最新续接 — 2026-10-28 P6 当前源码分发复核
+
+- 以当前 HEAD `c245d12` 生成 `artifacts/P6/microphone-locale-admission-20261028/`；iphoneos 与 iphonesimulator archive 均成功，产物实际为 **10 个 XCFramework**：Core、ModelStore、Face、AppleVision、Speech、AppleSpeech、Identity、Video、AppleVideo、Multimodal。逐包确认 `ios-arm64` 与 `ios-arm64-simulator` 存在，两个 slice 均为 arm64。
+- 当前 `SpeechBinaryConsumer` simulator App 已构建成功，只链接/嵌入 Core、Speech、AppleSpeech。20 个 framework slice 的动态依赖检查确认只有 AppleSpeech 直接链接 `Speech.framework`；Speech 的两个 slice interface 只导入 Foundation/Core 与 Swift 运行时，没有跨入 AppleSpeech、AVFAudio、Video、Face、KMP 或 Demo。
+- 这是当前源码的分发与依赖裁剪证据，不提升真机自然录音、中文质量、取消/重入、后台生命周期或最低系统状态。P6 Task6 仍开放；最低系统设备验收暂缓。后续按既有授权精确提交验证文档，保护工程、身份草稿和相机资源/线程 probe 保持本地。
+
+## 最新续接 — 2026-10-28 P4 全范围审查与上游依赖结论
+
+- fresh code-reviewer 只读覆盖 `e7c1484` camera isolation、`33dd8c4` synthetic PHPicker EXIF harness、当前 resource/page/thread probe、计划/ledger及冻结 Task12 证据；结果 **0 Critical、2 Important、0 Minor**。camera/controller/FIFO/terminal close、simulator picker边界和ThreadInventory资源释放未发现其他阻断。
+- Important 1：默认 `CameraResourceValidation` 的失败报告若再次写入失败会被 `try?` 静默吞掉。新增主机回归先因 reporter 不存在得到compile RED，再加入有界 `NSLog` fallback后GREEN；当前生产App生成的全新resource probe在generic iOS15 unsigned build中 **BUILD SUCCEEDED**。首次build仅因受限环境SwiftPM/Xcode cache权限失败，同一生成项目在批准环境复跑通过；没有设备安装/启动。
+- Important 2：受保护pbxproj的automatic signing/team diff不属于P4。按用户边界不restore、不覆盖、不stage、不commit；Face Identity草稿同样留在P10。排除本轮待提交文档后，审查涉及的本地保护/未完成子集为 **1 tracked dirty + 8 untracked（共9项）**；这不是完整 `git status` 计数，详情与hash见 `docs/validation/p4-full-review-20261028.md`。
+- dependency-expert与官方release/source核验得到 `no-supported-upgrade-conclusion`：Compose1.12.2→Skiko0.150.2及Skia m153仍保留相同AtlasTextOp TLS单槽/调用线程ClearCache机制，不能把版本升级当作18×GrOp/2304B修复。当前不升级、不私调ClearCache、不重标Leaks；下一条有区分力的方向是单独设计非生产instrumented Skiko/Skia research build，不重复旧LLDB或同构301秒trace。
+- Task12 ledger已用新鲜主机100轮、iOS15 typecheck、Swift5/6相机门禁、runtime/UUID/hash及17/17分配邻接脚本闭合；复用已完成的301.202178秒真机录制，不重复设备运行。P4仍缺native destructor/free/TLS证据、物理PHPicker→Vision EXIF和最低系统；P11仍`open/not-ready`，goal active。
+
+## 最新续接 — 2026-10-27 P11 分组 benchmark 快照
+
+- 新增 `benchmark/p11/grouped-report-manifest.json`、`tools/p11_grouped_report.py` 及回归测试；工具先验证 readiness/原始 JSON SHA-256、仓库内路径和全局 `runId` 唯一性，再分别委托既有 face/MLXVLM reporter 重算，输出覆盖前拒绝同路径、软链接和现有硬链接别名。
+- 真实 manifest 生成 `artifacts/verification/p11-grouped-benchmark-20261027/summary.json`：3 个组（iOS face、Android face、Apple MLXVLM），2/9 项 readiness 能力有兼容 grouped report，7 项显式 `unverified`；face quality/peak memory/energy/GPU 未测，MLXVLM 30/30 仅 synthetic rubric，natural quality/Metal GPU peak/energy 未验证。gate 仍 `open/not-ready`。
+- `docs/validation/acceptance.md` 与 `docs/validation/p11-status-matrix-20261027.md` 已链接首版报告并修正候选快照旧描述；详细合同见 `docs/validation/p11-grouped-benchmark.md`。readiness 校验为 19 evidence paths / 17 source hashes / 9 open rows。
+- 原始输入 SHA-256 未变：iOS face `e4005b5d…927e7`、Android face `13d6e256…5131`、MLXVLM `186a2077…73d1`；readiness `933e10bf…37fa`。继续保留 8 项本地修改和保护哈希，不把忽略目录 artifacts 当作提交内容。
+- 聚焦回归10/10、完整Python tools 166/166、`py_compile`、`git diff --check`及真实快照确定性重生成通过。独立code-reviewer因429重试耗尽没有结论；作者按review focus完成一次fix pass，不宣称独立审查通过。
+
+## 最新续接 — 2026-10-27 P11 SDK 候选快照冻结
+
+- 当前已在 linked `foundation` worktree，按 worktree 隔离规则不创建嵌套 worktree。直接从已同步双远端的提交 `7b9f7fc75772b61948d211d72ec2e1e221362591` 生成 committed-tree archive；内嵌 commit ID 精确匹配，tree `f60b65fc117908a9b82c60eb42285f8c855d6f91`，tar SHA-256 `6a2cb8afd895b13fa281d15f55046b3f263a1882aebd8ce31dff563bc3b2b666`。
+- 候选源码归档位于 `artifacts/verification/p11-candidate-freeze-20261027/sdk-foundation-7b9f7fc.tar`，只含 committed tree，因此排除受保护工程、身份草稿和未完成线程/资源probe；原 `foundation` 工作树仍保持1项tracked dirty+7项untracked，保护hash不变。
+- P11 SDK commit 冻结门槛由未就绪改为已就绪；整体候选仍 `not-ready`，Android LiteRT-LM授权模型/native drain、Face Identity生产模型/PAD/数据/校准、最低系统设备、统一质量/资源/能耗报告仍阻断。P11仍open，基础10/12与goal active不变。
+
+## 最新续接 — 2026-10-27 Metal 单目标资源观察
+
+- 解决受限沙箱无法初始化 InstrumentsCLI 用户缓存的工具入口问题；受控提权后模板列表可用。物理 iPhone16ProMax/iOS27.0.1 上，以已安装独立 VLMProbe、固定 manifest/model/公开 fixture 录制单目标 `Metal System Trace`：20.776271秒、PID28389、进程exit0；新报告runId `D8FEFBDC-94F8-425B-931C-474925C09DFC` status success，fixture/model/runtime identity不变。
+- 新导出501条该PID GPU interval（495Compute/6CoreImage）、3,227条 `MTLDevice.currentAllocatedSize` 记录，观察峰值 **1,723,596,800B**，资源分配事件1,436条。原始trace/XML/report、带schema/引用/PID断言的汇总脚本和摘要见 `artifacts/verification/p9-metal-20261027/`；这是单次合成图独立probe的Metal分配观察，不能当作物理GPU驻留、RSS可加值、当前SDK完整验收或统一预算。
+- Power Profiler All Processes被Location Energy Model拒绝，改为单目标后xctrace在 `NetworkConnectionStatsModeling.receive(row:writer:context:)` 触发SIGTRAP，trace缺模板无法导出；相关原始报告/诊断记录在 `artifacts/verification/p9-power-20261027/`。不重跑相同失败组合；能耗仍unverified。普通Demo已无参数启动恢复，见Metal证据目录restore-demo-launch.json。
+- 更新移动端VLM记录、P11矩阵及readiness/candidate来源哈希，9行仍有gap，`open/not-ready` 与基础10/12、P4/P11、goal active保持。原8项本地修改及保护hash保留；本包按既有授权精确提交文档并同步origin+jihu，实际SHA以新鲜远端检查为准。下一独立项需提升真实资源/质量/最低系统或production门禁，避免重复仅有GPU activity的录制。
+
+## 最新续接 — 2026-10-27 P11 一页状态矩阵
+
+- 新增 `docs/validation/p11-status-matrix-20261027.md`，把 readiness 快照的 9 项能力、bounded 状态、证据链接、未验证项和 `not-ready` 发布阻断整理为可审阅矩阵；来源哈希已纳入 `artifacts/verification/p11-readiness-20261027/summary.json`，校验结果为 16 条来源哈希、9 行未达 terminal pass。
+- 矩阵不提升任何能力状态，不接受许可证或下载模型；P4 原生残留、LiteRT-LM 模型/drain、Face Identity 生产模型、最低系统与统一质量/资源报告仍是发布阻断。提交 `00b11a1d255473f91d1a3c02d5e3c1fe60f48baa` 已同步 origin+jihu，goal active 保持。
+
+## 最新续接 — 2026-10-27 ModelStore published SDK consumer 复验
+
+- 以提交 `1102978bd9f66b56a09d77371a734f38152027cc` 重新发布 `sdk-core`、`model-store`、`multimodal` 和 `backend-litertlm` release AAR 到本地 Maven，并使用 `-PusePublishedSdk=true` 构建 `examples:android-litertlm-native`；**147 tasks / 22 executed，BUILD SUCCESSFUL**。摘要和完整日志见 `artifacts/verification/android-lease-cancellation-20261027/published-consumer-current.json` / `.log`。
+- 该结果确认分发 consumer 使用当前发布依赖链；它不增加模型资产、生产 factory、native drain、设备推理或 P11 状态。原8项本地修改与保护hash继续保留，goal active。
+
+## 最新续接 — 2026-10-27 Android ModelStore 取消交付 lease 回收
+
+- 独立 LiteRT-LM consumer review 再次429无结论后，转向共享资源门禁，发现 `ModelStore.acquire()` 在 IO 已登记 lease、调用方尚未接收时取消，会丢弃返回值并永久 pin 模型。手动排队 dispatcher 的真实 store 回归得到 **1 test/1 failure**（取消后 remove 抛 ModelInUseException）；修复在取消退出时 NonCancellable 回收尚未交付的本次 lease，不改正常返回后的调用方所有权。
+- 最终 ModelStore JVM **12/12**，含取消后可删与另一 owner 仍 pin 的两个回归，release AAR构建通过；LiteRT-LM JVM **25/25**、两模块 lint/consumer 构建通过（388tasks/51executed）。仓库 `verify-android.sh` 通过（725tasks/55executed/670up-to-date）；最后测试失败清理保护更新后，ModelStore全套与release重新通过（62tasks/8executed）。没有新编译warning或lint error；既有lint提示保留。
+- 新修复的限定独立review仍429无结论，不计APPROVE。证据冻结于 `artifacts/verification/android-lease-cancellation-20261027/summary.json`，详见 `docs/validation/p2-model-store-review.md`。本轮无设备操作/媒体/模型下载；不把JVM取消交付证据提升为native drain或真机推理。
+- 按既有授权仅提交本次源码、回归与记录，再同步origin+jihu；实际结果见该证据目录sync-summary.json及新鲜远端SHA。原8项未提交修改保留，保护hash不变；基础10/12、P4/P11和goal active继续保持。下一步仍需解决受支持native drain、授权模型和P4原生残留/EXIF等实际门禁，不重跑旧LLDB变体。
+
+## 最新续接 — 2026-10-27 LiteRT-LM 可选 Kotlin consumer
+
+- 继续 Task 5，新增公开只读 `LiteRtLm.availability` 和独立 Kotlin `examples/android-litertlm-native`；真实 `ModelStore`、API/ABI 加固定 `UNPROVEN`，缺资产显示 `REQUIRES_ASSETS/MISSING_ASSETS`、已安装资产仍为 `UNAVAILABLE/UNSUPPORTED_DEVICE`。不构造 production backend、不下载模型、不生成 fixture 输出；Task 4 及 Task 5 generation/close 消费仍开放，裁定已写入设计/计划与本地 ledger。
+- backend JVM **25/25**、consumer **2/2**、multimodal **48/48**；project consumer/default Demo/AAR/test APK/lint 构建通过，594 tasks。lint 无 error，backend 2 条既有版本提示，consumer 3 条 API/icon/i18n warning 保留。四 SDK 模块本地 Maven 发布后，consumer `-PusePublishedSdk=true` 构建通过，37 tasks；runtime 精确0.18.1，默认 Demo 与 base multimodal 新鲜图均不含 LiteRT-LM。AAR 工具7/7及固定vendor artifact校验通过。
+- TECNO KM9/API35 backend **4/4**、consumer Activity UI **1/1**，均无 failures/errors/skips。公开查询用例使用真实 Build 与已安装合成文件，确认仍 unavailable、无 generation cache 且可正常 remove；UI 读取真实 TextView 缺资产状态。无模型推理、native drain 或最低系统验收。设备命令首次自动权限审核超时未执行，提示允许的一次重试后成功；受限沙箱 ADB 失败不是断连证据。
+- 独立审查首选模型容量不足、备用模型429，未取得结论，不计为通过。证据冻结于 `artifacts/verification/android-litertlm-consumer-20261027/summary.json`；新包按用户授权提交并通过 `scripts/sync-remotes.sh feat/sdk-foundation` 同步，实际结果以本地 `sync-summary.json` 与新鲜远端 SHA 为准。原8项受保护/未完成修改保留；模型、production factory、真实drain/推理、API26及完整review仍开放，基础10/12、P4/P11、goal active 不变。
+
+## 最新续接 — 2026-10-27 P11 证据哈希覆盖门禁
+
+- 发现旧 readiness 校验只核对 16 条证据路径存在，却仅固定 5 项来源哈希；13 个独立证据文件中 10 个可以在内容变更后仍通过校验。真实测试目录复现了该误判。先新增回归得到 **8 tests/1 failure**，再让校验器拒绝任何未纳入 `sourceHashes` 的证据；修复后聚焦 **8/8**，旧快照如预期列出全部10项遗漏。
+- 忽略目录快照现纳入 15 项来源哈希（包含全部13个独立证据文件）。当前校验仍为 9 行/9 gaps/16条证据路径，`open/not-ready` 不变；Python 工具完整套件在可写Swift编译缓存的环境中 **156/156**。受限沙箱首次完整运行的2项 Swift 错误为模块缓存 `Operation not permitted`，同一源码随后完整复验通过。此包只提升 P11 证据完整性，不增加产品/设备/发布验收。
+- 前一检查点的远端网络判断仅适用于受限沙箱。已授权提权运行 `scripts/sync-remotes.sh feat/sdk-foundation`，`0c6559d` 成功同步至 `origin` 与 `jihu`，脚本完成新鲜远端SHA相等检查；本包后续提交仍需单独同步。8项受保护/未完成本地修改继续保留。
+
+## 最新续接 — 2026-10-27 P11 快照来源漂移与同步通道
+
+- 巡检起点 `feat/sdk-foundation` 为 `ec8308d`；既有 P11 readiness 快照的 `mobile-vlm.md`、`p4-atlas-text-cache.md` 两项来源哈希因后续已提交证据变化而失配。重新按当前文件刷新忽略目录中的 readiness/candidate 盘点并运行只读校验；九项能力仍全有 gap，`open/not-ready` 不变。快照刷新只证明来源完整性，不增加模型、真机推理、质量、资源、最低系统或发布证据。
+- 原有 1 项 tracked dirty 与 7 项 untracked 保留；两个保护文件哈希仍为 `b35bd984…fe9fd8f5`、`6f130bd9…bb70822`。Android `adb devices -l` 当前因 USB plugin/smartsocket `Operation not permitted` 失败；本机没有 iOS15 simulator runtime 或 Android API26 AVD，物理 iPhone 列表中的 connected 状态未作为新的验收。
+- 本次在受限沙箱内重新读取远端遇到 `github.com` DNS 失败，`jihu` 直连 DNS 失败且现有 `127.0.0.1:7897` 代理未监听。当时本地 remote-tracking refs 均为 `ec8308d`；随后受控提权同步成功，结果见上方最新续接。
+
+## 最新续接 — 2026-10-27 P4 分配时间与线程快照邻接复核
+
+- 对既有同 PID 301.202178 秒 trace 的完整 Allocations List、Leaks 明细和 236 个 own-task 快照完成只读时间对齐：18 个最终 live `GrOp` 中 1 个录制前已有，trace 内其余 **17/17** 个分配在估计时刻前后约1.1秒的快照中都观察到同一个 kernel thread ID。7 个导出低32位标签在不同分配窗口对应多个不同 kernel TID，结果与逐行邻接时间保存在 `artifacts/verification/p4-thread-calibration-20261027/allocation-snapshot-correlation.json`，可复核脚本为同目录 `correlate_allocations.py`。
+- 这只增加分配时刻的观察映射，不能证明析构/free、TLS槽值、精确线程退出或长期增长；快照非原子，marker 到 trace 原点有调度误差。没有新设备操作、没有依赖或生产代码变更，原始18×GrOp/2304B结论和 P4/P11 开放状态保持。
+
+## 最新续接 — 2026-10-27 LiteRT-LM unavailable 真机合同覆盖
+
+- 新增计划 Task 5 的 Kotlin instrumentation 与测试 runner 配置；真实 `ModelStore` 在 UUID 私有目录安装带 SHA-256 的合成文件，覆盖缺资产、已安装但 native drain 未证明、重复关闭三种状态。检查具体 availability/generate 拒绝、factory/输出次数为零、无 generation cache、remove 无残留 lease及精确目录清理。生产源码与 factory 边界未改。
+- TECNO KM9/API35 初次 **3/3**；临时将测试 setup 的 `UNPROVEN` 替换为 `PROVEN_CUMULATIVE` 作负向对照，得到预期 **3 tests/1 failure**（UNAVAILABLE→AVAILABLE）；恢复后正式设备 XML **3/3、0 failures、0 errors、0 skips**。强制重跑 JVM **23/23**，最终 lint 0 errors/2 既有版本提示、AAR/test APK 构建通过；默认 Demo 依赖图排除 LiteRT-LM，backend runtime 精确0.18.1且无runner/JUnit。证据冻结于 `artifacts/verification/android-litertlm-unavailable-20261027/summary.json`，不把合成合同覆盖记为模型推理或 native drain。
+- 新限定独立审查返回429无结论，未重派；一次额外runner注册查询也因自动审批服务429未执行，实际runner执行由设备XML证明。生产factory/consumer、授权模型、真实drain与API26真机仍开放，基础10/12、P4/P11及完整roadmap goal保持active。
+- 补齐上一段工作留下的iOS恢复记录：页面resource probe曾构建并安装但未启动，未重复301秒录制；普通Demo随后已恢复并无参数启动 **PID28142**。本轮读取 `/tmp/odai-camera-resource-page-20261027/restore-launch.json` 确认arguments为空，恢复包executable SHA-256仍为 `5852045750eae0f390b89de2b0f0f1b3b84ea7bdbfe0e1a7546ba3a077eea96d`。这不是新的iOS设备验收；本轮设备测试只操作Android独立test package。
+- 本批按既有授权提交Kotlin验收代码和验证文档，再以 `scripts/sync-remotes.sh feat/sdk-foundation` 同步origin+jihu；实际远端结果以本证据目录的 `sync-summary.json` 和新鲜ls-remote为准。保护工程、身份草稿与未完成线程/资源probe共8项继续留本地，原始证据/签名产物保持ignored。
+
+## 最新续接 — 2026-10-27 P4 ThreadInventory 主机门禁刷新
+
+- 新鲜本地主机验证编译 `probes/ios-camera-lifecycle/ThreadInventory.swift` 与 `ThreadInventoryChecks.swift`（Swift 6）并执行100轮快照；正常状态为 `complete-snapshot`，send-right 引用 **2→2**，注入缺失 pthread 映射时正确降级为 `partial-snapshot`（1 次 lookup failure），4097B marker 保持。
+- 同一源码通过 iOS15 arm64 typecheck，`scripts/generate-camera-resource-app.rb` 通过 Ruby 3.4.11 语法检查。证据：`artifacts/verification/p4-thread-inventory-local-20261027/summary.json`。
+- 这是 host ownership/snapshot release 与生成器边界证据；不证明真机线程生命周期、TLS/destructor 归属、GrOp 根因或零泄漏。当前 candidate/readiness 快照在本检查点刷新，P4/P11 仍开放。
+
+## 最新续接 — 2026-10-27 P11 candidate freeze 预检
+
+- `artifacts/verification/p11-candidate-freeze-20261027/summary.json` 的状态为 `not-ready`，仅作候选冻结前盘点，不冻结发布候选、不接受许可证、不下载模型，也不提升任何未验证行。
+- 当前 SDK 工作树仍有 1 个 tracked dirty、7 个 untracked；受保护工程、身份草稿和线程/资源 probe 按边界保留，因此没有单一 clean candidate snapshot。
+- 仅 Apple MLXVLM 的既有合成图观察值可冻结（model `fa57db46815177fbdfd65cc85a2b3416a8332268`、runtime `6e338e5df49424fc0db7c6d58184d622f92ed18a`、fixture SHA-256 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`）。LiteRT-LM 授权 manifest/weights、Face Identity 生产模型/PAD/数据/校准、iOS15/Android API26 设备、GPU/energy/峰值资源以及统一跨能力 fixture 仍缺失。
+- 该预检不改变基础 **10/12**、P4/P11 开放状态或 goal active；下一步仍须先完成 `requiredBeforeP11` 的候选冻结、逐能力矩阵和发布结论。
+
+## 最新续接 — 2026-10-27 P11 readiness 快照校验门禁
+
+- 新增只读 `tools/validate_p11_readiness.py` 与 `tools/tests/test_p11_readiness.py`。校验器强制 `p11Stop`/`requiredBeforeP11` 停止契约，并拒绝缺失/越界证据、来源哈希漂移、门禁计数不一致，以及仍有非 terminal 行时的 `closed/ready` 结论；不会修改快照或工作树。
+- 当前快照新鲜校验通过：9 行、9 个未验证 gap、16 条证据路径、5 个来源哈希；`p11Gate.status=open`、`finalReleaseConclusion=not-ready` 保持不变。证据与原始日志见 `artifacts/verification/p11-readiness-validator-20261027/summary.json`。
+- 使用显式 Ruby 3.4.11、临时 SwiftPM `--disable-sandbox` wrapper（只作用于测试子进程）重跑完整 Python 工具套件 **154/154、0 failures、0 errors**；`git diff --check` exit0。此前未设置 wrapper 的单项失败是当前受限环境的 SwiftPM sandbox 错误，不是产品/校验器失败。
+- 本轮只推进 P11 证据完整性，未新增设备、模型、质量、资源、最低系统或发布证据；基础10/12、P4/P11、goal active保持不变。
+
+## 最新续接 — 2026-10-27 CoreDevice 通道恢复但 EXIF 仍受 harness 边界限制
+
+- 新鲜 `devicectl list devices` 与 `device info lockState` 均 exit0；物理 iPhone 16 Pro Max 当前 `connected`、`passcodeRequired=false`、`unlockedSinceBoot=true`。本轮没有安装、启动或访问媒体。
+- Android ADB 仍因 USB plugin/smartsocket `Operation not permitted` exit1。iOS EXIF 计划仍明确为 simulator-only，生成器固定 `SUPPORTED_PLATFORMS=iphonesimulator`；不通过向物理 Photos 写入合成资产来绕过该边界。P4 真机 PHPicker→Vision EXIF2/6/7 继续 `unverified`。
+- 最新通道/harness 状态（不含设备标识）更新于 `artifacts/verification/p4-device-gate-status-20261027/summary.json`；这只证明通道可用，不关闭 P4、最低系统或 P11 门禁。
+
+## 最新续接 — 2026-10-27 P4 设备通道与 EXIF harness 边界刷新
+
+- 本轮首次 `devicectl list devices` 曾列出物理 iPhone 16 Pro Max 为 `connected`，立即重查却因 CoreDeviceService timeout 退出；没有安装、启动或测试。Android `adb devices -l` 因 USB plugin/smartsocket `Operation not permitted` 退出。该瞬时连接状态不计为设备验收。
+- 现有 `scripts/generate-photo-picker-tests.rb` 明确只生成 `SUPPORTED_PLATFORMS=iphonesimulator`、iOS15 的 host；没有把物理设备或 Photos 写入作为隐式 fallback。当前没有安全、可复核的真机合成 EXIF fixture 注入路径，因此 P4 真机 PHPicker→Vision EXIF2/6/7 继续 `unverified`。
+- 设备通道与 harness 证据（不含设备标识）见 `artifacts/verification/p4-device-gate-status-20261027/summary.json`。本轮没有重复页面 trace、没有访问私人媒体、没有修改签名或保护工程。
+
+## 最新续接 — 2026-10-27 P4 线程标签校准与原生残留复验
+
+- 延续 Task12 的 own-task 取证，先发现并修正完整性缺陷：`pthread_from_mach_thread_np` 缺失映射不能再报告 `complete-snapshot`。新增 lookup seam 后先得到稳定 runtime RED，再修正为 `partial-snapshot` 并记录 `pthreadLookupFailures`；100轮 macOS 宿主快照、JSON 序列化和 send-right **2→2**，缺映射回归通过，iOS15 Swift6 warnings-as-errors typecheck exit0。签名设备 probe build exit0；没有改保护工程或安装资产。
+- 在已解锁 iPhone 上使用显式 `--camera-thread-inventory` 完成当前源码生成 probe、三轮 page exit/reentry 与同 PID **301.202178s** Leaks 录制；运行 ID、PID、安装路径、trace 时间和实际 binary UUID 已严格关联。三轮 active 窗口新增 **687/661/660**，停止5秒无新增；页面退出后最后 owner、bridge、Compose controller、Metal layer 均在约 **32.643s** 首次全释放，约61.986s仍为0。普通 Demo 已从当前核验 restore 包恢复并无参数启动，容器保留。
+- 新鲜 trace 的最终 Leaks 为 **18×GrOp/2304B**，18项全部在完整 Allocations List 中为 live；导出读取 **108263 rows / 85579214 bytes，exit0**。4097B marker 实际分类为5120B，分配栈命中 `ThreadInventoryMarker`，其导出 thread label 与记录的 pthread low32 candidate 一致，完成了标签格式校准。8个 GrOp allocation labels 均能匹配快照候选值；其中7个完整 pthread 指针各对应多个不同 kernel thread ID，证明相同导出标签不能直接代表同一持续存活 OS 线程。
+- 取证仍有限：快照为非原子 own-task 列举，236个快照中66 complete/170 partial；partial 原因仅为 pthread 查询缺失，未见 thread_info、send-right release 或 VM array release 错误。没有观测析构/free 线程、TLS 槽地址或线程退出事件，因此不能关闭 GrOp、宣称泄漏是误报、或推导长期增长/平台修复。新限定审查仍因429无结论，不写成 APPROVE。
+- 线程校准结束后重新运行当前生产相机源码门禁：`scripts/check-camera-concurrency.sh` exit0，Swift5/Swift6 transfer checks 均通过，目标 iOS15；日志与 exit 文件在同一证据目录。该源码门禁不替代 iOS15 真机运行、原生释放或全范围 P4 review。
+- 为 P11 建立只读统一准备矩阵 `artifacts/verification/p11-readiness-20261027/summary.json`：9 项能力均保留至少一个未验证项，`p11Gate.status=open`、`rowsNotTerminalPass=9`，发布结论明确为 `not-ready`。它只汇总当前证据和阻断项，不把分包 pass-bounded 结果升级为最终验收。
+- 证据冻结在 `artifacts/verification/p4-thread-calibration-20261027/summary.json`、`snapshot-summary.json`、`candidate-thread-mapping.json`、`verify_runtime.py`、trace/导出及恢复日志。线程取证源码、生成器、资源 probe、保护工程和身份草稿继续留在本地 dirty/untracked；本轮未提交或再次同步。基础10/12、P4/P11、LiteRT-LM生产factory/模型/真实drain及完整交付继续开放。
+
+## 最新续接 — 2026-10-27 已验证工作包分批提交与双远端同步
+
+- 用户明确授权“分批提交已验证改动，并同步 origin + jihu”。此前各计划/历史检查点的 no commit/push 限制已被本次授权覆盖；只同步现有 `feat/sdk-foundation` 分支，不涉及合并、tag 或发布。
+- 提交前远端 origin 为 `9288ac5`，本地共有98项未提交路径；有可独立交付的成果，长期没有提交/同步是交付收尾遗漏，不是没有代码。已完成六笔代码/验证工具提交：`2f30b2a` benchmark输入完整性、`aab883c` MLXVLM 30样本校验、`8378c9a` 多模态picker与Kotlin fixture、`e7c1484` 相机并发/关闭合同、`96f03bb` 可选LiteRT-LM基础门禁、`33dd8c4` 合成PHPicker EXIF验证。本检查点与其余验证文档组成最后一笔文档提交。
+- 本次新鲜复验：聚焦Python29/29；Android Demo38/38、LiteRT-LM23/23、probe9/9均强制重跑，lint/AAR/APK/test APK构建exit0（693tasks、24executed）。Apple当前picker/bridge/store/factory模拟器套件75/75、0failures、xcodebuild exit0；既有测试QoS warning仍在。相机此前同源码host470/470、simulator8/8、TSan7/7、真机native11/11及Compose UI3/3证据保留；EXIF harness hash与历史模拟器3/3一致，不将历史EXIF结果升级为当前controller改造或真机验收。
+- 始终按精确路径暂存，每批验证空index/实际提交文件/父提交；保护工程与身份草稿hash不变。另将整个未完成资源取证工具组留本地：`CameraResourceValidation.swift`、`CameraPageResourceValidation.swift`、`ThreadInventory.swift`、`ThreadInventoryChecks.swift`、probe README和`generate-camera-resource-app.rb`。共8项保留本地，不纳入远端；原始报告/trace/签名产物仍在ignored目录。
+- 同步目标是包含本节的foundation HEAD，使用`scripts/sync-remotes.sh feat/sdk-foundation`，仅允许快进；先origin再jihu，完成后新鲜ls-remote核对两者与本地SHA相等。冻结清单、每笔commit、保护hash、验证日志、同步输出和最终结果保存在`artifacts/verification/batched-sync-20261027/`；恢复时须读取`sync-summary.json`并刷新远端，不能仅凭本节推断同步成功。真实设备标识已从本轮改动文档替换为占位符。
+- P4线程校准准备已完成own-task Mach/pthread快照、已知4097B标记分配及显式opt-in接线；100轮宿主快照/send-right计数2→2、iOS15 Swift6 warnings-as-errors typecheck及签名device build通过。libproc handle不等于pthread指针，保留为独立原始字段；尚未安装或录制真机，review因429无结论，不能证明trace线程/TLS归属或关闭GrOp项。下一步先核查快照完整性与标记相关性，再做有界设备取证；不得重复已失败的五种LLDB变体。证据`artifacts/verification/p4-thread-inventory-20261027/`。
+- 普通Demo最近恢复仍为下方当前Compose UI检查点：PID28004，恢复产物SHA256 `5852045750eae0f390b89de2b0f0f1b3b84ea7bdbfe0e1a7546ba3a077eea96d`；同步阶段没有操作真机。基础10/12、P4/P11及完整交付继续开放。LiteRT-LM生产factory、授权模型、真实native drain与推理未完成，既有模型问题待答，不重复询问或代为接受许可；goal保持active。
+
+## 最新续接 — 2026-10-27 当前源码 Compose 相机 UI 验收
+
+- 延续P4 Task10后的真实UI缺口；本次没有修改产品或测试源码。iPhone16ProMax/iOS27.0.1在线、passcodeRequired=false；确认无并行构建/测试后，以受保护原工程及现有签名build-for-testing成功，无provisioning更新。源码/设备KMP framework/工程hash冻结且结束时未变。
+- 原有控件稳定、两轮前后台恢复/用户停止/手动重启用例 **2/2、0failures、0skips**（27.409秒）。UI runner本次正常进入测试体，未重试旧失败；两分钟持续UI用例 **1/1、0failures、0skips**（131.868秒），四窗口新增748/750/749/750，实际窗口120.457944秒，起始50、最终3047；停止后5秒UI无新增结果。补齐当前源码三项Compose camera UI门槛，不取代native资源释放。
+- artifact-only xctestrun关闭系统附件保留、保留用户文本；完整导出后短测0附件，持续测试只有4份计数txt，无图像/视频。未访问相册或保存相机画面。PHPicker合成方案仍仅适用独立模拟器，真机缺安全的合成资产选择路径，因此EXIF2/6/7未验，未改写为通过。
+- 同一普通Demo已签名核验并无参数恢复 **PID28004**，executable URL为`F264C05D-AF8C-42E3-99C2-A5529CB2A26E/OnDeviceAIDemo.app/OnDeviceAIDemo`。本轮build-for-testing更新了原/tmp恢复目录产物；新的executable SHA256为`5852045750eae0f390b89de2b0f0f1b3b84ea7bdbfe0e1a7546ba3a077eea96d`，旧115635ec hash仅为历史，后续不得套用。未卸载/清数据，sharing overrides缺席。
+- 命令均结束；xcresult、原始日志、四份计数、manifest及`summary.json`在`artifacts/verification/p4-current-camera-ui-20261027/`。两个保护hash不变，既有dirty/untracked保留，无commit/push。Task11只关闭三项当前UI验证；P4原生GrOp、真机PHPicker→Vision、最低系统、全范围review及P11仍开放，基础10/12、goal active。
+
+## 最新续接 — 2026-10-27 Android drain 假设撤销与进度记录同步
+
+- 用户再次询问5/12；当前README/ROADMAP/阶段审计为基础 **10/12，P4/P11未完成**。修正mobile-vlm仍像当前状态的一条旧5/12，保留历史数字与完整扩展范围，不把计数转为整体完成率。既有dirty/untracked及两个保护hash保留。
+- 固定LiteRT-LM0.18.1 AAR字节码证实：`isAlive`只读AtomicBoolean，cancel不改它，close在nativeDeleteConversation返回前已置false。原`terminalCallbackThenDeadConversation`不可作为drain证明；设计/计划已撤销该判据，未批准或启用替代协议。
+- 官方tag `v0.18.1`为`bda624851d74be34d4e1f7fac1fc4155939539c7`；JNI terminal之后仍清理callback引用，SessionAdvanced析构忽略WaitUntilDone错误，默认timeout为10分钟。源码与AAR内.so的构建对应及真实安全barrier均未证明，不能用withTimeout(30s)宣称阻塞JNI有界。
+- probe两项误判回归先9tests/2failures，修正后JVM **9/9**，lint/APK/test APK构建 **exit0、80tasks/16executed**。schema2增加`drainEvidence=unsupported-conversation-lifetime-flag`，drainProven固定false，累计callback也只报`unverified-native-drain-contract`；移除错误证明后的close分支，send后保留native资源。旧30秒轮询仅作原始观察，不是新协议；旧设备schema1报告不重写。证据和局限见`docs/validation/android-litertlm-drain-contract.md`及`artifacts/verification/android-litertlm-drain-contract-20261027/`。
+- 本轮无模型下载/运行、无设备写操作，生产factory/consumer保持未提供，授权模型仍待答，不重复询问。本次限定独立审查因429无结论，不重复派发；证据摘要/source manifest已冻结，diff check及保护hash复核通过。下一步须先建立真实native barrier，不能以fake测试替代。其余P4/P11工作仍可继续，goal保持active。
+
+## 最新续接 — 2026-10-27 相机独立审查通过与MLX增强构建
+
+- 上轮实际源码/真机11项证据完成后，对最终isolated deinit与Identity测试排空屏障修订做了新的独立审查。`camera_isolation_review`返回**APPROVE、0 findings**，范围仅为CameraSource/Controller并发所有权、相关合同/测试/脚本和Task10，不是全P4或原生零泄漏审查。此前429日志继续保留，当前限定审查缺口已补齐。
+- 新生成工程启用Speech/Video/Multimodal/MLX全部开关，固定`apple-mlx/Package.resolved`、禁用自动解析/更新，generic iOS Debug unsigned构建**exit0**。源码manifest及pins未变，增强App minOS18.0符合既有可选后端边界；未安装、未下载模型、无新增MLX推理验收。证据`artifacts/verification/p4-camera-mlx-integration-20261027/summary.json`与`independent-review.md`；没有重跑上一轮已通过相机持续/关闭测试。
+- 正转向已批准Android LiteRT-LM Task4的实际adapter边界。授权模型仍缺席，不能启动生产推理；先核对固定AAR的`Conversation.isAlive`及terminal/drain语义，避免将未经证实的runtime假设写入生产wrapper。未修改Android生产行为或对外启用backend。模型待答问题不重复询问。
+- 所有相机编译命令已结束，普通真机Demo仍以上轮恢复PID27961记录为最近写操作。两个保护hash/所有dirty保留，无commit/push。P4原生GrOp、真实picker/UI/minOS及全范围P11继续开放，基础10/12、goal active。
+
+## 最新续接 — 2026-10-27 相机并发隔离、11项真机回归与普通Demo恢复
+
+- 已进入批准的相机计划Task10，生产`CameraSource`改为不可变Sendable入口、单AsyncStream命令消费者和专用串行executor上的capture actor；session/terminal状态由actor独占，start/stop/close保留FIFO。回调为Sendable，只有NSLock保护的私有callback slot保留窄范围unchecked声明；回调调用/旧capture析构均在锁外，close排空frame队列。`DemoController`及Kotlin action conformances隔离至MainActor，每代callback捕获自身队列，保留同步有界帧接入。
+- 真实Sendable contract先编译失败；生产源修复后Swift5/Swift6 complete concurrency、iOS15 deployment均exit0且无诊断。新增`scripts/check-camera-concurrency.sh`并接入Apple门禁。新模拟器完整生命周期**8/8、0 failures**，含facade释放后worker自动关闭的新用例；首轮exit74是CoreSimulator/Swift缓存沙箱限制，授权重跑通过，失败原件保留。证据目录`artifacts/verification/p4-camera-isolation-20261027/`。
+- 当前本地证据：完整simulator生命周期8/8（isolated deinit修复后再验8/8），TSan相机专项7/7并确认19个插桩符号；Apple门禁、默认Demo与语音/视频/多模态可选Demo构建通过。可选首次构建暴露Published状态的析构隔离错误，已改为isolated deinit；保留SDK回溯部署实现及实际对象符号证据。全量host首次469通过/1项Identity测试busy，定位为测试未等待异步stop排空；仅把既有close屏障移到reopen前，修正后完整470/470。所有失败日志保留，不修改Identity产品逻辑。
+- 普通Demo当前源码恢复包已在`/tmp/odai-p4-camera-isolation-restore-20261027/Build/Products/Debug-iphoneos/OnDeviceAIDemo.app`构建/签名校验通过，executable hash `115635ecf9db39285a159ab4731d71fbd17051e6a9727f4b836535c7b430ec35`。第一次审批服务429未执行，后续正常审批重试成功；沙箱内codesign信任错误也经授权只读校验消除。新真机测试包已通过**11/11、0 failures、0 skips**，包括当前源码两分钟controller→bridge→Vision、暂停/恢复/FIFO及关闭/释放；原9/9仅保留为改造前历史。`camera_isolation_review`及兼容性researcher均429，无独立结论；不重复派发。
+- 真机iPhone16ProMax/iOS27.0.1、PID27956，持续runID `0D4BFED6-DAD0-49B0-9A58-EA9E94A56622`：四个30秒窗口新增747/747/748/747，活动120.054737秒、总2992次成功；停止5秒不增加、inputs/jobs0，owner/bridge/detector关闭释放通过。暂停/恢复runID `274E9FCC-E934-44AA-8373-14EC8F7B13EC`计数3/6/7/10，关闭后仍10，start/stop通知各3，输入输出1/1→0/0。没有保存画面；该证据不覆盖Compose渲染或零泄漏。
+- 已从当前恢复包重新安装普通Demo并无参数启动**PID27961**，安装/启动URL `DC8CFDBE-50C2-46C1-B0D2-933985B057EF/OnDeviceAIDemo.app/`一致，sharing override缺席、原数据保留。所有本轮命令均结束；源manifest、xcresult、10份纯文本附件、全部失败/重试日志、恢复校验和交叉验证汇总在`artifacts/verification/p4-camera-isolation-20261027/summary.json`。下一步处理P4独立审查/剩余交互或原生残留，不重复已完成并发/持续测试；MLX专属增强构建本轮未复验。
+- 基础里程碑仍**10/12**；README/ROADMAP/计数审计已一致，历史5/12不代表当前进度。本轮没有新增关闭阶段。原生GrOp、真机PHPicker→Vision、最低系统、完整审查、Android授权模型和全范围P11仍开放；全部dirty/untracked与两个保护文件保留，无commit/push，goal active。
+
+## 最新续接 — 2026-10-27 benchmark 重复计数与原始输入保护修复
+
+- 继续P11报告准备时发现真实缺陷：现有iPhone P5原始JSON重复传入，`benchmark_report.py`将30个样本计成60个。新增全局`runId`唯一性校验，跨device/backend/memory方法或不同测量值的同ID输入也拒绝；不同ID的真实独立run保留。CLI另补输出路径保护，拒绝同路径/软链接/现有硬链接别名覆盖原始输入；有效独立报告仍可重建。分组和最近秩算法不变。
+- 工具/CLI回归先RED（9失败/子用例），后聚焦**9/9**通过。完整`python3 -m unittest discover -s tools/tests -v`首轮148tests、13failures/8errors，根因包括系统Ruby2.6加载3.4gems与Swift缓存权限；保留全部日志。使用显式`RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`及授权缓存权限后，完整**148/148、exit0**。未通过修改产品代码规避环境失败。
+- 对原`927b7749`双端报告分别/合并重算，输出与原工具对有效输入的结果完全相等，各30样本。iOS p50/p95=2.432/3.065ms，Android=10.853538/18.088231ms；两个raw hash不变，重复真实输入现在exit非0且不生成报告。本轮没有新设备run，也没有提升旧报告的质量/资源或当前源码验收等级。
+- 独立`benchmark_integrity_review`对工具、测试和计划只读审查**APPROVE、0 findings**；审查员另跑聚焦9/9、py_compile与diff check通过。该结论仅限本修复包。原始证据、旧工具副本、实报告重算、全部失败日志及总结在`artifacts/verification/benchmark-report-integrity-20261027/`；计划与ledger为`2026-10-27-benchmark-report-integrity`。schema仅新增runId说明，未改schema版本或结构。
+- 全部原dirty/untracked保留、保护hash不变，无commit/push/设备操作。P4严格并发与GrOp、Android授权模型等工作继续开放；P11实际候选冻结、全能力统一任务/阈值/设备运行和发布结论仍未完成。基础10/12、总goal active。下一步继续可独立交付包；独立agent服务本轮已恢复一次审查，但不能由此假定后续可用。
+
+## 最新续接 — 2026-10-27 CameraSource 暂停/恢复与 FIFO 真机回归
+
+- 本轮推进了新的行为验证，没有修复或抑制严格并发警告。新增`CameraHardwareReleaseTests.testPhysicalPauseResumePreservesSessionAndStopStartOrder`，复用真实session/callback；暂停后排空delegate队列并观察250ms无新帧，恢复时要求同一input/output，再紧邻调用stop/start并等待真实AVCaptureSession stop/start通知与新的回调。timeout/error也执行terminal close，不保存画面。
+- 独立新工程build-for-testing和真机全生命周期套件均exit0。iPhone16ProMax/iOS27.0.1 **9/9、0 failures、0 skips**；新用例2.126秒。PID27922/runID `B6B0956C-4C7E-4138-8EEE-3E5C08A5B0DD`：暂停计数3、恢复6、连续stop/start通知后7，之后继续至10；关闭后仍10，start/stop通知各3，inputs/outputs从1/1变为0/0。原关闭/并发注册/owner释放回归均通过。
+- 当前CameraSource单文件Swift6、`-strict-concurrency=complete -warnings-as-errors`、iOS15 target检查仍有**4处Sendable捕获warning**，即使编译exit0也不算通过。日志名称`strict-red.log`是原计划命名，实际不是编译失败，原exit0已保存。本机SDK接口确认SerialExecutor/UnownedJob基础API声明可回溯iOS13，`checkIsolated`则iOS18起；这不能证明旧系统AVCapture delegate调用`assumeIsolated`安全。研究agent429无结论；不重复同请求，不用unchecked包装、警告抑制或每帧Task替代所有权设计。生产并发迁移保持未完成。
+- 原始xcresult/两份纯文本状态附件/构建日志/当前源码hash/SDK声明证据与summary在`artifacts/verification/p4-camera-concurrency-20261027/`。初次xcresult导出因Xcode TestReport缓存权限exit64，授权重跑成功；不是产品失败。常规测试构建的既有warnings、XCTest最低版本链接提示和Xcode版本诊断保留，不宣称warning-free或iOS15运行通过。
+- 已恢复核验过的普通Demo并无参数启动**PID27925**，安装/启动URL一致，容器保留；两个保护hash与生产CameraSource/DemoController hash不变。只新增验证与文档，全部既有dirty/untracked保留，无commit/push。Task9仅行为证据子项完成；严格并发所有权设计、native GrOp残留、UI/EXIF/minOS、完整review及Android模型等仍开放。总goal active、基础10/12。
+
+## 最新续接 — 2026-10-27 LLDB 取证受阻与进度口径复核
+
+- 复核 README、ROADMAP、逐阶段计数审计和本 handoff，当前均为**基础10/12**；旧5/12只累计P0–P3/P8，遗漏已达到原定停止点的P5/P6/P7/P9/P10。此次核对没有新增完成阶段，也没有减少SDK/Demo、Android、模型、质量或统一验收范围；总goal仍active。
+- 上轮5次有界LLDB诊断原件保存在`artifacts/verification/p4-atlas-device-debug-20261027/`。`device process attach`后target为`<none>`/`state=connected`、无executable images；同步模式及显式`remote-ios`也未取得模块，`process interrupt`报`Process must be launched`，后续`process attach`报`no such process`。因此没有实际读取TLS、析构/释放事件或线程生命周期；这是调试通道阻断，不是产品失败或新的根因证据。没有新支持路径时不再重复同类attach。
+- 本轮新鲜`devicectl device info processes`成功，原已核验普通Demo安装URL `EB090307-6674-4E16-948B-421B04C463EC/OnDeviceAIDemo.app/OnDeviceAIDemo`当前进程为**PID27906**，不同于上轮无参数启动记录PID27901。本轮只读观察，未启动该PID，未重装/终止应用，也未操作另一个旧安装URL的PID27473；进程存在不等于前台UI验收。原始结果`processes-after-debug.json`保留。
+- 两个保护文件hash仍为`b35bd984…9fd8f5`和`6f130bd9…70822`；本轮没有生产源码修改、提交或远端写入。末次bridge自然释放已经取得证据，不重复该实验；native GrOp残留、真机交互/EXIF、minimum OS、strict-concurrency warnings与完整review仍开放。下一独立代码分支是CameraSource严格并发所有权设计与回归，不以`@unchecked Sendable`包装或诊断抑制代替修复。
+
+## 最新续接 — 2026-10-27 P4 末次 bridge 自然释放、TLS 线程退出候选机制
+
+- 上一轮有真实页面/分配证据进展；本轮补31/35/60秒idle尾部和同步弱bridge状态，不重建第四页、不强制GC、不跨await保留bridge。新包构建成功，当前probe/生产App/框架manifest哈希全部匹配；上轮审查后的报告诊断/status/来源修订本轮也实际跑到真机。所有本轮build/record/export/download句柄均已正常结束，无需重启。
+- iPhone16ProMax/iOS27.0.1、PID27882/runID `543373D1-52A7-424C-9ED1-FE5922D6E97C`，三轮30秒相机窗口新增**672/694/694**次成功；stop5秒无新增且inputs/jobs0。每轮名义30秒采样owner/Compose controller/Metal layer均为空，bridge仍存在但**admissionAvailable=false、inputs/jobs0**。末次实际30.992938秒bridge存在，**32.086039秒采样已释放**，持续空闲至62.350613秒均为0。结果`observations-complete`/`weakReferenceOutcome=released`，不把它写成原生零泄漏。
+- trace**301.116972秒**，覆盖全部周期与尾部；**18×GrOp/2304B全部最终live**，其中17项33帧AtlasTextOp路径、1项录制前已有。完整allocation导出99401行/73387236bytes、exit0。额外保存binary定义，trace中`OnDeviceAIDemo.debug.dylib`UUID **00708A06-D253-3EEB-9B8C-0AF13A8BF460**与实际运行build的dwarfdump匹配，PID/安装URL/时序/source hashes均严格验证。证据`artifacts/verification/p4-page-tail-20261027/summary.json`、`verify_tail.py`；运行源码/产物在同目录manifest及`/tmp/odai-p4-page-tail-20261027-build`。
+- 官方固定Skia revision的AtlasTextOp.h、GrOp.h/cpp、GrRecordingContext.cpp已直接获取，确认virtual析构、自定义delete和context同线程ClearCache路径。researcher429未提供结论，不重复派发。独立C++host从固定cpp68–89行提取allocator块，仅new/delete重定向计数，三场景通过：同线程复用/清理；3线程析构后退出仍留3块且主线程清理无效；存活worker槽须该worker清理。未链接Skia、未调用设备私有API，不是生产修复或真机根因证明。
+- 宿主3线程pthread地址重复但kernel TID不同。原PID27863 thread-info导出35个kernel TID，与Allocations thread-id标签无交集、metadata时间全0；未建立线程生命周期映射。因此先前“同分配线程”应限定为相同导出标签，不能推导同一个持续存活OS线程有多槽。候选机制为线程退出使raw TLS槽丢失已析构存储引用，尚需设备实际TLS/析构/释放线程证据。固定源/host原始结果/线程metadata/最近5条默认分支文件历史在`artifacts/verification/p4-atlas-reentry-upstream-20261027/summary.json`；没有取得已证实可应用的上游修复依据。
+- 普通Demo已从原核验restore包恢复安装/无参数启动**PID27888**，URL匹配、容器保留。保护hash和生产源hash不变，全部dirty/untracked保留，无commit/push。后续先围绕native TLS/线程生命周期/实际delete事件设计最小取证，不能继续以相同导出标签直接排除缓存机制；本范围bridge释放不必再重跑。原生残留、物理UI、真机PHPicker→Vision、minOS、strict warnings、完整review及Android模型等roadmap缺口继续保留，goal active、基础10/12。
+
+## 最新续接 — 2026-10-27 P4 同 PID 页面退出/重入与跨周期原生残留
+
+- 上轮进度问答仅复核数字，没有推进实现；本轮已新增实际证据。`generate-camera-resource-app.rb`新增显式page-cycle模式，生产App内容/StateObject原样成为page View，独立root控制存在与identity；新增`CameraPageResourceValidation.swift`只用弱引用追踪owner/bridge/Compose controller/Metal layer。未改生产导航、相机、controller或依赖。双模式生成源码逆变换严格等于原生产源码；现有stop模式保留。
+- 真机iPhone16ProMax/iOS27.0.1、PID27863、runID `7BB10334-CBE9-4CC8-839A-BC6DD3F38C20`：三次新owner/真实渲染，相机30秒窗口新增**667/690/694**次成功；stop5秒计数不变、inputs/jobs0。页面移除30秒后每轮owner/Compose controller/Metal layer均已释放，bridge仍1；前两轮bridge下一次warmup归零，最后bridge未来生命周期未验，原报告保持`incomplete-release`。
+- Leaks trace**301.106594秒**，覆盖全部周期，设备/PID/安装URL/时间已严格关联。**19×GrOp/2432B全部最终live**；流式导出**104655行/80807499bytes、exit0**。18项有33帧AtlasTextOp/SurfaceMetalRedrawer完整栈，来自8个分配线程；按分配周期7/6/5（不是三次即时Leaks计数），另1项录制前已有。同分配线程可跨周期各留1项，简单“每分配线程一槽”解释不足；delete/析构线程和TLS仍未观测，不宣称长期无界增长或缓存误报。另3个live AtlasTextOp未列入Leaks，不能自行升级为泄漏。
+- 原始报告/trace/源码/运行App/framework hashes、分配栈、生成检查与严格汇总脚本位于`artifacts/verification/p4-page-release-20261027/`。`summary.json`和[专项文档](validation/p4-atlas-text-cache.md)记录边界。xctrace初次沙箱导出因Instruments缓存权限exit134；授权后导出成功，不是产品错误。当前所有本轮build/record/export会话均结束，不需重启。
+- 独立probe reviewer提出报告I/O失败诊断、framework/Info来源、状态语义和模式检查4项：前三项已在源码补强并重新签名build成功，第四项已有真实双模式逆变换/manifest检查。真机运行的是补强前probe，`run-source/`、`project/`和`/tmp/odai-p4-page-release-20261027-build`完整冻结；修订后`project-final/`与`/tmp/odai-p4-page-release-final-20261027-build`仅编译验证，不混称设备已验。没有全P4独立review结论。
+- 普通Demo从已核验`/tmp/odai-p4-restored-demo-20261026/Build/Products/Debug-iphoneos/OnDeviceAIDemo.app`恢复安装/无参数启动**PID27875**，URL匹配、数据容器保留。保护两文件hash及生产CameraSource/DemoController/App hash不变，全部dirty/untracked保留，无commit/push。
+- 下一步：依据新19地址调查真实析构/释放线程与最终TLS/原生owner，补最后页面退出更晚的bridge采样；三轮已经证明跨周期新增最终残留，不重复旧trace“可能缓存”结论。保持依赖，不强制GC/调用私有ClearCache/压制Leaks。物理UI、真机PHPicker→Vision、最低系统、strict warnings、完整review及Android授权模型等全部roadmap缺口保留，总goal active、基础10/12。
+
+## 最新续接 — 2026-10-27 P4 AtlasTextOp 完整分配栈与缓存机制
+
+- 本轮只读分析上一包PID27593 trace，无新设备操作或生产/依赖修改。流式完整读取Allocations List **118470行/77838589 bytes**，七个Leaks地址全部匹配。**5个AtlasTextOp地址各取得33帧完整分配栈，分别来自5个不同线程**；路径明确为Compose `SurfaceMetalRedrawer.startRenderLoop/renderAndPresentFrame → Canvas.drawPicture → Skia文字绘制 → AtlasTextOp::Make`。另2个在trace时间0已存在，仍只有栈限制。
+- 固定Skia `22f58c9fd43d55bde818821c04b48fda5d7ec939`的cpp确认每线程一个`thread_local void* gCache`，new复用、delete缓存已析构存储、ClearCache清理调用线程槽。当前验证包二进制的TLS/new/delete路径吻合，并发现**GrRecordingContext基类析构实际调用ClearCache**；不能从派生类源码未见调用推导不清理。5对象/5线程支持缓存假设，但尚未读取运行时TLS值、析构/释放线程、页面退出与重复绘制增长，**不把7×GrOp/896B改为误报或零泄漏**。
+- 详情和固定来源链接在`docs/validation/p4-atlas-text-cache.md`；原始分配记录/完整栈、cpp、当前二进制hash/UUID/反汇编及汇总在`artifacts/verification/p4-atlas-cache-20261027/summary.json`。attach trace的dyld-load导出无事件，映像UUID未由trace独立复核。原trace和summary保留不变；上轮普通Demo恢复记录仍是最近设备操作，本轮未重新安装/启动。
+- row XPath为空、64MiB初轮partial均保留，512MiB限额的后续完整导出才用于结论。桌面UI未到达目标trace，无UI审查结论；不要再走这条不稳定入口。上游首次research有结果，补查429；补取header/版本文件的自动审批服务也429、两命令未执行，不是安全拒绝，未绕过审批。现有cpp与二进制证据可继续推进。
+- 下一验证：保持依赖，覆盖实际页面退出/重入、owner/renderer释放及同PID资源采样，区分线程缓存和持续增长；正常stop保留页面不能代替完整teardown。不盲升依赖或添加私有ClearCache调用。保护hash/生产源hash未变，全部dirty/untracked保留，无commit/push；基础10/12、总goal active及Android授权模型等所有缺口保留。
+
+## 最新续接 — 2026-10-27 P4 实际 Demo 渲染与持续/停止资源采样
+
+- 新增独立生成器`generate-camera-resource-app.rb`及`CameraResourceValidation.swift`，复用真实SwiftUI/Compose页面、controller和当前KMP framework；仅在生成的App副本插入一个验证调用，生产源码/保护工程未改。使用显式UUID启动和app-private触发文件，在准确PID的Leaks录制存活后才启动相机；不保存画面或截图。复跑说明在`probes/ios-camera-lifecycle/README.md`，计划Task6与原ledger已更新。
+- iPhone16ProMax/iOS27.0.1，runID `DE42C583-3089-416C-92A0-94B38266F918`、PID27593：真实ComposeHostingViewController与可见CMPMetalLayer各采样点存在。预热3次，四个30秒窗口新增**672/642/670/641**次成功，活动**121.117918秒**，共**2628**次Vision成功；停止后**30.085894秒**计数不变且inputs/jobs均0，报告`passed`。这是controller驱动、实际页面渲染的运行验证，不是物理UI控件触摸验收。
+- `rendered-camera-pid27593.trace`完整**210.750103秒**，PID/安装URL、时间范围与报告逐阶段核对，覆盖触发后基线、全部活动与停止窗口。Leaks明细**7×GrOp/896B**：**5项责任分配符号为`skgpu::ganesh::AtlasTextOp::Make(...)`，2项仍`<Call stack limit reached>`**。新符号缩小调查范围，但不能仅凭它认定Skiko/Compose所有权缺陷或修复方案；旧空闲trace不可归因结论不变。下一步针对这份新trace调查完整分配栈/对象生命周期，不重复旧trace或盲升依赖。
+- 活动RSS快照471859200/472678400/473088000/473841664B，停止30秒后464404480B；采样点thermal raw0。Allocations aggregate persistent351357200B，其中IOSurface317390848B，均不是峰值/footprint/GPU/能耗或无泄漏结论；正常stop保留最后一张预览和Compose页面，尚未覆盖整个页面owner teardown。原始trace约4GB，仅保留本地忽略目录。
+- 初次冷启动inactive、CAMetalLayer-only检测误判、诊断旧Swift API编译失败均留档，属于harness问题，非产品RED。固定Compose1.11.1源码确认SurfaceMetalView使用CMPMetalLayer，实际440×380图层证据支持修正检测。一次诊断编译失败后启动到旧产物的记录明确排除，未触发相机。所有失败、source manifest和最终交叉核验汇总见`artifacts/verification/p4-rendered-resource-20261027/summary.json`、`diagnostics.json`。
+- 普通Demo已恢复安装并无参数启动（PID27598），安装/启动路径一致、共享override缺席，保留应用数据；保护hash和生产相机/控制器hash未变，全部dirty/untracked保留，无commit/push。基础**10/12**与总goal active不变；P4仍缺真实UI控件、真机PHPicker→Vision EXIF2/6/7、完整渲染释放/泄漏根因、最低系统、并发warnings与独立review。Android授权模型问题仍待答，不重复询问。
+
+## 最新续接 — 2026-10-26 P4 真机两分钟 controller/Vision 管线
+
+- 新增device-only opt-in `CameraControllerSustainedTests`，使用生产`DemoController.startCamera/stopCamera`与真实bridge/Vision；生成器以`ODAI_CAMERA_LIFECYCLE_SUSTAINED=1`启用，拒绝simulator模式，默认快速套件不包含此用例。未修改生产相机代码，未保存画面。
+- iPhone16ProMax/iOS27.0.1完整hosted XCTest **9/9 passed、0 failures、0 skips**。runID `A13B90FD-12DB-4283-928C-832A205AF891`、PID27564：预热4次成功，四个30秒窗口分别新增720/721/720/720次，活动120.069秒后共2885次真实Vision成功结果。停止后等待bridge jobs，再观察5秒，计数仍2885、inputs/jobs为0；owner释放、bridge/detector关闭均通过。
+- RSS仅为`mach_task_basic_info.resident_size`快照：启动前148439040B，四个活动窗口490962944/492339200/491012096/491012096B，停止后490864640B，owner释放后450330624B。采样点前台状态/热状态均raw0；不是连续热状态、峰值、footprint、GPU、能耗或零泄漏结论，不设临时内存阈值。
+- raw xcresult、8个阶段文本附件、build/test logs、generator checks及源/保护hash汇总位于`artifacts/verification/p4-sustained-controller-20261026/summary.json`。普通Demo复用上轮已核验且hash相同的当前源码构建包，已恢复安装并无参数启动（PID27570），安装URL与启动路径一致，共享override缺席；未卸载或清理容器。两个保护hash不变，全部dirty/untracked保留，未提交/推送。
+- 此结果补齐原生controller持续运行与停止/owner释放合同，**不替代完整Compose相机UI、持续/停止后Leaks、渲染资源释放、真机PHPicker→Vision EXIF2/6/7、最低系统、并发warnings或独立review**。旧UI runner初始化超时和不可归因的GrOp trace继续保留，不盲目重跑。基础10/12与总goal active不变；Android授权模型仍待答，不重复询问。README及本入口已明确5/12为历史口径。
+
+## 最新续接 — 2026-10-26 P4 真实 PHPicker 合成 EXIF 模拟器验证
+
+- 新增独立simulator-only验证host/UI tests与生成器，直接编译生产`DemoController`，经其`selectPhoto()`打开真实PHPicker；观察实际`controller.image`，不复制decoder或注入picker callback。本轮未改生产代码、保护工程或真机照片库。计划与恢复说明为`docs/superpowers/plans/2026-10-26-ios-picker-exif.md`、`probes/ios-photo-picker/README.md`。
+- 三个新建独立iOS27.1模拟器分别导入已核验EXIF2/6/7的公开合成JPEG，原始DCIM文件与fixture SHA256唯一匹配。真实picker用例各**1/0/0，合计3/3 passed、0 failures、0 skips**。生产controller输出分别为`80x40:white,black,white,black`、`40x80:black,black,white,white`、`40x80:white,white,black,black`（按左上/右上/左下/右下），同时验证尺寸与镜像/旋转像素位置。
+- 首次“网格只能有1项”的保护断言失败，未点击图片；诊断证实新模拟器预置6张Apple示例图。随后要求`ODAI_PICKER_FIXTURE_LABEL`指定经核验的精确标签且唯一命中，无位置fallback。最初失败与诊断保留为harness/environment证据，不是产品方向处理RED。最终raw xcresult、文本附件、fixture manifest、库内hash清单、源hash与汇总在`artifacts/verification/p4-picker-exif-20261026/summary.json`。
+- 已仅删除本轮创建的3个临时模拟器，原iPhone Duo模拟器仍Booted；fixture与所有证据保留。`git diff --check`、Ruby语法与独立host/UI test构建通过，两个保护hash不变；此前dirty/untracked全部保留，未提交/推送。无需重跑未改动的Apple470项来冒充新证据。
+- **P4真机PHPicker→controller→Vision的EXIF2/6/7仍未验**；本包未断言Vision推理成功或Photos provider临时文件保留原EXIF，亦不覆盖完整Compose Demo交互。持续相机/停止资源窗口、渲染释放、最低系统、严格并发warnings与独立review继续保留。基础10/12，完整roadmap仍active；Android授权模型问题继续待答，不重复询问。
+
+## 最新续接 — 2026-10-26 P4 回调同步当前源码真机复验
+
+- 上一轮完成回调注册/terminal close同步修复及本地验证；本轮没有新生产代码修改。先核对源hash与设备lockState（无需密码），预先构建普通Demo恢复包，再使用既有hosted XCTest工程/签名测试iPhone16ProMax/iOS27.0.1。**当前源码8/8 passed、0 failures、0 skips**，包含真实硬件关闭、owner/bridge释放及全部回调同步回归。
+- 硬件文本附件确认capture callback **3** 次，input/output **1/1→0/0**，关闭后250ms计数仍3，拒绝restart；没有保存相机图像。普通Demo已用当前源码重新安装、无参数启动，sharing overrides缺席，未删除App容器或更新签名资产。结果为`artifacts/verification/p4-owner-release-20261026/callback-physical-summary.json`，`callback-summary.json`已追加新真机结论；旧`physical-summary.json`继续保留上一源码历史。
+- 两个保护文件hash与本轮前的source hashes均未变，全部dirty/untracked保留，未提交/推送。新源码硬件复验缺口已关闭；**P4仍需PHPicker EXIF2/6/7、持续相机/停止资源窗口、完整渲染释放/GrOp归因、最低系统与独立审查**。严格并发capture warnings仍在；review服务429不算审查通过。不要重复检查已无法归因的旧trace或无依据重跑失败UI runner。基础里程碑10/12，完整roadmap保持active。
+
+## 最新续接 — 2026-10-26 P4 回调注册与关闭同步（局部完成）
+
+- 本轮从并发 warning 排查到实际生命周期漏洞：`CameraSource.onFrame` 跨线程读写未同步，且 terminal close 后仍能重新注册并持有 callback owner。新真实 XCTest 先完成运行时 RED（1 test / 2 assertion failures，exit65），不是构建或 runner 错误；初轮沙箱缓存/模拟器权限失败单独保留为环境失败。
+- 回调存储、替换与关闭门禁现由 NSLock 保护；关闭先封住注册入口，再停止/拆卸 session 并排空帧队列。旧回调捕获对象在锁外释放，避免析构重入死锁。没有新增 Sendable 注解，没有改变 start/stop 可恢复暂停合同。新增关闭后注册/捕获释放、并发读写与 close、捕获对象析构重入回归。
+- 完整 simulator lifecycle **7/7、0 failures**；Thread Sanitizer 相机专项 **6/6**，日志无 race/lock-order report，测试二进制实际含 `__tsan_read/write` 等插桩符号。完整 `verify-apple.sh` exit0：Apple XCTest **470/470**、分发工具 **18/18**、既有生命周期/照片/方向/ASR checks、原生 consumer/default Demo simulator build通过；KMP 26 tasks up-to-date，增强 binary consumer未指定未运行。新证据与 frozen logs见 `artifacts/verification/p4-owner-release-20261026/callback-summary.json`。
+- 单文件 `-swift-version 6 -strict-concurrency=complete` typecheck exit0但仍有4个 non-Sendable capture warnings，涉及 start/stop/close/帧队列闭包；不能报告无警告或 Swift6迁移完成。新 bounded reviewer 返回429，无审查结论，不继续重派。同机旧5/5硬件结果属于上一源码，本轮未操作真机；当前修改的硬件复验仍待完成。
+- 两个保护文件 hash未变，既有dirty/untracked全部保留，未提交/推送。基础里程碑仍10/12；继续 P4严格并发/独立审查、当前源码硬件复验、PHPicker EXIF2/6/7和持续相机/停止资源窗口。现有GrOp trace不可归因结论不变，不重复检查同一trace。完整roadmap与Android模型/生产推理等扩展目标保持active。
+
+## 最新续接 — 2026-10-26 P4 现有 trace 归因复核
+
+- 当前基础里程碑为 **10/12，P4/P11 未完成**；下方历史 `5/12` 不再用于当前汇报。完整交付的 Android 后端、生产模型、质量、最低系统和统一验收缺口全部保留，不将 10/12 换算为整体完成百分比。
+- 已用 Instruments 打开既有 `idle-current-pid27475.trace`，逐一选择四个 GrOp 对象并查看 Inspector 的 `Allocation Backtrace`：四项均只有 `<Call stack limit reached>` / `<unknown>`。这不只是 CLI 的 Responsible Frame 列省略；当前保存的 trace 在这两个入口均未提供可归因的分配栈。View Options 仅见 Invert Stack / Collapse Stack。
+- 本机 `xctrace record --template Leaks --device … --show-recording-options` 成功输出的公开选项没有 stack-depth 设置。上游只读调查代理返回 `429 Too Many Requests`，没有调查结论。没有新录制、源码或依赖修改，也没有将 GrOp 归因于 CameraSource、Skiko 或 MetalRedrawer TODO。调查记录为 `artifacts/verification/p4-owner-release-20261026/idle-backtrace-inspection.json`，汇总已追加到 `physical-summary.json`。
+- 同一 trace 的无效重复检查到此结束；P4 继续保留 PHPicker EXIF2/6/7、持续相机/停止窗口、渲染释放、严格并发与独立审查。不要无依据重跑已两次初始化失败的 UI runner，或盲目升级依赖。上一检查点的真机5/5、模拟器4/4为既有验收，本轮没有重跑。保护文件 hash 未变，原有 dirty/untracked 修改保留；goal 仍 active。
+
+## 最新续接 — 2026-10-26 P4 真机关闭合同与当前空闲 Leaks（部分完成）
+
+- 前一轮为有效进展：owner teardown 修复、模拟器测试和 Apple 门禁已落地。本轮只读 lock-state 确认 iPhone 无需密码后，直接使用真机，没有镜像或解锁操作；原有 dirty/untracked 文件全部保留。基础里程碑仍 **10/12，P4/P11 未完成**。
+- `generate-camera-lifecycle-tests.rb` 新增 isolated hosted device 模式，复用现有 Demo/test bundle 标识和签名，不执行 provisioning updates。iPhone 16 Pro Max / iOS 27.0.1 上 **5/5 passed、0 failures、0 skips**；新增硬件测试实际收到 **3** 次 capture callback，关闭前 input/output **1/1**，关闭后 **0/0**，250ms 后回调仍 **3**、再次 start 后 session 仍 stopped。另四项 owner/bridge/output/delegate/drain/repeated-close 测试同机通过；没有保存相机画面。更新后的默认 simulator 生成模式也新鲜 **4/4 passed**。
+- 普通 Demo 的当前源码签名 device `build-for-testing`、安装、无参数恢复启动均成功；App 私有容器未删除，sharing overrides 不存在，两个保护 hash 未变。真机原始结果和状态附件在 `physical-tests.xcresult` / `physical-attachments/`，汇总见 `artifacts/verification/p4-owner-release-20261026/physical-summary.json`。
+- 既有两分钟相机 UI 用例两次均在 runner 初始化时报 `Timed out while enabling automation mode.`，业务测试体没有执行；xcresult 把 runner 错误记录为 failure，不计为相机行为 RED/通过。中途核实并结束了本项目旧安装路径的进程，但重试仍失败。本轮没有完成持续相机/停止窗口的新 Leaks。
+- 另取当前普通 Compose Demo 的 `--smoke-blank` 启动后空闲采样：PID **27475** 与当前安装 URL 和 trace TOC 一致，Leaks 模板窗口 **91.471143 秒**。明细 **4×GrOp / 512 B**，均 `Call stack limit reached`，责任边界仍未确认；与历史静态/相机样本状态不同，不能推导泄漏增长率或认定关闭修复无效。Allocations aggregate persistent bytes **19,206,032**，不是 physical footprint/峰值。TOC、明细和统计均已导出；原始 trace 仅留本地忽略目录。
+- 继续项：PHPicker EXIF 2/6/7、持续相机及停止后的完整释放/渲染责任、最低系统、独立审查和 Swift 5 non-Sendable warning。相机硬件 terminal close 这一合同现有真机证据，不能扩展为 P4 全部资源或零泄漏。LiteRT-LM 模型资产问题仍待用户答复，不重复询问或代为接受许可；总 goal 保持 active。
+
+## 最新续接 — 2026-10-26 P4 Demo owner 释放回归（局部完成）
+
+- 延续 Roadmap 口径复核后的 **基础里程碑 10/12**；P4、P11 未完成。LiteRT-LM 模型资产问题仍待用户答复，不重复询问、不下载或接受许可。转向独立可推进的 P4 相机/bridge 所有权缺口；全部先前 dirty/untracked 修改保留。
+- 真实控制器 XCTest 先得到运行时 RED：控制器已释放，但保留的 bridge 仍 available、待处理图像未清空、native detector 未 closed。`DemoController.deinit` 现取消 owner tasks、关闭 frame queue，并在 main actor 取消 photo submission、关闭 face bridge 和相机。相机新增幂等 terminal `close()`，在既有 capture serial queue 停止并移除 inputs/outputs、清空视频 delegate，再排空 frame queue、释放 callback/CIContext cache；`stop()` 保持可恢复暂停。
+- 新鲜模拟器 XCTest **4/4、0 failures**；`verify-apple.sh` exit0：Apple host XCTest **470/470**、分发工具 **18/18**、既有生命周期/照片提交/方向/ASR 检查、原生 consumer 与默认 Demo simulator build 通过。KMP 部分任务 UP-TO-DATE，不称全部重跑；增强 multimodal binary consumer 未指定、未运行。初轮 Ruby 2.6/3.4 gem 混用失败后，以 `RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby` 重跑通过。
+- 证据冻结在 `artifacts/verification/p4-owner-release-20261026/summary.json`、`camera-green.xcresult` 和对应 raw logs；计划/ledger 为 `docs/superpowers/plans/2026-10-26-ios-camera-release.md` / `.superpowers/sdd/2026-10-26-ios-camera-release/progress.md`。bridge RED 的 runner 在实际断言失败后整理诊断时被中断（exit130），不把未完成的 red xcresult 当成完整执行包；camera API 为缺少 initializer/close 合同的编译 RED。
+- 独立审查服务再次 `429 Too Many Requests`，没有审查结论。默认 Demo 的新 `CameraSource.close` 有 Swift 5 non-Sendable self capture warning，严格并发审查仍待完成；未用 unchecked Sendable 隐藏。真实 capture input/hardware 释放、新同设备 Leaks/Allocations、PHPicker EXIF 2/6/7 均未验，不能据模拟器测试关闭 P4 或宣称历史 GrOp 泄漏已解决。保护文件 hash 未变；`git diff --check` 通过；未 commit/push/merge/release。
+
+## 最新续接 — 2026-10-26 Roadmap 进度口径复核
+
+- 用户追问为何长期 5/12 后，对照 `cb7c13b` 原始阶段表与加入 P11 的 `cda5ba8` 基线，确认原阶段停止点与后续完整交付被混算。现按原始停止点记录 **基础里程碑 10/12（P0–P3、P5–P10）**，P4、P11 未完成；这不是整体完成百分比或发布结论。逐阶段依据、原始报告复核与扩展任务见 `docs/validation/roadmap-progress-audit-20261026.md`。
+- 新鲜只读复核：P5 两个 `927b7749` 真机 5+30 JSON 均由 `benchmark_report.py` 重验成功，Apple/Android 独立消费者历史构建日志成功标记仍在；P6 真机 TTS success/cancelled/closed、P7 固定视频 success/48→48 原始报告可读；P9 `20261025-fix2/device-report.json` 通过 `--expected-samples 30` validator。新汇总在 `artifacts/verification/roadmap-scope-audit-20261026/`；没有重跑设备或推导未测指标。
+- 已批准的后续 SDK/Demo/第二平台/生产模型/质量/最低系统与审查任务全部保留。当前活动工作仍是 LiteRT-LM Android 扩展包；它的模型资产、生产 adapter/consumer 和真实设备推理未完成。下方 5/12 为历史报告口径，续接时不再直接沿用。全部现有未提交修改保留。
+
+## 最新续接 — 2026-10-26 LiteRT-LM 复审修复与 release 打包边界（部分完成）
+
+- 在原有 dirty worktree 上完成独立复审；该轮发现的 2 MEDIUM 均经 RED→GREEN 修复。private cache 成功删除后才释放 lease；删除失败时保留 lease/cache、关闭 admission 并返回稳定 `RuntimeFailure`（模型移除持续被 lease 阻止直到进程结束）。`cancelProcess → awaitTerminated` 由 session owner 强制 30 秒截止时间；非返回 fake drain 在旧代码中触发外层 35 秒保护超时，修复后约 30 秒返回 `DrainFailure`，不 close native、不释放 lease/cache，并拒绝 drain/close/reentry。修复由回归验证，未声称独立复审已重审修复后的 diff。
+- 新鲜完整模块 JVM **23/23**（`review-fixes-green.log`）；后续 lint、debug/release AAR、POM/Gradle metadata、probe host/APK/test APK、`android:multimodal` JVM 与默认 Demo APK 门禁 **BUILD SUCCESSFUL**（567 tasks，40 executed、527 up-to-date，`review-package-final.log`）。probe host **9/9**、Python AAR 工具 **7/7**；`git diff --check` 通过。日志均在 `.superpowers/sdd/2026-10-26-android-litertlm-backend/`。
+- 生成包和依赖图只读断言通过：默认 Demo runtime 无 LiteRT-LM；可选后端精确解析 `0.18.1`；POM 仅以 runtime scope、Gradle metadata 仅在 runtime variant 声明 LiteRT-LM；release AAR 没有内嵌 vendor classes/JNI，AAR 与 source JAR 的 hash 匹配 metadata。冻结副本、raw logs 和 `summary.json` 位于 `artifacts/verification/android-litertlm-package-20261026/`；release AAR SHA-256 `b14f143f…d7c0e08`。只生成本地产物，未发布。
+- Task 1/2/3 及 Task 5 仍 **partial**，Task 4 生产构造未启用。固定授权模型仍缺失；真实 callback 模式、native drain、模型兼容性、设备图像生成均 **unverified**，不得以 host 超时测试或打包结果替代。保护文件 hash 仍为 `project.pbxproj=b35bd984…9fd8f5`、`face-identity.md=6f130bd9…70822`；全部原有未提交修改保留。Roadmap 仍 **5/12、P9 active**。
+- 模型候选只读 metadata 已记录在 `docs/validation/android-litertlm-model-assets.md`：Google Gemma 3n E2B 固定 revision 通用 `.litertlm` 为 `3,655,827,456` bytes，manual gate/Gemma 许可，SHA-256、当前文件 CPU/image/TECNO 兼容性未证实；没有下载或接受条款。已异步询问用户是否有授权本地资产，不能将候选记录当作真实 manifest。独立尝试恢复 P10 Android 专项 review 再次 `429`、无结论，P10 review 状态保持待审。
+
+## 最新续接 — 2026-10-26 LiteRT-LM Task 3 完整本地门禁复核（部分完成）
+
+- 延续原有 dirty `feat/sdk-foundation` worktree；上一检查点所述 cache 删除失败、预算、空结果及 availability/close join 回归已纳入最终聚焦构建。`.superpowers/sdd/2026-10-26-android-litertlm-backend/focused-final2.log` 记录 **BUILD SUCCESSFUL**（548 tasks，16 executed、532 up-to-date）；模块 JVM XML 合计 **22/22**（0 failure/error/skip），probe host **9/9**，Python AAR 工具 **7/7**，`git diff --check` 通过。此前“完整模块 lint/assemble 和默认 Demo 构建仍需重跑”只属于下方历史检查点。
+- 本次重新只读检查真实 AAR：`tools/inspect_android_vlm_artifact.py --json` 返回 `status=passed`、`errors=[]`，`minSdk=24`、target SDK 未声明、JNI `arm64-v8a/x86_64`；AAR/POM SHA-256 仍为 `05c6bdc8…699f3012b` / `3d6ea70f…699f5`。两个保护文件 hash 仍为 `project.pbxproj=b35bd984…9fd8f5`、`face-identity.md=6f130bd9…70822`。
+- Task 1/2/3 仍为 **partial**：没有固定授权的 LiteRT-LM 模型，真实 callback 模式、cancel→native drain、设备图像生成和模型兼容性均 **unverified**；生产 factory/consumer 未启用。本次新增代码的独立复审仍无结论（审查服务 `429 Too Many Requests`）。Roadmap 保持 **5/12、P9 active**；保留全部未提交修改，未 reset/clean/stash/commit/push/merge/release。
+
+## 最新续接 — 2026-10-26 LiteRT-LM Task 3 预算、查询 join 与 cache 失败门禁（部分完成）
+
+- 在原有 dirty `feat/sdk-foundation` worktree 继续可选 Kotlin 模块，不改变既有未提交文件的归属；保护文件 `project.pbxproj=b35bd984…9fd8f5`、`face-identity.md=6f130bd9…70822` 在本轮开头复核未变。
+- 新增可确定性复现的 private cache 删除失败测试，先因缺清理边界 RED，再引入内部 `LiteRtLmCacheCleaner` 与稳定 `RuntimeFailure` 映射，关闭 backend admission，保留失败 cache，禁止下一次 native open；该测试 GREEN。lease 已在 native 正常 close 后释放，不把清理失败误报为 drain 证明失败。
+- 补充 `512` token 上限、`513` 拒绝、`16 MiB + 1` 图像拒绝和空输出清理覆盖；新增可控 availability source，验证 `close()` 等待已进入的查询结束，随后查询返回 `CLOSED`。新增测试及当前模块 JVM 定向测试通过；完整模块 lint/assemble 和默认 Demo 构建仍需本轮最终重跑。
+- 生产 LiteRT-LM factory/consumer 仍未启用：没有固定授权模型资产，真实 callback 模式、cancel→native drain、设备生成与模型兼容性全部 **unverified**。独立复审本次新改动的 lane 遇到 `429 Too Many Requests`，未产生复审结论；上一轮已复审的范围不得自动扩展到这些新改动。Roadmap 仍 **5/12、P9 active**。
+
+## 最新续接 — 2026-10-26 LiteRT-LM fake 生命周期与 Maven 打包检查（部分完成）
+
+- 本检查点后独立审查最初给出 2 HIGH / 1 MEDIUM。HIGH native dispatcher 已由 `Dispatchers.IO` 包住完整 session 并以专用 caller 线程测试 RED→GREEN；复审确认 **resolved**。callback seam 现要求 `CUMULATIVE` 或 `DELTA` 并与 probe state 匹配，fake delta 被累积为有序累计 update；真实 probe 的 `delta-or-reordered` 含糊结果现以 RED→GREEN 测试改为 `unverified-callback-mode`，只有明确 cumulative + drain proof 才写 `candidate-probe`，复审确认原 HIGH 证据标签问题 **resolved**。MEDIUM 的 probe 资源归属已用 `ProbeNativeOwner` 处理：send 前失败按 conversation → engine 关闭，send 尝试后没有 drain 证明则保留；host 三项所有权回归先 RED 后 GREEN，复审确认原 MEDIUM 已解决。真实模型运行尚未测试，生产 gate 继续关闭。
+- 新增 caller 取消后、native drain 前的 late callback RED→GREEN 隔离回归，以及第二次并发 generation 只能 `Busy` 的测试。修复后最终聚焦门禁 `:android:backend-litertlm:testDebugUnitTest :lintDebug :assembleDebug :probes:android-litertlm:testDebugUnitTest :assembleDebug :assembleDebugAndroidTest :android:multimodal:testDebugUnitTest :demo:androidApp:assembleDebug` **BUILD SUCCESSFUL**（548 tasks，6 executed、542 up-to-date），完整日志为 `.superpowers/sdd/2026-10-26-android-litertlm-backend/focused-final.log`。模块 JVM **18/18**、probe host **9/9**；Python AAR 工具 **7/7**、`git diff --check` 通过。该本地构建不替代真实模型 probe。
+- 当前仍在 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation`、`feat/sdk-foundation`，所有原有 dirty/untracked 文件保留，未 reset/clean/stash/commit/push/merge/release。Roadmap 仍 **5/12、P9 active**。
+- 已修复 probe 最新编辑的 Kotlin 多余大括号；TECNO KM9/API35 安装并显式启动无模型 probe 后，App 私有报告精确为 `{"status":"unverified-missing-app-private-assets","schemaVersion":1}`，副本在 `artifacts/verification/android-litertlm-probe-20261026/missing-assets-device-report.json`。这只证明缺资产安全退出，没有运行模型或证明 callback/drain。
+- `android/backend-litertlm` 新增内部 fake engine/session seam 与 image-only `LiteRtLmBackend`。RED→GREEN 回归覆盖两次独立 generation、`cancel → awaitTerminated → native close → lease/cache release`、drain/open 失败后 poisoned terminal 保留 lease/cache、close 取消 active generation 与晚到 callback 隔离。availability 的缺资产优先级也做了 RED→GREEN 修复：缺模型显示 `REQUIRES_ASSETS/MISSING_ASSETS`；已安装但 probe 未证明则显示 `UNAVAILABLE/UNSUPPORTED_DEVICE`。这些都是 fake/host 合同，不能代表 native drain 已证明。
+- AGP 拒绝可选库直接依赖本地 `.aar`（`bundleDebugAar` 报 `Direct local .aar file dependencies are not supported`）；已将 AAR/POM 的已核验原件复制到被忽略的 `.superpowers/sdd/2026-10-26-android-litertlm-backend/maven/`，由 `-PlitertlmMavenRepo=.superpowers/sdd/2026-10-26-android-litertlm-backend/maven` 提供 Maven 坐标离线解析。模块和 probe 始终声明固定 `com.google.ai.edge.litertlm:litertlm-android:0.18.1`；依赖图为 Gson 2.14.0、reflect 2.4.0、coroutines-android 1.11.0，默认 Demo `debugRuntimeClasspath` 无 `litertlm`。默认无属性时仍走正常 Google Maven；本地构建不证明当前网络下 Google Maven 可达。保护文件 hash 仍为 `project.pbxproj=b35bd984…9fd8f5`、`face-identity.md=6f130bd9…70822`。
+- Task 1/2/3 仍仅 **partial**。真实模型资产、generation callback 累计/增量实测、cancel→native drain、生产 adapter/公开 opt-in consumer、Android VLM 推理与视频路径均未完成。继续补 close-query/预算及 native probe 双路径；生产 factory 必须继续不可构造。
+
+## 最新续接 — 2026-10-26 LiteRT-LM Kotlin probe 与可选模块合同（部分完成）
+
+- 用户已批准 `docs/superpowers/specs/2026-10-26-android-litertlm-backend-design.md`；实施计划见 `docs/superpowers/plans/2026-10-26-android-litertlm-backend.md`。本轮在现有 `feat/sdk-foundation` dirty worktree 开始 Native 执行，未 reset/clean/stash/commit/push/merge/release；所有既有未提交修改保持。
+- 新增 `probes/android-litertlm` Kotlin probe：使用真实 `litertlm-android:0.18.1` AAR 离线编译并生成 main/test APK。因当前代理 `127.0.0.1:7897` 不可连接，本地门禁显式传入 `-PlitertlmAar=artifacts/verification/android-litertlm-aar-20261026/litertlm-android-0.18.1.aar`；无该参数时 Gradle 仍使用固定 Google Maven 坐标。独立 review 发现首次本地模式错误地使用旧版 Gson/reflect；已修正为 AAR POM 的精确传递版本，离线 Gradle runtime graph 为 Gson **2.14.0**、Kotlin reflect **2.4.0**、coroutines-android **1.11.0**。AAR classes 的 Java class major 为 65，主机 JVM 17 无法执行 `Contents`，故 JVM 测试只跑无 AAR 类加载的规则，真实 content mapping 放在 Android instrumentation。
+- TECNO KM9 / API35 / `arm64-v8a`（serial `<Android-serial>`）上，修正版本的 probe APK/test APK 重新安装成功，`LiteRtLmProbeInstrumentationTest.inputMappingUsesRealLiteRtLmContentTypes` **1/1 passed**，新鲜原始日志 `artifacts/verification/android-litertlm-probe-20261026/message-user-exact-device.log` / `.exit`。它证明真实 AAR `Message.user(Contents.of(ImageFile, Text))` 的角色/顺序映射和 Android 类加载；设备 generation、callback delta/cumulative、`cancelProcess()` 后 native drain **未验证**，因为没有冻结/授权的 LiteRT-LM 模型资产。probe 目前尚无可执行的模型运行入口，不能将编译测试视为 Task 1 完成。
+- 新增可选 `android/backend-litertlm` 模块骨架，不进入 `android:multimodal` 或默认 Demo 依赖：固定 model spec/预算、manifest 版本与路径校验、`ModelStore.status → acquire → manifest → release` availability helper 和稳定错误类型。测试先观察缺类型 RED；发现原预算测试因空 metadata 假阳性后修正为有效 metadata，观察 `128` 预算预期 RED，再固定 spec ceiling 为 **512**。当前 `:android:backend-litertlm:testDebugUnitTest :android:backend-litertlm:lintDebug` **BUILD SUCCESSFUL**，但 backend generation/session、native adapter、consumer 均未实现，Task 2 仍部分完成。
+- 执行进度记录在被忽略的 `.superpowers/sdd/2026-10-26-android-litertlm-backend/progress.md`；其中 Task 1/2 均标为 **partial**，不得依据先前脚本自动产生的完成行升级任务状态。下一步先补可运行的真实模型 probe 入口和安全的正常/取消双路径，若模型不可得则继续 fake 生命周期/poisoned terminal 测试但保持生产 factory unavailable；随后完成模块/consumer/设备门禁与独立 review。
+- `git diff --check` 通过；两个保护文件继续未被本包编辑。Roadmap 保持 **5/12、P9 active**，Android 生产 VLM/video 推理、自然质量、GPU/NPU/energy、minimum OS 和 P9 完成继续 `unverified`。
+
+## 最新续接 — 2026-10-26 LiteRT-LM Android AAR 真实 artifact 门禁（未接入生产）
+
+- 通过公开 Google Maven 取得 `com.google.ai.edge.litertlm:litertlm-android:0.18.1` AAR/POM；完整 AAR ZIP 校验通过。AAR 大小 `20,905,360` bytes，SHA-256 `05c6bdc8acda834efcca12c0ad5d06d2cd8c83e60770f056d8d222f699f3012b`；POM SHA-256 `3d6ea70f41bc6305c5985a52c5f5d00da97402d6531c9a395f3145cb5c1a89a5`。所有原始副本与清单在 `artifacts/verification/android-litertlm-aar-20261026/`（被忽略目录）。
+- 真实 AAR 的 ZIP 路径/symlink 安全、`AndroidManifest.xml`、`classes.jar` 和 JNI ABI 门禁通过。manifest 是文本 XML，声明 `android:minSdkVersion="24"`，没有 `targetSdkVersion`，所以 SDK 状态为 `partial`：只确认 minSdk=24，不填 target SDK 代理值。
+- JNI 只有 `arm64-v8a` 与 `x86_64`；`file` 确认为 AArch64/x86-64 ELF 64-bit shared object。许可证在根目录 `LICENSE`，第三方声明在根目录 `THIRD_PARTY_NOTICE.txt`，POM 为 Apache-2.0；工具已覆盖根目录与 `META-INF` inventory。
+- `classes.jar` 的实际 API 包含 `Engine.initialize()/close()`、`Conversation.sendMessageAsync()` Flow/callback、`Conversation.cancelProcess()` 以及 text/image/audio 内容类型，没有视频内容类型。项目继续保持 `supportsVideo=false`；未修改 Gradle、未下载模型、未运行 LiteRT-LM 推理，Android 生产 VLM/video backend、模型兼容性、自然质量、GPU/NPU/energy 和 cancel 后 native drain 仍 `unverified`。
+- `tools/inspect_android_vlm_artifact.py` 已补齐文本 manifest 与根目录 license/notice 解析；标准库回归 **7/7 passed**：`python3 -m unittest tools.tests.test_android_vlm_artifact -v`。旧“代理不可用/未验证 AAR”段落保留为历史，不覆盖本节的新鲜证据。
+- 本轮设备通道刷新：`rtk proxy adb devices -l` 显示 TECNO KM9 `<Android-serial> device`（另有 `emulator-5554`），`rtk proxy xcrun devicectl list devices` 显示目标 iPhone `<iPhone-UDID> connected`。这些只证明通道可用，不升级为 LiteRT-LM 运行时或 P9 完成。Roadmap 仍 **5/12、P9 active**；全部 dirty/staged/untracked 修改继续保留，未 reset/clean/stash/commit/push/merge/release。
+
+## 最新续接 — 2026-10-26 当前 dirty source iOS 真机 picker 清除回归复验
+
+- 上一轮当前 dirty source 的新鲜真机报告在 Clear 后等待 `multimodal-input=尚未选择输入` 超时。系统调试确认产品 `MultimodalHost.clearImageFile()` 与 shared `MultimodalViewModel.selectImage(nil, nil)` 已在 MainActor 上同步更新；根因是 UI test helper `tapMultimodalClear` 先点击 Compose 子 `StaticText`，没有激活父 `multimodal-clear-input` Button。最小验证只调整 test helper，不修改产品清除逻辑。
+- `demo/iosApp/UITests/SpeechDemoUITests.swift` 现在优先点击带 `multimodal-clear-input` 标识的父 Button，静态文本/渲染点仅作 fallback。使用当前 dirty source 通过 `rtk proxy xcodebuild` 重新签名 `build-for-testing`，结果 `** TEST BUILD SUCCEEDED **`；xctestrun 副本只在 `/tmp` 注入 `ODAI_MULTIMODAL_FILE_UI_TEST=1`。
+- 物理 iPhone 16 Pro Max / iOS 27.0.1（UDID `<iPhone-UDID>`）重新执行 `SpeechDemoUITests/SpeechDemoUITests/testMultimodalImageFixturePickerCancellationAndClear`，证据 `/private/tmp/odai-picker-clear-button.xcresult`：**1 test / 0 failures / 0 skips**，40.178 秒，`** TEST EXECUTE SUCCEEDED **`。真实 Files picker 选择公开 fixture、二次打开取消保留输入、父 Button Clear 后显示“尚未选择输入”均通过。
+- fixture `artifacts/P9/fixture.png` SHA-256 为 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`；本轮未使用 iPhone 镜像、坐标、锁屏密码或私人媒体。该结果收口当前 dirty source 的真实系统 picker 选择/取消/清除证据，但不升级为物理手指触摸、OS background、Android 生产 VLM/video backend、自然质量/GPU/energy、minimum OS、binary archive 或全 P9 完成。
+- 随后只读刷新设备通道时，`rtk proxy adb devices -l` 因 macOS USB plugin / ADB smartsocket `Operation not permitted` 失败，`rtk proxy xcrun devicectl list devices` 因 `Timed out waiting for CoreDeviceService to fully initialize` 失败；这是测试后的外部工具状态，不推翻刚才已完成的 iPhone XCTest，也不归因于产品代码。下一次真机操作前必须重新刷新通道。
+- 继续保留所有 dirty/staged/untracked 修改，未 reset/clean/stash/commit/push/merge/release；Roadmap 仍 **5/12、P9 active**。
+
+## 最新续接 — 2026-10-26 Android 生产 VLM backend 路线复核
+
+- 只读复核官方 Android 运行时资料后，下一候选固定为 LiteRT-LM Android/Kotlin API（官方页：<https://developers.google.com/edge/litert-lm/android>）。Google Maven 元数据当前返回 `com.google.ai.edge.litertlm:litertlm-android` **0.18.1**；POM 声明 Apache-2.0，依赖 Gson 2.14.0、Kotlin reflect 2.4.0、coroutines-android 1.11.0。本轮没有新增依赖、下载模型、修改生产实现或把设备连接状态当作推理证据。
+- LiteRT-LM 提供离线模型路径、流式图像消息和 GPU/NPU 方向，但官方 API 没有视频语义/帧序列承诺；项目必须先保持 `supportsVideo=false`，视频仅可由显式 `MediaExtractor`/`MediaCodec` 抽帧适配层接入。`Engine.initialize()` 的耗时和 Flow/callback 终止都不能替代现有 native drain/close 契约；取消时仍需等待底层终止后释放输入和 engine。
+- MediaPipe LLM Inference 已标 maintenance-only，ExecuTorch Android 多模态入口仍 experimental，MLC Android 文档不提供当前可复用的 VLM/video API；它们不作为本包新生产路线。下一包先做 LiteRT-LM AAR `minSdk`/ABI/许可证/离线模型 manifest 的独立门禁，再实现 ModelStore 哈希、抽帧时间戳、cancel→drain→close 和 late-callback 过滤。没有实测 AAR/模型/真机推理前，Android 生产 VLM/video backend、自然质量、GPU/energy 继续 `unverified`。
+- 代理无法拉取 LiteRT-LM AAR 本体（127.0.0.1:7897 不可用），所以 `minSdk`、ABI 和 native library 清单仍未验证；Maven 坐标存在不等于 API 26/TECNO 可运行。由于本会话的 `xcrun devicectl` 仍返回 `Timed out waiting for CoreDeviceService to fully initialize`、ADB daemon 仍被 macOS USB/权限层拒绝，本轮不重试真机安装或 UI 操作；这些属于外部工具通道证据，不归因于产品代码。Roadmap 仍 **5/12、P9 active**，所有 dirty/staged/untracked 修改继续保留。
+- 本轮文档验证：`git diff --check` exit 0；标准库 `python3 -m unittest tools.tests.test_mlxvlm_benchmark_report -v` 为 **10/10 passed**。`pytest` 当前未安装（`No module named pytest`），不把它写成产品失败；两个保护文件 SHA-256 仍为 `project.pbxproj=b35bd984f784d4b13c0724f8c595d28ed96ddbe418e049547b762309fe9fd8f5`、`docs/validation/face-identity.md=6f130bd94debd5e8bffaba7b0db560553f7a367818d9cf37b72468e42bb70822`。
+- 为下一次拿到 AAR 后的独立门禁，新增 `tools/inspect_android_vlm_artifact.py` 与 `tools/tests/test_android_vlm_artifact.py`（仅 Python 标准库）：覆盖 SHA-256/size、ZIP traversal/symlink、manifest/classes.jar、JNI ABI、license/notice、可选 `aapt2` min/target SDK 解析；当前合成回归 **6/6 passed**，本地 binary-AXML wrapper 也实际解析出 `minSdk=24`/`targetSdk=35`。工具不接入生产 Demo、不下载模型，也不把 synthetic artifact 当作 LiteRT-LM 证据。
+
+## 最新续接 — 2026-10-26 iOS OS background 外部激活链 A/B 复核
+
+- 物理 iPhone `<iPhone-UDID>` 已由 CoreDevice 确认为 `connected`，`passcodeRequired=false`、`unlockedSinceBoot=true`，屏幕背光为 `activeOn`；本轮没有使用镜像、坐标或锁屏密码。此前重复运行当前 dirty source 的新鲜报告 `artifacts/verification/multimodal-demo-background-diagnostic-20261026/report-clean.json` 为 `failedGate=OS lifecycle notifications timeout`，ready marker 为新 PID `27059` / runId `DB766F59-9863-4DDD-8705-96DA77636234`，不是旧报告复用。
+- 为排除当前源码回归，随后仅安装并运行之前在 2026-10-23 取得 14-gate 通过的旧 signed Demo/companion artifact（sourceCommit `d50eff18ed53db61bc46f050f411ab076d118ede`），重新复制同一公开 fixture 与固定模型，严格复用 `devicectl device process launch` 的前台 companion 触发方式。A/B fresh ready marker 为 PID `27089` / runId `0EFFE65D-D797-4B9E-9250-44E40511D65A`；结果 `artifacts/verification/multimodal-demo-background-diagnostic-20261026/report-old.json` 同样为 `failedGate=OS lifecycle notifications timeout`。
+- 当前证据把失败层定位为本机 CoreDevice/`devicectl` 激活链：旧通过 artifact 与当前 dirty source 均无法在本机触发四个 UIKit lifecycle notifications。没有修改生产 lifecycle 代码，也没有把该结果写成通过；`osBackground=unverified` 继续保留。此前旧 artifact 的 2026-10-23 通过报告仍保留为历史、checkout-specific 证据，不能替代当前 dirty source。
+- 本轮只在被忽略的诊断 artifact 中加入 companion 自证日志尝试；该 artifact generic rebuild 因无匹配 provisioning profile 失败，未安装、未进入产品源码。工作树原有 dirty/staged/untracked 修改均保留，未 reset/clean/stash/commit/push/merge/release。下一步记录外部门槛后继续可独立推进的 Android 生产 backend、P9/P10/P11 其他缺口；Roadmap 仍 **5/12、P9 active**。
+
+## 最新续接 — 2026-10-26 当前 dirty source iOS shared AX active validation
+
+- 工作树仍为 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation` / `feat/sdk-foundation`；本包只写入被忽略的 `artifacts/verification/multimodal-demo-active-dirty-20261026/`，保留全部原有 dirty/staged/untracked 修改，未 reset/clean/stash/commit/push/merge/release。基准 `HEAD=9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4`；dirty source 指纹 `560b236527c196187f99055def5d145b61fc1d98` 及 manifest 保存在该 artifact 目录。指纹是当前工作树快照，不是 Git ref。
+- 当前 dirty source 的 `:demo:shared:linkDebugFrameworkIosArm64` 与 `:demo:shared:linkDebugFrameworkIosSimulatorArm64` exit `0`（14 actionable tasks，6 executed）；独立验证工程签名 `build-for-testing` 输出 `** TEST BUILD SUCCEEDED **`。使用既有 Team `4X996UV8LC`、固定 Swift/Xcode 缓存、公开 `artifacts/P9/fixture.png` 和 `artifacts/P9/verified` 14 文件模型，没有读取私人媒体、使用 iPhone 镜像/坐标或锁屏密码。
+- 物理 iPhone 16 Pro Max / iOS 27.0.1（UDID `<iPhone-UDID>`）安装并启动 `io.ondeviceai.multimodalmlxdemo`，参数为 `--multimodal-mlx-local-model --multimodal-demo-validation --multimodal-demo-active-validation`；PID `26996`、runId `F5372494-7EA3-4D79-A0ED-56081586D404`。原始报告 `artifacts/verification/multimodal-demo-active-dirty-20261026/demo-active-integration.json`，严格摘要 `strict-summary.json`，validator exit `0`。
+- 当前源码的共享页面 active 包 **11/11 gates true**：bootstrap、available、pageOpened、inputAction、pickerReply、activeCancel、reentry、activeLeave、noAutoRestart、returnReentry、closed。cancel/leave 在真实 delivered update 后由共享 AX 动作进入 `CANCELLED` 且无 output；两次同进程 reentry 为 `SUCCEEDED`，backend/model/runtime identity 精确匹配固定 `SmolVLM2`。`touchAcceptance=unverified`、`systemFileSelection=unverified`、`osBackground=unverified`，因此不扩展为物理触摸、真实系统 picker、OS 后台或全 P9/P11 完成。
+- 下一步继续保留 Android 生产 VLM/video backend、自然质量/GPU/energy、minimum OS、binary archive、独立全范围 review 及 P10/P11 其他缺口；Roadmap 仍 **5/12、P9 active**。
+
+## 最新续接 — 2026-10-26 Android 导入中后台/回前台真机回归
+
+- 工作树仍为 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation` / `feat/sdk-foundation`；保留全部 dirty/staged/untracked 修改，未 reset/clean/stash/commit/push/merge/release。两个保护文件 hash 未变。
+- 在 TECNO KM9 / Android 15 / API35（serial `<Android-serial>`）安装当前 dirty source 的 Kotlin-only Demo/test APK，运行 `io.ondeviceai.demo.test/io.ondeviceai.demo.MultimodalPickerInstrumentation`。新增 `background-active-import` 使用 test APK 自有公开 slow fixture：确认 Activity-owned import active 且 UI 尚未发布输入，执行 `moveTaskToBack(true)`，再以 `REORDER_TO_FRONT` 回到同一 Activity；`backgroundMidCopy=passed-import-retained-after-background-return`，输入最终保留并完成。
+- 同次真机 bundle 全部通过：`actualSelectedSystemFile=passed-documents-provider-real-picker`、system picker cancel、Activity-owned mid-copy、busy reselection、synthetic callback/copy/clear、foreground、cleanup；`status=passed`，instrumentation exit `0`。原始证据：`artifacts/verification/multimodal-android-lifecycle-20261026/device-picker.log` / `.exit`。
+- 设备刷新 artifact `artifacts/verification/multimodal-android-lifecycle-20261026/devices-now.log` 显示 Android `<Android-serial>` 为 ADB `device`，物理 iPhone `<iPhone-UDID>` 为 CoreDevice `connected`；本轮没有使用 iPhone 镜像、坐标或锁屏密码。
+- 当前 dirty source 的 Android unit/APK/test APK/lint fresh build 为 **BUILD SUCCESSFUL**（570 actionable tasks，38 executed），原始证据：`artifacts/verification/multimodal-android-lifecycle-20261026/build-rerun.log` / `.exit`。本次不需要修改生产 lifecycle 逻辑；现有 `onStop` 在 Activity-owned picker/import active 时传递 `preservePicker=true`，由真机回归锁定该行为。
+- 对独立 review 的 assertion-flags LOW 建议做了可逆验证：移除 androidTest 全局 flags 后 APK 构建仍 exit `0`，但真机 runner 在 DocumentsUI real-selection 阶段无终态，已以 exit `130` 终止；日志为 `build-no-assertions.log` / `device-picker-no-assertions.log`。恢复原配置后重新构建并安装，`device-picker-restored.log` / `.exit` 再次 `status=passed` / exit `0`，因此本轮保留现有 flags，不把该探索性失败归因于产品代码。
+- slow fixture 为 test APK 自有公开固定字节，不读取私人媒体；`inference=unverified-no-android-backend`。仍未收口 Android 生产 VLM/video backend、自然质量/GPU/energy、minimum OS、binary archive、独立全范围 review 及其他 roadmap 缺口；Roadmap 仍 **5/12、P9 active**。
+
+## 最新续接 — 2026-10-26 双真机 picker 收口与临时诊断清理
+
+- 工作树仍为 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation` / `feat/sdk-foundation`；保留全部 dirty/staged/untracked 修改，未 reset/clean/stash/commit/push/merge/release。两个保护文件 hash 未变。
+- 已移除上一轮真实 picker 诊断专用代码：`MultimodalHost.seedUITestFixtureIfRequested()`、`MultimodalInputStore` 的 Documents logger 及所有 host/store/picker 日志调用、UI test 的失败时 debug print。`ODAI_MULTIMODAL_FILE_UI_TEST` 仍只作为测试 gate；fixture 改由验证 artifact 通过 `devicectl device copy to` 放入 App Documents，不写入生产 host。
+- 当前 dirty source 重新签名构建 iOS 真机 UI bundle：`artifacts/verification/p9-multimodal-picker-20261026/clean-build.log` 为 `** TEST BUILD SUCCEEDED **`；仅在 artifact xctestrun 注入 `ODAI_MULTIMODAL_FILE_UI_TEST=1`。公开 `artifacts/P9/fixture.png`（170 bytes，SHA-256 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`）已复制到物理 iPhone App Documents。
+- 物理 iPhone 16 Pro Max / iOS 27.0.1（UDID `<iPhone-UDID>`）直接执行 `SpeechDemoUITests/SpeechDemoUITests/testMultimodalImageFixturePickerCancellationAndClear`，结果 `artifacts/verification/p9-multimodal-picker-20261026/ios-picker-clean2.xcresult`：**1 test / 0 failures / 0 skips**。真实流程覆盖 Files picker 选择 fixture、二次打开后取消保留输入、Clear 释放输入；未使用镜像、坐标或锁屏密码。
+- Android 当前 dirty source 的本地门禁仍为 **BUILD SUCCESSFUL**（Demo unit test、APK、test APK、lint；既有完整门禁 570 actionable tasks，44 executed；本轮 test APK 重建也成功）。首个真机 instrumentation 发现 test APK 的 Kotlin provider 在独立进程缺少 `kotlin.jvm.internal.Intrinsics`，随后移除 provider/instrumentation 中的 Kotlin `.use {}` 运行时依赖，并收窄 DocumentsUI root 行匹配以避免工具栏标题误选。TECNO KM9 / Android 15 / API35（serial `<Android-serial>`）重跑结果 `artifacts/verification/multimodal-android-cleanup-20261026/device-picker-real-documentsui-rerun2.log` / `.exit`：`status=passed`，包含 `actualSelectedSystemFile=passed-documents-provider-real-picker`、system picker cancel、Activity-owned mid-copy、busy reselection、synthetic callback/copy/clear、foreground 和 cleanup。
+- 这项 `actualSelectedSystemFile` 证据来自真实 DocumentsUI 与 test APK 自有 `MultimodalFixtureDocumentsProvider` 的公开固定字节，不读取私人媒体；仍不升级为 Android 生产 VLM/video backend、自然质量或资源验收。`inference=unverified-no-android-backend`。设备刷新：`xcrun devicectl list devices` 显示目标 iPhone `connected`，`adb devices -l` 显示 `<Android-serial> device`；完整输出见 `artifacts/verification/multimodal-android-cleanup-20261026/devices-rerun-20261026.log`；Roadmap 仍 **5/12、P9 active**。
+- 清理后门禁：iOS bridge/store/factory 模拟器 **75/75 passed、0 failures、0 skips**（`/tmp/odai-multimodal-cleanup-20261026c/tests2.xcresult`）；仓库级 `rtk proxy ./scripts/verify-android.sh` fresh exit 0（725 actionable tasks；`artifacts/verification/multimodal-android-cleanup-20261026/full-android-verify-20261026.log`）；`git diff --check` 通过。后续保留 P9 的 Android 生产 backend、自然质量/GPU/energy、minimum OS、binary archive、独立全范围 review 及其他 roadmap 缺口，不把本检查点写成全 P9 完成。
+
+## 最新续接 — 2026-10-25 Android 模拟器 Kotlin picker/in-flight 回归（iPhone 真机仍需用户解锁）
+
+- 用户不在 iPhone 真机旁，本轮没有使用 iPhone 镜像、镜像坐标、锁屏密码，也没有操作物理 Android；只使用本地 Android 模拟器 `Medium_Phone`（`emulator-5554`，API 37）。
+- 当前 dirty source 构建出的 app/test APK 安装后，直接运行 `io.ondeviceai.demo.test/io.ondeviceai.demo.MultimodalPickerInstrumentation`；退出码 `0`，bundle `status=passed`，并通过 `optOut`/`optIn`、真实 Android picker 打开/取消、Activity-owned mid-copy、busy reselection、synthetic Activity result/copy/clear、前后台和 owned-directory cleanup。
+- 关键结果：`systemPicker=passed-open-cancel-without-media-read`、`activityMidCopy=passed-activity-owned-import-active`、`busyReselection=passed-first-import-retained-second-picker-rejected`、`syntheticResult=passed-real-callback-copy-host-clear-fixture-only`、`foreground=passed-no-input-no-auto-generation`、`cleanup=passed-new-owned-directories-released`。
+- 原始日志、退出码、API/设备身份和 source provenance：`artifacts/verification/multimodal-android-emulator-20261025/`。结果继续明确 `actualSelectedSystemFile=unverified-synthetic-result-only`、`inference=unverified-no-android-backend`；不升级为 Android 生产推理、真实文件选择或自然质量证据。Roadmap 仍 **5/12、P9 active**。
+
+## 最新续接 — 2026-10-26 CoreDevice 外部门槛复核（真机仍需用户解锁）
+
+- 当前物理 iPhone `<iPhone-UDID>` 未执行任何解锁、镜像或 UI 操作；刷新 `xcrun devicectl list devices` 直接在 CoreDevice 初始化阶段失败：`Timed out waiting for CoreDeviceService to fully initialize`（`com.apple.coredevice.devicectl error 1`）。因此本轮没有启动真机 XCTest，也没有把该外部失败归因于源码。
+- 已有本地 dirty source 证据仍有效：fixture seed 显式错误诊断修复后的 iOS 模拟器 bridge/store/factory **75/75 passed**；`git diff --check` 通过，保护文件 hash 未变。设备恢复且由用户本人解锁后，继续直接复用 `artifacts/verification/p9-multimodal-picker-20261025/SpeechDemo_picker_after_fix_iphoneos27.1-arm64.xctestrun`，目标真实 picker `1/0/0`。
+- README 的多模态状态说明已同步到当前证据：Apple 单图/短视频 native 与 KMP/Demo 生命周期已记录；Android 仅类型化 contract/client 与明确 unavailable 路径，仍没有生产 VLM/video backend；自然质量、GPU/energy、最低系统、增强 binary archive 和独立全范围审查继续明确为未收口。仅更新文档，没有改变实现或验收等级。
+
+## 最新续接 — 2026-10-25 fixture seed 错误诊断收口（真机仍需用户解锁）
+
+- 针对上一轮独立 review 保留的 LOW 建议，`demo/iosApp/MultimodalHost.swift` 的 UI-test fixture seed 已从静默 `try?` 改为显式 `do/catch`；成功和失败都只通过现有 DEBUG + `ODAI_MULTIMODAL_FILE_UI_TEST=1` 受控日志记录，不改变生产路径或 fixture 内容。
+- 从当前 dirty source 重新生成 `/tmp/odai-multimodal-bridge-seed-fix2/MultimodalBridgeTests.xcodeproj`，使用本地 `apple` package、iOS 27.1 模拟器 `iPhone Duo`（UDID `DF2DC7EA-257B-4E5F-9AFD-EC4BD2ED6D7F`）执行全套 bridge/store/factory XCTest；首个普通沙箱命令只在 CoreSimulator/SwiftPM 缓存权限阶段失败，使用同一固定缓存的受控 escalated 路径后结果为 **75 tests / 0 failures / 0 skips，`** TEST SUCCEEDED **`**。xcresult：`/tmp/odai-multimodal-bridge-seed-fix2/build/Logs/Test/Test-MultimodalBridgeTests-2026.10.25_23-07-10-+0800.xcresult`；仅有既有 QoS priority-inversion 和 Xcode build-number parse warnings。
+- `git diff --check` 通过；保护文件 hash 未变；未 reset/clean/stash/commit/push/merge/release。此前 fixture seed LOW 建议现已关闭；独立 review 仍不是全 roadmap APPROVE。物理 iPhone picker 仍保持 `1/0/0` 未验，必须等用户本人解锁后直接复用 `artifacts/verification/p9-multimodal-picker-20261025/SpeechDemo_picker_after_fix_iphoneos27.1-arm64.xctestrun`。
+
+## 最新续接 — 2026-10-25 当前 dirty source 本地门禁复核（真机仍需用户解锁）
+
+- 在保留全部 dirty/untracked 修改、未使用 iPhone 镜像/镜像坐标/锁屏密码的前提下，当前生成的 `MultimodalBridgeTests.xcodeproj` 在 iOS 27.1 模拟器 `iPhone Duo`（UDID `DF2DC7EA-257B-4E5F-9AFD-EC4BD2ED6D7F`）重新执行；xcresult `/tmp/odai-multimodal-bridge-current/Logs/Test/Test-MultimodalBridgeTests-2026.10.25_22-40-16-+0800.xcresult` 明确为 **75 passed / 0 failed / 0 skipped，`** TEST SUCCEEDED **`**。现有 QoS priority-inversion runtime warnings 仍是测试等待告警，不是失败。
+- 当前 Android Demo 以受控本机缓存重跑 `:demo:androidApp:testDebugUnitTest :demo:androidApp:assembleDebug :demo:androidApp:assembleDebugAndroidTest :demo:androidApp:lintDebug --offline`，结果 **BUILD SUCCESSFUL**，570 actionable tasks（3 executed、567 up-to-date），lint 无 error。
+- 随后在同一受控环境重跑仓库 `rtk proxy ./scripts/verify-android.sh`，结果 **BUILD SUCCESSFUL**，725 actionable tasks（44 executed、681 up-to-date）；末尾明确报告 Android JVM tests、lint 和 APK builds passed。该门禁仍不包含 Android 生产 VLM/video inference。
+- 当前 benchmark/consumer 本地定向验证为 **12/12 passed**：`MLXVLMBenchmarkReportTests`、Swift `BenchmarkMeasurements` 行为测试和独立 consumer 生成测试；修复后的 validator 对 `artifacts/verification/apple-mlxvlm-benchmark-30-20261025-fix2/device-report.json` 使用 `--expected-samples 30` 通过，确认 `sampleProfile=1-warmup-30-samples`、30/30 synthetic rubric。`swift package dump-package` 仍因受限缓存触发 `sandbox_apply: Operation not permitted`，这是环境级未验项，不改写源码结论。
+- 旧 code-review 的 presenter HIGH、Android broad-catch MEDIUM 与 fixture seed 写入错误 LOW 建议均已在当前 dirty source 关闭并有回归/诊断；真实物理 iPhone picker 仍未取得 `1/0/0`；用户解锁后必须直接复用 `artifacts/verification/p9-multimodal-picker-20261025/SpeechDemo_picker_after_fix_iphoneos27.1-arm64.xctestrun`，不能用模拟器结果替代。
+- `git diff --check` 通过；保护文件 hash 仍为 `project.pbxproj=b35bd984f784d4b13c0724f8c595d28ed96ddbe418e049547b762309fe9fd8f5`、`docs/validation/face-identity.md=6f130bd94debd5e8bffaba7b0db560553f7a367818d9cf37b72468e42bb70822`。未 reset/clean/stash/commit/push/merge/release；Roadmap 仍 **5/12、P9 active**。
+
+## 最新续接 — 2026-10-25 模拟器真实 Files picker 回归通过（真机仍未验）
+
+- 在用户暂时不在真机旁的约束下，本轮没有使用 iPhone 镜像、镜像坐标或锁屏密码；只使用 iOS 27.1 模拟器 `iPhone Duo`（UDID `DF2DC7EA-257B-4E5F-9AFD-EC4BD2ED6D7F`）和当前 dirty source。模拟器 CoreSimulatorService 先因沙箱缓存权限失效，随后在允许本机 Xcode/CoreSimulator 缓存的验证环境恢复；这不是源码失败。
+- 为真实系统 Files picker 提供可见容器，验证 artifact `artifacts/verification/p9-multimodal-picker-20261025/simulator-ui-ocr-rerun4/` 使用 artifact-only `ui-test.plist`（`UIFileSharingEnabled=true`、`LSSupportsOpeningDocumentsInPlace=true`），并只复制公开合成 `artifacts/P9/fixture.png` 到该模拟器 App Documents。fixture SHA-256 为 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`；tracked 生产 `demo/iosApp/Info.plist` 未改动。
+- 修正 `demo/iosApp/UITests/SpeechDemoUITests.swift` 的系统 picker helper：`浏览`/取消改为跨 picker 层级查找；fixture 改为点击真实 `Cell(label: "fixture, png, …")`，避免点击静态文本只选中而不触发 delegate。当前 artifact `build5.log` 为 `** TEST BUILD SUCCEEDED **`。
+- 最终执行命令使用完整 selector `SpeechDemoUITests/SpeechDemoUITests/testMultimodalImageFixturePickerCancellationAndClear`，结果 `artifacts/verification/p9-multimodal-picker-20261025/simulator-ui-ocr-rerun4/test2.xcresult`，日志 `test2.log`：**1 test / 0 failures / 0 skips，`** TEST EXECUTE SUCCEEDED **`**。流程实际打开 Files picker、进入“我的 iPhone”、显示并点击 `fixture.png`、异步导入成功；第二次 picker 取消保留输入，随后 Clear 释放输入。
+- 这只是模拟器系统 picker/UI 证据，不替代物理触摸或真实 iPhone 文件选择；真机 picker 仍保持 `1/0/0` 未验，必须等用户亲自解锁设备后直接复用真机 xctestrun。临时 Documents logger、fixture seed 和 UI debug `print` 仍保留到真实设备日志回读后再清理。Roadmap 仍 **5/12、P9 active**。
+- 本轮 `git diff --check` 通过；保护文件当前 hash 仍为 `project.pbxproj=b35bd984f784d4b13c0724f8c595d28ed96ddbe418e049547b762309fe9fd8f5`、`docs/validation/face-identity.md=6f130bd94debd5e8bffaba7b0db560553f7a367818d9cf37b72468e42bb70822`。未 reset/clean/stash/commit/push/merge/release。
+
+## 最新续接 — 2026-10-25 无真机时的模拟器回归与 Kotlin fixture 收口
+
+- 用户暂时不在设备旁，本轮已终止等待解锁的真机 XCTest 会话 `28306`（exit 130），没有继续使用 iPhone 镜像、镜像坐标或真机 UI 操作。真机 picker 的 `1/0/0` 仍等待物理设备解锁后再跑。
+- 在 iOS 27.1 模拟器 `iPhone Duo`（UDID `DF2DC7EA-257B-4E5F-9AFD-EC4BD2ED6D7F`）重跑当前 dirty source 生成工程。完整 `MultimodalBridgeTests` 为 **75 tests / 0 failures / 0 skips**，结果：`artifacts/verification/multimodal-ios-demo-dirty-20261025/build-final/Logs/Test/Test-MultimodalBridgeTests-2026.10.25_21-10-28-+0800.xcresult`。
+- 复现并定位了原先记录的 3 个失败断言：`background()` 在 picker 回调后按新 `preserveImportOnNextBackground` 竞态修复保留异步导入，旧测试却仍要求该场景回收 token。测试已改名为 `testLateSuccessfulImportIsRetiredAfterClearLeaveCloseAndOwnerRelease`，仅保留 clear/leave/close/owner-release 的迟到回调回收覆盖；picker 退场后的 background 保留由 `testPickerDismissalBackgroundAfterReplyDoesNotCancelImport` 覆盖。生产逻辑未因该修复再改动。定向测试和完整 75 项均通过。
+- Android Demo 仍是 Kotlin/Compose：`demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/MultimodalFixtureProvider.kt` 是唯一 fixture provider；临时 Java provider 已删除。当前 `testDebugUnitTest`、`assembleDebug`、`assembleDebugAndroidTest`、`lintDebug` 组合命令 **BUILD SUCCESSFUL**，570 tasks（3 executed、567 up-to-date），lint 无 error。
+- `git diff --check` 通过；受保护文件 hash 仍为 `project.pbxproj=b35bd984…fd8f5`、`docs/validation/face-identity.md=6f130bd9…70822`。所有现有 dirty/untracked 修改继续保留，未 reset/clean/stash/commit/push/merge/release。临时 Documents logger、fixture seed 和 UI `print` 仍保留到下一次真实设备日志回读后清理。
+
+## 最新续接 — 2026-10-25 picker 退场时序 host 回归（非镜像）
+
+- 在上一检查点之后补齐了 picker 回调、退场通知与 host 后台切换的完整竞态回归：先以当前实现得到 RED，再用 `MultimodalFilePicker` 的 `finishing` reentrancy guard 和 host 的 `preserveImportOnNextBackground` 保留回调期间的导入，得到 GREEN。覆盖场景是文件已选中、picker 退场回调仍在执行、随后收到 background 通知时不能取消刚启动的异步导入。
+- 新增回归位于 `probes/ios-multimodal-bridge/MultimodalFilePickerTests.swift` 与 `MultimodalHostTests.swift`；Picker 专项 **5/5**、独立 bridge/store/factory 全套 **73/73** 通过。现有临时 `print`/Documents logger/fixture seed 仍只为下一次真机日志诊断保留，拿到日志后必须移除。
+- 已从当前 dirty source 重新执行签名 iOS 真机 `build-for-testing`，`** TEST BUILD SUCCEEDED **`。新产品二进制 SHA-256 为 `SpeechDemo.app/SpeechDemo=7cdbf08fff372fd1848daf242a2a57881e905873fe6886f0b5b2de276129164c`、`SpeechDemoUITests.xctest=8ca23ad8eb0bd6917068cc5b08d56c3bb12616a65097bd20a423613746b7c072`；验证 artifact 为 `artifacts/verification/p9-multimodal-picker-20261025/device-derived-after-host-fix/`。生成后的 xctestrun 仅在 artifact 内补入 `ODAI_MULTIMODAL_FILE_UI_TEST=1`，SHA-256 `a4fad0364c6027853a5d051830ef9a078cad7e0def7737bbd1fb137672206b48`。设备恢复后再对物理 iPhone `<iPhone-UDID>` 直接执行 `test-without-building`。
+- 已对同一物理 UDID 发起真实 `test-without-building`，没有调用镜像；`xcodebuild` exit **70**，兼容设备条目明确返回 `The device needs to be unlocked to continue`。结果保存在 `artifacts/verification/p9-multimodal-picker-20261025/host-fix-device-attempt.{log,exit,xcresult}`。解锁后继续使用同一 xctestrun 和 `testMultimodalImageFixturePickerCancellationAndClear`，不复用旧包。
+- 随后用可写本机 Instruments 缓存执行 `xcrun xctrace list devices`，目标 `<iPhone-UDID>` 被列在 **Devices Offline**；同机另一台 iPhone 也为 offline。该结果与 `devicectl` 的 CoreDeviceService 初始化超时相互印证，当前阻断是设备/CoreDevice 外部状态，不是镜像或源码失败。
+- CoreDevice 恢复到 `available (paired)` 后，对新包再次执行真实 `test-without-building` 仍 exit **70**；`xcrun devicectl device info lockState --device <iPhone-UDID> --json-output -` 返回 `CoreDeviceError 10003` / `RemotePairingError 1016`，明确为 `The device has not been unlocked recently`。结果保存在 `artifacts/verification/p9-multimodal-picker-20261025/host-fix-device-rerun.{log,exit,xcresult}`；解锁一次后继续同一 xctestrun。
+- 本续接不使用 iPhone 镜像、镜像画面或镜像坐标；CoreDevice/XCTest 的外部门槛只能如实记录，不能用镜像结果替代真实设备 picker 验收。现有 dirty/untracked 修改、保护文件和未提交状态均保留，未 reset/clean/stash/commit/push/merge/release。
+
+## 最新续接 — 2026-10-25 真机 picker 续接与 AutomationMode 外部门槛（非镜像）
+
+- 本轮纠正了之前误用 iPhone 镜像的路径。验收目标仍是物理 iPhone 16 Pro Max / iOS 27.0.1，UDID `<iPhone-UDID>`；没有使用镜像画面、镜像坐标或私人媒体。现有 dirty/untracked 修改和两个保护文件均保留，未 reset/clean/stash/commit/push/merge/release。
+- 已对最新 `SpeechDemo_iphoneos27.1-arm64.xctestrun` 仅补入测试环境变量 `ODAI_MULTIMODAL_FILE_UI_TEST=1`，没有修改产品工程。真机 `debug-log15`、`debug-log16`、`debug-log17` 均在 XCTest 初始化阶段因 `Timed out while enabling automation mode` 失败，未进入 picker/import 断言；因此不能改变 P9 picker 的通过结论。
+- 为排除项目进程残留，已只终止真机上两个旧 `SpeechDemo` 进程；随后做了一次可逆 userspace reboot。设备已重新启动并显示 `available (paired)`，但 CoreDevice 当前返回 `device was still locked`，需要解锁一次后才能继续 XCTest。没有修改系统设置、签名资产或其他 App。
+- 上一份真正进入 Files picker 的 `multimodal-picker-debug-log12.xcresult` 仍是 `passedTests=0/failedTests=1/skippedTests=0`，失败位于异步导入完成等待；当前临时 `print`/Documents logger/fixture seed 只用于下一次真机诊断，取得日志后必须移除。只有真实物理设备拿到 `1/0/0` 才能更新 picker 验收结论。
+- 设备锁定期间，从当前 dirty source 重新生成独立 `SpeechDemo` 工程并执行完整 iOS Simulator App/UITest bundle 编译，`** BUILD SUCCEEDED **`；artifact 为 `artifacts/verification/p9-multimodal-picker-20261025/dirty-generated-app2/`。该结果只证明生成工程可编译，不替代物理真机 picker 验收。
+- 本次续接再次确认不使用 iPhone 镜像：没有把镜像画面、镜像坐标或镜像结果纳入验收。物理设备先返回 `device was still locked`，随后 `xcrun devicectl` 多次返回 `Timed out waiting for CoreDeviceService to fully initialize`；该外部门槛不能通过镜像绕过。设备解锁且 CoreDeviceService 恢复后，直接重跑同一物理 UDID 的 `test-without-building`，不要改走镜像路径。
+- 在无法访问真机日志期间完成了一次有证据的竞态修复：`MultimodalFilePicker.finish` 原先在回调前清除 `isPresenting`，picker 退场通知因此会把刚启动的异步导入误取消。新增回归测试先以当前实现 RED，再用 `finishing` reentrancy guard 保留回调期间的 presenting 状态；Picker 专项 **5/5**、独立 bridge/store/factory 全套 **73/73** 通过。真实设备 `1/0/0` 仍未取得，临时 logger/fixture seed 必须保留到下一次真机日志回读后再移除。
+- 已从修复后的 dirty source 完成新的签名真机 `build-for-testing`（`** TEST BUILD SUCCEEDED **`）；待运行 xctestrun 为 `artifacts/verification/p9-multimodal-picker-20261025/SpeechDemo_picker_after_fix_iphoneos27.1-arm64.xctestrun`，SHA-256 `a4fad0364c6027853a5d051830ef9a078cad7e0def7737bbd1fb137672206b48`，两个测试环境均含 `ODAI_MULTIMODAL_FILE_UI_TEST=1`。当前 CoreDevice 仍超时，尚未安装或运行此 artifact。
+
+## 最新续接 — 2026-10-25 P9 自然图 3 帧真机 smoke evidence（非镜像）
+
+- 在物理 iPhone 16 Pro Max / iOS 27.0.1（`iPhone17,2`，UDID `<iPhone-UDID>`）上，使用已安装 `com.ondeviceaikit.probe.vlm`、现有固定模型/manifest 和公开自然视频抽帧 `frame-0`、`frame-1`、`frame-18`，只通过 `xcrun devicectl` 的 App Documents 与进程启动完成三次真实推理；没有使用镜像、坐标点击或私人媒体。
+- 三份报告 `artifacts/verification/p9-natural-20261025/reports/frame-{0,1,18}.json` 均 `status=success`，汇总 `artifacts/verification/p9-natural-20261025/summary.json`。backend/model/runtime、device/OS identity 全部匹配；首 token p50/p95 `1314.134208/1321.358042 ms`，total p50/p95 `1800.751500/1884.726460 ms`，进程 RSS 峰值 p50/p95 `1,196,851,200/1,198,440,448 B`。
+- 输出文本已保存；该包仅证明公开自然帧的真机推理/延迟/RSS smoke evidence，不含 ground truth 或独立人工质量裁定，`naturalImageQuality` 继续 `unverified`，不升级 P9/P11。现有工作树 dirty/untracked 修改全部保留，未 reset/clean/stash/commit/push/merge/release。
+
+## 最新续接 — 2026-10-25 benchmark review 修复后真机重跑（非镜像）
+
+- 针对独立 code review 的两个 MEDIUM，本轮已修复并验证：`--expected-samples 30` 现在要求 raw `sampleProfile=1-warmup-30-samples`，而默认 5 样本继续兼容缺失 profile 的旧报告；benchmark 运行异常、JSON 序列化或写盘失败不再显示为 `Finished`，会返回显式失败状态。新增 Swift helper/validator 回归后，`AppleMLXConsumerTests` + `MLXVLMBenchmarkReportTests` 为 **13/13**。
+- 从修复后的当前源码重新生成并签名构建独立 consumer，安装到物理 iPhone 16 Pro Max / iOS 27.0.1（`iPhone17,2`，UDID `<iPhone-UDID>`），只使用 `xcodebuild`、`xcrun devicectl` 和 App Documents；没有使用镜像、坐标点击或私人媒体。固定模型设备清单仍为 14/14。
+- 最新原始报告：`artifacts/verification/apple-mlxvlm-benchmark-30-20261025-fix2/device-report.json`，SHA-256 `186a2077bf966dfb69cd89034d940c79a09b91a6d09d74b05172dc862c3c73d1`；汇总：同目录 `summary.json`，SHA-256 `4cf8f2430d896addd2f2d821d815b795647924c83f09b9d825ed5987a6fa61d6`。`runId=ACC626B8-725C-4820-9E13-57A758B8314C`、`sampleProfile=1-warmup-30-samples`、warm-up 成功、测量 30/30、30/30 synthetic rubric，固定模型/runtime/fixture identity 全部匹配。
+- nearest-rank 结果：load p50/p95 `337.240167/364.418917 ms`；首 update `779.335084/809.109292 ms`；total `940.974208/971.115375 ms`。RSS baseline `40,124,416 B`、peak `1,192,296,448 B`、delta `1,152,172,032 B`，方法仍为 `process-resident-mach-task-basic-info-10ms`。
+- 当前 benchmark source diff（含 helper、strict validator、tests、spec/plan）SHA-256 为 `58afa193a03d8b4df1117cd63ff87d940690bc6a9847431aaea964728e4ab9e5`；full tools suite 仍有既有环境失败（135 tests，13 failures/6 errors），本包定向测试和真实 artifact validator 已通过。架构 reviewer lane 仍因 429 unavailable；不能写成独立 ARCHITECTURE CLEAR 或全 roadmap APPROVE。
+
+## 最新续接 — 2026-10-25 固定单图 benchmark 1 warm-up + 30 samples（非镜像）
+
+- 为补齐 P9 固定单图的规模化统计，本轮从当前源码生成独立 `MLXVLMConsumer` artifact，使用固定本地 Swift/Xcode 缓存和既有 Team `4X996UV8LC` 完成签名 iOS 真机构建；未修改产品工程、签名资产或两个保护文件。新增显式启动参数 `--sdk-mlxvlm-benchmark-30`，旧 `--sdk-mlxvlm-benchmark` 的 1 warm-up + 5 行为保持不变；validator 新增 `--expected-samples 30` 严格门禁。
+- 目标物理设备为 iPhone 16 Pro Max / iOS 27.0.1（`iPhone17,2`，UDID `<iPhone-UDID>`）；全程只用 `xcodebuild`、`xcrun devicectl` 和 App Documents 文件服务，没有使用 iPhone 镜像、镜像画布、坐标点击或私人媒体。公开 `artifacts/P9/fixture.png` 与已校验的 14 文件模型复制后，设备端模型清单为 14/14。
+- 原始设备报告：`artifacts/verification/apple-mlxvlm-benchmark-30-20261025/device-report.json`，SHA-256 `dd75f54cb84b821261e06639d032af2bba539fbdf1706023691479eb2e7c9f66`；汇总：`.../summary.json`，SHA-256 `3d970842aec57e0e79519f6588a49beb0b7ff3f9bdd776611aa3648d57fb7b83`。报告 `runId=D824ACA7-42E8-492D-B9A5-6FE3868551F5`、`sampleProfile=1-warmup-30-samples`、`warmup=success`、测量项 30/30，`mlx.smolvlm2-500m`、模型 revision `fa57db...2268`、runtime revision `6e338e...18a`、fixture hash `60e528...a606` 全部匹配。
+- nearest-rank 结果：load p50/p95 `334.141875/372.181459 ms`；首 update `782.097334/819.266917 ms`；total `943.978709/981.462959 ms`。30 次输出均为 `A flag with a red square in the center.`，synthetic rubric `30/30`；进程 RSS baseline `34,127,872 B`、peak `1,186,676,736 B`、delta `1,152,548,864 B`，方法为 `process-resident-mach-task-basic-info-10ms`。
+- 该证据只补齐固定合成图片的 30 样本延迟/RSS 统计，不是自然图片质量、Metal GPU peak、energy、冷启动、跨设备预算或 P11 统一验收；`metalGpuPeak`、`energy`、`naturalImageQuality` 继续 `unverified`。构建与 validator 测试为 12/12，通过 `git diff --check`；未 commit、stage、push、merge 或 release，roadmap 仍 5/12、P9 active。
+- 全量 `tools/tests` 回归原始日志保存在 `.../tools-tests-full.log`：135 tests 中 13 failures/6 errors，失败集中于既有 distribution project 生成断言和系统 Ruby 2.6 加载 Ruby 3.4 `json` gem 的环境不兼容；本包的 `AppleMLXConsumerTests` 与 `MLXVLMBenchmarkReportTests` 均逐项通过，不能把全量环境失败写成 benchmark 通过或产品回归。
+
+## 最新续接 — 2026-10-25 自然视频质量链路真机复核（非镜像）
+
+- 针对用户指出“已有真机连接，不应使用 iPhone 镜像”，本轮已停止镜像路径。工作树仍为 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation`、分支 `feat/sdk-foundation`、HEAD `9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4`；全部既有 dirty/untracked 修改保留，未 reset/clean/stash/commit/push/merge/release。
+- 仅使用固定签名的 `IOSVideoSRProbe.app`、`xcodebuild` 和 `xcrun devicectl` 真机操作：安装到 iPhone 16 Pro Max / iOS 27.0.1、复制仓库公开 fixture `artifacts/P7/natural/prepared/input-180p-4x.mp4` 到 App Documents，并以 `--process-video` 启动；没有使用 iPhone 镜像、镜像画布或坐标点击。
+- 最新设备报告：`artifacts/verification/p7-natural-device-20261025/device-documents/ios-video-sr-probe-777236F5-1760-4698-A44E-8EABAFAD81A5.json`。SR 与 bicubic 均 `state=success`，48/48 帧、1280×720、PTS 单调、HEVC/MOV、BT.709 元数据一致；设备副本 input SHA-256 与仓库 fixture 同为 `97682e3f9703e326bab3fbed06aa7a298b506d1965502288f5ed5037c51f2f1f`。
+- `video_sr_quality.py` 对 48 对解码帧报告：SR `PSNR 36.776212 dB / SSIM 0.979250`，bicubic `38.872866 dB / SSIM 0.983506`，`colorComparability=matched-metadata`，但两路 `qualityVerdict` 继续为 `unverified`。这补充了自然视频统一色彩/编码的真机证据，不构成主观模型质量结论，也不升级 P7/P9/P11、GPU/能耗、最低系统或全 roadmap。
+- 证据已追加到 `docs/validation/video-sr-backends.md` 顶部。下一步仍按独立门槛推进；禁止恢复镜像路径，除非用户明确改变验收目标。
+
+## 最新续接 — 2026-10-25 全仓 Android verifier 重跑／review service 仍 unavailable
+
+- 在上一节 dirty 多模态门禁之后，使用当前工作树和本地缓存重跑 `rtk proxy ./scripts/verify-android.sh`，exit **0**；`725 actionable tasks`，其中 `44 executed / 681 up-to-date`，末尾明确报告 Android JVM tests、lint 和 APK builds passed。该证据仍只覆盖 Android 本地门禁，不代表生产视频/VLM inference。
+- 为当前 dirty scope 重试既有 `code-reviewer` 与 `architect` 两条独立 lane；两者再次因 `429 Too Many Requests` 超出重试限制退出，未产生审查内容。当前没有活动 review 进程；因此仍不能写成独立 APPROVE、ARCHITECTURE CLEAR 或 merge-ready。服务恢复后需重新启动两条 lane，而不是复用本地测试代替。
+- 本轮没有改源码、保护文件、签名或远端；所有既有 dirty/untracked 内容继续保留。Roadmap 仍 **5/12、P9 active**。
+
+## 最新续接 — 2026-10-25 dirty 多模态门禁复核／独立 review unavailable
+
+- 在不修改两个保护文件、保留全部现有 dirty/untracked 内容的前提下，对当前多模态视频 Demo scope 做了本地门禁复核。`rtk proxy ./gradlew :demo:androidApp:testDebugUnitTest --offline --console=plain --rerun-tasks` 首次仅因 sandbox 无法创建 `~/.gradle` lock 失败；使用相同本地缓存的 escalated 路径后 **BUILD SUCCESSFUL**，245 tasks executed。随后 `rtk proxy python3 scripts/gradle-local.py :demo:androidApp:assembleDebug :demo:androidApp:assembleDebugAndroidTest :demo:androidApp:lintDebug --offline --console=plain` **BUILD SUCCESSFUL**，565 tasks（68 executed/497 up-to-date），无 lint error；仅保留既有 warning。
+- 当前 dirty source 生成的 iOS bridge/store/factory artifact 工程 `artifacts/verification/multimodal-ios-demo-dirty-20261025/MultimodalBridgeTests.xcodeproj` 使用本地 `apple` package、iOS 27.1 simulator、`-collect-test-diagnostics never` 重跑，`** TEST SUCCEEDED **`，`72 tests / 0 failures / 0 skips`；xcresult 为 `artifacts/verification/multimodal-ios-demo-dirty-20261025/build/Logs/Test/Test-MultimodalBridgeTests-2026.10.25_09-27-44-+0800.xcresult`。XCTest QoS priority-inversion 与 Xcode build-number parse warning 仍是既有观察项，不是失败。
+- 按 `code-review` 门禁尝试启动独立 `code-reviewer` 与 `architect` 两条 lane，但两者均因服务 `429 Too Many Requests` 超出重试限制而未返回审查证据。因此本轮**不**给当前 dirty scope 独立 APPROVE、ARCHITECTURE CLEAR 或 merge-ready 结论；需服务恢复后重新获取独立 review，不能用作者本地测试代替。
+- 以上只是当前实现的本地验证，不升级为 P9/P11、Android 生产 inference、真实系统文件选择、物理触摸、自然质量、GPU/energy、minimum OS、binary archive 或全 roadmap 完成。Roadmap 仍 **5/12、P9 active**；未 commit、stage、push、merge 或 release。
+
+## 最新续接 — 2026-10-25 iPhone 真机 Video Demo UI 成功／取消闭环
+
+- 本轮明确停止使用 iPhone 镜像；目标设备始终是物理 iPhone 16 Pro Max / iOS 27.0.1，UDID `<iPhone-UDID>`，`xcrun devicectl list devices` 状态为 `connected`。所有动作均走 `devicectl`、`xcodebuild` 和 XCTest 真机 runner；没有用镜像画布或 AX 镜像点击替代真机测试。
+- 保留当前 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation`、`feat/sdk-foundation`、HEAD `9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4` 及全部既有 dirty/untracked 修改；未 reset/clean/stash/commit/push/merge/release。受保护 `demo/iosApp/OnDeviceAIDemo.xcodeproj/project.pbxproj` 与 `docs/validation/face-identity.md` 未被本轮修改。
+- 在忽略的验证 artifact `artifacts/verification/roadmap-p7-video-ui-20261025-ruby34/SpeechDemo.xcodeproj` 上，用固定 Ruby `/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby`、`ODAI_VIDEO_DEMO=1`、Team `4X996UV8LC` 重新执行真机 `build-for-testing`，exit 0（`TEST BUILD SUCCEEDED`）。测试专用 `ui-test.plist` 仍只存在于 artifact，生产工程未开启文件共享 key。
+- 固定公开 fixture 为 `artifacts/verification/apple-video-audio-20261021/DeviceHarness/input-audio.mp4`，SHA256 `6a1c2a7bb875c8d9502450e732901fcd21bca5be27da0ef6ceae58c5b64c0d00`。每次真机 UI runner 安装新 app container 后，先以 `xcrun devicectl device copy to --device <iPhone-UDID> --source .../input-audio.mp4 --destination Documents/odai-video-ui-fixture.mp4 --domain-type appDataContainer --domain-identifier io.ondeviceai.ondeviceaidemo` 重新放入项目 App Documents；没有读取私人媒体。
+- `video-success7.xcresult`：`testVideoFixtureSuccessPlaybackSharingAndCleanup` 在真机通过。真实 XCTest 流程打开系统 Files picker，在“我的 iPhone/SpeechDemo”选择 fixture；再次打开 picker 后取消并保留输入；处理得到 `1280×720 · 48 帧 · 2.0 秒 · 音轨 1`；系统分享面板通过真实 `PopoverDismissRegion` 关闭；播放面板关闭；清理结果后保留输入。`xcrun xcresulttool get test-results summary` 报告该物理设备 `passedTests=1/failedTests=0`。
+- `video-cancel1.xcresult`：`testVideoFixtureCancellationReentryAndBackground` 在同一物理设备通过。覆盖处理期间取消、`CANCELLED` 终态、同一输入重新处理成功、再次运行后 Home/回前台不自动重启且终态仍 `CANCELLED`；summary 报告 `passedTests=1/failedTests=0`。
+- 失败包 `video-success5.xcresult` 仅暴露 iOS 27 分享面板没有“关闭/Close”按钮，已按真机 accessibility hierarchy 改为 `PopoverDismissRegion`；`video-success6.xcresult` 仅因 app 重装后的新容器未重新复制 fixture 失败，已通过每次 runner 前 `devicectl device copy to` 修正。测试命令必须保留 `-collect-test-diagnostics never`，否则 Xcode 可能启动额外 `devicectl diagnose` 并挂住收尾。
+- 这补齐的是 **P7 iOS Video Demo UI 的 XCTest 真机证据**，不是人工物理手指触摸验收，也不代表 P9/P11、Android 生产视频 backend、自然视频质量、GPU/能耗、最低系统矩阵、binary archive/Swift interface 或全 roadmap 完成。Roadmap 仍 **5/12、P9 active**；后续继续保留这些独立边界。
+
+## 最新续接 — 2026-10-25 Android Activity-owned mid-copy instrumentation 补强
+
+- 在保留当前全部 dirty/staged/untracked 内容的前提下，补强 `MultimodalPickerInstrumentation`：二次点击前先通过 Activity 自有 `multimodalImport` job 的 active 状态确认真实复制仍在进行，再断言第二个 picker 没有启动；这不是只依赖 host 单测或立即连续点击。
+- 使用固定缓存编译 `rtk proxy python3 scripts/gradle-local.py :demo:androidApp:assembleDebug :demo:androidApp:assembleDebugAndroidTest -PodaiTestRunner=io.ondeviceai.demo.MultimodalPickerInstrumentation --offline --console=plain`，**BUILD SUCCESSFUL**；仅有既有 Activity `!!` warning，无新增 error。
+- 已授权 TECNO KM9 / Android 15 / API35 真机重新安装本项目 app/test APK 并运行 instrumentation，命令 exit **0**、bundle `status=passed`。新增字段 `activityMidCopy=passed-activity-owned-import-active`；同一 bundle 的 `busyReselection=passed-first-import-retained-second-picker-rejected`、`systemPicker=passed-open-cancel-without-media-read`、`syntheticResult=passed-real-callback-copy-host-clear-fixture-only`、`foreground=passed-no-input-no-auto-generation`、`cleanup=passed-new-owned-directories-released` 均通过。
+- 原始输出：`artifacts/verification/multimodal-android-activity-midcopy-20261025/device-picker.log`；这补齐此前 scoped review 提出的 Activity busy-state/mid-copy coverage gap，但仍不等同真实系统文件选择、Android 生产推理或 P9 完成。未读取私人媒体、未下载依赖、未修改签名/保护文件。
+
+## 最新续接 — 2026-10-25 iPhone 镜像画面可见但真实点击仍不可用
+
+- 本轮先核对工作树，仍为 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation` / `feat/sdk-foundation`，HEAD `9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4`；全部既有未提交修改保留，未 reset/clean/stash/commit/push/merge/release，保护文件不变。
+- 授权 iPhone `<iPhone-UDID>` 仍可由 `xcrun devicectl` 识别。已确认安装包的真实 bundle identifier 是 `com.ugreen.ondeviceai.demo`；`rtk proxy xcrun devicectl device process launch --device <iPhone-UDID> --terminate-existing com.ugreen.ondeviceai.demo` 返回成功，进程列表出现 `OnDeviceAIDemo`（PID `23713`）。此前错误尝试的 `io.ondeviceai.demo` 只是未安装的 bundle，不代表产品失败。
+- 本机 `com.apple.ScreenContinuity` 现在能显示 iPhone 画面（此前为连接/超时状态），但窗口 AX 树仍只有镜像容器；对镜像画布的真实坐标点击 `[42,138]` 返回 `windowNotFoundAtPosition((36.0, 215.0))`。因此当前仍没有可复核的物理触摸或真实系统文件选择证据，不能把 `devicectl` 启动成功或镜像截图升级为 P9 通过。
+- 本轮没有读取私人媒体、没有安装新包、没有修改签名/保护文件；`touchAcceptance` 与 `systemFileSelection` 继续标记 **unverified**。下一步若镜像窗口获得可点击输入，再进行一次真实 picker；否则保留该外部门槛并推进其他可独立验证的 roadmap 缺口。
+
+## 最新续接 — 2026-10-25 P9/P5 Metal System Trace 资源观测
+
+- 沿用已安装 `com.ondeviceaikit.probe.vlm`、项目已有固定模型/manifest 和公开 `fixture.png`，在授权 iPhone 16 Pro Max / iPhone17,2 / iOS 27.0.1 上以 `--p9-auto-run` 执行一次真实 MLXVLM 图像生成；report `artifacts/verification/p9-metal-20261025/p9-run-39CEE4F5-7F1E-4645-A621-7892811267B0.json` 为 `status=success`，`runId=74E7A0E7-01DB-47A5-9E7F-B07B7C251519`，首 token `490.557542ms`、总计 `997.558208ms`、进程常驻峰值 `1,170,046,976B`，fixture/model/runtime hash 与 manifest 一致。
+- 同步录制 15.747300 秒 `Metal System Trace`：`artifacts/verification/p9-metal-20261025/vlm-metal-all.trace`；TOC 显示 A18 Pro，筛出的 VLMProbe PID `23718` 有 **405** 条 GPU interval（**399 Compute**、6 CoreImage），原始导出 `all-metal-gpu-intervals.xml` / `vlmprobe-gpu-rows.xml`。这证明真实 GPU 执行活动被捕获，但 `metal-current-allocated-size` 只出现一次 80KiB 记录，GPU counter set 为 null、shader timeline disabled，导出还有 dylib-overlap timeline warning；不填写 Metal GPU peak 或 energy，不升级完整 P9/P5 通过。
+- 本次只使用固定公开 fixture，没有读取私人媒体、下载/更新依赖或改签名/保护文件。下一步仍优先真实镜像点击（若窗口可输入），否则推进其他独立缺口；自然质量、能耗、最低系统、Android 生产 backend、P10 Task 9/10 和 P11 继续未完成。
+
+## 最新续接 — 2026-10-25 Kotlin-only Android fixture revalidation / iPhone mirror foreground gap
+
+- Demo 生产源码仍为 Kotlin/Compose。测试专用 `MultimodalFixtureProvider` 已从临时 `demo/androidApp/src/androidTest/java/.../MultimodalFixtureProvider.java` 恢复为 `demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/MultimodalFixtureProvider.kt`；Java 版本只是隔离 test APK Kotlin runtime/classpath 的临时尝试，不能作为 Demo 语言方向。当前 Android-test-only 配置显式加入 Kotlin stdlib，并限定断言编译选项，不改生产源码语言。
+- 强制离线重跑 `rtk proxy ./gradlew :demo:androidApp:testDebugUnitTest --offline --console=plain --rerun-tasks` **exit0**：XML 为 **38/38，0 failures/errors/skips**；`assembleDebug`、`assembleDebugAndroidTest`、`lintDebug` 强制重跑也 **exit0**。证据在 `artifacts/verification/multimodal-android-kotlin-fixture-20261024/{unit-rerun,build-lint-rerun}.{log,exit}`；lint 为既有 14 warnings，无 error。`git diff --check` 通过，provider 源码 inventory 仅有 `.kt`。
+- 在已授权 TECNO KM9/API35 上重新安装这版 Kotlin-only app/test APK 后，直接 `am instrument` 返回 bundle `status=passed`；`busyReselection=passed-first-import-retained-second-picker-rejected`、`systemPicker=passed-open-cancel-without-media-read`、`syntheticResult=passed-real-callback-copy-host-clear-fixture-only`、`foreground=passed-no-input-no-auto-generation`、`cleanup=passed-new-owned-directories-released`。证据：`artifacts/verification/multimodal-android-kotlin-fixture-20261025/device-picker.log`，build/device exit 均为 0。实际系统文件选择仍 unverified，推理仍 `unverified-no-android-backend`。
+- 仓库级 `rtk proxy ./scripts/verify-android.sh` 也 fresh exit0：725 actionable tasks（44 executed/681 up-to-date），JVM tests、lint 与 APK build 均通过。证据：`artifacts/verification/multimodal-android-kotlin-fixture-20261025/full-android-verify.log` / `.exit`；这不升级为 Android 生产推理通过。
+- 授权 iPhone `<iPhone-UDID>` fresh 状态为 `connected`；`com.apple.ScreenContinuity` 已能显示真实主屏。用 `xcrun devicectl device process launch` 启动已安装 Demo 成功，但镜像窗口没有把 Demo 带到可见前台，故物理触摸与真实系统 picker 仍是 **unverified**。没有读取私人媒体、修改签名或保护文件。
+
+Roadmap 仍 **5/12、P9 active**。下一步继续从可独立验证门槛推进；不把 Kotlin 本地门禁或 AX/注入式 picker 证据升级为真实 UI/P9 完成，不自动提交、推送、合并或发布。
+
+## 最新续接 — 2026-10-24 iPhone 镜像重试仍超时
+
+- 使用本机 `com.apple.ScreenContinuity` 启动 iPhone 镜像并重试“连接”；窗口先显示“正在连接 iPhone 17 Pro Max”，随后显示“已超时 iPhone 镜像连接超时”。当前没有可操作镜像窗口，真实物理触摸与系统 picker 继续 `unverified`。
+- 该结果是新的外部 UI 门槛证据；没有用 AX 激活、注入 picker callback、`devicectl` connected 状态或合成 fixture 替代真实触摸/真实文件选择。未安装/修改产品 App、未读取私人媒体、未改变签名。
+
+## 最新续接 — 2026-10-24 P10 scoped final review complete（product gates watch）
+
+- 当前工作树仍为 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation` / `feat/sdk-foundation`，HEAD `9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4`。全部既有未提交修改保留；未 reset/clean/stash/commit/push/merge/release。两个保护文件仍未修改或暂存，hash 不变。
+- 冻结的 P10 review 范围为 `ecdfd528..bb895161`，覆盖 `apple/Sources/ODAIKitIdentity/**`、`android/identity/**`、`kmp-binding` identity bridge、identity Demo wiring 和 distribution/reporting tools；排除当前 dirty P9 diff、`demo/iosApp/OnDeviceAIDemo.xcodeproj/project.pbxproj` 与 `docs/validation/face-identity.md`。
+- 独立 code-reviewer 已完成冻结范围 98 文件只读审查，architect 也完成 scoped architecture review；两者 CRITICAL/HIGH/MEDIUM/LOW 功能或安全 finding 均为 0。Android 专项 follow-up 仍因 `429 Too Many Requests` 不可用；记录在 `.superpowers/sdd/2026-10-24-p10-final-review/{review.md,architecture.md,ledger.md}`，结论为 `SCOPED_CODE_AND_ARCHITECTURE_REVIEW_COMPLETE_PRODUCT_GATES_WATCH`，不能写成全 roadmap APPROVE。
+- 新鲜验证：Apple `rtk proxy swift test --package-path apple --filter ODAIKitIdentityTests` exit0，313 tests/0 failures；Android `rtk proxy ./gradlew :android:identity:testDebugUnitTest --console=plain` exit0，XML 319 tests/0 skipped/0 failures/0 errors；固定 Ruby 3.4.11 的 distribution/tool unittest exit0，14 tests OK。`git diff --check`（当前工作树）通过；范围 diff 的历史 trailing blank lines 仅为 style observation。
+- 之后补跑全量门禁：`rtk proxy swift test --package-path apple` exit0（Identity313、Speech31、ModelStore13、Face9、Core5，共371，0 failures）；`rtk proxy ./scripts/verify-android.sh` exit0（725 actionable tasks，JVM tests/lint/APK passed）。这些是本地验证，不升级为生产模型、真实 UI 或全 roadmap 验收。
+- 仍未完成：P10 Task 9/10 生产模型、PAD、授权数据、阈值/校准、最低系统/设备推理；以及 P9 物理触摸/真实 system picker、Android 生产 inference backend、自然质量、GPU/energy、binary archive 等。Roadmap 仍 **5/12、P9 active**。下一步继续选择有独立证据的 roadmap 缺口；不自动提交、推送、合并或发布。
+
+## 最新续接 — 2026-10-24 物理触摸/真实系统 picker 可行性探针
+
+- `rtk proxy xcrun devicectl list devices` 与 `xctrace list devices` 均确认授权 iPhone `<iPhone-UDID>` 当前 `connected`；未安装新 bundle、未读取私人媒体、未改变签名或源码。
+- 本机 `cua_repl` 的 app inventory 能看到 `com.apple.ScreenContinuity`，但绑定 iPhone Mirroring 返回 `cgWindowNotFound`，当前没有可操作的镜像窗口。因此本轮没有物理触摸或真实系统文件选择证据；既有 AX/injected picker 报告保持 `touchAcceptance=unverified`、`systemFileSelection=unverified`。
+- 该外部 UI 入口阻断已精确记录，不能用程序化 AX 激活、注入 picker callback 或 `devicectl` 连接状态代替这两项验收。Roadmap 仍 **5/12、P9 active**；fresh branch-wide review 仅有已知 XCTest QoS LOW watchlist。
+
+## 最新续接 — 2026-10-24 dirty-source picker/UI 真机复验通过
+
+- 产品工作树仍为 `.worktrees/foundation` / `feat/sdk-foundation`，HEAD 仍 `9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4`。本轮保留所有未提交修改，未暂存、未 commit/push/merge/release；两个保护文件未改动。
+- 当前真机 `<iPhone-UDID>`（iPhone16ProMax / iPhone17,2 / iOS 27.0.1）已重新连接。沿用 Team `4X996UV8LC`、固定缓存、项目-owned fixed model 和公开 `fixture.png`，当前 dirty source signed generic device build **exit0**，新证据：`artifacts/verification/multimodal-mlx-full-app-9288ac5-20261024/resume3-20261024/signed-device.xcresult`。fixture SHA256 `60e52854b98e7e646033d70fb63b715fd90df2e8a20102ed79ea9b99b847a606`。
+- 精确来源为 HEAD `9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4` 加当前未提交 product/probe source diff SHA256 `a71a6a758e349b4d48d71bff7163380251a928fedbaeea31cfd38b879c8597f9`；报告中的 `sourceCommit` 启动参数是 HEAD 标签，不能单独代表 dirty source。
+- 真机 active report：`artifacts/verification/multimodal-mlx-full-app-9288ac5-20261024/resume3-20261024/demo-active-integration.json`，`status=passed`。`bootstrap/available/pageOpened/inputAction/pickerReply/activeCancel/activeLeave/noAutoRestart/reentry/returnReentry/closed` 全部 true；cancel/leave 为 `CANCELLED`，两次 reentry 为 `SUCCEEDED`，backend `mlx.smolvlm2-500m`。本轮将 picker reply 后检查改为等待异步 host/store 状态，已验证 delayed callback gate。
+- branch-review 的 MEDIUM 已修复：shared UI 仅在 `supportsVideoInput` 且实际 video store+picker 均配置时显示视频入口；Android/iOS image-only capability 回归已加。LOW factory failure 测试已改为断言阻塞文件构造的 `NSCocoaErrorDomain/fileWriteFileExists`，同时验证 image store 清理、foreign sentinel 保留与 model lease 可 remove。
+- 当前 iOS bridge/store/factory suite **72/72，0 failures/skips**：`artifacts/verification/multimodal-ios-store-resume-20261024/resume6-20261024/tests.xcresult`；完整 Android Demo unit suite **38/38，0 failures/errors/skips**，`demo:shared:allTests` 也通过。修复后的 fresh branch-wide review 已完成：CRITICAL/HIGH/MEDIUM 为 0，仅保留已知 XCTest QoS priority-inversion LOW watchlist；这仍不是全产品或 P9 APPROVE。
+- 报告仍明确 `touchAcceptance=unverified`、`systemFileSelection=unverified`、`osBackground=unverified`；这是 app-local AX/injected picker host/VM lifecycle 验证，不是物理触摸、真实系统文件选择或 OS background。Android 生产视频 backend、自然视频质量、Metal/GPU/energy、minimum OS、binary archive/interface、原上游 8→7、P4/P6/P7/P10/P11 和全分支最终 review 继续保留。
+
+Roadmap 仍 **5/12、P9 active**。下一步转向尚未完成且可独立验证的 P9 门槛（物理触摸/真实系统 picker 能力若工具条件允许，或记录外部门槛后推进其他独立缺口）；不自动提交、推送、合并或发布。
+
+## 最新续接 — 2026-10-24 KMP bridge 固定视频真机闭环通过
+
+- 已从本节上方检查点继续，保留全部 dirty/staged/untracked 内容；产品工作树仍为 `.worktrees/foundation` / `feat/sdk-foundation`，HEAD 仍 `9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4`。本轮未提交、未暂存、未 push/merge/release；两个保护文件未改动。
+- 临时 KMP consumer 初次失败的根因已定位为过期 framework 产物：`IOSMultimodalBridge.swift` 需要 `MultimodalBridge*`，而旧 `ODAIKitBinding.framework` 头文件仍为 `VideoBridge*`。沿用固定缓存离线执行 `rtk proxy ./gradlew :kmp-binding:linkDebugFrameworkIosArm64 --offline --console=plain` 成功，重生成 header 已导出 `MultimodalBridge*`。原失败日志与 retry1–3 均保留在 `artifacts/verification/multimodal-kmp-video-device-20261024/`。
+- artifact-only `KMPVideoConsumer` 在 retry5 signed generic iOS build **exit0**，使用既有 Team `4X996UV8LC`、当前 `IOSMultimodalBridge.swift`/`IOSMultimodalInput.swift`、重生成 binding framework 和固定 Swift package cache；证据：`retry5-20261024/generic-build.exit`、`generic.xcresult`。临时工程不改变 tracked 产品源码。
+- 真机 `<iPhone-UDID>`（iPhone17,2 / iOS 27.0.1 build 24A446）已安装并运行该 consumer。仅复制项目-owned 固定模型（从先前 native consumer 的 appDataContainer）及公开 fixture `apple-mlx/Tests/ODAIKitAppleMLXVLMTests/Fixtures/video-29fps.mp4`，没有读取私人媒体。启动带 `--sdk-commit=9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4`。
+- KMP bridge raw report：`artifacts/verification/multimodal-kmp-video-device-20261024/sdk-kmp-mlxvlm-video.json`；严格副本 `strict-kmp-summary.json`。`rtk proxy python3 tools/mlxvlm_video_report.py ...` **exit0**。`state=success`，success / 首次 update cancel+drain / same-PID reentry 均为预期状态；8 帧实际时间 `[0,3584,7168,10752,14848,18432,22016,25600]/14848`，`snapshotRemoved=true`；close 后 image/video 拒绝；取消前后 lease 保护、close 后 lease 释放、source unchanged、no owned snapshots 均 true。`runId=13B17E44-6145-4568-8C62-6A4F670CA64E`，`pid=22856`，backend `mlx.smolvlm2-500m`。
+- 该证据只证明当前 KMP `IOSMultimodalBridge` 到固定 Apple MLXVLM runtime/native lifecycle；**不**扩展为 Demo 真实 picker/物理触摸、Android 真后端、自然视频质量、Metal/GPU/能耗、minOS、binary archive 或全分支/P9 完成。Roadmap 仍 **5/12、P9 active**，独立 review 与其余历史门槛保留。详细记录已追加到 `docs/validation/multimodal-video-demo.md` 与 `.superpowers/sdd/2026-10-24-multimodal-video-demo/resume-20261024.md`。
+
+## 最新续接 — 2026-10-24 增强构建通过／原真机不可用
+
+- 工作树仍为 `.worktrees/foundation` / `feat/sdk-foundation`，HEAD `9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4`。原全部未提交修改保留；本轮新增 iOS store 父目录兼容修复、store/factory 回归与 Android IO→UI 取消窗口测试，也未提交/暂存/推送。两个原保护文件 SHA256 保持下方原表值；不修改/暂存它们。
+- 当前最小 `sandbox-exec` 探针 exit0。使用原独立增强工程、固定复制缓存、不解析/更新依赖重新构建完整 MLX App **exit0 / BUILD SUCCEEDED**，加入 store 修复后再次 exit0。未关闭宏/接口校验、未改上游/签名或下载。原沙箱错误精确外部策略原因未知，本环境未复现；原 exit65 保留。logs/xcresults：`artifacts/verification/multimodal-mlx-full-app-9288ac5-20261024/resume-20261024/`。
+- 12/12 固定 checkout HEAD/clean tracked 状态匹配，package/生成工程 lock hash 均仍 e67e9859…。源码是 HEAD+dirty，生成 validation label 仍是旧 HEAD，**后续设备报告必须重新冻结/生成精确来源，不可沿用该 label 假称精确源码**。snapshot/设备/格式证据在 `artifacts/verification/multimodal-resume-final-20261024/`。
+- iOS 只递归创建父目录，最终目录仍独占创建，拒绝既有外来目录。真实 RED70项/2缺父目录失败→GREEN70/70；补 factory video-store 失败后 image 目录与 model lease 清理。随后补实际 factory→host/VM→独立 video provider→typed native backend 的合成请求/输出/关闭测试；测试初版编译错误和URL目录末尾slash断言失败留档，生产路由未修改。最终 fresh 完整 **71/71，无失败/跳过，exit0**，xcresult summary确认；`multimodal-ios-store-resume-20261024/verified-final.{log,exit,xcresult}`。前一绿色测试卡在测试后simctl诊断，采样与日志保留；核对PID后仅终止本轮diagnose子进程，随后用文档支持的 `-collect-test-diagnostics never` 重跑，测试/编译校验保持启用；旧semaphore测试QoS warnings保留。
+- Binding ABI 新独立工程 **23/23**；Android Demo 最终 **37/37**，另APK/testAPK/lint 离线通过；Android新测试精确暂停成功IO copy后UI发布前，再clear回收，并以真实PickerCopy+host重建取消caller时NonCancellable join，证明source存活到worker/join退出后再清理；不冒充Activity中途复制实操。Android重选修复独立review APPROVE（LOW实际Activity忙状态/中途复制覆盖缺口）；iOS父目录/factory及Android取消测试切片独立review APPROVE，无finding；不扩大为全分支最终APPROVE。
+- 原授权 iPhone16ProMax `<iPhone-UDID>` fresh查询 **unavailable**；另一台physical设备无DDI，未使用。没有安装/修改签名/读私人媒体/执行权重推理。当前阻断转为设备可用性，**KMP固定视频权重success/首update cancel/drain/同PID reentry/close/lease与当前iOS真实picker/UI仍未验**，不复用旧native证据。
+
+下一：先核对本节与validation/dirty状态；原设备恢复后再冻结dirty源码与精确hash/生成validation工程，沿用已授权既有签名/固定缓存/公开合成profile视频，建立独立KMP视频权重严格validator证据；同一真机串行操作。不自动推送/merge/release。仍5/12/P9active，旧minOS/质量/资源/binary/短样本/Androidbackend/P4/P6/P7/P10/P11及全分支最终review缺口保留。
+
+## 最新续接 — 2026-10-24 14:20 真机输入通过／增强编译阻断
+
+### 工作树、提交与远端
+
+- 实际产品工作树：`/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation`，分支 `feat/sdk-foundation`。会话目录 `/Users/daubert/WorkBuddy/Worktrees/ondevice-ai-kit/main-263aa2ba` 不是产品源码工作树，不要在main上重做或迁移源码。
+- HEAD：`9288ac5a28dd5e2e55a23f9be9d5ec8108199fc4`，提交说明 `feat(demo): add typed video inputs and cancellable async staging`，26文件。用户明确授权后已普通推送GitHub origin和GitLab jihu，并独立ls-remote核对双方完整SHA一致。未强推、未合main、未建PR/MR。本次交接没有重新查询远端；上述是13:39左右的已验证结果。
+- HEAD之后仍有未提交修复：`demo/androidApp/src/main/kotlin/io/ondeviceai/demo/{MultimodalHost.kt,MainActivity.kt}`、`demo/androidApp/src/test/kotlin/io/ondeviceai/demo/MultimodalHostTest.kt`、`demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/MultimodalPickerInstrumentation.kt`、`docs/validation/multimodal-video-demo.md`，以及本交接文档。不要称这些已同步远端。
+- 两个原保护文件保持未提交：tracked dirty `demo/iosApp/OnDeviceAIDemo.xcodeproj/project.pbxproj` 和 untracked `docs/validation/face-identity.md`；禁止修改/暂存，原hash见下方保护表。不要reset/clean/stash、删除构建日志或覆盖现有修改。
+
+### 已完成及证据
+
+1. `9288ac5`包含shared typed video/UI、双端独立store/picker、异步有界私有copy、取消/晚到回收。Android生产Activity使用lifecycleScope/IO，临时picker source通过NonCancellable join保活；iOS detached worker复制、MainActor registry、安全域与inflight目录到worker退出才释放。保留同步兼容API，不可声称所有调用均异步。
+2. 该提交前已实际验证Android34/34、APK/lint；主会话完整iOS Demo ABI67/67。日志 `artifacts/verification/multimodal-ios-async-20261024/author-full.log`。不要重复实现已完成链路。
+3. 后续独立只读review发现major Android竞争：导入A时再选B，host先取消A，Activity又因busy拒B。已先编译RED再新增`canSelectInput`前置admission、接入Activity busy状态，拒绝重选时保留已接受导入；新确定性队列测试通过。修复真实picker runner三处旧文案“尚未选择图片”→“尚未选择输入”。当前Demo **35/35**、APK/testAPK/lint离线通过，diff-check通过。
+4. 连接TECNO KM9（serial `<Android-serial>`，Android15/API35）运行真实`MultimodalPickerInstrumentation`：bundle **status=passed**，系统picker真实打开/取消、公开合成provider经真实Activity回调/异步copy/host/clear、前后台不自动生成、自有目录清理通过。**实际系统选择文件未验，合成字节不是视频，Android无推理backend；重选中途暂停竞争仅单测覆盖。** 本轮未读取私人媒体。
+5. Android新证据均在 `artifacts/verification/multimodal-video-demo-red-20261024/`：`busy-selection-red.log`、`busy-selection-green-build.log`、`async-device-picker.log`。读bundle字段判断通过，不能只看adb退出码。
+
+### 当前阻断与未收口评审
+
+- 增强MLX完整App已生成新独立工程，使用既有复制缓存与固定lock，unsigned generic iOS构建 **exit65**。原始日志：`artifacts/verification/multimodal-mlx-full-app-9288ac5-20261024/unsigned-generic-ios-build.log`；同目录有generate/cache logs。
+- 根错误：`sandbox-exec: sandbox_apply: Operation not permitted`，`SwiftMacros.TaskLocalMacro`无法从`swift-plugin-server`载入，继发MLXRandom错误。**不是通过，不是确认产品API错误。** 未改上游、下载、修改签名或跳过宏校验；普通manifest sandbox参数不能被假定已解决compiler宏插件沙箱。
+- 独立review未APPROVE：major Android项已修但尚未复审；minor iOS store重写丢失自动创建父目录兼容行为仍待TDD处理；factory视频真实typed生成/provider链路、视频store创建失败后的图片目录/model lease清理测试仍待加强。Android临时source中途取消/join和IO完成→UI发布取消窗口还需精确覆盖。
+- 当前增强App没构建成功，**KMP→固定视频权重真机success/首update cancel/drain/同PID reentry/close/lease清理仍未执行**，不复用旧native视频或旧单图证据冒充。
+
+### 新对话直接继续的顺序
+
+1. 先核对本文件、validation/multimodal-video-demo.md、git状态与两个保护hash；保留全部未提交修复。
+2. 优先诊断宏插件sandbox执行条件。若确需外层沙箱权限，按环境权限流程申请；不得关闭代码/宏校验、改固定依赖或偷偷下载来绕过。没有条件变化不机械重跑相同失败命令。
+3. 可并行TDD补iOS父目录兼容及factory视频生成/失败清理测试；独立review复核Android修复。用户已明确允许并行，覆盖下方历史solo限制；同文件不并发写，同一真机串行操作。
+4. 增强编译通过后，核对iPhone连接，仅操作项目App，沿用既有签名与公开合成固定profile视频，独立建立KMP视频权重运行与严格validator证据，再验证当前iOS真实picker/UI。旧iPhone UDID `<iPhone-UDID>`，恢复时重新查询，不假定仍连接。
+5. 每个验证包准确记录失败/未验项。后续提交精确排除保护文件；这次已有同步授权对应9288ac5，不自动扩大为以后每轮push/merge/release授权。
+
+仍 **5/12，P9 active**；iOS15/API26、自然质量、Metal/GPU/energy、Android生产backend、短样本拒绝、原上游8→7、binary archive exit65、P4/P6/P7/P10/P11及独立最终评审缺口继续保留。
+
+## 最新续接 — 2026-10-24 双端异步输入提交检查点
+
+双端生产host已接异步最终复制及取消/晚到回收；Android Activity临时source经join保活，iOS detached worker/MainActor registry持有inflight目录与安全域直到worker退出。Android34/34、生产接线APK/lint通过；主会话完整iOS Demo ABI67/67。详见validation/multimodal-video-demo.md新增节。仍缺当前版本真机picker/UI、增强MLX整App、KMP视频权重闭环及独立review，5/12、P9active。用户本次明确授权将当前变更提交到feat/sdk-foundation并推送GitHub/GitLab；两个保护文件排除。提交与远端同步精确结果以后续git证据为准，下方未提交描述为历史状态。
+
+## 最新续接 — 2026-10-24 可取消 store 前置检查点
+
+后续已先解决Android store整段复制持锁问题：in-flight目录所有权、锁外逐块copy/checkpoint、close后拒绝publish、部分副本清理。2新测试真实缺checkpoint API编译RED→GREEN，增强旧lease+blocked worker断言后offline Demo31/31、assembleDebug/lintDebug成功。验证与原始GREEN log见multimodal-video-demo.md新增节。尚未改双端host异步调用；下一接Android staging任务与picker临时source存活/join，再Apple worker/MainActor分离。当前HEAD仍8d2cd9c，全部未提交、无新push/设备操作；保护hash不变。不是P9收口，仍5/12、P9active。
+
+## 最新续接 — 2026-10-24 视频 Demo 输入检查点
+
+用户已确认独立双store/共享状态机方案。新增shared媒体类型与视频分派、可选video actions/UI、双端host/picker独立store、32MiB有界私有复制及Apple factory videoInputs接线。当前均未提交/未push。shared64/64、Android Demo29/29及assemble/lint通过；Swift Demo ABI59/59、独立基础Demo simulator build通过。tools标准命令受清单sandbox阻断，进程内仅对dump-package加--disable-sandbox后133/133；完整说明见[本轮验证](validation/multimodal-video-demo.md)。旧图片测试异步序列断言[2]偶发失败，改验合法单调序列及terminal后不更新，产品bridge未改。两保护hash/index不变。
+
+不称本包完全收口：host最终复制仍UI同步有界，异步stager/显式导入中取消待补；增强MLX整App、Binding-only ABI、全Android modules、本轮UI实操及KMP到固定权重设备视频未验。下一先作者差异复核/独立review与增强编译及stager，再另包设备链路；5/12、P9active、原质量/资源/minOS/binary/picker等缺口保留。
+
+## 最新续接 — 2026-10-24 KMP 视频 bridge
+
+优先于下方历史下一步：设计e5a91a7、common447a7d5、Android0a84af6、Apple/generator2a1757d。optionalMultimodalVideoBridge/typedvideoDTO，原imageprotocol不加requirement；两端单独可选videoInputs默认nil/null，不借图片provider解析，image/video共用既有任务/nativeclient/drain/release/close。common24/24；Android模块48/48、完整725tasks/465JUnit；SwiftBinding23/23、Demo55/55、旧VideoABI6/6，xcresult0fail/skip；tools133/133、swiftformatstrict/Pythoncompile/diffcheck通过。中间common/JUnit/generatorfixture失败及所有logs留档，详见[视频bridge验证](validation/multimodal-video-bridge.md)、同名spec/plan/ledger。作者自审，独立reviewpending。
+
+下一独立包为sharedtypedvideo input/state/UI与两端hoststager设计实施，再单独KMP→固定模型设备视频链路。当前Demohost/UI仍image-only；本包只验证注入真实client生命周期，不是设备视频推理。原Apple固定native证据及所有Android真backend/自然质量/资源/minOS/binary/短样本/原上游丢帧/真实picker/旧UI/P6/独立review缺口保留，仍5/12/P9active。HEAD以git为准，原2保护文件hash/state/index保持。
+
+本次用户授权的原检查点05c67d2在jihu网络恢复后已非强推同步origin与jihu，独立freshls-remote双方均05c67d2a85c050d70ad51e255d0ed8deabc1d833；此前SSL/reset失败保留，未改网络/凭据/签名，无mainmerge/force/publish。新Android/KMP包仅本地提交；不自动继续push。同步JSON/成功push与失败logs在KMP视频bridge及前两个ledger，详见validation。下方“同步pending”为当时历史状态。
+
+## 最新续接 — 2026-10-24 Android 视频契约对等
+
+优先于下方全部历史下一步：设计333e414、typed API/client bd52496、callback测试修正f2f7bd1、consumer2164ebd。本包35/35（video13+旧client12+bridge10），完整Android725tasks/452JUnit、tools133/133；模块lint/KMPAndroidcompile通过，新localMavenAAR/sourceJar/javap及fresh独立Kotlin2.4 consumer45tasks assemble/lint通过。callback异常引用assertSame失败后误commit不是通过证据，f2f7bd1修正语义后全GREEN；独立consumer起初2.2metadata失败保留，对齐既有2.4后通过，未关闭检查/下载。Android仍无真实后端，未读媒体/运行设备/改KMPbridge或Demo。详见[Android视频契约验证](validation/android-multimodal-video-contract.md)和同名spec/plan/ledger。
+
+下一独立包为KMPtypedvideo/opaqueinput桥接设计实施，之后再Demo/picker；不要重复已完成Swift/Android native包。原Apple设备链路与所有质量/资源/binary/minOS/短样本/旧UI/P6/独立reviewpending缺口不变，仍5/12/P9active。HEAD以git为准；仅本地提交、2保护文件hash/state/index未变。
+
+用户本次“同步代码，然后继续”授权冻结同步05c67d2。sync-remotes两次因jihu SSL_ERROR_SYSCALL/reset预检失败，独立重查/HTTP1.1也失败；无任何push。GitHubfresh仍eb1287d，jihu fresh未知，双远端同步pending。初始runtimeledger remote-sync-20261024日志与Androidledger sync-jihu-recheck.log保留，未改网络/签名/凭据。继续实现后的新Android包默认本地，不自动追push。
+
+## 最新续接 — 可搬移 source 分发与 binary 门槛
+
+- 已从下述b988742基线续接；设计/计划cf342a1、source generator实现b8acaa3，最后精确HEAD以git为准。新增[分发验证](validation/apple-mlxvlm-distribution.md)和对应spec/plan/本地ledger；**不重做本包**。
+- `tools/generate_mlxvlm_consumer.py --portable-source <fresh-output>` 复制122个tracked package文件、固定lock和资源，以相对package引用生成独立consumer。已搬移到含空格目录，并在既有12个精确匹配/无tracked修改的依赖缓存下完成unsigned generic iOS build；snapshot/project lock及built canonical JSON完全一致，六个backend源文件确实从搬移目录编译。工具126/126，最终定向6/6、py_compile/diff-check通过。
+- source raw/summary `artifacts/verification/apple-mlxvlm-source-distribution-20261023/`；完整logs与progress/final-review在`.superpowers/sdd/2026-10-23-apple-mlxvlm-source-distribution/`。inventorySHA256 `479bdeb51f178c2b791a9d9228217b21eda90a3c3859aaa543c572ac6bbc2033`；lock仍e67e9859…。
+- 增强package真实Release archive（OnDeviceAIKitAppleMLX scheme、library evolution、固定缓存）**exit65 / ARCHIVE FAILED**：本机Xcode27.1/Swift6.4验证固定swift-collections1.7.3的OrderedCollections.swiftinterface失败，`'Element' is not imported through module 'OrderedCollections'`。binary分发未通过；未改上游/关闭校验/下载，不反复重跑同一门槛。source构建不替代binary、设备推理或最低系统验收。
+- 全程当前会话单人、作者自审，独立reviewpending；只本地提交，无远端同步。原有两个保护文件hash/state/index不变。旧UI/模型/质量/资源/最低系统门槛与roadmap5/12/P9active保留。
+- 下一独立包先核对**既有固定模型/runtime是否能支持有界短视频输入**，先读相关P8/P9/probe与backend契约，仅本地源码/缓存可行性和设计；若不满足依赖或设备条件，准确记录门槛后选择其他独立项。不与binary路线混做，不下载新模型/依赖，不预先承诺短视频可用。
+
+## 基线与远端
+
+- 工作树 `/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation`，分支 `feat/sdk-foundation`。
+- 本轮实现/验证基线 `9b6c8880244df10550edcee20b33ac18f1199037`；用户明确授权后，GitHub origin 与 GitLab jihu 的功能分支已通过仓库 sync-remotes 脚本快进同步到该提交（此前两端626b27b，本地领先49，无分叉）。本恢复文档随后本地提交并再次同步；最终精确HEAD以git/两端新鲜ls-remote核对为准。没有合入main、强推或发布。
+- 下一会话恢复默认**仅本地提交**；本次同步授权不作为以后自动push/merge/publish授权。
+- 工作树只保留以下原始脏状态；暂存区应为空。恢复前复核HEAD/branch/worktree/index与保护哈希；有并发变化只调查，不恢复覆盖。
+
+| 文件 | 状态 | SHA256 |
+| --- | --- | --- |
+| demo/iosApp/OnDeviceAIDemo.xcodeproj/project.pbxproj | tracked dirty，禁止修改/暂存 | b35bd984f784d4b13c0724f8c595d28ed96ddbe418e049547b762309fe9fd8f5 |
+| docs/validation/face-identity.md | untracked，禁止修改/暂存 | 6f130bd94debd5e8bffaba7b0db560553f7a367818d9cf37b72468e42bb70822 |
+
+## 已完成，不重做
+
+SDK Foundation、独立apple-mlx后端/真实SDK固定单图生命周期与benchmark、KMP双平台bridge、sharedVM/UI/opt-in、两端input lease/host/picker接线、Apple可选ModelStore/MLX host均已本地实现。默认/Android无生产多模态后端时明确unavailable。
+
+- 共享App-local AX成功/取消/活动离页/同PID重入：真实device source2915725、PID21348、11 gates；见 `docs/validation/multimodal-demo-active-ui.md`。
+- 真实OS前后台：source `d50eff18ed53db61bc46f050f411ab076d118ede`、iPhone16ProMax/iOS27.0.1、PID21398/runId16D64305-AD03-404E-ACB1-A509F9A79DA3；项目-owned inert companion触发真实UIKit四通知，ready update0、willResignActive时RUNNING/update23、后台CANCELLED无output/failure、同PID恢复300ms不自动重启、显式重入成功与close；14 gates严格通过。
+- raw `artifacts/verification/multimodal-background-20261023/demo-background-integration.json`，SHA256 `bc5ec5fbcb17f93ff3a3f034a8bab27a82fe0f48646236dd0a944bc7755b96e5`；详细见 `docs/validation/multimodal-demo-os-background.md`。
+- 最新工具123/123、Apple Demo42/42、strict新Swift0、default simulator/enhanced signed device/companion构建成功；之后仅交接文档变化，没有新App行为。CLI修复39660fc支持direct/module。
+- 当前设备通过devicectl可用；mobile MCP只执行了foreground检查，报agent未安装。未执行元素读取、未安装agent/profile。agent缺失继续限制触摸工具，**不阻断已通过的OS前后台证据**。
+
+## 最新续接 — 固定 MLXVLM 短视频可行性
+
+**最新native设备完成检查点（优先于下方全部历史下一步）：** Task2typedclient`c9ea298`、共享session/runtime`eebc670`、显式consumer/严格validator`30e5e8e`完成。首次设备PID22015 per-process-limit无report；阶段定位到ModelStore.acquire前，独立64MiB真实RED→GREEN定位Foundation逐块read临时对象保留，`5e39cb8`在read+SHA256.update内逐块autoreleasepool，不跳过校验、不动模型/runtime/MLXglobals/帧数。完整Apple470/470、增强host41/41无skip、tools133/133，实际签名build成功。真实iPhone16ProMax/iOS27.0.1源`5e39cb8b06a1dc3862e0f0a034ec6397951eac48`/PID22072/runId2B747E73-3D02-4585-8F13-969685C84892，固定29FPS8frame实际权重生成、首update取消+drain、同PID重入、close/lease/remove/清理均通过，严格validatorexit0。clip2s与span25600/14848分列，14modelhash/12checkout/lock均核对；raw与失败Jetsam/阶段诊断全保留，见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部和runtime/hash-memory两份ledger。原Task2/3本轮固定native范围完成；Task1短样本仍拒绝，不泛化<=5s。下一Androidtypedvideo契约/client对等独立设计实施，再另包KMP/Demo；不要重做adapter/profile/client/runtime。原上游8→7失败、binary archiveexit65、自然质量/Metal/energy/Android真backend/minOS/旧UI/P6实录/独立reviewpending缺口不变，5/12/P9active。仅本地提交，无新push授权。HEAD以git为准；2保护文件原hash/state/index不变。
+
+**最新runtime库检查点（优先于下方）：** MLXVLMBackend已conform video协议，image/video共用session/lease，视频直接adapter.Prepared.input，producerjoin后snapshot清理。session6项、实际29FPSmetadata1项均RED→GREEN，全增强host41/41无skip、tools126/126、新独立unsigned generic iOS build通过。原Task3仍缺consumer/严格validator及设备视频权重success/cancel/reentry/close，不以本包host/build替代。下一按`2026-10-23-apple-mlxvlm-short-video-runtime.md` Task2继续；日志/checks/作者自审在同名ledger目录。原Task1短样本仍拒绝，独立reviewpending、5/12/P9active、所有旧门槛不变，仅本地提交。
+
+**最新Task2检查点（优先于下方历史状态）：** 纯Swift `MultimodalVideoRequest`、可选video backend协议与client overload完成，image/video共用admission、update过滤、取消/drain及close/query。API RED后Multimodal22/22、完整Apple469/469、增强host34/34无skip、tools126/126、Swift6严格typecheck和新独立unsigned generic iOS compile probe通过。当前MLXVLMBackend仍image-only，Task3 runtime尚未开始；下一先细化runtime设计/验证，直接用adapter.Prepared.input，禁止原.frames路线。Task1短于8实际样本仍拒绝；上游失败、binary archive exit65与旧验收缺口保留。Task2日志/checks/作者自审在原short-video ledger目录，独立reviewpending、5/12/P9active、仅本地提交，不沿用旧push授权。详见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。
+
+**最新profile/设备检查点（优先于下方）：** `81ea4df`新增真实PQ/offset/2frame/reference-dref负向profile4/4；原代码baselineGREEN、HDRguard临时mutation真实RED并字节精确恢复，完整host34/34无skip、tools126/126。Package直接真机测试exit70（tool-hosted不支持device），改本项目现有bundleID/team/wildcard profile的空App testhost后，iPhone16ProMax/iOS27.0.1实际snapshot/profile12/12及adapter6/6执行通过；源码/fixtures16hash匹配。后者ByteTokenizer，仅输入准备，不是视频模型/真实tokenizer/质量/资源验收。中间host链接exit65/约束exit74保留；修正为原MLX exactVersion0.32.3后lock不变，无下载/签名资产变更。raw/summary/argv在`.superpowers/sdd/2026-10-23-apple-mlxvlm-video-profile/`和同名artifacts；详见[短视频验证](validation/apple-mlxvlm-short-video.md)最新节。短于8实际样本当前明确拒绝，尚未提供支持；原Task1不泛化任意<=5s。下一可独立推进原Task2纯Swift typed request/client生命周期，仍无公共API/runtime实现或视频权重推理；原Task3需采用新adapter而非原`.frames`。独立reviewpending、5/12/P9active、只本地提交。
+
+**新增最新检查点（优先于下方历史状态）：** 内部项目侧`MLXVLMVideoInputAdapter`（`5be1b57`）直接逐帧使用固定视频图像变换与模板装配，不再调用上游二次帧选择；29FPS实际8帧的pixels/顺序/原始CMTime全部保留，clip2s和sample span约1.724138s分列。`c9ef8ce`真实固定tokenizer2/2无skip，24FPS完整tokens/pixels/mask与上游一致；29FPS为8帧/512imageIDs，上游仍7帧/448imageIDs。全增强host30/30、tools126/126、fresh独立unsigned generic iOS编译通过；14modelassets和12checkout/lock均核对匹配。设计/计划为`2026-10-23-apple-mlxvlm-video-adapter*`；新ledger与rawlogs保留于同名`.superpowers/sdd/`目录。**没有公共video API、runtime接线或新视频权重/设备推理；原Task1 profile/iOSdecode缺口仍在，原Task2/3未开始。** 下一先补snapshot profile和iOS decode/cancel，再独立评估runtime集成门槛。单人作者自审，独立reviewpending；仅本地提交，没有新远端写入。详见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部，不按下方历史“先设计适配”重复执行已完成包。
+
+**历史eb1287d检查点（已由上方适配包续接）**：52fc766之后已实施内部`MLXVLMVideoSnapshot`和真实pinned processor测试；增强host22/22、tools126/126、独立consumer unsigned generic iOS编译通过。24FPS/2s fixture8帧保留，真实`SmolVLMProcessor.prepare` pixels为`[8,512,512,3]`；29FPS/2s原8帧count/timestamps门槛实际失败（上游二次采样变7帧，原index6丢失）。原失败log与断言副本保留；默认characterization测试断言固定版本已知7帧行为，不把GREEN称为8帧集成通过。**不要直接执行原Task2/3**。下一独立设计先解决真实帧/时间语义适配，不能改写timestamps或修改上游来绕过；原生snapshot额外profile测试和iOS实际decode/cancel仍待补。详见[短视频验证](validation/apple-mlxvlm-short-video.md)顶部。
+
+- 已完成源码/缓存核对并新增[短视频可行性](validation/apple-mlxvlm-short-video.md)、[设计](superpowers/specs/2026-10-23-apple-mlxvlm-short-video-design.md)和[计划](superpowers/plans/2026-10-23-apple-mlxvlm-short-video.md)。固定14个模型文件 hash/size 全匹配，12个 lock checkout HEAD/clean 全匹配；摘要 `artifacts/verification/apple-mlxvlm-short-video-20261023/preflight.json`，SHA256 `135c87c076307df7fbf5c1e02bfb75016bef0cb7b0e417efa7596b0362343186`。
+- 固定 runtime 的 `SmolVLMProcessor` 有单视频分支；配置 `fps=1/max_frames=64/max_image_size=512`，实际默认FPS会按时长变化。`UserInput.Video` 支持 `.url/.avAsset/.frames`，但项目公共请求和 backend 仍只支持单图。URL sampling包含duration端点并跳过失败帧；`.frames`重新计算sample span并二次采样，必须先做实际characterization。
+- 下一 Task1 为有界 H.264 SDR 本地 snapshot、AVFoundation 解码取消/join、帧身份/时间戳及 pinned processor characterization。只有通过后才执行 Task2 typed video contract、Task3 Apple runtime/consumer/device。若失败保留精确诊断，不改上游或伪造timestamps绕过。
+- 初次52fc766仅文档/preflight；后续内部snapshot/host/build结果见本节最新段，无新视频设备推理或设备写入。仍5/12、P9active。独立只读代理因429未启动，后续遵守当前会话单人执行。两个保护文件hash/state/index不变；无远端写入。
+
+## 下一独立包建议
+
+原建议的可选Apple MLXVLM分发包已按顶部最新续接执行，不再从头探测。source/binary结果分别见[分发验证](validation/apple-mlxvlm-distribution.md)；后续入口以顶部为准，binary路线必须有工具链/依赖条件变化或独立策略设计才重新启动。
+
+物理触摸/命中、真实system picker选文件、自然图片质量、可靠Metal/GPU/能耗/最低系统、短视频、Android真后端和独立review各自仍待验；不以AX/合成fixture/processRSS替代。短视频或Android新后端不与分发包混做。作者自审不称独立APPROVE。
+
+## 执行约束与必读
+
+先读生效AGENTS.md（无磁盘文件则会话注入版）和 `/Users/daubert/.codex/RTK.md`，再读本文件、`docs/HANDOFF-2026-10-20-speech-demo-bridge.md`顶部最新检查点、`docs/ROADMAP.md`、本包validation/spec/plan及`.superpowers/sdd/2026-10-23-multimodal-demo-os-background/{progress.md,final-review.md}`。保留全部本地`.superpowers/`/artifacts/日志；不clean/reset/stash，不覆盖用户改动。
+
+单人当前会话执行，不派子代理；按适用技能设计/逐Task计划、行为修改RED→GREEN、范围作者自审、精确暂存与本地提交；清晰可逆下一步不例行询问。所有shell命令以rtk开头，普通命令rtk proxy；Ruby测试显式RUBY=/Users/daubert/.rvm/rubies/ruby-3.4.11/bin/ruby。只既有固定模型/依赖缓存/公开合成fixture，不下载、录音、读取私人媒体或变更签名资产。允许使用已授权本项目真机和既有签名，先核对连接，只操作本项目App。
+
+保留旧Video UI runner初始化超时、P6实录、Android ASR MISSING_ASSETS、iOS15/API26最低系统和独立review缺口；全roadmap仍5/12完成、7阶段未收口，P9active。只因真实破坏性操作/并发冲突/必要权限缺失或无安全恢复路径停下。

@@ -1,0 +1,200 @@
+{
+  "runId": "w3-qwen-heap-emulator-20261111-01",
+  "reportSHA256": "3831a2cae37af09554fb76da089af4a5bd77fe6110280ef7dd3a44f15234ffc2",
+  "status": "completed",
+  "terminal": true,
+  "parentDiagnosticAccepted": true,
+  "parentCheckCount": 20,
+  "actualConstructors": 1,
+  "actualCreatedStreams": 2,
+  "actualDecodeCalls": 2,
+  "heapEventCount": 18,
+  "hostSeconds": 6.448792708994006,
+  "loadSeconds": 1.930013126,
+  "caseSeconds": 2.161738668,
+  "audioSeconds": 4.8,
+  "recognizerReleaseSeconds": 0.073505625,
+  "sampledMaxRssBytes": 1453527040,
+  "sampledMaxRssGiB": 1.3537025451660156,
+  "minDeviceAvailableBytes": 1535139840,
+  "rssSamples": 23,
+  "stopReason": null,
+  "terminalObservationGap": null,
+  "heapSelectedBoundaries": [
+    {
+      "seq": 0,
+      "label": "initial-before-report",
+      "sinceInitialSeconds": 0.0,
+      "nativeHeapSizeBytes": 12795904,
+      "nativeHeapAllocatedBytes": 5519520,
+      "nativeHeapFreeBytes": 2261552
+    },
+    {
+      "seq": 1,
+      "label": "constructor-before",
+      "sinceInitialSeconds": 1.501667792,
+      "nativeHeapSizeBytes": 23449600,
+      "nativeHeapAllocatedBytes": 17164720,
+      "nativeHeapFreeBytes": 1861200
+    },
+    {
+      "seq": 2,
+      "label": "constructor-returned",
+      "sinceInitialSeconds": 3.431730501,
+      "nativeHeapSizeBytes": 1110552576,
+      "nativeHeapAllocatedBytes": 1077066336,
+      "nativeHeapFreeBytes": 27360496
+    },
+    {
+      "seq": 8,
+      "label": "core-persist",
+      "sinceInitialSeconds": 4.577493335,
+      "nativeHeapSizeBytes": 1111568384,
+      "nativeHeapAllocatedBytes": 1077808512,
+      "nativeHeapFreeBytes": 27492432
+    },
+    {
+      "seq": 13,
+      "label": "core-persist",
+      "sinceInitialSeconds": 5.593282419,
+      "nativeHeapSizeBytes": 1111711744,
+      "nativeHeapAllocatedBytes": 1077944128,
+      "nativeHeapFreeBytes": 27491984
+    },
+    {
+      "seq": 15,
+      "label": "case-returned",
+      "sinceInitialSeconds": 5.599026336,
+      "nativeHeapSizeBytes": 1111711744,
+      "nativeHeapAllocatedBytes": 1077633728,
+      "nativeHeapFreeBytes": 27802384
+    },
+    {
+      "seq": 16,
+      "label": "recognizer-released",
+      "sinceInitialSeconds": 5.674482586,
+      "nativeHeapSizeBytes": 114675712,
+      "nativeHeapAllocatedBytes": 23951344,
+      "nativeHeapFreeBytes": 87349472
+    },
+    {
+      "seq": 17,
+      "label": "activity-torn-down",
+      "sinceInitialSeconds": 6.108650836,
+      "nativeHeapSizeBytes": 114675712,
+      "nativeHeapAllocatedBytes": 23530096,
+      "nativeHeapFreeBytes": 87777376
+    }
+  ],
+  "observedConstructorHeapAllocatedIncreaseBytes": 1059901616,
+  "observedRecognizerReleaseAllocatedDecreaseBytes": 1053682384,
+  "metrics": [
+    {
+      "language": "auto",
+      "word": {
+        "referenceUnits": 15,
+        "hypothesisUnits": 15,
+        "substitutions": 4,
+        "deletions": 0,
+        "insertions": 0,
+        "errors": 4,
+        "rate": 0.26666666666666666,
+        "defined": true
+      },
+      "character": {
+        "referenceUnits": 75,
+        "hypothesisUnits": 70,
+        "substitutions": 2,
+        "deletions": 6,
+        "insertions": 1,
+        "errors": 9,
+        "rate": 0.12,
+        "defined": true
+      },
+      "decodeNanos": 1094531334,
+      "decodeRTF": 0.22802736125
+    },
+    {
+      "language": "English",
+      "word": {
+        "referenceUnits": 15,
+        "hypothesisUnits": 17,
+        "substitutions": 6,
+        "deletions": 0,
+        "insertions": 2,
+        "errors": 8,
+        "rate": 0.5333333333333333,
+        "defined": true
+      },
+      "character": {
+        "referenceUnits": 75,
+        "hypothesisUnits": 82,
+        "substitutions": 8,
+        "deletions": 6,
+        "insertions": 13,
+        "errors": 27,
+        "rate": 0.36,
+        "defined": true
+      },
+      "decodeNanos": 983222084,
+      "decodeRTF": 0.20483793416666668
+    }
+  ],
+  "truePeakMeasured": false,
+  "preciseClockAlignmentVerified": false,
+  "nativePolicyEffectVerified": false,
+  "engineeringQualityAccepted": false,
+  "productionReady": false,
+  "w3Status": "open",
+  "r4Status": "open",
+  "r5Status": "open",
+  "microphoneStarts": 0,
+  "networkRequests": 0,
+  "physicalRunConsumed": false,
+  "restored": {
+    "removedOnlyExactNewAliases": [
+      "io.ondeviceai.acceptance.qwenheap.test",
+      "io.ondeviceai.acceptance.qwenheap"
+    ],
+    "exactStagingRemoved": "/data/local/tmp/w3-qwen-heap-emulator-20261111-01",
+    "ordinaryAppsModelsUnchanged": true,
+    "emulatorLauncherReturned": true,
+    "supplementalEmulatorEvidenceOnly": true
+  },
+  "emulatorStopped": true,
+  "interpretation": "On this emulator boundary allocated heap rose mainly across constructor and dropped after recognizer release. This does not identify native transient peaks, ORT allocator policy effect, TECNO memory cause, cross-file leaks or full quality.",
+  "freeze": {
+    "fileCount": 841,
+    "contractSHA256": "dcd11f4643048f6baa42e16d6d58c441acf5b02c4eb4163b572832b7d24292fc",
+    "physicalFrozenFileCount": 120,
+    "physicalRunConsumed": false
+  },
+  "verification": {
+    "adapterGroups": 4,
+    "identityNegatives": 9,
+    "inheritedParentTests": 72,
+    "diagnosticChecks": 20,
+    "toolsTests": 691,
+    "toolsSeconds": 53.689845084008994,
+    "independentReviewAccepted": true,
+    "deferredMinor": "Inherited driver globals are updated after exec; currently correct and accepted by independent review."
+  },
+  "policyCollection": {
+    "initialFailurePreserved": true,
+    "cause": "adb shell joined unquoted stat format into multiple remote arguments",
+    "sameRunReadOnlyRecovery": true,
+    "quotedStatExitCode": 0,
+    "originalAdapterAndReportUnchanged": true,
+    "inodeAndBounded21BReadsAccepted": true
+  },
+  "protectedDirtyFilesUnchanged": 86,
+  "otherTaskDriftPreserved": {
+    "docs/HANDOFF-F08-BIRDS-EXPERT-2026-11-08.md": {
+      "before": "03146a628031ec0d71376271d601b765f1e76f1d6472e63c96bef5477777e813",
+      "current": "cb6548f15691c1902bc6a159f3a1eb9320be98387f64417908f9c96b78af93a1"
+    }
+  },
+  "ordinaryAVDConfigUnchanged": true,
+  "sourceBranchPushed": false,
+  "rawEvidenceLocalOnly": true
+}

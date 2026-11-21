@@ -1,0 +1,7 @@
+{
+  "command": "fresh staged/material/protection verification inline Python",
+  "exitCode": 1,
+  "error": "AssertionError: docs/agent-pitfalls.md",
+  "failedCheck": "original protected-before suffix after removing own prefix and exact replacements",
+  "productOrDeviceWorkStarted": false
+}

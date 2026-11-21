@@ -1,0 +1,29 @@
+{
+  "verdict": "accept_bounded_increment",
+  "reviewer": "CBC hy3 separate supplied-context request",
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "action": "report, closure scope and issue/wiki explicitly retain R4/R5/P1/P2/P3/P4/W3 open; publishing checked separately",
+      "status": "addressed_in_local_report_and_publication_body"
+    },
+    {
+      "severity": "LOW",
+      "action": "build records ancillary; actual BUILD SUCCESSFUL stdout, real AAR/APK bytes and ten negatives are retained",
+      "status": "addressed"
+    },
+    {
+      "severity": "LOW",
+      "action": "qualify unchanged as non-notice members/fixed runtime libraries; package SHA changes explicitly recorded",
+      "status": "addressed"
+    },
+    {
+      "severity": "LOW",
+      "action": "keep local reconstruction distinct from historical execution or final LTO/machine-code evidence",
+      "status": "addressed"
+    }
+  ],
+  "reviewerExecutedChecks": false,
+  "legalOrFullReleaseAccepted": false,
+  "w3Complete": false
+}

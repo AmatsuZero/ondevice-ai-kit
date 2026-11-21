@@ -1,0 +1,64 @@
+{
+  "at": "2026-11-12T10:27:30.011400+00:00",
+  "scope": "fresh-subprocess-reader-with-local-fake-ADB-and-host-shell",
+  "suite": {
+    "at": "2026-11-12T10:22:38.239858+00:00",
+    "exitCode": 0,
+    "totalMethods": 139,
+    "newReaderMethods": 11,
+    "externalMethods": 4,
+    "parentMethods": 7,
+    "seconds": 4.213,
+    "pythonFilesParsed": 17,
+    "frozenOldFilesVerified": 120,
+    "oldReportAndFalseVerdictUnchanged": true,
+    "actualAndroidOperations": 0
+  },
+  "sourceSHA256": {
+    "adb_terminal_report_reader.py": "e184eaed9285e81be1a90e4505da0e280ca794dead66afaaa55ed3351bfa11e8",
+    "test_adb_terminal_report_reader.py": "6021241299d7493a3c7ab3e8c6898fb543aada05843b92e1bbdb99f1fae596c8",
+    "test_adb_report_reader_parent.py": "877dcce1f1accf20a1c04e861261f171f076c80281e3d807feaa9a44a992f9a6"
+  },
+  "directMissingModuleExternalAndParentREDBeforeRepositoryIntegration": true,
+  "initialStrictTypeFailures": 3,
+  "initialStrictTypeErrors": 9,
+  "externalTestPathLiteralFailureRetained": true,
+  "originalLargeTestDelivery": {
+    "at": "2026-11-12T09:42:23.937543+00:00",
+    "accepted": false,
+    "processExitCode": 0,
+    "rawBytes": 0,
+    "error": "400 prompt is too long: 100001 tokens > 100000 maximum (01a1cf209810791e869fe8183cc4d19d/01a1ceef-ab37-7f5d-b88a-1dd621f56867)",
+    "promptBytes": 3696,
+    "actualContextTokenOriginKnown": false,
+    "quotaErrorObserved": false,
+    "usableTestFiles": 0,
+    "sameRequestRestarted": false,
+    "session77499Terminal": true,
+    "nextAction": "Distinct reduced four-method tests-only candidate; no integration gate waived, no paid/native fallback."
+  },
+  "smallTestsDurationMs": 87465,
+  "sourceReview": {
+    "verdict": "accept",
+    "findings": [],
+    "limitations": [
+      "Source-only review; the 11 external/real-subprocess tests in evidence were executed by others, not reproduced here.",
+      "Contract does not promise real-device Android acceptance, remote descriptor metadata stability, malicious same-UID atomic replacement immunity, or trusted-kernel authenticity.",
+      "Scope excludes peak/continuous sampling and new full host-loop/remote ACK mechanisms.",
+      "Hostile executable/transport and microphone/AiAi/model behavior are out of scope.",
+      "Consumed 19/20 run not changed or replayed; actual Android channel reported empty at last fresh list."
+    ]
+  },
+  "sourceReviewDurationMs": 47380,
+  "realAndroidTransportVerified": false,
+  "fullHostLoopWired": false,
+  "remoteAckPublished": false,
+  "deviceOperations": 0,
+  "inferenceCalls": 0,
+  "mediaCapture": 0,
+  "systemAsrRequests": 0,
+  "modelOrRuntimeDownloads": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false
+}

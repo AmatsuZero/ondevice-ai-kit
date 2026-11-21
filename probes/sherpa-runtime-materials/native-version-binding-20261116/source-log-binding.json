@@ -1,0 +1,184 @@
+{
+  "sourceCommit": "af2d8d81dbfa61c4cea4c568da78f3982edca005",
+  "sourcePath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/source-evidence/sherpa-onnx/csrc/version.cc",
+  "patchEvidencePath": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/sherpa-version-patch.json",
+  "patchEvidenceSHA256": "87a379d62ccb2030b6cc48d9897a170680b69eb2665e2896b4dba159dee4b159",
+  "sourceGitBlobSHA1": "fad4f4608123d9fe30c9e2543f79952dd403a5fd",
+  "reconstructedPatchGitBlobSHA1": "149297a10a8ba54619e57615d844bbf5c7b21b1b",
+  "reconstructedPatchSHA256": "c4addca669aa59aa7aef9d8862acc761d94d3a36eb26ab0d0ea60eb5a41e106d",
+  "actualRetainedCILogExcerptsVerified": [
+    {
+      "job": "android-libs.log",
+      "retainedLogPath": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-libs.log",
+      "logBytes": 414518,
+      "logSHA256": "54ff201719ac53f4d5bb855718afe36e526b89c16fd2f2836447046ea093e9c6",
+      "originalExcerptLinesRechecked": true,
+      "excerpts": [
+        {
+          "line": 480,
+          "text": "2026-10-26T15:37:04.9867589Z diff --git a/sherpa-onnx/csrc/version.cc b/sherpa-onnx/csrc/version.cc"
+        },
+        {
+          "line": 481,
+          "text": "2026-10-26T15:37:04.9867881Z index fad4f460..149297a1 100644"
+        },
+        {
+          "line": 482,
+          "text": "2026-10-26T15:37:04.9868038Z --- a/sherpa-onnx/csrc/version.cc"
+        },
+        {
+          "line": 483,
+          "text": "2026-10-26T15:37:04.9868210Z +++ b/sherpa-onnx/csrc/version.cc"
+        },
+        {
+          "line": 484,
+          "text": "2026-10-26T15:37:04.9868385Z @@ -9,12 +9,12 @@"
+        },
+        {
+          "line": 485,
+          "text": "2026-10-26T15:37:04.9868924Z  namespace sherpa_onnx {"
+        },
+        {
+          "line": 486,
+          "text": "2026-10-26T15:37:04.9869057Z  "
+        },
+        {
+          "line": 487,
+          "text": "2026-10-26T15:37:04.9869280Z  const char *GetGitDate() {"
+        },
+        {
+          "line": 488,
+          "text": "2026-10-26T15:37:04.9869448Z -  static const char *date = \"Mon Oct 26 21:50:15 2026\";"
+        },
+        {
+          "line": 489,
+          "text": "2026-10-26T15:37:04.9869651Z +  static const char *date = \"Mon Oct 26 14:57:12 2026\";"
+        },
+        {
+          "line": 490,
+          "text": "2026-10-26T15:37:04.9869816Z    return date;"
+        },
+        {
+          "line": 491,
+          "text": "2026-10-26T15:37:04.9869924Z  }"
+        },
+        {
+          "line": 492,
+          "text": "2026-10-26T15:37:04.9870021Z  "
+        },
+        {
+          "line": 493,
+          "text": "2026-10-26T15:37:04.9870130Z  const char *GetGitSha1() {"
+        },
+        {
+          "line": 494,
+          "text": "2026-10-26T15:37:04.9870276Z -  static const char *sha1 = \"96255a1b\";"
+        },
+        {
+          "line": 495,
+          "text": "2026-10-26T15:37:04.9870432Z +  static const char *sha1 = \"af2d8d81\";"
+        },
+        {
+          "line": 496,
+          "text": "2026-10-26T15:37:04.9870574Z    return sha1;"
+        },
+        {
+          "line": 497,
+          "text": "2026-10-26T15:37:04.9870680Z  }"
+        },
+        {
+          "line": 498,
+          "text": "2026-10-26T15:37:04.9870772Z  "
+        }
+      ]
+    },
+    {
+      "job": "android-aar.log",
+      "retainedLogPath": ".omx/artifacts/w3-runtime-materials-20261111/official-provenance/job-logs-output-corrected/android-aar.log",
+      "logBytes": 117868,
+      "logSHA256": "ab83e33122f92e915d11e07e4829fdfc17e020fd4cfe803f81cb528c710ecc28",
+      "originalExcerptLinesRechecked": true,
+      "excerpts": [
+        {
+          "line": 481,
+          "text": "2026-10-26T16:23:13.3458316Z diff --git a/sherpa-onnx/csrc/version.cc b/sherpa-onnx/csrc/version.cc"
+        },
+        {
+          "line": 482,
+          "text": "2026-10-26T16:23:13.3459099Z index fad4f460..149297a1 100644"
+        },
+        {
+          "line": 483,
+          "text": "2026-10-26T16:23:13.3459558Z --- a/sherpa-onnx/csrc/version.cc"
+        },
+        {
+          "line": 484,
+          "text": "2026-10-26T16:23:13.3460078Z +++ b/sherpa-onnx/csrc/version.cc"
+        },
+        {
+          "line": 485,
+          "text": "2026-10-26T16:23:13.3461075Z @@ -9,12 +9,12 @@"
+        },
+        {
+          "line": 486,
+          "text": "2026-10-26T16:23:13.3461642Z  namespace sherpa_onnx {"
+        },
+        {
+          "line": 487,
+          "text": "2026-10-26T16:23:13.3462044Z  "
+        },
+        {
+          "line": 488,
+          "text": "2026-10-26T16:23:13.3462372Z  const char *GetGitDate() {"
+        },
+        {
+          "line": 489,
+          "text": "2026-10-26T16:23:13.3463134Z -  static const char *date = \"Mon Oct 26 21:50:15 2026\";"
+        },
+        {
+          "line": 490,
+          "text": "2026-10-26T16:23:13.3463772Z +  static const char *date = \"Mon Oct 26 14:57:12 2026\";"
+        },
+        {
+          "line": 491,
+          "text": "2026-10-26T16:23:13.3464286Z    return date;"
+        },
+        {
+          "line": 492,
+          "text": "2026-10-26T16:23:13.3464610Z  }"
+        },
+        {
+          "line": 493,
+          "text": "2026-10-26T16:23:13.3464903Z  "
+        },
+        {
+          "line": 494,
+          "text": "2026-10-26T16:23:13.3465222Z  const char *GetGitSha1() {"
+        },
+        {
+          "line": 495,
+          "text": "2026-10-26T16:23:13.3465656Z -  static const char *sha1 = \"96255a1b\";"
+        },
+        {
+          "line": 496,
+          "text": "2026-10-26T16:23:13.3466133Z +  static const char *sha1 = \"af2d8d81\";"
+        },
+        {
+          "line": 497,
+          "text": "2026-10-26T16:23:13.3466576Z    return sha1;"
+        },
+        {
+          "line": 498,
+          "text": "2026-10-26T16:23:13.3466899Z  }"
+        },
+        {
+          "line": 499,
+          "text": "2026-10-26T16:23:13.3467182Z  "
+        }
+      ]
+    }
+  ],
+  "staticReferenceOnly": true,
+  "nativeExecution": false,
+  "allSourceEquivalent": false
+}

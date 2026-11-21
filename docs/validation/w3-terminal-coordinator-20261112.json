@@ -1,0 +1,37 @@
+{
+  "at": "2026-11-12T07:38:44.058781+00:00",
+  "scope": "local-terminal-observation-coordinator-with-injected-samples",
+  "pythonTests": 102,
+  "coordinatorTests": 35,
+  "syntaxChecks": true,
+  "sourceHashes": {
+    "terminal_observation_coordinator.py": "5fcb411735e2774b6078328e74bbc9cdf67c3aee9e6d2a1769182877d2a943dc",
+    "test_terminal_observation_coordinator.py": "639eb1ed313fd396e131a379e26cb839c642a31ff63103af081f92f6e2cfda8d",
+    "test_coordinator_parent_acceptance.py": "f9b62e56d83f85f68d74e825699676aa4845e06abc467b632bd97dab2bd166a2"
+  },
+  "correctionHelperDurationMs": 126688,
+  "reviewHelperDurationMs": 155837,
+  "reviewVerdict": "accept",
+  "reviewScope": "static supplied-context source only",
+  "minorFindingDisposition": "Missing binding identity KeyError claim not reproducible; both fields raise ValueError before ACK/writes; regression added, source unchanged.",
+  "clockDomain": "one host monotonic_ns domain; not device uptime or a proven clock mapping",
+  "resourceAggregation": "max RSS/min available of two snapshots; not true peak",
+  "oldFrozenFilesVerified": 120,
+  "oldReportSHA256": "e80a4678468e736fdf20049fa2f5e4cee49a5a32c437da83b6fcb1db570b8a0e",
+  "oldFalseVerdictSHA256": "3575b70f0531560aeecc94935cf41f4415c15e1a5bef7e494b8f57c2cb31681d",
+  "actualDeviceIO": false,
+  "deviceOperations": 0,
+  "inferenceCalls": 0,
+  "W3Complete": false,
+  "R4R5Accepted": false,
+  "sourceBranchPushed": false,
+  "evidenceRoot": ".omx/artifacts/w3-terminal-observation-20261112",
+  "remainingGates": [
+    "real bounded process sampling and fresh report transport",
+    "Android ACK IO/stale refusal and independently named wrapper/driver",
+    "race/fault checks; Android build/lint/APK review",
+    "new frozen unconsumed device contract and same-run terminal collection/restoration",
+    "full physical quality/resource acceptance",
+    "source-to-AAR/recursive binary composition/production notices/release review"
+  ]
+}

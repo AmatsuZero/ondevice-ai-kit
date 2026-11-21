@@ -1,0 +1,42 @@
+)]}'
+{
+  "id": "4769c6af90e2ddd1460a7950037937864407dd8c",
+  "entries": [
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "3172a52266b104c2bab21e368f73a8011da102bf",
+      "name": "ndk"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "040e8fb4e5004fde7aa401ced96ef2f1a29d42ed",
+      "name": "ndk_hwasan"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "a4c066bd1f479e26418f309dd8b1b07eb785b9f3",
+      "name": "platform"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "b563a07ecafa8d90dbf2e5c49e19b560ceeb8942",
+      "name": "platform_hwasan"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "29be3c6b4228687ccdf86cc838989b769cd460da",
+      "name": "platform_noexcept"
+    },
+    {
+      "mode": 16384,
+      "type": "tree",
+      "id": "36aadcf29b036ef04ccb08adad79331e63005885",
+      "name": "platform_noexcept_hwasan"
+    }
+  ]
+}

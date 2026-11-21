@@ -1,0 +1,19 @@
+
+/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-c-api.so:	file format elf64-littleaarch64
+
+Disassembly of section .text:
+
+000000000014a728 <SherpaOnnxGetVersionStr>:
+  14a728: f0fff740     	adrp	x0, 0x35000
+  14a72c: 91061400     	add	x0, x0, #0x185
+  14a730: d65f03c0     	ret
+
+000000000014a734 <SherpaOnnxGetGitSha1>:
+  14a734: 90fff780     	adrp	x0, 0x3a000
+  14a738: 91036000     	add	x0, x0, #0xd8
+  14a73c: d65f03c0     	ret
+
+000000000014a740 <SherpaOnnxGetGitDate>:
+  14a740: 90fff720     	adrp	x0, 0x2e000
+  14a744: 911a2000     	add	x0, x0, #0x688
+  14a748: d65f03c0     	ret

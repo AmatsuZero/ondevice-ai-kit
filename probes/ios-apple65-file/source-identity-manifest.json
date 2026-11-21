@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "runId": "w3-apple65-file-20261116-01",
+  "backendId": "apple.speech.recognizer",
+  "manifestSHA256": "99584dec071c0e8a3b47f510443e002d80058482cb48d580122a0af88c86a1fb",
+  "inputBindingSHA256": "b3838b23136aa1be8c760915b565a2f192976ae3299631fcd3470f8df5334e88",
+  "sourceBaseCommit": "8537933d2340a2bf1e3c1f3aa97780bca5973780",
+  "selectedSources": [
+    {
+      "path": "apple/Package.swift",
+      "sha256": "6d556d858eb4fe8a9d7abf8c30799b3b4e66cc5cfde27620f6c16d076961fcfb"
+    },
+    {
+      "path": "apple/Sources/ODAIKitAppleSpeech/AppleAVSpeechBackend.swift",
+      "sha256": "f7f6e7d5a38dd5422fb699c4d58eee4a32b9d1ba123d7261bec2884e2e000bab"
+    },
+    {
+      "path": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechAudioSession.swift",
+      "sha256": "452bdd056ecc94624e2220c71ab7d96dee673b6f858cbc74ab0d313bd89cb466"
+    },
+    {
+      "path": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechMicrophone.swift",
+      "sha256": "0d40e29d27a13c72d7c535d34d6f1ac853ff383ec4625ab28af3d16839e076f9"
+    },
+    {
+      "path": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+      "sha256": "46fc138edd8b23286a6e7ab38561a7c4bfb342ef6c2083205e95a94e26a2e9db"
+    },
+    {
+      "path": "apple/Sources/ODAIKitCore/Availability.swift",
+      "sha256": "87f24120073f9c62ce6e3089e656356851a5732340e176e166fbc0d4130324a2"
+    },
+    {
+      "path": "apple/Sources/ODAIKitCore/LatestFrameQueue.swift",
+      "sha256": "2c8c7529fef0d34728fd7f14cd59322cb35952e2eaf9b2d92d7a4e2366cbf7ac"
+    },
+    {
+      "path": "apple/Sources/ODAIKitCore/TaskGate.swift",
+      "sha256": "0c62b522c82e0916d9f1330d3eda1a5bf9992de8c30e9689ad61e0aeba08d37d"
+    },
+    {
+      "path": "apple/Sources/ODAIKitSpeech/SpeechClient.swift",
+      "sha256": "59fcf256ed49ba8175d320dec03da149c9fc83f19d319d53eeb85f237be88990"
+    },
+    {
+      "path": "apple/Sources/ODAIKitSpeech/SpeechMicrophone.swift",
+      "sha256": "9c77a4179a83329f66ea25df6f148c024eb8a0be36d9d3c28663a397fd8d6500"
+    },
+    {
+      "path": "apple/Sources/ODAIKitSpeech/SpeechMicrophoneClientTask.swift",
+      "sha256": "868941155d991dec17be86906ac18d4a1388e5a6b8a4172324657cbaa37bf811"
+    },
+    {
+      "path": "probes/ios-apple65-file/Apple65Core.swift",
+      "sha256": "31ced81915caae508192db4d93145dc741fcd711f1e5aba4b9a52b0183f6dd9d"
+    },
+    {
+      "path": "probes/ios-apple65-file/W3Apple65App.swift",
+      "sha256": "36fdede7a03e408ff94e1cd783d669a48f6b81ae7aeac1ac73b815c87345359b"
+    },
+    {
+      "path": "probes/ios-apple65-file/project.yml",
+      "sha256": "663567aa564fb99f3cd4bf7a1519f4d041cf5fb66f199c98fef32f37a1a1b723"
+    }
+  ],
+  "distributionBoundary": "isolated-unsigned-probe-not-production"
+}

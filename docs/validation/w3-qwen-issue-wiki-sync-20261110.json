@@ -1,0 +1,39 @@
+{
+  "recordedAt": "2026-11-10T09:16:15.314045+00:00",
+  "sourceCommits": [
+    "745733c",
+    "7042b66",
+    "d63abe1"
+  ],
+  "issues": [
+    {
+      "provider": "github",
+      "id": 6763480473,
+      "url": "https://github.com/AmatsuZero/ondevice-ai-kit/issues/15#issuecomment-6763480473",
+      "readbackSHA256": "efdc050cae32022148722dfe70c6a307107e0992b1bfa9884e988a37d5b22af1",
+      "terminalNewlineTrimmed": false
+    },
+    {
+      "provider": "gitlab",
+      "id": 42269,
+      "url": "https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit/-/issues/15#note_42269",
+      "readbackSHA256": "a32c1e74509464963c5fc5148b8651901553b492a642cd854cdbab4934d18243",
+      "terminalNewlineTrimmed": true
+    }
+  ],
+  "githubWiki": {
+    "remoteCommit": "57a6593240e7a3b93146338cbde06d4186cc26af",
+    "contentSHA256": "0c1b4afa8a54605cbca4ba9f1d7d278cce063ba4fa75ab2e36047c5917648241",
+    "readbackIdentical": true,
+    "sourceBranchPush": false
+  },
+  "gitlabWiki": {
+    "slug": "W3语音验收与后续改进",
+    "contentSHA256": "0c1b4afa8a54605cbca4ba9f1d7d278cce063ba4fa75ab2e36047c5917648241",
+    "readbackIdentical": true
+  },
+  "sourceBranchPush": false,
+  "scope": "MacQwentwo-stage independent confirmation passed; W3open Androidquality/resource and notices/review pending",
+  "localEvidenceDirectory": ".omx/artifacts/w3-model-reselection-20261110",
+  "publishCorrection": "GitHub filename list quoting caused initial staging assertion failure; downstream push erroneously attempted before commit and stayed up-to-date. Postcondition failed; committed exact staged Unicode path using NUL output, then pushed/readback once. GitLab already verified, not resent."
+}

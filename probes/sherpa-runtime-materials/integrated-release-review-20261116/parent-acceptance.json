@@ -1,0 +1,16 @@
+{
+  "verifiedAtUTC": "2026-11-16T00:26:04.410188+00:00",
+  "sourceHEAD": "f2bcbbb33ef3470281fd41a70df2652f34922cbd",
+  "suppliedContextFilesExact": 25,
+  "candidateArtifactIdentitiesFreshVerified": 12,
+  "currentBackendSourceObservationsVerified": 4,
+  "frozenFilesVerified": 161,
+  "protectedPathsUnchanged": 176,
+  "helpersObservedTerminal": 2,
+  "allHelperToolUseEvents": 0,
+  "parentAcceptedCorrectedReviewScope": true,
+  "noNewLocalClosureMethodProved": true,
+  "newBuildDeviceDownload": false,
+  "independentP4ReleaseAccepted": false,
+  "W3Complete": false
+}

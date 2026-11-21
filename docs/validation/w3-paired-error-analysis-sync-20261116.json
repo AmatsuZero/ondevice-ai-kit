@@ -1,0 +1,31 @@
+{
+  "sourceEvidenceCommit": "83b36584641060721b17e2edfa38eca4fb0dff86",
+  "marker": "<!-- w3-paired-error-analysis-20261116 -->",
+  "githubIssue": {
+    "id": 6911184049,
+    "exactReadback": true
+  },
+  "gitlabIssue": {
+    "id": 45183,
+    "exactReadbackExceptOneFinalLF": true,
+    "initialEOFPreserved": true,
+    "documentedChildOnlyRouteRecovered": true
+  },
+  "bodySHA256": "394e87d7befcd3e1c8b340089b747f6f609aa44e575911fc122e274c61a35584",
+  "githubWiki": {
+    "commit": "9e42f76ff38f7d514bb5e0737921a2d61b31ee41",
+    "exactRemoteReadback": true,
+    "pageSHA256": "b72df9c9c89f5c7ab0cdd99c3a803af05a398cf9680966949db757b4eb351ab4",
+    "uniqueMarker": true,
+    "isolatedClone": "/private/tmp/odai-w3-apple65-device-wiki-20261116",
+    "initialStageGuardFailurePreserved": true,
+    "gitlabWiki": "pending-known-EOF;zero new GET/PUT attempts"
+  },
+  "gitlabWiki": {
+    "status": "pending-known-EOF",
+    "newGETOrPUTAttempts": 0
+  },
+  "sourceBranchPushed": false,
+  "P4Accepted": false,
+  "W3Complete": false
+}

@@ -1,0 +1,2902 @@
+{
+  "schemaVersion": 1,
+  "candidateVersion": "0.144.6-ondevice-f02.4",
+  "status": "draft-file-notices-not-approved",
+  "nativeInputs": [
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Color/CBDT/CBDT.hh",
+      "sha256": "524184d6b83f086e0abc9b0c6a23415d9240209dc6548c59c54bf6e86ef2af09",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "707ccccfff56b2db6eaef0b3684630635f48a2eb2ff39010896b471e97a375c2"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Color/COLR/COLR.hh",
+      "sha256": "306e22d223b2705bd36ddb28a9a36cd0118834cf59805b8d9508b3459fd0ae32",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b2fa5a438e754cab54dddac04fe6479bda4730e6153d6c9cba7c43fbb53c1c0f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Color/COLR/colrv1-closure.hh",
+      "sha256": "69f1988bb24a8c9db42ffbcc9b0c9974480dceef6acb301a172b49c4be047804",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "6dd82949ea2f763eac04078cbdb7ddc6fcc0f82239b8cad82526c074e28fe9ce"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Color/CPAL/CPAL.hh",
+      "sha256": "cc77c772daecf2a2c2005b48f950a7f95ec62adf54c6ee27f37e495a4da571ee",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "6997873a984fdf00ce3eaa70ab6acb343a89d3db5a5fab8dcc3a698c98ff51b9"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Color/sbix/sbix.hh",
+      "sha256": "147e294663a642f56b907796dbdc9b1ff0622feca3963964b01cab36c42b9a26",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b2fa5a438e754cab54dddac04fe6479bda4730e6153d6c9cba7c43fbb53c1c0f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Color/svg/svg.hh",
+      "sha256": "c3ee7fbc31a8e5097d510f59e855708c57cc5ba384551e67cd94d1791b28d1bd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/Common/Coverage.hh",
+      "sha256": "4877611b464b7a510639bd7a96cdede2d6e2b7175980a850a86a477d5b9a7ddf",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "8cf447c53ffa79bfb1fdb94d0d00e81cc41b8a522de16a4932a2036762968c27"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/Common/CoverageFormat1.hh",
+      "sha256": "7ee9a2bbfdd38858149bc31011040deba43bf8f8d745806cd5df4fc2bbc0ad8d",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fa576aa9cba8b26c85d2d313a080a25615b6515b40d84a6b238cb642832cadfc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/Common/CoverageFormat2.hh",
+      "sha256": "1217bf440e5e678155ebb9fa43699084624fe9a9dab0c56f30599737621ee456",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "8cf447c53ffa79bfb1fdb94d0d00e81cc41b8a522de16a4932a2036762968c27"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/Common/RangeRecord.hh",
+      "sha256": "21339be0fd783a3a3cd4391324d339b332eb3b12a32266b9a812bf400fde744a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "8cf447c53ffa79bfb1fdb94d0d00e81cc41b8a522de16a4932a2036762968c27"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GDEF/GDEF.hh",
+      "sha256": "29444098a08ae0085a3ecb45820b2786b1e000a0c6adb27b6d034c01040719a2",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "aa0fa56d9a903b8f12e067423555ee934f489993d5b98befb74bd0a1cb09d392"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/Anchor.hh",
+      "sha256": "598d442aab59fc68e56ae4b4fb44a6b510066c601d28a580ced1d5bed6f0f219",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/AnchorFormat1.hh",
+      "sha256": "e5a65b7ebb17411027802ada680b43d9cbe74f022d687da6910a6e05dd36350b",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/AnchorFormat2.hh",
+      "sha256": "cbffb2662d989c60bd9adbadfcbe31812a6208698c0352b1992377d79cfdb1d0",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/AnchorFormat3.hh",
+      "sha256": "ccf32cf1d36860f8f1f2b4bf836933bb7af68b9a157d2944def41769fd784187",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/AnchorMatrix.hh",
+      "sha256": "ded205c264e2acabca43165c22ec5ebac4a5b87e6818ef0587e4fe233bd4079e",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/ChainContextPos.hh",
+      "sha256": "c34439da36999ba2ea22c8e3f79e3d8ac7e5f1526b2952574ee9b89db3b20b46",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/Common.hh",
+      "sha256": "83ce20183ae2c7ed3778b379173d53bf171979c697b3130fe3450b29457734db",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/ContextPos.hh",
+      "sha256": "76cc7ef26c40970e39d96f6343f1ecfdc1e06369810db6e3cc4f4dff46f57e65",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/CursivePos.hh",
+      "sha256": "c0fbd10ff1d3d9c1af99bc486d7cbeb139ff84628be86f9c8452881cc3e88233",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/CursivePosFormat1.hh",
+      "sha256": "111a8b31e3b761548eda24681740afc5dd768e161016005d86b0b58de78822f3",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/ExtensionPos.hh",
+      "sha256": "5a80507ba337f036a614e37c619d59a90e9ac8589a835705aa3510e76fa5278b",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/GPOS.hh",
+      "sha256": "392a7b9eee1d4c8167db2d0c67a5b6ff6f6df81ff0868b2510c13cf88806c89f",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/LigatureArray.hh",
+      "sha256": "805f8e0018c51e9f6439ac19a97817b3aa7f3f56e30b2cb5f6919ddae5ee2b11",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/MarkArray.hh",
+      "sha256": "685bd1086f1071d5a208ccf1b615c75025ece229e64bfd4e5fe1ea810ac902dc",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/MarkBasePos.hh",
+      "sha256": "16168e3f6db1d5362ee816ed6aed5b15d4c575a5c37a1b695213f25bc64748ef",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/MarkBasePosFormat1.hh",
+      "sha256": "ff54773eb45b839d60332fd371018e209bc3fb1459623170de0cceaaed14ef5a",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/MarkLigPos.hh",
+      "sha256": "589bdd949299e50cbee98a26103ed3b2341403c28e23cafe9c3c05394be9692d",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/MarkLigPosFormat1.hh",
+      "sha256": "7d23c09943183489b495a9ee0f69dcd447f04f36629e602dc9e0592879127c04",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/MarkMarkPos.hh",
+      "sha256": "9a1a71e58ecb8e0e6cc8dbdd59e5183d549cbb42a01791698549eefd78c476b3",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/MarkMarkPosFormat1.hh",
+      "sha256": "cf90577d67c386c68af446574286392c3da6a6a02215e6e340d0c6b901397c27",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/MarkRecord.hh",
+      "sha256": "a884689ee938b1bf89cd6accc74666faff6187d9b6ff34b277a73c577d03d293",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/PairPos.hh",
+      "sha256": "54b31074e3ed19bab59bfd5f99ab9123b9f18803a6580ea015baec1dfb1976bd",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/PairPosFormat1.hh",
+      "sha256": "27524f0c75f8e20aadd4f362f50f678c3c1e278019adac9b693e297a76921b4a",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/PairPosFormat2.hh",
+      "sha256": "0f3b6e633f22b032dfa088529ff67f594025fdad380b5b64b4ae5440d8ae7a18",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/PairSet.hh",
+      "sha256": "e1de1bd7967402a138411ede8dd7bb4e9a07dce50d5ba1738517dc085ab97eca",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/PairValueRecord.hh",
+      "sha256": "c97fe09162c499a21d85f250dfe9f2e5df24e61ef8e6548c8d2a193d2834072d",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/PosLookup.hh",
+      "sha256": "3d5dc44eae59aa662f1a9654a88c7601cd36983ab57dae039610172d1570539e",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/PosLookupSubTable.hh",
+      "sha256": "228064543905b74d54ff70e81e5f0a2acc95b1fb5b96f1550979cdeed465f9a3",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/SinglePos.hh",
+      "sha256": "2f5f95c6ab60f24552871e34d241e4507982895ac0c154a7f3a622ef5e0747c3",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/SinglePosFormat1.hh",
+      "sha256": "ae7a2e1a4a5b0e5530fe6791f785c1f83be27778c8f2e522753d07b24e32a5fc",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/SinglePosFormat2.hh",
+      "sha256": "14afe94098068b674ac950818ae4262884e198b8a7855aae91ed807f9f362156",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GPOS/ValueFormat.hh",
+      "sha256": "0cb73a1877d3641c1756da1947ec141216700dc8e232f53918f70541530dd783",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/AlternateSet.hh",
+      "sha256": "e89a58704d46fdb96c7442e5192945a63f291f26d9876df8826251b18e64738c",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/AlternateSubst.hh",
+      "sha256": "749dfbf3ef4cb9fafe54ca894beca66e448c9e8c467413c927b68d4b04d5ba0f",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/AlternateSubstFormat1.hh",
+      "sha256": "de13d1b5d5ff613242a6e41892355193c4384da0ecf16b2a0a609cf00f67d869",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/ChainContextSubst.hh",
+      "sha256": "906b673e7e03c5dcf9da4f60596299b2d3336a26e4553b60325b4a5536e95344",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/Common.hh",
+      "sha256": "ce87391d986275cafe7b830db774c538b2a799ede2fc762786a0ae602a07a9d7",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/ContextSubst.hh",
+      "sha256": "188c24bb3603b4f580ca8b6c2c415fc7766b23ad8b2e519723622f85f76bf4d8",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/ExtensionSubst.hh",
+      "sha256": "ed6003a5fb8e6196367d1c474e646c12c008bc26c551f987e94b9fef210e4383",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/GSUB.hh",
+      "sha256": "d0e6b777f8788ef485b21dd7cd58550ad7af9f877b4f7a9f7b4b369e0a7bcf15",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/Ligature.hh",
+      "sha256": "ece46ab0552066ac265c84a65ab6a6f44bba8cb529c7158cbd072dd3e7859fce",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/LigatureSet.hh",
+      "sha256": "bf4cef28d5cadac30839a3301d2db3c7f724fdeb12ab4617347bcb3458e66eef",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/LigatureSubst.hh",
+      "sha256": "26a501e13840737c71f895125a83b0e57a29484ff25adaf866f30c8f71efbfd0",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/LigatureSubstFormat1.hh",
+      "sha256": "48c375210cf1c62c94286ef465125bf6fb3a426f71c28ecab4b08d2b3ccd6eb3",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/MultipleSubst.hh",
+      "sha256": "62fefab93b5c6ce685e17b19ce3db8fb11763420e2db151ff8056c387697c190",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/MultipleSubstFormat1.hh",
+      "sha256": "6feafe9e64dee18482154b22a5b6e6a47f1d561453e9ea47cb2eb8976b9068ba",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/ReverseChainSingleSubst.hh",
+      "sha256": "2676f140784fd9c562d645940c66d5e700fa1858059fe61668c353bf7e7e89b2",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/ReverseChainSingleSubstFormat1.hh",
+      "sha256": "d89a8f59f0eda1da960a134ac246898fad1b0e4704bc2f1e4839730bc8c7e6ac",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/Sequence.hh",
+      "sha256": "4cfbad9bd819d9d0e26e57dc107e962ae5caf1028976cdab98b9874c91adec39",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/SingleSubst.hh",
+      "sha256": "2fdba20f367eb634395dc0513c9e33b9cf78344cd046d3b18bbb9acae5eb52e2",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/SingleSubstFormat1.hh",
+      "sha256": "d2c94c62d0a78d1a7cb37bb3d2598bc4bb41b86ab8bed65c3cf14a88edcc0baa",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/SingleSubstFormat2.hh",
+      "sha256": "0df4a96798c614c9834f1b431ed07bb4c3173220661d2b95a48691059682ca21",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/SubstLookup.hh",
+      "sha256": "7e1e215abc8c4b72d4784414445f515d97a211b40cf2581b1d8d2c829e56a1c9",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/GSUB/SubstLookupSubTable.hh",
+      "sha256": "9f6a46682543981e215127a84b26af9279b196ef997e6eadfffc199cfbd0db13",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Layout/types.hh",
+      "sha256": "5d03d207a71aa6814c1921a33c92e3adc849e823cf95807c3d6372627bf76866",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "8cf447c53ffa79bfb1fdb94d0d00e81cc41b8a522de16a4932a2036762968c27"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Var/VARC/VARC.cc",
+      "sha256": "6c518ef9b0697c45b17258f9a52bac9497311cf9ee1913ab00df747d20830565",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Var/VARC/VARC.hh",
+      "sha256": "20e44d0897052c7c26b2f22285021fcd278c3c7854413175b677404f1c1b8eee",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/Var/VARC/coord-setter.hh",
+      "sha256": "c681f66bcd365e0818a9db801da38a4677be962f11cf82cbc7ef96d022e48bf0",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/CompositeGlyph.hh",
+      "sha256": "7e1a09a2e04438d768cd943e711987254f43f80df83c38e72f7798a1a6a7e5a5",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/Glyph.hh",
+      "sha256": "5f69782aec5a55e6ebabe6aa35d070381fc1d92f7d1362504873b28511477822",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/GlyphHeader.hh",
+      "sha256": "097358c6babebac698266e9783d510db5a93890defb1199597ab9c11de3755e8",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/SimpleGlyph.hh",
+      "sha256": "5436b61b20f4f3d21693555a20f1c89af6c0515b489403035ee5884a811a26bb",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/SubsetGlyph.hh",
+      "sha256": "5f5271e2ad4c4e693ab61bd2b44e5e7806ad319f4280f12c114a1490edf38261",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/composite-iter.hh",
+      "sha256": "de1d0c657a0943ef4c179df358b11932118bb46b0f7e17cbe2d06b3294d9d37f",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/glyf-helpers.hh",
+      "sha256": "b8667b0946124eaa06825fef39e42206fe0cd7c6772a7d4f9c529c0197b05483",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/glyf.hh",
+      "sha256": "5e2b543b8b7b305e78c336a88bf9ce05c118308b93834f7f0347f5ee41ad25bf",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/loca.hh",
+      "sha256": "66869ed7f1fc2f501111d0b6cecc226ebebd00e8ed0c0c79c94804d031c46398",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/glyf/path-builder.hh",
+      "sha256": "69a3fbce6c9cf21bd2ea53f6357631d2a91268492d9071c9a50ec3c4fca000f4",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/OT/name/name.hh",
+      "sha256": "546300a81ec42829b62e7eea05c893524c117e11de607a5efec74015d07a8724",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/classdef-graph.hh",
+      "sha256": "0a292787f6156a5a21a6d7dc51dc78e5b0f53d6b0155fbd60e70ca84460486c8",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/coverage-graph.hh",
+      "sha256": "12ecae7f41486cd40f2e3ebded06f47562e3038ebb4ac10c6e274ff088f08149",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/graph.hh",
+      "sha256": "2caa7599958d074e6b3895579f2066a23210b17ae9a74b7aba3d424b98ac9616",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/gsubgpos-context.cc",
+      "sha256": "bc55f636037c8474ac74982b148783ae3c1d5b4407360bf62694af44e009c415",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/gsubgpos-context.hh",
+      "sha256": "eb3a69bed8bbb12af5b428f7a3ead69c311f199ce1101e040ea6c296091b8e48",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/gsubgpos-graph.hh",
+      "sha256": "152826036845dd79d5ae0246f3f5b914ab2ff271efb5f96d7ec6f221e5796480",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/markbasepos-graph.hh",
+      "sha256": "e344058bfa3ba360672661a247a9af0b636a41a0f2c4f27d43825356f248c363",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/pairpos-graph.hh",
+      "sha256": "5aee734c474d7c5e800e4acb58b56163285187da814cb8e8f40e4bfb2ce2dd3e",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/serialize.hh",
+      "sha256": "33e9d6442a14caaa477f3a6545ea72a9ba42395db8053af4d45d6228c3f7f0eb",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/graph/split-helpers.hh",
+      "sha256": "4ea2b4133b903b4465ef8c7c0679fbea84ae558d81cc8c40207ea2209a1fc54b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout-ankr-table.hh",
+      "sha256": "b6941750b297df62c7ed1fa398e23021e58975fadb162184b96eb33707de2de2",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout-bsln-table.hh",
+      "sha256": "545cd27969681a26efef092a1157d042f1cdc56532283b436ada6a3cc0dc4feb",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout-common.hh",
+      "sha256": "d0c0b14d63bbb9780a1cce4861227fffe06cc5e509d1cbec414561673c2482a2",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout-feat-table.hh",
+      "sha256": "2a8608b0cc97a9d18ea744bc7c9994e845d1ae9fa384f5bccba0b9c404db1b3b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout-just-table.hh",
+      "sha256": "fb044098c7ad9aecdee121af61360bcde182cb1b09bbb4d7bd7abf33b4fd813b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout-kerx-table.hh",
+      "sha256": "e7daa3fdf616775e8ab9f8ccc4d6c682cc0d25830e36ce8f8d554fba2286845a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "05ea346c89b79076e7525c63d3c88b90b1f8cdfed9ac3c48624ffe7786622ab1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout-morx-table.hh",
+      "sha256": "df6f838928f58817b645974550b35f48f1cdef864e4f1982d93ef52d0364e326",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout-opbd-table.hh",
+      "sha256": "6494e88fbb9817e2264d7823bd28546c23407ced0ad91b3be04b47495e8d665a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "db9b8cb4e168958179d4ea737fa750f9a0624451b0cf39bccda0d67ea1b6afdc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout-trak-table.hh",
+      "sha256": "de412a04e502477f607b353092b5e34836193df27434887d170810bdf603d7eb",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "05ea346c89b79076e7525c63d3c88b90b1f8cdfed9ac3c48624ffe7786622ab1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout.cc",
+      "sha256": "48079e9d3b67128746eb98806d46920b37892c8c6ebbef8d2c7aecec956be8b6",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47677993aada0f3f872b9182387196c9337a0844d49f0942ee5b380e6ca6b7fb"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout.h",
+      "sha256": "19260855effa365dabbea60543813bdb88c67835aa347b7970e416906f3ff392",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-layout.hh",
+      "sha256": "1a0eb4aac2efc702de0714180dc66669b9b9dbe57bac5470986630f447a3885f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-ltag-table.hh",
+      "sha256": "6d4a919be4c83e4826ef120d6fa2ade98dcae3d92f7ccb98deb3ba7e30c7e53a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-map.cc",
+      "sha256": "3abb6e4f0ce0411cad22bf8866e2bce81346657ed61bd40541dd7f1a2cd24da8",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "dc618f7d300bc6f21d66d2bd3e57e22dfeb27c116e7b49cfd3da49b21dd96ce7"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat-map.hh",
+      "sha256": "8e3ed982d7d742470983421c6a34ae7356aa30e349adbb8e77e3b43b5cbec1a8",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-aat.h",
+      "sha256": "bce10093cad39cfbd5355d763368b22a04ae2bec9289ef0642e5f752bd6e79ff",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-algs.hh",
+      "sha256": "28ad723315735e70eb41f82d993ad5b6f0334712cf088be61a624250dd320e89",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "c7337e2d80ca112e32a7e46f3f8e2e6a43325fa6f397f26afd73c992bfc5a361"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-array.hh",
+      "sha256": "466b944eb3597dca703b41b731a84fd17f8a20976d1ac8e48f86fb59683086ac",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-atomic.hh",
+      "sha256": "0cfb4a8c8644b6601f7472bdc7e26395fca524be3ea491eafee0fa31c537155d",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "eafd502be8e01ce590a593303fb771ea57e8863da914c31463ce999288c3d4d6"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-bimap.hh",
+      "sha256": "a9a6ab75496bb578f9f9bd5d1d1970587aebd440f4cc422f072a9859580a068a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "252da112bd4727c84de11f5da3563b5fbeac710e1598e2c0e654448bbe67b6d7"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-bit-page.hh",
+      "sha256": "b63dc7958c01a50e002885e2ac00bdd4f84e20c1828e147981e777696306b911",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3da45c2087d4894c8182bdf6a385c39f026cb5fb2428f00cb110d9aec31053d1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-bit-set-invertible.hh",
+      "sha256": "19d7716d96cb8314c437e2c764b0232022be4f6b2c192450a54e411d37972828",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3da45c2087d4894c8182bdf6a385c39f026cb5fb2428f00cb110d9aec31053d1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-bit-set.hh",
+      "sha256": "921736475747a8dfa919016c5ab345e436f6ba2c2eab894f42c2a4783507ae25",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3da45c2087d4894c8182bdf6a385c39f026cb5fb2428f00cb110d9aec31053d1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-bit-vector.hh",
+      "sha256": "1b871a7fc4301a8e1bceed2c0ba29708dafd8540eb582222b96a704bf5925897",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "80fd08ff32a5ee1f713253362569174f887ca98007373a1f81de53a60153ce92"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-blob.cc",
+      "sha256": "4293a719d5d4efd833b08064a2a6214acd246ff87f7b0bc9e2c2baadfe43d6ae",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d314d137831e223772643ed6743bf40ff20716a32c6f6f04c06dc37f8cda64b7"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-blob.h",
+      "sha256": "710fe0a1be3b3a344154939be9bf6cc30674f6abd4ae0fcc0d3144b9d6b9a6bd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b7d86d88ef9cc9c4ecd1ce05b00b83683a90877405ed1bb0419093935f5c3403"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-blob.hh",
+      "sha256": "c31502628ab50bd8ee25bc9a4fe09d2ac675d0433e18beda010454b2ca53ebd1",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "5f7e10b45abdc0c5e51cab62d4ef5c59e11afbbb6be411972621ee3e684a0ec5"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-buffer-deserialize-json.hh",
+      "sha256": "8fb43286ed2238c53c84c8384930b54d892bb0c1ed4a36128c96764f51c9b748",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "0bbe3f4bdf564eeb0b70c95da71e54741d3d43bd61edd553560daddf55b4e2eb"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-buffer-deserialize-text-glyphs.hh",
+      "sha256": "a14f20821d18c76fb9f8ded17a513c1469013544fccdf86e1a9cfe567033e488",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9d92fd4da8c55173c33967c005b067190788c58bde42326faddabf9c5541b035"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-buffer-deserialize-text-unicode.hh",
+      "sha256": "a41c1ea83f4d307514344bc1134c9bfd177eab9f97b2610087994ac78d0830c7",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "90f5284fc3037a4d87647e775e9b75399279659fdad4d1a7aa0943ac168714c8"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-buffer-serialize.cc",
+      "sha256": "62af31f1c32cb205eb0299cab409eab80c0ec2190461b821969bf1a5190a5f25",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "819a22b50771e4b183bee69aec91d894c520083c10789a08fbb136fafb90cf97"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-buffer-verify.cc",
+      "sha256": "2e965b25ae722bd7fe4dbf037f627050be5714facfd361f2e116183af55833d7",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "641655d33676afdf1fc03c22074ef4968f3fb522350b0a2e149d4daded5f3de3"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-buffer.cc",
+      "sha256": "60668512015eab55b52316cd2a92a681b8da86a14fb4fe70f8bb10f74d3e7eae",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "124a9a5b6d68aaf77cf2561e1aa260fe8d97a7bb35f42c10f507a3a7d9733f6b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-buffer.h",
+      "sha256": "22a8f215df04e619d74e073f6f7849b65231274a6c807398d505f7d70a5418d7",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "6aaf28b549263cfa36ffb6968b4c240a21da11934c3ec3d164612245920ed450"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-buffer.hh",
+      "sha256": "05c390e41fb7a40505cb0f39285c849a94ceeeaeb5c6cf2413165f3440b62794",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "124a9a5b6d68aaf77cf2561e1aa260fe8d97a7bb35f42c10f507a3a7d9733f6b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-cache.hh",
+      "sha256": "ba11e580d2bf4130124eb5708e2741550b15007a4e430590ba53ce924b696b09",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-cff-interp-common.hh",
+      "sha256": "850a6d622b52b5cd51828f28c57de2e830057fd8de0aa699f89005dde05407ae",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "76677ddff5dbe7c57ceedb75d7ac08bee12b939c24612ca17876342df8af4861"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-cff-interp-cs-common.hh",
+      "sha256": "6bb1f058cb80474a99b9f635bebe08c9545458adb79ec9c85a8c5642dde1a9cf",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "76677ddff5dbe7c57ceedb75d7ac08bee12b939c24612ca17876342df8af4861"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-cff-interp-dict-common.hh",
+      "sha256": "bef4442015b5cb9cad8051fb6d3ed8ddbe2883bad3dfe1c1bed3dddbe6447d92",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "76677ddff5dbe7c57ceedb75d7ac08bee12b939c24612ca17876342df8af4861"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-cff1-interp-cs.hh",
+      "sha256": "a8533e1f78ffdc78540864cb7449123efbc3b9bd8f459fce11fa948cecfa11f7",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "76677ddff5dbe7c57ceedb75d7ac08bee12b939c24612ca17876342df8af4861"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-cff2-interp-cs.hh",
+      "sha256": "e322abc3ec689d383fa60d579a0037d6cd0c0ff2d72d60a9276301b241edff9a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "76677ddff5dbe7c57ceedb75d7ac08bee12b939c24612ca17876342df8af4861"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-common.cc",
+      "sha256": "a5e16efad738acf366e8d0999373c3aa13a32d0f529f1fc466a2e4ca23d5b271",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "8142016c2c6f7f5de4365c934fd795b6209e9fee32448657c27785b8756ee6c4"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-common.h",
+      "sha256": "a8d4765469856d6a34ea2fad587665cdae6aba8922a985eb4d715efce3027f74",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9abdf422cd0f28da4a3df7cb3d235bfe1e08c1c6063b80096c09f818cb818911"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-config.hh",
+      "sha256": "bef78f04da8a18f7ccadec9b03386b027ba72ef526c12a7f8f092738ee0335dd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "f8fed240698f0a26aba8e4cfa8221d55ba19040ff81edba7ae80822e46027b9f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-cplusplus.hh",
+      "sha256": "c876fcc980aa6c9e1ee59bece5724f32076f60d9acf998beedaa8519e9aece8a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9ad7b43d5eb70670f142c91552db901e05b18f79a0b969236ef3746a1a8e5230"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-debug.hh",
+      "sha256": "542c1a73910bd16824aa3550f49b98904338b7f81f4aeaa474eb0064c3292b6a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-decycler.hh",
+      "sha256": "0632868b53758e45ee832a0910e3a8e23f82e0407a2c7d19603e16ca0b1e2558",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "6a01d2bcd462e31ba00969d2444c455678f52ddffcd93e11b1c0594cf1702eb6"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-deprecated.h",
+      "sha256": "ab27435c95c7c65d50a4411695cc9f24e9d3f46145b482c93d54eff34650834c",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "a3bf82590ae2a06f39d45737a6af4257c8a118ca47e2d3ceb868a2c30e176c82"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-dispatch.hh",
+      "sha256": "38359a6994ce7e90db1a9473c16e0b692ca0bc4770f2427bae09becd0024ad80",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "ec281a666b5d220670e5595f2ccb7611ec9d1b2dad15f585c6c47c9dad6e57f8"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-draw.cc",
+      "sha256": "9f72063618e6cdd6736b6201fa72be3617037e291e0ce2722cdf1c0edf3a99d0",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "aec249ff83cd0fbfa2b849fd07b9f6c9de1607319928a32022c2820a004ac1d7"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-draw.h",
+      "sha256": "11ca1a975ec0262120649e8164d323aaa4e652dad53bd87eb2a89356b8706d1b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "aec249ff83cd0fbfa2b849fd07b9f6c9de1607319928a32022c2820a004ac1d7"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-draw.hh",
+      "sha256": "09cc062a868f72adc185131f1419834c9eeef32cf72ef61203ef2a6e0f58b529",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "563aeb18788f1417f4289a32eb27bf0cfeddab0fb465c4e1d89ec015de5221b5"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-face-builder.cc",
+      "sha256": "0f0feb945717bd2608ea723f24aa8bddad4b0fd618feea895c1687c1d67575ef",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e43a553ffc85abd435ac81905a3973e3b5460566e2b43334dec7308c6ca3b3dd"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-face.cc",
+      "sha256": "54b0991f4c289ca73bea3b0e9d9e49637196194931b3952b176f9c9afff7a55b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e43a553ffc85abd435ac81905a3973e3b5460566e2b43334dec7308c6ca3b3dd"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-face.h",
+      "sha256": "1e6b179f97b055c48aaadfe31adc20a090cf463336e7d11b83b834667e88f9dc",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b7d86d88ef9cc9c4ecd1ce05b00b83683a90877405ed1bb0419093935f5c3403"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-face.hh",
+      "sha256": "762b077dac9761e60f0bd4bafaec2dc5b84328348f5d543df9d4796b79d2a0c3",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "acd95de402a840a5eb4e717b69faf51bbcf45985e4de135f627851d504c7b153"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-font.cc",
+      "sha256": "0c064bc8b051134702d7d808710c2424d744c36d3668d4307c78b9e13f7766c9",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e43a553ffc85abd435ac81905a3973e3b5460566e2b43334dec7308c6ca3b3dd"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-font.h",
+      "sha256": "ed9da7f6f2add69402ac7926df3d99813ea1840ca39abe25fbb6ff6f7a44e8bd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b7d86d88ef9cc9c4ecd1ce05b00b83683a90877405ed1bb0419093935f5c3403"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-font.hh",
+      "sha256": "1b3893d2a66c9206c1514c37438279fa276b53d7a1c225c047cb10fecca61824",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "acd95de402a840a5eb4e717b69faf51bbcf45985e4de135f627851d504c7b153"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-geometry.hh",
+      "sha256": "34f0ebecb4ef4fc4f95d84e3b54f3ea186ac2458d341a760a3242c9072eaa461",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "6c4590c76b6b1087fb170d26a09e407b7412d05f53c63239f79c3856a384d709"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-iter.hh",
+      "sha256": "7bfe65e3674feeb461872713354aa391fffa41b1388376e3c00d8c7f4898c133",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "7e03fc6c33a95d417e89d9e8fc034aa8a1621f3b52d3bc6652c65d4e07d9aa66"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-kern.hh",
+      "sha256": "e75bb33b882c2053c275e5334feb337b426b6290fabb8f9aa8b70cea7c248a09",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-limits.hh",
+      "sha256": "c32e990db2e0bd2cd9960014054ce3fef4638b648588e528c2273dff1db95688",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "92f844800806a81d93c4b94849dee5a0b72a60b41eb90942b99b8e14de540f52"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-machinery.hh",
+      "sha256": "3790c63809e91b0533fc1c52c19db2873d7185c508cbd8ad7366470c951b1633",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "ec281a666b5d220670e5595f2ccb7611ec9d1b2dad15f585c6c47c9dad6e57f8"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-map.cc",
+      "sha256": "123f976e0db59c148b6f5e647be0e491a95ddbc90f8358476e25b44ffbb3f303",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-map.h",
+      "sha256": "b073aa19718e43e3535caeddc0015a4e45a89032a76059cc5ab8f3f0d220bece",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-map.hh",
+      "sha256": "2ca55e04d770c8aafffff00137f91df216505cf8263c1da0ee359cf605353d9f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-meta.hh",
+      "sha256": "f3baabab3cd19d5916b283059eb6175257405948ac2865729be75d302d8bbe7b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-multimap.hh",
+      "sha256": "f16feac27df49c23231915e72553996889ec42c2c1a2d63ab1ee931bf669f5bc",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "92f844800806a81d93c4b94849dee5a0b72a60b41eb90942b99b8e14de540f52"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-mutex.hh",
+      "sha256": "450e83b3636c77424bb0dc693eb59bddd7241ff6847f170f8a194225680b820f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "eafd502be8e01ce590a593303fb771ea57e8863da914c31463ce999288c3d4d6"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-null.hh",
+      "sha256": "13b47cb39bf5391fb209ae1b59545a4ce8b5fb016132687b29b7c2d8b3207ac4",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-number-parser.hh",
+      "sha256": "dc718e38d16508f8eaed9d13c8c433a445f457dee085cc04cbc239ca10a9cafe",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "dcdb55f524673d716cd75e68fa614a5bb4e0d1dc8a5a6bf3a908cfbb19b25ec3"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-number.cc",
+      "sha256": "6b9fefa647a42ffab352a3ad0413627700bc15e228adde4aaa7be8bfa1eb61f1",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "633348ad25f29a662fadd2cadab32c6d0f7a7d33e2fc1feaa3669611571cbbe4"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-number.hh",
+      "sha256": "44f1c28c9317ab5c125aa9d837fde597f340e00a7e2dba670f9879405439eb4f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "633348ad25f29a662fadd2cadab32c6d0f7a7d33e2fc1feaa3669611571cbbe4"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-object.hh",
+      "sha256": "d0e9435615f39e4c542c3a72dbc4522a69ab2b6fd0bc3a932934c4c177f6b546",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "eafd502be8e01ce590a593303fb771ea57e8863da914c31463ce999288c3d4d6"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-open-file.hh",
+      "sha256": "655ff7228980365f2a01bae4679e9cd1da668363d91ad62556e6492cec91f59a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e6a9ef193c940c4f4e802de0135aac0a70e3785c2b52630fd45770baf5b0977a"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-open-type.hh",
+      "sha256": "52fb57ecafed9f124a21eaa5764df66d0ac9214e4e1cfd74d77b69dc3a54b79c",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "0c66955b9103af7950dfee5fa22e8fc28f0c1a3b781370ae074ea6b507a7bb18"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-cff-common.hh",
+      "sha256": "778f0cc9f502fd72ba382c71b2ac1760589c1d8b92ba4deffe3c1c1ce24dd2fd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "76677ddff5dbe7c57ceedb75d7ac08bee12b939c24612ca17876342df8af4861"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-cff1-std-str.hh",
+      "sha256": "06173c76c4fd68d91ec998628bdefcd46696350d4fbdae10c2f855ab0da07dfb",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "f4b3d91b4b9ecc6b5e5f14cb5d0667179dc25b51f0a7a75b757584acb4ba7a87"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-cff1-table.cc",
+      "sha256": "f3307bde4158d1ec455a0fd65aa297ed5368c504a5ba85937e0da8d56e33c0cf",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-cff1-table.hh",
+      "sha256": "21efe3eb1466fb32d208ed20d1f8f69cc87cefeaf362d8d80b0f980af4e93d04",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-cff2-table.cc",
+      "sha256": "6362ab912790796a7733d92dd7ebe0d9bada3e80eb1b9b07eec833d14d8f4b8a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-cff2-table.hh",
+      "sha256": "e860d974e1cbd340e69650c7f4bc2c505d6e1ef7fec68386ebc69ec5ea63a85f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-cmap-table.hh",
+      "sha256": "6057e5459ad9c08f48555a6d92282e045f8c3e90465713d96e822a90754afc20",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b3163047457600ed36166110fb899bb2ef6430492e49b95a126af8752604ea0f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-color.cc",
+      "sha256": "19f17656d871e7c05d48f347680452532c7d4342ce5a2f371321a52be387218d",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "756e3dfabf2497cf8b22685333bb159b11960f10e570e94f2837e1268d2f5453"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-color.h",
+      "sha256": "3216a51aabe5e3961e2c11af854ddad57471009cccd8790e2d26e18eaa1f139c",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "aaba9a4036984db6fde1393d2b7750560efbc9af4772918ba5fe811294c9c043"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-deprecated.h",
+      "sha256": "c3a9878ac0633d5e6d7e16821114ad4555458a6924100581f0d16fef5728b1c4",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-face-table-list.hh",
+      "sha256": "6cf6c873d1f10cc0df1620257921abbc9645bdb4ab851cc3a2b6295dc56dacde",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "51896b2509d0be0fc564c3c28d04ccb3d4e32778366eef06dab20a2849002a64"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-face.cc",
+      "sha256": "a8cdc4a58bc5dcc48ba691e529af05067aa7e71c3bc848f66f3fb5615ba1338a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-face.hh",
+      "sha256": "768d8db9c13208e111ef32a0d6d3abeb51ac3463d095657589cdc2f258e1c722",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "6c1e8ae844e20c837e3bfc409b067a05b3e88aa7f93a2477a5db6be942830f61"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-font.cc",
+      "sha256": "94fd7da396844a573e280ac13831f946090cb1f8b1e736429348dbb8d49fae96",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fd6ca151806ca9d3bfecdd84726b7754adadd793ab8c209818617cacbfb58076"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-font.h",
+      "sha256": "e62d178aa73ef9c80b08d3c076db3e99bb8cb4e8219e978e793ef7ffe965f8f1",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "70d3f4761e3043db740ad11aaff13fd711eef2a729b23e8429b48a7d4b97c531"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-gasp-table.hh",
+      "sha256": "0c50108328bceb4d568ad6d5661b4905963abceafa97717d7752d50bb61777dc",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-glyf-table.hh",
+      "sha256": "b9631df8e7c3a6f72cc44918b7f5163202ddf645eb8c38648a6bf9459c58b49a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "be564f1d4e1ec889c70d0bd782806ced00b8fa2ebbcfb6a461c3eae1614d29ce"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-hdmx-table.hh",
+      "sha256": "9f470948bc85cf1ccc65640aca21ea89a41e42b7761a0a1029bb97cd91b014b3",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "4931133c70f36d6b651ac436a8a03d54bce3bb490836900f4a378bdc99c89dc4"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-head-table.hh",
+      "sha256": "7804fa4f333c9b8d479e9a73c89d1000ec8b249d14803462d999da09adeeb6b3",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3c9da06eb6d24182a8cee7648557117437a2267ba7f928fa4dba65bb7e458ff7"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-hhea-table.hh",
+      "sha256": "635244066c849bc6bacbc77d69035021ac82149f49068f2d1f8552c863c67d39",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-hmtx-table.hh",
+      "sha256": "2705c521e3fc7f76e13c41e35adca0f06b5fdf23ee8095815143a0f786b4cffd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "ff274df9c2420bdb0b2b5538210eb1661fc1ac7113d18549ac1dd900206a3172"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-kern-table.hh",
+      "sha256": "6ca4bac449df585e092aac307aaac8b4b317a43f30af67f62545b58a2b40286d",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout-base-table.hh",
+      "sha256": "b2592b187808dd4f92137ac4f0fc09cf5f2c5f84dfa68d84103260e6d20b2784",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "1b83f9ea4aff7767c78ff4d16734226812ca2bbcee6098470713b997d07bbe14"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout-common.hh",
+      "sha256": "2c699dfc8f6a461129ff882ab6cf7f970568908598baaa1a839f80eeb29da596",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9ba3c16cddb5c4dc62e5ef1e9aa34d60e251175df5f1b751c30e595023a37b96"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout-gdef-table.hh",
+      "sha256": "f19e79b06516c0d999d38aca145ecf6f85aa3528c7f17f4f42df031fe1d78e0e",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "aa0fa56d9a903b8f12e067423555ee934f489993d5b98befb74bd0a1cb09d392"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout-gpos-table.hh",
+      "sha256": "f1e182dd04e29f74917890a2c6629c99712deeb70ac44378a703a62040ebfb91",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "32c34904bc2933bddfea352f9f3d6154c29d41134fb85150fa63f41104d0ea48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout-gsub-table.hh",
+      "sha256": "64c954bd8e2be63d2774d249980c8ae9696a435fb3277b03b8ee3cef711cb3f2",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "32c34904bc2933bddfea352f9f3d6154c29d41134fb85150fa63f41104d0ea48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout-gsubgpos.hh",
+      "sha256": "25f501ee37cc1a212172e16485fcb6c9c68ff93f509c54944cf66592137e5190",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "66b74249df2c93ecd8c1080e7738aa69dc25c376accf44f496577e4eec30967f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout-jstf-table.hh",
+      "sha256": "3de4c4aeb1c218c3b25ef50dd17032e7161731eba5067e184c00d48b9fd2ca0b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "a3bf82590ae2a06f39d45737a6af4257c8a118ca47e2d3ceb868a2c30e176c82"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout.cc",
+      "sha256": "43c95d2f9c6e91e5d4e31997b05165ecf4b5335225151b5ef46aa2e693dcef2c",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e0fbe39aa87dd168817f75e7375bfbb906e57601e57993af9beea413ac36a6c6"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout.h",
+      "sha256": "a178b541f07052c97471f4a23a5851d624bcadedd7633c1af7a21a2c294f3c8d",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "ab9a80fc2a939c792ba8e9a5e2d5f73572e227183e8c75118595442943a03434"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-layout.hh",
+      "sha256": "a6cf0a34767acf8afe9336a2854d6eb522fa061314a5068fcd97c6f430d91d08",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "6c1e8ae844e20c837e3bfc409b067a05b3e88aa7f93a2477a5db6be942830f61"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-map.cc",
+      "sha256": "6b4b92b7f6e7af908fe179e172bb09122eb1a6ad0fe5243f9402a0c96931d869",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "dc618f7d300bc6f21d66d2bd3e57e22dfeb27c116e7b49cfd3da49b21dd96ce7"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-map.hh",
+      "sha256": "101d1b7eaa171a39bc841dcb8c11fb0b25d87dfbfe4f461fd090ab8881729404",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "1aceab99c0e77e54635d0f4b542ca505282fff6eed58e983697217dad40a34f8"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-math-table.hh",
+      "sha256": "1e7c07bbfb369bd68cd9a086adf57d7f83c55b11ffda0f3a7b53fd3c2b073c55",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "122cbb57e28609b5dff20700704d5c59c1dc85e83300467bfc5634e7077dd287"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-math.cc",
+      "sha256": "f7aba4bd5c246f03c5637b90b8e48a1a06b6b17f903bc9b1159b6667b1b05a95",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "122cbb57e28609b5dff20700704d5c59c1dc85e83300467bfc5634e7077dd287"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-math.h",
+      "sha256": "4e737e5ed9dcb3db18a64534a1ff2faf638ef720dc30db0ee821324099432f90",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "122cbb57e28609b5dff20700704d5c59c1dc85e83300467bfc5634e7077dd287"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-maxp-table.hh",
+      "sha256": "8caf59ef81ab9e23e17e8fadbd202ee00c127ac1a58473e3b15b1a4c92502d9a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-meta-table.hh",
+      "sha256": "8692468fceb0dd4cd90d5f810460ee1d26921794dd08c63119e3334ef123de77",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "db9b8cb4e168958179d4ea737fa750f9a0624451b0cf39bccda0d67ea1b6afdc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-meta.cc",
+      "sha256": "345e857c42009aac9c049478127fa7279f9de1ab95d2a28f2c3021abf6474aca",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "db9b8cb4e168958179d4ea737fa750f9a0624451b0cf39bccda0d67ea1b6afdc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-meta.h",
+      "sha256": "1d38c9bcbc0d417f8b7e0e818c2f5f9b83d2abddc39f2f116cc0ae84157a572d",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "db9b8cb4e168958179d4ea737fa750f9a0624451b0cf39bccda0d67ea1b6afdc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-metrics.cc",
+      "sha256": "0c8063840b86d0a6646949c0a6895be388d711805d6a7ea389d924f08b6993a3",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e0d3e3e207cd86264a5ad8ff3edfc7c626aaffc486b69f326e13bd8ddf0fe557"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-metrics.h",
+      "sha256": "c65239f100590cf1b1f647bba6ccd1a548a4e89cb80978601ca3050e9884e724",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-metrics.hh",
+      "sha256": "85b44bf5a04c6a859e87bbc4602774ffd1ec984730a600ae4d6a2e57e9bf375f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-name-language-static.hh",
+      "sha256": "9d3e308fd1467443c18b251545360efe80a2bbf68e02ab9fdba6f08f285b2167",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-name-language.hh",
+      "sha256": "a70e2231ad126d79c75009034485ff1c205ba584df1a4d711c3c5232d4745288",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-name-table.hh",
+      "sha256": "9ff82369883b752f707560c3e4b6aa9f24370bd3f9eaf88d30141f0a33d5df2f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-name.cc",
+      "sha256": "bdcab8554abf1e7cd36dfd59c157f9e10f371768bdb864dcea0124cde5ff78ab",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-name.h",
+      "sha256": "5be924687f71a0f98149b1987f3de3fd766ed9e84c4e144250e97048a36cb1ac",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3672840ab1ef8d3048e461b6b9b2f14fdc0edc53f42674059ebc6069224514eb"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-os2-table.hh",
+      "sha256": "5b5ff8efe80433ac65bdcad03816102ab637f0f435aade2d9115d97677a6c9bd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "63ebede07310e3c5e069a1bffb858eb1b76ea5f74aa4ad788c558893d27f1149"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-os2-unicode-ranges.hh",
+      "sha256": "71e0410f0469d6471978ccfa31a2421068bb65a31d3c6f6c13b20664bcce49fa",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "4931133c70f36d6b651ac436a8a03d54bce3bb490836900f4a378bdc99c89dc4"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-post-macroman.hh",
+      "sha256": "490556ad4c97daecf2c06b1774507560eb193b6657be70c5ec73b72a02d35433",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-post-table-v2subset.hh",
+      "sha256": "915d50f238be607428b0d64d4865e43297f87b65d7ed9718e2ced7719e6a664b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e6c32d18ef6e2766128d772037e04c65e83daf994fc658c1f972cf3977e41ed6"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-post-table.hh",
+      "sha256": "e64b1953718c1c27048f4c5b2743db8371c6eaea55e829e2cf08ea5b4d98e678",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "0252e6a327aa5a68c8b3efffe540d07ee43f889c8217a62431ca60053b9a1cbb"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shape-fallback.cc",
+      "sha256": "a12c44c011ec10a86d8fe075eae5c1de3348801b4186bcef65b4641bc5b30f49",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shape-fallback.hh",
+      "sha256": "7b6deee5ae42fd6ce433b4d64425fb47e3511c2c4feecfc7a68856ae0711f6f0",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shape-normalize.cc",
+      "sha256": "0eae6600f98fee3db3691fdf01d0ad17ce39519e51eb79d1fab430eead78ee57",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shape-normalize.hh",
+      "sha256": "d4bab12b9178fd31270965035beaf8131a41bd1a9d1b49a388bdfbbd93a521a3",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shape.cc",
+      "sha256": "86870624f133d2f58e3e056883d27489a474a9ce45d09c3e42d6ec70b83a2623",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "369255a82c63aebf51862b46de60f90777c08399170be002dfe5a179d2a03ab5"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shape.h",
+      "sha256": "5d741f9ae672d4b71aae4d604ed4fe4a9077b84c4b2a9b46f1307f2472e8c4df",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "4c40daa854c3afbcf5545390b73c5bb79bfe6ae1effde81a78feb61f83c87bad"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shape.hh",
+      "sha256": "73d89ba731b46a2036225a317f25bb6ecee2ba1cd2937e754386be8c478ccb0c",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "50bfc2a6aafbc2e450958e266ec51bf5661d22ae9fe8d74502a0fd8ccac4fbbc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic-fallback.hh",
+      "sha256": "c0d647e8c324233530d8fa91c066c9168711ff8f8be6e24bb04444c47eb0c0e4",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic-joining-list.hh",
+      "sha256": "95f678435b43b8397a98fe7c2118504ae01c6cdcc27a4d204c1c4abcf1312967",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic-pua.hh",
+      "sha256": "d33968be3dd9331598afa51d0ce7403515a73625fcd7221ad4fe938b68ec466b",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic-table.hh",
+      "sha256": "3d693020320004494e7fb8cb17661994996d8a7462418c85df0da1ff7bf31c76",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic.cc",
+      "sha256": "2606a46d67367064fed87107400ef96f3aed452b54b63f1aca559d7c31fbe1ae",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "483fdcca0bcab3669d92219803198c8b62d16d1fdfc323cea6c1a5c0eac94ff1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic.hh",
+      "sha256": "080c66f82955bf2a4578fbf946a54cd2c230f9aa241950419ee6630442920b8e",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "0a81397962516dcd2509dff1462928a1bbd13e4844d39a0bf8402ebd2e892702"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-default.cc",
+      "sha256": "0035a3cf8b359f4b4a59ff59b36998c36578174ba836fa74bf00310754451e66",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "483fdcca0bcab3669d92219803198c8b62d16d1fdfc323cea6c1a5c0eac94ff1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-hangul.cc",
+      "sha256": "82e59b4a85bc00b11c4fc8b93a3551755ea391fa96c0a41296bda07957d86d69",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "a3bf82590ae2a06f39d45737a6af4257c8a118ca47e2d3ceb868a2c30e176c82"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-hebrew.cc",
+      "sha256": "4dbb5128ec416028ae347ddac1047a13f5e43cc69df5c3101554577667862a01",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "483fdcca0bcab3669d92219803198c8b62d16d1fdfc323cea6c1a5c0eac94ff1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-indic-machine.hh",
+      "sha256": "67da2e512ba8717c497ee53b06c29b4d8a92a565b89c7946e089862f3d42b264",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "6e9d01c838711bd559a405aa3354454a0c4b28c8e13e35c5efd206e676364950"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-indic-table.cc",
+      "sha256": "b7a455c29a425a237f2ffeff9c6a44ef5a57de1eb5ff73a63e5c5c81a24702d1",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-indic.cc",
+      "sha256": "ab517813e0078f37ee4f5ee86700c15f2e64642b5c78848f07c259a736626158",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-indic.hh",
+      "sha256": "3c6ddb7bc92ac5d641ba1b0206b091e40b0e8f41569f97704a7a6d8eac47d405",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-khmer-machine.hh",
+      "sha256": "fe9aec7e0580e2c14c023763c36a94f8d3e7080b92bcf7c6de3570128881be83",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "1567fd1341b9ad35565c6565f6016614a1561a4a9f3b2a4771d73add56a24af2"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-khmer.cc",
+      "sha256": "52682486c355c1e04eb562c645e9eb5fdeb8bf55ca173359e09b744e1e545f8c",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-myanmar-machine.hh",
+      "sha256": "1fb238d85839ae29012acf53de238714fd780cd434b1a22da4bec20c00ee834e",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "aeb72faa593e284b3c20e76e8784eba5c783ab817373ff2f2451aa6390ece94a"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-myanmar.cc",
+      "sha256": "115f7ca3e0c271d0fbc2a1ae10043af80dc455e30b5f402d9dbe742ba4b91c9b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "a4e2d7660ba351b071986066a1d9274f76ea84a4667fbd629583257e05ab0a50"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-syllabic.cc",
+      "sha256": "09f5b4e7655231428f8463d7be2462d5e1e0486e2cdfe6aeee9c512bcf83e4c1",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3cb4da5312d03b4da8097ac7b9982c9f63640b44ac3222a6778050693fcace89"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-syllabic.hh",
+      "sha256": "62c036fde5151ea30a4f4a46c92ce6ef9ea6c3fd14d405c3e7a33c7274deb655",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3cb4da5312d03b4da8097ac7b9982c9f63640b44ac3222a6778050693fcace89"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-thai.cc",
+      "sha256": "1aa53454b7daaba3ca17023c5f9a8a43c4839b5b983b59b8bc4b20250ed3e83c",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "483fdcca0bcab3669d92219803198c8b62d16d1fdfc323cea6c1a5c0eac94ff1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-use-machine.hh",
+      "sha256": "77cba62b6e49292fa76da43e4274908955f6e74e0a55a5e3104aa70a963818bd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "dc9bdf08d04079394e1db59cead1f765a4809c6e83dd87530e769209caa7d064"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-use-table.hh",
+      "sha256": "224f97f7527cbe0ece6d4269a793d8d6ee0e50658342011c2e41b8fe2f29b4c3",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-use.cc",
+      "sha256": "1cf33c4ed82b65c16e02971a7f9bd5a4257423474a8aa347bfdfd11d66ed6db0",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "0a81397962516dcd2509dff1462928a1bbd13e4844d39a0bf8402ebd2e892702"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-vowel-constraints.cc",
+      "sha256": "fc83b4e8bbb3f898bfeb18bc1e3bfee13d75e5e22bad795ba8103176c8a913ce",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper-vowel-constraints.hh",
+      "sha256": "310be59d8c3baec5f34d9997f304a867205d5dda885038be0d808b7a5eecea4a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-shaper.hh",
+      "sha256": "cee53ee08f5958a9c42e91386a1939fdfaf4c930fe7c41e51eba35e5d53df484",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "8dd11060cf2f74171d193d993f30047335cd2ccce6dd2e49a0b67a70b0e71623"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-stat-table.hh",
+      "sha256": "36b2452b352af7e79e6facba90d72dafb746d8535ba2b85bc507922236fb291d",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-tag-table.hh",
+      "sha256": "6ad375708227ae19905fecaa8bc0bd31baf713ffe0a2a06ee9930a4a392c5054",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-tag.cc",
+      "sha256": "97495fee9782009ec26019aeabc8572bc27d5180daac96586fbf81ce18f20bcd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d0c04fc57c46d7f015092eeae6562c308444b4f9eb54af8f23090d845d5706f9"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var-avar-table.hh",
+      "sha256": "376ed3a9d91171c31459357c6dd78c7b05ed7c2efc62d09d117e72339721bfd0",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var-common.hh",
+      "sha256": "f5f2b8d2e4764ecb93c0314a5939f01f99b9aba2dd6abdfa90d1555d2cac7bed",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e6c32d18ef6e2766128d772037e04c65e83daf994fc658c1f972cf3977e41ed6"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var-cvar-table.hh",
+      "sha256": "494dd559057cc85d4a8ae9708a4291649df9fd702ba9f92abc58c48e35abc06b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "7d448092f1931131945b920955867725a09c80917e0c5d159dc09ab495372220"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var-fvar-table.hh",
+      "sha256": "43744c9abb611ab645e97c9f01e5cc5f11ecf4b5dddb09df9949744f1f610f94",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var-gvar-table.hh",
+      "sha256": "89f4189690746ec9b43bf84eeb3dcd782569ae8415a209e36e18485d61ca101f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3c9a979f1841aa1b7d6b0200e88cf2521157e12e1fef9838a00899d19c2bda0f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var-hvar-table.hh",
+      "sha256": "6b85b3776954e4c56359006c71fde1d9c59f13d8fa723147f3f4bfe373d84923",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var-mvar-table.hh",
+      "sha256": "87f8e46e615d475e3da388295bc98e9e0a6016a3eca0f92331d55f70d8b75b87",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var-varc-table.hh",
+      "sha256": "be2e2ce15201b49fe629052e43e2c30d284d00224c3d45f64760d7ad9027dced",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "fcf07cf29ff2df2b0d2cce5ad78f69761dd6b22e4ef152bc9c6d065296c109d2"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var.cc",
+      "sha256": "dc132fa35aa10d8cadcbfcae86a023999673a0f48bb3add00a37f5919a1570c6",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-var.h",
+      "sha256": "9c438bc34f43afcc95c3f5f390b929903156af93e19473fc29daa650d98cf20e",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "a881e7ccf225835fe28e682dc0d06e0e23a8c181cced7e248e626e760b33ca78"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot-vorg-table.hh",
+      "sha256": "b4fe42d5df11b505a95059e888ee0494cfcc948aca987efb2666e0db7ac03c3a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ot.h",
+      "sha256": "c5c821c47756741bae7a0121f440391a28d5e188824469f2281dd08b8c655a16",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b7d86d88ef9cc9c4ecd1ce05b00b83683a90877405ed1bb0419093935f5c3403"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-outline.cc",
+      "sha256": "f9fc1476f3c696ba55b11bb64c567e610e57ee7658bcebb7cef7c3e535667332",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d142acc172a65cd305f5e9a2e7ac0dbfd788dae355f2b6a4605c78371aafaff9"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-outline.hh",
+      "sha256": "fb94679486aafa32ab9e592f5c56e409b1195ddf87e64da04718975d05d6a34a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9984f350b409ca404bebf3d0fbae3c9797a72e5435c2715f6e1f29ea68abb9dc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-paint-bounded.cc",
+      "sha256": "c91c273c22cb739a8fb70adad65616373385dd9a75d0774b77276e8764407835",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9ad7b43d5eb70670f142c91552db901e05b18f79a0b969236ef3746a1a8e5230"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-paint-bounded.hh",
+      "sha256": "732efedcb24a64197d493e86a82a664a28d53f10516af0b017a1cdb6ace44cc3",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9ad7b43d5eb70670f142c91552db901e05b18f79a0b969236ef3746a1a8e5230"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-paint-extents.cc",
+      "sha256": "3280a6d1272c009e97b0546cadcfe1200b6ff4f9ddc8b4c55ccb013800628bac",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9ad7b43d5eb70670f142c91552db901e05b18f79a0b969236ef3746a1a8e5230"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-paint-extents.hh",
+      "sha256": "8968b21a96f2322d7a001adb962d3ddb94f89942d87bdada62b72d2618a02148",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9ad7b43d5eb70670f142c91552db901e05b18f79a0b969236ef3746a1a8e5230"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-paint.cc",
+      "sha256": "2849cb54f2141f5c7be9a3742a4cbfbf1c3c517baa8f07c877e8e0c84708f622",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "7a7a2d17a40e5f2bb2fb923d0318514cb4c03e6748744b2275a4d03bab8b4c28"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-paint.h",
+      "sha256": "a88458802714be88b79432f32404d9e520466ea1a19ae42928e8ff35b09830bc",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "7a7a2d17a40e5f2bb2fb923d0318514cb4c03e6748744b2275a4d03bab8b4c28"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-paint.hh",
+      "sha256": "c9d7ca96a84e9ffab78b7795e19765b29932f055c66eafe0d1986b611ef2d441",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "7a7a2d17a40e5f2bb2fb923d0318514cb4c03e6748744b2275a4d03bab8b4c28"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-pool.hh",
+      "sha256": "457d99021547c19843d451dec6495f9d7768100d195e58192d72706945e820f8",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "f8fed240698f0a26aba8e4cfa8221d55ba19040ff81edba7ae80822e46027b9f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-priority-queue.hh",
+      "sha256": "d8a03d3df873ed574fd539286db8a9f0361bba47d9baf9492077b759837802e8",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "1857042a111ba6398e0a45d11accc851c0411ce4f147a5e2dfdc0bded31a2fe1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-repacker.hh",
+      "sha256": "f71000c0c0fc125d84a7892f5cdc2c68184dd3d4db449b457126304b298ae0e1",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "1857042a111ba6398e0a45d11accc851c0411ce4f147a5e2dfdc0bded31a2fe1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-sanitize.hh",
+      "sha256": "916530bfe053557b3f1ccbb8e49b76cc093eea3491a0e7862f9e525ab1c40e3e",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "ec281a666b5d220670e5595f2ccb7611ec9d1b2dad15f585c6c47c9dad6e57f8"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-script-list.h",
+      "sha256": "0627d9f6a59a8b09e562e8aeaf414300899308725350beeb50b62b8657399576",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9abdf422cd0f28da4a3df7cb3d235bfe1e08c1c6063b80096c09f818cb818911"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-serialize.hh",
+      "sha256": "cc719154d49ec61b65a2193cfc2499270afa28804e1a54a7ca278428ebbae9a9",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "70dda1cc71cbfe67c0cb4b440d6b334d07c174fabb236e848154dd10b109a4bf"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-set-digest.hh",
+      "sha256": "4f3d61a97ccbaba3620d5e9ecf42ffaab005aef451906301b9ce7ebac47d5680",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-set.cc",
+      "sha256": "0bd89c0a7120b4c7e6c6e23a1d5593ea1c58874135d75054674789ddc0f2dbc4",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-set.h",
+      "sha256": "0ee36c1a0926e51bb2a050687930db464b8e719f5823cd93a0c96226b8ccb783",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-set.hh",
+      "sha256": "e640a5d9d5bd4e1032aeb6d7211ab841899bdd0d17af4162245f4c621176559b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3da45c2087d4894c8182bdf6a385c39f026cb5fb2428f00cb110d9aec31053d1"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-shape-plan.cc",
+      "sha256": "596571d35963dbcdbce8899e5b54afbddcfc097230b4b2f6539955d273466bc7",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-shape-plan.h",
+      "sha256": "03555c82558fa347e96549ec99698fae790c2cfb9ee795c5ea48ff4134e06224",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-shape-plan.hh",
+      "sha256": "fb8781a2a3c59c3002b896569544142631c4b4b65d318abad0487ba97ab98cbd",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "502bfaa0da21da7f0a48126496fb31f8bfadd50efb3b0fbd6a6bc96fe0db3ad4"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-shape.cc",
+      "sha256": "3d58a46a316939e15fe9801e1bd94d838acd01ada5dcb2c7801d9abd15c1bcff",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e43a553ffc85abd435ac81905a3973e3b5460566e2b43334dec7308c6ca3b3dd"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-shape.h",
+      "sha256": "3adfcf510853bc118a120b7633c0e4d15134e4ac4bdf7911cb85511887e7e328",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "e43a553ffc85abd435ac81905a3973e3b5460566e2b43334dec7308c6ca3b3dd"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-shaper-impl.hh",
+      "sha256": "459fb7af72bdcce6a46899f23f3d5fcd68dbc311c65973a533bcb53051a3f485",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-shaper-list.hh",
+      "sha256": "505e341b21a75dec5a934cbc7248c76bc3c920a5039ec0121fe43b5fc1654951",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-shaper.cc",
+      "sha256": "9b1d7d4edaae3107424510aeeff21524c1893f7b849abf44461e4c0b5566cd8e",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-shaper.hh",
+      "sha256": "1d3a3d3d92a8b9debd026ac1c510d964335d6b49cea42db490a60bacea84372b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-static.cc",
+      "sha256": "7029b7197dabf27f86aa2e213085a3d5e954b1210363463c72883621589ae8cc",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-string-array.hh",
+      "sha256": "d8bd27493c2c0f6a5743a076c85d46b4f27c4de4e07864ee76d527f4e215a8ba",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-style.h",
+      "sha256": "6e88aec3ae6db176b37e4d6089923f78859134a26fd12b33b40b772e91673b5a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "db9b8cb4e168958179d4ea737fa750f9a0624451b0cf39bccda0d67ea1b6afdc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-accelerator.hh",
+      "sha256": "8a29588d8a138aac2d304dd1774ba61ba034ad2e80a503ecf7f30aa993e07141",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-cff-common.cc",
+      "sha256": "b2396a0640147f065e185dbac5383657b088ae007eba788261ad6e5fee6baf98",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-cff-common.hh",
+      "sha256": "e1269ecb5f66b9e62262a6103b31dfce17dc002ca30e890796695995fbb5e72d",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-cff1.cc",
+      "sha256": "8281dc0a43976dfbe78d013d51dddb796eb162c21869d5449e32ca4f04bfd4d3",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-cff2.cc",
+      "sha256": "67856b5eef8d0988c4932b323bd0d293cbbddbe8f9b31c4c30c1a2c13dfe4a32",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-input.cc",
+      "sha256": "badbe47dcb71e6fc58474d983d2e3702e2ae4f9684cd505511e74ddc4a0aa51a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "22c4d0f3ffd2f115abb686af9813b68f5139f92055b2a81778adab08063305d8"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-input.hh",
+      "sha256": "0ec2ac9e31e09d6334e3f6de0e6627307a373897ce0f8c42055d81e309e1f07f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "85c80e19f292326cf701aeade5d526743521cbb478bd963e31220f8185dc69eb"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-instancer-iup.cc",
+      "sha256": "e6fb566c9654bc83d28e2e00e967e450349cee41b813b2263692e3815dd7b7ca",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "7dc316cbac93bdf097ca311f0b906acf86af67cdaceb411e595652b67829cc93"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-instancer-iup.hh",
+      "sha256": "3d671c4fd7e261670438cdfd4b71ece252c671cb1656b8b5f3103736cb4c4e82",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "7dc316cbac93bdf097ca311f0b906acf86af67cdaceb411e595652b67829cc93"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-instancer-solver.cc",
+      "sha256": "ffed3f9ed6fdbb1d8a92a19b37e43065efaa5b5fe68cea786e82dfe37e7a16d5",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9984f350b409ca404bebf3d0fbae3c9797a72e5435c2715f6e1f29ea68abb9dc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-instancer-solver.hh",
+      "sha256": "251d4724a826ec7038526fe9d402e448cc7426167daff1f872915a8ebcf5dfdf",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9984f350b409ca404bebf3d0fbae3c9797a72e5435c2715f6e1f29ea68abb9dc"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-plan-layout.cc",
+      "sha256": "fc4751397c7cf8245913f4b2edfdc4ebd2d5b0aae32f40b531f20b0c330166a4",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "c6c28f5888e53e87dc13d8d65604e41ed1af6a22415b58de5253217cb2ddfd49"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-plan-member-list.hh",
+      "sha256": "836d72c12bc64f3ea17ea42d449de12031df70a9f8b13c087f4a5858dfc44a22",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "623daa73417bc486e56dc14180d3721cacb69531b5ddbb7e0a6f0283f2a4ed46"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-plan-var.cc",
+      "sha256": "e80df3cd42ee4126d4cf9b006a452ac1908c958c9f70c5d8e1902c8a78559fa9",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "3e091aaeb7bc1d1d0997ea4cae4ac230c5c22995139d26faa77fdd2e7ca38fbd"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-plan.cc",
+      "sha256": "9d11348dd5b96882e7224b38f07eb136730ea4c778078dcb40335665be7f212c",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "85c80e19f292326cf701aeade5d526743521cbb478bd963e31220f8185dc69eb"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-plan.hh",
+      "sha256": "1212dac306b129dd35b60a9caa737e0d6fa7a59fcb4bbf63d4f7a59e3dd3079b",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "85c80e19f292326cf701aeade5d526743521cbb478bd963e31220f8185dc69eb"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-serialize.cc",
+      "sha256": "a32726499e89883377d21a9ae0b07e2af5d59aa902fb76f869415be3a6f40b35",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "ce48b9e063c6b5308338c035a7cbda41f4fe41092d8edbfd4b29559906f80b5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset-serialize.h",
+      "sha256": "cd0a15ab76193618e82077b53735338d4c5581d7c1718c3af2fafeac1161b13a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "ce48b9e063c6b5308338c035a7cbda41f4fe41092d8edbfd4b29559906f80b5b"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset.cc",
+      "sha256": "51b3f0ebb79d198a85438cfb641ef11e89d47d0db368efab0ff5de60ba315452",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "22c4d0f3ffd2f115abb686af9813b68f5139f92055b2a81778adab08063305d8"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset.h",
+      "sha256": "6b6746c12ac8cf35dd7bfbc19bb43e0c38a48cd820b802b113c0f5eb3589a54f",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "779ad3f166722b0e451451f5cc4f644d92777655e014d25b7f6686905d78dee5"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-subset.hh",
+      "sha256": "eba45feb35caca6c388f123025f80492dbce654991cfd4be611706d9294b2e3a",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "85c80e19f292326cf701aeade5d526743521cbb478bd963e31220f8185dc69eb"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ucd-table.hh",
+      "sha256": "fe3eac3e3db2e434fee86abd05a5887b47921f66cc9f85e4c48f05b5b82401d0",
+      "classification": "no-leading-grant-root-license-retained",
+      "noticeBlock": null
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-ucd.cc",
+      "sha256": "0bb1dc09aee15ca98a2222f7307d1a9d279646c486f8240efd50035c86554420",
+      "classification": "ISC-inline",
+      "noticeBlock": "c5e0a9b613b47f55cdc47cc236007f7fa5715933ddd5c832fdae4e7b8c052550"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-unicode-emoji-table.hh",
+      "sha256": "9a41a5392f9db6424a87b983dc7b2d69849508b64c105e3ba7c1f70695b1c680",
+      "classification": "Unicode-data-reference",
+      "noticeBlock": "6751b5ae09ecea42bbbfb52f5bea33f830edf16a01167bad77f903ed140b25ac"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-unicode.cc",
+      "sha256": "bb710579e8221b0983c5b341351f3a9c1bda738c9c00940f8eb8478bb40e26eb",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "8c4453ccab0329955ba32133989934ea88e946607ade9603eabfdef9e2ae578a"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-unicode.h",
+      "sha256": "6131f0eb9e411fa392101f58793f4e4347ec3bc6fe45226736b186004cea8038",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "64be246bd1ef81ae8d58894ae8818cbc78c95ac5e054e024af1902df712de0d2"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-unicode.hh",
+      "sha256": "e2d3179d57232fd4b7ece1e62dc6f4d2ffb3ae96a1e812c0ef2ebed6e816d9ae",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "8c4453ccab0329955ba32133989934ea88e946607ade9603eabfdef9e2ae578a"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-utf.hh",
+      "sha256": "fb2ad6ef31c359636bf0dbce1cbbac44eb1c97038757ca6324f725759861ce1d",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "c8575c77fe01974e1bbdd15b1f7218eb1b558a7712006f14a93dc0d9a5032c9c"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-vector.hh",
+      "sha256": "71a212d42d9ef9ac67b238d11a8aaa4b5e35fad64ddb6793e8f3c175aca6790e",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "69b037639c284336e162753cb04c3e156b68b2d3e12470da04a4df5c2e9a6f12"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb-version.h",
+      "sha256": "99f4368068f2a6b8980c648642109e9583291f70819ef8bfa4cd12b1fe67d1d5",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "8b00f055903bc65af921860934a6a5392cad1a9ccb0e353d9c18c6e1be25843a"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb.h",
+      "sha256": "31a1b53db3ee4395916e6d4f105b2c64772b8037bbb97d0e6d1e4a905eb6c6c9",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "b7d86d88ef9cc9c4ecd1ce05b00b83683a90877405ed1bb0419093935f5c3403"
+    },
+    {
+      "source": "third_party/externals/harfbuzz/src/hb.hh",
+      "sha256": "f6facfbaf67ea09b10b2fd3b2cc248359f4923dedf5dc72051a8e55dce06eaf1",
+      "classification": "OldMIT-inline",
+      "noticeBlock": "9abdf422cd0f28da4a3df7cb3d235bfe1e08c1c6063b80096c09f818cb818911"
+    }
+  ],
+  "blocks": {
+    "707ccccfff56b2db6eaef0b3684630635f48a2eb2ff39010896b471e97a375c2": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/OT/Color/CBDT/CBDT.hh"
+      ],
+      "sha256": "707ccccfff56b2db6eaef0b3684630635f48a2eb2ff39010896b471e97a375c2"
+    },
+    "b2fa5a438e754cab54dddac04fe6479bda4730e6153d6c9cba7c43fbb53c1c0f": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/OT/Color/COLR/COLR.hh",
+        "third_party/externals/harfbuzz/src/OT/Color/sbix/sbix.hh"
+      ],
+      "sha256": "b2fa5a438e754cab54dddac04fe6479bda4730e6153d6c9cba7c43fbb53c1c0f"
+    },
+    "6dd82949ea2f763eac04078cbdb7ddc6fcc0f82239b8cad82526c074e28fe9ce": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/OT/Color/COLR/colrv1-closure.hh"
+      ],
+      "sha256": "6dd82949ea2f763eac04078cbdb7ddc6fcc0f82239b8cad82526c074e28fe9ce"
+    },
+    "6997873a984fdf00ce3eaa70ab6acb343a89d3db5a5fab8dcc3a698c98ff51b9": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/OT/Color/CPAL/CPAL.hh"
+      ],
+      "sha256": "6997873a984fdf00ce3eaa70ab6acb343a89d3db5a5fab8dcc3a698c98ff51b9"
+    },
+    "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/OT/Color/svg/svg.hh",
+        "third_party/externals/harfbuzz/src/hb-aat-layout-ankr-table.hh",
+        "third_party/externals/harfbuzz/src/hb-aat-layout-bsln-table.hh",
+        "third_party/externals/harfbuzz/src/hb-aat-layout-feat-table.hh",
+        "third_party/externals/harfbuzz/src/hb-aat-layout-just-table.hh",
+        "third_party/externals/harfbuzz/src/hb-aat-layout.h",
+        "third_party/externals/harfbuzz/src/hb-aat-ltag-table.hh",
+        "third_party/externals/harfbuzz/src/hb-aat.h",
+        "third_party/externals/harfbuzz/src/hb-ot-gasp-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-metrics.h",
+        "third_party/externals/harfbuzz/src/hb-ot-metrics.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-stat-table.hh"
+      ],
+      "sha256": "244837645167e8e38335b933a09b01f6ee4448e95abd981f733f9c9ed42f1283"
+    },
+    "8cf447c53ffa79bfb1fdb94d0d00e81cc41b8a522de16a4932a2036762968c27": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/OT/Layout/Common/Coverage.hh",
+        "third_party/externals/harfbuzz/src/OT/Layout/Common/CoverageFormat2.hh",
+        "third_party/externals/harfbuzz/src/OT/Layout/Common/RangeRecord.hh",
+        "third_party/externals/harfbuzz/src/OT/Layout/types.hh"
+      ],
+      "sha256": "8cf447c53ffa79bfb1fdb94d0d00e81cc41b8a522de16a4932a2036762968c27"
+    },
+    "fa576aa9cba8b26c85d2d313a080a25615b6515b40d84a6b238cb642832cadfc": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/OT/Layout/Common/CoverageFormat1.hh"
+      ],
+      "sha256": "fa576aa9cba8b26c85d2d313a080a25615b6515b40d84a6b238cb642832cadfc"
+    },
+    "aa0fa56d9a903b8f12e067423555ee934f489993d5b98befb74bd0a1cb09d392": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/OT/Layout/GDEF/GDEF.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-layout-gdef-table.hh"
+      ],
+      "sha256": "aa0fa56d9a903b8f12e067423555ee934f489993d5b98befb74bd0a1cb09d392"
+    },
+    "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/OT/name/name.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-hhea-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-maxp-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-name-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-shape-fallback.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-shape-normalize.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-indic.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-khmer.cc"
+      ],
+      "sha256": "fa606f1515af24c11a2ecff4b08db4b81c9193621df463cc3ca5e0ff2b2eae48"
+    },
+    "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/graph/classdef-graph.hh",
+        "third_party/externals/harfbuzz/src/graph/coverage-graph.hh",
+        "third_party/externals/harfbuzz/src/graph/graph.hh",
+        "third_party/externals/harfbuzz/src/graph/gsubgpos-context.cc",
+        "third_party/externals/harfbuzz/src/graph/gsubgpos-context.hh",
+        "third_party/externals/harfbuzz/src/graph/gsubgpos-graph.hh",
+        "third_party/externals/harfbuzz/src/graph/markbasepos-graph.hh",
+        "third_party/externals/harfbuzz/src/graph/pairpos-graph.hh",
+        "third_party/externals/harfbuzz/src/graph/serialize.hh",
+        "third_party/externals/harfbuzz/src/graph/split-helpers.hh",
+        "third_party/externals/harfbuzz/src/hb-subset-accelerator.hh"
+      ],
+      "sha256": "d9dada671a748ce7ae12d381d1a03fb538555cb185bcda15c521adeb173b1c59"
+    },
+    "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-aat-layout-common.hh",
+        "third_party/externals/harfbuzz/src/hb-aat-layout-morx-table.hh",
+        "third_party/externals/harfbuzz/src/hb-aat-layout.hh",
+        "third_party/externals/harfbuzz/src/hb-debug.hh",
+        "third_party/externals/harfbuzz/src/hb-kern.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-kern-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-post-macroman.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-var-avar-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-var-fvar-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-var-hvar-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-var-mvar-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-var.cc",
+        "third_party/externals/harfbuzz/src/hb-string-array.hh"
+      ],
+      "sha256": "47db2b7cc2b8bd76f56a3093aaa0f826d3aa9c0137a4d173950c4b83b8edfb5b"
+    },
+    "05ea346c89b79076e7525c63d3c88b90b1f8cdfed9ac3c48624ffe7786622ab1": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-aat-layout-kerx-table.hh",
+        "third_party/externals/harfbuzz/src/hb-aat-layout-trak-table.hh"
+      ],
+      "sha256": "05ea346c89b79076e7525c63d3c88b90b1f8cdfed9ac3c48624ffe7786622ab1"
+    },
+    "db9b8cb4e168958179d4ea737fa750f9a0624451b0cf39bccda0d67ea1b6afdc": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-aat-layout-opbd-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-meta-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-meta.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-meta.h",
+        "third_party/externals/harfbuzz/src/hb-style.h"
+      ],
+      "sha256": "db9b8cb4e168958179d4ea737fa750f9a0624451b0cf39bccda0d67ea1b6afdc"
+    },
+    "47677993aada0f3f872b9182387196c9337a0844d49f0942ee5b380e6ca6b7fb": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-aat-layout.cc"
+      ],
+      "sha256": "47677993aada0f3f872b9182387196c9337a0844d49f0942ee5b380e6ca6b7fb"
+    },
+    "dc618f7d300bc6f21d66d2bd3e57e22dfeb27c116e7b49cfd3da49b21dd96ce7": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-aat-map.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-map.cc"
+      ],
+      "sha256": "dc618f7d300bc6f21d66d2bd3e57e22dfeb27c116e7b49cfd3da49b21dd96ce7"
+    },
+    "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-aat-map.hh",
+        "third_party/externals/harfbuzz/src/hb-array.hh",
+        "third_party/externals/harfbuzz/src/hb-map.cc",
+        "third_party/externals/harfbuzz/src/hb-map.h",
+        "third_party/externals/harfbuzz/src/hb-map.hh",
+        "third_party/externals/harfbuzz/src/hb-meta.hh",
+        "third_party/externals/harfbuzz/src/hb-null.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-deprecated.h",
+        "third_party/externals/harfbuzz/src/hb-ot-face.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-name-language-static.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-name-language.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-name.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-vowel-constraints.hh",
+        "third_party/externals/harfbuzz/src/hb-static.cc"
+      ],
+      "sha256": "755a3d710330006f52deafcae58e81d463fdaeb3f5c9ca78f4be508bfcdfe25c"
+    },
+    "c7337e2d80ca112e32a7e46f3f8e2e6a43325fa6f397f26afd73c992bfc5a361": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-algs.hh"
+      ],
+      "sha256": "c7337e2d80ca112e32a7e46f3f8e2e6a43325fa6f397f26afd73c992bfc5a361"
+    },
+    "eafd502be8e01ce590a593303fb771ea57e8863da914c31463ce999288c3d4d6": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-atomic.hh",
+        "third_party/externals/harfbuzz/src/hb-mutex.hh",
+        "third_party/externals/harfbuzz/src/hb-object.hh"
+      ],
+      "sha256": "eafd502be8e01ce590a593303fb771ea57e8863da914c31463ce999288c3d4d6"
+    },
+    "252da112bd4727c84de11f5da3563b5fbeac710e1598e2c0e654448bbe67b6d7": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-bimap.hh"
+      ],
+      "sha256": "252da112bd4727c84de11f5da3563b5fbeac710e1598e2c0e654448bbe67b6d7"
+    },
+    "3da45c2087d4894c8182bdf6a385c39f026cb5fb2428f00cb110d9aec31053d1": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-bit-page.hh",
+        "third_party/externals/harfbuzz/src/hb-bit-set-invertible.hh",
+        "third_party/externals/harfbuzz/src/hb-bit-set.hh",
+        "third_party/externals/harfbuzz/src/hb-set.hh"
+      ],
+      "sha256": "3da45c2087d4894c8182bdf6a385c39f026cb5fb2428f00cb110d9aec31053d1"
+    },
+    "80fd08ff32a5ee1f713253362569174f887ca98007373a1f81de53a60153ce92": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-bit-vector.hh"
+      ],
+      "sha256": "80fd08ff32a5ee1f713253362569174f887ca98007373a1f81de53a60153ce92"
+    },
+    "d314d137831e223772643ed6743bf40ff20716a32c6f6f04c06dc37f8cda64b7": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-blob.cc"
+      ],
+      "sha256": "d314d137831e223772643ed6743bf40ff20716a32c6f6f04c06dc37f8cda64b7"
+    },
+    "b7d86d88ef9cc9c4ecd1ce05b00b83683a90877405ed1bb0419093935f5c3403": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-blob.h",
+        "third_party/externals/harfbuzz/src/hb-face.h",
+        "third_party/externals/harfbuzz/src/hb-font.h",
+        "third_party/externals/harfbuzz/src/hb-ot.h",
+        "third_party/externals/harfbuzz/src/hb.h"
+      ],
+      "sha256": "b7d86d88ef9cc9c4ecd1ce05b00b83683a90877405ed1bb0419093935f5c3403"
+    },
+    "5f7e10b45abdc0c5e51cab62d4ef5c59e11afbbb6be411972621ee3e684a0ec5": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-blob.hh"
+      ],
+      "sha256": "5f7e10b45abdc0c5e51cab62d4ef5c59e11afbbb6be411972621ee3e684a0ec5"
+    },
+    "0bbe3f4bdf564eeb0b70c95da71e54741d3d43bd61edd553560daddf55b4e2eb": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-buffer-deserialize-json.hh"
+      ],
+      "sha256": "0bbe3f4bdf564eeb0b70c95da71e54741d3d43bd61edd553560daddf55b4e2eb"
+    },
+    "9d92fd4da8c55173c33967c005b067190788c58bde42326faddabf9c5541b035": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-buffer-deserialize-text-glyphs.hh"
+      ],
+      "sha256": "9d92fd4da8c55173c33967c005b067190788c58bde42326faddabf9c5541b035"
+    },
+    "90f5284fc3037a4d87647e775e9b75399279659fdad4d1a7aa0943ac168714c8": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-buffer-deserialize-text-unicode.hh"
+      ],
+      "sha256": "90f5284fc3037a4d87647e775e9b75399279659fdad4d1a7aa0943ac168714c8"
+    },
+    "819a22b50771e4b183bee69aec91d894c520083c10789a08fbb136fafb90cf97": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-buffer-serialize.cc"
+      ],
+      "sha256": "819a22b50771e4b183bee69aec91d894c520083c10789a08fbb136fafb90cf97"
+    },
+    "641655d33676afdf1fc03c22074ef4968f3fb522350b0a2e149d4daded5f3de3": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-buffer-verify.cc"
+      ],
+      "sha256": "641655d33676afdf1fc03c22074ef4968f3fb522350b0a2e149d4daded5f3de3"
+    },
+    "124a9a5b6d68aaf77cf2561e1aa260fe8d97a7bb35f42c10f507a3a7d9733f6b": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-buffer.cc",
+        "third_party/externals/harfbuzz/src/hb-buffer.hh"
+      ],
+      "sha256": "124a9a5b6d68aaf77cf2561e1aa260fe8d97a7bb35f42c10f507a3a7d9733f6b"
+    },
+    "6aaf28b549263cfa36ffb6968b4c240a21da11934c3ec3d164612245920ed450": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-buffer.h"
+      ],
+      "sha256": "6aaf28b549263cfa36ffb6968b4c240a21da11934c3ec3d164612245920ed450"
+    },
+    "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-cache.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-shape-fallback.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-shape-normalize.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic-fallback.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-indic.hh",
+        "third_party/externals/harfbuzz/src/hb-set-digest.hh",
+        "third_party/externals/harfbuzz/src/hb-set.cc",
+        "third_party/externals/harfbuzz/src/hb-set.h",
+        "third_party/externals/harfbuzz/src/hb-shape-plan.cc",
+        "third_party/externals/harfbuzz/src/hb-shape-plan.h",
+        "third_party/externals/harfbuzz/src/hb-shaper-impl.hh",
+        "third_party/externals/harfbuzz/src/hb-shaper-list.hh",
+        "third_party/externals/harfbuzz/src/hb-shaper.cc",
+        "third_party/externals/harfbuzz/src/hb-shaper.hh"
+      ],
+      "sha256": "b4b4bf55f7eb60ecad7e28bfd449e4d5e295aabe716f01e702106b2209c852ec"
+    },
+    "76677ddff5dbe7c57ceedb75d7ac08bee12b939c24612ca17876342df8af4861": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-cff-interp-common.hh",
+        "third_party/externals/harfbuzz/src/hb-cff-interp-cs-common.hh",
+        "third_party/externals/harfbuzz/src/hb-cff-interp-dict-common.hh",
+        "third_party/externals/harfbuzz/src/hb-cff1-interp-cs.hh",
+        "third_party/externals/harfbuzz/src/hb-cff2-interp-cs.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-cff-common.hh"
+      ],
+      "sha256": "76677ddff5dbe7c57ceedb75d7ac08bee12b939c24612ca17876342df8af4861"
+    },
+    "8142016c2c6f7f5de4365c934fd795b6209e9fee32448657c27785b8756ee6c4": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-common.cc"
+      ],
+      "sha256": "8142016c2c6f7f5de4365c934fd795b6209e9fee32448657c27785b8756ee6c4"
+    },
+    "9abdf422cd0f28da4a3df7cb3d235bfe1e08c1c6063b80096c09f818cb818911": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-common.h",
+        "third_party/externals/harfbuzz/src/hb-script-list.h",
+        "third_party/externals/harfbuzz/src/hb.hh"
+      ],
+      "sha256": "9abdf422cd0f28da4a3df7cb3d235bfe1e08c1c6063b80096c09f818cb818911"
+    },
+    "f8fed240698f0a26aba8e4cfa8221d55ba19040ff81edba7ae80822e46027b9f": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-config.hh",
+        "third_party/externals/harfbuzz/src/hb-pool.hh"
+      ],
+      "sha256": "f8fed240698f0a26aba8e4cfa8221d55ba19040ff81edba7ae80822e46027b9f"
+    },
+    "9ad7b43d5eb70670f142c91552db901e05b18f79a0b969236ef3746a1a8e5230": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-cplusplus.hh",
+        "third_party/externals/harfbuzz/src/hb-paint-bounded.cc",
+        "third_party/externals/harfbuzz/src/hb-paint-bounded.hh",
+        "third_party/externals/harfbuzz/src/hb-paint-extents.cc",
+        "third_party/externals/harfbuzz/src/hb-paint-extents.hh"
+      ],
+      "sha256": "9ad7b43d5eb70670f142c91552db901e05b18f79a0b969236ef3746a1a8e5230"
+    },
+    "6a01d2bcd462e31ba00969d2444c455678f52ddffcd93e11b1c0594cf1702eb6": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-decycler.hh"
+      ],
+      "sha256": "6a01d2bcd462e31ba00969d2444c455678f52ddffcd93e11b1c0594cf1702eb6"
+    },
+    "a3bf82590ae2a06f39d45737a6af4257c8a118ca47e2d3ceb868a2c30e176c82": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-deprecated.h",
+        "third_party/externals/harfbuzz/src/hb-ot-layout-jstf-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-hangul.cc"
+      ],
+      "sha256": "a3bf82590ae2a06f39d45737a6af4257c8a118ca47e2d3ceb868a2c30e176c82"
+    },
+    "ec281a666b5d220670e5595f2ccb7611ec9d1b2dad15f585c6c47c9dad6e57f8": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-dispatch.hh",
+        "third_party/externals/harfbuzz/src/hb-machinery.hh",
+        "third_party/externals/harfbuzz/src/hb-sanitize.hh"
+      ],
+      "sha256": "ec281a666b5d220670e5595f2ccb7611ec9d1b2dad15f585c6c47c9dad6e57f8"
+    },
+    "aec249ff83cd0fbfa2b849fd07b9f6c9de1607319928a32022c2820a004ac1d7": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-draw.cc",
+        "third_party/externals/harfbuzz/src/hb-draw.h"
+      ],
+      "sha256": "aec249ff83cd0fbfa2b849fd07b9f6c9de1607319928a32022c2820a004ac1d7"
+    },
+    "563aeb18788f1417f4289a32eb27bf0cfeddab0fb465c4e1d89ec015de5221b5": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-draw.hh"
+      ],
+      "sha256": "563aeb18788f1417f4289a32eb27bf0cfeddab0fb465c4e1d89ec015de5221b5"
+    },
+    "e43a553ffc85abd435ac81905a3973e3b5460566e2b43334dec7308c6ca3b3dd": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-face-builder.cc",
+        "third_party/externals/harfbuzz/src/hb-face.cc",
+        "third_party/externals/harfbuzz/src/hb-font.cc",
+        "third_party/externals/harfbuzz/src/hb-shape.cc",
+        "third_party/externals/harfbuzz/src/hb-shape.h"
+      ],
+      "sha256": "e43a553ffc85abd435ac81905a3973e3b5460566e2b43334dec7308c6ca3b3dd"
+    },
+    "acd95de402a840a5eb4e717b69faf51bbcf45985e4de135f627851d504c7b153": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-face.hh",
+        "third_party/externals/harfbuzz/src/hb-font.hh"
+      ],
+      "sha256": "acd95de402a840a5eb4e717b69faf51bbcf45985e4de135f627851d504c7b153"
+    },
+    "6c4590c76b6b1087fb170d26a09e407b7412d05f53c63239f79c3856a384d709": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-geometry.hh"
+      ],
+      "sha256": "6c4590c76b6b1087fb170d26a09e407b7412d05f53c63239f79c3856a384d709"
+    },
+    "7e03fc6c33a95d417e89d9e8fc034aa8a1621f3b52d3bc6652c65d4e07d9aa66": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-iter.hh"
+      ],
+      "sha256": "7e03fc6c33a95d417e89d9e8fc034aa8a1621f3b52d3bc6652c65d4e07d9aa66"
+    },
+    "92f844800806a81d93c4b94849dee5a0b72a60b41eb90942b99b8e14de540f52": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-limits.hh",
+        "third_party/externals/harfbuzz/src/hb-multimap.hh"
+      ],
+      "sha256": "92f844800806a81d93c4b94849dee5a0b72a60b41eb90942b99b8e14de540f52"
+    },
+    "dcdb55f524673d716cd75e68fa614a5bb4e0d1dc8a5a6bf3a908cfbb19b25ec3": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-number-parser.hh"
+      ],
+      "sha256": "dcdb55f524673d716cd75e68fa614a5bb4e0d1dc8a5a6bf3a908cfbb19b25ec3"
+    },
+    "633348ad25f29a662fadd2cadab32c6d0f7a7d33e2fc1feaa3669611571cbbe4": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-number.cc",
+        "third_party/externals/harfbuzz/src/hb-number.hh"
+      ],
+      "sha256": "633348ad25f29a662fadd2cadab32c6d0f7a7d33e2fc1feaa3669611571cbbe4"
+    },
+    "e6a9ef193c940c4f4e802de0135aac0a70e3785c2b52630fd45770baf5b0977a": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-open-file.hh"
+      ],
+      "sha256": "e6a9ef193c940c4f4e802de0135aac0a70e3785c2b52630fd45770baf5b0977a"
+    },
+    "0c66955b9103af7950dfee5fa22e8fc28f0c1a3b781370ae074ea6b507a7bb18": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-open-type.hh"
+      ],
+      "sha256": "0c66955b9103af7950dfee5fa22e8fc28f0c1a3b781370ae074ea6b507a7bb18"
+    },
+    "f4b3d91b4b9ecc6b5e5f14cb5d0667179dc25b51f0a7a75b757584acb4ba7a87": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-cff1-std-str.hh"
+      ],
+      "sha256": "f4b3d91b4b9ecc6b5e5f14cb5d0667179dc25b51f0a7a75b757584acb4ba7a87"
+    },
+    "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-cff1-table.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-cff1-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-cff2-table.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-cff2-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-vorg-table.hh",
+        "third_party/externals/harfbuzz/src/hb-subset-cff-common.cc",
+        "third_party/externals/harfbuzz/src/hb-subset-cff-common.hh",
+        "third_party/externals/harfbuzz/src/hb-subset-cff1.cc",
+        "third_party/externals/harfbuzz/src/hb-subset-cff2.cc"
+      ],
+      "sha256": "9896681cb17d24978ed57c8240faa9c5d7ccc695ee02165d13fd91ff1fab0d1f"
+    },
+    "b3163047457600ed36166110fb899bb2ef6430492e49b95a126af8752604ea0f": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-cmap-table.hh"
+      ],
+      "sha256": "b3163047457600ed36166110fb899bb2ef6430492e49b95a126af8752604ea0f"
+    },
+    "756e3dfabf2497cf8b22685333bb159b11960f10e570e94f2837e1268d2f5453": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-color.cc"
+      ],
+      "sha256": "756e3dfabf2497cf8b22685333bb159b11960f10e570e94f2837e1268d2f5453"
+    },
+    "aaba9a4036984db6fde1393d2b7750560efbc9af4772918ba5fe811294c9c043": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-color.h"
+      ],
+      "sha256": "aaba9a4036984db6fde1393d2b7750560efbc9af4772918ba5fe811294c9c043"
+    },
+    "51896b2509d0be0fc564c3c28d04ccb3d4e32778366eef06dab20a2849002a64": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-face-table-list.hh"
+      ],
+      "sha256": "51896b2509d0be0fc564c3c28d04ccb3d4e32778366eef06dab20a2849002a64"
+    },
+    "6c1e8ae844e20c837e3bfc409b067a05b3e88aa7f93a2477a5db6be942830f61": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-face.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-layout.hh"
+      ],
+      "sha256": "6c1e8ae844e20c837e3bfc409b067a05b3e88aa7f93a2477a5db6be942830f61"
+    },
+    "fd6ca151806ca9d3bfecdd84726b7754adadd793ab8c209818617cacbfb58076": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-font.cc"
+      ],
+      "sha256": "fd6ca151806ca9d3bfecdd84726b7754adadd793ab8c209818617cacbfb58076"
+    },
+    "70d3f4761e3043db740ad11aaff13fd711eef2a729b23e8429b48a7d4b97c531": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-font.h"
+      ],
+      "sha256": "70d3f4761e3043db740ad11aaff13fd711eef2a729b23e8429b48a7d4b97c531"
+    },
+    "be564f1d4e1ec889c70d0bd782806ced00b8fa2ebbcfb6a461c3eae1614d29ce": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-glyf-table.hh"
+      ],
+      "sha256": "be564f1d4e1ec889c70d0bd782806ced00b8fa2ebbcfb6a461c3eae1614d29ce"
+    },
+    "4931133c70f36d6b651ac436a8a03d54bce3bb490836900f4a378bdc99c89dc4": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-hdmx-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-os2-unicode-ranges.hh"
+      ],
+      "sha256": "4931133c70f36d6b651ac436a8a03d54bce3bb490836900f4a378bdc99c89dc4"
+    },
+    "3c9da06eb6d24182a8cee7648557117437a2267ba7f928fa4dba65bb7e458ff7": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-head-table.hh"
+      ],
+      "sha256": "3c9da06eb6d24182a8cee7648557117437a2267ba7f928fa4dba65bb7e458ff7"
+    },
+    "ff274df9c2420bdb0b2b5538210eb1661fc1ac7113d18549ac1dd900206a3172": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-hmtx-table.hh"
+      ],
+      "sha256": "ff274df9c2420bdb0b2b5538210eb1661fc1ac7113d18549ac1dd900206a3172"
+    },
+    "1b83f9ea4aff7767c78ff4d16734226812ca2bbcee6098470713b997d07bbe14": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-layout-base-table.hh"
+      ],
+      "sha256": "1b83f9ea4aff7767c78ff4d16734226812ca2bbcee6098470713b997d07bbe14"
+    },
+    "9ba3c16cddb5c4dc62e5ef1e9aa34d60e251175df5f1b751c30e595023a37b96": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-layout-common.hh"
+      ],
+      "sha256": "9ba3c16cddb5c4dc62e5ef1e9aa34d60e251175df5f1b751c30e595023a37b96"
+    },
+    "32c34904bc2933bddfea352f9f3d6154c29d41134fb85150fa63f41104d0ea48": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-layout-gpos-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-layout-gsub-table.hh"
+      ],
+      "sha256": "32c34904bc2933bddfea352f9f3d6154c29d41134fb85150fa63f41104d0ea48"
+    },
+    "66b74249df2c93ecd8c1080e7738aa69dc25c376accf44f496577e4eec30967f": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-layout-gsubgpos.hh"
+      ],
+      "sha256": "66b74249df2c93ecd8c1080e7738aa69dc25c376accf44f496577e4eec30967f"
+    },
+    "e0fbe39aa87dd168817f75e7375bfbb906e57601e57993af9beea413ac36a6c6": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-layout.cc"
+      ],
+      "sha256": "e0fbe39aa87dd168817f75e7375bfbb906e57601e57993af9beea413ac36a6c6"
+    },
+    "ab9a80fc2a939c792ba8e9a5e2d5f73572e227183e8c75118595442943a03434": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-layout.h"
+      ],
+      "sha256": "ab9a80fc2a939c792ba8e9a5e2d5f73572e227183e8c75118595442943a03434"
+    },
+    "1aceab99c0e77e54635d0f4b542ca505282fff6eed58e983697217dad40a34f8": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-map.hh"
+      ],
+      "sha256": "1aceab99c0e77e54635d0f4b542ca505282fff6eed58e983697217dad40a34f8"
+    },
+    "122cbb57e28609b5dff20700704d5c59c1dc85e83300467bfc5634e7077dd287": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-math-table.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-math.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-math.h"
+      ],
+      "sha256": "122cbb57e28609b5dff20700704d5c59c1dc85e83300467bfc5634e7077dd287"
+    },
+    "e0d3e3e207cd86264a5ad8ff3edfc7c626aaffc486b69f326e13bd8ddf0fe557": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-metrics.cc"
+      ],
+      "sha256": "e0d3e3e207cd86264a5ad8ff3edfc7c626aaffc486b69f326e13bd8ddf0fe557"
+    },
+    "3672840ab1ef8d3048e461b6b9b2f14fdc0edc53f42674059ebc6069224514eb": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-name.h"
+      ],
+      "sha256": "3672840ab1ef8d3048e461b6b9b2f14fdc0edc53f42674059ebc6069224514eb"
+    },
+    "63ebede07310e3c5e069a1bffb858eb1b76ea5f74aa4ad788c558893d27f1149": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-os2-table.hh"
+      ],
+      "sha256": "63ebede07310e3c5e069a1bffb858eb1b76ea5f74aa4ad788c558893d27f1149"
+    },
+    "e6c32d18ef6e2766128d772037e04c65e83daf994fc658c1f972cf3977e41ed6": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-post-table-v2subset.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-var-common.hh"
+      ],
+      "sha256": "e6c32d18ef6e2766128d772037e04c65e83daf994fc658c1f972cf3977e41ed6"
+    },
+    "0252e6a327aa5a68c8b3efffe540d07ee43f889c8217a62431ca60053b9a1cbb": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-post-table.hh"
+      ],
+      "sha256": "0252e6a327aa5a68c8b3efffe540d07ee43f889c8217a62431ca60053b9a1cbb"
+    },
+    "369255a82c63aebf51862b46de60f90777c08399170be002dfe5a179d2a03ab5": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shape.cc"
+      ],
+      "sha256": "369255a82c63aebf51862b46de60f90777c08399170be002dfe5a179d2a03ab5"
+    },
+    "4c40daa854c3afbcf5545390b73c5bb79bfe6ae1effde81a78feb61f83c87bad": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shape.h"
+      ],
+      "sha256": "4c40daa854c3afbcf5545390b73c5bb79bfe6ae1effde81a78feb61f83c87bad"
+    },
+    "50bfc2a6aafbc2e450958e266ec51bf5661d22ae9fe8d74502a0fd8ccac4fbbc": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shape.hh"
+      ],
+      "sha256": "50bfc2a6aafbc2e450958e266ec51bf5661d22ae9fe8d74502a0fd8ccac4fbbc"
+    },
+    "483fdcca0bcab3669d92219803198c8b62d16d1fdfc323cea6c1a5c0eac94ff1": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-default.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-hebrew.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-thai.cc"
+      ],
+      "sha256": "483fdcca0bcab3669d92219803198c8b62d16d1fdfc323cea6c1a5c0eac94ff1"
+    },
+    "0a81397962516dcd2509dff1462928a1bbd13e4844d39a0bf8402ebd2e892702": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic.hh",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-use.cc"
+      ],
+      "sha256": "0a81397962516dcd2509dff1462928a1bbd13e4844d39a0bf8402ebd2e892702"
+    },
+    "6e9d01c838711bd559a405aa3354454a0c4b28c8e13e35c5efd206e676364950": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-indic-machine.hh"
+      ],
+      "sha256": "6e9d01c838711bd559a405aa3354454a0c4b28c8e13e35c5efd206e676364950"
+    },
+    "1567fd1341b9ad35565c6565f6016614a1561a4a9f3b2a4771d73add56a24af2": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-khmer-machine.hh"
+      ],
+      "sha256": "1567fd1341b9ad35565c6565f6016614a1561a4a9f3b2a4771d73add56a24af2"
+    },
+    "aeb72faa593e284b3c20e76e8784eba5c783ab817373ff2f2451aa6390ece94a": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-myanmar-machine.hh"
+      ],
+      "sha256": "aeb72faa593e284b3c20e76e8784eba5c783ab817373ff2f2451aa6390ece94a"
+    },
+    "a4e2d7660ba351b071986066a1d9274f76ea84a4667fbd629583257e05ab0a50": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-myanmar.cc"
+      ],
+      "sha256": "a4e2d7660ba351b071986066a1d9274f76ea84a4667fbd629583257e05ab0a50"
+    },
+    "3cb4da5312d03b4da8097ac7b9982c9f63640b44ac3222a6778050693fcace89": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-syllabic.cc",
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-syllabic.hh"
+      ],
+      "sha256": "3cb4da5312d03b4da8097ac7b9982c9f63640b44ac3222a6778050693fcace89"
+    },
+    "dc9bdf08d04079394e1db59cead1f765a4809c6e83dd87530e769209caa7d064": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shaper-use-machine.hh"
+      ],
+      "sha256": "dc9bdf08d04079394e1db59cead1f765a4809c6e83dd87530e769209caa7d064"
+    },
+    "8dd11060cf2f74171d193d993f30047335cd2ccce6dd2e49a0b67a70b0e71623": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-shaper.hh"
+      ],
+      "sha256": "8dd11060cf2f74171d193d993f30047335cd2ccce6dd2e49a0b67a70b0e71623"
+    },
+    "d0c04fc57c46d7f015092eeae6562c308444b4f9eb54af8f23090d845d5706f9": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-tag.cc"
+      ],
+      "sha256": "d0c04fc57c46d7f015092eeae6562c308444b4f9eb54af8f23090d845d5706f9"
+    },
+    "7d448092f1931131945b920955867725a09c80917e0c5d159dc09ab495372220": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-var-cvar-table.hh"
+      ],
+      "sha256": "7d448092f1931131945b920955867725a09c80917e0c5d159dc09ab495372220"
+    },
+    "3c9a979f1841aa1b7d6b0200e88cf2521157e12e1fef9838a00899d19c2bda0f": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-var-gvar-table.hh"
+      ],
+      "sha256": "3c9a979f1841aa1b7d6b0200e88cf2521157e12e1fef9838a00899d19c2bda0f"
+    },
+    "fcf07cf29ff2df2b0d2cce5ad78f69761dd6b22e4ef152bc9c6d065296c109d2": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-var-varc-table.hh"
+      ],
+      "sha256": "fcf07cf29ff2df2b0d2cce5ad78f69761dd6b22e4ef152bc9c6d065296c109d2"
+    },
+    "a881e7ccf225835fe28e682dc0d06e0e23a8c181cced7e248e626e760b33ca78": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ot-var.h"
+      ],
+      "sha256": "a881e7ccf225835fe28e682dc0d06e0e23a8c181cced7e248e626e760b33ca78"
+    },
+    "d142acc172a65cd305f5e9a2e7ac0dbfd788dae355f2b6a4605c78371aafaff9": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-outline.cc"
+      ],
+      "sha256": "d142acc172a65cd305f5e9a2e7ac0dbfd788dae355f2b6a4605c78371aafaff9"
+    },
+    "9984f350b409ca404bebf3d0fbae3c9797a72e5435c2715f6e1f29ea68abb9dc": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-outline.hh",
+        "third_party/externals/harfbuzz/src/hb-subset-instancer-solver.cc",
+        "third_party/externals/harfbuzz/src/hb-subset-instancer-solver.hh"
+      ],
+      "sha256": "9984f350b409ca404bebf3d0fbae3c9797a72e5435c2715f6e1f29ea68abb9dc"
+    },
+    "7a7a2d17a40e5f2bb2fb923d0318514cb4c03e6748744b2275a4d03bab8b4c28": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-paint.cc",
+        "third_party/externals/harfbuzz/src/hb-paint.h",
+        "third_party/externals/harfbuzz/src/hb-paint.hh"
+      ],
+      "sha256": "7a7a2d17a40e5f2bb2fb923d0318514cb4c03e6748744b2275a4d03bab8b4c28"
+    },
+    "1857042a111ba6398e0a45d11accc851c0411ce4f147a5e2dfdc0bded31a2fe1": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-priority-queue.hh",
+        "third_party/externals/harfbuzz/src/hb-repacker.hh"
+      ],
+      "sha256": "1857042a111ba6398e0a45d11accc851c0411ce4f147a5e2dfdc0bded31a2fe1"
+    },
+    "70dda1cc71cbfe67c0cb4b440d6b334d07c174fabb236e848154dd10b109a4bf": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-serialize.hh"
+      ],
+      "sha256": "70dda1cc71cbfe67c0cb4b440d6b334d07c174fabb236e848154dd10b109a4bf"
+    },
+    "502bfaa0da21da7f0a48126496fb31f8bfadd50efb3b0fbd6a6bc96fe0db3ad4": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-shape-plan.hh"
+      ],
+      "sha256": "502bfaa0da21da7f0a48126496fb31f8bfadd50efb3b0fbd6a6bc96fe0db3ad4"
+    },
+    "22c4d0f3ffd2f115abb686af9813b68f5139f92055b2a81778adab08063305d8": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-subset-input.cc",
+        "third_party/externals/harfbuzz/src/hb-subset.cc"
+      ],
+      "sha256": "22c4d0f3ffd2f115abb686af9813b68f5139f92055b2a81778adab08063305d8"
+    },
+    "85c80e19f292326cf701aeade5d526743521cbb478bd963e31220f8185dc69eb": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-subset-input.hh",
+        "third_party/externals/harfbuzz/src/hb-subset-plan.cc",
+        "third_party/externals/harfbuzz/src/hb-subset-plan.hh",
+        "third_party/externals/harfbuzz/src/hb-subset.hh"
+      ],
+      "sha256": "85c80e19f292326cf701aeade5d526743521cbb478bd963e31220f8185dc69eb"
+    },
+    "7dc316cbac93bdf097ca311f0b906acf86af67cdaceb411e595652b67829cc93": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-subset-instancer-iup.cc",
+        "third_party/externals/harfbuzz/src/hb-subset-instancer-iup.hh"
+      ],
+      "sha256": "7dc316cbac93bdf097ca311f0b906acf86af67cdaceb411e595652b67829cc93"
+    },
+    "c6c28f5888e53e87dc13d8d65604e41ed1af6a22415b58de5253217cb2ddfd49": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-subset-plan-layout.cc"
+      ],
+      "sha256": "c6c28f5888e53e87dc13d8d65604e41ed1af6a22415b58de5253217cb2ddfd49"
+    },
+    "623daa73417bc486e56dc14180d3721cacb69531b5ddbb7e0a6f0283f2a4ed46": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-subset-plan-member-list.hh"
+      ],
+      "sha256": "623daa73417bc486e56dc14180d3721cacb69531b5ddbb7e0a6f0283f2a4ed46"
+    },
+    "3e091aaeb7bc1d1d0997ea4cae4ac230c5c22995139d26faa77fdd2e7ca38fbd": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-subset-plan-var.cc"
+      ],
+      "sha256": "3e091aaeb7bc1d1d0997ea4cae4ac230c5c22995139d26faa77fdd2e7ca38fbd"
+    },
+    "ce48b9e063c6b5308338c035a7cbda41f4fe41092d8edbfd4b29559906f80b5b": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-subset-serialize.cc",
+        "third_party/externals/harfbuzz/src/hb-subset-serialize.h"
+      ],
+      "sha256": "ce48b9e063c6b5308338c035a7cbda41f4fe41092d8edbfd4b29559906f80b5b"
+    },
+    "779ad3f166722b0e451451f5cc4f644d92777655e014d25b7f6686905d78dee5": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-subset.h"
+      ],
+      "sha256": "779ad3f166722b0e451451f5cc4f644d92777655e014d25b7f6686905d78dee5"
+    },
+    "c5e0a9b613b47f55cdc47cc236007f7fa5715933ddd5c832fdae4e7b8c052550": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-ucd.cc"
+      ],
+      "sha256": "c5e0a9b613b47f55cdc47cc236007f7fa5715933ddd5c832fdae4e7b8c052550"
+    },
+    "6751b5ae09ecea42bbbfb52f5bea33f830edf16a01167bad77f903ed140b25ac": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-unicode-emoji-table.hh"
+      ],
+      "sha256": "6751b5ae09ecea42bbbfb52f5bea33f830edf16a01167bad77f903ed140b25ac"
+    },
+    "8c4453ccab0329955ba32133989934ea88e946607ade9603eabfdef9e2ae578a": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-unicode.cc",
+        "third_party/externals/harfbuzz/src/hb-unicode.hh"
+      ],
+      "sha256": "8c4453ccab0329955ba32133989934ea88e946607ade9603eabfdef9e2ae578a"
+    },
+    "64be246bd1ef81ae8d58894ae8818cbc78c95ac5e054e024af1902df712de0d2": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-unicode.h"
+      ],
+      "sha256": "64be246bd1ef81ae8d58894ae8818cbc78c95ac5e054e024af1902df712de0d2"
+    },
+    "c8575c77fe01974e1bbdd15b1f7218eb1b558a7712006f14a93dc0d9a5032c9c": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-utf.hh"
+      ],
+      "sha256": "c8575c77fe01974e1bbdd15b1f7218eb1b558a7712006f14a93dc0d9a5032c9c"
+    },
+    "69b037639c284336e162753cb04c3e156b68b2d3e12470da04a4df5c2e9a6f12": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-vector.hh"
+      ],
+      "sha256": "69b037639c284336e162753cb04c3e156b68b2d3e12470da04a4df5c2e9a6f12"
+    },
+    "8b00f055903bc65af921860934a6a5392cad1a9ccb0e353d9c18c6e1be25843a": {
+      "sources": [
+        "third_party/externals/harfbuzz/src/hb-version.h"
+      ],
+      "sha256": "8b00f055903bc65af921860934a6a5392cad1a9ccb0e353d9c18c6e1be25843a"
+    }
+  },
+  "generatedAndExternalTables": [
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-arabic-joining-list.py",
+      "generatorSha256": "41f6bfeda5a4fe5bea97907ff572dc0180628a8590f05374e849a19701e74f09",
+      "output": "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic-joining-list.hh",
+      "outputSha256": "95f678435b43b8397a98fe7c2118504ae01c6cdcc27a4d204c1c4abcf1312967"
+    },
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-arabic-pua.py",
+      "generatorSha256": "3477c0f2a695c598fd758354ca10d8a1105a16d39b43b455b69866a9367459ea",
+      "output": "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic-pua.hh",
+      "outputSha256": "d33968be3dd9331598afa51d0ce7403515a73625fcd7221ad4fe938b68ec466b"
+    },
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-arabic-table.py",
+      "generatorSha256": "f15a6a8149675e9a531f292fe7983725b2cc6b15baf198586def3c7231d0e969",
+      "output": "third_party/externals/harfbuzz/src/hb-ot-shaper-arabic-table.hh",
+      "outputSha256": "3d693020320004494e7fb8cb17661994996d8a7462418c85df0da1ff7bf31c76"
+    },
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-indic-table.py",
+      "generatorSha256": "c9303dd44599e23fe8a66b353e699811836460be7d5d9d8889be3cf939dd0e40",
+      "output": "third_party/externals/harfbuzz/src/hb-ot-shaper-indic-table.cc",
+      "outputSha256": "b7a455c29a425a237f2ffeff9c6a44ef5a57de1eb5ff73a63e5c5c81a24702d1"
+    },
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-use-table.py",
+      "generatorSha256": "5843246def7cec4b1cf27f8fad3a8761a40be6b7e2808f89083a3a123987b0e0",
+      "output": "third_party/externals/harfbuzz/src/hb-ot-shaper-use-table.hh",
+      "outputSha256": "224f97f7527cbe0ece6d4269a793d8d6ee0e50658342011c2e41b8fe2f29b4c3"
+    },
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-vowel-constraints.py",
+      "generatorSha256": "c68140fd53db88a7887dc6ec949a8eac6a89520de31fca62a88283556aa36ae9",
+      "output": "third_party/externals/harfbuzz/src/hb-ot-shaper-vowel-constraints.cc",
+      "outputSha256": "fc83b4e8bbb3f898bfeb18bc1e3bfee13d75e5e22bad795ba8103176c8a913ce"
+    },
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-tag-table.py",
+      "generatorSha256": "3e8b365c704fe4a812f9abc6ed0c83a164224dd045afd58836ee7cd57a06ee3d",
+      "output": "third_party/externals/harfbuzz/src/hb-ot-tag-table.hh",
+      "outputSha256": "6ad375708227ae19905fecaa8bc0bd31baf713ffe0a2a06ee9930a4a392c5054"
+    },
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-ucd-table.py",
+      "generatorSha256": "ac89a2ee6362468408e85df5afd76dd2261a8ec0a744de21f518458badc161b8",
+      "output": "third_party/externals/harfbuzz/src/hb-ucd-table.hh",
+      "outputSha256": "fe3eac3e3db2e434fee86abd05a5887b47921f66cc9f85e4c48f05b5b82401d0"
+    },
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-emoji-table.py",
+      "generatorSha256": "933eaac72285445385533f870c6ab6eeb6632f60212adfb7067db4fc3e60782d",
+      "output": "third_party/externals/harfbuzz/src/hb-unicode-emoji-table.hh",
+      "outputSha256": "9a41a5392f9db6424a87b983dc7b2d69849508b64c105e3ba7c1f70695b1c680"
+    },
+    {
+      "generator": "third_party/externals/harfbuzz/src/gen-os2-unicode-ranges.py",
+      "generatorSha256": "25416d63f535906afdb50aec342ec04bb746d082cec7613963959678cb55e1c5",
+      "output": "third_party/externals/harfbuzz/src/hb-ot-os2-unicode-ranges.hh",
+      "outputSha256": "71e0410f0469d6471978ccfa31a2421068bb65a31d3c6f6c13b20664bcce49fa"
+    },
+    {
+      "generator": null,
+      "output": "third_party/externals/harfbuzz/src/hb-ot-name-language-static.hh",
+      "outputSha256": "9d3e308fd1467443c18b251545360efe80a2bbf68e02ab9fdba6f08f285b2167",
+      "sourceReference": "https://docs.microsoft.com/en-us/windows/desktop/intl/language-identifier-constants-and-strings"
+    }
+  ],
+  "scope": "Build-input provenance and exact leading notice retention; no automatic grant inference for files lacking leading grants."
+}

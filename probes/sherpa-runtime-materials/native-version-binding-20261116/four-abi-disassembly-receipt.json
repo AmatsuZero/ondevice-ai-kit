@@ -1,0 +1,74 @@
+{
+  "tool": "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-objdump",
+  "toolSHA256": "eabfdff817fb16e6526d9281967f1f95bcfaf7a385d3ed3c80705bcb7238640d",
+  "observations": [
+    {
+      "abi": "arm64-v8a",
+      "path": ".omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-c-api.so",
+      "bytes": 4303136,
+      "sha256": "0eadae93c4d595a26584d7eebde7b397b9a36d01eee3ebc7262e0d34df2fce10",
+      "exitCode": 0,
+      "argv": [
+        "rtk",
+        "proxy",
+        "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-objdump",
+        "-d",
+        "--disassemble-symbols=SherpaOnnxGetGitSha1,SherpaOnnxGetGitDate,SherpaOnnxGetVersionStr",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/arm64-v8a/libsherpa-onnx-c-api.so"
+      ],
+      "disassemblyPath": ".omx/artifacts/w3-native-version-20261116T002000/arm64-v8a-c-api-version.objdump.stdout",
+      "disassemblySHA256": "652bd1bc948b8ef61d318b5c26f157a902b005ebd20618b76e9c49b5f47ede6d"
+    },
+    {
+      "abi": "armeabi-v7a",
+      "path": ".omx/artifacts/w3-native-linkage-20261115/jni/armeabi-v7a/libsherpa-onnx-c-api.so",
+      "bytes": 3157748,
+      "sha256": "cb5d912ec19b4f76582047d082db63f304f3e584cc89130e393337f4cea6ebe7",
+      "exitCode": 0,
+      "argv": [
+        "rtk",
+        "proxy",
+        "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-objdump",
+        "-d",
+        "--disassemble-symbols=SherpaOnnxGetGitSha1,SherpaOnnxGetGitDate,SherpaOnnxGetVersionStr",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/armeabi-v7a/libsherpa-onnx-c-api.so"
+      ],
+      "disassemblyPath": ".omx/artifacts/w3-native-version-20261116T002000/armeabi-v7a-c-api-version.objdump.stdout",
+      "disassemblySHA256": "bcdb3008253ce138181b0912f88be03cf8cf6c3621ccf7ce3f1d82cb99377fe4"
+    },
+    {
+      "abi": "x86",
+      "path": ".omx/artifacts/w3-native-linkage-20261115/jni/x86/libsherpa-onnx-c-api.so",
+      "bytes": 4954780,
+      "sha256": "e1e483cc4a09aaadf7f72c1d406c010bba05e3a05fc763a4536117508ab3f390",
+      "exitCode": 0,
+      "argv": [
+        "rtk",
+        "proxy",
+        "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-objdump",
+        "-d",
+        "--disassemble-symbols=SherpaOnnxGetGitSha1,SherpaOnnxGetGitDate,SherpaOnnxGetVersionStr",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/x86/libsherpa-onnx-c-api.so"
+      ],
+      "disassemblyPath": ".omx/artifacts/w3-native-version-20261116T002000/x86-c-api-version.objdump.stdout",
+      "disassemblySHA256": "b080ae78963340444d0f365c74d2de0713f78e64596183383a89bcd4c07527c8"
+    },
+    {
+      "abi": "x86_64",
+      "path": ".omx/artifacts/w3-native-linkage-20261115/jni/x86_64/libsherpa-onnx-c-api.so",
+      "bytes": 4782648,
+      "sha256": "8285ecf2e6275374d4c8c5b46020cbb1de82db9bd6b6baad011fdc480cf10ba2",
+      "exitCode": 0,
+      "argv": [
+        "rtk",
+        "proxy",
+        "/Users/daubert/Library/Android/sdk/ndk/30.0.16138531/toolchains/llvm/prebuilt/darwin-x86_64/bin/llvm-objdump",
+        "-d",
+        "--disassemble-symbols=SherpaOnnxGetGitSha1,SherpaOnnxGetGitDate,SherpaOnnxGetVersionStr",
+        "/Users/daubert/Github/ondevice-ai-kit/.worktrees/foundation/.omx/artifacts/w3-native-linkage-20261115/jni/x86_64/libsherpa-onnx-c-api.so"
+      ],
+      "disassemblyPath": ".omx/artifacts/w3-native-version-20261116T002000/x86_64-c-api-version.objdump.stdout",
+      "disassemblySHA256": "cf1743ed7bed94865207ef043587fa9c405882fe57ce5ca34f3990d39ca9f005"
+    }
+  ]
+}

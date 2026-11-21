@@ -1,0 +1,12 @@
+{
+  "source": "artifacts/verification/w3-prefix-control-20261110-local/parent-acceptance.json",
+  "files": {
+    "Fleurs1906PrefixControlInstrumentation.kt": "14da961359cbc2651501091ae2e3793f30909ee965f214b3e8587461521ea2d0",
+    "Fleurs1906PrefixControlPlan.kt": "aba00939d11bef2536f1ef5a44aa31e94347de7ef66d7ec743e70aaa2f2a77f5",
+    "PrefixControlChecks.kt": "e675a177c6f1ce926ddbbe6cd82b351a04ed2a940a1b7731d046681df1a54740"
+  },
+  "deviceRun": "w3-prefix-20261110-local-02",
+  "rawReportSha256": "6b23710526d8c8d8dbde78075cff6d70f419fa7dd898b0f361ae4e7a2bba6d74",
+  "qualityVerdict": "unverified",
+  "scope": "exact accepted diagnostic sources; no production change"
+}

@@ -1,0 +1,68 @@
+{
+  "reviewer": "native code-reviewer",
+  "reviewMode": "read-only host-profile source and evidence review",
+  "verdict": "accept",
+  "scope": {
+    "filesReviewed": 16,
+    "terminalModules": 8,
+    "observationModules": 8,
+    "deviceActions": 0,
+    "testsRunByReviewer": 0,
+    "networkActions": 0
+  },
+  "sourceSHA256": {
+    "probes/android-qwen-terminal/device_acceptance.py": "cd96d13d5caff9a1a7c255006b0100c352cca38917880c4f503327dc542773f7",
+    "probes/android-qwen-terminal/terminal_device_contract.py": "4b2700e97aab8aa8ace27e89c687238a2389cabbcc766ba1dad2f9f44321cc96",
+    "probes/android-qwen-terminal/terminal_device_prepare.py": "52fe402a550970d68353dca90648fbb271f809e8e900ac5344f4534e6cd05fbe",
+    "probes/android-qwen-terminal/terminal_device_restore.py": "64371cfcc207e4ddf21046fb3aca25fbb0a43e8c0c1f242fbad2fbd7958a6878",
+    "probes/android-qwen-terminal/terminal_device_collect.py": "f87bb4b254404cfa7c05d33d6acaab41905e2c3b963c37ab3f672701cc572f2b",
+    "probes/android-qwen-terminal/terminal_device_policy.py": "9643bc2f50a30c9d531d4b208bd8b2f86de700d3c82a2741322f4ef6acb9650a",
+    "probes/android-qwen-terminal/terminal_source_adapter.py": "1a9ab1681f8dd585c9063783c0d38a8568b2cf296930e096310f882d48ed92e9",
+    "probes/android-qwen-terminal/terminal_device_lifecycle.py": "d587e59e5ca5720402e03e97be75b0c88c8b3fbb47fd7ff9f26a6d0250f75ec3",
+    "probes/android-terminal-observation/terminal_observer.py": "b86c9dda1a3ea45bcbd55cd207ce40bc74a2c3e37af83741938027c6971ce9ac",
+    "probes/android-terminal-observation/terminal_file_io.py": "2c9e885c85a0b0d6623b5285cd88075abd93ee8111c04088eb30ed82fc9304e4",
+    "probes/android-terminal-observation/terminal_observation_coordinator.py": "5fcb411735e2774b6078328e74bbc9cdf67c3aee9e6d2a1769182877d2a943dc",
+    "probes/android-terminal-observation/adb_process_sampler.py": "d77d0068d00cffe904c9d42b29c5f186733c1682c74814242175d633064b932b",
+    "probes/android-terminal-observation/adb_terminal_report_reader.py": "e184eaed9285e81be1a90e4505da0e280ca794dead66afaaa55ed3351bfa11e8",
+    "probes/android-terminal-observation/adb_terminal_ack_publisher.py": "027bb285d567edcf1784c407a369324e0c3d235ea041dd1b73b92cfc45283e57",
+    "probes/android-terminal-observation/adb_terminal_observation.py": "4dca5a93ce500bf9c81514fabca73939b54b5c829bb483f08de8edf504aea85a",
+    "probes/android-terminal-observation/terminal_polling.py": "19df5a6a4a5f7a09926ba31af5d2862b2cd011f1b280945ee69a694e47cff8c9"
+  },
+  "specCompliance": {
+    "newRunAndOutputConsistent": true,
+    "immutableFileDriverStillPinned": true,
+    "sourceFingerprintAndResourceBudgetsUnchanged": true,
+    "oldFailureIsNotReusedOrOverwritten": true,
+    "statQuoting": {
+      "prepare": "probes/android-qwen-terminal/terminal_device_prepare.py:203 uses one shlex.join remote command",
+      "restoreInitial": "probes/android-qwen-terminal/terminal_device_restore.py:441 uses one shlex.join remote command",
+      "restorePreDelete": "probes/android-qwen-terminal/terminal_device_restore.py:510 uses one shlex.join remote command"
+    },
+    "oemAbsentPackageBoundary": "probes/android-qwen-terminal/terminal_device_restore.py:342-376 accepts absence only for return code 0 or 1 with exact empty byte stdout and stderr; all other query output fails visibly before installed_sha or uninstall",
+    "postUninstallProof": "probes/android-qwen-terminal/terminal_device_restore.py:401-405 requires exact Success and a newly proven absent query",
+    "ownershipAndCleanup": "probes/android-qwen-terminal/terminal_device_restore.py:409-529 retains stage on invalid ownership proof and rechecks identity immediately before deletion"
+  },
+  "rootCauseGuard": {
+    "status": "pass",
+    "evidence": "The repair preserves the failing pm-path diagnostics. It does not suppress errors or add a broad fallback: malformed/nonempty stdout, nonempty stderr, unexpected status, non-UTF-8 bytes, and post-uninstall uncertainty raise before deletion."
+  },
+  "findings": [],
+  "validationEvidenceRead": {
+    "oldRegression": ".omx/artifacts/w3-terminal-portability-20261114/red-result.json records the original observed failure path",
+    "malformedCandidateRegression": ".omx/artifacts/w3-terminal-portability-20261114/initial-candidate-malformed-red.json records four initial parser false accepts before the narrowed candidate",
+    "candidateRegression": ".omx/artifacts/w3-terminal-portability-20261114/candidate-green-result.json records five OEM shell/absence cases green",
+    "contractRegression": ".omx/artifacts/w3-terminal-portability-20261114/contract-inputs-populated.stderr records 18/18 current contract cases green",
+    "historicalPreservation": ".omx/artifacts/w3-terminal-physical-20261114-0036/historical-snapshot-guard.json confirms 140 historical files and the original freeze SHA remain intact"
+  },
+  "limitations": [
+    "This review did not run diagnostics or tests; a parent-owned full suite and OEM full-chain process were active and intentionally not treated as completed here.",
+    "At review time the new contract is not yet executable because its independent 20261114 review receipts and diagnostic-frozen.json have not been generated; this is an intentional gate, not a fallback or approval of a device run.",
+    "No Android device, microphone, AiAi, download, native decode, quality measurement, true-peak measurement, or allocator-effect acceptance was performed."
+  ],
+  "recommendation": "ACCEPT_HOST_SOURCE_ONLY",
+  "originalRawPath": ".omx/artifacts/w3-terminal-portability-20261114/native-review.json",
+  "originalRawSHA256": "232ecf8fd307e87d9e3e4de3be315892a9ad7539cb4063452c627a8079a4bef8",
+  "deviceAcceptance": false,
+  "qualityAccepted": false,
+  "truePeakMeasured": false
+}

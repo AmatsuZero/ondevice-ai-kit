@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "capabilityId": "face.detection",
+  "defaultBackendId": "test.face.local",
+  "alternateBackendId": "test.face.cloud",
+  "missingBackendId": "test.face.missing",
+  "cases": [
+    {"selection": "default", "expectedBackendId": "test.face.local"},
+    {"selection": "explicit", "backendId": "test.face.cloud", "expectedBackendId": "test.face.cloud"},
+    {"selection": "explicit", "backendId": "test.face.missing", "error": "backendNotRegistered"},
+    {"selection": "explicit", "backendId": "test.face.cloud", "available": false, "error": "backendUnavailable"},
+    {"selection": "explicit", "backendId": "test.face.local", "optionId": "vendor.unknown", "error": "unsupportedOption"}
+  ]
+}

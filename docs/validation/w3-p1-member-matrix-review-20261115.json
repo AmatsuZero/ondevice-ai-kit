@@ -1,0 +1,91 @@
+{
+  "review": {
+    "disposition": "accept_increment",
+    "findings": [
+      {
+        "severity": "low",
+        "file": "2.0.1-member-inputs-20261115/build-input-groups.json",
+        "evidence": "packaging.sourcePaths 列 sherpa_onnx/build.gradle.kts（compileSdk34/minSdk21/jvm1.8/minify=false），但本轮 13 份逐文件 GitBlob 收据只含 android/SherpaOnnxAar/build.gradle.kts（根）与 settings.gradle.kts；模块文件字节仅由旧目录 2.0.1-a8d09d1d/source-evidence 提供。固定完整 tree（c1e7beaf…）覆盖该路径，但 13 份收据不含其逐文件核验。",
+        "fix": "不得声称 13 份 receipts 覆盖全部 packaging sourcePaths；保留 inputCompletenessVerified:false 与每行 'completeness remains open'；在穷尽性输入可信复核中逐一绑定各 sourcePath 的 GitBlob。"
+      },
+      {
+        "severity": "low",
+        "file": "2.0.1-member-inputs-20261115/build-input-groups.json:ortNative",
+        "evidence": "patchEvidence={omittedRepeatedRecords:30,fullRecordPath}；releaseMemberEvidence/dependencyInputEvidence 仅为路径；limitations 保留'不对穷尽输入或 raw CI per-ABI member reread 作认证'。SOVERSION/VERSION 删除、ZIP 摘要与 raw member 相等分开记录均为记录性断言，未提供相应字节。",
+        "fix": "仅作记录性 linkage；P1/P2 完备性验收前补齐被省略记录；保持 source 33ca… 与 workflow bb069… 区分、ORT API27/标志 与 Sherpa API21 区分；不得声称 raw per-ABI 重读。"
+      }
+    ],
+    "acceptedIncrements": [
+      "21/21 非目录成员（尺寸/SHA-256）+5 目录项；16 native=4ABI×4SO",
+      "9 个输入组，group/ABI 归属一致；所有 native 行 ciNativeByteEquality；4 个 libonnxruntime.so 行 nestedOrtReleaseByteEquality",
+      "124 class→22 Kotlin 路径（javap SourceFile + 固定完整 Git tree）；DEX 124/124 类名 + 仅生成 R；保留非等价限制",
+      "本地 Maven AAR 全字节绑定（a8d09d1d…）+ 冻结隔离 arm64 main.apk 88757e37… 恰含 4 份字节相等 SO；productionCandidate:false",
+      "Sherpa version.cc 日期/SHA 补丁：重建 blob 前缀 fad4f460..149297a1 与两 job diff 匹配；保留'非无补丁'与'不断言其它/生成输入未改'",
+      "13 份 receipts（39,085 B）逐份 GitBlob 核验；记录 4 ABI CMake 命令；ORT source 33ca… 与 workflow bb069… 区分、ZIP 摘要 vs raw member 分开、无 API21/API27 混同",
+      "P1/P2/P3/P4/R4/R5/W3 标志均 false；inputCompletenessVerified:false"
+    ],
+    "remainingP1Boundaries": [
+      "实际生产候选采用绑定 OPEN（productionCandidateBindingVerified:false）",
+      "逐输入组 source/patch/build/config 穷尽完备与可信复核 OPEN（fullSourceBuildInputCoverageVerified:false）",
+      "SourceFile/类名覆盖 ≠ class/DEX 字节或语义等价",
+      "Sherpa version.cc tracked diff ≠ 无其它/生成输入变更的证明",
+      "源码依赖声明 ≠ 最终静态组成；P2 递归组成 OPEN",
+      "ORT workflow head ≠ source revision/tag；归档摘要仅同类容器内比较",
+      "P2/P3/P4、R4 质量、R5 资源分别验收，不被本增量替代或否定",
+      "21 行矩阵 ≠ 通过的生产 gate；P1Complete/W3Complete 仍 false"
+    ],
+    "reviewLimits": [
+      "只读、无工具/执行；验证脚本由 Primary 执行，我未执行；无 device/build/download/decode/mic/AiAi",
+      "未发现缺失成员、错误 group/ABI/revision/patch 关联或被推翻的 consumer/completeness 断言，无阻塞本增量的问题",
+      "输入为紧凑确定性投影（保留原文件身份）；类列表/组不重复根路径与日志副本；完整脚本体、ORT raw per-ABI 重读、patchEvidence(30)、releaseMemberEvidence/dependencyInputEvidence 未全部提供。所供 JSON 为重组投影（groupedClasses dict；build-input-groups.json 缺脚本 sherpaVersionPatch 键，patchGroup 经独立 sherpa-version-patch.json 解析）——去重/表示差异，非证据缺失",
+      "既有 CI 整包 AAR/16SO 字节校验已独立接受，不在本次复审范围",
+      "本次紧凑 stream-json 评审改变范围/表示；不确立此前 209476 字节 JSON-array 交付（止于 262144、未闭合字符串、无 result event）的成因、也不保证已修复；exit0 ≠ 已交付报告；该交付未观察到 provider429，不得归因为 429；其 raw/error 记录保留",
+      "本评审仅为有界增量评审，非最终 P1/W3 验收；不预设唯一 attestation 方法或本地可复现构建"
+    ]
+  },
+  "delivery": {
+    "reviewModel": "hy4free",
+    "reviewSessionId": "01a1ddca-375e-7990-8c6f-3a44418dc5f0",
+    "processExitCode": 0,
+    "resultSubtype": "success",
+    "isError": false,
+    "toolUseBlocks": 0,
+    "permissionDenials": []
+  },
+  "parentDisposition": {
+    "disposition": "accept_bounded_increment",
+    "reviewModel": "hy4free",
+    "reviewSessionId": "01a1ddca-375e-7990-8c6f-3a44418dc5f0",
+    "processExitCode": 0,
+    "resultSubtype": "success",
+    "isError": false,
+    "toolUseBlocks": 0,
+    "permissionDenials": [],
+    "reviewEvents": 7,
+    "priorTruncatedDeliveryAccepted": false,
+    "native429Retried": false,
+    "findings": [
+      {
+        "id": "LOW-1",
+        "disposition": "accepted_scope_limit_and_parent_supplement",
+        "evidence": "13-file receipt claim remains limited to13. Explicit packaging/source-target paths now separately GitBlob-bound; no full input coverage claim.",
+        "supplement": "probes/sherpa-runtime-materials/2.0.1-member-inputs-20261115/referenced-source-path-bindings.json"
+      },
+      {
+        "id": "LOW-2",
+        "disposition": "accepted_review_context_limit",
+        "evidence": "Compact projection omitted repeated ORT patch lines, not full material records. All4 original patchEvidence lists remain complete in build-input-groups.json and referenced raw logs match stored hashes. No fresh raw per-ABI CI member reread claimed."
+      }
+    ],
+    "notSuppliedToReview": [
+      "README.md",
+      "helper-delivery.json",
+      "LICENSE",
+      "license-material.json",
+      "referenced-source-path-bindings.json",
+      "existing SDK metadata snapshot and fresh metadata graph"
+    ],
+    "P1Complete": false,
+    "W3Complete": false
+  }
+}
