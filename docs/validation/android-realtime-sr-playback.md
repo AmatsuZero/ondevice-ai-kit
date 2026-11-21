@@ -2,6 +2,8 @@
 
 更新至 2026-11-21。独立播放器可手动选择轻量 Spatial 或与 iOS 相同的 CuNNy 1×8 BOX，做 2× 亮度增强。首台 Android 真机 TECNO KM9 的 1080p/30 强制增强未确认增强帧上屏；新增的 540p/30 实播也未通过增强门槛，自动模式会回退原画。本页分别列出真机、模拟器和离线导出的证据。
 
+[KM9 固定刷新率：直出、EGL 原画和 Spatial 的实际呈现](android-motion-cadence-km9-20261121.md) · [在手机上观看运动 A/B](android-motion-pairs-km9-20261121.md)。
+
 [KM9 540p：Spatial、CuNNy 与原画的十场对照](android-spatial-playback-km9-20261121.md)。轻量 Spatial 已在播放中确认增强上屏；调试对照缩短了原画显示延迟，但严格的按时增强门槛仍未通过。
 
 | 环境或方案 | 已验证 | 尚无证据 |

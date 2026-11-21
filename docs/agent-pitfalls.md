@@ -1,3 +1,9 @@
+## Android 视频基线：SurfaceFlinger 图层名、刷新率和实际呈现（2026-11-21）
+
+KM9 的 `dumpsys SurfaceFlinger --list` 会输出 `RequestedLayerState{… parentId=…}`。整行传给 `--latency` 只得到周期，没有视频帧。截取本次 Activity 对应的完整 `SurfaceView[…](BLAST)#编号`（保留编号），用单个正确引用的远端参数轮询；按应用每帧请求时间精确匹配，去掉零、待定和重复历史，再与 EGL 的正显示时间交叉验证。窗口 UI 的 FrameTimeline 记录不能替代视频子图层。动态刷新率在一次播放边界可能出现 60/90 Hz 两种样本；比较时记录并恢复原策略，按图层实测周期复核。不同代次、多回调或迟开始采样须保留为探索样本。详见[KM9 固定刷新率播放对照](validation/android-motion-cadence-km9-20261121.md)。
+
+运动盲评中，文件即使有 H.264 VUI 和 FFprobe 的 BT.709 标签，KM9 的 MediaExtractor 仍可能不返回颜色信息。实际原始 540p 缺 MP4 的 colr 条目；Spatial 因输入不合条件，采到的 swap 全部是原画，投票被正确阻止。对生成器同时显式标记滤镜、编码流和 MP4 colr，独立读取每个文件的 MediaExtractor 格式；不能靠放宽播放门槛或把请求的后端记为实际后端来通过。
+
 ## W9真机文件验收：实包键、文件可见性与任务栈 — 2026-11-18
 
 结果收尾：iOS测试体107.032s/1项0失败后，xcodebuild停在collectDeviceDiagnostics/devicectl diagnose。只读采样与确切子进程命令确认该阶段；未重跑/kill，诊断600秒自然超时后外层exit0/709.560s、TEST EXECUTE SUCCEEDED且xcresult落盘。诊断附件收集失败原日志保留，不能把总命令时长当转换耗时，也不能称所有诊断齐备。
