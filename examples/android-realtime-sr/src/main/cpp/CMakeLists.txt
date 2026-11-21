@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(srtiming SHARED egl_timing.cpp)
+target_link_options(srtiming PRIVATE "-Wl,-z,max-page-size=16384")
 
 find_library(EGL_LIBRARY EGL)
 find_library(GLESV3_LIBRARY GLESv3)

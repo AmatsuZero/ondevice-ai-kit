@@ -11,9 +11,11 @@ struct SharedControls: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(controller) }
     func makeUIViewController(context: Context) -> UIViewController {
         let preview = UIHostingController(rootView: UnifiedFacePreview(controller: controller))
-        return MainViewControllerKt.unifiedDemoViewController(bindings: context.coordinator.bindings,
+        let root = MainViewControllerKt.unifiedDemoViewController(bindings: context.coordinator.bindings,
             facePreview: preview, voiceEffects: context.coordinator.bindings.voiceController,
             playback: context.coordinator.bindings.playbackHost.viewController)
+        context.coordinator.bindings.playbackHost.presentationController = root
+        return root
     }
     func updateUIViewController(_ view: UIViewController, context: Context) {}
     static func dismantleUIViewController(_ view: UIViewController, coordinator: Coordinator) {
@@ -138,7 +140,7 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
         #endif
     }
     var playbackEnhancement: (any PlaybackEnhancementDemoActions)? { playbackHost }
-    var realtimeSr: (any RealtimeSRDemoActions)? { nil }
+    var realtimeSr: (any RealtimeSRDemoActions)? { playbackHost }
     func modelSetup(id: DemoCapabilityId) -> (any UnifiedDemoModelActions)? {
         #if ODAI_MULTIMODAL_MLX_DEMO
         if id == .imageUnderstanding { return UnifiedImageModelSetup(controller) }
@@ -152,13 +154,14 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
         voice.recordSink = sink
         #endif
     }
-    func enterCapability(id: DemoCapabilityId) {}
+    func enterCapability(id: DemoCapabilityId) { if id == .playbackEnhancement { playbackHost.enter() } }
     func openVoiceEffects() {}
     func leaveCapability(id: DemoCapabilityId) {
         if id == .asr || id == .tts { speechActions?.leavePage() }
         if id == .faceDetection { controller.stopCamera(); controller.model.cancel() }
         if id == .imageUnderstanding { multimodalActions?.leaveMultimodalPage() }
         if id == .fileSuperResolution { videoActions?.leavePage() }
+        if id == .playbackEnhancement { playbackHost.close() }
         if id == .identityLiveness { controller.identityModel.leavePage() }
         #if ODAI_VOICE_EFFECTS_DEMO
         if id == .voiceEffects { voice.leaveEmbeddedPage() }
@@ -182,7 +185,7 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
             return DemoCapabilityStatus(kind: .frozenPreview, detail: "研发暂停")
         }
         if id == .playbackEnhancement {
-            return DemoCapabilityStatus(kind: .ready, detail: "AVPlayer 播放器已接入；增强预览为 Demo 级 Core Image 示意")
+            return DemoCapabilityStatus(kind: .ready, detail: "CMP 内嵌 AVPlayer + Metal 2× 超分；支持原画/自动/可用的系统、CuNNy 和 Spatial 后端")
         }
         if id == .faceDetection {
             let availability = controller.bridge.availability()

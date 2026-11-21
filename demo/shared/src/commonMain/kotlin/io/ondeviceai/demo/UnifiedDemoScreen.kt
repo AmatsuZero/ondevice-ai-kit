@@ -89,6 +89,11 @@ interface PlaybackEnhancementDemoActions {
     val playerDescription: String
     /** True when the platform Host exposes the playback controls to CMP. */
     val controlsAvailable: Boolean get() = false
+    /** Host-owned playback state; CMP renders it instead of maintaining fake local state. */
+    val hasVideo: Boolean get() = false
+    val isPlaying: Boolean get() = false
+    val inputName: String? get() = null
+    val playbackStatus: String get() = "尚未选择视频"
     fun openPlayer()
     /** Platform Host controls the playback engine; CMP owns the controls. */
     fun togglePlayback() {}
@@ -364,79 +369,50 @@ private fun PlaybackEnhancementPage(
     player: PlaybackEnhancementDemoActions?,
     playbackContent: (@Composable () -> Unit)?,
 ) {
-    var playing by remember { mutableStateOf(false) }
-    var enhancedPreview by remember { mutableStateOf(false) }
+    var state by remember(player, actions) { mutableStateOf(PlaybackDemoState.read(player, actions)) }
+    LaunchedEffect(player, actions) {
+        while (true) {
+            state = PlaybackDemoState.read(player, actions)
+            kotlinx.coroutines.delay(250)
+        }
+    }
     Text("播放时增强", style = MaterialTheme.typography.titleLarge)
-    Text(
-        "选择本地视频后，在同一页面里对比原画和增强预览。页面由 CMP 统一渲染，平台 Host 只负责解码、取帧和最终上屏。",
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
-    )
+    Text("选择本地视频，边播边对比原画与 2× 超分。未满足输入条件或增强超时时自动播放原画。",
+        color = MaterialTheme.colorScheme.onSurfaceVariant)
     playbackContent?.invoke()
     player?.let {
         Card(Modifier.fillMaxWidth().testTag("playback-player-entry")) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(if (it.playerAvailable) "实时播放器已接入" else "实时播放器未接入", style = MaterialTheme.typography.titleMedium)
                 Text(it.playerDescription, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                if (it.controlsAvailable) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Button(onClick = {
-                            it.openPlayer()
-                            playing = true
-                        }, enabled = it.playerAvailable,
-                            modifier = Modifier.testTag("open-realtime-player")) { Text("选择视频") }
-                        OutlinedButton(onClick = {
-                            it.togglePlayback()
-                            playing = !playing
-                        }, enabled = it.playerAvailable,
-                            modifier = Modifier.testTag("toggle-realtime-player")) {
-                            Text(if (playing) "暂停" else "播放")
-                        }
-                    }
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        FilterChip(
-                            selected = !enhancedPreview,
-                            onClick = {
-                                enhancedPreview = false
-                                it.showOriginal()
-                            },
-                            label = { Text("原画") },
-                        )
-                        FilterChip(
-                            selected = enhancedPreview,
-                            onClick = {
-                                enhancedPreview = true
-                                it.showEnhancedPreview()
-                            },
-                            label = { Text("增强预览") },
-                        )
-                    }
-                    Text(
-                        if (enhancedPreview) "当前模式：增强预览（iOS 为 Core Image 锐化示意）"
-                        else "当前模式：原画",
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                } else {
+                Text("输入：${state.inputName ?: "未选择"}")
+                Text(state.status, Modifier.testTag("playback-host-status"))
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = it::openPlayer, enabled = it.playerAvailable,
-                        modifier = Modifier.testTag("open-realtime-player")) { Text("打开播放器") }
-                    Text("当前平台的播放器控制项仍由 Host 页面提供。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        modifier = Modifier.testTag("open-realtime-player")) { Text("选择视频") }
+                    if (it.controlsAvailable) OutlinedButton(onClick = it::togglePlayback,
+                        enabled = it.playerAvailable && state.hasVideo,
+                        modifier = Modifier.testTag("toggle-realtime-player")) {
+                        Text(if (state.isPlaying) "暂停" else "播放")
+                    }
                 }
             }
         }
     }
     actions?.let {
         HorizontalDivider(Modifier.padding(vertical = 12.dp))
-        Text("播放器状态", style = MaterialTheme.typography.titleMedium)
-        Text("支持模式：${it.supportedModes.joinToString()}")
-        Text("用户选择：${it.selectedMode}")
-        Text("实际呈现：${it.presentedMode ?: "等待播放器确认上屏"}")
-        if (it.fallbackToOriginal) Text("当前帧已回退到原画。", color = MaterialTheme.colorScheme.tertiary)
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            it.supportedModes.forEach { mode ->
-                OutlinedButton(onClick = { it.selectMode(mode) }, enabled = mode != it.selectedMode) { Text(mode.name) }
+        Text("用户选择：${state.selectedMode}", Modifier.testTag("playback-selected-mode"))
+        Text("实际呈现：${state.presentedMode ?: "等待播放器确认上屏"}", Modifier.testTag("playback-presented-mode"))
+        if (state.fallbackToOriginal) Text("当前已回退到原画播放路径。", color = MaterialTheme.colorScheme.tertiary)
+        Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            state.supportedModes.forEach { mode ->
+                FilterChip(selected = mode == state.selectedMode,
+                    onClick = { it.selectMode(mode); state = PlaybackDemoState.read(player, actions) },
+                    label = { Text(if (mode == RealtimeSRMode.ORIGINAL) "原画" else if (mode == RealtimeSRMode.AUTO) "自动" else mode.name) },
+                    modifier = Modifier.testTag("playback-mode-${mode.name.lowercase()}"))
             }
         }
     } ?: if (player == null) UnavailablePage(status) else {
-        Text("模式选择和实际呈现状态会在播放器页内更新；当前页面不伪造帧状态。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("当前 Host 尚未提供超分模式与实际上屏状态。", color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 

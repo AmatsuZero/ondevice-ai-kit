@@ -1,3 +1,9 @@
+## 统一实时超分：异步打开完成与 CMP 按钮节点（2026-11-21）
+
+`CodecPlayer.open()` 只向内部 Handler 排队，配置异常也经 listener 异步返回；在调用返回后清除旧错误或用外围 try/catch 处理 codec 配置失败均不成立。当前 request/token 的 `format` 回调证明配置完成，再更新打开状态；打开阶段失败时单次重开 Direct Surface。Direct 原画回退可记为路由决定，但 `presentedBackend` 必须等待真实显示证据。同源失败→成功重开、保留增强请求→direct 回退、EOS 重播和 leave 均已用生产 session 的模拟器 instrumentation 验证；不据此证明真机性能。
+
+Compose 按钮禁用后，其 `Text` 子节点仍可能报告 `enabled=true`；Android CMP 验收脚本末端曾因此误判，实际 `toggle-realtime-player` 按钮为 `enabled=false`。按按钮 resource-id 复核原 XML，并独立读取当前页面确认，不改生产 UI 来迎合错误断言。iOS 按钮状态由 250ms 共享轮询刷新，XCTest 应等待实际 label，不能在 tap 返回后立即断言。首错、恢复和边界见[统一实时超分验收](validation/unified-realtime-sr-demo-20261121.md)。
+
 ## 统一 iOS Demo：独立体验工程不能替代默认工程验收（2026-11-21）
 
 离线变声在独立生成工程中已完成，但默认 `OnDeviceAIDemo.xcodeproj` 缺产品、Host / bridge 源与编译条件，统一首页因此显示未接入。需同时修生成器和默认 PBX，并从根 workspace 的真实 App 验证统一入口、导入及转换；不能拿旧 SpeechDemo 成功替代。默认 UI test bundle 的 CameraLifecycle 用例另有重复 `let card`，即使 `-only-testing` 只选变声，也会因同 bundle 的其他源编译失败；删除重复两行后入口和合成 WAV 升调均通过。工具测试最初还遇 Swift 缓存写入被拒，隔离缓存后只余 SwiftPM 嵌套 `sandbox_apply` 被拒，该项在宿主单独通过，不改生产依赖。边界及首错见[默认 Demo 接入验收](validation/unified-ios-voice-demo-20261121.md)。

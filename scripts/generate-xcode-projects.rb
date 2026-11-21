@@ -5,8 +5,8 @@ root = File.expand_path('..', __dir__)
 def create_project(root, relative, name, products, package_path, source)
   directory = File.join(root, relative)
   project_path = File.join(directory, "#{name}.xcodeproj")
-  project = Xcodeproj::Project.new(project_path)
-  target = project.new_target(:application, name, :ios, '15.0')
+  project = File.exist?(project_path) ? Xcodeproj::Project.open(project_path) : Xcodeproj::Project.new(project_path)
+  target = project.targets.find { |t| t.name == name } || project.new_target(:application, name, :ios, '15.0')
   target.build_configurations.each do |config|
     config.build_settings.merge!({
       'PRODUCT_BUNDLE_IDENTIFIER' => "io.ondeviceai.#{name.downcase}",
@@ -16,10 +16,14 @@ def create_project(root, relative, name, products, package_path, source)
       'TARGETED_DEVICE_FAMILY' => '1,2', 'CODE_SIGN_STYLE' => 'Manual'
     })
   end
-  package = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
-  package.relative_path = package_path
-  project.root_object.package_references << package
+  package = project.root_object.package_references.find { |ref| ref.respond_to?(:relative_path) && ref.relative_path == package_path }
+  unless package
+    package = project.new(Xcodeproj::Project::Object::XCLocalSwiftPackageReference)
+    package.relative_path = package_path
+    project.root_object.package_references << package
+  end
   products.each do |name|
+    next if target.package_product_dependencies.any? { |dep| dep.product_name == name }
     dependency = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
     dependency.product_name = name; dependency.package = package
     target.package_product_dependencies << dependency
@@ -27,7 +31,10 @@ def create_project(root, relative, name, products, package_path, source)
     build_file.product_ref = dependency
     target.frameworks_build_phase.files << build_file
   end
-  source.each { |name| target.source_build_phase.add_file_reference(project.main_group.new_file(name)) }
+  source.each do |source_name|
+    next if target.source_build_phase.files_references.any? { |ref| ref&.path == source_name }
+    target.source_build_phase.add_file_reference(project.main_group.new_file(source_name))
+  end
   if name == 'OnDeviceAIDemo'
     target.build_configurations.each do |config|
       config.build_settings.merge!({
@@ -45,19 +52,27 @@ def create_project(root, relative, name, products, package_path, source)
         'ODAI_SDK_COMMIT' => 'working-tree'
       })
     end
-    framework = project.main_group.new_file('../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework/ODAIKitDemo.framework')
-    target.frameworks_build_phase.add_file_reference(framework)
+    unless target.frameworks_build_phase.files_references.any? { |ref| ref&.path&.end_with?('ODAIKitDemo.framework') }
+      framework = project.main_group.new_file('../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework/ODAIKitDemo.framework')
+      target.frameworks_build_phase.add_file_reference(framework)
+    end
+    unless target.resources_build_phase.files_references.any? { |ref| ref&.path == 'RealtimeSRNotices' }
+      notices = project.main_group.new_file('RealtimeSRNotices')
+      notices.last_known_file_type = 'folder'
+      target.resources_build_phase.add_file_reference(notices)
+    end
   end
   project.save
   scheme = Xcodeproj::XCScheme.new
   scheme.add_build_target(target); scheme.set_launch_target(target)
-  scheme.save_as(project_path, target.name, true)
+  scheme.save_as(project_path, target.name, true) unless File.exist?(File.join(project_path, "xcshareddata/xcschemes/#{target.name}.xcscheme"))
 end
 create_project(root, 'examples/ios-native', 'NativeConsumer', ['ODAIKitCore', 'ODAIKitFace', 'ODAIKitAppleVision'], '../../apple', ['NativeConsumerApp.swift'])
 create_project(root, 'demo/iosApp', 'OnDeviceAIDemo',
   %w[ODAIKitCore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech ODAIKitVoiceEffects ODAIKitAppleVoiceEffects], '../../apple',
   %w[OnDeviceAIDemoApp.swift DemoController.swift IOSFaceBridge.swift CameraSource.swift CameraLifecycle.swift PhotoSubmission.swift
-     PlaybackEnhancementHost.swift SpeechHost.swift SpeechFilePicker.swift SpeechInputStore.swift SpeechAudioSession.swift
+     PlaybackEnhancementHost.swift PlaybackEnhancementMetalRenderer.swift PlaybackEnhancementSR.swift PlaybackEnhancementSystemSR.swift PlaybackFrameChoice.swift
+     PlaybackEnhancementShaders.metal PlaybackEnhancementCuNNy.metal PlaybackEnhancementSpatial.metal SpeechHost.swift SpeechFilePicker.swift SpeechInputStore.swift SpeechAudioSession.swift
      VoiceEffectsHost.swift VoiceEffectsInputStore.swift VoiceEffectsWave.swift
      ../../kmp-binding/apple/IOSSpeechBridge.swift ../../kmp-binding/apple/IOSSpeechAudioInput.swift
      ../../kmp-binding/apple/IOSVoiceEffectsBridge.swift])

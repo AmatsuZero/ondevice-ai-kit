@@ -5,6 +5,8 @@ val enableOpenCvIdentity = providers.gradleProperty("enableOpenCvIdentity").orNu
 val enableSherpaAsr = providers.gradleProperty("enableSherpaAsr").orNull == "true"
 android {
  namespace="io.ondeviceai.demo";compileSdk=36
+ ndkVersion = "27.0.12077973"
+ externalNativeBuild { cmake { path = file("../../examples/android-realtime-sr/src/main/cpp/CMakeLists.txt"); version = "3.22.1" } }
  defaultConfig {applicationId="io.ondeviceai.demo";minSdk=26;targetSdk=36;versionCode=1;versionName="0.1.0";testInstrumentationRunner=providers.gradleProperty("odaiTestRunner").orNull?:"io.ondeviceai.demo.TtsProbeInstrumentation";buildConfigField("String","ODAI_SDK_COMMIT","\""+(providers.gradleProperty("sdkCommit").orNull?:"working-tree")+"\"")}
  buildFeatures {compose=true;buildConfig=true}
  sourceSets.getByName("main").kotlin.srcDir(if (enableSherpaAsr) "src/sherpaasr/kotlin" else "src/noSherpaasr/kotlin")

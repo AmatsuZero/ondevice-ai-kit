@@ -1,0 +1,33 @@
+{
+  "sourceRepository": "comp-uhplayersdk",
+  "fixedCommit": "7d40dfe94f007c808c30cdb3b8004444f0405cdc",
+  "files": [
+    {
+      "source": "Sources/Render/Metal/UHPlayerSuperResolution.swift",
+      "destination": "demo/iosApp/PlaybackEnhancementSR.swift",
+      "sourceSha256": "214d33581b9b84b964baccc195f9b9e6dc958c39967e43deb1c40780222555df"
+    },
+    {
+      "source": "Sources/Render/Metal/UHSystemSR.swift",
+      "destination": "demo/iosApp/PlaybackEnhancementSystemSR.swift",
+      "sourceSha256": "04a3b0225af8d6f9d5b9067a9107672c58618c0b32742c9b5cea11993ade25f8"
+    },
+    {
+      "source": "Examples/SuperResolution/CuNNy.metal",
+      "destination": "demo/iosApp/PlaybackEnhancementCuNNy.metal",
+      "sourceSha256": "d1ec82236af13bf2dbd23f9488ad69d3bdc3a3a1a8c471c4ca3d84ba710d9fda"
+    },
+    {
+      "source": "Examples/SuperResolution/iOSDemo/App/Spatial.metal",
+      "destination": "demo/iosApp/PlaybackEnhancementSpatial.metal",
+      "sourceSha256": "68d3b5aab7138f336848a18f2475e90b3d6e6f299c5e0bc1106f5c472de5f99b"
+    }
+  ],
+  "scope": "Demo-only isolated SR engines and shaders; no UHPlayerSDK link dependency. Renderer/host are new integration code.",
+  "CuNNy": "Copyright (c) 2024 funnyplanter, LGPL-3.0-or-later; original source and license are shipped with this repository.",
+  "modifications": [
+    "System SR disabled at compile time for simulator SDKs without the API",
+    "Frame-choice gate extracted without behavior changes into PlaybackFrameChoice.swift",
+    "Original CuNNy and Spatial shader bytes preserved"
+  ]
+}

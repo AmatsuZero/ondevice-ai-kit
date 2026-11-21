@@ -20,6 +20,9 @@ end
 unless tests.source_build_phase.files_references.any? { |f| f.path == 'UITests/VoiceEffectsDemoUITests.swift' }
   tests.source_build_phase.add_file_reference(project.main_group.new_file('UITests/VoiceEffectsDemoUITests.swift'))
 end
+unless tests.source_build_phase.files_references.any? { |f| f.path == 'UITests/PlaybackEnhancementUITests.swift' }
+  tests.source_build_phase.add_file_reference(project.main_group.new_file('UITests/PlaybackEnhancementUITests.swift'))
+end
 tests.build_configurations.each do |config|
   config.build_settings.merge!({
     'ODAI_APP_BUNDLE_ID' => 'io.ondeviceai.ondeviceaidemo',
@@ -33,4 +36,4 @@ scheme = Xcodeproj::XCScheme.new
 scheme.add_build_target(app); scheme.set_launch_target(app)
 scheme.add_build_target(tests, false); scheme.add_test_target(tests)
 scheme.save_as(path, app.name, true)
-scheme.save_as(path, 'iOS Demo', true)
+scheme.save_as(path, 'iOS Demo', true) unless File.exist?(File.join(path, 'xcshareddata/xcschemes/iOS Demo.xcscheme'))

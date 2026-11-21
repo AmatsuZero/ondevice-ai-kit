@@ -43,7 +43,6 @@ import io.ondeviceai.face.*
 import io.ondeviceai.mlkit.MLKitFaceDetector
 import io.ondeviceai.systemtts.AndroidTextToSpeechBackend
 import io.ondeviceai.systemasr.AndroidSpeechRecognizerBackend
-import io.ondeviceai.realtimesr.PlayerActivity
 import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -61,12 +60,14 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private lateinit var voiceHost: VoiceEffectsHost
     private var unifiedModel: UnifiedDemoModel? = null
     private var unifiedCleaning by mutableStateOf(false)
-    private val playbackEnhancementActions = object : PlaybackEnhancementDemoActions {
-        override val playerAvailable: Boolean = true
-        override val playerDescription: String =
-            "Android 原生播放器已接入：支持本地 H.264/AAC、原画/自动/CuNNy/Spatial 切换；逐帧回退和实际呈现后端在播放器页内更新。"
-        override fun openPlayer() {
-            startActivity(Intent(this@MainActivity, PlayerActivity::class.java))
+    private lateinit var playbackHost: PlaybackEnhancementHost
+    private var playbackPickerEpoch = 0L
+    private val playbackPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (::playbackHost.isInitialized) {
+            val name = runCatching { uri?.let { selected -> contentResolver.query(selected, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use {
+                if (it.moveToFirst()) it.getString(0) else null
+            } } }.getOrNull()
+            playbackHost.picked(uri, name, playbackPickerEpoch)
         }
     }
     private var multimodalHost: MultimodalHost? = null
@@ -237,6 +238,10 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
             openSettings = { startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) },
             asrResources = speechResourceHost)
         voiceHost = VoiceEffectsHost(this)
+        playbackHost = PlaybackEnhancementHost(this) {
+            playbackPickerEpoch = playbackHost.selectionEpoch
+            playbackPicker.launch(arrayOf("video/*"))
+        }
         setContent {
             val unifiedModel = remember {
                 UnifiedDemoModel(onLeave = ::leaveUnifiedCapability, isIdle = ::unifiedDemoIdle).also { this@MainActivity.unifiedModel = it }
@@ -257,8 +262,8 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                     override val multimodalActions get() = multimodalHost
                     override val voiceEffectsModel get() = voiceHost.model
                     override val voiceEffectsActions get() = voiceHost
-                    override val realtimeSr: RealtimeSRDemoActions? get() = null
-                    override val playbackEnhancement get() = playbackEnhancementActions
+                    override val realtimeSr: RealtimeSRDemoActions get() = playbackHost
+                    override val playbackEnhancement get() = playbackHost
                     override val nowMillis get() = System.currentTimeMillis()
                     override fun setRecordSink(sink: DemoTerminalObserver?) {
                         model.onTerminal = sink
@@ -269,6 +274,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                     }
                     override fun enterCapability(id: DemoCapabilityId) {
                         if (id == DemoCapabilityId.VOICE_EFFECTS) voiceHost.foreground()
+                        if (id == DemoCapabilityId.PLAYBACK_ENHANCEMENT) playbackHost.enter()
                     }
                     override fun retryCleanup() { videoHost.model.retryReleases(); voiceHost.model.retryReleases() }
                     override fun modelSetup(id: DemoCapabilityId) = unifiedModelSetup(id)
@@ -286,6 +292,10 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                     model = unifiedModel,
                     bindings = bindings,
                     modifier = Modifier.fillMaxSize().safeDrawingPadding().semantics { testTagsAsResourceId = true },
+                    playbackContent = {
+                        AndroidView(factory = { playbackHost.surfaceView }, modifier = Modifier.fillMaxWidth().height(240.dp),
+                            onRelease = { playbackHost.leave() })
+                    },
                     facePreview = {
                         Box(Modifier.fillMaxWidth().height(240.dp).background(Color.Black).testTag("face-preview")) {
                             if (cameraRunning) AndroidView(
@@ -312,7 +322,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     }
 
     private fun unifiedDemoIdle(): Boolean =
-        !unifiedCleaning && (!::voiceHost.isInitialized || voiceHost.idle) &&
+        !unifiedCleaning && (!::playbackHost.isInitialized || playbackHost.idle) && (!::voiceHost.isInitialized || voiceHost.idle) &&
         (!::speechHost.isInitialized || speechHost.model.state.controlsEnabled) &&
             (!::videoHost.isInitialized || (videoHost.model.state.controlsEnabled && videoHost.model.state.pendingReleases == 0)) &&
             (multimodalHost?.model?.state?.controlsEnabled != false) &&
@@ -327,7 +337,8 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
             DemoCapabilityId.FACE_DETECTION -> { stopCamera(); model.cancel(); identityModel.cancel() }
             DemoCapabilityId.IMAGE_UNDERSTANDING -> { multimodalHost?.cancelModelSetup(); multimodalHost?.leaveMultimodalPage() }
             DemoCapabilityId.FILE_SUPER_RESOLUTION -> if (::videoHost.isInitialized) videoHost.leavePage()
-            DemoCapabilityId.PLAYBACK_ENHANCEMENT, DemoCapabilityId.VIDEO_UNDERSTANDING -> Unit
+            DemoCapabilityId.PLAYBACK_ENHANCEMENT -> playbackHost.leave()
+            DemoCapabilityId.VIDEO_UNDERSTANDING -> Unit
             DemoCapabilityId.IDENTITY_LIVENESS -> identityModel.leavePage()
         }
         unifiedCleaning = true
@@ -352,7 +363,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
         DemoCapabilityId.FILE_SUPER_RESOLUTION -> videoStatus()
         DemoCapabilityId.PLAYBACK_ENHANCEMENT -> DemoCapabilityStatus(
             DemoCapabilityAvailabilityKind.READY,
-            "Android 原生实时播放器已接入；实际呈现后端在播放器页确认",
+            "CMP 内嵌实时播放器；支持原画/自动/CuNNy/Spatial",
         )
         DemoCapabilityId.VIDEO_UNDERSTANDING, DemoCapabilityId.IDENTITY_LIVENESS -> DemoCapabilityStatus(DemoCapabilityAvailabilityKind.FROZEN_PREVIEW, "研发暂停")
     }
@@ -508,7 +519,7 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
             finally { reader.close() }
         }
     }
-    override fun onStart(){if(::voiceHost.isInitialized && (unifiedModel?.route as? UnifiedDemoRoute.Capability)?.id == DemoCapabilityId.VOICE_EFFECTS)voiceHost.foreground();if(::videoHost.isInitialized)videoHost.foreground();super.onStart();if(::speechHost.isInitialized)speechHost.onForeground();multimodalHost?.onForeground()}
-    override fun onStop(){if(::voiceHost.isInitialized)voiceHost.background();identityRuntime?.stop();if(::speechHost.isInitialized)speechHost.onBackground();if(::videoHost.isInitialized)videoHost.background(preservePicker=videoPickerReply!=null || videoImport?.isActive==true);multimodalHost?.background(preservePicker=multimodalPickerReply!=null || multimodalImport?.isActive==true);super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
-    override fun onDestroy(){if(::voiceHost.isInitialized)voiceHost.close();identityRuntime?.close();multimodalPickerReply=null;multimodalPickerFailure=null;multimodalImport?.cancel();multimodalHost?.close();if(::speechHost.isInitialized)speechHost.close();if(::videoHost.isInitialized)videoHost.close();videoPickerReply=null;videoImport?.cancel();speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
+    override fun onStart(){if(::playbackHost.isInitialized)playbackHost.foreground();if(::voiceHost.isInitialized && (unifiedModel?.route as? UnifiedDemoRoute.Capability)?.id == DemoCapabilityId.VOICE_EFFECTS)voiceHost.foreground();if(::videoHost.isInitialized)videoHost.foreground();super.onStart();if(::speechHost.isInitialized)speechHost.onForeground();multimodalHost?.onForeground()}
+    override fun onStop(){if(::playbackHost.isInitialized)playbackHost.background();if(::voiceHost.isInitialized)voiceHost.background();identityRuntime?.stop();if(::speechHost.isInitialized)speechHost.onBackground();if(::videoHost.isInitialized)videoHost.background(preservePicker=videoPickerReply!=null || videoImport?.isActive==true);multimodalHost?.background(preservePicker=multimodalPickerReply!=null || multimodalImport?.isActive==true);super.onStop();if(::model.isInitialized){stopCamera();model.cancel()}}
+    override fun onDestroy(){if(::playbackHost.isInitialized)playbackHost.close();if(::voiceHost.isInitialized)voiceHost.close();identityRuntime?.close();multimodalPickerReply=null;multimodalPickerFailure=null;multimodalImport?.cancel();multimodalHost?.close();if(::speechHost.isInitialized)speechHost.close();if(::videoHost.isInitialized)videoHost.close();videoPickerReply=null;videoImport?.cancel();speechPermissionGate.clear();if(::model.isInitialized)model.close();identityModel.close();identityProbeFactory=null;latestIdentityCameraFrame=null;cameraExecutor.shutdown();super.onDestroy()}
 }
