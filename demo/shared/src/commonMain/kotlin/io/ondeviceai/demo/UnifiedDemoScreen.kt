@@ -87,7 +87,13 @@ interface RealtimeSRDemoActions {
 interface PlaybackEnhancementDemoActions {
     val playerAvailable: Boolean
     val playerDescription: String
+    /** True when the platform Host exposes the playback controls to CMP. */
+    val controlsAvailable: Boolean get() = false
     fun openPlayer()
+    /** Platform Host controls the playback engine; CMP owns the controls. */
+    fun togglePlayback() {}
+    fun showOriginal() {}
+    fun showEnhancedPreview() {}
 }
 
 @Composable
@@ -358,9 +364,11 @@ private fun PlaybackEnhancementPage(
     player: PlaybackEnhancementDemoActions?,
     playbackContent: (@Composable () -> Unit)?,
 ) {
+    var playing by remember { mutableStateOf(false) }
+    var enhancedPreview by remember { mutableStateOf(false) }
     Text("播放时增强", style = MaterialTheme.typography.titleLarge)
     Text(
-        "选择本地视频后，在同一播放器里对比原画、自动和设备可用的实时超分后端。播放器负责解码、音频时钟、逐帧增强与最终上屏。",
+        "选择本地视频后，在同一页面里对比原画和增强预览。页面由 CMP 统一渲染，平台 Host 只负责解码、取帧和最终上屏。",
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
     playbackContent?.invoke()
@@ -369,8 +377,49 @@ private fun PlaybackEnhancementPage(
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(if (it.playerAvailable) "实时播放器已接入" else "实时播放器未接入", style = MaterialTheme.typography.titleMedium)
                 Text(it.playerDescription, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Button(onClick = it::openPlayer, enabled = it.playerAvailable,
-                    modifier = Modifier.testTag("open-realtime-player")) { Text("打开实时播放器") }
+                if (it.controlsAvailable) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Button(onClick = {
+                            it.openPlayer()
+                            playing = true
+                        }, enabled = it.playerAvailable,
+                            modifier = Modifier.testTag("open-realtime-player")) { Text("选择视频") }
+                        OutlinedButton(onClick = {
+                            it.togglePlayback()
+                            playing = !playing
+                        }, enabled = it.playerAvailable,
+                            modifier = Modifier.testTag("toggle-realtime-player")) {
+                            Text(if (playing) "暂停" else "播放")
+                        }
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FilterChip(
+                            selected = !enhancedPreview,
+                            onClick = {
+                                enhancedPreview = false
+                                it.showOriginal()
+                            },
+                            label = { Text("原画") },
+                        )
+                        FilterChip(
+                            selected = enhancedPreview,
+                            onClick = {
+                                enhancedPreview = true
+                                it.showEnhancedPreview()
+                            },
+                            label = { Text("增强预览") },
+                        )
+                    }
+                    Text(
+                        if (enhancedPreview) "当前模式：增强预览（iOS 为 Core Image 锐化示意）"
+                        else "当前模式：原画",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                } else {
+                    Button(onClick = it::openPlayer, enabled = it.playerAvailable,
+                        modifier = Modifier.testTag("open-realtime-player")) { Text("打开播放器") }
+                    Text("当前平台的播放器控制项仍由 Host 页面提供。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
             }
         }
     }

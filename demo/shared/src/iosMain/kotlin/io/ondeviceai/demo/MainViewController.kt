@@ -14,12 +14,15 @@ import platform.UIKit.UIViewController
 /** Default app entry. Legacy exported factories below remain source compatible. */
 @OptIn(ExperimentalForeignApi::class)
 fun unifiedDemoViewController(bindings: UnifiedDemoBindings, facePreview: UIViewController,
-    voiceEffects: UIViewController?): UIViewController = ComposeUIViewController {
+    voiceEffects: UIViewController?, playback: UIViewController? = null): UIViewController = ComposeUIViewController {
     val model = remember { UnifiedDemoModel(onLeave = bindings::leaveCapability, isIdle = bindings::isIdle) }
     UnifiedDemoScreen(model, bindings,
         facePreview = { UIKitViewController(factory = { facePreview }, modifier = Modifier.fillMaxWidth().height(220.dp)) },
         voiceContent = voiceEffects?.let { controller ->
             { UIKitViewController(factory = { controller }, modifier = Modifier.fillMaxSize()) }
+        },
+        playbackContent = playback?.let { controller ->
+            { UIKitViewController(factory = { controller }, modifier = Modifier.fillMaxWidth().height(360.dp)) }
         })
 }
 fun mainViewController(model:FaceViewModel,actions:DemoActions,identity:IdentityViewModel,

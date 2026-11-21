@@ -43,7 +43,7 @@ open artifacts/SpeechDemo-new/SpeechDemo.xcodeproj
 
 生成器可用 `ODAI_DEVELOPMENT_TEAM` 传入已有 team；不创建签名账户/资产。新工程包含实际 App UI 测试，旧工程仍保留旧入口。后端列表不等于语言资源就绪；取消按钮会等待 native drain 后才恢复操作。生成的 iOS 工程支持文件/麦克风输入：文件只请求 Speech 权限，麦克风依次请求 Speech 和录音权限；“结束录音并识别”等待最终结果，“取消”丢弃结果。宿主显式提供独占 audio-session lease，采集结束并 drain 后恢复 category/mode/options。当前真机证据、Android 资源与审查缺口见[语音 Demo 验证](docs/validation/speech-demo-bridge.md)和[麦克风验证](docs/validation/ios-microphone-asr.md)。
 
-视频 Demo：Android APK 包含“视频”页和“播放时增强”入口。文件超分继续使用独立 VideoBridge；播放时增强在统一 CMP 页面打开同一 APK 内的原生实时播放器，播放器页负责本地 H.264/AAC 解码、音频时钟、原画/自动/CuNNy/Spatial 切换、逐帧回退和实际呈现状态。iOS 在上述生成命令增加 `ODAI_VIDEO_DEMO=1`，新工程才链接可选 Video/AppleVideo 并加入视频 host/adapter；当前 iOS 播放时增强仍等待 UHPlayerSDK 宿主接入，统一页会明确显示未接入，不伪造画面。视频当前支持固定 Apple profile，取消等待 native drain，输出由显式清理或离页释放，播放/分享有独立副本。新 Demo UI 尚未通过真机验收，构建、fixture 与设备缺口见[视频 Demo 验证](docs/validation/video-bridge-demo.md)。
+视频 Demo：Android APK 包含“视频”页和“播放时增强”入口。文件超分继续使用独立 VideoBridge；播放时增强的能力页和入口由统一 CMP 页面呈现，平台 Host 负责本地解码、音频时钟、逐帧处理和渲染。iOS 已将选择视频、播放/暂停、原画/增强预览和状态文案收回 CMP；Android 仍复用已有实时播放器页面控件，后续再抽取为可嵌入 Host。iOS 使用 Demo 专用 `AVPlayer` + `AVPlayerItemVideoOutput`，增强预览明确标注为 Core Image 锐化示意，不依赖 UHPlayerSDK，也不冒充生产 AI 超分。视频当前支持固定 Apple profile，取消等待 native drain，输出由显式清理或离页释放，播放/分享有独立副本。新 Demo UI 尚未通过真机验收，构建、fixture 与设备缺口见[视频 Demo 验证](docs/validation/video-bridge-demo.md)。
 
 ## 本地分发
 

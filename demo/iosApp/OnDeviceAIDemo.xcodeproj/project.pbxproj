@@ -20,6 +20,7 @@
 		C97C9FD3F5B34B459AF57CCD /* OnDeviceAIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86B07B08BD419D7805814EB /* OnDeviceAIDemoApp.swift */; };
 		D766B6221010C3CB4849338C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C400C8A95494A2E3B6E3B066 /* Foundation.framework */; };
 		EAE1DFD11F31551C8EAE8DF9 /* PhotoSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA01B99A417119D971081869 /* PhotoSubmission.swift */; };
+		EFD08C8D0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD08C8C0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		CA01B99A417119D971081869 /* PhotoSubmission.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoSubmission.swift; sourceTree = "<group>"; };
 		DA48C129CED625C9A7C154F3 /* ODAIKitDemo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ODAIKitDemo.framework; path = "../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework/ODAIKitDemo.framework"; sourceTree = "<group>"; };
 		EF72EE06B623224FAB2A2780 /* CameraSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CameraSource.swift; sourceTree = "<group>"; };
+		EFD08C8C0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlaybackEnhancementHost.swift; sourceTree = "<group>"; };
 		FA3FAC9270A8B0373708CABC /* OnDeviceAIDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnDeviceAIDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 				A3DA0A16610DA12DD4F9F83C /* CameraLifecycleUITests.swift */,
 				5E2AA788318EF571CB8808CC /* CameraLifecycle.swift */,
 				CA01B99A417119D971081869 /* PhotoSubmission.swift */,
+				EFD08C8C0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -223,6 +226,7 @@
 				A50CE56483A0B360D9A0BE38 /* CameraSource.swift in Sources */,
 				A119FD29C8CFE752D8D56CC4 /* CameraLifecycle.swift in Sources */,
 				EAE1DFD11F31551C8EAE8DF9 /* PhotoSubmission.swift in Sources */,
+				EFD08C8D0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

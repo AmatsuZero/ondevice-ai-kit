@@ -12,7 +12,8 @@ struct SharedControls: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
         let preview = UIHostingController(rootView: UnifiedFacePreview(controller: controller))
         return MainViewControllerKt.unifiedDemoViewController(bindings: context.coordinator.bindings,
-            facePreview: preview, voiceEffects: context.coordinator.bindings.voiceController)
+            facePreview: preview, voiceEffects: context.coordinator.bindings.voiceController,
+            playback: context.coordinator.bindings.playbackHost.viewController)
     }
     func updateUIViewController(_ view: UIViewController, context: Context) {}
     static func dismantleUIViewController(_ view: UIViewController, coordinator: Coordinator) {
@@ -48,11 +49,13 @@ private struct UnifiedFacePreview: View {
 @MainActor
 final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBindings {
     private let controller: DemoController
+    let playbackHost: PlaybackEnhancementHost
     #if ODAI_VOICE_EFFECTS_DEMO
     private let voice: VoiceEffectsHost
     #endif
     init(controller: DemoController) {
         self.controller = controller
+        self.playbackHost = PlaybackEnhancementHost()
         #if ODAI_VOICE_EFFECTS_DEMO
         self.voice = VoiceEffectsHost(embedded: true, prepareAudio: {}, done: {})
         #endif
@@ -134,7 +137,7 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
         return nil
         #endif
     }
-    var playbackEnhancement: (any PlaybackEnhancementDemoActions)? { nil }
+    var playbackEnhancement: (any PlaybackEnhancementDemoActions)? { playbackHost }
     var realtimeSr: (any RealtimeSRDemoActions)? { nil }
     func modelSetup(id: DemoCapabilityId) -> (any UnifiedDemoModelActions)? {
         #if ODAI_MULTIMODAL_MLX_DEMO
@@ -179,7 +182,7 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
             return DemoCapabilityStatus(kind: .frozenPreview, detail: "研发暂停")
         }
         if id == .playbackEnhancement {
-            return DemoCapabilityStatus(kind: .missingHost, detail: "当前 Demo 构建未接入播放器")
+            return DemoCapabilityStatus(kind: .ready, detail: "AVPlayer 播放器已接入；增强预览为 Demo 级 Core Image 示意")
         }
         if id == .faceDetection {
             let availability = controller.bridge.availability()
@@ -224,6 +227,7 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
         #if ODAI_VOICE_EFFECTS_DEMO
         voice.shutdown()
         #endif
+        playbackHost.close()
         setRecordSink(sink: nil)
     }
 }

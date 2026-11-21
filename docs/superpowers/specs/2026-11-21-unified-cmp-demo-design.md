@@ -82,10 +82,10 @@ CMP shared UI
 | 人脸检测 | 预览、框和关键点在详情页内展示；相机离页停止，不把平台预览固定悬在所有能力页面上方。 |
 | 图像理解 | 共用入口与页布局；按编译配置、Host 和模型状态显示可用/未接入/缺模型。当前内部签包的 iOS 未纳入多模态，不为对齐界面自动启用 MLX 或重启模型评估。 |
 | 视频文件超分 | 复用 Video ViewModel/Host 的选取、处理、取消、播放/分享输出；原生后端和 OS 限制原样保留。前后对比只显示真实可获取的输入/输出，无法同步比较时明确使用分别预览，不用模拟增强图替代。 |
-| 播放时增强 | 接入已有 `RealtimeVideoSR` / `SelectableRealtimeSRHost` 控制与状态；Android 复用 `examples/android-realtime-sr` 已有播放器实现，iOS 通过现有 `kmp-binding/player-apple` 与独立 UHPlayerSDK 接入。实现计划须固定可构建的现有播放器来源/版本，复用既有着色器与播放器，不另造渲染器，不改播放器仓库或发版。缺 Host 时入口显示“当前构建未接入”及原因，不静默模拟或删除入口。 |
+| 播放时增强 | 接入已有 `RealtimeVideoSR` / `SelectableRealtimeSRHost` 控制与状态；Android 先复用 `examples/android-realtime-sr` 已有播放器实现，iOS Demo 采用轻量 `AVPlayer` + `AVPlayerItemVideoOutput` Host。CMP 统一呈现能力入口和共享状态；iOS 控制项已由 CMP 承载，Android 既有播放器控件暂保留，待抽取可嵌入 Surface/时钟 Host 后再完全统一。原生 Host 只负责平台解码、逐帧取图、增强预览和渲染。iOS 的 Core Image 路径必须标注为 Demo 示意，不冒充生产 AI 超分，也不修改或依赖独立 UHPlayerSDK。 |
 | 视频理解 / 身份与活体 | 默认提供冻结预览页，使用随包合成示意，不调用冻结模型。保留原有注册数据的删除/停用恢复入口（仅在已有 Host 管理能力存在时显示），不创建新注册或迁移数据，不给认证结论。 |
 
-已有原生播放器的本地来源还未等同于统一 App 中已经接入；在正式集成验证前，“播放时增强”保持明确的接线状态。
+已有原生播放器的本地来源还未等同于统一 App 中已经完成正式算法验收；本 Demo 允许使用明确标注的轻量 Host 展示完整交互，但不得把示意增强写成生产后端能力。
 
 ## 页面与状态约定
 
