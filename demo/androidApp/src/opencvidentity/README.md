@@ -1,8 +1,9 @@
 # Optional Android Identity prototype
 
 Build with `-PenableOpenCvIdentity=true`. It can be combined with
-`-PenableLiteRtSr=true -PenableLiteRtLm=true`; the default Demo links none of
-these vendor runtimes. OpenCV is pinned to `org.opencv:opencv:4.12.0`.
+`-PenableLiteRtLm=true`; the default Demo already links the LiteRT SR runtime.
+OpenCV and LiteRT-LM remain opt-in. Use `-PenableLiteRtSr=false` to omit SR.
+OpenCV is pinned to `org.opencv:opencv:4.12.0`.
 
 Open **身份与活体 → 导入身份模型** and select a flat ZIP containing exactly:
 

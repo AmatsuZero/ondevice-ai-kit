@@ -1,5 +1,10 @@
 # Android learned video SR Demo — 2026-11-03
 
+2026-11-22: the current Demo now enables LiteRT SR by default; use
+`-PenableLiteRtSr=false` to omit it. Model import remains explicit. The opt-in
+default described below is historical. Current build/UI evidence is in
+[the default-integration validation](android-file-sr-default-20261122.md).
+
 2026-11-06: the retained physical 48-frame output now has an actual
 [reference/bicubic fidelity comparison and per-frame scores](f11-android-sr-fidelity-20261106.md).
 This measures historical output without another inference. Device SR has lower

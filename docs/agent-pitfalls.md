@@ -1,3 +1,7 @@
+## CMP 能力未接入：先核实际构建图及具体模型身份 — 2026-11-22
+
+Android 文件超分卡显示“当前构建未接入”，本次根因是 Demo 默认选择 noLitertsr 工厂、未链接已有 LiteRT SR，并非共享页面/Host 缺失。先验实际 Gradle dependency/sourceSet；修正默认后，缺模型应是 MISSING_ASSETS 而非伪 READY。默认/true/false 三路、默认 APK 普通系统选片及 4× 导出均需分别验证。验包不能断言没有任何 `.tflite`：ML Kit 自带人脸模型合法存在，应按 ESRGAN 精确名称/大小/哈希检查不内置该 SR 模型。保留首次过宽断言失败，同包精确身份检查通过。模拟器两帧无音轨不证明 AAC passthrough、画质、实时上屏或真机资源；本轮 iOS 只实际执行文件超分 UI 1 项，未执行的指定 test 不计通过。证据 [默认接入验收](validation/android-file-sr-default-20261122.md)。
+
 ## CMP 预览标识、标题中心与配置重建（2026-11-22）
 
 空态下既有 PlaybackEnhancementHost 将 MTKView.isHidden=true，原生 `playback-preview` 不在可访问树；CMP包装若复用同名tag会让空态测试误认native。恢复：包装用 `playback-preview-container` 检查空态16:9，选片渲染后另核唯一native标识的真实frame/运动，不能为测试强行显示renderer。横屏尺寸从滚动外有限viewport拟合，只占实际媒体高度，避免预留半屏空槽。返回自然宽+标题weight的Row会把标题放在剩余区域中心而右偏；测量返回宽并对称预留、按全屏中心放标题，大字允许换行。专用Android模拟器旋转/字号配置重建会回首页，布局检查须读实际路由再通过可见分类重入；不宣称保持路由，显示设置finally精确恢复。证据 `/private/tmp/odai-detail-acceptance-20261122/{final-ui.xcresult,centered-ui.xcresult,large-font-ui.xcresult,android-final/geometry-result.json}`；见 `docs/validation/cmp-capability-details-20261122.md`。模拟器运动仍非真机SR质量/上屏时序证据。

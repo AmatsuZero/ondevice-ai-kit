@@ -1,6 +1,6 @@
 plugins { alias(libs.plugins.android.application);alias(libs.plugins.kotlin.compose) }
 val enableLiteRtLm = providers.gradleProperty("enableLiteRtLm").orNull == "true"
-val enableLiteRtSr = providers.gradleProperty("enableLiteRtSr").orNull == "true"
+val enableLiteRtSr = providers.gradleProperty("enableLiteRtSr").getOrElse("true") == "true"
 val enableOpenCvIdentity = providers.gradleProperty("enableOpenCvIdentity").orNull == "true"
 val enableSherpaAsr = providers.gradleProperty("enableSherpaAsr").orNull == "true"
 android {
