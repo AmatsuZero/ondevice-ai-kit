@@ -29,7 +29,7 @@ Android 模块为 `android/{sdk-core,model-store,face,backend-mlkit,speech,backe
 python3 -m unittest discover -s tools/tests -v
 ```
 
-Xcode 工程已提交。需要重新生成时，使用已有 Ruby xcodeproj gem 执行 `ruby scripts/generate-xcode-projects.rb`。iOS Demo 构建前先执行 `./gradlew :demo:shared:linkDebugFrameworkIosSimulatorArm64`（真机改为 `IosArm64`），再打开 `demo/iosApp/OnDeviceAIDemo.xcodeproj`。Demo 当前仅支持 Apple Silicon 模拟器；SDK 本身不依赖 KMP。真机签名由宿主配置。
+Xcode 工程已提交。需要重新生成时，使用已有 Ruby xcodeproj gem 执行 `ruby scripts/generate-xcode-projects.rb`。iOS Demo 构建前先执行 `./gradlew :demo:shared:linkDebugFrameworkIosSimulatorArm64`（真机改为 `IosArm64`），再打开 `demo/iosApp/OnDeviceAIDemo.xcodeproj`。Demo 支持 Apple Silicon 模拟器与 arm64 真机；SDK 本身不依赖 KMP。Demo 和 UI 测试默认使用 UGREEN GROUP LIMITED（`4X996UV8LC`）自动签名，真机运行需本机已有对应开发证书和匹配设备的描述文件；重新生成时可用 `ODAI_DEVELOPMENT_TEAM` 覆盖团队。
 
 Android Demo：`./gradlew :demo:androidApp:assembleDebug`。照片、相机和 benchmark 入口均调用真实原生后端。系统权限由 Demo 管理；SDK 不主动弹权限。benchmark 使用 5 次预热、30 次采样，记录实际后端和测量方法；未测内存/能耗为 null。
 

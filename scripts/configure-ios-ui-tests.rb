@@ -4,10 +4,13 @@ root = File.expand_path('..', __dir__)
 path = File.join(root, 'demo/iosApp/OnDeviceAIDemo.xcodeproj')
 project = Xcodeproj::Project.open(path)
 app = project.targets.find { |t| t.name == 'OnDeviceAIDemo' }
+development_team = ENV.fetch('ODAI_DEVELOPMENT_TEAM', '4X996UV8LC') # UGREEN GROUP LIMITED
 unless app.source_build_phase.files_references.any? { |f| f.path == 'CameraLifecycle.swift' }
   app.source_build_phase.add_file_reference(project.main_group.new_file('CameraLifecycle.swift'))
 end
 app.build_configurations.each do |config|
+  config.build_settings['CODE_SIGN_STYLE'] = 'Automatic'
+  config.build_settings['DEVELOPMENT_TEAM'] = development_team
   config.build_settings['ODAI_APP_BUNDLE_ID'] = 'io.ondeviceai.ondeviceaidemo'
   config.build_settings['PRODUCT_BUNDLE_IDENTIFIER'] = '$(ODAI_APP_BUNDLE_ID)'
 end
@@ -28,7 +31,8 @@ tests.build_configurations.each do |config|
     'ODAI_APP_BUNDLE_ID' => 'io.ondeviceai.ondeviceaidemo',
     'PRODUCT_BUNDLE_IDENTIFIER' => '$(ODAI_APP_BUNDLE_ID).uitests',
     'TEST_TARGET_NAME' => 'OnDeviceAIDemo', 'GENERATE_INFOPLIST_FILE' => 'YES',
-    'SWIFT_VERSION' => '5.0', 'CODE_SIGN_STYLE' => 'Manual', 'TARGETED_DEVICE_FAMILY' => '1,2'
+    'SWIFT_VERSION' => '5.0', 'CODE_SIGN_STYLE' => 'Automatic',
+    'DEVELOPMENT_TEAM' => development_team, 'TARGETED_DEVICE_FAMILY' => '1,2'
   })
 end
 project.save
