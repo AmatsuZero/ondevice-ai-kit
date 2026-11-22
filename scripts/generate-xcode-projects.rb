@@ -47,7 +47,7 @@ def create_project(root, relative, name, products, package_path, source)
         'INFOPLIST_KEY_NSCameraUsageDescription' => '在设备本地检测人脸，不上传图像。',
         'INFOPLIST_KEY_NSSpeechRecognitionUsageDescription' => '在设备本地识别选择的音频文件或主动开始的麦克风语音，不上传音频。',
         'INFOPLIST_KEY_NSMicrophoneUsageDescription' => '仅在你点击录音或语音识别时采集声音，在设备本地处理；变声录音可由你导出。',
-        'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO ODAI_VOICE_EFFECTS_DEMO',
+        'SWIFT_ACTIVE_COMPILATION_CONDITIONS' => '$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO ODAI_VOICE_EFFECTS_DEMO ODAI_VIDEO_DEMO',
         'INFOPLIST_KEY_ODAISDKCommit' => '$(ODAI_SDK_COMMIT)',
         'ODAI_SDK_COMMIT' => 'working-tree'
       })
@@ -69,11 +69,13 @@ def create_project(root, relative, name, products, package_path, source)
 end
 create_project(root, 'examples/ios-native', 'NativeConsumer', ['ODAIKitCore', 'ODAIKitFace', 'ODAIKitAppleVision'], '../../apple', ['NativeConsumerApp.swift'])
 create_project(root, 'demo/iosApp', 'OnDeviceAIDemo',
-  %w[ODAIKitCore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech ODAIKitVoiceEffects ODAIKitAppleVoiceEffects], '../../apple',
+  %w[ODAIKitCore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech ODAIKitVoiceEffects ODAIKitAppleVoiceEffects ODAIKitVideo ODAIKitAppleVideo], '../../apple',
   %w[OnDeviceAIDemoApp.swift DemoController.swift IOSFaceBridge.swift CameraSource.swift CameraLifecycle.swift PhotoSubmission.swift
      PlaybackEnhancementHost.swift PlaybackEnhancementMetalRenderer.swift PlaybackEnhancementSR.swift PlaybackEnhancementSystemSR.swift PlaybackFrameChoice.swift
      PlaybackEnhancementShaders.metal PlaybackEnhancementCuNNy.metal PlaybackEnhancementSpatial.metal SpeechHost.swift SpeechFilePicker.swift SpeechInputStore.swift SpeechAudioSession.swift
      VoiceEffectsHost.swift VoiceEffectsInputStore.swift VoiceEffectsWave.swift
+     VideoHost.swift VideoInputStore.swift VideoFilePicker.swift
      ../../kmp-binding/apple/IOSSpeechBridge.swift ../../kmp-binding/apple/IOSSpeechAudioInput.swift
+     ../../kmp-binding/apple/IOSVideoBridge.swift ../../kmp-binding/apple/IOSVideoInput.swift
      ../../kmp-binding/apple/IOSVoiceEffectsBridge.swift])
 load File.join(__dir__, 'configure-ios-ui-tests.rb')

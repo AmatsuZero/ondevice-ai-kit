@@ -26,6 +26,9 @@ end
 unless tests.source_build_phase.files_references.any? { |f| f.path == 'UITests/PlaybackEnhancementUITests.swift' }
   tests.source_build_phase.add_file_reference(project.main_group.new_file('UITests/PlaybackEnhancementUITests.swift'))
 end
+unless tests.source_build_phase.files_references.any? { |f| f.path == 'UITests/VideoFileSuperResolutionUITests.swift' }
+  tests.source_build_phase.add_file_reference(project.main_group.new_file('UITests/VideoFileSuperResolutionUITests.swift'))
+end
 tests.build_configurations.each do |config|
   config.build_settings.merge!({
     'ODAI_APP_BUNDLE_ID' => 'io.ondeviceai.ondeviceaidemo',
