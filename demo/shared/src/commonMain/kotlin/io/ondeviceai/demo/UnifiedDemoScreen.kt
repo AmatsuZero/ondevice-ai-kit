@@ -1,12 +1,15 @@
 package io.ondeviceai.demo
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -28,16 +31,22 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.runtime.mutableStateOf
 import io.ondeviceai.binding.RealtimeSRMode
+import kotlin.math.roundToInt
 
 interface UnifiedDemoBindings {
     val platformLabel: String
@@ -314,15 +323,22 @@ private fun CapabilityPage(
 ) {
     val descriptor = model.descriptor(id)
     PageHeader(title = descriptor.title, onBack = model::back)
-    Text(descriptor.purpose, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    // File and playback details own their own intro; no repeated purpose / save row above them.
+    val isFileDetail = id == DemoCapabilityId.FILE_SUPER_RESOLUTION
+    val isPlaybackDetail = id == DemoCapabilityId.PLAYBACK_ENHANCEMENT
+    if (!isFileDetail && !isPlaybackDetail) {
+        Text(descriptor.purpose, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    }
     if (descriptor.previewOnly) {
         ScrollableDetail { FrozenPreviewPage(descriptor, bindings.identitySetup.takeIf { id == DemoCapabilityId.IDENTITY_LIVENESS },
             bindings.identityModel.takeIf { id == DemoCapabilityId.IDENTITY_LIVENESS }) }
         return
     }
     if (model.leaving) return
-    TextButton(onClick = { model.saveRecord(id) }, enabled = model.canSaveRecord(id),
-        modifier = Modifier.testTag("save-record")) { Text("保存记录") }
+    // File details render save inside their real result card; other pages only when a record is pending.
+    if (!isFileDetail && model.canSaveRecord(id)) {
+        TextButton(onClick = { model.saveRecord(id) }, modifier = Modifier.testTag("save-record")) { Text("保存记录") }
+    }
     Box(Modifier.fillMaxSize()) {
     when (id) {
         DemoCapabilityId.ASR, DemoCapabilityId.TTS -> bindings.speechModel?.let { ScrollableDetail { SpeechScreen(it, bindings.speechActions,
@@ -342,16 +358,21 @@ private fun CapabilityPage(
         }
         DemoCapabilityId.IMAGE_UNDERSTANDING -> bindings.multimodalModel?.let { ScrollableDetail { MultimodalScreen(it, bindings.multimodalActions, allowVideoInput = false) } }
             ?: UnavailablePage(bindings.status(id))
-        DemoCapabilityId.FILE_SUPER_RESOLUTION -> bindings.videoModel?.let { ScrollableDetail { VideoScreen(it, bindings.videoActions) } }
-            ?: UnavailablePage(bindings.status(id))
-        DemoCapabilityId.PLAYBACK_ENHANCEMENT -> ScrollableDetail {
-            PlaybackEnhancementPage(
-                bindings.realtimeSr,
-                bindings.status(id),
-                bindings.playbackEnhancement,
-                playbackContent,
-            )
-        }
+        DemoCapabilityId.FILE_SUPER_RESOLUTION -> bindings.videoModel?.let {
+            ScrollableDetail {
+                VideoScreen(it, bindings.videoActions,
+                    canSaveRecord = { model.canSaveRecord(id) },
+                    onSaveRecord = { model.saveRecord(id) })
+            }
+        } ?: UnavailablePage(bindings.status(id))
+        // The playback page owns its own layout: a viewport-bounded preview outside
+        // the vertical scroll, with the remaining controls scrollable beneath it.
+        DemoCapabilityId.PLAYBACK_ENHANCEMENT -> PlaybackEnhancementPage(
+            bindings.realtimeSr,
+            bindings.status(id),
+            bindings.playbackEnhancement,
+            playbackContent,
+        )
         DemoCapabilityId.VIDEO_UNDERSTANDING, DemoCapabilityId.IDENTITY_LIVENESS -> Unit
     }
     }
@@ -362,6 +383,7 @@ private fun ScrollableDetail(content: @Composable () -> Unit) {
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) { content() }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun PlaybackEnhancementPage(
     actions: RealtimeSRDemoActions?,
@@ -376,43 +398,96 @@ private fun PlaybackEnhancementPage(
             kotlinx.coroutines.delay(250)
         }
     }
-    Text("播放时增强", style = MaterialTheme.typography.titleLarge)
-    Text("选择本地视频，边播边对比原画与 2× 超分。未满足输入条件或增强超时时自动播放原画。",
-        color = MaterialTheme.colorScheme.onSurfaceVariant)
-    playbackContent?.invoke()
-    player?.let {
-        Card(Modifier.fillMaxWidth().testTag("playback-player-entry")) {
-            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                Text(it.playerDescription, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text("输入：${state.inputName ?: "未选择"}")
-                Text(state.status, Modifier.testTag("playback-host-status"))
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Button(onClick = it::openPlayer, enabled = it.playerAvailable,
-                        modifier = Modifier.testTag("open-realtime-player")) { Text("选择视频") }
-                    if (it.controlsAvailable) OutlinedButton(onClick = it::togglePlayback,
-                        enabled = it.playerAvailable && state.hasVideo,
-                        modifier = Modifier.testTag("toggle-realtime-player")) {
-                        Text(if (state.isPlaying) "暂停" else "播放")
+
+    // Outer BoxWithConstraints gets finite viewport bounds because it sits outside
+    // any vertical scroll. Half of maxHeight is only a maximum cap for the 16:9
+    // preview; the preview itself occupies just its actual fitted height.
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+        val fitWidth = minOf(maxWidth, maxHeight * 0.5f * 16f / 9f)
+        val fitHeight = fitWidth * 9f / 16f
+        Column(Modifier.fillMaxSize()) {
+            // The native renderer keeps the single `playback-preview` identity; only
+            // this CMP wrapper has a distinct identifier. Placed at the top and
+            // horizontally centered, with no reserved half-screen slot or vertical
+            // centering gap.
+            Box(
+                Modifier
+                    .size(fitWidth, fitHeight)
+                    .align(Alignment.CenterHorizontally)
+                    .background(Color.Black)
+                    .testTag("playback-preview-container")
+            ) {
+                // Invoke native content even when empty so the surface lifecycle
+                // is preserved; the hint is a non-interactive overlay.
+                playbackContent?.invoke()
+                if (!state.hasVideo) {
+                    Column(
+                        Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Text("还没有选择视频", color = Color.White, style = MaterialTheme.typography.bodyMedium)
                     }
                 }
             }
-        }
-    }
-    actions?.let {
-        HorizontalDivider(Modifier.padding(vertical = 12.dp))
-        Text("用户选择：${state.selectedMode}", Modifier.testTag("playback-selected-mode"))
-        Text("实际呈现：${state.presentedMode ?: "等待播放器确认上屏"}", Modifier.testTag("playback-presented-mode"))
-        if (state.fallbackToOriginal) Text("当前已回退到原画播放路径。", color = MaterialTheme.colorScheme.tertiary)
-        Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            state.supportedModes.forEach { mode ->
-                FilterChip(selected = mode == state.selectedMode,
-                    onClick = { it.selectMode(mode); state = PlaybackDemoState.read(player, actions) },
-                    label = { Text(if (mode == RealtimeSRMode.ORIGINAL) "原画" else if (mode == RealtimeSRMode.AUTO) "自动" else mode.name) },
-                    modifier = Modifier.testTag("playback-mode-${mode.name.lowercase()}"))
+
+            Spacer(Modifier.height(12.dp))
+
+            // Remaining controls scroll independently of the fixed, bounded preview.
+            Column(
+                Modifier.weight(1f).verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                // 2. Input / status / select + play controls.
+                player?.let {
+                    Card(Modifier.fillMaxWidth().testTag("playback-player-entry")) {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Text("输入：${state.inputName ?: "尚未选择"}")
+                            Text(state.status, Modifier.testTag("playback-host-status"))
+                            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Button(onClick = it::openPlayer, enabled = it.playerAvailable,
+                                    modifier = Modifier.testTag("open-realtime-player")) { Text("选择视频") }
+                                if (it.controlsAvailable) OutlinedButton(onClick = it::togglePlayback,
+                                    enabled = it.playerAvailable && state.hasVideo,
+                                    modifier = Modifier.testTag("toggle-realtime-player")) {
+                                    Text(if (state.isPlaying) "暂停" else "播放")
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 3. Supported modes are generated from the Host; chips wrap safely on narrow screens.
+                // 4. Presented / fallback is reported by the Host and never synthesized from selection.
+                actions?.let {
+                    Card(Modifier.fillMaxWidth()) {
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                            Text("增强模式", style = MaterialTheme.typography.titleMedium)
+                            Text("仅显示设备支持的选项", style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                state.supportedModes.forEach { mode ->
+                                    FilterChip(selected = mode == state.selectedMode,
+                                        onClick = { it.selectMode(mode); state = PlaybackDemoState.read(player, actions) },
+                                        label = { Text(if (mode == RealtimeSRMode.ORIGINAL) "原画" else if (mode == RealtimeSRMode.AUTO) "自动" else mode.name) },
+                                        modifier = Modifier.testTag("playback-mode-${mode.name.lowercase()}"))
+                                }
+                            }
+                            HorizontalDivider(Modifier.padding(vertical = 4.dp))
+                            Text("用户选择：${state.selectedMode}", Modifier.testTag("playback-selected-mode"))
+                            val presented = if (!state.hasVideo) "尚未播放"
+                                else (state.presentedMode?.name ?: "等待播放器确认上屏")
+                            Text("实际呈现：$presented", Modifier.testTag("playback-presented-mode"))
+                            Text("开始播放后显示实际使用的增强方式；增强不可用时自动回退原画。",
+                                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            if (state.fallbackToOriginal) Text("当前已回退到原画播放路径。", color = MaterialTheme.colorScheme.tertiary)
+                        }
+                    }
+                } ?: if (player == null) UnavailablePage(status) else {
+                    Text("当前 Host 尚未提供超分模式与实际上屏状态。", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
             }
         }
-    } ?: if (player == null) UnavailablePage(status) else {
-        Text("当前 Host 尚未提供超分模式与实际上屏状态。", color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 
@@ -457,9 +532,61 @@ private fun UnavailablePage(status: DemoCapabilityStatus) = Column(verticalArran
 
 @Composable
 private fun PageHeader(title: String, onBack: () -> Unit) {
-    Row(Modifier.fillMaxWidth().padding(top = 12.dp), horizontalArrangement = Arrangement.SpaceBetween) {
-        TextButton(onClick = onBack, modifier = Modifier.testTag("unified-back")) { Text("‹ 返回") }
-        Text(title, style = MaterialTheme.typography.titleLarge)
-        Spacer(Modifier.padding(32.dp))
+    // Custom measured layout so the title sits on the full header midpoint, not
+    // merely the space left of the back control. The back button is measured at
+    // its natural width (>=48dp target); the title's max width is bounded by the
+    // header width minus twice that measured back width, reserving symmetric
+    // space on both sides so the two can never overlap. Height grows naturally
+    // to fit a wrapped title while never dropping below 52dp.
+    Layout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("detail-header"),
+        content = {
+            TextButton(
+                onClick = onBack,
+                modifier = Modifier.testTag("unified-back"),
+            ) { Text("‹ 返回") }
+            Text(
+                title,
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+            )
+        },
+    ) { measurables, constraints ->
+        val headerWidth = constraints.maxWidth
+        val minBackHeight = 48.dp.toPx().roundToInt()
+        val minHeaderHeight = 52.dp.toPx().roundToInt()
+
+        // Loose minimums: natural width, >=48dp height, unbounded upward.
+        val backPlaceable = measurables[0].measure(
+            Constraints(
+                minWidth = 0,
+                maxWidth = headerWidth,
+                minHeight = minBackHeight,
+                maxHeight = Constraints.Infinity,
+            )
+        )
+        // Reserve the measured back width on BOTH sides of the centered title.
+        val titleMaxWidth = (headerWidth - 2 * backPlaceable.width).coerceAtLeast(0)
+        val titlePlaceable = measurables[1].measure(
+            Constraints(
+                minWidth = 0,
+                maxWidth = titleMaxWidth,
+                minHeight = 0,
+                maxHeight = Constraints.Infinity,
+            )
+        )
+
+        val height = maxOf(minHeaderHeight, backPlaceable.height, titlePlaceable.height)
+        layout(headerWidth, height) {
+            // Back at start, vertically centered.
+            backPlaceable.placeRelative(0, (height - backPlaceable.height) / 2)
+            // Title exactly centered in the total header width, vertically centered.
+            titlePlaceable.placeRelative(
+                (headerWidth - titlePlaceable.width) / 2,
+                (height - titlePlaceable.height) / 2,
+            )
+        }
     }
 }

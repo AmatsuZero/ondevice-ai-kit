@@ -291,9 +291,11 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
                 UnifiedDemoScreen(
                     model = unifiedModel,
                     bindings = bindings,
-                    modifier = Modifier.fillMaxSize().safeDrawingPadding().semantics { testTagsAsResourceId = true },
+                    // Scaffold is the single safe-area owner; no outer safeDrawingPadding here.
+                    modifier = Modifier.fillMaxSize().semantics { testTagsAsResourceId = true },
                     playbackContent = {
-                        AndroidView(factory = { playbackHost.surfaceView }, modifier = Modifier.fillMaxWidth().height(240.dp),
+                        // Shared CMP supplies the bounded 16:9 host; the native view only fills it.
+                        AndroidView(factory = { playbackHost.surfaceView }, modifier = Modifier.fillMaxSize(),
                             onRelease = { playbackHost.leave() })
                     },
                     facePreview = {

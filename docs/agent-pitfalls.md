@@ -1,3 +1,14 @@
+## CMP 预览标识、标题中心与配置重建（2026-11-22）
+
+空态下既有 PlaybackEnhancementHost 将 MTKView.isHidden=true，原生 `playback-preview` 不在可访问树；CMP包装若复用同名tag会让空态测试误认native。恢复：包装用 `playback-preview-container` 检查空态16:9，选片渲染后另核唯一native标识的真实frame/运动，不能为测试强行显示renderer。横屏尺寸从滚动外有限viewport拟合，只占实际媒体高度，避免预留半屏空槽。返回自然宽+标题weight的Row会把标题放在剩余区域中心而右偏；测量返回宽并对称预留、按全屏中心放标题，大字允许换行。专用Android模拟器旋转/字号配置重建会回首页，布局检查须读实际路由再通过可见分类重入；不宣称保持路由，显示设置finally精确恢复。证据 `/private/tmp/odai-detail-acceptance-20261122/{final-ui.xcresult,centered-ui.xcresult,large-font-ui.xcresult,android-final/geometry-result.json}`；见 `docs/validation/cmp-capability-details-20261122.md`。模拟器运动仍非真机SR质量/上屏时序证据。
+
+## CMP iOS 模拟器：新 framework 与旧 Swift 对象混用（2026-11-22）
+
+现象：进入播放详情页，在 `PlaybackEnhancementDemoActions.hasVideo` 的 kotlin2objc 调用处 Objective-C forwarding 后 SIGABRT。已核当前协议和 Swift 源码都有该属性，但旧 `PlaybackEnhancementHost.o` 缺少 `hasVideo/isPlaying/inputName/playbackStatus` 四个 Objective-C getter thunk，旧 App 的 Host 方法表为 14 项；增量日志中的 `SwiftCompile` 标题及新生成的 Swift 头文件不证明该对象已重编。保持源码不变，先链接当前 CMP framework，再用全新隔离 DerivedData 重建，四个 thunk 齐全、Host 方法表为 18 项，现有 EOS/重播 UI 测试通过。Xcode 为什么保留该对象的内部依赖失效机制尚未证实。
+
+恢复边界：导出协议变化后，Swift 消费端使用独立新构建目录并核实际 App；不要用旧 framework 软链或单测编译替代当前 framework link，不删旧缓存/错误证据，不加 selector workaround 掩盖不一致。Kernel Triage 的 VM 行不是本次内存耗尽的已证原因。模拟器运动画面与桥接恢复不代表真机超分质量或真实呈现验收。证据：`/private/tmp/odai-hasvideo-crash-20261122/{diagnosis.md,getter-comparison.json,fresh-playback.xcresult}`；原失败 `ui-source-red` 保留在 `/private/tmp/odai-detail-acceptance-20261122/`。
+
+
 ## 统一实时超分：异步打开完成与 CMP 按钮节点（2026-11-21）
 
 `CodecPlayer.open()` 只向内部 Handler 排队，配置异常也经 listener 异步返回；在调用返回后清除旧错误或用外围 try/catch 处理 codec 配置失败均不成立。当前 request/token 的 `format` 回调证明配置完成，再更新打开状态；打开阶段失败时单次重开 Direct Surface。Direct 原画回退可记为路由决定，但 `presentedBackend` 必须等待真实显示证据。同源失败→成功重开、保留增强请求→direct 回退、EOS 重播和 leave 均已用生产 session 的模拟器 instrumentation 验证；不据此证明真机性能。

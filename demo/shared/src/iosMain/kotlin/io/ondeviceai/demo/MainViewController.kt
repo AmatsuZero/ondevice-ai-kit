@@ -21,8 +21,9 @@ fun unifiedDemoViewController(bindings: UnifiedDemoBindings, facePreview: UIView
         voiceContent = voiceEffects?.let { controller ->
             { UIKitViewController(factory = { controller }, modifier = Modifier.fillMaxSize()) }
         },
+        // Shared CMP owns the 16:9 bounded container; the native surface just fills it.
         playbackContent = playback?.let { controller ->
-            { UIKitViewController(factory = { controller }, modifier = Modifier.fillMaxWidth().height(360.dp)) }
+            { UIKitViewController(factory = { controller }, modifier = Modifier.fillMaxSize()) }
         })
 }
 fun mainViewController(model:FaceViewModel,actions:DemoActions,identity:IdentityViewModel,

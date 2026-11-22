@@ -267,25 +267,36 @@ private final class UnifiedImageModelSetup: NSObject, @preconcurrency UnifiedDem
     var body: some Scene {
         WindowGroup {
             VStack(spacing: 0) {
+                // CMP/Scaffold is the only safe-area owner. Let the shared root extend under
+                // the status bar and home indicator; it consumes the insets itself.
                 SharedControls(controller: controller)
-                if let message = controller.message { Text(message).font(.caption) }
-                if controller.cameraPermissionDenied {
-                    Button("打开设置") { controller.openCameraSettings() }
-                        .accessibilityIdentifier("camera-permission-settings")
-                }
-                if let report = controller.report { Button("导出 Benchmark JSON") { controller.exportReport(json: report) } }
-                #if DEBUG
-                if let status = controller.orientationProbeStatus {
-                    Text(status).accessibilityIdentifier("orientation-probe-status")
-                    if let size = controller.orientationProbeSize {
-                        Text(size).accessibilityIdentifier("orientation-probe-size")
+                    .ignoresSafeArea()
+
+                // Auxiliaries stay inside the safe area so they are never hidden by the
+                // home indicator, and keep their own opaque background for legibility.
+                VStack(spacing: 4) {
+                    if let message = controller.message { Text(message).font(.caption) }
+                    if controller.cameraPermissionDenied {
+                        Button("打开设置") { controller.openCameraSettings() }
+                            .accessibilityIdentifier("camera-permission-settings")
                     }
+                    if let report = controller.report { Button("导出 Benchmark JSON") { controller.exportReport(json: report) } }
+                    #if DEBUG
+                    if let status = controller.orientationProbeStatus {
+                        Text(status).accessibilityIdentifier("orientation-probe-status")
+                        if let size = controller.orientationProbeSize {
+                            Text(size).accessibilityIdentifier("orientation-probe-size")
+                        }
+                    }
+                    if ProcessInfo.processInfo.arguments.contains("--ui-camera-test") {
+                        Text(String(controller.cameraFrameCount)).accessibilityIdentifier("camera-frame-count")
+                    }
+                    #endif
                 }
-                if ProcessInfo.processInfo.arguments.contains("--ui-camera-test") {
-                    Text(String(controller.cameraFrameCount)).accessibilityIdentifier("camera-frame-count")
-                }
-                #endif
+                .background(Color(red: 247.0 / 255.0, green: 248.0 / 255.0, blue: 243.0 / 255.0))
             }
+            // #F7F8F3 fills the system-affected edges too, behind the CMP content.
+            .background(Color(red: 247.0 / 255.0, green: 248.0 / 255.0, blue: 243.0 / 255.0).ignoresSafeArea())
             .onDisappear { controller.stopCamera() }
             .onAppear {
                 #if ODAI_OPENCV_IDENTITY_VALIDATION
