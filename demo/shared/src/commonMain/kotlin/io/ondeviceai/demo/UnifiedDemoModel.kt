@@ -211,9 +211,9 @@ class UnifiedDemoModel(
 }
 
 val defaultDemoCatalog: List<DemoCapabilityDescriptor> = listOf(
-    DemoCapabilityDescriptor(DemoCapabilityId.ASR, "语音识别", "语音", "把麦克风输入转换为文字。"),
+    DemoCapabilityDescriptor(DemoCapabilityId.ASR, "语音识别", "语音", "将麦克风输入转换为文字，支持文件输入的后端还可转写音频文件。"),
     DemoCapabilityDescriptor(DemoCapabilityId.TTS, "语音合成", "语音", "把文字转换为本机语音。"),
-    DemoCapabilityDescriptor(DemoCapabilityId.VOICE_EFFECTS, "离线变声", "语音", "试听原声、升调和降调效果。"),
+    DemoCapabilityDescriptor(DemoCapabilityId.VOICE_EFFECTS, "离线变声", "语音", "对比不同音色，也可以导入或录制自己的声音。"),
     DemoCapabilityDescriptor(DemoCapabilityId.FACE_DETECTION, "人脸检测", "视觉", "查看人脸框、关键点和检测状态。"),
     DemoCapabilityDescriptor(DemoCapabilityId.IMAGE_UNDERSTANDING, "图像理解", "视觉", "为图片输入提出问题并查看模型输出。"),
     DemoCapabilityDescriptor(DemoCapabilityId.FILE_SUPER_RESOLUTION, "视频文件超分", "视频", "选择视频并查看真实处理进度与输出。"),

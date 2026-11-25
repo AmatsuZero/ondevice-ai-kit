@@ -1,7 +1,10 @@
 package io.ondeviceai.demo
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -39,10 +42,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.runtime.mutableStateOf
 import io.ondeviceai.binding.RealtimeSRMode
@@ -545,8 +554,23 @@ private fun PageHeader(title: String, onBack: () -> Unit) {
         content = {
             TextButton(
                 onClick = onBack,
-                modifier = Modifier.testTag("unified-back"),
-            ) { Text("‹ 返回") }
+                contentPadding = PaddingValues(start = 4.dp, end = 8.dp),
+                modifier = Modifier.sizeIn(minWidth = 84.dp, minHeight = 52.dp).testTag("unified-back"),
+            ) {
+                val tint = MaterialTheme.colorScheme.primary
+                Canvas(Modifier.size(20.dp, 24.dp)) {
+                    val tip = if (layoutDirection == LayoutDirection.Ltr) 0.25f else 0.75f
+                    val tail = 1f - tip
+                    val chevron = Path().apply {
+                        moveTo(size.width * tail, size.height * 0.15f)
+                        lineTo(size.width * tip, size.height * 0.5f)
+                        lineTo(size.width * tail, size.height * 0.85f)
+                    }
+                    drawPath(chevron, tint, style = Stroke(2.6.dp.toPx(), cap = StrokeCap.Round, join = StrokeJoin.Round))
+                }
+                Spacer(Modifier.size(4.dp))
+                Text("返回", style = MaterialTheme.typography.titleMedium.copy(fontSize = 20.sp, lineHeight = 26.sp))
+            }
             Text(
                 title,
                 style = MaterialTheme.typography.titleLarge,

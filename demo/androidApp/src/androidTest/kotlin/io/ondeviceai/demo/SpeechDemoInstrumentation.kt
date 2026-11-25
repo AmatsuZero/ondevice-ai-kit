@@ -4,9 +4,6 @@ import android.app.Instrumentation
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
-import android.graphics.Rect
-import android.view.InputDevice
-import android.view.MotionEvent
 import android.speech.ModelDownloadListener
 import android.speech.RecognitionSupport
 import android.speech.RecognitionSupportCallback
@@ -26,7 +23,7 @@ class SpeechDemoInstrumentation : Instrumentation() {
         try {
             if (mode == "asr-download") { downloadEnglishModel(result); finish(-1, result); return }
             val activity = startActivitySync(Intent(targetContext, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) as MainActivity
-            node("speech-tab").performAction(AccessibilityNodeInfo.ACTION_CLICK)
+            check(node(if (mode == "asr-live") "capability-asr" else "capability-tts", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK))
             if (mode == "asr-live") {
                 node("speech-recognize-mic", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK)
                 val permissionDeadline = SystemClock.uptimeMillis() + 5_000
@@ -47,44 +44,75 @@ class SpeechDemoInstrumentation : Instrumentation() {
                 finish(-1, result)
                 return
             }
-            val input = node("speech-tts-text", scroll = true)
-            input.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, Bundle().apply {
-                putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, "Speech demo fixture.")
-            })
-            node("speech-speak", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK)
+            check(
+              node("speech-tts-text", scroll = true).performAction(
+                AccessibilityNodeInfo.ACTION_SET_TEXT,
+                Bundle().apply {
+                  putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, "Speech demo fixture.")
+                }
+              )
+            )
+            check(node("speech-speak", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK))
             node("speech-tts-result", scroll = true, timeout = 30_000)
             result.putString("ttsCompletion", "passed")
-            val longInput = node("speech-tts-text", scroll = true)
-            longInput.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, Bundle().apply {
-                putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE,
-                    "This is an on device cancellation fixture. ".repeat(24))
-            })
-            node("speech-speak", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK)
-            node("speech-cancel", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK)
+
+            check(
+              node("speech-tts-text", scroll = true).performAction(
+                AccessibilityNodeInfo.ACTION_SET_TEXT,
+                Bundle().apply {
+                  putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, "This is an on device cancellation fixture. ".repeat(24))
+                }
+              )
+            )
+            check(node("speech-speak", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK))
+            node("speech-phase", scroll = true, expectedText = "RUNNING")
+            check(node("speech-cancel", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK))
             node("speech-cancelled", scroll = true)
             result.putString("ttsCancellation", "passed")
-            node("speech-speak", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK)
-            node("speech-cancel", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK)
+
+            check(node("speech-speak", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK))
+            node("speech-phase", scroll = true, expectedText = "RUNNING")
+            check(node("speech-cancel", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK))
             node("speech-cancelled", scroll = true)
             result.putString("ttsReentry", "passed")
-            node("speech-speak", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK)
+
+            check(node("speech-speak", scroll = true).performAction(AccessibilityNodeInfo.ACTION_CLICK))
+            node("speech-phase", scroll = true, expectedText = "RUNNING")
             runOnMainSync { activity.moveTaskToBack(true) }
-            val stoppedDeadline = SystemClock.uptimeMillis() + 5_000
+            val stopDeadline = SystemClock.uptimeMillis() + 5_000L
             var stopped = false
-            while (!stopped && SystemClock.uptimeMillis() < stoppedDeadline) {
-                runOnMainSync { stopped = !activity.lifecycle.currentState.isAtLeast(androidx.lifecycle.Lifecycle.State.STARTED) }
-                SystemClock.sleep(100)
+            while (!stopped && SystemClock.uptimeMillis() < stopDeadline) {
+              runOnMainSync {
+                stopped = !activity.lifecycle.currentState.isAtLeast(androidx.lifecycle.Lifecycle.State.STARTED)
+              }
+              if (!stopped) SystemClock.sleep(100L)
             }
             check(stopped)
-            runOnMainSync { activity.startActivity(Intent(activity, MainActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)) }
+            runOnMainSync {
+              activity.startActivity(Intent(activity, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
+            }
             node("speech-cancelled", scroll = true)
+            val observationDeadline = SystemClock.uptimeMillis() + 1_000L
+            while (SystemClock.uptimeMillis() < observationDeadline) {
+              val currentRoot = getUiAutomation().rootInActiveWindow
+              check(currentRoot != null)
+              check(find(currentRoot) { it.contentDescription?.toString() == "speech-cancelled" || it.viewIdResourceName == "speech-cancelled" } != null)
+              check(find(currentRoot) { it.contentDescription?.toString() == "speech-cancel" || it.viewIdResourceName == "speech-cancel" } == null)
+              val remaining = observationDeadline - SystemClock.uptimeMillis()
+              if (remaining > 0L) SystemClock.sleep(minOf(100L, remaining))
+            }
             result.putString("backgroundCancellationAndNoRestart", "passed")
+
             result.putString("asr", "unverified-requires-live-speech")
             result.putString("status", "passed")
-        } catch (_: Throwable) {
+        } catch (error: Throwable) {
             result.putString("status", "failed")
             result.putString("failure", lastControl)
+            result.putString("errorClass", error.javaClass.name)
+            result.putString("errorMessage", error.message)
+            val root = uiAutomation.rootInActiveWindow
+            val speechFailure = root?.let { find(it) { node -> node.viewIdResourceName == "speech-failure" }?.text?.toString() }
+            result.putString("speechFailure", speechFailure)
             result.putBoolean("speechTabTextPresent", uiAutomation.rootInActiveWindow?.let { root ->
                 find(root) { it.text?.toString() == "语音" } != null
             } ?: false)
@@ -139,37 +167,24 @@ class SpeechDemoInstrumentation : Instrumentation() {
         result.putString("status", if (result.getString("download") == "success") "passed" else "unverified")
     }
 
-    private fun node(id: String, scroll: Boolean = false, timeout: Long = 15_000, alternate: String? = null): AccessibilityNodeInfo {
+    private fun node(id: String, scroll: Boolean = false, timeout: Long = 15_000, alternate: String? = null, expectedText: String? = null): AccessibilityNodeInfo {
         lastControl = id
         val end = SystemClock.uptimeMillis() + timeout
-        var attempts = 0
+        var scrollForward = true
         while (SystemClock.uptimeMillis() < end) {
             val root = uiAutomation.rootInActiveWindow
-            if (root != null) {
-                find(root) { it.contentDescription?.toString() == id || it.viewIdResourceName == id || (alternate != null && it.viewIdResourceName == alternate) }?.let { return it }
-                if (scroll) find(root) { it.isScrollable }?.let { swipe(it, (attempts / 6) % 2 == 0) }
+            if (root != null && root.packageName?.toString() == targetContext.packageName) {
+                find(root) { (it.contentDescription?.toString() == id || it.viewIdResourceName == id || (alternate != null && it.viewIdResourceName == alternate)) && it.isVisibleToUser && it.isEnabled && (expectedText == null || it.text?.toString() == expectedText) }?.let { return it }
+                if (scroll) {
+                    find(root) { it.isScrollable && it.isVisibleToUser && it.isEnabled }?.let {
+                        val action = if (scrollForward) AccessibilityNodeInfo.ACTION_SCROLL_FORWARD else AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD
+                        if (!it.performAction(action)) scrollForward = !scrollForward
+                    }
+                }
             }
-            attempts++; SystemClock.sleep(200)
+            SystemClock.sleep(200)
         }
         error("missing speech control")
-    }
-    private fun swipe(container: AccessibilityNodeInfo, forward: Boolean) {
-        val bounds = Rect().also(container::getBoundsInScreen)
-        val x = bounds.left + 8f
-        val bottom = bounds.bottom - 80f
-        val top = bounds.top + 80f
-        val from = if (forward) bottom else top
-        val to = if (forward) top else bottom
-        val start = SystemClock.uptimeMillis()
-        fun inject(action: Int, y: Float) {
-            MotionEvent.obtain(start, SystemClock.uptimeMillis(), action, x, y, 0).also {
-                it.source = InputDevice.SOURCE_TOUCHSCREEN
-                uiAutomation.injectInputEvent(it, true); it.recycle()
-            }
-        }
-        inject(MotionEvent.ACTION_DOWN, from)
-        for (step in 1..12) { SystemClock.sleep(40); inject(MotionEvent.ACTION_MOVE, from + (to - from) * step / 12) }
-        inject(MotionEvent.ACTION_UP, to)
     }
     private fun find(node: AccessibilityNodeInfo, predicate: (AccessibilityNodeInfo) -> Boolean): AccessibilityNodeInfo? {
         if (predicate(node)) return node

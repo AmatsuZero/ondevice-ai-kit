@@ -34,6 +34,7 @@
 		8E9982442D2986DE64C8E25A /* ODAIKitSpeech in Frameworks */ = {isa = PBXBuildFile; productRef = 0DF65401AD6106A217AA1BB9 /* ODAIKitSpeech */; };
 		941D24A64AEA718C0653BFD8 /* IOSSpeechAudioInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8954D92A35462E7132EB8D /* IOSSpeechAudioInput.swift */; };
 		981BC3A6743D59636373CE4E /* VideoInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBD2B2D70DE1CF378DAFB4B /* VideoInputStore.swift */; };
+		9F26F06E1FE3528D7BD5F70D /* OpenVoice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A068BAEAF4C1691170EB50C4 /* OpenVoice.cpp */; };
 		A09D2C719B10850327425622 /* VoiceEffectsDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD12CCAE2B8A589150DE33D8 /* VoiceEffectsDemoUITests.swift */; };
 		A119FD29C8CFE752D8D56CC4 /* CameraLifecycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AA788318EF571CB8808CC /* CameraLifecycle.swift */; };
 		A4D7E73B323D4437B450265D /* SpeechInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4CDB80A5905F52E496D085 /* SpeechInputStore.swift */; };
@@ -43,6 +44,7 @@
 		ACBE4DFE38D99EEE0050C759 /* ODAIKitFace in Frameworks */ = {isa = PBXBuildFile; productRef = 6E5E31E10A3093F10E4453D0 /* ODAIKitFace */; };
 		ADC0CFA38FCE834105EFA4D6 /* VoiceEffectsInputStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3734AB85F4AD05AFD554B5 /* VoiceEffectsInputStore.swift */; };
 		B60FDD166ED01F0CEDDA7F65 /* VideoFilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B4F69529DBCDCF771D5AC9 /* VideoFilePicker.swift */; };
+		B6FC811A41E48DA2C000E72A /* SpeechDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB93DA5BF37D4076A5B75E42 /* SpeechDemoUITests.swift */; };
 		BCD2975C56BD7D84B7027E72 /* SpeechFilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC877F173857102EC6502876 /* SpeechFilePicker.swift */; };
 		C0FE208C4C49EA1474ED2DAF /* ODAIKitVoiceEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C5120EB9EC6A980140FB560D /* ODAIKitVoiceEffects */; };
 		C3FC908149BB0D18751FE756 /* PlaybackEnhancementShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 139E9E0A5D037D58902B3127 /* PlaybackEnhancementShaders.metal */; };
@@ -86,6 +88,7 @@
 		6FBD2B2D70DE1CF378DAFB4B /* VideoInputStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoInputStore.swift; sourceTree = "<group>"; };
 		751D420863BC9E937FFD9464 /* IOSVideoInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOSVideoInput.swift; path = "../../kmp-binding/apple/IOSVideoInput.swift"; sourceTree = "<group>"; };
 		7E4CDB80A5905F52E496D085 /* SpeechInputStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SpeechInputStore.swift; sourceTree = "<group>"; };
+		A068BAEAF4C1691170EB50C4 /* OpenVoice.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = OpenVoice.cpp; path = ../openvoice/OpenVoice.cpp; sourceTree = "<group>"; };
 		A1B3B73046B8DE6D6CC648DC /* VideoFileSuperResolutionUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VideoFileSuperResolutionUITests.swift; path = UITests/VideoFileSuperResolutionUITests.swift; sourceTree = "<group>"; };
 		A3DA0A16610DA12DD4F9F83C /* CameraLifecycleUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CameraLifecycleUITests.swift; path = UITests/CameraLifecycleUITests.swift; sourceTree = "<group>"; };
 		AD12CCAE2B8A589150DE33D8 /* VoiceEffectsDemoUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VoiceEffectsDemoUITests.swift; path = UITests/VoiceEffectsDemoUITests.swift; sourceTree = "<group>"; };
@@ -104,6 +107,7 @@
 		EFD08C8C0A8B42A0A4A3B7C1 /* PlaybackEnhancementHost.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PlaybackEnhancementHost.swift; sourceTree = "<group>"; };
 		F45D54A3A67367D99062D199 /* RealtimeSRNotices */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; path = RealtimeSRNotices; sourceTree = "<group>"; };
 		FA3FAC9270A8B0373708CABC /* OnDeviceAIDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnDeviceAIDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB93DA5BF37D4076A5B75E42 /* SpeechDemoUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpeechDemoUITests.swift; path = UITests/SpeechDemoUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,8 @@
 				21B4F69529DBCDCF771D5AC9 /* VideoFilePicker.swift */,
 				D3A17B63FB38318B456B8E7E /* IOSVideoBridge.swift */,
 				751D420863BC9E937FFD9464 /* IOSVideoInput.swift */,
+				A068BAEAF4C1691170EB50C4 /* OpenVoice.cpp */,
+				FB93DA5BF37D4076A5B75E42 /* SpeechDemoUITests.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,6 +235,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 38B9D5C06BDB48D200794B4F /* Build configuration list for PBXNativeTarget "OnDeviceAIDemo" */;
 			buildPhases = (
+				2A5F169E354446F5813DCCC4 /* Prepare OpenVoice */,
 				DC05F500CCE2F564CE700F70 /* Sources */,
 				977550433F50546597B3E475 /* Frameworks */,
 				76F676DE7140F471E62891F7 /* Resources */,
@@ -304,6 +311,43 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2A5F169E354446F5813DCCC4 /* Prepare OpenVoice */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(OPENVOICE_DIR)/prepare.py",
+				"$(OPENVOICE_DIR)/assets/original.wav",
+				"$(OPENVOICE_DIR)/assets/voiceA.f32",
+				"$(OPENVOICE_DIR)/assets/voiceB.f32",
+				"$(OPENVOICE_DIR)/assets/voiceC.f32",
+				"$(OPENVOICE_DIR)/assets/CREDITS.txt",
+			);
+			name = "Prepare OpenVoice";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/original.wav",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/converter.onnx",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/ref_encoder.onnx",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/voiceA.f32",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/voiceB.f32",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/voiceC.f32",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/CREDITS.txt",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/onnxruntime-LICENSE",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/onnxruntime-ThirdPartyNotices.txt",
+				"$(OPENVOICE_FRAMEWORK)/onnxruntime",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -eu\n/usr/bin/python3 \"$OPENVOICE_DIR/prepare.py\" ios \"$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/OpenVoice\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B7B6252988C4FE294B50FED6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -313,6 +357,7 @@
 				A09D2C719B10850327425622 /* VoiceEffectsDemoUITests.swift in Sources */,
 				102D094EA48056D7DDB2B8C2 /* PlaybackEnhancementUITests.swift in Sources */,
 				AB1A88FA11E77805AD6B997D /* VideoFileSuperResolutionUITests.swift in Sources */,
+				B6FC811A41E48DA2C000E72A /* SpeechDemoUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +394,7 @@
 				B60FDD166ED01F0CEDDA7F65 /* VideoFilePicker.swift in Sources */,
 				13E5C2C054A0F66578A14901 /* IOSVideoBridge.swift in Sources */,
 				11BD2B69E4212D881C5D72CA /* IOSVideoInput.swift in Sources */,
+				9F26F06E1FE3528D7BD5F70D /* OpenVoice.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +416,7 @@
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X996UV8LC;
@@ -378,6 +425,10 @@
 					"$(SRCROOT)/../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(OPENVOICE_FRAMEWORK)/Headers",
+				);
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "在设备本地检测人脸，不上传图像。";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "仅在你点击录音或语音识别时采集声音，在设备本地处理；变声录音可由你导出。";
@@ -385,20 +436,35 @@
 				INFOPLIST_KEY_ODAISDKCommit = "$(ODAI_SDK_COMMIT)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ODAI_APP_BUNDLE_ID = io.ondeviceai.ondeviceaidemo;
 				"ODAI_KONAN_TARGET[sdk=iphoneos*]" = iosArm64;
 				"ODAI_KONAN_TARGET[sdk=iphonesimulator*]" = iosSimulatorArm64;
 				ODAI_SDK_COMMIT = "working-tree";
+				OPENVOICE_DIR = "$(SRCROOT)/../openvoice";
+				OPENVOICE_FRAMEWORK = "$(OPENVOICE_DIR)/build/ios/onnxruntime.xcframework/$(OPENVOICE_SLICE)/onnxruntime.framework";
+				"OPENVOICE_SLICE[sdk=iphoneos*]" = "ios-arm64";
+				"OPENVOICE_SLICE[sdk=iphonesimulator*]" = "ios-arm64_x86_64-simulator";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lsqlite3",
+					"\"$(OPENVOICE_FRAMEWORK)/onnxruntime\"",
+					"-framework",
+					Accelerate,
+					"-framework",
+					CoreML,
+					"-framework",
+					Metal,
+					"-framework",
+					CoreVideo,
+					"-lz",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ODAI_APP_BUNDLE_ID)";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO ODAI_VOICE_EFFECTS_DEMO ODAI_VIDEO_DEMO";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO ODAI_VOICE_EFFECTS_DEMO ODAI_VIDEO_DEMO ODAI_OPENVOICE_DEMO";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(OPENVOICE_DIR)/OpenVoice.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -410,6 +476,7 @@
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4X996UV8LC;
@@ -418,6 +485,10 @@
 					"$(SRCROOT)/../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(OPENVOICE_FRAMEWORK)/Headers",
+				);
 				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "在设备本地检测人脸，不上传图像。";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "仅在你点击录音或语音识别时采集声音，在设备本地处理；变声录音可由你导出。";
@@ -425,20 +496,35 @@
 				INFOPLIST_KEY_ODAISDKCommit = "$(ODAI_SDK_COMMIT)";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ODAI_APP_BUNDLE_ID = io.ondeviceai.ondeviceaidemo;
 				"ODAI_KONAN_TARGET[sdk=iphoneos*]" = iosArm64;
 				"ODAI_KONAN_TARGET[sdk=iphonesimulator*]" = iosSimulatorArm64;
 				ODAI_SDK_COMMIT = "working-tree";
+				OPENVOICE_DIR = "$(SRCROOT)/../openvoice";
+				OPENVOICE_FRAMEWORK = "$(OPENVOICE_DIR)/build/ios/onnxruntime.xcframework/$(OPENVOICE_SLICE)/onnxruntime.framework";
+				"OPENVOICE_SLICE[sdk=iphoneos*]" = "ios-arm64";
+				"OPENVOICE_SLICE[sdk=iphonesimulator*]" = "ios-arm64_x86_64-simulator";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lsqlite3",
+					"\"$(OPENVOICE_FRAMEWORK)/onnxruntime\"",
+					"-framework",
+					Accelerate,
+					"-framework",
+					CoreML,
+					"-framework",
+					Metal,
+					"-framework",
+					CoreVideo,
+					"-lz",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "$(ODAI_APP_BUNDLE_ID)";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO ODAI_VOICE_EFFECTS_DEMO ODAI_VIDEO_DEMO";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ODAI_DEMO_BINDING ODAI_SPEECH_DEMO ODAI_VOICE_EFFECTS_DEMO ODAI_VIDEO_DEMO ODAI_OPENVOICE_DEMO";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(OPENVOICE_DIR)/OpenVoice.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

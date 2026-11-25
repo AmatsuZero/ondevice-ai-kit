@@ -8,16 +8,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
-import io.ondeviceai.binding.VoiceEffectsBridgePreset
 
 @Composable
 fun VoiceEffectsScreen(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoActions, showBack: Boolean = true) {
     val state = model.state
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text("离线变声", style = MaterialTheme.typography.headlineSmall)
-        Text("最长 30 秒。导入单声道 PCM16 WAV（16 / 44.1 / 48 kHz），或点击录音。升调 / 降调为 ±4 半音。")
-        Text(state.inputName ?: "尚未选择音频", Modifier.testTag("voice-input"))
+        if (showBack) Text("离线变声", style = MaterialTheme.typography.headlineSmall)
+        Text("输入音频", style = MaterialTheme.typography.titleMedium)
+        Text(state.inputName ?: "请选择音频", Modifier.testTag("voice-input"))
+        Text("支持最长 30 秒的单声道 PCM16 WAV（16 / 44.1 / 48 kHz）。", style = MaterialTheme.typography.bodySmall)
+        if (state.exampleReference != null && state.inputReference != state.exampleReference) {
+            TextButton(onClick = actions::useExample, enabled = state.controlsEnabled) { Text("使用内置示例") }
+        }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = actions::selectAudioFile, enabled = state.controlsEnabled,
                 modifier = Modifier.testTag("voice-import")) { Text("导入 WAV") }
@@ -27,16 +30,31 @@ fun VoiceEffectsScreen(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoAc
         }
         if (state.importing) Text("正在准备音频…")
         if (state.recording) Text("录音中，到 30 秒自动停止")
-        Row {
-            VoiceEffectsBridgePreset.entries.forEach { preset ->
-                TextButton(onClick = { model.selectPreset(preset) }, enabled = state.controlsEnabled) {
-                    val label = when (preset) { VoiceEffectsBridgePreset.ORIGINAL -> "原声"; VoiceEffectsBridgePreset.HIGH -> "升调"; VoiceEffectsBridgePreset.LOW -> "降调" }
-                    Text(label + if (state.preset == preset) " ✓" else "")
+        Text("目标音色", style = MaterialTheme.typography.titleMedium)
+        val choices = DemoVoiceEffect.entries.filter { model.hasTimbres || it.pitchPreset != null }
+        choices.chunked(3).forEach { row ->
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                row.forEach { effect ->
+                    FilterChip(selected = state.effect == effect, enabled = state.controlsEnabled,
+                        onClick = { model.selectEffect(effect) }, modifier = Modifier.testTag("voice-effect-${effect.key}"),
+                        label = { Text(effect.label) })
                 }
             }
         }
+        val showBackends = model.hasCoreMLTimbres && state.effect.pitchPreset == null
+        if (showBackends) {
+            Text("试听后端", style = MaterialTheme.typography.titleMedium)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FilterChip(selected = !state.useCoreML, enabled = state.controlsEnabled,
+                    onClick = { model.selectCoreML(false) }, modifier = Modifier.testTag("voice-backend-cpu"),
+                    label = { Text("ONNX · CPU") })
+                FilterChip(selected = state.useCoreML, enabled = state.controlsEnabled,
+                    onClick = { model.selectCoreML(true) }, modifier = Modifier.testTag("voice-backend-coreml"),
+                    label = { Text("Core ML 试听") })
+            }
+        }
         Button(onClick = model::process, enabled = state.controlsEnabled && state.inputReference != null,
-            modifier = Modifier.testTag("voice-process")) { Text("转换") }
+            modifier = Modifier.testTag("voice-process")) { Text("转换为${state.effect.label}") }
         if (state.phase == VoiceEffectsPhase.RUNNING || state.phase == VoiceEffectsPhase.CANCELLING) {
             LinearProgressIndicator(Modifier.fillMaxWidth())
             TextButton(onClick = model::cancel, modifier = Modifier.testTag("voice-cancel")) {
@@ -44,14 +62,17 @@ fun VoiceEffectsScreen(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoAc
             }
         }
         Text(when (state.phase) {
-            VoiceEffectsPhase.IDLE -> "就绪"; VoiceEffectsPhase.RUNNING -> "转换中"; VoiceEffectsPhase.CANCELLING -> "正在取消并释放资源"
-            VoiceEffectsPhase.SUCCEEDED -> "转换完成"; VoiceEffectsPhase.FAILED -> "操作失败"; VoiceEffectsPhase.CANCELLED -> "已取消"
+            VoiceEffectsPhase.IDLE -> "就绪"; VoiceEffectsPhase.RUNNING -> "正在本机转换为${state.effect.label}…"; VoiceEffectsPhase.CANCELLING -> "正在取消并释放资源"
+            VoiceEffectsPhase.SUCCEEDED -> "${state.effect.label}转换完成"; VoiceEffectsPhase.FAILED -> "操作失败"; VoiceEffectsPhase.CANCELLED -> "已取消"
         }, Modifier.testTag("voice-phase"))
-        TextButton(onClick = actions::playOriginal, enabled = state.controlsEnabled && state.inputReference != null) { Text("试听归一化原声") }
+        TextButton(onClick = actions::playOriginal, enabled = state.controlsEnabled && state.inputReference != null) { Text("试听原声") }
         state.output?.let { output ->
+            if (showBackends) {
+                Text(voiceBackendLabel(output.backendId), Modifier.testTag("voice-backend-result"))
+            }
             Text("${output.sampleRate} Hz · ${output.frameCount} 帧 · ${output.durationSeconds} 秒", Modifier.testTag("voice-output"))
             Row {
-                TextButton(onClick = { actions.playResult(output.reference) }, enabled = state.controlsEnabled) { Text("试听结果") }
+                TextButton(onClick = { actions.playResult(output.reference) }, enabled = state.controlsEnabled, modifier = Modifier.testTag("voice-play-result")) { Text("试听结果") }
                 TextButton(onClick = { actions.exportAudio(output.reference) }, enabled = state.controlsEnabled,
                     modifier = Modifier.testTag("voice-export")) { Text("导出 WAV") }
                 TextButton(onClick = model::clearOutput, enabled = state.controlsEnabled) { Text("清理") }
@@ -65,4 +86,17 @@ fun VoiceEffectsScreen(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoAc
         }
         if (showBack) TextButton(onClick = actions::leavePage) { Text("返回") }
     }
+}
+
+private fun voiceBackendLabel(backendId: String): String {
+    if (backendId == "openvoice.onnx") return "ONNX Runtime · CPU"
+    val stages = backendId.removePrefix("openvoice.").split(".")
+    fun provider(value: String) = when (value) {
+        "coreml" -> "Core ML"
+        "mixed" -> "Core ML + CPU"
+        "cpu" -> "CPU"
+        else -> "未确认"
+    }
+    if (stages.size != 2) return "推理后端未确认"
+    return "声纹提取 · ${provider(stages[0])}　音色转换 · ${provider(stages[1])}"
 }

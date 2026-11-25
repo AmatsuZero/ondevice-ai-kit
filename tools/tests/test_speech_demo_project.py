@@ -32,6 +32,7 @@ class SpeechDemoProjectTests(unittest.TestCase):
         self.root = Path(temp.name).resolve()
         (self.root / "scripts").mkdir()
         shutil.copy(ROOT / SCRIPT, self.root / SCRIPT)
+        shutil.copy(ROOT / "scripts/configure-openvoice-demo.rb", self.root / "scripts")
         shutil.copy(ROOT / "scripts/generate-opencv-identity-app.rb", self.root / "scripts")
         (self.root / "apple").mkdir()
         (self.root / "apple-mlx").mkdir()

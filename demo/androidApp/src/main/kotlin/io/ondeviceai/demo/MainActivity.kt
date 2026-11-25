@@ -56,6 +56,31 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
     private lateinit var bridge:AndroidFaceBridge
     private lateinit var model:FaceViewModel
     private lateinit var speechHost: SpeechHost
+    private var speechPickerReply: ((String?, String?, Boolean) -> Unit)? = null
+    private val speechAudioPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        val reply = speechPickerReply
+        speechPickerReply = null
+        if (reply != null) lifecycleScope.launch {
+            if (uri == null) {
+                reply(null, null, false)
+                return@launch
+            }
+            val displayName = try {
+                withContext(Dispatchers.IO) {
+                    contentResolver.query(
+                        uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null,
+                    )?.use { cursor ->
+                        if (cursor.moveToFirst()) cursor.getString(0) else null
+                    }
+                }
+            } catch (error: CancellationException) {
+                throw error
+            } catch (_: Exception) {
+                null
+            } ?: uri.lastPathSegment?.takeIf { it.isNotBlank() } ?: "Selected audio"
+            reply(uri.toString(), displayName, false)
+        }
+    }
     private lateinit var videoHost: VideoHost
     private lateinit var voiceHost: VoiceEffectsHost
     private var unifiedModel: UnifiedDemoModel? = null
@@ -233,6 +258,16 @@ class MainActivity:ComponentActivity(),DemoActions,IdentityDemoActions {
             createTts = { AndroidTextToSpeechBackend.create(this) }, createAsr = { AndroidSpeechRecognizerBackend(this) },
             createAdditionalAsr = { DemoOfflineAsrFactory.create(this) },
             defaultAsrBackendId = DemoOfflineAsrFactory.defaultBackendId,
+            launchAudioPicker = { reply ->
+                check(speechPickerReply == null) { "audio picker already active" }
+                speechPickerReply = reply
+                try {
+                    speechAudioPicker.launch(arrayOf("audio/*"))
+                } catch (error: Exception) {
+                    if (speechPickerReply === reply) speechPickerReply = null
+                    throw error
+                }
+            },
             hasPermission = { ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED },
             requestPermission = speechPermissionGate::request,
             openSettings = { startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName"))) },

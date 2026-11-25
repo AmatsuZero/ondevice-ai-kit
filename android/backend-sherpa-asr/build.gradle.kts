@@ -9,7 +9,7 @@ android {
 }
 dependencies {
     api(project(":android:speech"))
-    implementation("com.k2fsa.sherpa.onnx:sherpa-onnx:2.0.1")
+    implementation("com.k2fsa.sherpa.onnx:sherpa-onnx:${libs.versions.sherpaOnnx.get()}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.4.0")
 }

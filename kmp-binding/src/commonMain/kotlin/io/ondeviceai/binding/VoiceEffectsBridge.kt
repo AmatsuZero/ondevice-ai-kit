@@ -8,7 +8,7 @@ data class VoiceEffectsBridgeOutput(val reference: String, val backendId: String
     val frameCount: Long, val durationSeconds: Double) {
     init {
         require(reference.isNotBlank() && backendId.isNotBlank())
-        require(sampleRate in listOf(16000, 44100, 48000) && frameCount in 1..sampleRate * 30L)
+        require(sampleRate in listOf(16000, 22050, 44100, 48000) && frameCount in 1..sampleRate * 30L)
         require(durationSeconds.isFinite() && durationSeconds > 0)
     }
 }

@@ -1,9 +1,12 @@
 package io.ondeviceai.demo
 
 import android.content.Context
+import android.net.Uri
+import io.ondeviceai.binding.AndroidSpeechFileBackend
 import io.ondeviceai.sherpaasr.SherpaAsrBackend
 import io.ondeviceai.sherpaasr.SherpaWhisperModel
 import io.ondeviceai.speech.SpeechRecognitionBackend
+import io.ondeviceai.speech.SpeechRecognitionResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.sync.Mutex
@@ -13,8 +16,9 @@ internal object DemoOfflineAsrFactory {
     const val defaultBackendId = "sherpa.onnx.whisper"
     private val modelInstallation = Mutex()
     suspend fun create(context: Context): List<SpeechRecognitionBackend> = withContext(Dispatchers.IO) {
-        val model = prepareModel(context)
-        listOf(SherpaAsrBackend(context, model))
+        val appContext = context.applicationContext
+        val model = prepareModel(appContext)
+        listOf(DemoSherpaFileBackend(SherpaAsrBackend(appContext, model), appContext))
     }
 
     suspend fun prepareModel(context: Context): SherpaWhisperModel = withContext(Dispatchers.IO) {
@@ -34,5 +38,18 @@ internal object DemoOfflineAsrFactory {
         }
         model
         }
+    }
+
+    private class DemoSherpaFileBackend(
+        private val backend: SherpaAsrBackend,
+        private val context: Context,
+    ) : SpeechRecognitionBackend by backend, AndroidSpeechFileBackend {
+        override val backendId: String get() = backend.backendId
+
+        override suspend fun recognizeFile(
+            reference: String,
+            locale: String,
+        ): SpeechRecognitionResult =
+            backend.transcribeFile(locale, speechFilePcm(context, Uri.parse(reference)))
     }
 }

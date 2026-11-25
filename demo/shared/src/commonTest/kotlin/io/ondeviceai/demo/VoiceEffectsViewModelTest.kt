@@ -4,6 +4,90 @@ import io.ondeviceai.binding.*
 import kotlin.test.*
 
 class VoiceEffectsViewModelTest {
+    @Test fun choosingCoreMLRetiresCPUResultAndRoutesCurrentInputAndVoice() {
+        val neural = CoreMLTimbreFake()
+        val model = VoiceEffectsViewModel(VoiceFake(), neural)
+        model.selectInput("recording", "录音.wav")
+        model.selectEffect(DemoVoiceEffect.VOICE_B)
+        model.process()
+        neural.finish("cpu")
+        model.selectCoreML(true)
+        assertTrue(neural.outputs.isEmpty())
+        model.process()
+        assertEquals("recording" to "voiceB", neural.coreMLRequest)
+        model.leavePage()
+        neural.finish("late-coreml")
+        assertTrue(neural.outputs.isEmpty())
+        assertNull(model.state.output)
+        assertEquals(VoiceEffectsPhase.CANCELLED, model.state.phase)
+    }
+
+    @Test fun cpuOnlyHostAndPitchEffectsNeverRouteToCoreML() {
+        val neural = TimbreFake()
+        val model = VoiceEffectsViewModel(VoiceFake(), neural)
+        model.setExample("bundled")
+        model.selectCoreML(true)
+        assertFalse(model.state.useCoreML)
+        model.process()
+        assertEquals("bundled" to "voiceA", neural.request)
+
+        val pitch = VoiceFake()
+        val ios = VoiceEffectsViewModel(pitch, CoreMLTimbreFake())
+        ios.setExample("bundled")
+        ios.selectCoreML(true)
+        ios.selectEffect(DemoVoiceEffect.HIGH)
+        ios.process()
+        assertEquals(1, pitch.calls.size)
+    }
+
+    @Test fun selectedTimbreUsesCurrentInputAndRetiresEachOwnedResult() {
+        val pitch = VoiceFake()
+        val neural = TimbreFake()
+        val model = VoiceEffectsViewModel(pitch, neural)
+        model.setExample("bundled")
+        model.process()
+        assertEquals("bundled" to "voiceA", neural.request)
+        neural.finish("first")
+        assertTrue(model.holdOutput("first"))
+        model.selectInput("recorded", "录音.wav")
+        assertNull(model.state.output)
+        assertTrue(neural.outputs.contains("first"))
+        model.endOutputUse("first")
+        assertFalse(neural.outputs.contains("first"))
+        model.selectEffect(DemoVoiceEffect.VOICE_B)
+        model.process()
+        assertEquals("recorded" to "voiceB", neural.request)
+        neural.finish("second")
+        assertEquals(22050, model.state.output?.sampleRate)
+        model.selectEffect(DemoVoiceEffect.VOICE_C)
+        assertNull(model.state.output)
+        assertEquals(VoiceEffectsPhase.IDLE, model.state.phase)
+        model.selectInput("imported", "speech.wav")
+        model.process()
+        assertEquals("imported" to "voiceC", neural.request)
+        model.leavePage()
+        neural.finish("late")
+        assertNull(model.state.output)
+        assertTrue(neural.outputs.isEmpty())
+        assertTrue(pitch.calls.isEmpty())
+        assertTrue(pitch.releases.isEmpty())
+        model.selectEffect(DemoVoiceEffect.HIGH)
+        model.process()
+        assertEquals(1, pitch.calls.size)
+    }
+
+    @Test fun closingWhileOnnxIsReadingReleasesItsLateFile() {
+        val neural = TimbreFake()
+        val model = VoiceEffectsViewModel(VoiceFake(), neural)
+        model.selectInput("recorded", "录音.wav")
+        model.process()
+        model.close()
+        neural.finish("late")
+        assertTrue(neural.outputs.isEmpty())
+        assertNull(model.state.output)
+        assertEquals(VoiceEffectsPhase.CANCELLED, model.state.phase)
+    }
+
     @Test fun cancellationCanRetryPendingCleanup() {
         val bridge = VoiceFake(); val model = VoiceEffectsViewModel(bridge)
         model.selectInput("input",null); model.process(); model.cancel(); model.cancel()
@@ -60,4 +144,32 @@ private class VoiceFake : VoiceEffectsBridge {
         else callback.onReleased()
     }
     override fun close(callback: VoiceEffectsBridgeCloseCallback) { callback.onClosed() }
+}
+
+private open class TimbreFake : DemoVoiceTimbres {
+    val outputs = mutableSetOf<String>()
+    lateinit var request: Pair<String, String>
+    private lateinit var callback: VoiceEffectsBridgeProcessCallback
+
+    override fun render(inputReference: String, key: String, callback: VoiceEffectsBridgeProcessCallback) {
+        request = inputReference to key
+        this.callback = callback
+    }
+    fun finish(reference: String) {
+        outputs += reference
+        callback.onResult(VoiceEffectsBridgeOutput(reference, "openvoice.onnx", 22050, 22050, 1.0))
+    }
+    override fun ownsOutput(reference: String) = reference in outputs
+    override fun releaseOutput(reference: String, callback: VoiceEffectsBridgeReleaseCallback) {
+        assertTrue(outputs.remove(reference))
+        callback.onReleased()
+    }
+}
+
+private class CoreMLTimbreFake : TimbreFake(), DemoCoreMLVoiceTimbres {
+    var coreMLRequest: Pair<String, String>? = null
+    override fun renderCoreML(inputReference: String, key: String, callback: VoiceEffectsBridgeProcessCallback) {
+        coreMLRequest = inputReference to key
+        render(inputReference, key, callback)
+    }
 }

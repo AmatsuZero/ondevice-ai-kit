@@ -31,6 +31,7 @@ class SpeechHost(
     override val asrResources: AsrResourceHost? = null,
     private val createAdditionalAsr: suspend () -> List<SpeechRecognitionBackend> = { emptyList() },
     private val defaultAsrBackendId: String? = null,
+    private val launchAudioPicker: (((String?, String?, Boolean) -> Unit) -> Unit)? = null,
 ) : SpeechBridge, SpeechDemoActions, SpeechAsrResourceProvider {
     private val ownerJob = SupervisorJob()
     private val owner = CoroutineScope(scope.coroutineContext.minusKey(Job) + ownerJob)
@@ -39,6 +40,8 @@ class SpeechHost(
     private var closed = false
     private var foreground = true
     private var permission: PermissionTask? = null
+    private var fileBackends: List<AndroidSpeechFileBackend> = emptyList()
+    private var pendingAudioPicker: ((String?, String?, Boolean) -> Unit)? = null
     private val closeWaiters = mutableListOf<SpeechBridgeCloseCallback>()
     private var closing = false
     private var closeResult: SpeechBridgeFailure? = null
@@ -65,9 +68,12 @@ class SpeechHost(
             asrBackends.forEach { it.close() }
             null
         }
+        fileBackends = asrBackends.filterIsInstance<AndroidSpeechFileBackend>()
         adapter = AndroidSpeechBridge(
             tts = ttsBackend?.let { SpeechSynthesisClient(it.backendId, listOf(it)) },
-            asr = asrClient, scope = owner)
+            asr = asrClient,
+            scope = owner,
+            fileBackends = fileBackends)
         model.refreshBackends(SpeechBridgeCapability.TTS)
         model.refreshBackends(SpeechBridgeCapability.ASR)
     }
@@ -75,11 +81,59 @@ class SpeechHost(
     fun onForeground() { if (!closed) foreground = true }
     val canManageAsrResources: Boolean get() = !closed && foreground && permission == null && model.state.controlsEnabled
     fun onBackground() { foreground = false; asrResources?.cancel(); permission?.cancel(); model.background() }
-    fun close() = model.close()
-    override fun selectAudioFile() = Unit
-    override fun clearAudioFile() = Unit
+    fun close() {
+        pendingAudioPicker = null
+        model.close()
+    }
+    override fun selectAudioFile() {
+        if (closed || pendingAudioPicker != null) return
+        if (!foreground || permission != null || asrResources?.state?.busy == true ||
+            !model.state.controlsEnabled
+        ) {
+            model.inputFailed()
+            return
+        }
+        val launch = launchAudioPicker
+        if (launch == null) {
+            model.inputFailed()
+            return
+        }
+        lateinit var reply: (String?, String?, Boolean) -> Unit
+        reply = pickerReply@{ reference, displayName, failed ->
+            if (pendingAudioPicker !== reply) return@pickerReply
+            pendingAudioPicker = null
+            if (failed) {
+                model.inputFailed()
+                return@pickerReply
+            }
+            if (reference == null) return@pickerReply
+            if (closed || permission != null || asrResources?.state?.busy == true ||
+                !model.state.controlsEnabled || !reference.startsWith("content://")
+            ) {
+                model.inputFailed()
+                return@pickerReply
+            }
+            model.selectAudio(reference, displayName)
+        }
+        pendingAudioPicker = reply
+        try {
+            launch(reply)
+        } catch (_: Exception) {
+            if (pendingAudioPicker === reply) pendingAudioPicker = null
+            model.inputFailed()
+        }
+    }
+    override fun clearAudioFile() {
+        pendingAudioPicker = null
+        model.selectAudio(null, null)
+    }
     override fun openSpeechSettings() { if (!closed) openSettings() }
-    override fun leavePage() { asrResources?.cancel(); permission?.cancel(); model.leavePage() }
+    override fun leavePage() {
+        pendingAudioPicker = null
+        asrResources?.cancel()
+        permission?.cancel()
+        model.leavePage()
+    }
 
     override fun queryBackends(capability: SpeechBridgeCapability, callback: SpeechBridgeBackendsCallback): BridgeTask {
         if (closed) { callback.onFailure(failure(SpeechBridgeFailureCode.CLOSED)); return CompletedTask }
@@ -98,8 +152,19 @@ class SpeechHost(
         initializationFailures[SpeechBridgeCapability.ASR]?.let { callback.onFailure(it); return CompletedTask }
         if (permission != null) { callback.onFailure(failure(SpeechBridgeFailureCode.BUSY)); return CompletedTask }
         if (!foreground) { callback.onCancelled(); return CompletedTask }
-        if (request.input !is SpeechBridgeInput.Microphone) {
-            callback.onFailure(failure(SpeechBridgeFailureCode.UNSUPPORTED_INPUT)); return CompletedTask
+        when (val input = request.input) {
+            is SpeechBridgeInput.AudioFile -> {
+                if (fileBackends.isEmpty()) {
+                    callback.onFailure(failure(SpeechBridgeFailureCode.UNSUPPORTED_INPUT))
+                    return CompletedTask
+                }
+                if (input.reference.isBlank() || input.reference != model.state.audioReference) {
+                    callback.onFailure(failure(SpeechBridgeFailureCode.INVALID_INPUT))
+                    return CompletedTask
+                }
+                return adapter.recognize(request, selection, callback)
+            }
+            SpeechBridgeInput.Microphone -> Unit
         }
         if (hasPermission()) return adapter.recognize(request, selection, callback)
         val task = PermissionTask { callback.onCancelled() }
@@ -117,6 +182,7 @@ class SpeechHost(
     override fun close(callback: SpeechBridgeCloseCallback) {
         if (closeFinished) { deliverClose(callback); return }
         closeWaiters += callback
+        pendingAudioPicker = null
         closed = true
         permission?.cancel()
         if (closing) return

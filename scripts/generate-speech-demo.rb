@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'xcodeproj'
+require_relative 'configure-openvoice-demo'
 require 'fileutils'
 require 'json'
 require 'digest'
@@ -199,6 +200,7 @@ if validation
   File.write(metadata, JSON.generate({ sourceCommit: validation_commit }))
   target.resources_build_phase.add_file_reference(project.main_group.new_file(metadata))
 end
+configure_openvoice_demo(project, target, root) if voice_effects_demo
 project.save
 if mlx_demo
   pins = File.join(project.path, 'project.xcworkspace/xcshareddata/swiftpm')

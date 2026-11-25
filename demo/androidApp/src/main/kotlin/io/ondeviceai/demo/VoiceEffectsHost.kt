@@ -30,6 +30,7 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
     private var discardRecording = false
     private var player: MediaPlayer? = null
     private var playingReference: String? = null
+    private val timbres: AndroidOpenVoiceTimbres
     private var focus: AudioFocusRequest? = null
     private var exportReference: String? = null
     private var copyingExport = false
@@ -56,7 +57,7 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
     }
     private val exporter = activity.registerForActivityResult(ActivityResultContracts.CreateDocument("audio/wav")) { uri ->
         val reference = exportReference ?: return@registerForActivityResult
-        val file = bridge.outputFile(reference)
+        val file = outputFile(reference)
         if (uri == null || file == null) { finishExport(reference); return@registerForActivityResult }
         copyingExport = true
         scope.launch {
@@ -70,23 +71,33 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
         }
     }
     init {
-        bridge = AndroidVoiceEffectsBridge(VoiceEffectsClient(WindowedPitchVoiceEffectsBackend(), File(activity.cacheDir,"voice-output-${UUID.randomUUID()}")),
-            object : AndroidVoiceEffectsInputProvider {
-                override fun acquire(reference: String): AndroidVoiceEffectsInputLease {
-                    val file = inputs[reference] ?: error("unknown input")
-                    leased[reference] = (leased[reference] ?: 0) + 1
-                    return object : AndroidVoiceEffectsInputLease {
-                        override val file = file
-                        private var released = false
-                        override suspend fun release() {
-                            if (released) return
-                            released = true; leased[reference] = checkNotNull(leased[reference]) - 1
-                            cleanupInput(reference)
-                        }
+        val provider = object : AndroidVoiceEffectsInputProvider {
+            override fun acquire(reference: String): AndroidVoiceEffectsInputLease {
+                val file = inputs[reference] ?: error("unknown input")
+                leased[reference] = (leased[reference] ?: 0) + 1
+                return object : AndroidVoiceEffectsInputLease {
+                    override val file = file
+                    private var released = false
+                    override suspend fun release() {
+                        if (released) return
+                        released = true; leased[reference] = checkNotNull(leased[reference]) - 1
+                        cleanupInput(reference)
                     }
                 }
-            }, scope)
-        model = VoiceEffectsViewModel(bridge)
+            }
+        }
+        bridge = AndroidVoiceEffectsBridge(VoiceEffectsClient(WindowedPitchVoiceEffectsBackend(),
+            File(activity.cacheDir, "voice-output-${UUID.randomUUID()}")), provider, scope)
+        timbres = AndroidOpenVoiceTimbres(activity.applicationContext, provider, scope)
+        model = VoiceEffectsViewModel(bridge, timbres)
+        scope.launch {
+            try {
+                val file = withContext(Dispatchers.IO) {
+                    activity.assets.open("OpenVoice/original.wav").use { newInput(it.readBytes()) }
+                }
+                if (destroyed) file.delete() else model.setExample(registerInput(file))
+            } catch (_: Exception) { if (!destroyed) model.inputFailed("无法读取内置示例") }
+        }
     }
     fun foreground() { if (!destroyed) foreground = true }
     fun background() { foreground = false; stopPlayback(); stopCapture(true); model.cancel() }
@@ -162,8 +173,15 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
         runCatching { recorder?.stop() } // unblock worker; only that worker releases
     }
     override fun playOriginal() { inputs[model.state.inputReference]?.let { play(it,null) } }
+    override fun useExample() {
+        val old = model.state.inputReference ?: return
+        if (!model.state.controlsEnabled || old == model.state.exampleReference) return
+        model.useExample()
+        retireInput(old)
+    }
+    private fun outputFile(reference: String) = timbres.outputFile(reference) ?: bridge.outputFile(reference)
     override fun playResult(reference: String) {
-        val file = bridge.outputFile(reference) ?: return
+        val file = outputFile(reference) ?: return
         if (model.holdOutput(reference)) play(file,reference)
     }
     private fun play(file: File, reference: String?) {
@@ -176,9 +194,16 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
             player = MediaPlayer().apply {
                 setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build())
                 setDataSource(file.path)
-                setOnPreparedListener { if (player === it && foreground) it.start() else stopPlayback() }
-                setOnCompletionListener { stopPlayback() }
-                setOnErrorListener { _,_,_ -> stopPlayback(); model.inputFailed("audioPlaybackFailed"); true }
+                setOnPreparedListener {
+                    if (player === it && foreground) {
+                        it.start()
+                    } else if (player === it) stopPlayback()
+                }
+                setOnCompletionListener { if (player === it) stopPlayback() }
+                setOnErrorListener { failed,_,_ ->
+                    if (player === failed) { stopPlayback(); model.inputFailed("audioPlaybackFailed") }
+                    true
+                }
                 prepareAsync()
             }
         } catch (_: Exception) { stopPlayback(); model.inputFailed("audioPlaybackFailed") }
@@ -223,9 +248,17 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
     }
     private fun installInput(file: File, name: String) {
         val old = model.state.inputReference
-        val reference = "input-${UUID.randomUUID()}"; inputs[reference] = file
-        model.selectInput(reference,name)
-        if (old != null) { retired += old; scope.launch { cleanupInput(old) } }
+        model.selectInput(registerInput(file), name)
+        if (old != null && old != model.state.exampleReference) retireInput(old)
+    }
+    private fun registerInput(file: File): String {
+        val reference = "input-${UUID.randomUUID()}"
+        inputs[reference] = file
+        return reference
+    }
+    private fun retireInput(reference: String) {
+        retired += reference
+        scope.launch { cleanupInput(reference) }
     }
     private suspend fun cleanupInput(reference: String) {
         if (reference !in retired || (leased[reference] ?: 0) > 0) return

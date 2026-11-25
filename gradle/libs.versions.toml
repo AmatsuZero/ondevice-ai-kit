@@ -3,6 +3,7 @@ kotlin = "2.4.0"
 agp = "9.1.0"
 compose = "1.11.1"
 mlkit = "16.1.7"
+sherpaOnnx = "2.0.1"
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 android-kmp-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }

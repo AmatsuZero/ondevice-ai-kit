@@ -77,7 +77,7 @@ final class SpeechDemoUITests: XCTestCase {
 
     func testFilePickerCancellationReturnsWithoutSelectingInput() {
         let app = XCUIApplication(); app.launch()
-        let tab = app.descendants(matching: .any)["capability-tts"]
+        let tab = app.descendants(matching: .any)["capability-asr"]
         XCTAssertTrue(tab.waitForExistence(timeout: 15)); tab.tap()
         tapRenderedControl("选择音频文件", in: app)
         let cancel = app.descendants(matching: .any).matching(
@@ -120,7 +120,7 @@ final class SpeechDemoUITests: XCTestCase {
         try XCTSkipUnless(ProcessInfo.processInfo.environment["ODAI_SPEECH_FILE_UI_TEST"] == "1",
             "Requires the fixed synthetic CAF in this Demo's Files folder; see speech-demo-bridge.md")
         let app = XCUIApplication(); app.launch()
-        let tab = app.descendants(matching: .any)["capability-tts"]
+        let tab = app.descendants(matching: .any)["capability-asr"]
         XCTAssertTrue(tab.waitForExistence(timeout: 15)); tab.tap()
         selectFixture(in: app)
         let selected = app.staticTexts["speech-audio-name"]
@@ -396,10 +396,18 @@ final class SpeechDemoUITests: XCTestCase {
         if browse.waitForExistence(timeout: 3) { browse.tap() }
         let local = app.descendants(matching: .any).matching(NSPredicate(format: "label == '在我的 iPhone 上' OR label == '我的 iPhone' OR label == '我的iPhone' OR label == 'On My iPhone'")).firstMatch
         if local.waitForExistence(timeout: 3) { local.tap() }
-        let folder = app.descendants(matching: .any).matching(NSPredicate(format: "label == 'SpeechDemo'")).firstMatch
-        if folder.waitForExistence(timeout: 3) { folder.tap() }
-        let file = app.cells.matching(NSPredicate(format: "label BEGINSWITH 'odai-speech-ui-fixture, caf'")).firstMatch
-        XCTAssertTrue(file.waitForExistence(timeout: 10), "Provision only the fixed synthetic fixture in the Demo's Documents folder")
+        let folderName = ProcessInfo.processInfo.environment["ODAI_SPEECH_FILE_CONTAINER"] ?? "SpeechDemo"
+        let folder = app.cells.matching(NSPredicate(format: "identifier == %@", folderName + ", Container")).firstMatch
+        XCTAssertTrue(folder.waitForExistence(timeout: 10), app.debugDescription)
+        folder.tap()
+        XCTAssertTrue(folder.waitForNonExistence(timeout: 5), app.debugDescription)
+        let fixtureStem = ProcessInfo.processInfo.environment["ODAI_SPEECH_FILE_STEM"] ?? "odai-speech-ui-fixture"
+        let fixturePredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [
+            NSPredicate(format: "label BEGINSWITH[c] %@", fixtureStem),
+            NSPredicate(format: "identifier BEGINSWITH[c] %@", fixtureStem)
+        ])
+        let file = app.cells.matching(fixturePredicate).firstMatch
+        XCTAssertTrue(file.waitForExistence(timeout: 10), "Synthetic fixture not found in Files. Debug description: \(app.debugDescription)")
         file.tap()
     }
 
@@ -436,15 +444,21 @@ final class SpeechDemoUITests: XCTestCase {
                     app.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: point.x, dy: point.y)).tap()
                     return
                 }
+                let scrollView = app.scrollViews.firstMatch
+                guard scrollView.exists else {
+                    XCTFail("Scroll view must exist before scrolling: " + app.debugDescription)
+                    return
+                }
+
                 let start = direction ? 0.88 : 0.70
                 let end = direction ? 0.70 : 0.88
-                app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: start))
+                scrollView.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: start))
                     .press(forDuration: 0.05,
-                        thenDragTo: app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: end)),
+                        thenDragTo: scrollView.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: end)),
                         withVelocity: .slow, thenHoldForDuration: 0.3)
             }
         }
-        XCTFail("Rendered control must be visible: " + label)
+        XCTFail("Rendered control must be visible: " + label + "\n" + app.debugDescription)
     }
     private func stableRenderedPoint(_ label: String, in app: XCUIApplication, edgeInset: CGFloat) -> CGPoint? {
         guard var previous = renderedPoint(label, in: app, edgeInset: edgeInset) else { return nil }

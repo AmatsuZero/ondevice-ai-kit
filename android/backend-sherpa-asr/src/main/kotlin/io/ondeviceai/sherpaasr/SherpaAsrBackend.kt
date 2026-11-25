@@ -13,6 +13,7 @@ import android.os.SystemClock
 import com.k2fsa.sherpa.onnx.*
 import io.ondeviceai.core.*
 import io.ondeviceai.speech.*
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.*
 
 /** Optional CPU backend. No network access, implicit model download or audio persistence. */
@@ -47,6 +48,9 @@ class SherpaAsrBackend(context: Context, private val model: SherpaWhisperModel) 
     /** Caller-provided mono16kHz audio, at most10seconds; caller retains ownership. */
     suspend fun transcribe(samples: FloatArray, locale: String): SpeechRecognitionResult =
         session.transcribe(locale) { model.verify(); WhisperSpeechGate.prepare(model, samples) }
+
+    suspend fun transcribeFile(locale: String, chunks: Flow<FloatArray>): SpeechRecognitionResult =
+        session.transcribeFile(locale, chunks, verifyModel = { model.verify() }) { WhisperSpeechGate(model) }
 
     override suspend fun close() = session.close()
 

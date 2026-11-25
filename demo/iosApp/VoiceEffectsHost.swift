@@ -57,6 +57,7 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     private var recordingURL: URL?
     private var discardRecording = false
     private var player: AVAudioPlayer?
+    private var timbres: DemoVoiceTimbres?
     private var playingReference: String?
     private var playbackID: UUID?
     private var preparingPlayback = Set<UUID>()
@@ -86,7 +87,20 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
                 guard !closed else { return }
                 let client = try VoiceEffectsClient(backend: AppleVoiceEffectsBackend(), outputDirectory: directory)
                 let bridge = IOSVoiceEffectsBridge(client: client, inputs: inputs); self.bridge = bridge
-                let model = VoiceEffectsViewModel(bridge: bridge); self.model = model
+                #if ODAI_OPENVOICE_DEMO
+                let assets = Bundle.main.resourceURL!.appendingPathComponent("OpenVoice", isDirectory: true)
+                let renderer = OpenVoiceTimbres(assets: assets, directory: directory, inputs: inputs)
+                timbres = renderer
+                #endif
+                let model = VoiceEffectsViewModel(bridge: bridge, timbres: timbres); self.model = model
+                #if ODAI_OPENVOICE_DEMO
+                let example = try await Task.detached {
+                    try VoiceEffectsWave.store(VoiceEffectsWave.normalize(url: assets.appendingPathComponent("original.wav")),
+                                               directory: self.root.appendingPathComponent("inputs"))
+                }.value
+                guard !closed else { try? FileManager.default.removeItem(at: example); return }
+                model.setExample(reference: inputs.register(example))
+                #endif
                 model.onTerminal = recordSink
                 preparationState = .ready
                 let child = embedded
@@ -214,8 +228,20 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
         guard let reference = model?.state.inputReference, let lease = try? inputs.acquire(reference: reference) else { return }
         play(lease.url, reference: nil, input: lease)
     }
+    func useExample() {
+        guard let model, model.state.controlsEnabled, let old = model.state.inputReference,
+              old != model.state.exampleReference else { return }
+        model.useExample()
+        Task { await inputs.retire(old) }
+    }
+    private func outputURL(_ reference: String) -> URL? {
+        #if ODAI_OPENVOICE_DEMO
+        if let url = (timbres as? OpenVoiceTimbres)?.outputURL(reference) { return url }
+        #endif
+        return bridge?.outputURL(reference: reference)
+    }
     func playResult(reference: String) {
-        guard let url = bridge?.outputURL(reference: reference), model?.holdOutput(reference: reference) == true else { return }
+        guard let url = outputURL(reference), model?.holdOutput(reference: reference) == true else { return }
         play(url, reference: reference, input: nil)
     }
     private func play(_ url: URL, reference: String?, input: (any IOSVoiceEffectsInputLease)?) {
@@ -234,16 +260,19 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
             do {
                 // File parsing happens off MainActor. No read starts after the
                 // output hold ends: the hold remains until this preparation drains.
-                let data = try await Task.detached { try VoiceEffectsWave.normalize(url: url) }.value
+                let data = try await Task.detached { try Data(contentsOf: url) }.value
                 guard !closed, UIApplication.shared.applicationState == .active, playbackID == id else {
                     if playbackID == id { stopPlayback() }
                     return
                 }
-                let value = try AVAudioPlayer(data: data, fileTypeHint: AVFileType.wav.rawValue)
-                try acquireSession(recording: false); player = value; value.delegate = self
-                guard value.play() else { throw VoiceEffectsWave.Failure.unsupportedOrInvalidWAV }
+                try startPlayer(data)
             } catch { if playbackID == id { stopPlayback(); model.inputFailed(reason: "audioPlaybackFailed") } }
         }
+    }
+    private func startPlayer(_ data: Data) throws {
+        let value = try AVAudioPlayer(data: data, fileTypeHint: AVFileType.wav.rawValue)
+        try acquireSession(recording: false); player = value; value.delegate = self
+        guard value.play() else { throw VoiceEffectsWave.Failure.unsupportedOrInvalidWAV }
     }
     func stopPlayback() {
         player?.stop(); player = nil
@@ -269,7 +298,7 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
         }
     }
     func exportAudio(reference: String) {
-        guard let model, model.state.controlsEnabled, let url = bridge?.outputURL(reference: reference), model.holdOutput(reference: reference), !closed else { return }
+        guard let model, model.state.controlsEnabled, let url = outputURL(reference), model.holdOutput(reference: reference), !closed else { return }
         exportReference = reference; model.setMediaBusy(value: true); pickerIsExport = true
         let picker = UIDocumentPickerViewController(forExporting: [url], asCopy: true)
         picker.delegate = self; present(picker, animated: true)
@@ -281,7 +310,7 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     private func install(_ url: URL, name: String) async {
         let old = model?.state.inputReference
         let reference = inputs.register(url); model?.selectInput(reference: reference, name: name)
-        await inputs.retire(old)
+        if old != model?.state.exampleReference { await inputs.retire(old) }
     }
     private func acquireSession(recording: Bool) throws {
         let session = AVAudioSession.sharedInstance()
@@ -327,3 +356,109 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
         NotificationCenter.default.removeObserver(self)
     }
 }
+
+#if ODAI_OPENVOICE_DEMO
+@MainActor
+private final class OpenVoiceTimbres: NSObject, @preconcurrency DemoCoreMLVoiceTimbres {
+    private let assets: URL
+    private let directory: URL
+    private let inputs: VoiceEffectsInputStore
+    private var outputs: [String: URL] = [:]
+
+    init(assets: URL, directory: URL, inputs: VoiceEffectsInputStore) {
+        self.assets = assets
+        self.directory = directory
+        self.inputs = inputs
+    }
+
+    func render(inputReference: String, key: String, callback: any VoiceEffectsBridgeProcessCallback) {
+        render(inputReference: inputReference, key: key, callback: callback, coreML: false)
+    }
+
+    func renderCoreML(inputReference: String, key: String, callback: any VoiceEffectsBridgeProcessCallback) {
+        render(inputReference: inputReference, key: key, callback: callback, coreML: true)
+    }
+
+    private func render(inputReference: String, key: String, callback: any VoiceEffectsBridgeProcessCallback,
+                        coreML: Bool) {
+        guard let lease = try? inputs.acquire(reference: inputReference) else {
+            callback.onFailure(failure__: failure("无法读取当前音频"))
+            return
+        }
+        let id = UUID().uuidString
+        let output = directory.appendingPathComponent("\(key)-\(id).wav")
+        let assets = self.assets, source = lease.url
+        let profiles = directory.appendingPathComponent("profile-" + id, isDirectory: true)
+        Task {
+            do {
+                let (rate, frames, backend) = try await Task.detached(priority: .userInitiated) {
+                    var backend = "openvoice.onnx"
+                    if coreML {
+                        try FileManager.default.createDirectory(at: profiles, withIntermediateDirectories: false)
+                        defer { try? FileManager.default.removeItem(at: profiles) }
+                        guard openvoice_render_coreml(assets.path, source.path, key, output.path, profiles.path) == 0 else {
+                            throw RenderError.coreML
+                        }
+                        backend = Self.profileBackend(profiles)
+                    } else if openvoice_render(assets.path, source.path, key, output.path) != 0 {
+                        throw VoiceEffectsWave.Failure.unsupportedOrInvalidWAV
+                    }
+                    let file = try AVAudioFile(forReading: output)
+                    return (Int32(file.fileFormat.sampleRate), file.length, backend)
+                }.value
+                await lease.release()
+                outputs[id] = output
+                callback.onResult(output__: VoiceEffectsBridgeOutput(reference: id, backendId: backend,
+                    sampleRate: rate, frameCount: frames, durationSeconds: Double(frames) / Double(rate)))
+            } catch {
+                try? FileManager.default.removeItem(at: output)
+                await lease.release()
+                if error is RenderError {
+                    callback.onFailure(failure__: VoiceEffectsBridgeFailure(code: .backendUnavailable,
+                        reason: "Core ML 转换失败，可切换到 ONNX · CPU 再试。", domain: nil, platformCode: nil))
+                } else {
+                    callback.onFailure(failure__: failure("音色转换失败，请使用 0.05 至 30 秒的单声道语音。"))
+                }
+            }
+        }
+    }
+
+    private enum RenderError: Error { case coreML }
+
+    private nonisolated static func profileBackend(_ directory: URL) -> String {
+        let files = (try? FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)) ?? []
+        func stage(_ name: String) -> String {
+            guard let file = files.first(where: { $0.lastPathComponent.hasPrefix(name + "_") && $0.pathExtension == "json" }),
+                  let data = try? Data(contentsOf: file),
+                  let events = (try? JSONSerialization.jsonObject(with: data)) as? [[String: Any]] else { return "unknown" }
+            let providers = Set(events.compactMap { event -> String? in
+                guard event["cat"] as? String == "Node", (event["name"] as? String)?.hasSuffix("_kernel_time") == true
+                else { return nil }
+                return (event["args"] as? [String: Any])?["provider"] as? String
+            })
+            switch providers {
+            case ["CoreMLExecutionProvider"]: return "coreml"
+            case ["CPUExecutionProvider"]: return "cpu"
+            case ["CoreMLExecutionProvider", "CPUExecutionProvider"]: return "mixed"
+            default: return "unknown"
+            }
+        }
+        return "openvoice.\(stage("encoder")).\(stage("converter"))"
+    }
+
+    func outputURL(_ reference: String) -> URL? { outputs[reference] }
+    func ownsOutput(reference: String) -> Bool { outputs[reference] != nil }
+    func releaseOutput(reference: String, callback_ callback: any VoiceEffectsBridgeReleaseCallback) {
+        do {
+            if let url = outputs[reference], FileManager.default.fileExists(atPath: url.path) {
+                try FileManager.default.removeItem(at: url)
+            }
+            outputs.removeValue(forKey: reference)
+            callback.onReleased()
+        } catch { callback.onFailure(failure__: failure("无法清理音色文件")) }
+    }
+    private func failure(_ reason: String) -> VoiceEffectsBridgeFailure {
+        VoiceEffectsBridgeFailure(code: .invalidInput, reason: reason, domain: nil, platformCode: nil)
+    }
+}
+#endif

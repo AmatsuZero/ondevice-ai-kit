@@ -49,7 +49,7 @@ fun SpeechScreen(model: SpeechViewModel, actions: SpeechDemoActions?, capability
     resources?.let { AsrResourceControls(it, locale, state.controlsEnabled) }
     val inputs = state.asr.backends.flatMap { it.supportedInputs }.toSet()
     if (SpeechBridgeInputKind.AUDIO_FILE in inputs) {
-        Text("文件识别 · 按上方请求语言识别")
+        Text("请选择与音频一致的语言。转写文件时无需打开麦克风。")
         Text(state.audioDisplayName ?: "尚未选择音频", Modifier.testTag("speech-audio-name"))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = { actions?.selectAudioFile() }, enabled = controlsEnabled && actions != null,

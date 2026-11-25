@@ -3,11 +3,61 @@ val enableLiteRtLm = providers.gradleProperty("enableLiteRtLm").orNull == "true"
 val enableLiteRtSr = providers.gradleProperty("enableLiteRtSr").getOrElse("true") == "true"
 val enableOpenCvIdentity = providers.gradleProperty("enableOpenCvIdentity").orNull == "true"
 val enableSherpaAsr = providers.gradleProperty("enableSherpaAsr").orNull == "true"
+if (enableSherpaAsr) {
+ val sherpaOnnxAar = configurations.register("sherpaOnnxAar") {
+  isCanBeConsumed = false
+  isCanBeResolved = true
+  isTransitive = false
+ }
+ dependencies.add(
+  sherpaOnnxAar.name,
+  "com.k2fsa.sherpa.onnx:sherpa-onnx:${libs.versions.sherpaOnnx.get()}@aar"
+ )
+ val prepareSherpaOnnxRuntime = tasks.register<Sync>("prepareSherpaOnnxRuntime") {
+  inputs.files(sherpaOnnxAar)
+  from({ zipTree(sherpaOnnxAar.get().singleFile) }) {
+   include(
+    "jni/arm64-v8a/libonnxruntime.so",
+    "jni/armeabi-v7a/libonnxruntime.so",
+    "jni/x86/libonnxruntime.so",
+    "jni/x86_64/libonnxruntime.so",
+   )
+  }
+  into(layout.buildDirectory.dir("generated/sherpa-onnx"))
+ }
+ tasks.configureEach {
+  if (name.startsWith("configureCMake") || name.startsWith("buildCMake")) {
+   dependsOn(prepareSherpaOnnxRuntime)
+  }
+ }
+}
+val openVoiceDir = rootProject.file("demo/openvoice")
+abstract class PrepareOpenVoiceAssets : Exec() {
+ @get:OutputDirectory abstract val assetDirectory: DirectoryProperty
+}
+val prepareOpenVoice by tasks.registering(PrepareOpenVoiceAssets::class) {
+ assetDirectory.set(layout.buildDirectory.dir("generated/openvoice/assets"))
+ inputs.files(fileTree(openVoiceDir) { include("prepare.py", "assets/**") })
+ outputs.dir(openVoiceDir.resolve("build/android"))
+ commandLine("python3", openVoiceDir.resolve("prepare.py"), "android", assetDirectory.get().dir("OpenVoice").asFile)
+}
+androidComponents.onVariants { variant ->
+ variant.sources.assets?.addGeneratedSourceDirectory(prepareOpenVoice, PrepareOpenVoiceAssets::assetDirectory)
+}
+tasks.configureEach {
+ if (name == "preBuild" || name.startsWith("configureCMake") || name.startsWith("buildCMake")) dependsOn(prepareOpenVoice)
+}
 android {
  namespace="io.ondeviceai.demo";compileSdk=36
  ndkVersion = "27.0.12077973"
- externalNativeBuild { cmake { path = file("../../examples/android-realtime-sr/src/main/cpp/CMakeLists.txt"); version = "3.22.1" } }
- defaultConfig {applicationId="io.ondeviceai.demo";minSdk=26;targetSdk=36;versionCode=1;versionName="0.1.0";testInstrumentationRunner=providers.gradleProperty("odaiTestRunner").orNull?:"io.ondeviceai.demo.TtsProbeInstrumentation";buildConfigField("String","ODAI_SDK_COMMIT","\""+(providers.gradleProperty("sdkCommit").orNull?:"working-tree")+"\"")}
+ externalNativeBuild { cmake {
+  path = file("CMakeLists.txt"); version = "3.22.1"
+ } }
+ defaultConfig {applicationId="io.ondeviceai.demo";minSdk=26;targetSdk=36;versionCode=1;versionName="0.1.0";testInstrumentationRunner=providers.gradleProperty("odaiTestRunner").orNull?:"io.ondeviceai.demo.TtsProbeInstrumentation";buildConfigField("String","ODAI_SDK_COMMIT","\""+(providers.gradleProperty("sdkCommit").orNull?:"working-tree")+"\"")
+  externalNativeBuild { cmake {
+   if (enableSherpaAsr) arguments += "-DSHERPA_ONNX_JNI_DIR=${layout.buildDirectory.dir("generated/sherpa-onnx/jni").get().asFile}"
+  } }
+ }
  buildFeatures {compose=true;buildConfig=true}
  sourceSets.getByName("main").kotlin.srcDir(if (enableSherpaAsr) "src/sherpaasr/kotlin" else "src/noSherpaasr/kotlin")
  if (enableSherpaAsr) {

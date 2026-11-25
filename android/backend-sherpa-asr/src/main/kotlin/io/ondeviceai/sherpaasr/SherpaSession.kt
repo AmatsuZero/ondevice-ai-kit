@@ -3,7 +3,9 @@ package io.ondeviceai.sherpaasr
 import io.ondeviceai.core.BusyException
 import io.ondeviceai.core.ClosedException
 import io.ondeviceai.speech.SpeechRecognitionResult
+import io.ondeviceai.speech.SpeechNotDetectedException
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 
 internal interface SherpaDecoder : AutoCloseable {
     fun decode(samples: FloatArray, language: String): String
@@ -20,7 +22,7 @@ internal class SherpaSession(
     private var active: Active? = null
     private data class Active(val job: Job, val done: CompletableDeferred<Unit>)
 
-    suspend fun transcribe(locale: String, samples: suspend () -> FloatArray): SpeechRecognitionResult =
+    private suspend fun <T> admitted(locale: String, action: suspend (String) -> T): T =
         withContext(dispatcher) {
             val language = language(locale)
             val current = Active(currentCoroutineContext().job, CompletableDeferred())
@@ -29,9 +31,17 @@ internal class SherpaSession(
                 if (active != null) throw BusyException()
                 active = current
             }
+            try { action(language) }
+            finally {
+                synchronized(gate) { if (active === current) active = null }
+                current.done.complete(Unit)
+            }
+        }
+
+    suspend fun transcribe(locale: String, samples: suspend () -> FloatArray): SpeechRecognitionResult =
+        admitted(locale) { language ->
+            val waveform = samples()
             try {
-                val waveform = samples()
-                try {
                 currentCoroutineContext().ensureActive()
                 require(waveform.isNotEmpty() && waveform.size <= 160_000 && waveform.all { it.isFinite() }) {
                     "expected at most ten seconds of finite mono 16kHz samples"
@@ -43,11 +53,49 @@ internal class SherpaSession(
                     check(text.isNotBlank()) { "speech recognizer returned no result" }
                     SpeechRecognitionResult(BACKEND_ID, text)
                 }
-                } finally { waveform.fill(0f) }
-            } finally {
-                synchronized(gate) { if (active === current) active = null }
-                current.done.complete(Unit)
+            } finally { waveform.fill(0f) }
+        }
+
+    suspend fun transcribeFile(
+        locale: String,
+        chunks: Flow<FloatArray>,
+        verifyModel: () -> Unit,
+        speechGate: () -> WhisperSpeechGate,
+    ): SpeechRecognitionResult = admitted(locale) { language ->
+        currentCoroutineContext().ensureActive()
+        verifyModel()
+        currentCoroutineContext().ensureActive()
+
+        var engine: SherpaDecoder? = null
+        var voiced = false
+        val texts = mutableListOf<String>()
+        try {
+            speechGate().use { gate ->
+                chunks.collect { chunk ->
+                    try {
+                        currentCoroutineContext().ensureActive()
+                        require(chunk.isNotEmpty() && chunk.size <= 160_000 && chunk.all { it.isFinite() }) {
+                            "expected at most ten seconds of finite mono 16kHz samples"
+                        }
+                        gate.speechRange(chunk)?.let { range ->
+                            voiced = true
+                            val trimmed = chunk.copyOfRange(range.first, range.last + 1)
+                            try {
+                                val currentEngine = engine ?: decoder().also { engine = it }
+                                currentCoroutineContext().ensureActive()
+                                val text = currentEngine.decode(trimmed, language)
+                                currentCoroutineContext().ensureActive()
+                                text.trim().takeIf { it.isNotEmpty() }?.let(texts::add)
+                            } finally { trimmed.fill(0f) }
+                        }
+                    } finally { chunk.fill(0f) }
+                }
             }
+            currentCoroutineContext().ensureActive()
+            if (!voiced) throw SpeechNotDetectedException()
+            check(texts.isNotEmpty()) { "speech recognizer returned no result" }
+            SpeechRecognitionResult(BACKEND_ID, texts.joinToString(" "))
+        } finally { engine?.close() }
         }
 
     suspend fun close() = withContext(NonCancellable) {

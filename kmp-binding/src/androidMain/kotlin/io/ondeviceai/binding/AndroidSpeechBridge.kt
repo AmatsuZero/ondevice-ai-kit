@@ -4,10 +4,12 @@ import io.ondeviceai.core.CapabilityStatus
 import io.ondeviceai.core.ClosedException
 import io.ondeviceai.core.UnavailableReason
 import io.ondeviceai.speech.SpeechBackendSelection
+import io.ondeviceai.speech.SpeechBackendUnavailableException
 import io.ondeviceai.speech.SpeechClientError
 import io.ondeviceai.speech.SpeechCapability
 import io.ondeviceai.speech.SpeechRecognitionClient
 import io.ondeviceai.speech.SpeechRecognitionRequest
+import io.ondeviceai.speech.SpeechRecognitionResult
 import io.ondeviceai.speech.SpeechSynthesisClient
 import io.ondeviceai.speech.SpeechSynthesisRequest
 import kotlinx.coroutines.CancellationException
@@ -24,17 +26,24 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.coroutineContext
 
+interface AndroidSpeechFileBackend {
+    val backendId: String
+    suspend fun recognizeFile(reference: String, locale: String): SpeechRecognitionResult
+}
+
 /**
  * Android adapter for the capability-scoped speech clients.
  *
  * The clients are transferred to this object and are closed exactly once by [close].
  * Calls are admitted on the host's main scope; callbacks run on that same dispatcher.
  */
-class AndroidSpeechBridge(
+class AndroidSpeechBridge @JvmOverloads constructor(
     private val tts: SpeechSynthesisClient?,
     private val asr: SpeechRecognitionClient?,
     scope: CoroutineScope,
+    fileBackends: List<AndroidSpeechFileBackend> = emptyList(),
 ) : SpeechBridge {
+    private val fileBackends = fileBackends.associateBy { it.backendId }
     private val gate = Any()
     private val workerScope = CoroutineScope(
         SupervisorJob() + scope.coroutineContext.minusKey(Job),
@@ -122,9 +131,25 @@ class AndroidSpeechBridge(
             callback.onFailure(invalidInputFailure())
             return CompletedSpeechTask
         }
-        if (request.input !is SpeechBridgeInput.Microphone) {
-            callback.onFailure(unsupportedInputFailure())
-            return CompletedSpeechTask
+        when (val input = request.input) {
+            SpeechBridgeInput.Microphone -> Unit
+            is SpeechBridgeInput.AudioFile -> {
+                if (input.reference.isBlank()) {
+                    callback.onFailure(invalidInputFailure())
+                    return CompletedSpeechTask
+                }
+                if (fileBackends.isEmpty()) {
+                    callback.onFailure(unsupportedInputFailure())
+                    return CompletedSpeechTask
+                }
+                return startAudio(callback) {
+                    val result = recognizeFile(input.reference, request.locale, selection)
+                    coroutineContext.ensureActive()
+                    AudioTerminal.Result(
+                        SpeechBridgeAsrResult(result.backendId, result.transcript, result.confidence),
+                    )
+                }
+            }
         }
         return startAudio(callback) {
             val client = asr ?: throw MissingClientException(SpeechBridgeCapability.ASR)
@@ -134,6 +159,37 @@ class AndroidSpeechBridge(
             )
             coroutineContext.ensureActive()
             AudioTerminal.Result(SpeechBridgeAsrResult(result.backendId, result.transcript, result.confidence))
+        }
+    }
+
+    private suspend fun recognizeFile(
+        reference: String,
+        locale: String,
+        selection: SpeechBridgeSelection,
+    ): SpeechRecognitionResult {
+        val backend = when (selection) {
+            SpeechBridgeSelection.Default -> fileBackends.values.firstOrNull()
+                ?: throw UnsupportedAudioFileInputException()
+            is SpeechBridgeSelection.Explicit -> fileBackends[selection.backendId] ?: run {
+                val descriptors = asr?.listBackends() ?: throw MissingClientException(SpeechBridgeCapability.ASR)
+                if (descriptors.none { it.backendId == selection.backendId }) {
+                    throw SpeechClientError.BackendNotRegistered(
+                        SpeechCapability.ASR,
+                        selection.backendId,
+                    )
+                }
+                throw UnsupportedAudioFileInputException()
+            }
+        }
+        return try {
+            backend.recognizeFile(reference, locale)
+        } catch (error: SpeechBackendUnavailableException) {
+            throw SpeechClientError.BackendUnavailable(
+                SpeechCapability.ASR,
+                backend.backendId,
+                error.reason,
+                error,
+            )
         }
     }
 
@@ -230,26 +286,37 @@ class AndroidSpeechBridge(
         is SpeechBridgeSelection.Explicit -> SpeechBackendSelection.Explicit(backendId)
     }
 
-    private fun io.ondeviceai.speech.SpeechBackendDescriptor.toBridgeBackend() = SpeechBridgeBackend(
-        capability = when (capability) {
-            SpeechCapability.TTS -> SpeechBridgeCapability.TTS
-            SpeechCapability.ASR -> SpeechBridgeCapability.ASR
-        },
-        backendId = backendId,
-        availability = BridgeAvailability(
-            available = availability.status == CapabilityStatus.AVAILABLE,
-            reason = availability.reason?.name
-                ?: availability.status.takeUnless { it == CapabilityStatus.AVAILABLE }?.name,
+    private fun io.ondeviceai.speech.SpeechBackendDescriptor.toBridgeBackend(): SpeechBridgeBackend {
+        val filePermissionDenied = capability == SpeechCapability.ASR &&
+            backendId in fileBackends &&
+            availability.status != CapabilityStatus.AVAILABLE &&
+            (availability.reason?.name
+                ?: availability.status.takeUnless { it == CapabilityStatus.AVAILABLE }?.name) == "PERMISSION_DENIED"
+
+        return SpeechBridgeBackend(
+            capability = when (capability) {
+                SpeechCapability.TTS -> SpeechBridgeCapability.TTS
+                SpeechCapability.ASR -> SpeechBridgeCapability.ASR
+            },
             backendId = backendId,
-            minimumOS = availability.minOS,
-        ),
-        supportedInputs = if (capability == SpeechCapability.ASR) {
-            listOf(SpeechBridgeInputKind.MICROPHONE)
-        } else {
-            emptyList()
-        },
-        offline = availability.offline,
-    )
+            availability = BridgeAvailability(
+                available = availability.status == CapabilityStatus.AVAILABLE || filePermissionDenied,
+                reason = if (filePermissionDenied) null else availability.reason?.name
+                    ?: availability.status.takeUnless { it == CapabilityStatus.AVAILABLE }?.name,
+                backendId = backendId,
+                minimumOS = availability.minOS,
+            ),
+            supportedInputs = if (capability == SpeechCapability.ASR) {
+                buildList {
+                    add(SpeechBridgeInputKind.MICROPHONE)
+                    if (backendId in fileBackends) add(SpeechBridgeInputKind.AUDIO_FILE)
+                }
+            } else {
+                emptyList()
+            },
+            offline = availability.offline,
+        )
+    }
 
     private fun mapFailure(error: Throwable): SpeechBridgeFailure = when (error) {
         is MissingClientException -> SpeechBridgeFailure(
@@ -265,6 +332,11 @@ class AndroidSpeechBridge(
             SpeechBridgeFailureCode.BACKEND_UNAVAILABLE,
             error.reason.name,
         )
+        is SpeechBackendUnavailableException -> SpeechBridgeFailure(
+            SpeechBridgeFailureCode.BACKEND_UNAVAILABLE,
+            error.reason.name,
+        )
+        is UnsupportedAudioFileInputException -> unsupportedInputFailure()
         is ClosedException -> closedFailure()
         is io.ondeviceai.speech.SpeechNotDetectedException -> SpeechBridgeFailure(
             SpeechBridgeFailureCode.INVALID_INPUT, "NO_SPEECH")
@@ -298,6 +370,7 @@ class AndroidSpeechBridge(
     }
 
     private class MissingClientException(val capability: SpeechBridgeCapability) : IllegalStateException()
+    private class UnsupportedAudioFileInputException : IllegalStateException()
     private class InvalidSpeechRequestException : IllegalArgumentException()
 
     private object CompletedSpeechTask : BridgeTask {
