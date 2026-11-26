@@ -45,6 +45,9 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
     @Published private(set) var multimodalSetupStatus = "正在检查本地模型…"
     private var multimodalPreparation: MultimodalHostPreparation?
     #endif
+    #if ODAI_WEMM_VIDEO_DEMO
+    private(set) var weMMVideoDemoHost: WeMMVideoDemoHost?
+    #endif
     private var identityProbeFactory: ((CGImage) -> IdentityProbeReference)?
     private var latestIdentityCameraFrame: CameraFrame?
     private var livenessCapture: Task<Void, Never>?
@@ -90,6 +93,13 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
             catch { message = "语音模块初始化失败" }
         }
         NotificationCenter.default.addObserver(self, selector: #selector(speechBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        #endif
+        #if ODAI_WEMM_VIDEO_DEMO
+        MainActor.assumeIsolated {
+            let host = WeMMVideoDemoHost()
+            weMMVideoDemoHost = host
+            host.restore()
+        }
         #endif
         #if ODAI_MULTIMODAL_DEMO
         MainActor.assumeIsolated {
@@ -164,6 +174,9 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
             self?.multimodalHost?.background(preservePicker: self?.multimodalPicker?.isPresenting == true)
         }
         #endif
+        #if ODAI_WEMM_VIDEO_DEMO
+        weMMVideoDemoHost?.background()
+        #endif
         livenessCapture?.cancel(); identityModel.cancel(); cameraLifecycle.pause(); pauseCamera(); photoSubmission.cancel(); model.cancel()
         #if ODAI_VIDEO_DEMO
         Task { @MainActor [weak self] in self?.videoHost?.background() }
@@ -172,6 +185,9 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
     @objc private func foreground() {
         #if ODAI_MULTIMODAL_DEMO
         Task { @MainActor [weak self] in self?.multimodalHost?.onForeground() }
+        #endif
+        #if ODAI_WEMM_VIDEO_DEMO
+        weMMVideoDemoHost?.foreground()
         #endif
         #if ODAI_VIDEO_DEMO
         Task { @MainActor [weak self] in self?.videoHost?.onForeground() }
@@ -414,6 +430,10 @@ final class DemoController: NSObject, ObservableObject, @MainActor DemoActions, 
         let multimodal = multimodalHost
         let picker = multimodalPicker
         Task { @MainActor in multimodal?.close(); picker?.close() }
+        #endif
+        #if ODAI_WEMM_VIDEO_DEMO
+        let weMMVideo = weMMVideoDemoHost
+        Task { @MainActor in weMMVideo?.close() }
         #endif
         #if ODAI_VIDEO_DEMO
         let video = videoHost

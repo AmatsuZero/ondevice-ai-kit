@@ -262,6 +262,46 @@ import XCTest
     store.close()
   }
 
+  func testImportsPreserveRecognizedExtensionsAndLeaseFilesUntilRelease() async throws {
+    let root = try makeRoot()
+    defer { try? FileManager.default.removeItem(at: root) }
+
+    let store = try MultimodalInputStore(directory: root.appendingPathComponent("copies"))
+    defer { store.close() }
+
+    let payload = Data([0x01, 0x02, 0x03, 0x04])
+    let cases: [(name: String, expectedExtension: String)] = [
+      ("private-name.MP4", "mp4"),
+      ("private-name.MOV", "mov"),
+      ("private-name.png", ""),
+      ("private-name", "")
+    ]
+
+    for item in cases {
+      let source = root.appendingPathComponent(item.name)
+      try payload.write(to: source)
+
+      let task = try store.startImport(from: source)
+      let token = try await task.value
+      XCTAssertNotNil(UUID(uuidString: token), "Import token should be a UUID")
+
+      let lease = try store.acquire(reference: token)
+      let leasedURL = lease.url
+      let leasedBasename = leasedURL.deletingPathExtension().lastPathComponent
+      XCTAssertEqual(leasedBasename, token)
+      XCTAssertEqual(leasedURL.pathExtension, item.expectedExtension)
+      XCTAssertFalse(leasedBasename.contains(source.deletingPathExtension().lastPathComponent))
+      XCTAssertFalse(source.lastPathComponent.contains(token))
+      XCTAssertEqual(try Data(contentsOf: source), payload)
+      XCTAssertEqual(try Data(contentsOf: leasedURL), payload)
+
+      store.remove(reference: token)
+      XCTAssertTrue(FileManager.default.fileExists(atPath: leasedURL.path))
+      lease.release()
+      XCTAssertFalse(FileManager.default.fileExists(atPath: leasedURL.path))
+    }
+  }
+
   private func makeRoot() throws -> URL {
     let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: root, withIntermediateDirectories: false)

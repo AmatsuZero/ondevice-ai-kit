@@ -240,6 +240,8 @@ public final class IOSMultimodalBridge: NSObject, @preconcurrency MultimodalVide
     switch error {
     case MultimodalClientError.closed: return fail(.closed)
     case MultimodalClientError.busy: return fail(.busy)
+    case MultimodalClientError.invalidInput(let reason) where reason == "wemmVideoDecodeFailed":
+      return fail(.invalidInput, "无法解码该视频，请选择本机支持的视频编码。")
     case MultimodalClientError.invalidInput: return fail(.invalidInput)
     case MultimodalClientError.backendNotRegistered: return fail(.backendNotRegistered)
     case MultimodalClientError.backendUnavailable(_, let reason):

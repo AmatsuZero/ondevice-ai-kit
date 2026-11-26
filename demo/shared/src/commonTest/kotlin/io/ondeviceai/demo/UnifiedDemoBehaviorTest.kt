@@ -43,6 +43,48 @@ class UnifiedDemoBehaviorTest {
         assertEquals("语音", model.category)
     }
 
+    @Test fun videoOptInOnlyEnablesVideoUnderstandingAndAllowsSavingCancellation() {
+        val disabled = demoCatalogForVideo(enabled = false)
+        val enabled = demoCatalogForVideo(enabled = true)
+        assertEquals(defaultDemoCatalog, disabled)
+        assertEquals(defaultDemoCatalog.map { it.id }, enabled.map { it.id })
+        assertEquals(
+            listOf(DemoCapabilityId.VIDEO_UNDERSTANDING),
+            defaultDemoCatalog.zip(enabled).filter { (before, after) -> before != after }.map { it.first.id },
+        )
+
+        val video = enabled.first { it.id == DemoCapabilityId.VIDEO_UNDERSTANDING }
+        assertFalse(video.frozen)
+        assertFalse(video.previewOnly)
+        assertEquals(DemoCapabilityAvailabilityKind.NOT_QUERIED, video.status.kind)
+        val identity = enabled.first { it.id == DemoCapabilityId.IDENTITY_LIVENESS }
+        assertEquals(defaultDemoCatalog.first { it.id == DemoCapabilityId.IDENTITY_LIVENESS }, identity)
+        assertTrue(identity.frozen)
+
+        val active = UnifiedDemoModel(enabled)
+        active.updateStatus(DemoCapabilityId.VIDEO_UNDERSTANDING,
+            DemoCapabilityStatus(DemoCapabilityAvailabilityKind.READY, "backend ready"))
+        assertEquals(DemoCapabilityAvailabilityKind.READY,
+            active.descriptor(DemoCapabilityId.VIDEO_UNDERSTANDING).status.kind)
+        active.recordTerminal(DemoCapabilityId.VIDEO_UNDERSTANDING, "test", 1,
+            DemoRecordOutcome.CANCELLED, "用户取消")
+        assertTrue(active.canSaveRecord(DemoCapabilityId.VIDEO_UNDERSTANDING))
+        assertTrue(active.records.snapshot().isEmpty())
+        active.saveRecord(DemoCapabilityId.VIDEO_UNDERSTANDING)
+        assertEquals(DemoRecordOutcome.CANCELLED, active.records.snapshot().single().outcome)
+
+        val frozen = UnifiedDemoModel(disabled)
+        frozen.updateStatus(DemoCapabilityId.VIDEO_UNDERSTANDING,
+            DemoCapabilityStatus(DemoCapabilityAvailabilityKind.READY, "backend ready"))
+        assertEquals(DemoCapabilityAvailabilityKind.FROZEN_PREVIEW,
+            frozen.descriptor(DemoCapabilityId.VIDEO_UNDERSTANDING).status.kind)
+        frozen.recordTerminal(DemoCapabilityId.VIDEO_UNDERSTANDING, "test", 2,
+            DemoRecordOutcome.CANCELLED, "默认冻结")
+        assertFalse(frozen.canSaveRecord(DemoCapabilityId.VIDEO_UNDERSTANDING))
+        frozen.saveRecord(DemoCapabilityId.VIDEO_UNDERSTANDING)
+        assertTrue(frozen.records.snapshot().isEmpty())
+    }
+
     @Test fun frozenRecordsCannotClaimExecutedSuccess() {
         val model = UnifiedDemoModel()
         model.recordTerminal(DemoCapabilityId.IDENTITY_LIVENESS, "test", 1, DemoRecordOutcome.COMPLETED, "invalid")

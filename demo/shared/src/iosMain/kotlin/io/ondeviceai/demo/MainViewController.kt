@@ -15,7 +15,7 @@ import platform.UIKit.UIViewController
 @OptIn(ExperimentalForeignApi::class)
 fun unifiedDemoViewController(bindings: UnifiedDemoBindings, facePreview: UIViewController,
     voiceEffects: UIViewController?, playback: UIViewController? = null): UIViewController = ComposeUIViewController {
-    val model = remember { UnifiedDemoModel(onLeave = bindings::leaveCapability, isIdle = bindings::isIdle) }
+    val model = remember { UnifiedDemoModel(initialCatalog = demoCatalogForVideo(bindings.videoUnderstandingEnabled), onLeave = bindings::leaveCapability, isIdle = bindings::isIdle) }
     UnifiedDemoScreen(model, bindings,
         facePreview = { UIKitViewController(factory = { facePreview }, modifier = Modifier.fillMaxWidth().height(220.dp)) },
         voiceContent = voiceEffects?.let { controller ->

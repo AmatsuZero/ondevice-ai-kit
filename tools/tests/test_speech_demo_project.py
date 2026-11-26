@@ -20,7 +20,12 @@ MLX_SOURCES = ["demo/iosApp/MultimodalHostPreparation.swift", "demo/iosApp/Multi
 
 VALIDATION_SOURCES = ["probes/ios-multimodal-demo/AppAccessibility.swift", "probes/ios-multimodal-demo/AppBackgroundObservation.swift", "probes/ios-multimodal-demo/MultimodalDemoValidation.swift", "probes/ios-multimodal-demo/MultimodalDemoActiveValidation.swift", "probes/ios-multimodal-demo/MultimodalDemoBackgroundValidation.swift"]
 
-MULTIMODAL_SOURCES = ["demo/iosApp/MultimodalHost.swift", "demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/MultimodalFilePicker.swift", "kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOSMultimodalInput.swift"]
+MULTIMODAL_SOURCES = ["demo/iosApp/MultimodalHost.swift", "demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/MultimodalFilePicker.swift", "kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOSMultimodalInput.swift", "demo/iosApp/WeMMVideoPreparation.swift"]
+WEMM_SOURCES = ["demo/iosApp/WeMMVideoModel.swift", "demo/iosApp/WeMMVideoBackend.swift", "demo/iosApp/WeMMVideoDemoHost.swift",
+                "demo/iosApp/PlaybackEnhancementHost.swift", "demo/iosApp/PlaybackEnhancementMetalRenderer.swift",
+                "demo/iosApp/PlaybackEnhancementSR.swift", "demo/iosApp/PlaybackEnhancementSystemSR.swift",
+                "demo/iosApp/PlaybackFrameChoice.swift", "demo/iosApp/PlaybackEnhancementShaders.metal",
+                "demo/iosApp/PlaybackEnhancementCuNNy.metal", "demo/iosApp/PlaybackEnhancementSpatial.metal"]
 IDENTITY_SOURCES = ["demo/iosApp/IdentityOpenCvHost.swift", "demo/iosApp/IdentityOpenCvSession.swift",
                     "kmp-binding/apple/IOSIdentityBridge.swift"]
 
@@ -43,7 +48,7 @@ class SpeechDemoProjectTests(unittest.TestCase):
         notices.mkdir()
         for name in ["OpenCV-LICENSE.txt", "YuNet-LICENSE.txt", "SFace-LICENSE.txt"]:
             shutil.copyfile(ROOT / "apple-opencv/Notices" / name, notices / name)
-        for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES + IDENTITY_SOURCES + VALIDATION_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE]:
+        for source in SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + MLX_SOURCES + WEMM_SOURCES + IDENTITY_SOURCES + VALIDATION_SOURCES + ["demo/iosApp/Info.plist", UI_SOURCE, "demo/iosApp/UITests/W6UnifiedVideoUITests.swift", "demo/iosApp/UITests/W6Fixtures-Info.plist"]:
             path = self.root / source
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text("fixture")
@@ -51,6 +56,19 @@ class SpeechDemoProjectTests(unittest.TestCase):
                            for platform in ["iosSimulatorArm64", "iosArm64"]]
         for framework in self.frameworks:
             framework.mkdir(parents=True)
+        self.wemm_xcframework = self.root / "wemm-native.xcframework"
+        (self.wemm_xcframework / "Info.plist").parent.mkdir(parents=True)
+        (self.wemm_xcframework / "Info.plist").write_text("fixture")
+        for slice_name in ["ios-arm64", "ios-arm64-simulator"]:
+            slice_dir = self.wemm_xcframework / slice_name
+            headers = slice_dir / "Headers"
+            headers.mkdir(parents=True)
+            (slice_dir / "libODAIWeMMNative.a").write_bytes(b"fixture")
+            (headers / "module.modulemap").write_text("fixture")
+            (headers / "WeMMNative.h").write_text("fixture")
+        self.wemm_notice = self.root / "wemm-native-NOTICE.txt"
+        self.wemm_notice.write_text("WeMM native notice fixture\n")
+        (self.root / "demo/iosApp/RealtimeSRNotices").mkdir(parents=True)
         self.original = self.root / "demo/iosApp/OnDeviceAIDemo.xcodeproj/project.pbxproj"
         self.original.parent.mkdir()
         self.original.write_bytes(b"protected project")
@@ -122,9 +140,19 @@ puts JSON.generate(t.resources_build_phase.files.map { |f| [f.file_ref.real_path
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertFalse((self.output / "OpenCVIdentityNotices").exists())
 
-    def generate(self, video=False, multimodal=False, mlx=False, validation=False, commit="a" * 40, identity=False, notices=None):
+    def generate(self, video=False, multimodal=False, mlx=False, validation=False, commit="a" * 40, identity=False, notices=None, wemm=False, fixtures=False):
         return subprocess.run([self.ruby, str(self.root / SCRIPT)], capture_output=True, text=True,
-            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0", "ODAI_MULTIMODAL_MLX_DEMO": "1" if mlx else "0", "ODAI_MULTIMODAL_DEMO_VALIDATION": "1" if validation else "0", "ODAI_VALIDATION_SOURCE_COMMIT": commit, "ODAI_OPENCV_IDENTITY_DEMO": "1" if identity else "0", "ODAI_THIRD_PARTY_NOTICES_DIR": "" if notices is None else str(notices)})
+            env={**os.environ, "ODAI_SPEECH_DEMO_DIR": str(self.output), "ODAI_DEVELOPMENT_TEAM": "LOCALTEAM", "ODAI_VIDEO_DEMO": "1" if video else "0", "ODAI_MULTIMODAL_DEMO": "1" if multimodal else "0", "ODAI_MULTIMODAL_MLX_DEMO": "1" if mlx else "0", "ODAI_MULTIMODAL_DEMO_VALIDATION": "1" if validation else "0", "ODAI_VALIDATION_SOURCE_COMMIT": commit, "ODAI_OPENCV_IDENTITY_DEMO": "1" if identity else "0", "ODAI_THIRD_PARTY_NOTICES_DIR": "" if notices is None else str(notices), "ODAI_WEMM_VIDEO_DEMO": "1" if wemm else "0", "ODAI_WEMM_UI_FIXTURES": "1" if fixtures else "0", "ODAI_WEMM_NATIVE_XCFRAMEWORK": str(self.wemm_xcframework), "ODAI_WEMM_NATIVE_NOTICE": str(self.wemm_notice)})
+
+    def inspect_project(self):
+        inspected = subprocess.run([self.ruby, "-rxcodeproj", "-rjson", "-e", """
+p = Xcodeproj::Project.open(ARGV[0])
+puts JSON.generate(p.targets.to_h { |t| [t.name, {
+  settings: t.build_configurations.first.build_settings,
+  sources: t.source_build_phase.files.map { |f| f.file_ref.real_path.to_s }
+}] })
+""", str(self.output / "SpeechDemo.xcodeproj")], capture_output=True, text=True, check=True)
+        return json.loads(inspected.stdout)
 
     def notice_material(self):
         path = self.root / "notice-material"
@@ -282,6 +310,7 @@ puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.rea
             self.assertEqual(settings["IPHONEOS_DEPLOYMENT_TARGET"], "18.0")
             self.assertEqual(settings["PRODUCT_BUNDLE_IDENTIFIER"], "io.ondeviceai.multimodalmlxdemo")
             self.assertIn("ODAI_MULTIMODAL_MLX_DEMO", settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"])
+            self.assertNotIn("ODAI_WEMM_VIDEO_DEMO", settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"])
         lock = self.output / "SpeechDemo.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved"
         self.assertEqual(lock.read_text(), "fixed-lock")
         self.assertEqual(self.original.read_bytes(), b"protected project")
@@ -308,6 +337,98 @@ puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.rea
         self.assertIn("ODAIKitMultimodal", data["products"])
         self.assertNotIn("ODAIKitAppleMLXVLM", data["products"])
         self.assertTrue(all("ODAI_MULTIMODAL_DEMO" in c["SWIFT_ACTIVE_COMPILATION_CONDITIONS"] for c in data["settings"]))
+        self.assertEqual(self.original.read_bytes(), b"protected project")
+
+    def testWemmFixtureOptInRequiresWemmAndBothInputsBeforeCreatingOutput(self):
+        rejected = self.generate(fixtures=True)
+        self.assertNotEqual(rejected.returncode, 0)
+        self.assertFalse(self.output.exists())
+
+        fixture_paths = [self.root / "demo/iosApp/UITests/W6UnifiedVideoUITests.swift",
+                         self.root / "demo/iosApp/UITests/W6Fixtures-Info.plist"]
+        for index, missing in enumerate(fixture_paths):
+            with self.subTest(missing_input=missing.name):
+                self.output = self.root / f"fixture-missing-{index}"
+                held = missing.with_name(missing.name + ".held")
+                missing.rename(held)
+                try:
+                    result = self.generate(video=True, multimodal=True, wemm=True, fixtures=True)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertFalse(self.output.exists())
+                finally:
+                    held.rename(missing)
+
+    def testOrdinaryWemmAndFixtureTargetsUseExpectedIdentifiersAndSources(self):
+        fixture_source = str(self.root / "demo/iosApp/UITests/W6UnifiedVideoUITests.swift")
+        expected_ui_source = str(self.root / UI_SOURCE)
+        modes = [
+            ("ordinary", {}, "io.ondeviceai.ondeviceaidemo", "io.ondeviceai.ondeviceaidemo.uitests", False),
+            ("wemm", {"video": True, "multimodal": True, "wemm": True},
+             "io.ondeviceai.w6.unifiedvideo", "io.ondeviceai.w6.unifiedvideo.uitests", False),
+            ("fixtures", {"video": True, "multimodal": True, "wemm": True, "fixtures": True},
+             "io.ondeviceai.w6.unifiedvideo.fixtures", "io.ondeviceai.w6.unifiedvideo.fixtures.uitests", True),
+        ]
+        for name, options, app_id, ui_id, has_fixture in modes:
+            with self.subTest(mode=name):
+                self.output = self.root / f"project-{name}"
+                result = self.generate(**options)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                targets = self.inspect_project()
+                app = targets["SpeechDemo"]
+                ui = targets["SpeechDemoUITests"]
+                self.assertEqual(app["settings"]["PRODUCT_BUNDLE_IDENTIFIER"], app_id)
+                self.assertEqual(ui["settings"]["PRODUCT_BUNDLE_IDENTIFIER"], ui_id)
+                expected_app_plist = "demo/iosApp/UITests/W6Fixtures-Info.plist" if has_fixture else "demo/iosApp/Info.plist"
+                self.assertEqual(app["settings"]["INFOPLIST_FILE"], str(self.root / expected_app_plist))
+                self.assertIn(expected_ui_source, ui["sources"])
+                self.assertEqual(fixture_source in ui["sources"], has_fixture)
+                self.assertNotIn(fixture_source, app["sources"])
+                self.assertNotIn("INFOPLIST_FILE", ui["settings"])
+
+    def testWemmOptInRequiresBothNativeSlicesAndAddsNativeModelAndNotices(self):
+        rejected = self.generate(wemm=True)
+        self.assertNotEqual(rejected.returncode, 0)
+        self.assertFalse(self.output.exists())
+        for slice_name in ["ios-arm64", "ios-arm64-simulator"]:
+            with self.subTest(missing_slice=slice_name):
+                self.output = self.root / ("wemm-missing-" + slice_name)
+                slice_dir = self.wemm_xcframework / slice_name
+                held = slice_dir.with_name(slice_dir.name + ".held")
+                slice_dir.rename(held)
+                try:
+                    result = self.generate(video=True, multimodal=True, wemm=True)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertFalse(self.output.exists())
+                finally:
+                    held.rename(slice_dir)
+
+        self.output = self.root / "wemm-output"
+        result = self.generate(video=True, multimodal=True, wemm=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        inspected = subprocess.run([self.ruby, "-rxcodeproj", "-rjson", "-e", """
+p = Xcodeproj::Project.open(ARGV[0]); t = p.targets.find { |target| target.name == 'SpeechDemo' }
+puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.real_path.to_s },
+ products: t.package_product_dependencies.map(&:product_name),
+ frameworks: t.frameworks_build_phase.files.filter_map { |f| [f.file_ref.real_path.to_s, f.file_ref.last_known_file_type] if f.file_ref },
+ resources: t.resources_build_phase.files.map { |f| f.file_ref.real_path.to_s },
+ settings: t.build_configurations.map(&:build_settings)})
+""", str(self.output / "SpeechDemo.xcodeproj")], capture_output=True, text=True, check=True)
+        data = json.loads(inspected.stdout)
+        expected_sources = SOURCES + VIDEO_SOURCES + MULTIMODAL_SOURCES + [s for s in MLX_SOURCES if not s.endswith("MultimodalMLXHostFactory.swift")] + WEMM_SOURCES
+        self.assertEqual(sorted(data["sources"]), sorted(str(self.root / source) for source in expected_sources))
+        self.assertIn("ODAIKitModelStore", data["products"])
+        self.assertIn([str(self.wemm_xcframework), "wrapper.xcframework"], data["frameworks"])
+        self.assertTrue(all((self.wemm_xcframework / slice_name / "libODAIWeMMNative.a").is_file()
+                            for slice_name in ["ios-arm64", "ios-arm64-simulator"]))
+        notice = self.output / "WeMMNative-NOTICE.txt"
+        self.assertEqual(notice.read_text(), self.wemm_notice.read_text())
+        self.assertIn(str(notice), data["resources"])
+        self.assertIn(str(self.root / "demo/iosApp/RealtimeSRNotices"), data["resources"])
+        for settings in data["settings"]:
+            self.assertEqual(settings["PRODUCT_BUNDLE_IDENTIFIER"], "io.ondeviceai.w6.unifiedvideo")
+            self.assertIn("ODAI_WEMM_VIDEO_DEMO", settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"])
+            self.assertIn("-lc++", settings["OTHER_LDFLAGS"])
+            self.assertIn("MetalKit", settings["OTHER_LDFLAGS"])
         self.assertEqual(self.original.read_bytes(), b"protected project")
 
     def testVideoOptInAddsOnlyHostVideoProductsAndPreservesOriginal(self):
@@ -347,6 +468,7 @@ puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.rea
             self.assertIn("ODAI_SPEECH_DEMO", settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"])
             self.assertIn("ODAI_DEMO_BINDING", settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"])
             self.assertEqual(settings["PRODUCT_BUNDLE_IDENTIFIER"], "io.ondeviceai.ondeviceaidemo")
+            self.assertNotIn("ODAI_WEMM_VIDEO_DEMO", settings["SWIFT_ACTIVE_COMPILATION_CONDITIONS"])
             self.assertEqual(settings["DEVELOPMENT_TEAM"], "LOCALTEAM")
             self.assertIn("INFOPLIST_KEY_NSSpeechRecognitionUsageDescription", settings)
             self.assertIn("INFOPLIST_KEY_NSMicrophoneUsageDescription", settings)

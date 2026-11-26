@@ -1,5 +1,6 @@
 import Darwin
 import Foundation
+import UniformTypeIdentifiers
 
 enum MultimodalInputStoreError: Error, Equatable {
   case invalidSource
@@ -50,7 +51,20 @@ final class MultimodalInputStore: IOSMultimodalInputProvider {
     guard !closed, source.isFileURL else { throw MultimodalInputStoreError.invalidSource }
     let scoped = startAccess(source)
     let token = UUID().uuidString.lowercased()
-    let destination = directory.appendingPathComponent(token)
+    let extensionSuffix: String
+    if !source.pathExtension.isEmpty,
+       let sourceType = UTType(filenameExtension: source.pathExtension),
+       !sourceType.isDynamic,
+       sourceType.conforms(to: .movie),
+       let preferredExtension = sourceType.preferredFilenameExtension,
+       let preferredType = UTType(filenameExtension: preferredExtension),
+       !preferredType.isDynamic,
+       preferredType.conforms(to: .movie) {
+      extensionSuffix = ".\(preferredExtension)"
+    } else {
+      extensionSuffix = ""
+    }
+    let destination = directory.appendingPathComponent(token + extensionSuffix)
     let maxBytes = maxBytes
     let checkpoint = checkpoint
     let worker = Task.detached(priority: .userInitiated) {

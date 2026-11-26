@@ -70,6 +70,9 @@ interface UnifiedDemoBindings {
     val videoActions: VideoDemoActions?
     val multimodalModel: MultimodalViewModel?
     val multimodalActions: MultimodalDemoActions?
+    val videoUnderstandingEnabled: Boolean get() = false
+    val videoUnderstandingModel: MultimodalViewModel? get() = null
+    val videoUnderstandingActions: MultimodalDemoActions? get() = null
     val voiceEffectsModel: VoiceEffectsViewModel?
     val voiceEffectsActions: VoiceEffectsDemoActions?
     val realtimeSr: RealtimeSRDemoActions?
@@ -128,17 +131,18 @@ fun UnifiedDemoScreen(
     voiceContent: (@Composable () -> Unit)? = null,
     playbackContent: (@Composable () -> Unit)? = null,
 ) {
-    LaunchedEffect(bindings) {
+    LaunchedEffect(bindings, bindings.videoUnderstandingModel) {
         bindings.speechModel?.refreshBackends(io.ondeviceai.binding.SpeechBridgeCapability.TTS)
         bindings.speechModel?.refreshBackends(io.ondeviceai.binding.SpeechBridgeCapability.ASR)
         bindings.videoModel?.refreshBackends()
         bindings.multimodalModel?.refreshBackends()
+        bindings.videoUnderstandingModel?.refreshBackends()
         while (true) {
             defaultDemoCatalog.forEach { descriptor -> model.updateStatus(descriptor.id, bindings.status(descriptor.id)) }
             kotlinx.coroutines.delay(300)
         }
     }
-    DisposableEffect(bindings, model, bindings.faceModel, bindings.speechModel, bindings.videoModel, bindings.multimodalModel, bindings.voiceEffectsModel) {
+    DisposableEffect(bindings, model, bindings.faceModel, bindings.speechModel, bindings.videoModel, bindings.multimodalModel, bindings.videoUnderstandingModel, bindings.voiceEffectsModel) {
         bindings.setRecordSink { id, outcome, summary ->
             model.recordTerminal(id, bindings.platformLabel, bindings.nowMillis, outcome, summary)
         }
@@ -367,6 +371,9 @@ private fun CapabilityPage(
         }
         DemoCapabilityId.IMAGE_UNDERSTANDING -> bindings.multimodalModel?.let { ScrollableDetail { MultimodalScreen(it, bindings.multimodalActions, allowVideoInput = false) } }
             ?: UnavailablePage(bindings.status(id))
+        DemoCapabilityId.VIDEO_UNDERSTANDING -> bindings.videoUnderstandingModel?.let {
+            ScrollableDetail { MultimodalScreen(it, bindings.videoUnderstandingActions, allowVideoInput = true, videoOnlyInput = true) }
+        } ?: UnavailablePage(bindings.status(id))
         DemoCapabilityId.FILE_SUPER_RESOLUTION -> bindings.videoModel?.let {
             ScrollableDetail {
                 VideoScreen(it, bindings.videoActions,
@@ -382,7 +389,7 @@ private fun CapabilityPage(
             bindings.playbackEnhancement,
             playbackContent,
         )
-        DemoCapabilityId.VIDEO_UNDERSTANDING, DemoCapabilityId.IDENTITY_LIVENESS -> Unit
+        DemoCapabilityId.IDENTITY_LIVENESS -> Unit
     }
     }
 }

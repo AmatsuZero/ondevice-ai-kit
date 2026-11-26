@@ -47,6 +47,30 @@ open artifacts/SpeechDemo-new/SpeechDemo.xcodeproj
 
 “视频文件超分”已接入默认 iOS CMP Demo，复用 VideoBridge 与现有 Apple VideoToolbox 文件后端：支持该系统能力的 iOS 26+ 真机、320×180/24fps/1–48 帧/BT.709 SDR 输入，4× 输出；模拟器或不支持的设备显示真实不可用原因。取消等待 native drain，输出由显式清理或离页释放，播放/分享有独立副本；该入口与实时播放后端分别验收，默认入口回归见[接入修复验证](docs/validation/unified-ios-file-sr-20261122.md)，既有文件链路见[视频文件 Demo 验证](docs/validation/video-bridge-demo.md)。
 
+### W6 统一 Demo 视频理解（iOS）
+
+在已构建两套 KMP framework 的工作树中，设置 `WEMM_LLAMA_SOURCE` 指向含 `88aaf325a7026ac1127d0897394b0a3d6413dc2a` 的本地 llama.cpp 检出。以下命令使用 CMake 和 Xcode 构建独立 App `io.ondeviceai.w6.unifiedvideo`，最低 iOS 16.4。真机采用 Metal，模拟器采用 CPU。
+
+```sh
+w6_build=$(mktemp -d)
+for sdk in iphoneos iphonesimulator; do
+  python3 scripts/build-wemm-native.py --source "$WEMM_LLAMA_SOURCE" \
+    --sdk "$sdk" --output "$w6_build/$sdk" || exit 1
+done
+xcodebuild -create-xcframework \
+  -library "$w6_build/iphoneos/libODAIWeMMNative.a" -headers "$w6_build/iphoneos/include" \
+  -library "$w6_build/iphonesimulator/libODAIWeMMNative.a" -headers "$w6_build/iphonesimulator/include" \
+  -output "$w6_build/ODAIWeMMNative.xcframework"
+ODAI_VIDEO_DEMO=1 ODAI_MULTIMODAL_DEMO=1 ODAI_WEMM_VIDEO_DEMO=1 \
+  ODAI_WEMM_NATIVE_XCFRAMEWORK="$w6_build/ODAIWeMMNative.xcframework" \
+  ODAI_WEMM_NATIVE_NOTICE="$w6_build/iphoneos/NOTICE" \
+  ODAI_SPEECH_DEMO_DIR="$w6_build/demo" ruby scripts/generate-speech-demo.rb
+```
+
+打开生成的 `SpeechDemo.xcodeproj`。在「模型 → 视频理解 → 准备模型」选择本地文件夹，其中只放 `tencent/WeMM-Video-2B-GGUF` 修订版 `395e99f987a73915273943d4510e23004df7cede` 的 `language.gguf` 与 `mmproj.gguf`。校验完成后，在「探索 → 实验室 → 视频理解」选择影片并输入问题。页面显示实际后端、模型修订和输出，生成期间可取消。
+
+W6 页面验收使用独立标识的 App 和 XCTest Runner。设置 `ODAI_WEMM_UI_FIXTURES=1` 可从同一生成器运行空模型、导入恢复、时序问答、取消和视频错误提示。见[夹具及真机运行步骤](demo/iosApp/UITests/Fixtures/WeMM/README.md)。
+
 ## 本地分发
 
 W9 变声的当前本地验证、交付清单和设备缺口见 [R 报告](docs/validation/w9-r-delivery-20261117.md)。Apple 分发工程需先用 `ruby scripts/generate-distribution-project.rb` 重新生成，再执行打包；生成器会更新 SDK 的 `apple/OnDeviceAIKit.xcodeproj`，有未提交内容时应在新的完整源码副本中执行。W9 已有双切片 XCFramework 与独立链接证据，仍未完成真机和最终发布接受。iOS Demo 使用 `ODAI_VOICE_EFFECTS_DEMO=1` 生成到新目录；Android Demo 已有独立变声入口。

@@ -239,3 +239,16 @@ val defaultDemoCatalog: List<DemoCapabilityDescriptor> = listOf(
         status = DemoCapabilityStatus(DemoCapabilityAvailabilityKind.FROZEN_PREVIEW, "未校准"),
     ),
 )
+
+fun demoCatalogForVideo(enabled: Boolean): List<DemoCapabilityDescriptor> =
+    defaultDemoCatalog.map { descriptor ->
+        if (enabled && descriptor.id == DemoCapabilityId.VIDEO_UNDERSTANDING) {
+            descriptor.copy(
+                purpose = "为视频输入提出问题并查看模型输出。",
+                frozen = false,
+                previewOnly = false,
+                previewCopy = "",
+                status = DemoCapabilityStatus(DemoCapabilityAvailabilityKind.NOT_QUERIED),
+            )
+        } else descriptor
+    }

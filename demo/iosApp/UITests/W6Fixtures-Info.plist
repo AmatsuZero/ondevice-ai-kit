@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+	<key>CFBundleDisplayName</key>
+	<string>W6 Fixtures</string>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>ODAISDKCommit</key>
+	<string>$(ODAI_SDK_COMMIT)</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
+</dict>
+</plist>

@@ -118,6 +118,27 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
         return nil
         #endif
     }
+    var videoUnderstandingEnabled: Bool {
+        #if ODAI_WEMM_VIDEO_DEMO
+        return true
+        #else
+        return false
+        #endif
+    }
+    var videoUnderstandingModel: MultimodalViewModel? {
+        #if ODAI_WEMM_VIDEO_DEMO
+        return controller.weMMVideoDemoHost?.host?.model
+        #else
+        return nil
+        #endif
+    }
+    var videoUnderstandingActions: (any MultimodalDemoActions)? {
+        #if ODAI_WEMM_VIDEO_DEMO
+        return controller.weMMVideoDemoHost?.host
+        #else
+        return nil
+        #endif
+    }
     var voiceController: UIViewController? {
         #if ODAI_VOICE_EFFECTS_DEMO
         return voice
@@ -142,6 +163,9 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
     var playbackEnhancement: (any PlaybackEnhancementDemoActions)? { playbackHost }
     var realtimeSr: (any RealtimeSRDemoActions)? { playbackHost }
     func modelSetup(id: DemoCapabilityId) -> (any UnifiedDemoModelActions)? {
+        #if ODAI_WEMM_VIDEO_DEMO
+        if id == .videoUnderstanding { return controller.weMMVideoDemoHost }
+        #endif
         #if ODAI_MULTIMODAL_MLX_DEMO
         if id == .imageUnderstanding { return UnifiedImageModelSetup(controller) }
         #endif
@@ -150,6 +174,21 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
     func setRecordSink(sink: ((DemoCapabilityId, DemoRecordOutcome, String) -> Void)?) {
         faceModel.onTerminal = sink
         speechModel?.onTerminal = sink; videoModel?.onTerminal = sink; multimodalModel?.onTerminal = sink
+        if let sink, let model = videoUnderstandingModel {
+            model.onTerminal = { _, outcome, _ in
+                let summary: String
+                if outcome == .completed {
+                    summary = "视频理解已完成"
+                } else if outcome == .failed {
+                    summary = "视频理解失败"
+                } else {
+                    summary = "视频理解已取消"
+                }
+                sink(.videoUnderstanding, outcome, summary)
+            }
+        } else {
+            videoUnderstandingModel?.onTerminal = nil
+        }
         #if ODAI_VOICE_EFFECTS_DEMO
         voice.recordSink = sink
         #endif
@@ -160,6 +199,12 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
         if id == .asr || id == .tts { speechActions?.leavePage() }
         if id == .faceDetection { controller.stopCamera(); controller.model.cancel() }
         if id == .imageUnderstanding { multimodalActions?.leaveMultimodalPage() }
+        #if ODAI_WEMM_VIDEO_DEMO
+        if id == .videoUnderstanding {
+            if let setup = controller.weMMVideoDemoHost, setup.busy { setup.cancel() }
+            videoUnderstandingActions?.leaveMultimodalPage()
+        }
+        #endif
         if id == .fileSuperResolution { videoActions?.leavePage() }
         if id == .playbackEnhancement { playbackHost.close() }
         if id == .identityLiveness { controller.identityModel.leavePage() }
@@ -177,13 +222,31 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
         #endif
         return (speechModel?.state.controlsEnabled ?? true) &&
             (videoModel?.state.controlsEnabled ?? true) && (videoModel?.state.pendingReleases ?? 0) == 0 &&
-            (multimodalModel?.state.controlsEnabled ?? true) && controller.bridge.jobs.isEmpty
+            (multimodalModel?.state.controlsEnabled ?? true) &&
+            (videoUnderstandingModel?.state.controlsEnabled ?? true) && controller.bridge.jobs.isEmpty
     }
     func retryCleanup() { videoModel?.retryReleases(); voiceEffectsModel?.retryReleases() }
     func status(id: DemoCapabilityId) -> DemoCapabilityStatus {
-        if id == .videoUnderstanding || id == .identityLiveness {
-            return DemoCapabilityStatus(kind: .frozenPreview, detail: "研发暂停")
+        #if ODAI_WEMM_VIDEO_DEMO
+        if id == .videoUnderstanding {
+            guard let setup = controller.weMMVideoDemoHost else {
+                return DemoCapabilityStatus(kind: .missingHost, detail: "当前构建未包含视频理解模块")
+            }
+            if setup.busy {
+                return DemoCapabilityStatus(kind: .preparing, detail: setup.status)
+            }
+            guard let state = setup.host?.model.state else {
+                return DemoCapabilityStatus(kind: .missingModel, detail: setup.status)
+            }
+            return UnifiedDemoModelKt.demoAvailability(hostPresent: true,
+                available: setup.ready && state.backends.contains { $0.availability.available },
+                queried: !state.backends.isEmpty || state.queryFailure != nil,
+                reason: state.queryFailure?.reason ?? state.backends.first?.availability.reason)
         }
+        #else
+        if id == .videoUnderstanding { return DemoCapabilityStatus(kind: .frozenPreview, detail: "研发暂停") }
+        #endif
+        if id == .identityLiveness { return DemoCapabilityStatus(kind: .frozenPreview, detail: "研发暂停") }
         if id == .playbackEnhancement {
             return DemoCapabilityStatus(kind: .ready, detail: "CMP 内嵌 AVPlayer + Metal 2× 超分；支持原画/自动/可用的系统、CuNNy 和 Spatial 后端")
         }
@@ -227,6 +290,10 @@ final class UnifiedDemoIOSBindings: NSObject, @preconcurrency UnifiedDemoBinding
     func close() {
         controller.stopCamera()
         speechActions?.leavePage(); videoActions?.leavePage(); multimodalActions?.leaveMultimodalPage()
+        #if ODAI_WEMM_VIDEO_DEMO
+        if let setup = controller.weMMVideoDemoHost, setup.busy { setup.cancel() }
+        videoUnderstandingActions?.leaveMultimodalPage()
+        #endif
         #if ODAI_VOICE_EFFECTS_DEMO
         voice.shutdown()
         #endif

@@ -1,0 +1,428 @@
+--- a/tools/mtmd/clip.cpp
++++ b/tools/mtmd/clip.cpp
+@@ -26,6 +26,14 @@
+ #include <array>
+ #include <functional>
+ #include <float.h>
++#include <cstdio>
++
++#if defined(__APPLE__)
++#include "../../ggml/src/ggml-backend-impl.h"
++#include <sys/mman.h>
++#include <sys/stat.h>
++#include <unistd.h>
++#endif
+ 
+ struct clip_logger_state g_logger_state = {clip_log_callback_default, NULL};
+ 
+@@ -150,6 +158,20 @@
+     gguf_context_ptr ctx_gguf;
+     ggml_context_ptr ctx_data;
+ 
++#if defined(__APPLE__)
++    struct mmap_region {
++        void * addr = MAP_FAILED;
++        size_t size = 0;
++        ~mmap_region() {
++            if (addr != MAP_FAILED) {
++                munmap(addr, size);
++            }
++        }
++    };
++    std::shared_ptr<FILE> mapped_file;
++    std::unique_ptr<mmap_region> mapped_region;
++#endif
++
+     std::vector<uint8_t> buf_compute_meta;
+ 
+     std::vector<ggml_backend_t> backend_ptrs;
+@@ -229,6 +251,12 @@
+     }
+ 
+     ~clip_ctx() {
++        sched.reset();
++        buf.reset();
++#if defined(__APPLE__)
++        mapped_region.reset();
++        mapped_file.reset();
++#endif
+         ggml_backend_free(backend);
+         if (backend != backend_cpu) {
+             ggml_backend_free(backend_cpu);
+@@ -1204,6 +1232,11 @@
+     gguf_context_ptr ctx_gguf;
+ 
+     std::string fname;
++#if defined(__APPLE__)
++    std::shared_ptr<FILE> source_file;
++    bool mmap_requested = false;
++#endif
++    std::string model_name;
+ 
+     size_t model_size = 0; // in bytes
+ 
+@@ -1229,7 +1262,21 @@
+             /*.ctx      = */ &meta,
+         };
+ 
++#if defined(__APPLE__)
++        mmap_requested = true;
++        if (mmap_requested) {
++            FILE * file = std::fopen(fname, "rb");
++            if (!file) {
++                throw std::runtime_error(string_format("%s: failed to open %s\n", __func__, fname));
++            }
++            source_file = std::shared_ptr<FILE>(file, [](FILE * f) { std::fclose(f); });
++            ctx_gguf = gguf_context_ptr(gguf_init_from_file_ptr(source_file.get(), params));
++        } else {
++            ctx_gguf = gguf_context_ptr(gguf_init_from_file(fname, params));
++        }
++#else
+         ctx_gguf = gguf_context_ptr(gguf_init_from_file(fname, params));
++#endif
+         if (!ctx_gguf.get()) {
+             throw std::runtime_error(string_format("%s: failed to load CLIP model from %s. Does this file exist?\n", __func__, fname));
+         }
+@@ -1240,11 +1287,10 @@
+ 
+         // print gguf info
+         {
+-            std::string name;
+-            get_string(KEY_NAME, name, false);
++            get_string(KEY_NAME, model_name, false);
+             std::string description;
+             get_string(KEY_DESCRIPTION, description, false);
+-            LOG_INF("%s: model name:   %s\n",  __func__, name.c_str());
++            LOG_INF("%s: model name:   %s\n",  __func__, model_name.c_str());
+             LOG_INF("%s: description:  %s\n",  __func__, description.c_str());
+             LOG_INF("%s: GGUF version: %d\n",  __func__, gguf_get_version(ctx_gguf.get()));
+             LOG_INF("%s: alignment:    %zu\n", __func__, gguf_get_alignment(ctx_gguf.get()));
+@@ -2263,11 +2309,44 @@
+         auto & hparams = model.hparams;
+         std::map<std::string, size_t> tensor_offset;
+         std::vector<ggml_tensor *> tensors_to_load;
+-
+-        auto fin = open_ifstream_binary(fname);
+-        if (!fin) {
++        std::vector<ggml_tensor *> data_tensors_to_load;
++
++        std::ifstream fin;
++#if defined(__APPLE__)
++        if (!source_file) {
++            fin = open_ifstream_binary(fname);
++        }
++#else
++        fin = open_ifstream_binary(fname);
++#endif
++        if (
++#if defined(__APPLE__)
++            !source_file &&
++#endif
++            !fin) {
+             throw std::runtime_error(string_format("%s: failed to open %s\n", __func__, fname.c_str()));
+         }
++
++        auto read_at = [&](size_t offset, void * dst, size_t n) {
++#if defined(__APPLE__)
++            if (source_file) {
++                if (offset > static_cast<size_t>(std::numeric_limits<off_t>::max()) ||
++                    fseeko(source_file.get(), static_cast<off_t>(offset), SEEK_SET) != 0 ||
++                    std::fread(dst, 1, n, source_file.get()) != n) {
++                    throw std::runtime_error(string_format("%s: failed to read %zu bytes at offset %zu\n", __func__, n, offset));
++                }
++                return;
++            }
++#endif
++            fin.seekg(static_cast<std::streamoff>(offset), std::ios::beg);
++            if (!fin) {
++                throw std::runtime_error(string_format("%s: failed to seek to offset %zu\n", __func__, offset));
++            }
++            fin.read(reinterpret_cast<char *>(dst), static_cast<std::streamsize>(n));
++            if (!fin) {
++                throw std::runtime_error(string_format("%s: failed to read %zu bytes at offset %zu\n", __func__, n, offset));
++            }
++        };
+ 
+         // TODO @ngxson : support both audio and video in the future
+         const char * prefix = model.modality == CLIP_MODALITY_AUDIO ? "a"
+@@ -2277,7 +2356,12 @@
+         // get offsets
+         for (int64_t i = 0; i < gguf_get_n_tensors(ctx_gguf.get()); ++i) {
+             const char * name = gguf_get_tensor_name(ctx_gguf.get(), i);
+-            tensor_offset[name] = gguf_get_data_offset(ctx_gguf.get()) + gguf_get_tensor_offset(ctx_gguf.get(), i);
++            const size_t data_offset = gguf_get_data_offset(ctx_gguf.get());
++            const size_t tensor_rel_offset = gguf_get_tensor_offset(ctx_gguf.get(), i);
++            if (tensor_rel_offset > std::numeric_limits<size_t>::max() - data_offset) {
++                throw std::runtime_error(string_format("%s: tensor offset overflow for %s\n", __func__, name));
++            }
++            tensor_offset[name] = data_offset + tensor_rel_offset;
+         }
+ 
+         // create data context
+@@ -2306,6 +2390,7 @@
+                 tensors_to_load.push_back(cur);
+                 ggml_tensor * data_tensor = ggml_dup_tensor(ctx_clip.ctx_data.get(), cur);
+                 ggml_set_name(data_tensor, cur->name);
++                data_tensors_to_load.push_back(data_tensor);
+                 loaded_tensor_names.insert(name);
+                 cur = data_tensor;
+                 // add to weight memory counter
+@@ -2360,11 +2445,13 @@
+             if (n_bytes == 0) {
+                 throw std::runtime_error(string_format("%s: tensor %s is empty\n", __func__, name.c_str()));
+             }
++            if (n_bytes % sizeof(float) != 0) {
++                throw std::runtime_error(string_format("%s: tensor %s size is not a whole number of floats\n", __func__, name.c_str()));
++            }
+ 
+             const size_t n_elems = n_bytes / sizeof(float);
+             result.resize(n_elems);
+-            fin.seekg(it->second, std::ios::beg);
+-            fin.read(reinterpret_cast<char*>(result.data()), n_bytes);
++            read_at(it->second, result.data(), n_bytes);
+             return result;
+         };
+ 
+@@ -3814,6 +3901,8 @@
+         // load data
+         {
+             std::vector<uint8_t> read_buf;
++            bool mapped_weights = false;
++            std::string mmap_failure;
+ 
+             // start loading event
+             if (progress_callback){
+@@ -3828,8 +3917,197 @@
+ 
+             // alloc memory and offload data
+             ggml_backend_buffer_type_t buft = ggml_backend_get_default_buffer_type(ctx_clip.backend);
+-            ctx_clip.buf.reset(ggml_backend_alloc_ctx_tensors_from_buft(ctx_clip.ctx_data.get(), buft));
+-            ggml_backend_buffer_set_usage(ctx_clip.buf.get(), GGML_BACKEND_BUFFER_USAGE_WEIGHTS);
++#if defined(__APPLE__)
++            const bool mmap_candidate = mmap_requested &&
++                model_name == "WeMM-Video-2B-Vision" &&
++                model.proj_type == PROJECTOR_TYPE_QWEN3VL &&
++                model.modality == CLIP_MODALITY_VISION &&
++                !ctx_clip.no_alloc;
++            if (mmap_requested && model_name == "WeMM-Video-2B-Vision" &&
++                model.proj_type == PROJECTOR_TYPE_QWEN3VL && !ctx_clip.no_alloc) {
++                auto try_map_weights = [&]() -> bool {
++                    ggml_backend_dev_t dev = ggml_backend_get_device(ctx_clip.backend);
++                    if (!dev) {
++                        mmap_failure = "no backend device";
++                        return false;
++                    }
++                    ggml_backend_reg_t reg = ggml_backend_dev_backend_reg(dev);
++                    if (!reg || std::strcmp(ggml_backend_reg_name(reg), "MTL") != 0) {
++                        mmap_failure = "backend is not Metal";
++                        return false;
++                    }
++                    ggml_backend_dev_props props = {};
++                    ggml_backend_dev_get_props(dev, &props);
++                    if (!props.caps.mmap_support || !props.caps.buffer_from_host_ptr ||
++                        model.modality != CLIP_MODALITY_VISION) {
++                        mmap_failure = "Metal vision mmap capability unavailable";
++                        return false;
++                    }
++                    if (!source_file || data_tensors_to_load.empty()) {
++                        mmap_failure = "source file or selected weights unavailable";
++                        return false;
++                    }
++
++                    struct stat st = {};
++                    if (fstat(fileno(source_file.get()), &st) != 0 ||
++                        !S_ISREG(st.st_mode) || st.st_size <= 0) {
++                        mmap_failure = "unable to stat source file";
++                        return false;
++                    }
++                    const size_t file_size = static_cast<size_t>(st.st_size);
++                    if (static_cast<off_t>(file_size) != st.st_size) {
++                        mmap_failure = "source file size is not representable";
++                        return false;
++                    }
++                    const size_t page = static_cast<size_t>(sysconf(_SC_PAGESIZE));
++                    if (page == 0 || (page & (page - 1)) != 0) {
++                        mmap_failure = "invalid system page size";
++                        return false;
++                    }
++
++                    size_t min_offset = std::numeric_limits<size_t>::max();
++                    size_t max_end = 0;
++                    size_t max_tensor_size = 0;
++                    size_t required_alignment = std::max<size_t>(32, gguf_get_alignment(ctx_gguf.get()));
++                    required_alignment = std::max(required_alignment, ggml_backend_buft_get_alignment(buft));
++                    for (ggml_tensor * cur : data_tensors_to_load) {
++                        if (!cur || cur->buffer || cur->data || cur->view_src || cur->extra) {
++                            mmap_failure = "selected tensor is not an unbound ordinary tensor";
++                            return false;
++                        }
++                        auto it = tensor_offset.find(cur->name);
++                        const int64_t idx = gguf_find_tensor(ctx_gguf.get(), cur->name);
++                        if (it == tensor_offset.end() || idx < 0) {
++                            mmap_failure = "selected tensor metadata is missing";
++                            return false;
++                        }
++                        const size_t offset = it->second;
++                        const size_t nbytes = ggml_nbytes(cur);
++                        const size_t alloc_size = ggml_backend_buft_get_alloc_size(buft, cur);
++                        if (nbytes == 0 || offset > file_size || nbytes > file_size - offset ||
++                            offset % required_alignment != 0 ||
++                            nbytes != gguf_get_tensor_size(ctx_gguf.get(), idx) ||
++                            alloc_size < nbytes || alloc_size > file_size - offset ||
++                            offset > std::numeric_limits<size_t>::max() - alloc_size) {
++                            mmap_failure = "selected tensor range, size, or alignment is invalid";
++                            return false;
++                        }
++                        min_offset = std::min(min_offset, offset);
++                        max_end = std::max(max_end, offset + alloc_size);
++                        max_tensor_size = std::max(max_tensor_size, alloc_size);
++                    }
++
++                    const size_t map_offset = min_offset - min_offset % page;
++                    if (max_end > file_size || max_end <= map_offset) {
++                        mmap_failure = "mapped range is outside the source file";
++                        return false;
++                    }
++                    const size_t map_size = max_end - map_offset;
++                    if (map_size > std::numeric_limits<size_t>::max() - (page - 1)) {
++                        mmap_failure = "mapped range rounding overflow";
++                        return false;
++                    }
++                    const size_t rounded_map_size = ((map_size + page - 1) / page) * page;
++                    const size_t max_buft_size = ggml_backend_buft_get_max_size(buft);
++                    if (max_buft_size != 0 && rounded_map_size > max_buft_size) {
++                        mmap_failure = "mapped range exceeds one Metal buffer";
++                        return false;
++                    }
++
++                    auto region = std::make_unique<clip_ctx::mmap_region>();
++                    region->size = map_size;
++                    region->addr = mmap(nullptr, map_size, PROT_READ, MAP_PRIVATE,
++                                        fileno(source_file.get()), static_cast<off_t>(map_offset));
++                    if (region->addr == MAP_FAILED) {
++                        mmap_failure = "mmap failed";
++                        return false;
++                    }
++
++                    ggml_backend_buffer_t raw_buffer = ggml_backend_dev_buffer_from_host_ptr(
++                        dev, region->addr, map_size, max_tensor_size);
++                    if (!raw_buffer) {
++                        mmap_failure = "Metal mapped-buffer creation failed";
++                        return false;
++                    }
++                    ggml_backend_buffer_ptr mapped_buffer(raw_buffer);
++                    if (!raw_buffer->context) {
++                        raw_buffer->iface.free_buffer = nullptr;
++                        mapped_buffer.reset();
++                        mmap_failure = "Metal mapped-buffer context is null";
++                        return false;
++                    }
++                    if (!raw_buffer->iface.get_base) {
++                        mapped_buffer.reset();
++                        mmap_failure = "Metal mapped-buffer has no base callback";
++                        return false;
++                    }
++                    void * base = raw_buffer->iface.get_base(raw_buffer);
++                    if (!base || base != region->addr ||
++                        ggml_backend_buffer_get_size(raw_buffer) != map_size) {
++                        mapped_buffer.reset();
++                        mmap_failure = "Metal mapped-buffer base or size mismatch";
++                        return false;
++                    }
++                    const size_t buffer_alignment = ggml_backend_buffer_get_alignment(raw_buffer);
++                    std::vector<ggml_tensor *> binding_tensors;
++                    std::vector<void *> binding_data;
++                    binding_tensors.reserve(data_tensors_to_load.size());
++                    binding_data.reserve(data_tensors_to_load.size());
++                    for (ggml_tensor * cur : data_tensors_to_load) {
++                        const size_t offset = tensor_offset.at(cur->name);
++                        const size_t rel_offset = offset - map_offset;
++                        const size_t alloc_size = ggml_backend_buffer_get_alloc_size(raw_buffer, cur);
++                        if (buffer_alignment == 0 || alloc_size < ggml_nbytes(cur) ||
++                            rel_offset > map_size || alloc_size > map_size - rel_offset ||
++                            reinterpret_cast<uintptr_t>(static_cast<uint8_t *>(base) + rel_offset) % buffer_alignment != 0) {
++                            mmap_failure = "actual Metal tensor allocation is out of mapped range or misaligned";
++                            mapped_buffer.reset();
++                            return false;
++                        }
++                        binding_tensors.push_back(cur);
++                        binding_data.push_back(static_cast<uint8_t *>(base) + rel_offset);
++                    }
++
++                    for (size_t i = 0; i < binding_tensors.size(); ++i) {
++                        const enum ggml_status status = ggml_backend_tensor_alloc(
++                            raw_buffer, binding_tensors[i], binding_data[i]);
++                        if (status != GGML_STATUS_SUCCESS) {
++                            for (ggml_tensor * tensor : binding_tensors) {
++                                tensor->buffer = nullptr;
++                                tensor->data = nullptr;
++                                tensor->extra = nullptr;
++                            }
++                            mapped_buffer.reset();
++                            mmap_failure = "Metal tensor binding failed";
++                            return false;
++                        }
++                    }
++                    ggml_backend_buffer_set_usage(raw_buffer, GGML_BACKEND_BUFFER_USAGE_WEIGHTS);
++                    ctx_clip.buf.reset(mapped_buffer.release());
++                    ctx_clip.mapped_region = std::move(region);
++                    ctx_clip.mapped_file = source_file;
++                    return true;
++                };
++                try {
++                    if (mmap_candidate) {
++                        mapped_weights = try_map_weights();
++                    } else {
++                        mmap_failure = "model is not an Apple Metal vision context";
++                    }
++                } catch (const std::exception & e) {
++                    mmap_failure = e.what();
++                }
++                if (mapped_weights) {
++                    LOG_INF("%s: mmap weights successful for %s\n", __func__, model_name.c_str());
++                } else {
++                    LOG_WRN("%s: mmap weights fallback for %s: %s\n", __func__, model_name.c_str(), mmap_failure.c_str());
++                }
++            }
++#endif
++            if (!mapped_weights) {
++                ctx_clip.buf.reset(ggml_backend_alloc_ctx_tensors_from_buft(ctx_clip.ctx_data.get(), buft));
++                ggml_backend_buffer_set_usage(ctx_clip.buf.get(), GGML_BACKEND_BUFFER_USAGE_WEIGHTS);
++            }
+             // read the weight from file
+             if (!ctx_clip.no_alloc) {
+                 size_t data_loaded = 0;
+@@ -3839,18 +4117,14 @@
+                     auto it_off = tensor_offset.find(t->name);
+                     GGML_ASSERT(it_off != tensor_offset.end() && "no offset for tensor");
+                     const size_t offset = it_off->second;
+-                    fin.seekg(offset, std::ios::beg);
+-                    if (!fin) {
+-                        throw std::runtime_error(string_format("%s: failed to seek for tensor %s\n", __func__, t->name));
+-                    }
+                     size_t num_bytes = ggml_nbytes(cur);
+-                    if (ggml_backend_buft_is_host(buft)) {
++                    if (!mapped_weights && ggml_backend_buft_is_host(buft)) {
+                         // for the CPU and Metal backend, we can read directly into the tensor
+-                        fin.read(reinterpret_cast<char *>(cur->data), num_bytes);
+-                    } else {
++                        read_at(offset, cur->data, num_bytes);
++                    } else if (!mapped_weights) {
+                         // read into a temporary buffer first, then copy to device memory
+                         read_buf.resize(num_bytes);
+-                        fin.read(reinterpret_cast<char *>(read_buf.data()), num_bytes);
++                        read_at(offset, read_buf.data(), num_bytes);
+                         ggml_backend_tensor_set(cur, read_buf.data(), 0, num_bytes);
+                     }
+                     data_loaded += num_bytes;
+@@ -3865,7 +4139,9 @@
+             } else {
+                 LOG_DBG("%s: no_alloc is set, skipping tensor data loading (%zu tensors)\n", __func__, tensors_to_load.size());
+             }
+-            fin.close();
++            if (fin.is_open()) {
++                fin.close();
++            }
+         }
+ 
+     }
