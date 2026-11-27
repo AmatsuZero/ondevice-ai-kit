@@ -24,6 +24,7 @@ import ctypes
 import os
 import re
 import struct
+import sys
 import subprocess
 import tempfile
 import threading
@@ -53,6 +54,7 @@ ALLOW = {
     '/voice-worklet.js': 'voice-worklet.js',
     '/file-mode.js': 'file-mode.js',
     '/waveform.json': 'waveform.json',
+    '/monitor-setup.js': 'monitor-setup.js',
 }
 
 HEADER_FMT = '<IHHIIHH'
@@ -102,6 +104,53 @@ def mime_for(path):
     if path.endswith('.png'):
         return 'image/png'
     return 'application/octet-stream'
+
+
+def _ca_fourcc(tag):
+    return struct.unpack('>I', tag)[0]
+
+
+_CA_SYSTEM = 1
+_CA_DOUT = _ca_fourcc(b'dOut')
+_CA_TRAN = _ca_fourcc(b'tran')
+_CA_SSRC = _ca_fourcc(b'ssrc')
+_CA_GLOB = _ca_fourcc(b'glob')
+_CA_OUTP = _ca_fourcc(b'outp')
+_CA_BLTN = _ca_fourcc(b'bltn')
+_CA_HDPN = _ca_fourcc(b'hdpn')
+_CA_FRAMEWORK = '/System/Library/Frameworks/CoreAudio.framework/CoreAudio'
+
+
+def audio_route():
+    try:
+        if sys.platform != 'darwin':
+            return 'unknown', ''
+        lib = ctypes.CDLL(_CA_FRAMEWORK)
+        fn = lib.AudioObjectGetPropertyData
+        fn.argtypes = [ctypes.c_uint32, ctypes.c_void_p,
+                       ctypes.c_uint32, ctypes.c_void_p,
+                       ctypes.POINTER(ctypes.c_uint32), ctypes.c_void_p]
+        fn.restype = ctypes.c_int
+
+        def query(obj_id, selector, scope):
+            address = (ctypes.c_uint32 * 3)(selector, scope, 0)
+            size = ctypes.c_uint32(4)
+            value = ctypes.c_uint32(0)
+            status = fn(obj_id, ctypes.byref(address), 0, None,
+                        ctypes.byref(size), ctypes.byref(value))
+            if status != 0 or size.value < 4:
+                raise OSError('audio property failed')
+            return value.value
+
+        device = query(_CA_SYSTEM, _CA_DOUT, _CA_GLOB)
+        transport = query(device, _CA_TRAN, _CA_GLOB)
+        source = query(device, _CA_SSRC, _CA_OUTP)
+    except Exception:
+        return 'unknown', ''
+    token = '/'.join(format(v, 'x') for v in (device, transport, source))
+    if transport == _CA_BLTN and source == _CA_HDPN:
+        return 'headphones', token
+    return 'other', token
 
 
 class OpenVoice:
@@ -239,6 +288,10 @@ class Handler(BaseHTTPRequestHandler):
         if not self.local_host():
             return self.text(403, '仅允许本机访问')
         path = self.path.split('?', 1)[0].split('#', 1)[0]
+        if path == '/audio-route':
+            kind, token = audio_route()
+            body = '{"kind":"' + kind + '","token":"' + token + '"}'
+            return self.reply(200, body, 'application/json')
         rel = ALLOW.get(path)
         if rel is None:
             return self.text(404, '未找到资源')

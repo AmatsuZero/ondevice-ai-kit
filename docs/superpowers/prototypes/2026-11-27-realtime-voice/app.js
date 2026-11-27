@@ -19,11 +19,14 @@
     video: false
   };
   var LIVE_GAIN = 0.12;
+  var HP_GAIN = 0.8;
   var SAMPLE_GAIN = 0.85;
   var RAMP_UP = 0.08;
+  var ROUTE_POLL_MS = 400;
 
   var els = {};
   var talkText = '';
+  var listenToggleText = '';
   var role = INITIAL_ROLE;
   var waveCache = null;
 
@@ -47,8 +50,17 @@
   var holdMode = '';
   var captureId = -1;
 
+  var continuousMode = false;
+  var headphoneMode = false;
+  var captureKind = 'unknown';
+  var captureToken = '';
+  var captureLabel = '';
+  var routePollTimer = 0;
+  var routePollBusy = false;
+
   var rafId = 0;
   var fbBuf = null;
+  var rawBuf = null;
   var fbHot = 0;
 
   function $(id) { return document.getElementById(id); }
@@ -66,13 +78,155 @@
     for (var i = 0; i < btns.length; i++) btns[i].disabled = !!disabled;
   }
 
-  function createVoiceNode(context, r) {
-    return new AudioWorkletNode(context, 'role-voice', {
+  function monitorHelper() { return window.voiceMonitor; }
+
+  function invalidatePending() {
+    var h = monitorHelper();
+    if (h && typeof h.invalidate === 'function') {
+      try { h.invalidate(); } catch (_) {}
+    }
+  }
+
+  function freshRoute() {
+    var h = monitorHelper();
+    if (!h || typeof h.route !== 'function') {
+      return Promise.resolve({ kind: 'unknown', token: '' });
+    }
+    try {
+      var p = h.route();
+      return p && typeof p.then === 'function'
+        ? p
+        : Promise.resolve(p || { kind: 'unknown', token: '' });
+    } catch (_) {
+      return Promise.resolve({ kind: 'unknown', token: '' });
+    }
+  }
+
+  function showRoute(route) {
+    var h = monitorHelper();
+    if (!h || typeof h.showRoute !== 'function' || !route || !route.token) return;
+    try { h.showRoute(route); } catch (_) {}
+  }
+
+  function constraintsFor(hp) {
+    var h = monitorHelper();
+    if (h && typeof h.constraints === 'function') {
+      try { return h.constraints(hp); } catch (_) {}
+    }
+    if (hp) {
+      return { audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false }, video: false };
+    }
+    return MIC_CONSTRAINTS;
+  }
+
+  function defaultSink() {
+    try { return !ctx || ctx.sinkId === undefined || ctx.sinkId === ''; } catch (_) { return false; }
+  }
+
+  function verifiedHeadphones(route) {
+    return !!route && defaultSink() && route.kind === 'headphones' &&
+      typeof route.token === 'string' && route.token.length > 0;
+  }
+
+  function routeStillMatches(route) {
+    if (!route) return false;
+    if (!captureToken) {
+      if (headphoneMode || continuousMode) return false;
+      if (captureKind !== 'unknown' || route.kind !== 'unknown' || route.token) return false;
+      return true;
+    }
+    if (route.token !== captureToken) return false;
+    if (route.kind !== captureKind) return false;
+    if (headphoneMode && !verifiedHeadphones(route)) return false;
+    return true;
+  }
+
+  function reportLevel(rms, label) {
+    var h = monitorHelper();
+    if (!h || typeof h.level !== 'function') return;
+    var v = Number(rms);
+    if (!isFinite(v) || v < 0) v = 0;
+    if (v > 1) v = 1;
+    try { h.level(v, label || ''); } catch (_) {}
+  }
+
+  function resetMeter() { reportLevel(0, ''); }
+
+  function setToggleActive(on) {
+    var b = els.listenToggle;
+    if (!b) return;
+    b.textContent = on ? '停止连续监听' : (listenToggleText || '连续监听');
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    b.setAttribute('aria-label', on ? '点击停止连续监听' : '点击开始连续监听（需已验证耳机）');
+  }
+
+  function resetToggle() { setToggleActive(false); }
+
+  function stopRoutePolling() {
+    if (routePollTimer) { clearInterval(routePollTimer); routePollTimer = 0; }
+    routePollBusy = false;
+  }
+
+  function startRoutePolling(gen) {
+    stopRoutePolling();
+    routePollTimer = setInterval(function () {
+      if (routePollBusy || !live || gen !== liveGen || !live.hp) return;
+      routePollBusy = true;
+      freshRoute().then(function (route) {
+        routePollBusy = false;
+        if (!live || gen !== liveGen || !live.hp) return;
+        if (route && route.token && route.token === live.token) return;
+        showRoute(route);
+        endLive();
+        setStatus('音频路由已变化，连续监听已停止');
+      }).catch(function () {
+        routePollBusy = false;
+        if (!live || gen !== liveGen) return;
+        endLive();
+        setStatus('无法确认音频路由，连续监听已停止');
+      });
+    }, ROUTE_POLL_MS);
+  }
+
+  function describeMicError(err) {
+    var n = err && (err.name || err.code);
+    if (n === 'NotAllowedError' || n === 'PermissionDeniedError' || n === 'SecurityError') {
+      return '麦克风权限被拒绝，请在浏览器中允许麦克风后重试';
+    }
+    if (n === 'NotFoundError' || n === 'DevicesNotFoundError' || n === 'OverconstrainedError') {
+      return '未找到可用的麦克风或指定的输入设备';
+    }
+    if (n === 'NotReadableError' || n === 'TrackStartError') {
+      return '麦克风被其他应用占用，无法启动';
+    }
+    return '麦克风访问失败：' + msg(err);
+  }
+
+  function createVoiceNode(context, r, gen) {
+    var node = new AudioWorkletNode(context, 'role-voice', {
       numberOfInputs: 1,
       numberOfOutputs: 1,
       outputChannelCount: [1],
       processorOptions: { role: r }
     });
+    node.onprocessorerror = function () { onProcessorError(gen); };
+    return node;
+  }
+  function onProcessorError(gen) {
+    if (live && gen === liveGen) {
+      pressing = false;
+      holdMode = '';
+      resetTalk();
+      setRolesDisabled(false);
+      stopLive();
+      setStatus('音频处理出错，监听已停止，请重试');
+      return;
+    }
+    if (samplePlaying && gen === sampleLoadGen) {
+      ++sampleLoadGen;
+      stopSample();
+      setStatus('音频处理出错，示例播放已停止，请重试');
+    }
   }
   function postRole(node, r) { try { node.port.postMessage({ role: r }); } catch (_) {} }
   function makeLimiter(context) {
@@ -114,7 +268,7 @@
   }
 
   function applyRole(next) {
-    if (pressing) return;
+    if (pressing && !continuousMode) return;
     if (ROLES.indexOf(next) === -1) return;
     role = next;
     if (els.roleName) els.roleName.textContent = ROLE_NAMES[role] || role;
@@ -131,7 +285,9 @@
   }
   function updateRouteNote() {
     if (!els.routeNote) return;
-    els.routeNote.textContent = '声音跟随系统输出；松开即停。';
+    els.routeNote.textContent = continuousMode
+      ? '声音跟随系统输出；连续监听需手动停止。'
+      : '声音跟随系统输出；松开即停。';
   }
 
   function normalizeWave(arr) {
@@ -268,7 +424,7 @@
     try {
       var src = ctx.createBufferSource();
       src.buffer = decoded;
-      var node = createVoiceNode(ctx, role);
+      var node = createVoiceNode(ctx, role, sampleLoadGen);
       var gain = ctx.createGain();
       gain.gain.value = SAMPLE_GAIN;
       var limiter = makeLimiter(ctx);
@@ -336,10 +492,109 @@
       });
   }
 
+  function failSession(gen, text) {
+    if (gen !== liveGen) return;
+    pressing = false;
+    permissionPending = false;
+    holdMode = '';
+    continuousMode = false;
+    updateRouteNote();
+    headphoneMode = false;
+    captureKind = 'unknown';
+    captureToken = '';
+    captureLabel = '';
+    resetTalk();
+    setRolesDisabled(false);
+    resetToggle();
+    resetMeter();
+    stopRoutePolling();
+    setStatus(text);
+  }
+
+  function connectStream(stream, gen) {
+    var tracks = [];
+    try { tracks = stream.getAudioTracks(); } catch (_) {}
+    var track = tracks && tracks[0];
+    if (!track) {
+      stopTracks(stream);
+      failSession(gen, '未获得音频轨道');
+      return null;
+    }
+    var settings = {};
+    try { settings = track.getSettings ? track.getSettings() : {}; } catch (_) {}
+    if (!headphoneMode && settings.echoCancellation !== true) {
+      stopTracks(stream);
+      failSession(gen, '浏览器未开启回声消除，已关闭输出');
+      return null;
+    }
+    if (gen !== liveGen || !pressing) { stopTracks(stream); return null; }
+    try {
+      var src = ctx.createMediaStreamSource(stream);
+      var node = createVoiceNode(ctx, role, gen);
+      var raw = ctx.createAnalyser();
+      raw.fftSize = 1024;
+      var analyser = ctx.createAnalyser();
+      analyser.fftSize = 1024;
+      var gain = ctx.createGain();
+      gain.gain.value = 0;
+      var limiter = makeLimiter(ctx);
+      src.connect(raw);
+      raw.connect(node);
+      node.connect(analyser);
+      analyser.connect(gain);
+      gain.connect(limiter);
+      limiter.connect(ctx.destination);
+      var now = ctx.currentTime;
+      var target = headphoneMode ? HP_GAIN : LIVE_GAIN;
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(target, now + RAMP_UP);
+      captureLabel = track.label || '当前麦克风';
+      live = {
+        stream: stream, src: src, node: node, raw: raw, analyser: analyser,
+        gain: gain, limiter: limiter, hp: headphoneMode,
+        token: captureToken, label: captureLabel, track: track
+      };
+      if (!rawBuf) rawBuf = new Float32Array(raw.fftSize);
+      if (!fbBuf) fbBuf = new Float32Array(analyser.fftSize);
+      fbHot = 0;
+      if (track.addEventListener) {
+        track.addEventListener('ended', function () {
+          if (gen === liveGen && live) {
+            endLive();
+            setStatus('麦克风已断开，监听已停止');
+          }
+        });
+      }
+      if (headphoneMode) startRoutePolling(gen);
+      if (continuousMode) {
+        setToggleActive(true);
+        setStatus('连续监听中（' + (ROLE_NAMES[role] || role) + '）');
+      } else {
+        setStatus('讲话中（' + (ROLE_NAMES[role] || role) + '）— 松开结束');
+      }
+      ensureLoop();
+      return live;
+    } catch (err) {
+      stopTracks(stream);
+      failSession(gen, '麦克风连接失败：' + msg(err));
+      return null;
+    }
+  }
+
   function stopLive() {
     ++liveGen;
     var l = live;
     live = null;
+    continuousMode = false;
+    updateRouteNote();
+    headphoneMode = false;
+    captureKind = 'unknown';
+    captureToken = '';
+    captureLabel = '';
+    permissionPending = false;
+    stopRoutePolling();
+    resetMeter();
+    resetToggle();
     if (!l) return;
     try {
       if (ctx) l.gain.gain.cancelScheduledValues(ctx.currentTime);
@@ -349,42 +604,66 @@
     try { l.src.disconnect(); } catch (_) {}
     try { l.node.port.close(); } catch (_) {}
     try { l.node.disconnect(); } catch (_) {}
+    try { l.raw.disconnect(); } catch (_) {}
     try { l.analyser.disconnect(); } catch (_) {}
     try { l.gain.disconnect(); } catch (_) {}
     try { l.limiter.disconnect(); } catch (_) {}
   }
 
   function beginLive(mode) {
-    if (pressing) return;
+    if (pressing || live) return;
     ++sampleLoadGen;
     if (samplePlaying) stopSample();
+    invalidatePending();
     pressing = true;
     permissionPending = false;
     holdMode = mode || 'pointer';
     captureId = -1;
-    setTalkHold();
-    setRolesDisabled(true);
+    continuousMode = holdMode === 'continuous';
+    headphoneMode = false;
+    captureKind = 'unknown';
+    captureToken = '';
+    captureLabel = '';
+    if (continuousMode) {
+      setToggleActive(true);
+      setRolesDisabled(false);
+    } else {
+      setTalkHold();
+      setRolesDisabled(true);
+    }
+    updateRouteNote();
     var gen = ++liveGen;
 
     function cancelled() { return gen !== liveGen || !pressing; }
-    function fail(text) {
-      if (gen !== liveGen) return;
-      pressing = false;
-      permissionPending = false;
-      resetTalk();
-      setRolesDisabled(false);
-      setStatus(text);
+    function fail(text) { failSession(gen, text); }
+    function staleStream(stream) {
+      if (gen === liveGen && pressing) return false;
+      stopTracks(stream);
+      return true;
     }
 
-    setStatus('正在准备音频…');
+    setStatus(continuousMode ? '正在确认耳机路由…' : '正在准备音频…');
     var ctxPromise;
     try { ctxPromise = ensureContext(); }
     catch (err) { fail('音频初始化失败：' + msg(err)); return; }
 
+    var routePromise = freshRoute();
+
     ctxPromise
       .then(function () {
         if (cancelled()) return null;
-        return ensureWorklet();
+        return routePromise.then(function (route) {
+          if (cancelled()) return null;
+          showRoute(route);
+          captureKind = route && route.kind ? route.kind : 'unknown';
+          captureToken = route && typeof route.token === 'string' ? route.token : '';
+          headphoneMode = verifiedHeadphones(route);
+          if (continuousMode && !headphoneMode) {
+            fail('连续监听仅支持已验证的耳机输出：请先连接耳机，确认系统输出与页面路由均显示为耳机后再开启。');
+            return null;
+          }
+          return ensureWorklet();
+        });
       })
       .then(function () {
         if (cancelled()) return null;
@@ -393,66 +672,37 @@
         }
         permissionPending = true;
         setStatus('正在请求麦克风…');
-        return navigator.mediaDevices.getUserMedia(MIC_CONSTRAINTS);
+        return navigator.mediaDevices.getUserMedia(constraintsFor(headphoneMode));
       })
       .then(function (stream) {
-        if (gen !== liveGen || !pressing) {
-          stopTracks(stream);
-          if (!pressing) setStatus('麦克风已授权，请重新按住讲话');
-          return;
-        }
+        if (staleStream(stream)) return null;
         permissionPending = false;
-        var tracks = [];
-        try { tracks = stream.getAudioTracks(); } catch (_) {}
-        var track = tracks && tracks[0];
-        if (!track) { stopTracks(stream); fail('未获得音频轨道'); return; }
-        var settings = {};
-        try { settings = track.getSettings ? track.getSettings() : {}; } catch (_) {}
-        if (settings.echoCancellation !== true) {
-          stopTracks(stream);
-          fail('浏览器未开启回声消除，已关闭输出');
-          return;
-        }
-        if (cancelled()) { stopTracks(stream); return; }
-        try {
-          var src = ctx.createMediaStreamSource(stream);
-          var node = createVoiceNode(ctx, role);
-          var analyser = ctx.createAnalyser();
-          analyser.fftSize = 1024;
-          var gain = ctx.createGain();
-          gain.gain.value = 0;
-          var limiter = makeLimiter(ctx);
-          src.connect(node);
-          node.connect(analyser);
-          analyser.connect(gain);
-          gain.connect(limiter);
-          limiter.connect(ctx.destination);
-          var now = ctx.currentTime;
-          gain.gain.setValueAtTime(0, now);
-          gain.gain.linearRampToValueAtTime(LIVE_GAIN, now + RAMP_UP);
-          live = { stream: stream, src: src, node: node, analyser: analyser, gain: gain, limiter: limiter };
-          if (!fbBuf) fbBuf = new Float32Array(analyser.fftSize);
-          fbHot = 0;
-          setStatus('讲话中（' + (ROLE_NAMES[role] || role) + '）— 松开结束');
-          ensureLoop();
-        } catch (err) {
-          stopTracks(stream);
-          fail('麦克风连接失败：' + msg(err));
-        }
+        return freshRoute().then(function (route2) {
+          if (staleStream(stream)) return null;
+          showRoute(route2);
+          if (!routeStillMatches(route2)) {
+            stopTracks(stream);
+            fail('音频路由已变化，已关闭输出');
+            return null;
+          }
+          return connectStream(stream, gen);
+        });
       })
       .catch(function (err) {
-        permissionPending = false;
         if (gen !== liveGen) return;
-        fail('麦克风访问失败：' + msg(err));
+        permissionPending = false;
+        fail(describeMicError(err));
       });
   }
 
   function endLive() {
-    if (!pressing) return;
+    if (!pressing && !live) return;
     var wasPending = permissionPending;
+    var wasContinuous = continuousMode;
     pressing = false;
     permissionPending = false;
     holdMode = '';
+    continuousMode = false;
     if (captureId >= 0 && els.talk && els.talk.releasePointerCapture) {
       try { els.talk.releasePointerCapture(captureId); } catch (_) {}
       captureId = -1;
@@ -460,11 +710,30 @@
     resetTalk();
     setRolesDisabled(false);
     stopLive();
-    setStatus(wasPending ? '请允许麦克风后重新按住讲话' : '麦克风已关闭');
+    if (wasContinuous) setStatus('连续监听已停止');
+    else setStatus(wasPending ? '请允许麦克风后重新按住讲话' : '麦克风已关闭');
   }
 
   function monitorFeedback() {
     if (!live || !pressing) return;
+    var rawRms = 0;
+    var r = live.raw;
+    try {
+      if (r.getFloatTimeDomainData && rawBuf) {
+        r.getFloatTimeDomainData(rawBuf);
+        var rs = 0;
+        for (var m = 0; m < rawBuf.length; m++) { var rv = rawBuf[m]; rs += rv * rv; }
+        rawRms = Math.sqrt(rs / rawBuf.length);
+      } else if (r.getByteTimeDomainData) {
+        var rb = new Uint8Array(r.fftSize);
+        r.getByteTimeDomainData(rb);
+        var rs2 = 0;
+        for (var n = 0; n < rb.length; n++) { var xv = (rb[n] - 128) / 128; rs2 += xv * xv; }
+        rawRms = Math.sqrt(rs2 / rb.length);
+      }
+    } catch (_) {}
+    reportLevel(rawRms, live.label);
+
     var a = live.analyser;
     var rms = 0;
     try {
@@ -511,13 +780,14 @@
 
   function hardStopAll() {
     ++sampleLoadGen;
-    ++liveGen;
     pressing = false;
     permissionPending = false;
     holdMode = '';
+    continuousMode = false;
     captureId = -1;
     resetTalk();
     setRolesDisabled(false);
+    invalidatePending();
     stopLive();
     stopSample();
     setStatus('已停止全部音频');
@@ -546,13 +816,17 @@
     els.status = $('status');
     els.roleName = $('roleName');
     els.routeNote = $('routeNote');
+    els.listenToggle = $('listenToggle');
+    els.micSource = $('micSource');
     if (els.talk) talkText = els.talk.textContent;
+    if (els.listenToggle) listenToggleText = els.listenToggle.textContent || '连续监听';
 
     if (els.play) els.play.addEventListener('click', onPlay);
 
     if (els.talk) {
       els.talk.addEventListener('pointerdown', function (e) {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
+        if (pressing || live) return;
         beginLive('pointer');
         if (pressing && els.talk.setPointerCapture) {
           try { els.talk.setPointerCapture(e.pointerId); captureId = e.pointerId; } catch (_) {}
@@ -565,18 +839,31 @@
         if (holdMode === 'key' && pressing) endLive();
       });
     }
+
+    if (els.listenToggle) {
+      els.listenToggle.addEventListener('click', function (e) {
+        if (e.button && e.button !== 0) return;
+        if (pressing || live) { endLive(); return; }
+        beginLive('continuous');
+      });
+    }
+
     window.addEventListener('pointerup', function (e) {
-      if (!pressing) return;
+      if (!pressing || holdMode === 'continuous') return;
       if (holdMode === 'pointer' && captureId >= 0 && e.pointerId !== captureId) return;
       endLive();
     });
     window.addEventListener('pointercancel', function (e) {
-      if (!pressing) return;
+      if (!pressing || holdMode === 'continuous') return;
       if (holdMode === 'pointer' && captureId >= 0 && e.pointerId !== captureId) return;
       endLive();
     });
 
     window.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' || e.code === 'Escape') {
+        if (pressing || live) { e.preventDefault(); endLive(); }
+        return;
+      }
       if (e.code !== 'Space' && e.key !== ' ') return;
       if (e.repeat || isTyping(e.target) || !talkFocused()) return;
       e.preventDefault();
@@ -585,6 +872,7 @@
     window.addEventListener('keyup', function (e) {
       if (e.code !== 'Space' && e.key !== ' ') return;
       if (e.repeat || isTyping(e.target)) return;
+      if (holdMode === 'continuous') return;
       if (holdMode === 'key' && pressing) {
         e.preventDefault();
         endLive();
@@ -615,8 +903,14 @@
       else if (e.detail.mode === 'live') requestAnimationFrame(drawWave);
     });
     window.addEventListener('orientationchange', drawWave);
+    window.addEventListener('monitor-input-change', function () {
+      if (pressing || live) endLive();
+      invalidatePending();
+    });
 
     applyRole(INITIAL_ROLE);
+    setToggleActive(false);
+    resetMeter();
     setStatus('就绪：按住讲话或点击播放示例');
     updateTime(0, INITIAL_DURATION);
     drawWave();

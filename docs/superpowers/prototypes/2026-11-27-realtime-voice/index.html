@@ -342,6 +342,19 @@ h1 {
 #fileDownload { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; text-decoration:none; }
 #fileDownload:not([href]) { opacity:.5; pointer-events:none; cursor:not-allowed; }
 </style>
+<style>
+.setup { margin: 10px 0 0; }
+.setup-note { margin: 6px 0 0; font-size: 13px; line-height: 1.45; opacity: 0.72; }
+.setup-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.setup-label { font-size: 13px; opacity: 0.72; flex: 0 0 auto; }
+.setup-select { flex: 1 1 120px; min-width: 0; font: inherit; font-size: 13px; padding: 6px 8px; border: 1px solid currentColor; border-radius: 8px; background: transparent; color: inherit; }
+.setup-meter { flex: 1 1 80px; min-width: 60px; height: 8px; accent-color: currentColor; }
+.setup-reading { font-size: 12px; opacity: 0.72; font-variant-numeric: tabular-nums; min-width: 34px; text-align: right; }
+#micPrepare { margin-top: 8px; }
+#listenToggle { width: 100%; }
+.setup-select:focus-visible, #micPrepare:focus-visible, #listenToggle:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+</style>
+<script src="monitor-setup.js" defer></script>
 <script src="app.js" defer></script>
 <script src="file-mode.js" defer></script>
 </head>
@@ -363,7 +376,7 @@ h1 {
       <button type="button" class="mode-btn is-active" data-mode="file" aria-pressed="true">文件变声</button>
       <button type="button" class="mode-btn" data-mode="live" aria-pressed="false">实时变声</button>
     </div>
-    <p class="mode-hint">文件可导入、录制和导出；实时模式松开即停。</p>
+    <p class="mode-hint">文件可导入、录制和导出；实时模式可用耳机监听或按住试说。</p>
 
     <section id="filePanel" class="mode-panel" aria-label="文件变声">
       <div class="file-head">
@@ -420,6 +433,22 @@ h1 {
       </div>
 
       <p id="routeNote" class="route-note">声音从系统当前输出播放。</p>
+
+      <div class="setup">
+        <button type="button" id="listenToggle" class="btn btn-primary" aria-pressed="false">开启耳机监听</button>
+        <p id="setupNote" class="setup-note">耳机监听点一次开始，再点停止；外放请按住试说。选好麦克风后，电平条会跟随你的声音。</p>
+        <p id="monitorRoute" class="route-note">正在识别系统输出…</p>
+        <div class="setup-row">
+          <label class="setup-label" for="micSource">麦克风</label>
+          <select id="micSource" class="setup-select" aria-label="选择麦克风"><option value="">系统默认</option></select>
+        </div>
+        <button type="button" id="micPrepare" class="btn btn-ghost btn-sm">允许并列出麦克风</button>
+        <div class="setup-row">
+          <label class="setup-label" for="micMeter">输入电平</label>
+          <meter id="micMeter" class="setup-meter" min="0" max="1" value="0"></meter>
+          <span id="micReading" class="setup-reading" aria-live="polite">—</span>
+        </div>
+      </div>
 
       <div class="controls">
         <button id="play" class="btn btn-primary" type="button"><span id="playLabel">播放示例</span></button>
@@ -552,6 +581,9 @@ h1 {
       showMode(btn.getAttribute('data-mode'));
     });
   });
+  if (new URLSearchParams(window.location.search).get('mode') === 'live') {
+    showMode('live');
+  }
 })();
 </script>
 
