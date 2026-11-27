@@ -71,6 +71,8 @@ ODAI_VIDEO_DEMO=1 ODAI_MULTIMODAL_DEMO=1 ODAI_WEMM_VIDEO_DEMO=1 \
 
 W6 页面验收使用独立标识的 App 和 XCTest Runner。设置 `ODAI_WEMM_UI_FIXTURES=1` 可从同一生成器运行空模型、导入恢复、时序问答、取消和视频错误提示。见[夹具及真机运行步骤](demo/iosApp/UITests/Fixtures/WeMM/README.md)。
 
+在 Mac 上按默认 32 token 评测 12 段生活短视频，WeMM 的可回答题得 20/40 分，证据不足题得 6/8 分。逐题结果、同输入的 Qwen 基线及评分边界见[开放问答 v1.1 对照](docs/validation/w6-video-open-qa-v1.1.md)。
+
 ## 本地分发
 
 W9 变声的当前本地验证、交付清单和设备缺口见 [R 报告](docs/validation/w9-r-delivery-20261117.md)。Apple 分发工程需先用 `ruby scripts/generate-distribution-project.rb` 重新生成，再执行打包；生成器会更新 SDK 的 `apple/OnDeviceAIKit.xcodeproj`，有未提交内容时应在新的完整源码副本中执行。W9 已有双切片 XCFramework 与独立链接证据，仍未完成真机和最终发布接受。iOS Demo 使用 `ODAI_VOICE_EFFECTS_DEMO=1` 生成到新目录；Android Demo 已有独立变声入口。
