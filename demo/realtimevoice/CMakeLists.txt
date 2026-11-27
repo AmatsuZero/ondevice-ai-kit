@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.13)
+project(realtimevoice LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+add_library(realtimevoice STATIC RealtimeVoice.cpp)
+target_include_directories(realtimevoice PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
+
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+  include(CTest)
+  if(BUILD_TESTING)
+    enable_testing()
+    add_executable(realtimevoice_tests tests/RealtimeVoiceTests.cpp)
+    target_link_libraries(realtimevoice_tests PRIVATE realtimevoice)
+    add_test(NAME realtimevoice_tests COMMAND realtimevoice_tests)
+  endif()
+endif()

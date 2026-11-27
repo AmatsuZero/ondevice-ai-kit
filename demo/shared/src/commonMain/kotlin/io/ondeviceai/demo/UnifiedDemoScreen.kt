@@ -198,7 +198,7 @@ private fun UnifiedNavigationBar(model: UnifiedDemoModel) {
                     DemoTab.RECORDS -> UnifiedDemoRoute.Records
                 },
                 onClick = { model.navigateTopLevel(tab) },
-                icon = { Text(label.take(1)) },
+                icon = { UnifiedDemoTabIcon(tab) },
                 label = { Text(label) },
                 modifier = Modifier.testTag("nav-${label}"),
             )

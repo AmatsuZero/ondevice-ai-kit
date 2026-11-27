@@ -16,14 +16,14 @@ struct VoiceEffectsDemoSheet: UIViewControllerRepresentable {
         #if ODAI_VIDEO_DEMO
         controller.videoHost?.background()
         #endif
-        let host = VoiceEffectsHost(prepareAudio: {
-            while let speech = controller.speechHost, !speech.model.state.controlsEnabled {
+        let host = VoiceEffectsHost(prepareAudio: { [weak controller] in
+            while let speech = controller?.speechHost, !speech.model.state.controlsEnabled {
                 try Task.checkCancellation(); try await Task.sleep(nanoseconds: 20_000_000)
             }
-        }, done: {
-            controller.speechHost?.onForeground()
+        }, done: { [weak controller] in
+            controller?.speechHost?.onForeground()
             #if ODAI_VIDEO_DEMO
-            controller.videoHost?.onForeground()
+            controller?.videoHost?.onForeground()
             #endif
             dismiss()
         })
@@ -37,8 +37,10 @@ struct VoiceEffectsDemoSheet: UIViewControllerRepresentable {
 
 @MainActor
 final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemoActions,
-    AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIDocumentPickerDelegate {
+    @preconcurrency LiveVoiceOwner, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UIDocumentPickerDelegate {
     private let inputs = VoiceEffectsInputStore()
+    private let liveAudio: RealtimeVoiceAudio
+    let liveSession: RealtimeVoiceSession
     private var bridge: IOSVoiceEffectsBridge?
     private(set) var model: VoiceEffectsViewModel?
     private(set) var preparationState = DemoHostState.preparing
@@ -68,7 +70,12 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     init(embedded: Bool = false, prepareAudio: @escaping () async throws -> Void, done: @escaping () -> Void) {
         self.embedded = embedded
         self.preparation = prepareAudio; self.done = done
+        let audio = RealtimeVoiceAudio()
+        self.liveAudio = audio
+        let session = RealtimeVoiceSession(port: audio)
+        self.liveSession = session
         super.init(nibName: nil, bundle: nil)
+        audio.attach(session: session)
     }
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     override func viewDidLoad() {
@@ -94,12 +101,13 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
                 #endif
                 let model = VoiceEffectsViewModel(bridge: bridge, timbres: timbres); self.model = model
                 #if ODAI_OPENVOICE_DEMO
-                let example = try await Task.detached {
+                if let example = try? await Task.detached(operation: {
                     try VoiceEffectsWave.store(VoiceEffectsWave.normalize(url: assets.appendingPathComponent("original.wav")),
                                                directory: self.root.appendingPathComponent("inputs"))
-                }.value
-                guard !closed else { try? FileManager.default.removeItem(at: example); return }
-                model.setExample(reference: inputs.register(example))
+                }).value {
+                    guard !closed else { try? FileManager.default.removeItem(at: example); return }
+                    model.setExample(reference: inputs.register(example))
+                }
                 #endif
                 model.onTerminal = recordSink
                 preparationState = .ready
@@ -119,6 +127,7 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     @objc private func exitPage() { leavePage() }
     @objc private func background() {
         stopPlayback(); stopCapture(discard: true); model?.cancel()
+        liveAudio.cancelAll()
     }
     @objc private func interrupted(_ notification: Notification) {
         guard let type = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
@@ -328,11 +337,13 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     }
     var idle: Bool {
         !preparingEmbedded && recorder == nil && preparingPlayback.isEmpty &&
-            (model == nil || (model!.state.controlsEnabled && model!.state.pendingReleases == 0))
+            (model == nil || (model!.state.controlsEnabled && model!.state.pendingReleases == 0)) &&
+            !liveSession.busy
     }
     func leaveEmbeddedPage() {
         generation += 1
         stopPlayback(); stopCapture(discard: true); model?.leavePage()
+        liveAudio.cancelAll(); liveSession.release()
     }
     func leavePage() {
         if embedded { leaveEmbeddedPage(); return }
@@ -350,6 +361,7 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     func shutdown() {
         guard !closed else { return }; closed = true; generation += 1; prepare?.cancel()
         stopPlayback(); stopCapture(discard: true); model?.close()
+        liveAudio.cancelAll(); liveSession.release()
         // Document picker holds output until its own terminal callback, including
         // cancellation. It must not be released while UIKit is still copying it.
         Task { await inputs.close() }

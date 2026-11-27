@@ -49,7 +49,9 @@ video_demo = ENV['ODAI_VIDEO_DEMO'] == '1'
 voice_effects_demo = ENV['ODAI_VOICE_EFFECTS_DEMO'] == '1'
 if voice_effects_demo
   sources += ['demo/iosApp/VoiceEffectsHost.swift', 'demo/iosApp/VoiceEffectsInputStore.swift',
-              'demo/iosApp/VoiceEffectsWave.swift', 'kmp-binding/apple/IOSVoiceEffectsBridge.swift']
+              'demo/iosApp/VoiceEffectsWave.swift', 'kmp-binding/apple/IOSVoiceEffectsBridge.swift',
+              'demo/iosApp/RealtimeVoiceAudio.swift', 'demo/iosApp/RealtimeVoiceAudioUnit.cpp',
+              'demo/realtimevoice/RealtimeVoice.cpp']
 end
 multimodal_demo = ENV['ODAI_MULTIMODAL_DEMO'] == '1'
 mlx_demo = ENV['ODAI_MULTIMODAL_MLX_DEMO'] == '1'
@@ -124,6 +126,8 @@ inputs = sources.map { |path| File.join(root, path) } + frameworks +
 inputs += wemm_required_files + [wemm_notice_path, File.join(root, 'demo/iosApp/RealtimeSRNotices')] if wemm_video_demo
 inputs += [File.join(root, 'apple-mlx'), File.join(root, 'apple-mlx/Package.resolved')] if mlx_demo
 inputs += [File.join(root, 'demo/iosApp/UITests/VoiceEffectsDemoUITests.swift')] if voice_effects_demo
+inputs += ['demo/iosApp/RealtimeVoiceAudioUnit.h', 'demo/realtimevoice/RealtimeVoice.h',
+           'demo/iosApp/RealtimeVoiceBridge.h'].map { |path| File.join(root, path) } if voice_effects_demo
 inputs += [File.join(root, 'demo/iosApp/UITests/W6UnifiedVideoUITests.swift'),
            File.join(root, 'demo/iosApp/UITests/W6Fixtures-Info.plist')] if wemm_ui_fixtures
 inputs += [File.join(root, 'apple-opencv/Package.swift'), File.join(root, 'apple-opencv/Vendor/opencv2.xcframework')] if identity_demo

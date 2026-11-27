@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>离线变声 · 端侧 AI Demo</title>
+<style>
+:root {
+  --bg: #F7F5EF;
+  --surface: #FFFFFF;
+  --ink: #1B2B23;
+  --muted: #5C6B61;
+  --line: #E4E2D9;
+  --forest: #123329;
+  --mint: #A8E6C8;
+  --mint-strong: #2F8C68;
+  --serif: "Songti SC", "STSong", "Noto Serif CJK SC", Georgia, "Times New Roman", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+
+[hidden] { display: none !important; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  padding-bottom: calc(84px + env(safe-area-inset-bottom));
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+}
+.app-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+main {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+
+.intro { padding: 8px 0 26px; }
+h1 {
+  font-family: var(--serif);
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: .04em;
+  margin: 0;
+}
+.lede {
+  margin: 12px 0 0;
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.player h2 {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+
+.monitor {
+  background: var(--forest);
+  color: var(--mint);
+  border-radius: 18px;
+  padding: 18px 18px 14px;
+  box-shadow: 0 10px 28px rgba(18, 51, 41, .18);
+}
+.monitor-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.monitor-label {
+  font-size: 11px;
+  letter-spacing: .16em;
+  color: rgba(168, 230, 200, .65);
+}
+.role-name {
+  font-family: var(--serif);
+  font-size: 17px;
+}
+#wave {
+  display: block;
+  width: 100%;
+  height: 78px;
+}
+.monitor-bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+  min-height: 18px;
+}
+.time {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(168, 230, 200, .8);
+}
+.route-note {
+  margin: 10px 2px 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 18px;
+}
+.btn {
+  min-height: 46px;
+  border-radius: 12px;
+  border: 1px solid var(--forest);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .12s ease, background .15s ease, color .15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--forest); color: var(--mint); }
+.btn-ghost { background: transparent; color: var(--forest); }
+
+.status {
+  min-height: 20px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--mint-strong);
+}
+
+.roles { margin-top: 22px; }
+.roles-label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: var(--muted);
+}
+.role-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.role {
+  min-height: 44px;
+  border-radius: 11px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.role[aria-pressed="true"] {
+  background: var(--forest);
+  color: var(--mint);
+  border-color: var(--forest);
+}
+
+.btn:focus-visible,
+.role:focus-visible,
+.nav-item:focus-visible {
+  outline: 2px solid var(--mint-strong);
+  outline-offset: 2px;
+}
+
+.note-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px 22px;
+}
+.note-card h1 { font-size: 26px; margin-bottom: 14px; }
+.note-line {
+  font-family: var(--serif);
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+.note-sub {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.note-back { margin-top: 20px; }
+
+.footer {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px 30px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.footer p { margin: 0 0 6px; }
+.footer a {
+  color: var(--mint-strong);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: rgba(255, 255, 255, .94);
+  -webkit-backdrop-filter: saturate(1.2) blur(12px);
+  backdrop-filter: saturate(1.2) blur(12px);
+  border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.nav-item {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 62px;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: .04em;
+}
+.nav-item svg { width: 24px; height: 24px; display: block; }
+.nav-item.is-active { color: var(--mint-strong); }
+</style>
+<style>
+  .mode-switch {
+    display: flex;
+    gap: 4px;
+    margin: 18px 0 8px;
+    padding: 4px;
+    border: 1px solid rgba(127, 127, 127, .25);
+    border-radius: 999px;
+    background: rgba(127, 127, 127, .10);
+  }
+  .mode-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px 8px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .mode-btn.is-active {
+    border-color: rgba(127, 127, 127, .3);
+    background: linear-gradient(135deg, rgba(127, 127, 127, .28), rgba(127, 127, 127, .16));
+    font-weight: 700;
+  }
+  .mode-hint {
+    margin: 0 0 18px;
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: .78;
+  }
+  .mode-panel[hidden] { display: none; }
+  .file-head { display: flex; flex-direction: column; gap: 10px; }
+  .file-source { margin: 0; font-size: 13px; opacity: .82; overflow-wrap: anywhere; }
+  .file-tools { display: flex; flex-wrap: wrap; gap: 8px; }
+  .btn-sm { padding: 8px 12px; font-size: 13px; }
+  .file-label { display: inline-flex; align-items: center; }
+  .effect-groups { display: flex; flex-direction: column; gap: 14px; margin: 20px 0 14px; }
+  .effect-group { min-width: 0; margin: 0; padding: 0; border: 0; }
+  .effect-group legend { padding: 0 0 8px; font-size: 13px; opacity: .72; }
+  .effect-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .effect {
+    flex: 1 1 92px;
+    min-width: 88px;
+    padding: 10px 8px;
+    border: 1px solid rgba(127, 127, 127, .28);
+    border-radius: 12px;
+    background: rgba(127, 127, 127, .08);
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+  .effect.is-active {
+    border-color: rgba(127, 127, 127, .55);
+    background: rgba(127, 127, 127, .22);
+    font-weight: 700;
+  }
+  .file-tip { margin: 0 0 10px; font-size: 13px; line-height: 1.6; opacity: .82; }
+  #fileAudio { display: block; width: 100%; margin: 0 0 14px; }
+  .file-actions { display: flex; }
+  .file-actions a { text-decoration: none; }
+  .file-caption { margin: 12px 0 0; font-size: 12px; line-height: 1.6; opacity: .62; }
+  @media (max-width: 420px) {
+    .mode-btn { padding: 9px 4px; font-size: 14px; }
+    .effect { min-width: 0; }
+  }
+</style>
+<style>
+.mode-switch { display:flex; gap:4px; padding:4px; border:1px solid var(--line); border-radius:999px; background:var(--surface); }
+.intro + .mode-switch { margin-top:0; }
+.mode-btn { min-height:44px; padding:8px 18px; border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--muted); font:inherit; cursor:pointer; }
+.mode-btn[aria-pressed="false"] { border-color:var(--line); background:transparent; color:var(--muted); }
+.mode-btn[aria-pressed="true"] { border-color:var(--forest); background:var(--forest); color:var(--mint); }
+.effect { display:inline-flex; justify-content:center; align-items:center; gap:8px; min-height:44px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface); color:var(--ink); cursor:pointer; }
+.effect[aria-pressed="true"], .effect.is-active[aria-pressed="true"] { border-color:var(--forest); background:var(--forest); color:var(--mint); }
+.effect[aria-pressed="false"], .effect.is-active[aria-pressed="false"] { border-color:var(--line); background:var(--surface); color:var(--muted); }
+.effect:focus-visible, .mode-btn:focus-visible { outline:2px solid var(--forest); outline-offset:2px; }
+#fileInput { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+.file-label { cursor:pointer; }
+.file-tools:has(#fileInput:focus-visible) .file-label { outline:2px solid var(--forest); outline-offset:2px; }
+.file-tools .btn { min-height:44px; }
+#fileDownload { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; text-decoration:none; }
+#fileDownload:not([href]) { opacity:.5; pointer-events:none; cursor:not-allowed; }
+</style>
+<style>
+.setup { margin: 10px 0 0; }
+.setup-note { margin: 6px 0 0; font-size: 13px; line-height: 1.45; opacity: 0.72; }
+.setup-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.setup-label { font-size: 13px; opacity: 0.72; flex: 0 0 auto; }
+.setup-select { flex: 1 1 120px; min-width: 0; font: inherit; font-size: 13px; padding: 6px 8px; border: 1px solid currentColor; border-radius: 8px; background: transparent; color: inherit; }
+.setup-meter { flex: 1 1 80px; min-width: 60px; height: 8px; accent-color: currentColor; }
+.setup-reading { font-size: 12px; opacity: 0.72; font-variant-numeric: tabular-nums; min-width: 34px; text-align: right; }
+#micPrepare { margin-top: 8px; }
+#listenToggle { width: 100%; }
+.setup-select:focus-visible, #micPrepare:focus-visible, #listenToggle:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+</style>
+<script src="monitor-setup.js" defer></script>
+<script src="app.js" defer></script>
+<script src="file-mode.js" defer></script>
+</head>
+<body>
+
+<header class="app-header">
+  <img class="logo" src="./app-icon.png" alt="端侧 AI Demo 图标" width="40" height="40">
+  <span class="app-title">端侧 AI Demo</span>
+</header>
+
+<main>
+  <section id="panel-explore" class="panel" aria-labelledby="hero-title">
+    <div class="intro">
+      <h1 id="hero-title">离线变声</h1>
+      <p class="lede">用同一句话比较音色，或按住麦克风，听自己的声音。</p>
+    </div>
+
+    <div class="mode-switch" role="group" aria-label="变声方式">
+      <button type="button" class="mode-btn is-active" data-mode="file" aria-pressed="true">文件变声</button>
+      <button type="button" class="mode-btn" data-mode="live" aria-pressed="false">实时变声</button>
+    </div>
+    <p class="mode-hint">文件可导入、录制和导出；实时模式可用耳机监听或按住试说。</p>
+
+    <section id="filePanel" class="mode-panel" aria-label="文件变声">
+      <div class="file-head">
+        <p id="fileSource" class="file-source">内置示例 · original.wav</p>
+        <div class="file-tools">
+          <button type="button" id="fileDemo" class="btn btn-ghost btn-sm">使用内置示例</button>
+          <label class="btn btn-ghost btn-sm file-label" for="fileInput">导入 WAV</label>
+          <input id="fileInput" type="file" accept=".wav,audio/wav" aria-label="导入 WAV">
+          <button type="button" id="fileRecord" class="btn btn-ghost btn-sm">录一段</button>
+        </div>
+      </div>
+
+      <div class="effect-groups">
+        <fieldset class="effect-group">
+          <legend>原声与音高（半音）</legend>
+          <div class="effect-row">
+            <button type="button" class="effect is-active" data-effect="original" aria-pressed="true">原声</button>
+            <button type="button" class="effect" data-effect="up" aria-pressed="false">升调 +4</button>
+            <button type="button" class="effect" data-effect="down" aria-pressed="false">降调 −4</button>
+          </div>
+        </fieldset>
+        <fieldset class="effect-group">
+          <legend>OpenVoice 固定音色</legend>
+          <div class="effect-row">
+            <button type="button" class="effect" data-effect="voiceA" aria-pressed="false">音色 A</button>
+            <button type="button" class="effect" data-effect="voiceB" aria-pressed="false">音色 B</button>
+            <button type="button" class="effect" data-effect="voiceC" aria-pressed="false">音色 C</button>
+          </div>
+        </fieldset>
+      </div>
+
+      <p class="file-tip">点选音色后会自动准备好音频，点击下方播放键即可试听。</p>
+      <audio id="fileAudio" controls preload="none" aria-label="文件变声试听"></audio>
+      <div class="file-actions">
+        <a id="fileDownload" class="btn btn-primary" download="variant.wav" href="#">下载结果</a>
+      </div>
+      <p id="fileStatus" class="status" role="status"></p>
+      <p class="file-caption">内置 A/B/C 是此前用 OpenVoice 转换的同一句话。换成你的声音，会在本机重新转换。</p>
+    </section>
+
+    <section id="livePanel" class="mode-panel" hidden aria-label="实时变声">
+    <section class="player" aria-labelledby="player-title">
+      <h2 id="player-title">试听同一句话</h2>
+
+      <div class="monitor">
+        <div class="monitor-top">
+          <span class="monitor-label">当前音色</span>
+          <span id="roleName" class="role-name">大叔</span>
+        </div>
+        <canvas id="wave" width="640" height="160" aria-label="示例音频波形"></canvas>
+        <div class="monitor-bottom">
+          <span id="time" class="time"></span>
+        </div>
+      </div>
+
+      <p id="routeNote" class="route-note">声音从系统当前输出播放。</p>
+
+      <div class="setup">
+        <button type="button" id="listenToggle" class="btn btn-primary" aria-pressed="false">开启耳机监听</button>
+        <p id="setupNote" class="setup-note">耳机监听点一次开始，再点停止；外放请按住试说。选好麦克风后，电平条会跟随你的声音。</p>
+        <p id="monitorRoute" class="route-note">正在识别系统输出…</p>
+        <div class="setup-row">
+          <label class="setup-label" for="micSource">麦克风</label>
+          <select id="micSource" class="setup-select" aria-label="选择麦克风"><option value="">系统默认</option></select>
+        </div>
+        <button type="button" id="micPrepare" class="btn btn-ghost btn-sm">允许并列出麦克风</button>
+        <div class="setup-row">
+          <label class="setup-label" for="micMeter">输入电平</label>
+          <meter id="micMeter" class="setup-meter" min="0" max="1" value="0"></meter>
+          <span id="micReading" class="setup-reading" aria-live="polite">—</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="play" class="btn btn-primary" type="button"><span id="playLabel">播放示例</span></button>
+        <button id="talk" class="btn btn-ghost" type="button">按住试说</button>
+      </div>
+
+      <div id="status" class="status" role="status"></div>
+
+      <div class="roles" role="group" aria-label="选择音色">
+        <p class="roles-label">选择音色</p>
+        <div class="role-list">
+          <button type="button" class="role" data-role="original" aria-pressed="false">原声</button>
+          <button type="button" class="role" data-role="uncle" aria-pressed="true">大叔</button>
+          <button type="button" class="role" data-role="girl" aria-pressed="false">少女</button>
+          <button type="button" class="role" data-role="announcer" aria-pressed="false">播音员</button>
+        </div>
+      </div>
+    </section>
+    </section>
+  </section>
+
+  <section id="panel-model" class="panel" hidden>
+    <div class="note-card">
+      <h1>模型</h1>
+      <p class="note-line">文件变声用 OpenVoice 生成音色 A/B/C。</p>
+      <p class="note-sub">此原型用本机 CPU 转换文件；iOS App 还可选择 Core ML。实时变声使用 DSP，无需模型。</p>
+    </div>
+  </section>
+
+  <section id="panel-records" class="panel" hidden>
+    <div class="note-card">
+      <h1>记录</h1>
+      <p class="note-line">试听、导入与录音仅临时保存在本页面，关闭即失效</p>
+      <p class="note-sub">原型不上传、不留存音频；只有你点击下载时才将结果保存到本机。</p>
+      <button type="button" id="recordsBack" class="btn btn-ghost note-back">返回试听</button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>音源：<a href="https://huggingface.co/datasets/google/fleurs" target="_blank" rel="noopener">Google FLEURS</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a></p>
+  <p>音色 A/B/C：MyShell OpenVoice V2。实时角色：本机 DSP。</p>
+</footer>
+
+<nav class="nav" aria-label="主导航">
+  <button type="button" class="nav-item is-active" data-tab="explore" aria-current="page">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9"></circle>
+      <path d="M16,8 L13.5,13.5 L8,16 L10.5,10.5 Z"></path>
+    </svg>
+    <span>探索</span>
+  </button>
+  <button type="button" class="nav-item" data-tab="model">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3,8 L12,3.5 L21,8 L12,12.5 Z"></path>
+      <path d="M3,12 L12,16.5 L21,12"></path>
+      <path d="M3,16 L12,20.5 L21,16"></path>
+    </svg>
+    <span>模型</span>
+  </button>
+  <button type="button" class="nav-item" data-tab="records">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M4.2,10 A8,8 0 0,1 12,3.5 A8,8 0 1,1 4.3,16.2"></path>
+      <path d="M3.8,5.8 L3.8,10.5 L8.5,10.5"></path>
+      <path d="M12,7.2 L12,12 L15.6,14"></path>
+    </svg>
+    <span>记录</span>
+  </button>
+</nav>
+
+<script>
+(function () {
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+
+  var items = Array.prototype.slice.call(nav.querySelectorAll('.nav-item'));
+  var panels = {
+    explore: document.getElementById('panel-explore'),
+    model: document.getElementById('panel-model'),
+    records: document.getElementById('panel-records')
+  };
+
+  function show(name) {
+    items.forEach(function (item) {
+      var active = item.getAttribute('data-tab') === name;
+      item.classList.toggle('is-active', active);
+      if (active) item.setAttribute('aria-current', 'page');
+      else item.removeAttribute('aria-current');
+    });
+    Object.keys(panels).forEach(function (key) {
+      if (panels[key]) panels[key].hidden = key !== name;
+    });
+    window.dispatchEvent(new CustomEvent('prototype-nav', { detail: { tab: name } }));
+  }
+
+  items.forEach(function (item) {
+    item.addEventListener('click', function () {
+      show(item.getAttribute('data-tab'));
+    });
+  });
+
+  var back = document.getElementById('recordsBack');
+  if (back) back.addEventListener('click', function () { show('explore'); });
+})();
+</script>
+
+<script>
+(function () {
+  var switcher = document.querySelector('.mode-switch');
+  if (!switcher) return;
+  var buttons = Array.prototype.slice.call(switcher.querySelectorAll('[data-mode]'));
+  var panels = {
+    file: document.getElementById('filePanel'),
+    live: document.getElementById('livePanel')
+  };
+  function showMode(mode) {
+    buttons.forEach(function (btn) {
+      var active = btn.getAttribute('data-mode') === mode;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    Object.keys(panels).forEach(function (key) {
+      if (panels[key]) panels[key].hidden = key !== mode;
+    });
+    window.dispatchEvent(new CustomEvent('voice-mode', { detail: { mode: mode } }));
+    if (mode === 'live') window.dispatchEvent(new Event('resize'));
+  }
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      showMode(btn.getAttribute('data-mode'));
+    });
+  });
+  if (new URLSearchParams(window.location.search).get('mode') === 'live') {
+    showMode('live');
+  }
+})();
+</script>
+
+</body>
+</html>
