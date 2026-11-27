@@ -35,6 +35,12 @@ W8 复用 W6 在 iPhone 16 Pro Max（iOS 27.2.1，USB）上的 XCTest 结果。W
 
 三段影片选片前、出答后的六个热状态读数均为 `nominal`。两次检查之间的热状态、全程峰值、页面 RSS 和电池供电下的整机耗电仍待测量。产品资源预算待确认。[电池供电时的采集步骤](../../demo/iosApp/UITests/Fixtures/WeMM/power/README.md)
 
+### 拔线后的两次短答
+
+同日按操作者确认断开充电，CoreDevice 回读连接方式为 `localNetwork`。首次无线运行中，两段色序短答通过，XCTest 从点击「生成」到确认答案的上界为 5.583 秒和 5.597 秒。Power Profiler 按夹具的实际 PID 附加时返回退出码 21（`Cannot find process for provided pid`），没有生成 trace。随后仅重跑短答，两段仍答对，上界为 5.612 秒和 5.588 秒；采集器在 XCTest 重新安装夹具前取得的可执行路径已变化，未能附加。这两轮均无整机耗电率读数。
+
+首次无线运行的四项功能用例为 3 过、1 败。离页恢复用例在点击「生成」后 5.727 秒点击返回，再进入时读到 `SUCCEEDED` 和最终答案，等待 `CANCELLED` 超时。附件未记录返回动作生效前的即时生成状态。该失败与此前通过的 USB 真机记录一并保留。[用例与 USB 验收记录](../../demo/iosApp/UITests/Fixtures/WeMM/README.md#按模型状态运行)
+
 ## 2026-11-17 当周候选资源与交付范围
 
 W3/W6后续研发暂停、W7生产校准/PAD阶段外延期，新增[W9变声](W9-voice-effects.md)。W8状态仍 **open / active-planned**：按[本周范围](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)验证实际交付候选的稳定性、资源/预算或明确缺测裁定、通知/消费和最终复审；不等待W3/W6模型改进，也不替它们另跑实验。
