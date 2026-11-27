@@ -1,0 +1,194 @@
+{
+  "R01": {
+    "id": "w6-open-05a",
+    "group": "answerable",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R02": {
+    "id": "w6-open-02a",
+    "group": "answerable",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R03": {
+    "id": "w6-open-06b",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R04": {
+    "id": "w6-open-05b",
+    "group": "insufficient",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R05": {
+    "id": "w6-open-12a",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R06": {
+    "id": "w6-open-11b",
+    "group": "insufficient",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R07": {
+    "id": "w6-open-04b",
+    "group": "insufficient",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R08": {
+    "id": "w6-open-02b",
+    "group": "answerable",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R09": {
+    "id": "w6-open-01b",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R10": {
+    "id": "w6-open-07b",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R11": {
+    "id": "w6-open-10a",
+    "group": "answerable",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R12": {
+    "id": "w6-open-11a",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R13": {
+    "id": "w6-open-08a",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R14": {
+    "id": "w6-open-03a",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R15": {
+    "id": "w6-open-06a",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R16": {
+    "id": "w6-open-01a",
+    "group": "answerable",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R17": {
+    "id": "w6-open-12b",
+    "group": "answerable",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R18": {
+    "id": "w6-open-08b",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R19": {
+    "id": "w6-open-04a",
+    "group": "answerable",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R20": {
+    "id": "w6-open-10b",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R21": {
+    "id": "w6-open-07a",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R22": {
+    "id": "w6-open-09b",
+    "group": "answerable",
+    "models": {
+      "A": "qwen",
+      "B": "wemm"
+    }
+  },
+  "R23": {
+    "id": "w6-open-03b",
+    "group": "insufficient",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  },
+  "R24": {
+    "id": "w6-open-09a",
+    "group": "answerable",
+    "models": {
+      "A": "wemm",
+      "B": "qwen"
+    }
+  }
+}

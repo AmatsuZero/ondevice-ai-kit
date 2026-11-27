@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生活短片开放问答 · 独立复标</title>
+  <style>
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', Inter, sans-serif;
+      --bg-color: #fff;
+      --text-color: #333;
+      --border-color: #ccc;
+      --control-bg: #e8f5e9;
+      --control-hover: #d1e7dd;
+      --error-color: #d32f2f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.5;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+
+    h1, h2 {
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+    }
+
+    article {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    figure {
+      margin-bottom: 1rem;
+    }
+
+    video {
+      max-height: 360px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    fieldset {
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    legend {
+      font-weight: bold;
+      padding: 0 0.5rem;
+    }
+
+    label {
+      display: block;
+      margin-top: 0.75rem;
+      margin-bottom: 0.25rem;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      z-index: 10;
+    }
+
+    .toolbar button {
+      background-color: var(--control-bg);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      color: var(--text-color);
+    }
+
+    .toolbar button:hover {
+      background-color: var(--control-hover);
+    }
+
+    #status {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      background-color: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+
+    .card {
+      margin-bottom: 1rem;
+    }
+
+    .card label {
+      font-weight: bold;
+    }
+
+    .card input[type="radio"] {
+      width: auto;
+      margin-right: 0.5rem;
+    }
+
+    .card .note {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 480px) {
+      .toolbar {
+        position: static;
+        flex-direction: column;
+      }
+    }
+  main{max-width:850px;margin:auto} p{margin:.5rem 0} article{margin:2rem 0;padding:1rem 0;border-top:1px solid #abb9af;scroll-margin-top:6.5rem} figure{margin:.75rem 0} video{display:block;max-width:100%;width:min(100%,600px);height:auto;max-height:340px;background:#202923} figcaption{font-size:.875rem;color:#43554a;margin-top:.2rem} pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;line-height:1.65;padding:.75rem;background:#f3f6f3;border-inline-start:3px solid #648574} summary{cursor:pointer;font-weight:600;margin:.65rem 0;padding:.45rem} fieldset{min-width:0;border:1px solid #cad5ce;border-radius:.35rem;padding:1rem;margin:.75rem 0} label{display:block;margin-top:.45rem} label select,label textarea{display:block} textarea{width:100%} article ul{margin:0 0 .4rem 1.5rem} #status:empty{display:none} .toolbar{align-items:center} .toolbar input{width:auto;max-width:100%} nav{margin-bottom:.7rem} #jump{max-width:100%} :focus-visible{outline:2px solid #23613b;outline-offset:2px}
+</style>
+</head>
+<body>
+
+<main>
+  <h1>生活短片开放问答 · 独立复标</h1>
+
+  <p>12 段短片共有 24 道题，每题对应两份匿名回答。可以先看片、记下观察，再展开原答评分。</p>
+  <p>每个要点计 0 或 1 分。给 1 分时，从该回答逐字摘录依据；遇到关键反例时说明理由，整份回答计 0 分。证据不足题还要说明画面能确认什么，才能得满分。</p>
+  <p>两位评阅者各自填写。离开前请点「保存草稿」，下次可读取下载的文件。完成后点「导出评分」。</p>
+
+  <div class="toolbar" id="tools">
+    <button type="button" id="draft">保存草稿</button>
+    <button type="button" id="final">导出评分</button>
+    <label for="restore">读取自己的草稿</label>
+    <input type="file" id="restore" accept=".json" />
+  </div>
+
+  <div id="status" role="status" aria-live="polite"></div>
+
+  <nav>
+    <select id="jump" aria-label="跳到题目">
+      <option value="">跳到题目</option>
+      <option value="R01">R01　留意画面左边的电视。人物走近它前后，屏幕有什么变化？</option><option value="R02">R02　那个深色收纳箱原来放在哪里？人是怎么把它拿下来的？</option><option value="R03">R03　这一幕为什么看起来像洗衣区？请说出两条画面里的线索。</option><option value="R04">R04　开头电视里播的具体是哪部节目？从这个拍摄角度能辨认吗？</option><option value="R05">R05　短片后半段，游客聚在路边做什么？画面里有什么能支持你的判断？</option><option value="R06">R06　这次钓到了什么鱼？请区分画面能确认和不能确认的部分。</option><option value="R07">R07　我想买片中猫粮的同款，画面能确认具体品牌吗？</option><option value="R08">R08　整理东西时，这个人有两次把手举得很高。两次之间主要在做什么？</option><option value="R09">R09　我想找到刚擦过的地方。它在微波炉和烤箱门的什么位置？</option><option value="R10">R10　如果想在这一幕里找到吸尘器，要看茶几的哪一侧？它有什么醒目的特征？</option><option value="R11">R11　把这段划艇过程讲给没看过的人听：小艇是怎么穿过这段水面的？</option><option value="R12">R12　岸边那个人在做什么？请给出能看出这一点的动作。</option><option value="R13">R13　这个人怎样用红杯子接东西？请说明大容器放在哪里，以及杯子怎么靠过去。</option><option value="R14">R14　给这段起床的视频配一句说明，交代人从哪里起来，后来坐在哪里做什么。</option><option value="R15">R15　人在洗衣机旁先后查看了哪两样手持物件？按出现顺序说。</option><option value="R16">R16　用一句话说说，这个人在厨房先清理了哪里，随后又去打开了什么？</option><option value="R17">R17　想用两句话概括这段游客动线：开头的人在哪里走动，后半段队伍在哪里形成？</option><option value="R18">R18　桌边接水和摆弄纸箱哪个先发生？两件事发生时，人的姿势分别怎样？</option><option value="R19">R19　厨房里的猫出现在什么位置？当时人离它有多近？</option><option value="R20">R20　想剪一个能同时看清划艇人、船身和白浪的瞬间，应该找哪一段？请描述你会找的画面。</option><option value="R21">R21　客厅里两个人各在做什么？按他们所在的位置讲清楚。</option><option value="R22">R22　我想从原片截一张能看清动物毛发的特写。这段拍得够近吗？为什么？</option><option value="R23">R23　能从这段看出这个人起床后要去哪儿吗？最后能确定的动作是什么？</option><option value="R24">R24　帮我给这段风景配一句相册说明，让人知道近处和远处各能看到什么。</option>
+    </select>
+  </nav>
+  <form autocomplete="off" id="review" data-packet="9ec21df80a86fe7aca9c5e5217fc0679d4fca2de5c15c5ad5059ad27d1e36173" onsubmit="return false;">
+    <fieldset>
+      <legend>评审信息</legend>
+      <label for="reviewer">评阅人（可用代号）</label>
+      <input type="text" id="reviewer" name="reviewer" required>
+
+      <label for="date">日期</label>
+      <input type="date" id="date" name="date" required>
+    </fieldset>
+
+    <article id="R01"><h2>R01 留意画面左边的电视。人物走近它前后，屏幕有什么变化？</h2><figure><video controls preload="none" src="media/clip-05.mp4"></video><figcaption>原片</figcaption></figure><label for="R01-note">我的画面观察或时间（选填）</label><textarea id="R01-note" name="R01.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>此前电视亮着并显示节目画面</li><li>人靠近电视后屏幕变黑或熄灭</li></ul><p><strong>可接受表述</strong> 不要求断定通过遥控器还是机身按钮关闭</p><p><strong>关键反例</strong> 把变化说反，称黑屏变亮</p><fieldset><legend>回答 A</legend><pre data-answer="R01.A">在人物走近电视之前，电视屏幕上显示的是模糊的、类似人物或动态影像的画面。当人物走近电视并伸手触碰或靠近屏幕时，</pre><label>要点一得分<select name="R01.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R01.A.q1"></textarea></label><label>要点二得分<select name="R01.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R01.A.q2"></textarea></label><label>触发关键反例<select name="R01.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R01.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R01.B">在视频的开始，电视屏幕显示着一个模糊的图像，随后逐渐清晰，显示出一个人的面部特写。接着，电视屏幕切换到一个</pre><label>要点一得分<select name="R01.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R01.B.q1"></textarea></label><label>要点二得分<select name="R01.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R01.B.q2"></textarea></label><label>触发关键反例<select name="R01.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R01.B.reason"></textarea></label></fieldset></details></article>
+<article id="R02"><h2>R02 那个深色收纳箱原来放在哪里？人是怎么把它拿下来的？</h2><figure><video controls preload="none" src="media/clip-02.mp4"></video><figcaption>原片</figcaption></figure><label for="R02-note">我的画面观察或时间（选填）</label><textarea id="R02-note" name="R02.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>在储物间较高的架子上，位于画面右侧</li><li>人伸手举过头顶，托住箱子向下取</li></ul><p><strong>可接受表述</strong> 衣柜高层、上层置物架均可；无需猜箱内物品</p><p><strong>关键反例</strong> 说成从地板或低层捡起</p><fieldset><legend>回答 A</legend><pre data-answer="R02.A">根据视频内容，那个深色收纳箱原来放在衣柜的上方（或顶层货架上）。
+
+人是通过从衣柜内部伸手拿取，将其从上方</pre><label>要点一得分<select name="R02.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R02.A.q1"></textarea></label><label>要点二得分<select name="R02.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R02.A.q2"></textarea></label><label>触发关键反例<select name="R02.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R02.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R02.B">根据视频内容，那个深色收纳箱最初是放在一个衣柜的角落。视频中，一个人正在翻找衣柜，他伸手去拿那个收纳</pre><label>要点一得分<select name="R02.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R02.B.q1"></textarea></label><label>要点二得分<select name="R02.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R02.B.q2"></textarea></label><label>触发关键反例<select name="R02.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R02.B.reason"></textarea></label></fieldset></details></article>
+<article id="R03"><h2>R03 这一幕为什么看起来像洗衣区？请说出两条画面里的线索。</h2><figure><video controls preload="none" src="media/clip-06.mp4"></video><figcaption>原片</figcaption></figure><label for="R03-note">我的画面观察或时间（选填）</label><textarea id="R03-note" name="R03.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>人前方有白色、带控制面板的洗衣机或洗衣设备</li><li>上方架上有多只瓶罐或洗涤用品，或明确画出多台紧邻洗衣设备</li></ul><p><strong>可接受表述</strong> 不要求识别瓶身品牌或断言机器正在运转</p><p><strong>关键反例</strong> 称看到了洗衣机滚筒正在转动或人正把衣服放进去</p><fieldset><legend>回答 A</legend><pre data-answer="R03.A">这是一段视频，它看起来像洗衣区的原因如下：
+
+1. 画面中有一个白色的洗衣机，这是洗衣区的典型设备。
+2. </pre><label>要点一得分<select name="R03.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R03.A.q1"></textarea></label><label>要点二得分<select name="R03.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R03.A.q2"></textarea></label><label>触发关键反例<select name="R03.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R03.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R03.B">1. 画面中有一台白色的洗衣机（或类似洗涤设备）位于前景，且上方有置物架，上面摆放着各种洗涤用品（如</pre><label>要点一得分<select name="R03.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R03.B.q1"></textarea></label><label>要点二得分<select name="R03.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R03.B.q2"></textarea></label><label>触发关键反例<select name="R03.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R03.B.reason"></textarea></label></fieldset></details></article>
+<article id="R04"><h2>R04 开头电视里播的具体是哪部节目？从这个拍摄角度能辨认吗？</h2><figure><video controls preload="none" src="media/clip-05.mp4"></video><figcaption>原片</figcaption></figure><label for="R04-note">我的画面观察或时间（选填）</label><textarea id="R04-note" name="R04.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>具体节目名称不能确定</li><li>电视虽在播放，但屏幕小而远，没有清楚可读的节目名称或足以辨认的细节</li></ul><p><strong>可接受表述</strong> 不用猜电视类型或人物</p><p><strong>关键反例</strong> 断言具体片名、频道或节目名称</p><fieldset><legend>回答 A</legend><pre data-answer="R04.A">根据视频画面，电视屏幕上显示的节目内容较为模糊，无法清晰辨认出具体的节目名称或画面内容。虽然可以看到屏幕上有人物影像，但由于分辨率</pre><label>要点一得分<select name="R04.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R04.A.q1"></textarea></label><label>要点二得分<select name="R04.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R04.A.q2"></textarea></label><label>触发关键反例<select name="R04.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R04.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R04.B">无法确定。因为电视屏幕上的画面是动态的，且画面模糊，无法辨认出具体的节目内容。同时，电视屏幕的反射和光线</pre><label>要点一得分<select name="R04.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R04.B.q1"></textarea></label><label>要点二得分<select name="R04.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R04.B.q2"></textarea></label><label>触发关键反例<select name="R04.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R04.B.reason"></textarea></label></fieldset></details></article>
+<article id="R05"><h2>R05 短片后半段，游客聚在路边做什么？画面里有什么能支持你的判断？</h2><figure><video controls preload="none" src="media/clip-12.mp4"></video><figcaption>原片</figcaption></figure><label for="R05-note">我的画面观察或时间（选填）</label><textarea id="R05-note" name="R05.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>在路边排队等待，等车或接驳车是合理描述</li><li>队伍沿着隔离绳或栏杆排列，旁边有绿色车辆站牌</li></ul><p><strong>可接受表述</strong> 看到近处路面车辆可以补充，但不要断言已经登车</p><p><strong>关键反例</strong> 称后半段的人群正在上车或穿过马路</p><fieldset><legend>回答 A</legend><pre data-answer="R05.A">短片后半段，游客们聚集在路边，他们围成一圈，似乎在讨论或等待什么。他们面前有一个绿色的标志牌，</pre><label>要点一得分<select name="R05.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R05.A.q1"></textarea></label><label>要点二得分<select name="R05.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R05.A.q2"></textarea></label><label>触发关键反例<select name="R05.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R05.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R05.B">在短片后半段（约13秒至15秒），游客们主要聚集在路边排队，等待乘坐公共交通工具。
+
+支持这一判断的画面</pre><label>要点一得分<select name="R05.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R05.B.q1"></textarea></label><label>要点二得分<select name="R05.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R05.B.q2"></textarea></label><label>触发关键反例<select name="R05.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R05.B.reason"></textarea></label></fieldset></details></article>
+<article id="R06"><h2>R06 这次钓到了什么鱼？请区分画面能确认和不能确认的部分。</h2><figure><video controls preload="none" src="media/clip-11.mp4"></video><figcaption>原片</figcaption></figure><label for="R06-note">我的画面观察或时间（选填）</label><textarea id="R06-note" name="R06.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>可确认此人在岸边向水中抛线或钓鱼</li><li>片段没有清楚显示鱼被拉出水或捕到的鱼，无法确定鱼种或结果</li></ul><p><strong>可接受表述</strong> 可说看不到渔获；不能据此断言全天没有收获</p><p><strong>关键反例</strong> 报出确定鱼种或声称已看到鱼被钓起</p><fieldset><legend>回答 A</legend><pre data-answer="R06.A">根据视频画面，无法确认具体钓到了什么种类的鱼。
+
+**画面能确认的部分：**
+*   一名穿着深色上衣和深色裤子的人</pre><label>要点一得分<select name="R06.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R06.A.q1"></textarea></label><label>要点二得分<select name="R06.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R06.A.q2"></textarea></label><label>触发关键反例<select name="R06.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R06.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R06.B">画面中，这位钓鱼者站在河岸边，使用飞鱼竿进行钓鱼。然而，由于画面中没有显示鱼的细节，我们无法确认具体</pre><label>要点一得分<select name="R06.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R06.B.q1"></textarea></label><label>要点二得分<select name="R06.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R06.B.q2"></textarea></label><label>触发关键反例<select name="R06.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R06.B.reason"></textarea></label></fieldset></details></article>
+<article id="R07"><h2>R07 我想买片中猫粮的同款，画面能确认具体品牌吗？</h2><figure><video controls preload="none" src="media/clip-04.mp4"></video><figcaption>原片</figcaption></figure><label for="R07-note">我的画面观察或时间（选填）</label><textarea id="R07-note" name="R07.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>不能辨认具体品牌</li><li>画面能看到猫与人在桌边，但没有可辨认的包装商标或品牌文字</li></ul><p><strong>可接受表述</strong> 可说甚至不能仅凭画面确认食物的种类</p><p><strong>关键反例</strong> 给出确定品牌或把猜测当成看清的商标</p><fieldset><legend>回答 A</legend><pre data-answer="R07.A">根据视频画面，无法确认猫粮的具体品牌。
+
+画面中虽然可以看到一只猫在厨房地板上活动，以及一名女子在操作台和冰箱附近</pre><label>要点一得分<select name="R07.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R07.A.q1"></textarea></label><label>要点二得分<select name="R07.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R07.A.q2"></textarea></label><label>触发关键反例<select name="R07.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R07.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R07.B">根据提供的图片，无法明确确认具体品牌。画面中展示了一只猫在厨房的地板上，旁边有一个猫粮碗。然而，由于图片</pre><label>要点一得分<select name="R07.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R07.B.q1"></textarea></label><label>要点二得分<select name="R07.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R07.B.q2"></textarea></label><label>触发关键反例<select name="R07.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R07.B.reason"></textarea></label></fieldset></details></article>
+<article id="R08"><h2>R08 整理东西时，这个人有两次把手举得很高。两次之间主要在做什么？</h2><figure><video controls preload="none" src="media/clip-02.mp4"></video><figcaption>原片</figcaption></figure><label for="R08-note">我的画面观察或时间（选填）</label><textarea id="R08-note" name="R08.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>中间一段人弯下腰、蹲下或俯下身</li><li>人在较低处翻找、摆弄或整理东西</li></ul><p><strong>可接受表述</strong> “弯着腰在下面翻东西”即可得两分。无需复述两端的举手动作，也无需辨认手中物品。</p><p><strong>关键反例</strong> 说成一直站直在高处整理</p><fieldset><legend>回答 A</legend><pre data-answer="R08.A">在两次把手举得很高之间，这个人主要是在整理或放置衣物，包括将一件深色衣物（可能是帽子或外套）举过头顶，然后</pre><label>要点一得分<select name="R08.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R08.A.q1"></textarea></label><label>要点二得分<select name="R08.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R08.A.q2"></textarea></label><label>触发关键反例<select name="R08.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R08.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R08.B">这个人第一次把手举得很高，是在整理衣柜时，他把一件衣服从衣柜里拿出来。第二次把手举得很高，是在整理衣柜时，</pre><label>要点一得分<select name="R08.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R08.B.q1"></textarea></label><label>要点二得分<select name="R08.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R08.B.q2"></textarea></label><label>触发关键反例<select name="R08.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R08.B.reason"></textarea></label></fieldset></details></article>
+<article id="R09"><h2>R09 我想找到刚擦过的地方。它在微波炉和烤箱门的什么位置？</h2><figure><video controls preload="none" src="media/clip-01.mp4"></video><figcaption>原片</figcaption></figure><label for="R09-note">我的画面观察或时间（选填）</label><textarea id="R09-note" name="R09.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>擦过的位置在微波炉的下方</li><li>擦过的位置在烤箱门的上方</li></ul><p><strong>可接受表述</strong> “微波炉下面、烤箱门上面”即可得两分。只说其中一个方位得一分。</p><p><strong>关键反例</strong> 把擦拭面说成微波炉里面或烤箱门内侧</p><fieldset><legend>回答 A</legend><pre data-answer="R09.A">你提到的“刚擦过的地方”很可能是在微波炉和烤箱门之间。根据视频中的画面，这个区域是位于微波炉</pre><label>要点一得分<select name="R09.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R09.A.q1"></textarea></label><label>要点二得分<select name="R09.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R09.A.q2"></textarea></label><label>触发关键反例<select name="R09.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R09.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R09.B">根据视频内容，刚擦过的地方位于**烤箱的顶部（炉灶台面）**。
+
+具体来说，在视频的前半部分（约00:</pre><label>要点一得分<select name="R09.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R09.B.q1"></textarea></label><label>要点二得分<select name="R09.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R09.B.q2"></textarea></label><label>触发关键反例<select name="R09.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R09.B.reason"></textarea></label></fieldset></details></article>
+<article id="R10"><h2>R10 如果想在这一幕里找到吸尘器，要看茶几的哪一侧？它有什么醒目的特征？</h2><figure><video controls preload="none" src="media/clip-07.mp4"></video><figcaption>原片</figcaption></figure><label for="R10-note">我的画面观察或时间（选填）</label><textarea id="R10-note" name="R10.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>在画面中茶几右侧、靠地面或地毯边</li><li>蓝白色机身，或有很显眼的蓝色弯曲长软管</li></ul><p><strong>可接受表述</strong> 桶状机身或软管均接受</p><p><strong>关键反例</strong> 把位置说成在沙发上或茶几左侧</p><fieldset><legend>回答 A</legend><pre data-answer="R10.A">如果想在这一幕里找到吸尘器，它位于茶几的右侧。吸尘器有一个蓝色的软管，还有一个蓝色的桶。</pre><label>要点一得分<select name="R10.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R10.A.q1"></textarea></label><label>要点二得分<select name="R10.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R10.A.q2"></textarea></label><label>触发关键反例<select name="R10.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R10.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R10.B">吸尘器位于茶几的右侧（画面右侧）。它有一个蓝色的机身，并且连接着蓝色的软管。</pre><label>要点一得分<select name="R10.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R10.B.q1"></textarea></label><label>要点二得分<select name="R10.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R10.B.q2"></textarea></label><label>触发关键反例<select name="R10.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R10.B.reason"></textarea></label></fieldset></details></article>
+<article id="R11"><h2>R11 把这段划艇过程讲给没看过的人听：小艇是怎么穿过这段水面的？</h2><figure><video controls preload="none" src="media/clip-10.mp4"></video><figcaption>原片</figcaption></figure><label for="R11-note">我的画面观察或时间（选填）</label><textarea id="R11-note" name="R11.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>有人驾着小艇或皮划艇顺着河流穿过激流</li><li>艇在白色浪头中起伏，部分时候被浪遮挡又露出来</li></ul><p><strong>可接受表述</strong> 可以称划艇、独木舟；不要求识别地名或河流名称</p><p><strong>关键反例</strong> 断言人落水或船被救起</p><fieldset><legend>回答 A</legend><pre data-answer="R11.A">这段视频展示了一个人在湍急的河流中划艇的过程。以下是具体的描述：
+
+1.  **起始阶段**：视频开始时，可以看到</pre><label>要点一得分<select name="R11.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R11.A.q1"></textarea></label><label>要点二得分<select name="R11.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R11.A.q2"></textarea></label><label>触发关键反例<select name="R11.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R11.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R11.B">这段视频展示了一位皮划艇运动员在激流中穿行的场景。首先，我们可以看到湍急的水流，这是一条充满挑战</pre><label>要点一得分<select name="R11.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R11.B.q1"></textarea></label><label>要点二得分<select name="R11.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R11.B.q2"></textarea></label><label>触发关键反例<select name="R11.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R11.B.reason"></textarea></label></fieldset></details></article>
+<article id="R12"><h2>R12 岸边那个人在做什么？请给出能看出这一点的动作。</h2><figure><video controls preload="none" src="media/clip-11.mp4"></video><figcaption>原片</figcaption></figure><label for="R12-note">我的画面观察或时间（选填）</label><textarea id="R12-note" name="R12.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>在水边钓鱼或飞钓</li><li>反复挥动鱼竿或甩出细线，让线落向水面</li></ul><p><strong>可接受表述</strong> 无需说钩饵、鱼种或地名</p><p><strong>关键反例</strong> 把线说成用来套住另一人或动物</p><fieldset><legend>回答 A</legend><pre data-answer="R12.A">岸边那个人在飞钓。他站在岸边，手持一根长杆，杆子的末端连接着鱼线，他正用杆子将鱼线</pre><label>要点一得分<select name="R12.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R12.A.q1"></textarea></label><label>要点二得分<select name="R12.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R12.A.q2"></textarea></label><label>触发关键反例<select name="R12.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R12.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R12.B">岸边那个人正在钓鱼。
+
+能看出这一点的动作包括：
+1. 他手持一根长杆（鱼竿），杆子的一端伸向水面</pre><label>要点一得分<select name="R12.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R12.B.q1"></textarea></label><label>要点二得分<select name="R12.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R12.B.q2"></textarea></label><label>触发关键反例<select name="R12.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R12.B.reason"></textarea></label></fieldset></details></article>
+<article id="R13"><h2>R13 这个人怎样用红杯子接东西？请说明大容器放在哪里，以及杯子怎么靠过去。</h2><figure><video controls preload="none" src="media/clip-08.mp4"></video><figcaption>原片</figcaption></figure><label for="R13-note">我的画面观察或时间（选填）</label><textarea id="R13-note" name="R13.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>大水桶或带出水嘴的水容器放在桌边地上</li><li>人坐着向下弯腰，把红杯靠到桶的出水处</li></ul><p><strong>可接受表述</strong> 可说取水、接饮料；不要求断言液体成分</p><p><strong>关键反例</strong> 说成把大桶拿到桌上往杯中倾倒</p><fieldset><legend>回答 A</legend><pre data-answer="R13.A">这个人使用一个大容器，它是一个绿色的水桶，放在桌子旁边。他先用右手拿起一个红色的杯子，然后用左手拿起一个</pre><label>要点一得分<select name="R13.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R13.A.q1"></textarea></label><label>要点二得分<select name="R13.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R13.A.q2"></textarea></label><label>触发关键反例<select name="R13.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R13.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R13.B">根据视频内容，这个人使用红杯子接东西的过程如下：
+
+1.  **大容器位置**：大容器（一个绿色的桶状容器，</pre><label>要点一得分<select name="R13.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R13.B.q1"></textarea></label><label>要点二得分<select name="R13.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R13.B.q2"></textarea></label><label>触发关键反例<select name="R13.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R13.B.reason"></textarea></label></fieldset></details></article>
+<article id="R14"><h2>R14 给这段起床的视频配一句说明，交代人从哪里起来，后来坐在哪里做什么。</h2><figure><video controls preload="none" src="media/clip-03.mp4"></video><figcaption>原片</figcaption></figure><label for="R14-note">我的画面观察或时间（选填）</label><textarea id="R14-note" name="R14.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>从盖着被子的床上坐起或移到床边</li><li>坐在床沿弯身把手伸到脚边整理鞋或脚上的东西</li></ul><p><strong>可接受表述</strong> 不用断言是在系鞋带；描述低头整理脚边即可</p><p><strong>关键反例</strong> 说成已经走出房间</p><fieldset><legend>回答 A</legend><pre data-answer="R14.A">一个男孩从床上坐起，然后坐在床边的柜子上。</pre><label>要点一得分<select name="R14.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R14.A.q1"></textarea></label><label>要点二得分<select name="R14.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R14.A.q2"></textarea></label><label>触发关键反例<select name="R14.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R14.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R14.B">视频显示，一个人从床上起来，随后坐在床边，似乎在整理衣物或准备离开。</pre><label>要点一得分<select name="R14.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R14.B.q1"></textarea></label><label>要点二得分<select name="R14.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R14.B.q2"></textarea></label><label>触发关键反例<select name="R14.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R14.B.reason"></textarea></label></fieldset></details></article>
+<article id="R15"><h2>R15 人在洗衣机旁先后查看了哪两样手持物件？按出现顺序说。</h2><figure><video controls preload="none" src="media/clip-06.mp4"></video><figcaption>原片</figcaption></figure><label for="R15-note">我的画面观察或时间（选填）</label><textarea id="R15-note" name="R15.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>先查看红橙色封面的小册子或书本</li><li>随后拿起或打开浅色笔记本电脑看屏幕</li></ul><p><strong>可接受表述</strong> 本子、书、笔记本电脑均按物件类别计；颜色可省略</p><p><strong>关键反例</strong> 说成先看电脑再拿书</p><fieldset><legend>回答 A</legend><pre data-answer="R15.A">首先，人拿着一个橙色的物体，随后又拿着一个白色的物体。所以，按出现顺序说，人先拿着橙色的物体，</pre><label>要点一得分<select name="R15.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R15.A.q1"></textarea></label><label>要点二得分<select name="R15.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R15.A.q2"></textarea></label><label>触发关键反例<select name="R15.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R15.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R15.B">根据视频内容，人在洗衣机旁先后查看了以下两样手持物件：
+
+1.  **一个红绿相间的盒子/包装**（约在</pre><label>要点一得分<select name="R15.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R15.B.q1"></textarea></label><label>要点二得分<select name="R15.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R15.B.q2"></textarea></label><label>触发关键反例<select name="R15.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R15.B.reason"></textarea></label></fieldset></details></article>
+<article id="R16"><h2>R16 用一句话说说，这个人在厨房先清理了哪里，随后又去打开了什么？</h2><figure><video controls preload="none" src="media/clip-01.mp4"></video><figcaption>原片</figcaption></figure><label for="R16-note">我的画面观察或时间（选填）</label><textarea id="R16-note" name="R16.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>用手或布来回擦炉灶表面</li><li>随后走到冰箱处并打开冰箱门</li></ul><p><strong>可接受表述</strong> 擦灶台、擦炉面均可；只说在打扫厨房仅覆盖场景</p><p><strong>关键反例</strong> 说成先开冰箱再擦炉台</p><fieldset><legend>回答 A</legend><pre data-answer="R16.A">这个人在厨房先清理了炉灶台面，随后又去打开了微波炉。</pre><label>要点一得分<select name="R16.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R16.A.q1"></textarea></label><label>要点二得分<select name="R16.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R16.A.q2"></textarea></label><label>触发关键反例<select name="R16.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R16.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R16.B">这个人在厨房先清理了灶台，随后又去打开了微波炉。</pre><label>要点一得分<select name="R16.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R16.B.q1"></textarea></label><label>要点二得分<select name="R16.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R16.B.q2"></textarea></label><label>触发关键反例<select name="R16.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R16.B.reason"></textarea></label></fieldset></details></article>
+<article id="R17"><h2>R17 想用两句话概括这段游客动线：开头的人在哪里走动，后半段队伍在哪里形成？</h2><figure><video controls preload="none" src="media/clip-12.mp4"></video><figcaption>原片</figcaption></figure><label for="R17-note">我的画面观察或时间（选填）</label><textarea id="R17-note" name="R17.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>开头人在有屋顶的入口或访客区小亭、指示牌附近走动</li><li>后来镜头转到路边的候车点，游客沿隔离绳排队</li></ul><p><strong>可接受表述</strong> 无需读出地点或搭乘线路；两个镜头不保证是同一批人</p><p><strong>关键反例</strong> 断言追踪到了某个游客上车或出发</p><fieldset><legend>回答 A</legend><pre data-answer="R17.A">开头的人在入口处的木质亭子前走动，后半段队伍在指示牌旁及路边形成。</pre><label>要点一得分<select name="R17.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R17.A.q1"></textarea></label><label>要点二得分<select name="R17.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R17.A.q2"></textarea></label><label>触发关键反例<select name="R17.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R17.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R17.B">开头的人在入口站附近走动，后半段队伍在游客中心门口形成。</pre><label>要点一得分<select name="R17.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R17.B.q1"></textarea></label><label>要点二得分<select name="R17.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R17.B.q2"></textarea></label><label>触发关键反例<select name="R17.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R17.B.reason"></textarea></label></fieldset></details></article>
+<article id="R18"><h2>R18 桌边接水和摆弄纸箱哪个先发生？两件事发生时，人的姿势分别怎样？</h2><figure><video controls preload="none" src="media/clip-08.mp4"></video><figcaption>原片</figcaption></figure><label for="R18-note">我的画面观察或时间（选填）</label><textarea id="R18-note" name="R18.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>先坐着或俯身用杯子接水</li><li>后来站在桌边打开或整理纸箱</li></ul><p><strong>可接受表述</strong> 不要求说出箱内物品</p><p><strong>关键反例</strong> 把两件事的先后或坐站关系说反</p><fieldset><legend>回答 A</legend><pre data-answer="R18.A">先发生的是桌边接水。此时，人站在桌边，身体前倾，双手拿着杯子，正准备接水。随后，人坐在</pre><label>要点一得分<select name="R18.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R18.A.q1"></textarea></label><label>要点二得分<select name="R18.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R18.A.q2"></textarea></label><label>触发关键反例<select name="R18.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R18.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R18.B">桌边接水先发生。
+
+在接水时，人坐在白色塑料椅上，身体前倾，双手伸向地上的大桶，正在从</pre><label>要点一得分<select name="R18.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R18.B.q1"></textarea></label><label>要点二得分<select name="R18.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R18.B.q2"></textarea></label><label>触发关键反例<select name="R18.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R18.B.reason"></textarea></label></fieldset></details></article>
+<article id="R19"><h2>R19 厨房里的猫出现在什么位置？当时人离它有多近？</h2><figure><video controls preload="none" src="media/clip-04.mp4"></video><figcaption>原片</figcaption></figure><label for="R19-note">我的画面观察或时间（选填）</label><textarea id="R19-note" name="R19.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>猫站在画面右侧的桌面或台面上</li><li>人就站在桌边，俯身或把手伸到猫旁边</li></ul><p><strong>可接受表述</strong> 不用识别猫的品种、食物或性别</p><p><strong>关键反例</strong> 说猫一直在地板上</p><fieldset><legend>回答 A</legend><pre data-answer="R19.A">根据视频内容，猫出现在厨房的左侧区域，靠近一个深色橱柜和白色炉灶的下方。在视频开始时（约00:00</pre><label>要点一得分<select name="R19.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R19.A.q1"></textarea></label><label>要点二得分<select name="R19.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R19.A.q2"></textarea></label><label>触发关键反例<select name="R19.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R19.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R19.B">厨房里的猫在冰箱旁边。人站在冰箱前，离猫大约有1米的距离。</pre><label>要点一得分<select name="R19.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R19.B.q1"></textarea></label><label>要点二得分<select name="R19.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R19.B.q2"></textarea></label><label>触发关键反例<select name="R19.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R19.B.reason"></textarea></label></fieldset></details></article>
+<article id="R20"><h2>R20 想剪一个能同时看清划艇人、船身和白浪的瞬间，应该找哪一段？请描述你会找的画面。</h2><figure><video controls preload="none" src="media/clip-10.mp4"></video><figcaption>原片</figcaption></figure><label for="R20-note">我的画面观察或时间（选填）</label><textarea id="R20-note" name="R20.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>给出约 9–12 秒或中后段艇从浪中露出的时段</li><li>能看到橙红船身及艇上的人，周围有明显白浪</li></ul><p><strong>可接受表述</strong> 不强制精确秒数；若给其他时刻，复看片段能清楚看到三者也可接受</p><p><strong>关键反例</strong> 推荐片尾仅剩河水而船已出画的镜头</p><fieldset><legend>回答 A</legend><pre data-answer="R20.A">为了捕捉一个能同时看清划艇人、船身和白浪的瞬间，我建议选择视频中划艇人正从激流中穿</pre><label>要点一得分<select name="R20.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R20.A.q1"></textarea></label><label>要点二得分<select name="R20.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R20.A.q2"></textarea></label><label>触发关键反例<select name="R20.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R20.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R20.B">我会选择 **00:08 到 00:10** 这一时间段。
+
+**画面描述：**
+在这个时间段内，画面</pre><label>要点一得分<select name="R20.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R20.B.q1"></textarea></label><label>要点二得分<select name="R20.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R20.B.q2"></textarea></label><label>触发关键反例<select name="R20.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R20.B.reason"></textarea></label></fieldset></details></article>
+<article id="R21"><h2>R21 客厅里两个人各在做什么？按他们所在的位置讲清楚。</h2><figure><video controls preload="none" src="media/clip-07.mp4"></video><figcaption>原片</figcaption></figure><label for="R21-note">我的画面观察或时间（选填）</label><textarea id="R21-note" name="R21.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>沙发上的人拿起、展开或整理一块布或衣物</li><li>另一人在茶几和地毯旁，操作或摆弄有软管的吸尘器</li></ul><p><strong>可接受表述</strong> 衣服、毯子、布料都可；无需描述吃东西</p><p><strong>关键反例</strong> 把两个人的位置和动作互换</p><fieldset><legend>回答 A</legend><pre data-answer="R21.A">在客厅里，一位男士坐在沙发的左侧，他正拿着一个白色的杯子，似乎在喝水或喝饮料。他穿着一件绿色的外套，</pre><label>要点一得分<select name="R21.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R21.A.q1"></textarea></label><label>要点二得分<select name="R21.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R21.A.q2"></textarea></label><label>触发关键反例<select name="R21.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R21.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R21.B">在客厅里，有两个人分别处于不同的位置：
+
+1.  **坐在沙发上的男子**：他位于画面左侧的沙发上，身体靠在沙发上</pre><label>要点一得分<select name="R21.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R21.B.q1"></textarea></label><label>要点二得分<select name="R21.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R21.B.q2"></textarea></label><label>触发关键反例<select name="R21.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R21.B.reason"></textarea></label></fieldset></details></article>
+<article id="R22"><h2>R22 我想从原片截一张能看清动物毛发的特写。这段拍得够近吗？为什么？</h2><figure><video controls preload="none" src="media/clip-09.mp4"></video><figcaption>原片</figcaption></figure><label for="R22-note">我的画面观察或时间（选填）</label><textarea id="R22-note" name="R22.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>没有近到能清楚看见动物毛发</li><li>动物在开阔河谷里只占很小一部分画面，镜头保持远景</li></ul><p><strong>可接受表述</strong> 不要求判断动物种类或否定它在移动</p><p><strong>关键反例</strong> 称画面清楚呈现具体毛发纹理</p><fieldset><legend>回答 A</legend><pre data-answer="R22.A">不，这个镜头的清晰度并不足以看清动物的毛发。因为镜头距离太远，导致图像模糊，无法看清细节。此外，由于</pre><label>要点一得分<select name="R22.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R22.A.q1"></textarea></label><label>要点二得分<select name="R22.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R22.A.q2"></textarea></label><label>触发关键反例<select name="R22.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R22.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R22.B">这段拍得不够近。
+
+从视频画面来看，镜头距离较远，呈现的是广阔的草原、河流和远处的山脉全景。画面中虽然隐约</pre><label>要点一得分<select name="R22.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R22.B.q1"></textarea></label><label>要点二得分<select name="R22.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R22.B.q2"></textarea></label><label>触发关键反例<select name="R22.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R22.B.reason"></textarea></label></fieldset></details></article>
+<article id="R23"><h2>R23 能从这段看出这个人起床后要去哪儿吗？最后能确定的动作是什么？</h2><figure><video controls preload="none" src="media/clip-03.mp4"></video><figcaption>原片</figcaption></figure><label for="R23-note">我的画面观察或时间（选填）</label><textarea id="R23-note" name="R23.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>目的地无法从画面确定</li><li>最后仍坐在床边，曾弯身到脚边或整理鞋子</li></ul><p><strong>可接受表述</strong> 没有交代去哪里，同时给出床边动作可得满分</p><p><strong>关键反例</strong> 断言去上班、上学或某个具体地点</p><fieldset><legend>回答 A</legend><pre data-answer="R23.A">根据视频内容，这个人起床后并没有明确展示去某个特定地点（如卫生间或房间），而是直接坐在床边，随后弯腰并靠近床边的一个</pre><label>要点一得分<select name="R23.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R23.A.q1"></textarea></label><label>要点二得分<select name="R23.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R23.A.q2"></textarea></label><label>触发关键反例<select name="R23.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R23.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R23.B">根据视频内容，这个人起床后可能要去上学或上班。最后能确定的动作是坐在床上。</pre><label>要点一得分<select name="R23.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R23.B.q1"></textarea></label><label>要点二得分<select name="R23.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R23.B.q2"></textarea></label><label>触发关键反例<select name="R23.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R23.B.reason"></textarea></label></fieldset></details></article>
+<article id="R24"><h2>R24 帮我给这段风景配一句相册说明，让人知道近处和远处各能看到什么。</h2><figure><video controls preload="none" src="media/clip-09.mp4"></video><figcaption>原片</figcaption></figure><label for="R24-note">我的画面观察或时间（选填）</label><textarea id="R24-note" name="R24.note" placeholder="可选的个人观看笔记"></textarea><details><summary>查看要点与匿名回答</summary><p><strong>评分要点</strong></p><ul><li>近处有弯曲的河道或水流，穿过开阔草地</li><li>远处是层叠山岭或山脉</li></ul><p><strong>可接受表述</strong> 可补充草地上有很小的动物轮廓；无需认出物种或地点</p><p><strong>关键反例</strong> 把远处描述成楼群或把场景说成海滩</p><fieldset><legend>回答 A</legend><pre data-answer="R24.A">近处是蜿蜒的河流与翠绿的草地，远处则是连绵的群山与稀疏的树木，构成一幅宁静辽阔的草原画卷。</pre><label>要点一得分<select name="R24.A.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R24.A.q1"></textarea></label><label>要点二得分<select name="R24.A.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R24.A.q2"></textarea></label><label>触发关键反例<select name="R24.A.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R24.A.reason"></textarea></label></fieldset><fieldset><legend>回答 B</legend><pre data-answer="R24.B">这是一幅宁静的自然风光，近处是一条蜿蜒的河流，河水清澈，岸边长满了青草，远处的山峦在薄</pre><label>要点一得分<select name="R24.B.p1"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点一原文引文<textarea name="R24.B.q1"></textarea></label><label>要点二得分<select name="R24.B.p2"><option value="">未评</option><option value="0">0</option><option value="1">1</option></select></label><label>要点二原文引文<textarea name="R24.B.q2"></textarea></label><label>触发关键反例<select name="R24.B.veto"><option value="">未评</option><option value="yes">是</option><option value="no">否</option></select></label><label>反例理由<textarea name="R24.B.reason"></textarea></label></fieldset></details></article>
+  </form>
+  <p><a href="#tools">返回保存与导出</a></p>
+
+
+</main>
+
+<script>
+  document.getElementById('jump').addEventListener('change', function() {
+    const target = this.value;
+    if (target) {
+      document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  // Placeholder for actions script
+  (function () {
+  const form = document.getElementById('review');
+  const status = document.getElementById('status');
+  const restoreInput = document.getElementById('restore');
+  const draftBtn = document.getElementById('draft');
+  const finalBtn = document.getElementById('final');
+
+  const fieldNames = Array.from(form.elements, control => control.name).filter(Boolean);
+
+  const answerElements = document.querySelectorAll('pre[data-answer]');
+  const answers = {};
+  answerElements.forEach(el => {
+    const key = el.dataset.answer;
+    answers[key] = el.textContent;
+  });
+
+  function validateDate(dateStr) {
+    if (!dateStr) return true;
+    if (!/^(?!0000)\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+    const date = new Date(dateStr);
+    return !isNaN(date.getTime()) && date.toISOString().split('T')[0] === dateStr;
+  }
+
+  function validateField(name, value) {
+    const field = form.elements.namedItem(name);
+    if (!field || field.type === 'hidden') return null;
+
+    if (name === 'reviewer') {
+      if (!value.trim()) return '请填写评阅人姓名或代号';
+      return null;
+    }
+
+    if (name === 'date') {
+      if (!value) return '请填写评阅日期';
+      if (!validateDate(value)) return '请检查日期';
+      return null;
+    }
+
+    if (name.endsWith('.p1') || name.endsWith('.p2')) {
+      if (value !== '0' && value !== '1') return `${name} 请选择 0 或 1`;
+      return null;
+    }
+
+    if (name.endsWith('.veto')) {
+      if (value !== 'yes' && value !== 'no') return `${name} 请选择是否触发反例`;
+      return null;
+    }
+
+    if (name.endsWith('.q1') || name.endsWith('.q2')) {
+      const scoreName = name.replace(/\.q\d$/, '.p' + name.slice(-1));
+      const scoreField = form.elements.namedItem(scoreName);
+      if (!scoreField) return `${name}缺少对应分数`;
+
+      const scoreValue = scoreField.value;
+      if (scoreValue === '1') {
+        if (!value.trim()) return `${name}引用不能为空`;
+        const answerKey = name.slice(0, -3);
+        if (!answers[answerKey] || !answers[answerKey].includes(value.trim())) return `${name} 引文须逐字来自这份回答`;
+      }
+      return null;
+    }
+
+    if (name.endsWith('.reason')) {
+      const vetoName = name.replace(/\.reason$/, '.veto');
+      const vetoField = form.elements.namedItem(vetoName);
+      if (vetoField && vetoField.value === 'yes' && (!value || !value.trim())) return `${name}不能为空`;
+      return null;
+    }
+
+    return null;
+  }
+
+  function validateAllFields() {
+    for (const name of fieldNames) {
+      const el = form.querySelector(`[name="${name}"]`);
+      if (!el) continue;
+      const value = el.type === 'textarea' ? el.value : el.value;
+      const error = validateField(name, value);
+      if (error) {
+        const details = el.closest('details');
+        if (details && !details.open) details.open = true;
+        el.focus();
+        el.setCustomValidity(error);
+        el.reportValidity();
+        el.setCustomValidity("");
+        status.textContent = error;
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function collectFields() {
+    const data = {};
+    for (const name of fieldNames) {
+      const el = form.querySelector(`[name="${name}"]`);
+      if (!el) continue;
+      if (el.type === 'textarea') {
+        data[name] = el.value;
+      } else if (el.tagName === 'SELECT') {
+        data[name] = el.value;
+      } else {
+        data[name] = el.value;
+      }
+    }
+    return data;
+  }
+
+  function saveAsBlob(data, filename) {
+    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
+  }
+
+  function exportDraft() {
+    const fields = collectFields();
+    const data = { version: 1, packetId: form.dataset.packet, kind: 'draft', fields };
+    saveAsBlob(data, `draft-${form.dataset.packet.slice(0,10)}-${Date.now()}.json`);
+    status.textContent = '草稿已保存';
+  }
+
+  function exportFinal() {
+    if (!validateAllFields()) return;
+    const fields = collectFields();
+    const data = { version: 1, packetId: form.dataset.packet, kind: 'final', fields };
+    saveAsBlob(data, `final-${form.dataset.packet.slice(0,10)}-${Date.now()}.json`);
+    status.textContent = '最终评分已保存';
+  }
+
+  async function importFile(file) {
+    try {
+      const data = JSON.parse(await file.text());
+      if (data.version !== 1 || data.packetId !== form.dataset.packet || !['draft', 'final'].includes(data.kind)) {
+        status.textContent = '数据格式不正确';
+        return;
+      }
+
+      const fields = data.fields;
+      if (Object.keys(fields).length !== fieldNames.length || !fieldNames.every(name => Object.hasOwn(fields, name))) {
+        status.textContent = '字段不匹配';
+        return;
+      }
+
+      for (const name of fieldNames) {
+        const value = fields[name];
+        if (typeof value !== 'string') {
+          status.textContent = '字段值类型错误';
+          return;
+        }
+
+        const control = form[name];
+        if (control.tagName === 'SELECT') {
+          const optionExists = Array.from(control.options).some(option => option.value === value);
+          if (!optionExists && !(value === '' && data.kind === 'draft')) {
+            status.textContent = '选择值不存在';
+            return;
+          }
+        } else if (name === 'date' && value !== '') {
+          if (!validateDate(value)) {
+            status.textContent = '日期格式错误';
+            return;
+          }
+        }
+      }
+
+      for (const name of fieldNames) {
+        const control = form[name];
+        if (control.value !== '') {
+          if (!confirm('检测到已有数据，确认覆盖？')) {
+            return;
+          }
+          break;
+        }
+      }
+
+      for (const name of fieldNames) {
+        const control = form[name];
+        const value = fields[name];
+        control.value = value;
+      }
+
+      status.textContent = '导入成功';
+    } catch (error) {
+      status.textContent = '文件解析错误';
+    }
+  }
+
+  function resetFileInput() {
+    restoreInput.value = '';
+  }
+
+  draftBtn.addEventListener('click', exportDraft);
+  finalBtn.addEventListener('click', exportFinal);
+  restoreInput.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) {
+      importFile(e.target.files[0]);
+      resetFileInput();
+    }
+  });
+})();
+
+</script>
+
+</body>
+</html>
