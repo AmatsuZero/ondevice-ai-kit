@@ -109,7 +109,7 @@ actor WeMMVideoBackend: MultimodalVideoGenerationBackend {
                 guard let finalData = callbacks.finalData else {
                     throw KitError.backend("video generation failed")
                 }
-                return String(decoding: finalData, as: UTF8.self)
+                return weMMVideoFinalText(finalData, reachedTokenLimit: callbacks.generatedTokens == request.maxOutputTokens)
             }
 
             try Task.checkCancellation()
@@ -180,6 +180,7 @@ actor WeMMVideoBackend: MultimodalVideoGenerationBackend {
 @available(iOS 16.0, macOS 13.0, *)
 private final class WeMMVideoCallbackContext {
     let update: (@Sendable (MultimodalTextUpdate) -> Void)?
+    var generatedTokens = 0
     var lastOrdinal = -1
     var finalData: Data?
     var callbackFailed = false
@@ -205,6 +206,7 @@ private func weMMVideoCheckpoint(
         context.callbackFailed = true
         return 1
     }
+    context.generatedTokens = Int(generated)
     guard length > 0 else { return 0 }
     guard let bytes else {
         context.callbackFailed = true

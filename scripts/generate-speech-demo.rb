@@ -79,7 +79,7 @@ if mlx_demo
 end
 if wemm_video_demo
   sources += ['demo/iosApp/WeMMVideoModel.swift', 'demo/iosApp/WeMMVideoBackend.swift',
-              'demo/iosApp/WeMMVideoDemoHost.swift',
+              'demo/iosApp/WeMMVideoText.swift', 'demo/iosApp/WeMMVideoDemoHost.swift',
               'demo/iosApp/PlaybackEnhancementHost.swift', 'demo/iosApp/PlaybackEnhancementMetalRenderer.swift',
               'demo/iosApp/PlaybackEnhancementSR.swift', 'demo/iosApp/PlaybackEnhancementSystemSR.swift',
               'demo/iosApp/PlaybackFrameChoice.swift', 'demo/iosApp/PlaybackEnhancementShaders.metal',

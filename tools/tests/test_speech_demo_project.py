@@ -21,7 +21,7 @@ MLX_SOURCES = ["demo/iosApp/MultimodalHostPreparation.swift", "demo/iosApp/Multi
 VALIDATION_SOURCES = ["probes/ios-multimodal-demo/AppAccessibility.swift", "probes/ios-multimodal-demo/AppBackgroundObservation.swift", "probes/ios-multimodal-demo/MultimodalDemoValidation.swift", "probes/ios-multimodal-demo/MultimodalDemoActiveValidation.swift", "probes/ios-multimodal-demo/MultimodalDemoBackgroundValidation.swift"]
 
 MULTIMODAL_SOURCES = ["demo/iosApp/MultimodalHost.swift", "demo/iosApp/MultimodalInputStore.swift", "demo/iosApp/MultimodalFilePicker.swift", "kmp-binding/apple/IOSMultimodalBridge.swift", "kmp-binding/apple/IOSMultimodalInput.swift", "demo/iosApp/WeMMVideoPreparation.swift"]
-WEMM_SOURCES = ["demo/iosApp/WeMMVideoModel.swift", "demo/iosApp/WeMMVideoBackend.swift", "demo/iosApp/WeMMVideoDemoHost.swift",
+WEMM_SOURCES = ["demo/iosApp/WeMMVideoModel.swift", "demo/iosApp/WeMMVideoBackend.swift", "demo/iosApp/WeMMVideoText.swift", "demo/iosApp/WeMMVideoDemoHost.swift",
                 "demo/iosApp/PlaybackEnhancementHost.swift", "demo/iosApp/PlaybackEnhancementMetalRenderer.swift",
                 "demo/iosApp/PlaybackEnhancementSR.swift", "demo/iosApp/PlaybackEnhancementSystemSR.swift",
                 "demo/iosApp/PlaybackFrameChoice.swift", "demo/iosApp/PlaybackEnhancementShaders.metal",
@@ -384,6 +384,13 @@ puts JSON.generate({sources: t.source_build_phase.files.map { |f| f.file_ref.rea
                 self.assertEqual(fixture_source in ui["sources"], has_fixture)
                 self.assertNotIn(fixture_source, app["sources"])
                 self.assertNotIn("INFOPLIST_FILE", ui["settings"])
+
+    @unittest.skipUnless(shutil.which("swiftc"), "Swift compiler required")
+    def testWemmFinalTextAtTokenBoundaries(self):
+        executable = self.root / "WeMMVideoTextChecks"
+        subprocess.run(["swiftc", ROOT / "demo/iosApp/WeMMVideoText.swift",
+                        ROOT / "tools/tests/WeMMVideoTextChecks.swift", "-o", executable], check=True)
+        subprocess.run([executable], check=True)
 
     def testWemmOptInRequiresBothNativeSlicesAndAddsNativeModelAndNotices(self):
         rejected = self.generate(wemm=True)
