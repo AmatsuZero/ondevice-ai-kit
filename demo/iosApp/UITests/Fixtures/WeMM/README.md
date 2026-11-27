@@ -8,6 +8,8 @@
 | `w6-yuv-clip-02.mp4` | 先蓝后红，问题相同，回答顺序也要反转 |
 | `w6-clip-01.mp4` | 只保留首片的 32 字节 `ftyp` 容器头，选择后生成应显示解码失败并允许重新选片 |
 
+从 Files 选视频时，Demo 接受的单文件上限为 **32 MiB（33,554,432 字节，含上限）**。选择较大的原片时，可先导出要提问的片段再选择。限制发生在复制选中文件时，早于视频解码和模型推理。[原片与边界验证](../../../../../docs/validation/w6-video-temporal-coverage-20261127.md#从-demo-选片时的文件大小上限)
+
 ## 构建
 
 从仓库根目录运行。先按 [W6 原生库构建说明](../../../../../README.md) 准备 `w6_build` 中的静态 XCFramework、NOTICE 和两套 KMP framework。设置 `DEVICE_ID` 为目标 iPhone 的 Xcode destination ID，`ODAI_DEVELOPMENT_TEAM` 为已有签名团队，`WEMM_WEIGHTS` 为仅含固定版本 `language.gguf` 和 `mmproj.gguf` 的本地目录。示例用新的输出目录，保留每次测试结果。
