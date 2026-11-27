@@ -1,0 +1,52 @@
+{
+  "demoSourceCommit": "883d7f29d68794d9a634b561fbb28a93be3e5da0",
+  "demoBuild": {
+    "wemmVideo": true,
+    "uiFixtures": true,
+    "voiceEffectsDemo": false
+  },
+  "simulator": {
+    "device": "iPhone 16 Pro Max",
+    "os": "iOS 27.2",
+    "phases": {
+      "empty": {
+        "tests": [
+          "testMissingModelAndPickerCancellation"
+        ],
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      "import": {
+        "tests": [
+          "testImportModelFolderAndRestore"
+        ],
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      "movies": {
+        "tests": [
+          "testRealMovieAnswer",
+          "testCancelAfterVisibleTextAndAskAgain",
+          "testLeavingDuringGenerationCancelsAndRestoresInput",
+          "testUndecodableMovieReportsInputFailure"
+        ],
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "physicalBuild": {
+    "installedInThisRun": false,
+    "signaturesVerified": [
+      "app",
+      "uiTestRunner",
+      "uiTestBundle"
+    ],
+    "appExecutableSHA256": "0f8091d5ec61b1c908258c1fca14dcaf9fe779cb4d19daff65c5033a06591e63",
+    "testSourceSHA256": "4a1ac038455295bd233019fb9bfd83815ee154fff5393a01e4b6b0e70cdcbd64",
+    "xctestrunSHA256": "314662a806c4fd18074251a893b04c39cd54263686a1a749ce55226c8acf023f"
+  }
+}

@@ -18,6 +18,8 @@ python3 demo/iosApp/UITests/Fixtures/WeMM/power/capture.py \
 
 在第二个终端，将 `POWER_RUN` 设为刚才输出的目录。根据本次要测的范围，选择下面一组命令。采集器从目标测试的启动日志定位 W6 Fixtures 并向其当前 PID 附加。若开始附加时首个「生成」已经发生，采集器会记录错误并退出。
 
+若出现 `Cannot find process for provided pid`，保留本轮的 `binding.json` 和退出日志，用 XCTest 会话日志核对该 PID 在附加时是否仍在前台。普通 Demo 和 W6 夹具都可能使用可执行名 `SpeechDemo`，仅凭名称无法区分同时运行的实例。[iPhone 无线附加记录](../../../../../../docs/roadmap/W8-resources.md#拔线后的两次短答)
+
 ### 四项影片页面用例
 
 ```sh
