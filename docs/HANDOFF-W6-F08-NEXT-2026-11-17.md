@@ -1,4 +1,14 @@
-## 当前交接已暂停：2026-11-17 用户调整本周范围
+## 2026-11-27 从主干接续 W6 验收
+
+统一 iOS Demo 的 WeMM 视频问答已合入主干，按需构建。真机已验证模型导入与恢复、时序问答、取消及损坏视频提示。继续验收时从主干构建，使用独立 App「W6 Fixtures」。[构建及六项页面用例](../demo/iosApp/UITests/Fixtures/WeMM/README.md)
+
+| 剩余项目 | 现有证据 | 下一步 |
+| --- | --- | --- |
+| 开放问答质量 | Mac v1.1 的 12 段视频、24 道原题已有逐项评分和模型复评，原画面配原提示全部复现。 | 两位评阅者独立查看原片，评阅 48 份匿名原答并核对分歧。[逐题结果](validation/w6-video-open-qa-v1.1.md) |
+| iPhone 资源 | USB 真机测过一次预热后短答的进程峰值与页面耗时；模拟器已跑通连续六次流程。 | 在可用屏幕时段用同一页面交替问答六次，核对六组进程内存、计时和热状态记录。长视频和电池供电下的整机能耗另测。[测量范围](roadmap/W8-resources.md) · [连续六次用例](../demo/iosApp/UITests/Fixtures/WeMM/README.md#在同一页面连续测六次短答) |
+| 产品采用 | 五分钟影片只均匀取八帧，已有明确时段的短事件落在帧间而漏答。 | 确认整片问答、用户选时间段或自动寻找短事件的优先级，再确定相应质量门槛和资源预算。[采样实验](validation/w6-video-temporal-coverage-20261127.md) |
+
+## 2026-11-17 当周暂停记录
 
 **不再按本页旧“下一会话继续W6”派发。** W6视频理解paused/deferred，保留全部模型/代码/证据，不运行新旧质量集、训练、parity、下载或手机实验。主线改为[本周新交接](HANDOFF-2026-11-17-weekly-delivery.md)、[W9变声](roadmap/W9-voice-effects.md)和[并行计划](superpowers/plans/2026-11-17-weekly-delivery-voice-effects.md)。原W6未通过事实不改绿，本周不承诺通用视频理解。
 
