@@ -1,6 +1,6 @@
 ## W6 视频理解（2026-11-27）
 
-W6 已恢复评估。统一 iOS Demo 已按需接入 WeMM-Video-2B，iPhone 16 Pro Max 的六项页面功能测试已通过。同页连续六次短答的真机进程内存和耗时已采集。当前接续项是 v1.1 开放问答的独立人工复标、长视频的真机资源测量、整机耗电，以及产品采用范围和质量、资源门槛的裁定。[W6 专项状态](roadmap/W6-video-understanding.md) · [W6 验收交接](HANDOFF-W6-F08-NEXT-2026-11-17.md)
+统一 iOS Demo 保留 WeMM-Video-2B 视频问答实验入口，默认关闭。正式质量门槛和 iPhone 资源预算尚未设定。iPhone 16 Pro Max 首轮 USB 验收通过六项页面测试，连续六次短答和五分钟影片的页面耗时及进程内存均已采集。剩余验收为 v1.1 开放问答的双人独立复标、无线离页取消复验和电池供电下的整机耗电实测。[W6 专项状态](roadmap/W6-video-understanding.md) · [W6 验收交接](HANDOFF-W6-F08-NEXT-2026-11-17.md)
 
 ## W9 当周增量（2026-11-17）
 
