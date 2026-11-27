@@ -1,0 +1,1005 @@
+{
+  "dataset": "W6 生活短视频开放问答 v1.1",
+  "design": "Mac；同一模型贪心生成。12 段原视频，每段两题，四组各 24 次。灰画面用同尺寸纯灰 RGB(128,128,128) 替换每帧。原始八帧、时间点及原提示已逐题对照首次输入备查记录。",
+  "mainCommit": "a60440af15d0152b29959311e2e4c4fb18c012c4",
+  "model": {
+    "modelId": "tencent/WeMM-Video-2B-GGUF",
+    "modelRevision": "395e99f987a73915273943d4510e23004df7cede",
+    "backend": "llama.wemm-video-2b",
+    "runtimeRevision": "llama.cpp-88aaf325a7026ac1127d0897394b0a3d6413dc2a-wemm-mixed-prefill-microbatch-128-v1"
+  },
+  "framesPerCase": 8,
+  "maxNewTokens": 32,
+  "suffix": "\n只根据画面回答。若画面没有足够线索回答所问事实，请直接说明无法判断。",
+  "scoring": "主代理按冻结判据逐题复核。每题两个要点，匹配引文各得一分，触发关键反例时整题为零。灰画面的两个引文字段分别标记凭空给出的事实、明确说明缺乏所问事实的证据。两个字段独立，空值表示该项未计入。",
+  "grayBorderlines": [
+    "04a 原提示明确断言猫在左侧，「无法准确判断猫的具体」截断，未明确是哪件事无法判断，后项未计。",
+    "09b 原提示断言拍摄距离不够近，不能辨认毛发是它给出的结论，未承认距离无从判断。",
+    "10b 原提示给出从零秒开始的剪辑建议，终点截断。",
+    "09a 加提示把均匀灰面描述为有近处平面和远处风景，按空间关系计。"
+  ],
+  "frozenProtocolSHA256": "88d3f4b3d652ec71a5021c0a0e0054de7140e1c7593bb95ea4c812445503ca16",
+  "rubricSHA256": "38a6835186c231832bea9391211e3cd39b08e6d97cc3cb60b28c7d2fe0f0f5b6",
+  "inputReceiptDigest": {
+    "real-original": "5ad27e24ab63c76c525e4f22af80f8f61b3fa8ce284253314be8fc2ef2741b79",
+    "gray-guard": "6d98d396322d97ac5a5509487779339cbe24b1f2ec74e1333d5298acd05de0d3",
+    "gray-original": "561e521fa443ea1c233cc9933f0df301487d4cd736406ae9c9a628057f0f01e4",
+    "real-guard": "d27527e6eed2a1bd66e1e8c991d677c0dcb5355b2d6356ad584fade2f34554ac"
+  },
+  "summary": {
+    "answerable": {
+      "cases": 20,
+      "original": 20,
+      "guard": 21,
+      "improved": 3,
+      "unchanged": 14,
+      "declined": 3
+    },
+    "insufficient": {
+      "cases": 4,
+      "original": 6,
+      "guard": 5,
+      "improved": 1,
+      "unchanged": 2,
+      "declined": 1
+    },
+    "unsupportedQuote": {
+      "original": 18,
+      "guard": 5,
+      "both": 5,
+      "onlyOriginal": 13,
+      "onlyGuard": 0,
+      "neither": 6
+    },
+    "insufficientEvidenceQuote": {
+      "original": 7,
+      "guard": 22,
+      "both": 7,
+      "onlyOriginal": 0,
+      "onlyGuard": 15,
+      "neither": 2
+    },
+    "bothFlagsWithinArm": {
+      "grayOriginal": 1,
+      "grayGuard": 3
+    }
+  },
+  "cases": [
+    {
+      "id": "w6-open-01a",
+      "question": "用一句话说说，这个人在厨房先清理了哪里，随后又去打开了什么？",
+      "group": "answerable",
+      "points": [
+        "用手或布来回擦炉灶表面",
+        "随后走到冰箱处并打开冰箱门"
+      ],
+      "criticalContradiction": "说成先开冰箱再擦炉台",
+      "realOriginal": {
+        "answer": "这个人在厨房先清理了炉灶台面，随后又去打开了微波炉。",
+        "pointQuotes": [
+          "先清理了炉灶台面",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "这个人在厨房先清理了炉灶，随后又去打开了微波炉。",
+        "pointQuotes": [
+          "先清理了炉灶",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "打开的物件答成微波炉，步骤未颠倒。"
+      },
+      "grayOriginal": {
+        "answer": "这个人在厨房先清理了灶台，随后又去打开了水龙头。",
+        "unsupportedQuote": "先清理了灶台，随后又去打开了水龙头",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "根据画面无法判断。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-01b",
+      "question": "我想找到刚擦过的地方。它在微波炉和烤箱门的什么位置？",
+      "group": "answerable",
+      "points": [
+        "擦过的位置在微波炉的下方",
+        "擦过的位置在烤箱门的上方"
+      ],
+      "criticalContradiction": "把擦拭面说成微波炉里面或烤箱门内侧",
+      "realOriginal": {
+        "answer": "根据视频内容，刚擦过的地方位于**烤箱的顶部（炉灶台面）**。\n\n具体来说，在视频的前半部分（约00:",
+        "pointQuotes": [
+          null,
+          "烤箱的顶部（炉灶台面）"
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "根据画面，刚擦过的地方位于烤箱的顶部表面（即炉灶台面），该区域紧邻微波炉的下方。",
+        "pointQuotes": [
+          "紧邻微波炉的下方",
+          "烤箱的顶部表面（即炉灶台面）"
+        ],
+        "veto": false,
+        "score": 2,
+        "reason": "两个参照物的上下关系都明确。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，刚擦过的地方位于微波炉和烤箱门的**右侧**（或**右边**）。\n\n在视频大约00:02到",
+        "unsupportedQuote": "位于微波炉和烤箱门的**右侧**",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "无法判断",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-02a",
+      "question": "那个深色收纳箱原来放在哪里？人是怎么把它拿下来的？",
+      "group": "answerable",
+      "points": [
+        "在储物间较高的架子上，位于画面右侧",
+        "人伸手举过头顶，托住箱子向下取"
+      ],
+      "criticalContradiction": "说成从地板或低层捡起",
+      "realOriginal": {
+        "answer": "根据视频内容，那个深色收纳箱原来放在衣柜的上方（或顶层货架上）。\n\n人是通过从衣柜内部伸手拿取，将其从上方",
+        "pointQuotes": [
+          "放在衣柜的上方（或顶层货架上）",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "根据画面，深色收纳箱原来放在衣柜上方的架子上。人是从上方伸手将其拿下来的。",
+        "pointQuotes": [
+          "放在衣柜上方的架子上",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "沿用 64-token 复核口径，只说从上方伸手拿下，未描述举过头顶托住箱子。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，深色收纳箱原本放在一个灰色的背景（或灰色平面）上。人通过用手将其从该平面上拿起，从而将其拿",
+        "unsupportedQuote": "人通过用手将其从该平面上拿起",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "根据画面无法判断。画面中仅显示了一个灰色的收纳箱，没有显示其原本放置的位置，也没有显示人如何将其拿下的过程。",
+        "unsupportedQuote": "画面中仅显示了一个灰色的收纳箱",
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-02b",
+      "question": "整理东西时，这个人有两次把手举得很高。两次之间主要在做什么？",
+      "group": "answerable",
+      "points": [
+        "中间一段人弯下腰、蹲下或俯下身",
+        "人在较低处翻找、摆弄或整理东西"
+      ],
+      "criticalContradiction": "说成一直站直在高处整理",
+      "realOriginal": {
+        "answer": "在两次把手举得很高之间，这个人主要是在整理或放置衣物，包括将一件深色衣物（可能是帽子或外套）举过头顶，然后",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": false,
+        "score": 0
+      },
+      "realGuard": {
+        "answer": "在两次把手举得很高之间，这个人主要是在整理或放置衣物，并弯腰在衣柜或储物空间内操作。",
+        "pointQuotes": [
+          "弯腰",
+          "整理或放置衣物，并弯腰在衣柜或储物空间内操作"
+        ],
+        "veto": false,
+        "score": 2,
+        "reason": "俯身整理衣物同时给出姿势和在低处摆弄物件的动作。"
+      },
+      "grayOriginal": {
+        "answer": "在两次把手举得很高之间，这个人主要是在整理东西，具体动作包括将物品放置、移动或调整位置。",
+        "unsupportedQuote": "将物品放置、移动或调整位置",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "根据画面，无法判断。画面中显示的是灰色背景，没有任何人物或动作信息，因此无法得知整理东西时是否有人以及其动作。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-03a",
+      "question": "给这段起床的视频配一句说明，交代人从哪里起来，后来坐在哪里做什么。",
+      "group": "answerable",
+      "points": [
+        "从盖着被子的床上坐起或移到床边",
+        "坐在床沿弯身把手伸到脚边整理鞋或脚上的东西"
+      ],
+      "criticalContradiction": "说成已经走出房间",
+      "realOriginal": {
+        "answer": "视频显示，一个人从床上起来，随后坐在床边，似乎在整理衣物或准备离开。",
+        "pointQuotes": [
+          "一个人从床上起来",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "人从床上起来，后来坐在床边。",
+        "pointQuotes": [
+          "人从床上起来",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "只说后来坐床边，未交代低头整理脚边。"
+      },
+      "grayOriginal": {
+        "answer": "视频展示了一个人从床上醒来，随后坐在床边，开始整理衣物或准备开始一天的活动。",
+        "unsupportedQuote": "随后坐在床边，开始整理衣物",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "无法判断。画面为纯灰色，没有任何关于人物、动作或环境的线索，无法得知人从哪里起来或坐在哪里做什么。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-03b",
+      "question": "能从这段看出这个人起床后要去哪儿吗？最后能确定的动作是什么？",
+      "group": "insufficient",
+      "points": [
+        "目的地无法从画面确定",
+        "最后仍坐在床边，曾弯身到脚边或整理鞋子"
+      ],
+      "criticalContradiction": "断言去上班、上学或某个具体地点",
+      "realOriginal": {
+        "answer": "根据视频内容，这个人起床后并没有明确展示去某个特定地点（如卫生间或房间），而是直接坐在床边，随后弯腰并靠近床边的一个",
+        "pointQuotes": [
+          "并没有明确展示去某个特定地点",
+          "直接坐在床边，随后弯腰"
+        ],
+        "veto": false,
+        "score": 2
+      },
+      "realGuard": {
+        "answer": "根据画面，这个人起床后（约16秒时）坐在床边，随后身体向左侧（画面左侧）移动，靠近一个深色的柜子或",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": false,
+        "score": 0,
+        "reason": "未说明目的地无法确定；坐在床边后只说向柜子移动，没有整理脚边或弯身。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，无法看出这个人起床后要去哪儿，因为视频画面始终为纯灰色，没有任何场景、人物动作或环境信息。最后能确定的",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法看出这个人起床后要去哪儿"
+      },
+      "grayGuard": {
+        "answer": "无法判断。画面中仅显示为灰色背景，没有任何人物、环境或动作线索，因此无法确定此人起床后要去哪里，也无法确定最后能",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-04a",
+      "question": "厨房里的猫出现在什么位置？当时人离它有多近？",
+      "group": "answerable",
+      "points": [
+        "猫站在画面右侧的桌面或台面上",
+        "人就站在桌边，俯身或把手伸到猫旁边"
+      ],
+      "criticalContradiction": "说猫一直在地板上",
+      "realOriginal": {
+        "answer": "根据视频内容，猫出现在厨房的左侧区域，靠近一个深色橱柜和白色炉灶的下方。在视频开始时（约00:00",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": true,
+        "score": 0
+      },
+      "realGuard": {
+        "answer": "根据画面，猫出现在厨房的地面上，位于画面左侧靠近炉灶和橱柜的位置。当时人（穿着白色上衣和蓝色牛仔裤的人）站在画面",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": true,
+        "score": 0,
+        "reason": "按首轮对所问时段的判法触发反例：将猫定位在左侧地面，标注时段在右侧桌面。片头另有猫在地面的画面，原题时段有歧义。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，厨房里的猫出现在画面的左侧区域，靠近画面边缘的位置。由于视频画面非常模糊且缺乏清晰的细节，无法准确判断猫的具体",
+        "unsupportedQuote": "厨房里的猫出现在画面的左侧区域",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "无法判断。画面中仅显示灰色背景，没有任何关于厨房、猫或人物的视觉信息。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-04b",
+      "question": "我想买片中猫粮的同款，画面能确认具体品牌吗？",
+      "group": "insufficient",
+      "points": [
+        "不能辨认具体品牌",
+        "画面能看到猫与人在桌边，但没有可辨认的包装商标或品牌文字"
+      ],
+      "criticalContradiction": "给出确定品牌或把猜测当成看清的商标",
+      "realOriginal": {
+        "answer": "根据视频画面，无法确认猫粮的具体品牌。\n\n画面中虽然可以看到一只猫在厨房地板上活动，以及一名女子在操作台和冰箱附近",
+        "pointQuotes": [
+          "无法确认猫粮的具体品牌",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "无法判断。画面中未显示任何品牌标识或包装信息，无法确认猫粮的具体品牌。",
+        "pointQuotes": [
+          "无法确认猫粮的具体品牌",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "提到品牌标识不可见，未给出猫和人在桌边的可见情景。沿用 64-token 复核对第二点的要求。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，无法确认具体品牌。\n\n视频画面中仅显示为纯灰色背景，没有任何文字、标志、品牌名称或产品包装信息。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法确认具体品牌"
+      },
+      "grayGuard": {
+        "answer": "无法判断",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-05a",
+      "question": "留意画面左边的电视。人物走近它前后，屏幕有什么变化？",
+      "group": "answerable",
+      "points": [
+        "此前电视亮着并显示节目画面",
+        "人靠近电视后屏幕变黑或熄灭"
+      ],
+      "criticalContradiction": "把变化说反，称黑屏变亮",
+      "realOriginal": {
+        "answer": "在人物走近电视之前，电视屏幕上显示的是模糊的、类似人物或动态影像的画面。当人物走近电视并伸手触碰或靠近屏幕时，",
+        "pointQuotes": [
+          "电视屏幕上显示的是模糊的、类似人物或动态影像的画面",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "根据画面，人物走近电视后，屏幕上的内容似乎有轻微的变化，但无法清晰判断具体发生了什么（例如画面内容是否切换或闪烁）。",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": false,
+        "score": 0,
+        "reason": "只说似乎有变化，未写接近前在播和接近后黑屏。"
+      },
+      "grayOriginal": {
+        "answer": "在人物走近电视之前，电视屏幕显示的是纯灰色（或黑色，取决于具体画面，但在此处表现为无内容的灰色背景）。当人物走近",
+        "unsupportedQuote": "在人物走近电视之前，电视屏幕显示的是纯灰色",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "无法判断",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-05b",
+      "question": "开头电视里播的具体是哪部节目？从这个拍摄角度能辨认吗？",
+      "group": "insufficient",
+      "points": [
+        "具体节目名称不能确定",
+        "电视虽在播放，但屏幕小而远，没有清楚可读的节目名称或足以辨认的细节"
+      ],
+      "criticalContradiction": "断言具体片名、频道或节目名称",
+      "realOriginal": {
+        "answer": "根据视频画面，电视屏幕上显示的节目内容较为模糊，无法清晰辨认出具体的节目名称或画面内容。虽然可以看到屏幕上有人物影像，但由于分辨率",
+        "pointQuotes": [
+          "无法清晰辨认出具体的节目名称或画面内容",
+          "电视屏幕上显示的节目内容较为模糊"
+        ],
+        "veto": false,
+        "score": 2
+      },
+      "realGuard": {
+        "answer": "无法判断。画面中电视屏幕显示的是模糊的蓝色调影像，无法辨认出具体的节目名称或内容。",
+        "pointQuotes": [
+          "无法辨认出具体的节目名称或内容",
+          "电视屏幕显示的是模糊的蓝色调影像"
+        ],
+        "veto": false,
+        "score": 2,
+        "reason": "写到在播放的画面模糊，给出了辨认不了节目的理由。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，无法辨认出电视里具体播的是哪部节目。画面中显示的是一片纯灰色，没有任何可识别的图像、文字、人物",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法辨认出电视里具体播的是哪部节目"
+      },
+      "grayGuard": {
+        "answer": "无法判断",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-06a",
+      "question": "人在洗衣机旁先后查看了哪两样手持物件？按出现顺序说。",
+      "group": "answerable",
+      "points": [
+        "先查看红橙色封面的小册子或书本",
+        "随后拿起或打开浅色笔记本电脑看屏幕"
+      ],
+      "criticalContradiction": "说成先看电脑再拿书",
+      "realOriginal": {
+        "answer": "根据视频内容，人在洗衣机旁先后查看了以下两样手持物件：\n\n1.  **一个红绿相间的盒子/包装**（约在",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": false,
+        "score": 0
+      },
+      "realGuard": {
+        "answer": "根据画面内容，人在洗衣机旁先后查看了以下两样手持物件：\n1. 一个红绿相间的盒子（或类似包装盒）\n2",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": false,
+        "score": 0,
+        "reason": "把书认成盒子，第二件只输出序号。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，人在洗衣机旁先后查看了以下两样手持物件：\n\n1.  **手机**（在视频约00:00-",
+        "unsupportedQuote": "1.  **手机**",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "根据视频画面，无法判断人在洗衣机旁先后查看了哪两样手持物件。画面中仅显示灰色背景，没有任何可辨识的物体或人物动作",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-06b",
+      "question": "这一幕为什么看起来像洗衣区？请说出两条画面里的线索。",
+      "group": "answerable",
+      "points": [
+        "人前方有白色、带控制面板的洗衣机或洗衣设备",
+        "上方架上有多只瓶罐或洗涤用品，或明确画出多台紧邻洗衣设备"
+      ],
+      "criticalContradiction": "称看到了洗衣机滚筒正在转动或人正把衣服放进去",
+      "realOriginal": {
+        "answer": "1. 画面中有一台白色的洗衣机（或类似洗涤设备）位于前景，且上方有置物架，上面摆放着各种洗涤用品（如",
+        "pointQuotes": [
+          "一台白色的洗衣机（或类似洗涤设备）位于前景",
+          "上方有置物架，上面摆放着各种洗涤用品"
+        ],
+        "veto": false,
+        "score": 2
+      },
+      "realGuard": {
+        "answer": "1. 画面中有一台白色的洗衣机（或类似洗涤设备）位于人物下方。\n2. 人物手中拿着类似洗衣粉或洗涤剂的小",
+        "pointQuotes": [
+          "一台白色的洗衣机（或类似洗涤设备）",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "第二条只写手持物件，未指出架上的用品或相邻设备。"
+      },
+      "grayOriginal": {
+        "answer": "1. 画面中出现了大量白色的衣物，这些衣物被堆叠在一起，这是洗衣区常见的物品。\n2. 背景中隐约可见类似",
+        "unsupportedQuote": "画面中出现了大量白色的衣物",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "根据画面内容，无法判断这一幕看起来像洗衣区。画面中仅呈现为单一的灰色背景，没有任何与洗衣相关的物体、设施或环境特征（",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-07a",
+      "question": "客厅里两个人各在做什么？按他们所在的位置讲清楚。",
+      "group": "answerable",
+      "points": [
+        "沙发上的人拿起、展开或整理一块布或衣物",
+        "另一人在茶几和地毯旁，操作或摆弄有软管的吸尘器"
+      ],
+      "criticalContradiction": "把两个人的位置和动作互换",
+      "realOriginal": {
+        "answer": "在客厅里，有两个人分别处于不同的位置：\n\n1.  **坐在沙发上的男子**：他位于画面左侧的沙发上，身体靠在沙发上",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": false,
+        "score": 0
+      },
+      "realGuard": {
+        "answer": "在客厅里，左边的人坐在沙发上，手里拿着一个类似手机或遥控器的小物件，正在低头查看；右边的人站在一台蓝色的吸尘器旁，",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": false,
+        "score": 0,
+        "reason": "把布误作手机或遥控器；只写另一人站在吸尘器旁，未描述操作。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，客厅里只有一个人，他/她正坐在沙发上。由于画面中未显示第二个人，因此无法确定“两个人各在做什么",
+        "unsupportedQuote": "客厅里只有一个人，他/她正坐在沙发上",
+        "insufficientEvidenceQuote": "无法确定“两个人各在做什么"
+      },
+      "grayGuard": {
+        "answer": "根据画面，无法判断客厅里两个人各在做什么。画面中仅显示为灰色背景，没有任何人物、动作或环境细节可供观察。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-07b",
+      "question": "如果想在这一幕里找到吸尘器，要看茶几的哪一侧？它有什么醒目的特征？",
+      "group": "answerable",
+      "points": [
+        "在画面中茶几右侧、靠地面或地毯边",
+        "蓝白色机身，或有很显眼的蓝色弯曲长软管"
+      ],
+      "criticalContradiction": "把位置说成在沙发上或茶几左侧",
+      "realOriginal": {
+        "answer": "吸尘器位于茶几的右侧（画面右侧）。它有一个蓝色的机身，并且连接着蓝色的软管。",
+        "pointQuotes": [
+          "吸尘器位于茶几的右侧",
+          "蓝色的机身，并且连接着蓝色的软管"
+        ],
+        "veto": false,
+        "score": 2
+      },
+      "realGuard": {
+        "answer": "在茶几的右侧（画面右侧），可以看到一个蓝色的吸尘器，它有一个明显的蓝色机身和蓝色的软管。",
+        "pointQuotes": [
+          "在茶几的右侧",
+          "蓝色机身和蓝色的软管"
+        ],
+        "veto": false,
+        "score": 2,
+        "reason": "方位及颜色、软管都明确。"
+      },
+      "grayOriginal": {
+        "answer": "要找到吸尘器，需要看茶几的左侧。它有一个明显的黑色圆柱形物体，看起来像是一个吸尘器。",
+        "unsupportedQuote": "要找到吸尘器，需要看茶几的左侧",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "无法判断。画面中未显示茶几或吸尘器。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-08a",
+      "question": "这个人怎样用红杯子接东西？请说明大容器放在哪里，以及杯子怎么靠过去。",
+      "group": "answerable",
+      "points": [
+        "大水桶或带出水嘴的水容器放在桌边地上",
+        "人坐着向下弯腰，把红杯靠到桶的出水处"
+      ],
+      "criticalContradiction": "说成把大桶拿到桌上往杯中倾倒",
+      "realOriginal": {
+        "answer": "根据视频内容，这个人使用红杯子接东西的过程如下：\n\n1.  **大容器位置**：大容器（一个绿色的桶状容器，",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": false,
+        "score": 0
+      },
+      "realGuard": {
+        "answer": "根据画面，这个人将红杯子放在大容器（绿色大水桶）的上方，然后将其靠近大容器，似乎是用红杯子接大容器里的",
+        "pointQuotes": [
+          null,
+          null
+        ],
+        "veto": false,
+        "score": 0,
+        "reason": "未给出地面位置或俯身把杯子靠到出水口的动作。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，无法看到“红杯子”以及“大容器”的具体位置或动作。画面中仅显示为纯灰色背景，没有任何物体、",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法看到“红杯子”以及“大容器”的具体位置或动作"
+      },
+      "grayGuard": {
+        "answer": "无法判断。画面中仅显示灰色背景，没有任何物体、容器或人物的出现，因此无法判断红杯子如何接东西、大容器的位置或",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-08b",
+      "question": "桌边接水和摆弄纸箱哪个先发生？两件事发生时，人的姿势分别怎样？",
+      "group": "answerable",
+      "points": [
+        "先坐着或俯身用杯子接水",
+        "后来站在桌边打开或整理纸箱"
+      ],
+      "criticalContradiction": "把两件事的先后或坐站关系说反",
+      "realOriginal": {
+        "answer": "桌边接水先发生。\n\n在接水时，人坐在白色塑料椅上，身体前倾，双手伸向地上的大桶，正在从",
+        "pointQuotes": [
+          "桌边接水先发生。\n\n在接水时，人坐在白色塑料椅上，身体前倾",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "桌边接水先发生。接水时，人坐在白色塑料椅上，身体前倾，双手伸向地上的大桶装水；摆弄",
+        "pointQuotes": [
+          "桌边接水先发生。接水时，人坐在白色塑料椅上，身体前倾",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "第二步截在「摆弄」，未描述后来站立。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，桌边接水先发生，摆弄纸箱后发生。\n\n1.  **桌边接水**：在视频约0",
+        "unsupportedQuote": "桌边接水先发生，摆弄纸箱后发生",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "根据画面内容，无法判断桌边接水和摆弄纸箱哪个先发生，因为画面中没有任何人物或动作，仅显示为灰色背景。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-09a",
+      "question": "帮我给这段风景配一句相册说明，让人知道近处和远处各能看到什么。",
+      "group": "answerable",
+      "points": [
+        "近处有弯曲的河道或水流，穿过开阔草地",
+        "远处是层叠山岭或山脉"
+      ],
+      "criticalContradiction": "把远处描述成楼群或把场景说成海滩",
+      "realOriginal": {
+        "answer": "近处是蜿蜒的河流与翠绿的草地，远处则是连绵的群山与稀疏的树木，构成一幅宁静辽阔的草原画卷。",
+        "pointQuotes": [
+          "近处是蜿蜒的河流与翠绿的草地",
+          "远处则是连绵的群山"
+        ],
+        "veto": false,
+        "score": 2
+      },
+      "realGuard": {
+        "answer": "近处是一条蜿蜒的河流和绿色的草地，远处是连绵的山脉和几棵树木。",
+        "pointQuotes": [
+          "近处是一条蜿蜒的河流和绿色的草地",
+          "远处是连绵的山脉"
+        ],
+        "veto": false,
+        "score": 2,
+        "reason": "近处河流草地和远处山岭均明确。"
+      },
+      "grayOriginal": {
+        "answer": "近处是郁郁葱葱的树木与蜿蜒的溪流，远处则是连绵起伏的山峦与朦胧的云雾，构成一幅宁静而辽阔的自然画卷。",
+        "unsupportedQuote": "郁郁葱葱的树木与蜿蜒的溪流",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "近处为灰色平面，远处为灰色风景。",
+        "unsupportedQuote": "远处为灰色风景",
+        "insufficientEvidenceQuote": null
+      }
+    },
+    {
+      "id": "w6-open-09b",
+      "question": "我想从原片截一张能看清动物毛发的特写。这段拍得够近吗？为什么？",
+      "group": "answerable",
+      "points": [
+        "没有近到能清楚看见动物毛发",
+        "动物在开阔河谷里只占很小一部分画面，镜头保持远景"
+      ],
+      "criticalContradiction": "称画面清楚呈现具体毛发纹理",
+      "realOriginal": {
+        "answer": "这段拍得不够近。\n\n从视频画面来看，镜头距离较远，呈现的是广阔的草原、河流和远处的山脉全景。画面中虽然隐约",
+        "pointQuotes": [
+          "这段拍得不够近",
+          "镜头距离较远，呈现的是广阔的草原、河流和远处的山脉全景"
+        ],
+        "veto": false,
+        "score": 2
+      },
+      "realGuard": {
+        "answer": "无法判断。画面中虽然可以看到远处的动物（疑似牛或马），但距离较远，且没有提供足够的细节来看清其毛发，无法确定",
+        "pointQuotes": [
+          "没有提供足够的细节来看清其毛发",
+          "可以看到远处的动物（疑似牛或马），但距离较远"
+        ],
+        "veto": false,
+        "score": 2,
+        "reason": "虽以「无法判断」开头，后文说明看不清毛发和距离远。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，这段拍摄**不够近**，无法清晰看清动物毛发。\n\n原因如下：\n1.  **画面主体模糊**：视频",
+        "unsupportedQuote": "这段拍摄**不够近**",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "无法判断。画面中仅显示为单一灰色背景，没有任何动物或毛发相关的视觉信息，因此无法判断拍摄距离是否足够近。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-10a",
+      "question": "把这段划艇过程讲给没看过的人听：小艇是怎么穿过这段水面的？",
+      "group": "answerable",
+      "points": [
+        "有人驾着小艇或皮划艇顺着河流穿过激流",
+        "艇在白色浪头中起伏，部分时候被浪遮挡又露出来"
+      ],
+      "criticalContradiction": "断言人落水或船被救起",
+      "realOriginal": {
+        "answer": "这段视频展示了一个人在湍急的河流中划艇的过程。以下是具体的描述：\n\n1.  **起始阶段**：视频开始时，可以看到",
+        "pointQuotes": [
+          "一个人在湍急的河流中划艇",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "根据画面，小艇（皮划艇）是由一名穿着绿色上衣的人驾驶着，在湍急的河流中穿行。他/她通过",
+        "pointQuotes": [
+          "小艇（皮划艇）是由一名穿着绿色上衣的人驾驶着，在湍急的河流中穿行",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "写出驾艇穿激流，未描述浪中起伏或遮挡。"
+      },
+      "grayOriginal": {
+        "answer": "这段视频展示的是划艇（或类似小型船只）在水面上行进的过程。以下是详细的描述：\n\n1.  **准备阶段**：视频开始时",
+        "unsupportedQuote": "划艇（或类似小型船只）在水面上行进",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "根据画面，无法判断小艇是如何穿过这段水面的。画面中仅显示了一片灰色的水面，没有显示小艇、水波或其他任何关于运动",
+        "unsupportedQuote": "画面中仅显示了一片灰色的水面",
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-10b",
+      "question": "想剪一个能同时看清划艇人、船身和白浪的瞬间，应该找哪一段？请描述你会找的画面。",
+      "group": "answerable",
+      "points": [
+        "给出约 9–12 秒或中后段艇从浪中露出的时段",
+        "能看到橙红船身及艇上的人，周围有明显白浪"
+      ],
+      "criticalContradiction": "推荐片尾仅剩河水而船已出画的镜头",
+      "realOriginal": {
+        "answer": "我会选择 **00:08 到 00:10** 这一时间段。\n\n**画面描述：**\n在这个时间段内，画面",
+        "pointQuotes": [
+          "00:08 到 00:10",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "根据画面，应该选择 00:08 到 00:10 这一时间段。在这一时刻，画面中清晰可见划艇",
+        "pointQuotes": [
+          "00:08 到 00:10",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "与 9 至 11.8 秒参考时段重合，未写出人、船、白浪同框。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，要同时看清划艇人、船身和白浪的瞬间，应该选择**00:00 到 00:0",
+        "unsupportedQuote": "应该选择**00:00 到 00:0",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "无法判断。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-11a",
+      "question": "岸边那个人在做什么？请给出能看出这一点的动作。",
+      "group": "answerable",
+      "points": [
+        "在水边钓鱼或飞钓",
+        "反复挥动鱼竿或甩出细线，让线落向水面"
+      ],
+      "criticalContradiction": "把线说成用来套住另一人或动物",
+      "realOriginal": {
+        "answer": "岸边那个人正在钓鱼。\n\n能看出这一点的动作包括：\n1. 他手持一根长杆（鱼竿），杆子的一端伸向水面",
+        "pointQuotes": [
+          "岸边那个人正在钓鱼",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "岸边那个人正在钓鱼。他站在岩石岸边，手中拿着一根长杆（鱼竿），并做出抛掷或挥动鱼竿的动作，将",
+        "pointQuotes": [
+          "正在钓鱼",
+          "做出抛掷或挥动鱼竿的动作"
+        ],
+        "veto": false,
+        "score": 2,
+        "reason": "同时说明钓鱼及挥竿动作。"
+      },
+      "grayOriginal": {
+        "answer": "根据视频内容，画面中并没有清晰可见的“岸边”人物，也没有任何动作可以辨认。整个画面呈现为纯灰色，没有任何人物、物体",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "没有任何动作可以辨认"
+      },
+      "grayGuard": {
+        "answer": "无法判断。画面中未显示岸边的人，也没有任何关于其动作的视觉线索。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-11b",
+      "question": "这次钓到了什么鱼？请区分画面能确认和不能确认的部分。",
+      "group": "insufficient",
+      "points": [
+        "可确认此人在岸边向水中抛线或钓鱼",
+        "片段没有清楚显示鱼被拉出水或捕到的鱼，无法确定鱼种或结果"
+      ],
+      "criticalContradiction": "报出确定鱼种或声称已看到鱼被钓起",
+      "realOriginal": {
+        "answer": "根据视频画面，无法确认具体钓到了什么种类的鱼。\n\n**画面能确认的部分：**\n*   一名穿着深色上衣和深色裤子的人",
+        "pointQuotes": [
+          null,
+          "无法确认具体钓到了什么种类的鱼"
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "无法判断。画面中仅显示一名男子在河边使用钓竿进行垂钓，并未出现任何鱼类、鱼饵或鱼钩等能够明确识别鱼",
+        "pointQuotes": [
+          "一名男子在河边使用钓竿进行垂钓",
+          "无法判断。画面中仅显示一名男子在河边使用钓竿进行垂钓，并未出现任何鱼类"
+        ],
+        "veto": false,
+        "score": 2,
+        "reason": "可确认的是岸边钓鱼；未见鱼，无法确定鱼种。"
+      },
+      "grayOriginal": {
+        "answer": "根据提供的视频内容，无法确认这次钓到了什么鱼。\n\n**画面分析：**\n视频画面在整个时间段（00:00 - 0",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法确认这次钓到了什么鱼"
+      },
+      "grayGuard": {
+        "answer": "无法判断。画面中仅显示灰色背景，没有任何关于鱼、钓鱼场景或相关物体的视觉信息，因此无法确认钓到了什么鱼。",
+        "unsupportedQuote": null,
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-12a",
+      "question": "短片后半段，游客聚在路边做什么？画面里有什么能支持你的判断？",
+      "group": "answerable",
+      "points": [
+        "在路边排队等待，等车或接驳车是合理描述",
+        "队伍沿着隔离绳或栏杆排列，旁边有绿色车辆站牌"
+      ],
+      "criticalContradiction": "称后半段的人群正在上车或穿过马路",
+      "realOriginal": {
+        "answer": "在短片后半段（约13秒至15秒），游客们主要聚集在路边排队，等待乘坐公共交通工具。\n\n支持这一判断的画面",
+        "pointQuotes": [
+          "聚集在路边排队，等待乘坐公共交通工具",
+          null
+        ],
+        "veto": false,
+        "score": 1
+      },
+      "realGuard": {
+        "answer": "根据画面，游客们聚集在路边，主要是在排队或等待。画面中可以看到一大群游客背对着镜头，站成一排，前方有围栏",
+        "pointQuotes": [
+          "游客们聚集在路边，主要是在排队或等待",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "写到站成一排且前方有围栏，未定位队伍沿绳栏排开或指出车辆站牌。宽松接受「前方有围栏」则多 1 分。"
+      },
+      "grayOriginal": {
+        "answer": "在短片后半段（约10秒之后），游客们聚集在路边，主要是在**等待或观察**。\n\n画面中支持这一判断的视觉",
+        "unsupportedQuote": "游客们聚集在路边，主要是在**等待或观察**",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "根据画面，无法判断游客聚在路边具体在做什么。画面中仅显示了一群游客聚集在路边，背景有树木和建筑，但无法",
+        "unsupportedQuote": "画面中仅显示了一群游客聚集在路边，背景有树木和建筑",
+        "insufficientEvidenceQuote": "无法判断"
+      }
+    },
+    {
+      "id": "w6-open-12b",
+      "question": "想用两句话概括这段游客动线：开头的人在哪里走动，后半段队伍在哪里形成？",
+      "group": "answerable",
+      "points": [
+        "开头人在有屋顶的入口或访客区小亭、指示牌附近走动",
+        "后来镜头转到路边的候车点，游客沿隔离绳排队"
+      ],
+      "criticalContradiction": "断言追踪到了某个游客上车或出发",
+      "realOriginal": {
+        "answer": "开头的人在入口处的木质亭子前走动，后半段队伍在指示牌旁及路边形成。",
+        "pointQuotes": [
+          "开头的人在入口处的木质亭子前走动",
+          "后半段队伍在指示牌旁及路边形成"
+        ],
+        "veto": false,
+        "score": 2
+      },
+      "realGuard": {
+        "answer": "开头的人在入口处的木质亭子前走动，后半段队伍在游客中心附近的道路旁形成。",
+        "pointQuotes": [
+          "开头的人在入口处的木质亭子前走动",
+          null
+        ],
+        "veto": false,
+        "score": 1,
+        "reason": "写到了游客中心附近道路，未进一步定位路边的候车点、指示牌或隔离绳。若只要求路边队伍的位置则多 1 分。"
+      },
+      "grayOriginal": {
+        "answer": "开头的人在前方的开阔区域走动，后半段队伍在后方逐渐形成。",
+        "unsupportedQuote": "后半段队伍在后方逐渐形成",
+        "insufficientEvidenceQuote": null
+      },
+      "grayGuard": {
+        "answer": "开头的人在前方的开阔区域走动，后半段队伍在后方形成。",
+        "unsupportedQuote": "开头的人在前方的开阔区域走动，后半段队伍在后方形成",
+        "insufficientEvidenceQuote": null
+      }
+    }
+  ]
+}
