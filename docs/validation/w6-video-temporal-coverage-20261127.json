@@ -1,0 +1,1307 @@
+{
+  "date": "2026-11-27",
+  "sourceCommit": "c86779a1af8733ef22a5544e10471929ff79df6b",
+  "hardware": "Apple M5 Pro, 48 GiB",
+  "modelId": "tencent/WeMM-Video-2B-GGUF",
+  "modelRevision": "395e99f987a73915273943d4510e23004df7cede",
+  "runtimeRevision": "llama.cpp-88aaf325a7026ac1127d0897394b0a3d6413dc2a-wemm-mixed-prefill-microbatch-128-v1",
+  "maxNewTokens": 32,
+  "defaultQuestion": "视频中有没有室外场景？如果有，用一句话说明室外的人在做什么；如果没看到，请说没看到。",
+  "conditions": {
+    "A": "no outdoor scene",
+    "B": "outdoor scene between samples",
+    "C": "outdoor scene on sample",
+    "D": "outdoor scene alone",
+    "E": "condition B with timestamp in prompt",
+    "F": "9–11 s extracted from B, with a question about the excerpt"
+  },
+  "long": {
+    "event": "5 s of fly fishing",
+    "durationSeconds": 300,
+    "eventStartSeconds": {
+      "B": 120,
+      "C": 110
+    },
+    "inputs": {
+      "A": {
+        "mediaSHA256": "e3c7318d26ec920fd4ab20bdf8155bfd842877da285a944d33e4d184076103ac",
+        "bytes": 3724677,
+        "askedTimesSeconds": [
+          0,
+          37.5,
+          75,
+          112.5,
+          150,
+          187.5,
+          225,
+          262.5
+        ],
+        "actualTimesSeconds": [
+          0,
+          37.5,
+          75,
+          112.5,
+          150,
+          187.5,
+          225,
+          262.5
+        ],
+        "rgbSHA256": [
+          "5682274b299532fd383a6ca4cfbca30f4e33a96879bf157d6ce8170fdccfbae8",
+          "702039699554d541671e998ca5af2783d9a555b2c32926b11131c7a827f4c643",
+          "7ab601ae543012a4ac3274e89d2f4144872a9a5c8e9c81a2e1f3c1960284cf30",
+          "80f62c972dcaaa70d87835023f67cd38c0dde4c22b3a69678eec009589c68643",
+          "5900178427089ec65a6d865559152459d4d05385e17a3c8c635133f42fc1cd5a",
+          "7eae7bd4146ec55263f866df00080b41386d8d36dc90e82a9459c14e573a291b",
+          "5ab63a577eee7edd782cce8bc02fe245ece976762df114571f2d90ee99577ce1",
+          "394fec2eff4f4ddf6b4b15f4ebcc3b6037810c0a3c932db2b9b64775f0285176"
+        ],
+        "promptSHA256": "cd22e38f8a3d032ea57b2667d7efafd7989aacf65c687efc8c903f762afde556"
+      },
+      "B": {
+        "mediaSHA256": "e9644419f7d4013a547b97b6c10191c19f5ac6bb43f84d08f61ad597e5cfbae0",
+        "bytes": 3795253,
+        "askedTimesSeconds": [
+          0,
+          37.5,
+          75,
+          112.5,
+          150,
+          187.5,
+          225,
+          262.5
+        ],
+        "actualTimesSeconds": [
+          0,
+          37.5,
+          75,
+          112.5,
+          150,
+          187.5,
+          225,
+          262.5
+        ],
+        "rgbSHA256": [
+          "5682274b299532fd383a6ca4cfbca30f4e33a96879bf157d6ce8170fdccfbae8",
+          "702039699554d541671e998ca5af2783d9a555b2c32926b11131c7a827f4c643",
+          "7ab601ae543012a4ac3274e89d2f4144872a9a5c8e9c81a2e1f3c1960284cf30",
+          "80f62c972dcaaa70d87835023f67cd38c0dde4c22b3a69678eec009589c68643",
+          "5900178427089ec65a6d865559152459d4d05385e17a3c8c635133f42fc1cd5a",
+          "7eae7bd4146ec55263f866df00080b41386d8d36dc90e82a9459c14e573a291b",
+          "5ab63a577eee7edd782cce8bc02fe245ece976762df114571f2d90ee99577ce1",
+          "394fec2eff4f4ddf6b4b15f4ebcc3b6037810c0a3c932db2b9b64775f0285176"
+        ],
+        "promptSHA256": "cd22e38f8a3d032ea57b2667d7efafd7989aacf65c687efc8c903f762afde556"
+      },
+      "C": {
+        "mediaSHA256": "06321c5a599e25d473ecbb088bc24cf8f9628731853219c914e018a1ffbbfef7",
+        "bytes": 3795253,
+        "askedTimesSeconds": [
+          0,
+          37.5,
+          75,
+          112.5,
+          150,
+          187.5,
+          225,
+          262.5
+        ],
+        "actualTimesSeconds": [
+          0,
+          37.5,
+          75,
+          112.5,
+          150,
+          187.5,
+          225,
+          262.5
+        ],
+        "rgbSHA256": [
+          "5682274b299532fd383a6ca4cfbca30f4e33a96879bf157d6ce8170fdccfbae8",
+          "702039699554d541671e998ca5af2783d9a555b2c32926b11131c7a827f4c643",
+          "7ab601ae543012a4ac3274e89d2f4144872a9a5c8e9c81a2e1f3c1960284cf30",
+          "f7a9304180c86515af7ddbd8fb99936eb7fc59a70d1dd0d139c6b0dfe65c350e",
+          "5900178427089ec65a6d865559152459d4d05385e17a3c8c635133f42fc1cd5a",
+          "7eae7bd4146ec55263f866df00080b41386d8d36dc90e82a9459c14e573a291b",
+          "5ab63a577eee7edd782cce8bc02fe245ece976762df114571f2d90ee99577ce1",
+          "394fec2eff4f4ddf6b4b15f4ebcc3b6037810c0a3c932db2b9b64775f0285176"
+        ],
+        "promptSHA256": "cd22e38f8a3d032ea57b2667d7efafd7989aacf65c687efc8c903f762afde556"
+      },
+      "D": {
+        "mediaSHA256": "ebb21e65221df8d9b75b3be0f1c056daa686e69e9b18aecaaf8a2fb90e40d5d3",
+        "bytes": 192590,
+        "askedTimesSeconds": [
+          0,
+          0.625,
+          1.25,
+          1.875,
+          2.5,
+          3.125,
+          3.75,
+          4.375
+        ],
+        "actualTimesSeconds": [
+          0,
+          0.625,
+          1.25,
+          1.875,
+          2.5,
+          3.125,
+          3.75,
+          4.375
+        ],
+        "rgbSHA256": [
+          "4dfbfcf361cfbbfb1737c54cef35b65b011ada8c6a9d582bb9a1c28c94c52a59",
+          "21de914505877ba0b42d1375d3d71d9b3fd5a25593e05461382b66f4ca3fddaf",
+          "3040d137aab4f1f475c83b8001754eede220ba932b5f5394be7e2077aadcea75",
+          "328398f864fab88db3966074cb33351a539de3a4a8228c7131f579e8935438b4",
+          "f7a9304180c86515af7ddbd8fb99936eb7fc59a70d1dd0d139c6b0dfe65c350e",
+          "0aa88cd1ed297a58f82064120d5cb9ea73d82652b236c5726b5a5eeed759b3e1",
+          "5756901dab8619e0e515cb2442d3e5071b6a4cc62aab2a29e48d872267168e19",
+          "1526582f2a2dcbf26a3308c145f5a4c148e69d67af8a8806c794e76c2e9b83de"
+        ],
+        "promptSHA256": "0456dbd1eb10aa6e2c804a566ac985cc8b0e699412da9e91d1746d2f14623dd5"
+      }
+    },
+    "wallSeconds": 98.88048741687089,
+    "processPeakFootprintBytes": 401001376,
+    "maxRSSBytes": 2884943872,
+    "runs": [
+      {
+        "condition": "A",
+        "block": 1,
+        "id": "question-001",
+        "answer": "没看到",
+        "firstTextSeconds": 0.968645292,
+        "finalSeconds": 1.040512625,
+        "updateCount": 2
+      },
+      {
+        "condition": "B",
+        "block": 1,
+        "id": "question-002",
+        "answer": "没看到",
+        "firstTextSeconds": 0.791668959,
+        "finalSeconds": 0.8496385,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 1,
+        "id": "question-003",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.824750792,
+        "finalSeconds": 1.014960417,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 1,
+        "id": "question-004",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.785077792,
+        "finalSeconds": 0.919216875,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 2,
+        "id": "question-005",
+        "answer": "没看到",
+        "firstTextSeconds": 0.819217542,
+        "finalSeconds": 0.880379,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 2,
+        "id": "question-006",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.796127041,
+        "finalSeconds": 0.9285065,
+        "updateCount": 8
+      },
+      {
+        "condition": "A",
+        "block": 2,
+        "id": "question-007",
+        "answer": "没看到",
+        "firstTextSeconds": 0.800333875,
+        "finalSeconds": 0.859644959,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 2,
+        "id": "question-008",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.82044325,
+        "finalSeconds": 1.0015415,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 3,
+        "id": "question-009",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.810786959,
+        "finalSeconds": 0.94170925,
+        "updateCount": 8
+      },
+      {
+        "condition": "D",
+        "block": 3,
+        "id": "question-010",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.853320042,
+        "finalSeconds": 1.035290958,
+        "updateCount": 11
+      },
+      {
+        "condition": "B",
+        "block": 3,
+        "id": "question-011",
+        "answer": "没看到",
+        "firstTextSeconds": 0.804548208,
+        "finalSeconds": 0.864430625,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 3,
+        "id": "question-012",
+        "answer": "没看到",
+        "firstTextSeconds": 0.814198208,
+        "finalSeconds": 0.868716791,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 4,
+        "id": "question-013",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.834175083,
+        "finalSeconds": 1.007731083,
+        "updateCount": 11
+      },
+      {
+        "condition": "A",
+        "block": 4,
+        "id": "question-014",
+        "answer": "没看到",
+        "firstTextSeconds": 0.805742,
+        "finalSeconds": 0.867134791,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 4,
+        "id": "question-015",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.803522834,
+        "finalSeconds": 0.932425625,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 4,
+        "id": "question-016",
+        "answer": "没看到",
+        "firstTextSeconds": 0.922526958,
+        "finalSeconds": 0.992360916,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 5,
+        "id": "question-017",
+        "answer": "没看到",
+        "firstTextSeconds": 0.826397,
+        "finalSeconds": 0.88974425,
+        "updateCount": 2
+      },
+      {
+        "condition": "B",
+        "block": 5,
+        "id": "question-018",
+        "answer": "没看到",
+        "firstTextSeconds": 0.816263583,
+        "finalSeconds": 0.875582375,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 5,
+        "id": "question-019",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.874911292,
+        "finalSeconds": 1.072776,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 5,
+        "id": "question-020",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.89873275,
+        "finalSeconds": 1.055998417,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 6,
+        "id": "question-021",
+        "answer": "没看到",
+        "firstTextSeconds": 0.8367005,
+        "finalSeconds": 0.90031225,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 6,
+        "id": "question-022",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.892496417,
+        "finalSeconds": 1.078328084,
+        "updateCount": 8
+      },
+      {
+        "condition": "A",
+        "block": 6,
+        "id": "question-023",
+        "answer": "没看到",
+        "firstTextSeconds": 1.009657708,
+        "finalSeconds": 1.071526667,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 6,
+        "id": "question-024",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.868377,
+        "finalSeconds": 1.039689,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 7,
+        "id": "question-025",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.866058667,
+        "finalSeconds": 1.008258667,
+        "updateCount": 8
+      },
+      {
+        "condition": "D",
+        "block": 7,
+        "id": "question-026",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.885270417,
+        "finalSeconds": 1.062890959,
+        "updateCount": 11
+      },
+      {
+        "condition": "B",
+        "block": 7,
+        "id": "question-027",
+        "answer": "没看到",
+        "firstTextSeconds": 0.854162334,
+        "finalSeconds": 0.914570834,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 7,
+        "id": "question-028",
+        "answer": "没看到",
+        "firstTextSeconds": 0.97016375,
+        "finalSeconds": 1.04867025,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 8,
+        "id": "question-029",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.865870209,
+        "finalSeconds": 1.041752292,
+        "updateCount": 11
+      },
+      {
+        "condition": "A",
+        "block": 8,
+        "id": "question-030",
+        "answer": "没看到",
+        "firstTextSeconds": 0.828097666,
+        "finalSeconds": 0.89540825,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 8,
+        "id": "question-031",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.834752083,
+        "finalSeconds": 1.003618875,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 8,
+        "id": "question-032",
+        "answer": "没看到",
+        "firstTextSeconds": 0.897635667,
+        "finalSeconds": 0.963586459,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 9,
+        "id": "question-033",
+        "answer": "没看到",
+        "firstTextSeconds": 0.870607,
+        "finalSeconds": 0.940906,
+        "updateCount": 2
+      },
+      {
+        "condition": "B",
+        "block": 9,
+        "id": "question-034",
+        "answer": "没看到",
+        "firstTextSeconds": 0.818904667,
+        "finalSeconds": 0.88164925,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 9,
+        "id": "question-035",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.901245334,
+        "finalSeconds": 1.078185792,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 9,
+        "id": "question-036",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.826392541,
+        "finalSeconds": 0.961731666,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 10,
+        "id": "question-037",
+        "answer": "没看到",
+        "firstTextSeconds": 0.835186833,
+        "finalSeconds": 0.901969416,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 10,
+        "id": "question-038",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.885476625,
+        "finalSeconds": 1.06029725,
+        "updateCount": 8
+      },
+      {
+        "condition": "A",
+        "block": 10,
+        "id": "question-039",
+        "answer": "没看到",
+        "firstTextSeconds": 0.948758208,
+        "finalSeconds": 1.009233375,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 10,
+        "id": "question-040",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.843716875,
+        "finalSeconds": 1.024634166,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 11,
+        "id": "question-041",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.848669709,
+        "finalSeconds": 0.982695292,
+        "updateCount": 8
+      },
+      {
+        "condition": "D",
+        "block": 11,
+        "id": "question-042",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.933922792,
+        "finalSeconds": 1.117637917,
+        "updateCount": 11
+      },
+      {
+        "condition": "B",
+        "block": 11,
+        "id": "question-043",
+        "answer": "没看到",
+        "firstTextSeconds": 0.831832209,
+        "finalSeconds": 0.898718459,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 11,
+        "id": "question-044",
+        "answer": "没看到",
+        "firstTextSeconds": 1.027428333,
+        "finalSeconds": 1.100804291,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 12,
+        "id": "question-045",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.85377975,
+        "finalSeconds": 1.037122167,
+        "updateCount": 11
+      },
+      {
+        "condition": "A",
+        "block": 12,
+        "id": "question-046",
+        "answer": "没看到",
+        "firstTextSeconds": 0.827284375,
+        "finalSeconds": 0.894580042,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 12,
+        "id": "question-047",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.86472475,
+        "finalSeconds": 0.998903125,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 12,
+        "id": "question-048",
+        "answer": "没看到",
+        "firstTextSeconds": 0.842419958,
+        "finalSeconds": 0.901607958,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 13,
+        "id": "question-049",
+        "answer": "没看到",
+        "firstTextSeconds": 0.825358916,
+        "finalSeconds": 0.888623291,
+        "updateCount": 2
+      },
+      {
+        "condition": "B",
+        "block": 13,
+        "id": "question-050",
+        "answer": "没看到",
+        "firstTextSeconds": 0.879490625,
+        "finalSeconds": 0.941970542,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 13,
+        "id": "question-051",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.869604583,
+        "finalSeconds": 1.041780792,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 13,
+        "id": "question-052",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.812737,
+        "finalSeconds": 0.958861792,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 14,
+        "id": "question-053",
+        "answer": "没看到",
+        "firstTextSeconds": 0.873086334,
+        "finalSeconds": 0.9362465,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 14,
+        "id": "question-054",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.863521708,
+        "finalSeconds": 1.008273791,
+        "updateCount": 8
+      },
+      {
+        "condition": "A",
+        "block": 14,
+        "id": "question-055",
+        "answer": "没看到",
+        "firstTextSeconds": 0.865301792,
+        "finalSeconds": 0.93044125,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 14,
+        "id": "question-056",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.918574958,
+        "finalSeconds": 1.104718542,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 15,
+        "id": "question-057",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.874508958,
+        "finalSeconds": 1.019314,
+        "updateCount": 8
+      },
+      {
+        "condition": "D",
+        "block": 15,
+        "id": "question-058",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.866890084,
+        "finalSeconds": 1.044184042,
+        "updateCount": 11
+      },
+      {
+        "condition": "B",
+        "block": 15,
+        "id": "question-059",
+        "answer": "没看到",
+        "firstTextSeconds": 0.848312166,
+        "finalSeconds": 0.919814708,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 15,
+        "id": "question-060",
+        "answer": "没看到",
+        "firstTextSeconds": 0.832790542,
+        "finalSeconds": 0.89533325,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 16,
+        "id": "question-061",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.865190375,
+        "finalSeconds": 1.0494825,
+        "updateCount": 11
+      },
+      {
+        "condition": "A",
+        "block": 16,
+        "id": "question-062",
+        "answer": "没看到",
+        "firstTextSeconds": 0.86553525,
+        "finalSeconds": 0.931770458,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 16,
+        "id": "question-063",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.88050475,
+        "finalSeconds": 1.024975417,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 16,
+        "id": "question-064",
+        "answer": "没看到",
+        "firstTextSeconds": 0.938736542,
+        "finalSeconds": 1.017145208,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 17,
+        "id": "question-065",
+        "answer": "没看到",
+        "firstTextSeconds": 1.060327,
+        "finalSeconds": 1.133103833,
+        "updateCount": 2
+      },
+      {
+        "condition": "B",
+        "block": 17,
+        "id": "question-066",
+        "answer": "没看到",
+        "firstTextSeconds": 0.898525583,
+        "finalSeconds": 0.959510375,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 17,
+        "id": "question-067",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.867868666,
+        "finalSeconds": 1.037470958,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 17,
+        "id": "question-068",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.866121667,
+        "finalSeconds": 1.012714083,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 18,
+        "id": "question-069",
+        "answer": "没看到",
+        "firstTextSeconds": 0.8272345,
+        "finalSeconds": 0.895918667,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 18,
+        "id": "question-070",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.894919708,
+        "finalSeconds": 1.038280917,
+        "updateCount": 8
+      },
+      {
+        "condition": "A",
+        "block": 18,
+        "id": "question-071",
+        "answer": "没看到",
+        "firstTextSeconds": 1.000173541,
+        "finalSeconds": 1.069390875,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 18,
+        "id": "question-072",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.927652334,
+        "finalSeconds": 1.107548167,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 19,
+        "id": "question-073",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.953024416,
+        "finalSeconds": 1.107130541,
+        "updateCount": 8
+      },
+      {
+        "condition": "D",
+        "block": 19,
+        "id": "question-074",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 2.173723917,
+        "finalSeconds": 2.33959425,
+        "updateCount": 11
+      },
+      {
+        "condition": "B",
+        "block": 19,
+        "id": "question-075",
+        "answer": "没看到",
+        "firstTextSeconds": 0.7971325,
+        "finalSeconds": 0.858857458,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 19,
+        "id": "question-076",
+        "answer": "没看到",
+        "firstTextSeconds": 0.802465417,
+        "finalSeconds": 0.856441917,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 20,
+        "id": "question-077",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.798908375,
+        "finalSeconds": 0.964401042,
+        "updateCount": 11
+      },
+      {
+        "condition": "A",
+        "block": 20,
+        "id": "question-078",
+        "answer": "没看到",
+        "firstTextSeconds": 0.794052541,
+        "finalSeconds": 0.856176208,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 20,
+        "id": "question-079",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.82245875,
+        "finalSeconds": 0.9452435,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 20,
+        "id": "question-080",
+        "answer": "没看到",
+        "firstTextSeconds": 0.718778083,
+        "finalSeconds": 0.77442975,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 21,
+        "id": "question-081",
+        "answer": "没看到",
+        "firstTextSeconds": 0.724474084,
+        "finalSeconds": 0.783306459,
+        "updateCount": 2
+      },
+      {
+        "condition": "B",
+        "block": 21,
+        "id": "question-082",
+        "answer": "没看到",
+        "firstTextSeconds": 0.988192375,
+        "finalSeconds": 1.047989167,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 21,
+        "id": "question-083",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.804278666,
+        "finalSeconds": 0.992679416,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 21,
+        "id": "question-084",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.839259333,
+        "finalSeconds": 0.974901208,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 22,
+        "id": "question-085",
+        "answer": "没看到",
+        "firstTextSeconds": 0.8107935,
+        "finalSeconds": 0.870138083,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 22,
+        "id": "question-086",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.7718885,
+        "finalSeconds": 0.932030083,
+        "updateCount": 8
+      },
+      {
+        "condition": "A",
+        "block": 22,
+        "id": "question-087",
+        "answer": "没看到",
+        "firstTextSeconds": 1.365423625,
+        "finalSeconds": 1.438263792,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 22,
+        "id": "question-088",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.910137875,
+        "finalSeconds": 1.110965125,
+        "updateCount": 11
+      },
+      {
+        "condition": "C",
+        "block": 23,
+        "id": "question-089",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.971532042,
+        "finalSeconds": 1.098020833,
+        "updateCount": 8
+      },
+      {
+        "condition": "D",
+        "block": 23,
+        "id": "question-090",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.788859208,
+        "finalSeconds": 0.961298458,
+        "updateCount": 11
+      },
+      {
+        "condition": "B",
+        "block": 23,
+        "id": "question-091",
+        "answer": "没看到",
+        "firstTextSeconds": 0.859567208,
+        "finalSeconds": 0.920943917,
+        "updateCount": 2
+      },
+      {
+        "condition": "A",
+        "block": 23,
+        "id": "question-092",
+        "answer": "没看到",
+        "firstTextSeconds": 0.756518208,
+        "finalSeconds": 0.812726833,
+        "updateCount": 2
+      },
+      {
+        "condition": "D",
+        "block": 24,
+        "id": "question-093",
+        "answer": "视频中有室外场景，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.80600875,
+        "finalSeconds": 0.969676667,
+        "updateCount": 11
+      },
+      {
+        "condition": "A",
+        "block": 24,
+        "id": "question-094",
+        "answer": "没看到",
+        "firstTextSeconds": 0.780187583,
+        "finalSeconds": 0.840995625,
+        "updateCount": 2
+      },
+      {
+        "condition": "C",
+        "block": 24,
+        "id": "question-095",
+        "answer": "有，室外的人正在河边钓鱼。",
+        "firstTextSeconds": 0.9722175,
+        "finalSeconds": 1.106657208,
+        "updateCount": 8
+      },
+      {
+        "condition": "B",
+        "block": 24,
+        "id": "question-096",
+        "answer": "没看到",
+        "firstTextSeconds": 0.835026541,
+        "finalSeconds": 0.894762166,
+        "updateCount": 2
+      }
+    ]
+  },
+  "short": {
+    "event": "2 s of whitewater kayaking",
+    "durationSeconds": 32,
+    "eventStartSeconds": {
+      "B": 9,
+      "C": 7
+    },
+    "inputs": {
+      "A": {
+        "mediaSHA256": "df6bca62474ce6995d9dc1c027f3fea06518d70584cb3e04ef7cdecc40fad133",
+        "question": "视频中有没有室外场景？如果有，用一句话说明室外的人在做什么；如果没看到，请说没看到。",
+        "askedTimesSeconds": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "actualTimesSeconds": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "rgbSHA256": [
+          "8746e7ba9655112e9b7bb22b9e56d9a6398ebfd13686ad8ed15634b62b7837b8",
+          "97bc849baab703b61f48f463809c9f8bc0430c0d96c74e136872cb34aee76e47",
+          "2578c4f74b12de529736ae8368cffb1a362d25c6906ccbf168ee2d27c224fdcc",
+          "88191d424d324b02da33750b74cdd4bdda27bfbb519d0367de50a52c230e7bb8",
+          "3685991b1de67a2f882de14f4edcf994447408445bce6068396e91ab9c0ca674",
+          "360fcb0a34ae4f4ff1d0aebb4c9cd4693fc0b66a3666e65cea43432f266a09ad",
+          "84b374283ed8fbab9115cca13a072ac7fc4e5a14f6c781ca4ac9bc66e5921fe6",
+          "417d868347e68f51f781c7a8edfb3e5ca1a3cb04d528869f1949b47c2bd9405b"
+        ],
+        "promptSHA256": "08d05b7792304ff10d2a65e9aa88dafb070397cbee84d0d9c29133a1b9f37554"
+      },
+      "B": {
+        "mediaSHA256": "208587f668b9f3da4051bc00c5c251e84ceb26dd393060d360933af780cb77a6",
+        "question": "视频中有没有室外场景？如果有，用一句话说明室外的人在做什么；如果没看到，请说没看到。",
+        "askedTimesSeconds": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "actualTimesSeconds": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "rgbSHA256": [
+          "8746e7ba9655112e9b7bb22b9e56d9a6398ebfd13686ad8ed15634b62b7837b8",
+          "97bc849baab703b61f48f463809c9f8bc0430c0d96c74e136872cb34aee76e47",
+          "2578c4f74b12de529736ae8368cffb1a362d25c6906ccbf168ee2d27c224fdcc",
+          "88191d424d324b02da33750b74cdd4bdda27bfbb519d0367de50a52c230e7bb8",
+          "3685991b1de67a2f882de14f4edcf994447408445bce6068396e91ab9c0ca674",
+          "360fcb0a34ae4f4ff1d0aebb4c9cd4693fc0b66a3666e65cea43432f266a09ad",
+          "84b374283ed8fbab9115cca13a072ac7fc4e5a14f6c781ca4ac9bc66e5921fe6",
+          "417d868347e68f51f781c7a8edfb3e5ca1a3cb04d528869f1949b47c2bd9405b"
+        ],
+        "promptSHA256": "08d05b7792304ff10d2a65e9aa88dafb070397cbee84d0d9c29133a1b9f37554"
+      },
+      "C": {
+        "mediaSHA256": "62782703b2269024ccdff03b3bbd4874acbee1c0bb29a399d77be9fe54c175ab",
+        "question": "视频中有没有室外场景？如果有，用一句话说明室外的人在做什么；如果没看到，请说没看到。",
+        "askedTimesSeconds": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "actualTimesSeconds": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "rgbSHA256": [
+          "8746e7ba9655112e9b7bb22b9e56d9a6398ebfd13686ad8ed15634b62b7837b8",
+          "97bc849baab703b61f48f463809c9f8bc0430c0d96c74e136872cb34aee76e47",
+          "2bde3c5a6c9326c29c823903e919d94bdaa2ec14b1871ab0c6cb372763a1d273",
+          "88191d424d324b02da33750b74cdd4bdda27bfbb519d0367de50a52c230e7bb8",
+          "3685991b1de67a2f882de14f4edcf994447408445bce6068396e91ab9c0ca674",
+          "360fcb0a34ae4f4ff1d0aebb4c9cd4693fc0b66a3666e65cea43432f266a09ad",
+          "84b374283ed8fbab9115cca13a072ac7fc4e5a14f6c781ca4ac9bc66e5921fe6",
+          "417d868347e68f51f781c7a8edfb3e5ca1a3cb04d528869f1949b47c2bd9405b"
+        ],
+        "promptSHA256": "08d05b7792304ff10d2a65e9aa88dafb070397cbee84d0d9c29133a1b9f37554"
+      },
+      "D": {
+        "mediaSHA256": "b537418f1e8d3d0b3a9106ea4c771149953c10c33cd66b895f3691869df4e29b",
+        "question": "视频中有没有室外场景？如果有，用一句话说明室外的人在做什么；如果没看到，请说没看到。",
+        "askedTimesSeconds": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1,
+          1.25,
+          1.5,
+          1.75
+        ],
+        "actualTimesSeconds": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1,
+          1.25,
+          1.5,
+          1.75
+        ],
+        "rgbSHA256": [
+          "79145b68269a0e09a10ff069b8c76ea6c8f95407e607b9c1e85a31aee9990908",
+          "b593cd3269e26bbbc6d0822be1c1f47ebe1f449e20bd5bb5b72312fccfe4a388",
+          "eb956e7a0d7034561964e0c310111a8be6a271160322643bd9e79830c938ceb6",
+          "38d90985e668a69f39a420ef15ae3a9b01bad8283acac89bdea1009684bea86a",
+          "2bde3c5a6c9326c29c823903e919d94bdaa2ec14b1871ab0c6cb372763a1d273",
+          "40e5f1f92b5aea64110df47dd68a393172eebfe936c477e2700653292e0f367b",
+          "1267360dee29a51da075b92d555e78557b1dc90759127fa304c0fe2b50bc46d9",
+          "0f3bd8b3f6a6a8a0a975564589f46f100266655cf3b68205a57631b68c647102"
+        ],
+        "promptSHA256": "fea4d93a1e029e9dd6f774970da22a0b1457a93480da7ba1cbb2bab6d7f60d99"
+      },
+      "F": {
+        "mediaSHA256": "bffd10d1fb9a8a65e0231195fddfe0da922bafe745bc7ce99d324d9e1a6b472c",
+        "question": "这个两秒片段里的人在做什么？只说能从画面确认的动作。",
+        "askedTimesSeconds": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1,
+          1.25,
+          1.5,
+          1.75
+        ],
+        "actualTimesSeconds": [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1,
+          1.25,
+          1.5,
+          1.75
+        ],
+        "rgbSHA256": [
+          "79145b68269a0e09a10ff069b8c76ea6c8f95407e607b9c1e85a31aee9990908",
+          "b593cd3269e26bbbc6d0822be1c1f47ebe1f449e20bd5bb5b72312fccfe4a388",
+          "eb956e7a0d7034561964e0c310111a8be6a271160322643bd9e79830c938ceb6",
+          "38d90985e668a69f39a420ef15ae3a9b01bad8283acac89bdea1009684bea86a",
+          "2bde3c5a6c9326c29c823903e919d94bdaa2ec14b1871ab0c6cb372763a1d273",
+          "40e5f1f92b5aea64110df47dd68a393172eebfe936c477e2700653292e0f367b",
+          "1267360dee29a51da075b92d555e78557b1dc90759127fa304c0fe2b50bc46d9",
+          "0f3bd8b3f6a6a8a0a975564589f46f100266655cf3b68205a57631b68c647102"
+        ],
+        "promptSHA256": "6a7c061c2271665bf9032a82b4fff8e3328bba21ffa47c220963d1bffd534f4a"
+      },
+      "E": {
+        "mediaSHA256": "208587f668b9f3da4051bc00c5c251e84ceb26dd393060d360933af780cb77a6",
+        "question": "请看第9到11秒：画面里的人在做什么？只说能从画面确认的动作。",
+        "askedTimesSeconds": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "actualTimesSeconds": [
+          0,
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28
+        ],
+        "rgbSHA256": [
+          "8746e7ba9655112e9b7bb22b9e56d9a6398ebfd13686ad8ed15634b62b7837b8",
+          "97bc849baab703b61f48f463809c9f8bc0430c0d96c74e136872cb34aee76e47",
+          "2578c4f74b12de529736ae8368cffb1a362d25c6906ccbf168ee2d27c224fdcc",
+          "88191d424d324b02da33750b74cdd4bdda27bfbb519d0367de50a52c230e7bb8",
+          "3685991b1de67a2f882de14f4edcf994447408445bce6068396e91ab9c0ca674",
+          "360fcb0a34ae4f4ff1d0aebb4c9cd4693fc0b66a3666e65cea43432f266a09ad",
+          "84b374283ed8fbab9115cca13a072ac7fc4e5a14f6c781ca4ac9bc66e5921fe6",
+          "417d868347e68f51f781c7a8edfb3e5ca1a3cb04d528869f1949b47c2bd9405b"
+        ],
+        "promptSHA256": "c1d80f496630783a999e4e44168952f10dcff4e8911a4b9a56d618d237f80b58"
+      }
+    },
+    "runs": [
+      {
+        "condition": "F",
+        "id": "v27",
+        "answer": "在湍急的河流中划船，使用船桨进行划行。",
+        "firstTextSeconds": 0.799832542,
+        "finalSeconds": 1.019046,
+        "updateCount": 16
+      },
+      {
+        "condition": "A",
+        "id": "v05",
+        "answer": "没看到。",
+        "firstTextSeconds": 0.746038333,
+        "finalSeconds": 0.811175167,
+        "updateCount": 3
+      },
+      {
+        "condition": "E",
+        "id": "v49",
+        "answer": "根据视频画面，第9到11秒（即00:09至00:11）里，画面中的人（穿着白色",
+        "firstTextSeconds": 0.731994208,
+        "finalSeconds": 1.108308958,
+        "updateCount": 32
+      },
+      {
+        "condition": "D",
+        "id": "v62",
+        "answer": "视频中有室外场景，室外的人正在划皮划艇在湍急的河流中航行。",
+        "firstTextSeconds": 0.715708833,
+        "finalSeconds": 0.97590375,
+        "updateCount": 20
+      },
+      {
+        "condition": "C",
+        "id": "v33",
+        "answer": "有，室外的人正在划皮划艇。",
+        "firstTextSeconds": 0.697942083,
+        "finalSeconds": 0.838566875,
+        "updateCount": 10
+      },
+      {
+        "condition": "B",
+        "id": "v91",
+        "answer": "没看到。",
+        "firstTextSeconds": 0.748943833,
+        "finalSeconds": 0.8085205,
+        "updateCount": 3
+      }
+    ]
+  }
+}
