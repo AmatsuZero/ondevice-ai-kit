@@ -300,7 +300,8 @@ final class W6UnifiedVideoUITests: XCTestCase {
     }
 
     func testVideoAnswerProcessMemory() throws {
-        try XCTSkipUnless(ProcessInfo.processInfo.environment["W6_MEASURE_MEMORY"] == "1", "Set W6_MEASURE_MEMORY=1 in the test runner to profile the prepared W6 fixture.")
+        let mode = ProcessInfo.processInfo.environment["W6_MEASURE_MEMORY"]
+        try XCTSkipUnless(mode == "1" || mode == "series", "Set W6_MEASURE_MEMORY=1 or W6_MEASURE_MEMORY=series in the test runner to profile the prepared W6 fixture.")
         continueAfterFailure = false
         let app = XCUIApplication()
         app.launch()
@@ -313,19 +314,45 @@ final class W6UnifiedVideoUITests: XCTestCase {
             ("w6-yuv-clip-02", "blue, red")
         ]
 
+        let series = mode == "series"
+        let recordedCount = series ? 6 : 1
         var iteration = 0
         let options = XCTMeasureOptions()
-        options.iterationCount = 1
+        options.iterationCount = recordedCount
         options.invocationOptions = [.manuallyStart, .manuallyStop]
 
         measure(metrics: [XCTMemoryMetric(application: app), XCTClockMetric()], options: options) {
-            guard iteration < clips.count else {
+            guard iteration < recordedCount + 1 else {
                 XCTFail("Unexpected additional measurement iteration")
                 return
             }
 
-            let clip = clips[iteration]
+            let index = iteration
+            let clip = clips[index % clips.count]
             iteration += 1
+
+            func checkThermal(_ stage: String) {
+                guard series else { return }
+                let state = ProcessInfo.processInfo.thermalState
+                let readableState: String
+                switch state {
+                case .nominal:
+                    readableState = "nominal"
+                case .fair:
+                    readableState = "fair"
+                case .serious:
+                    readableState = "serious"
+                case .critical:
+                    readableState = "critical"
+                @unknown default:
+                    readableState = "unknown"
+                }
+                XCTContext.runActivity(named: "\(stage) - \(readableState)") { _ in
+                    XCTAssertTrue(state == .nominal || state == .fair, "Thermal state \(readableState) is not acceptable for \(stage)")
+                }
+            }
+
+            checkThermal("before_\(index)")
 
             self.selectFixture(clip.name, using: select, in: app)
             self.enterPrompt("What color is the screen in the first half, and what color is it in the second half? Answer with the two color names in order.", in: app)
@@ -342,11 +369,15 @@ final class W6UnifiedVideoUITests: XCTestCase {
             let appeared = output.waitForExistence(timeout: 180)
             self.stopMeasuring()
 
+            checkThermal("after_\(index)")
+
             XCTAssertTrue(appeared)
-            _ = self.assertResult(clip.answer, in: app, screenshotName: clip.name)
+            let sample = index == 0 ? "warmup" : "sample-\(index)"
+            let screenshotName = series ? "\(sample)-\(clip.name)" : clip.name
+            _ = self.assertResult(clip.answer, in: app, screenshotName: screenshotName)
         }
 
-        XCTAssertEqual(iteration, clips.count)
+        XCTAssertEqual(iteration, recordedCount + 1)
     }
 
     func testCancelAfterVisibleTextAndAskAgain() {

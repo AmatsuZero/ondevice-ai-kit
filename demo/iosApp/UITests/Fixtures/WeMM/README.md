@@ -133,6 +133,16 @@ xcrun xcresulttool get test-results metrics --path "$W6_QA_DIR/memory.xcresult" 
 
 结果应为 1 项通过、0 项跳过。核对结果中的设备 ID，以及内存指标标识中的夹具 bundle ID。三个内存指标的原始单位都是 kB。
 
+### 在同一页面连续测六次短答
+
+在上面的命令中，将 `plutil` 的 `-string 1` 改为 `-string series`，为计划和结果包各取一个新名称。用例先用红蓝片预热，再交替用蓝红片、红蓝片测六次。七轮共用一次 App 启动，每轮都通过 Files 选片，并校验完整色序回答、模型版本和后端。
+
+在结果包的 metrics 中，三个进程内存指标和一个时钟指标应各有六个值，按出答先后顺序对应 `sample-1` 到 `sample-6` 的截图。每个值只覆盖当轮点击「生成」到页面出答。文件选择器、两答间隙和预热期间的内存不在这六个窗口内。
+
+活动记录中每轮有两个热状态观测，`before_0` / `after_0` 对应预热，编号 1–6 对应正式回答。前者在选片前，后者在出答测量结束后。若观测到 serious、critical 或未知状态，用例在该检查点停止。两点之间的热状态、长视频处理和电池耗电需另行测量。
+
+2026-11-27 在专用 iOS 27.2 模拟器上验证了该流程。活动记录显示 App 启动一次、七次答对两段影片的色序、十四条热状态记录。四个指标各导出六个样本。真机的连续六次内存数据仍待采集。
+
 ## 在专用模拟器运行
 
 将构建 destination 改为 `generic/platform=iOS Simulator`，运行时选取同一构建目录的 `SpeechDemo_iphonesimulator*.xctestrun`。`DEVICE_ID` 应取自本轮新建并启动的专用模拟器。先运行空模型测试，再把两份权重和三段素材放入 Files 的「我的 iPhone / W6 Test Files」。iOS 27.2 模拟器实测使用以下来源目录。请在同一个 shell 中设置前述变量并运行。
