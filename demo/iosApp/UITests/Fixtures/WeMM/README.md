@@ -118,7 +118,7 @@ xcrun xcresulttool get test-results activities --path "$W6_QA_DIR/movies.xcresul
 | Memory Physical（区间变化） | +36,077.568 kB |
 | Clock Monotonic Time | 4.447 s |
 
-内存指标绑定到 `io.ondeviceai.w6.unifiedvideo.fixtures` 进程。峰值约为 394.97 MB（十进制），仅覆盖这次预热后短答。冷启动、长视频、连续问答和整机能耗仍待测量。
+内存指标绑定到 `io.ondeviceai.w6.unifiedvideo.fixtures` 进程。峰值约为 394.97 MB（十进制），仅覆盖这次预热后短答。连续问答数据见下节。冷启动、长视频和整机能耗仍待真机测量。
 
 复测需要手机有可用屏幕，夹具中已有两段影片及固定版本模型。常规测试默认跳过这项测量。在原构建产物旁另存开启测量的计划，以保留 App 和 Runner 的相对路径。以下命令沿用前文变量，并在新的结果目录中执行一次。
 
@@ -143,7 +143,7 @@ xcrun xcresulttool get test-results metrics --path "$W6_QA_DIR/memory.xcresult" 
 
 活动记录中每轮有两个热状态观测，`before_0` / `after_0` 对应预热，编号 1–6 对应正式回答。前者在选片前，后者在出答测量结束后。若观测到 serious、critical 或未知状态，用例在该检查点停止。两点之间的热状态、长视频处理和电池耗电需另行测量。
 
-2026-11-27 在专用 iOS 27.2 模拟器上验证了该流程。活动记录显示 App 启动一次、七次答对两段影片的色序、十四条热状态记录。四个指标各导出六个样本。真机的连续六次内存数据仍待采集。
+2026-11-27 在专用 iOS 27.2 模拟器上验证了该流程。活动记录显示 App 启动一次、七次答对两段影片的色序、十四条热状态记录。四个指标各导出六个样本。同日，iPhone 16 Pro Max（iOS 27.2.1，USB）也完成了同一流程，六次色序均答对。每轮出答耗时 3.413–4.468 秒，最高进程峰值 408,080.552 kB，14 个检查点均为 `nominal`。[真机逐轮数据](../../../../../docs/roadmap/W8-resources.md#同一页面连续六次短答)
 
 ### 测量五分钟影片的页面出答
 

@@ -1,0 +1,140 @@
+{
+  "source": {
+    "resultBundle": "w6-iphone-six-answers-20261127-GT2300QJ/series.xcresult",
+    "infoPlistSHA256": "8b4583c8f8530fa7148aa7d8ce72d770b4e9be40b248f10bee6f5f47bfa04bf7",
+    "testIdentifier": "W6UnifiedVideoUITests/testVideoAnswerProcessMemory()",
+    "testPlanSHA256": "ad32e5396eaccc11e9bef86ca772b8cef45a6f819732e3e7f77446b0a60b1aec",
+    "metricsExportSHA256": "b621824160728a3c372f751fe49e1bd9f58066d09c94c4c945bdbcb2a2ca15a7",
+    "startedUTC": "2026-11-27T07:47:44.051000+00:00"
+  },
+  "device": {
+    "modelName": "iPhone 16 Pro Max",
+    "platform": "iOS",
+    "osVersion": "27.2.1",
+    "osBuildNumber": "24B156"
+  },
+  "connection": "USB",
+  "mode": "series",
+  "testResult": {
+    "result": "Passed",
+    "passedTests": 1,
+    "skippedTests": 0,
+    "failedTests": 0
+  },
+  "model": "tencent/WeMM-Video-2B-GGUF",
+  "modelRevision": "395e99f987a73915273943d4510e23004df7cede",
+  "backend": "llama.wemm-video-2b",
+  "appLaunches": 1,
+  "warmupAnswers": 1,
+  "measuredAnswers": 6,
+  "measurementWindow": "Tap Generate until XCTest observes the answer. Includes UI automation waits. Metric arrays correspond to samples 1 through 6. Sample 0 is warm-up.",
+  "thermalCheckpoints": "System thermal state before file selection and after the answer window in each round.",
+  "answers": [
+    {
+      "sample": 0,
+      "screenshot": "warmup-w6-yuv-clip-01",
+      "screenshotSHA256": "e032f2cb97f4e748358e825b5262a4ed809aec1a304d7c3975dade86b509a1b6",
+      "verifiedColorOrder": "red, blue",
+      "thermalBefore": "nominal",
+      "thermalAfter": "nominal"
+    },
+    {
+      "sample": 1,
+      "screenshot": "sample-1-w6-yuv-clip-02",
+      "screenshotSHA256": "12cf3ce0d278f6c68de8c3b8f7d22222abe5086eb668c8dcb3d252bb56d44815",
+      "verifiedColorOrder": "blue, red",
+      "thermalBefore": "nominal",
+      "thermalAfter": "nominal"
+    },
+    {
+      "sample": 2,
+      "screenshot": "sample-2-w6-yuv-clip-01",
+      "screenshotSHA256": "7d347a14138a337ad7a82f0c06f541cd55c4ffb09375221f21a1cec803332db8",
+      "verifiedColorOrder": "red, blue",
+      "thermalBefore": "nominal",
+      "thermalAfter": "nominal"
+    },
+    {
+      "sample": 3,
+      "screenshot": "sample-3-w6-yuv-clip-02",
+      "screenshotSHA256": "12cf3ce0d278f6c68de8c3b8f7d22222abe5086eb668c8dcb3d252bb56d44815",
+      "verifiedColorOrder": "blue, red",
+      "thermalBefore": "nominal",
+      "thermalAfter": "nominal"
+    },
+    {
+      "sample": 4,
+      "screenshot": "sample-4-w6-yuv-clip-01",
+      "screenshotSHA256": "8c8a48477a1ed59982a01919f44c88ccceeae78add7b71b78ec3fdf14ccfea6c",
+      "verifiedColorOrder": "red, blue",
+      "thermalBefore": "nominal",
+      "thermalAfter": "nominal"
+    },
+    {
+      "sample": 5,
+      "screenshot": "sample-5-w6-yuv-clip-02",
+      "screenshotSHA256": "b80f8c8915e739829de25cba074165f466e6c954d887a74caaf68926b2daee39",
+      "verifiedColorOrder": "blue, red",
+      "thermalBefore": "nominal",
+      "thermalAfter": "nominal"
+    },
+    {
+      "sample": 6,
+      "screenshot": "sample-6-w6-yuv-clip-01",
+      "screenshotSHA256": "9e23c456f202c994675a173c6aefb1cac2c721cf0f376e57e4428167718a13ca",
+      "verifiedColorOrder": "red, blue",
+      "thermalBefore": "nominal",
+      "thermalAfter": "nominal"
+    }
+  ],
+  "metrics": [
+    {
+      "identifier": "com.apple.dt.XCTMetric_Clock.time.monotonic",
+      "unitOfMeasurement": "s",
+      "measurements": [
+        4.463572625,
+        4.463663686,
+        4.4677716400000005,
+        4.458158493,
+        4.454752992,
+        3.413138849
+      ]
+    },
+    {
+      "identifier": "com.apple.dt.XCTMetric_Memory-io.ondeviceai.w6.unifiedvideo.fixtures.physical",
+      "unitOfMeasurement": "kB",
+      "measurements": [
+        36634.624,
+        187187.296,
+        143818.848,
+        152862.816,
+        162316.408,
+        155549.792
+      ]
+    },
+    {
+      "identifier": "com.apple.dt.XCTMetric_Memory-io.ondeviceai.w6.unifiedvideo.fixtures.physical_peak",
+      "unitOfMeasurement": "kB",
+      "measurements": [
+        403099.816,
+        408080.552,
+        387895.44,
+        378130.576,
+        380113.04,
+        375787.664
+      ]
+    },
+    {
+      "identifier": "com.apple.dt.XCTMetric_Memory-io.ondeviceai.w6.unifiedvideo.fixtures.physical_absolute",
+      "unitOfMeasurement": "kB",
+      "measurements": [
+        222365.968,
+        373623.152,
+        330844.504,
+        339921.24,
+        349129.072,
+        342329.688
+      ]
+    }
+  ]
+}
