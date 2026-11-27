@@ -79,6 +79,32 @@ done
 
 2026-11-27 在 iPhone 16 Pro Max（iOS 27.2.1）上实测，三个阶段分别通过 1/1、1/1、4/4 项，零跳过。从系统「文件」导入模型后，重启仍可选片。同一问题在两段反向色序影片上分别得到 `red, blue` 和 `blue, red`。手动取消或离开页面后都可再次提问，损坏影片显示解码错误并可重新选片。此次验收使用专用已签名夹具。开放问答质量、进程内存峰值和整机功耗需单独评估。
 
+## 从 XCTest 结果包读出页面耗时
+
+在 Mac 上用 Xcode 命令行工具读取上面生成的 `movies.xcresult`。将 `DEVICE_ID` 设为测试目的地的 ID。读取器校验设备、四个影片用例及其通过状态，再输出六个观察窗口。每个窗口从点击「生成」开始，到 XCTest 确认文字后的下一项活动开始为止，包含 UI 自动化与轮询时间。
+
+```sh
+python3 demo/iosApp/UITests/Fixtures/WeMM/read-ui.py \
+  "$W6_QA_DIR/movies.xcresult" "$DEVICE_ID"
+```
+
+在上述真机记录中，两次反向色序短答的页面观察上界分别为 5.619 和 5.680 秒。取消后续问为 5.601 秒，离页后续问为 5.575 秒。
+
+同一真机结果包还保留了三个恢复过程。下面的上界从操作开始，到 XCTest 完成所列状态断言后的下一项活动开始，每项各观测一次。
+
+| 操作 | 确认的界面状态 | 观察上界 |
+| --- | --- | ---: |
+| 长答中点击取消 | 阶段为 `CANCELLED`，无最终答案 | 1.530 秒 |
+| 长答中返回，再进视频理解 | 阶段为 `CANCELLED`，无最终答案，原视频仍选中 | 5.806 秒，含往返导航 |
+| 选择截断影片并点击生成 | 显示解码错误，选片按钮可用 | 1.539 秒 |
+
+要复核恢复上界，可在 Xcode 中打开结果包，或用下列命令读取单个用例的活动。取消和离页分别从点击 `multimodal-cancel` 和 `unified-back` 算到添加 `first-visible-text` 附件；坏片从点击 `multimodal-generate` 算到 `Tear Down`。取两项活动的 `startTime` 之差。
+
+```sh
+xcrun xcresulttool get test-results activities --path "$W6_QA_DIR/movies.xcresult" \
+  --test-id 'W6UnifiedVideoUITests/testCancelAfterVisibleTextAndAskAgain()'
+```
+
 ## 在专用模拟器运行
 
 将构建 destination 改为 `generic/platform=iOS Simulator`，运行时选取同一构建目录的 `SpeechDemo_iphonesimulator*.xctestrun`。`DEVICE_ID` 应取自本轮新建并启动的专用模拟器。先运行空模型测试，再把两份权重和三段素材放入 Files 的「我的 iPhone / W6 Test Files」。iOS 27.2 模拟器实测使用以下来源目录。请在同一个 shell 中设置前述变量并运行。
