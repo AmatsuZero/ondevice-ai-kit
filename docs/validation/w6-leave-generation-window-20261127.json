@@ -1,0 +1,106 @@
+{
+  "originalIPhone": {
+    "device": "iPhone 16 Pro Max",
+    "os": "27.2.1",
+    "budget": 32,
+    "nativeTeardownRelativeToXCTestBackTap": {
+      "wired": {
+        "updateToBackSeconds": 1.184,
+        "generateToBackSeconds": 5.724,
+        "teardownEntries": [
+          {
+            "line": 12437,
+            "previousAppLogRelativeToBackSeconds": 0.083687,
+            "followingAppLogRelativeToBackSeconds": 1.473046
+          },
+          {
+            "line": 12441,
+            "previousAppLogRelativeToBackSeconds": 0.083687,
+            "followingAppLogRelativeToBackSeconds": 1.473046
+          }
+        ],
+        "stderrSHA256": "6c2ac7024804dc2fd634da4b66abc8a1b62692d2e92bc5964303f83aab889826"
+      },
+      "wireless": {
+        "updateToBackSeconds": 1.204,
+        "generateToBackSeconds": 5.727,
+        "teardownEntries": [
+          {
+            "line": 10069,
+            "previousAppLogRelativeToBackSeconds": -1.185906,
+            "followingAppLogRelativeToBackSeconds": -0.145433
+          },
+          {
+            "line": 10073,
+            "previousAppLogRelativeToBackSeconds": -1.185906,
+            "followingAppLogRelativeToBackSeconds": -0.145433
+          }
+        ],
+        "stderrSHA256": "af806d298c897835744e47b18956e6c93a7c28f597105ef8607f457203731d34"
+      }
+    },
+    "wirelessSuite": {
+      "result": "Failed",
+      "passedTests": 3,
+      "failedTests": 1,
+      "skippedTests": 0
+    }
+  },
+  "macComparison": {
+    "clipSHA256": "0696147436009709bcc1515c2864711e522c00d5d3beda567ff338f57d551f88",
+    "prompt": "Write a long numbered list of thirty observations about the colors and their order in this video. Explain each observation in its own sentence.",
+    "runtime": "llama.cpp-88aaf325a7026ac1127d0897394b0a3d6413dc2a-wemm-mixed-prefill-microbatch-128-v1",
+    "runs": [
+      {
+        "caseId": "normal-1",
+        "budget": 32,
+        "callbacks": 32,
+        "firstNonblankSeconds": 5.029210083,
+        "returnedSeconds": 5.457624458
+      },
+      {
+        "caseId": "long-1",
+        "budget": 256,
+        "callbacks": 256,
+        "firstNonblankSeconds": 0.840009708,
+        "returnedSeconds": 4.010602583
+      },
+      {
+        "caseId": "long-2",
+        "budget": 256,
+        "callbacks": 256,
+        "firstNonblankSeconds": 0.8375495,
+        "returnedSeconds": 4.014079958
+      },
+      {
+        "caseId": "normal-2",
+        "budget": 32,
+        "callbacks": 32,
+        "firstNonblankSeconds": 0.822645458,
+        "returnedSeconds": 1.249197166
+      }
+    ]
+  },
+  "revisedFixture": {
+    "sourceSHA256": "4a1ac038455295bd233019fb9bfd83815ee154fff5393a01e4b6b0e70cdcbd64",
+    "simulator": "iOS 27.2 / iPhone 16 Pro Max",
+    "tests": {
+      "empty": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      "import": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      "movies": {
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    "physicalRetest": "pending"
+  }
+}

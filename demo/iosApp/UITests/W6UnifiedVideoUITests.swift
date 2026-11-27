@@ -208,6 +208,7 @@ final class W6UnifiedVideoUITests: XCTestCase {
         let select = app.buttons[videoSelectTag]
         XCTAssertTrue(waitUntilEnabled(select, in: app, timeout: 120))
         selectFixture("w6-yuv-clip-01", using: select, in: app)
+        enterText("256", tag: "multimodal-budget", emptyLabel: "输出 token budget（正整数）", in: app)
         enterPrompt("Write a long numbered list of thirty observations about the colors and their order in this video. Explain each observation in its own sentence.", in: app)
         let generate = app.buttons[generateTag]
         XCTAssertTrue(reveal(generate, in: app)); generate.tap()
@@ -227,6 +228,7 @@ final class W6UnifiedVideoUITests: XCTestCase {
         let attachment = XCTAttachment(string: "visible text before leaving: " + firstText)
         attachment.name = "first-visible-text"; attachment.lifetime = .keepAlways; add(attachment)
 
+        enterText("32", tag: "multimodal-budget", emptyLabel: "输出 token budget（正整数）", in: app)
         enterPrompt("What color is the screen in the first half, and what color is it in the second half? Answer with the two color names in order.", in: app)
         runGeneration(in: app)
         _ = assertResult("red, blue", in: app, screenshotName: "w6-restored-answer")
@@ -498,21 +500,25 @@ final class W6UnifiedVideoUITests: XCTestCase {
     }
 
     private func enterPrompt(_ prompt: String, in app: XCUIApplication) {
-        let field = app.descendants(matching: .any)[promptTag]
-        XCTAssertTrue(reveal(field, in: app), "Prompt field should be visible")
+        enterText(prompt, tag: promptTag, emptyLabel: "原始 prompt", in: app)
+    }
+
+    private func enterText(_ text: String, tag: String, emptyLabel: String, in app: XCUIApplication) {
+        let field = app.descendants(matching: .any)[tag]
+        XCTAssertTrue(reveal(field, in: app), "Field should be visible for \(tag)")
         field.tap()
 
-        if (field.value as? String) != prompt {
+        if (field.value as? String) != text {
             // Compose keeps its own edit selection. Move to the logical end, then verify deletion in the actual text control.
             for _ in 0..<3 {
                 let old = (field.value as? String) ?? ""
-                if old.isEmpty || old == "原始 prompt" { break }
+                if old.isEmpty || old == emptyLabel { break }
                 for _ in 0..<(old.count + 1) { field.typeKey(.rightArrow, modifierFlags: []) }
                 field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count + 8))
             }
-            field.typeText(prompt)
+            field.typeText(text)
         }
-        XCTAssertEqual(field.value as? String, prompt, "The requested prompt should be entered exactly")
+        XCTAssertEqual(field.value as? String, text, "The requested text should be entered exactly for \(tag)")
 
         let done = app.keyboards.buttons.matching(NSPredicate(format: "label IN %@", ["Done", "完成", "done"])).firstMatch
         if done.waitForExistence(timeout: 2) {
