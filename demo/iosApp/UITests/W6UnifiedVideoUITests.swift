@@ -299,6 +299,56 @@ final class W6UnifiedVideoUITests: XCTestCase {
         XCTAssertEqual(second.backendID, first.backendID, "Both clips should use the same backend")
     }
 
+    func testVideoAnswerProcessMemory() throws {
+        try XCTSkipUnless(ProcessInfo.processInfo.environment["W6_MEASURE_MEMORY"] == "1", "Set W6_MEASURE_MEMORY=1 in the test runner to profile the prepared W6 fixture.")
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launch()
+        openVideoUnderstanding(in: app)
+        let select = app.buttons[videoSelectTag]
+        XCTAssertTrue(waitUntilEnabled(select, in: app, timeout: 180))
+
+        let clips: [(name: String, answer: String)] = [
+            ("w6-yuv-clip-01", "red, blue"),
+            ("w6-yuv-clip-02", "blue, red")
+        ]
+
+        var iteration = 0
+        let options = XCTMeasureOptions()
+        options.iterationCount = 1
+        options.invocationOptions = [.manuallyStart, .manuallyStop]
+
+        measure(metrics: [XCTMemoryMetric(application: app), XCTClockMetric()], options: options) {
+            guard iteration < clips.count else {
+                XCTFail("Unexpected additional measurement iteration")
+                return
+            }
+
+            let clip = clips[iteration]
+            iteration += 1
+
+            self.selectFixture(clip.name, using: select, in: app)
+            self.enterPrompt("What color is the screen in the first half, and what color is it in the second half? Answer with the two color names in order.", in: app)
+
+            let generate = app.buttons[generateTag]
+            let output = app.staticTexts[outputTag]
+
+            XCTAssertFalse(output.exists)
+            XCTAssertTrue(self.reveal(generate, in: app))
+            XCTAssertTrue(generate.isEnabled)
+
+            self.startMeasuring()
+            generate.tap()
+            let appeared = output.waitForExistence(timeout: 180)
+            self.stopMeasuring()
+
+            XCTAssertTrue(appeared)
+            _ = self.assertResult(clip.answer, in: app, screenshotName: clip.name)
+        }
+
+        XCTAssertEqual(iteration, clips.count)
+    }
+
     func testCancelAfterVisibleTextAndAskAgain() {
         continueAfterFailure = false
         let app = XCUIApplication()

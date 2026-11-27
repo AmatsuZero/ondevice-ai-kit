@@ -77,7 +77,7 @@ done
 
 三个结果应分别执行 1、1、4 项，通过数等于执行数且跳过数为零。
 
-2026-11-27 在 iPhone 16 Pro Max（iOS 27.2.1）上实测，三个阶段分别通过 1/1、1/1、4/4 项，零跳过。从系统「文件」导入模型后，重启仍可选片。同一问题在两段反向色序影片上分别得到 `red, blue` 和 `blue, red`。手动取消或离开页面后都可再次提问，损坏影片显示解码错误并可重新选片。此次验收使用专用已签名夹具。开放问答质量、进程内存峰值和整机功耗需单独评估。
+2026-11-27 在 iPhone 16 Pro Max（iOS 27.2.1）上实测，三个阶段分别通过 1/1、1/1、4/4 项，零跳过。从系统「文件」导入模型后，重启仍可选片。同一问题在两段反向色序影片上分别得到 `red, blue` 和 `blue, red`。手动取消或离开页面后都可再次提问，损坏影片显示解码错误并可重新选片。此次验收使用专用已签名夹具。该轮覆盖页面功能，开放问答质量与整机功耗另行验收。
 
 ## 从 XCTest 结果包读出页面耗时
 
@@ -104,6 +104,34 @@ python3 demo/iosApp/UITests/Fixtures/WeMM/read-ui.py \
 xcrun xcresulttool get test-results activities --path "$W6_QA_DIR/movies.xcresult" \
   --test-id 'W6UnifiedVideoUITests/testCancelAfterVisibleTextAndAskAgain()'
 ```
+
+## 测量短回答期间的 App 进程内存
+
+2026-11-27 在 iPhone 16 Pro Max（iOS 27.2.1，USB）上复用了通过六项功能验收的 W6 Fixtures App 和已导入的 WeMM 模型。独立的 XCTest 先用红蓝影片预热一次，再用蓝红影片记录一次。两次都校验了答案、模型和后端。测量从点击「生成」开始，到页面出现回答为止，包含 UI 自动化等待。选片、键入问题、核对答案和截图均在测量区间外。
+
+| XCTest 指标 | 第二段短回答（1 个样本） |
+| --- | ---: |
+| Memory Peak Physical | 394,973.304 kB |
+| Absolute Memory Physical | 221,890.808 kB |
+| Memory Physical（区间变化） | +36,077.568 kB |
+| Clock Monotonic Time | 4.447 s |
+
+内存指标绑定到 `io.ondeviceai.w6.unifiedvideo.fixtures` 进程。峰值约为 394.97 MB（十进制），仅覆盖这次预热后短答。冷启动、长视频、连续问答和整机能耗仍待测量。
+
+复测需要手机有可用屏幕，夹具中已有两段影片及固定版本模型。常规测试默认跳过这项测量。在原构建产物旁另存开启测量的计划，以保留 App 和 Runner 的相对路径。以下命令沿用前文变量，并在新的结果目录中执行一次。
+
+```sh
+products="$W6_QA_DIR/build/Build/Products"
+plutil -insert SpeechDemoUITests.EnvironmentVariables.W6_MEASURE_MEMORY -string 1 \
+  -o "$products/memory.xctestrun" "$products"/SpeechDemo_iphoneos*.xctestrun
+xcodebuild test-without-building -xctestrun "$products/memory.xctestrun" \
+  -destination "id=$DEVICE_ID" -parallel-testing-enabled NO -collect-test-diagnostics never \
+  "-only-testing:$W6_SUITE/testVideoAnswerProcessMemory" -resultBundlePath "$W6_QA_DIR/memory.xcresult"
+xcrun xcresulttool get test-results metrics --path "$W6_QA_DIR/memory.xcresult" \
+  --test-id 'W6UnifiedVideoUITests/testVideoAnswerProcessMemory()'
+```
+
+结果应为 1 项通过、0 项跳过。核对结果中的设备 ID，以及内存指标标识中的夹具 bundle ID。三个内存指标的原始单位都是 kB。
 
 ## 在专用模拟器运行
 
