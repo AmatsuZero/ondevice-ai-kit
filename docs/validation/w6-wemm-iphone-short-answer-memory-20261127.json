@@ -1,0 +1,57 @@
+{
+  "source": {
+    "resultBundle": "phone-memory.xcresult",
+    "infoPlistSHA256": "cb4b32f67059e6bec913f3475a1f97cfb4e3aa9ce035493500985b355cb2590a",
+    "testIdentifier": "W6UnifiedVideoUITests/testVideoAnswerProcessMemory()"
+  },
+  "device": {
+    "modelName": "iPhone 16 Pro Max",
+    "platform": "iOS",
+    "osVersion": "27.2.1",
+    "osBuildNumber": "24B156"
+  },
+  "connection": "USB",
+  "testResult": {
+    "result": "Passed",
+    "passedTests": 1,
+    "skippedTests": 0,
+    "failedTests": 0
+  },
+  "measurementWindow": "Tap Generate until the UI answer is present",
+  "warmupAnswers": 1,
+  "measuredAnswers": 1,
+  "answerScreenshots": [
+    "w6-yuv-clip-01",
+    "w6-yuv-clip-02"
+  ],
+  "metrics": [
+    {
+      "identifier": "com.apple.dt.XCTMetric_Clock.time.monotonic",
+      "unitOfMeasurement": "s",
+      "measurements": [
+        4.447155897
+      ]
+    },
+    {
+      "identifier": "com.apple.dt.XCTMetric_Memory-io.ondeviceai.w6.unifiedvideo.fixtures.physical",
+      "unitOfMeasurement": "kB",
+      "measurements": [
+        36077.568
+      ]
+    },
+    {
+      "identifier": "com.apple.dt.XCTMetric_Memory-io.ondeviceai.w6.unifiedvideo.fixtures.physical_peak",
+      "unitOfMeasurement": "kB",
+      "measurements": [
+        394973.304
+      ]
+    },
+    {
+      "identifier": "com.apple.dt.XCTMetric_Memory-io.ondeviceai.w6.unifiedvideo.fixtures.physical_absolute",
+      "unitOfMeasurement": "kB",
+      "measurements": [
+        221890.808
+      ]
+    }
+  ]
+}
