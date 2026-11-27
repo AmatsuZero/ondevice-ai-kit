@@ -39,6 +39,50 @@ import XCTest
     store.close()
   }
 
+  func testKnownOversizeIsRejectedBeforeWritingAnyChunks() async throws {
+    let root = try makeRoot()
+    defer { try? FileManager.default.removeItem(at: root) }
+    let source = root.appendingPathComponent("oversized.mp4")
+    let limit = 64 * 1024
+    try Data(repeating: 1, count: limit + 1).write(to: source)
+    let directory = root.appendingPathComponent("copies")
+    let store = try MultimodalInputStore(directory: directory, maxBytes: limit, checkpoint: { phase in
+      if phase == .chunkWritten { XCTFail("A known oversized source should be rejected before copying") }
+    })
+    defer { store.close() }
+
+    do {
+      _ = try await store.startImport(from: source).value
+      XCTFail("Expected an oversized source to be rejected")
+    } catch MultimodalInputStoreError.invalidSource {}
+    XCTAssertTrue(try FileManager.default.contentsOfDirectory(atPath: directory.path).isEmpty)
+  }
+
+  func testSourceThatGrowsAfterTheSizeCheckIsStillRejected() async throws {
+    let root = try makeRoot()
+    defer { try? FileManager.default.removeItem(at: root) }
+    let source = root.appendingPathComponent("growing.mp4")
+    let limit = 64 * 1024
+    try Data(repeating: 1, count: limit).write(to: source)
+    let directory = root.appendingPathComponent("copies")
+    let store = try MultimodalInputStore(directory: directory, maxBytes: limit, checkpoint: { phase in
+      guard phase == .chunkWritten else { return }
+      let writer = try FileHandle(forWritingTo: source)
+      defer { try? writer.close() }
+      if try writer.seekToEnd() == UInt64(limit) {
+        try writer.write(contentsOf: Data([2]))
+      }
+    })
+    defer { store.close() }
+
+    do {
+      _ = try await store.startImport(from: source).value
+      XCTFail("Expected growth beyond the limit to be rejected")
+    } catch MultimodalInputStoreError.invalidSource {}
+    XCTAssertEqual(try Data(contentsOf: source).count, limit + 1)
+    XCTAssertTrue(try FileManager.default.contentsOfDirectory(atPath: directory.path).isEmpty)
+  }
+
   func testPrivateCopyIsIndependentOfSourceAndReferenceIsOpaque() async throws {
     let root = try makeRoot()
     defer { try? FileManager.default.removeItem(at: root) }

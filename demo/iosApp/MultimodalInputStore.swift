@@ -140,7 +140,8 @@ final class MultimodalInputStore: IOSMultimodalInputProvider {
     defer { Darwin.close(descriptor) }
     var metadata = stat()
     guard fstat(descriptor, &metadata) == 0,
-      metadata.st_mode & S_IFMT == S_IFREG
+      metadata.st_mode & S_IFMT == S_IFREG,
+      metadata.st_size <= maxBytes
     else { throw MultimodalInputStoreError.invalidSource }
     let output = destination.withUnsafeFileSystemRepresentation { path in
       path.map { Darwin.open($0, O_WRONLY | O_CREAT | O_EXCL | O_NOFOLLOW, S_IRUSR | S_IWUSR) }
