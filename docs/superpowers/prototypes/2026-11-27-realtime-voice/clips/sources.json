@@ -1,0 +1,40 @@
+{
+  "original": {
+    "source_sha256": "6d2924e2a9c30ae62c18f020222dbd35cc71e9f0e54ac0427cc68f87afe468a1",
+    "preview_sha256": "31561202c481b391faacaf3a15a4d5cfe06eada022645ee7140ca8d10ef2548b",
+    "gain_dB": 20
+  },
+  "voiceA": {
+    "source_sha256": "6299c11809aebe5fa482ba84e41ed00a98d8e9b809d34708c425d490b2076079",
+    "preview_sha256": "2236061e586001336b5f08789b69e6ec9faca86c2e33dc331442b3109ca017d7",
+    "gain_dB": 9.6696,
+    "frames": 214272,
+    "sample_rate": 22050
+  },
+  "voiceB": {
+    "source_sha256": "f5e29d6c85fce7eedd56590ff86ffb5db8cefb4db078cc7c748a5e92f36f9696",
+    "preview_sha256": "1723e8d7f38a767b4b62c495ce9ee9ac53d4daaf35801a9a9ef537c915ae4953",
+    "gain_dB": 10.0997,
+    "frames": 214272,
+    "sample_rate": 22050
+  },
+  "voiceC": {
+    "source_sha256": "192d7e5a25e83a546c4ec89e755a7b399a0a017ada53c86e8cff31e9d4f2ad2a",
+    "preview_sha256": "2471eb49bfe69ecb7cf4b2f8a5fce3d83e5dee50e5a9686a3ed4c293a9ca3955",
+    "gain_dB": 10.6895,
+    "frames": 214272,
+    "sample_rate": 22050
+  },
+  "up": {
+    "preview_sha256": "a4f8ec9f9641351dbaaf4a1de4f2a4cae1daeb3e75276a4e34b49621ea6fbcb6",
+    "input": "original.wav",
+    "filter": "asetrate=20159,aresample=16000,atempo=0.7936901632025398,apad,atrim=end_sample=155520",
+    "frames": 155520
+  },
+  "down": {
+    "preview_sha256": "6f264df32cb82f69bbf23afa54770c188e27eed6dc7d2f9af5efa2e415d642a4",
+    "input": "original.wav",
+    "filter": "asetrate=12699,aresample=16000,atempo=1.2599417276950942,apad,atrim=end_sample=155520",
+    "frames": 155520
+  }
+}

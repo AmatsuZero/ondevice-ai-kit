@@ -47,6 +47,7 @@
 		B6FC811A41E48DA2C000E72A /* SpeechDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB93DA5BF37D4076A5B75E42 /* SpeechDemoUITests.swift */; };
 		BCD2975C56BD7D84B7027E72 /* SpeechFilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC877F173857102EC6502876 /* SpeechFilePicker.swift */; };
 		C0FE208C4C49EA1474ED2DAF /* ODAIKitVoiceEffects in Frameworks */ = {isa = PBXBuildFile; productRef = C5120EB9EC6A980140FB560D /* ODAIKitVoiceEffects */; };
+		C3BE90902B6972E06A9B4B06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF9B6F948F3615521552B8A /* Assets.xcassets */; };
 		C3FC908149BB0D18751FE756 /* PlaybackEnhancementShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 139E9E0A5D037D58902B3127 /* PlaybackEnhancementShaders.metal */; };
 		C97C9FD3F5B34B459AF57CCD /* OnDeviceAIDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86B07B08BD419D7805814EB /* OnDeviceAIDemoApp.swift */; };
 		D3D07E8A3CBF908342B657D3 /* IOSSpeechBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D8CE7A2A03FD45631DDABB /* IOSSpeechBridge.swift */; };
@@ -97,6 +98,7 @@
 		C400C8A95494A2E3B6E3B066 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		C86B07B08BD419D7805814EB /* OnDeviceAIDemoApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OnDeviceAIDemoApp.swift; sourceTree = "<group>"; };
 		CA01B99A417119D971081869 /* PhotoSubmission.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoSubmission.swift; sourceTree = "<group>"; };
+		CDF9B6F948F3615521552B8A /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF8954D92A35462E7132EB8D /* IOSSpeechAudioInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOSSpeechAudioInput.swift; path = "../../kmp-binding/apple/IOSSpeechAudioInput.swift"; sourceTree = "<group>"; };
 		D3A17B63FB38318B456B8E7E /* IOSVideoBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IOSVideoBridge.swift; path = "../../kmp-binding/apple/IOSVideoBridge.swift"; sourceTree = "<group>"; };
 		D89E3359D65A861EC3CAD177 /* VideoHost.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoHost.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				751D420863BC9E937FFD9464 /* IOSVideoInput.swift */,
 				A068BAEAF4C1691170EB50C4 /* OpenVoice.cpp */,
 				FB93DA5BF37D4076A5B75E42 /* SpeechDemoUITests.swift */,
+				CDF9B6F948F3615521552B8A /* Assets.xcassets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				368CA4414241599CD08B00D9 /* RealtimeSRNotices in Resources */,
+				C3BE90902B6972E06A9B4B06 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
