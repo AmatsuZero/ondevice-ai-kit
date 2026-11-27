@@ -154,4 +154,51 @@ final class VoiceEffectsDemoUITests: XCTestCase {
         back.tap()
         XCTAssertTrue(entry.waitForExistence(timeout:10))
     }
+
+    func testLiveVoiceRoleChipsDoNotStartMicrophoneAndPreserveFileOutput() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["--smoke-blank"]
+        app.launch()
+        let entry = app.descendants(matching: .any)["capability-voice_effects"]
+        XCTAssertTrue(entry.waitForExistence(timeout: 15), app.debugDescription)
+        entry.tap()
+        XCTAssertTrue(app.buttons["voice-import"].waitForExistence(timeout: 15), app.debugDescription)
+
+        // 先用内置的非 ONNX 预设转换一次，作为切换后必须保留的既有输出。
+        let convert = app.buttons["voice-process"]
+        XCTAssertTrue(convert.waitForExistence(timeout: 15), app.debugDescription)
+        convert.tap()
+        let output = app.staticTexts["voice-output"]
+        XCTAssertTrue(output.waitForExistence(timeout: 60), app.debugDescription)
+        XCTAssertFalse(output.label.isEmpty, app.debugDescription)
+        let convertedLabel = output.label
+        let inputLabel = app.staticTexts["voice-input"].label
+        XCTAssertFalse(inputLabel.isEmpty, app.debugDescription)
+
+        // 进入实时模式，逐个点选角色芯片；全程不按通话按钮，不申请麦克风。
+        let live = app.descendants(matching: .any)["voice-mode-live"].firstMatch
+        XCTAssertTrue(live.waitForExistence(timeout: 10), app.debugDescription)
+        live.tap()
+        let press = app.descendants(matching: .any)["voice-live-press"].firstMatch
+        XCTAssertTrue(press.waitForExistence(timeout: 10), app.debugDescription)
+        XCTAssertTrue(press.isEnabled, app.debugDescription)
+        XCTAssertFalse(app.buttons["voice-stop-record"].exists, app.debugDescription)
+        for role in ["UNCLE", "GIRL", "ANNOUNCER"] {
+            let chip = app.descendants(matching: .any)["voice-live-role-" + role].firstMatch
+            XCTAssertTrue(chip.waitForExistence(timeout: 10), role + " " + app.debugDescription)
+            chip.tap()
+            XCTAssertTrue(press.exists, app.debugDescription)
+            XCTAssertFalse(app.buttons["voice-stop-record"].exists, app.debugDescription)
+        }
+
+        // 回到文件模式，输入选择与既有输出不得被实时模式切换清掉。
+        let file = app.descendants(matching: .any)["voice-mode-file"].firstMatch
+        XCTAssertTrue(file.waitForExistence(timeout: 10), app.debugDescription)
+        file.tap()
+        XCTAssertEqual(app.staticTexts["voice-input"].label, inputLabel, app.debugDescription)
+        XCTAssertTrue(app.staticTexts["voice-output"].waitForExistence(timeout: 10), app.debugDescription)
+        XCTAssertEqual(app.staticTexts["voice-output"].label, convertedLabel, app.debugDescription)
+        XCTAssertFalse(app.buttons["voice-stop-record"].exists, app.debugDescription)
+    }
 }

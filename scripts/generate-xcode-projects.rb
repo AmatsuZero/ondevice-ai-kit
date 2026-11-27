@@ -39,6 +39,7 @@ def create_project(root, relative, name, products, package_path, source)
     target.build_configurations.each do |config|
       config.build_settings.merge!({
         'ARCHS' => 'arm64',
+        'SWIFT_OBJC_BRIDGING_HEADER' => 'RealtimeVoiceBridge.h',
         'ODAI_KONAN_TARGET[sdk=iphonesimulator*]' => 'iosSimulatorArm64',
         'ODAI_KONAN_TARGET[sdk=iphoneos*]' => 'iosArm64',
         'FRAMEWORK_SEARCH_PATHS' => ['$(inherited)', '$(SRCROOT)/../shared/build/bin/$(ODAI_KONAN_TARGET)/debugFramework'],
@@ -68,6 +69,7 @@ def create_project(root, relative, name, products, package_path, source)
   scheme.save_as(project_path, target.name, true) unless File.exist?(File.join(project_path, "xcshareddata/xcschemes/#{target.name}.xcscheme"))
 end
 create_project(root, 'examples/ios-native', 'NativeConsumer', ['ODAIKitCore', 'ODAIKitFace', 'ODAIKitAppleVision'], '../../apple', ['NativeConsumerApp.swift'])
+voice_sources = %w[RealtimeVoiceAudio.swift RealtimeVoiceAudioUnit.cpp ../realtimevoice/RealtimeVoice.cpp]
 create_project(root, 'demo/iosApp', 'OnDeviceAIDemo',
   %w[ODAIKitCore ODAIKitFace ODAIKitAppleVision ODAIKitSpeech ODAIKitAppleSpeech ODAIKitVoiceEffects ODAIKitAppleVoiceEffects ODAIKitVideo ODAIKitAppleVideo], '../../apple',
   %w[OnDeviceAIDemoApp.swift DemoController.swift IOSFaceBridge.swift CameraSource.swift CameraLifecycle.swift PhotoSubmission.swift
@@ -77,5 +79,5 @@ create_project(root, 'demo/iosApp', 'OnDeviceAIDemo',
      VideoHost.swift VideoInputStore.swift VideoFilePicker.swift
      ../../kmp-binding/apple/IOSSpeechBridge.swift ../../kmp-binding/apple/IOSSpeechAudioInput.swift
      ../../kmp-binding/apple/IOSVideoBridge.swift ../../kmp-binding/apple/IOSVideoInput.swift
-     ../../kmp-binding/apple/IOSVoiceEffectsBridge.swift])
+     ../../kmp-binding/apple/IOSVoiceEffectsBridge.swift] + voice_sources)
 load File.join(__dir__, 'configure-ios-ui-tests.rb')

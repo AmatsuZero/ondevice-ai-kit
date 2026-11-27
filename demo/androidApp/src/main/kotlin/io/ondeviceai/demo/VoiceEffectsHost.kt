@@ -10,12 +10,47 @@ import io.ondeviceai.voiceeffects.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.UUID
+import android.os.Handler
+import android.os.Looper
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlinx.coroutines.*
 
 /** Reusable platform audio owner for the unified CMP page. */
-internal class VoiceEffectsHost(private val activity: ComponentActivity) : VoiceEffectsDemoActions {
+internal class VoiceEffectsHost(private val activity: ComponentActivity) : VoiceEffectsDemoActions, LiveVoiceOwner {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+
+    private val liveAudio: RealtimeVoiceAudio = RealtimeVoiceAudio(
+        activity.applicationContext,
+        Handler(Looper.getMainLooper()),
+        object : RealtimeVoiceAudio.Events {
+            override fun onBeforeStart(): Boolean =
+                foreground && !destroyed && model.state.controlsEnabled &&
+                    recorder == null && capture == null && player == null &&
+                    exportReference == null && !copyingExport
+            override fun onPermissionNeeded(id: Long) {
+                pendingLiveId = id
+                livePermission.launch(Manifest.permission.RECORD_AUDIO)
+            }
+            override fun onReady(id: Long) { liveSession.ready(id) }
+            override fun onEnded(id: Long, message: String) { liveSession.ended(id, message) }
+            override fun onRouteLabel(label: String, headphonesAvailable: Boolean) {
+                liveRouteLabel = label
+                liveHeadphonesAvailable = headphonesAvailable
+                liveSession.route(if (headphonesAvailable) LiveDestination.HEADPHONES else LiveDestination.BUILTIN_SPEAKER)
+            }
+        },
+    )
+    override val liveSession: RealtimeVoiceSession = RealtimeVoiceSession(liveAudio)
+    var liveRouteLabel: String = "内置扬声器"
+        private set
+    var liveHeadphonesAvailable: Boolean = false
+        private set
+    private var pendingLiveId: Long = RealtimeVoiceAudio.IDLE
+    private val livePermission = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        pendingLiveId = RealtimeVoiceAudio.IDLE
+        // Permission callbacks never auto-start a live session; the user presses again.
+        if (!granted && foreground && !destroyed) liveSession.refresh()
+    }
     private lateinit var bridge: AndroidVoiceEffectsBridge
     lateinit var model: VoiceEffectsViewModel
         private set
@@ -99,10 +134,11 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
             } catch (_: Exception) { if (!destroyed) model.inputFailed("无法读取内置示例") }
         }
     }
-    fun foreground() { if (!destroyed) foreground = true }
-    fun background() { foreground = false; stopPlayback(); stopCapture(true); model.cancel() }
+    fun foreground() { if (!destroyed) { foreground = true; liveAudio.attach() } }
+    fun background() { foreground = false; stopPlayback(); stopCapture(true); model.cancel(); liveAudio.release() }
     fun close() {
         destroyed = true; importGeneration++
+        liveAudio.close()
         stopPlayback(); stopCapture(true)
         if (!copyingExport) exportReference?.let(::finishExport)
         model.close()
@@ -227,9 +263,10 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
     }
     override fun leavePage() {
         foreground = false; importGeneration++
+        liveAudio.release()
         stopPlayback(); stopCapture(true); model.leavePage()
     }
-    val idle: Boolean get() = model.state.controlsEnabled && model.state.pendingReleases == 0 && capture == null && !copyingExport
+    val idle: Boolean get() = model.state.controlsEnabled && model.state.pendingReleases == 0 && capture == null && !copyingExport && !liveSession.busy
 
     private fun takeFocus(): Boolean {
         val request = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
