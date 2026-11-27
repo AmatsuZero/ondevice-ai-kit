@@ -1361,5 +1361,92 @@
       }
     ],
     "physicalDeviceRun": false
+  },
+  "iosDeviceLongPage": {
+    "question": "Is there an outdoor scene in this video? If so, say what the person outdoors is doing in one sentence. If you do not see one, say so.",
+    "platform": "iOS",
+    "deviceModel": "iPhone 16 Pro Max",
+    "osVersion": "27.2.1",
+    "modelId": "tencent/WeMM-Video-2B-GGUF",
+    "modelRevision": "395e99f987a73915273943d4510e23004df7cede",
+    "runtimeRevision": "llama.cpp-88aaf325a7026ac1127d0897394b0a3d6413dc2a-wemm-mixed-prefill-microbatch-128-v1",
+    "memoryUnit": "kB",
+    "metricWindow": "Generate tap to visible page output; excludes selection, prompt entry and capture of the result.",
+    "appLaunches": 1,
+    "thermalCheckpoints": [
+      "before_0 - nominal",
+      "after_0 - nominal",
+      "before_1 - nominal",
+      "after_1 - nominal",
+      "before_2 - nominal",
+      "after_2 - nominal"
+    ],
+    "answers": [
+      {
+        "condition": "A",
+        "file": "scene-4f2a.mp4",
+        "bytes": 3724677,
+        "sha256": "e3c7318d26ec920fd4ab20bdf8155bfd842877da285a944d33e4d184076103ac",
+        "macAnswer": "There is no outdoor scene in this video.",
+        "measured": false,
+        "iosDeviceAnswer": "There is no outdoor scene in this video.",
+        "sampledFishingFrames": 0,
+        "semanticResult": "correctly reported no outdoor scene",
+        "screenshotSHA256": "b34a51aac9f1a3d647a118a84541461e84d841b511bd9ff47afe84637ad74caf",
+        "answerAttachmentSHA256": "f58cf889c8af5dc6299d72bb7189992635459b0c45d6e5a6cc325829aae47bf8"
+      },
+      {
+        "condition": "B",
+        "file": "scene-19be.mp4",
+        "bytes": 3795253,
+        "sha256": "e9644419f7d4013a547b97b6c10191c19f5ac6bb43f84d08f61ad597e5cfbae0",
+        "macAnswer": "There is no outdoor scene in this video.",
+        "measured": true,
+        "clockSeconds": 5.448907667,
+        "physical": 36896.768,
+        "physical_peak": 406458.512,
+        "physical_absolute": 222333.152,
+        "iosDeviceAnswer": "There is no outdoor scene in this video.",
+        "sampledFishingFrames": 0,
+        "semanticResult": "missed the outdoor fishing scene",
+        "screenshotSHA256": "ceb779442b0e6e159e21fd4ce32f531c104514988b7748704e4399933f4d47b0",
+        "answerAttachmentSHA256": "f58cf889c8af5dc6299d72bb7189992635459b0c45d6e5a6cc325829aae47bf8"
+      },
+      {
+        "condition": "C",
+        "file": "scene-734d.mp4",
+        "bytes": 3795253,
+        "sha256": "06321c5a599e25d473ecbb088bc24cf8f9628731853219c914e018a1ffbbfef7",
+        "macAnswer": "Yes, there is an outdoor scene. A person is standing on a rocky cliff overlooking a body of water, appearing to be fishing or observing the water.",
+        "measured": true,
+        "clockSeconds": 6.448722269,
+        "physical": 146014.328,
+        "physical_peak": 371003.536,
+        "physical_absolute": 332810.584,
+        "iosDeviceAnswer": "Yes, there is an outdoor scene. A person is fishing from a rocky shore by a body of water.",
+        "sampledFishingFrames": 1,
+        "semanticResult": "identified fishing",
+        "screenshotSHA256": "a5f4b8b077efe409b4b8667749a680e12b398f7ec81fa662944794e3da4ab169",
+        "answerAttachmentSHA256": "58498de5a5d26cb408712303faa822b4695a9a7d58089476603262dd35a1bcde"
+      }
+    ],
+    "physicalDeviceRun": true,
+    "connection": "USB",
+    "mode": "long-video",
+    "testResult": {
+      "result": "Passed",
+      "passedTests": 1,
+      "failedTests": 0,
+      "skippedTests": 0
+    },
+    "source": {
+      "resultBundle": "w6-iphone-five-minute-20261127-ThISOixm/long.xcresult",
+      "infoPlistSHA256": "98667ba844d6bc21c182df8b6c4481e9f5fa02e767ef48e6d7baa0945e96f077",
+      "testIdentifier": "W6UnifiedVideoUITests/testVideoAnswerProcessMemory()",
+      "testPlanSHA256": "a9556944419277d94b1531f337975bbe627c4fa388cd9dde90c694b5763185ae",
+      "uiSourceSHA256": "6869820c6fe818d2424efe868890a4036df3c999ebe9456fc6a9a14c2afb54d1",
+      "metricsExportSHA256": "dfa9373d6fe47ebe1a94bfc23ed5bb5988da9284ea14102926cfb85bc1e80c88",
+      "startedUTC": "2026-11-27T09:21:34.543000+00:00"
+    }
   }
 }

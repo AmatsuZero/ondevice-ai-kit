@@ -120,7 +120,7 @@ xcrun xcresulttool get test-results activities --path "$W6_QA_DIR/movies.xcresul
 | Memory Physical（区间变化） | +36,077.568 kB |
 | Clock Monotonic Time | 4.447 s |
 
-内存指标绑定到 `io.ondeviceai.w6.unifiedvideo.fixtures` 进程。峰值约为 394.97 MB（十进制），仅覆盖这次预热后短答。连续问答数据见下节。冷启动、长视频和整机能耗仍待真机测量。
+内存指标绑定到 `io.ondeviceai.w6.unifiedvideo.fixtures` 进程。峰值约为 394.97 MB（十进制），仅覆盖这次预热后短答。下文列有连续短答与五分钟影片的真机测量。冷启动和整机电池耗电仍待测量。
 
 复测需要手机有可用屏幕，夹具中已有两段影片及固定版本模型。常规测试默认跳过这项测量。在原构建产物旁另存开启测量的计划，以保留 App 和 Runner 的相对路径。以下命令沿用前文变量，并在新的结果目录中执行一次。
 
@@ -143,7 +143,7 @@ xcrun xcresulttool get test-results metrics --path "$W6_QA_DIR/memory.xcresult" 
 
 在结果包的 metrics 中，三个进程内存指标和一个时钟指标应各有六个值，按出答先后顺序对应 `sample-1` 到 `sample-6` 的截图。每个值只覆盖当轮点击「生成」到页面出答。文件选择器、两答间隙和预热期间的内存不在这六个窗口内。
 
-活动记录中每轮有两个热状态观测，`before_0` / `after_0` 对应预热，编号 1–6 对应正式回答。前者在选片前，后者在出答测量结束后。若观测到 serious、critical 或未知状态，用例在该检查点停止。两点之间的热状态、长视频处理和电池耗电需另行测量。
+活动记录中每轮有两个热状态观测，`before_0` / `after_0` 对应预热，编号 1–6 对应正式回答。前者在选片前，后者在出答测量结束后。若观测到 serious、critical 或未知状态，用例在该检查点停止。两点之间的热状态和电池耗电需另行测量。
 
 2026-11-27 在专用 iOS 27.2 模拟器上验证了该流程。活动记录显示 App 启动一次、七次答对两段影片的色序、十四条热状态记录。四个指标各导出六个样本。同日，iPhone 16 Pro Max（iOS 27.2.1，USB）也完成了同一流程，六次色序均答对。每轮出答耗时 3.413–4.468 秒，最高进程峰值 408,080.552 kB，14 个检查点均为 `nominal`。[真机逐轮数据](../../../../../docs/roadmap/W8-resources.md#同一页面连续六次短答)
 
@@ -170,6 +170,8 @@ W6_HASHES
 ```
 
 用上文的内存测量命令另存计划，将 `-string 1` 改为 `-string long-video`，选择同一项 `testVideoAnswerProcessMemory`。B、C 各有一个正式的点击到出答窗口。三轮均核对非空原答、模型标识和后端，各保留一张截图和一份以 `-answer` 结尾的文字附件。用例通过表示三份文件均经页面出答；是否认出钓鱼须根据附件里的原答另行判读。
+
+2026-11-27，iPhone 16 Pro Max 已完成三轮。B 漏答钓鱼，C 认出了钓鱼。[真机逐字原答及页面指标](../../../../../docs/validation/w6-video-temporal-coverage-20261127.md#iphone-16-pro-max-真机)
 
 ## 在专用模拟器运行
 

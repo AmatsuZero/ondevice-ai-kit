@@ -32,7 +32,7 @@
 
 Apple M5 Pro（48 GiB）使用与主干源码核对过的 WeMM 后端、固定权重和默认 32 token。96 个请求中，72 个读取五分钟视频，24 个读取五秒单片；全部返回非空答案。首个非空更新的中位耗时为 0.854 秒，完整答案为 0.972 秒，完整答案 P95 为 1.111 秒，最慢一次为 2.340 秒。每次从调用后端到返回计时，含抽帧与生成。P95 取排序后的第 92 项。
 
-计入模型安装、96 次问答和清理，进程总用时 98.88 秒。Darwin `time -l` 记录的物理内存峰值为 401,001,376 B，最大 RSS 为 2,884,943,872 B。结果适用于这次 Mac 连续运行。iPhone 已有一次预热后短答的页面内存测量，持续问答期间的真机内存、热状态与电池耗电仍待测。[iPhone 短答测量](../../demo/iosApp/UITests/Fixtures/WeMM/README.md#测量短回答期间的-app-进程内存)
+计入模型安装、96 次问答和清理，进程总用时 98.88 秒。Darwin `time -l` 记录的物理内存峰值为 401,001,376 B，最大 RSS 为 2,884,943,872 B。iPhone 的单次短答、同页连续六次短答和五分钟影片均按点击生成到页面出答的窗口单独测量。[iPhone 资源记录](../roadmap/W8-resources.md)
 
 这两组使用已有素材剪成对照，102 次调用共覆盖两种户外活动。日常开放问答的质量仍按独立题集评估。[v1.1 开放问答对照](w6-video-open-qa-v1.1.md)
 
@@ -46,7 +46,19 @@ Apple M5 Pro（48 GiB）使用与主干源码核对过的 WeMM 后端、固定�
 | B 在采样间隙插入钓鱼 | There is no outdoor scene in this video. | 21.001 秒 | 1,554,683.568 kB |
 | C 一帧采到钓鱼 | Yes, there is an outdoor scene. A person is fishing by a body of water. | 22.010 秒 | 1,571,411.608 kB |
 
-Mac 对 A、B 的原答均与模拟器逐字一致。对 C，Mac 写到人物站在水边，看起来在钓鱼或观察水面。模拟器的两次正式测量各有一个样本，均包含 UI 自动化等待；选片、输入问题、核对文字和截图位于窗口之外。六个离散热状态读数均为 nominal。五分钟影片在物理 iPhone 上的时延、内存和耗电仍待实测。
+Mac 对 A、B 的原答均与模拟器逐字一致。对 C，Mac 写到人物站在水边，看起来在钓鱼或观察水面。模拟器的两次正式测量各有一个样本，均包含 UI 自动化等待。选片、输入问题、核对文字和截图位于窗口之外。六个离散热状态读数均为 `nominal`。
+
+### iPhone 16 Pro Max 真机
+
+2026-11-27，iPhone 16 Pro Max（iOS 27.2.1，USB）上的 W6 Fixtures 启动一次，在同一页面通过「文件」选入上述三段原片，逐段问相同的英文问题。XCTest 通过 1 项，失败和跳过均为 0。三份原答、三张截图及模型修订均已核验。[逐轮原答、附件摘要与完整精度指标](w6-video-temporal-coverage-20261127.json)
+
+| 五分钟影片 | iPhone 页面原答 | 与影片核对 | 点击生成至出答 | App 进程物理内存峰值 |
+| --- | --- | --- | ---: | ---: |
+| A 全程室内 | There is no outdoor scene in this video. | 正确 | 预热 | 预热 |
+| B 第 120–125 秒钓鱼 | There is no outdoor scene in this video. | 漏掉钓鱼 | 5.449 秒 | 406,458.512 kB |
+| C 第 110–115 秒钓鱼 | Yes, there is an outdoor scene. A person is fishing from a rocky shore by a body of water. | 认出钓鱼 | 6.449 秒 | 371,003.536 kB |
+
+B 和 C 各测一次。模型每隔 37.5 秒取一帧，B 的五秒镜头落在两帧之间，C 的同一镜头覆盖第 112.5 秒。六次选片前、出答后的系统热状态读数均为 `nominal`。本轮全程连接 USB，整机电池耗电仍待测量。[真机内存绝对值、变化量与测量窗口](../roadmap/W8-resources.md#五分钟影片)
 
 ## 从 Demo 选片时的文件大小上限
 
