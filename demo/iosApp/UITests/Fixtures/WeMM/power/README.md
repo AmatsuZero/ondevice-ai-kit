@@ -16,7 +16,9 @@ python3 demo/iosApp/UITests/Fixtures/WeMM/power/capture.py \
   "$DEVICE_ID" "$POWER_RUN/movies.log" "$POWER_RUN/capture"
 ```
 
-在第二个终端，将 `POWER_RUN` 设为刚才输出的目录，再执行影片阶段。使用新的结果包名称。采集器从目标测试的启动日志定位 W6 Fixtures，只向其当前 PID 附加；若开始附加时首个「生成」已经发生，采集器会记录错误并退出。
+在第二个终端，将 `POWER_RUN` 设为刚才输出的目录。根据本次要测的范围，选择下面一组命令。采集器从目标测试的启动日志定位 W6 Fixtures 并向其当前 PID 附加。若开始附加时首个「生成」已经发生，采集器会记录错误并退出。
+
+### 四项影片页面用例
 
 ```sh
 phase="$(basename "$POWER_RUN")-movies"
@@ -25,20 +27,32 @@ run_w6_tests "$phase" \
   "-only-testing:$W6_SUITE/testCancelAfterVisibleTextAndAskAgain" \
   "-only-testing:$W6_SUITE/testLeavingDuringGenerationCancelsAndRestoresInput" \
   "-only-testing:$W6_SUITE/testUndecodableMovieReportsInputFailure" \
-  > "$POWER_RUN/movies.log" 2>&1
+  > "$POWER_RUN/movies.log" 2>&1 &&
+  python3 demo/iosApp/UITests/Fixtures/WeMM/read-ui.py \
+    "$W6_QA_DIR/$phase.xcresult" "$DEVICE_ID" > "$POWER_RUN/ui-observations.json"
+```
+
+### 单项色序短答
+
+此范围只执行 `testRealMovieAnswer`。读取器核对唯一通过的用例、目标设备及两次出答的完整活动序列，然后输出两个观察窗口。
+
+```sh
+phase="$(basename "$POWER_RUN")-short-answers"
+run_w6_tests "$phase" "-only-testing:$W6_SUITE/testRealMovieAnswer" \
+  > "$POWER_RUN/movies.log" 2>&1 &&
+  python3 demo/iosApp/UITests/Fixtures/WeMM/read-ui.py --short-answers-only \
+    "$W6_QA_DIR/$phase.xcresult" "$DEVICE_ID" > "$POWER_RUN/ui-observations.json"
 ```
 
 ## 对齐出答和采集窗口
 
-四项页面测试通过且第一个终端的采集器成功退出后，在第二个终端执行。下面的脚本从同一份 trace 导出四张表，并核对设备、App 路径、PID 和两次出答的起止时间。
+所选测试的观察窗口已生成、第一终端的采集器成功退出后，在第二终端执行。下面的脚本从同一份 trace 导出四张表，并核对设备、App 路径、PID 和两次出答的起止时间。
 
 ```sh
 (
   set -eu
   fixture=demo/iosApp/UITests/Fixtures/WeMM
   cap="$POWER_RUN/capture"
-  python3 "$fixture/read-ui.py" "$W6_QA_DIR/$phase.xcresult" "$DEVICE_ID" \
-    > "$POWER_RUN/ui-observations.json"
   xcrun xctrace export --input "$cap/workload.trace" --toc --output "$cap/toc.xml"
   for schema in SystemPowerLevel DeviceChargingState ProcessSubsystemPowerImpact device-thermal-state-intervals; do
     xcrun xctrace export --input "$cap/workload.trace" \

@@ -103,13 +103,16 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("xcresult")
     parser.add_argument("expectedDeviceId")
+    parser.add_argument("--short-answers-only", action="store_true",
+                        help="Expect only testRealMovieAnswer and its two color-order answers")
     args = parser.parse_args()
+    names = ("testRealMovieAnswer",) if args.short_answers_only else NAMES
 
     summary = get_json(args.xcresult, "summary")
     tests = get_json(args.xcresult, "tests")
     require(isinstance(summary, dict) and isinstance(tests, dict), "Invalid result shape")
     require(summary.get("result") == "Passed", "XCResult did not pass")
-    for key, expected in (("totalTestCount", 4), ("passedTests", 4),
+    for key, expected in (("totalTestCount", len(names)), ("passedTests", len(names)),
                           ("failedTests", 0), ("skippedTests", 0)):
         require(type(summary.get(key)) is int and summary[key] == expected,
                 f"Unexpected summary {key}")
@@ -119,7 +122,7 @@ def main():
             "Expected exactly one summary device/configuration")
     summary_device = rows[0].get("device") if isinstance(rows[0], dict) else None
     platform = check_device(summary_device, args.expectedDeviceId)
-    for key, expected in (("passedTests", 4), ("failedTests", 0), ("skippedTests", 0)):
+    for key, expected in (("passedTests", len(names)), ("failedTests", 0), ("skippedTests", 0)):
         require(type(rows[0].get(key)) is int and rows[0][key] == expected,
                 f"Unexpected device summary {key}")
 
@@ -127,7 +130,7 @@ def main():
     require(isinstance(devices, list) and len(devices) == 1,
             "Expected exactly one tests.devices device")
     check_device(devices[0], args.expectedDeviceId, platform)
-    expected_ids = {f"{SUITE}/{name}()" for name in NAMES}
+    expected_ids = {f"{SUITE}/{name}()" for name in names}
     case_nodes = [node for node in walk(tests.get("testNodes"))
                   if node.get("nodeType") == "Test Case"]
     identifiers = [node.get("nodeIdentifier") for node in case_nodes]
@@ -140,7 +143,7 @@ def main():
                 f"Non-passing test: {node.get('nodeIdentifier')}")
 
     output_tests = []
-    for name in NAMES:
+    for name in names:
         identifier = f"{SUITE}/{name}()"
         result = get_json(args.xcresult, "activities", "--test-id", identifier)
         require(isinstance(result, dict) and result.get("testIdentifier") == identifier,
