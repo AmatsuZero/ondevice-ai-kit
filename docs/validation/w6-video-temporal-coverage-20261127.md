@@ -36,6 +36,18 @@ Apple M5 Pro（48 GiB）使用与主干源码核对过的 WeMM 后端、固定�
 
 这两组使用已有素材剪成对照，102 次调用共覆盖两种户外活动。日常开放问答的质量仍按独立题集评估。[v1.1 开放问答对照](w6-video-open-qa-v1.1.md)
 
+## 五分钟影片从 iOS 页面选入后的回答
+
+在 iOS 27.2 的 iPhone 16 Pro Max 模拟器上，通过系统「文件」依次选入三份五分钟长片。同一页面连续问了三次相同的英文问题，要求说明是否看到外景以及室外的人在做什么。三次页面都显示了非空原答和固定版本的 WeMM 模型。模拟器使用 CPU 后端，Mac 另用相同影片和英文问题作对照。[逐次原答与指标](w6-video-temporal-coverage-20261127.json) · [夹具和复测方法](../../demo/iosApp/UITests/Fixtures/WeMM/README.md#测量五分钟影片的页面出答)
+
+| 影片 | 模拟器页面原答 | 点击生成至出现答案 | App 进程物理内存峰值 |
+| --- | --- | ---: | ---: |
+| A 全程室内 | There is no outdoor scene in this video. | 预热 | 预热 |
+| B 在采样间隙插入钓鱼 | There is no outdoor scene in this video. | 21.001 秒 | 1,554,683.568 kB |
+| C 一帧采到钓鱼 | Yes, there is an outdoor scene. A person is fishing by a body of water. | 22.010 秒 | 1,571,411.608 kB |
+
+Mac 对 A、B 的原答均与模拟器逐字一致。对 C，Mac 写到人物站在水边，看起来在钓鱼或观察水面。模拟器的两次正式测量各有一个样本，均包含 UI 自动化等待；选片、输入问题、核对文字和截图位于窗口之外。六个离散热状态读数均为 nominal。五分钟影片在物理 iPhone 上的时延、内存和耗电仍待实测。
+
 ## 从 Demo 选片时的文件大小上限
 
 上面的 Mac 问答直接把文件交给后端。iOS 统一 Demo 先把用户从 Files 选中的单个视频复制到临时目录，上限为 32 MiB。另在 Mac 上编译同一份 `MultimodalInputStore`，从 Demo 使用的异步导入入口传入 39 段已有视频。每个成功导入的副本均与源文件 SHA-256 一致；释放后逐项核对了临时目录。[导入实现](../../demo/iosApp/MultimodalInputStore.swift) · [宿主接入](../../demo/iosApp/MultimodalModelHostFactory.swift)

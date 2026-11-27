@@ -301,7 +301,8 @@ final class W6UnifiedVideoUITests: XCTestCase {
 
     func testVideoAnswerProcessMemory() throws {
         let mode = ProcessInfo.processInfo.environment["W6_MEASURE_MEMORY"]
-        try XCTSkipUnless(mode == "1" || mode == "series", "Set W6_MEASURE_MEMORY=1 or W6_MEASURE_MEMORY=series in the test runner to profile the prepared W6 fixture.")
+        let longVideo = mode == "long-video"
+        try XCTSkipUnless(mode == "1" || mode == "series" || longVideo, "Select a prepared W6 workload with W6_MEASURE_MEMORY.")
         continueAfterFailure = false
         let app = XCUIApplication()
         app.launch()
@@ -309,13 +310,18 @@ final class W6UnifiedVideoUITests: XCTestCase {
         let select = app.buttons[videoSelectTag]
         XCTAssertTrue(waitUntilEnabled(select, in: app, timeout: 180))
 
-        let clips: [(name: String, answer: String)] = [
-            ("w6-yuv-clip-01", "red, blue"),
-            ("w6-yuv-clip-02", "blue, red")
-        ]
-
-        let series = mode == "series"
-        let recordedCount = series ? 6 : 1
+        let clips: [(name: String, answer: String?)]
+        let prompt: String
+        let recordedCount: Int
+        if longVideo {
+            clips = [("scene-4f2a", nil), ("scene-19be", nil), ("scene-734d", nil)]
+            prompt = "Is there an outdoor scene in this video? If so, say what the person outdoors is doing in one sentence. If you do not see one, say so."
+            recordedCount = 2
+        } else {
+            clips = [("w6-yuv-clip-01", "red, blue"), ("w6-yuv-clip-02", "blue, red")]
+            prompt = "What color is the screen in the first half, and what color is it in the second half? Answer with the two color names in order."
+            recordedCount = mode == "series" ? 6 : 1
+        }
         var iteration = 0
         let options = XCTMeasureOptions()
         options.iterationCount = recordedCount
@@ -332,7 +338,7 @@ final class W6UnifiedVideoUITests: XCTestCase {
             iteration += 1
 
             func checkThermal(_ stage: String) {
-                guard series else { return }
+                guard recordedCount > 1 else { return }
                 let state = ProcessInfo.processInfo.thermalState
                 let readableState: String
                 switch state {
@@ -355,7 +361,7 @@ final class W6UnifiedVideoUITests: XCTestCase {
             checkThermal("before_\(index)")
 
             self.selectFixture(clip.name, using: select, in: app)
-            self.enterPrompt("What color is the screen in the first half, and what color is it in the second half? Answer with the two color names in order.", in: app)
+            self.enterPrompt(prompt, in: app)
 
             let generate = app.buttons[generateTag]
             let output = app.staticTexts[outputTag]
@@ -373,7 +379,7 @@ final class W6UnifiedVideoUITests: XCTestCase {
 
             XCTAssertTrue(appeared)
             let sample = index == 0 ? "warmup" : "sample-\(index)"
-            let screenshotName = series ? "\(sample)-\(clip.name)" : clip.name
+            let screenshotName = recordedCount > 1 ? "\(sample)-\(clip.name)" : clip.name
             _ = self.assertResult(clip.answer, in: app, screenshotName: screenshotName)
         }
 
@@ -525,11 +531,15 @@ final class W6UnifiedVideoUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts[outputTag].waitForExistence(timeout: 180), "The video answer should be rendered")
     }
 
-    private func assertResult(_ expected: String, in app: XCUIApplication, screenshotName: String) -> ResultIdentity {
+    private func assertResult(_ expected: String?, in app: XCUIApplication, screenshotName: String) -> ResultIdentity {
         let output = app.staticTexts[outputTag]
         XCTAssertTrue(output.waitForExistence(timeout: 30), "An answer should be present")
-        XCTAssertEqual(output.label.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(), expected,
-                       "The answer should match the clip's color order")
+        let answer = output.label.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let expected {
+            XCTAssertEqual(answer.lowercased(), expected, "The answer should match the clip's color order")
+        } else {
+            XCTAssertFalse(answer.isEmpty, "The open question should return a nonempty answer")
+        }
 
         let backendElement = app.staticTexts[backendTag]
         let identityElement = app.staticTexts[identityTag]
@@ -548,6 +558,13 @@ final class W6UnifiedVideoUITests: XCTestCase {
         XCTAssertEqual(modelID, "tencent/WeMM-Video-2B-GGUF")
         XCTAssertEqual(modelRevision, "395e99f987a73915273943d4510e23004df7cede")
         XCTAssertFalse(runtimeRevision.isEmpty, "The reported runtime revision should not be empty")
+
+        if expected == nil {
+            let text = XCTAttachment(string: identityElement.label + "\n\n" + output.label)
+            text.name = screenshotName + "-answer"
+            text.lifetime = .keepAlways
+            add(text)
+        }
 
         let attachment = XCTAttachment(image: app.screenshot().image)
         attachment.name = screenshotName

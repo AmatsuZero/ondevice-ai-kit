@@ -145,6 +145,30 @@ xcrun xcresulttool get test-results metrics --path "$W6_QA_DIR/memory.xcresult" 
 
 2026-11-27 在专用 iOS 27.2 模拟器上验证了该流程。活动记录显示 App 启动一次、七次答对两段影片的色序、十四条热状态记录。四个指标各导出六个样本。真机的连续六次内存数据仍待采集。
 
+### 测量五分钟影片的页面出答
+
+`W6_MEASURE_MEMORY=long-video` 使用三份各 300 秒的对照影片。A 全程室内，用于预热。B、C 均包含同一段五秒钓鱼镜头，分别放在 120–125 秒和 110–115 秒。八帧均匀采样会错过 B 的钓鱼镜头，在 C 的 112.5 秒处采到一帧。三次都从 Files 选入原片，使用同一个英文开放问题。[影片摘要与实际采样点](../../../../../docs/validation/w6-video-temporal-coverage-20261127.json)
+
+这三份实验视频单独保存。有相应素材的测试人员可将 `W6_LONG_MEDIA` 指向包含下列三个 MP4 的目录。先核对文件内容，再复制到已有模型的 W6 Fixtures。在专用模拟器上，将同三份文件放入下节的 `W6 Test Files` 目录。
+
+```sh
+stage_w6_long_clips() {
+  (cd "$W6_LONG_MEDIA" && shasum -a 256 -c - <<'W6_HASHES'
+e3c7318d26ec920fd4ab20bdf8155bfd842877da285a944d33e4d184076103ac  scene-4f2a.mp4
+e9644419f7d4013a547b97b6c10191c19f5ac6bb43f84d08f61ad597e5cfbae0  scene-19be.mp4
+06321c5a599e25d473ecbb088bc24cf8f9628731853219c914e018a1ffbbfef7  scene-734d.mp4
+W6_HASHES
+  ) || return 1
+  for clip in scene-4f2a.mp4 scene-19be.mp4 scene-734d.mp4; do
+    xcrun devicectl device copy to --device "$DEVICE_ID" \
+      --domain-type appDataContainer --domain-identifier "$W6_APP" \
+      --source "$W6_LONG_MEDIA/$clip" --destination "Documents/$clip" || return 1
+  done
+}
+```
+
+用上文的内存测量命令另存计划，将 `-string 1` 改为 `-string long-video`，选择同一项 `testVideoAnswerProcessMemory`。B、C 各有一个正式的点击到出答窗口。三轮均核对非空原答、模型标识和后端，各保留一张截图和一份以 `-answer` 结尾的文字附件。用例通过表示三份文件均经页面出答；是否认出钓鱼须根据附件里的原答另行判读。
+
 ## 在专用模拟器运行
 
 将构建 destination 改为 `generic/platform=iOS Simulator`，运行时选取同一构建目录的 `SpeechDemo_iphonesimulator*.xctestrun`。`DEVICE_ID` 应取自本轮新建并启动的专用模拟器。先运行空模型测试，再把两份权重和三段素材放入 Files 的「我的 iPhone / W6 Test Files」。iOS 27.2 模拟器实测使用以下来源目录。请在同一个 shell 中设置前述变量并运行。

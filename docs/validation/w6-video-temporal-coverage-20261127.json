@@ -1303,5 +1303,63 @@
         "updateCount": 3
       }
     ]
+  },
+  "iosSimulatorLongPage": {
+    "question": "Is there an outdoor scene in this video? If so, say what the person outdoors is doing in one sentence. If you do not see one, say so.",
+    "platform": "iOS Simulator",
+    "deviceModel": "iPhone 16 Pro Max",
+    "osVersion": "27.2",
+    "modelId": "tencent/WeMM-Video-2B-GGUF",
+    "modelRevision": "395e99f987a73915273943d4510e23004df7cede",
+    "runtimeRevision": "llama.cpp-88aaf325a7026ac1127d0897394b0a3d6413dc2a-wemm-mixed-prefill-microbatch-128-v1-simulator-cpu",
+    "memoryUnit": "kB",
+    "metricWindow": "Generate tap to visible page output; excludes selection, prompt entry and capture of the result.",
+    "appLaunches": 1,
+    "thermalCheckpoints": [
+      "before_0 - nominal",
+      "after_0 - nominal",
+      "before_1 - nominal",
+      "after_1 - nominal",
+      "before_2 - nominal",
+      "after_2 - nominal"
+    ],
+    "answers": [
+      {
+        "condition": "A",
+        "file": "scene-4f2a.mp4",
+        "bytes": 3724677,
+        "sha256": "e3c7318d26ec920fd4ab20bdf8155bfd842877da285a944d33e4d184076103ac",
+        "macAnswer": "There is no outdoor scene in this video.",
+        "iosSimulatorAnswer": "There is no outdoor scene in this video.",
+        "measured": false
+      },
+      {
+        "condition": "B",
+        "file": "scene-19be.mp4",
+        "bytes": 3795253,
+        "sha256": "e9644419f7d4013a547b97b6c10191c19f5ac6bb43f84d08f61ad597e5cfbae0",
+        "macAnswer": "There is no outdoor scene in this video.",
+        "iosSimulatorAnswer": "There is no outdoor scene in this video.",
+        "measured": true,
+        "clockSeconds": 21.001204705000003,
+        "physical": 0,
+        "physical_peak": 1554683.568,
+        "physical_absolute": 109153.136
+      },
+      {
+        "condition": "C",
+        "file": "scene-734d.mp4",
+        "bytes": 3795253,
+        "sha256": "06321c5a599e25d473ecbb088bc24cf8f9628731853219c914e018a1ffbbfef7",
+        "macAnswer": "Yes, there is an outdoor scene. A person is standing on a rocky cliff overlooking a body of water, appearing to be fishing or observing the water.",
+        "iosSimulatorAnswer": "Yes, there is an outdoor scene. A person is fishing by a body of water.",
+        "measured": true,
+        "clockSeconds": 22.01015792,
+        "physical": 638.976,
+        "physical_peak": 1571411.608,
+        "physical_absolute": 110463.856
+      }
+    ],
+    "physicalDeviceRun": false
   }
 }
