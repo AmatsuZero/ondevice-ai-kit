@@ -46,7 +46,7 @@ run_w6_tests() {
 run_w6_tests empty "-only-testing:$W6_SUITE/testMissingModelAndPickerCancellation"
 ```
 
-真机步骤将权重和三个测试文件放进夹具 App 的 Documents，在 Files 中使用「W6 Fixtures」。当前真机页面验收待执行。导入期间需同时存放来源与 ModelStore 中的模型，两份合计约 6.36 GB。
+真机步骤将权重和三个测试文件放进夹具 App 的 Documents，在 Files 中使用「W6 Fixtures」。导入期间需同时存放来源与 ModelStore 中的模型，两份合计约 6.36 GB。
 
 ```sh
 stage_w6_inputs() {
@@ -76,6 +76,8 @@ done
 ```
 
 三个结果应分别执行 1、1、4 项，通过数等于执行数且跳过数为零。
+
+2026-11-27 在 iPhone 16 Pro Max（iOS 27.2.1）上实测，三个阶段分别通过 1/1、1/1、4/4 项，零跳过。从系统「文件」导入模型后，重启仍可选片。同一问题在两段反向色序影片上分别得到 `red, blue` 和 `blue, red`。手动取消或离开页面后都可再次提问，损坏影片显示解码错误并可重新选片。此次验收使用专用已签名夹具。开放问答质量、进程内存峰值和整机功耗需单独评估。
 
 ## 在专用模拟器运行
 
