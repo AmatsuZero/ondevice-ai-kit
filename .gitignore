@@ -11,3 +11,6 @@ __pycache__/
 *.xcuserstate
 xcuserdata/
 **/.cxx/
+AGENTS.md
+.idea/
+.xcodebuildmcp/
