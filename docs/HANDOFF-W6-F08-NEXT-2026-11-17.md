@@ -1,4 +1,4 @@
-## 2026-11-28 从主干接续 W6 验收
+## 2026-11-28 W6 实验入口交付完成
 
 统一 iOS Demo 的 WeMM 视频问答已合入主干，保留为按需启用的实验入口。iPhone 首轮 USB 验收通过六项页面用例。继续验收时从主干构建，使用独立 App「W6 Fixtures」。[构建及六项页面用例](../demo/iosApp/UITests/Fixtures/WeMM/README.md)
 
@@ -9,7 +9,7 @@
 
 11 月 28 日，iPhone 16 Pro Max 无线复验已通过生成中离页取消、保留原片和续问。[离页与短答结果](validation/w6-wemm-wireless-iphone-20261128.json)
 
-当前产品范围限于实验入口，正式质量门槛和资源预算尚未设定。五分钟影片均匀取八帧，已观察到短事件落在帧间时漏答。[采样实验](validation/w6-video-temporal-coverage-20261127.md)
+本阶段按实验入口范围收尾。人工抽查已收到 4 段视频的画面观察，A/B 评分栏为空。正式双人盲评仍待回卷，产品问答质量门槛和目标 iPhone 的资源预算也待确定。五分钟影片均匀取八帧，已观察到短事件落在帧间时漏答。[采样实验](validation/w6-video-temporal-coverage-20261127.md)
 
 ## 2026-11-17 当周暂停记录
 
