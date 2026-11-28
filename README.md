@@ -31,7 +31,7 @@ make test-offline          # 离线测试子集（tools/ci-pure-tests.txt，本�
 
 `make test-offline` 是 CI 守门入口，跑 51 个模块 / 574 tests 的离线纯 Python 测试，需要 `make` + Python 3.12（镜像已自带）。默认用 `python3`；若要走 uv 锁定解释器，用 `make test-offline PYTHON="uv run python"`。跑本机全量测试（含依赖 ffmpeg/ruby/Xcode 的用例）仍用 `python3 -m unittest discover -s tools/tests -v`。
 
-`make test-kotlin` 跑 Android JVM 单测（14 个模块，清单在 `tools/ci-kotlin-modules.txt`），需 JDK 17+ 与 Android SDK platform 36；GitHub Actions 的 ubuntu-latest 已预装这些，作为独立 CI job 运行。Kotlin/Native 的 iOS 测试（`iosSimulatorArm64Test` 等）和真机/听感/通知关联/复审/签名仍需本机 Xcode 或人工验收，不在流水线内。
+`make test-kotlin` 跑 Android JVM 单测（15 个模块，清单在 `tools/ci-kotlin-modules.txt`），需 JDK 17+ 与 Android SDK platform 36；GitHub Actions 的 ubuntu-latest 已预装这些，作为独立 CI job 运行。其中 `backend-sherpa-asr` 依赖不在公共 Maven 仓库的 sherpa-onnx AAR：CI 用 `python3 tools/prepare_sherpa_asr.py --aar-only --output /tmp/sherpa-aar` 从公网 GitHub release 下载并校验，再 `make test-kotlin SHERPA_REPO=/tmp/sherpa-aar/m2` 传入（AAR 按 sha256 缓存，仅首次下载）。本地跑全量需同样先准备 AAR 并传 `SHERPA_REPO`，否则该模块会因找不到 AAR 而编译失败。Kotlin/Native 的 iOS 测试（`iosSimulatorArm64Test` 等）和真机/听感/通知关联/复审/签名仍需本机 Xcode 或人工验收，不在流水线内。
 
 Xcode 工程已提交。需要重新生成时，使用已有 Ruby xcodeproj gem 执行 `ruby scripts/generate-xcode-projects.rb`。iOS Demo 构建前先执行 `./gradlew :demo:shared:linkDebugFrameworkIosSimulatorArm64`（真机改为 `IosArm64`），再打开 `demo/iosApp/OnDeviceAIDemo.xcodeproj`。Demo 支持 Apple Silicon 模拟器与 arm64 真机；SDK 本身不依赖 KMP。Demo 和 UI 测试默认使用 UGREEN GROUP LIMITED（`4X996UV8LC`）自动签名，真机运行需本机已有对应开发证书和匹配设备的描述文件；重新生成时可用 `ODAI_DEVELOPMENT_TEAM` 覆盖团队。
 

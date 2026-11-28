@@ -22,5 +22,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # ubuntu-latest 预装 JDK 17 / Android SDK platform 36 + build-tools 36，无需 setup。
+      # sherpa-onnx AAR 不在公共 Maven 仓库：从公网 GitHub release 下载（脚本带 size/sha256 校验），
+      # 与内网 GitLab 无关（GitLab 只跑 Python，不跑 Kotlin）。按 AAR sha256 缓存 m2 避免每次下载 47MB。
+      - name: Cache sherpa AAR maven repo
+        id: sherpa-cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/sherpa-aar/m2
+          key: sherpa-onnx-2.0.1-aar-a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7
+      - name: Prepare sherpa AAR maven repo
+        if: steps.sherpa-cache.outputs.cache-hit != 'true'
+        run: python3 tools/prepare_sherpa_asr.py --aar-only --output /tmp/sherpa-aar
       - name: Run Android JVM unit tests
-        run: make test-kotlin
+        run: make test-kotlin SHERPA_REPO=/tmp/sherpa-aar/m2

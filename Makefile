@@ -5,6 +5,9 @@
 
 PYTHON ?= python3
 GRADLE ?= ./gradlew
+# sherpa-onnx AAR 不在公网 Maven 仓库；CI 预置到 m2 后通过 SHERPA_REPO 传入。本地未传则不追加该参数。
+SHERPA_REPO ?=
+SHERPA_GRADLE_ARG = $(if $(SHERPA_REPO),-PsherpaMavenRepo=$(SHERPA_REPO),)
 MODULES = $(shell tr '\n' ' ' < tools/ci-pure-tests.txt)
 # Kotlin：清单每行是 ":模块名"，拼成 :android:模块:testDebugUnitTest 参数列表。
 KOTLIN_TASKS = $(shell sed 's|^|:android|; s|$$|:testDebugUnitTest|' tools/ci-kotlin-modules.txt | tr '\n' ' ')
@@ -15,12 +18,13 @@ export PYTHONPATH := .:tools:tools/tests
 help:
 	@echo "目标："
 	@echo "  test-offline  跑离线纯 Python 测试子集（tools/ci-pure-tests.txt）"
-	@echo "  test-kotlin   跑 Android JVM 单测（tools/ci-kotlin-modules.txt，需 JDK+Android SDK 36）"
+	@echo "  test-kotlin   跑 Android JVM 单测（tools/ci-kotlin-modules.txt，需 JDK+Android SDK 36；sherpa 需 SHERPA_REPO）"
 
 # 离线测试子集：51 个模块 / 574 tests。命令主体在此一处定义，CI 不再重复长串。
 test-offline:
 	$(PYTHON) -m unittest $(MODULES)
 
-# Android JVM 单测：14 个已验证可纯 JVM 跑的模块（sherpa-asr 等需本地 native 依赖的已排除）。
+# Android JVM 单测：15 个已验证可纯 JVM 跑的模块。
+# backend-sherpa-asr 需要 sherpa-onnx AAR（不在公共仓库），CI 通过 SHERPA_REPO 指向预置的 m2。
 test-kotlin:
-	$(GRADLE) $(KOTLIN_TASKS) --no-daemon --console=plain
+	$(GRADLE) $(KOTLIN_TASKS) $(SHERPA_GRADLE_ARG) --no-daemon --console=plain

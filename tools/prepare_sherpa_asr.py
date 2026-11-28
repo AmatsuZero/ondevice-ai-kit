@@ -38,11 +38,17 @@ def verified(path, size, digest):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--aar-only", action="store_true",
+                        help="only prepare the AAR maven repo needed to compile backend-sherpa-asr unit tests; "
+                             "skip model files, assets and license notices (CI needs only the AAR on the compile classpath)")
     args = parser.parse_args()
     out = args.output.resolve()
     downloads = out / "downloads"
     downloads.mkdir(parents=True, exist_ok=True)
-    for name, (url, size, digest) in INPUTS.items():
+
+    # --aar-only 只处理 .aar 一项；其余（模型/license）是 Demo APK 运行时资产，单测用不到。
+    inputs = {k: v for k, v in INPUTS.items() if k.endswith(".aar")} if args.aar_only else INPUTS
+    for name, (url, size, digest) in inputs.items():
         path = downloads / name
         if not verified(path, size, digest):
             temporary = path.with_suffix(path.suffix + ".part")
@@ -53,6 +59,19 @@ def main():
                 raise ValueError(f"artifact digest/size mismatch: {name}")
             temporary.replace(path)
         print(f"Verified {name}", flush=True)
+
+    # 生成 m2 maven 仓库（AAR + pom）——两种模式都需要。
+    repo = out / "m2" / "com" / "k2fsa" / "sherpa" / "onnx" / "sherpa-onnx" / VERSION
+    repo.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(downloads / "sherpa-onnx-2.0.1.aar", repo / "sherpa-onnx-2.0.1.aar")
+    (repo / "sherpa-onnx-2.0.1.pom").write_text(
+        '<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>'
+        '<groupId>com.k2fsa.sherpa.onnx</groupId><artifactId>sherpa-onnx</artifactId>'
+        '<version>2.0.1</version><packaging>aar</packaging></project>\n')
+    if args.aar_only:
+        print(json.dumps({"sherpaMavenRepo": str(out / "m2")}, indent=2))
+        return
+
     assets = out / "assets" / "sherpa-whisper-tiny"
     assets.mkdir(parents=True, exist_ok=True)
     for name in INPUTS:
@@ -69,13 +88,6 @@ def main():
         if b"Permission is hereby granted" not in data and b"Apache License" not in data:
             raise ValueError(f"unrecognized license response: {name}")
         (assets / name).write_bytes(data)
-    repo = out / "m2" / "com" / "k2fsa" / "sherpa" / "onnx" / "sherpa-onnx" / VERSION
-    repo.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(downloads / "sherpa-onnx-2.0.1.aar", repo / "sherpa-onnx-2.0.1.aar")
-    (repo / "sherpa-onnx-2.0.1.pom").write_text(
-        '<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>'
-        '<groupId>com.k2fsa.sherpa.onnx</groupId><artifactId>sherpa-onnx</artifactId>'
-        '<version>2.0.1</version><packaging>aar</packaging></project>\n')
     manifest = {"runtimeVersion": VERSION, "modelRevision": REVISION,
         "files": {p.name: {"size": p.stat().st_size,
             "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}

@@ -12,3 +12,4 @@
 :backend-litertlm
 :backend-litert-sr
 :backend-opencv-identity
+:backend-sherpa-asr
