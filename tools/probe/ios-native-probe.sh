@@ -7,7 +7,10 @@ cd "$(dirname "$0")/../.."
 echo "=== 环境 ==="
 java -version 2>&1 | head -3
 xcodebuild -version 2>&1 | head -3
-./gradlew --version 2>&1 | grep -E 'Gradle|JVM' | head -4
+echo "https_proxy=${https_proxy:-<unset>} HTTPS_PROXY=${HTTPS_PROXY:-<unset>}"
+# 用仓库自带 gradle-local.py（注入代理、支持 ODAI_GRADLE_BIN），避免 wrapper 直连 services.gradle.org 下载失败。
+# 注意不要把 --version 放进 pipefail 管道：grep 无匹配会误判为失败。
+python3 scripts/gradle-local.py --version 2>&1 | grep -E 'Gradle|JVM' || true
 
 # 记录跑前进程（供清理脚本做 PID 差集，只杀本 job 新起的，不碰 runner 上别人的）
 mkdir -p .ci-probe-state
@@ -21,7 +24,7 @@ PYTHONPATH=".:tools:tools/tests" python3 -m unittest \
   test_mlxvlm_xcframework_layout
 
 echo "=== 2) KMP iOS Native 测试（kmp-binding + demo/shared 的 commonTest）==="
-./gradlew :kmp-binding:iosSimulatorArm64Test :demo:shared:iosSimulatorArm64Test \
+python3 scripts/gradle-local.py :kmp-binding:iosSimulatorArm64Test :demo:shared:iosSimulatorArm64Test \
   --no-daemon --console=plain
 
 echo "=== 跑后进程（供清理核对）==="
