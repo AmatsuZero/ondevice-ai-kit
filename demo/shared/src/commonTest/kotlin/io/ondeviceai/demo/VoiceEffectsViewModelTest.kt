@@ -122,6 +122,25 @@ class VoiceEffectsViewModelTest {
         assertEquals("old", model.state.inputReference)
         model.setRecording(true); model.process(); assertEquals(VoiceEffectsPhase.FAILED, model.state.phase)
     }
+    @Test fun referenceModeUsesBothInputsAndDiscardsStaleOutput() {
+        val neural = TimbreFake()
+        val model = VoiceEffectsViewModel(VoiceFake(), neural)
+        model.selectInput("content.wav", "内容.wav")
+        model.selectReferenceInput("voice.wav", "参考.wav")
+        model.setReferenceMode(true)
+        model.process()
+        assertEquals("voice.wav" to "content.wav", neural.referenceRequest)
+        neural.finish("reference-out")
+        assertEquals("reference-out", model.state.output?.reference)
+        assertTrue(model.holdOutput("reference-out"))
+        model.selectReferenceInput("replaced.wav", "新参考.wav")
+        assertNull(model.state.output)
+        assertTrue(neural.outputs.contains("reference-out"))
+        model.endOutputUse("reference-out")
+        assertFalse(neural.outputs.contains("reference-out"))
+        model.setReferenceMode(false)
+        assertEquals(VoiceEffectsPhase.IDLE, model.state.phase)
+    }
     @Test fun closeAndOldCallbacksDoNotReviveOutput() {
         val bridge = VoiceFake(); val model = VoiceEffectsViewModel(bridge)
         model.selectInput("input", null); model.process(); model.close()
@@ -149,10 +168,15 @@ private class VoiceFake : VoiceEffectsBridge {
 private open class TimbreFake : DemoVoiceTimbres {
     val outputs = mutableSetOf<String>()
     lateinit var request: Pair<String, String>
+    var referenceRequest: Pair<String, String>? = null
     private lateinit var callback: VoiceEffectsBridgeProcessCallback
 
     override fun render(inputReference: String, key: String, callback: VoiceEffectsBridgeProcessCallback) {
         request = inputReference to key
+        this.callback = callback
+    }
+    override fun renderReference(referenceInputReference: String, contentInputReference: String, callback: VoiceEffectsBridgeProcessCallback) {
+        referenceRequest = referenceInputReference to contentInputReference
         this.callback = callback
     }
     fun finish(reference: String) {

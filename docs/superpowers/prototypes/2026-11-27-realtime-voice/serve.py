@@ -49,10 +49,15 @@ ALLOW = {
     '/clips/voiceA.wav': 'clips' + os.sep + 'voiceA.wav',
     '/clips/voiceB.wav': 'clips' + os.sep + 'voiceB.wav',
     '/clips/voiceC.wav': 'clips' + os.sep + 'voiceC.wav',
+    '/clips/reference-sample.wav': 'clips' + os.sep + 'reference-sample.wav',
+    '/clips/reference-content.wav': 'clips' + os.sep + 'reference-content.wav',
+    '/clips/reference-converted.wav': 'clips' + os.sep + 'reference-converted.wav',
+    '/clips/reference-CREDITS.txt': 'clips' + os.sep + 'reference-CREDITS.txt',
     '/app-icon.png': 'app-icon.png',
     '/app.js': 'app.js',
     '/voice-worklet.js': 'voice-worklet.js',
     '/file-mode.js': 'file-mode.js',
+    '/reference-mode.js': 'reference-mode.js',
     '/waveform.json': 'waveform.json',
     '/monitor-setup.js': 'monitor-setup.js',
 }
@@ -103,6 +108,8 @@ def mime_for(path):
         return 'audio/wav'
     if path.endswith('.png'):
         return 'image/png'
+    if path.endswith('.txt'):
+        return 'text/plain; charset=utf-8'
     return 'application/octet-stream'
 
 

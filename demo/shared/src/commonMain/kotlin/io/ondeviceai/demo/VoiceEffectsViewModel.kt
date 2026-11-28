@@ -13,6 +13,7 @@ enum class DemoVoiceEffect(val label: String, val key: String, val pitchPreset: 
 /** The host renders into an owned WAV and keeps its reference valid until release. */
 interface DemoVoiceTimbres {
     fun render(inputReference: String, key: String, callback: VoiceEffectsBridgeProcessCallback)
+    fun renderReference(referenceInputReference: String, contentInputReference: String, callback: VoiceEffectsBridgeProcessCallback)
     fun ownsOutput(reference: String): Boolean
     fun releaseOutput(reference: String, callback: VoiceEffectsBridgeReleaseCallback)
 }
@@ -24,14 +25,17 @@ interface DemoCoreMLVoiceTimbres : DemoVoiceTimbres {
 data class VoiceEffectsState(
     val phase: VoiceEffectsPhase = VoiceEffectsPhase.IDLE,
     val inputReference: String? = null, val inputName: String? = null,
+    val referenceReference: String? = null, val referenceName: String? = null,
+    val referenceMode: Boolean = false,
     val effect: DemoVoiceEffect = DemoVoiceEffect.ORIGINAL, val exampleReference: String? = null,
     val useCoreML: Boolean = false,
     val output: VoiceEffectsBridgeOutput? = null, val importing: Boolean = false,
     val recording: Boolean = false, val mediaBusy: Boolean = false,
+    val referenceImporting: Boolean = false, val referenceRecording: Boolean = false,
     val failure: VoiceEffectsBridgeFailure? = null, val releaseFailure: VoiceEffectsBridgeFailure? = null,
     val pendingReleases: Int = 0, val closed: Boolean = false,
 ) {
-    val controlsEnabled get() = !closed && !importing && !recording && !mediaBusy &&
+    val controlsEnabled get() = !closed && !importing && !recording && !referenceImporting && !referenceRecording && !mediaBusy &&
         phase != VoiceEffectsPhase.RUNNING && phase != VoiceEffectsPhase.CANCELLING
 }
 interface VoiceEffectsDemoActions {
@@ -39,12 +43,23 @@ interface VoiceEffectsDemoActions {
     fun selectAudioFile()
     fun startRecording()
     fun stopRecording()
+    fun selectReferenceAudioFile()
+    fun startReferenceRecording()
+    fun stopReferenceRecording()
+    fun playReference()
     fun playOriginal()
     fun playResult(reference: String)
     fun stopPlayback()
     fun exportAudio(reference: String)
     fun leavePage()
+    fun loadReferenceExample()
+    fun clearVoiceInput(referenceSlot: Boolean)
+    fun readVoiceWave(reference: String, reply: VoiceWaveReply)
+    fun playVoiceAt(reference: String, fraction: Float)
+    fun playbackFraction(reference: String): Float
 }
+
+interface VoiceWaveReply { fun ready(wave: VoiceWaveform?) }
 
 /** UI-thread state. Host holds outputs while any player/exporter can read them. */
 class VoiceEffectsViewModel(private val bridge: VoiceEffectsBridge, private val timbres: DemoVoiceTimbres? = null) {
@@ -74,6 +89,33 @@ class VoiceEffectsViewModel(private val bridge: VoiceEffectsBridge, private val 
         state = state.copy(inputReference = reference, inputName = name, failure = null,
             phase = if (pending || state.output != null) state.phase else VoiceEffectsPhase.IDLE)
     }
+    fun clearInput() {
+        if (state.closed) return
+        cancel(); clearOutput()
+        state = state.copy(inputReference = null, inputName = null, failure = null,
+            phase = if (pending) VoiceEffectsPhase.CANCELLING else VoiceEffectsPhase.IDLE)
+    }
+    fun selectReferenceInput(reference: String?, name: String?) {
+        if (state.closed || reference == null) return
+        if (reference != state.referenceReference) { cancel(); clearOutput() }
+        state = state.copy(referenceReference = reference, referenceName = name, failure = null,
+            phase = if (pending || state.output != null) state.phase else VoiceEffectsPhase.IDLE)
+    }
+    fun clearReference() {
+        if (state.closed) return
+        cancel(); clearOutput()
+        state = state.copy(referenceReference = null, referenceName = null, referenceImporting = false,
+            referenceRecording = false, failure = null,
+            phase = if (pending) VoiceEffectsPhase.CANCELLING else VoiceEffectsPhase.IDLE)
+    }
+    fun setReferenceMode(enabled: Boolean) {
+        if (state.closed || state.referenceMode == enabled || (enabled && !hasTimbres)) return
+        cancel(); clearOutput()
+        state = state.copy(referenceMode = enabled, failure = null,
+            phase = if (pending) VoiceEffectsPhase.CANCELLING else VoiceEffectsPhase.IDLE)
+    }
+    fun setReferenceImporting(value: Boolean) { if (!state.closed) state = state.copy(referenceImporting = value) }
+    fun setReferenceRecording(value: Boolean) { if (!state.closed) state = state.copy(referenceRecording = value) }
     fun selectEffect(effect: DemoVoiceEffect) {
         if (!state.controlsEnabled || effect == state.effect || (effect.pitchPreset == null && !hasTimbres)) return
         clearOutput()
@@ -94,6 +136,7 @@ class VoiceEffectsViewModel(private val bridge: VoiceEffectsBridge, private val 
     fun process() {
         if (!state.controlsEnabled || pending) return
         val input = state.inputReference ?: run { inputFailed(); return }
+        val reference = if (state.referenceMode) state.referenceReference ?: run { inputFailed("referenceMissing"); return } else null
         clearOutput(); val ticket = ++generation; pending = true; active = null
         state = state.copy(phase = VoiceEffectsPhase.RUNNING, failure = null)
         val callback = object : VoiceEffectsBridgeProcessCallback {
@@ -106,6 +149,10 @@ class VoiceEffectsViewModel(private val bridge: VoiceEffectsBridge, private val 
             }
             override fun onFailure(failure: VoiceEffectsBridgeFailure) = terminal(ticket, VoiceEffectsPhase.FAILED, failure = failure)
             override fun onCancelled() = terminal(ticket, VoiceEffectsPhase.CANCELLED)
+        }
+        if (state.referenceMode) {
+            checkNotNull(timbres).renderReference(reference!!, input, callback)
+            return
         }
         val effect = state.effect
         val preset = effect.pitchPreset

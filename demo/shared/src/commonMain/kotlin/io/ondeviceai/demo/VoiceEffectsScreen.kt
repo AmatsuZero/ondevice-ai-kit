@@ -1,19 +1,27 @@
 package io.ondeviceai.demo
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
@@ -21,6 +29,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 
 @Composable
 fun VoiceEffectsScreen(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoActions, showBack: Boolean = true) {
@@ -49,6 +58,50 @@ fun VoiceEffectsScreen(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoAc
 
 @Composable
 private fun FileVoicePanel(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoActions) {
+    val state = model.state
+    val waves = remember { mutableStateMapOf<String, VoiceWaveform>() }
+    if (state.referenceMode) {
+        listOfNotNull(state.referenceReference, state.inputReference, state.output?.reference)
+            .distinct()
+            .forEach { reference -> key(reference) { WaveLoader(reference, actions, waves) } }
+    }
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        FilterChip(selected = !state.referenceMode, enabled = state.controlsEnabled,
+            onClick = { model.setReferenceMode(false) }, modifier = Modifier.testTag("voice-submode-fixed"),
+            label = { Text("固定音色") })
+        FilterChip(selected = state.referenceMode, enabled = state.controlsEnabled && model.hasTimbres,
+            onClick = { model.setReferenceMode(true) }, modifier = Modifier.testTag("voice-submode-reference"),
+            label = { Text("参考音色") })
+    }
+    if (state.referenceMode) {
+        ReferenceVoicePanel(model = model, actions = actions, waves = waves)
+    } else {
+        FixedVoiceInputPanel(model = model, actions = actions)
+    }
+    VoiceStatus(model = model, actions = actions,
+        showBackends = state.referenceMode || (model.hasCoreMLTimbres && state.effect.pitchPreset == null),
+        resultTag = if (state.referenceMode) "voice-reference-result" else "voice-output")
+}
+
+@Composable
+private fun WaveLoader(reference: String, actions: VoiceEffectsDemoActions,
+                       waves: MutableMap<String, VoiceWaveform>) {
+    DisposableEffect(reference) {
+        var retired = false
+        actions.readVoiceWave(reference, object : VoiceWaveReply {
+            override fun ready(wave: VoiceWaveform?) {
+                if (!retired && wave != null) waves[reference] = wave
+            }
+        })
+        onDispose {
+            retired = true
+            waves.remove(reference)
+        }
+    }
+}
+
+@Composable
+private fun FixedVoiceInputPanel(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoActions) {
     val state = model.state
     Text("输入音频", style = MaterialTheme.typography.titleMedium)
     Text(state.inputName ?: "请选择音频", Modifier.testTag("voice-input"))
@@ -90,6 +143,195 @@ private fun FileVoicePanel(model: VoiceEffectsViewModel, actions: VoiceEffectsDe
     }
     Button(onClick = model::process, enabled = state.controlsEnabled && state.inputReference != null,
         modifier = Modifier.testTag("voice-process")) { Text("转换为${state.effect.label}") }
+    TextButton(onClick = actions::playOriginal, enabled = state.controlsEnabled && state.inputReference != null,
+        modifier = Modifier.testTag("voice-content-play")) { Text("试听原声") }
+}
+
+@Composable
+private fun ReferenceVoicePanel(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoActions,
+                                waves: Map<String, VoiceWaveform>) {
+    val state = model.state
+    Box(Modifier.fillMaxWidth().background(Color(0xFF1B4332), RoundedCornerShape(12.dp)).padding(16.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text("参考音色", style = MaterialTheme.typography.headlineSmall, color = Color(0xFFA7F3D0))
+            Text("先录参考音色，再录要说的话。", style = MaterialTheme.typography.bodySmall, color = Color(0xFFA7F3D0))
+            Button(onClick = actions::loadReferenceExample, enabled = state.controlsEnabled,
+                modifier = Modifier.testTag("voice-reference-example"),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFA7F3D0), contentColor = Color(0xFF1B4332))) { Text("载入样例") }
+        }
+    }
+    NumberedCard(number = "01", title = "想变成谁的声音") {
+        VoiceInputCard(
+            title = "参考音频", name = state.referenceName, reference = state.referenceReference,
+            wave = waves[state.referenceReference], referenceSlot = true, actions = actions,
+            importTag = "voice-reference-import", recordTag = "voice-reference-record",
+            stopTag = "voice-reference-stop", playTag = "voice-reference-play", clearTag = "voice-reference-clear",
+            onImport = actions::selectReferenceAudioFile, onRecord = actions::startReferenceRecording,
+            onStop = actions::stopReferenceRecording,
+            recording = state.referenceRecording, importing = state.referenceImporting, enabled = state.controlsEnabled, poll = state.mediaBusy)
+    }
+    NumberedCard(number = "02", title = "想说些什么") {
+        VoiceInputCard(
+            title = "内容音频", name = state.inputName, reference = state.inputReference,
+            wave = waves[state.inputReference], referenceSlot = false, actions = actions,
+            importTag = "voice-content-import", recordTag = "voice-content-record",
+            stopTag = "voice-content-stop", playTag = "voice-content-play", clearTag = "voice-content-clear",
+            onImport = actions::selectAudioFile, onRecord = actions::startRecording, onStop = actions::stopRecording,
+            recording = state.recording, importing = state.importing, enabled = state.controlsEnabled, poll = state.mediaBusy)
+    }
+    NumberedCard(number = "03", title = "听听变化") {
+        Button(onClick = model::process,
+            enabled = state.controlsEnabled && state.referenceReference != null && state.inputReference != null,
+            modifier = Modifier.testTag("voice-reference-process")) { Text("按参考音色转换") }
+        VoiceComparison(
+            inputReference = state.inputReference, content = waves[state.inputReference],
+            outputReference = state.output?.reference, output = state.output?.let { waves[it.reference] },
+            actions = actions, enabled = state.controlsEnabled || state.mediaBusy, poll = state.mediaBusy)
+    }
+}
+
+@Composable
+private fun NumberedCard(number: String, title: String, content: @Composable ColumnScope.() -> Unit) {
+    Column(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp)).padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text("$number $title", style = MaterialTheme.typography.titleMedium)
+        content()
+    }
+}
+
+@Composable
+private fun VoiceInputCard(
+    title: String, name: String?, reference: String?, wave: VoiceWaveform?, referenceSlot: Boolean,
+    actions: VoiceEffectsDemoActions, importTag: String, recordTag: String, stopTag: String,
+    playTag: String, clearTag: String, onImport: () -> Unit, onRecord: () -> Unit, onStop: () -> Unit,
+    recording: Boolean, importing: Boolean, enabled: Boolean, poll: Boolean,
+) {
+    val shape = RoundedCornerShape(8.dp)
+    val buttons = Modifier.height(48.dp)
+    Text(title, style = MaterialTheme.typography.titleSmall)
+    Text(name ?: "请选择音频", Modifier.testTag("${importTag}-name"))
+    Text("支持 0.5–30 秒的单声道 PCM16 WAV（16 / 44.1 / 48 kHz）。音频仅在本机处理，不会上传。", style = MaterialTheme.typography.bodySmall)
+    if (importing) Text("正在准备音频…")
+    if (recording) Text("录音中，到 30 秒自动停止")
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        OutlinedButton(onClick = onImport, enabled = enabled, shape = shape,
+            modifier = buttons.weight(1f).testTag(importTag),
+            contentPadding = PaddingValues(4.dp)) { Text("导入 WAV", maxLines = 1, softWrap = false) }
+        if (recording) OutlinedButton(onClick = onStop, shape = shape,
+            modifier = buttons.weight(1f).testTag(stopTag),
+            contentPadding = PaddingValues(4.dp)) { Text("停止录音", maxLines = 1, softWrap = false) }
+        else OutlinedButton(onClick = onRecord, enabled = enabled, shape = shape,
+            modifier = buttons.weight(1f).testTag(recordTag),
+            contentPadding = PaddingValues(4.dp)) { Text("录制声音", maxLines = 1, softWrap = false) }
+        OutlinedButton(onClick = { actions.clearVoiceInput(referenceSlot) },
+            enabled = enabled && reference != null, shape = shape,
+            modifier = buttons.weight(1f).testTag(clearTag),
+            contentPadding = PaddingValues(4.dp)) { Text("清空", maxLines = 1, softWrap = false) }
+    }
+    VoiceWaveView(reference = reference, wave = wave, actions = actions,
+        tag = "${importTag}-wave", playTag = playTag, label = title,
+        enabled = enabled || poll, poll = poll)
+}
+
+@Composable
+private fun VoiceWaveView(
+    reference: String?, wave: VoiceWaveform?, actions: VoiceEffectsDemoActions,
+    tag: String, label: String, maxDuration: Double = wave?.durationSeconds ?: 0.0,
+    color: Color = Color(0xFF2E7D32), enabled: Boolean = true, poll: Boolean = false,
+    showControls: Boolean = true, playTag: String = "",
+) {
+    var fraction by remember(reference) { mutableStateOf(-1f) }
+    LaunchedEffect(reference, poll) {
+        if (reference == null || !poll) {
+            fraction = -1f
+            return@LaunchedEffect
+        }
+        while (true) {
+            fraction = actions.playbackFraction(reference)
+            delay(80)
+        }
+    }
+    if (reference == null || wave == null || wave.peaks.isEmpty()) return
+    fun seek(x: Float, width: Float) {
+        if (width > 0f) {
+            val fraction = ((x / width) * maxDuration / wave.durationSeconds).toFloat().coerceIn(0f, 1f)
+            actions.playVoiceAt(reference, fraction)
+        }
+    }
+    Text("$label ${formatSeconds(wave.durationSeconds)} 秒", Modifier.testTag("${tag}-duration"),
+        style = MaterialTheme.typography.bodySmall)
+    Canvas(Modifier.fillMaxWidth().height(56.dp).testTag(tag)
+        .semantics(mergeDescendants = true) { contentDescription = "$label 波形，点击或拖动可定位播放" }
+        .pointerInput(reference, enabled, maxDuration, wave.durationSeconds) {
+            if (!enabled) return@pointerInput
+            detectTapGestures { offset -> seek(offset.x, size.width.toFloat()) }
+        }
+        .pointerInput(reference, enabled, maxDuration, wave.durationSeconds) {
+            if (!enabled) return@pointerInput
+            var dragX = 0f
+            detectHorizontalDragGestures(
+                onHorizontalDrag = { change, _ -> dragX = change.position.x },
+                onDragEnd = { seek(dragX, size.width.toFloat()) }
+            )
+        }) {
+        val w = size.width
+        val h = size.height
+        val peaks = wave.peaks
+        val span = w * (wave.durationSeconds / maxDuration.coerceAtLeast(0.000001)).toFloat().coerceIn(0f, 1f)
+        val barW = (span / peaks.size).coerceAtLeast(0.01f)
+        val mid = h / 2f
+        drawLine(color, Offset(0f, mid), Offset(span, mid), strokeWidth = 1f)
+        peaks.forEachIndexed { i, peak ->
+            val db = (20.0 * kotlin.math.log10(peak.coerceAtLeast(1e-6f).toDouble())).coerceIn(-60.0, 0.0)
+            val norm = ((db + 60.0) / 60.0).toFloat()
+            val amp = norm * mid * 0.92f
+            val cx = (i * barW + barW / 2f).coerceAtMost(span)
+            drawLine(color, Offset(cx, mid - amp), Offset(cx, mid + amp), strokeWidth = barW.coerceAtMost(3f))
+        }
+        if (fraction in 0f..1f) {
+            val cx = fraction * span
+            drawLine(Color.Red, Offset(cx, 0f), Offset(cx, h), strokeWidth = 2f)
+        }
+    }
+    if (showControls) {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            TextButton(onClick = { actions.playVoiceAt(reference, 0f) }, enabled = enabled,
+                modifier = Modifier.testTag(playTag).semantics { contentDescription = "播放$label" }) { Text("播放") }
+            if (fraction in 0f..1f) {
+                TextButton(onClick = actions::stopPlayback,
+                    modifier = Modifier.testTag("${tag}-stop").semantics { contentDescription = "停止播放$label" }) { Text("停止") }
+            }
+        }
+    }
+}
+
+@Composable
+private fun VoiceComparison(
+    inputReference: String?, content: VoiceWaveform?,
+    outputReference: String?, output: VoiceWaveform?,
+    actions: VoiceEffectsDemoActions, enabled: Boolean, poll: Boolean,
+) {
+    if (outputReference == null || output == null) return
+    val duration = maxOf(content?.durationSeconds ?: 0.0, output.durationSeconds)
+    if (duration <= 0.0) return
+    Text("原声与结果对比（−60..0 dBFS）", style = MaterialTheme.typography.titleSmall)
+    VoiceWaveView(reference = inputReference, wave = content, actions = actions,
+        tag = "voice-compare-content", label = "原声", maxDuration = duration,
+        color = Color.Gray, enabled = enabled, poll = poll, showControls = false)
+    VoiceWaveView(reference = outputReference, wave = output, actions = actions,
+        tag = "voice-compare-output", label = "转换后", maxDuration = duration,
+        color = Color(0xFF2E7D32), enabled = enabled, poll = poll, showControls = false)
+}
+
+private fun formatSeconds(value: Double): String {
+    val tenths = (value * 10).toLong()
+    return "${tenths / 10}.${tenths % 10}"
+}
+
+@Composable
+private fun VoiceStatus(model: VoiceEffectsViewModel, actions: VoiceEffectsDemoActions, showBackends: Boolean,
+                        resultTag: String = "voice-output") {
+    val state = model.state
     if (state.phase == VoiceEffectsPhase.RUNNING || state.phase == VoiceEffectsPhase.CANCELLING) {
         LinearProgressIndicator(Modifier.fillMaxWidth())
         TextButton(onClick = model::cancel, modifier = Modifier.testTag("voice-cancel")) {
@@ -97,15 +339,18 @@ private fun FileVoicePanel(model: VoiceEffectsViewModel, actions: VoiceEffectsDe
         }
     }
     Text(when (state.phase) {
-        VoiceEffectsPhase.IDLE -> "就绪"; VoiceEffectsPhase.RUNNING -> "正在本机转换为${state.effect.label}…"; VoiceEffectsPhase.CANCELLING -> "正在取消并释放资源"
-        VoiceEffectsPhase.SUCCEEDED -> "${state.effect.label}转换完成"; VoiceEffectsPhase.FAILED -> "操作失败"; VoiceEffectsPhase.CANCELLED -> "已取消"
+        VoiceEffectsPhase.IDLE -> "就绪"
+        VoiceEffectsPhase.RUNNING -> if (state.referenceMode) "正在按参考音色转换…" else "正在本机转换为${state.effect.label}…"
+        VoiceEffectsPhase.CANCELLING -> "正在取消并释放资源"
+        VoiceEffectsPhase.SUCCEEDED -> if (state.referenceMode) "参考音色转换完成" else "${state.effect.label}转换完成"
+        VoiceEffectsPhase.FAILED -> "操作失败"
+        VoiceEffectsPhase.CANCELLED -> "已取消"
     }, Modifier.testTag("voice-phase"))
-    TextButton(onClick = actions::playOriginal, enabled = state.controlsEnabled && state.inputReference != null) { Text("试听原声") }
     state.output?.let { output ->
         if (showBackends) {
             Text(voiceBackendLabel(output.backendId), Modifier.testTag("voice-backend-result"))
         }
-        Text("${output.sampleRate} Hz · ${output.frameCount} 帧 · ${output.durationSeconds} 秒", Modifier.testTag("voice-output"))
+        Text("${output.sampleRate} Hz · ${output.frameCount} 帧 · ${formatSeconds(output.durationSeconds)} 秒", Modifier.testTag(resultTag))
         Row {
             TextButton(onClick = { actions.playResult(output.reference) }, enabled = state.controlsEnabled, modifier = Modifier.testTag("voice-play-result")) { Text("试听结果") }
             TextButton(onClick = { actions.exportAudio(output.reference) }, enabled = state.controlsEnabled,

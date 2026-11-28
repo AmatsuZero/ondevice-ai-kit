@@ -335,6 +335,7 @@
 			inputPaths = (
 				"$(OPENVOICE_DIR)/prepare.py",
 				"$(OPENVOICE_DIR)/assets/original.wav",
+				"$(OPENVOICE_DIR)/assets/reference-content.wav",
 				"$(OPENVOICE_DIR)/assets/voiceA.f32",
 				"$(OPENVOICE_DIR)/assets/voiceB.f32",
 				"$(OPENVOICE_DIR)/assets/voiceC.f32",
@@ -345,6 +346,7 @@
 			);
 			outputPaths = (
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/original.wav",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/reference-content.wav",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/converter.onnx",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/ref_encoder.onnx",
 				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/OpenVoice/voiceA.f32",

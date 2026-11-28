@@ -50,7 +50,7 @@
     var st = window.getComputedStyle ? getComputedStyle(el) : null;
     return !st || st.display !== 'none';
   }
-  var active = isVisible(filePanel);
+  var active = isVisible(filePanel) && !fileAudio.hidden && !filePanel.hidden;
 
   function setStatus(msg) {
     if (fileStatus) fileStatus.textContent = msg;
@@ -580,8 +580,16 @@
   });
   window.addEventListener('voice-mode', function (e) {
     var m = e.detail && e.detail.mode;
-    if (m === 'file') activate();
+    if (m === 'file') { if (!fileAudio.hidden) activate(); }
     else deactivate();
+  });
+  window.addEventListener('voice-file-kind', function (e) {
+    var kind = e && e.detail && e.detail.kind;
+    if (kind === 'reference') { deactivate(); return; }
+    if (kind === 'fixed') {
+      var ex = document.getElementById('panel-explore');
+      if (isVisible(filePanel) && ex && !ex.hidden && !document.hidden) activate();
+    }
   });
   window.addEventListener('prototype-nav', function () {
     try { fileAudio.pause(); } catch (e) {}

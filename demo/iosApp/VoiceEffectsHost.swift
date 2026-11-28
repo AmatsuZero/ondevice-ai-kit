@@ -66,6 +66,14 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     private var playbackHolds: [UUID: (String?, (any IOSVoiceEffectsInputLease)?)] = [:]
     private var exportReference: String?
     private var pickerIsExport = false
+    private weak var activePicker: UIDocumentPickerViewController?
+    private var pickerTicket = 0
+    private enum InputTarget: Equatable { case content, reference }
+    private var pickerTarget: InputTarget = .content
+    private var pickerReferenceMode = false
+    private var recordingTarget: InputTarget = .content
+    private var recordingReferenceMode = false
+    private var recordingTicket = 0
     private var sessionOriginal: (AVAudioSession.Category, AVAudioSession.Mode, AVAudioSession.CategoryOptions)?
     init(embedded: Bool = false, prepareAudio: @escaping () async throws -> Void, done: @escaping () -> Void) {
         self.embedded = embedded
@@ -134,63 +142,138 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
               type == AVAudioSession.InterruptionType.began.rawValue else { return }
         background()
     }
-    func selectAudioFile() {
-        guard let model, model.state.controlsEnabled, !closed else { return }
-        model.setImporting(value: true); pickerIsExport = false
-        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.wav], asCopy: false)
-        picker.delegate = self; picker.allowsMultipleSelection = false; present(picker, animated: true)
-    }
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        if pickerIsExport { finishExport(); return }
-        guard let source = urls.first, let model, !closed else { model?.setImporting(value: false); return }
-        generation += 1; let ticket = generation; let directory = root.appendingPathComponent("inputs")
-        let scoped = source.startAccessingSecurityScopedResource()
-        Task { @MainActor in
-            defer { if scoped { source.stopAccessingSecurityScopedResource() }; model.setImporting(value: false) }
-            do {
-                let url = try await Task.detached {
-                    try VoiceEffectsWave.store(VoiceEffectsWave.normalize(url: source), directory: directory)
-                }.value
-                if closed || ticket != generation { _ = await Task.detached { try? FileManager.default.removeItem(at: url) }.value; return }
-                await install(url, name: source.lastPathComponent)
-            } catch { if !closed { model.inputFailed(reason: "unsupportedOrInvalidWav") } }
-        }
-    }
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        if pickerIsExport { finishExport() } else { model?.setImporting(value: false) }
-    }
-    func startRecording() {
-        guard let model, model.state.controlsEnabled, !closed, UIApplication.shared.applicationState == .active else { return }
-        model.setImporting(value: true); generation += 1; let ticket = generation
-        AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted in
-            Task { @MainActor in
-                guard let self, !self.closed, ticket == self.generation else { return }
-                model.setImporting(value: false)
-                guard granted else { model.inputFailed(reason: "microphonePermissionDenied"); return }
-                guard UIApplication.shared.applicationState == .active else { return }
-                await self.beginRecording()
+    private func setInputBusy(_ value: Bool, target: InputTarget, recording: Bool = false) {
+        guard let model else { return }
+        if recording {
+            if target == .reference {
+                model.setReferenceRecording(value: value)
+            } else {
+                model.setRecording(value: value)
+            }
+        } else {
+            switch target {
+            case .content: model.setImporting(value: value)
+            case .reference: model.setReferenceImporting(value: value)
             }
         }
     }
-    private func beginRecording() async {
-        guard let model, !closed else { return }
-        model.setImporting(value: true)
-        defer { model.setImporting(value: false) }
+
+    nonisolated private func isValidReferenceWAV(_ data: Data) -> Bool {
+        let bytes = [UInt8](data)
+        guard bytes.count >= 44 else { return false }
+        let rate = UInt32(bytes[24]) | (UInt32(bytes[25]) << 8) |
+            (UInt32(bytes[26]) << 16) | (UInt32(bytes[27]) << 24)
+        guard rate > 0 else { return false }
+        let seconds = Double((bytes.count - 44) / 2) / Double(rate)
+        return seconds >= 0.5 && seconds <= 30
+    }
+
+    func selectAudioFile() {
+        guard let model, model.state.controlsEnabled, !closed else { return }
+        pickerTarget = .content; pickerReferenceMode = model.state.referenceMode
+        setInputBusy(true, target: .content)
+        pickerIsExport = false
+        generation += 1; pickerTicket = generation
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.wav], asCopy: false)
+        picker.delegate = self; picker.allowsMultipleSelection = false; activePicker = picker
+        present(picker, animated: true)
+    }
+
+    func selectReferenceAudioFile() {
+        guard let model, model.state.controlsEnabled, !closed else { return }
+        pickerTarget = .reference; pickerReferenceMode = true
+        setInputBusy(true, target: .reference)
+        pickerIsExport = false
+        generation += 1; pickerTicket = generation
+        let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.wav], asCopy: false)
+        picker.delegate = self; picker.allowsMultipleSelection = false; activePicker = picker
+        present(picker, animated: true)
+    }
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard controller === activePicker else { return }
+        activePicker = nil
+        if pickerIsExport { finishExport(); return }
+        let target = pickerTarget, isReferenceMode = pickerReferenceMode, ticket = pickerTicket
+        guard ticket == generation, let source = urls.first, let model, !closed else { return }
+        generation += 1; let installTicket = generation; let directory = root.appendingPathComponent("inputs")
+        let scoped = source.startAccessingSecurityScopedResource()
+        Task { @MainActor in
+            defer {
+                if scoped { source.stopAccessingSecurityScopedResource() }
+                if installTicket == generation { setInputBusy(false, target: target) }
+            }
+            do {
+                let url: URL = try await Task.detached {
+                    let data = try VoiceEffectsWave.normalize(url: source)
+                    guard !isReferenceMode || self.isValidReferenceWAV(data) else {
+                        throw VoiceEffectsWave.Failure.unsupportedOrInvalidWAV
+                    }
+                    return try VoiceEffectsWave.store(data, directory: directory)
+                }.value
+                if closed || installTicket != generation {
+                    _ = await Task.detached { try? FileManager.default.removeItem(at: url) }.value
+                    return
+                }
+                await install(url, name: source.lastPathComponent, target: target, isReferenceMode: isReferenceMode)
+            } catch { if !closed, installTicket == generation { model.inputFailed(reason: "unsupportedOrInvalidWav") } }
+        }
+    }
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        guard controller === activePicker else { return }
+        activePicker = nil
+        if pickerIsExport { finishExport() }
+        else if pickerTicket == generation { setInputBusy(false, target: pickerTarget) }
+    }
+    func startRecording() { startCapture(target: .content) }
+    func startReferenceRecording() { startCapture(target: .reference) }
+    func stopRecording() { stopCapture(discard: false) }
+    func stopReferenceRecording() { stopCapture(discard: false) }
+
+    private func startCapture(target: InputTarget) {
+        guard let model, model.state.controlsEnabled, !closed,
+              UIApplication.shared.applicationState == .active else { return }
+        let isReferenceMode = target == .reference || model.state.referenceMode
+        setInputBusy(true, target: target)
+        generation += 1; let ticket = generation
+        recordingTarget = target; recordingReferenceMode = isReferenceMode; recordingTicket = ticket
+        AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted in
+            Task { @MainActor in
+                guard let self, !self.closed, ticket == self.generation else { return }
+                self.setInputBusy(false, target: target)
+                guard granted else { model.inputFailed(reason: "microphonePermissionDenied"); return }
+                guard UIApplication.shared.applicationState == .active else { return }
+                await self.beginRecording(target: target, isReferenceMode: isReferenceMode, ticket: ticket)
+            }
+        }
+    }
+
+    private func beginRecording(target: InputTarget, isReferenceMode: Bool, ticket: Int) async {
+        guard let model, !closed, ticket == generation else { return }
+        setInputBusy(true, target: target)
+        defer { if ticket == generation { setInputBusy(false, target: target) } }
         let directory = root.appendingPathComponent("recordings")
         do {
             try await Task.detached { try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true) }.value
-            guard !closed, UIApplication.shared.applicationState == .active else { return }
+            guard !closed, ticket == generation, UIApplication.shared.applicationState == .active, recorder == nil else { return }
             try acquireSession(recording: true)
-            let url = directory.appendingPathComponent("record-\(UUID().uuidString).wav"); recordingURL = url
+            let url = directory.appendingPathComponent("record-\(UUID().uuidString).wav")
             let value = try AVAudioRecorder(url: url, settings: [AVFormatIDKey: kAudioFormatLinearPCM,
                 AVSampleRateKey: 16000, AVNumberOfChannelsKey: 1, AVLinearPCMBitDepthKey: 16,
                 AVLinearPCMIsFloatKey: false, AVLinearPCMIsBigEndianKey: false])
-            value.delegate = self; recorder = value; discardRecording = false
+            value.delegate = self
+            recordingURL = url
             guard value.record(forDuration: 30) else { throw VoiceEffectsWave.Failure.unsupportedOrInvalidWAV }
-            model.setRecording(value: true)
-        } catch { recorder = nil; releaseSession(); model.inputFailed(reason: "audioRecordingFailed"); cleanupRecording() }
+            recorder = value
+            recordingTarget = target; recordingReferenceMode = isReferenceMode; recordingTicket = ticket
+            discardRecording = false
+            setInputBusy(true, target: target, recording: true)
+        } catch {
+            releaseSession()
+            model.inputFailed(reason: "audioRecordingFailed")
+            cleanupRecording()
+        }
     }
-    func stopRecording() { stopCapture(discard: false) }
     private func stopCapture(discard: Bool) {
         guard let recorder else { return }
         discardRecording = discardRecording || discard; recorder.stop()
@@ -200,33 +283,47 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     }
     private func finishedRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         guard self.recorder === recorder else { return }
+        let target = recordingTarget, isReferenceMode = recordingReferenceMode, ticket = recordingTicket
         self.recorder = nil; releaseSession()
         let source = recordingURL; recordingURL = nil
         if !flag && !discardRecording && !closed { model?.inputFailed(reason: "audioRecordingFailed") }
         let discard = discardRecording || closed || !flag
         let directory = root.appendingPathComponent("inputs")
         Task { @MainActor in
-            defer { model?.setRecording(value: false) }
+            defer { if generation == ticket { setInputBusy(false, target: target, recording: true) } }
             guard let source else { return }
+            if closed || discard || generation != ticket {
+                _ = await Task.detached { try? FileManager.default.removeItem(at: source) }.value
+                return
+            }
             do {
-                let output: URL? = try await Task.detached {
+                let output: URL = try await Task.detached {
                     defer { try? FileManager.default.removeItem(at: source) }
-                    if discard { return nil }
-                    return try VoiceEffectsWave.store(VoiceEffectsWave.normalize(url: source), directory: directory)
+                    let data = try VoiceEffectsWave.normalize(url: source)
+                    guard !isReferenceMode || self.isValidReferenceWAV(data) else {
+                        throw VoiceEffectsWave.Failure.unsupportedOrInvalidWAV
+                    }
+                    return try VoiceEffectsWave.store(data, directory: directory)
                 }.value
-                if let output {
-                    if closed { _ = await Task.detached { try? FileManager.default.removeItem(at: output) }.value }
-                    else { await install(output, name: "录音.wav") }
+                if closed || generation != ticket {
+                    _ = await Task.detached { try? FileManager.default.removeItem(at: output) }.value
+                } else {
+                    await install(output, name: "录音.wav", target: target, isReferenceMode: isReferenceMode)
                 }
-            } catch { if !closed { model?.inputFailed(reason: "audioRecordingFailed") } }
+            } catch VoiceEffectsWave.Failure.unsupportedOrInvalidWAV {
+                if !closed && generation == ticket { model?.inputFailed(reason: "unsupportedOrInvalidWav") }
+            } catch {
+                if !closed && generation == ticket { model?.inputFailed(reason: "audioRecordingFailed") }
+            }
         }
     }
     nonisolated func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         Task { @MainActor [weak self] in
             guard let self, self.recorder === recorder else { return }
+            let ticket = self.recordingTicket
             self.discardRecording = true; recorder.stop()
             self.finishedRecording(recorder, successfully: false)
-            self.model?.inputFailed(reason: "audioRecordingFailed")
+            if !self.closed, self.generation == ticket { self.model?.inputFailed(reason: "audioRecordingFailed") }
         }
     }
     private func cleanupRecording() {
@@ -235,13 +332,121 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     }
     func playOriginal() {
         guard let reference = model?.state.inputReference, let lease = try? inputs.acquire(reference: reference) else { return }
-        play(lease.url, reference: nil, input: lease)
+        play(lease.url, reference: nil, input: lease, track: reference)
+    }
+    func playReference() {
+        guard let reference = model?.state.referenceReference, let lease = try? inputs.acquire(reference: reference) else { return }
+        play(lease.url, reference: nil, input: lease, track: reference)
+    }
+    func playVoiceAt(reference: String, fraction: Float) {
+        let clamped = min(max(fraction, 0), 1)
+        if !closed, playingReference == reference, let player = player,
+           player.duration.isFinite, player.duration > 0 {
+            if clamped >= 1 {
+                stopPlayback()
+                return
+            } else {
+                player.currentTime = TimeInterval(clamped) * player.duration
+                if !player.isPlaying { _ = player.play() }
+            }
+            return
+        }
+        guard !closed, recorder == nil, exportReference == nil else { return }
+        guard let model, UIApplication.shared.applicationState == .active else { return }
+        if clamped >= 1 { stopPlayback(); return }
+        let state = model.state
+        let switching = playbackID != nil && !state.importing && !state.referenceImporting &&
+            !state.recording && !state.referenceRecording &&
+            state.phase != .running && state.phase != .cancelling
+        guard switching || state.controlsEnabled else { return }
+        stopPlayback()
+        if reference == state.inputReference || reference == state.referenceReference {
+            guard let lease = try? inputs.acquire(reference: reference) else { return }
+            play(lease.url, reference: nil, input: lease, fraction: clamped, track: reference)
+        } else if let url = outputURL(reference), model.holdOutput(reference: reference) {
+            play(url, reference: reference, input: nil, fraction: clamped, track: reference)
+        }
+    }
+    func playbackFraction(reference: String) -> Float {
+        guard playingReference == reference, let player = player,
+              player.duration.isFinite, player.duration > 0 else { return -1 }
+        return Float(min(max(player.currentTime / player.duration, 0), 1))
     }
     func useExample() {
-        guard let model, model.state.controlsEnabled, let old = model.state.inputReference,
-              old != model.state.exampleReference else { return }
+        guard let model, model.state.controlsEnabled,
+              model.state.inputReference != model.state.exampleReference else { return }
+        let old = model.state.inputReference
         model.useExample()
-        Task { await inputs.retire(old) }
+        if let old { Task { await inputs.retire(old) } }
+    }
+    func loadReferenceExample() {
+        guard let model, model.state.controlsEnabled, !closed, let example = model.state.exampleReference else { return }
+        #if ODAI_OPENVOICE_DEMO
+        guard let assets = Bundle.main.resourceURL?.appendingPathComponent("OpenVoice", isDirectory: true) else { return }
+        generation += 1; let ticket = generation
+        model.setReferenceImporting(value: true)
+        Task { @MainActor in
+            defer { if ticket == generation { model.setReferenceImporting(value: false) } }
+            do {
+                let content = try await Task.detached {
+                    try VoiceEffectsWave.store(VoiceEffectsWave.normalize(url: assets.appendingPathComponent("reference-content.wav")),
+                                               directory: self.root.appendingPathComponent("inputs"))
+                }.value
+                guard !closed, ticket == generation else {
+                    _ = await Task.detached { try? FileManager.default.removeItem(at: content) }.value
+                    return
+                }
+                let newContent = inputs.register(content)
+                let oldReference = model.state.referenceReference
+                let oldContent = model.state.inputReference
+                model.setReferenceMode(enabled: true)
+                model.selectReferenceInput(reference: example, name: "内置普通话示例")
+                model.selectInput(reference: newContent, name: "参考内容示例")
+                for old in [oldReference, oldContent].compactMap({ $0 }) where old != example && old != model.state.exampleReference {
+                    Task { await inputs.retire(old) }
+                }
+            } catch { if !closed { model.inputFailed(reason: "unsupportedOrInvalidWav") } }
+        }
+        #endif
+    }
+    func clearVoiceInput(referenceSlot: Bool) {
+        guard let model, !closed else { return }
+        generation += 1
+        if referenceSlot {
+            let old = model.state.referenceReference
+            model.clearReference()
+            if let old, old != model.state.exampleReference { Task { await inputs.retire(old) } }
+        } else {
+            let old = model.state.inputReference
+            let wasReferenceMode = model.state.referenceMode
+            model.clearInput()
+            if !wasReferenceMode, model.state.inputReference == nil, model.state.exampleReference != nil { model.useExample() }
+            if let old, old != model.state.exampleReference { Task { await inputs.retire(old) } }
+        }
+    }
+    func readVoiceWave(reference: String, reply: any VoiceWaveReply) {
+        guard let model, !closed else { reply.ready(wave: nil); return }
+        var heldOutput = false
+        var lease: (any IOSVoiceEffectsInputLease)?
+        let url: URL?
+        if let output = outputURL(reference), model.holdOutput(reference: reference) {
+            heldOutput = true; url = output
+        } else if let acquired = try? inputs.acquire(reference: reference) {
+            lease = acquired; url = acquired.url
+        } else {
+            url = nil
+        }
+        guard let url else { reply.ready(wave: nil); return }
+        Task { @MainActor [weak self] in
+            let wave: VoiceWaveform?
+            do {
+                wave = try await Task.detached { VoiceWaveDataKt.decodeVoiceWave(data: try Data(contentsOf: url)) }.value
+            } catch { wave = nil }
+            if heldOutput { model.endOutputUse(reference: reference) }
+            if let lease { await lease.release() }
+            let alive = self.map { !$0.closed } ?? false
+            reply.ready(wave: alive ? wave : nil)
+        }
     }
     private func outputURL(_ reference: String) -> URL? {
         #if ODAI_OPENVOICE_DEMO
@@ -253,14 +458,15 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
         guard let url = outputURL(reference), model?.holdOutput(reference: reference) == true else { return }
         play(url, reference: reference, input: nil)
     }
-    private func play(_ url: URL, reference: String?, input: (any IOSVoiceEffectsInputLease)?) {
+    private func play(_ url: URL, reference: String?, input: (any IOSVoiceEffectsInputLease)?,
+                      fraction: Float = 0, track: String? = nil) {
         stopPlayback()
         guard let model, model.state.controlsEnabled, !closed, UIApplication.shared.applicationState == .active else {
             if let reference { self.model?.endOutputUse(reference: reference) }
             if let input { Task { await input.release() } }; return
         }
         let id = UUID(); playbackID = id; preparingPlayback.insert(id); playbackHolds[id] = (reference, input)
-        playingReference = reference; model.setMediaBusy(value: true)
+        playingReference = track ?? reference; model.setMediaBusy(value: true)
         Task { @MainActor in
             defer {
                 preparingPlayback.remove(id)
@@ -274,13 +480,20 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
                     if playbackID == id { stopPlayback() }
                     return
                 }
-                try startPlayer(data)
+                try startPlayer(data, fraction: fraction)
             } catch { if playbackID == id { stopPlayback(); model.inputFailed(reason: "audioPlaybackFailed") } }
         }
     }
-    private func startPlayer(_ data: Data) throws {
+    private func startPlayer(_ data: Data, fraction: Float) throws {
         let value = try AVAudioPlayer(data: data, fileTypeHint: AVFileType.wav.rawValue)
-        try acquireSession(recording: false); player = value; value.delegate = self
+        try acquireSession(recording: false)
+        if fraction >= 1 {
+            stopPlayback()
+            return
+        } else if fraction > 0 {
+            value.currentTime = TimeInterval(fraction) * value.duration
+        }
+        player = value; value.delegate = self
         guard value.play() else { throw VoiceEffectsWave.Failure.unsupportedOrInvalidWAV }
     }
     func stopPlayback() {
@@ -309,17 +522,25 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     func exportAudio(reference: String) {
         guard let model, model.state.controlsEnabled, let url = outputURL(reference), model.holdOutput(reference: reference), !closed else { return }
         exportReference = reference; model.setMediaBusy(value: true); pickerIsExport = true
+        generation += 1; pickerTicket = generation
         let picker = UIDocumentPickerViewController(forExporting: [url], asCopy: true)
-        picker.delegate = self; present(picker, animated: true)
+        picker.delegate = self; activePicker = picker; present(picker, animated: true)
     }
     private func finishExport() {
         if let reference = exportReference { model?.endOutputUse(reference: reference) }
         exportReference = nil; model?.setMediaBusy(value: false)
     }
-    private func install(_ url: URL, name: String) async {
-        let old = model?.state.inputReference
-        let reference = inputs.register(url); model?.selectInput(reference: reference, name: name)
-        if old != model?.state.exampleReference { await inputs.retire(old) }
+    private func install(_ url: URL, name: String, target: InputTarget, isReferenceMode: Bool) async {
+        let old = target == .content ? model?.state.inputReference : model?.state.referenceReference
+        let example = model?.state.exampleReference
+        let reference = inputs.register(url)
+        if target == .content {
+            model?.selectInput(reference: reference, name: name)
+        } else {
+            model?.setReferenceMode(enabled: true)
+            model?.selectReferenceInput(reference: reference, name: name)
+        }
+        if let old, old != example { await inputs.retire(old) }
     }
     private func acquireSession(recording: Bool) throws {
         let session = AVAudioSession.sharedInstance()
@@ -342,8 +563,21 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     }
     func leaveEmbeddedPage() {
         generation += 1
-        stopPlayback(); stopCapture(discard: true); model?.leavePage()
+        stopPlayback(); stopCapture(discard: true)
+        let example = model?.state.exampleReference
+        let oldIDs = [model?.state.inputReference, model?.state.referenceReference].compactMap({ $0 })
+            .filter({ $0 != example })
+        model?.leavePage()
+        model?.clearReference()
+        model?.clearInput()
+        if let example { model?.selectInput(reference: example, name: "内置普通话示例") }
+        model?.setImporting(value: false); model?.setReferenceImporting(value: false)
+        model?.setRecording(value: false); model?.setReferenceRecording(value: false)
+        if exportReference == nil { model?.setMediaBusy(value: false) }
         liveAudio.cancelAll(); liveSession.release()
+        Task { @MainActor in
+            for reference in oldIDs { await inputs.retire(reference) }
+        }
     }
     func leavePage() {
         if embedded { leaveEmbeddedPage(); return }
@@ -360,7 +594,11 @@ final class VoiceEffectsHost: UIViewController, @preconcurrency VoiceEffectsDemo
     }
     func shutdown() {
         guard !closed else { return }; closed = true; generation += 1; prepare?.cancel()
-        stopPlayback(); stopCapture(discard: true); model?.close()
+        stopPlayback(); stopCapture(discard: true)
+        model?.setImporting(value: false); model?.setReferenceImporting(value: false)
+        model?.setRecording(value: false); model?.setReferenceRecording(value: false)
+        if exportReference == nil { model?.setMediaBusy(value: false) }
+        model?.close()
         liveAudio.cancelAll(); liveSession.release()
         // Document picker holds output until its own terminal callback, including
         // cancellation. It must not be released while UIKit is still copying it.
@@ -389,6 +627,42 @@ private final class OpenVoiceTimbres: NSObject, @preconcurrency DemoCoreMLVoiceT
 
     func renderCoreML(inputReference: String, key: String, callback: any VoiceEffectsBridgeProcessCallback) {
         render(inputReference: inputReference, key: key, callback: callback, coreML: true)
+    }
+    func renderReference(referenceInputReference: String, contentInputReference: String,
+                         callback: any VoiceEffectsBridgeProcessCallback) {
+        guard let referenceLease = try? inputs.acquire(reference: referenceInputReference) else {
+            callback.onFailure(failure__: failure("无法读取参考音频"))
+            return
+        }
+        guard let contentLease = try? inputs.acquire(reference: contentInputReference) else {
+            Task { await referenceLease.release() }
+            callback.onFailure(failure__: failure("无法读取当前音频"))
+            return
+        }
+        let id = UUID().uuidString
+        let output = directory.appendingPathComponent("reference-\(id).wav")
+        let assets = self.assets, referenceURL = referenceLease.url, contentURL = contentLease.url
+        Task {
+            do {
+                let (rate, frames) = try await Task.detached(priority: .userInitiated) {
+                    guard openvoice_render_reference(assets.path, referenceURL.path, contentURL.path, output.path) == 0 else {
+                        throw VoiceEffectsWave.Failure.unsupportedOrInvalidWAV
+                    }
+                    let file = try AVAudioFile(forReading: output)
+                    return (Int32(file.fileFormat.sampleRate), file.length)
+                }.value
+                await referenceLease.release()
+                await contentLease.release()
+                outputs[id] = output
+                callback.onResult(output__: VoiceEffectsBridgeOutput(reference: id, backendId: "openvoice.onnx",
+                    sampleRate: rate, frameCount: frames, durationSeconds: Double(frames) / Double(rate)))
+            } catch {
+                try? FileManager.default.removeItem(at: output)
+                await referenceLease.release()
+                await contentLease.release()
+                callback.onFailure(failure__: failure("参考音色转换失败，请使用 0.5 至 30 秒的单声道语音。"))
+            }
+        }
     }
 
     private func render(inputReference: String, key: String, callback: any VoiceEffectsBridgeProcessCallback,

@@ -19,3 +19,11 @@ extern "C" JNIEXPORT jint JNICALL Java_io_ondeviceai_demo_OpenVoiceAudio_render(
     UtfChars o(env,output); if (!o.text) return 1;
     return openvoice_render(a.text,i.text,v.text,o.text);
 }
+extern "C" JNIEXPORT jint JNICALL Java_io_ondeviceai_demo_OpenVoiceAudio_renderReference(
+    JNIEnv *env, jobject, jstring assets, jstring reference, jstring input, jstring output) {
+    UtfChars a(env,assets); if (!a.text) return 1;
+    UtfChars r(env,reference); if (!r.text) return 1;
+    UtfChars i(env,input); if (!i.text) return 1;
+    UtfChars o(env,output); if (!o.text) return 1;
+    return openvoice_render_reference(a.text,r.text,i.text,o.text);
+}

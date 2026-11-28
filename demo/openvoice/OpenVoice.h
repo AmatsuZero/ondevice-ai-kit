@@ -4,6 +4,8 @@ extern "C" {
 #endif
 // input is a canonical mono PCM16 WAV owned by the demo. Returns 0 on success.
 int openvoice_render(const char *assets, const char *input, const char *voice, const char *output);
+// reference is a canonical mono PCM16 WAV supplying the 256-dim target voice embedding.
+int openvoice_render_reference(const char *assets, const char *reference, const char *input, const char *output);
 #ifdef __APPLE__
 // The caller owns an empty profile directory for this render and removes it after use.
 int openvoice_render_coreml(const char *assets, const char *input, const char *voice, const char *output,

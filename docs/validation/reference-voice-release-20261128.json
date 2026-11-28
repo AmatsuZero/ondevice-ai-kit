@@ -1,0 +1,124 @@
+{
+  "date": "2026-11-28",
+  "baseCommit": "3cef6a3e67ed4a1b928261571626f8f826c60934",
+  "previewBundle": "io.ondeviceai.demo.referencepreview",
+  "unitTests": {
+    "shared": {
+      "tests": 127,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "androidVoice": {
+      "tests": 30,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "androidDemo": {
+      "tests": 78,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "localOfflineCi": {
+    "tests": 574,
+    "failed": 0
+  },
+  "androidLint": "passed",
+  "iosArm64Framework": "passed",
+  "iosPhysical": {
+    "device": "iPhone 16 Pro Max",
+    "os": "27.2.1",
+    "test": "VoiceEffectsDemoUITests/testReferenceVoiceConvertsSampleAndClearsInputs",
+    "passed": 1,
+    "failed": 0,
+    "durationSeconds": 77.932,
+    "timingBoundary": "complete UI test, not conversion latency",
+    "coverage": [
+      "bundled inputs",
+      "equal input buttons",
+      "PCM waves",
+      "local ONNX CPU reference conversion",
+      "playback",
+      "midpoint waveform seek",
+      "export button enabled",
+      "clear",
+      "reload",
+      "leave and reopen cleanup",
+      "fixed and realtime entries"
+    ],
+    "outputLabel": {
+      "sampleRate": 22050,
+      "frames": 228864
+    },
+    "firstRun": {
+      "failed": 1,
+      "failure": "clear-state assertion",
+      "testDriverCorrection": "bounded scroll to top before clear query, enabled and placeholder assertions",
+      "productChangedForCorrection": false
+    }
+  },
+  "iosSimulatorDriverRegression": {
+    "passed": 1,
+    "failed": 0,
+    "durationSeconds": 61.954
+  },
+  "existingDeviceAppMetadataUnchanged": true,
+  "screenshots": [
+    {
+      "file": "ios-reference-inputs.png",
+      "sha256": "2838eee92016f4b9515fed30bb62801b8885dcc963bd59f645190ace25d3f14e",
+      "capturedAtEpoch": 1795848687.917,
+      "device": "iPhone 16 Pro Max",
+      "os": "iOS 27.2.1",
+      "reality": "physical",
+      "sourceTestRun": "iphone-reference-r2.xcresult",
+      "sourceTestRunStatus": "passed",
+      "gitlabWikiPath": "uploads/2370b410b42d4030aeedbeeab3ea972f/ios-reference-inputs.png",
+      "githubWikiPath": "assets/reference-voice-20261128/ios-reference-inputs.png"
+    },
+    {
+      "file": "ios-reference-result.png",
+      "sha256": "e3240cb10078b46eb85e98a8fc2dfa9d4bd22cd928ef0d960fa1571aaa038fdb",
+      "capturedAtEpoch": 1795848699.498,
+      "device": "iPhone 16 Pro Max",
+      "os": "iOS 27.2.1",
+      "reality": "physical",
+      "sourceTestRun": "iphone-reference-r2.xcresult",
+      "sourceTestRunStatus": "passed",
+      "gitlabWikiPath": "uploads/6003aa0f05e2dca35b14d465fec167d5/ios-reference-result.png",
+      "githubWikiPath": "assets/reference-voice-20261128/ios-reference-result.png"
+    }
+  ],
+  "sourceSha256": {
+    "demo/iosApp/VoiceEffectsHost.swift": "5ff93bc40a7f7669f9ffedc44256fa065e245418e582ccf0f8bb4fa22309487d",
+    "demo/openvoice/OpenVoice.cpp": "ed1f60782a8b6e79dc9a6112e50f7750e431278e6edb61644d84fcce16dd5993",
+    "demo/openvoice/AndroidOpenVoice.cpp": "3bf23966be9fa17b25d10cb9e09b7363a89b42698c05275cf799425d1edeed72",
+    "demo/openvoice/OpenVoice.h": "c2730d700ba6560a3ca0b564b8262c0b4bcb4612de7de2992aa78bf2a1c93827",
+    "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/OpenVoiceAudio.kt": "3458e077bb993b22cd0cee78c284135eb24eba877528cbd6bce2dcdd85838663",
+    "demo/androidApp/src/main/kotlin/io/ondeviceai/demo/VoiceEffectsHost.kt": "c67b0a621d3ed8ef000220117163217a3eb044442308c9251fb29e6d35e0e081",
+    "demo/androidApp/src/androidTest/kotlin/io/ondeviceai/demo/ReferenceVoiceInstrumentation.kt": "b601b15a2d86894132bb05ded0572e2baa8e15a936cdbfff72c6e1583fa7dafe",
+    "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/VoiceEffectsViewModel.kt": "84d44178d37a8e3cdae72c2073200e56a7258c4872e6aebdd6f5db43121545a1",
+    "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/VoiceWaveform.kt": "856b17aa1ad406827f5ef7721fc2fe81477b3ad15d4d4285c3ae720d57dd97ec",
+    "demo/shared/src/commonMain/kotlin/io/ondeviceai/demo/VoiceEffectsScreen.kt": "d7aa163a8da321401472f5a35b3c4d678a310b01be517f291754ecf1172bd1be",
+    "demo/shared/src/iosMain/kotlin/io/ondeviceai/demo/VoiceWaveData.kt": "ed7f035b8d32e389289ae9c7960220929eefe1600c7d1efb6508548ea9c2b241",
+    "demo/iosApp/UITests/VoiceEffectsDemoUITests.swift": "ee82f81b9a41d300df319424bb9b28e7bc581de02c7269afd8ebdd00b7fecfe5"
+  },
+  "gaps": [
+    "physical microphone reference/content capture",
+    "subjective speaker similarity and actual listening",
+    "reference-mode system-picker import",
+    "iOS system file save",
+    "new Android physical reference-mode test",
+    "physical resource and latency distributions"
+  ],
+  "waveform": {
+    "source": "actual PCM16 peak bins",
+    "maxBins": 128,
+    "update": "after capture/import/conversion",
+    "playbackCursorIntervalMs": 80,
+    "liveRecordingWaveform": false
+  }
+}

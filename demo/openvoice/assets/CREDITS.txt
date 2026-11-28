@@ -1,4 +1,5 @@
-Original audio: Google FLEURS, cmn_hans_cn test sample 1698. CC BY 4.0.
+Original audio (original.wav): Google FLEURS, cmn_hans_cn (Mandarin) test sample 1698. CC BY 4.0.
+Reference content (reference-content.wav): Google FLEURS, cmn_hans_cn (Mandarin) test sample 1906. CC BY 4.0.
 https://huggingface.co/datasets/google/fleurs
 https://creativecommons.org/licenses/by/4.0/
 The demo resamples and converts the recording on the device.

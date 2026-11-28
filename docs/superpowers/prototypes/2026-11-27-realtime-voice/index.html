@@ -341,6 +341,11 @@ h1 {
 .file-tools .btn { min-height:44px; }
 #fileDownload { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; text-decoration:none; }
 #fileDownload:not([href]) { opacity:.5; pointer-events:none; cursor:not-allowed; }
+.file-submode { display:flex; gap:8px; margin:0 0 8px; }
+.file-submode-btn { flex:1 1 0; min-width:0; min-height:44px; padding:8px 14px; border:1px solid var(--line); border-radius:999px; background:var(--surface); color:var(--muted); font:inherit; cursor:pointer; }
+.file-submode-btn[aria-pressed="true"] { border-color:var(--forest); background:var(--forest); color:var(--mint); font-weight:700; }
+.file-submode-btn:focus-visible { outline:2px solid var(--forest); outline-offset:2px; }
+.file-submode-hint { margin:0 0 16px; font-size:12px; line-height:1.5; opacity:.72; }
 </style>
 <style>
 .setup { margin: 10px 0 0; }
@@ -357,6 +362,7 @@ h1 {
 <script src="monitor-setup.js" defer></script>
 <script src="app.js" defer></script>
 <script src="file-mode.js" defer></script>
+<script src="reference-mode.js" defer></script>
 </head>
 <body>
 
@@ -379,6 +385,12 @@ h1 {
     <p class="mode-hint">文件可导入、录制和导出；实时模式可用耳机监听或按住试说。</p>
 
     <section id="filePanel" class="mode-panel" aria-label="文件变声">
+      <div class="file-submode" role="group" aria-label="文件变声类型">
+        <button type="button" class="file-submode-btn is-active" data-file-submode="fixed" aria-pressed="true">固定音色</button>
+        <button type="button" class="file-submode-btn" data-file-submode="reference" aria-pressed="false">参考音色</button>
+      </div>
+      <p class="file-submode-hint">固定音色适合快速试听；参考音色会先提取一段说话人的音色，再把另一段内容转换过去。</p>
+
       <div class="file-head">
         <p id="fileSource" class="file-source">内置示例 · original.wav</p>
         <div class="file-tools">
@@ -389,7 +401,9 @@ h1 {
         </div>
       </div>
 
-      <div class="effect-groups">
+      <section id="referenceMode" class="reference-mode" hidden aria-label="参考音色变声"></section>
+
+      <div id="fixedEffects" class="effect-groups">
         <fieldset class="effect-group">
           <legend>原声与音高（半音）</legend>
           <div class="effect-row">

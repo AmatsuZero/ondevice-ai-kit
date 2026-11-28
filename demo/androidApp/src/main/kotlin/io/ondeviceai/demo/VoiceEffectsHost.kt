@@ -55,6 +55,7 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
     lateinit var model: VoiceEffectsViewModel
         private set
     private val inputs = mutableMapOf<String, File>()
+    private lateinit var inputProvider: AndroidVoiceEffectsInputProvider
     private val leased = mutableMapOf<String, Int>()
     private val retired = mutableSetOf<String>()
     private var destroyed = false
@@ -69,26 +70,66 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
     private var focus: AudioFocusRequest? = null
     private var exportReference: String? = null
     private var copyingExport = false
-    private var importGeneration = 0L
+    private data class InputRequest(val ticket: Long, val referenceSlot: Boolean, val requiresHalfSecond: Boolean)
+
+    private var inputTicket = 0L
+    private var waveGeneration = 0L
+    private var pendingRequest: InputRequest? = null
+    private var playbackIsOutput = false
+    private var pendingSeekFraction = -1f
+    private var playerReady = false
     private val audio by lazy { activity.getSystemService(android.content.Context.AUDIO_SERVICE) as AudioManager }
     private val picker = activity.registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        val request = pendingRequest
+        pendingRequest = null
+        if (request == null || request.referenceSlot || request.ticket != inputTicket) return@registerForActivityResult
         if (uri == null) { model.setImporting(false); return@registerForActivityResult }
-        val generation = ++importGeneration
         scope.launch {
             try {
                 val file = withContext(Dispatchers.IO) {
                     val bytes = activity.contentResolver.openInputStream(uri)?.use(VoiceEffectsWave::normalize) ?: error("input")
+                    if (!acceptableDuration(bytes, request.requiresHalfSecond)) error("duration")
                     newInput(bytes)
                 }
-                if (destroyed || generation != importGeneration) withContext(Dispatchers.IO) { file.delete() }
+                if (destroyed || request.ticket != inputTicket) withContext(Dispatchers.IO) { file.delete() }
                 else installInput(file, "导入 WAV")
-            } catch (_: Exception) { if (!destroyed) model.inputFailed("unsupportedOrInvalidWav") }
-            finally { model.setImporting(false) }
+            } catch (_: Exception) { if (!destroyed && request.ticket == inputTicket) model.inputFailed("unsupportedOrInvalidWav") }
+            finally { if (request.ticket == inputTicket) model.setImporting(false) }
         }
     }
     private val permission = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        if (granted && foreground && !destroyed) beginRecording()
+        val request = pendingRequest
+        pendingRequest = null
+        if (request == null || request.referenceSlot || request.ticket != inputTicket) return@registerForActivityResult
+        if (granted && foreground && !destroyed) beginCapture(request)
         else { model.setImporting(false); model.inputFailed("microphonePermissionDenied") }
+    }
+    private val referencePermission = activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        val request = pendingRequest
+        pendingRequest = null
+        if (request == null || !request.referenceSlot || request.ticket != inputTicket) return@registerForActivityResult
+        if (granted && foreground && !destroyed) beginCapture(request)
+        else { model.setReferenceImporting(false); if (foreground && !destroyed) model.inputFailed("microphonePermissionDenied") }
+    }
+    private val referencePicker = activity.registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        val request = pendingRequest
+        pendingRequest = null
+        if (request == null || !request.referenceSlot || request.ticket != inputTicket) return@registerForActivityResult
+        if (uri == null) { model.setReferenceImporting(false); return@registerForActivityResult }
+        scope.launch {
+            try {
+                val bytes = withContext(Dispatchers.IO) {
+                    val data = activity.contentResolver.openInputStream(uri)?.use(VoiceEffectsWave::normalize) ?: error("input")
+                    if ((VoiceWaves.decode(data)?.durationSeconds ?: 0.0) !in 0.5..30.0) error("duration")
+                    data
+                }
+                val file = withContext(Dispatchers.IO) { newInput(bytes) }
+                if (destroyed || request.ticket != inputTicket) withContext(Dispatchers.IO) { file.delete() }
+                else installReference(file, "导入参考音频.wav")
+            } catch (_: Exception) {
+                if (!destroyed && request.ticket == inputTicket) model.inputFailed("unsupportedOrInvalidWav")
+            } finally { if (request.ticket == inputTicket) model.setReferenceImporting(false) }
+        }
     }
     private val exporter = activity.registerForActivityResult(ActivityResultContracts.CreateDocument("audio/wav")) { uri ->
         val reference = exportReference ?: return@registerForActivityResult
@@ -121,6 +162,7 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
                 }
             }
         }
+        inputProvider = provider
         bridge = AndroidVoiceEffectsBridge(VoiceEffectsClient(WindowedPitchVoiceEffectsBackend(),
             File(activity.cacheDir, "voice-output-${UUID.randomUUID()}")), provider, scope)
         timbres = AndroidOpenVoiceTimbres(activity.applicationContext, provider, scope)
@@ -134,33 +176,48 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
             } catch (_: Exception) { if (!destroyed) model.inputFailed("无法读取内置示例") }
         }
     }
-    fun foreground() { if (!destroyed) { foreground = true; liveAudio.attach() } }
+    fun foreground() {
+        if (destroyed) return
+        foreground = true; liveAudio.attach()
+        if (::model.isInitialized && !model.state.referenceMode && model.state.inputReference == null && model.state.exampleReference != null) model.useExample()
+    }
     fun background() { foreground = false; stopPlayback(); stopCapture(true); model.cancel(); liveAudio.release() }
     fun close() {
-        destroyed = true; importGeneration++
+        destroyed = true; inputTicket++; waveGeneration++
         liveAudio.close()
         stopPlayback(); stopCapture(true)
+        model.setRecording(false); model.setReferenceRecording(false)
         if (!copyingExport) exportReference?.let(::finishExport)
         model.close()
         inputs.keys.toList().forEach { reference -> retired += reference; scope.launch { cleanupInput(reference) } }
-        // Cleanup scope survives until native input drain and active export finish.
+        // The capture worker owns AudioRecord release and focus cleanup in its finally;
+        // when no worker exists stopPlayback has already abandoned focus.
     }
     override fun selectAudioFile() {
         if (!model.state.controlsEnabled) return
+        if (newRequest(false, model.state.referenceMode) == null) return
         model.setImporting(true)
         try { picker.launch(arrayOf("audio/wav", "audio/x-wav", "audio/wave")) }
-        catch (_: Exception) { model.setImporting(false); model.inputFailed("audioPickerUnavailable") }
+        catch (_: Exception) { pendingRequest = null; model.setImporting(false); model.inputFailed("audioPickerUnavailable") }
     }
     override fun startRecording() {
         if (!foreground || !model.state.controlsEnabled) return
+        if (newRequest(false, model.state.referenceMode) == null) return
         model.setImporting(true)
-        if (activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) beginRecording()
-        else permission.launch(Manifest.permission.RECORD_AUDIO)
+        if (activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+            val request = checkNotNull(pendingRequest); pendingRequest = null
+            beginCapture(request)
+        } else try { permission.launch(Manifest.permission.RECORD_AUDIO) }
+        catch (_: Exception) { pendingRequest = null; model.setImporting(false); model.inputFailed("microphonePermissionDenied") }
+    }
+    private fun newRequest(referenceSlot: Boolean, requiresHalfSecond: Boolean): InputRequest? {
+        if (pendingRequest != null || capture != null) return null
+        return InputRequest(++inputTicket, referenceSlot, requiresHalfSecond).also { pendingRequest = it }
     }
     @Suppress("MissingPermission")
-    private fun beginRecording() {
-        model.setImporting(false)
-        if (!foreground || destroyed || capture != null) return
+    private fun beginCapture(request: InputRequest) {
+        if (request.referenceSlot) model.setReferenceImporting(false) else model.setImporting(false)
+        if (!foreground || destroyed || request.ticket != inputTicket || capture != null) return
         stopPlayback()
         if (!takeFocus()) { model.inputFailed("audioInUse"); return }
         try {
@@ -169,14 +226,16 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
             val value = AudioRecord(MediaRecorder.AudioSource.MIC,16000,AudioFormat.CHANNEL_IN_MONO,AudioFormat.ENCODING_PCM_16BIT,maxOf(minimum,4096))
             recorder = value; check(value.state == AudioRecord.STATE_INITIALIZED)
             value.startRecording()
-            discardRecording = false; capturing.set(true); model.setRecording(true)
+            discardRecording = false; capturing.set(true)
+            if (request.referenceSlot) model.setReferenceRecording(true) else model.setRecording(true)
             capture = scope.launch {
                 try {
                     val bytes = withContext(Dispatchers.IO) {
                         val pcm = ByteArrayOutputStream(); val buffer = ShortArray(2048); val encoded = ByteArray(4096)
+                        val limit = 16000*2*30
                         try {
-                            while (capturing.get() && pcm.size() < 16000*60) {
-                                val count = value.read(buffer,0,minOf(buffer.size,(16000*60-pcm.size())/2),AudioRecord.READ_BLOCKING)
+                            while (capturing.get() && pcm.size() < limit) {
+                                val count = value.read(buffer,0,minOf(buffer.size,(limit-pcm.size())/2),AudioRecord.READ_BLOCKING)
                                 if (count < 0) { if (capturing.get()) error("record"); break }
                                 if (count == 0) error("record")
                                 for (i in 0 until count) {
@@ -186,19 +245,31 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
                                 pcm.write(encoded,0,count*2)
                             }
                         } finally { runCatching { value.stop() }; value.release() }
-                        VoiceEffectsWave.canonical(16000,pcm.toByteArray())
+                        val canonical = VoiceEffectsWave.canonical(16000,pcm.toByteArray())
+                        if (!acceptableDuration(canonical, request.requiresHalfSecond)) error("duration")
+                        canonical
                     }
-                    if (!discardRecording && !destroyed) {
+                    if (!discardRecording && !destroyed && request.ticket == inputTicket) {
                         val file = withContext(Dispatchers.IO) { newInput(bytes) }
-                        if (!destroyed) installInput(file,"录音.wav") else withContext(Dispatchers.IO) { file.delete() }
+                        if (!destroyed && request.ticket == inputTicket) {
+                            if (request.referenceSlot) installReference(file, "参考录音.wav") else installInput(file, "录音.wav")
+                        } else withContext(Dispatchers.IO) { file.delete() }
                     }
-                } catch (_: Exception) { if (!discardRecording && !destroyed) model.inputFailed("audioRecordingFailed") }
-                finally {
-                    recorder = null; capture = null; capturing.set(false); model.setRecording(false); releaseFocus()
+                } catch (_: Exception) {
+                    if (!discardRecording && !destroyed && request.ticket == inputTicket) model.inputFailed("audioRecordingFailed")
+                } finally {
+                    withContext(Dispatchers.Main) {
+                        if (recorder === value) {
+                            recorder = null; capture = null; capturing.set(false)
+                            model.setRecording(false); model.setReferenceRecording(false)
+                            releaseFocus()
+                        }
+                    }
                 }
             }
         } catch (_: Exception) {
-            recorder?.release(); recorder = null; capturing.set(false); model.setRecording(false)
+            recorder?.release(); recorder = null; capturing.set(false)
+            model.setRecording(false); model.setReferenceRecording(false)
             releaseFocus(); model.inputFailed("audioRecordingFailed")
         }
     }
@@ -208,30 +279,166 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
         discardRecording = discardRecording || discard; capturing.set(false)
         runCatching { recorder?.stop() } // unblock worker; only that worker releases
     }
-    override fun playOriginal() { inputs[model.state.inputReference]?.let { play(it,null) } }
+    override fun startReferenceRecording() {
+        if (!foreground || !model.state.controlsEnabled) return
+        if (newRequest(true, true) == null) return
+        model.setReferenceImporting(true)
+        if (activity.checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+            val request = checkNotNull(pendingRequest); pendingRequest = null
+            beginCapture(request)
+        } else try { referencePermission.launch(Manifest.permission.RECORD_AUDIO) }
+        catch (_: Exception) { pendingRequest = null; model.setReferenceImporting(false); model.inputFailed("microphonePermissionDenied") }
+    }
+    override fun stopReferenceRecording() = stopCapture(false)
+    override fun playOriginal() {
+        val reference = model.state.inputReference ?: return
+        val file = inputs[reference] ?: return
+        play(file, reference, false)
+    }
     override fun useExample() {
-        val old = model.state.inputReference ?: return
+        val old = model.state.inputReference
         if (!model.state.controlsEnabled || old == model.state.exampleReference) return
         model.useExample()
-        retireInput(old)
+        if (old != null) retireInput(old)
+    }
+    override fun loadReferenceExample() {
+        if (!foreground || !model.state.controlsEnabled) return
+        val example = model.state.exampleReference ?: return
+        val request = newRequest(true, true) ?: return
+        model.setReferenceImporting(true)
+        scope.launch {
+            try {
+                val file = withContext(Dispatchers.IO) {
+                    val bytes = activity.assets.open("OpenVoice/reference-content.wav").use(VoiceEffectsWave::normalize)
+                    if ((VoiceWaves.decode(bytes)?.durationSeconds ?: 0.0) !in 0.5..30.0) error("duration")
+                    newInput(bytes)
+                }
+                if (destroyed || request.ticket != inputTicket) withContext(Dispatchers.IO) { file.delete() }
+                else {
+                    val oldReference = model.state.referenceReference
+                    model.selectReferenceInput(example, "内置普通话示例")
+                    if (oldReference != null && oldReference != example) retireInput(oldReference)
+                    installInput(file, "参考内容示例.wav")
+                }
+            } catch (_: Exception) {
+                if (!destroyed && request.ticket == inputTicket) model.inputFailed("无法读取内置示例")
+            } finally { pendingRequest = null; if (request.ticket == inputTicket) model.setReferenceImporting(false) }
+        }
+    }
+    override fun clearVoiceInput(referenceSlot: Boolean) {
+        if (!model.state.controlsEnabled) return
+        inputTicket++
+        stopPlayback(); stopCapture(true)
+        model.setRecording(false); model.setReferenceRecording(false)
+        releaseFocus()
+        if (referenceSlot) {
+            val old = model.state.referenceReference
+            model.clearReference()
+            if (old != null) retireInput(old)
+        } else {
+            val old = model.state.inputReference
+            model.clearInput()
+            if (old != null) retireInput(old)
+        }
+    }
+    override fun readVoiceWave(reference: String, reply: VoiceWaveReply) {
+        if (destroyed) { scope.launch { reply.ready(null) }; return }
+        val outputHold = model.holdOutput(reference)
+        val lease = if (outputHold) null else try { inputProvider.acquire(reference) } catch (_: Exception) { null }
+        val file = if (outputHold) outputFile(reference) else lease?.file
+        if (file == null) {
+            scope.launch {
+                try {
+                    reply.ready(null)
+                } finally {
+                    if (outputHold) model.endOutputUse(reference)
+                    else lease?.release()
+                }
+            }
+            return
+        }
+        scope.launch {
+            val wave = withContext(Dispatchers.IO) {
+                try { VoiceWaves.decode(file.readBytes()) } catch (_: Exception) { null }
+            }
+            try {
+                withContext(Dispatchers.Main) { reply.ready(if (destroyed) null else wave) }
+            } finally {
+                if (outputHold) model.endOutputUse(reference)
+                else lease?.release()
+            }
+        }
+    }
+
+    override fun selectReferenceAudioFile() {
+        if (!foreground || !model.state.controlsEnabled) return
+        if (newRequest(true, true) == null) return
+        model.setReferenceImporting(true)
+        try { referencePicker.launch(arrayOf("audio/wav", "audio/x-wav", "audio/wave")) }
+        catch (_: Exception) { pendingRequest = null; model.setReferenceImporting(false); model.inputFailed("audioPickerUnavailable") }
+    }
+    override fun playReference() {
+        val reference = model.state.referenceReference ?: return
+        val file = inputs[reference] ?: return
+        play(file, reference, false)
+    }
+    override fun playVoiceAt(reference: String, fraction: Float) {
+        if (!foreground) return
+        if (!model.state.controlsEnabled && !(model.state.mediaBusy && player != null &&
+            exportReference == null && !copyingExport && capture == null)) return
+        val clamped = fraction.coerceIn(0f, 1f)
+        if (clamped >= 1f) { stopPlayback(); return } // end of waveform stops, never restarts
+        val current = player
+        if (current != null && playingReference == reference) {
+            scope.launch {
+                val active = player
+                if (active !== current || playingReference != reference) return@launch
+                if (!playerReady) { pendingSeekFraction = clamped; return@launch }
+                val duration = try { active.duration } catch (_: Exception) { -1 }
+                if (duration > 0) {
+                    try {
+                        active.seekTo((duration * clamped).toInt())
+                        if (!active.isPlaying) active.start()
+                    } catch (_: Exception) { stopPlayback(); model.inputFailed("audioPlaybackFailed") }
+                }
+            }
+            return
+        }
+        val outputHold = model.holdOutput(reference)
+        val file = if (outputHold) outputFile(reference) else inputs[reference]
+        if (file == null) { if (outputHold) model.endOutputUse(reference); return }
+        play(file, reference, outputHold, clamped)
+    }
+
+    override fun playbackFraction(reference: String): Float {
+        val current = player ?: return -1f
+        if (playingReference != reference || !playerReady) return -1f
+        val duration = try { current.duration } catch (_: Exception) { return -1f }
+        if (duration <= 0) return -1f
+        val position = try { current.currentPosition } catch (_: Exception) { return -1f }
+        return (position.toFloat() / duration).coerceIn(0f, 1f)
     }
     private fun outputFile(reference: String) = timbres.outputFile(reference) ?: bridge.outputFile(reference)
     override fun playResult(reference: String) {
         val file = outputFile(reference) ?: return
         if (model.holdOutput(reference)) play(file,reference)
     }
-    private fun play(file: File, reference: String?) {
+    private fun play(file: File, reference: String?, output: Boolean = true, startFraction: Float = -1f) {
         stopPlayback()
         if (!foreground || !model.state.controlsEnabled || !takeFocus()) {
-            reference?.let(model::endOutputUse); model.inputFailed("audioInUse"); return
+            if (output) reference?.let(model::endOutputUse)
+            model.inputFailed("audioInUse"); return
         }
-        playingReference = reference; model.setMediaBusy(true)
+        playingReference = reference; playbackIsOutput = output; pendingSeekFraction = startFraction; playerReady = false; model.setMediaBusy(true)
         try {
             player = MediaPlayer().apply {
                 setAudioAttributes(AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA).setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build())
                 setDataSource(file.path)
                 setOnPreparedListener {
                     if (player === it && foreground) {
+                        playerReady = true
+                        val seek = pendingSeekFraction; pendingSeekFraction = -1f
+                        if (seek >= 0f && it.duration > 0) it.seekTo((it.duration * seek).toInt())
                         it.start()
                     } else if (player === it) stopPlayback()
                 }
@@ -245,13 +452,19 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
         } catch (_: Exception) { stopPlayback(); model.inputFailed("audioPlaybackFailed") }
     }
     override fun stopPlayback() {
-        player?.release(); player = null
-        playingReference?.let(model::endOutputUse); playingReference = null
+        player?.let { active -> player = null; runCatching { active.release() } }
+        playerReady = false
+        if (playbackIsOutput) {
+            playingReference?.let(model::endOutputUse)
+            playbackIsOutput = false
+        }
+        playingReference = null; pendingSeekFraction = -1f
         if (::model.isInitialized && exportReference == null) model.setMediaBusy(false)
         if (capture == null) releaseFocus()
     }
     override fun exportAudio(reference: String) {
         if (!model.state.controlsEnabled || !model.holdOutput(reference)) return
+        stopPlayback()
         exportReference = reference; model.setMediaBusy(true)
         try { exporter.launch("voice-effect.wav") }
         catch (_: Exception) { finishExport(reference); model.inputFailed("audioExportFailed") }
@@ -262,9 +475,16 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
         model.setMediaBusy(false)
     }
     override fun leavePage() {
-        foreground = false; importGeneration++
+        foreground = false; inputTicket++; waveGeneration++
         liveAudio.release()
-        stopPlayback(); stopCapture(true); model.leavePage()
+        stopPlayback(); stopCapture(true)
+        model.setRecording(false); model.setReferenceRecording(false); model.setImporting(false); model.setReferenceImporting(false)
+        releaseFocus()
+        val example = model.state.exampleReference
+        model.leavePage()
+        model.clearReference(); model.clearInput()
+        if (example != null) model.selectInput(example, "内置普通话示例")
+        retireTemps(example)
     }
     val idle: Boolean get() = model.state.controlsEnabled && model.state.pendingReleases == 0 && capture == null && !copyingExport && !liveSession.busy
 
@@ -293,9 +513,25 @@ internal class VoiceEffectsHost(private val activity: ComponentActivity) : Voice
         inputs[reference] = file
         return reference
     }
-    private fun retireInput(reference: String) {
+    private fun retireInput(reference: String, keep: String? = model.state.exampleReference) {
+        if (reference == keep && !destroyed) return
         retired += reference
         scope.launch { cleanupInput(reference) }
+    }
+    private fun retireTemps(keep: String?) {
+        inputs.keys.toList().forEach { reference ->
+            if (reference != keep) retireInput(reference, keep)
+        }
+    }
+    private fun installReference(file: File, name: String) {
+        val old = model.state.referenceReference
+        model.selectReferenceInput(registerInput(file), name)
+        if (old != null && old != model.state.exampleReference) retireInput(old)
+    }
+    private fun acceptableDuration(bytes: ByteArray, requiresHalfSecond: Boolean = model.state.referenceMode): Boolean {
+        val minimum = if (requiresHalfSecond) 0.5 else 0.05
+        val duration = VoiceWaves.decode(bytes)?.durationSeconds ?: return false
+        return duration >= minimum
     }
     private suspend fun cleanupInput(reference: String) {
         if (reference !in retired || (leased[reference] ?: 0) > 0) return

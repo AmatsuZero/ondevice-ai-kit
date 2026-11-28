@@ -70,7 +70,7 @@ void makeSpectra(const std::vector<int16_t>& pcm, int frames, Floats& forEncoder
         for (int k = 0; k < bins; ++k) {
             float value = static_cast<float>(std::sqrt(std::norm(block[k])+1e-6));
             forEncoder[t*bins+k] = value;
-            forConverter[k*frames+t] = value;
+            if (!forConverter.empty()) forConverter[k*frames+t] = value;
         }
     }
 }
@@ -96,7 +96,7 @@ void wave(const std::string& path, const float* samples, size_t n) {
     f.close(); require(!f.fail(),"WAV write failed");
 }
 
-std::vector<int16_t> resampleInput(const std::string& path) {
+std::vector<int16_t> resampleInput(const std::string& path, bool referenceMode = false) {
     const auto bytes = readFile<uint8_t>(path);
     auto u32 = [&](int i) {
         return uint32_t(bytes[i]) | (uint32_t(bytes[i+1]) << 8) |
@@ -110,7 +110,9 @@ std::vector<int16_t> resampleInput(const std::string& path) {
     const int rate = static_cast<int>(u32(24));
     require(rate == 16000 || rate == 44100 || rate == 48000, "unsupported sample rate");
     const int count = static_cast<int>((bytes.size()-44)/2);
-    require(count >= rate/20 && count <= 30*rate, "audio must last 0.05 to 30 seconds");
+    const double minSeconds = referenceMode ? 0.5 : 0.05;
+    require(count >= minSeconds*rate && count <= 30*rate,
+            referenceMode ? "audio must last 0.5 to 30 seconds" : "audio must last 0.05 to 30 seconds");
     std::vector<int16_t> input(count);
     std::memcpy(input.data(), bytes.data()+44, count*2);
     const double step = rate/22050.0, cutoff = std::min(1.0, 1.0/step);
@@ -129,6 +131,83 @@ std::vector<int16_t> resampleInput(const std::string& path) {
         pcm[i] = static_cast<int16_t>(std::clamp(std::lround(sum/weight), -32768L, 32767L));
     }
     return pcm;
+}
+
+void convert(const std::string& assets, const Ort::Env& env, const Ort::SessionOptions& opts,
+             const Ort::MemoryInfo& memory, Ort::AllocatorWithDefaultOptions& allocator,
+             Floats& spectrum, Floats& source, Floats& target, int frames,
+             const std::string& output, const char* profileDirectory = nullptr) {
+    Ort::Session converter(env, (assets+"/converter.onnx").c_str(), opts);
+    auto name = converter.GetOutputNameAllocated(0, allocator);
+    const char *in[] = {"spec","noise","src_se","tgt_se"}, *out[] = {name.get()};
+    std::mt19937 generator(0);
+    std::normal_distribution<float> normal(0, 1);
+    Floats noise(192*frames);
+    for (float& sample : noise) sample = normal(generator);
+    // Bound decoder working memory. Reuse the same latent noise across overlapping windows.
+    constexpr int windowFrames = 840, overlapFrames = 12;
+    Floats result(frames*hop);
+    for (int start = 0; start < frames; start += windowFrames-overlapFrames) {
+        int n = std::min(windowFrames, frames-start);
+        auto window = [&](const Floats& all, int channels) {
+            Floats slice(channels*n);
+            for (int i = 0; i < channels; ++i)
+                std::copy_n(all.data()+i*frames+start, n, slice.data()+i*n);
+            return slice;
+        };
+        auto spec = window(spectrum,bins), latent = window(noise,192);
+        std::array<Ort::Value,4> args = {tensor(memory,spec,{1,bins,n}), tensor(memory,latent,{1,192,n}),
+            tensor(memory,source,{1,256,1}), tensor(memory,target,{1,256,1})};
+        auto y = converter.Run(Ort::RunOptions{nullptr}, in, args.data(), args.size(), out, 1);
+        require(y[0].GetTensorTypeAndShapeInfo().GetShape() == std::vector<int64_t>({1,1,n*hop}), "decoder shape");
+        const float *data = y[0].GetTensorData<float>();
+        for (int i = 0; i < n*hop; ++i) {
+            float mix = start == 0 ? 1.f : std::min(1.f, float(i)/(overlapFrames*hop));
+            auto& sample = result[start*hop+i];
+            sample = (1.f-mix)*sample + mix*data[i];
+        }
+        if (start+n == frames) break;
+    }
+    if (profileDirectory) converter.EndProfilingAllocated(allocator);
+    wave(output, result.data(), result.size());
+}
+
+void renderReference(const std::string& assets, const std::string& reference,
+                     const std::string& input, const std::string& output) {
+    const auto refPcm = resampleInput(reference, true);
+    const auto inPcm = resampleInput(input, true);
+    const int frames = static_cast<int>(inPcm.size())/hop;
+    const int refFrames = static_cast<int>(refPcm.size())/hop;
+    require(frames > 0 && refFrames > 0, "audio shorter than one frame");
+    Floats transposed(frames*bins), spectrum(frames*bins);
+    makeSpectra(inPcm, frames, transposed, spectrum);
+    Floats refTransposed(refFrames*bins), converterSpectrum;
+    makeSpectra(refPcm, refFrames, refTransposed, converterSpectrum); // reference STFT only feeds the encoder
+    Ort::Env env(ORT_LOGGING_LEVEL_WARNING, "openvoice-demo");
+    Ort::SessionOptions opts;
+    opts.SetIntraOpNumThreads(2);
+    opts.SetInterOpNumThreads(1);
+    auto memory = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
+    Ort::AllocatorWithDefaultOptions allocator;
+    Floats source, target;
+    {
+        // A single encoder session serves both embeddings and is released before the converter.
+        Ort::Session encoder(env, (assets+"/ref_encoder.onnx").c_str(), opts);
+        auto name = encoder.GetOutputNameAllocated(0, allocator);
+        const char *in[] = {"spec"}, *out[] = {name.get()};
+        auto inSpec = tensor(memory, transposed, {1,frames,bins});
+        auto inEmbedding = encoder.Run(Ort::RunOptions{nullptr}, in, &inSpec, 1, out, 1);
+        require(inEmbedding[0].GetTensorTypeAndShapeInfo().GetShape() == std::vector<int64_t>({1,256}), "encoder shape");
+        const float *sourceData = inEmbedding[0].GetTensorData<float>();
+        source.assign(sourceData, sourceData+256);
+        auto refSpec = tensor(memory, refTransposed, {1,refFrames,bins});
+        auto refEmbedding = encoder.Run(Ort::RunOptions{nullptr}, in, &refSpec, 1, out, 1);
+        require(refEmbedding[0].GetTensorTypeAndShapeInfo().GetShape() == std::vector<int64_t>({1,256}), "encoder shape");
+        const float *targetData = refEmbedding[0].GetTensorData<float>();
+        target.assign(targetData, targetData+256);
+        for (float value : target) require(std::isfinite(value), "nonfinite voice embedding");
+    }
+    convert(assets, env, opts, memory, allocator, spectrum, source, target, frames, output);
 }
 
 void render(const std::string& assets, const std::string& input, const std::string& voice,
@@ -168,39 +247,7 @@ void render(const std::string& assets, const std::string& input, const std::stri
     }
     auto target = readFile<float>(assets+"/"+voice+".f32");
     require(target.size() == 256, "invalid voice embedding");
-    Ort::Session converter(env, (assets+"/converter.onnx").c_str(), opts);
-    auto name = converter.GetOutputNameAllocated(0, allocator);
-    const char *in[] = {"spec","noise","src_se","tgt_se"}, *out[] = {name.get()};
-    std::mt19937 generator(0);
-    std::normal_distribution<float> normal(0, 1);
-    Floats noise(192*frames);
-    for (float& sample : noise) sample = normal(generator);
-    // Bound decoder working memory. Reuse the same latent noise across overlapping windows.
-    constexpr int windowFrames = 840, overlapFrames = 12;
-    Floats result(frames*hop);
-    for (int start = 0; start < frames; start += windowFrames-overlapFrames) {
-        int n = std::min(windowFrames, frames-start);
-        auto window = [&](const Floats& all, int channels) {
-            Floats slice(channels*n);
-            for (int i = 0; i < channels; ++i)
-                std::copy_n(all.data()+i*frames+start, n, slice.data()+i*n);
-            return slice;
-        };
-        auto spec = window(spectrum,bins), latent = window(noise,192);
-        std::array<Ort::Value,4> args = {tensor(memory,spec,{1,bins,n}), tensor(memory,latent,{1,192,n}),
-            tensor(memory,source,{1,256,1}), tensor(memory,target,{1,256,1})};
-        auto y = converter.Run(Ort::RunOptions{nullptr}, in, args.data(), args.size(), out, 1);
-        require(y[0].GetTensorTypeAndShapeInfo().GetShape() == std::vector<int64_t>({1,1,n*hop}), "decoder shape");
-        const float *data = y[0].GetTensorData<float>();
-        for (int i = 0; i < n*hop; ++i) {
-            float mix = start == 0 ? 1.f : std::min(1.f, float(i)/(overlapFrames*hop));
-            auto& sample = result[start*hop+i];
-            sample = (1.f-mix)*sample + mix*data[i];
-        }
-        if (start+n == frames) break;
-    }
-    if (profileDirectory) converter.EndProfilingAllocated(allocator);
-    wave(output, result.data(), result.size());
+    convert(assets, env, opts, memory, allocator, spectrum, source, target, frames, output, profileDirectory);
 }
 }
 #ifdef __APPLE__
@@ -222,6 +269,16 @@ int openvoice_render(const char *assets, const char *input, const char *voice, c
         return 0;
     } catch (const std::exception& error) {
         std::fprintf(stderr,"OpenVoice: %s\n", error.what());
+        return 1;
+    }
+}
+
+int openvoice_render_reference(const char *assets, const char *reference, const char *input, const char *output) {
+    try {
+        renderReference(assets, reference, input, output);
+        return 0;
+    } catch (const std::exception& error) {
+        std::fprintf(stderr, "OpenVoice reference: %s\n", error.what());
         return 1;
     }
 }

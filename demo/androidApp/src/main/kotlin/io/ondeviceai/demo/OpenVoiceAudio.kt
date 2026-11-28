@@ -12,11 +12,22 @@ import java.util.UUID
 internal object OpenVoiceAudio {
     init { System.loadLibrary("openvoice_demo") }
     private external fun render(assets: String, input: String, voice: String, output: String): Int
+    private external fun renderReference(assets: String, reference: String, input: String, output: String): Int
 
     // Serialize cache publication and limit ONNX working memory across demo hosts.
     @Synchronized
     fun renderTo(context: Context, input: File, key: String, output: File) {
         require(key in setOf("voiceA", "voiceB", "voiceC"))
+        check(render(assets(context).path, input.path, key, output.path) == 0)
+    }
+
+    @Synchronized
+    fun renderReferenceTo(context: Context, reference: File, input: File, output: File) {
+        check(renderReference(assets(context).path, reference.path, input.path, output.path) == 0)
+    }
+
+    @Synchronized
+    private fun assets(context: Context): File {
         val assets = File(context.cacheDir, "OpenVoice-Demo-v1")
         if (!assets.isDirectory) {
             val stage = File(context.cacheDir, "OpenVoice-${UUID.randomUUID()}")
@@ -30,10 +41,9 @@ internal object OpenVoiceAudio {
                 check(stage.renameTo(assets))
             } finally { stage.deleteRecursively() }
         }
-        check(render(assets.path, input.path, key, output.path) == 0)
+        return assets
     }
 }
-
 internal class AndroidOpenVoiceTimbres(
     private val context: Context,
     private val inputs: AndroidVoiceEffectsInputProvider,
@@ -61,6 +71,38 @@ internal class AndroidOpenVoiceTimbres(
             } finally { input.release() }
             if (frames == null) {
                 callback.onFailure(failure("音色转换失败，请使用 0.05 至 30 秒的单声道语音。"))
+            } else {
+                outputs[id] = output
+                callback.onResult(VoiceEffectsBridgeOutput(id, "openvoice.onnx", 22050, frames, frames / 22050.0))
+            }
+        }
+    }
+
+    override fun renderReference(referenceInputReference: String, contentInputReference: String, callback: VoiceEffectsBridgeProcessCallback) {
+        val referenceLease = try { inputs.acquire(referenceInputReference) } catch (_: Exception) {
+            callback.onFailure(failure("无法读取参考音频")); return
+        }
+        val contentLease = try { inputs.acquire(contentInputReference) } catch (_: Exception) {
+            scope.launch { referenceLease.release() }
+            callback.onFailure(failure("无法读取当前音频")); return
+        }
+        val id = UUID.randomUUID().toString()
+        val output = File(context.cacheDir, "reference-$id.wav")
+        scope.launch {
+            val frames = try {
+                withContext(Dispatchers.IO) {
+                    OpenVoiceAudio.renderReferenceTo(context, referenceLease.file, contentLease.file, output)
+                    (output.length() - 44) / 2
+                }
+            } catch (_: Exception) {
+                output.delete()
+                null
+            } finally {
+                contentLease.release()
+                referenceLease.release()
+            }
+            if (frames == null) {
+                callback.onFailure(failure("音色转换失败，请使用 0.5 至 30 秒的单声道语音。"))
             } else {
                 outputs[id] = output
                 callback.onResult(VoiceEffectsBridgeOutput(id, "openvoice.onnx", 22050, frames, frames / 22050.0))

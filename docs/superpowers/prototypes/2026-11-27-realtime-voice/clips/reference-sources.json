@@ -1,0 +1,23 @@
+{
+  "reference-sample.wav": {
+    "source": "Google FLEURS cmn_hans_cn test 1698",
+    "sha256": "6d2924e2a9c30ae62c18f020222dbd35cc71e9f0e54ac0427cc68f87afe468a1",
+    "sample_rate": 16000,
+    "frames": 155520,
+    "seconds": 9.72
+  },
+  "reference-content.wav": {
+    "source": "Google FLEURS cmn_hans_cn test 1906",
+    "sha256": "601158e75e991eeff3dface860bf33716a1577243bbfad1fea0a1dc1bef6680b",
+    "sample_rate": 16000,
+    "frames": 166080,
+    "seconds": 10.38
+  },
+  "reference-converted.wav": {
+    "source": "Local OpenVoice conversion of test1906 to the reference embedding of test1698",
+    "sha256": "c95feba6602ec3b1acaf4065c8e2d7eb268126f5d5c524eab3208d8c26d2f869",
+    "sample_rate": 22050,
+    "frames": 228864,
+    "seconds": 10.379319727891156
+  }
+}
