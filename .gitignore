@@ -17,3 +17,6 @@ AGENTS.md
 
 # uv 本地虚拟环境
 .venv/
+
+# probe job 本地/运行态产物
+.ci-probe-state/

@@ -14,3 +14,23 @@ offline-tests:
   script:
     # 统一走 Makefile 入口；测试零第三方依赖，docker runner 无需 uv。
     - make test-offline
+
+# 探测 job（手动触发，不影响现有自动流水线）：验证 macOS runner 能否跑苹果端原生测试 + 清理机制。
+# runner #9/#17 与主工程共享，用 resource_group 串行；探测通过后再决定是否转正式自动 job。
+ios-native-probe:
+  stage: test
+  tags:
+    - macos
+  when: manual
+  allow_failure: true
+  resource_group: macos-shared
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+    - when: never
+  variables:
+    DERIVED_DATA_PATH: "${CI_BUILDS_DIR}/derived_data/ondevice-${CI_JOB_ID}"
+  script:
+    - bash tools/probe/ios-native-probe.sh
+  after_script:
+    - bash tools/probe/ios-native-cleanup.sh || echo "cleanup failed (non-fatal for probe)"
