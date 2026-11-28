@@ -54,7 +54,7 @@ W8 复用 W6 在 iPhone 16 Pro Max（iOS 27.2.1，USB）上的 XCTest 结果。W
 | `red, blue` | 10.711 秒 | 15.02–77.93 | 43.84 | `Nominal` |
 | `blue, red` | 5.614 秒 | 18.74–77.42 | 44.63 | `Nominal` |
 
-两段分别有 12、7 个非零整机样本，时间间隙均小于 1 微秒。`DeviceChargingState` 表没有区间，trace 无法独立核实操作者报告的供电状态。导入后的 trace 目标为 `all-processes`。目录中的 PID 589 与 XCTest 夹具相符，但目录只有可执行名，trace 的设备 UUID 也未能映射到 XCTest 硬件 ID。1,093 行进程影响数据只属于另外两个 PID，夹具功耗缺测。表中 `%/hr` 仅用于描述短窗口整机读数，W6 正式资源预算仍待项目确认。
+两段分别有 12、7 个非零整机样本，时间间隙均小于 1 微秒。`DeviceChargingState` 表没有区间。原始 `PowerMetrics` 的 550 个 `SystemMetrics` 区间及两个回答窗口均为 `Charging Status = 0`。11 月 9 日历史充电 TTS 对照 trace 的 91 个区间均为 `Charging Status = 1`，且有 `DeviceChargingState` 区间，因此当前状态码与断开充电相符。这个对应关系来自历史录制对照，Apple 导出表没有给出状态码定义。导入后的 trace 目标为 `all-processes`。目录中的 PID 589 与 XCTest 夹具相符，但目录只有可执行名，trace 的设备 UUID 也未能映射到 XCTest 硬件 ID。1,093 行进程影响数据只属于另外两个 PID，夹具功耗缺测。随后用主干签包重跑单项短答，XCTest 通过 1/1，按安装路径取到 PID 720，`xctrace --attach 720` 仍返回 21。表中 `%/hr` 仅用于描述短窗口整机读数，W6 正式资源预算仍待项目确认。[绑定复验收据](../validation/w6-wemm-wireless-iphone-20261128.json)
 
 ## 2026-11-17 当周候选资源与交付范围
 

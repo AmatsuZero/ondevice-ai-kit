@@ -102,6 +102,18 @@
     "fixturePowerImpactRows": 0,
     "fixturePowerImpact": null,
     "traceChargingStateDuringAnswers": null,
+    "systemMetricsChargingStatus": {
+      "schema": "PowerMetrics SystemMetrics signposts",
+      "rows": 550,
+      "statusCodesDuringAnswers": [0],
+      "allTraceRowsStatusCodes": [0],
+      "historicalChargedControlDate": "2026-11-09",
+      "historicalChargedControlLocalEvidenceDirectory": "w8-tts-power-workload-20261109-1214",
+      "historicalChargedControlRows": 91,
+      "historicalChargedControlStatusCode": 1,
+      "historicalChargedControlHasDeviceChargingInterval": true,
+      "interpretation": "Code 0 is consistent with disconnected power when compared with the historical charged control, but the code meaning is not independently documented by the exported table."
+    },
     "trials": [
       {
         "answer": "red, blue",
@@ -127,5 +139,23 @@
       }
     ],
     "resourceBudgetVerified": false
+  },
+  "bindingRecheck": {
+    "localEvidenceDirectory": "w6-power-short-20261128-e5cvkv6k",
+    "test": "W6UnifiedVideoUITests/testRealMovieAnswer()",
+    "device": "iPhone 16 Pro Max, iOS 27.2.1",
+    "transport": "localNetwork",
+    "xctestrunSHA256": "314662a806c4fd18074251a893b04c39cd54263686a1a749ce55226c8acf023f",
+    "xcodebuildExit": 0,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "fixturePID": 720,
+    "executablePathVerified": true,
+    "xctraceTemplate": "Power Profiler",
+    "xctraceAttachExit": 21,
+    "xctraceAttachError": "Cannot find process for provided pid: 720",
+    "captureExit": 1,
+    "conclusion": "The exact installed fixture executable was resolved during the test, but host xctrace still could not attach to its live PID."
   }
 }

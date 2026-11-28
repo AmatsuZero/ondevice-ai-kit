@@ -5,7 +5,7 @@
 | 剩余项目 | 现有证据 | 下一步 |
 | --- | --- | --- |
 | 开放问答质量 | Mac v1.1 的 12 段视频、24 道原题已有逐项评分和模型复评，原画面配原提示全部复现。 | 两位评阅者从空白表开始，各自看片并评完 48 份匿名原答。两份回卷齐备后由协调人核对分歧。[空白表与本机原片准备](validation/w6-open-qa-review-v1.1/README.md) |
-| iPhone 资源 | iPhone 16 Pro Max 已完成单次和连续六次短答，以及三段五分钟影片。长片预热后两个窗口分别为 5.449 秒和 6.449 秒，进程内存峰值分别为 406,458.512 kB 和 371,003.536 kB。iPhone 本机 Power Profiler 已导出两次短答的整机读数，系统热状态均为 `Nominal`。 | 下一轮先用短录制确认当前夹具 PID 确实有 `ProcessSubsystemPowerImpact` 样本，并取得可核验的供电记录，再安排正式测量。[真机逐轮数据](roadmap/W8-resources.md#iphone-本机-performance-trace) · [电池采集步骤](../demo/iosApp/UITests/Fixtures/WeMM/power/README.md) |
+| iPhone 资源 | iPhone 16 Pro Max 已完成单次和连续六次短答，以及三段五分钟影片。长片预热后两个窗口分别为 5.449 秒和 6.449 秒，进程内存峰值分别为 406,458.512 kB 和 371,003.536 kB。iPhone 本机 Power Profiler 已导出两次短答的整机读数，系统热状态均为 `Nominal`。新短录制已按安装路径取得夹具 PID，但主机附加仍返回 21。 | 继续定位 Power Profiler 对当前安装夹具的附加边界，再取得夹具 `ProcessSubsystemPowerImpact` 样本和可核验供电记录。[真机逐轮数据](roadmap/W8-resources.md#iphone-本机-performance-trace) · [电池采集步骤](../demo/iosApp/UITests/Fixtures/WeMM/power/README.md) |
 
 11 月 28 日，iPhone 16 Pro Max 无线复验已通过生成中离页取消、保留原片和续问。[离页与短答结果](validation/w6-wemm-wireless-iphone-20261128.json)
 
