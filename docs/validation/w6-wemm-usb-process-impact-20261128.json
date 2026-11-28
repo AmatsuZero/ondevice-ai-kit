@@ -183,6 +183,155 @@
     "explicitInstallationSucceeded": true,
     "installedBundleID": "io.ondeviceai.w6.unifiedvideo.fixtures",
     "installReceiptSHA256": "a6a0e55105ff32cb8234dc8d038b4b44ec0317de3da353ad278e83005eaa7d3f",
-    "workloadVerified": false
+    "workloadVerified": true,
+    "runnerSourceCommit": "8ad8402e2ae03e2a1b3044ff156b86e2231bbe8a",
+    "runnerChange": "XCTest waited for the foreground W6 fixture launched by Instruments. Both original answer, model and backend assertions ran.",
+    "identityChecks": {
+      "deviceIDMatchesXCTestAndTrace": true,
+      "installationPathMatchesReceiptCoreDeviceXCTestAndTrace": true,
+      "xctestForegroundPID": 1233,
+      "xctestForegroundObservations": 2,
+      "oldAndNewTraceHaveOnlyTheirRespectiveAppUUIDPair": true,
+      "dyldLibraryLoadRows": {
+        "previousTrace": 0,
+        "currentTrace": 0
+      },
+      "localProvenanceSHA256": {
+        "explicitInstallation": "a6a0e55105ff32cb8234dc8d038b4b44ec0317de3da353ad278e83005eaa7d3f",
+        "binding": "750584c8fd66038a516c46dff9e6695dcb53c9082e770e4170cb2c651d71f3f3",
+        "liveProcess": "4fece59cd793e8f50e827cad60c75db699998e490da4b91d2410f0469eefba49",
+        "xcTestSession": "6a4caf72e5893d8304be51c64ed3cb56e75f0124477ce163003da8fa0d0cfa53",
+        "dyldTable": "eb354f1455d4b88c238ce0ae583711ea1b766dcd04a05264a71b38287563f681",
+        "runnerDiff": "b9267ebadb68c526607073466fab63aae033ffcf485f4f02e5cc7fc4b29b6060"
+      }
+    },
+    "imageEvidence": "The explicitly installed signed app and its observed foreground PID share the trace catalog path. Each trace symbol store contains its own build UUID pair. The dyld load exports had zero rows.",
+    "capture": {
+      "localEvidenceDirectory": "w6-profile-short-current-lQgxcNQX/installed-short-01",
+      "template": "Power Profiler",
+      "captureMode": "launch",
+      "transport": "wired",
+      "processID": 1233,
+      "device": "iPhone 16 Pro Max",
+      "deviceOS": "27.2.1 (24B156)",
+      "templateDurationSeconds": 73.039737,
+      "imageUUIDs": {
+        "SpeechDemo": "224460C5-97D9-32DE-AE6C-7727DD572555",
+        "SpeechDemo.debug.dylib": "313E808B-DA8D-3B82-AE93-6247752EE146"
+      },
+      "xcTest": {
+        "passed": 1,
+        "skipped": 0,
+        "case": "testRealMovieAnswer"
+      },
+      "totalProcessImpactRows": 143,
+      "totalRowsByKind": {
+        "2": 71,
+        "0": 72
+      },
+      "windows": [
+        {
+          "trial": 1,
+          "answer": "red, blue",
+          "startSinceTraceNs": 39121000000,
+          "endSinceTraceNs": 47821000000,
+          "uiUpperSeconds": 8.7,
+          "impactByRowKind": {
+            "0": {
+              "overlappingRows": 10,
+              "coveredSeconds": 8.7,
+              "cpu-impact": {
+                "nonnegativeMinMax": [
+                  0.0,
+                  11.0
+                ],
+                "negativeRows": 0
+              },
+              "display-impact": {
+                "nonnegativeMinMax": [
+                  435.0,
+                  792.0
+                ],
+                "negativeRows": 0
+              }
+            },
+            "2": {
+              "overlappingRows": 10,
+              "coveredSeconds": 8.7,
+              "gpu-impact": {
+                "nonnegativeMinMax": [
+                  0.0,
+                  48.0
+                ],
+                "negativeRows": 0
+              }
+            }
+          },
+          "chargingOverlapSeconds": 8.7,
+          "wholeDeviceRateRawRange": [
+            0.0,
+            0.0
+          ],
+          "thermalStates": [
+            "Nominal"
+          ]
+        },
+        {
+          "trial": 2,
+          "answer": "blue, red",
+          "startSinceTraceNs": 66278000000,
+          "endSinceTraceNs": 71837000000,
+          "uiUpperSeconds": 5.559,
+          "impactByRowKind": {
+            "0": {
+              "overlappingRows": 7,
+              "coveredSeconds": 5.559,
+              "cpu-impact": {
+                "nonnegativeMinMax": [
+                  0.1,
+                  16.0
+                ],
+                "negativeRows": 0
+              },
+              "display-impact": {
+                "nonnegativeMinMax": [
+                  471.0,
+                  798.0
+                ],
+                "negativeRows": 0
+              }
+            },
+            "2": {
+              "overlappingRows": 5,
+              "coveredSeconds": 4.807456,
+              "gpu-impact": {
+                "nonnegativeMinMax": [
+                  0.1,
+                  48.0
+                ],
+                "negativeRows": 0
+              }
+            }
+          },
+          "chargingOverlapSeconds": 5.559,
+          "wholeDeviceRateRawRange": [
+            0.0,
+            0.0
+          ],
+          "thermalStates": [
+            "Nominal"
+          ]
+        }
+      ],
+      "exportSHA256": {
+        "toc.xml": "202da9daf68f01efd2fa15192cbcb1ea0d3197ee31096388e508c2030597e8da",
+        "ui.json": "dbf1e64584b80fe16b60265f202166f1e5f1699cedad9d242b076b9fa7970465",
+        "summary.json": "456f2af89f363a4f878059afbe56b6e829c397c797b125eecbfd59c3f9c2d1c1",
+        "ProcessSubsystemPowerImpact.xml": "8a57c9e30008099232acac744d5fc488a09ee60d3386ebcd28d63bb73465f981",
+        "SystemPowerLevel.xml": "33b2cdfe9e14eff5dd0b475cdf4dac9e3132a96c25d6acc03e7e1c78e2a47470",
+        "DeviceChargingState.xml": "660bd4909dbf3ec28852c05c85be58ef758f9a8781cd9686f05cfd4294ba3279",
+        "device-thermal-state-intervals.xml": "eb0ffbbb2c82491bff88a5c2ecab4303e93c3046f718dcc8af4c7ff0edab4182"
+      }
+    }
   }
 }

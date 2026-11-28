@@ -4,7 +4,9 @@
 
 Mac 开放问答 v1.1 中，WeMM 的可回答题得 20/40，证据不足题得 6/8，仍待两位评阅者独立复标。iPhone 16 Pro Max 首次 USB 验收通过六项页面测试。后续无线复验的四项影片用例中三项通过，离页取消超时。11 月 28 日，调整长答预算后的离页用例在同一台 iPhone 无线复验通过。[逐题评分](../validation/w6-video-open-qa-v1.1.md) · [离页取消的生成窗口](#离页取消的生成窗口)
 
-同一台 iPhone 通过 USB 完成了单次短答、同页连续六次短答及五分钟影片的进程内存与页面计时。五秒钓鱼镜头落在采样间隙时漏答，移到第 112.5 秒采样点时认出了钓鱼。两次页面出答分别用时 5.449 秒和 6.449 秒。无线短答已取得整机读数，夹具功耗和 trace 内充电状态仍缺测。[短事件采样实验](../validation/w6-video-temporal-coverage-20261127.md) · [W8 逐轮资源表](W8-resources.md#五分钟影片) · [无线整机读数](W8-resources.md#iphone-本机-performance-trace)
+同一台 iPhone 通过 USB 完成了单次短答、同页连续六次短答及五分钟影片的进程内存与页面计时。五秒钓鱼镜头落在采样间隙时漏答，移到第 112.5 秒采样点时认出了钓鱼。两次页面出答分别用时 5.449 秒和 6.449 秒。[短事件采样实验](../validation/w6-video-temporal-coverage-20261127.md) · [W8 逐轮资源表](W8-resources.md#五分钟影片)
+
+拔线短答已取得整机耗电率读数。有线复测中，显式安装的 `8ad8402` 夹具正确回答了两个色序问题，两个回答窗口均取得夹具进程的 CPU、显示和 GPU 影响样本。第二答末尾约 0.752 秒缺 GPU 样本。[无线整机读数](W8-resources.md#iphone-本机-performance-trace) · [USB 进程采样覆盖](W8-resources.md#usb-下的夹具进程记录)
 
 旧 Qwen2-VL 的 24 题试验已于 11 月 11 日结束。Perception Test 训练划分的 24 段视频在同一 iPhone 进程内全部出答，按原规则严格计分 12/24，含 5 份格式违规。终态报告的两次回读摘要均为 `7b0e1458170fe92c5692010cc870fb0598d97b45ecf1e3c2f504469cfec5adf5`。该候选当时的裁定为 `continue-evaluation`。
 

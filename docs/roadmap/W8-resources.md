@@ -68,6 +68,15 @@ W8 复用 W6 在 iPhone 16 Pro Max（iOS 27.2.1，USB）上的 XCTest 结果。W
 
 首次短答采集中，XCTest 等待 Instruments 启动夹具后执行原有色序断言，两答通过。trace 的主可执行文件和 debug dylib UUID 均匹配原先安装的 `883d7f2` 夹具。测试 Runner 已从 `8ad8402` 重建。复测新版时须先显式安装对应的 App，再核对这两个 UUID、进程路径及两个答题窗口。原先安装的夹具和新版分开记录。[USB 采集收据](../validation/w6-wemm-usb-process-impact-20261128.json)
 
+显式安装 `8ad8402` 签包后，两段视频的色序均答对。CoreDevice、XCTest 前台日志与 Instruments 目录记录了相同的安装路径和 PID 1233。新版 trace 的符号目录含新版主可执行文件和 debug dylib 的 UUID，旧版 trace 中这两个 UUID 均缺失。两份 trace 的 dyld 加载表均为零行。新版录制共 73.040 秒，143 行进程影响记录全部属于 PID 1233。[签包、进程与窗口收据](../validation/w6-wemm-usb-process-impact-20261128.json)
+
+| 页面回答 | 点击生成到确认答案的上界 | CPU / 显示影响采样覆盖 | GPU 影响采样覆盖 |
+| --- | ---: | ---: | ---: |
+| `red, blue` | 8.700 秒 | 8.700 秒 | 8.700 秒 |
+| `blue, red` | 5.559 秒 | 5.559 秒 | 4.807 秒 |
+
+覆盖时长取采样区间与答题窗口的交集，表中保留至毫秒。第二答末尾约 0.752 秒缺 GPU 样本。两段窗口全程 USB 充电，系统热状态均为 `Nominal`。进程影响值沿用 Instruments 原始单位。电池供电下的整机读数见[本机 Performance Trace](#iphone-本机-performance-trace)。
+
 ## 2026-11-17 当周候选资源与交付范围
 
 W3/W6后续研发暂停、W7生产校准/PAD阶段外延期，新增[W9变声](W9-voice-effects.md)。W8状态仍 **open / active-planned**：按[本周范围](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)验证实际交付候选的稳定性、资源/预算或明确缺测裁定、通知/消费和最终复审；不等待W3/W6模型改进，也不替它们另跑实验。
