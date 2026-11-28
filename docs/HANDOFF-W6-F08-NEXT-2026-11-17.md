@@ -5,7 +5,7 @@
 | 剩余项目 | 现有证据 | 下一步 |
 | --- | --- | --- |
 | 开放问答质量 | Mac v1.1 的 12 段视频、24 道原题已有逐项评分和模型复评，原画面配原提示全部复现。 | 两位评阅者从空白表开始，各自看片并评完 48 份匿名原答。两份回卷齐备后由协调人核对分歧。[空白表与本机原片准备](validation/w6-open-qa-review-v1.1/README.md) |
-| iPhone 资源 | iPhone 16 Pro Max 已完成单次和连续六次短答，以及三段五分钟影片。长片预热后两个窗口分别为 5.449 秒和 6.449 秒，进程内存峰值分别为 406,458.512 kB 和 371,003.536 kB。iPhone 本机 Power Profiler 已导出两次短答的整机读数，系统热状态均为 `Nominal`。无线空闲对照中两种模板均无法附加存活的夹具 PID，两次全进程录制均在 2 秒内断开。 | 先用 USB 对同一夹具做空闲附加对照，核验 trace 中的 PID 和安装路径。进程影响和电池供电下的整机读数按各自采集结果验收。[真机逐轮数据](roadmap/W8-resources.md#无线空闲附加诊断) · [电池采集步骤](../demo/iosApp/UITests/Fixtures/WeMM/power/README.md) |
+| iPhone 资源 | iPhone 16 Pro Max 已完成单次和连续六次短答，以及三段五分钟影片。长片预热后两个窗口分别为 5.449 秒和 6.449 秒，进程内存峰值分别为 406,458.512 kB 和 371,003.536 kB。iPhone 本机 Power Profiler 已导出两次短答的整机读数，系统热状态均为 `Nominal`。USB 下由 Instruments 直接启动夹具，取得了空闲及两次短答的进程影响记录。首轮短答 trace 的二进制 UUID 匹配原安装夹具。 | 新版夹具已显式安装，待再次运行两次短答，并核对 trace 的两个二进制 UUID 及窗口覆盖。[真机逐轮数据](roadmap/W8-resources.md#usb-下的夹具进程记录) · [电池采集步骤](../demo/iosApp/UITests/Fixtures/WeMM/power/README.md) |
 
 11 月 28 日，iPhone 16 Pro Max 无线复验已通过生成中离页取消、保留原片和续问。[离页与短答结果](validation/w6-wemm-wireless-iphone-20261128.json)
 

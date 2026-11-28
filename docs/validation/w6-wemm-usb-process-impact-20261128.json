@@ -1,0 +1,188 @@
+{
+  "date": "2026-11-28",
+  "idleControl": {
+    "device": "iPhone 16 Pro Max",
+    "os": "27.2.1 (24B156)",
+    "transport": "wired",
+    "bundleIdentifier": "io.ondeviceai.w6.unifiedvideo.fixtures",
+    "existingFixtureSourceCommit": "883d7f29d68794d9a634b561fbb28a93be3e5da0",
+    "requestedSeconds": 30,
+    "workload": "idle; no XCTest or video inference",
+    "attachAttempts": [
+      {
+        "pid": 857,
+        "exit": 21,
+        "rawLogRetained": false
+      },
+      {
+        "pid": 863,
+        "exit": 21,
+        "visibleAtInstalledPathAfter": true
+      }
+    ],
+    "allProcessPowerTemplateExit": 2,
+    "captureMethod": "Power Profiler --launch -- io.ondeviceai.w6.unifiedvideo.fixtures",
+    "targetPID": 868,
+    "deviceUDIDMatchesCoreDevice": true,
+    "catalogAppPathMatchesCoreDevice": true,
+    "captureSeconds": 31.669713,
+    "endReason": "Time limit reached",
+    "processImpactRowsByPID": {
+      "868": 60
+    },
+    "systemPowerLevelRows": 30,
+    "nonzeroSystemPowerLevelRows": 0,
+    "chargingIntervals": 1,
+    "localEvidenceDirectory": "w6-power-usb-idle-20261128-5tk6Jgmr",
+    "exportSHA256": {
+      "launch-toc.xml": "76a8b1526c27e19fbe2a2da45a37218b7704c15c25d0a661b6f9edeea60b2e76",
+      "process-info.xml": "34c6ebfae8993b5c548b6649f7d5438c3180b5083db8ea363c476df3478b2c43",
+      "ProcessSubsystemPowerImpact.xml": "5eba0f62f2313c8ea5b362e807656e7d9f646b178906bc94ee09aba265de5823",
+      "DeviceChargingState.xml": "29fdaeadf165ee35a50a0a8c5bb80792f479a30ddca87192f6e25d9e23d979c8",
+      "SystemPowerLevel.xml": "000133b034e4dd890e0054b5a20f1c63457989fa6c38e9f1ee6a82e4dc2de01d"
+    }
+  },
+  "firstWorkload": {
+    "appSourceCommit": "883d7f29d68794d9a634b561fbb28a93be3e5da0",
+    "runnerSourceCommit": "8ad8402e2ae03e2a1b3044ff156b86e2231bbe8a",
+    "runnerChange": "XCTest waited for the foreground W6 fixture launched by Instruments. Both original answer, model and backend assertions ran.",
+    "disposition": "Prior installed fixture. Both trace image UUIDs matched the earlier signed app and differed from the new build. Only the runner installation was confirmed by the session log.",
+    "capture": {
+      "localEvidenceDirectory": "w6-profile-short-current-lQgxcNQX",
+      "template": "Power Profiler",
+      "captureMode": "launch",
+      "transport": "wired",
+      "processID": 1162,
+      "device": "iPhone 16 Pro Max",
+      "deviceOS": "27.2.1 (24B156)",
+      "templateDurationSeconds": 75.317379,
+      "imageUUIDs": {
+        "SpeechDemo": "97337109-8ED9-3E0E-849E-33918E0C5AD2",
+        "SpeechDemo.debug.dylib": "7AC8AAD1-50E6-3E0E-BD2F-B95F54A2B2F9"
+      },
+      "xcTest": {
+        "passed": 1,
+        "skipped": 0,
+        "case": "testRealMovieAnswer"
+      },
+      "totalProcessImpactRows": 146,
+      "totalRowsByKind": {
+        "2": 73,
+        "0": 73
+      },
+      "windows": [
+        {
+          "trial": 1,
+          "answer": "red, blue",
+          "startSinceTraceNs": 39244000000,
+          "endSinceTraceNs": 49902000000,
+          "uiUpperSeconds": 10.658,
+          "impactByRowKind": {
+            "0": {
+              "overlappingRows": 12,
+              "coveredSeconds": 10.658,
+              "cpu-impact": {
+                "nonnegativeMinMax": [
+                  0.0,
+                  13.0
+                ],
+                "negativeRows": 0
+              },
+              "display-impact": {
+                "nonnegativeMinMax": [
+                  447.0,
+                  819.0
+                ],
+                "negativeRows": 0
+              }
+            },
+            "2": {
+              "overlappingRows": 11,
+              "coveredSeconds": 10.658,
+              "gpu-impact": {
+                "nonnegativeMinMax": [
+                  0.0,
+                  48.0
+                ],
+                "negativeRows": 0
+              }
+            }
+          },
+          "chargingOverlapSeconds": 10.658,
+          "wholeDeviceRateRawRange": [
+            0.0,
+            0.0
+          ],
+          "thermalStates": [
+            "Nominal"
+          ]
+        },
+        {
+          "trial": 2,
+          "answer": "blue, red",
+          "startSinceTraceNs": 68222000000,
+          "endSinceTraceNs": 73810000000,
+          "uiUpperSeconds": 5.588,
+          "impactByRowKind": {
+            "0": {
+              "overlappingRows": 6,
+              "coveredSeconds": 5.342087,
+              "cpu-impact": {
+                "nonnegativeMinMax": [
+                  1.0,
+                  16.0
+                ],
+                "negativeRows": 0
+              },
+              "display-impact": {
+                "nonnegativeMinMax": [
+                  471.0,
+                  807.0
+                ],
+                "negativeRows": 0
+              }
+            },
+            "2": {
+              "overlappingRows": 5,
+              "coveredSeconds": 5.588,
+              "gpu-impact": {
+                "nonnegativeMinMax": [
+                  0.1,
+                  48.0
+                ],
+                "negativeRows": 0
+              }
+            }
+          },
+          "chargingOverlapSeconds": 5.588,
+          "wholeDeviceRateRawRange": [
+            0.0,
+            0.0
+          ],
+          "thermalStates": [
+            "Nominal"
+          ]
+        }
+      ],
+      "exportSHA256": {
+        "toc.xml": "af29eb41bc5be81c8c4404cd792ca080ce201116b2f63f16f58f1c3e1edf1bf9",
+        "ui.json": "53b17a95e1faeed014d2348ba214579b19faacd5ce9c834458df24509971a16f",
+        "summary.json": "30adda9ace7e777a5b88ab2dc8bef087d8efcd990ad71d0168b10c71fd9f907b",
+        "ProcessSubsystemPowerImpact.xml": "38d030316c93778b4ea8c8f0690242e7f727b5c840ab12d0ea4fde587838fa62",
+        "SystemPowerLevel.xml": "b4a1b1b14fc21e9e34c082da4eab65aecd0b7004e949ca5abc7db6887ae76240",
+        "DeviceChargingState.xml": "7b68dc417adda123e3cad898960e1dba135cf484132a975e766a0235e514d896",
+        "device-thermal-state-intervals.xml": "df5d5f8c78c5eea3c6d0f1f495af89a755ebd7f1250a85c0f40855365fa03611"
+      }
+    }
+  },
+  "units": "ProcessSubsystemPowerImpact values are exported instrument units. USB windows overlapped charging. Whole-device battery-discharge and product thresholds are evaluated separately.",
+  "currentBuild": {
+    "demoSourceCommit": "8ad8402e2ae03e2a1b3044ff156b86e2231bbe8a",
+    "mainExecutableUUID": "224460C5-97D9-32DE-AE6C-7727DD572555",
+    "debugDylibUUID": "313E808B-DA8D-3B82-AE93-6247752EE146",
+    "explicitInstallationSucceeded": true,
+    "installedBundleID": "io.ondeviceai.w6.unifiedvideo.fixtures",
+    "installReceiptSHA256": "a6a0e55105ff32cb8234dc8d038b4b44ec0317de3da353ad278e83005eaa7d3f",
+    "workloadVerified": false
+  }
+}

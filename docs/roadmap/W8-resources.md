@@ -62,6 +62,12 @@ W8 复用 W6 在 iPhone 16 Pro Max（iOS 27.2.1，USB）上的 XCTest 结果。W
 
 以 Activity Monitor 模板加 Power Profiler instrument 做两次无线全进程录制，分别请求 8 秒和 12 秒。两份 trace 的结束原因都是 `Device disconnected`，持续 1.916 秒和 1.734 秒。第二次在夹具空闲时录制，导出的 `ProcessSubsystemPowerImpact` 为零行。下一次先用 USB 连接对同一签包做空闲附加对照，确认 TOC 绑定实际 PID 与安装路径后，再安排带负载的进程采集。USB 对照只用于诊断附加与进程记录。[无线诊断结果](../validation/w6-wemm-wireless-iphone-20261128.json)
 
+### USB 下的夹具进程记录
+
+11 月 28 日，同一台 iPhone 通过 USB 连接后，Power Profiler 对已有 PID 857 和重启后的 PID 863 均返回 21。CoreDevice 随后仍按夹具安装路径查到 PID 863。改由 Power Profiler 通过 `--launch -- io.ondeviceai.w6.unifiedvideo.fixtures` 启动，空闲录制按时限结束，持续 31.670 秒。设备 UDID 和安装路径一致，60 行进程影响记录均属于 PID 868。
+
+首次短答采集中，XCTest 等待 Instruments 启动夹具后执行原有色序断言，两答通过。trace 的主可执行文件和 debug dylib UUID 均匹配原先安装的 `883d7f2` 夹具。测试 Runner 已从 `8ad8402` 重建。复测新版时须先显式安装对应的 App，再核对这两个 UUID、进程路径及两个答题窗口。原先安装的夹具和新版分开记录。[USB 采集收据](../validation/w6-wemm-usb-process-impact-20261128.json)
+
 ## 2026-11-17 当周候选资源与交付范围
 
 W3/W6后续研发暂停、W7生产校准/PAD阶段外延期，新增[W9变声](W9-voice-effects.md)。W8状态仍 **open / active-planned**：按[本周范围](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)验证实际交付候选的稳定性、资源/预算或明确缺测裁定、通知/消费和最终复审；不等待W3/W6模型改进，也不替它们另跑实验。
