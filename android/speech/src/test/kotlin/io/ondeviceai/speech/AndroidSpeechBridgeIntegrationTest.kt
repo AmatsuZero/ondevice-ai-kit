@@ -597,24 +597,42 @@ private abstract class TerminalCapture {
 private class TtsCapture : TerminalCapture(), SpeechBridgeTtsCallback {
     val result = CompletableDeferred<SpeechBridgeTtsResult>()
     val failure = CompletableDeferred<SpeechBridgeFailure>()
-    override fun onResult(synthesis: SpeechBridgeTtsResult) { result.complete(synthesis); record("result") }
-    override fun onFailure(failure: SpeechBridgeFailure) { this.failure.complete(failure); record("failure") }
+    override fun onResult(synthesis: SpeechBridgeTtsResult) {
+        record("result")
+        result.complete(synthesis)
+    }
+    override fun onFailure(failure: SpeechBridgeFailure) {
+        record("failure")
+        this.failure.complete(failure)
+    }
     override fun onCancelled() = record("cancelled")
 }
 
 private class AsrCapture : TerminalCapture(), SpeechBridgeAsrCallback {
     val result = CompletableDeferred<SpeechBridgeAsrResult>()
     val failure = CompletableDeferred<SpeechBridgeFailure>()
-    override fun onResult(output: SpeechBridgeAsrResult) { result.complete(output); record("result") }
-    override fun onFailure(failure: SpeechBridgeFailure) { this.failure.complete(failure); record("failure") }
+    override fun onResult(output: SpeechBridgeAsrResult) {
+        record("result")
+        result.complete(output)
+    }
+    override fun onFailure(failure: SpeechBridgeFailure) {
+        record("failure")
+        this.failure.complete(failure)
+    }
     override fun onCancelled() = record("cancelled")
 }
 
 private class BackendsCapture : TerminalCapture(), SpeechBridgeBackendsCallback {
     val result = CompletableDeferred<List<SpeechBridgeBackend>>()
     val failure = CompletableDeferred<SpeechBridgeFailure>()
-    override fun onResult(backends: List<SpeechBridgeBackend>) { result.complete(backends); record("result") }
-    override fun onFailure(failure: SpeechBridgeFailure) { this.failure.complete(failure); record("failure") }
+    override fun onResult(backends: List<SpeechBridgeBackend>) {
+        record("result")
+        result.complete(backends)
+    }
+    override fun onFailure(failure: SpeechBridgeFailure) {
+        record("failure")
+        this.failure.complete(failure)
+    }
     override fun onCancelled() = record("cancelled")
 }
 
