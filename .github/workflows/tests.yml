@@ -1,4 +1,4 @@
-name: offline-tests
+name: tests
 
 on:
   push:
@@ -16,3 +16,11 @@ jobs:
       # 统一走 Makefile 入口；uv 仅锁 Python 版本，无 pip install。
       - name: Run offline unit tests
         run: make test-offline PYTHON="uv run python"
+
+  kotlin-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # ubuntu-latest 预装 JDK 17 / Android SDK platform 36 + build-tools 36，无需 setup。
+      - name: Run Android JVM unit tests
+        run: make test-kotlin

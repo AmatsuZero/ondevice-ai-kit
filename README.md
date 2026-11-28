@@ -31,6 +31,8 @@ make test-offline          # 离线测试子集（tools/ci-pure-tests.txt，本�
 
 `make test-offline` 是 CI 守门入口，跑 51 个模块 / 574 tests 的离线纯 Python 测试，需要 `make` + Python 3.12（镜像已自带）。默认用 `python3`；若要走 uv 锁定解释器，用 `make test-offline PYTHON="uv run python"`。跑本机全量测试（含依赖 ffmpeg/ruby/Xcode 的用例）仍用 `python3 -m unittest discover -s tools/tests -v`。
 
+`make test-kotlin` 跑 Android JVM 单测（14 个模块，清单在 `tools/ci-kotlin-modules.txt`），需 JDK 17+ 与 Android SDK platform 36；GitHub Actions 的 ubuntu-latest 已预装这些，作为独立 CI job 运行。Kotlin/Native 的 iOS 测试（`iosSimulatorArm64Test` 等）和真机/听感/通知关联/复审/签名仍需本机 Xcode 或人工验收，不在流水线内。
+
 Xcode 工程已提交。需要重新生成时，使用已有 Ruby xcodeproj gem 执行 `ruby scripts/generate-xcode-projects.rb`。iOS Demo 构建前先执行 `./gradlew :demo:shared:linkDebugFrameworkIosSimulatorArm64`（真机改为 `IosArm64`），再打开 `demo/iosApp/OnDeviceAIDemo.xcodeproj`。Demo 支持 Apple Silicon 模拟器与 arm64 真机；SDK 本身不依赖 KMP。Demo 和 UI 测试默认使用 UGREEN GROUP LIMITED（`4X996UV8LC`）自动签名，真机运行需本机已有对应开发证书和匹配设备的描述文件；重新生成时可用 `ODAI_DEVELOPMENT_TEAM` 覆盖团队。
 
 Android Demo：`./gradlew :demo:androidApp:assembleDebug`。照片、相机和 benchmark 入口均调用真实原生后端。系统权限由 Demo 管理；SDK 不主动弹权限。benchmark 使用 5 次预热、30 次采样，记录实际后端和测量方法；未测内存/能耗为 null。

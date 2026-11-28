@@ -1,0 +1,14 @@
+:sdk-core
+:model-store
+:face
+:identity
+:video
+:multimodal
+:voice-effects
+:speech
+:backend-mlkit
+:backend-system-tts
+:backend-system-asr
+:backend-litertlm
+:backend-litert-sr
+:backend-opencv-identity
