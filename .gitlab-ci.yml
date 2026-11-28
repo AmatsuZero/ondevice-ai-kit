@@ -1,0 +1,15 @@
+# 窄 CI：只守门离线纯 Python 测试子集（tools/ci-pure-tests.txt）。
+# 不跑真机/听感/通知关联/复审/签名——那些保持人工，在清单里如实标 open。
+stages:
+  - test
+
+offline-tests:
+  stage: test
+  tags:
+    - aiot-fe-runner
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+  script:
+    # 测试零第三方依赖；uv 仅用于锁 Python 3.12（runner 已 provision）。
+    - PYTHONPATH=".:tools:tools/tests" uv run --python 3.12 python -m unittest $(tr '\n' ' ' < tools/ci-pure-tests.txt)

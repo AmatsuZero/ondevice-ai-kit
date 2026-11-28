@@ -14,3 +14,6 @@ xcuserdata/
 AGENTS.md
 .idea/
 .xcodebuildmcp/
+
+# uv 本地虚拟环境
+.venv/

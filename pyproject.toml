@@ -1,0 +1,8 @@
+[project]
+name = "ondevice-ai-kit-ci"
+version = "0.0.0"
+description = "Offline test gate for ondevice-ai-kit tooling (no build, no third-party deps)"
+requires-python = ">=3.12"
+
+[tool.uv]
+package = false
