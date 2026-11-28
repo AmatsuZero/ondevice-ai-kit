@@ -30,6 +30,18 @@ ios-native-probe:
     - when: never
   variables:
     DERIVED_DATA_PATH: "${CI_BUILDS_DIR}/derived_data/ondevice-${CI_JOB_ID}"
+    # NAS 缓存配方抄自 ugreenhome-shared 的 .ios_build：Gradle 缓存落到工程内目录，由 cache paths 捕获。
+    GRADLE_USER_HOME: "${CI_PROJECT_DIR}/.ci-gradle"
+  cache:
+    key:
+      files:
+        - gradle/wrapper/gradle-wrapper.properties
+        - gradle/libs.versions.toml
+      prefix: ios-native-probe-v1
+    paths:
+      - .ci-gradle/caches/
+      - .ci-gradle/wrapper/
+      - .ci-konan/
   script:
     - bash tools/probe/ios-native-probe.sh
   after_script:

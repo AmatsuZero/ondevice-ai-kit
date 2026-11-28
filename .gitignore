@@ -20,3 +20,7 @@ AGENTS.md
 
 # probe job 本地/运行态产物
 .ci-probe-state/
+
+# NAS 缓存运行态目录（probe/正式 job 产生）
+.ci-gradle/
+.ci-konan/
