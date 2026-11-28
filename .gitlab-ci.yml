@@ -19,8 +19,10 @@ offline-tests:
 # runner #9/#17 与主工程共享，用 resource_group 串行；探测通过后再决定是否转正式自动 job。
 ios-native-probe:
   stage: test
+  # 只用 runner #9：#9 独有 tag xcode-cas-consumer-9（#17 是 xcode-cas-producer-17）。
   tags:
     - macos
+    - xcode-cas-consumer-9
   when: manual
   allow_failure: true
   resource_group: macos-shared

@@ -12,6 +12,29 @@ echo "CI_BUILDS_DIR=${CI_BUILDS_DIR:-<unset>}"
 echo "python3=$(command -v python3) $(python3 --version 2>&1)"
 echo "xcodegen=$(command -v xcodegen || echo '<missing>')  swiftc=$(command -v swiftc || echo '<missing>')"
 
+# === Android SDK 诊断（坐实 runner 上到底有没有 SDK）===
+# KMP 配置阶段遍历所有模块（含 :demo:androidApp），即使只跑 iOS 测试也需要 Android SDK。
+echo "--- Android SDK 探测 ---"
+echo "env ANDROID_HOME=${ANDROID_HOME:-<unset>}  ANDROID_SDK_ROOT=${ANDROID_SDK_ROOT:-<unset>}"
+for candidate in "$HOME/Library/Android/sdk" /opt/homebrew/share/android-commandlinetools /usr/local/share/android-commandlinetools "/Applications/Android Studio.app/Contents/sdk"; do
+  if [ -d "$candidate" ]; then
+    platforms=$(ls "$candidate/platforms" 2>/dev/null | tr '\n' ',' || true)
+    echo "  EXISTS $candidate  platforms=[${platforms:-<none>}]"
+  else
+    echo "  MISSING $candidate"
+  fi
+done
+if [ -z "${ANDROID_HOME:-}" ]; then
+  for candidate in "$HOME/Library/Android/sdk" /opt/homebrew/share/android-commandlinetools /usr/local/share/android-commandlinetools "/Applications/Android Studio.app/Contents/sdk"; do
+    if [ -d "$candidate/platforms" ]; then
+      export ANDROID_HOME="$candidate"
+      echo "ANDROID_HOME 自动探测命中: $ANDROID_HOME"
+      break
+    fi
+  done
+fi
+echo "ANDROID_HOME(final)=${ANDROID_HOME:-<unset>}"
+
 # --- 1) NAS 缓存验证：检查 cache 恢复的 Gradle distribution ---
 # 子模块配方：GRADLE_USER_HOME=$CI_PROJECT_DIR/.ci-gradle，cache paths 含 .ci-gradle/wrapper/caches。
 # 这里 GRADLE_USER_HOME 由 job variables 设成 .ci-gradle；cache restore 会把 distribution 放回这里。
