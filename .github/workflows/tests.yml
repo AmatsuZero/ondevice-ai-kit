@@ -13,6 +13,6 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           python-version: '3.12'
-      # 测试零第三方依赖；uv 仅锁 Python 版本，无 pip install。
+      # 统一走 Makefile 入口；uv 仅锁 Python 版本，无 pip install。
       - name: Run offline unit tests
-        run: PYTHONPATH=".:tools:tools/tests" uv run python -m unittest $(tr '\n' ' ' < tools/ci-pure-tests.txt)
+        run: make test-offline PYTHON="uv run python"

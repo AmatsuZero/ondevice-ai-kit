@@ -12,5 +12,5 @@ offline-tests:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
   script:
-    # 测试零第三方依赖，docker runner 无需 uv；uv 配置仅用于本地维护。
-    - PYTHONPATH=".:tools:tools/tests" python -m unittest $(tr '\n' ' ' < tools/ci-pure-tests.txt)
+    # 统一走 Makefile 入口；测试零第三方依赖，docker runner 无需 uv。
+    - make test-offline
