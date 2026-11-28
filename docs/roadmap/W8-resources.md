@@ -45,6 +45,17 @@ W8 复用 W6 在 iPhone 16 Pro Max（iOS 27.2.1，USB）上的 XCTest 结果。W
 
 11 月 28 日使用主干 `883d7f2` 构建的夹具无线复测。首次 XCTest 在启用界面自动化时超时，未执行短答。重跑后红→蓝、蓝→红均答对，从点击「生成」到页面确认答案的上界依次为 5.636 秒、5.627 秒。CoreDevice 按安装路径定位到 PID 29261。Power Profiler 按此 PID 附加返回 21，再按当时唯一的 `SpeechDemo` 名称附加返回 19。XCTest 会话日志在两次报错时均记录该夹具处于前台。没有生成 trace，两个窗口的充电状态和整机耗电率均缺测。[11 月 28 日无线真机记录](../validation/w6-wemm-wireless-iphone-20261128.json)
 
+### iPhone 本机 Performance Trace
+
+同日使用同一个签包，操作者确认断开充电后，从 iPhone 启动 Power Profiler。无线 XCTest 通过，两段短答均正确。导出的 trace 覆盖 08:49:42.256 至 08:58:51.261（北京时间）。以 XCTest 活动的墙钟时间对齐点击「生成」至页面确认答案的两个窗口，时间精度为毫秒，包含 UI 自动化等待。整机读数按样本与窗口的重叠时长加权。[验证数据与归档摘要](../validation/w6-wemm-wireless-iphone-20261128.json)
+
+| 回答 | 页面出答上界 | 整机读数范围（%/hr） | 整机读数加权平均（%/hr） | 系统热状态 |
+| --- | ---: | ---: | ---: | --- |
+| `red, blue` | 10.711 秒 | 15.02–77.93 | 43.84 | `Nominal` |
+| `blue, red` | 5.614 秒 | 18.74–77.42 | 44.63 | `Nominal` |
+
+两段分别有 12、7 个非零整机样本，时间间隙均小于 1 微秒。`DeviceChargingState` 表没有区间，trace 无法独立核实操作者报告的供电状态。导入后的 trace 目标为 `all-processes`。目录中的 PID 589 与 XCTest 夹具相符，但目录只有可执行名，trace 的设备 UUID 也未能映射到 XCTest 硬件 ID。1,093 行进程影响数据只属于另外两个 PID，夹具功耗缺测。表中 `%/hr` 仅用于描述短窗口整机读数，W6 正式资源预算仍待项目确认。
+
 ## 2026-11-17 当周候选资源与交付范围
 
 W3/W6后续研发暂停、W7生产校准/PAD阶段外延期，新增[W9变声](W9-voice-effects.md)。W8状态仍 **open / active-planned**：按[本周范围](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)验证实际交付候选的稳定性、资源/预算或明确缺测裁定、通知/消费和最终复审；不等待W3/W6模型改进，也不替它们另跑实验。

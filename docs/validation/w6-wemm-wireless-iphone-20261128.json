@@ -73,5 +73,59 @@
     "traceProduced": false,
     "chargingStateDuringAnswers": null,
     "systemPowerPercentPerHour": null
+  },
+  "onDevicePerformanceTrace": {
+    "localEvidenceDirectory": "w6-device-power-20261128-1mkbeus0",
+    "resultBundle": "short-answers.xcresult",
+    "test": "W6UnifiedVideoUITests/testRealMovieAnswer()",
+    "xcodebuildExit": 0,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "archiveSHA256": "851f7edbfff02ac056ad705f050346c2f908dd950f219b9ebf32d19fee373ac3",
+    "traceSHA256": "8342da30f7bc91ca19bcf27da4fcae5e1d1fb33fbed729d508db3bac301a4810",
+    "captureStart": "2026-11-28T08:49:42.256+08:00",
+    "captureEnd": "2026-11-28T08:58:51.261+08:00",
+    "durationSeconds": 549.004767,
+    "scope": "all-processes",
+    "alignment": "XCTest activity wall clock against the trace start timestamp, at millisecond precision",
+    "fixturePID": 589,
+    "exactAttachedProcessBindingVerified": false,
+    "traceDeviceUUIDMappedToHardwareUDID": false,
+    "operatorConfirmedDisconnectedFromChargers": true,
+    "tableRows": {
+      "SystemPowerLevel": 550,
+      "DeviceChargingState": 0,
+      "SystemThermalState": 1,
+      "ProcessSubsystemPowerImpact": 1093
+    },
+    "fixturePowerImpactRows": 0,
+    "fixturePowerImpact": null,
+    "traceChargingStateDuringAnswers": null,
+    "trials": [
+      {
+        "answer": "red, blue",
+        "traceRelativeNs": [132850000000, 143561000000],
+        "upperSeconds": 10.711,
+        "systemPowerRows": 12,
+        "systemPowerPercentPerHourMin": 15.021817498,
+        "systemPowerPercentPerHourMax": 77.929871256,
+        "systemPowerPercentPerHourWeightedMean": 43.841125057,
+        "uncoveredTraceNanoseconds": 459,
+        "systemThermalState": "Nominal"
+      },
+      {
+        "answer": "blue, red",
+        "traceRelativeNs": [161872000000, 167486000000],
+        "upperSeconds": 5.614,
+        "systemPowerRows": 7,
+        "systemPowerPercentPerHourMin": 18.741582946,
+        "systemPowerPercentPerHourMax": 77.418014751,
+        "systemPowerPercentPerHourWeightedMean": 44.634894751,
+        "uncoveredTraceNanoseconds": 252,
+        "systemThermalState": "Nominal"
+      }
+    ],
+    "resourceBudgetVerified": false
   }
 }
