@@ -865,3 +865,9 @@ ORT依赖材料逐归档重核时，mp11的boost-1.82.0归档没有任何独立l
 ## GitLab 主干推送：调用级代理路径恢复（2026-11-21）
 
 默认代理路径对公司远端返回 `Recv failure: Connection reset by peer`，不是未登录或拒绝推送的证据。只读确认本机代理后，同一远端以调用级 `git -c http.proxy= -c https.proxy=` 直连，`ls-remote`、普通 push、最终 SHA 回读均成功。不要因此修改全局代理或凭据，也不要 force push；该恢复只证明本次直连可用，不推断所有网络失败都由代理引起。见[统一 Demo 合入与清理](validation/unified-demo-main-merge-cleanup-20261121.md)。
+
+## macOS 上核验历史采样归档与透明压缩（2026-11-28）
+
+本机 Python 缺少 `os.listxattr` 和 `st_birthtime_ns`。`ditto --hfsCompression` 在一次复制中保留了修改时间，但创建时间与原件相差约 101 微秒。用 macOS `getattrlist` 读取 `ATTR_CMN_CRTIME`，在候选副本上用 `setattrlist` 回写并回读，随后核对文件内容、修改时间、权限、所有者和扩展属性。只替换逐项相符且占用下降的文件。
+
+同一 Instruments 采样包两次导出 TOC 时，`kernel` 和 Demo 进程的排列顺序可以交换。本次完整解压后 226 个成员的内容和元数据一致。核对 TOC 时将进程表按属性排序并忽略 XML 缩进，保留其它元素的顺序、属性和内容。原始导出和清单保存在本地 `artifacts/verification/foundation-audit-cleanup-20261128/`。
