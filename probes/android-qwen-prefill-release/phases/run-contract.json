@@ -1,0 +1,100 @@
+{
+  "runId": "w3-station-phases-20261122-01",
+  "target": "one arm64 Android emulator only",
+  "singleUse": true,
+  "sourceFingerprint": "9dde57a3307177378c6ac388bfeeaf8217f77d7185e35e4aa53835e18acf8611",
+  "inputs": {
+    "AndroidManifest.xml": "1709b286d364fc2b8151d81e0fdfacd0948ca6155ecc194ed7fc662335cf1849",
+    "build.gradle.kts": "edcdf9dad5e3f7419c2f2107bb2989c812c4ba7f409ae62870d436c775a1538b",
+    "gradle/wrapper/gradle-wrapper.jar": "55243ef57851f12b070ad14f7f5bb8302daceeebc5bce5ece5fa6edb23e1145c",
+    "gradle/wrapper/gradle-wrapper.properties": "032a71c92fc7f3c1cadf8880f0554b71aa6beb411f97ac253aa93932cb3784d5",
+    "gradlew": "aed171fb114f82e6eaea4970a245a200e0582a7dcc8ec0891ca41b6e4a62b754",
+    "main-src/QwenArenaPolicy.kt": "c86b96b68fb617f4920736bfa257ecf90280d9d1565ad9010725a5dbd56812e0",
+    "main-src/QwenFileActivity.kt": "dd859f76faff8e222207798294ff91a0598a064c9ab4a3e1b009b87eadaecd8a",
+    "main-src/QwenFileInputs.kt": "bdd50d11b637f6a12f6021586910898141e50c7e84c572710901cc51dab49953",
+    "main-src/QwenFileReport.kt": "74cb2ab4b94bbf5f75e61f084983556fa511f6b3a56be75d05b95b2003fa6736",
+    "main-src/QwenLoadCore.kt": "0bac095d4cd8151257900827bfc3e013a7b2d0b2bebd92b674b06e39c98f999c",
+    "main-src/QwenTwoStageCore.kt": "2d14b1a3ed7c1f1c8a7ba9bb38379d7a25459e326cf2458e38140d365b57eaba",
+    "settings.gradle.kts": "02588897e140f9140e129a2ac4e611f4d8cc1678df0b6dd151d55b9d7f9f8cd8",
+    "sherpa-diagnostic.aar": "53f8abdca782d4845900e857d17d53c304ffae9721bb89d2b7596c8135e72c53",
+    "src/androidTest/java/io/ondeviceai/probes/w3/NativeHeapWindow.java": "f6092f3001ef7d575d32e476c3c3eaf6978c3820864691182cf68fc42675e20d",
+    "test-assets/cases.json": "46cdb4d9e2194ab4ae05f4b5e8a047e63aa7fb1633a8b149b721844974d18fd5",
+    "test-assets/inputs/w3-pair-station.pcm": "c33f0f9a2e78e06099fa26281d92c7915dc0703b8ff51b86b538284aa2a269bc",
+    "test-src/QwenTerminalInstrumentation.kt": "ece391410bdf7f8d93cc5e13348adb3d0110c423a4e884024ed317449bd478c7",
+    "test-src/TerminalAckFile.kt": "95ebb10092e25f5359941ab8d2e47f2f16050f0c785ca28a52771d927829f018",
+    "test-src/TerminalObservationBarrier.kt": "d4a21ea1c66ea77baf60f88cdd27815a5075d2193662604e74f5d0da60bbe21c"
+  },
+  "models": {
+    "conv_frontend.onnx": "d22dc4423e0940e49884e903d2ea2f7e5567c14fc1aed97e4e26d6b8f208ef9e",
+    "encoder.int8.onnx": "60748d3e6744a57c9c91e1b17424a6c2990567e8adceb0783940c03ed98fa9d9",
+    "decoder.int8.onnx": "4f6885be5959ae26af3089d38ee7972c5fafbeeb1cf8d5e76eab6d8b61ca5771",
+    "tokenizer/merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "tokenizer/tokenizer_config.json": "4942d005604266809309cabc9f4e9cb89ce855d59b14681fdc0e1cc62ea26c4c",
+    "tokenizer/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "apks": {
+    "app": {
+      "package": "io.ondeviceai.acceptance.qwenphasetrace",
+      "name": "qwen-load-acceptance-debug.apk",
+      "relativePath": "project/build/outputs/apk/debug/qwen-load-acceptance-debug.apk",
+      "size": 33839130,
+      "sha256": "a9ce14d7f6eb102f9126f7ee91a32d078f7060f3239f468c9037032870b7a445"
+    },
+    "test": {
+      "package": "io.ondeviceai.acceptance.qwenphasetrace.test",
+      "name": "qwen-load-acceptance-debug-androidTest.apk",
+      "relativePath": "project/build/outputs/apk/androidTest/debug/qwen-load-acceptance-debug-androidTest.apk",
+      "size": 398224,
+      "sha256": "1d6e765d09dc1b4bbdaf85347ce67d17b7386d138baddd17dd2e55ffe6dd4f58"
+    }
+  },
+  "caseManifest": "46cdb4d9e2194ab4ae05f4b5e8a047e63aa7fb1633a8b149b721844974d18fd5",
+  "fixture": "w3-pair-station",
+  "samples": 158621,
+  "locale": "en-US",
+  "expectedStageOrder": [
+    "auto",
+    "forced"
+  ],
+  "maxConstructors": 1,
+  "maxStreams": 2,
+  "maxDecodes": 2,
+  "requestedAllocatorPolicy": "EnableCpuMemArena=0",
+  "sampledRssStopAboveBytes": 1610612736,
+  "deviceAvailableStopBelowBytes": 536870912,
+  "caseOrLoadStopAboveSeconds": 120,
+  "totalStopAboveSeconds": 240,
+  "terminalAckTimeoutMs": 30000,
+  "ackHelperSHA256": "344f0070ceeb33813c4792047aa9fb7a4fd6472c68cfab2a4d5c976dc7eef320",
+  "coverage": "Each stage requires at least three strict interior samples, conservative gap at most 100ms, no overflow or errors, raw bytes and digest, terminal double read, positive ACK, ownership restoration.",
+  "qualityScope": "resource diagnostic on one synthetic sentence only",
+  "automaticRetry": false,
+  "hostInputHashes": {
+    "adb_process_sampler.py": "d77d0068d00cffe904c9d42b29c5f186733c1682c74814242175d633064b932b",
+    "adb_terminal_ack_publisher.py": "027bb285d567edcf1784c407a369324e0c3d235ea041dd1b73b92cfc45283e57",
+    "adb_terminal_ack_rename_publisher.py": "c7228a3b5ccdd2a74db8ebaedceba24bf253a2e1b2fe00638bac433b17c417ff",
+    "adb_terminal_observation.py": "6fdf1d109e6a0c311d9bbfed73cc1a3fa7f65bfaf7fa9b874e520e5dd7a11c68",
+    "adb_terminal_report_reader.py": "e184eaed9285e81be1a90e4505da0e280ca794dead66afaaa55ed3351bfa11e8",
+    "terminal_device_lifecycle.py": "bccef7b035f4ef2a31c782f9b8ba2169e0fe2e7cc8a5924072c3dd1e7f590a98",
+    "terminal_file_io.py": "2c9e885c85a0b0d6623b5285cd88075abd93ee8111c04088eb30ed82fc9304e4",
+    "terminal_observation_coordinator.py": "ac647f6e1ecbbb9ae416b518cba7cc4e2f759b43c06c75f9e09576ea90009a83",
+    "terminal_observer.py": "b86c9dda1a3ea45bcbd55cd207ce40bc74a2c3e37af83741938027c6971ce9ac",
+    "terminal_polling.py": "cd1bc6dbe1b06752accc5b40cc804468d399a8f6c538e540f3ff983531ae4848"
+  },
+  "nativeHelperSourceSha256": "e756a487f4a87a6e307841a9494717510ccb007257e32c57bbdd6d53f01163b9",
+  "scope": "One fresh isolated Android emulator run, same synthetic station sentence, auto then forced English.",
+  "sherpaJniSHA256": "3faa59ffe3a21783106a3a6b425679114f10176d99b22b9016421c29bd9ef43d",
+  "onnxRuntimeSHA256": "33847ad43bffe204699fd4a27f7f3603452a8cdaf2f9a44983a0bc31ffcf2da1",
+  "phaseTrace": {
+    "schema": "w3-phase-v1",
+    "clock": "CLOCK_BOOTTIME",
+    "tag": "W3Phase",
+    "buffer": "main",
+    "format": "raw",
+    "expectedRecords": 4,
+    "binding": "process identity and same call window; marks in one thread per call",
+    "sourceRoot": ".omx/artifacts/w3-phase-markers-20261122-HEma2FiE",
+    "hostDirectory": "host-src",
+    "singleUse": true
+  }
+}
