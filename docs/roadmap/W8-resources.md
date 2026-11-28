@@ -77,6 +77,10 @@ W8 复用 W6 在 iPhone 16 Pro Max（iOS 27.2.1，USB）上的 XCTest 结果。W
 
 覆盖时长取采样区间与答题窗口的交集，表中保留至毫秒。第二答末尾约 0.752 秒缺 GPU 样本。两段窗口全程 USB 充电，系统热状态均为 `Nominal`。进程影响值沿用 Instruments 原始单位。电池供电下的整机读数见[本机 Performance Trace](#iphone-本机-performance-trace)。
 
+## 2026-11-21 内部演示验收
+
+已装开发签包上的 Android 和 iPhone 文件变声演示已验收。两端均完成文件导入、原声／升调／降调转换及 WAV 导出回读。该决定覆盖内部演示。正式分发仍待最低系统、资源和第三方通知等项目验收。[历史候选能力范围](../validation/w8-candidate-capability-scope-20261120.md) · [发布清单](../release/2026-11-weekly-candidate-checklist.md)
+
 ## 2026-11-17 当周候选资源与交付范围
 
 W3/W6后续研发暂停、W7生产校准/PAD阶段外延期，新增[W9变声](W9-voice-effects.md)。W8状态仍 **open / active-planned**：按[本周范围](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)验证实际交付候选的稳定性、资源/预算或明确缺测裁定、通知/消费和最终复审；不等待W3/W6模型改进，也不替它们另跑实验。
