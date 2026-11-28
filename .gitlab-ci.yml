@@ -15,16 +15,15 @@ offline-tests:
     # 统一走 Makefile 入口；测试零第三方依赖，docker runner 无需 uv。
     - make test-offline
 
-# 探测 job（手动触发，不影响现有自动流水线）：验证 macOS runner 能否跑苹果端原生测试 + 清理机制。
-# runner #9/#17 与主工程共享，用 resource_group 串行；探测通过后再决定是否转正式自动 job。
-ios-native-probe:
+# 苹果端原生测试正式 job（自动触发，与 Python/Kotlin job 并列）：
+# 在 runner #9 上跑 KMP iOS Native 测试（kmp-binding + demo/shared 的 commonTest），带 NAS 缓存与进程清理。
+# runner #9 与主工程共享，用 resource_group 串行；Apple 工具 Python 测试因 runner 缺 xcodegen 暂不纳入。
+ios-native-tests:
   stage: test
   # 只用 runner #9：#9 独有 tag xcode-cas-consumer-9（#17 是 xcode-cas-producer-17）。
   tags:
     - macos
     - xcode-cas-consumer-9
-  when: manual
-  allow_failure: true
   resource_group: macos-shared
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -39,7 +38,7 @@ ios-native-probe:
       files:
         - gradle/wrapper/gradle-wrapper.properties
         - gradle/libs.versions.toml
-      prefix: ios-native-probe-v1
+      prefix: ios-native-tests-v1
     paths:
       - .ci-gradle/caches/
       - .ci-gradle/wrapper/
@@ -47,4 +46,4 @@ ios-native-probe:
   script:
     - bash tools/probe/ios-native-probe.sh
   after_script:
-    - bash tools/probe/ios-native-cleanup.sh || echo "cleanup failed (non-fatal for probe)"
+    - bash tools/probe/ios-native-cleanup.sh || echo "cleanup failed (non-fatal)"
