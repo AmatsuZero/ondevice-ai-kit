@@ -1,0 +1,249 @@
+{
+  "status": "prepared-not-authorized-not-executed",
+  "executionAuthorized": false,
+  "executionPerformed": false,
+  "runId": null,
+  "finalProductionCandidate": null,
+  "approvalClaimed": false,
+  "productionChanged": false,
+  "candidateStage": "draft",
+  "candidateScope": {
+    "type": "isolated-artifact-candidate-only",
+    "requestType": "FILE",
+    "requestClass": "SFSpeechURLRecognitionRequest",
+    "productionFeatureIntegration": false,
+    "preserveOtherEdits": true,
+    "preservedPaths": [
+      "on-device",
+      "partialResults",
+      "delegate",
+      "timeout",
+      "lifecycle",
+      "mic"
+    ],
+    "noPublicConfig": true,
+    "noNewDependency": true,
+    "noDefaultValueAdded": true,
+    "noNewInterface": true,
+    "noModelMicOrOrdinaryAppOperation": true,
+    "productDependenciesSigningModelRecordingPermissionsUnchanged": true,
+    "recursiveDelegation": false
+  },
+  "insertion": {
+    "sourcePath": "apple/Sources/ODAIKitAppleSpeech/AppleSpeechRecognizerBackend.swift",
+    "after": "request.shouldReportPartialResults = true",
+    "availabilityGuard": "#available(iOS 16.0, macOS 13.0, *)",
+    "assignment": "request.addsPunctuation = true",
+    "onlyChange": true,
+    "deploymentTargets": [
+      "iOS 15",
+      "macOS 12"
+    ],
+    "lowerVersionBehavior": "no assignment",
+    "sdkHeaderInterpretation": "API capability and availability only; no proof of actual effect"
+  },
+  "execution": {
+    "recognitionRun": false,
+    "deviceRun": false,
+    "validationRun": false,
+    "streamJsonConsumed": false
+  },
+  "futureValidation": {
+    "executed": false,
+    "targetOS": "iOS 27.2.1"
+  },
+  "applicationInstruction": {
+    "mechanicalOnly": true,
+    "isolatedArtifactCopyOnly": true,
+    "productionSourceUntouched": true
+  },
+  "inputSelection": {
+    "source": "input-selection.json",
+    "sha256": "97e70bf9f22c8d0d09465dc52952f88d6d3d00f50cf0b6d06badabbfebcb97cc",
+    "shaPendingParent": false,
+    "repeatInputText": false,
+    "fixedSixInputs": true
+  },
+  "historicalDataPolicy": {
+    "consumed40BatchReplayed": false,
+    "consumed65BatchReplayed": false,
+    "original65RunIdReplayed": false,
+    "historical65AsContemporaneousA": false,
+    "fourHistoricalRawFileListsMissingCannotReconstruct": true,
+    "newApple65FileListsIndependent": true,
+    "rawFailuresPreserved": true
+  },
+  "futureExperiment": {
+    "state": "draft",
+    "authorized": false,
+    "approved": false,
+    "bothArmsAreFutureNewControl": true,
+    "session": {
+      "sameDevice": true,
+      "sameOS": true,
+      "sameBaseSourceAndConstructionExceptProperty": true,
+      "separateArmBinaryIdentitiesRequired": true
+    },
+    "design": {
+      "inputs": 6,
+      "arms": 2,
+      "requests": 12,
+      "scope": "future authorized only"
+    },
+    "arms": {
+      "A": {
+        "addsPunctuation": "unset",
+        "originalSettingPreserved": true,
+        "defaultMustNotBeInferredAsFalse": true
+      },
+      "B": {
+        "addsPunctuation": true
+      }
+    },
+    "pairOrder": {
+      "rule": "按固定6输入次序逐项配对；输入序号1、3、5为A->B，输入序号2、4、6为B->A",
+      "oddOrdinal": "A->B",
+      "evenOrdinal": "B->A",
+      "fixed": true,
+      "noChangeFromResults": true
+    },
+    "isolation": {
+      "freshBackendPerRequest": true,
+      "sameCandidateConstructionCloseDrainExceptProperty": true,
+      "preserveActualStartCleanupTerminalPerArm": true,
+      "providerConfigMustRemainAligned": true
+    },
+    "blockConditions": [
+      "method cannot be isomorphic isolated",
+      "provider configuration drift"
+    ],
+    "reportConcreteBlockersUpward": true,
+    "noRerun": true,
+    "improvementClaims": {
+      "historical65CannotServeAsSameSessionA": true,
+      "noResultDrivenOrderChange": true,
+      "noResultDrivenInputChange": true,
+      "noResultDrivenRerun": true
+    }
+  },
+  "blindness": {
+    "notBlind": true,
+    "sourceResultsDisclosed": true,
+    "exploratory": true,
+    "independentHeldout": false
+  },
+  "preregisteredInterpretation": {
+    "experimentOnly": true,
+    "notProductThreshold": true,
+    "scorer": {
+      "casefold": true,
+      "punctuationAndDigits": "preserved"
+    },
+    "reporting": {
+      "perCohortOriginalCERWER": true,
+      "columns": [
+        "formattingOnly",
+        "contentOrMixed"
+      ]
+    },
+    "criteria": {
+      "formattingEditsStrictlyReducedForB": true,
+      "contentOrMixedMustNotIncrease": true,
+      "improvementClaimBlockers": [
+        "newTypedError",
+        "emptySpeech",
+        "incompleteSpeech",
+        "cleanupFailure"
+      ],
+      "existingTypedErrorsPreserved": true,
+      "noConversionToEmptyHypothesis": true,
+      "cohortScope": "Each of mandarin and english-near separately; do not pool cohorts.",
+      "completeNonemptySpeechBothArmsRequired": true
+    },
+    "outOfScopeClaims": [
+      "far-field content omissions",
+      "original 1110",
+      "challenge false non-empty",
+      "independent heldout",
+      "statistical causal proof",
+      "generalization"
+    ]
+  },
+  "metrics": {
+    "latency": {
+      "requestWall": {
+        "separate": true,
+        "budget": null
+      },
+      "recognition": {
+        "separate": true,
+        "budget": null
+      }
+    },
+    "resourceBudgets": {
+      "all": null,
+      "rtf": null,
+      "rss": null
+    },
+    "noNumericalBudgetAdded": true,
+    "rtfRssDraftNotApproval": true
+  },
+  "futureRecords": [
+    "full app and source manifest",
+    "device",
+    "OS",
+    "locale",
+    "input identity",
+    "recognizer configuration",
+    "arm identity",
+    "run identity",
+    "terminal state",
+    "recovery"
+  ],
+  "scopeLimit": "only authorized scope; no model, mic, or ordinary App operations",
+  "pitfalls": {
+    "oldDefaultNotInferredFalse": true,
+    "sdkHeaderOnlyProvesApiCapabilityAndAvailability": true,
+    "streamJson": {
+      "lineByLineParse": true,
+      "completeResultErrorToolUseCheck": true,
+      "exit0NotDeliverySuccess": true
+    },
+    "quotaFailure": {
+      "retryOriginal": false,
+      "paidFallback": false
+    },
+    "rawFailuresPreserved": true,
+    "historicalRawFileListsMissingCannotReconstruct": true,
+    "newApple65FileListsIndependent": true,
+    "notEveryStatusOrHeadFinalCandidate": true,
+    "preserveConcurrentEdits": true,
+    "productDependenciesSigningModelRecordingPermissionsUnchanged": true
+  },
+  "documentation": [
+    "../../docs/validation/w3-paired-error-analysis-20261116.md",
+    "../../docs/validation/w3-apple65-device-20261116.md"
+  ],
+  "scopeChanges": [],
+  "blockers": [
+    "Future device execution is not authorized by this preparation.",
+    "Arm A/B final App/binary identities and a paired runner are not prepared.",
+    "Runtime punctuation effect remains unmeasured."
+  ],
+  "scorerBinding": {
+    "path": "tools/speech_error_metrics.py",
+    "sha256": "d398bb35438b9f4eb399fc404e02c0c2a7184a7cea7c7a6d32e4a321f8e2b39e",
+    "casefold": true,
+    "punctuationAndDigitsRetained": true,
+    "classificationTool": "tools/w3_paired_error_analysis.py",
+    "classificationToolSHA256": "b801dfdf4f79311e6b943c159531817725de6db1ab65ecf86322e35bd7f103f3"
+  },
+  "parentPlanningClarifications": [
+    {
+      "field": "futureExperiment.session.sameCandidate",
+      "old": true,
+      "new": "sameBaseSourceAndConstructionExceptProperty=true and separateArmBinaryIdentitiesRequired=true",
+      "reason": "A/B compiled variants differ by property, cannot claim same App bytes."
+    }
+  ]
+}

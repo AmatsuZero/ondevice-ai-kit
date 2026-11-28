@@ -1,0 +1,24 @@
+--- a/Libraries/MLXVLM/Models/Qwen2VL.swift
++++ b/Libraries/MLXVLM/Models/Qwen2VL.swift
+@@ -1004,8 +1004,8 @@
+             embeds = mergedVisionEmbeds(inputIds: inputIds2D, pixelValues: pixels, frames: frames)
+             let (positionIds, ropeDeltas) = Language.getRopeIndex(
+                 inputIds: inputIds2D,
+-                imageGridTHW: frames,
+-                videoGridTHW: nil,
++                imageGridTHW: input.image?.frames,
++                videoGridTHW: input.video?.frames,
+                 spatialMergeSize: config.visionConfiguration.spatialMergeSize,
+                 imageTokenId: config.baseConfiguration.imageTokenId,
+                 videoTokenId: config.baseConfiguration.videoTokenId)
+@@ -1043,8 +1043,8 @@
+ 
+         let (positionIds, ropeDeltas) = Language.getRopeIndex(
+             inputIds: inputIds,
+-            imageGridTHW: frames,
+-            videoGridTHW: nil,
++            imageGridTHW: input.image?.frames,
++            videoGridTHW: input.video?.frames,
+             spatialMergeSize: config.visionConfiguration.spatialMergeSize,
+             imageTokenId: config.baseConfiguration.imageTokenId,
+             videoTokenId: config.baseConfiguration.videoTokenId,
