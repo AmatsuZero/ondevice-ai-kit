@@ -1,12 +1,13 @@
-## 2026-11-27 从主干接续 W6 验收
+## 2026-11-28 从主干接续 W6 验收
 
 统一 iOS Demo 的 WeMM 视频问答已合入主干，保留为按需启用的实验入口。iPhone 首轮 USB 验收通过六项页面用例。继续验收时从主干构建，使用独立 App「W6 Fixtures」。[构建及六项页面用例](../demo/iosApp/UITests/Fixtures/WeMM/README.md)
 
 | 剩余项目 | 现有证据 | 下一步 |
 | --- | --- | --- |
 | 开放问答质量 | Mac v1.1 的 12 段视频、24 道原题已有逐项评分和模型复评，原画面配原提示全部复现。 | 两位评阅者从空白表开始，各自看片并评完 48 份匿名原答。两份回卷齐备后由协调人核对分歧。[空白表与本机原片准备](validation/w6-open-qa-review-v1.1/README.md) |
-| 离页取消 | 无线复验时，32 token 的长答在返回前已释放原生上下文。改用 256 token 的用例已通过模拟器验收。 | 在 iPhone 无线复验离页取消、原片保留及续问。[修订用例与时序证据](roadmap/W6-video-understanding.md#离页取消的生成窗口) |
-| iPhone 资源 | iPhone 16 Pro Max 已完成单次和连续六次短答，以及三段五分钟影片。长片预热后两个窗口分别为 5.449 秒和 6.449 秒，进程内存峰值分别为 406,458.512 kB 和 371,003.536 kB。 | 下一项为电池供电下的整机耗电，需无线调试时段。[真机逐轮数据](roadmap/W8-resources.md) · [电池采集步骤](../demo/iosApp/UITests/Fixtures/WeMM/power/README.md) |
+| iPhone 资源 | iPhone 16 Pro Max 已完成单次和连续六次短答，以及三段五分钟影片。长片预热后两个窗口分别为 5.449 秒和 6.449 秒，进程内存峰值分别为 406,458.512 kB 和 371,003.536 kB。 | 无线复验的两段短答均答对，按 PID 和唯一进程名附加均未取得 trace。下一步先定位 Power Profiler 无法识别前台夹具的原因，再测整机耗电。[真机逐轮数据](roadmap/W8-resources.md) · [电池采集步骤](../demo/iosApp/UITests/Fixtures/WeMM/power/README.md) |
+
+11 月 28 日，iPhone 16 Pro Max 无线复验已通过生成中离页取消、保留原片和续问。[离页与短答结果](validation/w6-wemm-wireless-iphone-20261128.json)
 
 当前产品范围限于实验入口，正式质量门槛和资源预算尚未设定。五分钟影片均匀取八帧，已观察到短事件落在帧间时漏答。[采样实验](validation/w6-video-temporal-coverage-20261127.md)
 

@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-28",
+  "demoSourceCommit": "883d7f29d68794d9a634b561fbb28a93be3e5da0",
+  "xctestrunSHA256": "314662a806c4fd18074251a893b04c39cd54263686a1a749ce55226c8acf023f",
+  "device": {
+    "model": "iPhone 16 Pro Max",
+    "osVersion": "27.2.1",
+    "transport": "localNetwork"
+  },
+  "fixtureBundleID": "io.ondeviceai.w6.unifiedvideo.fixtures",
+  "localEvidenceDirectory": "w6-main-fixture-883d7f2-vdnco75t",
+  "firstShortAnswerAttempt": {
+    "resultBundle": "battery/movies.xcresult",
+    "businessTestsRun": 0,
+    "xcodebuildExit": 65,
+    "runnerError": "The test runner failed to initialize for UI testing. (Underlying Error: Timed out while enabling automation mode.)"
+  },
+  "navigation": {
+    "resultBundle": "wireless-leave.xcresult",
+    "test": "W6UnifiedVideoUITests/testLeavingDuringGenerationCancelsAndRestoresInput()",
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "generationTokenBudget": 256,
+    "visibleTextBeforeLeaving": "1. The video begins with a solid, bright red color filling the entire frame",
+    "phaseOnReturn": "CANCELLED",
+    "finalAnswerPresentOnReturn": false,
+    "retainedInput": "w6-yuv-clip-01",
+    "followUpTokenBudget": 32,
+    "followUpAnswer": "red, blue",
+    "restoredAnswerScreenshotSHA256": "cd5c8d5e5e779c866c7bb39e64653d9a3d230af5e5ce91a8d4eb0ab5034fb104"
+  },
+  "shortAnswers": {
+    "resultBundle": "battery-after-automation/movies.xcresult",
+    "test": "W6UnifiedVideoUITests/testRealMovieAnswer()",
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "timing": "XCTest generate tap to UI answer confirmation upper bound, including automation and polling",
+    "trials": [
+      {
+        "answer": "red, blue",
+        "tapEpoch": 1795825159.46,
+        "confirmationUpperBoundEpoch": 1795825165.096,
+        "upperSeconds": 5.636
+      },
+      {
+        "answer": "blue, red",
+        "tapEpoch": 1795825183.351,
+        "confirmationUpperBoundEpoch": 1795825188.978,
+        "upperSeconds": 5.627
+      }
+    ]
+  },
+  "powerProfiler": {
+    "pid": 29261,
+    "attempts": [
+      {
+        "target": "pid",
+        "exitCode": 21,
+        "error": "Cannot find process for provided pid: 29261",
+        "hostStderrMtimeLocal": "08:18:48.909"
+      },
+      {
+        "target": "name",
+        "exitCode": 19,
+        "error": "Cannot find process matching name: SpeechDemo",
+        "hostStderrMtimeLocal": "08:18:50.218"
+      }
+    ],
+    "foregroundStateAtBothErrors": "running foreground",
+    "timeZone": "Asia/Shanghai",
+    "traceProduced": false,
+    "chargingStateDuringAnswers": null,
+    "systemPowerPercentPerHour": null
+  }
+}
