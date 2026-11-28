@@ -4,6 +4,8 @@ W3 继续跟踪目标设备的语音质量与资源。2026 年 11 月 24 日，�
 
 固定语料在 Android 模拟器连续完成 65/65 条，402 次采样的进程 RSS 最高为 1.3581 GiB。TECNO 真机连续批次完成 24/65 条。第 25 条单独复验得到参考转写，但 ADB 断连使解码期间的 RSS 和主机终态确认缺失。目标真机整批质量、资源预算和正式发布仍开放。[W3 跟踪单 #15](https://clients-gitlab.ugreeniot.com/home/common/ondevice-ai-kit/-/issues/15)
 
+[固定 65 条的两轮原始记录与评分](../validation/w3-encoder-reuse-batch65-avd-20261124.md)包含逐次 RSS 采样、端上报告和回执。
+
 ## 2026-11-17 当周排期（历史记录）
 
 用户已选择本周暂停 W3 后续研发、转向变声与项目阶段交付。当周记录为 **paused/deferred**。保留已具备的双端 TTS、iOS ASR 和 Android Whisper 基础识别及已知限制，不继续 Qwen 替换、全量质量实验、内存/ACK 专属诊断、系统资源下载或旧批次重放。

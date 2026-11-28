@@ -1,0 +1,224 @@
+--- a/sherpa-onnx/csrc/offline-recognizer-qwen3-asr-impl.cc
++++ b/sherpa-onnx/csrc/offline-recognizer-qwen3-asr-impl.cc
+@@ -32,9 +32,82 @@
+ #include "sherpa-onnx/csrc/onnx-utils.h"
+ #include "sherpa-onnx/csrc/text-utils.h"
+ 
++#if __ANDROID__
++#include <android/log.h>
++#include <time.h>
++#include <unistd.h>
++#endif
++
+ namespace sherpa_onnx {
+ 
+ namespace {
++
++#if __ANDROID__
++static int64_t W3NowNs() {
++  struct timespec ts;
++  if (clock_gettime(CLOCK_BOOTTIME, &ts) != 0) {
++    return 0;
++  }
++  return static_cast<int64_t>(ts.tv_sec) * 1000000000LL +
++         static_cast<int64_t>(ts.tv_nsec);
++}
++
++struct W3AudioTrace {
++  int64_t conv_begin = 0;
++  int64_t conv_end = 0;
++  int64_t encoder_begin = 0;
++  int64_t encoder_end = 0;
++
++  ~W3AudioTrace() {
++    __android_log_print(
++        ANDROID_LOG_INFO, "W3Phase",
++        "v1 group=audio pid=%d tid=%d ns=%lld,%lld,%lld,%lld",
++        static_cast<int>(getpid()), static_cast<int>(gettid()),
++        static_cast<long long>(conv_begin), static_cast<long long>(conv_end),
++        static_cast<long long>(encoder_begin),
++        static_cast<long long>(encoder_end));
++  }
++};
++
++struct W3TextTrace {
++  int64_t entry = 0;
++  int64_t empty_kv_begin = 0;
++  int64_t empty_kv_end = 0;
++  int64_t prefill_fwd_begin = 0;
++  int64_t prefill_fwd_end = 0;
++  int64_t apply_kv_begin = 0;
++  int64_t apply_kv_end = 0;
++  int64_t kv_clear_end = 0;
++  int64_t sample_begin = 0;
++  int64_t first_token_end = 0;
++  int64_t logits_reset_end = 0;
++  int64_t incr_fwd_begin = 0;
++  int64_t incr_fwd_end = 0;
++  int64_t incr_kv_apply_end = 0;
++
++  ~W3TextTrace() {
++    __android_log_print(
++        ANDROID_LOG_INFO, "W3Phase",
++        "v1 group=text pid=%d tid=%d "
++        "ns=%lld,%lld,%lld,%lld,%lld,%lld,%lld,%lld,%lld,%lld,%lld,%lld,%lld,%lld",
++        static_cast<int>(getpid()), static_cast<int>(gettid()),
++        static_cast<long long>(entry),
++        static_cast<long long>(empty_kv_begin),
++        static_cast<long long>(empty_kv_end),
++        static_cast<long long>(prefill_fwd_begin),
++        static_cast<long long>(prefill_fwd_end),
++        static_cast<long long>(apply_kv_begin),
++        static_cast<long long>(apply_kv_end),
++        static_cast<long long>(kv_clear_end),
++        static_cast<long long>(sample_begin),
++        static_cast<long long>(first_token_end),
++        static_cast<long long>(logits_reset_end),
++        static_cast<long long>(incr_fwd_begin),
++        static_cast<long long>(incr_fwd_end),
++        static_cast<long long>(incr_kv_apply_end));
++  }
++};
++#endif
+ 
+ // Mel-frame chunk length (in frames) assumed by the Qwen3-ASR conv frontend
+ // when mapping log-mel features to audio tokens. Must match the chunk size
+@@ -765,6 +838,10 @@
+ OfflineRecognitionResult OfflineRecognizerQwen3ASRImpl::GenerateText(
+     Ort::Value audio_features, int32_t audio_token_len,
+     OfflineStream *stream) const {
++#if __ANDROID__
++  W3TextTrace w3_text;
++  w3_text.entry = W3NowNs();
++#endif
+   OfflineRecognitionResult result;
+   auto memory_info =
+       Ort::MemoryInfo::CreateCpu(OrtDeviceAllocator, OrtMemTypeDefault);
+@@ -836,8 +913,14 @@
+     return result;
+   }
+ 
++#if __ANDROID__
++  w3_text.empty_kv_begin = W3NowNs();
++#endif
+   std::vector<std::pair<Ort::Value, Ort::Value>> cache_kv =
+       model_->CreateEmptyKVCache(1);
++#if __ANDROID__
++  w3_text.empty_kv_end = W3NowNs();
++#endif
+   const int32_t model_max_len = model_->GetMaxTotalLen();
+   int32_t max_seq_len = model_max_len;
+   const int32_t max_total_len_opt =
+@@ -953,14 +1036,29 @@
+       BuildCachePosition(model_->Allocator(), context_len);
+   Ort::Value audio_features_view = View(&trimmed_audio_features);
+ 
++#if __ANDROID__
++  w3_text.prefill_fwd_begin = W3NowNs();
++#endif
+   auto tmp = model_->ForwardLLM(
+       std::move(input_ids_tensor), std::move(audio_features_view),
+       std::move(attention_mask), cache_position, cache_kv);
++#if __ANDROID__
++  w3_text.prefill_fwd_end = W3NowNs();
++#endif
+   Ort::Value logits = std::move(tmp.first);
+   auto kv_outputs = std::move(tmp.second);
+ 
++#if __ANDROID__
++  w3_text.apply_kv_begin = W3NowNs();
++#endif
+   model_->ApplyKvDeltaInplace(&cache_kv, kv_outputs, cache_position);
++#if __ANDROID__
++  w3_text.apply_kv_end = W3NowNs();
++#endif
+   kv_outputs.clear();
++#if __ANDROID__
++  w3_text.kv_clear_end = W3NowNs();
++#endif
+ 
+   std::vector<int64_t> generated_ids;
+   generated_ids.reserve(static_cast<size_t>(max_new_tokens));
+@@ -986,6 +1084,9 @@
+     return result;
+   }
+ 
++#if __ANDROID__
++  w3_text.sample_begin = W3NowNs();
++#endif
+   int64_t next_id = SampleTokenFromLogits(logits, last_idx, temperature, top_p);
+ 
+   if (next_id == eos_id) {
+@@ -1024,7 +1125,13 @@
+   }
+ 
+   generated_ids.push_back(next_id);
++#if __ANDROID__
++  w3_text.first_token_end = W3NowNs();
++#endif
+   logits = Ort::Value{};
++#if __ANDROID__
++  w3_text.logits_reset_end = W3NowNs();
++#endif
+   int32_t cur_len = context_len;
+ 
+   for (int32_t step = 1; step < max_new_tokens; ++step) {
+@@ -1061,13 +1168,28 @@
+ 
+     Ort::Value audio_features_view2 = View(&trimmed_audio_features);
+ 
++#if __ANDROID__
++    if (step == 1) {
++      w3_text.incr_fwd_begin = W3NowNs();
++    }
++#endif
+     auto tmp2 = model_->ForwardLLM(
+         std::move(one_tensor), std::move(audio_features_view2),
+         std::move(next_attention_mask), next_cache_position, cache_kv);
++#if __ANDROID__
++    if (step == 1) {
++      w3_text.incr_fwd_end = W3NowNs();
++    }
++#endif
+     logits = std::move(tmp2.first);
+     auto kv_outputs2 = std::move(tmp2.second);
+ 
+     model_->ApplyKvDeltaInplace(&cache_kv, kv_outputs2, next_cache_position);
++#if __ANDROID__
++    if (step == 1) {
++      w3_text.incr_kv_apply_end = W3NowNs();
++    }
++#endif
+ 
+     auto log_shape2 = logits.GetTensorTypeAndShapeInfo().GetShape();
+     if (log_shape2.size() < 3) {
+@@ -1195,7 +1317,14 @@
+       memory_info, f.data(), static_cast<size_t>(feat_frames) * F,
+       conv_input_shape.data(), conv_input_shape.size());
+ 
++#if __ANDROID__
++  W3AudioTrace w3_audio;
++  w3_audio.conv_begin = W3NowNs();
++#endif
+   Ort::Value conv_output = model_->ForwardConvFrontend(std::move(conv_input));
++#if __ANDROID__
++  w3_audio.conv_end = W3NowNs();
++#endif
+ 
+   auto conv_shape = conv_output.GetTensorTypeAndShapeInfo().GetShape();
+   if (conv_shape.size() < 3 || conv_shape[1] <= 0) {
+@@ -1219,8 +1348,14 @@
+       memory_info, mask_buf.get(), static_cast<size_t>(conv_num_frames),
+       tok_mask_shape.data(), tok_mask_shape.size());
+ 
++#if __ANDROID__
++  w3_audio.encoder_begin = W3NowNs();
++#endif
+   Ort::Value audio_features = model_->ForwardEncoder(
+       std::move(conv_output), std::move(feature_attention_mask));
++#if __ANDROID__
++  w3_audio.encoder_end = W3NowNs();
++#endif
+ 
+   if (config_.model_config.debug) {
+     SHERPA_ONNX_LOGE(

@@ -43,3 +43,5 @@ python3 -B probes/android-qwen-prefill-release/phases/analyze_phase_capture.py \
 已从解压副本复核全部摘要，重算的窗口、阶段统计、进程采样和逐字比对均与留存结果一致。`ranked-samples.json` 列出各模式全部并列最高、次高样本及其纳秒级读取区间。
 
 本轮覆盖一条合成英语。TECNO 真机原批次在完成 65 条中的 24 条后触发内存停止条件。[真机原批次](w3-qwen-arena-observed-20261111.md)
+
+采集器的离线回归覆盖日志收取失败、保留原始字节、逐字比对和已消费运行号的保护。从仓库根目录运行 `python3 -B probes/android-qwen-prefill-release/phases/test_phase_capture.py`。同目录的设备启动脚本保存这次实验的实现，依赖当时的本机 APK、模型和准备目录。该运行号已消费，复核实测数值请使用上面的 ZIP。
