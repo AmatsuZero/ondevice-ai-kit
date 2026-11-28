@@ -1,0 +1,83 @@
+{
+  "selectionRule": "per cohort take first 3 sorted by SHA256(UTF8(w3-apple-punctuation-exploratory-v1|id)); no scores used in selection",
+  "notBlind": true,
+  "canonicalPath": "probes/w3-paired-error-analysis-20261116/canonical-input.json",
+  "canonicalSHA256": "37311ca5f6b18c585d10c531c682c7a6ba0b2cfc42b9aee6fa6be0078362fef3",
+  "inputs": [
+    {
+      "id": "fleurs-cmn_hans_cn-1698",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 155520,
+      "pcmSHA256": "c0cf0ea82e08a6e7f364626fdecf3c4f7d8dedbf3d3b24f96ff029fc1ca312a4",
+      "reference": "宇宙中的一切都由物质构成，而所有的物质都由被称为原子的微小粒子组成。",
+      "pcmPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1698.pcm",
+      "pcmBytes": 311040,
+      "referenceSHA256": "1313189fa8863bdde86a89eff5f19bbf42356268a191783b90d4c6cb17639c02",
+      "sourceRevision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1871",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 111360,
+      "pcmSHA256": "03a066eba992c84246696180810c01b61d5b7d050bc41e5b8b3b8cc6c7e5fd62",
+      "reference": "在中东温暖的气候中，房子并不是多重要。",
+      "pcmPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1871.pcm",
+      "pcmBytes": 222720,
+      "referenceSHA256": "05c5be363356ac0d747eb8604127ed156c301890b3d056567266d335634082ac",
+      "sourceRevision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd"
+    },
+    {
+      "id": "fleurs-cmn_hans_cn-1830",
+      "cohort": "mandarin",
+      "locale": "zh-CN",
+      "samples": 101760,
+      "pcmSHA256": "32201ea0511a0285c0da43ca492357524fc3af05e0682fddedb6663b1f4c8082",
+      "reference": "执政党西南非洲人民组织 (SWAPO) 也在议会选举中保持了多数席位。",
+      "pcmPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-cmn_hans_cn-1830.pcm",
+      "pcmBytes": 203520,
+      "referenceSHA256": "2bd10a5a05006a8c2db021a7007c40a185e54564eed365544cfac4f31658b3b4",
+      "sourceRevision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd"
+    },
+    {
+      "id": "fleurs-en_us-1858",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 100800,
+      "pcmSHA256": "e8138f2c1b81addf0479f2abf0edbe38be2e2e5a2eb0a29fd12efdb602e53ff4",
+      "reference": "Danielle Lantagne, a UN expert on the disease, stated the outbreak was likely caused by the peacekeepers.",
+      "pcmPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1858.pcm",
+      "pcmBytes": 201600,
+      "referenceSHA256": "6ca6e59d1b7d20521c1e36ef100f2bce15677b64383066bd6c654c1fd7617a16",
+      "sourceRevision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd"
+    },
+    {
+      "id": "fleurs-en_us-1992",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 138240,
+      "pcmSHA256": "9c9a81e00df5617314c141a676eb01447539b46697e6607e7cf11fc389ce7f75",
+      "reference": "The term safari in popular use refers to overland travel to view the stunning African wildlife, particularly on savanna.",
+      "pcmPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1992.pcm",
+      "pcmBytes": 276480,
+      "referenceSHA256": "2b39b4054bdb0b7b5ff9dd4564d92d84cbdde1c7ae2d58127bd918477e5bf921",
+      "sourceRevision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd"
+    },
+    {
+      "id": "fleurs-en_us-1909",
+      "cohort": "english-near",
+      "locale": "en-US",
+      "samples": 90240,
+      "pcmSHA256": "743a920543850ab40540466a1b7b896ce5281c7887390c5adb136d874c78f300",
+      "reference": "Virtual teams are held to the same standards of excellence as conventional teams, but there are subtle differences.",
+      "pcmPath": ".omx/artifacts/w3-model-reselection-20261110/independent-preparation/inputs/fleurs-en_us-1909.pcm",
+      "pcmBytes": 180480,
+      "referenceSHA256": "79394b66eef8b7e5188acf5b6e54cd6abdfbec78df97aecd633341af6fe03467",
+      "sourceRevision": "70bb2e84b976b7e960aa89f1c648e09c59f894dd"
+    }
+  ],
+  "selectionCheckedAgainstInputBinding": "docs/validation/w3-apple-65-input-binding-20261116.json",
+  "executionAuthorized": false,
+  "newRecognitionRequests": 0
+}
