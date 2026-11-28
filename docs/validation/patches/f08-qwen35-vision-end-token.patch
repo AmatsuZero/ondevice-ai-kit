@@ -1,0 +1,22 @@
+--- a/Libraries/MLXVLM/Models/Qwen35.swift
++++ b/Libraries/MLXVLM/Models/Qwen35.swift
+@@ -1438,8 +1438,9 @@
+                             spatialMergeSize: config.visionConfiguration.spatialMergeSize,
+                             imageTokenId: config.imageTokenId,
+                             videoTokenId: config.videoTokenId,
+                             visionStartTokenId: config.visionStartTokenId,
++                            visionEndTokenId: config.visionEndTokenId,
+                             attentionMask: ropeMask)
+                         positionIds = computed
+                         state[precomputedPositionIdsKey] = computed
+                         state[ropeDeltasKey] = deltas
+@@ -1823,8 +1824,9 @@
+             spatialMergeSize: config.visionConfiguration.spatialMergeSize,
+             imageTokenId: config.imageTokenId,
+             videoTokenId: config.videoTokenId,
+             visionStartTokenId: config.visionStartTokenId,
++            visionEndTokenId: config.visionEndTokenId,
+             attentionMask: input.text.mask,
+             positionOffset: positionOffset
+         )
+ 
