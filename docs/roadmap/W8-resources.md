@@ -56,6 +56,12 @@ W8 复用 W6 在 iPhone 16 Pro Max（iOS 27.2.1，USB）上的 XCTest 结果。W
 
 两段分别有 12、7 个非零整机样本，时间间隙均小于 1 微秒。`DeviceChargingState` 表没有区间。原始 `PowerMetrics` 的 550 个 `SystemMetrics` 区间及两个回答窗口均为 `Charging Status = 0`。11 月 9 日历史充电 TTS 对照 trace 的 91 个区间均为 `Charging Status = 1`，且有 `DeviceChargingState` 区间，因此当前状态码与断开充电相符。这个对应关系来自历史录制对照，Apple 导出表没有给出状态码定义。导入后的 trace 目标为 `all-processes`。目录中的 PID 589 与 XCTest 夹具相符，但目录只有可执行名，trace 的设备 UUID 也未能映射到 XCTest 硬件 ID。1,093 行进程影响数据只属于另外两个 PID，夹具功耗缺测。随后用主干签包重跑单项短答，XCTest 通过 1/1，按安装路径取到 PID 720，`xctrace --attach 720` 仍返回 21。表中 `%/hr` 仅用于描述短窗口整机读数，W6 正式资源预算仍待项目确认。[绑定复验收据](../validation/w6-wemm-wireless-iphone-20261128.json)
 
+### 无线空闲附加诊断
+
+11 月 28 日，在同一台 iPhone 和同一签包上，由 CoreDevice 单独启动 W6 Fixtures，保持空闲。Power Profiler 和 Time Profiler 对 PID 799 均返回 21，CoreDevice 在每次失败后仍按安装路径查到相同进程。仅重启夹具后获得 PID 801，再用 Power Profiler 附加仍返回 21，CoreDevice 同样确认了进程。该现象在没有 XCTest 或模型推理时也会发生。
+
+以 Activity Monitor 模板加 Power Profiler instrument 做两次无线全进程录制，分别请求 8 秒和 12 秒。两份 trace 的结束原因都是 `Device disconnected`，持续 1.916 秒和 1.734 秒。第二次在夹具空闲时录制，导出的 `ProcessSubsystemPowerImpact` 为零行。下一次先用 USB 连接对同一签包做空闲附加对照，确认 TOC 绑定实际 PID 与安装路径后，再安排带负载的进程采集。USB 对照只用于诊断附加与进程记录。[无线诊断结果](../validation/w6-wemm-wireless-iphone-20261128.json)
+
 ## 2026-11-17 当周候选资源与交付范围
 
 W3/W6后续研发暂停、W7生产校准/PAD阶段外延期，新增[W9变声](W9-voice-effects.md)。W8状态仍 **open / active-planned**：按[本周范围](../superpowers/specs/2026-11-17-weekly-delivery-voice-effects-design.md)验证实际交付候选的稳定性、资源/预算或明确缺测裁定、通知/消费和最终复审；不等待W3/W6模型改进，也不替它们另跑实验。

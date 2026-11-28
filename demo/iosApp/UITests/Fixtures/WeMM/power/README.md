@@ -20,6 +20,8 @@ python3 demo/iosApp/UITests/Fixtures/WeMM/power/capture.py \
 
 若出现 `Cannot find process for provided pid`，保留本轮的 `binding.json` 和退出日志，用 XCTest 会话日志核对该 PID 在附加时是否仍在前台。普通 Demo 和 W6 夹具都可能使用可执行名 `SpeechDemo`，仅凭名称无法区分同时运行的实例。[iPhone 无线附加记录](../../../../../../docs/roadmap/W8-resources.md#拔线后的两次短答)
 
+在已复现的无线失败中，CoreDevice 可查询到空闲夹具的实际 PID，Power Profiler 与 Time Profiler 仍返回退出码 21。无线的 Activity Monitor 加 Power Profiler instrument 全进程录制则在 2 秒内断开。再次诊断时，先用 USB 对同一安装夹具做空闲附加对照。开始负载测试前，从新 trace 的 TOC 核对目标设备、附加 PID 和进程安装路径。USB 对照只用于诊断采集。[无线空闲对照结果](../../../../../../docs/roadmap/W8-resources.md#无线空闲附加诊断)
+
 ### 四项影片页面用例
 
 ```sh

@@ -157,5 +157,52 @@
     "xctraceAttachError": "Cannot find process for provided pid: 720",
     "captureExit": 1,
     "conclusion": "The exact installed fixture executable was resolved during the test, but host xctrace still could not attach to its live PID."
+  },
+  "idleWirelessDiagnostic": {
+    "localEvidenceDirectory": "w6-power-idle-diagnostic-20261128-8m8yz01y",
+    "device": "iPhone 16 Pro Max, iOS 27.2.1",
+    "transport": "localNetwork",
+    "xcode": "27.2 (27B52)",
+    "workload": "No XCTest or inference. Attach attempts and the second all-process recording used an idle W6 fixture.",
+    "attachAttempts": [
+      {
+        "template": "Power Profiler",
+        "pid": 799,
+        "exit": 21,
+        "error": "Cannot find process for provided pid: 799",
+        "exactProcessStillVisibleAfter": true
+      },
+      {
+        "template": "Time Profiler",
+        "pid": 799,
+        "exit": 21,
+        "error": "Cannot find process for provided pid: 799",
+        "exactProcessStillVisibleAfter": true
+      },
+      {
+        "template": "Power Profiler",
+        "pid": 801,
+        "exit": 21,
+        "error": "Cannot find process for provided pid: 801",
+        "exactProcessStillVisibleAfter": true
+      }
+    ],
+    "allProcessTemplate": "Activity Monitor + Power Profiler instrument",
+    "allProcessRecordings": [
+      {
+        "requestedSeconds": 8,
+        "actualSeconds": 1.915514,
+        "endReason": "Device disconnected",
+        "tocSHA256": "10dee13fff6889c634603dfb5ef4563de0c697a4f9a16a5c70a7d5665e49b323"
+      },
+      {
+        "requestedSeconds": 12,
+        "actualSeconds": 1.733508,
+        "endReason": "Device disconnected",
+        "tocSHA256": "d92da10b593d0bad60d4cc0195b6b7f58d201fd5f9244a56ad22e79574402e45",
+        "processImpactRows": 0
+      }
+    ],
+    "diagnosticFixtureStopped": true
   }
 }
