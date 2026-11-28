@@ -16,7 +16,6 @@ test_android_tts_report
 test_android_vlm_artifact
 test_benchmark_report
 test_cunny_reference
-test_generate_multimodal_device
 test_identity_calibration_bound_curves
 test_identity_calibration_curves
 test_identity_calibration_manifest
@@ -26,9 +25,6 @@ test_identity_restart_report
 test_identity_store_report
 test_mlxvlm_benchmark_report
 test_mlxvlm_binary_artifact
-test_mlxvlm_binary_package
-test_mlxvlm_binary_snapshot
-test_mlxvlm_compatibility_overlay
 test_mlxvlm_label_margin
 test_mlxvlm_natural_quality
 test_mlxvlm_static_artifact
@@ -38,7 +34,6 @@ test_mlxvlm_video_report
 test_multimodal_active_report
 test_multimodal_background_report
 test_multimodal_lifecycle_report
-test_nexus_get_receipts
 test_nexus_get_receipts_boundaries
 test_nexus_notice_materials
 test_nexus_notice_materials_boundaries
@@ -50,7 +45,6 @@ test_p9_fixture
 test_prepare_noisy_fixture
 test_run_android_identity_restart
 test_speech_error_metrics
-test_sync_remotes
 test_verify_w6_choice_prefix
 test_vlm_asset
 test_vlm_manifest

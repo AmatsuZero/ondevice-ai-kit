@@ -5,7 +5,7 @@ stages:
 
 offline-tests:
   stage: test
-  image: python:3.12
+  image: nexus.ugaiot.com/docker-ugreenhome-release/python:3.12-slim@sha256:dc70e0402bd9fb34ffd856745ba3d0564dc80dd4c9f2730ff7bfabb2d4f3145f
   tags:
     - aiot-fe-runner
   rules:
